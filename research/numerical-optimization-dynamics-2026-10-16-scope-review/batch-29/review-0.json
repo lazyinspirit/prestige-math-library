@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "29",
+  "round": 0,
+  "reviewed_items": [
+    "def-simple-fold-complement-splitting-and-projection",
+    "lem-pseudo-arclength-border-matrix-invertibility-and-inverse-bound",
+    "thm-augmented-residual-contraction-certificate",
+    "lem-regular-curve-chart-and-pseudo-arclength-predictor-defect",
+    "lem-simple-fold-complement-restriction-is-an-isomorphism",
+    "lem-transverse-hyperplane-selects-unique-local-branch-point",
+    "thm-simple-fold-lyapunov-schmidt-parameterization",
+    "thm-pseudo-arclength-local-newton-correction",
+    "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+    "ex-zero-tangent-angle-makes-bordered-corrector-singular",
+    "ex-natural-parameterization-fails-at-x-squared-fold",
+    "ex-local-trace-misses-disconnected-branch",
+    "ex-pseudo-arclength-crosses-x-squared-fold"
+  ],
+  "reviewed_pages": [
+    "pseudo-arclength-continuation-and-fold-certificates",
+    "pseudo-arclength-continuation-and-fold-certificates-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The approved item inventory has no separate proved correctness and termination result for the finite continuation algorithm; the procedure itself cannot serve as that proof. Owner reconciliation is needed before acceptance. Other listed defects are locally repairable.",
+  "findings": [
+    {
+      "id": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+      "type": "scope",
+      "reason": "The algorithm and its consumers rely on accepted-ball and finite-trace behavior, but no separate result proves partial correctness and termination, conditional on supplied callbacks returning. The assigned scope contains no such theorem. Smallest missing prerequisite: a proved result that accepted balls identify the unique section root on the certified chart and that every finite-budget path returns."
+    },
+    {
+      "id": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+      "type": "scope",
+      "reason": "Procedure step 2 uses the current tangent candidate \\hat t_k as the section normal, while the approved design and A-page objective specify the previous tangent. Use the previous orientation and establish the corresponding angle and predictor-offset bounds."
+    },
+    {
+      "id": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+      "type": "local",
+      "reason": "The procedure does not explicitly track N_s, and when N_req=0 step 1 finalizes the seed without assigning a continuation status. Specify the budget counter and return status on these paths."
+    },
+    {
+      "id": "lem-regular-curve-chart-and-pseudo-arclength-predictor-defect",
+      "type": "prerequisite",
+      "reason": "Step 1.1 uses rank-nullity to conclude ker DF(z_0) is one-dimensional, but thm-rank-nullity is absent from its deps and Facts. Step 2.1 claims ell'(r)=||gamma'(r)|| for ell(r)=integral_0^r ||gamma'(u)|| du; continuity plus the cited Newton-Leibniz theorem (part II) does not establish this. Add thm-ftc-first-part (and the needed integral-additivity use) or prove the derivative locally."
+    },
+    {
+      "id": "ex-local-trace-misses-disconnected-branch",
+      "type": "local",
+      "reason": "The example certifies the next section root in step 2.1 but does not specify or certify the initial seed section required by the algorithm. State G_-1 and verify its seed ball and local chart conditions."
+    },
+    {
+      "id": "ex-pseudo-arclength-crosses-x-squared-fold",
+      "type": "local",
+      "reason": "The example allows any h>0 and calls the step local, but the algorithm requires the corrected point to lie on the seed chart with its angle and length bounds. It also does not certify the initial seed section. Restrict h sufficiently or verify an explicit chart for the chosen step, and provide the seed certificate."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "pseudo-arclength-continuation-and-fold-certificates",
+      "decision": "accept",
+      "reason": "Its objective already specifies the previous tangent as section normal; it will agree once the algorithm procedure is repaired."
+    },
+    {
+      "id": "pseudo-arclength-continuation-and-fold-certificates-examples",
+      "decision": "accept",
+      "reason": "The page summary remains accurate after the two examples add their seed and local-step conditions."
+    },
+    {
+      "id": "ex-local-trace-misses-disconnected-branch",
+      "decision": "repair",
+      "reason": "Direct algorithm consumer; add the missing initial seed certificate."
+    },
+    {
+      "id": "ex-pseudo-arclength-crosses-x-squared-fold",
+      "decision": "repair",
+      "reason": "Direct algorithm consumer; certify the seed and ensure the step meets the local chart conditions."
+    },
+    {
+      "id": "alg-periodic-orbit-pseudoarclength-continuation",
+      "decision": "accept",
+      "reason": "It delegates the section equation and chart, angle, inverse, and budget checks to the generic algorithm, and does not depend on using the current tangent as the section normal."
+    },
+    {
+      "id": "periodic-orbit-shooting-collocation-and-floquet-error",
+      "decision": "accept",
+      "reason": "Its page summary describes a validated section equation without imposing a current-tangent normal."
+    }
+  ]
+}

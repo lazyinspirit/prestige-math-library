@@ -1,0 +1,27 @@
+--- before/items/alg-golub-welsch-certified-node-and-weight-enclosures.md
++++ proposed/items/alg-golub-welsch-certified-node-and-weight-enclosures.md
+@@ -49,7 +49,12 @@
+ $\mu_j=\int x^j\,d\mu(x)$, a finite dyadic format, and positive dyadic
+ width tolerances $\varepsilon_x,\varepsilon_w$. The measure and the truth of
+ the moment-enclosure promise are mathematical input promises; this procedure
+-does not verify them. All interval operations use
++does not verify them. For the $m\ge2$ proposal branch also supply a
++finite-return exact projected eigensolver $S$ satisfying the explicit input
++and output contract of [[alg-thick-and-implicitly-restarted-arnoldi-with-locking]].
++The $m=1$ branch needs no such provider. Missing or unavailable projected-solver
++data return `inconclusive` when that proposal branch is reached; no universal
++exact eigensolver is constructed here. All interval operations use
+ [[def-outward-rounded-interval-and-ball-operations]]. Any overflow, invalid
+ domain, nonpositive divisor, failed solve, undecidable comparison, or failed
+ certification returns `inconclusive`.
+@@ -90,7 +95,9 @@
+ [[alg-thick-and-implicitly-restarted-arnoldi-with-locking]] in exact arithmetic
+ on $J_c$ from the first coordinate vector, with full dimension $m$, target
+ count $m-1$, restart budget $N_{\max}=1$, thick restart mode, and zero
+-Ritz residual tolerance. Supply the following target rule if a restart is
++Ritz residual tolerance, passing the supplied $S$ to every projected solve.
++Both projected-solve failure statuses, like every other nonconverged Arnoldi
++status, return `inconclusive` here. Supply the following target rule if a restart is
+ reached: scan the current Ritz vectors in the projected eigensolve's returned
+ order, retain the first vectors that increase the span modulo all locked
+ vectors, and stop after selecting the required $r-k=m-1-k$ vectors. If the

@@ -1,0 +1,343 @@
+{
+  "group": "ab",
+  "batches": [
+    "84"
+  ],
+  "pages_read": [
+    "gauss-newton-and-levenberg-marquardt-methods",
+    "gauss-newton-and-levenberg-marquardt-methods-examples"
+  ],
+  "items_read": [
+    "thm-nonlinear-least-squares-gradient-and-hessian",
+    "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian",
+    "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+    "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+    "alg-safeguarded-levenberg-marquardt",
+    "thm-gauss-newton-local-linear-contraction",
+    "thm-gauss-newton-zero-residual-quadratic-convergence",
+    "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+    "thm-safeguarded-levenberg-marquardt-global-stationarity",
+    "ex-exponential-kinetics-gauss-newton-fit",
+    "ex-rank-deficient-identifiability-and-lm-step",
+    "ex-nonzero-residual-gauss-newton-is-only-linear"
+  ],
+  "conventions": [
+    {
+      "convention": "The objective is φ=||r||₂²/2, the Jacobian has residual gradients as rows, and the objective gradient is Jᵀr.",
+      "fixed_by": "thm-nonlinear-least-squares-gradient-and-hessian",
+      "matters_for": [
+        "thm-gauss-newton-local-linear-contraction",
+        "ex-nonzero-residual-gauss-newton-is-only-linear"
+      ]
+    },
+    {
+      "convention": "Matrix norms in the quantitative estimates are Euclidean induced operator norms; rectangular residual maps are allowed.",
+      "fixed_by": "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian",
+      "matters_for": [
+        "thm-gauss-newton-zero-residual-quadratic-convergence",
+        "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease"
+      ]
+    },
+    {
+      "convention": "The linear solver rejects m<n. Exact QR requires a supplied exact reduced factorization. Computed candidates are distinct from certified exact steps, and a nonzero computed diagonal alone does not certify full rank.",
+      "fixed_by": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "matters_for": [
+        "alg-safeguarded-levenberg-marquardt",
+        "thm-gauss-newton-local-linear-contraction",
+        "thm-gauss-newton-zero-residual-quadratic-convergence"
+      ]
+    },
+    {
+      "convention": "The SVD threshold retains singular values strictly greater than τ; equality is a rejected threshold case.",
+      "fixed_by": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "matters_for": [
+        "alg-gauss-newton-qr-svd-step-with-rank-safeguard"
+      ]
+    },
+    {
+      "convention": "LM uses fixed nonsingular D, positive damping with a positive floor, and pred from the unregularized residual model. A ratio is evaluated only after checking positive predicted reduction and trial feasibility.",
+      "fixed_by": "alg-safeguarded-levenberg-marquardt",
+      "matters_for": [
+        "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+        "thm-safeguarded-levenberg-marquardt-global-stationarity",
+        "ex-rank-deficient-identifiability-and-lm-step"
+      ]
+    },
+    {
+      "convention": "Rejection multiplies damping by γ. Accepted damping decreases only for a high-ratio step exactly on the scaled trust boundary; a finite attempt budget may fail.",
+      "fixed_by": "alg-safeguarded-levenberg-marquardt",
+      "matters_for": [
+        "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+        "thm-safeguarded-levenberg-marquardt-global-stationarity",
+        "ex-rank-deficient-identifiability-and-lm-step"
+      ]
+    },
+    {
+      "convention": "The global stationarity result assumes exact arithmetic, exact augmented solves with supplied exact QR factorizations, no evaluation failures, and at least the stated uniform number N of trials per iteration.",
+      "fixed_by": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "matters_for": [
+        "thm-safeguarded-levenberg-marquardt-global-stationarity"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "statement": "One finite-budget LM update forms and solves the augmented least-squares problem afresh at each damping, rejects infeasible or low-ratio trials, and returns either an accepted update or an explicit status. Exact and computed modes have separate certification conditions.",
+      "used_by": [
+        "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+        "thm-safeguarded-levenberg-marquardt-global-stationarity",
+        "ex-rank-deficient-identifiability-and-lm-step"
+      ]
+    },
+    {
+      "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+      "statement": "Under its compact-sublevel, unit-neighborhood, residual/Jacobian, Lipschitz and scaling bounds, every nonstationary exact LM trial with λ≥Λ has positive predicted reduction, ||Dpλ||₂≤Δ/2, and ρ≥η₂. With at least N trials, an iteration starting at λ≥λmin accepts by its Nth trial, assuming exact solves and objective evaluations.",
+      "used_by": [
+        "thm-safeguarded-levenberg-marquardt-global-stationarity"
+      ]
+    },
+    {
+      "id": "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+      "statement": "For real J,r, nonsingular D, λ>0 and g=Jᵀr≠0, the damped system has a unique solution pλ. Its scaled step globally minimizes the unregularized model on the ball of radius ||Dpλ||₂, and pred=||Jpλ||₂²/2+λ||Dpλ||₂²>0.",
+      "used_by": [
+        "alg-safeguarded-levenberg-marquardt",
+        "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+        "thm-safeguarded-levenberg-marquardt-global-stationarity",
+        "ex-rank-deficient-identifiability-and-lm-step"
+      ]
+    },
+    {
+      "id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "statement": "The full-column-rank exact branches solve the linearized residual least-squares problem through supplied QR or SVD factors. Rank, threshold, arithmetic and certification failures have explicit statuses; computed candidates carry only the stated conditional guarantees.",
+      "used_by": [
+        "alg-safeguarded-levenberg-marquardt",
+        "thm-gauss-newton-local-linear-contraction",
+        "thm-gauss-newton-zero-residual-quadratic-convergence",
+        "ex-exponential-kinetics-gauss-newton-fit",
+        "ex-rank-deficient-identifiability-and-lm-step",
+        "ex-nonzero-residual-gauss-newton-is-only-linear"
+      ]
+    },
+    {
+      "id": "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian",
+      "statement": "For a C¹ residual r:U→Rᵐ, m,n≥1, convex K⊆U, x*,x∈K and an L-Lipschitz Jacobian on K, ||r(x)−r(x*)−J(x)(x−x*)||₂≤(L/2)||x−x*||₂².",
+      "used_by": [
+        "thm-gauss-newton-zero-residual-quadratic-convergence",
+        "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease"
+      ]
+    },
+    {
+      "id": "thm-nonlinear-least-squares-gradient-and-hessian",
+      "statement": "For n,m≥1 and C² residual r on open U, φ=||r||₂²/2 is C², with gradient Jᵀr and Hessian JᵀJ+Σᵢrᵢ∇²rᵢ.",
+      "used_by": [
+        "thm-gauss-newton-local-linear-contraction",
+        "ex-nonzero-residual-gauss-newton-is-only-linear",
+        "rem-gauss-newton-information-is-not-full-hessian"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-ck-and-multi-index-notation-in-several-variables",
+      "used_for": "The ordered-partial definition of C² residual components.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Dot products, squared norms and quadratic expansions.",
+      "opened": true
+    },
+    {
+      "id": "def-hessian-and-euclidean-critical-point",
+      "used_for": "Hessian entries and stationarity conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Jacobian orientation and gradient coordinates.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-partial-derivatives-imply-total-differentiability",
+      "used_for": "Differentiability of C² residual components.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Coordinate product rules and elementary antiderivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of finite algebraic combinations.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Residual path derivatives and the C¹ objective gradient.",
+      "opened": true
+    },
+    {
+      "id": "cor-vector-valued-ftc-and-lipschitz-bound",
+      "used_for": "Integrating residual and gradient derivatives along segments.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "C¹ regularity of rectangular residual maps.",
+      "opened": true
+    },
+    {
+      "id": "def-induced-matrix-p-norm",
+      "used_for": "The Euclidean induced matrix norm.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-valued-derivative-and-integral",
+      "used_for": "Componentwise vector differentiation, integration and linearity.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Integrability of continuous path derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+      "used_for": "Matrix-vector and matrix-product norm estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "Integrating pointwise remainder bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-newton-leibniz-with-interior-derivative",
+      "used_for": "Constant-vector integrals and the integral of 1−t.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-inequality-for-the-vector-valued-integral",
+      "used_for": "Norm estimates for vector integral remainders.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Damped systems and augmented matrix identities.",
+      "opened": true
+    },
+    {
+      "id": "def-forward-and-back-substitution-for-triangular-systems",
+      "used_for": "The exact QR triangular solve.",
+      "opened": true
+    },
+    {
+      "id": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+      "used_for": "Exact reduced QR input requirements.",
+      "opened": true
+    },
+    {
+      "id": "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+      "used_for": "Strict singular-value threshold convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+      "used_for": "Identification and uniqueness of exact QR least-squares steps.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Exact SVD solves, inverse bounds and transpose norm equality.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "The positive square root in augmented LM systems.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+      "used_for": "Singular-value norm formulas and orthogonal invariance.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Damped-step bounds and model-error estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+      "used_for": "Continuity used in the accumulation-point stationarity argument.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Nonvanishing of the exponential-fit Jacobian determinant.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "The exponential-fit Jacobian.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "concern": "The algorithm contains a numbered Proof establishing termination, exact-solve correctness and certification properties. The task's algorithm convention requires these properties in separate proved result items depending on the algorithm. The arguments appear sound, but their current placement violates that explicit content convention.",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "concern": "The algorithm contains a numbered Proof establishing augmented-solve correctness, gradient identification and finite termination. The task requires algorithmic properties in separate proved result items depending on the algorithm; these properties currently remain inside the procedure item.",
+      "severity": "presentation"
+    },
+    {
+      "id": "gauss-newton-and-levenberg-marquardt-methods",
+      "concern": "The summary says 'a uniform bound smaller than the squared least singular-value bound gives a stated linear contraction'. The actual local theorem requires q=(κ+MLR)/σ²<1, alongside its other hypotheses. The summary should retain the MLR contribution or explicitly refer to all quantitative hypotheses of that theorem.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "rem-gauss-newton-information-is-not-full-hessian",
+      "finding": "rem-gauss-newton-information-is-not-full-hessian states 'For the unweighted nonlinear least-squares objective' and then asserts the full Hessian identity 'by [[thm-nonlinear-least-squares-gradient-and-hessian]]' without requiring C² residuals. Its other dependency, def-nonlinear-experimental-design-and-local-identifiability, assumes only C¹ observation maps. The cited theorem explicitly requires C². This matters: the permitted scalar residual r(t)=1+|t|^(3/2) is C¹, but φ(t)=r(t)²/2 has no second derivative at zero, so the asserted Hessian identity is undefined there.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "gauss-newton-and-levenberg-marquardt-methods",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Checked the Householder procedure and computed least-squares theorem against the GN/LM calls. Failure statuses propagate, computed candidates remain distinct from exact steps, and the backward-stability conclusion retains the supplier's execution, arithmetic and perturbed-factor nonsingularity conditions."
+    },
+    {
+      "from": "gauss-newton-and-levenberg-marquardt-methods",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "The square-map Newton remainder lemma is contextual. The assigned rectangular residual lemma proves its own estimate from vector FTC and does not transfer a square-only statement to unequal dimensions."
+    },
+    {
+      "from": "gauss-newton-and-levenberg-marquardt-methods",
+      "to": "trust-region-and-cubic-regularization-methods",
+      "faithful": true,
+      "note": "Checked the quadratic-model/ratio definition and SPD solve lemma against the scaled LM construction. The scaled ball, positive prediction and SPD hypotheses are supplied; no global trust-region convergence theorem is imported."
+    },
+    {
+      "from": "iterative-regularization-and-early-stopping",
+      "to": "gauss-newton-and-levenberg-marquardt-methods",
+      "faithful": true,
+      "note": "The page uses LM as context while defining and analyzing its Hilbert-space unanchored and anchored procedures separately. The inspected procedure and remainder lemma do not import finite-dimensional full-rank or safeguarded-LM convergence conclusions."
+    },
+    {
+      "from": "numerical-identifiability-and-optimal-experiment-design",
+      "to": "gauss-newton-and-levenberg-marquardt-methods",
+      "faithful": false,
+      "note": "The downstream Hessian remark omits the C² residual hypothesis required by the cited theorem, while its design definition provides only C¹ observation maps. Exact evidence and a C¹ counterexample are recorded in alerts."
+    }
+  ]
+}

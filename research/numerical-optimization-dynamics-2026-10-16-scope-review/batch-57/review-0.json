@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "57",
+  "round": 0,
+  "reviewed_items": [
+    "def-eigenspace-best-approximation-gap",
+    "thm-compact-coercive-form-spectrum-and-minmax",
+    "lem-finite-dimensional-galerkin-minmax",
+    "lem-compact-self-adjoint-residual-controls-invariant-subspace-gap",
+    "thm-finite-hermitian-ritz-residual-certifies-spectrum-and-eigendirection",
+    "prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil",
+    "lem-conforming-energy-projection-is-best-approximation",
+    "lem-conforming-galerkin-ritz-matrix-error-is-quadratic-in-gap",
+    "thm-conforming-galerkin-eigenvalue-upper-bound-quadratic-gap-error",
+    "thm-conforming-galerkin-eigenspace-gap-under-isolated-cluster",
+    "ex-nearly-dependent-overlap-matrix-whitening-and-conditioning",
+    "ex-nonconforming-broken-eigenvalue-below-dirichlet-ground-state",
+    "ex-dirichlet-square-conforming-p1-eigenvalue-upper-bound",
+    "ex-repeated-eigenvalue-subspace-stable-but-eigenvector-choice-unstable"
+  ],
+  "reviewed_pages": [
+    "finite-element-eigenvalue-approximation",
+    "finite-element-eigenvalue-approximation-examples"
+  ],
+  "decision": "repair",
+  "reason": "Full batch reviewed. Request one local repair covering three proof and statement issues; the affected consumers remain valid after the wording correction.",
+  "findings": [
+    {
+      "id": "lem-conforming-galerkin-ritz-matrix-error-is-quadratic-in-gap",
+      "type": "local",
+      "reason": "The Statement calls p_i=P_h(e_i/sqrt(lambda_i)) energy-orthonormal. In general A_h=I-G with a nonzero error Gram matrix G, so these vectors are a basis but not orthonormal. Remove the orthonormality claim; the small-gap hypothesis already supplies basis status."
+    },
+    {
+      "id": "ex-repeated-eigenvalue-subspace-stable-but-eigenvector-choice-unstable",
+      "type": "prerequisite",
+      "reason": "Proof step 1.2 calls subsequential convergence the compact-operator definition, but the actual definition requires compact closure of bounded images. The sequential-compactness equivalence requires dependent choice in this library, while the example assumes only countable choice. Repair locally without strengthening assumptions: use finite-coordinate truncations and the uniform tail bound to show J(B_V) is totally bounded, then use completeness of its closure and the countable-choice complete-plus-totally-bounded theorem."
+    },
+    {
+      "id": "lem-finite-dimensional-galerkin-minmax",
+      "type": "local",
+      "reason": "Proof step 2.1 asserts K_h is compact from finite dimensionality without giving the bridge to the compact-closure definition. State that K_h is bounded as a finite-dimensional linear map and apply Heine–Borel to the closure of its unit-ball image before invoking the compact spectral theorem."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-conforming-galerkin-eigenvalue-upper-bound-quadratic-gap-error",
+      "decision": "accept",
+      "reason": "Uses the Ritz-matrix quotient bound on U_h; its argument does not require the basis p_i to be orthonormal."
+    },
+    {
+      "id": "thm-conforming-galerkin-eigenspace-gap-under-isolated-cluster",
+      "decision": "accept",
+      "reason": "Uses the fixed-index eigenvalue bounds and discrete min–max; it does not rely on the inaccurate orthonormality description."
+    },
+    {
+      "id": "ex-repeated-eigenvalue-subspace-stable-but-eigenvector-choice-unstable",
+      "decision": "accept",
+      "reason": "Its use of the corrected matrix statement is unaffected: in the example the approximation gap is zero. Its separate compactness-proof defect is listed above."
+    },
+    {
+      "id": "finite-element-eigenvalue-approximation",
+      "decision": "accept",
+      "reason": "The page summary claims the matrix and no-collapse estimates, not that the projected vectors form an orthonormal basis."
+    },
+    {
+      "id": "finite-element-eigenvalue-approximation-examples",
+      "decision": "accept",
+      "reason": "Its companion summary does not use the inaccurate basis claim."
+    }
+  ]
+}

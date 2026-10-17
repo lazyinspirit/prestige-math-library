@@ -1,0 +1,1 @@
+Follow the full r2 same-cycle application brief. Fresh root writer declaration: <writer_declaration>. Prior attempt was a pre-worker schema transport failure; no extra mathematical round. Return JSON only without schema mode.

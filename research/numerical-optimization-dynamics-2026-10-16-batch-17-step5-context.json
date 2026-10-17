@@ -1,0 +1,318 @@
+{
+  "group": "o",
+  "batches": [
+    "17"
+  ],
+  "pages_read": [
+    "computed-singular-values-and-rank-revealing-factorizations",
+    "computed-singular-values-and-rank-revealing-factorizations-examples"
+  ],
+  "items_read": [
+    "alg-householder-bidiagonalization",
+    "alg-strong-rank-revealing-qr-with-finite-swaps",
+    "lem-singular-value-product-bound",
+    "lem-singular-values-lipschitz-in-spectral-norm",
+    "prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex",
+    "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+    "lem-exact-householder-bidiagonal-reduction",
+    "lem-strong-rrqr-column-swap-volume-ratio",
+    "thm-bidiagonal-singular-values-relative-under-componentwise-perturbations",
+    "thm-strong-rrqr-singular-value-comparisons",
+    "alg-rank-thresholded-least-squares-by-svd",
+    "lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence",
+    "thm-strong-rrqr-swap-rule-terminates",
+    "thm-bidiagonal-svd-backward-error-under-local-stability",
+    "thm-svd-thresholded-least-squares-minimum-norm-model",
+    "cor-computed-singular-values-absolute-error-from-backward-stability",
+    "alg-scaled-complex-householder-and-givens-updates",
+    "lem-scaled-complex-householder-and-givens-local-backward-error",
+    "ex-nearly-rank-deficient-design-matrix",
+    "cex-classical-column-pivoted-qr-is-not-strong-with-factor-one",
+    "ex-absolute-versus-relative-singular-value-error"
+  ],
+  "conventions": [
+    {
+      "convention": "Tall orientation uses C=A when m≥n and C=A* otherwise; p=min(m,n), M=max(m,n), and the square bidiagonal matrix is embedded above M−p zero rows.",
+      "fixed_by": "alg-householder-bidiagonalization",
+      "matters_for": [
+        "lem-exact-householder-bidiagonal-reduction",
+        "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+        "thm-bidiagonal-svd-backward-error-under-local-stability",
+        "cor-computed-singular-values-absolute-error-from-backward-stability"
+      ]
+    },
+    {
+      "convention": "Nonzero Householder columns use alpha=−phase(x₁)‖x‖₂, taking phase zero-coordinate value 1; zero columns use the identity.",
+      "fixed_by": "alg-householder-bidiagonalization",
+      "matters_for": [
+        "lem-exact-householder-bidiagonal-reduction",
+        "lem-scaled-complex-householder-and-givens-local-backward-error"
+      ]
+    },
+    {
+      "convention": "Stored local data represent exact unitary transformations; rounded dense accumulators and their computed residuals are separate and are not certificates by themselves.",
+      "fixed_by": "alg-scaled-complex-householder-and-givens-updates",
+      "matters_for": [
+        "alg-householder-bidiagonalization",
+        "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+        "thm-bidiagonal-svd-backward-error-under-local-stability",
+        "cor-computed-singular-values-absolute-error-from-backward-stability"
+      ]
+    },
+    {
+      "convention": "Singular values equal to the declared threshold are discarded; retained values satisfy the strict inequality sigma_i>tau.",
+      "fixed_by": "alg-rank-thresholded-least-squares-by-svd",
+      "matters_for": [
+        "prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex",
+        "thm-svd-thresholded-least-squares-minimum-norm-model",
+        "ex-nearly-rank-deficient-design-matrix"
+      ]
+    },
+    {
+      "convention": "Strong RRQR uses full QR factors, 0≤k<n and f≥1. Success requires combined scores, not merely coefficient magnitudes, to be at most f; computed candidates require rigorous score and reconstruction certificates.",
+      "fixed_by": "alg-strong-rank-revealing-qr-with-finite-swaps",
+      "matters_for": [
+        "lem-strong-rrqr-column-swap-volume-ratio",
+        "thm-strong-rrqr-swap-rule-terminates",
+        "thm-strong-rrqr-singular-value-comparisons",
+        "cex-classical-column-pivoted-qr-is-not-strong-with-factor-one"
+      ]
+    },
+    {
+      "convention": "Bidiagonal QR records deflation and additional cleanup perturbations explicitly. Budget exhaustion supplies estimates and diagnostics without a singular-value accuracy claim.",
+      "fixed_by": "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+      "matters_for": [
+        "lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence",
+        "thm-bidiagonal-svd-backward-error-under-local-stability",
+        "cor-computed-singular-values-absolute-error-from-backward-stability",
+        "alg-rank-thresholded-least-squares-by-svd"
+      ]
+    },
+    {
+      "convention": "The relative bidiagonal theorem preserves every zero entry and allows multiplicative ratios of modulus between 1−epsilon and 1+epsilon, with 0≤epsilon<1. A normwise backward bound does not establish this hypothesis.",
+      "fixed_by": "thm-bidiagonal-singular-values-relative-under-componentwise-perturbations",
+      "matters_for": [
+        "ex-absolute-versus-relative-singular-value-error",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-scaled-complex-householder-and-givens-local-backward-error",
+      "statement": "Successful specified updates, with 0<u<1 and (r−1)u<1 for Householder dimensions, have exact unitary representatives and perturbations satisfying W(C+E)=C_+ and ‖E‖F≤eta‖C‖F, with the stated explicit target-overwrite and separate-block coefficients; right updates follow by conjugate transposition.",
+      "used_by": [
+        "thm-bidiagonal-svd-backward-error-under-local-stability"
+      ]
+    },
+    {
+      "id": "thm-bidiagonal-svd-backward-error-under-local-stability",
+      "statement": "Under the stated local two-sided unitary update equations and bounds, C₀+E=L C_J R* and ‖E‖F≤(product_j(1+eta_j)−1)‖C₀‖F+sum_j delta_j product_{ell>j}(1+eta_ell).",
+      "used_by": [
+        "cor-computed-singular-values-absolute-error-from-backward-stability"
+      ]
+    },
+    {
+      "id": "lem-singular-values-lipschitz-in-spectral-norm",
+      "statement": "For A,E in F^(m×n), F=R or C, and every 1≤i≤min(m,n), |sigma_i(A+E)−sigma_i(A)|≤‖E‖₂.",
+      "used_by": [
+        "thm-strong-rrqr-singular-value-comparisons",
+        "cor-computed-singular-values-absolute-error-from-backward-stability",
+        "ex-absolute-versus-relative-singular-value-error"
+      ]
+    },
+    {
+      "id": "lem-singular-value-product-bound",
+      "statement": "For compatible X,Y,Z over R or C, sigma_i(XY)≤sigma_i(X)‖Y‖₂ for 1≤i≤min(m,n,q), and sigma_j(ZX)≤‖Z‖₂ sigma_j(X) for 1≤j≤min(r,m,n).",
+      "used_by": [
+        "thm-bidiagonal-singular-values-relative-under-componentwise-perturbations",
+        "thm-strong-rrqr-singular-value-comparisons"
+      ]
+    },
+    {
+      "id": "lem-exact-householder-bidiagonal-reduction",
+      "statement": "Exact Householder bidiagonalization returns unitary U,V and upper bidiagonal B such that U*AV=[B;0] when m≥n, and U*A*V=[B;0] when m<n.",
+      "used_by": [
+        "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+        "alg-rank-thresholded-least-squares-by-svd",
+        "thm-bidiagonal-svd-backward-error-under-local-stability"
+      ]
+    },
+    {
+      "id": "prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex",
+      "statement": "For m,n≥1, F in {R,C}, and tau≥0, spectral numerical rank equals the number of singular values strictly greater than tau.",
+      "used_by": [
+        "alg-rank-thresholded-least-squares-by-svd",
+        "thm-svd-thresholded-least-squares-minimum-norm-model",
+        "ex-nearly-rank-deficient-design-matrix"
+      ]
+    },
+    {
+      "id": "thm-strong-rrqr-singular-value-comparisons",
+      "statement": "Exact-arithmetic success gives sigma_i(R₁₁)≥sigma_i(A)/g and sigma_j(R₂₂)≤g sigma_{k+j}(A), where g=sqrt(1+f²k(n−k)); a verified computed certificate gives the stated epsilon-adjusted bounds.",
+      "used_by": [
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ]
+    },
+    {
+      "id": "lem-strong-rrqr-column-swap-volume-ratio",
+      "statement": "Replacing selected column i by trailing column j changes selected volume by the combined score sqrt(|X_ij|²+(omega_i gamma_j)²).",
+      "used_by": [
+        "thm-strong-rrqr-swap-rule-terminates"
+      ]
+    },
+    {
+      "id": "cor-computed-singular-values-absolute-error-from-backward-stability",
+      "statement": "For the stated successful diagonal nearby factorization with exact represented unitary factors, ordered exact readout errors are at most ‖E‖₂≤‖E‖F; rounded modulus readout adds epsilon_read. Budget-exhausted outputs have no such conclusion.",
+      "used_by": [
+        "thm-computed-pseudospectrum-membership-enclosure"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-standard-relative-floating-point-model-and-unit-roundoff",
+      "used_for": "Relative rounding factors, exact-zero behavior, and explicit exclusion of underflow, overflow and invalid operations.",
+      "opened": true
+    },
+    {
+      "id": "def-householder-reflector",
+      "used_for": "Exact reflector formula and unit-normal convention.",
+      "opened": true
+    },
+    {
+      "id": "def-real-and-complex-givens-transformations",
+      "used_for": "Canonical real and complex rotation block conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+      "used_for": "Exact unitary annihilators in bidiagonal reduction, bulge chasing and QR.",
+      "opened": true
+    },
+    {
+      "id": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+      "used_for": "Full/reduced QR shapes and column-permutation conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block",
+      "used_for": "Greedy CPQR initialization and nonsingular selected leading blocks.",
+      "opened": true
+    },
+    {
+      "id": "thm-eckart-young-best-rank-k-approximation",
+      "used_for": "Attained spectral distance to rank-at-most-k matrices, including zero tails.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Spectral operator norm, zero-domain convention and elementary norm inequalities.",
+      "opened": true
+    },
+    {
+      "id": "def-frobenius-matrix-norm",
+      "used_for": "Entrywise Euclidean matrix norm, residual reports and empty shapes.",
+      "opened": true
+    },
+    {
+      "id": "def-numerical-rank-relative-to-a-norm-scale-and-tolerance",
+      "used_for": "Numerical rank as minimum attainable exact rank within a closed tolerance ball.",
+      "opened": true
+    },
+    {
+      "id": "cor-rank-equals-number-of-nonzero-singular-values",
+      "used_for": "Rank counts positive singular values and invertible diagonal scalings preserve zero counts.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+      "used_for": "Unitary invariance, singular-value norm formulas and spectral-to-Frobenius comparison.",
+      "opened": true
+    },
+    {
+      "id": "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+      "used_for": "Strict-threshold reciprocal singular-value construction.",
+      "opened": true
+    },
+    {
+      "id": "lem-product-of-one-plus-deltas-gives-theta-n",
+      "used_for": "Products of rounding factors and sequential summation error expansions.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Exact SVD, adjoint singular values, truncations and example calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-moore-penrose-pseudoinverse",
+      "used_for": "Four Penrose equations for the truncated model.",
+      "opened": true
+    },
+    {
+      "id": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+      "used_for": "Identification of the truncated-model pseudoinverse.",
+      "opened": true
+    },
+    {
+      "id": "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+      "used_for": "Unique minimum-norm least-squares optimality for the truncated matrix.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-norm",
+      "used_for": "Euclidean vector residuals and minimum-norm convention.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "Original-matrix residual allowance from the truncated model.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-strong-rrqr-column-swap-volume-ratio",
+      "concern": "The displayed replacement set is '(J\\setminus\\{i\\})\\cup\\{j\\}', although i and j index selected and trailing QR positions, respectively. These are not original column indices. Literally, take A=diag(1,2), Pi=I, Q=I, k=1, J={1}, i=j=1. The displayed numerator selects column 1 again, so its ratio is 1, whereas X=0, omega_1=1 and gamma_1=2 give score 2. The proof analyzes replacement by the actual trailing column; the Statement must map positions through Pi and use position k+j for that trailing column.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+      "concern": "The finite-precision procedure says to 'form only the tridiagonal entries of T=B*B' and 'Choose mu to be the eigenvalue ... closest to T_rr', but does not specify the rounded scalar expression/order for forming that Hermitian block, evaluating its two eigenvalues, or evaluating the deflation comparisons. The helper supplies rotation arithmetic, not this shift calculation. Exact-arithmetic selection is well-defined, and the conditional backward argument does not need an accurate shift, but the finite-precision procedure needs a concrete evaluation/failure rule to determine its execution under the operationwise model.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "computed-singular-values-and-rank-revealing-factorizations-examples",
+      "concern": "The page says 'The last example gives an exact finite matrix and proves the pivot order and offending coefficient.' That describes the CPQR counterexample, which is the second listed entry; the last entry concerns absolute versus relative singular-value error.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "computed-singular-values-and-rank-revealing-factorizations",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "The scaled complex kernels use the actual operationwise binary no-underflow model, including componentwise complex operations, square-root rounding and first range failure. Their local error theorem retains its additional roundoff/dimension hypotheses."
+    },
+    {
+      "from": "computed-schur-decompositions-and-nonnormal-spectra",
+      "to": "computed-singular-values-and-rank-revealing-factorizations",
+      "faithful": true,
+      "note": "The complex Householder wrapper and similarity bound preserve target-overwrite versus separate-block coefficients and exact represented reflectors. Pseudospectrum enclosure explicitly retains arithmetic, deflation, modulus-readout and shifted-input formation allowances, and treats unavailable certification or budget exhaustion as undecided."
+    },
+    {
+      "from": "generalized-eigenvalue-pencils-and-qz-methods",
+      "to": "computed-singular-values-and-rank-revealing-factorizations",
+      "faithful": true,
+      "note": "The QZ local lemma enlarges the source raw Givens coefficient by replacing sqrt(2) with 2, applies the same stored rotation to both matrices, and separately accounts for target writes, external-vector actions and tolerance deflations. The QZ procedure preserves these conditions."
+    },
+    {
+      "from": "matrix-functions-and-scaling-squaring",
+      "to": "computed-singular-values-and-rank-revealing-factorizations",
+      "faithful": true,
+      "note": "The denominator solver replays the stored Householder separate-block kernel without target overwrites and expands its prescribed scalar schedule for budget accounting. Its termination theorem uses that finite schedule without inferring numerical accuracy or certification from candidate generation."
+    }
+  ]
+}

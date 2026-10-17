@@ -1,0 +1,689 @@
+{
+  "version": 1,
+  "scope": [
+    "def-one-step-ode-method-local-defect-order-and-stability",
+    "lem-time-along-ode-solution-derivative-bound",
+    "thm-forward-euler-one-step-consistency-and-local-error",
+    "ex-explicit-midpoint-local-order-drop-at-nonsmooth-time-kink",
+    "ex-forward-euler-local-error-for-scalar-linear-ode"
+  ],
+  "contracts": {
+    "def-one-step-ode-method-local-defect-order-and-stability": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a definition and makes no proof or verification claim. The Definition fixes d>=1 and positive steps. Its word family refers to prescribed step maps, not an aggregate that needs an empty-family value; the uniform-order hypothesis is conditional on admitted solution segments and stages in K. No existence of such a method or estimate outside those admitted inputs is asserted.",
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex root owner adjudication accepting the cited named Codex source/case owner review",
+            "reason": "This is a definition and makes no proof or verification claim. The Definition fixes d>=1 and positive steps. Its word family refers to prescribed step maps, not an aggregate that needs an empty-family value; the uniform-order hypothesis is conditional on admitted solution segments and stages in K. No existence of such a method or estimate outside those admitted inputs is asserted.",
+            "item_sha256": "958fddf5054249c21cdb0720b8655d7a5e6d88cfc2c10a61e743c8723dde455a",
+            "row_sha256": "ea7d757eba972de1668820ea4c08a74af01a2c195d8b5e5a6755d6ffcd40d89e"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This is a definition and makes no proof or verification claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This is a definition and makes no proof or verification claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This is a definition and makes no proof or verification claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a definition and makes no proof or verification claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This is a definition and makes no proof or verification claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a definition and makes no proof or verification claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a definition and makes no proof or verification claim."
+        }
+      ],
+      "source_locators": "Hairer, French course notes Équations Différentielles Ordinaires, Chapter III §III.2, printed pp. 60–62; MIT OCW 18.330, Chapter 5 §5.2.1, PDF pp. 4–5; Driscoll–Braun, Fundamentals of Numerical Computation §6.2.1.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-7",
+        "notes": "The defect is method minus exact value. Uniform order p is the unscaled O(h^(p+1)) convention; one-step Lipschitz stability is distinct from absolute stability and global convergence."
+      }
+    },
+    "lem-time-along-ode-solution-derivative-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "The ODE solution supplies graph-domain membership and y'=f(s,y(s))."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "Continuous partials give the total derivative matrix used in the path chain rule."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a\\in U$, then some $C,\\delta>0$ satisfy $\\|f(a+h)-f(a)\\|_2\\le C\\|h\\|_2$ whenever $\\|h\\|_2<\\delta$ and $a+h\\in U$. In particular $f$ is continuous at $a$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "Total differentiability gives continuity of f and hence continuity of the solution derivative and composition."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "The total chain rule computes the derivative of f_i composed with q(s)=(s,y(s))."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "By [F2]–[F3], $f$ is continuous on $V$. Since $y'=f(s,y(s))$, the derivative of $y$ is continuous on $I$; hence $y$ is continuously differentiable and the path $q(s):=(s,y(s))$ has derivative $q'(s)=(1,f(s,y(s)))$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For each $i$, the component map $f_i$ is totally differentiable, so [F4] applied to $g_i=f_i\\circ q$ gives the displayed derivative formula. The bounds give $|g_i'(s)|\\le M_{t,i}+\\sum_{j=1}^dM_{ij}F_j=B_i$ for every $s\\in(a,b)$. Continuity of $g_i$ on $[a,b]$ follows from continuity of $f$ and $y$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes d≥1 and a nondegenerate solution interval. The Statement requires d>=1 and a nondegenerate time interval containing an actual solution graph. Its component sums run over one through d, and its proof composes the supplied solution with the given vector field. Thus no empty component family occurs; zero bounds or vector-field components remain admitted in the one-way derivative estimate.",
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex root owner adjudication accepting the cited named Codex source/case owner review",
+            "reason": "The statement fixes d≥1 and a nondegenerate solution interval. The Statement requires d>=1 and a nondegenerate time interval containing an actual solution graph. Its component sums run over one through d, and its proof composes the supplied solution with the given vector field. Thus no empty component family occurs; zero bounds or vector-field components remain admitted in the one-way derivative estimate.",
+            "item_sha256": "c4977cf79eb0add9b15904939d8765fdd47e14f3477540d42b1649a32666086b",
+            "row_sha256": "d53fe3b6ce7659f3a2e28b4c6948260e12efac398d156a1fe28f5b59b7bd1798"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid when any F_j or B_i is zero; the corresponding derivative bound is then zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 2.1 allow d=1, where B_i contains one term."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 gives g_i'=0 whenever M_{t,i}=0 and every product M_{ij}F_j=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement gives continuity on [a,b] and differentiability only on (a,b); no two-sided endpoint derivative is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1 use only the given solution and finite component sums; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a derivative formula and bound, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a derivative formula and bound, not an equivalence."
+        }
+      ],
+      "source_locators": "Hairer, French course notes Équations Différentielles Ordinaires, Chapter III §III.2, printed pp. 60–61; the exact path derivative is proved locally from the total chain rule supplier.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-7",
+        "notes": "Continuous first partials give the Jacobian and total chain rule along the C1 solution path. Bounds are evaluated at (s,y(s)); no second derivatives are assumed."
+      }
+    },
+    "thm-forward-euler-one-step-consistency-and-local-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-one-step-ode-method-local-defect-order-and-stability",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, and consider a first-order IVP and solution in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. A **one-step method** is a family of maps $\\Psi_h(t,v)$, defined for admitted times $t$, positive step sizes $h$, and states $v$, whose value is the method's approximation at time $t+h$ from the single input state $v$ at time $t$. It does not use earlier numerical states.\n\nIf $y$ is an exact solution on an interval containing $[t,t+h]$, the **local defect** is\n\n$$\\delta_h(t;y):=\\Psi_h(t,y(t))-y(t+h).$$\n\nLet $K\\subseteq D$ be a fixed compact time-state set. The method has **uniform local order $p$ on $K$ along $y$** if there are constants $C\\ge0$ and $h_0>0$, independent of the admitted starting time $t$ and step $0<h\\le h_0$, such that\n\n$$\\|\\delta_h(t;y)\\|_2\\le C h^{p+1}$$\n\nwhenever the exact solution graph on $[t,t+h]$ and the associated method time-state inputs, stages, and outputs under consideration lie in $K$. Here $p$ is a positive integer and $\\|\\cdot\\|_2$ is the Euclidean norm of [[def-euclidean-inner-product]].\n\nThe method has **one-step Lipschitz stability on $K$** with constant $L\\ge0$ if\n\n$$\\|\\Psi_h(t,u)-\\Psi_h(t,v)\\|_2\\le(1+Lh)\\|u-v\\|_2$$\n\nfor every admitted step size $h$, admitted time $t$, and input states $u,v$ with $(t,u),(t,v)\\in K$. This is a bound on the change in one step; it is separate from absolute or linear stability regions and does not itself assert a global error estimate.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ],
+          "use_explanation": "This fixes the defect sign convention and the order/stability properties in the conclusion."
+        },
+        {
+          "fact": "F2",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "use_explanation": "The solution definition supplies graph-domain membership and the differential equation."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ],
+          "use_explanation": "Continuous partials give the Jacobian as the total derivative on V."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a\\in U$, then some $C,\\delta>0$ satisfy $\\|f(a+h)-f(a)\\|_2\\le C\\|h\\|_2$ whenever $\\|h\\|_2<\\delta$ and $a+h\\in U$. In particular $f$ is continuous at $a$.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "Total differentiability gives continuity needed for IVP existence and the solution path."
+        },
+        {
+          "fact": "F5",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ],
+          "use_explanation": "Convex state fibers keep line segments in the domain for the mean-value bound."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then\n\n$$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ],
+          "use_explanation": "The derivative operator bound yields the state Lipschitz inequality on each fiber."
+        },
+        {
+          "fact": "F7",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Every initial value problem satisfying the Picard-Lindelof hypotheses has a unique maximal solution. Its domain is an open interval containing the initial time, and every other solution through the same data is its restriction.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "This supplier gives local existence and uniqueness once continuity and state Lipschitzness are checked."
+        },
+        {
+          "fact": "F8",
+          "source": "lem-time-along-ode-solution-derivative-bound",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $V\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, let $f:V\\to\\mathbb R^d$ have continuous first partial derivatives, and let $y:I\\to\\mathbb R^d$ solve $y'=f(t,y)$ on an open interval $I$. Fix $a<b$ with $[a,b]\\subset I$ such that $(s,y(s))\\in V$ for every $s\\in[a,b]$. Suppose finite constants $F_j,M_{t,i},M_{ij}\\ge0$ satisfy for all $s\\in[a,b]$\n\n$$|f_j(s,y(s))|\\le F_j,\\qquad |\\partial_t f_i(s,y(s))|\\le M_{t,i},\\qquad |\\partial_{z_j}f_i(s,y(s))|\\le M_{ij}\\qquad(1\\le i,j\\le d).$$\n\nDefine $g_i(s):=f_i(s,y(s))$ and $B_i:=M_{t,i}+\\sum_{j=1}^dM_{ij}F_j$. Then $g_i$ is continuous on $[a,b]$, differentiable on $(a,b)$, and\n\n$$g_i'(s)=\\partial_t f_i(s,y(s))+\\sum_{j=1}^d\\partial_{z_j}f_i(s,y(s))f_j(s,y(s)),\\qquad |g_i'(s)|\\le B_i.$$",
+          "uses": [
+            "1.2"
+          ],
+          "use_explanation": "The local A-page lemma supplies the exact derivative formula and componentwise bound B_i."
+        },
+        {
+          "fact": "F9",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "The integral-equation form supplies the exact solution increment on each restarted step."
+        },
+        {
+          "fact": "F10",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "The real mean value theorem turns the derivative bound into |g_i(s)-g_i(0)|≤B_i s."
+        },
+        {
+          "fact": "F11",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "The Euclidean norm squared is the sum of squared components."
+        },
+        {
+          "fact": "F12",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "4.1"
+          ],
+          "use_explanation": "The Euclidean norm triangle inequality bounds the sum of the state difference and h times the vector-field difference."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "By [F3]–[F4], $f$ is totally differentiable and continuous on $V$, with state derivative matrix $D_yf$. On each open convex fiber $V_t$, the derivative bound and [F5]–[F6] make $f(t,\\cdot)$ $L$-Lipschitz. Thus the hypotheses of [F7] hold and the IVP has a unique maximal solution; the given solution agrees with it throughout $[0,T]$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Fix any $t\\in[0,T)$ and $h>0$ with $t+h\\le T$ satisfying the stated compact-set condition, and fix a component $i$. Define $g_i(s):=f_i(t+s,y(t+s))$ for $0\\le s\\le h$. The exact path segment lies in $K\\subset V$, so [F8] gives $|g_i'(s)|\\le B_i$ on $(0,h)$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F8"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For each $s\\in(0,h]$, [F10] applied to $g_i$ on $[0,s]$ yields $|g_i(s)-g_i(0)|\\le B_i s$; at $s=0$ the same inequality is equality.",
+          "inputs": [
+            "step 1.2",
+            "F10"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Apply [F9] to the IVP restarted at $(t,y(t))$; then $y_i(t+h)-y_i(t)=\\int_0^h g_i(s)\\,ds$. Euler's output from the exact state is $y_i(t)+hg_i(0)$, so $\\delta_{h,i}(t;y)=\\int_0^h(g_i(0)-g_i(s))\\,ds$. Using [step 2.1] gives $|\\delta_{h,i}(t;y)|\\le\\int_0^h B_i s\\,ds=B_i h^2/2$. Squaring the component bounds, summing, and using [F11] gives the asserted Euclidean norm estimate. Its constant is independent of $t$ and $h$, proving uniform local order one under [F1].",
+          "inputs": [
+            "F1",
+            "F9",
+            "F11",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "For any admitted $t\\in[0,T]$, $h>0$, and $u,v\\in V_t$, [F3] identifies the derivative of $z\\mapsto f(t,z)$ with $D_yf(t,z)$; [F5]–[F6] give $\\|f(t,u)-f(t,v)\\|_2\\le L\\|u-v\\|_2$. Therefore [F12] gives $\\|\\Psi_h(t,u)-\\Psi_h(t,v)\\|_2\\le\\|u-v\\|_2+h\\|f(t,u)-f(t,v)\\|_2\\le(1+Lh)\\|u-v\\|_2$, which is the one-step stability bound in [F1] for inputs in $K$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "F12",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes d≥1, T>0, and a nonempty interval [0,T]. The Statement requires positive state dimension and horizon and an actual solution graph in K, excluding an empty compact domain for this instance. The finite sums of component bounds are nonempty; the proof separately handles zero elapsed integration variable and derives local Euler defect/stability only for admitted positive steps. It claims no global error estimate.",
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex root owner adjudication accepting the cited named Codex source/case owner review",
+            "reason": "The theorem assumes d≥1, T>0, and a nonempty interval [0,T]. The Statement requires positive state dimension and horizon and an actual solution graph in K, excluding an empty compact domain for this instance. The finite sums of component bounds are nonempty; the proof separately handles zero elapsed integration variable and derives local Euler defect/stability only for admitted positive steps. It claims no global error estimate.",
+            "item_sha256": "9c21d2e0b420803c9d0bf6ab142ca6045411ade533e9370347f12b0568fbf495",
+            "row_sha256": "96b4823d3b33e6deb510e8b696cb0cc3e1272d3258ecfb6eca01ab7de848342f"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives zero defect when all B_i vanish; step 4.1 reduces to the identity factor when L=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows d=1; the component sum and Euclidean norm in step 3.1 then have one term."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 remain valid for zero field and zero derivative bounds; no division by L occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1, and 3.1 include t=0 and t+h=T; the scalar mean-value estimate is applied on each closed [0,s]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 use the given solution, arbitrary admitted t and h, and finite sums only; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an estimate, not an equivalence."
+        }
+      ],
+      "source_locators": "Hairer, French course notes Équations Différentielles Ordinaires, Chapter III §III.2 printed pp. 60–62; MIT OCW 18.330 §5.2.1–§5.2.2 PDF pp. 4–8; Driscoll–Braun, Fundamentals of Numerical Computation §§6.2.1–6.2.2. Their broader global results are explicitly not used.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Independently read all five proof steps and F1-F12 against current supplier statements. Continuous first partials on the open (d+1)-dimensional V give continuity and total derivatives; convex open fibers and the uniform operator bound give one time-uniform L on every compact cylinder, meeting local state-Lipschitzness. The published maximal-solution openness argument has nonfatal omitted uniqueness/gluing detail (reader:7:2), explicitly closed by its cited overlap lemma; no unmet prerequisite remains for this use. The continuous-partials supplier omits m=0, but every application here has m=d+1>=2 or state dimension d>=1 (reader:7:1). F8 applies on [t,t+h] and supplies continuity at both endpoints, including t=0 and t+h=T. MVT gives |g_i(s)-g_i(0)|<=B_i s for s>0, separately equality at zero. The Volterra increment gives delta_i=int_0^h(g_i(0)-g_i(s))ds, hence |delta_i|<=B_i h^2/2; Euclidean square summation gives the claimed constant independent of t,h. d=1 and zero component/derivative bounds are valid; the given solution and T>0 exclude empty K, while missing admitted steps merely restrict the quantifier. Triangle inequality with h>0 gives 1+Lh, including L=0 and u=v, without division by L or any choice. No C2, global-error, or higher-method conclusion is used. Source comparison: Driscoll-Braun Euler section 6.2.1, equations (6.2.6)-(6.2.8), uses LTE tau=-delta/h; section 6.2.2 has the same Lipschitz recurrence factor, without importing its global theorem. Lebl section 8.4 Proposition 8.4.2 supplies the convex derivative-bound argument; Teschl section 2.6 Theorem 2.13 supplies the maximal-union argument. Also read the directly fetched Hairer URL rendered PDF pp.4–6 (printed pp.60–62): §III.2 equations (2.2)–(2.3), Definition 2.2 and Euler order-one calculation. It is French course notes, not the named HNW book; the unchanged theorem/lemma/definition reference titles are separately alerted to owner. This bibliographic mismatch does not change their checked statements or proofs. MIT Chapter 5 §5.2.1 Definitions 6–7 and §5.2.2 Example 14 confirm the sign/order convention and scalar Euler factor; absolute stability is separate."
+      }
+    },
+    "ex-forward-euler-local-error-for-scalar-linear-ode": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-one-step-ode-method-local-defect-order-and-stability",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, and consider a first-order IVP and solution in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. A **one-step method** is a family of maps $\\Psi_h(t,v)$, defined for admitted times $t$, positive step sizes $h$, and states $v$, whose value is the method's approximation at time $t+h$ from the single input state $v$ at time $t$. It does not use earlier numerical states.\n\nIf $y$ is an exact solution on an interval containing $[t,t+h]$, the **local defect** is\n\n$$\\delta_h(t;y):=\\Psi_h(t,y(t))-y(t+h).$$\n\nLet $K\\subseteq D$ be a fixed compact time-state set. The method has **uniform local order $p$ on $K$ along $y$** if there are constants $C\\ge0$ and $h_0>0$, independent of the admitted starting time $t$ and step $0<h\\le h_0$, such that\n\n$$\\|\\delta_h(t;y)\\|_2\\le C h^{p+1}$$\n\nwhenever the exact solution graph on $[t,t+h]$ and the associated method time-state inputs, stages, and outputs under consideration lie in $K$. Here $p$ is a positive integer and $\\|\\cdot\\|_2$ is the Euclidean norm of [[def-euclidean-inner-product]].\n\nThe method has **one-step Lipschitz stability on $K$** with constant $L\\ge0$ if\n\n$$\\|\\Psi_h(t,u)-\\Psi_h(t,v)\\|_2\\le(1+Lh)\\|u-v\\|_2$$\n\nfor every admitted step size $h$, admitted time $t$, and input states $u,v$ with $(t,u),(t,v)\\in K$. This is a bound on the change in one step; it is separate from absolute or linear stability regions and does not itself assert a global error estimate.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "use_explanation": "The definition fixes the method-minus-exact defect and local order-one convention."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-forward-euler-one-step-consistency-and-local-error",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $T>0$, and let $V\\subseteq\\mathbb R\\times\\mathbb R^d$ be an open time-state domain whose fibers $V_t:=\\{z:(t,z)\\in V\\}$ are open and convex. Let $K\\subset V$ be compact. Let $f:V\\to\\mathbb R^d$ have continuous first partial derivatives, and suppose $y$ is a solution of $y'=f(t,y)$, $y(0)=y_0$, on an open interval containing $[0,T]$, with graph on $[0,T]$ contained in $K$. For each local defect under consideration, require the Euler input and output time-state pairs to lie in $K$; the exact solution segment already lies in $K$.\n\nFor $1\\le i,j\\le d$, assume finite constants $F_j,M_{t,i},M_{ij},L\\ge0$ satisfy throughout $V$\n\n$$|f_j(t,z)|\\le F_j,\\qquad |\\partial_t f_i(t,z)|\\le M_{t,i},\\qquad |\\partial_{z_j}f_i(t,z)|\\le M_{ij},\\qquad \\|D_yf(t,z)w\\|_2\\le L\\|w\\|_2\\quad(w\\in\\mathbb R^d).$$\n\nHere $D_yf$ is the matrix with entries $\\partial_{z_j}f_i$, and the last inequality defines the operator bound used below. The forward Euler map is $\\Psi_h(t,v)=v+h f(t,v)$. Then, with $B_i:=M_{t,i}+\\sum_{j=1}^dM_{ij}F_j$, for every $t\\in[0,T)$ and $h>0$ with $t+h\\le T$ whose Euler input and output pairs lie in $K$, its local defect satisfies\n\n$$\\|\\delta_h(t;y)\\|_2\\le \\frac{h^2}{2}\\left(\\sum_{i=1}^d B_i^2\\right)^{1/2},$$\n\nso it has uniform local order one on $K$ along $y|_{[0,T]}$, with $h_0=T$. For every $t\\in[0,T]$, every admitted $h>0$, and every $u,v\\in V_t$,\n\n$$\\|\\Psi_h(t,u)-\\Psi_h(t,v)\\|_2\\le(1+Lh)\\|u-v\\|_2.$$\n\nThis is a local defect and one-step stability result. It does not assert a global error estimate or an order for any other named method.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ],
+          "use_explanation": "The A theorem supplies the local Euler and one-step stability interface for this field."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "The scalar k=1 specialization gives the exact exponential remainder with an interior second-derivative value."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Fix $T>0$, let $R:=e^T(1+T)+1$, and take $V=(-1,T+1)\\times(-R,R)$ and $K=[0,T]\\times[-R+1,R-1]$. These are an open domain with convex state fibers and a compact subset $K\\subset V$. For $f(t,z)=z$, the bounds in [F2] hold throughout $V$ with $F_1=R$, $M_{t,1}=0$, $M_{11}=1$, and $L=1$. The function $y(t)=e^t$ solves the IVP, its graph on $[0,T]$ lies in $K$, and for every $0<h\\le T-t$ the Euler output state $e^t(1+h)$ lies between $0$ and $e^T(1+T)=R-1$, so its input and output pairs lie in $K$. Starting from $e^t$, Euler returns $e^t(1+h)$ and the exact endpoint is $e^{t+h}=e^te^h$. Therefore [F1] gives $\\delta_h(t;y)=e^t(1+h-e^h)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Apply [F3] to $s\\mapsto e^s$ at $0$ with increment $h$: there is $\\theta_h\\in(0,h)$ with $e^h=1+h+\\tfrac12 e^{\\theta_h}h^2$. Thus $|\\delta_h(t;y)|=\\tfrac12 e^{t+\\theta_h}h^2$.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Since $0<\\theta_h<h$, for $0\\le t\\le T-h$ we have $\\tfrac12h^2\\le |\\delta_h(t;y)|\\le \\tfrac12e^T h^2$. The lower and upper bounds establish uniform $\\Theta(h^2)$ error, hence order exactly one under [F1].",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "For any scalar inputs $u,v$, $|\\Psi_h(t,u)-\\Psi_h(t,v)|=|(1+h)(u-v)|=(1+h)|u-v|$. This verifies the stated stability factor; it also agrees with [F2] for $f(t,z)=z$ and $L=1$.",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes T>0, so [0,T-h] is nonempty for all sufficiently small positive h; it also fixes the nonempty scalar state space R and positive steps."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement defect formula δ=e^t(1+h−e^h) extends continuously to h=0 with zero defect."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is scalar, so the component count d is exactly one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonzero scalar field f(y)=y and does not vary a degenerate vector field."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1 hold at t=0 and at the last admitted start t=T−h."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1, 4.1 are explicit scalar calculations and use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies an explicit formula, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies an explicit formula, not an equivalence."
+        }
+      ],
+      "source_locators": "Hairer, French course notes Équations Différentielles Ordinaires, Chapter III §III.2 printed pp. 60–62; Driscoll–Braun, Fundamentals of Numerical Computation §6.2.1; Taylor supplier statement at items/thm-multivariable-taylor-formula-with-lagrange-remainder.md.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-7",
+        "notes": "The exact defect sign is method minus exact; Taylor supplies an interior-point remainder and gives uniform upper and lower h^2 bounds on fixed [0,T]."
+      }
+    },
+    "ex-explicit-midpoint-local-order-drop-at-nonsmooth-time-kink": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-one-step-ode-method-local-defect-order-and-stability",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, and consider a first-order IVP and solution in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. A **one-step method** is a family of maps $\\Psi_h(t,v)$, defined for admitted times $t$, positive step sizes $h$, and states $v$, whose value is the method's approximation at time $t+h$ from the single input state $v$ at time $t$. It does not use earlier numerical states.\n\nIf $y$ is an exact solution on an interval containing $[t,t+h]$, the **local defect** is\n\n$$\\delta_h(t;y):=\\Psi_h(t,y(t))-y(t+h).$$\n\nLet $K\\subseteq D$ be a fixed compact time-state set. The method has **uniform local order $p$ on $K$ along $y$** if there are constants $C\\ge0$ and $h_0>0$, independent of the admitted starting time $t$ and step $0<h\\le h_0$, such that\n\n$$\\|\\delta_h(t;y)\\|_2\\le C h^{p+1}$$\n\nwhenever the exact solution graph on $[t,t+h]$ and the associated method time-state inputs, stages, and outputs under consideration lie in $K$. Here $p$ is a positive integer and $\\|\\cdot\\|_2$ is the Euclidean norm of [[def-euclidean-inner-product]].\n\nThe method has **one-step Lipschitz stability on $K$** with constant $L\\ge0$ if\n\n$$\\|\\Psi_h(t,u)-\\Psi_h(t,v)\\|_2\\le(1+Lh)\\|u-v\\|_2$$\n\nfor every admitted step size $h$, admitted time $t$, and input states $u,v$ with $(t,u),(t,v)\\in K$. This is a bound on the change in one step; it is separate from absolute or linear stability regions and does not itself assert a global error estimate.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ],
+          "use_explanation": "The definition gives the local defect and the uniform h^3 requirement for order two."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "For $t<0$, $y(t)=-t^2/2$ and $y'(t)=-t=|t|$; for $t>0$, $y(t)=t^2/2$ and $y'(t)=t=|t|$. At $t=0$, $\\lim_{s\\to0}(y(s)-y(0))/s=\\lim_{s\\to0}|s|/2=0=|0|$. Hence $y$ is the exact solution through $y(0)=0$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "At $t_h=-h/2$, the exact value is $y(t_h)=-h^2/8$ and the explicit midpoint stage time is $0$, where $f(0,z)=0$ for every stage value $z$. Thus $M_h(t_h,y(t_h))=y(t_h)=-h^2/8$, while $y(t_h+h)=y(h/2)=h^2/8$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Therefore $\\delta_h(t_h;y)=-h^2/4$. The exact segment has $|t|\\le h/2\\le1/2$ and $|y(t)|\\le1/8$; the input and output states are $-h^2/8$, and the midpoint stage state is $h^2/8$, all in $[-1,1]$. Their time coordinates also lie in $[-1,1]$, so the definition applies on the fixed compact set $K$. If a uniform order-two bound held, $h^2/4\\le Ch^3$ for every $0<h\\le1$, forcing $C\\ge1/(4h)$ as $h\\downarrow0$, which is impossible.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "For an arbitrary $t\\in\\mathbb R$ and $h>0$, the method increment from the exact state is $h|t+h/2|$. If $[t,t+h]$ lies on either side of $0$, then $y$ is quadratic there and this increment equals $y(t+h)-y(t)$, so the defect is zero. If $t<0<t+h$, put $r=-t/h\\in(0,1)$. Using $y(t)=-t^2/2$ and $y(t+h)=(t+h)^2/2$ gives $\\delta_h(t;y)=-h^2r^2$ for $0<r\\le1/2$ and $\\delta_h(t;y)=-h^2(1-r)^2$ for $1/2\\le r<1$. Thus every crossing step has $|\\delta_h(t;y)|\\le h^2/4$, and the same bound holds for every step. In particular, it holds uniformly for all admitted starts and steps in $K$; together with step 3.1, the uniform local order is exactly one.",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty scalar state space and a positive step."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At the kink t=0 the field value is zero; step 2.1 uses this exact zero midpoint slope."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is scalar, so the component count d is one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1 directly handle the zero derivative value at the kink without dividing by the field."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses both endpoints −h/2 and h/2 and computes the exact defect across the kink."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1 explicitly calculate all states, stages and limits; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a one-way counterexample to a uniform order-two bound, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a one-way counterexample to a uniform order-two bound, not an equivalence."
+        }
+      ],
+      "source_locators": "Hairer, French course notes Équations Différentielles Ordinaires, Chapter III §III.2 printed pp. 61–62; MIT OCW 18.330 Chapter 5, PDF pp. 2–5. The nonsmooth witness is calculated locally and is not attributed to either source.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-7",
+        "notes": "The starting time depends on h, as permitted by uniform local order. The exact segment, input, midpoint stage, and output lie in the fixed compact rectangle K; the defect is exactly −h^2/4."
+      }
+    }
+  }
+}

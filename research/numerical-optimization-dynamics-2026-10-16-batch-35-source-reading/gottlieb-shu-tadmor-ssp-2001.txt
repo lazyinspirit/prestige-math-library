@@ -1,0 +1,2895 @@
+SIAM REVIEW
+c⃝2001 Society for Industrial and Applied Mathematics
+Vol. 43, No. 1, pp. 89–112
+
+Strong Stability-Preserving
+High-Order Time Discretization
+Methods∗
+
+Sigal Gottlieb†
+
+Chi-Wang Shu‡
+
+Eitan Tadmor§
+
+Abstract. In this paper we review and further develop a class of strong stability-preserving (SSP)
+high-order time discretizations for semidiscrete method of lines approximations of par-
+tial differential equations.
+Previously termed TVD (total variation diminishing) time
+discretizations, these high-order time discretization methods preserve the strong stabil-
+ity properties of first-order Euler time stepping and have proved very useful, especially
+in solving hyperbolic partial differential equations. The new developments in this paper
+include the construction of optimal explicit SSP linear Runge–Kutta methods, their appli-
+cation to the strong stability of coercive approximations, a systematic study of explicit SSP
+multistep methods for nonlinear problems, and the study of the SSP property of implicit
+Runge–Kutta and multistep methods.
+
+Key words. strong stability preserving, Runge–Kutta methods, multistep methods, high-order accu-
+racy, time discretization
+
+AMS subject classifications. 65M20, 65L06
+
+PII. S003614450036757X
+
+1. Introduction. It is a common practice in solving time-dependent partial dif-
+ferential equations (PDEs) to first discretize the spatial variables to obtain a semidis-
+crete method of lines scheme. This is then an ordinary differential equation (ODE)
+system in the time variable, which can be discretized by an ODE solver. A relevant
+question here concerns stability. For problems with smooth solutions, usually a linear
+stability analysis is adequate. For problems with discontinuous solutions, however,
+such as solutions to hyperbolic problems, a stronger measure of stability is usually
+required.
+
+∗Received by the editors February 11, 2000; accepted for publication (in revised form) August 1,
+2000; published electronically February 2, 2001.
+http://www.siam.org/journals/sirev/43-1/36757.html
+†Department of Mathematics, University of Massachusetts at Dartmouth, Dartmouth, MA
+02747 and Division of Applied Mathematics, Brown University, Providence, RI 02912 (sgottlieb@
+umassd.edu).
+The research of this author was supported by ARO grant DAAG55-97-1-0318 and
+NSF grant ECS-9627849.
+‡Division of Applied Mathematics, Brown University, Providence, RI 02912 (shu@cfm.brown.edu).
+The research of this author was supported by ARO grants DAAG55-97-1-0318 and DAAD19-00-1-
+0405, NSF grants DMS-9804985, ECS-9906606, and INT-9601084, NASA Langley grant NAG-1-2070
+and contract NAS1-97046 while this author was in residence at ICASE, NASA Langley Research
+Center, Hampton, VA 23681-2199, and by AFOSR grant F49620-99-1-0077.
+§Department of Mathematics, University of California at Los Angeles, Los Angeles, CA 90095
+(tadmor@math.ucla.edu). The research of this author was supported by NSF grant DMS97-06827
+and ONR grant N00014-1-J-1076.
+
+89
+
+
+90
+SIGAL GOTTLIEB, CHI-WANG SHU, AND EITAN TADMOR
+
+In this paper we review and further develop a class of high-order strong stability-
+preserving (SSP) time discretization methods for the semidiscrete method of lines
+approximations of PDEs. These time discretization methods were first developed in
+[20] and [19] and were called TVD (total variation diminishing) time discretizations.
+This class of methods was further developed in [6]. The idea is to assume that the
+first-order forward Euler time discretization of the method of lines ODE is strongly
+stable under a certain norm when the time step ∆t is suitably restricted, and then
+to try to find a higher order time discretization (Runge–Kutta or multistep) that
+maintains strong stability for the same norm, perhaps under a different time step
+restriction. In [20] and [19], the relevant norm was the total variation norm: the
+forward Euler time discretization of the method of lines ODE was assumed to be
+TVD, hence the class of high-order time discretization developed there was termed
+TVD time discretization. This terminology was also used in [6]. In fact, the essence
+of this class of high-order time discretizations lies in its ability to maintain the strong
+stability in the same norm as the first-order forward Euler version, hence SSP time
+discretization is a more suitable term, which we will use in this paper.
+We begin this paper by discussing explicit SSP methods. We first give, in sec-
+tion 2, a brief introduction to the setup and basic properties of the methods. We
+then move, in section 3, to our new results on optimal SSP Runge–Kutta methods
+of arbitrary order of accuracy for linear ODEs suitable for solving PDEs with linear
+spatial discretizations. This is used to prove strong stability for a class of well-posed
+problems ut = L(u), where the operator L is linear and coercive, improving and
+simplifying the proofs for the results in [13]. We review and further develop the re-
+sults in [20], [19], and [6] for nonlinear SSP Runge–Kutta methods in section 4 and
+for multistep methods in section 5. Section 6 of this paper contains our new results
+on implicit SSP schemes. It starts with a numerical example showing the necessity
+of preserving the strong stability property of the method, then it moves on to the
+analysis of the rather disappointing negative results concerning the nonexistence of
+SSP implicit Runge–Kutta or multistep methods of order higher than 1. Concluding
+remarks are given in section 7.
+
+2. Explicit SSP Methods.
+
+2.1. Why SSP Methods? Explicit SSP methods were developed in [20] and [19]
+(termed TVD time discretizations there) to solve systems of ODEs
+
+d
+dtu = L(u),
+(2.1)
+
+resulting from a method of lines approximation of the hyperbolic conservation law,
+
+ut = −f(u)x,
+(2.2)
+
+where the spatial derivative, f(u)x, is discretized by a TVD finite difference or finite
+element approximation; see, e.g., [8], [16], [21], [2], [9], and consult [22] for a recent
+overview. Denoted by −L(u), it is assumed that the spatial discretization has the
+property that when it is combined with the first-order forward Euler time discretiza-
+tion,
+
+un+1 = un + ∆tL(un),
+(2.3)
+
+then, for a sufficiently small time step dictated by the Courant–Friedrichs–Levy (CFL)
+condition,
+
+∆t ≤∆tF E,
+(2.4)
+
+
+STRONG STABILITY-PRESERVING TIME DISCRETIZATION METHODS
+91
+
+30
+40
+50
+60
+
+-0.5
+
+0.0
+
+0.5
+
+1.0
+
+1.5
+
+x
+
+u
+exact
+
+TVD
+
+30
+40
+50
+60
+
+-0.5
+
+0.0
+
+0.5
+
+1.0
+
+1.5
+
+x
+
+u
+exact
+
+non-TVD
+
+Fig. 2.1
+Second-order TVD MUSCL spatial discretization. Solution after the shock moves 50 mesh
+points. Left: SSP time discretization; right: non-SSP time discretization.
+
+the total variation (TV) of the one-dimensional discrete solution
+
+un :=
+�
+
+j
+un
+j 1{xj−1
+
+2 ≤x≤xj+ 1
+
+2 }
+
+does not increase in time; i.e., the following so-called TVD property holds:
+
+TV (un+1) ≤TV (un),
+TV (un) :=
+�
+
+j
+|un
+j+1 −un
+j |.
+(2.5)
+
+The objective of the high-order SSP Runge–Kutta or multistep time discretiza-
+tion is to maintain the strong stability property (2.5) while achieving higher order
+accuracy in time, perhaps with a modified CFL restriction (measured here with a
+CFL coefficient, c)
+
+∆t ≤c ∆tF E.
+(2.6)
+
+In [6] we gave numerical evidence to show that oscillations may occur when using
+a linearly stable, high-order method which lacks the strong stability property, even if
+the same spatial discretization is TVD when combined with the first-order forward
+Euler time discretization. The example is illustrative, so we reproduce it here. We
+consider a scalar conservation law, the familiar Burgers equation
+
+ut +
+�1
+
+2u2
+�
+
+x
+= 0
+(2.7)
+
+with Riemann initial data
+
+u(x, 0) =
+�
+1
+if x ≤0,
+−0.5
+if x > 0.
+(2.8)
+
+The spatial discretization is obtained by a second order MUSCL [12], which is TVD
+for forward Euler time discretization under suitable CFL restriction.
+In Figure 2.1, we show the result of using an SSP second-order Runge–Kutta
+method for the time discretization (left) and that of using a non-SSP second-order
+Runge–Kutta method (right). We can clearly see that the non-SSP result is oscillatory
+(there is an overshoot).
+
+
+92
+SIGAL GOTTLIEB, CHI-WANG SHU, AND EITAN TADMOR
+
+This simple numerical example illustrates that it is safer to use an SSP time
+discretization for solving hyperbolic problems. After all, they do not increase the
+computational cost and have the extra assurance of provable stability.
+As we have already mentioned above, the high-order SSP methods discussed here
+are not restricted to preserving (not increasing) the TV. Our arguments below rely on
+convexity, hence these properties hold for any norm. Consequently, SSP methods have
+a wide range of applicability, as they can be used to ensure stability in an arbitrary
+norm once the forward Euler time discretization is shown to be strongly stable,1 i.e.,
+∥un + ∆tL(un)∥≤∥un∥.
+For linear examples we refer to [7], where weighted L2
+
+SSP higher order discretizations of spectral schemes were discussed. For nonlinear
+scalar conservation laws in several space dimensions, the TVD property is ruled out
+for high-resolution schemes; instead, strong stability in the maximum norm is sought.
+Applications of L∞SSP higher order discretization for discontinuous Galerkin and
+central schemes can be found in [3] and [9]. Finally, we note that since our arguments
+below are based on convex decompositions of high-order methods in terms of the
+first-order Euler method, any convex function will be preserved by such high-order
+time discretizations. In this context we refer, for example, to the cell entropy stability
+property of high-order schemes studied in [17] and [15].
+We remark that the strong stability assumption for the forward Euler ∥un +
+∆tL(un)∥≤∥un∥can be relaxed to the more general stability assumption ∥un +
+∆tL(un)∥≤(1+O(∆t))∥un∥. This general stability property will also be preserved by
+the high-order SSP time discretizations. The total variation bounded (TVB) methods
+discussed in [18] and [2] belong to this category. However, if the forward Euler operator
+is not stable, the framework in this paper cannot be used to determine whether a high-
+order time discretization is stable or not.
+
+2.2. SSP Runge–Kutta Methods. In [20], a general m-stage Runge–Kutta method
+for (2.1) is written in the form
+
+u(0) = un,
+
+u(i) =
+
+i−1
+�
+
+k=0
+
+�
+αi,ku(k) + ∆tβi,kL(u(k))
+�
+,
+αi,k ≥0,
+i = 1, . . . , m,
+(2.9)
+
+un+1 = u(m).
+
+Clearly, if all the βi,k’s are nonnegative, βi,k
+≥0; then since by consistency
+�i−1
+k=0 αi,k = 1, it follows that the intermediate stages in (2.9), u(i), amount to con-
+vex combinations of forward Euler operators, with ∆t replaced by βi,k
+
+αi,k ∆t. We thus
+conclude with the following lemma.
+Lemma 2.1 (see [20]). If the forward Euler method (2.3) is strongly stable under
+the CFL restriction (2.4), ∥un + ∆tL(un)∥≤∥un∥, then the Runge–Kutta method
+(2.9) with βi,k ≥0 is SSP, ∥un+1∥≤∥un∥, provided the following CFL restriction
+(2.6) is fulfilled:
+
+∆t ≤c∆tF E,
+c = min
+i,k
+αi,k
+βi,k
+.
+(2.10)
+
+1By the notion of strong stability we refer to the fact that there is no temporal growth, as opposed
+to the general notion of stability, which allows a bounded temporal growth, ∥un∥≤Const · ∥u0∥,
+with any arbitrary constant, possibly Const > 1.
+
+
+STRONG STABILITY-PRESERVING TIME DISCRETIZATION METHODS
+93
+
+If some of the βi,k’s are negative, we need to introduce an associated operator
+˜L corresponding to stepping backward in time.
+The requirement for ˜L is that it
+approximate the same spatial derivative(s) as L, but that the strong stability property
+hold with ∥un+1∥≤∥un∥(with respect to either the TV or another relevant norm)
+for the first-order Euler scheme solved backward in time, i.e.,
+
+un+1 = un −∆t˜L(un).
+(2.11)
+
+This can be achieved for hyperbolic conservation laws by solving the negative-in-time
+version of (2.2),
+
+ut = f(u)x.
+(2.12)
+
+Numerically, the only difference is the change of upwind direction. Clearly, ˜L can be
+computed with the same cost as that of computing L. We then have the following
+lemma.
+Lemma 2.2 (see [20]).
+If the forward Euler method combined with the spatial
+discretization L in (2.3) is strongly stable under the CFL restriction (2.4), ∥un +
+∆tL(un)∥≤∥un∥, and if Euler’s method solved backward in time in combination with
+the spatial discretization ˜L in (2.11) is also strongly stable under the CFL restriction
+(2.4), ∥un −∆t˜L(un)∥≤∥un∥, then the Runge–Kutta method (2.9) is SSP, ∥un+1∥≤
+∥un∥, under the CFL restriction (2.6),
+
+∆t ≤c∆tF E,
+c = min
+i,k
+αi,k
+|βi,k|,
+(2.13)
+
+provided βi,kL is replaced by βi,k ˜L whenever βi,k is negative.
+Notice that if, for the same k, both L(u(k)) and ˜L(u(k)) must be computed, the
+cost as well as the storage requirement for this k is doubled. For this reason, we
+would like to avoid negative βi,k as much as possible. However, as shown in [6] it is
+not always possible to avoid negative βi,k.
+
+2.3. SSP Multistep Methods. SSP multistep methods of the form
+
+un+1 =
+
+m
+�
+
+i=1
+
+�
+αiun+1−i + ∆tβiL(un+1−i)
+�
+,
+αi ≥0,
+(2.14)
+
+were studied in [19].
+Since �αi = 1, it follows that un+1 is given by a convex
+combination of forward Euler solvers with suitably scaled ∆t’s, and hence, similar to
+our discussion for Runge–Kutta methods, we arrive at the following lemma.
+Lemma 2.3 (see [19]).
+If the forward Euler method combined with the spatial
+discretization L in (2.3) is strongly stable under the CFL restriction (2.4), ∥un +
+∆tL(un)∥≤∥un∥, and if Euler’s method solved backward in time in combination with
+the spatial discretization ˜L in (2.11) is also strongly stable under the CFL restriction
+(2.4), ∥un −∆t˜L(un)∥≤∥un∥, then the multistep method (2.14) is SSP, ∥un+1∥≤
+∥un∥, under the CFL restriction (2.6),
+
+∆t ≤c∆tF E,
+c = min
+i
+αi
+|βi|,
+(2.15)
+
+provided βiL(·) is replaced by βi ˜L(·) whenever βi is negative.
+
+
+94
+SIGAL GOTTLIEB, CHI-WANG SHU, AND EITAN TADMOR
+
+3. Linear SSP Runge–Kutta Methods of Arbitrary Order.
+
+3.1. SSP Runge–Kutta Methods with Optimal CFL Condition. In this section
+we present a class of optimal (in the sense of CFL number) SSP Runge–Kutta methods
+of any order for the ODE (2.1), where L is linear. With a linear L being realized as a
+finite-dimensional matrix, we denote L(u) = Lu. We will first show that the m-stage,
+mth-order SSP Runge–Kutta method can have, at most, CFL coefficient c = 1 in
+(2.10). We then proceed to construct optimal SSP linear Runge–Kutta methods.
+Proposition 3.1. Consider the family of m-stage, mth-order SSP Runge–Kutta
+methods (2.9) with nonnegative coefficients αi,k and βi,k. The maximum CFL restric-
+tion attainable for such methods is the one dictated by the forward Euler scheme,
+
+∆t ≤∆tF E;
+
+i.e., (2.6) holds with maximal CFL coefficient c = 1.
+Proof. We consider the special case where L is linear and prove that even in this
+special case the maximum CFL coefficient c attainable is 1. Any m-stage method
+(2.9), for this linear case, can be rewritten as
+
+u(i) =
+
+�
+
+1 +
+
+i−1
+�
+
+k=0
+Ai,k(∆tL)k+1
+�
+
+u(0),
+i = 1, . . . , m,
+
+where
+
+A1,0 = β1,0,
+Ai,0 =
+
+i−1
+�
+
+k=1
+αi,kAk,0 +
+
+i−1
+�
+
+k=0
+βi,k,
+
+Ai,k =
+
+i−1
+�
+
+j=k+1
+αi,jAj,k +
+
+i−1
+�
+
+j=k
+βi,jAj,k−1,
+k = 1, . . . , i −1.
+
+In particular, using induction, it is easy to show that the last two terms of the final
+stage can be expanded as
+
+Am,m−1 =
+
+m
+�
+
+l=1
+βl,l−1,
+
+Am,m−2 =
+
+m
+�
+
+k=2
+βk,k−2
+
+�
+m
+�
+
+l=k+1
+βl,l−1
+
+��k−2
+�
+
+l=1
+βl,l−1
+
+�
+
++
+
+m
+�
+
+k=1
+αk,k−1
+
+
+
+
+m
+�
+
+l=1,l̸=k
+βl,l−1
+
+
+
+.
+
+For an m-stage, mth-order linear Runge–Kutta scheme, Am,k =
+1
+(k+1)!. Using
+Am,m−1 = �m
+l=1 βl,l−1 =
+1
+m!, we can rewrite
+
+Am,m−2 =
+
+m
+�
+
+k=1
+
+αk,k−1
+m!βk,k−1
++
+
+m
+�
+
+k=2
+βk,k−2
+
+�
+m
+�
+
+l=k+1
+βl,l−1
+
+��k−2
+�
+
+l=1
+βl,l−1
+
+�
+
+.
+
+With the nonnegative assumption on βi,k’s and the fact Am,m−1 = �m
+l=1 βl,l−1 =
+1
+m!
+we have βl,l−1 > 0 for all l. For the CFL coefficient c ≥1 we must have αk,k−1
+
+βk,k−1 ≥1 for
+all k. Clearly, Am,m−2 =
+1
+(m−1)! is possible under these restrictions only if βk,k−2 = 0
+and αk,k−1
+
+βk,k−1 = 1 for all k, in which case the CFL coefficient c ≤1.
+
+
+STRONG STABILITY-PRESERVING TIME DISCRETIZATION METHODS
+95
+
+We remark that the conclusion of Proposition 3.1 is valid only if the m-stage
+Runge–Kutta method is mth-order accurate.
+In [19], we constructed an m-stage,
+first-order SSP Runge–Kutta method with a CFL coefficient c = m which is suitable
+for steady state calculations.
+The proof above also suggests a construction for the optimal linear m-stage, mth-
+order SSP Runge–Kutta methods.
+Proposition 3.2. The class of m-stage schemes given (recursively) by
+
+u(i) = u(i−1) + ∆tLu(i−1),
+i = 1, . . . , m −1,
+(3.1)
+
+u(m) =
+
+m−2
+�
+
+k=0
+αm,ku(k) + αm,m−1
+�
+u(m−1) + ∆tLu(m−1)�
+,
+
+where α1,0 = 1 and
+
+αm,k = 1
+
+k αm−1,k−1,
+k = 1, . . . , m −2,
+(3.2)
+
+αm,m−1 = 1
+
+m!,
+αm,0 = 1 −
+
+m−1
+�
+
+k=1
+αm,k
+
+is an mth-order linear Runge–Kutta method which is SSP with CFL coefficient c = 1,
+
+∆t ≤∆tF E.
+
+Proof. The first-order case is forward Euler, which is first-order accurate and SSP
+with CFL coefficient c = 1 by definition. The other schemes will be SSP with a CFL
+coefficient c = 1 by construction, as long as the coefficients are nonnegative.
+We now show that scheme (3.1)–(3.2) is mth-order accurate when L is linear. In
+this case, clearly
+
+u(i) = (1 + ∆tL)i u(0) =
+
+�
+i
+�
+
+k=0
+
+i!
+k!(i −k)!(∆tL)k
+�
+
+u(0),
+i = 1, . . . , m −1,
+
+hence scheme (3.1)–(3.2) results in
+
+u(m) =
+
+
+
+
+m−2
+�
+
+j=0
+αm,j
+
+j
+�
+
+k=0
+
+j!
+k!(j −k)!(∆tL)k + αm,m−1
+
+m
+�
+
+k=0
+
+m!
+k!(m −k)!(∆tL)k
+
+
+
+u(0).
+
+Clearly, by (3.2), the coefficient of (∆tL)m−1 is αm,m−1
+m!
+(m−1)! =
+1
+(m−1)!, the coefficient
+of (∆tL)m is αm,m−1 =
+1
+m!, and the coefficient of (∆tL)0 is
+
+1
+m! +
+
+m−2
+�
+
+j=0
+αm,j = 1.
+
+It remains to show that, for 1 ≤k ≤m −2, the coefficient of (∆tL)k is equal to
+1
+k!:
+
+1
+k!(m −k)! +
+
+m−2
+�
+
+j=k
+αm,j
+j!
+k!(j −k)! = 1
+
+k!.
+(3.3)
+
+
+96
+SIGAL GOTTLIEB, CHI-WANG SHU, AND EITAN TADMOR
+
+This will be shown by induction. Thus we assume (3.3) is true for m, and then for
+m + 1 we have, for 0 ≤k ≤m −2, that the coefficient of (∆tL)k+1 is equal to
+
+1
+(k + 1)!(m −k)! +
+
+m−1
+�
+
+j=k+1
+αm+1,j
+j!
+(k + 1)!(j −k −1)!
+
+=
+1
+(k + 1)!
+
+�
+1
+(m −k)! +
+
+m−2
+�
+
+l=k
+αm+1,l+1
+(l + 1)!
+(l −k)!
+
+�
+
+=
+1
+(k + 1)!
+
+�
+1
+(m −k)! +
+
+m−2
+�
+
+l=k
+
+1
+(l + 1)αm,l
+(l + 1)!
+(l −k)!
+
+�
+
+=
+1
+(k + 1)!
+
+�
+1
+(m −k)! +
+
+m−2
+�
+
+l=k
+αm,l
+l!
+(l −k)!
+
+�
+
+=
+1
+(k + 1)!,
+
+where in the second equality we used (3.2) and in the last equality we used the
+induction hypothesis (3.3). This finishes the proof.
+Finally, we show that all the α’s are nonnegative. Clearly α2,0 = α2,1 = 1
+
+2 > 0.
+If we assume αm,j ≥0 for all j = 0, . . . , m −1, then
+
+αm+1,j = 1
+
+j αm,j−1 ≥0,
+j = 1, . . . , m −1;
+αm+1,m =
+1
+(m + 1)! ≥0,
+
+and, by noticing that αm+1,j ≤αm,j−1 for all j = 1, . . . , m, we have
+
+αm+1,0 = 1 −
+
+m
+�
+
+j=1
+αm+1,j ≥1 −
+
+m
+�
+
+j=1
+αm,j−1 = 0.
+
+As the m-stage, mth-order linear Runge–Kutta method is unique, we have in
+effect proved that this unique m-stage, mth-order linear Runge–Kutta method is SSP
+under CFL coefficient c = 1. If L is nonlinear, scheme (3.1)–(3.2) is still SSP under
+CFL coefficient c = 1, but it is no longer mth-order accurate. Notice that all but the
+last stage of these methods are simple forward Euler steps.
+We note in passing the examples of the ubiquitous third- and fourth-order Runge–
+Kutta methods, which admit the following convex, and hence SSP, decompositions:
+
+3
+�
+
+k=0
+
+1
+k!(∆tL)k = 1
+
+3 + 1
+
+2(I + ∆tL) + 1
+
+6(I + ∆tL)3,
+(3.4)
+
+4
+�
+
+k=0
+
+1
+k!(∆tL)k = 3
+
+8 + 1
+
+3(I + ∆tL) + 1
+
+4(I + ∆tL)2 + 1
+
+24(I + ∆tL)4.
+(3.5)
+
+We list, in Table 3.1, the coefficients αm,j of these optimal methods in (3.2) up to
+m = 8.
+
+
+STRONG STABILITY-PRESERVING TIME DISCRETIZATION METHODS
+97
+
+Table 3.1
+Coefficients αm,j of the SSP methods (3.1)–(3.2).
+
+Order m
+αm,0
+αm,1
+αm,2
+αm,3
+αm,4
+αm,5
+αm,6
+αm,7
+1
+1
+
+2
+1
+2
+1
+2
+
+3
+1
+3
+1
+2
+1
+6
+
+4
+3
+8
+1
+3
+1
+4
+1
+24
+
+5
+11
+30
+3
+8
+1
+6
+1
+12
+1
+120
+
+6
+53
+144
+11
+30
+3
+16
+1
+18
+1
+48
+1
+720
+
+7
+103
+280
+53
+144
+11
+60
+3
+48
+1
+72
+1
+240
+1
+5040
+
+8
+2119
+5760
+103
+280
+53
+288
+11
+180
+1
+64
+1
+360
+1
+1440
+1
+40320
+
+3.2. Application to Coercive Approximations. We now apply the optimal lin-
+ear SSP Runge–Kutta methods to coercive approximations. We consider the linear
+system of ODEs of the general form, with possibly variable, time-dependent coeffi-
+cients,
+
+d
+dtu(t) = L(t)u(t).
+(3.6)
+
+As an example we refer to [7], where the far-from-normal character of the spec-
+tral differentiation matrices defies the straightforward von Neumann stability analysis
+when augmented with high-order time discretizations.
+We begin our stability study for Runge–Kutta approximations of (3.6) with the
+first-order forward Euler scheme (with ⟨·, ·⟩denoting the usual Euclidean inner prod-
+uct)
+
+un+1 = un + ∆tnL(tn)un,
+
+based on variable time steps, tn := �n−1
+j=0 ∆tj. Taking L2 norms on both sides one
+finds
+
+|un+1|2 = |un|2 + 2∆tnRe⟨L(tn)un, un⟩+ (∆tn)2|L(tn)un|2,
+
+and hence strong stability holds, |un+1| ≤|un|, provided the following restriction on
+the time step, ∆tn, is met:
+
+∆tn ≤−2Re⟨L(tn)un, un⟩/|L(tn)un|2.
+
+Following Levy and Tadmor [13] we therefore make the following assumption.
+Assumption 3.1 (coercivity). The operator L(t) is (uniformly) coercive in the
+sense that there exists η(t) > 0 such that
+
+η(t) := inf
+|u|=1 −Re⟨L(t)u, u⟩
+
+|L(t)u|2
+> 0.
+(3.7)
+
+We conclude that for coercive L’s, the forward Euler scheme is strongly stable,
+∥I + ∆tnL(tn)∥≤1, if and only if
+
+∆tn ≤2η(tn).
+
+
+98
+SIGAL GOTTLIEB, CHI-WANG SHU, AND EITAN TADMOR
+
+In a generic case, L(tn) represents a spatial operator with a coercivity bound η(tn),
+which is proportional to some power of the smallest spatial scale. In this context the
+above restriction on the time step amounts to the celebrated CFL stability condition.
+Our aim is to show that the general m-stage, mth-order accurate Runge–Kutta scheme
+is strongly stable under the same CFL condition.
+Remark. Observe that the coercivity constant, η, is an upper bound in the size
+of L; indeed, by Cauchy–Schwartz, η(t) ≤|L(t)u| · |u|/|L(t)u|2 and hence
+
+∥L(t)∥= sup
+u
+|L(t)u|
+
+|u|
+≤
+1
+η(t).
+(3.8)
+
+To make one point, we consider the fourth-order Runge–Kutta approximation of
+(3.6):
+
+k1 = L(tn)un,
+(3.9)
+
+k2 = L(tn+ 1
+
+2 )
+�
+un + ∆tn
+
+2 k1
+�
+,
+(3.10)
+
+k3 = L(tn+ 1
+
+2 )
+�
+un + ∆tn
+
+2 k2
+�
+,
+(3.11)
+
+k4 = L(tn+1)(un + ∆tnk3),
+(3.12)
+
+un+1 = un + ∆tn
+
+6
+
+�
+k1 + 2k2 + 2k3 + k4�
+.
+(3.13)
+
+Starting with second-order and higher, the Runge–Kutta intermediate steps de-
+pend on the time variation of L(·), and hence we require a minimal smoothness in
+time, making the following assumption.
+Assumption 3.2 (Lipschitz regularity). We assume that L(·) is Lipschitz. Thus,
+there exists a constant K > 0 such that
+
+∥L(t) −L(s)∥≤K
+
+η(t)|t −s|.
+(3.14)
+
+We are now ready to make our main result, stating the following proposition.
+Proposition 3.3. Consider the coercive systems of ODEs (3.6)–(3.7), with Lips-
+chitz continuous coefficients (3.14). Then the fourth-order Runge–Kutta scheme (3.9)–
+(3.13) is stable under CFL condition
+
+∆tn ≤2η(tn),
+(3.15)
+
+and the following estimate holds:
+
+|un| ≤e3Ktn|u0|.
+(3.16)
+
+Remark. The result along these lines was introduced by Levy and Tadmor [13,
+Main Theorem], stating the strong stability of the constant coefficients s-order Runge–
+Kutta scheme under CFL condition ∆tn ≤Csη(tn). Here we improve in both simplic-
+ity and generality. Thus, for example, the previous bound of C4 = 1/31 [13, Theorem
+3.3] is now improved to a practical time-step restriction with our uniform Cs = 2.
+
+
+STRONG STABILITY-PRESERVING TIME DISCRETIZATION METHODS
+99
+
+Proof. We proceed in two steps. We first freeze the coefficients at t = tn, consid-
+ering (here we abbreviate Ln = L(tn))
+
+j1 = Lnun,
+(3.17)
+
+j2 = Ln
+�
+un + ∆tn
+
+2 j1
+�
+≡Ln
+�
+I + ∆tn
+
+2 Ln
+�
+un,
+(3.18)
+
+j3 = Ln
+�
+un + ∆tn
+
+2 j2
+�
+≡Ln
+�
+I + ∆tn
+
+2 Ln
+�
+I + ∆tn
+
+2 Ln
+��
+un,
+(3.19)
+
+j4 = Ln(un + ∆tnj3),
+(3.20)
+
+vn+1 = un + ∆tn
+
+6
+
+�
+j1 + 2j2 + 2j3 + j4�
+.
+(3.21)
+
+Thus, vn+1 = P4(∆tnLn)un, where following (3.5),
+
+P4(∆tnLn) := 3
+
+8I + 1
+
+3(I + ∆tL) + 1
+
+4(I + ∆tL)2 + 1
+
+24(I + ∆tL)4.
+
+Since the CFL condition (3.15) implies the strong stability of forward Euler, i.e.,
+∥I + ∆tnLn∥≤1, it follows that ∥P4(∆tnLn)∥≤3/8 + 1/3 + 1/4 + 1/24 = 1. Thus,
+
+|vn+1| ≤|un|.
+(3.22)
+
+Next, we include the time dependence. We need to measure the difference between
+the exact and the “frozen” intermediate values—the k’s and the j’s. We have
+
+k1 −j1 = 0,
+(3.23)
+
+k2 −j2 =
+�
+L(tn+ 1
+
+2 ) −L(tn)
+��
+I + ∆tn
+
+2 Ln
+�
+un,
+(3.24)
+
+k3 −j3 = L(tn+ 1
+
+2 )∆tn
+
+2 (k2 −j2) +
+�
+L(tn+ 1
+
+2 ) −L(tn)
+�∆tn
+
+2 j2,
+(3.25)
+
+k4 −j4 = L(tn+1)∆tn(k3 −j3) +
+�
+L(tn+1) −L(tn)
+�
+∆tnj3.
+(3.26)
+
+Lipschitz continuity (3.14) and the strong stability of forward Euler imply
+
+|k2 −j2| ≤K · ∆tn
+
+2η(tn) |un| ≤K|un|.
+(3.27)
+
+Also, since ∥Ln∥≤
+1
+η(tn), we find from (3.18) that |j2| ≤|un|/η(tn), and hence (3.25)
+followed by (3.27) and the CFL condition (3.15) imply
+
+|k3 −j3| ≤
+∆tn
+2η(tn)|k2 −j2| + K · ∆tn
+
+2η(tn) ·
+∆tn
+2η(tn)|un|
+(3.28)
+
+≤2K
+�∆tn
+
+2η(tn)
+
+�2
+|un| ≤2K|un|.
+
+
+100
+SIGAL GOTTLIEB, CHI-WANG SHU, AND EITAN TADMOR
+
+Finally, since by (3.19) j3 does not exceed |j3| <
+1
+η(tn)(1 +
+∆tn
+2η(tn))|un|, we find from
+(3.26) followed by (3.28) and the CFL condition (3.15),
+
+|k4 −j4| ≤∆tn
+
+η(tn)|k3 −j3| + K · ∆tn
+
+η(tn)
+· ∆tn
+
+η(tn)
+
+�
+1 +
+∆tn
+2η(tn)
+
+�
+|un|
+(3.29)
+
+≤K
+
+��∆tn
+
+η(tn)
+
+�3
++
+�∆tn
+
+η(tn)
+
+�2�
+
+|un| ≤12K|un|.
+
+We conclude that un+1,
+
+un+1 = vn+1 + ∆tn
+
+6
+
+�
+2(k2 −j2) + 2(k3 −j3) + (k4 −j4)
+�
+,
+
+is upper bounded by (consult (3.22), (3.27)–(3.29))
+
+|un+1| ≤|vn+1| + ∆tn
+
+6
+
+�
+2K|un| + 4K|un| + 12K|un|
+�
+
+≤(1 + 3K∆tn)|un|
+
+and the result (3.16) follows.
+
+4. Nonlinear SSP Runge–Kutta Methods. In the previous section we derived
+SSP Runge–Kutta methods for linear spatial discretizations.
+As explained in the
+introduction, SSP methods are often required for nonlinear spatial discretizations.
+Thus, most of the research to date has been in the derivation of SSP methods for
+nonlinear spatial discretizations. In [20], schemes up to third order were found to
+satisfy the conditions in Lemma 2.1 with CFL coefficient c = 1. In [6] it was shown
+that all four-stage, fourth-order Runge–Kutta methods with positive CFL coefficient
+c in (2.13) must have at least one negative βi,k, and a method which seems optimal
+was found. For large-scale scientific computing in three space dimensions, storage is
+usually a paramount consideration. We review the results presented in [6] about SSP
+properties among such low-storage Runge–Kutta methods.
+
+4.1. Nonlinear Methods of Second, Third, and Fourth Order. Here we review
+the optimal (in the sense of CFL coefficient and the cost incurred by ˜L if it appears)
+SSP Runge–Kutta methods of m-stage, mth-order for m = 2, 3, 4, written in the form
+(2.9).
+Proposition 4.1 (see [6]). If we require βi,k ≥0, then an optimal second-order
+SSP Runge–Kutta method (2.9) is given by
+
+u(1) = un + ∆tL(un),
+(4.1)
+
+un+1 = 1
+
+2un + 1
+
+2u(1) + 1
+
+2∆tL(u(1)),
+
+with a CFL coefficient c = 1 in (2.10). An optimal third-order SSP Runge–Kutta
+method (2.9) is given by
+
+u(1) = un + ∆tL(un),
+
+u(2) = 3
+
+4un + 1
+
+4u(1) + 1
+
+4∆tL(u(1)),
+(4.2)
+
+un+1 = 1
+
+3un + 2
+
+3u(2) + 2
+
+3∆tL(u(2)),
+
+with a CFL coefficient c = 1 in (2.10).
+
+
+STRONG STABILITY-PRESERVING TIME DISCRETIZATION METHODS
+101
+
+In the fourth-order case we proved in [6] that we cannot avoid the appearance of
+negative βi,k, as demonstrated in the following proposition.
+Proposition 4.2 (see [6]). The four-stage, fourth-order SSP Runge–Kutta scheme
+(2.9) with a nonzero CFL coefficient c in (2.13) must have at least one negative βi,k.
+We thus must settle for finding an efficient fourth-order scheme containing ˜L,
+which maximizes the operation cost measured by
+c
+4+i, where c is the CFL coefficient
+(2.13) and i is the number of ˜L’s. This way we are looking for an SSP method that
+reaches a fixed time T with a minimal number of evaluations of L or ˜L. The best
+method we could find in [6] is
+
+u(1) = un + 1
+
+2∆tL(un),
+
+u(2) = 649
+
+1600u(0) −10890423
+
+25193600∆t˜L(un) + 951
+
+1600u(1) + 5000
+
+7873∆tL(u(1)),
+
+u(3) =
+53989
+2500000un −102261
+
+5000000∆t˜L(un) + 4806213
+
+20000000u(1)
+(4.3)
+
+−5121
+
+20000∆t˜L(u(1)) + 23619
+
+32000u(2) + 7873
+
+10000∆tL(u(2)),
+
+un+1 = 1
+
+5un + 1
+
+10∆tL(un) + 6127
+
+30000u(1) + 1
+
+6∆tL(u(1))
+
++ 7873
+
+30000u(2) + 1
+
+3u(3) + 1
+
+6∆tL(u(3)),
+
+with a CFL coefficient c = 0.936 in (2.13). Notice that two ˜L’s must be computed. The
+effective CFL coefficient, compared with an ideal case without ˜L’s, is 0.936× 4
+
+6 = 0.624.
+Since it is difficult to solve the global optimization problem, we do not claim that (4.3)
+is an optimal four stage, fourth-order SSP Runge–Kutta method.
+
+4.2. Low Storage Methods. Storage is usually an important consideration for
+large scale scientific computing in three space dimensions.
+Therefore, low-storage
+Runge–Kutta methods [23], [1], which only require two storage units per ODE vari-
+able, may be desirable. Here we review the results presented in [6] concerning SSP
+properties among such low-storage Runge–Kutta methods.
+The general low-storage Runge–Kutta schemes can be written in the form [23], [1]
+
+u(0) = un,
+du(0) = 0,
+
+du(i) = Aidu(i−1) + ∆tL(u(i−1)),
+i = 1, . . . , m,
+
+u(i) = u(i−1) + Bidu(i),
+i = 1, . . . , m,
+B1 = c,
+(4.4)
+
+un+1 = u(m).
+
+Only u and du must be stored, resulting in two storage units for each variable.
+Following Carpenter and Kennedy [1], the best SSP third-order method found by
+numerical search in [6] is given by the system
+
+z1 =
+√
+
+36c4 + 36c3 −135c2 + 84c −12,
+z2 = 2c2 + c −2,
+
+z3 = 12c4 −18c3 + 18c2 −11c + 2,
+z4 = 36c4 −36c3 + 13c2 −8c + 4,
+
+z5 = 69c3 −62c2 + 28c −8,
+z6 = 34c4 −46c3 + 34c2 −13c + 2,
+
+
+102
+SIGAL GOTTLIEB, CHI-WANG SHU, AND EITAN TADMOR
+
+B2 = 12c(c −1)(3z2 −z1) −(3z2 −z1)2
+
+144c(3c −2)(c −1)2
+,
+
+B3 =
+−24(3c −2)(c −1)2
+
+(3z2 −z1)2 −12c(c −1)(3z2 −z1),
+
+A2 =
+−z1(6c2 −4c + 1) + 3z3
+(2c + 1)z1 −3(c + 2)(2c −1)2 ,
+
+A3 = −z1z4 + 108(2c −1)c5 −3(2c −1)z5
+
+24z1c(c −1)4 + 72cz6 + 72c6(2c −13),
+
+with c = 0.924574, resulting in a CFL coefficient c = 0.32 in (2.6). This is of course
+less optimal than (4.2) in terms of CFL coefficient, but the low-storage form is useful
+for large-scale calculations.
+Carpenter and Kennedy [1] have also given classes of
+five-stage, fourth-order low-storage Runge–Kutta methods. We have been unable to
+find SSP methods in that class with positive αi,k and βi,k. A low-storage method
+with negative βi,k cannot be made SSP, as ˜L cannot be used without destroying the
+low-storage property.
+
+4.3. Hybrid Multistep Runge–Kutta Methods. Hybrid multistep Runge–Kutta
+methods (e.g., [10], [14]) are methods that combine the properties of Runge–Kutta
+and multistep methods. We explore the two-step, two-stage method
+
+un+ 1
+
+2 = α21un + α20un−1 + ∆t
+�
+β20L(un−1) + β21L(un)
+�
+,
+α2k ≥0,
+(4.5)
+
+un+1 = α30un−1 + α31un+ 1
+
+2 + α32un
+
++ ∆t
+�
+β30L(un−1) + β31L(un+ 1
+
+2 ) + β32L(un)
+�
+,
+α3k ≥0.
+(4.6)
+
+Clearly, this method is SSP under the CFL coefficient (2.10) if βi,k ≥0. We could also
+consider the case allowing negative βi,k’s, using instead (2.13) for the CFL coefficient
+and replacing βi,kL by βi,k ˜L for the negative βi,k’s.
+For third-order accuracy, we have a three-parameter family (depending on c, α30,
+and α31):
+
+α20 = 3c2 + 2c3,
+
+β20 = c2 + c3,
+
+α21 = 1 −3c2 −2c3,
+
+β21 = c + 2c2 + c3,
+
+β30 = 2 + 2α30 −3c + 3α30c + α31c3
+
+6(1 + c)
+,
+(4.7)
+
+β31 = 5 −α30 −3α31c2 −2α31c3
+
+6c + 6c2
+,
+
+α32 = 1 −α31 −α30,
+
+β32 = −5 + α30 + 9c + 3α30c −3α31c2 −α31c3
+
+6c
+.
+
+
+STRONG STABILITY-PRESERVING TIME DISCRETIZATION METHODS
+103
+
+The best method we were able to find is given by c = 0.4043, α30 = 0.0605, and
+α31 = 0.6315 and has a CFL coefficient c ≈0.473. Clearly, this is not as good as
+the optimal third-order Runge–Kutta method (4.2) with CFL coefficient c = 1. We
+hoped that a fourth-order scheme with a large CFL coefficient could be found, but
+unfortunately this is not the case, as is proven in the following proposition.
+Proposition 4.3. There are no fourth-order schemes (4.5) with all nonnegative
+αi,k.
+Proof. The fourth-order schemes are given by a two-parameter family depending
+on c, α30 and setting α31 in (4.7) to be
+
+α31 = −7 −α30 + 10c −2α30c
+
+c2(3 + 8c + 4c2)
+.
+
+The requirement α21 ≥0 enforces (see (4.7)) c ≤1
+
+2. The further requirement
+α20 ≥0 yields −3
+
+2 ≤c ≤1
+
+2. α31 has a positive denominator and a negative numerator
+for −1
+
+2 < c < 1
+
+2, and its denominator is 0 when c = −1
+
+2 or c = −3
+
+2, thus we require
+−3
+
+2 ≤c < −1
+
+2. In this range, the denominator of α31 is negative, hence we also require
+its numerator to be negative, which translates to α30 ≤−7+10c
+
+1+2c . Finally, we would
+
+require α32 = 1 −α31 −α30 ≥0, which translates to α30 ≥c2(2c+1)(2c+3)+7−10c
+
+(2c+1)(2c−1)(c+1)2 . The
+two restrictions on α30 give us the following inequality:
+
+−7 + 10c
+
+1 + 2c
+≥c2(2c + 1)(2c + 3) + 7 −10c
+
+(2c + 1)(2c −1)(c + 1)2
+,
+
+which, in the range of −3
+
+2 ≤c < −1
+
+2, yields c ≥1—a contradiction.
+
+5. Linear and Nonlinear Multistep Methods. In this section we review and
+further study SSP explicit multistep methods (2.14), which were first developed in
+[19]. These methods are rth-order accurate if
+
+m
+�
+
+i=1
+αi = 1,
+(5.1)
+
+m
+�
+
+i=1
+ikαi = k
+
+�m
+�
+
+i=1
+ik−1βi
+
+�
+
+,
+k = 1, . . . , r.
+
+We first prove a proposition that sets the minimum number of steps in our search
+for SSP multistep methods.
+Proposition 5.1. For m ≥2, there is no m-step, mth-order SSP method with
+all nonnegative βi, and there is no m-step SSP method of order (m + 1).
+Proof. By the accuracy condition (5.1), we clearly have for an rth-order accurate
+method
+
+m
+�
+
+i=1
+p(i)αi =
+
+m
+�
+
+i=1
+p′(i)βi
+(5.2)
+
+for any polynomial p(x) of degree at most r satisfying p(0) = 0.
+When r = m, we could choose
+
+p(x) = x(m −x)m−1.
+
+
+104
+SIGAL GOTTLIEB, CHI-WANG SHU, AND EITAN TADMOR
+
+Clearly p(i) ≥0 for i = 1, . . . , m, and equality holds only for i = m. On the other
+hand, p′(i) = m(1 −i)(m −i)m−2 ≤0, and equality holds only for i = 1 and i = m.
+Hence (5.2) would have a negative right side and a positive left side and would not be
+an inequality if all αi and βi are nonnegative, unless the only nonzero entries are αm,
+β1, and βm. In this special case we have αm = 1 and β1 = 0 to get a positive CFL
+coefficient c in (2.15). The first two-order conditions in (5.1) now lead to βm = m
+and 2βm = m, which cannot be simultaneously satisfied.
+When r = m + 1, we could choose
+
+p(x) =
+�x
+
+0
+q(t)dt,
+q(t) =
+
+m
+�
+
+i=1
+(i −t).
+(5.3)
+
+Clearly p′(i) = q(i) = 0 for i = 1, . . . , m. We also claim (and prove below) that all the
+p(i)’s, i = 1, . . . , m, are positive. With this choice of p in (5.2), its right-hand side
+vanishes, while the left-hand side is strictly positive if all αi ≥0—a contradiction.
+We conclude with the proof of the following claim.
+Claim. p(i) =
+�i
+0 q(t)dt > 0, q(t) := �m
+i=1(i −t).
+Indeed, q(t) oscillates between being positive on the even intervals I0 = (0, 1), I2 =
+(2, 3), . . . , and being negative on the odd intervals, I1 = (1, 2), I3 = (3, 4), . . . . The
+positivity of the p(i)’s for i ≤(m + 1)/2 follows since the integral of q(t) over each
+pair of consecutive intervals is positive, at least for the first [(m + 1)/2] intervals,
+
+p(2k + 2) −p(2k) =
+�
+
+I2k
+|q(t)|dt −
+�
+
+I2k+1
+|q(t)|dt
+
+=
+�
+
+I2k
+−
+�
+
+I2k+1
+|(1 −t)(2 −t) · · · (m −t)|dt
+
+=
+�
+
+I2k
+|(1 −t)(2 −t) · · · (m −1 −t)| × (|(m −t)| −|t|)dt > 0,
+
+2k + 1 ≤(m + 1)/2.
+
+For the remaining intervals we note the symmetry of q(t) with respect to the midpoint
+(m + 1)/2, i.e., q(t) = (−1)mq(m + 1 −t), which enables us to write for i > (m + 1)/2
+
+p(i) =
+�(m+1)/2
+
+0
+q(t)dt + (−1)m
+�i
+
+(m+1)/2
+q(m + 1 −t)dt
+
+=
+�(m+1)/2
+
+0
+q(t)dt + (−1)m
+�(m+1)/2
+
+m+1−i
+q(t′)dt′.
+(5.4)
+
+Thus, if m is odd, then p(i) = p(m + 1 −i) > 0 for i > (m + 1)/2. If m is even, then
+the second integral on the right of (5.4) is positive for odd i’s, since it starts with a
+positive integrand on the even interval Im+1−i. And finally, if m is even and i is odd,
+then the second integral starts with a negative contribution from its first integrand
+on the odd interval Im+1−i, while the remaining terms that follow cancel in pairs as
+before. A straightforward computation shows that this first negative contribution is
+compensated for by the positive gain from the first pair, i.e.,
+
+p(m + 2 −i) >
+�2
+
+0
+q(t)dt +
+�m+2−i
+
+m+1−i
+q(t)dt > 0,
+m even, i odd.
+
+This concludes the proof of our claim.
+
+
+STRONG STABILITY-PRESERVING TIME DISCRETIZATION METHODS
+105
+
+Table 5.1
+SSP multistep methods (2.14).
+
+#
+Steps
+Order
+CFL
+αi
+βi
+m
+r
+c
+
+1
+2
+2
+1
+2
+
+4
+5 , 1
+
+5
+
+8
+5 , −2
+
+5
+2
+3
+2
+1
+2
+
+3
+4 , 0, 1
+
+4
+
+3
+2 , 0, 0
+
+3
+4
+2
+2
+3
+
+8
+9 , 0, 0, 1
+
+9
+
+4
+3 , 0, 0, 0
+
+4
+3
+3
+0.274
+4
+7 , 2
+
+7 , 1
+
+7
+
+25
+12 , −20
+
+21 , 37
+
+84
+5
+3
+3
+0.287
+2973
+5000 , 351
+
+1250 , 623
+
+5000
+
+1297
+
+625 , −49
+
+50 , 1087
+
+2500
+6
+4
+3
+1
+3
+
+16
+27 , 0, 0, 11
+
+27
+
+16
+
+9 , 0, 0, 4
+
+9
+7
+5
+3
+1
+2
+
+25
+32 , 0, 0, 0, 7
+
+32
+
+25
+16 , 0, 0, 0, 5
+
+16
+8
+6
+3
+0.567
+108
+125 , 0, 0, 0, 0, 17
+
+125
+
+36
+25 , 0, 0, 0, 0, 6
+
+25
+9
+4
+4
+0.154
+29
+72 , 7
+
+24 , 1
+
+4 , 1
+
+18
+
+481
+192 , −1055
+
+576 , 937
+
+576 , −197
+
+576
+10
+4
+4
+0.159
+1989
+5000 , 2893
+
+10000 , 517
+
+2000 , 34
+
+625
+
+601613
+240000 , −1167
+
+640 , 130301
+
+80000 , −82211
+
+240000
+11
+6
+4
+0.245
+747
+1280 , 0, 0, 0, 81
+
+256 , 1
+
+10
+
+237
+128 , 0, 0, 0, 165
+
+128 , −3
+
+8
+12
+5
+4
+0.021
+1557
+32000 ,
+1
+32000 ,
+1
+120 , 2063
+
+48000 , 9
+
+10
+
+5323561
+2304000 ,
+2659
+2304000 , 904987
+
+2304000 , 1567579
+
+768000 , 0
+
+13
+5
+5
+0.077
+1
+4 , 1
+
+4 , 7
+
+24 , 1
+
+6 , 1
+
+24
+
+185
+
+64 , −851
+
+288 , 91
+
+24 , −151
+
+96 , 199
+
+576
+14
+5
+5
+0.085
+1
+4 , 13
+
+50 , 8
+
+25 , 7
+
+50 ,
+3
+100
+
+52031
+18000 , −26617
+
+9000 , 1412
+
+375 , −14407
+
+9000 , 6161
+
+18000
+15
+6
+5
+0.130
+7
+20 , 3
+
+10 , 4
+
+15 , 0,
+7
+120 , 1
+
+40
+
+291201
+108000 , −198401
+
+86400 , 88063
+
+43200 , 0, −17969
+
+43200 , 73061
+
+432000
+
+We remark that [4] contains a result stating that there are no linearly stable m-
+step, (m + 1)st-order methods when m is odd. When m is even such linearly stable
+methods exist but would require negative αi. This is consistent with our result.
+In the remainder of this section we will discuss optimal m-step, mth-order SSP
+methods (which must have negative βi according to Proposition 5.1) and m-step,
+(m −1)st-order SSP methods with positive βi.
+For two-step, second-order SSP methods, a scheme was given in [19] with a CFL
+coefficient c = 1
+
+2 (scheme 1 in Table 5.1). We prove this is optimal in terms of CFL
+coefficients.
+Proposition 5.2. For two-step, second-order SSP methods, the optimal CFL
+coefficient c in (2.15) is 1
+
+2.
+Proof. The accuracy condition (5.1) can be explicitly solved to obtain a one-
+parameter family of solutions
+
+α2 = 1 −α1,
+β1 = 2 −1
+
+2α1,
+β2 = −1
+
+2α1.
+
+The CFL coefficient c is a function of α1 and it can be easily verified that the maximum
+is c = 1
+
+2 achieved at α1 = 4
+
+5.
+We move on to three-step, second-order methods.
+It is now possible to have
+SSP schemes with positive αi and βi.
+One such method is given in [19] with a
+CFL coefficient c =
+1
+2 (scheme 2 in Table 5.1).
+We prove this is optimal in the
+CFL coefficient in the following proposition. We remark that this multistep method
+has the same efficiency as the optimal two-stage, second-order Runge–Kutta method
+(4.1). This is because there is only one L evaluation per time step here, compared
+with two L evaluations in the two-stage Runge–Kutta method. Of course, the storage
+requirement here is larger.
+
+
+106
+SIGAL GOTTLIEB, CHI-WANG SHU, AND EITAN TADMOR
+
+Proposition 5.3. If we require βi ≥0, then the optimal three-step, second-order
+method has a CFL coefficient c = 1
+
+2.
+Proof. The coefficients of the three-step, second-order method are given by
+
+α1 = 1
+
+2 (6 −3β1 −β2 + β3) ,
+α2 = −3 + 2β1 −2β3,
+α3 = 1
+
+2 (2 −β1 + β2 + 3β3) .
+
+For CFL coefficient c > 1
+
+2, we need αk
+
+βk > 1
+
+2 for all k. This implies
+
+2α1 > β1 ⇒6 −4β1 −β2 + β3 > 0,
+
+2α2 > β2 ⇒−6 + 4β1 −β2 −4β3 > 0.
+
+This means that
+
+β2 −β3 < 6 −4β1 < −β2 −4β3
+⇒
+2β2 < −3β3.
+
+Thus, we would have a negative β.
+
+We remark that if more steps are allowed, then the CFL coefficient can be im-
+proved. Scheme 3 in Table 5.1 is a four-step, second-order method with positive αi
+and βi and a CFL coefficient c = 2
+
+3.
+We now move to three-step, third-order methods. In [19] we gave a three-step,
+third-order method with a CFL coefficient c ≈0.274 (scheme 4 in Table 5.1).
+A
+computer search gives a slightly better scheme (scheme 5 in Table 5.1) with a CFL
+coefficient c ≈0.287.
+Next we move on to four-step, third-order methods. It is now possible to have
+SSP schemes with positive αi and βi. One example was given in [19] with a CFL
+coefficient c =
+1
+3 (scheme 6 in Table 5.1).
+We prove this is optimal in the CFL
+coefficient in the following proposition. We remark again that this multistep method
+has the same efficiency as the optimal three-stage, third-order Runge–Kutta method
+(4.2). This is because there is only one L evaluation per time step here, compared
+with three L evaluations in the three-stage Runge–Kutta method. Of course, the
+storage requirement here is larger.
+Proposition 5.4. If we require βi ≥0, then the optimal four-step, third-order
+method has a CFL coefficient c = 1
+
+3.
+Proof. The coefficients of the four-step, third-order method are given by
+
+α1 = 1
+
+6 (24 −11β1 −2β2 + β3 −2β4) ,
+α2 = −6 + 3β1 −1
+
+2β2 −β3 + 3
+
+2β4,
+
+α3 = 4 −3
+
+2β1 + β2 + 1
+
+2β3 −3β4,
+α4 = 1
+
+6 (−6 + 2β1 −β2 + 2β3 + 11β4) .
+
+For a CFL coefficient c > 1
+
+3 we need αk
+
+βk > 1
+
+3 for all k. This implies
+
+24 −13β1 −2β2 + β3 −2β4 > 0,
+−36 + 18β1 −5β2 −6β3 + 9β4 > 0,
+
+24 −9β1 + 6β2 + β3 −18β4 > 0,
+−6 + 2β1 −β2 + 2β3 + 9β4 > 0.
+
+Combining these (9 times the first inequality plus 8 times the second plus 3 times the
+third) we get
+
+−40β2 −36β3 > 0,
+
+which implies a negative β.
+
+
+STRONG STABILITY-PRESERVING TIME DISCRETIZATION METHODS
+107
+
+We again remark that if more steps are allowed, the CFL coefficient can be im-
+proved. Scheme 7 in Table 5.1 is a five-step, third-order method with positive αi
+and βi and a CFL coefficient c = 1
+
+2. Scheme 8 in Table 5.1 is a six-step, third-order
+method with positive αi and βi and a CFL coefficient c = 0.567.
+We now move on to four-step, fourth-order methods.
+In [19] we gave a four-
+step, fourth-order method (scheme 9 in Table 5.1) with a CFL coefficient c ≈0.154.
+A computer search gives a slightly better scheme with a CFL coefficient c ≈0.159,
+scheme 10 in Table 5.1. If we allow two more steps, we can improve the CFL coefficient
+to c = 0.245 (scheme 11 in Table 5.1).
+Next we move on to five-step, fourth-order methods. It is now possible to have
+SSP schemes with positive αi and βi. The solution can be written as the following
+five-parameter family:
+
+α5 = 1 −α1 −α2 −α3 −α4,
+β1 = 1
+
+24 (55 + 9α2 + 8α3 + 9α4 + 24β5) ,
+
+β2 = 1
+
+24 (5 −64α1 −45α2 −32α3 −37α4 −96β5) ,
+
+β3 = 1
+
+24 (5 + 32α1 + 27α2 + 40α3 + 59α4 + 144β5) ,
+
+β4 = 1
+
+24 (55 −64α1 −63α2 −64α3 −55α4 −96β5) .
+
+We can clearly see that to get β2 ≥0 we would need α1 ≤
+5
+64, and also β1 ≥55
+
+24, hence
+the CFL coefficient cannot exceed c ≤α1
+
+β1 ≤
+3
+88 ≈0.034. A computer search gives a
+scheme (scheme 12 in Table 5.1) with a CFL coefficient c = 0.021. The significance
+of this scheme is that it disproves the belief that SSP schemes of order four or higher
+must have negative β and hence must use ˜L (see Proposition 4.2 for Runge–Kutta
+methods). However, the CFL coefficient here is probably too small for the scheme to
+be of much practical use.
+We finally look at five-step, fifth-order methods.
+In [19] a scheme with CFL
+coefficient c = 0.077 is given (scheme 13 in Table 5.1). A computer search gives us
+a scheme with a slightly better CFL coefficient c ≈0.085, scheme 14 in Table 5.1.
+Finally, by increasing one more step, one could get [19], a scheme with CFL coefficient
+c = 0.130, scheme 15 in Table 5.1.
+We list in Table 5.1 the multistep methods studied in this section.
+
+6. Implicit SSP Methods.
+
+6.1. Implicit TVD Stable Scheme. Implicit methods are useful in that they typ-
+ically eliminate the step-size restriction (CFL) associated with stability analysis. For
+many applications, the backward Euler method possesses strong stability properties
+that we would like to preserve in higher order methods. For example, it is easy to
+show a version of Harten’s lemma [8] for the TVD property of implicit backward Euler
+methods.
+Lemma 6.1 (Harten). The following implicit backward Euler method
+
+un+1
+j
+= un
+j + ∆t
+�
+Cj+ 1
+
+2
+�
+un+1
+j+1 −un+1
+j
+�
+−Dj−1
+
+2
+�
+un+1
+j
+−un+1
+j−1
+��
+,
+(6.1)
+
+where Cj+ 1
+
+2 and Dj−1
+
+2 are functions of un and/or un+1 at various (usually neighbor-
+ing) grid points satisfying
+
+Cj+ 1
+
+2 ≥0,
+Dj−1
+
+2 ≥0,
+(6.2)
+
+is TVD in the sense of (2.5) for arbitrary ∆t.
+
+
+108
+SIGAL GOTTLIEB, CHI-WANG SHU, AND EITAN TADMOR
+
+Proof. Taking a spatial forward difference in (6.1) and moving terms, one gets
+�
+1 + ∆t
+�
+Cj+ 1
+
+2 + Dj+ 1
+
+2
+
+���
+un+1
+j+1 −un+1
+j
+�
+
+= un
+j+1 −un
+j + ∆tCj+ 3
+
+2
+�
+un+1
+j+2 −un+1
+j+1
+�
++ ∆tDj−1
+
+2
+�
+un+1
+j
+−un+1
+j−1
+�
+.
+
+Using the positivity of C and D in (6.2) one gets
+�
+1 + ∆t
+�
+Cj+ 1
+
+2 + Dj+ 1
+
+2
+
+����un+1
+j+1 −un+1
+j
+��
+
+≤
+��un
+j+1 −un
+j
+��+ ∆tCj+ 3
+
+2
+��un+1
+j+2 −un+1
+j+1
+��+ ∆tDj−1
+
+2
+��un+1
+j
+−un+1
+j−1
+��,
+
+which, upon summing over j, would yield the TVD property (2.5).
+
+Another example is the cell entropy inequality for the square entropy, satisfied
+by the discontinuous Galerkin method of arbitrary order of accuracy in any space
+dimensions, when the time discretization is by a class of implicit time discretization
+including backward Euler and Crank–Nicholson, again without any restriction on the
+time step ∆t [11].
+As in section 2 for explicit methods, here we would like to discuss the possibility
+of designing higher order implicit methods that share the strong stability properties
+of backward Euler, without any restriction on the time step ∆t.
+Unfortunately, we are not as lucky in the implicit case. Let us look at a simple
+example of second-order implicit Runge–Kutta methods:
+
+u(1) = un + β1∆tL(u(1)),
+(6.3)
+
+un+1 = α2,0un + α2,1u(1) + β2∆tL(un+1).
+
+Notice that we have only a single implicit L term for each stage and no explicit L
+terms, in order to avoid time-step restrictions necessitated by the strong stability
+of explicit schemes. However, since the explicit L(u(1)) term is contained indirectly
+in the second stage through the u(1) term, we do not lose generality in writing the
+schemes as the form in (6.3) except for the absence of the L(un) terms in both stages.
+To simplify our example we assume L is linear. Second-order accuracy requires
+the coefficients in (6.3) to satisfy
+
+α2,1 =
+1
+2β1(1 −β1),
+α2,0 = 1 −α2,1,
+β2 = 1 −2β1
+
+2(1 −β1).
+(6.4)
+
+To obtain an SSP scheme from (6.4) we would require α2,0 and α2,1 to be nonnegative.
+We can clearly see that this is impossible, as α2,1 is in the range [4, +∞) or (−∞, 0).
+We will use the following simple numerical example to demonstrate that a non-
+SSP implicit method may destroy the nonoscillatory property of the backward Euler
+method, despite the same underlying nonoscillatory spatial discretization. We solve
+the simple linear wave equation
+
+ut = ux
+(6.5)
+
+with a step-function initial condition:
+
+u(x, 0) =
+�1
+if x ≤0,
+0
+if x > 0,
+(6.6)
+
+
+STRONG STABILITY-PRESERVING TIME DISCRETIZATION METHODS
+109
+
+-7
+-6
+-5
+-4
+-3
+-0.1
+
+0
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+0.6
+
+0.7
+
+0.8
+
+0.9
+
+1
+
+1.1
+
+1.2
+
+1.3
+
+x
+
+u
+1st order
+exact
+
+-7
+-6
+-5
+-4
+-3
+-0.1
+
+0
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+0.6
+
+0.7
+
+0.8
+
+0.9
+
+1
+
+1.1
+
+1.2
+
+1.3
+
+x
+
+u
+2nd order
+exact
+
+Fig. 6.1
+First-order upwind spatial discretization. Solution after 100 time steps at CFL number
+∆t
+∆x = 1.4. Left: First-order backward Euler time discretization; right: non-SSP second-
+order implicit Runge–Kutta time discretization (6.3)–(6.4) with β1 = 2.
+
+and ux in (6.5) is approximated by the simple first-order upwind difference:
+
+L(u)j =
+1
+∆x (uj+1 −uj) .
+
+The backward Euler time discretization
+
+un+1 = un + ∆tL(un+1)
+
+for this problem is unconditionally TVD according to Lemma 6.1. We can see on
+the left of Figure 6.1 that the solution is monotone. However, if we use (6.3)–(6.4)
+with β1 = 2 (which results in positive β2 = 3
+
+2, α2,0 = 5
+
+4, but a negative α2,1 = −1
+
+4)
+as the time discretization, we can see on the right of Figure 6.1 that the solution is
+oscillatory.
+In the next two subsections we discuss the rather disappointing negative results
+about the nonexistence of high-order SSP Runge–Kutta or multistep methods.
+
+6.2. Implicit Runge–Kutta Methods. A general implicit Runge–Kutta method
+for (2.1) can be written in the form
+
+u(0) = un,
+
+u(i) =
+
+i−1
+�
+
+k=0
+αi,ku(k) + ∆tβiL(u(i)),
+αi,k ≥0,
+i = 1, . . . , m,
+(6.7)
+
+un+1 = u(m).
+
+Notice that we have only a single implicit L term for each stage and no explicit L
+terms. This is to avoid time-step restrictions for strong stability properties of explicit
+schemes. However, since explicit L terms are contained indirectly beginning at the
+second stage from u of the previous stages, we do not lose generality in writing the
+schemes as the form in (6.7) except for the absence of the L(u(0)) terms in all stages.
+
+
+110
+SIGAL GOTTLIEB, CHI-WANG SHU, AND EITAN TADMOR
+
+If these L(u(0)) terms are included, we would be able to obtain SSP Runge–Kutta
+methods under restrictions on ∆t similar to explicit methods.
+Clearly, if we assume that the first-order implicit Euler discretization
+
+un+1 = un + ∆tL(un+1)
+(6.8)
+
+is unconditionally strongly stable, ∥un+1∥≤∥un∥, then (6.7) would be uncondition-
+ally strongly stable under the same norm provided βi > 0 for all i. If βi becomes
+negative, (6.7) would still be unconditionally strongly stable under the same norm
+if βiL is replaced by βi ˜L whenever the coefficient βi < 0, with ˜L approximates the
+same spatial derivative(s) as L, but is unconditionally strongly stable for first-order
+implicit Euler, backward in time:
+
+un+1 = un −∆t˜L(un+1).
+(6.9)
+
+As before, this can again be achieved for hyperbolic conservation laws by solving
+(2.12), the negative-in-time version of (2.2). Numerically, the only difference is the
+change of upwind direction.
+Unfortunately, we have the following negative result which completely rules out
+the existence of SSP implicit Runge–Kutta schemes (6.7) of order higher than 1.
+Proposition 6.2. If (6.7) is at least second-order accurate, then αi,k cannot be
+all nonnegative.
+Proof. We prove that the statement holds even if L is linear. In this case second-
+order accuracy implies
+
+i−1
+�
+
+k=0
+αi,k = 1,
+Xm = 1,
+Ym = 1
+
+2,
+(6.10)
+
+where Xm and Ym can be recursively defined as
+
+X1 = β1,
+Y1 = β2
+1,
+Xm = βm +
+
+m−1
+�
+
+i=1
+αm,iXi,
+Ym = βmXm +
+
+m−1
+�
+
+i=1
+αm,iYi.
+
+(6.11)
+
+We now show that, if αi,k ≥0 for all i and k, then
+
+Xm −Ym < 1
+
+2,
+(6.12)
+
+which is clearly a contradiction to (6.10). In fact, we use induction on m to prove
+
+(1 −a)Xm −Ym ≤cm(1 −a)2
+for any real number a,
+(6.13)
+
+where
+
+c1 = 1
+
+4,
+ci+1 =
+1
+4(1 −ci).
+(6.14)
+
+It is easy to show that (6.14) implies
+
+1
+4 = c1 < c2 < · · · < cm < 1
+
+2.
+(6.15)
+
+
+STRONG STABILITY-PRESERVING TIME DISCRETIZATION METHODS
+111
+
+We start with the case m = 1. Clearly,
+
+(1 −a)X1 −Y1 = (1 −a)β1 −β2
+1 ≤1
+
+4(1 −a)2 = c1(1 −a)2
+
+for any a. Now assume that (6.13)–(6.14), and hence also (6.15), is valid for all m < k,
+and that for m = k we have
+
+(1 −a)Xk −Yk = (1 −a −βk)βk +
+
+k−1
+�
+
+i=1
+αk,i [(1 −a −βk)Xi −Yi]
+
+≤(1 −a −βk)βk + ck−1(1 −a −βk)2
+
+≤
+1
+4(1 −ck−1)(1 −a)2
+
+= ck(1 −a)2,
+
+where in the first equality we used (6.11), in the second inequality we used (6.10)
+and the induction hypotheses (6.13) and (6.15), and the third inequality is a simple
+maximum of a quadratic function in βk. This finishes the proof.
+
+We remark that the proof of Proposition 6.2 can be simplified, using existing
+ODE results in [5], if all βi’s are nonnegative or all βi’s are nonpositive. However, the
+case containing both positive and negative βi’s cannot be handled by existing ODE
+results, as L and ˜L do not belong to the same ODE.
+
+6.3. Implicit Multistep Methods. For our purpose, a general implicit multistep
+method for (2.1) can be written in the form
+
+un+1 =
+
+m
+�
+
+i=1
+αiun+1−i + ∆tβ0L(un+1),
+αi ≥0.
+(6.16)
+
+Notice that we have only a single implicit L term and no explicit L terms. This is to
+avoid time-step restrictions for norm properties of explicit schemes. If explicit L terms
+are included, we would be able to obtain SSP multistep methods under restrictions
+on ∆t similar to explicit methods.
+Clearly, if we assume that the first-order implicit Euler discretization (6.8) is
+unconditionally strongly stable under a certain norm, then (6.16) would be uncondi-
+tionally strongly stable under the same norm provided that β0 > 0. If β0 is negative,
+(6.16) would still be unconditionally strongly stable under the same norm if L were
+replaced by ˜L.
+Unfortunately, we have the following negative result which completely rules out
+the existence of SSP implicit multistep schemes (6.16) of order higher than 1.
+Proposition 6.3. If (6.16) is at least second-order accurate, then αi cannot be
+all nonnegative.
+Proof. Second order accuracy implies
+
+m
+�
+
+i=1
+αi = 1,
+
+m
+�
+
+i=1
+iαi = β0,
+
+m
+�
+
+i=1
+i2αi = 0.
+(6.17)
+
+The last equality in (6.17) implies that αi cannot be all nonnegative.
+
+
+112
+SIGAL GOTTLIEB, CHI-WANG SHU, AND EITAN TADMOR
+
+7. Concluding Remarks. We have systematically studied SSP time discretiza-
+tion methods, which preserve stability, in any norm, of the forward Euler (for explicit
+methods) or the backward Euler (for implicit methods) first-order time discretizations.
+Runge–Kutta and multistep methods are both investigated. The methods listed here
+can be used for method of lines numerical schemes for PDEs, especially for hyperbolic
+problems.
+
+REFERENCES
+
+[1] M. Carpenter and C. Kennedy, Fourth-Order 2N-Storage Runge-Kutta Schemes, NASA TM
+109112, NASA Langley Research Center, June 1994.
+[2] B. Cockburn and C.-W. Shu, TVB Runge-Kutta local projection discontinuous Galerkin finite
+element method for conservation laws II: General framework, Math. Comp., 52 (1989), pp.
+411–435.
+[3] B. Cockburn, S. Hou, and C.-W. Shu, TVB Runge-Kutta local projection discontinuous
+Galerkin finite element method for conservation laws IV: The multidimensional case,
+Math. Comp., 54 (1990), pp. 545–581.
+[4] G. Dahlquist, A special stability problem for linear multistep methods, BIT, 3 (1963), pp.
+27–43.
+[5] K. Dekker and and J. G. Verwer, Stability of Runge-Kutta methods for stiff nonlinear
+differential equations, Elsevier Science Publishers, Amsterdam, 1984.
+[6] S. Gottlieb and C.-W. Shu, Total variation diminishing Runge-Kutta schemes, Math. Comp.,
+67 (1998), pp. 73–85.
+[7] D. Gottlieb and E. Tadmor, The CFL condition for spectral approximations to hyperbolic
+initial-boundary value problems, Math. Comp., 56 (1991), pp. 565–588.
+[8] A. Harten, High resolution schemes for hyperbolic conservation laws, J. Comput. Phys., 49
+(1983), pp. 357–393.
+[9] A. Kurganov and E. Tadmor, New High-Resolution Schemes for Nonlinear Conservation
+Laws and Related Convection-Diffusion Equations, UCLA CAM Report No. 99-16, Uni-
+versity of California, Los Angeles.
+[10] Z. Jackiewicz, R. Renaut, and A. Feldstein, Two-step Runge-Kutta methods, SIAM J.
+Numer. Anal, 28 (1991), pp. 1165–1182.
+[11] G. Jiang and C.-W. Shu, On cell entropy inequality for discontinuous Galerkin methods,
+Math. Comp., 62 (1994), pp. 531–538.
+[12] B. van Leer, Towards the ultimate conservative difference scheme V. A second order sequel
+to Godunov’s method, J. Comput. Phys., 32 (1979), pp. 101–136.
+[13] D. Levy and E. Tadmor, From semidiscrete to fully discrete:
+Stability of Runge–Kutta
+schemes by the energy method, SIAM Rev., 40 (1998), pp. 40–73.
+[14] M. Nakashima, Embedded pseudo-Runge–Kutta methods, SIAM J. Numer. Anal, 28 (1991),
+pp. 1790–1802.
+[15] H. Nessyahu and E. Tadmor, Non-oscillatory central differencing for hyperbolic conservation
+laws, J. Comput. Phys., 87 (1990), pp. 408–463.
+[16] S. Osher and S. Chakravarthy, High resolution schemes and the entropy condition, SIAM
+J. Numer. Anal., 21 (1984), pp. 955–984.
+[17] S. Osher and E. Tadmor, On the convergence of difference approximations to scalar conser-
+vation laws, Math. Comp., 50 (1988), pp. 19–51.
+[18] C.-W. Shu, TVB uniformly high-order schemes for conservation laws, Math. Comp., 49 (1987),
+pp. 105–121.
+[19] C.-W. Shu, Total-variation-diminishing time discretizations, SIAM J. Sci. Statist. Comput., 9
+(1988), pp. 1073–1084.
+[20] C.-W. Shu and S. Osher, Efficient implementation of essentially non-oscillatory shock-
+capturing schemes, J. Comput. Phys., 77 (1988), pp. 439–471.
+[21] P. K. Sweby, High resolution schemes using flux limiters for hyperbolic conservation laws,
+SIAM J. Numer. Anal., 21 (1984), pp. 995–1011.
+[22] E. Tadmor, Approximate solutions of nonlinear conservation laws, in Advanced Numerical
+Approximation of Nonlinear Hyperbolic Equations, Lectures Notes from CIME Course,
+Cetraro, Italy, 1997, A. Quarteroni, ed., Lecture Notes in Math. 1697, Springer-Verlag,
+New York, 1998, pp. 1–150.
+[23] J. H. Williamson, Low-storage Runge-Kutta schemes, J. Comput. Phys., 35 (1980), pp. 48–56.
+
+

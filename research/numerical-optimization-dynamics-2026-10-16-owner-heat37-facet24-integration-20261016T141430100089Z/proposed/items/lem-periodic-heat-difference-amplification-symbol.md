@@ -1,0 +1,83 @@
+---
+id: lem-periodic-heat-difference-amplification-symbol
+kind: lemma
+title: Periodic heat-stencil eigenvalues and θ amplification factor
+status: draft
+origin: pipeline
+pipeline_run: numerical-optimization-dynamics-2026-10-16
+dependency_level: 2
+deps:
+  - def-parabolic-theta-finite-difference-scheme
+  - thm-complex-exponential-addition-and-real-extension
+  - thm-kernel-and-fibres-of-complex-exponential
+  - cor-complex-exponential-cartesian-form-modulus-and-eulers-identity
+  - lem-complex-conjugation-and-modulus-laws
+  - thm-double-angle-and-power-reduction-identities
+  - lem-orthogonality-of-characters-on-a-finite-cyclic-group
+  - lem-finite-sum-reindexing-and-fubini
+  - thm-finite-fourier-inversion
+justified_by: []
+verification:
+  precheck: pass
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations: A brief introduction to the theory of finite difference approximation of PDEs"
+      url: "https://people.maths.ox.ac.uk/suli/nspdes.pdf"
+      locator: "§5.2.1–§5.4, PDF pp. 59–64: finite-difference Fourier modes, explicit heat amplification, and the θ-scheme factor."
+    - title: "Benjamin Seibold, MIT 18.336, Lecture 14: Von Neumann Stability Analysis (Spring 2009)"
+      url: "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c7c12accea163007923288875bb42604_MIT18_336S09_lec14.pdf"
+      locator: "Complete PDF pp. 1–3: one- and two-dimensional heat symbols and the Crank–Nicolson factor."
+    - title: "Martin Krosche, Hermann G. Matthies, and Oliver Kayser-Herold, Lecture Notes: Introduction to PDEs and Numerical Methods, Technical University Braunschweig, Revision 1.1 (2008), hosted by University of Jyväskylä"
+      url: "https://users.jyu.fi/~rainom/pde/material/pde1en.pdf"
+      locator: "Chapter 1 §§1.4.4–1.4.6, PDF pp. 21–29: θ time discretization, finite-grid matrix form, von Neumann stability, highest resolvable frequency, and separate stability/positivity conditions. The Fourier section assumes an infinite grid; no boundary claim is imported."
+---
+
+## Statement
+
+On the finite periodic rectangular $d$-grid of [[def-parabolic-theta-finite-difference-scheme]], let $\ell_j\in\{0,\ldots,N_j-1\}$ and
+$$
+\phi_\ell(i)=\exp\left(2\pi\mathrm i\sum_{j=1}^d\frac{\ell_ji_j}{N_j}\right).
+$$
+Then $\phi_\ell$ is an eigenvector of $A_h^{\rm per}$ with eigenvalue
+$$
+\lambda_\ell=4\sum_{j=1}^d\frac{\kappa_j}{h_j^2}\sin^2\left(\frac{\pi\ell_j}{N_j}\right)\ge0.
+$$
+For zero source, the $\theta$ update multiplies this mode at each step by
+$$
+g_\theta(\ell)=\frac{1-(1-\theta)\Delta t\lambda_\ell}{1+\theta\Delta t\lambda_\ell}.
+$$
+The displayed modes form a basis of the complexified grid space, so this factor describes the full periodic update.
+
+## Facts & Assumptions
+
+**Given:** A finite periodic rectangular grid with $d\ge1$, $N_j\ge2$, $h_j=L_j/N_j$, $\kappa_j>0$, and $\theta\in[0,1]$ as defined in [[def-parabolic-theta-finite-difference-scheme]].
+
+[F1] [[def-parabolic-theta-finite-difference-scheme]] defines $A_h^{\rm per}$ by periodic wraparound and the update $\Delta t^{-1}(U^{n+1}-U^n)+A_h^{\rm per}((1-\theta)U^n+\theta U^{n+1})=0$ when the source is zero.
+
+[F2] The complex exponential obeys the addition law and has kernel $2\pi\mathrm i\mathbb Z$; its Cartesian Euler formula gives unit modulus on imaginary arguments, and complex conjugation and modulus obey their field laws ([[thm-complex-exponential-addition-and-real-extension]], [[thm-kernel-and-fibres-of-complex-exponential]], [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[lem-complex-conjugation-and-modulus-laws]]).
+
+[F3] For real $a$, $\cos(2a)=1-2\sin^2(a)$ ([[thm-double-angle-and-power-reduction-identities]]).
+
+[F4] For $N\ge1$ and integer frequencies $k,m$, the finite character sum $\sum_{r=0}^{N-1}\exp(2\pi\mathrm i(k-m)r/N)$ is $N$ if $k\equiv m\pmod N$ and zero otherwise ([[lem-orthogonality-of-characters-on-a-finite-cyclic-group]]).
+
+[F5] Finite sums may be reindexed and iterated over Cartesian-product index sets; distributivity factors a finite sum of coordinatewise products into the product of its coordinate sums ([[lem-finite-sum-reindexing-and-fubini]]).
+
+[F6] Finite Fourier inversion expands every complex function on $\mathbb Z/N\mathbb Z$ in its positive-exponent character modes, for each $N\ge1$ ([[thm-finite-fourier-inversion]]).
+
+## Proof
+
+1.1 Changing a representative $i_j$ by $N_j$ changes the exponent by the integer multiple $2\pi\mathrm i\ell_j$, so [F2] makes $\phi_\ell$ well-defined on the periodic grid. It is nonzero because $\phi_\ell(0)=1$. Put $\beta_j=2\pi\ell_j/N_j$. The addition law gives $\phi_\ell(i\pm e_j)=e^{\pm\mathrm i\beta_j}\phi_\ell(i)$, including wrapped indices. By [F2], $e^{\mathrm i\beta_j}$ has modulus one and $e^{\mathrm i\beta_j}e^{-\mathrm i\beta_j}=1$, hence $e^{-\mathrm i\beta_j}=\overline{e^{\mathrm i\beta_j}}$. The Cartesian Euler formula in [F2] and [F3] therefore give $2-e^{\mathrm i\beta_j}-e^{-\mathrm i\beta_j}=2-2\cos\beta_j=4\sin^2(\beta_j/2)$. Substitution into [F1] yields the asserted eigenvalue on summing over $j$; it is nonnegative because each $\kappa_j/h_j^2$ is positive and each sine square is nonnegative. [F1, F2, F3, algebra]
+
+1.2 Put $P=\prod_{j=1}^dN_j>0$. By [F2], [F4] and the finite Fubini rule [F5], $\sum_{i\in G_h^{\rm per}}\phi_\ell(i)\overline{\phi_m(i)}=\prod_{j=1}^d\sum_{r=0}^{N_j-1}\exp(2\pi\mathrm i(\ell_j-m_j)r/N_j)$. This is $P$ when $\ell=m$ and zero otherwise: distinct index tuples have a coordinate whose two standard representatives are not congruent modulo $N_j$. Thus the nonzero modes are orthogonal, also after multiplying the pairing by the positive grid weight $\prod_jh_j$. Apply the published one-dimensional inversion formula [F6] successively to each of the $d$ coordinates of any grid vector. All sums are finite, so [F5] combines these expansions into a linear combination of the displayed product modes $\phi_\ell$; hence they span the complexified grid space. If a linear combination of them is zero, multiply it by $\overline{\phi_m}$ and sum over the grid. The displayed pairing identity leaves $P$ times its $m$th coefficient, so every coefficient is zero. The modes therefore form a basis. [F2, F4, F5, F6, algebra]
+
+2.1 Substituting $U^n=a_n\phi_\ell$ into the zero-source update gives $(a_{n+1}-a_n)+\Delta t\lambda_\ell((1-\theta)a_n+\theta a_{n+1})=0$. Since $1+\theta\Delta t\lambda_\ell\ge1$, solving this scalar equation gives $a_{n+1}=g_\theta(\ell)a_n$. [F1, step 1.1, algebra]
+
+3.1 By step 1.2 every grid vector is a finite linear combination of these modes, and the update acts on each component by the factor from step 2.1. Thus the stated factors describe the full update. [step 2.1, step 1.2, algebra] ∎
+
+## Remarks
+
+The calculation is for periodic grids. It does not establish stability of a finite Dirichlet matrix or of a variable-coefficient stencil.

@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "72",
+  "dependency_level": 4,
+  "prerequisite_batches": [
+    "34",
+    "58"
+  ],
+  "scheduling_input_sha256": "6dfd0c45f2a8223c7d6f772198513d38987ad90fa865c52f24f2241dd5c6d510",
+  "inputs": [
+    {
+      "consumer_page": "trust-region-and-cubic-regularization-methods",
+      "supplier_page": "krylov-methods-and-lanczos-convergence",
+      "supplier_batch": "34",
+      "status": "required page body absent; the exact published Krylov-space definition used by local claims is present and inspected",
+      "unresolved_page_ids": [
+        "krylov-methods-and-lanczos-convergence"
+      ],
+      "unresolved_item_supplier_ids": [],
+      "actual_supplier_item_ids": [
+        "def-krylov-subspace-of-a-matrix-and-start-vector"
+      ],
+      "inspected_item_ids_not_used_as_logical_suppliers": [
+        "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases"
+      ],
+      "required_hypotheses": [
+        "The truncated-CG recurrence and its Krylov-membership lemma use only the published definition K_m(B,-g)=span{-g,B(-g),...,B^(m-1)(-g)} and its finite-dimensional nesting under multiplication by B.",
+        "The B-page Newton example uses K_2(B,-g)=R^2 for the displayed two-dimensional full-space solve. It imports no Lanczos convergence theorem, spectral-gap assumption, or floating-point guarantee."
+      ],
+      "affected_claims": [
+        "alg-truncated-cg-trust-region-step and lem-truncated-cg-iterates-are-krylov-vectors use the published Krylov definition; the declared page-level requirement remains unreconciled, but no claim depends on the absent Lanczos page body."
+      ],
+      "owner_action": "Reconcile the retained page-level requirement after batch 34 completes. Do not add a Lanczos-convergence conclusion to this pair; the actual local Krylov interfaces are available and sufficient for the stated claims."
+    },
+    {
+      "consumer_page": "trust-region-and-cubic-regularization-methods-examples",
+      "supplier_page": "nonconvex-line-search-and-inexact-newton-methods",
+      "supplier_batch": "58",
+      "status": "page and draft supplier body present; exact algorithm and line-search definition inspected; draft status is not independent approval",
+      "unresolved_page_ids": [],
+      "unresolved_item_supplier_ids": [],
+      "actual_supplier_item_ids": [
+        "alg-inexact-newton-krylov-with-descent-safeguard",
+        "def-wolfe-and-strong-wolfe-conditions",
+        "alg-bracketing-zoom-strong-wolfe-search"
+      ],
+      "required_hypotheses": [
+        "The example instantiates the unshifted first Newton-Krylov attempt with an exact zero residual, a strict descent check, and a finite Krylov solve in the full two-dimensional space.",
+        "The example uses a C1 quadratic on R^2 and checks both strong-Wolfe inequalities at t=1 with c1=1/10 and c2=1/4. It makes no global-convergence or finite-budget success claim about the supplier algorithms."
+      ],
+      "affected_claims": [
+        "ex-trust-region-newton-cauchy-truncated-cg: exact inexact-Newton residual/descent acceptance and full-step strong-Wolfe acceptance."
+      ],
+      "owner_action": "No missing item-level interface remains for this example; preserve the supplier's draft status and ordinary independent review."
+    },
+    {
+      "consumer_page": "trust-region-and-cubic-regularization-methods",
+      "supplier_page": "nonconvex-line-search-and-inexact-newton-methods",
+      "supplier_batch": "58",
+      "status": "required page present as draft; directly used algorithm body inspected; draft is not independent approval",
+      "unresolved_page_ids": [],
+      "unresolved_item_supplier_ids": [],
+      "actual_supplier_item_ids": [
+        "alg-inexact-newton-krylov-with-descent-safeguard"
+      ],
+      "required_hypotheses": [
+        "The A-page items do not use a Newton convergence theorem; the declared interface is retained because the B example uses the exact unshifted residual and descent checks.",
+        "Finite solver and line-search budgets may return failure; the example separately verifies one exact candidate and one accepted Wolfe step."
+      ],
+      "affected_claims": [
+        "A-page dependency metadata only; the actual proof-bearing B-page use is ex-trust-region-newton-cauchy-truncated-cg."
+      ],
+      "owner_action": "Keep the page-level requirement; no additional line-search convergence claim is imported."
+    }
+  ],
+  "item_dependency_edges": [
+    {
+      "consumer_item": "alg-truncated-cg-trust-region-step",
+      "supplier_item": "def-krylov-subspace-of-a-matrix-and-start-vector",
+      "supplier_batch": "external-published",
+      "status": "published body inspected",
+      "required_hypotheses": [
+        "Use the exact finite-dimensional Krylov-space definition only; no convergence result is imported."
+      ]
+    },
+    {
+      "consumer_item": "lem-truncated-cg-iterates-are-krylov-vectors",
+      "supplier_item": "def-krylov-subspace-of-a-matrix-and-start-vector",
+      "supplier_batch": "external-published",
+      "status": "published body inspected",
+      "required_hypotheses": [
+        "Use K_0={0}, the span through B^(j-1)(-g), and closure under B into K_(j+1)."
+      ]
+    },
+    {
+      "consumer_item": "ex-trust-region-newton-cauchy-truncated-cg",
+      "supplier_item": "alg-inexact-newton-krylov-with-descent-safeguard",
+      "supplier_batch": "58",
+      "status": "draft body and exact residual/descent branch inspected; not independently approved",
+      "required_hypotheses": [
+        "The input K returns p in a Krylov subspace; the algorithm recomputes Bp+g and checks g^T p < -sigma||g||||p||."
+      ]
+    },
+    {
+      "consumer_item": "ex-trust-region-newton-cauchy-truncated-cg",
+      "supplier_item": "def-wolfe-and-strong-wolfe-conditions",
+      "supplier_batch": "58",
+      "status": "draft body and strong-Wolfe inequalities inspected; not independently approved",
+      "required_hypotheses": [
+        "Require a descent direction and 0<c1<c2<1/2; verify Armijo and strong-curvature conditions directly."
+      ]
+    },
+    {
+      "consumer_item": "ex-trust-region-newton-cauchy-truncated-cg",
+      "supplier_item": "alg-bracketing-zoom-strong-wolfe-search",
+      "supplier_batch": "58",
+      "status": "draft body and first expansion branch inspected; not independently approved",
+      "required_hypotheses": [
+        "Expansion budget must be at least one; the first trial is t=1 and both strong-Wolfe tests are checked before return."
+      ]
+    },
+    {
+      "consumer_item": "ex-trust-region-newton-cauchy-truncated-cg",
+      "supplier_item": "def-krylov-subspace-of-a-matrix-and-start-vector",
+      "supplier_batch": "external-published",
+      "status": "published body inspected",
+      "required_hypotheses": [
+        "K_2(B,-g) is the span of -g and B(-g)."
+      ]
+    },
+    {
+      "consumer_item": "thm-trust-region-epsilon-iteration-complexity",
+      "supplier_item": "lem-natural-logarithm-bounded-by-argument",
+      "supplier_batch": "72",
+      "status": "draft local supplier; full proof and strict contract inspected",
+      "required_hypotheses": [
+        "Use the exact proved bound 0<=log y<=y-1<=y for y>=1 to absorb the terminal radius logarithm into O(epsilon^-2)."
+      ]
+    },
+    {
+      "consumer_item": "lem-natural-logarithm-bounded-by-argument",
+      "supplier_item": "def-natural-logarithm",
+      "supplier_batch": "external-published",
+      "status": "published supplier body inspected",
+      "required_hypotheses": [
+        "The logarithm is the inverse exponential on positive reals; the lemma uses its domain and value log(1)."
+      ]
+    },
+    {
+      "consumer_item": "lem-natural-logarithm-bounded-by-argument",
+      "supplier_item": "thm-natural-logarithm-laws",
+      "supplier_batch": "external-published",
+      "status": "published supplier body inspected",
+      "required_hypotheses": [
+        "Use strict monotonicity, continuity on [1,x], and log(1)=0."
+      ]
+    },
+    {
+      "consumer_item": "lem-natural-logarithm-bounded-by-argument",
+      "supplier_item": "thm-logarithm-derivative-and-integral",
+      "supplier_batch": "external-published",
+      "status": "published supplier body inspected",
+      "required_hypotheses": [
+        "Use log′(t)=1/t for t>0 on the interval [1,x]."
+      ]
+    },
+    {
+      "consumer_item": "lem-natural-logarithm-bounded-by-argument",
+      "supplier_item": "cor-mean-value-theorem",
+      "supplier_batch": "external-published",
+      "status": "published supplier body inspected",
+      "required_hypotheses": [
+        "Apply the theorem on [1,x] only when x>1; handle x=1 separately."
+      ]
+    },
+    {
+      "consumer_item": "thm-trust-region-epsilon-iteration-complexity",
+      "supplier_item": "def-natural-logarithm",
+      "supplier_batch": "external-published",
+      "status": "published supplier body inspected",
+      "required_hypotheses": [
+        "Every logged radius and contraction factor is positive; log is the natural logarithm."
+      ]
+    },
+    {
+      "consumer_item": "thm-trust-region-epsilon-iteration-complexity",
+      "supplier_item": "thm-natural-logarithm-laws",
+      "supplier_batch": "external-published",
+      "status": "published supplier body inspected",
+      "required_hypotheses": [
+        "Use monotonicity, product and quotient laws, and log(gamma_dec)<0 when 0<gamma_dec<1."
+      ]
+    },
+    {
+      "consumer_item": "thm-trust-region-epsilon-iteration-complexity",
+      "supplier_item": "thm-of-archimedean",
+      "supplier_batch": "external-published",
+      "status": "published supplier body inspected",
+      "required_hypotheses": [
+        "Choose a finite number of accepted steps exceeding the fixed objective gap divided by the positive per-step decrease."
+      ]
+    },
+    {
+      "consumer_item": "thm-trust-region-epsilon-iteration-complexity",
+      "supplier_item": "lem-geometric-sequence-null",
+      "supplier_batch": "external-published",
+      "status": "published supplier body inspected",
+      "required_hypotheses": [
+        "An infinite rejection block with fixed 0<gamma_dec<1 would force the radius to zero."
+      ]
+    },
+    {
+      "consumer_item": "thm-trust-region-global-liminf-gradient",
+      "supplier_item": "def-limsup-liminf",
+      "supplier_batch": "external-published",
+      "status": "published supplier body inspected",
+      "required_hypotheses": [
+        "Use liminf(a_k)=sup_n inf{k>=n:a_k} exactly as defined."
+      ]
+    },
+    {
+      "consumer_item": "thm-trust-region-global-liminf-gradient",
+      "supplier_item": "lem-extended-reals-complete",
+      "supplier_batch": "external-published",
+      "status": "published supplier body inspected",
+      "required_hypotheses": [
+        "Use the greatest-lower-bound property for each extended-real tail infimum."
+      ]
+    },
+    {
+      "consumer_item": "thm-trust-region-global-liminf-gradient",
+      "supplier_item": "def-upper-bound",
+      "supplier_batch": "external-published",
+      "status": "published supplier body inspected",
+      "required_hypotheses": [
+        "If every tail infimum is <=epsilon, epsilon is an upper bound and the supremum is <=epsilon."
+      ]
+    },
+    {
+      "consumer_item": "lem-trust-region-subproblem-optimality-and-hard-case",
+      "supplier_item": "thm-algebra-of-continuous-functions",
+      "supplier_batch": "external-published",
+      "status": "published supplier body inspected",
+      "required_hypotheses": [
+        "Use only continuity of finite sums and quotients with nonzero denominators to justify the scalar secular function on its domain."
+      ]
+    }
+  ]
+}

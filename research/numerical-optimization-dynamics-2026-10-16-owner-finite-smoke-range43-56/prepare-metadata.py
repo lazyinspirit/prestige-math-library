@@ -1,0 +1,21 @@
+from pathlib import Path
+import json,difflib
+D=Path(__file__).parent;run='numerical-optimization-dynamics-2026-10-16';p=Path('research')/(run+'-batch-55.proof-contracts.json');before=p.read_text();doc=json.loads(before)
+specs=[
+('thm-periodic-centered-wave-amplification-and-endpoint','n2-wave-root-boundary',r'If $\nu=1$, $N$ is even, and $\ell=N/2$, then $s_\ell=1$ and $p_\ell(r)=(r+1)^2$.','N=2: independently derive the cyclic wave recurrence; test strict-CFL roots at nu=1/sqrt(2), endpoint repeated root and compatible versus parasitic starts through12levels.','Proof5.1'),
+('thm-periodic-advection-power-stability','n2-periodic-alias-boundary',r'while the $N=2$ centered stencil aliases to the identity.','N=2: six fixed Courant values give centered identity and Lax-Friedrichs unit-modulus alias, with separate super-CFL upwind/Lax-Wendroff growth witnesses.','Statement and Proof1.2/2.1'),
+('ex-wave-cfl-endpoint-and-energy-breakdown','n2-wave-nyquist-endpoint-and-supercfl',r'It is zero at $\nu=1$ and negative at $\nu>1$.','N=2: compute modified energy from cyclic differences, obtaining zero at nu1 and negative -6||X||^2 at nu2, with a separate positive witness; check super-CFL characteristic roots.','Verification1.1/1.2/1.4/2.1'),
+('ex-upwind-versus-downwind-advection','n4-z-i-upwind-downwind',r'Since $z^{-1}=-i$, the upwind factor is $(1-i)/2$, whose squared modulus is $((1)^2+(-1)^2)/4=1/2$.','N=4,z=i,nu1/2: apply original up/down cyclic stencils independently, compare squared norm ratios1/2 and5/2 and eight powers.','Verification1.1/1.2/2.1'),
+('ex-centered-advection-consistent-but-unstable','n4-centered-cfl-half',r'Since $z_\ell=i$, $S_\ell=1$, and the centered factor is $1-i/2$.','N=4,z=i,nu1/2: direct centered stencil gives squared modulus5/4 and eight growing powers; does not prove consistency or a refining-family nonuniform-power theorem.','Verification1.1'),
+('ex-grid-fourier-stability-needs-a-common-space-lift','n4-upwind-grid-mode-not-common-space-lift',r'$\|T_N^m\|_{2,h\to2,h}\le1$','N=4,nu1/2: all four discrete Fourier columns and eight powers satisfy the finite upwind contraction calculation. This finite check neither supplies nor decides a common Banach-space lift or consistency.','Verification1.1; scope limitation in1.2/2.1')]
+ops=[]
+for id,fixture,quote,claim,loc in specs:
+ src=Path('items',id+'.md').read_text();assert quote in src,(id,'assertion absent')
+ e=doc['contracts'][id];matches=[(i,row)for i,row in enumerate(e['finite_smoke'])if row['check']==fixture];assert len(matches)==1
+ i,old=matches[0];new={**old,'check':'numerical-periodic-grid-fixture','parameters':{'fixture':fixture},'asserts':quote,'claim':claim,'checked_in':loc,'fixture_version':2}
+ e['finite_smoke'][i]=new;ops.append({'target':str(p),'path':['contracts',id,'finite_smoke',i],'before':old,'after':new,'source_path':'items/'+id+'.md','source_assertion_present':True,'fixture':fixture})
+for sub in ['before','proposed']:(D/sub).mkdir(exist_ok=False)
+(D/'before'/p.name).write_text(before);after=json.dumps(doc,indent=2)+'\n';(D/'proposed'/p.name).write_text(after)
+(D/'metadata.patch').write_text(''.join(difflib.unified_diff(before.splitlines(True),after.splitlines(True),fromfile=str(p),tofile=str(D/'proposed'/p.name))))
+(D/'operations.json').write_text(json.dumps({'status':'research-only unexecuted finite fixture+metadata proposal','run':run,'module':str(D/'checks.mjs'),'export':'numericalFourierChecks','registry_key':'numerical-periodic-grid-fixture','operations':ops,'count':6,'source_assertion_comparison':'All six literal assertion excerpts occur in actual source; metadata extraction only, not fixture execution.','not_run':['fixture code','syntax check','self-test','finite-smoke gate','any other gate'],'guards':'Root must match each finite_smoke row to exact before value before surgical update; whole proposed carrier is for review only and must not clobber separately updated boundary rows.','limits':'Bounded N2/N4 arrays, <=12timelevels; binary64 arithmetic with explicit numerical tolerance only for irrational roots. Source-exact assertion anchor is not proof. All other fields preserved.'},indent=2)+'\n')
+print('prepared six source-exact rows; checks.mjs unexecuted')

@@ -1,0 +1,249 @@
+{
+  "group": "v",
+  "batches": ["13"],
+  "pages_read": [
+    "automatic-differentiation-and-computational-graphs",
+    "automatic-differentiation-and-computational-graphs-examples"
+  ],
+  "items_read": [
+    "def-finite-straight-line-computational-program",
+    "lem-implicit-sensitivity-error-controlled-by-residual",
+    "thm-implicit-differentiation-forward-and-adjoint-formulas",
+    "alg-forward-mode-automatic-differentiation",
+    "alg-reverse-mode-automatic-differentiation",
+    "lem-finite-straight-line-program-defines-c1-map",
+    "lem-finite-straight-line-program-defines-c2-map",
+    "alg-checkpointed-reverse-schedules",
+    "alg-differentiate-finite-fixed-point-iteration",
+    "alg-forward-over-reverse-hessian-vector-product",
+    "thm-forward-mode-computes-directional-derivative",
+    "thm-reverse-mode-computes-gradient",
+    "thm-reverse-mode-work-and-tape-storage-bound",
+    "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+    "thm-finite-iteration-sensitivity-bound-and-residual-limitation",
+    "thm-forward-over-reverse-computes-hessian-vector-product",
+    "thm-graph-gradient-error-from-local-jacobian-perturbations",
+    "rem-real-arithmetic-graph-versus-rounded-execution",
+    "lem-certified-linear-solve-jacobian-and-pullback-error",
+    "ex-branchwise-ad-at-the-absolute-value-switch",
+    "ex-implicit-linear-solve-adjoint",
+    "ex-reverse-euler-trajectory-tape",
+    "ex-shared-expression-forward-and-reverse-graph"
+  ],
+  "conventions": [
+    {
+      "convention": "Graphs are finite and topologically ordered, have a scalar designated output that may be an input coordinate, and count repeated parent slots as separate edges. Input and node dimensions may be zero.",
+      "fixed_by": "def-finite-straight-line-computational-program",
+      "matters_for": [
+        "alg-forward-mode-automatic-differentiation",
+        "alg-reverse-mode-automatic-differentiation",
+        "thm-forward-mode-computes-directional-derivative",
+        "thm-reverse-mode-computes-gradient",
+        "thm-graph-gradient-error-from-local-jacobian-perturbations",
+        "ex-shared-expression-forward-and-reverse-graph"
+      ]
+    },
+    {
+      "convention": "All node spaces use standard real Euclidean inner products; transposes and scalar-output gradients use those coordinates.",
+      "fixed_by": "def-finite-straight-line-computational-program",
+      "matters_for": [
+        "alg-reverse-mode-automatic-differentiation",
+        "alg-forward-over-reverse-hessian-vector-product",
+        "thm-reverse-mode-computes-gradient",
+        "thm-forward-over-reverse-computes-hessian-vector-product"
+      ]
+    },
+    {
+      "convention": "Piecewise primitives are differentiated only on a unique strict active branch. Boundaries or ambiguous selections return NONDIFFERENTIABLE; an unspecified boundary primal value lies outside the program domain.",
+      "fixed_by": "def-finite-straight-line-computational-program",
+      "matters_for": [
+        "lem-finite-straight-line-program-defines-c1-map",
+        "lem-finite-straight-line-program-defines-c2-map",
+        "alg-checkpointed-reverse-schedules",
+        "ex-branchwise-ad-at-the-absolute-value-switch"
+      ]
+    },
+    {
+      "convention": "Checkpoint replay applies identical deterministic transition maps to identical saved states. Binomial d counts saved snapshots, t counts additional unrecorded evaluations per transition, and G includes scalar recursion frames and live cotangent workspace.",
+      "fixed_by": "alg-checkpointed-reverse-schedules",
+      "matters_for": [
+        "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds"
+      ]
+    },
+    {
+      "convention": "The reverse work bound counts arithmetic operations; allocating and zero-initializing cotangent buffers is charged to storage.",
+      "fixed_by": "thm-reverse-mode-work-and-tape-storage-bound",
+      "matters_for": [
+        "thm-reverse-mode-work-and-tape-storage-bound"
+      ]
+    },
+    {
+      "convention": "Local Jacobian perturbations are measured against derivatives at exact real-arithmetic primal values, using induced Euclidean norms and exact reverse accumulation; rounding in accumulation additions is excluded.",
+      "fixed_by": "thm-graph-gradient-error-from-local-jacobian-perturbations",
+      "matters_for": [
+        "rem-real-arithmetic-graph-versus-rounded-execution",
+        "lem-certified-linear-solve-jacobian-and-pullback-error"
+      ]
+    },
+    {
+      "convention": "Solve derivative errors use Euclidean vector norms and the Frobenius matrix-input norm. Rounded pullbacks use the specified sequential dot products and rounded outer product, require successful operations and nu < 1, and approximate the mathematical solve derivative.",
+      "fixed_by": "lem-certified-linear-solve-jacobian-and-pullback-error",
+      "matters_for": [
+        "rem-real-arithmetic-graph-versus-rounded-execution",
+        "ex-implicit-linear-solve-adjoint"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-finite-straight-line-computational-program",
+      "statement": "Defines finite topologically ordered real-arithmetic programs with open primitive domains, scalar output, separately counted parent slots, deterministic tapes, Euclidean derivative conventions and strict-branch rules.",
+      "used_by": [
+        "alg-forward-mode-automatic-differentiation",
+        "alg-reverse-mode-automatic-differentiation",
+        "lem-finite-straight-line-program-defines-c1-map",
+        "lem-finite-straight-line-program-defines-c2-map",
+        "alg-checkpointed-reverse-schedules",
+        "alg-differentiate-finite-fixed-point-iteration",
+        "alg-forward-over-reverse-hessian-vector-product",
+        "thm-graph-gradient-error-from-local-jacobian-perturbations"
+      ]
+    },
+    {
+      "id": "lem-finite-straight-line-program-defines-c1-map",
+      "statement": "For a finite straight-line program whose primitives are C1, the recursively defined admissible input domain is open on each fixed strict branch. The scalar output f is C1 there, and its total derivative is obtained by the ordinary chain rule through the primitive maps.",
+      "used_by": [
+        "lem-finite-straight-line-program-defines-c2-map",
+        "thm-forward-mode-computes-directional-derivative",
+        "thm-reverse-mode-computes-gradient"
+      ]
+    },
+    {
+      "id": "thm-reverse-mode-computes-gradient",
+      "statement": "For a finite C1 program with one scalar output f, on a fixed strict branch and at every admissible x, the reverse-mode algorithm returns Df(x)^T1, the gradient of f. Operation-node cotangents are derivatives with respect to independently varied node values with later operations recomputed.",
+      "used_by": [
+        "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+        "thm-forward-over-reverse-computes-hessian-vector-product",
+        "thm-graph-gradient-error-from-local-jacobian-perturbations",
+        "ex-reverse-euler-trajectory-tape",
+        "ex-shared-expression-forward-and-reverse-graph",
+        "thm-discrete-adjoint-gradient-recursion"
+      ]
+    },
+    {
+      "id": "thm-implicit-differentiation-forward-and-adjoint-formulas",
+      "statement": "A C1 residual R on open parameter and state sets, at a zero with invertible state Jacobian, has a local C1 solution branch with derivative -R_z^{-1}R_theta. A scalar C1 objective has branch derivative J_theta-J_z R_z^{-1}R_theta, equivalently J_theta-lambda^T R_theta when R_z^T lambda=J_z^T.",
+      "used_by": [
+        "lem-certified-linear-solve-jacobian-and-pullback-error",
+        "ex-implicit-linear-solve-adjoint",
+        "thm-implicit-rk-stage-parameter-sensitivity"
+      ]
+    },
+    {
+      "id": "thm-forward-mode-computes-directional-derivative",
+      "statement": "Let f:Omega→R be the output of a finite C1 program on a fixed strict branch. For every admissible x in Omega and direction v in R^n, the forward-mode algorithm returns Df(x)v.",
+      "used_by": [
+        "thm-finite-iteration-sensitivity-bound-and-residual-limitation",
+        "thm-forward-over-reverse-computes-hessian-vector-product",
+        "ex-shared-expression-forward-and-reverse-graph"
+      ]
+    },
+    {
+      "id": "lem-certified-linear-solve-jacobian-and-pullback-error",
+      "statement": "For n≥1, certified bounds ||I-AB||₂≤d<1, ||b-A xhat||₂≤rho and ||B||₂≤M imply invertibility of A and solve-Jacobian errors eta_b=Kd and eta_A=Kd||xhat||₂+K²rho, K=M/(1-d). Specified successful rounded dot and outer products have the additional stated cotangent allowances.",
+      "used_by": [
+        "rem-real-arithmetic-graph-versus-rounded-execution",
+        "ex-implicit-linear-solve-adjoint"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "C1 regularity and local-inverse terminology for primitives and graph maps.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "Total derivatives, including zero source and target dimensions.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Graph composition, implicit objective differentiation and finite sensitivity recurrences.",
+      "opened": true
+    },
+    {
+      "id": "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+      "used_for": "Continuity of primitive and node maps in the open-domain induction.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-implicit-function-theorem",
+      "used_for": "Local exact solution branches, residual inverse charts and fixed-point sensitivities; its statement requires both block dimensions to be positive.",
+      "opened": true
+    },
+    {
+      "id": "thm-mean-value-inequality-for-total-derivatives",
+      "used_for": "Residual-to-state bounds and contraction estimates on convex neighborhoods.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+      "used_for": "C2 composition and differentiation of matrix-vector products in forward-over-reverse mode.",
+      "opened": true
+    },
+    {
+      "id": "lem-composition-operator-norm-inequality",
+      "used_for": "Path-product perturbation bounds and certified solve derivative estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Euclidean dual norm identities and Frobenius matrix-action bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Finite square-map invertibility from lower norm bounds and absence of zero singular values.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm",
+      "used_for": "Unit-ball operator norms, action bounds and zero-space conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-relative-floating-point-model-and-unit-roundoff",
+      "used_for": "Successful-operation relative errors and exact-zero arithmetic in rounded solve pullbacks.",
+      "opened": true
+    },
+    {
+      "id": "lem-product-of-one-plus-deltas-gives-theta-n",
+      "used_for": "Gamma_n bounds for coefficients in sequential rounded dot products.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-implicit-differentiation-forward-and-adjoint-formulas",
+      "concern": "The Statement imposes no positivity restriction on p,m, but Proof 1.1 says the cited implicit-function theorem applies 'under exactly the nonsingularity hypothesis in the statement.' The opened supplier thm-euclidean-implicit-function-theorem explicitly requires both block dimensions ≥1. If zero dimensions are permitted, as elsewhere on this page, p=0 and m=0 require separate elementary constant/zero-space arguments. The formulas remain valid; this is a missing boundary-case justification.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "automatic-differentiation-and-computational-graphs",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Checked the page summaries and the actual use of lem-rounded-linear-and-normal-residual-certificates and def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma in the certified solve-Jacobian lemma. The consumer requires exact certified residual bounds and arithmetic success, retains derivative-evaluation-point error, and does not infer derivative accuracy from a factorization residual alone."
+    },
+    {
+      "from": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "to": "automatic-differentiation-and-computational-graphs",
+      "faithful": true,
+      "note": "Checked both pages and the actual citations in thm-discrete-adjoint-gradient-recursion and thm-implicit-rk-stage-parameter-sensitivity. The finite state-step definition supplies C1 maps on open domains for exact reverse differentiation. The implicit-stage consumer explicitly requires a selected exact root and nonsingular stage Jacobian and distinguishes its derivative from that of a stopped stage iteration."
+    }
+  ]
+}

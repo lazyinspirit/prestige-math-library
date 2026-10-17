@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "25",
+  "round": 0,
+  "reviewed_items": [
+    "lem-hilbert-tikhonov-normal-operator-invertible",
+    "lem-truncated-svd-bias-and-data-noise-decomposition",
+    "lem-hilbert-tikhonov-noise-amplification-bound",
+    "thm-tikhonov-error-chain-with-discretization-and-residual",
+    "cor-l2-inverse-error-budget-and-cross-term-condition",
+    "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+    "ex-tikhonov-normal-equation-residual-bound",
+    "ex-diagonal-inverse-noise-amplification",
+    "ex-tikhonov-bias-noise-tradeoff",
+    "ex-quadrature-discretization-residual-before-inversion"
+  ],
+  "reviewed_pages": [
+    "numerical-inverse-problems-and-regularization-error",
+    "numerical-inverse-problems-and-regularization-error-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The full batch and its actual suppliers were reviewed. Request one assigned-source repair for the local proof/interface and cross-term wording issues. Escalate because two batch-1 suppliers used by the assigned computed-solve lemma omit an explicit proof prerequisite.",
+  "findings": [
+    {
+      "id": "lem-hilbert-tikhonov-normal-operator-invertible",
+      "type": "local",
+      "reason": "Proof 1.1 uses linearity and boundedness of A* to establish that Bλ is bounded and self-adjoint, but the cited adjoint definition states the adjoint identity without stating these properties. Add a short derivation: uniqueness gives linearity, and Cauchy–Schwarz plus the operator-norm bound gives ||A*y|| ≤ ||A|| ||y||. No statement change is needed."
+    },
+    {
+      "id": "lem-rounded-linear-and-normal-residual-certificates",
+      "type": "outside-batch",
+      "reason": "The batch-1 supplier proof uses Cauchy–Schwarz in steps 2.1 and 3.1, but its deps omit thm-cauchy-schwarz-in-an-inner-product-space. Its direct assigned consumer is lem-computed-augmented-tikhonov-solve-residual-and-output-error; that item feeds thm-tikhonov-error-chain-with-discretization-and-residual and its assigned consumers cor-l2-inverse-error-budget-and-cross-term-condition, ex-tikhonov-bias-noise-tradeoff, and ex-quadrature-discretization-residual-before-inversion. Owner reconciliation is needed."
+    },
+    {
+      "id": "thm-computed-full-rank-least-squares-backward-stability",
+      "type": "outside-batch",
+      "reason": "The batch-1 supplier proof uses Cauchy–Schwarz in step 1.1, but its deps omit thm-cauchy-schwarz-in-an-inner-product-space. Its direct assigned consumer is lem-computed-augmented-tikhonov-solve-residual-and-output-error, with downstream consumers as in the residual-certificate finding. Owner reconciliation is needed."
+    },
+    {
+      "id": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+      "type": "local",
+      "reason": "Proof 2.1 uses Cauchy–Schwarz, but the item deps omit thm-cauchy-schwarz-in-an-inner-product-space. Proof 3.1 also uses ||A*(ŷc−V*y)|| ≤ ||A||₂ εy without defining the matrix 2-norm or justifying the adjoint norm bound. Add the direct prerequisite and state or prove the finite-dimensional spectral-norm estimate used."
+    },
+    {
+      "id": "cor-l2-inverse-error-budget-and-cross-term-condition",
+      "type": "local",
+      "reason": "The formula implies that root-sum-square equality requires the aggregate sum of integrated cross terms to vanish; individual cross terms need not each vanish because they can cancel. Clarify the title and statement, and make the same clarification on the A page."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+      "decision": "escalate",
+      "reason": "Its residual and QR claims use both batch-1 suppliers with undeclared Cauchy–Schwarz prerequisites, and the item also needs the local proof/interface repair."
+    },
+    {
+      "id": "thm-tikhonov-error-chain-with-discretization-and-residual",
+      "decision": "escalate",
+      "reason": "Its computed-output bridge uses the assigned lemma above; the exact error-chain and residual uses themselves are sound."
+    },
+    {
+      "id": "cor-l2-inverse-error-budget-and-cross-term-condition",
+      "decision": "repair",
+      "reason": "Its pathwise L2 and cross-term identity are sound; clarify that the necessary condition is aggregate cross-term cancellation."
+    },
+    {
+      "id": "ex-tikhonov-bias-noise-tradeoff",
+      "decision": "accept",
+      "reason": "Its scalar bias and noise calculations correctly use the finite-matrix identity."
+    },
+    {
+      "id": "ex-quadrature-discretization-residual-before-inversion",
+      "decision": "accept",
+      "reason": "Its five-term scalar chain and propagated pre-inversion residual are correct."
+    },
+    {
+      "id": "numerical-inverse-problems-and-regularization-error",
+      "decision": "repair",
+      "reason": "Its summary repeats the cross-term wording and should state the aggregate condition."
+    },
+    {
+      "id": "numerical-inverse-problems-and-regularization-error-examples",
+      "decision": "accept",
+      "reason": "The examples page makes no cross-term claim; its listed computations and exact-residual caveat are sound."
+    }
+  ]
+}

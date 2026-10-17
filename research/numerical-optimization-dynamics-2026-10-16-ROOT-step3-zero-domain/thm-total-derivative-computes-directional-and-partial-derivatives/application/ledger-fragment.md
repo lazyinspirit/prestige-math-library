@@ -1,0 +1,7 @@
+
+<!-- local-published-repair:numerical-optimization-dynamics-2026-10-16:owner-step3-zero-domain:thm-total-derivative-computes-directional-and-partial-derivatives:begin -->
+Continued local published repair: thm-total-derivative-computes-directional-and-partial-derivatives; current content_sha256 9815c0d88bb09ae8024ed643828b12ed560e740446e0eba7c7457b1020f504b6.
+Adds explicit zero-dimensional proof branches and corresponding true normwise Facts qualifiers; full Statement unchanged and positive-dimensional argument retained.
+Scope: Focused supplier-first zero-dimensional calculus closure; same reviewer checked actual direct current-context uses. No new full audit or mathematical acceptance.
+Original claim owner-step2-b3 at 2026-10-16T08:31:07.909Z retained; prior valid receipt research/numerical-optimization-dynamics-2026-10-16-owner-step2-preclaimed-published-receipts-CONTINUED-ROOT-1035-v1/thm-total-derivative-computes-directional-and-partial-derivatives.repair.json. Current pre-continuation and original published before archived in research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-zero-domain/thm-total-derivative-computes-directional-and-partial-derivatives/application. No new claim, audit or mathematical acceptance.
+<!-- local-published-repair:numerical-optimization-dynamics-2026-10-16:owner-step3-zero-domain:thm-total-derivative-computes-directional-and-partial-derivatives:end -->

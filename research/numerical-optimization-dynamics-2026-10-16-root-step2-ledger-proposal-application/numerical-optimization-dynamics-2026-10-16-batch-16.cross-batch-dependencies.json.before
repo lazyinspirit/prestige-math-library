@@ -1,0 +1,145 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-certified-hermitian-one-and-two-by-two-ldl-kernel",
+    "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "consumer_batch": "16",
+    "supplier_batch": "1",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-16.pages.json#deps",
+      "items/alg-certified-hermitian-one-and-two-by-two-ldl-kernel.md#deps"
+    ],
+    "status": "verified",
+    "evidence": "Definition specifies componentwise divisions by nonzero real pivot/determinant, six-operation complex dots, componentwise Schur subtraction and correctly rounded positive roots in the scaled modulus guards. Negative real denominators use the supplier real divide operation on each component. It explicitly rejects every nonzero out-of-normal intermediate and separates finite-budget exact-real controller guards from rounded numerical operations.",
+    "inspected_paths": [
+      "items/alg-certified-hermitian-one-and-two-by-two-ldl-kernel.md",
+      "items/def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma.md"
+    ],
+    "basis": "new focused interface check",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-10-18.json#reviews/41"
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-multifrontal-cholesky-and-sparse-triangular-solves",
+    "supplier": "def-symmetric-structural-elimination-graph-and-ordering",
+    "status": "verified",
+    "evidence": "Verified the supplier graph/ordering convention and parent forest. The algorithm uses that graph for structural column sets; the complex numeric support is separately supplied by the local Hermitian Schur-support lemma."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-nested-dissection-ordering-on-regular-grids",
+    "supplier": "def-symmetric-structural-elimination-graph-and-ordering",
+    "status": "verified",
+    "evidence": "Verified the supplier uses vertices 0,...,n−1 and adds all pairs of later neighbors at elimination; the grid algorithm maps coordinate vertices through an explicit zero-based lexicographic bijection."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-sparse-cholesky-with-invalid-pivot-status",
+    "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "status": "verified",
+    "evidence": "Verified the actual batch-1 model body. The sparse recurrence uses complex add/subtract/product, positive-real diagonal division, and positive square root, all explicitly covered by the supplier model; every displayed sum is left-to-right."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-symmetric-indefinite-block-ldl-star",
+    "supplier": "def-symmetric-structural-elimination-graph-and-ordering",
+    "status": "verified",
+    "evidence": "Verified the supplier graph convention. The algorithm first maps the Hermitian support through the local real symmetric adapter, then applies the supplier graph update to position-labeled vertices."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-threshold-partial-pivot-sparse-lu",
+    "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "status": "verified",
+    "evidence": "Verified the actual batch-1 model body. This algorithm is scoped to real A and uses only real add/subtract/multiply/divide, with exact pivot guards and range-failure on unsupported exact intermediates."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-elimination-tree-and-column-reach",
+    "supplier": "def-symmetric-structural-elimination-graph-and-ordering",
+    "status": "verified",
+    "evidence": "Verified the supplier parent is the later neighbor of least ordering position, with roots for empty later-neighbor sets. The local definition adds column sets and reach while reusing that parent forest."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-hermitian-structural-graph-adapter",
+    "supplier": "def-symmetric-structural-elimination-graph-and-ordering",
+    "status": "verified",
+    "evidence": "Verified the supplier’s exact zero-based graph and clique-update definition. The local adapter defines H_ij=H_ji=1 iff the Hermitian entry A_ij is nonzero, so H satisfies the supplier’s real-symmetric support hypothesis."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-star-orderings-produce-different-sparse-fill",
+    "supplier": "def-symmetric-structural-elimination-graph-and-ordering",
+    "status": "verified",
+    "evidence": "Verified the exact later-neighbor clique update. Leaf-first star pivots have one later neighbor; center-first inserts every pair among the leaves."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-elimination-tree-reach-contains-each-filled-neighbor",
+    "supplier": "def-symmetric-structural-elimination-graph-and-ordering",
+    "status": "verified",
+    "evidence": "Verified the supplier parent and neighbor-clique update. The proof follows strictly increasing ordering positions until the earliest-later-neighbor parent path reaches the given filled neighbor."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-filled-edge-path-characterisation",
+    "supplier": "def-symmetric-structural-elimination-graph-and-ordering",
+    "status": "verified",
+    "evidence": "Verified the exact delete-and-clique-update rule; the local induction proves the path characterization for that update, including both retained and newly inserted edges."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-hermitian-block-ldl-kernel-roundoff-and-reconstruction-residual",
+    "supplier": "lem-rounded-linear-and-normal-residual-certificates",
+    "consumer_batch": "16",
+    "supplier_batch": "1",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-16.pages.json#deps",
+      "items/lem-hermitian-block-ldl-kernel-roundoff-and-reconstruction-residual.md#deps"
+    ],
+    "status": "verified",
+    "evidence": "Consumer [F2] imports the supplier length-j complex dot allowance g_j=(1+6u)/(1-(j-1)u)-1 for j=1,2, including exact zeros. Proof 2.1/2.2 apply it to two-term multiplier and k-term update dots. Here u<1 suffices for j<=2. Its actual-factor bound separately includes N=Mhat D-B; no trailing-only certificate is misreported as the stored-factor residual.",
+    "inspected_paths": [
+      "items/lem-hermitian-block-ldl-kernel-roundoff-and-reconstruction-residual.md",
+      "items/lem-rounded-linear-and-normal-residual-certificates.md"
+    ],
+    "basis": "new focused interface check",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-10-18.json#reviews/42"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-hermitian-schur-support-is-contained-in-structural-fill",
+    "supplier": "def-symmetric-structural-elimination-graph-and-ordering",
+    "status": "verified",
+    "evidence": "Verified the supplier graph rule on the local real symmetric support matrix H. The supplier’s Schur theorem assumes a symmetric matrix over a field; it is not applied to A as a complex symmetric matrix. The local proof establishes Hermitian Schur symmetry and support directly."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-nested-dissection-fronts-are-boundary-limited",
+    "supplier": "def-symmetric-structural-elimination-graph-and-ordering",
+    "status": "verified",
+    "evidence": "Verified the supplier’s ordered clique update and zero-based vertex convention. The local path lemma turns that update into the witness used in the grid-boundary proof."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-threshold-sparse-lu-residual-with-growth",
+    "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "status": "verified",
+    "evidence": "Verified the actual batch-1 model body and exact operationwise real error rule. The theorem is explicitly real-valued; its local update, division, row-swap and growth argument is proved in the item."
+  },
+  {
+    "kind": "page",
+    "consumer": "sparse-direct-elimination-and-ordering",
+    "supplier": "finite-precision-direct-factorizations",
+    "status": "verified",
+    "evidence": "Inspected the actual batch-1 page and def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma body. It specifies real basic operations, complex component additions/products, positive-real scaling/division and square roots, plus range failure. The real threshold-LU theorem and complex Cholesky recurrence use only supported operations. The model does not specify general complex division."
+  },
+  {
+    "kind": "page",
+    "consumer": "sparse-direct-elimination-and-ordering",
+    "supplier": "sparse-matrix-models-and-kernel-costs",
+    "status": "verified",
+    "evidence": "Inspected the actual batch-2 page, def-symmetric-structural-elimination-graph-and-ordering and thm-filled-graph-contains-schur-complement-support. The graph definition is zero-based and requires A_ij=A_ji over a field. The local Hermitian adapter constructs a real symmetric 0/1 support matrix, and the local Schur-support proof supplies the complex Hermitian extension; no supplier theorem is treated as complex-Hermitian without proof."
+  }
+]

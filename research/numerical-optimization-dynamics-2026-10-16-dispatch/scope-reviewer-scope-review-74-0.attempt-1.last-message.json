@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "74",
+  "round": 0,
+  "reviewed_items": [
+    "def-rosenbrock-euler-step-map",
+    "lem-rosenbrock-shifted-matrix-invertibility-bound",
+    "lem-rosenbrock-shifted-inverse-perturbation",
+    "lem-rosenbrock-stage-residual-certificate",
+    "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+    "lem-rosenbrock-euler-jacobian-approximation-defect",
+    "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+    "alg-rosenbrock-euler-step",
+    "alg-two-stage-rosenbrock-w-method",
+    "lem-rosenbrock-euler-local-defect-and-residual-error",
+    "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+    "prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves",
+    "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+    "thm-rosenbrock-euler-scalar-a-and-l-stability",
+    "thm-two-stage-rosenbrock-scalar-l-stability",
+    "thm-rosenbrock-euler-global-first-order-error",
+    "thm-two-stage-rosenbrock-global-order-two",
+    "cex-omitting-rosenbrock-stage-correction-loses-order-two",
+    "ex-two-stage-rosenbrock-factorization-reuse",
+    "ex-rosenbrock-euler-stiff-decay-and-backward-euler",
+    "cex-approximate-jacobian-breaks-stiff-damping"
+  ],
+  "reviewed_pages": [
+    "rosenbrock-and-linearly-implicit-methods",
+    "rosenbrock-and-linearly-implicit-methods-examples"
+  ],
+  "decision": "repair",
+  "reason": "Both pages, all assigned items, approved scope, and direct suppliers were reviewed. Request one supplier-first local repair for the factor-only QR interface and the listed proof, prerequisite, step-size, and scalar-stability clarifications; the approved mathematical claims can be preserved.",
+  "findings": [
+    {
+      "id": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+      "type": "prerequisite",
+      "reason": "Its Input requires a precomputed list of stored right-hand sides and tolerances, but both step algorithms call for factorization with only the matrix, and the two-stage second RHS is formed after the first solve. Define a factor-only operation returning an object whose solve(b, epsilon) accepts each later RHS; preserve the residual certificate and status behavior."
+    },
+    {
+      "id": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate:rounded-back-substitution",
+      "type": "local",
+      "reason": "The rounded back-substitution instruction cites an exact triangular recurrence but does not specify the order of rounded products and sums. State the per-row accumulation order, subtraction, division, and first-failure handling."
+    },
+    {
+      "id": "c2-total-derivative-bridge",
+      "type": "prerequisite",
+      "reason": "The proofs in lem-rosenbrock-euler-local-defect-and-residual-error, lem-two-stage-rosenbrock-local-defect-and-residual-error, thm-rosenbrock-euler-global-first-order-error, and thm-two-stage-rosenbrock-global-order-two apply the chain rule and identify total-derivative blocks with f_t and D_y f. Their C² premise is componentwise; add explicit uses of thm-continuous-partial-derivatives-imply-total-differentiability and thm-total-derivative-computes-directional-and-partial-derivatives."
+    },
+    {
+      "id": "lem-rosenbrock-euler-local-defect-and-residual-error",
+      "type": "local",
+      "reason": "Proof step 1.1 does not show the integration that produces the h²/2 remainder. Bound the variation of y′ by M₁s, then apply the vector FTC to y and integrate that bound."
+    },
+    {
+      "id": "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+      "type": "local",
+      "reason": "Proof step 3.1 states Wk₂ = F₁ − f₀ + Wk₁ − k₁, but the stage equations give Wk₂ = F₁ − k₁ + Wk₁ = F₁ − αh J̃k₁. The later expansion uses this corrected identity."
+    },
+    {
+      "id": "thm-rosenbrock-euler-global-first-order-error",
+      "type": "local",
+      "reason": "The proof uses h ≤ h₀, while the Statement does not impose this on the actual step. State 0 < h ≤ h₀ explicitly."
+    },
+    {
+      "id": "thm-two-stage-rosenbrock-global-order-two",
+      "type": "local",
+      "reason": "The proof uses h ≤ h₀ in its stage and Lipschitz bounds, but the Statement does not impose this on the actual step. State 0 < h ≤ h₀ explicitly."
+    },
+    {
+      "id": "thm-rosenbrock-euler-scalar-a-and-l-stability",
+      "type": "prerequisite",
+      "reason": "The method algorithm is defined for real state spaces, while the proof substitutes complex λ and uses exact amplification. Specify the exact-arithmetic complexified stage equations (or their real two-dimensional representation); do not present this as execution of the finite-precision real algorithm."
+    },
+    {
+      "id": "thm-two-stage-rosenbrock-scalar-l-stability",
+      "type": "prerequisite",
+      "reason": "The method algorithm is defined for real state spaces, while the proof substitutes complex λ and uses an exact stability function. Specify the exact-arithmetic complexified stage equations (or their real two-dimensional representation); do not present this as execution of the finite-precision real algorithm."
+    },
+    {
+      "id": "thm-total-derivative-computes-directional-and-partial-derivatives",
+      "type": "outside-batch",
+      "reason": "This published supplier’s proof step 2.1 divides by ||tv|| and uses the normalized-remainder limit without separating v = 0, where the denominator is zero. The statement is true and the assigned use in prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler only needs nonzero basis directions, so that consumer use is unaffected; the owner should add the trivial zero-direction case to the supplier proof."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-rosenbrock-euler-step",
+      "decision": "accept",
+      "reason": "Its factor-then-solve calls are supported by the requested factor-only QR interface, with the same stage equation and outputs."
+    },
+    {
+      "id": "alg-two-stage-rosenbrock-w-method",
+      "decision": "accept",
+      "reason": "Its first and data-dependent second solves are supported by the requested reusable factor object; the stage equations remain unchanged."
+    },
+    {
+      "id": "prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves",
+      "decision": "accept",
+      "reason": "The factor object and per-call triangular-solve count remain the same under the factor-only interface."
+    },
+    {
+      "id": "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+      "decision": "repair",
+      "reason": "After the QR interface change, revise its finite-work input wording from a precomputed RHS list to a finite number of solve requests."
+    },
+    {
+      "id": "ex-two-stage-rosenbrock-factorization-reuse",
+      "decision": "accept",
+      "reason": "The example uses one factor object for two later RHSs; its calculations and residual bounds are unchanged."
+    },
+    {
+      "id": "lem-rosenbrock-euler-local-defect-and-residual-error",
+      "decision": "repair",
+      "reason": "Add the derivative-to-Jacobian prerequisites and the missing FTC integration step."
+    },
+    {
+      "id": "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+      "decision": "repair",
+      "reason": "Add the derivative-to-Jacobian prerequisites and correct the stage identity in proof step 3.1."
+    },
+    {
+      "id": "thm-rosenbrock-euler-scalar-a-and-l-stability",
+      "decision": "repair",
+      "reason": "Make the exact-arithmetic complexification convention explicit."
+    },
+    {
+      "id": "thm-two-stage-rosenbrock-scalar-l-stability",
+      "decision": "repair",
+      "reason": "Make the exact-arithmetic complexification convention explicit."
+    },
+    {
+      "id": "thm-rosenbrock-euler-global-first-order-error",
+      "decision": "repair",
+      "reason": "Add 0 < h ≤ h₀ and the derivative-to-Jacobian prerequisites."
+    },
+    {
+      "id": "thm-two-stage-rosenbrock-global-order-two",
+      "decision": "repair",
+      "reason": "Add 0 < h ≤ h₀ and the derivative-to-Jacobian prerequisites."
+    },
+    {
+      "id": "cex-omitting-rosenbrock-stage-correction-loses-order-two",
+      "decision": "accept",
+      "reason": "Its exact stage equations and local expansion are unchanged by the QR interface correction."
+    },
+    {
+      "id": "ex-rosenbrock-euler-stiff-decay-and-backward-euler",
+      "decision": "accept",
+      "reason": "Its exact real scalar step and backward-Euler comparison are unchanged."
+    },
+    {
+      "id": "cex-approximate-jacobian-breaks-stiff-damping",
+      "decision": "accept",
+      "reason": "Its exact real scalar stage calculation is unchanged."
+    },
+    {
+      "id": "rosenbrock-and-linearly-implicit-methods",
+      "decision": "accept",
+      "reason": "Its factorization-reuse and residual-certificate summary is preserved by the factor-only interface."
+    },
+    {
+      "id": "rosenbrock-and-linearly-implicit-methods-examples",
+      "decision": "accept",
+      "reason": "Its examples retain the same stage formulas and factorization count."
+    },
+    {
+      "id": "lem-rosenbrock-euler-step-map-lipschitz",
+      "decision": "accept",
+      "reason": "Its use of the exact one-stage map is unchanged by the QR input-interface correction."
+    },
+    {
+      "id": "lem-rosenbrock-euler-local-defect",
+      "decision": "accept",
+      "reason": "Its use of the exact one-stage map is unchanged by the QR input-interface correction."
+    },
+    {
+      "id": "thm-rosenbrock-euler-global-first-order",
+      "decision": "accept",
+      "reason": "Its exact one-stage recurrence is unchanged by the QR input-interface correction."
+    },
+    {
+      "id": "thm-rosenbrock-euler-a-l-stable",
+      "decision": "accept",
+      "reason": "Its one-stage algebraic formula is unchanged by the QR input-interface correction."
+    },
+    {
+      "id": "thm-rosenbrock-euler-one-newton-step-for-backward-euler",
+      "decision": "accept",
+      "reason": "Its exact Newton-correction identity is unchanged by the QR input-interface correction."
+    },
+    {
+      "id": "ex-rosenbrock-euler-stiff-linear-damping",
+      "decision": "accept",
+      "reason": "Its exact real scalar update is unchanged by the QR input-interface correction."
+    },
+    {
+      "id": "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+      "decision": "accept",
+      "reason": "Its use of the published derivative/Jacobian result is only on nonzero coordinate directions, where the supplier proof applies."
+    }
+  ]
+}

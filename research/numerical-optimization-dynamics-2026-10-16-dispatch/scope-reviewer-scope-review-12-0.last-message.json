@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "12",
+  "round": 0,
+  "reviewed_items": [
+    "def-complex-step-derivative-estimator",
+    "def-finite-difference-stencils-and-evaluation-error-model",
+    "def-jacobian-and-hessian-vector-difference-products",
+    "def-structural-column-coloring-for-sparse-jacobian-recovery",
+    "lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative",
+    "thm-complex-step-derivative-has-second-order-error-under-holomorphy",
+    "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds",
+    "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds",
+    "thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring",
+    "def-richardson-extrapolation-under-a-fourth-order-remainder",
+    "thm-optimal-step-for-forward-and-central-difference-error-bounds",
+    "thm-richardson-extrapolation-has-fourth-order-error-bound",
+    "cex-colliding-column-colors-do-not-identify-a-jacobian",
+    "cex-complex-step-absolute-value-returns-the-wrong-derivative",
+    "ex-colored-jacobian-of-two-independent-reactions",
+    "ex-forward-difference-noise-bound-has-a-balanced-step"
+  ],
+  "reviewed_pages": [
+    "numerical-differentiation-and-derivative-error-control",
+    "numerical-differentiation-and-derivative-error-control-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch, approved DIF1 scope, and actual supplier interfaces were reviewed. The derivative estimates, error constants, balancing steps, coloring results, examples, and counterexamples are sound. One same-page repair can clarify the JVP/HVP definition and its bound theorem.",
+  "findings": [
+    {
+      "id": "def-jacobian-and-hessian-vector-difference-products",
+      "type": "local",
+      "reason": "The definition names JF(x)v and H_f(x)v without requiring the corresponding derivatives to exist, and the Hessian stencils use gradients at sample points without requiring those gradients to exist. It also leaves the inexact quotient formulas implicit although the theorem uses their noise bounds. State the minimal derivative and gradient admissibility conditions and define the hatted estimates with per-call error bound δ≥0."
+    },
+    {
+      "id": "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds",
+      "type": "local",
+      "reason": "Clarify that C^k for vector-valued F means componentwise C^k, and state the total-error bounds for the inexact hatted estimates. The existing regularity hypotheses and proof supply the needed bounds."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds",
+      "decision": "repair",
+      "reason": "Direct consumer of the definition; its regularity hypotheses suffice, but its vector-valued C^k convention and inexact-estimate notation need the same local clarification."
+    },
+    {
+      "id": "numerical-differentiation-and-derivative-error-control",
+      "decision": "accept",
+      "reason": "Its summary accurately describes the bound theorem and makes no separate JVP/HVP domain claim."
+    },
+    {
+      "id": "numerical-differentiation-and-derivative-error-control-examples",
+      "decision": "accept",
+      "reason": "Its examples do not use the JVP/HVP definition or theorem."
+    }
+  ]
+}

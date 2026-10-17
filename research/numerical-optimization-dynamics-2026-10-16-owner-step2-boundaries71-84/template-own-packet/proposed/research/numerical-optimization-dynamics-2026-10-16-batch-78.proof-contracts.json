@@ -1,0 +1,2600 @@
+{
+  "version": 1,
+  "level": 4,
+  "scope": [
+    "def-finite-conservative-production-destruction-system",
+    "lem-strict-column-dominance-implies-nonnegative-inverse",
+    "alg-modified-patankar-euler",
+    "def-source-factored-production-destruction-rates",
+    "alg-zero-compatible-modified-patankar-euler",
+    "alg-mprk22-1",
+    "thm-modified-patankar-euler-positive-conservative",
+    "lem-modified-patankar-euler-positive-tube-local-error-and-stability",
+    "thm-zero-compatible-modified-patankar-euler-admissibility",
+    "thm-mprk22-1-positive-conservative",
+    "lem-mprk22-1-positive-tube-local-error-and-stability",
+    "thm-modified-patankar-euler-global-first-order-error",
+    "thm-patankar-inexact-solve-residual-ledger",
+    "thm-mprk22-1-global-second-order-error",
+    "ex-two-compartment-stiff-reversible-transfer",
+    "ex-three-species-weighted-stoichiometric-conservation",
+    "ex-zero-denominator-corner-and-factorized-extension",
+    "cex-small-residual-does-not-certify-positivity",
+    "cex-forward-euler-negative-concentration-despite-stability"
+  ],
+  "contracts": {
+    "def-finite-conservative-production-destruction-system": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: m>=1, but at m=1 there is no off-diagonal transfer; p_11=d_11=0 makes the displayed vector field zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: admissible states lie in Omega intersect [0,infinity)^m and every transfer is nonnegative there; zero coordinates are permitted without any division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the one-compartment index set contains only i=j=1, whose production and destruction rates are both prescribed zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: setting all p_ij=d_ij=0 gives y_i'=0 and constant summed mass; no inverse or step matrix is asserted by this definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The PDS Definition fixes an autonomous vector field on a state domain and no time integration interval or endpoint evaluation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: its m^2 rate functions are supplied finite data and each F_i is their explicit finite sum; this is not a simultaneous arbitrary-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The closed production-destruction Definition is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The closed production-destruction Definition does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The main proof obligation is whether the stated hypotheses cover each use of the finite formulas; this is recorded in the Statement and Facts & Assumptions for def-finite-conservative-production-destruction-system."
+      }
+    },
+    "lem-strict-column-dominance-implies-nonnegative-inverse": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $D=\\operatorname{diag}(m_{11},\\ldots,m_{mm})$ and $C=I-MD^{-1}$. Then $D$ is invertible, $C\\ge0$, and for each column $j$, $r_j:=\\sum_i C_{ij}=\\sum_{i\\ne j}|m_{ij}|/m_{jj}<1$. Since there are finitely many columns, $r:=\\max_j r_j<1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $k\\ge0$, $C^k\\ge0$ and $\\sum_i(C^k)_{ij}\\le r^k$ for every column $j$: it holds at $k=0$, and multiplying by $C$ gives $\\sum_i(C^{k+1})_{ij}=\\sum_\\ell(\\sum_iC_{i\\ell})(C^k)_{\\ell j}\\le r\\sum_\\ell(C^k)_{\\ell j}$. Thus each entry series in $S:=\\sum_{k=0}^\\infty C^k$ converges and is nonnegative.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The finite geometric identity $(I-C)\\sum_{k=0}^N C^k=\\sum_{k=0}^N C^k(I-C)=I-C^{N+1}$ holds by cancellation of adjacent powers. Step 2.1 gives $C^{N+1}\\to0$ entrywise, so $(I-C)S=S(I-C)=I$. Since $M=(I-C)D$, $M^{-1}=D^{-1}S\\ge0$, proving invertibility and inverse nonnegativity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $b\\ge0$, then $M^{-1}b\\ge0$ by step 3.1. If $b>0$, then $S\\ge I$ entrywise, so $D^{-1}Sb\\ge D^{-1}b>0$ coordinatewise. This proves both vector conclusions.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 permits an empty off-diagonal column at m=1: its column sum r_j is0 and C=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 4.1 handles b=0 by M^-1 b=0; divisions in step 1.1 use only m_jj>0 required in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At m=1 the Statement requires m_11>0 and proof step 1.1 constructs its reciprocal, yielding the nonnegative scalar inverse."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement excludes singular matrices by strict column dominance; proof step 3.1 actually constructs the inverse from the convergent nonnegative series."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This matrix Statement has no variable real interval or endpoint; its infinite series is controlled by r<1 in proof steps 2.1 and3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–3.1 define D,C and the unique entrywise series sum from the given finite matrix; no independent inverse choices are made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The strict column-dominance inverse implication is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The strict column-dominance inverse implication does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The load-bearing point is the column-norm Neumann series and strict positivity for positive right-hand sides; steps 1.1-4.1 prove both without a spectral citation."
+      }
+    },
+    "alg-modified-patankar-euler": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: when m=1 the sum j!=i is empty, M_11=1 and the unique system solution returns y^(n+1)=y^n."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero state coordinates are allowed with separately supplied sigma_i>0; nonpositive denominators are rejected before rate evaluation. The standard choice sigma_i=y_i requires strictly positive input."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a one-compartment closed PDS has no off-diagonal rates, so the scalar system is the identity equation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: zero transfer rates give all off-diagonal entries zero and every diagonal entry1, so the returned exact solve is the input state."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: h<=0 is rejected; this is a single-step procedure with no variable time interval endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite coefficient matrix is formed from the supplied state/rates/positive denominators and its unique exact solution is returned; no free selection among solutions is specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The modified Patankar Euler procedure is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The modified Patankar Euler procedure does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The main proof obligation is whether the stated hypotheses cover each use of the finite formulas; this is recorded in the Statement and Facts & Assumptions for alg-modified-patankar-euler."
+      }
+    },
+    "def-source-factored-production-destruction-rates": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the factors are indexed by i!=j, so a one-compartment PDS needs no off-diagonal factor; a_ii is prescribed0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a_ij remains defined at a zero donor coordinate while p_ij=y_j a_ij vanishes; the text explicitly avoids assigning a value to0/0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: at m=1 the off-diagonal factor family is empty and a_11=0 is the only diagonal convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The source-factor Definition imposes a C2 extension on an open neighborhood; it does not promise existence of such a factorization for arbitrary rates or a collapsed neighborhood."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This Definition concerns state-space factor extensions and contains no integration interval or terminal-time assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the C2 factors on U are additional supplied mathematical data; the item does not derive or choose a factorization from an arbitrary collection of rates."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The source-factored transfer Definition is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The source-factored transfer Definition does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The main proof obligation is whether the stated hypotheses cover each use of the finite formulas; this is recorded in the Statement and Facts & Assumptions for def-source-factored-production-destruction-rates."
+      }
+    },
+    "alg-zero-compatible-modified-patankar-euler": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: an empty off-diagonal factor list makes B=0 and the finite solve (I-hB)y^+=y is the identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: no formula divides by a state coordinate; zero donors in K are admissible, whereas h<=0 or y outside K returns inadmissible-input."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: with m=1, the empty column sum makes B_11=0 and the one-by-one identity solve returns the input."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: all transfer factors zero imply B=0, hence y^+=y with no nonlinear rate ratio."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition specifies one h>0 step and has no time interval with independently evaluated endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the factor matrix is given by finite sums and its uniquely solvable linear equation is supplied by the column-dominance lemma; no choice of one of many roots is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The factorized zero-compatible Euler procedure is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The factorized zero-compatible Euler procedure does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The main proof obligation is whether the stated hypotheses cover each use of the finite formulas; this is recorded in the Statement and Facts & Assumptions for alg-zero-compatible-modified-patankar-euler."
+      }
+    },
+    "alg-mprk22-1": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: at m=1 both off-diagonal sums are empty, so its stage and final systems are identities."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Definition: any nonpositive input coordinate is rejected before rates; positive stage denominators z_j are required, and the text explicitly defines no zero-stage or regularized second-order variant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the one-compartment stage z=y and final output y^+=y are obtained by its two scalar identity solves."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: zero transfer rates and positive y give z=y, B=0, and identity final update; this does not authorize a zero donor."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition: this is a two-stage single-step rule for h>0; the rate-domain check at z precedes the second rate evaluation rather than asserting a time-endpoint theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: each linear solve must return its unique vector or the prescribed stage/update failure; no set-valued arbitrary root selection is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The positive-input MPRK22(1) algorithm is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The positive-input MPRK22(1) algorithm does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The main proof obligation is whether the stated hypotheses cover each use of the finite formulas; this is recorded in the Statement and Facts & Assumptions for alg-mprk22-1."
+      }
+    },
+    "thm-modified-patankar-euler-positive-conservative": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-conservative-production-destruction-system",
+          "source_section": "Definition",
+          "quote": "Fix an integer $m\\ge1$ and a domain $\\Omega\\subseteq\\mathbb R^m$; its admissible nonnegative states are $\\Omega_+:=\\Omega\\cap[0,\\infty)^m$. For every ordered pair $i,j\\in\\{1,\\ldots,m\\}$ let $p_{ij},d_{ij}:\\Omega\\to\\mathbb R$ be production and destruction transfer rates that are nonnegative on $\\Omega_+$. A **finite conservative production destruction system** (finite conservative PDS) is the autonomous ODE\n\n$$y_i'=F_i(y):=\\sum_{j=1}^m\\bigl(p_{ij}(y)-d_{ij}(y)\\bigr),\\qquad i=1,\\ldots,m,$$\n\nwith internal-transfer identities\n\n$$p_{ij}(y)=d_{ji}(y),\\qquad p_{ii}(y)=d_{ii}(y)=0.$$\n\nThe index $j$ is the donor/source of $p_{ij}$ and the index $i$ is its recipient/destination; $d_{ji}$ is the same transfer viewed as destruction from $j$. The total mass is $M(y):=\\sum_{i=1}^m y_i$. The ODE is considered at states in $\\Omega_+$. The definition describes a closed system: external sources and sinks must be specified separately and are not included in the conservation claims on this page. No existence, positivity, or regularity assertion about solutions is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-modified-patankar-euler",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] with state domain $\\Omega$, and take an input state $y^n\\in\\mathbb R^m$, a step size $h$, and declared denominators $\\sigma_i$. If $y^n\\notin\\Omega_+$, $h\\le0$, or any $\\sigma_i\\le0$, return an inadmissible-input status before evaluating any rate. Otherwise the **modified Patankar Euler step** returns the unique solution $y^{n+1}$ of\n\n$$y_i^{n+1}=y_i^n+h\\sum_{j\\ne i}\\left(p_{ij}(y^n)\\frac{y_j^{n+1}}{\\sigma_j}-d_{ij}(y^n)\\frac{y_i^{n+1}}{\\sigma_i}\\right),\\qquad i=1,\\ldots,m.$$\n\nEquivalently, form $M\\in\\mathbb R^{m\\times m}$ by\n\n$$M_{ii}=1+h\\sum_{j\\ne i}\\frac{d_{ij}(y^n)}{\\sigma_i},\\qquad M_{ij}=-h\\frac{p_{ij}(y^n)}{\\sigma_j}\\quad(i\\ne j),$$\n\nand solve $My^{n+1}=y^n$. The rates in the solve are evaluated only at the admissible state $y^n\\in\\Omega_+$. For every input passing the branch, return the unique exact solution of the stated linear system. The standard first-order choice is $\\sigma_i=y_i^n$, which is admissible only when every $y_i^n>0$. A separately defined rate-factor form extends a first-order step to zero donor coordinates under an additional source-factorization hypothesis.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-strict-column-dominance-implies-nonnegative-inverse",
+          "source_section": "Statement",
+          "quote": "Let $M=(m_{ij})\\in\\mathbb R^{m\\times m}$ for a finite $m\\ge1$. Suppose $m_{jj}>0$, $m_{ij}\\le0$ for $i\\ne j$, and\n\n$$m_{jj}>\\sum_{i\\ne j}|m_{ij}|\\qquad(j=1,\\ldots,m).$$\n\nThen $M$ is invertible and every entry of $M^{-1}$ is nonnegative. If $b\\in\\mathbb R^m$ has nonnegative coordinates, then $M^{-1}b\\ge0$; if every coordinate of $b$ is positive, then every coordinate of $M^{-1}b$ is positive.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $j$, $M_{jj}>0$ and $M_{ij}\\le0$ when $i\\ne j$ by [F1]–[F2]. Moreover, $M_{jj}-\\sum_{i\\ne j}|M_{ij}|=1+\\frac{h}{\\sigma_j}\\sum_{k\\ne j}d_{jk}(y^n)-\\frac{h}{\\sigma_j}\\sum_{i\\ne j}p_{ij}(y^n)=1$, because $p_{ij}=d_{ji}$ makes the two finite sums equal. Thus [F3] applies: $M$ is invertible and $y^{n+1}=M^{-1}y^n\\ge0$, with strict positivity when $y^n>0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same identity gives each column sum $\\sum_iM_{ij}=1$. Therefore $\\sum_i y_i^n=\\sum_i(My^{n+1})_i=\\sum_j(\\sum_iM_{ij})y_j^{n+1}=\\sum_jy_j^{n+1}$. This proves exact summed conservation.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 uses the same column-margin identity when the off-diagonal sums are empty; then the margin is1 and step 2.1 still sums conservation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement permits zero y_i with independent positive sigma_i; proof step 1.1 uses M^-1>=0 to preserve nonnegativity without dividing by y_i."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and2.1 specialize to the scalar identity matrix when m=1, so the conserved scalar mass is unchanged."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.1 gives M=I for zero transfers, and step 2.1 then yields equality of the unchanged mass sums."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The preservation Statement applies to one h>0 solve and has no temporal endpoint evaluation; it does not assert accuracy at h=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.1 obtains the uniquely defined output from a single invertible finite matrix; step 2.1 uses finite column sums, not an arbitrary family of solution choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Patankar Euler positivity and conservation theorem is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Patankar Euler positivity and conservation theorem does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The main proof obligation is whether the stated hypotheses cover each use of the finite formulas; this is recorded in the Statement and Facts & Assumptions for thm-modified-patankar-euler-positive-conservative."
+      }
+    },
+    "lem-modified-patankar-euler-positive-tube-local-error-and-stability": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-conservative-production-destruction-system",
+          "source_section": "Definition",
+          "quote": "Fix an integer $m\\ge1$ and a domain $\\Omega\\subseteq\\mathbb R^m$; its admissible nonnegative states are $\\Omega_+:=\\Omega\\cap[0,\\infty)^m$. For every ordered pair $i,j\\in\\{1,\\ldots,m\\}$ let $p_{ij},d_{ij}:\\Omega\\to\\mathbb R$ be production and destruction transfer rates that are nonnegative on $\\Omega_+$. A **finite conservative production destruction system** (finite conservative PDS) is the autonomous ODE\n\n$$y_i'=F_i(y):=\\sum_{j=1}^m\\bigl(p_{ij}(y)-d_{ij}(y)\\bigr),\\qquad i=1,\\ldots,m,$$\n\nwith internal-transfer identities\n\n$$p_{ij}(y)=d_{ji}(y),\\qquad p_{ii}(y)=d_{ii}(y)=0.$$\n\nThe index $j$ is the donor/source of $p_{ij}$ and the index $i$ is its recipient/destination; $d_{ji}$ is the same transfer viewed as destruction from $j$. The total mass is $M(y):=\\sum_{i=1}^m y_i$. The ODE is considered at states in $\\Omega_+$. The definition describes a closed system: external sources and sinks must be specified separately and are not included in the conservation claims on this page. No existence, positivity, or regularity assertion about solutions is part of this definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-modified-patankar-euler",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] with state domain $\\Omega$, and take an input state $y^n\\in\\mathbb R^m$, a step size $h$, and declared denominators $\\sigma_i$. If $y^n\\notin\\Omega_+$, $h\\le0$, or any $\\sigma_i\\le0$, return an inadmissible-input status before evaluating any rate. Otherwise the **modified Patankar Euler step** returns the unique solution $y^{n+1}$ of\n\n$$y_i^{n+1}=y_i^n+h\\sum_{j\\ne i}\\left(p_{ij}(y^n)\\frac{y_j^{n+1}}{\\sigma_j}-d_{ij}(y^n)\\frac{y_i^{n+1}}{\\sigma_i}\\right),\\qquad i=1,\\ldots,m.$$\n\nEquivalently, form $M\\in\\mathbb R^{m\\times m}$ by\n\n$$M_{ii}=1+h\\sum_{j\\ne i}\\frac{d_{ij}(y^n)}{\\sigma_i},\\qquad M_{ij}=-h\\frac{p_{ij}(y^n)}{\\sigma_j}\\quad(i\\ne j),$$\n\nand solve $My^{n+1}=y^n$. The rates in the solve are evaluated only at the admissible state $y^n\\in\\Omega_+$. For every input passing the branch, return the unique exact solution of the stated linear system. The standard first-order choice is $\\sigma_i=y_i^n$, which is admissible only when every $y_i^n>0$. A separately defined rate-factor form extends a first-order step to zero donor coordinates under an additional source-factorization hypothesis.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-strict-column-dominance-implies-nonnegative-inverse",
+          "source_section": "Statement",
+          "quote": "Let $M=(m_{ij})\\in\\mathbb R^{m\\times m}$ for a finite $m\\ge1$. Suppose $m_{jj}>0$, $m_{ij}\\le0$ for $i\\ne j$, and\n\n$$m_{jj}>\\sum_{i\\ne j}|m_{ij}|\\qquad(j=1,\\ldots,m).$$\n\nThen $M$ is invertible and every entry of $M^{-1}$ is nonnegative. If $b\\in\\mathbb R^m$ has nonnegative coordinates, then $M^{-1}b\\ge0$; if every coordinate of $b$ is positive, then every coordinate of $M^{-1}b$ is positive.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-one-step-ode-method-local-defect-order-and-stability",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, and consider a first-order IVP and solution in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. A **one-step method** is a family of maps $\\Psi_h(t,v)$, defined for admitted times $t$, positive step sizes $h$, and states $v$, whose value is the method's approximation at time $t+h$ from the single input state $v$ at time $t$. It does not use earlier numerical states.\n\nIf $y$ is an exact solution on an interval containing $[t,t+h]$, the **local defect** is\n\n$$\\delta_h(t;y):=\\Psi_h(t,y(t))-y(t+h).$$\n\nLet $K\\subseteq D$ be a fixed compact time-state set. The method has **uniform local order $p$ on $K$ along $y$** if there are constants $C\\ge0$ and $h_0>0$, independent of the admitted starting time $t$ and step $0<h\\le h_0$, such that\n\n$$\\|\\delta_h(t;y)\\|_2\\le C h^{p+1}$$\n\nwhenever the exact solution graph on $[t,t+h]$ and the associated method time-state inputs, stages, and outputs under consideration lie in $K$. Here $p$ is a positive integer and $\\|\\cdot\\|_2$ is the Euclidean norm of [[def-euclidean-inner-product]].\n\nThe method has **one-step Lipschitz stability on $K$** with constant $L\\ge0$ if\n\n$$\\|\\Psi_h(t,u)-\\Psi_h(t,v)\\|_2\\le(1+Lh)\\|u-v\\|_2$$\n\nfor every admitted step size $h$, admitted time $t$, and input states $u,v$ with $(t,u),(t,v)\\in K$. This is a bound on the change in one step; it is separate from absolute or linear stability regions and does not itself assert a global error estimate.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put\n\n$$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$\n\nHere $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of [[def-nat-finite-sum-and-product]], and $n!$ is the factorial of [[def-factorial-and-falling-factorial]]. By contrast, $h^\\alpha$ is the finite product in $\\mathbb R$ of [[def-finite-sum]], with the natural exponents interpreted by [[def-integer-power]]. For the zero multi-index $0$, set $D^0f:=f$. For nonzero $\\alpha$, write\n\n$$D^\\alpha f:=\\partial_0^{\\alpha_0}\\cdots\\partial_{m-1}^{\\alpha_{m-1}}f$$\n\nfor this displayed, canonical order whenever it exists. Coordinate partial derivatives have the meaning fixed in [[def-directional-and-partial-derivatives]].\n\nFor $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$. Thus this definition does **not** presuppose that differently ordered derivatives are equal. Equality of their values is a later theorem under these regularity hypotheses.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U \\subseteq X$ be open in a real Banach space $X$, and let $Y$, $Z$, $W$ be\nreal Banach spaces. Then:\n\n1. **Sum rule.** If $f_1, f_2 : U \\to Y$ are Fréchet differentiable at $x \\in U$\n   and $a, b \\in \\mathbb R$, then $af_1+bf_2$ is Fréchet differentiable at $x$\n   with $D(af_1+bf_2)(x) = a\\,Df_1(x) + b\\,Df_2(x)$.\n2. **Bounded-bilinear product rule.** If $f : U \\to Y$ and $g : U \\to Z$ are\n   Fréchet differentiable at $x$, and $B : Y \\times Z \\to W$ is bounded\n   bilinear, then $U \\ni u \\mapsto B(f(u),g(u))$ is Fréchet differentiable at\n   $x$ and\n\n$$D\\bigl(B(f,g)\\bigr)(x)h = B\\bigl(Df(x)h,\\ g(x)\\bigr) + B\\bigl(f(x),\\ Dg(x)h\\bigr) \\qquad (h \\in X).$$\n\n3. **Chain rule.** If $f : U \\to Y$ is Fréchet differentiable at $x$, if\n   $W_0 \\subseteq Y$ is an open set with $f[U] \\subseteq W_0$, and if\n   $g : W_0 \\to Z$ is Fréchet differentiable at $f(x)$, then\n   $g \\circ f$ is Fréchet differentiable at $x$ and\n   $$D(g \\circ f)(x) = Dg\\bigl(f(x)\\bigr)\\,Df(x).$$\n\nNo continuity of any derivative map is assumed; these are pointwise statements\nabout one $x$ at a time.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-induced-matrix-p-norm",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is\n\n$$\\lVert A\\rVert_{p}\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_{p}\\;:\\;x\\in\\mathbb{R}^{n},\\ \\lVert x\\rVert_{p}\\le 1\\,\\Bigr\\}.$$\n\nWhen $n\\ge1$, the following three displayed quantities are the same number:\n\n$$\\lVert A\\rVert_p=\\sup_{\\lVert x\\rVert_p\\le 1}\\lVert Ax\\rVert_p=\\sup_{\\lVert x\\rVert_p=1}\\lVert Ax\\rVert_p=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_p}{\\lVert x\\rVert_p},$$\n\nthe equalities following from positive homogeneity of $\\lVert\\cdot\\rVert_p$\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]], axiom (N2)) and\nthe equality $\\lVert 0\\rVert_p=0$.\n\n**The value is a finite nonnegative real.** For $n\\ge 1$ the norms\n$\\lVert\\cdot\\rVert_p$ and $\\lVert\\cdot\\rVert_2$ are equivalent by\n[[thm-all-norms-on-rn-are-equivalent]], so there is $C>0$ with\n$\\lVert x\\rVert_\\infty\\le C\\lVert x\\rVert_p$ for every $x$. For every $i<m$,\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty\\le C\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_p$,\nso $\\lVert Ax\\rVert_p\\le \\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C\\lVert x\\rVert_p$;\nhence the supremum over the unit ball is at most the finite constant\n$\\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C$.\n\n**The induced infinity norm is a separate named case.** When $m,n\\ge1$, define\n\n$$\\lVert A\\rVert_\\infty\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_\\infty\\;:\\;x\\in\\mathbb R^n,\\ \\lVert x\\rVert_\\infty\\le 1\\,\\Bigr\\}.$$\n\nAs in the rational-$p$ case, positive homogeneity gives\n\n$$\\lVert A\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty\\le 1}\\lVert Ax\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty=1}\\lVert Ax\\rVert_\\infty=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_\\infty}{\\lVert x\\rVert_\\infty}.$$\n\nThe supremum is finite because for every $i<m$ one has\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty$,\nso\n\n$$\\lVert Ax\\rVert_\\infty\\le\\max_{i<m}\\sum_{j<n}|a_{ij}|\\,\\lVert x\\rVert_\\infty.$$\n\n**At $n=0$ the convention is explicit.** The only element of $\\mathbb{R}^{0}$\nis the zero vector, the only matrix $A\\in M_{m\\times 0}(\\mathbb{R})$ is the\nempty matrix, and the unit-ball definition gives $\\lVert A\\rVert_{p}=0$.\nThe unit sphere and the set of nonzero vectors are empty, so the two ratio\nformulas above are not asserted in this case.\n\nThe induced quantity is a norm on the matrix space $M_{m\\times n}(\\mathbb{R})$:\nfor each rational $p\\ge1$, and likewise for the separately named\n$\\infty$-case when $m,n\\ge1$, separation, absolute homogeneity and the triangle\ninequality follow from the same three axioms of the underlying vector norm\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]]) through the\ndefining supremum. The compatibility with matrix-vector multiplication, the\nsubmultiplicativity and the value on identity matrices are\n[[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]];\nthe explicit value at $p=1$ and the separate $\\infty$-formula are\n[[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb{Q}$ with $p\\ge 1$ and let $m,n,q\\in\\mathbb{N}$, with the\ninduced $p$-norms of [[def-induced-matrix-p-norm]].\n\n1. **Compatibility.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and every\n   $x\\in\\mathbb{R}^{n}$,\n   $$\\lVert Ax\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert x\\rVert_p.$$\n2. **Submultiplicativity.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and\n   $B\\in M_{n\\times q}(\\mathbb{R})$,\n   $$\\lVert AB\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert B\\rVert_p.$$\n3. **Normalisation.** For every $n\\ge 1$,\n   $$\\lVert I_n\\rVert_p=1,$$\n   where $I_n$ is the identity matrix of [[def-matrix-product-and-identity-matrix]];\n   at $n=0$ the unique empty matrix $I_0\\in M_0(\\mathbb{R})$ has\n   $\\lVert I_0\\rVert_p=0$, the convention of [[def-induced-matrix-p-norm]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then\n\n$$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $U\\subset\\mathbb R_{>0}^m$, each coordinate $y_j$ stays bounded away from zero on $\\overline U$. On $\\mathbb R\\setminus\\{0\\}$ the reciprocal $s\\mapsto s^{-1}$ has derivatives $-s^{-2}$ and $2s^{-3}$, obtained from the difference quotients $-1/(s(s+t))$ and $(2s+t)/(s^2(s+t)^2)$; composing with the coordinate projection gives continuous first and second partials for $y\\mapsto y_j^{-1}$. Applying the product rule [F7] twice shows every entry $A_{ij}(y)=p_{ij}(y)y_j^{-1}$ ($i\\ne j$), and hence every diagonal sum, is $C^2$ on $U$; [F6] applied to these entries and their first partials supplies continuous total derivatives through order two. The row equations give $A(y)y=F(y)$: the off-diagonal terms contribute $\\sum_{j\\ne i}p_{ij}$, and the diagonal term is $-\\sum_{j\\ne i}d_{ij}$. For column $j$, $\\sum_i A_{ij}=0$ because $A_{jj}=-\\sum_{i\\ne j}A_{ij}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The off-diagonal entries of $A$ are nonnegative and its diagonal entries are nonpositive. Thus $I-hA(y)$ has positive diagonal, nonpositive off-diagonal entries, and strict column diagonal-dominance margin $1$; [F3] makes it invertible. On $[0,h_0]\\times\\overline U$, the entries of $I-hA(y)$ and its determinant are $C^2$; the determinant is nonzero by [F3]. Its cofactors and determinant are finite sums of products of entries, and the scalar reciprocal of the determinant is $C^2$ by the same reciprocal calculation as in step 1.1. The adjugate formula therefore makes the inverse a $C^2$ matrix-valued function there; compactness gives uniform bounds for the inverse and its first derivatives.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The matrix identity $(I-hA)^{-1}=I+hA+h^2A^2(I-hA)^{-1}$ yields $\\Phi_h(y)=y+hF(y)+h^2G(h,y)$ with $G(h,y):=A(y)^2(I-hA(y))^{-1}y$. Step 1.2 and compactness bound $G$ uniformly. Along the exact solution, [F5]–[F7] give $y''(t)=DF(y(t))F(y(t))$, which is uniformly bounded on the compact tube. Taylor's formula [F11] gives $y(t+h)=y(t)+hF(y(t))+O(h^2)$ uniformly. Subtracting the expansions proves the local-defect estimate in [F4].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F11",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The function $G$ in step 2.1 is continuously differentiable in $y$ with uniformly bounded derivative on $\\overline U$ by [F5]–[F7] and step 1.2. Differentiating that identity gives $D_y\\Phi_h(y)=I+hDF(y)+h^2D_yG(h,y)$. Compactness bounds $\\|DF(y)\\|_2$ by $L_0$ and $\\|D_yG(h,y)\\|_2$ by $G_0$. The matrix-norm triangle inequality from [F8] and $\\|I\\|_2=1$ from [F9] yield $\\|D_y\\Phi_h(y)\\|_2\\le1+hL_0+h^2G_0\\le1+(L_0+h_0G_0)h$ for $0<h\\le h_0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F10] to $\\Phi_h$ on the convex open set $U$ using the uniform derivative bound from step 3.1. This gives $\\|\\Phi_h(u)-\\Phi_h(v)\\|_2\\le(1+Lh)\\|u-v\\|_2$ for every $u,v\\in U$, exactly the one-step stability assertion of [F4].",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F10",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 includes empty off-diagonal rate sums at m=1; then A=F=0 and step 2.1 gives the identity one-step expansion."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement explicitly keeps the closure of U in the strictly positive orthant; proof step 1.1 uses that positive lower bound for coordinate reciprocals, and no zero-state ratio extension is claimed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.1 gives a zero scalar transfer generator at m=1; steps 2.1 and4.1 remain valid for its identity map."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The positive-tube Statement excludes a collapsed tube touching a zero coordinate; the reciprocal-derivative argument in step 1.1 requires precisely this separation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes h=h_0 in 0<h<=h_0; proof step 3.1 uses h^2<=h_0 h, so its derivative bound holds at that upper endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and1.2 define the rate matrix and its adjugate inverse from the supplied finite data; constants come from compact bounds, with no family of arbitrary solver outputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The positive-tube first-order local defect and stability estimate is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The positive-tube first-order local defect and stability estimate does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The main proof obligation is whether the stated hypotheses cover each use of the finite formulas; this is recorded in the Statement and Facts & Assumptions for lem-modified-patankar-euler-positive-tube-local-error-and-stability."
+      },
+      "unresolved_suppliers": [
+        "def-one-step-ode-method-local-defect-order-and-stability"
+      ]
+    },
+    "thm-zero-compatible-modified-patankar-euler-admissibility": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-conservative-production-destruction-system",
+          "source_section": "Definition",
+          "quote": "Fix an integer $m\\ge1$ and a domain $\\Omega\\subseteq\\mathbb R^m$; its admissible nonnegative states are $\\Omega_+:=\\Omega\\cap[0,\\infty)^m$. For every ordered pair $i,j\\in\\{1,\\ldots,m\\}$ let $p_{ij},d_{ij}:\\Omega\\to\\mathbb R$ be production and destruction transfer rates that are nonnegative on $\\Omega_+$. A **finite conservative production destruction system** (finite conservative PDS) is the autonomous ODE\n\n$$y_i'=F_i(y):=\\sum_{j=1}^m\\bigl(p_{ij}(y)-d_{ij}(y)\\bigr),\\qquad i=1,\\ldots,m,$$\n\nwith internal-transfer identities\n\n$$p_{ij}(y)=d_{ji}(y),\\qquad p_{ii}(y)=d_{ii}(y)=0.$$\n\nThe index $j$ is the donor/source of $p_{ij}$ and the index $i$ is its recipient/destination; $d_{ji}$ is the same transfer viewed as destruction from $j$. The total mass is $M(y):=\\sum_{i=1}^m y_i$. The ODE is considered at states in $\\Omega_+$. The definition describes a closed system: external sources and sinks must be specified separately and are not included in the conservation claims on this page. No existence, positivity, or regularity assertion about solutions is part of this definition.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-source-factored-production-destruction-rates",
+          "source_section": "Definition",
+          "quote": "Let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]]. A **source-factored transfer representation** on an open set $U\\subseteq\\Omega\\subseteq\\mathbb R^m$ containing a compact set $K\\subseteq[0,\\infty)^m$ consists of functions $a_{ij}:U\\to\\mathbb R$, $i\\ne j$, such that each $a_{ij}$ is $C^2$ on the open subset $U\\subseteq\\mathbb R^m$ in the multivariable sense of [[def-ck-and-multi-index-notation-in-several-variables]], is nonnegative on $U\\cap[0,\\infty)^m$, and, for every $y\\in U\\cap[0,\\infty)^m$,\n\n$$p_{ij}(y)=y_j a_{ij}(y),\\qquad d_{ij}(y)=y_i a_{ji}(y),\\qquad a_{ii}:=0.$$\n\nHere $a_{ij}$ is the transfer rate from donor $j$ to recipient $i$ per unit of donor quantity. Nonnegativity is required on admissible nonnegative states; the $C^2$ extension to the open neighborhood is used for local analysis and need not be nonnegative at inadmissible states with negative coordinates. The factorization is an additional hypothesis, not a consequence of nonnegative rates and the identity $p_{ij}=d_{ji}$. On strictly positive states the ratio $p_{ij}(y)/y_j$ equals $a_{ij}(y)$; at a zero donor coordinate the factorized coefficient remains defined and avoids the indeterminate expression $0/0$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-zero-compatible-modified-patankar-euler",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a compact nonnegative state set with a source-factored transfer representation [[def-source-factored-production-destruction-rates]]. Given $y^n\\in\\mathbb R^m$ and a step size $h$, if $y^n\\notin K$ or $h\\le0$, return an inadmissible-input status before evaluating any factor. Otherwise form $B(y^n)\\in\\mathbb R^{m\\times m}$ by\n\n$$B_{ij}(y^n)=a_{ij}(y^n)\\ (i\\ne j),\\qquad B_{jj}(y^n)=-\\sum_{i\\ne j}a_{ij}(y^n).$$\n\nReturn the unique solution $y^{n+1}$ of\n\n$$\\bigl(I-hB(y^n)\\bigr)y^{n+1}=y^n.$$\n\nEquivalently, component $i$ satisfies\n\n$$y_i^{n+1}=y_i^n+h\\sum_{j\\ne i}\\left(a_{ij}(y^n)y_j^{n+1}-a_{ji}(y^n)y_i^{n+1}\\right).$$\n\nThis procedure uses no denominator $y_j^n$ and is defined when some donor coordinates vanish. It is the factorized extension of the first-order Patankar Euler formula to the zero-state boundary. In exact arithmetic its linear system is uniquely solvable by [[lem-strict-column-dominance-implies-nonnegative-inverse]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-strict-column-dominance-implies-nonnegative-inverse",
+          "source_section": "Statement",
+          "quote": "Let $M=(m_{ij})\\in\\mathbb R^{m\\times m}$ for a finite $m\\ge1$. Suppose $m_{jj}>0$, $m_{ij}\\le0$ for $i\\ne j$, and\n\n$$m_{jj}>\\sum_{i\\ne j}|m_{ij}|\\qquad(j=1,\\ldots,m).$$\n\nThen $M$ is invertible and every entry of $M^{-1}$ is nonnegative. If $b\\in\\mathbb R^m$ has nonnegative coordinates, then $M^{-1}b\\ge0$; if every coordinate of $b$ is positive, then every coordinate of $M^{-1}b$ is positive.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put\n\n$$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$\n\nHere $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of [[def-nat-finite-sum-and-product]], and $n!$ is the factorial of [[def-factorial-and-falling-factorial]]. By contrast, $h^\\alpha$ is the finite product in $\\mathbb R$ of [[def-finite-sum]], with the natural exponents interpreted by [[def-integer-power]]. For the zero multi-index $0$, set $D^0f:=f$. For nonzero $\\alpha$, write\n\n$$D^\\alpha f:=\\partial_0^{\\alpha_0}\\cdots\\partial_{m-1}^{\\alpha_{m-1}}f$$\n\nfor this displayed, canonical order whenever it exists. Coordinate partial derivatives have the meaning fixed in [[def-directional-and-partial-derivatives]].\n\nFor $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$. Thus this definition does **not** presuppose that differently ordered derivatives are equal. Equality of their values is a later theorem under these regularity hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U \\subseteq X$ be open in a real Banach space $X$, and let $Y$, $Z$, $W$ be\nreal Banach spaces. Then:\n\n1. **Sum rule.** If $f_1, f_2 : U \\to Y$ are Fréchet differentiable at $x \\in U$\n   and $a, b \\in \\mathbb R$, then $af_1+bf_2$ is Fréchet differentiable at $x$\n   with $D(af_1+bf_2)(x) = a\\,Df_1(x) + b\\,Df_2(x)$.\n2. **Bounded-bilinear product rule.** If $f : U \\to Y$ and $g : U \\to Z$ are\n   Fréchet differentiable at $x$, and $B : Y \\times Z \\to W$ is bounded\n   bilinear, then $U \\ni u \\mapsto B(f(u),g(u))$ is Fréchet differentiable at\n   $x$ and\n\n$$D\\bigl(B(f,g)\\bigr)(x)h = B\\bigl(Df(x)h,\\ g(x)\\bigr) + B\\bigl(f(x),\\ Dg(x)h\\bigr) \\qquad (h \\in X).$$\n\n3. **Chain rule.** If $f : U \\to Y$ is Fréchet differentiable at $x$, if\n   $W_0 \\subseteq Y$ is an open set with $f[U] \\subseteq W_0$, and if\n   $g : W_0 \\to Z$ is Fréchet differentiable at $f(x)$, then\n   $g \\circ f$ is Fréchet differentiable at $x$ and\n   $$D(g \\circ f)(x) = Dg\\bigl(f(x)\\bigr)\\,Df(x).$$\n\nNo continuity of any derivative map is assumed; these are pointwise statements\nabout one $x$ at a time.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-one-step-ode-method-local-defect-order-and-stability",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, and consider a first-order IVP and solution in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. A **one-step method** is a family of maps $\\Psi_h(t,v)$, defined for admitted times $t$, positive step sizes $h$, and states $v$, whose value is the method's approximation at time $t+h$ from the single input state $v$ at time $t$. It does not use earlier numerical states.\n\nIf $y$ is an exact solution on an interval containing $[t,t+h]$, the **local defect** is\n\n$$\\delta_h(t;y):=\\Psi_h(t,y(t))-y(t+h).$$\n\nLet $K\\subseteq D$ be a fixed compact time-state set. The method has **uniform local order $p$ on $K$ along $y$** if there are constants $C\\ge0$ and $h_0>0$, independent of the admitted starting time $t$ and step $0<h\\le h_0$, such that\n\n$$\\|\\delta_h(t;y)\\|_2\\le C h^{p+1}$$\n\nwhenever the exact solution graph on $[t,t+h]$ and the associated method time-state inputs, stages, and outputs under consideration lie in $K$. Here $p$ is a positive integer and $\\|\\cdot\\|_2$ is the Euclidean norm of [[def-euclidean-inner-product]].\n\nThe method has **one-step Lipschitz stability on $K$** with constant $L\\ge0$ if\n\n$$\\|\\Psi_h(t,u)-\\Psi_h(t,v)\\|_2\\le(1+Lh)\\|u-v\\|_2$$\n\nfor every admitted step size $h$, admitted time $t$, and input states $u,v$ with $(t,u),(t,v)\\in K$. This is a bound on the change in one step; it is separate from absolute or linear stability regions and does not itself assert a global error estimate.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each column $j$, $B_{jj}=-\\sum_{i\\ne j}a_{ij}\\le0$, $B_{ij}=a_{ij}\\ge0$ off the diagonal, and $\\sum_iB_{ij}=0$. Therefore $M:=I-hB(y^n)$ has $M_{jj}=1+h\\sum_{i\\ne j}a_{ij}(y^n)>0$, $M_{ij}=-ha_{ij}(y^n)\\le0$ for $i\\ne j$, and $M_{jj}-\\sum_{i\\ne j}|M_{ij}|=1$. By [F4], $M^{-1}\\ge0$; hence the unique solution $y^{n+1}=M^{-1}y^n$ exists and is nonnegative, including for zero coordinates in $y^n$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The column sums of $M$ equal one, so $\\sum_i y_i^n=\\sum_i(My^{n+1})_i=\\sum_j(\\sum_iM_{ij})y_j^{n+1}=\\sum_jy_j^{n+1}$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The factorization [F2] gives $B(y)y=F(y)$ for every $y\\in K$: its $i$-th component is $\\sum_{j\\ne i}a_{ij}(y)y_j-y_i\\sum_{j\\ne i}a_{ji}(y)=\\sum_{j\\ne i}(p_{ij}(y)-d_{ij}(y))$. The matrix identity used in step 1.1 also gives $(I-hB(y))^{-1}=I+hB(y)+h^2B(y)^2(I-hB(y))^{-1}$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The factors are $C^2$ on $U$, so the coordinate products $y_j a_{ij}(y)$ and $y_i a_{ji}(y)$ have continuous partial derivatives through order two by applying the bounded-bilinear product rule [F7] twice. Applying the continuous-partials theorem [F6] to these components and their first partials shows that $\\widetilde F$ is $C^2$ and has continuous first total derivative on $U$. On the compact set $[0,h_0]\\times K$ of admissible nonnegative starting states, $B$ is bounded and $I-hB(y^n)$ is invertible by step 1.1 for $h>0$ and equals $I$ at $h=0$. Its inverse is continuous there, hence uniformly bounded for sufficiently small $h$. The matrix identity from step 2.2 then yields $y^{n+1}=y^n+hF(y^n)+O(h^2)$ uniformly, without dividing by any coordinate of $y^n$. On the nonnegative exact path, the PDS field equals the $C^2$ extension $\\widetilde F$ defined in the Statement, so [F5]–[F7] give $y'=\\widetilde F(y)$ and bounded $y''=D\\widetilde F(y)\\widetilde F(y)$ on $K_*$. Applying [F8] to the time curve gives the same expansion uniformly. Their difference is therefore $O(h^2)$ uniformly, which is the local-defect bound specified by [F9].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 permits empty off-diagonal sums, giving M=I at m=1; step 2.1 retains the column-sum mass identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1 proves M^-1>=0 with zero starting coordinates allowed, and step 3.1 expands without dividing by any coordinate of y^n."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At m=1 proof step 1.1 has B=0 and M=I, so the scalar update and the first-order local expansion remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For zero transfer factors, proof steps 1.1 and2.2 give B=0 and identity update; the C2 extension in step 3.1 is the zero vector field."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement imposes h>0 and takes a local h down to0 limit; proof step 3.1 explicitly extends the inverse continuously to h=0 with value I. It asserts no terminal-time global error."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.1 uses the unique nonnegative inverse solve; the compact C2 bounds in step 3.1 do not select independent solution branches."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The zero-compatible positivity and local-defect theorem is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The zero-compatible positivity and local-defect theorem does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The main proof obligation is whether the stated hypotheses cover each use of the finite formulas; this is recorded in the Statement and Facts & Assumptions for thm-zero-compatible-modified-patankar-euler-admissibility."
+      },
+      "unresolved_suppliers": [
+        "def-one-step-ode-method-local-defect-order-and-stability"
+      ]
+    },
+    "thm-mprk22-1-positive-conservative": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-conservative-production-destruction-system",
+          "source_section": "Definition",
+          "quote": "Fix an integer $m\\ge1$ and a domain $\\Omega\\subseteq\\mathbb R^m$; its admissible nonnegative states are $\\Omega_+:=\\Omega\\cap[0,\\infty)^m$. For every ordered pair $i,j\\in\\{1,\\ldots,m\\}$ let $p_{ij},d_{ij}:\\Omega\\to\\mathbb R$ be production and destruction transfer rates that are nonnegative on $\\Omega_+$. A **finite conservative production destruction system** (finite conservative PDS) is the autonomous ODE\n\n$$y_i'=F_i(y):=\\sum_{j=1}^m\\bigl(p_{ij}(y)-d_{ij}(y)\\bigr),\\qquad i=1,\\ldots,m,$$\n\nwith internal-transfer identities\n\n$$p_{ij}(y)=d_{ji}(y),\\qquad p_{ii}(y)=d_{ii}(y)=0.$$\n\nThe index $j$ is the donor/source of $p_{ij}$ and the index $i$ is its recipient/destination; $d_{ji}$ is the same transfer viewed as destruction from $j$. The total mass is $M(y):=\\sum_{i=1}^m y_i$. The ODE is considered at states in $\\Omega_+$. The definition describes a closed system: external sources and sinks must be specified separately and are not included in the conservation claims on this page. No existence, positivity, or regularity assertion about solutions is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-mprk22-1",
+          "source_section": "Definition",
+          "quote": "Let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] with state domain $\\Omega$. Given $y^n\\in\\mathbb R^m$ and $h$, if $y^n\\notin\\Omega_+$, any coordinate of $y^n$ is nonpositive, or $h\\le0$, return an inadmissible-input status before evaluating rates or solving a system. First compute the stage $z$ by invoking [[alg-modified-patankar-euler]] with denominators $\\sigma_i=y_i^n$:\n\n$$z_i=y_i^n+h\\sum_{j\\ne i}\\left(p_{ij}(y^n)\\frac{z_j}{y_j^n}-d_{ij}(y^n)\\frac{z_i}{y_i^n}\\right).$$\n\nIf the stage solve does not return a unique vector, return stage-failure. If its output $z\\notin\\Omega_+$, return rate-domain-failure before evaluating rates at $z$. Otherwise form $B(y^n,z)$ with, for $i\\ne j$,\n\n$$B_{ij}(y^n,z):=\\frac{p_{ij}(y^n)+p_{ij}(z)}{2z_j},\\qquad B_{jj}(y^n,z):=-\\sum_{i\\ne j}B_{ij}(y^n,z),$$\n\nand solve\n\n$$\\bigl(I-hB(y^n,z)\\bigr)y^{n+1}=y^n.$$\n\nEquivalently,\n\n$$y_i^{n+1}=y_i^n+\\frac h2\\sum_{j\\ne i}\\left((p_{ij}(y^n)+p_{ij}(z))\\frac{y_j^{n+1}}{z_j}-(d_{ij}(y^n)+d_{ij}(z))\\frac{y_i^{n+1}}{z_i}\\right).$$\n\nIf the final solve is not uniquely solvable, return update-failure; otherwise return its unique solution $y^{n+1}$. The stage solve is uniquely solvable and its output is positive under the finite conservative PDS and positive-input hypotheses; when the rate-domain check passes, [[lem-strict-column-dominance-implies-nonnegative-inverse]] also guarantees a unique final solve. No zero-stage or denominator-regularized second-order variant is defined here.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-strict-column-dominance-implies-nonnegative-inverse",
+          "source_section": "Statement",
+          "quote": "Let $M=(m_{ij})\\in\\mathbb R^{m\\times m}$ for a finite $m\\ge1$. Suppose $m_{jj}>0$, $m_{ij}\\le0$ for $i\\ne j$, and\n\n$$m_{jj}>\\sum_{i\\ne j}|m_{ij}|\\qquad(j=1,\\ldots,m).$$\n\nThen $M$ is invertible and every entry of $M^{-1}$ is nonnegative. If $b\\in\\mathbb R^m$ has nonnegative coordinates, then $M^{-1}b\\ge0$; if every coordinate of $b$ is positive, then every coordinate of $M^{-1}b$ is positive.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the stage, $M^{(1)}:=I-hA(y^n)$ has off-diagonal entries $-hp_{ij}(y^n)/y_j^n\\le0$ and diagonal entries $1+h\\sum_{i\\ne j}p_{ij}(y^n)/y_j^n>0$ in column $j$. The sum of the absolute off-diagonal entries in that column is $h\\sum_{i\\ne j}p_{ij}(y^n)/y_j^n$, so its strict column-dominance margin is $1$. By [F3], $z=(M^{(1)})^{-1}y^n>0$. Also $\\sum_i M^{(1)}_{ij}=1$ for every column, hence $\\sum_i z_i=\\sum_i y_i^n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $z>0$, every denominator in $B(y^n,z)$ is positive. Its off-diagonal entries are nonnegative, its diagonal entries are nonpositive, and its columns sum to zero by [F2]. Thus $M^{(2)}:=I-hB(y^n,z)$ has positive diagonal, nonpositive off-diagonal entries, and column diagonal-dominance margin $1$. Applying [F3] to $M^{(2)}$ gives a unique $y^{n+1}=(M^{(2)})^{-1}y^n>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every column of $M^{(2)}$ sums to one, so $\\sum_i y_i^{n+1}=\\sum_i(M^{(2)}y^{n+1})_i=\\sum_i y_i^n$. Together with step 1.1, this proves all stated positivity and conservation equalities.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and2.1 allow empty off-diagonal columns, each dominance margin staying1; both scalar systems then equal I."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement requires strictly positive y^n; proof step 1.1 proves z>0 before step 2.1 divides by z_j, so no zero-stage extension is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At m=1 both systems in proof steps 1.1 and2.1 are scalar identities and step 3.1 preserves the single mass."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "With zero rates, the two dominance arguments yield identity stage and final solve; this remains within the required positive-input domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The preservation Statement fixes one h>0 stage/update pair; there is no varying time interval or terminal evaluation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–2.1 obtain both outputs by unique finite inverse solves, and step 3.1 uses finite column sums; no arbitrary branch is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The MPRK22(1) preservation implication is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The MPRK22(1) preservation implication does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The main proof obligation is whether the stated hypotheses cover each use of the finite formulas; this is recorded in the Statement and Facts & Assumptions for thm-mprk22-1-positive-conservative."
+      }
+    },
+    "lem-mprk22-1-positive-tube-local-error-and-stability": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-conservative-production-destruction-system",
+          "source_section": "Definition",
+          "quote": "Fix an integer $m\\ge1$ and a domain $\\Omega\\subseteq\\mathbb R^m$; its admissible nonnegative states are $\\Omega_+:=\\Omega\\cap[0,\\infty)^m$. For every ordered pair $i,j\\in\\{1,\\ldots,m\\}$ let $p_{ij},d_{ij}:\\Omega\\to\\mathbb R$ be production and destruction transfer rates that are nonnegative on $\\Omega_+$. A **finite conservative production destruction system** (finite conservative PDS) is the autonomous ODE\n\n$$y_i'=F_i(y):=\\sum_{j=1}^m\\bigl(p_{ij}(y)-d_{ij}(y)\\bigr),\\qquad i=1,\\ldots,m,$$\n\nwith internal-transfer identities\n\n$$p_{ij}(y)=d_{ji}(y),\\qquad p_{ii}(y)=d_{ii}(y)=0.$$\n\nThe index $j$ is the donor/source of $p_{ij}$ and the index $i$ is its recipient/destination; $d_{ji}$ is the same transfer viewed as destruction from $j$. The total mass is $M(y):=\\sum_{i=1}^m y_i$. The ODE is considered at states in $\\Omega_+$. The definition describes a closed system: external sources and sinks must be specified separately and are not included in the conservation claims on this page. No existence, positivity, or regularity assertion about solutions is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-modified-patankar-euler",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] with state domain $\\Omega$, and take an input state $y^n\\in\\mathbb R^m$, a step size $h$, and declared denominators $\\sigma_i$. If $y^n\\notin\\Omega_+$, $h\\le0$, or any $\\sigma_i\\le0$, return an inadmissible-input status before evaluating any rate. Otherwise the **modified Patankar Euler step** returns the unique solution $y^{n+1}$ of\n\n$$y_i^{n+1}=y_i^n+h\\sum_{j\\ne i}\\left(p_{ij}(y^n)\\frac{y_j^{n+1}}{\\sigma_j}-d_{ij}(y^n)\\frac{y_i^{n+1}}{\\sigma_i}\\right),\\qquad i=1,\\ldots,m.$$\n\nEquivalently, form $M\\in\\mathbb R^{m\\times m}$ by\n\n$$M_{ii}=1+h\\sum_{j\\ne i}\\frac{d_{ij}(y^n)}{\\sigma_i},\\qquad M_{ij}=-h\\frac{p_{ij}(y^n)}{\\sigma_j}\\quad(i\\ne j),$$\n\nand solve $My^{n+1}=y^n$. The rates in the solve are evaluated only at the admissible state $y^n\\in\\Omega_+$. For every input passing the branch, return the unique exact solution of the stated linear system. The standard first-order choice is $\\sigma_i=y_i^n$, which is admissible only when every $y_i^n>0$. A separately defined rate-factor form extends a first-order step to zero donor coordinates under an additional source-factorization hypothesis.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-mprk22-1",
+          "source_section": "Definition",
+          "quote": "Let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] with state domain $\\Omega$. Given $y^n\\in\\mathbb R^m$ and $h$, if $y^n\\notin\\Omega_+$, any coordinate of $y^n$ is nonpositive, or $h\\le0$, return an inadmissible-input status before evaluating rates or solving a system. First compute the stage $z$ by invoking [[alg-modified-patankar-euler]] with denominators $\\sigma_i=y_i^n$:\n\n$$z_i=y_i^n+h\\sum_{j\\ne i}\\left(p_{ij}(y^n)\\frac{z_j}{y_j^n}-d_{ij}(y^n)\\frac{z_i}{y_i^n}\\right).$$\n\nIf the stage solve does not return a unique vector, return stage-failure. If its output $z\\notin\\Omega_+$, return rate-domain-failure before evaluating rates at $z$. Otherwise form $B(y^n,z)$ with, for $i\\ne j$,\n\n$$B_{ij}(y^n,z):=\\frac{p_{ij}(y^n)+p_{ij}(z)}{2z_j},\\qquad B_{jj}(y^n,z):=-\\sum_{i\\ne j}B_{ij}(y^n,z),$$\n\nand solve\n\n$$\\bigl(I-hB(y^n,z)\\bigr)y^{n+1}=y^n.$$\n\nEquivalently,\n\n$$y_i^{n+1}=y_i^n+\\frac h2\\sum_{j\\ne i}\\left((p_{ij}(y^n)+p_{ij}(z))\\frac{y_j^{n+1}}{z_j}-(d_{ij}(y^n)+d_{ij}(z))\\frac{y_i^{n+1}}{z_i}\\right).$$\n\nIf the final solve is not uniquely solvable, return update-failure; otherwise return its unique solution $y^{n+1}$. The stage solve is uniquely solvable and its output is positive under the finite conservative PDS and positive-input hypotheses; when the rate-domain check passes, [[lem-strict-column-dominance-implies-nonnegative-inverse]] also guarantees a unique final solve. No zero-stage or denominator-regularized second-order variant is defined here.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-strict-column-dominance-implies-nonnegative-inverse",
+          "source_section": "Statement",
+          "quote": "Let $M=(m_{ij})\\in\\mathbb R^{m\\times m}$ for a finite $m\\ge1$. Suppose $m_{jj}>0$, $m_{ij}\\le0$ for $i\\ne j$, and\n\n$$m_{jj}>\\sum_{i\\ne j}|m_{ij}|\\qquad(j=1,\\ldots,m).$$\n\nThen $M$ is invertible and every entry of $M^{-1}$ is nonnegative. If $b\\in\\mathbb R^m$ has nonnegative coordinates, then $M^{-1}b\\ge0$; if every coordinate of $b$ is positive, then every coordinate of $M^{-1}b$ is positive.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put\n\n$$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$\n\nHere $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of [[def-nat-finite-sum-and-product]], and $n!$ is the factorial of [[def-factorial-and-falling-factorial]]. By contrast, $h^\\alpha$ is the finite product in $\\mathbb R$ of [[def-finite-sum]], with the natural exponents interpreted by [[def-integer-power]]. For the zero multi-index $0$, set $D^0f:=f$. For nonzero $\\alpha$, write\n\n$$D^\\alpha f:=\\partial_0^{\\alpha_0}\\cdots\\partial_{m-1}^{\\alpha_{m-1}}f$$\n\nfor this displayed, canonical order whenever it exists. Coordinate partial derivatives have the meaning fixed in [[def-directional-and-partial-derivatives]].\n\nFor $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$. Thus this definition does **not** presuppose that differently ordered derivatives are equal. Equality of their values is a later theorem under these regularity hypotheses.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U \\subseteq X$ be open in a real Banach space $X$, and let $Y$, $Z$, $W$ be\nreal Banach spaces. Then:\n\n1. **Sum rule.** If $f_1, f_2 : U \\to Y$ are Fréchet differentiable at $x \\in U$\n   and $a, b \\in \\mathbb R$, then $af_1+bf_2$ is Fréchet differentiable at $x$\n   with $D(af_1+bf_2)(x) = a\\,Df_1(x) + b\\,Df_2(x)$.\n2. **Bounded-bilinear product rule.** If $f : U \\to Y$ and $g : U \\to Z$ are\n   Fréchet differentiable at $x$, and $B : Y \\times Z \\to W$ is bounded\n   bilinear, then $U \\ni u \\mapsto B(f(u),g(u))$ is Fréchet differentiable at\n   $x$ and\n\n$$D\\bigl(B(f,g)\\bigr)(x)h = B\\bigl(Df(x)h,\\ g(x)\\bigr) + B\\bigl(f(x),\\ Dg(x)h\\bigr) \\qquad (h \\in X).$$\n\n3. **Chain rule.** If $f : U \\to Y$ is Fréchet differentiable at $x$, if\n   $W_0 \\subseteq Y$ is an open set with $f[U] \\subseteq W_0$, and if\n   $g : W_0 \\to Z$ is Fréchet differentiable at $f(x)$, then\n   $g \\circ f$ is Fréchet differentiable at $x$ and\n   $$D(g \\circ f)(x) = Dg\\bigl(f(x)\\bigr)\\,Df(x).$$\n\nNo continuity of any derivative map is assumed; these are pointwise statements\nabout one $x$ at a time.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-taylor-lagrange-and-cauchy-remainders",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-taylor-schlomilch-roche-remainder]], there are points $\\xi_L,\\xi_C$ between $a$ and $x$ such that\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_L)}{\\iota((n+1)!)}(x-a)^{n+1}$$\nand\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_C)}{\\iota(n!)}(x-\\xi_C)^n(x-a).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-one-step-ode-method-local-defect-order-and-stability",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, and consider a first-order IVP and solution in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. A **one-step method** is a family of maps $\\Psi_h(t,v)$, defined for admitted times $t$, positive step sizes $h$, and states $v$, whose value is the method's approximation at time $t+h$ from the single input state $v$ at time $t$. It does not use earlier numerical states.\n\nIf $y$ is an exact solution on an interval containing $[t,t+h]$, the **local defect** is\n\n$$\\delta_h(t;y):=\\Psi_h(t,y(t))-y(t+h).$$\n\nLet $K\\subseteq D$ be a fixed compact time-state set. The method has **uniform local order $p$ on $K$ along $y$** if there are constants $C\\ge0$ and $h_0>0$, independent of the admitted starting time $t$ and step $0<h\\le h_0$, such that\n\n$$\\|\\delta_h(t;y)\\|_2\\le C h^{p+1}$$\n\nwhenever the exact solution graph on $[t,t+h]$ and the associated method time-state inputs, stages, and outputs under consideration lie in $K$. Here $p$ is a positive integer and $\\|\\cdot\\|_2$ is the Euclidean norm of [[def-euclidean-inner-product]].\n\nThe method has **one-step Lipschitz stability on $K$** with constant $L\\ge0$ if\n\n$$\\|\\Psi_h(t,u)-\\Psi_h(t,v)\\|_2\\le(1+Lh)\\|u-v\\|_2$$\n\nfor every admitted step size $h$, admitted time $t$, and input states $u,v$ with $(t,u),(t,v)\\in K$. This is a bound on the change in one step; it is separate from absolute or linear stability regions and does not itself assert a global error estimate.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-induced-matrix-p-norm",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is\n\n$$\\lVert A\\rVert_{p}\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_{p}\\;:\\;x\\in\\mathbb{R}^{n},\\ \\lVert x\\rVert_{p}\\le 1\\,\\Bigr\\}.$$\n\nWhen $n\\ge1$, the following three displayed quantities are the same number:\n\n$$\\lVert A\\rVert_p=\\sup_{\\lVert x\\rVert_p\\le 1}\\lVert Ax\\rVert_p=\\sup_{\\lVert x\\rVert_p=1}\\lVert Ax\\rVert_p=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_p}{\\lVert x\\rVert_p},$$\n\nthe equalities following from positive homogeneity of $\\lVert\\cdot\\rVert_p$\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]], axiom (N2)) and\nthe equality $\\lVert 0\\rVert_p=0$.\n\n**The value is a finite nonnegative real.** For $n\\ge 1$ the norms\n$\\lVert\\cdot\\rVert_p$ and $\\lVert\\cdot\\rVert_2$ are equivalent by\n[[thm-all-norms-on-rn-are-equivalent]], so there is $C>0$ with\n$\\lVert x\\rVert_\\infty\\le C\\lVert x\\rVert_p$ for every $x$. For every $i<m$,\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty\\le C\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_p$,\nso $\\lVert Ax\\rVert_p\\le \\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C\\lVert x\\rVert_p$;\nhence the supremum over the unit ball is at most the finite constant\n$\\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C$.\n\n**The induced infinity norm is a separate named case.** When $m,n\\ge1$, define\n\n$$\\lVert A\\rVert_\\infty\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_\\infty\\;:\\;x\\in\\mathbb R^n,\\ \\lVert x\\rVert_\\infty\\le 1\\,\\Bigr\\}.$$\n\nAs in the rational-$p$ case, positive homogeneity gives\n\n$$\\lVert A\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty\\le 1}\\lVert Ax\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty=1}\\lVert Ax\\rVert_\\infty=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_\\infty}{\\lVert x\\rVert_\\infty}.$$\n\nThe supremum is finite because for every $i<m$ one has\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty$,\nso\n\n$$\\lVert Ax\\rVert_\\infty\\le\\max_{i<m}\\sum_{j<n}|a_{ij}|\\,\\lVert x\\rVert_\\infty.$$\n\n**At $n=0$ the convention is explicit.** The only element of $\\mathbb{R}^{0}$\nis the zero vector, the only matrix $A\\in M_{m\\times 0}(\\mathbb{R})$ is the\nempty matrix, and the unit-ball definition gives $\\lVert A\\rVert_{p}=0$.\nThe unit sphere and the set of nonzero vectors are empty, so the two ratio\nformulas above are not asserted in this case.\n\nThe induced quantity is a norm on the matrix space $M_{m\\times n}(\\mathbb{R})$:\nfor each rational $p\\ge1$, and likewise for the separately named\n$\\infty$-case when $m,n\\ge1$, separation, absolute homogeneity and the triangle\ninequality follow from the same three axioms of the underlying vector norm\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]]) through the\ndefining supremum. The compatibility with matrix-vector multiplication, the\nsubmultiplicativity and the value on identity matrices are\n[[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]];\nthe explicit value at $p=1$ and the separate $\\infty$-formula are\n[[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb{Q}$ with $p\\ge 1$ and let $m,n,q\\in\\mathbb{N}$, with the\ninduced $p$-norms of [[def-induced-matrix-p-norm]].\n\n1. **Compatibility.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and every\n   $x\\in\\mathbb{R}^{n}$,\n   $$\\lVert Ax\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert x\\rVert_p.$$\n2. **Submultiplicativity.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and\n   $B\\in M_{n\\times q}(\\mathbb{R})$,\n   $$\\lVert AB\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert B\\rVert_p.$$\n3. **Normalisation.** For every $n\\ge 1$,\n   $$\\lVert I_n\\rVert_p=1,$$\n   where $I_n$ is the identity matrix of [[def-matrix-product-and-identity-matrix]];\n   at $n=0$ the unique empty matrix $I_0\\in M_0(\\mathbb{R})$ has\n   $\\lVert I_0\\rVert_p=0$, the convention of [[def-induced-matrix-p-norm]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then\n\n$$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $A(y)$ as in [F2]. On $U$, the coordinate reciprocals $y_j^{-1}$ have continuous partials $\\partial_k(y_j^{-1})=-\\delta_{jk}y_j^{-2}$ and $\\partial_\\ell\\partial_k(y_j^{-1})=2\\delta_{jk}\\delta_{\\ell j}y_j^{-3}$, as follows from the scalar reciprocal difference quotients on $\\mathbb R\\setminus\\{0\\}$; the product rule [F7] then makes every entry of $A$ $C^2$ from the rate data [F6]. By the continuous-partials theorem [F6], these entries have continuous total derivatives through order two. Direct multiplication gives $A(y)y=F(y)$. The matrix $I-hA(y)$ is invertible for $h>0$ by [F4] and equals $I$ at $h=0$; its determinant and cofactors are $C^2$ finite sums of products, and its determinant is nonzero, so the adjugate formula and the scalar reciprocal calculation make its inverse $C^2$ on the compact set of admitted $(h,y)$. It is uniformly bounded there for small $h$. Since $y>0$, [F4] gives $z=(I-hA(y))^{-1}y>0$. The identity $(I-hA)^{-1}=I+hA+h^2A^2(I-hA)^{-1}$ now gives $z=y+hF(y)+O(h^2)$ uniformly; in particular $z-y=O(h)$, so after decreasing $h_0$ we have $z\\in V\\subset\\Omega$ uniformly for $y\\in U$. Thus all stage denominators and the final rate evaluations are valid.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $B=B(y,z)$ for the final coefficient matrix in [F3]. Its entries are $C^2$ on the compact region of pairs produced inside $V$ by step 1.1: the rates are $C^2$, the stage map is $C^2$, and each reciprocal $z_j^{-1}$ has the same coordinate derivative formulas as in step 1.1. Its columns sum to zero, and direct multiplication using $p_{ij}=d_{ji}$ gives $B(y,z)z=\\tfrac12(F(y)+F(z))$. For small $h$, step 1.1 keeps every $z_j$ bounded away from zero, so $B$ and its first derivatives are uniformly bounded. Also $B(y,y)=A(y)$; the mean-value theorem on the compact tube and $z-y=O(h)$ give $B(y,z)=A(y)+O(h)$. The final matrix $I-hB$ is invertible by [F4] and its inverse is uniformly bounded by the adjugate formula. Expanding its inverse yields $\\Psi_h(y)=y+hB(y,z)y+O(h^2)=y+hF(y)+O(h^2)$. Comparing with step 1.1 gives $\\Psi_h(y)-z=O(h^2)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The stage and final maps are $C^1$ in $y$ near the compact positive tube: their rates are $C^2$, their denominators stay bounded away from zero, and their matrix inverses are $C^2$ by the adjugate formula and the reciprocal calculation in steps 1.1–2.1. For any direction $v$, differentiating $z=y+hA(y)z$ gives $(I-hA)D_yz[v]=v+h(DA(y)[v])z$; boundedness from step 1.1 therefore gives $D_yz[v]=v+O(h)$ uniformly for $\\|v\\|_2\\le1$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Using $\\Psi_h-y=hB\\Psi_h$, substitute $z$ and use step 2.1 to obtain $\\Psi_h-y=hBz+hB(\\Psi_h-z)=\\tfrac h2(F(y)+F(z))+O(h^3)$. Taylor expansion of $F$ at $y$, together with $z-y=hF(y)+O(h^2)$ from step 1.1, gives $F(z)=F(y)+hDF(y)F(y)+O(h^2)$. Thus $\\Psi_h(y)=y+hF(y)+\\tfrac{h^2}{2}DF(y)F(y)+O(h^3)$. By [F5]–[F7], the exact solution has the same expansion: $y''=DF(y)F(y)$ and its third derivative is bounded, so the one-variable Taylor remainder applied coordinatewise is $O(h^3)$. Their difference is the asserted uniform exact-start defect in [F9].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Differentiating $\\Psi_h=y+hB(y,z)\\Psi_h$ in direction $v$ gives $D_y\\Psi_h[v]=(I-hB(y,z))^{-1}(v+h(D_1B(y,z)[v]+D_2B(y,z)[D_yz[v]])\\Psi_h)$, with the inverse defined by step 2.1.",
+          "step": "3.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1–2.2 give $z=y+O(h)$, $\\Psi_h=y+O(h)$, $B(y,z)=A(y)+O(h)$, and $(I-hB)^{-1}=I+hB+O(h^2)$ uniformly. Substitution yields $D_y\\Psi_h[v]=v+h(A(y)v+(D_1B(y,y)[v]+D_2B(y,y)[v])y)+o(h)$. Differentiating $B(y,y)y=F(y)$ with the chain and product rules identifies the coefficient as $DF(y)v$; compactness makes the remainder uniform, so $D_y\\Psi_h(y)=I+hDF(y)+hE(h,y)$ with $\\sup_{y\\in U}\\|E(h,y)\\|_2\\to0$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Compactness bounds $\\|DF(y)\\|_2$ uniformly, and step 4.1 makes the $E$ contribution at most $h$ for sufficiently small $h$. The norm properties in [F10] then give $\\|D_y\\Psi_h(y)\\|_2\\le1+Lh$ after decreasing $h_0$ and increasing $L$. Applying [F11] on convex $U$ proves $\\|\\Psi_h(u)-\\Psi_h(v)\\|_2\\le(1+Lh)\\|u-v\\|_2$.",
+          "step": "5.1",
+          "inputs": [
+            "F10",
+            "F11",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 includes m=1 with no off-diagonal rates; A=0 and z=y, and steps 2.1 and3.1 give the identity final map."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement requires a compact strictly positive tube. Proof steps 1.1 and2.1 explicitly bound y_j and z_j away from zero before reciprocal derivatives, so boundary donors are excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The m=1 identity systems in proof steps 1.1 and2.1 satisfy the local expansion in step 3.1 and the derivative bound in step 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The stated U,V compact positive-tube assumptions exclude collapse onto a zero-stage denominator; the order estimate is not uniform as that separation vanishes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement restricts to sufficiently small positive h; proof step 5.1 may decrease h_0 and obtains the bound throughout the retained range. No independent temporal endpoint value is prescribed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and2.1 construct the uniquely invertible stage and final matrices; their differentiability is proved from explicit cofactors and determinant reciprocals."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The MPRK22(1) local second-order and stability estimate is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The MPRK22(1) local second-order and stability estimate does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The load-bearing points are positive stage denominators, the averaged-rate identity B(y,z)z=(F(y)+F(z))/2, the O(h^3) cancellation, and the derivative expansion for one-step stability; these are explicit in steps 1.1-5.1."
+      },
+      "unresolved_suppliers": [
+        "def-one-step-ode-method-local-defect-order-and-stability"
+      ]
+    },
+    "thm-modified-patankar-euler-global-first-order-error": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-conservative-production-destruction-system",
+          "source_section": "Definition",
+          "quote": "Fix an integer $m\\ge1$ and a domain $\\Omega\\subseteq\\mathbb R^m$; its admissible nonnegative states are $\\Omega_+:=\\Omega\\cap[0,\\infty)^m$. For every ordered pair $i,j\\in\\{1,\\ldots,m\\}$ let $p_{ij},d_{ij}:\\Omega\\to\\mathbb R$ be production and destruction transfer rates that are nonnegative on $\\Omega_+$. A **finite conservative production destruction system** (finite conservative PDS) is the autonomous ODE\n\n$$y_i'=F_i(y):=\\sum_{j=1}^m\\bigl(p_{ij}(y)-d_{ij}(y)\\bigr),\\qquad i=1,\\ldots,m,$$\n\nwith internal-transfer identities\n\n$$p_{ij}(y)=d_{ji}(y),\\qquad p_{ii}(y)=d_{ii}(y)=0.$$\n\nThe index $j$ is the donor/source of $p_{ij}$ and the index $i$ is its recipient/destination; $d_{ji}$ is the same transfer viewed as destruction from $j$. The total mass is $M(y):=\\sum_{i=1}^m y_i$. The ODE is considered at states in $\\Omega_+$. The definition describes a closed system: external sources and sinks must be specified separately and are not included in the conservation claims on this page. No existence, positivity, or regularity assertion about solutions is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-modified-patankar-euler",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] with state domain $\\Omega$, and take an input state $y^n\\in\\mathbb R^m$, a step size $h$, and declared denominators $\\sigma_i$. If $y^n\\notin\\Omega_+$, $h\\le0$, or any $\\sigma_i\\le0$, return an inadmissible-input status before evaluating any rate. Otherwise the **modified Patankar Euler step** returns the unique solution $y^{n+1}$ of\n\n$$y_i^{n+1}=y_i^n+h\\sum_{j\\ne i}\\left(p_{ij}(y^n)\\frac{y_j^{n+1}}{\\sigma_j}-d_{ij}(y^n)\\frac{y_i^{n+1}}{\\sigma_i}\\right),\\qquad i=1,\\ldots,m.$$\n\nEquivalently, form $M\\in\\mathbb R^{m\\times m}$ by\n\n$$M_{ii}=1+h\\sum_{j\\ne i}\\frac{d_{ij}(y^n)}{\\sigma_i},\\qquad M_{ij}=-h\\frac{p_{ij}(y^n)}{\\sigma_j}\\quad(i\\ne j),$$\n\nand solve $My^{n+1}=y^n$. The rates in the solve are evaluated only at the admissible state $y^n\\in\\Omega_+$. For every input passing the branch, return the unique exact solution of the stated linear system. The standard first-order choice is $\\sigma_i=y_i^n$, which is admissible only when every $y_i^n>0$. A separately defined rate-factor form extends a first-order step to zero donor coordinates under an additional source-factorization hypothesis.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-modified-patankar-euler-positive-tube-local-error-and-stability",
+          "source_section": "Statement",
+          "quote": "Let $F$ be the vector field of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] on a bounded open convex set $U\\subset\\Omega\\cap\\mathbb R_{>0}^m$ with $\\overline U\\subset\\mathbb R_{>0}^m$. Suppose there is an open set $V$ with $\\overline U\\subset V\\subset\\Omega\\cap\\mathbb R_{>0}^m$ on which the transfer rates are multivariable $C^2$ and their derivatives through order two are bounded. For $y\\in U$, let $\\Phi_h(y)$ be [[alg-modified-patankar-euler]] with the standard denominators $\\sigma_i=y_i$. Then there are constants $C,L,h_0>0$ such that, for $0<h\\le h_0$:\n\n1. for every exact solution $y(t)$ whose segment and the method states under consideration remain in a compact subset of $U$, the exact-start local defect satisfies $\\|\\Phi_h(y(t))-y(t+h)\\|_2\\le Ch^2$; and\n2. for all $u,v\\in U$, $\\|\\Phi_h(u)-\\Phi_h(v)\\|_2\\le(1+Lh)\\|u-v\\|_2$.\n\nThe defect is the method output minus the exact next state and the second inequality is one-step Lipschitz stability in the convention of [[def-one-step-ode-method-local-defect-order-and-stability]]. This result is restricted to a compact positive tube; it does not define the standard ratio formula at zero compartments.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-global-error-from-one-step-defect-and-stability",
+          "source_section": "Statement",
+          "quote": "Let $d,N,p\\ge1$, $T>0$, $h=T/N$, and $t_n=nh$. Let $y:[0,T]\\to\\mathbb R^d$ solve an initial-value problem in an open time-state domain $D$. Use the Euclidean norm $\\|v\\|_2=(\\sum_{i=1}^d v_i^2)^{1/2}$ of [[def-euclidean-inner-product]], whose triangle inequality is proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]]. Let $\\mathcal T\\subset D$ be a common compact time-state tube with positive margin in $D$, and write $\\mathcal T_t:=\\{v\\in\\mathbb R^d:(t,v)\\in\\mathcal T\\}$. Suppose a one-step map $\\Psi_{h,n}$ is defined on $\\mathcal T_{t_n}$, produces $y_{n+1}=\\Psi_{h,n}(y_n)$, and the entire exact path, all numerical grid states, and every method stage lie in $\\mathcal T$. If constants $C,C_0,L\\ge0$, independent of $N$ and $n$, satisfy\n$$\\|y_0-y(0)\\|_2\\le C_0h^p,\\qquad \\|\\Psi_{h,n}(y(t_n))-y(t_{n+1})\\|_2\\le Ch^{p+1},$$\nand\n$$\\|\\Psi_{h,n}(u)-\\Psi_{h,n}(v)\\|_2\\le(1+Lh)\\|u-v\\|_2$$\nfor every $u,v\\in\\mathcal T_{t_n}$ and $0\\le n<N$, then, for $L>0$,\n$$\\max_{0\\le n\\le N}\\|y_n-y(t_n)\\|_2\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, for $L=0$,\n$$\\max_{0\\le n\\le N}\\|y_n-y(t_n)\\|_2\\le(C_0+CT)h^p.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The assumption $y_n\\in K\\subset(0,\\infty)^m$ makes every standard denominator $\\sigma_i=(y_n)_i$ positive, so [F3] is admissible at every step. By [F4] the local defect is bounded by $Ch^2$ and the one-step map has factor $1+Lh$, with constants independent of $n$ and $N$. The initial error is zero, and the tube hypothesis supplies the common-tube condition of [F5].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F5] with $p=1$ and $C_0=0$. If $L>0$, its bound is $C(\\exp(LT)-1)h/L$; if $L=0$, it is $CTh$. Both are $C_T h$ for a constant independent of $N$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 applies the local map on the finite conservative PDS, including m=1 where its transfer sums are empty and the map is the identity."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement assumes K in the strictly positive tube; proof step 1.1 uses positive sigma_i=(y_n)_i and starts the recurrence with zero initial error, not zero denominators."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1 with no transfers, the local method is the identity and the recurrence used in proof step 2.1 has zero defect; the scalar error bound remains meaningful."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Proof step 2.1 explicitly separates L>0 from L=0, assigning the latter coefficient CT rather than dividing by L."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes grid indices n=0 and n=N, and proof step 1.1 supplies the fixed-grid hypotheses for the global recurrence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–2.1 invoke a deterministic finite-grid recurrence for the given path and its unique exact solves; no independent trajectory selection is performed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The positive-tube global first-order estimate is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The positive-tube global first-order estimate does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The main proof obligation is whether the stated hypotheses cover each use of the finite formulas; this is recorded in the Statement and Facts & Assumptions for thm-modified-patankar-euler-global-first-order-error."
+      },
+      "unresolved_suppliers": [
+        "def-one-step-ode-method-local-defect-order-and-stability",
+        "thm-global-error-from-one-step-defect-and-stability"
+      ]
+    },
+    "thm-patankar-inexact-solve-residual-ledger": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-conservative-production-destruction-system",
+          "source_section": "Definition",
+          "quote": "Fix an integer $m\\ge1$ and a domain $\\Omega\\subseteq\\mathbb R^m$; its admissible nonnegative states are $\\Omega_+:=\\Omega\\cap[0,\\infty)^m$. For every ordered pair $i,j\\in\\{1,\\ldots,m\\}$ let $p_{ij},d_{ij}:\\Omega\\to\\mathbb R$ be production and destruction transfer rates that are nonnegative on $\\Omega_+$. A **finite conservative production destruction system** (finite conservative PDS) is the autonomous ODE\n\n$$y_i'=F_i(y):=\\sum_{j=1}^m\\bigl(p_{ij}(y)-d_{ij}(y)\\bigr),\\qquad i=1,\\ldots,m,$$\n\nwith internal-transfer identities\n\n$$p_{ij}(y)=d_{ji}(y),\\qquad p_{ii}(y)=d_{ii}(y)=0.$$\n\nThe index $j$ is the donor/source of $p_{ij}$ and the index $i$ is its recipient/destination; $d_{ji}$ is the same transfer viewed as destruction from $j$. The total mass is $M(y):=\\sum_{i=1}^m y_i$. The ODE is considered at states in $\\Omega_+$. The definition describes a closed system: external sources and sinks must be specified separately and are not included in the conservation claims on this page. No existence, positivity, or regularity assertion about solutions is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-modified-patankar-euler",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] with state domain $\\Omega$, and take an input state $y^n\\in\\mathbb R^m$, a step size $h$, and declared denominators $\\sigma_i$. If $y^n\\notin\\Omega_+$, $h\\le0$, or any $\\sigma_i\\le0$, return an inadmissible-input status before evaluating any rate. Otherwise the **modified Patankar Euler step** returns the unique solution $y^{n+1}$ of\n\n$$y_i^{n+1}=y_i^n+h\\sum_{j\\ne i}\\left(p_{ij}(y^n)\\frac{y_j^{n+1}}{\\sigma_j}-d_{ij}(y^n)\\frac{y_i^{n+1}}{\\sigma_i}\\right),\\qquad i=1,\\ldots,m.$$\n\nEquivalently, form $M\\in\\mathbb R^{m\\times m}$ by\n\n$$M_{ii}=1+h\\sum_{j\\ne i}\\frac{d_{ij}(y^n)}{\\sigma_i},\\qquad M_{ij}=-h\\frac{p_{ij}(y^n)}{\\sigma_j}\\quad(i\\ne j),$$\n\nand solve $My^{n+1}=y^n$. The rates in the solve are evaluated only at the admissible state $y^n\\in\\Omega_+$. For every input passing the branch, return the unique exact solution of the stated linear system. The standard first-order choice is $\\sigma_i=y_i^n$, which is admissible only when every $y_i^n>0$. A separately defined rate-factor form extends a first-order step to zero donor coordinates under an additional source-factorization hypothesis.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-mprk22-1",
+          "source_section": "Definition",
+          "quote": "Let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] with state domain $\\Omega$. Given $y^n\\in\\mathbb R^m$ and $h$, if $y^n\\notin\\Omega_+$, any coordinate of $y^n$ is nonpositive, or $h\\le0$, return an inadmissible-input status before evaluating rates or solving a system. First compute the stage $z$ by invoking [[alg-modified-patankar-euler]] with denominators $\\sigma_i=y_i^n$:\n\n$$z_i=y_i^n+h\\sum_{j\\ne i}\\left(p_{ij}(y^n)\\frac{z_j}{y_j^n}-d_{ij}(y^n)\\frac{z_i}{y_i^n}\\right).$$\n\nIf the stage solve does not return a unique vector, return stage-failure. If its output $z\\notin\\Omega_+$, return rate-domain-failure before evaluating rates at $z$. Otherwise form $B(y^n,z)$ with, for $i\\ne j$,\n\n$$B_{ij}(y^n,z):=\\frac{p_{ij}(y^n)+p_{ij}(z)}{2z_j},\\qquad B_{jj}(y^n,z):=-\\sum_{i\\ne j}B_{ij}(y^n,z),$$\n\nand solve\n\n$$\\bigl(I-hB(y^n,z)\\bigr)y^{n+1}=y^n.$$\n\nEquivalently,\n\n$$y_i^{n+1}=y_i^n+\\frac h2\\sum_{j\\ne i}\\left((p_{ij}(y^n)+p_{ij}(z))\\frac{y_j^{n+1}}{z_j}-(d_{ij}(y^n)+d_{ij}(z))\\frac{y_i^{n+1}}{z_i}\\right).$$\n\nIf the final solve is not uniquely solvable, return update-failure; otherwise return its unique solution $y^{n+1}$. The stage solve is uniquely solvable and its output is positive under the finite conservative PDS and positive-input hypotheses; when the rate-domain check passes, [[lem-strict-column-dominance-implies-nonnegative-inverse]] also guarantees a unique final solve. No zero-stage or denominator-regularized second-order variant is defined here.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-strict-column-dominance-implies-nonnegative-inverse",
+          "source_section": "Statement",
+          "quote": "Let $M=(m_{ij})\\in\\mathbb R^{m\\times m}$ for a finite $m\\ge1$. Suppose $m_{jj}>0$, $m_{ij}\\le0$ for $i\\ne j$, and\n\n$$m_{jj}>\\sum_{i\\ne j}|m_{ij}|\\qquad(j=1,\\ldots,m).$$\n\nThen $M$ is invertible and every entry of $M^{-1}$ is nonnegative. If $b\\in\\mathbb R^m$ has nonnegative coordinates, then $M^{-1}b\\ge0$; if every coordinate of $b$ is positive, then every coordinate of $M^{-1}b$ is positive.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-rounded-linear-and-normal-residual-certificates",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, $x\\in\\mathbb F^n$, $y\\in\\mathbb F^m$ have stored real or complex entries, with $m,n\\ge1$. Use the operationwise arithmetic model, successful sequential dot products, and $0<u<1$ with $(\\max(m,n)-1)u<1$. Define\n$$g_k=\\frac{1+6u}{1-(k-1)u}-1,\\qquad F=\\|A\\|_F,\\quad X=\\|x\\|_2,\\quad Y=\\|y\\|_2.$$\nFor $\\widehat v=\\operatorname{fl}(Ax)$ and $\\widehat w=\\operatorname{fl}(\\widehat v-y)$, put $V=g_nFX$ and $W=V+u(\\|\\widehat v\\|_2+Y)$. Then\n$$\\|\\widehat w-(Ax-y)\\|_2\\le W.$$\nFor a stored real $\\lambda>0$, also compute $\\widehat z=\\operatorname{fl}(A^*\\widehat w)$, $\\widehat l=\\operatorname{fl}(\\lambda x)$ and $\\widehat r=\\operatorname{fl}(\\widehat z+\\widehat l)$, rounding scalar multiplication componentwise. The exact intended normal residual $r=A^*(Ax-y)+\\lambda x$ satisfies\n$$\\|\\widehat r-r\\|_2\\le\\rho:=FW+g_mF\\|\\widehat w\\|_2+u\\lambda X+u(\\|\\widehat z\\|_2+\\|\\widehat l\\|_2).$$\nNorms in these certificates mean exact norms or certified upper bounds. Uncontrolled rounding of the certificate itself is not authorized. The linear bound applies columnwise to certify $\\|I-AB\\|_2\\le\\|I-AB\\|_F$ from stored basis-solve columns $B$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For modified Patankar Euler, column $j$ of $M$ has off-diagonal entries $-hp_{ij}(y^n)/\\sigma_j$ and diagonal $1+h\\sum_{k\\ne j}d_{jk}(y^n)/\\sigma_j$; for an MPRK final matrix the same form uses averaged rates and denominators $z_j$, and its stage is the first form with $\\sigma_j=y_j^n>0$. By [F1]–[F2], each such matrix has column sum one and strict column-dominance margin one, so [F3] gives $M^{-1}\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $r:=M\\widehat y-b$. By [F5] and the triangle inequality, $\\|r\\|_2\\le\\|\\widehat w\\|_2+\\|r-\\widehat w\\|_2\\le\\|\\widehat w\\|_2+W=\\rho$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Multiplying $\\mathbf1^TM=\\mathbf1^T$ on the right by $M^{-1}$ gives $\\mathbf1^TM^{-1}=\\mathbf1^T$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\mathbf1^TM=\\mathbf1^T$, $\\mathbf1^T\\widehat y-\\mathbf1^Tb=\\mathbf1^T(M\\widehat y-b)=\\mathbf1^Tr$; [F6] and step 1.2 give $|\\mathbf1^T\\widehat y-\\mathbf1^Tb|\\le\\sqrt m\\,\\rho$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "With $y^*=M^{-1}b$, we have $\\widehat y-y^*=M^{-1}r$ and, since $M^{-1}\\ge0$ and its columns sum to one, $\\|M^{-1}r\\|_1=\\sum_i|\\sum_j(M^{-1})_{ij}r_j|\\le\\sum_j(\\sum_i(M^{-1})_{ij})|r_j|=\\|r\\|_1\\le\\sqrt m\\,\\rho$ by [F6] and step 1.2.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each coordinate, $y_i^*\\ge\\widehat y_i-|\\widehat y_i-y_i^*|\\ge\\widehat y_i-\\|\\widehat y-y^*\\|_1$; step 2.2 therefore gives $y_i^*\\ge0$ whenever $\\widehat y_i\\ge\\sqrt m\\,\\rho$. A residual bound alone places no sign condition on $\\widehat y$, so it does not certify that the computed candidate is nonnegative.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 includes m=1 with empty off-diagonal transfer sums and column sum1, so the scalar inverse and residual ledger apply."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement permits b=0 and residual0. Proof steps 1.2,2.1 and2.2 give zero error allowances when rho=0; the margin condition in step 3.1 stays non-strict."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At m=1 the factor sqrt(m) in proof steps 2.1 and2.2 is1 and the same residual/inverse-column-sum estimate is scalar."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement fixes a successfully completed strictly dominated stored system; singular matrices and failed arithmetic are outside this certificate, not assigned an inverse."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This stored-system Statement has no time-grid endpoint or interval parameter to evaluate; the allowance concerns one given candidate and right-hand side."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and1.3 use the unique inverse of the supplied matrix and finite column sums; the certificate does not choose among exact-solution branches."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The stored Patankar residual ledger is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The stored Patankar residual ledger does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The certificate is only for the stored matrix and right-hand side under the residual supplier’s exact operation order, normal-intermediate, unit-roundoff, and norm-bound assumptions; assembly error is separately excluded."
+      },
+      "unresolved_suppliers": [
+        "lem-rounded-linear-and-normal-residual-certificates"
+      ]
+    },
+    "thm-mprk22-1-global-second-order-error": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-conservative-production-destruction-system",
+          "source_section": "Definition",
+          "quote": "Fix an integer $m\\ge1$ and a domain $\\Omega\\subseteq\\mathbb R^m$; its admissible nonnegative states are $\\Omega_+:=\\Omega\\cap[0,\\infty)^m$. For every ordered pair $i,j\\in\\{1,\\ldots,m\\}$ let $p_{ij},d_{ij}:\\Omega\\to\\mathbb R$ be production and destruction transfer rates that are nonnegative on $\\Omega_+$. A **finite conservative production destruction system** (finite conservative PDS) is the autonomous ODE\n\n$$y_i'=F_i(y):=\\sum_{j=1}^m\\bigl(p_{ij}(y)-d_{ij}(y)\\bigr),\\qquad i=1,\\ldots,m,$$\n\nwith internal-transfer identities\n\n$$p_{ij}(y)=d_{ji}(y),\\qquad p_{ii}(y)=d_{ii}(y)=0.$$\n\nThe index $j$ is the donor/source of $p_{ij}$ and the index $i$ is its recipient/destination; $d_{ji}$ is the same transfer viewed as destruction from $j$. The total mass is $M(y):=\\sum_{i=1}^m y_i$. The ODE is considered at states in $\\Omega_+$. The definition describes a closed system: external sources and sinks must be specified separately and are not included in the conservation claims on this page. No existence, positivity, or regularity assertion about solutions is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-mprk22-1",
+          "source_section": "Definition",
+          "quote": "Let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] with state domain $\\Omega$. Given $y^n\\in\\mathbb R^m$ and $h$, if $y^n\\notin\\Omega_+$, any coordinate of $y^n$ is nonpositive, or $h\\le0$, return an inadmissible-input status before evaluating rates or solving a system. First compute the stage $z$ by invoking [[alg-modified-patankar-euler]] with denominators $\\sigma_i=y_i^n$:\n\n$$z_i=y_i^n+h\\sum_{j\\ne i}\\left(p_{ij}(y^n)\\frac{z_j}{y_j^n}-d_{ij}(y^n)\\frac{z_i}{y_i^n}\\right).$$\n\nIf the stage solve does not return a unique vector, return stage-failure. If its output $z\\notin\\Omega_+$, return rate-domain-failure before evaluating rates at $z$. Otherwise form $B(y^n,z)$ with, for $i\\ne j$,\n\n$$B_{ij}(y^n,z):=\\frac{p_{ij}(y^n)+p_{ij}(z)}{2z_j},\\qquad B_{jj}(y^n,z):=-\\sum_{i\\ne j}B_{ij}(y^n,z),$$\n\nand solve\n\n$$\\bigl(I-hB(y^n,z)\\bigr)y^{n+1}=y^n.$$\n\nEquivalently,\n\n$$y_i^{n+1}=y_i^n+\\frac h2\\sum_{j\\ne i}\\left((p_{ij}(y^n)+p_{ij}(z))\\frac{y_j^{n+1}}{z_j}-(d_{ij}(y^n)+d_{ij}(z))\\frac{y_i^{n+1}}{z_i}\\right).$$\n\nIf the final solve is not uniquely solvable, return update-failure; otherwise return its unique solution $y^{n+1}$. The stage solve is uniquely solvable and its output is positive under the finite conservative PDS and positive-input hypotheses; when the rate-domain check passes, [[lem-strict-column-dominance-implies-nonnegative-inverse]] also guarantees a unique final solve. No zero-stage or denominator-regularized second-order variant is defined here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-mprk22-1-positive-conservative",
+          "source_section": "Statement",
+          "quote": "For every finite conservative PDS [[def-finite-conservative-production-destruction-system]] with domain $\\Omega$, every strictly positive input $y^n\\in\\Omega_+$, and every step size $h>0$, compute the Patankar Euler stage $z$. If $z\\in\\Omega_+$, the stage and output of [[alg-mprk22-1]] are uniquely defined, strictly positive, and conserve total mass:\n\n$$z>0,\\qquad y^{n+1}>0,\\qquad \\sum_i z_i=\\sum_i y_i^n=\\sum_i y_i^{n+1}.$$\n\nIf $z\\notin\\Omega_+$, the algorithm returns rate-domain-failure before its second rate evaluation and makes no output claim. These preservation properties do not use the smoothness or compact-tube assumptions needed for the separate second-order error theorem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-mprk22-1-positive-tube-local-error-and-stability",
+          "source_section": "Statement",
+          "quote": "Let $F$ be the vector field of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] on a bounded open convex set $U\\subset\\Omega\\cap\\mathbb R_{>0}^m$ with $\\overline U\\subset\\mathbb R_{>0}^m$. Assume there is an open set $V$ with $\\overline U\\subset V\\subset\\Omega\\cap\\mathbb R_{>0}^m$ on which the transfer rates are multivariable $C^2$, with derivatives through order two bounded there. Let $\\Psi_h(y)$ be [[alg-mprk22-1]]. For sufficiently small $h>0$, there are constants $C,L,h_0>0$ such that:\n\n1. for every exact solution segment in a compact subset of $U$, the exact-start defect satisfies $\\|\\Psi_h(y(t))-y(t+h)\\|_2\\le Ch^3$; and\n2. for all $u,v\\in U$, $\\|\\Psi_h(u)-\\Psi_h(v)\\|_2\\le(1+Lh)\\|u-v\\|_2$.\n\nThe local order-two estimate requires the positive lower bound on the stage denominators and the stated smoothness. Positivity and conservation for every $h>0$ are separate preservation properties and are not used to claim the local error order.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-global-error-from-one-step-defect-and-stability",
+          "source_section": "Statement",
+          "quote": "Let $d,N,p\\ge1$, $T>0$, $h=T/N$, and $t_n=nh$. Let $y:[0,T]\\to\\mathbb R^d$ solve an initial-value problem in an open time-state domain $D$. Use the Euclidean norm $\\|v\\|_2=(\\sum_{i=1}^d v_i^2)^{1/2}$ of [[def-euclidean-inner-product]], whose triangle inequality is proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]]. Let $\\mathcal T\\subset D$ be a common compact time-state tube with positive margin in $D$, and write $\\mathcal T_t:=\\{v\\in\\mathbb R^d:(t,v)\\in\\mathcal T\\}$. Suppose a one-step map $\\Psi_{h,n}$ is defined on $\\mathcal T_{t_n}$, produces $y_{n+1}=\\Psi_{h,n}(y_n)$, and the entire exact path, all numerical grid states, and every method stage lie in $\\mathcal T$. If constants $C,C_0,L\\ge0$, independent of $N$ and $n$, satisfy\n$$\\|y_0-y(0)\\|_2\\le C_0h^p,\\qquad \\|\\Psi_{h,n}(y(t_n))-y(t_{n+1})\\|_2\\le Ch^{p+1},$$\nand\n$$\\|\\Psi_{h,n}(u)-\\Psi_{h,n}(v)\\|_2\\le(1+Lh)\\|u-v\\|_2$$\nfor every $u,v\\in\\mathcal T_{t_n}$ and $0\\le n<N$, then, for $L>0$,\n$$\\max_{0\\le n\\le N}\\|y_n-y(t_n)\\|_2\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, for $L=0$,\n$$\\max_{0\\le n\\le N}\\|y_n-y(t_n)\\|_2\\le(C_0+CT)h^p.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $K\\subset U\\subset\\Omega\\cap(0,\\infty)^m$ and all iterates and stages remain in $K$, every rate evaluation in [F3], including the evaluation at each stage, is in $\\Omega_+$; [F4] gives exact solvability and positivity independently of the order estimate. By [F5], the exact-start defect is uniformly at most $Ch^3$ and the one-step stability factor is $1+Lh$. The exact initial error is zero, and the common-tube assumption is exactly the remaining tube hypothesis of [F6].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F6] with $p=2$ and $C_0=0$. Its $L>0$ case gives $C(\\exp(LT)-1)h^2/L$ and its $L=0$ case gives $CTh^2$. In either case the coefficient is independent of $N$, proving the asserted global $O(h^2)$ error.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 invokes the finite PDS local map, including empty off-diagonal sums at m=1; its identity stage/update has no missing transfer."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement requires every numerical state and every stage in compact K subset of the positive orthant; proof step 1.1 uses that hypothesis for every denominator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At m=1 the identity stage and final solves satisfy the same local assumptions fed into proof step 2.1; the bound is not limited to multi-compartment states."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Proof step 2.1 treats L=0 by CTh^2, avoiding the L denominator used only in the L>0 branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes grid indices n=0 and n=N, and proof step 1.1 supplies the fixed-grid hypotheses for the global recurrence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.1 uses the already unique exact method solves and step 2.1 the supplied deterministic recurrence; no additional choice of numerical branches is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The positive-tube global second-order estimate is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The positive-tube global second-order estimate does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The global rate is conditional on a common compact positive tube containing exact states, numerical states, and stages; step 1.1 records this before applying the recurrence."
+      },
+      "unresolved_suppliers": [
+        "def-one-step-ode-method-local-defect-order-and-stability",
+        "thm-global-error-from-one-step-defect-and-stability"
+      ]
+    },
+    "ex-two-compartment-stiff-reversible-transfer": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-conservative-production-destruction-system",
+          "source_section": "Definition",
+          "quote": "Fix an integer $m\\ge1$ and a domain $\\Omega\\subseteq\\mathbb R^m$; its admissible nonnegative states are $\\Omega_+:=\\Omega\\cap[0,\\infty)^m$. For every ordered pair $i,j\\in\\{1,\\ldots,m\\}$ let $p_{ij},d_{ij}:\\Omega\\to\\mathbb R$ be production and destruction transfer rates that are nonnegative on $\\Omega_+$. A **finite conservative production destruction system** (finite conservative PDS) is the autonomous ODE\n\n$$y_i'=F_i(y):=\\sum_{j=1}^m\\bigl(p_{ij}(y)-d_{ij}(y)\\bigr),\\qquad i=1,\\ldots,m,$$\n\nwith internal-transfer identities\n\n$$p_{ij}(y)=d_{ji}(y),\\qquad p_{ii}(y)=d_{ii}(y)=0.$$\n\nThe index $j$ is the donor/source of $p_{ij}$ and the index $i$ is its recipient/destination; $d_{ji}$ is the same transfer viewed as destruction from $j$. The total mass is $M(y):=\\sum_{i=1}^m y_i$. The ODE is considered at states in $\\Omega_+$. The definition describes a closed system: external sources and sinks must be specified separately and are not included in the conservation claims on this page. No existence, positivity, or regularity assertion about solutions is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-modified-patankar-euler",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] with state domain $\\Omega$, and take an input state $y^n\\in\\mathbb R^m$, a step size $h$, and declared denominators $\\sigma_i$. If $y^n\\notin\\Omega_+$, $h\\le0$, or any $\\sigma_i\\le0$, return an inadmissible-input status before evaluating any rate. Otherwise the **modified Patankar Euler step** returns the unique solution $y^{n+1}$ of\n\n$$y_i^{n+1}=y_i^n+h\\sum_{j\\ne i}\\left(p_{ij}(y^n)\\frac{y_j^{n+1}}{\\sigma_j}-d_{ij}(y^n)\\frac{y_i^{n+1}}{\\sigma_i}\\right),\\qquad i=1,\\ldots,m.$$\n\nEquivalently, form $M\\in\\mathbb R^{m\\times m}$ by\n\n$$M_{ii}=1+h\\sum_{j\\ne i}\\frac{d_{ij}(y^n)}{\\sigma_i},\\qquad M_{ij}=-h\\frac{p_{ij}(y^n)}{\\sigma_j}\\quad(i\\ne j),$$\n\nand solve $My^{n+1}=y^n$. The rates in the solve are evaluated only at the admissible state $y^n\\in\\Omega_+$. For every input passing the branch, return the unique exact solution of the stated linear system. The standard first-order choice is $\\sigma_i=y_i^n$, which is admissible only when every $y_i^n>0$. A separately defined rate-factor form extends a first-order step to zero donor coordinates under an additional source-factorization hypothesis.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-modified-patankar-euler-positive-conservative",
+          "source_section": "Statement",
+          "quote": "For a finite conservative PDS [[def-finite-conservative-production-destruction-system]] with domain $\\Omega$, an admissible input $y^n\\in\\Omega_+$, step $h>0$, and any positive denominators $\\sigma_i>0$, the step of [[alg-modified-patankar-euler]] is uniquely defined, satisfies $y^{n+1}\\ge0$, and conserves total mass:\n\n$$\\sum_{i=1}^m y_i^{n+1}=\\sum_{i=1}^m y_i^n.$$\n\nIf $y^n>0$ coordinatewise, then $y^{n+1}>0$ coordinatewise. These conclusions do not assert order for arbitrary denominators; the first-order choice and its accuracy hypotheses are treated separately.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-xd-finite-column-generator",
+          "source_section": "Definition",
+          "quote": "Let $S=\\{0,1,\\ldots,n-1\\}$ with $n\\ge1$. Identify its real matrices with $M_n(\\mathbb R)$, the finite matrix space with row and column indices in $S$ from [[def-matrix-space]], and use the matrix-product and identity conventions of [[def-matrix-product-and-identity-matrix]]. A **finite column generator** on $S$ is a real matrix $Q=(q_{ij})\\in M_n(\\mathbb R)$ satisfying\n\n$$q_{ij}\\ge0\\quad(i\\ne j),\\qquad \\sum_{i<n}q_{ij}=0\\quad(j<n).$$\n\nThe column index $j$ is the source state and the row index $i$ is the destination state: for $i\\ne j$, $q_{ij}$ is the transition rate from $j$ to $i$. The exit rate from $j$ is\n\n$$r_j:=-q_{jj}=\\sum_{i\\ne j}q_{ij}\\ge0.$$\n\nA **column probability vector** is $p\\in\\mathbb R^n$ with $p_i\\ge0$ for each $i$ and $\\sum_{i<n}p_i=1$. A **subprobability vector** has the same coordinatewise nonnegativity and has coordinate sum at most one. These conventions are used throughout this page.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The rates satisfy $p_{21}=d_{12}=1000y_1$ and $p_{12}=d_{21}=y_2$, so [F1] gives $y_1'=-1000y_1+y_2$ and $y_2'=1000y_1-y_2$. In the state order $(1,2)$ the coefficient matrix is $Q=\\begin{pmatrix}-1000&1\\\\1000&-1\\end{pmatrix}$; its off-diagonal entries are nonnegative and both column sums are zero, so it is a finite column generator under [F4].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "With $h=1$ and $y^n=(1,1)$, [F2] gives $\\begin{pmatrix}1001&-1\\\\-1000&2\\end{pmatrix}y^{n+1}=\\begin{pmatrix}1\\\\1\\end{pmatrix}$. The determinant is $1001\\cdot2-1000=1002$, and direct elimination gives $y_1^{n+1}=3/1002=1/334$ and $y_2^{n+1}=2001/1002=667/334$. Both coordinates are positive and their sum is $2$, as also predicted by [F3].",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For total mass $M=y_1+y_2$ and $s=1001$, the continuous first coordinate obeys $y_1'=-s(y_1-y_1^*)$ with equilibrium $y_1^*=M/1001$. The one-step formula in step 1.2 satisfies $y_1^{n+1}-y_1^*=(y_1^n-y_1^*)/(1+hs)$; for $h=1$ this positive damping factor is $1/1002$ although $hs=1001$. This verifies the large-rate damping for the specified example without inferring a general stability theorem.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes two compartments, initial state(1,1), rates1000 and1, and h=1; an empty input system is not its witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example fixes positive initial coordinates (1,1), and no zero-state branch is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example is specifically two-compartment and Verification step 1.1 uses a2by2 generator; it does not assert a one-compartment specialization."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The rates1000 and1 and h=1 are fixed in the Example, so there is no collapsing parameter interval in this witness."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example verifies a single h=1 step from specified data; Verification step 2.1 compares its damping factor but supplies no variable time interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification step 1.2 obtains both coordinates by explicit determinant1002 and elimination; no existential selection is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The worked stiff reversible-transfer instance is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The worked stiff reversible-transfer instance does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "two-compartment-patankar-step",
+          "asserts": "For h=1 and y=(1,1), M=[[1001,-1],[-1000,2]], det(M)=1002, y+= (1/334,667/334), and sum(y+)=2.",
+          "claim": "The displayed exact solve is positive, conservative, and damps the fast difference mode by 1/1002.",
+          "checked_in": "Statement and steps 1.2-2.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The generator convention and the frozen-rate solve are separately verified; the batch-47 generator supplier remains natively unresolved and is explicitly held open."
+      },
+      "unresolved_suppliers": [
+        "def-xd-finite-column-generator"
+      ]
+    },
+    "ex-three-species-weighted-stoichiometric-conservation": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-conservative-production-destruction-system",
+          "source_section": "Definition",
+          "quote": "Fix an integer $m\\ge1$ and a domain $\\Omega\\subseteq\\mathbb R^m$; its admissible nonnegative states are $\\Omega_+:=\\Omega\\cap[0,\\infty)^m$. For every ordered pair $i,j\\in\\{1,\\ldots,m\\}$ let $p_{ij},d_{ij}:\\Omega\\to\\mathbb R$ be production and destruction transfer rates that are nonnegative on $\\Omega_+$. A **finite conservative production destruction system** (finite conservative PDS) is the autonomous ODE\n\n$$y_i'=F_i(y):=\\sum_{j=1}^m\\bigl(p_{ij}(y)-d_{ij}(y)\\bigr),\\qquad i=1,\\ldots,m,$$\n\nwith internal-transfer identities\n\n$$p_{ij}(y)=d_{ji}(y),\\qquad p_{ii}(y)=d_{ii}(y)=0.$$\n\nThe index $j$ is the donor/source of $p_{ij}$ and the index $i$ is its recipient/destination; $d_{ji}$ is the same transfer viewed as destruction from $j$. The total mass is $M(y):=\\sum_{i=1}^m y_i$. The ODE is considered at states in $\\Omega_+$. The definition describes a closed system: external sources and sinks must be specified separately and are not included in the conservation claims on this page. No existence, positivity, or regularity assertion about solutions is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-source-factored-production-destruction-rates",
+          "source_section": "Definition",
+          "quote": "Let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]]. A **source-factored transfer representation** on an open set $U\\subseteq\\Omega\\subseteq\\mathbb R^m$ containing a compact set $K\\subseteq[0,\\infty)^m$ consists of functions $a_{ij}:U\\to\\mathbb R$, $i\\ne j$, such that each $a_{ij}$ is $C^2$ on the open subset $U\\subseteq\\mathbb R^m$ in the multivariable sense of [[def-ck-and-multi-index-notation-in-several-variables]], is nonnegative on $U\\cap[0,\\infty)^m$, and, for every $y\\in U\\cap[0,\\infty)^m$,\n\n$$p_{ij}(y)=y_j a_{ij}(y),\\qquad d_{ij}(y)=y_i a_{ji}(y),\\qquad a_{ii}:=0.$$\n\nHere $a_{ij}$ is the transfer rate from donor $j$ to recipient $i$ per unit of donor quantity. Nonnegativity is required on admissible nonnegative states; the $C^2$ extension to the open neighborhood is used for local analysis and need not be nonnegative at inadmissible states with negative coordinates. The factorization is an additional hypothesis, not a consequence of nonnegative rates and the identity $p_{ij}=d_{ji}$. On strictly positive states the ratio $p_{ij}(y)/y_j$ equals $a_{ij}(y)$; at a zero donor coordinate the factorized coefficient remains defined and avoids the indeterminate expression $0/0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-zero-compatible-modified-patankar-euler",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a compact nonnegative state set with a source-factored transfer representation [[def-source-factored-production-destruction-rates]]. Given $y^n\\in\\mathbb R^m$ and a step size $h$, if $y^n\\notin K$ or $h\\le0$, return an inadmissible-input status before evaluating any factor. Otherwise form $B(y^n)\\in\\mathbb R^{m\\times m}$ by\n\n$$B_{ij}(y^n)=a_{ij}(y^n)\\ (i\\ne j),\\qquad B_{jj}(y^n)=-\\sum_{i\\ne j}a_{ij}(y^n).$$\n\nReturn the unique solution $y^{n+1}$ of\n\n$$\\bigl(I-hB(y^n)\\bigr)y^{n+1}=y^n.$$\n\nEquivalently, component $i$ satisfies\n\n$$y_i^{n+1}=y_i^n+h\\sum_{j\\ne i}\\left(a_{ij}(y^n)y_j^{n+1}-a_{ji}(y^n)y_i^{n+1}\\right).$$\n\nThis procedure uses no denominator $y_j^n$ and is defined when some donor coordinates vanish. It is the factorized extension of the first-order Patankar Euler formula to the zero-state boundary. In exact arithmetic its linear system is uniquely solvable by [[lem-strict-column-dominance-implies-nonnegative-inverse]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-zero-compatible-modified-patankar-euler-admissibility",
+          "source_section": "Statement",
+          "quote": "Let a finite conservative PDS have a source-factored representation on an open neighborhood $U\\subseteq\\Omega$ of a compact set $K\\subseteq[0,\\infty)^m$, with factors that are multivariable $C^2$ on $U$ and nonnegative on $U\\cap[0,\\infty)^m$, as in [[def-source-factored-production-destruction-rates]]. For every $y^n\\in K$ and $h>0$, [[alg-zero-compatible-modified-patankar-euler]] has a unique output $y^{n+1}\\ge0$ and conserves $\\sum_i y_i$. For the accuracy clause, fix a compact set $K_*\\subset U$ containing $K$ and all exact solution segments under consideration, and define the $C^2$ extension $\\widetilde F_i(y):=\\sum_{j\\ne i}(y_j a_{ij}(y)-y_i a_{ji}(y))$ on $U$. If those exact segments remain in $K_*\\cap[0,\\infty)^m$, then the exact-start local defect is uniformly $O(h^2)$ as $h\\downarrow0$, including when some coordinates of $y^n$ are zero. The claim is local; no global error bound at the boundary is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "One forward event consumes mass $2$ from $A$ and produces mass $1$ in each of $B,C$; one reverse event consumes mass $1$ from each of $B,C$ and produces mass $2$ in $A$. Thus the mass transfer rates are $p_{21}=p_{31}=d_{12}=d_{13}=r=y_1$ and $p_{12}=p_{13}=d_{21}=d_{31}=s=y_2y_3$, with all other rates zero. These paired rates satisfy [F1], and $y_1+y_2+y_3=2n_A+n_B+n_C$ is the molecular-weight mass.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The transfer factors are $a_{21}=a_{31}=1$, $a_{12}=y_3$, and $a_{13}=y_2$, with all other factors zero; hence the rates have the form required by [F2], even when $y_2$ or $y_3$ is zero. At $y^n=(2,0,0)$, the matrix in [F3] is $I-B(y^n)=\\begin{pmatrix}3&0&0\\\\-1&1&0\\\\-1&0&1\\end{pmatrix}$. Solving it against $(2,0,0)^T$ gives $y^{n+1}=(2/3,2/3,2/3)^T$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The updated coordinates are nonnegative, and $2/3+2/3+2/3=2=2+0+0$. This is the weighted number-to-mass conservation verified in step 1.1; it also agrees with the general zero-compatible theorem [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes three species and K containing the one stated state(2,0,0); it does not use an empty species set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 1.2 evaluates the source-factored system at the two zero donor coordinates and obtains(2/3,2/3,2/3); step 2.1 checks summed mass2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example requires the displayed three-species reaction A reversible to B+C, not a singleton species family."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example fixes weights2,1,1, initial state(2,0,0) and h=1; no interval or arbitrary parameter limit is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example is one algebraic h=1 update. Its zero starting donor coordinates are the zero axis, not a terminal-time evaluation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification step 1.2 displays the triangular3by3 system and solves all coordinates explicitly; the witness is supplied rather than chosen from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The three-species mass-coordinate witness is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The three-species mass-coordinate witness does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "weighted-three-species-zero-step",
+          "asserts": "For y=(2,0,0), h=1 and B=[[-2,0,0],[1,0,0],[1,0,0]], solve (I-B)y+=(2,0,0) to obtain (2/3,2/3,2/3), whose sum is 2.",
+          "claim": "The reversible reaction fluxes form paired mass transfers and the factorized zero-state step conserves weighted mass.",
+          "checked_in": "Statement and steps 1.1-2.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The key risk is mass weighting in the reversible event; step 1.1 checks each paired flux and step 1.2 checks the zero-state linear solve."
+      },
+      "unresolved_suppliers": [
+        "def-one-step-ode-method-local-defect-order-and-stability"
+      ]
+    },
+    "ex-zero-denominator-corner-and-factorized-extension": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-conservative-production-destruction-system",
+          "source_section": "Definition",
+          "quote": "Fix an integer $m\\ge1$ and a domain $\\Omega\\subseteq\\mathbb R^m$; its admissible nonnegative states are $\\Omega_+:=\\Omega\\cap[0,\\infty)^m$. For every ordered pair $i,j\\in\\{1,\\ldots,m\\}$ let $p_{ij},d_{ij}:\\Omega\\to\\mathbb R$ be production and destruction transfer rates that are nonnegative on $\\Omega_+$. A **finite conservative production destruction system** (finite conservative PDS) is the autonomous ODE\n\n$$y_i'=F_i(y):=\\sum_{j=1}^m\\bigl(p_{ij}(y)-d_{ij}(y)\\bigr),\\qquad i=1,\\ldots,m,$$\n\nwith internal-transfer identities\n\n$$p_{ij}(y)=d_{ji}(y),\\qquad p_{ii}(y)=d_{ii}(y)=0.$$\n\nThe index $j$ is the donor/source of $p_{ij}$ and the index $i$ is its recipient/destination; $d_{ji}$ is the same transfer viewed as destruction from $j$. The total mass is $M(y):=\\sum_{i=1}^m y_i$. The ODE is considered at states in $\\Omega_+$. The definition describes a closed system: external sources and sinks must be specified separately and are not included in the conservation claims on this page. No existence, positivity, or regularity assertion about solutions is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-modified-patankar-euler",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] with state domain $\\Omega$, and take an input state $y^n\\in\\mathbb R^m$, a step size $h$, and declared denominators $\\sigma_i$. If $y^n\\notin\\Omega_+$, $h\\le0$, or any $\\sigma_i\\le0$, return an inadmissible-input status before evaluating any rate. Otherwise the **modified Patankar Euler step** returns the unique solution $y^{n+1}$ of\n\n$$y_i^{n+1}=y_i^n+h\\sum_{j\\ne i}\\left(p_{ij}(y^n)\\frac{y_j^{n+1}}{\\sigma_j}-d_{ij}(y^n)\\frac{y_i^{n+1}}{\\sigma_i}\\right),\\qquad i=1,\\ldots,m.$$\n\nEquivalently, form $M\\in\\mathbb R^{m\\times m}$ by\n\n$$M_{ii}=1+h\\sum_{j\\ne i}\\frac{d_{ij}(y^n)}{\\sigma_i},\\qquad M_{ij}=-h\\frac{p_{ij}(y^n)}{\\sigma_j}\\quad(i\\ne j),$$\n\nand solve $My^{n+1}=y^n$. The rates in the solve are evaluated only at the admissible state $y^n\\in\\Omega_+$. For every input passing the branch, return the unique exact solution of the stated linear system. The standard first-order choice is $\\sigma_i=y_i^n$, which is admissible only when every $y_i^n>0$. A separately defined rate-factor form extends a first-order step to zero donor coordinates under an additional source-factorization hypothesis.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-source-factored-production-destruction-rates",
+          "source_section": "Definition",
+          "quote": "Let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]]. A **source-factored transfer representation** on an open set $U\\subseteq\\Omega\\subseteq\\mathbb R^m$ containing a compact set $K\\subseteq[0,\\infty)^m$ consists of functions $a_{ij}:U\\to\\mathbb R$, $i\\ne j$, such that each $a_{ij}$ is $C^2$ on the open subset $U\\subseteq\\mathbb R^m$ in the multivariable sense of [[def-ck-and-multi-index-notation-in-several-variables]], is nonnegative on $U\\cap[0,\\infty)^m$, and, for every $y\\in U\\cap[0,\\infty)^m$,\n\n$$p_{ij}(y)=y_j a_{ij}(y),\\qquad d_{ij}(y)=y_i a_{ji}(y),\\qquad a_{ii}:=0.$$\n\nHere $a_{ij}$ is the transfer rate from donor $j$ to recipient $i$ per unit of donor quantity. Nonnegativity is required on admissible nonnegative states; the $C^2$ extension to the open neighborhood is used for local analysis and need not be nonnegative at inadmissible states with negative coordinates. The factorization is an additional hypothesis, not a consequence of nonnegative rates and the identity $p_{ij}=d_{ji}$. On strictly positive states the ratio $p_{ij}(y)/y_j$ equals $a_{ij}(y)$; at a zero donor coordinate the factorized coefficient remains defined and avoids the indeterminate expression $0/0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-zero-compatible-modified-patankar-euler",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a compact nonnegative state set with a source-factored transfer representation [[def-source-factored-production-destruction-rates]]. Given $y^n\\in\\mathbb R^m$ and a step size $h$, if $y^n\\notin K$ or $h\\le0$, return an inadmissible-input status before evaluating any factor. Otherwise form $B(y^n)\\in\\mathbb R^{m\\times m}$ by\n\n$$B_{ij}(y^n)=a_{ij}(y^n)\\ (i\\ne j),\\qquad B_{jj}(y^n)=-\\sum_{i\\ne j}a_{ij}(y^n).$$\n\nReturn the unique solution $y^{n+1}$ of\n\n$$\\bigl(I-hB(y^n)\\bigr)y^{n+1}=y^n.$$\n\nEquivalently, component $i$ satisfies\n\n$$y_i^{n+1}=y_i^n+h\\sum_{j\\ne i}\\left(a_{ij}(y^n)y_j^{n+1}-a_{ji}(y^n)y_i^{n+1}\\right).$$\n\nThis procedure uses no denominator $y_j^n$ and is defined when some donor coordinates vanish. It is the factorized extension of the first-order Patankar Euler formula to the zero-state boundary. In exact arithmetic its linear system is uniquely solvable by [[lem-strict-column-dominance-implies-nonnegative-inverse]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-zero-compatible-modified-patankar-euler-admissibility",
+          "source_section": "Statement",
+          "quote": "Let a finite conservative PDS have a source-factored representation on an open neighborhood $U\\subseteq\\Omega$ of a compact set $K\\subseteq[0,\\infty)^m$, with factors that are multivariable $C^2$ on $U$ and nonnegative on $U\\cap[0,\\infty)^m$, as in [[def-source-factored-production-destruction-rates]]. For every $y^n\\in K$ and $h>0$, [[alg-zero-compatible-modified-patankar-euler]] has a unique output $y^{n+1}\\ge0$ and conserves $\\sum_i y_i$. For the accuracy clause, fix a compact set $K_*\\subset U$ containing $K$ and all exact solution segments under consideration, and define the $C^2$ extension $\\widetilde F_i(y):=\\sum_{j\\ne i}(y_j a_{ij}(y)-y_i a_{ji}(y))$ on $U$. If those exact segments remain in $K_*\\cap[0,\\infty)^m$, then the exact-start local defect is uniformly $O(h^2)$ as $h\\downarrow0$, including when some coordinates of $y^n$ are zero. The claim is local; no global error bound at the boundary is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The rates are $p_{21}=d_{12}=2y_X$ and $p_{12}=d_{21}=3y_Y$, so [F1] holds. At $y^n=(1,0)$, the standard choice has $\\sigma_Y=0$, so [F2] returns inadmissible-input before evaluating a rate. The displayed standard-step equation itself would contain $p_{12}(y^n)y_Y^{n+1}/\\sigma_Y=0\\cdot y_Y^{n+1}/0$, which is undefined; assigning $0/0=0$ is not an algebraic evaluation of that expression.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The transfer factors are $a_{21}=2$ and $a_{12}=3$, both defined at $(1,0)$. With $h=1$, [F4] gives $\\begin{pmatrix}3&-3\\\\-2&4\\end{pmatrix}y^{n+1}=\\begin{pmatrix}1\\\\0\\end{pmatrix}$, whose determinant is $6$ and whose solution is $(y_X^{n+1},y_Y^{n+1})=(2/3,1/3)$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The computed coordinates are nonnegative and sum to $1$, equal to the initial total. This agrees with [F5] and exhibits a well-defined first-order zero-state extension; it makes no second-order claim for a zero MPRK stage.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes two compartments and starting state(1,0), so there is no empty data family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 1.1 returns inadmissible-input for sigma_Y=0 before evaluating the undefined quotient; step 1.2 solves the ratio-free system to(2/3,1/3)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example explicitly compares two-compartment standard and factored formulas; no one-compartment version is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed corner(1,0), transfer factors2 and3, and h=1 are the supplied witness; it has no variable interval to collapse."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example supplies one update at h=1, without a varying time-grid endpoint; its donor corner is handled explicitly in Verification step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification step 1.2 computes determinant6 and the explicit unique solution, with no root or factor choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The zero-denominator corner witness is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The zero-denominator corner witness does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "zero-donor-ratio-and-factorized-step",
+          "asserts": "At (1,0), p_XY=0 and sigma_Y=0, so p_XY*yY+/sigma_Y is undefined; the factorized h=1 matrix [[3,-3],[-2,4]] has solution (2/3,1/3).",
+          "claim": "The standard ratio formula is undefined at the zero donor while the separately defined factorized step is nonnegative and conserves mass.",
+          "checked_in": "Statement and steps 1.1-2.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The standard formula is left undefined at 0/0, and the separate rate-factor update is solved directly; no zero convention is borrowed."
+      },
+      "unresolved_suppliers": [
+        "def-one-step-ode-method-local-defect-order-and-stability"
+      ]
+    },
+    "cex-small-residual-does-not-certify-positivity": {
+      "risk": "low",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-conservative-production-destruction-system",
+          "source_section": "Definition",
+          "quote": "Fix an integer $m\\ge1$ and a domain $\\Omega\\subseteq\\mathbb R^m$; its admissible nonnegative states are $\\Omega_+:=\\Omega\\cap[0,\\infty)^m$. For every ordered pair $i,j\\in\\{1,\\ldots,m\\}$ let $p_{ij},d_{ij}:\\Omega\\to\\mathbb R$ be production and destruction transfer rates that are nonnegative on $\\Omega_+$. A **finite conservative production destruction system** (finite conservative PDS) is the autonomous ODE\n\n$$y_i'=F_i(y):=\\sum_{j=1}^m\\bigl(p_{ij}(y)-d_{ij}(y)\\bigr),\\qquad i=1,\\ldots,m,$$\n\nwith internal-transfer identities\n\n$$p_{ij}(y)=d_{ji}(y),\\qquad p_{ii}(y)=d_{ii}(y)=0.$$\n\nThe index $j$ is the donor/source of $p_{ij}$ and the index $i$ is its recipient/destination; $d_{ji}$ is the same transfer viewed as destruction from $j$. The total mass is $M(y):=\\sum_{i=1}^m y_i$. The ODE is considered at states in $\\Omega_+$. The definition describes a closed system: external sources and sinks must be specified separately and are not included in the conservation claims on this page. No existence, positivity, or regularity assertion about solutions is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-modified-patankar-euler",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $(p_{ij},d_{ij})$ be the rates of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] with state domain $\\Omega$, and take an input state $y^n\\in\\mathbb R^m$, a step size $h$, and declared denominators $\\sigma_i$. If $y^n\\notin\\Omega_+$, $h\\le0$, or any $\\sigma_i\\le0$, return an inadmissible-input status before evaluating any rate. Otherwise the **modified Patankar Euler step** returns the unique solution $y^{n+1}$ of\n\n$$y_i^{n+1}=y_i^n+h\\sum_{j\\ne i}\\left(p_{ij}(y^n)\\frac{y_j^{n+1}}{\\sigma_j}-d_{ij}(y^n)\\frac{y_i^{n+1}}{\\sigma_i}\\right),\\qquad i=1,\\ldots,m.$$\n\nEquivalently, form $M\\in\\mathbb R^{m\\times m}$ by\n\n$$M_{ii}=1+h\\sum_{j\\ne i}\\frac{d_{ij}(y^n)}{\\sigma_i},\\qquad M_{ij}=-h\\frac{p_{ij}(y^n)}{\\sigma_j}\\quad(i\\ne j),$$\n\nand solve $My^{n+1}=y^n$. The rates in the solve are evaluated only at the admissible state $y^n\\in\\Omega_+$. For every input passing the branch, return the unique exact solution of the stated linear system. The standard first-order choice is $\\sigma_i=y_i^n$, which is admissible only when every $y_i^n>0$. A separately defined rate-factor form extends a first-order step to zero donor coordinates under an additional source-factorization hypothesis.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-patankar-inexact-solve-residual-ledger",
+          "source_section": "Statement",
+          "quote": "Let $M\\in\\mathbb R^{m\\times m}$ be an exact linear-system matrix from a successfully completed [[alg-modified-patankar-euler]] step with admissible positive denominators, or from a completed stage/final solve of [[alg-mprk22-1]], for a finite conservative PDS. Let $b\\ge0$ be its exact right-hand side. For either scheme, the PDS transfer identity gives $\\mathbf 1^TM=\\mathbf 1^T$ and strict column diagonal dominance, so $M^{-1}\\ge0$. Let $\\widehat y$ be a stored candidate and compute $\\widehat v=\\operatorname{fl}(M\\widehat y)$ and $\\widehat w=\\operatorname{fl}(\\widehat v-b)$ in the operationwise model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], with $0<u<1$, $(m-1)u<1$, every nonzero exact intermediate normal, zero operations exact, successful sequential dot products and subtraction, and exact or certified upper bounds for the norms used by the supplier. Let $W$ be the certified allowance from [[lem-rounded-linear-and-normal-residual-certificates]], using exact norms or certified upper bounds, and set $\\rho:=\\|\\widehat w\\|_2+W$. Then\n\n$$\\|M\\widehat y-b\\|_2\\le\\rho,\\qquad \\left|\\mathbf1^T\\widehat y-\\mathbf1^Tb\\right|\\le\\sqrt m\\,\\rho.$$\n\nIf $y^*:=M^{-1}b$ is the exact solution of the stored linear system, then\n\n$$\\|\\widehat y-y^*\\|_1\\le\\sqrt m\\,\\rho.$$\n\nConsequently, the componentwise margin condition $\\widehat y_i\\ge\\sqrt m\\,\\rho$ for every $i$ certifies $y^*\\ge0$. A residual bound alone does not certify that the computed candidate $\\widehat y$ is nonnegative. This certificate is relative to the stated stored matrix and right-hand side; any coefficient-assembly error relative to the intended real system must be separately bounded and added to the residual allowance.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $m=1$, $p_{11}=d_{11}=0$, $h=1$, $y^n=0$, and $\\sigma_1=1$. These data satisfy [F1] and the admissible input conditions of [F2], and the system $My^+=y^n$ is $y^+=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the candidate $\\widehat y=-\\varepsilon$, the exact residual is $r=M\\widehat y-b=-\\varepsilon$, so $|r|=\\varepsilon$ can be made smaller than any prescribed positive tolerance while $\\widehat y<0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Here the exact solve is $y^*=0$ and the candidate margin required by [F3] is $\\widehat y\\ge |r|=\\varepsilon$, which fails because $-\\varepsilon<\\varepsilon$. Thus the residual bound does not certify the candidate's sign, refuting the statement.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Counterexample uses the empty transfer set and the one-dimensional identity system in steps 1.1-1.2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Refutation step 1.1 sets b=y^n=0, and step 2.1 gives the negative candidate -epsilon with residual -epsilon for every epsilon>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Refutation step 1.1 is explicitly the one-compartment identity system m=1, so the singleton case is this counterexample itself."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample has no transfers and b=0; Refutation steps 1.1–3.1 retain a nonsingular identity matrix and show sign failure for the candidate, not matrix singularity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The witness parameter epsilon is strictly positive in Refutation step 2.1 and tends toward zero only to demonstrate arbitrarily small nonzero residual; epsilon=0 is not a negative candidate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Refutation step 2.1 explicitly chooses candidate -epsilon for any prescribed positive tolerance; no arbitrary infinite selection is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The scalar identity residual counterexample is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The scalar identity residual counterexample does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "arbitrarily-small-residual-negative-candidate",
+          "asserts": "For M=(1), b=0, and yhat=-epsilon, r=-epsilon and |r|=epsilon while yhat<0 for every epsilon>0.",
+          "claim": "The residual tends to zero without certifying the computed candidate is nonnegative.",
+          "checked_in": "Statement refuted and steps 1.1-3.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The exact one-dimensional residual is arbitrarily small while the candidate stays negative; the imported margin concerns the exact solution only."
+      },
+      "unresolved_suppliers": [
+        "lem-rounded-linear-and-normal-residual-certificates"
+      ]
+    },
+    "cex-forward-euler-negative-concentration-despite-stability": {
+      "risk": "low",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-conservative-production-destruction-system",
+          "source_section": "Definition",
+          "quote": "Fix an integer $m\\ge1$ and a domain $\\Omega\\subseteq\\mathbb R^m$; its admissible nonnegative states are $\\Omega_+:=\\Omega\\cap[0,\\infty)^m$. For every ordered pair $i,j\\in\\{1,\\ldots,m\\}$ let $p_{ij},d_{ij}:\\Omega\\to\\mathbb R$ be production and destruction transfer rates that are nonnegative on $\\Omega_+$. A **finite conservative production destruction system** (finite conservative PDS) is the autonomous ODE\n\n$$y_i'=F_i(y):=\\sum_{j=1}^m\\bigl(p_{ij}(y)-d_{ij}(y)\\bigr),\\qquad i=1,\\ldots,m,$$\n\nwith internal-transfer identities\n\n$$p_{ij}(y)=d_{ji}(y),\\qquad p_{ii}(y)=d_{ii}(y)=0.$$\n\nThe index $j$ is the donor/source of $p_{ij}$ and the index $i$ is its recipient/destination; $d_{ji}$ is the same transfer viewed as destruction from $j$. The total mass is $M(y):=\\sum_{i=1}^m y_i$. The ODE is considered at states in $\\Omega_+$. The definition describes a closed system: external sources and sinks must be specified separately and are not included in the conservation claims on this page. No existence, positivity, or regularity assertion about solutions is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-euler-midpoint-rk4-orders-and-stability-functions",
+          "source_section": "Statement",
+          "quote": "Under the smoothness and compact-tube hypotheses of [[prop-explicit-rk-order-conditions-through-four]], the forward Euler, explicit midpoint, and classical four-stage tableaus of [[def-euler-midpoint-rk4-tableaus]] have uniform local orders at least one, two, and four, respectively.\n\nFor the scalar test equation $y'=\\lambda y$, set $z=h\\lambda$. The corresponding stability functions, defined by $y^+=R(z)y$, are\n$$R_{\\mathrm E}(z)=1+z,\\qquad R_{\\mathrm M}(z)=1+z+\\frac{z^2}{2},\\qquad R_{\\mathrm{RK4}}(z)=1+z+\\frac{z^2}{2}+\\frac{z^3}{6}+\\frac{z^4}{24}.$$\nThe absolute stability region of a listed method is $\\{z\\in\\mathbb C:|R(z)|\\le1\\}$. On the negative real axis, the Euler and midpoint regions are exactly $[-2,0]$. No maximal real interval is asserted here for RK4.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-explicit-euler-absolute-stability-disk",
+          "source_section": "Statement",
+          "quote": "For forward Euler applied to $y'=\\lambda y$, let $z=h\\lambda$. Its stability function is $R_{\\mathrm E}(z)=1+z$, and its absolute-stability region is exactly the closed disk\n\n$$\\{z\\in\\mathbb C:|z+1|\\le1\\}.$$\n\nOn the negative real axis, for $y'=-\\rho y$ with $\\rho>0$, the method is absolutely stable exactly when $0<h\\rho\\le2$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The rates satisfy $p_{21}=d_{12}=y_1\\ge0$ and all other pair rates vanish, so [F1] gives $y_1'=-y_1$ and $y_2'=y_1$ with conserved sum $y_1+y_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Forward Euler gives $y^{1}=y^0+hF(y^0)=(1,0)+(3/2)(-1,1)=(-1/2,3/2)$, so the first concentration is negative even though the sum remains $1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The system matrix is lower triangular with eigenvalues $-1$ and $0$. For $\\lambda=-1$, [F3] gives absolute stability because $0<h\\rho=3/2<2$; for $\\lambda=0$, [F2] gives multiplier $R_E(0)=1$. Thus $|1+h\\lambda|\\le1$ for both eigenvalues even though step 2.1 has a negative component.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The vector field is linear and smooth, so the compact-tube hypotheses of [F2] hold locally and forward Euler has first-order local consistency. Steps 2.1 and 3.1 show that neither this accuracy order nor scalar absolute stability implies positivity preservation.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Witness fixes two compartments with transfer y_1 and starting state(1,0); an empty compartment system is not under test."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Refutation step 2.1 computes the update from the zero second coordinate, and step 3.1 includes the zero eigenvalue with multiplier1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Witness is the displayed two-compartment lower-triangular system, so no singleton-size specialization is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed h=3/2 witness has one negative and one zero eigenvalue; Refutation step 3.1 explicitly checks both scalar multipliers."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Witness fixes h=3/2 inside the stability interval0<h<=2; it makes no claim about evaluation at the endpoints of a variable integration interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Refutation step 2.1 computes the explicit output(-1/2,3/2) from supplied data; no family of selected witnesses is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The forward-Euler positivity counterexample is asserted as a construction or implication, not a converse characterization; the forward biconditional axis is absent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The forward-Euler positivity counterexample does not assert that its conclusion implies its input hypotheses, so there is no reverse implication obligation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "stable-euler-step-violates-positivity",
+          "asserts": "For y0=(1,0), h=3/2 and F(y0)=(-1,1), forward Euler returns (-1/2,3/2), while |1+h(-1)|=1/2<1.",
+          "claim": "The counterexample refutes positivity from scalar absolute stability and preserves the summed mass.",
+          "checked_in": "Statement refuted and steps 1.1-3.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-78-author",
+        "notes": "The counterexample compares one negative component with the scalar stability multiplier for the same eigenmode and preserves the sum."
+      },
+      "unresolved_suppliers": [
+        "prop-euler-midpoint-rk4-orders-and-stability-functions",
+        "thm-explicit-euler-absolute-stability-disk"
+      ]
+    }
+  }
+}

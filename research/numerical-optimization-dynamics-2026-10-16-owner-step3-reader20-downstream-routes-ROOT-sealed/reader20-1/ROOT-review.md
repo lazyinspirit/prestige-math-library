@@ -1,0 +1,6 @@
+Run numerical-optimization-dynamics-2026-10-16, focused root routing review reader:20:1. Supplier alg-composite-midpoint-rule, consumer lem-midpoint-quadrature-defect-for-p1-stiffness in batch89.
+Supplier-before 031c25cdc0c18f4138af2306f5da501a30b30b5db71025aca11c726590f7559a
+Supplier-after 3db7f662a353b1327ec955a7d06f716b3cd7445eeec64d2f8443f0339a19cf41
+Consumer registration b3051a780715c8ce3094a41bd00a0049d0e74f463c8aff4b3cffffc29929386b
+Root read the supplier Definition/change and full current consumer source. The supplier now validates raw endpoints/n before f evaluations. The current consumer directly declares the supplier. The cellwise finite-element use supplies a positive cell width and one panel. Its valid-grid midpoint formula is unchanged; the old full Definition quote in F1 is stale.
+Preserve the original native finding, full successful result/report/prompt unchanged. Genuine native pre/post source hashes and unique current ownership are independently validated by the supported API. No historical consumer observation is bound; origin Alpha20 must independently adjudicate the original obligation on the actual current target carrier, and target batch89 retains its normal refuter/Alpha duties. This is routing only, no edit permission or mathematical acceptance.

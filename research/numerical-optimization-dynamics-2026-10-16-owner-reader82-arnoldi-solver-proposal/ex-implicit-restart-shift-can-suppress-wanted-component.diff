@@ -1,0 +1,22 @@
+--- before/items/ex-implicit-restart-shift-can-suppress-wanted-component.md
++++ proposed/items/ex-implicit-restart-shift-can-suppress-wanted-component.md
+@@ -35,6 +35,10 @@
+ least $t$ when considering $t$ cycles. This shift rule is allowed by the
+ procedure; it is not claimed to be a good selection rule.
+ 
++Supply the following finite-return projected solver for this example. For a $2\times2$ Hermitian matrix $H=\begin{pmatrix}\alpha&b\\\overline b&\delta\end{pmatrix}$, if $b=0$, return `success` with the ordered pairs $(\alpha,e_1)$ and $(\delta,e_2)$. If $b\ne0$, set
++$$D=\sqrt{(\alpha-\delta)^2+4|b|^2},\qquad\lambda_\pm=(\alpha+\delta\pm D)/2,$$
++and return `success` with the ordered pairs $(\lambda_-,(b,\lambda_--\alpha)^{\mathsf T})$ and $(\lambda_+,(b,\lambda_+-\alpha)^{\mathsf T})$. Return `unavailable` on other shapes or non-Hermitian inputs. Each displayed vector is nonzero, direct multiplication verifies its eigenpair equation, and the two factors reproduce the quadratic characteristic polynomial. This supplied finite-dimensional example provider is not a general eigensolver or a new restart method.
++
+ ## Verification
+ 
+ **Given:** The exact diagonal matrix, starting vector, target, and shift above.
+@@ -43,7 +47,7 @@
+ 
+ [F2] [[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]: an eigenvector is a nonzero vector satisfying $Au=\lambda u$.
+ 
+-1.1 By [F1], $q(A)v=(-19e_1-9e_2+e_3)/(10\sqrt3)$. The squared component weights are proportional to $361,81,1$, so the Rayleigh quotient of the restarted vector is $(1\cdot361+2\cdot81+3\cdot1)/(361+81+1)=526/443<2$, whereas the initial quotient is $(1+2+3)/3=2$. The wanted component-to-$e_1$ component ratio falls from 1 to 1/19. [given, F1, F2, algebra]
++1.1 Every projected $H_2=V_2^*AV_2$ in this example is Hermitian because $A^*=A$, so the supplied two-dimensional solver returns valid complete projected data in finite exact work. By [F1], $q(A)v=(-19e_1-9e_2+e_3)/(10\sqrt3)$. The squared component weights are proportional to $361,81,1$, so the Rayleigh quotient of the restarted vector is $(1\cdot361+2\cdot81+3\cdot1)/(361+81+1)=526/443<2$, whereas the initial quotient is $(1+2+3)/3=2$. The wanted component-to-$e_1$ component ratio falls from 1 to 1/19. [given, F1, F2, algebra]
+ 
+ 2.1 Repeating the same exact restart multiplies the $e_3$ component by $q(3)=1/10$ and the $e_1$ component by $q(1)=-19/10$ at every cycle. Hence after $t$ cycles their magnitude ratio is $(1/19)^t$, which tends to zero. This shift choice suppresses the wanted eigendirection and gives no general convergence claim. [given, F1, F2, step 1.1, algebra]
+ 

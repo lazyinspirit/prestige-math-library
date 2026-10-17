@@ -1,6 +1,7 @@
 // Optional owner-authorized closeout. Imported only when a run has a policy.
 // The engine's mathematical/readiness/report gates remain unchanged.
 import { validateFragment, decodeLedger } from './step6-ledger-fragment.mjs';
+import { validatePlanProjection, decodePlan } from './step6-plan-projection.mjs';
 import { spawnSync } from 'node:child_process';
 import { accessSync, constants, copyFileSync, existsSync, lstatSync, mkdirSync,
   mkdtempSync, readFileSync, readdirSync, readlinkSync, rmSync, statSync,
@@ -120,8 +121,57 @@ export function indexEntries(root) {
   if (index !== rows.length || before !== after) throw Error('closeout: index changed while reading preservation state');
   if (rows.some(row => row.stage !== 0)) throw Error('closeout: unresolved index conflicts; preserve them and resolve before closeout');
   if (rows.some(row => row.mode === '160000')) throw Error('closeout: submodule index preservation is not supported');
+  Object.defineProperty(rows, 'indexSnapshot', { value: { path, sha256: after } });
   return rows;
 }
+// Preserve check-ignore's tracked-path exclusion without its per-stdin-path
+// full index scan. Unusual pathspec/case/sparse/index states retain native Git.
+export function ignoredOwnedPaths(root, paths, index) {
+  const original = () => nul(git(root, ['check-ignore', '-z', '--stdin'], {
+    input: pathsInput(paths), optional: true, literalPathspecs: false,
+  }) || Buffer.alloc(0));
+  const literal = path => {
+    try { safePath(path); return true; } catch { return false; }
+  };
+  if (!Array.isArray(index) || !index.indexSnapshot || !paths.length
+    || paths.some(path => !literal(path))
+    || ['GIT_LITERAL_PATHSPECS', 'GIT_GLOB_PATHSPECS', 'GIT_NOGLOB_PATHSPECS', 'GIT_ICASE_PATHSPECS']
+      .some(key => process.env[key] !== undefined)
+    || index.some(row => row.stage !== 0 || row.flags !== '0'
+      || !['100644', '100755', '120000'].includes(row.mode))) return original();
+  const config = () => ['core.ignorecase', 'core.sparsecheckout', 'core.sparsecheckoutcone', 'index.sparse']
+    .map(key => textGit(root, ['config', '--type=bool', '--get', key], { optional: true }));
+  const beforeConfig = config();
+  if (beforeConfig.some(value => value !== null && value !== 'false')) return original();
+  const snapshot = index.indexSnapshot;
+  const currentIndex = () => {
+    const path = gitPath(root, 'index');
+    return { path, sha256: existsSync(path) ? sha256(readFileSync(path)) : null };
+  };
+  const requireCurrent = () => {
+    if (JSON.stringify(currentIndex()) !== JSON.stringify(snapshot)
+      || JSON.stringify(config()) !== JSON.stringify(beforeConfig))
+      throw Error('closeout: index or ignore matching configuration changed during ignore check');
+  };
+  requireCurrent();
+  const names = index.map(row => row.path).sort();
+  const lowerBound = value => {
+    let lo = 0, hi = names.length;
+    while (lo < hi) { const mid = (lo + hi) >>> 1; if (names[mid] < value) lo = mid + 1; else hi = mid; }
+    return lo;
+  };
+  const tracked = path => names[lowerBound(path)] === path
+    || names[lowerBound(path + '/')]?.startsWith(path + '/') === true;
+  // Git also excludes a literal parent path when an indexed descendant matches.
+  // Every other exact original path still receives Git's real ignore evaluation.
+  const remaining = paths.filter(path => !tracked(path));
+  const ignored = remaining.length ? nul(git(root, ['check-ignore', '--no-index', '-z', '--stdin'], {
+    input: pathsInput(remaining), optional: true, literalPathspecs: false,
+  }) || Buffer.alloc(0)) : [];
+  requireCurrent();
+  return ignored;
+}
+
 export function fileState(root, path) {
   const full = join(root, path);
   if (!existsSync(full) && !lstatExists(full)) return { path, kind: 'missing' };
@@ -293,7 +343,7 @@ function readScopePolicy(root, run) {
   const policyPath = 'research/' + run + '-closeout-scope.json';
   regularPath(root, policyPath);
   const policyText = readFileSync(join(root, policyPath), 'utf8'), policy = JSON.parse(policyText);
-  const keys = new Set(['version', 'run', 'authorized_by', 'authorization', 'additional_paths', 'reviewed_hook', 'shared_fragments']);
+  const keys = new Set(['version', 'run', 'authorized_by', 'authorization', 'additional_paths', 'reviewed_hook', 'shared_fragments', 'plan_projection']);
   if (Object.keys(policy).some(key => !keys.has(key)) || policy.version !== 1 || policy.run !== run
     || policy.authorized_by !== 'owner' || typeof policy.authorization !== 'string'
     || policy.authorization.trim().length < 20 || !Array.isArray(policy.additional_paths)) {
@@ -468,6 +518,38 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
       fragments.push({ path: row.path, authority: row.authority, sha256: row.sha256, spec, ownedIds: [...ownedIds].sort() });
     }
   }
+  // Plan replacement ownership is separate from the addition-only ledger API.
+  const planProjections = [];
+  if (policy.plan_projection !== undefined) {
+    if (physics) throw Error('closeout: plan projection currently supports mathematics only');
+    const row = policy.plan_projection;
+    if (finalReceipt !== `research/${run}-dispatch/tool-step6-finalize-v3.result.json`
+      || !row || Object.keys(row).some(key => !['path', 'authority', 'sha256'].includes(key))
+      || row.path !== 'research/plan-spec.json' || !runResearch(run, safePath(row.authority))
+      || !/^[a-f0-9]{64}$/.test(row.sha256 ?? '')) throw Error('closeout: invalid exact plan-projection binding');
+    regularPath(root, row.authority);
+    const bytes = readFileSync(join(root, row.authority));
+    if (sha256(bytes) !== row.sha256) throw Error('closeout: plan-projection authority changed');
+    const spec = JSON.parse(decodePlan(bytes));
+    if (!/^[a-f0-9]{40,64}$/.test(spec.original_head ?? '')
+      || !/^[a-f0-9]{40,64}$/.test(spec.original_index_blob ?? ''))
+      throw Error('closeout: invalid original plan Git bindings');
+    git(root, ['--no-replace-objects', 'merge-base', '--is-ancestor', spec.original_head, 'HEAD']);
+    const originalHead = decodePlan(git(root, ['--no-replace-objects', 'show', spec.original_head + ':research/plan-spec.json']));
+    const originalIndex = decodePlan(git(root, ['--no-replace-objects', 'cat-file', 'blob', spec.original_index_blob]));
+    validatePlanProjection(spec, run, selected.pages, decodePlan(readFileSync(join(root, row.path))), originalHead, originalIndex, root);
+    required.add(row.authority);
+    for (const evidence of spec.evidence) {
+      if (!evidence || Object.keys(evidence).some(key => !['path', 'sha256'].includes(key))
+        || !runResearch(run, safePath(evidence.path)) || !/^[a-f0-9]{64}$/.test(evidence.sha256 ?? ''))
+        throw Error('closeout: invalid plan-projection supporting evidence');
+      regularPath(root, evidence.path);
+      if (sha256(readFileSync(join(root, evidence.path))) !== evidence.sha256)
+        throw Error('closeout: plan-projection supporting evidence changed');
+      required.add(evidence.path);
+    }
+    planProjections.push({ path: row.path, authority: row.authority, sha256: row.sha256, spec });
+  }
   const additional = new Set();
   for (const row of policy.additional_paths) {
     if (!row || Object.keys(row).some(key => !['path', 'sha256', 'reason', 'ownership_evidence'].includes(key))
@@ -496,7 +578,11 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
   // may be absent here; authoritative sources and every present path stay strict.
   const pending = path => preflight && (path === finalReceipt || ['proof-layout.json',
     'publication-readiness.json', 'step6-report-integrity.json', 'step6-report.response.json',
-    'step6-report.md', 'step6-evidence.json'].some(name => path === `research/${run}-${name}`));
+    'step6-report.md', 'step6-evidence.json'].some(name => path === `research/${run}-${name}`)
+    // Native v3 authority is sealed before preparation/gates derive closures.
+    // Present carriers stay strict; commitStep6 requires both actual products.
+    || finalReceipt === `research/${run}-dispatch/tool-step6-finalize-v3.result.json`
+      && ['pathway-closure.json', 'judge-closure.json'].some(name => path === `research/${run}-${name}`));
   for (const path of required) regularPath(root, path, pending(path) || allowMissingReceipt && path === finalReceipt);
   const index = indexEntries(root), rawTree = treeEntries(root);
   // ls-tree --full-tree is repository-relative; local item/research selectors
@@ -534,15 +620,15 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
     if (!owns(path)) throw Error('closeout: recorded path no longer belongs to this run: ' + path);
     regularPath(root, path, pending(path) || !required.has(path) || allowMissingReceipt && path === finalReceipt);
   }
-  // check-ignore reads exact filenames and rejects literal pathspec magic.
-  const ignored = nul(git(root, ['check-ignore', '-z', '--stdin'], {
-    input: pathsInput(paths), optional: true, literalPathspecs: false,
-  }) || Buffer.alloc(0));
+  const ignored = ignoredOwnedPaths(root, paths, index);
   if (ignored.length) throw Error('closeout: required/authorized artifact is ignored by Git: ' + ignored[0]);
-  return { policyPath, policySha256: sha256(policyText), paths, owns, inventory, reviewedHook, fragments,
+  return { policyPath, policySha256: sha256(policyText), paths, owns, inventory, reviewedHook, fragments, planProjections,
     contextSha256: sha256(JSON.stringify({ ...(physics ? { domain: 'physics' } : {}), selected, required: [...required].sort(),
       claims: sha256(claimsText), noopClosures, operationalContexts: exclusions.sha256, additional: policy.additional_paths,
-      sharedFragments: fragments.map(({ path, authority, sha256 }) => ({ path, authority, sha256 })) })) };
+      sharedFragments: fragments.map(({ path, authority, sha256 }) => ({ path, authority, sha256 })),
+      ...(policy.plan_projection !== undefined
+        ? { planProjections: planProjections.map(({ path, authority, sha256 }) => ({ path, authority, sha256 })) }
+        : {}) })) };
 }
 
 // Read-only binding helper for an owner administrative reseal. It does not

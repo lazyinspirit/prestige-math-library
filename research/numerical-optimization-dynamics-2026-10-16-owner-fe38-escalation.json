@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "kind": "focused-owner-escalation-proposal",
+  "at": "2026-10-16T00:58:33.815535+00:00",
+  "review_cycles": 2,
+  "status": "authorized-repair-complete-release-batch38-to-root",
+  "carriers_modified": true,
+  "supplier_owner_manifest": "research/numerical-optimization-dynamics-2026-10-16-batch-24.pages.json",
+  "supplier_batch_state": {
+    "stage": "1-scaffold",
+    "role": "beta",
+    "label": "batch-24",
+    "covers": [
+      "24"
+    ],
+    "attempt": 1,
+    "attempts": 1,
+    "startedAt": "2026-10-15T22:55:54.577Z",
+    "endedAt": "2026-10-16T00:22:38.390Z",
+    "lastExitOk": true
+  },
+  "consumer_batch_state": {
+    "stage": "1-scaffold",
+    "role": "beta",
+    "label": "batch-38",
+    "covers": [
+      "38"
+    ],
+    "attempt": 1,
+    "attempts": 1,
+    "startedAt": "2026-10-15T23:47:19.695Z",
+    "endedAt": null,
+    "lastExitOk": null
+  },
+  "native_results": {
+    "24": {
+      "ok": true,
+      "ended_at": "2026-10-16T00:21:32.796Z",
+      "exit_code": 0,
+      "terminal_summary": {
+        "available": true,
+        "last_event": "task_complete",
+        "task_completed": true,
+        "task_aborted": false,
+        "final_response_present": true,
+        "error_events": 0
+      }
+    },
+    "38": {
+      "ok": true,
+      "ended_at": "2026-10-16T00:57:26.757Z",
+      "exit_code": 0,
+      "terminal_summary": {
+        "available": true,
+        "last_event": "task_complete",
+        "task_completed": true,
+        "task_aborted": false,
+        "final_response_present": true,
+        "error_events": 0
+      }
+    }
+  },
+  "suppliers": [
+    {
+      "id": "def-matching-affine-simplicial-meshes",
+      "decision": "ready",
+      "at": "2026-10-16T00:08:03.130Z",
+      "readiness_scope": "Observed author-readiness record only; no independent approval inferred."
+    },
+    {
+      "id": "def-reference-finite-element-and-unisolvent-dofs",
+      "decision": "ready",
+      "at": "2026-10-16T00:18:51.232Z",
+      "readiness_scope": "Observed author-readiness record only; no independent approval inferred."
+    },
+    {
+      "id": "lem-unisolvent-dofs-define-reference-interpolant",
+      "decision": "ready",
+      "at": "2026-10-16T00:18:51.737Z",
+      "readiness_scope": "Observed author-readiness record only; no independent approval inferred."
+    },
+    {
+      "id": "lem-affine-pullback-weak-derivatives-and-scaling",
+      "decision": "ready",
+      "at": "2026-10-16T00:18:54.073Z",
+      "readiness_scope": "Observed author-readiness record only; no independent approval inferred."
+    },
+    {
+      "id": "lem-shape-regular-affine-simplex-scaling",
+      "decision": "ready",
+      "at": "2026-10-16T00:18:55.148Z",
+      "readiness_scope": "Observed author-readiness record only; no independent approval inferred."
+    },
+    {
+      "id": "thm-bramble-hilbert-on-reference-simplex",
+      "decision": "ready",
+      "at": "2026-10-16T00:19:05.416Z",
+      "readiness_scope": "Observed author-readiness record only; no independent approval inferred."
+    }
+  ],
+  "supplier_body_checks": [
+    "Grid definition gives a finite matching positive-orientation affine simplex mesh, radius-based uniform shape regularity, no omitted cracks.",
+    "Reference finite-element definition explicitly requires unisolvence and bounded extensions; interpolant lemma proves uniqueness/reproduction by finite-dimensional bijectivity, including N=0.",
+    "Affine weak pullback proved using transformed compact tests and change of variables; iterating constant matrix factors yields all integer-order seminorm bounds with determinant factors, under CC.",
+    "Shape lemma uses reference inscribed-ball diameter for upper singular value and physical width/inradius for lower singular value, then determinant and facet cofactor bounds; this supplies exactly uniform h and inverse h factors.",
+    "Bramble-Hilbert moment map is invertible by its top-degree derivatives; Poincare-Wirtinger applied downward to zero-mean derivatives yields full W^{s,p} error bounds for s<=r. Consumer uses theorem parameter r+1, p=2, including s=r+1 to control the full interpolation-input norm.",
+    "Inspected immediate BH/scaling closure: reference-simplex Poincare-Wirtinger via convex segments, density via inward affine contraction/cutoff/whole-space smoothing, and affine simplex Gauss-Green/cofactor argument. No substantial defect identified in the interfaces used by batch38."
+  ],
+  "primal_consumer_check": "The stated polynomial space and bounded W^{r+1,2} DOFs give a bounded reference interpolant. Reproduction plus BH with theorem order r+1 controls full W^{r+1,2} remainder; affine scaling gives h_K^{r+1-m}; squared cell sums and h<=1 give global H1 rate. Global conformity and zero-boundary mapping are explicit assumptions, not inferred from arbitrary DOFs. All exact hypotheses and CC retained.",
+  "confirmed_defects": [
+    {
+      "item": "cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation",
+      "locus": "Facts F3, Proof 1.2 and 3.1",
+      "defect": "The unnormalized duality argument requires ||e||L2 squared on the left. Current step 1.2 instead uses ||e||L2 and then includes ||e||L2 on its right. Dividing it in step 3.1 yields 1<=constant*H1error, not the claimed estimate. Statement remains sound under stated assumptions.",
+      "smallest_repair": "Use existing thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity final Statement directly: ||e||L2<=M C_D C_R h^s ||u-u_h||H1. In step3.1 combine with step2.1, without division. Make F3 faithfully quote this final supplier bound."
+    },
+    {
+      "locus": "batch38 notes/cross-batch records and escalation reasons",
+      "defect": "All six named NA28 readiness records now exist and say ready; batch24 has ended successfully natively. Absence claim is stale.",
+      "smallest_repair": "After batch38 verified drain, reconcile evidence to actual supplier bodies and readiness observations; preserve original author evidence/preimages. Root handles native owner-ready records/hashes."
+    }
+  ],
+  "branch_reconciliation": "No inference from batch24 page requires NA10 to every batch24 item. Generic bounded-DOF branch does not consume thm-local-finite-element-interpolation-estimates or thm-lagrange-point-evaluation-threshold-on-reference-simplex. Current batch24 notes already reconcile actual NA10 one-dimensional interfaces and readiness. Preserve inherited page edge and scope; no speculative pair addition/deletion.",
+  "same_owner_consumer_check": {
+    "direct_and_indirect": [
+      "cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation",
+      "cor-parabolic-semidiscrete-spatial-error-rates"
+    ],
+    "outcome": "Parabolic consumer uses only unchanged conditional static rate with constant M^2/alpha*CFE*CD*CR for w=u and uprime; it explicitly carries both uniform dual bounds, primal regularity and exact initial Ritz projection. No affected Statement/Definition change or consumer repair needed for proposed proof-only fix. Recheck current consumers after drain."
+  },
+  "limits": "Only authorized proof/F3, contract derivation/zero-case mirrors, notes and cross-batch reconciliation changed after verified state/native result drain. Statements, supplier mathematics, manifests, readiness, levels, hashes, runtime unchanged. One required proof-layout passed; no other tests/gates/stamps/commits.",
+  "repair_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-fe38-evidence/mutation-record.json"
+}

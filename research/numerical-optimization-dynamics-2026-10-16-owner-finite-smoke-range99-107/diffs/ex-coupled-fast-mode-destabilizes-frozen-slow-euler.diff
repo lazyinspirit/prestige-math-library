@@ -1,0 +1,26 @@
+--- before/ex-coupled-fast-mode-destabilizes-frozen-slow-euler
++++ proposed/ex-coupled-fast-mode-destabilizes-frozen-slow-euler
+@@ -1,8 +1,19 @@
+ [
+   {
+-    "case": "H=0.6, m=2",
+-    "input": "x=z=1, h=0.3",
+-    "calculation": "x+=0.4; z1=-1.1; z2=1.84; 1-8h=-1.4",
+-    "result": "the method step is as stated and the fast perturbation expands by magnitude 1.4"
++    "check": "numerical-multirate-fixture",
++    "parameters": {
++      "fixture": "coupled-fast-two-microsteps"
++    },
++    "asserts": "It tends to zero as $t\\to\\infty$, so the continuous linear system is asymptotically stable, meaning every solution tends to the origin. Apply [[alg-frozen-slow-explicit-fast-euler]] with $H=3/5$, $m=2$, and $h=3/10$. The method gives $x^+=2/5$, $z_1=-11/10$, and $z_2=46/25$. At fixed frozen $x$, a fast-coordinate perturbation is multiplied per microstep by $1-8h=-7/5$, whose magnitude exceeds one; the exact homogeneous fast perturbation instead decays.",
++    "claim": "Exact rationals H=3/5,m=2,h=3/10,x=z=1: x+=2/5,z1=-11/10,z2=46/25, fast perturbation factor=-7/5. Recompute recurrence rather than print constants.",
++    "scope": "Bounded independent computations only; not a general proof or reading claim. Research implementation is unexecuted.",
++    "historical_declarative_entries": [
++      {
++        "case": "H=0.6, m=2",
++        "input": "x=z=1, h=0.3",
++        "calculation": "x+=0.4; z1=-1.1; z2=1.84; 1-8h=-1.4",
++        "result": "the method step is as stated and the fast perturbation expands by magnitude 1.4"
++      }
++    ]
+   }
+ ]

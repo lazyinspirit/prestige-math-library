@@ -1,0 +1,319 @@
+--- items/alg-fixed-point-iteration.md
++++ proposed/items/alg-fixed-point-iteration.md
+@@ -35,7 +35,5 @@
+ $(x_k,\texttt{iteration-budget-exhausted},r_k,k)$. Otherwise set
+ $x_{k+1}:=G(x_k)$ and continue.
+ 
+-The map condition $G:X\to X$ makes every update defined. The procedure makes at
+-most $N$ updates and $N+1$ residual evaluations, so it terminates for every
+-admissible input. A positive residual tolerance reports an approximate fixed
+-point only; this definition asserts no convergence or error bound.
++A positive residual tolerance reports an approximate fixed point only; this
++definition asserts no convergence or error bound.
+--- items/alg-finite-budget-newton-for-vector-residuals.md
++++ proposed/items/alg-finite-budget-newton-for-vector-residuals.md
+@@ -51,5 +51,4 @@
+ 4. Let $s_k$ be its correction. If $x_k+s_k\notin U$, return
+    $(x_k,\texttt{invalid-trial})$. Otherwise set $x_{k+1}=x_k+s_k$.
+ 
+-The procedure performs at most $N$ corrections. It makes no arbitrary-start,
+-global-convergence, or discretization-error claim.
++It makes no arbitrary-start, global-convergence, or discretization-error claim.
+--- items/thm-index-one-dae-finite-budget-solvers-terminate.md
++++ proposed/items/thm-index-one-dae-finite-budget-solvers-terminate.md
+@@ -11,6 +11,7 @@
+   - alg-index-one-dae-backward-euler-stepper
+   - alg-index-one-dae-bdf2-stepper
+   - alg-finite-budget-newton-for-vector-residuals
++  - lem-finite-budget-newton-work-and-status
+ justified_by: []
+ aliases: []
+ forward_refs: []
+@@ -38,7 +39,7 @@
+ 
+ **Given:** The finite grids, finite correction budget, and exact loops and status branches in the three DAE algorithms.
+ 
+-[F1] [[alg-finite-budget-newton-for-vector-residuals]]: for a budget $B$, Newton evaluates at iterates $0,\ldots,B$, performs at most $B$ corrections, and returns a status at a tolerance, domain, singular-Jacobian, or budget branch.
++[F1] [[lem-finite-budget-newton-work-and-status]]: with budget $B$, an admissible Newton call makes at most $B$ correction calls and $B+1$ explicit residual evaluations and returns a stated status under the returning-primitive convention.
+ 
+ [F2] [[alg-index-one-dae-consistent-initialization]]: initialization makes one such Newton call and, on root status, one extra algebraic-residual evaluation.
+ 
+--- items/thm-pseudo-arclength-local-newton-correction.md
++++ proposed/items/thm-pseudo-arclength-local-newton-correction.md
+@@ -17,6 +17,7 @@
+   - def-ck-euclidean-maps-and-diffeomorphisms
+   - def-total-derivative-in-euclidean-space
+   - thm-chain-rule-for-total-derivatives
++  - lem-finite-budget-newton-work-and-status
+ justified_by: []
+ aliases: []
+ proof_strategy: direct
+@@ -96,10 +97,10 @@
+ error recurrence; an infinite recurrence converges, while finite-budget
+ `root` status records only a residual tolerance.
+ 
+-[F5] [[alg-finite-budget-newton-for-vector-residuals]]: the exact procedure
+-tests residual tolerance, applies at most its specified number of Newton
+-corrections, checks trial-domain membership, and may return
+-`iteration-budget-exhausted` before tolerance is met.
++[F5] [[alg-finite-budget-newton-for-vector-residuals]] specifies the residual,
++trial-domain, singularity and budget branches. Its correction-call bound is
++proved in [[lem-finite-budget-newton-work-and-status]]; budget exhaustion may
++precede tolerance attainment.
+ 
+ [F6] [[thm-augmented-residual-contraction-certificate]]: under its certified
+ residual/Jacobian error, inverse, Lipschitz and strict contraction
+--- items/thm-pseudo-arclength-finite-trace-partial-correctness-and-termination.md
++++ proposed/items/thm-pseudo-arclength-finite-trace-partial-correctness-and-termination.md
+@@ -13,6 +13,7 @@
+   - thm-simple-fold-lyapunov-schmidt-parameterization
+   - alg-finite-budget-newton-for-vector-residuals
+   - thm-mean-value-inequality-for-total-derivatives
++  - lem-finite-budget-newton-work-and-status
+ proof_strategy: direct
+ provenance:
+   statement: ai-altered
+@@ -46,7 +47,7 @@
+ 
+ [F4] [[thm-simple-fold-lyapunov-schmidt-parameterization]] gives its local chart and normalized nonzero parameter curvature when all stated rank, regularity, complement and strict nondegeneracy hypotheses hold.
+ 
+-[F5] [[alg-finite-budget-newton-for-vector-residuals]] has at most its specified number of exact Newton corrections, with explicit singular/domain/budget or residual-stop outputs; it is not a root certificate.
++[F5] [[alg-finite-budget-newton-for-vector-residuals]] specifies its singular/domain/budget and residual-stop outputs; [[lem-finite-budget-newton-work-and-status]] proves its correction-call bound. Neither result makes a residual stop a root certificate.
+ 
+ [F6] [[lem-regular-curve-chart-and-pseudo-arclength-predictor-defect]] bounds $\|F(z_*+ht)\|_2$ by $\sqrt n Lh^2/2$ for the exact root and unit tangent on its admitted tube.
+ 
+--- items/thm-total-derivative-computes-directional-and-partial-derivatives.md
++++ proposed/items/thm-total-derivative-computes-directional-and-partial-derivatives.md
+@@ -40,7 +40,7 @@
+ 
+ **Proof technique:** direct.
+ 
+-1.1 For $t\ne0$, write $f(a+tv)-f(a)=tDf(a)v+r(tv)$, where $\|r(tv)\|_2/\|tv\|_2\to0$ by [L1]. [L1, L2]
++1.1 If $v=0$, then $(f(a+tv)-f(a))/t=0=Df(a)0$ for every $t\ne0$, so [L2] gives $D_0f(a)=Df(a)0$. For the remaining case assume $v\ne0$. For sufficiently small $t\ne0$, openness of $U$ gives $a+tv\in U$ and $tv\ne0$. Write $f(a+tv)-f(a)=tDf(a)v+r(tv)$, where $\|r(tv)\|_2/\|tv\|_2\to0$ by [L1]. [L1, L2, algebra]
+ 
+ 2.1 Dividing by $t$ gives $(f(a+tv)-f(a))/t=Df(a)v+r(tv)/t$, and $\|r(tv)/t\|_2=\|v\|_2\,\|r(tv)\|_2/\|tv\|_2\to0$; hence [L2] yields $D_vf(a)=Df(a)v$. [step 1.1, L2, algebra]
+ 
+--- items/alg-newton-chord-implicit-residual-with-factorization-reuse.md
++++ proposed/items/alg-newton-chord-implicit-residual-with-factorization-reuse.md
+@@ -12,6 +12,7 @@
+   - alg-newton-correction-for-vector-residuals
+   - def-c-one-map-and-local-inverse
+   - def-jacobian-matrix-and-gradient
++  - thm-total-derivative-computes-directional-and-partial-derivatives
+ justified_by: []
+ aliases: []
+ forward_refs: []
+@@ -32,7 +33,7 @@
+ 
+ ## Definition
+ 
+-Let $U\subseteq\mathbb R^m$ be open, $G:U\to\mathbb R^m$ be $C^1$, $z_0\in U$, residual tolerance $\varepsilon\ge0$, correction budget $N\in\mathbb N_0$, and refresh period $q\in\mathbb N$, $q\ge1$. Use the Jacobian convention $J(z)=DG(z)$ of [[def-jacobian-matrix-and-gradient]]. The output is a last valid iterate $z\in U$, a status, and the actual residual norm $\|G(z)\|_2$.
++Let $m\ge1$, let $U\subseteq\mathbb R^m$ be open, and let $G:U\to\mathbb R^m$ be $C^1$, $z_0\in U$, residual tolerance $\varepsilon\ge0$, correction budget $N\in\mathbb N_0$, and refresh period $q\in\mathbb N$, $q\ge1$. Use the coordinate Jacobian convention of [[def-jacobian-matrix-and-gradient]]. Since $G$ is $C^1$, [[thm-total-derivative-computes-directional-and-partial-derivatives]] identifies this Jacobian with the matrix of $DG(z)$; write it as $J(z)$. The output is a last valid iterate $z\in U$, a status, and the actual residual norm $\|G(z)\|_2$.
+ 
+ In **updated-Newton mode**, invoke [[alg-finite-budget-newton-for-vector-residuals]] with $G,z_0,\varepsilon,N$. It recomputes the Jacobian at every correction and returns its stated residual/budget/failure status. Re-evaluate $G$ at the returned iterate to provide the output residual norm. Count each Jacobian assembly, factorization attempt, and linear solve actually performed.
+ 
+--- items/alg-implicit-stiff-time-stepper-with-consistent-starts.md
++++ proposed/items/alg-implicit-stiff-time-stepper-with-consistent-starts.md
+@@ -18,6 +18,7 @@
+   - alg-newton-chord-implicit-residual-with-factorization-reuse
+   - thm-variable-step-bdf2-order-two-under-ratio-bound
+   - cor-constant-step-bdf2-order-two-with-consistent-start
++  - def-c-one-map-and-local-inverse
+ justified_by: []
+ aliases: []
+ forward_refs: []
+@@ -38,7 +39,7 @@
+ 
+ ## Definition
+ 
+-**Inputs.** Take a finite strictly increasing time grid $t_0<\cdots<t_N$, $N\ge1$, a vector field $f$ defined at every attempted evaluation, a method selector in {BE, the selected two-stage SDIRK, two-stage Radau IIA, variable-step BDF2}, and an initial state $Y_0$. For every BE or Runge–Kutta solve supply an admissible open residual domain $U_n$, an initial iterate $z_{n,0}\in U_n$, tolerance $\varepsilon_n\ge0$, correction budget $M_n\in\mathbb N_0$, Newton or chord mode, refresh period $q_n\ge1$, and a linear-system backend. In chord mode that backend must satisfy the exact-solve interface of [[alg-newton-chord-implicit-residual-with-factorization-reuse]]. For BDF2 supply $Y_1$, or select a BE startup and give that solve its own domain, initial iterate, tolerance, budget, mode, and refresh period. Also supply a closed BDF2 branch ball for each later BDF2 step.
++**Inputs.** Take a finite strictly increasing time grid $t_0<\cdots<t_N$, $N\ge1$, a vector field $f$ defined at every attempted evaluation, a method selector in {BE, the selected two-stage SDIRK, two-stage Radau IIA, variable-step BDF2}, and an initial state $Y_0$. For every finite BE, Runge–Kutta or BDF2 solve, including a startup solve, supply an admissible open residual domain $U_n\subseteq\mathbb R^{m_n}$ with $m_n\ge1$, an initial iterate $z_{n,0}\in U_n$, tolerance $\varepsilon_n\ge0$, correction budget $M_n\in\mathbb N_0$, Newton or chord mode, refresh period $q_n\ge1$, and a linear-system backend. Require the resulting square residual $G_n:U_n\to\mathbb R^{m_n}$ to be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]], and supply its exact derivative matrix whenever the selected finite solver requests a Jacobian. In chord mode that backend must satisfy the exact-solve interface of [[alg-newton-chord-implicit-residual-with-factorization-reuse]]. For BDF2 supply $Y_1$, or select a BE startup and give that solve its own domain, initial iterate, tolerance, budget, mode, and refresh period. Also supply a closed BDF2 branch ball for each later BDF2 step.
+ 
+ **Procedure.** For BE, form the endpoint residual of [[def-backward-euler-step-equation]]. For SDIRK or Radau IIA, form the stage residual of [[def-implicit-runge-kutta-stage-equations]] with the selected tableau and update by its formula. Call [[alg-newton-chord-implicit-residual-with-factorization-reuse]] for each finite solve. If it returns `root`, store the returned endpoint or stages, update the state, and record the returned residual norm and solver work; this status means only that the tolerance was met. On any other status, return immediately with the computed prefix, residual norm when available, and work log. An evaluation failure, singular Jacobian, invalid trial, or exhausted correction budget therefore cannot be reported as a successful step.
+ 
+--- items/alg-index-one-dae-backward-euler-stepper.md
++++ proposed/items/alg-index-one-dae-backward-euler-stepper.md
+@@ -49,6 +49,6 @@
+ 
+ Use $(X_{n-1},Z_{n-1})$ as the Newton seed. Before calling Newton, if $(X_{n-1},Z_{n-1})\notin\mathcal T_{t_n}$, return invalid-trial with the already computed prefix. Otherwise call [[alg-finite-budget-newton-for-vector-residuals]] on $\mathcal R_n$ with residual tolerance $1$, budget $B$, and $\mathcal T_{t_n}$ as its evaluation domain. If the returned status is root and the candidate lies in $\mathcal T_{t_n}$, reevaluate $R_n$ once to retain both unscaled residuals, then append the candidate. Otherwise return the corresponding singular-Jacobian, invalid-trial, or iteration-budget-exhausted status and the already computed prefix. The input functions are defined on the selected tube, so no separate evaluation-failure branch is needed. If every step is accepted, return completed and the state sequence.
+ 
+-An accepted step satisfies $\|r^d_n\|_2\le\eta_d$ for the derivative residual $r^d_n=(X_n-X_{n-1})/h-f(t_n,X_n,Z_n)$, and $\|r^a_n\|_2\le\eta_a$ for the algebraic residual $r^a_n=g(t_n,X_n,Z_n)$. This follows because each block norm is at most the norm of their concatenation. root means only that the scaled residual tolerance was met; it does not assert an exact zero, uniqueness, Newton convergence from an arbitrary seed, or a discretization error bound.
++For recording, define the derivative residual $r^d_n=(X_n-X_{n-1})/h-f(t_n,X_n,Z_n)$ and the algebraic residual $r^a_n=g(t_n,X_n,Z_n)$. root means only that the scaled residual tolerance was met; it does not assert an exact zero, uniqueness, Newton convergence from an arbitrary seed, or a discretization error bound.
+ 
+-Each step solves a coupled block system with $d+m$ unknowns. At most $B$ Newton corrections and $B+1$ Newton residual evaluations are made per attempted step, plus at most one residual reevaluation to record the unscaled blocks after a root status. Each correction uses one solve with the current $(d+m)$-dimensional block Jacobian. Work per residual, Jacobian assembly, and linear solve depends on the backend.
++Use the coupled $(d+m)$-dimensional residual and its current block Jacobian. Record residual queries, Jacobian assemblies and correction solves separately; backend costs are not specified.
+--- items/alg-index-one-dae-bdf2-stepper.md
++++ proposed/items/alg-index-one-dae-bdf2-stepper.md
+@@ -54,6 +54,6 @@
+ $$
+ r^d_n=\frac{3X_n-4X_{n-1}+X_{n-2}}{2h}-f(t_n,X_n,Z_n),
+ $$
+-and the algebraic residual is $r^a_n=g(t_n,X_n,Z_n)$. The scaling ensures $\|r^d_n\|_2\le\eta_d$ and $\|r^a_n\|_2\le\eta_a$. The procedure makes no claim that Newton finds a root or that an accepted state is the exact selected branch root.
++and the algebraic residual is $r^a_n=g(t_n,X_n,Z_n)$.  The procedure makes no claim that Newton finds a root or that an accepted state is the exact selected branch root.
+ 
+-Each step solves a coupled block system with $d+m$ unknowns. At most $B$ Newton corrections and $B+1$ Newton residual evaluations are made per attempted step, plus at most one residual reevaluation to record the unscaled blocks after a root status. Each correction uses one solve with the current $(d+m)$-dimensional block Jacobian. Work per residual, Jacobian assembly, and linear solve depends on the backend.
++Use the coupled $(d+m)$-dimensional residual and its current block Jacobian. Record residual queries, Jacobian assemblies and correction solves separately; backend costs are not specified.
+--- items/alg-index-one-dae-consistent-initialization.md
++++ proposed/items/alg-index-one-dae-consistent-initialization.md
+@@ -36,4 +36,4 @@
+ 
+ The procedure makes no arbitrary-start convergence claim. approximate-consistent records a residual bound; it is not relabeled as exact consistency. Under the index-one branch hypotheses an exact consistent value exists locally, by [[thm-index-one-dae-implicit-function-reduction]], but the finite Newton budget may fail to find it.
+ 
+-The solve has $m$ algebraic unknowns. With budget $N$, the Newton supplier performs at most $N$ corrections, each using one $m\times m$ Jacobian solve, and at most $N+1$ residual evaluations. A root status adds one residual reevaluation for recording, so the procedure uses at most $N+2$ residual evaluations. Residual/Jacobian assembly and linear-solve costs depend on the chosen backend.
++The solve has $m$ algebraic unknowns. Record residual queries, Jacobian assemblies and correction solves separately. Their costs depend on the chosen backend.
+--- items/alg-pseudo-arclength-continuation-with-certified-local-corrector.md
++++ proposed/items/alg-pseudo-arclength-continuation-with-certified-local-corrector.md
+@@ -95,7 +95,7 @@
+ $$h a_k>r_k,\qquad h a_k+r_k\le\kappa r_{\rm ch}^+.$$
+ These checks bound $d=\tau_k^T(z_p-z_k^*)$ between $h a_k-r_k$ and $h a_k+r_k$, so the selected section has one forward intersection on the supplied chart by [[lem-transverse-hyperplane-selects-unique-local-branch-point]]. A failed chart angle gives `tangent-angle-failure`; failed offset/length evidence gives `root-certificate-inconclusive`. If the predictor, proposed ball or required chart leaves the declared tube, return `tube-exit`.
+ 4. With exact evaluations, call [[alg-finite-budget-newton-for-vector-residuals]] on $G_k$ from $z_p$, tolerance $\epsilon$ and update budget $N_c$. Map `singular-jacobian` to `singular-corrector` and `invalid-trial` to `tube-exit`. For `root` or `iteration-budget-exhausted`, retain the last valid iterate as a candidate. If the predictor is certified inside the invariant ball of [[thm-pseudo-arclength-local-newton-correction]], every attempted exact update has its quadratic error bound; otherwise this is only a candidate generator. Apply the root certificate of [[thm-augmented-residual-contraction-certificate]] to the last candidate. Accept only if every inequality passes and the **whole** ball lies in $V_k$. Unavailable inputs give `root-certificate-inconclusive`; failed tests after a `root` residual stop give that same status; failed tests after exhausted updates give `corrector-budget-exhausted`. Neither residual tolerance nor budget alone is a root proof. A passing ball proceeds to step6, without an earlier append.
+-5. With bounded evaluation errors, set $y_0=z_p$. For $j=0,\ldots,N_c$, query the supplied certified residual/Jacobian and root-ball data at $y_j$. Unavailable certificate inputs give `root-certificate-inconclusive`. Apply the same strict contraction tests and whole-ball inclusion in $V_k$ as in step4. A passing ball proceeds to step6, without an earlier append. If the tests fail at $j=N_c$, return `corrector-budget-exhausted`. Otherwise call [[alg-newton-correction-for-vector-residuals]] on the supplied approximate augmented residual and matrix. Map `singular-jacobian` to `singular-corrector`; a trial outside the tube gives `tube-exit`; otherwise set $y_{j+1}=y_j+s_j$. There are at most $N_c$ updates and $N_c+1$ certificate attempts. This bounded-error branch has no convergence promise.
++5. With bounded evaluation errors, set $y_0=z_p$. For $j=0,\ldots,N_c$, query the supplied certified residual/Jacobian and root-ball data at $y_j$. Unavailable certificate inputs give `root-certificate-inconclusive`. Apply the same strict contraction tests and whole-ball inclusion in $V_k$ as in step4. A passing ball proceeds to step6, without an earlier append. If the tests fail at $j=N_c$, return `corrector-budget-exhausted`. Otherwise call [[alg-newton-correction-for-vector-residuals]] on the supplied approximate augmented residual and matrix. Map `singular-jacobian` to `singular-corrector`; a trial outside the tube gives `tube-exit`; otherwise set $y_{j+1}=y_j+s_j$.  This bounded-error branch has no convergence promise.
+ 6. Append the passing ball **once**, with its section, error bounds and chart/angle record; increase $a$ by one. For the next attempt use the already certified unit candidate $\widehat t_k$ as the new previous orientation. It is not silently declared the exact tangent at the new root: step2 must certify its angle against the next root's tangent. Return to step1.
+ 7. At every finalization, including every early return, retain the continuation status already assigned. For a requested fold check require a returned certified record satisfying all hypotheses of [[thm-simple-fold-lyapunov-schmidt-parameterization]] at its specified point: $F=0$, the required $C^3$ neighborhood, $\operatorname{rank}F_x=n-1$, normalized right and nonzero left nullvectors, and strict enclosures excluding zero for $w^TF_\lambda$ and $w^TF_{xx}[v,v]$, together with the stated complement/parameter normalization. Missing or failed evidence leaves the fold field `inconclusive`; otherwise set it to `certified` and record only the local fold chart and curvature formula. Without a fold request keep `not-requested`. This finalization makes finitely many callback requests and performs no unbounded search.
+ 
+--- items/thm-finite-budget-rattle-solver-returns-status.md
++++ proposed/items/thm-finite-budget-rattle-solver-returns-status.md
+@@ -35,10 +35,10 @@
+ 
+ [F1] [[alg-finite-budget-rattle-step-with-scaled-residuals]]: the procedure makes at most one position solve and, only if that succeeds, one momentum solve; all other actions are finite evaluations and assignments.
+ 
+-[F2] [[alg-newton-chord-implicit-residual-with-factorization-reuse]]: in chord mode with budget $N$, the residual solver checks at most $N+1$ iterates, makes at most $N$ corrections, and returns a residual or failure status at each terminating branch.
++[F2] [[alg-newton-chord-implicit-residual-with-factorization-reuse]]: chord mode tests the residual at successive indices $k=0,\ldots,N$, returns at its tolerance or failure branches, and at $k=N$ returns for budget before another correction. A continuing pass makes one correction and advances the index by one.
+ 
+ ## Proof
+ 
+-1.1 The position call in [F1] is the finite-budget supplier call in [F2], so it terminates after at most $N_q+1$ residual checks and $N_q$ corrections. If it returns any non-success status, the RATTLE routine returns immediately after finitely many further arithmetic operations. [F1, F2, given]
++1.1 By induction on the loop index in [F2], a chord call with budget $N$ enters at most $N+1$ residual checks and makes at most $N$ corrections: only indices below $N$ can correct, and an entered index $N$ returns. Under the supplier's returning-operation interface, the call terminates. Apply this to the position call in [F1] with $N=N_q$. If it returns any non-success status, the RATTLE routine returns immediately after finitely many further arithmetic operations. [F1, F2, given]
+ 
+ 2.1 If the position call succeeds, the algorithm makes the single momentum call in [F1], which by [F2] terminates after at most $N_p+1$ residual checks and $N_p$ corrections; the remaining assignment and status return are finite. Therefore every execution terminates and returns one of the specified statuses. [F1, F2, step 1.1, algebra] ∎
+--- items/thm-shooting-residual-error-budget.md
++++ proposed/items/thm-shooting-residual-error-budget.md
+@@ -15,6 +15,7 @@
+   - prop-shooting-residual-zero-iff-bvp-solution
+   - thm-gronwall-integral-inequality
+   - thm-multivariable-taylor-formula-with-lagrange-remainder
++  - lem-vector-newton-correction-error-under-lipschitz-jacobian
+ justified_by: []
+ proof_strategy: direct
+ provenance:
+@@ -54,7 +55,7 @@
+ 
+ [F4] [[alg-single-shooting-for-nonlinear-bvps]]: the computed root-tolerance status is only the residual bound for $B(s,\widetilde\Phi(s))$.
+ 
+-[F5] [[thm-multivariable-taylor-formula-with-lagrange-remainder]]: the Taylor remainder for a C2 map with $L_R$-Lipschitz derivative has norm at most $(L_R/2)\|s-s^*\|_2^2$ on the ball.
++[F5] [[lem-vector-newton-correction-error-under-lipschitz-jacobian]]: apply its estimate on the convex ball with its evaluation point $x=s^*$ and its other point $x_*=s$. Since $R(s^*)=0$, this gives $R(s)=DR(s^*)(s-s^*)+q$ with $\|q\|_2\le(L_R/2)\|s-s^*\|_2^2$.
+ 
+ [F6] [[thm-gronwall-integral-inequality]]: a difference bound $u(t)\le u(a)+L\int_a^t u$ yields $u(t)\le e^{L(t-a)}u(a)$.
+ 
+--- items/thm-periodic-midpoint-collocation-error-budget.md
++++ proposed/items/thm-periodic-midpoint-collocation-error-budget.md
+@@ -19,6 +19,7 @@
+   - thm-chain-rule-for-total-derivatives
+   - thm-ftc-second-part
+   - thm-norm-inequality-for-the-vector-valued-integral
++  - cor-vector-valued-ftc-and-lipschitz-bound
+ proof_strategy: direct
+ provenance:
+   statement: ai-altered
+@@ -39,7 +40,7 @@
+ 
+ Consider the augmented phase-fixed BVP of [[def-phase-bordered-periodic-orbit-bvp]] on $[0,1]$, with exact solution $u_*\in C^3$, field $\widetilde f$, and affine boundary map $B$. Put
+ $$M_2=\|u_*''\|_\infty,\quad M_3=\|u_*'''\|_\infty,\quad L_f=\sup\|D\widetilde f\|_2,\quad C_0=M_3/24+L_fM_2/8.$$
+-Let $G_h$ be the normalized midpoint residual on a uniform mesh and $Y^*$ the samples of $u_*$. Suppose that for all $0<h\le h_0$, $J_h=DG_h(Y^*)$ is invertible with $\|J_h^{-1}\|_{\infty\to\infty}\le K$, and on a fixed-radius ball of radius $r$ about $Y^*$ the maps $DG_h$ are $L_G$-Lipschitz in the block maximum norm. Assume $2KL_Gr\le1/2$, $KC_0h^2\le r/2$, and $2K^2L_GC_0h^2\le1/2$. Then $G_h$ has a unique zero $Y_h$ in that ball. Every candidate $Y$ in the ball satisfying $\|G_h(Y)\|_\infty\le\varepsilon$ obeys
++For every admitted mesh cell with midpoint $m_i$, assume the segment joining $u_*(m_i)$ to $(u_*(t_i)+u_*(t_{i+1}))/2$ lies in the field domain and $\|D\widetilde f\|_{\rm op}\le L_f$ on that segment. Let $G_h$ be the normalized midpoint residual on a uniform mesh and $Y^*$ the samples of $u_*$. Suppose that for all $0<h\le h_0$, $J_h=DG_h(Y^*)$ is invertible with $\|J_h^{-1}\|_{\infty\to\infty}\le K$, and on a fixed-radius ball of radius $r$ about $Y^*$ the maps $DG_h$ are $L_G$-Lipschitz in the block maximum norm. Assume $2KL_Gr\le1/2$, $KC_0h^2\le r/2$, and $2K^2L_GC_0h^2\le1/2$. Then $G_h$ has a unique zero $Y_h$ in that ball. Every candidate $Y$ in the ball satisfying $\|G_h(Y)\|_\infty\le\varepsilon$ obeys
+ $$
+ \|P_hY-u_*\|_\infty\le 4K\varepsilon+\left(2KC_0+\frac{M_2}{8}\right)h^2,
+ $$
+@@ -55,7 +56,7 @@
+ 
+ [F3] A contraction of a nonempty complete metric space into itself has a unique fixed point ([[thm-banach-fixed-point]]). The closed ball in the node space is complete: a block-maximum Cauchy sequence is Cauchy in each of its finitely many Euclidean blocks, each block converges by [[thm-euclidean-space-complete]], and the finite maximum of the block errors tends to zero; closedness keeps the limit in the ball.
+ 
+-[F4] Taylor's formula along a segment bounds the stated $C^2$ and $C^3$ remainders ([[thm-multivariable-taylor-formula-with-lagrange-remainder]]).
++[F4] [[cor-vector-valued-ftc-and-lipschitz-bound]] gives the componentwise integral of a continuous vector derivative. [[thm-norm-inequality-for-the-vector-valued-integral]] bounds the Euclidean norm of that integral. Apply these in each output block; taking the finite maximum preserves the same bound in the block maximum norm.
+ 
+ [F5] If $\|J^{-1}(A-J)\|\le1/2$, the perturbed operator is invertible with inverse norm at most $2\|J^{-1}\|$ ([[lem-neumann-series-and-small-perturbations-of-bounded-inverses]]).
+ 
+@@ -64,12 +65,12 @@
+ [F7] The fundamental theorem of calculus applies coordinatewise to a continuously differentiable vector curve, and the norm of a Euclidean vector-valued integral is at most the integral of the norm ([[thm-ftc-second-part]], [[thm-norm-inequality-for-the-vector-valued-integral]]).
+ 
+ ## Proof
+-1.1 On a mesh cell centered at $m_i$, write $s=t-m_i$. Taylor's formula gives $u_*'(m_i+s)=u_*'(m_i)+s u_*''(m_i)+r(s)$ with $\|r(s)\|_2\le M_3s^2/2$. Averaging over the symmetric interval cancels the odd term and gives $\|(u_*(t_{i+1})-u_*(t_i))/h-u_*'(m_i)\|_2\le M_3h^2/24$. The average endpoint state differs from $u_*(m_i)$ by at most $M_2h^2/8$, so the Lipschitz bound $L_f$ gives $\|G_h(Y^*)\|_\infty\le C_0h^2$; the boundary residual is exactly zero. These are uniform cellwise bounds, hence independent of the number of cells. [F1, F4, given, algebra]
++1.1 On a mesh cell centered at $m_i$, repeated vector FTC gives $u_*'(m_i+s)=u_*'(m_i)+s u_*''(m_i)+r(s)$, where $r(s)=\int_0^s\int_0^v u_*'''(m_i+w)\,dw\,dv$. For negative limits reverse their orientation before applying the norm inequality. Thus $\|r(s)\|_2\le M_3|s|^2/2$. Averaging over $[-h/2,h/2]$ cancels the odd term and gives a difference-quotient defect at most $M_3h^2/24$. Applying the same integral argument to $u_*$ at $m_i\pm h/2$ bounds each first-order remainder by $M_2h^2/8$; their average therefore bounds the endpoint-average displacement from $u_*(m_i)$ by $M_2h^2/8$. Integrating $D\widetilde f$ on the connecting segment bounds the corresponding field difference by $L_fM_2h^2/8$. The affine boundary residual is zero. Taking the maximum of the cell bounds gives $\|G_h(Y^*)\|_\infty\le C_0h^2$. [F1, F4, given, algebra]
+ 
+-2.1 Define $T_h(Y)=Y-J_h^{-1}G_h(Y)$. The Jacobian Lipschitz bound gives $\|T_h(Y)-T_h(Z)\|_\infty\le KL_Gr\|Y-Z\|_\infty\le\frac14\|Y-Z\|_\infty$ on the ball. Also $\|T_h(Y^*)-Y^*\|_\infty\le KC_0h^2\le r/2$, so $T_h$ maps the ball into itself. By [F3], it has a unique fixed point $Y_h$, and invertibility of $J_h$ makes fixed points exactly the zeros of $G_h$. The fixed-point equation also gives $\|Y_h-Y^*\|_\infty\le KC_0h^2/(1-1/4)\le2KC_0h^2$. [F2, F3, step 1.1, given]
++2.1 Define $T_h(Y)=Y-J_h^{-1}G_h(Y)$. The Jacobian Lipschitz bound gives $\|T_h(Y)-T_h(Z)\|_\infty\le KL_Gr\|Y-Z\|_\infty\le\frac14\|Y-Z\|_\infty$ on the ball. Also $\|T_h(Y^*)-Y^*\|_\infty\le KC_0h^2\le r/2$, so $T_h$ maps the ball into itself. By [F3], it has a unique fixed point $Y_h$, and invertibility of $J_h$ makes fixed points exactly the zeros of $G_h$. The fixed-point equation also gives $\|Y_h-Y^*\|_\infty\le KC_0h^2/(1-1/4)\le2KC_0h^2$. [F2, F3, F4, step 1.1, given]
+ 
+ 3.1 The perturbation bound $\|DG_h(Y_h)-J_h\|\le L_G\|Y_h-Y^*\|$ implies $\|J_h^{-1}(DG_h(Y_h)-J_h)\|\le2K^2L_GC_0h^2\le1/2$. The small-perturbation inverse bound [F5] therefore gives $DG_h(Y_h)^{-1}$ with norm at most $2K$. [F5, step 2.1, given]
+ 
+ 4.1 Put $\delta=Y-Y_h$ and define $R(t)=G_h(Y_h+t\delta)-G_h(Y_h)-tDG_h(Y_h)\delta$ for $0\le t\le1$. The segment lies in the ball. By the chain rule [F6], $R\prime(t)=(DG_h(Y_h+t\delta)-DG_h(Y_h))\delta$, so the Lipschitz bound gives $\|R\prime(t)\|_\infty\le L_Gt\|\delta\|_\infty^2$. For each Euclidean block index $j$, [F7] gives $\|R_j(1)\|_2\le\int_0^1\|R_j\prime(t)\|_2dt\le\int_0^1\|R\prime(t)\|_\infty dt$; taking the finite maximum over $j$ gives $\|R(1)\|_\infty\le\int_0^1\|R\prime(t)\|_\infty dt\le(L_G/2)\|\delta\|_\infty^2$. Thus $G_h(Y)=DG_h(Y_h)(Y-Y_h)+R(1)$ with this remainder bound. Since both vectors lie in the radius-$r$ ball, $\|Y-Y_h\|_\infty\le2r$, and $2KL_Gr\le1/2$ yields $\|Y-Y_h\|_\infty\le2K\varepsilon+\frac12\|Y-Y_h\|_\infty$. Hence $\|Y-Y_h\|_\infty\le4K\varepsilon$. [F6, F7, step 3.1, given, algebra]
+ 
+-5.1 Linear interpolation is a convex combination of adjacent node values, so $\|P_h(Y-Y_h)\|_\infty\le\|Y-Y_h\|_\infty$. The exact curve differs from its own linear interpolant by at most $M_2h^2/8$ on each cell, by [F4]. The sample error of $Y_h$ is at most $2KC_0h^2$ by step 2.1. Adding these three bounds proves the displayed estimate. [F4, step 2.1, step 4.1, given, algebra] ∎
++5.1 Linear interpolation is a convex combination, so $\|P_h(Y-Y_h)\|_\infty\le\|Y-Y_h\|_\infty$. On a cell $[a,b]$ of length $h$, repeated FTC gives $u_*(t)-P_hY^*(t)=-\int_a^b K_t(s)u_*''(s)\,ds$, where $K_t(s)=(b-t)(s-a)/h$ for $s\le t$ and $K_t(s)=(t-a)(b-s)/h$ for $s\ge t$. This kernel is nonnegative and has integral $(t-a)(b-t)/2\le h^2/8$, so [F4] gives the interpolation bound $M_2h^2/8$. The sample error of $Y_h$ is at most $2KC_0h^2$ by step 2.1. Combining these bounds with step 4.1 proves the displayed estimate. [F4, step 2.1, step 4.1, given, algebra] ∎
+--- items/lem-forward-difference-jacobian-error-bound.md
++++ proposed/items/lem-forward-difference-jacobian-error-bound.md
+@@ -14,6 +14,7 @@
+   - thm-chain-rule-for-total-derivatives
+   - thm-multivariable-taylor-formula-with-lagrange-remainder
+   - thm-cauchy-schwarz-and-the-euclidean-norm
++  - thm-continuous-partial-derivatives-imply-total-differentiability
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -61,11 +62,13 @@
+ 
+ [F6] [[thm-cauchy-schwarz-and-the-euclidean-norm]]: $|\sum_i a_i b_i|\le(\sum_i a_i^2)^{1/2}(\sum_i b_i^2)^{1/2}$.
+ 
++[F7] [[thm-continuous-partial-derivatives-imply-total-differentiability]]: continuous first partial derivatives give a total derivative with the coordinate Jacobian matrix. Applied to each $F_j$ and each first partial of $F_j$, the componentwise $C^2$ hypotheses give the total differentiability needed below; continuity of the derivative entries makes $F$ a $C^1$ map admissible for [F1].
++
+ ## Proof
+ 
+ **Given:** The data in the Statement.
+ 
+-1.1 For each input coordinate $i<n$ and output component $j<n$, put $g_{ij}(t):=F_j(x+t h_i e_i)$ on $I_i$. The chain rule [F4] and Jacobian identification [F3] give $g_{ij}'(t)=h_i\partial_iF_j(x+t h_i e_i)$ and $g_{ij}''(t)=h_i^2\partial_{ii}F_j(x+t h_i e_i)$. Taylor's theorem [F5] between $0$ and $1$ supplies $\theta_{ij}\in(0,1)$ with $F_j(x+h_i e_i)-F_j(x)=h_i\partial_iF_j(x)+\frac{h_i^2}{2}\partial_{ii}F_j(x+\theta_{ij}h_i e_i)$. The points $\theta_{ij}$ may differ between components. [given, F3, F4, F5, choose]
++1.1 By [F7], the $C^2$ components and their first partials have the total derivatives needed for the chain rule, and $F$ is admissible for [F1]. For each input coordinate $i<n$ and output component $j<n$, put $g_{ij}(t):=F_j(x+t h_i e_i)$ on $I_i$. The chain rule [F4] and Jacobian identification [F3] give $g_{ij}'(t)=h_i\partial_iF_j(x+t h_i e_i)$ and $g_{ij}''(t)=h_i^2\partial_{ii}F_j(x+t h_i e_i)$. Taylor's theorem [F5] between $0$ and $1$ supplies $\theta_{ij}\in(0,1)$ with $F_j(x+h_i e_i)-F_j(x)=h_i\partial_iF_j(x)+\frac{h_i^2}{2}\partial_{ii}F_j(x+\theta_{ij}h_i e_i)$. The points $\theta_{ij}$ may differ between components. [given, F3, F4, F5, choose]
+ 
+ 2.1 Divide by the nonzero $h_i$. In column $i$, output coordinate $j$ has error at most $M_{ij}|h_i|/2$; hence the Euclidean column error is at most $M_i|h_i|/2$, even though the remainder points $\theta_{ij}$ may differ. [step 1.1, F1, F2, given, algebra]
+ 
+--- items/lem-regular-curve-chart-and-pseudo-arclength-predictor-defect.md
++++ proposed/items/lem-regular-curve-chart-and-pseudo-arclength-predictor-defect.md
+@@ -113,6 +113,6 @@
+ 
+ 2.1 The speed $v(r):=\|\gamma'(r)\|_2$ is continuous and positive on a smaller interval because $v(0)=1$. Set $\ell(r):=\int_0^r v(u)\,du$. On a compact subinterval $[a,b]$ with $a<0<b$, continuity makes $v$ integrable by [F4]. Set $H(r)=\int_a^r v$; [F12] gives $H\prime(r)=v(r)$. By [F13], $\ell(r)=H(r)-H(0)$ on both sides of zero, so $\ell\prime(r)=v(r)>0$; [F7] therefore gives a local inverse $r=r(s)$. The curve $c(s):=\gamma(r(s))$ is $C^1$, satisfies $\|c'(s)\|_2=1$, and has $c(0)=z_0$, $c'(0)=t$. [F3, F4, F5, F7, F12, F13, step 1.1, algebra]
+ 
+-3.1 Fix an admissible $s,h$ and put $e:=h c'(s)$. Differentiating the identity $F(c(r))=0$ at $r=s$ by the chain rule gives $DF(c(s))c'(s)=0$, hence $DF(c(s))e=0$. For each coordinate $i\in\{1,\ldots,n\}$, apply [F3] and [F4] to $u\mapsto F_i(c(s)+u e)$ and subtract the zero linear term $DF_i(c(s))e$ to obtain $$F_i(c(s)+e)=\int_0^1\bigl(DF_i(c(s)+u e)-DF_i(c(s))\bigr)e\,du.$$ The Lipschitz bound, [F6], and $\|e\|_2=h$ bound the integrand in absolute value by $Lu h^2$; [F5] then gives the coordinate bound $Lh^2/2$. [F3, F4, F5, F6, F8, F9, given, step 2.1]
++3.1 Fix an admissible $s,h$ and put $e:=h c'(s)$. Differentiating the identity $F(c(r))=0$ at $r=s$ by the chain rule gives $DF(c(s))c'(s)=0$, hence $DF(c(s))e=0$. For each coordinate $0\le i<n$, apply [F3] and [F4] to $u\mapsto F_i(c(s)+u e)$ and subtract the zero linear term $DF_i(c(s))e$ to obtain $$F_i(c(s)+e)=\int_0^1\bigl(DF_i(c(s)+u e)-DF_i(c(s))\bigr)e\,du.$$ The Lipschitz bound, [F6], and $\|e\|_2=h$ bound the integrand in absolute value by $Lu h^2$; [F5] then gives the coordinate bound $Lh^2/2$. [F3, F4, F5, F6, F8, F9, given, step 2.1]
+ 
+ 4.1 Combining the $n$ coordinate bounds gives $\|F(z_p)\|_2\le \sqrt n Lh^2/2$. The last coordinate of $G_{s,h}(z_p)$ is zero by the definition of $z_p$, proving the augmented residual bound. [step 3.1, algebra] ∎ 
+--- items/thm-sqp-reduced-bfgs-superlinear-under-dm.md
++++ proposed/items/thm-sqp-reduced-bfgs-superlinear-under-dm.md
+@@ -80,6 +80,6 @@
+ 
+ 2.1 The inverse bound gives $\|s_k\|_2\le C\|F_k\|_2$ and therefore $\|p_k\|_2\le C\|F_k\|_2$. The Dennis–Moré condition supplies numbers $\delta_k\to0$ with $\|r_k\|_2\le\delta_k\|p_k\|_2$ whenever $p_k\ne0$; therefore $\|r_k\|_2\le C\delta_k\|F_k\|_2$. At a zero primal step the displayed residual is zero, so the same conclusion holds. [given, step 1.1, algebra]
+ 
+-3.1 LICQ and the second-order condition make $J_*$ nonsingular by [F2], as in the exact-Hessian result. The Jacobian is locally Lipschitz by [A1]. Thus the steps satisfy the inexact-Newton equation with forcing ratio $\eta_k=C\delta_k\to0$. [A1, F2, F4, step 2.1]
++3.1 LICQ and the second-order condition make $J_*$ nonsingular by [F2], as in the exact-Hessian result. The Jacobian is locally Lipschitz by [A1]. Thus the steps satisfy the inexact-Newton equation with forcing factor $\eta_k:=\|r_k\|_2/\|F_k\|_2$ when $F_k\ne0$, and $\eta_k:=0$ when $F_k=0$. Assumption [A1] gives $\eta_k\le\bar\eta<1$, while step 2.1 gives $\eta_k\le C\delta_k\to0$. [A1, F2, F4, step 2.1]
+ 
+ 4.1 Apply [F4] to the combined primal-dual variable. Starting sufficiently near the root, the full steps remain local and converge superlinearly. If an exact root is reached, no further convergence assertion is needed; if the algorithm reports a failed solve, its nonsingularity hypotheses have failed and this theorem does not apply. [F3, F4, step 3.1] ∎
+--- items/ex-self-consistent-projector-two-cycle-with-gap.md
++++ proposed/items/ex-self-consistent-projector-two-cycle-with-gap.md
+@@ -48,6 +48,6 @@
+ 
+ 1.1 For Hermitian $X,Y$, the diagonal entries are real and $\langle G(X),Y\rangle_F=X_{11}Y_{11}+X_{22}Y_{22}=\langle X,G(Y)\rangle_F.$ Thus $G$ is real-linear, Hermitian-valued, and self-adjoint for the Frobenius inner product, so the stated data satisfy [F1]. Each $P_i$ is Hermitian, idempotent, and has trace $1$, hence lies in $\mathcal P_1$. [given, F1, algebra]
+ 
+-1.2 Direct substitution gives $F(P_0)=\operatorname{diag}(1,0)$ and $F(P_1)=\operatorname{diag}(0,1)$. Each matrix has eigenvalues $0<1$, so the strict occupied gap is $1$. By [F2], the lowest eigenspace of $F(P_0)$ is $\operatorname{span}(e_2)$ and that of $F(P_1)$ is $\operatorname{span}(e_1)$; [F4] guarantees these give the unique projectors $\Phi(P_0)=P_1$ and $\Phi(P_1)=P_0$. [given, F2, F4, algebra]
++1.2 Direct substitution gives $F(P_0)=\operatorname{diag}(1,0)$ and $F(P_1)=\operatorname{diag}(0,1)$. Each matrix has eigenvalues $0<1$, so the strict occupied gap is $1$. By [F2], the lowest eigenspace of $F(P_0)$ is $\operatorname{span}\{(0,1)^T\}$ and that of $F(P_1)$ is $\operatorname{span}\{(1,0)^T\}$; [F4] guarantees these give the unique projectors $\Phi(P_0)=P_1$ and $\Phi(P_1)=P_0$. [given, F2, F4, algebra]
+ 
+ 2.1 By [F3], starting at $P_0$ yields $P_0,P_1,P_0,P_1,\ldots$. Since $\|P_0-P_1\|_F=\sqrt2>0$, this sequence does not converge. Thus a positive uniform gap at the iterates alone does not imply convergence. [step 1.2, F3, algebra] ∎
+--- items/alg-undamped-scf-with-gap-and-residual-status.md
++++ proposed/items/alg-undamped-scf-with-gap-and-residual-status.md
+@@ -34,7 +34,7 @@
+ 2. Set $P_{k+1}^{raw}=\Phi(P_k)$ and $\rho_k=\|P_k-P_{k+1}^{raw}\|_F$. If $\rho_k\le\varepsilon$, return $(P_k,\texttt{residual-tolerance-met},\rho_k,k)$.
+ 3. If $k=N$, return $(P_k,\texttt{iteration-budget-exhausted},\rho_k,k)$. Otherwise set $P_{k+1}=P_{k+1}^{raw}$ and continue.
+ 
+-The procedure uses at most $N$ updates. It reports a residual stopping status,
+-gap loss, eigensolver failure, or budget exhaustion separately. A finite budget
++It reports a residual stopping status, gap loss, eigensolver failure, or budget
++exhaustion separately. A finite budget
+ does not guarantee that the residual tolerance will be met, and the definition
+ asserts no convergence from damping or from a positive gap alone.

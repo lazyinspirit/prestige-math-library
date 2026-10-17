@@ -1,0 +1,68 @@
+--- a/items/thm-continuous-ode-adjoint-gradient-formula.md
++++ b/items/thm-continuous-ode-adjoint-gradient-formula.md
+@@ -31,7 +31,7 @@
+ where $\phi$ and $\ell$ are $C^1$ on a neighborhood of the trajectory tube and their first derivatives are bounded and uniformly continuous there. Let $S=D_\theta u_\theta$ be the tangent from that lemma. Let $p$ solve the terminal adjoint problem
+ $$-p'(t)=D_u f(t,u_\theta(t),\theta)^Tp(t)+D_u\ell(t,u_\theta(t),\theta)^T,\qquad p(T)=D_u\phi(u_\theta(T),\theta)^T.$$
+ Then
+-$$\nabla_\theta J=D_\theta\phi(u_\theta(T),\theta)^T+p(0)^TD_\theta u_0(\theta)+\int_0^T\bigl(D_\theta\ell(t,u_\theta,\theta)^T+D_\theta f(t,u_\theta,\theta)^Tp(t)\bigr)\,dt.$$
++$$\nabla_\theta J=D_\theta\phi(u_\theta(T),\theta)^T+D_\theta u_0(\theta)^Tp(0)+\int_0^T\bigl(D_\theta\ell(t,u_\theta,\theta)^T+D_\theta f(t,u_\theta,\theta)^Tp(t)\bigr)\,dt.$$
+ This formula separates initial, terminal, running-cost and vector-field parameter terms. It applies only while the common-tube and differentiability hypotheses hold.
+ 
+ ## Facts & Assumptions
+@@ -50,9 +50,9 @@
+ 
+ 1.1 By [F3], the terminal linear adjoint equation has a unique $C^1$ solution on $[0,T]$. [F3, given]
+ 
+-1.2 For a parameter increment $h$, the mean-value integral formula for the $C^1$ integrand, uniform continuity on the compact tube, and [F1] show that the objective difference quotient converges uniformly in $t$ to $D_\theta\ell(t,u_\theta,\theta)^T+D_u\ell(t,u_\theta,\theta)S(t)$. The terminal difference quotient converges to $D_\theta\phi^T+D_u\phi\,S(T)$. Uniform convergence permits integrating the running derivative, so $\nabla_\theta J=D_\theta\phi^T+S(T)^TD_u\phi^T+\int_0^T(D_\theta\ell^T+S^TD_u\ell^T)\,dt$. [F1, A1, given]
++1.2 By [F1], the state depends $C^1$ on the parameter and has sensitivity $S$. The chain rule gives the column gradient of the running integrand as $D_\theta\ell(t,u_\theta,\theta)^T+S(t)^TD_u\ell(t,u_\theta,\theta)^T$. The mean-value integral formula, boundedness and uniform continuity of the objective derivatives on the common compact tube, and the uniform first-order state remainder from [F1] make the running first-order remainder $o(\|h\|)$ uniformly in $t$ for a parameter increment $h$. Integration therefore gives its derivative by integrating that column gradient. The terminal chain rule gives $D_\theta\phi^T+S(T)^TD_u\phi^T$. Consequently $\nabla_\theta J=D_\theta\phi^T+S(T)^TD_u\phi^T+\int_0^T(D_\theta\ell^T+S^TD_u\ell^T)\,dt$. [F1, A1, given]
+ 
+-1.3 In [F2], set $A=D_uf$, $B=D_\theta f$, and $g=D_u\ell^T$. The adjoint equation in the Statement and tangent equation in [F1] satisfy its hypotheses. Since $p(T)=D_u\phi^T$, the identity gives $$S(T)^TD_u\phi^T-p(0)^TD_\theta u_0=\int_0^T(-D_u\ell\,S+p^TD_\theta f)\,dt.$$ [F1, F2, given]
++1.3 In [F2], set $A=D_uf$, $B=D_\theta f$, and $g=D_u\ell^T$. The adjoint equation in the Statement and tangent equation in [F1] satisfy its hypotheses. Transposing that row pairing identity and using $p(T)=D_u\phi^T$ gives $$S(T)^TD_u\phi^T-D_\theta u_0^Tp(0)=\int_0^T(-S^TD_u\ell^T+D_\theta f^Tp)\,dt.$$ [F1, F2, given]
+ 
+-2.1 Substitute step 1.3 into step 1.2; the terms involving $D_u\ell\,S$ cancel, leaving the asserted continuous adjoint gradient formula. [step 1.2, step 1.3, algebra] ∎
++2.1 Substitute step 1.3 into step 1.2; the terms involving $S^TD_u\ell^T$ cancel, leaving the asserted continuous adjoint gradient formula. [step 1.2, step 1.3, algebra] ∎
+ 
+--- a/items/thm-discrete-continuous-gradient-error-order-p.md
++++ b/items/thm-discrete-continuous-gradient-error-order-p.md
+@@ -26,9 +26,11 @@
+ 
+ Let $J$ and $J_h$ be the continuous and finite state-step objectives of [[thm-continuous-ode-adjoint-gradient-formula]] and [[thm-discrete-adjoint-gradient-recursion]], respectively, and put $h=T/N$. Let $q(t,u,p)=D_\theta\ell(t,u,\theta)^T+D_\theta f(t,u,\theta)^Tp$ be the continuous running-gradient vector, evaluated on its exact state and adjoint as $q(t):=q(t,u(t),p(t))$. Suppose the exact and numerical state/adjoint pairs lie in a common tube and
+ $$\max_n\bigl(\|u_n-u(t_n)\|_2+\|p_n-p(t_n)\|_2\bigr)\le C_xh^p.$$
+-For the state part of this bound, it is sufficient that the hypotheses of [[thm-global-error-from-one-step-defect-and-stability]] hold with a uniform $O(h^{p+1})$ exact-start defect; the coefficient conditions of [[prop-explicit-rk-order-conditions-through-four]] supply that defect for an explicit Runge--Kutta method of order $p\le4$ under that item's $C^4$ and common-tube assumptions. No cited state-error result supplies the adjoint part, which is an independent hypothesis here. Suppose the numerical running-gradient vector $\widehat q_n$ also satisfies
+-$$\|\widehat q_n-q(t_n,u_n,p_n)\|_2\le C_dh^p,$$
+-the endpoint contributions in the two gradient formulas differ by at most $C_bh^p$, and the quadrature $Q_h(q)=\sum_{n=0}^Nw_nq(t_n)$ has nonnegative weights with $\sum_nw_n=T$ and
++For the state part of this bound, it is sufficient that the hypotheses of [[thm-global-error-from-one-step-defect-and-stability]] hold with a uniform $O(h^{p+1})$ exact-start defect; the coefficient conditions of [[prop-explicit-rk-order-conditions-through-four]] supply that defect for an explicit Runge--Kutta method of order $p\le4$ under that item's $C^4$ and common-tube assumptions. No cited state-error result supplies the adjoint part, which is an independent hypothesis here. Write $b$ and $b_h$ for the column initial/terminal contribution vectors in the continuous and discrete gradient formulas. Assume the discrete running-gradient terms admit vectors $\widehat q_n$ and nonnegative weights $w_n$, $0\le n\le N$, with
++$$\nabla J_h=b_h+\sum_{n=0}^N w_n\widehat q_n,\qquad \nabla J=b+\int_0^Tq(t)\,dt,\qquad \sum_{n=0}^Nw_n=T.$$
++The weighted discrete representation is an explicit premise; it is not implied by the generic finite state-step adjoint recursion. Suppose
++$$\|\widehat q_n-q(t_n,u_n,p_n)\|_2\le C_dh^p,\qquad \|b_h-b\|_2\le C_bh^p,$$
++and that the same weights give the quadrature $Q_h(q)=\sum_{n=0}^Nw_nq(t_n)$ satisfying
+ $$\left\|Q_h(q)-\int_0^Tq(t)\,dt\right\|_2\le C_Qh^p.$$
+ If $q$ is Lipschitz in $(u,p)$ on the common tube with constant $L_q$ in the sum norm, then
+ $$\|\nabla J_h-\nabla J\|_2\le\bigl(C_b+T(C_d+L_qC_x)+C_Q\bigr)h^p.$$
+@@ -52,7 +54,7 @@
+ 
+ 1.1 If the stated explicit Runge--Kutta conditions are used, [F4] supplies the exact-start defect required by [F3]. Under the stated stability, common-tube and initial-error hypotheses, [F3] gives the state part of the asserted $C_xh^p$ bound; the adjoint part remains the separately assumed bound. [F3, F4, given]
+ 
+-2.1 By [F1] and [F2], the two gradients are their respective endpoint terms plus, respectively, the weighted sum of $\widehat q_n$ and the integral of $q$. At each node, insert and subtract $q(t_n,u_n,p_n)$. The derivative-data assumption and Lipschitz bound give $\|\widehat q_n-q(t_n)\|_2\le(C_d+L_qC_x)h^p$. [A1, F1, F2, step 1.1, algebra]
++2.1 By [F1], [F2], and the explicit weighted representation in the Statement, the two gradients are their respective endpoint terms plus, respectively, the weighted sum of $\widehat q_n$ and the integral of $q$. At each node, insert and subtract $q(t_n,u_n,p_n)$. The derivative-data assumption and Lipschitz bound give $\|\widehat q_n-q(t_n)\|_2\le(C_d+L_qC_x)h^p$. [A1, F1, F2, step 1.1, algebra]
+ 
+ 3.1 Since $w_n\ge0$ and $\sum_nw_n=T$, the node-data perturbation contributes at most $T(C_d+L_qC_x)h^p$. The exact-integrand quadrature error contributes at most $C_Qh^p$, and the endpoint difference at most $C_bh^p$. The Euclidean triangle inequality gives the displayed bound. [A1, F1, F2, step 2.1, algebra] ∎
+ 
+--- a/items/alg-differentiate-finite-fixed-point-iteration.md
++++ b/items/alg-differentiate-finite-fixed-point-iteration.md
+@@ -23,4 +23,6 @@
+ 
+ ## Definition
+ 
+-Input a $C^1$ map $G(z,\theta)$, a $C^1$ initial-state map $z_0(\theta)$, a parameter $\theta$, and a finite budget $K\ge0$. Form the finite computational graph for $z_{k+1}(\theta)=G(z_k(\theta),\theta)$, $k=0,\ldots,K-1$. Evaluate that graph and run forward mode to compute both $z_K(\theta)$ and its derivative $D_\theta z_K(\theta)$. Return that pair with status ITERATES_DIFFERENTIATED. A primitive-domain failure returns DOMAIN_ERROR; a nonsmooth active-branch switch returns NONDIFFERENTIABLE. This procedure differentiates the $K$-step map actually specified by $G,z_0,K$; it does not substitute the derivative of an exact fixed point.
++Input a finite-dimensional $C^1$ map $G(z,\theta)$, a $C^1$ initial-state map $z_0(\theta)$, a parameter $\theta$ in an open subset of $\mathbb R^p$, and an integer budget $K\ge0$; the states lie in $\mathbb R^m$, with $p,m\ge0$. Use the specified maps $z_0$ and $G$, with their exact derivative evaluations, as primitive maps on their declared open domains. Evaluate $z_0(\theta)$ and then $z_{k+1}(\theta)=G(z_k(\theta),\theta)$ for $k=0,\ldots,K-1$. A primitive-domain failure returns DOMAIN_ERROR; a branch boundary or ambiguous active branch returns NONDIFFERENTIABLE and no derivative. The admissible case requires every evaluation to remain in its declared domain and, for piecewise primitives, on a unique strict active branch.
++
++Allocate an $m\times p$ Jacobian array $J$. For each state coordinate $a=1,\ldots,m$, form the finite scalar-output graph for $f_a(\theta)=(z_K(\theta))_a$ by appending the coordinate projection to the finite recursion. For each parameter coordinate $\ell=1,\ldots,p$, call [[alg-forward-mode-automatic-differentiation]] on this graph at $\theta$ with direction $e_\ell$, the $\ell$th standard basis vector of $\mathbb R^p$, and put its returned tangent in $J_{a\ell}$. Propagate any DOMAIN_ERROR or NONDIFFERENTIABLE status from a call. Return $(z_K(\theta),J)$ with status ITERATES_DIFFERENTIATED. For $K=0$ the recursion contains only the initial-state map. If $m=0$ or $p=0$, the corresponding loops are empty and $J$ has the specified empty shape; the primal recursion is still evaluated. This procedure differentiates the $K$-step map actually specified by $G,z_0,K$; it does not substitute the derivative of an exact fixed point.
+--- a/items/alg-ctrl1-runge-kutta-shooting-and-collocation-transcription.md
++++ b/items/alg-ctrl1-runge-kutta-shooting-and-collocation-transcription.md
+@@ -35,4 +35,4 @@
+ 
+ **RK collocation:** introduce stage variables $X_{j,i}$ and impose the general collocation stage equations and endpoint equation from [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]]. This includes implicit tableaus such as Gauss collocation: their stages remain coupled equality constraints in the NLP and are not required to be solved while constructing the transcription. Approximate the objective by $\sum_j h_j\sum_i b_iL(t_{j,i},X_{j,i},u_j)+\phi(X_{N,0})$; include path constraints only at their explicitly declared nodes.
+ 
+-For single or multiple shooting, check the pointwise domain before evaluating an explicit stage map; an unavailable stage evaluation returns a domain or evaluation failure and supplies no NLP candidate. For collocation, the stage values are decision variables, so construct the finite NLP and check each queried stage domain whenever its objective or constraint functions are evaluated; a failed query returns a failure status. This direct transcription samples actual pointwise data; an $L^\infty$ equivalence class without a specified representative is not stage-evaluable. For a single-shooting reduced objective represented as the finite state-step graph of [[def-parameterized-finite-state-step-objective]], its exact real-arithmetic reduced gradient is given by [[thm-discrete-adjoint-gradient-recursion]]. Agreement of that gradient with the continuous ODE adjoint gradient is only conditional on the separate state, adjoint, derivative-data, endpoint, and quadrature estimates in [[thm-discrete-continuous-gradient-error-order-p]]. An embedded adaptive RK controller may be used to produce a separate trajectory estimate, but its embedded difference is not a certified global error bound and does not define the fixed smooth NLP map above. The algorithm makes no continuous-path feasibility, convergence-rate, global-optimality, or unconditioned discrete-adjoint accuracy claim.
++For single or multiple shooting, check the pointwise domain before evaluating an explicit stage map; an unavailable stage evaluation returns a domain or evaluation failure and supplies no NLP candidate. For collocation, the stage values are decision variables, so construct the finite NLP and check each queried stage domain whenever its objective or constraint functions are evaluated; a failed query returns a failure status. This direct transcription samples actual pointwise data; an $L^\infty$ equivalence class without a specified representative is not stage-evaluable. For a single-shooting reduced objective represented as the finite state-step graph of [[def-parameterized-finite-state-step-objective]], its exact real-arithmetic reduced gradient is given by [[thm-discrete-adjoint-gradient-recursion]]. Agreement of that gradient with the continuous ODE adjoint gradient is only conditional on the weighted discrete-gradient representation and the separate state, adjoint, derivative-data, endpoint, and quadrature estimates in [[thm-discrete-continuous-gradient-error-order-p]]. An embedded adaptive RK controller may be used to produce a separate trajectory estimate, but its embedded difference is not a certified global error bound and does not define the fixed smooth NLP map above. The algorithm makes no continuous-path feasibility, convergence-rate, global-optimality, or unconditioned discrete-adjoint accuracy claim.

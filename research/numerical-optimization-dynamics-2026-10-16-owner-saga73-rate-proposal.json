@@ -1,0 +1,144 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "status": "Readonly proposal only; active native73 writer retained. No active carrier, manifest, control, readiness or runtime edit performed.",
+  "active_writer": {
+    "dispatch_pid": 8981,
+    "label": "batch-73",
+    "task": "research/numerical-optimization-dynamics-2026-10-16-beta-73-dependency-order.task.md",
+    "state_warning": "Stored state has an old failed endedAt despite observed live dispatch; do not treat stale state as drain authority."
+  },
+  "confirmed_defect": {
+    "item": "thm-saga-expected-linear-contraction",
+    "original_required_claim": "Same fixed potential contraction1-mu eta without memory-rate cap under eta<=min{1/(3L),mu/(13L\u00b2)} is false.",
+    "counterexample": {
+      "n": 100,
+      "L": 1,
+      "mu": 1,
+      "x0": 1,
+      "eta": "1/13",
+      "functions": "fi(x)=x\u00b2/2 for every i, standard initialization",
+      "V0": "1",
+      "V1": "144/169",
+      "S0_and_S1": "1",
+      "potential0": "869/169",
+      "potential1": "844/169",
+      "ratio": "844/869",
+      "false_factor": "12/13",
+      "comparison": "13*844=10972>10428=12*869; all outcomes identical so expectation changes nothing."
+    }
+  },
+  "approved_scope": "Controlling plan STO2 requires practical geometric expected objective convergence for convex L-smooth components and strongly convex sum, plus standard SAGA work/storage. Exact fixed-potential old factor is mathematically false; preserving scope calls for corrected rate, not only shrinking to memory-scaled eta.",
+  "richest_focused_repair": {
+    "same_potential": true,
+    "alternate_potential_needed": false,
+    "constant_step": "0<eta<=1/(10L), including eta=1/(10L) independent of n and mu",
+    "rate": "q=1-min{mu*eta,1/(7n)}",
+    "memory_complexity_scale": "For eta=1/(10L), inverse rate parameter=max{10L/mu,7n}; n initialization gradients plus O((n+L/mu)log(initial_bound/target)) subsequent component-gradient evaluations. Maintained table mean gives O(d) vector arithmetic per update and O(nd) storage; no bound on cost of a component-gradient oracle and no total runtime/work bound is asserted.",
+    "old_corrected_branch": "Retain original sufficient min{1/(3L),mu/(13L\u00b2),1/(7mu n)} theorem as a special case; no need to delete its proved claim.",
+    "counterexample": "Preserve unchanged as refutation of unamended faster factor, including standard initialization.",
+    "implementation": "One additional same-pair theorem; original proven theorem and counterexample unchanged. No new pair."
+  },
+  "exact_guarded_statement_proposal": "Under the current component convexity/L-smoothness, average mu-strong convexity, stationary minimizer, standard initialized SAGA, independent uniform sampling and AC hypotheses, retain V_k, S_k and the same potential mathcal L_k=V_k+7 eta\u00b2 n S_k. For any 0<eta<=1/(10L), define delta=min{mu eta,1/(7n)} and q=1-delta. Then E[mathcal L_{k+1}|F_k]<=q mathcal L_k, E[mathcal L_k]<=q^k mathcal L_0 and E[F(x_k)-F*]<= (L/2) q^k mathcal L_0. In particular eta=1/(10L) is independent of n and gives delta=min{mu/(10L),1/(7n)}. Preserve the already-proved sufficient branch eta<=min{1/(3L),mu/(13L\u00b2),1/(7mu n)} as a corollary with q=1-mu eta. The existing counterexample refutes omitting the memory-rate cap, not the corrected min-rate theorem.",
+  "proposed_proof_steps": [
+    {
+      "step": "1.1",
+      "claim": "Let Delta=F(x)-F*. Apply the current strong-convexity lower-support inequality at x with y=x*: <grad F(x),x-x*> >= Delta+(mu/2)V. Keep Delta>=0 and Delta<=L V/2 from the original proof. mu<=L is proved as in the current theorem; hence eta<=1/(10L) gives mu eta<=1/10 and delta>0.",
+      "inputs": [
+        "lem-strong-convexity-implies-strong-monotonicity-of-gradient",
+        "lem-l-smoothness-descent-inequality",
+        "lem-finite-sum-gradient-is-average",
+        "current original proof1.1/4.1"
+      ]
+    },
+    {
+      "step": "2.1",
+      "claim": "Expand Vnext=V-2eta<grad F,e>+eta\u00b2 E||v||\u00b2 conditionally. Unbiasedness, the gap-retaining bound in1.1 and current estimator bound give E[Vnext|history]<=(1-mu eta)V+(-2eta+6L eta\u00b2)Delta+6eta\u00b2 S.",
+      "inputs": [
+        "alg-saga-finite-sum-method",
+        "lem-saga-estimator-and-table-recurrence",
+        "step1.1"
+      ]
+    },
+    {
+      "step": "2.2",
+      "claim": "Multiply E[Snext|history]<=(1-1/n)S+(2L/n)Delta by7eta\u00b2n and add: E[mathcal Lnext|history]<=(1-mu eta)V+(-2eta+20Leta\u00b2)Delta+(7n-1)eta\u00b2 S.",
+      "inputs": [
+        "lem-saga-estimator-and-table-recurrence",
+        "step2.1"
+      ]
+    },
+    {
+      "step": "3.1",
+      "claim": "eta<=1/(10L) makes the gap coefficient nonpositive. Thus discard Delta>=0 and bound the V coefficient by1-delta and S coefficient by7eta\u00b2n(1-delta), since delta<=mu eta and delta<=1/(7n). This proves the conditional potential contraction. No n-dependent restriction on eta is used.",
+      "inputs": [
+        "step1.1",
+        "step2.2"
+      ]
+    },
+    {
+      "step": "4.1",
+      "claim": "Finite gradient/index histories give finite-time moments, exactly as in current source; AC and tower property give unconditional contraction and finite induction gives E[mathcal L_k]<=q^k mathcal L_0. Delta<=L V/2<=L mathcal L/2 gives expected objective bound. For original sufficient eta branch, mu<=L implies eta<=1/(13L)<1/(10L), and eta<=1/(7mu n) gives delta=mu eta, recovering every original corrected claim.",
+      "inputs": [
+        "def-axiom-of-choice",
+        "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+        "step1.1",
+        "step3.1"
+      ]
+    }
+  ],
+  "smallest_suppliers": "No new item or pair necessary: use current alg-saga, estimator/table recurrence, strong-convexity lower-support inequality, L-smooth average bound, finite sum, inner product and conditional expectation/AC suppliers already in theorem deps.",
+  "source_use": "Independent local algebra verified from actual current supplier statements/full relevant proofs. No new external full-text acquisition or reading claimed; no uncertainty remains in this elementary fixed-potential derivation.",
+  "actual_consumer_checks": [
+    {
+      "item": "alg-saga-finite-sum-method",
+      "disposition": "Supplier procedure unchanged; old-table estimator and pre-update table replacement essential and retained. Standard initialization/work/storage unchanged."
+    },
+    {
+      "item": "lem-saga-estimator-and-table-recurrence",
+      "disposition": "Supplier unchanged: its exact6L gap+6S and table2L/n gap constants yield20L eta\u00b2, not a guessed published rate."
+    },
+    {
+      "item": "cex-saga-linear-factor-fails-under-standard-initialization",
+      "disposition": "Preserve statement/calculation unchanged; corrected q at witness eta1/13,n100 is1-1/700, so it does not assert false12/13."
+    },
+    {
+      "page": "variance-reduced-finite-sum-and-adaptive-gradient-optimization",
+      "disposition": "Actual A prose still describes only memory-restricted repair/escalation. After drain update to state constant-step min-rate, retained special case and counterexample."
+    },
+    {
+      "page": "variance-reduced-finite-sum-and-adaptive-gradient-optimization-examples",
+      "disposition": "Current logistic example invokes SVRG only, work example invokes algorithm not contraction theorem, Adam example unrelated. No inherited SAGA rate claim to weaken."
+    },
+    {
+      "item": "ex-svrg-saga-gradient-work-storage-comparison",
+      "disposition": "Inspected full proof; only counts initialization/one gradient per update/storage; unchanged."
+    },
+    {
+      "other_item_consumers": "Exact-ID reference scan finds no other item citing the SAGA theorem, so there is no actual item claim requiring rate-hypothesis repair beyond A-page mirror."
+    }
+  ],
+  "notes_observation": "research/numerical-optimization-dynamics-2026-10-16-batch-73.notes.md does not exist at inspection; no claim of reading unavailable active-author notes. Actual A-page current discrepancy prose and Step1 escalation/counterexample records were read.",
+  "after_genuine_drain_actions": [
+    "Re-read final active73 source/notes/records before applying a proposal; do not overwrite author changes.",
+    "Archive complete source/theorem/control/mirror preimages.",
+    "Add exactly one same-pair constant-step capped-rate theorem with proposed proof; preserve the entire existing memory-scaled theorem mathematical Statement and proof, and counterexample. Any historical discrepancy editorial note must clarify the former contract is repaired without changing those mathematical claims.",
+    "Amend active STO2 false-factor paragraph to distinguish capped min-factor and faster factor when mu*eta<=1/(7n); add new theorem to actual A-page, manifest, coverage/proof-contract/interface mirrors. Do not silently alter the old proven Statement.",
+    "Same owner confirms actual consumers with final source; required scoped precheck/final explicit layout only when actual repair is authorized.",
+    "Root owns readiness/levels/hash/stamp/registry/gate bindings."
+  ],
+  "not_performed": [
+    "active source edits",
+    "control edits",
+    "tests",
+    "hash calculation",
+    "ready record write",
+    "level edit",
+    "runtime mutation",
+    "gate",
+    "stamp",
+    "commit"
+  ],
+  "root_direction": "Preserve current memory-scaled theorem/Statement and counterexample; add exactly one same-pair constant-step theorem after genuine drain.",
+  "new_same_pair_item": "thm-saga-constant-step-memory-capped-linear-contraction",
+  "proposed_control_replacement": "For the same potential V+7eta\u00b2nS, all0<eta<=1/(10L) yield factor1-min{mu eta,1/(7n)}. If additionally mu eta<=1/(7n), this is the faster1-mu eta factor. Retain original sufficient step-size branch min{1/(3L),mu/(13L\u00b2),1/(7mu n)} as a separately proved special case; retain the counterexample showing the memory cap cannot simply be omitted. Constant eta=1/(10L) yields the stated gradient-evaluation count under the algorithm maintained-mean/component-gradient oracle model, not a total-runtime bound."
+}

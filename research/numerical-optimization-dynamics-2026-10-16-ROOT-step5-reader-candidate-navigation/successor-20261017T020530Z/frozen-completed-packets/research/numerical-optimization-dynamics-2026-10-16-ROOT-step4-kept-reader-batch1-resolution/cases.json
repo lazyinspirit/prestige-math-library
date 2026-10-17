@@ -1,0 +1,583 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "research_only": true,
+  "status": "proposal-only; no canonical/native application or certification",
+  "cases": [
+    {
+      "id": "thm-scaled-householder-qr-backward-stability",
+      "batch": 1,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+      "pointer": "/concerns/0",
+      "finding": {
+        "id": "thm-scaled-householder-qr-backward-stability",
+        "concern": "The Statement says that applying the stored reflectors to a separate b 'gives a full vector' with the stated error bound, but explicitly assumes success only for the QR steps. Its Facts section additionally assumes successful vector updates. This qualification should also appear in the Statement: in binary64, A=[1] factors successfully with stored v=2 and tau=1/2, while applying that reflector to b=[N_max] fails at the dot product 2*N_max. The proof is sound under its stated successful-vector-update assumption.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_row": {
+        "id": "thm-scaled-householder-qr-backward-stability",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "Accepted: the local perturbations embed into the full matrix, their transported norms sum to the stated geometric bound, and the separate real-vector updates are bounded by \u03ba_m per step. The reflector order and QR dimensions match the supplied interface.",
+        "context_sha256": "f00f837a52f2f3f9437ef50efbcbd3be55c350a25622ebbdab5a6e2fd73a9379",
+        "item_sha256": "c6dd1c285b9c10ce1b434e282dac3e763895ec015efe3ec80316a1a45e7a7e14",
+        "at": "2026-10-16T17:45:00.307Z"
+      },
+      "classification": "confirmed-defect",
+      "type": "statement-premise-omission",
+      "focused_evidence": [
+        "The local-step lemma Statement promises a separate-block discrepancy only for successful application. Its Facts assume every nonzero exact intermediate normal. The QR Facts likewise explicitly assume successful QR and vector updates, but the QR Statement qualifies success only for QR.",
+        "For binary64 A=[1], the procedure computes s=z=t=h=rhat=1, alpha=-1, v=2, w=4, tau=1/2, and no trailing columns; every QR operation succeeds. For b=[N_max], replay first computes fl(v*b)=fl(2*N_max), whose exact value exceeds N_max and therefore returns range-failure. No full c exists in this branch.",
+        "Under successful replay the local lemma applies to each real active suffix. Its coefficient is at most kappa_m. Orthogonal transport and the same finite geometric sum prove the existing beta_Q bound; no proof or constant replacement is needed."
+      ],
+      "unsupported_extensions": [
+        "No flaw is asserted in the successful-update proof, QR bound, reflector order, dimensions, or fixed-dimension O(u) claim.",
+        "This is an explicit premise clarification, not a claim of unconditional success or a new narrowing of approved mathematics."
+      ],
+      "canonical_target": "items/thm-scaled-householder-qr-backward-stability.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/thm-scaled-householder-qr-backward-stability.md",
+      "proposal_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/thm-scaled-householder-qr-backward-stability.md",
+      "guard": {
+        "type": "exact-raw-byte-preimage",
+        "require": "Before future canonical application, canonical_target must exactly equal before_file; stop and re-review on any divergence. Root binds native hashes; none generated here."
+      },
+      "native_digest": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+        "pointer": "/concerns/0",
+        "concern_index": 0
+      },
+      "exact_edits": [
+        {
+          "scope": "Statement",
+          "before": "Applying the stored reflectors in the same order to a separate vector $b$, by their rounded rank-one updates without column overwrites, gives a full vector $\\widehat c$ satisfying",
+          "after": "Successful application of the stored reflectors in the same order to a separate vector $b$, by their rounded rank-one updates without column overwrites, gives a full vector $\\widehat c$ satisfying"
+        }
+      ],
+      "definition_or_statement_changed": true,
+      "original_luna_status": "kept; immutable original row preserved above; no new verdict or review coverage asserted",
+      "future_mirrors": [
+        "research/numerical-optimization-dynamics-2026-10-16-batch-1.proof-contracts.json /contracts/thm-computed-full-rank-least-squares-backward-stability/citations/0/quote: replace current full QR Statement quote with the exact proposed successor Statement only after source repair.",
+        "Current QR own boundaries/risk prose already describes successful vector arithmetic; retain and align only if future contract tooling requires exact Statement mirrors.",
+        "No changed-proof derivations. Fresh native reviews/certification and root hashes remain owed. Never rewrite frozen original reader/Luna evidence."
+      ]
+    },
+    {
+      "id": "alg-two-product-fma-error-free-transform",
+      "batch": 1,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+      "pointer": "/concerns/3",
+      "finding": {
+        "id": "alg-two-product-fma-error-free-transform",
+        "concern": "The algorithm carrier contains a numbered ## Proof establishing termination rather than placing that property in a separate proved result as the dispatch requires; justified_by is empty.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "alg-two-product-fma-error-free-transform",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The product and FMA obey the supplied range-failure model; when the exact residual is representable, correctly rounded FMA returns it exactly. The fixed two-operation procedure terminates; the proof\u2019s loop discussion is irrelevant but not a fatal defect.",
+        "context_sha256": "570707390e028415228b08a9a0b26cf4eb48bbde2ca2cf89a7f302be878bfc1d",
+        "item_sha256": "993d5611c26c94e55bade81b06869ff060013ba5cc0b5614f917ab960ac251b3",
+        "at": "2026-10-16T17:28:16.530Z"
+      },
+      "classification": "confirmed-presentation-defect",
+      "focused_evidence": [
+        "The carrier has a numbered Proof rather than an extracted algorithmic-property result. SCHEMA Algorithms and the actual Step4 dispatch explicitly require separate proved results for termination.",
+        "Its actual schedule is one multiply followed by one FMA, each returning finite value or failure under the operationwise model. The proof mentions loops that this algorithm does not have; that irrelevant sentence is unnecessary, not a mathematical counterexample.",
+        "The existing thm-two-product-fma-error-free-transform already proves exact residual recovery when the exact residual is zero or normal representable, because correctly rounded FMA then returns that residual exactly. Preserve that result and the Definition."
+      ],
+      "unsupported_extensions": [
+        "Empty justified_by alone is not a mathematical defect and is not generally forbidden. No exactness or termination failure is claimed."
+      ],
+      "canonical_target": "items/alg-two-product-fma-error-free-transform.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/alg-two-product-fma-error-free-transform.md",
+      "proposal_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/alg-two-product-fma-error-free-transform.md",
+      "guard": {
+        "type": "exact-raw-byte-preimage",
+        "require": "Before future canonical application, canonical_target must exactly equal before_file; stop and re-review on any divergence. Root binds native hashes; none generated here."
+      },
+      "native_digest": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+        "pointer": "/concerns/3",
+        "concern_index": 3
+      },
+      "exact_edits": [
+        {
+          "scope": "frontmatter",
+          "before": "justified_by: []",
+          "after": "justified_by: [lem-two-product-kahan-neumaier-termination-and-status]"
+        },
+        {
+          "scope": "frontmatter",
+          "before": "proof_strategy: direct\n",
+          "after": ""
+        },
+        {
+          "scope": "frontmatter",
+          "before": "  proof: ai-altered",
+          "after": "  proof: not-applicable"
+        },
+        {
+          "scope": "frontmatter",
+          "before": "  precheck: pass",
+          "after": "  precheck: n/a"
+        },
+        {
+          "scope": "body",
+          "before": "\n## Facts & Assumptions\n**Given:** a finite input of the stated type and the operationwise arithmetic model.\n\n[F1] [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]: each successful elementary operation returns a finite value, and an invalid or out-of-range operation returns a failure status.\n\n## Proof\n\n1.1 Every loop index ranges over the finite input length or matrix dimensions; any branch test in the definition is a comparison of already supplied finite values. [given, choose]\n\n2.1 At each operation the model [F1] either returns a finite next value or the defined failure status, and every loop has its stated finite bound. Thus execution terminates with the specified output or first failure. [step 1.1, F1, algebra] \u220e\n",
+          "after": "\n"
+        }
+      ],
+      "definition_or_statement_changed": false,
+      "original_luna_status": "kept; immutable original row preserved above; no new verdict or review coverage asserted",
+      "future_mirrors": [
+        "Native Step5 creation/admission for proposed lemma required before adding justified_by links.",
+        "Future native manifest/dependency/capacity/page integration for lemma; retain every existing algorithm and all its operational/property sentences.",
+        "Remove algorithm from proof-bearing contract inventory only after moving proof obligation to native lemma contract; retain algorithm manifest identity and n/a proof treatment. No Definition quote mirrors change.",
+        "Do not rewrite frozen Step4 reader digest, original Luna rows, Step3 closure, or old receipts."
+      ]
+    },
+    {
+      "id": "alg-kahan-compensated-summation",
+      "batch": 1,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+      "pointer": "/concerns/4",
+      "finding": {
+        "id": "alg-kahan-compensated-summation",
+        "concern": "The algorithm carrier contains a numbered ## Proof establishing termination rather than placing that property in a separate proved result as the dispatch requires; justified_by is empty.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "alg-kahan-compensated-summation",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The recurrence is defined in operation order, and the cited model supplies finite results or range-failure statuses. The finite loop therefore terminates with the stated result or first failure.",
+        "context_sha256": "c59160a63ab89f3e548b9ecba211b71dffa4be58ccc94625e4d32c79df00daa8",
+        "item_sha256": "8da1bf14b53b24bc622c3b2afc3cba0937d4b3e2feede8b246f54333076d5627",
+        "at": "2026-10-16T17:28:13.282Z"
+      },
+      "classification": "confirmed-presentation-defect",
+      "focused_evidence": [
+        "The numbered generic termination Proof belongs in a separate result under the actual dispatch and SCHEMA.",
+        "For n>=0 each iteration executes the fixed y,s,d,c schedule of four operations. Successful finite values feed the next operation; any failure returns at once. At most 4n operations are attempted. For n=0 return s0=0 without any operation.",
+        "The existing finite-error-identity theorem explicitly covers n=0 and successful nonempty recurrences. Moving the termination argument does not change its defining recurrence or identities."
+      ],
+      "unsupported_extensions": [
+        "No invalid recurrence, termination failure, or accuracy defect is inferred from this placement concern. Empty justified_by alone is not a general schema violation."
+      ],
+      "canonical_target": "items/alg-kahan-compensated-summation.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/alg-kahan-compensated-summation.md",
+      "proposal_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/alg-kahan-compensated-summation.md",
+      "guard": {
+        "type": "exact-raw-byte-preimage",
+        "require": "Before future canonical application, canonical_target must exactly equal before_file; stop and re-review on any divergence. Root binds native hashes; none generated here."
+      },
+      "native_digest": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+        "pointer": "/concerns/4",
+        "concern_index": 4
+      },
+      "exact_edits": [
+        {
+          "scope": "frontmatter",
+          "before": "justified_by: []",
+          "after": "justified_by: [lem-two-product-kahan-neumaier-termination-and-status]"
+        },
+        {
+          "scope": "frontmatter",
+          "before": "proof_strategy: direct\n",
+          "after": ""
+        },
+        {
+          "scope": "frontmatter",
+          "before": "  proof: ai-altered",
+          "after": "  proof: not-applicable"
+        },
+        {
+          "scope": "frontmatter",
+          "before": "  precheck: pass",
+          "after": "  precheck: n/a"
+        },
+        {
+          "scope": "body",
+          "before": "\n## Facts & Assumptions\n**Given:** a finite input of the stated type and the operationwise arithmetic model.\n\n[F1] [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]: each successful elementary operation returns a finite value, and an invalid or out-of-range operation returns a failure status.\n\n## Proof\n\n1.1 Every loop index ranges over the finite input length or matrix dimensions; any branch test in the definition is a comparison of already supplied finite values. [given, choose]\n\n2.1 At each operation the model [F1] either returns a finite next value or the defined failure status, and every loop has its stated finite bound. Thus execution terminates with the specified output or first failure. [step 1.1, F1, algebra] \u220e\n",
+          "after": "\n"
+        }
+      ],
+      "definition_or_statement_changed": false,
+      "original_luna_status": "kept; immutable original row preserved above; no new verdict or review coverage asserted",
+      "future_mirrors": [
+        "Native Step5 creation/admission for proposed lemma required before adding justified_by links.",
+        "Future native manifest/dependency/capacity/page integration for lemma; retain every existing algorithm and all its operational/property sentences.",
+        "Remove algorithm from proof-bearing contract inventory only after moving proof obligation to native lemma contract; retain algorithm manifest identity and n/a proof treatment. No Definition quote mirrors change.",
+        "Do not rewrite frozen Step4 reader digest, original Luna rows, Step3 closure, or old receipts."
+      ]
+    },
+    {
+      "id": "alg-neumaier-compensated-summation",
+      "batch": 1,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+      "pointer": "/concerns/5",
+      "finding": {
+        "id": "alg-neumaier-compensated-summation",
+        "concern": "The algorithm carrier contains a numbered ## Proof establishing termination rather than placing that property in a separate proved result as the dispatch requires; justified_by is empty.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "alg-neumaier-compensated-summation",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The finite loop uses comparisons on finite inputs and successful accumulator values. Each rounded operation either produces a finite value or the model\u2019s indexed range failure, so execution terminates with the stated result or first failure.",
+        "context_sha256": "fcc415b6de854cd33f050f850ebab8606d9bca29a05ad3431f42357b76a8193f",
+        "item_sha256": "2d372c4cd67ecd3b37f5d7127eb37414ac3681803673700449a2daf49309b9ae",
+        "at": "2026-10-16T17:28:11.105Z"
+      },
+      "classification": "confirmed-presentation-defect",
+      "focused_evidence": [
+        "The numbered generic termination Proof belongs in a separate result under the actual dispatch and SCHEMA.",
+        "For each i the current finite s and finite input determine one of the two magnitude branches. Each branch executes t,q,a,c in finite work; after n iterations one final fl(s_n+c_n) is attempted. At most 4n+1 rounded operations are attempted, with first failure returned. At n=0 the final exact 0+0 returns zero.",
+        "The finite-error-identity theorem covers the actual branch correction, final rounding, and empty list; the cancellation example executes the stated branch. Preserve all these claims."
+      ],
+      "unsupported_extensions": [
+        "No invalid branch, termination failure, or uniform-relative-error promise is inferred. Empty justified_by alone is not a general schema violation."
+      ],
+      "canonical_target": "items/alg-neumaier-compensated-summation.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/alg-neumaier-compensated-summation.md",
+      "proposal_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/alg-neumaier-compensated-summation.md",
+      "guard": {
+        "type": "exact-raw-byte-preimage",
+        "require": "Before future canonical application, canonical_target must exactly equal before_file; stop and re-review on any divergence. Root binds native hashes; none generated here."
+      },
+      "native_digest": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+        "pointer": "/concerns/5",
+        "concern_index": 5
+      },
+      "exact_edits": [
+        {
+          "scope": "frontmatter",
+          "before": "justified_by: []",
+          "after": "justified_by: [lem-two-product-kahan-neumaier-termination-and-status]"
+        },
+        {
+          "scope": "frontmatter",
+          "before": "proof_strategy: direct\n",
+          "after": ""
+        },
+        {
+          "scope": "frontmatter",
+          "before": "  proof: ai-altered",
+          "after": "  proof: not-applicable"
+        },
+        {
+          "scope": "frontmatter",
+          "before": "  precheck: pass",
+          "after": "  precheck: n/a"
+        },
+        {
+          "scope": "body",
+          "before": "\n## Facts & Assumptions\n**Given:** a finite input of the stated type and the operationwise arithmetic model.\n\n[F1] [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]: each successful elementary operation returns a finite value, and an invalid or out-of-range operation returns a failure status.\n\n## Proof\n\n1.1 Every loop index ranges over the finite input length or matrix dimensions; any branch test in the definition is a comparison of already supplied finite values. [given, choose]\n\n2.1 At each operation the model [F1] either returns a finite next value or the defined failure status, and every loop has its stated finite bound. Thus execution terminates with the specified output or first failure. [step 1.1, F1, algebra] \u220e\n",
+          "after": "\n"
+        }
+      ],
+      "definition_or_statement_changed": false,
+      "original_luna_status": "kept; immutable original row preserved above; no new verdict or review coverage asserted",
+      "future_mirrors": [
+        "Native Step5 creation/admission for proposed lemma required before adding justified_by links.",
+        "Future native manifest/dependency/capacity/page integration for lemma; retain every existing algorithm and all its operational/property sentences.",
+        "Remove algorithm from proof-bearing contract inventory only after moving proof obligation to native lemma contract; retain algorithm manifest identity and n/a proof treatment. No Definition quote mirrors change.",
+        "Do not rewrite frozen Step4 reader digest, original Luna rows, Step3 closure, or old receipts."
+      ]
+    },
+    {
+      "id": "ex-subnormal-and-overflow-range-failure",
+      "batch": 1,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+      "pointer": "/concerns/8",
+      "finding": {
+        "id": "ex-subnormal-and-overflow-range-failure",
+        "concern": "This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "ex-subnormal-and-overflow-range-failure",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The inputs are normal binary64 values; for each pair, the exact root sum is respectively a nonzero subnormal or an overflow. The model returns range-failure, and pairwise summation returns the first failing operation.",
+        "context_sha256": "c46fd48099629639666c9668091be68478a938c40861859d89852b5a90bed116",
+        "item_sha256": "e42018c706f643f8c86466f018fb078ace46880e2d9bcf76b633ba3ccc36a825",
+        "at": "2026-10-16T17:44:47.116Z"
+      },
+      "classification": "confirmed-presentation-defect",
+      "focused_evidence": [
+        "The current kind is example while its headings are Statement and Proof. SCHEMA Item bodies prescribes Example and Verification as an authoring convention; it explicitly says this is not a renderer type check.",
+        "N_min+2^-1074 is the next normal binary64 value above N_min; subtracting it from N_min yields the nonzero subnormal -2^-1074. Two leaves give one pairwise tree root. N_max+N_max exceeds normal range. The operationwise no-subnormal model returns range-failure on both exact results."
+      ],
+      "unsupported_extensions": [
+        "No hardware-underflow claim, arithmetic defect, or rendering failure is inferred."
+      ],
+      "canonical_target": "items/ex-subnormal-and-overflow-range-failure.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/ex-subnormal-and-overflow-range-failure.md",
+      "proposal_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/ex-subnormal-and-overflow-range-failure.md",
+      "guard": {
+        "type": "exact-raw-byte-preimage",
+        "require": "Before future canonical application, canonical_target must exactly equal before_file; stop and re-review on any divergence. Root binds native hashes; none generated here."
+      },
+      "native_digest": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+        "pointer": "/concerns/8",
+        "concern_index": 8
+      },
+      "exact_edits": [
+        {
+          "scope": "heading",
+          "before": "## Statement",
+          "after": "## Example"
+        },
+        {
+          "scope": "heading",
+          "before": "## Proof",
+          "after": "## Verification"
+        }
+      ],
+      "definition_or_statement_changed": false,
+      "original_luna_status": "kept; immutable original row preserved above; no new verdict or review coverage asserted",
+      "future_mirrors": [
+        "Keep existing proof-contract derivations and source citations; the mathematical body is unchanged.",
+        "Any live metadata section locator naming this example Statement/Proof must follow Example/Verification after authorized repair; frozen historical quotes remain unchanged. No consumer mathematical propagation is required."
+      ]
+    },
+    {
+      "id": "ex-neumaier-recovers-low-order-term-after-cancellation",
+      "batch": 1,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+      "pointer": "/concerns/9",
+      "finding": {
+        "id": "ex-neumaier-recovers-low-order-term-after-cancellation",
+        "concern": "This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "ex-neumaier-recovers-low-order-term-after-cancellation",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The binary64 tie rounds 1+2^-53 to 1; Neumaier\u2019s stated branches produce c2=2^-53 and preserve it through step 3. The final addition is exact, matching the input sum and the cited identity.",
+        "context_sha256": "6ecaf669e77bec52fbef616afe3eed0220806084d5f1b7530ed9bbc8d33c6ebe",
+        "item_sha256": "14a27fc436dbb50551019790fc89bdf6e6a00eca2ed0a3830394d29b7e5c9dc7",
+        "at": "2026-10-16T17:44:46.965Z"
+      },
+      "classification": "confirmed-presentation-defect",
+      "focused_evidence": [
+        "kind: example currently uses Statement/Proof; only the two headings need replacement.",
+        "RNE ties 1+2^-53 to 1. The Neumaier branch at step 2 gives q=0, a=c=2^-53; step 3 gives t=0,q=1,a=0,c=2^-53; final 0+2^-53 is normal and exact. The finite error identity includes that final operation."
+      ],
+      "unsupported_extensions": [
+        "No cancellation-example or accuracy defect is inferred from heading conventions."
+      ],
+      "canonical_target": "items/ex-neumaier-recovers-low-order-term-after-cancellation.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/ex-neumaier-recovers-low-order-term-after-cancellation.md",
+      "proposal_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/ex-neumaier-recovers-low-order-term-after-cancellation.md",
+      "guard": {
+        "type": "exact-raw-byte-preimage",
+        "require": "Before future canonical application, canonical_target must exactly equal before_file; stop and re-review on any divergence. Root binds native hashes; none generated here."
+      },
+      "native_digest": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+        "pointer": "/concerns/9",
+        "concern_index": 9
+      },
+      "exact_edits": [
+        {
+          "scope": "heading",
+          "before": "## Statement",
+          "after": "## Example"
+        },
+        {
+          "scope": "heading",
+          "before": "## Proof",
+          "after": "## Verification"
+        }
+      ],
+      "definition_or_statement_changed": false,
+      "original_luna_status": "kept; immutable original row preserved above; no new verdict or review coverage asserted",
+      "future_mirrors": [
+        "Keep existing proof-contract derivations and source citations; the mathematical body is unchanged.",
+        "Any live metadata section locator naming this example Statement/Proof must follow Example/Verification after authorized repair; frozen historical quotes remain unchanged. No consumer mathematical propagation is required."
+      ]
+    },
+    {
+      "id": "ex-rounded-cholesky-two-by-two-residual",
+      "batch": 1,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+      "pointer": "/concerns/10",
+      "finding": {
+        "id": "ex-rounded-cholesky-two-by-two-residual",
+        "concern": "This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "ex-rounded-cholesky-two-by-two-residual",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The exact pivots are 1 and 3/4, and the operations remain in range, so the procedure succeeds. The rounded square root cannot square to 3/4, giving the stated residual. Binary64 also meets F2's m u condition.",
+        "context_sha256": "99a85ee978d2383d4a756ab7c6134298ba553c6d12989cd9f9067a7dbd736797",
+        "item_sha256": "2954f8e0eb5848016225b2192f88579dd43135066571daaf436a0e88c2e423a0",
+        "at": "2026-10-16T17:44:54.484Z"
+      },
+      "classification": "confirmed-presentation-defect",
+      "focused_evidence": [
+        "kind: example currently uses Statement/Proof; only the two headings need replacement.",
+        "The completed square proves SPD. The actual rounded Cholesky recurrence gives l11=1,l21=1/2,p2=3/4 with normal exact intermediates; the rounded positive square root is normal. A binary64 output is rational, and its square cannot equal 3/4 since that would make it sqrt(3)/2. The exact residual is the stated single diagonal entry.",
+        "The backward-error supplier requires m=20n+20=60 and mu<1/5; binary64 u=2^-53 satisfies this and the additional relative-bound condition. No new proof gap is created by heading changes."
+      ],
+      "unsupported_extensions": [
+        "No false residual or unconditional rounded-success assertion is inferred."
+      ],
+      "canonical_target": "items/ex-rounded-cholesky-two-by-two-residual.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/ex-rounded-cholesky-two-by-two-residual.md",
+      "proposal_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/ex-rounded-cholesky-two-by-two-residual.md",
+      "guard": {
+        "type": "exact-raw-byte-preimage",
+        "require": "Before future canonical application, canonical_target must exactly equal before_file; stop and re-review on any divergence. Root binds native hashes; none generated here."
+      },
+      "native_digest": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+        "pointer": "/concerns/10",
+        "concern_index": 10
+      },
+      "exact_edits": [
+        {
+          "scope": "heading",
+          "before": "## Statement",
+          "after": "## Example"
+        },
+        {
+          "scope": "heading",
+          "before": "## Proof",
+          "after": "## Verification"
+        }
+      ],
+      "definition_or_statement_changed": false,
+      "original_luna_status": "kept; immutable original row preserved above; no new verdict or review coverage asserted",
+      "future_mirrors": [
+        "Keep existing proof-contract derivations and source citations; the mathematical body is unchanged.",
+        "Any live metadata section locator naming this example Statement/Proof must follow Example/Verification after authorized repair; frozen historical quotes remain unchanged. No consumer mathematical propagation is required."
+      ]
+    },
+    {
+      "id": "ex-full-rank-least-squares-normal-equations-versus-qr",
+      "batch": 1,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+      "pointer": "/concerns/11",
+      "finding": {
+        "id": "ex-full-rank-least-squares-normal-equations-versus-qr",
+        "concern": "This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "ex-full-rank-least-squares-normal-equations-versus-qr",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The determinant and Gram entries are correct; in binary64, 1+2^-54 rounds to 1, making the formed Gram matrix singular. The QR and conditional computed-stability claims match their cited interfaces.",
+        "context_sha256": "006b91384b596d8b7618d4801ce3469cc9b2665ac49391b4bc5498b149da0371",
+        "item_sha256": "40ac6a2c88d709b921a2e5193b4b6a0c2d4b9e1dbc56456506a75a8ed0832597",
+        "at": "2026-10-16T17:44:51.506Z"
+      },
+      "classification": "confirmed-presentation-defect",
+      "focused_evidence": [
+        "kind: example currently uses Statement/Proof; only the two headings need replacement.",
+        "The determinant is 2^-27 and exact Gram entry (2,2)=1+2^-54. The latter is below the midpoint 1+2^-53 and rounds to 1. The formed Gram has equal rows. The exact QR supplier avoids forming it; both Statement and Verification retain the computed guarantee only under its own successful-step hypotheses."
+      ],
+      "unsupported_extensions": [
+        "No unconditional QR success or new computed-stability defect is inferred."
+      ],
+      "canonical_target": "items/ex-full-rank-least-squares-normal-equations-versus-qr.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/ex-full-rank-least-squares-normal-equations-versus-qr.md",
+      "proposal_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/ex-full-rank-least-squares-normal-equations-versus-qr.md",
+      "guard": {
+        "type": "exact-raw-byte-preimage",
+        "require": "Before future canonical application, canonical_target must exactly equal before_file; stop and re-review on any divergence. Root binds native hashes; none generated here."
+      },
+      "native_digest": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+        "pointer": "/concerns/11",
+        "concern_index": 11
+      },
+      "exact_edits": [
+        {
+          "scope": "heading",
+          "before": "## Statement",
+          "after": "## Example"
+        },
+        {
+          "scope": "heading",
+          "before": "## Proof",
+          "after": "## Verification"
+        }
+      ],
+      "definition_or_statement_changed": false,
+      "original_luna_status": "kept; immutable original row preserved above; no new verdict or review coverage asserted",
+      "future_mirrors": [
+        "Keep existing proof-contract derivations and source citations; the mathematical body is unchanged.",
+        "Any live metadata section locator naming this example Statement/Proof must follow Example/Verification after authorized repair; frozen historical quotes remain unchanged. No consumer mathematical propagation is required."
+      ]
+    },
+    {
+      "id": "ex-ill-conditioned-design-stability-versus-forward-error",
+      "batch": 1,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+      "pointer": "/concerns/12",
+      "finding": {
+        "id": "ex-ill-conditioned-design-stability-versus-forward-error",
+        "concern": "This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "ex-ill-conditioned-design-stability-versus-forward-error",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The exact solutions, relative changes, and 2-norm condition number are computed correctly. The example shows RHS sensitivity and uses backward stability only for the general point that it does not guarantee small forward error.",
+        "context_sha256": "def8ddb4087964c5539f404238fe9a6710c51f3649932a7800dfb36463d62a48",
+        "item_sha256": "8854b7f62f275b39184eed97d05d4688e3979afc247e25b044c2249a58f3715c",
+        "at": "2026-10-16T17:45:03.319Z"
+      },
+      "classification": "confirmed-presentation-defect",
+      "focused_evidence": [
+        "kind: example currently uses Statement/Proof; only the two headings need replacement.",
+        "A^-1=diag(1,2^40) gives the two claimed exact solutions; the relative RHS difference is 2^-40 and solution difference 1. Unit-coordinate extremizers give ||A||2=1 and ||A^-1||2=2^40. F2 imports computed backward stability only under its hypotheses."
+      ],
+      "unsupported_extensions": [
+        "No incorrect norm, sensitivity, or finite-precision convergence claim is inferred."
+      ],
+      "canonical_target": "items/ex-ill-conditioned-design-stability-versus-forward-error.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/ex-ill-conditioned-design-stability-versus-forward-error.md",
+      "proposal_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/ex-ill-conditioned-design-stability-versus-forward-error.md",
+      "guard": {
+        "type": "exact-raw-byte-preimage",
+        "require": "Before future canonical application, canonical_target must exactly equal before_file; stop and re-review on any divergence. Root binds native hashes; none generated here."
+      },
+      "native_digest": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-1-step5-context.json",
+        "pointer": "/concerns/12",
+        "concern_index": 12
+      },
+      "exact_edits": [
+        {
+          "scope": "heading",
+          "before": "## Statement",
+          "after": "## Example"
+        },
+        {
+          "scope": "heading",
+          "before": "## Proof",
+          "after": "## Verification"
+        }
+      ],
+      "definition_or_statement_changed": false,
+      "original_luna_status": "kept; immutable original row preserved above; no new verdict or review coverage asserted",
+      "future_mirrors": [
+        "Keep existing proof-contract derivations and source citations; the mathematical body is unchanged.",
+        "Any live metadata section locator naming this example Statement/Proof must follow Example/Verification after authorized repair; frozen historical quotes remain unchanged. No consumer mathematical propagation is required."
+      ]
+    }
+  ]
+}

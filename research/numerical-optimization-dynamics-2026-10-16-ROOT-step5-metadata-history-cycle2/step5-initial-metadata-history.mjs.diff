@@ -1,0 +1,11 @@
+--- a/tools/step5-initial-metadata-history.mjs
++++ b/tools/step5-initial-metadata-history.mjs
+@@ -127,7 +127,7 @@
+   // The archived state is historical-only on later reads. The first collection
+   // also requires real live drained 5.1 or pre-dispatch 5.2 currency.
+   if(current){beforeImpact(root,run);const live=read(join(root,'.autopilot',run,'state.json'));
+-    need(live.run===run&&stateDrained(live)&&((live.stage==='5.1-adjudicate'&&live.paused===true)||live.stage==='5.2-impact'),'wrong live initial collection boundary');}
++    need(live.run===run&&stateDrained(live)&&['5.1-adjudicate','5.2-impact'].includes(live.stage),'wrong live initial collection boundary');}
+   return {path,evidence,historicalGuards:{[label.id]:itemHashGuard(before)},sourceIds:[label.id],historicalReviews:originals.map(x=>x.review),row};
+ }
+ export function loadInitialMetadataHistory(root,run,options={}){

@@ -1,0 +1,479 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "3",
+  "round": 1,
+  "reviewed_items": [
+    "alg-fixed-point-iteration",
+    "alg-newton-correction-for-vector-residuals",
+    "alg-forward-difference-jacobian",
+    "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+    "lem-forward-difference-jacobian-error-bound",
+    "alg-finite-budget-newton-for-vector-residuals",
+    "alg-damped-newton-for-vector-residuals",
+    "alg-finite-difference-newton-for-vector-residuals",
+    "thm-updated-jacobian-newton-local-quadratic-convergence",
+    "thm-damped-newton-vector-residual-accepted-merit-decrease",
+    "ex-nonlinear-equations-and-newton-methods-boundary-cases"
+  ],
+  "reviewed_pages": [
+    "nonlinear-equations-and-newton-methods",
+    "nonlinear-equations-and-newton-methods-examples"
+  ],
+  "decision": "escalate",
+  "reason": "All 56 required affected consumers now have substantive dispositions. The original indexing, Jacobian-identification, page-summary and double-root repairs remain sound. The genuine native escalation remains unresolved: separate proved work-bound suppliers and the published zero-direction proof repair still require owner integration. Additional focused proposals address downstream domain, regularity, counting and vector-remainder gaps. These are read-only proposals; no canonical source, native report or engine state was changed.",
+  "findings": [
+    {
+      "id": "fixed-point-property-relocation",
+      "type": "scope",
+      "reason": "Owner proposal for items/alg-fixed-point-iteration.md. source_excerpt:\nThe map condition $G:X\\to X$ makes every update defined. The procedure makes at\nmost $N$ updates and $N+1$ residual evaluations, so it terminates for every\nadmissible input. A positive residual tolerance reports an approximate fixed\npoint only; this definition asserts no convergence or error bound.\nproposed replacement:\nA positive residual tolerance reports an approximate fixed point only; this\ndefinition asserts no convergence or error bound.\n\nAdd the following complete substantive supplier on the same A-page; owner integrates its new ID and metadata. Proposed ID: lem-finite-budget-fixed-point-iteration-work; kind: lemma; dependencies: [alg-fixed-point-iteration]. Proposed text:\n## Statement\nFor admissible inputs of [[alg-fixed-point-iteration]] with budget $N\\in\\mathbb N_0$, every entered iterate belongs to $X$. The procedure uses at most $N$ updates and $N+1$ fixed-point residual evaluations and returns one of its stated statuses. Termination is in the model where each map evaluation, metric evaluation and comparison returns in finite time. These counts specify outer procedure operations and give no bound on the internal cost of evaluating the supplied map or metric.\n\n## Facts & Assumptions\n**Given:** The algorithm's metric space, self-map, initial point, tolerance and finite budget, and returning evaluation primitives.\n[F1] [[alg-fixed-point-iteration]] evaluates its residual once at each entered index, tests tolerance before budget, returns at index $N$ if tolerance fails, and updates only when $k<N$.\n\n## Proof\n1.1 Initially $x_0\\in X$. If an update is made from $x_k\\in X$, the self-map condition gives $x_{k+1}=G(x_k)\\in X$. Induction proves membership of every entered iterate. [given, F1, induction]\n2.1 A continuing pass advances its index by one. At index $N$, either the residual test returns or the budget test returns before another update. Thus the entered indices form an initial segment of $0,\\ldots,N$, with at most $N+1$ residual evaluations and $N$ updates. Every pass contains finitely many returning primitives, so the procedure terminates with a stated status. This includes $N=0$. [F1, step 1.1, induction] ∎\n\nThe iteration format is consistent with [FNC §4.2](https://fncbook.com/fixed-point/); the precise local counts are proved above. This result may justify the algorithm through justified_by, without a reverse deps edge. All six old/current fixed-point consumers were also inspected prospectively; their update and stopping-order uses need no quote change for this relocation."
+    },
+    {
+      "id": "newton-property-relocation",
+      "type": "scope",
+      "reason": "Owner proposal for items/alg-finite-budget-newton-for-vector-residuals.md. source_excerpt:\nThe procedure performs at most $N$ corrections. It makes no arbitrary-start,\nglobal-convergence, or discretization-error claim.\nproposed replacement:\nIt makes no arbitrary-start, global-convergence, or discretization-error claim.\n\nAdd the following complete substantive supplier on the same A-page; owner integrates its new ID and metadata. Proposed ID: lem-finite-budget-newton-work-and-status; kind: lemma; dependencies: [alg-finite-budget-newton-for-vector-residuals]. Proposed text:\n## Statement\nFor admissible inputs of [[alg-finite-budget-newton-for-vector-residuals]] with budget $N\\in\\mathbb N_0$, every entered iterate lies in $U$. The procedure makes at most $N$ correction calls, at most $N$ accepted updates, and at most $N+1$ explicit outer residual evaluations. It returns a stated residual, singular-Jacobian, invalid-trial or budget status. Termination is in the exact-arithmetic model where residual and Jacobian evaluations, domain decisions and correction calls return in finite time. No convergence, tolerance-attainment or backend complexity claim follows.\n\n## Facts & Assumptions\n**Given:** The algorithm's admissible inputs and returning primitives.\n[F1] [[alg-finite-budget-newton-for-vector-residuals]] evaluates $F(x_k)$ once at an entered index, checks residual and budget before correction, and accepts an update only after checking membership in $U$.\n\n## Proof\n1.1 The initial point lies in $U$. A failed trial returns the current point; an accepted trial becomes the next iterate only after its membership test succeeds. Induction proves membership of all entered iterates. [given, F1, induction]\n2.1 The entered indices form an initial segment of $0,\\ldots,N$. At $k=N$ the residual or budget branch returns before a correction. Each earlier index permits one correction call and at most one accepted update. Consequently there are at most $N+1$ explicit residual evaluations, $N$ correction calls and $N$ updates. Singular or invalid-trial returns only shorten this execution. The finitely many returning primitives therefore terminate with a stated status, including when $N=0$. [F1, step 1.1, induction] ∎\n\nThe Newton iteration and bounded stopping implementation are described in [FNC §4.5](https://fncbook.com/newtonsys/); the exact local status/count result is proved above. Owner integration must retain the distinction between explicit residual queries and work internal to Jacobian assembly or a backend."
+    },
+    {
+      "id": "count-consumer-source-proposals",
+      "type": "outside-batch",
+      "reason": "After integrating lem-finite-budget-newton-work-and-status, add it as a direct dependency at the following count uses.\n\nitems/thm-index-one-dae-finite-budget-solvers-terminate.md source_excerpt:\n[F1] [[alg-finite-budget-newton-for-vector-residuals]]: for a budget $B$, Newton evaluates at iterates $0,\\ldots,B$, performs at most $B$ corrections, and returns a status at a tolerance, domain, singular-Jacobian, or budget branch.\nproposed replacement:\n[F1] [[lem-finite-budget-newton-work-and-status]]: with budget $B$, an admissible Newton call makes at most $B$ correction calls and $B+1$ explicit residual evaluations and returns a stated status under the returning-primitive convention.\n\nitems/thm-pseudo-arclength-local-newton-correction.md source_excerpt:\n[F5] [[alg-finite-budget-newton-for-vector-residuals]]: the exact procedure\ntests residual tolerance, applies at most its specified number of Newton\ncorrections, checks trial-domain membership, and may return\n`iteration-budget-exhausted` before tolerance is met.\nproposed replacement:\n[F5] [[alg-finite-budget-newton-for-vector-residuals]] specifies the residual,\ntrial-domain, singularity and budget branches. Its correction-call bound is\nproved in [[lem-finite-budget-newton-work-and-status]]; budget exhaustion may\nprecede tolerance attainment.\n\nitems/thm-pseudo-arclength-finite-trace-partial-correctness-and-termination.md source_excerpt:\n[F5] [[alg-finite-budget-newton-for-vector-residuals]] has at most its specified number of exact Newton corrections, with explicit singular/domain/budget or residual-stop outputs; it is not a root certificate.\nproposed replacement:\n[F5] [[alg-finite-budget-newton-for-vector-residuals]] specifies its singular/domain/budget and residual-stop outputs; [[lem-finite-budget-newton-work-and-status]] proves its correction-call bound. Neither result makes a residual stop a root certificate.\n\nThe updated-Newton theorem's current Fact F4 already states only instructions and needs no count citation or replacement."
+    },
+    {
+      "id": "published-zero-direction-proof",
+      "type": "outside-batch",
+      "reason": "The original published-prerequisite escalation is confirmed and remains unapplied. In items/thm-total-derivative-computes-directional-and-partial-derivatives.md preserve the Statement. source_excerpt:\n1.1 For $t\\ne0$, write $f(a+tv)-f(a)=tDf(a)v+r(tv)$, where $\\|r(tv)\\|_2/\\|tv\\|_2\\to0$ by [L1]. [L1, L2]\nproposed replacement:\n1.1 If $v=0$, then $(f(a+tv)-f(a))/t=0=Df(a)0$ for every $t\\ne0$, so [L2] gives $D_0f(a)=Df(a)0$. For the remaining case assume $v\\ne0$. For sufficiently small $t\\ne0$, openness of $U$ gives $a+tv\\in U$ and $tv\\ne0$. Write $f(a+tv)-f(a)=tDf(a)v+r(tv)$, where $\\|r(tv)\\|_2/\\|tv\\|_2\\to0$ by [L1]. [L1, L2, algebra]\n\nCurrent step 2.1 then applies in the explicitly remaining nonzero case, and step 3.1 is unchanged. The six changed interfaces use matrix/partial identification through nonzero standard-basis vectors with positive dimension; their use does not require the omitted zero-direction argument. By contrast, thm-gradient-represents-directional-derivatives-and-steepest-ascent, Statement and Proof 1.1, genuinely asserts and uses the formula for every direction, including zero. That use is restored by this proof-only supplier repair, with no consumer Statement change."
+    },
+    {
+      "id": "chord-positive-dimension-and-jacobian-premise",
+      "type": "prerequisite",
+      "reason": "items/alg-newton-chord-implicit-residual-with-factorization-reuse.md forwards its inputs to an n>=1 Newton supplier without stating positive dimension. source_excerpt:\nLet $U\\subseteq\\mathbb R^m$ be open, $G:U\\to\\mathbb R^m$ be $C^1$\nproposed replacement:\nLet $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $G:U\\to\\mathbb R^m$ be $C^1$\n\nsource_excerpt:\nUse the Jacobian convention $J(z)=DG(z)$ of [[def-jacobian-matrix-and-gradient]].\nproposed replacement:\nUse the coordinate Jacobian convention of [[def-jacobian-matrix-and-gradient]]. Since $G$ is $C^1$, [[thm-total-derivative-computes-directional-and-partial-derivatives]] identifies this Jacobian with the matrix of $DG(z)$; write it as $J(z)$.\n\nAdd that theorem as a direct dependency. The inspected scalar, stage, RATTLE and DAE callers have positive dimensions; the general stiff wrapper needs the separate residual-admissibility proposal below."
+    },
+    {
+      "id": "stiff-wrapper-residual-admissibility",
+      "type": "prerequisite",
+      "reason": "Being defined at attempted evaluations does not imply the C¹ hypothesis required by the finite Newton/chord supplier. The BE and RK residual definitions do not supply that missing regularity. Finite BDF2 calls also need the domain/seed package explicitly. In items/alg-implicit-stiff-time-stepper-with-consistent-starts.md source_excerpt:\nFor every BE or Runge–Kutta solve supply an admissible open residual domain $U_n$, an initial iterate $z_{n,0}\\in U_n$, tolerance $\\varepsilon_n\\ge0$, correction budget $M_n\\in\\mathbb N_0$, Newton or chord mode, refresh period $q_n\\ge1$, and a linear-system backend.\nproposed replacement:\nFor every finite BE, Runge–Kutta or BDF2 solve, including a startup solve, supply an admissible open residual domain $U_n\\subseteq\\mathbb R^{m_n}$ with $m_n\\ge1$, an initial iterate $z_{n,0}\\in U_n$, tolerance $\\varepsilon_n\\ge0$, correction budget $M_n\\in\\mathbb N_0$, Newton or chord mode, refresh period $q_n\\ge1$, and a linear-system backend. Require the resulting square residual $G_n:U_n\\to\\mathbb R^{m_n}$ to be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]], and supply its exact derivative matrix whenever the selected finite solver requests a Jacobian.\n\nAdd the linked definition as a direct dependency. This requires regularity only of the actual residuals on their evaluation domains; it does not impose unnecessary global time regularity on the field. The Robertson polynomial residual satisfies the proposal."
+    },
+    {
+      "id": "dae-seed-domain-guards",
+      "type": "prerequisite",
+      "reason": "A previous accepted state or an extrapolated state need not lie in the selected tube at the next time. Check membership before invoking the Newton supplier or evaluating its residual.\n\nitems/alg-index-one-dae-backward-euler-stepper.md source_excerpt:\nUse $(X_{n-1},Z_{n-1})$ as the Newton seed, and call\nproposed replacement:\nLet $U_n:=\\{(X,Z):(t_n,X,Z)\\text{ lies in the selected open tube}\\}$. If $(X_{n-1},Z_{n-1})\\notin U_n$, return invalid-input with the computed prefix before evaluating the step residual. Otherwise use this pair as the Newton seed, and call\n\nitems/alg-index-one-dae-bdf2-stepper.md source_excerpt:\nUse $(2X_{n-1}-X_{n-2},Z_{n-1})$ as the Newton seed and call\nproposed replacement:\nLet $U_n:=\\{(X,Z):(t_n,X,Z)\\text{ lies in the selected open tube}\\}$. If $(2X_{n-1}-X_{n-2},Z_{n-1})\\notin U_n$, return invalid-input with the computed prefix before evaluating the step residual. Otherwise use this pair as the Newton seed and call\n\nIn each call, interpret its evaluation domain as this open slice $U_n$. The accepted-state accuracy results remain conditional on their existing tube and residual hypotheses; the guard creates no new convergence assertion."
+    },
+    {
+      "id": "dae-work-total-and-accepted-residual-result",
+      "type": "outside-batch",
+      "reason": "The current total evaluation bound omits the initial algebraic-residual checks: at most one for BE and two for BDF2. These may occur even when S=0. In items/thm-index-one-dae-finite-budget-solvers-terminate.md source_excerpt:\nSuppose the initialization and stepper algorithms in [[alg-index-one-dae-consistent-initialization]], [[alg-index-one-dae-backward-euler-stepper]], and [[alg-index-one-dae-bdf2-stepper]] are run with finite grid length and finite Newton budget $B$. Each call returns a status after finitely many residual evaluations. A Newton call makes at most $B+1$ residual evaluations. Initialization and a time-step wrapper may each make one additional residual evaluation after a root status to record the returned residual norm or unscaled blocks, so initialization uses at most $B+2$ evaluations and a stepper with $S$ attempted steps uses at most $S(B+2)$ evaluations before returning a failure status or completed. This is a termination statement only; it does not assert that any residual tolerance is attained.\nproposed replacement:\nIn the exact-arithmetic model with returning residual, Jacobian, domain-test and correction primitives, suppose the initialization and stepper algorithms in [[alg-index-one-dae-consistent-initialization]], [[alg-index-one-dae-backward-euler-stepper]], and [[alg-index-one-dae-bdf2-stepper]] are run with finite grid length and finite Newton budget $B$. Count their explicit residual queries separately from backend work. A Newton call makes at most $B$ correction calls and $B+1$ residual queries. Initialization uses at most $B+2$ residual queries. With $S$ attempted time steps, BE uses at most $1+S(B+2)$ residual queries and BDF2 at most $2+S(B+2)$, including initial algebraic-residual checks and at most one unscaled-residual reevaluation after each root status. Each call returns a stated status in finite time.\n\nFor either stepper, every appended candidate satisfies $\\|r^d_n\\|_2\\le\\eta_d$ and $\\|r^a_n\\|_2\\le\\eta_a$, for the derivative and algebraic residuals defined by that stepper. These are conditional accepted-residual bounds; neither termination nor these bounds assert tolerance attainment, an exact root, uniqueness or a discretization error estimate.\n\nUse the proposed proved work supplier in Fact F1. source_excerpt:\n2.2 A stepper attempts a finite number $S$ of steps. By [F3], each attempted step makes at most one Newton call; on a root status it reevaluates the block residual once to record the unscaled blocks, and otherwise returns immediately. Summing at most $B+2$ evaluations per attempted step gives $S(B+2)$ residual evaluations; after the last accepted step it returns completed. [F1, F3, step 1.1, algebra]\nproposed replacement:\n2.2 The BE input checks make at most one initial algebraic-residual query; the BDF2 checks make at most two. A domain or input failure may return before any time step. Each of the $S$ attempted time steps makes at most one Newton call and, on root status, one block-residual reevaluation. By [F1], these contribute at most $S(B+2)$ further queries. The totals are therefore at most $1+S(B+2)$ for BE and $2+S(B+2)$ for BDF2. The seed-domain guards return before a step-residual query when they fail. [F1, F3, given, algebra]\n\nsource_excerpt:\n3.1 The argument uses only finite loops and the specified status branches, so it proves termination without any assumption that Newton converges or accepts a step. [step 1.1, step 2.1, step 2.2] ∎\nproposed replacement:\n3.1 All remaining checks and assignments are finite under the returning-primitive convention. The finite grid and the preceding bounds therefore prove termination without assuming that Newton converges or accepts a step. [given, step 1.1, step 2.1, step 2.2]\n\n3.2 Each appended candidate came from a Newton root status with tolerance $1$, so its scaled concatenated residual has Euclidean norm at most $1$. The norm of each block is at most this concatenated norm. The differential block equals $r^d_n/\\eta_d$ and the algebraic block equals $r^a_n/\\eta_a$ in both steppers. Positivity of the tolerances gives the two asserted accepted-residual bounds. [F3, given, algebra] ∎\n\nFact F3 should additionally record the existing tolerance-1 calls and scaling instructions. There are no current item consumers of this theorem; its A-page summary remains compatible with these separated termination and residual claims."
+    },
+    {
+      "id": "downstream-algorithm-property-relocation",
+      "type": "outside-batch",
+      "reason": "Preserve the DAE count and acceptance claims in the preceding proved theorem, while removing their proof assertions from algorithm Definitions.\n\nitems/alg-index-one-dae-consistent-initialization.md source_excerpt:\nThe solve has $m$ algebraic unknowns. With budget $N$, the Newton supplier performs at most $N$ corrections, each using one $m\\times m$ Jacobian solve, and at most $N+1$ residual evaluations. A root status adds one residual reevaluation for recording, so the procedure uses at most $N+2$ residual evaluations. Residual/Jacobian assembly and linear-solve costs depend on the chosen backend.\nproposed replacement:\nThe solve has $m$ algebraic unknowns. Record residual queries, Jacobian assemblies and correction solves separately. Their costs depend on the chosen backend.\n\nIn both items/alg-index-one-dae-backward-euler-stepper.md and items/alg-index-one-dae-bdf2-stepper.md source_excerpt:\nEach step solves a coupled block system with $d+m$ unknowns. At most $B$ Newton corrections and $B+1$ Newton residual evaluations are made per attempted step, plus at most one residual reevaluation to record the unscaled blocks after a root status. Each correction uses one solve with the current $(d+m)$-dimensional block Jacobian. Work per residual, Jacobian assembly, and linear solve depends on the backend.\nproposed replacement:\nUse the coupled $(d+m)$-dimensional residual and its current block Jacobian. Record residual queries, Jacobian assemblies and correction solves separately; backend costs are not specified.\n\nIn the BE algorithm source_excerpt:\nAn accepted step satisfies $\\|r^d_n\\|_2\\le\\eta_d$ for the derivative residual $r^d_n=(X_n-X_{n-1})/h-f(t_n,X_n,Z_n)$, and $\\|r^a_n\\|_2\\le\\eta_a$ for the algebraic residual $r^a_n=g(t_n,X_n,Z_n)$. This follows because each block norm is at most the norm of their concatenation.\nproposed replacement:\nFor recording, define the derivative residual $r^d_n=(X_n-X_{n-1})/h-f(t_n,X_n,Z_n)$ and the algebraic residual $r^a_n=g(t_n,X_n,Z_n)$.\n\nIn the BDF2 algorithm source_excerpt:\nThe scaling ensures $\\|r^d_n\\|_2\\le\\eta_d$ and $\\|r^a_n\\|_2\\le\\eta_a$.\nproposed replacement: empty string.\n\nIn items/alg-pseudo-arclength-continuation-with-certified-local-corrector.md source_excerpt:\nThere are at most $N_c$ updates and $N_c+1$ certificate attempts.\nproposed replacement: empty string. Its existing partial-correctness/termination theorem already states and proves these bounds."
+    },
+    {
+      "id": "rattle-count-premise",
+      "type": "local",
+      "reason": "The chord count used by the RATTLE termination proof can be proved directly there from instructions. In items/thm-finite-budget-rattle-solver-returns-status.md source_excerpt:\n[F2] [[alg-newton-chord-implicit-residual-with-factorization-reuse]]: in chord mode with budget $N$, the residual solver checks at most $N+1$ iterates, makes at most $N$ corrections, and returns a residual or failure status at each terminating branch.\nproposed replacement:\n[F2] [[alg-newton-chord-implicit-residual-with-factorization-reuse]]: chord mode tests the residual at successive indices $k=0,\\ldots,N$, returns at its tolerance or failure branches, and at $k=N$ returns for budget before another correction. A continuing pass makes one correction and advances the index by one.\n\nsource_excerpt:\n1.1 The position call in [F1] is the finite-budget supplier call in [F2], so it terminates after at most $N_q+1$ residual checks and $N_q$ corrections.\nproposed replacement:\n1.1 By induction on the loop index in [F2], a chord call with budget $N$ enters at most $N+1$ residual checks and makes at most $N$ corrections: only indices below $N$ can correct, and an entered index $N$ returns. Under the supplier's returning-operation interface, the call terminates. Apply this to the position call in [F1] with $N=N_q$.\n\nThe remaining early-return and momentum-call argument is unchanged."
+    },
+    {
+      "id": "shooting-vector-remainder-premise",
+      "type": "prerequisite",
+      "reason": "The cited multivariable Taylor theorem is scalar-valued. Its coordinatewise Lagrange form alone does not establish the stated vector remainder with sharp constant L_R/2. The changed vector-remainder supplier resolves this locally without changing the shooting theorem's Statement. In items/thm-shooting-residual-error-budget.md source_excerpt:\n[F5] [[thm-multivariable-taylor-formula-with-lagrange-remainder]]: the Taylor remainder for a C2 map with $L_R$-Lipschitz derivative has norm at most $(L_R/2)\\|s-s^*\\|_2^2$ on the ball.\nproposed replacement:\n[F5] [[lem-vector-newton-correction-error-under-lipschitz-jacobian]]: apply its estimate on the convex ball with its evaluation point $x=s^*$ and its other point $x_*=s$. Since $R(s^*)=0$, this gives $R(s)=DR(s^*)(s-s^*)+q$ with $\\|q\\|_2\\le(L_R/2)\\|s-s^*\\|_2^2$.\n\nAdd this lemma as a direct dependency. Proof 1.1 then uses precisely the required remainder at the root derivative. Positive shooting dimension, C¹ regularity, convexity and the derivative-Lipschitz assumption are supplied by the existing hypotheses."
+    },
+    {
+      "id": "periodic-collocation-vector-remainders",
+      "type": "prerequisite",
+      "reason": "Preserve the explicit constants using vector integral remainders, rather than attributing them to the scalar Lagrange theorem. In items/thm-periodic-midpoint-collocation-error-budget.md add direct dependencies cor-vector-valued-ftc-and-lipschitz-bound and thm-norm-inequality-for-the-vector-valued-integral.\n\nsource_excerpt:\n[F4] Taylor's formula along a segment bounds the stated $C^2$ and $C^3$ remainders ([[thm-multivariable-taylor-formula-with-lagrange-remainder]]).\nproposed replacement:\n[F4] [[cor-vector-valued-ftc-and-lipschitz-bound]] gives the componentwise integral of a continuous vector derivative. [[thm-norm-inequality-for-the-vector-valued-integral]] bounds the Euclidean norm of that integral. Apply these in each output block; taking the finite maximum preserves the same bound in the block maximum norm.\n\nsource_excerpt:\n1.1 On a mesh cell centered at $m_i$, write $s=t-m_i$. Taylor's formula gives $u_*'(m_i+s)=u_*'(m_i)+s u_*''(m_i)+r(s)$ with $\\|r(s)\\|_2\\le M_3s^2/2$. Averaging over the symmetric interval cancels the odd term and gives $\\|(u_*(t_{i+1})-u_*(t_i))/h-u_*'(m_i)\\|_2\\le M_3h^2/24$. The average endpoint state differs from $u_*(m_i)$ by at most $M_2h^2/8$, so the Lipschitz bound $L_f$ gives $\\|G_h(Y^*)\\|_\\infty\\le C_0h^2$; the boundary residual is exactly zero. These are uniform cellwise bounds, hence independent of the number of cells. [F1, F4, given, algebra]\nproposed replacement:\n1.1 On a mesh cell centered at $m_i$, repeated vector FTC gives $u_*'(m_i+s)=u_*'(m_i)+s u_*''(m_i)+r(s)$, where $r(s)=\\int_0^s\\int_0^v u_*'''(m_i+w)\\,dw\\,dv$. For negative limits reverse their orientation before applying the norm inequality. Thus $\\|r(s)\\|_2\\le M_3|s|^2/2$. Averaging over $[-h/2,h/2]$ cancels the odd term and gives a difference-quotient defect at most $M_3h^2/24$. Applying the same integral argument to $u_*$ at $m_i\\pm h/2$ bounds each first-order remainder by $M_2h^2/8$; their average therefore bounds the endpoint-average displacement from $u_*(m_i)$ by $M_2h^2/8$. Integrating $D\\widetilde f$ on the connecting segment bounds the corresponding field difference by $L_fM_2h^2/8$. The affine boundary residual is zero. Taking the maximum of the cell bounds gives $\\|G_h(Y^*)\\|_\\infty\\le C_0h^2$. [F1, F4, given, algebra]\n\nsource_excerpt:\n4.1 For a candidate $Y$ in the ball, the segment from $Y_h$ to $Y$ stays in the ball. Taylor's formula [F4] and the Lipschitz Jacobian bound give $G_h(Y)=DG_h(Y_h)(Y-Y_h)+R$ with $\\|R\\|_\\infty\\le(L_G/2)\\|Y-Y_h\\|_\\infty^2$.\nproposed replacement:\n4.1 Put $e=Y-Y_h$. Its segment stays in the ball. By [F4], $G_h(Y)=DG_h(Y_h)e+R$, where each output block is $R_i=\\int_0^1[(DG_h(Y_h+te)-DG_h(Y_h))e]_i\\,dt$. Its Euclidean norm is at most $\\int_0^1L_Gt\\|e\\|_\\infty^2\\,dt=(L_G/2)\\|e\\|_\\infty^2$. Taking the finite block maximum gives the same bound for $\\|R\\|_\\infty$.\n\nsource_excerpt:\n5.1 Linear interpolation is a convex combination of adjacent node values, so $\\|P_h(Y-Y_h)\\|_\\infty\\le\\|Y-Y_h\\|_\\infty$. The exact curve differs from its own linear interpolant by at most $M_2h^2/8$ on each cell, by [F4]. The sample error of $Y_h$ is at most $2KC_0h^2$ by step 2.1. Adding these three bounds proves the displayed estimate. [F4, step 2.1, step 4.1, given, algebra] ∎\nproposed replacement:\n5.1 Linear interpolation is a convex combination, so $\\|P_h(Y-Y_h)\\|_\\infty\\le\\|Y-Y_h\\|_\\infty$. On a cell $[a,b]$ of length $h$, repeated FTC gives $u_*(t)-P_hY^*(t)=-\\int_a^b K_t(s)u_*''(s)\\,ds$, where $K_t(s)=(b-t)(s-a)/h$ for $s\\le t$ and $K_t(s)=(t-a)(b-s)/h$ for $s\\ge t$. This kernel is nonnegative and has integral $(t-a)(b-t)/2\\le h^2/8$, so [F4] gives the interpolation bound $M_2h^2/8$. The sample error of $Y_h$ is at most $2KC_0h^2$ by step 2.1. Combining these bounds with step 4.1 proves the displayed estimate. [F4, step 2.1, step 4.1, given, algebra] ∎\n\nAlso replace the unique proof citation [F2, F3, step 1.1, given] by [F2, F3, F4, step 1.1, given], since the contraction estimate uses the blockwise integral argument."
+    },
+    {
+      "id": "periodic-collocation-field-segments",
+      "type": "prerequisite",
+      "reason": "The field comparison in periodic-collocation Proof 1.1 needs the segment between the true midpoint state and the endpoint-average state to lie in the field domain. A derivative bound on an arbitrary nonconvex domain does not by itself give that comparison. In items/thm-periodic-midpoint-collocation-error-budget.md source_excerpt:\nLet $G_h$ be the normalized midpoint residual on a uniform mesh and $Y^*$ the samples of $u_*$.\nproposed replacement:\nFor every admitted mesh cell with midpoint $m_i$, assume the segment joining $u_*(m_i)$ to $(u_*(t_i)+u_*(t_{i+1}))/2$ lies in the field domain and $\\|D\\widetilde f\\|_{\\rm op}\\le L_f$ on that segment. Let $G_h$ be the normalized midpoint residual on a uniform mesh and $Y^*$ the samples of $u_*$.\n\nThis is the smallest explicit domain premise needed by the retained constant C_0. Current references reveal no item consumer of this theorem; its placement page's local, conditional summary requires no prose change."
+    },
+    {
+      "id": "forward-difference-c2-premise-explication",
+      "type": "local",
+      "reason": "The corrected indices and bound are sound. Make the componentwise-C² to total-C¹ prerequisite explicit at the defining-procedure and chain-rule uses. In items/lem-forward-difference-jacobian-error-bound.md add thm-continuous-partial-derivatives-imply-total-differentiability as a direct dependency. source_excerpt:\n## Proof\nproposed replacement:\n[F7] [[thm-continuous-partial-derivatives-imply-total-differentiability]]: continuous first partial derivatives give a total derivative with the coordinate Jacobian matrix. Applied to each $F_j$ and each first partial of $F_j$, the componentwise $C^2$ hypotheses give the total differentiability needed below; continuity of the derivative entries makes $F$ a $C^1$ map admissible for [F1].\n\n## Proof\n\nsource_excerpt:\n1.1 For each input coordinate $i<n$ and output component $j<n$, put\nproposed replacement:\n1.1 By [F7], the $C^2$ components and their first partials have the total derivatives needed for the chain rule, and $F$ is admissible for [F1]. For each input coordinate $i<n$ and output component $j<n$, put\n\nThe rest of the coordinatewise Taylor proof, including possibly different remainder points, is unchanged."
+    },
+    {
+      "id": "regular-curve-supplier-indexing",
+      "type": "outside-batch",
+      "reason": "An additional inspected supplier uses the same incompatible coordinate range. In items/lem-regular-curve-chart-and-pseudo-arclength-predictor-defect.md, Proof 3.1 source_excerpt:\nFor each coordinate $i\\in\\{1,\\ldots,n\\}$,\nproposed replacement:\nFor each coordinate $0\\le i<n$,\n\nIts n>=1 hypothesis already holds. This proof-only correction preserves the stated, conservative sqrt(n)Lh²/2 bound. The local corrector, generic continuation algorithm and finite-trace theorem consume that bound and require no changed claim."
+    },
+    {
+      "id": "sqp-forcing-factor-explication",
+      "type": "local",
+      "reason": "The reduced-BFGS proof should use forcing factors satisfying both bounds at every iterate, rather than assigning Cδ_k when that upper estimate can initially exceed bar-eta. In items/thm-sqp-reduced-bfgs-superlinear-under-dm.md source_excerpt:\nThus the steps satisfy the inexact-Newton equation with forcing ratio $\\eta_k=C\\delta_k\\to0$.\nproposed replacement:\nThus the steps satisfy the inexact-Newton equation with forcing factor $\\eta_k:=\\|r_k\\|_2/\\|F_k\\|_2$ when $F_k\\ne0$, and $\\eta_k:=0$ when $F_k=0$. Assumption [A1] gives $\\eta_k\\le\\bar\\eta<1$, while step 2.1 gives $\\eta_k\\le C\\delta_k\\to0$.\n\nAt a root the nonsingular approximate KKT solve gives a zero step and residual. The Statement and strongest local superlinear claim are preserved."
+    },
+    {
+      "id": "prospective-fixed-point-consumer-proposals",
+      "type": "outside-batch",
+      "reason": "The prospective fixed-point relocation also prompted inspection of its six old/current descendants. Their loop/stopping uses survive unchanged. Two independent issues need owner disposition.\n\nIn items/ex-self-consistent-projector-two-cycle-with-gap.md source_excerpt:\nBy [F2], the lowest eigenspace of $F(P_0)$ is $\\operatorname{span}(e_2)$ and that of $F(P_1)$ is $\\operatorname{span}(e_1)$;\nproposed replacement:\nBy [F2], the lowest eigenspace of $F(P_0)$ is $\\operatorname{span}\\{(0,1)^T\\}$ and that of $F(P_1)$ is $\\operatorname{span}\\{(1,0)^T\\}$;\nThis avoids the undefined e_2 in the library's zero-based standard basis for R².\n\nIn items/alg-undamped-scf-with-gap-and-residual-status.md source_excerpt:\nThe procedure uses at most $N$ updates. It reports a residual stopping status,\ngap loss, eigensolver failure, or budget exhaustion separately.\nproposed replacement:\nIt reports a residual stopping status, gap loss, eigensolver failure, or budget\nexhaustion separately.\n\nPreserve the removed property in a proved supporting item on the existing SCF A-page. Proposed ID: lem-finite-budget-scf-iteration-work; kind: lemma; dependencies: [alg-undamped-scf-with-gap-and-residual-status, alg-relaxed-density-mixing-with-finite-budget]. Complete substantive text:\n## Statement\nFor admissible inputs of either cited SCF iteration with finite budget $N$, there are at most $N$ updates and $N+1$ fixed-point residual tests. Under returning spectrum, response, metric and comparison primitives, the procedure terminates with a stated residual, gap, eigensolver or budget status. This is a work/status bound and does not assert contraction, convergence or tolerance attainment.\n\n## Facts & Assumptions\n**Given:** Either algorithm's admissible inputs and returning primitives.\n[F1] [[alg-undamped-scf-with-gap-and-residual-status]] checks the spectrum/gap, then its residual, then the budget, and updates only at indices below $N$.\n[F2] [[alg-relaxed-density-mixing-with-finite-budget]] uses the same index and stopping order for its relaxed residual, with earlier gap/eigensolver returns allowed.\n\n## Proof\n1.1 In either loop the entered indices form an initial segment of $0,\\ldots,N$. Each entered index permits at most one residual test. Index $N$ returns before an update, and every earlier continuing index makes one update. Induction gives at most $N+1$ residual tests and $N$ updates. Earlier failures shorten the execution. Each pass contains finitely many returning primitives, proving termination with a stated status. [given, F1, F2, induction] ∎\n\nThese proposals do not alter a foreign physics or quantum source. Integration of the additional local result remains an owner scope decision."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "decision": "accept",
+      "reason": "Its exact local branch imports the identified-active-set SQP theorem conditionally; finite dispatch does not promise Newton convergence or NLP success."
+    },
+    {
+      "id": "alg-ctrl1-indirect-shooting-for-the-ode-optimality-system",
+      "decision": "accept",
+      "reason": "The smooth feedback branch gives a C¹ square shooting residual of positive dimension; numerical residual tolerance remains separate from a continuous optimality certificate."
+    },
+    {
+      "id": "alg-finite-budget-rattle-step-with-scaled-residuals",
+      "decision": "accept",
+      "reason": "Its smooth scaled multiplier residuals have positive dimension and supplied branch-ball seeds. The proposed chord dimension clarification is satisfied."
+    },
+    {
+      "id": "alg-finite-difference-newton-for-vector-residuals",
+      "decision": "accept",
+      "reason": "It inherits n>=1 and C¹ inputs, uses h_0 through h_(n-1), and checks stencil/trial membership. It makes no C² error or quadratic-rate claim."
+    },
+    {
+      "id": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+      "decision": "repair",
+      "reason": "Supply C¹ positive-dimensional residuals and complete open-domain/seed packages for every finite solve, including BDF2, as proposed."
+    },
+    {
+      "id": "alg-index-one-dae-backward-euler-stepper",
+      "decision": "repair",
+      "reason": "Its positive-dimensional C¹ scaled residual is valid, but the next-time seed needs a domain guard. Move count and accepted-residual properties to the proved DAE result."
+    },
+    {
+      "id": "alg-index-one-dae-bdf2-stepper",
+      "decision": "repair",
+      "reason": "The extrapolated seed needs a domain guard before Newton. Preserve scaling and work claims in the proposed proved DAE result."
+    },
+    {
+      "id": "alg-index-one-dae-consistent-initialization",
+      "decision": "repair",
+      "reason": "The index-one chart supplies C¹ regularity, m>=1 and a valid seed. Relocate its work-count paragraph to proved results."
+    },
+    {
+      "id": "alg-index-one-eigenvector-following-step",
+      "decision": "accept",
+      "reason": "The d>=2 smooth-potential interface supplies a positive-dimensional gradient residual; an accepted update uses the exact Hessian correction, with rates conditional on the local theorem."
+    },
+    {
+      "id": "alg-midpoint-collocation-for-nonlinear-bvps",
+      "decision": "accept",
+      "reason": "Its C¹ field/boundary hypotheses and open nodal domain give the required square C¹ map in dimension d(N+1)>=1. Euclidean residual control also controls each block norm."
+    },
+    {
+      "id": "alg-multiple-shooting-for-nonlinear-bvps",
+      "decision": "accept",
+      "reason": "The differentiable numerical endpoint maps and C¹ boundary map give the required positive-dimensional residual and exact numerical-map Jacobian. Failure/domain branches remain explicit."
+    },
+    {
+      "id": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+      "decision": "repair",
+      "reason": "Make m>=1 and the C¹ coordinate-Jacobian identification explicit before its Newton call and independent chord branch."
+    },
+    {
+      "id": "alg-periodic-orbit-pseudoarclength-continuation",
+      "decision": "accept",
+      "reason": "The parameter-augmented C² shooting map yields positive-dimensional square sections. It forwards the generic chart, angle, validation and finite-callback requirements."
+    },
+    {
+      "id": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+      "decision": "repair",
+      "reason": "Its exact Newton calls meet the changed interface: square C² sections, n+1>=2 and guarded predictors. Remove the bounded-error count assertion from the Definition; its existing theorem proves it."
+    },
+    {
+      "id": "alg-single-shooting-for-nonlinear-bvps",
+      "decision": "accept",
+      "reason": "It uses the derivative of the actual C¹ numerical endpoint map and an open valid endpoint-pair domain, with positive state dimension and explicit failure checks."
+    },
+    {
+      "id": "alg-validated-periodic-orbit-corrector",
+      "decision": "accept",
+      "reason": "Differentiable candidate modes require their C¹ point evaluators explicitly. Interval-guided corrections use proposal matrices only; independent Krawczyk validation supplies the exact-root certificate."
+    },
+    {
+      "id": "cor-local-newton-convergence-for-midpoint-bvp-collocation",
+      "decision": "accept",
+      "reason": "For a fixed mesh its stated C² residual, simple root and local derivative bounds meet the updated-Newton hypotheses. No mesh-uniform basin is inferred."
+    },
+    {
+      "id": "cor-local-newton-convergence-for-shooting-bvp-residual",
+      "decision": "accept",
+      "reason": "The exact evaluator, positive shooting dimension, C² residual and closed Lipschitz-Jacobian ball meet the local theorem; approximate IVP maps are not substituted."
+    },
+    {
+      "id": "def-phase-bordered-multiple-shooting-and-midpoint-collocation",
+      "decision": "accept",
+      "reason": "The augmented C² field and affine boundary map give square positive-dimensional candidate residuals; references to finite procedures retain their admissible-input requirements."
+    },
+    {
+      "id": "ex-inexact-newton-forcing-tolerance-cost-and-rate",
+      "decision": "accept",
+      "reason": "The scalar residual has constant derivative 1. The geometric inner residual, unit Wolfe step and explicit outer recurrence satisfy the imported forcing theorem."
+    },
+    {
+      "id": "ex-local-trace-misses-disconnected-branch",
+      "decision": "accept",
+      "reason": "Its C∞ two-variable sections have invertible bordered derivatives and explicit valid certificates. The zero-correction realization uses a valid predictor and preserves local-only claims."
+    },
+    {
+      "id": "ex-midpoint-collocation-has-two-branches",
+      "decision": "accept",
+      "reason": "The scalar polynomial boundary map gives a C¹ residual of dimension N+1>=2. The kernel calculation proves both roots simple without claiming global branch selection."
+    },
+    {
+      "id": "ex-near-unit-floquet-multiplier-is-inconclusive",
+      "decision": "accept",
+      "reason": "Its conclusion uses only the distinction between a validated enclosure and strict spectral separation; no Newton residual status is promoted to stability evidence."
+    },
+    {
+      "id": "ex-nearly-dependent-constraints-amplify-rattle-residuals",
+      "decision": "accept",
+      "reason": "The explicit Gram-matrix eigenvalues correctly expose loss of uniform inverse bounds; finite-solver residuals alone are not treated as state-error bounds."
+    },
+    {
+      "id": "ex-newton-budget-exhaustion-with-a-unique-backward-euler-root",
+      "decision": "accept",
+      "reason": "The scalar C∞ residual satisfies the positive-dimensional solver interface. Budget zero returns after the initial failed tolerance test, independently of root uniqueness."
+    },
+    {
+      "id": "ex-newton-shooting-fails-from-singular-start",
+      "decision": "accept",
+      "reason": "The exact scalar residual s²-1 is C∞; at zero the failed residual test precedes the singular correction. Simple-root local convergence gives no arbitrary-start guarantee."
+    },
+    {
+      "id": "ex-nonlinear-equations-and-newton-methods-boundary-cases",
+      "decision": "accept",
+      "reason": "Scalar dimensions satisfy the suppliers. The double-root witness is restricted to the proposed quadratic neighborhood, and the example imports stopping/update instructions rather than a relocated count."
+    },
+    {
+      "id": "ex-pseudo-arclength-crosses-x-squared-fold",
+      "decision": "accept",
+      "reason": "The explicit two-dimensional bordered section is nonsingular, the predictor/correction stays in the declared domain, and the small-step certificate establishes the claimed local realization."
+    },
+    {
+      "id": "ex-rattle-residual-budget-and-global-trajectory-drift",
+      "decision": "accept",
+      "reason": "It explicitly restores consistency and uses separate inverse/stability bounds. The geometric error sum does not infer forward error from Newton tolerance alone."
+    },
+    {
+      "id": "ex-robertson-reaction-system-newton-work",
+      "decision": "accept",
+      "reason": "The displayed polynomial remainder proves C¹ regularity in dimension 3. Independent arithmetic reproduction matched both printed residual sequences, the five-correction Newton result and the eight-correction chord exhaustion."
+    },
+    {
+      "id": "ex-unstable-single-shooting-amplifies-error",
+      "decision": "accept",
+      "reason": "The exact smooth two-dimensional flow satisfies the shooting interface. The amplification calculation concerns endpoint sensitivity and makes no unsupported Newton success claim."
+    },
+    {
+      "id": "ex-van-der-pol-stability-conditional-on-validated-enclosure",
+      "decision": "accept",
+      "reason": "It requires hypothetical independent root and complete Floquet certificates; it supplies no numerical certificate or conclusion from candidate Newton stopping."
+    },
+    {
+      "id": "lem-forward-difference-jacobian-error-bound",
+      "decision": "repair",
+      "reason": "The zero-based indexing, nonzero increments, full coordinate segments and operator-norm estimate are sound. Explicitly supply the componentwise-C² to total-C¹ premise at its algorithm and chain-rule uses."
+    },
+    {
+      "id": "lem-index-one-dae-backward-euler-local-branch",
+      "decision": "accept",
+      "reason": "The unscaled C¹ block residual has invertible derivative at h=0 by the index-one hypothesis. Its IFT claim does not assume a finite Newton seed succeeds."
+    },
+    {
+      "id": "lem-index-one-dae-bdf2-local-branch",
+      "decision": "accept",
+      "reason": "The C¹ unscaled residual has the invertible block derivative with 3I_d and g_z at h=0. Local branch existence remains separate from finite solver success."
+    },
+    {
+      "id": "lem-inexact-newton-error-recurrence-under-lipschitz-jacobian",
+      "decision": "accept",
+      "reason": "Its canonical invertible-map premise supplies n>=1. The convex-ball Lipschitz hypothesis matches the changed remainder lemma, and the weighted-norm recurrence follows with the stated constants."
+    },
+    {
+      "id": "prop-index-one-eigenvector-step-is-the-local-newton-correction",
+      "decision": "accept",
+      "reason": "The d>=2 C⁴ potential gives a C² gradient residual, and accepted eigenvalue enclosures establish Hessian invertibility. Only attempted exact updates receive the local rate."
+    },
+    {
+      "id": "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+      "decision": "accept",
+      "reason": "The positive-dimensional fixed transcription and C³ NLP functions give a C¹ KKT map with locally Lipschitz Jacobian. Identified activity, LICQ, strict complementarity and SOSC are explicit."
+    },
+    {
+      "id": "thm-damped-newton-vector-residual-accepted-merit-decrease",
+      "decision": "accept",
+      "reason": "For an accepted step, alpha>0, beta^j>0 and a nonzero residual make the stated acceptance inequality strict. No line-search success or rate is inferred."
+    },
+    {
+      "id": "thm-dimer-mode-error-contracts-local-saddle-translation",
+      "decision": "accept",
+      "reason": "Its d>=2 C⁴ gradient residual and Hessian-Lipschitz ball satisfy the remainder supplier. The remainder at H_* follows by interchanging the supplier's two points; that lemma does not require its named x_* to be a root."
+    },
+    {
+      "id": "thm-fem-control-active-set-sqp-finite-budget-certificate",
+      "decision": "accept",
+      "reason": "The exact local convergence branch explicitly imports the full SQP hypotheses; its finite-precision residual certificate is not used as an exact Newton or forward-error premise."
+    },
+    {
+      "id": "thm-finite-budget-rattle-solver-returns-status",
+      "decision": "repair",
+      "reason": "Prove the chord count from its operational loop in this theorem, using the proposed Fact F2 and induction clarification. Smooth positive-dimensional RATTLE residuals meet the solver prerequisites."
+    },
+    {
+      "id": "thm-index-one-dae-backward-euler-first-order-with-residuals",
+      "decision": "accept",
+      "reason": "The result assumes accepted residual bounds and uniform branch-ball/inverse data explicitly. Its recurrence is independent of Newton count placement and does not assert finite-budget success."
+    },
+    {
+      "id": "thm-index-one-dae-bdf2-second-order-with-residuals",
+      "decision": "accept",
+      "reason": "The stated starts, branch balls and O(h²) residuals support its two-step error recurrence. The BE startup argument is conditional and does not use a Newton tolerance as an unproved forward-error estimate."
+    },
+    {
+      "id": "thm-index-one-dae-finite-budget-solvers-terminate",
+      "decision": "escalate",
+      "reason": "Owner integration is still required for the proved Newton count supplier, initial residual-query totals, seed guards and relocated accepted-residual proof. Completing missing dispositions alone does not resolve this native escalation."
+    },
+    {
+      "id": "thm-inexact-newton-local-forcing-rates",
+      "decision": "accept",
+      "reason": "The underlying invertibility convention supplies positive dimension. Its invariant weighted-norm ball uses the checked recurrence and the uniform forcing bound; rate conclusions remain for the full-step recurrence."
+    },
+    {
+      "id": "thm-orbital-stability-from-certified-floquet-multipliers",
+      "decision": "accept",
+      "reason": "Its affected use receives an independently certified exact nonconstant orbit and monodromy enclosure. Stability requires complete strict cluster separation, not candidate Newton convergence or residual stopping."
+    },
+    {
+      "id": "thm-periodic-midpoint-collocation-error-budget",
+      "decision": "repair",
+      "reason": "Retain the explicit constants using the proposed blockwise vector integral proofs, and make the field-comparison segment/domain premise explicit."
+    },
+    {
+      "id": "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination",
+      "decision": "repair",
+      "reason": "Its callback-conditioned finite-loop proof is sound; cite the new proved Newton work supplier for exact correction counts. The predictor supplier also needs its proof-only coordinate-index repair."
+    },
+    {
+      "id": "thm-pseudo-arclength-local-newton-correction",
+      "decision": "repair",
+      "reason": "The augmented map has dimension n+1>=2, is C², and inherits the stated Lipschitz bound. Preserve its local convergence claim and replace the algorithm-attributed count in Fact F5 by the proved supplier."
+    },
+    {
+      "id": "thm-rattle-scaled-solve-residual-error-budget",
+      "decision": "accept",
+      "reason": "Its actual residual-to-error steps use uniform multiplier inverse bounds, smooth branches and explicit consistency restoration. They do not require finite Newton convergence or the FD interface."
+    },
+    {
+      "id": "thm-shooting-residual-error-budget",
+      "decision": "repair",
+      "reason": "Use the checked vector-remainder lemma with interchanged points to justify the sharp L_R/2 vector estimate in Fact F5 and Proof 1.1."
+    },
+    {
+      "id": "thm-sqp-exact-hessian-local-quadratic-convergence",
+      "decision": "accept",
+      "reason": "Positive primal dimension gives a positive-dimensional KKT map. C² data, Lipschitz KKT Jacobian and the nonsingularity proof meet the inexact-Newton theorem with zero forcing."
+    },
+    {
+      "id": "thm-sqp-reduced-bfgs-superlinear-under-dm",
+      "decision": "repair",
+      "reason": "The residual identity and Dennis–Moré estimate are sound. Use actual residual ratios, bounded by both bar-eta and C delta_k, in the proposed proof clarification."
+    },
+    {
+      "id": "thm-updated-jacobian-newton-local-quadratic-convergence",
+      "decision": "accept",
+      "reason": "Its n>=1 C² map, simple root and closed Lipschitz-Jacobian ball meet the suppliers. The inverse bound and current-point remainder yield the invariant quadratic recurrence; Fact F4 no longer claims counts."
+    },
+    {
+      "id": "thm-validated-periodic-orbit-certificate-soundness",
+      "decision": "accept",
+      "reason": "Its exact root comes from independent outward enclosures, Krawczyk inclusion and contraction, plus the nonstationarity check. Candidate Newton stopping supplies none of these premises."
+    },
+    {
+      "id": "alg-fixed-point-iteration",
+      "decision": "escalate",
+      "reason": "The operational definition is sound, but termination and work properties remain in its Definition pending owner approval and integration of the proposed local proved supplier."
+    },
+    {
+      "id": "alg-forward-difference-jacobian",
+      "decision": "accept",
+      "reason": "Its positive dimension, zero-based basis indices, nonzero increments and endpoint checks are explicit. The standard-basis Jacobian use does not need the omitted zero-direction proof case."
+    },
+    {
+      "id": "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+      "decision": "accept",
+      "reason": "The positive-dimensional vector FTC proof handles a zero displacement through the chain rule without dividing by that displacement. Convexity and the Lipschitz bound give the stated L/2 estimate."
+    },
+    {
+      "id": "alg-finite-budget-newton-for-vector-residuals",
+      "decision": "escalate",
+      "reason": "Its changed C¹/Jacobian interface is sound. The correction-count assertion still needs the proposed separate proved result and owner integration."
+    },
+    {
+      "id": "alg-damped-newton-for-vector-residuals",
+      "decision": "accept",
+      "reason": "Its n>=1 C¹ input and matrix identification are explicit. The finite trial loop and acceptance instructions support the separate accepted-decrease theorem."
+    },
+    {
+      "id": "alg-undamped-scf-with-gap-and-residual-status",
+      "decision": "repair",
+      "reason": "The prospective fixed-point relocation preserves its guarded update and stopping-order use. Move its independent update-count assertion to the proposed local SCF work lemma."
+    },
+    {
+      "id": "alg-relaxed-density-mixing-with-finite-budget",
+      "decision": "accept",
+      "reason": "Its prospective fixed-point use is the relaxed-map update and residual-before-budget order. Relocating the general work result changes neither instruction nor its conditional convergence caveats."
+    },
+    {
+      "id": "alg-certified-scf-with-diis-safeguard",
+      "decision": "accept",
+      "reason": "Its inherited fixed-point use concerns the baseline update interface. DIIS acceptance uses its own certified contraction/residual budget; it does not depend on the relocated general count claim."
+    },
+    {
+      "id": "ex-self-consistent-projector-two-cycle-with-gap",
+      "decision": "repair",
+      "reason": "Its two-cycle argument survives the prospective fixed-point relocation. Replace the undefined standard-basis label e_2 in R² by the explicit eigenvector tuples."
+    },
+    {
+      "id": "thm-certified-diis-error-inheritance",
+      "decision": "accept",
+      "reason": "Its error induction uses the separately proved contractive residual bound and certified algorithm branches. No general fixed-point work count or automatic convergence from a positive gap is used."
+    },
+    {
+      "id": "thm-gradient-represents-directional-derivatives-and-steepest-ascent",
+      "decision": "escalate",
+      "reason": "Statement and Proof 1.1 genuinely use the published directional formula for every v, including zero. That prerequisite proof case remains pending the proposed owner repair; no consumer change is needed for this issue."
+    },
+    {
+      "id": "lem-regular-curve-chart-and-pseudo-arclength-predictor-defect",
+      "decision": "repair",
+      "reason": "Its complete predictor proof is valid with output coordinates 0<=i<n. Correct the proof's 1-through-n range while retaining its conservative sqrt(n) constant."
+    },
+    {
+      "id": "nonlinear-equations-and-newton-methods",
+      "decision": "accept",
+      "reason": "The current A-page states the material FD and local Newton hypotheses and attributes accepted merit decrease to its proved theorem. Owner integration must place any approved new local suppliers."
+    },
+    {
+      "id": "nonlinear-equations-and-newton-methods-examples",
+      "decision": "accept",
+      "reason": "Its prepared inventory and summary agree with the checked example and repaired double-root neighborhood argument."
+    },
+    {
+      "id": "differential-algebraic-equations-and-consistent-initialization",
+      "decision": "accept",
+      "reason": "Its summary already separates finite solver termination, residual targets and conditional accuracy. The proposed corrected counts, seed guards and accepted-residual proof require no prose change."
+    },
+    {
+      "id": "periodic-orbit-shooting-collocation-and-floquet-error",
+      "decision": "accept",
+      "reason": "Its midpoint-error summary is explicitly local and its solver/certificate distinction is retained. The proposed domain qualification and integral proofs preserve that summary."
+    },
+    {
+      "id": "self-consistent-projector-iterations-and-certified-mixing",
+      "decision": "accept",
+      "reason": "Its summary preserves conditional contraction and distinct finite failure statuses. Owner integration may place the proposed SCF work lemma without changing the mathematical summary."
+    }
+  ]
+}

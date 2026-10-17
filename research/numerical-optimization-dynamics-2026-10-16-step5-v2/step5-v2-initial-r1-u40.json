@@ -1,0 +1,120 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "40",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-compact-set-in-open-neighborhood-has-uniform-radius",
+      "model": "gpt-6-luna",
+      "context_sha256": "659614604b7395cb8458bf70c969433774a8150b26fac6a8488710c68e80181a",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 1.1 did not establish the openness required by the ambient finite-subcover theorem. This is an immediate proof-step omission: for z in B(x,r), s=r-||z-x||_2 is positive and the triangle inequality gives B(z,s) contained in B(x,r). The existing metric-topology, ball and norm prerequisites suffice to prove this locally; no unsupported theorem or new hypothesis is needed. Inserted this argument before applying F2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-compact-set-in-open-neighborhood-has-uniform-radius",
+      "disposition": "repaired",
+      "post_sha256": "2a0473182cd4df7c50a358af0c97cecf2e07accbb085f32f41e5c62d99aea1ef",
+      "review_context_sha256": "1ccbcb9ed49ac6c9c5d237e2b977f93af53e7b2c1671aac870eb5e3229e90523",
+      "reason": "The all-admissible-ball family avoids arbitrary pointwise choices and covers K by openness of V, taking half an available radius. The inserted positive-slack argument makes every member open, licensing the ambient finite subcover through lem-compactness-is-intrinsic. Nonempty K yields a positive finite minimum radius; the final triangle inequality puts y in the corresponding doubled ball inside V. Empty K admits delta=1. The norm supplier covers dimension zero as well. The Statement, hypotheses, deps, page placement and AC requirements remain unchanged; only step 1.1 and its contract mirror changed. This is repair validation, not an independent review of my repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-compact-set-in-open-neighborhood-has-uniform-radius",
+      "severity": "nonfatal",
+      "location": "proof-step",
+      "step": "1.1",
+      "status": "fixed",
+      "reason": "The cover was not explicitly proved open before compactness was applied. Step 1.1 now supplies the positive-slack-ball triangle argument using existing prerequisites; no statement or dependency changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "class": "accuracy",
+      "subclass": "unsupported-inference",
+      "disposition": "fixed",
+      "repair_cost": "inline-fix",
+      "evidence_path": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u40.json"
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "record-current-observation",
+      "id": "thm-nearest-point-in-a-nonempty-closed-convex-set",
+      "status": "already-repaired-outside-this-assignment",
+      "reason": "Batch-40 Step-4 alert 0 concerned radius R=||x-c_0||_2, which could vanish. Current Proof 1.1 instead sets R=1+||x-c_0||_2>0 and includes direct closed-ball/intersection closedness and distance-continuity arguments. The canonical ledger already records this proof-only local published repair at its nearest-point repair entry (receipt research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-nearest-point-repair/repair.json). This is a current-source observation, not independent audit or receipt validation; no published edit, gate, adjudication or new maintenance work is claimed.",
+      "affected_use": "Published nearest-point existence proof 1.1 forms K=C intersect the closed ball of center x and radius R before compact minimization.",
+      "invalidated_claim": "The old R=0 notation violated the strictly-positive radius convention; current R=1+||x-c_0||_2 removes that specific defect.",
+      "minimality": "The recorded repair changes only the existence proof, and the current Statement is not changed by this unit.",
+      "observed_snippet": "Choose $c_0\\in C$ and put $R=1+\\|x-c_0\\|_2>0$.",
+      "observed_raw_sha256": "e46fc1dc705b7c5deeeac8889f04cfb8a218b2fbbcf304ee4b1beeec639cd59b",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_items": [
+      "lem-compact-set-in-open-neighborhood-has-uniform-radius"
+    ],
+    "claim": "For compact K contained in open Euclidean V, one positive radius works uniformly for every point of K; empty K is vacuous.",
+    "conventions": "Ball radii are strictly positive. Form the family of all admissible balls, with no arbitrary-index choice. The Statement is unchanged.",
+    "evidence_paths": [
+      "items/lem-compact-set-in-open-neighborhood-has-uniform-radius.md",
+      "items/def-metric-ball.md",
+      "items/def-metric-topology.md",
+      "items/lem-compactness-is-intrinsic.md",
+      "items/thm-metric-open-set-algebra.md",
+      "items/thm-cauchy-schwarz-and-the-euclidean-norm.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-40.proof-contracts.json"
+    ],
+    "source_urls_consulted": [],
+    "dependencies_changed": false,
+    "contract_change": "Only the assigned contract derivation 1.1 claim and input tags were synchronized under the shared write lock.",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-40.proof-contracts.json --items lem-compact-set-in-open-neighborhood-has-uniform-radius --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; one selected and checked item; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-compact-set-in-open-neighborhood-has-uniform-radius.md --json",
+        "exit_code": 0,
+        "result": "One file and one proof checked; pass; zero failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-compact-set-in-open-neighborhood-has-uniform-radius.md --json",
+        "exit_code": 0,
+        "result": "One file checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-compact-set-in-open-neighborhood-has-uniform-radius.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects; run after the final item edit."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Handoff complete; controller collects evidence and owns independent rejudgment and certification.",
+    "statement_sha256": "67f7161c8652694feb75a3f9270735022af0f1f55798a1824c4db676ff697d6a",
+    "statement_comparison": "The unchanged ## Statement section matches the initial-1 before_statements hash exactly; no ## Definition exists. There is no supplier-interface change and downstream is empty."
+  },
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-40.proof-contracts.json": "8a54086e9f3617671cae94bd1a2b8abbe25ce6c69bb631d2859499e6a6563ba7"
+  }
+}

@@ -14,7 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
-  audited: 2026-08-02
+  repair: research/numerical-optimization-dynamics-2026-10-16-owner-step2-published-reapplication-ROOT-1035/lem-real-polynomial-factor-at-a-root.repair.json
 sources:
   scraped: []
   references:
@@ -39,4 +39,4 @@ If $p(x)=\sum_{k<n}a_kx^k$ and $p(a)=0$, then there is a real polynomial $q$ wit
 
 1.2 Since $p(a)=0$, write $p(x)=\sum_{k<n}a_k(x^k-a^k)$. [algebra]
 
-2.1 Substitute the factorization from step 1.1 and collect the finite coefficient sums into a polynomial $q$. [construct, discharge-construct] ∎
+2.1 If the displayed list has length $n\le1$, the root condition makes its constant evaluation zero, so choose the zero polynomial $q$. For $n\ge2$, define $b_d=\sum_{k=d+1}^{n-1}a_k a^{k-1-d}$ for $0\le d\le n-2$. Reindexing the finite sums in steps 1.1–1.2 gives $p(x)=(x-a)\sum_{d=0}^{n-2}b_dx^d$. If every $b_d$ vanishes choose the zero formal polynomial; otherwise truncate the list $(b_0,\ldots,b_{n-2})$ after its last nonzero entry. This is a formal polynomial $q$ with the required evaluation. In particular, when $p$ has degree $N\ge1$ and its actual list is $(a_0,\ldots,a_N)$, take $n=N+1$: then $b_{N-1}=a_Na^0=a_N\ne0$, and no exponent above $N-1$ occurs. Thus this construction gives $q$ of degree exactly $N-1$ and leading coefficient $a_N$. [step 1.1, step 1.2, construct, algebra, discharge-construct] ∎

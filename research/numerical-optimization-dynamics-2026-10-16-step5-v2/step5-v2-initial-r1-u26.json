@@ -1,0 +1,349 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "26",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-revised-simplex-residual-audit",
+      "model": "gpt-6-luna",
+      "context_sha256": "c34106754fa504e6b4bf8acae473869aab916f7a4a018f33fa10c331132e0701",
+      "outcome": "false_positive",
+      "reason": "The separate theorem thm-revised-simplex-primal-dual-residual-gap proves in step 3.1 that primal feasibility, nonnegative dual slack and zero gap imply optimality, exactly the algorithm output test. Exact rational arithmetic terminates on finite dyadic inputs; dimensions and nonfinite values are rejected. A justified_by link is not required for this total arithmetic definition. The claimed missing correctness result already exists; its overbroad audit attribution is repaired under its own assigned tuple.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-revised-primal-simplex-bland-rule",
+      "model": "gpt-6-luna",
+      "context_sha256": "2a044464ea4a57082e0493f2093a1fd541e0334565d0632e1b9db814d35f386a",
+      "outcome": "false_positive",
+      "reason": "The exact text says it makes no iteration bound polynomial in m or n: this disclaims such a guarantee and does not assert a lower bound or nonexistence theorem. Its inputs, reduced-cost tests, feasible pivot ratios, least-index choices and ray output are explicit; thm-revised-simplex-bland-rule-finite-termination separately proves termination and the combinatorial bound. No procedural or mathematical correction is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-revised-simplex-sparse-pricing-operation-count",
+      "model": "gpt-6-luna",
+      "context_sha256": "abf2fb80f9df3af4e001180868477c997427b49ffc8ba153de0137b9c101967f",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed a missing coordinate convention: CSR addresses 0..n-1 while the basis dictionary uses 1..n. The accumulator and operation count are correct in zero-based coordinates; explicitly relabelling row i and column j to i+1,j+1 now identifies c-w with dictionary reduced costs without changing the algorithm or claim. Also corrected initializations to precede the loop. The row-partition induction covers empty rows/streams, repeated columns and stored zeros; no AC or missing supplier is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-revised-simplex-primal-dual-residual-gap",
+      "model": "gpt-6-luna",
+      "context_sha256": "3b7ac0bca56e380bc5d808cfb2f1c104e88f709fb0140230da57d46414c61eaf",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The original general-real Statement attributes residual computation to a dyadic-input-only algorithm, and F2 removes that supplier restriction. For example an irrational matrix entry is outside the audit domain. Repaired the dependency attribution without narrowing the theorem: define the residuals algebraically for all real inputs, restrict the audit specialization to dimension-matched finite binary inputs, and prove the identity and norm bound directly. Weak duality proves the zero-gap optimality test, including empty vectors. The defect is dependency_citation because the algorithm was invoked beyond its admissible inputs.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-revised-simplex-primal-dual-trace",
+      "model": "gpt-6-luna",
+      "context_sha256": "7d132f2095b6946d437aaffbc42ae7abb1d7ae6219e3d134f8a09c7898ec1e02",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 omitted dual feasibility and the negative basic-row hypothesis from its supplier restatement. These hypotheses already hold in Verification 1.2: y=1, reduced cost 1, x1=-1, and transformed coefficient 1. Restored them explicitly; also restored the pivot part of F2 actually used in 2.1. The computed primal optimum (1,0), cost 1, and q=1 with A^Tq=(1,1), b^Tq=-1 were already correct, so this is a nonfatal facts-block repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-revised-simplex-unbounded-ray",
+      "model": "gpt-6-luna",
+      "context_sha256": "2ec6865f775ef75e4dfea730e868c953b769fab47e814d7cbde32ae928bf3b4e",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 restated the ray conclusion without its primal-feasible basis and negative reduced-cost nonbasic-column hypotheses. Restored the complete conditional. Verification 1.1 already establishes x2=0 and reduced cost -1, and 2.1 gives d=-1, r=(1,1), Ar=0 and c^Tr=-1. Hence x(B)+t r is feasible for all t>=0 and its cost tends to minus infinity. The omitted hypotheses do not invalidate this particular calculation; repair is nonfatal.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-revised-simplex-degenerate-cycle-prevented-by-bland",
+      "model": "gpt-6-luna",
+      "context_sha256": "32b51cb77db2a89e4e9d52dedc4b8af9a67b19fbef98a9f2a59387aed27a0054",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 7.1 gives the correct basic values (2,1,1) at basis (5,1,3) but leaves the role of x5 ambiguous in saying the other original variables vanish. Wrote the full vector (1,0,1,0,2,0,0), which satisfies all three equations and has cost -1. Exact Fraction Gaussian elimination independently recomputed all six cycling pivots and all seven Bland pivots, directions, ratios and final reduced costs (30,42,18,1). Restored the feasible-pivot hypotheses, leaving tie rule and final optimality clause in F1/F2; the numerical proof was already sound, so this is nonfatal.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-revised-simplex-phase-one-extraction-and-farkas",
+      "model": "gpt-6-luna",
+      "context_sha256": "ecbc62a766992bad5cbc08a879b79b5bc910625c3d09a05f233fcfeb2370d21b",
+      "outcome": "false_positive",
+      "reason": "The rejection correctly distinguishes an arbitrary optimal basic point from a dual-feasible basis, but this proof uses the specific Phase I driver in F1: alg-revised-simplex-phase-one calls Bland, whose instruction 1 returns optimal only after every nonbasic reduced cost is nonnegative. Thus step 1.2 has that stopping-test premise from F1, not merely optimality from F2; basic reduced costs are zero by the dictionary. For costs (0,1), this gives (DA)^Ty<=0 and (Db)^Ty=w*>0, hence q=-D^Ty has the claimed signs. The identity-augmented system is full row rank and its objective is bounded below. Zero optimum forces every artificial value zero; a nonzero extraction pivot preserves that feasible point, while a deleted transformed original equation is exactly 0=0. Each removal reduces the artificial-basic count, including empty/rank-deficient cases. No repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-revised-simplex-residual-audit",
+      "disposition": "unaffected",
+      "post_sha256": "91484dc4134cb5c548de1c8d323605365584005cda3227653465c5dd873392e9",
+      "review_context_sha256": "9bf7d790fcf5a243a993798c93deeb6d5aee88b0199d7bfc82adbf756bd2dd5a",
+      "reason": "Unchanged. Exact dyadic residual arithmetic and its optimality test are well-defined; the separate residual-gap theorem proves that test by weak duality. No missing correctness supplier.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-revised-primal-simplex-bland-rule",
+      "disposition": "unaffected",
+      "post_sha256": "ee71a42c67702ed177e9bac52fad19b5babab65c6cfd43360f801b9433226c41",
+      "review_context_sha256": "22d2e770036fe89837568e436c25a4cf915306accbae5a7e83a09005b4dd4932",
+      "reason": "Unchanged. The procedure specifies feasible-basis inputs, exact reduced-cost tests, Bland entering/leaving choices and the ray branch. Its final sentence disclaims a polynomial bound; the separate Bland theorem proves finite termination.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-revised-simplex-sparse-pricing-operation-count",
+      "disposition": "repaired",
+      "post_sha256": "09493e534ea087d592c9cfd2ef9cfffa9a9c6ab3edb077ee768d60c8b7a9c05f",
+      "review_context_sha256": "2c6ca9a125c75672627c8a3e8014a7b1ade876df9992cde508584101ee912fa4",
+      "reason": "Added explicit zero-based to one-based row/column/vector/basis relabelling and corrected initialization order. The row-partition accumulator induction and stored-entry counts remain valid, including empty streams, duplicate columns and stored zeros.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-revised-simplex-primal-dual-residual-gap",
+      "disposition": "repaired",
+      "post_sha256": "e29c19c00849c2036ce32ecdebc4825a4873bfe8c9c80f5a72ea91cad3dfbcd0",
+      "review_context_sha256": "b0c99fb3b5e6838fcc86a9be00fd6efb26c3e633e511b0b3925ed4eb75310b4f",
+      "reason": "Preserved the arbitrary-real identity, norm inequality and weak-duality conclusion. Restricted only the executable audit attribution to dimension-matched finite binary inputs and updated proof/contract inputs. Both direct consumers remain sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-revised-simplex-primal-dual-trace",
+      "disposition": "repaired",
+      "post_sha256": "72c759190865dab78de7da6c43c3a83f4b8105d2e30a25973a1294aadd7bdc5e",
+      "review_context_sha256": "c405417f723482299eb779469b944c187ec058aa569ec19658e69eaaadf41e17",
+      "reason": "Restored dual feasibility and the negative-basic-row premise in F3, and the pivot conclusion actually used from F2. Verified the cost change 2 to 1 and the modified-system certificate q=1 with A^Tq=(1,1), b^Tq=-1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-revised-simplex-unbounded-ray",
+      "disposition": "repaired",
+      "post_sha256": "b7df09f066f840c755e15f445b48227c120239e5465c82045030dddf32d417f0",
+      "review_context_sha256": "85635f5e16da1402844ae461975449a372f65b5d9f63049f9adb8fb796d57e35",
+      "reason": "Restored the feasible-basis and negative-reduced-cost hypotheses in F1. The displayed computation establishes them: x2=0, reduced cost -1, d=-1; r=(1,1) is nonnegative, has Ar=0 and cost -1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-revised-simplex-degenerate-cycle-prevented-by-bland",
+      "disposition": "repaired",
+      "post_sha256": "98e82f4eef42ea57dfe0c5199d8a4bd4c97832828b170dc0a901354c0c178a64",
+      "review_context_sha256": "21160a230a96e01c6ee89cf986e170f3745451f96657566bfd745e56a2130790",
+      "reason": "Displayed all seven final coordinates, including x5=2, and completed the F1/F2 rule/hypothesis restatements. Exact Fraction elimination reproduced the six-pivot cycle and seven-pivot Bland trace ending at cost -1 with nonnegative reduced costs.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-revised-simplex-phase-one-extraction-and-farkas",
+      "disposition": "unaffected",
+      "post_sha256": "55650a807ed3f709b970b2a54cd3c8389a36d5547eb27162e3313abde06ce154",
+      "review_context_sha256": "01706b0db167cebd157a7c66a1702f9acc0fe756ad0073733adb10b68c5438db",
+      "reason": "Unchanged. F1 invokes the actual Bland driver, whose optimal return requires nonnegative reduced costs. Together with the zero basic reduced costs this proves the Phase I multiplier signs. Zero artificial sum, either-sign zero pivots and redundant 0=0 row deletions give finite extraction.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "ex-revised-simplex-ill-conditioned-basis-residual",
+    "thm-revised-simplex-qr-basis-residual-status-sound"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "prop-revised-simplex-sparse-pricing-operation-count",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "statement",
+      "reason": "Added explicit zero-based to one-based row/column/vector/basis relabelling and corrected initialization order. The row-partition accumulator induction and stored-entry counts remain valid, including empty streams, duplicate columns and stored zeros.",
+      "action": "record-fixed-finding",
+      "post_sha256": "09493e534ea087d592c9cfd2ef9cfffa9a9c6ab3edb077ee768d60c8b7a9c05f",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-revised-simplex-primal-dual-residual-gap",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "locus": "statement",
+      "reason": "Preserved the arbitrary-real identity, norm inequality and weak-duality conclusion. Restricted only the executable audit attribution to dimension-matched finite binary inputs and updated proof/contract inputs. Both direct consumers remain sound.",
+      "action": "record-fixed-finding",
+      "post_sha256": "e29c19c00849c2036ce32ecdebc4825a4873bfe8c9c80f5a72ea91cad3dfbcd0",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-revised-simplex-primal-dual-trace",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "facts-block",
+      "reason": "Restored dual feasibility and the negative-basic-row premise in F3, and the pivot conclusion actually used from F2. Verified the cost change 2 to 1 and the modified-system certificate q=1 with A^Tq=(1,1), b^Tq=-1.",
+      "action": "record-fixed-finding",
+      "post_sha256": "72c759190865dab78de7da6c43c3a83f4b8105d2e30a25973a1294aadd7bdc5e",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-revised-simplex-unbounded-ray",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "facts-block",
+      "reason": "Restored the feasible-basis and negative-reduced-cost hypotheses in F1. The displayed computation establishes them: x2=0, reduced cost -1, d=-1; r=(1,1) is nonnegative, has Ar=0 and cost -1.",
+      "action": "record-fixed-finding",
+      "post_sha256": "b7df09f066f840c755e15f445b48227c120239e5465c82045030dddf32d417f0",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-revised-simplex-degenerate-cycle-prevented-by-bland",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "proof-step",
+      "reason": "Displayed all seven final coordinates, including x5=2, and completed the F1/F2 rule/hypothesis restatements. Exact Fraction elimination reproduced the six-pivot cycle and seven-pivot Bland trace ending at cost -1 with nonnegative reduced costs.",
+      "action": "record-fixed-finding",
+      "post_sha256": "98e82f4eef42ea57dfe0c5199d8a4bd4c97832828b170dc0a901354c0c178a64",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed": [
+      "alg-revised-simplex-residual-audit",
+      "alg-revised-primal-simplex-bland-rule",
+      "prop-revised-simplex-sparse-pricing-operation-count",
+      "thm-revised-simplex-primal-dual-residual-gap",
+      "ex-revised-simplex-primal-dual-trace",
+      "ex-revised-simplex-unbounded-ray",
+      "ex-revised-simplex-degenerate-cycle-prevented-by-bland",
+      "thm-revised-simplex-phase-one-extraction-and-farkas"
+    ],
+    "next_action": "Controller collection and ordinary current rejudgment; one unique confirmed-fatal item remains counted for this round despite repair. No judgment, stamp, certificate or round-state writes were made.",
+    "obligations": [],
+    "sources_consulted": [
+      "items/def-revised-simplex-standard-form-linear-program.md",
+      "items/def-revised-simplex-basis-dictionary.md",
+      "items/def-csr-matrix-with-stored-entry-semantics.md",
+      "items/thm-revised-simplex-primal-pivot-objective-ray-optimality.md",
+      "items/thm-revised-simplex-bland-rule-finite-termination.md",
+      "items/alg-revised-simplex-phase-one.md",
+      "items/thm-revised-dual-simplex-invariant-and-farkas.md"
+    ],
+    "conventions": "Minimize c^T x with Ax=b,x>=0; mathematical simplex columns 1..n, CSR storage indices 0..n-1; exact stored-data audit uses dyadic inputs; no AC.",
+    "pricing_interface_event": {
+      "statement_changed": true,
+      "direct_item_consumers": [],
+      "page": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/revised-simplex-linear-programming-and-certificates.md",
+      "affected_use": "Page lists the proposition and promises sparse pricing counts for the stored-entry stream. The added relabelling and initialization-order correction preserve this use; no page repair required."
+    },
+    "consumer_examinations": [
+      {
+        "supplier": "thm-revised-simplex-primal-dual-residual-gap",
+        "consumer": "ex-revised-simplex-ill-conditioned-basis-residual",
+        "path": "items/ex-revised-simplex-ill-conditioned-basis-residual.md",
+        "affected_use": "F2 and Verification 3.1 apply the norm gap bound with delta=2^-27, xhat=(1,1+delta), y=(1,delta^-1); all inputs are finite dyadics, and the same general-real bound gives delta+delta^2.",
+        "disposition": "sound_unchanged",
+        "invalidated_claim": "None; arbitrary-real identity and bound are retained and this example also satisfies the finite-binary audit restriction.",
+        "minimality": "No mathematical item repair is needed. Updated only its cited supplier Statement quote in the owning batch contract under the shared lock; the consumer carrier remains unchanged."
+      },
+      {
+        "supplier": "thm-revised-simplex-primal-dual-residual-gap",
+        "consumer": "thm-revised-simplex-qr-basis-residual-status-sound",
+        "path": "items/thm-revised-simplex-qr-basis-residual-status-sound.md",
+        "affected_use": "F4 and Proof 5.2 use the identity, norm bound and conditional optimality for the actual stored LP data and completed audit candidates. The driver Definition requires finite stored binary data and calls the audit on actual stored vectors in instruction 4.",
+        "disposition": "sound_unchanged",
+        "invalidated_claim": "None; both the general algebraic result and the finite-binary audit specialization supply this exact use.",
+        "minimality": "No mathematical item repair is needed. Updated only its cited supplier Statement quote in the owning batch contract under the shared lock; the consumer carrier remains unchanged."
+      }
+    ],
+    "residual_page_use": {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/revised-simplex-linear-programming-and-certificates.md",
+      "affected_use": "Page lists the theorem and promises stored-data residual bounds and exact-test-only optimality. The corrected arbitrary-real theorem and restricted executable specialization preserve this prose.",
+      "disposition": "sound_unchanged"
+    },
+    "finite_checks": [
+      "Inline Python3 Fraction elimination reproduced each basis, multiplier, negative reduced cost, entering direction, minimum ratio and leaving choice of both pivot rules. Most-negative returns to (5,6,7) in six zero-length pivots; Bland stops at (5,1,3) with x=(1,0,1,0,2,0,0), cost -1 and reduced costs (30,42,18,1). Assertions passed.",
+      "A CSR witness with duplicate column indices, an explicit zero and an empty row accumulated w=(2,-3,-4), matching the reconstructed transpose product under zero-based coordinates. Assertions passed."
+    ],
+    "contract_updates": {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-26.proof-contracts.json",
+      "lock": "acquire/reread/edit/strict-check/release with owner step5-v2-initial-r1-u26; earlier busy attempts made no metadata writes",
+      "assigned_entries": "Regenerated residual-theorem and degenerate-example citations/derivations; corrected trace finite-check locator to Verification 1.1\u20134.1.",
+      "consumer_quote_mirrors": "Updated only the residual-theorem source quote in ex-revised-simplex-ill-conditioned-basis-residual and thm-revised-simplex-qr-basis-residual-status-sound after checking the exact uses; their item carriers remain untouched.",
+      "check_result": "proof-contract: 0 errors, 0 warnings, 10/10 selected items checked."
+    },
+    "repair_complete": true,
+    "checks": [
+      {
+        "check": "precheck",
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-revised-simplex-residual-audit.md items/alg-revised-primal-simplex-bland-rule.md items/prop-revised-simplex-sparse-pricing-operation-count.md items/thm-revised-simplex-primal-dual-residual-gap.md items/ex-revised-simplex-primal-dual-trace.md items/ex-revised-simplex-unbounded-ray.md items/ex-revised-simplex-degenerate-cycle-prevented-by-bland.md items/thm-revised-simplex-phase-one-extraction-and-farkas.md --json",
+        "exit_code": 0,
+        "result": "8 files; 6 proof-bearing files passed; 2 algorithms not applicable; 0 failures."
+      },
+      {
+        "check": "rendercheck",
+        "command": "node tools/rendercheck.mjs items/alg-revised-simplex-residual-audit.md items/alg-revised-primal-simplex-bland-rule.md items/prop-revised-simplex-sparse-pricing-operation-count.md items/thm-revised-simplex-primal-dual-residual-gap.md items/ex-revised-simplex-primal-dual-trace.md items/ex-revised-simplex-unbounded-ray.md items/ex-revised-simplex-degenerate-cycle-prevented-by-bland.md items/thm-revised-simplex-phase-one-extraction-and-farkas.md --json",
+        "exit_code": 0,
+        "result": "8 checked; 0 errors; 0 warnings."
+      },
+      {
+        "check": "proof-contract",
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-26.proof-contracts.json --strict --items alg-revised-simplex-residual-audit,alg-revised-primal-simplex-bland-rule,prop-revised-simplex-sparse-pricing-operation-count,thm-revised-simplex-primal-dual-residual-gap,ex-revised-simplex-primal-dual-trace,ex-revised-simplex-unbounded-ray,ex-revised-simplex-degenerate-cycle-prevented-by-bland,thm-revised-simplex-phase-one-extraction-and-farkas,ex-revised-simplex-ill-conditioned-basis-residual,thm-revised-simplex-qr-basis-residual-status-sound",
+        "exit_code": 0,
+        "result": "10/10 checked; 0 errors; 0 warnings. Initial pre-regeneration check found 5 stale proof-input/use records; all resolved by contract synchronization."
+      },
+      {
+        "check": "proof-layout",
+        "command": "node tools/proof-layout.mjs items/prop-revised-simplex-sparse-pricing-operation-count.md items/thm-revised-simplex-primal-dual-residual-gap.md items/ex-revised-simplex-primal-dual-trace.md items/ex-revised-simplex-unbounded-ray.md items/ex-revised-simplex-degenerate-cycle-prevented-by-bland.md",
+        "exit_code": 0,
+        "result": "5 items; 22 steps; 0 defects. Run once after the final item edits."
+      },
+      {
+        "check": "report-integrity",
+        "exit_code": 0,
+        "result": "Verified pack digest, all 8 exact rejected tuples, all 8 current item guards and captured review-context hashes, dispositions against assignment before guards, and exactly two Statement/Definition changes."
+      }
+    ],
+    "published_consumer_findings": [],
+    "outside_consumer_maintenance": [],
+    "new_prerequisites": "None: all repairs use existing local suppliers and finite algebra; no AC required.",
+    "gate_diagnostics": "No gate diagnostics assigned in this initial adjudication pack."
+  }
+}

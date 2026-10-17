@@ -1,0 +1,2297 @@
+Explicit stabilized integrators for stiff optimal control problems
+
+Ibrahim Almuslimani1 and Gilles Vilmart1
+
+November 24, 2020
+
+Abstract
+
+Explicit stabilized methods are an efficient alternative to implicit schemes for the time
+integration of stiff systems of differential equations in large dimension. In this paper we derive
+explicit stabilized integrators of orders one and two for the optimal control of stiff systems.
+We analyze their favorable stability properties based on the continuous optimality conditions.
+Furthermore, we study their order of convergence taking advantage of the symplecticity of the
+corresponding partitioned Runge-Kutta method involved for the adjoint equations. Numerical
+experiments including the optimal control of a nonlinear diffusion-advection PDE illustrate
+the efficiency of the new approach.
+
+Keywords: optimal control, RKC, Chebyshev methods, symplectic methods, geometric inte-
+gration, stability, adjoint control systems, double adjoint, Burgers equation, diffusion-advection
+PDE.
+AMS subject classification: 49M25, 65L04, 65L06
+
+1
+Introduction
+
+In this paper, we introduce and analyze numerical methods for the optimal control of systems of
+ordinary differential equations (ODEs) of the form
+
+min
+u
+Ψ(y(T));
+˙y(t) := dy
+
+dt (t) = f(u(t), y(t)),
+t ∈[0, T];
+y(0) = y0,
+(1)
+
+where for a fixed final time T > 0 and a given initial condition y0 ∈Rn, the function y :
+[0, T] →Rn is the unknown state function, u : [0, T] →Rm is the unknown control function.
+Here, f : Rm × Rn →Rn is the given vector field and Ψ : Rn →R is the given cost function,
+which are assumed to be C∞mappings. For simplicity of the presentation, we consider the case
+of autonomous problems (with f independent of time) but we highlight that our approach also
+applies straightforwardly to non-autonomous problems dy
+
+dt (t) = f(t, u(t), y(t)).2
+
+There are essentially two approaches for the numerical solution of optimal control problems:
+the direct approach, which consists in directly discretizing (1) and then applying a minimization
+method to the corresponding discrete minimization problem, and the indirect approach, which
+is based on Pontryagin’s maximum principle, taking benefit of continuous optimality conditions
+(adjoint equation). A natural approach for the accurate numerical approximation of such optimal
+control problem (1) is to consider Runge-Kutta type schemes. It was shown in [11, Theorem 4.1]
+by studying the continuous and discrete optimality conditions that additional order conditions for
+
+1Universit´e de Gen`eve, Section de math´ematiques, 2-4 rue du Li`evre, CP 64, CH-1211 Gen`eve 4, Switzerland,
+Ibrahim.Almuslimani@unige.ch, Gilles.Vilmart@unige.ch
+2A standard approach is to consider the augmented system with z(t) = t, i.e.
+dz
+dt = 1, z(0) = 0 and define
+˜y(t) = (y(t), z(t))T , see e.g. [12, Chap. III] for details.
+
+1
+
+
+the convergence rate are required in general by Runge-Kutta methods when applied to optimal
+control problems, compared to the integration of standard initial valued ordinary differential
+equations and conditions up to order 4 were derived.
+In [10], general order conditions were
+derived, in addition to identifying symplecticity properties. This result is related to the order of
+symplectic partitioned Runge-Kutta methods, and it implies in particular that applying naively
+a Runge-Kutta method to (1) yields in general an order reduction phenomenon.
+This analysis
+was then extended to other classes of Runge-Kutta type schemes in [17, 18, 14], see also [15, 8]
+in the context of hyperbolic problems and multistep methods. The use of symplectic integrators
+is motivated by the recent publication [20] which proves the convergence of forward-backward
+iterative algorithm (Algorithm 2.3 in the present paper), to implement discretized optimal control
+problems, when using a symplectic Runge-Kutta method. The work done in [20] generalizes that
+of [19] in which the authors prove the global convergence of the algorithm in the continuous time
+case. We also mention the paper [27] where automatic differentiation can be efficiently applied
+for computing the gradient of the cost function under the assumption that optimal control order
+conditions are satisfied. In our algorithms, the Jacobian of the vector field is given as an input,
+however the idea of automatic differentiation could be coupled with our approach to compute
+derivatives automatically, but this is not the purpose of the present paper.
+In the case where the vector field f in (1) is stiff, due for instance to the multiscale nature
+of the model, or due to the spatial discretization of a diffusion operator in a partial differential
+equation (PDE) model, standard explicit integrators face in general a severe time step restriction
+making standard explicit methods unreasonable to be used due to their dramatic cost. A standard
+approach in this stiff case is to consider indirect implicit methods with good stability properties,
+as studied in [14] in the context of implicit-explicit (IMEX) Runge-Kutta methods for stiff optimal
+control problems. Note however that, already for initial value ODEs, such implicit methods can
+become very costly for nonlinear stiff problems in large dimension, requiring the usage of Newton-
+type methods and sophisticated linear algebra tools (preconditioners, etc.). Alternatively to using
+implicit methods, in this paper we focus on fully explicit indirect methods, and introduce new
+families of explicit stabilized methods for stiff optimal control problems. The proposed methods
+rely on the so-called Runge-Kutta-Chebyshev methods of order one and its extension RKC of order
+two [25]. Such explicit stabilized methods are popular in the context of initial value problems of
+stiff differential equations, particularly in high dimensions in the context of diffusive PDEs, see
+e.g. the survey [2]. It was extended to the stochastic context first in [4, 5] and recently in [3] for
+the design of explicit stabilized integrators with optimally large stability domains in the context
+of mean-square stable stiff and ergodic problems.
+This paper is organized as follows. In Section 2, we recall standard tools on explicit stabilized
+methods and classical results on standard Runge-Kutta methods applied to optimal control prob-
+lems. In Section 3, we introduce the new explicit stabilized schemes for optimal control problems
+and analyze their convergence and stability properties. Finally, Section 4 is dedicated to the
+numerical experiments where we illustrate the efficiency of the new approach.
+
+2
+Preliminaries
+
+2.1
+Discretization, order conditions, and symplecticity
+
+Let us first recall the definition of a Runge-Kutta method for ordinary differential equations
+(ODEs),
+˙y(t) = F(y(t)),
+y(0) = y0,
+(2)
+
+where y : [0, T] →Rn is the unknown solution, F : Rn →Rn is a smooth vector field, and
+y0 ∈Rn is a given initial condition. We consider for simplicity a uniform discretization of the
+
+2
+
+
+interval [0, T] with N + 1 points for N ∈N, and denote by h = T/N the stepsize. For a given
+integer s and given real coefficients bi, aij (i, j = 1, . . . , s), an s-stage Runge-Kutta method,
+yk ≈y(tk), tk = kh, to approximate the solution of (2), is defined, for all k = 0, . . . , N −1, by
+
+yki = yk + h
+
+s
+�
+
+j=1
+aijF(ykj),
+i = 1, . . . , s,
+yk+1 = yk + h
+
+s
+�
+
+i=1
+biF(yki).
+(3)
+
+The coefficients are usually displayed in a Butcher tableau as follows
+
+aij
+
+bi ,
+(4)
+
+and we will sometimes use the notation (aij, bi). For more details about the order conditions of
+Runge-Kutta methods in the context of initial value ODEs, we refer for example to the book [12,
+Chap. III]. We denote by yk+1 = Φh(yk) the numerical flow of (3), while the time adjoint method
+Φ∗
+h of Φh is the inverse map of the original method with reversed time step −h, i.e., Φ∗
+h := Φ−1
+−h
+[12, Sect. II.3]. We recall that the time adjoint of an s-stage Runge-Kutta method (aij, bi) (3)
+is again an s-stage Runge-Kutta method with the same order of accuracy and its coefficients
+(a∗
+ij, b∗
+i ) are given by a∗
+ij = bs+1−j −as+1−i,s+1−j and b∗
+i = bs+1−i, where i, j = 1, . . . , s.
+If we discretize (1) using a Runge-Kutta discretization as above we naturally get the following
+discrete optimization problem,
+
+min
+Ψ(yN);
+subject to:
+
+yk+1 = yk + h
+
+s
+�
+
+i=1
+bif(uki, yki),
+yki = yk + h
+
+s
+�
+
+j=1
+aijf(ukj, ykj),
+(5)
+
+where i = 1 . . . , s, k = 0, . . . , N −1, and y0 = y0. We denote by pode the order of accuracy of the
+method (3) applied to the ODE problem (2) and by poc the order of the method (5) for solving
+the optimal control problem (1). Note that we always have poc ≤pode. In general, poc < pode
+because additional order conditions, described in [11, 10], have to be satisfied.
+Let us denote by H(u, y, p) := pT f(u, y) the pseudo-Hamiltonian of the system where p is the
+Lagrange multiplier (or the costate) associated to the state y. Applying Pontryagin’s maximum
+(or minimum) principle, the first order optimality conditions of (1) are given by the following
+boundary value problem,
+
+˙y(t) = f(u(t), y(t)) = ∇pH(u(t), y(t), p(t)),
+
+˙p(t) = −∇yf(u(t), y(t))p = −∇yH(u(t), y(t), p(t)),
+
+0 = ∇uH(u(t), y(t), p(t)).
+
+t ∈[0, T],
+y(0) = y0,
+p(T) = ∇Ψ(y(T)).
+
+(6)
+
+Applying a Runge-Kutta integrator naively to (6) as an initial value system of ODEs combined
+with the classical methodology of shooting methods, would lead to severe instability due to the
+forward in time integration of the costate equation. For instance, for the optimal control of a
+diffusion PDE problem such as ∂ty(t, x) = ∆y(t, x) + u(t, x), where ∆is the Laplace operator,
+y(t, x) is the state function, and u(t, x) is the control function (see also the diffusion-convection
+PDE problem considered in Sect. 4.2), then the costate equation takes the form of a heat equation
+with the wrong sign, ∂tp(t, x) = −∆p(t, x), which is naturally unstable if integrated forward in
+time. This makes classical
+shooting methods not applicable in the context of stiff dissipative
+optimal control problems considered in this paper. Alternatively, we consider a forward-backward
+iterative algorithm as described below (Algorithm 2.3).
+
+3
+
+
+Introducing Lagrange multipliers for the finite dimensional optimization problem (5), and
+supposing that bi ̸= 0 for all i = 1 . . . , s, a calculation [11, 10] yields the following discrete
+optimality conditions
+
+yk+1 = yk + h
+
+s
+�
+
+i=1
+bif(uki, yki),
+yki = yk + h
+
+s
+�
+
+j=1
+aijf(ukj, ykj),
+
+pk+1 = pk −h
+
+s
+�
+
+i=1
+ˆbi∇yH(uki, yki, pki), pki = pk −h
+
+s
+�
+
+j=1
+ˆaij∇yH(ukj, ykj, pkj),
+
+0 = ∇uH(uki, yki, pki),
+k = 0, . . . , N −1
+i = 1, . . . , s,
+
+y0 = y0,
+pN = ∇Ψ(yN)
+
+(7)
+
+where the coefficients ˆbi and ˆaij are defined by the following relations which, as observed in [10],
+correspond to the symplecticity conditions of partitioned Runge-Kutta methods for ODEs,
+
+ˆbi := bi,
+ˆaij := bj −bj
+
+bi
+aji,
+i = 1, . . . s, j = 1, . . . , s.
+(8)
+
+Note that the vectors pk and pki are the Lagrange multipliers associated to yk and yki respectively.
+Assuming that the Hessian matrix ∇2
+uH(u, y, p) ∈Rm×m is invertible along the trajectory of the
+exact solution, by the implicit function theorem there exists a C∞function φ such that u = φ(y, p)
+and then (7) is equivalent to a partitioned Runge-Kutta (PRK) method. As noticed in [10], if
+we consider the problem (6) as a Hamiltonian system, with the Hamiltonian function H(y, p) :=
+H(Ψ(y, p), y, p), then the obtained PRK (7) scheme is symplectic thanks to the relations (8).
+
+Theorem 2.1 (Theorem 4.1 in [11]). Consider a Runge-Kutta method (aij, bi) of order pode for
+ODEs, where bi ̸= 0, for all i = 1, . . . , s, applied to the optimal control problem (1). Consider
+the optimality conditions (6), and assume that ∇2
+uH(u, y, p) is invertible in a neighborhood of the
+solution, then we have the following theorem. If we discretize (6) using an s-stage partitioned
+Runge-Kutta method (aij, bi)−(ˆaij,ˆbi) of order p⋆
+ode for ODEs (as partitioned RK method), and the
+condition (8) is satisfied, then the order poc of (5) satisfies poc = p⋆
+ode ≤pode and the schemes (5)
+and (7) are equivalent. In particular, for pode ≥2, equivalently �s
+i=1 bi = 1 and �s
+i,j=1 biaij = 1
+
+2,
+we get p⋆
+ode ≥2 and poc ≥2.
+
+The proof of Theorem 2.1 relies on the commutativity of the following diagram [10, Sect. 2]
+which means that methods (5) and (7), colorredwhere (7) is a symplectic partitioned Runge-
+Kutta method, yield exactly the same outputs (up to round-off errors) if derived for Runge-Kutta
+discretizations of (1) and (6) respectively.
+We also refer to the article [22] where the role of
+symplectic partitioned Runge-Kutta methods involved in this commutative diagram is discussed.
+
+(1)
+(5)
+
+(6)
+(7)
+
+optimality conditions
+
+discretization
+
+discretization
+
+optimality conditions
+
+Remark that in (7), if the method (aij, bi) is explicit, then (ˆaij,ˆbi) is in contrast an implicit
+method. Hence it is useful to consider the costate equation backward in time and use the time
+adjoint of (ˆaij,ˆbi) which turns out to be explicit as shown in Proposition 3.1 in Section 3. Indeed,
+consider method (7) and proceed as in [11, 14],
+
+pk+1 + h
+
+s
+�
+
+i=1
+ˆbi∇yH(uki, yki, pki) = pki + h
+
+s
+�
+
+j=1
+ˆaij∇yH(ukj, ykj, pkj),
+
+4
+
+
+we then deduce from the identity bj −ˆaij = bj
+
+bi aji the following formulation where pN serves to
+initialize the induction on k = N −1, . . . , 0,
+
+pk = pk+1 + h
+
+s
+�
+
+i=1
+bi∇yH(uki, yki, pki),
+pki = pk+1 + h
+
+s
+�
+
+j=1
+
+bj
+
+bi
+aji∇yH(ukj, ykj, pkj).
+
+The above Runge-Kutta method (˜aij,˜bi) := (bj
+
+bi aji, bi) for the costate is in fact the time adjoint
+
+of (ˆaij,ˆbi). Since the method (ˆaij,ˆbi) is called in the literature the adjoint method in the sense
+of optimal control because it is applied to the adjoint equation (costate), we call the method
+(˜aij,˜bi) := (bj
+
+bi aji, bi) the double adjoint of (aij, bi), and we rewrite method (7) as
+
+yk+1 = yk + h
+
+s
+�
+
+i=1
+bif(uki, yki),
+k = 0, . . . , N −1
+
+yki = yk + h
+
+s
+�
+
+j=1
+aijf(ukj, ykj),
+k = 0, . . . , N −1
+i = 1, . . . , s
+
+pk = pk+1 + h
+
+s
+�
+
+i=1
+˜bi∇yH(uki, yki, pki),
+k = N −1, . . . , 0
+
+pki = pk+1 + h
+
+s
+�
+
+j=1
+˜aij∇yH(ukj, ykj, pkj),
+k = N −1, . . . , 0
+i = s, . . . , 1
+
+0 = ∇uH(uki,ki , pki),
+k = 0, . . . , N −1
+i = 1, . . . , s
+
+y0 = y0,
+pN = ∇Ψ(yN).
+
+(9)
+
+Note that we integrate the state forward in time (increasing indices k) and the costate backward
+in time (decreasing k).
+An immediate consequence of Theorem 2.1 is that applying naively a Runge-Kutta method
+yields in general an order reduction, as stated in the following remark.
+
+Remark 2.2. Consider a Runge-Kutta method (aij, bi) of order pode = 2 and define (˜aij,˜bi) :=
+(aij, bi), in general the obtained partitioned Runge-Kutta method (9) is not of order poc = 2.
+Indeed, the coupling order conditions �s
+i,j=1 biˆaij = 1
+
+2 and �s
+i,j=1 ˆbiaij = 1
+
+2 are not automatically
+satisfied in general. In particular, for (aij, bi) being the standard order two RKC method studied
+in the next section below, it can be checked that poc = 1. This makes non trivial the construction
+of an explicit stabilized scheme of order 2 for optimal control problems, as described in section
+3.3. We will see that the notion of double adjoint of a Runge-Kutta method, as described above,
+is an essential tool in our study.
+
+To implement (9) (equivalent to (7)), we shall use the following classical iterative algorithm
+which was proposed as a parallel algorithm with N sub-problems in [21, Algo. 4]. For simplicity
+of the presentation, we only recall the non parallel algorithm, but emphasize that the parallel
+version could also be used in our context with explicit stabilized schemes.
+
+Algorithm 2.3. (see for instance [21, Algo. 4]). First start with an initial guess for the internal
+stages of the control U0 = (u0
+ki)i=1,...,s
+k=0...,N−1 where u0
+ki ∈Rm for all k and i.
+Denote by yl =
+
+(yl
+k)k=0,...,N−1 and Y l = (yl
+ki)i=1,...,s
+k=0...,N−1 the collection of the state values and its internal stages
+respectively at iteration l, and analogously we use the notations pl and P l for costate and its
+internal stages at iteration l. Suppose that at the iteration l, Ul is known. For the next iteration
+l + 1, the computation of Ul+1 is achieved as follows.
+
+5
+
+
+1. Compute Y l, P l, yl, pl as in (9), the computation is done forward in time for the state yk
+and backward in time for the costate pk.
+
+2. Compute ˜ul+1
+ki
+solving the system ∇uH(˜ul+1
+ki , yl
+ki, pl
+ki) = 0, for all k and i using an analytical
+formula if available, or a Newton method for instance.
+
+3. Denoting ˜Ul = (˜ul
+ki)i=1,...,s
+k=0...,N−1, define Ul+1 by Ul+1 = (1−θl)Ul+θl ˜Ul+1, where θl is defined
+to minimize the scalar function θ �→Ψ(Ul+1) using a simple trisection method for instance,
+where Ψ : U �→Ψ(yN).
+
+We stop when ∥Ul+1 −Ul∥≤tol, where tol is a prescribed small tolerance.
+
+In the recent paper [20], it was shown that the forward-backward sweep iteration defined
+in Algorithm 2.3 used in implementing discretized optimal control problems converges when
+using a symplectic Runge-Kutta discretization, which strengthens the interest of such symplectic
+methods.
+For simplicity, we assume in the rest of the paper that y0 = y0 always holds in (7).
+
+2.2
+Explicit stabilized methods
+
+Stability is a crucial property of numerical integrators for solving stiff problems and we refer to
+the book [13]. A Runge-Kutta method is said to be stable if the numerical solution stays bounded
+along the integration process. Applying a Runge-Kutta method (3) to the linear test problem
+(with fixed parameter λ ∈C),
+˙y = λy,
+y(0) = y0,
+(10)
+
+with stepsize h yields a recurrence of the form yk+1 = R(hλ)yk and by induction we get yk =
+R(hλ)ky0. The function R(z) is called the stability function of the method and the stability
+domain is defined as S := {z ∈C; |R(z)| ≤1}, and yk remains bounded if and only if hλ ∈S.
+The same result also applies to the internal stages of the Runge-Kutta method, for all i = 1, . . . , s,
+where s is the number of internal stages, yki = Ri(hλ)yk, for some function Ri. Remark that
+R(z) is a rational function for implicit methods, but in the case of explicit methods the stability
+function R(z) reduces to a polynomial. The simplest Runge-Kutta type method to integrate
+ODEs (2) is the explicit Euler method yk+1 = yk +hf(yk) with stability polynomial R(z) = 1+z.
+However, its stability domain S is small (it reduces to the disc of center −1 and radius 1 in the
+complex plane) which yields a severe time step restriction and makes it very expensive for stiff
+problems.
+
+2.2.1
+Optimal first order Chebyshev methods
+
+The idea of explicit stabilized methods (as introduced in [25], see the survey [2]) is to construct
+explicit Runge-Kutta integrators with extended stability domain that grows quadratically with
+the number of stages s of the method along the negative real axis, and hence allows to use large
+time steps typically for problems arising from diffusion partial differential equations. The family
+of methods considered in [25] is known as “Chebyshev methods” since its construction relies on
+Chebyshev polynomials Ts(x) satisfying Ts(cos θ) = cos(sθ). These polynomials allow us to obtain
+a two-step recurrence formula and hence low memory requirements and good internal stability
+with respect to round-off errors. The order one Chebyshev method for solving a stiff ODE (2) is
+defined as an explicit s-stage Runge-Kutta method by the recurrence
+
+yk0
+=
+yk,
+yk1 = yk + µ1hF(yk0),
+
+yki
+=
+µihF(yk,i−1) + νiyk,i−1 + (1 −νi)yk,i−2,
+j = 2, . . . , s
+(11)
+
+6
+
+
+yk+1
+=
+yks,
+
+where
+
+ω0 := 1 + η
+
+s2 ,
+ω1 := Ts(ω0)
+
+T ′s(ω0),
+µ1 := ω1
+
+ω0
+,
+(12)
+
+where η is called the damping parameter and is used to make the stability of the method robust
+with respect to small perturbations as described below. Finally, for all i = 2, . . . , s,
+
+µi := 2ω1Ti−1(ω0)
+
+Ti(ω0)
+,
+νi := 2ω0Ti−1(ω0)
+
+Ti(ω0)
+.
+(13)
+
+One can easily check that the (family) of methods (11) has the same first order of accuracy as
+the explicit Euler method (recovered for s = 1). Note that instead of the standard Runge-Kutta
+method formulation (3) with coefficients (aij, bi), the one step method yk+1 = Φh(yk) in (11)
+should be implemented using a recurrence relation (indexed by j) inspired from the relation (14)
+on Chebyshev polynomials
+Tj(z) = 2zTj−1(z) −Tj−2(z),
+(14)
+
+where T0(z) = 1, T1(z) = z. This implementation (11) yields a good stability [25] of the scheme
+with respect to round-off errors.
+The most interesting feature of this scheme is its stability
+behavior.
+Indeed, the method (11) applied to (10) yields, with z = λh, yk+1 = Rη
+s(z)yk =
+Ts(ω0+ω1z)
+
+Ts(ω0)
+yk. A large real negative interval (−Cηs2, 0) is included in the stability domain of the
+method S := {z ∈C; |Rη
+s(z)| ≤1}. For the internal stages, we have analogously yki = Rη
+s,i(z)yk =
+Ti(ω0+ω1z)
+
+Ti(ω0)
+yk. The constant Cη = 2 −4/3 η + O(η2) depends on the so-called damping parameter
+η and for η = 0, it reaches the maximal value C0 = 2 (also optimal with respect to all possible
+stability polynomials for explicit schemes of order 1). Hence, given the stepsize h, for dissipative
+vector fields with a Jacobian having large real negative eigenvalues (such as diffusion problems)
+with spectral radius λmax at yn, the parameter s for the next step yn+1 can be chosen adaptively
+as1
+
+s :=
+
+��
+
+hλmax + 1.5
+
+2 −4/3 η
++ 0.5
+
+�
+
+,
+(15)
+
+see [1] in the context of stabilized schemes of order two with adaptive stepsizes. The method (11)
+is much more efficient as its stability domain increases quadratically with the number s of function
+evaluations while a composition of s explicit Euler steps (same cost) has a stability domain that
+only increases linearly with s. In Figure 1 we plot the internal stages for s = 10 and different
+values η = 0 and η = 0.05 , respectively. We observe that in the absence of damping (η = 0),
+the stability function (here a polynomial) is bounded by 1 in the large real interval [−2s2, 0] of
+width 2 · 102 = 200. However, for all z that are local extrema of the stability function, where
+|Rη
+s(z)| = 1, the stability domain is very narrow in the complex plane. Here the importance of
+some damping appears, to make the scheme robust with respect to small perturbations of the
+eigenvalues. A typical recommended value for the damping parameter is η = 0.05, see [26, 2]. The
+advantage of this damping is that the stability polynomial is now strictly bounded by 1 and the
+stability domain includes a neighborhood of the negative interval (−Cηs2, 0). This improvement
+costs a slight reduction of the stability domain length from 2s2 to Cηs2 where Cη ≥2 −4
+
+3η.
+
+1The notation [x] stands for the integer rounding of real numbers.
+
+7
+
+
+-200
+-150
+-100
+-50
+0
+
+-1
+
+-0.5
+
+0
+
+0.5
+
+1
+
+(a) η = 0
+
+-200
+-150
+-100
+-50
+0
+
+-1
+
+-0.5
+
+0
+
+0.5
+
+1
+
+(b) η = 0.05
+
+Figure 1: Internal stages (thin curves) and stability polynomials (bold curves) of the Chebyshev
+method (11) for s = 10 with and without damping.
+
+2.2.2
+Second order RKC methods
+
+To design a second order method, we need the stability polynomial to satisfy2 R(z) = 1+z + z2
+
+2 +
+O(z3). In [9], Bakker introduced a correction to the first order shifted Chebyshev polynomials to
+get the following second order polynomial
+
+Rη
+s(z) = as + bsTs(ω0 + ω2z),
+(16)
+
+where,
+
+as = 1 −bsTs(ω0),
+bs =
+T ′′
+s (ω0)
+(T ′s(ω0)2),
+ω0 = 1 + η
+
+s2 ,
+ω2 = T ′
+s(ω0)
+T ′′s (ω0),
+η = 0.15.
+(17)
+
+For each s, |Rη
+s(z)| remains bounded by ab + bs = 1 −η/3 + O(η2) for z in the stability interval
+(except for a small interval near the origin). The stability interval along the negative real axis
+is approximately [−0.65s2, 0], and covers about 80% of the optimal stability interval for second
+order stability polynomials, and the formula now for calculating s for a given time step h is
+
+s :=
+
+��
+
+hλmax + 1.5
+
+0.65
++ 0.5
+
+�
+
+.
+(18)
+
+Using the recurrence relation of the Chebyshev polynomials, the RKC method as introduced in
+[25] is defined by
+
+yk0 = yk,
+yk1 = yk0 + hb1ω2f(yk0),
+
+yki = yk0 + µ′
+ih(f(yk,i−1) −ai−1f(yk0)) + ν′
+i(yk,i−1 −yk0)
+
++ κ′
+i(yk,i−2 −yk0),
+
+yk+1 = yks,
+
+(19)
+
+where,
+
+µ′
+i = 2biω2
+
+bi−1
+,
+ν′
+i = 2biω0
+
+bi−1
+,
+κ′
+i = −bi
+
+bi−2
+,
+bi =
+T ′′
+i (ω0)
+(T ′
+i(ω0)2),
+ai = 1 −biTi(ω0),
+(20)
+
+2Indeed, up to order two, the order conditions for nonlinear problems are the same as the order conditions for
+linear problems [12, Chap. III].
+
+8
+
+
+-60
+-50
+-40
+-30
+-20
+-10
+0
+
+-1
+
+-0.5
+
+0
+
+0.5
+
+1
+
+(a) Classical RKC (19).
+
+-60
+-50
+-40
+-30
+-20
+-10
+0
+
+-1
+
+-0.5
+
+0
+
+0.5
+
+1
+
+(b) New RKC (21).
+
+Figure 2: Internal stages (thin curves) and stability polynomials (bold curves) of the classical
+(19) and the new (21) RKC implementations for s = 10 internal stages.
+
+for i = 2, . . . , s. As in (16), the stability functions of the internal stages are given by Rη
+i (z) =
+ai + biTi(ω0 + ω2z), where i = 0, . . . , s −1, and the parameters ai and bi are chosen such that
+the above stages are consistent Rη
+i (z) = 1 + O(z). The parameters b0 and b1 are free (Rη
+0(z) is
+constant and only order 1 is possible for Rη
+1(z)) and the values b0 = b1 = b2 are suggested in [24].
+In this paper, to facilitate the analysis of the internal stability of the optimal control methods,
+making the internal stages of the RKC method analogous to the Chebyshev method (11) of order
+one, we introduce a new implementation of RKC method
+
+yk0
+=
+yk,
+yk1 = yk + µ1hF(yk0),
+
+yki
+=
+µihF(yk,i−1) + νiyk,i−1 + (1 −νi)yk,i−2,
+i = 2, . . . , s
+(21)
+
+yk+1
+=
+asyk0 + bsTs(ωo)yks,
+
+where µ1 = ω2
+
+ω0 , as, bs are given in (17), and the parameters µi and νi are defined by (analogously
+
+to (13), using ω2 instead of ω1), µi = 2ω2Ti−1(ω0)
+
+Ti(ω0)
+, νi = 2ω0Ti−1(ω0)
+
+Ti(ω0)
+, for i = 2, . . . , s. This new
+formulation (21) yields the same stability function Rη
+s(z) in (16) but different internal stages,
+and it will be helpful when we introduce the double adjoint of RKC in Section 3. We recall that
+for an accurate implementation, one should not use the standard Runge-Kutta formulations with
+coefficients (aij, bi) for (11) and (19) since they are unstable due to the accumulated round-off
+error for large values of s. In contrast, the low memory induction formulations (11) and (19) are
+easy to implement and very stable with respect to round-off errors [25].
+Note that (21) is not the same Runge-Kutta method as the standard RKC (19) from [25],
+it has different internal stages but the same stability function Rη
+s(z) in (16) and hence order
+pode = 2. In Figure 2 we can see that the internal stages of the new formulation (21) of RKC
+have an analogous behavior compared to those of the first order Chebyshev method oscillating
+around zero (see Figure 1), in contrast to those of the standard RKC (19), oscillating around the
+value as > 0. In addition, comparing Figures 2b and 1b, we see that the internal stages of the
+new RKC method (21) are the same as the order one Chebyshev method (11) up to a horizontal
+rescaling ω2/ω1. This is because the s internal stages of the methods have the stability function
+Ti(ω0 + ωjz)/Ti(ω0), i = 1, . . . , s for j = 1, 2 respectively.
+Notice however that this modification of the standard RKC method (19) deteriorates the order
+two of accuracy of the internal stages of the method, useful for PDEs with non homogeneous
+
+9
+
+
+-140
+-120
+-100
+-80
+-60
+-40
+-20
+0
+
+-1
+
+-0.5
+
+0
+
+0.5
+
+1
+
+(a) Classical ROCK2.
+
+-140
+-120
+-100
+-80
+-60
+-40
+-20
+0
+
+-1
+
+-0.5
+
+0
+
+0.5
+
+1
+
+(b) Double adjoint of ROCK2.
+
+Figure 3: Internal stages (thin curves) and stability polynomials (bold curves) of the ROCK2
+method [6] and its double adjoint for optimal control for s = 13 stages.
+
+boundary conditions [16, Chap. V].
+
+Remark 2.4. Analogously to the standard RKC method (19), the new RKC formulation (21)
+can be equipped with an error estimator to allow a variable time step control. Since the new
+formulation (21) has the same stability function, one can use the same error estimator as pro-
+posed in [23, Sect. 3.1]. In this paper we consider only a constant time step for simplicity of the
+presentation but emphasize that a variable time step hn can be used for the new optimal control
+method of order two.
+
+Remark 2.5. Second order Runge-Kutta Orthogonal Chebyshev (ROCK2) methods, as introduced
+in [6], are second order explicit stabilized methods for which the stability domain contains an
+interval that covers around 98% of the optimal one for second order explicit methods. It would
+be interesting to extend such second order methods with nearly optimally large stability domain
+to the context of optimal control problems. It turns out however that such an extension based
+on ROCK2 (or its order four extension ROCK4 [1]) is difficult and not analyzed in the present
+paper. This difficulty arises from the severe instability of the internal stages of the double adjoint
+of the standard ROCK2 method (see Figure 3) which would introduce large round-off errors for
+stiff problems (large values of s), making the obtained optimal control method not reliable.
+
+3
+Explicit stabilized methods for optimal control
+
+In this section, we derive new two term recurrence relations of the double adjoints of Chebyshev
+method (11) and RKC method (21) that are numerically stable.
+Indeed, one cannot rely on
+standard Runge-Kutta coefficients for the implementation of explicit stabilized schemes.
+
+3.1
+Double adjoint of a general Runge-Kutta method
+
+Recall from (9) that the Butcher tableau of the double adjoint (˜aij,˜bi) of (4) is
+
+˜aji
+
+˜bi
+:=
+
+bj
+bi aji
+
+bi
+.
+(22)
+
+10
+
+
+Proposition 3.1. If a Runge-Kutta method (aij, bi) (4) is explicit, then its double adjoint (22)
+is explicit as well.
+
+Proof. For an explicit Runge-Kutta method we have that aij = 0 for all j ≥i i.e the matrix (aij)
+is strictly lower triangular. Permuting the internal stages in (22) for i, j = s, . . . , 2, 1 does not
+modify the method but yields the following Butcher tableau
+
+bs+1−j
+bs+1−i as+1−j,s+1−i
+
+bs+1−i
+(23)
+
+which is strictly lower triangular, and thus the method (22) is again explicit.
+
+An immediate consequence of Proposition 3.1 is that for explicit methods, the stability func-
+tion of the double adjoint is again a polynomial. In fact it turns out, as stated in Theorem 3.2
+below, that for any Runge-Kutta method, the double adjoint (˜aij,˜bi) has exactly the same sta-
+bility function as (aij, bi). Note however that this result does not hold in general for the internal
+stages (see Remark 2.5 about ROCK2).
+
+Theorem 3.2. A Runge-Kutta method (aij, bi) and its double adjoint (˜aij,˜bi) in (22) share the
+same stability function R(z).
+
+Proof. Let A = (aij), Ad = (aji bj/bi), and b = (bi), i, j = 1 . . . s. We recall the formula for the
+stability function of the Runge-Kutta method (aij, bi),
+
+R(z) = det(I −zA + z1bT )
+
+det(I −zA)
+,
+(24)
+
+where 1 ∈Rs is the line vector of size s containing only ones. Using a simple calculation, one can
+show that AT
+d = DAD−1 where D = diag(bi). This implies that I −zAT
+d = D(I −zA)D−1, and
+since I −zAT
+d = (I −zAd)T , thus det(I −zA) = det(I −zAd). Using the same diagonal matrix D
+we have D1bT D−1 = 1T b, hence I −zAT
+d +z1b = D(I −zA+z1b)D−1 and det(I −zAT
+d +z1b) =
+det(I −zA + z1b) and hence the stability function of (˜aij,˜bi) is again (24).
+
+3.2
+Chebyshev method of order one for optimal control problems
+
+For clarity of presentation, we first study Chebyshev method of order one for optimal control
+problems before introducing the second order RKC method. Applying the order one Chebyshev
+method (11) to the problem (1) we get
+
+min Ψ(yN), such that
+
+yk0 = yk,
+yk1 = yk0 + µ1hf(uk0, yk0),
+
+yki = µihf(uk,i−1, yk,i−1) + νiyk,i−1 + (1 −νi)yk,i−2,
+i = 2, . . . , s
+
+yk+1 = yks,
+
+(25)
+
+where, k = 0, . . . , N −1, η > 0 is fixed, and the parameters µi, νi are defined as in (12) and (13).
+For the implementation of Algorithm 2.3 based on the order one Chebyshev method (25)
+for the state equation, the costate equation can be implemented efficiently using the recurrence
+relations given by the following theorem.
+
+11
+
+
+Theorem 3.3. The double adjoint of scheme (25) is given by the recurrence
+
+pN = ∇Ψ(yN),
+pks = pk+1
+
+pk,s−1 = pks + µs
+
+νs
+h∇yH(uk,s−1, yk,s−1, pks)
+
+pk,s−j = µs−j+1αs−j+1
+
+αs−j
+h∇yH(uk,s−j, yk,s−j, pk,s−j+1)
+
++ νs−j+1αs−j+1
+
+αs−j
+pk,s−j+1
+
++ (1 −νs−j+2)αs−j+2
+
+αs−j
+pk,s−j+2,
+j = 2 . . . , s −1,
+
+pk0 = µ1α1h∇yH(uk0, yk0, pk1) + α1pk1 + (1 −ν2)α2pk2
+pk = pk0
+∇uH(uk,s−j, yk,s−j, pk,s−j+1) = 0,
+j = 1, . . . , s.
+
+(26)
+
+where k = N −1, . . . , 2, 1, 0 and the coefficients αj are defined by induction as
+
+αs = 1,
+αs−1 = νs,
+
+αs−j = νs−j+1αs−j+1 + (1 −νs−j+2)αs−j+2,
+j = 2 . . . s −1.
+(27)
+
+The proof of Theorem 3.3 uses similar arguments to the proof of Theorem 2.1, with the
+exception that we now rely on the recurrence formula (25) instead of the standard Runge-Kutta
+formulation (6) to avoid numerical instability.
+
+Proof of Theorem 3.3. The Lagrangian associated to the discrete optimization problem (25) is
+
+L = Ψ(yN) + p0 · (y0 −y0) +
+
+N−1
+�
+
+k=0
+
+�
+pk+1 · (yks −yk+1) −pk0 · (yk −yk0)
+
++ pk1 · (yk0 + µ1hf(uk0, yk0) −yk1)
+
++
+
+s
+�
+
+i=2
+pki · (µihf(uk,i−1, yk,i−1) + νiyk,i−1
+
++ (1 −νi)yki−2 −yki)
+�
+.
+
+Here pk+1, pki, and p0 are the Lagrange multipliers. The optimality necessary conditions are thus
+given by
+∂L
+∂yk
+= 0,
+∂L
+∂yki
+= 0,
+∂L
+∂pk
+= 0,
+∂L
+∂pki
+= 0,
+∂L
+∂uki
+= 0,
+(28)
+
+where k = 0, . . . , N −1 and i = 0, . . . , s. By a direct calculation, we obtain the following system,
+
+yk0 = yk,
+yk1 = yk0 + µ1hf(uk0, yk0),
+
+yki = µihf(uk,i−1, yk,i−1) + νiyk,i−1 + (1 −νi)yk,i−2,
+i = 2, . . . , s,
+
+yk+1 = yks,
+
+pN = ∇Ψ(yN),
+pks = pk+1,
+
+pk,s−1 = µsh∇yH(uk,s−1, yk,s−1, pks) + νspks,
+
+pk,s−j = µs−j+1h∇yH(uk,s−j, yk,s−j, pk,s−j+1) + νs−j+1pk,s−j+1
++ (1 −νs−j+2)pk,s−j+2,
+j = 2, . . . , s −1,
+
+pk0 = µ1h∇yH(uk0, yk0, pk1) + pk1 + (1 −ν2)pk2,
+
+pk = pk0,
+
+∇uH(uk,s−j, yk,s−j, pk,s−j+1) = 0,
+j = 1, . . . , s,
+
+(29)
+
+12
+
+
+where k = 0, . . . , N −1. In the above system, observe that the steps pki of the double adjoint are
+not internal stages of a Runge-Kutta method, that is because they are not O(h) perturbations of
+the pk+1, i.e. pki ̸= pk+1+O(h), for instance, already for the first step pk,s−1 = νspk+1+O(h) with
+νs = 2 + O(η). Since the pseudo-Hamiltonian H(u, y, p) is linear in p, we can rescale the internal
+stages of the costate by a factor αj such that for ˆpkj := α−1
+j pkj, we obtain ˆpkj = pk+1 + O(h).
+We define
+ˆpks := pks,
+ˆpk,s−1 := pk,s−1
+
+νs
+= ˆpks + µs
+
+νs
+h∇yH(uk,s−1, yk,s−1, ˆpks).
+
+Substituting ˆpk,s−2 in (29), we obtain
+
+pk,s−2 = µs−1νsh∇yH(uk,s−2, yk,s−2, ˆpk,s−1) + νs−1νsˆpk,s−1 + (1 −νs)ˆpks,
+
+the quantities ˆpk,s−1 and ˆpks are equal to pk+1+O(h), hence pk,s−2 = (νs−1νs+1−νs)pk+1+O(h),
+this implies that αs−2 = νs−1νs + 1 −νs and therefore
+
+ˆpk,s−2 :=
+pk,s−2
+νs−1νs + 1 −νs
+=
+pk,s−2
+νs(νs−1 −1) + 1.
+
+Following this procedure for pk,s−j, j = 2, . . . , s −1, we arrive at the Runge-Kutta formulation
+(26) of the double adjoint of scheme (25), where we go back to the notation pki instead of ˆpki.
+
+Remark 3.4. A straightforward calculation yields that without damping (for η = 0), we have
+αs−j = j + 1, and method (25)-(26) reduces to the following recurrence
+
+yk0 = yk,
+yk1 = yk0 + h
+
+s2 f(uk0, yk0),
+
+yki = 2h
+
+s2 f(uk,i−1, yk,i−1) + 2yk,i−1 −yk,i−2,
+i = 2, . . . , s,
+
+yk+1 = yks,
+
+pN = ∇Ψ(yN),
+pks = pk+1,
+
+pk,s−1 = pks + h
+
+s2 ∇yH(uk,s−1, yk,s−1, pks),
+
+pk,s−j =
+2j
+(j + 1)s2 h∇yH(uk,s−j, yk,s−j, pk,s−j+1) +
+2j
+j + 1pk,s−i+1
+
++ 1 −j
+
+j + 1pk,s−j+2,
+j = 2, . . . , s −1,
+
+pk0 = h
+
+s ∇yH(uk0, yk0, pk1) + spk1 + (1 −s)pk2,
+
+pk = pk0,
+
+∇uH(uk,s−j, yk,s−j, pk,s−j+1) = 0,
+j = 1, . . . , s.
+
+(30)
+
+where k = 0, . . . , N −1. In Section 3.4, we shall study the stability of (30) (without damping)
+and of (25)-(26) (with damping).
+
+3.3
+RKC method of order 2
+
+We consider the new implementation (21) of the RKC method applied to (1) for which the internal
+stages behave similarly to that of the order one method, given by
+
+min Ψ(yN), such that
+
+yk0 = yk,
+yk1 = yk0 + µ1hf(uk0, yk0),
+
+yki = µihf(uk,i−1, yk,i−1) + νiyk,i−1 + (1 −νi)yk,i−2,
+i = 2, . . . , s
+
+yk+1 = asyk0 + bsTs(ω0)yks,
+
+(31)
+
+13
+
+
+where, k = 0, . . . , N −1, η = 0.15, and again all the parameters are defined as for the Chebyshev
+method using ω2 instead of ω1. The order two RKC method with formulation (31) for the state
+equation can be implemented using Algorithm 2.3, the costate equation being implemented using
+the recurrence relations given by the following Theorem 3.5. Its proof is analogous to that of
+Theorem 3.3 and thus omitted.
+
+Theorem 3.5. The double adjoint of the scheme (31) is given by the recurrence
+
+pN = ∇Ψ(yN),
+pks = pk+1,
+
+pk,s−1 = pks + µs
+
+νs
+h∇yH(uk,s−1, yk,s−1, pks),
+
+pk,s−j = µs−j+1αs−j+1
+
+αs−j
+h∇yH(uk,s−j, yk,s−j, pk,s−j+1)
+
++ νs−j+1αs−j+1
+
+αs−j
+pk,s−j+1,
+
++ (1 −νs−j+2)αs−j+2
+
+αs−j
+pk,s−j+2,
+j = 2, . . . , s −1,
+
+pk0 = µ1α1h∇yH(uk0, yk0, pk1) + α1pk1 + (1 −ν2)α2pk2 + aspk+1,
+
+pk = pk0,
+
+∇uH(uk,s−j, yk,s−j, pk,s−j+1) = 0,
+j = 1, . . . , s,
+
+(32)
+
+where the coefficients αj are defined using the induction
+
+αs = bsTs(ω0),
+αs−1 = νsαs,
+
+αs−j = νs−j+1αs−j+1 + (1 −νs−j+2)αs−j+2,
+j = 2 . . . s −1.
+(33)
+
+In Figure 4, we plot the stability function and the internal stages of the double adjoint (26)
+of Chebyshev (11) and the double adjoint (32) of RKC (21). Comparing with Figures 1b and 2b,
+we observe that the internal stages are not the same for the double adjoint methods compared
+to the (11) and (21), while the stability function itself is identical as shown in Theorem 3.2 for a
+general Runge-Kutta method.
+
+3.4
+Stability and convergence analysis
+
+In this section, we study the stability of the double adjoint of the Chebyshev method (25) and
+the RKC method (31). We recall that for the Chebyshev method of order one (resp. RKC of
+order two) the stability domain contains the interval [−β(s, η), 0] where βCheb(s, η) ≈(2−4η/3)s2
+
+(resp. βRKC(s, η) ≈0.653s2 for η = 0.15).
+
+Theorem 3.6. Consider the Chebyshev (25) and the RKC (31) methods. For η = 0, the stability
+functions of the internal stages Rs,i(z) of the Chebyshev (resp. RKC) double adjoint (26) (resp.
+(32)), are bounded by 1 for all z ∈[−2s2, 0] (resp. [−2
+
+3s2 + 2
+
+3, 0]) and all s ∈N.
+
+The proof of Theorem 3.6 relies on the following lemma.
+
+Lemma 3.7. Let s ≥1, and consider the double sequence ˜γi
+j indexed by i and j,
+
+˜γi
+j = 0 ∀j > i,
+i = 0, . . . , s −1,
+
+˜γ0
+0 = 1,
+˜γ1
+0 = 0,
+˜γ1
+1 = 2,
+(34)
+
+14
+
+
+-200
+-150
+-100
+-50
+0
+
+-1
+
+-0.5
+
+0
+
+0.5
+
+1
+
+(a) Double adjoint (26) for η = 0.05
+
+-60
+-50
+-40
+-30
+-20
+-10
+0
+
+-1
+
+-0.5
+
+0
+
+0.5
+
+1
+
+(b) Double adjoint (32) for η = 0.15
+
+Figure 4: Internal stages (thin curves) and stability polynomial (bold curve) of the double adjoint
+of the Chebyshev method (26) of order one and the RKC method (32) of order two for s = 10
+internal stages.
+
+˜γi
+0 = ˜γi−1
+1
+−˜γi−2
+0
+,
+˜γi
+1 = 2˜γi−1
+0
++ ˜γi−1
+2
+−˜γi−2
+1
+i = 2, . . . , s −1,
+
+˜γi
+j = ˜γi−1
+j−1 + ˜γi−1
+j+1 −˜γi−2
+j
+i = 2, . . . , s −1, j = 2, . . . , i,
+(35)
+
+Then,
+
+˜γi
+j = 0 ∀j > i,
+
+˜γi
+0 =
+
+�
+1
+if i is even
+0
+if i is odd
+˜γi
+j =
+
+�
+2
+if i −j is even
+0
+otherwise
+
+(36)
+
+where i = 0, . . . , s −1, j = 0, . . . , i.
+
+Proof. It can be checked that the coefficients defined in (36) verify the induction (35). Hence
+using the fact that they have the same initial terms (34), we conclude that they coincide by
+induction on i and j.
+
+Proof of Theorem 3.6. We first consider the Chebyshev method without damping applied to the
+linear test problem y′ = λy , λ ∈C, t ∈(0, T], y(0) = 1, with a uniform subdivision x0 = 0 <
+x1 < · · · < xN = T of stepsize h. Using Remark 3.4, we obtain for k = 0:
+
+yk0 = 1,
+yk1 = yk0 + hλ
+
+s2 yk0,
+
+yki =
+2ihλ
+(i + 1)s2 yk,i−1 +
+2i
+i + 1yk,i−1 + 1 −i
+
+i + 1yk,i−2,
+i = 2, . . . , s −1,
+
+yks = hλ
+
+s yk,s−1 + syk,s−1 + (1 −s)yk,s−2,
+
+y1 = yks.
+
+(37)
+
+First, notice that since
+2i
+i+1 + 1−i
+
+i+1 = 1, we have that for all i = 0, . . . , s, yki = (1 + O(h)) (by
+induction). Setting z = hλ, it is sufficient to prove the identity
+
+yki =
+
+i
+�
+
+j=0
+γi
+jTj(1 + z
+
+s2 )
+(38)
+
+15
+
+
+where yki is a convex combination of the polynomials Tj(1 + z
+
+s2 ),
+
+i
+�
+
+j=0
+γi
+j = 1 and γi
+j ≥0 ∀i, j = 1, . . . s −1,
+(39)
+
+because |Tj(1 + z
+
+s2 )| ≤1 for all j = 0, . . . , s and z ∈[−β(s, 0), 0] = [−2s2, 0].
+Since the Chebyshev polynomials form a basis of the vector space of polynomials, this already
+justifies the existence of the expansion (38) with some real coefficients γi
+j. The identity �i
+j=0 γi
+j =
+1 follows from the fact that yki = 1 + O(h) and Tj(1 + z
+
+s2 ) = 1 + O(h) for all i, j = 0, . . . , s.
+Now we can calculate these coefficients for the first two internal stages, Rs,0(z) = yk0 = yk =
+1 = T0(1 + z
+
+s2 ), thus γ0
+0 = 1. Analogously, Rs,1(z) = yk1 = yk0 + hλ
+
+s2 yk0 = 1 + z
+
+s2 = T1(1 +
+z
+s2 ) we obtain γ1
+0 = 0, γ1
+1 = 1.
+It remains to prove the positivity of the coefficients γi
+j. Coupling (38) and (39), we obtain
+
+Rs,i(z) = yki =
+2i
+i + 1(1 + z
+
+s2 )yk,i−1 + 1 −i
+
+i + 1yk,i−2
+
+=
+2i
+i + 1(1 + z
+
+s2 )
+
+i−1
+�
+
+j=0
+γi−1
+j
+Tj(1 + z
+
+s2 ) + 1 −i
+
+i + 1
+
+i−2
+�
+
+j=0
+γi−2
+j
+Tj(1 + z
+
+s2 )
+
+=
+2i
+i + 1γi−1
+0
+T1(1 + z
+
+s2 ) +
+
+i
+�
+
+j=2
+
+i
+i + 1γi−1
+j−1Tj(1 + z
+
+s2 )
+
++
+
+i
+�
+
+j=2
+
+�
+i
+i + 1γi−1
+j−1 −i −1
+
+i + 1γi−2
+j−2
+
+�
+Tj−2(1 + z
+
+s2 )
+
+where we used (14). By comparison with (38), we obtain the following recurrence
+
+γi
+j = 0 ∀j > i,
+i = 0, . . . , s −1,
+
+γ0
+0 = 1,
+γ1
+0 = 0,
+γ1
+1 = 1,
+γi
+0 =
+i
+i + 1γi−1
+1
+−i −1
+
+i + 1γi−2
+0
+i = 2, . . . , s −1,
+
+γi
+1 =
+2i
+i + 1γi−1
+0
++
+i
+i + 1γi−1
+2
+−i −1
+
+i + 1γi−2
+1
+i = 2, . . . , s −1,
+
+γi
+j =
+i
+i + 1γi−1
+j−1 +
+i
+i + 1γi−1
+j+1 −i −1
+
+i + 1γi−2
+j
+i = 2, . . . , s −1, j = 2, . . . , i.
+
+Now defining ˜γi
+j = (i+1)γi
+j, the above induction relations simplify to (34) and (35). The positivity
+of ˜γi
+j, and hence of γi
+j, follows from Lemma 3.7. For i = s, the stability is a consequence of
+Theorem 3.2.
+Analogously, the RKC method reads for η = 0,
+
+yk0 = 1,
+yk1 = yk0 +
+3hλ
+s2 −1yk0,
+
+yki =
+6ihλ
+(i + 1)(s2 −1)yk,i−1 +
+2i
+i + 1yk,i−1 + 1 −i
+
+i + 1yk,i−2,
+i = 2, . . . , s −1,
+
+yks = hλ
+
+s yk,s−1 + s2 −1
+
+3s
+yk,s−1 −s3 −s2 −s + 1
+
+3s2
+yk,s−2 + 2s2 + 1
+
+3s2
+y0,
+
+y1 = yks,
+
+(40)
+
+and we follow the same methodology as above. Note that for RKC we have |Tj(1 +
+3
+s2−1z)| ≤1
+for all j = 0, . . . , s and z ∈[−β(s, 0), 0] = [−2
+
+3(s2 −1), 0]. Using the same notations we search for
+
+16
+
+
+coefficients satisfying the following
+
+yki =
+
+i
+�
+
+j=0
+γi
+jTj(1 +
+3
+s2 −1z), where
+
+i
+�
+
+j=0
+γi
+j = 1 and γi
+j ≥0 ∀i, j = 1, . . . s −1.
+(41)
+
+Remark that Rs,0(z) = yk0 = yk = 1 = T0(1 +
+3
+s2−1z), hence γ0
+0 = 1. Analogously, Rs,1(z) =
+yk1 = yk0 + 3hλ
+
+s2−1yk0 = 1 +
+3z
+s2−1 = T1(1 +
+3
+s2−1z), and we deduce that γ1
+0 = 0, γ1
+1 = 1.
+Again we find a relation between these new coefficients to prove their positivity using yki =
+2i
+i+1(1 +
+3
+s2−1z)yk,i−1 + 1−i
+
+i+1yk,i−2. We get a recurrence of the same form as in the Chebyshev
+double adjoint method (37) but with different parameter, proceeding in the same we obtain
+exactly the same coefficients γi
+j, which concludes the proof.
+
+Remark 3.8. For the case of positive damping η > 0, the coefficients get very complicated and it
+is difficult to find a recurrence relation between them in order to prove their positivity. However,
+observing that all the coefficients in the recurrence relations of the internal stages of the methods
+are continuous functions of η, then for all s, there exists η0(s) such that the internal stages are
+stable (bounded) for all η ∈[0, η0(s)]. Numerical investigations suggest that Theorem 3.6 remains
+valid for all η > 0 i.e the methods remain stable with the stability functions of the internal stages
+bounded by 1, for all integers s ≥1 for Chebyshev and s ≥2 for RKC, and all η > 0. We have
+verified this numerically for s ≤200.
+
+We conclude this section by the following convergence theorem for the new explicit stabilized
+methods for stiff optimal control problems.
+
+Theorem 3.9. The method (25)-(26) (resp. (31)-(32)) has order 1 (resp. 2) of accuracy for the
+optimal control problem (1).
+
+Proof. The proof follows immediately from Theorem 2.1 with poc = pode = 2 for the RKC
+method.
+
+Remark 3.10. The proposed explicit stabilized integrators for optimal control problems could be
+combined with the idea of implicit-explicit (IMEX) integrators as proposed in [14], where RKC
+type methods would replace the implicit part in the IMEX integrator. This idea is already proposed
+in [28, 7] in the context of advection-diffusion-reaction problems. In [28], the diffusion part is
+discretized with an RKC method which typically has a large number of internal stages, and the
+advection-reaction part is integrated using a 4-stage explicit Runge-Kutta method. In [7], the
+method integrates the diffusion term using ROCK2 method, the advection term using a 3-stage
+explicit method, and the nonlinear reaction term is solved implicitly. Such an extension is however
+out of the scope of the paper.
+
+4
+Numerical experiments
+
+In this Section, we illustrate numerically our theoretical findings of convergence and stability of
+the new fully explicit methods for stiff optimal control problems, first on a stiff three dimensional
+problem and second on a nonlinear diffusion advection PDE (Burgers equation).
+
+17
+
+
+10-1
+100
+
+h
+
+10-2
+
+100
+
+error
+
+state
+control
+slope=2
+
+(a) ε = 10−1.
+
+10 -1
+10 0
+
+h
+
+10 -4
+
+10 -3
+
+10 -2
+
+10 -1
+
+10 0
+
+error
+
+state
+control
+slope=2
+
+(b) ε = 10−3.
+
+Figure 5: Convergence plot of RKC (31)-(32) applied to problem (43).
+
+4.1
+A linear quadratic stiff test problem
+
+We start this section by a simple test problem taken from [11]:
+
+min 1
+
+2
+
+�1
+
+0
+(u2(t) + 2x2(t))dt subject to
+
+˙x(t) = 1
+
+2x(t) + u(t), t ∈[0, 1], x(0) = 1.
+(42)
+
+The optimal solution (u∗, x∗) is given by u∗(t) =
+2(e3t−e3)
+e3t/2(2+e3), x∗(t) =
+2e3t+e3
+e3t/2(2+e3). As studied in [14]
+we modify problem (42) into a singularly perturbed (stiff) problem to illustrate the good stability
+properties of our new method. For a fixed ε > 0, we consider the following stiff optimal control
+problem,
+
+min c(1) subject to
+
+˙c(t) = 1
+
+2(u2(t) + x2(t) + 4z2(t)), c(0) = 0,
+
+˙x(t) = z(t) + u(t), x(0) = 1,
+
+˙z(t) = 1
+
+ε
+
+�1
+
+2x(t) −z(t)
+�
+, z(0) = 1
+
+2,
+
+(43)
+
+Figure 5 shows the convergence behavior, using the new RKC method (31)-(32), of the error
+in infinity norm between the solutions of the stiff problem (43) for ε = 10−1 and ε = 10−3 and
+different sizes of the time step hi = 2−i, i = 0, . . . , 5 and the reference solution is obtained with
+h = 2−7. We observe lines of slope 2 which confirms the theoretical order two of accuracy of
+the scheme (Theorem 3.9). In the stiff case (ε = 10−3), the method uses s = 4 to calculate
+the reference solution and s = 40, 28, 20, 14, 10, 7 respectively for the different time steps used to
+illustrate the convergence, these values coincide with the theoretical values that can be obtained
+using (18). Analogously to the case of stiff ODEs, the cost of scheme (31)-(32) is O(ε−1
+
+2 ) function
+evaluations of f, while using Euler method with its double adjoint would cost O(ε−1).
+
+18
+
+
+4.2
+Optimal control of Burgers equation
+
+To illustrate the performance of the new method, we consider the following optimal control
+problem of a nonlinear diffusion advection PDE corresponding to the Burgers equation
+
+min
+u∈L2([0,T];L2(Ω))J(u) = 1
+
+2∥y(T) −ytarget∥2
+L2(Ω) + α
+
+2
+
+�T
+
+0
+∥u(t)∥2
+L2(Ω)
+
+subject to
+
+∂ty(t, x) = µ∆y(t, x) −ν
+
+2∂x(y2(t, x)) + u(t, x)
+in (0, T) × Ω,
+
+y(0, x) = g(x)
+in Ω,
+
+y(t, x) = 0
+on ∂Ω,
+
+(44)
+
+where µ, ν > 0, in dimension d = 1 with domain Ω= (0, 1) and the final time is given by T = 2.5.
+Here the control u is a part of the source that we want to adjust in order to achieve a given final
+state ytarget : Ω→R.
+We use a standard central finite difference space discretization for the state equation, and
+the trapezoid rule to discretize in space the norm L2(Ω). We consider M + 2 points in space
+xm = m∆x, with grid mesh size ∆x =
+1
+M+1, and we denote by ym(t) the approximation to
+y(t, xm), and define the vector Y (t) = (y0(t), y1(t), . . . , yM+1(t)) ∈RM+2. Similar notations are
+used for U and P. We obtain the following optimal control problem semi discretized in space,
+
+min
+U(t)∈RM+2
+Ψ(c(T), Y (T)) =
+1
+2(M + 1)
+
+M+1
+�
+
+m=0
+
+′(ym(T) −ytarget(xm))2 + αc(T)
+
+subject to
+
+˙c(t) =
+1
+2(M + 1)
+
+M+1
+�
+
+m=0
+
+′u2
+m(t),
+c(0) = 0,
+
+˙ym(t) = Fm(U(t), Y (t)) :=
+µ
+∆x2 (ym+1 −2ym + ym−1)
+
+−
+ν
+4∆x2 (y2
+m+1 −y2
+m−1) + um,
+
+ym(0) = g(xm), m = 0, . . . , M + 1,
+
+(45)
+
+where m = 0, . . . M+1 and the primed sum denotes a normal sum where the first and the last term
+are divided by 2 and we define y0 = yM+1 = 0 to take into account the homogeneous Dirichlet
+boundary conditions. The function F : RM+2 →RM+2 with components Fm : RM+2 →R is
+obtained from the standard central finite difference discretization of the right hand side of the
+state equation (44), and adapted to the boundary conditions. The corresponding adjoint system
+is
+
+˙pc(t) = 0,
+pc(T) = ∇cΨ = α,
+˙P(t) = −∇Y F(U(t), Y (t))P,
+(46)
+
+where P is a vector of length M + 2 containing the costate values pm, m = 0, . . . , M + 1. In all
+our experiments we take µ = 0.1, ν = 0.02, g(x) = 3
+
+2x(1 −x)2, and ytarget(x) = 1
+
+2 sin(10x)(1 −x).
+In Figure 6 we plot the optimal control function (Fig. 6b) and the corresponding state function
+(Fig. 6a) obtained using scheme (31)-(32). When we use a small value for α in the model, we
+allow larger control values and thus a final state very close to the target (Fig. 6c), otherwise the
+control will be more limited and then the final state will not be that close to the target (Fig. 6d).
+
+19
+
+
+(a) State.
+(b) Optimal control
+
+0
+0.2
+0.4
+0.6
+0.8
+1
+x
+
+-0.3
+
+-0.2
+
+-0.1
+
+0
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+final state
+
+ytarget(x)
+yN(x)
+
+(c) Final and target states for α = 0.01.
+
+0
+0.2
+0.4
+0.6
+0.8
+1
+x
+
+-0.3
+
+-0.2
+
+-0.1
+
+0
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+final state
+
+ytarget(x)
+yN(x)
+
+(d) Final and target states for α = 0.02.
+
+Figure 6: State, final state, and control, of problem (44). Figures (a), (b), and (c) are obtained
+using ∆x = 1/100, ∆t = T/30, and s = 24 stages, and α = 0.01. Figure (d) uses the same ∆x, g
+and ytarget but α = 0.02.
+
+Note that the method required s = 24 stages for ∆x = 1/100 and ∆t = 2.5/30, while using an
+Euler method with its double adjoint would require ∆t ≤∆tmax,Euler := ∆x2/2 at most. Hence,
+the standard Euler method would be ∆t/(s∆tmax,Euler) ≃70 times more expensive in terms of
+number of function evaluations for ∆x = 1/100, a factor that grows arbitrarily as ∆x →0.
+In Figure 7, we plot the convergence curves for the state and control functions of the new
+RKC method (31)-(32) applied to the diffusion problem discretized in space (45), where the
+number of stages s is computed adaptively using (18). We recover again lines of slope two, which
+corroborate the order two of the method. Although our convergence analysis is valid only in finite
+dimensions (Theorem 3.9), this suggests that the convergence of order two persists in the PDE
+case. For comparison, we also included the results for the following standard diagonally implicit
+Runge-Kutta method of order two, inspired from [14, Table 5.1] in the context of stiff optimal
+control problems, and given by the following Butcher tableau where γ = 1 −
+√
+
+2/2 (making the
+method L-stable),
+
+γ
+1 −2γ
+γ
+1/2
+1/2
+(47)
+
+20
+
+
+10-2
+10-1
+
+t
+
+10-4
+
+10-3
+
+10-2
+
+10-1
+
+100
+
+101
+
+relative error
+
+RKC
+implicit
+slope=2
+
+(a) Error in the state.
+
+10-2
+10-1
+
+t
+
+10-3
+
+10-2
+
+10-1
+
+100
+
+101
+
+relative error
+
+RKC
+implicit
+slope=2
+
+(b) Error in the control.
+
+Figure 7: Convergence plot of the RKC method (31)-(32) and the implicit method (47) applied
+to problem (45) for many time steps ∆ti = T/2i, i = 3, . . . , 8, ∆x = 1/100, and α = 0.02, The
+reference solution is obtained using ∆t = T/212, s = 3.
+
+Although for a fixed timestep, the second order implicit method (47) appears about two times
+more accurate than the RKC method (31)-(32) for the control and almost of the same accuracy
+for the state, we emphasize that these convergence plots do not take into account the extra cost
+of the implicitness of method (47). Indeed, the cost and difficulty of the implementation of the
+implicit methods (nonlinear iterations, preconditioners, etc.) would typically deteriorate in larger
+dimensions and for a nonlinear diffusion operator, as it is already the case for initial value PDEs
+[2], while as an explicit stabilized scheme, the RKC method (31)-(32) can be conveniently imple-
+mented in the spirit of the simplest explicit Euler method.
+
+Acknowledgment. This work was partially supported by the Swiss National Science Founda-
+tion, grants No.200020 184614, No.200021 162404 and No.200020 178752.
+
+References
+
+[1] A. Abdulle. Fourth order Chebyshev methods with recurrence relation. SIAM J. Sci. Com-
+put., 23(6):2041–2054, 2002.
+
+[2] A. Abdulle. Explicit Stabilized Runge–Kutta Methods, pages 460–468. Encyclopedia of Ap-
+plied and Computational Mathematics, Springer Berlin Heidelberg, 2015.
+
+[3] A. Abdulle, I. Almuslimani, and G. Vilmart. Optimal explicit stabilized integrator of weak
+order 1 for stiff and ergodic stochastic differential equations.
+SIAM/ASA J. Uncertain.
+Quantif., 6(2):937–964, 2018.
+
+[4] A. Abdulle and S. Cirilli. S-ROCK: Chebyshev methods for stiff stochastic differential equa-
+tions. SIAM J. Sci. Comput., 30(2):997–1014, 2008.
+
+[5] A. Abdulle and T. Li. S-ROCK methods for stiff Ito SDEs. Commun. Math. Sci., 6(4):845–
+868, 2008.
+
+[6] A. Abdulle and A. Medovikov. Second order Chebyshev methods based on orthogonal poly-
+nomials. Numer. Math., 90(1):1–18, 2001.
+
+21
+
+
+[7] A. Abdulle and G. Vilmart. PIROCK: a swiss-knife partitioned implicit-explicit orthogonal
+Runge-Kutta Chebyshev integrator for stiff diffusion-advection-reaction problems with or
+without noise. J. Comput. Phys., 242:869–888, 2013.
+
+[8] G. Albi, M. Herty, and L. Pareschi. Linear multistep methods for optimal control problems
+and applications to hyperbolic relaxation systems. Appl. Math. Comput., 354:460–477, 2019.
+
+[9] M. Bakker. Analytical aspects of a minimax problem. 1971. Technical Note TN 62 (in
+Dutch), Mathematical centre, Amsterdam.
+
+[10] J. F. Bonnans and J. Laurent-Varin. Computation of order conditions for symplectic parti-
+tioned Runge-Kutta schemes with application to optimal control. Numer. Math., 103(1):1–10,
+2006.
+
+[11] W. W. Hager. Runge-Kutta methods in optimal control and the transformed adjoint system.
+Numer. Math., 87(2):247–282, 2000.
+
+[12] E. Hairer, C. Lubich, and G. Wanner.
+Geometric numerical integration, volume 31 of
+Springer Series in Computational Mathematics.
+Springer-Verlag, Berlin, second edition,
+2006. Structure-preserving algorithms for ordinary differential equations.
+
+[13] E. Hairer and G. Wanner. Solving Ordinary Differential Equations II. Stiff and Differential-
+Algebraic Problems.
+Springer Series in Computational Mathematics 14. Springer-Verlag,
+Berlin, 2 edition, 1996.
+
+[14] M. Herty, L. Pareschi, and S. Steffensen. Implicit-explicit Runge-Kutta schemes for numerical
+discretization of optimal control problems. SIAM J. Numer. Anal., 51(4):1875–1899, 2013.
+
+[15] M. Herty and V. Schleper. Time discretizations for numerical optimisation of hyperbolic
+problems. Appl. Math. Comput., 218(1):183–194, 2011.
+
+[16] W. Hundsdorfer and J. Verwer. Numerical solution of time-dependent advection-diffusion-
+reaction equations, volume 33 of Springer Series in Computational Mathematics. Springer-
+Verlag, Berlin, 2003.
+
+[17] C. Y. Kaya. Inexact restoration for Runge-Kutta discretization of optimal control problems.
+SIAM J. Numer. Anal., 48(4):1492–1517, 2010.
+
+[18] J. Lang and J. G. Verwer. W-methods in optimal control. Numer. Math., 124(2):337–360,
+2013.
+
+[19] Q. Li, L. Chen, C. Tai, and W. E. Maximum principle based algorithms for deep learning.
+Journal of Machine Learning Research, 18(165):1–29, 2018.
+
+[20] X. Liu and J. Frank.
+Symplectic Runge-Kutta discretization of a regularized forward-
+backward sweep iteration for optimal control problems. Submitted, arXiv: 1912.07028v1,
+2019.
+
+[21] Y. Maday, M.-K. Riahi, and J. Salomon. Parareal in time intermediate targets methods for
+optimal control problems. In Control and optimization with PDE constraints, volume 164 of
+Internat. Ser. Numer. Math., pages 79–92. Birkh¨auser/Springer Basel AG, Basel, 2013.
+
+[22] J. M. Sanz-Serna. Symplectic Runge-Kutta schemes for adjoint equations, automatic differ-
+entiation, optimal control, and more. SIAM Rev., 58(1):3–33, 2016.
+
+22
+
+
+[23] B. Sommeijer, L. Shampine, and J. Verwer. RKC: an explicit solver for parabolic PDEs. J.
+Comput. Appl. Math., 88:316–326, 1998.
+
+[24] B. P. Sommeijer and J. G. Verwer. A performance evaluation of a class of Runge-Kutta-
+Chebyshev methods for solving semidiscrete parabolic differential equations. Afdeling Nu-
+merieke Wiskunde [Department of Numerical Mathematics], 91. Mathematisch Centrum,
+Amsterdam, 1980.
+
+[25] P. J. van der Houwen and B. P. Sommeijer. On the internal stability of explicit, m-stage
+Runge-Kutta methods for large m-values. Z. Angew. Math. Mech., 60(10):479–485, 1980.
+
+[26] J. Verwer. Explicit Runge-Kutta methods for parabolic partial differential equations. Special
+issue of Appl. Num. Math., 22:359–379, 1996.
+
+[27] A. Walther. Automatic differentiation of explicit Runge-Kutta methods for optimal control.
+Comput. Optim. Appl., 36(1):83–108, 2007.
+
+[28] C. J. Zbinden. Partitioned Runge-Kutta-Chebyshev methods for diffusion-advection-reaction
+problems. SIAM J. Sci. Comput., 33(4):1707–1725, 2011.
+
+23
+
+

@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "15",
+  "round": 1,
+  "reviewed_items": [
+    "def-na-dct-ii-and-dst-i-even-odd-extension",
+    "lem-na-bluestein-chirp-convolution-factorization",
+    "lem-na-mixed-radix-cooley-tukey-factorization",
+    "lem-na-zero-padding-removes-linear-convolution-aliasing",
+    "lem-na-complex-product-six-operation-roundoff-bound",
+    "thm-na-dct-ii-orthogonality-inverse-and-dft-extension",
+    "thm-na-dst-i-orthogonality-inverse-and-dft-extension",
+    "thm-na-dct-ii-chebyshev-coefficient-extraction",
+    "thm-na-interval-pi-matches-canonical-fourier-pi",
+    "alg-na-certified-unit-circle-phase",
+    "alg-na-computed-unitary-radix-two-fft",
+    "thm-na-certified-unit-circle-phase-enclosure",
+    "alg-na-computed-fft-cyclic-and-linear-convolution",
+    "lem-na-computed-unitary-butterfly-error-bound",
+    "alg-na-computed-fast-transforms-and-convolution",
+    "thm-na-computed-unitary-radix-two-fft-error-bound",
+    "thm-na-arbitrary-length-fft-correctness-and-cost",
+    "thm-na-computed-fft-convolution-error-bound",
+    "thm-na-bluestein-chirp-phase-error-separate-from-fft-error",
+    "ex-na-prime-length-five-bluestein-transform",
+    "ex-na-two-point-circular-aliasing",
+    "ex-na-three-sample-dct-chebyshev-coefficients"
+  ],
+  "reviewed_pages": [
+    "computed-fast-transforms-and-convolution",
+    "computed-fast-transforms-and-convolution-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Repaired the assigned-scope findings and checked affected consumers. The out-of-scope Clenshaw–Curtis consumer still needs to accept and forward the explicit phase and FFT controls to the updated arbitrary-length procedure; owner repair is required.",
+  "findings": [
+    {
+      "id": "lem-na-mixed-radix-cooley-tukey-factorization",
+      "type": "prerequisite",
+      "reason": "Added and cited the exponential-kernel theorem used to turn the integer-period factor into 1."
+    },
+    {
+      "id": "thm-na-dct-ii-chebyshev-coefficient-extraction:F1",
+      "type": "prerequisite",
+      "reason": "Added and cited the multiple-angle theorem; the recurrence definition alone does not establish T_k(cos θ)=cos(kθ)."
+    },
+    {
+      "id": "thm-na-dct-ii-chebyshev-coefficient-extraction:F2",
+      "type": "local",
+      "reason": "Corrected the row-orthogonality identity to CC^T, matching the proof's matrix multiplication."
+    },
+    {
+      "id": "alg-na-certified-unit-circle-phase",
+      "type": "prerequisite",
+      "reason": "Added and cited Euler's formula for the exponential-to-sine/cosine identification."
+    },
+    {
+      "id": "thm-na-certified-unit-circle-phase-enclosure",
+      "type": "prerequisite",
+      "reason": "Added and cited Euler's formula for the coordinate-enclosure argument."
+    },
+    {
+      "id": "alg-na-computed-unitary-radix-two-fft",
+      "type": "local",
+      "reason": "Named the phase-format and series controls, and specified the finite recursion-depth cap and its inconclusive branch so callers can thread controls exactly."
+    },
+    {
+      "id": "alg-na-computed-fft-cyclic-and-linear-convolution",
+      "type": "local",
+      "reason": "Added explicit phase-format, series, tolerance, and recursion-depth inputs and passed them to all forward and inverse FFT calls."
+    },
+    {
+      "id": "alg-na-computed-fast-transforms-and-convolution",
+      "type": "local",
+      "reason": "Threaded explicit controls through phase, radix-two, convolution, and recursive calls; declared the operationwise model and rounded the chirp input products."
+    },
+    {
+      "id": "thm-na-arbitrary-length-fft-correctness-and-cost:recurrence",
+      "type": "local",
+      "reason": "Corrected the cost argument to bound the normalized recurrence with a separate binary comparison tree; its leaves include both primes and powers of two, while the actual mixed-radix schedule makes r+s recursive calls."
+    },
+    {
+      "id": "thm-na-arbitrary-length-fft-correctness-and-cost:prerequisites",
+      "type": "prerequisite",
+      "reason": "Added logarithm and induction suppliers for the logarithmic product, monotonicity, and induction steps."
+    },
+    {
+      "id": "alg-na-computed-clenshaw-curtis-via-fast-dft",
+      "type": "outside-batch",
+      "reason": "Its call must accept and forward τ, exponent limits, p0, pmax, series cap J, and radix-two depth cap dmax. The source is outside the authorized write scope."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-na-computed-unitary-radix-two-fft",
+      "decision": "repair",
+      "reason": "Updated its phase calls to pass the exact format and series controls."
+    },
+    {
+      "id": "thm-na-certified-unit-circle-phase-enclosure",
+      "decision": "repair",
+      "reason": "Added the missing Euler supplier to the coordinate-to-exponential argument."
+    },
+    {
+      "id": "alg-na-computed-fft-cyclic-and-linear-convolution",
+      "decision": "repair",
+      "reason": "Passes all explicit controls to each forward and inverse FFT call and propagates budget failure."
+    },
+    {
+      "id": "lem-na-computed-unitary-butterfly-error-bound",
+      "decision": "accept",
+      "reason": "Its one-step bound remains conditional on a successful rounded butterfly."
+    },
+    {
+      "id": "alg-na-computed-fast-transforms-and-convolution",
+      "decision": "repair",
+      "reason": "Threads the phase and FFT configuration through its composite and Bluestein branches; the input chirp product now matches the rounded operation in the error theorem."
+    },
+    {
+      "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+      "decision": "accept",
+      "reason": "The bound is conditional on a successful execution; an insufficient depth cap returns no computed transform."
+    },
+    {
+      "id": "thm-na-arbitrary-length-fft-correctness-and-cost",
+      "decision": "repair",
+      "reason": "Clarified the complete formal schedule and repaired its normalized-recursion cost proof and logarithm premises."
+    },
+    {
+      "id": "thm-na-computed-fft-convolution-error-bound",
+      "decision": "accept",
+      "reason": "Its per-certificate assumptions still suffice for the conditional convolution error estimate."
+    },
+    {
+      "id": "thm-na-bluestein-chirp-phase-error-separate-from-fft-error",
+      "decision": "accept",
+      "reason": "The procedure now performs the rounded input modulation modeled by the theorem; successful phase calls meet its τ bound."
+    },
+    {
+      "id": "alg-box-muller-finite-bit-transform",
+      "decision": "accept",
+      "reason": "Its fixed dyadic format and phase configuration supply the existing phase routine inputs; the target-value relation is now explicitly sourced."
+    },
+    {
+      "id": "thm-box-muller-finite-bit-coupling-error",
+      "decision": "accept",
+      "reason": "Its use of the phase-enclosure result is unchanged and remains valid."
+    },
+    {
+      "id": "alg-na-computed-clenshaw-curtis-via-fast-dft",
+      "decision": "escalate",
+      "reason": "Owner must add the explicit phase/FFT controls to its inputs and forward them in the call to the updated arbitrary-length procedure."
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "13",
+  "round": 0,
+  "reviewed_items": [
+    "def-finite-straight-line-computational-program",
+    "lem-implicit-sensitivity-error-controlled-by-residual",
+    "thm-implicit-differentiation-forward-and-adjoint-formulas",
+    "alg-forward-mode-automatic-differentiation",
+    "alg-reverse-mode-automatic-differentiation",
+    "lem-finite-straight-line-program-defines-c1-map",
+    "lem-finite-straight-line-program-defines-c2-map",
+    "alg-checkpointed-reverse-schedules",
+    "alg-differentiate-finite-fixed-point-iteration",
+    "alg-forward-over-reverse-hessian-vector-product",
+    "thm-forward-mode-computes-directional-derivative",
+    "thm-reverse-mode-computes-gradient",
+    "thm-reverse-mode-work-and-tape-storage-bound",
+    "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+    "thm-finite-iteration-sensitivity-bound-and-residual-limitation",
+    "thm-forward-over-reverse-computes-hessian-vector-product",
+    "thm-graph-gradient-error-from-local-jacobian-perturbations",
+    "rem-real-arithmetic-graph-versus-rounded-execution",
+    "lem-certified-linear-solve-jacobian-and-pullback-error",
+    "ex-branchwise-ad-at-the-absolute-value-switch",
+    "ex-implicit-linear-solve-adjoint",
+    "ex-reverse-euler-trajectory-tape",
+    "ex-shared-expression-forward-and-reverse-graph"
+  ],
+  "reviewed_pages": [
+    "automatic-differentiation-and-computational-graphs",
+    "automatic-differentiation-and-computational-graphs-examples"
+  ],
+  "decision": "repair",
+  "reason": "The assigned pages, items, approved design, and actual supplier proofs were reviewed. The defects are locally resolvable; no unresolved prerequisite or scope gap requires escalation.",
+  "findings": [
+    {
+      "id": "def-finite-straight-line-computational-program",
+      "type": "local",
+      "reason": "The definition allows arbitrary finite-dimensional real value spaces, but reverse mode and HVP use transposes and gradients without specifying inner products or a dual-cotangent convention. Specify Euclidean coordinate spaces and their standard products, or define cotangents and pullbacks in dual spaces."
+    },
+    {
+      "id": "alg-reverse-mode-automatic-differentiation",
+      "type": "local",
+      "reason": "Only operation cotangents are initialized to zero. Input cotangent accumulators are returned as the gradient but are never initialized, so their values are unspecified. Initialize all input cotangents to zero before seeding the output; define the seed if the output may itself be an input."
+    },
+    {
+      "id": "alg-checkpointed-reverse-schedules",
+      "type": "local",
+      "reason": "The binomial procedure promises a terminal value and starting cotangent, but its N=0 branch returns only the cotangent. T=0 is permitted by the capacity condition, so specify that this branch returns the known state x_a along with the unchanged cotangent."
+    },
+    {
+      "id": "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+      "type": "local",
+      "reason": "The binomial correctness proof's N=0 base case does not account for the terminal value claimed in the theorem. State that the empty interval returns x_a and verify the returned value as well as the unchanged cotangent."
+    },
+    {
+      "id": "lem-certified-linear-solve-jacobian-and-pullback-error",
+      "type": "local",
+      "reason": "Proof step 2.1 imports the bound ||fl(B^T c)-B^T c|| <= gamma_n ||B||_F ||c|| without deriving it or citing a supplier fact. State gamma_n=nu/(1-nu), make the operationwise success assumptions explicit, and derive or cite the sequential real dot-product bound. The stated error formulas are sound under that bound."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "automatic-differentiation-and-computational-graphs",
+      "decision": "accept",
+      "reason": "Its summary remains accurate under the explicit Euclidean convention and the specified local algorithm repairs."
+    },
+    {
+      "id": "automatic-differentiation-and-computational-graphs-examples",
+      "decision": "accept",
+      "reason": "The examples use real Euclidean inputs and remain valid after the reverse accumulator initialization is specified."
+    },
+    {
+      "id": "alg-forward-mode-automatic-differentiation",
+      "decision": "accept",
+      "reason": "Its tangent recurrence is valid with the explicit Euclidean coordinate convention."
+    },
+    {
+      "id": "alg-reverse-mode-automatic-differentiation",
+      "decision": "repair",
+      "reason": "Initialize input cotangent accumulators and define output seeding when the output is an input."
+    },
+    {
+      "id": "lem-finite-straight-line-program-defines-c1-map",
+      "decision": "accept",
+      "reason": "Its open-domain induction and chain-rule argument remain valid for the clarified Euclidean spaces."
+    },
+    {
+      "id": "lem-finite-straight-line-program-defines-c2-map",
+      "decision": "accept",
+      "reason": "Its composition and product-rule argument remains valid under the clarified convention."
+    },
+    {
+      "id": "alg-checkpointed-reverse-schedules",
+      "decision": "repair",
+      "reason": "Specify the returned terminal state in the binomial N=0 case."
+    },
+    {
+      "id": "alg-differentiate-finite-fixed-point-iteration",
+      "decision": "accept",
+      "reason": "It differentiates the stated finite composition and does not depend on the reverse-mode initialization."
+    },
+    {
+      "id": "alg-forward-over-reverse-hessian-vector-product",
+      "decision": "accept",
+      "reason": "It explicitly initializes all reverse accumulators and its recurrence is valid under the clarified Euclidean convention."
+    },
+    {
+      "id": "thm-forward-mode-computes-directional-derivative",
+      "decision": "accept",
+      "reason": "Its induction matches the forward recurrence and the clarified graph spaces."
+    },
+    {
+      "id": "thm-reverse-mode-computes-gradient",
+      "decision": "accept",
+      "reason": "Its proof matches the reverse procedure once input accumulators are zero-initialized."
+    },
+    {
+      "id": "thm-reverse-mode-work-and-tape-storage-bound",
+      "decision": "accept",
+      "reason": "Its work and storage count remains valid under the stated bounded-arity primitive assumptions."
+    },
+    {
+      "id": "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+      "decision": "repair",
+      "reason": "Clarify the terminal value in the empty-interval base case alongside the algorithm repair."
+    },
+    {
+      "id": "thm-finite-iteration-sensitivity-bound-and-residual-limitation",
+      "decision": "accept",
+      "reason": "Its finite-iteration derivative and residual bounds remain valid."
+    },
+    {
+      "id": "thm-forward-over-reverse-computes-hessian-vector-product",
+      "decision": "accept",
+      "reason": "Its differentiated reverse recurrence remains valid under the clarified Euclidean convention."
+    },
+    {
+      "id": "thm-graph-gradient-error-from-local-jacobian-perturbations",
+      "decision": "accept",
+      "reason": "Its pathwise perturbation proof is algebraic and remains valid with the clarified graph spaces."
+    },
+    {
+      "id": "rem-real-arithmetic-graph-versus-rounded-execution",
+      "decision": "accept",
+      "reason": "Its distinctions and solve-error application remain valid once the local dot-product bound is proved."
+    },
+    {
+      "id": "lem-certified-linear-solve-jacobian-and-pullback-error",
+      "decision": "repair",
+      "reason": "Add the missing sequential dot-product error justification; the resulting consumer claims remain unchanged."
+    },
+    {
+      "id": "ex-branchwise-ad-at-the-absolute-value-switch",
+      "decision": "accept",
+      "reason": "Its strict-branch derivatives and boundary status remain valid."
+    },
+    {
+      "id": "ex-implicit-linear-solve-adjoint",
+      "decision": "accept",
+      "reason": "Its exact derivative is correct, and its zero-error rounded instance remains valid once the solve lemma's dot bound is justified."
+    },
+    {
+      "id": "ex-reverse-euler-trajectory-tape",
+      "decision": "accept",
+      "reason": "Its primal and reverse values remain correct after input cotangents are initialized to zero."
+    },
+    {
+      "id": "ex-shared-expression-forward-and-reverse-graph",
+      "decision": "accept",
+      "reason": "Its forward and reverse calculations remain correct after input cotangents are initialized to zero."
+    },
+    {
+      "id": "thm-discrete-adjoint-gradient-recursion",
+      "decision": "accept",
+      "reason": "The outside-batch consumer uses real Euclidean state spaces and its adjoint recursion remains valid after reverse input cotangents are initialized."
+    }
+  ]
+}

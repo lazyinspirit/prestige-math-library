@@ -1,0 +1,41 @@
+{
+  "research_only": true,
+  "application": "Root must bind current bytes and merge these exact single-occurrence replacements at paused/drained5.1. New module/doc require absent canonical paths. Do not overwrite another pending proposal.",
+  "existing_file": "tools/step5-workflow.mjs",
+  "preimage": "before/tools/step5-workflow.mjs",
+  "successor": "proposed/tools/step5-workflow.mjs",
+  "hunks": [
+    {
+      "before": "export { readerConcernSession };",
+      "after": "import { loadInitialScopeFindings, checkFrozenInitialScopeFindingInput, recordInitialScopeFindings } from './step5-initial-scope-findings.mjs';\nexport { readerConcernSession };"
+    },
+    {
+      "before": "      `Write only your assigned frontier item files, their necessary owning contracts/metadata, and ${report}.`,",
+      "after": "      pack.initial_scope_findings?.some(row=>assigned.includes(row.id))\n        ? `Owner-confirmed findings from original native initial adjudication, assigned for current review and smallest necessary repair:\\n${JSON.stringify(pack.initial_scope_findings.filter(row=>assigned.includes(row.id)),null,2)}. Read the original native report/finding and bound individual root instructions. These are explicit work requests, not Step-4 reader concerns, judge rejections, new adjudication decisions, or current acceptance. Return ordinary reviews with no adjudication decision. Only actual Statement/Definition changes propagate consumer examination.` : '',\n      `Write only your assigned frontier item files, their necessary owning contracts/metadata, and ${report}.`,"
+    },
+    {
+      "before": "  for(const pack of packs)if(pack.reader_concerns?.length){\n    for(const concern of pack.reader_concerns){",
+      "after": "  for(const pack of packs)if(pack.reader_concerns?.length||pack.initial_scope_findings?.length){\n    for(const concern of [...(pack.reader_concerns??[]),...(pack.initial_scope_findings??[])]){"
+    },
+    {
+      "before": "    if(phase==='impact-initial'&&round===1)checkFrozenReaderConcernInput(root,run,saved);",
+      "after": "    if(phase==='impact-initial'&&round===1){\n      checkFrozenReaderConcernInput(root,run,saved);\n      checkFrozenInitialScopeFindingInput(root,run,saved);\n    }"
+    },
+    {
+      "before": "  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id)])];",
+      "after": "  const scopeFindings=phase==='impact-initial'&&round===1?loadInitialScopeFindings(root,run):null;\n  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id),...(scopeFindings?.entries??[]).map(row=>row.id)])];"
+    },
+    {
+      "before": "    pack.input_evidence=frozenSupportingEvidence(root,run,concerns.evidence);\n  }\n  frozen(path,pack);writeTasks(root,pack,'repair');return pack;",
+      "after": "  }\n  if(scopeFindings)pack.initial_scope_findings=scopeFindings.entries;\n  if(concerns||scopeFindings){\n    pack.reader_concern_owners={...(pack.reader_concern_owners??{}),...Object.fromEntries((scopeFindings?.entries??[]).map(row=>[row.id,pack.units.find(unit=>assignments[unit].includes(row.id))]))};\n    pack.input_evidence??={};\n    for(const admission of [concerns,scopeFindings].filter(Boolean))for(const [file,hash]of Object.entries(frozenSupportingEvidence(root,run,admission.evidence))){\n      requireValue(!Object.hasOwn(pack.input_evidence,file)||pack.input_evidence[file]===hash,`conflicting work-admission evidence: ${file}`);\n      pack.input_evidence[file]=hash;\n    }\n  }\n  frozen(path,pack);writeTasks(root,pack,'repair');return pack;"
+    },
+    {
+      "before": "    case 'init':result=initialize(root,run);break;",
+      "after": "    case 'record-initial-scope-findings':result=recordInitialScopeFindings(root,run,opt('--authorization'));break;\n    case 'check-initial-scope-findings':{\n      const admission=loadInitialScopeFindings(root,run,{requireCollection:false});\n      requireValue(admission,'initial-scope finding registry missing');\n      console.log(JSON.stringify({run,ids:admission.entries.map(row=>row.id),mathematical_review:false,native_coverage_adopted:false}));return;\n    }\n    case 'init':result=initialize(root,run);break;"
+    }
+  ],
+  "new_files": [
+    "tools/step5-initial-scope-findings.mjs",
+    "tools/step5-initial-scope-findings.md"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "54",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "38d594c4906bcd86fba122b3fb39bf64c30067fabf5fe97326bbda06cb0538b3",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F4 incorrectly says that differentiation reverses written composition order. The cited chain-rule Statement instead gives D(g∘f)(z)=Dg(f(z))Df(z). This is nonfatal because step 2.1 proves closure of the symplectic matrix identity under every finite product: either factor order preserves J, and the admitted-domain conditions ensure all actual intermediate derivatives exist and satisfy F3. Replaced F4 with the exact chain rule, including the intermediate evaluation point; no missing mathematical supplier or change of conclusion is required.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+      "disposition": "repaired",
+      "post_sha256": "3794abe143f94b70ba1cbe4510cbb719635884310ce9d933cf960e41ea72c3ef",
+      "review_context_sha256": "7f3588e844251f94552dee7324d48843f9c565c0e4f26ea49f795144a198b5bd",
+      "reason": "Checked the complete assigned proposition, its local-domain and Euler procedures, shear lemma, published chain-rule theorem, symplectic-form definition, published shear formulas, owning page and complete item contract. For V∈C² the shears are C¹; their admitted finite-composition domains are open by continuity, and the chain rule gives continuous Jacobian products at the actual intermediate points. The identity (AB)ᵀJ(AB)=Bᵀ(AᵀJA)B=J proves the conclusion. Corrected only F4. The digest’s earlier C¹-Jacobian concern is absent: the current Statement already asserts a C¹ map with continuous Jacobian. Its section is unchanged from the frozen round input. Exact supplier quotations and derivations in the contract remain valid. This is repair-author verification, not independent acceptance of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+      "severity": "nonfatal",
+      "location": "Facts & Assumptions, F4",
+      "affected_use": "Proof 2.1 invokes F4 to identify the Jacobian of each admitted shear composition.",
+      "invalidated_claim": "F4 asserts that derivatives multiply in reverse written composition order; the cited chain rule preserves the written order of outer and inner factors.",
+      "minimality": "Replace only F4 by D(g∘f)(z)=Dg(f(z))Df(z), explicitly evaluating the outer derivative at f(z). The finite-product identity, Statement, contract and page need no change.",
+      "reason": "The inaccurate chain-rule wording is repaired. The symplectic product calculation already applies to either factor order, so it has no essential dependence on the erroneous reversal claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Only items/prop-local-leapfrog-and-symplectic-euler-are-symplectic.md and this assigned report were written. The item edit replaces F4 only; no contract or page change, new prerequisite, choice assumption, downstream interface event, outside-consumer finding or published-ledger update is required.",
+    "Local evidence: items/def-local-leapfrog-domain-on-an-open-configuration-set.md, Definition; items/alg-local-symplectic-euler-step.md, Definition; items/lem-canonical-kick-and-drift-shears-have-symplectic-jacobians.md, Statement and Proof 1.1–2.1; items/thm-chain-rule-for-total-derivatives.md, Statement and complete Proof; items/def-leapfrog-step-map.md, Definition; items/def-symplectic-form-and-symplectic-manifold.md, Definition; library/numerical-differential-equations-and-stochastic-dynamics/geometric-numerical-integration.md, Summary; research/numerical-optimization-dynamics-2026-10-16-batch-54.proof-contracts.json, assigned contract. No external source reading is claimed; the mathematics is familiar.",
+    "Immediately after the repair review, node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items prop-local-leapfrog-and-symplectic-euler-are-symplectic returned the two hashes copied into reviews; no supplier edits followed.",
+    "node tools/tsx-run.mjs tools/precheck.mts items/prop-local-leapfrog-and-symplectic-euler-are-symplectic.md --json: exit 0, one proof checked, zero failures.",
+    "node tools/rendercheck.mjs items/prop-local-leapfrog-and-symplectic-euler-are-symplectic.md --json: exit 0, one file checked, zero errors or warnings.",
+    "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-54.proof-contracts.json --strict --items prop-local-leapfrog-and-symplectic-euler-are-symplectic --json: exit 0, assigned item checked, ok:true, zero errors or warnings.",
+    "node tools/proof-layout.mjs items/prop-local-leapfrog-and-symplectic-euler-are-symplectic.md: exit 0, 1 items, 2 steps, 0 defects. Executed once after the final item edit.",
+    "Direct round-interface comparison: statementHash remains a8bb2336cbc1ab3cd3032c80a9da7f3497c1be61e2b6a6cc1399f9bb2fc8010a, exactly matching repeat-1.json before_statements. Item guard changed from 80382a53254a973c24dc2465a171e6fe4f29a0fb5394f8da0725e3d9765ca2db to the recorded post_sha256. No unresolved mathematical obligations remain in this assignment; controller-owned collection and certification are not claimed."
+  ]
+}

@@ -1,0 +1,284 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "88",
+  "batch_dependency_level": 6,
+  "prerequisite_batches": [
+    "25",
+    "32",
+    "34",
+    "50",
+    "84"
+  ],
+  "scheduling_input_sha256": "a20c83d967c4fb82d96b2681fe009f89c3dd179bbf56683e847ca38526498979",
+  "suppliers": [
+    {
+      "kind": "item",
+      "consumer": "alg-iteratively-regularized-gauss-newton-step",
+      "supplier": "lem-hilbert-tikhonov-normal-operator-invertible",
+      "supplier_batch": "25",
+      "supplier_pair": "numerical-inverse-problems-and-regularization-error",
+      "supplier_item_ids": [
+        "lem-hilbert-tikhonov-normal-operator-invertible"
+      ],
+      "status": "verified",
+      "required_interface": "For a bounded A between real or complex Hilbert spaces and lambda>0, B_lambda=A*A+lambda I is bijective and ||B_lambda^{-1}||<=1/lambda. The carrier assumes Countable Choice, as the supplier does.",
+      "affected_claims": [
+        "The algorithm defines the unanchored step by solving the shifted normal equation; invertibility makes that solve unique and well-defined."
+      ],
+      "source_excerpt": "Then $B_\\lambda:X\\to X$ is bijective and $$\\|B_\\lambda^{-1}\\|\\le\\frac1\\lambda.$$",
+      "readiness_claim": "The current Step-1 record is ready; this is not independent approval.",
+      "evidence": "Inspected the complete supplier Statement and proof, its direct hypotheses, and the current Step-1 record. The boundedness, Hilbert-space, adjoint, lambda>0, and Countable Choice assumptions match the algorithm."
+    },
+    {
+      "kind": "item",
+      "consumer": "lem-irlgnm-one-step-error-recurrence",
+      "supplier": "lem-hilbert-tikhonov-normal-operator-invertible",
+      "supplier_batch": "25",
+      "supplier_pair": "numerical-inverse-problems-and-regularization-error",
+      "supplier_item_ids": [
+        "lem-hilbert-tikhonov-normal-operator-invertible"
+      ],
+      "status": "verified",
+      "required_interface": "For A_k=F'(x_k) bounded between Hilbert spaces and alpha_k>0, B_k=A_k*A_k+alpha_k I is invertible and ||B_k^{-1}||<=1/alpha_k.",
+      "affected_claims": [
+        "Step 1.1 solves for B_k^{-1}; step 2.1 uses alpha_k||B_k^{-1}||<=1."
+      ],
+      "source_excerpt": "Then $B_\\lambda:X\\to X$ is bijective and $$\\|B_\\lambda^{-1}\\|\\le\\frac1\\lambda.$$",
+      "readiness_claim": "The current Step-1 record is ready; this is not independent approval.",
+      "evidence": "Inspected the complete supplier proof and current ready Step-1 record. The local recurrence explicitly takes alpha_k>0 and A_k=F'(x_k), which is bounded by the Fréchet differentiability assumption."
+    },
+    {
+      "kind": "item",
+      "consumer": "lem-irlgnm-one-step-error-recurrence",
+      "supplier": "lem-hilbert-tikhonov-noise-amplification-bound",
+      "supplier_batch": "25",
+      "supplier_pair": "numerical-inverse-problems-and-regularization-error",
+      "supplier_item_ids": [
+        "lem-hilbert-tikhonov-noise-amplification-bound"
+      ],
+      "status": "verified",
+      "required_interface": "For bounded A_k between Hilbert spaces and alpha_k>0, R_alpha=(A_k*A_k+alpha_k I)^{-1}A_k* satisfies ||R_alpha g||<=||g||/(2 sqrt(alpha_k)). Countable Choice is assumed.",
+      "affected_claims": [
+        "Step 2.1 applies the supplier to the combined data noise and linearization remainder."
+      ],
+      "source_excerpt": "Then for every $g\\in Y$, $$\\|R_\\lambda g\\|\\le\\frac{\\|g\\|}{2\\sqrt\\lambda},\\qquad \\|R_\\lambda\\|\\le\\frac1{2\\sqrt\\lambda}.$$",
+      "readiness_claim": "The current Step-1 record is ready; this is not independent approval.",
+      "evidence": "Inspected the complete supplier Statement/proof and its current ready Step-1 record. The consumer uses precisely the supplier norm bound for lambda=alpha_k."
+    },
+    {
+      "kind": "item",
+      "consumer": "lem-landweber-filter-and-residual-identities",
+      "supplier": "lem-compact-gram-operator-is-positive-and-has-kernel",
+      "supplier_batch": "32",
+      "supplier_pair": "spectral-regularization-and-parameter-choice",
+      "supplier_item_ids": [
+        "lem-compact-gram-operator-is-positive-and-has-kernel"
+      ],
+      "status": "verified",
+      "required_interface": "For compact bounded A between Hilbert spaces, both A*A and AA* are compact, positive, and self-adjoint; ker(A*A)=ker A. Countable Choice is the stated axiom.",
+      "affected_claims": [
+        "T=A*A has the compact spectral multipliers used in the filter identities; AA* is the compact Gram operator in the residual-filter identity."
+      ],
+      "source_excerpt": "Then both $A^*A:X\\to X$ and $AA^*:Y\\to Y$ are compact, self-adjoint and positive, and $$\\ker(A^*A)=\\ker A,\\qquad \\ker(AA^*)=\\ker A^*.$$",
+      "readiness_claim": "The current Step-1 record is ready; this is not independent approval.",
+      "evidence": "Inspected the complete current Statement/proof, including compactness of both Gram operators via the compact-composition theorem, and the current ready Step-1 record."
+    },
+    {
+      "kind": "item",
+      "consumer": "lem-landweber-filter-and-residual-identities",
+      "supplier": "def-compact-spectral-filter-and-qualification",
+      "supplier_batch": "32",
+      "supplier_pair": "spectral-regularization-and-parameter-choice",
+      "supplier_item_ids": [
+        "def-compact-spectral-filter-and-qualification"
+      ],
+      "status": "verified",
+      "required_interface": "On a compact positive self-adjoint S, define bounded spectral multipliers by their scalar values on the nonzero eigenvalues and the kernel; for nu>0, S^nu uses q(0)=0 and q(t)=t^nu. Countable Choice is declared.",
+      "affected_claims": [
+        "The finite geometric polynomials g_k(T) and r_k(T), and powers T^nu, are read as the declared compact spectral multipliers."
+      ],
+      "source_excerpt": "For $\\nu>0$, define\n$S^\\nu$ by the multiplier $q_\\nu(0)=0$ and $q_\\nu(t)=t^\\nu$ for $t>0$.",
+      "readiness_claim": "The current Step-1 record is ready; this is not independent approval.",
+      "evidence": "Inspected the complete current definition and its current ready Step-1 record. The exact multiplier convention at zero and the source-power convention match the consumer."
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-landweber-source-and-noise-error-bounds",
+      "supplier": "lem-compact-spectral-multiplier-is-well-defined",
+      "supplier_batch": "32",
+      "supplier_pair": "spectral-regularization-and-parameter-choice",
+      "supplier_item_ids": [
+        "lem-compact-spectral-multiplier-is-well-defined"
+      ],
+      "status": "verified",
+      "required_interface": "Every bounded scalar multiplier q on the compact self-adjoint eigenspaces defines a bounded linear operator with norm at most sup |q|; Countable Choice is assumed.",
+      "affected_claims": [
+        "Steps 2.2 and 3.1 use the multiplier norm bound for t^s r_k(t) and t|g_k(t)|^2."
+      ],
+      "source_excerpt": "The map $Q_q:H\\to H$ is bounded and\nlinear, with $\\|Q_q\\|\\le\\sup_{t\\in\\{0\\}\\cup\\Sigma}|q(t)|$.",
+      "readiness_claim": "The current Step-1 record is ready; this is not independent approval.",
+      "evidence": "Inspected the complete multiplier proof and its current ready Step-1 record, including the operator norm estimate used by both scalar multipliers."
+    },
+    {
+      "kind": "item",
+      "consumer": "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+      "supplier": "lem-square-summable-sequences-form-a-hilbert-space",
+      "supplier_batch": "32",
+      "supplier_pair": "spectral-regularization-and-parameter-choice",
+      "supplier_item_ids": [
+        "lem-square-summable-sequences-form-a-hilbert-space"
+      ],
+      "status": "verified",
+      "required_interface": "The real square-summable sequence space with its canonical coordinate inner product is a Hilbert space.",
+      "affected_claims": [
+        "The compact diagonal example uses X=Y=ell^2(N) and the compact diagonal operator acting on that Hilbert space."
+      ],
+      "source_excerpt": "with its canonical inner product and norm from [[def-square-summable-family-on-an-arbitrary-index-set]], is complete and therefore is a real Hilbert space.",
+      "readiness_claim": "The current Step-1 record is ready; this is not independent approval.",
+      "evidence": "Inspected the complete local Cauchy-coordinate proof and current ready Step-1 record. The example's real sequence space and inner product convention match."
+    },
+    {
+      "kind": "page",
+      "consumer": "iterative-regularization-and-early-stopping",
+      "supplier": "krylov-methods-and-lanczos-convergence",
+      "supplier_batch": "34",
+      "supplier_item_ids": [
+        "lem-scaled-chebyshev-filter-bound-on-a-separated-interval",
+        "thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound",
+        "thm-cg-recursive-residual-gap-and-attainable-accuracy",
+        "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+        "thm-gmres-true-residual-gap-from-computed-arnoldi-relation",
+        "prop-sparse-unrestarted-gmres-work-and-storage"
+      ],
+      "status": "open",
+      "required_interface": "This is a page-context prerequisite only for batch 88: no batch-34 item ID occurs in any assigned item dependency array. Batch 88 defines Golub-Kahan LSQR and proves its exact residual-minimization statement locally; it imports no MGS, CG, Lanczos, GMRES, or sparse-cost theorem. The page-level requirement remains for owner reconciliation.",
+      "affected_claims": [
+        "No current proof claim consumes a batch-34 item. The declared A-page context edge remains open."
+      ],
+      "source_excerpt": null,
+      "readiness_claim": "No batch-34 acceptance or readiness is claimed for this page-context edge.",
+      "evidence": "Inspected the current batch-34 manifest and draft A-page carrier. Its six items cover Chebyshev/Lanczos, MGS, CG, GMRES, and sparse GMRES; no Golub-Kahan item is listed. The assigned LSQR algorithm and theorem are complete local items, so the missing LSQR interface does not block their claims."
+    },
+    {
+      "kind": "page",
+      "consumer": "iterative-regularization-and-early-stopping",
+      "supplier": "preconditioner-algorithms-and-residual-metrics",
+      "supplier_batch": "50",
+      "supplier_item_ids": [
+        "alg-ilu0-fixed-pattern-factorization",
+        "thm-ilu0-factor-pattern-and-work-counts",
+        "alg-flexible-gmres-variable-right-preconditioning",
+        "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span"
+      ],
+      "status": "open",
+      "required_interface": "This is a page-context prerequisite only. No batch-50 item ID occurs in any batch-88 dependency array; the assigned Landweber, LSQR, and nonlinear step claims do not use ILU(0), flexible GMRES, or a preconditioned residual metric. Owner reconciliation of the declared page context remains open.",
+      "affected_claims": [
+        "No current proof claim consumes a batch-50 item; the A-page context edge remains open."
+      ],
+      "source_excerpt": null,
+      "readiness_claim": "No batch-50 item is imported or used as a logical supplier.",
+      "evidence": "Inspected the current batch-50 manifest, A-page carrier, and batch-50 notes. Its items concern fixed-pattern ILU(0), FGMRES, and preconditioning residuals; none is used by batch 88."
+    },
+    {
+      "kind": "page",
+      "consumer": "iterative-regularization-and-early-stopping",
+      "supplier": "gauss-newton-and-levenberg-marquardt-methods",
+      "supplier_batch": "84",
+      "supplier_item_ids": [
+        "thm-nonlinear-least-squares-gradient-and-hessian",
+        "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian",
+        "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+        "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+        "alg-safeguarded-levenberg-marquardt",
+        "thm-gauss-newton-local-linear-contraction",
+        "thm-gauss-newton-zero-residual-quadratic-convergence",
+        "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+        "thm-safeguarded-levenberg-marquardt-global-stationarity"
+      ],
+      "status": "open",
+      "required_interface": "The planned dependent theorem requires Hilbert spaces, a local invariant ball, a tangential-cone or compatible Lipschitz-derivative condition, source condition x^dagger-x0=(F'(x^dagger)^*F'(x^dagger))^nu w for 0<nu<=1/2, a declared alpha schedule, and a proof of discrepancy crossing/convergence. The inspected batch-84 linearization supplier is explicitly finite-dimensional r:U subset R^n -> R^m, while its Gauss-Newton/LM algorithm and theorems are also finite-dimensional; they do not prove the required infinite-dimensional source-condition theorem. Readiness records for the inspected current bodies are absent.",
+      "affected_claims": [
+        "The assigned contract's nonlinear local discrepancy-stopped convergence theorem remains owner-escalated. Current batch-88 carriers prove only the unanchored step, a general Banach-space quadratic remainder, and the one-step error recurrence."
+      ],
+      "source_excerpt": null,
+      "readiness_claim": "No batch-84 body is claimed ready or accepted as a supplier.",
+      "evidence": "Inspected the current batch-84 manifest and the actual gradient/Hessian, finite-dimensional residual-linearization, and safeguarded LM bodies. The relevant Step-1 readiness records are absent. None supplies the stated Hilbert-space source/rate and discrepancy-crossing interface; the full theorem remains open for owner reconciliation."
+    },
+    {
+      "kind": "page",
+      "consumer": "iterative-regularization-and-early-stopping",
+      "supplier": "numerical-inverse-problems-and-regularization-error",
+      "supplier_batch": "25",
+      "supplier_item_ids": [
+        "lem-hilbert-tikhonov-normal-operator-invertible",
+        "lem-truncated-svd-bias-and-data-noise-decomposition",
+        "lem-hilbert-tikhonov-noise-amplification-bound",
+        "thm-tikhonov-error-chain-with-discretization-and-residual",
+        "cor-l2-inverse-error-budget-and-cross-term-condition",
+        "lem-computed-augmented-tikhonov-solve-residual-and-output-error"
+      ],
+      "status": "verified",
+      "required_interface": "The declared page context is present. The only logical item interfaces imported from this page are the shifted normal-operator inverse and Tikhonov noise-amplification bound, recorded as separate verified item edges above. No discretization, computed-solve, or L2 error-chain theorem is imported.",
+      "affected_claims": [
+        "The nonlinear step and one-step recurrence use the two verified normal-equation/noise bounds; no other batch-25 result is used."
+      ],
+      "source_excerpt": null,
+      "readiness_claim": "Only the named current item Step-1 records are ready; this is not page-level or independent proof approval.",
+      "evidence": "Inspected the current batch-25 manifest and A-page carrier plus the complete two supplier bodies and their current ready records. This is the page named by the A-page requires edge."
+    },
+    {
+      "kind": "page",
+      "consumer": "iterative-regularization-and-early-stopping",
+      "supplier": "spectral-regularization-and-parameter-choice",
+      "supplier_batch": "32",
+      "supplier_item_ids": [
+        "alg-discrete-l-curve-parameter-choice",
+        "lem-compact-gram-operator-is-positive-and-has-kernel",
+        "lem-compact-spectral-multiplier-is-well-defined",
+        "lem-linear-smoother-gcv-expression",
+        "lem-square-summable-sequences-form-a-hilbert-space",
+        "alg-gcv-finite-grid-parameter-choice",
+        "def-compact-spectral-filter-and-qualification",
+        "thm-discrete-l-curve-grid-search-is-well-defined",
+        "lem-tikhonov-bias-converges-for-minimum-norm-solution",
+        "lem-tikhonov-data-residual-continuity-monotonicity-and-limits",
+        "lem-tikhonov-source-condition-bias-bound",
+        "thm-gcv-grid-search-returns-score-minimizer",
+        "alg-morozov-discrepancy-bracketing-and-bisection",
+        "thm-tikhonov-convergence-under-noise-parameter-coupling",
+        "thm-tikhonov-source-condition-rate-and-qualification-saturation",
+        "thm-morozov-discrepancy-choice-converges",
+        "thm-tikhonov-forward-discretization-and-stopping-coupling"
+      ],
+      "status": "verified",
+      "required_interface": "The declared spectral-regularization page context is present. Only the compact Gram operators, bounded compact spectral multipliers, compact-filter/source convention, and real ell^2 Hilbert-space supplier are used as logical item interfaces; those exact item edges and readiness evidence are listed above. No Tikhonov parameter-choice theorem or GCV claim is imported.",
+      "affected_claims": [
+        "Landweber filter identities, spectral bounds, stopped-rate interpolation, and the compact diagonal example use the named batch-32 items; no other batch-32 theorem is imported."
+      ],
+      "source_excerpt": null,
+      "readiness_claim": "The cited current batch-32 item records are ready; this is not independent approval of the page or its items.",
+      "evidence": "Inspected the current batch-32 manifest and page carrier, the complete four logically used supplier bodies, and their current ready records. This is the page named by the A-page requires edge."
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-irlgnm-local-source-condition-discrepancy-convergence",
+      "supplier": "thm-continuous-functional-calculus-for-bounded-self-adjoint-operators",
+      "supplier_batch": "published",
+      "supplier_pair": "bounded self-adjoint functional calculus",
+      "supplier_item_ids": [
+        "thm-continuous-functional-calculus-for-bounded-self-adjoint-operators",
+        "def-axiom-of-choice"
+      ],
+      "status": "open",
+      "required_interface": "Define S^nu for S=F'(x_dagger)^*F'(x_dagger) on both real and complex Hilbert spaces, 0<nu<=1/2, while recording the axiom used. The available published calculus assumes AC and is stated only for a nonzero complex Hilbert space; it does not supply the real-Hilbert interface.",
+      "affected_claims": [
+        "The source-condition hypothesis and any recurrence/convergence proof that uses S^nu for the target class X real or complex."
+      ],
+      "source_excerpt": "Assume AC. For a bounded self-adjoint operator $T$ on a nonzero complex Hilbert space there is a unique isometric unital star-homomorphism $C(\\sigma(T))\\to\\mathcal B(H)$, $f\\mapsto f(T)$, sending the coordinate function $z$ to $T$, with range $C^*(I,T)$.",
+      "readiness_claim": "The complex supplier is published and its AC hypothesis is explicit; readiness for this target is open because the real-field source-power interface is absent.",
+      "evidence": "Inspected the complete published Statement and proof of the continuous functional calculus. Its statement is complex-only and assumes AC; no real-Hilbert transfer was verified in the assigned dependencies. The nonlinear theorem remains escalated."
+    }
+  ],
+  "outgoing_interfaces": []
+}

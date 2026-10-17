@@ -1,0 +1,751 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "21",
+  "scope": [
+    "alg-centered-difference-dirichlet-bvp",
+    "lem-centered-difference-dirichlet-inverse-maxnorm",
+    "lem-centered-difference-dirichlet-truncation-residual",
+    "thm-centered-difference-dirichlet-second-order-error",
+    "ex-centered-difference-dirichlet-quadratic-exact",
+    "ex-first-order-neumann-closure-causes-first-order-bvp-error",
+    "ex-dirichlet-inverse-infinity-norm-tight-at-n3"
+  ],
+  "contracts": {
+    "alg-centered-difference-dirichlet-bvp": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition returns invalid-mesh for N=0; admissible meshes have N≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition accepts zero sampled data and its recurrence returns the all-zero vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition uses p_1=2 and performs one back-substitution when N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate boundary branch is admitted; the Definition fixes zero Dirichlet data and N≥1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition sets U_0=U_{N+1}=0 and uses those exact values in the stencil."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite recurrence makes no selection from an arbitrary family and uses no Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        }
+      ]
+    },
+    "lem-centered-difference-dirichlet-inverse-maxnorm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-centered-difference-dirichlet-bvp",
+          "source_section": "Definition",
+          "quote": "The finite-difference equations are\n$$\n\\frac{-U_{j-1}+2U_j-U_{j+1}}{h^2}=g_j,\\qquad 1\\le j\\le N,\n$$\nor $A_hU=g_h$, where $A_h=h^{-2}\\operatorname{tridiag}(-1,2,-1)",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The Thomas pivots are p_j=(j+1)/j and are strictly positive for every j=1,...,N.",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The quadratic barrier q_j has A_h q=1 and 0≤q_j≤1/8.",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Forward elimination transforms each original tridiagonal row into p_j w_j-w_(j+1)=q_j with the stated q recurrence.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Back-substitution solves the transformed system uniquely and therefore the original system has a unique solution for every right-hand side.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "A negative interior minimum for A_h w=r≥0 forces equal neighboring minima until the zero boundary is reached, a contradiction.",
+          "inputs": [
+            "given",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "Order preservation compares A_h^{-1}r between -R q and R q.",
+          "inputs": [
+            "given",
+            "step 4.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-6.1",
+          "step": "6.1",
+          "claim": "The barrier comparison implies ||A_h^{-1}r||∞≤||r||∞/8 uniformly in N.",
+          "inputs": [
+            "step 1.2",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes N≥1; N=0 is outside its matrix and grid domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 explicitly covers R=0 and gives A_h^{-1}0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 give p_1=2 and unique solvability at N=1; q_1=1/8 attains the bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate coefficient or boundary parameter occurs in the fixed stencil."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 uses w_0=w_{N+1}=0 to exclude a negative minimum."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.3 use finite recurrences, finite minima, and coordinatewise inequalities only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states implications and an estimate, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states implications and an estimate, not an iff claim."
+        }
+      ]
+    },
+    "lem-centered-difference-dirichlet-truncation-residual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-centered-difference-dirichlet-bvp",
+          "source_section": "Definition",
+          "quote": "The finite-difference equations are\n$$\n\\frac{-U_{j-1}+2U_j-U_{j+1}}{h^2}=g_j,\\qquad 1\\le j\\le N,\n$$\nor $A_hU=g_h$, where $A_h=h^{-2}\\operatorname{tridiag}(-1,2,-1)",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-taylor-remainder-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, and suppose $f$ has derivatives through order $n+1$ on the closed interval between $a$ and $x$, with the usual endpoint continuity. If $|f^{(n+1)}(t)|\\le M$ throughout that interval, then\n$$|R_{n,a}f(x)|\\le \\frac{M}{\\iota((n+1)!)}|x-a|^{n+1}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Exact endpoint values give zero boundary-closure residual, and the order-three Taylor remainders at both neighboring nodes are bounded by M h^4/24.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Substituting the two expansions into the centered operator cancels odd terms and identifies the residual as -(R_-+R_+)/h^2.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The triangle inequality bounds the residual by M h^2/12 at each interior node; the boundary residuals are zero.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes N≥1; an empty interior mesh is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives zero interior residual when M=0, and step 1.1 gives zero endpoint residuals."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies at both neighboring closed intervals when N=1, and step 3.1 applies at its sole interior node."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate coefficients or alternative closure parameters occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 records the exact endpoint closure residuals as zero, including the first and last interior stencil."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only the two individual Lagrange remainder points and finite scalar inequalities are used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma makes no biconditional claim."
+        }
+      ]
+    },
+    "thm-centered-difference-dirichlet-second-order-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-centered-difference-dirichlet-bvp",
+          "source_section": "Definition",
+          "quote": "The finite-difference equations are\n$$\n\\frac{-U_{j-1}+2U_j-U_{j+1}}{h^2}=g_j,\\qquad 1\\le j\\le N,\n$$\nor $A_hU=g_h$, where $A_h=h^{-2}\\operatorname{tridiag}(-1,2,-1)",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-centered-difference-dirichlet-inverse-maxnorm",
+          "source_section": "Statement",
+          "quote": "and for every $r\\in\\mathbb R^N$,\n$$\n\\|A_h^{-1}r\\|_\\infty\\le\\frac18\\|r\\|_\\infty.\n$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-centered-difference-dirichlet-truncation-residual",
+          "source_section": "Statement",
+          "quote": "Then\n$$\n\\max_{1\\le j\\le N}|\\tau_j|\\le\\frac{Mh^2}{12}.\n$$\nThe endpoint closure residuals are exactly zero: $u(0)-0=0$ and $u(1)-0=0$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-centered-difference-dirichlet-bvp",
+          "source_section": "Definition",
+          "quote": "otherwise return status `success` with the vector $U$ and the boundary values $U_0=U_{N+1}=0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The truncation lemma supplies the interior residual bound and zero endpoint residual for the exact boundary closure.",
+          "inputs": [
+            "given",
+            "F3"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Subtracting the exact-grid equation from the vector residual equation gives A_h e_h=rho_h-tau_h.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Apply the inverse max-norm bound and coordinatewise triangle inequality to e_h=A_h^{-1}(rho_h-tau_h).",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Substitute the tau_h bound to obtain Mh^2/96+||rho_h||∞/8, and set rho_h=0 for the exact algorithm output.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes N≥1; N=0 is outside the algorithm and its error statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 gives exact nodal agreement when M=0 and rho_h=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1–4.1 apply for N=1; the inverse estimate and endpoint closure do not require more interior nodes."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed operator has no variable coefficients or branch parameters."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use zero endpoint residual and zero endpoint error from the exact Dirichlet closure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the finite-dimensional inverse bound and finite maximum norms."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts an error estimate, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts an error estimate, not an iff claim."
+        }
+      ]
+    },
+    "ex-centered-difference-dirichlet-quadratic-exact": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-centered-difference-dirichlet-bvp",
+          "source_section": "Definition",
+          "quote": "The finite-difference equations are\n$$\n\\frac{-U_{j-1}+2U_j-U_{j+1}}{h^2}=g_j,\\qquad 1\\le j\\le N,\n$$\nor $A_hU=g_h$, where $A_h=h^{-2}\\operatorname{tridiag}(-1,2,-1)",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-centered-difference-dirichlet-inverse-maxnorm",
+          "source_section": "Statement",
+          "quote": "returns the unique solution of $A_hU=g_h$ for every admissible exact input",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The stated quadratic solves the continuous equation and both zero boundary values.",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The exact quadratic samples satisfy every centered interior row and the endpoint closure.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Unique solvability identifies the algorithm output with the exact nodal samples.",
+          "inputs": [
+            "step 1.2",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N=0 is outside the example; the statement is for N≥1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The fixed example has g=1 rather than zero forcing."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 apply at N=1, where the sole nodal sample is u(1/2)=1/8."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example has no degenerate coefficient or parameter branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 verifies q(0)=q(1)=0 and both prescribed endpoint values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses direct algebra on a finite grid and no Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts an exact-solution claim, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts an exact-solution claim, not an iff statement."
+        }
+      ]
+    },
+    "ex-first-order-neumann-closure-causes-first-order-bvp-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-centered-difference-dirichlet-bvp",
+          "source_section": "Definition",
+          "quote": "The finite-difference equations are\n$$\n\\frac{-U_{j-1}+2U_j-U_{j+1}}{h^2}=g_j,\\qquad 1\\le j\\le N,\n$$\nor $A_hU=g_h$, where $A_h=h^{-2}\\operatorname{tridiag}(-1,2,-1)",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The explicit quadratic satisfies the mixed differential equation and the left Dirichlet/right Neumann data.",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The first-difference recurrence with its right endpoint value constructs one unique discrete vector.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The exact quadratic samples satisfy the interior stencil, while the first-order Neumann closure has residual h^2/2.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The homogeneous error recurrence makes all error increments equal to -h^2/2 and gives e_j=-h x_j/2.",
+          "inputs": [
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "The exact max error h/2 cannot be bounded by C h^2 uniformly as h tends to zero.",
+          "inputs": [
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes N≥1, so an empty interior grid is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The forcing is fixed at g=1 in this example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2–4.1 give a unique grid and error h/2=1/4 at N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The boundary datum c is arbitrary real and no singular branch occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1 and 3.1 treat the left endpoint value and right derivative closure explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite difference recurrence constructs the unique vector without arbitrary-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts a rate failure, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts a rate failure, not an iff statement."
+        }
+      ]
+    },
+    "ex-dirichlet-inverse-infinity-norm-tight-at-n3": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-centered-difference-dirichlet-bvp",
+          "source_section": "Definition",
+          "quote": "where $A_h=h^{-2}\\operatorname{tridiag}(-1,2,-1)",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-centered-difference-dirichlet-inverse-maxnorm",
+          "source_section": "Statement",
+          "quote": "and for every $r\\in\\mathbb R^N$,\n$$\n\\|A_h^{-1}r\\|_\\infty\\le\\frac18\\|r\\|_\\infty.\n$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The row-sum expression satisfies positivity, definiteness, absolute homogeneity and the triangle inequality.",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "At N=3, direct multiplication verifies the displayed exact inverse matrix.",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The row-sum norm equals the induced infinity operator norm by the rowwise upper bound and a maximizing sign vector.",
+          "inputs": [
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The inverse lemma implies the row-sum norm is at most 1/8 for every N.",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "The exact row sums attain 1/8 in the middle row, so the uniform upper bound is sharp.",
+          "inputs": [
+            "step 3.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The matrix family is defined for N≥1; N=0 is outside the example."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The induced-norm supremum in step 2.1 includes the zero vector, which contributes value zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At N=1, A_h=[8] and its inverse row-sum norm is 1/8, consistent with steps 3.1 and 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The tridiagonal matrix has no variable coefficient or singular parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the matrix with the two fixed Dirichlet endpoint values already eliminated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.2 chooses a maximizing row from a finite set and defines its sign vector coordinatewise; no Choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts a norm bound and a sharp instance, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts a norm bound and a sharp instance, not an iff statement."
+        }
+      ]
+    }
+  }
+}

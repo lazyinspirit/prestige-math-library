@@ -1,0 +1,189 @@
+Current independent-followup result: 24 obligations decided; reader/refuter:33:4 resolved against the independently reviewed native real-property extraction. Both original-Alpha33 new lemmas independently reviewed, with unchanged source and repaired current contract evidence. The authorized Francis scan and status/cost proof repair is applied; every actual affected consumer was checked. Both richest theorem Statements are unchanged. Batch49 retains its own independent decision closure; ROOT retains the staged68 quote merge and authentic history/hash/certification bindings. Original attempt1 report is preserved below as history; its open handoffs describe that earlier attempt and are resolved or superseded only by the explicit current continuation.
+
+# Batch 33 Step 3a adjudication
+
+Run: numerical-optimization-dynamics-2026-10-16. Group: batch-33.
+
+Dependency-order checkpoint: level 0 complete.
+
+- `lem-implicit-q-uniqueness-for-unreduced-hessenberg`: coordinate-support induction divides only by an explicitly nonzero transformed subdiagonal. Triangular unitarity gives phases; n=1 and real signs checked.
+- `lem-neumann-invertibility-for-finite-matrices`: finite geometric identity, entrywise completeness, and explicit norm bound give both inverse identities, including q=0.
+
+Read exact supplier Definitions and norm corollary. No source lookup needed for these elementary arguments. Risk reviews recorded in the batch contract. Next: read-only batch-1 producer and level-1 spectral results.
+
+Level 1 checkpoint: Bauer–Fike and both pseudospectrum equivalences checked, including singularity, equality, scalar and zero perturbations; risk reviews complete. Batch-1 producer full procedure, proof, contract and manifest independently read. Its finite-loop termination argument is sound but still in the algorithm carrier, confirming the reported nonfatal schema defect. Producer outside scope: owner must extract a termination/status lemma and update its justified_by/contract; no local modification or closure claimed. Retain both original consumer obligations and all routed fingerprints in decisions. Next: exact Francis carrier and its compact-support prerequisite.
+
+Level 2 checkpoint: repaired compact-support hypothesis and independently checked its induction and direction proof. Exact procedure Definition unchanged and meets strengthened supplier; original four-step property proof now in `lem-exact-francis-step-termination-and-similarity`, on the assigned A page, with one-way deps/justified_by. Reader/refuter finding 2 confirmed nonfatal and repaired. Risk reviews completed for exact procedure, new lemma and supplier. Consumer search: compact supplier only feeds exact algorithm; its unchanged Definition stops statement propagation. No external consumer repair needed for this correction. Source consulted: Demmel Lecture 16 lines 601–667 (Hessenberg similarities, implicit-Q argument); Cornell 2025-10-29 double-trouble section (two-shift polynomial and unreduced hypothesis). Next: complex wrapper, then explicit-QR equivalence.
+
+Level 3 checkpoint: complex wrapper Definition preserved; property proof extracted into `lem-complex-scaled-householder-step-termination-and-status`, with explicit conditional local-error hypotheses and elementary projector unitarity. Reader/refuter finding 3 confirmed nonfatal and repaired. Primitive schedule and complete local error proof read; q=0, one coordinate, zero norm/failure checked. Explicit-QR equivalence checked via p(H)=Q1Q2R2R1, triangular-unitary diagonal factor and first-sign correction. Both unreduced-output assumptions and nonsingular p(H) are essential and present. Risk review completed. Next: deterministic computed shift schedule and actual consumer checks.
+
+Level 4 checkpoint: reader/refuter finding 1 confirmed fatal and repaired. Added finite typed tables T[a,b], direct cursor lookup, ordered partition scan/pass, child state reset, exact c/q controls, k completed passes, and local-to-global panel embedding. Checked h=1, missing/empty tables, split descendants, equality deflation, zero target, real signs, unavailable evaluator and N=0. No convergence premise used. All direct consumers found by full items/library reference search: local backward/status theorems and A-page prose; outside `thm-bartels-stewart-dense-operation-count`, `alg-bartels-stewart-sylvester-equation`, `alg-schur-parlett-matrix-function`, `alg-principal-matrix-logarithm-and-square-root`, `ex-rotation-logarithm-branch-cut`. Read each actual use. They pass generic Schur controls, propagate statuses and/or independently verify exact Schur identities; no necessary source repair. Cost theorem uses sum of active sizes <=n and dimension-bounded chase, unchanged by ordered pass and direct table lookup; zero-budget -I2 example remains exact. No further propagation needed. Risk review complete; batch-1 formatting escalation retained. Next: touched backward/status proof reviews and historical title comparison.
+
+Level 5 checkpoint: both touched reader title repairs accepted after complete proof and actual dependency review. Current raw sources equal reader-post hashes f667d8e1e8bf07388ae94068948abdf5783abdd77a9fee782358c116da26d059 and 80c83790fe83d16618ac06bf89b80d95c5f42f43a89d574066dd7e6b8f80b6f1. Restoring only the manifest old title exactly reconstructs each immutable pre raw hash (df5a667b58a178ab2e42cf2e905b618053032d63649fccc7a6384c2b556cce5c and 4c7f9ce561d094ac09f54d7782cd6654e37fd31a88360e1f7930470b0cfc6e45). No historical uncertainty. Backward-error sum/outer rho-C induction and finite termination/status proof sound; no theorem body edits needed. Updated manifest titles, local citation mirrors, coverage and all required risk reviews. Outside consumer mathematics remains compatible, but owner must refresh any external contracts quoting the changed entire Francis Definition; no outside contract edited. Next: focused contract/precheck/render/layout checks, defect ledger and exact ten decisions.
+
+## Final decisions and defect identities
+
+Exactly ten owed decisions are in the companion `-decisions.json`, group `batch-33` (original scope group `p` unchanged).
+
+| Obligations | Carrier | Verdict | Ledger identity |
+|---|---|---|---|
+| reader:33:4, refuter:33:4 | alg-scaled-householder-reflector-formation-and-application | escalated | nod-b25-3a-householder-termination-placement (existing identity) |
+| reader:33:2, refuter:33:2 | alg-exact-francis-hessenberg-qr-step | confirmed_nonfatal | nod-b33-3a-exact-properties-placement |
+| reader:33:3, refuter:33:3 | alg-complex-scaled-householder-reflector-step | confirmed_nonfatal | nod-b33-3a-complex-properties-placement |
+| reader:33:1, refuter:33:1 | alg-finite-budget-francis-schur-reduction | confirmed_fatal | nod-b33-3a-shift-schedule |
+| touched:33:thm-computed-francis-schur-backward-error | thm-computed-francis-schur-backward-error | accepted_repair | nod-b33-3a-backward-title |
+| touched:33:thm-finite-budget-francis-schur-termination-and-status | thm-finite-budget-francis-schur-termination-and-status | accepted_repair | nod-b33-3a-status-title |
+
+Paired reader/refuter obligations identify one defect apiece; `same_defect_as` documents sharing. All completed repairs have `repair_confidence: 1`. Six new closed rows were appended at `3a-adjudicate`, including `nod-b33-3a-compact-identity-alignment` for the necessary prerequisite repair. The compact supplier has no separately routed decision; its correction is documented with the exact-procedure review. No row was created for a mechanical check failure. The reused batch-25 row records the existing nonfatal placement defect; it does not represent a current producer repair or resolve the present escalation.
+
+## Owner handoffs still open
+
+1. **Batch 1 producer placement.** Current producer raw SHA256 remains `d09b37d969c79d49a08bf9edc843b41b2997df1d4020afd8e8d679092087af6d`, exactly the routed current observation. Its full finite-loop termination argument is sound, but a separate `lem-scaled-real-householder-step-termination-and-status` result (or equivalent owner-selected carrier) is still missing. The existing local real backward-error lemma covers successful arithmetic under small-roundoff hypotheses, and cannot replace an unconditional finite execution/status claim for failing inputs. SCHEMA.md Algorithms and current producer Proof 1.1–2.1 were consulted. Author/extract the result in batch 1, integrate it through `justified_by`, manifest and contract, independently review it, and explicitly resolve these two consumer-batch obligations. Producer source/contract/manifest were left read-only. Its placement defect remains open for owner action. All original dependency-path hashes, producer-at-routing carrier, pre-reader fingerprint, `producer_batch: "1"` and consumer ID are retained verbatim in both decisions. No historical unbound-byte authorization is needed: `observation_basis` is `current`.
+
+2. **New local helper origins.** Two complete draft lemmas have been authored on the existing assigned A page and integrated into its manifest, contracts and coverage: `lem-exact-francis-step-termination-and-similarity` and `lem-complex-scaled-householder-step-termination-and-status`. Their logical suppliers precede the corresponding result (through ordinary in-run levels); the analyzed algorithms point back only through `justified_by`, not `deps`. They extract the original property proofs; the exact lemma uses the repaired compact-support hypothesis and the complex lemma makes local-error hypotheses explicit. The engine/owner must perform any required new-item origin registration and subsequent independent review. No creation certificate, decision hash, judge stamp or acceptance coverage has been fabricated here. No new page or pair was added.
+
+3. **Outside contract excerpt mirrors.** Actual source uses in batch 49 (`alg-bartels-stewart-sylvester-equation`, `thm-bartels-stewart-dense-operation-count`) and batch 68 (`alg-schur-parlett-matrix-function`, `alg-principal-matrix-logarithm-and-square-root`, `ex-rotation-logarithm-branch-cut`) are mathematically compatible with the clarified schedule; no Statement/Definition consumer repair is needed. Their owners must refresh the exact entire-Definition citation mirrors: batch-49 operation-count theorem F1 and F2, and batch-68 rotation example F3. Each currently quotes the prior 11,385-character Francis Definition, which no longer occurs in the source. Outside contracts were not edited. These are supplier-first metadata follow-ups, not new mathematical defect claims.
+
+## Source evidence and publication scope
+
+Consulted [Demmel, Math 221 Lecture 16](https://people.eecs.berkeley.edu/~demmel/ma221_Fall10/Lectures/Lecture_16.html), lines 601–667, for Hessenberg reduction, bulge chasing and implicit-Q uniqueness, and [Bindel, CS 6210, 2025-10-29](https://www.cs.cornell.edu/courses/cs6210/2025fa/lec/2025-10-29.html), “Double trouble,” lines 57–67, for the two-shift setting and unreduced-output qualification. The sources motivate the method; the corrected local support induction and finite schedule are proved/specified locally. No unconditional convergence conclusion is imported. No complete-book reading or new source-fetch receipt is claimed.
+
+Read actual published Hessenberg, unitary, reflector, QR, norm, spectrum and SVD dependency interfaces and the necessary reflector/shifted-QR proofs; read the complete in-run real/complex arithmetic schedules, local error proofs, two-sided composition and accumulated-error proof. All remaining cited source statements were used only with their actual hypotheses. No defective published item was identified, so no published-consumer ledger entry was needed. Published carriers remained read-only. No stable ID or withdrawal proposal was removed.
+
+## Local checks and limits
+
+- Initial `risk-report.mjs` without `--require-reviewed` identified nine original HIGH/CRITICAL carriers; a final ordinary run additionally identified the new exact-step lemma. Every required carrier has a specific complete Alpha risk review in the batch-33 contract. Final `--require-reviewed`: **0 errors, 24 items routed**. The outside producer's schema escalation remains open; this pass is not its resolution.
+- `node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-33.proof-contracts.json --strict`: **0 errors, 0 warnings, 24/24 checked**. First local pass reported seven obsolete step references after extraction and two older citation mismatches. Corrected local boundary references and refreshed the exact current real local-error and computed-SVD excerpts; no mathematical claim was changed to silence a diagnostic.
+- Reflow on all six authored/edited item paths: all unchanged.
+- Final precheck covered those six paths plus both touched reader carriers: **5 proofs checked, 0 failing**; the three procedure carriers have no phase proof.
+- Rendercheck on the six paths plus the changed A page: **7 files, no errors**, using the renderer YAML parser and KaTeX.
+- After final item edits and reflow, the required single batched command was run:
+
+```text
+node tools/proof-layout.mjs items/lem-francis-compact-bulge-support-propagation.md items/alg-exact-francis-hessenberg-qr-step.md items/lem-exact-francis-step-termination-and-similarity.md items/alg-complex-scaled-householder-reflector-step.md items/lem-complex-scaled-householder-step-termination-and-status.md items/alg-finite-budget-francis-schur-reduction.md
+```
+
+Result: **6 items, 10 steps, 0 defects**.
+
+The native status was checked from `.autopilot/` using the dispatched run/state-dir: run `running`, no in-flight jobs, unrelated `3a-collect` blocker `collect-27 failed 3x`. Git HEAD was `3599deca51` (“Publish all quantum computing and quantum algorithms pairs”). No concluded RESUME file was used as active-run evidence. No engine transition, gate battery, judge cycle, stamp, publication or commit was initiated. Local checks do not establish engine closure. Next owner actions are the three handoffs above, followed by native stamping and gates.
+
+
+# Independent current followup (fresh reviewer)
+
+This continuation is a fresh independent reviewer, not the original Alpha33 session resumed. The complete original report above and its immutable ROOT-current-alpha-followup-33 and ROOT-step3-native33-completed-origin-observations archives preserve actual creator history. No original finding, snapshot or old disposition has been erased.
+
+Checkpoint: independently reviewed level-0 implicit-Q support induction and Neumann entrywise-completeness argument; level-1 Bauer–Fike strict contradiction and both closed-pseudospectrum directions (including singular/equality cases). They need no source repair. Reviewed full current real Householder Definition and separate termination/status lemma: finite loops including q=0 and separate q′=0 terminate; the zero branch avoids the denominator, and successful positive stored squared norm forces nonzero v, giving exact projector orthogonality over either field. The historical placement finding is true but now repaired by another creator; current independent producer evidence is being checked before decision closure.
+
+Reviewed both original-Alpha33 property extractions in full: exact polynomial support, finite reflector construction, compact-support induction including zero active vectors, exact similarity product and x/alpha direction; complex canonical finite schedule, first-failure/breakdown labels, zero-copy branch, positive-norm nonzero argument and Hermitian-projector unitarity. The local-error assertion remains conditional on 0<u<1, (m-1)u<1 and successful normal-range operations. Actual native17 ordered schedule was read; its cone remains native17 ownership. No source change is needed in either new lemma; the complex contract needs its expanded current supplier quote and both lemmas need independent, source-specific boundary/risk evidence. Finite explicit constructions use no AC. Next: guarded scan source repair, full consumer closure, contract mirrors and decisions.
+
+Current repair checkpoint: all three complete-byte proposal guards matched. Applied the authorized interval-only scan, status Proof 2.2/3.1 and cost title/Proof 1.1/1.2, with explicit row-major first-nonzero equivalence and failure-prefix accounting. Both theorem Statements are byte-identical to guarded before sources. No new lemma or logical dependency was needed. The original two extracted lemmas remain byte-identical to their genuine origin archives; both analyzed algorithm Definitions match exact reader-post preimages. The A-page differs from reader-post only by the two lemma inventory entries (removing those two lines reconstructs the original page raw hash), so its additional page obligation is metadata integration, distinct from full mathematical review of the added results.
+
+Current complete consumer closure: `thm-computed-francis-schur-backward-error` uses the unchanged stages, signed deflations and rho/C recurrences; its finite-prefix proof remains sound. `thm-finite-budget-francis-schur-termination-and-status` now proves the complement-zero induction explicitly. `alg-bartels-stewart-sylvester-equation` delegates the same statuses and independently checks exact Schur identities; its Definition needs no change. Its exact-correctness and finite-status/local-pivot-uniqueness results use those certificates, finite termination and exact invertible pivots, which are unchanged. The cost theorem needed and received the specified count/title proof correction. `alg-schur-parlett-matrix-function` and `alg-principal-matrix-logarithm-and-square-root` propagate identical Schur outcomes and independently verify exact candidates; their Definitions need no repair. `ex-rotation-logarithm-branch-cut` uses n=2,N=0, so no chase/check runs and the exact -I2 candidate still fails the branch domain. `thm-schur-parlett-recurrence-correctness` uses exact certificates/unique successful Sylvester solutions; `thm-matrix-function-finite-algorithms-termination-and-budget-status` uses finite Schur/Sylvester termination, not the cost premise. Their Statements and proofs remain compatible. Full current bodies of all eleven and the six A/B page summaries were read; literal reference search confirmed the direct use inventory, including status consumers. No further Statement/Definition consumer changed. No published repair identified or made.
+
+Updated source-exact current Francis Definition quotes in contracts 33 and 49; added status derivation 2.2 and its actual uses; mirrored cost title/proof changes and altered-proof provenance. Updated the complex new lemma's F1 to the complete actual native17 scalar schedule, its empty-block/strict-error-endpoint boundaries and independent risk review. Corrected exact-lemma zero/scalar endpoint anchors and independent review attribution. Prior risk reviews remain under risk_review_history. All nine original HIGH/CRITICAL reviews and the new exact-step CRITICAL review were independently completed; the complex result also has its specific independent review. Local strict contract checks currently pass: 33 is 24/24 and 49 is 22/22, both zero errors/warnings. No source or contract in 68 was written. Next: exact native decisions/ledger sharing, final local checks and owner handoff.
+
+
+## Current exact decisions and ledger closure
+
+The current version-1/group batch-33 decisions file contains exactly 24 obligations: the original ten, thirteen additional item deltas and the A-page inventory delta computed directly from immutable reader-post versus pre-3a under stabilizedObligations. No scope file was changed or scope-check/stamp command run. Seven unchanged-source post-reader item deltas are audit enrichments with empty defect IDs; the A-page inventory-only delta is metadata with empty defect IDs. The two genuinely added results receive amended_repair after full independent proof review and necessary source-exact contract/boundary/risk repairs, each with causal_subject and same_defect_as pointing to its actual algorithm placement finding. The original procedure extractions receive amended_repair; the compact prerequisite repair is accepted after its complete proof review. The existing touched backward-error title remains accepted; the touched finite-status theorem is amended for the equivalent scan proof.
+
+The two real-producer findings now have confirmed_nonfatal, repair_confidence 1, original immutable route/producer/consumer/path fingerprints unchanged, and active defect identity nod-b1-3a-householder-termination-placement-resolved. It supersedes historical nod-b25-3a-householder-termination-placement; that historical escalation and original attempt1 decisions remain preserved. Current independent producer source/contract/manifest and genuine creator/Alpha1 tasks, reports and results were read; the separate lemma supplies the finite status property, not an unconditional arithmetic-success or backward-error theorem. No source edit in1 or decision edit in25 was made.
+
+Three append-only current ledger rows were appended successfully by the locked native ledger utility. nod-b33-3a-exact-properties-placement-current-review and nod-b33-3a-complex-properties-placement-current-review supersede only their corresponding original placement rows, which remain verbatim history. Each represents the same single physical historical defect, with exact reader/refuter/procedure/added-helper adjudication_ref links for current causal ownership. Original IDs are additionally retained in historical_defect_ids in the affected decisions; no second placement defect is invented. nod-b33-3a-francis-touching-interval-scans is the actual closed supplier procedure defect, referenced by the procedure's post-reader decision. It records the completed source/count/consumer repair. The original49 title and count open rows and all49 decisions/report remain untouched; this supplier handoff does not pretend the future independent49 adjudicator has accepted its own current carrier.
+
+## Scientific count and failure-path handoff to49
+
+All three complete-byte guards in owner-b49-francis-scan-repair-proposal/plan.json matched before any source write. Actual edits are restricted to those three sources and their necessary33/49 contract/manifest mirrors. The status proof uses final steps3.1/4.1 after the required precheck renumbering; the initial proposed2.2/3.1 names in earlier checkpoints are historical. Initial precheck requested the phase renumbering, including its cited tag; the final accepted numbering has no mathematical change. No defect-ledger row was created for this mechanical diagnostic.
+
+The algorithm now directly visits exactly i>j+1 with i in[a,b] OR j in[a,b]: inside rows test j=1..i-2; outside rows test j=a..min(b,i-2). Empty ranges are skipped. This is an actual enumeration, not a dense scan with a filter. Every left/target write has a row in[a,b], every right write a column there. Starting from an accepted full initialization check (vacuous for n<=2), complement entries stay unchanged zero. Each accepted block check restores the entire invariant; deflation writes on the first subdiagonal preserve it. Induction gives the same block-boundary failure predicate and partial matrix/factors as the old full scan, including all-identity and zero-vector stages. In row-major enumeration the first nonzero agrees with a full row-major scan. The former full check did not prescribe a finer entry-location output; its main status boundary is preserved. No exact rounded Hessenberg preservation is assumed.
+
+For block length r>=2, visited positions are at most nr+nr, plus n row visits: O(nr)+O(n). Active intervals are disjoint and sum r<=n, so all block checks in a pass cost O(n²), including n/2 persistent two-by-two identity blocks. Full initialization scans cost at most O(n²) at each of at most n reflector stages, hence O(n³). Polynomial formation and compact updates fit O(nr) per block; partition/deflation/status/direct shift lookup work fits O(n²) per pass. All range/breakdown/invariant/stagnation/type/budget failures are prefixes of these bounded loops, with partial-factor/residual output within the same cubic materialization bound. Ancillary unavailable bounds only stop certificate work; the one-entry deflation norm has constant cost, not a dense scan. Controller calls total O(n²), each charged K in bounded mode or actual total C_aux in arbitrary-terminating mode. Exact scalar integer/rational arithmetic is not a bit-cost claim. The fixed-controller cubic and O(n³+C_aux) conclusions remain fully present. The cost title now explicitly includes controller costs. No new prerequisite/result was needed.
+
+Future native49 independently reviews the actual current cost source and strict current contract and dispositions its unchanged refuter:49:1/nod-b49-3a-cost-title and nod-b49-3a-cost-invariant-scans, using this actual closed supplier row and the source-exact two-theorem handoff. This reviewer authored the necessary49 title/proof/contract/manifest repairs only under the explicit task authorization and did not write49 report/decisions.
+
+## Exact68 quotation operation (research handoff only)
+
+After native17 writer drain or via native68 followup, ROOT can perform exactly this guarded field operation. The source is the final current Francis Definition. All68 mathematical Statements/Definitions/interfaces remain unchanged by scan equivalence.
+
+```json
+{
+  "operation": "replace only this existing quote after writer drain or native68 followup",
+  "path": "research/numerical-optimization-dynamics-2026-10-16-batch-68.proof-contracts.json",
+  "json_pointer": "/contracts/ex-rotation-logarithm-branch-cut/citations/2/quote",
+  "required_sibling_fields": {
+    "fact": "F3",
+    "source": "alg-finite-budget-francis-schur-reduction",
+    "source_section": "Definition"
+  },
+  "expected_old_quote_sha256": "fdfad98e7fb8fc351a63f244ec2ef0c3a57a88f6ad2c19b646319ec5e737a2cd",
+  "expected_old_quote_characters": 14213,
+  "new_value": "the complete stripped Definition section from items/alg-finite-budget-francis-schur-reduction.md",
+  "new_quote_sha256": "03ffcb101d3e7244d7703603e7a6504a1fd962f2bbf459afdcb6e507c77ba27c",
+  "new_quote_characters": 14881,
+  "preserve": "Every other field, including all native17 source quotation repairs and all native68 risk/decisions/history. No 68 write performed by Alpha33."
+}
+```
+
+## Typed history/prior-applied authority still owned by ROOT
+
+The actual mathematical resolutions above are genuine choices of this reviewer. They confer no owner authentication. ROOT must bind the ordinary current target objects and active closed rows under tools/step3-scope.mjs if its guards require shared_defects/prior_applied_repairs. Do not alter original findings, producer snapshots, old registry rows or creator certificates to make these pass.
+
+For the real extraction, the exact consumer targets are scope33.reader_findings[3] with route reader (reader:33:4), and scope33.refuter_findings[3] with route flagged (refuter:33:4), retaining their actual in-run-dependency typing, producer_batch1, consumer_id, full original dependency_path and both immutable producer fingerprints. The shared producer target is touched:1:alg-scaled-householder-reflector-formation-and-application; the genuine added property target is post-reader:1:lem-scaled-real-householder-step-termination-and-status. Active row: nod-b1-3a-householder-termination-placement-resolved. Reader33 explicitly shares the touched producer repair; refuter33 shares reader33. ROOT should authenticate the distinct immutable observations as needed, with current producer bytes and all exact current target hashes, rather than editing25 or weakening causal guards. The existing Alpha1 report already records a minimal replacement-literal JSON appendix; the exact full-file replacement alternative below also satisfies the unique literal reconstruction requirement. ROOT must create/authenticate its own ordinary run-bearing JSON original_owner_artifact containing the actual before/after hashes when required; this Markdown report supplies evidence, not that authority.
+
+For the exact/complex extractions, source targets are the original reader/refuter:33:2 and:3 and the stabilized post-reader:33:alg-exact-francis-hessenberg-qr-step / post-reader:33:alg-complex-scaled-householder-reflector-step. Genuinely added helper targets are post-reader:33:lem-exact-francis-step-termination-and-similarity / post-reader:33:lem-complex-scaled-householder-step-termination-and-status (route touched, added true). Active current ownership rows are the two placement-current-review successors listed above. Both rows contain exact references to all four corresponding decisions. Added helper same_defect_as points to its reader finding and causal_subject to its algorithm; each stabilized procedure points to its refuter finding. ROOT may need explicit shared observation bindings for the nonadded stabilized procedure targets; neither decision invents an observed finding. All actual original creation/raw-result evidence remains in ROOT-step3-native33-completed-origin-observations, and helper source bytes still equal those observations.
+
+These are exact prior-applied literal requirements; reading the complete specified files (without trimming) gives the literal strings. Each current source contains its entire after_literal once and replacing it once by the complete original before_file reproduces the listed raw hash. Source paths identify actual preserved preimages, not reconstructed history.
+
+```json
+[
+  {
+    "id": "alg-scaled-householder-reflector-formation-and-application",
+    "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-native-real-householder-property-creation/before-0-alg-scaled-householder-reflector-formation-and-application.md",
+    "current_path": "items/alg-scaled-householder-reflector-formation-and-application.md",
+    "before_raw_sha256": "d09b37d969c79d49a08bf9edc843b41b2997df1d4020afd8e8d679092087af6d",
+    "after_raw_sha256": "55a0c7573c3f78b0da2327c3926a9e003f481996f97007d600236606030f02e3",
+    "before_literal": "exact entire UTF-8 contents of before_file, including trailing newline",
+    "after_literal": "exact entire UTF-8 contents of current_path, including trailing newline",
+    "replacement_guard": "current contains after_literal exactly once; replacing it once with before_literal reproduces before_raw_sha256"
+  },
+  {
+    "id": "alg-exact-francis-hessenberg-qr-step",
+    "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-reader33-procedure-properties-proposal/before/items/alg-exact-francis-hessenberg-qr-step.md",
+    "current_path": "items/alg-exact-francis-hessenberg-qr-step.md",
+    "before_raw_sha256": "dbd44166a5503929e315254eb53654dd5c6b1435e58d0ef1fd5127a0b9b29251",
+    "after_raw_sha256": "be899fa68b12811af2e7bde9ced0bcd7a80cde4f95701423ed5821aa3cf9d57f",
+    "before_literal": "exact entire UTF-8 contents of before_file, including trailing newline",
+    "after_literal": "exact entire UTF-8 contents of current_path, including trailing newline",
+    "replacement_guard": "current contains after_literal exactly once; replacing it once with before_literal reproduces before_raw_sha256"
+  },
+  {
+    "id": "alg-complex-scaled-householder-reflector-step",
+    "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-reader33-procedure-properties-proposal/before/items/alg-complex-scaled-householder-reflector-step.md",
+    "current_path": "items/alg-complex-scaled-householder-reflector-step.md",
+    "before_raw_sha256": "6e96b7a5bd84abe9d27fedb65c72bdd8bdab105dddaa3d18edf8da10de58fa94",
+    "after_raw_sha256": "8d58c0b7adaa60bc4afda3c3b114d6ed6d05ecf755a31512ae255063a47cfb90",
+    "before_literal": "exact entire UTF-8 contents of before_file, including trailing newline",
+    "after_literal": "exact entire UTF-8 contents of current_path, including trailing newline",
+    "replacement_guard": "current contains after_literal exactly once; replacing it once with before_literal reproduces before_raw_sha256"
+  }
+]
+```
+
+For the original schedule row, retain nod-b33-3a-shift-schedule and the actual reader/refuter:33:1 targets plus post-reader:33:alg-finite-budget-francis-schur-reduction. Its current source also includes the separately recorded scan repair; ROOT must bind current bytes after this real repair, not claim a title-only or metadata delta. The exact original raw algorithm preimage is owner-reader33-procedure-properties-proposal/before/items/alg-finite-budget-francis-schur-reduction.md; the before image for this session's scan edit is owner-b49-francis-scan-repair-proposal/before/items/alg-finite-budget-francis-schur-reduction.md. All are preserved; no prior-applied owner evidence was fabricated here.
+
+## Final local checks and current limits
+
+Final item edits are complete. Required reflow on all three edited item paths reported each unchanged. Initial precheck requested consecutive direct-proof phase numbering for the inserted status argument; removing the induction tag alone did not satisfy it, so its proposed numbering and reference adjustment were adopted. Final precheck on exactly `items/alg-finite-budget-francis-schur-reduction.md items/thm-finite-budget-francis-schur-termination-and-status.md items/thm-bartels-stewart-dense-operation-count.md` returned exit0: files3, checked2, failed0; algorithm not-applicable, both proofs pass. The mathematical induction argument remains intact as final status Proof3.1, cited by4.1. No theorem Statement changed.
+
+- `node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-33.proof-contracts.json --strict`: exit0, 24/24 checked, zero errors/warnings, including the final renumbered status derivations/uses.
+- The corresponding batch49 strict command: exit0, 22/22 checked, zero errors/warnings. Other49 worksheets were retained; its complete current cost worksheet was specifically reviewed/repaired here.
+- Ordinary risk-report commands were run on both33 and49 before their reviews. Final required `--require-reviewed` passes: 33 exit0, 24 items, zero errors; 49 exit0,22 items, zero errors. Current33 required routes are seven HIGH and three CRITICAL; the status score rises from5 to7 because the authored induction is now explicit, and its current complete review covers it. Existing score fields and earlier review history were retained. The49 required reviews remain its original independent reviews; its moderate cost carrier additionally has the specific authorized supplier-first repair review with its prior open review preserved in risk_review_history. This does not grant native49 independent finding acceptance.
+- Final `node tools/rendercheck.mjs` on exactly those three item paths with `--json`: exit0, checked3, errors=[],warnings=[].
+- After every final source edit and reflow, the single final batched command `node tools/proof-layout.mjs items/alg-finite-budget-francis-schur-reduction.md items/thm-finite-budget-francis-schur-termination-and-status.md items/thm-bartels-stewart-dense-operation-count.md` returned exit0: **3 items,10 steps,0 defects**. No item edit or formatter followed it.
+- The locked defect-ledger append accepted exactly three rows and refreshed its generated view. No mechanical failure was entered as a defect.
+
+The read-only native status command using the actual `.autopilot/numerical-optimization-dynamics-2026-10-16` state directory reported the run running, nothing in flight and an unrelated collect-83 failed3x blocker. Git HEAD was3599deca51. No RESUME file was used as live-run evidence and no control instruction was executed. This session performed no scope-check, native full gate, judge, stamp, certification, global hash/plan/control/creation-certificate edit, commit, publish or push.
+
+Current authored/reviewed paths: the three item sources above; batch33/batch49 proof contracts and necessary manifest mirrors; the owned batch33 cross-batch real-producer edge and the batch33 continuation in `briefs/tasks/frontier-dependency-ledger.md`; exactly this task-named report and its decisions file; and the three append-only defect rows/generated ledger view. No68 source/contract/manifest, no1/17 source, no25/49 decisions/report, no original source/creator observations, no immutable reader/refuter/scope/pre/post/pre-3a carrier and no published source was written. No new page or lemma was created in this session. Actual method/source review used local complete arguments and exact current supplier sections; this fresh reviewer performed no new external full-text reading and does not inherit the original reviewer's source-fetch claims as its own.
+
+There is no unresolved mathematical prerequisite or proof gap in this review's repaired scientific supplier handoff. Batch33's own original two real-placement escalations are resolved in its current decisions with honest distinct creator/independent-review history. Remaining owner work is authentic typed shared-history/prior-applied binding and current decision hashes, the staged68 quote field, and the subsequent independent native49 current cost review/ledger disposition, followed by whatever transitions and full batteries ROOT/engine authorize. None of those pending operations is represented as already performed.

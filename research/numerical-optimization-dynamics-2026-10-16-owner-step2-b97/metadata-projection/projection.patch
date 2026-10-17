@@ -1,0 +1,186 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-92.pages.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-92.pages.json
+@@ -72,6 +72,7 @@
+         "title": "A Hermitian idempotent has trace equal to its rank",
+         "dependency_level": 1,
+         "deps": [
++          "cor-trace-is-invariant-under-similarity",
+           "def-rank-r-orthogonal-projector-domain",
+           "thm-complex-spectral-theorem-for-normal-endomorphisms",
+           "def-matrix-product-and-identity-matrix",
+@@ -176,6 +177,7 @@
+         "title": "The finite projector energy is real and has the stated Frobenius gradient",
+         "dependency_level": 2,
+         "deps": [
++          "thm-trace-of-ab-equals-trace-of-ba",
+           "def-finite-basis-projector-energy-model",
+           "prop-differentials-of-trace-and-frobenius-linear-functionals",
+           "prop-matrix-differentials-obey-sum-product-and-adjoint-rules"
+--- research/numerical-optimization-dynamics-2026-10-16-batch-92.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-92.proof-contracts.json
+@@ -410,6 +410,15 @@
+           "uses": [
+             "2.1"
+           ]
++        },
++        {
++          "fact": "F3",
++          "source": "cor-trace-is-invariant-under-similarity",
++          "source_section": "Statement",
++          "quote": "If square matrices $A$ and $B$ over $F$ are similar, then\n$\\operatorname{tr}(A)=\\operatorname{tr}(B)$.",
++          "uses": [
++            "2.1"
++          ]
+         }
+       ],
+       "derivations": [
+@@ -426,10 +435,11 @@
+         },
+         {
+           "id": "proof-step-2.1",
+-          "claim": "In this basis the trace is $\\sum_j\\lambda_j$, while the image is spanned exactly by the eigenvectors with eigenvalue $1$. By [F2], the rank is the dimension of this image. Thus the trace and rank both equal the number of indices with $\\lambda_j=1$.",
++          "claim": "Let $U$ be the unitary matrix whose columns are the eigenbasis from step 1.1, so $U^*PU=\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_n)$. Since $U$ is unitary, $U^*=U^{-1}$ and [F3] gives $\\operatorname{tr}P=\\operatorname{tr}(U^*PU)=\\sum_j\\lambda_j$, where the last equality is the diagonal definition of trace. The image is spanned exactly by the eigenvectors with eigenvalue $1$, so by [F2] its dimension, and thus the rank, is the number of indices with $\\lambda_j=1$. Therefore trace and rank agree.",
+           "step": "2.1",
+           "inputs": [
+             "F2",
++            "F3",
+             "step 1.1",
+             "algebra"
+           ]
+@@ -1304,16 +1314,26 @@
+             "1.2",
+             "2.1"
+           ]
++        },
++        {
++          "fact": "F4",
++          "source": "thm-trace-of-ab-equals-trace-of-ba",
++          "source_section": "Statement",
++          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.",
++          "uses": [
++            "1.1"
++          ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "proof-step-1.1",
+-          "claim": "If $A,B$ are Hermitian, then $\\overline{\\operatorname{tr}(AB)}=\\operatorname{tr}((AB)^*)=\\operatorname{tr}(BA)=\\operatorname{tr}(AB)$ by cyclicity of trace. Hence $\\operatorname{tr}(hP)$ and $\\operatorname{tr}(P G(P))$ are real; $E_{xc}$ is real by [F3]. The first two terms are polynomial in the real coordinates of $P$, so together with the $C^2$ term they give a real $C^2$ function.",
++          "claim": "If $A,B$ are Hermitian, then $\\overline{\\operatorname{tr}(AB)}=\\operatorname{tr}((AB)^*)=\\operatorname{tr}(BA)=\\operatorname{tr}(AB)$ by the trace identity [F4]. Hence $\\operatorname{tr}(hP)$ and $\\operatorname{tr}(P G(P))$ are real; $E_{xc}$ is real by [F3]. The first two terms are polynomial in the real coordinates of $P$, so together with the $C^2$ term they give a real $C^2$ function.",
+           "step": "1.1",
+           "inputs": [
+             "F2",
+             "F3",
++            "F4",
+             "given",
+             "algebra"
+           ]
+--- research/numerical-optimization-dynamics-2026-10-16-batch-97.pages.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-97.pages.json
+@@ -20,6 +20,8 @@
+         "title": "Capped DIIS coefficients have a unique minimum-norm least-squares selection",
+         "dependency_level": 0,
+         "deps": [
++          "lem-of-triangle-inequality",
++          "lem-of-abs-value",
+           "def-finite-sum-in-a-commutative-monoid",
+           "def-frobenius-matrix-norm",
+           "thm-heine-borel-rn",
+@@ -68,6 +70,7 @@
+         "title": "A strict occupied gap defines a unique rank-r spectral projector",
+         "dependency_level": 2,
+         "deps": [
++          "def-trace-of-a-square-matrix",
+           "def-self-consistent-projector-response-map",
+           "def-rank-r-orthogonal-projector-domain",
+           "thm-complex-spectral-theorem-for-normal-endomorphisms"
+--- research/numerical-optimization-dynamics-2026-10-16-batch-97.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-97.proof-contracts.json
+@@ -53,6 +53,24 @@
+             "1.1",
+             "2.1"
+           ]
++        },
++        {
++          "fact": "F3",
++          "source": "lem-of-triangle-inequality",
++          "source_section": "Statement",
++          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
++          "uses": [
++            "3.1"
++          ]
++        },
++        {
++          "fact": "F3",
++          "source": "lem-of-abs-value",
++          "source_section": "Statement",
++          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
++          "uses": [
++            "3.1"
++          ]
+         }
+       ],
+       "derivations": [
+@@ -77,11 +95,12 @@
+         },
+         {
+           "id": "step-3.1",
+-          "claim": "The set $M$ is convex: $\\mathcal C_{s,C}$ is convex, and for matrices $A,B$ the identity $\\|(1-t)A+tB\\|_F^2=(1-t)\\|A\\|_F^2+t\\|B\\|_F^2-t(1-t)\\|A-B\\|_F^2$ proves convexity of the squared norm. Applying it to $A=\\sum_i c_iR_i$ and $B=\\sum_i d_iR_i$ shows $J((1-t)c+td)\\le(1-t)J(c)+tJ(d)=\\min J$, so the convex combination also minimizes. Since $M$ is compact, the continuous function $c\\mapsto\\|c\\|_2^2$ has a minimizer $c_*\\in M$.",
++          "claim": "For $c,d\\in\\mathcal C_{s,C}$ and $0\\le t\\le1$, the coefficients $e=(1-t)c+td$ satisfy $\\sum_i e_i=(1-t)\\sum_i c_i+t\\sum_i d_i=1$. By [F3], $\\sum_i|e_i|\\le(1-t)\\sum_i|c_i|+t\\sum_i|d_i|\\le C$, so $\\mathcal C_{s,C}$ is convex. The set $M$ is also convex: for matrices $A,B$ the identity $\\|(1-t)A+tB\\|_F^2=(1-t)\\|A\\|_F^2+t\\|B\\|_F^2-t(1-t)\\|A-B\\|_F^2$ proves convexity of the squared norm. Applying it to $A=\\sum_i c_iR_i$ and $B=\\sum_i d_iR_i$ shows $J((1-t)c+td)\\le(1-t)J(c)+tJ(d)=\\min J$, so the convex combination also minimizes. Since $M$ is compact, the continuous function $c\\mapsto\\|c\\|_2^2$ has a minimizer $c_*\\in M$.",
+           "step": "3.1",
+           "inputs": [
+             "step 2.1",
+             "F1",
++            "F3",
+             "algebra"
+           ]
+         },
+@@ -115,7 +134,7 @@
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Statement: Steps 2.1–2.2 cover nonunique least-squares minimizers, including a singular Gram matrix, and prove a unique minimum-norm tie-break."
++          "evidence": "The singular-Gram/nonunique least-squares case retains existence and the unique minimum-Euclidean-norm selection. Current Proof3.1: For $c,d\\in\\mathcal C_{s,C}$ and $0\\le t\\le1$, the coefficients $e=(1-t)c+td$ satisfy $\\sum_i e_i=(1-t)\\sum_i c_i+t\\sum_i d_i=1$. By [F3], $\\sum_i|e_i|\\le(1-t)\\sum_i|c_i|+t\\sum_i|d_i|\\le C$, so $\\mathcal C_{s,C}$ is convex. The set $M$ is also convex: for matrices $A,B$ the identity $\\|(1-t)A+tB\\|_F^2=(1-t)\\|A\\|_F^2+t\\|B\\|_F^2-t(1-t)\\|A-B\\|_F^2$ proves convexity of the squared norm. Applying it to $A=\\sum_i c_iR_i$ and $B=\\sum_i d_iR_i$ shows $J((1-t)c+td)\\le(1-t)J(c)+tJ(d)=\\min J$, so the convex combination also minimizes. Since $M$ is compact, the continuous function $c\\mapsto\\|c\\|_2^2$ has a minimizer $c_*\\in M$. Current Proof4.1: If distinct $c,d\\in M$ both had minimum Euclidean norm, their midpoint would lie in $M$ and satisfy $\\left\\|\\frac{c+d}{2}\\right\\|_2^2=\\frac{\\|c\\|_2^2+\\|d\\|_2^2}{2}-\\frac{\\|c-d\\|_2^2}{4}<\\frac{\\|c\\|_2^2+\\|d\\|_2^2}{2},$ contradicting minimality. Thus $c_*$ is the unique minimum-norm least-squares minimizer. No nonsingularity of the Gram matrix is needed for existence or tie-breaking."
+         },
+         {
+           "case": "endpoints",
+@@ -338,6 +357,15 @@
+             "2.1",
+             "3.1"
+           ]
++        },
++        {
++          "fact": "F3",
++          "source": "def-trace-of-a-square-matrix",
++          "source_section": "Definition",
++          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
++          "uses": [
++            "2.1"
++          ]
+         }
+       ],
+       "derivations": [
+@@ -353,12 +381,13 @@
+         },
+         {
+           "id": "step-2.1",
+-          "claim": "Changing the orthonormal basis within a repeated eigenspace below the gap leaves that entire eigenspace in the sum; changing one within a repeated eigenspace above the gap leaves that entire eigenspace out. Thus the selected subspace does not depend on the eigenbasis chosen in step 1.1. Its orthogonal projector is $P=\\sum_{j=1}^r u_ju_j^*$, which satisfies $P=P^*$, $P^2=P$, and $\\operatorname{tr}P=r$.",
++          "claim": "Changing the orthonormal basis within a repeated eigenspace below the gap leaves that entire eigenspace in the sum; changing one within a repeated eigenspace above the gap leaves that entire eigenspace out. Thus the selected subspace does not depend on the eigenbasis chosen in step 1.1. Its orthogonal projector is $P=\\sum_{j=1}^r u_ju_j^*$, which satisfies $P=P^*$ and $P^2=P$ by orthonormality. By [F3], $\\operatorname{tr}P=\\sum_{a=1}^n P_{aa}=\\sum_{a=1}^n\\sum_{j=1}^r (u_j)_a\\overline{(u_j)_a}=\\sum_{j=1}^r\\sum_{a=1}^n|(u_j)_a|^2=\\sum_{j=1}^r1=r$, since each $u_j$ is a unit vector.",
+           "step": "2.1",
+           "inputs": [
+             "step 1.1",
+             "F1",
+             "F2",
++            "F3",
+             "L1",
+             "algebra"
+           ]
+@@ -1898,7 +1927,7 @@
+           "fact": "F2",
+           "source": "alg-certified-scf-with-diis-safeguard",
+           "source_section": "Definition",
+-          "quote": "Input: a complete invariant set $K$ and a gapped response map $\\Phi:K\\to K$\nwith a certified contraction factor $q<1$; an initial projector $P_0\\in K$;\na certified initial error bound $E_0\\ge\\|P_0-P_*\\|_F$ for the unique fixed\npoint $P_*$; residual tolerance $\\varepsilon\\ge0$; finite update budget\n$N\\in\\mathbb N_0$; memory $m\\ge1$; coefficient cap $C\\ge1$; and an eigensolver\nwhich, on success at $X$, returns $\\widetilde\\Phi(X)\\in K$ and a certified\n$\\eta(X)\\ge0$ with $\\|\\widetilde\\Phi(X)-\\Phi(X)\\|_F\\le\\eta(X)$. The solver\nreturns a separate failure status if it cannot certify the gap or this error.\n\nFor $k=0,\\ldots,N$:\n\n1. If no certified response evaluation is cached for $P_k$, evaluate the finite-basis matrix $F(P_k)$ and its occupied projector solver. If the gap fails, return $\\texttt{gap-loss}$; if the eigensolver cannot certify its output/error, return $\\texttt{eigensolve-failure}$. Retain the evaluated pair $(P_k,F(P_k))$ for this proposal step and set $\\bar\\rho_k=\\|P_k-\\widetilde\\Phi(P_k)\\|_F+\\eta(P_k)$. If $\\bar\\rho_k\\le\\varepsilon$, return $\\texttt{residual-tolerance-met}$ with error bound $\\bar\\rho_k/(1-q)$.\n2. If $k=N$, return $\\texttt{iteration-budget-exhausted}$ with current bound $E_k$.\n3. Call [[alg-capped-diis-projector-proposal]] with the up-to-$m-1$ preceding stored pairs and the current pair $(P_k,F(P_k))$. For a candidate $Y$, certify $Y\\in K$, the gap at $Y$, and one eigensolver evaluation $\\widetilde\\Phi(Y)$ with error $\\eta(Y)$. Accept $Y$ only if all certificates succeed and\n$$\\frac{\\|Y-\\widetilde\\Phi(Y)\\|_F+\\eta(Y)}{1-q}\\le qE_k.$$\nIf accepted, set $P_{k+1}=Y$ and $E_{k+1}=qE_k$.\n4. If the DIIS system is singular/uncertified, its candidate gap fails, or its fixed-point residual test fails, use the baseline update from step 1: set $P_{k+1}=\\widetilde\\Phi(P_k)$ and $E_{k+1}=qE_k+\\eta(P_k)$. If the baseline certificate or $K$-membership check fails, return its distinct gap, eigensolver, or invariance-certificate failure status.\n5. Append the current pair $(P_k,F(P_k))$ to the preceding-iterate history, retaining at most the newest $m-1$ preceding pairs. If step 3 accepted $Y$, cache its certified evaluation $(F(Y),\\widetilde\\Phi(Y),\\eta(Y))$ as the next iteration's current evaluation; if the baseline branch was used, evaluate its new iterate when the next loop begins. Never attach a response matrix evaluated at one density to a different density.\n\nThe DIIS commutator objective is only a proposal score. Acceptance uses the\nseparate fixed-point residual $\\|Y-\\Phi(Y)\\|_F$ with its additive eigensolver\nerror certificate. The algorithm makes no unconditional success claim: finite\nbudget exhaustion and each certificate failure are explicit outcomes.",
++          "quote": "Input: a complete invariant set $K$ and a gapped response map $\\Phi:K\\to K$\nwith a certified contraction factor $q<1$; an initial projector $P_0\\in K$;\na certified initial error bound $E_0\\ge\\|P_0-P_*\\|_F$ for the unique fixed\npoint $P_*$; residual tolerance $\\varepsilon\\ge0$; finite update budget\n$N\\in\\mathbb N_0$; memory $m\\ge1$; coefficient cap $C\\ge1$; and an eigensolver\nwhich, on success at $X$, returns $\\widetilde\\Phi(X)\\in K$ and a certified\n$\\eta(X)\\ge0$ with $\\|\\widetilde\\Phi(X)-\\Phi(X)\\|_F\\le\\eta(X)$. The solver\nreturns a separate failure status if it cannot certify the gap or this error.\n\nFor $k=0,\\ldots,N$:\n\n1. If no certified response evaluation is cached for $P_k$, evaluate the finite-basis matrix $F(P_k)$ and its occupied projector solver. If the gap fails, return $\\texttt{gap-loss}$; if the eigensolver cannot certify its output/error, return $\\texttt{eigensolve-failure}$. Cache the certified evaluation $(F(P_k),\\widetilde\\Phi(P_k),\\eta(P_k))$ at exactly $P_k$. Whether this evaluation is newly obtained or already cached, use that current evaluation, check the certified baseline output belongs to $K$ (return $\\texttt{invariance-certificate-failure}$ if not), and retain the current pair $(P_k,F(P_k))$ for this proposal step. Set $\\bar\\rho_k=\\|P_k-\\widetilde\\Phi(P_k)\\|_F+\\eta(P_k)$. If $\\bar\\rho_k\\le\\varepsilon$, return $\\texttt{residual-tolerance-met}$ with error bound $\\bar\\rho_k/(1-q)$.\n2. If $k=N$, return $\\texttt{iteration-budget-exhausted}$ with current bound $E_k$.\n3. Call [[alg-capped-diis-projector-proposal]] with the up-to-$m-1$ preceding stored pairs and the current pair $(P_k,F(P_k))$. For a candidate $Y$, certify $Y\\in K$, the gap at $Y$, and one eigensolver evaluation $\\widetilde\\Phi(Y)$ with error $\\eta(Y)$. Accept $Y$ only if all certificates succeed and\n$$\\frac{\\|Y-\\widetilde\\Phi(Y)\\|_F+\\eta(Y)}{1-q}\\le qE_k.$$\nIf accepted, set $P_{k+1}=Y$ and $E_{k+1}=qE_k$.\n4. If step 3 does not accept a candidate for any reason, use the certified baseline update from step 1. In particular this includes a singular/uncertified least-squares solve, coefficient-cap or affine-constraint failure, failed candidate $K$-membership, failed candidate gap, failed candidate eigensolver output/error certificate, or failed candidate fixed-point residual test. In this fallback branch, set $P_{k+1}=\\widetilde\\Phi(P_k)$ and $E_{k+1}=qE_k+\\eta(P_k)$. If the baseline certificate or $K$-membership check fails, return its distinct gap, eigensolver, or invariance-certificate failure status.\n5. Append the current pair $(P_k,F(P_k))$ to the preceding-iterate history, retaining at most the newest $m-1$ preceding pairs. If step 3 accepted $Y$, cache its certified evaluation $(F(Y),\\widetilde\\Phi(Y),\\eta(Y))$ as the next iteration's current evaluation; if the baseline branch was used, evaluate its new iterate when the next loop begins. Never attach a response matrix evaluated at one density to a different density.\n\nThe DIIS commutator objective is only a proposal score. Acceptance uses the\nseparate fixed-point residual $\\|Y-\\Phi(Y)\\|_F$ with its additive eigensolver\nerror certificate. The algorithm makes no unconditional success claim: finite\nbudget exhaustion and each certificate failure are explicit outcomes.",
+           "uses": [
+             "1.1",
+             "2.1",

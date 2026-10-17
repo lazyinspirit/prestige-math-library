@@ -1,0 +1,1968 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": 1,
+  "edges": [
+    {
+      "consumer": "alg-finite-budget-francis-schur-reduction",
+      "supplier": "alg-scaled-householder-reflector-formation-and-application",
+      "consumer_path": "items/alg-finite-budget-francis-schur-reduction.md",
+      "supplier_path": "items/alg-scaled-householder-reflector-formation-and-application.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-scaled-householder-reflector-formation-and-application",
+          "section": "Definition",
+          "line": "1. Reduce $A$ to upper Hessenberg form with Householder similarities. For $k=1,\\ldots,\\max(n-2,0)$ in increasing order, use active indices $S=\\{k+1,\\ldots,n\\}$, target $x=H_{S,k}$, and trailing left panel $B=H_{S,\\{k+1,\\ldots,n\\}}$ with columns in increasing order. In the real branch use [[alg-scaled-householder-reflector-formation-and-application]] for the finite left application and overwrite; in the complex branch use [[alg-complex-scaled-householder-reflector-step]]. Complete each similarity by the right application above on columns $S$. If the resulting matrix fails the exact upper-Hessenberg zero-pattern check, return bulge-chase-invariant-failure with the partial factors. Store the exact unitary reflector factors as a product representation $Q_0$."
+        },
+        {
+          "raw_id": "alg-scaled-householder-reflector-formation-and-application",
+          "section": "Facts & Assumptions",
+          "line": "[F3] [[alg-scaled-householder-reflector-formation-and-application]]: the current real reflector procedure has an explicit finite operation sequence and range-failure branch, but its definition is real-only and makes no local similarity-error claim."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-bartels-stewart-sylvester-equation",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "consumer_path": "items/alg-bartels-stewart-sylvester-equation.md",
+      "supplier_path": "items/alg-finite-budget-francis-schur-reduction.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-finite-budget-francis-schur-reduction",
+          "section": "Definition",
+          "line": "1. Run [[alg-finite-budget-francis-schur-reduction]] on $A$ and $B$ with their supplied controls and budgets. If either call does not return `Schur-computed`, return `schur-failure` with the underlying status."
+        },
+        {
+          "raw_id": "alg-finite-budget-francis-schur-reduction",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-finite-budget-francis-schur-reduction]]: The finite computed reduction returns a product representation, a candidate factor, residual diagnostic and explicit success, budget or failure status; it asserts no unconditional convergence of its shift schedule."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+      "supplier": "alg-rounded-cholesky-with-failure-status",
+      "consumer_path": "items/alg-bfgs-hessian-direction-with-rounded-cholesky.md",
+      "supplier_path": "items/alg-rounded-cholesky-with-failure-status.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rounded-cholesky-with-failure-status",
+          "section": "Definition",
+          "line": "1. Call [[alg-rounded-cholesky-with-failure-status]] on $B$. If it returns a failure status, return factorization-failure with that pivot and operation index."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "supplier": "alg-scaled-householder-reflector-formation-and-application",
+      "consumer_path": "items/alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones.md",
+      "supplier_path": "items/alg-scaled-householder-reflector-formation-and-application.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-scaled-householder-reflector-formation-and-application",
+          "section": "Definition",
+          "line": "Stored floating-point numbers are treated as exact dyadic rationals (rationals with denominator a power of two) for audits; the unit roundoff $u$ and failure behavior of elementary operations are those of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. For a matrix $M$, $\\|M\\|_F^2$ is the sum of the squares of its entries. Check exact rank by rational row elimination: scan columns from left to right, find the first nonzero entry at or below the next pivot row, swap it into that row, subtract exact multiples to clear entries below, and count pivots. If fewer pivots than rows are found, return `singular-system`. For a full-rank matrix, use a reduced QR solve: for each active column apply [[alg-scaled-householder-reflector-formation-and-application]] to the column and trailing block, store the reflector, apply the stored reflectors in order to the right-hand side using the same sequential dot, scale, multiply, and subtraction order as that procedure, and solve the resulting upper-triangular system by descending substitution $t_i=\\operatorname{fl}(q_i-\\operatorname{fl}(\\sum_{j>i}\\widehat R_{ij}\\widehat d_j))$, $\\widehat d_i=\\operatorname{fl}(t_i/\\widehat R_{ii})$. A range exception returns `lost-range`; a zero pivot returns `singular-system`. Let $d$ be the system dimension and $\\gamma_{d+3}=(d+3)u/(1-(d+3)u)$. Require $(d+3)u<1$, $\\gamma_{d+3}<1/8$, and, for the computed triangular factor $\\widehat R$, verify with exact dyadic arithmetic that"
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "supplier": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "consumer_path": "items/alg-ctrl1-finite-budget-transcription-solver-dispatch.md",
+      "supplier_path": "items/alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+          "section": "Definition",
+          "line": "Input a finite transcription from [[alg-ctrl1-runge-kutta-shooting-and-collocation-transcription]], an initial iterate, solver tolerances, an integer outer cap $K\\ge0$, and integer inner caps $R,J\\ge1$ (penalty and backtracking trials). First check dimensions and domains. If the transcription satisfies the linear-quadratic, nonnegative-quadrature, and affine-constraint hypotheses of [[lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program]], convert its affine constraints to the standard equality-plus-nonnegative-variable representation of [[alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones]]. Supply a strictly positive primal/slack start and a dual start, then call that finite-budget algorithm once. Return its status, translating `certified-gap` only to the exact gap certificate described by [[thm-fraction-to-boundary-and-primal-dual-gap-certificates]]; a `residual-candidate` remains a candidate. If $K=0$, skip the SQP loop and return `budget-exhausted`."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "supplier": "lem-rounded-triangular-substitution-componentwise-backward-error",
+      "consumer_path": "items/alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones.md",
+      "supplier_path": "items/lem-rounded-triangular-substitution-componentwise-backward-error.md",
+      "kinds": [
+        "frontmatter:deps"
+      ],
+      "alias_matches": [],
+      "references": [],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "lem-scaled-householder-step-meets-local-backward-error-premise",
+      "supplier": "alg-scaled-householder-reflector-formation-and-application",
+      "consumer_path": "items/lem-scaled-householder-step-meets-local-backward-error-premise.md",
+      "supplier_path": "items/alg-scaled-householder-reflector-formation-and-application.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-scaled-householder-reflector-formation-and-application",
+          "section": "Statement",
+          "line": "Let $C=[x\\;B]\\in\\mathbb R^{r\\times(q+1)}$, $r\\ge1$, $q\\ge0$, undergo a successful step of [[alg-scaled-householder-reflector-formation-and-application]], with $0<u<1$ and $ru<1$. Define"
+        },
+        {
+          "raw_id": "alg-scaled-householder-reflector-formation-and-application",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-scaled-householder-reflector-formation-and-application]] fixes scaling, sequential dots, the two update multiplications, and the column overwrite."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+      "supplier": "lem-scaled-householder-step-meets-local-backward-error-premise",
+      "consumer_path": "items/alg-sqp-finite-precision-kkt-qr-solve-and-residual-check.md",
+      "supplier_path": "items/lem-scaled-householder-step-meets-local-backward-error-premise.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "lem-scaled-householder-step-meets-local-backward-error-premise",
+          "section": "Definition",
+          "line": "[[lem-scaled-householder-step-meets-local-backward-error-premise]], and set"
+        },
+        {
+          "raw_id": "lem-scaled-householder-step-meets-local-backward-error-premise",
+          "section": "Facts & Assumptions",
+          "line": "[F5] [[lem-scaled-householder-step-meets-local-backward-error-premise]]"
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+      "supplier": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+      "consumer_path": "items/alg-fem-control-active-set-sqp-with-finite-residual-status.md",
+      "supplier_path": "items/alg-sqp-finite-precision-kkt-qr-solve-and-residual-check.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+          "section": "Definition",
+          "line": "Let $F_A(z)=0$ be the active KKT system of a finite-dimensional reduced FE control problem, where $z=(x,\\mu)$ stacks the control and active multipliers. Given $z_0$, an ordered finite list of proposed active sets $A_0,\\ldots,A_{m-1}$, maximum budget $N\\ge1$, residual tolerance $\\tau\\ge0$, and the floating-point hypotheses of [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]], process at most $\\min(m,N)$ candidates:"
+        },
+        {
+          "raw_id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+          "section": "Definition",
+          "line": "2. Apply [[alg-sqp-exact-hessian-newton-step]] when its rank and reduced-curvature checks succeed. Solve its active KKT system by the finite-precision QR algorithm of [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]]. A failed check or solve records `numerical-failure`, sets $z_{j+1}=z_j$, and proceeds."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-computed-full-rank-least-squares-backward-stability",
+      "supplier": "lem-rounded-triangular-substitution-componentwise-backward-error",
+      "consumer_path": "items/thm-computed-full-rank-least-squares-backward-stability.md",
+      "supplier_path": "items/lem-rounded-triangular-substitution-componentwise-backward-error.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "lem-rounded-triangular-substitution-componentwise-backward-error",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[lem-rounded-triangular-substitution-componentwise-backward-error]] supplies the rounded triangular matrix perturbation, including the zero-solution branch."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+      "supplier": "thm-computed-full-rank-least-squares-backward-stability",
+      "consumer_path": "items/alg-sqp-finite-precision-kkt-qr-solve-and-residual-check.md",
+      "supplier_path": "items/thm-computed-full-rank-least-squares-backward-stability.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-computed-full-rank-least-squares-backward-stability",
+          "section": "Definition",
+          "line": "[[thm-computed-full-rank-least-squares-backward-stability]]. If factorization"
+        },
+        {
+          "raw_id": "thm-computed-full-rank-least-squares-backward-stability",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[thm-computed-full-rank-least-squares-backward-stability]] supplies"
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "supplier": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+      "consumer_path": "items/alg-full-memory-bfgs-with-curvature-safeguards.md",
+      "supplier_path": "items/alg-bfgs-hessian-direction-with-rounded-cholesky.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+          "section": "Definition",
+          "line": "At each nonstationary iterate $x_k$, set $g_k:=\\nabla f(x_k)$. Use the Euclidean inner product of [[def-euclidean-inner-product]] in descent and curvature tests. In exact direction mode set $p_k:=-H_kg_k$. In rounded-Cholesky mode call [[alg-bfgs-hessian-direction-with-rounded-cholesky]] with $(B_k,g_k)$; if the factorization or triangular solve fails, return its failure status. If the computed direction is not descending, reset $B_k:=\\gamma^{-1}I$, $H_k:=\\gamma I$, and set $p_k:=-\\gamma g_k$. If $g_k=0$, return stationary."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "supplier": "alg-scaled-householder-reflector-formation-and-application",
+      "consumer_path": "items/alg-gauss-newton-qr-svd-step-with-rank-safeguard.md",
+      "supplier_path": "items/alg-scaled-householder-reflector-formation-and-application.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-scaled-householder-reflector-formation-and-application",
+          "section": "Definition",
+          "line": "For QR mode, either supply an exact reduced factorization $J=QR$ with $Q^TQ=I_n$, or compute one by setting $C=[J\\mid-r]$ and, for $k=1,\\ldots,n$, applying [[alg-scaled-householder-reflector-formation-and-application]] to the active part of column $k$ and all trailing columns of $C$, including its last right-hand-side column. Propagate the first factorization failure. In exact mode, a zero diagonal in $R$ returns rank-deficient; otherwise solve $Rp=Q^T(-r)$ by backward substitution and return exact-step($p$). In computed mode, a zero diagonal returns rank-deficient-candidate; a failed triangular solve returns linear-solve-failure; and a nonzero computed diagonal without an independently supplied full-rank certificate returns rank-unverified with the computed candidate but no full-rank claim. With a full-rank certificate, return computed-candidate($p$). The computed-QR backward-stability conclusion of [[thm-computed-full-rank-least-squares-backward-stability]] is attached only when all of that theorem's successful-execution, arithmetic, and nonsingularity hypotheses are supplied; otherwise no backward-stability conclusion is returned."
+        },
+        {
+          "raw_id": "alg-scaled-householder-reflector-formation-and-application",
+          "section": "Facts & Assumptions",
+          "line": "[F5] [[alg-scaled-householder-reflector-formation-and-application]]: each reflector call has finite loops and returns either its stated transformed block or a failure status."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "supplier": "thm-computed-full-rank-least-squares-backward-stability",
+      "consumer_path": "items/alg-gauss-newton-qr-svd-step-with-rank-safeguard.md",
+      "supplier_path": "items/thm-computed-full-rank-least-squares-backward-stability.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-computed-full-rank-least-squares-backward-stability",
+          "section": "Definition",
+          "line": "For QR mode, either supply an exact reduced factorization $J=QR$ with $Q^TQ=I_n$, or compute one by setting $C=[J\\mid-r]$ and, for $k=1,\\ldots,n$, applying [[alg-scaled-householder-reflector-formation-and-application]] to the active part of column $k$ and all trailing columns of $C$, including its last right-hand-side column. Propagate the first factorization failure. In exact mode, a zero diagonal in $R$ returns rank-deficient; otherwise solve $Rp=Q^T(-r)$ by backward substitution and return exact-step($p$). In computed mode, a zero diagonal returns rank-deficient-candidate; a failed triangular solve returns linear-solve-failure; and a nonzero computed diagonal without an independently supplied full-rank certificate returns rank-unverified with the computed candidate but no full-rank claim. With a full-rank certificate, return computed-candidate($p$). The computed-QR backward-stability conclusion of [[thm-computed-full-rank-least-squares-backward-stability]] is attached only when all of that theorem's successful-execution, arithmetic, and nonsingularity hypotheses are supplied; otherwise no backward-stability conclusion is returned."
+        },
+        {
+          "raw_id": "thm-computed-full-rank-least-squares-backward-stability",
+          "section": "Facts & Assumptions",
+          "line": "[F6] [[thm-computed-full-rank-least-squares-backward-stability]]: after successful scaled Householder QR, reflector application, and triangular solve under its arithmetic bounds, a backward-stability conclusion is available only if the stated nonsingularity condition on the perturbed triangular factor also holds."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-principal-matrix-logarithm-and-square-root",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "consumer_path": "items/alg-principal-matrix-logarithm-and-square-root.md",
+      "supplier_path": "items/alg-finite-budget-francis-schur-reduction.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-finite-budget-francis-schur-reduction",
+          "section": "Definition",
+          "line": "1. Run [[alg-finite-budget-francis-schur-reduction]] in its complex branch."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-revised-simplex-qr-basis-recompute-and-audit",
+      "supplier": "alg-scaled-householder-reflector-formation-and-application",
+      "consumer_path": "items/alg-revised-simplex-qr-basis-recompute-and-audit.md",
+      "supplier_path": "items/alg-scaled-householder-reflector-formation-and-application.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-scaled-householder-reflector-formation-and-application",
+          "section": "Definition",
+          "line": "2. Separately for $D=C=A_B$ and $D=C^{\\mathsf T}$, copy the current stored entries into a working matrix $W$. For $k=1,\\ldots,m$, set $r=m-k+1$, take the active column $x=W_{k:m,k}$ and trailing block $T=W_{k:m,k+1:m}$, and call [[alg-scaled-householder-reflector-formation-and-application]] once on $(x,T)$. On success, save its reflector data and replace the active block $W_{k:m,k:m}$ by its returned output, which writes the new diagonal entry and exact zeros below it; leave earlier rows and columns unchanged. If $x=0$, save an identity marker and leave the trailing block unchanged. Stop with `numerical-failure` at the first failed call, recording the factorization, column $k$, and failure stage. The final $W$ is the computed upper-triangular factor $\\widehat R_D$."
+        },
+        {
+          "raw_id": "alg-scaled-householder-reflector-formation-and-application",
+          "section": "Definition",
+          "line": "   To apply these stored reflectors to any right-hand side $s$, start with $z=s$ and visit $k=1,\\ldots,m$ in that same order. Skip an identity marker. Otherwise, on the active suffix $z_{k:m}$ compute the sequential rounded dot $d=\\operatorname{fl}(v_k^{\\mathsf T}z_{k:m})$, then $p=\\operatorname{fl}(\\widehat\\tau_k v_k)$, $u=\\operatorname{fl}(p\\,d)$ componentwise, and $z_{k:m}=\\operatorname{fl}(z_{k:m}-u)$ componentwise, using the operation order of [[alg-scaled-householder-reflector-formation-and-application]] without a column overwrite. Stop at the first failure and record the right-hand side, reflector index, and failure stage. For $Dz=s$, apply this replay to obtain the transformed right-hand side and solve $\\widehat R_D\\widehat z=z$ by descending substitution: for $i=m,\\ldots,1$, sequentially compute $t_i=\\operatorname{fl}(\\sum_{j=i+1}^m(\\widehat R_D)_{ij}\\widehat z_j)$, $h_i=\\operatorname{fl}(z_i-t_i)$, and $\\widehat z_i=\\operatorname{fl}(h_i/(\\widehat R_D)_{ii})$. A zero diagonal or any failed operation returns `numerical-failure` with the solve and row index. Reuse the $C$ factorization for $\\widehat x_B$ and every nonbasic direction $\\widehat d_j$; reuse the $C^{\\mathsf T}$ factorization for $\\widehat y$. Never substitute a rounded dense orthogonal product for the exact orthogonal representative in the proof. After every admitted basis replacement discard both factorizations and recompute; no rank-one factorization-update implementation is claimed."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-revised-simplex-qr-basis-recompute-and-audit",
+      "supplier": "thm-computed-full-rank-least-squares-backward-stability",
+      "consumer_path": "items/alg-revised-simplex-qr-basis-recompute-and-audit.md",
+      "supplier_path": "items/thm-computed-full-rank-least-squares-backward-stability.md",
+      "kinds": [
+        "frontmatter:deps"
+      ],
+      "alias_matches": [],
+      "references": [],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-scaled-householder-qr-backward-stability",
+      "supplier": "alg-scaled-householder-reflector-formation-and-application",
+      "consumer_path": "items/thm-scaled-householder-qr-backward-stability.md",
+      "supplier_path": "items/alg-scaled-householder-reflector-formation-and-application.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-scaled-householder-reflector-formation-and-application",
+          "section": "Statement",
+          "line": "Let $A\\in\\mathbb R^{m\\times n}$, $m\\ge n\\ge1$, undergo successful QR steps of [[alg-scaled-householder-reflector-formation-and-application]], with $mu<1$. Use $\\kappa_m$ from [[lem-scaled-householder-step-meets-local-backward-error-premise]] and set $\\beta_Q=(1+\\kappa_m)^n-1$. The exact orthogonal product represented by the stored reflectors has reduced first $n$ columns $\\widehat Q$, and the computed triangular block is $\\widehat R$. Then"
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "def-stiefel-qr-polar-retractions",
+      "supplier": "thm-scaled-householder-qr-backward-stability",
+      "consumer_path": "items/def-stiefel-qr-polar-retractions.md",
+      "supplier_path": "items/thm-scaled-householder-qr-backward-stability.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-scaled-householder-qr-backward-stability",
+          "section": "Remark",
+          "line": "The formulas here are exact-arithmetic definitions. The finite-precision Householder QR supplier proves a backward-error statement under its operationwise assumptions and does not assert that a computed $Q$ is exactly orthogonal ([[thm-scaled-householder-qr-backward-stability]]). No floating-point retraction guarantee is claimed by this page."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-riemannian-armijo-backtracking",
+      "supplier": "def-stiefel-qr-polar-retractions",
+      "consumer_path": "items/alg-riemannian-armijo-backtracking.md",
+      "supplier_path": "items/def-stiefel-qr-polar-retractions.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "def-stiefel-qr-polar-retractions",
+          "section": "Definition",
+          "line": "[[def-stiefel-qr-polar-retractions]]. At $x\\in M$, let $g=\\operatorname{grad}f(x)$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-riemannian-trust-region",
+      "supplier": "def-stiefel-qr-polar-retractions",
+      "consumer_path": "items/alg-riemannian-trust-region.md",
+      "supplier_path": "items/def-stiefel-qr-polar-retractions.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "def-stiefel-qr-polar-retractions",
+          "section": "Facts & Assumptions",
+          "line": "[F4] A valid tangent step is mapped to a Stiefel or Grassmann point by the selected real or complex retraction ([[def-stiefel-qr-polar-retractions]], [[def-complex-grassmann-polar-retraction]])."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+      "supplier": "alg-scaled-householder-reflector-formation-and-application",
+      "consumer_path": "items/alg-rosenbrock-shifted-qr-solver-with-residual-certificate.md",
+      "supplier_path": "items/alg-scaled-householder-reflector-formation-and-application.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-scaled-householder-reflector-formation-and-application",
+          "section": "Definition",
+          "line": "1. Set $R:=M$. For each column $j=0,\\ldots,d-1$, let $x$ be the active part of column $j$ of $R$ and $B$ the active trailing block to its right. Call [[alg-scaled-householder-reflector-formation-and-application]] on $(x,B)$. This applies the reflector in [[def-householder-reflector]] using the operation order specified by the called procedure. If it returns `range-failure`, return that status and no factor object. Otherwise replace the active block by its returned $C_+$, store its $(v,\\widehat\\tau)$, and continue. The resulting $R$ is upper triangular with its lower entries set to exact zeros by the called procedure; this is the full/reduced computational QR convention of [[def-full-reduced-and-column-pivoted-computational-qr-factorisations]]."
+        },
+        {
+          "raw_id": "alg-scaled-householder-reflector-formation-and-application",
+          "section": "Definition",
+          "line": "   1. Apply the stored reflector updates in the same order, each using the successful rounded dot, scaling, product, and subtraction operations specified by [[alg-scaled-householder-reflector-formation-and-application]], to obtain $c$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-rosenbrock-euler-step",
+      "supplier": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+      "consumer_path": "items/alg-rosenbrock-euler-step.md",
+      "supplier_path": "items/alg-rosenbrock-shifted-qr-solver-with-residual-certificate.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+          "section": "Definition",
+          "line": "**Input:** an ODE field $f:D\\to\\mathbb R^d$ on the open domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$, $(t_n,y_n)\\in D$, $h>0$, $\\gamma>0$, a finite real Jacobian matrix $\\widetilde J_n\\in\\mathbb R^{d\\times d}$, a residual tolerance $\\varepsilon\\ge0$, the selected stored finite set $\\mathbb F$ of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], a terminating field-evaluation routine and a terminating partial exact-storage check, and the terminating certified-norm routine of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. For an exact real scalar, vector, or matrix $v$, `store(v)` returns $v$ if every entry belongs to $\\mathbb F$ and returns `unavailable` otherwise; it does not round. Apply it before each QR call."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-safeguarded-levenberg-marquardt",
+      "supplier": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "consumer_path": "items/alg-safeguarded-levenberg-marquardt.md",
+      "supplier_path": "items/alg-gauss-newton-qr-svd-step-with-rank-safeguard.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "section": "Definition",
+          "line": "For stable linear algebra, form $A_\\lambda=[J(x);\\sqrt\\lambda D]$ and $s_\\lambda=[r(x);0]$, then call [[alg-gauss-newton-qr-svd-step-with-rank-safeguard]] in QR mode on $(A_\\lambda,s_\\lambda)$. The exact augmented matrix has full column rank because $D$ is nonsingular and $\\lambda>0$. A computed-candidate status remains a candidate and carries no convergence guarantee."
+        },
+        {
+          "raw_id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-gauss-newton-qr-svd-step-with-rank-safeguard]]: a successful exact QR step solves the linear least-squares problem; computed candidates and rank-unverified statuses are distinct."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-schur-parlett-matrix-function",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "consumer_path": "items/alg-schur-parlett-matrix-function.md",
+      "supplier_path": "items/alg-finite-budget-francis-schur-reduction.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-finite-budget-francis-schur-reduction",
+          "section": "Definition",
+          "line": "1. Call [[alg-finite-budget-francis-schur-reduction]] in its complex branch."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "alg-two-stage-rosenbrock-w-method",
+      "supplier": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+      "consumer_path": "items/alg-two-stage-rosenbrock-w-method.md",
+      "supplier_path": "items/alg-rosenbrock-shifted-qr-solver-with-residual-certificate.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+          "section": "Definition",
+          "line": "**Input:** an ODE field $f:D\\to\\mathbb R^d$ on the open domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$, $(t_n,y_n)\\in D$, $h>0$, a finite real state-Jacobian approximation $\\widetilde J_n$, a finite approximation $\\widetilde T_n$ to $\\partial_t f(t_n,y_n)$, stage residual tolerances $\\varepsilon_1,\\varepsilon_2\\ge0$, the selected stored finite set $\\mathbb F$ of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], terminating exact field-evaluation and `store` routines, and the terminating certified-norm routine of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. The exact-storage check returns $v$ if every entry is in $\\mathbb F$ and `unavailable` otherwise; it does not round. Put"
+        },
+        {
+          "raw_id": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+          "section": "Definition",
+          "line": "1. Form $W$ by exact outer arithmetic and set $W_s:=\\operatorname{store}(W)$. If storage returns `unavailable`, return $(y_n,\\texttt{representation-unavailable})$. Factor $W_s$ once using [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. If factorization fails, return $(y_n,\\texttt{factorization-failure})$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "cex-approximate-jacobian-breaks-stiff-damping",
+      "supplier": "alg-two-stage-rosenbrock-w-method",
+      "consumer_path": "items/cex-approximate-jacobian-breaks-stiff-damping.md",
+      "supplier_path": "items/alg-two-stage-rosenbrock-w-method.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-two-stage-rosenbrock-w-method",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-two-stage-rosenbrock-w-method]]: the stages satisfy $Wk_1=f+\\alpha h\\widetilde T$, $F_1=f(y+hk_1/2)$ for this autonomous equation, $Wq_2=F_1-k_1$, $k_2=q_2+k_1$, and $y_+=y+hk_2$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "cex-omitting-rosenbrock-stage-correction-loses-order-two",
+      "supplier": "alg-two-stage-rosenbrock-w-method",
+      "consumer_path": "items/cex-omitting-rosenbrock-stage-correction-loses-order-two.md",
+      "supplier_path": "items/alg-two-stage-rosenbrock-w-method.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-two-stage-rosenbrock-w-method",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-two-stage-rosenbrock-w-method]]: the correct stages use the second right-hand side $F_1-k_1$ and then set $k_2=q_2+k_1$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-computed-full-rank-least-squares-backward-stability",
+      "supplier": "thm-scaled-householder-qr-backward-stability",
+      "consumer_path": "items/thm-computed-full-rank-least-squares-backward-stability.md",
+      "supplier_path": "items/thm-scaled-householder-qr-backward-stability.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-scaled-householder-qr-backward-stability",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[thm-scaled-householder-qr-backward-stability]] supplies the proved QR bound and the stored-reflector application bound."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+      "supplier": "thm-computed-full-rank-least-squares-backward-stability",
+      "consumer_path": "items/lem-computed-augmented-tikhonov-solve-residual-and-output-error.md",
+      "supplier_path": "items/thm-computed-full-rank-least-squares-backward-stability.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-computed-full-rank-least-squares-backward-stability",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[thm-computed-full-rank-least-squares-backward-stability]] supplies successful real augmented-QR nearby-data bounds with its explicit nonsingularity check."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-tikhonov-error-chain-with-discretization-and-residual",
+      "supplier": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+      "consumer_path": "items/thm-tikhonov-error-chain-with-discretization-and-residual.md",
+      "supplier_path": "items/lem-computed-augmented-tikhonov-solve-residual-and-output-error.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+          "section": "Statement",
+          "line": "For stored finite matrices, [[lem-computed-augmented-tikhonov-solve-residual-and-output-error]] supplies the concrete augmented-QR or independently certified-residual application: take its $\\rho$ as $\\rho_h$ with datum $y_\\delta$, or as $\\rho_{h,h}$ with datum $y_{h,\\delta}$. It bounds returned-output roundoff for the exact direct-solve target and retains explicit real/complex realization, square-root representation, successful-operation and nonsingularity conditions."
+        },
+        {
+          "raw_id": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+          "section": "Facts & Assumptions",
+          "line": "[F10] [[lem-computed-augmented-tikhonov-solve-residual-and-output-error]]: Finite stored real/complex data admit the stated normal-residual certificate and augmented-QR returned-output bound, with all arithmetic and representation hypotheses explicit."
+        },
+        {
+          "raw_id": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+          "section": "Remarks",
+          "line": "Hansen's slides write the penalty as $\\|Ax-b\\|^2+\\lambda_H^2\\|x\\|^2$; there $\\lambda=\\lambda_H^2$. Clason's coefficient $\\alpha$ in front of the squared penalty maps directly to this item's $\\lambda$. The concrete finite-matrix allowance is supplied by [[lem-computed-augmented-tikhonov-solve-residual-and-output-error]]; for general Hilbert-space computations any residual certificate still needs its own stated arithmetic realization."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "cor-l2-inverse-error-budget-and-cross-term-condition",
+      "supplier": "thm-tikhonov-error-chain-with-discretization-and-residual",
+      "consumer_path": "items/cor-l2-inverse-error-budget-and-cross-term-condition.md",
+      "supplier_path": "items/thm-tikhonov-error-chain-with-discretization-and-residual.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-tikhonov-error-chain-with-discretization-and-residual",
+          "section": "Statement",
+          "line": "[[thm-tikhonov-error-chain-with-discretization-and-residual]]."
+        },
+        {
+          "raw_id": "thm-tikhonov-error-chain-with-discretization-and-residual",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[thm-tikhonov-error-chain-with-discretization-and-residual]]: The realization-wise error is the finite sum of its displayed chain differences."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "def-stiefel-grassmann-projected-vector-transport",
+      "supplier": "def-stiefel-qr-polar-retractions",
+      "consumer_path": "items/def-stiefel-grassmann-projected-vector-transport.md",
+      "supplier_path": "items/def-stiefel-qr-polar-retractions.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "def-stiefel-qr-polar-retractions",
+          "section": "Facts & Assumptions",
+          "line": "[F2] QR and polar endpoints are orthonormal frames, and the polar endpoint transforms as $R_{XQ}^{\\rm pol}(\\eta Q)=R_X^{\\rm pol}(\\eta)Q$ ([[def-stiefel-qr-polar-retractions]])."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-bfgs-powell-damping-after-negative-curvature",
+      "supplier": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "consumer_path": "items/ex-bfgs-powell-damping-after-negative-curvature.md",
+      "supplier_path": "items/alg-full-memory-bfgs-with-curvature-safeguards.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "section": "Facts & Assumptions",
+          "line": "[F4] [[alg-full-memory-bfgs-with-curvature-safeguards]]: the normal search branch requires a strong Wolfe step and reports line-search failure if its finite search does not return one."
+        },
+        {
+          "raw_id": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "section": "Verification",
+          "line": "[F4] [[alg-full-memory-bfgs-with-curvature-safeguards]]: the normal search branch requires a strong Wolfe step and reports line-search failure if its finite search does not return one."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-bfgs-secant-on-a-strongly-convex-quadratic",
+      "supplier": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "consumer_path": "items/ex-bfgs-secant-on-a-strongly-convex-quadratic.md",
+      "supplier_path": "items/alg-full-memory-bfgs-with-curvature-safeguards.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[alg-full-memory-bfgs-with-curvature-safeguards]]: an exact full-memory iteration uses $p=-Hg$ and accepts a positive strong Wolfe step before updating."
+        },
+        {
+          "raw_id": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "section": "Verification",
+          "line": "[F2] [[alg-full-memory-bfgs-with-curvature-safeguards]]: an exact full-memory iteration uses $p=-Hg$ and accepts a positive strong Wolfe step before updating."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-exponential-kinetics-gauss-newton-fit",
+      "supplier": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "consumer_path": "items/ex-exponential-kinetics-gauss-newton-fit.md",
+      "supplier_path": "items/alg-gauss-newton-qr-svd-step-with-rank-safeguard.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-gauss-newton-qr-svd-step-with-rank-safeguard]]: for an exact full-column-rank Jacobian, the exact QR/SVD branch returns the unique minimizer of the linearized residual problem."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-finite-basis-projector-optimization-on-grassmann",
+      "supplier": "alg-riemannian-trust-region",
+      "consumer_path": "items/ex-finite-basis-projector-optimization-on-grassmann.md",
+      "supplier_path": "items/alg-riemannian-trust-region.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-riemannian-trust-region",
+          "section": "Example",
+          "line": "[[alg-riemannian-trust-region]], with the inner subproblem routine returning"
+        },
+        {
+          "raw_id": "alg-riemannian-trust-region",
+          "section": "Facts & Assumptions",
+          "line": "[F6] The trust-region method uses a retracted trial, leaves the current point on rejection, and has the proved first-order count under its pullback hypotheses ([[alg-riemannian-trust-region]], [[thm-riemannian-trust-region-first-order-complexity]])."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-full-rank-least-squares-normal-equations-versus-qr",
+      "supplier": "thm-computed-full-rank-least-squares-backward-stability",
+      "consumer_path": "items/ex-full-rank-least-squares-normal-equations-versus-qr.md",
+      "supplier_path": "items/thm-computed-full-rank-least-squares-backward-stability.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-computed-full-rank-least-squares-backward-stability",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[thm-computed-full-rank-least-squares-backward-stability]]: the computed guarantee is conditional on the listed QR and solve premises."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-ill-conditioned-design-stability-versus-forward-error",
+      "supplier": "thm-computed-full-rank-least-squares-backward-stability",
+      "consumer_path": "items/ex-ill-conditioned-design-stability-versus-forward-error.md",
+      "supplier_path": "items/thm-computed-full-rank-least-squares-backward-stability.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-computed-full-rank-least-squares-backward-stability",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[thm-computed-full-rank-least-squares-backward-stability]]: its guarantee controls perturbations of data under its hypotheses."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-lbfgs-memory-dependent-cost",
+      "supplier": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "consumer_path": "items/ex-lbfgs-memory-dependent-cost.md",
+      "supplier_path": "items/alg-full-memory-bfgs-with-curvature-safeguards.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "section": "Facts & Assumptions",
+          "line": "[F3] [[alg-full-memory-bfgs-with-curvature-safeguards]]: this fully explicit implementation maintains both consistent dense matrices $B_k$ and $H_k$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-lp-primal-dual-residual-and-gap",
+      "supplier": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "consumer_path": "items/ex-lp-primal-dual-residual-and-gap.md",
+      "supplier_path": "items/alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+          "section": "Facts & Assumptions",
+          "line": "[F1] The algorithm's residuals are $r_p=Ax-b$ and $r_d=c-A^Ty-s$ for this LP ([[alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones]])."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-nonzero-residual-gauss-newton-is-only-linear",
+      "supplier": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "consumer_path": "items/ex-nonzero-residual-gauss-newton-is-only-linear.md",
+      "supplier_path": "items/alg-gauss-newton-qr-svd-step-with-rank-safeguard.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[alg-gauss-newton-qr-svd-step-with-rank-safeguard]]: for a full-column-rank scalar Jacobian, the exact step minimizes the linearized residual norm."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-quadrature-discretization-residual-before-inversion",
+      "supplier": "thm-tikhonov-error-chain-with-discretization-and-residual",
+      "consumer_path": "items/ex-quadrature-discretization-residual-before-inversion.md",
+      "supplier_path": "items/thm-tikhonov-error-chain-with-discretization-and-residual.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-tikhonov-error-chain-with-discretization-and-residual",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[thm-tikhonov-error-chain-with-discretization-and-residual]]: For $y_{h,\\delta}=A_hx^\\dagger+e$ and $d_h=(A-A_h)x^\\dagger$, the exact chain contains the separate term $R_\\lambda d_h$ before the discretized solve."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-rank-deficient-identifiability-and-lm-step",
+      "supplier": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "consumer_path": "items/ex-rank-deficient-identifiability-and-lm-step.md",
+      "supplier_path": "items/alg-gauss-newton-qr-svd-step-with-rank-safeguard.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-gauss-newton-qr-svd-step-with-rank-safeguard]]: a rank-deficient exact Jacobian returns a rank status rather than an asserted unique Gauss-Newton step."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-rosenbrock-euler-scalar-a-and-l-stability",
+      "supplier": "alg-rosenbrock-euler-step",
+      "consumer_path": "items/thm-rosenbrock-euler-scalar-a-and-l-stability.md",
+      "supplier_path": "items/alg-rosenbrock-euler-step.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rosenbrock-euler-step",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[alg-rosenbrock-euler-step]]: when the shifted solve succeeds, its update is the one-stage formula of [F1]."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-rosenbrock-euler-stiff-decay-and-backward-euler",
+      "supplier": "thm-rosenbrock-euler-scalar-a-and-l-stability",
+      "consumer_path": "items/ex-rosenbrock-euler-stiff-decay-and-backward-euler.md",
+      "supplier_path": "items/thm-rosenbrock-euler-scalar-a-and-l-stability.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-rosenbrock-euler-scalar-a-and-l-stability",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[thm-rosenbrock-euler-scalar-a-and-l-stability]]: $R_1(z)=1/(1-z)$ and the $\\gamma=1$ method is L-stable."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-rosenbrock-euler-stiff-linear-damping",
+      "supplier": "alg-rosenbrock-euler-step",
+      "consumer_path": "items/ex-rosenbrock-euler-stiff-linear-damping.md",
+      "supplier_path": "items/alg-rosenbrock-euler-step.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rosenbrock-euler-step",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-rosenbrock-euler-step]] solves $(1-h\\lambda)k=\\lambda y_n$ and returns $y_{n+1}=y_n+hk$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-rotation-logarithm-branch-cut",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "consumer_path": "items/ex-rotation-logarithm-branch-cut.md",
+      "supplier_path": "items/alg-finite-budget-francis-schur-reduction.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-finite-budget-francis-schur-reduction",
+          "section": "Facts & Assumptions",
+          "line": "([[alg-finite-budget-francis-schur-reduction]])."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-rounded-cholesky-two-by-two-residual",
+      "supplier": "alg-rounded-cholesky-with-failure-status",
+      "consumer_path": "items/ex-rounded-cholesky-two-by-two-residual.md",
+      "supplier_path": "items/alg-rounded-cholesky-with-failure-status.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rounded-cholesky-with-failure-status",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-rounded-cholesky-with-failure-status]]: successful factorization uses the rounded pivot and square-root recurrence."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-subnormal-and-overflow-range-failure",
+      "supplier": "alg-balanced-pairwise-summation",
+      "consumer_path": "items/ex-subnormal-and-overflow-range-failure.md",
+      "supplier_path": "items/alg-balanced-pairwise-summation.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-balanced-pairwise-summation",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[alg-balanced-pairwise-summation]]: each internal sum is rounded and the first failure is returned."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-tikhonov-bias-noise-tradeoff",
+      "supplier": "thm-tikhonov-error-chain-with-discretization-and-residual",
+      "consumer_path": "items/ex-tikhonov-bias-noise-tradeoff.md",
+      "supplier_path": "items/thm-tikhonov-error-chain-with-discretization-and-residual.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-tikhonov-error-chain-with-discretization-and-residual",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[thm-tikhonov-error-chain-with-discretization-and-residual]]: For finite matrices, $x^\\dagger-A^\\#_\\lambda b=(I-A^\\#_\\lambda A)x^\\dagger -A^\\#_\\lambda e$ with $A^\\#_\\lambda=(A^*A+\\lambda I)^{-1}A^*$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "ex-two-stage-rosenbrock-factorization-reuse",
+      "supplier": "alg-scaled-householder-reflector-formation-and-application",
+      "consumer_path": "items/ex-two-stage-rosenbrock-factorization-reuse.md",
+      "supplier_path": "items/alg-scaled-householder-reflector-formation-and-application.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-scaled-householder-reflector-formation-and-application",
+          "section": "Facts & Assumptions",
+          "line": "[F3] [[alg-scaled-householder-reflector-formation-and-application]]: on each nonzero stored active column, the specified finite arithmetic forms a reflector, updates the trailing block, and returns either the stored reflector data or a declared failure."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "consumer_path": "items/lem-full-memory-bfgs-dennis-more-condition.md",
+      "supplier_path": "items/alg-full-memory-bfgs-with-curvature-safeguards.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[alg-full-memory-bfgs-with-curvature-safeguards]]: in exact-undamped mode $p_k=-H_kg_k$, $B_k=H_k^{-1}$, $s_k=\\alpha_kp_k$, $y_k=g_{k+1}-g_k$, and the undamped BFGS update is applied after a successful strong Wolfe step."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+      "supplier": "alg-safeguarded-levenberg-marquardt",
+      "consumer_path": "items/lem-levenberg-marquardt-large-damping-forces-sufficient-decrease.md",
+      "supplier_path": "items/alg-safeguarded-levenberg-marquardt.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-safeguarded-levenberg-marquardt",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-safeguarded-levenberg-marquardt]]: the exact step solves $(J^TJ+\\lambda D^TD)p=-J^Tr$, rejection multiplies $\\lambda$ by $\\gamma$, and an actual ratio is tested only on a feasible trial with positive predicted reduction."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "lem-riemannian-trust-region-ratio-accuracy-for-small-radii",
+      "supplier": "alg-riemannian-trust-region",
+      "consumer_path": "items/lem-riemannian-trust-region-ratio-accuracy-for-small-radii.md",
+      "supplier_path": "items/alg-riemannian-trust-region.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-riemannian-trust-region",
+          "section": "Facts & Assumptions",
+          "line": "[F2] The Riemannian trust-region step is feasible, has predicted decrease at least $\\theta_C$ times Cauchy decrease, and uses the Cauchy step when $\\Delta\\le\\|g\\|/(2M_B)$ ([[alg-riemannian-trust-region]])."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "lem-rosenbrock-euler-local-defect",
+      "supplier": "alg-rosenbrock-euler-step",
+      "consumer_path": "items/lem-rosenbrock-euler-local-defect.md",
+      "supplier_path": "items/alg-rosenbrock-euler-step.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rosenbrock-euler-step",
+          "section": "Statement",
+          "line": "Let $K\\subset U\\subset\\mathbb R^d$ be compact and convex, let $f:U\\to\\mathbb R^d$ be continuously differentiable, and suppose $\\|f(y)\\|\\le F$ and $\\|Df(y)\\|\\le L$ on $K$. For $0<h\\le h_0$, assume $I-hDf(y)$ is invertible for every $y\\in K$ with inverse norm at most $B$. If the exact solution starting at $y$ stays in $K$ on $[t,t+h]$, the step $\\Phi_h(y)$ of [[alg-rosenbrock-euler-step]] satisfies"
+        },
+        {
+          "raw_id": "alg-rosenbrock-euler-step",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-rosenbrock-euler-step]]: at state $y$, the successful stage solves $(I-hDf(y))k=f(y)$ and returns $\\Phi_h(y)=y+hk$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "lem-rosenbrock-euler-local-defect-and-residual-error",
+      "supplier": "alg-rosenbrock-euler-step",
+      "consumer_path": "items/lem-rosenbrock-euler-local-defect-and-residual-error.md",
+      "supplier_path": "items/alg-rosenbrock-euler-step.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rosenbrock-euler-step",
+          "section": "Facts & Assumptions",
+          "line": "[F6] [[alg-rosenbrock-euler-step]]: the stage equation is $(I-\\gamma h\\widetilde J)k=f(t,y)$ and the update is $y+hk$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "lem-rosenbrock-euler-step-map-lipschitz",
+      "supplier": "alg-rosenbrock-euler-step",
+      "consumer_path": "items/lem-rosenbrock-euler-step-map-lipschitz.md",
+      "supplier_path": "items/alg-rosenbrock-euler-step.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rosenbrock-euler-step",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-rosenbrock-euler-step]]: $\\Phi_h(y)=y+hM_h(y)^{-1}f(y)$ when $M_h(y)$ is invertible."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "lem-two-sided-scaled-householder-similarity-error",
+      "supplier": "lem-scaled-householder-step-meets-local-backward-error-premise",
+      "consumer_path": "items/lem-two-sided-scaled-householder-similarity-error.md",
+      "supplier_path": "items/lem-scaled-householder-step-meets-local-backward-error-premise.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "lem-scaled-householder-step-meets-local-backward-error-premise",
+          "section": "Statement",
+          "line": "For real arithmetic put $b_m=(1+u)c_m+3u$, with $c_m,\\kappa_m$ from [[lem-scaled-householder-step-meets-local-backward-error-premise]]. With an actual matrix-target column overwrite use $a_m=\\kappa_m$; without such an overwrite use $a_m=b_m$. For complex arithmetic put $b_m=(1+u)c_U+3u$, with $c_U,\\eta_H(m)$ from [[lem-scaled-complex-householder-and-givens-local-backward-error]], and use $a_m=\\eta_H(m)$ or $a_m=b_m$, respectively. Set"
+        },
+        {
+          "raw_id": "lem-scaled-householder-step-meets-local-backward-error-premise",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[lem-scaled-householder-step-meets-local-backward-error-premise]] supplies the real matrix-target bound $\\kappa_m$ and separate-block bound $(1+u)c_m+3u$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+      "supplier": "alg-two-stage-rosenbrock-w-method",
+      "consumer_path": "items/lem-two-stage-rosenbrock-local-defect-and-residual-error.md",
+      "supplier_path": "items/alg-two-stage-rosenbrock-w-method.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-two-stage-rosenbrock-w-method",
+          "section": "Statement",
+          "line": "For exact-arithmetic stages $k_1,q_2,k_2$ of [[alg-two-stage-rosenbrock-w-method]] (with its exact-storage checks successful), define"
+        },
+        {
+          "raw_id": "alg-two-stage-rosenbrock-w-method",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-two-stage-rosenbrock-w-method]]: $W=I-\\alpha h\\widetilde J$, $Wk_1=f+\\alpha h\\widetilde T$, $F_1=f(t+h/2,y+hk_1/2)$, $Wq_2=F_1-k_1$, and $k_2=q_2+k_1$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "prop-stiefel-grassmann-vector-transport-is-tangent",
+      "supplier": "def-stiefel-grassmann-projected-vector-transport",
+      "consumer_path": "items/prop-stiefel-grassmann-vector-transport-is-tangent.md",
+      "supplier_path": "items/def-stiefel-grassmann-projected-vector-transport.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "def-stiefel-grassmann-projected-vector-transport",
+          "section": "Statement",
+          "line": "[[def-stiefel-grassmann-projected-vector-transport]] are smooth linear maps in"
+        },
+        {
+          "raw_id": "def-stiefel-grassmann-projected-vector-transport",
+          "section": "Facts & Assumptions",
+          "line": "[F1] The projected transport formulas are those in [[def-stiefel-grassmann-projected-vector-transport]]."
+        },
+        {
+          "raw_id": "def-stiefel-grassmann-projected-vector-transport",
+          "section": "Facts & Assumptions",
+          "line": "[F4] QR and polar endpoints are frames, and the polar endpoint is right-equivariant ([[def-stiefel-grassmann-projected-vector-transport]])."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves",
+      "supplier": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+      "consumer_path": "items/prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves.md",
+      "supplier_path": "items/alg-rosenbrock-shifted-qr-solver-with-residual-certificate.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]: one factor object stores a single QR factorization and each call to its solve operation applies that factorization and performs one triangular substitution."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-balanced-pairwise-summation-error-bound",
+      "supplier": "alg-balanced-pairwise-summation",
+      "consumer_path": "items/thm-balanced-pairwise-summation-error-bound.md",
+      "supplier_path": "items/alg-balanced-pairwise-summation.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-balanced-pairwise-summation",
+          "section": "Statement",
+          "line": "Let $x_1,\\ldots,x_n\\in\\mathbb R$, $n\\ge1$, be successfully processed by [[alg-balanced-pairwise-summation]] in the operationwise model. Put $d=\\lceil\\log_2 n\\rceil$, assume $du<1$, and set $\\gamma_d=du/(1-du)$. Then"
+        },
+        {
+          "raw_id": "alg-balanced-pairwise-summation",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-balanced-pairwise-summation]]: the tree has depth d and rounds each internal addition."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-bartels-stewart-dense-operation-count",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "consumer_path": "items/thm-bartels-stewart-dense-operation-count.md",
+      "supplier_path": "items/alg-finite-budget-francis-schur-reduction.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-finite-budget-francis-schur-reduction",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-bartels-stewart-sylvester-equation]]: Each Schur candidate is obtained by [[alg-finite-budget-francis-schur-reduction]]; the procedure then checks exact Schur identities, forms two dense transforms, traverses block pairs, and solves local systems of dimension at most four."
+        },
+        {
+          "raw_id": "alg-finite-budget-francis-schur-reduction",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[alg-finite-budget-francis-schur-reduction]]: Its initialization reduces a dense matrix to Hessenberg form with Householder similarities; each active block has at most $\\max(n-2,0)+1$ initial/chase bounded-support reflector updates per sweep, with explicit finite sweep caps."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-bartels-stewart-sylvester-exact-correctness",
+      "supplier": "alg-bartels-stewart-sylvester-equation",
+      "consumer_path": "items/thm-bartels-stewart-sylvester-exact-correctness.md",
+      "supplier_path": "items/alg-bartels-stewart-sylvester-equation.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-bartels-stewart-sylvester-equation",
+          "section": "Statement",
+          "line": "Suppose [[alg-bartels-stewart-sylvester-equation]] returns `success` for $A,B,C$. Then its returned $X$ satisfies $AX+XB=C$. If $\\sigma(A)\\cap(-\\sigma(B))=\\varnothing$, this $X$ is the unique solution."
+        },
+        {
+          "raw_id": "alg-bartels-stewart-sylvester-equation",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-bartels-stewart-sylvester-equation]]: Success requires exact Schur certificates, and the block traversal solves $T_{ii}Y_{ij}+Y_{ij}S_{jj}=D_{ij}-\\sum_{k>i}T_{ik}Y_{kj}-\\sum_{\\ell<j}Y_{i\\ell}S_{\\ell j}$ for every block pair."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-computed-francis-schur-backward-error",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "consumer_path": "items/thm-computed-francis-schur-backward-error.md",
+      "supplier_path": "items/alg-finite-budget-francis-schur-reduction.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-finite-budget-francis-schur-reduction",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-finite-budget-francis-schur-reduction]] records all factors, target operations and signed additive deflation writes with finite controls and explicit statuses; on a certified return it supplies $C_{\\rm acc}$ and the $\\rho,C$ outward recurrence."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+      "supplier": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "consumer_path": "items/thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription.md",
+      "supplier_path": "items/alg-ctrl1-finite-budget-transcription-solver-dispatch.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+          "section": "Statement",
+          "line": "Fix a mesh and a finite transcription generated from the pointwise smooth data in [[def-ctrl1-smooth-transcription-data]]. Suppose its NLP functions have continuous derivatives through order three on an open neighborhood of a KKT point $(z_*,\\mu_*)$, LICQ holds there, every active inequality multiplier is strictly positive, and the second-order sufficient condition holds on the critical cone. Then, after the correct active set is identified, the exact-Hessian full-step branch using [[alg-sqp-exact-hessian-newton-step]] is well-defined from a sufficiently close primal-dual start and converges quadratically to $(z_*,\\mu_*)$. The finite-budget dispatch of [[alg-ctrl1-finite-budget-transcription-solver-dispatch]] may terminate before this local convergence is realized."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-fem-control-active-set-sqp-finite-budget-certificate",
+      "supplier": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+      "consumer_path": "items/thm-fem-control-active-set-sqp-finite-budget-certificate.md",
+      "supplier_path": "items/alg-fem-control-active-set-sqp-with-finite-residual-status.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+          "section": "Statement",
+          "line": "Every `active-kkt-residual-certified` return of [[alg-fem-control-active-set-sqp-with-finite-residual-status]] with reported bound $\\eta$ satisfies the exact active linear solve residual bound $\\|K s+F_A(z)\\|_2\\le\\eta\\le\\tau$. For a quadratic FE reduced objective and affine box constraints, this also bounds the exact active KKT residual of the returned next point. On a nonlinear reduced problem, if the true active set is identified and the OPT6 hypotheses hold, exact-arithmetic full steps started sufficiently close converge quadratically to the active KKT pair. The finite-precision residual bound alone does not imply forward error, box optimality, or an SQP accuracy rate."
+        },
+        {
+          "raw_id": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+          "section": "Facts & Assumptions",
+          "line": "[F1] The finite algorithm reports `certified` only after checking $\\eta\\le\\tau$ and does not label box feasibility or global optimality ([[alg-fem-control-active-set-sqp-with-finite-residual-status]])."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-sqp-finite-precision-kkt-residual-certificate-sound",
+      "supplier": "thm-computed-full-rank-least-squares-backward-stability",
+      "consumer_path": "items/thm-sqp-finite-precision-kkt-residual-certificate-sound.md",
+      "supplier_path": "items/thm-computed-full-rank-least-squares-backward-stability.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-computed-full-rank-least-squares-backward-stability",
+          "section": "Facts & Assumptions",
+          "line": "[F3] [[thm-computed-full-rank-least-squares-backward-stability]] supplies"
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-fem-control-active-set-sqp-finite-budget-certificate",
+      "supplier": "thm-sqp-finite-precision-kkt-residual-certificate-sound",
+      "consumer_path": "items/thm-fem-control-active-set-sqp-finite-budget-certificate.md",
+      "supplier_path": "items/thm-sqp-finite-precision-kkt-residual-certificate-sound.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-sqp-finite-precision-kkt-residual-certificate-sound",
+          "section": "Facts & Assumptions",
+          "line": "[F2] The OPT6 QR certificate bounds the exact residual of its active KKT linear system; the corresponding solution error additionally depends on $\\|K^{-1}\\|$ ([[thm-sqp-finite-precision-kkt-residual-certificate-sound]])."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-fraction-to-boundary-and-primal-dual-gap-certificates",
+      "supplier": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "consumer_path": "items/thm-fraction-to-boundary-and-primal-dual-gap-certificates.md",
+      "supplier_path": "items/alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+          "section": "Statement",
+          "line": "In symmetric-cone mode of [[alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones]], let $s,z$ be strictly interior primal and dual cone variables and let $\\bar\\alpha_s,\\bar\\alpha_z\\in(0,1]$ be their largest boundary-preserving step fractions. If $0<\\beta_s\\le\\bar\\alpha_s$, $0<\\beta_z\\le\\bar\\alpha_z$, and $0<\\eta<1$, then $\\alpha=\\eta\\min(\\beta_s,\\beta_z)$ keeps both updated cone variables interior. The conservative fractions in the algorithm's Lorentz and PSD branches satisfy these inequalities. For any exactly primal- and dual-feasible conic pair, the gap $\\langle z,s\\rangle$ is a rigorous upper bound on primal suboptimality."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-full-memory-bfgs-global-linear-convergence",
+      "supplier": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "consumer_path": "items/thm-full-memory-bfgs-global-linear-convergence.md",
+      "supplier_path": "items/alg-full-memory-bfgs-with-curvature-safeguards.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "section": "Statement",
+          "line": "where $\\|A\\|_2:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$ is the Euclidean operator norm. Fix $0<c_1<c_2<1/2$ for the line searches. Write $\\psi(B):=\\operatorname{tr}(B)-\\log\\det(B)$ as in [[lem-bfgs-trace-determinant-potential-identities]], with $\\operatorname{tr}(B)$ the sum of diagonal entries. Consider the exact, undamped branch of [[alg-full-memory-bfgs-with-curvature-safeguards]] with any SPD initial $H_0$, and suppose every nonstationary line search succeeds. For every generated iterate,"
+        },
+        {
+          "raw_id": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-full-memory-bfgs-with-curvature-safeguards]]: in exact direction mode the method uses $p_k=-H_kg_k$, seeks a strong Wolfe step, and then forms $s_k=\\alpha_kp_k$, $y_k=g_{k+1}-g_k$ and the undamped BFGS update."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-full-memory-bfgs-local-superlinear-convergence",
+      "supplier": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "consumer_path": "items/thm-full-memory-bfgs-local-superlinear-convergence.md",
+      "supplier_path": "items/alg-full-memory-bfgs-with-curvature-safeguards.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "section": "Facts & Assumptions",
+          "line": "[F3] [[alg-full-memory-bfgs-with-curvature-safeguards]]: in exact mode $p_k=-H_kg_k$, $B_k=H_k^{-1}$, and hence $B_kp_k=-g_k$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-gauss-newton-local-linear-contraction",
+      "supplier": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "consumer_path": "items/thm-gauss-newton-local-linear-contraction.md",
+      "supplier_path": "items/alg-gauss-newton-qr-svd-step-with-rank-safeguard.md",
+      "kinds": [
+        "frontmatter:deps"
+      ],
+      "alias_matches": [],
+      "references": [],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-gauss-newton-zero-residual-quadratic-convergence",
+      "supplier": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "consumer_path": "items/thm-gauss-newton-zero-residual-quadratic-convergence.md",
+      "supplier_path": "items/alg-gauss-newton-qr-svd-step-with-rank-safeguard.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[alg-gauss-newton-qr-svd-step-with-rank-safeguard]]: an exact full-rank branch returns the unique minimizer of the linearized residual least-squares problem."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-mixed-precision-refinement-error-recurrence-and-floor",
+      "supplier": "alg-bounded-mixed-precision-iterative-refinement",
+      "consumer_path": "items/thm-mixed-precision-refinement-error-recurrence-and-floor.md",
+      "supplier_path": "items/alg-bounded-mixed-precision-iterative-refinement.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-bounded-mixed-precision-iterative-refinement",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-bounded-mixed-precision-iterative-refinement]]: residual, factorization, and update precisions are distinct; the algorithm represents solve/update error by delta_w and fails inconclusively on missing certificates."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-retraction-armijo-acceptance-and-step-lower-bound",
+      "supplier": "alg-riemannian-armijo-backtracking",
+      "consumer_path": "items/thm-retraction-armijo-acceptance-and-step-lower-bound.md",
+      "supplier_path": "items/alg-riemannian-armijo-backtracking.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-riemannian-armijo-backtracking",
+          "section": "Facts & Assumptions",
+          "line": "[F4] The finite Armijo search tests $t_j=\\beta^j$ and accepts only the sufficient-decrease inequality ([[alg-riemannian-armijo-backtracking]])."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-retraction-armijo-best-iterate-complexity",
+      "supplier": "alg-riemannian-armijo-backtracking",
+      "consumer_path": "items/thm-retraction-armijo-best-iterate-complexity.md",
+      "supplier_path": "items/alg-riemannian-armijo-backtracking.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-riemannian-armijo-backtracking",
+          "section": "Facts & Assumptions",
+          "line": "[F2] An accepted Armijo update satisfies $f(x_{k+1})\\le f(x_k)-a t_k\\|\\operatorname{grad}f(x_k)\\|^2$ ([[alg-riemannian-armijo-backtracking]])."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-revised-simplex-qr-basis-residual-status-sound",
+      "supplier": "alg-revised-simplex-qr-basis-recompute-and-audit",
+      "consumer_path": "items/thm-revised-simplex-qr-basis-residual-status-sound.md",
+      "supplier_path": "items/alg-revised-simplex-qr-basis-recompute-and-audit.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-revised-simplex-qr-basis-recompute-and-audit",
+          "section": "Statement",
+          "line": "For admitted inputs of [[alg-revised-simplex-qr-basis-recompute-and-audit]], the procedure terminates after at most $K$ basis-evaluation attempts with its defined output or failure status. Each completed solve certificate satisfies"
+        },
+        {
+          "raw_id": "alg-revised-simplex-qr-basis-recompute-and-audit",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-revised-simplex-qr-basis-recompute-and-audit]] specifies fresh current-basis QR recomputation, bounded attempts, first failures, established transitions, exact stored-data audit and all return statuses."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-revised-simplex-qr-basis-residual-status-sound",
+      "supplier": "thm-computed-full-rank-least-squares-backward-stability",
+      "consumer_path": "items/thm-revised-simplex-qr-basis-residual-status-sound.md",
+      "supplier_path": "items/thm-computed-full-rank-least-squares-backward-stability.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-computed-full-rank-least-squares-backward-stability",
+          "section": "Facts & Assumptions",
+          "line": "[F2] [[thm-computed-full-rank-least-squares-backward-stability]] supplies a square exactly orthogonal representative $\\widehat Q$, triangular $\\widehat R$, and perturbations"
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-riemannian-trust-region-first-order-complexity",
+      "supplier": "alg-riemannian-trust-region",
+      "consumer_path": "items/thm-riemannian-trust-region-first-order-complexity.md",
+      "supplier_path": "items/alg-riemannian-trust-region.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-riemannian-trust-region",
+          "section": "Statement",
+          "line": "$\\|B_x\\|\\le M_B$. Run [[alg-riemannian-trust-region]] with fixed"
+        },
+        {
+          "raw_id": "alg-riemannian-trust-region",
+          "section": "Facts & Assumptions",
+          "line": "[F1] The finite-budget Riemannian method uses the $\\eta_1,\\eta_2$ ratio thresholds, $\\gamma_{\\rm dec},\\gamma_{\\rm inc}$ radius branches, and the $\\theta_C$ Cauchy-decrease safeguard ([[alg-riemannian-trust-region]])."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+      "supplier": "alg-scaled-householder-reflector-formation-and-application",
+      "consumer_path": "items/thm-rosenbrock-computational-steps-terminate-with-finite-work.md",
+      "supplier_path": "items/alg-scaled-householder-reflector-formation-and-application.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-scaled-householder-reflector-formation-and-application",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-scaled-householder-reflector-formation-and-application]]: its loops range over the finite active column and trailing block, and every elementary operation returns a finite value or a failure status."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-rosenbrock-euler-a-l-stable",
+      "supplier": "alg-rosenbrock-euler-step",
+      "consumer_path": "items/thm-rosenbrock-euler-a-l-stable.md",
+      "supplier_path": "items/alg-rosenbrock-euler-step.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rosenbrock-euler-step",
+          "section": "Statement",
+          "line": "Apply [[alg-rosenbrock-euler-step]] to $y'=\\lambda y$ over $\\mathbb C$, with exact Jacobian $J=\\lambda$ and $z=h\\lambda$. Its scalar amplification factor is $R(z)=(1-z)^{-1}$. For this statement, A-stability means $|R(z)|\\le1$ for every $z$ with $\\operatorname{Re}z\\le0$, and L-stability means A-stability together with $R(z)\\to0$ as real $z\\to-\\infty$. The method is both A-stable and L-stable, and its scalar amplification factor agrees with backward Euler."
+        },
+        {
+          "raw_id": "alg-rosenbrock-euler-step",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-rosenbrock-euler-step]] gives $y^+=y+hk$ with $(1-h\\lambda)k=\\lambda y$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-rosenbrock-euler-global-first-order",
+      "supplier": "alg-rosenbrock-euler-step",
+      "consumer_path": "items/thm-rosenbrock-euler-global-first-order.md",
+      "supplier_path": "items/alg-rosenbrock-euler-step.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rosenbrock-euler-step",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-rosenbrock-euler-step]] defines the step map $\\Phi_h$ by the exact solve $(I-hDf(y))k=f(y)$ and $y^+=y+hk$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-rosenbrock-euler-global-first-order-error",
+      "supplier": "alg-rosenbrock-euler-step",
+      "consumer_path": "items/thm-rosenbrock-euler-global-first-order-error.md",
+      "supplier_path": "items/alg-rosenbrock-euler-step.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rosenbrock-euler-step",
+          "section": "Statement",
+          "line": "At each step $t_n=t_0+nh$, use the one-stage algorithm of [[alg-rosenbrock-euler-step]] with a certified stage residual upper bound $\\rho_n\\le R h$, for a fixed $R\\ge0$, and assume its exact-storage checks succeed. Starting from $y_0=y(t_0)$, suppose the computed states and comparison segments remain in $Q$ and $Nh\\le T$. Then, with"
+        },
+        {
+          "raw_id": "alg-rosenbrock-euler-step",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-rosenbrock-euler-step]]: the stage system is $A(t,y)k=f(t,y)$ with $A(t,y)=I-\\gamma h\\widetilde J(t,y)$ and output $y+hk$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-rosenbrock-euler-one-newton-step-for-backward-euler",
+      "supplier": "alg-rosenbrock-euler-step",
+      "consumer_path": "items/thm-rosenbrock-euler-one-newton-step-for-backward-euler.md",
+      "supplier_path": "items/alg-rosenbrock-euler-step.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rosenbrock-euler-step",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-rosenbrock-euler-step]] returns $y+h(I-hDf(y))^{-1}f(y)$ whenever the stage matrix is invertible."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+      "supplier": "alg-rounded-cholesky-with-failure-status",
+      "consumer_path": "items/thm-rounded-cholesky-componentwise-and-normwise-backward-error.md",
+      "supplier_path": "items/alg-rounded-cholesky-with-failure-status.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-rounded-cholesky-with-failure-status",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-rounded-cholesky-with-failure-status]]: success supplies positive rounded pivots and rounded updates using six-real-operation complex products."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "supplier": "alg-safeguarded-levenberg-marquardt",
+      "consumer_path": "items/thm-safeguarded-levenberg-marquardt-global-stationarity.md",
+      "supplier_path": "items/alg-safeguarded-levenberg-marquardt.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-safeguarded-levenberg-marquardt",
+          "section": "Statement",
+          "line": "Run [[alg-safeguarded-levenberg-marquardt]] in exact arithmetic with at least"
+        },
+        {
+          "raw_id": "alg-safeguarded-levenberg-marquardt",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-safeguarded-levenberg-marquardt]]: a nonstationary exact LM trial is accepted only when $\\rho\\ge\\eta_1$; its damping increases by $\\gamma$ on rejection and decreases only on an accepted high-ratio boundary step, with floor $\\lambda_{\\min}$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-schur-parlett-recurrence-correctness",
+      "supplier": "alg-schur-parlett-matrix-function",
+      "consumer_path": "items/thm-schur-parlett-recurrence-correctness.md",
+      "supplier_path": "items/alg-schur-parlett-matrix-function.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-schur-parlett-matrix-function",
+          "section": "Statement",
+          "line": "If [[alg-schur-parlett-matrix-function]] returns parlett-success for an exact"
+        },
+        {
+          "raw_id": "alg-schur-parlett-matrix-function",
+          "section": "Facts & Assumptions",
+          "line": "([[alg-schur-parlett-matrix-function]])."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-sqp-finite-precision-kkt-residual-certificate-sound",
+      "supplier": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+      "consumer_path": "items/thm-sqp-finite-precision-kkt-residual-certificate-sound.md",
+      "supplier_path": "items/alg-sqp-finite-precision-kkt-qr-solve-and-residual-check.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+          "section": "Statement",
+          "line": "Suppose [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]]"
+        },
+        {
+          "raw_id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]] returns"
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-stiefel-retractions-are-first-order",
+      "supplier": "def-stiefel-qr-polar-retractions",
+      "consumer_path": "items/thm-stiefel-retractions-are-first-order.md",
+      "supplier_path": "items/def-stiefel-qr-polar-retractions.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "def-stiefel-qr-polar-retractions",
+          "section": "Statement",
+          "line": "On the full-column-rank domains of [[def-stiefel-qr-polar-retractions]], the"
+        },
+        {
+          "raw_id": "def-stiefel-qr-polar-retractions",
+          "section": "Facts & Assumptions",
+          "line": "**Given:** $X\\in\\operatorname{St}(n,r)$, the full-rank formulas of [[def-stiefel-qr-polar-retractions]], and $\\eta\\in T_X\\operatorname{St}(n,r)$."
+        },
+        {
+          "raw_id": "def-stiefel-qr-polar-retractions",
+          "section": "Facts & Assumptions",
+          "line": "[F1] The retraction maps are the positive-diagonal QR factor and the polar factor of $X+\\eta$ ([[def-stiefel-qr-polar-retractions]])."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-tikhonov-forward-discretization-and-stopping-coupling",
+      "supplier": "thm-tikhonov-error-chain-with-discretization-and-residual",
+      "consumer_path": "items/thm-tikhonov-forward-discretization-and-stopping-coupling.md",
+      "supplier_path": "items/thm-tikhonov-error-chain-with-discretization-and-residual.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "thm-tikhonov-error-chain-with-discretization-and-residual",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[thm-tikhonov-error-chain-with-discretization-and-residual]]: With"
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-two-stage-rosenbrock-global-order-two",
+      "supplier": "alg-two-stage-rosenbrock-w-method",
+      "consumer_path": "items/thm-two-stage-rosenbrock-global-order-two.md",
+      "supplier_path": "items/alg-two-stage-rosenbrock-w-method.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-two-stage-rosenbrock-w-method",
+          "section": "Statement",
+          "line": "Use the method of [[alg-two-stage-rosenbrock-w-method]] with stage residual upper bounds $\\rho_{1,n}\\le R_1h$ and $\\rho_{2,n}\\le R_2h^2$, where $R_1,R_2$ are fixed, and assume its exact-storage checks succeed. Starting from $y_0=y(t_0)$ and assuming $Nh\\le T$ and all stated tube conditions hold, define"
+        },
+        {
+          "raw_id": "alg-two-stage-rosenbrock-w-method",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-two-stage-rosenbrock-w-method]]: the two stages use $W=I-\\alpha h\\widetilde J$, the midpoint field value, and one shared factorization."
+        }
+      ],
+      "old_only_if_unmatched": false
+    },
+    {
+      "consumer": "thm-two-stage-rosenbrock-scalar-l-stability",
+      "supplier": "alg-two-stage-rosenbrock-w-method",
+      "consumer_path": "items/thm-two-stage-rosenbrock-scalar-l-stability.md",
+      "supplier_path": "items/alg-two-stage-rosenbrock-w-method.md",
+      "kinds": [
+        "frontmatter:deps",
+        "body-reference"
+      ],
+      "alias_matches": [],
+      "references": [
+        {
+          "raw_id": "alg-two-stage-rosenbrock-w-method",
+          "section": "Statement",
+          "line": "For the exact-Jacobian branch of [[alg-two-stage-rosenbrock-w-method]], apply the method to $y'=\\lambda y$, set $z=h\\lambda$, and take $\\widetilde J=\\lambda$, $\\widetilde T=0$. With $\\alpha=1-1/\\sqrt2$, its scalar stability function is"
+        },
+        {
+          "raw_id": "alg-two-stage-rosenbrock-w-method",
+          "section": "Facts & Assumptions",
+          "line": "[F1] [[alg-two-stage-rosenbrock-w-method]]: $W=I-\\alpha h\\widetilde J$, $Wk_1=f+\\alpha h\\widetilde T$, $F_1=f(t+h/2,y+hk_1/2)$, $Wq_2=F_1-k_1$, and $k_2=q_2+k_1$."
+        }
+      ],
+      "old_only_if_unmatched": false
+    }
+  ],
+  "alias_matches": [],
+  "classification_note": "Body-only Remarks/Notes are recorded as actual nonlogical/contextual references; a body link alone does not establish theorem transfer or mathematics satisfaction. Same original owner checks each affected use."
+}

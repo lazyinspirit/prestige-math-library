@@ -1,0 +1,180 @@
+[
+  {
+    "kind": "page",
+    "consumer": "minimum-energy-paths-string-neb-and-saddle-certificates",
+    "supplier": "nonlinear-equations-and-newton-methods",
+    "status": "verified",
+    "supplier_batch": "3",
+    "supplier_item_ids": [
+      "alg-newton-correction-for-vector-residuals",
+      "thm-updated-jacobian-newton-local-quadratic-convergence",
+      "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+      "alg-finite-budget-newton-for-vector-residuals",
+      "lem-newton-contraction-near-an-invertible-derivative",
+      "lem-geometric-sequence-null",
+      "def-c-one-map-and-local-inverse",
+      "def-jacobian-matrix-and-gradient"
+    ],
+    "required_interface": "The vector correction takes a square residual vector and Jacobian and returns the unique solution of J s=-F when J is invertible; the local quadratic theorem requires a C2 residual, a simple root, nonsingular Jacobian there, and a Lipschitz Jacobian on a local ball. The vector Taylor remainder lemma uses the same Euclidean Jacobian-Lipschitz convention. The positive-definite damped-Newton theorem is not applied to an indefinite saddle Hessian.",
+    "affected_claims": [
+      "alg-index-one-eigenvector-following-step uses the exact square vector correction after validated index-one and mode checks",
+      "prop-index-one-eigenvector-step-is-the-local-newton-correction identifies each accepted update with vector Newton and invokes the local quadratic theorem",
+      "thm-dimer-mode-error-contracts-local-saddle-translation uses the vector Newton remainder bound for the gradient field"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "alg-newton-correction-for-vector-residuals",
+        "section": "Definition",
+        "excerpt": "If $A$ is invertible, return\n$(\\texttt{correction},s)$, where $s$ is the unique vector solving\n$$As=-r.$$"
+      },
+      {
+        "item": "thm-updated-jacobian-newton-local-quadratic-convergence",
+        "section": "Statement",
+        "excerpt": "For every $x_0\\in\\overline B_2(x_*,\\rho)$, each update attempted by\n[[alg-finite-budget-newton-for-vector-residuals]] is defined, remains in this\nball, and satisfies\n$$\\|x_{k+1}-x_*\\|_2\\le C\\|x_k-x_*\\|_2^2.$$"
+      },
+      {
+        "item": "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+        "section": "Statement",
+        "excerpt": "Then\n$$\\|F(x)-F(x_*)-J(x)(x-x_*)\\|_2\\le\\frac{L}{2}\\|x-x_*\\|_2^2.$$"
+      }
+    ],
+    "evidence": "Inspected the current algorithm and complete proof bodies. The Hessian is the Jacobian of F=grad V, the validated intervals make that Jacobian invertible, and the local quadratic theorem's nonsingularity and Lipschitz hypotheses are stated explicitly in the consuming proposition. The cited Newton sources remain draft supplier items awaiting the normal independent review; this Step 1 record is not approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-index-one-eigenvector-following-step",
+    "supplier": "alg-newton-correction-for-vector-residuals",
+    "status": "verified",
+    "supplier_batch": "3",
+    "required_interface": "For the exact gradient residual and Hessian Jacobian, an invertible Hessian gives the unique Newton correction solving H p=-grad V. The consumer checks the exact spectral enclosure first and reports a singular-Hessian status if the solve is unavailable.",
+    "affected_claims": [
+      "Step 3 returns the exact Newton correction after a validated index-one mode branch"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "alg-newton-correction-for-vector-residuals",
+        "section": "Definition",
+        "excerpt": "$(\\texttt{correction},s)$, where $s$ is the unique vector solving\n$$As=-r.$$"
+      }
+    ],
+    "evidence": "The current supplier definition was inspected. Its invertibility branch and exact sign convention match A=H(x_k), r=grad V(x_k); no positive-definiteness assumption is present."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-index-one-eigenvector-following-step",
+    "supplier": "thm-updated-jacobian-newton-local-quadratic-convergence",
+    "status": "verified",
+    "supplier_batch": "3",
+    "required_interface": "The local quadratic Newton claim applies only when the residual is C2, the selected root is simple with invertible Jacobian, and the Jacobian is Lipschitz on a local ball. The algorithm's local behavior is conditional on the proposition that checks these hypotheses.",
+    "affected_claims": [
+      "alg-index-one-eigenvector-following-step local quadratic behavior reference"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "thm-updated-jacobian-newton-local-quadratic-convergence",
+        "section": "Statement",
+        "excerpt": "For every $x_0\\in\\overline B_2(x_*,\\rho)$, each update attempted by\n[[alg-finite-budget-newton-for-vector-residuals]] is defined, remains in this\nball, and satisfies\n$$\\|x_{k+1}-x_*\\|_2\\le C\\|x_k-x_*\\|_2^2.$$"
+      }
+    ],
+    "evidence": "The actual batch-3 theorem and complete proof were inspected. The algorithm points to this theorem only as the conditional local guarantee and makes no standalone convergence claim."
+  },
+  {
+    "kind": "item",
+    "consumer": "prop-index-one-eigenvector-step-is-the-local-newton-correction",
+    "supplier": "thm-updated-jacobian-newton-local-quadratic-convergence",
+    "status": "verified",
+    "supplier_batch": "3",
+    "required_interface": "The exact-Jacobian local theorem applies to a C2 square residual with a simple zero, invertible Jacobian there, and a Lipschitz Jacobian on a local ball; each attempted finite update before stopping obeys the quadratic bound, while finite budget may stop first.",
+    "affected_claims": [
+      "prop-index-one-eigenvector-step-is-the-local-newton-correction local quadratic estimate"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "thm-updated-jacobian-newton-local-quadratic-convergence",
+        "section": "Statement",
+        "excerpt": "If the ordinary exact-Jacobian Newton recurrence is continued indefinitely,\nthese estimates imply $x_k\\to x_*$ with a quadratic error bound. A finite\nbudget may stop before the residual tolerance is met; `root` status records\nonly that tolerance, not an exact-zero certificate."
+      }
+    ],
+    "evidence": "Read the supplier statement and complete proof. For F=grad V with V in C4, F is C2; the stated nonsingular index-one critical point is a simple zero of F, and the assumed Hessian-Lipschitz condition is precisely the Jacobian-Lipschitz hypothesis. The consumer preserves the finite-stop qualification."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-dimer-mode-error-contracts-local-saddle-translation",
+    "supplier": "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+    "status": "verified",
+    "supplier_batch": "3",
+    "required_interface": "For F=grad V on a convex ball, the L-Lipschitz Hessian gives ||grad V(x)-H(x_*)(x-x_*)||_2 <= (L/2)||x-x_*||_2^2 because grad V(x_*)=0. This is the nonlinear remainder used to compare translation with its linear reflection map.",
+    "affected_claims": [
+      "thm-dimer-mode-error-contracts-local-saddle-translation one-step local contraction recurrence"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+        "section": "Statement",
+        "excerpt": "Then\n$$\\|F(x)-F(x_*)-J(x)(x-x_*)\\|_2\\le\\frac{L}{2}\\|x-x_*\\|_2^2.$$"
+      }
+    ],
+    "evidence": "The supplier's complete proof was inspected. The closed ball is convex, F=grad V is C1, and its Jacobian is the Hessian with the same Lipschitz constant. The gradient vanishes at x_*, so the exact statement yields the remainder used in the local iteration proof."
+  },
+  {
+    "kind": "page",
+    "consumer": "minimum-energy-paths-string-neb-and-saddle-certificates",
+    "supplier": "numerical-optimization-globalization-and-inexact-certificates",
+    "status": "verified",
+    "supplier_batch": "39",
+    "supplier_item_ids": [
+      "alg-damped-newton",
+      "thm-damped-newton-global-phase-and-local-quadratic-rate"
+    ],
+    "required_interface": "The current damped-Newton theorem assumes a strongly convex objective with mI <= Hessian <= MI on a convex sublevel tube; its local critical Hessian is positive definite. This interface does not apply to an index-one saddle with an indefinite Hessian.",
+    "affected_claims": [],
+    "supplier_excerpts": [
+      {
+        "item": "thm-damped-newton-global-phase-and-local-quadratic-rate",
+        "section": "Statement",
+        "excerpt": "This is a strongly convex objective result; it does not apply to arbitrary vector roots or indefinite Hessians."
+      }
+    ],
+    "evidence": "Inspected the current algorithm and complete theorem proof. No batch-39 algorithm or convergence claim is a logical premise for PC-PATH. The index-one local step uses batch-3 vector Newton, whose hypotheses include invertibility but not positive definiteness."
+  },
+  {
+    "kind": "page",
+    "consumer": "minimum-energy-paths-string-neb-and-saddle-certificates",
+    "supplier": "trust-region-and-cubic-regularization-methods",
+    "status": "verified",
+    "supplier_batch": "72",
+    "supplier_item_ids": [
+      "alg-trust-region-method"
+    ],
+    "required_interface": "The supplied finite Euclidean trust-region method uses a positive Cauchy decrease, predicted/actual ratio, finite candidate filtering, and radius-update branches, and makes no convergence claim from finite subproblem budgets. PC-PATH defines fixed-step string, NEB, and dimer updates and proves no trust-region guarantee.",
+    "affected_claims": [],
+    "supplier_excerpts": [
+      {
+        "item": "alg-trust-region-method",
+        "section": "Definition",
+        "excerpt": "The finite\nsubproblem budget alone does not imply convergence or a complexity bound."
+      }
+    ],
+    "evidence": "Inspected the actual batch-72 algorithm and its dependency interface. The pair contains no trust-region or cubic-regularization claim, so the page requirement is recorded as context only."
+  },
+  {
+    "kind": "page",
+    "consumer": "minimum-energy-paths-string-neb-and-saddle-certificates",
+    "supplier": "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+    "status": "verified",
+    "supplier_batch": "83",
+    "supplier_item_ids": [
+      "alg-riemannian-trust-region"
+    ],
+    "required_interface": "The current method is defined on Stiefel or Grassmann geometry, uses a QR or polar retraction, and forms a tangent or horizontal pullback model. PC-PATH uses Euclidean coordinates on an open subset of R^d and makes no manifold-retraction claim; OPT11 is optional in the controlling design.",
+    "affected_claims": [],
+    "supplier_excerpts": [
+      {
+        "item": "alg-riemannian-trust-region",
+        "section": "Definition",
+        "excerpt": "Let $M=\\operatorname{St}(n,r)$ or $\\operatorname{Gr}(r,n)$, let $f:M\\to\n\\mathbb R$ be smooth, and choose a QR or polar retraction $R$."
+      }
+    ],
+    "evidence": "The actual batch-83 carrier and its current page manifest are present and were inspected. The Riemannian item is not used as a premise; no supplier is missing. This records interface matching only and does not imply independent review or approval of the draft supplier."
+  }
+]

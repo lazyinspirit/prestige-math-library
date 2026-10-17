@@ -1,0 +1,257 @@
+{
+  "group": "ah",
+  "batches": [
+    "55"
+  ],
+  "pages_read": [
+    "hyperbolic-finite-difference-methods",
+    "hyperbolic-finite-difference-methods-examples"
+  ],
+  "items_read": [
+    "def-uniform-grid-and-difference-operators",
+    "def-periodic-one-way-advection-schemes",
+    "def-centered-leapfrog-wave-scheme",
+    "lem-dirichlet-grid-summation-by-parts",
+    "lem-dirichlet-grid-poincare-inequality",
+    "thm-smooth-advection-stencils-consistent",
+    "thm-dirichlet-leapfrog-discrete-energy",
+    "lem-periodic-advection-amplification-symbols",
+    "thm-periodic-centered-wave-amplification-and-endpoint",
+    "thm-periodic-advection-power-stability",
+    "thm-nearest-neighbor-cfl-domain-condition",
+    "ex-wave-cfl-endpoint-and-energy-breakdown",
+    "ex-upwind-versus-downwind-advection",
+    "ex-centered-advection-consistent-but-unstable",
+    "ex-grid-fourier-stability-needs-a-common-space-lift"
+  ],
+  "conventions": [
+    {
+      "convention": "Natural-number time indices include zero. Periodic grids have N≥2 nodes indexed modulo N; finite intervals have N+1 nodes, N−1 interior nodes, and N edges. Grid norms carry weight h, and complex inner products are linear in their first entry. The finite-interval edge pairing has the notation defect recorded below.",
+      "fixed_by": "def-uniform-grid-and-difference-operators",
+      "matters_for": [
+        "lem-dirichlet-grid-summation-by-parts",
+        "lem-dirichlet-grid-poincare-inequality",
+        "thm-dirichlet-leapfrog-discrete-energy",
+        "lem-periodic-advection-amplification-symbols",
+        "thm-periodic-centered-wave-amplification-and-endpoint",
+        "thm-periodic-advection-power-stability"
+      ]
+    },
+    {
+      "convention": "Advection means u_t+a u_x=0. For a>0, upwind uses j−1 and ν=ak/h; negative speeds use reflected stencils and |a|k/h. Finite-interval upwind prescribes only the left inflow value and computes the right outflow node.",
+      "fixed_by": "def-periodic-one-way-advection-schemes",
+      "matters_for": [
+        "thm-smooth-advection-stencils-consistent",
+        "lem-periodic-advection-amplification-symbols",
+        "thm-periodic-advection-power-stability",
+        "thm-nearest-neighbor-cfl-domain-condition",
+        "ex-upwind-versus-downwind-advection"
+      ]
+    },
+    {
+      "convention": "Wave states are real, with Fourier analysis performed on their complexification. Initialization is U¹=U⁰+kV⁰, with V⁰ the discrete initial velocity; homogeneous Dirichlet displacement and velocity have zero endpoints. No initialization convergence order is asserted.",
+      "fixed_by": "def-centered-leapfrog-wave-scheme",
+      "matters_for": [
+        "thm-dirichlet-leapfrog-discrete-energy",
+        "thm-periodic-centered-wave-amplification-and-endpoint",
+        "ex-wave-cfl-endpoint-and-energy-breakdown"
+      ]
+    },
+    {
+      "convention": "Consistency is the one-step residual divided by k, uniformly on each fixed C⁶ periodic solution with bounded derivatives, under two-sided positive bounds on k/h.",
+      "fixed_by": "thm-smooth-advection-stencils-consistent",
+      "matters_for": [
+        "ex-centered-advection-consistent-but-unstable"
+      ]
+    },
+    {
+      "convention": "The wave estimate uses 0<ν≤ν₀<1 and displacement/discrete-velocity data. The mean mode is retained; the repeated Nyquist root at ν=1 requires even N.",
+      "fixed_by": "thm-periodic-centered-wave-amplification-and-endpoint",
+      "matters_for": [
+        "ex-wave-cfl-endpoint-and-energy-breakdown"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-uniform-grid-and-difference-operators",
+      "statement": "Defines the periodic, infinite, and finite-interval index sets, difference operators, weighted grid norms, and interior and edge pairings.",
+      "used_by": [
+        "def-periodic-one-way-advection-schemes",
+        "def-centered-leapfrog-wave-scheme",
+        "lem-dirichlet-grid-summation-by-parts",
+        "lem-dirichlet-grid-poincare-inequality",
+        "lem-periodic-advection-amplification-symbols",
+        "thm-periodic-centered-wave-amplification-and-endpoint",
+        "thm-nearest-neighbor-cfl-domain-condition"
+      ]
+    },
+    {
+      "id": "lem-periodic-advection-amplification-symbols",
+      "statement": "The five periodic advection updates are diagonal in the orthogonal Fourier basis, each Fourier vector having squared norm Nh; their factors and squared moduli are the displayed scheme-specific formulas.",
+      "used_by": [
+        "thm-periodic-advection-power-stability",
+        "thm-nearest-neighbor-cfl-domain-condition",
+        "ex-upwind-versus-downwind-advection",
+        "ex-centered-advection-consistent-but-unstable"
+      ]
+    },
+    {
+      "id": "lem-dirichlet-grid-summation-by-parts",
+      "statement": "⟨u,−Δ_hv⟩_h = ⟨D₊u,D₊v⟩_{e,h} + u₀ conjugate((D₊v)₀) − u_N conjugate((D₋v)_N). On zero-endpoint functions, −Δ_h is self-adjoint and nonnegative.",
+      "used_by": [
+        "thm-dirichlet-leapfrog-discrete-energy"
+      ]
+    },
+    {
+      "id": "thm-periodic-centered-wave-amplification-and-endpoint",
+      "statement": "For 0<ν≤ν₀<1, nonconstant periodic wave roots are distinct and have modulus one, and ‖Uⁿ‖_{2,h}≤(1+ν₀/√(1−ν₀²))‖U⁰‖_{2,h}+t_n‖V⁰‖_{2,h}. At ν=1 and even N, the Nyquist solution is (−1)ⁿ(A+nB), with B=0 exactly when w¹=−w⁰.",
+      "used_by": [
+        "ex-wave-cfl-endpoint-and-energy-breakdown"
+      ]
+    },
+    {
+      "id": "thm-periodic-advection-power-stability",
+      "statement": "Periodic upwind powers contract for 0≤ν≤1; Lax–Friedrichs and Lax–Wendroff powers contract for |ν|≤1. The stated growing-mode conclusions outside these ranges, for downwind, and for centered advection retain the explicit N=2 aliasing exceptions.",
+      "used_by": [
+        "ex-upwind-versus-downwind-advection",
+        "ex-grid-fourier-stability-needs-a-common-space-lift"
+      ]
+    },
+    {
+      "id": "thm-nearest-neighbor-cfl-domain-condition",
+      "statement": "A fixed strict subsequential violation ak/h≥1+ε prevents sampled-maximum convergence for the stated compactly supported datum and infinite-grid homogeneous nearest-neighbor family. Independently, the fixed-period centered family N_q=4q, k_q=h_q/(2a) has unbounded finite-time power norms.",
+      "used_by": [
+        "ex-centered-advection-consistent-but-unstable"
+      ]
+    },
+    {
+      "id": "thm-smooth-advection-stencils-consistent",
+      "statement": "For the stated bounded-derivative C⁶ periodic transport solution and two-sided mesh-ratio bounds, upwind, downwind, centered, and Lax–Friedrichs residuals are uniformly O(h), while Lax–Wendroff residuals are uniformly O(h²).",
+      "used_by": [
+        "ex-centered-advection-consistent-but-unstable"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Natural-number indexing includes zero.",
+      "opened": true
+    },
+    {
+      "id": "def-real-numbers",
+      "used_for": "Real scalar field underlying grid values and spacings.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-numbers-and-arithmetic",
+      "used_for": "Complexification of periodic grid spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-conjugate-real-imaginary-part-and-modulus",
+      "used_for": "Complex pairings, Fourier coordinates, and multiplier moduli.",
+      "opened": true
+    },
+    {
+      "id": "lem-complex-conjugation-and-modulus-laws",
+      "used_for": "Conjugation, multiplicativity, and triangle inequalities in Fourier calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-transport-equation-and-its-characteristic-flow",
+      "used_for": "Transport sign convention and the constant-velocity characteristic equation.",
+      "opened": true
+    },
+    {
+      "id": "cor-taylor-remainder-bound",
+      "used_for": "Uniform spatial and temporal Taylor remainders in stencil consistency.",
+      "opened": true
+    },
+    {
+      "id": "def-ck-and-multi-index-notation-in-several-variables",
+      "used_for": "Ordered mixed derivatives and smoothness hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "thm-symmetry-of-higher-mixed-partials",
+      "used_for": "Commuting derivatives to derive u_tt=a²u_xx and u_ttt=−a³u_xxx.",
+      "opened": true
+    },
+    {
+      "id": "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+      "used_for": "Finite Fourier orthogonality and normalization.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm",
+      "used_for": "Exact power norms and lower bounds obtained from individual modes.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Constant-velocity characteristic uniqueness and constancy along characteristics.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Propagation of nearest-neighbor numerical dependence intervals.",
+      "opened": true
+    },
+    {
+      "id": "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+      "used_for": "A smooth compactly supported datum for the strict CFL obstruction.",
+      "opened": true
+    },
+    {
+      "id": "lem-integer-part",
+      "used_for": "Integer time levels and nearest-grid-point estimates in the CFL proof.",
+      "opened": true
+    },
+    {
+      "id": "def-test-function-space-d-of-an-open-set",
+      "used_for": "Compact-support and real test-function conventions for the CFL datum.",
+      "opened": true
+    },
+    {
+      "id": "def-dependent-choice",
+      "used_for": "Explicit axiom qualification in the conditional common-space Lax citation.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-uniform-grid-and-difference-operators",
+      "concern": "The finite-interval Definition writes ⟨p,q⟩_{e,h}=h Σ_{j=0}^{N−1}(D₊p)_j conjugate((D₊q)_j), whereas the periodic Definition writes the same right-hand side as ⟨D₊p,D₊q⟩_{e,h}. Consequently the finite-interval pairing is defined on nodal functions as a derivative pairing, but lem-dirichlet-grid-summation-by-parts applies it to edge arrays D₊u,D₊v. Those arrays have only N entries, so applying the defined D₊ again requires an unavailable endpoint entry. Thus its displayed identity and the cross term defining thm-dirichlet-leapfrog-discrete-energy are not well-typed under the supplied Definition. The intended finite edge pairing h Σ p_j conjugate(q_j) makes the subsequent finite-sum arguments work, but that is not the definition currently written.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "hyperbolic-finite-difference-methods",
+      "to": "linear-scheme-stability-and-lax-equivalence",
+      "faithful": true,
+      "note": "The common-space example accurately retains one Banach space, one norm, consistency, finite-time power bounds, and the DC qualification. It does not infer convergence directly from varying-grid Fourier bounds."
+    },
+    {
+      "from": "hyperbolic-finite-difference-methods",
+      "to": "stationary-iterations-and-relaxation",
+      "faithful": true,
+      "note": "This is a contextual page prerequisite; the assigned claims do not invoke a stationary-iteration theorem. Their power estimates are proved directly using an orthonormal Fourier basis, so they do not replace power boundedness with a general spectral-radius assertion."
+    },
+    {
+      "from": "hyperbolic-finite-difference-methods",
+      "to": "parabolic-finite-difference-methods",
+      "faithful": true,
+      "note": "The heat-symbol lemma is used in its one-dimensional periodic, unit-diffusivity specialization for the Laplacian eigenvalue and Fourier basis. Neither boundary stability nor heat time-stepping conclusions are imported."
+    },
+    {
+      "from": "renewal-age-and-size-structured-numerical-methods",
+      "to": "hyperbolic-finite-difference-methods",
+      "faithful": true,
+      "note": "The renewal upwind algorithm cites the uniform-grid supplier and independently specifies its cell grid, birth inflow, absorbing outflow, loss term, and transport-plus-loss CFL. It does not import periodic scalar-advection stability as a renewal-boundary estimate."
+    }
+  ]
+}

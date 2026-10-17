@@ -1,0 +1,154 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "61",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-interval-linear-krawczyk-certifier",
+      "model": "gpt-6-luna",
+      "context_sha256": "f1d1a411dc2f09a67246ad9b78e15bcff17243e682843e80f66d1b76fa34dc63",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal metadata misuse: justified_by is reserved for well-definedness, whereas thm-interval-linear-krawczyk-certifier-soundness proves only the conditional output guarantees. Removed that entry from the item and its owning manifest. The alleged logical cycle is not present: the theorem has the permitted forward deps edge to the algorithm, and the finite rectangle evaluation, exact endpoint comparisons, inverse-witness input and status branches already define the procedure without invoking that theorem.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-interval-determinant-sign-certifier-soundness",
+      "model": "gpt-6-luna",
+      "context_sha256": "4b4bbd8bd22cb434f50b4e40455dd3cda4cfac6c04703010e73c4f1fb522d60f",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed a logic defect: original step 1.1 asserted a finite determinant enclosure for every completed return, and step 2.1 incorrectly inferred that every inconclusive return failed both tests on D. The algorithm can instead stop at an overflowing/non-finite operation, where the DAG theorem explicitly supplies no finite enclosure. The repair conditions step 1.1 on a conclusive return and splits step 2.1 into the non-finite failure and finite uninformative-enclosure branches; the theorem Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-interval-linear-krawczyk-certifier",
+      "disposition": "repaired",
+      "post_sha256": "fe99457616d1468299509292706a7badcf1a67daa45fa24e830ab48b0449b9d9",
+      "review_context_sha256": "f4350be5dcea0add4cdae0a7df5724db6b5f8bc696d6877b4e5de5b4080d63d9",
+      "reason": "Reviewed the complete procedure, its interval-operation and DAG suppliers, complex row-sum norm, Krawczyk inclusion theorem, output theorem and owning page/manifest. RS=SR=I is an admissibility premise, not an executed check; it proves R nonsingular. Finite outward K encloses every admitted affine image, inclusion implies existence, and q<1 implies per-pair uniqueness; every non-finite branch withholds the corresponding claim. Only the frontmatter justified_by entry and matching manifest field changed; the Definition is byte-for-byte unchanged. No new choice or prerequisite is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-interval-determinant-sign-certifier-soundness",
+      "disposition": "repaired",
+      "post_sha256": "d1cb399662c15a23c7abe254b6cdca000ad769fa6b88b7e63eb76562467a018b",
+      "review_context_sha256": "c9e11dfe8d5475c99d940e2bf124e3911c7a6022a3fc49de38464a951a8bf5ef",
+      "reason": "Reviewed the finite Leibniz algorithm, DAG theorem and determinant certificate theorem. Conclusive returns require all nodes finite, so the determinant enclosure holds uniformly, excluding zero proves nonsingularity and common sign, and D={0} proves every member singular. Non-finite inconclusive runs assert no finite D; finite inconclusive runs have 0 in D but D is not {0}. Both assert no singularity/sign conclusion. Qualified F1 and repaired both proof steps without changing Statement, dependencies, page promise or choice requirements.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-interval-linear-krawczyk-certifier",
+      "severity": "nonfatal",
+      "locus": "frontmatter",
+      "reason": "Confirmed nonfatal metadata misuse: justified_by is reserved for well-definedness, whereas thm-interval-linear-krawczyk-certifier-soundness proves only the conditional output guarantees. Removed that entry from the item and its owning manifest. The alleged logical cycle is not present: the theorem has the permitted forward deps edge to the algorithm, and the finite rectangle evaluation, exact endpoint comparisons, inverse-witness input and status branches already define the procedure without invoking that theorem.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-interval-determinant-sign-certifier-soundness",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "proof-step",
+      "reason": "Confirmed a logic defect: original step 1.1 asserted a finite determinant enclosure for every completed return, and step 2.1 incorrectly inferred that every inconclusive return failed both tests on D. The algorithm can instead stop at an overflowing/non-finite operation, where the DAG theorem explicitly supplies no finite enclosure. The repair conditions step 1.1 on a conclusive return and splits step 2.1 into the non-finite failure and finite uninformative-enclosure branches; the theorem Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "route-to-frontier-owner",
+      "id": "thm-interval-linear-krawczyk-certifier-soundness",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "affected_use": "items/thm-interval-linear-krawczyk-certifier-soundness.md, F3: \"On an existence-certified return the algorithm checks $RS=SR=I$\".",
+      "invalidated_claim": "The procedure does not execute an inverse-witness check; its input paragraph assumes exact identities RS=SR=I. The theorem remains valid on those admitted inputs, and proof 1.1 correctly uses the supplied identity.",
+      "minimality": "The owning lane can replace \"the algorithm checks $RS=SR=I$ and that\" by wording that distinguishes the admitted inverse-witness premise from the executed inclusion check; leave Statement and algorithm Definition unchanged.",
+      "reason": "Verified the Step-4 presentation concern against both complete current items. This item is unassigned but belongs to the frozen frontier, so route to its ordinary owner without editing or giving it an assigned review. This is not a consequence of an interface change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "alg-interval-linear-krawczyk-certifier",
+      "thm-interval-determinant-sign-certifier-soundness"
+    ],
+    "sources_consulted": [
+      "SCHEMA.md: Algorithms and justified_by rule",
+      "items/def-intervals-rectangles-and-complex-balls.md",
+      "items/def-outward-rounded-interval-and-ball-operations.md",
+      "items/thm-outward-rounded-operations-are-isotone-and-dag-sound.md",
+      "items/def-complex-infinity-matrix-norm.md",
+      "items/lem-complex-infinity-matrix-norm-submultiplicative.md",
+      "items/thm-krawczyk-set-inclusion-existence-and-uniqueness.md",
+      "items/thm-interval-linear-krawczyk-certifier-soundness.md",
+      "library/numerical-linear-algebra-and-approximation/verified-linear-systems-and-spectral-enclosures.md",
+      "items/alg-interval-determinant-sign-certifier.md",
+      "items/thm-interval-determinant-sign-certificate-soundness.md"
+    ],
+    "source_reading": "Local arguments inspected; no external source reading claimed. Elementary finite interval, affine fixed-point and determinant reasoning is familiar.",
+    "validation": [
+      "Owning manifest metadata-only delta checked under shared-write lock.",
+      "Precheck: 2 files, 1 proof checked and passed, algorithm not-applicable, 0 failures; exit 0.",
+      "Rendercheck: 2 files, 0 errors and 0 warnings; exit 0.",
+      "Final batched proof-layout: 2 items, 2 steps, 0 defects; exit 0.",
+      "Initial contract check failed because the algorithm has no proof-contract scope and the first mirror extraction parsed an inline fact citation as trailing tags. Corrected only the theorem mirror and reran with its explicit proof-bearing ID; the final strict check passed.",
+      "Strict focused proof-contract check: ok true, 1 theorem checked, 0 errors and 0 warnings; exit 0."
+    ],
+    "next_action": "Engine collection and independent rejudgment/certification remain engine-owned. The confirmed-fatal item still counts for this round despite its completed repair. Route the unassigned F3 wording concern through its frontier owner.",
+    "unresolved_obligations": [],
+    "repair_complete": true,
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-interval-linear-krawczyk-certifier.md items/thm-interval-determinant-sign-certifier-soundness.md --json",
+        "exit_code": 0,
+        "result": "2 files; 1 direct proof passed; algorithm not-applicable; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-interval-linear-krawczyk-certifier.md items/thm-interval-determinant-sign-certifier-soundness.md --json",
+        "exit_code": 0,
+        "result": "2 checked; 0 errors; 0 warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-61.proof-contracts.json --strict --items thm-interval-determinant-sign-certifier-soundness --json",
+        "exit_code": 0,
+        "result": "ok true; theorem checked; 0 errors; 0 warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-interval-linear-krawczyk-certifier.md items/thm-interval-determinant-sign-certifier-soundness.md",
+        "exit_code": 0,
+        "result": "2 items; 2 steps; 0 defects. Ran once after final item edits; subsequent changes were contract/report-only."
+      }
+    ],
+    "interface_comparison": {
+      "alg-interval-linear-krawczyk-certifier": "Definition unchanged; matches frozen before_statements ce46270c52a8ce92ce1bb4fc891d7bc0fd53ecdd2ec0ac114a4d3b48afb32349.",
+      "thm-interval-determinant-sign-certifier-soundness": "Statement unchanged; matches frozen before_statements 277af02148b9790e8f671a8f8a9481354779f4b9b307054eda25a539f0e1d2a9."
+    },
+    "shared_metadata": "Acquired/reread/edited/checked/released the Step-5 shared lock for the owning manifest field and theorem contract row. Only assigned rows changed; all other contract rows preserved.",
+    "published_ledger": "No published interface or affected published consumer discovered; no published-ledger update proposed."
+  }
+}

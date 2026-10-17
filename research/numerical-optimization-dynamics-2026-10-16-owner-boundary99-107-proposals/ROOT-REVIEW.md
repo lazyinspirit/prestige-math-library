@@ -1,0 +1,7 @@
+# Research-only batches 99–107 boundary candidates
+
+1124 selected boundary row operations: 1123 distinct native template rows plus the malformed BAOAB endpoint anchor. Nine complete before/proposed carriers and source-specific observations live in the two disjoint subdirectories. Historical source/contract content is retained in before carriers; unrelated fields and smoke rows are untouched. No canonical apply, hash, adjudication binding or gate was performed.
+
+Read sub99-102/case-review.json and sub103-107/item-case-review.json with the exact proposed rows. Source bodies were read individually; these boundary observations are not a new mathematical acceptance round. Root owns all hashes and any false-positive reviewed bindings. sub99-102/root-binding-requests.json lists conservative NA requests; sub103-107/root-adjudication-requests.json has the two actual fixed-support iff false positives. The latter theorem's fixed-support predicate is a hypothesis, not its conclusion. The covariance empty row becomes checked for its actual n=0 innovation sum. BAOAB cites real steps 2.2,3.1,4.1 and preserves both growth branches.
+
+review_operations.py defaults to compare/diff only. Its explicitly named --apply mode is reserved to root after source/row review; every selected row must match its before guard and all source guards must remain exact. Unselected parsed contract fields survive. Root must rebind any source revisions and run the real mandatory diagnostics at the appropriate authorized stage; this research package claims no diagnostic success.

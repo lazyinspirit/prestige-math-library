@@ -1,0 +1,30 @@
+---
+id: def-ctrl1-runge-kutta-tableau-and-stage-collocation
+kind: definition
+title: "Runge–Kutta tableaux and stage collocation equations"
+status: draft
+origin: pipeline
+pipeline_run: numerical-optimization-dynamics-2026-10-16
+dependency_level: 2
+deps: [def-ctrl1-smooth-transcription-data, def-ctrl1-control-mesh-and-piecewise-constant-parameterization, def-explicit-runge-kutta-tableau-and-stage-map]
+justified_by: []
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+verification:
+  precheck: n/a
+sources:
+  references:
+    - title: "S. Gros and M. Diehl, Numerical Optimal Control, draft course manuscript, Chapter 13 §13.3"
+      url: "https://www.syscop.de/files/2019ss/NOC/book-NOCSE.pdf"
+      locator: "Printed pp. 239–244: direct collocation stage variables, collocation equations, and quadrature objectives."
+    - title: "W. W. Hager, Runge-Kutta methods in optimal control and the transformed adjoint system, Numerische Mathematik 87 (2000)"
+      url: "https://people.clas.ufl.edu/hager/files/rk.pdf"
+      locator: "Printed pp. 251–257, §§3–4: general Runge–Kutta stage equations and their use in optimal-control transcriptions."
+---
+
+## Definition
+
+Let $s\ge1$ be a stage count, $A=(a_{ik})\in\mathbb R^{s\times s}$, and $b,c\in\mathbb R^s$ satisfy $c_i=\sum_{k=1}^s a_{ik}$ for each $i$. This is a (possibly implicit) Runge–Kutta tableau. On mesh cell $[t_j,t_{j+1}]$ with width $h_j$, a start state $X_{j,0}$ and piecewise-constant control $u_j$, define stage times $t_{j,i}=t_j+c_i h_j$ and the **collocation stage equations**
+$$X_{j,i}=X_{j,0}+h_j\sum_{k=1}^s a_{ik}f(t_{j,k},X_{j,k},u_j),\qquad i=1,\ldots,s.$$
+The equations are admissibly defined only for $X_{j,0}\in\Omega_x$, $u_j\in\Omega_u$, and stage inputs $(t_{j,i},X_{j,i},u_j)\in[0,T]\times\Omega_x\times\Omega_u$ for every $i$, using the domains in [[def-ctrl1-smooth-transcription-data]]. A transcription procedure must check these memberships before each query of $f$, $L$, or their state/control derivatives when requested, including queries within a supplied evaluator or trial stages of an implicit solve, and report a stage-time-domain failure for an invalid time or a stage-domain failure for an invalid state or control without making that query. The corresponding endpoint equation is $X_{j+1,0}=X_{j,0}+h_j\sum_{i=1}^s b_i f(t_{j,i},X_{j,i},u_j)$. In a finite transcription, an implicit tableau's coupled stage residuals are solved internally and the stage variables are eliminated from the outer NLP; the procedure returns the nonlinear stage-solve status and residuals. The quadrature contribution of the cell is $h_j\sum_{i=1}^s b_i L(t_{j,i},X_{j,i},u_j)$. This definition asserts no stage-solution existence, uniqueness, order, stability, or error bound. If $A$ is strictly lower triangular, solve these same stage equations successively for $i=1,\ldots,s$: the equation for $X_{j,i}$ uses only the preceding stage slopes. The coefficient conditions are those of the explicit tableau in [[def-explicit-runge-kutta-tableau-and-stage-map]]; only that algebraic tableau convention is used here. Evaluation uses the closed-horizon domains and failure checks just stated, rather than that item's open-time-state IVP stage-map interface. No extension of $f$ or $L$ to times outside $[0,T]$ is required.

@@ -1,0 +1,540 @@
+[
+  {
+    "order": 2394,
+    "id": "hyperbolic-finite-difference-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Hyperbolic finite-difference methods",
+    "companion": "hyperbolic-finite-difference-methods-examples",
+    "requires": [
+      "wave-energy-finite-propagation-and-huygens",
+      "linear-scheme-stability-and-lax-equivalence",
+      "stationary-iterations-and-relaxation",
+      "parabolic-finite-difference-methods",
+      "finite-fourier-analysis-and-the-fast-fourier-transform"
+    ],
+    "items": [
+      {
+        "id": "def-uniform-grid-and-difference-operators",
+        "kind": "definition",
+        "title": "Uniform periodic, infinite, and Dirichlet grid conventions",
+        "statement": "For N≥2 and h,k>0, define the periodic, infinite, and finite-interval uniform grids, with finite nodes x_j=jh and L=Nh, weighted norms, interior and edge inner products, centered/one-sided differences, and second differences on their stated index sets.",
+        "deps": [
+          "def-natural-numbers",
+          "def-real-numbers",
+          "def-complex-numbers-and-arithmetic",
+          "def-complex-conjugate-real-imaginary-part-and-modulus"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "not-applicable",
+        "axiom_base": "Definition only; no choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.3–§6.6, PDF pp. 85–104: uniform wave/advection grids, grid differences, and weighted mesh norms."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 15, Finite Difference Methods for the One-Way Wave Equation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/286be9198204bea2f7e7d77f88e7b061_MIT18_336S09_lec15.pdf",
+              "locator": "Complete 5-page PDF, pp. 1–4: uniform-grid differences and Fourier-mode symbols."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-periodic-one-way-advection-schemes",
+        "kind": "definition",
+        "title": "Periodic advection schemes and the finite-interval upwind row",
+        "statement": "For u_t+a u_x=0 with a>0, mesh h,k>0, and ν=ak/h, define periodic or infinite-grid upwind, downwind, centered, Lax–Friedrichs, and Lax–Wendroff updates by their stated three-point stencils; set U_j^0=u_0(jh) and reduce periodic indices modulo N. For a<0 reflect j↦−j. On a finite interval define only the upwind branch with U_0^n=g(t_n) at the inflow, compatible initial row U_j^0=u_0(jh), j=1,…,N, and no prescribed value at the outflow.",
+        "deps": [
+          "def-uniform-grid-and-difference-operators",
+          "def-linear-transport-equation-and-its-characteristic-flow"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "not-applicable",
+        "axiom_base": "Definition only; no choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.5–§6.6, PDF pp. 97–104: linear transport, inflow boundary data, and the explicit upwind rows."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lectures 15 and 18",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/286be9198204bea2f7e7d77f88e7b061_MIT18_336S09_lec15.pdf",
+              "locator": "Lecture 15, complete PDF pp. 1–4: upwind, downwind, centered, Lax–Friedrichs, and Lax–Wendroff formulas. Its u_t=c u_x convention is reflected to the present u_t+a u_x=0 convention."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 18, Boundary Conditions for Advection",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/3ed0b03979b2d5868bbf5f44fdc5f3a2_MIT18_336S09_lec18.pdf",
+              "locator": "Complete 3-page PDF, pp. 1–2: upwind inflow/outflow handling and separate numerical boundary data for Lax–Friedrichs/Lax–Wendroff."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-centered-leapfrog-wave-scheme",
+        "kind": "definition",
+        "title": "Centered leapfrog wave recurrence with Dirichlet and periodic rows",
+        "statement": "For a real wave grid with c,h,k>0 and ν=ck/h, prescribe displacement U^0 and discrete initial velocity V^0 and set U^1=U^0+kV^0. Define the centered two-step recurrence on periodic or homogeneous Dirichlet rows, with both initial rows and boundary values explicit; Fourier analysis uses the complex-linear extension.",
+        "deps": [
+          "def-uniform-grid-and-difference-operators"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "not-applicable",
+        "axiom_base": "Definition only; no choice axiom is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.3–§6.4, PDF pp. 85–96: centered explicit wave recurrence, initial/boundary rows, and Fourier analysis."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 15, Finite Difference Methods for the One-Way Wave Equation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/286be9198204bea2f7e7d77f88e7b061_MIT18_336S09_lec15.pdf",
+              "locator": "Complete 5-page PDF, pp. 1–4: centered second-order spatial stencil and explicit time update; used as a difference-method comparison, not as a wave-energy proof."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-dirichlet-grid-summation-by-parts",
+        "kind": "lemma",
+        "title": "One-dimensional discrete summation by parts with boundary terms",
+        "statement": "For complex finite-interval grid functions, the interior inner product and centered second difference satisfy ⟨u,−Δ_hv⟩_h=⟨D_+u,D_+v⟩_{e,h}+u_0 overline((D_+v)_0)−u_N overline((D_-v)_N). Zero endpoints remove the boundary terms and give self-adjoint nonnegativity.",
+        "deps": [
+          "def-uniform-grid-and-difference-operators"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "axiom_base": "No choice axiom is used; the proof is a finite telescoping sum.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.3, PDF pp. 85–89: the finite-grid summation-by-parts identity and homogeneous Dirichlet energy terms."
+            },
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.6, PDF pp. 99–101: one-sided differences and boundary flux terms for inflow transport."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-dirichlet-grid-poincare-inequality",
+        "kind": "lemma",
+        "title": "A finite-grid Poincare inequality for zero endpoint values",
+        "statement": "For a complex grid function with zero endpoint values on a uniform interval L=Nh, the weighted interior norm satisfies ‖w‖_h≤L‖D_+w‖_{e,h}.",
+        "deps": [
+          "def-uniform-grid-and-difference-operators"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "axiom_base": "No choice axiom is used; the proof uses finite sums and exact real algebra.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.3, PDF pp. 87–89: the finite-grid Poincare–Friedrichs estimate used to discuss the endpoint energy norm."
+            },
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.6, PDF pp. 100–101: the telescoping boundary-grid energy calculation."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-smooth-advection-stencils-consistent",
+        "kind": "theorem",
+        "title": "Smooth consistency orders for the five periodic advection stencils",
+        "statement": "For fixed nonzero a and a C^6 periodic solution of u_t+a u_x=0 with bounded derivatives, and two-sided k/h bounds, the sign-selected upwind, downwind, centered and Lax–Friedrichs residuals are O(h), while Lax–Wendroff is O(h²).",
+        "deps": [
+          "def-periodic-one-way-advection-schemes",
+          "cor-taylor-remainder-bound",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-symmetry-of-higher-mixed-partials"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "axiom_base": "No choice axiom is used; the proof uses Taylor remainders and the classical translation solution.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.6, PDF pp. 99–104: upwind truncation error and the exact inflow/outflow setup."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 15, Finite Difference Methods for the One-Way Wave Equation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/286be9198204bea2f7e7d77f88e7b061_MIT18_336S09_lec15.pdf",
+              "locator": "Complete PDF pp. 1–4: Taylor consistency orders for upwind, downwind, centered, and Lax–Wendroff; the Lax–Friedrichs exercise is completed locally with the two-sided k/h condition."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-dirichlet-leapfrog-discrete-energy",
+        "kind": "theorem",
+        "title": "Coercive discrete energy for the Dirichlet leapfrog wave scheme",
+        "statement": "For the real homogeneous-Dirichlet leapfrog recurrence with fixed c>0 and 0<ν=ck/h<1, the displayed adjacent-level energy is conserved and bounds the discrete velocity and averaged spatial gradient with coefficients 1−ν² and c². For fixed c,L and ν≤ν₀<1 it uniformly controls the interior state and velocity over meshes.",
+        "deps": [
+          "def-centered-leapfrog-wave-scheme",
+          "lem-dirichlet-grid-summation-by-parts",
+          "lem-dirichlet-grid-poincare-inequality"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "axiom_base": "No choice axiom is used; the proof uses finite grid sums and exact real arithmetic.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.3, PDF pp. 85–89: discrete wave-energy identity, discrete summation by parts, positivity under cΔt/Δx≤1, and loss of mesh-uniform coercivity at equality."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 15, Finite Difference Methods for the One-Way Wave Equation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/286be9198204bea2f7e7d77f88e7b061_MIT18_336S09_lec15.pdf",
+              "locator": "Complete PDF pp. 1–4: advection comparison only; no discrete second-order wave-energy proof is imported."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-periodic-advection-amplification-symbols",
+        "kind": "lemma",
+        "title": "Amplification symbols for periodic scalar advection stencils",
+        "statement": "On an N-point periodic grid, for z=e^{2πiℓ/N}, C=Re z, S=Im z, and ν=ak/h with a>0, the five one-step factors are g_up=1−ν+νz^{-1}, g_down=1+ν−νz, g_center=1−iνS, g_LF=C−iνS, and g_LW=1−ν²(1−C)−iνS. Their squared moduli are respectively 1−2ν(1−ν)(1−C), 1+2ν(1+ν)(1−C), 1+ν²S², 1−(1−ν²)S², and 1−ν²(1−ν²)(1−C)².",
+        "deps": [
+          "def-periodic-one-way-advection-schemes",
+          "def-uniform-grid-and-difference-operators",
+          "lem-periodic-heat-difference-amplification-symbol",
+          "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "axiom_base": "No choice axiom is used; the proof uses finite Fourier modes and complex arithmetic.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.4, PDF pp. 91–96: Fourier reduction of the centered wave recurrence; §6.6, PDF pp. 99–104: upwind amplification and CFL analysis."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 15, Finite Difference Methods for the One-Way Wave Equation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/286be9198204bea2f7e7d77f88e7b061_MIT18_336S09_lec15.pdf",
+              "locator": "Complete PDF pp. 2–4: amplification factors for upwind, downwind, centered, Lax–Friedrichs, and Lax–Wendroff; signs are reflected to u_t+a u_x=0."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-periodic-centered-wave-amplification-and-endpoint",
+        "kind": "theorem",
+        "title": "Periodic leapfrog amplification, finite-time bounds, and the Nyquist endpoint",
+        "statement": "On a periodic grid of length L=Nh, with ν=ck/h and Fourier coefficient w_ℓ for mode ℓ, each centered leapfrog mode satisfies w_ℓ^{n+1}−2(1−2ν²sin²(πℓ/N))w_ℓ^n+w_ℓ^{n−1}=0. For 0<ν≤ν₀<1, nonconstant roots are distinct and lie on the unit circle and the finite-time grid norm obeys ‖U^n‖≤(1+ν₀/√(1−ν₀²))‖U^0‖+t_n‖V^0‖; the mean mode is w₀^n=w₀^0+t_n V̂₀^0. At ν=1 with even N the Nyquist mode has repeated root −1 and generalized component absent exactly when w^1=−w^0; arbitrary starts have no uniform endpoint power bound.",
+        "deps": [
+          "def-centered-leapfrog-wave-scheme",
+          "def-uniform-grid-and-difference-operators",
+          "lem-periodic-heat-difference-amplification-symbol",
+          "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "axiom_base": "No choice axiom is used; the proof uses finite Fourier modes and a finite root recurrence.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.4, PDF pp. 91–96: exact periodic wave characteristic roots, practical stability estimates, and the strict CFL restriction; §6.3, PDF pp. 87–89: endpoint loss of a mesh-uniform energy coercivity constant."
+            },
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.3, PDF pp. 85–89: finite-grid centered wave energy identity and the equality endpoint distinction."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-periodic-advection-power-stability",
+        "kind": "theorem",
+        "title": "Scheme-specific periodic power stability for scalar advection",
+        "statement": "On periodic grids with a>0, upwind powers are contractions for 0≤ν≤1, and Lax–Friedrichs and Lax–Wendroff powers are contractions for |ν|≤1. Downwind powers grow for every ν>0 on any N≥2 grid. Centered powers grow for every ν≠0 when N≥3; for N=2 the centered stencil aliases to the identity. For the reflected a<0 stencils the same conclusions hold with |ν|.",
+        "deps": [
+          "def-periodic-one-way-advection-schemes",
+          "lem-periodic-advection-amplification-symbols",
+          "def-operator-norm",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "axiom_base": "No choice axiom is used; the proof uses the finite orthogonal Fourier basis.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.4 and §6.6, PDF pp. 91–104: periodic wave and one-way advection amplification calculations."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 15, Finite Difference Methods for the One-Way Wave Equation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/286be9198204bea2f7e7d77f88e7b061_MIT18_336S09_lec15.pdf",
+              "locator": "Complete PDF pp. 2–4: the four named advection scheme stability calculations and CFL ranges."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-nearest-neighbor-cfl-domain-condition",
+        "kind": "theorem",
+        "title": "The nearest-neighbor CFL condition is necessary but not sufficient",
+        "statement": "Under a fixed strict violation ak/h≥1+ε, a homogeneous explicit nearest-neighbor update fails to converge in sampled maximum error from one fixed smooth compact datum. Independently, for fixed-period centered periodic grids N_q=4q with ak_q/h_q=1/2, the z=i mode makes finite-time power norms unbounded for every fixed T.",
+        "deps": [
+          "def-periodic-one-way-advection-schemes",
+          "def-uniform-grid-and-difference-operators",
+          "def-operator-norm",
+          "lem-periodic-advection-amplification-symbols",
+          "def-linear-transport-equation-and-its-characteristic-flow",
+          "cor-mean-value-theorem",
+          "thm-induction-principle",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "lem-integer-part",
+          "def-test-function-space-d-of-an-open-set",
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "axiom_base": "No choice axiom is used; the argument uses finite stencil dependence and the exact translation solution.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.6, PDF pp. 99–104: CFL and domain-of-dependence context for one-way advection."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 15, Finite Difference Methods for the One-Way Wave Equation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/286be9198204bea2f7e7d77f88e7b061_MIT18_336S09_lec15.pdf",
+              "locator": "Complete PDF pp. 1–2: characteristic direction, the upwind CFL condition, and the centered instability despite the same finite-difference setting."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2395,
+    "id": "hyperbolic-finite-difference-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Hyperbolic finite-difference methods — Examples",
+    "companion": "hyperbolic-finite-difference-methods",
+    "requires": [
+      "hyperbolic-finite-difference-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-wave-cfl-endpoint-and-energy-breakdown",
+        "kind": "example",
+        "title": "The Nyquist mode at and beyond the leapfrog CFL endpoint",
+        "statement": "For an even periodic grid, the centered leapfrog Nyquist mode has a repeated root −1 at ν=1 and a growing root when ν>1; the usual modified wave energy is semidefinite at ν=1 and indefinite for ν>1.",
+        "deps": [
+          "def-centered-leapfrog-wave-scheme",
+          "thm-periodic-centered-wave-amplification-and-endpoint",
+          "lem-periodic-heat-difference-amplification-symbol",
+          "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "def-uniform-grid-and-difference-operators"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "axiom_base": "No choice axiom is used; the verification is a finite Fourier-mode calculation.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§6.3–§6.4, PDF pp. 87–96: strict wave-energy coercivity and the periodic explicit-wave root calculation."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-upwind-versus-downwind-advection",
+        "kind": "example",
+        "title": "Upwind damping versus downwind growth on a periodic grid",
+        "statement": "On a four-point periodic grid with ν=1/2, the Fourier mode z=i has upwind multiplier of modulus 1/√2 and downwind multiplier of modulus √(5/2).",
+        "deps": [
+          "def-periodic-one-way-advection-schemes",
+          "lem-periodic-advection-amplification-symbols",
+          "thm-periodic-advection-power-stability"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "axiom_base": "No choice axiom is used; the verification is a finite complex-arithmetic calculation.",
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 15, Finite Difference Methods for the One-Way Wave Equation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/286be9198204bea2f7e7d77f88e7b061_MIT18_336S09_lec15.pdf",
+              "locator": "Complete PDF pp. 2–3: upwind conditional stability and downwind instability; the present advection sign convention is the reflected stencil."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-centered-advection-consistent-but-unstable",
+        "kind": "example",
+        "title": "Centered advection is consistent and unstable under the CFL bound",
+        "statement": "For the fixed-period family N_q=4q, h_q=P/N_q and k_q=h_q/(2a), centered advection has O(h_q) residual on every fixed smooth admissible solution, while the mode ℓ=q has z=i and yields unbounded finite-time power norms.",
+        "deps": [
+          "def-periodic-one-way-advection-schemes",
+          "thm-smooth-advection-stencils-consistent",
+          "lem-periodic-advection-amplification-symbols",
+          "thm-nearest-neighbor-cfl-domain-condition"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "axiom_base": "No choice axiom is used; the verification is a finite Fourier-mode calculation.",
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 15, Finite Difference Methods for the One-Way Wave Equation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/286be9198204bea2f7e7d77f88e7b061_MIT18_336S09_lec15.pdf",
+              "locator": "Complete PDF pp. 1–2: centered consistency order and centered instability."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-grid-fourier-stability-needs-a-common-space-lift",
+        "kind": "example",
+        "title": "Grid Fourier stability alone does not instantiate Lax equivalence",
+        "statement": "For periodic upwind updates on different N-point spaces with fixed 0<ν<1, the grid power bounds do not by themselves satisfy the common-Banach-space hypotheses of the Lax equivalence theorem.",
+        "deps": [
+          "def-periodic-one-way-advection-schemes",
+          "thm-periodic-advection-power-stability",
+          "def-common-space-linear-scheme-interface",
+          "thm-lax-equivalence-for-common-banach-space-schemes",
+          "def-dependent-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "axiom_base": "Dependent Choice is carried because the cited Lax-equivalence supplier assumes DC; no choice axiom is used in the finite-grid calculation.",
+        "sources": {
+          "references": [
+            {
+              "title": "Lloyd N. Trefethen, Finite Difference and Spectral Methods, Chapter 4, §4.2",
+              "url": "https://people.maths.ox.ac.uk/trefethen/4all.pdf",
+              "locator": "Complete PDF pp. 8–13, §4.2: the common Banach-space Lax-equivalence theorem and its same-norm hypotheses."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

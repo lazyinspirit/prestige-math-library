@@ -1,0 +1,233 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "93",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-smolyak-univariate-level-hierarchy",
+      "model": "gpt-6-luna",
+      "context_sha256": "91e2d2ab9ba9cdb9daba9e4483db878b075dc54c6bad3961217dacdf73df9db8",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The opening domain [0,1] incorrectly types Q as a point function, although Q(g)=sum_i w_i g(x_i) unambiguously defines evaluation on real-valued functions. Corrected its domain to {g:[0,1]\u2192R}; no continuity restriction, weights, nodes, details or Simpson conventions change. This is a type-notation defect rather than a false quadrature construction.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-smolyak-rectangular-telescope",
+      "model": "gpt-6-luna",
+      "context_sha256": "579bdd45f67289e7243f851f6c2c8624223f2349259744809a26a106098f8bc7",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 overstates lem-finite-sum-laws: its actual interface gives scalar additivity, scaling and telescoping, not tensor distributivity. The tensor definition nevertheless reduces this step to routine finite scalar algebra. Corrected F3 and made the reduction explicit using zero-extended weights on each terminal node set and expansion of product_j sum_r a_{j,r}(x_j). No theorem statement, hypothesis or prerequisite is missing.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-smolyak-univariate-level-hierarchy",
+      "disposition": "repaired",
+      "post_sha256": "98a64517769aae9efc840334e92164967c9c12c216afbbf926336a6360d9ac47",
+      "review_context_sha256": "789636930c1f1404cd2c794aabca16e71bb6f52e48beb396a4f32714f9df7642",
+      "reason": "Checked the finite evaluation functional, Q_-1=0 and Delta_0=Q_0 conventions, coordinate tensor-weight interpretation, and the actual composite-Simpson algorithm: 2^{ell+1} is even, nested nodes and H(1,4,1)/6 block weights give total mass one. Only the incorrectly displayed domain was repaired. Integral notation retains the cited Riemann-integrability convention.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-smolyak-rectangular-telescope",
+      "disposition": "repaired",
+      "post_sha256": "9d61ef1dc9ee4c31dcd48168a1e3c5abf1a913964296e188f779afe1b884d32c",
+      "review_context_sha256": "bee167da3d9c138bceaecf89b288944d263b81ba6bc575cc5af87e211b7c2d97",
+      "reason": "Checked both proof steps and actual supplier interfaces. For m_j=0 the positive-level sum is empty; otherwise scalar telescoping gives sum Delta_r=Q_mj. Nestedness supplies a common finite coordinate node set. Scalar additivity and scaling expand product_j(sum_r a_jr) into one term per rectangular multi-index; summing against arbitrary f proves equality of functionals. The repaired proof makes this elementary derivation explicit; its Statement remains byte-identical. This is repair verification, not independent acceptance of my edits.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-smolyak-cubature",
+    "lem-smolyak-dyadic-tensor-simpson-convergence",
+    "alg-smolyak-node-deduplication",
+    "lem-smolyak-mixed-simpson-detail-decay",
+    "lem-smolyak-rectangular-telescope",
+    "alg-dimension-adaptive-smolyak-surplus-selection",
+    "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+    "thm-smolyak-polynomial-multi-degree-exactness",
+    "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+    "ex-smolyak-signed-weights-polynomial-chaos-coefficient"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-smolyak-univariate-level-hierarchy",
+      "severity": "nonfatal",
+      "locus": "definition",
+      "finding": "The opening domain [0,1] incorrectly types Q as a point function, although Q(g)=sum_i w_i g(x_i) unambiguously defines evaluation on real-valued functions. Corrected its domain to {g:[0,1]\u2192R}; no continuity restriction, weights, nodes, details or Simpson conventions change. This is a type-notation defect rather than a false quadrature construction.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-smolyak-rectangular-telescope",
+      "severity": "nonfatal",
+      "locus": "facts-block and proof step 2.1",
+      "finding": "F3 overstates lem-finite-sum-laws: its actual interface gives scalar additivity, scaling and telescoping, not tensor distributivity. The tensor definition nevertheless reduces this step to routine finite scalar algebra. Corrected F3 and made the reduction explicit using zero-extended weights on each terminal node set and expansion of product_j sum_r a_{j,r}(x_j). No theorem statement, hypothesis or prerequisite is missing.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "action": "no-update",
+      "reason": "All ten direct dependency/reference consumers of the changed hierarchy Definition are draft frontier items. No published or outside-frontier direct consumer was found in items/ or library/. No published repair or acceptance is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "mathematical_repairs_complete": true,
+    "interface_change": {
+      "id": "def-smolyak-univariate-level-hierarchy",
+      "before": "Let $Q:[0,1]\\to\\mathbb R$ be a finite quadrature functional of the form",
+      "after": "Let $Q:\\{g:[0,1]\\to\\mathbb R\\}\\to\\mathbb R$ be a finite quadrature functional of the form",
+      "effect": "Only this Definition line changed. Nestedness, differences, finite tensor weights and Simpson levels are unchanged. The telescope Statement is byte-identical."
+    },
+    "downstream_reviews": [
+      {
+        "id": "def-smolyak-cubature",
+        "path": "items/def-smolyak-cubature.md",
+        "locus": "Definition, scalar detail and Smolyak functional formulas",
+        "affected_use": "Evaluates tensor differences on f and sums scalar delta_ell(f); the corrected domain explicitly licenses these same function arguments.",
+        "disposition": "use_remains_sound",
+        "reason": "The supplier type correction makes explicit the function arguments already required by this use; no mathematical consumer repair is necessary."
+      },
+      {
+        "id": "lem-smolyak-dyadic-tensor-simpson-convergence",
+        "path": "items/lem-smolyak-dyadic-tensor-simpson-convergence.md",
+        "locus": "Statement; F1; proof step 2.1",
+        "affected_use": "Uses composite-Simpson block weights and Q_L tensor d evaluated on a continuous cube function; neither grid nor tensor weights changed.",
+        "disposition": "use_remains_sound",
+        "reason": "The supplier type correction makes explicit the function arguments already required by this use; no mathematical consumer repair is necessary."
+      },
+      {
+        "id": "alg-smolyak-node-deduplication",
+        "path": "items/alg-smolyak-node-deduplication.md",
+        "locus": "Definition, output and instructions 1\u20132",
+        "affected_use": "Expands Delta_0=Q_0 and Delta_r=Q_r-Q_{r-1} and multiplies finite coordinate weights before evaluating f at tuple nodes; those rules are unchanged.",
+        "disposition": "use_remains_sound",
+        "reason": "The supplier type correction makes explicit the function arguments already required by this use; no mathematical consumer repair is necessary."
+      },
+      {
+        "id": "lem-smolyak-mixed-simpson-detail-decay",
+        "path": "items/lem-smolyak-mixed-simpson-detail-decay.md",
+        "locus": "Statement; F1; proof steps 1.1\u20132.1",
+        "affected_use": "Applies Q_ell and Delta_ell to real-valued one-dimensional sections, then forms tensor details; the corrected full function domain includes these C^4 sections.",
+        "disposition": "use_remains_sound",
+        "reason": "The supplier type correction makes explicit the function arguments already required by this use; no mathematical consumer repair is necessary."
+      },
+      {
+        "id": "lem-smolyak-rectangular-telescope",
+        "path": "items/lem-smolyak-rectangular-telescope.md",
+        "locus": "Statement; F1; proof steps 1.1 and 2.1",
+        "affected_use": "Uses scalar values Q_r(g) for arbitrary one-dimensional g and finite products of tensor weights; the domain correction validates the intended inputs. Its separate assigned citation defect was repaired without changing its Statement.",
+        "disposition": "use_remains_sound",
+        "reason": "The supplier type correction makes explicit the function arguments already required by this use; no mathematical consumer repair is necessary."
+      },
+      {
+        "id": "alg-dimension-adaptive-smolyak-surplus-selection",
+        "path": "items/alg-dimension-adaptive-smolyak-surplus-selection.md",
+        "locus": "Definition, hierarchy input and instruction 3",
+        "affected_use": "Requires supplied finite rules through Gamma levels and evaluates f for each finite tensor surplus; hierarchy node sets, levels and evaluations are preserved.",
+        "disposition": "use_remains_sound",
+        "reason": "The supplier type correction makes explicit the function arguments already required by this use; no mathematical consumer repair is necessary."
+      },
+      {
+        "id": "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+        "path": "items/thm-smolyak-absolute-detail-reconstruction-and-tail-error.md",
+        "locus": "Statement and Given; proof step 1.1",
+        "affected_use": "Assumes tensor rules converge on continuous f and uses the rectangular identity for their evaluations; correcting the one-dimensional functional domain changes none of these hypotheses or values.",
+        "disposition": "use_remains_sound",
+        "reason": "The supplier type correction makes explicit the function arguments already required by this use; no mathematical consumer repair is necessary."
+      },
+      {
+        "id": "thm-smolyak-polynomial-multi-degree-exactness",
+        "path": "items/thm-smolyak-polynomial-multi-degree-exactness.md",
+        "locus": "Statement; F1; proof steps 1.1 and 4.1",
+        "affected_use": "Applies Q_ell and Delta_ell to coordinate polynomials and uses the same even Simpson panel counts and tensor weights; all such inputs lie in the corrected domain.",
+        "disposition": "use_remains_sound",
+        "reason": "The supplier type correction makes explicit the function arguments already required by this use; no mathematical consumer repair is necessary."
+      },
+      {
+        "id": "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+        "path": "items/thm-smolyak-isotropic-mixed-smoothness-work-error-rate.md",
+        "locus": "Statement and proof node-union and error estimates",
+        "affected_use": "Selects the same dyadic Simpson hierarchy for node counts and mixed-regularity error bounds; the type correction changes neither nodes nor weights nor admissible mixed-smooth inputs.",
+        "disposition": "use_remains_sound",
+        "reason": "The supplier type correction makes explicit the function arguments already required by this use; no mathematical consumer repair is necessary."
+      },
+      {
+        "id": "ex-smolyak-signed-weights-polynomial-chaos-coefficient",
+        "path": "items/ex-smolyak-signed-weights-polynomial-chaos-coefficient.md",
+        "locus": "Given; F1; proof steps 2.1\u20133.1",
+        "affected_use": "Evaluates the unchanged Simpson hierarchy through level two on polynomial sections, using endpoint weights 1/6, 1/12, 1/24 and six tensor details; the corrected domain permits all these evaluations.",
+        "disposition": "use_remains_sound",
+        "reason": "The supplier type correction makes explicit the function arguments already required by this use; no mathematical consumer repair is necessary."
+      }
+    ],
+    "page_review": {
+      "path": "library/numerical-linear-algebra-and-approximation/sparse-grid-cubature-and-mixed-regularity.md",
+      "affected_use": "Page inventory and summary construct nested composite-Simpson levels, tensor details and rectangular telescoping.",
+      "disposition": "unchanged; summary remains accurate after the functional-domain correction."
+    },
+    "obligations": [],
+    "checks": [
+      {
+        "check": "scoped precheck",
+        "result": "pass: two files, one proof checked, zero failures; definition not applicable",
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-smolyak-univariate-level-hierarchy.md items/lem-smolyak-rectangular-telescope.md --json"
+      },
+      {
+        "check": "scoped rendercheck",
+        "result": "pass: two files, zero errors and warnings",
+        "command": "node tools/rendercheck.mjs items/def-smolyak-univariate-level-hierarchy.md items/lem-smolyak-rectangular-telescope.md --json"
+      },
+      {
+        "check": "final batched proof-layout",
+        "result": "pass: two items, two numbered steps, zero defects",
+        "command": "node tools/proof-layout.mjs items/def-smolyak-univariate-level-hierarchy.md items/lem-smolyak-rectangular-telescope.md"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-93.proof-contracts.json --strict --items def-smolyak-univariate-level-hierarchy,lem-smolyak-rectangular-telescope --json",
+        "result": "exit 0; both assigned contracts checked, ok true, zero errors and warnings"
+      }
+    ],
+    "contract_repair": "Acquired shared lock, reread current batch-93 contract, updated the five exact hierarchy-domain quotations (including four unchanged consumers), and synchronized only the assigned telescope F1/F3 supplier descriptions, F1 uses and step-2.1 derivation. Strict checks passed before lock release. Prior risk-review text remains historical; no independent acceptance of the repair is claimed.",
+    "source_evidence": {
+      "consulted_local_suppliers": [
+        "items/alg-composite-simpson-rule.md: Definition",
+        "items/def-finite-sum.md: Definition",
+        "items/def-multidimensional-darboux-integral.md: Definition",
+        "items/lem-finite-sum-laws.md: Statement and Proof",
+        "items/def-monoid-finite-product.md: Definition",
+        "items/def-smolyak-cubature.md: Definition (complete current quotation and direct use)"
+      ],
+      "external_sources_consulted": [],
+      "familiarity": "Finite quadrature evaluation, finite scalar telescoping and expansion are familiar; no external source reading is claimed."
+    },
+    "unresolved_uncertainty": []
+  },
+  "gate_resolutions": []
+}

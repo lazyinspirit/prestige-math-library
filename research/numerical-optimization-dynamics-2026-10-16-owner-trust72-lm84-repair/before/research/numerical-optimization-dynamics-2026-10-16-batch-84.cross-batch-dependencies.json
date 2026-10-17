@@ -1,0 +1,135 @@
+[
+  {
+    "kind": "page",
+    "consumer": "gauss-newton-and-levenberg-marquardt-methods",
+    "supplier": "finite-precision-direct-factorizations",
+    "supplier_batch": "1",
+    "status": "verified",
+    "supplier_item_ids": [
+      "alg-scaled-householder-reflector-formation-and-application",
+      "thm-computed-full-rank-least-squares-backward-stability"
+    ],
+    "supplier_item_ids_status": "Both actual bodies and current Step 1 ready records were inspected. The records are owner-authored readiness records, not independent proof acceptance.",
+    "affected_items": [
+      "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "alg-safeguarded-levenberg-marquardt"
+    ],
+    "required_interface": [
+      "Scaled Householder calls terminate or return a declared failure status; the QR algorithm propagates failure.",
+      "Computed full-rank least-squares backward stability is conditional on successful QR/RHS/triangular solve, arithmetic bounds, and nonsingularity of the perturbed triangular factor; the GN algorithm attaches no such conclusion unless every hypothesis holds."
+    ],
+    "evidence": "The exact QR supplier Definition and full computed least-squares theorem Statement/Proof were read. Their current Step 1 records say ready with owner:true. GN computed candidates remain candidates; the conditional theorem is not generalized."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+    "supplier": "alg-scaled-householder-reflector-formation-and-application",
+    "supplier_batch": "1",
+    "status": "verified",
+    "required_hypotheses": [
+      "Each reflector call receives its stated active block and trailing columns, including the right-hand-side column.",
+      "The call either returns its stated transformed block or its finite failure status."
+    ],
+    "affected_claims": [
+      "finite QR-loop termination and failure propagation in step 1.1"
+    ],
+    "evidence": "The actual supplier Definition and Proof were read; its current Step 1 ready record is owner-authored. The local algorithm uses the stated loop and does not infer a stronger factorization accuracy result."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+    "supplier": "thm-computed-full-rank-least-squares-backward-stability",
+    "supplier_batch": "1",
+    "status": "verified",
+    "required_hypotheses": [
+      "Successful scaled Householder QR, right-hand-side transformation and triangular solve.",
+      "The supplier arithmetic bounds hold.",
+      "The perturbed triangular factor is nonsingular."
+    ],
+    "affected_claims": [
+      "conditional backward-stability annotation on the computed QR branch"
+    ],
+    "evidence": "The actual theorem Statement and complete Proof were inspected. Its current Step 1 record is owner-authored and ready; the local Definition expressly withholds backward stability unless the theorem’s success, arithmetic, and nonsingularity premises are all supplied."
+  },
+  {
+    "kind": "page",
+    "consumer": "gauss-newton-and-levenberg-marquardt-methods",
+    "supplier": "nonlinear-equations-and-newton-methods",
+    "supplier_batch": "3",
+    "status": "verified",
+    "supplier_item_ids": [
+      "lem-vector-newton-correction-error-under-lipschitz-jacobian"
+    ],
+    "supplier_item_ids_status": "The current batch-3 page and the square-map lemma body/Step 1 record were inspected. The lemma’s domain is R^n→R^n and is not used as a rectangular residual estimate.",
+    "affected_items": [
+      "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian",
+      "thm-gauss-newton-zero-residual-quadratic-convergence"
+    ],
+    "required_interface": [
+      "No square-map result is imported for a residual map R^n→R^m with m possibly unequal to n.",
+      "The local rectangular lemma instead assumes C^1 residual on open U, convex K⊂U, and L-Lipschitz Euclidean induced Jacobian on K, and proves the L||x−x*||²/2 remainder by vector FTC."
+    ],
+    "evidence": "The actual batch-3 page context and square-only supplier statement/proof were read. The local rectangular lemma proves the needed bound from vector-valued FTC and norm inequalities; no logical item-level edge to the square Newton lemma is added."
+  },
+  {
+    "kind": "page",
+    "consumer": "gauss-newton-and-levenberg-marquardt-methods",
+    "supplier": "trust-region-and-cubic-regularization-methods",
+    "supplier_batch": "72",
+    "status": "open",
+    "supplier_item_ids": [
+      "def-trust-region-quadratic-model-and-ratio",
+      "lem-positive-definite-model-has-unique-newton-step"
+    ],
+    "supplier_item_ids_status": "Both actual bodies were read: the definition gives the model, feasible ball, reduction quantities, and ratio domain; the lemma proves uniqueness for a symmetric positive-definite model. Neither item currently has a Step 1 readiness record; do not infer readiness from body inspection.",
+    "affected_items": [
+      "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+      "alg-safeguarded-levenberg-marquardt",
+      "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+      "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "ex-rank-deficient-identifiability-and-lm-step"
+    ],
+    "required_interface": [
+      "def-trust-region-quadratic-model-and-ratio must retain the Euclidean model convention and define rho only when predicted reduction is positive.",
+      "lem-positive-definite-model-has-unique-newton-step must apply to real symmetric positive-definite J^TJ+lambda D^TD and establish existence/uniqueness of the damped equation solution."
+    ],
+    "affected_claims": [
+      "scaled trust-region interpretation and positive predicted decrease",
+      "LM ratio and finite branch definitions",
+      "large-damping acceptance bound",
+      "global stationarity theorem",
+      "rank-deficient example’s trust-ratio acceptance"
+    ],
+    "evidence": "Both supplier bodies were inspected, but their current Step 1 records are missing. These are the exact unresolved external supplier checks; dependent items are drafted and escalated, not omitted."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+    "supplier": "def-trust-region-quadratic-model-and-ratio",
+    "supplier_batch": "72",
+    "status": "open",
+    "required_hypotheses": [
+      "Trust-region model uses the Euclidean norm in z coordinates.",
+      "The predicted reduction is m(0)−m(z), and a ratio is defined only for positive predicted reduction."
+    ],
+    "affected_claims": [
+      "Statement’s identity with the scaled trust-region model and its positive denominator"
+    ],
+    "evidence": "The current draft Definition body was read and its actual interface matches the local use, but the current Step 1 readiness record is missing; readiness is therefore unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+    "supplier": "lem-positive-definite-model-has-unique-newton-step",
+    "supplier_batch": "72",
+    "status": "open",
+    "required_hypotheses": [
+      "The damped Hessian is symmetric positive definite because D is nonsingular and lambda>0.",
+      "The supplier’s theorem solves the equation for every right-hand side."
+    ],
+    "affected_claims": [
+      "existence and uniqueness of p_lambda"
+    ],
+    "evidence": "The actual supplier Statement and Proof were read and the mathematical hypotheses match, but no current Step 1 readiness record exists."
+  }
+]

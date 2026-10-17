@@ -1,0 +1,38 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-81.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-81.proof-contracts.json (proposed)
+@@ -646,8 +646,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "Definition requires n>=1 and finite positive scaling budget; an empty matrix or empty pair search is outside the valid input domain."
++          "status": "checked",
++          "evidence": "Definition step 2 returns inconclusive-tail-budget if the admissible pair search is empty. Definition step 3 explicitly handles p=0 by retaining w_l=w_(l-1) and epsilon_l=0; hence its empty Taylor-update and error sums are specified rather than excluded."
+         },
+         {
+           "case": "zero",
+@@ -1108,8 +1108,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "Statement assumes n>=1 and finite integer s>=1; there is no empty matrix or empty step sequence."
++          "status": "checked",
++          "evidence": "The Statement permits p=0 and explicitly says empty error sums are zero. Proof step 4.1 counts sp calls, including zero calls for p=0; step 1.3 then has no nonconstant Taylor term, while the tail bound in step 1.1 remains Q_0(R)."
+         },
+         {
+           "case": "zero",
+@@ -1391,7 +1391,12 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "Statement assumes n>=1 and 1<=m<=n; no empty matrix or Krylov basis is included."
++          "reason": "The Arnoldi Statement fixes 1<=m<=n and n>=1. Its column-error sum has exactly m indices and its vectors e_1,e_m are therefore defined; exact happy breakdown zeros the rank-one defect but does not authorize an empty reduced basis.",
++          "reviewed": {
++            "upheld": true,
++            "by": "num_remaining_triage",
++            "reason": "The Arnoldi Statement fixes 1<=m<=n and n>=1. Its column-error sum has exactly m indices and its vectors e_1,e_m are therefore defined; exact happy breakdown zeros the rank-one defect but does not authorize an empty reduced basis."
++          }
+         },
+         {
+           "case": "zero",

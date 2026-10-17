@@ -1,0 +1,252 @@
+[
+  {
+    "order": 2456,
+    "id": "constrained-dynamics-shake-and-rattle",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Constrained dynamics shake and rattle",
+    "companion": "constrained-dynamics-shake-and-rattle-examples",
+    "requires": [
+      "hamiltonian-monte-carlo-and-leapfrog",
+      "implicit-stiff-time-stepping-and-algebraic-error",
+      "differential-algebraic-equations-and-consistent-initialization",
+      "geometric-numerical-integration"
+    ],
+    "items": [
+      {
+        "id": "def-regular-holonomic-phase-space-and-dynamics",
+        "kind": "definition",
+        "title": "Regular holonomic phase space and constrained dynamics",
+        "deps": [],
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-smooth-residual-quotient-extension",
+        "kind": "lemma",
+        "title": "A smooth residual vanishing to finite order has a smooth scaled extension",
+        "deps": [
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-mean-value-inequality-for-total-derivatives"
+        ],
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-regular-holonomic-phase-space-is-symplectic-cotangent",
+        "kind": "lemma",
+        "title": "The regular holonomic phase space is a symplectic cotangent bundle",
+        "deps": [
+          "def-regular-holonomic-phase-space-and-dynamics",
+          "def-symplectic-form-and-symplectic-manifold",
+          "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold",
+        "kind": "lemma",
+        "title": "Holonomic phase residuals control distance to the consistent phase manifold",
+        "deps": [
+          "def-regular-holonomic-phase-space-and-dynamics",
+          "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-mean-value-inequality-for-total-derivatives"
+        ],
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "def-regular-classical-rattle-step-map",
+        "kind": "definition",
+        "title": "Scaled classical RATTLE step map",
+        "deps": [
+          "def-regular-holonomic-phase-space-and-dynamics",
+          "def-leapfrog-step-map"
+        ],
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "thm-local-holonomic-constrained-hamiltonian-flow",
+        "kind": "theorem",
+        "title": "The constrained Hamiltonian vector field has a unique local flow",
+        "deps": [
+          "def-regular-holonomic-phase-space-and-dynamics",
+          "lem-regular-holonomic-phase-space-is-symplectic-cotangent",
+          "thm-picard-lindelof-local-existence-and-uniqueness"
+        ],
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "lem-rattle-scaled-position-and-momentum-branches",
+        "kind": "lemma",
+        "title": "Scaled RATTLE equations have unique local multiplier branches",
+        "deps": [
+          "def-regular-classical-rattle-step-map",
+          "lem-regular-holonomic-phase-space-is-symplectic-cotangent",
+          "lem-smooth-residual-quotient-extension",
+          "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "alg-finite-budget-rattle-step-with-scaled-residuals",
+        "kind": "algorithm",
+        "title": "Finite budget RATTLE solve with scaled constraint residuals",
+        "deps": [
+          "def-regular-classical-rattle-step-map",
+          "lem-rattle-scaled-position-and-momentum-branches",
+          "lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold",
+          "def-implicit-residual-and-algebraic-error-units",
+          "alg-newton-chord-implicit-residual-with-factorization-reuse"
+        ],
+        "dependency_level": 3,
+        "justified_by": [
+          "thm-finite-budget-rattle-solver-returns-status"
+        ]
+      },
+      {
+        "id": "thm-rattle-exact-constraint-preservation-and-reversibility",
+        "kind": "theorem",
+        "title": "Exact RATTLE preserves both constraints and is symmetric",
+        "deps": [
+          "def-regular-holonomic-phase-space-and-dynamics",
+          "def-regular-classical-rattle-step-map",
+          "lem-rattle-scaled-position-and-momentum-branches"
+        ],
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "thm-rattle-symplecticity-on-regular-constraint-phase-space",
+        "kind": "theorem",
+        "title": "Exact RATTLE is symplectic on the constrained phase space",
+        "deps": [
+          "thm-rattle-exact-constraint-preservation-and-reversibility",
+          "def-regular-holonomic-phase-space-and-dynamics",
+          "lem-regular-holonomic-phase-space-is-symplectic-cotangent",
+          "def-regular-classical-rattle-step-map",
+          "lem-rattle-scaled-position-and-momentum-branches",
+          "def-symplectic-form-and-symplectic-manifold"
+        ],
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "thm-finite-budget-rattle-solver-returns-status",
+        "kind": "theorem",
+        "title": "The finite budget RATTLE solver returns a status in finite work",
+        "deps": [
+          "alg-finite-budget-rattle-step-with-scaled-residuals",
+          "alg-newton-chord-implicit-residual-with-factorization-reuse"
+        ],
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "thm-rattle-second-order-global-accuracy-on-compact-tubes",
+        "kind": "theorem",
+        "title": "Exact RATTLE has second order global accuracy on compact tubes",
+        "deps": [
+          "def-regular-holonomic-phase-space-and-dynamics",
+          "thm-local-holonomic-constrained-hamiltonian-flow",
+          "def-regular-classical-rattle-step-map",
+          "lem-rattle-scaled-position-and-momentum-branches",
+          "thm-rattle-exact-constraint-preservation-and-reversibility",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "thm-mean-value-inequality-for-total-derivatives"
+        ],
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "thm-rattle-scaled-solve-residual-error-budget",
+        "kind": "theorem",
+        "title": "Scaled RATTLE residuals bound the finite solve trajectory error",
+        "deps": [
+          "def-regular-holonomic-phase-space-and-dynamics",
+          "def-regular-classical-rattle-step-map",
+          "lem-rattle-scaled-position-and-momentum-branches",
+          "alg-finite-budget-rattle-step-with-scaled-residuals",
+          "def-implicit-residual-and-algebraic-error-units",
+          "lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold",
+          "thm-mean-value-inequality-for-total-derivatives"
+        ],
+        "dependency_level": 4,
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2457,
+    "id": "constrained-dynamics-shake-and-rattle-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Constrained dynamics shake and rattle — Examples",
+    "companion": "constrained-dynamics-shake-and-rattle",
+    "requires": [
+      "constrained-dynamics-shake-and-rattle"
+    ],
+    "items": [
+      {
+        "id": "ex-constrained-pendulum-equations-and-multiplier",
+        "kind": "example",
+        "title": "The constrained pendulum multiplier follows from tangency",
+        "deps": [
+          "def-regular-holonomic-phase-space-and-dynamics",
+          "thm-local-holonomic-constrained-hamiltonian-flow"
+        ],
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "ex-rigid-bond-rattle-free-rotor",
+        "kind": "example",
+        "title": "RATTLE gives an exact step and a cubic phase defect for a free rigid bond",
+        "deps": [
+          "def-regular-holonomic-phase-space-and-dynamics",
+          "def-regular-classical-rattle-step-map",
+          "lem-rattle-scaled-position-and-momentum-branches",
+          "thm-local-holonomic-constrained-hamiltonian-flow",
+          "thm-rattle-exact-constraint-preservation-and-reversibility",
+          "thm-rattle-second-order-global-accuracy-on-compact-tubes",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "dependency_level": 5,
+        "justified_by": []
+      },
+      {
+        "id": "ex-nearly-dependent-constraints-amplify-rattle-residuals",
+        "kind": "example",
+        "title": "Nearly dependent constraints make the multiplier solve ill conditioned",
+        "deps": [
+          "def-regular-holonomic-phase-space-and-dynamics",
+          "thm-rattle-scaled-solve-residual-error-budget"
+        ],
+        "dependency_level": 5,
+        "justified_by": []
+      },
+      {
+        "id": "ex-rattle-residual-budget-and-global-trajectory-drift",
+        "kind": "example",
+        "title": "A fixed RATTLE residual budget allows an O(epsilon) drift envelope",
+        "deps": [
+          "thm-rattle-scaled-solve-residual-error-budget",
+          "lem-rattle-scaled-position-and-momentum-branches",
+          "thm-mean-value-inequality-for-total-derivatives",
+          "lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold",
+          "def-implicit-residual-and-algebraic-error-units"
+        ],
+        "dependency_level": 5,
+        "justified_by": []
+      }
+    ]
+  }
+]

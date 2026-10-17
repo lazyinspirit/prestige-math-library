@@ -1,0 +1,556 @@
+--- a/research/numerical-optimization-dynamics-2026-10-16-batch-91.pages.json
++++ b/research/numerical-optimization-dynamics-2026-10-16-batch-91.pages.json
+@@ -32,6 +32,9 @@
+           "def-ck-and-multi-index-notation-in-several-variables",
+           "def-hessian-and-euclidean-critical-point",
+           "def-jacobian-matrix-and-gradient",
++          "cor-hessian-is-symmetric",
++          "thm-total-derivative-computes-directional-and-partial-derivatives",
++          "thm-chain-rule-for-total-derivatives",
+           "thm-multivariable-taylor-formula-with-lagrange-remainder"
+         ],
+         "dependency_level": 0
+@@ -106,6 +109,7 @@
+         "kind": "definition",
+         "title": "Validated ordered eigenvalue enclosures for an index-one Hessian",
+         "deps": [
++          "cor-hessian-is-symmetric",
+           "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+           "def-hessian-and-euclidean-critical-point",
+           "def-regular-minimum-energy-path-in-a-collision-free-tube"
+@@ -132,7 +136,7 @@
+           "def-ck-and-multi-index-notation-in-several-variables",
+           "lem-centered-chord-and-unequal-step-tangent-error",
+           "thm-chain-rule-for-total-derivatives",
+-          "thm-multivariable-taylor-formula-with-lagrange-remainder"
++          "cor-taylor-lagrange-and-cauchy-remainders"
+         ],
+         "dependency_level": 2
+       },
+@@ -145,9 +149,11 @@
+           "def-validated-eigenvalue-enclosures-for-an-index-one-hessian",
+           "lem-local-root-from-uniformly-small-residual",
+           "thm-courant-fischer-min-max-principle",
+-          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+-          "def-hessian-and-euclidean-critical-point",
+-          "def-jacobian-matrix-and-gradient"
++          "cor-hessian-is-symmetric",
++          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
++          "def-hessian-and-euclidean-critical-point",
++          "def-jacobian-matrix-and-gradient",
++          "thm-total-derivative-computes-directional-and-partial-derivatives"
+         ],
+         "dependency_level": 2
+       },
+@@ -188,6 +194,7 @@
+           "lem-dimer-central-force-hessian-vector-error",
+           "thm-local-index-one-saddle-certificate-from-enclosures",
+           "def-ck-and-multi-index-notation-in-several-variables",
++          "cor-hessian-is-symmetric",
+           "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+           "thm-cauchy-schwarz-and-the-euclidean-norm"
+         ],
+@@ -215,7 +222,9 @@
+           "thm-updated-jacobian-newton-local-quadratic-convergence",
+           "def-regular-minimum-energy-path-in-a-collision-free-tube",
+           "def-hessian-and-euclidean-critical-point",
+-          "def-jacobian-matrix-and-gradient"
++          "def-jacobian-matrix-and-gradient",
++          "cor-hessian-is-symmetric",
++          "thm-total-derivative-computes-directional-and-partial-derivatives"
+         ],
+         "dependency_level": 4
+       },
+@@ -228,10 +237,12 @@
+           "thm-dimer-mode-perturbation-and-local-saddle-error",
+           "thm-local-leading-eigenvector-stability-under-eigengap",
+           "lem-vector-newton-correction-error-under-lipschitz-jacobian",
++          "cor-hessian-is-symmetric",
+           "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+           "def-ck-and-multi-index-notation-in-several-variables",
+           "def-hessian-and-euclidean-critical-point",
+           "def-jacobian-matrix-and-gradient",
++          "thm-total-derivative-computes-directional-and-partial-derivatives",
+           "def-euclidean-inner-product",
+           "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+         ],
+@@ -292,6 +303,7 @@
+           "def-regular-minimum-energy-path-in-a-collision-free-tube",
+           "alg-finite-image-string-method",
+           "def-hessian-and-euclidean-critical-point",
++          "cor-hessian-is-symmetric",
+           "thm-chain-rule-for-total-derivatives",
+           "thm-multivariable-taylor-formula-with-lagrange-remainder"
+         ],
+--- a/research/numerical-optimization-dynamics-2026-10-16-batch-91.proof-contracts.json
++++ b/research/numerical-optimization-dynamics-2026-10-16-batch-91.proof-contracts.json
+@@ -119,6 +119,42 @@
+           ]
+         },
+         {
++          "fact": "F1",
++          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
++          "source_section": "Statement",
++          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
++          "uses": [
++            "1.1"
++          ]
++        },
++        {
++          "fact": "F1",
++          "source": "cor-hessian-is-symmetric",
++          "source_section": "Statement",
++          "quote": "For a $C^2$ scalar field $f$, $H_f(a)^T=H_f(a)$ at every point $a$.",
++          "uses": [
++            "1.1"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "def-ck-and-multi-index-notation-in-several-variables",
++          "source_section": "Definition",
++          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put\n\n$$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$\n\nHere $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of [[def-nat-finite-sum-and-product]], and $n!$ is the factorial of [[def-factorial-and-falling-factorial]]. By contrast, $h^\\alpha$ is the finite product in $\\mathbb R$ of [[def-finite-sum]], with the natural exponents interpreted by [[def-integer-power]]. For the zero multi-index $0$, set $D^0f:=f$. For nonzero $\\alpha$, write\n\n$$D^\\alpha f:=\\partial_0^{\\alpha_0}\\cdots\\partial_{m-1}^{\\alpha_{m-1}}f$$\n\nfor this displayed, canonical order whenever it exists. Coordinate partial derivatives have the meaning fixed in [[def-directional-and-partial-derivatives]].\n\nFor $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$. Thus this definition does **not** presuppose that differently ordered derivatives are equal. Equality of their values is a later theorem under these regularity hypotheses.",
++          "uses": [
++            "1.1"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "thm-chain-rule-for-total-derivatives",
++          "source_section": "Statement",
++          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
++          "uses": [
++            "1.1"
++          ]
++        },
++        {
+           "fact": "F2",
+           "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+           "source_section": "Statement",
+@@ -131,7 +167,7 @@
+       "derivations": [
+         {
+           "id": "derive-1-1",
+-          "claim": "Apply [F2] to each coordinate of $g=\\nabla V$ at $x$ with displacements $\\pm\\epsilon v$. The expansions have linear terms $\\pm\\epsilon\\nabla^2V(x)v$, identical quadratic terms, and remainder vectors $r_\\pm$ with $\\|r_\\pm\\|_2\\le\\sqrt d\\,M_4\\epsilon^3/6$ by [A1]. Subtracting and dividing by $2\\epsilon$ cancels the constant and quadratic terms and gives $\\|D_\\epsilon(x,v)-\\nabla^2V(x)v\\|_2\\le\\sqrt d\\,M_4\\epsilon^2/6$.",
++          "claim": "Let $I$ be the open interval component of $\\{t\\in\\mathbb R:x+tv\\in U\\}$ containing $[-\\epsilon,\\epsilon]$; it exists because that line segment lies in the open set $U$. Each $g_j(t):=\\partial_jV(x+tv)$ is $C^3$ on the open, convex interval $I$. Apply [F2] to $g_j$ at $0$ with displacements $\\pm\\epsilon$. The linear terms are $\\pm\\epsilon(Hv)_j$ by [F1], the quadratic terms agree, and the coordinate remainders satisfy $|(r_\\pm)_j|\\le M_4\\epsilon^3/6$ by [A1]. Thus $\\|r_\\pm\\|_2\\le\\sqrt d\\,M_4\\epsilon^3/6$. Subtracting and dividing by $2\\epsilon$ cancels the constant and quadratic terms and gives $\\|D_\\epsilon(x,v)-\\nabla^2V(x)v\\|_2\\le\\sqrt d\\,M_4\\epsilon^2/6$.",
+           "step": "1.1",
+           "inputs": [
+             "A1",
+@@ -214,7 +250,8 @@
+           "source_section": "Definition",
+           "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.\n\nFor an open $U\\subseteq\\mathbb R^n$ and $a\\in U$, a **local inverse of $f$ at\n$a$** is a function $g:W\\to V$ for open neighbourhoods $a\\in V\\subseteq U$\nand $f(a)\\in W\\subseteq\\mathbb R^n$ such that $f|_V:V\\to W$ is bijective and\n$g=(f|_V)^{-1}$. If both $f|_V$ and $g$ are $C^1$, this restriction is a\n**local diffeomorphism** at $a$.",
+           "uses": [
+-            "1.1"
++            "1.1",
++            "2.1"
+           ]
+         },
+         {
+@@ -296,10 +333,11 @@
+         },
+         {
+           "id": "derive-2-1",
+-          "claim": "The open ball $B_2(x_0,2r)$ is convex and contains the closed radius-$r$ ball. Applying [F3] on that open ball to any two points in $\\overline B_2(x_0,r)$ shows that $\\Phi$ is $1/2$-Lipschitz on the closed ball.",
++          "claim": "On the open convex ball $B_2(x_0,r)$, step 1.1 gives $\\|D\\Phi(y)\\|_{\\rm op}\\le\\beta L\\|y-x_0\\|_2\\le\\beta Lr\\le\\tfrac12$. Applying [F3] on this open ball shows that $\\Phi$ is $1/2$-Lipschitz there. Since $\\Phi$ is continuous on $B_2(x_0,2r)$ by [F1], approximation by interior points extends the same inequality to every pair in $\\overline B_2(x_0,r)$.",
+           "step": "2.1",
+           "inputs": [
+             "given",
++            "F1",
+             "F3",
+             "step 1.1"
+           ]
+@@ -418,7 +456,7 @@
+           "source_section": "Definition",
+           "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+           "uses": [
+-            "4.1"
++            "3.2"
+           ]
+         },
+         {
+@@ -427,7 +465,7 @@
+           "source_section": "Statement",
+           "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+           "uses": [
+-            "4.1"
++            "3.2"
+           ]
+         },
+         {
+@@ -436,7 +474,7 @@
+           "source_section": "Statement",
+           "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.",
+           "uses": [
+-            "4.1"
++            "3.2"
+           ]
+         },
+         {
+@@ -474,6 +512,15 @@
+           "uses": [
+             "4.1",
+             "5.1"
++          ]
++        },
++        {
++          "fact": "F7",
++          "source": "thm-euclidean-space-complete",
++          "source_section": "Statement",
++          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.",
++          "uses": [
++            "3.2"
+           ]
+         }
+       ],
+@@ -512,15 +559,26 @@
+           ]
+         },
+         {
++          "id": "derive-3-2",
++          "claim": "Let $(x^{(m)})$ be Cauchy in $d_\\infty$. For every $j<n$, $|x^{(m)}_j-x^{(l)}_j|\\le d_\\infty(x^{(m)},x^{(l)})$, so the $j$th coordinate sequence is Cauchy in $\\mathbb R$ and converges to some $y_j$ by [F4]. The finitely many unique limits define $y\\in\\mathbb R^n$. Given $\\delta>0$, choose for each $j<n$ an index $K_j$ such that $|x^{(m)}_j-y_j|<\\delta$ for $m\\ge K_j$; since $n\\ge1$, [F7] gives $K=\\max_{j<n}K_j$. Then $d_\\infty(x^{(m)},y)<\\delta$ for $m\\ge K$. Thus $(\\mathbb R^n,d_\\infty)$ is complete.",
++          "step": "3.2",
++          "inputs": [
++            "F4",
++            "F7",
++            "given",
++            "choose"
++          ]
++        },
++        {
+           "id": "derive-4-1",
+-          "claim": "The closed ball is nonempty and complete by [F4] and [F5]. Hence [F6] gives a unique fixed point $x_*\\in\\overline B_\\infty(x_0,r)$. Its fixed-point equation gives $A^{-1}F(x_*)=0$, and invertibility in [F2] yields $F(x_*)=0$.",
++          "claim": "The closed ball is nonempty and complete by step 3.2 and [F5]. Hence [F6] gives a unique fixed point $x_*\\in\\overline B_\\infty(x_0,r)$. Its fixed-point equation gives $A^{-1}F(x_*)=0$, and invertibility in [F2] yields $F(x_*)=0$.",
+           "step": "4.1",
+           "inputs": [
+             "F2",
+-            "F4",
+             "F5",
+             "F6",
+-            "step 3.1"
++            "step 3.1",
++            "step 3.2"
+           ]
+         },
+         {
+@@ -717,7 +775,7 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Definition: The zero-budget or zero-residual stop branch is stated in the finite procedure."
++          "evidence": "Definition: the climbing image has no spring force. The remaining interior images retain the ordinary force. Thus iterations $k=0,\\ldots,n_{\\rm climb}-1$ use ordinary forces and the first climbing force is evaluated at iteration $k=n_{\\rm climb}$. At each iteration report the maximum force norm and spacing residual $\\max_i|\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2|$. Stop with `tolerances-met` only if both are within their declared tolerances. If a tolerance fails and $k=N$, return `budget-exhausted`; only when $k<N$ update every interior image by $R_i^{k+1}=R_i^k+\\eta F_i^k$. Leaving $U$ returns `geometry-failure`. After a valid update set $k\\leftarrow k+1$ and repeat. The tolerance check precedes the budget check, so $N=0$ still checks the initial chain and $n_{\\rm climb}=N$ uses a climbing force at the final residual check (without an update if the budget is then exhausted)."
+         },
+         {
+           "case": "one",
+@@ -1031,9 +1089,9 @@
+         },
+         {
+           "fact": "F3",
+-          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+-          "source_section": "Statement",
+-          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
++          "source": "cor-taylor-lagrange-and-cauchy-remainders",
++          "source_section": "Statement",
++          "quote": "Under the hypotheses of [[thm-taylor-schlomilch-roche-remainder]], there are points $\\xi_L,\\xi_C$ between $a$ and $x$ such that\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_L)}{\\iota((n+1)!)}(x-a)^{n+1}$$\nand\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_C)}{\\iota(n!)}(x-\\xi_C)^n(x-a).$$",
+           "uses": [
+             "1.1",
+             "1.2"
+@@ -1062,7 +1120,7 @@
+       "derivations": [
+         {
+           "id": "derive-1-1",
+-          "claim": "At a mesh interval starting at $s$, Taylor's formula gives $R(s+h)-R(s)=hT+\\frac{h^2}{2}K+r$ with $T=R'(s)$, $K=R''(s)$, $\\|r\\|_2\\le M_3h^3/6$ by [A1, F2], and $\\|K\\|_2\\le K_2$. Differentiating $\\|R'(s)\\|_2^2=1$ gives $T^TK=0$ by the chain rule [F4]. Hence $|\\|R(s+h)-R(s)\\|_2^2-h^2|\\le C h^4$ for a constant depending only on $K_2,M_3$; for sufficiently small $h$ the chord is at least $h/2$, so division by its sum with $h$ yields $|\\ell_i-h|\\le C_1h^3$.",
++          "claim": "On each mesh interval $[s,s+h]$, apply the one-dimensional degree-two formula [F3] to each coordinate of the extended curve at $s$; the endpoint convention supplies the required derivative continuity, and [A1, F2] gives a remainder vector $r$ with $\\|r\\|_2\\le M_3h^3/6$. Thus $R(s+h)-R(s)=hT+\\frac{h^2}{2}K+r$ with $T=R'(s)$, $K=R''(s)$, and $\\|K\\|_2\\le K_2$. Differentiating $\\|R'(s)\\|_2^2=1$ gives $T^TK=0$ by the chain rule [F4]. Hence $|\\|R(s+h)-R(s)\\|_2^2-h^2|\\le C h^4$ for a constant depending only on $K_2,M_3$; for sufficiently small $h$ the chord is at least $h/2$, so division by its sum with $h$ yields $|\\ell_i-h|\\le C_1h^3$.",
+           "step": "1.1",
+           "inputs": [
+             "A1",
+@@ -1076,7 +1134,7 @@
+         },
+         {
+           "id": "derive-1-2",
+-          "claim": "For $s=ih+\\theta h$ with $0\\le\\theta\\le1$, Taylor expansion at $ih$ gives $R(s)=R(ih)+\\theta hR'(ih)+O(K_2h^2)$ and $R((i+1)h)=R(ih)+hR'(ih)+O(K_2h^2)$. Subtracting the linear interpolant cancels the first-order term, so the pointwise interpolation error is bounded by $C_2h^2$, uniformly over all intervals.",
++          "claim": "For $s=ih+\\theta h$ with $0\\le\\theta\\le1$, apply the one-dimensional degree-one formula [F3] on $[ih,s]$ and $[ih,(i+1)h]$. The remainder bound in [F3] and $\\|R''\\|_2\\le K_2$ give $R(s)=R(ih)+\\theta hR'(ih)+O(K_2h^2)$ and $R((i+1)h)=R(ih)+hR'(ih)+O(K_2h^2)$. Subtracting the linear interpolant cancels the first-order term, so the pointwise interpolation error is bounded by $C_2h^2$, uniformly over all intervals.",
+           "step": "1.2",
+           "inputs": [
+             "A1",
+@@ -1168,7 +1226,7 @@
+           "fact": "F1",
+           "source": "def-validated-eigenvalue-enclosures-for-an-index-one-hessian",
+           "source_section": "Definition",
+-          "quote": "Let $V$ and $U$ be as in [[def-regular-minimum-energy-path-in-a-collision-free-tube]], let $x\\in U$, and let $H=\\nabla^2V(x)$ use the convention of [[def-hessian-and-euclidean-critical-point]]. By the real spectral theorem [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]], $H$ has ordered eigenvalues $\\lambda_1(H)\\le\\cdots\\le\\lambda_d(H)$.\n\nA **validated ordered eigenvalue enclosure** is a list of intervals $I_j=[\\ell_j,u_j]$ together with an independently checked certificate proving $\\lambda_j(H)\\in I_j$ for every $j$ and preserving the stated ordering. The exact Hessian $H$, interval arithmetic or another validated spectral method, and all rounding assumptions used by the certificate are part of that external certificate; a Ritz value or residual alone is not, by definition, such a certificate.\n\nFor $d\\ge2$ and $\\gamma>0$, the enclosure certifies **index one with gap $\\gamma$** when $u_1\\le-\\gamma$ and $\\ell_j\\ge\\gamma$ for every $j\\ge2$. For $d=1$, the condition is $u_1\\le-\\gamma$, with no positive-eigenvalue clauses. A validated enclosure records the input evidence; this definition does not assert that any particular eigensolver produces it.",
++          "quote": "Let $V$ and $U$ be as in [[def-regular-minimum-energy-path-in-a-collision-free-tube]], let $x\\in U$, and let $H=\\nabla^2V(x)$ use the convention of [[def-hessian-and-euclidean-critical-point]]. Since $V\\in C^4(U)$, it is $C^2$; [[cor-hessian-is-symmetric]] gives $H^T=H$. In the standard Euclidean inner product this makes the endomorphism represented by $H$ self-adjoint. Therefore the real spectral theorem [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]] applies, and $H$ has ordered eigenvalues $\\lambda_1(H)\\le\\cdots\\le\\lambda_d(H)$.\n\nA **validated ordered eigenvalue enclosure** is a list of intervals $I_j=[\\ell_j,u_j]$ together with an independently checked certificate proving $\\lambda_j(H)\\in I_j$ for every $j$ and preserving the stated ordering. The exact Hessian $H$, interval arithmetic or another validated spectral method, and all rounding assumptions used by the certificate are part of that external certificate; a Ritz value or residual alone is not, by definition, such a certificate.\n\nFor $d\\ge2$ and $\\gamma>0$, the enclosure certifies **index one with gap $\\gamma$** when $u_1\\le-\\gamma$ and $\\ell_j\\ge\\gamma$ for every $j\\ge2$. For $d=1$, the condition is $u_1\\le-\\gamma$, with no positive-eigenvalue clauses. A validated enclosure records the input evidence; this definition does not assert that any particular eigensolver produces it.",
+           "uses": [
+             "1.1",
+             "2.1",
+@@ -1178,9 +1236,9 @@
+         },
+         {
+           "fact": "F2",
+-          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+-          "source_section": "Statement",
+-          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
++          "source": "cor-hessian-is-symmetric",
++          "source_section": "Statement",
++          "quote": "For a $C^2$ scalar field $f$, $H_f(a)^T=H_f(a)$ at every point $a$.",
+           "uses": [
+             "1.1",
+             "3.1",
+@@ -1188,6 +1246,17 @@
+           ]
+         },
+         {
++          "fact": "F2",
++          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
++          "source_section": "Statement",
++          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
++          "uses": [
++            "1.1",
++            "3.1",
++            "4.1"
++          ]
++        },
++        {
+           "fact": "F3",
+           "source": "def-hessian-and-euclidean-critical-point",
+           "source_section": "Definition",
+@@ -1201,6 +1270,24 @@
+           "source": "def-jacobian-matrix-and-gradient",
+           "source_section": "Definition",
+           "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
++          "uses": [
++            "2.1"
++          ]
++        },
++        {
++          "fact": "F3",
++          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
++          "source_section": "Statement",
++          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
++          "uses": [
++            "2.1"
++          ]
++        },
++        {
++          "fact": "F3",
++          "source": "cor-hessian-is-symmetric",
++          "source_section": "Statement",
++          "quote": "For a $C^2$ scalar field $f$, $H_f(a)^T=H_f(a)$ at every point $a$.",
+           "uses": [
+             "2.1"
+           ]
+@@ -1353,7 +1440,7 @@
+           "fact": "F3",
+           "source": "lem-arc-length-polyline-interpolation-error",
+           "source_section": "Statement",
+-          "quote": "Let $L>0$, let $M\\ge1$ be an integer, and let $R:[0,L]\\to\\mathbb R^d$ be a unit-speed $C^3$ curve with $M$ equal arc-length intervals of length $h=L/M$. Suppose $\\|R''\\|_2\\le K_2$ and the coordinate third derivatives satisfy the bound in [[lem-centered-chord-and-unequal-step-tangent-error]] with constant $M_3$. For sufficiently small $h$, each chord length $\\ell_i=\\|R(ih)-R((i-1)h)\\|_2$ satisfies $|\\ell_i-h|\\le C_1h^3$, where $C_1$ depends only on $K_2,M_3$. The piecewise-linear interpolant through the samples differs from $R$ in supremum norm by at most $C_2h^2$. If this polygon is redistributed by linear interpolation at equally spaced cumulative-length targets, the $j$th redistributed image is within $C_3h^2$ of $R(jh)$, for every $j=0,\\ldots,M$.",
++          "quote": "Let $L>0$, let $M\\ge1$ be an integer, and let $R:[0,L]\\to\\mathbb R^d$ be a unit-speed $C^3$ curve with $M$ equal arc-length intervals of length $h=L/M$. Suppose $\\|R''\\|_2\\le K_2$ and the coordinate third derivatives satisfy the bound in [[lem-centered-chord-and-unequal-step-tangent-error]] with constant $M_3$. For sufficiently small $h$, each chord length $\\ell_i=\\|R(ih)-R((i-1)h)\\|_2$ satisfies $|\\ell_i-h|\\le C_1h^3$, where $C_1$ depends only on $K_2,M_3$. The piecewise-linear interpolant through the samples differs from $R$ in supremum norm by at most $C_2h^2$. If this polygon is redistributed by linear interpolation at equally spaced cumulative-length targets, the $j$th redistributed image is within $C_3h^2$ of $R(jh)$, for every $j=0,\\ldots,M$.\n\nHere $C^3$ on $[0,L]$ means that $R$ is the restriction of a $C^3$ curve on an open interval containing $[0,L]$; derivatives at the endpoints are the continuous one-sided values, and the unit-speed and derivative bounds are required on $[0,L]$.",
+           "uses": [
+             "1.2",
+             "2.1"
+@@ -1508,6 +1595,26 @@
+             "1.1",
+             "1.2"
+           ]
++        },
++        {
++          "fact": "F4",
++          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
++          "source_section": "Statement",
++          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
++          "uses": [
++            "1.1",
++            "1.2"
++          ]
++        },
++        {
++          "fact": "F4",
++          "source": "cor-hessian-is-symmetric",
++          "source_section": "Statement",
++          "quote": "For a $C^2$ scalar field $f$, $H_f(a)^T=H_f(a)$ at every point $a$.",
++          "uses": [
++            "1.1",
++            "1.2"
++          ]
+         }
+       ],
+       "derivations": [
+@@ -1604,11 +1711,20 @@
+           "fact": "A1",
+           "source": "def-validated-eigenvalue-enclosures-for-an-index-one-hessian",
+           "source_section": "Definition",
+-          "quote": "Let $V$ and $U$ be as in [[def-regular-minimum-energy-path-in-a-collision-free-tube]], let $x\\in U$, and let $H=\\nabla^2V(x)$ use the convention of [[def-hessian-and-euclidean-critical-point]]. By the real spectral theorem [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]], $H$ has ordered eigenvalues $\\lambda_1(H)\\le\\cdots\\le\\lambda_d(H)$.\n\nA **validated ordered eigenvalue enclosure** is a list of intervals $I_j=[\\ell_j,u_j]$ together with an independently checked certificate proving $\\lambda_j(H)\\in I_j$ for every $j$ and preserving the stated ordering. The exact Hessian $H$, interval arithmetic or another validated spectral method, and all rounding assumptions used by the certificate are part of that external certificate; a Ritz value or residual alone is not, by definition, such a certificate.\n\nFor $d\\ge2$ and $\\gamma>0$, the enclosure certifies **index one with gap $\\gamma$** when $u_1\\le-\\gamma$ and $\\ell_j\\ge\\gamma$ for every $j\\ge2$. For $d=1$, the condition is $u_1\\le-\\gamma$, with no positive-eigenvalue clauses. A validated enclosure records the input evidence; this definition does not assert that any particular eigensolver produces it.",
++          "quote": "Let $V$ and $U$ be as in [[def-regular-minimum-energy-path-in-a-collision-free-tube]], let $x\\in U$, and let $H=\\nabla^2V(x)$ use the convention of [[def-hessian-and-euclidean-critical-point]]. Since $V\\in C^4(U)$, it is $C^2$; [[cor-hessian-is-symmetric]] gives $H^T=H$. In the standard Euclidean inner product this makes the endomorphism represented by $H$ self-adjoint. Therefore the real spectral theorem [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]] applies, and $H$ has ordered eigenvalues $\\lambda_1(H)\\le\\cdots\\le\\lambda_d(H)$.\n\nA **validated ordered eigenvalue enclosure** is a list of intervals $I_j=[\\ell_j,u_j]$ together with an independently checked certificate proving $\\lambda_j(H)\\in I_j$ for every $j$ and preserving the stated ordering. The exact Hessian $H$, interval arithmetic or another validated spectral method, and all rounding assumptions used by the certificate are part of that external certificate; a Ritz value or residual alone is not, by definition, such a certificate.\n\nFor $d\\ge2$ and $\\gamma>0$, the enclosure certifies **index one with gap $\\gamma$** when $u_1\\le-\\gamma$ and $\\ell_j\\ge\\gamma$ for every $j\\ge2$. For $d=1$, the condition is $u_1\\le-\\gamma$, with no positive-eigenvalue clauses. A validated enclosure records the input evidence; this definition does not assert that any particular eigensolver produces it.",
+           "uses": [
+             "1.1",
+             "4.1",
+             "5.1"
++          ]
++        },
++        {
++          "fact": "F1",
++          "source": "cor-hessian-is-symmetric",
++          "source_section": "Statement",
++          "quote": "For a $C^2$ scalar field $f$, $H_f(a)^T=H_f(a)$ at every point $a$.",
++          "uses": [
++            "1.1"
+           ]
+         },
+         {
+@@ -1772,7 +1888,7 @@
+           "fact": "F1",
+           "source": "alg-improved-tangent-climbing-neb",
+           "source_section": "Definition",
+-          "quote": "Let $U,V,a,b$ satisfy [[def-regular-minimum-energy-path-in-a-collision-free-tube]]. **Inputs:** an integer $M\\ge2$, images $R_0=a,R_1,\\ldots,R_M=b$ in $U$, spring constant $k\\ge0$, fixed step $\\eta>0$, force and spacing tolerances $\\tau_F,\\tau_s\\ge0$, an ordinary-step count $n_{\\rm climb}\\in\\mathbb N_0$, and a finite update budget $N\\in\\mathbb N_0$. Require $n_{\\rm climb}\\le N$. **Output:** the last chain and one of `tolerances-met`, `tangent-failure`, `geometry-failure`, `nonfinite-evaluation`, or `budget-exhausted`.\n\nAt each iteration, endpoints are fixed and only interior images are updated. For $i=1,\\ldots,M-1$, write $\\Delta_i^+=R_{i+1}-R_i$, $\\Delta_i^-=R_i-R_{i-1}$, and $V_i=V(R_i)$. Select an unnormalized tangent by\n\n$$\\tau_i=\\begin{cases}\\Delta_i^+,&V_{i+1}>V_i>V_{i-1},\\\\\\Delta_i^-,&V_{i+1}<V_i<V_{i-1},\\\\w_{\\max}\\Delta_i^+ + w_{\\min}\\Delta_i^-,&\\text{otherwise and }V_{i+1}>V_{i-1},\\\\w_{\\min}\\Delta_i^+ + w_{\\max}\\Delta_i^-,&\\text{otherwise and }V_{i+1}<V_{i-1},\\\\\\Delta_i^++\\Delta_i^-,&V_{i+1}=V_{i-1},\\end{cases}$$\n\nwhere $w_{\\max}=\\max(|V_{i+1}-V_i|,|V_{i-1}-V_i|)$ and $w_{\\min}=\\min(|V_{i+1}-V_i|,|V_{i-1}-V_i|)$. If $\\tau_i=0$, return `tangent-failure`; otherwise set $t_i=\\tau_i/\\|\\tau_i\\|_2$. Nonfinite energies, gradients, or forces return `nonfinite-evaluation`.\n\nBefore iteration $n_{\\rm climb}$, use the ordinary force\n\n$$F_i=-(I-t_it_i^T)\\nabla V(R_i)+k(\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2)t_i.$$\n\nStarting at iteration $n_{\\rm climb}$, choose the least index $i_*$ attaining the largest interior energy and replace that image's force by\n\n$$F_{i_*}^{\\rm CI}=-\\nabla V(R_{i_*})+2(\\nabla V(R_{i_*})^Tt_{i_*})t_{i_*};$$\n\nthe climbing image has no spring force. The remaining interior images retain the ordinary force. At each iteration report the maximum force norm and spacing residual $\\max_i|\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2|$. Stop with `tolerances-met` only if both are within their declared tolerances. If the budget is exhausted first, return `budget-exhausted`. Otherwise update every interior image by $R_i^{k+1}=R_i^k+\\eta F_i^k$; leaving $U$ returns `geometry-failure`.\n\nThe finite stopping status does not assert convergence to a MEP, a saddle, or a continuum path.",
++          "quote": "Let $U,V,a,b$ satisfy [[def-regular-minimum-energy-path-in-a-collision-free-tube]]. **Inputs:** an integer $M\\ge2$, images $R_0=a,R_1,\\ldots,R_M=b$ in $U$, spring constant $\\kappa\\ge0$, fixed step $\\eta>0$, force and spacing tolerances $\\tau_F,\\tau_s\\ge0$, an ordinary-step count $n_{\\rm climb}\\in\\mathbb N_0$, and a finite update budget $N\\in\\mathbb N_0$. Require $n_{\\rm climb}\\le N$. **Output:** the last chain and one of `tolerances-met`, `tangent-failure`, `geometry-failure`, `nonfinite-evaluation`, or `budget-exhausted`.\n\nAt each iteration, endpoints are fixed and only interior images are updated. For $i=1,\\ldots,M-1$, write $\\Delta_i^+=R_{i+1}-R_i$, $\\Delta_i^-=R_i-R_{i-1}$, and $V_i=V(R_i)$. Select an unnormalized tangent by\n\n$$\\tau_i=\\begin{cases}\\Delta_i^+,&V_{i+1}>V_i>V_{i-1},\\\\\\Delta_i^-,&V_{i+1}<V_i<V_{i-1},\\\\w_{\\max}\\Delta_i^+ + w_{\\min}\\Delta_i^-,&\\text{otherwise and }V_{i+1}>V_{i-1},\\\\w_{\\min}\\Delta_i^+ + w_{\\max}\\Delta_i^-,&\\text{otherwise and }V_{i+1}<V_{i-1},\\\\\\Delta_i^++\\Delta_i^-,&V_{i+1}=V_{i-1},\\end{cases}$$\n\nwhere $w_{\\max}=\\max(|V_{i+1}-V_i|,|V_{i-1}-V_i|)$ and $w_{\\min}=\\min(|V_{i+1}-V_i|,|V_{i-1}-V_i|)$. If $\\tau_i=0$, return `tangent-failure`; otherwise set $t_i=\\tau_i/\\|\\tau_i\\|_2$. Nonfinite energies, gradients, or forces return `nonfinite-evaluation`.\n\nInitialize the update counter $k=0$. At iteration $k$, use the ordinary force\n\n$$F_i=-(I-t_it_i^T)\\nabla V(R_i)+\\kappa(\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2)t_i.$$\n\nWhen $k\\ge n_{\\rm climb}$, choose the least index $i_*$ attaining the largest interior energy and replace that image's force by\n\n$$F_{i_*}^{\\rm CI}=-\\nabla V(R_{i_*})+2(\\nabla V(R_{i_*})^Tt_{i_*})t_{i_*};$$\n\nthe climbing image has no spring force. The remaining interior images retain the ordinary force. Thus iterations $k=0,\\ldots,n_{\\rm climb}-1$ use ordinary forces and the first climbing force is evaluated at iteration $k=n_{\\rm climb}$. At each iteration report the maximum force norm and spacing residual $\\max_i|\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2|$. Stop with `tolerances-met` only if both are within their declared tolerances. If a tolerance fails and $k=N$, return `budget-exhausted`; only when $k<N$ update every interior image by $R_i^{k+1}=R_i^k+\\eta F_i^k$. Leaving $U$ returns `geometry-failure`. After a valid update set $k\\leftarrow k+1$ and repeat. The tolerance check precedes the budget check, so $N=0$ still checks the initial chain and $n_{\\rm climb}=N$ uses a climbing force at the final residual check (without an update if the budget is then exhausted).\n\nThe finite stopping status does not assert convergence to a MEP, a saddle, or a continuum path.",
+           "uses": [
+             "2.2"
+           ]
+@@ -1799,7 +1915,7 @@
+           "fact": "F4",
+           "source": "prop-central-string-projected-force-consistency",
+           "source_section": "Statement",
+-          "quote": "Let $L>0$, let $M\\ge2$ be an integer, and let $R$ be a regular MEP as in [[def-regular-minimum-energy-path-in-a-collision-free-tube]], now parameterized by arc length on $[0,L]$, with $R\\in C^3$ and the bounds of [[lem-centered-chord-and-unequal-step-tangent-error]] and [[lem-arc-length-polyline-interpolation-error]]. Let $R_i=R(ih)$ for $i=0,\\ldots,M$, $Mh=L$, and assume every interior centered chord is nonzero. Suppose $\\|\\nabla V(R(s))\\|_2\\le G$ along the curve and $0<h\\le1$. Use the centered unit tangent $\\widehat t_i=(R_{i+1}-R_{i-1})/\\|R_{i+1}-R_{i-1}\\|_2$. Then the projected string force at each interior sample satisfies\n\n$$\\|(I-\\widehat t_i\\widehat t_i^T)\\nabla V(R_i)\\|_2\\le C_Fh^2.$$\n\nIf the equal-spacing spring residual $k(\\ell_i^+-\\ell_i^-)\\widehat t_i$ is also evaluated on these samples, then its norm is at most $C_Sh^3$ for fixed $k$. Equal-length polyline redistribution of the exact samples changes each image by at most $C_Rh^2$. The constants depend on the stated derivative bounds, $G$, $k$, and the path, not on $M$. The projected-force conclusion is for the centered-tangent string residual; it does not assert second-order consistency for the improved energy-selected NEB tangent.",
++          "quote": "Let $L>0$, let $M\\ge2$ be an integer, and let $R$ be a regular MEP as in [[def-regular-minimum-energy-path-in-a-collision-free-tube]], now parameterized by arc length on $[0,L]$, with $R\\in C^3$ under the endpoint convention of [[lem-arc-length-polyline-interpolation-error]] and the bounds of [[lem-centered-chord-and-unequal-step-tangent-error]] and [[lem-arc-length-polyline-interpolation-error]]. Let $R_i=R(ih)$ for $i=0,\\ldots,M$, $Mh=L$, and assume every interior centered chord is nonzero. Suppose $\\|\\nabla V(R(s))\\|_2\\le G$ along the curve and $0<h\\le1$. Use the centered unit tangent $\\widehat t_i=(R_{i+1}-R_{i-1})/\\|R_{i+1}-R_{i-1}\\|_2$. Then the projected string force at each interior sample satisfies\n\n$$\\|(I-\\widehat t_i\\widehat t_i^T)\\nabla V(R_i)\\|_2\\le C_Fh^2.$$\n\nIf the equal-spacing spring residual $k(\\ell_i^+-\\ell_i^-)\\widehat t_i$ is also evaluated on these samples, then its norm is at most $C_Sh^3$ for fixed $k$. Equal-length polyline redistribution of the exact samples changes each image by at most $C_Rh^2$. The constants depend on the stated derivative bounds, $G$, $k$, and the path, not on $M$. The projected-force conclusion is for the centered-tangent string residual; it does not assert second-order consistency for the improved energy-selected NEB tangent.",
+           "uses": [
+             "3.1"
+           ]
+@@ -1930,7 +2046,7 @@
+           "fact": "F3",
+           "source": "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+           "source_section": "Statement",
+-          "quote": "Let $U\\subseteq\\mathbb R^n$ be open, let $F:U\\to\\mathbb R^n$ be $C^1$, and\nwrite $J(x)=DF(x)$ as a matrix in the standard basis. For a matrix $A$ let\n$\\|A\\|_{\\rm op}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$. Let $K\\subseteq U$ be convex,\nlet $x_*,x\\in K$, and suppose for some $L\\ge0$ that\n$$\\|J(y)-J(z)\\|_{\\rm op}\\le L\\|y-z\\|_2\\qquad(y,z\\in K).$$\nThen\n$$\\|F(x)-F(x_*)-J(x)(x-x_*)\\|_2\\le\\frac{L}{2}\\|x-x_*\\|_2^2.$$",
++          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $F:U\\to\\mathbb R^n$ be\n$C^1$, and write $J(x)=DF(x)$ as a matrix in the standard basis. The matrix\nof $DF(x)$ agrees with the Jacobian matrix by\n[[thm-total-derivative-computes-directional-and-partial-derivatives]]. For a\nmatrix $A$ let\n$\\|A\\|_{\\rm op}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$. Let $K\\subseteq U$ be convex,\nlet $x_*,x\\in K$, and suppose for some $L\\ge0$ that\n$$\\|J(y)-J(z)\\|_{\\rm op}\\le L\\|y-z\\|_2\\qquad(y,z\\in K).$$\nThen\n$$\\|F(x)-F(x_*)-J(x)(x-x_*)\\|_2\\le\\frac{L}{2}\\|x-x_*\\|_2^2.$$",
+           "uses": [
+             "2.2"
+           ]
+@@ -1939,7 +2055,7 @@
+           "fact": "F4",
+           "source": "alg-finite-budget-dimer-mode-following",
+           "source_section": "Definition",
+-          "quote": "Let $U,V$ be as in [[def-regular-minimum-energy-path-in-a-collision-free-tube]]. **Inputs:** $x_0\\in U$, a unit vector $v_0$, finite-difference distance $\\epsilon>0$, force-evaluation error bound $\\eta\\ge0$, rotation step $\\alpha>0$, rotation tolerance $\\tau_{\\rm rot}\\ge0$, force tolerance $\\tau_F\\ge0$, rotation cap $J\\in\\mathbb N_0$, translation step $\\sigma>0$, and translation cap $K\\in\\mathbb N_0$. Return the last point, direction, reported residuals, and a status from `force-tolerance`, `mode-unverified`, `rotation-cap`, `translation-cap`, `geometry-failure`, `rotation-failure`, or `nonfinite-evaluation`.\n\nAt each translation iteration, start with the current unit direction $v$. For at most $J$ rotations:\n\n1. If $x\\pm\\epsilon v\\notin U$, return `geometry-failure`. Evaluate approximate gradients $\\widehat g_\\pm$ at $x\\pm\\epsilon v$ with the declared error bound, and form $D_\\epsilon=(\\widehat g_+-\\widehat g_-)/(2\\epsilon)$. Nonfinite data return `nonfinite-evaluation`.\n2. Set $r_{\\rm rot}=\\|(I-vv^T)D_\\epsilon\\|_2$. If $r_{\\rm rot}\\le\\tau_{\\rm rot}$, end this rotation loop. Otherwise set $w=v-\\alpha(I-vv^T)D_\\epsilon$. If $w=0$, return `rotation-failure`; else replace $v$ by $w/\\|w\\|_2$.\n\nIf the rotation cap is reached before the residual test succeeds, return `rotation-cap` with the last direction. A small rotational residual by itself does not certify that the direction is the lowest eigenmode. If no validated spectral-gap or mode-tracking certificate is supplied, label the mode status `mode-unverified`.\n\nAfter a rotation residual passes, evaluate $\\widehat g(x)$ with error at most $\\eta$. If it is nonfinite, return `nonfinite-evaluation`. If $\\|\\widehat g(x)\\|_2\\le\\tau_F$, return `force-tolerance` together with the mode status. If the translation cap has been reached, return `translation-cap`. Otherwise update\n\n$$x^+=x+\\sigma\\bigl[-\\widehat g(x)+2(\\widehat g(x)^Tv)v\\bigr].$$\n\nIf $x^+\\notin U$, return `geometry-failure`; otherwise set $x\\leftarrow x^+$ and repeat. This finite procedure makes no arbitrary-start, termination, saddle-convergence, or global-transition claim.",
++          "quote": "Let $U,V$ be as in [[def-regular-minimum-energy-path-in-a-collision-free-tube]]. **Inputs:** $x_0\\in U$, a unit vector $v_0$, finite-difference distance $\\epsilon>0$, force-evaluation error bound $\\eta\\ge0$, rotation step $\\alpha>0$, rotation tolerance $\\tau_{\\rm rot}\\ge0$, force tolerance $\\tau_F\\ge0$, rotation cap $J\\in\\mathbb N_0$, translation step $\\sigma>0$, and translation cap $K\\in\\mathbb N_0$. Return the last point, direction, reported residuals, and a status from `force-tolerance`, `mode-unverified`, `rotation-cap`, `translation-cap`, `geometry-failure`, `rotation-failure`, or `nonfinite-evaluation`.\n\nInitialize the translation-update counter $k=0$, the current point $x=x_0$, and the current unit direction $v=v_0$. At each translation iteration, start with the current $v$, set the rotation-update counter $j=0$, and repeat the following residual test and possible update:\n\n1. If $x\\pm\\epsilon v\\notin U$, return `geometry-failure`. Evaluate approximate gradients $\\widehat g_\\pm$ at $x\\pm\\epsilon v$ with the declared error bound, and form $D_\\epsilon=(\\widehat g_+-\\widehat g_-)/(2\\epsilon)$. Nonfinite data return `nonfinite-evaluation`.\n2. Set $r_{\\rm rot}=\\|(I-vv^T)D_\\epsilon\\|_2$. If $r_{\\rm rot}\\le\\tau_{\\rm rot}$, end this rotation loop. If the test fails and $j=J$, return `rotation-cap` with the last direction. Otherwise set $w=v-\\alpha(I-vv^T)D_\\epsilon$. If $w=0$, return `rotation-failure`; else replace $v$ by $w/\\|w\\|_2$, set $j\\leftarrow j+1$, and repeat the rotation test.\n\nThus $J$ counts direction updates, and the current direction is tested before the cap is returned, including when $J=0$. A small rotational residual by itself does not certify that the direction is the lowest eigenmode. If no validated spectral-gap or mode-tracking certificate is supplied, label the mode status `mode-unverified`.\n\nAfter a rotation residual passes, evaluate $\\widehat g(x)$ with error at most $\\eta$. If it is nonfinite, return `nonfinite-evaluation`. If $\\|\\widehat g(x)\\|_2\\le\\tau_F$, return `force-tolerance` together with the mode status. If $k=K$, return `translation-cap`; perform an update only when $k<K$.\n\n$$x^+=x+\\sigma\\bigl[-\\widehat g(x)+2(\\widehat g(x)^Tv)v\\bigr].$$\n\nIf $x^+\\notin U$, return `geometry-failure`; otherwise set $x\\leftarrow x^+$, set $k\\leftarrow k+1$, and begin the next translation iteration. Thus $K$ counts translation updates; the force-tolerance test is made before the cap test, including when $K=0$. This finite procedure makes no arbitrary-start, termination, saddle-convergence, or global-transition claim.",
+           "uses": [
+             "3.1"
+           ]
+@@ -1976,9 +2092,39 @@
+         },
+         {
+           "fact": "F5",
++          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
++          "source_section": "Statement",
++          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
++          "uses": [
++            "1.1",
++            "1.2"
++          ]
++        },
++        {
++          "fact": "F5",
++          "source": "cor-hessian-is-symmetric",
++          "source_section": "Statement",
++          "quote": "For a $C^2$ scalar field $f$, $H_f(a)^T=H_f(a)$ at every point $a$.",
++          "uses": [
++            "1.1",
++            "1.2"
++          ]
++        },
++        {
++          "fact": "F5",
+           "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+           "source_section": "Definition",
+           "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
++          "uses": [
++            "1.1",
++            "1.2"
++          ]
++        },
++        {
++          "fact": "F6",
++          "source": "cor-hessian-is-symmetric",
++          "source_section": "Statement",
++          "quote": "For a $C^2$ scalar field $f$, $H_f(a)^T=H_f(a)$ at every point $a$.",
+           "uses": [
+             "1.1",
+             "1.2"
+@@ -2141,7 +2287,7 @@
+           "fact": "F2",
+           "source": "prop-central-string-projected-force-consistency",
+           "source_section": "Statement",
+-          "quote": "Let $L>0$, let $M\\ge2$ be an integer, and let $R$ be a regular MEP as in [[def-regular-minimum-energy-path-in-a-collision-free-tube]], now parameterized by arc length on $[0,L]$, with $R\\in C^3$ and the bounds of [[lem-centered-chord-and-unequal-step-tangent-error]] and [[lem-arc-length-polyline-interpolation-error]]. Let $R_i=R(ih)$ for $i=0,\\ldots,M$, $Mh=L$, and assume every interior centered chord is nonzero. Suppose $\\|\\nabla V(R(s))\\|_2\\le G$ along the curve and $0<h\\le1$. Use the centered unit tangent $\\widehat t_i=(R_{i+1}-R_{i-1})/\\|R_{i+1}-R_{i-1}\\|_2$. Then the projected string force at each interior sample satisfies\n\n$$\\|(I-\\widehat t_i\\widehat t_i^T)\\nabla V(R_i)\\|_2\\le C_Fh^2.$$\n\nIf the equal-spacing spring residual $k(\\ell_i^+-\\ell_i^-)\\widehat t_i$ is also evaluated on these samples, then its norm is at most $C_Sh^3$ for fixed $k$. Equal-length polyline redistribution of the exact samples changes each image by at most $C_Rh^2$. The constants depend on the stated derivative bounds, $G$, $k$, and the path, not on $M$. The projected-force conclusion is for the centered-tangent string residual; it does not assert second-order consistency for the improved energy-selected NEB tangent.",
++          "quote": "Let $L>0$, let $M\\ge2$ be an integer, and let $R$ be a regular MEP as in [[def-regular-minimum-energy-path-in-a-collision-free-tube]], now parameterized by arc length on $[0,L]$, with $R\\in C^3$ under the endpoint convention of [[lem-arc-length-polyline-interpolation-error]] and the bounds of [[lem-centered-chord-and-unequal-step-tangent-error]] and [[lem-arc-length-polyline-interpolation-error]]. Let $R_i=R(ih)$ for $i=0,\\ldots,M$, $Mh=L$, and assume every interior centered chord is nonzero. Suppose $\\|\\nabla V(R(s))\\|_2\\le G$ along the curve and $0<h\\le1$. Use the centered unit tangent $\\widehat t_i=(R_{i+1}-R_{i-1})/\\|R_{i+1}-R_{i-1}\\|_2$. Then the projected string force at each interior sample satisfies\n\n$$\\|(I-\\widehat t_i\\widehat t_i^T)\\nabla V(R_i)\\|_2\\le C_Fh^2.$$\n\nIf the equal-spacing spring residual $k(\\ell_i^+-\\ell_i^-)\\widehat t_i$ is also evaluated on these samples, then its norm is at most $C_Sh^3$ for fixed $k$. Equal-length polyline redistribution of the exact samples changes each image by at most $C_Rh^2$. The constants depend on the stated derivative bounds, $G$, $k$, and the path, not on $M$. The projected-force conclusion is for the centered-tangent string residual; it does not assert second-order consistency for the improved energy-selected NEB tangent.",
+           "uses": [
+             "2.1"
+           ]
+@@ -2150,7 +2296,7 @@
+           "fact": "F3",
+           "source": "lem-arc-length-polyline-interpolation-error",
+           "source_section": "Statement",
+-          "quote": "Let $L>0$, let $M\\ge1$ be an integer, and let $R:[0,L]\\to\\mathbb R^d$ be a unit-speed $C^3$ curve with $M$ equal arc-length intervals of length $h=L/M$. Suppose $\\|R''\\|_2\\le K_2$ and the coordinate third derivatives satisfy the bound in [[lem-centered-chord-and-unequal-step-tangent-error]] with constant $M_3$. For sufficiently small $h$, each chord length $\\ell_i=\\|R(ih)-R((i-1)h)\\|_2$ satisfies $|\\ell_i-h|\\le C_1h^3$, where $C_1$ depends only on $K_2,M_3$. The piecewise-linear interpolant through the samples differs from $R$ in supremum norm by at most $C_2h^2$. If this polygon is redistributed by linear interpolation at equally spaced cumulative-length targets, the $j$th redistributed image is within $C_3h^2$ of $R(jh)$, for every $j=0,\\ldots,M$.",
++          "quote": "Let $L>0$, let $M\\ge1$ be an integer, and let $R:[0,L]\\to\\mathbb R^d$ be a unit-speed $C^3$ curve with $M$ equal arc-length intervals of length $h=L/M$. Suppose $\\|R''\\|_2\\le K_2$ and the coordinate third derivatives satisfy the bound in [[lem-centered-chord-and-unequal-step-tangent-error]] with constant $M_3$. For sufficiently small $h$, each chord length $\\ell_i=\\|R(ih)-R((i-1)h)\\|_2$ satisfies $|\\ell_i-h|\\le C_1h^3$, where $C_1$ depends only on $K_2,M_3$. The piecewise-linear interpolant through the samples differs from $R$ in supremum norm by at most $C_2h^2$. If this polygon is redistributed by linear interpolation at equally spaced cumulative-length targets, the $j$th redistributed image is within $C_3h^2$ of $R(jh)$, for every $j=0,\\ldots,M$.\n\nHere $C^3$ on $[0,L]$ means that $R$ is the restriction of a $C^3$ curve on an open interval containing $[0,L]$; derivatives at the endpoints are the continuous one-sided values, and the unit-speed and derivative bounds are required on $[0,L]$.",
+           "uses": [
+             "2.1",
+             "4.1"
+@@ -2176,9 +2322,9 @@
+         },
+         {
+           "fact": "F6",
+-          "source": "def-ck-and-multi-index-notation-in-several-variables",
+-          "source_section": "Definition",
+-          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put\n\n$$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$\n\nHere $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of [[def-nat-finite-sum-and-product]], and $n!$ is the factorial of [[def-factorial-and-falling-factorial]]. By contrast, $h^\\alpha$ is the finite product in $\\mathbb R$ of [[def-finite-sum]], with the natural exponents interpreted by [[def-integer-power]]. For the zero multi-index $0$, set $D^0f:=f$. For nonzero $\\alpha$, write\n\n$$D^\\alpha f:=\\partial_0^{\\alpha_0}\\cdots\\partial_{m-1}^{\\alpha_{m-1}}f$$\n\nfor this displayed, canonical order whenever it exists. Coordinate partial derivatives have the meaning fixed in [[def-directional-and-partial-derivatives]].\n\nFor $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$. Thus this definition does **not** presuppose that differently ordered derivatives are equal. Equality of their values is a later theorem under these regularity hypotheses.",
++          "source": "lem-arc-length-polyline-interpolation-error",
++          "source_section": "Statement",
++          "quote": "Let $L>0$, let $M\\ge1$ be an integer, and let $R:[0,L]\\to\\mathbb R^d$ be a unit-speed $C^3$ curve with $M$ equal arc-length intervals of length $h=L/M$. Suppose $\\|R''\\|_2\\le K_2$ and the coordinate third derivatives satisfy the bound in [[lem-centered-chord-and-unequal-step-tangent-error]] with constant $M_3$. For sufficiently small $h$, each chord length $\\ell_i=\\|R(ih)-R((i-1)h)\\|_2$ satisfies $|\\ell_i-h|\\le C_1h^3$, where $C_1$ depends only on $K_2,M_3$. The piecewise-linear interpolant through the samples differs from $R$ in supremum norm by at most $C_2h^2$. If this polygon is redistributed by linear interpolation at equally spaced cumulative-length targets, the $j$th redistributed image is within $C_3h^2$ of $R(jh)$, for every $j=0,\\ldots,M$.\n\nHere $C^3$ on $[0,L]$ means that $R$ is the restriction of a $C^3$ curve on an open interval containing $[0,L]$; derivatives at the endpoints are the continuous one-sided values, and the unit-speed and derivative bounds are required on $[0,L]$.",
+           "uses": [
+             "2.1"
+           ]
+@@ -2519,6 +2665,15 @@
+           ]
+         },
+         {
++          "fact": "F2",
++          "source": "cor-hessian-is-symmetric",
++          "source_section": "Statement",
++          "quote": "For a $C^2$ scalar field $f$, $H_f(a)^T=H_f(a)$ at every point $a$.",
++          "uses": [
++            "2.1"
++          ]
++        },
++        {
+           "fact": "F3",
+           "source": "thm-chain-rule-for-total-derivatives",
+           "source_section": "Statement",
+@@ -2649,7 +2804,7 @@
+           "fact": "F2",
+           "source": "alg-improved-tangent-climbing-neb",
+           "source_section": "Definition",
+-          "quote": "Let $U,V,a,b$ satisfy [[def-regular-minimum-energy-path-in-a-collision-free-tube]]. **Inputs:** an integer $M\\ge2$, images $R_0=a,R_1,\\ldots,R_M=b$ in $U$, spring constant $k\\ge0$, fixed step $\\eta>0$, force and spacing tolerances $\\tau_F,\\tau_s\\ge0$, an ordinary-step count $n_{\\rm climb}\\in\\mathbb N_0$, and a finite update budget $N\\in\\mathbb N_0$. Require $n_{\\rm climb}\\le N$. **Output:** the last chain and one of `tolerances-met`, `tangent-failure`, `geometry-failure`, `nonfinite-evaluation`, or `budget-exhausted`.\n\nAt each iteration, endpoints are fixed and only interior images are updated. For $i=1,\\ldots,M-1$, write $\\Delta_i^+=R_{i+1}-R_i$, $\\Delta_i^-=R_i-R_{i-1}$, and $V_i=V(R_i)$. Select an unnormalized tangent by\n\n$$\\tau_i=\\begin{cases}\\Delta_i^+,&V_{i+1}>V_i>V_{i-1},\\\\\\Delta_i^-,&V_{i+1}<V_i<V_{i-1},\\\\w_{\\max}\\Delta_i^+ + w_{\\min}\\Delta_i^-,&\\text{otherwise and }V_{i+1}>V_{i-1},\\\\w_{\\min}\\Delta_i^+ + w_{\\max}\\Delta_i^-,&\\text{otherwise and }V_{i+1}<V_{i-1},\\\\\\Delta_i^++\\Delta_i^-,&V_{i+1}=V_{i-1},\\end{cases}$$\n\nwhere $w_{\\max}=\\max(|V_{i+1}-V_i|,|V_{i-1}-V_i|)$ and $w_{\\min}=\\min(|V_{i+1}-V_i|,|V_{i-1}-V_i|)$. If $\\tau_i=0$, return `tangent-failure`; otherwise set $t_i=\\tau_i/\\|\\tau_i\\|_2$. Nonfinite energies, gradients, or forces return `nonfinite-evaluation`.\n\nBefore iteration $n_{\\rm climb}$, use the ordinary force\n\n$$F_i=-(I-t_it_i^T)\\nabla V(R_i)+k(\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2)t_i.$$\n\nStarting at iteration $n_{\\rm climb}$, choose the least index $i_*$ attaining the largest interior energy and replace that image's force by\n\n$$F_{i_*}^{\\rm CI}=-\\nabla V(R_{i_*})+2(\\nabla V(R_{i_*})^Tt_{i_*})t_{i_*};$$\n\nthe climbing image has no spring force. The remaining interior images retain the ordinary force. At each iteration report the maximum force norm and spacing residual $\\max_i|\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2|$. Stop with `tolerances-met` only if both are within their declared tolerances. If the budget is exhausted first, return `budget-exhausted`. Otherwise update every interior image by $R_i^{k+1}=R_i^k+\\eta F_i^k$; leaving $U$ returns `geometry-failure`.\n\nThe finite stopping status does not assert convergence to a MEP, a saddle, or a continuum path.",
++          "quote": "Let $U,V,a,b$ satisfy [[def-regular-minimum-energy-path-in-a-collision-free-tube]]. **Inputs:** an integer $M\\ge2$, images $R_0=a,R_1,\\ldots,R_M=b$ in $U$, spring constant $\\kappa\\ge0$, fixed step $\\eta>0$, force and spacing tolerances $\\tau_F,\\tau_s\\ge0$, an ordinary-step count $n_{\\rm climb}\\in\\mathbb N_0$, and a finite update budget $N\\in\\mathbb N_0$. Require $n_{\\rm climb}\\le N$. **Output:** the last chain and one of `tolerances-met`, `tangent-failure`, `geometry-failure`, `nonfinite-evaluation`, or `budget-exhausted`.\n\nAt each iteration, endpoints are fixed and only interior images are updated. For $i=1,\\ldots,M-1$, write $\\Delta_i^+=R_{i+1}-R_i$, $\\Delta_i^-=R_i-R_{i-1}$, and $V_i=V(R_i)$. Select an unnormalized tangent by\n\n$$\\tau_i=\\begin{cases}\\Delta_i^+,&V_{i+1}>V_i>V_{i-1},\\\\\\Delta_i^-,&V_{i+1}<V_i<V_{i-1},\\\\w_{\\max}\\Delta_i^+ + w_{\\min}\\Delta_i^-,&\\text{otherwise and }V_{i+1}>V_{i-1},\\\\w_{\\min}\\Delta_i^+ + w_{\\max}\\Delta_i^-,&\\text{otherwise and }V_{i+1}<V_{i-1},\\\\\\Delta_i^++\\Delta_i^-,&V_{i+1}=V_{i-1},\\end{cases}$$\n\nwhere $w_{\\max}=\\max(|V_{i+1}-V_i|,|V_{i-1}-V_i|)$ and $w_{\\min}=\\min(|V_{i+1}-V_i|,|V_{i-1}-V_i|)$. If $\\tau_i=0$, return `tangent-failure`; otherwise set $t_i=\\tau_i/\\|\\tau_i\\|_2$. Nonfinite energies, gradients, or forces return `nonfinite-evaluation`.\n\nInitialize the update counter $k=0$. At iteration $k$, use the ordinary force\n\n$$F_i=-(I-t_it_i^T)\\nabla V(R_i)+\\kappa(\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2)t_i.$$\n\nWhen $k\\ge n_{\\rm climb}$, choose the least index $i_*$ attaining the largest interior energy and replace that image's force by\n\n$$F_{i_*}^{\\rm CI}=-\\nabla V(R_{i_*})+2(\\nabla V(R_{i_*})^Tt_{i_*})t_{i_*};$$\n\nthe climbing image has no spring force. The remaining interior images retain the ordinary force. Thus iterations $k=0,\\ldots,n_{\\rm climb}-1$ use ordinary forces and the first climbing force is evaluated at iteration $k=n_{\\rm climb}$. At each iteration report the maximum force norm and spacing residual $\\max_i|\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2|$. Stop with `tolerances-met` only if both are within their declared tolerances. If a tolerance fails and $k=N$, return `budget-exhausted`; only when $k<N$ update every interior image by $R_i^{k+1}=R_i^k+\\eta F_i^k$. Leaving $U$ returns `geometry-failure`. After a valid update set $k\\leftarrow k+1$ and repeat. The tolerance check precedes the budget check, so $N=0$ still checks the initial chain and $n_{\\rm climb}=N$ uses a climbing force at the final residual check (without an update if the budget is then exhausted).\n\nThe finite stopping status does not assert convergence to a MEP, a saddle, or a continuum path.",
+           "uses": [
+             "2.1"
+           ]
+@@ -2755,7 +2910,7 @@
+           "fact": "F1",
+           "source": "def-validated-eigenvalue-enclosures-for-an-index-one-hessian",
+           "source_section": "Definition",
+-          "quote": "Let $V$ and $U$ be as in [[def-regular-minimum-energy-path-in-a-collision-free-tube]], let $x\\in U$, and let $H=\\nabla^2V(x)$ use the convention of [[def-hessian-and-euclidean-critical-point]]. By the real spectral theorem [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]], $H$ has ordered eigenvalues $\\lambda_1(H)\\le\\cdots\\le\\lambda_d(H)$.\n\nA **validated ordered eigenvalue enclosure** is a list of intervals $I_j=[\\ell_j,u_j]$ together with an independently checked certificate proving $\\lambda_j(H)\\in I_j$ for every $j$ and preserving the stated ordering. The exact Hessian $H$, interval arithmetic or another validated spectral method, and all rounding assumptions used by the certificate are part of that external certificate; a Ritz value or residual alone is not, by definition, such a certificate.\n\nFor $d\\ge2$ and $\\gamma>0$, the enclosure certifies **index one with gap $\\gamma$** when $u_1\\le-\\gamma$ and $\\ell_j\\ge\\gamma$ for every $j\\ge2$. For $d=1$, the condition is $u_1\\le-\\gamma$, with no positive-eigenvalue clauses. A validated enclosure records the input evidence; this definition does not assert that any particular eigensolver produces it.",
++          "quote": "Let $V$ and $U$ be as in [[def-regular-minimum-energy-path-in-a-collision-free-tube]], let $x\\in U$, and let $H=\\nabla^2V(x)$ use the convention of [[def-hessian-and-euclidean-critical-point]]. Since $V\\in C^4(U)$, it is $C^2$; [[cor-hessian-is-symmetric]] gives $H^T=H$. In the standard Euclidean inner product this makes the endomorphism represented by $H$ self-adjoint. Therefore the real spectral theorem [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]] applies, and $H$ has ordered eigenvalues $\\lambda_1(H)\\le\\cdots\\le\\lambda_d(H)$.\n\nA **validated ordered eigenvalue enclosure** is a list of intervals $I_j=[\\ell_j,u_j]$ together with an independently checked certificate proving $\\lambda_j(H)\\in I_j$ for every $j$ and preserving the stated ordering. The exact Hessian $H$, interval arithmetic or another validated spectral method, and all rounding assumptions used by the certificate are part of that external certificate; a Ritz value or residual alone is not, by definition, such a certificate.\n\nFor $d\\ge2$ and $\\gamma>0$, the enclosure certifies **index one with gap $\\gamma$** when $u_1\\le-\\gamma$ and $\\ell_j\\ge\\gamma$ for every $j\\ge2$. For $d=1$, the condition is $u_1\\le-\\gamma$, with no positive-eigenvalue clauses. A validated enclosure records the input evidence; this definition does not assert that any particular eigensolver produces it.",
+           "uses": [
+             "2.1"
+           ]
+@@ -2973,7 +3128,7 @@
+           "fact": "F3",
+           "source": "alg-improved-tangent-climbing-neb",
+           "source_section": "Definition",
+-          "quote": "Let $U,V,a,b$ satisfy [[def-regular-minimum-energy-path-in-a-collision-free-tube]]. **Inputs:** an integer $M\\ge2$, images $R_0=a,R_1,\\ldots,R_M=b$ in $U$, spring constant $k\\ge0$, fixed step $\\eta>0$, force and spacing tolerances $\\tau_F,\\tau_s\\ge0$, an ordinary-step count $n_{\\rm climb}\\in\\mathbb N_0$, and a finite update budget $N\\in\\mathbb N_0$. Require $n_{\\rm climb}\\le N$. **Output:** the last chain and one of `tolerances-met`, `tangent-failure`, `geometry-failure`, `nonfinite-evaluation`, or `budget-exhausted`.\n\nAt each iteration, endpoints are fixed and only interior images are updated. For $i=1,\\ldots,M-1$, write $\\Delta_i^+=R_{i+1}-R_i$, $\\Delta_i^-=R_i-R_{i-1}$, and $V_i=V(R_i)$. Select an unnormalized tangent by\n\n$$\\tau_i=\\begin{cases}\\Delta_i^+,&V_{i+1}>V_i>V_{i-1},\\\\\\Delta_i^-,&V_{i+1}<V_i<V_{i-1},\\\\w_{\\max}\\Delta_i^+ + w_{\\min}\\Delta_i^-,&\\text{otherwise and }V_{i+1}>V_{i-1},\\\\w_{\\min}\\Delta_i^+ + w_{\\max}\\Delta_i^-,&\\text{otherwise and }V_{i+1}<V_{i-1},\\\\\\Delta_i^++\\Delta_i^-,&V_{i+1}=V_{i-1},\\end{cases}$$\n\nwhere $w_{\\max}=\\max(|V_{i+1}-V_i|,|V_{i-1}-V_i|)$ and $w_{\\min}=\\min(|V_{i+1}-V_i|,|V_{i-1}-V_i|)$. If $\\tau_i=0$, return `tangent-failure`; otherwise set $t_i=\\tau_i/\\|\\tau_i\\|_2$. Nonfinite energies, gradients, or forces return `nonfinite-evaluation`.\n\nBefore iteration $n_{\\rm climb}$, use the ordinary force\n\n$$F_i=-(I-t_it_i^T)\\nabla V(R_i)+k(\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2)t_i.$$\n\nStarting at iteration $n_{\\rm climb}$, choose the least index $i_*$ attaining the largest interior energy and replace that image's force by\n\n$$F_{i_*}^{\\rm CI}=-\\nabla V(R_{i_*})+2(\\nabla V(R_{i_*})^Tt_{i_*})t_{i_*};$$\n\nthe climbing image has no spring force. The remaining interior images retain the ordinary force. At each iteration report the maximum force norm and spacing residual $\\max_i|\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2|$. Stop with `tolerances-met` only if both are within their declared tolerances. If the budget is exhausted first, return `budget-exhausted`. Otherwise update every interior image by $R_i^{k+1}=R_i^k+\\eta F_i^k$; leaving $U$ returns `geometry-failure`.\n\nThe finite stopping status does not assert convergence to a MEP, a saddle, or a continuum path.",
++          "quote": "Let $U,V,a,b$ satisfy [[def-regular-minimum-energy-path-in-a-collision-free-tube]]. **Inputs:** an integer $M\\ge2$, images $R_0=a,R_1,\\ldots,R_M=b$ in $U$, spring constant $\\kappa\\ge0$, fixed step $\\eta>0$, force and spacing tolerances $\\tau_F,\\tau_s\\ge0$, an ordinary-step count $n_{\\rm climb}\\in\\mathbb N_0$, and a finite update budget $N\\in\\mathbb N_0$. Require $n_{\\rm climb}\\le N$. **Output:** the last chain and one of `tolerances-met`, `tangent-failure`, `geometry-failure`, `nonfinite-evaluation`, or `budget-exhausted`.\n\nAt each iteration, endpoints are fixed and only interior images are updated. For $i=1,\\ldots,M-1$, write $\\Delta_i^+=R_{i+1}-R_i$, $\\Delta_i^-=R_i-R_{i-1}$, and $V_i=V(R_i)$. Select an unnormalized tangent by\n\n$$\\tau_i=\\begin{cases}\\Delta_i^+,&V_{i+1}>V_i>V_{i-1},\\\\\\Delta_i^-,&V_{i+1}<V_i<V_{i-1},\\\\w_{\\max}\\Delta_i^+ + w_{\\min}\\Delta_i^-,&\\text{otherwise and }V_{i+1}>V_{i-1},\\\\w_{\\min}\\Delta_i^+ + w_{\\max}\\Delta_i^-,&\\text{otherwise and }V_{i+1}<V_{i-1},\\\\\\Delta_i^++\\Delta_i^-,&V_{i+1}=V_{i-1},\\end{cases}$$\n\nwhere $w_{\\max}=\\max(|V_{i+1}-V_i|,|V_{i-1}-V_i|)$ and $w_{\\min}=\\min(|V_{i+1}-V_i|,|V_{i-1}-V_i|)$. If $\\tau_i=0$, return `tangent-failure`; otherwise set $t_i=\\tau_i/\\|\\tau_i\\|_2$. Nonfinite energies, gradients, or forces return `nonfinite-evaluation`.\n\nInitialize the update counter $k=0$. At iteration $k$, use the ordinary force\n\n$$F_i=-(I-t_it_i^T)\\nabla V(R_i)+\\kappa(\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2)t_i.$$\n\nWhen $k\\ge n_{\\rm climb}$, choose the least index $i_*$ attaining the largest interior energy and replace that image's force by\n\n$$F_{i_*}^{\\rm CI}=-\\nabla V(R_{i_*})+2(\\nabla V(R_{i_*})^Tt_{i_*})t_{i_*};$$\n\nthe climbing image has no spring force. The remaining interior images retain the ordinary force. Thus iterations $k=0,\\ldots,n_{\\rm climb}-1$ use ordinary forces and the first climbing force is evaluated at iteration $k=n_{\\rm climb}$. At each iteration report the maximum force norm and spacing residual $\\max_i|\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2|$. Stop with `tolerances-met` only if both are within their declared tolerances. If a tolerance fails and $k=N$, return `budget-exhausted`; only when $k<N$ update every interior image by $R_i^{k+1}=R_i^k+\\eta F_i^k$. Leaving $U$ returns `geometry-failure`. After a valid update set $k\\leftarrow k+1$ and repeat. The tolerance check precedes the budget check, so $N=0$ still checks the initial chain and $n_{\\rm climb}=N$ uses a climbing force at the final residual check (without an update if the budget is then exhausted).\n\nThe finite stopping status does not assert convergence to a MEP, a saddle, or a continuum path.",
+           "uses": [
+             "1.2"
+           ]
+@@ -2982,7 +3137,7 @@
+           "fact": "F4",
+           "source": "thm-gauge-fixed-stable-discrete-path-comparison",
+           "source_section": "Statement",
+-          "quote": "Let $L>0$ and let $M\\ge2$ be an integer. Let $V$ and $U$ satisfy [[def-regular-minimum-energy-path-in-a-collision-free-tube]], and let $R_*:[0,L]\\to U$ be a $C^3$ unit-speed regular MEP with fixed endpoints. For $h=L/M$, let $z_h=(R_*(h),\\ldots,R_*((M-1)h))$ be its interior samples and let $I_h$ be piecewise-linear reconstruction with the same fixed endpoints.\n\nIn a local coordinate chart, choose a smooth orthonormal normal frame $Q_i$ at each centered discrete tangent, and keep that frame convention and chart fixed throughout the local ball. Define the square gauge-fixed residual $G_h$ on the $d(M-1)$ interior coordinates by the $(d-1)(M-1)$ scalar entries of $Q_i^T\\nabla V(R_i)$ and the $M-1$ independent spacing components $\\ell_i-\\ell_M$, $1\\le i<M$, where $\\ell_i=\\|R_i-R_{i-1}\\|_2$. Its norm is the maximum absolute value of all scalar residual coordinates; the domain norm is the maximum absolute value of all node coordinates. Assume this chosen map is $C^1$ on the open ball in hypothesis 2. The endpoints are fixed and the spacing equations fix the arc-length reparameterization; a zero of this residual is exactly a zero of all centered-tangent normal force components and equality of all segment lengths.\n\nAssume that for all sufficiently small $h$ the following constants $C_0,\\beta,L_G,C_I>0$ are independent of $h$:\n\n1. The consistency and interpolation bounds are $\\|G_h(z_h)\\|_\\infty\\le C_0h^2$ and $\\|I_hz_h-R_*\\|_{C^0,\\infty}\\le C_Ih^2$, where $\\|Y\\|_{C^0,\\infty}:=\\sup_{s\\in[0,L]}\\max_{j<d}|Y_j(s)|$.\n2. $DG_h(z_h)$ is invertible with induced maximum-norm inverse bound $\\|DG_h(z_h)^{-1}\\|_\\infty\\le\\beta$, and $DG_h$ is $L_G$-Lipschitz in the induced maximum operator norm on the open maximum-norm ball of radius $2\\rho_h$ about $z_h$, where $\\rho_h=2\\beta C_0h^2$.\n3. That ball lies in the residual's domain and $\\beta L_G\\rho_h\\le1/2$.\n\nThen there is a unique gauge-fixed discrete zero $z_h^*$ in $\\overline B_\\infty(z_h,\\rho_h)$, and\n\n$$\\|I_hz_h^*-R_*\\|_\\infty\\le(C_I+2\\beta C_0)h^2.$$\n\nThe consistency hypothesis is supplied by [[prop-central-string-projected-force-consistency]] for the centered-tangent string residual. The theorem is conditional on the stated uniform inverse and Lipschitz bounds; it proves no blanket convergence result for every potential, mesh, or improved-tangent NEB chain.",
++          "quote": "Let $L>0$ and let $M\\ge2$ be an integer. Let $V$ and $U$ satisfy [[def-regular-minimum-energy-path-in-a-collision-free-tube]], and let $R_*:[0,L]\\to U$ be a $C^3$ unit-speed regular MEP with fixed endpoints, using the endpoint extension convention of [[lem-arc-length-polyline-interpolation-error]]. For $h=L/M$, let $z_h=(R_*(h),\\ldots,R_*((M-1)h))$ be its interior samples and let $I_h$ be piecewise-linear reconstruction with the same fixed endpoints.\n\nIn a local coordinate chart, choose a smooth orthonormal normal frame $Q_i$ at each centered discrete tangent, and keep that frame convention and chart fixed throughout the local ball. Define the square gauge-fixed residual $G_h$ on the $d(M-1)$ interior coordinates by the $(d-1)(M-1)$ scalar entries of $Q_i^T\\nabla V(R_i)$ and the $M-1$ independent spacing components $\\ell_i-\\ell_M$, $1\\le i<M$, where $\\ell_i=\\|R_i-R_{i-1}\\|_2$. Its norm is the maximum absolute value of all scalar residual coordinates; the domain norm is the maximum absolute value of all node coordinates. Assume this chosen map is $C^1$ on the open ball in hypothesis 2. The endpoints are fixed and the spacing equations fix the arc-length reparameterization; a zero of this residual is exactly a zero of all centered-tangent normal force components and equality of all segment lengths.\n\nAssume that for all sufficiently small $h$ the following constants $C_0,\\beta,L_G,C_I>0$ are independent of $h$:\n\n1. The consistency and interpolation bounds are $\\|G_h(z_h)\\|_\\infty\\le C_0h^2$ and $\\|I_hz_h-R_*\\|_{C^0,\\infty}\\le C_Ih^2$, where $\\|Y\\|_{C^0,\\infty}:=\\sup_{s\\in[0,L]}\\max_{j<d}|Y_j(s)|$.\n2. $DG_h(z_h)$ is invertible with induced maximum-norm inverse bound $\\|DG_h(z_h)^{-1}\\|_\\infty\\le\\beta$, and $DG_h$ is $L_G$-Lipschitz in the induced maximum operator norm on the open maximum-norm ball of radius $2\\rho_h$ about $z_h$, where $\\rho_h=2\\beta C_0h^2$.\n3. That ball lies in the residual's domain and $\\beta L_G\\rho_h\\le1/2$.\n\nThen there is a unique gauge-fixed discrete zero $z_h^*$ in $\\overline B_\\infty(z_h,\\rho_h)$, and\n\n$$\\|I_hz_h^*-R_*\\|_\\infty\\le(C_I+2\\beta C_0)h^2.$$\n\nThe consistency hypothesis is supplied by [[prop-central-string-projected-force-consistency]] for the centered-tangent string residual. The theorem is conditional on the stated uniform inverse and Lipschitz bounds; it proves no blanket convergence result for every potential, mesh, or improved-tangent NEB chain.",
+           "uses": [
+             "2.1"
+           ]

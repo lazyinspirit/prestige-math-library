@@ -1,0 +1,432 @@
+{
+  "group": "n",
+  "batches": ["15"],
+  "pages_read": [
+    "computed-fast-transforms-and-convolution",
+    "computed-fast-transforms-and-convolution-examples"
+  ],
+  "items_read": [
+    "def-na-dct-ii-and-dst-i-even-odd-extension",
+    "lem-na-bluestein-chirp-convolution-factorization",
+    "lem-na-mixed-radix-cooley-tukey-factorization",
+    "lem-na-zero-padding-removes-linear-convolution-aliasing",
+    "lem-na-complex-product-six-operation-roundoff-bound",
+    "thm-na-dct-ii-orthogonality-inverse-and-dft-extension",
+    "thm-na-dst-i-orthogonality-inverse-and-dft-extension",
+    "thm-na-dct-ii-chebyshev-coefficient-extraction",
+    "thm-na-interval-pi-matches-canonical-fourier-pi",
+    "alg-na-certified-unit-circle-phase",
+    "alg-na-computed-unitary-radix-two-fft",
+    "thm-na-certified-unit-circle-phase-enclosure",
+    "alg-na-computed-fft-cyclic-and-linear-convolution",
+    "lem-na-computed-unitary-butterfly-error-bound",
+    "alg-na-computed-fast-transforms-and-convolution",
+    "thm-na-computed-unitary-radix-two-fft-error-bound",
+    "thm-na-arbitrary-length-fft-correctness-and-cost",
+    "thm-na-computed-fft-convolution-error-bound",
+    "thm-na-bluestein-chirp-phase-error-separate-from-fft-error",
+    "ex-na-prime-length-five-bluestein-transform",
+    "ex-na-two-point-circular-aliasing",
+    "ex-na-three-sample-dct-chebyshev-coefficients"
+  ],
+  "conventions": [
+    {
+      "convention": "The forward unitary DFT has negative exponential sign and factor N^(-1/2); the inverse has positive sign and the same factor. The engineering DFT is √N times the unitary DFT. Cyclic convolution is unnormalised.",
+      "fixed_by": "def-unitary-discrete-fourier-transform-on-z-mod-n",
+      "matters_for": [
+        "lem-na-bluestein-chirp-convolution-factorization",
+        "lem-na-mixed-radix-cooley-tukey-factorization",
+        "thm-na-dct-ii-orthogonality-inverse-and-dft-extension",
+        "thm-na-dst-i-orthogonality-inverse-and-dft-extension",
+        "thm-na-computed-fft-convolution-error-bound",
+        "thm-na-arbitrary-length-fft-correctness-and-cost"
+      ]
+    },
+    {
+      "convention": "DCT-II uses j,k=0,...,N−1, cosine argument π(j+1/2)k/N, and extension entries E_j=E_(2N−1−j)=x_j. DST-I uses j,k=1,...,N, sine argument πjk/(N+1), endpoint zeros at 0 and N+1, and antisymmetric reflected entries.",
+      "fixed_by": "def-na-dct-ii-and-dst-i-even-odd-extension",
+      "matters_for": [
+        "thm-na-dct-ii-orthogonality-inverse-and-dft-extension",
+        "thm-na-dst-i-orthogonality-inverse-and-dft-extension",
+        "thm-na-dct-ii-chebyshev-coefficient-extraction",
+        "ex-na-three-sample-dct-chebyshev-coefficients"
+      ]
+    },
+    {
+      "convention": "Successful operationwise arithmetic uses nearest-even binary rounding and excludes every nonzero subnormal or overflowing exact intermediate. Complex multiplication uses four rounded real products followed by one rounded subtraction and one rounded addition.",
+      "fixed_by": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+      "matters_for": [
+        "lem-na-complex-product-six-operation-roundoff-bound",
+        "lem-na-computed-unitary-butterfly-error-bound",
+        "thm-na-computed-unitary-radix-two-fft-error-bound",
+        "thm-na-computed-fft-convolution-error-bound",
+        "thm-na-bluestein-chirp-phase-error-separate-from-fft-error"
+      ]
+    },
+    {
+      "convention": "Phase certification uses finite directed-rounding formats and budgets, returns the lower-left corner of the cosine/sine rectangle, and bounds its modulus error by an upward-rounded sum of coordinate widths. Exhausted certification may return inconclusive.",
+      "fixed_by": "alg-na-certified-unit-circle-phase",
+      "matters_for": [
+        "thm-na-certified-unit-circle-phase-enclosure",
+        "alg-na-computed-unitary-radix-two-fft",
+        "alg-na-computed-fast-transforms-and-convolution",
+        "lem-na-computed-unitary-butterfly-error-bound"
+      ]
+    },
+    {
+      "convention": "The interval evaluator's π=4 arctan(1) is identified with the canonical Fourier π defined from the first positive cosine zero.",
+      "fixed_by": "thm-na-interval-pi-matches-canonical-fourier-pi",
+      "matters_for": [
+        "alg-na-certified-unit-circle-phase",
+        "thm-na-certified-unit-circle-phase-enclosure"
+      ]
+    },
+    {
+      "convention": "Computed FFT inputs and certified phase operands must belong coordinatewise to the same arithmetic representable set. The radix-two routine returns a unitary transform; the arbitrary-length routine returns an approximate unnormalised DFT.",
+      "fixed_by": "alg-na-computed-fast-transforms-and-convolution",
+      "matters_for": [
+        "thm-na-arbitrary-length-fft-correctness-and-cost",
+        "thm-na-bluestein-chirp-phase-error-separate-from-fft-error"
+      ]
+    },
+    {
+      "convention": "The arbitrary-length exactness and O(N log N) count concern the formal exact-constant model with sufficient subdivision depth. Integer factor search, phase generation, interval evaluation, storage, and bit complexity are excluded.",
+      "fixed_by": "thm-na-arbitrary-length-fft-correctness-and-cost",
+      "matters_for": [
+        "alg-na-computed-fast-transforms-and-convolution",
+        "computed-fast-transforms-and-convolution"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-na-certified-unit-circle-phase-enclosure",
+      "statement": "Whenever alg-na-certified-unit-circle-phase returns certified(ŵ,ε) on rational input q, its output satisfies |ŵ−exp(πiq)|≤ε≤τ.",
+      "used_by": [
+        "lem-na-computed-unitary-butterfly-error-bound",
+        "thm-na-bluestein-chirp-phase-error-separate-from-fft-error"
+      ]
+    },
+    {
+      "id": "lem-na-complex-product-six-operation-roundoff-bound",
+      "statement": "Let u≤1/16. For z,w∈C, the specified six-operation complex product satisfies |fl_C(zw)−zw|≤3u|z||w| if every nonzero intermediate is normal and no operation overflows.",
+      "used_by": [
+        "lem-na-computed-unitary-butterfly-error-bound",
+        "thm-na-computed-fft-convolution-error-bound",
+        "thm-na-bluestein-chirp-phase-error-separate-from-fft-error"
+      ]
+    },
+    {
+      "id": "lem-na-computed-unitary-butterfly-error-bound",
+      "statement": "For u≤1/16, |w|=1 and |ŵ−w|≤ε≤1/4, a successful butterfly with every exact nonzero real intermediate normal has pair error at most (10u+ε) times the Euclidean norm of its input pair.",
+      "used_by": [
+        "thm-na-computed-unitary-radix-two-fft-error-bound"
+      ]
+    },
+    {
+      "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+      "statement": "For N=2^m and a successful execution with u≤1/16 and every twiddle error at most εtw≤1/4, put η=10u+εtw. The forward and conjugated inverse errors are at most ((1+η)^m−1) times the input norm; if mη≤1 this is at most 2mη times that norm.",
+      "used_by": [
+        "thm-na-computed-fft-convolution-error-bound"
+      ]
+    },
+    {
+      "id": "thm-na-computed-fft-convolution-error-bound",
+      "statement": "For successful length-M=2^q convolution with u≤1/16 and twiddle errors bounded by εtw≤1/4, define ρ=(1+10u+εtw)^q−1, εp=3u, εs=2u+u² and λ=2ρ+ρ²+εp(1+ρ)². The cyclic error is at most √M[λ+ρ(1+λ)+εs(1+ρ)(1+λ)]||a||₂||b||₂; the same bound applies to the retained linear-convolution outputs.",
+      "used_by": [
+        "thm-na-bluestein-chirp-phase-error-separate-from-fft-error"
+      ]
+    },
+    {
+      "id": "lem-na-bluestein-chirp-convolution-factorization",
+      "statement": "For N≥1, M≥2N−1 and the stated padded chirp arrays, (F_N x)(k)=N^(-1/2)γ_k(a*_M b)_k for 0≤k<N, and a*_M b=√M F_M^(-1)((F_M a)⊙(F_M b)).",
+      "used_by": [
+        "alg-na-computed-fast-transforms-and-convolution",
+        "thm-na-arbitrary-length-fft-correctness-and-cost",
+        "thm-na-bluestein-chirp-phase-error-separate-from-fft-error",
+        "ex-na-prime-length-five-bluestein-transform"
+      ]
+    },
+    {
+      "id": "lem-na-mixed-radix-cooley-tukey-factorization",
+      "statement": "For integers r,s≥2, N=rs, strided inputs x^(u)_v=x_(u+rv), and y^(k₂)_u=exp(−2πiuk₂/N)(F_s x^(u))(k₂), one has (F_N x)(k₂+sk₁)=(F_r y^(k₂))(k₁) throughout the stated index ranges, without a coprimality assumption.",
+      "used_by": [
+        "alg-na-computed-fast-transforms-and-convolution",
+        "thm-na-arbitrary-length-fft-correctness-and-cost"
+      ]
+    },
+    {
+      "id": "lem-na-zero-padding-removes-linear-convolution-aliasing",
+      "statement": "For positive sequence lengths n,m and M≥n+m−1, zero padding makes the first n+m−1 cyclic-convolution entries equal the full linear convolution and makes every remaining cyclic entry zero.",
+      "used_by": [
+        "alg-na-computed-fft-cyclic-and-linear-convolution",
+        "thm-na-computed-fft-convolution-error-bound",
+        "ex-na-two-point-circular-aliasing"
+      ]
+    },
+    {
+      "id": "thm-na-dct-ii-orthogonality-inverse-and-dft-extension",
+      "statement": "For the stated DCT-II matrix C, CCᵀ=diag(N,N/2,...,N/2), with the displayed inverse formula; the even extension satisfies (F_(2N) E_N x)(k)=√(2/N)exp(πik/(2N))X_k for 0≤k<N.",
+      "used_by": [
+        "thm-na-dct-ii-chebyshev-coefficient-extraction",
+        "ex-na-three-sample-dct-chebyshev-coefficients"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-sine-and-cosine-by-power-series",
+      "used_for": "Point-function conventions in the DCT/DST definition.",
+      "opened": true
+    },
+    {
+      "id": "def-pi-via-first-positive-cosine-zero",
+      "used_for": "Canonical Fourier π and its identification with the interval constant.",
+      "opened": true
+    },
+    {
+      "id": "def-unitary-discrete-fourier-transform-on-z-mod-n",
+      "used_for": "Negative-sign unitary transform, domains and normalization.",
+      "opened": true
+    },
+    {
+      "id": "def-unnormalised-engineering-dft-and-conversion",
+      "used_for": "Conversion X=√N F_N x in arbitrary-length reductions and examples.",
+      "opened": true
+    },
+    {
+      "id": "def-cyclic-convolution-on-z-mod-n",
+      "used_for": "Unnormalised cyclic convolution and modular indexing.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product",
+      "used_for": "The √M factor in FFT convolution and its norm estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-fourier-inversion",
+      "used_for": "Positive-sign inverse and exact convolution reconstruction.",
+      "opened": true
+    },
+    {
+      "id": "def-integers-modulo-n",
+      "used_for": "Residue classes in cyclic convolution and chirp embedding.",
+      "opened": true
+    },
+    {
+      "id": "thm-integers-modulo-n-basic-algebra",
+      "used_for": "Modular group arithmetic and cyclic index manipulations.",
+      "opened": true
+    },
+    {
+      "id": "thm-standard-representatives-modulo-n",
+      "used_for": "Unique representatives and finite index maps.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum-in-a-commutative-monoid",
+      "used_for": "Finite Fourier and convolution sums.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-reindexing-and-fubini",
+      "used_for": "Finite-sum rearrangement in transform factorizations.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-exponential-addition-and-real-extension",
+      "used_for": "Splitting exponential factors in chirp, mixed-radix and extension identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-numbers-form-a-field",
+      "used_for": "Complex coordinate arithmetic and algebraic cancellation.",
+      "opened": true
+    },
+    {
+      "id": "def-rational-power",
+      "used_for": "Positive square-root normalization factors.",
+      "opened": true
+    },
+    {
+      "id": "lem-rational-power-laws",
+      "used_for": "Multiplication and cancellation of transform normalization factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-kernel-and-fibres-of-complex-exponential",
+      "used_for": "Integer periods and nonvanishing geometric-sum denominators.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-relative-floating-point-model-and-unit-roundoff",
+      "used_for": "Successful-operation relative error and exact-zero rules.",
+      "opened": true
+    },
+    {
+      "id": "def-abs-value",
+      "used_for": "Real component error magnitudes.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+      "used_for": "Complex-product constants, butterfly aggregation and Euclidean triangle inequalities.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-conjugate-real-imaginary-part-and-modulus",
+      "used_for": "Coordinatewise complex error and modulus formulas.",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "used_for": "Unit-modulus phases and cosine/sine representation.",
+      "opened": true
+    },
+    {
+      "id": "thm-product-to-sum-and-sum-to-product-identities",
+      "used_for": "DCT-II and DST-I orthogonality sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-cosine-zero-sets-and-fundamental-period",
+      "used_for": "Nonzero sine denominators in the DCT orthogonality proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-rank-nullity",
+      "used_for": "DCT matrix invertibility from its right inverse.",
+      "opened": true
+    },
+    {
+      "id": "thm-invertible-matrix-theorem",
+      "used_for": "Identification of the DCT inverse matrix.",
+      "opened": true
+    },
+    {
+      "id": "def-chebyshev-polynomials-first-and-second-kind",
+      "used_for": "Chebyshev recurrence and polynomial coefficients in extraction and its example.",
+      "opened": true
+    },
+    {
+      "id": "thm-chebyshev-multiple-angle-identities",
+      "used_for": "T_k(cos θ)=cos(kθ) in coefficient extraction.",
+      "opened": true
+    },
+    {
+      "id": "thm-principal-inverse-tangent-calculus",
+      "used_for": "Integral arctangent, endpoint series and canonical π/4 identification.",
+      "opened": true
+    },
+    {
+      "id": "thm-abel-limit-theorem",
+      "used_for": "Endpoint limit in the canonical-π bridge.",
+      "opened": true
+    },
+    {
+      "id": "cor-differentiable-implies-continuous",
+      "used_for": "Continuity of principal arctangent at 1.",
+      "opened": true
+    },
+    {
+      "id": "def-recursive-radix-two-fast-fourier-transform",
+      "used_for": "Published unnormalised recursion and comparison with normalized butterflies.",
+      "opened": true
+    },
+    {
+      "id": "lem-complex-conjugation-and-modulus-laws",
+      "used_for": "Phase-error triangle bounds, unit modulus and inverse conjugation.",
+      "opened": true
+    },
+    {
+      "id": "def-counting-inner-product-on-complex-functions-on-z-mod-n",
+      "used_for": "Unweighted Euclidean norms throughout the stability bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-radix-two-fft-correctness",
+      "used_for": "Exact radix-two transform computation in the formal model.",
+      "opened": true
+    },
+    {
+      "id": "lem-radix-two-even-odd-dft-factorisation",
+      "used_for": "Derivation of exact normalized butterfly blocks.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-parseval-and-plancherel",
+      "used_for": "Norm preservation in stage, convolution and chirp bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-radix-two-fft-arithmetic-complexity",
+      "used_for": "Power-of-two terminal costs in arbitrary-length complexity.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Logarithm convention in the complexity argument.",
+      "opened": true
+    },
+    {
+      "id": "def-logarithm-to-a-base",
+      "used_for": "Definition of log₂.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Product-to-sum and monotonicity bounds for the comparison tree.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Finite recurrence and binary-tree arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-well-ordering-principle",
+      "used_for": "Strong induction on transform length.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-na-three-sample-dct-chebyshev-coefficients",
+      "concern": "F2 says, “The DCT-II inverse is a_0=X_0/N and a_k=2X_k/N for k≥1,” citing thm-na-dct-ii-orthogonality-inverse-and-dft-extension. That supplier gives reconstruction of sample coordinates by a cosine sum, not this Chebyshev coefficient-recovery rule. The displayed rule is supplied by thm-na-dct-ii-chebyshev-coefficient-extraction, already cited in F1. The numerical example remains correct, but F2 conflates sample inversion with coefficient extraction and attributes the formula to the wrong statement.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "lem-na-bluestein-chirp-convolution-factorization",
+      "concern": "Proof 3.1 says, “Applying the inverse in [F3] and dividing by √M ... proves the displayed FFT convolution representation of c.” Applying the inverse to F_M c=√M((F_M a)⊙(F_M b)) already yields the claimed c=√M F_M^(-1)((F_M a)⊙(F_M b)); the stated additional division instead gives a formula for c/√M. The displayed conclusion is correct, but the description of the scaling operation is inaccurate.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "computed-fast-transforms-and-convolution",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "The actual supplier is the operationwise binary nearest-even model. Complex products use its six operations; roots and real scalings are rounded as specified. The error claims retain successful zero-or-normal intermediate hypotheses and do not import a factorization stability result."
+    },
+    {
+      "from": "computed-fast-transforms-and-convolution",
+      "to": "outward-rounded-interval-and-ball-arithmetic",
+      "faithful": true,
+      "note": "The phase routine supplies directed angle enclosures to finite cosine/sine DAG evaluations, uses only finite range-containing outputs, and preserves inconclusive/overflow branches. The separate π bridge uses the supplier's exact Machin identity with its integral-defined arctangent."
+    },
+    {
+      "from": "finite-bit-random-streams-and-variate-generation",
+      "to": "computed-fast-transforms-and-convolution",
+      "faithful": true,
+      "note": "alg-box-muller-finite-bit-transform passes rational q=2u₂ and fixed admissible phase controls, imports the certified absolute phase-error bound, and propagates failed certification. Its page explicitly requires uniform certification over all bit inputs for the distribution-error theorem."
+    },
+    {
+      "from": "clenshaw-curtis-and-extrapolation-quadrature",
+      "to": "computed-fast-transforms-and-convolution",
+      "faithful": true,
+      "note": "alg-na-computed-clenshaw-curtis-via-fast-dft passes representable samples, length 2n and all declared controls to the unnormalised arbitrary-length DFT. Its endpoint/interior DCT-I rescalings match that convention. It propagates supplier failures and makes no new end-to-end stability claim."
+    }
+  ]
+}

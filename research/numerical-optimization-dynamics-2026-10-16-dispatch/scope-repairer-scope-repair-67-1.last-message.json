@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "67",
+  "round": 1,
+  "reviewed_items": [
+    "alg-thick-and-implicitly-restarted-arnoldi-with-locking",
+    "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+    "alg-block-lobpcg-with-rank-loss-status",
+    "thm-finite-budget-restarted-and-block-procedures-return-a-status",
+    "lem-generalized-ritz-values-monotone-under-nested-subspaces",
+    "lem-block-principal-angle-squared-ritz-enclosure",
+    "thm-lobpcg-selected-ritz-values-do-not-increase",
+    "alg-shift-invert-and-harmonic-ritz-extraction",
+    "thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status",
+    "thm-shift-invert-map-and-inexact-solve-residual-transfer",
+    "ex-implicit-restart-shift-can-suppress-wanted-component",
+    "ex-clustered-vibration-modes-with-block-lobpcg",
+    "ex-interior-vibration-mode-shift-invert"
+  ],
+  "reviewed_pages": [
+    "restarted-and-block-eigensolvers",
+    "restarted-and-block-eigensolvers-examples"
+  ],
+  "decision": "accept",
+  "reason": "The dispatched local findings are repaired, and direct and indirect consumers are checked. Prepared for final whole-batch review; this is not independent final acceptance.",
+  "findings": [
+    {
+      "id": "alg-thick-and-implicitly-restarted-arnoldi-with-locking",
+      "type": "local",
+      "reason": "Added a thick-restart path for implicit runs with locked pairs, mapped unavailable or wrong-length shifts, counted only independent locked vectors, and clarified early-breakdown dimensions and exact restart orthogonalization."
+    },
+    {
+      "id": "thm-finite-budget-restarted-and-block-procedures-return-a-status",
+      "type": "local",
+      "reason": "Restricted the finite-return hypothesis to exact value-returning operations and the target or shift outcomes the algorithm maps; updated the termination proof for the locked-pair fallback."
+    },
+    {
+      "id": "thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status",
+      "type": "local",
+      "reason": "Restricted non-QZ operations to value returns; the remaining unavailable-solve and QZ status branches are explicitly mapped."
+    },
+    {
+      "id": "ex-interior-vibration-mode-shift-invert",
+      "type": "local",
+      "reason": "Specified a separate harmonic invocation with trial basis, QZ sweep budget, and QZ tolerance."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+      "decision": "accept",
+      "reason": "Its hypotheses use the no-lock implicit branch; the polynomial-subspace and residual arguments remain applicable."
+    },
+    {
+      "id": "thm-finite-budget-restarted-and-block-procedures-return-a-status",
+      "decision": "accept",
+      "reason": "The repaired hypotheses and proof match the algorithm's mapped statuses and finite restart paths."
+    },
+    {
+      "id": "ex-implicit-restart-shift-can-suppress-wanted-component",
+      "decision": "accept",
+      "reason": "The stated zero-tolerance runs have no accepted Ritz pair before their scheduled restarts, so they use the unchanged no-lock implicit branch."
+    },
+    {
+      "id": "alg-golub-welsch-certified-node-and-weight-enclosures",
+      "decision": "accept",
+      "reason": "The full-dimension run returns with all independent exact Ritz pairs in its first cycle, before any restart or target rule is needed; no outside repair is required."
+    },
+    {
+      "id": "restarted-and-block-eigensolvers",
+      "decision": "accept",
+      "reason": "Its summary remains consistent with retained locked subspaces and the repaired finite-status hypotheses."
+    }
+  ]
+}

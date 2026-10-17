@@ -1,0 +1,526 @@
+[
+  {
+    "order": 2406,
+    "id": "verified-linear-systems-and-spectral-enclosures",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Verified linear systems and spectral enclosures",
+    "companion": "verified-linear-systems-and-spectral-enclosures-examples",
+    "requires": [
+      "dual-spaces-bilinear-forms-and-inertia",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "finite-precision-direct-factorizations",
+      "sparse-direct-elimination-and-ordering",
+      "outward-rounded-interval-and-ball-arithmetic",
+      "computed-schur-decompositions-and-nonnormal-spectra",
+      "homology-axioms-degree-and-classical-applications"
+    ],
+    "items": [
+      {
+        "id": "def-complex-infinity-matrix-norm",
+        "kind": "definition",
+        "title": "The complex induced infinity matrix norm",
+        "deps": [
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-hermitian-residual-orthogonality-certificate",
+        "kind": "definition",
+        "title": "Residual and near-orthogonality data for an approximate Hermitian eigenbasis",
+        "deps": [
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $\\mathcal A$ be a nonempty family of Hermitian matrices in $\\mathbb C^{n\\times n}$, let $V\\in\\mathbb C^{n\\times n}$, and let $\\Theta=\\operatorname{diag}(\\theta_1,\\ldots,\\theta_n)$ with real $\\theta_j$. A **residual and orthogonality certificate** is a tuple of nonnegative numbers $\\delta,\\rho,M_A,M_\\Theta,\\tau$ such that, for every $A\\in\\mathcal A$,\n$$\\|V^*V-I\\|_2\\le\\delta<1,\\quad \\|AV-V\\Theta\\|_2\\le\\rho,\\quad \\|A\\|_2\\le M_A,\\quad \\|\\Theta\\|_2\\le M_\\Theta,\\quad 1-\\sqrt{1-\\delta}\\le\\tau.$$\nThe certificate uses exact inequalities or separately verified upper bounds. Its eigenvalue enclosure radius is $\\eta=\\rho+(M_A+M_\\Theta)\\tau$. This definition does not assert that computed residuals or Gram matrices satisfy the bounds; that is a separate certification procedure.\n"
+      },
+      {
+        "id": "def-verified-linear-residual-certificate-data",
+        "kind": "definition",
+        "title": "Verified point and uniform linear residual certificate data",
+        "deps": [
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-brouwer-fixed-point-for-closed-boxes",
+        "kind": "lemma",
+        "title": "Brouwer fixed points exist on every nonempty closed box",
+        "deps": [
+          "thm-brouwer-fixed-point-theorem"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-complex-hermitian-realification-identities",
+        "kind": "lemma",
+        "title": "Realification preserves Hermitian spectra, norms, and congruence",
+        "deps": [
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-rank-nullity",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-euclidean-inner-product",
+          "def-real-and-complex-inner-product-space",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose"
+        ],
+        "dependency_level": 0,
+        "statement": "For $m,n,p\\in\\mathbb N$ and $Z=X+iY\\in\\mathbb C^{m\\times n}$ with real $X,Y$, define its realification\n$$\n\\mathcal R(Z)=\\begin{pmatrix}X&-Y\\\\Y&X\\end{pmatrix}\\in\\mathbb R^{2m\\times2n}.\n$$\nUse the standard coordinate inner products $\\langle z,w\\rangle=\\sum_j z_j\\overline{w_j}$ on $\\mathbb C^k$ and $\\langle x,y\\rangle=\\sum_j x_jy_j$ on $\\mathbb R^k$, with their induced 2-norms. For compatible $Z\\in\\mathbb C^{m\\times n}$ and $W\\in\\mathbb C^{n\\times p}$,\n$$\n\\mathcal R(ZW)=\\mathcal R(Z)\\mathcal R(W).\n$$\nFor any $Z\\in\\mathbb C^{m\\times n}$, $\\mathcal R(Z^*)=\\mathcal R(Z)^{\\mathsf T}$. For square $Z\\in\\mathbb C^{n\\times n}$, $Z$ is invertible exactly when $\\mathcal R(Z)$ is invertible. If $H=H^*$ is Hermitian with eigenvalues $\\lambda_1,\\ldots,\\lambda_n$ counted with multiplicity, then $\\mathcal R(H)$ is real symmetric with eigenvalue multiset $\\{\\lambda_j,\\lambda_j:1\\le j\\le n\\}$. For every complex matrix $E\\in\\mathbb C^{m\\times n}$, $\\|\\mathcal R(E)\\|_2=\\|E\\|_2$.\n\n"
+      },
+      {
+        "id": "lem-hermitian-eigenvalue-frobenius-bound",
+        "kind": "lemma",
+        "title": "Hermitian eigenvalues lie within a certified Frobenius bound",
+        "deps": [
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-hermitian-rayleigh-residual-spectrum-distance",
+        "kind": "lemma",
+        "title": "A Hermitian approximate-eigenpair residual locates a spectral value",
+        "deps": [
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-real-and-complex-inner-product-space"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $A=A^*\\in\\mathbb C^{n\\times n}$, $n\\ge1$, and equip $\\mathbb C^n$ with the standard Hermitian inner product $\\langle x,y\\rangle=\\sum_{j=1}^n x_j\\overline{y_j}$ and its induced norm $\\|\\cdot\\|_2$. For $v\\in\\mathbb C^n\\setminus\\{0\\}$ and $\\theta\\in\\mathbb R$, if $\\rho\\ge\\|Av-\\theta v\\|_2$ and $0<\\nu\\le\\|v\\|_2$, then some eigenvalue $\\lambda$ of $A$ satisfies $|\\lambda-\\theta|\\le\\rho/\\nu$.\n\n"
+      },
+      {
+        "id": "thm-inertia-guided-bisection-loop-soundness",
+        "kind": "theorem",
+        "title": "Certified inertia counts maintain ordered eigenvalue brackets",
+        "deps": [
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-interval-determinant-sign-certificate-soundness",
+        "kind": "theorem",
+        "title": "An interval determinant excluding zero certifies nonsingularity and sign",
+        "deps": [
+          "def-determinant-of-a-square-matrix",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-complex-hermitian-eigenvalue-perturbation",
+        "kind": "lemma",
+        "title": "Hermitian eigenvalues move by at most the spectral norm perturbation",
+        "deps": [
+          "lem-complex-hermitian-realification-identities",
+          "thm-weyl-inequalities-for-self-adjoint-sums",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-complex-hermitian-inertia-congruence",
+        "kind": "lemma",
+        "title": "Complex Hermitian inertia is invariant under nonsingular congruence",
+        "deps": [
+          "lem-complex-hermitian-realification-identities",
+          "thm-sylvesters-law-of-inertia"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-complex-infinity-matrix-norm-submultiplicative",
+        "kind": "lemma",
+        "title": "The complex infinity matrix norm is compatible and submultiplicative",
+        "deps": [
+          "def-complex-infinity-matrix-norm"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-neumann-inverse-norm-bound",
+        "kind": "lemma",
+        "title": "A Neumann defect bounds the inverse norm",
+        "deps": [
+          "lem-neumann-invertibility-for-finite-matrices",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-hermitian-two-by-two-inertia-sign-test",
+        "kind": "lemma",
+        "title": "A Hermitian two-by-two pivot inertia is determined by determinant and trace signs",
+        "deps": [
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-characteristic-polynomial-is-similarity-invariant",
+          "def-characteristic-polynomial-of-a-matrix",
+          "thm-determinant-of-a-triangular-matrix",
+          "lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients",
+          "def-determinant-of-a-square-matrix",
+          "def-trace-of-a-square-matrix",
+          "lem-complex-hermitian-inertia-congruence"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-complex-infinity-neumann-inverse-norm-bound",
+        "kind": "lemma",
+        "title": "A complex infinity-norm defect bounds the inverse norm",
+        "deps": [
+          "def-complex-infinity-matrix-norm",
+          "lem-complex-infinity-matrix-norm-submultiplicative",
+          "thm-rank-nullity"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-hermitian-block-ldl-inertia-additivity",
+        "kind": "lemma",
+        "title": "Block LDL congruence adds the Hermitian pivot inertias",
+        "deps": [
+          "lem-complex-hermitian-inertia-congruence",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-krawczyk-set-inclusion-existence-and-uniqueness",
+        "kind": "theorem",
+        "title": "Krawczyk inclusion gives solutions and contraction gives uniqueness",
+        "deps": [
+          "lem-brouwer-fixed-point-for-closed-boxes",
+          "def-complex-infinity-matrix-norm",
+          "lem-complex-infinity-matrix-norm-submultiplicative"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-near-orthonormal-hermitian-eigenvalue-enclosure",
+        "kind": "theorem",
+        "title": "Near-orthonormal residual data enclose all ordered Hermitian eigenvalues",
+        "deps": [
+          "def-hermitian-residual-orthogonality-certificate",
+          "lem-complex-hermitian-eigenvalue-perturbation",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-rank-nullity",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-uniform-linear-residual-solution-enclosure",
+        "kind": "theorem",
+        "title": "A uniform approximate inverse and residual enclose every linear solution",
+        "deps": [
+          "def-verified-linear-residual-certificate-data",
+          "lem-neumann-inverse-norm-bound",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "thm-rank-nullity",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-complex-resolvent-cover-certificate-soundness",
+        "kind": "theorem",
+        "title": "Diskwise Neumann certificates bound a complex matrix resolvent",
+        "deps": [
+          "lem-complex-infinity-neumann-inverse-norm-bound",
+          "def-complex-infinity-matrix-norm",
+          "lem-complex-infinity-matrix-norm-submultiplicative",
+          "thm-rank-nullity"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-complex-resolvent-cover-validator",
+        "kind": "algorithm",
+        "title": "Finite complex contour resolvent validator with cover and inconclusive statuses",
+        "deps": [
+          "thm-complex-resolvent-cover-certificate-soundness",
+          "lem-complex-infinity-neumann-inverse-norm-bound",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "def-complex-infinity-matrix-norm",
+          "lem-complex-infinity-matrix-norm-submultiplicative"
+        ],
+        "dependency_level": 5,
+        "justified_by": [
+          "thm-complex-resolvent-cover-validator-soundness"
+        ]
+      },
+      {
+        "id": "alg-interval-determinant-sign-certifier",
+        "kind": "algorithm",
+        "title": "Outward Leibniz determinant sign and nonsingularity certifier",
+        "deps": [
+          "thm-interval-determinant-sign-certificate-soundness",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "dependency_level": 5,
+        "justified_by": [
+          "thm-interval-determinant-sign-certifier-soundness"
+        ]
+      },
+      {
+        "id": "alg-interval-hermitian-ldl-inertia-certifier",
+        "kind": "algorithm",
+        "title": "Outward interval block LDL inertia certifier with pivot-inconclusive status",
+        "deps": [
+          "alg-symmetric-indefinite-block-ldl-star",
+          "lem-hermitian-block-ldl-inertia-additivity",
+          "lem-hermitian-two-by-two-inertia-sign-test",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "dependency_level": 5,
+        "justified_by": [
+          "thm-interval-hermitian-ldl-inertia-certifier-soundness"
+        ]
+      },
+      {
+        "id": "alg-interval-linear-krawczyk-certifier",
+        "kind": "algorithm",
+        "title": "Interval Krawczyk linear system certifier with explicit statuses",
+        "deps": [
+          "thm-krawczyk-set-inclusion-existence-and-uniqueness",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "def-complex-infinity-matrix-norm",
+          "lem-complex-infinity-matrix-norm-submultiplicative"
+        ],
+        "dependency_level": 5,
+        "justified_by": [
+          "thm-interval-linear-krawczyk-certifier-soundness"
+        ]
+      },
+      {
+        "id": "alg-near-orthonormal-hermitian-eigenvalue-certifier",
+        "kind": "algorithm",
+        "title": "Certified Hermitian eigenvalue intervals from residual and Gram bounds",
+        "deps": [
+          "def-hermitian-residual-orthogonality-certificate",
+          "thm-near-orthonormal-hermitian-eigenvalue-enclosure",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "dependency_level": 5,
+        "justified_by": [
+          "thm-near-orthonormal-hermitian-eigenvalue-certifier-soundness"
+        ]
+      },
+      {
+        "id": "alg-point-verified-linear-system-certifier",
+        "kind": "algorithm",
+        "title": "Finite precision point linear solve certificate with explicit status",
+        "deps": [
+          "def-verified-linear-residual-certificate-data",
+          "thm-uniform-linear-residual-solution-enclosure",
+          "lem-rounded-linear-and-normal-residual-certificates",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "dependency_level": 5,
+        "justified_by": [
+          "thm-point-verified-linear-system-certifier-soundness"
+        ]
+      },
+      {
+        "id": "alg-uniform-interval-linear-residual-certifier",
+        "kind": "algorithm",
+        "title": "Uniform interval linear residual certificate with inconclusive status",
+        "deps": [
+          "def-verified-linear-residual-certificate-data",
+          "thm-uniform-linear-residual-solution-enclosure",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "dependency_level": 5,
+        "justified_by": [
+          "thm-uniform-interval-linear-residual-certifier-soundness"
+        ]
+      },
+      {
+        "id": "thm-complex-resolvent-cover-validator-soundness",
+        "kind": "theorem",
+        "title": "The finite disk cover validator returns a uniform resolvent bound on success",
+        "deps": [
+          "alg-complex-resolvent-cover-validator",
+          "thm-complex-resolvent-cover-certificate-soundness",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-interval-determinant-sign-certifier-soundness",
+        "kind": "theorem",
+        "title": "The interval determinant sign certifier is sound and failure means unknown",
+        "deps": [
+          "alg-interval-determinant-sign-certifier",
+          "thm-interval-determinant-sign-certificate-soundness",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-interval-hermitian-ldl-inertia-certifier-soundness",
+        "kind": "theorem",
+        "title": "The interval block LDL certifier returns the exact inertia on success",
+        "deps": [
+          "alg-interval-hermitian-ldl-inertia-certifier",
+          "lem-hermitian-block-ldl-inertia-additivity",
+          "lem-hermitian-two-by-two-inertia-sign-test",
+          "lem-complex-hermitian-inertia-congruence",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-interval-linear-krawczyk-certifier-soundness",
+        "kind": "theorem",
+        "title": "The interval Krawczyk certifier has the stated per-system guarantee",
+        "deps": [
+          "alg-interval-linear-krawczyk-certifier",
+          "thm-krawczyk-set-inclusion-existence-and-uniqueness",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-near-orthonormal-hermitian-eigenvalue-certifier-soundness",
+        "kind": "theorem",
+        "title": "The residual and orthogonality certifier encloses the full ordered spectrum",
+        "deps": [
+          "alg-near-orthonormal-hermitian-eigenvalue-certifier",
+          "thm-near-orthonormal-hermitian-eigenvalue-enclosure",
+          "def-hermitian-residual-orthogonality-certificate",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-point-verified-linear-system-certifier-soundness",
+        "kind": "theorem",
+        "title": "The point linear solve certifier returns a sound solution ball on success",
+        "deps": [
+          "alg-point-verified-linear-system-certifier",
+          "thm-uniform-linear-residual-solution-enclosure",
+          "lem-rounded-linear-and-normal-residual-certificates",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-uniform-interval-linear-residual-certifier-soundness",
+        "kind": "theorem",
+        "title": "The uniform interval residual certifier is sound on success",
+        "deps": [
+          "alg-uniform-interval-linear-residual-certifier",
+          "thm-uniform-linear-residual-solution-enclosure",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "def-verified-linear-residual-certificate-data"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "alg-ordered-hermitian-eigenvalue-bisection",
+        "kind": "algorithm",
+        "title": "Budgeted ordered Hermitian eigenvalue bisection by verified inertia",
+        "deps": [
+          "thm-inertia-guided-bisection-loop-soundness",
+          "alg-interval-hermitian-ldl-inertia-certifier",
+          "thm-interval-hermitian-ldl-inertia-certifier-soundness",
+          "lem-hermitian-eigenvalue-frobenius-bound",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "dependency_level": 7,
+        "justified_by": [
+          "thm-ordered-hermitian-eigenvalue-bisection-soundness"
+        ]
+      },
+      {
+        "id": "thm-ordered-hermitian-eigenvalue-bisection-soundness",
+        "kind": "theorem",
+        "title": "The ordered Hermitian bisection certifier returns valid intervals or an inconclusive status",
+        "deps": [
+          "alg-ordered-hermitian-eigenvalue-bisection",
+          "thm-inertia-guided-bisection-loop-soundness",
+          "lem-hermitian-eigenvalue-frobenius-bound",
+          "thm-interval-hermitian-ldl-inertia-certifier-soundness",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "dependency_level": 8
+      }
+    ]
+  },
+  {
+    "order": 2407,
+    "id": "verified-linear-systems-and-spectral-enclosures-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Verified linear systems and spectral enclosures — Examples",
+    "companion": "verified-linear-systems-and-spectral-enclosures",
+    "requires": [
+      "verified-linear-systems-and-spectral-enclosures"
+    ],
+    "items": [
+      {
+        "id": "ex-certified-ill-conditioned-two-by-two-linear-solve",
+        "kind": "example",
+        "title": "A certified residual enclosure remains valid for an ill-conditioned 2 by 2 solve",
+        "deps": [
+          "thm-uniform-linear-residual-solution-enclosure",
+          "def-verified-linear-residual-certificate-data"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-uncertain-linear-matrix-family-contains-singular-member",
+        "kind": "example",
+        "title": "An interval matrix family can contain a singular member",
+        "deps": [
+          "thm-uniform-linear-residual-solution-enclosure",
+          "thm-interval-determinant-sign-certificate-soundness"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-hermitian-eigenvalue-bisection-by-verified-inertia",
+        "kind": "example",
+        "title": "Ordered eigenvalue bisection by exact inertia queries",
+        "deps": [
+          "alg-ordered-hermitian-eigenvalue-bisection",
+          "thm-ordered-hermitian-eigenvalue-bisection-soundness",
+          "thm-interval-hermitian-ldl-inertia-certifier-soundness",
+          "thm-inertia-guided-bisection-loop-soundness"
+        ],
+        "dependency_level": 9
+      }
+    ]
+  }
+]

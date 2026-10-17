@@ -1,0 +1,32 @@
+{
+  "batch": "85",
+  "findings": [
+    {
+      "id": "thm-convex-kkt-sufficiency-and-normal-cone-certificate",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "04e13d66b54f0241043de0050db3f1fcb7608741a470ebee86d0ad16f64158a6"
+      },
+      "location": "## Statement, sentence concluding global minimization and normal-cone membership: the references to the feasible set C and N_C(x_*)",
+      "defect": "ill-formed",
+      "evidence": "The theorem states the objective, inequalities, and equalities Ax=b, then uses C in both conclusions without defining C or explicitly instantiating the generic program definition with h(x)=Ax-b. Define C={x in U: Ax=b, g_i(x)<=0} and specify the finite inequality index range so both conclusions have a bound subject.",
+      "severity": "fatal"
+    },
+    {
+      "id": "lem-finitely-generated-euclidean-cones-are-closed",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "be7659a5a50cea54e4a5e5de9643f7a91dcf648fc39ecb0e62985f7abd60c32e"
+      },
+      "location": "## Proof, step 1.2: the assertion that R_J is continuous and the resulting closed-preimage claim",
+      "defect": "unlicensed-inference",
+      "evidence": "The proof uses continuity of R_J(y)=G_J^{-1}A_J^T y to conclude R_J^{-1}(R_{>=0}^{|J|}) is closed, but neither proves continuity nor cites a dependency that supplies it. Add an estimate such as ||R_J(y)-R_J(y')||_2 <= ||G_J^{-1}A_J^T||_2 ||y-y'||_2, or cite a result establishing continuity of finite-dimensional matrix maps.",
+      "severity": "nonfatal"
+    }
+  ],
+  "coverage_note": "Opened all 24 assigned items, both assigned pages, the four required prerequisite pages, their direct suppliers, and additional supporting items needed for the reviewed proof paths; the full transitive foundation graph was not re-audited. Both in-run findings bind the current source SHA-256 observed during review. The Nocedal PDF fetch timed out and the Bertsekas PDF was too large for the web reader; their relevant assigned arguments were checked directly, with the Nocedal Maratos excerpt available from the indexed source."
+}

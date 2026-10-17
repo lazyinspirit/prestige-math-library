@@ -1,0 +1,276 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-81.proof-contracts.json (before)
++++ research/numerical-optimization-dynamics-2026-10-16-batch-81.proof-contracts.json (proposed)
+@@ -27,13 +27,13 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The definition is for scalars and finite matrices with n>=1; it has no empty-domain instance."
++          "status": "checked",
++          "evidence": "Definition: For n=0, I_0 is the unique empty matrix; every power and partial sum is that matrix, and phi_k(0_0x0)=I_0/k!=0_0x0 including k=0."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Definition: setting z=0 or X=0 leaves only the j=0 series term; lem-phi-series-converges-absolutely supplies the proved values."
++          "evidence": "Definition: scalar zero gives 1/k!; positive-size zero matrices have only the j=0 term possibly nonzero, and at size0 every term is the empty matrix, yielding I_n/k! in every size."
+         },
+         {
+           "case": "one",
+@@ -48,7 +48,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Definition: k=0 and every integer k>=0 are included; the matrix domain states n>=1."
++          "evidence": "Definition: k=0 and every integer k>=0 are included; the matrix domain states n>=0, with I_0 the unique empty matrix."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -407,7 +407,7 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "Put $R:=\\|X\\|_2$. The operator norm is defined by [F1]. Repeated submultiplicativity in [F2] gives $\\|X^j\\|_2\\le R^j$, so $\\|X^j/(j+k)!\\|_2\\le R^j/j!$ for every $j$. The norms therefore have a finite sum by [F4].",
++          "claim": "If $n=0$, the series definition gives $X^j=I_0=0_{0\\times0}$ for every $j\\ge0$. Every term has norm $0$ by [F1], so the matrix series is absolutely convergent and every partial sum equals the unique empty matrix. For $n\\ge1$, put $R:=\\|X\\|_2$. The operator norm is defined by [F1]. Repeated submultiplicativity in [F2] gives $\\|X^j\\|_2\\le R^j$, so $\\|X^j/(j+k)!\\|_2\\le R^j/j!$ for every $j$. The norms therefore have a finite sum by [F4].",
+           "step": "1.2",
+           "inputs": [
+             "given",
+@@ -418,7 +418,7 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "Let $S_N$ be the partial sums of the matrix series. For $N>M$, the triangle inequality bounds $\\|S_N-S_M\\|_2$ by the tail of the convergent scalar majorant in step 1.2, so $(S_N)$ is Cauchy. The matrix space is finite-dimensional and complete by [F3], hence $(S_N)$ converges in operator norm.",
++          "claim": "For $n\\ge1$, let $S_N$ be the partial sums of the matrix series. For $N>M$, the triangle inequality bounds $\\|S_N-S_M\\|_2$ by the tail of the convergent scalar majorant in step 1.2, so $(S_N)$ is Cauchy. The matrix space is finite-dimensional and complete by [F3], hence $(S_N)$ converges in operator norm. For $n=0$, convergence was established directly in step 1.2.",
+           "step": "2.1",
+           "inputs": [
+             "given",
+@@ -429,11 +429,12 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "At $z=0$ only the $j=0$ term of the scalar series is nonzero, and at $X=0$ only the $j=0$ matrix term is nonzero; these terms are respectively $1/k!$ and $I_n/k!$. Hence both stated zero values follow.",
++          "claim": "At $z=0$ only the $j=0$ term of the scalar series is nonzero, and at $X=0$ with $n\\ge1$ only the $j=0$ matrix term is nonzero; these terms are respectively $1/k!$ and $I_n/k!$. When $n=0$, every matrix term and $I_0/k!$ is the unique empty matrix by step 1.2. Hence both stated zero values follow for every allowed size.",
+           "step": "3.1",
+           "inputs": [
+             "given",
+             "step 1.1",
++            "step 1.2",
+             "step 2.1",
+             "algebra"
+           ]
+@@ -443,18 +444,18 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "Statement assumes a finite matrix of dimension n>=1; there is no empty matrix-space case."
++          "status": "checked",
++          "evidence": "step 1.2: for n=0 every term has norm0, the series is absolutely convergent, and every partial sum is the unique empty matrix; step 2.1 retains this direct convergence case."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Step 2.1 evaluates both scalar and matrix zero inputs directly."
++          "evidence": "step 3.1 evaluates scalar zero, positive-size zero matrices and the empty matrix directly, using step 1.2 for the empty case."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Step 1.2 applies to n=1 and the statement includes every finite n>=1."
++          "evidence": "step 1.2 retains the positive-size norm majorant, including n=1; the Statement now includes every finite n>=0."
+         },
+         {
+           "case": "degenerate",
+@@ -697,7 +698,7 @@
+           "fact": "F1",
+           "source": "def-phi-functions-by-everywhere-convergent-series",
+           "source_section": "Definition",
+-          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge1$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, only the $j=0$ term remains, so $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
++          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. On $\\mathbb C^0=\\{0\\}$ this operator norm is $0$, as specified in that definition.\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge0$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, the series gives $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$ for every $n\\ge0$. For $n\\ge1$, only the $j=0$ matrix term can be nonzero. For $n=0$, [[def-matrix-space]] and [[def-matrix-product-and-identity-matrix]] identify $I_0$ with the unique empty matrix $0_{0\\times0}$; every power $X^j$ and every partial sum is that matrix. Thus $\\varphi_k(0_{0\\times0})=I_0/k!=0_{0\\times0}$, including $k=0$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
+           "uses": [
+             "1.1",
+             "1.2",
+@@ -708,7 +709,7 @@
+           "fact": "F2",
+           "source": "lem-phi-series-converges-absolutely",
+           "source_section": "Statement",
+-          "quote": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge1$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
++          "quote": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge0$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
+           "uses": [
+             "1.1",
+             "1.2",
+@@ -729,7 +730,7 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "The same index shift is valid in operator norm by [F2]; left multiplication by $X$ sends the $(j+k+1)!$ denominator term to $X^{j+1}/(j+k+1)!$. Thus $X\\varphi_{k+1}(X)=\\varphi_k(X)-I_n/k!$, proving the matrix recurrence.",
++          "claim": "For $n=0$, every matrix term is the unique empty matrix by [F1], so the matrix recurrence is the equality of that matrix with itself. For $n\\ge1$, the same index shift is valid in operator norm by [F2]; left multiplication by $X$ sends the $(j+k+1)!$ denominator term to $X^{j+1}/(j+k+1)!$. Thus $X\\varphi_{k+1}(X)=\\varphi_k(X)-I_n/k!$, proving the matrix recurrence.",
+           "step": "1.2",
+           "inputs": [
+             "F1",
+@@ -739,7 +740,7 @@
+         },
+         {
+           "id": "step-1-3",
+-          "claim": "In $B_k(X,w)$, a block-product path from the first block row to the last column of the last block must move through the $w e_1^*$ block and then through all $k-1$ superdiagonal entries of $J_k$. It uses exactly $k$ block transitions; any remaining factors can only be copies of $X$ before that first transition. Hence the last column of the top-right block of $B_k^r$ is zero for $r<k$, and is $X^{r-k}w$ for $r\\ge k$.",
++          "claim": "For $n\\ge1$, in $B_k(X,w)$, a block-product path from the first block row to the last column of the last block must move through the $w e_1^*$ block and then through all $k-1$ superdiagonal entries of $J_k$. It uses exactly $k$ block transitions; any remaining factors can only be copies of $X$ before that first transition. Hence the last column of the top-right block of $B_k^r$ is zero for $r<k$, and is $X^{r-k}w$ for $r\\ge k$.",
+           "step": "1.3",
+           "inputs": [
+             "given",
+@@ -748,7 +749,7 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "By [F2] with $k=0$, $e^{B_k}=\\varphi_0(B_k)=\\sum_{r\\ge0}B_k^r/r!$. By step 1.3, the last column of its top-right block is $\\sum_{r\\ge k}X^{r-k}w/r!=\\sum_{j\\ge0}X^jw/(j+k)!=\\varphi_k(X)w$. This is exactly the first $n$ entries obtained by applying $e^{B_k}$ to the last coordinate vector.",
++          "claim": "For $n\\ge1$, by [F2] with $k=0$, $e^{B_k}=\\varphi_0(B_k)=\\sum_{r\\ge0}B_k^r/r!$. By step 1.3, the last column of its top-right block is $\\sum_{r\\ge k}X^{r-k}w/r!=\\sum_{j\\ge0}X^jw/(j+k)!=\\varphi_k(X)w$. This is exactly the first $n$ entries obtained by applying $e^{B_k}$ to the last coordinate vector. When $n=0$, $w$ is the unique vector in $\\mathbb C^0$ and $B_k(X,w)=J_k$; the first zero entries of $e^{J_k}e_k$ and $\\varphi_k(X)w$ are both the empty vector. Thus the augmented identity also holds in that case.",
+           "step": "2.1",
+           "inputs": [
+             "step 1.3",
+@@ -762,8 +763,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "Statement uses finite matrices with n>=1 and k>=0; there is no empty matrix domain."
++          "status": "checked",
++          "evidence": "step 1.2: at n=0 the recurrence is equality of the unique empty matrix with itself. step 2.1: B_k=J_k and the extracted first zero entries and phi_k(X)w are both the empty vector."
+         },
+         {
+           "case": "zero",
+@@ -977,7 +978,7 @@
+           "fact": "F1",
+           "source": "def-phi-functions-by-everywhere-convergent-series",
+           "source_section": "Definition",
+-          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge1$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, only the $j=0$ term remains, so $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
++          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. On $\\mathbb C^0=\\{0\\}$ this operator norm is $0$, as specified in that definition.\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge0$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, the series gives $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$ for every $n\\ge0$. For $n\\ge1$, only the $j=0$ matrix term can be nonzero. For $n=0$, [[def-matrix-space]] and [[def-matrix-product-and-identity-matrix]] identify $I_0$ with the unique empty matrix $0_{0\\times0}$; every power $X^j$ and every partial sum is that matrix. Thus $\\varphi_k(0_{0\\times0})=I_0/k!=0_{0\\times0}$, including $k=0$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
+           "uses": [
+             "1.1",
+             "1.2"
+@@ -987,7 +988,7 @@
+           "fact": "F1",
+           "source": "lem-phi-series-converges-absolutely",
+           "source_section": "Statement",
+-          "quote": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge1$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
++          "quote": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge0$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
+           "uses": [
+             "1.1",
+             "1.2"
+@@ -1278,7 +1279,7 @@
+           "fact": "F8",
+           "source": "def-phi-functions-by-everywhere-convergent-series",
+           "source_section": "Definition",
+-          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge1$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, only the $j=0$ term remains, so $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
++          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. On $\\mathbb C^0=\\{0\\}$ this operator norm is $0$, as specified in that definition.\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge0$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, the series gives $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$ for every $n\\ge0$. For $n\\ge1$, only the $j=0$ matrix term can be nonzero. For $n=0$, [[def-matrix-space]] and [[def-matrix-product-and-identity-matrix]] identify $I_0$ with the unique empty matrix $0_{0\\times0}$; every power $X^j$ and every partial sum is that matrix. Thus $\\varphi_k(0_{0\\times0})=I_0/k!=0_{0\\times0}$, including $k=0$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
+           "uses": [
+             "3.2"
+           ]
+@@ -1287,7 +1288,7 @@
+           "fact": "F8",
+           "source": "lem-phi-series-converges-absolutely",
+           "source_section": "Statement",
+-          "quote": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge1$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
++          "quote": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge0$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
+           "uses": [
+             "3.2"
+           ]
+@@ -1441,7 +1442,7 @@
+           "fact": "F1",
+           "source": "def-phi-functions-by-everywhere-convergent-series",
+           "source_section": "Definition",
+-          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge1$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, only the $j=0$ term remains, so $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
++          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. On $\\mathbb C^0=\\{0\\}$ this operator norm is $0$, as specified in that definition.\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge0$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, the series gives $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$ for every $n\\ge0$. For $n\\ge1$, only the $j=0$ matrix term can be nonzero. For $n=0$, [[def-matrix-space]] and [[def-matrix-product-and-identity-matrix]] identify $I_0$ with the unique empty matrix $0_{0\\times0}$; every power $X^j$ and every partial sum is that matrix. Thus $\\varphi_k(0_{0\\times0})=I_0/k!=0_{0\\times0}$, including $k=0$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
+           "uses": [
+             "1.1"
+           ]
+@@ -1450,7 +1451,7 @@
+           "fact": "F2",
+           "source": "thm-phi-recurrence-and-augmented-matrix-actions",
+           "source_section": "Statement",
+-          "quote": "For every integer $k\\ge0$, scalar $z\\in\\mathbb C$, and square matrix $X\\in M_n(\\mathbb C)$, the series-defined functions of [[def-phi-functions-by-everywhere-convergent-series]] satisfy\n\n$$\\varphi_k(z)=\\frac1{k!}+z\\varphi_{k+1}(z),\\qquad \\varphi_k(X)=\\frac1{k!}I_n+X\\varphi_{k+1}(X).$$\n\nFor $k\\ge1$ and $w\\in\\mathbb C^n$, let $J_k\\in M_k(\\mathbb C)$ have ones on the superdiagonal and zeros elsewhere, and let $e_1,e_k\\in\\mathbb C^k$ be the first and last coordinate vectors. Define $B_k(X,w):=\\begin{bmatrix}X&we_1^*\\\\0&J_k\\end{bmatrix}$. Then the first $n$ entries of $e^{B_k(X,w)}\\begin{bmatrix}0\\\\e_k\\end{bmatrix}$ equal $\\varphi_k(X)w$. The identity is valid at $X=0$ and requires no division by $X$ or by a scalar argument.",
++          "quote": "For every integer $k\\ge0$, scalar $z\\in\\mathbb C$, and square matrix $X\\in M_n(\\mathbb C)$ with $n\\ge0$, the series-defined functions of [[def-phi-functions-by-everywhere-convergent-series]] satisfy\n\n$$\\varphi_k(z)=\\frac1{k!}+z\\varphi_{k+1}(z),\\qquad \\varphi_k(X)=\\frac1{k!}I_n+X\\varphi_{k+1}(X).$$\n\nFor $k\\ge1$ and $w\\in\\mathbb C^n$, let $J_k\\in M_k(\\mathbb C)$ have ones on the superdiagonal and zeros elsewhere, and let $e_1,e_k\\in\\mathbb C^k$ be the first and last coordinate vectors. Define $B_k(X,w):=\\begin{bmatrix}X&we_1^*\\\\0&J_k\\end{bmatrix}$. Then the first $n$ entries of $e^{B_k(X,w)}\\begin{bmatrix}0\\\\e_k\\end{bmatrix}$ equal $\\varphi_k(X)w$. The identity is valid at $X=0$ and requires no division by $X$ or by a scalar argument.",
+           "uses": [
+             "2.1"
+           ]
+@@ -1586,7 +1587,7 @@
+           "fact": "F4",
+           "source": "def-phi-functions-by-everywhere-convergent-series",
+           "source_section": "Definition",
+-          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge1$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, only the $j=0$ term remains, so $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
++          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. On $\\mathbb C^0=\\{0\\}$ this operator norm is $0$, as specified in that definition.\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge0$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, the series gives $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$ for every $n\\ge0$. For $n\\ge1$, only the $j=0$ matrix term can be nonzero. For $n=0$, [[def-matrix-space]] and [[def-matrix-product-and-identity-matrix]] identify $I_0$ with the unique empty matrix $0_{0\\times0}$; every power $X^j$ and every partial sum is that matrix. Thus $\\varphi_k(0_{0\\times0})=I_0/k!=0_{0\\times0}$, including $k=0$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
+           "uses": [
+             "2.1"
+           ]
+@@ -1790,7 +1791,7 @@
+           "fact": "F3",
+           "source": "def-phi-functions-by-everywhere-convergent-series",
+           "source_section": "Definition",
+-          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge1$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, only the $j=0$ term remains, so $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
++          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. On $\\mathbb C^0=\\{0\\}$ this operator norm is $0$, as specified in that definition.\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge0$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, the series gives $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$ for every $n\\ge0$. For $n\\ge1$, only the $j=0$ matrix term can be nonzero. For $n=0$, [[def-matrix-space]] and [[def-matrix-product-and-identity-matrix]] identify $I_0$ with the unique empty matrix $0_{0\\times0}$; every power $X^j$ and every partial sum is that matrix. Thus $\\varphi_k(0_{0\\times0})=I_0/k!=0_{0\\times0}$, including $k=0$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
+           "uses": [
+             "2.1"
+           ]
+@@ -1799,7 +1800,7 @@
+           "fact": "F3",
+           "source": "lem-phi-series-converges-absolutely",
+           "source_section": "Statement",
+-          "quote": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge1$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
++          "quote": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge0$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
+           "uses": [
+             "2.1"
+           ]
+--- research/numerical-optimization-dynamics-2026-10-16-batch-94.proof-contracts.json (before)
++++ research/numerical-optimization-dynamics-2026-10-16-batch-94.proof-contracts.json (proposed)
+@@ -383,7 +383,7 @@
+           "fact": "F1",
+           "source": "def-phi-functions-by-everywhere-convergent-series",
+           "source_section": "Definition",
+-          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge1$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, only the $j=0$ term remains, so $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
++          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. On $\\mathbb C^0=\\{0\\}$ this operator norm is $0$, as specified in that definition.\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge0$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, the series gives $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$ for every $n\\ge0$. For $n\\ge1$, only the $j=0$ matrix term can be nonzero. For $n=0$, [[def-matrix-space]] and [[def-matrix-product-and-identity-matrix]] identify $I_0$ with the unique empty matrix $0_{0\\times0}$; every power $X^j$ and every partial sum is that matrix. Thus $\\varphi_k(0_{0\\times0})=I_0/k!=0_{0\\times0}$, including $k=0$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
+           "uses": [
+             "2.1",
+             "3.1"
+@@ -393,7 +393,7 @@
+           "fact": "F2",
+           "source": "lem-phi-series-converges-absolutely",
+           "source_section": "Statement",
+-          "quote": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge1$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
++          "quote": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge0$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
+           "uses": [
+             "2.1",
+             "3.1"
+@@ -1354,7 +1354,7 @@
+           "fact": "F1",
+           "source": "thm-phi-recurrence-and-augmented-matrix-actions",
+           "source_section": "Statement",
+-          "quote": "For every integer $k\\ge0$, scalar $z\\in\\mathbb C$, and square matrix $X\\in M_n(\\mathbb C)$, the series-defined functions of [[def-phi-functions-by-everywhere-convergent-series]] satisfy\n\n$$\\varphi_k(z)=\\frac1{k!}+z\\varphi_{k+1}(z),\\qquad \\varphi_k(X)=\\frac1{k!}I_n+X\\varphi_{k+1}(X).$$\n\nFor $k\\ge1$ and $w\\in\\mathbb C^n$, let $J_k\\in M_k(\\mathbb C)$ have ones on the superdiagonal and zeros elsewhere, and let $e_1,e_k\\in\\mathbb C^k$ be the first and last coordinate vectors. Define $B_k(X,w):=\\begin{bmatrix}X&we_1^*\\\\0&J_k\\end{bmatrix}$. Then the first $n$ entries of $e^{B_k(X,w)}\\begin{bmatrix}0\\\\e_k\\end{bmatrix}$ equal $\\varphi_k(X)w$. The identity is valid at $X=0$ and requires no division by $X$ or by a scalar argument.",
++          "quote": "For every integer $k\\ge0$, scalar $z\\in\\mathbb C$, and square matrix $X\\in M_n(\\mathbb C)$ with $n\\ge0$, the series-defined functions of [[def-phi-functions-by-everywhere-convergent-series]] satisfy\n\n$$\\varphi_k(z)=\\frac1{k!}+z\\varphi_{k+1}(z),\\qquad \\varphi_k(X)=\\frac1{k!}I_n+X\\varphi_{k+1}(X).$$\n\nFor $k\\ge1$ and $w\\in\\mathbb C^n$, let $J_k\\in M_k(\\mathbb C)$ have ones on the superdiagonal and zeros elsewhere, and let $e_1,e_k\\in\\mathbb C^k$ be the first and last coordinate vectors. Define $B_k(X,w):=\\begin{bmatrix}X&we_1^*\\\\0&J_k\\end{bmatrix}$. Then the first $n$ entries of $e^{B_k(X,w)}\\begin{bmatrix}0\\\\e_k\\end{bmatrix}$ equal $\\varphi_k(X)w$. The identity is valid at $X=0$ and requires no division by $X$ or by a scalar argument.",
+           "uses": [
+             "1.2",
+             "3.1"
+@@ -1987,7 +1987,7 @@
+           "fact": "F2",
+           "source": "def-phi-functions-by-everywhere-convergent-series",
+           "source_section": "Definition",
+-          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge1$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, only the $j=0$ term remains, so $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
++          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. On $\\mathbb C^0=\\{0\\}$ this operator norm is $0$, as specified in that definition.\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge0$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, the series gives $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$ for every $n\\ge0$. For $n\\ge1$, only the $j=0$ matrix term can be nonzero. For $n=0$, [[def-matrix-space]] and [[def-matrix-product-and-identity-matrix]] identify $I_0$ with the unique empty matrix $0_{0\\times0}$; every power $X^j$ and every partial sum is that matrix. Thus $\\varphi_k(0_{0\\times0})=I_0/k!=0_{0\\times0}$, including $k=0$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
+           "uses": [
+             "2.1",
+             "3.1"
+@@ -2364,7 +2364,7 @@
+           "fact": "F1",
+           "source": "def-phi-functions-by-everywhere-convergent-series",
+           "source_section": "Definition",
+-          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge1$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, only the $j=0$ term remains, so $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
++          "quote": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. On $\\mathbb C^0=\\{0\\}$ this operator norm is $0$, as specified in that definition.\n\nFor each integer $k\\ge0$, define the scalar phi function and its finite-matrix action by\n\n$$\\varphi_k(z):=\\sum_{j=0}^{\\infty}\\frac{z^j}{(j+k)!},\\qquad \\varphi_k(X):=\\sum_{j=0}^{\\infty}\\frac{X^j}{(j+k)!}.$$\n\nHere $z\\in\\mathbb C$, $X\\in M_n(\\mathbb C)$, $n\\ge0$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\\varphi_0(z)=\\exp z$; for matrices, $\\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].\n\nAt zero, the series gives $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$ for every $n\\ge0$. For $n\\ge1$, only the $j=0$ matrix term can be nonzero. For $n=0$, [[def-matrix-space]] and [[def-matrix-product-and-identity-matrix]] identify $I_0$ with the unique empty matrix $0_{0\\times0}$; every power $X^j$ and every partial sum is that matrix. Thus $\\varphi_k(0_{0\\times0})=I_0/k!=0_{0\\times0}$, including $k=0$.\n\nThe recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.",
+           "uses": [
+             "2.1",
+             "3.1"
+@@ -2374,7 +2374,7 @@
+           "fact": "F1",
+           "source": "lem-phi-series-converges-absolutely",
+           "source_section": "Statement",
+-          "quote": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge1$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
++          "quote": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge0$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
+           "uses": [
+             "2.1",
+             "3.1"

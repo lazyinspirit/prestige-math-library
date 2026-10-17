@@ -1,0 +1,24 @@
+--- items/def-dyadic-floating-point-format-and-directed-rounding.md
++++ items/def-dyadic-floating-point-format-and-directed-rounding.md
+@@ -42,12 +42,16 @@
+ For nonzero $x$ in the
+ subnormal range, define the absolute-error bound $\epsilon_{\rm abs}(x)=\eta$;
+ for $2^e\le |x|<2^{e+1}$ in the normal range, define
+-$\epsilon_{\rm abs}(x)=2^{e-p+2}$. At finite overflow, a directed result is
+-the corresponding infinite sentinel and its error bound is $+\infty$; the
+-status is `overflow`. The rounding procedure reports `finite`, `subnormal`, or
+-`overflow`, so no relative-error assumption is implicit.
++$\epsilon_{\rm abs}(x)=2^{e-p+2}$. For real inputs outside the finite range, extend the directed roundings by
++$$ (\operatorname{rd}(x),\operatorname{ru}(x))=\begin{cases}(N_{\max},+\infty),&x>N_{\max},\\(-\infty,-N_{\max}),&x<-N_{\max}.\end{cases} $$
++For either direction, every such conversion reports `overflow` and has error
++bound $\epsilon_{\rm abs}(x)=+\infty$, including when the returned one-sided
++endpoint is finite. An `overflow` status must be propagated and is not a
++successful finite-error conversion. The rounding procedure reports `finite`,
++`subnormal`, or `overflow`, so no relative-error assumption is implicit.
+ 
+ An exact rational intermediate may be converted by comparing integer
+ numerators and denominators after clearing powers of two. A directed interval
+-endpoint is the resulting greatest lower or least upper member of $\mathbb F$.
++endpoint uses the downward or upward conversion rule above, respectively,
++and carries its reported status.
+ 

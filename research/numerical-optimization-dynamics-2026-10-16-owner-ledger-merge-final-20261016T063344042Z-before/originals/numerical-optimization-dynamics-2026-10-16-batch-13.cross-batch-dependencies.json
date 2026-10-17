@@ -1,0 +1,22 @@
+[
+  {
+    "kind": "page",
+    "consumer": "automatic-differentiation-and-computational-graphs",
+    "supplier": "finite-precision-direct-factorizations",
+    "status": "reconciled-local-proof",
+    "batch": "1",
+    "required_interface": "For each concrete floating-point factorization or solve primitive used in a real-arithmetic graph, provide a proved same-branch local Jacobian or pullback discrepancy bound ||A_tilde_e-A_e|| <= eta_e under explicit arithmetic, range, conditioning, pivot/branch, and replay hypotheses. If computed primal values perturb the derivative evaluation point, also supply the needed derivative regularity/Lipschitz bound. The generic graph theorem only propagates supplied eta_e and excludes rounding in reverse accumulation.",
+    "supplier_item_ids": [
+      "lem-rounded-linear-and-normal-residual-certificates",
+      "lem-rounded-triangular-substitution-componentwise-backward-error",
+      "thm-scaled-householder-qr-backward-stability",
+      "thm-computed-full-rank-least-squares-backward-stability"
+    ],
+    "affected_claims": [
+      "rem-real-arithmetic-graph-versus-rounded-execution: concrete derivative-discrepancy estimates for rounded factorization and solve primitives are not supplied.",
+      "thm-graph-gradient-error-from-local-jacobian-perturbations: its conditional pathwise bound is complete, but instantiating eta_e for those primitives remains open."
+    ],
+    "evidence": "Read and repaired suppliers before consumers. The actual mathematical solve primitive now has proved eta_b=Kd and eta_A=Kd||xhat||+K^2rho plus rounded pullback allowances, using exact certified inverse/primal residuals. This covers triangular, Cholesky or QR backends once their returned residuals are certified; primal factorization residual alone is never substituted for derivative stability. The exact graph theorem remains conditional with exact accumulation. No factor-output derivative algorithm is used by the current concrete example.",
+    "consumer_local_interface": "lem-certified-linear-solve-jacobian-and-pullback-error"
+  }
+]

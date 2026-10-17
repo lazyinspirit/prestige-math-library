@@ -11,8 +11,7 @@ deps: [def-forward-and-back-substitution-for-triangular-systems]
 aliases: []
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
-  precheck: pass
+  repair: research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-published-reader50/thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost/application/repair.json
 sources:
   scraped: []
   references:
@@ -47,7 +46,7 @@ subtractions, hence $O(n^2)$ scalar operations.
 
 **Proof technique:** induction on the row index, then reverse induction for the upper-triangular case.
 
-1.1 Forward substitution. For $i=0$, [L1] gives $x_0=b_0/\ell_{00}$, so the first row equation is satisfied. Assume the first $i$ rows are satisfied. Then the $(i+1)$-st row of a lower-triangular system is $\sum_{j\le i+1}\ell_{i+1,j}x_j=b_{i+1}$, and solving for $x_{i+1}$ gives exactly the recursion in [L1]. Because $\ell_{i+1,i+1}\ne 0$, this value is forced and is unique. Induction proves that the forward recursion solves $Lx=b$ and that no other vector can differ in any coordinate. [L1, induction]
+1.1 Forward substitution. For $i=0$, the sum over $j<0$ is empty, so [L1] gives $x_0=b_0/\ell_{00}$, the unique value satisfying row $0$. For $1\le i<n$, assume coordinates $x_0,\ldots,x_{i-1}$ are uniquely determined and rows $0,\ldots,i-1$ are satisfied. Lower triangularity makes row $i$ equal to $\sum_{j<i}\ell_{ij}x_j+\ell_{ii}x_i=b_i$. Since $\ell_{ii}\ne0$, its unique solution for the remaining coordinate is exactly the recursion in [L1]. Assigning $x_i$ leaves all earlier rows unchanged because they involve only earlier coordinates. Induction through $i=n-1$ therefore proves that the forward recursion solves every row of $Lx=b$ and uniquely determines every coordinate. [L1, induction]
 
 1.2 Backward substitution is the same argument from the last row upward: the last row determines $x_{n-1}=b_{n-1}/u_{n-1,n-1}$, and once $x_{i+1},\ldots,x_{n-1}$ are fixed, the $i$-th row forces $x_i=u_{ii}^{-1}(b_i-\sum_{j>i}u_{ij}x_j)$. Hence the backward recursion solves $Ux=b$ and the solution is unique. [L1, induction]
 

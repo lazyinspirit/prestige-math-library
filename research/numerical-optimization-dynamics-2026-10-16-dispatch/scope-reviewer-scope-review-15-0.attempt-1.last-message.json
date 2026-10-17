@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "15",
+  "round": 0,
+  "reviewed_items": [
+    "def-na-dct-ii-and-dst-i-even-odd-extension",
+    "lem-na-bluestein-chirp-convolution-factorization",
+    "lem-na-mixed-radix-cooley-tukey-factorization",
+    "lem-na-zero-padding-removes-linear-convolution-aliasing",
+    "lem-na-complex-product-six-operation-roundoff-bound",
+    "thm-na-dct-ii-orthogonality-inverse-and-dft-extension",
+    "thm-na-dst-i-orthogonality-inverse-and-dft-extension",
+    "thm-na-dct-ii-chebyshev-coefficient-extraction",
+    "thm-na-interval-pi-matches-canonical-fourier-pi",
+    "alg-na-certified-unit-circle-phase",
+    "alg-na-computed-unitary-radix-two-fft",
+    "thm-na-certified-unit-circle-phase-enclosure",
+    "alg-na-computed-fft-cyclic-and-linear-convolution",
+    "lem-na-computed-unitary-butterfly-error-bound",
+    "alg-na-computed-fast-transforms-and-convolution",
+    "thm-na-computed-unitary-radix-two-fft-error-bound",
+    "thm-na-arbitrary-length-fft-correctness-and-cost",
+    "thm-na-computed-fft-convolution-error-bound",
+    "thm-na-bluestein-chirp-phase-error-separate-from-fft-error",
+    "ex-na-prime-length-five-bluestein-transform",
+    "ex-na-two-point-circular-aliasing",
+    "ex-na-three-sample-dct-chebyshev-coefficients"
+  ],
+  "reviewed_pages": [
+    "computed-fast-transforms-and-convolution",
+    "computed-fast-transforms-and-convolution-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete batch review found locally repairable proof-premise, algorithm-interface, and complexity-proof defects. One out-of-batch consumer also needs owner disposition if the phase controls are made explicit.",
+  "findings": [
+    {
+      "id": "lem-na-mixed-radix-cooley-tukey-factorization",
+      "type": "prerequisite",
+      "reason": "Step 2.1 removes the factor e^(-2πivk₁)=1, but F4/deps cite exponential addition and field laws without the kernel/integer-period result. Add and cite thm-kernel-and-fibres-of-complex-exponential."
+    },
+    {
+      "id": "thm-na-dct-ii-chebyshev-coefficient-extraction:F1",
+      "type": "prerequisite",
+      "reason": "F1 attributes Tₖ(cos θ)=cos(kθ) to the Chebyshev definition, which only defines the recurrence. Cite and add the existing thm-chebyshev-multiple-angle-identities prerequisite."
+    },
+    {
+      "id": "thm-na-dct-ii-chebyshev-coefficient-extraction:F2",
+      "type": "local",
+      "reason": "F2 states CᵀC=diag(N,N/2,…), while the cited theorem proves CCᵀ=diag(N,N/2,…); the derivation uses CCᵀ. Correct the transposed identity."
+    },
+    {
+      "id": "alg-na-certified-unit-circle-phase",
+      "type": "prerequisite",
+      "reason": "The definition identifies e^(πiq) with cos(πq)+i sin(πq), but omits the Euler-formula supplier. Add and cite cor-complex-exponential-cartesian-form-modulus-and-eulers-identity."
+    },
+    {
+      "id": "thm-na-certified-unit-circle-phase-enclosure",
+      "type": "prerequisite",
+      "reason": "F1's coordinate enclosures prove the claim about e^(πiq) only after identifying it with the sine/cosine pair. Add and cite cor-complex-exponential-cartesian-form-modulus-and-eulers-identity."
+    },
+    {
+      "id": "alg-na-computed-fft-cyclic-and-linear-convolution",
+      "type": "local",
+      "reason": "For M>1, the called radix-two FFT needs a twiddle tolerance and finite precision, exponent, subdivision, and series controls. These are absent from this algorithm's inputs and calls; specify and pass the required controls."
+    },
+    {
+      "id": "alg-na-computed-fast-transforms-and-convolution",
+      "type": "local",
+      "reason": "Phase and convolution calls lack an explicit tolerance/configuration and parameter threading. The chirp input multiplication αⱼxⱼ is not specified as a rounded operation although the error theorem models fl_C(α̂ⱼxⱼ); declare the operationwise model dependency and specify the rounded product."
+    },
+    {
+      "id": "thm-na-arbitrary-length-fft-correctness-and-cost",
+      "type": "local",
+      "reason": "The actual composite call tree has r+s recursive calls, not two; the binary-tree argument applies only to the normalized S(N)=T(N)/N recurrence and should be stated that way. Its terminal leaves include powers of two as well as primes. The log₂ product and monotonicity steps also need their logarithm supplier."
+    },
+    {
+      "id": "alg-na-computed-clenshaw-curtis-via-fast-dft",
+      "type": "outside-batch",
+      "reason": "This out-of-batch consumer calls alg-na-computed-fast-transforms-and-convolution without explicitly forwarding its phase/arithmetic controls. Recheck and repair its inputs/call if those controls are made explicit in the assigned algorithm."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-na-computed-fast-transforms-and-convolution",
+      "decision": "repair",
+      "reason": "It must pass the repaired cyclic-convolution configuration and specify its direct rounded chirp products."
+    },
+    {
+      "id": "thm-na-computed-fft-convolution-error-bound",
+      "decision": "repair",
+      "reason": "Reconcile its successful-call and twiddle-error assumptions with the explicit configuration passed to the cyclic-convolution algorithm."
+    },
+    {
+      "id": "thm-na-arbitrary-length-fft-correctness-and-cost",
+      "decision": "repair",
+      "reason": "It consumes the arbitrary-length procedure and also has the local recurrence-tree and logarithm-proof defect above."
+    },
+    {
+      "id": "thm-na-bluestein-chirp-phase-error-separate-from-fft-error",
+      "decision": "repair",
+      "reason": "Tie its phase tolerance and rounded modulation/demodulation assumptions to the repaired arbitrary-length procedure."
+    },
+    {
+      "id": "alg-na-computed-clenshaw-curtis-via-fast-dft",
+      "decision": "escalate",
+      "reason": "Outside batch 15; its call configuration must be checked and updated by the owner if the assigned algorithm interface is clarified."
+    },
+    {
+      "id": "ex-na-three-sample-dct-chebyshev-coefficients",
+      "decision": "accept",
+      "reason": "Its use of the Chebyshev coefficient formula remains valid after correcting the proof's supplier citation and matrix orientation."
+    }
+  ]
+}

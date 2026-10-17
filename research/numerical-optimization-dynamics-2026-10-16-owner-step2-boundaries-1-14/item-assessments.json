@@ -1,0 +1,739 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "reviewer": "same assigned boundary owner /root/num_ledger_10_18",
+  "scope": "Batches1\u201314; actual current item bodies read, final phase-format bindings separately required",
+  "items": {
+    "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma": {
+      "batch": "1",
+      "assessment": "The arithmetic Definition admits exact zero and normal exact results, rejects every nonzero subnormal, overflow and invalid division, and fixes componentwise complex operations and a first-failure policy. It supplies deterministic arithmetic conventions rather than an existential or biconditional theorem."
+    },
+    "alg-balanced-pairwise-summation": {
+      "batch": "1",
+      "assessment": "The Definition requires n>=1, specifies zero padding and deterministic tree order, and returns x1 with no additions at depth zero. Its finite-loop proof concerns termination/status on successful arithmetic or first failure; cancellation and zero leaves require no division."
+    },
+    "alg-two-sum-error-free-transform": {
+      "batch": "1",
+      "assessment": "The Definition specifies two real operands and six separately rounded operations, with a first range-failure status. The local Proof establishes only finite execution, while exact recovery is a separate theorem; zero or unit operands do not create a new theorem hypothesis."
+    },
+    "alg-two-product-fma-error-free-transform": {
+      "batch": "1",
+      "assessment": "The Definition fixes one product followed by one fused residual, with representability and range checks. The finite execution Proof does not claim exact recovery outside that residual condition; a zero product or residual is an admitted exact-zero arithmetic value."
+    },
+    "alg-kahan-compensated-summation": {
+      "batch": "1",
+      "assessment": "The Definition initializes both running sum and compensation to zero and traverses its supplied finite list. An empty list performs no loop arithmetic and returns the initialized sum; nonempty execution uses four ordered operations per datum and returns the first range failure."
+    },
+    "alg-neumaier-compensated-summation": {
+      "batch": "1",
+      "assessment": "The Definition initializes sum and compensation to zero, uses the stated magnitude comparison for each datum, and rounds the final sum plus compensation. Empty input leaves both initial values zero; the final exact-zero addition returns zero in the operationwise model."
+    },
+    "alg-rounded-cholesky-with-failure-status": {
+      "batch": "1",
+      "assessment": "The Definition takes a positive-definite matrix of order at least one, specifies empty inner dots as zero, and checks positive normal pivots and every arithmetic operation. Its referenced supplier ID contains iff, but the algorithm itself asserts finite termination with success or first failure, not an equivalence between definiteness and rounded success."
+    },
+    "alg-bounded-mixed-precision-iterative-refinement": {
+      "batch": "1",
+      "assessment": "The Definition requires nonsingular positive-order input and factors, a verified contraction certificate, and finite update budget N>=0. Budget zero still evaluates the initial residual before returning tolerance or budget status. Missing certificates/range failures return inconclusive; stored residual equalities control only stagnation status."
+    },
+    "thm-balanced-pairwise-summation-error-bound": {
+      "batch": "1",
+      "assessment": "The Statement requires a nonempty input list, positive length n, and successful tree evaluation. Its depth-zero singleton has no additions and zero error; the Proof expands each leaf path, interpreting a length-zero product as one. It proves an absolute error inequality without dividing by the possibly zero exact sum."
+    },
+    "thm-two-product-fma-error-free-transform": {
+      "batch": "1",
+      "assessment": "The Statement requires a successful product/FMA call and an exact residual representable as zero or normal. The Proof identifies the fused residual with ab-p and adds p in real arithmetic. The exact-transform equality includes zero products, but is not an if-and-only-if characterization of every successful machine program."
+    },
+    "thm-kahan-and-neumaier-finite-error-identities": {
+      "batch": "1",
+      "assessment": "The original empty-input worksheet exclusion was unsupported. Root coordinated a source repair preserving the empty list: current new the proof returns zero with empty loops and exact-zero Neumaier final addition; indexed Kahan identities are for positive lengths. The actual source must be reanchored after root phase formatting."
+    },
+    "thm-rounded-cholesky-componentwise-and-normwise-backward-error": {
+      "batch": "1",
+      "assessment": "The Statement assumes positive matrix order, positive definiteness, rounded success and explicit small-roundoff conditions. Empty diagonal dots are admitted in the recurrence, and zero off-diagonal errors are permitted. The relative consequence needs the extra trace-absorption condition; no guarantee is asserted for a failed or singular pivot."
+    },
+    "thm-mixed-precision-refinement-error-recurrence-and-floor": {
+      "batch": "1",
+      "assessment": "The Statement assumes nonsingular exact and stored systems with certified residual/update defects. Its geometric estimate is conditional on q<1, so 1-q is positive; the zero-executed-update instance is the induction base. Vanishing defects give the homogeneous bound, without a promise of exact finite termination."
+    },
+    "ex-subnormal-and-overflow-range-failure": {
+      "batch": "1",
+      "assessment": "This fixed binary64 example uses two nonempty two-term sums at the normal-range boundaries. Its first exact result is the least negative subnormal, and its second exceeds the largest normal magnitude; both return range-failure by the declared policy. It claims neither a variable dimension-one result nor an equivalence about IEEE hardware."
+    },
+    "ex-neumaier-recovers-low-order-term-after-cancellation": {
+      "batch": "1",
+      "assessment": "This fixed three-datum binary64 example compares ordinary cancellation to Neumaier compensation. The proof computes zero leading sum and nonzero low-order compensation, then the exact final low part. Its input length is three, not an arbitrary singleton-size family; no new witness selection or interval endpoint is involved."
+    },
+    "ex-rounded-cholesky-two-by-two-residual": {
+      "batch": "1",
+      "assessment": "The example fixes a two-by-two positive-definite matrix and exact first pivots one and three quarters. Rounding its irrational square root leaves a nonzero residual with other entries zero. The proof checks this particular successful factor; it does not assert an empty or one-dimensional instance or permit a singular pivot."
+    },
+    "ex-full-rank-least-squares-normal-equations-versus-qr": {
+      "batch": "1",
+      "assessment": "The example fixes a two-by-two full-rank design with determinant 2^-27. The exact small Gram correction rounds away, producing a singular formed Gram matrix, while the computed QR conclusion remains conditional. This specific cancellation is the degenerate comparison, not a variable dimension-one or unconditional QR-success claim."
+    },
+    "ex-ill-conditioned-design-stability-versus-forward-error": {
+      "batch": "1",
+      "assessment": "The example fixes a two-coordinate diagonal system and two explicitly given right-hand sides. Its nonzero data and solution norms justify relative ratios; one coordinate of the first solution is zero, and the second changes by one. This finite conditioning witness has no empty or variable singleton dimension and chooses no arbitrary family of vectors."
+    },
+    "alg-scaled-householder-reflector-formation-and-application": {
+      "batch": "1",
+      "assessment": "The Definition requires r>=1 and q>=0, returns an identity/copy for zero active column, and allows an empty trailing block. For a nonzero column it checks positive normal norm quantities and every rounded operation before returning a reflector. The termination Proof is a finite-index/status argument, not a backward-error assertion."
+    },
+    "lem-scaled-householder-step-meets-local-backward-error-premise": {
+      "batch": "1",
+      "assessment": "The Statement assumes a successful step, positive active row count and ru<1. the proof explicitly takes H=I,E=0 for x=0, then normalizes only nonzero vectors; an empty trailing block contributes zero Frobenius norm. All denominators in the coefficient estimates are positive under the stated roundoff hypotheses."
+    },
+    "thm-scaled-householder-qr-backward-stability": {
+      "batch": "1",
+      "assessment": "The Statement admits m>=n>=1, successful steps and mu<1. Its Proof transports the local perturbations through exact orthogonal factors and sums a finite positive-length geometric expansion; zero input or vector has zero norm allowance, and singleton dimensions require only the same local step. Rounded dense Q is expressly outside exact orthogonality."
+    },
+    "thm-computed-full-rank-least-squares-backward-stability": {
+      "batch": "1",
+      "assessment": "The Statement requires full column rank and successful QR/back substitution; uniqueness additionally requires the perturbed triangular factor nonsingular. the proof explicitly handles zero computed solution by forcing the transformed right-hand side zero. The one-column case uses the same finite dot/solve identities and no output-vector norm division."
+    },
+    "lem-rounded-triangular-substitution-componentwise-backward-error": {
+      "batch": "1",
+      "assessment": "The Statement requires n>=1 and nonzero diagonal entries, but explicitly defines the last-row inner sum as zero. the proof uses s_n=0; the proof handles zero solution and dimension one without dividing by its norm. Roundoff denominators stay positive under the stated small-u condition."
+    },
+    "lem-rounded-linear-and-normal-residual-certificates": {
+      "batch": "1",
+      "assessment": "The Statement requires m,n>=1, successful dot arithmetic and positive regularization parameter for the normal residual. the proof includes length-one dots through gamma_0=0 and states that zeros cause no difficulty; norm allowances multiply F,X,Y instead of dividing by a residual or data norm. Certificates themselves must be exact or upper bounds."
+    },
+    "lem-binary-rounding-grid-and-ordered-two-sum": {
+      "batch": "1",
+      "assessment": "This binary-grid lemma fixes precision at least two with unbounded exponents. Its proof constructs each binade by a finite bounded integer search, handles zero operands separately, and proves ordered cancellation through representable grid differences. The four one-way grid properties are not a biconditional or a selection from an arbitrary family."
+    },
+    "thm-two-sum-error-free-transform": {
+      "batch": "1",
+      "assessment": "The Statement includes zero operands, exact cancellation and successful calls at both normal-range endpoints. the proof transfers finite-range success to unbounded binary rounding; later magnitude/sign branches prove the residual identity. Precision at least two and the no-underflow success policy stay explicit; no arbitrary choice is introduced."
+    },
+    "ex-two-sum-recovers-a-rounded-away-low-part": {
+      "batch": "1",
+      "assessment": "The fixed binary64 call has operands one and 2^-53. Its verification computes exact zero intermediate subtractions and preserves the low part in the second output, with all nonzero intermediates normal. This concrete two-operand computation is neither an empty input nor a separate biconditional or arbitrary-selection assertion."
+    },
+    "thm-csr-matvec-algorithm-terminates-with-status": {
+      "batch": "2",
+      "assessment": "The theorem accepts integer dimension candidates and finite arrays, returning invalid-dimension before scans if needed. Its proof counts finite pointer/index scans and disjoint stored-index ranges; on valid zero-row input no accumulation is entered. The result is a deterministic termination/status implication, not a logical equivalence or a choice construction."
+    },
+    "thm-csr-matvec-returns-the-represented-matrix-product": {
+      "batch": "2",
+      "assessment": "The theorem works over an arbitrary field with natural row/column counts, including zero. Its proof starts each row with the empty sum, distributes/reindexes stored contributions including duplicates, and explicitly equates the unique empty outputs when m=0. There is no interval parameter, biconditional, or unprescribed witness selection in this exact-product identity."
+    },
+    "thm-csr-storage-and-exact-matvec-cost": {
+      "batch": "2",
+      "assessment": "The theorem counts stored slots and visits, retaining the additive constant when m=s=0 and reserving O(m+s) for m>=1. The O(s) consequence requires at least one stored entry per row. It is a finite arithmetic/storage count, with no interval endpoint, equivalence, or selection from an arbitrary family."
+    },
+    "thm-filled-graph-contains-schur-complement-support": {
+      "batch": "2",
+      "assessment": "The Statement fixes a finite matrix/order and assumes each executed pivot nonzero. Its induction proves only numerical-support inclusion in the symbolic filled graph, expressly allowing cancellation and excluding a cost/equality conclusion. No interval endpoint or arbitrary choice is used; the elimination ordering is supplied, not selected by a choice axiom."
+    },
+    "ex-csr-tridiagonal-matrix": {
+      "batch": "2",
+      "assessment": "The example fixes four rows and ten stored rational entries, with every row explicitly nonempty. Verification checks the five row pointers and all listed columns, then identifies each tridiagonal entry. It does not vary row count to zero or one and states no equivalence, interval endpoint or existence-selection theorem."
+    },
+    "ex-ordered-elimination-creates-fill": {
+      "batch": "2",
+      "assessment": "The example fixes a rational three-by-three path matrix and the supplied order middle-first. Verification computes nonzero pivots two, three halves and four thirds and the new nonzero fill entry minus one half. This fixed-size witness has no empty/singleton input, interval endpoint, iff direction or arbitrary choice of order."
+    },
+    "ex-numerical-cancellation-within-filled-graph": {
+      "batch": "2",
+      "assessment": "The fixed rational triangle and elimination order retain the symbolic outer edge while the computed Schur entry cancels to zero. Verification also checks the remaining pivots five halves, so cancellation does not introduce an undefined division. Its three-vertex witness does not assert an empty/singleton family, endpoint or biconditional theorem."
+    },
+    "ex-csr-matvec-operation-count": {
+      "batch": "2",
+      "assessment": "The displayed four-row ten-entry CSR and vector (1,2,3,4) give output (0,0,0,5), ten products, ten additions and four initializations. Verification evaluates every row and the slot count twenty-five. This fixed computation has no empty/singleton input, interval endpoint, iff or arbitrary witness choice."
+    },
+    "ex-csr-duplicates-and-explicit-zero-entry-count": {
+      "batch": "2",
+      "assessment": "The example fixes a two-row three-entry noncanonical record. The repeated column cancels and the explicit stored zero still consumes work, giving a zero matrix despite three stored entries. Verification enumerates both rows and counts nine input slots; there is no continuous endpoint, iff or family-selection claim."
+    },
+    "ex-nonlinear-equations-and-newton-methods-boundary-cases": {
+      "batch": "3",
+      "assessment": "The example computes contraction iterates, simple-root Newton, a double-root countercase and singular-Jacobian exit. Its zero-tolerance discussion distinguishes finite-budget failure from positive-tolerance convergence, and its fixed-inverse comparison is not updated Newton. These are explicit computations and countercases, not a biconditional assertion requiring two directions."
+    },
+    "lem-finite-budget-fixed-point-iteration-work": {
+      "batch": "3",
+      "assessment": "The Statement permits zero update budget and only assumes returning primitives. Its proof checks the initial residual before budget, keeps every entered point in the self-map space, and bounds updates by N and residual evaluations by N+1. The initial point excludes an empty state space; zero budget, singleton space and early return obey the same counted branches."
+    },
+    "lem-finite-budget-newton-work-and-status": {
+      "batch": "3",
+      "assessment": "The Statement permits zero correction budget, while the initial point belongs to the open domain. Its proof returns before correction at the final allowed index and treats singular correction or invalid trial as early exits. This bounds outer calls only, including N=0; no convergence, tolerance attainment or backend complexity is inferred."
+    },
+    "lem-finite-coefficient-vector-has-polynomial-representative": {
+      "batch": "4",
+      "assessment": "The coefficient vector has n+1 entries even at n=0. The constructive proof chooses the zero object when all coefficients vanish and otherwise the prefix or the list ending in the last nonzero coefficient. Both directions of its zero-polynomial characterization are proved by the explicit zero/nonzero construction, not by an arbitrary selection of representatives."
+    },
+    "lem-finite-double-sum-interchange": {
+      "batch": "4",
+      "assessment": "The finite square array is supplied, including the empty array. The proof compares two explicitly expanded last-row/last-column decompositions and uses induction from both empty sums zero. It rearranges a specified finite sum and requires no selection from an arbitrary family of sets."
+    },
+    "lem-finite-product-of-nonzero-reals-is-nonzero": {
+      "batch": "4",
+      "assessment": "All real factors are supplied and nonzero. The proof starts with the empty product one and appends the next prescribed factor, using absence of zero divisors. Its induction chooses no factors or representatives from an unspecified family."
+    },
+    "lem-polynomial-highest-derivative": {
+      "batch": "4",
+      "assessment": "The Statement requires derivative order m>=1 but the auxiliary derivative-order induction includes r=0, where its falling product is explicitly one. The proof differentiates an explicit padded coefficient vector and identifies the final factorial. These finite formulas determine all representatives and require no arbitrary choice."
+    },
+    "lem-product-of-linear-factors-is-monic-polynomial": {
+      "batch": "4",
+      "assessment": "The finite root list is given. The proof starts with constant polynomial one at length zero and writes every successor coefficient explicitly, with last coefficient one. This supplies a determined formal representative for each list and no selection from an arbitrary family."
+    },
+    "def-cardinal-polynomial-interpolation": {
+      "batch": "4",
+      "assessment": "The ordered node/data arrays have n+1 entries. Omitted-node factors use a specified increasing list and empty product one at n=0; distinctness makes every inverse unique. The cardinal functions and interpolant are explicit finite formulas, rather than a choice of interpolants from nonempty sets."
+    },
+    "lem-finite-product-of-quotients": {
+      "batch": "4",
+      "assessment": "The numerator and nonzero-denominator lists are supplied. The proof establishes the empty product and uniquely identifies the inverse of the appended denominator product, so every quotient is determined. No arbitrary choice of inverses or factors is used."
+    },
+    "lem-cardinal-basis-degree-and-values": {
+      "batch": "4",
+      "assessment": "The proof explicitly scales the finite omitted-root polynomial by its nonzero barycentric weight, derives nodal zero/one values, and constructs the interpolant coefficients by finite sums. Representatives are constructed from the supplied ordered nodes, so no family-wide selection principle is needed."
+    },
+    "prop-equispaced-interpolation-basis-growth": {
+      "batch": "4",
+      "assessment": "The integer m>=6 fixes every equally spaced node and the off-node query. The proof derives the exact central-binomial ratio and bounds it with explicit factorial products and a selected nonnegative binomial term. There is no choice of a witness point beyond that stated formula."
+    },
+    "thm-cardinal-polynomial-interpolant-exists-uniquely": {
+      "batch": "4",
+      "assessment": "The proof obtains an explicit degree-bounded representative from the cardinal-basis construction, then proves coefficient equality by the n+1-root contradiction. At n=0 its cardinal product is one and the single value gives the unique constant polynomial. The finite construction needs no arbitrary selection of interpolants."
+    },
+    "thm-barycentric-interpolation-identities": {
+      "batch": "4",
+      "assessment": "The Statement has n+1 ordered nodes, so its outer sum is nonempty; at n=0 the omitted-factor products are one. The proof splits explicit ordered products and invokes uniqueness of the constant-data interpolant, then uses a nonzero off-node denominator. It does not select arbitrary family members."
+    },
+    "thm-lagrange-interpolation-remainder": {
+      "batch": "4",
+      "assessment": "There is at least one supplied node because n>=0; the node product has n+1 factors. At a node the error is zero, otherwise a single Rolle witness lies between the query and extreme nodes. This is one finite existential application, not simultaneous choice from an arbitrary family of witness sets."
+    },
+    "alg-finite-barycentric-interpolation-evaluator": {
+      "batch": "4",
+      "assessment": "The Definition supplies finite arrays and fixed index order. It validates nodes/data, returns an exact node value before testing representable one, and otherwise guards every weight/quotient operation. No maximizer or witness is selected from a family; matching a unique strictly ordered node is a finite deterministic test."
+    },
+    "prop-finite-barycentric-interpolation-evaluator-returns-status": {
+      "batch": "4",
+      "assessment": "The Definition's n>=0 gives n+1 candidates, with invalid lengths returning immediately. the proof preserves the exact-node value return even if one is not representable; off-node computation guards one before weight initialization. Finite loops and explicit failure exits need no nonempty-family choice."
+    },
+    "ex-equispaced-cardinal-basis-growth": {
+      "batch": "4",
+      "assessment": "The data are explicitly the unit vector at the middle node for each m>=6, and the query is fixed by the growth supplier. The proof constructs that vector rather than selecting a fixed-function interpolation counterexample. No simultaneous choice of dense polynomial approximants is used in the amplification calculation."
+    },
+    "ex-quadratic-interpolation-at-three-nodes": {
+      "batch": "4",
+      "assessment": "The three nodes and polynomial X squared are fixed. Verification reads nodal values one, zero, one and invokes uniqueness to identify the interpolant; it does not choose a polynomial from an unspecified nonempty family."
+    },
+    "ex-cubic-interpolation-pointwise-remainder": {
+      "batch": "4",
+      "assessment": "The cubic, three nodes and endpoint query are fixed. Verification writes the explicit quadratic, computes third derivative six, and takes the explicit intermediate point one. There is no arbitrary choice of a remainder witness or assertion of a maximum over queries."
+    },
+    "lem-finitely-generated-euclidean-cones-are-closed": {
+      "batch": "6",
+      "assessment": "The Statement includes an empty generator list. The proof discards zero coefficients, uses the minimum of a finite nonempty list of positive ratios to reduce dependent support, and treats the empty independent support as the closed cone {0}. No constraint qualification is assumed here; singleton generators and zero vectors are covered by the same finite construction."
+    },
+    "lem-second-order-jet-on-a-regular-level-set": {
+      "batch": "6",
+      "assessment": "The Statement requires a surjective derivative and a compatible second jet. The proof explicitly handles zero target dimension by the quadratic curve and otherwise uses the supplied regular-level graph and explicit correction z-v. A nonregular level is outside the hypothesis; a zero direction or acceleration remains a valid compatible jet, and no arbitrary family of curves is selected."
+    },
+    "thm-farkas-alternative-for-finite-linear-systems": {
+      "batch": "6",
+      "assessment": "The proof handles zero ambient dimension explicitly, and the finite-column cone always contains zero, including no columns. Outside that cone it uses its unique nearest point and the explicit separating vector minus the projection residual; the final inner-product contradiction excludes simultaneous alternatives. It is an exactly-one alternative, not an iff whose two propositions are both true."
+    },
+    "thm-mfcq-linearized-cone-equals-bouligand-tangent-cone": {
+      "batch": "6",
+      "assessment": "The proof establishes both cone inclusions under MFCQ. With no active inequalities it sets w=0, and with no equalities it uses zero graph correction; otherwise a supplied MFCQ direction and regular-level graph produce an explicit feasible curve. Failure of MFCQ is outside this cone-equality claim, and finitely many active conditions share one sufficiently small positive time."
+    },
+    "thm-critical-cone-equivalence-under-kkt": {
+      "batch": "6",
+      "assessment": "The Statement has a genuine equivalence: under KKT and a linearized direction, zero objective directional derivative is equivalent to zero derivatives on all positively weighted active constraints. The proof writes a finite sum of nonnegative terms; its vanishing forces each positive-weight term zero, and those zero terms conversely make the sum zero. Empty positive-weight index sets and zero directions remain covered."
+    },
+    "thm-lagrangian-weak-duality": {
+      "batch": "6",
+      "assessment": "The pointwise inequality assumes an actual primal feasible point, making the relevant set nonempty; the global comparison explicitly requires a nonempty feasible set. Empty inequality/equality lists contribute zero to the Lagrangian. The proof takes infimum and supremum, not an attained optimizer or a choice of witnesses, and proves only the weak inequality."
+    },
+    "thm-convex-value-function-support-at-relative-interior-domain-points": {
+      "batch": "6",
+      "assessment": "The proof treats the zero-dimensional affine hull with the zero functional. Otherwise it projects a specified sequence of points uniquely onto the nonempty epigraph closure and takes one convergent subsequence; a zero vertical support coefficient is excluded by the two-sided relative-interior ball. The positive vertical coefficient licenses division, with no claim at a missing relative-interior point."
+    },
+    "thm-first-order-kkt-necessity-under-mfcq": {
+      "batch": "6",
+      "assessment": "The Statement assumes a feasible local minimizer and MFCQ. The proof handles zero direction directly, then applies the finite Farkas alternative to paired equality columns and active inequalities, setting inactive multipliers zero explicitly. Existence uses one finite coefficient witness, not arbitrary simultaneous choices; multiplier uniqueness is not claimed here."
+    },
+    "thm-convex-kkt-sufficiency-and-normal-cone-certificate": {
+      "batch": "6",
+      "assessment": "A feasible KKT tuple is given, so the comparison set contains the proposed minimizer. The proof separates zero from positive multipliers, applies convex gradient inequalities, and obtains the normal-cone inequality for every feasible point. It is a sufficient implication, does not require a nondegenerate active set, and introduces no arbitrary optimizer choice."
+    },
+    "thm-second-order-sufficient-condition-on-the-critical-cone": {
+      "batch": "6",
+      "assessment": "The proof explicitly separates an empty critical unit set from a nonempty compact one. The former excludes all nearby bad points; the latter has a strictly positive minimum curvature and a finite-intersection contradiction. The zero critical cone is admitted and the condition is vacuous there; no constraint qualification is silently imposed."
+    },
+    "thm-slater-strong-duality-and-dual-attainment": {
+      "batch": "6",
+      "assessment": "The Statement requires a finite attained primal value and relative-interior Slater point. The proof explicitly allows no inequalities by taking any positive eta and extends functionals only across finite bases; at the optimum every nonpositive complementarity term must vanish. Empty multiplier blocks and zero optimal multipliers are admissible, while failure of Slater/attainment is outside the conclusion."
+    },
+    "prop-licq-implies-mfcq-and-unique-kkt-multipliers": {
+      "batch": "6",
+      "assessment": "The proof takes w=0 when the active/equality row matrix is empty. Otherwise its Gram inverse gives one explicit direction with active derivatives minus one. Inactive multipliers vanish, and linear independence forces equality of any two multiplier tuples; a dependent gradient family is outside LICQ, not a permitted degeneracy of this proposition."
+    },
+    "thm-second-order-necessary-condition-on-the-critical-cone": {
+      "batch": "6",
+      "assessment": "The proof handles d=0 directly, then solves a finite onto linear jet system using LICQ and applies the regular-level jet supplier. Positive-multiplier constraints stay equalities; zero-weight tangential constraints get a negative second-order term. Its one-sided feasible curve and local-minimum hypothesis force nonnegative curvature, without claiming sufficiency or validity when LICQ fails."
+    },
+    "ex-failed-constraint-qualification-blocks-kkt": {
+      "batch": "6",
+      "assessment": "The example fixes a two-variable cusp constraint and the origin. Feasibility forces nonnegative x, making the origin minimizing, but its active gradient is zero while the objective gradient is (1,0), so stationarity is impossible for every multiplier. This is a concrete MFCQ-failure witness, not an empty constraint list or an iff certificate."
+    },
+    "ex-closed-convex-program-with-positive-duality-gap": {
+      "batch": "6",
+      "assessment": "The perspective example explicitly defines its value at the origin and outside its finite domain. Its proof identifies the closed convex epigraph, feasible half-ray, primal value one, and dual value zero using explicit sequences for each multiplier. Slater fails because no strict inequality is possible; the proof uses no selected optimizer family and does not promote weak duality to equality."
+    },
+    "ex-active-set-quadratic-kkt-certificate": {
+      "batch": "6",
+      "assessment": "The fixed two-variable quadratic has one active constraint at (0,2), multiplier one and a nonzero active gradient. Its direct nonnegative objective-gap expression vanishes only at that point, proving uniqueness. Zero constraint slack is part of this explicit certificate; an empty active set or arbitrary-dimensional family is not the example's input."
+    },
+    "ex-kkt-stationary-saddle-point": {
+      "batch": "6",
+      "assessment": "This is an unconstrained two-variable example, so both multiplier blocks are empty. The origin has zero gradient but a negative critical curvature direction, and opposite coordinate rays give objective values of opposite sign. It refutes sufficiency of stationarity alone, not the qualified second-order theorems or an iff statement."
+    },
+    "def-inequality-constrained-program-and-kkt-geometry": {
+      "batch": "6",
+      "assessment": "The Definition requires positive state dimension but explicitly permits zero equality and inequality dimensions via unique empty maps. Empty active sets make the strict-direction condition vacuous and zero-row rank vacuous. The stated tangent, linearized and critical cones and KKT equations are definitions, with no optimizer existence or arbitrary witness-family selection asserted."
+    },
+    "def-convex-program-duality-and-slater-condition": {
+      "batch": "6",
+      "assessment": "The Definition allows m=p=0, with full row rank vacuous at zero rows and empty inequality intersections removing those domain restrictions. Empty multiplier vectors contribute zero to the Lagrangian; properness still requires the objective finite somewhere. Relative-interior Slater and primal/dual values are definitions, not existence of an optimizer or equivalence between all qualifications."
+    },
+    "def-kkt-residual-and-normal-cone": {
+      "batch": "6",
+      "assessment": "The residual Definition explicitly gives zero-dimensional vector norm zero and uses coordinate positive parts and complementarity products. The normal cone is defined only at x in the convex set, so that comparison set is nonempty. These are deterministic formulas; a vanishing residual's equivalence with KKT is proved separately rather than assumed here."
+    },
+    "thm-kkt-residual-vanishes-exactly-on-kkt-tuples": {
+      "batch": "6",
+      "assessment": "The proof separately establishes both directions: zero sum of five nonnegative norms gives every KKT condition, and a KKT tuple zeros each vector. Empty constraint blocks contribute zero by the residual definition. The theorem remains a residual characterization with no existence or uniqueness assertion for KKT tuples."
+    },
+    "def-one-step-ode-method-local-defect-order-and-stability": {
+      "batch": "7",
+      "assessment": "The Definition fixes d>=1 and positive steps. Its word family refers to prescribed step maps, not an aggregate that needs an empty-family value; the uniform-order hypothesis is conditional on admitted solution segments and stages in K. No existence of such a method or estimate outside those admitted inputs is asserted."
+    },
+    "lem-time-along-ode-solution-derivative-bound": {
+      "batch": "7",
+      "assessment": "The Statement requires d>=1 and a nondegenerate time interval containing an actual solution graph. Its component sums run over one through d, and its proof composes the supplied solution with the given vector field. Thus no empty component family occurs; zero bounds or vector-field components remain admitted in the one-way derivative estimate."
+    },
+    "thm-forward-euler-one-step-consistency-and-local-error": {
+      "batch": "7",
+      "assessment": "The Statement requires positive state dimension and horizon and an actual solution graph in K, excluding an empty compact domain for this instance. The finite sums of component bounds are nonempty; the proof separately handles zero elapsed integration variable and derives local Euler defect/stability only for admitted positive steps. It claims no global error estimate."
+    },
+    "def-rare-event-efficiency-criteria": {
+      "batch": "8",
+      "assessment": "The indexed objects label an asymptotic rare-event limit with positive event probabilities tending to zero, not a finite product assigned an empty-family value. The separate benchmark uses one positive-probability event and a normalized density. Efficiency and work are defined relative to that specified limit/cost convention; no proposal existence or biconditional theorem is asserted."
+    },
+    "lem-standard-normal-mills-ratio": {
+      "batch": "8",
+      "assessment": "The Statement restricts the tail argument to x>0; the proof integrates only over t>=x and divides by positive x and positive normal density. Its ratio limit compares upper and lower bounds at infinity. There is no admitted zero denominator, empty input family or separate finite-interval endpoint parameter in this normal-tail inequality."
+    },
+    "alg-cross-entropy-pilot-production": {
+      "batch": "8",
+      "assessment": "The candidate set is finite nonempty with a supplied starting member, and both sample sizes are positive. No-hit and all-minus-infinity scores return before selection; otherwise lexicographic least finite maximizer is deterministic. The iff describes the supplied exact checker's input contract, not a claimed mathematical equivalence proved by this pilot procedure."
+    },
+    "def-nested-rare-event-levels": {
+      "batch": "8",
+      "assessment": "The Definition requires L>=1 and positive probabilities at every prefix including the target. Each conditional denominator is therefore positive; repeated levels with conditional probability one are allowed. The sequence and probability law are supplied, so this is not a choice of samplers or a claim that positive marginals imply independent arrays."
+    },
+    "def-finite-budget-stopped-event-kernel": {
+      "batch": "8",
+      "assessment": "The Definition explicitly assigns hit, return or cemetery at budget zero according to the initial state's partition. Positive budgets integrate the previous status kernel only from the continuing set. Target/return sets may be empty, and exact hitting is a distinct limiting oracle; no finite-cost exact sampler is asserted by the recursion."
+    },
+    "lem-sir-bounded-potential-unnormalized-update-variance": {
+      "batch": "8",
+      "assessment": "The Statement assumes at least one proposal and bounded measurable potential/test with z in the closed unit interval. Its proof makes the unnormalized estimate zero on the zero-weight branch regardless of fallback law, then uses a Bernoulli-type variance ceiling. This is an equality plus upper bound, not a biconditional or a hidden positivity assumption on the empirical average."
+    },
+    "thm-zero-variance-importance-sampling-proposal": {
+      "batch": "8",
+      "assessment": "The event probability is strictly positive and the proposal is explicitly normalized by it. The proof restricts the likelihood ratio to its positive proposal support, where every contribution equals the same constant; one or many IID draws have zero variance. It constructs this benchmark density and does not assert that unknown normalization is computable."
+    },
+    "thm-gaussian-tail-exponential-tilting": {
+      "batch": "8",
+      "assessment": "The Statement takes a>0 and positive sample size. Its proof derives a bounded event contribution and finite second moment before applying Mills asymptotics, obtaining logarithmic efficiency but divergent one-draw relative error. Zero target probabilities or a zero sampling denominator are not admitted, and no arbitrary fitted proposal is selected."
+    },
+    "thm-cross-entropy-production-unbiased-given-pilot": {
+      "batch": "8",
+      "assessment": "The proof partitions the successful/admissible event by finitely many selected parameters and uses the frozen proposal's conditional IID law. The zero extension off success is explicit, so a failed pilot or empty success event contributes zero. No finite-variance, success-probability or optimal-proposal existence conclusion is being claimed."
+    },
+    "lem-nested-level-probability-factorization": {
+      "batch": "8",
+      "assessment": "The imported event sequence has L>=1 and positive prefixes. The proof telescopes those explicitly defined positive probability ratios from A0=Omega; repeated levels contribute factors one. It needs no arbitrary choice of conditional samples and does not claim an identity for an unspecified empty level chain."
+    },
+    "alg-independent-fixed-level-splitting": {
+      "batch": "8",
+      "assessment": "The Definition imports positive-length nested levels, requires N>=1 and positive declared costs, and returns unavailable status when a conditional sampler is missing. Level arrays are required independent and exact; a zero empirical level gives a zero estimate/status rather than a zero target probability. No actual zero particle denominator or sampler-existence inference is admitted."
+    },
+    "alg-fixed-level-sir-splitting": {
+      "batch": "8",
+      "assessment": "The Definition imports positive-length levels and N>=1 particles, fixes identity first mutation and full resampling, and requires later kernels accessible, supported and invariant. With L=1 the later mutation-kernel list is empty, while zero empirical event weights return zero-particle-prefix. Existence of an invariant kernel is not asserted to supply an exact accessible conditional sampler."
+    },
+    "lem-finite-budget-stopped-normalizer": {
+      "batch": "8",
+      "assessment": "The proof treats the budget-zero partition directly, then inducts the measurable probability-kernel property and finite-prefix hit probability. It identifies a one-step normalizer and takes an increasing-event limit; AC is inherited only through the path-law supplier. No finite expected cost for the limiting exact oracle is inferred."
+    },
+    "lem-stopped-kernel-discretization-bias": {
+      "batch": "8",
+      "assessment": "The Statement allows the common transition horizon H=0. With identical initial law/potential, the two normalizers then coincide and the transition-error sum is zero; the telescoping proof has no replacement terms. The stopped-budget and missed-crossing branches compare actual measurable events and require additional tail or regularity bounds for a rate."
+    },
+    "thm-independent-splitting-product-moments-and-work": {
+      "batch": "8",
+      "assessment": "The imported sequence has L>=1, particle count N>=1 and every p_l>0. The proof divides only by positive target/product probabilities, while empty subset complements in its finite product expansion have value one. Repeated levels with p_l=1 give zero level variance; independence and costs stay explicit, with no rarity-uniform relative-efficiency conclusion."
+    },
+    "thm-fixed-level-sir-estimator-unbiased": {
+      "batch": "8",
+      "assessment": "The imported model requires positive finite prefixes and full resampling. The proof identifies the initial event normalizer, inducts through invariant supported mutations, and applies the declared unbiasedness supplier. L=1 needs no subsequent mutation; zero empirical estimates are permitted, and inherited AC is declared without a new variance assertion."
+    },
+    "thm-fixed-level-sir-absolute-mse-bound": {
+      "batch": "8",
+      "assessment": "The proof starts with bounded backward functions and includes the initial IID variance as well as L conditional update variances. N>=1 and L>=1 exclude empty particle/level lists, but an empirical zero normalizer remains zero and causes no division. The theorem proves an absolute bound only; the two iff worksheet axes concern no biconditional in this inequality claim."
+    },
+    "cex-sir-l2-bound-from-conditional-means-is-false": {
+      "batch": "8",
+      "assessment": "The counterexample fixes two states, two levels and a refresh mutation. Its conditional future-mean normalization is one, so the asserted B=1 bound would be zero, while the actual Bernoulli particle mean has positive error 1/(4N). This explicit finite construction refutes one implication; AC is inherited through the general SIR interface rather than chosen anew."
+    },
+    "rem-sir-finite-particle-error-bound-scope": {
+      "batch": "8",
+      "assessment": "The Remarks report the existing absolute SIR bound under positive prefixes and distinguish it from relative error and fixed-horizon CLT variance. They prescribe no new numerical input family, sampler choice, phase proof or biconditional; the existing theorem/counterexample retain their own zero/one/degenerate cases and explicit domination hypotheses."
+    },
+    "ex-gaussian-barrier-exponential-tilting": {
+      "batch": "8",
+      "assessment": "This fixed positive barrier-two example substitutes into the existing Gaussian tilt formula and obtains a positive finite mean and finite second moment. It is not a varying zero-barrier, singleton-dimension or endpoint theorem. The asymptotic relative-error divergence is explicitly reserved for the changing-barrier family, with no new random-law construction."
+    },
+    "ex-queue-overflow-and-redundant-splitting-work": {
+      "batch": "8",
+      "assessment": "The example enumerates two Bernoulli arrivals and compares two nonempty splitting designs at work four. Conditional probabilities one in the redundant levels contribute unit factors, while the nontrivial levels yield relative variances four thirds and three. All probabilities and sample counts used in denominators are positive, and no arbitrary level family is selected."
+    },
+    "ex-cross-entropy-pilot-misses-event-support": {
+      "batch": "8",
+      "assessment": "The one-member proposal family and event probability one tenth are fixed. With positive pilot size, the all-miss event has probability (9/10)^m and returns pilot-no-hit without producing an estimator. This supplies explicit singleton/failure behavior rather than an assertion that pilot success follows from positive event probability."
+    },
+    "cex-dependent-level-samples-bias-product-estimator": {
+      "batch": "8",
+      "assessment": "The counterexample gives an explicit four-point coupling through two independent Bernoulli variables. Each level has the correct half-success marginal but both indicators equal the same variable, so product expectation one half differs from target one quarter. It intentionally violates independent arrays and proves no biconditional or arbitrary coupling-selection claim."
+    },
+    "ex-sir-zero-particle-prefix-positive-event": {
+      "batch": "8",
+      "assessment": "The example fixes one event level and two IID uniform two-state particles. Both missing the event has probability one quarter and returns zero although the target is one half. This exact zero-estimate branch is an outcome of a nonempty particle system, not an empty or zero-probability event and not an iff about unbiasedness."
+    },
+    "ex-finite-budget-crossing-misses-between-grid-times": {
+      "batch": "8",
+      "assessment": "The deterministic path is zero at both inspected endpoints and one at the midpoint, above threshold three quarters. Verification gives continuous hit probability one, grid hit probability zero and bias one. The grid and interval are explicitly fixed and nonempty; no asymptotic mesh rate or arbitrary path selection is asserted."
+    },
+    "ex-importance-sampling-finite-mean-infinite-second-moment": {
+      "batch": "8",
+      "assessment": "The support is the positive integers and the event tail starts at m>=1. Both normalizing series constants and every proposal atom are strictly positive, so all likelihood denominators are nonzero. Verification computes a convergent mean series and divergent harmonic second moment; it is a concrete witness, not a finite-variance equivalence or a selectable proposal family."
+    },
+    "thm-fixed-level-sir-relative-mse-under-conditional-event-second-moment-bounds": {
+      "batch": "8",
+      "assessment": "The Statement requires L,N>=1 and deterministic B0 through BL>=1. Its proof includes initialization, conditional event second moments, the a=0 branch without division and the zero-normalizer fallback branch. At B0=1 the initial factor is one; the product bound is a sufficient implication, not a consequence of mean-only deterministic-target bounds."
+    },
+    "def-milstein-scheme-and-iterated-integrals": {
+      "batch": "9",
+      "assessment": "The Definition requires positive finite state and noise dimensions. Its sums run over one through m and its scalar specialization sets both dimensions one; commutativity removes the antisymmetric contribution but noncommuting implementations require actual area information. It defines prescribed updates, not an iff theorem or arbitrary choice of a sampler."
+    },
+    "lem-iterated-brownian-integral-identities": {
+      "batch": "9",
+      "assessment": "The imported noise dimension is positive and the step length strictly positive. Its proof pairs finitely many coordinate terms, including diagonal pairs, and derives the scalar conditional moments from the specified normal law. A zero area on diagonal is explicit; the resulting identities and commutative substitution are not biconditionals."
+    },
+    "lem-event-weighted-ito-isometry": {
+      "batch": "9",
+      "assessment": "The theorem assumes a positive deterministic interval and finite-energy predictable integrand; the event may be empty or null, giving zero weighted integrals. Its proof truncates elementary approximations to that interval and uses the declared AC-dependent Ito completion. It proves one weighted identity, not an iff or a new family-wide selection principle."
+    },
+    "lem-bounded-sde-increment-moments": {
+      "batch": "9",
+      "assessment": "The theorem allows elapsed time zero and arbitrary conditioning event, giving zero increment or zero event weight. Its proof stops a continuous representative, obtains uniform second/fourth moment bounds, and removes the stop with Fatou. Positive state/noise dimensions are inherited and no biconditional is claimed by the two inequalities."
+    },
+    "lem-milstein-local-defect-bounds": {
+      "batch": "9",
+      "assessment": "The imported state/noise dimensions are positive and 0<h<=1. The proof writes three explicit remainder terms, including finite sums over those noise coordinates, and bounds conditional means and event-weighted second moments using declared AC interfaces. Vanishing coefficients/remainders satisfy the same estimates; no equivalence or empty noise family is asserted."
+    },
+    "lem-stochastic-local-to-global-rms-bound": {
+      "batch": "9",
+      "assessment": "The Statement takes N>=1, 0<h<=1 and e0=0. The proof bounds a finite positive-length recurrence with orthogonal increments and never divides by an error norm; zero increments simply satisfy its inequalities. The filtration is indexed from zero to N, so no empty time sequence is used in this one-way RMS bound."
+    },
+    "thm-commutative-milstein-strong-order-one": {
+      "batch": "9",
+      "assessment": "The Statement fixes positive finite state/noise dimensions, positive horizon and positive grid count. Its proof explicitly treats scalar noise as automatically commutative and zero diffusion as the deterministic recurrence; the grid maximum includes both time endpoints. AC stays in the Brownian/Ito suppliers, and the rate is conditional rather than biconditional."
+    },
+    "def-additive-noise-stochastic-heun-scheme": {
+      "batch": "9",
+      "assessment": "The Definition fixes a scalar state, one positive time step and one shared normal increment for predictor/corrector. A zero constant diffusion is admitted and removes the stochastic additions. This is a prescribed two-stage map under declared Brownian AC assumptions, not an assertion of a weak-order equivalence for multiplicative noise."
+    },
+    "lem-additive-heun-one-step-weak-expansion": {
+      "batch": "9",
+      "assessment": "The theorem assumes 0<h<=1, a scalar Gaussian increment and the bounded classical backward solution. Its proof lists finitely many Gaussian moments, including zero odd moments, and cancels matching terms through second order. Positive step/one-dimensional state exclude an empty scheme instance, and the local weak bound is not an iff."
+    },
+    "thm-additive-noise-stochastic-heun-weak-order-two": {
+      "batch": "9",
+      "assessment": "The theorem fixes a scalar additive-noise SDE, deterministic initial value and a positive uniform grid with Nh=T. The proof telescopes the stated one-step backward-solution errors and substitutes the terminal payoff; it does not infer multiplicative-noise order or existence of an arbitrary payoff's backward solution. Its rate claim is one-way."
+    },
+    "thm-milstein-mlmc-level-variance-and-cost": {
+      "batch": "9",
+      "assessment": "The theorem has positive finite dimensions and horizon and a nonempty dyadic hierarchy starting at level zero. Its proof handles that base level separately for variance and absorbs finitely many coarser grids, then uses nested coupling for the rate exponents. No iff or arbitrary area-sampler selection is claimed; the commutative fixed-cost hypotheses remain explicit."
+    },
+    "ex-geometric-brownian-milstein-update": {
+      "batch": "9",
+      "assessment": "The example gives an explicit exponential solution and a scalar Milstein factor for arbitrary real constants. Verification includes zero initial value and zero noise coefficient, with the latter reducing the update to deterministic Euler. It makes no global strong-rate claim for these unbounded coefficients and contains no biconditional or empty-dimensional process."
+    },
+    "ex-scalar-multiplicative-noise-milstein": {
+      "batch": "9",
+      "assessment": "The example fixes the positive-time scalar sine-diffusion model at initial value pi/4 and positive grid count. Verification computes a nonzero correction, its zero mean and positive variance, and checks bounded derivatives before applying the strong-rate theorem. It is a concrete scalar example, not a biconditional or empty scheme."
+    },
+    "ex-noncommuting-two-noise-milstein-area": {
+      "batch": "9",
+      "assessment": "The example fixes two independent Brownian coordinates and h>0. Conditional Gaussian calculations divide only by positive h and positive normal densities, with endpoint subintervals handled separately. Verification obtains positive residual h squared over four after projecting on the endpoint increments, demonstrating why the needed area is not determined by them; no iff assertion is made."
+    },
+    "lem-competing-exponential-race-for-reaction-channels": {
+      "batch": "10",
+      "assessment": "The Statement requires R>=1 but permits every rate zero. The proof treats that empty active-clock set before taking any minimum or dividing by total rate; otherwise the positive total guarantees at least one active clock, and finite pair ties are null. Choice assumptions are the declared exponential-law ones, not selection of a minimum from an empty set."
+    },
+    "thm-countable-state-reaction-networks-lyapunov-nonexplosion": {
+      "batch": "10",
+      "assessment": "The initial state forces the countable state set nonempty. Each active-channel generator sum may nevertheless be empty at an absorbing state, where the defined process stays constant. The proof stops on finite sublevels containing the initial state and bounds event counts; independent streams use Countable Choice and Dependent Choice, without full AC or an iff claim."
+    },
+    "thm-dominating-thinning-exactly-simulates-reaction-rates": {
+      "batch": "10",
+      "assessment": "The theorem requires an actual initial time/state and a certified finite envelope. The proof treats zero envelope as the constant path and otherwise uses a positive-rate marked Poisson construction; zero channel rates give empty accepted regions. Product-measurable mark sets and declared stream choice principles remain explicit, with no guarantee outside the envelope."
+    },
+    "thm-finite-state-gillespie-and-next-reaction-exactness": {
+      "batch": "10",
+      "assessment": "The algorithms start from an admitted state, excluding an empty state-space instance. Their active-channel generator sums can be empty when total rate is zero, and the proof returns the absorbing path before a rate division. Marked zero-increment events remain counted. The conclusion is equality of path laws under supplied streams, not an iff or an arbitrary process choice."
+    },
+    "thm-minimum-intensity-coupling-preserves-exact-marginals": {
+      "batch": "10",
+      "assessment": "The Statement supplies both initial states and finite systems, so neither coordinate state set is empty. The proof returns two constant paths if the candidate envelope is zero; otherwise nested fixed mark intervals give the exact shared/residual rates and marginal laws. It constructs a particular coupling from declared streams, not a choice from an unspecified coupling family."
+    },
+    "thm-reaction-counts-have-compensators-brackets-and-isometry": {
+      "batch": "10",
+      "assessment": "The state set is explicitly finite nonempty, but individual active rates and all counts may vanish. The proof treats zero global envelope first, builds predictable compensators from bounded state rates, and extends finite simple-integrand identities through declared AC interfaces. The finite channel sum includes zero integrands; this is an isometry and bracket theorem, not a biconditional."
+    },
+    "cex-quadratic-pure-birth-reaction-network-explodes": {
+      "batch": "10",
+      "assessment": "The counterexample fixes the infinite nonempty positive-integer state set and one active channel with rate n squared. Holding-time sums begin at n=1, so no zero holding-time denominator occurs; explicit exponential expectations and monotone convergence give finite explosion time. The example uses the stated stream choice principles and refutes sufficiency of finite per-state rates only."
+    },
+    "cex-understated-thinning-envelope-is-invalid": {
+      "batch": "10",
+      "assessment": "The fixed one-state example has one zero-increment marked channel at positive rate two and an invalid envelope one. Its proof compares distinct exponential survivals for t>0 and preserves the algorithm's invalid-envelope status instead of clipping. Singleton state/channel sizes are built into the example, not an iff or arbitrary-selection assertion."
+    },
+    "ex-zero-total-hazard-state-is-absorbing": {
+      "batch": "10",
+      "assessment": "The fixed two-state one-channel death process moves from one to zero after a unit exponential wait. Verification handles zero propensity by the absorbing-path status and computes its two probabilities at every t>=0. No division by zero rate, endpoint convention beyond this stated time range, or arbitrary state/process choice is used."
+    },
+    "ex-finite-state-birth-death-reaction-simulation": {
+      "batch": "10",
+      "assessment": "The fixed three-state birth/death model has total rate two everywhere. Verification checks zero birth rate at the upper state and zero death rate at the lower state before evaluating poststates, and computes the first-event threshold and generator. The specified finite input and exact streams introduce no iff or arbitrary witness selection."
+    },
+    "ex-two-chain-minimum-intensity-birth-death-coupling": {
+      "batch": "10",
+      "assessment": "The fixed pair of three-state systems starts at (1,1). Verification checks boundary-disabled channels, three unit-rate accepted events and a candidate envelope six, with one residual event type having rate zero. The explicit mark construction gives first-event rate three and exact marginals; it is not an iff or arbitrary coupling choice."
+    },
+    "thm-midpoint-bit-stream-coupling-and-error": {
+      "batch": "11",
+      "assessment": "The Statement requires a positive bit budget, so its prefix sum has at least one bit; the underlying countable fair-bit sequence is also nonempty. The proof constructs the same-stream midpoint coupling, handles closed uniform endpoints through its CDF, and distinguishes the atomic grid by total variation one. It uses the declared Countable/Dependent Choice suppliers only."
+    },
+    "alg-finite-categorical-inverse-cdf": {
+      "batch": "11",
+      "assessment": "The Definition explicitly requires a nonempty outcome list and a probability sum one. It handles input zero by returning outcome one, then searches deterministically for the least cumulative threshold; r=1 needs no comparisons. No empty probability vector or unprescribed inverse choice is admitted by this algorithm."
+    },
+    "thm-finite-categorical-midpoint-count-bound": {
+      "batch": "11",
+      "assessment": "The Statement and imported algorithm use a nonempty categorical list. Its proof treats clipped cumulative thresholds including zero/one and separately proves zero search updates at r=1 and immediate return for input zero. All count and search operations are finite and specified; the bound does not claim a biconditional."
+    },
+    "lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative": {
+      "batch": "12",
+      "assessment": "The Statement has a real center and positive step with both symmetric stencil points in the open domain. The proof cancels even Taylor terms and divides only by positive 2h, retaining zero derivative/remainder constants. It constructs a remainder from two fixed evaluations, not arbitrary witness families or an iff."
+    },
+    "thm-complex-step-derivative-has-second-order-error-under-holomorphy": {
+      "batch": "12",
+      "assessment": "The Statement requires holomorphy, real-axis reality and h>0 on a supplied vertical segment. The proof obtains zero initial imaginary value/second derivative and divides the Taylor expansion by positive h. Evaluation error is a separate allowed nonnegative term; no claim is made at zero step or without holomorphy, and no equivalence is asserted."
+    },
+    "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds": {
+      "batch": "12",
+      "assessment": "The Statement assumes positive step and the appropriate nonempty real stencil segment. The proof applies Taylor at fixed endpoints and bounds evaluation differences by the triangle inequality, allowing zero derivative/error bounds. It supplies sufficient inequalities, not exact-error equivalences, and no choice of independent random noise is silently made."
+    },
+    "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds": {
+      "batch": "12",
+      "assessment": "The Statement requires positive input/output dimensions and step, but permits zero direction and zero evaluation errors. The proof combines fixed component Taylor bounds in Euclidean norm and separately derives variance from centered covariance data, reserving independence for its stated specialization. Degenerate covariance is not divided out, and no iff or arbitrary sample selection is claimed."
+    },
+    "thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring": {
+      "batch": "12",
+      "assessment": "The coloring and safe pattern are supplied. The proof has at most one supported term per row/color and explicitly gives zero if none, while the collision caveat constructs two different rows with the same compressed observation. There is no interval parameter, biconditional or existence/choice theorem for colorings."
+    },
+    "thm-optimal-step-for-forward-and-central-difference-error-bounds": {
+      "batch": "12",
+      "assessment": "The permitted step interval is nonempty because H>0. For positive constants the proof uses unique positive roots and equality only at ratio one; it separately handles zero noise, zero truncation and both zero, and caps the minimizer at H. It optimizes a supplied bound, not actual error, and asserts no biconditional about all algorithms."
+    },
+    "thm-richardson-extrapolation-has-fourth-order-error-bound": {
+      "batch": "12",
+      "assessment": "The Statement uses positive outer step and actual uniform expansions for every smaller positive step. The proof cancels one common quadratic coefficient between the two fixed central stencils, then propagates four allowed evaluation errors. Zero remainder/noise gives zero upper allowance; no empty stencil, arbitrary sequence selection or iff is claimed."
+    },
+    "cex-colliding-column-colors-do-not-identify-a-jacobian": {
+      "batch": "12",
+      "assessment": "The counterexample fixes a two-column support and one colliding seed, then explicitly gives rows (1,2) and (3,0) with common product three. The zero entry is allowed by safe support, but the seed is not a proper coloring. This finite non-identifiability witness uses no empty/singleton input, continuous endpoint or arbitrary choice."
+    },
+    "cex-complex-step-absolute-value-returns-the-wrong-derivative": {
+      "batch": "12",
+      "assessment": "The counterexample fixes modulus at the real point one and h>0. It computes real derivative one and zero complex-step estimate, then shows unequal real/imaginary difference-quotient limits. It excludes the supplier's holomorphy hypothesis rather than proving an iff, and its two explicit paths require no family-wide choice."
+    },
+    "ex-colored-jacobian-of-two-independent-reactions": {
+      "batch": "12",
+      "assessment": "The example fixes four state coordinates and two positive reaction constants. Verification derives singleton row supports and explicitly supplies the all-one seed, whose entries recover the nonzero columns while safe-pattern zeros remain zero. No arbitrary coloring choice, endpoint parameter, or equivalence claim is made."
+    },
+    "ex-forward-difference-noise-bound-has-a-balanced-step": {
+      "batch": "12",
+      "assessment": "The example fixes a scalar quadratic at one and explicitly chooses opposing evaluation errors, attaining the supplied bound. Its final delta=one-half specialization gives step one with two equal error contributions. Positive noise and step are stated; this is a determined example, not an empty input, iff or arbitrary noise-family choice."
+    },
+    "rem-real-arithmetic-graph-versus-rounded-execution": {
+      "batch": "13",
+      "assessment": "The Remarks distinguish exact graph derivatives from rounded machine-map derivatives and report a conditional certified-solve bound. Their only explicit numerical example is two-dimensional with A(0)=I, inverse/residual defects zero and exact derivative minus one. They assert no dimension-parametric scalar example, independent phase proof or biconditional; strict branch and certified residual conditions are retained."
+    },
+    "ex-implicit-linear-solve-adjoint": {
+      "batch": "13",
+      "assessment": "The example fixes a two-by-two triangular matrix with diagonal one for every parameter and evaluates at zero. Verification computes the exact primal/adjoint gradient minus one and then exact-zero inverse/primal defects for stored identity solves. No singular-state Jacobian or varying one-dimensional matrix instance is admitted by this particular example."
+    },
+    "lem-certified-linear-solve-jacobian-and-pullback-error": {
+      "batch": "13",
+      "assessment": "The Statement assumes positive dimension, certified inverse defect d<1 and successful evaluated arithmetic. The proof obtains invertibility before any inverse formula, expands singleton dots using empty coefficient products one, and handles zero cotangent separately instead of dividing by its norm. Zero defect/residual bounds and strict replay conditions are explicit, not arbitrary backend choices."
+    },
+    "def-finite-straight-line-computational-program": {
+      "batch": "13",
+      "assessment": "The Definition allows zero input or primitive value dimensions and a finite operation list, but requires an actual designated scalar output. Empty parent lists are supplied constant primitives; repeated slots are distinct prescribed edges. Strict open branch selection is required for derivatives and a switch returns NONDIFFERENTIABLE; no arbitrary active branch is selected."
+    },
+    "lem-implicit-sensitivity-error-controlled-by-residual": {
+      "batch": "13",
+      "assessment": "The Statement restricts residual and state segments to a supplied local inverse chart with uniform inverse/Lipschitz bounds. The proof applies the segment estimate, expands inverse differences and explicitly gives identical state/sensitivity when residual zero. It does not turn a stopped iteration into an exact branch derivative or make an iff/choice assertion."
+    },
+    "thm-implicit-differentiation-forward-and-adjoint-formulas": {
+      "batch": "13",
+      "assessment": "The Statement gives an exact residual zero with invertible square state Jacobian, so the implicit branch and the adjoint solve are locally unique. The proof substitutes the branch derivative into the objective chain rule and rewrites it through the transposed inverse. A singular state block is outside the hypothesis; no arbitrary branch or stopped-iteration equivalence is selected."
+    },
+    "alg-forward-mode-automatic-differentiation": {
+      "batch": "13",
+      "assessment": "The Definition supplies a finite admissible graph and direction, initializes input tangents, and applies each exact primitive derivative to its parent tuple. If the output is an input it returns that coordinate direction directly, including no-operation graphs. Domain failures and nonunique strict branches return statuses, not an arbitrary derivative choice."
+    },
+    "alg-reverse-mode-automatic-differentiation": {
+      "batch": "13",
+      "assessment": "The Definition zero-initializes all accumulators, seeds only the designated scalar output and processes every parent slot in fixed reverse order. Repeated slots contribute separately; an input output returns the identity coordinate seed even with no operations. It differentiates a strict real graph only and returns NONDIFFERENTIABLE at a switch, not an iff or chosen subgradient."
+    },
+    "lem-finite-straight-line-program-defines-c1-map": {
+      "batch": "13",
+      "assessment": "The proof begins with the whole input space and builds admissible domains by finite preimages of primitive open domains, then applies the chain rule. An input-coordinate output is covered with no operation node; an empty admissible open set makes the local assertion vacuous. Strict branch boundaries are excluded from the derivative conclusion, with no arbitrary primitive/branch selection."
+    },
+    "lem-finite-straight-line-program-defines-c2-map": {
+      "batch": "13",
+      "assessment": "The proof starts with linear coordinate maps and uses the supplied finite C2 primitive list and bounded-bilinear matrix product rule to induct through nodes. An input output remains C2, while a branch switch is outside the claim. The theorem is a smoothness implication and does not choose maps or assert an iff."
+    },
+    "alg-checkpointed-reverse-schedules": {
+      "batch": "13",
+      "assessment": "The Definition returns starting state and unchanged supplied cotangent on an empty transition interval. Positive uniform mode requires positive snapshot budget; binomial mode explicitly handles lengths zero and one before recursive splitting, so zero resource budgets are only admitted at capacity-one leaves. Replay maps/order/domains are fixed and no schedule optimality or arbitrary branch choice is asserted."
+    },
+    "alg-differentiate-finite-fixed-point-iteration": {
+      "batch": "13",
+      "assessment": "The Definition admits zero iteration, state and parameter dimensions. Budget zero evaluates only the initial map; empty coordinate loops return the required empty Jacobian shape while still evaluating primal recursion. It computes the specified finite map and propagates domain/branch failures, not a selected exact fixed point or an iff about residual convergence."
+    },
+    "alg-forward-over-reverse-hessian-vector-product": {
+      "batch": "13",
+      "assessment": "The Definition seeds cotangent/tangent-cotangent (1,0), differentiates each exact reverse contribution and accumulates repeated parent slots separately. An input-coordinate output has constant gradient and zero tangent-cotangent; no-operation or zero directions require no special derivative choice. Its strict C2 graph/domain requirements exclude branch switches."
+    },
+    "thm-forward-mode-computes-directional-derivative": {
+      "batch": "13",
+      "assessment": "The proof checks input-coordinate tangents first, inducts exact primitive compositions, and explicitly handles either operation output or input output. Empty operation lists and zero direction retain the corresponding coordinate derivative/zero tangent. This is correctness on a supplied strict graph, not an iff or arbitrary choice of a branch."
+    },
+    "thm-reverse-mode-computes-gradient": {
+      "batch": "13",
+      "assessment": "The proof expands prescribed parent-slot paths, with a length-zero identity path at the output and zero sum when no path exists. Thus empty outgoing families, disconnected nodes and input-coordinate outputs are covered by the seed/zero initialization. Exact graph correctness is a direct implication, with no interval endpoint or arbitrary path selection principle."
+    },
+    "thm-reverse-mode-work-and-tape-storage-bound": {
+      "batch": "13",
+      "assessment": "The Statement counts arithmetic work for a supplied finite primitive graph and includes buffer initialization in storage, not arithmetic. With no operation nodes the work sum is zero; input-gradient storage remains in S. The proof separately sums fixed primal/pullback/parent costs and excludes opaque calls lacking those ratios, rather than claiming an iff or arbitrary solver choice."
+    },
+    "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds": {
+      "batch": "13",
+      "assessment": "The proof explicitly treats empty reversed intervals as unchanged state/cotangent and one-step intervals as one exact local tape. Positive uniform mode uses finite block lengths; binomial recursion has stated capacity and decreasing child resources. The schedule and replays are deterministic, and the theorem proves correctness/cost bounds without claiming optimality or a selected schedule family."
+    },
+    "thm-finite-iteration-sensitivity-bound-and-residual-limitation": {
+      "batch": "13",
+      "assessment": "The Statement takes K>=1 and q<1, with an explicit q=0,K=1 power convention. The proof differentiates the finite recurrence and sums its error propagation, then gives a concrete zero-residual example with nonzero finite-derivative discrepancy. It is not an iff or an unqualified residual-only derivative certificate; all neighborhoods/maps are supplied."
+    },
+    "thm-forward-over-reverse-computes-hessian-vector-product": {
+      "batch": "13",
+      "assessment": "The proof differentiates the exact reverse recurrence of a strict finite C2 graph using the product rule. An input-coordinate output is explicitly treated as constant gradient with zero Hessian-vector output; a zero direction also propagates zero through the linearized recurrence. No Hessian-symmetry, branch-switch derivative or arbitrary map selection is assumed."
+    },
+    "thm-graph-gradient-error-from-local-jacobian-perturbations": {
+      "batch": "13",
+      "assessment": "The proof expands the given finite strict graph into paths, interpreting the length-zero output path as identity and disconnected-input path sums as zero. Empty prefix/suffix matrix products are identities in telescoping each path. The output seed is unchanged, so those empty terms add no error; exact reverse accumulation is required and no arbitrary error family is selected."
+    },
+    "ex-branchwise-ad-at-the-absolute-value-switch": {
+      "batch": "13",
+      "assessment": "The scalar example gives exactly two strict formulas with derivatives plus/minus one. At zero the one-sided quotients differ, so the prescribed status is NONDIFFERENTIABLE rather than a chosen subgradient. There is one fixed nonempty primitive input, no continuous interval endpoint outside the switch analysis and no biconditional theorem."
+    },
+    "ex-reverse-euler-trajectory-tape": {
+      "batch": "13",
+      "assessment": "The example fixes two scalar Euler steps, a positive half-step and initial state one. Verification computes both forward tape and reverse contributions at parameter one, giving three halves, with fixed unit output seed. It does not vary the number of steps to empty or choose a trajectory/adjoint from a family."
+    },
+    "ex-shared-expression-forward-and-reverse-graph": {
+      "batch": "13",
+      "assessment": "The example fixes four operation nodes and input (1,2), giving output eleven. Forward directions yield eight u plus seven v; reverse mode adds both repeated-square parent contributions and obtains the same gradient. This explicit graph has no empty input, arbitrary branch/edge selection or iff claim."
+    },
+    "def-intervals-rectangles-and-complex-balls": {
+      "batch": "14",
+      "assessment": "The Definition explicitly stipulates represented-set inclusion S sqsubseteq T exactly as set inclusion, so both directions are the defining condition, not unproved theorems. It separately names empty/entire/error statuses, admits singleton intervals and zero-radius balls, and excludes zero from complex reciprocal division."
+    },
+    "def-centered-taylor-model-with-derivative-interval": {
+      "batch": "14",
+      "assessment": "The Definition assumes a supplied interval with a center c in it and integer n>=0, so its coefficient family has n+1>=1 entries. Zero width gives zero radius remainder, and n=0 still has a constant coefficient. Required derivative/coefficient enclosures are inputs and unavailable ones return no certificate, rather than being chosen implicitly."
+    },
+    "lem-absolutely-convergent-series-cauchy-product": {
+      "batch": "14",
+      "assessment": "The infinite coefficient sequences are indexed by all nonnegative integers, not an optional empty family. Each convolution sum includes j=0 through n, and finite partial sums have at least the zeroth term. The proof allows zero coefficient sequences and uses actual absolute-convergence bounds and tails; no separate empty-index aggregate is claimed."
+    },
+    "lem-elementary-power-series-converge-uniformly-on-bounded-sets": {
+      "batch": "14",
+      "assessment": "Every stated series is indexed by a nonempty natural-number sequence; finite partial sums include their zeroth term. The proof explicitly separates R=0 and q=0 from positive ratio estimates and then uses bounded nonnegative partial sums. It asserts uniform convergence on bounded intervals, not a definition of a sum over an absent coefficient family."
+    },
+    "lem-power-series-termwise-differentiation": {
+      "batch": "14",
+      "assessment": "The coefficient sequence starts at zero and the derivative sequence at one, both nonempty fixed index sets. The proof chooses one radius strictly between a fixed interior point and the positive convergence radius, then controls the two tails around finite polynomials. It does not require or assert differentiation of an unspecified empty series family."
+    },
+    "lem-continuous-functions-riemann-integrable": {
+      "batch": "14",
+      "assessment": "For the main a<b case the partition family contains the two-endpoint partition and every partition has at least one subinterval. The proof uses actual attained extrema and common refinements; the Statement separately defines coincident-endpoint integral zero and reversed orientation. Thus an empty partition is unnecessary, and the degenerate integral extension is explicit."
+    },
+    "def-real-elementary-functions-and-domains": {
+      "batch": "14",
+      "assessment": "The Definition uses fixed natural-indexed power series and continuous integrals on the segment between specified endpoints. Coincident integral endpoints give zero by the oriented integral supplier, but no empty coefficient index set is an input. Logarithm/reciprocal/tangent/principal-argument domains and excluded branch cases are explicit, not arbitrary point-function choices."
+    },
+    "lem-range-reduced-exp-log-and-arctan-series-enclosures": {
+      "batch": "14",
+      "assessment": "The Statement fixes N>=1, so each truncated series has at least two terms, while its infinite tails start at the next actual index. The proof handles transformed zero arguments and logarithm at one separately and keeps every geometric denominator positive on the stated reduced domains. No empty-series truncation is claimed."
+    },
+    "lem-taylor-lagrange-remainder-from-mean-value": {
+      "batch": "14",
+      "assessment": "The Taylor coefficient family has indices zero through n with n>=0, hence is nonempty. For distinct center/query the proof applies a finite chain of Rolle witnesses, including a single first witness at n=0; at coincident points it directly gives zero remainder. It needs no empty coefficient list or arbitrary simultaneous witness choice."
+    },
+    "lem-taylor-integral-remainder": {
+      "batch": "14",
+      "assessment": "The Taylor sum has n+1 terms and the auxiliary remainder recurrence includes its m=0 base. Every factorial denominator is a product of positive integers with 0!=1, so none vanishes. The proof explicitly handles coincident endpoints by zero oriented integral, then proves the absolute remainder bound for both orientations."
+    },
+    "thm-real-elementary-range-enclosures": {
+      "batch": "14",
+      "assessment": "The proof uses finite fixed-term series with nonzero integer factorial denominators and sound rational tail formulas on their reduced domains. It separately returns split/nonfinite status when tangent's cosine may vanish. Zero inputs and constant/zero-width enclosures are admitted through the primitive range rules, while uncertified domains carry no finite success claim."
+    },
+    "lem-closed-interval-compactness-from-completeness": {
+      "batch": "14",
+      "assessment": "The Statement requires a<b, so a collapsed singleton interval is outside this compactness lemma's input. The proof chooses cover members containing actual endpoints and grows a nonempty supremum set; it does not assert an unproved degenerate-length version or use an empty cover of a nonempty interval."
+    },
+    "lem-mean-value-theorem-on-closed-interval": {
+      "batch": "14",
+      "assessment": "The Statement requires a<b before the proof divides by b-a, so a collapsed interval is excluded rather than silently normalized. The proof constructs an affine-corrected function with equal endpoint values and applies the stated Rolle supplier, producing one interior witness, not an endpoint or arbitrary family of witnesses."
+    },
+    "lem-riemann-integral-linearity": {
+      "batch": "14",
+      "assessment": "The main Darboux proof starts on a<b, explicitly separates positive, zero and negative scalar coefficients, and uses common finite refinements. Its Statement and final argument separately cover reversed endpoints and zero-length intervals with both sides zero. Thus the degenerate interval is a checked extension, not a missing or excluded case."
+    }
+  }
+}

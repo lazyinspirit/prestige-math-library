@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "43",
+  "round": 0,
+  "reviewed_items": [
+    "alg-na-romberg-trapezoid-table",
+    "def-na-bernoulli-polynomials",
+    "def-na-clenshaw-curtis-dct-i",
+    "def-na-closed-newton-cotes-eight-panel-rule",
+    "def-na-peano-kernel",
+    "lem-na-chebyshev-degree-bound-from-recurrence",
+    "lem-na-chebyshev-recurrence-angle-identity",
+    "lem-na-bernoulli-polynomial-identities",
+    "lem-na-chebyshev-integral-moments",
+    "lem-na-clenshaw-curtis-dct-i-orthogonality",
+    "thm-na-peano-kernel-remainder-and-bound",
+    "thm-na-euler-maclaurin-composite-trapezoid-remainder",
+    "cor-na-composite-trapezoid-even-power-expansion",
+    "lem-na-closed-newton-cotes-eight-panel-weights-and-exactness",
+    "thm-na-romberg-even-power-cancellation",
+    "cor-na-closed-newton-cotes-eight-panel-peano-bound",
+    "thm-na-clenshaw-curtis-interpolation-coefficients",
+    "def-na-clenshaw-curtis-quadrature",
+    "thm-na-clenshaw-curtis-exactness-and-near-best-error",
+    "alg-na-computed-clenshaw-curtis-via-fast-dft",
+    "ex-na-square-root-endpoint-breaks-romberg-order",
+    "ex-na-eight-panel-newton-cotes-negative-weight-amplification",
+    "ex-na-clenshaw-curtis-integrates-quadratics"
+  ],
+  "reviewed_pages": [
+    "clenshaw-curtis-and-extrapolation-quadrature",
+    "clenshaw-curtis-and-extrapolation-quadrature-examples"
+  ],
+  "decision": "repair",
+  "reason": "The mathematical claims and checked supplier uses otherwise hold. One local repair should resolve the missing DCT orthogonality premise and clarify the factorial and computed-algorithm input conventions.",
+  "findings": [
+    {
+      "id": "def-na-clenshaw-curtis-dct-i",
+      "type": "prerequisite",
+      "reason": "The angles use division by n for integer n≥1. Make the canonical real-image convention and positivity/nonzero premise explicit, with lem-of-naturals-positive."
+    },
+    {
+      "id": "lem-na-clenshaw-curtis-dct-i-orthogonality",
+      "type": "prerequisite",
+      "reason": "Step 1.1 divides by sin(mπ/(2n)) for 1≤m<2n, but its cited facts do not establish this is nonzero. Add the sine sign/zero supplier and show the angle lies in (0,π)."
+    },
+    {
+      "id": "alg-na-computed-clenshaw-curtis-via-fast-dft",
+      "type": "local",
+      "reason": "The input's generic phase/arithmetic budgets do not specify or pass the supplier's controls (τ, e_min, e_max, p_0, p_max, J, d_max). Also state the n=0 sample condition y_0=f((a+b)/2)."
+    },
+    {
+      "id": "def-na-peano-kernel",
+      "type": "local",
+      "reason": "In the real-valued kernel formula, clarify that (r−1)! denotes the canonical real image of the natural factorial and state why that denominator is nonzero."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-na-clenshaw-curtis-dct-i-orthogonality",
+      "decision": "repair",
+      "reason": "Its step 1.1 has the missing sine nonzero premise identified above."
+    },
+    {
+      "id": "thm-na-clenshaw-curtis-interpolation-coefficients",
+      "decision": "accept",
+      "reason": "The reconstruction and node reordering are sound once the DCT index convention and orthogonality premise are explicit."
+    },
+    {
+      "id": "def-na-clenshaw-curtis-quadrature",
+      "decision": "accept",
+      "reason": "Its n≥1 and separate midpoint conventions remain consistent with the clarified DCT definition."
+    },
+    {
+      "id": "thm-na-clenshaw-curtis-exactness-and-near-best-error",
+      "decision": "accept",
+      "reason": "The affine pullback, exactness, and physical-interval error bound use their suppliers with the stated hypotheses."
+    },
+    {
+      "id": "alg-na-computed-clenshaw-curtis-via-fast-dft",
+      "decision": "repair",
+      "reason": "Its DCT use is consistent, but the procedure needs the supplier's exact control tuple and the midpoint sample condition."
+    },
+    {
+      "id": "ex-na-clenshaw-curtis-integrates-quadratics",
+      "decision": "accept",
+      "reason": "The three-node transform and moment evaluations agree with the stated DCT convention."
+    },
+    {
+      "id": "clenshaw-curtis-and-extrapolation-quadrature",
+      "decision": "accept",
+      "reason": "Its page claims remain valid after the local convention and prerequisite clarifications."
+    },
+    {
+      "id": "clenshaw-curtis-and-extrapolation-quadrature-examples",
+      "decision": "accept",
+      "reason": "Its example summaries remain valid after the local convention clarifications."
+    },
+    {
+      "id": "thm-na-peano-kernel-remainder-and-bound",
+      "decision": "accept",
+      "reason": "Its Taylor and kernel formulas use the same factorial values once the real-image convention is explicit."
+    },
+    {
+      "id": "cor-na-closed-newton-cotes-eight-panel-peano-bound",
+      "decision": "accept",
+      "reason": "The r=10 kernel expression is consistent with the clarified factorial convention."
+    },
+    {
+      "id": "ex-na-eight-panel-newton-cotes-negative-weight-amplification",
+      "decision": "accept",
+      "reason": "Its perturbation bound and separate Peano error claim remain valid with the clarified kernel convention."
+    }
+  ]
+}

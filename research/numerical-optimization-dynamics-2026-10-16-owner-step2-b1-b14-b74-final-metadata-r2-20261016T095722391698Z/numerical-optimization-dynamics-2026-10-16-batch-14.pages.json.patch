@@ -1,0 +1,33 @@
+--- current/research/numerical-optimization-dynamics-2026-10-16-batch-14.pages.json
++++ proposed/research/numerical-optimization-dynamics-2026-10-16-batch-14.pages.json
+@@ -495,7 +495,9 @@
+           "def-intervals-rectangles-and-complex-balls",
+           "lem-directed-dyadic-rounding-enclosure-and-error",
+           "thm-dyadic-square-root-bisection-encloses",
+-          "lem-real-and-complex-modulus-rules"
++          "lem-real-and-complex-modulus-rules",
++          "lem-nonnegative-square-root-exists-and-unique",
++          "def-complete-ordered-real-field"
+         ],
+         "statement": "For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosure is asserted.",
+         "dependency_level": 4,
+@@ -891,7 +893,8 @@
+         "deps": [
+           "alg-certified-elementary-range-evaluation",
+           "def-intervals-rectangles-and-complex-balls",
+-          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
++          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
++          "def-dyadic-floating-point-format-and-directed-rounding"
+         ],
+         "statement": "Input: a finite expression DAG, a closed interval/rectangle domain box $X$, a\ndyadic requested width $\\varepsilon>0$, finite-format parameters, series\ntruncation index $N\\ge1$, and integer total box-split budget $B\\ge0$. Set a shared counter\n$R:=B$ and a queue containing $X$. Process boxes in a fixed order. For each\nbox $Q$, evaluate the DAG by\n[[alg-certified-elementary-range-evaluation]] with the same format and $N$.\n\n- If evaluation returns a non-finite status, return that status and the exact\n  unresolved box $Q$; it is not a tolerance certificate.\n- If it returns a finite enclosure $I$ with width at most $\\varepsilon$, save\n  $I$ as a completed leaf enclosure.\n- If it returns a finite enclosure wider than $\\varepsilon$ and $R=0$, return\n  `inconclusive` with the completed-leaf hull, $Q$, and the unmet width test.\n- If it returns a finite enclosure wider than $\\varepsilon$ and $R>0$, select\n  a widest nondegenerate input coordinate (breaking ties by the first\n  coordinate in the input order), split it at its dyadic midpoint\n  into two closed halves, decrement the shared counter $R$ by one, and append\n  both halves to the queue. If no coordinate can be split, return\n  `inconclusive` with the unmet width test.\n\nWhen the queue is empty, take the hull $J$ of all completed leaf enclosures.\nReturn `certified(J,X)` only if $\\operatorname{width}(J)\\le\\varepsilon$;\notherwise return `inconclusive(J,X)` and state that the global width test\nfailed. Each split covers its parent because the two closed halves overlap at\nthe midpoint and their union is the parent coordinate interval. The shared\ncounter makes $B$ a total split limit across the full computation.",
+         "dependency_level": 10,
+@@ -925,7 +928,8 @@
+           "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+           "lem-range-reduced-exp-log-and-arctan-series-enclosures",
+           "lem-trigonometric-identities-machin-and-range-reduction",
+-          "lem-mean-value-theorem-on-closed-interval"
++          "lem-mean-value-theorem-on-closed-interval",
++          "lem-absolutely-convergent-series-cauchy-product"
+         ],
+         "statement": "Every finite enclosure returned by\n[[alg-certified-elementary-range-evaluation]] for a real interval in the\ndomain of $\\exp$, $\\ln$, $\\sqrt{\\phantom{x}}$, $\\arctan$, $\\sin$, $\\cos$, or\n$\\tan$ contains the exact range of that function on the represented domain.\nIf two input intervals are nested and both calls return finite enclosures,\nthe canonical branch-cell and fixed-term construction in the algorithm makes\nthe smaller interval's computed enclosure a subset of the larger one's.\nAn unresolved fixed branch, pole, invalid domain or overflow returns its\nstated non-finite status and carries no finite success claim.",
+         "dependency_level": 10,

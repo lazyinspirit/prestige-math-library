@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "63",
+  "round": 1,
+  "reviewed_items": [
+    "def-verified-flow-variational-range-oracle",
+    "lem-positive-convex-polygon-winding-index",
+    "alg-validated-euler-flow-and-monodromy-enclosure",
+    "def-phase-bordered-periodic-orbit-bvp",
+    "lem-autonomous-periodic-orbit-has-neutral-floquet-multiplier",
+    "thm-c2-ode-flow-on-common-tube",
+    "lem-periodic-poincare-spectrum-matches-transverse-monodromy",
+    "lem-phase-bordered-shooting-jacobian-invertibility",
+    "prop-phase-bordered-bvp-root-equivalence",
+    "thm-validated-euler-flow-and-monodromy-enclosure-soundness",
+    "lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse",
+    "def-phase-bordered-multiple-shooting-and-midpoint-collocation",
+    "def-validated-periodic-shooting-jet-enclosure",
+    "thm-periodic-midpoint-collocation-error-budget",
+    "alg-validated-periodic-orbit-corrector",
+    "lem-separated-simple-floquet-multiplier-perturbation-bound",
+    "thm-periodic-shooting-residual-to-orbit-error-budget",
+    "alg-floquet-multiplier-cluster-certifier",
+    "alg-periodic-orbit-pseudoarclength-continuation",
+    "thm-floquet-multiplier-cluster-certificate-soundness",
+    "thm-validated-periodic-orbit-certificate-soundness",
+    "thm-orbital-stability-from-certified-floquet-multipliers",
+    "ex-coarse-euler-variational-step-gives-spurious-instability",
+    "ex-phase-singularity-in-stable-planar-oscillator",
+    "ex-near-unit-floquet-multiplier-is-inconclusive",
+    "ex-van-der-pol-stability-conditional-on-validated-enclosure"
+  ],
+  "reviewed_pages": [
+    "periodic-orbit-shooting-collocation-and-floquet-error",
+    "periodic-orbit-shooting-collocation-and-floquet-error-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The p=1 jet query does not specify the parameter-augmented endpoint box, and two algorithms have circular justified_by edges to their own soundness theorems. These remain unresolved at the final review.",
+  "findings": [
+    {
+      "id": "def-validated-periodic-shooting-jet-enclosure",
+      "type": "local",
+      "reason": "For p>0, q=(x,μ) varies over X×Λ, but the period-column query is stated on X_T×{I_d}×Θ, omitting Λ and the augmented identity dimension. The endpoint field enclosure needed for DG over the full input box is therefore unspecified. State the query on an endpoint box including Λ and the matching d+p augmented variational block. This affects section-mode consumers alg-validated-periodic-orbit-corrector and alg-periodic-orbit-pseudoarclength-continuation."
+    },
+    {
+      "id": "alg-validated-periodic-orbit-corrector",
+      "type": "prerequisite",
+      "reason": "Its justified_by points to thm-validated-periodic-orbit-certificate-soundness, whose deps include this algorithm. A soundness theorem assuming the algorithm's output cannot independently justify the algorithm's well-definedness; the owner must remove or replace this cycle. Affected consumers include alg-periodic-orbit-pseudoarclength-continuation, thm-validated-periodic-orbit-certificate-soundness, thm-orbital-stability-from-certified-floquet-multipliers, ex-near-unit-floquet-multiplier-is-inconclusive, and ex-van-der-pol-stability-conditional-on-validated-enclosure."
+    },
+    {
+      "id": "alg-floquet-multiplier-cluster-certifier",
+      "type": "prerequisite",
+      "reason": "Its justified_by points to thm-floquet-multiplier-cluster-certificate-soundness, whose deps include this algorithm. The owner must remove or replace this circular justification. Affected consumers include thm-floquet-multiplier-cluster-certificate-soundness, thm-orbital-stability-from-certified-floquet-multipliers, ex-near-unit-floquet-multiplier-is-inconclusive, and ex-van-der-pol-stability-conditional-on-validated-enclosure."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-validated-periodic-orbit-corrector",
+      "decision": "escalate",
+      "reason": "Its p=1 section mode relies on the unspecified augmented endpoint query; its fixed-parameter mode matches the corrected dimensions."
+    },
+    {
+      "id": "alg-periodic-orbit-pseudoarclength-continuation",
+      "decision": "escalate",
+      "reason": "Its section-mode corrector call uses p=1 and inherits the jet endpoint-box gap; its one-parameter dimensions otherwise match."
+    },
+    {
+      "id": "thm-validated-periodic-orbit-certificate-soundness",
+      "decision": "escalate",
+      "reason": "Its fixed-mode use matches the corrected interface, but the corrector and this soundness theorem have a circular justified_by/dependency edge."
+    },
+    {
+      "id": "thm-floquet-multiplier-cluster-certificate-soundness",
+      "decision": "escalate",
+      "reason": "Its proof uses the certifier, which also points back to this theorem under justified_by."
+    },
+    {
+      "id": "thm-orbital-stability-from-certified-floquet-multipliers",
+      "decision": "escalate",
+      "reason": "It depends on both certificate soundness chains with unresolved algorithm/theorem cycles."
+    },
+    {
+      "id": "ex-near-unit-floquet-multiplier-is-inconclusive",
+      "decision": "escalate",
+      "reason": "Its cluster-count and stability-theorem uses inherit the unresolved cluster-certifier cycle."
+    },
+    {
+      "id": "ex-van-der-pol-stability-conditional-on-validated-enclosure",
+      "decision": "escalate",
+      "reason": "Its conditional conclusion uses both unresolved orbit and Floquet certificate soundness chains."
+    }
+  ]
+}

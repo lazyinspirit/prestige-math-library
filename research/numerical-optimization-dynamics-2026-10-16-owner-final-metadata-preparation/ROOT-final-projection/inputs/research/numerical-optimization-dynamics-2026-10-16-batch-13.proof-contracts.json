@@ -1,0 +1,2306 @@
+{
+  "version": 1,
+  "scope": [
+    "def-finite-straight-line-computational-program",
+    "lem-implicit-sensitivity-error-controlled-by-residual",
+    "thm-implicit-differentiation-forward-and-adjoint-formulas",
+    "alg-forward-mode-automatic-differentiation",
+    "alg-reverse-mode-automatic-differentiation",
+    "lem-finite-straight-line-program-defines-c1-map",
+    "lem-finite-straight-line-program-defines-c2-map",
+    "alg-checkpointed-reverse-schedules",
+    "alg-differentiate-finite-fixed-point-iteration",
+    "alg-forward-over-reverse-hessian-vector-product",
+    "thm-forward-mode-computes-directional-derivative",
+    "thm-reverse-mode-computes-gradient",
+    "thm-reverse-mode-work-and-tape-storage-bound",
+    "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+    "thm-finite-iteration-sensitivity-bound-and-residual-limitation",
+    "thm-forward-over-reverse-computes-hessian-vector-product",
+    "thm-graph-gradient-error-from-local-jacobian-perturbations",
+    "rem-real-arithmetic-graph-versus-rounded-execution",
+    "ex-branchwise-ad-at-the-absolute-value-switch",
+    "ex-implicit-linear-solve-adjoint",
+    "ex-reverse-euler-trajectory-tape",
+    "ex-shared-expression-forward-and-reverse-graph",
+    "lem-certified-linear-solve-jacobian-and-pullback-error"
+  ],
+  "contracts": {
+    "def-finite-straight-line-computational-program": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "lem-implicit-sensitivity-error-controlled-by-residual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-euclidean-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^1$.  Suppose $(a,b)\\in U$, $F(a,b)=0$, and the\n**partial derivative in the second block**\n\n$$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$\n\nis invertible.  Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$.  Then there are open\nneighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map\n$\\varphi:P\\to Q$, such that\n\n$$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$\n\nAfter shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and\n\n$$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then\n\n$$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F2] to $\\Psi$ on the convex segment from $0$ to $r$. Since $\\Psi(0)=z_*$, $\\Psi(r)=\\tilde z$, and $\\|D\\Psi\\|\\le\\kappa$, it gives $\\|\\tilde z-z_*\\|\\le\\kappa\\|r\\|$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $A=A(\\tilde z)$, $A_*=A(z_*)$, $B=B(\\tilde z)$, and $B_*=B(z_*)$. The identities $S(\\tilde z)-S(z_*)=(A_*^{-1}-A^{-1})B+A_*^{-1}(B_*-B)$ and $A_*^{-1}-A^{-1}=A^{-1}(A-A_*)A_*^{-1}$ follow by expansion and multiplication.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The inverse bounds, $B$ bound, and Lipschitz bounds give $\\|A_*^{-1}-A^{-1}\\|\\le M^2L_A\\|\\tilde z-z_*\\|$ and $\\|B_*-B\\|\\le L_B\\|\\tilde z-z_*\\|$. The triangle and product inequalities then yield $\\|S(\\tilde z)-S(z_*)\\|\\le(M^2L_AB_0+ML_B)\\|\\tilde z-z_*\\|$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitute step 1.1 into step 2.1 to obtain the asserted residual bound. If $r=0$, local uniqueness gives $\\tilde z=z_*$ and the same inequality reads $0\\le0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–3.1 include r=0 and derive the resulting zero state and sensitivity error."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "thm-implicit-differentiation-forward-and-adjoint-formulas": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-euclidean-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^1$.  Suppose $(a,b)\\in U$, $F(a,b)=0$, and the\n**partial derivative in the second block**\n\n$$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$\n\nis invertible.  Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$.  Then there are open\nneighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map\n$\\varphi:P\\to Q$, such that\n\n$$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$\n\nAfter shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and\n\n$$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] to $R$ with parameter block $\\theta$ and state block $z$. It provides the local $C^1$ branch $\\phi$ and the displayed formula $D\\phi=-R_z^{-1}R_\\theta$, under exactly the nonsingularity hypothesis in the statement.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The map $\\theta\\mapsto J(\\theta,\\phi(\\theta))$ is $C^1$. By [F2], its derivative at $\\theta_0$ is $J_\\theta+J_zD\\phi$. Substituting step 1.1 yields $J_\\theta-J_zR_z^{-1}R_\\theta$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $R_z$ is invertible, $R_z^T$ is invertible. The adjoint equation has the unique solution satisfying $\\lambda^T=J_zR_z^{-1}$, by transposing $R_z^T\\lambda=J_z^T$. Therefore $J_zR_z^{-1}R_\\theta=\\lambda^TR_\\theta$, giving the stated adjoint formula.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes nonsingular R_z; proof steps 1.1 and 3.1 use its inverse and the unique adjoint solution. Singular systems are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "alg-forward-mode-automatic-differentiation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition initializes each tangent from v; v=0 propagates zero through the linear local derivative maps."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "alg-reverse-mode-automatic-differentiation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "lem-finite-straight-line-program-defines-c1-map": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-straight-line-computational-program",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and a designated output node $o$, either an input coordinate or an operation, whose value space is $\\mathbb R$. Input coordinate $i$ has value $x_i$ and value space $\\mathbb R$ with its standard Euclidean inner product. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot points to an input or an operation with index less than $j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a dimension $d_j\\ge0$, set $E_j=\\mathbb R^{d_j}$ with its standard Euclidean inner product, take an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$ with the product inner product, and choose a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. Derivatives are represented in these coordinates, and every transpose is the Euclidean transpose for the stated inner products; the gradient of a scalar output is the Euclidean gradient. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined. The graph's scalar output function $f$ is the value at $o$: it is $x_i$ when $o$ is input coordinate $i$, and $z_j$ when $o$ is operation node $j$.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.\n\nFor an open $U\\subseteq\\mathbb R^n$ and $a\\in U$, a **local inverse of $f$ at\n$a$** is a function $g:W\\to V$ for open neighbourhoods $a\\in V\\subseteq U$\nand $f(a)\\in W\\subseteq\\mathbb R^n$ such that $f|_V:V\\to W$ is bijective and\n$g=(f|_V)^{-1}$. If both $f|_V$ and $g$ are $C^1$, this restriction is a\n**local diffeomorphism** at $a$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a\\in U$, then some $C,\\delta>0$ satisfy $\\|f(a+h)-f(a)\\|_2\\le C\\|h\\|_2$ whenever $\\|h\\|_2<\\delta$ and $a+h\\in U$. In particular $f$ is continuous at $a$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Begin with the open input domain $\\mathbb R^n$, whose coordinate maps are continuous and $C^1$. Suppose the values through node $j-1$ are defined and continuous on an open set $\\Omega_{j-1}$. The parent tuple $g_j(x)=(z_{p_{j,1}}(x),\\ldots,z_{p_{j,r_j}}(x))$ is continuous there. Thus $\\Omega_j:=\\{x\\in\\Omega_{j-1}:g_j(x)\\in U_j\\}$ is open in $\\Omega_{j-1}$, hence open in $\\mathbb R^n$, because $U_j$ is open. This proves by finite induction that the full admissible domain is open.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each operation $j$, assume its parent-node maps are $C^1$ on $\\Omega_j$. Their tuple $g_j$ is $C^1$ componentwise. Since $z_j=\\phi_j\\circ g_j$, [F4] gives $Dz_j(x)=D\\phi_j(g_j(x))Dg_j(x)$. Both matrix factors vary continuously because $\\phi_j$ and the parent maps are $C^1$; hence $Dz_j$ is continuous and $z_j$ is $C^1$ by [F2]. Thus every operation value is $C^1$; the scalar output is $C^1$ whether it is one of these operation values or an input coordinate projection.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On a strict piecewise branch, the branch label is fixed on the open branch region and its primitive formula is $C^1$; steps 1.1–2.1 therefore apply unchanged on that region. At a boundary the definition in [F1] returns NONDIFFERENTIABLE, so no derivative assertion is made there.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "lem-finite-straight-line-program-defines-c2-map": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-straight-line-computational-program",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and a designated output node $o$, either an input coordinate or an operation, whose value space is $\\mathbb R$. Input coordinate $i$ has value $x_i$ and value space $\\mathbb R$ with its standard Euclidean inner product. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot points to an input or an operation with index less than $j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a dimension $d_j\\ge0$, set $E_j=\\mathbb R^{d_j}$ with its standard Euclidean inner product, take an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$ with the product inner product, and choose a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. Derivatives are represented in these coordinates, and every transpose is the Euclidean transpose for the stated inner products; the gradient of a scalar output is the Euclidean gradient. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined. The graph's scalar output function $f$ is the value at $o$: it is $x_i$ when $o$ is input coordinate $i$, and $z_j$ when $o$ is operation node $j$.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U \\subseteq X$ be open in a real Banach space $X$, and let $Y$, $Z$, $W$ be\nreal Banach spaces. Then:\n\n1. **Sum rule.** If $f_1, f_2 : U \\to Y$ are Fréchet differentiable at $x \\in U$\n   and $a, b \\in \\mathbb R$, then $af_1+bf_2$ is Fréchet differentiable at $x$\n   with $D(af_1+bf_2)(x) = a\\,Df_1(x) + b\\,Df_2(x)$.\n2. **Bounded-bilinear product rule.** If $f : U \\to Y$ and $g : U \\to Z$ are\n   Fréchet differentiable at $x$, and $B : Y \\times Z \\to W$ is bounded\n   bilinear, then $U \\ni u \\mapsto B(f(u),g(u))$ is Fréchet differentiable at\n   $x$ and\n\n$$D\\bigl(B(f,g)\\bigr)(x)h = B\\bigl(Df(x)h,\\ g(x)\\bigr) + B\\bigl(f(x),\\ Dg(x)h\\bigr) \\qquad (h \\in X).$$\n\n3. **Chain rule.** If $f : U \\to Y$ is Fréchet differentiable at $x$, if\n   $W_0 \\subseteq Y$ is an open set with $f[U] \\subseteq W_0$, and if\n   $g : W_0 \\to Z$ is Fréchet differentiable at $f(x)$, then\n   $g \\circ f$ is Fréchet differentiable at $x$ and\n   $$D(g \\circ f)(x) = Dg\\bigl(f(x)\\bigr)\\,Df(x).$$\n\nNo continuity of any derivative map is assumed; these are pointwise statements\nabout one $x$ at a time.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-straight-line-program-defines-c1-map",
+          "source_section": "Statement",
+          "quote": "For a finite straight-line program whose primitives are $C^1$, the recursively defined admissible input domain is open on each fixed strict branch. The scalar output $f$ is $C^1$ there, and its total derivative is obtained by the ordinary chain rule through the primitive maps.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each input coordinate map is linear and has constant derivative, so it is $C^2$. Suppose all parent-node maps of operation $j$ are $C^2$. The tuple $g_j$ of parent values is $C^2$, since it is a finite product of their coordinate maps; its domain is open by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $z_j=\\phi_j\\circ g_j$. By [F2], $Dz_j=(D\\phi_j\\circ g_j)Dg_j$. The map $D\\phi_j$ is $C^1$ by the $C^2$ hypothesis, and $g_j$ is $C^1$, so $D\\phi_j\\circ g_j$ is $C^1$ by the chain rule. The derivative map $Dg_j$ is $C^1$ because $g_j$ is $C^2$. Matrix multiplication is a bounded bilinear map in finite dimensions, so the product rule in [F2] makes $Dz_j$ $C^1$. Thus $z_j$ is $C^2$ by the definition in [F1].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Induction through the finite operation list gives $C^2$ for every operation value. The scalar output is therefore $C^2$ whether it is one of these values or an input coordinate projection. On a strict branch the selected primitive maps stay fixed on an open neighborhood; no claim is made at branch switches.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "alg-checkpointed-reverse-schedules": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition handles T=0 explicitly and returns without replay."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition handles T=0 explicitly and returns the supplied cotangent unchanged."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition handles T=0 and partitions the final partial block with b=min(a+q,T)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "alg-differentiate-finite-fixed-point-iteration": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "alg-forward-over-reverse-hessian-vector-product": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "thm-forward-mode-computes-directional-derivative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-straight-line-computational-program",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and a designated output node $o$, either an input coordinate or an operation, whose value space is $\\mathbb R$. Input coordinate $i$ has value $x_i$ and value space $\\mathbb R$ with its standard Euclidean inner product. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot points to an input or an operation with index less than $j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a dimension $d_j\\ge0$, set $E_j=\\mathbb R^{d_j}$ with its standard Euclidean inner product, take an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$ with the product inner product, and choose a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. Derivatives are represented in these coordinates, and every transpose is the Euclidean transpose for the stated inner products; the gradient of a scalar output is the Euclidean gradient. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined. The graph's scalar output function $f$ is the value at $o$: it is $x_i$ when $o$ is input coordinate $i$, and $z_j$ when $o$ is operation node $j$.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-straight-line-program-defines-c1-map",
+          "source_section": "Statement",
+          "quote": "For a finite straight-line program whose primitives are $C^1$, the recursively defined admissible input domain is open on each fixed strict branch. The scalar output $f$ is $C^1$ there, and its total derivative is obtained by the ordinary chain rule through the primitive maps.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-forward-mode-automatic-differentiation",
+          "source_section": "Definition",
+          "quote": "Input a graph from [[def-finite-straight-line-computational-program]], an admissible point $x$, and a direction $v\\in\\mathbb R^n$. Evaluate all primal node values in topological order and store the tape. Set each input tangent to $\\dot x_i=v_i$. For each operation $j=1,\\ldots,T$, compute\n$$\\dot z_j=D\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})(\\dot z_{p_{j,1}},\\ldots,\\dot z_{p_{j,r_j}}).$$\nReturn the primal scalar output $f(x)$ and its tangent: return $(z_o,\\dot z_o)$ if $o$ is an operation node, and $(x_i,v_i)$ if $o$ is input coordinate $i$. If the input is outside the admissible domain, return DOMAIN_ERROR; if a piecewise primitive is at a branch boundary or has no unique strict active branch, return NONDIFFERENTIABLE and no tangent. All derivative evaluations in this definition are exact real-arithmetic operations on the specified primitive maps.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each input coordinate map $x\\mapsto x_i$, its directional derivative in direction $v$ is $v_i$, exactly the initialized tangent in [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose the tangent at every parent of node $j$ equals the derivative of that parent value in direction $v$. The node map is the composition of its primitive with the tuple of parent maps. By [F2] and [F4], its directional derivative is $D\\phi_j$ applied to that parent-direction tuple, which is exactly the tangent assigned by [F3]. Finite induction proves this identity for every node.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $o$ is an operation node, step 2.1 gives $\\dot z_o=Df(x)v$. If $o$ is input coordinate $i$, then $f(x)=x_i$ and step 1.1 gives the returned tangent $\\dot x_i=v_i=Df(x)v$. Thus in either case the algorithm returns the asserted directional derivative.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "thm-reverse-mode-computes-gradient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-straight-line-computational-program",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and a designated output node $o$, either an input coordinate or an operation, whose value space is $\\mathbb R$. Input coordinate $i$ has value $x_i$ and value space $\\mathbb R$ with its standard Euclidean inner product. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot points to an input or an operation with index less than $j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a dimension $d_j\\ge0$, set $E_j=\\mathbb R^{d_j}$ with its standard Euclidean inner product, take an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$ with the product inner product, and choose a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. Derivatives are represented in these coordinates, and every transpose is the Euclidean transpose for the stated inner products; the gradient of a scalar output is the Euclidean gradient. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined. The graph's scalar output function $f$ is the value at $o$: it is $x_i$ when $o$ is input coordinate $i$, and $z_j$ when $o$ is operation node $j$.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-straight-line-program-defines-c1-map",
+          "source_section": "Statement",
+          "quote": "For a finite straight-line program whose primitives are $C^1$, the recursively defined admissible input domain is open on each fixed strict branch. The scalar output $f$ is $C^1$ there, and its total derivative is obtained by the ordinary chain rule through the primitive maps.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-reverse-mode-automatic-differentiation",
+          "source_section": "Definition",
+          "quote": "Input a graph from [[def-finite-straight-line-computational-program]] and an admissible point $x$. Evaluate and store all primal values in topological order. Initialize every operation cotangent and every input cotangent to zero. Seed the scalar output by setting its cotangent to $1$: if $o$ is an operation, set $\\bar z_o=1$; if $o$ is input coordinate $i$, set $\\bar x_i=1$. For $j=T,T-1,\\ldots,1$, and for every parent slot $k=1,\\ldots,r_j$, compute the contribution\n$$c_{j,k}=D_k\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})^T\\bar z_j$$\nand add it to the cotangent accumulator of that parent: use $\\bar x_i$ if the parent is input coordinate $i$, and $\\bar z_\\ell$ if it is operation node $\\ell$. If the same parent node occurs in multiple slots, add every slot contribution. Return the scalar output $f(x)$ and the input cotangents $(\\bar x_1,\\ldots,\\bar x_n)$ as the Euclidean gradient. A point outside the admissible domain returns DOMAIN_ERROR; a branch boundary or ambiguous active branch returns NONDIFFERENTIABLE and no gradient. The procedure differentiates the real-arithmetic graph; it makes no floating-point error claim.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each input or operation node $i$, define a directed path from $i$ to the output by choosing one parent slot at each successive operation; when $i=o$, include the length-zero path. Associate to an edge from parent slot $k$ of node $j$ the linear map $D_k\\phi_j$ at the stored primal arguments. Repeated slots give separate edges.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a node $i$ and form the downstream map $F_i(u)$ by replacing its value with an independent $u$ while holding earlier node values fixed and then evaluating later operations in topological order. Repeated use of [F4] shows that the derivative contribution along a fixed path from $i$ to $o$ is the ordered product of its edge maps. At each operation, its derivative is linear in the concatenated parent direction, so contributions from distinct parent slots add. If $i=o$, the output is $u$ and the length-zero path contributes the identity; if there is no path from $i$ to $o$, $F_i$ is locally constant and the sum is zero. Thus $DF_i(z_i)^T$ is the sum of the path products over all paths from $i$ to $o$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The output-node path sum is the identity scalar $1$, matching the unit seed in [F3], whether the output is an input or an operation. For every other node, each path to $o$ begins with exactly one outgoing parent-slot edge $i\\to j$, followed by a path from $j$ to $o$. Hence its path-sum recurrence is $\\bar z_i=\\sum_{j,k:p_{j,k}=i}D_k\\phi_j^T\\bar z_j$, with an additional identity seed only when $i=o$; this is exactly the initialization and accumulation in [F3]. Reverse induction gives $\\bar z_i=DF_i(z_i)^T$ at operation nodes and, at inputs, $\\bar x=Df(x)^T1$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The algorithm returns precisely those input cotangents, proving the statement.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.1 assigns path sum zero when no path connects a node to the output."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "thm-reverse-mode-work-and-tape-storage-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-straight-line-computational-program",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and a designated output node $o$, either an input coordinate or an operation, whose value space is $\\mathbb R$. Input coordinate $i$ has value $x_i$ and value space $\\mathbb R$ with its standard Euclidean inner product. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot points to an input or an operation with index less than $j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a dimension $d_j\\ge0$, set $E_j=\\mathbb R^{d_j}$ with its standard Euclidean inner product, take an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$ with the product inner product, and choose a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. Derivatives are represented in these coordinates, and every transpose is the Euclidean transpose for the stated inner products; the gradient of a scalar output is the Euclidean gradient. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined. The graph's scalar output function $f$ is the value at $o$: it is $x_i$ when $o$ is input coordinate $i$, and $z_j$ when $o$ is operation node $j$.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-reverse-mode-automatic-differentiation",
+          "source_section": "Definition",
+          "quote": "Input a graph from [[def-finite-straight-line-computational-program]] and an admissible point $x$. Evaluate and store all primal values in topological order. Initialize every operation cotangent and every input cotangent to zero. Seed the scalar output by setting its cotangent to $1$: if $o$ is an operation, set $\\bar z_o=1$; if $o$ is input coordinate $i$, set $\\bar x_i=1$. For $j=T,T-1,\\ldots,1$, and for every parent slot $k=1,\\ldots,r_j$, compute the contribution\n$$c_{j,k}=D_k\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})^T\\bar z_j$$\nand add it to the cotangent accumulator of that parent: use $\\bar x_i$ if the parent is input coordinate $i$, and $\\bar z_\\ell$ if it is operation node $\\ell$. If the same parent node occurs in multiple slots, add every slot contribution. Return the scalar output $f(x)$ and the input cotangents $(\\bar x_1,\\ldots,\\bar x_n)$ as the Euclidean gradient. A point outside the admissible domain returns DOMAIN_ERROR; a branch boundary or ambiguous active branch returns NONDIFFERENTIABLE and no gradient. The procedure differentiates the real-arithmetic graph; it makes no floating-point error claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The primal pass evaluates each node once, so its cost is $\\sum_j w_j=W$. The reverse pass makes one local pullback call at node $j$, costing at most $c w_j$, and handles at most $r$ parent slots, costing at most $ar$ arithmetic operations. Since $w_j\\ge1$, this node's reverse arithmetic work is at most $(c+ar)w_j$. Summing over all nodes gives total arithmetic work at most $(1+c+ar)W$; cotangent-buffer initialization is storage under [A2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The primal tape contains the recorded graph values and fixed-size node/parent metadata; by the definition of $S$, this is $O(S)$ scalar entries. Reverse cotangents require one vector of the corresponding dimension per node and one input-gradient vector, all dimensions already counted in $S$. Bounded primitive workspace adds at most $O(S)$ entries. Hence total storage is $O(S)$; the bound says nothing about an opaque solver whose local tape or pullback cost was excluded in [A1].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-checkpointed-reverse-schedules",
+          "source_section": "Definition",
+          "quote": "The input is a finite sequence of deterministic $C^1$ transitions $F_1,\\ldots,F_T$ between open subsets of finite-dimensional Euclidean spaces, with starting state $x_0$. Every transition is evaluated on one fixed strict branch and has its exact local reverse rule. The last transition has scalar output and may be the terminal objective, so its scalar cotangent is $1$; for an empty sequence the terminal value is the starting state. A transition tape stores the local values needed by its exact reverse rule. A deterministic replay applies the same transition maps, in the same order, to the identical checkpoint state and therefore reproduces the same values and local derivative inputs. The procedure returns the terminal output and cotangent at $x_0$; an invalid domain evaluation returns DOMAIN_ERROR, and a branch boundary returns NONDIFFERENTIABLE. A checkpoint schedule is permitted only when its saved states and all deterministic replays lie in these declared domains.\n\n**Uniform-block mode.** For $T=0$, return $x_0$ and the supplied cotangent without work. For $T\\ge1$, require an integer slot budget $m\\ge1$, set $q=\\lceil T/m\\rceil$, and during one forward pass save $x_{jq}$ for $j=0,\\ldots,\\lceil T/q\\rceil-1$ (all indices are below $T$). This uses at most $m$ saved states. Partition the steps into blocks $[a,b]$ with $a=jq$ and $b=\\min(a+q,T)$. Process the blocks from last to first. Within one block, for $\\ell=b,b-1,\\ldots,a+1$, restore $x_a$, replay $F_{a+1},\\ldots,F_{\\ell-1}$ without recording, evaluate $F_\\ell$ once while recording its local tape, apply its reverse rule to the current cotangent, and discard the one-step tape and replay workspace. Retain only the checkpoint states, the live state/cotangent, and the ordinary one-step reverse tape. Do not infer any optimality property of this schedule.\n\n**Binomial mode.** Define $C(d,0)=C(0,t)=1$, and $C(d,t)=C(d-1,t)+C(d,t-1)$ for integers $d,t\\ge1$. The recursive procedure REVERSE$(a,N,d,t,x_a,\\bar x_{a+N})$ requires integer indices $0\\le a\\le a+N\\le T$, nonnegative integer budgets $d,t$, the capacity condition $N\\le C(d,t)$, and a known starting state $x_a$. If $N=0$, return the pair $(x_a,\\bar x_a)$, the known terminal state and unchanged cotangent. If $N=1$, evaluate and record the unique transition, apply its local reverse rule, and return its output and input cotangents. If $N\\ge2$, then $d,t\\ge1$. Put $L=\\min(N-1,C(d,t-1))$, $R=N-L$; replay the first $L$ transitions from $x_a$ without recording and save the resulting midpoint state $x_{a+L}$. Call REVERSE$(a+L,R,d-1,t,x_{a+L},\\bar x_{a+N})$ on the right block. Release the midpoint checkpoint, restore the caller's supplied $x_a$, and call REVERSE$(a,L,d,t-1,x_a,\\bar x_{a+L})$ on the left block, where $\\bar x_{a+L}$ is the cotangent returned by the right call. Return the right call's terminal value and the left call's cotangent at $x_a$. The top-level call uses $a=0,N=T$, with the specified terminal cotangent. A recursive call with $N>1$ and $d=0$ or $t=0$ is a schedule failure; the capacity condition makes that branch unreachable.\n\nThe parameter $d$ bounds the number of simultaneously saved state snapshots. The parameter $t$ bounds, for each transition, the number of additional unrecorded forward evaluations beyond its one recorded evaluation. Both are finite integer inputs. This mode gives a binomial capacity bound; it does not promise a numerical error estimate or an optimal schedule for arbitrary nonuniform primitive costs. For the storage count in the paired theorem, $R_s$ bounds scalar storage for one full primal state. The binomial recursion may reuse one mutable cotangent workspace: each call consumes its terminal cotangent and returns the cotangent at its start, reusing the same buffer through both children. Let $G$ bound the largest one-step tape and local reverse scratch, the constant number of live cotangent/work vectors, and the scalar call-frame records; it excludes the $d$ saved primal states and one live primal state.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-reverse-mode-computes-gradient",
+          "source_section": "Statement",
+          "quote": "For a finite $C^1$ program with one scalar output $f$, on a fixed strict branch and at every admissible $x$, the reverse-mode algorithm returns $Df(x)^T1$, the gradient of $f$. More precisely, at any operation node $i$, if its value is temporarily treated as an independent variable and all later operations are recomputed from it, then the accumulated cotangent at $i$ is the derivative of the scalar output with respect to that independent node value.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-straight-line-computational-program",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and a designated output node $o$, either an input coordinate or an operation, whose value space is $\\mathbb R$. Input coordinate $i$ has value $x_i$ and value space $\\mathbb R$ with its standard Euclidean inner product. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot points to an input or an operation with index less than $j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a dimension $d_j\\ge0$, set $E_j=\\mathbb R^{d_j}$ with its standard Euclidean inner product, take an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$ with the product inner product, and choose a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. Derivatives are represented in these coordinates, and every transpose is the Euclidean transpose for the stated inner products; the gradient of a scalar output is the Euclidean gradient. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined. The graph's scalar output function $f$ is the value at $o$: it is $x_i$ when $o$ is input coordinate $i$, and $z_j$ when $o$ is operation node $j$.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In uniform mode, for any block start $x_a$, deterministic replay reproduces the original $x_{a+1},\\ldots,x_b$: the first replayed transition starts from the identical $x_a$, and induction applies each same map $F_j$ to the same preceding state. Thus the recorded local tape at step $\\ell$ has the same primitive inputs as the original forward trajectory, so its reverse rule is the same one used by the full tape. Processing blocks and then their steps in decreasing order is exactly reverse transition order; [F2] gives the same terminal and initial cotangents.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "A block of length $r$ has replay prefix lengths $r-1,r-2,\\ldots,0$ before its $r$ recorded local evaluations. Therefore its additional unrecorded evaluations total $\\sum_{j=0}^{r-1}j=r(r-1)/2$. The number of blocks is $s=\\lceil T/q\\rceil\\le m$, each $r_\\ell\\le q$, so the sum is at most $m q(q-1)/2$. The checkpoint indices are $0,q,\\ldots,(s-1)q<T$; $T/q\\le m$, so $s=\\lceil T/q\\rceil\\le m$. Only those states, one live state, and one local tape are retained.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In binomial mode the recurrence and boundary values give $C(d,t)=\\binom{d+t}{d}$: the binomial coefficients have the same boundary values and Pascal recurrence, so induction on $d+t$ identifies them. For $d,t\\ge1$, write $A=C(d,t-1)$, $B=C(d-1,t)$, so $C(d,t)=A+B$. If $N\\ge2$, $L=\\min(N-1,A)$ satisfies $1\\le L<N$; if $L=N-1$, then $R=1\\le B$, and otherwise $L=A$ and $R=N-A\\le B$. Thus both recursive capacities hold and both child lengths are strictly less than $N$; the recursion terminates at $N=1$ or $N=0$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Induct on $N$. For $N=0$, the empty interval has terminal state $x_{a+N}=x_a$ and unchanged cotangent, exactly the returned pair. For $N=1$, the single evaluation returns its exact output state and its local reverse rule returns the exact input cotangent. For $N\\ge2$, midpoint replay produces the exact $x_{a+L}$ by [F3]. By induction the right child returns terminal state $x_{a+N}$ and the exact cotangent at that midpoint; the left child returns terminal state $x_{a+L}$ and, after the earlier transitions, the exact cotangent at $x_a$. The parent returns the right child's terminal state and the left child's starting cotangent, so both outputs are correct. Every interval is split into disjoint left and right steps and each base step is recorded and reversed once. Therefore the terminal value and initial cotangent agree with the ordinary reverse sweep.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "During a right child, the saved midpoint occupies one slot and its child uses at most $d-1$ further snapshots; after that child returns, the midpoint is released and the left child uses at most $d$. Thus peak snapshot count is at most $d$. A step in a right child has at most $t$ replays by induction. A step in the left child is replayed once at the current split and then has at most $t-1$ replays in the left child, hence at most $t$ total. Each step also has one recorded forward and one reverse call, giving work $\\widehat W+\\overline W+tW$. Each recursive child decreases $d+t$ by one, so at most $d+t+1$ call frames are active; each frame stores a fixed number of scalar indices and flags. The algorithm reuses its cotangent buffer and has only the bounded one-step tape and local scratch included in $G$. The saved states and one live primal state use at most $(d+1)R_s$ scalar entries, giving storage at most $G+(d+1)R_s$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 2.1 treats N=0,1 as the recursion bases and applies one recorded reverse rule at N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "binomial-capacity-small-case",
+          "steps": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ],
+          "calculation": "For d=t=1, C(1,1)=2. N=2 splits L=R=1, uses one midpoint snapshot and one extra unrecorded transition replay."
+        }
+      ]
+    },
+    "thm-finite-iteration-sensitivity-bound-and-residual-limitation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-differentiate-finite-fixed-point-iteration",
+          "source_section": "Definition",
+          "quote": "Input a finite-dimensional $C^1$ map $G(z,\\theta)$, a $C^1$ initial-state map $z_0(\\theta)$, a parameter $\\theta$ in an open subset of $\\mathbb R^p$, and an integer budget $K\\ge0$; the states lie in $\\mathbb R^m$, with $p,m\\ge0$. Use the specified maps $z_0$ and $G$, with their exact derivative evaluations, as primitive maps on their declared open domains. Evaluate $z_0(\\theta)$ and then $z_{k+1}(\\theta)=G(z_k(\\theta),\\theta)$ for $k=0,\\ldots,K-1$. A primitive-domain failure returns DOMAIN_ERROR; a branch boundary or ambiguous active branch returns NONDIFFERENTIABLE and no derivative. The admissible case requires every evaluation to remain in its declared domain and, for piecewise primitives, on a unique strict active branch.\n\nAllocate an $m\\times p$ Jacobian array $J$. For each state coordinate $a=1,\\ldots,m$, form the finite scalar-output graph for $f_a(\\theta)=(z_K(\\theta))_a$ by appending the coordinate projection to the finite recursion. For each parameter coordinate $\\ell=1,\\ldots,p$, call [[alg-forward-mode-automatic-differentiation]] on this graph at $\\theta$ with direction $e_\\ell$, the $\\ell$th standard basis vector of $\\mathbb R^p$, and put its returned tangent in $J_{a\\ell}$. Propagate any DOMAIN_ERROR or NONDIFFERENTIABLE status from a call. Return $(z_K(\\theta),J)$ with status ITERATES_DIFFERENTIATED. For $K=0$ the recursion contains only the initial-state map. If $m=0$ or $p=0$, the corresponding loops are empty and $J$ has the specified empty shape; the primal recursion is still evaluated. This procedure differentiates the $K$-step map actually specified by $G,z_0,K$; it does not substitute the derivative of an exact fixed point.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^1$.  Suppose $(a,b)\\in U$, $F(a,b)=0$, and the\n**partial derivative in the second block**\n\n$$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$\n\nis invertible.  Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$.  Then there are open\nneighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map\n$\\varphi:P\\to Q$, such that\n\n$$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$\n\nAfter shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and\n\n$$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-forward-mode-computes-directional-derivative",
+          "source_section": "Statement",
+          "quote": "Let $f:\\Omega\\to\\mathbb R$ be the output of a finite $C^1$ program on a fixed strict branch. For every admissible $x\\in\\Omega$ and direction $v\\in\\mathbb R^n$, the forward-mode algorithm returns $Df(x)v$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $A_*=G_z(z_*,\\theta_0)$. Since $\\|A_*\\|\\le q<1$, the series $\\sum_{j=0}^{\\infty}A_*^j$ converges in operator norm: its tails are bounded by the corresponding geometric tails $\\sum q^j$. The finite partial sums satisfy $(I-A_*)\\sum_{j=0}^{N}A_*^j=\\sum_{j=0}^{N}A_*^j(I-A_*)=I-A_*^{N+1}$, which tends to $I$; hence $R_z=I-A_*$ is invertible.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] to $R(z,\\theta)=z-G(z,\\theta)$. The exact branch derivative $s_*$ satisfies $s_*=A_*s_*+B_*$, where $B_*=G_\\theta(z_*,\\theta_0)$. The primal recurrence and contraction give $\\|z_{k+1}-z_*\\|=\\|G(z_k,\\theta_0)-G(z_*,\\theta_0)\\|\\le q\\|z_k-z_*\\|$; induction yields $\\|z_k-z_*\\|\\le q^k\\delta_0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], the derivative of $z_{k+1}=G(z_k,\\theta)$ is $e_{k+1}=A_ke_k+B_k$, where $A_k=G_z(z_k,\\theta_0)$ and $B_k=G_\\theta(z_k,\\theta_0)$; [F3] computes that exact finite-graph derivative. Subtract $s_*=A_*s_*+B_*$ to obtain $e_{k+1}-s_*=A_k(e_k-s_*)+(A_k-A_*)s_*+(B_k-B_*)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Set $D_k=\\|e_k-s_*\\|$. Taking norms and applying the hypotheses gives $D_{k+1}\\le qD_k+C\\|z_k-z_*\\|\\le qD_k+C\\delta_0q^k$ by step 2.1. For $K=1$ this gives $D_1\\le qd_0+C\\delta_0$. If $D_K\\le q^Kd_0+C\\delta_0\\sum_{j=0}^{K-1}q^{K-1-j}q^j$, then\n$D_{K+1}\\le q^{K+1}d_0+C\\delta_0\\sum_{j=0}^{K-1}q^{K-j}q^j+C\\delta_0q^K=q^{K+1}d_0+C\\delta_0\\sum_{j=0}^{K}q^{K-j}q^j.$\nInduction proves the sum bound for every $K\\ge1$. Each summand equals $q^{K-1}$, including the stated convention at $q=0,K=1$, so the sum is $Kq^{K-1}$.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The residual identity $r_K=(z_K-z_*)-(G(z_K,\\theta_0)-G(z_*,\\theta_0))$ and the triangle inequality imply $(1-q)\\|z_K-z_*\\|\\le\\|r_K\\|$. For the stated scalar example, $z_*=\\theta$, $z_k(0)=0$ and $r_K=0$; differentiating the recurrence gives $e_{k+1}=q e_k+(1-q)$, $e_0=0$, hence $e_K=1-q^K$, whereas $s_*=1$. Thus a finite-iteration derivative is a different target even at zero primal residual, with its discrepancy still bounded by step 3.2.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 4.1 gives the zero-residual example and proves the derivative discrepancy remains nonzero for 0<q<1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 4.1 verifies r_K=0 explicitly and the statement restricts the iteration count to K≥1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "stopped-iteration-target-gap",
+          "steps": [
+            "2.1",
+            "3.2",
+            "4.1"
+          ],
+          "calculation": "For q=1/2 and K=2 in G(z,theta)=qz+(1-q)theta with z0=0, r2=0, e2=3/4, s*=1, and |e2-s*|=1/4=q^2 d0."
+        }
+      ]
+    },
+    "thm-forward-over-reverse-computes-hessian-vector-product": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-straight-line-computational-program",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and a designated output node $o$, either an input coordinate or an operation, whose value space is $\\mathbb R$. Input coordinate $i$ has value $x_i$ and value space $\\mathbb R$ with its standard Euclidean inner product. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot points to an input or an operation with index less than $j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a dimension $d_j\\ge0$, set $E_j=\\mathbb R^{d_j}$ with its standard Euclidean inner product, take an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$ with the product inner product, and choose a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. Derivatives are represented in these coordinates, and every transpose is the Euclidean transpose for the stated inner products; the gradient of a scalar output is the Euclidean gradient. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined. The graph's scalar output function $f$ is the value at $o$: it is $x_i$ when $o$ is input coordinate $i$, and $z_j$ when $o$ is operation node $j$.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-straight-line-program-defines-c2-map",
+          "source_section": "Statement",
+          "quote": "If every primitive of a finite straight-line program is $C^2$ on the selected open branch domains, then the real-arithmetic scalar output is $C^2$ on each fixed strict branch.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-forward-mode-computes-directional-derivative",
+          "source_section": "Statement",
+          "quote": "Let $f:\\Omega\\to\\mathbb R$ be the output of a finite $C^1$ program on a fixed strict branch. For every admissible $x\\in\\Omega$ and direction $v\\in\\mathbb R^n$, the forward-mode algorithm returns $Df(x)v$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-reverse-mode-computes-gradient",
+          "source_section": "Statement",
+          "quote": "For a finite $C^1$ program with one scalar output $f$, on a fixed strict branch and at every admissible $x$, the reverse-mode algorithm returns $Df(x)^T1$, the gradient of $f$. More precisely, at any operation node $i$, if its value is temporarily treated as an independent variable and all later operations are recomputed from it, then the accumulated cotangent at $i$ is the derivative of the scalar output with respect to that independent node value.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-forward-over-reverse-hessian-vector-product",
+          "source_section": "Definition",
+          "quote": "Input a $C^2$ graph, admissible $x$, and direction $v$. First run the forward tangent recurrence to compute every $\\dot z_j=Dz_j(x)v$. Initialize every operation and input cotangent and tangent-cotangent accumulator to zero. Seed the output by setting its cotangent/tangent-cotangent pair to $(1,0)$: if $o$ is an operation, set $(\\bar z_o,\\dot{\\bar z}_o)=(1,0)$; if $o$ is input coordinate $i$, set $(\\bar x_i,\\dot{\\bar x}_i)=(1,0)$. In reverse topological order, for each node $j$ and parent slot $k$, let $A_{j,k}=D_k\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$, compute\n$$c_{j,k}=A_{j,k}^{T}\\bar z_j,\\qquad \\dot c_{j,k}=A_{j,k}^{T}\\dot{\\bar z}_j+\\bigl(DA_{j,k}(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})[\\dot z_{p_{j,1}},\\ldots,\\dot z_{p_{j,r_j}}]\\bigr)^{T}\\bar z_j,$$\nand add $c_{j,k}$ and $\\dot c_{j,k}$ to the parent's cotangent and tangent-cotangent accumulators. Use $(\\bar x_i,\\dot{\\bar x}_i)$ for input coordinate $i$ and $(\\bar z_\\ell,\\dot{\\bar z}_\\ell)$ for operation node $\\ell$. If the same parent occurs in multiple slots, add every slot contribution.\nReturn the input tangent of the gradient, $(\\dot{\\bar x}_1,\\ldots,\\dot{\\bar x}_n)$. Repeated parent slots receive separate additions. Outside the admissible domain return DOMAIN_ERROR; at a branch boundary return NONDIFFERENTIABLE. The transpose is the real Euclidean transpose, not a complex adjoint.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U \\subseteq X$ be open in a real Banach space $X$, and let $Y$, $Z$, $W$ be\nreal Banach spaces. Then:\n\n1. **Sum rule.** If $f_1, f_2 : U \\to Y$ are Fréchet differentiable at $x \\in U$\n   and $a, b \\in \\mathbb R$, then $af_1+bf_2$ is Fréchet differentiable at $x$\n   with $D(af_1+bf_2)(x) = a\\,Df_1(x) + b\\,Df_2(x)$.\n2. **Bounded-bilinear product rule.** If $f : U \\to Y$ and $g : U \\to Z$ are\n   Fréchet differentiable at $x$, and $B : Y \\times Z \\to W$ is bounded\n   bilinear, then $U \\ni u \\mapsto B(f(u),g(u))$ is Fréchet differentiable at\n   $x$ and\n\n$$D\\bigl(B(f,g)\\bigr)(x)h = B\\bigl(Df(x)h,\\ g(x)\\bigr) + B\\bigl(f(x),\\ Dg(x)h\\bigr) \\qquad (h \\in X).$$\n\n3. **Chain rule.** If $f : U \\to Y$ is Fréchet differentiable at $x$, if\n   $W_0 \\subseteq Y$ is an open set with $f[U] \\subseteq W_0$, and if\n   $g : W_0 \\to Z$ is Fréchet differentiable at $f(x)$, then\n   $g \\circ f$ is Fréchet differentiable at $x$ and\n   $$D(g \\circ f)(x) = Dg\\bigl(f(x)\\bigr)\\,Df(x).$$\n\nNo continuity of any derivative map is assumed; these are pointwise statements\nabout one $x$ at a time.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F4], the input reverse accumulator is the function $x\\mapsto\\operatorname{grad} f(x)$. Since $f$ is $C^2$ by [F2] under the primitive hypotheses in [F1], its directional derivative at $x$ exists. By [F3], the forward recurrence supplies every primitive-input direction $\\dot z_{pa}=Dz_{pa}(x)v$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At a node $j$, the exact reverse contribution to parent slot $i$ is $A^T\\bar z_j$. Since each primitive is $C^2$, $A$ is $C^1$; the finite reverse recurrence is therefore differentiable, as it consists of sums and bounded bilinear matrix-vector products of $C^1$ maps. Differentiate this matrix-vector product along $x+tv$. The product rule [F6] gives $A^T\\dot{\\bar z}_j+(DA[\\dot z_{pa}])^T\\bar z_j$, exactly the second recurrence in [F5]. Reverse topological induction therefore shows that every $\\dot{\\bar z}_i$ equals the directional derivative of the corresponding exact reverse accumulator. If the scalar output is an input coordinate, its seeded gradient is the constant coordinate vector and the initialized tangent-cotangent remains zero, as this recurrence also gives.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At the inputs, step 2.1 identifies the returned vector with $D(\\operatorname{grad} f)(x)v$, which by definition is $H_f(x)v$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "thm-graph-gradient-error-from-local-jacobian-perturbations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-straight-line-computational-program",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and a designated output node $o$, either an input coordinate or an operation, whose value space is $\\mathbb R$. Input coordinate $i$ has value $x_i$ and value space $\\mathbb R$ with its standard Euclidean inner product. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot points to an input or an operation with index less than $j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a dimension $d_j\\ge0$, set $E_j=\\mathbb R^{d_j}$ with its standard Euclidean inner product, take an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$ with the product inner product, and choose a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. Derivatives are represented in these coordinates, and every transpose is the Euclidean transpose for the stated inner products; the gradient of a scalar output is the Euclidean gradient. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined. The graph's scalar output function $f$ is the value at $o$: it is $x_i$ when $o$ is input coordinate $i$, and $z_j$ when $o$ is operation node $j$.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-reverse-mode-computes-gradient",
+          "source_section": "Statement",
+          "quote": "For a finite $C^1$ program with one scalar output $f$, on a fixed strict branch and at every admissible $x$, the reverse-mode algorithm returns $Df(x)^T1$, the gradient of $f$. More precisely, at any operation node $i$, if its value is temporarily treated as an independent variable and all later operations are recomputed from it, then the accumulated cotangent at $i$ is the derivative of the scalar output with respect to that independent node value.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Starting with output cotangent $1$, the exact reverse recurrence at a node sums one local derivative-transpose contribution from each outgoing parent-slot edge. By induction in reverse topological order, its expansion at input block $i$ has one ordered derivative product for every path from $i$ to the output: the length-zero path at the output node has product $1$ (including when the output itself is an input), and extending a path by one edge multiplies its product by that edge's local derivative. The same finite recurrence with $\\widetilde A_e$ yields the sum of perturbed path products; the output seed is unchanged. By [F2], the exact path sum is $g_i$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a path $\\pi=(e_1,\\ldots,e_s)$. Insert one factor at a time to write\n$$\\widetilde A_{e_s}\\cdots\\widetilde A_{e_1}-A_{e_s}\\cdots A_{e_1}=\\sum_{\\ell=1}^s\\widetilde A_{e_s}\\cdots\\widetilde A_{e_{\\ell+1}}(\\widetilde A_{e_\\ell}-A_{e_\\ell})A_{e_{\\ell-1}}\\cdots A_{e_1}.$$\nThis identity follows by cancellation of consecutive products in the telescoping sum.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Submultiplicativity of the induced operator norm and [A1] bound the $\\ell$th summand by $\\eta_{e_\\ell}\\prod_{r<\\ell}\\|A_{e_r}\\|\\prod_{r>\\ell}(\\|A_{e_r}\\|+\\eta_{e_r})$. Summing these bounds over $\\ell$ controls the error on this path.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The perturbed and exact gradients are finite sums over the same paths by step 1.1. The triangle inequality therefore bounds their difference by the sum of the pathwise errors from step 2.1, which is exactly the displayed bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ]
+    },
+    "rem-real-arithmetic-graph-versus-rounded-execution": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "ex-branchwise-ad-at-the-absolute-value-switch": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-straight-line-computational-program",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and a designated output node $o$, either an input coordinate or an operation, whose value space is $\\mathbb R$. Input coordinate $i$ has value $x_i$ and value space $\\mathbb R$ with its standard Euclidean inner product. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot points to an input or an operation with index less than $j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a dimension $d_j\\ge0$, set $E_j=\\mathbb R^{d_j}$ with its standard Euclidean inner product, take an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$ with the product inner product, and choose a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. Derivatives are represented in these coordinates, and every transpose is the Euclidean transpose for the stated inner products; the gradient of a scalar output is the Euclidean gradient. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined. The graph's scalar output function $f$ is the value at $o$: it is $x_i$ when $o$ is input coordinate $i$, and $z_j$ when $o$ is operation node $j$.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $x>0$, the active formula is $f(x)=x$, whose derivative is $1$; for $x<0$, the active formula is $f(x)=-x$, whose derivative is $-1$. These are the two derivatives used by the strict-branch rule in [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At zero, the right difference quotient is $(|h|-0)/h=1$ for $h>0$, while the left quotient is $(|h|-0)/h=-1$ for $h<0$. Since the one-sided limits differ, the derivative does not exist at zero.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], the branch boundary therefore returns NONDIFFERENTIABLE and no derivative; selecting a generalized derivative would require a separately supplied rule.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.2 checks x=0 by distinct one-sided difference quotients."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.1 returns NONDIFFERENTIABLE at the branch boundary and does not choose a generalized derivative."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "absolute-value-boundary",
+          "steps": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ],
+          "calculation": "For x>0 derivative=1; for x<0 derivative=−1; at x=0 the right and left quotients differ."
+        }
+      ]
+    },
+    "ex-implicit-linear-solve-adjoint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-implicit-differentiation-forward-and-adjoint-formulas",
+          "source_section": "Statement",
+          "quote": "Let $R:\\Theta\\times Z\\to\\mathbb R^m$ be $C^1$, where $\\Theta\\subseteq\\mathbb R^p$ and $Z\\subseteq\\mathbb R^m$ are open. Suppose $R(\\theta_0,z_0)=0$ and the state Jacobian $R_z(\\theta_0,z_0)$ is invertible. The Euclidean implicit function theorem gives a local $C^1$ solution branch $z=\\phi(\\theta)$, and\n$$D\\phi(\\theta_0)=-R_z(\\theta_0,z_0)^{-1}R_\\theta(\\theta_0,z_0).$$\nFor a scalar $C^1$ objective $J(\\theta,z)$, its derivative along that branch is\n$$D(J(\\theta,\\phi(\\theta)))|_{\\theta_0}=J_\\theta-J_zR_z^{-1}R_\\theta.$$\nEquivalently, if $\\lambda$ solves $R_z^T\\lambda=J_z^T$, this derivative is $J_\\theta-\\lambda^TR_\\theta$. These formulas concern the exact local solution branch; differentiating a stopped iteration is a separate finite-map derivative.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-certified-linear-solve-jacobian-and-pullback-error",
+          "source_section": "Statement",
+          "quote": "For the real mathematical solve primitive $\\phi(A,b)=A^{-1}b$, let $A,B\\in\\mathbb R^{n\\times n}$, $b,\\widehat x\\in\\mathbb R^n$, $n\\ge1$, and suppose certified exact-residual bounds satisfy\n$$\\|I-AB\\|_2\\le d<1,\\qquad \\|b-A\\widehat x\\|_2\\le\\rho,\\qquad \\|B\\|_2\\le M,\\qquad K=\\frac{M}{1-d}.$$\nThen $A$ is invertible; writing $x=A^{-1}b$, the fixed linear derivative approximations $\\widetilde J_bh=Bh$ and $\\widetilde J_AH=-BH\\widehat x$ obey\n$$\\|\\widetilde J_b-J_b\\|\\le\\eta_b=Kd,\\qquad \\|\\widetilde J_A-J_A\\|\\le\\eta_A=Kd\\|\\widehat x\\|_2+K^2\\rho.$$\nUse Euclidean vector norms and Frobenius matrix-input norm. For any stored matrix $B$ and stored cotangent $c\\in\\mathbb R^n$, the exact adjoints are $B^Tc$ and $-(B^Tc)\\widehat x^T$. Let $u$ be the unit roundoff in [[def-standard-relative-floating-point-model-and-unit-roundoff]], and assume $nu<1$. For each $j=1,\\ldots,n$, compute $\\widehat\\lambda_j$ by the sequential real dot rule: $p_i=\\operatorname{fl}(B_{ij}c_i)$ for $i=1,\\ldots,n$, $s_1=p_1$, and $s_i=\\operatorname{fl}(s_{i-1}+p_i)$ for $i=2,\\ldots,n$, with each product and addition rounded separately; set $\\widehat\\lambda_j=s_n$. Form the matrix cotangent as the componentwise rounded outer product $-\\operatorname{fl}(\\widehat\\lambda\\widehat x^T)$. Assume every operation succeeds in the operationwise model [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]: each exact intermediate is zero or normal and every rounded output is finite. Put $\\gamma_n=nu/(1-nu)$ and $t=\\gamma_n\\|B\\|_F$. The resulting cotangent errors are bounded by $(\\eta_b+t)\\|c\\|_2$ and $[\\eta_A+(t+u(M+t))\\|\\widehat x\\|_2]\\|c\\|_2$, respectively. These are derivative approximations to the mathematical solve map, not derivatives of the rounded program.\n\nThe fixed $B$ may be assembled from stored basis-vector solves using a triangular, Cholesky or QR backend; its defect must be certified rather than inferred from a factor residual. Replay must preserve the same $\\widehat x,B$ and strict graph branch. Reverse accumulation additions are excluded.",
+          "uses": [
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "The system gives $u_2=1$ and $u_1+\\theta u_2=2$, hence $u(\\theta)=(2-\\theta,1)^T$ and $J(\\theta)=3-\\theta$. Therefore $J'(0)=-1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Write $R(u,\\theta)=A(\\theta)u-b$. At $\\theta=0$, $u=(2,1)^T$, $R_u=A(0)=I$, $R_\\theta=A_\\theta u=(1,0)^T$, and $J_u=(1,1)$. The adjoint equation $R_u^T\\lambda=J_u^T$ gives $\\lambda=(1,1)^T$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "The objective has no explicit $\\theta$ dependence, so $J_\\theta=0$; the adjoint formula gives $J_\\theta-\\lambda^TR_\\theta=-(1,1)\\cdot(1,0)=-1$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "The adjoint result agrees with the direct derivative in step 1.1, verifying this nonsingular linear-solve instance.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derive-4.2",
+          "claim": "In any arithmetic satisfying the operationwise model and representing $0,1,2,3$, with these small operations in range, at $\\theta=0$ the primal and basis solves give $\\widehat x=(2,1)^T$ and $B=I$ exactly. Their inverse defect and primal residual are zero. The certified solve-Jacobian result [[lem-certified-linear-solve-jacobian-and-pullback-error]] therefore gives zero fixed-map discrepancy; the actual dot and product operations here are also exact, and return derivative $-1$.",
+          "step": "4.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "ex-reverse-euler-trajectory-tape": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-reverse-mode-automatic-differentiation",
+          "source_section": "Definition",
+          "quote": "Input a graph from [[def-finite-straight-line-computational-program]] and an admissible point $x$. Evaluate and store all primal values in topological order. Initialize every operation cotangent and every input cotangent to zero. Seed the scalar output by setting its cotangent to $1$: if $o$ is an operation, set $\\bar z_o=1$; if $o$ is input coordinate $i$, set $\\bar x_i=1$. For $j=T,T-1,\\ldots,1$, and for every parent slot $k=1,\\ldots,r_j$, compute the contribution\n$$c_{j,k}=D_k\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})^T\\bar z_j$$\nand add it to the cotangent accumulator of that parent: use $\\bar x_i$ if the parent is input coordinate $i$, and $\\bar z_\\ell$ if it is operation node $\\ell$. If the same parent node occurs in multiple slots, add every slot contribution. Return the scalar output $f(x)$ and the input cotangents $(\\bar x_1,\\ldots,\\bar x_n)$ as the Euclidean gradient. A point outside the admissible domain returns DOMAIN_ERROR; a branch boundary or ambiguous active branch returns NONDIFFERENTIABLE and no gradient. The procedure differentiates the real-arithmetic graph; it makes no floating-point error claim.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-reverse-mode-computes-gradient",
+          "source_section": "Statement",
+          "quote": "For a finite $C^1$ program with one scalar output $f$, on a fixed strict branch and at every admissible $x$, the reverse-mode algorithm returns $Df(x)^T1$, the gradient of $f$. More precisely, at any operation node $i$, if its value is temporarily treated as an independent variable and all later operations are recomputed from it, then the accumulated cotangent at $i$ is the derivative of the scalar output with respect to that independent node value.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substitution into the two Euler updates gives $x_1=1+(1/2)(1)(1)=3/2$ and $x_2=(3/2)+(1/2)(1)(3/2)=9/4$. As a function of $\\alpha$, $J(\\alpha)=(1+h\\alpha)^2x_0$, so $J'(1)=2h(1+h)x_0=3/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Seed $\\bar x_2=1$. At step $k=1$, $\\partial x_2/\\partial x_1=1+h\\alpha=3/2$ and $\\partial x_2/\\partial\\alpha=h x_1=3/4$, so $\\bar x_1=3/2$ and the accumulated $\\bar\\alpha=3/4$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At step $k=0$, $\\partial x_1/\\partial x_0=3/2$ gives $\\bar x_0=(3/2)(3/2)=9/4$, while $\\partial x_1/\\partial\\alpha=h x_0=1/2$ adds $(1/2)(3/2)=3/4$ to $\\bar\\alpha$. Thus the total parameter cotangent is $3/2$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The reverse result equals the direct derivative in step 1.1, and [F2] identifies it as the derivative of the finite trajectory map.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "This example has two transitions; proof steps 2.1–3.1 trace each reverse update."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "euler-primal-and-gradient",
+          "steps": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "calculation": "x1=3/2, x2=9/4, direct dJ/dalpha=3/2 and reverse parameter cotangent=3/2."
+        }
+      ]
+    },
+    "ex-shared-expression-forward-and-reverse-graph": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-straight-line-computational-program",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and a designated output node $o$, either an input coordinate or an operation, whose value space is $\\mathbb R$. Input coordinate $i$ has value $x_i$ and value space $\\mathbb R$ with its standard Euclidean inner product. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot points to an input or an operation with index less than $j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a dimension $d_j\\ge0$, set $E_j=\\mathbb R^{d_j}$ with its standard Euclidean inner product, take an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$ with the product inner product, and choose a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. Derivatives are represented in these coordinates, and every transpose is the Euclidean transpose for the stated inner products; the gradient of a scalar output is the Euclidean gradient. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined. The graph's scalar output function $f$ is the value at $o$: it is $x_i$ when $o$ is input coordinate $i$, and $z_j$ when $o$ is operation node $j$.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-forward-mode-computes-directional-derivative",
+          "source_section": "Statement",
+          "quote": "Let $f:\\Omega\\to\\mathbb R$ be the output of a finite $C^1$ program on a fixed strict branch. For every admissible $x\\in\\Omega$ and direction $v\\in\\mathbb R^n$, the forward-mode algorithm returns $Df(x)v$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reverse-mode-computes-gradient",
+          "source_section": "Statement",
+          "quote": "For a finite $C^1$ program with one scalar output $f$, on a fixed strict branch and at every admissible $x$, the reverse-mode algorithm returns $Df(x)^T1$, the gradient of $f$. More precisely, at any operation node $i$, if its value is temporarily treated as an independent variable and all later operations are recomputed from it, then the accumulated cotangent at $i$ is the derivative of the scalar output with respect to that independent node value.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The primal values are $z_1=1+2=3$, $z_2=3\\cdot3=9$, $z_3=1\\cdot2=2$, and $f=z_2+z_3=11$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For direction $(u,v)$, forward mode gives $\\dot z_1=u+v$, $\\dot z_2=z_1\\dot z_1+\\dot z_1z_1=6(u+v)$, $\\dot z_3=yu+xv=2u+v$, hence $\\dot f=8u+7v$. By [F2], the gradient is $(8,7)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "In reverse mode, seed $\\bar f=1$, so $\\bar z_2=\\bar z_3=1$. The product $z_3=xy$ adds $2$ to $\\bar x$ and $1$ to $\\bar y$. The repeated slots in $z_2=z_1z_1$ add $z_1+z_1=6$ to $\\bar z_1$; then $z_1=x+y$ adds $6$ to each input. The total input cotangents are $(8,7)$, consistent with [F3].",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The forward value $11$ and both derivative calculations agree with the stated output and gradient.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a scalar output or a positive iteration count; it makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or vector is a boundary hypothesis of this claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-dimensional or single-step case is not a separate boundary for the stated result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate or singular case is included beyond the explicit hypotheses in the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval-endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is deterministic and makes no existence-by-choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "shared-expression-values",
+          "steps": [
+            "1.1"
+          ],
+          "calculation": "z1=3, z2=9, z3=2, f=11."
+        },
+        {
+          "id": "shared-expression-jvp-vjp",
+          "steps": [
+            "2.1",
+            "2.2"
+          ],
+          "calculation": "Forward directional derivative is 8u+7v; reverse input gradient is (8,7), including both z1 parent-slot contributions."
+        }
+      ]
+    },
+    "lem-certified-linear-solve-jacobian-and-pullback-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-implicit-differentiation-forward-and-adjoint-formulas",
+          "source_section": "Statement",
+          "quote": "Let $R:\\Theta\\times Z\\to\\mathbb R^m$ be $C^1$, where $\\Theta\\subseteq\\mathbb R^p$ and $Z\\subseteq\\mathbb R^m$ are open. Suppose $R(\\theta_0,z_0)=0$ and the state Jacobian $R_z(\\theta_0,z_0)$ is invertible. The Euclidean implicit function theorem gives a local $C^1$ solution branch $z=\\phi(\\theta)$, and\n$$D\\phi(\\theta_0)=-R_z(\\theta_0,z_0)^{-1}R_\\theta(\\theta_0,z_0).$$\nFor a scalar $C^1$ objective $J(\\theta,z)$, its derivative along that branch is\n$$D(J(\\theta,\\phi(\\theta)))|_{\\theta_0}=J_\\theta-J_zR_z^{-1}R_\\theta.$$\nEquivalently, if $\\lambda$ solves $R_z^T\\lambda=J_z^T$, this derivative is $J_\\theta-\\lambda^TR_\\theta$. These formulas concern the exact local solution branch; differentiating a stopped iteration is a separate finite-map derivative.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-rounded-linear-and-normal-residual-certificates",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, $x\\in\\mathbb F^n$, $y\\in\\mathbb F^m$ have stored real or complex entries, with $m,n\\ge1$. Use the operationwise arithmetic model, successful sequential dot products, and $0<u<1$ with $(\\max(m,n)-1)u<1$. Define\n$$g_k=\\frac{1+6u}{1-(k-1)u}-1,\\qquad F=\\|A\\|_F,\\quad X=\\|x\\|_2,\\quad Y=\\|y\\|_2.$$\nFor $\\widehat v=\\operatorname{fl}(Ax)$ and $\\widehat w=\\operatorname{fl}(\\widehat v-y)$, put $V=g_nFX$ and $W=V+u(\\|\\widehat v\\|_2+Y)$. Then\n$$\\|\\widehat w-(Ax-y)\\|_2\\le W.$$\nFor a stored real $\\lambda>0$, also compute $\\widehat z=\\operatorname{fl}(A^*\\widehat w)$, $\\widehat l=\\operatorname{fl}(\\lambda x)$ and $\\widehat r=\\operatorname{fl}(\\widehat z+\\widehat l)$, rounding scalar multiplication componentwise. The exact intended normal residual $r=A^*(Ax-y)+\\lambda x$ satisfies\n$$\\|\\widehat r-r\\|_2\\le\\rho:=FW+g_mF\\|\\widehat w\\|_2+u\\lambda X+u(\\|\\widehat z\\|_2+\\|\\widehat l\\|_2).$$\nNorms in these certificates mean exact norms or certified upper bounds. Uncontrolled rounding of the certificate itself is not authorized. The linear bound applies columnwise to certify $\\|I-AB\\|_2\\le\\|I-AB\\|_F$ from stored basis-solve columns $B$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-standard-relative-floating-point-model-and-unit-roundoff",
+          "source_section": "Definition",
+          "quote": "**A floating-point system.** A floating-point system consists of a nonempty\nfinite set $\\mathbb F\\subseteq\\mathbb R$ of representable numbers with\n$0\\in\\mathbb F$ and $-\\mathbb F=\\mathbb F$, a positive real\n$N_{\\max}\\in\\mathbb F$ (the largest normal magnitude), a positive real\n$N_{\\min}\\in\\mathbb F$ (the smallest normal magnitude), with\n$N_{\\min}\\le N_{\\max}$, and a rounding map\n$\\operatorname{fl}$ defined on $0$ and on the real numbers $t$ with\n$N_{\\min}\\le|t|\\le N_{\\max}$, taking values in $\\mathbb F$ and satisfying\n$\\operatorname{fl}(0)=0$.\n\n**Unit roundoff.** A real $u>0$ is a **unit roundoff** for the system when\nevery real $t$ with $N_{\\min}\\le|t|\\le N_{\\max}$ satisfies\n\n$$\\operatorname{fl}(t)=t(1+\\delta)\\qquad\\text{for some }\\delta\\text{ with }|\\delta|\\le u,$$\n\nwith $|\\cdot|$ the absolute value ([[def-abs-value]]). The model quantifies all\nsubsequent error analysis through the single constant $u$ and says nothing\nabout the internal bit representation beyond the bound $|\\delta|\\le u$.\n\n**The standard relative model.** For each operation\n$\\circ\\in\\{+,-,\\times,\\div\\}$ and all $x,y\\in\\mathbb F$ such that $x\\circ y$ is\nzero or is a real number in the normal range\n($N_{\\min}\\le|x\\circ y|\\le N_{\\max}$; for $\\div$ this includes $y\\ne 0$), the\ncomputed result is\n\n$$\\operatorname{fl}(x\\circ y)=(x\\circ y)(1+\\delta)\\qquad\\text{for some }\\delta\\text{ with }|\\delta|\\le u.$$\n\nWhen $x\\circ y=0$, this identity is the exact-zero rule\n$\\operatorname{fl}(0)=0$ and one may take $\\delta=0$.\n\n**The exclusions are part of the model, and are stated explicitly.**\n\n- **Overflow** is excluded: when $|x\\circ y|>N_{\\max}$ the result is not a real\n  number of the form $(x\\circ y)(1+\\delta)$ with $|\\delta|\\le u$.\n- **Underflow** is excluded: when $0<|x\\circ y|<N_{\\min}$ the result falls into\n  the subnormal or lost range and need not satisfy the relative bound.\n- **Invalid operations** are excluded: when $x\\circ y$ is not a real number\n  (for example $0/0$), there is no real $\\delta$ for the displayed identity.\n\nEvery item on this page that uses the model therefore carries the hypotheses\nthat the relevant operations lie in the normal range, and statements about\noverflow, underflow or invalid operations are made only where the exclusion is\nmentioned.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, let $u\\ge 0$, let\n$\\delta_0,\\dots,\\delta_{n-1}\\in\\mathbb{R}$ satisfy $|\\delta_i|\\le u$ for every\n$i<n$, and suppose $n u<1$. Then\n\n$$\\prod_{i<n}(1+\\delta_i)=1+\\theta_n\\qquad\\text{with}\\qquad|\\theta_n|\\le\\gamma_n:=\\frac{n u}{1-n u}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "For every $z$, $\\|ABz\\|\\ge(1-d)\\|z\\|$. Thus [F3] makes $AB$, hence both square factors, invertible and gives $\\|(AB)^{-1}\\|\\le1/(1-d)$. Since $A^{-1}=B(AB)^{-1}$, $\\|A^{-1}\\|\\le K$. The identity $B-A^{-1}=A^{-1}(AB-I)$ gives $\\|B-A^{-1}\\|\\le Kd$, while $\\widehat x-x=A^{-1}(A\\widehat x-b)$ gives $\\|\\widehat x-x\\|\\le K\\rho$. The residuals in these identities are exact; [F2] explains how to certify them from rounded evaluations.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "Apply [F1] at the exact point $(A,b)$. For the matrix edge, $BH\\widehat x-A^{-1}Hx=(B-A^{-1})H\\widehat x+A^{-1}H(\\widehat x-x)$. Since $\\|H\\|_2\\le\\|H\\|_F$, step 1.1 gives $\\eta_A$; the vector edge gives $\\eta_b$. Taking Euclidean/Frobenius adjoints yields the stated pullbacks with the same norm discrepancies. This explicitly accounts for the perturbed primal evaluation point through $\\rho$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Fix an output coordinate $j$ of $\\widehat\\lambda$ and put $q_i=B_{ij}c_i$. By success in [F4] and the relative bound in [F5], $p_i=q_i(1+\\alpha_i)$ with $|\\alpha_i|\\le u$; exact-zero products have $\\alpha_i=0$. For each addition $i=2,\\ldots,n$, write $s_i=(s_{i-1}+p_i)(1+\\beta_i)$ with $|\\beta_i|\\le u$, taking $\\beta_i=0$ when the exact sum is zero. Expanding gives $\\widehat\\lambda_j=s_n=\\sum_{i=1}^n q_i(1+\\alpha_i)\\prod_{k=\\max(2,i)}^n(1+\\beta_k)$, with an empty product interpreted as $1$. Each coefficient has at most $n$ factors: for $i=1$ it has one product factor and $n-1$ addition factors, while for $i\\ge2$ it has one product factor and $n-i+1$ addition factors. Thus [F6], $nu<1$, and monotonicity of $ku/(1-ku)$ imply that each coefficient differs from $1$ by at most $\\gamma_n$. Hence $|\\widehat\\lambda_j-(B^Tc)_j|\\le\\gamma_n\\sum_i|B_{ij}||c_i|$. Stacking these bounds and applying $\\||B|^T|c|\\|_2\\le\\|B\\|_F\\|c\\|_2$ gives $\\|\\widehat\\lambda-B^Tc\\|_2\\le t\\|c\\|_2$ and then $\\|\\widehat\\lambda\\|_2\\le(M+t)\\|c\\|_2$. Each rounded outer-product entry has error at most $u|\\widehat\\lambda_i\\widehat x_j|$, so its Frobenius error is at most $u(M+t)\\|\\widehat x\\|_2\\|c\\|_2$. Combining these bounds with step 1.2 gives the stated vector and matrix cotangent estimates.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "claim": "For each realized nonzero $c$, any cotangent error vector $z$ is the action on $c$ of the linear map $zc^T/\\|c\\|^2$, whose induced norm is $\\|z\\|/\\|c\\|$; vectorize the matrix cotangent for the matrix edge. When $c=0$, successful operations return exact zero. Thus the realized rounded pullbacks admit local linear-map perturbations with the displayed bounds, without asserting global linearity of rounding. The graph perturbation theorem may propagate these realized maps with exact accumulation.",
+          "step": "2.2",
+          "inputs": [
+            "step 2.1",
+            "algebra",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1235 @@
+{
+  "version": 1,
+  "scope": [
+    "def-diagonal-lower-upper-splitting-convention",
+    "alg-richardson-stationary-iteration",
+    "lem-irreducible-row-substochastic-matrix-has-strict-weighted-contraction",
+    "alg-jacobi-stationary-iteration",
+    "alg-gauss-seidel-stationary-iteration",
+    "alg-sor-stationary-iteration",
+    "thm-strict-row-diagonal-dominance-implies-jacobi-and-gauss-seidel-convergence",
+    "thm-irreducibly-weakly-diagonally-dominant-jacobi-and-gauss-seidel-converge",
+    "thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two",
+    "ex-stationary-splitting-with-an-initial-error-missing-an-unstable-eigenspace",
+    "ex-jacobi-iteration-for-a-strictly-diagonally-dominant-matrix",
+    "ex-sor-iteration-for-a-positive-definite-matrix-with-omega-in-zero-two"
+  ],
+  "contracts": {
+    "def-diagonal-lower-upper-splitting-convention": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition assumes n at least one and fixes coordinates one through n; it does not supply an empty-order convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero entries are permitted; if A=0 then D=L=U=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for n=1 the strict triangular parts L and U are zero and D=A."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: if A=0, all three parts are zero and A=D−L−U still holds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: positions i=j belong only to D; strict lower and upper indices use i>j and i<j."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Each entry is defined by its index inequality, so the splitting is unique and uses no family of choices. The supplied construction therefore has no additional arbitrary-family selection premise to discharge."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is the exact identity A=D-L-U, with U=L-star on Hermitian inputs, for positive matrix order with a fixed coordinate order. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is the exact identity A=D-L-U, with U=L-star on Hermitian inputs, for positive matrix order with a fixed coordinate order. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": []
+    },
+    "alg-richardson-stationary-iteration": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input dimension is at least one; a zero budget is explicitly allowed but returns the supplied initial vector rather than an empty-vector input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: A=0 gives x^(k+1)=x^(k)+ωb; b=0 leaves x fixed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for n=1 the update is x^(k+1)=x^(k)+ω(b−ax^(k))."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: when dimensions match and omega is nonzero, m=0 returns the supplied x^(0) with status completed; invalid-input and invalid-relaxation checks precede this branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: mismatching dimensions return invalid-input first; only otherwise omega=0 returns invalid-relaxation. If both checks pass, nonzero omega runs the finite supplied budget without a convergence certificate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Each residual update is a fixed matrix-vector expression and the initial iterate is supplied. The supplied construction therefore has no additional arbitrary-family selection premise to discharge."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is the explicitly updated iterate or invalid-input/invalid-relaxation status, for positive dimension, matching data and a nonzero real relaxation. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is the explicitly updated iterate or invalid-input/invalid-relaxation status, for positive dimension, matching data and a nonzero real relaxation. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": []
+    },
+    "alg-jacobi-stationary-iteration": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires n>=1 but permits the EMPTY update loop m=0 and returns x^(0). For n=1 the off-diagonal sum is empty and zero, with its nonzero diagonal checked before the scalar division."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a zero diagonal pivot returns pivot-failure before any iteration."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for n=1 and a_11≠0 the update is x^(k+1)=b_1/a_11."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: if A is diagonal with nonzero diagonal, one update returns A^{-1}b."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: m=0 returns x^(0); a zero diagonal returns pivot-failure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The diagonal inverse acts coordinatewise on supplied data and the least failing pivot is prescribed; no solution selector is needed. The supplied construction therefore has no additional arbitrary-family selection premise to discharge."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is the last simultaneous iterate or input/pivot failure, without convergence certificate, for positive dimension, matching data, nonzero diagonal and a finite iteration budget. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is the last simultaneous iterate or input/pivot failure, without convergence certificate, for positive dimension, matching data, nonzero diagonal and a finite iteration budget. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": []
+    },
+    "alg-gauss-seidel-stationary-iteration": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires n>=1 but expressly returns x^(0) at zero budget m=0. For n=1 both triangular off-diagonal sums are empty, leaving the admitted nonzero diagonal solve."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a zero diagonal pivot returns pivot-failure before any iteration."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for n=1 and a_11≠0 the triangular solve returns b_1/a_11."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: for diagonal A with nonzero diagonal, one sweep returns A^{-1}b."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: m=0 returns x^(0); the update order is fixed as 1,…,n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Least failing diagonal index and increasing-index forward substitution fix all choices; the triangular solution is unique. The supplied construction therefore has no additional arbitrary-family selection premise to discharge."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is the last lower-triangular solve iterate or an input/pivot failure, without convergence certificate, for positive dimension, matching data, nonzero diagonal and a finite iteration budget. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is the last lower-triangular solve iterate or an input/pivot failure, without convergence certificate, for positive dimension, matching data, nonzero diagonal and a finite iteration budget. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": []
+    },
+    "alg-sor-stationary-iteration": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition takes n at least one; its empty iteration list at zero budget returns x^(0) and does not define a dimension-zero solve."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: ω=0 returns invalid-relaxation and a zero diagonal returns pivot-failure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for n=1 with a_11≠0 the error multiplier is 1−ω."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: for diagonal A with nonzero diagonal, the recurrence is x^(k+1)=(1−ω)x^(k)+ωA^{-1}b."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: m=0 returns x^(0); ω=0 is rejected, while convergence restrictions are proved separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Increasing-index forward substitution is unique after the checks and the least failing diagonal is fixed. The supplied construction therefore has no additional arbitrary-family selection premise to discharge."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is a completed finite iterate or input/relaxation/pivot failure, without a convergence claim, for positive dimension, matching data, nonzero diagonal and nonzero real relaxation. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is a completed finite iterate or input/relaxation/pivot failure, without a convergence claim, for positive dimension, matching data, nonzero diagonal and nonzero real relaxation. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": []
+    },
+    "lem-irreducible-row-substochastic-matrix-has-strict-weighted-contraction": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "telescoping-row-defect",
+          "claim": "Put $d=\\mathbf1-C\\mathbf1$. Telescoping gives $\\mathbf1-C^n\\mathbf1=\\sum_{k=0}^{n-1}C^k d$, since $(I-C)\\sum_{k=0}^{n-1}C^k=I-C^n$. Each summand is coordinatewise nonnegative by [A1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "propagate-strict-row",
+          "claim": "For each $i$, choose by [A2] a path of length $s_i\\le n-1$ from $i$ to $r$. The product of the positive edge weights along it is a positive term of $(C^{s_i})_{ir}$; for $s_i=0$ this entry is $1$. Hence $(C^{s_i}d)_i\\ge(C^{s_i})_{ir}d_r>0$. Step 1.1 then gives $(C^n\\mathbf1)_i<1$ for every $i$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "convergent-neumann-vector",
+          "claim": "Let $q:=\\max_i(C^n\\mathbf1)_i<1$. Since $C^s\\mathbf1\\le\\mathbf1$ for $0\\le s<n$, nonnegativity gives $C^{kn+s}\\mathbf1\\le q^k\\mathbf1$ for all $k\\ge0$ and $0\\le s<n$. Therefore $\\sum_{j=0}^{\\infty}C^j\\mathbf1$ converges coordinatewise and its sum $v$ satisfies $v\\ge\\mathbf1>0$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weighted-contraction",
+          "claim": "Multiplying the convergent series by $C$ shifts its terms, so $Cv=v-\\mathbf1<v$ coordinatewise.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes n>=1. Proof step 2.1 permits a path of length0 with C^0 entry1; for n=1 this is the empty edge-product case. The coordinate series has its k=0 unit term, making v>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For n=1, C=[0], the length-zero path reaches the strict row, and v=1 satisfies Cv=0<v (steps 2.1–4.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional case is covered by the allowed length-zero path and the same series (steps 2.1–4.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Other rows may have sum exactly 1; strong connectivity carries the strict row defect to them (steps 2.1–3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Row sums equal to 1 are allowed except that at least one row must be strict (A1 and steps 1.1–2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Shortest paths in a finite graph and a componentwise convergent series suffice; no arbitrary-index choice is used (steps 2.1–3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement uses exactly-when for graph edges as the definition of its directed support; it does not assert a characterization of weighted contraction by strong connectivity. Proof steps 2.1–4.1 establish only the stated sufficient contraction conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The exactly-when phrase defines support edges i->j by c_ij>0. No reverse necessity of irreducibility for Cv<v is claimed; proof step 4.1 derives Cv=v-1 from the established convergent series."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": []
+    },
+    "thm-strict-row-diagonal-dominance-implies-jacobi-and-gauss-seidel-convergence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-diagonal-lower-upper-splitting-convention",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, let $n\\ge1$, fix the coordinate\norder $1,\\ldots,n$, and let $A=(a_{ij})\\in M_n(F)$. Define $D,L,U\\in M_n(F)$\nby\n\n$$D_{ij}=\\begin{cases}a_{ii}&i=j,\\\\0&i\\ne j,\\end{cases}\\qquad L_{ij}=\\begin{cases}-a_{ij}&i>j,\\\\0&i\\le j,\\end{cases}\\qquad U_{ij}=\\begin{cases}-a_{ij}&i<j,\\\\0&i\\ge j.\\end{cases}$$\n\nThus $D$ is diagonal, $L$ is strictly lower triangular, $U$ is strictly upper\ntriangular (in the sense of\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]), and\n$A=D-L-U$. If $A=A^*$, then $U=L^*$, where $*$ denotes conjugate transpose.\nThe decomposition uses the fixed coordinate order and is an exact-arithmetic\nidentity.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-jacobi-stationary-iteration",
+          "source_section": "Definition",
+          "quote": "Input $n\\ge1$, $A\\in M_n(\\mathbb C)$, $b,x^{(0)}\\in\\mathbb C^n$, and an\niteration budget $m\\in\\mathbb N_0$. Check dimensions; on a mismatch return\n`invalid-input`. Form $D,L,U$ by\n[[def-diagonal-lower-upper-splitting-convention]]. If some diagonal entry of\n$A$ is zero, return `pivot-failure(i)` for the least such index $i$.\n\nOtherwise set $M=D$ and $N=L+U$, so $A=M-N$. For each\n$k=0,\\ldots,m-1$, compute the diagonal solve\n\n$$D x^{(k+1)}=(L+U)x^{(k)}+b,$$\n\nequivalently, simultaneously for every $i$,\n\n$$x_i^{(k+1)}=\\frac{b_i-\\sum_{j\\ne i}a_{ij}x_j^{(k)}}{a_{ii}}.$$\n\nReturn `completed` with $x^{(m)}$. The solve is the unique diagonal instance of\n[[def-forward-and-back-substitution-for-triangular-systems]] when the pivot\ncheck succeeds; [[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]]\ngives its well-definedness. A zero budget returns $x^{(0)}$. The procedure\nreports no convergence or accuracy certificate.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-gauss-seidel-stationary-iteration",
+          "source_section": "Definition",
+          "quote": "Input $n\\ge1$, $A\\in M_n(\\mathbb C)$, $b,x^{(0)}\\in\\mathbb C^n$, and an\niteration budget $m\\in\\mathbb N_0$. Use the fixed order $1,\\ldots,n$. Check\ndimensions; on a mismatch return `invalid-input`. Form $D,L,U$ by\n[[def-diagonal-lower-upper-splitting-convention]]. If some diagonal entry of\n$A$ is zero, return `pivot-failure(i)` for the least such index $i$.\n\nOtherwise set $M=D-L$ and $N=U$, so $A=M-N$. For each\n$k=0,\\ldots,m-1$, solve the lower-triangular system\n\n$$ (D-L)x^{(k+1)}=Ux^{(k)}+b $$\n\nby forward substitution in increasing index order. Equivalently, the component\nupdates are\n\n$$x_i^{(k+1)}=\\frac{b_i+\\sum_{j<i}L_{ij}x_j^{(k+1)}+\\sum_{j>i}U_{ij}x_j^{(k)}}{a_{ii}},\\qquad i=1,\\ldots,n.$$\n\nReturn `completed` with $x^{(m)}$. The lower-triangular solve is unique after\nthe pivot check by [[def-forward-and-back-substitution-for-triangular-systems]]\nand [[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]].\nA zero budget returns $x^{(0)}$. The procedure reports no convergence or\naccuracy certificate.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\n1. If $L\\in M_n(F)$ is lower triangular with nonzero diagonal, the forward\n   substitution recursion of\n   [[def-forward-and-back-substitution-for-triangular-systems]] produces the\n   unique solution of $Lx=b$.\n2. If $U\\in M_n(F)$ is upper triangular with nonzero diagonal, the backward\n   substitution recursion produces the unique solution of $Ux=b$.\n\nEach solve uses exactly $n$ divisions,\n$\\frac{n(n-1)}{2}$ multiplications, and $\\frac{n(n-1)}{2}$ additions or\nsubtractions, hence $O(n^2)$ scalar operations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-stationary-iteration-from-a-matrix-splitting",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb F)$ admit a **matrix splitting**\n\n$$A=M-N,$$\n\nwhere $M\\in\\operatorname{GL}_n(\\mathbb F)$ is invertible in the sense of\n[[def-invertible-matrix-and-general-linear-group]]. The associated\n**stationary iteration** for the system $Ax=b$ is\n\n$$x_{k+1}=M^{-1}Nx_k+M^{-1}b.$$\n\nIts iteration matrix is\n\n$$B:=M^{-1}N.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one",
+          "source_section": "Statement",
+          "quote": "Let $A=M-N$ be a matrix splitting in $M_n(\\mathbb C)$ with stationary iteration\n\n$$x_{k+1}=M^{-1}Nx_k+M^{-1}b,$$\n\nand let $B:=M^{-1}N$ be its iteration matrix. Then the following are\nequivalent:\n\n1. For every right-hand side $b$ and every initial vector $x_0$, the iterates\n   converge to the unique solution of $Ax=b$.\n2. The spectral radius $\\rho(B)$ is strictly less than $1$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nonzero-pivots",
+          "claim": "By [A1], every $a_{ii}\\ne0$. Thus $D$ and the lower-triangular matrix $D-L$ have nonzero diagonal, so the solves in [F1] and [F2] are uniquely defined by [L2].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "iteration-matrices",
+          "claim": "By [F1]–[F2] and [L3], the iteration matrices are $G_J=D^{-1}(L+U)$ and $G_G=(D-L)^{-1}U$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "jacobi-eigenvalue-bound",
+          "claim": "For each row $i$, set $q_i=\\sum_{j\\ne i}|a_{ij}|/|a_{ii}|$ and $q_J=\\max_i q_i<1$. Since $L_{ij}=-a_{ij}$ below the diagonal and $U_{ij}=-a_{ij}$ above it, $\\sum_j|(G_J)_{ij}|=q_i$. Hence for any eigenpair $G_Jz=\\lambda z$ with $z\\ne0$, choose $i$ with $|z_i|=\\max_j|z_j|$; the row equation gives $|\\lambda||z_i|\\le q_i|z_i|\\le q_J|z_i|$, so $|\\lambda|<1$ and $\\rho(G_J)<1$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "gauss-seidel-eigenvalue-bound",
+          "claim": "Let $G_Gz=\\lambda z$ with $z\\ne0$, and choose $i$ with $|z_i|=\\max_j|z_j|=:R$. The equation $Uz=\\lambda(D-L)z$ in row $i$ is $\\sum_{j>i}U_{ij}z_j=\\lambda(a_{ii}z_i-\\sum_{j<i}L_{ij}z_j)$, so $|\\lambda|\\,|a_{ii}z_i-\\sum_{j<i}L_{ij}z_j| \\le\\sum_{j>i}|U_{ij}||z_j|$. By the reverse triangle inequality and [A1], the left factor is at least $|\\lambda|(|a_{ii}|-\\sum_{j<i}|a_{ij}|)R$, while the right side is at most $\\sum_{j>i}|a_{ij}|R$. Therefore $|\\lambda|\\le\\max_i\\frac{\\sum_{j>i}|a_{ij}|}{|a_{ii}|-\\sum_{j<i}|a_{ij}|}<1$; the denominators are positive and each strict inequality follows from [A1]. Thus $\\rho(G_G)<1$.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "all-start-convergence",
+          "claim": "The bounds in steps 3.1 and 3.2 and [L4] imply that both methods converge to the unique solution of $Ax=b$ for every $b$ and every initial vector.",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires n>=1; for n=1 each off-diagonal row sum is empty and zero. Proof step 1.1 then forces a_11 nonzero, and the Jacobi/Gauss-Seidel iteration matrices in steps 2.1–3.2 are zero, so the scalar case is retained."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Strict row dominance forces |a_ii|>0 in every row, so no pivot failure occurs (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, strict dominance gives a_11≠0 and both iteration matrices are zero, so one update solves the system (steps 1.1–4.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For diagonal A with nonzero diagonal, both iteration matrices vanish and one update returns A^{-1}b (steps 2.1–4.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict inequality gives q_J<1 and q_G<1; equality rows are excluded and treated by the separate weak theorem (steps 3.1–3.2)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only a finite maximum and an eigenvector for each eigenvalue are used; no arbitrary-index choice is needed (steps 3.1–3.2)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is Jacobi and fixed-order Gauss–Seidel converge for every right side and initial vector, for a positive-order real matrix with every row strictly diagonally dominant. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is Jacobi and fixed-order Gauss–Seidel converge for every right side and initial vector, for a positive-order real matrix with every row strictly diagonally dominant. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": []
+    },
+    "thm-irreducibly-weakly-diagonally-dominant-jacobi-and-gauss-seidel-converge": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-diagonal-lower-upper-splitting-convention",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, let $n\\ge1$, fix the coordinate\norder $1,\\ldots,n$, and let $A=(a_{ij})\\in M_n(F)$. Define $D,L,U\\in M_n(F)$\nby\n\n$$D_{ij}=\\begin{cases}a_{ii}&i=j,\\\\0&i\\ne j,\\end{cases}\\qquad L_{ij}=\\begin{cases}-a_{ij}&i>j,\\\\0&i\\le j,\\end{cases}\\qquad U_{ij}=\\begin{cases}-a_{ij}&i<j,\\\\0&i\\ge j.\\end{cases}$$\n\nThus $D$ is diagonal, $L$ is strictly lower triangular, $U$ is strictly upper\ntriangular (in the sense of\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]), and\n$A=D-L-U$. If $A=A^*$, then $U=L^*$, where $*$ denotes conjugate transpose.\nThe decomposition uses the fixed coordinate order and is an exact-arithmetic\nidentity.",
+          "uses": [
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-jacobi-stationary-iteration",
+          "source_section": "Definition",
+          "quote": "Input $n\\ge1$, $A\\in M_n(\\mathbb C)$, $b,x^{(0)}\\in\\mathbb C^n$, and an\niteration budget $m\\in\\mathbb N_0$. Check dimensions; on a mismatch return\n`invalid-input`. Form $D,L,U$ by\n[[def-diagonal-lower-upper-splitting-convention]]. If some diagonal entry of\n$A$ is zero, return `pivot-failure(i)` for the least such index $i$.\n\nOtherwise set $M=D$ and $N=L+U$, so $A=M-N$. For each\n$k=0,\\ldots,m-1$, compute the diagonal solve\n\n$$D x^{(k+1)}=(L+U)x^{(k)}+b,$$\n\nequivalently, simultaneously for every $i$,\n\n$$x_i^{(k+1)}=\\frac{b_i-\\sum_{j\\ne i}a_{ij}x_j^{(k)}}{a_{ii}}.$$\n\nReturn `completed` with $x^{(m)}$. The solve is the unique diagonal instance of\n[[def-forward-and-back-substitution-for-triangular-systems]] when the pivot\ncheck succeeds; [[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]]\ngives its well-definedness. A zero budget returns $x^{(0)}$. The procedure\nreports no convergence or accuracy certificate.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-gauss-seidel-stationary-iteration",
+          "source_section": "Definition",
+          "quote": "Input $n\\ge1$, $A\\in M_n(\\mathbb C)$, $b,x^{(0)}\\in\\mathbb C^n$, and an\niteration budget $m\\in\\mathbb N_0$. Use the fixed order $1,\\ldots,n$. Check\ndimensions; on a mismatch return `invalid-input`. Form $D,L,U$ by\n[[def-diagonal-lower-upper-splitting-convention]]. If some diagonal entry of\n$A$ is zero, return `pivot-failure(i)` for the least such index $i$.\n\nOtherwise set $M=D-L$ and $N=U$, so $A=M-N$. For each\n$k=0,\\ldots,m-1$, solve the lower-triangular system\n\n$$ (D-L)x^{(k+1)}=Ux^{(k)}+b $$\n\nby forward substitution in increasing index order. Equivalently, the component\nupdates are\n\n$$x_i^{(k+1)}=\\frac{b_i+\\sum_{j<i}L_{ij}x_j^{(k+1)}+\\sum_{j>i}U_{ij}x_j^{(k)}}{a_{ii}},\\qquad i=1,\\ldots,n.$$\n\nReturn `completed` with $x^{(m)}$. The lower-triangular solve is unique after\nthe pivot check by [[def-forward-and-back-substitution-for-triangular-systems]]\nand [[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]].\nA zero budget returns $x^{(0)}$. The procedure reports no convergence or\naccuracy certificate.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-irreducible-row-substochastic-matrix-has-strict-weighted-contraction",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $C=(c_{ij})\\in M_n(\\mathbb R)$ have nonnegative entries\nand row sums at most $1$. Form the directed graph with vertices\n$\\{1,\\ldots,n\\}$ and an edge $i\\to j$ exactly when $c_{ij}>0$; assume this\ngraph is strongly connected, with paths of length $0$ allowed. Assume one row\n$r$ has sum strictly less than $1$. Then, with $\\mathbf1=(1,\\ldots,1)^T$,\n\n$$C^n\\mathbf1<\\mathbf1$$\n\ncoordinatewise, and the series $v=\\sum_{k=0}^{\\infty}C^k\\mathbf1$ converges\ncoordinatewise to a vector satisfying $v>0$ and $Cv<v$ coordinatewise.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-stationary-iteration-from-a-matrix-splitting",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb F)$ admit a **matrix splitting**\n\n$$A=M-N,$$\n\nwhere $M\\in\\operatorname{GL}_n(\\mathbb F)$ is invertible in the sense of\n[[def-invertible-matrix-and-general-linear-group]]. The associated\n**stationary iteration** for the system $Ax=b$ is\n\n$$x_{k+1}=M^{-1}Nx_k+M^{-1}b.$$\n\nIts iteration matrix is\n\n$$B:=M^{-1}N.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one",
+          "source_section": "Statement",
+          "quote": "Let $A=M-N$ be a matrix splitting in $M_n(\\mathbb C)$ with stationary iteration\n\n$$x_{k+1}=M^{-1}Nx_k+M^{-1}b,$$\n\nand let $B:=M^{-1}N$ be its iteration matrix. Then the following are\nequivalent:\n\n1. For every right-hand side $b$ and every initial vector $x_0$, the iterates\n   converge to the unique solution of $Ax=b$.\n2. The spectral radius $\\rho(B)$ is strictly less than $1$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\n1. If $L\\in M_n(F)$ is lower triangular with nonzero diagonal, the forward\n   substitution recursion of\n   [[def-forward-and-back-substitution-for-triangular-systems]] produces the\n   unique solution of $Lx=b$.\n2. If $U\\in M_n(F)$ is upper triangular with nonzero diagonal, the backward\n   substitution recursion produces the unique solution of $Ux=b$.\n\nEach solve uses exactly $n$ divisions,\n$\\frac{n(n-1)}{2}$ multiplications, and $\\frac{n(n-1)}{2}$ additions or\nsubtractions, hence $O(n^2)$ scalar operations.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "diagonal-nonzero",
+          "claim": "If $n>1$ and $a_{ii}=0$, [A1] forces every off-diagonal entry in row $i$ to vanish, contradicting strong connectivity. If $n=1$, the strict-row hypothesis forces $|a_{11}|>0$. Hence every diagonal entry is nonzero, and the Jacobi and lower-triangular Gauss–Seidel solves are defined by [L5].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "comparison-matrix",
+          "claim": "Define $C_{ii}=0$ and $C_{ij}=|a_{ij}|/|a_{ii}|$ for $i\\ne j$. Its row sums are at most $1$, one is strictly below $1$, and its positive-entry graph is the graph in [A1]. By [L2], choose $v>0$ with $Cv<v$, and set $q_J=\\max_i (Cv)_i/v_i<1$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "jacobi-weighted-bound",
+          "claim": "By [F1], $|G_J|=C$ entrywise. For $\\|z\\|_v:=\\max_i |z_i|/v_i$, nonnegativity gives $|G_Jz|\\le C|z|\\le\\|z\\|_v Cv\\le q_J\\|z\\|_v v$. Thus every eigenvalue $\\lambda$ of $G_J$ satisfies $|\\lambda|\\le q_J<1$, so $\\rho(G_J)<1$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "gauss-seidel-comparison-sweep",
+          "claim": "Set $B_L=|D|^{-1}|L|$ and $B_U=|D|^{-1}|U|$. Then $C=B_L+B_U$, $B_L$ is strictly lower triangular, and $(I-B_L)^{-1}=\\sum_{r=0}^{n-1}B_L^r\\ge I$. Thus $H:=(I-B_L)^{-1}B_U=\\sum_{r=0}^{n-1}B_L^rB_U\\ge0$. Since $(I-B_L)v-B_Uv=(I-C)v>0$, multiplying by $(I-B_L)^{-1}\\ge I$ gives $Hv<v$. Consequently $q_G:=\\max_i(Hv)_i/v_i<1$.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "gauss-seidel-weighted-bound",
+          "claim": "Because $D-L=D(I-D^{-1}L)$ and $D^{-1}L$ is strictly lower triangular, $(D-L)^{-1}U=\\sum_{r=0}^{n-1}(D^{-1}L)^rD^{-1}U$. Entrywise absolute values obey $|XY|\\le|X||Y|$, so $|G_G|\\le H$. The same weighted-vector estimate as in step 3.1 yields $\\|G_Gz\\|_v\\le q_G\\|z\\|_v$; hence $\\rho(G_G)<1$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "step 3.2",
+            "algebra",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "all-start-convergence",
+          "claim": "By [L3]–[L4], the two spectral-radius bounds imply convergence to the unique solution of $Ax=b$ for every right-hand side and every initial vector.",
+          "step": "5.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 handles n=1 separately: the strict-row hypothesis gives |a_11|>0 despite an empty off-diagonal graph. Statement allows length-zero paths, and the finite nilpotent sums in steps 3.2–4.1 include their r=0 term."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For n>1 a zero diagonal forces a zero off-diagonal row, contradicting strong connectivity; for n=1 the strict row excludes it (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When n=1 the strict-row assumption gives a_11≠0, C=0, and the comparison lemma yields v=1 (steps 1.1–5.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A graph with no off-diagonal edges is incompatible with strong connectivity for n>1; n=1 is handled separately (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Weak equality is allowed in non-strict rows; the strict row and strong connectivity give Cv<v through [L2] in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses finite paths, finite sums, and a convergent vector series, not arbitrary-index choice (steps 2.1–3.2)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is both exact stationary iterations converge to the unique solution for every right side and start, for real positive-order matrix, at least one strict row and strongly connected off-diagonal graph. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is both exact stationary iterations converge to the unique solution for every right side and start, for real positive-order matrix, at least one strict row and strongly connected off-diagonal graph. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": []
+    },
+    "thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-sor-stationary-iteration",
+          "source_section": "Definition",
+          "quote": "Input $n\\ge1$, $A\\in M_n(\\mathbb C)$, $b,x^{(0)}\\in\\mathbb C^n$, a real\nrelaxation parameter $\\omega$, and an iteration budget $m\\in\\mathbb N_0$.\nCheck dimensions; on a mismatch return `invalid-input`. If $\\omega=0$, return\n`invalid-relaxation`. Form $D,L,U$ by\n[[def-diagonal-lower-upper-splitting-convention]]. If some diagonal entry of\n$A$ is zero, return `pivot-failure(i)` for the least such index $i$.\n\nOtherwise set\n\n$$M_\\omega=\\omega^{-1}D-L,\\qquad N_\\omega=(\\omega^{-1}-1)D+U,$$\n\nso $A=M_\\omega-N_\\omega$. For each $k=0,\\ldots,m-1$, solve\n\n$$M_\\omega x^{(k+1)}=N_\\omega x^{(k)}+b$$\n\nby forward substitution in increasing index order. The lower-triangular\ncoefficient matrix has diagonal entries $a_{ii}/\\omega$, which are nonzero\nafter the checks. Return `completed` with $x^{(m)}$. The solve is unique by\n[[def-forward-and-back-substitution-for-triangular-systems]] and\n[[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]].\nA zero budget returns $x^{(0)}$. This procedure is defined for every real\n$\\omega\\ne0$; it reports no convergence or accuracy certificate.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-diagonal-lower-upper-splitting-convention",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, let $n\\ge1$, fix the coordinate\norder $1,\\ldots,n$, and let $A=(a_{ij})\\in M_n(F)$. Define $D,L,U\\in M_n(F)$\nby\n\n$$D_{ij}=\\begin{cases}a_{ii}&i=j,\\\\0&i\\ne j,\\end{cases}\\qquad L_{ij}=\\begin{cases}-a_{ij}&i>j,\\\\0&i\\le j,\\end{cases}\\qquad U_{ij}=\\begin{cases}-a_{ij}&i<j,\\\\0&i\\ge j.\\end{cases}$$\n\nThus $D$ is diagonal, $L$ is strictly lower triangular, $U$ is strictly upper\ntriangular (in the sense of\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]), and\n$A=D-L-U$. If $A=A^*$, then $U=L^*$, where $*$ denotes conjugate transpose.\nThe decomposition uses the fixed coordinate order and is an exact-arithmetic\nidentity.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-stationary-iteration-from-a-matrix-splitting",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb F)$ admit a **matrix splitting**\n\n$$A=M-N,$$\n\nwhere $M\\in\\operatorname{GL}_n(\\mathbb F)$ is invertible in the sense of\n[[def-invertible-matrix-and-general-linear-group]]. The associated\n**stationary iteration** for the system $Ax=b$ is\n\n$$x_{k+1}=M^{-1}Nx_k+M^{-1}b.$$\n\nIts iteration matrix is\n\n$$B:=M^{-1}N.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one",
+          "source_section": "Statement",
+          "quote": "Let $A=M-N$ be a matrix splitting in $M_n(\\mathbb C)$ with stationary iteration\n\n$$x_{k+1}=M^{-1}Nx_k+M^{-1}b,$$\n\nand let $B:=M^{-1}N$ be its iteration matrix. Then the following are\nequivalent:\n\n1. For every right-hand side $b$ and every initial vector $x_0$, the iterates\n   converge to the unique solution of $Ax=b$.\n2. The spectral radius $\\rho(B)$ is strictly less than $1$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\n1. If $L\\in M_n(F)$ is lower triangular with nonzero diagonal, the forward\n   substitution recursion of\n   [[def-forward-and-back-substitution-for-triangular-systems]] produces the\n   unique solution of $Lx=b$.\n2. If $U\\in M_n(F)$ is upper triangular with nonzero diagonal, the backward\n   substitution recursion produces the unique solution of $Ux=b$.\n\nEach solve uses exactly $n$ divisions,\n$\\frac{n(n-1)}{2}$ multiplications, and $\\frac{n(n-1)}{2}$ additions or\nsubtractions, hence $O(n^2)$ scalar operations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-determinant-is-product-of-eigenvalues",
+          "source_section": "Statement",
+          "quote": "Let $T$ be an endomorphism of an $n$-dimensional vector space over $F$. If\n\n$$\\chi_T(x)=\\prod_{i<n}(x-\\lambda_i)$$\n\nin $F[x]$, then $\\det(T)=\\prod_{i<n}\\lambda_i$. Thus the determinant is the product of the eigenvalues counted with algebraic multiplicity.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "thm-the-complex-numbers-are-algebraically-closed",
+          "source_section": "Statement",
+          "quote": "The field $\\mathbb C$ is algebraically closed.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "sor-splitting-determinant",
+          "claim": "By [A1] and [F1], $M_\\omega$ is lower triangular with diagonal $a_{ii}/\\omega\\ne0$, hence invertible by [L5]. Also $A=M_\\omega-N_\\omega$ by [L1], so [L2] applies with iteration matrix $G_\\omega$. The matrix $N_\\omega$ is upper triangular with diagonal entries $(\\omega^{-1}-1)a_{ii}$. Thus [L6]–[L7] give $\\det(M_\\omega)=\\omega^{-n}\\prod_i a_{ii}$ and $\\det(N_\\omega)=(\\omega^{-1}-1)^n\\prod_i a_{ii}$. From $M_\\omega G_\\omega=N_\\omega$ and multiplicativity, $\\det(G_\\omega)=\\det(N_\\omega)/\\det(M_\\omega)=(1-\\omega)^n$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "L1",
+            "L2",
+            "L5",
+            "L6",
+            "L7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sufficiency-by-eigenvalue-identity",
+          "claim": "For sufficiency, suppose $A$ is positive definite and $0<\\omega<2$. Then $Q:=M_\\omega+M_\\omega^*-A=(2/\\omega-1)D$ is positive definite. For an eigenpair $G_\\omega v=\\lambda v$ with $v\\ne0$, one has $\\lambda\\ne1$ since $Av=(1-\\lambda)M_\\omega v$ and $A$ is invertible. Put $a=v^*Av>0$. Then $v^*M_\\omega v=a/(1-\\lambda)$, so $v^*Qv=a\\left(2\\operatorname{Re}\\frac{1}{1-\\lambda}-1\\right) =a\\frac{1-|\\lambda|^2}{|1-\\lambda|^2}>0$. Therefore $|\\lambda|<1$ for every eigenvalue and $\\rho(G_\\omega)<1$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "L1",
+            "L2",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "necessary-omega-range",
+          "claim": "If SOR converges for every right-hand side and start, [L3] gives $\\rho(G_\\omega)<1$. By [L8]–[L9], $|\\det(G_\\omega)|=\\prod_{j=1}^n|\\lambda_j|\\le\\rho(G_\\omega)^n<1$. Step 1.1 therefore gives $|1-\\omega|<1$, which for real $\\omega$ is equivalent to $0<\\omega<2$.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L8",
+            "L9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sor-energy-identity",
+          "claim": "Assume now that SOR converges for every right-hand side and start. Then $\\rho(G_\\omega)<1$ by [L3], so $1$ is not an eigenvalue of $G_\\omega$ and $I-G_\\omega$ is invertible. By [L2], $A=M_\\omega(I-G_\\omega)$ is invertible. For $b=0$, its unique solution is $x_*=0$. For arbitrary $e^{(0)}:=x^{(0)}$, set $e^{(k)}:=x^{(k)}-x_*=x^{(k)}$ and $\\delta_k=e^{(k+1)}-e^{(k)}$. The homogeneous SOR recurrence gives $M_\\omega e^{(k+1)}=N_\\omega e^{(k)}$, hence $Ae^{(k)}+M_\\omega\\delta_k=0$. Expanding the Hermitian quadratic form gives $(e^{(k)})^*Ae^{(k)}-(e^{(k+1)})^*Ae^{(k+1)} =\\delta_k^*(M_\\omega+M_\\omega^*-A)\\delta_k =(2/\\omega-1)\\delta_k^*D\\delta_k$. The last equality follows from [L1] and [F1].",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "L1",
+            "L2",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "necessity-of-positive-definiteness",
+          "claim": "By step 2.1, $c:=2/\\omega-1>0$. Summing the identity in step 2.2 from $k=0$ to $N-1$ and taking $N\\to\\infty$ (the error tends to $0$ by the assumed convergence) gives $(e^{(0)})^*Ae^{(0)}=c\\sum_{k=0}^{\\infty}\\delta_k^*D\\delta_k$. Moreover $\\delta_0\\ne0$: otherwise step 2.2 implies $Ae^{(0)}=0$, contrary to invertibility of $A$. Since $D$ has positive diagonal, the first summand is strictly positive and all others are nonnegative. Thus $(e^{(0)})^*Ae^{(0)}>0$ for every nonzero $e^{(0)}$, so [L4] gives that $A$ is positive definite.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "L3",
+            "L4",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "iff-conclusion",
+          "claim": "By [L3], $\\rho(G_\\omega)<1$ implies convergence to the unique solution for every right-hand side and every initial vector. Steps 2.1 and 3.1 prove the reverse implication.",
+          "step": "4.1",
+          "inputs": [
+            "L3",
+            "step 2.1",
+            "step 3.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n at least one with strictly positive diagonal; the universal-start convergence equivalence is not stated for the empty matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The theorem assumes a positive diagonal; omega=0 is outside the algorithm domain and returns invalid-relaxation (A1 and step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 and A=[a] with a>0, the scalar recurrence has factor 1−omega, so convergence from every start is exactly |1−omega|<1, or 0<omega<2 (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For diagonal positive A, L=U=0 and G=(1−omega)I, so the same interval follows from the scalar eigenvalue calculation in step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At omega=0 the procedure is undefined. At omega=2, convergence would force |1−omega|<1 by the determinant argument in step 2.1, which is false; hence there is no all-start convergence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The polynomial roots and eigenpairs are finite-dimensional, and only a finite eigenvalue product is used; no arbitrary-family choice is needed (steps 1.2 and 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Positive definiteness and 0<omega<2 give rho(G)<1 in step 1.2; [L3] then gives all-start convergence in step 4.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "All-start convergence implies the interval and positive definiteness (steps 2.1–3.1)."
+        }
+      ],
+      "finite_checks": [],
+      "axioms": []
+    },
+    "ex-stationary-splitting-with-an-initial-error-missing-an-unstable-eigenspace": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stationary-iteration-from-a-matrix-splitting",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb F)$ admit a **matrix splitting**\n\n$$A=M-N,$$\n\nwhere $M\\in\\operatorname{GL}_n(\\mathbb F)$ is invertible in the sense of\n[[def-invertible-matrix-and-general-linear-group]]. The associated\n**stationary iteration** for the system $Ax=b$ is\n\n$$x_{k+1}=M^{-1}Nx_k+M^{-1}b.$$\n\nIts iteration matrix is\n\n$$B:=M^{-1}N.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one",
+          "source_section": "Statement",
+          "quote": "Let $A=M-N$ be a matrix splitting in $M_n(\\mathbb C)$ with stationary iteration\n\n$$x_{k+1}=M^{-1}Nx_k+M^{-1}b,$$\n\nand let $B:=M^{-1}N$ be its iteration matrix. Then the following are\nequivalent:\n\n1. For every right-hand side $b$ and every initial vector $x_0$, the iterates\n   converge to the unique solution of $Ax=b$.\n2. The spectral radius $\\rho(B)$ is strictly less than $1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "split-matrix-calculation",
+          "claim": "The matrices satisfy $M-N=I_2=A$ and $M$ is invertible. By [F1], $G=M^{-1}N=\\operatorname{diag}(2,1/2)$, whose spectral radius is $2$. The unique solution for $b=0$ is $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stable-and-unstable-starts",
+          "claim": "The recurrence is diagonal, so from $x^{(0)}=(0,1)^T$ it gives $x^{(k)}=(0,2^{-k})^T\\to0$, while from $(1,0)^T$ it gives $x^{(k)}=(2^k,0)^T$ and does not converge. This directly exhibits both the missing-unstable-eigenspace case and the failure of the all-start condition [L1] because $\\rho(G)=2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example fixes n=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero right-hand side is valid and the displayed M is invertible, so the recurrence is defined (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness is specifically two-dimensional, with one stable and one unstable eigenspace."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The chosen initial error lies wholly in the stable eigenspace while (1,0)^T lies in the unstable eigenspace (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No scalar relaxation parameter or endpoint claim occurs in this example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All matrices, eigenvalues, and initial errors are explicitly displayed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example illustrates an all-start criterion and does not assert an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example illustrates an all-start criterion and does not assert an iff theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact-split-and-initial-error-check",
+          "method": "Exact rational and diagonal-matrix arithmetic.",
+          "result": "M−N=I₂; M⁻¹N=diag(2,1/2), so ρ=2. The two starts give G^k(0,1)=(0,2⁻ᵏ)→0 and G^k(1,0)=(2ᵏ,0), which diverges."
+        }
+      ],
+      "axioms": []
+    },
+    "ex-jacobi-iteration-for-a-strictly-diagonally-dominant-matrix": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-jacobi-stationary-iteration",
+          "source_section": "Definition",
+          "quote": "Input $n\\ge1$, $A\\in M_n(\\mathbb C)$, $b,x^{(0)}\\in\\mathbb C^n$, and an\niteration budget $m\\in\\mathbb N_0$. Check dimensions; on a mismatch return\n`invalid-input`. Form $D,L,U$ by\n[[def-diagonal-lower-upper-splitting-convention]]. If some diagonal entry of\n$A$ is zero, return `pivot-failure(i)` for the least such index $i$.\n\nOtherwise set $M=D$ and $N=L+U$, so $A=M-N$. For each\n$k=0,\\ldots,m-1$, compute the diagonal solve\n\n$$D x^{(k+1)}=(L+U)x^{(k)}+b,$$\n\nequivalently, simultaneously for every $i$,\n\n$$x_i^{(k+1)}=\\frac{b_i-\\sum_{j\\ne i}a_{ij}x_j^{(k)}}{a_{ii}}.$$\n\nReturn `completed` with $x^{(m)}$. The solve is the unique diagonal instance of\n[[def-forward-and-back-substitution-for-triangular-systems]] when the pivot\ncheck succeeds; [[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]]\ngives its well-definedness. A zero budget returns $x^{(0)}$. The procedure\nreports no convergence or accuracy certificate.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-strict-row-diagonal-dominance-implies-jacobi-and-gauss-seidel-convergence",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and $A=(a_{ij})\\in M_n(\\mathbb R)$ satisfy strict row diagonal\ndominance:\n\n$$|a_{ii}|>\\sum_{j\\ne i}|a_{ij}|\\qquad(i=1,\\ldots,n).$$\n\nThen the Jacobi and fixed-order Gauss–Seidel iterations defined by\n[[alg-jacobi-stationary-iteration]] and\n[[alg-gauss-seidel-stationary-iteration]] converge in exact arithmetic to the\nunique solution of $Ax=b$ for every $b,x^{(0)}\\in\\mathbb R^n$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "verify-system-and-dominance",
+          "claim": "The row inequalities are $5>1$ and $4>1$. Direct multiplication gives $A(5/19,13/19)^T=(2,3)^T$, so the displayed vector is the exact solution.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "jacobi-spectrum",
+          "claim": "By [F1], $G_J=-D^{-1}(A-D)=\\begin{pmatrix}0&-1/5\\\\-1/4&0\\end{pmatrix}$, whose characteristic polynomial is $\\lambda^2-1/20$. Thus $\\rho(G_J)=1/\\sqrt{20}<1$; [L1] gives convergence from every initial vector to the verified solution.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example fixes a 2-by-2 matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Both diagonal entries are nonzero, so the Jacobi pivots in this witness are defined (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The displayed witness has dimension two; n=1 is covered by the theorem, not this example."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This is a non-diagonal strict-dominance witness and makes no claim about a degenerate matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The row inequalities are strict (5>1 and 4>1); no equality case is inferred (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All entries, vectors, and the exact solution are displayed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a sufficient-condition witness, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a sufficient-condition witness, not an iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact-solution-and-spectrum-check",
+          "method": "Exact rational substitution and characteristic-polynomial calculation.",
+          "result": "A(5/19,13/19)ᵀ=(2,3)ᵀ; det(λI−G_J)=λ²−1/20, hence ρ(G_J)=1/√20<1."
+        }
+      ],
+      "axioms": []
+    },
+    "ex-sor-iteration-for-a-positive-definite-matrix-with-omega-in-zero-two": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-sor-stationary-iteration",
+          "source_section": "Definition",
+          "quote": "Input $n\\ge1$, $A\\in M_n(\\mathbb C)$, $b,x^{(0)}\\in\\mathbb C^n$, a real\nrelaxation parameter $\\omega$, and an iteration budget $m\\in\\mathbb N_0$.\nCheck dimensions; on a mismatch return `invalid-input`. If $\\omega=0$, return\n`invalid-relaxation`. Form $D,L,U$ by\n[[def-diagonal-lower-upper-splitting-convention]]. If some diagonal entry of\n$A$ is zero, return `pivot-failure(i)` for the least such index $i$.\n\nOtherwise set\n\n$$M_\\omega=\\omega^{-1}D-L,\\qquad N_\\omega=(\\omega^{-1}-1)D+U,$$\n\nso $A=M_\\omega-N_\\omega$. For each $k=0,\\ldots,m-1$, solve\n\n$$M_\\omega x^{(k+1)}=N_\\omega x^{(k)}+b$$\n\nby forward substitution in increasing index order. The lower-triangular\ncoefficient matrix has diagonal entries $a_{ii}/\\omega$, which are nonzero\nafter the checks. Return `completed` with $x^{(m)}$. The solve is unique by\n[[def-forward-and-back-substitution-for-triangular-systems]] and\n[[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]].\nA zero budget returns $x^{(0)}$. This procedure is defined for every real\n$\\omega\\ne0$; it reports no convergence or accuracy certificate.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, $A\\in M_n(\\mathbb C)$ be Hermitian with strictly positive\ndiagonal, and let $\\omega\\in\\mathbb R\\setminus\\{0\\}$. Write\n$A=D-L-L^*$ by [[def-diagonal-lower-upper-splitting-convention]], and define\n\n$$M_\\omega=\\omega^{-1}D-L,\\qquad N_\\omega=(\\omega^{-1}-1)D+L^*,\\qquad G_\\omega=M_\\omega^{-1}N_\\omega.$$\n\nThe SOR iteration is $x^{(k+1)}=G_\\omega x^{(k)}+M_\\omega^{-1}b$. It converges\nto the unique solution of $Ax=b$ for every $b,x^{(0)}\\in\\mathbb C^n$ if and\nonly if $A$ is positive definite (meaning $x^*Ax>0$ for every nonzero $x$)\nand $0<\\omega<2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "positive-definiteness",
+          "claim": "For $z=(z_1,z_2)^T$, $z^*Az=|z_1|^2+|z_2|^2+|z_1-z_2|^2$, so [L2] shows that $A$ is positive definite; its diagonal is positive and $0<3/2<2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sor-matrix-and-spectrum",
+          "claim": "Here $D=2I$, $L_{21}=1$, and $U=L^*$. By [F1], $M_\\omega=\\begin{pmatrix}4/3&0\\\\-1&4/3\\end{pmatrix}$ and $N_\\omega=\\begin{pmatrix}-2/3&1\\\\0&-2/3\\end{pmatrix}$, hence $G_\\omega=M_\\omega^{-1}N_\\omega= \\begin{pmatrix}-1/2&3/4\\\\-3/8&1/16\\end{pmatrix}$. Its characteristic polynomial is $\\lambda^2+(7/16)\\lambda+1/4$, whose roots are $(-7\\pm i\\sqrt{207})/32$ and have modulus $1/2$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "convergence-conclusion",
+          "claim": "The hypotheses of [L1] hold by step 1.1, so SOR converges for every start; in particular the stated start converges to the solution $0$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example fixes a 2-by-2 matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The matrix has positive diagonal and omega=3/2, so the SOR solve is defined (steps 1.1–1.2)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The displayed witness has dimension two; the scalar case is handled by the theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The matrix is non-diagonal and positive definite; no singular or semidefinite case is inferred (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example uses the interior value omega=3/2; it does not infer endpoint convergence (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All entries, the parameter, and eigenvalues are explicitly computed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example applies the iff theorem rather than proving a new iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example applies the iff theorem rather than proving a new iff statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact-sor-matrix-and-spectrum-check",
+          "method": "Exact rational 2×2 matrix multiplication and characteristic polynomial.",
+          "result": "M_ω⁻¹N_ω=[[-1/2,3/4],[-3/8,1/16]], with characteristic polynomial λ²+(7/16)λ+1/4 and roots (−7±i√207)/32, each of modulus 1/2."
+        }
+      ],
+      "axioms": []
+    }
+  }
+}

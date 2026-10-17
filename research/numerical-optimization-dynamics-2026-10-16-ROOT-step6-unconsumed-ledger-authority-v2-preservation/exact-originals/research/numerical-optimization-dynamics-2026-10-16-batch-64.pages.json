@@ -1,0 +1,466 @@
+[
+  {
+    "order": 2412,
+    "id": "stochastic-approximation-and-stochastic-gradient-methods",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Stochastic approximation and stochastic gradient methods",
+    "companion": "stochastic-approximation-and-stochastic-gradient-methods-examples",
+    "requires": [
+      "proximal-gradient-and-accelerated-composite-optimization",
+      "numerical-optimization-globalization-and-inexact-certificates",
+      "martingale-inequalities-and-convergence"
+    ],
+    "items": [
+      {
+        "id": "def-stochastic-gradient-oracle-and-unconstrained-update",
+        "kind": "definition",
+        "title": "Filtration-adapted stochastic-gradient oracles and Robbins–Monro updates",
+        "statement": "On a filtered probability space, define adapted stochastic-gradient oracles, conditional unbiasedness, conditional variance and moment bounds, and the unconstrained Robbins–Monro/SGD update.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-random-element-and-real-random-variable",
+          "def-adapted-and-integrable-stochastic-process",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-conditional-variance",
+          "lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), §4.1",
+              "url": "https://leon.bottou.org/publications/pdf/tr-optml-2016.pdf"
+            },
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, §§6.1–6.2",
+              "url": "https://arxiv.org/pdf/1405.4980"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-robbins-siegmund-almost-supermartingale",
+        "kind": "lemma",
+        "title": "Robbins–Siegmund almost-supermartingale convergence",
+        "statement": "Assume AC. If nonnegative adapted integrable X_k and predictable nonnegative integrable b_k satisfy E[X_{k+1}|F_k] ≤ (1+a_k)X_k − b_k + c_k for deterministic nonnegative summable a_k,c_k, then X_k converges almost surely and Σ b_k is finite almost surely.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-adapted-and-integrable-stochastic-process",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "thm-doob-submartingale-convergence",
+          "def-real-exponential-function-and-e",
+          "thm-derivative-of-exponential",
+          "thm-exponential-is-strictly-increasing",
+          "cor-mean-value-theorem",
+          "thm-exponential-addition-formula",
+          "def-complete-ordered-field",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dimitri P. Bertsekas, Convex Optimization Algorithms, Appendix A, Proposition A.4.5",
+              "url": "https://web.mit.edu/dimitrib/www/Appendix_A_NEW_ALG.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-robbins-monro-strongly-monotone-root-convergence",
+        "kind": "theorem",
+        "title": "Robbins–Monro converges almost surely for a strongly monotone root",
+        "statement": "For a strongly monotone drift with a root, conditionally unbiased stochastic updates with a uniform conditional second-moment bound converge almost surely under square-summable, nonsummable positive stepsizes.",
+        "deps": [
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "lem-robbins-siegmund-almost-supermartingale",
+          "thm-taking-out-what-is-known",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "def-axiom-of-choice",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), §4.2",
+              "url": "https://leon.bottou.org/publications/pdf/tr-optml-2016.pdf"
+            },
+            {
+              "title": "Dimitri P. Bertsekas, Convex Optimization Algorithms, Appendix A, Proposition A.4.5",
+              "url": "https://web.mit.edu/dimitrib/www/Appendix_A_NEW_ALG.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-stochastic-gradient-nonconvex-randomized-iterate-bound",
+        "kind": "theorem",
+        "title": "Nonconvex SGD stationarity bound for a uniform randomized iterate",
+        "statement": "For an L-smooth function bounded below and an unbiased stochastic gradient with bounded conditional variance, a constant-step SGD trajectory has expected squared gradient at a uniform randomized iterate at most 2(f(x_0)−f_inf)/(αN)+Lασ² when α≤1/L.",
+        "deps": [
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "lem-l-smoothness-descent-inequality",
+          "def-conditional-variance",
+          "lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula",
+          "thm-taking-out-what-is-known",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "def-axiom-of-choice",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), §4.3, Theorem 4.8",
+              "url": "https://leon.bottou.org/publications/pdf/tr-optml-2016.pdf"
+            },
+            {
+              "title": "Saeed Ghadimi and Guanghui Lan, Stochastic First- and Zeroth-Order Methods for Nonconvex Stochastic Programming, §2.1, Theorem 2.1",
+              "url": "https://optimization-online.org/wp-content/uploads/2012/06/3499.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-stochastic-gradient-biased-noise-floor",
+        "kind": "theorem",
+        "title": "Biased SGD has an explicit weighted stationarity floor",
+        "statement": "For L-smooth f bounded below, conditional mean bias bounded by β_k, conditional variance bounded by σ_k², and steps α_k≤1/(4L), SGD satisfies an explicit weighted squared-gradient bound with separate bias and variance sums.",
+        "deps": [
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "lem-l-smoothness-descent-inequality",
+          "def-conditional-variance",
+          "lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula",
+          "thm-taking-out-what-is-known",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "def-axiom-of-choice",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), §§4.1 and 4.3",
+              "url": "https://leon.bottou.org/publications/pdf/tr-optml-2016.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-strong-convexity-implies-strong-monotonicity-of-gradient",
+        "kind": "lemma",
+        "title": "Strong convexity makes a differentiable gradient strongly monotone",
+        "statement": "If f is differentiable on an open convex neighborhood and its restriction to a convex set is μ-strongly convex in the strong-Jensen sense, then its gradient satisfies the μ-strong monotonicity inequality on that set.",
+        "deps": [
+          "def-strong-convex-composite-objective",
+          "thm-chain-rule-for-total-derivatives",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, §3.4.2",
+              "url": "https://arxiv.org/pdf/1405.4980"
+            },
+            {
+              "title": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), §4.2",
+              "url": "https://leon.bottou.org/publications/pdf/tr-optml-2016.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-stochastic-gradient-strong-convex-diminishing-step-rate",
+        "kind": "theorem",
+        "title": "Last-iterate SGD rate for smooth strongly convex objectives",
+        "statement": "For an unconstrained L-smooth μ-strongly convex f with ∇f(x*)=0 and uniformly bounded conditional second moment M², the specified diminishing steps give E||x_k−x*||²≤M²/(μ²k) and E[f(x_k)−f*]≤LM²/(2μ²k) for k≥1.",
+        "deps": [
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "def-strong-convex-composite-objective",
+          "lem-strong-convexity-implies-strong-monotonicity-of-gradient",
+          "lem-l-smoothness-descent-inequality",
+          "thm-taking-out-what-is-known",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "def-axiom-of-choice",
+          "def-euclidean-inner-product",
+          "thm-induction-principle",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), §4.2, Theorem 4.7",
+              "url": "https://leon.bottou.org/publications/pdf/tr-optml-2016.pdf"
+            },
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, §6.1, Theorem 6.2",
+              "url": "https://arxiv.org/pdf/1405.4980"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-projected-stochastic-gradient-update",
+        "kind": "definition",
+        "title": "Projected stochastic-gradient update",
+        "statement": "For a nonempty closed convex C in Euclidean space, define projected SGD by x_{k+1}=P_C(x_k−α_kG_k), using the unique Euclidean projection supplied by the proximal indicator interface.",
+        "deps": [
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "def-indicator-function-of-closed-convex-set",
+          "lem-prox-indicator-is-euclidean-projection",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, §§3.1 and 6.1",
+              "url": "https://arxiv.org/pdf/1405.4980"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-projected-stochastic-gradient-strong-convex-a-s-convergence",
+        "kind": "theorem",
+        "title": "Projected SGD converges almost surely on a strongly convex objective",
+        "statement": "If F=f+ι_C is μ-strongly convex, f has an attained minimizer on nonempty closed convex C, the projected oracle is conditionally unbiased with second moment at most M², and α_k≤1/(2μ), Σα_k=∞, Σα_k²<∞, then x_k converges almost surely to the minimizer.",
+        "deps": [
+          "def-projected-stochastic-gradient-update",
+          "def-indicator-function-of-closed-convex-set",
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "def-strong-convex-composite-objective",
+          "lem-robbins-siegmund-almost-supermartingale",
+          "lem-strong-convexity-implies-strong-monotonicity-of-gradient",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "lem-prox-indicator-is-euclidean-projection",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-taking-out-what-is-known",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "def-axiom-of-choice",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dimitri P. Bertsekas, Convex Optimization Algorithms, Appendix A, Proposition A.4.5",
+              "url": "https://web.mit.edu/dimitrib/www/Appendix_A_NEW_ALG.pdf"
+            },
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, §6.1",
+              "url": "https://arxiv.org/pdf/1405.4980"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-projected-stochastic-gradient-convex-average-bound",
+        "kind": "theorem",
+        "title": "Finite-time projected SGD bound for a convex objective",
+        "statement": "For convex differentiable f minimized on a closed convex set C of diameter D, an unbiased projected stochastic gradient with conditional second moment at most G² satisfies E[f(x̄_N)−f*]≤DG/√N when α=D/(G√N), with zero-diameter and zero-moment cases treated separately.",
+        "deps": [
+          "def-projected-stochastic-gradient-update",
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "lem-prox-indicator-is-euclidean-projection",
+          "thm-differentiable-convex-functions-and-gradient-inequality",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "thm-induction-principle",
+          "thm-taking-out-what-is-known",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "def-axiom-of-choice",
+          "def-euclidean-inner-product",
+          "def-conditional-variance",
+          "lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-dedekind-complete"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, §§3.1 and 6.1, Theorem 6.1",
+              "url": "https://arxiv.org/pdf/1405.4980"
+            },
+            {
+              "title": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), §4.1",
+              "url": "https://leon.bottou.org/publications/pdf/tr-optml-2016.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2413,
+    "id": "stochastic-approximation-and-stochastic-gradient-methods-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Stochastic approximation and stochastic gradient methods — Examples",
+    "companion": "stochastic-approximation-and-stochastic-gradient-methods",
+    "requires": [
+      "stochastic-approximation-and-stochastic-gradient-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-streaming-least-squares-single-sample-update",
+        "kind": "example",
+        "title": "One streaming least-squares SGD update",
+        "statement": "For a fair two-point observation model, the stochastic least-squares gradient is unbiased at zero, and one SGD update has a sample-dependent iterate with objective gap 1/8.",
+        "deps": [
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "def-filtration-and-filtered-probability-space",
+          "def-finite-probability-space-and-event",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-derivative",
+          "def-euclidean-inner-product",
+          "def-axiom-of-choice",
+          "def-conditional-variance"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-noisy-scalar-root-robbins-monro-convergence",
+        "kind": "example",
+        "title": "A bounded-noise Robbins–Monro scalar root",
+        "statement": "For drift h(x)=x and symmetric bounded noise, the steps α_k=(1/4)(k+2)^(−3/4) meet the square-summable, nonsummable conditions and the iterates converge almost surely to the root.",
+        "deps": [
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "thm-robbins-monro-strongly-monotone-root-convergence",
+          "thm-p-series-real-exponents",
+          "thm-taking-out-what-is-known",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "def-axiom-of-choice",
+          "def-euclidean-inner-product",
+          "thm-induction-principle",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-biased-simulator-gradient-stationarity-floor",
+        "kind": "example",
+        "title": "A biased simulator gradient has limiting squared gradient $b^2$",
+        "statement": "For f(x)=x²/2 and a constant additive gradient bias b, SGD with step 1/4 converges to −b and its average squared true gradient converges to b².",
+        "deps": [
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "thm-stochastic-gradient-biased-noise-floor",
+          "lem-geometric-sequence-null",
+          "def-axiom-of-choice",
+          "def-euclidean-inner-product",
+          "thm-induction-principle",
+          "def-derivative",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "def-conditional-variance"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      }
+    ]
+  }
+]

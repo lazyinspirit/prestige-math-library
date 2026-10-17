@@ -1,0 +1,34 @@
+--- items/thm-parabolic-backward-euler-error-and-reconstruction.md (before)
++++ items/thm-parabolic-backward-euler-error-and-reconstruction.md (proposed)
+@@ -64,8 +64,9 @@
+ bounded/coercive form, $f$, the semidiscrete trajectory $u_h$, a finite time
+ partition, and $U^0\in V_h$.
+ 
+-[F1] Backward Euler uses interval-average forms and load; with the algorithm's
+-load $g=f$, its step equation is the displayed variational equation
++[F1] Instantiate backward Euler with the algorithm's form $a_h:=a$ and
++load $g=f$. It uses the corresponding interval-average forms and load, and
++its step equation is the displayed variational equation
+ ([[alg-parabolic-backward-euler-averaged-forms]]).
+ 
+ [F2] The exact finite-dimensional semidiscrete trajectory exists in
+@@ -83,7 +84,7 @@
+ 
+ 1.1 Fix a finite basis of $V_h$ and write the $j$th variational step as a square linear system for the coefficients of $U^j$. If its homogeneous system has solution $x\in V_h$, testing by $x$ gives $\tau_j^{-1}\|x\|_H^2+\bar a_j(x,x)=0$. Coercivity [F4] implies $x=0$. Thus the square matrix has zero kernel and is invertible, proving a unique solution at each step without a choice axiom. [F1, F4, given, construct]
+ 
+-1.2 Integrate the semidiscrete equation [F2] over $I_j$ and subtract it from the backward Euler step. With $e^j=U^j-u_h(t_j)$, this gives $\tau_j^{-1}(e^j-e^{j-1},v_h)_H+\bar a_j(e^j,v_h)=r_j(v_h),$ where $r_j(v_h)=\tau_j^{-1}\int_{I_j} a(t;u_h(t)-u_h(t_j),v_h)\,dt.$ The fundamental theorem of calculus in finite-dimensional $V_h$ yields $\|r_j\|_{V_h^*}\le M\int_{I_j}\|u_h'(s)\|_{V_h}ds$. Cauchy–Schwarz gives $\sum_j\tau_j\|r_j\|_{V_h^*}^2\le M^2\tau_{\max}^2\|u_h'\|_{L^2(V_h)}^2$. [F1, F2, F4, given, algebra]
++1.2 With the instantiation in [F1], $\bar a_j(v_h,w_h)=\tau_j^{-1}\int_{I_j}a(t;v_h,w_h)\,dt$ for all $v_h,w_h\in V_h$; changing the form on its common null set does not change this average. Integrate the semidiscrete equation [F2] over $I_j$ and subtract it from the backward Euler step. With $e^j=U^j-u_h(t_j)$, this gives $\tau_j^{-1}(e^j-e^{j-1},v_h)_H+\bar a_j(e^j,v_h)=r_j(v_h),$ where $r_j(v_h)=\tau_j^{-1}\int_{I_j} a(t;u_h(t)-u_h(t_j),v_h)\,dt.$ The fundamental theorem of calculus in finite-dimensional $V_h$ yields $\|r_j\|_{V_h^*}\le M\int_{I_j}\|u_h'(s)\|_{V_h}ds$. Cauchy–Schwarz gives $\sum_j\tau_j\|r_j\|_{V_h^*}^2\le M^2\tau_{\max}^2\|u_h'\|_{L^2(V_h)}^2$. [F1, F2, F4, given, algebra]
+ 
+ 2.1 Test the step equation with $U^j$, multiply by $2\tau_j$, use [F3], and bound $2\bar f_j(U^j)$ by $\alpha\|U^j\|_V^2+\alpha^{-1}\|\bar f_j\|_{V_h^*}^2$. Summing and applying Jensen's inequality gives, for every $m$, $\|U^m\|_H^2+\sum_{j=1}^m\|U^j-U^{j-1}\|_H^2+ \alpha\sum_{j=1}^m\tau_j\|U^j\|_V^2\le C_U.$ Taking the maximum of the endpoint term over $m$ proves the maximum bound; setting $m=N$ proves the cumulative bound. [F1, F3, F4, step 1.1, algebra]
+ 
+--- items/alg-parabolic-backward-euler-averaged-forms.md (before)
++++ items/alg-parabolic-backward-euler-averaged-forms.md (proposed)
+@@ -39,7 +39,7 @@
+ $$|a_h(t;v_h,w_h)|\le M\|v_h\|_V\|w_h\|_V,\qquad
+ a_h(t;v_h,v_h)\ge\alpha\|v_h\|_V^2\qquad(v_h,w_h\in V_h,\ t\in(0,T)\setminus E).$$
+ The same exceptional set and constants apply to all pairs. Input a strongly
+-measurable load $g\in L^2(0,T;V_h^*)$ and an initial value $U^0\in V_h. A
++measurable load $g\in L^2(0,T;V_h^*)$ and an initial value $U^0\in V_h$. A
+ finite-element load $f\in L^2(0,T;V^*)$ is supplied as its restriction
+ $g(t)=f(t)|_{V_h}$. For $I_j=(t_{j-1},t_j)$ and $\tau_j=t_j-t_{j-1}$,
+ form the scalar bilinear and Bochner load averages

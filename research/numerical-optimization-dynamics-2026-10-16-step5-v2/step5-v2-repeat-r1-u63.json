@@ -1,0 +1,182 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "63",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "cbc43a69ecdba5fe703f3226e6c30eb66ee64e9e35fc6a585b3cbd3b196ce02c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F3 claimed bounded-solution continuation, but neither cited Statement supplied it. Steps 1.1 and 2.2 therefore lacked their global-existence premise. Repaired F3 using the published fixed-interval linear-matrix ODE lemma, with an explicit block augmentation for continuous forcing and Picard-Lindelof uniqueness.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-separated-simple-floquet-multiplier-perturbation-bound",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "5db9ee0401358ba70109c3332e0804f66a6e29926d8ee7716310608f46d29a59",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The estimate concerns eigenvalues of A+E. A being monodromy does not make those eigenvalues Floquet multipliers: A=diag(1,1/4), E=diag(0,-1/4), lambda0=1/4, rho=delta=1/4 and R=2 satisfy q=kappa=1 and Rq^2 delta=1/2<1, yet lambda=0 belongs to D and cannot be a monodromy eigenvalue. The Statement and step 4.1 now correctly require A+E to be monodromy for the Floquet interpretation. The general matrix enclosure is preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse",
+      "disposition": "repaired",
+      "post_sha256": "32fa4251b3087567fc4637bcb96371070622c33b440cdc39e2d94b25a4354be3",
+      "review_context_sha256": "a8a10d79ecbf5ccec058eadad5e3a359e529c1b29f0be6b4d7419096c6427890",
+      "reason": "Checked the fixed-interval matrix supplier including positive length, endpoint derivatives and compact-extension proof. The first column of the block system [[A,g],[0,0]] with initial last entry 1 supplies p globally; zero forcing supplies U. Euclidean Gronwall gives ||U(t,s)||<=exp(a0(t-s)) and ||p||<=E||g||. The exact period column gives B1+B2U(1,0)=J; solving for the initial value and adding the derivative norm yields exactly the stated K_L. Statement unchanged; no AC or new prerequisite item. Updated assigned manifest dependency and contract citation/derivations. This is repair verification, not independent review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-separated-simple-floquet-multiplier-perturbation-bound",
+      "disposition": "repaired",
+      "post_sha256": "09dc6f76ba1cf8226ce41700ee9e64c4d746b99932ac2eb164b46dd925853ff8",
+      "review_context_sha256": "64fd846df33342e6eaa5c7d00d556f795f1ea45a8dc992b4db83f2a9589e2c58",
+      "reason": "Checked W invariance and the direct-sum projection Q, hence q>=1 for n>=2. Resolvent projection excludes zero v coefficient because Rq delta<1, and yields ||y||<=Rq delta/(1-Rq delta). Applying w* yields the stated bound with its weaker positive denominator. The derivative interpretation is now explicitly conditional on differentiable normalized eigenpair branches, matching its actual supplier; no eigenbranch is needed for the finite estimate. Corrected the Floquet clause to the exact perturbed matrix A+E and mirrored the repaired step in the contract. Direct algorithm use remains sound under the retained hypotheses; no existence/count assertion is added. This verifies my repair and does not claim independent review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-floquet-multiplier-cluster-certifier"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "locus": "facts-block",
+      "affected_use": "F3 and proof steps 1.1 and 2.2 claim global continuation solely from local existence and maximal existence/uniqueness.",
+      "reason": "F3 claimed bounded-solution continuation, but neither cited Statement supplied it. Steps 1.1 and 2.2 therefore lacked their global-existence premise. Repaired F3 using the published fixed-interval linear-matrix ODE lemma, with an explicit block augmentation for continuous forcing and Picard-Lindelof uniqueness.",
+      "repair": "Use the existing global matrix-ODE supplier, explicitly homogenize affine forcing in F3, and obtain full-interval solutions before estimating them. Statement and K_L unchanged.",
+      "post_sha256": "32fa4251b3087567fc4637bcb96371070622c33b440cdc39e2d94b25a4354be3",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-separated-simple-floquet-multiplier-perturbation-bound",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "affected_use": "The Statement and step 4.1 identify an eigenvalue of A+E as a Floquet multiplier solely because A is monodromy.",
+      "reason": "The estimate concerns eigenvalues of A+E. A being monodromy does not make those eigenvalues Floquet multipliers: A=diag(1,1/4), E=diag(0,-1/4), lambda0=1/4, rho=delta=1/4 and R=2 satisfy q=kappa=1 and Rq^2 delta=1/2<1, yet lambda=0 belongs to D and cannot be a monodromy eigenvalue. The Statement and step 4.1 now correctly require A+E to be monodromy for the Floquet interpretation. The general matrix enclosure is preserved.",
+      "repair": "Require A+E to be monodromy in Statement and step 4.1. Preserve the matrix perturbation bound and qualify the derivative interpretation to match the differentiable-eigenpair interface.",
+      "post_sha256": "09dc6f76ba1cf8226ce41700ee9e64c4d746b99932ac2eb164b46dd925853ff8",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "summary": "Both exact rejected tuples are confirmed fatal and repaired. No new item or independent review claimed. Review hashes were captured immediately after each completed item review. No judge stamps, shared ledgers, certificates or round state were written.",
+    "statement_comparison": "Direct section comparison: the BVP Statement is unchanged; the multiplier Statement changes only the quoted Floquet interpretation. All quantitative claims and separation hypotheses are retained.",
+    "source_evidence": [
+      {
+        "path": "items/lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval.md",
+        "locator": "Statement and complete proof, especially coefficient extension in 1.1 and compact continuation in 3.1",
+        "establishes": "Global real linear matrix IVPs for every continuous coefficient on [0,1], including endpoint derivatives."
+      },
+      {
+        "path": "items/thm-picard-lindelof-local-existence-and-uniqueness.md",
+        "locator": "Statement",
+        "establishes": "Vector IVP uniqueness; constant extension permits its open-domain hypothesis at endpoints."
+      },
+      {
+        "path": "items/thm-existence-and-uniqueness-of-a-maximal-ode-solution.md",
+        "locator": "Statement and proof",
+        "establishes": "Maximal existence/uniqueness without the bounded-continuation assertion attributed to it."
+      },
+      {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-63.proof-contracts.json",
+        "locator": "Assigned entries and exact supplier Statement/Definition quotations",
+        "establishes": "BVP spaces/norms, bordered inverse, flow variation, integration and Gronwall; eigenvector normalization, Floquet and shooting-jet definitions."
+      },
+      {
+        "path": "items/thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x.md",
+        "locator": "Statement and complete two-step proof",
+        "establishes": "Derivative formula assuming differentiable normalized compatible eigenpair branches; the finite estimate uses direct norm inequalities."
+      }
+    ],
+    "counterexample_monodromy": "A=diag(1,1/4) is realized in tangent/radial coordinates at a unit-circle orbit of the smooth annular polar field dr/dt=-(log 4)(r-1), dtheta/dt=2*pi, of least period 1. E=diag(0,-1/4) makes A+E singular. The target lambda0=1/4 and rho=delta=1/4 have complementary resolvent bound R=2. Thus the rejected implication admits the eigenvalue zero, which cannot be a monodromy eigenvalue.",
+    "consumer_accounting": "Current item/library dependency and reference searches give one direct item consumer, recorded in downstream and consumer_reviews. Its Definition remains sound and unchanged, so no further hop is required. The owning page summary remains sound. No published or outside-frontier direct consumer was found; the published-consumer ledger needs no update or maintenance referral.",
+    "metadata": "Under the shared-write lock, updated only the assigned BVP dependency mirror in the batch-63 manifest and the assigned proof-contract citations/derivations. The multiplier derivation mirror was updated in a separate locked critical section. Focused strict contract checks passed before each lock release. Prior independent risk-review records were preserved.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse.md items/lem-separated-simple-floquet-multiplier-perturbation-bound.md",
+        "exit_code": 0,
+        "result": "2 checked, 0 failing; both direct proofs PASS."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse.md items/lem-separated-simple-floquet-multiplier-perturbation-bound.md --json",
+        "exit_code": 0,
+        "result": "2 checked; errors: []; warnings: []."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-63.proof-contracts.json --strict --items lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse,lem-separated-simple-floquet-multiplier-perturbation-bound",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 2/2 items checked."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse.md items/lem-separated-simple-floquet-multiplier-perturbation-bound.md",
+        "exit_code": 0,
+        "result": "2 items, 9 steps, 0 defects; run once after all item edits."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection, independent rejudgment and ordinary frontier consumer routing; this report grants no certification."
+  },
+  "consumer_reviews": [
+    {
+      "id": "alg-floquet-multiplier-cluster-certifier",
+      "supplier": "lem-separated-simple-floquet-multiplier-perturbation-bound",
+      "path": "items/alg-floquet-multiplier-cluster-certifier.md",
+      "affected_use": "For a simple separated multiplier, an optional left/right-conditioned finite enclosure may also be reported using [[lem-separated-simple-floquet-multiplier-perturbation-bound]].",
+      "disposition": "unaffected",
+      "reason": "The optional enclosure invokes the lemma with all its hypotheses. For an exact monodromy M enclosed by a jet, take A as the reference matrix and E=M-A; then A+E=M is monodromy. For arbitrary matrix families the general eigenvalue bound remains valid, without asserting a Floquet interpretation. The algorithm does not supply a Euclidean bound from its infinity-norm input implicitly: the optional lemma use must meet its stated Euclidean norm and complementary-resolvent hypotheses. Its mandatory contour count and Definition are unchanged; no further hop is required.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "interface_changes": [
+    {
+      "id": "lem-separated-simple-floquet-multiplier-perturbation-bound",
+      "section": "Statement",
+      "before": "When $A$ is a monodromy matrix, this bounds the corresponding Floquet multiplier.",
+      "after": "When $A+E$ is a monodromy matrix, this bounds its Floquet multipliers lying in $D$; $A$ may be a numerical reference matrix.",
+      "before_statement_sha256": "f6498e663e0e7207b44899ce2d53378ecea6f29f297a994193ba673a7b303b61",
+      "after_statement_sha256": "a9d9159d39d795f57c855a3405ca365186e2d20304592ad45743724b98aec1de",
+      "direct_consumers": [
+        "alg-floquet-multiplier-cluster-certifier"
+      ],
+      "page_use": {
+        "path": "library/numerical-differential-equations-and-stochastic-dynamics/periodic-orbit-shooting-collocation-and-floquet-error.md",
+        "excerpt": "A left/right-conditioned finite bound handles an isolated simple multiplier.",
+        "disposition": "unaffected",
+        "reason": "The summary describes the conditional finite bound and asserts neither that a numerical reference matrix is monodromy nor that arbitrary perturbed eigenvalues are Floquet multipliers."
+      }
+    }
+  ]
+}

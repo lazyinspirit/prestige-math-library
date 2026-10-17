@@ -1,0 +1,316 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-nonlinear-conjugate-gradient-methods",
+    "supplier": "alg-bracketing-zoom-strong-wolfe-search",
+    "batch": "58",
+    "status": "verified",
+    "required_interface": "Finite E expansion and Z zoom trial limits; return a positive step only after both strong-Wolfe inequalities are checked, otherwise return invalid-direction, domain-exit, or evaluation-budget-exhausted.",
+    "supplier_excerpts": [
+      {
+        "item": "alg-bracketing-zoom-strong-wolfe-search",
+        "section": "Definition",
+        "quote": "The procedure returns a step only after both strong Wolfe inequalities have been checked."
+      }
+    ],
+    "evidence": "Read the complete current procedure, including endpoint-reversal handling, domain checks before trial evaluation, and explicit finite failure exits. The consuming algorithm passes the declared E,Z budgets and propagates each supplier failure as search-failure."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-nonlinear-conjugate-gradient-methods",
+    "supplier": "def-wolfe-and-strong-wolfe-conditions",
+    "batch": "58",
+    "status": "verified",
+    "required_interface": "Use the definition of strong Wolfe and the descent-angle convention with 0<c1<c2<1/2.",
+    "supplier_excerpts": [
+      {
+        "item": "def-wolfe-and-strong-wolfe-conditions",
+        "section": "Definition",
+        "quote": "Every strong Wolfe step is a Wolfe step"
+      }
+    ],
+    "evidence": "Read the current definition and its chain-rule dependencies. The algorithm calls the supplier only with a direction that passed its local descent check and requires a returned strong-Wolfe step."
+  },
+  {
+    "kind": "item",
+    "consumer": "cex-raw-prplus-loses-descent-and-safeguard-restarts",
+    "supplier": "def-wolfe-and-strong-wolfe-conditions",
+    "consumer_batch": "70",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "The actual example/counterexample chooses 0<c1<c2<1/2 and a strict initial descent direction, then explicitly verifies Armijo and absolute directional-derivative curvature. Only this strong-Wolfe test is imported; neither PR+ descent nor convergence follows from the source. The raw-PR+ ascent counterexample remains intact.",
+    "inspected_paths": [
+      "items/def-wolfe-and-strong-wolfe-conditions.md#Definition",
+      "items/cex-raw-prplus-loses-descent-and-safeguard-restarts.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the feasible ray\n$T_{x,p}:=\\{t\\ge0:x+tp\\in D\\}$ and, for $t\\in T_{x,p}$,\n$\\phi(t):=f(x+tp)$. Wherever $t$ is an interior point of $T_{x,p}$,\nthe chain rule gives\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality ensures $0<\\cos\\theta\\le1$.",
+    "consumer_use_excerpts": [
+      "**Given:** The raw PR+ coefficient and safeguard in [[alg-nonlinear-conjugate-gradient-methods]] and the strong Wolfe conditions of [[def-wolfe-and-strong-wolfe-conditions]].",
+      "[F2] [[def-wolfe-and-strong-wolfe-conditions]]: a strong Wolfe step satisfies $\\phi(t)\\le\\phi(0)+c_1t\\phi'(0)$ and $|\\phi'(t)|\\le c_2|\\phi'(0)|$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[307]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-70.pages.json#deps",
+      "items/cex-raw-prplus-loses-descent-and-safeguard-restarts.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/19"
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-rosenbrock-fr-prplus-trace",
+    "supplier": "def-wolfe-and-strong-wolfe-conditions",
+    "consumer_batch": "70",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "The actual example/counterexample chooses 0<c1<c2<1/2 and a strict initial descent direction, then explicitly verifies Armijo and absolute directional-derivative curvature. Only this strong-Wolfe test is imported; neither PR+ descent nor convergence follows from the source. The raw-PR+ ascent counterexample remains intact.",
+    "inspected_paths": [
+      "items/def-wolfe-and-strong-wolfe-conditions.md#Definition",
+      "items/ex-rosenbrock-fr-prplus-trace.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the feasible ray\n$T_{x,p}:=\\{t\\ge0:x+tp\\in D\\}$ and, for $t\\in T_{x,p}$,\n$\\phi(t):=f(x+tp)$. Wherever $t$ is an interior point of $T_{x,p}$,\nthe chain rule gives\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality ensures $0<\\cos\\theta\\le1$.",
+    "consumer_use_excerpts": [
+      "[F2] [[def-wolfe-and-strong-wolfe-conditions]]: a strong Wolfe step satisfies Armijo decrease and $|\\phi'(t)|\\le c_2|\\phi'(0)|$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[306]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-70.pages.json#deps",
+      "items/ex-rosenbrock-fr-prplus-trace.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/18"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-fr-descent-and-direction-growth-bound",
+    "supplier": "def-wolfe-and-strong-wolfe-conditions",
+    "batch": "58",
+    "status": "verified",
+    "required_interface": "Strong Wolfe curvature gives |g_k^T d_{k-1}| <= c2 |g_{k-1}^T d_{k-1}| with c2<1/2.",
+    "supplier_excerpts": [
+      {
+        "item": "def-wolfe-and-strong-wolfe-conditions",
+        "section": "Definition",
+        "quote": "It is a **strong Wolfe step** when it satisfies the first inequality"
+      }
+    ],
+    "evidence": "The lemma substitutes the supplier curvature inequality at each accepted step; its own induction proves the normalized FR slope and direction-growth bounds."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-safeguarded-pr-plus-uniform-angle",
+    "supplier": "def-wolfe-and-strong-wolfe-conditions",
+    "batch": "58",
+    "status": "verified",
+    "required_interface": "Use the angle convention cos(theta)=-g^T d/(||g|| ||d||) for a descent direction.",
+    "supplier_excerpts": [
+      {
+        "item": "def-wolfe-and-strong-wolfe-conditions",
+        "section": "Definition",
+        "quote": "For a descent direction define its **descent angle**"
+      }
+    ],
+    "evidence": "The local lemma checks kept and reset directions separately against this exact convention; no PR+ sufficient-descent result is imported."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe",
+    "supplier": "def-wolfe-and-strong-wolfe-conditions",
+    "batch": "58",
+    "status": "verified",
+    "required_interface": "A strong-Wolfe step is a Wolfe step under the supplier’s sign convention.",
+    "supplier_excerpts": [
+      {
+        "item": "def-wolfe-and-strong-wolfe-conditions",
+        "section": "Definition",
+        "quote": "Every strong Wolfe step is a Wolfe step"
+      }
+    ],
+    "evidence": "The local theorem uses this implication to invoke the exact Wolfe hypothesis of the Zoutendijk supplier."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe",
+    "supplier": "thm-zoutendijk-summability-for-wolfe-steps",
+    "batch": "58",
+    "status": "verified",
+    "required_interface": "Feasible Wolfe steps, objective bounded below on the initial sublevel set, and an L-Lipschitz gradient on a neighborhood containing all trial segments imply a finite angle-weighted gradient-square series.",
+    "supplier_excerpts": [
+      {
+        "item": "thm-zoutendijk-summability-for-wolfe-steps",
+        "section": "Statement",
+        "quote": "Then\n$$\n\\sum_{k=0}^{\\infty}\\cos^2\\theta_k\\,\\|\\nabla f(x_k)\\|_2^2<\\infty.\n$$"
+      }
+    ],
+    "evidence": "Read the current theorem statement and full proof. The consuming theorem repeats the bounded-below, segment-wise Lipschitz, feasibility, descent and Wolfe hypotheses and uses only the resulting series convergence."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-nonlinear-cg-finite-budget-terminates",
+    "supplier": "alg-bracketing-zoom-strong-wolfe-search",
+    "batch": "58",
+    "status": "verified",
+    "required_interface": "Each search call uses at most E expansion plus Z zoom trials and returns a checked step or a finite failure status.",
+    "supplier_excerpts": [
+      {
+        "item": "alg-bracketing-zoom-strong-wolfe-search",
+        "section": "Definition",
+        "quote": "For at most $E$ expansion trials, in order:"
+      },
+      {
+        "item": "alg-bracketing-zoom-strong-wolfe-search",
+        "section": "Definition",
+        "quote": "For at most $Z$ zoom trials, in order:"
+      }
+    ],
+    "evidence": "Read the bounded loops and all terminal branches; the finite theorem multiplies their E+Z trial cap by at most K outer calls and counts outer-iterate gradients separately from trial derivatives."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-safeguarded-pr-plus-gradient-norms-converge",
+    "supplier": "cor-uniform-descent-angle-implies-gradient-vanishing",
+    "batch": "58",
+    "status": "verified",
+    "required_interface": "Under the Zoutendijk hypotheses, Wolfe steps plus a uniform positive angle imply ||grad f(x_k)|| -> 0.",
+    "supplier_excerpts": [
+      {
+        "item": "cor-uniform-descent-angle-implies-gradient-vanishing",
+        "section": "Statement",
+        "quote": "This is convergence of gradient norms to zero; it does not assert convergence of $(x_k)$ or that a limit point is a minimizer."
+      }
+    ],
+    "evidence": "The local theorem carries the supplier’s full smoothness and lower-bound assumptions and supplies a uniform angle from its own safeguard lemma."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-safeguarded-pr-plus-gradient-norms-converge",
+    "supplier": "def-wolfe-and-strong-wolfe-conditions",
+    "batch": "58",
+    "status": "verified",
+    "required_interface": "Strong Wolfe implies Wolfe.",
+    "supplier_excerpts": [
+      {
+        "item": "def-wolfe-and-strong-wolfe-conditions",
+        "section": "Definition",
+        "quote": "Every strong Wolfe step is a Wolfe step"
+      }
+    ],
+    "evidence": "The local theorem needs Wolfe steps to apply the supplied uniform-angle convergence corollary."
+  },
+  {
+    "kind": "page",
+    "consumer": "nonlinear-conjugate-gradient-methods",
+    "supplier": "krylov-methods-and-lanczos-convergence",
+    "batch": "34",
+    "status": "verified",
+    "supplier_item_ids": [],
+    "required_interface": "Page-level linear-Krylov context required by the controlling OPT14 plan. No new Batch-34 finite-precision, Lanczos, or sparse-cost result is a logical premise of this pair; exact linear-CG recurrence, orthogonality, and denominator positivity are imported from the published canonical CG items named in the local theorem deps.",
+    "supplier_excerpts": [
+      {
+        "item": "krylov-methods-and-lanczos-convergence",
+        "section": "page summary",
+        "quote": "The finite-precision items use the declared real operationwise model with successful normal-range operations. They give explicit local Arnoldi and residual-gap terms plus an a posteriori basis-orthogonality recurrence."
+      }
+    ],
+    "evidence": "Inspected the current draft A page and companion. Its new CG item is a finite-precision recursive-residual-gap result; the other new results concern Lanczos, Arnoldi, and sparse GMRES costs. They do not widen OPT14’s exact-arithmetic SPD equivalence. The directly used canonical items def-conjugate-gradient-recurrence, thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate, prop-conjugate-gradient-denominators-are-positive-before-convergence, and def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix were read at their current published homes."
+  },
+  {
+    "kind": "page",
+    "consumer": "nonlinear-conjugate-gradient-methods",
+    "supplier": "nonconvex-line-search-and-inexact-newton-methods",
+    "batch": "58",
+    "status": "verified",
+    "supplier_item_ids": [
+      "def-wolfe-and-strong-wolfe-conditions",
+      "alg-bracketing-zoom-strong-wolfe-search",
+      "lem-wolfe-step-lower-bound-from-the-descent-angle",
+      "thm-zoutendijk-summability-for-wolfe-steps",
+      "cor-uniform-descent-angle-implies-gradient-vanishing"
+    ],
+    "required_interface": "Use the exact strong-Wolfe inequalities and angle convention; bounded search returns a step only after both inequalities are checked and otherwise has explicit finite failure exits; Zoutendijk summability requires feasible Wolfe steps, a lower bound on the initial sublevel set, and a Lipschitz gradient on a neighborhood containing every trial segment; a uniform positive angle then implies gradient norms tend to zero.",
+    "supplier_excerpts": [
+      {
+        "item": "def-wolfe-and-strong-wolfe-conditions",
+        "section": "Definition",
+        "quote": "Every strong Wolfe step is a Wolfe step"
+      },
+      {
+        "item": "alg-bracketing-zoom-strong-wolfe-search",
+        "section": "Definition",
+        "quote": "The procedure returns a step only after both strong Wolfe inequalities have been checked. Finite budgets and domain exits may return failure even when a strong Wolfe step exists; no convergence claim follows from the procedure alone."
+      },
+      {
+        "item": "lem-wolfe-step-lower-bound-from-the-descent-angle",
+        "section": "Statement",
+        "quote": "If $t$ satisfies the Wolfe conditions of [[def-wolfe-and-strong-wolfe-conditions]] with $0<c_1<c_2<1/2$, then its descent angle $\\theta$ satisfies\n$$\nt\\ge\\frac{1-c_2}{L}\\frac{\\cos\\theta\\,\\|g\\|_2}{\\|p\\|_2}.\n$$"
+      },
+      {
+        "item": "thm-zoutendijk-summability-for-wolfe-steps",
+        "section": "Statement",
+        "quote": "Then\n$$\n\\sum_{k=0}^{\\infty}\\cos^2\\theta_k\\,\\|\\nabla f(x_k)\\|_2^2<\\infty.\n$$"
+      },
+      {
+        "item": "cor-uniform-descent-angle-implies-gradient-vanishing",
+        "section": "Statement",
+        "quote": "This is convergence of gradient norms to zero; it does not assert convergence of $(x_k)$ or that a limit point is a minimizer."
+      }
+    ],
+    "evidence": "Inspected all listed current supplier statements and the complete local proofs of the line-search lower bound, Zoutendijk summability, and uniform-angle corollary. The exact hypotheses used by OPT14 are retained. These current draft suppliers provide interface evidence only; no independent acceptance is claimed."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-rosenbrock-fr-prplus-trace",
+    "supplier": "alg-bracketing-zoom-strong-wolfe-search",
+    "status": "verified",
+    "evidence": "The same58/70 owner completed the actual bracket/zoom trace repair: the unit trial and nine dyadic midpoint trials fail, the tenth midpoint 1/1024 succeeds, and the ascending PR+ candidate is replaced by the actual negative-gradient restart. This is concrete finite-search execution evidence, retaining the separate valid manually specified 1/1000 comparison.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-root-step2-ledger-registry.json",
+    "receipt_refs": [
+      {
+        "file": "research/numerical-optimization-dynamics-2026-10-16-owner-step2-b70/applied-r1/consumer-dispositions-final.json",
+        "pointer": "/items/13"
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg",
+    "supplier": "def-wolfe-and-strong-wolfe-conditions",
+    "status": "verified",
+    "evidence": "Existing70 same-owner final applied focused-repair disposition checks the exact positive quadratic minimizer, zero line derivative and change(t/2)*gTd. With c1<1/2 this discharges the actual Wolfe/Armijo acceptance requirement at each induction step; SPD/exact arithmetic/no-restart qualifications remain. The supplier-refinement field records the actual typed Wolfe premises rather than an automatic acceptance of any exact line minimizer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-root-step2-ledger-registry.json",
+    "receipt_refs": [
+      {
+        "file": "research/numerical-optimization-dynamics-2026-10-16-owner-step2-b70/applied-r1/consumer-dispositions-final.json",
+        "pointer": "/items/30"
+      },
+      {
+        "file": "research/numerical-optimization-dynamics-2026-10-16-batch-70.proof-contracts.json",
+        "pointer": "/contracts/thm-fr-and-raw-prplus-exact-line-search-match-linear-cg/citations/5"
+      },
+      {
+        "file": "research/numerical-optimization-dynamics-2026-10-16-batch-70.proof-contracts.json",
+        "pointer": "/contracts/thm-fr-and-raw-prplus-exact-line-search-match-linear-cg/derivations/3"
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-nonlinear-cg-finite-budget-terminates",
+    "supplier": "lem-bracketing-zoom-finite-budget-checked-return",
+    "status": "verified",
+    "evidence": "Final focused same-owner closure retains applied replacement of algorithm-only count/checked-return facts by the new proved bracketing/zoom search lemma. The nonlinear-CG finite-loop theorem uses that proved finite-search interface; the algorithm convergence-prose clarification changes no finite-loop premise or count.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-root-step2-ledger-registry.json",
+    "receipt_refs": [
+      {
+        "file": "research/numerical-optimization-dynamics-2026-10-16-owner-step2-b70/applied-r1/consumer-dispositions-final.json",
+        "pointer": "/items/35"
+      }
+    ]
+  }
+]

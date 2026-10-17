@@ -1,0 +1,74 @@
+[
+  {
+    "kind": "page",
+    "consumer": "differential-algebraic-equations-and-consistent-initialization",
+    "supplier": "nonlinear-equations-and-newton-methods",
+    "status": "verified",
+    "supplier_batch": "3",
+    "supplier_item_ids": [
+      "alg-finite-budget-newton-for-vector-residuals",
+      "alg-newton-correction-for-vector-residuals"
+    ],
+    "required_interface": "The finite Newton procedure checks the current residual before its correction budget, makes at most B corrections and B+1 residual evaluations, returns the last valid iterate with a root/singular-Jacobian/invalid-trial/budget status, and makes no arbitrary-start convergence or forward-error claim. A correction solves J s=-r when J is invertible.",
+    "affected_claims": [
+      "alg-index-one-dae-consistent-initialization",
+      "alg-index-one-dae-backward-euler-stepper",
+      "alg-index-one-dae-bdf2-stepper",
+      "thm-index-one-dae-finite-budget-solvers-terminate"
+    ],
+    "evidence": "Read the complete current batch-3 Definitions of alg-finite-budget-newton-for-vector-residuals and alg-newton-correction-for-vector-residuals. The DAE wrappers retain their residual-first budget/status semantics and exact block correction; no convergence theorem is imported."
+  },
+  {
+    "kind": "page",
+    "consumer": "differential-algebraic-equations-and-consistent-initialization",
+    "supplier": "implicit-stiff-time-stepping-and-algebraic-error",
+    "status": "verified",
+    "supplier_batch": "65",
+    "supplier_item_ids": [
+      "def-backward-euler-step-equation",
+      "def-implicit-residual-and-algebraic-error-units"
+    ],
+    "required_interface": "Backward Euler solves the endpoint equation z-y-h f(t+h,z)=0. Its update residual is in state units and the derivative residual is the update residual divided by positive h. A residual is not a forward-error estimate without a separate inverse/stability bound; the endpoint definition itself grants no root existence or uniqueness.",
+    "affected_claims": [
+      "alg-index-one-dae-backward-euler-stepper",
+      "alg-index-one-dae-bdf2-stepper",
+      "thm-index-one-dae-backward-euler-first-order-with-residuals",
+      "ex-index-one-circuit-consistent-initialization-and-be-step"
+    ],
+    "evidence": "Read the complete Definitions of def-backward-euler-step-equation and def-implicit-residual-and-algebraic-error-units. The DAE carriers use the same update/derivative units and enforce g=0 separately; their local residual-to-state estimate is proved in batch 75."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-index-one-dae-bdf2-stepper",
+    "supplier": "linear-multistep-methods-and-dahlquist-equivalence",
+    "status": "verified",
+    "supplier_batch": "36",
+    "supplier_item_ids": [
+      "alg-variable-step-bdf2-with-selected-implicit-branch",
+      "lem-variable-step-bdf2-interpolation-and-local-defect"
+    ],
+    "required_interface": "For positive adjacent steps, the selected-branch algorithm uses the quadratic-interpolation BDF2 coefficients and requires exactly one root in a prescribed ball for its exact-root completion claim. The interpolation lemma gives an unscaled O(h^3) exact residual on a compact positive ratio interval; the constant-step specialization has ratio one. Batch 75's finite Newton status does not certify that exact selected root.",
+    "affected_claims": [
+      "alg-index-one-dae-bdf2-stepper",
+      "lem-index-one-dae-bdf2-local-branch",
+      "thm-index-one-dae-bdf2-second-order-with-residuals"
+    ],
+    "evidence": "Read both actual batch-36 bodies and their complete arguments. Batch 75 uses the ratio-one coefficient/local-defect interface and separately proves the DAE branch, residual perturbation, and error recurrence."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-index-one-dae-backward-euler-first-order-with-residuals",
+    "supplier": "global-ode-and-density-error",
+    "status": "verified",
+    "supplier_batch": "28",
+    "supplier_item_ids": [
+      "lem-discrete-one-step-error-recurrence-bound"
+    ],
+    "required_interface": "For h=T/N>0, a nonnegative sequence with e0<=C0 h^p and e_(n+1)<=(1+Lh)e_n+C h^(p+1) has a finite-interval O(h^p) bound, including L=0. Batch 75 applies p=1 to BE and p=2 to its BDF2 weighted-error recurrence.",
+    "affected_claims": [
+      "thm-index-one-dae-backward-euler-first-order-with-residuals",
+      "thm-index-one-dae-bdf2-second-order-with-residuals"
+    ],
+    "evidence": "Read the complete current batch-28 lemma Statement and Proof. The BE theorem establishes the recurrence locally; the BDF2 theorem first derives its weighted recurrence and then applies the supplier to N-1 steps over interval (N-1)h."
+  }
+]

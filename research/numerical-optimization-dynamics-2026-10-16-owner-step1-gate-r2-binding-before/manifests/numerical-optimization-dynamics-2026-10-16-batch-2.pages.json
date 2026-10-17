@@ -1,0 +1,202 @@
+[
+  {
+    "order": 2288,
+    "id": "sparse-matrix-models-and-kernel-costs",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Sparse matrix models and kernel costs",
+    "companion": "sparse-matrix-models-and-kernel-costs-examples",
+    "requires": [
+      "direct-matrix-factorisations-lu-cholesky-and-qr",
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "krylov-subspaces-arnoldi-and-gmres"
+    ],
+    "items": [
+      {
+        "id": "def-csr-matrix-with-stored-entry-semantics",
+        "kind": "definition",
+        "title": "Compressed sparse row matrices with stored-entry semantics",
+        "statement": "Define the zero-based CSR arrays for an m by n matrix, including repeated columns, explicit zeros, empty rows, and the represented matrix; s counts stored entries and equals nnz only in the canonical case.",
+        "strategy": "Specify the dimensions and array invariants, then define each matrix entry by the finite sum of stored values at that coordinate.",
+        "deps": [
+          "def-field",
+          "def-matrix-space",
+          "def-finite-sum-in-a-commutative-monoid"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-symmetric-structural-elimination-graph-and-ordering",
+        "kind": "definition",
+        "title": "Structural graphs and ordered symmetric elimination",
+        "statement": "Define the simple undirected nonzero-pattern graph of a real symmetric matrix, its graph update under a fixed elimination ordering, fill edges, and the later-neighbor parent forest.",
+        "strategy": "Define the initial support graph and the finite neighbor-clique update at each ordered pivot; define each parent as the earliest later neighbor.",
+        "deps": [
+          "def-field",
+          "def-matrix-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-csr-matrix-vector-product-with-validation",
+        "kind": "algorithm",
+        "title": "Validated compressed sparse row matrix-vector product",
+        "statement": "Validate candidate CSR dimensions, row pointers, and column indices; return an explicit invalid-dimension or invalid-index status, or accumulate every stored entry once to return Ax in exact arithmetic.",
+        "strategy": "Check dimensions first, validate the finite index arrays, initialize the output to zero, and perform one multiply-add per stored entry.",
+        "deps": [
+          "def-csr-matrix-with-stored-entry-semantics"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-filled-graph-contains-schur-complement-support",
+        "kind": "theorem",
+        "title": "The filled graph contains every Schur-complement nonzero",
+        "statement": "For an ordered real symmetric matrix with nonzero elimination pivots, every off-diagonal nonzero in each successive Schur complement is an edge of the corresponding filled graph; the later neighbors of each eliminated vertex form a clique.",
+        "strategy": "Induct on the Schur-complement update: a nonzero updated entry either survives from the prior entry or comes from two nonzero pivot couplings, whose endpoints are joined by the graph update.",
+        "deps": [
+          "def-field",
+          "lem-of-zero-mult",
+          "lem-of-no-zero-divisors",
+          "def-symmetric-structural-elimination-graph-and-ordering"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-csr-matvec-algorithm-terminates-with-status",
+        "kind": "theorem",
+        "title": "Validated CSR matrix-vector multiplication terminates with a status",
+        "statement": "For finite candidate arrays and a finite vector, the validated CSR matrix-vector algorithm terminates, returning either its specified invalid-input status or an output vector.",
+        "strategy": "Every validation loop has a finite array bound, and on valid input the row intervals partition the finite set of stored-entry indices.",
+        "deps": [
+          "alg-csr-matrix-vector-product-with-validation"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-csr-matvec-returns-the-represented-matrix-product",
+        "kind": "theorem",
+        "title": "CSR matrix-vector multiplication returns the represented product",
+        "statement": "For every valid CSR record and vector x, the algorithm returns the represented matrix A times x in exact field arithmetic.",
+        "strategy": "Prove the row accumulator equals the finite sum over its stored entries, then reindex the matrix-product sum by the unique stored column of each entry.",
+        "deps": [
+          "def-field",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-function-space",
+          "def-matrix-space",
+          "def-csr-matrix-with-stored-entry-semantics",
+          "alg-csr-matrix-vector-product-with-validation",
+          "def-matrix-product-and-identity-matrix",
+          "lem-of-zero-mult"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-csr-storage-and-exact-matvec-cost",
+        "kind": "theorem",
+        "title": "CSR storage and exact matrix-vector operation counts",
+        "statement": "The CSR input uses exactly s value slots, s column-index slots, and m+1 row-pointer slots; on valid input the algorithm uses exactly s field multiplications, s field additions, and m zero initializations, with O(m+s) total storage and work for m at least one.",
+        "strategy": "Count the three arrays and telescope the disjoint row-pointer intervals to count the stored-entry loop iterations.",
+        "deps": [
+          "def-csr-matrix-with-stored-entry-semantics",
+          "alg-csr-matrix-vector-product-with-validation"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 2289,
+    "id": "sparse-matrix-models-and-kernel-costs-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Sparse matrix models and kernel costs — Examples",
+    "companion": "sparse-matrix-models-and-kernel-costs",
+    "requires": [
+      "sparse-matrix-models-and-kernel-costs"
+    ],
+    "items": [
+      {
+        "id": "ex-csr-tridiagonal-matrix",
+        "kind": "example",
+        "title": "A four-row tridiagonal matrix in CSR form",
+        "statement": "The 4 by 4 matrix with diagonal 2 and adjacent off-diagonal entries -1 has the displayed zero-based CSR representation with ten stored entries.",
+        "strategy": "Check the row-pointer partition and column bounds, then expand each row's stored values into the represented matrix.",
+        "deps": [
+          "def-csr-matrix-with-stored-entry-semantics",
+          "thm-rat-field"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-ordered-elimination-creates-fill",
+        "kind": "example",
+        "title": "Eliminating the middle vertex creates structural fill",
+        "statement": "Eliminating the middle vertex first in the three-vertex path matrix creates the edge between its two later neighbors and a nonzero Schur-complement entry there.",
+        "strategy": "List the initial path graph, apply the neighbor-clique update, and calculate the first and remaining Schur pivots exactly.",
+        "deps": [
+          "def-symmetric-structural-elimination-graph-and-ordering",
+          "thm-filled-graph-contains-schur-complement-support",
+          "thm-rat-field"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-numerical-cancellation-within-filled-graph",
+        "kind": "example",
+        "title": "Numerical cancellation can remove an entry from the structural pattern",
+        "statement": "For a specified symmetric 3 by 3 matrix and ordering, the first Schur update cancels an existing off-diagonal value to zero while the filled graph retains that structural edge.",
+        "strategy": "Compute the first Schur-complement entry and all pivots, then compare its numerical support with the graph update.",
+        "deps": [
+          "def-symmetric-structural-elimination-graph-and-ordering",
+          "thm-filled-graph-contains-schur-complement-support",
+          "thm-rat-field"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-csr-matvec-operation-count",
+        "kind": "example",
+        "title": "An exact CSR product and its stored-entry count",
+        "statement": "For the four-row tridiagonal CSR matrix and x=(1,2,3,4), the product is (0,0,0,5), with ten multiplications, ten additions, four zero initializations, and 25 input storage slots.",
+        "strategy": "Evaluate each row from its stored entries and count operations and array slots directly.",
+        "deps": [
+          "def-csr-matrix-with-stored-entry-semantics",
+          "alg-csr-matrix-vector-product-with-validation",
+          "thm-csr-matvec-returns-the-represented-matrix-product",
+          "thm-csr-storage-and-exact-matvec-cost",
+          "thm-rat-field"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-csr-duplicates-and-explicit-zero-entry-count",
+        "kind": "example",
+        "title": "Duplicate columns and explicit zeros count as stored entries",
+        "statement": "A 2 by 3 CSR record with duplicate column entries that cancel and one explicit zero represents the zero matrix while still having three stored entries.",
+        "strategy": "Verify the row-pointer and column data, sum duplicate entries, and count all stored entries in the operation and storage formulas.",
+        "deps": [
+          "def-csr-matrix-with-stored-entry-semantics",
+          "alg-csr-matrix-vector-product-with-validation",
+          "thm-csr-matvec-returns-the-represented-matrix-product",
+          "thm-csr-storage-and-exact-matvec-cost",
+          "thm-rat-field",
+          "lem-of-zero-mult"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      }
+    ]
+  }
+]

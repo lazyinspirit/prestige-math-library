@@ -1,0 +1,1 @@
+Research-only five-item template; root/drain/history authorization flags remain unset/false. Full current approved source archives, genuine completion copies and audited original copies are immutable preparation evidence. No claim/check/source/ledger/native/metadata/gate operation was run. Use original reviewed reapply utility only after fresh root authorization.

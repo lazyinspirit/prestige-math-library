@@ -11,11 +11,7 @@ deps: [def-frobenius-matrix-norm]
 aliases: []
 landmark: false
 verification:
-  audited: 2026-08-31
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-31
+  repair: research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-published-matrix-calculus/application-1/repair.json
 sources:
   scraped: []
   references:
@@ -29,10 +25,12 @@ Let $U$ be an open subset of a real matrix space $\mathbb R^{m\times n}$ or of
 a complex matrix space $\mathbb C^{m\times n}$ viewed as a real vector space,
 and let $F:U\to W$ take values in a finite-dimensional real normed vector
 space $(W,\|\,\cdot\,\|_W)$.
-We say that $F$ is **real Fr\'echet differentiable** at $A\in U$ if there is a
-real-linear map $L$ such that
+We say that $F$ is **real Fr\'echet differentiable** at $A\in U$ if there is a real-linear map $L$ such that for every $\varepsilon>0$ there is $\delta>0$ for which
 
-$$\frac{\|F(A+H)-F(A)-L[H]\|_W}{\|H\|_F}\longrightarrow0\qquad(H\to0,\ H\ne0).$$
+$$\|F(A+H)-F(A)-L[H]\|_W\le\varepsilon\|H\|_F\qquad\text{whenever }A+H\in U\text{ and }\|H\|_F<\delta.$$
 
-That map $L$ is the **real Fr\'echet derivative** of $F$ at $A$ and is denoted
-$DF(A)$.
+That map $L$ is the **real Fr\'echet derivative** of $F$ at $A$ and is denoted $DF(A)$. At $H=0$ the remainder is zero because $L[0]=0$. When the source matrix space has at least one entry, this is equivalently
+
+$$\frac{\|F(A+H)-F(A)-L[H]\|_W}{\|H\|_F}\longrightarrow0\qquad(H\to0,\ H\ne0),$$
+
+since a nonempty open neighborhood supplies nonzero increments arbitrarily close to zero. Thus the original positive-dimensional notion is unchanged. A source with zero entries is the zero vector space with its zero Frobenius norm ([[def-frobenius-matrix-norm]]). Its only increment is $H=0$, and the unique real-linear map from it to $W$ is zero; the displayed normwise estimate holds identically. No punctured quotient limit at an isolated point is asserted.

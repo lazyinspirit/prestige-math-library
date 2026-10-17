@@ -1,0 +1,137 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "102",
+  "pages": [
+    {
+      "kind": "page",
+      "consumer": "numerical-identifiability-and-optimal-experiment-design",
+      "supplier": "response-surfaces-and-optimal-design",
+      "status": "verified-context-only",
+      "evidence": "The required supplier page is published and was read. It contains def-approximate-linear-model-design-and-optimality-criteria, lem-log-determinant-concavity-on-positive-definite-matrices, and thm-d-optimality-equivalence-theorem. Their definitions, hypotheses and proofs were checked; the batch uses their finite-candidate approximate-design convention, log-determinant concavity and D-equivalence criterion without creating a second D-optimality theorem."
+    },
+    {
+      "kind": "page",
+      "consumer": "numerical-identifiability-and-optimal-experiment-design",
+      "supplier": "inequality-kkt-duality-and-optimality-certificates",
+      "status": "verified-context-only",
+      "evidence": "The required page is a draft in batch 6. Its inequality convention, KKT residual and certificate scope were inspected. No batch-102 item uses a KKT or duality result as a logical premise; the page-level requirement remains in the A-page manifest and frontmatter."
+    },
+    {
+      "kind": "page",
+      "consumer": "numerical-identifiability-and-optimal-experiment-design",
+      "supplier": "proximal-gradient-and-accelerated-composite-optimization",
+      "status": "verified-context-only",
+      "evidence": "The required page is a draft in batch 27. Its composite-objective assumptions and exact/inexact proximal-gradient scope were inspected. No batch-102 item uses a proximal-gradient result as a logical premise; the page-level requirement remains in the A-page manifest and frontmatter."
+    },
+    {
+      "kind": "item",
+      "consumer": "rem-gauss-newton-information-is-not-full-hessian",
+      "supplier": "thm-nonlinear-least-squares-gradient-and-hessian",
+      "status": "verified-body-and-current-step1-record",
+      "evidence": "The supplier's complete Statement and Proof were read. Exact excerpt: \"\\nabla^2\\phi(x)=J(x)^TJ(x)+\\sum_{i=1}^m r_i(x)\\nabla^2r_i(x).\" It also states: \"The second term in the Hessian is the residual-curvature term. It vanishes when r(x)=0, but need not vanish at a nonzero-residual stationary point.\" The supplier's Step 1 record is decision=ready, owner=true, and its hash is current against the current body and declared dependencies. Batch 102 only restates this exact decomposition and does not claim the information matrix is the full Hessian away from zero residual. Owner readiness is not independent proof approval."
+    },
+    {
+      "kind": "page",
+      "consumer": "numerical-identifiability-and-optimal-experiment-design",
+      "supplier": "gauss-newton-and-levenberg-marquardt-methods",
+      "status": "verified-context-only",
+      "evidence": "The required page is a draft in batch 84. Its exact nonlinear least-squares Hessian formula and residual-curvature caveat were inspected through thm-nonlinear-least-squares-gradient-and-hessian. Only rem-gauss-newton-information-is-not-full-hessian declares that theorem as an item dependency; the remaining page relation is contextual."
+    },
+    {
+      "kind": "page",
+      "consumer": "numerical-identifiability-and-optimal-experiment-design",
+      "supplier": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "status": "owner-escalation",
+      "evidence": "The current batch-96 A-page manifest is populated and its relevant bodies were inspected. lem-parameter-ode-flow-tangent-on-common-tube proves a C1 ODE flow and its tangent equation under a C1 field, C1 initial map and a common bounded convex tube. thm-discrete-continuous-gradient-error-order-p states a conditional error bound for an objective gradient; it requires a uniform state/adjoint error bound, derivative-data error, endpoint error, quadrature error and Lipschitz q, and explicitly says state accuracy alone does not give gradient error. Neither item supplies a uniform error bound for a general observation-sensitivity matrix J_h-J, and the ODE tangent lemma supplies only C1, not the Lipschitz-Jacobian hypothesis used by the local parameter perturbation theorem. No current Step 1 readiness records exist for these two supplier items."
+    },
+    {
+      "kind": "item-interface",
+      "consumer": "numerical-identifiability-and-optimal-experiment-design",
+      "supplier": "lem-parameter-ode-flow-tangent-on-common-tube",
+      "status": "owner-escalation",
+      "evidence": "Exact supplier statement excerpt: \"Then $\\theta\\mapsto u_\\theta$ is $C^1$ as a map to $C([0,T];\\mathbb R^d)$.\" This proves the ODE flow is C1, under the declared common-tube assumptions. It does not state that the Jacobian is Lipschitz on a parameter ball or give a discretization error ||J_h-J||. The supplier has no Step 1 readiness record."
+    },
+    {
+      "kind": "item-interface",
+      "consumer": "numerical-identifiability-and-optimal-experiment-design",
+      "supplier": "thm-discrete-continuous-gradient-error-order-p",
+      "status": "owner-escalation",
+      "evidence": "Exact supplier statement excerpt: \"The adjoint, derivative-data and quadrature hypotheses are separate from state accuracy; without them the state estimate alone gives no gradient error conclusion.\" Its conclusion is an error bound for the gradient of a reduced scalar objective under separate derivative-data, endpoint, quadrature and Lipschitz-q assumptions. It does not bound the full observation-sensitivity matrix for every candidate condition. The supplier has no Step 1 readiness record."
+    }
+  ],
+  "unresolved_interfaces": [
+    {
+      "supplier_page": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "status": "owner-escalation",
+      "gap": "The INV3 statements prove conditional finite-dimensional matrix-perturbation and design-gap bounds, but an ODE/PDE application still needs their numerical inputs justified. DIF3 currently has C1/tangent formulas and conditional reduced-objective-gradient estimates, not a stated uniform operator bound ||J_h-J|| over candidates/designs. A possible route is to instantiate the scalar objective-gradient estimates once for every output coordinate and candidate, prove common constants, and convert the finitely many coordinate errors to an operator-norm bound; no current ready item discharges those instantiation hypotheses. Separately, the ODE tangent item establishes only C1, not the Lipschitz-Jacobian premise used by thm-local-parameter-perturbation-bound.",
+      "affected_claims": [
+        "thm-local-parameter-perturbation-bound when instantiated on an ODE/PDE observation map",
+        "lem-computed-sensitivity-singular-value-perturbation when J_h is produced by an ODE/PDE discretization",
+        "lem-information-matrix-perturbation-bound and thm-uniform-sensitivity-error-controls-design-gap when their eta, K, W and eigenvalue-floor inputs must be justified numerically",
+        "the A-page ODE/PDE sensitivity-design application; the scalar B example is self-contained and unaffected"
+      ],
+      "required_hypotheses": [
+        "For local parameter stability: a common parameter ball, a lower bound sigma_min(J(theta_0))>=mu>0, and a proved Lipschitz constant L for the observation Jacobian on that ball.",
+        "For discretized ODE/PDE design comparisons: a uniform bound ||J_h,x(theta)-J_x(theta)||_2<=eta for every candidate condition and parameter under study, plus uniform K and W bounds and a common positive eigenvalue floor over the compact design set and the true/computed interpolation segments.",
+        "For any order-p sensitivity application: explicit state and tangent/adjoint error estimates, derivative-data consistency, stable propagation, endpoint and quadrature bounds as applicable. A scalar reduced-gradient result can support a matrix bound only after separate instantiation for every scalar observation coordinate and candidate, uniform constants over that finite family, and a proved coordinate-to-operator-norm conversion; state error alone is insufficient."
+      ],
+      "proposed_suppliers_and_placement": [
+        {
+          "item": "lem-ode-observation-jacobian-is-lipschitz-on-a-compact-parameter-ball",
+          "placement": "DIF3 A page, adjacent to lem-parameter-ode-flow-tangent-on-common-tube",
+          "scope": "Prove a uniform parameter-Lipschitz bound for the observation Jacobian from explicit C2 dynamics, initial data and observation maps on a common compact tube."
+        },
+        {
+          "item": "thm-discrete-continuous-observation-sensitivity-error-order-p",
+          "placement": "DIF3 A page, adjacent to thm-discrete-continuous-gradient-error-order-p",
+          "scope": "Prove a uniform operator-norm error estimate for the discrete observation Jacobian, either directly or by stating a componentwise reduced-gradient route with common constants and the finite-dimensional conversion. Keep state, tangent/adjoint, derivative-data consistency and observation quadrature hypotheses separate. Provide a distinct PDE analogue if the elliptic/parabolic discretizations do not meet the same finite-dimensional theorem."
+        }
+      ],
+      "reconciliation": "These are interface escalations only. The batch-102 local conditional claims and examples are complete; no DIF3 supplier ID, proof excerpt, readiness or numerical convergence guarantee is invented.",
+      "observed_items": [
+        {
+          "item": "lem-parameter-ode-flow-tangent-on-common-tube",
+          "readiness": "missing Step 1 record",
+          "interface": "Gives a C1 ODE solution map and tangent equation under a C1 field, C1 initial map, and common bounded convex tube; it gives neither Lipschitz continuity of the observation Jacobian nor a discretization error.",
+          "exact_excerpt": "Then $\\theta\\mapsto u_\\theta$ is $C^1$ as a map to $C([0,T];\\mathbb R^d)$.",
+          "axioms": "No choice principle is declared in this item."
+        },
+        {
+          "item": "thm-discrete-continuous-gradient-error-order-p",
+          "readiness": "missing Step 1 record",
+          "interface": "Bounds a reduced scalar objective gradient under explicit state/adjoint, derivative-data, endpoint, quadrature and Lipschitz-q hypotheses. It could be applied coordinatewise only after those hypotheses and uniform constants are supplied for every candidate/output; it does not directly state a matrix operator-norm bound.",
+          "exact_excerpt": "The adjoint, derivative-data and quadrature hypotheses are separate from state accuracy; without them the state estimate alone gives no gradient error conclusion.",
+          "axioms": "No choice principle is declared in this item."
+        },
+        {
+          "item": "lem-elliptic-state-map-c1-under-uniform-coercivity",
+          "readiness": "missing Step 1 record",
+          "interface": "Proves a C1 elliptic state map and its tangent variational equation under uniform coercivity and operator-norm C1 form/load maps. It may provide state-map differentiability for an elliptic observation after a C1 output functional is supplied, but no discretization error for the observation Jacobian.",
+          "exact_excerpt": "Then each state $u_\\theta$ exists uniquely, the map $\\theta\\mapsto u_\\theta\\in V$ is $C^1$.",
+          "axioms": "Requires Countable Choice; this axiom branch is not inherited by batch-102 finite-dimensional claims."
+        },
+        {
+          "item": "thm-elliptic-fe-gradient-error-in-energy-norms",
+          "readiness": "missing Step 1 record",
+          "interface": "Bounds a reduced elliptic objective gradient from state/adjoint energy errors and separate direct-objective and derivative-data defects. A componentwise application to observation outputs would require explicit common bounds across all candidates and output coordinates, followed by a finite-dimensional operator-norm conversion.",
+          "exact_excerpt": "The derivative-data defects are separate obligations: ordinary state and adjoint Strang bounds do not by themselves bound derivative defects.",
+          "axioms": "Requires Countable Choice; this axiom branch is not inherited by batch-102 finite-dimensional claims."
+        },
+        {
+          "item": "thm-parabolic-adjoint-gradient-sensitivity",
+          "readiness": "missing Step 1 record",
+          "interface": "Assumes a Frechet-differentiable parabolic state map and a displayed adjoint solution, then derives the reduced scalar gradient. It does not establish those state/adjoint solutions or a discrete observation-Jacobian error.",
+          "exact_excerpt": "This is conditional on the displayed differentiable state and adjoint; it does not prove either exists.",
+          "axioms": "Requires Countable Choice; this axiom branch is not inherited by batch-102 finite-dimensional claims."
+        },
+        {
+          "item": "thm-parabolic-fe-gradient-error-with-time-dependent-ritz",
+          "readiness": "missing Step 1 record",
+          "interface": "Gives a conditional reduced-objective-gradient error with state, adjoint, projection-derivative, derivative-data and trace defects. A coordinatewise route to a Jacobian error would need all such bounds uniformly over outputs and candidates.",
+          "exact_excerpt": "The derivative-data and trace defects are additional assumptions; an energy estimate for the state alone does not imply this gradient bound.",
+          "axioms": "Requires Countable Choice; this axiom branch is not inherited by batch-102 finite-dimensional claims."
+        }
+      ]
+    }
+  ]
+}

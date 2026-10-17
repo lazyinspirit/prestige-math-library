@@ -1,0 +1,215 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "93",
+  "purpose": "Read-only owner triage; no new mathematical acceptance or native coverage",
+  "created_at": "2026-10-16T09:18:24.958Z",
+  "session_id": "01a143eb-4e00-7043-8566-81d3daf41fca",
+  "session_home": "research/numerical-optimization-dynamics-2026-10-16-scope-review/batch-93/scope-repairer-session",
+  "native_hold": "Worker report requires owner resolution: Repair omitted affected consumers",
+  "changed_interfaces": [
+    "lem-smolyak-mixed-simpson-detail-decay",
+    "alg-dimension-adaptive-smolyak-surplus-selection",
+    "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+    "thm-smolyak-isotropic-mixed-smoothness-work-error-rate"
+  ],
+  "interface_deltas": [
+    {
+      "id": "lem-smolyak-mixed-simpson-detail-decay",
+      "before": [
+        "## Statement\n\nLet $d\\ge1$. For $S=\\{j_1<\\cdots<j_k\\}\\subseteq\\{1,\\ldots,d\\}$, define\n$$D_Sf:=\\partial_{x_{j_k}}^4\\cdots\\partial_{x_{j_1}}^4f,$$\nso these derivatives are applied in increasing coordinate order; set\n$D_\\varnothing f=f$. Assume every $D_Sf$ is continuous on the closed cube,\nwith the one-sided endpoint convention of\n[[def-higher-derivatives-and-smoothness]], and choose finite bounds $M_S\\ge0$\nsuch that $|D_Sf(x)|\\le M_S$ on $[0,1]^d$. For\n$\\ell\\in\\mathbb N_0^d$, put $S(\\ell):=\\{j:\\ell_j\\ge1\\}$ and\n$$\\delta_\\ell(f):=(\\Delta_{\\ell_1}^{(1)}\\otimes\\cdots\\otimes\\Delta_{\\ell_d}^{(d)})(f).$$\nThen\n$$|\\delta_\\ell(f)|\\le M_{S(\\ell)}\\left(\\frac{17}{2880}\\right)^{|S(\\ell)|}16^{-\\sum_{j\\in S(\\ell)}\\ell_j}.$$\nMoreover, for every finite $F\\subseteq\\mathbb N_0^d$,\n$$\\sum_{\\ell\\in F}|\\delta_\\ell(f)|\\le\\sum_{S\\subseteq\\{1,\\ldots,d\\}}M_S\\left(\\frac{17}{43200}\\right)^{|S|}<\\infty.$$"
+      ],
+      "current": [
+        "## Statement\n\nUse the dyadic composite-Simpson hierarchy of\n[[def-smolyak-univariate-level-hierarchy]]. Let $d\\ge1$. For\n$S=\\{j_1<\\cdots<j_k\\}\\subseteq\\{1,\\ldots,d\\}$, define\n$$D_Sf:=\\partial_{x_{j_k}}^4\\cdots\\partial_{x_{j_1}}^4f,$$\nso these derivatives are applied in increasing coordinate order; set\n$D_\\varnothing f=f$. Assume every $D_Sf$ is continuous on the closed cube,\nwith the one-sided endpoint convention of\n[[def-higher-derivatives-and-smoothness]], and choose finite bounds $M_S\\ge0$\nsuch that $|D_Sf(x)|\\le M_S$ on $[0,1]^d$. For\n$\\ell\\in\\mathbb N_0^d$, put $S(\\ell):=\\{j:\\ell_j\\ge1\\}$ and\n$$\\delta_\\ell(f):=(\\Delta_{\\ell_1}^{(1)}\\otimes\\cdots\\otimes\\Delta_{\\ell_d}^{(d)})(f).$$\nThen\n$$|\\delta_\\ell(f)|\\le M_{S(\\ell)}\\left(\\frac{17}{2880}\\right)^{|S(\\ell)|}16^{-\\sum_{j\\in S(\\ell)}\\ell_j}.$$\nMoreover, for every finite $F\\subseteq\\mathbb N_0^d$,\n$$\\sum_{\\ell\\in F}|\\delta_\\ell(f)|\\le\\sum_{S\\subseteq\\{1,\\ldots,d\\}}M_S\\left(\\frac{17}{43200}\\right)^{|S|}<\\infty.$$"
+      ]
+    },
+    {
+      "id": "alg-dimension-adaptive-smolyak-surplus-selection",
+      "before": [
+        "## Definition\n\n**Input:** dimension $d\\ge1$; a finite downward-closed cap\n$\\Gamma\\subseteq\\mathbb N_0^d$ containing $0$; a nested node-key hierarchy\nthrough every level in $\\Gamma$; a function $f$ evaluable at the nodes; and an\ninteger evaluation budget $B\\ge0$.\n\n**Output:** a current downward-closed index set $\\Lambda\\subseteq\\Gamma$, its\nSmolyak value when the initial rule fits the budget, the computed detail\nsurpluses, the distinct nodes actually sampled, and one status:\n`budget-too-small`, `budget-exhausted`, or `frontier-exhausted`.\n\n1. Form the baseline node set $X_0^d$. If its cardinality exceeds $B$, return\n   `budget-too-small`, an empty $\\Lambda$, no cubature value, and no sampled\n   nodes. Otherwise set $\\Lambda:=\\{0\\}$, evaluate $f$ once at every baseline\n   node, and set the current value to $Q_{\\{0\\}}(f)$.\n2. An index $\\ell\\in\\Gamma\\setminus\\Lambda$ is **admissible** when every\n   immediate predecessor $\\ell-e_j$ with $\\ell_j>0$ already belongs to\n   $\\Lambda$. Its **surplus** is the exact detail value $\\delta_\\ell(f)$ and\n   its selection indicator is $|\\delta_\\ell(f)|$.\n3. Visit newly admissible indices in lexicographic order, skipping any index\n   already recorded as active, accepted, or `uncomputed-budget`. To compute one\n   surplus, form its finite tensor-detail node set and the new keys not already\n   sampled. If adding them would exceed $B$, record this candidate as\n   `uncomputed-budget` without evaluating those nodes. Otherwise evaluate each\n   new key once, store the values, compute $\\delta_\\ell(f)$ from the finite\n   signed weights, and add the index to the active candidate set.\n4. If the active set is empty and an admissible `uncomputed-budget` candidate\n   remains, return `budget-exhausted`. If the active set and admissible\n   candidates are both empty, return `frontier-exhausted`.\n5. Otherwise select the active index with largest absolute surplus, breaking\n   ties lexicographically. Add it to $\\Lambda$, update the cubature value by\n   adding its signed surplus, and inspect its finite forward neighbors for new\n   admissible indices; process them by step 3. Repeat from step 4.\n\nThe evaluation budget counts the union of distinct keys sampled while computing\nboth accepted and candidate surpluses. The indicator $|\\delta_\\ell(f)|$ is a\nrefinement heuristic only. A threshold on this indicator, or exhaustion of the\nfinite candidate cap, is not an error certificate unless a separate omitted-tail\nbound applies."
+      ],
+      "current": [
+        "## Definition\n\n**Input:** dimension $d\\ge1$; a finite downward-closed cap\n$\\Gamma\\subseteq\\mathbb N_0^d$ containing $0$; for each coordinate, the\none-dimensional quadrature rules from a hierarchy as in\n[[def-smolyak-univariate-level-hierarchy]] through every level used by\n$\\Gamma$, with canonical node keys that agree exactly if and only if the real\nnodes agree and are totally ordered; a function $f$ evaluable at the nodes; and\nan integer evaluation budget $B\\ge0$. Admissible inputs supply all these rules\nand keys at every level required by $\\Gamma$.\n\n**Output:** a current downward-closed index set $\\Lambda\\subseteq\\Gamma$, its\nSmolyak value when the initial rule fits the budget, the computed detail\nsurpluses, the distinct nodes actually sampled, and one status:\n`budget-too-small`, `budget-exhausted`, or `frontier-exhausted`.\n\n1. An index $\\ell\\in\\Gamma\\setminus\\Lambda$ is **admissible** when every\n   immediate predecessor $\\ell-e_j$ with $\\ell_j>0$ already belongs to\n   $\\Lambda$. Its **surplus** is the exact detail value $\\delta_\\ell(f)$ and\n   its selection indicator is $|\\delta_\\ell(f)|$.\n2. Form the baseline node set $X_0^d$. If its cardinality exceeds $B$, return\n   `budget-too-small`, an empty $\\Lambda$, no cubature value, and no sampled\n   nodes. Otherwise set $\\Lambda:=\\{0\\}$, initialize the active candidate set\n   as empty, evaluate $f$ once at every baseline node, and set the current\n   value to $Q_{\\{0\\}}(f)$. Then process every initially admissible index in\n   $\\Gamma\\setminus\\Lambda$ in lexicographic order using step 3.\n3. Visit newly admissible indices in lexicographic order, skipping any index\n   already recorded as active, accepted, or `uncomputed-budget`. To compute one\n   surplus, form its finite tensor-detail node set and the new keys not already\n   sampled. If adding them would exceed $B$, record this candidate as\n   `uncomputed-budget` without evaluating those nodes. Otherwise evaluate each\n   new key once, store the values, compute $\\delta_\\ell(f)$ from the finite\n   signed weights, and add the index to the active candidate set.\n4. If the active set is empty and an admissible `uncomputed-budget` candidate\n   remains, return `budget-exhausted`. Otherwise, if the active set is empty,\n   return `frontier-exhausted`.\n5. Otherwise select the active index with largest absolute surplus, breaking\n   ties lexicographically. Remove it from the active set, mark it accepted, add\n   it to $\\Lambda$, update the cubature value by adding its signed surplus, and\n   inspect its finite forward neighbors for newly admissible indices; process\n   them by step 3. Repeat from step 4.\n\nThe evaluation budget counts the union of distinct keys sampled while computing\nboth accepted and candidate surpluses. The indicator $|\\delta_\\ell(f)|$ is a\nrefinement heuristic only. A threshold on this indicator, or exhaustion of the\nfinite candidate cap, is not an error certificate unless a separate omitted-tail\nbound applies."
+      ]
+    },
+    {
+      "id": "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+      "before": [
+        "## Statement\n\nLet $d\\ge1$, let $f:[0,1]^d\\to\\mathbb R$ be continuous, and suppose its detail\nfamily is absolutely summable in the sense of\n[[def-smolyak-absolute-detail-summability]]. For every finite downward-closed\n$\\Lambda\\subseteq\\mathbb N_0^d$ containing $0$,\n$$|I_d(f)-Q_\\Lambda(f)|\\le\\sum_{\\ell\\in\\mathbb N_0^d\\setminus\\Lambda}|\\delta_\\ell(f)|.$$\nIn particular, the hypothesis holds for the mixed-derivative class of\n[[lem-smolyak-mixed-simpson-detail-decay]]."
+      ],
+      "current": [
+        "## Statement\n\nLet $d\\ge1$, let $f:[0,1]^d\\to\\mathbb R$ be continuous, and use a level\nhierarchy as in [[def-smolyak-univariate-level-hierarchy]]. Suppose its tensor\nrules satisfy $Q_L^{\\otimes d}(f)\\to I_d(f)$ and its detail family is absolutely\nsummable in the sense of [[def-smolyak-absolute-detail-summability]]. For every\nfinite downward-closed $\\Lambda\\subseteq\\mathbb N_0^d$ containing $0$,\n$$|I_d(f)-Q_\\Lambda(f)|\\le\\sum_{\\ell\\in\\mathbb N_0^d\\setminus\\Lambda}|\\delta_\\ell(f)|.$$\nIn particular, the dyadic composite-Simpson hierarchy satisfies the convergence\nhypothesis for continuous $f$ by\n[[lem-smolyak-dyadic-tensor-simpson-convergence]], and for the mixed-derivative\nclass of [[lem-smolyak-mixed-simpson-detail-decay]] the same hierarchy also\nsatisfies absolute summability."
+      ]
+    },
+    {
+      "id": "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+      "before": [
+        "## Statement\n\nLet $d\\ge1$, $n\\ge2d$, and let $f:[0,1]^d\\to\\mathbb R$ satisfy the\ncontinuous mixed fourth-derivative hypotheses and bounds $M_S$ of\n[[lem-smolyak-mixed-simpson-detail-decay]]. Define the isotropic index set\n$$\\Lambda_n:=\\{\\ell\\in\\mathbb N_0^d:|\\ell|_1\\le n\\},$$\nand let $W_{n,d}:=|\\mathcal N_{\\Lambda_n}|$ be the distinct-node work count\nof [[def-smolyak-cubature]] and [[alg-smolyak-node-deduplication]]. For a\ndyadic node $x$, let $t(x)=0$ for $x=0,1,1/2$; if $x=p/2^{r+1}$ is interior\nand reduced with odd numerator $p$, let $t(x)=r\\ge1$. Put\n$$a_0:=3,\\qquad a_r:=2^r\\ (r\\ge1),$$\n$$\\|f\\|_{\\mathrm{mix},d}:=\\sum_{\\varnothing\\ne S\\subseteq\\{1,\\ldots,d\\}}\\left(\\frac{17}{2880}\\right)^{|S|}M_S,\\quad T_d:=\\sup_{N\\ge1}\\sum_{r=1}^{N}r^{d-1}16^{-r},$$\n$$D_d:=2\\cdot3^d d^{d-1},\\qquad C_d:=D_d^4T_d\\left(\\frac3{\\log 2}\\right)^{5(d-1)},$$\nwhere $\\log$ is the natural logarithm of [[def-natural-logarithm]]. Then\n$T_d<\\infty$, and the actual node-union count and error satisfy\n$$W_{n,d}=\\sum_{\\substack{t\\in\\mathbb N_0^d\\\\|t|_1\\le n}}\\prod_{j=1}^d a_{t_j},\\qquad 2^n\\binom{n-1}{d-1}\\le W_{n,d}\\le D_d2^n(n+1)^{d-1},$$\n$$|I_d(f)-Q_{\\Lambda_n}(f)|\\le T_d\\|f\\|_{\\mathrm{mix},d}16^{-n}(n+1)^{d-1}\\le C_d\\|f\\|_{\\mathrm{mix},d}W_{n,d}^{-4}\\bigl(\\log(2+W_{n,d})\\bigr)^{5(d-1)}.$$\nAll constants and the mixed-derivative quantity display their dimension\ndependence; no weighted-anisotropic tractability claim is made."
+      ],
+      "current": [
+        "## Statement\n\nUse the dyadic composite-Simpson hierarchy of\n[[def-smolyak-univariate-level-hierarchy]]. Let $d\\ge1$, $n\\ge2d$, and let\n$f:[0,1]^d\\to\\mathbb R$ satisfy the\ncontinuous mixed fourth-derivative hypotheses and bounds $M_S$ of\n[[lem-smolyak-mixed-simpson-detail-decay]]. Define the isotropic index set\n$$\\Lambda_n:=\\{\\ell\\in\\mathbb N_0^d:|\\ell|_1\\le n\\},$$\nand let $W_{n,d}:=|\\mathcal N_{\\Lambda_n}|$ be the distinct-node work count\nof [[def-smolyak-cubature]] and [[alg-smolyak-node-deduplication]]. For a\ndyadic node $x$, let $t(x)=0$ for $x=0,1,1/2$; if $x=p/2^{r+1}$ is interior\nand reduced with odd numerator $p$, let $t(x)=r\\ge1$. Put\n$$a_0:=3,\\qquad a_r:=2^r\\ (r\\ge1),$$\n$$\\|f\\|_{\\mathrm{mix},d}:=\\sum_{\\varnothing\\ne S\\subseteq\\{1,\\ldots,d\\}}\\left(\\frac{17}{2880}\\right)^{|S|}M_S,\\quad T_d:=\\sup_{N\\ge1}\\sum_{r=1}^{N}r^{d-1}16^{-r},$$\n$$D_d:=2\\cdot3^d d^{d-1},\\qquad C_d:=D_d^4T_d\\left(\\frac3{\\log 2}\\right)^{5(d-1)},$$\nwhere $\\log$ is the natural logarithm of [[def-natural-logarithm]]. Then\n$T_d<\\infty$, and the actual node-union count and error satisfy\n$$W_{n,d}=\\sum_{\\substack{t\\in\\mathbb N_0^d\\\\|t|_1\\le n}}\\prod_{j=1}^d a_{t_j},\\qquad 2^n\\binom{n-1}{d-1}\\le W_{n,d}\\le D_d2^n(n+1)^{d-1},$$\n$$|I_d(f)-Q_{\\Lambda_n}(f)|\\le T_d\\|f\\|_{\\mathrm{mix},d}16^{-n}(n+1)^{d-1}\\le C_d\\|f\\|_{\\mathrm{mix},d}W_{n,d}^{-4}\\bigl(\\log(2+W_{n,d})\\bigr)^{5(d-1)}.$$\nAll constants and the mixed-derivative quantity display their dimension\ndependence; no weighted-anisotropic tractability claim is made."
+      ]
+    }
+  ],
+  "affected_consumers": [
+    {
+      "id": "cor-smolyak-chaos-coefficient-error-bound",
+      "path": [
+        "lem-smolyak-mixed-simpson-detail-decay",
+        "cor-smolyak-chaos-coefficient-error-bound"
+      ],
+      "paths": [
+        [
+          "lem-smolyak-mixed-simpson-detail-decay",
+          "cor-smolyak-chaos-coefficient-error-bound"
+        ],
+        [
+          "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+          "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+          "cor-smolyak-chaos-coefficient-error-bound"
+        ],
+        [
+          "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+          "cor-smolyak-chaos-coefficient-error-bound"
+        ]
+      ]
+    },
+    {
+      "id": "ex-smolyak-diagonal-ridge-breaks-mixed-regularity",
+      "path": [
+        "lem-smolyak-mixed-simpson-detail-decay",
+        "ex-smolyak-diagonal-ridge-breaks-mixed-regularity"
+      ],
+      "paths": [
+        [
+          "lem-smolyak-mixed-simpson-detail-decay",
+          "ex-smolyak-diagonal-ridge-breaks-mixed-regularity"
+        ],
+        [
+          "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+          "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+          "ex-smolyak-diagonal-ridge-breaks-mixed-regularity"
+        ],
+        [
+          "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+          "ex-smolyak-diagonal-ridge-breaks-mixed-regularity"
+        ]
+      ]
+    },
+    {
+      "id": "lem-smolyak-adaptive-surplus-termination",
+      "path": [
+        "alg-dimension-adaptive-smolyak-surplus-selection",
+        "lem-smolyak-adaptive-surplus-termination"
+      ],
+      "paths": [
+        [
+          "alg-dimension-adaptive-smolyak-surplus-selection",
+          "lem-smolyak-adaptive-surplus-termination"
+        ]
+      ]
+    },
+    {
+      "id": "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+      "path": [
+        "lem-smolyak-mixed-simpson-detail-decay",
+        "thm-smolyak-absolute-detail-reconstruction-and-tail-error"
+      ],
+      "paths": [
+        [
+          "lem-smolyak-mixed-simpson-detail-decay",
+          "thm-smolyak-absolute-detail-reconstruction-and-tail-error"
+        ]
+      ]
+    },
+    {
+      "id": "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+      "path": [
+        "lem-smolyak-mixed-simpson-detail-decay",
+        "thm-smolyak-isotropic-mixed-smoothness-work-error-rate"
+      ],
+      "paths": [
+        [
+          "lem-smolyak-mixed-simpson-detail-decay",
+          "thm-smolyak-isotropic-mixed-smoothness-work-error-rate"
+        ],
+        [
+          "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+          "thm-smolyak-isotropic-mixed-smoothness-work-error-rate"
+        ]
+      ]
+    }
+  ],
+  "missing_consumer_dispositions": [
+    {
+      "id": "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+      "path": [
+        "lem-smolyak-mixed-simpson-detail-decay",
+        "thm-smolyak-absolute-detail-reconstruction-and-tail-error"
+      ],
+      "paths": [
+        [
+          "lem-smolyak-mixed-simpson-detail-decay",
+          "thm-smolyak-absolute-detail-reconstruction-and-tail-error"
+        ]
+      ]
+    }
+  ],
+  "existing_consumer_checks": [
+    {
+      "id": "lem-smolyak-adaptive-surplus-termination",
+      "decision": "accept",
+      "reason": "Updated its supplier facts; the proof now matches initial frontier processing and active-set removal."
+    },
+    {
+      "id": "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+      "decision": "accept",
+      "reason": "Its hierarchy, summability, and convergence uses match the clarified suppliers."
+    },
+    {
+      "id": "ex-smolyak-diagonal-ridge-breaks-mixed-regularity",
+      "decision": "accept",
+      "reason": "Its rate-theorem use is under the dyadic hierarchy; the counterexample and regularity conclusion remain valid."
+    },
+    {
+      "id": "cor-smolyak-chaos-coefficient-error-bound",
+      "decision": "accept",
+      "reason": "Read-only published consumer explicitly uses the dyadic Simpson rule and satisfies the clarified mixed-regularity conditions."
+    },
+    {
+      "id": "sparse-grid-cubature-and-mixed-regularity",
+      "decision": "accept",
+      "reason": "Its summary now states that reconstruction uses both dyadic tensor convergence and absolute summability; its adaptive-procedure summary remains accurate."
+    },
+    {
+      "id": "sparse-grid-cubature-and-mixed-regularity-examples",
+      "decision": "accept",
+      "reason": "Its example summaries remain consistent with the checked suppliers."
+    }
+  ],
+  "current_sha256": {
+    "items/def-smolyak-univariate-level-hierarchy.md": "6f5b17131356d96a018cd8d9b7976c1cb3e44a0119835538fd1874cb27b12f9f",
+    "items/def-smolyak-cubature.md": "243b45f85e91f1a8b82ec63e06e5ada8de0d0690d5a74356dfcce58ad09599fd",
+    "items/lem-smolyak-dyadic-tensor-simpson-convergence.md": "94047299ae1427e56f547fa0ee148528ee2353ad785da915075d4795df951b5d",
+    "items/alg-smolyak-node-deduplication.md": "d9a13dd978fd63524d14c65f4cfc90e8157974ef1af5cf3888bedeed24560aa1",
+    "items/def-smolyak-absolute-detail-summability.md": "06bdceb7def4b83e9b87d3264f2de0d2e2dc532093ce7e85602fddbedc3fd569",
+    "items/lem-smolyak-mixed-simpson-detail-decay.md": "35f77b8f4ebac6783aa4ce9df7e66d53d815694498801a261bfc06e10240408c",
+    "items/lem-smolyak-rectangular-telescope.md": "a73281c54f9886d9323f464146601234657f33db88f1aac596e047ef3a52b448",
+    "items/alg-dimension-adaptive-smolyak-surplus-selection.md": "2ca82d0b8ba68f8a8401b413ce2e93917b627ffca3a96881c6f5b28b264cbc59",
+    "items/thm-smolyak-absolute-detail-reconstruction-and-tail-error.md": "cb94ab74ad86f01b2ad501d7becd7f977bec063a2ddc8a4a70204653b9d20501",
+    "items/thm-smolyak-polynomial-multi-degree-exactness.md": "a373fe26e5294eb5fd9e14363d5b4a26c95f0a6c5b03285ee99a76da08735c06",
+    "items/lem-smolyak-adaptive-surplus-termination.md": "12568ea89893a38f8bf1dbb36804aaa0ba63107f0583b7b0be2872876be639a3",
+    "items/thm-smolyak-isotropic-mixed-smoothness-work-error-rate.md": "78876cf81d8faa86ab021361b862c46ea8244c07743fcf30a6878f373d4dbc67",
+    "items/ex-smolyak-diagonal-ridge-breaks-mixed-regularity.md": "032aa86af7c9865cd999d6d3a815362e05cbc2177fb962a54400f8f26bd64fb4",
+    "items/ex-smolyak-four-dimensional-product-integrand.md": "8e57f4ec838378990770937523b84080dbb88a37e2cd6272c945d8ec79db6d11",
+    "items/ex-smolyak-signed-weights-polynomial-chaos-coefficient.md": "9b803e055bb8c167ef55a6a881a43aae5283ecb5b5565e03fc1454ee31581d65",
+    "library/numerical-linear-algebra-and-approximation/sparse-grid-cubature-and-mixed-regularity.md": "8f457ec892334e4e18f89ab8ca539cb80793ff792109f0285d12d0bf9cf26f2e",
+    "library/numerical-linear-algebra-and-approximation/sparse-grid-cubature-and-mixed-regularity-examples.md": "5311e76e9227c71eca823f516407dd43995a97c3fe6aaab8978ee639191c4e22",
+    "items/cor-smolyak-chaos-coefficient-error-bound.md": "3075bda96198b632145d36e4b2be5e7f8c0e40b3eab1bf055217dc184b93e81c",
+    "research/numerical-optimization-dynamics-2026-10-16-scope-review/batch-93/state.json": "10a56a0dac9ab79aeb3982ae73047dbdeb385933d1d47285a88f97642d7c281a",
+    "research/numerical-optimization-dynamics-2026-10-16-scope-review/batch-93/review-0.json": "5a47d72772ff0cdec0ad0ebdbb1e9929bbd466a1105ae05973ddc50efffa828c",
+    "research/numerical-optimization-dynamics-2026-10-16-scope-review/batch-93/repair-1.json": "eb122fbbb0a6816eecd77ec57ece588c90a9a5b2ceeeb1a2cfff329c24c32cc0",
+    "research/numerical-optimization-dynamics-2026-10-16-dispatch/scope-repairer-scope-repair-93-1.result.json": "b35f58eb75536126c2f0c343d6e7b6bd5375a0b7e3fee1a72232d6a4090fcac6"
+  },
+  "native_pre_edit_bodies": "Not available in this receipt; native prepared.before_interfaces retains actual interface preimages only."
+}

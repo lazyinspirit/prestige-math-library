@@ -1,0 +1,201 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-point-verified-linear-system-certifier",
+    "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "status": "verified",
+    "evidence": "Inspected the current Definition in full. It specifies componentwise complex arithmetic and range-failure on nonzero subnormal/overflow intermediates; the point certifier's finite operations are required to follow those semantics. This records interface use, not independent approval.",
+    "examined_supplier_items": [
+      "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+    ],
+    "required_hypotheses": "Stored point entries are finite format values; every operation that returns a rounded result satisfies the no-underflow model, and any range failure is returned rather than treated as a certificate.",
+    "affected_claims": [
+      "alg-point-verified-linear-system-certifier: interpreting rounded matrix and vector products and reporting range-failure"
+    ],
+    "local_route": "The algorithm treats stored dyadics as exact inputs and uses the supplier only for its explicitly rounded candidate products; exact certificate bounds are enclosed separately by interval operations.",
+    "supplier_excerpts": [
+      {
+        "item": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+        "section": "Definition",
+        "excerpt": "Complex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-point-verified-linear-system-certifier",
+    "supplier": "lem-rounded-linear-and-normal-residual-certificates",
+    "status": "verified",
+    "evidence": "Inspected the complete Statement and Proof. The carrier gives a successful-dot-product operationwise error allowance for fl(Ax) followed by fl(v-y), and a columnwise Frobenius certificate for computed matrix products. The consumer applies the vector bound to its residual and each column of RA; it does not use the normal-equation allowance.",
+    "examined_supplier_items": [
+      "lem-rounded-linear-and-normal-residual-certificates"
+    ],
+    "required_hypotheses": "Dimensions are positive; (max(m,n)-1)u<1; requested dot products succeed; nonzero exact intermediates are normal; norms in the allowance are exact or certified upper bounds; certificate computations are not uncontrolled rounded values.",
+    "affected_claims": [
+      "alg-point-verified-linear-system-certifier: q upper bound from rounded columns of RA",
+      "alg-point-verified-linear-system-certifier: r upper bound from rounded A xhat-b and R residual"
+    ],
+    "local_route": "For each RA column the supplier's linear-vector bound yields a column error v_j; their squared sum bounds the product Frobenius error. Its two-stage residual bound W is propagated by ||R||_2 and combined with the rounded R product allowance.",
+    "supplier_excerpts": [
+      {
+        "item": "lem-rounded-linear-and-normal-residual-certificates",
+        "section": "Statement",
+        "excerpt": "For $\\widehat v=\\operatorname{fl}(Ax)$ and $\\widehat w=\\operatorname{fl}(\\widehat v-y)$, put $V=g_nFX$ and $W=V+u(\\|\\widehat v\\|_2+Y)$. Then\n$$\\|\\widehat w-(Ax-y)\\|_2\\le W.$$\nNorms in these certificates mean exact norms or certified upper bounds. Uncontrolled rounding of the certificate itself is not authorized. The linear bound applies columnwise to certify $\\|I-AB\\|_2\\le\\|I-AB\\|_F$ from stored basis-solve columns $B$."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "all interval-dependent batch-61 algorithms and their soundness theorems",
+    "supplier": "def-intervals-rectangles-and-complex-balls",
+    "status": "verified",
+    "evidence": "Inspected the current Definition and its transitive interval chain. The current run-local Step 1 records for the represented-set definitions, dyadic rounding, square-root procedure, and outward-operation soundness are ready with owner=true and their current content hashes match. The Definition distinguishes finite dyadic enclosures from empty, entire, overflow, domain-error, split-domain, and inconclusive statuses. This establishes an available drafting interface, not independent proof approval.",
+    "examined_supplier_items": [
+      "def-intervals-rectangles-and-complex-balls",
+      "def-dyadic-floating-point-format-and-directed-rounding",
+      "lem-directed-dyadic-rounding-enclosure-and-error",
+      "alg-dyadic-square-root-bisection",
+      "thm-dyadic-square-root-bisection-encloses",
+      "def-outward-rounded-interval-and-ball-operations",
+      "lem-real-and-complex-modulus-rules",
+      "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+    ],
+    "required_hypotheses": "Represented inputs are contained in finite dyadic real intervals, conjugate-symmetric complex rectangles or balls. Exact endpoint formulas are rounded downward/upward; invalid domains and overflow are returned as non-finite statuses, never as finite results. Interval consumers may infer exact family bounds only from finite DAG enclosures.",
+    "affected_claims": [
+      "alg-point-verified-linear-system-certifier: all outward norm and radius bounds",
+      "alg-uniform-interval-linear-residual-certifier: uniform matrix and residual enclosures",
+      "alg-interval-linear-krawczyk-certifier: Krawczyk inclusion and defect bound",
+      "alg-interval-determinant-sign-certifier: determinant enclosure",
+      "alg-interval-hermitian-ldl-inertia-certifier: pivot and Schur-complement enclosures",
+      "alg-near-orthonormal-hermitian-eigenvalue-certifier: residual, Gram and scalar inequalities",
+      "alg-complex-resolvent-cover-validator: diskwise norm bounds",
+      "alg-ordered-hermitian-eigenvalue-bisection and ex-hermitian-eigenvalue-bisection-by-verified-inertia: interval inertia chain"
+    ],
+    "local_route": "Batch-61 algorithms use only finite outward enclosures and return inconclusive on unresolved domains, range statuses or non-finite results. The actual interval chain is available; no unresolved supplier item remains for this interface.",
+    "supplier_excerpts": [
+      {
+        "item": "def-intervals-rectangles-and-complex-balls",
+        "section": "Definition",
+        "excerpt": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic endpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its midpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty set is the status `empty`; the whole real line is `entire`. `overflow`, `domain-error`, `split-domain`, and `inconclusive` are computation statuses, not finite intervals."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "all interval-dependent batch-61 algorithms and their soundness theorems",
+    "supplier": "def-outward-rounded-interval-and-ball-operations",
+    "status": "verified",
+    "evidence": "Inspected the complete operation Definition and the current owner-ready Step 1 record. It specifies exact real endpoint formulas, directed dyadic storage, complex rectangle extensions, conservative ball radii, and explicit overflow/domain statuses; the required dyadic-format and square-root suppliers are present and current.",
+    "examined_supplier_items": [
+      "def-dyadic-floating-point-format-and-directed-rounding",
+      "def-intervals-rectangles-and-complex-balls",
+      "alg-dyadic-square-root-bisection",
+      "thm-dyadic-square-root-bisection-encloses"
+    ],
+    "required_hypotheses": "Finite endpoint operations use the specified dyadic format and directed rounding; division and square-root domains are checked; complex rectangles and balls are used only when the stated nonzero/domain tests succeed; any non-finite status stops the finite enclosure claim.",
+    "affected_claims": [
+      "all batch-61 interval-dependent success claims listed under def-intervals-rectangles-and-complex-balls"
+    ],
+    "local_route": "Consumers evaluate these operations as finite DAG nodes and return inconclusive if a node is undefined, overflows, or has no finite enclosure.",
+    "supplier_excerpts": [
+      {
+        "item": "def-outward-rounded-interval-and-ball-operations",
+        "section": "Definition",
+        "excerpt": "For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact endpoint formulas and round the lower endpoint down and the upper endpoint up in the format of [[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact endpoint overflows, return `overflow` with the outward extended endpoints; never substitute a finite endpoint for an overflow sentinel."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "all interval-dependent batch-61 soundness theorems",
+    "supplier": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "status": "verified",
+    "evidence": "Inspected the complete Statement and proof, including the induction over a finite expression DAG and the separate interval, rectangle and ball cases. The current run-local Step 1 record is ready with owner=true and its content hash matches its dependencies. This records the available supplier interface, not independent proof approval.",
+    "examined_supplier_items": [
+      "def-intervals-rectangles-and-complex-balls",
+      "def-outward-rounded-interval-and-ball-operations",
+      "lem-directed-dyadic-rounding-enclosure-and-error",
+      "thm-dyadic-square-root-bisection-encloses",
+      "lem-real-and-complex-modulus-rules"
+    ],
+    "required_hypotheses": "Every operation node in a claimed finite DAG returns a finite enclosure; endpoint conversions bracket exact finite endpoints; invalid-domain, overflow or inconclusive statuses make no finite DAG claim. For ball operations the rectangle projection bounds and nonzero divisor lower bound in the Definition apply.",
+    "affected_claims": [
+      "all batch-61 interval-dependent soundness theorems: translation from reported enclosures to exact family bounds"
+    ],
+    "local_route": "Batch-61 soundness proofs use this theorem only to pass from finite computed enclosures to exact quantities for all admitted family members; algorithm failure branches make no mathematical assertion.",
+    "supplier_excerpts": [
+      {
+        "item": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+        "section": "Statement",
+        "excerpt": "For a finite expression DAG whose operation nodes all return finite enclosures, every exact node value from every admissible input assignment belongs to its computed node enclosure; in particular, the root enclosure contains the exact range. If any node returns a non-finite status, no finite DAG enclosure is asserted."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-interval-hermitian-ldl-inertia-certifier",
+    "supplier": "alg-symmetric-indefinite-block-ldl-star",
+    "status": "verified",
+    "evidence": "Inspected the full current Definition. The exact branch accepts the caller's ordering, declared one/two by two block partition and threshold, and may return pivot-failure on a nonsingular matrix. The interval algorithm uses only a successful midpoint run to select a candidate plan, independently verifies family pivots, and maps candidate failure to inconclusive.",
+    "examined_supplier_items": [
+      "alg-symmetric-indefinite-block-ldl-star"
+    ],
+    "required_hypotheses": "The midpoint is Hermitian; a fixed ordering, admissible block partition and threshold are supplied; exact midpoint arithmetic is used by the branch being called. A midpoint pivot-failure is not treated as family singularity.",
+    "affected_claims": [
+      "alg-interval-hermitian-ldl-inertia-certifier: candidate plan and pivot-failure status"
+    ],
+    "local_route": "The midpoint algorithm only proposes a pivot plan. Exact family inertia follows from independent interval nonzero/sign tests, the local two-by-two determinant/trace sign lemma, Schur updates, and the local block inertia-additivity lemma.",
+    "supplier_excerpts": [
+      {
+        "item": "alg-symmetric-indefinite-block-ldl-star",
+        "section": "Definition",
+        "excerpt": "The method may return **pivot-failure**$(r)$ on a nonsingular input when the declared pivot sequence contains a block that fails its test; it asserts no universal growth bound."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-neumann-inverse-norm-bound",
+    "supplier": "lem-neumann-invertibility-for-finite-matrices",
+    "status": "verified",
+    "evidence": "Inspected the full current Statement and Proof. It proves finite-dimensional Neumann invertibility under an operator-2-norm defect below one. The local inverse-norm proof separately proves convergence and the quantitative geometric bound; it does not infer the bound from invertibility alone.",
+    "examined_supplier_items": [
+      "lem-neumann-invertibility-for-finite-matrices"
+    ],
+    "required_hypotheses": "The matrix is finite square with dimension n≥1, and the 2-operator norm of the defect is strictly less than one.",
+    "affected_claims": [
+      "lem-neumann-inverse-norm-bound: invertibility in its q<1 case"
+    ],
+    "local_route": "The local geometric-series proof supplies the quantitative norm estimate; this ready supplier supplies the finite-dimensional invertibility interface as declared in the item facts.",
+    "supplier_excerpts": [
+      {
+        "item": "lem-neumann-invertibility-for-finite-matrices",
+        "section": "Statement",
+        "excerpt": "If $n\\ge1$, $X\\in\\mathbb C^{n\\times n}$, and $\\|X\\|_2<1$, then $I+X$ is invertible."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "supplier": "lem-directed-dyadic-rounding-enclosure-and-error",
+    "status": "verified",
+    "evidence": "Inspected the complete rounding lemma proof and the current owner-ready Step 1 record. The exact dyadic-format supplier is present and current. The proof treats representable values, adjacent subnormals, normal-bin boundaries, negative values by symmetry, and finite overflow sentinels.",
+    "examined_supplier_items": [
+      "def-dyadic-floating-point-format-and-directed-rounding",
+      "lem-directed-dyadic-rounding-enclosure-and-error"
+    ],
+    "required_hypotheses": "For |x|≤Nmax, rd(x) and ru(x) are adjacent representable dyadics bracketing x with the stated absolute-error allowance; values outside the finite range use extended overflow sentinels and do not receive a finite-error bound.",
+    "affected_claims": [
+      "thm-outward-rounded-operations-are-isotone-and-dag-sound: every finite endpoint operation and stored square-root endpoint encloses its exact value"
+    ],
+    "local_route": "Finite interval operations apply the lemma at each endpoint conversion; the theorem proof separately handles the exact real formulas and uses the lemma only for directed storage.",
+    "supplier_excerpts": [
+      {
+        "item": "lem-directed-dyadic-rounding-enclosure-and-error",
+        "section": "Statement",
+        "excerpt": "For finite $x$ with $|x|\\le N_{\\max}$, the directed roundings defined in [[def-dyadic-floating-point-format-and-directed-rounding]] satisfy $\\operatorname{rd}(x)\\le x\\le\\operatorname{ru}(x)$ and each endpoint error is at most the stated $\\epsilon_{\\rm abs}(x)$ (with zero error when $x$ is representable). For $x>N_{\\max}$ the pair $(N_{\\max},+\\infty)$ encloses $x$; for $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has error bound $+\\infty$ and cannot be reported as a finite-error result."
+      }
+    ]
+  }
+]

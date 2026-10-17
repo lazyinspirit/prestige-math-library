@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "id": "thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+  "obligation": "post-reader:85:thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+  "session_id": "01a1453a-4023-7610-bb50-420ea714ce09",
+  "accepted_decision_sha256": "2ebd5c4a1fa63d8988351351c3c4383479c22f7fc9a3848aeb5c33cf6c352e4f",
+  "native_result": {
+    "path": "research/numerical-optimization-dynamics-2026-10-16-dispatch/alpha-3a-batch-85.result.json",
+    "sha256": "a813c41c22ce17538ace4868afe75d87b83138cd5264b372ae36c0df0469ba14"
+  },
+  "native_report": {
+    "path": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-85-3a.md",
+    "sha256": "adaab88413aa1bdd786c0ad5eacae0f9239897629714c118e19789d1c89e0a80"
+  },
+  "mathematical_acceptance_source": "actual-native-review",
+  "root_binding_only": true,
+  "report_excerpt": "Independently reviewed complete `lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature`, `lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate` and `thm-sqp-exhaustive-active-set-qp-solve-correct-finite`. The theorem's actual current proof covers equality reduction, every accepted KKT tuple by strict quadratic expansion, feasible-support completeness, all 2^m possible subsets, both directions of infeasibility, full multipliers and E/J. It covers all properties removed from the algorithm's embedded Facts/Proof; `justified_by` therefore reuses this existing proved result without a new item, method or unproved fallback. Zero-dimensional primal space, no equality rows, m=0 (one empty subset), inconsistent equalities and dependent selected stacks are all covered. If equalities are inconsistent, there can be zero subset tests; the contract now says **at most** 2^m. Property placement is a separate owner-observed nonfatal correction, not a fabricated reader100 finding. The original algorithm proof and native worksheets remain intact in the two archives named by `proof_applicability`.",
+  "source_raw_sha256": "3bcb1f0e2e3836fb35227f13d6436278fdee8ae4a23316017cecff08e864a721",
+  "proof_steps": [
+    {
+      "id": "1.1",
+      "claim": "The equality reduction is finite: there are finitely many row subsets to check, and exact rank and consistency tests decide each one. Under [A1] it preserves the equality feasible set; if it reports inconsistency, that set is empty and the full QP is infeasible."
+    },
+    {
+      "id": "1.2",
+      "claim": "For any enumerated subset whose rows are independent, the KKT matrix is nonsingular by [F2], because $B$ is positive definite on every subspace. Thus its equality-constrained candidate is uniquely defined. If that candidate passes the inequality feasibility and multiplier-sign filters, its zero-extended multipliers give a feasible KKT tuple for the original QP, with primal point $\\bar p$. For every feasible $y$, stationarity and complementarity give $(B\\bar p+c)^T(y-\\bar p)=-\\sum_i\\lambda_iG_i(y-\\bar p)\\ge0$, since only active inequalities have positive multipliers. Thus $q(y)-q(\\bar p)=(B\\bar p+c)^T(y-\\bar p)+\\tfrac12(y-\\bar p)^TB(y-\\bar p)\\ge0$, with equality only for $y=\\bar p$. Hence the accepted candidate is the unique global minimizer."
+    },
+    {
+      "id": "2.1",
+      "claim": "If the QP is feasible, [F1] supplies an active KKT support whose rows are independent together with the reduced equality rows. [F3] therefore tests that support. The solve in step 1.2 returns its KKT point, and its feasibility and nonnegative multipliers make it pass both filters. Hence the algorithm cannot report `QP-infeasible` on a feasible subproblem."
+    },
+    {
+      "id": "3.1",
+      "claim": "There are exactly $2^m$ inequality subsets. Every subset requires only finitely many exact rank, solve, and feasibility operations, so [F3] terminates. If no candidate was found, step 2.1 shows the QP is infeasible; if a candidate was found, step 1.2 shows it is the unique minimizer with the returned full KKT multipliers and support data."
+    }
+  ],
+  "review_basis": "fresh-specific-native-proof-review"
+}

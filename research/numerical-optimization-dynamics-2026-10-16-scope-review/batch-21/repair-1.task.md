@@ -1,0 +1,15 @@
+# Batch 21: repair 1
+
+Run: numerical-optimization-dynamics-2026-10-16
+Batch: 21
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: numerical-boundary-value-problems, numerical-boundary-value-problems-examples
+Items: alg-centered-difference-dirichlet-bvp, lem-centered-difference-dirichlet-inverse-maxnorm, lem-centered-difference-dirichlet-truncation-residual, thm-centered-difference-dirichlet-second-order-error, ex-centered-difference-dirichlet-quadratic-exact, ex-first-order-neumann-closure-causes-first-order-bvp-error, ex-dirichlet-inverse-infinity-norm-tight-at-n3
+Consolidated findings: [{"id":"alg-centered-difference-dirichlet-bvp","type":"prerequisite","reason":"The algorithm has justified_by: [lem-centered-difference-dirichlet-inverse-maxnorm], while that lemma depends on the algorithm and uses its recurrence in proof steps 1.1–3.1 to establish pivot positivity and solve correctness. Remove the justified_by edge and the Definition’s final sentence that invokes it. The algorithm is already defined with explicit failure statuses; retain the inverse lemma as a downstream result proving those branches unreachable and success for admissible inputs. The affected consumers are listed below; their mathematical uses remain sound because the algorithm’s operational specification is unchanged."}]
+Authorized source files: ["items/alg-centered-difference-dirichlet-bvp.md","items/lem-centered-difference-dirichlet-inverse-maxnorm.md","items/lem-centered-difference-dirichlet-truncation-residual.md","items/thm-centered-difference-dirichlet-second-order-error.md","items/ex-centered-difference-dirichlet-quadratic-exact.md","items/ex-first-order-neumann-closure-causes-first-order-bvp-error.md","items/ex-dirichlet-inverse-infinity-norm-tight-at-n3.md","library/numerical-differential-equations-and-stochastic-dynamics/numerical-boundary-value-problems.md","library/numerical-differential-equations-and-stochastic-dynamics/numerical-boundary-value-problems-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

@@ -1,0 +1,445 @@
+{
+  "group": "ad",
+  "batches": [
+    "96"
+  ],
+  "pages_read": [
+    "discrete-continuous-and-pde-adjoint-sensitivities",
+    "discrete-continuous-and-pde-adjoint-sensitivities-examples"
+  ],
+  "items_read": [
+    "def-parameterized-finite-state-step-objective",
+    "def-parameterized-elliptic-variational-problem",
+    "def-parameterized-parabolic-variational-problem",
+    "lem-parameter-ode-flow-tangent-on-common-tube",
+    "lem-ode-adjoint-pairing-integration-by-parts",
+    "thm-discrete-adjoint-gradient-recursion",
+    "thm-continuous-ode-adjoint-gradient-formula",
+    "lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order",
+    "lem-explicit-rk-differentiated-stages-give-local-c1-order",
+    "thm-discrete-continuous-gradient-error-order-p",
+    "lem-implicit-rk-stage-jacobian-nonsingular-on-branch",
+    "thm-implicit-rk-stage-parameter-sensitivity",
+    "lem-elliptic-state-map-c1-under-uniform-coercivity",
+    "thm-elliptic-adjoint-reduced-gradient",
+    "thm-elliptic-fe-gradient-error-in-energy-norms",
+    "cor-elliptic-l2-gradient-rate-under-dual-regularity",
+    "thm-parabolic-adjoint-gradient-sensitivity",
+    "thm-parabolic-fe-gradient-error-with-time-dependent-ritz",
+    "thm-finite-time-tangent-volume-growth-from-qr",
+    "ex-4dvar-discrete-adjoint-gradient",
+    "ex-implicit-stiff-decay-parameter-fit",
+    "ex-elliptic-diffusion-coefficient-sensitivity",
+    "ex-multiple-shooting-sensitivity-jacobian",
+    "ex-qr-finite-time-volume-growth",
+    "ex-tent-map-finite-time-sensitivity-growth",
+    "ex-discrete-terminal-condition-mismatch",
+    "cex-state-error-alone-does-not-control-gradient"
+  ],
+  "conventions": [
+    {
+      "convention": "The finite graph has N≥1 transitions indexed 0 through N−1, permits varying state dimensions, and differentiates its actual C1 maps in exact real arithmetic.",
+      "fixed_by": "def-parameterized-finite-state-step-objective",
+      "matters_for": [
+        "thm-discrete-adjoint-gradient-recursion",
+        "ex-4dvar-discrete-adjoint-gradient",
+        "ex-discrete-terminal-condition-mismatch"
+      ]
+    },
+    {
+      "convention": "Gradients are columns; vector norms are Euclidean and matrix norms are induced operator norms.",
+      "fixed_by": "lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order",
+      "matters_for": [
+        "lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order",
+        "lem-explicit-rk-differentiated-stages-give-local-c1-order",
+        "thm-discrete-continuous-gradient-error-order-p"
+      ]
+    },
+    {
+      "convention": "At T=0 the parameter-flow assertion concerns initial evaluation only and asserts no time derivative on a singleton. The continuous adjoint and pairing formulas require T>0.",
+      "fixed_by": "lem-parameter-ode-flow-tangent-on-common-tube",
+      "matters_for": [
+        "thm-continuous-ode-adjoint-gradient-formula",
+        "lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order",
+        "ex-multiple-shooting-sensitivity-jacobian"
+      ]
+    },
+    {
+      "convention": "Elliptic forms are real bilinear forms, need not be symmetric, and the adjoint equation is aθ(v,p)=DuJ[v]. Parameter data are C1 in operator norm with uniform neighborhood coercivity.",
+      "fixed_by": "def-parameterized-elliptic-variational-problem",
+      "matters_for": [
+        "lem-elliptic-state-map-c1-under-uniform-coercivity",
+        "thm-elliptic-adjoint-reduced-gradient",
+        "thm-elliptic-fe-gradient-error-in-energy-norms"
+      ]
+    },
+    {
+      "convention": "The weighted gradient-error branch requires nonnegative weights summing to T. The independent local-C1 consistency branch permits negative or zero RK weights.",
+      "fixed_by": "thm-discrete-continuous-gradient-error-order-p",
+      "matters_for": [
+        "thm-discrete-continuous-gradient-error-order-p",
+        "lem-explicit-rk-differentiated-stages-give-local-c1-order"
+      ]
+    },
+    {
+      "convention": "Implicit sensitivities differentiate the selected exact algebraic stage branch with nonsingular residual Jacobian.",
+      "fixed_by": "thm-implicit-rk-stage-parameter-sensitivity",
+      "matters_for": [
+        "thm-implicit-rk-stage-parameter-sensitivity",
+        "ex-implicit-stiff-decay-parameter-fit"
+      ]
+    },
+    {
+      "convention": "Parabolic states use a real evolution triple, T>0, weak time derivatives in W(0,T;V), and continuous H traces. The definition specifies bilinear forms without imposing their boundedness.",
+      "fixed_by": "def-parameterized-parabolic-variational-problem",
+      "matters_for": [
+        "thm-parabolic-adjoint-gradient-sensitivity",
+        "thm-parabolic-fe-gradient-error-with-time-dependent-ritz"
+      ]
+    },
+    {
+      "convention": "Time-dependent comparison maps are C1 in operator norm; their residual derivative includes P′u+Pu′−u′. Adjoint reversal changes the sign of the projection time derivative.",
+      "fixed_by": "thm-parabolic-fe-gradient-error-with-time-dependent-ritz",
+      "matters_for": [
+        "thm-parabolic-fe-gradient-error-with-time-dependent-ritz"
+      ]
+    },
+    {
+      "convention": "QR factors have positive real diagonals, n,N≥1, and log-volume means log|det(A_N⋯A_1)| over a finite horizon.",
+      "fixed_by": "thm-finite-time-tangent-volume-growth-from-qr",
+      "matters_for": [
+        "thm-finite-time-tangent-volume-growth-from-qr",
+        "ex-qr-finite-time-volume-growth"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-discrete-adjoint-gradient-recursion",
+      "statement": "For the finite C1 state-step objective, S₀=Dx₀ and Sₙ₊₁=AₙSₙ+Bₙ; p_N=Dxφᵀ and pₙ=Dxℓₙᵀ+Aₙᵀpₙ₊₁. Its exact gradient is Dθφᵀ+S₀ᵀp₀+Σₙ(Dθℓₙᵀ+Bₙᵀpₙ₊₁).",
+      "used_by": [
+        "lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order",
+        "thm-discrete-continuous-gradient-error-order-p",
+        "ex-4dvar-discrete-adjoint-gradient",
+        "ex-multiple-shooting-sensitivity-jacobian",
+        "ex-tent-map-finite-time-sensitivity-growth",
+        "ex-discrete-terminal-condition-mismatch"
+      ]
+    },
+    {
+      "id": "lem-parameter-ode-flow-tangent-on-common-tube",
+      "statement": "Under the stated C1 field, C1 initial map, unique positive-horizon solutions and bounded convex common tube with compact closure in the open domain, θ↦uθ is C1 into C([0,T];Rᵈ). For T>0 its derivative uniquely solves S′=f_uS+f_θ, S(0)=Du₀; T=0 has the separate initial-evaluation conclusion.",
+      "used_by": [
+        "thm-continuous-ode-adjoint-gradient-formula",
+        "lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order",
+        "lem-explicit-rk-differentiated-stages-give-local-c1-order",
+        "ex-multiple-shooting-sensitivity-jacobian"
+      ]
+    },
+    {
+      "id": "lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order",
+      "statement": "Under its uniform local value and first-derivative consistency, derivative stability and size, exact-derivative Lipschitz, initial-data, terminal-derivative and tube hypotheses, the state, actual graph tangent, nodal adjoint and reduced gradient have the displayed order-p bounds with constants X,C_S,C_P,C_G.",
+      "used_by": [
+        "lem-explicit-rk-differentiated-stages-give-local-c1-order",
+        "thm-discrete-continuous-gradient-error-order-p"
+      ]
+    },
+    {
+      "id": "lem-explicit-rk-differentiated-stages-give-local-c1-order",
+      "statement": "For the actual explicit RK state and matching cost maps, the stated C2 base-data, common-tube and local augmented-order hypotheses supply the preceding lemma's local consistency, stability, derivative-size and derivative-Lipschitz hypotheses. The stated augmented C4 condition and coefficient equations instantiate orders through four.",
+      "used_by": [
+        "thm-discrete-continuous-gradient-error-order-p"
+      ]
+    },
+    {
+      "id": "lem-elliptic-state-map-c1-under-uniform-coercivity",
+      "statement": "Assuming Countable Choice, uniform neighborhood coercivity and operator-norm C1 data, each elliptic state exists uniquely and depends C1 on θ; its derivative satisfies aθ(wη,v)=Dθℓθ[η](v)−Dθaθ[η](uθ,v).",
+      "used_by": [
+        "thm-elliptic-adjoint-reduced-gradient"
+      ]
+    },
+    {
+      "id": "thm-elliptic-adjoint-reduced-gradient",
+      "statement": "Assuming Countable Choice and the stated differentiable coercive state setting, the transposed adjoint gives Dj(θ)[η]=DθJ(uθ,θ)[η]+Dθℓθ[η](pθ)−Dθaθ[η](uθ,pθ). No symmetry is required.",
+      "used_by": [
+        "thm-elliptic-fe-gradient-error-in-energy-norms",
+        "cor-elliptic-l2-gradient-rate-under-dual-regularity",
+        "ex-elliptic-diffusion-coefficient-sensitivity"
+      ]
+    },
+    {
+      "id": "thm-parabolic-adjoint-gradient-sensitivity",
+      "statement": "Under the stated differentiable state, linearized equation, objective differentiation and terminal adjoint hypotheses, Dj[η]=Dθφ[η]+(p(0),u₀′[η])_H+∫₀ᵀ(DθL[η]+⟨fθ′[η],p⟩−aθ′[η](uθ,p))dt.",
+      "used_by": [
+        "thm-parabolic-fe-gradient-error-with-time-dependent-ritz"
+      ]
+    },
+    {
+      "id": "thm-finite-time-tangent-volume-growth-from-qr",
+      "statement": "For invertible real square factors and positive-diagonal QR updates A_kQ_{k−1}=Q_kR_k, log|det(A_N⋯A_1)|=Σ_{k,i}log r_{k,ii}. The numerical log bound additionally requires the stated positive singular-value floor and certified diagonal/log errors.",
+      "used_by": [
+        "ex-qr-finite-time-volume-growth"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "C1 maps on open Euclidean domains in the finite graph definition.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "Total derivatives and zero-dimensional remainder conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+      "used_for": "Boundedness, coercivity and real nonsymmetric bilinear conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-hilbert-space",
+      "used_for": "Hilbert-space completeness convention for elliptic states.",
+      "opened": true
+    },
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "ODE solution domains and endpoint derivatives.",
+      "opened": true
+    },
+    {
+      "id": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+      "used_for": "Integral equations in the common-tube tangent proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-mean-value-inequality-for-total-derivatives",
+      "used_for": "Uniform secant and remainder estimates on convex open sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-gronwall-integral-inequality",
+      "used_for": "Flow increment, tangent remainder and coefficient-continuity bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-inequality-for-the-vector-valued-integral",
+      "used_for": "Norm estimates for positive-orientation vector integrals.",
+      "opened": true
+    },
+    {
+      "id": "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+      "used_for": "Existence and uniqueness of tangent columns and terminal adjoints via homogeneous augmentation.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Finite coordinate pairings and Euclidean norms.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Pairing product rule and elementary example derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Integrated pairing identity and scalar weak-solution verification.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Finite graph, implicit branch and differentiated-stage compositions.",
+      "opened": true
+    },
+    {
+      "id": "thm-mean-value-inequality",
+      "used_for": "Segmentwise Lipschitz estimates, including blockwise stage estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Euclidean norm inequalities and the transpose operator-norm identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+      "used_for": "Variational reduced-objective derivatives and augmented-field differentiation.",
+      "opened": true
+    },
+    {
+      "id": "thm-rank-nullity",
+      "used_for": "Turning a trivial stage-Jacobian kernel into invertibility.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Explicit choice assumptions inherited by elliptic and parabolic suppliers.",
+      "opened": true
+    },
+    {
+      "id": "thm-lax-milgram",
+      "used_for": "Elliptic state and sensitivity existence with inverse bound α⁻¹.",
+      "opened": true
+    },
+    {
+      "id": "thm-qr-factorisation-over-r-or-c",
+      "used_for": "Existence and uniqueness of positive-diagonal QR factorizations.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-multiplicative",
+      "used_for": "Finite-product determinant identity in the QR volume theorem.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-of-a-triangular-matrix",
+      "used_for": "Determinants of the upper-triangular QR factors.",
+      "opened": true
+    },
+    {
+      "id": "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus",
+      "used_for": "Determinant modulus one for orthogonal QR factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Logarithm perturbation estimate under the positive diagonal floor.",
+      "opened": true
+    },
+    {
+      "id": "alg-four-dimensional-variational-assimilation",
+      "used_for": "Exact strong-constraint objective instantiated by the two-observation example.",
+      "opened": true
+    },
+    {
+      "id": "def-sobolev-space-wkp-and-its-norm",
+      "used_for": "H1 norm and Sobolev-class conventions in the diffusion example.",
+      "opened": true
+    },
+    {
+      "id": "def-wkp-zero-as-a-sobolev-closure",
+      "used_for": "Approximation by compactly supported smooth tests in the diffusion example.",
+      "opened": true
+    },
+    {
+      "id": "thm-holder-inequality-for-integrals",
+      "used_for": "Bounded load and weak integral pairings in the diffusion example.",
+      "opened": true
+    },
+    {
+      "id": "lem-w-one-two-is-a-hilbert-space",
+      "used_for": "The H1_0 Hilbert-space prerequisite for the elliptic example and dual-rate supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Exact scalar shooting flow and its sensitivity.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Integrating-factor uniqueness for the scalar shooting flow.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Uniform local tube bound in the shooting example.",
+      "opened": true
+    },
+    {
+      "id": "cor-zero-derivative-implies-constant",
+      "used_for": "Uniqueness from the scalar integrating factor.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-parabolic-adjoint-gradient-sensitivity",
+      "concern": "Proof 1.2 uses 'the adjoint equation with v=w_η and the linearized state equation with v=p', although the Statement gives equations 'for every v∈V and almost every t'. Neither this theorem nor def-parameterized-parabolic-variational-problem requires the bilinear forms to be bounded, so fixed-test equations cannot in general be substituted at time-dependent tests. Under the written fixed-test quantifier order the claim is false. A counterexample in ZFC: take T=1 and V=H=ℓ²(R), with w(t)=(1,t,t²/2!,t³/3!,...). The vectors w(t), 0≤t≤1, are linearly independent by the finite Vandermonde determinant. Extend them to a Hamel basis and let λ_t be the coefficient functional of w(t). For each fixed v, λ_t(v) is nonzero at only finitely many times. Set aθ(t;x,y)=λ_t(x)(e₀,y), independently of θ; uθ(t)=θw(t); fθ(t)=θ(w′(t)+e₀); u₀,θ=θe₀; L=0; and φ(x,θ)=(e₀,x). The state and tangent equations hold for all tests at every time. The constant p=e₀ satisfies the written adjoint equation for every fixed test almost everywhere, since λ_t(v)=0 almost everywhere, and has the required terminal value. All state, forcing, objective and parameter derivatives have the required regularity. The true reduced objective is j(θ)=θ, whereas the asserted formula gives Dj[1]=1+∫₀¹(e₀,w′+e₀)dt=2. An explicit bounded-form/operator-equation hypothesis, or appropriately strengthened simultaneous-test assumptions, is needed to license the cancellation.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "to": "automatic-differentiation-and-computational-graphs",
+      "faithful": true,
+      "note": "Finite C1 reverse accumulation preserves every parameter edge and terminal seed. Implicit differentiation remains restricted to an exact nonsingular local solution branch."
+    },
+    {
+      "from": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "to": "nonlinear-boundary-value-solvers",
+      "faithful": true,
+      "note": "Contextual prerequisite; the assigned shooting example verifies its exact scalar flow and Jacobian locally. No BVP solvability or conditioning theorem is imported."
+    },
+    {
+      "from": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "The global one-step theorem supplies state error only under its defect, stability, initial-error and tube hypotheses. Tangent and adjoint conclusions require separate augmented or local-C1 arguments."
+    },
+    {
+      "from": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "The sufficient coefficient equations through four are applied to the actual augmented field with augmented C4 regularity and admitted stages. State order alone is not used as differentiated order."
+    },
+    {
+      "from": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "to": "ceas-lemma-and-aubin-nitsche-error-estimates",
+      "faithful": true,
+      "note": "Transposed coercive adjoints retain Countable Choice. The L2 rate explicitly requires separate state/adjoint primal-dual approximation hypotheses and L2-bounded parameter derivative maps."
+    },
+    {
+      "from": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "to": "parabolic-finite-element-methods",
+      "faithful": true,
+      "note": "The energy pairing and Ritz residual statements are cited with their trace, choice, regularity and comparison-map requirements. The concern about the owned gradient theorem is its separate fixed-test substitution under unrestricted bilinear forms."
+    },
+    {
+      "from": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "to": "implicit-stiff-time-stepping-and-algebraic-error",
+      "faithful": true,
+      "note": "Invariant-ball contraction supplies the selected root; a separate kernel argument supplies Jacobian nonsingularity. The scalar example verifies the centered ball [0,2u₀] and exact root."
+    },
+    {
+      "from": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "to": "variational-crimes-and-strang-lemmas",
+      "faithful": true,
+      "note": "Conforming state and adjoint error budgets retain their own load/form defects and coercivity assumptions. Parameter-derivative defects are separately assumed."
+    },
+    {
+      "from": "event-location-and-hybrid-trajectory-error",
+      "to": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "faithful": true,
+      "note": "The saltation theorem explicitly supplies identity-initial-map and common-tube hypotheses, including time reversal for incoming variations to the left of the event."
+    },
+    {
+      "from": "direct-transcription-and-numerical-ode-optimal-control",
+      "to": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "faithful": true,
+      "note": "The transcription procedure uses the exact finite-graph recursion for its actual returned maps. Continuous-gradient agreement remains conditional on the weighted representation and separate error hypotheses."
+    },
+    {
+      "from": "finite-element-pde-constrained-optimization",
+      "to": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "faithful": true,
+      "note": "Contextual prerequisite with no direct assigned-item citation in the page's current items. Its independent parabolic gradient interface explicitly assumes separability and measurable uniformly bounded coercive forms; it retains the projection derivative."
+    },
+    {
+      "from": "numerical-identifiability-and-optimal-experiment-design",
+      "to": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "faithful": true,
+      "note": "Contextual prerequisite with no direct assigned-item citation in the page's current items. Sensitivity perturbation and design-gap statements assume actual sensitivity errors and positive information floors rather than inferring them from state accuracy."
+    },
+    {
+      "from": "simulation-gradient-estimation-and-simultaneous-perturbation",
+      "to": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "faithful": true,
+      "note": "The SDE adjoint theorem applies the deterministic finite-graph formula realization by realization, handles N=0 separately, and adds explicit measurable versions and derivative-interchange hypotheses."
+    }
+  ]
+}

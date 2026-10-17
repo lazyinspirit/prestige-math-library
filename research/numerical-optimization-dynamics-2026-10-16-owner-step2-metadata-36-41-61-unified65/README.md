@@ -1,0 +1,13 @@
+# Unified source-to-metadata projection: 36, 41, 61 and seven applied 65 proofs
+
+Root-only review/application package. No mathematical review, source edit, native acceptance, gate or recertification is claimed. Actual original-session completion evidence is bound in proposal.json.
+
+This package explicitly supersedes the earlier partial36/41/61 package and ALL payloads in `research/numerical-optimization-dynamics-2026-10-16-owner-step2-b65/metadata-seven-preparation/`. Preserve those artifacts as history; do not execute the old65 utility as well. Root authorized consolidating all seven applied65 proof mirrors here.
+
+Current source scope: native inventories36/41/61, the native36-applied constant-BDF2 corollary and four remaining65 proof subjects. Complete numbered source paragraphs are extracted with the repository numberedProofSteps helper: multiline formulas and internal references remain in claims; only final justification tags and QED are removed. Full trailing inputs, current fact/source citation uses, complete actual source-section quotes and actual manifest deps are mirrored. Existing derivation classification/IDs and unrelated contract fields are preserved. Levels, proof judgments, boundary worksheets, source content and native evidence remain untouched.
+
+Current36 corollary uniform local-branch Proof1.1 and65 componentwise Facts are retained exactly in metadata mirrors. Current36 theorem dependencies include its two actual exponential suppliers. There are no projection issues.
+
+`before/`, `proposed/`, `proposal.diff` and raw source guards bind complete current inputs/candidates. Root application uses exact **per-field** preconditions, never a stale full-metadata replacement: disjoint later metadata edits are preserved. Source/context raw guards are selected per subject/field. Already-identical values are honest no-ops. `group_inventory` lists independent subject groups, and optional outside quote groups52/75/82 are separate. Any future original3 chord/stiff/RATTLE source change invalidates only fields requiring that source. None of the changed fields currently quotes those pending backend Definitions; the metadata subjects remain independently selectable.
+
+Run `python3 research/numerical-optimization-dynamics-2026-10-16-owner-step2-metadata-36-41-61-unified65/review_apply.py` for all guarded diffs. Root can use `--apply --all-stable` for primary stable fields, `--apply --group b36` / `b41` / `b61` / `b65` for a subject prefix, or `--apply --group outside-quotes` for separately approved external quotation mirrors. Exact group names also work. Application is not performed in this preparation. No mathematical consumer coverage is manufactured.

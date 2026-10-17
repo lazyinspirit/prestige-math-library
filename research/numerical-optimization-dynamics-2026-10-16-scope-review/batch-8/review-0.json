@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "8",
+  "round": 0,
+  "reviewed_items": [
+    "def-rare-event-efficiency-criteria",
+    "lem-standard-normal-mills-ratio",
+    "alg-cross-entropy-pilot-production",
+    "def-nested-rare-event-levels",
+    "def-finite-budget-stopped-event-kernel",
+    "lem-sir-bounded-potential-unnormalized-update-variance",
+    "thm-zero-variance-importance-sampling-proposal",
+    "thm-gaussian-tail-exponential-tilting",
+    "thm-cross-entropy-production-unbiased-given-pilot",
+    "lem-nested-level-probability-factorization",
+    "alg-independent-fixed-level-splitting",
+    "alg-fixed-level-sir-splitting",
+    "lem-finite-budget-stopped-normalizer",
+    "lem-stopped-kernel-discretization-bias",
+    "thm-independent-splitting-product-moments-and-work",
+    "thm-fixed-level-sir-estimator-unbiased",
+    "thm-fixed-level-sir-absolute-mse-bound",
+    "cex-sir-l2-bound-from-conditional-means-is-false",
+    "rem-sir-finite-particle-error-bound-scope",
+    "ex-gaussian-barrier-exponential-tilting",
+    "ex-queue-overflow-and-redundant-splitting-work",
+    "ex-cross-entropy-pilot-misses-event-support",
+    "cex-dependent-level-samples-bias-product-estimator",
+    "ex-sir-zero-particle-prefix-positive-event",
+    "ex-finite-budget-crossing-misses-between-grid-times",
+    "ex-importance-sampling-finite-mean-infinite-second-moment"
+  ],
+  "reviewed_pages": [
+    "rare-event-importance-sampling-and-multilevel-splitting",
+    "rare-event-importance-sampling-and-multilevel-splitting-examples"
+  ],
+  "decision": "repair",
+  "reason": "The batch’s substantive claims and supplier arguments were reviewed. Several local repairs are needed; the prerequisite gaps can be made explicit within the assigned sources, and the affected consumers were checked.",
+  "findings": [
+    {
+      "id": "alg-cross-entropy-pilot-production",
+      "type": "local",
+      "reason": "The production formula uses target density f, but f or its target P is not an algorithm input. Step 4 also relies on a “supplied admissibility check” without defining that input or its semantics. Specify the target density and a sound/exact check for support and integrability, or make those conditions explicit preconditions."
+    },
+    {
+      "id": "thm-cross-entropy-production-unbiased-given-pilot",
+      "type": "local",
+      "reason": "Proof step 1.1 says the pilot has a finite outcome space, although the algorithm permits a general measure space. Replace this with the measurable finite-valued selector argument and state the conditional conclusion almost surely given the pilot sigma-algebra."
+    },
+    {
+      "id": "alg-fixed-level-sir-splitting",
+      "type": "prerequisite",
+      "reason": "The nested-level definition permits an arbitrary measurable probability space, while the referenced Feynman–Kac/SIR setup requires standard Borel state spaces. Add the standard Borel condition on (Ω, F) to the algorithm’s inputs."
+    },
+    {
+      "id": "lem-stopped-kernel-discretization-bias",
+      "type": "prerequisite",
+      "reason": "The TV comparison needs a common finite Feynman–Kac setup: the same initial law, state spaces, potentials, and horizon for both kernel sequences. Otherwise zero kernel discrepancies need not give equal normalizers. State these assumptions and the inherited AC/standard Borel conditions explicitly."
+    },
+    {
+      "id": "thm-gaussian-tail-exponential-tilting",
+      "type": "local",
+      "reason": "Proof step 2.1 claims the estimator’s second moment is asymptotic to E[Z_a²]/n based only on p_a²/E[Z_a²]→0; this treats n as fixed although the statement does not say so. The logarithmic-efficiency claim can instead follow from p_a² ≤ E[ p̂² ] ≤ p_a² + E[Z_a²], whose bounds have the same leading logarithm."
+    },
+    {
+      "id": "rem-sir-finite-particle-error-bound-scope",
+      "type": "local",
+      "reason": "The remark says relative error divides by P(A_L)². Relative error divides by P(A_L); relative variance divides by its square."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-cross-entropy-production-unbiased-given-pilot",
+      "decision": "repair",
+      "reason": "Direct consumer of the cross-entropy algorithm; its proof also needs the pilot-conditioning correction identified above."
+    },
+    {
+      "id": "ex-cross-entropy-pilot-misses-event-support",
+      "decision": "accept",
+      "reason": "The Bernoulli example still has positive probability of pilot failure; its one-member proposal is admissible."
+    },
+    {
+      "id": "rare-event-importance-sampling-and-multilevel-splitting",
+      "decision": "accept",
+      "reason": "The page summary remains accurate with the algorithm’s target and admissibility inputs made explicit."
+    },
+    {
+      "id": "rare-event-importance-sampling-and-multilevel-splitting-examples",
+      "decision": "accept",
+      "reason": "The example-page summary remains accurate; the pilot-failure conclusion is unchanged."
+    },
+    {
+      "id": "thm-fixed-level-sir-estimator-unbiased",
+      "decision": "accept",
+      "reason": "Its statement uses the SIR model defined by the algorithm, so it inherits the added standard Borel input; the prefix-normalizer and invariance argument is sound."
+    },
+    {
+      "id": "thm-fixed-level-sir-absolute-mse-bound",
+      "decision": "accept",
+      "reason": "Its conditional IID update and backward-function martingale argument are valid for the algorithm’s standard Borel model."
+    },
+    {
+      "id": "cex-sir-l2-bound-from-conditional-means-is-false",
+      "decision": "accept",
+      "reason": "The finite two-state counterexample is a discrete standard Borel instance and its error calculation is valid."
+    },
+    {
+      "id": "ex-sir-zero-particle-prefix-positive-event",
+      "decision": "accept",
+      "reason": "The finite uniform model is a discrete standard Borel instance; the zero-prefix probability remains 1/4."
+    },
+    {
+      "id": "rem-sir-finite-particle-error-bound-scope",
+      "decision": "repair",
+      "reason": "The absolute-error conclusion is sound, but the relative-error denominator needs the local correction identified above."
+    },
+    {
+      "id": "ex-finite-budget-crossing-misses-between-grid-times",
+      "decision": "accept",
+      "reason": "The deterministic missed-crossing conclusion remains valid under a singleton standard Borel probability model; it does not use the TV comparison."
+    },
+    {
+      "id": "ex-gaussian-barrier-exponential-tilting",
+      "decision": "accept",
+      "reason": "It uses the Gaussian theorem’s finite-barrier moments, which are unaffected by the logarithmic-efficiency proof correction."
+    }
+  ]
+}

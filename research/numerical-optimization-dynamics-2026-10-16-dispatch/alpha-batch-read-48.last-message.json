@@ -1,0 +1,314 @@
+{
+  "group": "q",
+  "batches": ["48"],
+  "pages_read": [
+    "generalized-eigenvalue-pencils-and-qz-methods",
+    "generalized-eigenvalue-pencils-and-qz-methods-examples"
+  ],
+  "items_read": [
+    "def-regular-generalized-eigenvalue-pencil",
+    "lem-block-upper-triangular-pencil-determinant-factorizes",
+    "lem-zero-determinant-matrix-has-nonzero-kernel-vector",
+    "def-b-inner-product-and-dual-norm-for-definite-pencil",
+    "alg-generalized-hessenberg-triangular-reduction",
+    "def-generalized-schur-form",
+    "lem-projective-determinant-is-homogeneous-and-scale-invariant",
+    "lem-regular-pencil-has-no-common-kernel-vector",
+    "lem-two-sided-unitary-equivalence-errors-accumulate-for-pencil",
+    "thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis",
+    "prop-generalized-hessenberg-triangular-reduction-preserves-form-and-equivalence",
+    "lem-regular-pencil-has-projective-eigenvalue",
+    "thm-b-metric-residual-encloses-definite-pencil-eigenvalue",
+    "lem-qz-two-sided-local-computed-update-bound",
+    "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+    "thm-generalized-schur-form-exists-for-regular-pencil",
+    "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence",
+    "thm-computed-qz-pair-has-certified-backward-error",
+    "ex-singular-b-yields-an-infinite-generalized-eigenvalue",
+    "ex-regular-and-singular-pencil-determinant-witnesses",
+    "ex-mass-stiffness-pencil-has-two-b-orthogonal-modes"
+  ],
+  "conventions": [
+    {
+      "convention": "Pencils have positive order. Regularity means det(A−λB) is not the zero polynomial. Homogeneous eigenvalues are nonzero complex pairs [α:β] satisfying det(βA−αB)=0, modulo nonzero complex scaling; β=0 denotes infinity and σ(A,B) contains only finite ratios.",
+      "fixed_by": "def-regular-generalized-eigenvalue-pencil",
+      "matters_for": [
+        "lem-projective-determinant-is-homogeneous-and-scale-invariant",
+        "lem-regular-pencil-has-projective-eigenvalue",
+        "thm-generalized-schur-form-exists-for-regular-pencil",
+        "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+        "ex-singular-b-yields-an-infinite-generalized-eigenvalue",
+        "ex-regular-and-singular-pencil-determinant-witnesses"
+      ]
+    },
+    {
+      "convention": "The B-inner product is linear first: ⟨x,y⟩B=y*Bx. For B=LL*, the primal norm is ||L*x||₂ and the dual residual norm is ||L⁻¹r||₂.",
+      "fixed_by": "def-b-inner-product-and-dual-norm-for-definite-pencil",
+      "matters_for": [
+        "thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis",
+        "thm-b-metric-residual-encloses-definite-pencil-eigenvalue",
+        "ex-mass-stiffness-pencil-has-two-b-orthogonal-modes"
+      ]
+    },
+    {
+      "convention": "Complex generalized Schur form uses Q*AZ=S and Q*BZ=T with both factors triangular. Real form permits only one-by-one real blocks and two-by-two nonreal conjugate-root blocks in S, while T remains upper triangular.",
+      "fixed_by": "def-generalized-schur-form",
+      "matters_for": [
+        "thm-generalized-schur-form-exists-for-regular-pencil",
+        "alg-finite-budget-qz-iteration-with-deflation-and-residual"
+      ]
+    },
+    {
+      "convention": "Matrix indices start at zero. Left rotations annihilate the second coordinate of a column; first-coordinate row annihilation uses the reversal/adjoint factor J L(conjugate(b),conjugate(a))* J.",
+      "fixed_by": "alg-generalized-hessenberg-triangular-reduction",
+      "matters_for": [
+        "prop-generalized-hessenberg-triangular-reduction-preserves-form-and-equivalence",
+        "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+        "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence"
+      ]
+    },
+    {
+      "convention": "A computed rotation is generated once and shared by both matrices. Its normalized exact unitary representative is recorded as a factor product. Structural target writes enter the arithmetic allowance once; tolerance deflations are separate exact perturbations without an O(u) assertion.",
+      "fixed_by": "lem-qz-two-sided-local-computed-update-bound",
+      "matters_for": [
+        "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+        "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence",
+        "thm-computed-qz-pair-has-certified-backward-error"
+      ]
+    },
+    {
+      "convention": "The QZ budget counts sweeps after initialization and deflation; N=0 permits no sweep. qz-computed requires triangular factors and nonzero diagonal pairs. Infinite candidates describe the returned perturbed pencil, and no unconditional convergence is asserted.",
+      "fixed_by": "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+      "matters_for": [
+        "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence",
+        "thm-computed-qz-pair-has-certified-backward-error"
+      ]
+    },
+    {
+      "convention": "Residual certificates propagate raw stored-factor action errors, apply matvec bounds only to stored inputs, and evaluate allowances through an exact controller. Failure of the independent residual route does not invalidate a separately valid local-accumulation certificate.",
+      "fixed_by": "lem-qz-two-sided-local-computed-update-bound",
+      "matters_for": [
+        "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+        "thm-computed-qz-pair-has-certified-backward-error"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-qz-two-sided-local-computed-update-bound",
+      "statement": "Successful common computed Givens actions admit exact unitary representatives and local pair bounds ℓP(C,D), with ℓ=η for matrix-target actions and ℓ=v for raw actions; the lemma also supplies a stored-factor-action residual certificate with explicit propagated allowances.",
+      "used_by": [
+        "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+        "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence",
+        "thm-computed-qz-pair-has-certified-backward-error"
+      ]
+    },
+    {
+      "id": "lem-two-sided-unitary-equivalence-errors-accumulate-for-pencil",
+      "statement": "For the stated finite sequence of exact unitary two-sided updates with arithmetic and deflation perturbations, A_m=Q*(A+Δ_A)Z and B_m=Q*(B+Δ_B)Z, with combined Frobenius perturbation bounded by the sum of the local arithmetic pair norms and deflation pair norms; empty products are identities.",
+      "used_by": [
+        "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence",
+        "thm-computed-qz-pair-has-certified-backward-error"
+      ]
+    },
+    {
+      "id": "thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis",
+      "statement": "For Hermitian A and positive-definite Hermitian B=LL*, C=L⁻¹AL⁻* is self-adjoint with an orthonormal eigenbasis and real eigenvalues. The vectors x_i=L⁻*y_i satisfy Ax_i=λ_iBx_i and x_i*Bx_j=δ_ij; the homogeneous eigenvalues are exactly [λ_i:1], with none infinite.",
+      "used_by": [
+        "thm-b-metric-residual-encloses-definite-pencil-eigenvalue",
+        "ex-mass-stiffness-pencil-has-two-b-orthogonal-modes"
+      ]
+    },
+    {
+      "id": "prop-generalized-hessenberg-triangular-reduction-preserves-form-and-equivalence",
+      "statement": "For every input of alg-generalized-hessenberg-triangular-reduction, the algorithm terminates and returns orthogonal/unitary Q,Z, an upper Hessenberg matrix H, and an upper triangular matrix T such that H=Q*AZ and T=Q*BZ.",
+      "used_by": [
+        "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+        "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence"
+      ]
+    },
+    {
+      "id": "lem-regular-pencil-has-projective-eigenvalue",
+      "statement": "Every regular finite square pencil (A,B) over R or C has at least one homogeneous generalized eigenvalue pair [α:β] over C.",
+      "used_by": [
+        "thm-generalized-schur-form-exists-for-regular-pencil"
+      ]
+    },
+    {
+      "id": "lem-regular-pencil-has-no-common-kernel-vector",
+      "statement": "If (A,B) is a regular pencil and x∈Cⁿ satisfies Ax=0 and Bx=0, then x=0.",
+      "used_by": [
+        "thm-generalized-schur-form-exists-for-regular-pencil"
+      ]
+    },
+    {
+      "id": "lem-block-upper-triangular-pencil-determinant-factorizes",
+      "statement": "For a common block upper triangular pair with two positive block sizes, det(βA−αB)=det(βA₁₁−αB₁₁)det(βA₂₂−αB₂₂) for every complex α,β.",
+      "used_by": [
+        "thm-generalized-schur-form-exists-for-regular-pencil"
+      ]
+    },
+    {
+      "id": "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence",
+      "statement": "Every run of the specified finite-budget QZ algorithm terminates with a declared status. Successful initialization and completed sweeps preserve Hessenberg-triangular structure, except at explicitly isolated blocks. Certified exact-unitary factor records and local residuals give a two-sided equivalence to an accumulated perturbed input pair, without a size bound.",
+      "used_by": [
+        "thm-computed-qz-pair-has-certified-backward-error"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-determinant-of-a-square-matrix",
+      "used_for": "Leibniz expansions of pencil determinants and block factorization.",
+      "opened": true
+    },
+    {
+      "id": "cor-matrix-rank-nullity",
+      "used_for": "A trivial kernel forces full rank in the zero-determinant kernel lemma.",
+      "opened": true
+    },
+    {
+      "id": "cor-matrix-rank-equals-the-rank-of-its-linear-map",
+      "used_for": "Converting full matrix rank into surjectivity.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-invertible-iff-determinant-nonzero",
+      "used_for": "Kernel, regularity, invertibility, and homogeneous-root arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-cholesky-factorisation-with-positive-diagonal",
+      "used_for": "Positive-definite and Cholesky conventions underlying the B-metric.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Existence and uniqueness of B=LL* for the metric and definite-pencil reduction.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-space",
+      "used_for": "The linear-first convention respected by the B-inner product.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-norm",
+      "used_for": "Induced norm conventions for the B-norm and orthonormal constructions.",
+      "opened": true
+    },
+    {
+      "id": "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices",
+      "used_for": "The structural invariant of initialization and QZ sweeps.",
+      "opened": true
+    },
+    {
+      "id": "def-triangular-and-diagonal-matrices-over-a-commutative-ring",
+      "used_for": "Triangular structure in reduction and generalized Schur forms.",
+      "opened": true
+    },
+    {
+      "id": "def-real-and-complex-givens-transformations",
+      "used_for": "Exact rotation blocks and zero-based coordinate conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+      "used_for": "Exact vector alignment, target annihilation, and orthogonal/unitary transformations.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "used_for": "The meaning of orthogonal and unitary factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+      "used_for": "Homogeneity and the leading coefficient of det(A−λB).",
+      "opened": true
+    },
+    {
+      "id": "thm-root-bound-for-polynomials-over-a-domain",
+      "used_for": "Excluding identically vanishing determinants under regularity and choosing nonsingular parameter values.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "The augmented block embedding for pair-error accumulation.",
+      "opened": true
+    },
+    {
+      "id": "def-frobenius-matrix-norm",
+      "used_for": "Combined pair norms in the augmented block argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-multiplicative",
+      "used_for": "Determinant identities under Cholesky and generalized Schur basis changes.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-of-a-triangular-matrix",
+      "used_for": "Invertibility of Cholesky factors and diagonal spectral determinant products.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "An orthonormal eigenbasis for the real definite-pencil reduction.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "used_for": "An orthonormal eigenbasis for the complex Hermitian reduction.",
+      "opened": true
+    },
+    {
+      "id": "thm-fundamental-theorem-of-algebra-minimum-modulus-proof",
+      "used_for": "A finite root when the regular determinant polynomial has full positive degree.",
+      "opened": true
+    },
+    {
+      "id": "thm-gram-schmidt-orthonormalisation",
+      "used_for": "Real two-dimensional Schur-block bases, including a triangular leading B block.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "Completing real Schur-block bases on orthogonal complements.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+      "used_for": "Exact equality of raw residual and backward-perturbation Frobenius norms.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "generalized-eigenvalue-pencils-and-qz-methods",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Opened the operationwise model and rounded residual-certificate lemma. QZ retains range-failure handling, successful no-underflow assumptions, the matvec dimension restriction, stored-input requirements, and controlled certificate evaluation."
+    },
+    {
+      "from": "generalized-eigenvalue-pencils-and-qz-methods",
+      "to": "computed-schur-decompositions-and-nonnormal-spectra",
+      "faithful": true,
+      "note": "Opened the unitary-similarity accumulation lemma. The local 3n-dimensional block embedding correctly obtains distinct left/right pencil products and the combined pair bound. No Francis convergence claim is imported."
+    },
+    {
+      "from": "generalized-eigenvalue-pencils-and-qz-methods",
+      "to": "computed-singular-values-and-rank-revealing-factorizations",
+      "faithful": true,
+      "note": "Opened the canonical stored Givens procedure and complete local backward-error lemma. QZ shares each generated rotation across both arrays, enlarges the raw coefficient conservatively, uses the correct row-target orientation, and counts structural writes once."
+    },
+    {
+      "from": "restarted-and-block-eigensolvers",
+      "to": "generalized-eigenvalue-pencils-and-qz-methods",
+      "faithful": true,
+      "note": "Checked B-metric uses in block LOBPCG and the Ritz lemmas, plus harmonic-extraction and termination uses of QZ. Positive-definite hypotheses are preserved; the harmonic branch establishes projected-pencil regularity, maps all QZ statuses, and labels successful candidates as values of a perturbed projected pencil."
+    }
+  ]
+}

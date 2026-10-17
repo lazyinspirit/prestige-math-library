@@ -1,0 +1,1320 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json (proposed)
+@@ -31,7 +31,7 @@
+         "id": "alg-landweber-iteration-with-discrepancy-stopping",
+         "kind": "algorithm",
+         "title": "Landweber iteration with discrepancy and budget statuses",
+-        "statement": "Define the compact Hilbert-space Landweber path with x0=0, the stated step interval, discrepancy exit, and finite-budget status.",
++        "statement": "Assume Countable Choice, as required for the Hilbert-space adjoint in the\niteration.\n\nLet $X,Y$ be real or complex Hilbert spaces, let $A:X\\to Y$ be a nonzero\ncompact linear operator, and let $\\omega$ satisfy\n$0<\\omega<2/\\|A\\|^2$. The input consists of data $y_\\delta\\in Y$, a noise\nbound $\\delta\\ge0$, a discrepancy factor $\\tau>1$, and a finite iteration\nbudget $N\\in\\mathbb N$. Define the associated infinite mathematical path by\n$x_0=0$ and\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k),\\qquad k\\ge0.$$\nFor the finite procedure, evaluate only the prefix through index $N$, in\nincreasing order, and return at its first stopping condition. Values of the\nmathematical path after an earlier return remain defined by the recurrence but\nneed not be computed by an implementation.\n\nFor $k=0,\\ldots,N$ in increasing order, compute\n$r_k=y_\\delta-Ax_k$. If $\\|r_k\\|\\le\\tau\\delta$, return\n$(x_k,k,\\texttt{discrepancy})$. If $k=N$, return\n$(x_k,k,\\texttt{budget-exhausted})$. Otherwise set\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k).$$\n\nThe procedure uses exact Hilbert-space operations. It reports a finite-budget\nfailure to cross as inconclusive; that status is not a convergence conclusion.",
+         "strategy": "Give the finite inputs and every return branch; define the mathematical recurrence path through the budget and distinguish the lazy early return from its continuation.",
+         "deps": [
+           "def-hilbert-space",
+@@ -48,7 +48,7 @@
+         "id": "alg-golub-kahan-lsqr-with-givens-and-status",
+         "kind": "algorithm",
+         "title": "Exact-arithmetic LSQR with Golub–Kahan bidiagonalization and explicit statuses",
+-        "statement": "Define an exact finite-budget Golub–Kahan LSQR procedure with a specified Givens solve, discrepancy check, and stationary, breakdown, and budget statuses.",
++        "statement": "Let $A\\in\\mathbb R^{m\\times n}$, $b\\in\\mathbb R^m$, $x_0\\in\\mathbb R^n$,\n$\\delta\\ge0$, $\\tau>1$, and a budget $N\\in\\mathbb N$ be given. All\noperations are exact. Put $r_0=b-Ax_0$. If $\\|r_0\\|_2=0$, return\n$(x_0,0,\\text{zero-residual})$. If $\\|r_0\\|_2\\le\\tau\\delta$, return\n$(x_0,0,\\text{discrepancy})$. If $N=0$, return\n$(x_0,0,\\text{budget-exhausted})$. Otherwise initialize\n$\\beta_1=\\|r_0\\|_2$, $u_1=r_0/\\beta_1$, and\n$\\alpha_1=\\|A^Tu_1\\|_2$. If $\\alpha_1=0$, return\n$(x_0,0,\\text{stationary-nonzero-residual})$. Otherwise set\n$v_1=A^Tu_1/\\alpha_1$.\n\nInitialize the current best iterate and index to $(x_{\\rm best},j_{\\rm best})\n=(x_0,0)$. If a Givens rotation is undefined, return\n$(x_{\\rm best},j_{\\rm best},\\text{small-QR-breakdown})$.\n\nFor $j=1,\\ldots,N$, perform these steps.\n\n1. Compute $p_j=Av_j-\\alpha_j u_j$ and $\\beta_{j+1}=\\|p_j\\|_2$. If\n   $\\beta_{j+1}>0$, set $u_{j+1}=p_j/\\beta_{j+1}$.\n2. If $\\beta_{j+1}>0$, compute\n   $q_j=A^Tu_{j+1}-\\beta_{j+1}v_j$ and $\\alpha_{j+1}=\\|q_j\\|_2$. If\n   $\\alpha_{j+1}>0$, set $v_{j+1}=q_j/\\alpha_{j+1}$. A zero\n   $\\beta_{j+1}$ or $\\alpha_{j+1}$ marks bidiagonalization breakdown.\n3. Form the $(j+1)\\times j$ lower-bidiagonal matrix $B_j$ with diagonal\n   $\\alpha_1,\\ldots,\\alpha_j$ and subdiagonal\n   $\\beta_2,\\ldots,\\beta_{j+1}$, using $\\beta_{j+1}=0$ if step 1 broke down.\n   Let $e_1=(1,0,\\ldots,0)^T\\in\\mathbb R^{j+1}$ and $c=\\beta_1e_1$.\n   For $i=1,\\ldots,j$, let $a,b$ be the current entries at positions\n   $(i,i),(i+1,i)$ of the rotated matrix and put $\\rho=(a^2+b^2)^{1/2}$.\n   If $\\rho=0$, return the current best output with status\n   `small-QR-breakdown`. Otherwise put $c_i=a/\\rho$, $s_i=b/\\rho$ and\n   apply $\\begin{pmatrix}c_i&s_i\\\\-s_i&c_i\\end{pmatrix}$ to rows\n   $i,i+1$ of the full matrix and right-hand side. After these $j$ rotations,\n   let $R_j$ be the first $j$ rows of the rotated matrix and $d_j$ the first\n   $j$ entries of the rotated right-hand side. Solve $R_jz_j=d_j$ by back\n   substitution. Update $(x_{\\rm best},j_{\\rm best})=(x_0+V_jz_j,j)$.\n4. Put $V_j=[v_1,\\ldots,v_j]$ and $x_j=x_0+V_jz_j$. Compute the physical\n   residual $\\|Ax_j-b\\|_2$. If it is at most $\\tau\\delta$, return\n   $(x_j,j,\\text{discrepancy})$. If bidiagonalization broke down, return\n   $(x_j,j,\\text{bidiagonalization-breakdown})$. If $j=N$, return\n   $(x_j,j,\\text{budget-exhausted})$; otherwise continue.\n\nThe procedure makes no claim that a finite-budget status is a successful\nregularized approximation. Its exact-arithmetic residual-minimization property\nis a separate theorem.",
+         "strategy": "State the matrix/vector domains, all zero branches, the bidiagonal recurrence, the exact row rotations, triangular solve, physical residual test, and outputs. Claim no finite-precision stability.",
+         "deps": [
+           "def-matrix-space",
+@@ -64,7 +64,7 @@
+         "id": "lem-local-lipschitz-derivative-quadratic-remainder",
+         "kind": "lemma",
+         "title": "A Lipschitz Fréchet derivative gives a quadratic linearization remainder",
+-        "statement": "For a C1 map with L-Lipschitz Fréchet derivative on a convex set, prove the linearization remainder is at most (L/2)||x-z||^2.",
++        "statement": "Assume Countable Choice. Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ and let\n$X,Y$ be Banach spaces over the same field $\\mathbb F$. Let $U\\subseteq X$ be\nopen and let $F:U\\to Y$ be continuously Fréchet differentiable over\n$\\mathbb F$. Thus $F'(u)$ is bounded $\\mathbb F$-linear for each $u\\in U$ and\n$$\\lim_{\\substack{h\\to0,\\ h\\ne0\\\\u+h\\in U}}\n\\frac{\\|F(u+h)-F(u)-F'(u)h\\|}{\\|h\\|}=0.$$\nIn particular, in the complex case $F'(u)$ is complex-linear and the limit\nranges over complex increments. Let $K\\subseteq U$ be convex and let\n$x,z\\in K$. If\n$\\|F'(u)-F'(v)\\|\\le L\\|u-v\\|$ for all $u,v\\in K$, where $L\\ge0$, then\n$$\\|F(x)-F(z)-F'(z)(x-z)\\|\\le\\frac L2\\|x-z\\|^2.$$",
+         "strategy": "Parametrize the segment from z to x, apply the Banach-valued fundamental theorem of calculus, subtract the constant derivative integral, and integrate the Lipschitz bound.",
+         "deps": [
+           "lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves",
+@@ -81,7 +81,7 @@
+         "id": "alg-iteratively-regularized-gauss-newton-step",
+         "kind": "algorithm",
+         "title": "Iteratively regularized Gauss–Newton step with explicit early stopping",
+-        "statement": "Define the assigned unanchored regularized Gauss–Newton step with alpha_k=alpha_0 q^k, discrepancy return, and finite-budget status.",
++        "statement": "Assume Countable Choice, as required for the Hilbert-space adjoints in the\nnormal equation.\n\nLet $X,Y$ be Hilbert spaces over the same field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$,\nlet $U\\subseteq X$ be open, and let $F:U\\to Y$ be continuously Fréchet\ndifferentiable over $\\mathbb F$. In the complex case, each $F'(x)$ is a bounded\ncomplex-linear operator and the Fréchet remainder is measured over complex\nincrements, so\n$$\\lim_{\\substack{h\\to0,\\ h\\ne0\\\\x+h\\in U}}\n\\frac{\\|F(x+h)-F(x)-F'(x)h\\|}{\\|h\\|}=0.$$\nInputs are\n$x_0\\in U$, noisy data $y_\\delta\\in Y$, a bound $\\delta\\ge0$, a discrepancy\nfactor $\\tau>1$, a finite budget $N\\in\\mathbb N$, and parameters\n$\\alpha_0>0$ and $q\\in(0,1)$. At iteration $k$, if $x_k\\notin U$ return\n$(x_k,k,\\text{domain-failure})$. Otherwise put $A_k=F'(x_k)$ and\n$\\alpha_k=\\alpha_0q^k$. Before computing an update, if\n$\\|F(x_k)-y_\\delta\\|\\le\\tau\\delta$, return\n$(x_k,k,\\text{discrepancy})$. If $k=N$, return\n$(x_k,k,\\text{budget-exhausted})$.\n\nFor $k<N$, solve the unique Hilbert-space Tikhonov normal equation\n$$\\bigl(A_k^*A_k+\\alpha_k I_X\\bigr)s_k=A_k^*(y_\\delta-F(x_k))$$\nand set $x_{k+1}=x_k+s_k$. The shifted normal operator is invertible by\n[[lem-hilbert-tikhonov-normal-operator-invertible]]. If the returned iterate\nleaves $U$, the next call returns domain-failure. The procedure asserts no\nconvergence theorem; its prescribed step is the unanchored Levenberg–Marquardt\nform used in the assigned contract.",
+         "strategy": "State the open-domain and Hilbert-space inputs, check discrepancy before the solve, use the positive-shift normal inverse, update by x_{k+1}=x_k+s_k, and make no convergence assertion.",
+         "deps": [
+           "def-hilbert-space",
+@@ -99,7 +99,7 @@
+         "id": "thm-lsqr-residual-minimizes-on-krylov-subspace",
+         "kind": "theorem",
+         "title": "A nonbreakdown LSQR iterate minimizes residual on its Krylov space",
+-        "statement": "For a nonbreakdown k-step run, prove the LSQR iterate minimizes the true residual over x0+K_k(A^T A,A^T r0).",
++        "statement": "Let $A\\in\\mathbb R^{m\\times n}$, $b\\in\\mathbb R^m$, $x_0\\in\\mathbb R^n$, and\n$r_0=b-Ax_0$. Consider a $k$-step run of\n[[alg-golub-kahan-lsqr-with-givens-and-status]] with nonzero initial residual\nand no bidiagonalization or small-QR breakdown through step $k$. Then its\niterate $x_k$ minimizes $\\|Ax-b\\|_2$ over\n$$x_0+\\mathcal K_k(A^TA,A^Tr_0),$$\nwhere $\\mathcal K_k(M,v)=\\operatorname{span}\\{v,Mv,\\ldots,M^{k-1}v\\}$ is the\nKrylov subspace of [[def-krylov-subspace-of-a-matrix-and-start-vector]].\nThe assertion is exact-arithmetic residual minimization; it is not a\nconvergence or noise-stability theorem.",
+         "strategy": "Prove the two orthogonality recurrences by induction, assemble the bidiagonal projection and norm identity, transfer the projected least-squares minimizer, and identify the basis span with the Krylov space.",
+         "deps": [
+           "alg-golub-kahan-lsqr-with-givens-and-status",
+@@ -119,7 +119,7 @@
+         "id": "lem-landweber-filter-and-residual-identities",
+         "kind": "lemma",
+         "title": "Landweber iterates and residuals are spectral-filter iterates",
+-        "statement": "Derive the Landweber filter formula, data-residual filter, and exact-data error filter from the recurrence.",
++        "statement": "Assume Countable Choice. Let $A:X\\to Y$ and $\\omega$ satisfy the\nhypotheses of [[alg-landweber-iteration-with-discrepancy-stopping]] and put\n$T=A^*A$. For each integer $k\\ge0$, define\n$g_0(t)=0$ and\n$g_k(t)=\\omega\\sum_{j=0}^{k-1}(1-\\omega t)^j$ for $k\\ge1$, with\n$r_k(t)=(1-\\omega t)^k$. For the associated infinite mathematical path,\n$$x_k=g_k(T)A^*y_\\delta,\\qquad y_\\delta-Ax_k=r_k(AA^*)y_\\delta.$$\nIf $y_\\delta=Ax^\\dagger$, then\n$$x^\\dagger-x_k=r_k(T)x^\\dagger.$$\nHere $g_k(T)$ and $r_k(T)$ are the compact spectral multipliers defined in\n[[def-compact-spectral-filter-and-qualification]]; $r_k(AA^*)$ is the\nmultiplier with scalar function $t\\mapsto(1-\\omega t)^k$ on the compact\nself-adjoint operator $AA^*$, as supplied by\n[[lem-compact-spectral-multiplier-is-well-defined]].",
+         "strategy": "Induct on the vector recurrence and residual recurrence, then use the finite geometric identity to identify g_k and r_k.",
+         "deps": [
+           "alg-landweber-iteration-with-discrepancy-stopping",
+@@ -136,7 +136,7 @@
+         "id": "lem-irlgnm-one-step-error-recurrence",
+         "kind": "lemma",
+         "title": "One-step error recurrence for the assigned nonlinear regularized Gauss–Newton step",
+-        "statement": "Derive the exact nonlinear one-step error identity and the Lipschitz-remainder and tangential-cone bounds for the assigned unanchored step.",
++        "statement": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces over the\nsame scalar field and let $U\\subseteq X$ be open. Let $F:U\\to Y$ be\ncontinuously Fréchet differentiable over that field, with bounded\ncomplex-linear derivatives in the complex case. Let $x^\\dagger\\in U$ satisfy\n$F(x^\\dagger)=y$, and suppose $x_k,x^\\dagger$ lie in a convex subset of $U$\non which $F'$ is $L$-Lipschitz. Let $y_\\delta$ satisfy\n$\\|y_\\delta-y\\|\\le\\delta$, put $e_k=x_k-x^\\dagger$ and $A_k=F'(x_k)$,\nand use the step of\n[[alg-iteratively-regularized-gauss-newton-step]] with $\\alpha_k>0$.\nDefine\n$$R_k:=y-F(x_k)+A_ke_k.$$\nThen\n$$e_{k+1}=\\alpha_k(A_k^*A_k+\\alpha_kI)^{-1}e_k +(A_k^*A_k+\\alpha_kI)^{-1}A_k^*(y_\\delta-y+R_k),$$\nand\n$$\\|e_{k+1}\\|\\le\\|e_k\\|+ \\frac{\\delta+(L/2)\\|e_k\\|^2}{2\\sqrt{\\alpha_k}}.$$\nIf in addition the tangential-cone condition\n$$\\|F(x)-F(z)-F'(z)(x-z)\\|\\le\\eta\\|F(x)-F(z)\\|$$\nholds for all $x,z$ in that subset, then also\n$\\|R_k\\|\\le\\eta(\\|F(x_k)-y_\\delta\\|+\\delta)$, which may replace\n$(L/2)\\|e_k\\|^2$ in the recurrence bound. This lemma alone does not assert\ncontraction or discrepancy-stopped convergence.",
+         "strategy": "Multiply the error update by the shifted normal operator, isolate the noise and linearization remainder, then use the supplier norm bounds and triangle inequality.",
+         "deps": [
+           "alg-iteratively-regularized-gauss-newton-step",
+@@ -152,7 +152,7 @@
+         "id": "thm-landweber-source-and-noise-error-bounds",
+         "kind": "theorem",
+         "title": "Landweber converges for exact data and balances source bias with noise",
+-        "statement": "Prove exact-data norm convergence to the minimum-norm solution, source bias O(k^-s), noise amplification at most sqrt(2 omega k) delta, the scalar filter bound, and their total-error bound.",
++        "statement": "Assume Countable Choice. Let $A:X\\to Y$ be a nonzero compact operator between\nreal or complex Hilbert spaces, set $T=A^*A$, choose\n$0<\\omega<2/\\|A\\|^2$, and let $y=Ax^\\dagger$ with\n$x^\\dagger\\in(\\ker A)^\\perp$. Let $x_k$ be the exact-data Landweber iterates\nin the infinite recurrence-defined path of\n[[alg-landweber-iteration-with-discrepancy-stopping]] for datum $y$; this path\ndepends on $A,\\omega,y$ and not on a finite cap or stopping test. Put\n$r_k(t)=(1-\\omega t)^k$. Then $\\|x_k-x^\\dagger\\|$ is nonincreasing and\n$x_k\\to x^\\dagger$ in norm. For every $s>0$, if $x^\\dagger=T^s w$ with\n$w\\in X$, then for $k\\ge1$,\n$$\\|x_k-x^\\dagger\\|\\le C_{s,A,\\omega}\\|w\\|k^{-s}.$$\nThe scalar filter also satisfies\n$$\\sup_{t\\in\\Sigma}t^s|r_k(t)|\\le C_{s,A,\\omega}k^{-s},$$\nwhere $\\Sigma$ is the set of nonzero eigenvalues of $T$.\nFor noisy data $y_\\delta$ with $\\|y_\\delta-y\\|\\le\\delta$, let\n$x_k^\\delta$ be the infinite recurrence-defined path for datum $y_\\delta$.\nIt satisfies\n$$\\|x_k^\\delta-x_k\\|\\le\\sqrt{2\\omega k}\\,\\delta.$$\nConsequently, under the source condition $x^\\dagger=T^\\nu w$,\n$0<\\nu\\le1$, the total error obeys\n$$\\|x_k^\\delta-x^\\dagger\\|\\le C_{\\nu,A,\\omega}\\|w\\|k^{-\\nu} +\\sqrt{2\\omega k}\\,\\delta.$$",
+         "strategy": "Use compact spectral components for monotonicity and convergence, bound the scalar filter multiplier, and estimate the noise operator through Q_k Q_k*.",
+         "deps": [
+           "lem-landweber-filter-and-residual-identities",
+@@ -172,7 +172,7 @@
+         "id": "cor-landweber-discrepancy-stopped-convergence-rate",
+         "kind": "corollary",
+         "title": "Landweber discrepancy stopping converges under a source condition",
+-        "statement": "Under xdag=T^nu w, 0<nu<=1, positive noise, tau>1, and sufficient budget, prove a finite first discrepancy crossing and the rate C R^(1/(2nu+1)) delta^(2nu/(2nu+1)).",
++        "statement": "Assume Countable Choice and the hypotheses of\n[[thm-landweber-source-and-noise-error-bounds]]. Let\n$x^\\dagger=T^\\nu w$ with $0<\\nu\\le1$ and $R=\\|w\\|\\ge0$. Fix $\\tau>1$ and\n$\\delta>0$ with $\\|y_\\delta-Ax^\\dagger\\|\\le\\delta$. Let $k_\\delta$ be the\nfirst index on the associated infinite mathematical path satisfying\n$\\|Ax_{k_\\delta}^\\delta-y_\\delta\\|\\le\\tau\\delta$, where $x_k^\\delta$ is\nthe corresponding noisy-data path.\nIf a finite budget is used, assume it is at least the upper bound $K_\\delta$\nconstructed in the proof when $R>0$. If $R=0$, the initial iterate is the\nfirst crossing and any finite budget suffices. For all sufficiently small\n$\\delta$,\n$$\\|x_{k_\\delta}^\\delta-x^\\dagger\\| \\le C_{\\nu,A,\\omega,\\tau}R^{1/(2\\nu+1)}\\delta^{2\\nu/(2\\nu+1)}.$$\nThe conclusion is conditional on an actual discrepancy crossing; a budget\nexhaustion status is inconclusive.",
+         "strategy": "Construct an upper crossing index from the residual source bound, control noise in data space, prove the spectral interpolation inequality on finite eigenvalue sets, and bound the propagated solution noise.",
+         "deps": [
+           "thm-landweber-source-and-noise-error-bounds",
+@@ -270,7 +270,7 @@
+         "id": "cex-full-lsqr-can-amplify-data-noise",
+         "kind": "counterexample",
+         "title": "A fully converged LSQR solve can amplify a small singular-direction error",
+-        "statement": "Refute a matrix-independent noise-to-solution error bound for continuing a full LSQR projected solve to zero residual.",
++        "statement": "There is a constant independent of the matrix such that continuing the LSQR\nprojected solves to zero residual always gives an estimate within that\nconstant times the data-noise level of the exact solution.",
+         "strategy": "Compute the one-dimensional weak-singular-direction Golub–Kahan and projected solve exactly, then compare its solution error with the data-noise norm; distinguish the assigned early return.",
+         "deps": [
+           "alg-golub-kahan-lsqr-with-givens-and-status",
+@@ -290,7 +290,7 @@
+         "id": "ex-nonlinear-exponential-kinetics-one-step",
+         "kind": "example",
+         "title": "One regularized Gauss–Newton step for exponential reaction kinetics",
+-        "statement": "Compute one assigned regularized Gauss–Newton step for F(c)=1-exp(-c), including the initial discrepancy check and physical-rate sign.",
++        "statement": "For a first-order reaction with conversion fraction $F(c)=1-e^{-c}$ at unit\ntime, use $X=Y=U=\\mathbb R$, true rate $c^\\dagger=\\log 2$, exact datum\n$y=\\tfrac12$, initial rate $c_0=0$, $\\alpha_0=\\tfrac14$, $q=\\tfrac12$,\ndiscrepancy factor $\\tau=2$, and budget $N=1$. For\n$0<\\delta\\le\\tfrac1{10}$ and $|\\varepsilon|\\le\\delta$, the datum\n$y^\\delta=\\tfrac12+\\varepsilon$ does not meet the initial discrepancy stopping condition. The\nsingle update gives $c_1=\\tfrac25+\\tfrac45\\varepsilon$; the procedure returns\nthis state with status `discrepancy` if its post-update residual is at most\n$2\\delta$, and otherwise with status `budget-exhausted`.",
+         "strategy": "Differentiate the scalar model with the chain rule, verify exp(log 2)=2, check the initial residual exceeds tau delta, substitute the scalar normal equation, and bound the returned rate below.",
+         "deps": [
+           "alg-iteratively-regularized-gauss-newton-step",
+@@ -311,7 +311,7 @@
+         "id": "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+         "kind": "example",
+         "title": "Landweber semiconvergence for diagonal noisy data",
+-        "statement": "Exhibit compact diagonal Landweber data whose residual tends to zero while un-stopped noisy reconstruction norms diverge along k_j=4^j.",
++        "statement": "Let $X=Y=\\ell^2(\\mathbb N)$, let $Ae_j=2^{-j}e_j$ for the standard unit\nvectors $e_j$, and take $\\omega=1$, exact solution $x^\\dagger=0$, and exact\ndata $y=0$. For $\\delta>0$ let\n$y^\\delta_j=\\delta\\,2^{-j/2}$, so $\\|y^\\delta-y\\|=\\delta$. The un-stopped\nLandweber residual tends to zero, but the reconstruction norms are unbounded\nalong the subsequence $k_j=4^j$.",
+         "strategy": "Approximate the diagonal operator by finite-rank truncations, compute residual and reconstruction coordinates, and use a geometric bound on (1-4^-j)^(4^j).",
+         "deps": [
+           "alg-landweber-iteration-with-discrepancy-stopping",
+@@ -336,7 +336,7 @@
+         "id": "ex-three-pixel-blur-landweber-reconstruction",
+         "kind": "example",
+         "title": "Landweber reconstructs a three-pixel blurred signal",
+-        "statement": "Compute the Landweber iterates for a symmetric three-pixel blur and a zero-sum eigenvector.",
++        "statement": "Consider the symmetric three-pixel averaging blur\n$$A=\\frac14\\begin{pmatrix}2&1&1\\\\1&2&1\\\\1&1&2\\end{pmatrix}.$$\nFor the zero-sum signal $x^\\dagger=(1,0,-1)^T$, exact data are\n$y=Ax^\\dagger=\\tfrac14x^\\dagger$. With $x_0=0$ and $\\omega=1$, the\nLandweber iterates are $x_k=(1-(15/16)^k)x^\\dagger$: the first reconstruction\nis only $x_1=\\tfrac1{16}x^\\dagger$, while the exact signal is recovered in the\nlimit.",
+         "strategy": "Diagonalize the displayed rank-one perturbation of the identity, verify the step interval, and apply the exact-data Landweber error filter.",
+         "deps": [
+           "alg-landweber-iteration-with-discrepancy-stopping",
+--- research/numerical-optimization-dynamics-2026-10-16-batch-88.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-88.proof-contracts.json (proposed)
+@@ -27,8 +27,7 @@
+           "source_section": "Definition",
+           "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+           "uses": [
+-            "1.1",
+-            "2.1"
++            "1.1"
+           ]
+         },
+         {
+@@ -73,22 +72,19 @@
+           "source": "def-bochner-integrable-function",
+           "source_section": "Definition",
+           "quote": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space and $X$ a real or complex\nBanach space. A strongly measurable function $f:\\Omega\\to X$ is\n**Bochner integrable** if there is a sequence of integrable $X$-valued simple\nfunctions $(s_n)$ such that\n\n$$\\lim_{n\\to\\infty}\\int_\\Omega\\|f-s_n\\|\\,d\\mu=0.$$\n\nFor such a sequence define\n\n$$\\int_\\Omega f\\,d\\mu:=\\lim_{n\\to\\infty}\\int_\\Omega s_n\\,d\\mu.$$\n\nThe displayed norm limit exists: the simple integral inequality gives\n\n$$\\left\\|\\int s_n-\\int s_m\\right\\|\\leq\\int\\|s_n-s_m\\|\\leq\\int\\|s_n-f\\|+\\int\\|f-s_m\\|,$$\n\nso the simple integrals form a Cauchy sequence, and $X$ is complete. The next\ntheorem proves that the value is independent of the approximating sequence and\ncharacterizes existence by integrability of $\\|f\\|$.\n\nFor $E\\in\\mathcal A$, write\n$\\int_Ef\\,d\\mu:=\\int_\\Omega\\mathbf1_Ef\\,d\\mu$ whenever this function is\nBochner integrable.",
+-          "uses": [
+-            "1.1"
+-          ]
++          "uses": []
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "Convexity gives $z+th\\in K\\subseteq U$ for $0\\le t\\le1$. The chain rule gives $\\gamma'(t)=F'(z+th)h$, which is continuous because $F'$ is Lipschitz on $K$. Thus [F1] applies and $F(x)-F(z)=\\int_0^1F'(z+th)h\\,dt$. The constant vector function $t\\mapsto F'(z)h$ has integral $F'(z)h$ by [F2]. Subtracting that integral and using linearity gives $F(x)-F(z)-F'(z)h=\\int_0^1(F'(z+th)-F'(z))h\\,dt$.",
++          "claim": "Convexity gives $z+th\\in K\\subseteq U$ for $0\\le t\\le1$. If $h\\ne0$ and $0<t<1$, put $u=z+th$. For real $s\\to0$ with $t+s\\in[0,1]$, Fréchet differentiability at $u$ gives\n$$\\left\\|\\frac{F(u+sh)-F(u)}s-F'(u)h\\right\\|\n=\\frac{\\|F(u+sh)-F(u)-F'(u)(sh)\\|}{|s|}\\longrightarrow0,$$\nbecause $F'(u)$ is linear over the common field and hence over real scalars.\nThus $\\gamma'(t)=F'(z+th)h$. If $h=0$, $\\gamma$ is constant and the same\nformula holds. Differentiability at every point of $U$ also makes $F$ and hence\n$\\gamma$ continuous on the segment, directly from the Fréchet remainder\ndefinition. In either case this derivative is continuous in $t$ and extends\nto the endpoints, since $F'$ is Lipschitz on $K$. The Banach-valued fundamental\ntheorem [F1] therefore gives\n$F(x)-F(z)=\\int_0^1F'(z+th)h\\,dt$. The constant vector function\n$t\\mapsto F'(z)h$ has integral $F'(z)h$ by [F2]. Subtracting that integral and\nusing linearity gives\n$F(x)-F(z)-F'(z)h=\\int_0^1(F'(z+th)-F'(z))h\\,dt$.",
+           "step": "1.1",
+           "inputs": [
+             "A1",
+             "F1",
+             "F2",
+             "F4",
+-            "F5",
+             "given",
+             "construct",
+             "algebra"
+@@ -96,10 +92,10 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "For each $t\\in[0,1]$, the Lipschitz hypothesis and [F4] give $\\|(F'(z+th)-F'(z))h\\|\\le Lt\\|h\\|^2$. Therefore [F3] and scalar integration give $\\|F(x)-F(z)-F'(z)h\\|\\le\\int_0^1Lt\\|h\\|^2\\,dt=(L/2)\\|h\\|^2$.",
++          "claim": "For each $t\\in[0,1]$, the Lipschitz hypothesis and bounded linearity give $\\|(F'(z+th)-F'(z))h\\|\\le Lt\\|h\\|^2$. Therefore",
+           "step": "2.1",
+           "inputs": [
+-            "A1",
++            "F3] and scalar integration give $\\|F(x)-F(z)-F'(z)h\\|\\le\\int_0^1Lt\\|h\\|^2\\,dt=(L/2)\\|h\\|^2$. [A1",
+             "step 1.1",
+             "F3",
+             "F4",
+@@ -175,9 +171,7 @@
+           "quote": "Let $A\\in\\mathbb R^{m\\times n}$, $b\\in\\mathbb R^m$, $x_0\\in\\mathbb R^n$,\n$\\delta\\ge0$, $\\tau>1$, and a budget $N\\in\\mathbb N$ be given. All\noperations are exact. Put $r_0=b-Ax_0$. If $\\|r_0\\|_2=0$, return\n$(x_0,0,\\text{zero-residual})$. If $\\|r_0\\|_2\\le\\tau\\delta$, return\n$(x_0,0,\\text{discrepancy})$. If $N=0$, return\n$(x_0,0,\\text{budget-exhausted})$. Otherwise initialize\n$\\beta_1=\\|r_0\\|_2$, $u_1=r_0/\\beta_1$, and\n$\\alpha_1=\\|A^Tu_1\\|_2$. If $\\alpha_1=0$, return\n$(x_0,0,\\text{stationary-nonzero-residual})$. Otherwise set\n$v_1=A^Tu_1/\\alpha_1$.\n\nInitialize the current best iterate and index to $(x_{\\rm best},j_{\\rm best})\n=(x_0,0)$. If a Givens rotation is undefined, return\n$(x_{\\rm best},j_{\\rm best},\\text{small-QR-breakdown})$.\n\nFor $j=1,\\ldots,N$, perform these steps.\n\n1. Compute $p_j=Av_j-\\alpha_j u_j$ and $\\beta_{j+1}=\\|p_j\\|_2$. If\n   $\\beta_{j+1}>0$, set $u_{j+1}=p_j/\\beta_{j+1}$.\n2. If $\\beta_{j+1}>0$, compute\n   $q_j=A^Tu_{j+1}-\\beta_{j+1}v_j$ and $\\alpha_{j+1}=\\|q_j\\|_2$. If\n   $\\alpha_{j+1}>0$, set $v_{j+1}=q_j/\\alpha_{j+1}$. A zero\n   $\\beta_{j+1}$ or $\\alpha_{j+1}$ marks bidiagonalization breakdown.\n3. Form the $(j+1)\\times j$ lower-bidiagonal matrix $B_j$ with diagonal\n   $\\alpha_1,\\ldots,\\alpha_j$ and subdiagonal\n   $\\beta_2,\\ldots,\\beta_{j+1}$, using $\\beta_{j+1}=0$ if step 1 broke down.\n   Let $e_1=(1,0,\\ldots,0)^T\\in\\mathbb R^{j+1}$ and $c=\\beta_1e_1$.\n   For $i=1,\\ldots,j$, let $a,b$ be the current entries at positions\n   $(i,i),(i+1,i)$ of the rotated matrix and put $\\rho=(a^2+b^2)^{1/2}$.\n   If $\\rho=0$, return the current best output with status\n   `small-QR-breakdown`. Otherwise put $c_i=a/\\rho$, $s_i=b/\\rho$ and\n   apply $\\begin{pmatrix}c_i&s_i\\\\-s_i&c_i\\end{pmatrix}$ to rows\n   $i,i+1$ of the full matrix and right-hand side. After these $j$ rotations,\n   let $R_j$ be the first $j$ rows of the rotated matrix and $d_j$ the first\n   $j$ entries of the rotated right-hand side. Solve $R_jz_j=d_j$ by back\n   substitution. Update $(x_{\\rm best},j_{\\rm best})=(x_0+V_jz_j,j)$.\n4. Put $V_j=[v_1,\\ldots,v_j]$ and $x_j=x_0+V_jz_j$. Compute the physical\n   residual $\\|Ax_j-b\\|_2$. If it is at most $\\tau\\delta$, return\n   $(x_j,j,\\text{discrepancy})$. If bidiagonalization broke down, return\n   $(x_j,j,\\text{bidiagonalization-breakdown})$. If $j=N$, return\n   $(x_j,j,\\text{budget-exhausted})$; otherwise continue.\n\nThe procedure makes no claim that a finite-budget status is a successful\nregularized approximation. Its exact-arithmetic residual-minimization property\nis a separate theorem.",
+           "uses": [
+             "1.1",
+-            "2.1",
+-            "3.1",
+-            "4.1"
++            "2.1"
+           ]
+         },
+         {
+@@ -243,10 +237,16 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "The initial vector $u_1=r_0/\\|r_0\\|_2$ is unit. Suppose $u_1,\\ldots,u_j$ and $v_1,\\ldots,v_j$ are orthonormal and satisfy the earlier Golub–Kahan recurrences. For $i<j$, $\\langle Av_j,u_i\\rangle=\\langle v_j,A^Tu_i\\rangle=0$ by [F5]–[F7], because $A^Tu_i$ lies in $\\operatorname{span}\\{v_{i-1},v_i\\}$; for $i=j$, $\\langle Av_j,u_j\\rangle=\\alpha_j$ by the definition of $\\alpha_j$. Therefore $Av_j-\\alpha_ju_j$ is orthogonal to $u_1,\\ldots,u_j$, and division by the nonzero $\\beta_{j+1}$ gives a unit $u_{j+1}$ orthogonal to them. For $i<j$, $\\langle A^Tu_{j+1},v_i\\rangle=\\langle u_{j+1},Av_i\\rangle=0$ by [F5]–[F7], since $Av_i=\\alpha_i u_i+\\beta_{i+1}u_{i+1}$ lies in $\\operatorname{span}\\{u_1,\\ldots,u_j\\}$; for $i=j$ the inner product equals $\\beta_{j+1}$. Thus $A^Tu_{j+1}-\\beta_{j+1}v_j$ is orthogonal to $v_1,\\ldots,v_j$, and division by the nonzero $\\alpha_{j+1}$ gives a unit $v_{j+1}$ orthogonal to them. Induction proves both orthonormality relations through step $k$.",
++          "claim": "The initial vector $u_1=r_0/\\|r_0\\|_2$ is unit. Suppose $u_1,\\ldots,u_j$ and $v_1,\\ldots,v_j$ are orthonormal and satisfy the earlier Golub–Kahan recurrences. For $i<j$, $\\langle Av_j,u_i\\rangle=\\langle v_j,A^Tu_i\\rangle=0$ by",
+           "step": "1.1",
+           "inputs": [
+-            "given",
++            "F5]–[F7]",
++            "because $A^Tu_i$ lies in $\\operatorname{span}\\{v_{i-1},v_i\\}$; for $i=j$",
++            "$\\langle Av_j,u_j\\rangle=\\alpha_j$ by the definition of $\\alpha_j$. Therefore $Av_j-\\alpha_ju_j$ is orthogonal to $u_1,\\ldots,u_j$",
++            "and division by the nonzero $\\beta_{j+1}$ gives a unit $u_{j+1}$ orthogonal to them. For $i<j$",
++            "$\\langle A^Tu_{j+1},v_i\\rangle=\\langle u_{j+1},Av_i\\rangle=0$ by [F5]–[F7]",
++            "since $Av_i=\\alpha_i u_i+\\beta_{i+1}u_{i+1}$ lies in $\\operatorname{span}\\{u_1,\\ldots,u_j\\}$; for $i=j$ the inner product equals $\\beta_{j+1}$. Thus $A^Tu_{j+1}-\\beta_{j+1}v_j$ is orthogonal to $v_1,\\ldots,v_j$",
++            "and division by the nonzero $\\alpha_{j+1}$ gives a unit $v_{j+1}$ orthogonal to them. Induction proves both orthonormality relations through step $k$. [given",
+             "F1",
+             "F5",
+             "F6",
+@@ -257,10 +257,11 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "The column recurrences in [F1] assemble as $AV_k=U_{k+1}B_k$. Also $r_0=\\beta_1u_1=\\beta_1U_{k+1}e_1$. Hence for every $z\\in\\mathbb R^k$, $$b-A(x_0+V_kz)=r_0-AV_kz=U_{k+1}(\\beta_1e_1-B_kz).$$ Orthonormality from [step 1.1] and the Euclidean norm definition [F5] imply $\\|b-A(x_0+V_kz)\\|_2=\\|\\beta_1e_1-B_kz\\|_2$.",
++          "claim": "The column recurrences in",
+           "step": "2.1",
+           "inputs": [
+-            "step 1.1",
++            "F1] assemble as $AV_k=U_{k+1}B_k$. Also $r_0=\\beta_1u_1=\\beta_1U_{k+1}e_1$. Hence for every $z\\in\\mathbb R^k$",
++            "$$b-A(x_0+V_kz)=r_0-AV_kz=U_{k+1}(\\beta_1e_1-B_kz).$$ Orthonormality from [step 1.1] and the Euclidean norm definition [F5] imply $\\|b-A(x_0+V_kz)\\|_2=\\|\\beta_1e_1-B_kz\\|_2$. [step 1.1",
+             "F1",
+             "F5",
+             "F6",
+@@ -269,10 +270,12 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "Each Givens rotation in [F1] is orthogonal because $(a/\\rho)^2+(b/\\rho)^2=1$ when $\\rho=(a^2+b^2)^{1/2}>0$, so the rotations preserve the small least-squares residual norm. Since $B_k$ has nonzero diagonal $\\alpha_1,\\ldots,\\alpha_k$, it has full column rank; [F4] therefore gives a unique minimizing vector $z_k$. The algorithm's $x_k=x_0+V_kz_k$ minimizes the true residual over $x_0+\\operatorname{span}\\{v_1,\\ldots,v_k\\}$ by [step 2.1].",
++          "claim": "Each Givens rotation in",
+           "step": "3.1",
+           "inputs": [
+-            "F1",
++            "F1] is orthogonal because $(a/\\rho)^2+(b/\\rho)^2=1$ when $\\rho=(a^2+b^2)^{1/2}>0$",
++            "so the rotations preserve the small least-squares residual norm. Since $B_k$ has nonzero diagonal $\\alpha_1,\\ldots,\\alpha_k$",
++            "it has full column rank; [F4] therefore gives a unique minimizing vector $z_k$. The algorithm's $x_k=x_0+V_kz_k$ minimizes the true residual over $x_0+\\operatorname{span}\\{v_1,\\ldots,v_k\\}$ by [step 2.1]. [F1",
+             "F4",
+             "F5",
+             "step 2.1",
+@@ -281,10 +284,10 @@
+         },
+         {
+           "id": "step-4-1",
+-          "claim": "The recurrence gives, for $j\\ge1$, $$A^TAv_j=\\alpha_j\\beta_jv_{j-1}+(\\alpha_j^2+\\beta_{j+1}^2)v_j+\\alpha_{j+1}\\beta_{j+1}v_{j+1},$$ with the first term omitted at $j=1$. Every coefficient $\\alpha_{j+1}\\beta_{j+1}$ is nonzero in a nonbreakdown run, so induction shows $\\operatorname{span}\\{v_1,\\ldots,v_k\\}= \\operatorname{span}\\{v_1,A^TAv_1,\\ldots,(A^TA)^{k-1}v_1\\}$. Since $v_1=A^Tr_0/(\\beta_1\\alpha_1)$, [F2]–[F3] identify this span with $\\mathcal K_k(A^TA,A^Tr_0)$. Substitution into [step 3.1] proves the Statement.",
++          "claim": "The recurrence gives, for $j\\ge1$, $$A^TAv_j=\\alpha_j\\beta_jv_{j-1}+(\\alpha_j^2+\\beta_{j+1}^2)v_j+\\alpha_{j+1}\\beta_{j+1}v_{j+1},$$ with the first term omitted at $j=1$. Every coefficient $\\alpha_{j+1}\\beta_{j+1}$ is nonzero in a nonbreakdown run, so induction shows $\\operatorname{span}\\{v_1,\\ldots,v_k\\}= \\operatorname{span}\\{v_1,A^TAv_1,\\ldots,(A^TA)^{k-1}v_1\\}$. Since $v_1=A^Tr_0/(\\beta_1\\alpha_1)$,",
+           "step": "4.1",
+           "inputs": [
+-            "F1",
++            "F2]–[F3] identify this span with $\\mathcal K_k(A^TA,A^Tr_0)$. Substitution into [step 3.1] proves the Statement. [F1",
+             "F2",
+             "F3",
+             "F6",
+@@ -361,33 +364,29 @@
+           "source": "def-countable-choice",
+           "source_section": "Definition",
+           "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+-          "uses": [
+-            "1.1",
++          "uses": []
++        },
++        {
++          "fact": "F1",
++          "source": "alg-landweber-iteration-with-discrepancy-stopping",
++          "source_section": "Definition",
++          "quote": "Assume Countable Choice, as required for the Hilbert-space adjoint in the\niteration.\n\nLet $X,Y$ be real or complex Hilbert spaces, let $A:X\\to Y$ be a nonzero\ncompact linear operator, and let $\\omega$ satisfy\n$0<\\omega<2/\\|A\\|^2$. The input consists of data $y_\\delta\\in Y$, a noise\nbound $\\delta\\ge0$, a discrepancy factor $\\tau>1$, and a finite iteration\nbudget $N\\in\\mathbb N$. Define the associated infinite mathematical path by\n$x_0=0$ and\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k),\\qquad k\\ge0.$$\nFor the finite procedure, evaluate only the prefix through index $N$, in\nincreasing order, and return at its first stopping condition. Values of the\nmathematical path after an earlier return remain defined by the recurrence but\nneed not be computed by an implementation.\n\nFor $k=0,\\ldots,N$ in increasing order, compute\n$r_k=y_\\delta-Ax_k$. If $\\|r_k\\|\\le\\tau\\delta$, return\n$(x_k,k,\\texttt{discrepancy})$. If $k=N$, return\n$(x_k,k,\\texttt{budget-exhausted})$. Otherwise set\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k).$$\n\nThe procedure uses exact Hilbert-space operations. It reports a finite-budget\nfailure to cross as inconclusive; that status is not a convergence conclusion.",
++          "uses": [
++            "1.1",
++            "2.1"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "lem-compact-gram-operator-is-positive-and-has-kernel",
++          "source_section": "Statement",
++          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded, with adjoint $A^*:Y\\to X$. Then both\n$A^*A:X\\to X$ and $AA^*:Y\\to Y$ are compact, self-adjoint and positive, and\n$$\\ker(A^*A)=\\ker A,\\qquad \\ker(AA^*)=\\ker A^*.$$",
++          "uses": [
+             "2.1",
+             "3.1"
+           ]
+         },
+         {
+-          "fact": "F1",
+-          "source": "alg-landweber-iteration-with-discrepancy-stopping",
+-          "source_section": "Definition",
+-          "quote": "Assume Countable Choice, as required for the Hilbert-space adjoint in the\niteration.\n\nLet $X,Y$ be real or complex Hilbert spaces, let $A:X\\to Y$ be a nonzero\ncompact linear operator, and let $\\omega$ satisfy\n$0<\\omega<2/\\|A\\|^2$. The input consists of data $y_\\delta\\in Y$, a noise\nbound $\\delta\\ge0$, a discrepancy factor $\\tau>1$, and a finite iteration\nbudget $N\\in\\mathbb N$. Define the finite mathematical path by $x_0=0$ and\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k),\\qquad 0\\le k<N.$$\nThe procedure evaluates this path in increasing order and returns at its\nfirst stopping condition; values after an earlier return are part of the\nmathematical path but need not be computed by an implementation.\n\nFor $k=0,\\ldots,N$ in increasing order, compute\n$r_k=y_\\delta-Ax_k$. If $\\|r_k\\|\\le\\tau\\delta$, return\n$(x_k,k,\\texttt{discrepancy})$. If $k=N$, return\n$(x_k,k,\\texttt{budget-exhausted})$. Otherwise set\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k).$$\n\nThe procedure uses exact Hilbert-space operations. It reports a finite-budget\nfailure to cross as inconclusive; that status is not a convergence conclusion.",
+-          "uses": [
+-            "1.1",
+-            "2.1"
+-          ]
+-        },
+-        {
+-          "fact": "F2",
+-          "source": "lem-compact-gram-operator-is-positive-and-has-kernel",
+-          "source_section": "Statement",
+-          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded, with adjoint $A^*:Y\\to X$. Then both\n$A^*A:X\\to X$ and $AA^*:Y\\to Y$ are compact, self-adjoint and positive, and\n$$\\ker(A^*A)=\\ker A,\\qquad \\ker(AA^*)=\\ker A^*.$$",
+-          "uses": [
+-            "2.1",
+-            "3.1"
+-          ]
+-        },
+-        {
+           "fact": "F3",
+           "source": "lem-compact-spectral-multiplier-is-well-defined",
+           "source_section": "Statement",
+@@ -418,10 +417,12 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "The adjoint identity [F5] gives $A^*A=T$. Thus [F1] rewrites each update before stopping as $x_{j+1}=(I-\\omega T)x_j+\\omega A^*y_\\delta$. Starting from $x_0=0$, induction gives $x_k=\\omega\\sum_{j=0}^{k-1}(I-\\omega T)^jA^*y_\\delta$: the sum is empty for $k=0$, and multiplying the $k$-term sum by $I-\\omega T$ and adding $\\omega A^*y_\\delta$ produces the $(k+1)$-term sum.",
++          "claim": "The adjoint identity",
+           "step": "1.1",
+           "inputs": [
+-            "A1",
++            "F5] gives $A^*A=T$. Thus [F1] rewrites each update before stopping as $x_{j+1}=(I-\\omega T)x_j+\\omega A^*y_\\delta$. Starting from $x_0=0$",
++            "induction gives $x_k=\\omega\\sum_{j=0}^{k-1}(I-\\omega T)^jA^*y_\\delta$: the sum is empty for $k=0$",
++            "and multiplying the $k$-term sum by $I-\\omega T$ and adding $\\omega A^*y_\\delta$ produces the $(k+1)$-term sum. [A1",
+             "given",
+             "F1",
+             "F5",
+@@ -431,10 +432,12 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "Put $\\rho_k=y_\\delta-Ax_k$. Substitution of [F1] gives $\\rho_{k+1}=\\rho_k-\\omega AA^*\\rho_k=(I-\\omega AA^*)\\rho_k$. Induction from $\\rho_0=y_\\delta$ yields $\\rho_k=(I-\\omega AA^*)^ky_\\delta$. By [F2], $AA^*$ is compact positive self-adjoint, and [F3] therefore interprets this polynomial as the stated compact spectral multiplier. The scalar geometric identity $1-(1-\\omega t)^k=\\omega t\\sum_{j=0}^{k-1}(1-\\omega t)^j$ also identifies the vector expression from step 1.1 with $g_k(T)A^*y_\\delta$.",
++          "claim": "Put $\\rho_k=y_\\delta-Ax_k$. Substitution of",
+           "step": "2.1",
+           "inputs": [
+-            "A1",
++            "F1] gives $\\rho_{k+1}=\\rho_k-\\omega AA^*\\rho_k=(I-\\omega AA^*)\\rho_k$. Induction from $\\rho_0=y_\\delta$ yields $\\rho_k=(I-\\omega AA^*)^ky_\\delta$. By [F2]",
++            "$AA^*$ is compact positive self-adjoint",
++            "and [F3] therefore interprets this polynomial as the stated compact spectral multiplier. The scalar geometric identity $1-(1-\\omega t)^k=\\omega t\\sum_{j=0}^{k-1}(1-\\omega t)^j$ also identifies the vector expression from step 1.1 with $g_k(T)A^*y_\\delta$. [A1",
+             "F1",
+             "F2",
+             "F3",
+@@ -445,10 +448,11 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "If $y_\\delta=Ax^\\dagger$, then [step 1.1] and $A^*y_\\delta=Tx^\\dagger$ give $x_k=\\omega\\sum_{j=0}^{k-1}(I-\\omega T)^jTx^\\dagger=[I-(I-\\omega T)^k]x^\\dagger$ by the same polynomial identity. Since [F2] makes $T$ compact positive self-adjoint, [F4] interprets $r_k(T)$ as its residual multiplier; hence $x^\\dagger-x_k=(I-\\omega T)^kx^\\dagger=r_k(T)x^\\dagger$.",
++          "claim": "If $y_\\delta=Ax^\\dagger$, then",
+           "step": "3.1",
+           "inputs": [
+-            "A1",
++            "step 1.1] and $A^*y_\\delta=Tx^\\dagger$ give $x_k=\\omega\\sum_{j=0}^{k-1}(I-\\omega T)^jTx^\\dagger=[I-(I-\\omega T)^k]x^\\dagger$ by the same polynomial identity. Since [F2] makes $T$ compact positive self-adjoint",
++            "[F4] interprets $r_k(T)$ as its residual multiplier; hence $x^\\dagger-x_k=(I-\\omega T)^kx^\\dagger=r_k(T)x^\\dagger$. [A1",
+             "F2",
+             "F4",
+             "step 1.1",
+@@ -522,17 +526,13 @@
+           "source": "def-countable-choice",
+           "source_section": "Definition",
+           "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+-          "uses": [
+-            "1.1",
+-            "2.1",
+-            "3.1"
+-          ]
++          "uses": []
+         },
+         {
+           "fact": "F1",
+           "source": "alg-iteratively-regularized-gauss-newton-step",
+           "source_section": "Definition",
+-          "quote": "Assume Countable Choice, as required for the Hilbert-space adjoints in the\nnormal equation.\n\nLet $X,Y$ be real or complex Hilbert spaces, let $U\\subseteq X$ be open, and\nlet $F:U\\to Y$ be continuously Fréchet differentiable. Inputs are\n$x_0\\in U$, noisy data $y_\\delta\\in Y$, a bound $\\delta\\ge0$, a discrepancy\nfactor $\\tau>1$, a finite budget $N\\in\\mathbb N$, and parameters\n$\\alpha_0>0$ and $q\\in(0,1)$. At iteration $k$, if $x_k\\notin U$ return\n$(x_k,k,\\text{domain-failure})$. Otherwise put $A_k=F'(x_k)$ and\n$\\alpha_k=\\alpha_0q^k$. Before computing an update, if\n$\\|F(x_k)-y_\\delta\\|\\le\\tau\\delta$, return\n$(x_k,k,\\text{discrepancy})$. If $k=N$, return\n$(x_k,k,\\text{budget-exhausted})$.\n\nFor $k<N$, solve the unique Hilbert-space Tikhonov normal equation\n$$\\bigl(A_k^*A_k+\\alpha_k I_X\\bigr)s_k=A_k^*(y_\\delta-F(x_k))$$\nand set $x_{k+1}=x_k+s_k$. The shifted normal operator is invertible by\n[[lem-hilbert-tikhonov-normal-operator-invertible]]. If the returned iterate\nleaves $U$, the next call returns domain-failure. The procedure asserts no\nconvergence theorem; its prescribed step is the unanchored Levenberg–Marquardt\nform used in the assigned contract.",
++          "quote": "Assume Countable Choice, as required for the Hilbert-space adjoints in the\nnormal equation.\n\nLet $X,Y$ be Hilbert spaces over the same field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$,\nlet $U\\subseteq X$ be open, and let $F:U\\to Y$ be continuously Fréchet\ndifferentiable over $\\mathbb F$. In the complex case, each $F'(x)$ is a bounded\ncomplex-linear operator and the Fréchet remainder is measured over complex\nincrements, so\n$$\\lim_{\\substack{h\\to0,\\ h\\ne0\\\\x+h\\in U}}\n\\frac{\\|F(x+h)-F(x)-F'(x)h\\|}{\\|h\\|}=0.$$\nInputs are\n$x_0\\in U$, noisy data $y_\\delta\\in Y$, a bound $\\delta\\ge0$, a discrepancy\nfactor $\\tau>1$, a finite budget $N\\in\\mathbb N$, and parameters\n$\\alpha_0>0$ and $q\\in(0,1)$. At iteration $k$, if $x_k\\notin U$ return\n$(x_k,k,\\text{domain-failure})$. Otherwise put $A_k=F'(x_k)$ and\n$\\alpha_k=\\alpha_0q^k$. Before computing an update, if\n$\\|F(x_k)-y_\\delta\\|\\le\\tau\\delta$, return\n$(x_k,k,\\text{discrepancy})$. If $k=N$, return\n$(x_k,k,\\text{budget-exhausted})$.\n\nFor $k<N$, solve the unique Hilbert-space Tikhonov normal equation\n$$\\bigl(A_k^*A_k+\\alpha_k I_X\\bigr)s_k=A_k^*(y_\\delta-F(x_k))$$\nand set $x_{k+1}=x_k+s_k$. The shifted normal operator is invertible by\n[[lem-hilbert-tikhonov-normal-operator-invertible]]. If the returned iterate\nleaves $U$, the next call returns domain-failure. The procedure asserts no\nconvergence theorem; its prescribed step is the unanchored Levenberg–Marquardt\nform used in the assigned contract.",
+           "uses": [
+             "1.1"
+           ]
+@@ -560,7 +560,7 @@
+           "fact": "F4",
+           "source": "lem-local-lipschitz-derivative-quadratic-remainder",
+           "source_section": "Statement",
+-          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Banach spaces, let\n$U\\subseteq X$ be open, and let $F:U\\to Y$ be continuously Fréchet\ndifferentiable. Let $K\\subseteq U$ be convex and let $x,z\\in K$. If\n$\\|F'(u)-F'(v)\\|\\le L\\|u-v\\|$ for all $u,v\\in K$, where $L\\ge0$, then\n$$\\|F(x)-F(z)-F'(z)(x-z)\\|\\le\\frac L2\\|x-z\\|^2.$$",
++          "quote": "Assume Countable Choice. Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ and let\n$X,Y$ be Banach spaces over the same field $\\mathbb F$. Let $U\\subseteq X$ be\nopen and let $F:U\\to Y$ be continuously Fréchet differentiable over\n$\\mathbb F$. Thus $F'(u)$ is bounded $\\mathbb F$-linear for each $u\\in U$ and\n$$\\lim_{\\substack{h\\to0,\\ h\\ne0\\\\u+h\\in U}}\n\\frac{\\|F(u+h)-F(u)-F'(u)h\\|}{\\|h\\|}=0.$$\nIn particular, in the complex case $F'(u)$ is complex-linear and the limit\nranges over complex increments. Let $K\\subseteq U$ be convex and let\n$x,z\\in K$. If\n$\\|F'(u)-F'(v)\\|\\le L\\|u-v\\|$ for all $u,v\\in K$, where $L\\ge0$, then\n$$\\|F(x)-F(z)-F'(z)(x-z)\\|\\le\\frac L2\\|x-z\\|^2.$$",
+           "uses": [
+             "2.1"
+           ]
+@@ -569,10 +569,12 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "From [F1], $e_{k+1}=e_k+B_k^{-1}A_k^*(y_\\delta-F(x_k))$. Multiplying by $B_k$ and using $B_ke_k=A_k^*A_ke_k+\\alpha_ke_k$ gives $$B_ke_{k+1}=\\alpha_ke_k+A_k^*(A_ke_k+y_\\delta-F(x_k)).$$ Since $A_ke_k+y-F(x_k)=R_k$, the term in parentheses is $y_\\delta-y+R_k$. Applying [F2] to invert $B_k$ proves the stated identity.",
++          "claim": "From",
+           "step": "1.1",
+           "inputs": [
+-            "A1",
++            "F1]",
++            "$e_{k+1}=e_k+B_k^{-1}A_k^*(y_\\delta-F(x_k))$. Multiplying by $B_k$ and using $B_ke_k=A_k^*A_ke_k+\\alpha_ke_k$ gives $$B_ke_{k+1}=\\alpha_ke_k+A_k^*(A_ke_k+y_\\delta-F(x_k)).$$ Since $A_ke_k+y-F(x_k)=R_k$",
++            "the term in parentheses is $y_\\delta-y+R_k$. Applying [F2] to invert $B_k$ proves the stated identity. [A1",
+             "F1",
+             "F2",
+             "algebra"
+@@ -580,10 +582,12 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "By [F2], $\\|\\alpha_kB_k^{-1}e_k\\|\\le\\|e_k\\|$. By [F3], $\\|B_k^{-1}A_k^*(y_\\delta-y+R_k)\\| \\le(\\delta+\\|R_k\\|)/(2\\sqrt{\\alpha_k})$. The triangle inequality and [F4] give the quadratic-error recurrence.",
++          "claim": "By",
+           "step": "2.1",
+           "inputs": [
+-            "A1",
++            "F2]",
++            "$\\|\\alpha_kB_k^{-1}e_k\\|\\le\\|e_k\\|$. By [F3]",
++            "$\\|B_k^{-1}A_k^*(y_\\delta-y+R_k)\\| \\le(\\delta+\\|R_k\\|)/(2\\sqrt{\\alpha_k})$. The triangle inequality and [F4] give the quadratic-error recurrence. [A1",
+             "F2",
+             "F3",
+             "F4",
+@@ -593,10 +597,10 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "For the tangential-cone bound, substitute $x=x^\\dagger$ and $z=x_k$. Its left side is $\\|y-F(x_k)+A_k(x_k-x^\\dagger)\\|=\\|R_k\\|$, so $\\|R_k\\|\\le\\eta\\|y-F(x_k)\\|\\le\\eta(\\|y-y_\\delta\\|+\\|y_\\delta-F(x_k)\\|) \\le\\eta(\\delta+\\|y_\\delta-F(x_k)\\|)$. Inserting this estimate into the bound from [step 2.1] proves the optional residual form.",
++          "claim": "For the tangential-cone bound, substitute $x=x^\\dagger$ and $z=x_k$. Its left side is $\\|y-F(x_k)+A_k(x_k-x^\\dagger)\\|=\\|R_k\\|$, so $\\|R_k\\|\\le\\eta\\|y-F(x_k)\\|\\le\\eta(\\|y-y_\\delta\\|+\\|y_\\delta-F(x_k)\\|) \\le\\eta(\\delta+\\|y_\\delta-F(x_k)\\|)$. Inserting this estimate into the bound from",
+           "step": "3.1",
+           "inputs": [
+-            "A1",
++            "step 2.1] proves the optional residual form. [A1",
+             "given",
+             "step 2.1",
+             "algebra"
+@@ -670,90 +674,92 @@
+           "source_section": "Definition",
+           "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+           "uses": [
+-            "1.1",
+-            "1.2",
++            "1.2"
++          ]
++        },
++        {
++          "fact": "F1",
++          "source": "lem-landweber-filter-and-residual-identities",
++          "source_section": "Statement",
++          "quote": "Assume Countable Choice. Let $A:X\\to Y$ and $\\omega$ satisfy the\nhypotheses of [[alg-landweber-iteration-with-discrepancy-stopping]] and put\n$T=A^*A$. For each integer $k\\ge0$, define\n$g_0(t)=0$ and\n$g_k(t)=\\omega\\sum_{j=0}^{k-1}(1-\\omega t)^j$ for $k\\ge1$, with\n$r_k(t)=(1-\\omega t)^k$. For the associated infinite mathematical path,\n$$x_k=g_k(T)A^*y_\\delta,\\qquad y_\\delta-Ax_k=r_k(AA^*)y_\\delta.$$\nIf $y_\\delta=Ax^\\dagger$, then\n$$x^\\dagger-x_k=r_k(T)x^\\dagger.$$\nHere $g_k(T)$ and $r_k(T)$ are the compact spectral multipliers defined in\n[[def-compact-spectral-filter-and-qualification]]; $r_k(AA^*)$ is the\nmultiplier with scalar function $t\\mapsto(1-\\omega t)^k$ on the compact\nself-adjoint operator $AA^*$, as supplied by\n[[lem-compact-spectral-multiplier-is-well-defined]].",
++          "uses": [
++            "1.1",
+             "1.3",
+             "2.1"
+           ]
+         },
+         {
+-          "fact": "F1",
+-          "source": "lem-landweber-filter-and-residual-identities",
+-          "source_section": "Statement",
+-          "quote": "Assume Countable Choice. Let $A:X\\to Y$ and $\\omega$ satisfy the\nhypotheses of [[alg-landweber-iteration-with-discrepancy-stopping]] and put\n$T=A^*A$. For each integer $k\\ge0$, define\n$g_0(t)=0$ and\n$g_k(t)=\\omega\\sum_{j=0}^{k-1}(1-\\omega t)^j$ for $k\\ge1$, with\n$r_k(t)=(1-\\omega t)^k$. For the iterates from that algorithm,\n$$x_k=g_k(T)A^*y_\\delta,\\qquad y_\\delta-Ax_k=r_k(AA^*)y_\\delta.$$\nIf $y_\\delta=Ax^\\dagger$, then\n$$x^\\dagger-x_k=r_k(T)x^\\dagger.$$\nHere $g_k(T)$ and $r_k(T)$ are the compact spectral multipliers defined in\n[[def-compact-spectral-filter-and-qualification]]; $r_k(AA^*)$ is the\nmultiplier with scalar function $t\\mapsto(1-\\omega t)^k$ on the compact\nself-adjoint operator $AA^*$, as supplied by\n[[lem-compact-spectral-multiplier-is-well-defined]].",
+-          "uses": [
+-            "1.1",
++          "fact": "F2",
++          "source": "def-compact-spectral-filter-and-qualification",
++          "source_section": "Definition",
++          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded. Put $S=A^*A$. By\n[[lem-compact-gram-operator-is-positive-and-has-kernel]], $S$ is compact,\npositive, and self-adjoint, with $\\ker S=\\ker A$. Let $\\Sigma$ be the set of\nnonzero eigenvalues of $S$ and $P_t$ the orthogonal projection onto the\neigenspace of $t\\in\\Sigma$; let $P_0$ be the orthogonal projection onto\n$\\ker S$. The compact spectral multiplier of a bounded scalar function\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is\n$$q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx,$$\nwhere the finite-subset net converges in norm by\n[[lem-compact-spectral-multiplier-is-well-defined]]. For $\\nu>0$, define\n$S^\\nu$ by the multiplier $q_\\nu(0)=0$ and $q_\\nu(t)=t^\\nu$ for $t>0$.\n\nFor $\\lambda>0$, the Tikhonov filter and residual filter are\n$$g_\\lambda(t)=\\frac1{t+\\lambda},\\qquad r_\\lambda(t)=1-tg_\\lambda(t)=\\frac{\\lambda}{t+\\lambda}.$$\nThe Tikhonov solution for data $y_\\delta\\in Y$ is\n$$x_\\lambda^\\delta=g_\\lambda(S)A^*y_\\delta =(A^*A+\\lambda I_X)^{-1}A^*y_\\delta.$$\nThe source condition of order $\\nu>0$ and radius $R\\ge0$ means that\n$x^\\dagger=S^\\nu w$ for some $w\\in X$ with $\\|w\\|\\le R$. A family of\nfilters $g_\\alpha$ with residual filters $r_\\alpha(t)=1-tg_\\alpha(t)$ has\nqualification at least $p>0$ when, for each $0<\\nu\\le p$, some finite\nconstant $C_\\nu$ satisfies\n$$\\sup_{t\\in\\Sigma}t^\\nu|r_\\alpha(t)|\\le C_\\nu\\alpha^\\nu \\quad\\text{for every }\\alpha>0.$$",
++          "uses": [
++            "1.2",
++            "2.1"
++          ]
++        },
++        {
++          "fact": "F3",
++          "source": "lem-compact-gram-operator-is-positive-and-has-kernel",
++          "source_section": "Statement",
++          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded, with adjoint $A^*:Y\\to X$. Then both\n$A^*A:X\\to X$ and $AA^*:Y\\to Y$ are compact, self-adjoint and positive, and\n$$\\ker(A^*A)=\\ker A,\\qquad \\ker(AA^*)=\\ker A^*.$$",
++          "uses": [
++            "1.1",
++            "1.2"
++          ]
++        },
++        {
++          "fact": "F4",
++          "source": "thm-hilbert-adjoint-properties",
++          "source_section": "Statement",
++          "quote": "Assume the Axiom of Countable Choice. Let $H,K,L$ be real or complex Hilbert spaces and let $R,S\\in\\mathcal B(H,K)$ and $T\\in\\mathcal B(K,L)$ be bounded linear operators. Then the Hilbert adjoints satisfy:\n\n1. $(aR+bS)^*=\\overline a\\,R^*+\\overline b\\,S^*$ for scalars $a,b$, and the adjoint of an operator is unique;\n2. $(TS)^*=S^*T^*$;\n3. $T^{**}=T$ and $\\|T^*\\|=\\|T\\|$;\n4. $\\|T^*T\\|=\\|T\\|^2$.",
++          "uses": [
++            "1.1",
++            "1.2",
++            "1.3"
++          ]
++        },
++        {
++          "fact": "F5",
++          "source": "def-orthogonality-and-orthogonal-complement",
++          "source_section": "Definition",
++          "quote": "Let $V$ be a real or complex inner-product space. Vectors $x,y\\in V$ are\n**orthogonal**, written $x\\perp y$, when\n\n$$\\langle x,y\\rangle=0 .$$\n\nFor a subset $S\\subseteq V$ the **orthogonal complement** of $S$ is\n\n$$S^\\perp:=\\{\\,v\\in V : \\langle v,s\\rangle=0 \\text{ for every } s\\in S\\,\\}.$$\n\n**Orthogonality is symmetric.** If $\\langle x,y\\rangle=0$, then\n$\\langle y,x\\rangle=\\overline{\\langle x,y\\rangle}=0$, so $x\\perp y$ exactly\nwhen $y\\perp x$; in particular the condition defining $S^\\perp$ is symmetric in\nits two arguments.\n\n**$S^\\perp$ is a linear subspace.** Let $s\\in S$ and scalars $a,b$; then\n$\\langle 0,s\\rangle=0$, and if $u,v\\in S^\\perp$ then\n$\\langle au+bv,s\\rangle=a\\langle u,s\\rangle+b\\langle v,s\\rangle=0$ by linearity\nin the first argument, so $au+bv\\in S^\\perp$. Thus $S^\\perp$ is a linear\nsubspace of $V$ ([[def-linear-subspace]]) for every subset $S$, whether or not\n$S$ is a subspace. Moreover $0\\in S^\\perp$ always, and $v\\in V$ lies in\n$\\{0\\}^\\perp$ for every $v$, so $\\{0\\}^\\perp=V$.\n\n**Monotonicity.** If $S\\subseteq T\\subseteq V$, then every vector orthogonal to\nall of $T$ is orthogonal to all of $S$, so $T^\\perp\\subseteq S^\\perp$.\n\n**Nontriviality of orthogonality.** By positive definiteness\n$\\langle v,v\\rangle=\\|v\\|^2=0$ exactly for $v=0$ ([[cor-inner-product-induces-a-norm]]),\nso a vector orthogonal to itself is zero, and $\\{0\\}^\\perp=V$, $V^\\perp=\\{0\\}$.",
++          "uses": [
++            "1.1"
++          ]
++        },
++        {
++          "fact": "F6",
++          "source": "thm-spectral-theorem-for-compact-self-adjoint-operators",
++          "source_section": "Statement",
++          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a\nreal or complex Hilbert space ([[def-hilbert-space]]) and let\n$T\\in\\mathcal B(H)$ be a compact self-adjoint operator\n([[def-compact-linear-operator]],\n[[def-self-adjoint-positive-unitary-and-normal-operator]],\n[[def-bounded-linear-operator]]). Let\n\n$$\\Sigma:=\\{\\lambda:\\lambda\\ \\text{is an eigenvalue of}\\ T,\\ \\lambda\\ne0\\}$$\n\nbe its set of nonzero eigenvalues\n([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]), with eigenspaces\n$E_\\lambda=\\ker(T-\\lambda I)$ for $\\lambda\\in\\Sigma$. Then:\n\n1. $\\Sigma$ is a finite or countably infinite set of **real** numbers, each\n   eigenvalue has finite multiplicity in the sense $\\dim E_\\lambda<+\\infty$, and\n   for every real $\\varepsilon>0$ there are only finitely many\n   $\\lambda\\in\\Sigma$ with $|\\lambda|\\ge\\varepsilon$; in particular every point\n   of $\\mathbb F\\setminus\\{0\\}$ has a neighbourhood containing only finitely\n   many elements of $\\Sigma$, so the only possible accumulation point of\n   $\\Sigma$ is $0$;\n2. the closed linear span $M$ of $\\bigcup_{\\lambda\\in\\Sigma}E_\\lambda$ satisfies\n   $$M=(\\ker T)^\\perp=\\overline{\\operatorname{ran}T}$$\n   ([[def-orthogonality-and-orthogonal-complement]]), and $H=M\\oplus M^\\perp$\n   with $M^\\perp\\subseteq\\ker T$;\n3. for every $x\\in H$ the finite-subset net of $\\sum_{\\lambda\\in\\Sigma}\\lambda P_\\lambda x$\n   over the orthogonal projections $P_\\lambda$ onto $E_\\lambda$ converges in\n   norm and\n   $$Tx=\\sum_{\\lambda\\in\\Sigma}\\lambda P_\\lambda x ;$$\n4. if in addition $H$ is a complex Hilbert space, then the nonzero spectrum\n   agrees with the nonzero eigenvalues,\n   $$\\sigma(T)\\cap\\{\\mu\\in\\mathbb C:\\mu\\ne0\\}=\\Sigma .$$\n\nNo Hilbert basis of $\\ker T$ is selected anywhere: only the orthonormal bases of\nthe finite-dimensional eigenspaces $E_\\lambda$, $\\lambda\\ne0$, are used.",
++          "uses": [
++            "1.1"
++          ]
++        },
++        {
++          "fact": "F7",
++          "source": "lem-compact-spectral-multiplier-is-well-defined",
++          "source_section": "Statement",
++          "quote": "Assume Countable Choice. Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$,\n$H$ be an $\\mathbb F$-Hilbert space, and let $S:H\\to H$ be compact and\nself-adjoint. Let $\\Sigma$ be its set of nonzero\neigenvalues, $E_t=\\ker(S-tI)$, $P_t$ the orthogonal projection onto $E_t$,\nand $P_0$ the orthogonal projection onto $\\ker S$. If\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is bounded, then for every $x\\in H$ the\nfinite-subset net\n$$q(0)P_0x+\\sum_{t\\in F}q(t)P_tx,\\qquad F\\subseteq\\Sigma\\text{ finite},$$\nconverges in norm to a vector $Q_qx$. The map $Q_q:H\\to H$ is bounded and\nlinear, with $\\|Q_q\\|\\le\\sup_{t\\in\\{0\\}\\cup\\Sigma}|q(t)|$.",
++          "uses": [
+             "1.3",
+             "2.1"
+           ]
+-        },
+-        {
+-          "fact": "F2",
+-          "source": "def-compact-spectral-filter-and-qualification",
+-          "source_section": "Definition",
+-          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded. Put $S=A^*A$. By\n[[lem-compact-gram-operator-is-positive-and-has-kernel]], $S$ is compact,\npositive, and self-adjoint, with $\\ker S=\\ker A$. Let $\\Sigma$ be the set of\nnonzero eigenvalues of $S$ and $P_t$ the orthogonal projection onto the\neigenspace of $t\\in\\Sigma$; let $P_0$ be the orthogonal projection onto\n$\\ker S$. The compact spectral multiplier of a bounded scalar function\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is\n$$q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx,$$\nwhere the finite-subset net converges in norm by\n[[lem-compact-spectral-multiplier-is-well-defined]]. For $\\nu>0$, define\n$S^\\nu$ by the multiplier $q_\\nu(0)=0$ and $q_\\nu(t)=t^\\nu$ for $t>0$.\n\nFor $\\lambda>0$, the Tikhonov filter and residual filter are\n$$g_\\lambda(t)=\\frac1{t+\\lambda},\\qquad r_\\lambda(t)=1-tg_\\lambda(t)=\\frac{\\lambda}{t+\\lambda}.$$\nThe Tikhonov solution for data $y_\\delta\\in Y$ is\n$$x_\\lambda^\\delta=g_\\lambda(S)A^*y_\\delta =(A^*A+\\lambda I_X)^{-1}A^*y_\\delta.$$\nThe source condition of order $\\nu>0$ and radius $R\\ge0$ means that\n$x^\\dagger=S^\\nu w$ for some $w\\in X$ with $\\|w\\|\\le R$. A family of\nfilters $g_\\alpha$ with residual filters $r_\\alpha(t)=1-tg_\\alpha(t)$ has\nqualification at least $p>0$ when, for each $0<\\nu\\le p$, some finite\nconstant $C_\\nu$ satisfies\n$$\\sup_{t\\in\\Sigma}t^\\nu|r_\\alpha(t)|\\le C_\\nu\\alpha^\\nu \\quad\\text{for every }\\alpha>0.$$",
+-          "uses": [
+-            "1.2",
+-            "2.1"
+-          ]
+-        },
+-        {
+-          "fact": "F3",
+-          "source": "lem-compact-gram-operator-is-positive-and-has-kernel",
+-          "source_section": "Statement",
+-          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded, with adjoint $A^*:Y\\to X$. Then both\n$A^*A:X\\to X$ and $AA^*:Y\\to Y$ are compact, self-adjoint and positive, and\n$$\\ker(A^*A)=\\ker A,\\qquad \\ker(AA^*)=\\ker A^*.$$",
+-          "uses": [
+-            "1.1",
+-            "1.2"
+-          ]
+-        },
+-        {
+-          "fact": "F4",
+-          "source": "thm-hilbert-adjoint-properties",
+-          "source_section": "Statement",
+-          "quote": "Assume the Axiom of Countable Choice. Let $H,K,L$ be real or complex Hilbert spaces and let $R,S\\in\\mathcal B(H,K)$ and $T\\in\\mathcal B(K,L)$ be bounded linear operators. Then the Hilbert adjoints satisfy:\n\n1. $(aR+bS)^*=\\overline a\\,R^*+\\overline b\\,S^*$ for scalars $a,b$, and the adjoint of an operator is unique;\n2. $(TS)^*=S^*T^*$;\n3. $T^{**}=T$ and $\\|T^*\\|=\\|T\\|$;\n4. $\\|T^*T\\|=\\|T\\|^2$.",
+-          "uses": [
+-            "1.1",
+-            "1.2",
+-            "1.3"
+-          ]
+-        },
+-        {
+-          "fact": "F5",
+-          "source": "def-orthogonality-and-orthogonal-complement",
+-          "source_section": "Definition",
+-          "quote": "Let $V$ be a real or complex inner-product space. Vectors $x,y\\in V$ are\n**orthogonal**, written $x\\perp y$, when\n\n$$\\langle x,y\\rangle=0 .$$\n\nFor a subset $S\\subseteq V$ the **orthogonal complement** of $S$ is\n\n$$S^\\perp:=\\{\\,v\\in V : \\langle v,s\\rangle=0 \\text{ for every } s\\in S\\,\\}.$$\n\n**Orthogonality is symmetric.** If $\\langle x,y\\rangle=0$, then\n$\\langle y,x\\rangle=\\overline{\\langle x,y\\rangle}=0$, so $x\\perp y$ exactly\nwhen $y\\perp x$; in particular the condition defining $S^\\perp$ is symmetric in\nits two arguments.\n\n**$S^\\perp$ is a linear subspace.** Let $s\\in S$ and scalars $a,b$; then\n$\\langle 0,s\\rangle=0$, and if $u,v\\in S^\\perp$ then\n$\\langle au+bv,s\\rangle=a\\langle u,s\\rangle+b\\langle v,s\\rangle=0$ by linearity\nin the first argument, so $au+bv\\in S^\\perp$. Thus $S^\\perp$ is a linear\nsubspace of $V$ ([[def-linear-subspace]]) for every subset $S$, whether or not\n$S$ is a subspace. Moreover $0\\in S^\\perp$ always, and $v\\in V$ lies in\n$\\{0\\}^\\perp$ for every $v$, so $\\{0\\}^\\perp=V$.\n\n**Monotonicity.** If $S\\subseteq T\\subseteq V$, then every vector orthogonal to\nall of $T$ is orthogonal to all of $S$, so $T^\\perp\\subseteq S^\\perp$.\n\n**Nontriviality of orthogonality.** By positive definiteness\n$\\langle v,v\\rangle=\\|v\\|^2=0$ exactly for $v=0$ ([[cor-inner-product-induces-a-norm]]),\nso a vector orthogonal to itself is zero, and $\\{0\\}^\\perp=V$, $V^\\perp=\\{0\\}$.",
+-          "uses": [
+-            "1.1"
+-          ]
+-        },
+-        {
+-          "fact": "F6",
+-          "source": "thm-spectral-theorem-for-compact-self-adjoint-operators",
+-          "source_section": "Statement",
+-          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a\nreal or complex Hilbert space ([[def-hilbert-space]]) and let\n$T\\in\\mathcal B(H)$ be a compact self-adjoint operator\n([[def-compact-linear-operator]],\n[[def-self-adjoint-positive-unitary-and-normal-operator]],\n[[def-bounded-linear-operator]]). Let\n\n$$\\Sigma:=\\{\\lambda:\\lambda\\ \\text{is an eigenvalue of}\\ T,\\ \\lambda\\ne0\\}$$\n\nbe its set of nonzero eigenvalues\n([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]), with eigenspaces\n$E_\\lambda=\\ker(T-\\lambda I)$ for $\\lambda\\in\\Sigma$. Then:\n\n1. $\\Sigma$ is a finite or countably infinite set of **real** numbers, each\n   eigenvalue has finite multiplicity in the sense $\\dim E_\\lambda<+\\infty$, and\n   for every real $\\varepsilon>0$ there are only finitely many\n   $\\lambda\\in\\Sigma$ with $|\\lambda|\\ge\\varepsilon$; in particular every point\n   of $\\mathbb F\\setminus\\{0\\}$ has a neighbourhood containing only finitely\n   many elements of $\\Sigma$, so the only possible accumulation point of\n   $\\Sigma$ is $0$;\n2. the closed linear span $M$ of $\\bigcup_{\\lambda\\in\\Sigma}E_\\lambda$ satisfies\n   $$M=(\\ker T)^\\perp=\\overline{\\operatorname{ran}T}$$\n   ([[def-orthogonality-and-orthogonal-complement]]), and $H=M\\oplus M^\\perp$\n   with $M^\\perp\\subseteq\\ker T$;\n3. for every $x\\in H$ the finite-subset net of $\\sum_{\\lambda\\in\\Sigma}\\lambda P_\\lambda x$\n   over the orthogonal projections $P_\\lambda$ onto $E_\\lambda$ converges in\n   norm and\n   $$Tx=\\sum_{\\lambda\\in\\Sigma}\\lambda P_\\lambda x ;$$\n4. if in addition $H$ is a complex Hilbert space, then the nonzero spectrum\n   agrees with the nonzero eigenvalues,\n   $$\\sigma(T)\\cap\\{\\mu\\in\\mathbb C:\\mu\\ne0\\}=\\Sigma .$$\n\nNo Hilbert basis of $\\ker T$ is selected anywhere: only the orthonormal bases of\nthe finite-dimensional eigenspaces $E_\\lambda$, $\\lambda\\ne0$, are used.",
+-          "uses": [
+-            "1.1"
+-          ]
+-        },
+-        {
+-          "fact": "F7",
+-          "source": "lem-compact-spectral-multiplier-is-well-defined",
+-          "source_section": "Statement",
+-          "quote": "Assume Countable Choice. Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$,\n$H$ be an $\\mathbb F$-Hilbert space, and let $S:H\\to H$ be compact and\nself-adjoint. Let $\\Sigma$ be its set of nonzero\neigenvalues, $E_t=\\ker(S-tI)$, $P_t$ the orthogonal projection onto $E_t$,\nand $P_0$ the orthogonal projection onto $\\ker S$. If\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is bounded, then for every $x\\in H$ the\nfinite-subset net\n$$q(0)P_0x+\\sum_{t\\in F}q(t)P_tx,\\qquad F\\subseteq\\Sigma\\text{ finite},$$\nconverges in norm to a vector $Q_qx$. The map $Q_q:H\\to H$ is bounded and\nlinear, with $\\|Q_q\\|\\le\\sup_{t\\in\\{0\\}\\cup\\Sigma}|q(t)|$.",
+-          "uses": [
+-            "1.3",
+-            "2.1"
+-          ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "For every nonzero eigenvalue $t$ of $T$, [F3]–[F4] give $0<t\\le M$, so $0<\\omega t<2$ and $|1-\\omega t|<1$. Therefore $|r_k(t)|$ decreases with $k$ and tends to $0$. Since $x^\\dagger\\perp\\ker T$ by [F3] and [F5], [F6] expands it using only positive-eigenvalue components. By [F1], each component of $x_k-x^\\dagger$ is multiplied by $-r_k(t)$; its magnitude decreases to zero and is bounded by the corresponding component of $x^\\dagger$. Given $\\epsilon>0$, choose a finite set of eigenvalues whose omitted squared components of $x^\\dagger$ sum to less than $\\epsilon$; on the chosen finite set every component tends to zero. The squared error sum therefore tends to at most $\\epsilon$, and arbitrariness of $\\epsilon$ proves norm convergence. The componentwise decrease also proves monotonicity of the norm.",
++          "claim": "For every nonzero eigenvalue $t$ of $T$,",
+           "step": "1.1",
+           "inputs": [
+-            "A1",
++            "F3]–[F4] give $0<t\\le M$",
++            "so $0<\\omega t<2$ and $|1-\\omega t|<1$. Therefore $|r_k(t)|$ decreases with $k$ and tends to $0$. Since $x^\\dagger\\perp\\ker T$ by [F3] and [F5]",
++            "[F6] expands it using only positive-eigenvalue components. By [F1]",
++            "each component of $x_k-x^\\dagger$ is multiplied by $-r_k(t)$; its magnitude decreases to zero and is bounded by the corresponding component of $x^\\dagger$. Given $\\epsilon>0$",
++            "choose a finite set of eigenvalues whose omitted squared components of $x^\\dagger$ sum to less than $\\epsilon$; on the chosen finite set every component tends to zero. The squared error sum therefore tends to at most $\\epsilon$",
++            "and arbitrariness of $\\epsilon$ proves norm convergence. The componentwise decrease also proves monotonicity of the norm. [A1",
+             "F1",
+             "F3",
+             "F4",
+@@ -765,7 +771,7 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "If $0<t\\le\\min\\{M,\\omega^{-1}\\}$, then $0\\le1-\\omega t\\le e^{-\\omega t}$, whence $t^s|r_k(t)|\\le t^s e^{-\\omega kt}\\le(s/(e\\omega k))^s$. If $\\omega^{-1}<t\\le M$, a range that exists only when $\\omega M>1$, then $|1-\\omega t|=\\omega t-1\\le\\omega M-1=:q<1$, so $t^s|r_k(t)|\\le M^s q^k\\le C_{s,M,\\omega}k^{-s}$ because $\\sup_{k\\ge1}k^s q^k<\\infty$. Thus $\\sup_{t\\in\\sigma(T)\\setminus\\{0\\}}t^s|r_k(t)|\\le C_{s,A,\\omega}k^{-s}$.",
++          "claim": "Choose an integer $m>s$. For $v\\ge0$ and an integer $n\\ge0$,\n$(1+v)^n\\ge1+nv$: induction proves this, since multiplying the bound at\n$n$ by $1+v$ gives $1+(n+1)v+nv^2\\ge1+(n+1)v$. For $k\\ge2m$, let\n$n=\\lfloor k/m\\rfloor$, so $mn\\le k$ and $n\\ge k/(2m)$.\n\nIf $0<t\\le\\min\\{M,\\omega^{-1}\\}$, put $u=\\omega t\\in(0,1]$. At $u=1$\nthe filter is zero. If $0<u\\le1/k$, then $u^s(1-u)^k\\le k^{-s}$. If\n$k\\ge2m$ and $1/k<u<1$, the identity $(1-u)(1+u)=1-u^2\\le1$ gives\n$(1-u)^{-k}\\ge(1+u)^k\\ge(1+u)^{mn}=((1+u)^n)^m\\ge(nu)^m$.\nConsequently\n$$u^s(1-u)^k\\le n^{-m}u^{s-m}\\le n^{-m}k^{m-s}\n\\le(2m)^m k^{-s}.$$\nFor $k<2m$ the same product is at most $1\\le(2m)^s k^{-s}$. Thus on this\nrange $t^s|r_k(t)|=\\omega^{-s}u^s(1-u)^k\\le C_{s,\\omega}k^{-s}$.\n\nIf $\\omega^{-1}<t\\le M$, a range that exists only when $\\omega M>1$, then\n$|1-\\omega t|=\\omega t-1\\le\\omega M-1=:q\\in(0,1)$. Put\n$a=q^{-1}-1>0$. For $k\\ge2m$ and the same $n$,\n$$q^{-k}=(1+a)^k\\ge(1+a)^{mn}=((1+a)^n)^m\\ge(na)^m,$$\nso $k^s q^k\\le(2m)^m a^{-m}k^{s-m}\\le(2m)^m a^{-m}$. For $k<2m$,\n$k^s q^k\\le(2m)^s$. Hence $\\sup_{k\\ge1}k^s q^k<\\infty$ and\n$t^s|r_k(t)|\\le M^s q^k\\le C_{s,M,\\omega}k^{-s}$. Combining the two\nranges proves $\\sup_{t\\in\\sigma(T)\\setminus\\{0\\}}t^s|r_k(t)|\\le\nC_{s,A,\\omega}k^{-s}$.",
+           "step": "1.2",
+           "inputs": [
+             "A1",
+@@ -778,10 +784,10 @@
+         },
+         {
+           "id": "step-1-3",
+-          "claim": "For $k\\ge1$, the scalar geometric identity gives $g_k(t)=[1-(1-\\omega t)^k]/t$ for $t>0$. Since $|1-\\omega t|\\le1$, both the bound by $2$ and the finite-sum bound by $k\\omega t$ hold for its numerator. Hence $$\\sqrt t\\,|g_k(t)|\\le\\min\\{2/\\sqrt t,\\omega k\\sqrt t\\}\\le\\sqrt{2\\omega k}.$$ The last inequality follows by splitting at $t=2/(\\omega k)$. For $Q_k=g_k(T)A^*$, adjoint multiplication gives $Q_kQ_k^*=g_k(T)Tg_k(T)^*$, the compact spectral multiplier with scalar values $t|g_k(t)|^2$ and value zero on $\\ker T$. [F7] bounds its norm by the supremum of these values; [F4] and $\\|Q_k\\|^2=\\|Q_kQ_k^*\\|$ then give $\\|Q_k\\|\\le\\sqrt{2\\omega k}$. Applying [F1] to $y_\\delta-y$ gives $\\|x_k^\\delta-x_k\\|=\\|Q_k(y_\\delta-y)\\|\\le\\sqrt{2\\omega k}\\,\\delta$.",
++          "claim": "For $k\\ge1$, the scalar geometric identity gives $g_k(t)=[1-(1-\\omega t)^k]/t$ for $t>0$. Since $|1-\\omega t|\\le1$, both the bound by $2$ and the finite-sum bound by $k\\omega t$ hold for its numerator. Hence $$\\sqrt t\\,|g_k(t)|\\le\\min\\{2/\\sqrt t,\\omega k\\sqrt t\\}\\le\\sqrt{2\\omega k}.$$ The last inequality follows by splitting at $t=2/(\\omega k)$. For $Q_k=g_k(T)A^*$, adjoint multiplication gives $Q_kQ_k^*=g_k(T)Tg_k(T)^*$, the compact spectral multiplier with scalar values $t|g_k(t)|^2$ and value zero on $\\ker T$.",
+           "step": "1.3",
+           "inputs": [
+-            "A1",
++            "F7] bounds its norm by the supremum of these values; [F4] and $\\|Q_k\\|^2=\\|Q_kQ_k^*\\|$ then give $\\|Q_k\\|\\le\\sqrt{2\\omega k}$. Applying [F1] to $y_\\delta-y$ gives $\\|x_k^\\delta-x_k\\|=\\|Q_k(y_\\delta-y)\\|\\le\\sqrt{2\\omega k}\\,\\delta$. [A1",
+             "F1",
+             "F4",
+             "F7",
+@@ -791,10 +797,11 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "Under $x^\\dagger=T^sw$, [F1] gives $x_k-x^\\dagger=-r_k(T)T^sw$. On every eigenspace the product multiplier is $t^sr_k(t)$, bounded by [step 1.2]; [F7] therefore yields $\\|x_k-x^\\dagger\\|\\le\\sup_{t>0}t^s|r_k(t)|\\,\\|w\\|$. Substituting the bound in [step 1.2] proves the source-bias estimate.",
++          "claim": "Under $x^\\dagger=T^sw$,",
+           "step": "2.1",
+           "inputs": [
+-            "A1",
++            "F1] gives $x_k-x^\\dagger=-r_k(T)T^sw$. On every eigenspace the product multiplier is $t^sr_k(t)$",
++            "bounded by [step 1.2]; [F7] therefore yields $\\|x_k-x^\\dagger\\|\\le\\sup_{t>0}t^s|r_k(t)|\\,\\|w\\|$. Substituting the bound in [step 1.2] proves the source-bias estimate. [A1",
+             "F1",
+             "F2",
+             "F7",
+@@ -804,10 +811,10 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "The triangle inequality gives $\\|x_k^\\delta-x^\\dagger\\|\\le\\|x_k^\\delta-x_k\\|+\\|x_k-x^\\dagger\\|$; substituting the bounds from [step 2.1] and [step 1.3] proves the final estimate.",
++          "claim": "The triangle inequality gives $\\|x_k^\\delta-x^\\dagger\\|\\le\\|x_k^\\delta-x_k\\|+\\|x_k-x^\\dagger\\|$; substituting the bounds from",
+           "step": "3.1",
+           "inputs": [
+-            "step 2.1",
++            "step 2.1] and [step 1.3] proves the final estimate. [step 2.1",
+             "step 1.3",
+             "algebra"
+           ]
+@@ -879,18 +886,13 @@
+           "source": "def-countable-choice",
+           "source_section": "Definition",
+           "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+-          "uses": [
+-            "1.1",
+-            "1.2",
+-            "2.1",
+-            "3.1"
+-          ]
++          "uses": []
+         },
+         {
+           "fact": "F1",
+           "source": "thm-landweber-source-and-noise-error-bounds",
+           "source_section": "Statement",
+-          "quote": "Assume Countable Choice. Let $A:X\\to Y$ be a nonzero compact operator between\nreal or complex Hilbert spaces, set $T=A^*A$, choose\n$0<\\omega<2/\\|A\\|^2$, and let $y=Ax^\\dagger$ with\n$x^\\dagger\\in(\\ker A)^\\perp$. Let $x_k$ be the exact-data Landweber iterates\nfrom [[alg-landweber-iteration-with-discrepancy-stopping]] and put\n$r_k(t)=(1-\\omega t)^k$. Then $\\|x_k-x^\\dagger\\|$ is nonincreasing and\n$x_k\\to x^\\dagger$ in norm. For every $s>0$, if $x^\\dagger=T^s w$ with\n$w\\in X$, then for $k\\ge1$,\n$$\\|x_k-x^\\dagger\\|\\le C_{s,A,\\omega}\\|w\\|k^{-s}.$$\nThe scalar filter also satisfies\n$$\\sup_{t\\in\\Sigma}t^s|r_k(t)|\\le C_{s,A,\\omega}k^{-s},$$\nwhere $\\Sigma$ is the set of nonzero eigenvalues of $T$.\nFor noisy data $y_\\delta$ with $\\|y_\\delta-y\\|\\le\\delta$, the corresponding\niterates satisfy\n$$\\|x_k^\\delta-x_k\\|\\le\\sqrt{2\\omega k}\\,\\delta.$$\nConsequently, under the source condition $x^\\dagger=T^\\nu w$,\n$0<\\nu\\le1$, the total error obeys\n$$\\|x_k^\\delta-x^\\dagger\\|\\le C_{\\nu,A,\\omega}\\|w\\|k^{-\\nu} +\\sqrt{2\\omega k}\\,\\delta.$$",
++          "quote": "Assume Countable Choice. Let $A:X\\to Y$ be a nonzero compact operator between\nreal or complex Hilbert spaces, set $T=A^*A$, choose\n$0<\\omega<2/\\|A\\|^2$, and let $y=Ax^\\dagger$ with\n$x^\\dagger\\in(\\ker A)^\\perp$. Let $x_k$ be the exact-data Landweber iterates\nin the infinite recurrence-defined path of\n[[alg-landweber-iteration-with-discrepancy-stopping]] for datum $y$; this path\ndepends on $A,\\omega,y$ and not on a finite cap or stopping test. Put\n$r_k(t)=(1-\\omega t)^k$. Then $\\|x_k-x^\\dagger\\|$ is nonincreasing and\n$x_k\\to x^\\dagger$ in norm. For every $s>0$, if $x^\\dagger=T^s w$ with\n$w\\in X$, then for $k\\ge1$,\n$$\\|x_k-x^\\dagger\\|\\le C_{s,A,\\omega}\\|w\\|k^{-s}.$$\nThe scalar filter also satisfies\n$$\\sup_{t\\in\\Sigma}t^s|r_k(t)|\\le C_{s,A,\\omega}k^{-s},$$\nwhere $\\Sigma$ is the set of nonzero eigenvalues of $T$.\nFor noisy data $y_\\delta$ with $\\|y_\\delta-y\\|\\le\\delta$, let\n$x_k^\\delta$ be the infinite recurrence-defined path for datum $y_\\delta$.\nIt satisfies\n$$\\|x_k^\\delta-x_k\\|\\le\\sqrt{2\\omega k}\\,\\delta.$$\nConsequently, under the source condition $x^\\dagger=T^\\nu w$,\n$0<\\nu\\le1$, the total error obeys\n$$\\|x_k^\\delta-x^\\dagger\\|\\le C_{\\nu,A,\\omega}\\|w\\|k^{-\\nu} +\\sqrt{2\\omega k}\\,\\delta.$$",
+           "uses": [
+             "1.1",
+             "3.1"
+@@ -900,7 +902,7 @@
+           "fact": "F2",
+           "source": "lem-landweber-filter-and-residual-identities",
+           "source_section": "Statement",
+-          "quote": "Assume Countable Choice. Let $A:X\\to Y$ and $\\omega$ satisfy the\nhypotheses of [[alg-landweber-iteration-with-discrepancy-stopping]] and put\n$T=A^*A$. For each integer $k\\ge0$, define\n$g_0(t)=0$ and\n$g_k(t)=\\omega\\sum_{j=0}^{k-1}(1-\\omega t)^j$ for $k\\ge1$, with\n$r_k(t)=(1-\\omega t)^k$. For the iterates from that algorithm,\n$$x_k=g_k(T)A^*y_\\delta,\\qquad y_\\delta-Ax_k=r_k(AA^*)y_\\delta.$$\nIf $y_\\delta=Ax^\\dagger$, then\n$$x^\\dagger-x_k=r_k(T)x^\\dagger.$$\nHere $g_k(T)$ and $r_k(T)$ are the compact spectral multipliers defined in\n[[def-compact-spectral-filter-and-qualification]]; $r_k(AA^*)$ is the\nmultiplier with scalar function $t\\mapsto(1-\\omega t)^k$ on the compact\nself-adjoint operator $AA^*$, as supplied by\n[[lem-compact-spectral-multiplier-is-well-defined]].",
++          "quote": "Assume Countable Choice. Let $A:X\\to Y$ and $\\omega$ satisfy the\nhypotheses of [[alg-landweber-iteration-with-discrepancy-stopping]] and put\n$T=A^*A$. For each integer $k\\ge0$, define\n$g_0(t)=0$ and\n$g_k(t)=\\omega\\sum_{j=0}^{k-1}(1-\\omega t)^j$ for $k\\ge1$, with\n$r_k(t)=(1-\\omega t)^k$. For the associated infinite mathematical path,\n$$x_k=g_k(T)A^*y_\\delta,\\qquad y_\\delta-Ax_k=r_k(AA^*)y_\\delta.$$\nIf $y_\\delta=Ax^\\dagger$, then\n$$x^\\dagger-x_k=r_k(T)x^\\dagger.$$\nHere $g_k(T)$ and $r_k(T)$ are the compact spectral multipliers defined in\n[[def-compact-spectral-filter-and-qualification]]; $r_k(AA^*)$ is the\nmultiplier with scalar function $t\\mapsto(1-\\omega t)^k$ on the compact\nself-adjoint operator $AA^*$, as supplied by\n[[lem-compact-spectral-multiplier-is-well-defined]].",
+           "uses": [
+             "1.1",
+             "1.2",
+@@ -960,10 +962,17 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "Put $p=\\nu+\\tfrac12$. By [F2], $x_k-x^\\dagger=-r_k(T)T^\\nu w$. The compact spectral expansion [F6], the power convention [F3], and $\\|Az\\|^2=\\langle A^*Az,z\\rangle$ from [F4] give $\\|Ax_k-y\\|=\\|T^p r_k(T)w\\|$. The scalar filter bound [F1] therefore gives $\\|Ax_k-y\\|\\le C_{p,A,\\omega}Rk^{-p}$. Choose $$K_\\delta=\\max\\!\\left\\{1,\\left\\lceil\\left(\\frac{C_{p,A,\\omega}R}{(\\tau-1)\\delta}\\right)^{1/p}\\right\\rceil\\right\\}.$$ Then $\\|Ax_{K_\\delta}-y\\|\\le(\\tau-1)\\delta$. By [F2], the noisy residual differs from the exact-data residual by $r_{K_\\delta}(AA^*)(y_\\delta-y)$. [F7] makes $AA^*$ compact positive self-adjoint, and [F4] gives $\\|AA^*\\|=\\|A\\|^2$. Every eigenvalue $t$ of $AA^*$ therefore satisfies $0\\le t\\le\\|A\\|^2$, so $|1-\\omega t|\\le1$ by the step-size hypothesis. [F5] bounds the noise residual by $\\delta$. Hence $\\|Ax_{K_\\delta}^\\delta-y_\\delta\\|\\le\\tau\\delta$, so the first crossing exists and $k_\\delta\\le K_\\delta$ (provided the finite budget reaches $K_\\delta$).",
++          "claim": "Put $p=\\nu+\\tfrac12$. By",
+           "step": "1.1",
+           "inputs": [
+-            "A1",
++            "F2]",
++            "$x_k-x^\\dagger=-r_k(T)T^\\nu w$. The compact spectral expansion [F6]",
++            "the power convention [F3]",
++            "and $\\|Az\\|^2=\\langle A^*Az,z\\rangle$ from [F4] give $\\|Ax_k-y\\|=\\|T^p r_k(T)w\\|$. The scalar filter bound [F1] therefore gives $\\|Ax_k-y\\|\\le C_{p,A,\\omega}Rk^{-p}$. Choose $$K_\\delta=\\max\\!\\left\\{1,\\left\\lceil\\left(\\frac{C_{p,A,\\omega}R}{(\\tau-1)\\delta}\\right)^{1/p}\\right\\rceil\\right\\}.$$ Then $\\|Ax_{K_\\delta}-y\\|\\le(\\tau-1)\\delta$. By [F2]",
++            "the noisy residual differs from the exact-data residual by $r_{K_\\delta}(AA^*)(y_\\delta-y)$. [F7] makes $AA^*$ compact positive self-adjoint",
++            "and [F4] gives $\\|AA^*\\|=\\|A\\|^2$. Every eigenvalue $t$ of $AA^*$ therefore satisfies $0\\le t\\le\\|A\\|^2$",
++            "so $|1-\\omega t|\\le1$ by the step-size hypothesis. [F5] bounds the noise residual by $\\delta$. Hence $\\|Ax_{K_\\delta}^\\delta-y_\\delta\\|\\le\\tau\\delta$",
++            "so the first crossing exists and $k_\\delta\\le K_\\delta$ (provided the finite budget reaches $K_\\delta$). [A1",
+             "F1",
+             "F2",
+             "F3",
+@@ -978,10 +987,10 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "At the crossing, [F2] and the same multiplier estimate [F5] give $\\|Ax_{k_\\delta}-y\\|\\le\\|Ax_{k_\\delta}^\\delta-y_\\delta\\|+\\delta\\le(\\tau+1)\\delta$.",
++          "claim": "At the crossing,",
+           "step": "1.2",
+           "inputs": [
+-            "A1",
++            "F2] and the same multiplier estimate [F5] give $\\|Ax_{k_\\delta}-y\\|\\le\\|Ax_{k_\\delta}^\\delta-y_\\delta\\|+\\delta\\le(\\tau+1)\\delta$. [A1",
+             "F2",
+             "F5",
+             "given",
+@@ -990,10 +999,17 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "Let $v=r_{k_\\delta}(T)w$ and $\\theta=2\\nu/(2\\nu+1)$. For a finite set $E\\subseteq\\Sigma$, put $a_t=t^{2\\nu+1}\\|P_tv\\|^2$ and $b_t=\\|P_tv\\|^2$. Then $t^{2\\nu}\\|P_tv\\|^2=a_t^\\theta b_t^{1-\\theta}$. If either $\\sum_Ea_t$ or $\\sum_Eb_t$ is zero, every summand on the left is zero. Otherwise normalize $\\tilde a_t=a_t/(\\sum_Ea_t)$ and $\\tilde b_t=b_t/(\\sum_Eb_t)$. The scalar inequality $u^\\theta v^{1-\\theta}\\le\\theta u+(1-\\theta)v$ follows by minimizing $f(s)=\\theta s+(1-\\theta)-s^\\theta$: $f'(s)=\\theta(1-s^{\\theta-1})$ is negative for $0<s<1$ and positive for $s>1$, so $f(s)\\ge f(1)=0$. Thus the sum of the normalized products is at most $1$, and $$\\|T^\\nu v\\|\\le\\|T^{\\nu+1/2}v\\|^{2\\nu/(2\\nu+1)}\\|v\\|^{1/(2\\nu+1)}.$$ Since [F6] gives the norm-convergent spectral expansion, increasing finite sets $E$ to $\\Sigma$ passes this inequality to the full sums. Also $\\|v\\|\\le R$ because $|r_{k_\\delta}(t)|\\le1$. Finally [F2], [F3], [F4], [F6], and [step 1.2] give $x^\\dagger-x_{k_\\delta}=T^\\nu v$. For every $z\\in X$, $\\|Az\\|^2=\\langle Tz,z\\rangle=\\sum_{t\\in\\Sigma}t\\|P_tz\\|^2=\\|T^{1/2}z\\|^2$, so $\\|T^{\\nu+1/2}v\\|=\\|A T^\\nu v\\|=\\|Ax_{k_\\delta}-y\\|\\le(\\tau+1)\\delta$. Hence $$\\|x_{k_\\delta}-x^\\dagger\\|=\\|T^\\nu v\\|\\le((\\tau+1)\\delta)^{2\\nu/(2\\nu+1)}R^{1/(2\\nu+1)}.$$",
++          "claim": "Let $v=r_{k_\\delta}(T)w$ and $\\theta=2\\nu/(2\\nu+1)$. For a finite set $E\\subseteq\\Sigma$, put $a_t=t^{2\\nu+1}\\|P_tv\\|^2$ and $b_t=\\|P_tv\\|^2$. Then $t^{2\\nu}\\|P_tv\\|^2=a_t^\\theta b_t^{1-\\theta}$. If either $\\sum_Ea_t$ or $\\sum_Eb_t$ is zero, every summand on the left is zero. Otherwise normalize $\\tilde a_t=a_t/(\\sum_Ea_t)$ and $\\tilde b_t=b_t/(\\sum_Eb_t)$. The scalar inequality $u^\\theta v^{1-\\theta}\\le\\theta u+(1-\\theta)v$ follows by minimizing $f(s)=\\theta s+(1-\\theta)-s^\\theta$: $f'(s)=\\theta(1-s^{\\theta-1})$ is negative for $0<s<1$ and positive for $s>1$, so $f(s)\\ge f(1)=0$. Thus the sum of the normalized products is at most $1$, and $$\\|T^\\nu v\\|\\le\\|T^{\\nu+1/2}v\\|^{2\\nu/(2\\nu+1)}\\|v\\|^{1/(2\\nu+1)}.$$ Since",
+           "step": "2.1",
+           "inputs": [
+-            "A1",
++            "F6] gives the norm-convergent spectral expansion",
++            "increasing finite sets $E$ to $\\Sigma$ passes this inequality to the full sums. Also $\\|v\\|\\le R$ because $|r_{k_\\delta}(t)|\\le1$. Finally [F2]",
++            "[F3]",
++            "[F4]",
++            "[F6]",
++            "and [step 1.2] give $x^\\dagger-x_{k_\\delta}=T^\\nu v$. For every $z\\in X$",
++            "$\\|Az\\|^2=\\langle Tz,z\\rangle=\\sum_{t\\in\\Sigma}t\\|P_tz\\|^2=\\|T^{1/2}z\\|^2$",
++            "so $\\|T^{\\nu+1/2}v\\|=\\|A T^\\nu v\\|=\\|Ax_{k_\\delta}-y\\|\\le(\\tau+1)\\delta$. Hence $$\\|x_{k_\\delta}-x^\\dagger\\|=\\|T^\\nu v\\|\\le((\\tau+1)\\delta)^{2\\nu/(2\\nu+1)}R^{1/(2\\nu+1)}.$$ [A1",
+             "F2",
+             "F3",
+             "F4",
+@@ -1004,10 +1020,14 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "From [F1], $\\|x_{k_\\delta}^\\delta-x_{k_\\delta}\\|\\le\\sqrt{2\\omega K_\\delta}\\delta$. Put $B=C_{p,A,\\omega}R/(\\tau-1)$, choosing $C_{p,A,\\omega}>0$. For sufficiently small $\\delta$, $B/\\delta\\ge1$, so $K_\\delta=\\lceil(B/\\delta)^{1/p}\\rceil\\le2(B/\\delta)^{1/p}$. Therefore $$\\sqrt{2\\omega K_\\delta}\\delta\\le2\\sqrt{\\omega}\\,B^{1/(2p)}\\delta^{1-1/(2p)}=C'R^{1/(2\\nu+1)}\\delta^{2\\nu/(2\\nu+1)},$$ because $2p=2\\nu+1$. Combining this with [step 2.1] by the triangle inequality proves the claim.",
++          "claim": "From",
+           "step": "3.1",
+           "inputs": [
+-            "A1",
++            "F1]",
++            "$\\|x_{k_\\delta}^\\delta-x_{k_\\delta}\\|\\le\\sqrt{2\\omega K_\\delta}\\delta$. Put $B=C_{p,A,\\omega}R/(\\tau-1)$",
++            "choosing $C_{p,A,\\omega}>0$. For sufficiently small $\\delta$",
++            "$B/\\delta\\ge1$",
++            "so $K_\\delta=\\lceil(B/\\delta)^{1/p}\\rceil\\le2(B/\\delta)^{1/p}$. Therefore $$\\sqrt{2\\omega K_\\delta}\\delta\\le2\\sqrt{\\omega}\\,B^{1/(2p)}\\delta^{1-1/(2p)}=C'R^{1/(2\\nu+1)}\\delta^{2\\nu/(2\\nu+1)},$$ because $2p=2\\nu+1$. Combining this with [step 2.1] by the triangle inequality proves the claim. [A1",
+             "F1",
+             "step 1.1",
+             "step 2.1",
+@@ -1235,17 +1255,16 @@
+           "source": "def-countable-choice",
+           "source_section": "Definition",
+           "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+-          "uses": [
+-            "2.1"
+-          ]
++          "uses": []
+         },
+         {
+           "fact": "F1",
+           "source": "alg-iteratively-regularized-gauss-newton-step",
+           "source_section": "Definition",
+-          "quote": "Assume Countable Choice, as required for the Hilbert-space adjoints in the\nnormal equation.\n\nLet $X,Y$ be real or complex Hilbert spaces, let $U\\subseteq X$ be open, and\nlet $F:U\\to Y$ be continuously Fréchet differentiable. Inputs are\n$x_0\\in U$, noisy data $y_\\delta\\in Y$, a bound $\\delta\\ge0$, a discrepancy\nfactor $\\tau>1$, a finite budget $N\\in\\mathbb N$, and parameters\n$\\alpha_0>0$ and $q\\in(0,1)$. At iteration $k$, if $x_k\\notin U$ return\n$(x_k,k,\\text{domain-failure})$. Otherwise put $A_k=F'(x_k)$ and\n$\\alpha_k=\\alpha_0q^k$. Before computing an update, if\n$\\|F(x_k)-y_\\delta\\|\\le\\tau\\delta$, return\n$(x_k,k,\\text{discrepancy})$. If $k=N$, return\n$(x_k,k,\\text{budget-exhausted})$.\n\nFor $k<N$, solve the unique Hilbert-space Tikhonov normal equation\n$$\\bigl(A_k^*A_k+\\alpha_k I_X\\bigr)s_k=A_k^*(y_\\delta-F(x_k))$$\nand set $x_{k+1}=x_k+s_k$. The shifted normal operator is invertible by\n[[lem-hilbert-tikhonov-normal-operator-invertible]]. If the returned iterate\nleaves $U$, the next call returns domain-failure. The procedure asserts no\nconvergence theorem; its prescribed step is the unanchored Levenberg–Marquardt\nform used in the assigned contract.",
+-          "uses": [
+-            "2.1"
++          "quote": "Assume Countable Choice, as required for the Hilbert-space adjoints in the\nnormal equation.\n\nLet $X,Y$ be Hilbert spaces over the same field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$,\nlet $U\\subseteq X$ be open, and let $F:U\\to Y$ be continuously Fréchet\ndifferentiable over $\\mathbb F$. In the complex case, each $F'(x)$ is a bounded\ncomplex-linear operator and the Fréchet remainder is measured over complex\nincrements, so\n$$\\lim_{\\substack{h\\to0,\\ h\\ne0\\\\x+h\\in U}}\n\\frac{\\|F(x+h)-F(x)-F'(x)h\\|}{\\|h\\|}=0.$$\nInputs are\n$x_0\\in U$, noisy data $y_\\delta\\in Y$, a bound $\\delta\\ge0$, a discrepancy\nfactor $\\tau>1$, a finite budget $N\\in\\mathbb N$, and parameters\n$\\alpha_0>0$ and $q\\in(0,1)$. At iteration $k$, if $x_k\\notin U$ return\n$(x_k,k,\\text{domain-failure})$. Otherwise put $A_k=F'(x_k)$ and\n$\\alpha_k=\\alpha_0q^k$. Before computing an update, if\n$\\|F(x_k)-y_\\delta\\|\\le\\tau\\delta$, return\n$(x_k,k,\\text{discrepancy})$. If $k=N$, return\n$(x_k,k,\\text{budget-exhausted})$.\n\nFor $k<N$, solve the unique Hilbert-space Tikhonov normal equation\n$$\\bigl(A_k^*A_k+\\alpha_k I_X\\bigr)s_k=A_k^*(y_\\delta-F(x_k))$$\nand set $x_{k+1}=x_k+s_k$. The shifted normal operator is invertible by\n[[lem-hilbert-tikhonov-normal-operator-invertible]]. If the returned iterate\nleaves $U$, the next call returns domain-failure. The procedure asserts no\nconvergence theorem; its prescribed step is the unanchored Levenberg–Marquardt\nform used in the assigned contract.",
++          "uses": [
++            "2.1",
++            "3.1"
+           ]
+         },
+         {
+@@ -1297,10 +1316,15 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "By [F6], $e^{\\log2}=2$, and [F3] gives $e^{-\\log2}=1/2$; hence $F(c^\\dagger)=1/2$ and $F(c_0)=0$. The derivative of $c\\mapsto-c$ is $-1$ by its difference quotient. Therefore [F2], [F4], and [F5] give $(e^{-c})'=-e^{-c}$ and $F'(c)=e^{-c}$, so $F'(0)=1$.",
++          "claim": "By",
+           "step": "1.1",
+           "inputs": [
+-            "given",
++            "F6]",
++            "$e^{\\log2}=2$",
++            "and [F3] gives $e^{-\\log2}=1/2$; hence $F(c^\\dagger)=1/2$ and $F(c_0)=0$. The derivative of $c\\mapsto-c$ is $-1$ by its difference quotient. Therefore [F2]",
++            "[F4]",
++            "and [F5] give $(e^{-c})'=-e^{-c}$ and $F'(c)=e^{-c}$",
++            "so $F'(0)=1$. [given",
+             "F2",
+             "F3",
+             "F4",
+@@ -1311,14 +1335,26 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "The initial residual satisfies $|y^\\delta-F(c_0)|\\ge2/5$, while $\\tau\\delta\\le1/5$, so the discrepancy test does not stop at $c_0$. Substitution into [F1] gives $c_1=0+(1+1/4)^{-1}(1/2+\\varepsilon)=\\tfrac25+\\tfrac45\\varepsilon$. Because $|\\varepsilon|\\le1/10$, $c_1\\ge\\tfrac25-\\tfrac2{25}=\\tfrac8{25}>0$, so the returned rate lies in the physical rate domain $[0,\\infty)$.",
++          "claim": "The initial residual satisfies $|y^\\delta-F(c_0)|\\ge2/5$, while $\\tau\\delta\\le1/5$, so the discrepancy test does not stop at $c_0$. Substitution into",
+           "step": "2.1",
+           "inputs": [
+-            "A1",
++            "F1] gives $c_1=0+(1+1/4)^{-1}(1/2+\\varepsilon)=\\tfrac25+\\tfrac45\\varepsilon$. Because $|\\varepsilon|\\le1/10$",
++            "$c_1\\ge\\tfrac25-\\tfrac2{25}=\\tfrac8{25}>0$",
++            "so the returned rate lies in the physical rate domain $[0,\\infty)$. [A1",
+             "F1",
+             "step 1.1",
+             "given",
+             "algebra"
++          ]
++        },
++        {
++          "id": "step-3-1",
++          "step": "3.1",
++          "claim": "Since the cap is $N=1$ and $c_1\\in U=\\mathbb R$, the next check returns status `discrepancy` if its residual is at most $2\\delta$; otherwise the cap branch returns `budget-exhausted`. In both cases the returned state is $c_1$.",
++          "inputs": [
++            "F1",
++            "step 2.1",
++            "given"
+           ]
+         }
+       ],
+@@ -1388,38 +1424,33 @@
+           "source": "def-countable-choice",
+           "source_section": "Definition",
+           "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
++          "uses": []
++        },
++        {
++          "fact": "F1",
++          "source": "alg-landweber-iteration-with-discrepancy-stopping",
++          "source_section": "Definition",
++          "quote": "Assume Countable Choice, as required for the Hilbert-space adjoint in the\niteration.\n\nLet $X,Y$ be real or complex Hilbert spaces, let $A:X\\to Y$ be a nonzero\ncompact linear operator, and let $\\omega$ satisfy\n$0<\\omega<2/\\|A\\|^2$. The input consists of data $y_\\delta\\in Y$, a noise\nbound $\\delta\\ge0$, a discrepancy factor $\\tau>1$, and a finite iteration\nbudget $N\\in\\mathbb N$. Define the associated infinite mathematical path by\n$x_0=0$ and\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k),\\qquad k\\ge0.$$\nFor the finite procedure, evaluate only the prefix through index $N$, in\nincreasing order, and return at its first stopping condition. Values of the\nmathematical path after an earlier return remain defined by the recurrence but\nneed not be computed by an implementation.\n\nFor $k=0,\\ldots,N$ in increasing order, compute\n$r_k=y_\\delta-Ax_k$. If $\\|r_k\\|\\le\\tau\\delta$, return\n$(x_k,k,\\texttt{discrepancy})$. If $k=N$, return\n$(x_k,k,\\texttt{budget-exhausted})$. Otherwise set\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k).$$\n\nThe procedure uses exact Hilbert-space operations. It reports a finite-budget\nfailure to cross as inconclusive; that status is not a convergence conclusion.",
++          "uses": [
++            "1.2"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "lem-landweber-filter-and-residual-identities",
++          "source_section": "Statement",
++          "quote": "Assume Countable Choice. Let $A:X\\to Y$ and $\\omega$ satisfy the\nhypotheses of [[alg-landweber-iteration-with-discrepancy-stopping]] and put\n$T=A^*A$. For each integer $k\\ge0$, define\n$g_0(t)=0$ and\n$g_k(t)=\\omega\\sum_{j=0}^{k-1}(1-\\omega t)^j$ for $k\\ge1$, with\n$r_k(t)=(1-\\omega t)^k$. For the associated infinite mathematical path,\n$$x_k=g_k(T)A^*y_\\delta,\\qquad y_\\delta-Ax_k=r_k(AA^*)y_\\delta.$$\nIf $y_\\delta=Ax^\\dagger$, then\n$$x^\\dagger-x_k=r_k(T)x^\\dagger.$$\nHere $g_k(T)$ and $r_k(T)$ are the compact spectral multipliers defined in\n[[def-compact-spectral-filter-and-qualification]]; $r_k(AA^*)$ is the\nmultiplier with scalar function $t\\mapsto(1-\\omega t)^k$ on the compact\nself-adjoint operator $AA^*$, as supplied by\n[[lem-compact-spectral-multiplier-is-well-defined]].",
+           "uses": [
+             "1.2",
+             "2.1"
+           ]
+         },
+         {
+-          "fact": "F1",
+-          "source": "alg-landweber-iteration-with-discrepancy-stopping",
+-          "source_section": "Definition",
+-          "quote": "Assume Countable Choice, as required for the Hilbert-space adjoint in the\niteration.\n\nLet $X,Y$ be real or complex Hilbert spaces, let $A:X\\to Y$ be a nonzero\ncompact linear operator, and let $\\omega$ satisfy\n$0<\\omega<2/\\|A\\|^2$. The input consists of data $y_\\delta\\in Y$, a noise\nbound $\\delta\\ge0$, a discrepancy factor $\\tau>1$, and a finite iteration\nbudget $N\\in\\mathbb N$. Define the finite mathematical path by $x_0=0$ and\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k),\\qquad 0\\le k<N.$$\nThe procedure evaluates this path in increasing order and returns at its\nfirst stopping condition; values after an earlier return are part of the\nmathematical path but need not be computed by an implementation.\n\nFor $k=0,\\ldots,N$ in increasing order, compute\n$r_k=y_\\delta-Ax_k$. If $\\|r_k\\|\\le\\tau\\delta$, return\n$(x_k,k,\\texttt{discrepancy})$. If $k=N$, return\n$(x_k,k,\\texttt{budget-exhausted})$. Otherwise set\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k).$$\n\nThe procedure uses exact Hilbert-space operations. It reports a finite-budget\nfailure to cross as inconclusive; that status is not a convergence conclusion.",
+-          "uses": [
+-            "1.2"
+-          ]
+-        },
+-        {
+-          "fact": "F2",
+-          "source": "lem-landweber-filter-and-residual-identities",
+-          "source_section": "Statement",
+-          "quote": "Assume Countable Choice. Let $A:X\\to Y$ and $\\omega$ satisfy the\nhypotheses of [[alg-landweber-iteration-with-discrepancy-stopping]] and put\n$T=A^*A$. For each integer $k\\ge0$, define\n$g_0(t)=0$ and\n$g_k(t)=\\omega\\sum_{j=0}^{k-1}(1-\\omega t)^j$ for $k\\ge1$, with\n$r_k(t)=(1-\\omega t)^k$. For the iterates from that algorithm,\n$$x_k=g_k(T)A^*y_\\delta,\\qquad y_\\delta-Ax_k=r_k(AA^*)y_\\delta.$$\nIf $y_\\delta=Ax^\\dagger$, then\n$$x^\\dagger-x_k=r_k(T)x^\\dagger.$$\nHere $g_k(T)$ and $r_k(T)$ are the compact spectral multipliers defined in\n[[def-compact-spectral-filter-and-qualification]]; $r_k(AA^*)$ is the\nmultiplier with scalar function $t\\mapsto(1-\\omega t)^k$ on the compact\nself-adjoint operator $AA^*$, as supplied by\n[[lem-compact-spectral-multiplier-is-well-defined]].",
+-          "uses": [
+-            "1.2",
+-            "2.1"
+-          ]
+-        },
+-        {
+           "fact": "F3",
+           "source": "lem-finite-rank-operators-are-compact",
+           "source_section": "Statement",
+           "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field and let\n$T:X\\to Y$ be a bounded linear operator\n([[def-bounded-linear-operator]]) whose range $T(X)$ admits an ordered basis of\nfinite length ([[def-linear-basis]]). Then $T$ is compact\n([[def-compact-linear-operator]]).",
+-          "uses": [
+-            "1.1"
+-          ]
++          "uses": []
+         },
+         {
+           "fact": "F4",
+@@ -1471,10 +1502,13 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "The truncation $A_Ne_j=2^{-j}e_j$ for $j\\le N$ and $A_Ne_j=0$ for $j>N$ has finite rank, so [F3] makes it compact. Also $\\|A-A_N\\|=\\sup_{j>N}2^{-j}=2^{-(N+1)}\\to0$, so [F4] makes $A$ compact. For every $x\\in\\ell^2$, [F8] gives $\\|Ax\\|^2=\\sum_{j\\ge1}4^{-j}|x_j|^2\\le\\tfrac14\\|x\\|^2$, with equality at $e_1$; thus [F5] gives $\\|A\\|=1/2$ and $0<\\omega=1<2/\\|A\\|^2=8$. The data norm is $\\|y^\\delta\\|^2=\\delta^2\\sum_{j=1}^{\\infty}2^{-j}=\\delta^2$.",
++          "claim": "The truncation $A_Ne_j=2^{-j}e_j$ for $j\\le N$ and $A_Ne_j=0$ for $j>N$ has finite rank, so",
+           "step": "1.1",
+           "inputs": [
+-            "F3",
++            "F3] makes it compact. Also $\\|A-A_N\\|=\\sup_{j>N}2^{-j}=2^{-(N+1)}\\to0$",
++            "so [F4] makes $A$ compact. For every $x\\in\\ell^2$",
++            "[F8] gives $\\|Ax\\|^2=\\sum_{j\\ge1}4^{-j}|x_j|^2\\le\\tfrac14\\|x\\|^2$",
++            "with equality at $e_1$; thus [F5] gives $\\|A\\|=1/2$ and $0<\\omega=1<2/\\|A\\|^2=8$. The data norm is $\\|y^\\delta\\|^2=\\delta^2\\sum_{j=1}^{\\infty}2^{-j}=\\delta^2$. [F3",
+             "F4",
+             "F5",
+             "F7",
+@@ -1485,10 +1519,17 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "By [F6] and [F8], $A^*e_j=2^{-j}e_j$: for every $x$, $\\langle Ax,e_j\\rangle=2^{-j}x_j=\\langle x,2^{-j}e_j\\rangle$, and the adjoint is unique. Thus $AA^*e_j=4^{-j}e_j$, and the un-stopped path from [F1] has residual coordinates given by [F2]: $\\delta2^{-j/2}(1-4^{-j})^k$. Their squared sum is dominated termwise by $\\delta^2 2^{-j}$, whose tail tends to zero by the geometric-series formula. Given $\\epsilon>0$, choose a finite initial segment with omitted bound below $\\epsilon$; on that finite segment every residual coordinate tends to zero. Hence the full squared residual sum tends to zero. Each coordinate factor also decreases with $k$, so the residual norm is nonincreasing.",
++          "claim": "By",
+           "step": "1.2",
+           "inputs": [
+-            "A1",
++            "F6] and [F8]",
++            "$A^*e_j=2^{-j}e_j$: for every $x$",
++            "$\\langle Ax,e_j\\rangle=2^{-j}x_j=\\langle x,2^{-j}e_j\\rangle$",
++            "and the adjoint is unique. Thus $AA^*e_j=4^{-j}e_j$",
++            "and the un-stopped path from [F1] has residual coordinates given by [F2]: $\\delta2^{-j/2}(1-4^{-j})^k$. Their squared sum is dominated termwise by $\\delta^2 2^{-j}$",
++            "whose tail tends to zero by the geometric-series formula. Given $\\epsilon>0$",
++            "choose a finite initial segment with omitted bound below $\\epsilon$; on that finite segment every residual coordinate tends to zero. Hence the full squared residual sum tends to zero. Each coordinate factor also decreases with $k$",
++            "so the residual norm is nonincreasing. [A1",
+             "F1",
+             "F2",
+             "F6",
+@@ -1500,10 +1541,13 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "Here $A^*A e_j=4^{-j}e_j$. Substituting into [F2] gives $x_{k,j}^\\delta=\\delta2^{j/2}\\bigl(1-(1-4^{-j})^k\\bigr)$. For an integer $n\\ge2$, Bernoulli's inequality gives $(1+1/(n-1))^n\\ge1+n/(n-1)>2$, hence $(1-1/n)^n<1/2$. Taking $n=4^j$ shows $|x_{k_j,j}^\\delta|\\ge\\delta2^{j/2}/2$, which tends to infinity. Thus $\\|x_{k_j}^\\delta-x^\\dagger\\|\\to\\infty$ although the residual tends to zero; this is semiconvergence and shows why the method needs an explicit stopping rule.",
++          "claim": "Here $A^*A e_j=4^{-j}e_j$. Substituting into",
+           "step": "2.1",
+           "inputs": [
+-            "A1",
++            "F2] gives $x_{k,j}^\\delta=\\delta2^{j/2}\\bigl(1-(1-4^{-j})^k\\bigr)$. For an integer $n\\ge2$",
++            "Bernoulli's inequality gives $(1+1/(n-1))^n\\ge1+n/(n-1)>2$",
++            "hence $(1-1/n)^n<1/2$. Taking $n=4^j$ shows $|x_{k_j,j}^\\delta|\\ge\\delta2^{j/2}/2$",
++            "which tends to infinity. Thus $\\|x_{k_j}^\\delta-x^\\dagger\\|\\to\\infty$ although the residual tends to zero; this is semiconvergence and shows why the method needs an explicit stopping rule. [A1",
+             "F2",
+             "given",
+             "algebra"
+@@ -1576,15 +1620,13 @@
+           "source": "def-countable-choice",
+           "source_section": "Definition",
+           "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+-          "uses": [
+-            "2.1"
+-          ]
++          "uses": []
+         },
+         {
+           "fact": "F1",
+           "source": "alg-landweber-iteration-with-discrepancy-stopping",
+           "source_section": "Definition",
+-          "quote": "Assume Countable Choice, as required for the Hilbert-space adjoint in the\niteration.\n\nLet $X,Y$ be real or complex Hilbert spaces, let $A:X\\to Y$ be a nonzero\ncompact linear operator, and let $\\omega$ satisfy\n$0<\\omega<2/\\|A\\|^2$. The input consists of data $y_\\delta\\in Y$, a noise\nbound $\\delta\\ge0$, a discrepancy factor $\\tau>1$, and a finite iteration\nbudget $N\\in\\mathbb N$. Define the finite mathematical path by $x_0=0$ and\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k),\\qquad 0\\le k<N.$$\nThe procedure evaluates this path in increasing order and returns at its\nfirst stopping condition; values after an earlier return are part of the\nmathematical path but need not be computed by an implementation.\n\nFor $k=0,\\ldots,N$ in increasing order, compute\n$r_k=y_\\delta-Ax_k$. If $\\|r_k\\|\\le\\tau\\delta$, return\n$(x_k,k,\\texttt{discrepancy})$. If $k=N$, return\n$(x_k,k,\\texttt{budget-exhausted})$. Otherwise set\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k).$$\n\nThe procedure uses exact Hilbert-space operations. It reports a finite-budget\nfailure to cross as inconclusive; that status is not a convergence conclusion.",
++          "quote": "Assume Countable Choice, as required for the Hilbert-space adjoint in the\niteration.\n\nLet $X,Y$ be real or complex Hilbert spaces, let $A:X\\to Y$ be a nonzero\ncompact linear operator, and let $\\omega$ satisfy\n$0<\\omega<2/\\|A\\|^2$. The input consists of data $y_\\delta\\in Y$, a noise\nbound $\\delta\\ge0$, a discrepancy factor $\\tau>1$, and a finite iteration\nbudget $N\\in\\mathbb N$. Define the associated infinite mathematical path by\n$x_0=0$ and\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k),\\qquad k\\ge0.$$\nFor the finite procedure, evaluate only the prefix through index $N$, in\nincreasing order, and return at its first stopping condition. Values of the\nmathematical path after an earlier return remain defined by the recurrence but\nneed not be computed by an implementation.\n\nFor $k=0,\\ldots,N$ in increasing order, compute\n$r_k=y_\\delta-Ax_k$. If $\\|r_k\\|\\le\\tau\\delta$, return\n$(x_k,k,\\texttt{discrepancy})$. If $k=N$, return\n$(x_k,k,\\texttt{budget-exhausted})$. Otherwise set\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k).$$\n\nThe procedure uses exact Hilbert-space operations. It reports a finite-budget\nfailure to cross as inconclusive; that status is not a convergence conclusion.",
+           "uses": [
+             "2.1"
+           ]
+@@ -1593,7 +1635,7 @@
+           "fact": "F2",
+           "source": "lem-landweber-filter-and-residual-identities",
+           "source_section": "Statement",
+-          "quote": "Assume Countable Choice. Let $A:X\\to Y$ and $\\omega$ satisfy the\nhypotheses of [[alg-landweber-iteration-with-discrepancy-stopping]] and put\n$T=A^*A$. For each integer $k\\ge0$, define\n$g_0(t)=0$ and\n$g_k(t)=\\omega\\sum_{j=0}^{k-1}(1-\\omega t)^j$ for $k\\ge1$, with\n$r_k(t)=(1-\\omega t)^k$. For the iterates from that algorithm,\n$$x_k=g_k(T)A^*y_\\delta,\\qquad y_\\delta-Ax_k=r_k(AA^*)y_\\delta.$$\nIf $y_\\delta=Ax^\\dagger$, then\n$$x^\\dagger-x_k=r_k(T)x^\\dagger.$$\nHere $g_k(T)$ and $r_k(T)$ are the compact spectral multipliers defined in\n[[def-compact-spectral-filter-and-qualification]]; $r_k(AA^*)$ is the\nmultiplier with scalar function $t\\mapsto(1-\\omega t)^k$ on the compact\nself-adjoint operator $AA^*$, as supplied by\n[[lem-compact-spectral-multiplier-is-well-defined]].",
++          "quote": "Assume Countable Choice. Let $A:X\\to Y$ and $\\omega$ satisfy the\nhypotheses of [[alg-landweber-iteration-with-discrepancy-stopping]] and put\n$T=A^*A$. For each integer $k\\ge0$, define\n$g_0(t)=0$ and\n$g_k(t)=\\omega\\sum_{j=0}^{k-1}(1-\\omega t)^j$ for $k\\ge1$, with\n$r_k(t)=(1-\\omega t)^k$. For the associated infinite mathematical path,\n$$x_k=g_k(T)A^*y_\\delta,\\qquad y_\\delta-Ax_k=r_k(AA^*)y_\\delta.$$\nIf $y_\\delta=Ax^\\dagger$, then\n$$x^\\dagger-x_k=r_k(T)x^\\dagger.$$\nHere $g_k(T)$ and $r_k(T)$ are the compact spectral multipliers defined in\n[[def-compact-spectral-filter-and-qualification]]; $r_k(AA^*)$ is the\nmultiplier with scalar function $t\\mapsto(1-\\omega t)^k$ on the compact\nself-adjoint operator $AA^*$, as supplied by\n[[lem-compact-spectral-multiplier-is-well-defined]].",
+           "uses": [
+             "2.1"
+           ]
+@@ -1603,9 +1645,7 @@
+           "source": "def-euclidean-inner-product",
+           "source_section": "Definition",
+           "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+-          "uses": [
+-            "1.1"
+-          ]
++          "uses": []
+         },
+         {
+           "fact": "F4",
+@@ -1629,10 +1669,13 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "Let $\\mathbf 1=(1,1,1)^T$. By [F4], $A=\\tfrac14(I+\\mathbf1\\mathbf1^T)$. Thus $A\\mathbf1=\\mathbf1$, and for every $v\\perp\\mathbf1$ one has $\\mathbf1^Tv=0$ and $Av=\\tfrac14v$. These orthogonal subspaces span $\\mathbb R^3$, so [F3]–[F5] give $\\|A\\|=1$ and $0<1<2/\\|A\\|^2$.",
++          "claim": "Let $\\mathbf 1=(1,1,1)^T$. By",
+           "step": "1.1",
+           "inputs": [
+-            "F3",
++            "F4]",
++            "$A=\\tfrac14(I+\\mathbf1\\mathbf1^T)$. Thus $A\\mathbf1=\\mathbf1$",
++            "and for every $v\\perp\\mathbf1$ one has $\\mathbf1^Tv=0$ and $Av=\\tfrac14v$. These orthogonal subspaces span $\\mathbb R^3$",
++            "so [F3]–[F5] give $\\|A\\|=1$ and $0<1<2/\\|A\\|^2$. [F3",
+             "F4",
+             "F5",
+             "given",
+@@ -1641,10 +1684,11 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "Since $x^\\dagger$ is a zero-sum eigenvector, $A^TAx^\\dagger=\\tfrac1{16}x^\\dagger$. Applying [F2] gives $x_k=[1-(1-1/16)^k]x^\\dagger=[1-(15/16)^k]x^\\dagger$. At $k=1$ this is $\\tfrac1{16}(1,0,-1)^T$, and the scalar coefficient tends to $1$ as $k\\to\\infty$.",
++          "claim": "Since $x^\\dagger$ is a zero-sum eigenvector, $A^TAx^\\dagger=\\tfrac1{16}x^\\dagger$. Applying",
+           "step": "2.1",
+           "inputs": [
+-            "A1",
++            "F2] gives $x_k=[1-(1-1/16)^k]x^\\dagger=[1-(15/16)^k]x^\\dagger$. At $k=1$ this is $\\tfrac1{16}(1,0,-1)^T$",
++            "and the scalar coefficient tends to $1$ as $k\\to\\infty$. [A1",
+             "F1",
+             "F2",
+             "step 1.1",
+@@ -1719,9 +1763,7 @@
+           "source_section": "Definition",
+           "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+           "uses": [
+-            "1.1",
+-            "3.1",
+-            "5.1"
++            "1.1"
+           ]
+         },
+         {
+@@ -1732,7 +1774,6 @@
+           "uses": [
+             "3.1",
+             "4.1",
+-            "4.2",
+             "5.1"
+           ]
+         },
+@@ -1891,9 +1932,16 @@
+         {
+           "id": "step-3-1",
+           "step": "3.1",
+-          "claim": "In the nonzero complex space, or in step 2.1's complexification, apply [F1]–[F2]. For $\\nu>0$, $t^\\nu$ extends continuously to zero: for $0<t<\\varepsilon^{1/\\nu}$, the positive derivative and [F8], followed by the power laws, give $t^\\nu<\\varepsilon$. Hence [F3] supplies real polynomials converging uniformly to $t^\\nu$ on $[0,\\|S\\|]$. The calculus maps them to a norm-convergent sequence of self-adjoint operators. In the real case each polynomial in $S_c$ preserves $j(X)=\\{(x,0)\\}$, a closed real subspace, so the limit preserves it too. Restriction defines $S^\\nu$ over the real field, independent of approximants by the norm estimate from [F1]. Polynomial identities and norm bounds pass to these restrictions.",
+-          "inputs": [
+-            "A1",
++          "claim": "In the nonzero complex space, or in step 2.1's complexification, apply",
++          "inputs": [
++            "F1]–[F2]. For $\\nu>0$",
++            "$t^\\nu$ extends continuously to zero: for $0<t<\\varepsilon^{1/\\nu}$",
++            "the positive derivative and [F8]",
++            "followed by the power laws",
++            "give $t^\\nu<\\varepsilon$. Hence [F3] supplies real polynomials converging uniformly to $t^\\nu$ on $[0,\\|S\\|]$. The calculus maps them to a norm-convergent sequence of self-adjoint operators. In the real case each polynomial in $S_c$ preserves $j(X)=\\{(x,0)\\}$",
++            "a closed real subspace",
++            "so the limit preserves it too. Restriction defines $S^\\nu$ over the real field",
++            "independent of approximants by the norm estimate from [F1]. Polynomial identities and norm bounds pass to these restrictions. [A1",
+             "F1",
+             "F2",
+             "F3",
+@@ -1920,9 +1968,10 @@
+         {
+           "id": "step-4-2",
+           "step": "4.2",
+-          "claim": "The calculus identifies $T_\\alpha$ with $(t+\\alpha)^{-1}$: multiplying this function by $t+\\alpha$ gives the identity, so uniqueness of the inverse in [F7] applies. For $0<\\gamma\\le1$ and $u\\ge0$, $u^\\gamma\\le1+u$ (use $u\\le1$ and $u\\ge1$ separately). Scaling $t=\\alpha u$ therefore gives $\\alpha t^\\nu/(t+\\alpha)\\le\\alpha^\\nu$ for $0<\\nu\\le1$. Applying the isometric calculus and its real restriction proves the first filter bound.",
+-          "inputs": [
+-            "F1",
++          "claim": "The calculus identifies $T_\\alpha$ with $(t+\\alpha)^{-1}$: multiplying this function by $t+\\alpha$ gives the identity, so uniqueness of the inverse in",
++          "inputs": [
++            "F7] applies. For $0<\\gamma\\le1$ and $u\\ge0$",
++            "$u^\\gamma\\le1+u$ (use $u\\le1$ and $u\\ge1$ separately). Scaling $t=\\alpha u$ therefore gives $\\alpha t^\\nu/(t+\\alpha)\\le\\alpha^\\nu$ for $0<\\nu\\le1$. Applying the isometric calculus and its real restriction proves the first filter bound. [F1",
+             "F6",
+             "F7",
+             "step 3.1",
+@@ -1932,9 +1981,13 @@
+         {
+           "id": "step-5-1",
+           "step": "5.1",
+-          "claim": "Put $Q=\\alpha T_\\alpha S^\\nu$. By [F4], $\\|AQ\\|^2=\\|Q^*SQ\\|$. Its scalar function is $[\\alpha t^{\\nu+1/2}/(t+\\alpha)]^2$. Since $\\nu+1/2\\le1$, the same scalar estimate as step 4.2 bounds this by $\\alpha^{2\\nu+1}$, proving the second bound. The noise bound is [F7]. Finally $(AA^*+\\alpha I)A=A(S+\\alpha I)$ yields $AT_\\alpha A^*=(AA^*+\\alpha I)^{-1}AA^*$. Apply the calculus to $AA^*$ on $Y$, or directly use zero if $Y=\\{0\\}$: its function $t/(t+\\alpha)$ is at most one. This proves the last bound in either field.",
+-          "inputs": [
+-            "A1",
++          "claim": "Put $Q=\\alpha T_\\alpha S^\\nu$. By",
++          "inputs": [
++            "F4]",
++            "$\\|AQ\\|^2=\\|Q^*SQ\\|$. Its scalar function is $[\\alpha t^{\\nu+1/2}/(t+\\alpha)]^2$. Since $\\nu+1/2\\le1$",
++            "the same scalar estimate as step 4.2 bounds this by $\\alpha^{2\\nu+1}$",
++            "proving the second bound. The noise bound is [F7]. Finally $(AA^*+\\alpha I)A=A(S+\\alpha I)$ yields $AT_\\alpha A^*=(AA^*+\\alpha I)^{-1}AA^*$. Apply the calculus to $AA^*$ on $Y$",
++            "or directly use zero if $Y=\\{0\\}$: its function $t/(t+\\alpha)$ is at most one. This proves the last bound in either field. [A1",
+             "F1",
+             "F2",
+             "F4",
+@@ -2004,31 +2057,29 @@
+           "source_section": "Definition",
+           "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+           "uses": [
+-            "1.1",
++            "1.1"
++          ]
++        },
++        {
++          "fact": "F1",
++          "source": "alg-anchored-irgnm-with-discrepancy-stopping",
++          "source_section": "Definition",
++          "quote": "Assume Countable Choice. Let $X,Y$ be Hilbert spaces over the same field\n$\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $U\\subseteq X$ be open, and let\n$F:U\\to Y$ be continuously Fréchet differentiable over $\\mathbb F$. In the\ncomplex case, each $F'(x)$ is a bounded complex-linear operator and the\nFréchet remainder is measured over complex increments, with\n$$\\lim_{\\substack{h\\to0,\\ h\\ne0\\\\x+h\\in U}}\n\\frac{\\|F(x+h)-F(x)-F'(x)h\\|}{\\|h\\|}=0.$$\nInputs are anchor and\ninitial point $x_0\\in U$, datum $y_\\delta$, noise bound $\\delta\\ge0$,\ndiscrepancy factor $\\tau>1$, finite update cap $N\\in\\mathbb N_0$,\n$\\alpha_0>0$ and $q\\in(0,1)$. For $k=0,\\ldots,N$, first check $x_k\\in U$;\notherwise return domain-failure. Evaluate $F(x_k)$; if\n$\\|F(x_k)-y_\\delta\\|\\le\\tau\\delta$, return\n$(x_k,k,\\texttt{discrepancy})$. If $k=N$, return\n$(x_k,k,\\texttt{budget-exhausted})$. Otherwise set\n$A_k=F'(x_k)$, $\\alpha_k=\\alpha_0q^k$, solve\n$$(A_k^*A_k+\\alpha_k I)s_k=A_k^*(y_\\delta-F(x_k))+\\alpha_k(x_0-x_k),$$\nand set $x_{k+1}=x_k+s_k$. The unique Hilbert-space solve exists by [[lem-hilbert-tikhonov-normal-operator-invertible]]. An evaluation failure returns evaluation-failure with the last valid state; a finite implementation that cannot certify the exact normal solve returns solve-unverified. No success or convergence claim is attached to these failure statuses.\n\nThe mathematical extended recurrence means the same exact updates with the discrepancy and finite-cap tests suppressed, for as long as the states lie in $U$. It is used only for comparison in proofs. A finite actual run follows its prefix and stops at its first test crossing. This anchored update is distinct from the retained unanchored Levenberg-Marquardt step; its extra term is $\\alpha_k(x_0-x_k)$.",
++          "uses": [
++            "1.2"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
++          "source_section": "Statement",
++          "quote": "Assume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.",
++          "uses": [
+             "1.2",
+             "3.1"
+           ]
+         },
+         {
+-          "fact": "F1",
+-          "source": "alg-anchored-irgnm-with-discrepancy-stopping",
+-          "source_section": "Definition",
+-          "quote": "Assume Countable Choice. Let $F:U\\to Y$ be continuously Fréchet differentiable between real or complex Hilbert spaces, with open $U\\subseteq X$. Inputs are anchor and initial point $x_0\\in U$, datum $y_\\delta$, noise bound $\\delta\\ge0$, discrepancy factor $\\tau>1$, finite update cap $N\\in\\mathbb N_0$, $\\alpha_0>0$ and $q\\in(0,1)$. For $k=0,\\ldots,N$, first check $x_k\\in U$; otherwise return domain-failure. Evaluate $F(x_k)$; if $\\|F(x_k)-y_\\delta\\|\\le\\tau\\delta$, return $(x_k,k,\\texttt{discrepancy})$. If $k=N$, return $(x_k,k,\\texttt{budget-exhausted})$. Otherwise set $A_k=F'(x_k)$, $\\alpha_k=\\alpha_0q^k$, solve\n$$(A_k^*A_k+\\alpha_k I)s_k=A_k^*(y_\\delta-F(x_k))+\\alpha_k(x_0-x_k),$$\nand set $x_{k+1}=x_k+s_k$. The unique Hilbert-space solve exists by [[lem-hilbert-tikhonov-normal-operator-invertible]]. An evaluation failure returns evaluation-failure with the last valid state; a finite implementation that cannot certify the exact normal solve returns solve-unverified. No success or convergence claim is attached to these failure statuses.\n\nThe mathematical extended recurrence means the same exact updates with the discrepancy and finite-cap tests suppressed, for as long as the states lie in $U$. It is used only for comparison in proofs. A finite actual run follows its prefix and stops at its first test crossing. This anchored update is distinct from the retained unanchored Levenberg-Marquardt step; its extra term is $\\alpha_k(x_0-x_k)$.",
+-          "uses": [
+-            "1.2"
+-          ]
+-        },
+-        {
+-          "fact": "F2",
+-          "source": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+-          "source_section": "Statement",
+-          "quote": "Assume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.",
+-          "uses": [
+-            "1.2",
+-            "3.1"
+-          ]
+-        },
+-        {
+           "fact": "F3",
+           "source": "lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves",
+           "source_section": "Statement",
+@@ -2061,8 +2112,7 @@
+           "source_section": "Statement",
+           "quote": "Assume the Axiom of Countable Choice. Let $H,K,L$ be real or complex Hilbert spaces and let $R,S\\in\\mathcal B(H,K)$ and $T\\in\\mathcal B(K,L)$ be bounded linear operators. Then the Hilbert adjoints satisfy:\n\n1. $(aR+bS)^*=\\overline a\\,R^*+\\overline b\\,S^*$ for scalars $a,b$, and the adjoint of an operator is unique;\n2. $(TS)^*=S^*T^*$;\n3. $T^{**}=T$ and $\\|T^*\\|=\\|T\\|$;\n4. $\\|T^*T\\|=\\|T\\|^2$.",
+           "uses": [
+-            "1.2",
+-            "2.1"
++            "1.2"
+           ]
+         }
+       ],
+@@ -2070,7 +2120,7 @@
+         {
+           "id": "step-1-1",
+           "step": "1.1",
+-          "claim": "For $h=x-u$, the segment lies in $B$, so [F3] gives $F(x)-F(u)-Ah=\\int_0^1(F'(u+sh)-A)h\\,ds$. Its integrand has norm at most $\\kappa\\|Ah\\|$, hence the integral has that bound. The triangle inequality and reverse triangle inequality give the two-sided estimate. Subtracting $(F'(u)-A)h$ bounds the linearization remainder by $2\\kappa\\|Ah\\|$, proving the cone constant. This integrates the continuous vector $F'(u+sh)h$, not a possibly unmeasurable choice of the operators $R_{u+sh}$. Taking $u=x^\\dagger$ also gives $\\|t\\|\\le2\\kappa v$.",
++          "claim": "For $h=x-u$, let $\\gamma(s)=F(u+sh)$. The segment lies in $B$. If $h\\ne0$ and $0<s<1$, then for real $r\\to0$ with $s+r\\in[0,1]$, same-field Fréchet differentiability gives\n$$\\left\\|\\frac{F(u+(s+r)h)-F(u+sh)}r-F'(u+sh)h\\right\\|\n=\\frac{\\|F(u+(s+r)h)-F(u+sh)-F'(u+sh)(rh)\\|}{|r|}\\longrightarrow0.$$\nThus $\\gamma'(s)=F'(u+sh)h$. For $h=0$ the curve is constant. In either case differentiability makes $\\gamma$ continuous by the Fréchet remainder definition, and this derivative is continuous on the segment with endpoint extensions because the assumed continuous Fréchet differentiability makes $s\\mapsto F'(u+sh)$ continuous in operator norm, including at $s=0,1$, and evaluation at the fixed vector $h$ is continuous. Applying the Banach-valued fundamental theorem [F3] and subtracting the constant integral of $Ah$ gives\n$$F(x)-F(u)-Ah=\\int_0^1(F'(u+sh)-A)h\\,ds.$$\nLinearity of $R_{u+sh}$ and its norm bound make the integrand norm at most $\\kappa\\|Ah\\|$, so the integral has that bound. The triangle and reverse triangle inequalities give the two-sided estimate. Subtracting $(F'(u)-A)h$ bounds the linearization remainder by $2\\kappa\\|Ah\\|$, proving the cone constant. This integrates the continuous vector $F'(u+sh)h$, not a possibly unmeasurable choice of the operators $R_{u+sh}$. Taking $u=x^\\dagger$ also gives $\\|t\\|\\le2\\kappa v$.",
+           "inputs": [
+             "A1",
+             "F3",
+@@ -2081,9 +2131,11 @@
+         {
+           "id": "step-1-2",
+           "step": "1.2",
+-          "claim": "Let $A_x=F'(x)$. From [F1], $(A_x^*A_x+\\alpha I)e_+=\\alpha e_0+A_x^*(y_\\delta-y+t)$. By factorization and [F4], $A_x^*A_x=S+A^*HA$ and $A_x^*=A^*(I+R)^*$. Moving $A^*HAe_+$ to the right gives the fixed-reference identity with $z$ in the Statement. The inverse used here exists independently of where $x_+$ lies.",
+-          "inputs": [
+-            "A1",
++          "claim": "Let $A_x=F'(x)$. From",
++          "inputs": [
++            "F1]",
++            "$(A_x^*A_x+\\alpha I)e_+=\\alpha e_0+A_x^*(y_\\delta-y+t)$. By factorization and [F4]",
++            "$A_x^*A_x=S+A^*HA$ and $A_x^*=A^*(I+R)^*$. Moving $A^*HAe_+$ to the right gives the fixed-reference identity with $z$ in the Statement. The inverse used here exists independently of where $x_+$ lies. [A1",
+             "F1",
+             "F2",
+             "F4",
+@@ -2094,9 +2146,10 @@
+         {
+           "id": "step-2-1",
+           "step": "2.1",
+-          "claim": "By [F4], $\\|H\\|\\le2\\kappa+\\kappa^2=\\theta$ and $\\|(I+R)^*\\|\\le1+\\kappa$. Combining these bounds with $\\|t\\|\\le2\\kappa v$ proves $\\|z\\|\\le c_0\\delta+d_0v+\\theta v_+$.",
+-          "inputs": [
+-            "F4",
++          "claim": "By",
++          "inputs": [
++            "F4]",
++            "$\\|H\\|\\le2\\kappa+\\kappa^2=\\theta$ and $\\|(I+R)^*\\|\\le1+\\kappa$. Combining these bounds with $\\|t\\|\\le2\\kappa v$ proves $\\|z\\|\\le c_0\\delta+d_0v+\\theta v_+$. [F4",
+             "step 1.1",
+             "step 1.2",
+             "algebra"
+@@ -2105,9 +2158,11 @@
+         {
+           "id": "step-3-1",
+           "step": "3.1",
+-          "claim": "Apply $A(S+\\alpha I)^{-1}$ to step 1.2 and use [F2] with $e_0=S^\\nu w$. Then $v_+\\le W\\alpha^{\\nu+1/2}+\\|z\\|$; moving $\\theta v_+$ to the left gives the residual inequality. Applying $(S+\\alpha I)^{-1}$ without $A$ instead gives $\\|e_+\\|\\le W\\alpha^\\nu+\\|z\\|/(2\\sqrt\\alpha)$, proving the error bound. This controls the fixed source term through its spectral filter, not through a crude $\\alpha^{-1}\\|e_0\\|$ estimate.",
+-          "inputs": [
+-            "A1",
++          "claim": "Apply $A(S+\\alpha I)^{-1}$ to step 1.2 and use",
++          "inputs": [
++            "F2] with $e_0=S^\\nu w$. Then $v_+\\le W\\alpha^{\\nu+1/2}+\\|z\\|$; moving $\\theta v_+$ to the left gives the residual inequality. Applying $(S+\\alpha I)^{-1}$ without $A$ instead gives $\\|e_+\\|\\le W\\alpha^\\nu+\\|z\\|/(2\\sqrt\\alpha)$",
++            "proving the error bound. This controls the fixed source term through its spectral filter",
++            "not through a crude $\\alpha^{-1}\\|e_0\\|$ estimate. [A1",
+             "F2",
+             "step 1.2",
+             "step 2.1",
+@@ -2173,24 +2228,16 @@
+           "source": "def-axiom-of-choice",
+           "source_section": "Definition",
+           "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+-          "uses": [
+-            "1.1",
+-            "1.2",
+-            "2.1",
+-            "3.1",
+-            "5.2",
+-            "6.1"
+-          ]
++          "uses": []
+         },
+         {
+           "fact": "F1",
+           "source": "alg-anchored-irgnm-with-discrepancy-stopping",
+           "source_section": "Definition",
+-          "quote": "Assume Countable Choice. Let $F:U\\to Y$ be continuously Fréchet differentiable between real or complex Hilbert spaces, with open $U\\subseteq X$. Inputs are anchor and initial point $x_0\\in U$, datum $y_\\delta$, noise bound $\\delta\\ge0$, discrepancy factor $\\tau>1$, finite update cap $N\\in\\mathbb N_0$, $\\alpha_0>0$ and $q\\in(0,1)$. For $k=0,\\ldots,N$, first check $x_k\\in U$; otherwise return domain-failure. Evaluate $F(x_k)$; if $\\|F(x_k)-y_\\delta\\|\\le\\tau\\delta$, return $(x_k,k,\\texttt{discrepancy})$. If $k=N$, return $(x_k,k,\\texttt{budget-exhausted})$. Otherwise set $A_k=F'(x_k)$, $\\alpha_k=\\alpha_0q^k$, solve\n$$(A_k^*A_k+\\alpha_k I)s_k=A_k^*(y_\\delta-F(x_k))+\\alpha_k(x_0-x_k),$$\nand set $x_{k+1}=x_k+s_k$. The unique Hilbert-space solve exists by [[lem-hilbert-tikhonov-normal-operator-invertible]]. An evaluation failure returns evaluation-failure with the last valid state; a finite implementation that cannot certify the exact normal solve returns solve-unverified. No success or convergence claim is attached to these failure statuses.\n\nThe mathematical extended recurrence means the same exact updates with the discrepancy and finite-cap tests suppressed, for as long as the states lie in $U$. It is used only for comparison in proofs. A finite actual run follows its prefix and stops at its first test crossing. This anchored update is distinct from the retained unanchored Levenberg-Marquardt step; its extra term is $\\alpha_k(x_0-x_k)$.",
++          "quote": "Assume Countable Choice. Let $X,Y$ be Hilbert spaces over the same field\n$\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $U\\subseteq X$ be open, and let\n$F:U\\to Y$ be continuously Fréchet differentiable over $\\mathbb F$. In the\ncomplex case, each $F'(x)$ is a bounded complex-linear operator and the\nFréchet remainder is measured over complex increments, with\n$$\\lim_{\\substack{h\\to0,\\ h\\ne0\\\\x+h\\in U}}\n\\frac{\\|F(x+h)-F(x)-F'(x)h\\|}{\\|h\\|}=0.$$\nInputs are anchor and\ninitial point $x_0\\in U$, datum $y_\\delta$, noise bound $\\delta\\ge0$,\ndiscrepancy factor $\\tau>1$, finite update cap $N\\in\\mathbb N_0$,\n$\\alpha_0>0$ and $q\\in(0,1)$. For $k=0,\\ldots,N$, first check $x_k\\in U$;\notherwise return domain-failure. Evaluate $F(x_k)$; if\n$\\|F(x_k)-y_\\delta\\|\\le\\tau\\delta$, return\n$(x_k,k,\\texttt{discrepancy})$. If $k=N$, return\n$(x_k,k,\\texttt{budget-exhausted})$. Otherwise set\n$A_k=F'(x_k)$, $\\alpha_k=\\alpha_0q^k$, solve\n$$(A_k^*A_k+\\alpha_k I)s_k=A_k^*(y_\\delta-F(x_k))+\\alpha_k(x_0-x_k),$$\nand set $x_{k+1}=x_k+s_k$. The unique Hilbert-space solve exists by [[lem-hilbert-tikhonov-normal-operator-invertible]]. An evaluation failure returns evaluation-failure with the last valid state; a finite implementation that cannot certify the exact normal solve returns solve-unverified. No success or convergence claim is attached to these failure statuses.\n\nThe mathematical extended recurrence means the same exact updates with the discrepancy and finite-cap tests suppressed, for as long as the states lie in $U$. It is used only for comparison in proofs. A finite actual run follows its prefix and stops at its first test crossing. This anchored update is distinct from the retained unanchored Levenberg-Marquardt step; its extra term is $\\alpha_k(x_0-x_k)$.",
+           "uses": [
+             "1.1",
+             "1.2",
+-            "4.1",
+             "5.2"
+           ]
+         },
+@@ -2198,7 +2245,7 @@
+           "fact": "F2",
+           "source": "lem-anchored-irgnm-fixed-reference-error-and-residual",
+           "source_section": "Statement",
+-          "quote": "Assume AC. Let $B=\\overline B(x^\\dagger,\\rho)\\subseteq U$ be convex, $F:U\\to Y$ be continuously Fréchet differentiable between real or complex Hilbert spaces, $A=F'(x^\\dagger)$, $S=A^*A$ and $y=F(x^\\dagger)$. Suppose for each $x\\in B$ that $F'(x)=(I+R_x)A$ for a bounded $R_x:Y\\to Y$ with $\\|R_x\\|\\le\\kappa<1$, taking $R_{x^\\dagger}=0$. Let $x\\in B$, $e=x-x^\\dagger$, $e_0=x_0-x^\\dagger=S^\\nu w$, $0<\\nu\\le1/2$, $\\|w\\|\\le W$, and $\\|y_\\delta-y\\|\\le\\delta$. For a single exact anchored update with shift $\\alpha>0$, define $e_+=x_+-x^\\dagger$, $v=\\|Ae\\|$, $v_+=\\|Ae_+\\|$, $R=R_x$, $H=R+R^*+R^*R$, $\\theta=2\\kappa+\\kappa^2$, $d_0=2\\kappa(1+\\kappa)$, and $c_0=1+\\kappa$. Then\n$$t=F'(x)e-(F(x)-y),\\quad z=(I+R)^*(y_\\delta-y+t)-HAe_+,$$\n$$(S+\\alpha I)e_+=\\alpha e_0+A^*z,\\quad \\|z\\|\\le c_0\\delta+d_0v+\\theta v_+.$$\nConsequently\n$$(1-\\theta)v_+\\le W\\alpha^{\\nu+1/2}+d_0v+c_0\\delta,\\qquad \\|e_+\\|\\le W\\alpha^\\nu+\\frac{c_0\\delta+d_0v+\\theta v_+}{2\\sqrt\\alpha}.$$\nAlso for $x,u\\in B$,\n$$(1-\\kappa)\\|A(x-u)\\|\\le\\|F(x)-F(u)\\|\\le(1+\\kappa)\\|A(x-u)\\|,$$\nand the tangential-cone condition holds with constant $2\\kappa/(1-\\kappa)$. The conclusions require only the current state and segment in $B$, not the next state in $B$.",
++          "quote": "Assume AC. Let $X,Y$ be real or complex Hilbert spaces over the same scalar\nfield, let $U\\subseteq X$ be open, and let\n$B=\\overline B(x^\\dagger,\\rho)\\subseteq U$ be convex. Let\n$F:U\\to Y$ continuously Fréchet differentiable over that field (bounded\ncomplex-linear derivatives in the complex case). Set $A=F'(x^\\dagger)$,\n$S=A^*A$ and $y=F(x^\\dagger)$. Suppose for each $x\\in B$ that\n$F'(x)=(I+R_x)A$ for a bounded linear $R_x:Y\\to Y$ with\n$\\|R_x\\|\\le\\kappa<1$, taking $R_{x^\\dagger}=0$. Let $x\\in B$,\n$e=x-x^\\dagger$, $e_0=x_0-x^\\dagger=S^\\nu w$, $0<\\nu\\le1/2$,\n$\\|w\\|\\le W$, and $\\|y_\\delta-y\\|\\le\\delta$. For a single exact\nanchored update with shift $\\alpha>0$, define $e_+=x_+-x^\\dagger$,\n$v=\\|Ae\\|$, $v_+=\\|Ae_+\\|$, $R=R_x$,\n$H=R+R^*+R^*R$, $\\theta=2\\kappa+\\kappa^2$,\n$d_0=2\\kappa(1+\\kappa)$, and $c_0=1+\\kappa$. Then\n$$t=F'(x)e-(F(x)-y),\\quad z=(I+R)^*(y_\\delta-y+t)-HAe_+,$$\n$$(S+\\alpha I)e_+=\\alpha e_0+A^*z,\\quad \\|z\\|\\le c_0\\delta+d_0v+\\theta v_+.$$\nConsequently\n$$(1-\\theta)v_+\\le W\\alpha^{\\nu+1/2}+d_0v+c_0\\delta,\\qquad \\|e_+\\|\\le W\\alpha^\\nu+\\frac{c_0\\delta+d_0v+\\theta v_+}{2\\sqrt\\alpha}.$$\nAlso for $x,u\\in B$,\n$$(1-\\kappa)\\|A(x-u)\\|\\le\\|F(x)-F(u)\\|\\le(1+\\kappa)\\|A(x-u)\\|,$$\nand the tangential-cone condition holds with constant $2\\kappa/(1-\\kappa)$. The conclusions require only the current state and segment in $B$, not the next state in $B$.",
+           "uses": [
+             "1.2",
+             "2.1",
+@@ -2244,8 +2291,7 @@
+           "source_section": "Statement",
+           "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+           "uses": [
+-            "3.1",
+-            "5.1"
++            "3.1"
+           ]
+         }
+       ],
+@@ -2253,9 +2299,14 @@
+         {
+           "id": "step-1-1",
+           "step": "1.1",
+-          "claim": "The hypotheses give $\\theta<1$, $0\\le b<q^\\beta<1$, so all constants are finite and positive except possibly $b,d_0,\\theta$. By [F3], $\\|e_0\\|\\le W\\|A\\|^{2\\nu}\\le W\\alpha_0^\\nu<\\rho$ and $v_0:=\\|Ae_0\\|\\le W\\alpha_0^\\beta$. If $X=\\{0\\}$, or $A=0$, the source condition gives $e_0=0$; more generally whenever $e_0=0$ the actual noisy algorithm stops at index zero since its residual is at most $\\delta$. Its conclusion is exact. The extended recurrence is still treated by the estimates below, including in these cases, rather than assumed to stop.",
+-          "inputs": [
+-            "A1",
++          "claim": "The hypotheses give $\\theta<1$, $0\\le b<q^\\beta<1$, so all constants are finite and positive except possibly $b,d_0,\\theta$. By",
++          "inputs": [
++            "F3]",
++            "$\\|e_0\\|\\le W\\|A\\|^{2\\nu}\\le W\\alpha_0^\\nu<\\rho$ and $v_0:=\\|Ae_0\\|\\le W\\alpha_0^\\beta$. If $X=\\{0\\}$",
++            "or $A=0$",
++            "the source condition gives $e_0=0$; more generally whenever $e_0=0$ the actual noisy algorithm stops at index zero since its residual is at most $\\delta$. Its conclusion is exact. The extended recurrence is still treated by the estimates below",
++            "including in these cases",
++            "rather than assumed to stop. [A1",
+             "F1",
+             "F3",
+             "given",
+@@ -2265,9 +2316,10 @@
+         {
+           "id": "step-1-2",
+           "step": "1.2",
+-          "claim": "Suppose a theoretical current iterate lies in $B$ and $v_k\\le DW\\alpha_k^\\beta+E\\delta$. The inverse [F4] defines its next exact step in $X$ before any next-domain assertion. The residual inequality [F2] yields $v_{k+1}\\le aW\\alpha_k^\\beta+bv_k+c\\delta\\le(a+bD)W\\alpha_k^\\beta+(bE+c)\\delta\\le DW\\alpha_{k+1}^\\beta+E\\delta$, since $D(q^\\beta-b)\\ge a$ and $E(1-b)=c$. Here $v_{k+1}=\\|A(x_{k+1}-x^\\dagger)\\|$ is defined even before proving the next state lies in $B$.",
+-          "inputs": [
+-            "A1",
++          "claim": "Suppose a theoretical current iterate lies in $B$ and $v_k\\le DW\\alpha_k^\\beta+E\\delta$. The inverse",
++          "inputs": [
++            "F4] defines its next exact step in $X$ before any next-domain assertion. The residual inequality [F2] yields $v_{k+1}\\le aW\\alpha_k^\\beta+bv_k+c\\delta\\le(a+bD)W\\alpha_k^\\beta+(bE+c)\\delta\\le DW\\alpha_{k+1}^\\beta+E\\delta$",
++            "since $D(q^\\beta-b)\\ge a$ and $E(1-b)=c$. Here $v_{k+1}=\\|A(x_{k+1}-x^\\dagger)\\|$ is defined even before proving the next state lies in $B$. [A1",
+             "F1",
+             "F2",
+             "F4",
+@@ -2278,9 +2330,11 @@
+         {
+           "id": "step-2-1",
+           "step": "2.1",
+-          "claim": "Under step 1.2's conditions, substitute its bounds for $v_k,v_{k+1}$ into [F2]'s error inequality. As $\\beta-1/2=\\nu$, this gives $\\|e_{k+1}\\|\\le[1+D(d_0+\\theta q^\\beta)/2]W\\alpha_k^\\nu+[c_0+(d_0+\\theta)E]\\delta/(2\\sqrt{\\alpha_k})=C_eW\\alpha_k^\\nu+N_e\\delta/\\sqrt{\\alpha_k}$. Thus the source term has its actual filtered power, not an inverse-shift estimate of the initial norm.",
+-          "inputs": [
+-            "A1",
++          "claim": "Under step 1.2's conditions, substitute its bounds for $v_k,v_{k+1}$ into",
++          "inputs": [
++            "F2]'s error inequality. As $\\beta-1/2=\\nu$",
++            "this gives $\\|e_{k+1}\\|\\le[1+D(d_0+\\theta q^\\beta)/2]W\\alpha_k^\\nu+[c_0+(d_0+\\theta)E]\\delta/(2\\sqrt{\\alpha_k})=C_eW\\alpha_k^\\nu+N_e\\delta/\\sqrt{\\alpha_k}$. Thus the source term has its actual filtered power",
++            "not an inverse-shift estimate of the initial norm. [A1",
+             "F2",
+             "step 1.2",
+             "algebra"
+@@ -2289,9 +2343,16 @@
+         {
+           "id": "step-3-1",
+           "step": "3.1",
+-          "claim": "By [F6], $K_\\delta$ exists and is positive. For every $j<K_\\delta$, $\\delta<W\\alpha_j^\\beta$, so step 2.1 gives $\\|e_{j+1}\\|\\le(C_e+N_e)W\\alpha_j^\\nu\\le(C_e+N_e)W\\alpha_0^\\nu<\\rho$. Start at step 1.1 and induct: at stage $j$ the current state is already in $B$, so [F4] and step 1.2 define the next state and its residual bound, and the displayed estimate places it in $B$. This proves the extension, ball preservation and both stated estimates through $K_\\delta$ without any future-ball assumption. For exact data the same induction runs for every $j$ with noise zero, and the error estimate with [F6] gives convergence of the exact extension to $x^\\dagger$.",
+-          "inputs": [
+-            "A1",
++          "claim": "By",
++          "inputs": [
++            "F6]",
++            "$K_\\delta$ exists and is positive. For every $j<K_\\delta$",
++            "$\\delta<W\\alpha_j^\\beta$",
++            "so step 2.1 gives $\\|e_{j+1}\\|\\le(C_e+N_e)W\\alpha_j^\\nu\\le(C_e+N_e)W\\alpha_0^\\nu<\\rho$. Start at step 1.1 and induct: at stage $j$ the current state is already in $B$",
++            "so [F4] and step 1.2 define the next state and its residual bound",
++            "and the displayed estimate places it in $B$. This proves the extension",
++            "ball preservation and both stated estimates through $K_\\delta$ without any future-ball assumption. For exact data the same induction runs for every $j$ with noise zero",
++            "and the error estimate with [F6] gives convergence of the exact extension to $x^\\dagger$. [A1",
+             "F3",
+             "F4",
+             "F6",
+@@ -2306,9 +2367,10 @@
+         {
+           "id": "step-4-1",
+           "step": "4.1",
+-          "claim": "The upper residual comparison in [F2] and step 3.1 give $\\|F(x_{K_\\delta}^\\delta)-y_\\delta\\|\\le(1+\\kappa)v_{K_\\delta}+\\delta\\le[(1+\\kappa)(D+E)+1]\\delta<\\tau\\delta$. Thus the first crossing exists by $K_\\delta$. Until its first crossing the actual finite algorithm uses exactly the extended recurrence, so with a sufficient cap and successful exact calls its return equals this crossing. No property of an arbitrary budget-final iterate follows.",
+-          "inputs": [
+-            "F1",
++          "claim": "The upper residual comparison in",
++          "inputs": [
++            "F2] and step 3.1 give $\\|F(x_{K_\\delta}^\\delta)-y_\\delta\\|\\le(1+\\kappa)v_{K_\\delta}+\\delta\\le[(1+\\kappa)(D+E)+1]\\delta<\\tau\\delta$. Thus the first crossing exists by $K_\\delta$. Until its first crossing the actual finite algorithm uses exactly the extended recurrence",
++            "so with a sufficient cap and successful exact calls its return equals this crossing. No property of an arbitrary budget-final iterate follows. [F1",
+             "F2",
+             "step 3.1",
+             "given",
+@@ -2318,9 +2380,9 @@
+         {
+           "id": "step-5-1",
+           "step": "5.1",
+-          "claim": "For $1\\le k_\\delta\\le K_\\delta$, minimality of $K_\\delta$ gives $W\\alpha_{K_\\delta-1}^\\beta>\\delta$ and hence $\\delta/\\sqrt{\\alpha_{k_\\delta-1}}\\le\\delta/\\sqrt{\\alpha_{K_\\delta-1}}<W^{1/(2\\beta)}\\delta^{1-1/(2\\beta)}\\to0$, since $\\beta>1/2$. Along any sequence with $k_\\delta\\to\\infty$, also $\\alpha_{k_\\delta-1}^\\nu\\to0$ by [F6]. The error bound in step 3.1 therefore proves stopped convergence along such sequences.",
+-          "inputs": [
+-            "F6",
++          "claim": "For $1\\le k_\\delta\\le K_\\delta$, minimality of $K_\\delta$ gives $W\\alpha_{K_\\delta-1}^\\beta>\\delta$ and hence $\\delta/\\sqrt{\\alpha_{k_\\delta-1}}\\le\\delta/\\sqrt{\\alpha_{K_\\delta-1}}<W^{1/(2\\beta)}\\delta^{1-1/(2\\beta)}\\to0$, since $\\beta>1/2$. Along any sequence with $k_\\delta\\to\\infty$, also $\\alpha_{k_\\delta-1}^\\nu\\to0$ by",
++          "inputs": [
++            "F6]. The error bound in step 3.1 therefore proves stopped convergence along such sequences. [F6",
+             "step 3.1",
+             "step 4.1",
+             "given",
+@@ -2330,9 +2392,11 @@
+         {
+           "id": "step-5-2",
+           "step": "5.2",
+-          "claim": "For each fixed index $j$, the extended iterates depend continuously on the datum near $y$. Indeed, the exact states for data $y$ lie strictly inside $B$ by step 3.1. Inductively $F,F'$ and the adjoint/product laws [F5] are continuous there; for fixed positive $\\alpha_j$, the inverse identity $B_1^{-1}-B_2^{-1}=B_1^{-1}(B_2-B_1)B_2^{-1}$ and [F4]'s $1/\\alpha_j$ bounds prove continuity of each normal inverse. Thus $x_j^\\delta\\to x_j^0$. If a stopping subsequence has fixed index $j$, its discrepancy bound implies $F(x_j^0)=y$. The lower residual comparison in [F2] then gives $A(x_j^0-x^\\dagger)=0$.",
+-          "inputs": [
+-            "A1",
++          "claim": "For each fixed index $j$, the extended iterates depend continuously on the datum near $y$. Indeed, the exact states for data $y$ lie strictly inside $B$ by step 3.1. Inductively $F,F'$ and the adjoint/product laws",
++          "inputs": [
++            "F5] are continuous there; for fixed positive $\\alpha_j$",
++            "the inverse identity $B_1^{-1}-B_2^{-1}=B_1^{-1}(B_2-B_1)B_2^{-1}$ and [F4]'s $1/\\alpha_j$ bounds prove continuity of each normal inverse. Thus $x_j^\\delta\\to x_j^0$. If a stopping subsequence has fixed index $j$",
++            "its discrepancy bound implies $F(x_j^0)=y$. The lower residual comparison in [F2] then gives $A(x_j^0-x^\\dagger)=0$. [A1",
+             "F1",
+             "F2",
+             "F4",
+@@ -2347,9 +2411,12 @@
+         {
+           "id": "step-6-1",
+           "step": "6.1",
+-          "claim": "By [F3], $e_0\\perp\\ker A$. Testing the anchored error equation $(A_k^*A_k+\\alpha_k I)e_{k+1}=\\alpha_k e_0+A_k^*(y_\\delta-y+t_k)$ against $h\\in\\ker A$ gives $\\langle e_{k+1},h\\rangle=\\langle e_0,h\\rangle=0$, because factorization gives $A_kh=0$. Hence every exact error lies in $(\\ker A)^\\perp$. The exact error in step 5.2 also lies in $\\ker A$, so it is zero. This includes $j=0$ and proves convergence along every bounded-index stopping subsequence by taking a constant-index further subsequence.",
+-          "inputs": [
+-            "A1",
++          "claim": "By",
++          "inputs": [
++            "F3]",
++            "$e_0\\perp\\ker A$. Testing the anchored error equation $(A_k^*A_k+\\alpha_k I)e_{k+1}=\\alpha_k e_0+A_k^*(y_\\delta-y+t_k)$ against $h\\in\\ker A$ gives $\\langle e_{k+1},h\\rangle=\\langle e_0,h\\rangle=0$",
++            "because factorization gives $A_kh=0$. Hence every exact error lies in $(\\ker A)^\\perp$. The exact error in step 5.2 also lies in $\\ker A$",
++            "so it is zero. This includes $j=0$ and proves convergence along every bounded-index stopping subsequence by taking a constant-index further subsequence. [A1",
+             "F2",
+             "F3",
+             "step 5.2",

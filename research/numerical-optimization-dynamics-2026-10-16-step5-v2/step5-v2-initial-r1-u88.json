@@ -1,0 +1,246 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "88",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-anchored-irgnm-with-discrepancy-stopping",
+      "model": "gpt-6-luna",
+      "context_sha256": "3d73c08f777a3023f09b11cf96991f035acbc42f1cff1bf86514716ceef024b8",
+      "outcome": "false_positive",
+      "reason": "False positive: the Definition explicitly returns budget-exhausted at k=N and separates the exact extended recurrence from finite actual runs. The title describes a finite procedure with a discrepancy test, not an unconditional crossing theorem. At each admissible current state the positive shifted normal operator is invertible under Countable Choice; domain/evaluation/solve failures have explicit outputs. The owning page and convergence theorem preserve the cap and exact-call caveats.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-iteratively-regularized-gauss-newton-step",
+      "model": "gpt-6-luna",
+      "context_sha256": "e5d71fc01cef0137cda8bfe6f42d7dc48630a6ee5afed69dcdabd51d19b8febd",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal operational omission: initialization of k and the return to the stopping tests were only implicit in \u201cAt iteration k\u201d and \u201cnext call\u201d. Added k=0, explicit output tuples, and k\u2190k+1 followed by repetition. The unchanged positive-shift equation has a unique solution; discrepancy precedes the cap at each state, and a new state outside U returns domain-failure on the next check.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-lsqr-residual-minimizes-on-krylov-subspace",
+      "model": "gpt-6-luna",
+      "context_sha256": "84182a70f21eff7f5a125bf3e60a2e64a7e14597feecc707c3bdeddd1cc96c21",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed fatal unsupported inference (logic): F1 asserted projected minimization although the algorithm only prescribes rotations and back substitution; old step 3.1 did not show that its computed z was the minimizer. Replaced F1 with the actual instructions and proved QB_k=(R_k;0), Q beta_1 e_1=(d_k;eta_k), and residual squared = ||d_k-R_k z||^2+|eta_k|^2. Back substitution zeros the first term. Orthonormal Golub\u2013Kahan bases transfer this minimum to the true residual, and the nonzero three-term forward coefficients identify the Krylov span. The Statement is unchanged, including k=0 and the nonbreakdown hypotheses.",
+      "uncertain": false,
+      "source_urls": [
+        "https://web.stanford.edu/group/SOL/software/lsqr/lsqr-toms82a.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "lem-anchored-irgnm-fixed-reference-error-and-residual",
+      "model": "gpt-6-luna",
+      "context_sha256": "1f10bd6a399676e2382474093fcc35a488376e9f914696c35fa1976392d4577f",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal citation/interface ambiguity: a full anchored run requires x0 in U, whereas this lemma only needs an algebraic anchor in X. Preserved its Statement and defined the standalone correction explicitly in F1. Step 1.2 now obtains its positive-shift inverse from the filter supplier applied to A_x and derives the identity by adding the current error equation. Neither F(x0) nor a run initialized at x0 is used. The continuous segment integral bounds t by 2kappa||Ae||; adjoint expansion yields H and z, and the two source filters give precisely the displayed residual/error bounds without requiring x_+ in B.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+      "model": "gpt-6-luna",
+      "context_sha256": "ed3c39b385385ba0b907782e24b63d62707efe9719b6aef07abb273a2f9c14b5",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed fatal dependency-citation defect: F3 asserted compactness for every finite-rank Hilbert-space operator, omitting the supplier\u2019s bounded-linear hypothesis. A finite-rank algebraic linear map need not be bounded. Corrected F3 to the exact bounded finite-dimensional-range result. Step 1.1 now proves ||A_N x||^2\u2264||x||^2/4 and identifies the explicit ordered range basis before invoking compactness; it also establishes boundedness of A before the norm-limit theorem. The noise norm, coordinate residual formula, finite-tail convergence, and Bernoulli lower bound at k_j=4^j remain valid.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-anchored-irgnm-with-discrepancy-stopping",
+      "disposition": "unaffected",
+      "post_sha256": "c80eed6635d83489a2039f787f03ec629eb1ac3f5113ff1343f61965b5928ba3",
+      "review_context_sha256": "0992fe9e44ff91f8ab89c1b66894248f5ad258544b49fbdc89883c6b4e1648d1",
+      "reason": "Unchanged guard matches the assignment. The Definition explicitly distinguishes discrepancy, budget and failure returns; positive-shift invertibility justifies every successful exact correction. Its page and convergence theorem retain the sufficient-cap and exact-call caveats.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-iteratively-regularized-gauss-newton-step",
+      "disposition": "repaired",
+      "post_sha256": "10e56bf7bdf6534428ae8ea7fe3012d27b26ed7e4f21d3f5195a8098a0da6ce8",
+      "review_context_sha256": "4514c7bdf4dfcb5301f0dbcbfdb39304b0ed15c84a3144f8b43c4f42157f7036",
+      "reason": "Explicit initialization, output and repetition now complete the finite procedure. The positive-shift normal equation and ordering of domain, discrepancy and cap tests are unchanged. Both direct consumers retain their actual update and stopping formulas.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-lsqr-residual-minimizes-on-krylov-subspace",
+      "disposition": "repaired",
+      "post_sha256": "a9d7f54e0d0766159f09692397e10f67170cada6f885265032aebeb1b2158bfb",
+      "review_context_sha256": "8d98be4953787d799ebfd3f49121d1c4f53ae7fcaa1eb4af7bc782c806998506",
+      "reason": "The repaired proof derives the computed projected minimizer from orthogonal elimination and back substitution, then transfers it through AV_k=U_{k+1}B_k and the Krylov-span identity. The Statement and all nonbreakdown conditions are unchanged. This is a repair review, not independent review of the newly written proof.",
+      "uncertain": false,
+      "source_urls": [
+        "https://web.stanford.edu/group/SOL/software/lsqr/lsqr-toms82a.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "lem-anchored-irgnm-fixed-reference-error-and-residual",
+      "disposition": "repaired",
+      "post_sha256": "d3736d682faccd64cd7bbab57bb039ed134ac8e97c482810388d34fb7f0b56e3",
+      "review_context_sha256": "d55d89b62c3838931264fb35e519d75ca2004ead1d10cde634980680509e0da8",
+      "reason": "The standalone correction is now explicitly defined for any anchor in X and justified at the current bounded derivative. Expanding the normal equation, estimating the continuous segment integral, and applying the real/complex source filters establish the unchanged Statement with its AC hypothesis and without a next-state ball assumption.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+      "disposition": "repaired",
+      "post_sha256": "a55a9eddeb8bd686f007fe90dff2f8c2f98e72242a2bdf301218af6d49842096",
+      "review_context_sha256": "11f0221700672eb59c4716b2f9f32a0dedc322451115f6a9094c7ea64922dda5",
+      "reason": "Boundedness and the explicit finite ordered range basis are now checked before invoking finite-rank compactness. The unchanged witness has ||A||=1/2, noise norm delta, residual decay by finite-tail control, and reconstruction growth at k_j=4^j by Bernoulli\u2019s inequality.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-irlgnm-one-step-error-recurrence",
+    "ex-nonlinear-exponential-kinetics-one-step"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "alg-iteratively-regularized-gauss-newton-step",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "Definition",
+      "finding": "Confirmed nonfatal operational omission: initialization of k and the return to the stopping tests were only implicit in \u201cAt iteration k\u201d and \u201cnext call\u201d. Added k=0, explicit output tuples, and k\u2190k+1 followed by repetition. The unchanged positive-shift equation has a unique solution; discrepancy precedes the cap at each state, and a new state outside U returns domain-failure on the next check.",
+      "action": "record-fixed-finding",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-lsqr-residual-minimizes-on-krylov-subspace",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "locus": "F1 and proof step 3.1",
+      "finding": "Confirmed fatal unsupported inference (logic): F1 asserted projected minimization although the algorithm only prescribes rotations and back substitution; old step 3.1 did not show that its computed z was the minimizer. Replaced F1 with the actual instructions and proved QB_k=(R_k;0), Q beta_1 e_1=(d_k;eta_k), and residual squared = ||d_k-R_k z||^2+|eta_k|^2. Back substitution zeros the first term. Orthonormal Golub\u2013Kahan bases transfer this minimum to the true residual, and the nonzero three-term forward coefficients identify the Krylov span. The Statement is unchanged, including k=0 and the nonbreakdown hypotheses.",
+      "action": "record-fixed-finding",
+      "uncertain": false,
+      "source_urls": [
+        "https://web.stanford.edu/group/SOL/software/lsqr/lsqr-toms82a.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "lem-anchored-irgnm-fixed-reference-error-and-residual",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "F1 and proof step 1.2",
+      "finding": "Confirmed nonfatal citation/interface ambiguity: a full anchored run requires x0 in U, whereas this lemma only needs an algebraic anchor in X. Preserved its Statement and defined the standalone correction explicitly in F1. Step 1.2 now obtains its positive-shift inverse from the filter supplier applied to A_x and derives the identity by adding the current error equation. Neither F(x0) nor a run initialized at x0 is used. The continuous segment integral bounds t by 2kappa||Ae||; adjoint expansion yields H and z, and the two source filters give precisely the displayed residual/error bounds without requiring x_+ in B.",
+      "action": "record-fixed-finding",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "locus": "F3 and verification step 1.1",
+      "finding": "Confirmed fatal dependency-citation defect: F3 asserted compactness for every finite-rank Hilbert-space operator, omitting the supplier\u2019s bounded-linear hypothesis. A finite-rank algebraic linear map need not be bounded. Corrected F3 to the exact bounded finite-dimensional-range result. Step 1.1 now proves ||A_N x||^2\u2264||x||^2/4 and identifies the explicit ordered range basis before invoking compactness; it also establishes boundedness of A before the norm-limit theorem. The noise norm, coordinate residual formula, finite-tail convergence, and Bernoulli lower bound at k_j=4^j remain valid.",
+      "action": "record-fixed-finding",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": {
+    "status": "Assigned work complete; no unresolved mathematical obligations. Two fatal findings require the engine\u2019s next independent rejudgment round; no global closure or independent review of these author repairs is claimed. No published-consumer ledger update or outside maintenance repair is proposed. All five stored post-review guards match current item carriers.",
+    "consumer_checks": [
+      {
+        "id": "lem-irlgnm-one-step-error-recurrence",
+        "path": "items/lem-irlgnm-one-step-error-recurrence.md",
+        "affected_use": "Statement and F1/step 1.1 use e_{k+1}=e_k+s_k and the unanchored shifted normal equation.",
+        "disposition": "sound unchanged: the update equation, positive shift and current-domain condition are preserved; no consumer repair is required."
+      },
+      {
+        "id": "ex-nonlinear-exponential-kinetics-one-step",
+        "path": "items/ex-nonlinear-exponential-kinetics-one-step.md",
+        "affected_use": "F1/step 2.1 uses the scalar k=0 update; step 3.1 uses the next discrepancy/cap test with N=1.",
+        "disposition": "sound unchanged: explicit repetition now directly specifies the next test asserted in step 3.1."
+      }
+    ],
+    "page_check": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/iterative-regularization-and-early-stopping.md retains the same unanchored one-step scope; no page edit needed.",
+    "propagation": "Only the unanchored algorithm Definition changed. The other three item repairs preserve their Statement/Example sections exactly; the anchored algorithm is unchanged. No new prerequisite or outside-frontier mathematical consumer was found.",
+    "out_of_lane": [
+      {
+        "id": "alg-golub-kahan-lsqr-with-givens-and-status",
+        "route": "owner of batch 88; assigned frontier repair or reader-concern route, not edited by this unit",
+        "finding": "Step-4 concerns independently confirmed as presentation issues: algorithm step 3 uses one-based matrix positions against def-matrix-space zero-based coordinates without declaring the relabeling, and uses V_j before its definition in step 4.",
+        "affected_use": "Step 3 Givens row accesses (i,i),(i+1,i), i=1,...,j and x_best=x0+V_j z_j; the intended first-through-last rows and vector matrix are unambiguous mathematically.",
+        "minimality": "Declare a local one-based relabeling and define V_j before the best-iterate assignment; no projected least-squares equation or theorem Statement needs alteration."
+      }
+    ],
+    "published_consumer_ledger_updates": [],
+    "source_cross_check": {
+      "id": "thm-lsqr-residual-minimizes-on-krylov-subspace",
+      "source_url": "https://web.stanford.edu/group/SOL/software/lsqr/lsqr-toms82a.pdf",
+      "locator": "Paige\u2013Saunders (1982), \u00a7\u00a73\u20134, printed pp. 47\u201351; extracted text of equations (3.1)\u2013(3.4) and (4.1)\u2013(4.8), plus the recurrence instructions through the end of \u00a74.",
+      "finding": "The primary source connects AV_k=U_{k+1}B_k and orthonormality to the projected residual, then applies a plane-rotation QR factorization and triangular solve. Its derivation uses x0=0; the local theorem applies it to r0=b-Ax0, with the translation proved in step 2.1. No finite-precision minimization is asserted.",
+      "citation": "[Paige\u2013Saunders, LSQR](https://web.stanford.edu/group/SOL/software/lsqr/lsqr-toms82a.pdf)"
+    },
+    "source_reading": "No reading of the nonlinear external references is claimed; the nonlinear and diagonal repairs use familiar local arguments and the actual supplier statements.",
+    "metadata_repair": "Under tools/step5-shared-write-lock.mjs acquire/reread/edit/check/release, updated only three repaired derivation rows, the LSQR F6 use inventory, their repair notes, inaccurate diagonal-example step locators, and the two unanchored consumers\u2019 exact Definition quote mirrors. No consumer item changed.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-anchored-irgnm-with-discrepancy-stopping.md items/alg-iteratively-regularized-gauss-newton-step.md items/thm-lsqr-residual-minimizes-on-krylov-subspace.md items/lem-anchored-irgnm-fixed-reference-error-and-residual.md items/ex-landweber-semiconvergence-on-a-compact-diagonal-operator.md --json",
+        "exit_code": 0,
+        "result": "5 files, 3 proofs checked, 0 failed; both algorithms not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-anchored-irgnm-with-discrepancy-stopping.md items/alg-iteratively-regularized-gauss-newton-step.md items/thm-lsqr-residual-minimizes-on-krylov-subspace.md items/lem-anchored-irgnm-fixed-reference-error-and-residual.md items/ex-landweber-semiconvergence-on-a-compact-diagonal-operator.md --json",
+        "exit_code": 0,
+        "result": "5 files checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-iteratively-regularized-gauss-newton-step.md items/thm-lsqr-residual-minimizes-on-krylov-subspace.md items/lem-anchored-irgnm-fixed-reference-error-and-residual.md items/ex-landweber-semiconvergence-on-a-compact-diagonal-operator.md",
+        "exit_code": 0,
+        "result": "4 items, 11 steps, 0 defects; executed once after the final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-88.proof-contracts.json --strict --items thm-lsqr-residual-minimizes-on-krylov-subspace,lem-anchored-irgnm-fixed-reference-error-and-residual,ex-landweber-semiconvergence-on-a-compact-diagonal-operator,lem-irlgnm-one-step-error-recurrence,ex-nonlinear-exponential-kinetics-one-step --json",
+        "exit_code": 0,
+        "result": "Five selected contracts checked; ok:true; no errors or warnings."
+      },
+      {
+        "command": "node tools/finite-smoke.mjs research/numerical-optimization-dynamics-2026-10-16-batch-88.proof-contracts.json --items thm-lsqr-residual-minimizes-on-krylov-subspace,lem-anchored-irgnm-fixed-reference-error-and-residual,ex-landweber-semiconvergence-on-a-compact-diagonal-operator --json",
+        "exit_code": 0,
+        "result": "Two registered numerical-inverse-problem-fixture checks pass: 2x2 nonbreakdown Golub\u2013Kahan projected residual/minimizer and j=1,2 semiconvergence bounds. The anchored lemma declares no finite-smoke fixture. These checks establish only their finite models."
+      }
+    ],
+    "obligations_remaining": []
+  },
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-88.proof-contracts.json": "3cfee80ab034386490245d1abeac8a8276857db354be5e45e8d28567ddb4ac82"
+  }
+}

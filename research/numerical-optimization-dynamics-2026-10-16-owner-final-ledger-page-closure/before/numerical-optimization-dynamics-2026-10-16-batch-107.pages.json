@@ -1,0 +1,351 @@
+[
+  {
+    "order": 2498,
+    "id": "global-sensitivity-anova-and-sobol-estimation",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Global sensitivity anova and sobol estimation",
+    "companion": "global-sensitivity-anova-and-sobol-estimation-examples",
+    "requires": [
+      "conditional-expectation",
+      "randomized-quasi-monte-carlo-and-replicates",
+      "polynomial-chaos-stochastic-collocation-and-galerkin-uq"
+    ],
+    "items": [
+      {
+        "id": "def-dependent-input-shapley-effects",
+        "kind": "definition",
+        "title": "Shapley effects for dependent inputs",
+        "deps": [
+          "thm-conditional-expectation-is-the-l2-orthogonal-projection",
+          "def-axiom-of-choice",
+          "def-moments-variance-and-covariance"
+        ],
+        "dependency_level": 0,
+        "strategy": "Fix the variance game v(S)=Var(E[f|X_S]), state the positive-output-variance convention, and define the normalized average marginal contribution over all input permutations."
+      },
+      {
+        "id": "def-product-coordinate-projections",
+        "kind": "definition",
+        "title": "Product-coordinate averaging operators",
+        "deps": [
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 0,
+        "strategy": "Define each coordinate-subset averaging operator on a finite product probability law as a section integral; the following in-pair lemma proves representative independence, L2 contraction, projection, commutation, and self-adjointness.",
+        "justified_by": [
+          "lem-product-coordinate-projections-commute-and-contract"
+        ]
+      },
+      {
+        "id": "lem-uniform-interval-poincare-inequality",
+        "kind": "lemma",
+        "title": "Sharp Poincare bound for the uniform law on an interval",
+        "deps": [
+          "def-absolutely-continuous-function",
+          "thm-integration-by-parts-for-absolutely-continuous-functions",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "def-moments-variance-and-covariance",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_level": 0,
+        "strategy": "Reflect the centered function evenly to a periodic absolutely continuous function, derive its Fourier derivative coefficients by integration by parts, and apply Parseval to obtain the sharp constant L^2/pi^2."
+      },
+      {
+        "id": "alg-exact-permutation-shapley-effects",
+        "kind": "algorithm",
+        "title": "Exact finite-permutation Shapley effects",
+        "deps": [
+          "def-dependent-input-shapley-effects"
+        ],
+        "dependency_level": 1,
+        "strategy": "Enumerate each of the d! permutations, accumulate each input's marginal coalition increment, then divide the averages by the positive total variance."
+      },
+      {
+        "id": "alg-monte-carlo-permutation-shapley-effects",
+        "kind": "algorithm",
+        "title": "Monte Carlo permutation estimator for Shapley effects",
+        "deps": [
+          "def-dependent-input-shapley-effects"
+        ],
+        "dependency_level": 1,
+        "strategy": "Sample a declared number of independent uniform permutations and report the coordinatewise mean marginal contribution and sample-covariance standard errors."
+      },
+      {
+        "id": "lem-product-coordinate-projections-commute-and-contract",
+        "kind": "lemma",
+        "title": "Product-coordinate projections commute and contract in L2",
+        "deps": [
+          "def-product-coordinate-projections",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 1,
+        "strategy": "Apply Tonelli to squared sections and Cauchy-Schwarz to prove L2 contraction; use finite-product Fubini to prove P_J P_K=P_{J intersect K} and self-adjointness."
+      },
+      {
+        "id": "thm-shapley-effects-are-nonnegative-and-efficient",
+        "kind": "theorem",
+        "title": "Dependent-input Shapley effects are nonnegative and sum to one",
+        "deps": [
+          "def-dependent-input-shapley-effects",
+          "thm-conditional-expectation-is-the-l2-orthogonal-projection",
+          "def-axiom-of-choice",
+          "alg-exact-permutation-shapley-effects"
+        ],
+        "dependency_level": 2,
+        "strategy": "Nested conditional-expectation projections make every coalition marginal nonnegative; telescope the marginal increments along each finite permutation to prove efficiency."
+      },
+      {
+        "id": "def-product-hoeffding-anova-components",
+        "kind": "definition",
+        "title": "Product-law Hoeffding ANOVA components",
+        "deps": [
+          "def-product-coordinate-projections",
+          "lem-product-coordinate-projections-commute-and-contract"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define each component by the finite Möbius sum of the coordinate projections; the projection identities make this a well-defined L2 class."
+      },
+      {
+        "id": "thm-monte-carlo-shapley-effects-clt-and-standard-errors",
+        "kind": "theorem",
+        "title": "Monte Carlo permutation Shapley effects have a joint CLT",
+        "deps": [
+          "alg-monte-carlo-permutation-shapley-effects",
+          "thm-shapley-effects-are-nonnegative-and-efficient",
+          "cor-iid-finite-variance-strong-law",
+          "lem-measurable-functions-preserve-independence",
+          "thm-multivariate-iid-central-limit-theorem",
+          "def-moments-variance-and-covariance",
+          "def-axiom-of-choice",
+          "def-dependent-input-shapley-effects"
+        ],
+        "dependency_level": 3,
+        "strategy": "The bounded vector of permutation increments is iid; apply the vector strong law, multivariate CLT, and entrywise weak law to its sample covariance."
+      },
+      {
+        "id": "thm-product-hoeffding-anova-decomposition",
+        "kind": "theorem",
+        "title": "Independent product inputs have an orthogonal Hoeffding decomposition",
+        "deps": [
+          "def-product-hoeffding-anova-components",
+          "lem-product-coordinate-projections-commute-and-contract",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-moments-variance-and-covariance",
+          "def-product-coordinate-projections"
+        ],
+        "dependency_level": 3,
+        "strategy": "Expand the Möbius sums and use the projection composition identity to prove reconstruction, coordinatewise centering, and pairwise orthogonality; Pythagoras gives the variance sum."
+      },
+      {
+        "id": "def-first-and-total-sobol-indices",
+        "kind": "definition",
+        "title": "First-order and total Sobol indices",
+        "deps": [
+          "thm-product-hoeffding-anova-decomposition",
+          "def-moments-variance-and-covariance"
+        ],
+        "dependency_level": 4,
+        "strategy": "For positive output variance only, normalize the singleton variance component and the sum of components containing the selected coordinate."
+      },
+      {
+        "id": "thm-complete-chaos-tensor-expansions-give-sobol-coefficients",
+        "kind": "theorem",
+        "title": "Complete orthonormal tensor expansions group into Sobol components",
+        "deps": [
+          "thm-product-hoeffding-anova-decomposition",
+          "def-first-and-total-sobol-indices",
+          "lem-product-coordinate-projections-commute-and-contract",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-countable-choice",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space"
+        ],
+        "dependency_level": 5,
+        "strategy": "For finite sums, Möbius inversion of each product basis tensor retains exactly its coordinate support; pass to a complete countable basis using L2 convergence, projection contraction, and Parseval. The completeness hypothesis remains explicit and law-specific."
+      },
+      {
+        "id": "thm-pick-freeze-sobol-covariance-identities",
+        "kind": "theorem",
+        "title": "Pick-freeze covariances recover first and total Sobol numerators",
+        "deps": [
+          "thm-product-hoeffding-anova-decomposition",
+          "def-first-and-total-sobol-indices",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-moments-variance-and-covariance",
+          "def-product-coordinate-projections",
+          "lem-product-coordinate-projections-commute-and-contract"
+        ],
+        "dependency_level": 5,
+        "strategy": "Integrate over independent replacement coordinates: the first-order product becomes the squared conditional projection, while half the squared total-freeze difference is the residual variance after averaging over all coordinates except i."
+      },
+      {
+        "id": "thm-poincare-bound-for-total-sobol-effect",
+        "kind": "theorem",
+        "title": "Coordinate Poincare inequalities bound total Sobol effects",
+        "deps": [
+          "thm-product-hoeffding-anova-decomposition",
+          "def-first-and-total-sobol-indices",
+          "lem-uniform-interval-poincare-inequality",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-product-coordinate-projections",
+          "lem-product-coordinate-projections-commute-and-contract"
+        ],
+        "dependency_level": 5,
+        "strategy": "The total-effect numerator is the integrated conditional variance given all other coordinates; apply the one-dimensional Poincare inequality on almost every coordinate slice and integrate."
+      },
+      {
+        "id": "alg-pick-freeze-monte-carlo-sobol-estimators",
+        "kind": "algorithm",
+        "title": "Pick-freeze Monte Carlo estimators for Sobol indices",
+        "deps": [
+          "def-first-and-total-sobol-indices",
+          "thm-pick-freeze-sobol-covariance-identities"
+        ],
+        "dependency_level": 6,
+        "strategy": "Use independent product-law bundles to form unbiased first-order and total-effect numerators and an independent pair-difference variance denominator; report raw ratios only when the empirical denominator is positive."
+      },
+      {
+        "id": "thm-pick-freeze-sobol-ratio-joint-clt-and-mcse",
+        "kind": "theorem",
+        "title": "Pick-freeze Sobol ratios are consistent and have a joint delta-method CLT",
+        "deps": [
+          "alg-pick-freeze-monte-carlo-sobol-estimators",
+          "cor-iid-finite-variance-strong-law",
+          "lem-measurable-functions-preserve-independence",
+          "thm-khinchin-weak-law-for-iid-integrable-variables",
+          "thm-multivariate-iid-central-limit-theorem",
+          "thm-first-and-second-order-delta-method-for-random-vectors",
+          "def-moments-variance-and-covariance",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-axiom-of-choice",
+          "thm-pick-freeze-sobol-covariance-identities",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 7,
+        "strategy": "Finite fourth moments make the joint row vector square-integrable; the strong law gives consistency, the multivariate CLT and differentiability of division by positive variance give the joint limit, and the weak law for products validates plug-in covariance MCSE."
+      }
+    ]
+  },
+  {
+    "order": 2499,
+    "id": "global-sensitivity-anova-and-sobol-estimation-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Global sensitivity anova and sobol estimation — Examples",
+    "companion": "global-sensitivity-anova-and-sobol-estimation",
+    "requires": [
+      "global-sensitivity-anova-and-sobol-estimation"
+    ],
+    "items": [
+      {
+        "id": "ex-perfectly-correlated-inputs-and-shapley-allocation",
+        "kind": "example",
+        "title": "Perfectly correlated inputs share a Shapley effect",
+        "deps": [
+          "def-dependent-input-shapley-effects",
+          "thm-shapley-effects-are-nonnegative-and-efficient",
+          "alg-exact-permutation-shapley-effects",
+          "def-moments-variance-and-covariance",
+          "def-axiom-of-choice",
+          "thm-conditional-expectation-is-the-l2-orthogonal-projection"
+        ],
+        "dependency_level": 3,
+        "strategy": "For X1=X2=Z and f=Z, compute the two coalition values, enumerate both permutations, and verify equal allocation and efficiency."
+      },
+      {
+        "id": "ex-ishigami-function-sobol-decomposition",
+        "kind": "example",
+        "title": "The Ishigami function has a pure X1-X3 interaction",
+        "deps": [
+          "def-product-hoeffding-anova-components",
+          "thm-product-hoeffding-anova-decomposition",
+          "def-first-and-total-sobol-indices",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-moments-variance-and-covariance"
+        ],
+        "dependency_level": 5,
+        "strategy": "Integrate the sine and polynomial factors under independent uniform laws, isolate the X1-X3 interaction, and compute the exact variance components and indices."
+      },
+      {
+        "id": "ex-polynomial-chaos-coefficients-and-sobol-indices",
+        "kind": "example",
+        "title": "Polynomial-chaos coefficients group by variable support",
+        "deps": [
+          "def-finite-product-chaos-input",
+          "lem-positive-moment-gram-produces-univariate-chaos-polynomials",
+          "def-chaos-orthonormal-tensor-basis",
+          "def-first-and-total-sobol-indices",
+          "thm-product-hoeffding-anova-decomposition",
+          "def-product-coordinate-projections",
+          "def-moments-variance-and-covariance"
+        ],
+        "dependency_level": 5,
+        "strategy": "Use the complete four-mode tensor basis for two symmetric two-point inputs and an exact finite expansion; verify the coefficient support sums and state the no-completeness boundary for general UQ1 cutoffs."
+      },
+      {
+        "id": "ex-zero-variance-sobol-indices-undefined",
+        "kind": "example",
+        "title": "A constant output has no normalized Sobol indices",
+        "deps": [
+          "def-first-and-total-sobol-indices",
+          "thm-product-hoeffding-anova-decomposition",
+          "def-product-hoeffding-anova-components",
+          "def-product-coordinate-projections"
+        ],
+        "dependency_level": 5,
+        "strategy": "For a constant function, every nonempty ANOVA component and the total variance vanish, so the positive-variance denominator condition fails."
+      },
+      {
+        "id": "ex-noisy-simulator-intrinsic-noise-and-input-sensitivity",
+        "kind": "example",
+        "title": "Noisy simulator output separates intrinsic noise from input variance",
+        "deps": [
+          "def-first-and-total-sobol-indices",
+          "thm-pick-freeze-sobol-covariance-identities",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-moments-variance-and-covariance",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 6,
+        "strategy": "For Y=f(X)+epsilon with centered independent noise, factor the covariance, decompose total output variance, and compare conditional-mean and raw-output denominators."
+      },
+      {
+        "id": "ex-ratio-pick-freeze-index-estimator-is-biased",
+        "kind": "example",
+        "title": "A pick-freeze ratio can be biased at finite sample size",
+        "deps": [
+          "alg-pick-freeze-monte-carlo-sobol-estimators",
+          "thm-pick-freeze-sobol-covariance-identities",
+          "def-first-and-total-sobol-indices"
+        ],
+        "dependency_level": 7,
+        "strategy": "For a one-factor Bernoulli output and one sample bundle, condition on a positive empirical variance denominator and calculate the ratio expectation explicitly."
+      }
+    ]
+  }
+]

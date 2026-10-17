@@ -1,0 +1,39 @@
+--- research/numerical-optimization-dynamics-2026-10-16-owner-reader102-eckart-young-proof-proposal/caller17-applied/before/items/thm-svd-thresholded-least-squares-minimum-norm-model.md
++++ items/thm-svd-thresholded-least-squares-minimum-norm-model.md
+@@ -7,7 +7,7 @@
+ provenance:
+   statement: literature-derived
+   proof: ai-altered
+-deps: [alg-rank-thresholded-least-squares-by-svd, def-truncated-singular-value-pseudoinverse-at-a-declared-threshold, def-moore-penrose-pseudoinverse, thm-moore-penrose-pseudoinverse-exists-and-is-unique, thm-singular-value-decomposition, thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution, thm-eckart-young-best-rank-k-approximation, prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex, def-operator-norm-on-a-finite-dimensional-inner-product-space, cor-triangle-inequality-for-inner-product-norm]
++deps: [def-numerical-rank-relative-to-a-norm-scale-and-tolerance, alg-rank-thresholded-least-squares-by-svd, def-truncated-singular-value-pseudoinverse-at-a-declared-threshold, def-moore-penrose-pseudoinverse, thm-moore-penrose-pseudoinverse-exists-and-is-unique, thm-singular-value-decomposition, thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution, thm-eckart-young-best-rank-k-approximation, prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex, def-operator-norm-on-a-finite-dimensional-inner-product-space, cor-triangle-inequality-for-inner-product-norm]
+ dependency_level: 5
+ verification:
+   precheck: pass
+@@ -34,21 +34,23 @@
+ 
+ [F3] [[thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution]]: for any matrix $M$ and right-hand side $b$, $M^+b$ is the unique least-squares solution of minimum Euclidean norm.
+ 
+-[F4] [[thm-eckart-young-best-rank-k-approximation]]: the SVD truncation to rank $q$ has spectral residual $\sigma_{q+1}$.
++[F4] [[thm-eckart-young-best-rank-k-approximation]]: for $0\le q<n$, the SVD truncation to rank at most $q$ has spectral residual $\sigma_{q+1}$, including the stated zero-tail convention.
+ 
+-[F5] [[prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex]]: the spectral numerical rank at threshold $\tau$ counts precisely the singular values strictly greater than $\tau$.
++[F5] [[prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex]]: for $m,n\ge1$, the spectral numerical rank at threshold $\tau$ counts precisely the singular values strictly greater than $\tau$.
+ 
+ [F6] [[def-moore-penrose-pseudoinverse]] and [[thm-moore-penrose-pseudoinverse-exists-and-is-unique]]: the four Penrose equations define the Moore--Penrose pseudoinverse, and every finite real or complex matrix has a unique matrix satisfying them.
+ 
+-[F7] [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]: the matrix operator norm is the maximum of $\|Mx\|_2$ over unit vectors, so $\|Mx\|_2\le\|M\|_2\|x\|_2$ for every vector $x$ by scaling (and directly when $x=0$).
++[F7] [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]: the matrix operator norm is zero on a zero domain and is the maximum of $\|Mx\|_2$ over unit vectors otherwise. Thus $\|Mx\|_2\le\|M\|_2\|x\|_2$ for every vector $x$ by scaling when $x\ne0$, and directly when $x=0$.
+ 
+ [F8] [[cor-triangle-inequality-for-inner-product-norm]]: the Euclidean vector norm satisfies $\|u+v\|_2\le\|u\|_2+\|v\|_2$.
++
++[F9] [[def-numerical-rank-relative-to-a-norm-scale-and-tolerance]] defines numerical rank as the least rank of a matrix within the declared norm tolerance, for all finite matrix dimensions, including zero.
+ 
+ ## Proof
+ 
+ 1.1 Let $I=\{i\le p:\sigma_i>\tau\}$. By [F1]–[F2], $A_\tau=\sum_{i\in I}\sigma_i u_i v_i^*$ and $A_\tau^+=\sum_{i\in I}\sigma_i^{-1}v_i u_i^*$. Orthonormality gives $A_\tau A_\tau^+=\sum_{i\in I}u_i u_i^*$ and $A_\tau^+A_\tau=\sum_{i\in I}v_i v_i^*$, which are self-adjoint. Using $u_i^*u_j=v_i^*v_j=\delta_{ij}$ in those sums verifies the two Penrose product equations. Together with self-adjointness, these are the four equations; by [F6], $A_\tau^+$ is the unique Moore--Penrose pseudoinverse of $A_\tau$. The calculation includes $I=\varnothing$, when both matrices and sums are zero. [F1, F2, F6, algebra]
+ 
+-1.2 By [F5], $q$ is the spectral numerical rank retained by the strict threshold. The SVD truncation and [F4] give $\|A-A_\tau\|_2=\sigma_{q+1}\le\tau$; when $q=p$, the tail is zero. [F4, F5, F7]
++1.2 If $p=0$, the matrix has no singular-value terms, so $A_\tau=A$, $q=0$, and its spectral numerical rank is zero because $A$ has rank zero and distance zero from itself by [F9]. If $p>0$, [F5] identifies $q$ with the spectral numerical rank retained by the strict threshold. When $q<p$, one has $q<p\le n$, so [F4] applies with $k=q$ and gives $\|A-A_\tau\|_2=\sigma_{q+1}\le\tau$. When $q=p$, [F1] shows directly that all positive singular terms are retained, hence $A_\tau=A$ and the residual norm is zero, equal to the stated convention $\sigma_{p+1}=0$. This last branch also covers $p=0$ without applying [F4] or [F5] outside their dimension hypotheses. [F1, F4, F5, F7, F9, algebra]
+ 
+ 2.1 Apply [F3] to $M=A_\tau$. Its unique minimum-norm least-squares solution is $A_\tau^+b=x_\tau$, proving the truncated-model claim. [step 1.1, F3]
+ 

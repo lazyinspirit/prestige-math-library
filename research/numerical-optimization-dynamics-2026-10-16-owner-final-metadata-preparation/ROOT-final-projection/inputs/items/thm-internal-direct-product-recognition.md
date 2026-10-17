@@ -1,0 +1,57 @@
+---
+id: thm-internal-direct-product-recognition
+kind: theorem
+title: "Internal direct products are external direct products, equivalently every element has a unique factorisation"
+status: published
+origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+deps: [def-internal-direct-product-of-subgroups, thm-external-direct-product-is-a-group, def-group-homomorphism, thm-group-homomorphism-injective-iff-trivial-kernel, lem-product-with-normal-subgroup]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+verification:
+  precheck: pass
+  audited: 2026-08-11
+sources:
+  scraped: []
+  references:
+    - title: "Keith Conrad, Decomposition of Finite Abelian Groups, §§1-4"
+      url: "https://kconrad.math.uconn.edu/blurbs/grouptheory/finite-abelian.pdf"
+    - title: "Richard Elman, Lectures on Abstract Algebra, Ch. 14"
+      url: "https://www.math.ucla.edu/~rse/algebra_book.pdf"
+pipeline_run: null
+---
+## Statement
+
+Let $N_0,\ldots,N_{r-1}\trianglelefteq G$. The following are equivalent: the $N_i$ form an internal direct product of $G$; every $g\in G$ has a unique expression $g=n_0\cdots n_{r-1}$ with $n_i\in N_i$; and the multiplication map $\mu:\prod_{i<r}N_i\to G$ is an isomorphism. These statements include the empty family and the one-factor case.
+
+## Facts & Assumptions
+
+**Given:** The objects and hypotheses in the statement.
+
+[L1] Let $G$ be a group and let $N_0,\ldots,N_{r-1}$ be normal subgroups, where $r\in\mathbb N$. They form an **internal direct product** when they generate $G$ and, for each $i<r$, $$N_i\cap\langle N_j:j<r,\ j\ne i\rangle=\{e\}.$$ The empty family is an internal direct product of the trivial group. For two subgroups of an abelian group this says $G=HK$ and $H\cap K=\{e\}$; in additive notation one writes $G=H\oplus K$. Normal subgroups and generated subgroups are those of def-normal-subgroup and def-generated-subgroup, and the comparison product is def-external-direct-product-of-groups. ([[def-internal-direct-product-of-subgroups]]).
+
+[L2] For groups $G$ and $H$, the componentwise operation of def-external-direct-product-of-groups makes $G\times H$ a group. Its identity is $(e_G,e_H)$, and $$(g,h)^{-1}=(g^{-1},h^{-1}).$$ Moreover the coordinate maps $\pi_G(g,h)=g$ and $\pi_H(g,h)=h$ are group homomorphisms. ([[thm-external-direct-product-is-a-group]]).
+
+[L3] Let $(M,\cdot,e)$ and $(M',\cdot',e')$ be monoids (def-semigroup-and-monoid). A **monoid homomorphism** from $M$ to $M'$ is a function $f : M \to M'$ such that - **(H1)** $f(x \cdot y) = f(x) \cdot' f(y)$ for all $x, y \in M$; - **(H2)** $f(e) = e'$. Let $G$ and $G'$ be groups (def-group). A **group homomorphism** from $G$ to $G'$ is a function $f : G \to G'$ satisfying (H1) alone: $$f(xy) \;=\; f(x)\, f(y) \qquad \text{for all } x, y \in G .$$ Condition (H2) is not imposed for groups because it follows: a group homomorphism automatically satisfies $f(e) = e'$ and $f(x^{-1}) = f(x)^{-1}$ (lem-group-homomorphism-basic-properties). For monoids it does **not** follow and must be assumed, which is why the two definitions differ. A homomorphism from a structure to itself is an **endomorphism**. The identity map of $M$ is a monoid homomorphism, and a composite of monoid homomorphisms is one, since $(g \circ f)(xy) = g(f(x)f(y)) = g(f(x))\,g(f(y))$ and $(g \circ f)(e) = g(e') = e''$; the same computation, without the second clause, shows a composite of group homomorphisms is a group homomorphism. ([[def-group-homomorphism]]).
+
+[L4] A group homomorphism is injective if and only if its kernel is trivial. For a group homomorphism $f:G\to H$, $f$ is injective exactly when $\ker f=\{e_G\}$. ([[thm-group-homomorphism-injective-iff-trivial-kernel]]).
+
+[L5] If $H\le G$ and $N\mathrel{\trianglelefteq}G$, then $HN$ is a subgroup and $H\cap N\mathrel{\trianglelefteq}H$. Here $HN:=\{hn:h\in H,\ n\in N\}$. ([[lem-product-with-normal-subgroup]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 The internal intersection condition gives $N_i\cap N_j=\{e\}$ for $i\ne j$. Unique factorisation gives the same conclusion, since an element of $N_i\cap N_j$ has expressions supported in either coordinate. In either case normality puts $[N_i,N_j]$ inside $N_i\cap N_j$, so distinct factors commute and the multiplication map $\mu((n_i))=n_0\cdots n_{r-1}$ is a homomorphism. [given, L1, L2, L3]
+
+1.2 Conversely, suppose that $\mu$ is an isomorphism. Coordinate subgroups in the external product commute, so their images $N_i$ commute, and surjectivity says that the factors generate $G$. If $x\in N_i\cap\langle N_j:j\ne i\rangle$, the commuting factors express $x$ as an ordered product of elements from the other $N_j$. The tuple supported at $i$ and this tuple supported away from $i$ have the same image, so injectivity gives $x=e$. Hence the factors form an internal direct product. [given, L1, L2, L3, L4, L5]
+
+2.1 Under the internal-product condition, the image of $\mu$ is the subgroup generated by the factors, hence is all of $G$. If $\mu((n_i))=e$, then each $n_i$ is the inverse of a product of the other factors and so lies in $N_i\cap\langle N_j:j\ne i\rangle$; therefore every $n_i=e$. Thus $\mu$ is an isomorphism. [step 1.1, L1, L4, L5]
+
+2.2 Under unique factorisation, every element has exactly one preimage under the homomorphism $\mu$. Thus $\mu$ is bijective and hence is an isomorphism. [step 1.1, L3, L4]
+
+3.1 For the empty family, each condition says that $G$ is trivial. For one factor, each says that $N_0=G$, and the multiplication map is then the identity after identifying the one-fold product with $N_0$. [given, L1, L2] ∎

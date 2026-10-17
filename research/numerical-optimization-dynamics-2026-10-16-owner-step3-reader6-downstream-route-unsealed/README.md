@@ -1,0 +1,9 @@
+# Reader6 downstream consumer route — UNSEALED
+
+Read tools/step3-owner-downstream-consumer-routes.md and its module in full. This packet proposes the supported route for genuine reader:6:1, supplier def-convex-program-duality-and-slater-condition (6) -> consumer ex-consensus-admm-least-squares (60).
+
+ROOT action: inspect noncryptographic-observations.json and all full raw source captures; hash supplier-before.candidate.md against native6pre and supplier-after.current-capture.md against native6post; hash every referenced original artifact; compute finding_sha256 with downstreamConsumerHash over the complete original native finding; complete an actual focused review with the three source hashes, at >= genuine reader ended_at; set reviewed only after that review; then register/merge through the documented authority path. registry-entry.UNSEALED.json and registry-envelope.UNSEALED.json intentionally contain null hashes/time and reviewed=false and are not valid registered authority. Preserve any existing unrelated registry entries.
+
+Unknown historical consumer observation remains explicitly false/unbound. Consumer60 ownpre and the new registration capture establish baselines/route edge, not reader6 observed bytes. The copied native finding is unchanged, and all native artifacts remain original. No canonical source, contract, manifest, native report/result, hash, registry, gate or credit was edited/generated. No mathematical acceptance is claimed.
+
+Do not edit batch60 metadata while its reader is unassigned until the native before baselines and root routing are accounted for. The quote-only defect remains a separate actual current-carrier adjudication/repair obligation after registration. ROOT owns hashing, source-current correspondence, registration and mathematical acceptance; this packet neither seals nor grants permission.

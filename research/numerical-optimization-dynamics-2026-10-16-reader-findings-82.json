@@ -1,0 +1,29 @@
+{
+  "batch": "82",
+  "findings": [
+    {
+      "id": "alg-thick-and-implicitly-restarted-arnoldi-with-locking",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "alg-golub-welsch-certified-node-and-weight-enclosures",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "1be98f37990cf90e584352f9cba9f18a17a520fa7a7154f3457c2bcb9b5d1e93"
+      },
+      "location": "items/alg-thick-and-implicitly-restarted-arnoldi-with-locking.md, ## Definition, steps 1 and 5",
+      "defect": "ill-formed",
+      "evidence": "Step 1 processes eigenpairs of the projected matrix H_d, and step 5 recomputes Ritz pairs, but the algorithm gives no projected-eigensolver instructions, termination/output behavior, or failure branch. Its listed dependency def-ritz-values-and-ritz-vectors-from-arnoldi only defines a Ritz pair as an eigenpair of H_d; it is not an eigensolver procedure. The assigned consumer alg-golub-welsch-certified-node-and-weight-enclosures calls this supplier in step 4 to obtain proposal pairs. Supply a complete projected eigensolver or an explicit solver input contract with output and failure guarantees.",
+      "severity": "fatal"
+    },
+    {
+      "id": "def-gauss-moment-data",
+      "subject_type": "in-flight-item",
+      "consumer_id": null,
+      "observed_source": null,
+      "location": "research/numerical-optimization-dynamics-2026-10-16-batch-82.proof-contracts.json, contracts.def-gauss-moment-data.boundaries[case=endpoints].evidence",
+      "defect": "false-claim",
+      "evidence": "The contract evidence says “Relative support includes a,b,” but the current Definition requires only at least m+1 distinct points in the relative support. On [0,1], the measure mu(E)=lambda(E intersect [1/4,3/4]) with m=1 has at least two support points while neither endpoint 0 nor 1 belongs to its support. This defect is in the proof-contract annotation; the item Definition itself is unaffected.",
+      "severity": "nonfatal"
+    }
+  ],
+  "coverage_note": "Reviewed all 24 assigned items and both assigned pages, compared the batch proof-contract citations and derivations with the current proofs, and opened the supplier statements needed for the reviewed inferences. Checked Gubner’s Theorem 12 and proof for the Jacobi eigenvalue/weight relation. No item repair was made; no validators or finite-smoke execution were run."
+}

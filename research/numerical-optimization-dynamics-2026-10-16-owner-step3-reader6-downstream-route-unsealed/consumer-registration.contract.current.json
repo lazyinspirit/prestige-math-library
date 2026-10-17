@@ -1,0 +1,152 @@
+{
+  "risk": "medium",
+  "kind": "example",
+  "citations": [
+    {
+      "fact": "F1",
+      "source": "alg-two-block-admm-scaled",
+      "source_section": "Definition",
+      "quote": "Let $f:\\mathbb R^n\\to(-\\infty,+\\infty]$ and\n$g:\\mathbb R^m\\to(-\\infty,+\\infty]$ be proper closed convex, let\n$K:\\mathbb R^n\\to\\mathbb R^p$ and $L:\\mathbb R^m\\to\\mathbb R^p$ be linear,\nlet $c\\in\\mathbb R^p$, and let $\\rho>0$. The primal problem is\n$$\\min_{x,z}\\ f(x)+g(z)\\quad\\text{subject to }Kx+Lz=c,$$\nand its Lagrangian is\n$\\mathcal L((x,z),y)=f(x)+g(z)+\\langle y,Kx+Lz-c\\rangle$.\nA saddle point means a saddle pair in the sense of\n[[def-saddle-point-for-convex-concave-lagrangian]].\n\nFor an exact outer sweep with scaled dual $u^k$, compute, in order,\n$$x^{k+1}\\in\\arg\\min_x\\left(f(x)+\\frac\\rho2\\|Kx+Lz^k-c+u^k\\|_2^2\\right),$$\n$$z^{k+1}\\in\\arg\\min_z\\left(g(z)+\\frac\\rho2\\|Kx^{k+1}+Lz-c+u^k\\|_2^2\\right),$$\nthen set $r^{k+1}=Kx^{k+1}+Lz^{k+1}-c$ and\n$u^{k+1}=u^k+r^{k+1}$. Report also the unscaled dual\n$y^k=\\rho u^k$, objective $p_k=f(x^k)+g(z^k)$, and primal residual $r^k$.\nIf an exact subproblem has multiple minimizers, choose the unique minimum-norm\nmember of its nonempty closed convex minimizer set; existence and uniqueness of\nthat tie-break follow from [[thm-nearest-point-in-a-nonempty-closed-convex-set]].\n\nA finite implementation supplies finite inner iteration caps for both solves.\nA solve is accepted only with a certificate of an attained global minimizer\nbefore its cap. Return **invalid-input** for invalid dimensions or $\\rho\\le0$;\nreturn **x-solve-failed**, **x-cap-exhausted**, **z-solve-failed**, or\n**z-cap-exhausted** if the corresponding solve fails, is uncertified, or reaches\nits cap. A failed sweep does not change the outer state, even if its first\nsubproblem was solved. These statuses give no approximate convergence guarantee.",
+      "uses": [
+        "1.2",
+        "3.1"
+      ]
+    },
+    {
+      "fact": "F2",
+      "source": "def-saddle-point-for-convex-concave-lagrangian",
+      "source_section": "Definition",
+      "quote": "Let $X,Y$ be nonempty subsets of finite-dimensional real Euclidean spaces and\nlet $\\Psi:X\\times Y\\to[-\\infty,+\\infty]$ be an extended-real function. A\npair $(x_*,y_*)$ is a\n**saddle point** of $\\Psi$ if $\\Psi(x_*,y_*)$ is finite and\n$$\\Psi(x_*,y)\\le \\Psi(x_*,y_*)\\le \\Psi(x,y_*)\\qquad(x\\in X,\\ y\\in Y).$$\nThe inequalities must be defined at the arguments they display. For an\nequality-constrained problem the primal set may be a product set of\nfinite-valued pairs $(x,z)$.",
+      "uses": [
+        "1.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "def-convex-program-duality-and-slater-condition",
+      "source_section": "Definition",
+      "quote": "A subset is convex when it contains the segment joining each pair of its\npoints ([[def-convex-subset-of-euclidean-space]]). A function\n$F:\\mathbb R^n\\to(-\\infty,+\\infty]$ is proper if it never equals\n$-\\infty$ and is finite at at least one point. Its domain is\n$\\operatorname{dom}F=\\{x:F(x)<+\\infty\\}$. Its epigraph is\n$\\operatorname{epi}F=\\{(x,t):F(x)\\le t\\}$. It is closed convex when its\nepigraph is a closed convex set. For a nonempty convex set $S$,\n$\\operatorname{aff}S$ is its smallest containing affine subspace and\n$\\operatorname{ri}S$ is its interior relative to $\\operatorname{aff}S$.\n\nLet $n\\ge1$, let $m,p\\in\\mathbb N$ with zero allowed, let\n$f_0,g_1,\\ldots,g_m$ be proper closed convex functions on $\\mathbb R^n$,\nlet $A\\in\\mathbb R^{p\\times n}$ have full row rank, and let\n$b\\in\\mathbb R^p$. Full row rank means that the rows are linearly\nindependent, vacuously when $p=0$. The common domain is\n$D=\\operatorname{dom}f_0\\cap\\bigcap_{i=1}^m\\operatorname{dom}g_i$. The primal\nproblem is to minimize $f_0(x)$ over $x\\in D$ satisfying $Ax=b$ and\n$g_i(x)\\le0$. An inequality is trivial if $g_i(x)\\le0$ for every $x\\in D$;\ntrivial inequalities may be removed without changing the feasible set.\nUnless stated otherwise, the inequalities below are the remaining,\nnontrivial ones. The primal value is\n$$\np^*=\\inf\\{f_0(x):x\\in D,\\ Ax=b,\\ g_i(x)\\le0\\text{ for all }i\\}.\n$$\n\nFor $\\lambda\\in\\mathbb R^m_+$ and $\\nu\\in\\mathbb R^p$, the extended\nLagrangian is\n$$\nL(x,\\lambda,\\nu)=\\begin{cases}f_0(x)+\\lambda^Tg(x)+\\nu^T(Ax-b),&x\\in D,\\\\+\\infty,&x\\notin D.\\end{cases}\n$$\nThe dual function and dual value are\n$$\nq(\\lambda,\\nu)=\\inf_{x\\in\\mathbb R^n}L(x,\\lambda,\\nu),\\qquad d^*=\\sup_{\\lambda\\ge0,\\ \\nu\\in\\mathbb R^p}q(\\lambda,\\nu).\n$$\nThe dual supremum is attained when some admissible $(\\lambda,\\nu)$ has\n$q(\\lambda,\\nu)=d^*$; the optimal duality gap is $p^*-d^*$ when both values\nare finite.\n\nSlater's condition means that there is\n$x_s\\in\\operatorname{ri}(\\operatorname{dom}f_0)\\cap\n\\bigcap_i\\operatorname{ri}(\\operatorname{dom}g_i)$ with $Ax_s=b$ and\n$g_i(x_s)<0$ for every remaining inequality. Relative interior is used in\nthe affine hull of each domain, so the domain need not have ambient interior.",
+      "uses": [
+        "2.1"
+      ]
+    },
+    {
+      "fact": "F4",
+      "source": "thm-lagrangian-weak-duality",
+      "source_section": "Statement",
+      "quote": "For the convex program and Lagrangian dual of\n[[def-convex-program-duality-and-slater-condition]], every primal feasible\n$x$ and every dual feasible $(\\lambda,\\nu)$ satisfy\n$$q(\\lambda,\\nu)\\le f_0(x).$$\nConsequently, when the primal feasible set is nonempty, $d^*\\le p^*$.",
+      "uses": [
+        "2.1"
+      ]
+    }
+  ],
+  "derivations": [
+    {
+      "id": "step-1-1",
+      "claim": "On the feasible set $z=x$, the objective is $$f(x)+g(x)=\\tfrac12(x-1)^2+\\tfrac12(x+1)^2=x^2+1,$$ which is uniquely minimized at $x=z=0$ with value $1$. For $y_*=1$, $$\\mathcal L((x,z),1)=f(x)+g(z)+x-z=1+\\tfrac12x^2+\\tfrac12z^2\\ge1,$$ with equality at $(0,0)$; feasibility makes $\\mathcal L((0,0),y)=1$ for every $y$. These are exactly the saddle inequalities [F2].",
+      "step": "1.1",
+      "inputs": [
+        "A1",
+        "given",
+        "F2",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-1-2",
+      "claim": "Differentiating the first strictly convex quadratic in [F1] gives $2x^{k+1}=1+z^k-u^k$. At $k=0$ this yields $x^1=1/2$. Differentiating the second gives $2z^{k+1}=x^{k+1}+u^k-1$, hence $z^1=-1/4$ and then $u^1=u^0+x^1-z^1=3/4$.",
+      "step": "1.2",
+      "inputs": [
+        "A1",
+        "F1",
+        "given",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-2-1",
+      "claim": "The equality matrix is $A=(1,-1)$, whose single row is linearly independent, so the dual definition [F3] applies. Its dual function is $$d(y)=\\inf_x\\{\\tfrac12(x-1)^2+yx\\}+\\inf_z\\{\\tfrac12(z+1)^2-yz\\}=(y-\\tfrac12y^2)+(y-\\tfrac12y^2)=1-(y-1)^2.$$ Thus its maximum is $1$ at $y=1$, consistent with weak duality [F4] and the saddle value.",
+      "step": "2.1",
+      "inputs": [
+        "A1",
+        "F3",
+        "F4",
+        "step 1.1",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-3-1",
+      "claim": "The same two equations give $x^2=(1-1/4-3/4)/2=0$, $z^2=(0+3/4-1)/2=-1/8$, and $u^2=3/4+0-(-1/8)=7/8$. Each subproblem is a strictly convex quadratic, so both minimizers in each of these sweeps are attained and unique. The recurrence values are exact rationals.",
+      "step": "3.1",
+      "inputs": [
+        "A1",
+        "F1",
+        "step 1.2",
+        "algebra"
+      ]
+    }
+  ],
+  "routine_steps": [],
+  "boundaries": [
+    {
+      "case": "empty",
+      "status": "not_applicable",
+      "reason": "Statement: Only the supplied relation/domain and admitted attained minimizer sets are used. Partial resolvents and empty-domain possibilities are not replaced by an unstated full-domain hypothesis. The fixed two scalar quadratics with unit penalty have zero consensus optimizer and the displayed two exact rational sweeps."
+    },
+    {
+      "case": "zero",
+      "status": "checked",
+      "evidence": "Statement: The constrained optimizer is the zero consensus pair although its objective is one; the first update is nonzero and the second primal x value is exactly zero. These are the displayed rational sweeps, not a universal zero-state recurrence. The fixed two scalar quadratics with unit penalty have zero consensus optimizer and the displayed two exact rational sweeps."
+    },
+    {
+      "case": "one",
+      "status": "checked",
+      "evidence": "The first exact update is computed in step 1.1 and the next update in step 2.1."
+    },
+    {
+      "case": "degenerate",
+      "status": "not_applicable",
+      "reason": "Statement: Multiple minimizers, set-valued relations or rank-deficient couplings are admitted only as the stated assumptions allow; exact attained solves, saddle/fixed-point existence and any tie-break remain explicit. The fixed two scalar quadratics with unit penalty have zero consensus optimizer and the displayed two exact rational sweeps."
+    },
+    {
+      "case": "endpoints",
+      "status": "checked",
+      "evidence": "Statement: Only the displayed finite sweep or sum indices are asserted. Strict positive step parameters and finite-valued saddle domains retain their stated boundaries. The fixed two scalar quadratics with unit penalty have zero consensus optimizer and the displayed two exact rational sweeps."
+    },
+    {
+      "case": "nonempty-choice",
+      "status": "checked",
+      "evidence": "Statement: The actual relation witnesses, fixed points or attained minimizers are part of the stated existence assumptions or finite-dimensional construction; no extra global arbitrary selection is inferred. The fixed two scalar quadratics with unit penalty have zero consensus optimizer and the displayed two exact rational sweeps."
+    },
+    {
+      "case": "iff-forward",
+      "status": "not_applicable",
+      "reason": "Statement: This item gives its stated forward implication or definition, not a converse characterizing all its hypotheses. The fixed two scalar quadratics with unit penalty have zero consensus optimizer and the displayed two exact rational sweeps."
+    },
+    {
+      "case": "iff-reverse",
+      "status": "not_applicable",
+      "reason": "Statement: This item gives its stated forward implication or definition, not a converse characterizing all its hypotheses. The fixed two scalar quadratics with unit penalty have zero consensus optimizer and the displayed two exact rational sweeps."
+    }
+  ],
+  "finite_checks": [
+    {
+      "name": "Scalar saddle and dual certificate",
+      "status": "proved_exactly",
+      "evidence": "Steps 1.1 and 2.1 expand the primal objective and compute d(y)=1-(y-1)^2."
+    },
+    {
+      "name": "First two exact ADMM sweeps",
+      "status": "proved_exactly",
+      "evidence": "Steps 1.2 and 3.1 differentiate the quadratic subproblems and compute the rational triples."
+    }
+  ],
+  "axioms": [],
+  "axiom_use": "No additional axiom; exact scalar real algebra.",
+  "risk_review": {
+    "status": "open",
+    "reviewer": "batch-60 beta author",
+    "notes": "Author completeness review only; this record is not an independent approval."
+  }
+}

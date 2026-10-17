@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "group": "batch-70",
+  "decisions": [
+    {
+      "obligation": "reader:70:1",
+      "id": "alg-bracketing-zoom-strong-wolfe-search",
+      "consumer_id": "alg-nonlinear-conjugate-gradient-methods",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "32f1660afa931dea153729a7a17f229b5b1b5a4b0d6797f17c1816cc57bfed29"
+      },
+      "producer_batch": "58",
+      "dependency_path": [
+        {
+          "id": "alg-nonlinear-conjugate-gradient-methods",
+          "item_sha256": "f4a516eb8a093cf65b5426ab86ee3782373455084671853032e084ce7f0a5768"
+        },
+        {
+          "id": "alg-bracketing-zoom-strong-wolfe-search",
+          "item_sha256": "c6d98934e2701fa99096731a418b05f68854206b33841567b103afda46de6d7b"
+        }
+      ],
+      "producer_carrier_at_split": {
+        "producer_batch": "58",
+        "item_sha256": "c6d98934e2701fa99096731a418b05f68854206b33841567b103afda46de6d7b",
+        "contract_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "manifest_sha256": "c2c4217a7933a801638f4a3cf3682ab5aa58afc3d5df65afb2a00f8d097b1d68"
+      },
+      "producer_pre_snapshot": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-step3-hash-58-pre.json",
+        "sha256": "ea7c879e9dc0d654554d113ca26e4182914f49c793418f56ed06da7ab2a537f1",
+        "carrier": {
+          "producer_batch": "58",
+          "item_sha256": "32f1660afa931dea153729a7a17f229b5b1b5a4b0d6797f17c1816cc57bfed29",
+          "contract_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "manifest_sha256": "c2c4217a7933a801638f4a3cf3682ab5aa58afc3d5df65afb2a00f8d097b1d68"
+        }
+      },
+      "owner_unbound_reader_observation": {
+        "record_sha256": "76e390a5b2fefb780f79e519e58049608290d6c3c707c2ba36e033715de39a19",
+        "original_source_unavailable": false,
+        "observed_source_archive": {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-reader70-observation-ROOT-sealed/original-observed-source.md",
+          "sha256": "32f1660afa931dea153729a7a17f229b5b1b5a4b0d6797f17c1816cc57bfed29"
+        }
+      },
+      "observation_basis": "unbound",
+      "observed_sha256": null,
+      "route": "reader",
+      "verdict": "confirmed_nonfatal",
+      "defect_ids": [
+        "numerical-optimization-dynamics-2026-10-16-3a-batch-58-D01"
+      ],
+      "repair_confidence": 1,
+      "historical_delta_unknown": true,
+      "same_defect_as": "refuter:58:1",
+      "same_defect_evidence": "reader:70:1 reaches the supplier through alg-nonlinear-conjugate-gradient-methods, whereas refuter:58:1 flags the supplier directly. Both original findings identify the same missing instruction in alg-bracketing-zoom-strong-wolfe-search: neither evaluation nor supplied initial data obtains phi(0)=f(x) for the expansion and zoom Armijo comparisons. The archived reader source's Definition has those comparisons and no baseline evaluation; the current Definition's first instruction evaluates and retains f(x) and the gradient and sets phi(0) and phi-prime(0). That single initialization repair is exactly the fixed defect described by ledger numerical-optimization-dynamics-2026-10-16-3a-batch-58-D01 and the batch-58 decision. The distinct routes, original observations and historical composite uncertainty remain preserved; this link identifies the physical omission rather than equating their historical carriers.",
+      "owner_resolution": "ROOT explicitly authorized preservation and independent adjudication in owner-step3-reader70-observation-ROOT-sealed/root-registration.json. Its authenticated original source archive matches raw hash 32f1660afa931dea153729a7a17f229b5b1b5a4b0d6797f17c1816cc57bfed29 and confirms the omitted baseline evaluation. This source-only binding does not reconstruct the historical manifest/contract composite; that historical uncertainty remains. Current producer and actual consumer interface were independently reviewed.",
+      "evidence": "Original authenticated source omits evaluation of phi(0) despite Armijo tests. Current batch-58 algorithm explicitly evaluates/retains f(x), gradient, phi(0), phi-prime(0); independently checked all branches, Wolfe checks, finite budgets and positive feasible midpoint returns. Current manifest places the algorithm in batch 58; definition-like algorithm has null proof contract. Consumer still uses identical checked-step/failure and trial-count interface. Existing fixed ledger D01 closes this same defect; no duplicate row. Historical finding remains true and is not alleged against corrected current bytes. See alpha-batch-70-3a.md.",
+      "subject_sha256": "fa040c1917317c87b78665b11e514aac54ef1b822f2e7cf9aca489952056518e"
+    },
+    {
+      "obligation": "refuter:70:1",
+      "id": "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg",
+      "route": "flagged",
+      "verdict": "confirmed_nonfatal",
+      "evidence": "Proof 1.2 previously carried only direction equality although using common current iterates/residuals to import CG orthogonality. Explicit joint induction now carries iterates/residuals through k and directions/accepted step lengths through k-1; steps 3.1/4.1 propagate accepted equal steps and common next iterates. Independently reviewed full CG suppliers, initial/terminal zero residual, positive SPD denominators and exact strong Wolfe acceptance. Statement unchanged; contract derivations synchronized. See alpha-batch-70-3a.md.",
+      "defect_ids": [
+        "numerical-optimization-dynamics-2026-10-16-3a-batch-70-D01"
+      ],
+      "repair_confidence": 1,
+      "subject_sha256": "39764a5afc7e34601c22b632db9fd1a374009097d9b3752483c603d44e062402"
+    },
+    {
+      "obligation": "gate:numerical-optimization-dynamics-2026-10-16-3a-batch-70-D02",
+      "id": "cex-raw-prplus-loses-descent-and-safeguard-restarts",
+      "route": "gate",
+      "verdict": "confirmed_fatal",
+      "defect_ids": [
+        "numerical-optimization-dynamics-2026-10-16-3a-batch-70-D02"
+      ],
+      "repair_confidence": 1,
+      "evidence": "ROOT OWNER adjudication accepted by /root on 2026-10-16T16:48:14.339Z, following the explicitly delegated focused correction review below. This is separately attributed owner work and supplies no new native execution or whole-proof review. Delegated evidence retained verbatim: ROOT OWNER supplemental gate adjudication proposal, separately attributed from the original native Alpha output. The native batch70 Completed counterexample review and final handoff explicitly accept D02 at confidence1 while retaining the exact ascent witness; D02 was risk-review discovered and deliberately absent from its two original JSON obligations. Current Statement refuted is the universal raw-PR+ descent assertion after every strong-Wolfe step with nonzero new gradient. Current Counterexample2.1 verifies Armijo/curvature, and3.1 gives beta=57/100, d=(-17/100,-1/10), g1·d=29/500>0; this actually refutes that universal assertion. The old negative non-necessity sentence could not be refuted by this witness. The safeguard restart conclusion and numerical witness are unchanged. The whole current native report and decisions were read; no original decision references this row, which is the decision-coverage gap. This proposal preserves the original native entries and historical fields and claims only focused repair acceptance on the evidence cited.",
+      "owner_adjudication": {
+        "version": 1,
+        "owner_identity": "/root",
+        "recorded_at": "2026-10-16T16:48:14.339Z",
+        "basis": "accepted-delegated-focused-correction-review",
+        "original_native_output": false,
+        "native_execution_coverage_adopted": false,
+        "new_full_proof_review_claimed": false,
+        "delegated_proposal": {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-unowned-intake-3-supplement-proposals/owner-gate-decision-proposals.json",
+          "sha256": "a0f6c37e0bddae69b1265d230d1698426761f7a81e6ce4440ab5662aa5382a8a"
+        }
+      },
+      "subject_sha256": "6072068bf17be6cfe4f409bfa160f92a202829faf37771fd65dbba8920ea805b"
+    }
+  ]
+}

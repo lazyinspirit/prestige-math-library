@@ -1,0 +1,666 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "scope": "LIN-SVD strong RRQR interface",
+  "round": 1,
+  "decision": "focused-owner-interface-reconciliation-complete; root-readiness-binding-pending",
+  "confirmed_defect": "Original controlling audit stopped only at max|R11^-1 R12|<=f yet claimed both full strong spectral block bounds. Coefficient control alone gives no control on R22. The active algorithm adds the necessary combined residual score.",
+  "independent_defect_witness": "For a partitioned full-rank A=diag(1,M), k=1, f=1 and M>sqrt(2), X=0 passes the coefficient test while sigma_1(R11)=1<M/sqrt(2) and sigma_1(R22)=M>sqrt(2)sigma_2(A). This is a witness against coefficient-only partition sufficiency, not an assertion about greedy CPQR selecting the first column of that diagonal matrix.",
+  "smallest_missing_prerequisite": "No new page/pair. Correct the same owning strong-RRQR success criterion to include the residual term; existing local volume-ratio and singular-value helper proofs then support the retained comparisons.",
+  "repaired_interface": {
+    "inputs": "Full-column-rank real/complex A with m>=n, 0<=k<n, f>=1 and finite swap cap.",
+    "score": "X=R11^-1 R12; omega_i=||e_i* R11^-1||2; gamma_j=||R22(:,j)||2; s_ij=sqrt(|Xij|²+(omega_i gamma_j)²).",
+    "selection": "Preserve coefficient-first largest-violation branch; if none, largest combined score above f. Lexicographic ties. Restore triangular form by unitary transformations.",
+    "success": "All scores<=f; hence all |Xij|<=f. k=0 succeeds without swaps.",
+    "guarantees": "Exact-arithmetic volume ratio equals s_ij; at most binomial(n,k)-1 swaps; both spectral block comparisons retain g=sqrt(1+f²k(n-k)).",
+    "statuses": "Rank-deficient input, singular selected block, cap exhaustion and nonfinite arithmetic retain explicit statuses. Range checks do not certify exact strong bounds for rounded factors."
+  },
+  "source_reading": {
+    "url": "https://math.berkeley.edu/~mgu/MA273/Strong_RRQR.pdf",
+    "title": "Ming Gu and Stanley C. Eisenstat, Efficient Algorithms for Computing a Strong Rank-Revealing QR Factorization",
+    "retrieval": "Original author-hosted 22-page PDF retrieved for this review and extracted locally with PyMuPDF.",
+    "actually_read": "Complete relevant Section 3 argument: Algorithms 3 and 4, Lemma 3.1 and its proof, Theorem 3.2 and its proof, printed pp.852–854. The beginning of Section 4 was read to distinguish the later efficient adaptive-rank algorithm; no whole-paper reading is claimed.",
+    "notation_match": "Paper uses omega_i=1/||row_i(Ak^-1)||2 and gamma_j/omega_i; draft names the row norm itself omega_i and multiplies. The scores agree.",
+    "scope_limits": "Source argument is written with real transpose. The inspected local draft uses conjugate transpose/Gram volume and the same block-norm proof, providing the complex extension directly. No source-reading credit inherited from author."
+  },
+  "independent_proof_checks": [
+    "Volume ratio follows from determinant(Cprime*Cprime+gamma² e_i e_i*) with row inverse term; extension at zero coefficient uses the squared polynomial identity.",
+    "Sum scores gives ||X||F²+||R11^-1||F²||R22||F²<=f²k(n-k).",
+    "For alpha=||R22||2/sigma_k(R11)>0, R=D1W1 with D1=diag(R11,R22/alpha), W1=[[I,X],[0,alpha I]]. Top k singular values of D1 are those of R11; ||W1||²<=1+||X||F²+alpha²<=g².",
+    "D2=RW2 with D2=diag(alpha R11,R22), W2=[[alpha I,-X],[0,I]]. Last n-k singular values of D2 are those of R22 and ||W2||<=g. Product inequality yields the trailing comparison.",
+    "Strict volume growth works even at f=1; it yields finite subset bound, not a polynomial complexity claim.",
+    "Kahan-style CPQR counterexample triangular solve and equal-residual/tie convention checked independently."
+  ],
+  "complete_preimages": {
+    "directory": "research/numerical-optimization-dynamics-2026-10-16-owner-rrqr-interface-before",
+    "files": [
+      "research/plan-numerical-linear-track.md",
+      "research/numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md"
+    ]
+  },
+  "changed_files": [
+    "research/plan-numerical-linear-track.md",
+    "research/numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md"
+  ],
+  "edit_limits": "Only LIN-SVD RRQR contract paragraphs changed. NA02 and bidiagonal/rounded SVD paragraphs left untouched; no active batch17 item, manifest, page, coverage, contract, readiness or runtime edited.",
+  "actual_item_dispositions": [
+    {
+      "item": "alg-strong-rank-revealing-qr-with-finite-swaps",
+      "disposition": "current richer combined-score Definition matches repaired controlling contract; no active-item edit",
+      "actual_use": "Greedy CPQR initialization; full column rank, real/complex m>=n, 0<=k<n, f>=1, finite cap. Coefficient-first violating branch then residual-score branch; success only when all scores<=f."
+    },
+    {
+      "item": "lem-strong-rrqr-column-swap-volume-ratio",
+      "disposition": "unchanged",
+      "actual_use": "Gram determinant rank-one update gives exact score as volume ratio. Row i of (R11 S)^-1 is row i of R11^-1 divided by Xij; continuity of the polynomial squared-volume identity handles Xij=0."
+    },
+    {
+      "item": "thm-strong-rrqr-swap-rule-terminates",
+      "disposition": "unchanged",
+      "actual_use": "Every accepted swap has score>f>=1, so selected subset volume strictly increases and no subset recurs; at most binomial(n,k)-1 swaps. Success implies coefficient bound; smaller cap may return budget exhaustion."
+    },
+    {
+      "item": "thm-strong-rrqr-singular-value-comparisons",
+      "disposition": "unchanged",
+      "actual_use": "Sum combined scores, set alpha=||R22||2/sigma_k(R11), use two block scalings and singular-value product inequality. This proves both stated comparisons with g=sqrt(1+f²k(n-k)), over real/complex fields, in exact arithmetic."
+    },
+    {
+      "item": "cex-classical-column-pivoted-qr-is-not-strong-with-factor-one",
+      "disposition": "unchanged",
+      "actual_use": "Kahan-style triangular 4x4 input c=1/2,s=sqrt(3)/2; equal residual norms and declared smallest-original-index tie produce identity permutation, then X1=-c(1+c)^2=-9/8. It refutes plain CPQR factor-one coefficient guarantee, not the combined-score procedure."
+    },
+    {
+      "item": "lem-singular-value-product-bound",
+      "disposition": "helper inspected; unchanged; not counted as a distinct RRQR-escalated record",
+      "actual_use": "SVD rank-(i-1) truncation and operator-norm submultiplicativity prove sigma_i(XY)<=sigma_i(X)||Y|| and left-multiplication analogue. Exact helper for the comparison proof."
+    }
+  ],
+  "actual_readiness_observation": [
+    {
+      "item": "alg-strong-rank-revealing-qr-with-finite-swaps",
+      "decision": "escalated",
+      "reason": "Escalated: the controlling repaired LIN-SVD contract stops only at max |R11^-1 R12|<=f, but Gu–Eisenstat Lemma 3.1/Theorem 3.2/Algorithm 4 require the combined score to control R22. This draft adds the required residual score; owner reconciliation of the shared interface is needed before readiness.",
+      "path": "research/numerical-optimization-dynamics-2026-10-16-step1-alg-strong-rank-revealing-qr-with-finite-swaps.json"
+    },
+    {
+      "item": "lem-strong-rrqr-column-swap-volume-ratio",
+      "decision": "escalated",
+      "reason": "Escalated because its score definition depends on the disputed strong-RRQR interface in alg-strong-rank-revealing-qr-with-finite-swaps. The local proof is complete and source-checked, but the shared contract needs owner reconciliation.",
+      "path": "research/numerical-optimization-dynamics-2026-10-16-step1-lem-strong-rrqr-column-swap-volume-ratio.json"
+    },
+    {
+      "item": "thm-strong-rrqr-swap-rule-terminates",
+      "decision": "escalated",
+      "reason": "Escalated because its termination and coefficient guarantee depend on the disputed strong-RRQR algorithm interface. The volume proof is complete; owner reconciliation is required before it is a ready supplier.",
+      "path": "research/numerical-optimization-dynamics-2026-10-16-step1-thm-strong-rrqr-swap-rule-terminates.json"
+    },
+    {
+      "item": "thm-strong-rrqr-singular-value-comparisons",
+      "decision": "escalated",
+      "reason": "Escalated because its block comparison uses the combined residual score added locally to address the X-only stopping defect in the shared plan/audit. Gu–Eisenstat Theorem 3.2 supports the combined criterion; owner reconciliation is required.",
+      "path": "research/numerical-optimization-dynamics-2026-10-16-step1-thm-strong-rrqr-singular-value-comparisons.json"
+    },
+    {
+      "item": "cex-classical-column-pivoted-qr-is-not-strong-with-factor-one",
+      "decision": "escalated",
+      "reason": "Escalated because its comparison fact cites the disputed strong-RRQR output interface. The finite counterexample and exact CPQR verification are complete; owner reconciliation must settle the linked algorithm contract.",
+      "path": "research/numerical-optimization-dynamics-2026-10-16-step1-cex-classical-column-pivoted-qr-is-not-strong-with-factor-one.json"
+    },
+    {
+      "item": "lem-singular-value-product-bound",
+      "decision": "ready",
+      "reason": "Ready: examined all declared dependencies (thm-eckart-young-best-rank-k-approximation, def-operator-norm-on-a-finite-dimensional-inner-product-space); placement is the assigned A page at dependency level 0. Supplier bodies and hypotheses were checked, the proof contract quotes every linked fact, and the final scoped precheck/layout/render/dependency gates pass (or precheck is n/a for algorithms).",
+      "path": "research/numerical-optimization-dynamics-2026-10-16-step1-lem-singular-value-product-bound.json"
+    }
+  ],
+  "readiness_count_note": "Five observed RRQR-specific escalated records, plus the inspected product-bound helper. Two separately observed bidiagonal backward-error escalation records remain with the other reviewer. No invented sixth RRQR readiness record.",
+  "planned_actual_interface_consumers": [
+    {
+      "pair": "LIN-CUR",
+      "page": "interpolative-cur-and-nystrom-decompositions",
+      "disposition": "Actual strong-RRQR consumer: use successful combined-score output, T(:,J)=I and T(:,Jc)=R11^-1 R12. Exact residual is the trailing orthogonal block and its spectral bound is preserved; coefficients still <=f. Rank-deficient/failed RRQR branches remain statuses, and separate CUR/Nystrom results do not inherit universal success.",
+      "companion": "interpolative-cur-and-nystrom-decompositions-examples: unchanged nonlogical consumer"
+    },
+    {
+      "pair": "LIN-EIGITER",
+      "page": "restarted-and-block-eigensolvers",
+      "disposition": "Generic rank-revealing orthonormalization with rank-loss status; no coefficient-only strong spectral assertion in its actual contract. Unchanged.",
+      "companion": "restarted-and-block-eigensolvers-examples: unchanged nonlogical consumer"
+    },
+    {
+      "pair": "LIN-SCHUR",
+      "page": "computed-schur-decompositions-and-nonnormal-spectra",
+      "disposition": "Consumes SVD/smallest singular value and local reflector numerical results, not strong-RRQR stopping. Unchanged.",
+      "companion": "computed-schur-decompositions-and-nonnormal-spectra-examples: unchanged nonlogical consumer"
+    },
+    {
+      "pair": "LIN-TT",
+      "page": "tensor-train-compression-and-truncation-error",
+      "disposition": "TT/HOSVD SVD truncation and orthogonal discarded tails; no strong-RRQR comparison premise. Unchanged.",
+      "companion": "tensor-train-compression-and-truncation-error-examples: unchanged nonlogical consumer"
+    },
+    {
+      "pair": "NA-08",
+      "page": "randomized-low-rank-approximation",
+      "disposition": "SVD partitions and range orthogonalization/Gaussian estimates; no X-only stopping or strong-RRQR theorem imported. Unchanged.",
+      "companion": "randomized-low-rank-approximation-examples: unchanged nonlogical consumer"
+    },
+    {
+      "pair": "APP-RATIONAL",
+      "page": "barycentric-rational-and-aaa-approximation",
+      "disposition": "AAA uses smallest right-singular subspace of Loewner matrix; unrelated to RRQR swap criterion. Unchanged.",
+      "companion": "barycentric-rational-and-aaa-approximation-examples: unchanged nonlogical consumer"
+    },
+    {
+      "pair": "LIN-SKETCH",
+      "page": "sketched-least-squares-and-subspace-embeddings",
+      "disposition": "QR/SVD sketch solve and computed QR errors; no strong-RRQR score premise. Unchanged.",
+      "companion": "sketched-least-squares-and-subspace-embeddings-examples: unchanged nonlogical consumer"
+    },
+    {
+      "pair": "LIN-SQRTFILTER",
+      "page": "square-root-covariance-update-error-and-stability",
+      "disposition": "Rectangular QR/Gram identity with local NA02 reflector error, not rank-revealing block comparisons. Unchanged.",
+      "companion": "square-root-covariance-update-error-and-stability-examples: unchanged nonlogical consumer"
+    }
+  ],
+  "selected_page_closure_dispositions": [
+    {
+      "page": "computed-singular-values-and-rank-revealing-factorizations",
+      "path_to_LIN_SVD": [
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "controlling RRQR interface repaired",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "computed-singular-values-and-rank-revealing-factorizations-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "computed-schur-decompositions-and-nonnormal-spectra",
+      "path_to_LIN_SVD": [
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "computed-schur-decompositions-and-nonnormal-spectra-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "generalized-eigenvalue-pencils-and-qz-methods",
+      "path_to_LIN_SVD": [
+        "generalized-eigenvalue-pencils-and-qz-methods",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "generalized-eigenvalue-pencils-and-qz-methods-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "sylvester-and-lyapunov-matrix-equations",
+      "path_to_LIN_SVD": [
+        "sylvester-and-lyapunov-matrix-equations",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "sylvester-and-lyapunov-matrix-equations-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "verified-linear-systems-and-spectral-enclosures",
+      "path_to_LIN_SVD": [
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "verified-linear-systems-and-spectral-enclosures-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "interval-newton-krawczyk-and-polynomial-root-isolation",
+      "path_to_LIN_SVD": [
+        "interval-newton-krawczyk-and-polynomial-root-isolation",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "interval-newton-krawczyk-and-polynomial-root-isolation-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "periodic-orbit-shooting-collocation-and-floquet-error",
+      "path_to_LIN_SVD": [
+        "periodic-orbit-shooting-collocation-and-floquet-error",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "periodic-orbit-shooting-collocation-and-floquet-error-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "restarted-and-block-eigensolvers",
+      "path_to_LIN_SVD": [
+        "restarted-and-block-eigensolvers",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "restarted-and-block-eigensolvers-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "matrix-functions-and-scaling-squaring",
+      "path_to_LIN_SVD": [
+        "matrix-functions-and-scaling-squaring",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "matrix-functions-and-scaling-squaring-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "matrix-exponential-and-phi-function-actions",
+      "path_to_LIN_SVD": [
+        "matrix-exponential-and-phi-function-actions",
+        "matrix-functions-and-scaling-squaring",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "matrix-exponential-and-phi-function-actions-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "gaussian-quadrature",
+      "path_to_LIN_SVD": [
+        "gaussian-quadrature",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "gaussian-quadrature-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "variational-crimes-and-strang-lemmas",
+      "path_to_LIN_SVD": [
+        "variational-crimes-and-strang-lemmas",
+        "gaussian-quadrature",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "variational-crimes-and-strang-lemmas-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "spectral-collocation-and-galerkin-methods",
+      "path_to_LIN_SVD": [
+        "spectral-collocation-and-galerkin-methods",
+        "gaussian-quadrature",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "spectral-collocation-and-galerkin-methods-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "sparse-grid-cubature-and-mixed-regularity",
+      "path_to_LIN_SVD": [
+        "sparse-grid-cubature-and-mixed-regularity",
+        "gaussian-quadrature",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "sparse-grid-cubature-and-mixed-regularity-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "exponential-and-integrating-factor-integrators",
+      "path_to_LIN_SVD": [
+        "exponential-and-integrating-factor-integrators",
+        "matrix-exponential-and-phi-function-actions",
+        "matrix-functions-and-scaling-squaring",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "exponential-and-integrating-factor-integrators-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "deferred-correction-and-collocation-iterations",
+      "path_to_LIN_SVD": [
+        "deferred-correction-and-collocation-iterations",
+        "gaussian-quadrature",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "deferred-correction-and-collocation-iterations-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "path_to_LIN_SVD": [
+        "discrete-continuous-and-pde-adjoint-sensitivities",
+        "variational-crimes-and-strang-lemmas",
+        "gaussian-quadrature",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "discrete-continuous-and-pde-adjoint-sensitivities-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "imex-and-operator-splitting-methods",
+      "path_to_LIN_SVD": [
+        "imex-and-operator-splitting-methods",
+        "exponential-and-integrating-factor-integrators",
+        "matrix-exponential-and-phi-function-actions",
+        "matrix-functions-and-scaling-squaring",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "imex-and-operator-splitting-methods-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "polynomial-chaos-stochastic-collocation-and-galerkin-uq",
+      "path_to_LIN_SVD": [
+        "polynomial-chaos-stochastic-collocation-and-galerkin-uq",
+        "gaussian-quadrature",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "polynomial-chaos-stochastic-collocation-and-galerkin-uq-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "direct-transcription-and-numerical-ode-optimal-control",
+      "path_to_LIN_SVD": [
+        "direct-transcription-and-numerical-ode-optimal-control",
+        "discrete-continuous-and-pde-adjoint-sensitivities",
+        "variational-crimes-and-strang-lemmas",
+        "gaussian-quadrature",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "direct-transcription-and-numerical-ode-optimal-control-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "finite-element-pde-constrained-optimization",
+      "path_to_LIN_SVD": [
+        "finite-element-pde-constrained-optimization",
+        "variational-crimes-and-strang-lemmas",
+        "gaussian-quadrature",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "finite-element-pde-constrained-optimization-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "numerical-identifiability-and-optimal-experiment-design",
+      "path_to_LIN_SVD": [
+        "numerical-identifiability-and-optimal-experiment-design",
+        "discrete-continuous-and-pde-adjoint-sensitivities",
+        "variational-crimes-and-strang-lemmas",
+        "gaussian-quadrature",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "numerical-identifiability-and-optimal-experiment-design-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "simulation-gradient-estimation-and-simultaneous-perturbation",
+      "path_to_LIN_SVD": [
+        "simulation-gradient-estimation-and-simultaneous-perturbation",
+        "discrete-continuous-and-pde-adjoint-sensitivities",
+        "variational-crimes-and-strang-lemmas",
+        "gaussian-quadrature",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "simulation-gradient-estimation-and-simultaneous-perturbation-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "multirate-and-partitioned-time-integration",
+      "path_to_LIN_SVD": [
+        "multirate-and-partitioned-time-integration",
+        "imex-and-operator-splitting-methods",
+        "exponential-and-integrating-factor-integrators",
+        "matrix-exponential-and-phi-function-actions",
+        "matrix-functions-and-scaling-squaring",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "multirate-and-partitioned-time-integration-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "event-location-and-hybrid-trajectory-error",
+      "path_to_LIN_SVD": [
+        "event-location-and-hybrid-trajectory-error",
+        "interval-newton-krawczyk-and-polynomial-root-isolation",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "event-location-and-hybrid-trajectory-error-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "langevin-splittings-and-invariant-measure-error",
+      "path_to_LIN_SVD": [
+        "langevin-splittings-and-invariant-measure-error",
+        "imex-and-operator-splitting-methods",
+        "exponential-and-integrating-factor-integrators",
+        "matrix-exponential-and-phi-function-actions",
+        "matrix-functions-and-scaling-squaring",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "langevin-splittings-and-invariant-measure-error-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    },
+    {
+      "page": "global-sensitivity-anova-and-sobol-estimation",
+      "path_to_LIN_SVD": [
+        "global-sensitivity-anova-and-sobol-estimation",
+        "polynomial-chaos-stochastic-collocation-and-galerkin-uq",
+        "gaussian-quadrature",
+        "verified-linear-systems-and-spectral-enclosures",
+        "computed-schur-decompositions-and-nonnormal-spectra",
+        "computed-singular-values-and-rank-revealing-factorizations"
+      ],
+      "disposition": "unchanged",
+      "reason": "No actual item reference to these RRQR IDs outside batch17 at inspection; generic LIN-SVD page closure does not imply logical RRQR use. The preserved SVD/numerical interfaces and strong block bounds require no downstream mathematical change.",
+      "companion": {
+        "page": "global-sensitivity-anova-and-sobol-estimation-examples",
+        "disposition": "unchanged; nonlogical examples retain exact referenced interface"
+      }
+    }
+  ],
+  "exact_use_search": "Searched actual current items/library/run manifests for algorithm and RRQR result IDs; only batch17 items/page/manifest matched. Searched all four controlling track plans/audits for RRQR/strong-rank-revealing wording; LIN-CUR is the explicit future strong-RRQR importer, LIN-EIGITER has generic rank-revealing orthogonalization.",
+  "proposed_requires": {},
+  "residual_uncertainty": [
+    "Final drained RRQR bodies now checked and match the repaired controlling interface; root still owns current raw source/readiness/level/registry bindings. No additional RRQR mathematical carrier edit is required for this issue.",
+    "Exact arithmetic comparisons remain conditional on exact unitary factorization and successful combined-score tests; finite-precision score robustness/backward errors are not proved by this controlling prose repair.",
+    "Other numerical SVD/Givens/Householder escalations belong to their separately assigned owner; no acceptance of those proofs is conferred."
+  ],
+  "checks": "Focused mathematical/source/interface and consumer checks only; no tests, native gates, hashing, stamps, commits or runtime mutation performed.",
+  "final_drained_reconciliation": {
+    "kind": "final-source-reconciliation-of-existing-focused-repair; not-an-additional-review-cycle",
+    "drain_check": {
+      "dispatch": "1-scaffold:batch-17",
+      "endedAt": "2026-10-15T23:51:09.307Z",
+      "lastExitOk": true,
+      "nativeRefreshes": [],
+      "source": ".autopilot/numerical-optimization-dynamics-2026-10-16/state.json"
+    },
+    "source_read": "All five complete current Definition/Statement/Facts/Proof/Counterexample bodies reread after confirmed drain.",
+    "exact_resolved_item_ids": [
+      "alg-strong-rank-revealing-qr-with-finite-swaps",
+      "lem-strong-rrqr-column-swap-volume-ratio",
+      "thm-strong-rrqr-swap-rule-terminates",
+      "thm-strong-rrqr-singular-value-comparisons",
+      "cex-classical-column-pivoted-qr-is-not-strong-with-factor-one"
+    ],
+    "dispositions": [
+      {
+        "item": "alg-strong-rank-revealing-qr-with-finite-swaps",
+        "file": "items/alg-strong-rank-revealing-qr-with-finite-swaps.md",
+        "decision": "accepted-for-this-specific-owner-interface-reconciliation",
+        "reason": "Greedy CPQR initialization; full column rank, real/complex m>=n, 0<=k<n, f>=1, finite cap. Coefficient-first violating branch then residual-score branch; success only when all scores<=f.",
+        "carrier_edits_required": false,
+        "controlling_contract_match": true
+      },
+      {
+        "item": "lem-strong-rrqr-column-swap-volume-ratio",
+        "file": "items/lem-strong-rrqr-column-swap-volume-ratio.md",
+        "decision": "accepted-for-this-specific-owner-interface-reconciliation",
+        "reason": "Gram determinant rank-one update gives exact score as volume ratio. Row i of (R11 S)^-1 is row i of R11^-1 divided by Xij; continuity of the polynomial squared-volume identity handles Xij=0.",
+        "carrier_edits_required": false,
+        "controlling_contract_match": true
+      },
+      {
+        "item": "thm-strong-rrqr-swap-rule-terminates",
+        "file": "items/thm-strong-rrqr-swap-rule-terminates.md",
+        "decision": "accepted-for-this-specific-owner-interface-reconciliation",
+        "reason": "Every accepted swap has score>f>=1, so selected subset volume strictly increases and no subset recurs; at most binomial(n,k)-1 swaps. Success implies coefficient bound; smaller cap may return budget exhaustion.",
+        "carrier_edits_required": false,
+        "controlling_contract_match": true
+      },
+      {
+        "item": "thm-strong-rrqr-singular-value-comparisons",
+        "file": "items/thm-strong-rrqr-singular-value-comparisons.md",
+        "decision": "accepted-for-this-specific-owner-interface-reconciliation",
+        "reason": "Sum combined scores, set alpha=||R22||2/sigma_k(R11), use two block scalings and singular-value product inequality. This proves both stated comparisons with g=sqrt(1+f²k(n-k)), over real/complex fields, in exact arithmetic.",
+        "carrier_edits_required": false,
+        "controlling_contract_match": true
+      },
+      {
+        "item": "cex-classical-column-pivoted-qr-is-not-strong-with-factor-one",
+        "file": "items/cex-classical-column-pivoted-qr-is-not-strong-with-factor-one.md",
+        "decision": "accepted-for-this-specific-owner-interface-reconciliation",
+        "reason": "Kahan-style triangular 4x4 input c=1/2,s=sqrt(3)/2; equal residual norms and declared smallest-original-index tie produce identity permutation, then X1=-c(1+c)^2=-9/8. It refutes plain CPQR factor-one coefficient guarantee, not the combined-score procedure.",
+        "carrier_edits_required": false,
+        "controlling_contract_match": true
+      }
+    ],
+    "controlling_change_match": "Current algorithm uses exactly the combined score, coefficient-first violating selection and strict >f swap criterion written in the controlling LIN-SVD plan/audit. Volume and termination proofs use that score; singular comparisons use the summed score bound and two block factorizations; CPQR counterexample uses only the retained success coefficient consequence.",
+    "consumer_checks": "All actual RRQR-local direct and indirect uses are among the five read carriers. Their exact contracts remain as checked in first focused pass. Earlier planned LIN-CUR/generic SVD consumer dispositions remain valid.",
+    "mutations": "Updated this owner evidence and companion MD only. No drained item, shared batch17 manifest/page/proof-contract, readiness, hash, registry or runtime write.",
+    "readiness_status": "Five genuine source readiness records remain escalated and unchanged on disk; root owns their current-source binding and resolution. This evidence does not claim native ready records were written."
+  }
+}

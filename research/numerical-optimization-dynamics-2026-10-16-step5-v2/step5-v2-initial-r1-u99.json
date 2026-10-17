@@ -1,0 +1,291 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "99",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-chaos-orthonormal-tensor-basis",
+      "model": "gpt-6-luna",
+      "context_sha256": "2b004d28393ba97f1e61ba63ad666a5399c7ec4cb3c1775fe90524b11ec2a8af",
+      "outcome": "false_positive",
+      "reason": "The tensor product is an explicitly defined polynomial before L2 membership is proved. The justifying theorem uses that product formula and the univariate moment bounds, then Tonelli/Fubini to prove integrability and orthonormality; it never assumes the membership it establishes. This is the justified_by pattern expressly required by SCHEMA.md, not a circular argument.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-finite-support-makes-high-degree-moment-gram-singular",
+      "model": "gpt-6-luna",
+      "context_sha256": "245a63fcbb3a61cb14fe90b4a47762dd4b1cf8d1abd019dcd49c18a07744004a",
+      "outcome": "false_positive",
+      "reason": "The counterexample invokes only the definition of the moment Gram matrix and its positive-definiteness criterion, not an admissibility theorem. Testing the excluded two-point cutoff is exactly how the false sufficiency claim is refuted. Directly G=[[1,0,1],[0,1,0],[1,0,1]] has kernel vector (-1,0,1), while every absolute moment is finite. There is no premise that this cutoff is admissible.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-christoffel-weighted-least-squares-collocation",
+      "model": "gpt-6-luna",
+      "context_sha256": "786c247af4b919b2a07339521ecda7e5b39d7b69bddc9620f8a454512d6cde50",
+      "outcome": "false_positive",
+      "reason": "The lemma reads the explicit kernel formula from the algorithm and proves its normalization using orthonormality: integral K=N and K>=psi_0^2=1. It does not assume nu is normalized; its proof establishes this before using X~nu. This is the definition/justified_by pattern required by SCHEMA.md. Positive K and the accepted spectral interval make every division and G inverse well-defined, including Lambda={0}; M>=1 prevents an empty average.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-finite-chaos-orthogonal-projection",
+      "model": "gpt-6-luna",
+      "context_sha256": "5ff8a15a2204d202639c4c60a8704669bfb26c34ef6f655cdd4aff89f04a241e",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original Definition quantified over arbitrary finite Lambda although its only polynomial supplier constructs indices in the admissible degree box. For example a two-point marginal with admissible p=1 supplies no degree-two orthonormal polynomial. The opening sentence now explicitly requires the supplier box and its tensor family; all supported finite spaces, including the empty set, retain the same projection. Cauchy-Schwarz and null invariance make coefficients well-defined, and expanding <u-Pu,psi_beta>=c_beta-c_beta proves orthogonality without completeness or choice.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-chaos-quadrature-coefficient-error-split",
+      "model": "gpt-6-luna",
+      "context_sha256": "3b2152f78858bf2d4ed7cebf482ed1b09d2bdbee097917c5d160b6543f1929ad",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F2 originally cited residual orthogonality from a theorem whose Statement requires 0 in Lambda, but this theorem allows any finite supplied chaos space. That interface does not license step 1.1. The replacement proves <u-Pu,psi_beta>=c_beta-sum_alpha c_alpha delta_alpha,beta=0 directly from the coefficient definition and finite orthonormality, then uses the finite span. This preserves empty sets and sets without zero; the unchanged second step gives the exact squared-error split and the triangle bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-total-degree-versus-tensor-product-work",
+      "model": "gpt-6-luna",
+      "context_sha256": "6a82381142196deb81051bbef07e93e728d6af0927fb6d8f06962e70f79e03b6",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The Example and its verification correctly fix d=3, p=(2,2,2), s=2, and three Gaussian nodes per coordinate: the ten multi-indices are 0, e_j, 2e_j, and e_i+e_j, while the tensor box and quadrature have 27 entries. The unqualified display title suggests a general strict inequality, which fails already for d=1. This is a nonfatal presentation defect; the title now explicitly states the proved three-input degree-two counts. The Example and Verification remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-chaos-orthonormal-tensor-basis",
+      "disposition": "unaffected",
+      "post_sha256": "3a408fc2fdb3f00adce7c5bb7e9350a7b38bd6e9bdd31ce93d600d3f624b500b",
+      "review_context_sha256": "b626315fc8111e6b74d31683edc3d7e25a65ea264728c98e7986716672304fd2",
+      "reason": "The tensor product is an explicitly defined polynomial before L2 membership is proved. The justifying theorem uses that product formula and the univariate moment bounds, then Tonelli/Fubini to prove integrability and orthonormality; it never assumes the membership it establishes. This is the justified_by pattern expressly required by SCHEMA.md, not a circular argument. Empty index set gives the zero span; the constant factor is one and no completeness or choice premise is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-finite-support-makes-high-degree-moment-gram-singular",
+      "disposition": "unaffected",
+      "post_sha256": "bb3809ce865e7d901ccd4c6ee091de9bb4abac7e86a66ef8adf4d75838c8693d",
+      "review_context_sha256": "4770593cdc90b632bbfc8d056c8574d0c34a602d8bca28c298bb6534dd25eff7",
+      "reason": "The counterexample invokes only the definition of the moment Gram matrix and its positive-definiteness criterion, not an admissibility theorem. Testing the excluded two-point cutoff is exactly how the false sufficiency claim is refuted. Directly G=[[1,0,1],[0,1,0],[1,0,1]] has kernel vector (-1,0,1), while every absolute moment is finite. There is no premise that this cutoff is admissible.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-christoffel-weighted-least-squares-collocation",
+      "disposition": "unaffected",
+      "post_sha256": "66fce9d58c62ca7fb37076569036c523b222a9cdc04795e50a6ed350c9450a96",
+      "review_context_sha256": "c4cf533fc593bfed6a8c55663787ea9d88b94bb902c8220eae0198da322deebe",
+      "reason": "The lemma reads the explicit kernel formula from the algorithm and proves its normalization using orthonormality: integral K=N and K>=psi_0^2=1. It does not assume nu is normalized; its proof establishes this before using X~nu. This is the definition/justified_by pattern required by SCHEMA.md. Positive K and the accepted spectral interval make every division and G inverse well-defined, including Lambda={0}; M>=1 prevents an empty average.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-finite-chaos-orthogonal-projection",
+      "disposition": "repaired",
+      "post_sha256": "492e8e94f3cdbdd391b9f125cbb9ebea6baaacc6416b6a697d9dbf9b4681823f",
+      "review_context_sha256": "a45071c7ac9567651cdaba62e96420745933fe85258f7aea44c26070688c3bf1",
+      "reason": "The original Definition quantified over arbitrary finite Lambda although its only polynomial supplier constructs indices in the admissible degree box. For example a two-point marginal with admissible p=1 supplies no degree-two orthonormal polynomial. The opening sentence now explicitly requires the supplier box and its tensor family; all supported finite spaces, including the empty set, retain the same projection. Cauchy-Schwarz and null invariance make coefficients well-defined, and expanding <u-Pu,psi_beta>=c_beta-c_beta proves orthogonality without completeness or choice. The owning contract boundary evidence was synchronized; focused strict contract check passed (1/1). This is repair self-review, not independent judgment.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-chaos-quadrature-coefficient-error-split",
+      "disposition": "repaired",
+      "post_sha256": "d8c753294fb56baa2a7e8c1a014dacb8e35c91d7d7df2edc69b47c4ccf5b2854",
+      "review_context_sha256": "3df18521079455aa10503283d76996825e547d998c32d3e83debb2583c3aa9d4",
+      "reason": "F2 originally cited residual orthogonality from a theorem whose Statement requires 0 in Lambda, but this theorem allows any finite supplied chaos space. That interface does not license step 1.1. The replacement proves <u-Pu,psi_beta>=c_beta-sum_alpha c_alpha delta_alpha,beta=0 directly from the coefficient definition and finite orthonormality, then uses the finite span. This preserves empty sets and sets without zero; the unchanged second step gives the exact squared-error split and the triangle bound. Statement unchanged; only proof, fact citation, and the unused dependency were repaired. Strict contract, phase precheck, and render checks passed. This is repair self-review, not independent judgment.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-total-degree-versus-tensor-product-work",
+      "disposition": "repaired",
+      "post_sha256": "0214b8e020043334680dbb5d9742ebb9536dbc7c5aff761208c2847e3c807376",
+      "review_context_sha256": "18a850d37f8915ccfdfd4ae378deafcb30b8327a22b0d6d943535ae6eca79a1f",
+      "reason": "The Example and its verification correctly fix d=3, p=(2,2,2), s=2, and three Gaussian nodes per coordinate: the ten multi-indices are 0, e_j, 2e_j, and e_i+e_j, while the tensor box and quadrature have 27 entries. The unqualified display title suggests a general strict inequality, which fails already for d=1. This is a nonfatal presentation defect; the title now explicitly states the proved three-input degree-two counts. The Example and Verification remain unchanged. The uniform moment quadratic form is (c0+c2/3)^2+c1^2/3+4c2^2/45, positive off zero; the tensor-node theorem applies to the stated uniform rules. Owning manifest title synchronized.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-chaos-quadrature-coefficient-estimator",
+    "thm-finite-chaos-projection-parseval-and-moments",
+    "thm-chaos-quadrature-coefficient-error-split",
+    "thm-weighted-least-squares-stability-and-error"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "def-chaos-orthonormal-tensor-basis",
+      "outcome": "false_positive",
+      "status": "false-positive",
+      "reason": "The tensor product is an explicitly defined polynomial before L2 membership is proved. The justifying theorem uses that product formula and the univariate moment bounds, then Tonelli/Fubini to prove integrability and orthonormality; it never assumes the membership it establishes. This is the justified_by pattern expressly required by SCHEMA.md, not a circular argument.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "cex-finite-support-makes-high-degree-moment-gram-singular",
+      "outcome": "false_positive",
+      "status": "false-positive",
+      "reason": "The counterexample invokes only the definition of the moment Gram matrix and its positive-definiteness criterion, not an admissibility theorem. Testing the excluded two-point cutoff is exactly how the false sufficiency claim is refuted. Directly G=[[1,0,1],[0,1,0],[1,0,1]] has kernel vector (-1,0,1), while every absolute moment is finite. There is no premise that this cutoff is admissible.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "alg-christoffel-weighted-least-squares-collocation",
+      "outcome": "false_positive",
+      "status": "false-positive",
+      "reason": "The lemma reads the explicit kernel formula from the algorithm and proves its normalization using orthonormality: integral K=N and K>=psi_0^2=1. It does not assume nu is normalized; its proof establishes this before using X~nu. This is the definition/justified_by pattern required by SCHEMA.md. Positive K and the accepted spectral interval make every division and G inverse well-defined, including Lambda={0}; M>=1 prevents an empty average.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "def-finite-chaos-orthogonal-projection",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "reason": "The original Definition quantified over arbitrary finite Lambda although its only polynomial supplier constructs indices in the admissible degree box. For example a two-point marginal with admissible p=1 supplies no degree-two orthonormal polynomial. The opening sentence now explicitly requires the supplier box and its tensor family; all supported finite spaces, including the empty set, retain the same projection. Cauchy-Schwarz and null invariance make coefficients well-defined, and expanding <u-Pu,psi_beta>=c_beta-c_beta proves orthogonality without completeness or choice.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "thm-chaos-quadrature-coefficient-error-split",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "reason": "F2 originally cited residual orthogonality from a theorem whose Statement requires 0 in Lambda, but this theorem allows any finite supplied chaos space. That interface does not license step 1.1. The replacement proves <u-Pu,psi_beta>=c_beta-sum_alpha c_alpha delta_alpha,beta=0 directly from the coefficient definition and finite orthonormality, then uses the finite span. This preserves empty sets and sets without zero; the unchanged second step gives the exact squared-error split and the triangle bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "ex-total-degree-versus-tensor-product-work",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "The Example and its verification correctly fix d=3, p=(2,2,2), s=2, and three Gaussian nodes per coordinate: the ten multi-indices are 0, e_j, 2e_j, and e_i+e_j, while the tensor box and quadrature have 27 entries. The unqualified display title suggests a general strict inequality, which fails already for d=1. This is a nonfatal presentation defect; the title now explicitly states the proved three-input degree-two counts. The Example and Verification remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "route-frontier-owner-follow-up",
+      "id": "def-chaos-quadrature-coefficient-estimator",
+      "reason": "After the projection domain clarification, inspect the estimator opening clause \"Let $\\Lambda$ be a finite index set\". Its formulas require the supplied basis inside the admissible degree box. The final reference to exact coefficients imports that condition, but explicitly matching the opening domain avoids the same undefined out-of-box reading. This unassigned frontier item was not edited; exact affected use and minimal proposed repair appear in downstream_reviews.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "route-unassigned-reader-concern",
+      "id": "def-finite-input-bochner-l2-space",
+      "status": "owner-follow-up",
+      "reason": "The current Definition integrates (U(y),W(y))_V on the uncompleted trace-Borel space, while its published strong-measurability supplier allows arbitrary values on a measurable null set. For uniform law on [0,1], a Borel null Cantor set C and a non-Borel subset A of C give U=2*1_A-1_C, W=1: both are strongly measurable with measurable squared norms, but UW is non-Borel. Thus the literal scalar integral needs a measurable-version convention or an explicitly completed space. This unassigned draft and its theorem are routed to the owner; no edits or assigned adjudication claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "route-unassigned-reader-concern",
+      "id": "lem-affine-form-integrable-on-bochner-l2",
+      "status": "owner-follow-up",
+      "reason": "The Statement says the scalar form functions \"are measurable and integrable\", and step 1.1 says \"Defining the scalar function arbitrarily on the measurable exceptional null set gives a measurable representative.\" On the explicitly uncompleted input space, arbitrary null-set modifications need not be Borel. With a=1, nonzero v in H0^1(0,1), U=(2*1_A-1_C)v and W=v for the preceding null-set example, a_y(U,W)=(2*1_A-1_C)||v||^2 is non-Borel. A measurable version exists but does not imply literal measurability of arbitrary representatives. Route to the owner to align this claim with the chosen Bochner integration convention; no unassigned edit performed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "action": "no-update",
+      "reason": "No published item was edited and the changed projection Definition has no published direct dependency/reference consumer in the inspected graph. The two trace-Borel concerns concern unassigned draft items and are routed to the frontier owner, not recorded as published repairs.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": [
+    "All six exact rejected tuples adjudicated in assigned dependency order. Three false positives were not edited; two fatal findings and one nonfatal title finding were repaired. No new items, judges, stamps, central certificates, round state, or published items were written. All mathematical evidence is from local complete relevant arguments and elementary finite calculations familiar to this reviewer; no external-source consultation is claimed.",
+    "Projection Definition adds only the admissible-degree-box and supplied-family qualification. Its own contract boundary evidence is synchronized. The four direct item consumers are inventoried with exact uses in downstream_reviews; the home-page finite-chaos-space prose remains sound. No direct outside-frontier consumer was found. The estimator opening-domain clarification is routed to its ordinary frontier owner; it was not edited.",
+    "Quadrature theorem Statement unchanged. Replaced the inapplicable Parseval citation with a direct residual calculation; synchronized only its owning proof-contract citations/derivation and its manifest dependency list. The example changes only its title and owning manifest title. Shared metadata edits used acquire/reread/edit/check/release.",
+    "Review-contexts ran immediately after each completed review and before any next item edit. Captured per-item guards and contexts are recorded in reviews; earlier hashes were not refreshed after later supplier changes. These repair reviews do not claim independent judgment.",
+    "Final focused checks, all exit 0: strict proof-contract for the six assigned IDs (6/6, zero errors/warnings); phase precheck for six files (three proof-bearing passes, three not-applicable, zero failures); rendercheck for six files (zero errors/warnings); manifest-deps for the owning 30-item manifest (zero errors); final proof-layout batched all three changed item paths (three items, four steps, zero defects). No item edits followed proof-layout.",
+    "The two unassigned Bochner measurability concerns from the batch digest remain routed to the owner. Their current defining clauses and strongly-measurable supplier were inspected; the incomplete trace-Borel issue is concrete and does not enter these scalar finite-chaos repairs. No published item defect or published consumer repair was found in this assignment."
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "def-finite-chaos-orthogonal-projection",
+      "id": "def-chaos-quadrature-coefficient-estimator",
+      "path": "items/def-chaos-quadrature-coefficient-estimator.md",
+      "affected_use": "Definition: \"Let $\\Lambda$ be a finite index set\" followed by \"The exact coefficients $c_\\alpha$ and projection $P_\\Lambda u$ are those of [[def-finite-chaos-orthogonal-projection]].\"",
+      "disposition": "owner_follow_up",
+      "reason": "The estimator must use the supplier tensor family inside the admissible box. Its exact-coefficient clause imports that domain, but its own opening index-set clause should be made explicit to avoid the same out-of-box reading. Route this unassigned frontier item to its ordinary owner; no coefficients or estimates on supported indices change.",
+      "minimality": "Clarify the opening sentence to require a finite subset of the admissible degree box with the supplied tensor basis; retain every estimator formula and accuracy disclaimer."
+    },
+    {
+      "supplier": "def-finite-chaos-orthogonal-projection",
+      "id": "thm-finite-chaos-projection-parseval-and-moments",
+      "path": "items/thm-finite-chaos-projection-parseval-and-moments.md",
+      "affected_use": "Statement imports the basis \"as in [[def-chaos-orthonormal-tensor-basis]]\"; F1 defines the coefficients and steps 1.1-3.1 expand their pairings.",
+      "disposition": "unaffected",
+      "reason": "The explicit supplier-basis premise already restricts all indices to the box. Residual orthogonality and the constant-mode formulas are unchanged; no Statement change or further propagation is necessary."
+    },
+    {
+      "supplier": "def-finite-chaos-orthogonal-projection",
+      "id": "thm-chaos-quadrature-coefficient-error-split",
+      "path": "items/thm-chaos-quadrature-coefficient-error-split.md",
+      "affected_use": "Statement uses \"the exact and quadrature coefficients from [[def-finite-chaos-orthogonal-projection]]\"; F4 uses the integral pairing in the orthogonal norm expansion.",
+      "disposition": "assigned_review",
+      "reason": "Using coefficients from the corrected definition imports its box domain. The existing orthonormal-family Given remains valid. Separately repair the unjustified zero-membership citation by direct finite expansion, preserving the Statement."
+    },
+    {
+      "supplier": "def-finite-chaos-orthogonal-projection",
+      "id": "thm-weighted-least-squares-stability-and-error",
+      "path": "items/thm-weighted-least-squares-stability-and-error.md",
+      "affected_use": "F3 and step 2.1 use the projection coefficient vector c and residual samples r_i=u(X_i)-P_Lambda u(X_i); step 3.1 uses residual orthogonality.",
+      "disposition": "unaffected",
+      "reason": "The accepted algorithm already requires the supplied real tensor basis and hence indices in its admissible box, with zero included. All projection and Parseval hypotheses still hold; no mathematical repair is necessary."
+    }
+  ],
+  "gate_resolutions": []
+}

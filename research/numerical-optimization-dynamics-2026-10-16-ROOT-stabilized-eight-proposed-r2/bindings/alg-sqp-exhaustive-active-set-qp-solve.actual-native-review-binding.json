@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "id": "alg-sqp-exhaustive-active-set-qp-solve",
+  "obligation": "post-reader:85:alg-sqp-exhaustive-active-set-qp-solve",
+  "session_id": "01a1453a-4023-7610-bb50-420ea714ce09",
+  "accepted_decision_sha256": "9a5a3fce89e9ff9011955dc7fa69dc0127d32c9747ef7999a6fc9fcd437ead65",
+  "native_result": {
+    "path": "research/numerical-optimization-dynamics-2026-10-16-dispatch/alpha-3a-batch-85.result.json",
+    "sha256": "a813c41c22ce17538ace4868afe75d87b83138cd5264b372ae36c0df0469ba14"
+  },
+  "native_report": {
+    "path": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-85-3a.md",
+    "sha256": "adaab88413aa1bdd786c0ad5eacae0f9239897629714c118e19789d1c89e0a80"
+  },
+  "mathematical_acceptance_source": "actual-native-review",
+  "root_binding_only": true,
+  "report_excerpt": "`alg-sqp-exhaustive-active-set-qp-solve`: inspected the complete archived before-source and complete current Definition. ROOT source receipt records raw `5587da778bc3ea7c2afe8f7aa3e0896e731457b8ac413ff39fa2ac654512561b` -> `326819334633a4c314f932ec46f5770ebbbb16dd30af1b052bf4cd3072f25644`. Archived d_i and the selected RHS really were unspecified; this is a fatal well-formedness defect, not a false positive because current source was repaired. Independently accept the current amendment: Aeq=Dh(x), beq=-h(x), G=Dg(x), d=g(x), c=gradient f(x), A_J=(Aeq_E;G_J), b_J=(beq_E;-d_J), with increasing original indices and empty blocks. The actual prerequisite Definition explicitly requires symmetric positive-definite B, retained in full. Equality reduction is equivalent or inconsistent; independent stacked rows and positive reduced curvature give nonsingular exact KKT solves. The full zero-extended equality and inequality multipliers satisfy stationarity and complementarity; unselected entries are zero, and tie-breaking still chooses the first bit mask among least-objective candidates. Neither numerical-failure nor infeasibility is reinterpreted.",
+  "source_raw_sha256": "326819334633a4c314f932ec46f5770ebbbb16dd30af1b052bf4cd3072f25644",
+  "proof_steps": [],
+  "review_basis": "fresh-specific-native-complete-Definition-review",
+  "interface_section": "Definition",
+  "interface_text": "Input an SQP subproblem from [[def-sqp-linearized-quadratic-subproblem]],\nusing exact real arithmetic. Let $q$ and $m$ be the numbers of equality and\ninequality constraints. Put $A^{\\rm eq}=Dh(x)$, $b^{\\rm eq}=-h(x)$,\n$G=Dg(x)$, $d=g(x)$, and $c=\\nabla f(x)$, so $G_i=Dg_i(x)$ and\n$d_i=g_i(x)$ for $1\\le i\\le m$. First reduce the linearized equality system\n$A^{\\rm eq}p=b^{\\rm eq}$: test consistency, and, if consistent, retain the\nlexicographically first maximal independent set $E\\subseteq\\{1,\\ldots,q\\}$\nof equality row indices with their right-hand sides. If it is inconsistent,\nreturn `QP-infeasible`. Within each retained row set, use increasing original\nindices; an empty row set contributes no rows or right-hand-side entries.\n\nFor each subset $J\\subseteq\\{1,\\ldots,m\\}$ in increasing bit-mask order:\n\n1. Stack the equality rows $(A^{\\rm eq})_E$ and the inequality rows $G_J$,\n   in that order. If these rows are dependent, skip $J$.\n2. Treat the selected inequalities as equalities $G_ip=-d_i$ and solve\n   $$\\begin{bmatrix}B&A_J^T\\\\A_J&0\\end{bmatrix} \\binom{p}{\\eta}=\\binom{-c}{b_J},$$\n   where $A_J=\\binom{(A^{\\rm eq})_E}{G_J}$ and\n   $b_J=\\binom{(b^{\\rm eq})_E}{-d_J}$. Thus the equality entries of $b_J$\n   are $-h_a(x)$ for $a\\in E$, followed by $-g_i(x)$ for $i\\in J$,\n   in the declared row order. The multiplier vector $\\eta$ is stored in this\n   same order. The KKT matrix is\n   nonsingular by [[lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature]].\n3. Discard the candidate if any linearized inequality is violated or any\n   selected inequality multiplier is negative. Otherwise store $(p,\\eta,J)$.\n\nIf no candidate is stored, return `QP-infeasible`. Otherwise return the\nstored candidate with least quadratic objective, breaking an exact tie by the\nleast subset bit mask, as `solution(p, nu, lambda, E, J)`. Here $\\nu$ is\nthe full equality-multiplier vector, initialized to zero and filled from the\nequality components of $\\eta$ at indices $E$; $\\lambda$ is the full\ninequality-multiplier vector, initialized to zero and filled from the selected\ncomponents at indices $J$. A finite-precision\nimplementation that cannot complete a rank test or solve must return\n`numerical-failure`; this definition's exact-arithmetic branch has no such\nfailure. It requires no\nfeasible initial step and specifies no pivoting rule for an iterative working\nset solver.\n"
+}

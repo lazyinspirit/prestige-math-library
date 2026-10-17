@@ -1,0 +1,427 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": 22,
+  "dependency_level": 1,
+  "scheduling_input_sha256": "ca41fcdd6d4a40fbd61e4921a8bfdd410bd704a05c937a5f709843ed28d2e97d",
+  "pages": [
+    {
+      "page": "nonlinear-boundary-value-solvers",
+      "kind": "A",
+      "order": 2328,
+      "sources": [
+        {
+          "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Summer 2011 lecture notes",
+          "kind": "course-notes",
+          "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+          "locator": "Complete 107-page notes. Ch. I §I.1.3 (printed p. 9/PDF p. 10); §§I.3.1–I.3.3 (printed pp. 17–19); §§I.4.1–I.4.3 (printed pp. 19–24/PDF pp. 20–25).",
+          "reading_verification": "The complete author-hosted 107-page PDF and the relevant derivations were inspected. §I.1.3 states the variational sensitivity result; §§I.3.1–I.3.3 distinguish BVP and branch existence; §I.4.1 gives the shooting residual and Jacobian; §I.4.2 gives an unstable shooting example; §I.4.3 gives multiple-shooting residuals and the block Jacobian. The local sensitivity, conditioning and error proofs in this batch are authored in full and do not rely on an unstated source proof.",
+          "contents": [
+            {
+              "name": "BVP formulation and shooting residual",
+              "locator": "§§I.3.1, I.4.1",
+              "disposition": "included",
+              "item": "def-nonlinear-two-point-bvp-and-boundary-residual",
+              "reason": "The source supplies the established endpoint formulation; the carrier fixes dimensions and admissible domains explicitly."
+            },
+            {
+              "name": "Initial-data sensitivity and variational equation",
+              "locator": "§I.1.3",
+              "disposition": "included",
+              "item": "lem-c1-ode-flow-on-common-tube",
+              "reason": "The source states the result; the carrier provides the complete common-tube difference-quotient and Gronwall proof."
+            },
+            {
+              "name": "Single-shooting residual, Jacobian and Newton formulation",
+              "locator": "§I.4.1",
+              "disposition": "included",
+              "item": "prop-shooting-residual-derivative",
+              "reason": "The displayed formula motivates the statement; the carrier proves the chain-rule identity for exact and approximate endpoint maps."
+            },
+            {
+              "name": "Multiple-shooting continuity equations and block Jacobian",
+              "locator": "§I.4.3",
+              "disposition": "included",
+              "item": "prop-multiple-shooting-residual-block-jacobian",
+              "reason": "The displayed block structure is reproduced with the endpoint blocks and dimension count proved locally."
+            },
+            {
+              "name": "Multiple-shooting residual equations",
+              "locator": "§I.4.3",
+              "disposition": "included",
+              "item": "alg-multiple-shooting-for-nonlinear-bvps",
+              "reason": "The procedure uses the sourced continuity residual form and explicitly separates approximate segment evaluation from exact solution claims."
+            },
+            {
+              "name": "Shooting endpoint amplification example",
+              "locator": "§I.4.2",
+              "disposition": "inline",
+              "item": "ex-unstable-single-shooting-amplifies-error",
+              "reason": "The source supports the instability warning; the shifted scalar model and amplification factor are verified directly in the example."
+            },
+            {
+              "name": "Exact IVP endpoint and variational evaluator context",
+              "locator": "§I.4.1, printed pp. 19–21 / PDF pp. 20–22",
+              "disposition": "inline",
+              "item": "def-certified-ivp-approximation-and-sensitivity-interface",
+              "reason": "The notes evaluate IVP endpoints and sensitivities but do not give this certified uniform-error contract; the carrier defines the interface and makes no claim that a named integrator satisfies it."
+            },
+            {
+              "name": "Linearized BVP conditioning and branch setup",
+              "locator": "§§I.3.1–I.3.3, printed pp. 17–19",
+              "disposition": "inline",
+              "item": "def-linearized-two-point-bvp-operator-and-conditioning",
+              "reason": "The notes provide BVP and branch context; this carrier fixes the function spaces, norms, linear operator and bounded-inverse convention used by the local proof."
+            },
+            {
+              "name": "Multiple-shooting residual zero correspondence",
+              "locator": "§I.4.3, printed pp. 22–24 / PDF pp. 23–25",
+              "disposition": "inline",
+              "item": "prop-multiple-shooting-residual-zero-iff-bvp-solution",
+              "reason": "The notes give segment continuity residuals; the carrier proves the exact zero-to-solution equivalence by joining segments and applying IVP uniqueness."
+            },
+            {
+              "name": "BVP linearization and numerical solver context",
+              "locator": "§§I.3.1–I.4.3, printed pp. 17–24",
+              "disposition": "inline",
+              "item": "lem-midpoint-bvp-discrete-linearized-inverse",
+              "reason": "The notes do not prove the midpoint transfer-matrix inverse used here; the complete local proof derives it from the declared continuous bounded inverse."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "at": "2026-10-15T23:41:52.091Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-15T23:41:52.091Z",
+            "bytes": 1086988,
+            "sha256_16": "4975047c8d4ebc08",
+            "kind": "pdf",
+            "pages": 107
+          }
+        },
+        {
+          "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10: Shooting methods",
+          "kind": "textbook",
+          "url": "https://fncbook.com/shooting/",
+          "locator": "Full-text Chapter 10 web chapter, §§10.2.1–10.2.2, Algorithm 10.2.1 and the decaying-mode example.",
+          "reading_verification": "The complete chapter page was opened and inspected, including its residual construction, algorithm, endpoint sensitivity calculation, and explicit instability example. Its implementation text is treated as method context; all local regularity and error claims in the carriers are independently proved.",
+          "contents": [
+            {
+              "name": "Shooting as a terminal residual root problem",
+              "locator": "§10.2.1, Algorithm 10.2.1",
+              "disposition": "included",
+              "item": "alg-single-shooting-for-nonlinear-bvps",
+              "reason": "The algorithm adopts the terminal residual composition while adding an explicit evaluator contract and finite-budget failure statuses."
+            },
+            {
+              "name": "Endpoint sensitivity amplification in a decaying-mode BVP",
+              "locator": "§10.2.2, equations (10.2.3)–(10.2.6)",
+              "disposition": "included",
+              "item": "ex-unstable-single-shooting-amplifies-error",
+              "reason": "The example directly verifies the exponential endpoint amplification and bounded exact BVP trajectory."
+            },
+            {
+              "name": "Shooting sensitivity, residual tolerance and integration error context",
+              "locator": "§§10.2.1–10.2.2, Algorithm 10.2.1 and decaying-mode example",
+              "disposition": "inline",
+              "item": "thm-shooting-residual-error-budget",
+              "reason": "The source motivates separate IVP sensitivity and root residual effects; the local inverse and Gronwall estimates are proved fully in the carrier."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://fncbook.com/shooting/",
+              "at": "2026-10-15T23:41:52.795Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-15T23:41:52.795Z",
+            "bytes": 683671,
+            "sha256_16": "15cd3d9c3e920268",
+            "kind": "html",
+            "text_chars": 20812
+          },
+          "source_kind_detail": "Original publication format: book-chapter; normalized to the coverage schema without changing source identity or reading extent."
+        },
+        {
+          "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10: Nonlinear BVP residuals",
+          "kind": "textbook",
+          "url": "https://fncbook.com/nonlinear/",
+          "locator": "Full-text Chapter 10 web chapter, §10.5.1, equations (10.5.1)–(10.5.4), and §10.5.2 examples.",
+          "reading_verification": "The complete chapter page was opened and inspected. It presents finite nonlinear boundary-value residual systems and examples of poor initial guesses; it does not prove midpoint collocation convergence. No convergence theorem is imported from this source.",
+          "contents": [
+            {
+              "name": "Finite-dimensional nonlinear BVP residual systems",
+              "locator": "§10.5.1",
+              "disposition": "inline",
+              "item": "def-midpoint-collocation-residual-for-bvps",
+              "reason": "The source supports finite residual-system context; the carrier defines a different normalized implicit-midpoint scheme."
+            },
+            {
+              "name": "Local nonlinear solve limitations",
+              "locator": "§10.5.2",
+              "disposition": "inline",
+              "item": "thm-midpoint-collocation-local-branch-and-error-budget",
+              "reason": "The source illustrates initialization limitations only; the local branch and error theorem is proved from its stated inverse and smoothness assumptions."
+            },
+            {
+              "name": "Finite-dimensional BVP solver context for midpoint collocation",
+              "locator": "§10.5.1, equations (10.5.1)–(10.5.4)",
+              "disposition": "inline",
+              "item": "alg-midpoint-collocation-for-nonlinear-bvps",
+              "reason": "The source uses a different finite-difference residual. The carrier defines the normalized midpoint residual and finite-budget Newton procedure independently."
+            },
+            {
+              "name": "Nonlinear residual equations and boundary row context",
+              "locator": "§10.5.1, equations (10.5.1)–(10.5.4)",
+              "disposition": "inline",
+              "item": "prop-midpoint-residual-zero-is-collocation",
+              "reason": "The source has a different discretization; the equivalence for normalized midpoint rows is proved directly by multiplying and dividing by h>0."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://fncbook.com/nonlinear/",
+              "at": "2026-10-15T23:41:53.265Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-15T23:41:53.265Z",
+            "bytes": 1007005,
+            "sha256_16": "14013b926a128802",
+            "kind": "html",
+            "text_chars": 28038
+          },
+          "source_kind_detail": "Original publication format: book-chapter; normalized to the coverage schema without changing source identity or reading extent."
+        },
+        {
+          "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10: Two-point BVPs",
+          "kind": "textbook",
+          "url": "https://fncbook.com/tpbvp/",
+          "locator": "Full-text Chapter 10 web chapter, §10.1.1, Definition 10.1.1 and Example 10.1.1.",
+          "reading_verification": "The complete chapter page was opened and inspected for the two-point formulation and its example with multiple BVP solutions. The example is used only as context; the scalar midpoint branches are checked directly.",
+          "contents": [
+            {
+              "name": "Two-point boundary-value formulation and multiple solutions",
+              "locator": "§10.1.1, Example 10.1.1",
+              "disposition": "inline",
+              "item": "prop-shooting-residual-zero-iff-bvp-solution",
+              "reason": "The source gives formulation context; the exact residual/solution equivalence follows from the local IVP uniqueness proof."
+            },
+            {
+              "name": "Existence of multiple BVP branches",
+              "locator": "§10.1.1, Example 10.1.1",
+              "disposition": "inline",
+              "item": "ex-midpoint-collocation-has-two-branches",
+              "reason": "The example verifies its own two exact and discrete branches and simple Jacobians without importing the source example."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://fncbook.com/tpbvp/",
+              "at": "2026-10-15T23:41:53.924Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-15T23:41:53.924Z",
+            "bytes": 822634,
+            "sha256_16": "27f5e09a1e354c67",
+            "kind": "html",
+            "text_chars": 20317
+          },
+          "source_kind_detail": "Original publication format: book-chapter; normalized to the coverage schema without changing source identity or reading extent."
+        },
+        {
+          "title": "E. Hairer and G. Wanner, author-hosted numerical-analysis course notes, Chapitre VI: Méthodes Itératives – Equations Non Linéaires",
+          "kind": "lecture-notes",
+          "url": "https://www.unige.ch/~hairer/poly/chap6.pdf",
+          "locator": "Complete chapter PDF; §VI.3, printed pp. 138–141 / PDF pp. 5–7, exact-Jacobian Newton iteration and local theorem.",
+          "reading_verification": "The available chapter PDF and the complete §VI.3 theorem argument were inspected. It provides a local exact-Jacobian Newton result; the current Newton supplier statement and proof in batch 3 are the actual in-run contract used here.",
+          "contents": [
+            {
+              "name": "Exact-Jacobian Newton correction and local convergence",
+              "locator": "§VI.3, printed pp. 138–140 / PDF pp. 5–6",
+              "disposition": "included",
+              "item": "cor-local-newton-convergence-for-shooting-bvp-residual",
+              "reason": "The corollary applies the actual current-run Newton theorem under its stated simple-root and Lipschitz-Jacobian hypotheses."
+            },
+            {
+              "name": "Local Newton convergence on a discrete collocation branch",
+              "locator": "§VI.3, printed pp. 138–140 / PDF pp. 5–6",
+              "disposition": "included",
+              "item": "cor-local-newton-convergence-for-midpoint-bvp-collocation",
+              "reason": "The corollary applies the current Newton supplier to the fixed finite-dimensional residual and explicitly allows its basin radius to depend on mesh width."
+            },
+            {
+              "name": "Local Newton basin conditions used to interpret singular-start example",
+              "locator": "§VI.3, printed pp. 138–140 / PDF pp. 5–6",
+              "disposition": "inline",
+              "item": "ex-newton-shooting-fails-from-singular-start",
+              "reason": "The source supplies only local simple-root Newton context; the singular start and residual derivative are computed exactly in the example."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://www.unige.ch/~hairer/poly/chap6.pdf",
+              "at": "2026-10-15T23:42:00.100Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-15T23:42:00.100Z",
+            "bytes": 1757271,
+            "sha256_16": "2627cdf6f6ca61f3",
+            "kind": "pdf",
+            "pages": 14
+          },
+          "source_kind_detail": "The actual14-page author-hosted course chapter is identified by its first-page heading; it is not Solving Ordinary Differential Equations II. Existing native §VI.3 reading verification is retained; this metadata correction claims no new whole-text reading."
+        }
+      ]
+    }
+  ],
+  "historical_source_history": [
+    {
+      "source": "Ascher, Mattheij, and Russell, Numerical Solution of Boundary Value Problems for Ordinary Differential Equations",
+      "url": "https://external.dandelon.com/download/attachments/dandelon/ids/DE004E07F38339D438A04C125794800445DF3.pdf",
+      "outcome": "The retrieved PDF contained only 11 pages of front matter and table of contents, not the required BVP chapters; it was not used as evidence.",
+      "searches": [
+        {
+          "query": "Search for full-text alternatives to the incomplete Ascher candidate (exact search string not retained)",
+          "outcome": "Located and inspected the complete Verfürth notes and FNC chapter pages; each local claim was proved in its carrier."
+        }
+      ],
+      "affected_items": [
+        "lem-c1-ode-flow-on-common-tube",
+        "alg-single-shooting-for-nonlinear-bvps",
+        "alg-multiple-shooting-for-nonlinear-bvps",
+        "lem-midpoint-bvp-discrete-linearized-inverse",
+        "thm-midpoint-collocation-local-branch-and-error-budget"
+      ],
+      "disposition": "not-relied-on; alternative full-text treatments inspected; mathematical claims proved locally",
+      "item_arguments": [
+        {
+          "item": "lem-c1-ode-flow-on-common-tube",
+          "argument": "Prove the derivative with common-tube difference quotients, a variational integral equation, and Gronwall; the incomplete candidate source is not needed.",
+          "deps": [
+            "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+            "thm-picard-lindelof-local-existence-and-uniqueness",
+            "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+            "thm-gronwall-integral-inequality",
+            "thm-heine-cantor-metric",
+            "thm-norm-inequality-for-the-vector-valued-integral",
+            "thm-mean-value-inequality",
+            "thm-chain-rule-for-total-derivatives",
+            "def-c-one-map-and-local-inverse",
+            "def-total-derivative-in-euclidean-space",
+            "def-jacobian-matrix-and-gradient"
+          ]
+        },
+        {
+          "item": "alg-single-shooting-for-nonlinear-bvps",
+          "argument": "Compose the boundary map with the certified approximate endpoint map, differentiate that numerical residual, and apply finite-budget Newton with explicit statuses.",
+          "deps": [
+            "def-nonlinear-two-point-bvp-and-boundary-residual",
+            "def-certified-ivp-approximation-and-sensitivity-interface",
+            "prop-shooting-residual-derivative",
+            "alg-finite-budget-newton-for-vector-residuals",
+            "alg-newton-correction-for-vector-residuals"
+          ]
+        },
+        {
+          "item": "alg-multiple-shooting-for-nonlinear-bvps",
+          "argument": "Assemble segment endpoint mismatch rows and the boundary row, then use the verified sparse block Jacobian and finite-budget residual procedure.",
+          "deps": [
+            "def-nonlinear-two-point-bvp-and-boundary-residual",
+            "def-certified-ivp-approximation-and-sensitivity-interface",
+            "prop-multiple-shooting-residual-block-jacobian",
+            "alg-finite-budget-newton-for-vector-residuals",
+            "alg-newton-correction-for-vector-residuals"
+          ]
+        },
+        {
+          "item": "lem-midpoint-bvp-discrete-linearized-inverse",
+          "argument": "Derive the transfer recurrence for the normalized midpoint Jacobian, prove transfer convergence to the continuous fundamental matrix, and use the bounded continuous BVP inverse.",
+          "deps": [
+            "def-midpoint-collocation-residual-for-bvps",
+            "def-linearized-two-point-bvp-operator-and-conditioning",
+            "thm-picard-lindelof-local-existence-and-uniqueness",
+            "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+            "thm-gronwall-integral-inequality",
+            "thm-chain-rule-for-total-derivatives",
+            "thm-euclidean-space-complete"
+          ]
+        },
+        {
+          "item": "thm-midpoint-collocation-local-branch-and-error-budget",
+          "argument": "Use the exact-sample O(h^2) residual, uniform discrete inverse, uniform Hessian bound, and a contraction on a fixed ball.",
+          "deps": [
+            "def-midpoint-collocation-residual-for-bvps",
+            "def-linearized-two-point-bvp-operator-and-conditioning",
+            "lem-midpoint-bvp-discrete-linearized-inverse",
+            "thm-banach-fixed-point",
+            "thm-euclidean-space-complete",
+            "thm-multivariable-taylor-formula-with-lagrange-remainder"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "SIAM publisher copy of de Boor and Swartz, Collocation at Gaussian Points",
+      "url": "https://epubs.siam.org/doi/pdf/10.1137/0710052",
+      "outcome": "The publisher PDF URL returned HTTP 403; ResearchGate displayed a full author-uploaded article through the web reader, but the direct source fetch also returned HTTP 403. A UNT search result was only a bibliography entry, not the article. The source was removed from item citations because no local claim depends on it; the midpoint theorem is fully proved from its stated hypotheses and the full Verfürth/FNC sources remain the independent treatments.",
+      "searches": [
+        {
+          "query": "Search for an author-hosted full text after the publisher returned 403 (exact search string not retained)",
+          "outcome": "Located and inspected the complete author-uploaded article at https://www.researchgate.net/publication/238747998_Collocation_at_Gaussian_Points."
+        }
+      ],
+      "affected_items": [
+        "def-midpoint-collocation-residual-for-bvps",
+        "lem-midpoint-bvp-discrete-linearized-inverse",
+        "thm-midpoint-collocation-local-branch-and-error-budget"
+      ],
+      "disposition": "recovered alternative; the Gaussian spline theorem is contextual only and is not imported",
+      "item_arguments": [
+        {
+          "item": "def-midpoint-collocation-residual-for-bvps",
+          "argument": "Define the normalized midpoint row and boundary row explicitly; prove zero equivalence algebraically.",
+          "deps": [
+            "def-nonlinear-two-point-bvp-and-boundary-residual"
+          ]
+        },
+        {
+          "item": "lem-midpoint-bvp-discrete-linearized-inverse",
+          "argument": "Derive the transfer recurrence for the normalized midpoint Jacobian, prove transfer convergence to the continuous fundamental matrix, and use the bounded continuous BVP inverse.",
+          "deps": [
+            "def-midpoint-collocation-residual-for-bvps",
+            "def-linearized-two-point-bvp-operator-and-conditioning",
+            "thm-picard-lindelof-local-existence-and-uniqueness",
+            "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+            "thm-gronwall-integral-inequality",
+            "thm-chain-rule-for-total-derivatives",
+            "thm-euclidean-space-complete"
+          ]
+        },
+        {
+          "item": "thm-midpoint-collocation-local-branch-and-error-budget",
+          "argument": "Use the exact-sample O(h^2) residual, uniform discrete inverse, uniform Hessian bound, and a contraction on a fixed ball.",
+          "deps": [
+            "def-midpoint-collocation-residual-for-bvps",
+            "def-linearized-two-point-bvp-operator-and-conditioning",
+            "lem-midpoint-bvp-discrete-linearized-inverse",
+            "thm-banach-fixed-point",
+            "thm-euclidean-space-complete",
+            "thm-multivariable-taylor-formula-with-lagrange-remainder"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -10,19 +10,18 @@ provenance:
 deps: [def-total-variation-of-a-signed-or-complex-measure, thm-jordan-decomposition-for-signed-measures]
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
-  precheck: pass
+  repair: research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-published-reader80/application/repair.json
 sources:
   references:
     - title: "Richard F. Bass, Real Analysis for Graduate Students, Exercises 12.6 and 12.7"
       url: "https://draft-r-bass-scholar.media.uconn.edu/wp-content/uploads/sites/3926/2024/12/real-analysis-for-graduate-students_version-50_accessible.pdf"
     - title: "John K. Hunter, Measure Theory, sentence after Theorem 6.21"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 ---
 
 ## Statement
 
-Let $\nu$ be a signed measure on $(X,\mathcal A)$), with Jordan decomposition
+Let $\nu$ be a signed measure on $(X,\mathcal A)$, with Jordan decomposition
 $\nu=\nu^+-\nu^-$. Then for every measurable $E$:
 
 1. $$|\nu|(E)=\nu^+(E)+\nu^-(E);$$

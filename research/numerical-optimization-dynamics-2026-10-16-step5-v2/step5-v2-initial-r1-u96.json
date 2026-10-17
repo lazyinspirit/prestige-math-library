@@ -1,0 +1,274 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "96",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-parameterized-parabolic-variational-problem",
+      "model": "gpt-6-luna",
+      "context_sha256": "592232b72c291a7f3f3a451dd5dc76d7fa087b4addf4a4a418ff5856f8cdb782",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Differentiability in state and parameter does not ensure a finite running cost: L(t,v,theta)=1/t on (0,T) gives an infinite integral even for the zero state. Require measurable L1 running cost along every specified state; retain the original state class and make no derivative-interchange claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-elliptic-fe-gradient-error-in-energy-norms",
+      "model": "gpt-6-luna",
+      "context_sha256": "8e1a6590318b20c9db6958efc16a7ca70230491b341b644c1102a4278f1f874a",
+      "outcome": "false_positive",
+      "reason": "The Statement imports the setting of thm-elliptic-adjoint-reduced-gradient, which imports def-parameterized-elliptic-variational-problem: V is explicitly real and every form is real bilinear. Thus a-dagger(v,w)=a(w,v) is bilinear, has the same boundedness and diagonal coercivity constants, and satisfies the real cases of Cea/Strang. The inverse-difference calculation and load/form subtraction give every displayed gradient-error term. The proposed complex counterexample is outside the claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-implicit-rk-stage-parameter-sensitivity",
+      "model": "gpt-6-luna",
+      "context_sha256": "37f40aa0c4d76dbb9ea045ee7afedd5052afe0a68d75b5a3314dcb57bb88320b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The output coefficient 1_b is undefined and inconsistent with the supplier, which uses tableau weights b_i. This is a nonfatal notation defect: the displayed derivative already has the correct b^T factor and the residual/IFT argument is valid. Replace both erroneous coefficients by b^T and explicitly identify b as the tableau-weight vector. No estimate or branch hypothesis changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-parameterized-parabolic-variational-problem",
+      "disposition": "repaired",
+      "post_sha256": "58b816ffd0132004cb90ee2c5e2822259dd7af16513d8f17c5ba1b68817bab5c",
+      "review_context_sha256": "d03e323bbc0e75ad6c44eba721ed4107da2116cf56a38a3a97edaedf7f91fb53",
+      "reason": "The real evolution triple supplies W and H traces. Finite-valued terminal cost plus measurable L1 running cost now defines a finite real objective; no differentiability of the integral or state existence is inferred. No new prerequisite or choice assumption is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-elliptic-fe-gradient-error-in-energy-norms",
+      "disposition": "unaffected",
+      "post_sha256": "dcc3e03f31d2636a9f0c2af23f8605aeb1aa74ca6995aec193f28fff38cf7ed2",
+      "review_context_sha256": "dd82583f16061007a9360711882143db51d536279a1d8bb7ed4a8fc7d29a7cd4",
+      "reason": "The Statement imports the setting of thm-elliptic-adjoint-reduced-gradient, which imports def-parameterized-elliptic-variational-problem: V is explicitly real and every form is real bilinear. Thus a-dagger(v,w)=a(w,v) is bilinear, has the same boundedness and diagonal coercivity constants, and satisfies the real cases of Cea/Strang. The inverse-difference calculation and load/form subtraction give every displayed gradient-error term. The proposed complex counterexample is outside the claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-implicit-rk-stage-parameter-sensitivity",
+      "disposition": "repaired",
+      "post_sha256": "1daea99f1f6b96a935cad80aad062e452e68ea07f6526a50fcd484bea919f4a3",
+      "review_context_sha256": "336faeb6ec883ec9a42f74820f6954871a7c279163db3f57a7df3c8aa32f16b3",
+      "reason": "The contraction supplier gives the selected exact root and the stage-Jacobian supplier gives invertibility. For R(theta,Y)=G(Y,u(theta),theta), chain rule gives R_theta=G_u Du+G_theta, so the implicit-function supplier yields DY. The output now uses the same tableau b^T as its derivative; chain rule supplies all three F terms. No stopped-solver derivative is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-parabolic-adjoint-gradient-sensitivity",
+    "ex-implicit-stiff-decay-parameter-fit"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-parameterized-parabolic-variational-problem",
+      "locus": "definition",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "reason": "Differentiability in state and parameter does not ensure a finite running cost: L(t,v,theta)=1/t on (0,T) gives an infinite integral even for the zero state. Require measurable L1 running cost along every specified state; retain the original state class and make no derivative-interchange claim.",
+      "correction": "Added measurability and L1 integrability along every specified state, with a finite real terminal objective; retained the state equation and all existence disclaimers.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "thm-elliptic-fe-gradient-error-in-energy-norms",
+      "locus": "proof-step",
+      "step": "1.1",
+      "status": "false_positive",
+      "reason": "The Statement imports the setting of thm-elliptic-adjoint-reduced-gradient, which imports def-parameterized-elliptic-variational-problem: V is explicitly real and every form is real bilinear. Thus a-dagger(v,w)=a(w,v) is bilinear, has the same boundedness and diagonal coercivity constants, and satisfies the real cases of Cea/Strang. The inverse-difference calculation and load/form subtraction give every displayed gradient-error term. The proposed complex counterexample is outside the claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-implicit-rk-stage-parameter-sensitivity",
+      "locus": "statement",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "The output coefficient 1_b is undefined and inconsistent with the supplier, which uses tableau weights b_i. This is a nonfatal notation defect: the displayed derivative already has the correct b^T factor and the residual/IFT argument is valid. Replace both erroneous coefficients by b^T and explicitly identify b as the tableau-weight vector. No estimate or branch hypothesis changes.",
+      "correction": "Replaced undefined 1_b coefficient with tableau b in the update and proof 2.1; the derivative formula is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-parabolic-adjoint-gradient-sensitivity",
+      "locus": "proof-step",
+      "step": "1.2",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "open",
+      "route": "frontier owner via ordinary impact work; item is draft and outside unit 96 assignment",
+      "reason": "The fixed-test almost-everywhere adjoint equation permits an exceptional null set depending on v; without bounded forms or a simultaneous V-star equation it cannot be tested with the varying w_eta(t). The new objective-integrability condition does not repair this separate defect.",
+      "affected_use": "Proof 1.2: By the adjoint equation with v=w_eta and the linearized state equation with v=p, the two a_theta(t;w_eta,p) terms cancel.",
+      "invalidated_claim": "The displayed adjoint reduced-gradient formula may give 2 when the actual directional derivative is 1.",
+      "evidence": "Verified the digest witness in ZFC: V=H=real ell2, T=1, w(t)=(1,t,t^2/2!,...). Finite Vandermonde matrices make {w(t)} linearly independent. Extend this set to a Hamel basis and let lambda_t extract the coefficient of w(t). For each fixed v, lambda_t(v) is nonzero at finitely many times, hence zero almost everywhere. Set a(t;x,y)=lambda_t(x)*(e0,y), u_theta=theta*w, f_theta=theta*(w_prime+e0), u0_theta=theta*e0, L=0 and phi(x,theta)=(e0,x). State and tangent equations hold for all tests at every time, while p=e0 satisfies the fixed-test adjoint equation almost everywhere and its terminal condition. All relevant state/forcing derivatives lie in the required energy classes and the objective is finite. The true j=theta has derivative 1, while the claimed formula gives (e0,e0)+integral (w_prime+e0,e0)=2.",
+      "minimality": "The consumer owner must supply a valid hypothesis licensing the time-dependent test substitutions, with exact prerequisites; no consumer edit is licensed to this unit. Do not infer boundedness from the definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "def-parameterized-parabolic-variational-problem",
+      "thm-elliptic-fe-gradient-error-in-energy-norms",
+      "thm-implicit-rk-stage-parameter-sensitivity"
+    ],
+    "checks": [
+      {
+        "items": [
+          "def-parameterized-parabolic-variational-problem"
+        ],
+        "precheck": "exit 0; definition not applicable, zero proofs checked",
+        "rendercheck": "exit 0; one file, no errors or warnings",
+        "proof_contract": "exit 0; strict selected contract passes"
+      },
+      {
+        "items": [
+          "thm-elliptic-fe-gradient-error-in-energy-norms"
+        ],
+        "proof_contract": "exit 0; strict selected contract passes"
+      },
+      {
+        "items": [
+          "thm-elliptic-fe-gradient-error-in-energy-norms",
+          "thm-implicit-rk-stage-parameter-sensitivity"
+        ],
+        "precheck": "exit 0; two proofs pass without automatic repair",
+        "rendercheck": "exit 0; two files, zero errors and warnings"
+      },
+      {
+        "items": [
+          "thm-implicit-rk-stage-parameter-sensitivity"
+        ],
+        "proof_contract": "exit 0; strict selected contract passes before derivation mirror cleanup"
+      },
+      {
+        "items": [
+          "def-parameterized-parabolic-variational-problem",
+          "thm-implicit-rk-stage-parameter-sensitivity"
+        ],
+        "command": "node tools/proof-layout.mjs items/def-parameterized-parabolic-variational-problem.md items/thm-implicit-rk-stage-parameter-sensitivity.md",
+        "result": "exit 0; 2 items, 3 steps, 0 defects"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-96.proof-contracts.json --strict --items def-parameterized-parabolic-variational-problem,thm-elliptic-fe-gradient-error-in-energy-norms,thm-implicit-rk-stage-parameter-sensitivity,ex-implicit-stiff-decay-parameter-fit --json",
+        "result": "exit 0; all four selected contracts pass, zero errors and warnings"
+      }
+    ],
+    "downstream_examination": [
+      {
+        "supplier": "def-parameterized-parabolic-variational-problem",
+        "id": "thm-parabolic-adjoint-gradient-sensitivity",
+        "path": "items/thm-parabolic-adjoint-gradient-sensitivity.md",
+        "affected_use": "Statement imports the real evolution triple; F1 imports the variational state and reduced objective; proof 1.1 differentiates its running-cost integral.",
+        "disposition": "unaffected_by_integrability_repair",
+        "reason": "Its own Statement already assumes measurable running cost and a common integrable majorant justifying differentiation, so the added finite-cost condition is compatible. Independent fixed-test cancellation concern is routed separately below; no consumer source edited.",
+        "source_excerpt": "[F1] The parameterized parabolic state and reduced objective use the variational equation on $W(0,T;V)$ with $H$ traces ([[def-parameterized-parabolic-variational-problem]])."
+      },
+      {
+        "supplier": "thm-implicit-rk-stage-parameter-sensitivity",
+        "id": "ex-implicit-stiff-decay-parameter-fit",
+        "path": "items/ex-implicit-stiff-decay-parameter-fit.md",
+        "affected_use": "F2 invokes the exact selected-branch derivative; Verification 1.1 checks its contraction and nonsingularity hypotheses and 2.1 computes Y_k from (1+hk)Y-u0=0.",
+        "disposition": "mathematically unaffected; F2 contract quotation mechanically refreshed",
+        "reason": "Backward Euler has A=b=1, so the state update equals Y. The corrected general output coefficient leaves Y_k=-h*u0/(1+hk)^2 and J_k=-h*u0^2/(1+hk)^3 unchanged. The contract F2 quotes the entire old supplier Statement and requires a mechanical quotation refresh.",
+        "source_excerpt": "2.1 Differentiate the residual $(1+hk)Y-u_0=0$: $(1+hk)Y_k+hY=0$, so [F2] gives $Y_k=-hu_0/(1+hk)^2$. Therefore $J_k=YY_k=-hu_0^2/(1+hk)^3$. [F2, step 1.1, algebra] \u220e "
+      }
+    ],
+    "page_examination": [
+      {
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/discrete-continuous-and-pde-adjoint-sensitivities.md",
+        "affected_use": "Lists the definition and describes the parabolic formula as conditional on differentiable state and adjoint solutions.",
+        "disposition": "unaffected",
+        "reason": "The page makes no claim of finite objective from differentiability alone."
+      },
+      {
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/discrete-continuous-and-pde-adjoint-sensitivities.md",
+        "affected_use": "Lists the implicit-stage sensitivity theorem and limits it to a selected nonsingular algebraic branch.",
+        "disposition": "unaffected",
+        "reason": "No printed coefficient formula or stopped-solver claim in the page changes."
+      }
+    ],
+    "sources_consulted": [
+      "items/def-parabolic-evolution-triple-and-energy-space.md, complete Definition",
+      "items/thm-parabolic-adjoint-gradient-sensitivity.md, complete Statement, Facts and Proof",
+      "items/def-parameterized-elliptic-variational-problem.md, complete Definition; V real and a real bilinear",
+      "items/thm-elliptic-adjoint-reduced-gradient.md, complete item",
+      "items/thm-cea-quasi-optimality-for-conforming-galerkin-approximations.md, Statement and Facts",
+      "items/thm-first-strang-lemma-for-conforming-perturbed-galerkin.md, Statement and Facts",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-96.proof-contracts.json, all three assigned contracts",
+      "items/def-implicit-runge-kutta-stage-equations.md, complete Definition; update uses b_i",
+      "items/lem-implicit-rk-stage-jacobian-nonsingular-on-branch.md, complete item",
+      "items/thm-implicit-differentiation-forward-and-adjoint-formulas.md, complete item",
+      "items/ex-implicit-stiff-decay-parameter-fit.md, complete example and Verification",
+      "items/lem-small-step-implicit-rk-branch-and-residual-error.md, complete Statement via exact contract quote"
+    ],
+    "next_action": "Hand off to engine: direct-consumer frontier reviews and the independently confirmed parabolic-adjoint defect remain owner work; no judgment, certificate, or cycle was launched.",
+    "published_consumer_ledger": "No published direct dependency/reference consumers discovered for either changed interface; no published-ledger entry or published repair is proposed.",
+    "unresolved_assigned_obligations": [],
+    "interface_changes": [
+      {
+        "id": "def-parameterized-parabolic-variational-problem",
+        "section": "Definition",
+        "before_clause": "When a state is specified, a differentiable terminal and running objective defines its reduced objective without an integrability condition.",
+        "after_clause": "The terminal cost is finite-valued and the running cost must be measurable and in L1 along each specified state; no derivative interchange is claimed.",
+        "direct_consumers": [
+          "thm-parabolic-adjoint-gradient-sensitivity"
+        ]
+      },
+      {
+        "id": "thm-implicit-rk-stage-parameter-sensitivity",
+        "section": "Statement",
+        "before_clause": "Update coefficient is undefined \\mathbf1^T_b; displayed derivative uses b^T.",
+        "after_clause": "Both update and derivative use b^T, explicitly identified as the tableau weights.",
+        "direct_consumers": [
+          "ex-implicit-stiff-decay-parameter-fit"
+        ]
+      }
+    ],
+    "independent_review_claimed": false,
+    "repair_complete": true,
+    "metadata_repairs": [
+      {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-96.proof-contracts.json",
+        "changes": [
+          "RK step-2.1 derivation claim now uses b^T",
+          "Backward Euler example F2 quotation matches the repaired supplier Statement exactly"
+        ],
+        "lock": "Acquired step5-shared-write-lock as step5-v2-initial-r1-u96; reread current file, edited only these fields, strict check passed, released lock."
+      }
+    ],
+    "source_reading_scope": "Only repository items, contracts, page and assigned task/digest were consulted. No external-source reading or independent review of these repairs is claimed.",
+    "new_items_required": false,
+    "closure_status": "Unit repairs complete. This report does not close Step 5: one assigned fatal item was confirmed this round, and the separate parabolic-adjoint defect remains for its frontier owner."
+  }
+}

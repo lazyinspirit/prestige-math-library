@@ -1,0 +1,3 @@
+<!-- local-published-repair:numerical-optimization-dynamics-2026-10-16:step4-nearest-point:begin -->
+numerical-optimization-dynamics-2026-10-16: proof-only recorded local published repair of thm-nearest-point-in-a-nonempty-closed-convex-set; choose strictly positive enclosing radius and justify closedness/continuity. Statement and uniqueness proof unchanged. Current canonical hash 6377dc539eda6aef9285c2206f21e99ceea0397d56fa50b0ef7d5c5dc7f7947a. Receipt research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-nearest-point-repair/repair.json; focused root review research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-nearest-point-repair/root-review.md.
+<!-- local-published-repair:numerical-optimization-dynamics-2026-10-16:step4-nearest-point:end -->

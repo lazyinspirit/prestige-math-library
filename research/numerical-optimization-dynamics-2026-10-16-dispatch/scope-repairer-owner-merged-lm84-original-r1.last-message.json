@@ -1,0 +1,105 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "label": "owner-merged-lm84-original-r1",
+  "owner_cycle": 1,
+  "decision": "hold",
+  "reason": "The dispatch requires root confirmation that no conflicting batch-84/source writer exists. That confirmation remains pending; the approved proposal has not been applied.",
+  "guarded_edit": {
+    "path": "items/alg-safeguarded-levenberg-marquardt.md",
+    "canonical_equals_approved_before": true,
+    "canonical_equals_approved_proposal": false,
+    "write_performed": false
+  },
+  "findings": [
+    "The approved proposal rebuilds the augmented matrix, report and solve inside every attempt at its current damping.",
+    "It validates every remaining candidate before computing a ratio and preserves both existing zero-step exits.",
+    "It checks rejection multiplications and boundary division before changing damping or accepting a trial.",
+    "The exact damping formulas and exact-solve convergence claims remain compatible."
+  ],
+  "consumer_dispositions": [
+    {
+      "id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "decision": "compatible_with_proposal",
+      "evidence": "Exact supplied-factorization and computed-candidate routes remain separate; conditional backward-stability premises remain explicit."
+    },
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "decision": "hold_pending_application",
+      "evidence": "The complete approved proposal resolves the flagged control-flow and damping-range branches; canonical source still contains the before version."
+    },
+    {
+      "id": "thm-gauss-newton-local-linear-contraction",
+      "decision": "compatible_with_proposal",
+      "evidence": "Proof 1.1–3.1 uses the exact full-rank GN step and its stated singular-value, Lipschitz and curvature bounds."
+    },
+    {
+      "id": "thm-gauss-newton-zero-residual-quadratic-convergence",
+      "decision": "compatible_with_proposal",
+      "evidence": "Proof 2.1–4.1 uses exact least-squares minimality and the residual remainder; no computed convergence rate is asserted."
+    },
+    {
+      "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+      "decision": "compatible_with_proposal",
+      "evidence": "Proof 4.1 requires a fresh exact step after each damping increase. The proposal supplies that execution order; the large-damping accepted step is interior."
+    },
+    {
+      "id": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "decision": "compatible_with_proposal",
+      "evidence": "Its exact-arithmetic assumptions and Proof 2.1–4.1 retain the damping bound, sufficient decrease and stationarity telescope."
+    },
+    {
+      "id": "ex-exponential-kinetics-gauss-newton-fit",
+      "decision": "compatible_with_proposal",
+      "evidence": "The full-rank exact Jacobian and zero residual give the unique exact step zero."
+    },
+    {
+      "id": "ex-rank-deficient-identifiability-and-lm-step",
+      "decision": "compatible_with_proposal",
+      "evidence": "The exact step is (5/11,5/11), with ratio 1 and norm 5√2/11<1; the boundary damping branch is unused and damping stays 1."
+    },
+    {
+      "id": "ex-nonzero-residual-gauss-newton-is-only-linear",
+      "decision": "compatible_with_proposal",
+      "evidence": "The current corrected middle coefficient 1/2 in Verification 1.1 is present. The exact update, contraction constants and limiting linear factor remain valid."
+    }
+  ],
+  "page_dispositions": [
+    {
+      "id": "gauss-newton-and-levenberg-marquardt-methods",
+      "decision": "compatible_with_proposal",
+      "evidence": "The summary retains conditional computed stability, finite failure statuses and exact-solve convergence qualifications."
+    },
+    {
+      "id": "gauss-newton-and-levenberg-marquardt-methods-examples",
+      "decision": "compatible_with_proposal",
+      "evidence": "The page describes exact examples without asserting general numerical success."
+    }
+  ],
+  "reference_discovery": {
+    "original_and_current_definition_closure": "Nine assigned items; no aliases or outside references to their item IDs found.",
+    "additional_topic_mentions": "The IRGNM sources define separate exact Hilbert-space procedures. The identifiability remark uses the unchanged gradient/Hessian theorem. No additional repair was identified."
+  },
+  "original1_joint_issue": {
+    "proposal_disposition": "The approved merge resolves rebuilding at current damping and preserves exhaustive zero-candidate exits before prediction.",
+    "applied_resolution": false,
+    "independent_86_consumer_obligation_completed": false
+  },
+  "local_checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-safeguarded-levenberg-marquardt.md --json",
+      "executed": false,
+      "exit_code": null,
+      "output": "Pending guarded source application."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/alg-safeguarded-levenberg-marquardt.md",
+      "executed": false,
+      "exit_code": null,
+      "output": "Pending guarded source application."
+    }
+  ],
+  "remaining_obligations": [
+    "Obtain the dispatch-required root confirmation of no conflicting writer.",
+    "Immediately recheck canonical LM against the approved before carrier, apply only approved proposal bytes, verify byte equality, and run the two authorized local checks."
+  ]
+}

@@ -1,0 +1,653 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-anchored-irgnm-with-discrepancy-stopping",
+    "supplier": "lem-hilbert-tikhonov-normal-operator-invertible",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/lem-hilbert-tikhonov-normal-operator-invertible.md",
+      "items/alg-anchored-irgnm-with-discrepancy-stopping.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/alg-anchored-irgnm-with-discrepancy-stopping.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume the Axiom of Countable Choice. Let $X$ and $Y$ be real or complex\nHilbert spaces and let $A:X\\to Y$ be bounded, with Hilbert adjoint $A^*$. For\n$\\lambda>0$, define\n\n$$B_\\lambda:=A^*A+\\lambda I_X.$$\n\nThen $B_\\lambda:X\\to X$ is bijective and\n\n$$\\|B_\\lambda^{-1}\\|\\le\\frac1\\lambda.$$\n",
+    "consumer_use_anchors": "\n## Definition\n\nAssume Countable Choice. Let $X,Y$ be Hilbert spaces over the same field\n$\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $U\\subseteq X$ be open, and let\n$F:U\\to Y$ be continuously Fréchet differentiable over $\\mathbb F$: for each\n$x\\in U$, $F'(x)$ is bounded $\\mathbb F$-linear, the map $x\\mapsto F'(x)$ is\noperator-norm continuous, and\n$$\\lim_{\\substack{h\\to0,\\ h\\ne0\\\\x+h\\in U}} \\frac{\\|F(x+h)-F(x)-F'(x)h\\|}{\\|h\\|}=0,$$\nwhere $h$ ranges over increments in $\\mathbb F$. In the complex case the\nderivative is complex-linear and the limit uses complex increments.\nInputs are anchor and\ninitial point $x_0\\in U$, datum $y_\\delta$, noise bound $\\delta\\ge0$,\ndiscrepancy factor $\\tau>1$, finite update cap $N\\in\\mathbb N_0$,\n$\\alpha_0>0$ and $q\\in(0,1)$. For $k=0,\\ldots,N$, first check $x_k\\in U$;\notherwise return $(x_k,k,\\texttt{domain-failure})$. The output of every return\nis a tuple $(x_k,k,\\text{status})$. Use an exact-call interface with these\noutcomes: an evaluation call returns either $\\texttt{ok}(v_k)$ with the exact\nvalue $v_k=F(x_k)$ or $\\texttt{failure}$; a normal-solve call returns either\n$\\texttt{ok}(s_k)$ with the exact solution of the displayed equation or\n$\\texttt{unverified}$. The interface never returns an incorrect value. If the\nevaluation call returns $\\texttt{failure}$, return\n$(x_k,k,\\texttt{evaluation-failure})$. If the evaluation returns\n$\\texttt{ok}(v_k)$ and $\\|v_k-y_\\delta\\|\\le\\tau\\delta$, return\n$(x_k,k,\\texttt{discrepancy})$. If $k=N$, return\n$(x_k,k,\\texttt{budget-exhausted})$. Otherwise set\n$A_k=F'(x_k)$, $\\alpha_k=\\alpha_0q^k$, and call the normal solver on\n$$(A_k^*A_k+\\alpha_k I)s_k=A_k^*(y_\\delta-v_k)+\\alpha_k(x_0-x_k),$$\nwhose exact solution exists uniquely by [[lem-hilbert-tikhonov-normal-operator-invertible]]. If the solve call returns\n$\\texttt{unverified}$, return $(x_k,k,\\texttt{solve-unverified})$; otherwise\nset $x_{k+1}=x_k+s_k$. The mathematical evaluation and solve succeed because\n$F$ is defined on $U$ and the shifted normal equation has a unique solution;\nthe failure outcomes record only a finite implementation's inability to\nreturn the exact value or certify the exact solve. No success or convergence\nclaim is attached to these failure statuses.\n\nThe mathematical extended recurrence means the same exact updates with the discrepancy and finite-cap tests suppressed, for as long as the states lie in $U$. It is used only for comparison in proofs. A finite actual run follows its prefix and stops at its first test crossing. This anchored update is distinct from the retained unanchored Levenberg-Marquardt step; its extra term is $\\alpha_k(x_0-x_k)$.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/67"
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-iteratively-regularized-gauss-newton-step",
+    "supplier": "lem-hilbert-tikhonov-normal-operator-invertible",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/lem-hilbert-tikhonov-normal-operator-invertible.md",
+      "items/alg-iteratively-regularized-gauss-newton-step.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/alg-iteratively-regularized-gauss-newton-step.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume the Axiom of Countable Choice. Let $X$ and $Y$ be real or complex\nHilbert spaces and let $A:X\\to Y$ be bounded, with Hilbert adjoint $A^*$. For\n$\\lambda>0$, define\n\n$$B_\\lambda:=A^*A+\\lambda I_X.$$\n\nThen $B_\\lambda:X\\to X$ is bijective and\n\n$$\\|B_\\lambda^{-1}\\|\\le\\frac1\\lambda.$$\n",
+    "consumer_use_anchors": "\n## Definition\n\nAssume Countable Choice, as required for the Hilbert-space adjoints in the\nnormal equation.\n\nLet $X,Y$ be Hilbert spaces over the same field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$,\nlet $U\\subseteq X$ be open, and let $F:U\\to Y$ be continuously Fréchet\ndifferentiable over $\\mathbb F$. In the complex case, each $F'(x)$ is a bounded\ncomplex-linear operator and the Fréchet remainder is measured over complex\nincrements, so\n$$\\lim_{\\substack{h\\to0,\\ h\\ne0\\\\x+h\\in U}} \\frac{\\|F(x+h)-F(x)-F'(x)h\\|}{\\|h\\|}=0.$$\nInputs are\n$x_0\\in U$, noisy data $y_\\delta\\in Y$, a bound $\\delta\\ge0$, a discrepancy\nfactor $\\tau>1$, a finite budget $N\\in\\mathbb N$, and parameters\n$\\alpha_0>0$ and $q\\in(0,1)$. At iteration $k$, if $x_k\\notin U$ return\n$(x_k,k,\\text{domain-failure})$. Otherwise put $A_k=F'(x_k)$ and\n$\\alpha_k=\\alpha_0q^k$. Before computing an update, if\n$\\|F(x_k)-y_\\delta\\|\\le\\tau\\delta$, return\n$(x_k,k,\\text{discrepancy})$. If $k=N$, return\n$(x_k,k,\\text{budget-exhausted})$.\n\nFor $k<N$, solve the unique Hilbert-space Tikhonov normal equation\n$$\\bigl(A_k^*A_k+\\alpha_k I_X\\bigr)s_k=A_k^*(y_\\delta-F(x_k))$$\nand set $x_{k+1}=x_k+s_k$. The shifted normal operator is invertible by\n[[lem-hilbert-tikhonov-normal-operator-invertible]]. If the returned iterate\nleaves $U$, the next call returns domain-failure. The procedure asserts no\nconvergence theorem; its prescribed step is the unanchored Levenberg–Marquardt\nform used in the assigned contract.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/53"
+  },
+  {
+    "kind": "item",
+    "consumer": "cor-landweber-discrepancy-stopped-convergence-rate",
+    "supplier": "def-compact-spectral-filter-and-qualification",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Its independent local step3.1 constant typo is a separate reported gap, so this edge verification grants no whole-proof acceptance. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/def-compact-spectral-filter-and-qualification.md",
+      "items/cor-landweber-discrepancy-stopped-convergence-rate.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/cor-landweber-discrepancy-stopped-convergence-rate.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nAssume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded. Put $S=A^*A$. By\n[[lem-compact-gram-operator-is-positive-and-has-kernel]], $S$ is compact,\npositive, and self-adjoint, with $\\ker S=\\ker A$. Let $\\Sigma$ be the set of\nnonzero eigenvalues of $S$ and $P_t$ the orthogonal projection onto the\neigenspace of $t\\in\\Sigma$; let $P_0$ be the orthogonal projection onto\n$\\ker S$. The compact spectral multiplier of a bounded scalar function\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is\n$$q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx,$$\nwhere the finite-subset net converges in norm by\n[[lem-compact-spectral-multiplier-is-well-defined]]. For $\\nu>0$, define\n$S^\\nu$ by the multiplier $q_\\nu(0)=0$ and $q_\\nu(t)=t^\\nu$ for $t>0$.\nThis multiplier is bounded: if $t\\in\\Sigma$ and $u\\in E_t$ is a unit vector,\nthen $0<t=\\|Su\\|\\le\\|S\\|$, so $|q_\\nu(t)|\\le\\|S\\|^\\nu$.\n\nFor $\\lambda>0$, the Tikhonov filter and residual filter are\n$$g_\\lambda(t)=\\frac1{t+\\lambda},\\qquad r_\\lambda(t)=1-tg_\\lambda(t)=\\frac{\\lambda}{t+\\lambda}.$$\nThe Tikhonov solution for data $y_\\delta\\in Y$ is\n$$x_\\lambda^\\delta=g_\\lambda(S)A^*y_\\delta =(A^*A+\\lambda I_X)^{-1}A^*y_\\delta.$$\nIndeed, the spectral decomposition gives $S+\\lambda I_X$ the multiplier\n$t+\\lambda$ on each $E_t$ and $\\lambda$ on $\\ker S$, so $g_\\lambda(S)$ is\nits inverse, whose existence is also supplied by\n[[lem-hilbert-tikhonov-normal-operator-invertible]].\nThe source condition of order $\\nu>0$ and radius $R\\ge0$ means that\n$x^\\dagger=S^\\nu w$ for some $w\\in X$ with $\\|w\\|\\le R$. A family of\nfilters $g_\\alpha$ with residual filters $r_\\alpha(t)=1-tg_\\alpha(t)$ has\nqualification at least $p>0$ when, for each $0<\\nu\\le p$, some finite\nconstant $C_\\nu\\ge0$ satisfies\n$$t^\\nu|r_\\alpha(t)|\\le C_\\nu\\alpha^\\nu \\quad\\text{for every }\\alpha>0\\text{ and }t\\in\\Sigma.$$\nWhen $\\Sigma=\\varnothing$, this condition is vacuous.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume Countable Choice and the hypotheses of\n[[thm-landweber-source-and-noise-error-bounds]]. Let\n$x^\\dagger=T^\\nu w$ with $0<\\nu\\le1$ and $R=\\|w\\|\\ge0$. Fix $\\tau>1$ and\n$\\delta>0$ with $\\|y_\\delta-Ax^\\dagger\\|\\le\\delta$. Let $k_\\delta$ be the\nfirst index on the associated infinite mathematical path satisfying\n$\\|Ax_{k_\\delta}^\\delta-y_\\delta\\|\\le\\tau\\delta$, where $x_k^\\delta$ is\nthe corresponding noisy-data path.\nIf a finite budget is used, assume it is at least the upper bound $K_\\delta$\nconstructed in the proof when $R>0$. If $R=0$, the initial iterate is the\nfirst crossing and any finite budget suffices. For all sufficiently small\n$\\delta$,\n$$\\|x_{k_\\delta}^\\delta-x^\\dagger\\| \\le C_{\\nu,A,\\omega,\\tau}R^{1/(2\\nu+1)}\\delta^{2\\nu/(2\\nu+1)}.$$\nThe conclusion is conditional on an actual discrepancy crossing; a budget\nexhaustion status is inconclusive.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/62"
+  },
+  {
+    "kind": "item",
+    "consumer": "cor-landweber-discrepancy-stopped-convergence-rate",
+    "supplier": "lem-compact-gram-operator-is-positive-and-has-kernel",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Its independent local step3.1 constant typo is a separate reported gap, so this edge verification grants no whole-proof acceptance. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/lem-compact-gram-operator-is-positive-and-has-kernel.md",
+      "items/cor-landweber-discrepancy-stopped-convergence-rate.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/cor-landweber-discrepancy-stopped-convergence-rate.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded, with adjoint $A^*:Y\\to X$. Then both\n$A^*A:X\\to X$ and $AA^*:Y\\to Y$ are compact, self-adjoint and positive, and\n$$\\ker(A^*A)=\\ker A,\\qquad \\ker(AA^*)=\\ker A^*.$$\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume Countable Choice and the hypotheses of\n[[thm-landweber-source-and-noise-error-bounds]]. Let\n$x^\\dagger=T^\\nu w$ with $0<\\nu\\le1$ and $R=\\|w\\|\\ge0$. Fix $\\tau>1$ and\n$\\delta>0$ with $\\|y_\\delta-Ax^\\dagger\\|\\le\\delta$. Let $k_\\delta$ be the\nfirst index on the associated infinite mathematical path satisfying\n$\\|Ax_{k_\\delta}^\\delta-y_\\delta\\|\\le\\tau\\delta$, where $x_k^\\delta$ is\nthe corresponding noisy-data path.\nIf a finite budget is used, assume it is at least the upper bound $K_\\delta$\nconstructed in the proof when $R>0$. If $R=0$, the initial iterate is the\nfirst crossing and any finite budget suffices. For all sufficiently small\n$\\delta$,\n$$\\|x_{k_\\delta}^\\delta-x^\\dagger\\| \\le C_{\\nu,A,\\omega,\\tau}R^{1/(2\\nu+1)}\\delta^{2\\nu/(2\\nu+1)}.$$\nThe conclusion is conditional on an actual discrepancy crossing; a budget\nexhaustion status is inconclusive.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/63"
+  },
+  {
+    "kind": "item",
+    "consumer": "cor-landweber-discrepancy-stopped-convergence-rate",
+    "supplier": "lem-compact-spectral-multiplier-is-well-defined",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Its independent local step3.1 constant typo is a separate reported gap, so this edge verification grants no whole-proof acceptance. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/lem-compact-spectral-multiplier-is-well-defined.md",
+      "items/cor-landweber-discrepancy-stopped-convergence-rate.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/cor-landweber-discrepancy-stopped-convergence-rate.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume Countable Choice. Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$,\n$H$ be an $\\mathbb F$-Hilbert space, and let $S:H\\to H$ be compact and\nself-adjoint. Let $\\Sigma$ be its set of nonzero\neigenvalues, $E_t=\\ker(S-tI)$, $P_t$ the orthogonal projection onto $E_t$,\nand $P_0$ the orthogonal projection onto $\\ker S$. If\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is bounded, then for every $x\\in H$ the\nfinite-subset net\n$$q(0)P_0x+\\sum_{t\\in F}q(t)P_tx,\\qquad F\\subseteq\\Sigma\\text{ finite},$$\nconverges in norm to a vector $Q_qx$. The map $Q_q:H\\to H$ is bounded and\nlinear, with $\\|Q_q\\|\\le\\sup_{t\\in\\{0\\}\\cup\\Sigma}|q(t)|$.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume Countable Choice and the hypotheses of\n[[thm-landweber-source-and-noise-error-bounds]]. Let\n$x^\\dagger=T^\\nu w$ with $0<\\nu\\le1$ and $R=\\|w\\|\\ge0$. Fix $\\tau>1$ and\n$\\delta>0$ with $\\|y_\\delta-Ax^\\dagger\\|\\le\\delta$. Let $k_\\delta$ be the\nfirst index on the associated infinite mathematical path satisfying\n$\\|Ax_{k_\\delta}^\\delta-y_\\delta\\|\\le\\tau\\delta$, where $x_k^\\delta$ is\nthe corresponding noisy-data path.\nIf a finite budget is used, assume it is at least the upper bound $K_\\delta$\nconstructed in the proof when $R>0$. If $R=0$, the initial iterate is the\nfirst crossing and any finite budget suffices. For all sufficiently small\n$\\delta$,\n$$\\|x_{k_\\delta}^\\delta-x^\\dagger\\| \\le C_{\\nu,A,\\omega,\\tau}R^{1/(2\\nu+1)}\\delta^{2\\nu/(2\\nu+1)}.$$\nThe conclusion is conditional on an actual discrepancy crossing; a budget\nexhaustion status is inconclusive.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/64"
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+    "supplier": "lem-square-summable-sequences-form-a-hilbert-space",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md. Positive-coordinate l2(I,R) completeness is now justified explicitly by n -> n+1 isometry to the cited real l2(N,R).",
+    "inspected_paths": [
+      "items/lem-square-summable-sequences-form-a-hilbert-space.md",
+      "items/ex-landweber-semiconvergence-on-a-compact-diagonal-operator.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/ex-landweber-semiconvergence-on-a-compact-diagonal-operator.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nThe real sequence space\n$$\\ell^2(\\mathbb N,\\mathbb R)=\\left\\{x=(x_n):\\sum_{n\\in\\mathbb N}|x_n|^2<\\infty\\right\\},$$\nwith its canonical inner product and norm from\n[[def-square-summable-family-on-an-arbitrary-index-set]], is complete and\ntherefore is a real Hilbert space.\n",
+    "consumer_use_anchors": "\n## Example\n\nLet $I=\\{j\\in\\mathbb N:j\\ge1\\}$ and $X=Y=\\ell^2(I,\\mathbb R)$, let $Ae_j=2^{-j}e_j$ for the standard unit\nvectors $e_j$, and take $\\omega=1$, exact solution $x^\\dagger=0$, and exact\ndata $y=0$. For $\\delta>0$ let\n$y^\\delta_j=\\delta\\,2^{-j/2}$, so $\\|y^\\delta-y\\|=\\delta$. The un-stopped\nLandweber residual tends to zero, but the reconstruction norms are unbounded\nalong the subsequence $k_j=4^j$.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/69"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-irlgnm-one-step-error-recurrence",
+    "supplier": "lem-hilbert-tikhonov-noise-amplification-bound",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/lem-hilbert-tikhonov-noise-amplification-bound.md",
+      "items/lem-irlgnm-one-step-error-recurrence.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/lem-irlgnm-one-step-error-recurrence.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be bounded, with Hilbert adjoint $A^*$. For $\\lambda>0$, put\n$R_\\lambda=(A^*A+\\lambda I_X)^{-1}A^*$, which is well-defined by\n[[lem-hilbert-tikhonov-normal-operator-invertible]]. Then for every $g\\in Y$,\n\n$$\\|R_\\lambda g\\|\\le\\frac{\\|g\\|}{2\\sqrt\\lambda},\\qquad \\|R_\\lambda\\|\\le\\frac1{2\\sqrt\\lambda}.$$\n\nThe proof uses the normal equation and the Hilbert-space inner product; it\ndoes not use a compact-operator convergence rate or a source condition.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces over the\nsame scalar field and let $U\\subseteq X$ be open. Let $F:U\\to Y$ be\ncontinuously Fréchet differentiable over that field, with bounded\ncomplex-linear derivatives in the complex case. Let $x^\\dagger\\in U$ satisfy\n$F(x^\\dagger)=y$, and suppose $x_k,x^\\dagger$ lie in a convex subset of $U$\non which $F'$ is $L$-Lipschitz. Let $y_\\delta$ satisfy\n$\\|y_\\delta-y\\|\\le\\delta$, put $e_k=x_k-x^\\dagger$ and $A_k=F'(x_k)$,\nand use the step of\n[[alg-iteratively-regularized-gauss-newton-step]] with $\\alpha_k>0$.\nDefine\n$$R_k:=y-F(x_k)+A_ke_k.$$\nThen\n$$e_{k+1}=\\alpha_k(A_k^*A_k+\\alpha_kI)^{-1}e_k +(A_k^*A_k+\\alpha_kI)^{-1}A_k^*(y_\\delta-y+R_k),$$\nand\n$$\\|e_{k+1}\\|\\le\\|e_k\\|+ \\frac{\\delta+(L/2)\\|e_k\\|^2}{2\\sqrt{\\alpha_k}}.$$\nIf in addition the tangential-cone condition\n$$\\|F(x)-F(z)-F'(z)(x-z)\\|\\le\\eta\\|F(x)-F(z)\\|$$\nholds for all $x,z$ in that subset, then also\n$\\|R_k\\|\\le\\eta(\\|F(x_k)-y_\\delta\\|+\\delta)$, which may replace\n$(L/2)\\|e_k\\|^2$ in the recurrence bound. This lemma alone does not assert\ncontraction or discrepancy-stopped convergence.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/58"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-irlgnm-one-step-error-recurrence",
+    "supplier": "lem-hilbert-tikhonov-normal-operator-invertible",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/lem-hilbert-tikhonov-normal-operator-invertible.md",
+      "items/lem-irlgnm-one-step-error-recurrence.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/lem-irlgnm-one-step-error-recurrence.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume the Axiom of Countable Choice. Let $X$ and $Y$ be real or complex\nHilbert spaces and let $A:X\\to Y$ be bounded, with Hilbert adjoint $A^*$. For\n$\\lambda>0$, define\n\n$$B_\\lambda:=A^*A+\\lambda I_X.$$\n\nThen $B_\\lambda:X\\to X$ is bijective and\n\n$$\\|B_\\lambda^{-1}\\|\\le\\frac1\\lambda.$$\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces over the\nsame scalar field and let $U\\subseteq X$ be open. Let $F:U\\to Y$ be\ncontinuously Fréchet differentiable over that field, with bounded\ncomplex-linear derivatives in the complex case. Let $x^\\dagger\\in U$ satisfy\n$F(x^\\dagger)=y$, and suppose $x_k,x^\\dagger$ lie in a convex subset of $U$\non which $F'$ is $L$-Lipschitz. Let $y_\\delta$ satisfy\n$\\|y_\\delta-y\\|\\le\\delta$, put $e_k=x_k-x^\\dagger$ and $A_k=F'(x_k)$,\nand use the step of\n[[alg-iteratively-regularized-gauss-newton-step]] with $\\alpha_k>0$.\nDefine\n$$R_k:=y-F(x_k)+A_ke_k.$$\nThen\n$$e_{k+1}=\\alpha_k(A_k^*A_k+\\alpha_kI)^{-1}e_k +(A_k^*A_k+\\alpha_kI)^{-1}A_k^*(y_\\delta-y+R_k),$$\nand\n$$\\|e_{k+1}\\|\\le\\|e_k\\|+ \\frac{\\delta+(L/2)\\|e_k\\|^2}{2\\sqrt{\\alpha_k}}.$$\nIf in addition the tangential-cone condition\n$$\\|F(x)-F(z)-F'(z)(x-z)\\|\\le\\eta\\|F(x)-F(z)\\|$$\nholds for all $x,z$ in that subset, then also\n$\\|R_k\\|\\le\\eta(\\|F(x_k)-y_\\delta\\|+\\delta)$, which may replace\n$(L/2)\\|e_k\\|^2$ in the recurrence bound. This lemma alone does not assert\ncontraction or discrepancy-stopped convergence.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/57"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-landweber-filter-and-residual-identities",
+    "supplier": "def-compact-spectral-filter-and-qualification",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/def-compact-spectral-filter-and-qualification.md",
+      "items/lem-landweber-filter-and-residual-identities.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/lem-landweber-filter-and-residual-identities.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nAssume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded. Put $S=A^*A$. By\n[[lem-compact-gram-operator-is-positive-and-has-kernel]], $S$ is compact,\npositive, and self-adjoint, with $\\ker S=\\ker A$. Let $\\Sigma$ be the set of\nnonzero eigenvalues of $S$ and $P_t$ the orthogonal projection onto the\neigenspace of $t\\in\\Sigma$; let $P_0$ be the orthogonal projection onto\n$\\ker S$. The compact spectral multiplier of a bounded scalar function\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is\n$$q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx,$$\nwhere the finite-subset net converges in norm by\n[[lem-compact-spectral-multiplier-is-well-defined]]. For $\\nu>0$, define\n$S^\\nu$ by the multiplier $q_\\nu(0)=0$ and $q_\\nu(t)=t^\\nu$ for $t>0$.\nThis multiplier is bounded: if $t\\in\\Sigma$ and $u\\in E_t$ is a unit vector,\nthen $0<t=\\|Su\\|\\le\\|S\\|$, so $|q_\\nu(t)|\\le\\|S\\|^\\nu$.\n\nFor $\\lambda>0$, the Tikhonov filter and residual filter are\n$$g_\\lambda(t)=\\frac1{t+\\lambda},\\qquad r_\\lambda(t)=1-tg_\\lambda(t)=\\frac{\\lambda}{t+\\lambda}.$$\nThe Tikhonov solution for data $y_\\delta\\in Y$ is\n$$x_\\lambda^\\delta=g_\\lambda(S)A^*y_\\delta =(A^*A+\\lambda I_X)^{-1}A^*y_\\delta.$$\nIndeed, the spectral decomposition gives $S+\\lambda I_X$ the multiplier\n$t+\\lambda$ on each $E_t$ and $\\lambda$ on $\\ker S$, so $g_\\lambda(S)$ is\nits inverse, whose existence is also supplied by\n[[lem-hilbert-tikhonov-normal-operator-invertible]].\nThe source condition of order $\\nu>0$ and radius $R\\ge0$ means that\n$x^\\dagger=S^\\nu w$ for some $w\\in X$ with $\\|w\\|\\le R$. A family of\nfilters $g_\\alpha$ with residual filters $r_\\alpha(t)=1-tg_\\alpha(t)$ has\nqualification at least $p>0$ when, for each $0<\\nu\\le p$, some finite\nconstant $C_\\nu\\ge0$ satisfies\n$$t^\\nu|r_\\alpha(t)|\\le C_\\nu\\alpha^\\nu \\quad\\text{for every }\\alpha>0\\text{ and }t\\in\\Sigma.$$\nWhen $\\Sigma=\\varnothing$, this condition is vacuous.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume Countable Choice. Let $A:X\\to Y$ and $\\omega$ satisfy the\nhypotheses of [[alg-landweber-iteration-with-discrepancy-stopping]] and put\n$T=A^*A$. For each integer $k\\ge0$, define\n$g_0(t)=0$ and\n$g_k(t)=\\omega\\sum_{j=0}^{k-1}(1-\\omega t)^j$ for $k\\ge1$, with\n$r_k(t)=(1-\\omega t)^k$. For the associated infinite mathematical path,\n$$x_k=g_k(T)A^*y_\\delta,\\qquad y_\\delta-Ax_k=r_k(AA^*)y_\\delta.$$\nIf $y_\\delta=Ax^\\dagger$, then\n$$x^\\dagger-x_k=r_k(T)x^\\dagger.$$\nHere $g_k(T)$ and $r_k(T)$ are the compact spectral multipliers defined in\n[[def-compact-spectral-filter-and-qualification]]; $r_k(AA^*)$ is the\nmultiplier with scalar function $t\\mapsto(1-\\omega t)^k$ on the compact\nself-adjoint operator $AA^*$, as supplied by\n[[lem-compact-spectral-multiplier-is-well-defined]].\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/54"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-landweber-filter-and-residual-identities",
+    "supplier": "lem-compact-gram-operator-is-positive-and-has-kernel",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/lem-compact-gram-operator-is-positive-and-has-kernel.md",
+      "items/lem-landweber-filter-and-residual-identities.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/lem-landweber-filter-and-residual-identities.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded, with adjoint $A^*:Y\\to X$. Then both\n$A^*A:X\\to X$ and $AA^*:Y\\to Y$ are compact, self-adjoint and positive, and\n$$\\ker(A^*A)=\\ker A,\\qquad \\ker(AA^*)=\\ker A^*.$$\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume Countable Choice. Let $A:X\\to Y$ and $\\omega$ satisfy the\nhypotheses of [[alg-landweber-iteration-with-discrepancy-stopping]] and put\n$T=A^*A$. For each integer $k\\ge0$, define\n$g_0(t)=0$ and\n$g_k(t)=\\omega\\sum_{j=0}^{k-1}(1-\\omega t)^j$ for $k\\ge1$, with\n$r_k(t)=(1-\\omega t)^k$. For the associated infinite mathematical path,\n$$x_k=g_k(T)A^*y_\\delta,\\qquad y_\\delta-Ax_k=r_k(AA^*)y_\\delta.$$\nIf $y_\\delta=Ax^\\dagger$, then\n$$x^\\dagger-x_k=r_k(T)x^\\dagger.$$\nHere $g_k(T)$ and $r_k(T)$ are the compact spectral multipliers defined in\n[[def-compact-spectral-filter-and-qualification]]; $r_k(AA^*)$ is the\nmultiplier with scalar function $t\\mapsto(1-\\omega t)^k$ on the compact\nself-adjoint operator $AA^*$, as supplied by\n[[lem-compact-spectral-multiplier-is-well-defined]].\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/55"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-landweber-filter-and-residual-identities",
+    "supplier": "lem-compact-spectral-multiplier-is-well-defined",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/lem-compact-spectral-multiplier-is-well-defined.md",
+      "items/lem-landweber-filter-and-residual-identities.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/lem-landweber-filter-and-residual-identities.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume Countable Choice. Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$,\n$H$ be an $\\mathbb F$-Hilbert space, and let $S:H\\to H$ be compact and\nself-adjoint. Let $\\Sigma$ be its set of nonzero\neigenvalues, $E_t=\\ker(S-tI)$, $P_t$ the orthogonal projection onto $E_t$,\nand $P_0$ the orthogonal projection onto $\\ker S$. If\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is bounded, then for every $x\\in H$ the\nfinite-subset net\n$$q(0)P_0x+\\sum_{t\\in F}q(t)P_tx,\\qquad F\\subseteq\\Sigma\\text{ finite},$$\nconverges in norm to a vector $Q_qx$. The map $Q_q:H\\to H$ is bounded and\nlinear, with $\\|Q_q\\|\\le\\sup_{t\\in\\{0\\}\\cup\\Sigma}|q(t)|$.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume Countable Choice. Let $A:X\\to Y$ and $\\omega$ satisfy the\nhypotheses of [[alg-landweber-iteration-with-discrepancy-stopping]] and put\n$T=A^*A$. For each integer $k\\ge0$, define\n$g_0(t)=0$ and\n$g_k(t)=\\omega\\sum_{j=0}^{k-1}(1-\\omega t)^j$ for $k\\ge1$, with\n$r_k(t)=(1-\\omega t)^k$. For the associated infinite mathematical path,\n$$x_k=g_k(T)A^*y_\\delta,\\qquad y_\\delta-Ax_k=r_k(AA^*)y_\\delta.$$\nIf $y_\\delta=Ax^\\dagger$, then\n$$x^\\dagger-x_k=r_k(T)x^\\dagger.$$\nHere $g_k(T)$ and $r_k(T)$ are the compact spectral multipliers defined in\n[[def-compact-spectral-filter-and-qualification]]; $r_k(AA^*)$ is the\nmultiplier with scalar function $t\\mapsto(1-\\omega t)^k$ on the compact\nself-adjoint operator $AA^*$, as supplied by\n[[lem-compact-spectral-multiplier-is-well-defined]].\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/56"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "supplier": "cor-mean-value-theorem",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/cor-mean-value-theorem.md",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [],
+    "supplier_statement_or_definition": "\n## Statement\n\nLet $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/91"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "supplier": "cor-weierstrass-approximation-on-a-closed-interval",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/cor-weierstrass-approximation-on-a-closed-interval.md",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [],
+    "supplier_statement_or_definition": "\n## Statement\n\nFor $a\\le b$, every continuous real function on $[a,b]$ is a uniform limit of polynomials.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/83"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "supplier": "def-axiom-of-choice",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/def-axiom-of-choice.md",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [],
+    "supplier_statement_or_definition": "\n## Definition\n\nThe **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/90"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "supplier": "def-hilbert-space",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/def-hilbert-space.md",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [],
+    "supplier_statement_or_definition": "\n## Definition\n\nA **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).\n\n**The completion convention is the Cauchy-sequence one.**\n[[def-banach-space]] defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness — the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/86"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "supplier": "def-real-and-complex-inner-product-space",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/def-real-and-complex-inner-product-space.md",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [],
+    "supplier_statement_or_definition": "\n## Definition\n\nLet $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/85"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "supplier": "def-real-power",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/def-real-power.md",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [],
+    "supplier_statement_or_definition": "\n## Definition\n\nFor $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/87"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "supplier": "lem-hilbert-tikhonov-noise-amplification-bound",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/lem-hilbert-tikhonov-noise-amplification-bound.md",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be bounded, with Hilbert adjoint $A^*$. For $\\lambda>0$, put\n$R_\\lambda=(A^*A+\\lambda I_X)^{-1}A^*$, which is well-defined by\n[[lem-hilbert-tikhonov-normal-operator-invertible]]. Then for every $g\\in Y$,\n\n$$\\|R_\\lambda g\\|\\le\\frac{\\|g\\|}{2\\sqrt\\lambda},\\qquad \\|R_\\lambda\\|\\le\\frac1{2\\sqrt\\lambda}.$$\n\nThe proof uses the normal equation and the Hilbert-space inner product; it\ndoes not use a compact-operator convergence rate or a source condition.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/66"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "supplier": "lem-hilbert-tikhonov-normal-operator-invertible",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/lem-hilbert-tikhonov-normal-operator-invertible.md",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume the Axiom of Countable Choice. Let $X$ and $Y$ be real or complex\nHilbert spaces and let $A:X\\to Y$ be bounded, with Hilbert adjoint $A^*$. For\n$\\lambda>0$, define\n\n$$B_\\lambda:=A^*A+\\lambda I_X.$$\n\nThen $B_\\lambda:X\\to X$ is bijective and\n\n$$\\|B_\\lambda^{-1}\\|\\le\\frac1\\lambda.$$\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/65"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "supplier": "lem-spectrum-of-a-positive-operator-is-nonnegative",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/lem-spectrum-of-a-positive-operator-is-nonnegative.md",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume Countable Choice. If $T$ is a bounded positive operator on a nonzero complex Hilbert space, then $\\sigma(T)\\subseteq[0,+\\infty)$.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/81"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "supplier": "thm-continuous-functional-calculus-for-bounded-self-adjoint-operators",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/thm-continuous-functional-calculus-for-bounded-self-adjoint-operators.md",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume AC. For a bounded self-adjoint operator $T$ on a nonzero complex Hilbert space there is a unique isometric unital star-homomorphism $C(\\sigma(T))\\to\\mathcal B(H)$, $f\\mapsto f(T)$, sending the coordinate function $z$ to $T$, with range $C^*(I,T)$.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/80"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "supplier": "thm-hilbert-adjoint-properties",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/thm-hilbert-adjoint-properties.md",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume the Axiom of Countable Choice. Let $H,K,L$ be real or complex Hilbert spaces and let $R,S\\in\\mathcal B(H,K)$ and $T\\in\\mathcal B(K,L)$ be bounded linear operators. Then the Hilbert adjoints satisfy:\n\n1. $(aR+bS)^*=\\overline a\\,R^*+\\overline b\\,S^*$ for scalars $a,b$, and the adjoint of an operator is unique;\n2. $(TS)^*=S^*T^*$;\n3. $T^{**}=T$ and $\\|T^*\\|=\\|T\\|$;\n4. $\\|T^*T\\|=\\|T\\|^2$.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/84"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "supplier": "thm-real-power-continuity-and-derivatives",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/thm-real-power-continuity-and-derivatives.md",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [],
+    "supplier_statement_or_definition": "\n## Statement\n\nFor $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/89"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "supplier": "thm-real-power-laws",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/thm-real-power-laws.md",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [],
+    "supplier_statement_or_definition": "\n## Statement\n\nFor $a,b>0$ and $r,s\\in\\mathbb R$,\n$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/88"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "supplier": "thm-spectrum-is-nonempty-compact-and-norm-bounded",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/thm-spectrum-is-nonempty-compact-and-norm-bounded.md",
+      "items/lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume the Axiom of Choice ([[def-axiom-of-choice]]). Let $A$ be a nonzero\nunital complex Banach algebra and let $a \\in A$, with spectrum $\\sigma_A(a)$\nand resolvent $R(z,a) = (z1-a)^{-1}$ as in\n[[def-spectrum-and-resolvent-set-in-a-banach-algebra]]. Then\n\n1. $\\sigma_A(a)$ is a compact subset of the closed disc\n   $\\{\\,z \\in \\mathbb C : |z| \\le \\|a\\|\\,\\}$;\n2. $\\sigma_A(a) \\ne \\varnothing$.\n\nThe Axiom of Choice is used exactly once, in the form of the Hahn–Banach\nseparation supplied by [[cor-dual-separates-points]]; the closedness,\nboundedness and nonemptiness arguments are otherwise choice-free.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $A:X\\to Y$ be bounded between real or complex Hilbert spaces, and set $S=A^*A$. For $\\nu>0$, define $S^\\nu$ by the continuous calculus of $t\\mapsto t^\\nu$ in the complex case; in the real case use the Hilbert complexification and restrict to the real copy, as constructed below. On a zero space or for $S=0$, this power is zero. It is bounded self-adjoint, and $S^\\nu h=0$ for $h\\in\\ker A$, so $S^\\nu w\\perp\\ker A$. For $\\alpha>0$ put $T_\\alpha=(S+\\alpha I)^{-1}$. Then\n$$\\|\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^\\nu\\quad(0<\\nu\\le1),\\qquad \\|A\\alpha T_\\alpha S^\\nu\\|\\le\\alpha^{\\nu+1/2}\\quad(0<\\nu\\le1/2),$$\n$$\\|T_\\alpha A^*\\|\\le\\frac1{2\\sqrt\\alpha},\\qquad \\|AT_\\alpha A^*\\|\\le1,\\qquad \\|S^\\nu\\|\\le\\|A\\|^{2\\nu}.$$\nNo compactness or lower singular-value bound is assumed.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/82"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-irlgnm-local-source-condition-discrepancy-convergence",
+    "supplier": "lem-hilbert-tikhonov-normal-operator-invertible",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/lem-hilbert-tikhonov-normal-operator-invertible.md",
+      "items/thm-irlgnm-local-source-condition-discrepancy-convergence.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/thm-irlgnm-local-source-condition-discrepancy-convergence.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume the Axiom of Countable Choice. Let $X$ and $Y$ be real or complex\nHilbert spaces and let $A:X\\to Y$ be bounded, with Hilbert adjoint $A^*$. For\n$\\lambda>0$, define\n\n$$B_\\lambda:=A^*A+\\lambda I_X.$$\n\nThen $B_\\lambda:X\\to X$ is bijective and\n\n$$\\|B_\\lambda^{-1}\\|\\le\\frac1\\lambda.$$\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $X,Y$ be Hilbert spaces over the same field\n$\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ and let $F:U\\to Y$ be continuously\nFréchet differentiable over $\\mathbb F$ on open $U\\subseteq X$. In the\ncomplex case, each $F'(x)$ is a bounded complex-linear operator and the\nFréchet remainder is measured over complex increments. Let\n$B=\\overline B(x^\\dagger,\\rho)\\subseteq U$, with $\\rho>0$, and\n$y=F(x^\\dagger)$. Set $A=F'(x^\\dagger)$, $S=A^*A$. Suppose $F'$ is\nLipschitz on $B$ and, for every $x\\in B$,\n$$F'(x)=(I+R_x)A,\\qquad \\|R_x\\|\\le\\kappa<1/5,\\qquad \\kappa\\ge0,$$\nwith bounded linear $R_x:Y\\to Y$ and $R_{x^\\dagger}=0$. This is an explicit additional weak-nonlinearity hypothesis; it is not inferred from the original tangential-cone/Lipschitz assumptions alone.\n\nSuppose $e_0=x_0-x^\\dagger=S^\\nu w$, $0<\\nu\\le1/2$, $\\|w\\|\\le W$, where $W>0$; changing the sign of $w$ gives the original opposite-sign source convention. Let $\\alpha_0>0$, $\\alpha_0\\ge\\|A\\|^2$, $0<q<1$, and $\\alpha_k=\\alpha_0q^k$. Define\n$$\\beta=\\nu+1/2,\\quad \\theta=2\\kappa+\\kappa^2,\\quad d_0=2\\kappa(1+\\kappa),\\quad c_0=1+\\kappa,$$\n$$a=(1-\\theta)^{-1},\\quad b=d_0/(1-\\theta),\\quad c=c_0/(1-\\theta),\\qquad b<q^\\beta,$$\n$$D=\\max\\{1,a/(q^\\beta-b)\\},\\quad E=c/(1-b),\\quad C_e=1+D(d_0+\\theta q^\\beta)/2,\\quad N_e=[c_0+(d_0+\\theta)E]/2.$$\nRequire the source-smallness and discrepancy conditions\n$$(C_e+N_e)W\\alpha_0^\\nu<\\rho,\\qquad \\tau>(1+\\kappa)(D+E)+1.$$\nFor each $0<\\delta<W\\alpha_0^\\beta$ and datum $\\|y_\\delta-y\\|\\le\\delta$, use the **anchored** recurrence of [[alg-anchored-irgnm-with-discrepancy-stopping]]. Its theoretical exact extension, ignoring the stopping tests, is well-defined and lies in $B$ through\n$$K_\\delta=\\min\\{k\\ge0:W\\alpha_k^\\beta\\le\\delta\\}.$$\nIts first ordinary discrepancy crossing $k_\\delta=\\min\\{k:\\|F(x_k^\\delta)-y_\\delta\\|\\le\\tau\\delta\\}$ is finite and $k_\\delta\\le K_\\delta$. For the theoretical extension through this comparison index,\n$$\\|A(x_k^\\delta-x^\\dagger)\\|\\le DW\\alpha_k^\\beta+E\\delta,\\qquad \\|x_{k+1}^\\delta-x^\\dagger\\|\\le C_eW\\alpha_k^\\nu+N_e\\delta/\\sqrt{\\alpha_k}\\quad(0\\le k<K_\\delta).$$\nAs $\\delta\\downarrow0$, $x_{k_\\delta}^\\delta\\to x^\\dagger$ in norm for every admissible noise sequence. For exact data the extended recurrence converges to $x^\\dagger$ as well. A finite actual algorithm returns this first-crossing iterate only if its cap reaches $k_\\delta$ and exact calls succeed; shorter caps and uncertified calls retain their explicit failure statuses. No nonlinear rate is asserted, and no injectivity, closed range or finite-dimensional restriction on $A$ is imposed. The retained unanchored LM algorithm is not claimed to satisfy this anchored theorem.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/68"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-irlgnm-local-source-condition-discrepancy-convergence",
+    "supplier": "thm-continuous-functional-calculus-for-bounded-self-adjoint-operators",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/thm-continuous-functional-calculus-for-bounded-self-adjoint-operators.md",
+      "items/thm-irlgnm-local-source-condition-discrepancy-convergence.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume AC. For a bounded self-adjoint operator $T$ on a nonzero complex Hilbert space there is a unique isometric unital star-homomorphism $C(\\sigma(T))\\to\\mathcal B(H)$, $f\\mapsto f(T)$, sending the coordinate function $z$ to $T$, with range $C^*(I,T)$.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume AC. Let $X,Y$ be Hilbert spaces over the same field\n$\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ and let $F:U\\to Y$ be continuously\nFréchet differentiable over $\\mathbb F$ on open $U\\subseteq X$. In the\ncomplex case, each $F'(x)$ is a bounded complex-linear operator and the\nFréchet remainder is measured over complex increments. Let\n$B=\\overline B(x^\\dagger,\\rho)\\subseteq U$, with $\\rho>0$, and\n$y=F(x^\\dagger)$. Set $A=F'(x^\\dagger)$, $S=A^*A$. Suppose $F'$ is\nLipschitz on $B$ and, for every $x\\in B$,\n$$F'(x)=(I+R_x)A,\\qquad \\|R_x\\|\\le\\kappa<1/5,\\qquad \\kappa\\ge0,$$\nwith bounded linear $R_x:Y\\to Y$ and $R_{x^\\dagger}=0$. This is an explicit additional weak-nonlinearity hypothesis; it is not inferred from the original tangential-cone/Lipschitz assumptions alone.\n\nSuppose $e_0=x_0-x^\\dagger=S^\\nu w$, $0<\\nu\\le1/2$, $\\|w\\|\\le W$, where $W>0$; changing the sign of $w$ gives the original opposite-sign source convention. Let $\\alpha_0>0$, $\\alpha_0\\ge\\|A\\|^2$, $0<q<1$, and $\\alpha_k=\\alpha_0q^k$. Define\n$$\\beta=\\nu+1/2,\\quad \\theta=2\\kappa+\\kappa^2,\\quad d_0=2\\kappa(1+\\kappa),\\quad c_0=1+\\kappa,$$\n$$a=(1-\\theta)^{-1},\\quad b=d_0/(1-\\theta),\\quad c=c_0/(1-\\theta),\\qquad b<q^\\beta,$$\n$$D=\\max\\{1,a/(q^\\beta-b)\\},\\quad E=c/(1-b),\\quad C_e=1+D(d_0+\\theta q^\\beta)/2,\\quad N_e=[c_0+(d_0+\\theta)E]/2.$$\nRequire the source-smallness and discrepancy conditions\n$$(C_e+N_e)W\\alpha_0^\\nu<\\rho,\\qquad \\tau>(1+\\kappa)(D+E)+1.$$\nFor each $0<\\delta<W\\alpha_0^\\beta$ and datum $\\|y_\\delta-y\\|\\le\\delta$, use the **anchored** recurrence of [[alg-anchored-irgnm-with-discrepancy-stopping]]. Its theoretical exact extension, ignoring the stopping tests, is well-defined and lies in $B$ through\n$$K_\\delta=\\min\\{k\\ge0:W\\alpha_k^\\beta\\le\\delta\\}.$$\nIts first ordinary discrepancy crossing $k_\\delta=\\min\\{k:\\|F(x_k^\\delta)-y_\\delta\\|\\le\\tau\\delta\\}$ is finite and $k_\\delta\\le K_\\delta$. For the theoretical extension through this comparison index,\n$$\\|A(x_k^\\delta-x^\\dagger)\\|\\le DW\\alpha_k^\\beta+E\\delta,\\qquad \\|x_{k+1}^\\delta-x^\\dagger\\|\\le C_eW\\alpha_k^\\nu+N_e\\delta/\\sqrt{\\alpha_k}\\quad(0\\le k<K_\\delta).$$\nAs $\\delta\\downarrow0$, $x_{k_\\delta}^\\delta\\to x^\\dagger$ in norm for every admissible noise sequence. For exact data the extended recurrence converges to $x^\\dagger$ as well. A finite actual algorithm returns this first-crossing iterate only if its cap reaches $k_\\delta$ and exact calls succeed; shorter caps and uncertified calls retain their explicit failure statuses. No nonlinear rate is asserted, and no injectivity, closed range or finite-dimensional restriction on $A$ is imposed. The retained unanchored LM algorithm is not claimed to satisfy this anchored theorem.\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/79"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-landweber-source-and-noise-error-bounds",
+    "supplier": "def-compact-spectral-filter-and-qualification",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/def-compact-spectral-filter-and-qualification.md",
+      "items/thm-landweber-source-and-noise-error-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/thm-landweber-source-and-noise-error-bounds.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nAssume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded. Put $S=A^*A$. By\n[[lem-compact-gram-operator-is-positive-and-has-kernel]], $S$ is compact,\npositive, and self-adjoint, with $\\ker S=\\ker A$. Let $\\Sigma$ be the set of\nnonzero eigenvalues of $S$ and $P_t$ the orthogonal projection onto the\neigenspace of $t\\in\\Sigma$; let $P_0$ be the orthogonal projection onto\n$\\ker S$. The compact spectral multiplier of a bounded scalar function\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is\n$$q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx,$$\nwhere the finite-subset net converges in norm by\n[[lem-compact-spectral-multiplier-is-well-defined]]. For $\\nu>0$, define\n$S^\\nu$ by the multiplier $q_\\nu(0)=0$ and $q_\\nu(t)=t^\\nu$ for $t>0$.\nThis multiplier is bounded: if $t\\in\\Sigma$ and $u\\in E_t$ is a unit vector,\nthen $0<t=\\|Su\\|\\le\\|S\\|$, so $|q_\\nu(t)|\\le\\|S\\|^\\nu$.\n\nFor $\\lambda>0$, the Tikhonov filter and residual filter are\n$$g_\\lambda(t)=\\frac1{t+\\lambda},\\qquad r_\\lambda(t)=1-tg_\\lambda(t)=\\frac{\\lambda}{t+\\lambda}.$$\nThe Tikhonov solution for data $y_\\delta\\in Y$ is\n$$x_\\lambda^\\delta=g_\\lambda(S)A^*y_\\delta =(A^*A+\\lambda I_X)^{-1}A^*y_\\delta.$$\nIndeed, the spectral decomposition gives $S+\\lambda I_X$ the multiplier\n$t+\\lambda$ on each $E_t$ and $\\lambda$ on $\\ker S$, so $g_\\lambda(S)$ is\nits inverse, whose existence is also supplied by\n[[lem-hilbert-tikhonov-normal-operator-invertible]].\nThe source condition of order $\\nu>0$ and radius $R\\ge0$ means that\n$x^\\dagger=S^\\nu w$ for some $w\\in X$ with $\\|w\\|\\le R$. A family of\nfilters $g_\\alpha$ with residual filters $r_\\alpha(t)=1-tg_\\alpha(t)$ has\nqualification at least $p>0$ when, for each $0<\\nu\\le p$, some finite\nconstant $C_\\nu\\ge0$ satisfies\n$$t^\\nu|r_\\alpha(t)|\\le C_\\nu\\alpha^\\nu \\quad\\text{for every }\\alpha>0\\text{ and }t\\in\\Sigma.$$\nWhen $\\Sigma=\\varnothing$, this condition is vacuous.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume Countable Choice. Let $A:X\\to Y$ be a nonzero compact operator between\nreal or complex Hilbert spaces, set $T=A^*A$, choose\n$0<\\omega<2/\\|A\\|^2$, and let $y=Ax^\\dagger$ with\n$x^\\dagger\\in(\\ker A)^\\perp$. Let $x_k$ be the exact-data Landweber iterates\nin the infinite recurrence-defined path of\n[[alg-landweber-iteration-with-discrepancy-stopping]] for datum $y$; this path\ndepends on $A,\\omega,y$ and not on a finite cap or stopping test. Put\n$r_k(t)=(1-\\omega t)^k$. Then $\\|x_k-x^\\dagger\\|$ is nonincreasing and\n$x_k\\to x^\\dagger$ in norm. For every $s>0$, if $x^\\dagger=T^s w$ with\n$w\\in X$, then for $k\\ge1$,\n$$\\|x_k-x^\\dagger\\|\\le C_{s,A,\\omega}\\|w\\|k^{-s}.$$\nThe scalar filter also satisfies\n$$\\sup_{t\\in\\Sigma}t^s|r_k(t)|\\le C_{s,A,\\omega}k^{-s},$$\nwhere $\\Sigma$ is the set of nonzero eigenvalues of $T$.\nFor noisy data $y_\\delta$ with $\\|y_\\delta-y\\|\\le\\delta$, let\n$x_k^\\delta$ be the infinite recurrence-defined path for datum $y_\\delta$.\nIt satisfies\n$$\\|x_k^\\delta-x_k\\|\\le\\sqrt{2\\omega k}\\,\\delta.$$\nConsequently, under the source condition $x^\\dagger=T^\\nu w$,\n$0<\\nu\\le1$, the total error obeys\n$$\\|x_k^\\delta-x^\\dagger\\|\\le C_{\\nu,A,\\omega}\\|w\\|k^{-\\nu} +\\sqrt{2\\omega k}\\,\\delta.$$\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/59"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-landweber-source-and-noise-error-bounds",
+    "supplier": "lem-compact-gram-operator-is-positive-and-has-kernel",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/lem-compact-gram-operator-is-positive-and-has-kernel.md",
+      "items/thm-landweber-source-and-noise-error-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/thm-landweber-source-and-noise-error-bounds.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded, with adjoint $A^*:Y\\to X$. Then both\n$A^*A:X\\to X$ and $AA^*:Y\\to Y$ are compact, self-adjoint and positive, and\n$$\\ker(A^*A)=\\ker A,\\qquad \\ker(AA^*)=\\ker A^*.$$\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume Countable Choice. Let $A:X\\to Y$ be a nonzero compact operator between\nreal or complex Hilbert spaces, set $T=A^*A$, choose\n$0<\\omega<2/\\|A\\|^2$, and let $y=Ax^\\dagger$ with\n$x^\\dagger\\in(\\ker A)^\\perp$. Let $x_k$ be the exact-data Landweber iterates\nin the infinite recurrence-defined path of\n[[alg-landweber-iteration-with-discrepancy-stopping]] for datum $y$; this path\ndepends on $A,\\omega,y$ and not on a finite cap or stopping test. Put\n$r_k(t)=(1-\\omega t)^k$. Then $\\|x_k-x^\\dagger\\|$ is nonincreasing and\n$x_k\\to x^\\dagger$ in norm. For every $s>0$, if $x^\\dagger=T^s w$ with\n$w\\in X$, then for $k\\ge1$,\n$$\\|x_k-x^\\dagger\\|\\le C_{s,A,\\omega}\\|w\\|k^{-s}.$$\nThe scalar filter also satisfies\n$$\\sup_{t\\in\\Sigma}t^s|r_k(t)|\\le C_{s,A,\\omega}k^{-s},$$\nwhere $\\Sigma$ is the set of nonzero eigenvalues of $T$.\nFor noisy data $y_\\delta$ with $\\|y_\\delta-y\\|\\le\\delta$, let\n$x_k^\\delta$ be the infinite recurrence-defined path for datum $y_\\delta$.\nIt satisfies\n$$\\|x_k^\\delta-x_k\\|\\le\\sqrt{2\\omega k}\\,\\delta.$$\nConsequently, under the source condition $x^\\dagger=T^\\nu w$,\n$0<\\nu\\le1$, the total error obeys\n$$\\|x_k^\\delta-x^\\dagger\\|\\le C_{\\nu,A,\\omega}\\|w\\|k^{-\\nu} +\\sqrt{2\\omega k}\\,\\delta.$$\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/60"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-landweber-source-and-noise-error-bounds",
+    "supplier": "lem-compact-spectral-multiplier-is-well-defined",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Checked actual supplier field/space/choice and parameter hypotheses against the consumer facts/proof. Positive alpha and bounded Hilbert derivatives under CC give unique inverse/noise bounds. Compact Gram/kernel and bounded spectral multiplier interfaces are used only in compact Landweber branches. The separate noncompact source-power proof carries AC, handles zero space/A=0 and constructs the real Hilbert complexification before applying complex calculus; real polynomial approximation preserves the real copy. No automatic real/complex transfer or unanchored/anchored convergence transfer is made. Exact supplier and consumer anchors are attached below. Alpha batch-88 independently checked the current supplier interface and consumer use in dependency order; see research/numerical-optimization-dynamics-2026-10-16-alpha-batch-88-3a.md.",
+    "inspected_paths": [
+      "items/lem-compact-spectral-multiplier-is-well-defined.md",
+      "items/thm-landweber-source-and-noise-error-bounds.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#deps",
+      "items/thm-landweber-source-and-noise-error-bounds.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nAssume Countable Choice. Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$,\n$H$ be an $\\mathbb F$-Hilbert space, and let $S:H\\to H$ be compact and\nself-adjoint. Let $\\Sigma$ be its set of nonzero\neigenvalues, $E_t=\\ker(S-tI)$, $P_t$ the orthogonal projection onto $E_t$,\nand $P_0$ the orthogonal projection onto $\\ker S$. If\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is bounded, then for every $x\\in H$ the\nfinite-subset net\n$$q(0)P_0x+\\sum_{t\\in F}q(t)P_tx,\\qquad F\\subseteq\\Sigma\\text{ finite},$$\nconverges in norm to a vector $Q_qx$. The map $Q_q:H\\to H$ is bounded and\nlinear, with $\\|Q_q\\|\\le\\sup_{t\\in\\{0\\}\\cup\\Sigma}|q(t)|$.\n",
+    "consumer_use_anchors": "\n## Statement\n\nAssume Countable Choice. Let $A:X\\to Y$ be a nonzero compact operator between\nreal or complex Hilbert spaces, set $T=A^*A$, choose\n$0<\\omega<2/\\|A\\|^2$, and let $y=Ax^\\dagger$ with\n$x^\\dagger\\in(\\ker A)^\\perp$. Let $x_k$ be the exact-data Landweber iterates\nin the infinite recurrence-defined path of\n[[alg-landweber-iteration-with-discrepancy-stopping]] for datum $y$; this path\ndepends on $A,\\omega,y$ and not on a finite cap or stopping test. Put\n$r_k(t)=(1-\\omega t)^k$. Then $\\|x_k-x^\\dagger\\|$ is nonincreasing and\n$x_k\\to x^\\dagger$ in norm. For every $s>0$, if $x^\\dagger=T^s w$ with\n$w\\in X$, then for $k\\ge1$,\n$$\\|x_k-x^\\dagger\\|\\le C_{s,A,\\omega}\\|w\\|k^{-s}.$$\nThe scalar filter also satisfies\n$$\\sup_{t\\in\\Sigma}t^s|r_k(t)|\\le C_{s,A,\\omega}k^{-s},$$\nwhere $\\Sigma$ is the set of nonzero eigenvalues of $T$.\nFor noisy data $y_\\delta$ with $\\|y_\\delta-y\\|\\le\\delta$, let\n$x_k^\\delta$ be the infinite recurrence-defined path for datum $y_\\delta$.\nIt satisfies\n$$\\|x_k^\\delta-x_k\\|\\le\\sqrt{2\\omega k}\\,\\delta.$$\nConsequently, under the source condition $x^\\dagger=T^\\nu w$,\n$0<\\nu\\le1$, the total error obeys\n$$\\|x_k^\\delta-x^\\dagger\\|\\le C_{\\nu,A,\\omega}\\|w\\|k^{-\\nu} +\\sqrt{2\\omega k}\\,\\delta.$$\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/61"
+  },
+  {
+    "kind": "page",
+    "consumer": "iterative-regularization-and-early-stopping",
+    "supplier": "gauss-newton-and-levenberg-marquardt-methods",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "No item from this page occurs in current batch88 item deps. Hilbert-space unanchored/anchored procedures remain distinct with their own hypotheses; finite-dimensional GN/LM results are not transferred.",
+    "inspected_paths": [
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/iterative-regularization-and-early-stopping.md",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/gauss-newton-and-levenberg-marquardt-methods.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#requires"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/52"
+  },
+  {
+    "kind": "page",
+    "consumer": "iterative-regularization-and-early-stopping",
+    "supplier": "krylov-methods-and-lanczos-convergence",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "No item from this page occurs in current batch88 item deps. Local Golub-Kahan LSQR and its exact residual-minimization proof supply their own argument; retain navigation/context only, with no Lanczos/CG/GMRES transfer.",
+    "inspected_paths": [
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/iterative-regularization-and-early-stopping.md",
+      "library/numerical-linear-algebra-and-approximation/krylov-methods-and-lanczos-convergence.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#requires"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/50"
+  },
+  {
+    "kind": "page",
+    "consumer": "iterative-regularization-and-early-stopping",
+    "supplier": "numerical-inverse-problems-and-regularization-error",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Actual uses are positive-shift bounded-Hilbert inverses and1/(2sqrt(alpha)) noise bounds, under CC, for local unanchored/anchored updates. Neither compact rate nor parameter choice follows from that bookkeeping page.",
+    "inspected_paths": [
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/iterative-regularization-and-early-stopping.md",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/numerical-inverse-problems-and-regularization-error.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#requires"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/48"
+  },
+  {
+    "kind": "page",
+    "consumer": "iterative-regularization-and-early-stopping",
+    "supplier": "preconditioner-algorithms-and-residual-metrics",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "No item from this page occurs in current batch88 item deps. No ILU/flexible-GMRES/preconditioner-quality theorem is imported. Retain declared page context/order only.",
+    "inspected_paths": [
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/iterative-regularization-and-early-stopping.md",
+      "library/numerical-linear-algebra-and-approximation/preconditioner-algorithms-and-residual-metrics.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#requires"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/51"
+  },
+  {
+    "kind": "page",
+    "consumer": "iterative-regularization-and-early-stopping",
+    "supplier": "spectral-regularization-and-parameter-choice",
+    "consumer_batch": "88",
+    "status": "verified",
+    "evidence": "Actual uses are compact positive Gram/kernel identity, bounded compact spectral multipliers, source powers and real ell2 completeness under CC. Local Landweber recurrence/scalar filter estimates are proved separately from Tikhonov qualification.",
+    "inspected_paths": [
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/iterative-regularization-and-early-stopping.md",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/spectral-regularization-and-parameter-choice.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-88.pages.json#requires"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/49"
+  }
+]

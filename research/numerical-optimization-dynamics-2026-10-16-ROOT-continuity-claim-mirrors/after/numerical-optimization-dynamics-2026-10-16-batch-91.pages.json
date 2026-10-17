@@ -1,0 +1,372 @@
+[
+  {
+    "order": 2466,
+    "id": "minimum-energy-paths-string-neb-and-saddle-certificates",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Minimum energy paths string neb and saddle certificates",
+    "companion": "minimum-energy-paths-string-neb-and-saddle-certificates-examples",
+    "requires": [
+      "nonlinear-equations-and-newton-methods",
+      "numerical-optimization-globalization-and-inexact-certificates",
+      "trust-region-and-cubic-regularization-methods",
+      "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+      "principal-components-and-eigenspace-stability"
+    ],
+    "items": [
+      {
+        "id": "def-regular-minimum-energy-path-in-a-collision-free-tube",
+        "kind": "definition",
+        "title": "Regular minimum-energy paths on a declared collision-free tube",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-jacobian-matrix-and-gradient"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-dimer-central-force-hessian-vector-error",
+        "kind": "lemma",
+        "title": "Paired force evaluations give a second-order Hessian-vector estimate",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-hessian-and-euclidean-critical-point",
+          "def-jacobian-matrix-and-gradient",
+          "cor-hessian-is-symmetric",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-local-root-from-uniformly-small-residual",
+        "kind": "lemma",
+        "title": "A small residual gives a nearby root under a uniform inverse and Lipschitz bound",
+        "deps": [
+          "def-c-one-map-and-local-inverse",
+          "def-invertible-euclidean-linear-map",
+          "def-metric-ball",
+          "def-euclidean-inner-product",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-banach-fixed-point",
+          "thm-complete-subspace-iff-closed",
+          "thm-mean-value-inequality-for-total-derivatives",
+          "thm-euclidean-space-complete",
+          "thm-metric-open-set-algebra",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-local-root-in-max-norm",
+        "kind": "lemma",
+        "title": "A small residual gives a nearby root under a uniform inverse and Lipschitz bound in the maximum norm",
+        "deps": [
+          "def-c-one-map-and-local-inverse",
+          "def-invertible-euclidean-linear-map",
+          "def-metric-ball",
+          "def-p-norms-on-rn",
+          "lem-metrics-on-rn",
+          "thm-metric-open-set-algebra",
+          "thm-euclidean-space-complete",
+          "thm-complete-subspace-iff-closed",
+          "thm-banach-fixed-point",
+          "cor-mean-value-theorem",
+          "thm-chain-rule-for-total-derivatives",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "cor-cauchy-reals-lub-complete",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-of-abs-value",
+          "lem-of-triangle-inequality"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-finite-budget-dimer-mode-following",
+        "kind": "algorithm",
+        "title": "Finite-budget dimer rotation and saddle translation",
+        "deps": [
+          "def-regular-minimum-energy-path-in-a-collision-free-tube",
+          "lem-dimer-central-force-hessian-vector-error"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-finite-image-string-method",
+        "kind": "algorithm",
+        "title": "Finite-image projected-gradient string with arc-length redistribution",
+        "deps": [
+          "def-regular-minimum-energy-path-in-a-collision-free-tube"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-improved-tangent-climbing-neb",
+        "kind": "algorithm",
+        "title": "Finite-budget improved-tangent NEB with a climbing image",
+        "deps": [
+          "def-regular-minimum-energy-path-in-a-collision-free-tube"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $U,V,a,b$ satisfy [[def-regular-minimum-energy-path-in-a-collision-free-tube]]. **Inputs:** an integer $M\\ge2$, images $R_0=a,R_1,\\ldots,R_M=b$ in $U$, spring constant $\\kappa\\ge0$, fixed step $\\eta>0$, force and spacing tolerances $\\tau_F,\\tau_s\\ge0$, an ordinary-step count $n_{\\rm climb}\\in\\mathbb N_0$, and a finite update budget $N\\in\\mathbb N_0$. Require $n_{\\rm climb}\\le N$. **Output:** the last chain and one of `tolerances-met`, `tangent-failure`, `geometry-failure`, `nonfinite-evaluation`, or `budget-exhausted`.\n\nAt each iteration, endpoints are fixed and only interior images are updated. First evaluate $V_i=V(R_i)$ for every image; if any energy is nonfinite, return `nonfinite-evaluation` before making energy comparisons. For $i=1,\\ldots,M-1$, write $\\Delta_i^+=R_{i+1}-R_i$ and $\\Delta_i^-=R_i-R_{i-1}$. Select an unnormalized tangent by\n\n$$\\tau_i=\\begin{cases}\\Delta_i^+,&V_{i+1}>V_i>V_{i-1},\\\\\\Delta_i^-,&V_{i+1}<V_i<V_{i-1},\\\\w_{\\max}\\Delta_i^+ + w_{\\min}\\Delta_i^-,&\\text{otherwise and }V_{i+1}>V_{i-1},\\\\w_{\\min}\\Delta_i^+ + w_{\\max}\\Delta_i^-,&\\text{otherwise and }V_{i+1}<V_{i-1},\\\\\\Delta_i^++\\Delta_i^-,&V_{i+1}=V_{i-1},\\end{cases}$$\n\nwhere $w_{\\max}=\\max(|V_{i+1}-V_i|,|V_{i-1}-V_i|)$ and $w_{\\min}=\\min(|V_{i+1}-V_i|,|V_{i-1}-V_i|)$. When $V_{i+1}=V_{i-1}$, the displayed centered-chord branch is the algorithm's explicit tie convention; it is a local completion of the strict-comparison rule in the cited improved-tangent formula. If $\\tau_i=0$, return `tangent-failure`; otherwise set $t_i=\\tau_i/\\|\\tau_i\\|_2$. Next evaluate $\\nabla V(R_i)$ for every interior image; if any gradient is nonfinite, return `nonfinite-evaluation` before forming forces.\n\nInitialize the update counter $k=0$. At iteration $k$, use the ordinary force\n\n$$F_i=-(I-t_it_i^T)\\nabla V(R_i)+\\kappa(\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2)t_i.$$\n\nWhen $k\\ge n_{\\rm climb}$, choose the least index $i_*$ attaining the largest interior energy and replace that image's force by\n\n$$F_{i_*}^{\\rm CI}=-\\nabla V(R_{i_*})+2(\\nabla V(R_{i_*})^Tt_{i_*})t_{i_*};$$\n\nthe climbing image has no spring force. The remaining interior images retain the ordinary force. If any resulting force is nonfinite, return `nonfinite-evaluation`. Thus iterations $k=0,\\ldots,n_{\\rm climb}-1$ use ordinary forces and the first climbing force is evaluated at iteration $k=n_{\\rm climb}$. At each iteration report the maximum force norm and spacing residual $\\max_i|\\|\\Delta_i^+\\|_2-\\|\\Delta_i^-\\|_2|$. Stop with `tolerances-met` only if both are within their declared tolerances. If a tolerance fails and $k=N$, return `budget-exhausted`; only when $k<N$ update every interior image by $R_i^{k+1}=R_i^k+\\eta F_i^k$. Leaving $U$ returns `geometry-failure`. After a valid update set $k\\leftarrow k+1$ and repeat. The tolerance check precedes the budget check, so $N=0$ still checks the initial chain and $n_{\\rm climb}=N$ uses a climbing force at the final residual check (without an update if the budget is then exhausted).\n\nThe finite stopping status does not assert convergence to a MEP, a saddle, or a continuum path.\n"
+      },
+      {
+        "id": "def-validated-eigenvalue-enclosures-for-an-index-one-hessian",
+        "kind": "definition",
+        "title": "Validated ordered eigenvalue enclosures for an index-one Hessian",
+        "deps": [
+          "cor-hessian-is-symmetric",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-hessian-and-euclidean-critical-point",
+          "def-regular-minimum-energy-path-in-a-collision-free-tube"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-centered-chord-and-unequal-step-tangent-error",
+        "kind": "lemma",
+        "title": "Second-order centered and unequal-step tangent estimates",
+        "deps": [
+          "def-regular-minimum-energy-path-in-a-collision-free-tube",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-arc-length-polyline-interpolation-error",
+        "kind": "lemma",
+        "title": "Polyline interpolation and equal-length redistribution approximate a smooth arc-length path",
+        "deps": [
+          "def-regular-minimum-energy-path-in-a-collision-free-tube",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "lem-centered-chord-and-unequal-step-tangent-error",
+          "thm-chain-rule-for-total-derivatives",
+          "cor-taylor-lagrange-and-cauchy-remainders"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-local-index-one-saddle-certificate-from-enclosures",
+        "kind": "theorem",
+        "title": "Validated Hessian enclosures and a small gradient residual certify a nearby index-one saddle",
+        "deps": [
+          "def-regular-minimum-energy-path-in-a-collision-free-tube",
+          "def-validated-eigenvalue-enclosures-for-an-index-one-hessian",
+          "lem-local-root-from-uniformly-small-residual",
+          "thm-courant-fischer-min-max-principle",
+          "cor-hessian-is-symmetric",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-hessian-and-euclidean-critical-point",
+          "def-jacobian-matrix-and-gradient",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-index-one-eigenvector-following-step",
+        "kind": "algorithm",
+        "title": "Finite-budget index-one eigenvector-following Newton step",
+        "deps": [
+          "alg-newton-correction-for-vector-residuals",
+          "cor-hessian-is-symmetric",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-regular-minimum-energy-path-in-a-collision-free-tube",
+          "def-validated-eigenvalue-enclosures-for-an-index-one-hessian",
+          "thm-updated-jacobian-newton-local-quadratic-convergence"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $U,V$ be as in [[def-regular-minimum-energy-path-in-a-collision-free-tube]]. **Inputs:** an initial point $x_0\\in U$, a unit initial mode reference $v_{\\rm ref}\\in\\mathbb R^d$, a local-ball center $x_{\\rm ref}\\in U$, radius $r_{\\rm loc}>0$, gradient tolerance $\\tau_g\\ge0$, eigenvalue margin $\\gamma>0$, eigenpair residual tolerance $\\tau_{\\rm eig}\\ge0$, mode-overlap threshold $0\\le\\tau_{\\rm mode}<1$, and update budget $N\\in\\mathbb N_0$. Return the last point, the most recently accepted mode reference, and a termination status from `geometry-failure`, `outside-local-basin`, `gradient-residual-tolerance`, `budget-exhausted`, `eigensolve-tolerance-failure`, `index-one-branch-failure`, `mode-tracking-failure`, or `singular-jacobian`. The mode reference starts at $v_{\\rm ref}$ and changes only after a successful eigenpair and overlap check; it certifies the current lowest-mode line only when that check has passed at the current iterate. At each iterate $x_k$, the eigensolver supplies an orthogonal matrix $Q=[q_1,\\ldots,q_d]$, ordered approximate eigenvalues $\\widehat\\lambda_1\\le\\cdots\\le\\widehat\\lambda_d$, and validated intervals $I_j=[\\ell_j,u_j]$ in the sense of [[def-validated-eigenvalue-enclosures-for-an-index-one-hessian]]. Require every residual $\\|H(x_k)q_j-\\widehat\\lambda_jq_j\\|_2\\le\\tau_{\\rm eig}$, $\\sqrt d\\,\\tau_{\\rm eig}\\le\\gamma/2$, and $\\widehat\\lambda_j\\in I_j$. The Hessian $H=\\nabla^2V$ is symmetric by [[cor-hessian-is-symmetric]].\n\nFor $k=0,\\ldots,N$, in order:\n\n1. If $x_k\\notin U$, return `geometry-failure`. If $x_k\\notin B_2(x_{\\rm ref},r_{\\rm loc})$, return `outside-local-basin`. Compute $g_k=\\nabla V(x_k)$. If $\\|g_k\\|_2\\le\\tau_g$, return `gradient-residual-tolerance`; if $k=N$, return `budget-exhausted`.\n2. If an eigenpair residual exceeds $\\tau_{\\rm eig}$, $\\sqrt d\\tau_{\\rm eig}>\\gamma/2$, or some $\\widehat\\lambda_j\\notin I_j$, return `eigensolve-tolerance-failure`. If the validated intervals do not satisfy $u_1\\le-\\gamma$ and $\\ell_j\\ge\\gamma$ for all $j\\ge2$ (with the dimension-one convention in the definition), return `index-one-branch-failure`. If $|q_1^Tv_{\\rm ref}|\\le\\tau_{\\rm mode}$, return `mode-tracking-failure`; otherwise retain $q_1$ when $q_1^Tv_{\\rm ref}>0$ and replace it by $-q_1$ when $q_1^Tv_{\\rm ref}<0$. Use the resulting direction as the next mode reference. This overlap check detects a mode-branch change but does not alter the Newton correction.\n3. Call [[alg-newton-correction-for-vector-residuals]] with $A=H(x_k)$ and $r=g_k$. If it returns `singular-jacobian`, return that status. Its correction $p_k$ is the exact Newton solution of $H(x_k)p_k=-g_k$ in the mathematical model; the eigenpair data certifies the index-one branch but does not replace this linear solve.\n4. If $x_k+p_k\\notin U$ or lies outside $B_2(x_{\\rm ref},r_{\\rm loc})$, return `outside-local-basin`. Otherwise set $x_{k+1}=x_k+p_k$ and continue.\n\nAn approximate eigensolve has a finite residual-tolerance branch and an explicit failure status. The definition makes no global-convergence claim. Local quadratic behavior is stated separately and requires the hypotheses of [[thm-updated-jacobian-newton-local-quadratic-convergence]].\n"
+      },
+      {
+        "id": "prop-central-string-projected-force-consistency",
+        "kind": "proposition",
+        "title": "Centered-tangent string residuals are second-order consistent on a regular MEP",
+        "deps": [
+          "alg-finite-image-string-method",
+          "def-regular-minimum-energy-path-in-a-collision-free-tube",
+          "lem-arc-length-polyline-interpolation-error",
+          "lem-centered-chord-and-unequal-step-tangent-error",
+          "def-jacobian-matrix-and-gradient",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-dimer-mode-perturbation-and-local-saddle-error",
+        "kind": "theorem",
+        "title": "A separated dimer mode gives a local inexact saddle error bound",
+        "deps": [
+          "alg-finite-budget-dimer-mode-following",
+          "def-validated-eigenvalue-enclosures-for-an-index-one-hessian",
+          "lem-dimer-central-force-hessian-vector-error",
+          "thm-local-index-one-saddle-certificate-from-enclosures",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "cor-hessian-is-symmetric",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $d\\ge2$, let $U\\subseteq\\mathbb R^d$ be open, and let $V\\in C^4(U,\\mathbb R)$ using the convention of [[def-ck-and-multi-index-notation-in-several-variables]]. Fix $x\\in U$. Put $H=\\nabla^2V(x)$ and suppose a validated ordered eigenvalue enclosure certifies index one with gap $\\gamma>0$ as in [[def-validated-eigenvalue-enclosures-for-an-index-one-hessian]], so $\\lambda_1(H)\\le-\\gamma$ and $\\lambda_j(H)\\ge\\gamma$ for $j\\ge2$. Let $\\epsilon>0$, let $v$ be a unit direction accepted by the rotation test of [[alg-finite-budget-dimer-mode-following]], and assume the whole segment $x+[-\\epsilon,\\epsilon]v$ lies in $U$. Let $D_\\epsilon$ be the paired-force estimate, with $\\|(I-vv^T)D_\\epsilon\\|_2\\le\\tau_{\\rm rot}$. Suppose each force evaluation has Euclidean error at most $\\eta$ and the third derivatives of each gradient coordinate along this segment are bounded by $M_4$. Set\n\n$$\\delta:=\\frac{\\sqrt d\\,M_4}{6}\\epsilon^2+\\frac{\\eta}{\\epsilon}.$$\n\nIf $\\delta\\le\\gamma/4$ and the measured Rayleigh estimate $v^TD_\\epsilon\\le-\\gamma/2$, then the sine of the angle from $v$ to the lowest-eigenvalue line of $H$ satisfies\n\n$$\\sin\\angle(v,q_1):=\\sqrt{1-|q_1^Tv|^2}\\le\\frac{4(\\tau_{\\rm rot}+\\delta)}{5\\gamma},$$\n\nwhere $q_1$ is any unit eigenvector for $\\lambda_1(H)$. This is a conditional mode bound; rotation success alone is not an index certificate.\n\nLet $\\epsilon_g=\\|\\nabla V(x)\\|_2$. If $\\epsilon_g=0$, $x$ itself is an index-one critical point. If $\\epsilon_g>0$, put $\\rho=2\\epsilon_g/\\gamma$ and additionally assume $B_2(x,2\\rho)\\subset U$, $H(\\cdot)=\\nabla^2V(\\cdot)$ is $L$-Lipschitz on that ball, and $L\\rho/\\gamma\\le1/2$. Then there is a unique index-one critical point $x_*$ in $\\overline B_2(x,\\rho)$ and\n\n$$\\|x_*-x\\|_2\\le\\rho=\\frac{2\\epsilon_g}{\\gamma}.$$\n\nThe dimer direction bound does not replace the validated eigenvalue enclosure or the residual, inverse, and Hessian-Lipschitz conditions in this local saddle certificate.\n\n"
+      },
+      {
+        "id": "prop-improved-neb-monotone-tangent-has-first-order-projection-error",
+        "kind": "proposition",
+        "title": "The improved NEB monotone branch is generally only first-order consistent",
+        "deps": [
+          "alg-improved-tangent-climbing-neb",
+          "cor-sin-x-over-x-limit",
+          "def-regular-minimum-energy-path-in-a-collision-free-tube",
+          "prop-central-string-projected-force-consistency"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "prop-index-one-eigenvector-step-is-the-local-newton-correction",
+        "kind": "proposition",
+        "title": "An exact index-one eigenvector-following step is the Newton correction at a saddle",
+        "deps": [
+          "alg-index-one-eigenvector-following-step",
+          "alg-newton-correction-for-vector-residuals",
+          "thm-updated-jacobian-newton-local-quadratic-convergence",
+          "def-regular-minimum-energy-path-in-a-collision-free-tube",
+          "def-hessian-and-euclidean-critical-point",
+          "def-jacobian-matrix-and-gradient",
+          "cor-hessian-is-symmetric",
+          "thm-total-derivative-computes-directional-and-partial-derivatives"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-dimer-mode-error-contracts-local-saddle-translation",
+        "kind": "theorem",
+        "title": "A gap-controlled dimer mode gives a local saddle-translation error recurrence",
+        "deps": [
+          "alg-finite-budget-dimer-mode-following",
+          "thm-dimer-mode-perturbation-and-local-saddle-error",
+          "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+          "cor-hessian-is-symmetric",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-hessian-and-euclidean-critical-point",
+          "def-jacobian-matrix-and-gradient",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-courant-fischer-min-max-principle",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "cor-cauchy-reals-lub-complete"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-gauge-fixed-stable-discrete-path-comparison",
+        "kind": "theorem",
+        "title": "A gauge-fixed stable discrete path lies within second order of a smooth MEP",
+        "deps": [
+          "def-regular-minimum-energy-path-in-a-collision-free-tube",
+          "lem-local-root-in-max-norm",
+          "lem-arc-length-polyline-interpolation-error",
+          "prop-central-string-projected-force-consistency",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 2467,
+    "id": "minimum-energy-paths-string-neb-and-saddle-certificates-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Minimum energy paths string neb and saddle certificates — Examples",
+    "companion": "minimum-energy-paths-string-neb-and-saddle-certificates",
+    "requires": [
+      "minimum-energy-paths-string-neb-and-saddle-certificates"
+    ],
+    "items": [
+      {
+        "id": "ex-dimer-hessian-vector-bias-noise-tradeoff",
+        "kind": "example",
+        "title": "Dimer finite-difference bias competes with force-evaluation error",
+        "deps": [
+          "lem-dimer-central-force-hessian-vector-error",
+          "def-hessian-and-euclidean-critical-point"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-corner-and-cusp-break-the-string-tangent-hypotheses",
+        "kind": "example",
+        "title": "A corner has no unique tangent and a cusp gives a zero centered chord",
+        "deps": [
+          "alg-finite-image-string-method",
+          "lem-centered-chord-and-unequal-step-tangent-error"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-curved-double-well-has-a-circular-minimum-energy-path",
+        "kind": "example",
+        "title": "A curved double well has an exact circular minimum-energy path",
+        "deps": [
+          "def-regular-minimum-energy-path-in-a-collision-free-tube",
+          "alg-finite-image-string-method",
+          "def-hessian-and-euclidean-critical-point",
+          "cor-hessian-is-symmetric",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-straight-chord-is-not-the-curved-double-well-path",
+        "kind": "example",
+        "title": "The straight chord misses the curved double-well minimum-energy path",
+        "deps": [
+          "alg-improved-tangent-climbing-neb",
+          "def-regular-minimum-energy-path-in-a-collision-free-tube",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-index-two-maximum-fails-the-index-one-certificate",
+        "kind": "example",
+        "title": "A local maximum has the wrong Morse index for the saddle certificate",
+        "deps": [
+          "def-validated-eigenvalue-enclosures-for-an-index-one-hessian",
+          "thm-local-index-one-saddle-certificate-from-enclosures"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-near-degenerate-saddle-modes-rotate-under-small-perturbations",
+        "kind": "example",
+        "title": "A small spectral gap makes the dimer mode sensitive to perturbations",
+        "deps": [
+          "thm-dimer-mode-perturbation-and-local-saddle-error"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-zero-discrete-neb-residual-does-not-fix-a-continuum-path",
+        "kind": "example",
+        "title": "Zero discrete force does not select a unique continuum path",
+        "deps": [
+          "def-regular-minimum-energy-path-in-a-collision-free-tube",
+          "alg-finite-image-string-method",
+          "alg-improved-tangent-climbing-neb",
+          "thm-gauge-fixed-stable-discrete-path-comparison"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  }
+]

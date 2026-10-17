@@ -7,12 +7,11 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-full-reduced-and-column-pivoted-computational-qr-factorisations, thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts, thm-least-squares-solutions-and-normal-equation, thm-normal-equations-square-the-spectral-condition-number, def-condition-number-of-a-nonsingular-linear-system, thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]
+deps: [def-full-reduced-and-column-pivoted-computational-qr-factorisations, thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts, thm-least-squares-solutions-and-normal-equation, thm-normal-equations-square-the-spectral-condition-number, def-condition-number-of-a-nonsingular-linear-system, thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison, thm-dimension-of-a-linear-subspace, thm-gram-schmidt-orthonormalisation]
 aliases: []
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
-  precheck: pass
+  repair: research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-published-QR/thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number/application/repair.json
 sources:
   scraped: []
   references:
@@ -56,13 +55,17 @@ $\widehat R$ upper triangular. Then:
 
 [L5] Spectral norm is unitarily invariant and is determined by singular values ([[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]]).
 
+[L6] Every independent set in a finite-dimensional vector space extends to a basis, without a choice principle ([[thm-dimension-of-a-linear-subspace]], claim 3).
+
+[L7] Gram–Schmidt applied to a finite independent list gives an orthonormal list with the same successive spans, by the displayed projection and normalization recursion ([[thm-gram-schmidt-orthonormalisation]]).
+
 ## Proof
 
 **Proof technique:** orthogonal decomposition of the residual.
 
-1.1 With the reduced QR factorisation supplied by [L2] and shaped as in [L1], extend the columns of $\widehat Q$ to an orthogonal basis $Q=[\widehat Q\ \widehat Q_\perp]$. Then $$ \|Ax-b\|_2 =\|Q^{\mathsf T}(Ax-b)\|_2 =\left\|\binom{\widehat R x-\widehat Q^{\mathsf T}b}{-\widehat Q_\perp^{\mathsf T}b}\right\|_2, $$ so $$ \|Ax-b\|_2^2 =\|\widehat R x-\widehat Q^{\mathsf T}b\|_2^2+\|\widehat Q_\perp^{\mathsf T}b\|_2^2. $$ The second term is independent of $x$, so minimising $\|Ax-b\|_2$ is equivalent to solving $\widehat R x=\widehat Q^{\mathsf T}b$. [L1, L2, L5, algebra]
+1.1 Use the given reduced factorisation, with the orthonormal columns of $\widehat Q$ as in [L1]. They are independent, since $\widehat Qc=0$ implies $c=\widehat Q^{\mathsf T}\widehat Qc=0$. By [L6], extend them to a basis of $\mathbb R^m$, listed with these given columns first. Apply the recursion of [L7] to that list. Each of its first $n$ steps subtracts zero projections and divides a unit vector by its norm $1$, so these columns remain exactly the given $\widehat Q$. The resulting orthogonal matrix is $Q=[\widehat Q\ \widehat Q_\perp]$, with the terminal block empty when $m=n$. Then $$ \|Ax-b\|_2 =\|Q^{\mathsf T}(Ax-b)\|_2 =\left\|\binom{\widehat R x-\widehat Q^{\mathsf T}b}{-\widehat Q_\perp^{\mathsf T}b}\right\|_2, $$ so $$ \|Ax-b\|_2^2 =\|\widehat R x-\widehat Q^{\mathsf T}b\|_2^2+\|\widehat Q_\perp^{\mathsf T}b\|_2^2. $$ The second term is independent of $x$, so minimising $\|Ax-b\|_2$ is equivalent to solving $\widehat R x=\widehat Q^{\mathsf T}b$. [L1, L5, L6, L7, algebra, construct]
 
-2.1 Because $A$ has full column rank, the upper-triangular factor $\widehat R$ has nonzero diagonal, so the triangular system of step 1.1 has a unique solution. Thus the least-squares minimiser is unique and equals that solution. This agrees with the normal equation of [L3]. [step 1.1, L1, L3, algebra]
+2.1 For every $v\in\mathbb R^n$, $\widehat Rv=0$ implies $Av=\widehat Q\widehat Rv=0$, and $Av=0$ implies $\widehat Rv=\widehat Q^{\mathsf T}Av=0$. Thus $\ker\widehat R=\ker A=\{0\}$. If an upper-triangular $\widehat R$ had a zero diagonal entry, using indices $0,\ldots,n-1$, let $j$ be its first such index. Set $v_j=1$ and $v_i=0$ for $i>j$, and solve the rows $i=j-1,\ldots,0$ backwards for $v_i$ (an empty recursion when $j=0$), dividing only by the preceding nonzero diagonal entries. Row $j$ and all later rows then also vanish, giving $\widehat Rv=0$ with $v_j=1$, a contradiction. Hence every diagonal entry is nonzero. Backward substitution therefore gives a unique solution of the triangular system of step 1.1. Thus the least-squares minimiser is unique and equals that solution. This agrees with the normal equation of [L3]. [step 1.1, L1, L3, algebra]
 
 3.1 Since $Q$ is orthogonal and $A=Q\binom{\widehat R}{0}$, [L5] implies that $A$ and $\widehat R$ have the same positive singular values, hence the same spectral condition number. By [L4], the normal-equation matrix has condition number $\kappa_2(A)^2$. Therefore the QR solve uses a factor with condition $\kappa_2(A)$, not the squared condition of the normal equations. [step 2.1, L4, L5, algebra]
 

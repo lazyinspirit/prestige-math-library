@@ -1,0 +1,153 @@
+--- verify-projected.mjs (before)
++++ verify-projected.mjs
+@@ -13,6 +13,7 @@
+ function owned(p){const a=path.resolve(root,p);if(!a.startsWith(base+path.sep))throw Error('Packet/report must remain under own research preparation directory');return a;}
+ const packet=owned(packetArg),read=p=>fs.readFileSync(path.resolve(root,p),'utf8');
+ const journal=JSON.parse(read(path.join(packet,'journal.json'))),issues=[],checks=[],inputs=[];
++const optionForPhase=opt,phaseSpec=opt('--phase-map')??journal.phase_identity_spec,phases=loadPhaseIdentity(phaseSpec,read);
+ const eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+ const sets=(a,b)=>eq([...new Set(a)].sort(),[...new Set(b)].sort());
+ function check(ok,detail){checks.push({...detail,ok});if(!ok)issues.push(detail);}
+@@ -42,22 +43,27 @@
+  }
+  if(!row.target.endsWith('.proof-contracts.json'))throw Error('Unexpected projected metadata target '+row.target);
+  for(const id of after.scope??[]){
+-  const s=source(id);if(!s.steps.length)continue;
+-  const c=after.contracts?.[id],old=before.contracts?.[id];
++  const s=source(id),c=after.contracts?.[id],old=before.contracts?.[id];
++  if(c&&Object.hasOwn(c,'supplier_interfaces'))verifySupplierInterfaces(id,s,c,old??{});
++  if(!s.steps.length)continue;
+   if(!c){check(false,{kind:'missing-scoped-contract',id});continue;}
+   const records=[...(c.derivations??[]),...(c.routine_steps??[])];
+   check(records.length===s.steps.length&&new Set(records.map(x=>x.step)).size===records.length,{kind:'exact-proof-step-set',id});
+-  const routine=new Set((old?.routine_steps??[]).map(x=>x.step));
++  const identities=proofIdentities(id,s.steps,old??{},phases),oldIds=new Set([...(old?.derivations??[]),...(old?.routine_steps??[])].map(x=>x.id));
+   for(const st of s.steps){
+    const matches=records.filter(x=>x.step===st.id),d=matches[0];
+    check(matches.length===1&&d.claim===st.claim,{kind:'whole-source-proof-paragraph',id,step:st.id});
+    const declaredInputs=new Set(d?.inputs??[]),nativeTokens=explicitTokens(st.text,new Map(s.steps.map(x=>[x.id,x])));
+    check(matches.length===1&&Array.isArray(d.inputs)&&st.inputs.every(token=>declaredInputs.has(token)),{kind:'source-terminal-input-tags-retained',id,step:st.id});
+    check(matches.length===1&&[...nativeTokens].every(token=>declaredInputs.has(token)||declaredInputs.has(`step ${token}`)),{kind:'native-explicit-fact-and-known-step-inputs-covered',id,step:st.id});
+-   const actualRoutine=(c.routine_steps??[]).some(x=>x.step===st.id);
+-   check(actualRoutine===routine.has(st.id),{kind:'preserved-derivation-routine-classification',id,step:st.id});
+-   const prior=(routine.has(st.id)?(old?.routine_steps??[]):(old?.derivations??[])).find(x=>x.step===st.id);
+-   check(d?.id===(prior?.id??`step-${st.id.replace('.','-')}`),{kind:'preserved-or-mechanical-step-record-id',id,step:st.id});
++   const match=identities.get(st.id),actualRoutine=(c.routine_steps??[]).some(x=>x.step===st.id);
++   check(actualRoutine===(match?.group==='routine_steps'),{kind:'original-paragraph-classification-preserved',id,step:st.id,original_step:match?.row.step??null});
++   if(match){
++    check(d?.id===match.row.id,{kind:'original-paragraph-stable-record-id',id,step:st.id,original_step:match.row.step});
++    for(const key of Object.keys(match.row))if(!['id','claim','step','inputs'].includes(key))check(eq(d?.[key],match.row[key]),{kind:'original-paragraph-auxiliary-field-preserved',id,step:st.id,field:key});
++   }else{
++    check(!oldIds.has(d?.id)&&Object.keys(d??{}).every(key=>['id','claim','step','inputs'].includes(key)),{kind:'new-paragraph-no-fabricated-original-id-score-or-classification',id,step:st.id});
++   }
+   }
+   const expected=[];
+   for(const [fact,f]of s.facts)for(const supplier of new Set(f.links)){
+@@ -74,7 +80,7 @@
+    check(declared.includes(supplier),{kind:'supplier-declared-in-source',id,fact,supplier});
+   }
+   check(sets((c.citations??[]).map(x=>`${x.fact}\0${x.source}`),expected)&&(c.citations??[]).length===new Set(expected).size,{kind:'complete-no-stale-citation-pair-set',id});
+-  for(const key of new Set([...Object.keys(old??{}),...Object.keys(c)]))if(!['derivations','routine_steps','citations'].includes(key))check(eq(old?.[key],c[key]),{kind:'preserved-unrelated-contract-field',id,field:key});
++  for(const key of new Set([...Object.keys(old??{}),...Object.keys(c)]))if(!['derivations','routine_steps','citations','supplier_interfaces'].includes(key))check(eq(old?.[key],c[key]),{kind:'preserved-unrelated-contract-field',id,field:key});
+  }
+ }
+ // Reject drift during verification as well as drift at entry.
+@@ -94,3 +100,98 @@
+   }
+   return out;
+ }
++
++// Paragraph identity is authenticated from root's direct map and archived source,
++// never inferred from a coincident step number after a phase insertion/reorder.
++function loadPhaseIdentity(specPath, reader) {
++  const entries=new Map();
++  if(!specPath)return entries;
++  const spec=JSON.parse(reader(specPath));
++  const config=Array.isArray(spec)?{maps:spec}:spec;
++  const receipt=optionForPhase('--phase-receipt')??config.root_receipt;
++  if(!receipt)throw Error('Phase identity requires the actual root application receipt');
++  reader(receipt);
++  const rows=config.map_file?JSON.parse(reader(config.map_file)):(config.maps??[]);
++  const origin=config.map_file??specPath;
++  for(const row of [...rows,...(config.extra_maps??[])]){
++    const file=row.path,id=path.basename(file,'.md'),map=row.old_to_final_step_labels;
++    if(!file?.startsWith('items/')||!map||entries.has(id))throw Error('Invalid/duplicate phase identity '+file);
++    if(new Set(Object.values(map)).size!==Object.values(map).length)throw Error('Noninjective phase identity '+id);
++    if(row.root_receipt)reader(row.root_receipt);
++    const before=row.before_file??path.join(path.dirname(origin),'before',file);
++    const original=numberedProofSteps(splitFrontmatter(reader(before)).body);
++    entries.set(id,{map,original:new Map(original.map(st=>[st.id,st])),before});
++  }
++  for(const id of config.rewritten_items??[]){if(entries.has(id))throw Error('Rewritten item also has old-paragraph phase map '+id);entries.set(id,{rewritten:true});}
++  return entries;
++}
++function paragraphClaim(text,map={},order=Object.keys(map)){
++  const refs=/(steps?\s+)((?:\d+\.\d+)(?:(?:\s*,\s*(?:and\s+)?|\s+and\s+|\s*&\s*|\s*[–—-]\s*)\d+\.\d+)*)/gi;
++  return String(text??'').replace(refs,(_,prefix,labels)=>{
++    const expanded=[];
++    for(const part of labels.match(/\d+\.\d+(?:\s*[–—-]\s*\d+\.\d+)?/g)??[]){
++      const ends=part.match(/\d+\.\d+/g);
++      if(ends.length===1)expanded.push(ends[0]);
++      else{const a=order.indexOf(ends[0]),z=order.indexOf(ends[1]);if(a<0||z<a)throw Error('Unbound/reversed paragraph reference range '+part);expanded.push(...order.slice(a,z+1));}
++    }
++    return 'step-references:'+expanded.map(label=>map[label]??label).join(',');
++  })
++    .replaceAll('\\{t_{ii}\\}','\\{t_{ii}}')
++    .replaceAll('\\lbrackih,s\\rbrack','[ih,s]')
++    .replaceAll('\\lbrackih,(i+1)h\\rbrack','[ih,(i+1)h]')
++    .replace(/\s+/g,'').replace(/∎$/,'');
++}
++function proofIdentities(id,steps,contract,phases){
++  const prior=['derivations','routine_steps'].flatMap(group=>(contract[group]??[]).map(row=>({row,group})));
++  const currentOrder=steps.map(st=>st.id),phase=phases.get(id),inverse=new Map(Object.entries(phase?.map??{}).map(([a,b])=>[b,a])),used=new Set(),out=new Map();
++  for(const step of steps){
++    let candidates=[];
++    if(phase?.rewritten){out.set(step.id,null);continue;}
++    if(phase){
++      const oldLabel=inverse.get(step.id);
++      if(oldLabel===undefined){out.set(step.id,null);continue;} // explicitly inserted new paragraph
++      const source=phase.original.get(oldLabel);
++      if(!source||paragraphClaim(source.claim,phase.map,[...phase.original.keys()])!==paragraphClaim(step.claim,{},currentOrder))throw Error('Mapped source paragraph identity drift '+id+' '+oldLabel+' -> '+step.id);
++      // Direct inverse-map candidate must actually carry that paragraph's claim.
++      const direct=prior.filter(x=>x.row.step===oldLabel&&paragraphClaim(x.row.claim,{},[...phase.original.keys()])===paragraphClaim(source.claim,{},[...phase.original.keys()]));
++      candidates=direct.length?direct:prior.filter(x=>paragraphClaim(x.row.claim,{},currentOrder)===paragraphClaim(step.claim,{},currentOrder)||paragraphClaim(x.row.claim,phase.map,[...phase.original.keys()])===paragraphClaim(step.claim,{},currentOrder));
++    }else{
++      // Rewritten paragraphs (e.g. a new proof) receive no invented old identity.
++      const direct=prior.filter(x=>x.row.step===step.id&&paragraphClaim(x.row.claim,{},currentOrder)===paragraphClaim(step.claim,{},currentOrder));
++      candidates=direct.length?direct:prior.filter(x=>paragraphClaim(x.row.claim,{},currentOrder)===paragraphClaim(step.claim,{},currentOrder));
++    }
++    if(candidates.length>1)throw Error('Ambiguous original paragraph identity '+id+' '+step.id);
++    const match=candidates[0]??null;
++    if(match){if(used.has(match.row))throw Error('Original paragraph reused '+id);used.add(match.row);}
++    out.set(step.id,match);
++  }
++  return out;
++}
++function supplierInterfaceProjection(contract,body){
++  const facts=[...factParagraphs(body)].flatMap(([fact,f])=>[...new Set(f.links)].map(supplier=>({fact,supplier,text:f.text.trim()})));
++  const prior=contract.supplier_interfaces??[];
++  return facts.map(pair=>{
++    const exact=prior.find(x=>x.fact===pair.fact&&(x.supplier??x.source)===pair.supplier);
++    const legacy=prior.filter(x=>!x.fact&&(x.supplier??x.source)===pair.supplier);
++    const old=exact??(legacy.length===1&&facts.filter(x=>x.supplier===pair.supplier).length===1?legacy[0]:null);
++    return {...old,fact:pair.fact,supplier:pair.supplier,required_hypotheses:pair.text};
++  });
++}
++
++// Independently compare the actual fact paragraphs/pairs, preserving only genuine
++// same-pair auxiliary fields. No new source-reading or body-inspected status.
++function verifySupplierInterfaces(id,s,contract,prior){
++  const pairs=[...s.facts].flatMap(([fact,f])=>[...new Set(f.links)].map(supplier=>({fact,supplier,paragraph:f.text.trim()})));
++  const rows=contract.supplier_interfaces??[];
++  check(rows.length===pairs.length,{kind:'supplier-interface-current-pair-count',id});
++  for(const pair of pairs){
++    const matches=rows.filter(x=>x.fact===pair.fact&&(x.supplier??x.source)===pair.supplier),row=matches[0];
++    check(matches.length===1&&row.required_hypotheses===pair.paragraph,{kind:'supplier-interface-full-current-fact-paragraph',id,fact:pair.fact,supplier:pair.supplier});
++    if(!row)continue;
++    const exact=(prior.supplier_interfaces??[]).find(x=>x.fact===pair.fact&&(x.supplier??x.source)===pair.supplier);
++    const legacy=(prior.supplier_interfaces??[]).filter(x=>!x.fact&&(x.supplier??x.source)===pair.supplier);
++    const old=exact??(legacy.length===1&&pairs.filter(x=>x.supplier===pair.supplier).length===1?legacy[0]:null);
++    if(old){for(const key of Object.keys(old))if(!['fact','supplier','required_hypotheses'].includes(key))check(eq(row[key],old[key]),{kind:'supplier-interface-same-pair-other-field-preserved',id,fact:pair.fact,supplier:pair.supplier,field:key});}
++    else check(Object.keys(row).every(k=>['fact','supplier','required_hypotheses'].includes(k)),{kind:'new-supplier-interface-no-invented-reading-status',id,fact:pair.fact,supplier:pair.supplier});
++  }
++}

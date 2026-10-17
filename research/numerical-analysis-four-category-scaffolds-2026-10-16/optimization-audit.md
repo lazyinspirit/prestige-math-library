@@ -124,6 +124,19 @@ quadratic rate without a separate perturbation argument. PE01/PE27 consume
 only this local root correction; bracket preservation, coarse derivative
 invertibility and mesh-uniformity are their own obligations.
 
+The published page `numerical-optimization-for-statistical-computation`
+supplies the canonical gradient/descent and objective-Newton algorithms.
+When $F=\nabla f$, identify $DF=\nabla^2f$ and reuse
+`alg-damped-newton` only on its $C^2$ objective, positive-definite Hessian
+branch with $0<\alpha<1/2$, $0<\beta<1$ and positive decrement tolerance.
+Its stationary/decrement/unavailable-solve statuses and pre-update stopping
+order are retained. Its local quadratic theorem requires a positive-definite
+critical Hessian and Lipschitz Hessian in a ball and bounds only attempted
+updates. Neither algorithm covers an arbitrary vector root or an indefinite
+nonsingular gradient-root Hessian. A vector-root merit function needs its
+own differentiability and strict-descent proof before invoking an Armijo
+argument; no objective-globalization theorem is silently transferred.
+
 <a id="contract-opt5"></a>
 
 ### Contract OPT5
@@ -215,12 +228,40 @@ and status `zero-particle-prefix`; canonical unbiasedness requires its exact
 positive finite-prefix/full-resampling hypotheses. Define
 $Q_{p,L}1(x_p)=E[\prod_{j=p+1}^LG_j(X_j)\mid X_p=x_p]$,
 $Z_p=E\prod_{j=1}^pG_j(X_j)>0$, $\eta_p$ the normalized level-$p$ law,
-and $h_{p,L}=Q_{p,L}1/(Z_L/Z_p)$. Under the explicit local stability
-condition $E_{\eta_p}h_{p,L}^2\le B$ for every $p<L$, the same-frontier
-conditional-variance recursion must prove
-$$E[(\hat Z_L-Z_L)^2]\le Z_L^2[(1+(B-1)/N)^L-1].$$
-This is absolute $O(L/N)$ for fixed $L,B$ because $Z_L\le1$; $B$ may depend
-badly on rarity. A stopped-level extension additionally needs a specified
+and $h_{p,L}=Q_{p,L}1/(Z_L/Z_p)$. A bound on
+$E_{\eta_p}h_{p,L}^2$ alone does not control finite-particle error: the
+same-frontier two-state refresh-kernel counterexample has every such second
+moment equal to one but positive event-sampling variance. Retain that
+counterexample, and prove the unconditional bounded-potential absolute bound
+$$E[(\hat Z_L-Z_L)^2]\le (L+1)/(4N)$$
+by the backward-event martingale and conditional variance, under the stated
+positive-prefix/full-multinomial-resampling hypotheses. This retains absolute
+$O(L/N)$ control for fixed $L$ without asserting uniform relative efficiency.
+
+Retain a separate stronger finite-particle relative bound under hypotheses
+on the actual random predictive laws, including event/transition randomness.
+Set $q_L=1$, $q_{p-1}=M_p(G_pq_p)$, and
+$U_p=\hat Z_p\eta_p^N(q_p)$, where $\eta_p^N$ is the weighted empirical
+law after level $p$. Let deterministic finite $B_0,\ldots,B_L\ge1$ satisfy
+$P(q_0^2)\le B_0Z_L^2$ and, almost surely on every positive empirical prefix,
+$$\eta_{p-1}^NM_p[(G_pq_p)^2]\le B_p\{\eta_{p-1}^NM_p(G_pq_p)\}^2,
+\qquad 1\le p\le L.$$
+These are bounds on the second moment of the realized event-weighted test,
+not on the square of its conditional mean. The same-frontier theorem must
+prove
+$$E[(\hat Z_L-Z_L)^2]\le Z_L^2\left\{\prod_{p=0}^L[1+(B_p-1)/N]-1\right\}.$$
+Indeed $E[U_p\mid\mathcal F_{p-1}]=U_{p-1}$ and the IID conditional
+variance gives $E[U_p^2\mid\mathcal F_{p-1}]\le[1+(B_p-1)/N]U_{p-1}^2$;
+initial IID sampling supplies the $p=0$ factor. This accounts for the initial
+particle draw and all $L$ resample/mutation steps of the canonical procedure.
+If $B_0=1$ and $B_p\le B$ for $1\le p\le L$, the earlier-shaped bound
+$Z_L^2[(1+(B-1)/N)^L-1]$ follows under these stronger, explicit hypotheses.
+No such deterministic conditional bound follows from invariant mutations
+alone; any uniform-in-rarity assertion must establish these bounds for its
+actual family. Relative error is standard deviation divided by $Z_L$;
+relative variance is variance divided by $Z_L^2$.
+
+A stopped-level extension additionally needs a specified
 exact hitting/stopped transition kernel (or exact-hitting oracle), cemetery
 state convention and proof its Feynman–Kac normalizer equals $P(A)$. That
 kernel/event identity is a precise RARE1 authoring hold, not a canonical SIR
@@ -325,7 +366,7 @@ $d_i>0$ returns ray $r_j=1,r_B=-d\ge0$ with $c^Tr=\bar c_j<0$. Otherwise
 set $\theta=\min_{d_i>0}x_{B_i}/d_i$, update
 $x_B^+=x_B-\theta d$, $x_j^+=\theta$, and leave the least-index basic
 variable among minimizing rows. The objective change is
-$-\theta\bar c_j<0$. If no reduced cost is negative, return
+$\theta\bar c_j\le0$, strictly negative only when $\theta>0$. If no reduced cost is negative, return
 the primal basic solution and dual $y$; exact feasibility and complementary
 slackness prove optimality.
 
@@ -419,6 +460,19 @@ $1-2am\min(1,2b(1-a)/M)$. If computed gradient error $\le\delta$ and
 computed residual $\le\eta$, strong monotonicity gives
 $\|x-x^*\|\le(\eta+\delta)/\mu$. Software flags establish neither
 bound. These differ from published fixed-step gradient rate.
+
+Reuse `alg-gradient-descent`, `alg-damped-newton` and
+`lem-armijo-backtracking-terminates-for-strict-descent-directions` from
+`numerical-optimization-for-statistical-computation`, with their exact
+open-domain and stopping interfaces. The published fixed-step theorem uses
+$1/L$ and global strong convexity/smoothness; it does not prove the new
+exact-search/Armijo rate. For Newton's global damped phase retain uniform
+$mI\preceq H\preceq MI$ on trial segments and compact sublevel, then prove
+a uniform positive accepted-step/decrease bound away from the local basin.
+Lipschitz Hessian and the published local theorem yield unit attempted steps
+and quadratic updates in that basin; a positive decrement tolerance may
+stop the algorithm earlier, so eventual-unit-step language is conditional on
+continued updates. No post-stop infinite sequence is asserted.
 
 <a id="contract-opt10"></a>
 
@@ -517,12 +571,7 @@ and uniqueness. A finite inner oracle may instead return a point within
 $\epsilon_k$ of this subproblem minimum and its certified gap; a larger gap
 returns inner-solve failure. The displayed rates are for $\epsilon_k=0$;
 inexact rates require their explicit accumulated error term. For $g_i=0$ this is the
-gradient step of size $1/L_i$. Under a nonempty minimizer set,
-$R=\|x^0-x^*\|$ for a chosen minimizer, and $L_{max}=\max_iL_i$, the
-coordinate descent estimate-sequence proof gives
-$E[F(x^k)-F^*]\le2nL_{max}R^2/(k+4)$. If $F$ is $\mu$-strongly convex,
-the one-block decrease and strong-convexity inequality give the factor
-$1-\mu/(nL_{max})$ per expected gap. Nonuniform sampling requires its own
+gradient step of size $1/L_i$. For the smooth branch $g_i=0$, retain its separately proved convex radius-dependent rate. For a general separable composite, no penalty-independent $R$-only convex rate is inferred from that smooth branch. If $F=f+g$ itself is $\mu$-strongly convex, the same-pair composite-curvature theorem proves unique attainment and the factor $q_c=1-\mu/[n(L_{max}+\mu)]$ using common majorizer $L_{max}$ and uniform independent sampling. If the smooth $f$ itself is $\mu$-strongly convex, preserve the sharper $q_f=1-\mu/(nL_{max})$. Both finite-horizon bounds retain the deterministic certified model-error convolution $\sum_{j<k}q^{k-1-j}\epsilon_j$ and assume accepted calls at every history through the stated horizon; neither conditions the block law on successful calls. The counterexample to $q_f$ from composite-only curvature is retained. Nonuniform sampling requires its own
 probability/step relation and theorem. A finite wrapper stops on a declared
 proximal-gradient mapping tolerance or budget and returns the current point,
 gap estimate if available, and status; these asymptotic rates do not certify
@@ -696,18 +745,32 @@ $\mathcal F_k$-measurable, and $G_k$ be $\mathcal F_{k+1}$-measurable.
 Projected SGD is $x_{k+1}=P_C(x_k-\alpha_kG_k)$; require
 $E[G_k\mid\mathcal F_k]=\nabla f(x_k)$ and state the conditional second
 moment each theorem uses. The locally proved Robbins–Siegmund lemma is:
-if nonnegative adapted integrable $X_k$ obey
-$E[X_{k+1}\mid\mathcal F_k]\le(1+a_k)X_k-b_k+c_k$ for deterministic
-nonnegative sequences with $\sum a_k,\sum c_k<\infty$, then $X_k$ converges
-almost surely and $\sum b_k<\infty$ almost surely. Set
-$A_0=1$, $A_{k+1}=A_k(1+a_k)$ and
-$Z_k=X_k/A_k+\sum_{j=k}^{\infty}c_j/A_{j+1}$; the conditional inequality
-makes $Z_k$ a nonnegative supermartingale with decrement at least
-$b_k/A_{k+1}$. Doob convergence gives convergence and finite decrement sum;
-$A_k$ converges to a finite positive limit, yielding the claim. This uses
-the inspected Doob submartingale convergence theorem only under its
-bounded-positive-part-expectation hypothesis, which must be checked for
-$Z_k$.
+assume AC. Let nonnegative adapted integrable $X_k$ obey
+$E[X_{k+1}\mid\mathcal F_k]\le(1+a_k)X_k-b_k+c_k$,
+where $a_k,c_k$ are deterministic nonnegative summable sequences and $b_k$
+is nonnegative, $\mathcal F_k$-measurable and integrable (deterministic
+$b_k$ is included). Set $A_0=1$, $A_{k+1}=A_k(1+a_k)$ and
+$Z_k=X_k/A_k+\sum_{j=k}^{\infty}c_j/A_{j+1}$.
+Then $Z_k$ is adapted, nonnegative and integrable and
+$E[Z_{k+1}\mid\mathcal F_k]\le Z_k-b_k/A_{k+1}$.
+Thus $-Z_k$ is an integrable adapted submartingale with
+$\sup_k E[(-Z_k)^+]=0$; the exact published
+`thm-doob-submartingale-convergence` on
+`martingale-inequalities-and-convergence` applies, assuming AC.
+To obtain the decrement sum, set
+$W_k=Z_k+\sum_{j<k}b_j/A_{j+1}$. Each finite sum is integrable;
+$W_k$ is also a nonnegative supermartingale, so Doob applied to $-W_k$
+gives a finite almost-sure limit. Since the partial sum is at most $W_k$,
+$\sum_k b_k/A_{k+1}<\infty$ almost surely. Finally
+$1\le A_k\le\exp(\sum_j a_j)$, $A_k$ tends to a finite positive
+limit, and the deterministic tail tends to zero. Hence $X_k$ converges
+almost surely and $\sum_k b_k<\infty$ almost surely. This proves the
+stated local lemma from the literal supplier, without confusing a
+supermartingale with a submartingale or deriving finite decrements from
+convergence alone. Every instantiation must exhibit its filtration,
+nonnegative integrable adapted Lyapunov quantity, predictable decrement and
+the two deterministic summable error sequences; the strongly convex and
+biased-noise branches retain their stability and moment assumptions.
 
 For $\mu$-strongly convex $f$ on $C$, a minimizer $x^*$, steps
 $0<\alpha_k\le1/(2\mu)$, unbiased gradients and
@@ -782,18 +845,49 @@ finite bounds are handled by the same tree with deterministic integer
 branching; finite enumeration is the fallback and no polynomial-time claim
 is made.
 
-For finite-candidate Bayesian search, input a finite ordered set $X$, PSD
-kernel $k$, noise variance $\sigma^2$, observations and choose the
-lexicographically least acquisition maximizer. Compute
-posterior
-$\mu_t(x)=k_t(x)^T(K_t+\sigma^2I)^{-1}y$ and
-$s_t^2(x)=k(x,x)-k_t(x)^T(K_t+\sigma^2I)^{-1}k_t(x)$; choose
-$x_{t+1}=\arg\max_{x\in X}\{\mu_t(x)+b_t s_t(x)\}$ for declared $b_t$,
-observe $y_{t+1}=f(x_{t+1})+\xi_{t+1}$ and append it to the data. This finite
-acquisition rule has no generic global/regret theorem. Any
-GP-UCB bound requires an explicit RKHS norm bound, conditionally sub-Gaussian
-noise, confidence sequence and information-gain theorem; acquisition
-maximization error must also be included.
+For finite-candidate Bayesian search, input a nonempty finite ordered set
+$X$, finite budget, real mean $m$, symmetric PSD kernel $k$ on $X$, noise
+variance $\sigma^2\ge0$, finite nonnegative acquisition coefficients $b_t$,
+and an initial finite observation list (repetitions allowed). Assume AC and
+$f\sim GP(m,k)$ with observation errors independent of the entire process
+and of one another, each $N(0,\sigma^2)$. The zero-mean formula is the
+special case $m=0$; a deterministic objective may use the same surrogate
+rule but receives no assertion that its actual law is this GP posterior.
+At $t=0$ use the prior $\mu_0=m$, $s_0^2(x)=k(x,x)$ without an inverse.
+For $t\ge1$ form $C_t=K_t+\sigma^2I$ and require $C_t\succ0$.
+Indeed for every nonzero $v$, PSD gives
+$v^TC_tv=v^TK_tv+\sigma^2\|v\|^2>0$ if $\sigma^2>0$.
+Thus positive noise permits singular prior blocks and repeated sites.
+Zero noise is also admissible whenever $K_t\succ0$; do not require strict
+positive definiteness of the kernel on every possible repeated list.
+If positive definiteness or the required solve is unavailable, return
+`posterior-solve-unavailable` with the last valid data/state, and no posterior
+or next acquisition for that stage. Invalid kernel/noise/model inputs return
+`inadmissible-model`; neither branch substitutes a singular conditional or
+pseudoinverse formula.
+
+Reuse `thm-finite-gaussian-process-posterior-and-predictive-laws` on
+`gaussian-process-priors-and-posterior-laws`: solve the SPD systems using
+Cholesky/triangular solves and set
+$$\mu_t(x)=m(x)+k_t(x)^TC_t^{-1}(y-m_{X_t}),\qquad
+s_t^2(x)=k(x,x)-k_t(x)^TC_t^{-1}k_t(x).$$
+The theorem proves the variance is nonnegative and permits it to be zero;
+set $s_t=\sqrt{s_t^2}$. No unqualified floating negative variance is clipped
+to claim exact validity. Choose the least maximizer of
+$\mu_t(x)+b_ts_t(x)$, observe $y_{t+1}=f(x_{t+1})+\xi_{t+1}$, append and
+repeat to the finite cap. For a fixed observation list the supplier gives
+an all-$y$ conditional-kernel version. For adaptive sites the local proof
+must induct over histories: the next site is a measurable deterministic
+function of the finite history (finite ordered argmax), its selection adds
+no information beyond that history, and independent fresh Gaussian noise
+permits the next Gaussian conditioning update. This supplies the sequential
+posterior claim; a mere substitution of random indices into the fixed-list
+theorem does not. All published singular prior/predictive cases with
+$C_t\succ0$ remain supported. This acquisition rule has no generic
+regret/global certificate. GP-UCB needs its separate RKHS norm,
+conditionally sub-Gaussian noise, confidence-sequence/information-gain
+proof and acquisition-error hypotheses; the deterministic branch-and-bound
+certificate above is unaffected.
 
 <a id="contract-opt14"></a>
 
@@ -888,6 +982,13 @@ failed iterations.
 
 ### Contract STO2
 
+Assume AC for the conditional-expectation classes inherited through STO1.
+The SVRG/SAGA finite-expectation Lyapunov arguments below require integrable
+iterates/tables (finite deterministic initialization and smooth finite-sum
+gradients give finite moments at each finite step); they do not invoke
+Doob or claim almost-sure convergence. Any added almost-sure conclusion must
+instantiate STO1's compensated-supermartingale hypotheses separately.
+
 For $F(x)=n^{-1}\sum_{i=1}^nf_i(x)$, SVRG takes a snapshot $\tilde x$,
 computes $\nabla F(\tilde x)$, sets $x_0=\tilde x$, then for each inner
 iteration samples $i$ uniformly and independently and sets
@@ -917,12 +1018,9 @@ $n^{-1}\sum_i\|\nabla f_i(x_k)-\nabla f_i(x^*)\|^2\le2L(F(x_k)-F^*)$;
 the three-vector norm bound gives
 $E[\|v_k\|^2\mid\mathcal F_k]\le6L(F(x_k)-F^*)+6S_k$, and table replacement
 gives $E[S_{k+1}\mid\mathcal F_k]\le(1-1/n)S_k+2L(F(x_k)-F^*)/n$.
-Using $F(x)-F^*\le L\|x-x^*\|^2/2$ and
-$\langle\nabla F(x),x-x^*\rangle\ge\mu\|x-x^*\|^2$, the Lyapunov
-$\mathcal L_k=V_k+7\eta^2nS_k$ contracts by
-$E[\mathcal L_{k+1}]\le(1-\mu\eta)E[\mathcal L_k]$ whenever
-$0<\eta\le\min\{1/(3L),\mu/(13L^2)\}$. This conservative factor is
-derived locally and is not the sharper published constant. The SVRG/SAGA
+Use the stronger gap-retaining inequality $\langle\nabla F(x),x-x^*\rangle\ge F(x)-F^*+(\mu/2)\|x-x^*\|^2$. Combining the iterate and table bounds for $\mathcal L_k=V_k+7\eta^2nS_k$ gives
+$$E[\mathcal L_{k+1}\mid\mathcal F_k]\le(1-\mu\eta)V_k+(-2\eta+20L\eta^2)(F(x_k)-F^*)+(7n-1)\eta^2S_k.$$
+Thus every constant $0<\eta\le1/(10L)$ gives factor $q=1-\min\{\mu\eta,1/(7n)\}$ and $E[F(x_k)-F^*]\le(L/2)q^k\mathcal L_0$. The faster factor $1-\mu\eta$ additionally requires $\mu\eta\le1/(7n)$. Retain the separate already-proved sufficient branch $\eta\le\min\{1/(3L),\mu/(13L^2),1/(7\mu n)\}$ and the counterexample to removing its memory restriction. These local results preserve an $n$-independent $O(1/L)$ step without asserting the refuted faster factor. Counts concern $n$ initialization and one subsequent component-gradient evaluation per update, with maintained-mean vector arithmetic and $O(nd)$ storage, not the oracle's total runtime. The SVRG/SAGA
 claims do not transfer to nonconvex components, without-replacement sampling
 or arbitrary epoch outputs.
 
@@ -1092,17 +1190,11 @@ $\alpha_{j+1}v_{j+1}=A^*u_{j+1}-\beta_{j+1}v_j$. A zero divisor is
 a breakdown/status branch. LSQR applies Givens rotations to the bidiagonal
 least-squares problem; exact arithmetic minimizes residual over
 $x_0+\mathcal K_k(A^*A,A^*r_0)$. Regularization requires an explicit stop.
-For nonlinear $F:X\to Y$, iteratively regularized Gauss–Newton solves
-$(F'(x_k)^*F'(x_k)+\alpha_k I)s_k=F'(x_k)^*(y_\delta-F(x_k))$,
-sets $x_{k+1}=x_k+s_k$, $\alpha_k=\alpha_0q^k$ for $0<q<1$, and stops at
-the first discrepancy index $\|F(x_k)-y_\delta\|\le\tau\delta$ or finite
-budget. Its local theorem assumes on an invariant ball
-$$\|F(x)-F(z)-F'(z)(x-z)\|\le\eta\|F(x)-F(z)\|,\quad \eta<1/2,$$
-$F'$ is $L$-Lipschitz, and
-$x^\dagger-x_0=(F'(x^\dagger)^*F'(x^\dagger))^\nu w$ for
-$0<\nu\le1/2$ and bounded $w$. It must derive the regularization/noise
-error recurrence and ensure discrepancy crossing; no nonlinear rate is
-imported from the linear filter proof.
+For nonlinear $F:X\to Y$, preserve the unanchored regularized LM step $(A_k^*A_k+\alpha_k I)s_k=A_k^*(y_\delta-F(x_k))$ and its exact one-step error identity as separate valid procedures/results. The source/discrepancy theorem uses a **separate anchored IRGNM** step
+$$(A_k^*A_k+\alpha_k I)s_k=A_k^*(y_\delta-F(x_k))+\alpha_k(x_0-x_k).$$
+Assume AC, real or complex Hilbert spaces, a closed convex ball $\overline B(x^\dagger,\rho)\subset U$, continuous differentiability with Lipschitz derivative there, and $A=F'(x^\dagger)$ with $F'(x)=(I+R_x)A$, $\|R_x\|\le\kappa<1/5$. This explicit extra factorization implies the cone condition with $\eta=2\kappa/(1-\kappa)<1/2$; it is not inferred from Lipschitz/cone alone. Require the field-complete source $x_0-x^\dagger=(A^*A)^\nu w$, $0<\nu\le1/2$, $\|w\|\le W$, $W>0$, geometric $\alpha_k=\alpha_0q^k$, $0<q<1$, $\alpha_0\ge\|A\|^2$. Use the exact constants $a,b,c,D,E,C_e,N_e$ defined and proved in `thm-irlgnm-local-source-condition-discrepancy-convergence`, with $b<q^{\nu+1/2}$, $(C_e+N_e)W\alpha_0^\nu<\rho$ and $\tau>(1+\kappa)(D+E)+1$. The source-power/filter supplier explicitly constructs the real Hilbert transfer and zero-space branch. Its published complex calculus alone is not a real-field interface.
+
+The theorem proves, rather than assumes, ball preservation of the theoretical extension through $K_\delta=\min\{k:W\alpha_k^{\nu+1/2}\le\delta\}$, finite ordinary Morozov crossing $k_\delta\le K_\delta$, and convergence of its stopped iterate to $x^\dagger$. Actual finite calls follow the extension only until their first test crossing; a shorter cap or uncertified solve retains its failure status. Bounded stopping subsequences use finite-index stability and kernel orthogonality, not a false universal claim $k_\delta\to\infty$. Exact-data convergence is proved too; no nonlinear rate, injectivity, closed-range or finite-dimensional restriction is asserted. No claim that the original unanchored/source hypothesis combination has been proved or refuted is made.
 
 <a id="contract-pc-path"></a>
 
@@ -1453,6 +1545,15 @@ Bounded third derivatives give bias $O(c^2)$; weighted second moments give
 variance $O(c^{-2})$. STO1 requires both bias/noise summability and
 stability. Weak SDE payoff convergence does not imply stochastic-adjoint
 interchange.
+
+Whenever SPSA/biased simulation gradients invoke STO1's almost-sure
+convergence theorem, assume AC and specify the history filtration, adapted
+iterates, fresh conditionally independent perturbation/noise sampling and
+integrable nonnegative Lyapunov process. Prove the conditional bias and
+second-moment estimates for that actual estimator, stability and the
+weighted bias/noise summability making STO1's deterministic error bounds
+summable. This carries the repaired Doob interface to the actual consumer;
+finite-difference bias order or a weak-payoff limit alone proves none of it.
 
 <a id="contract-uq2"></a>
 

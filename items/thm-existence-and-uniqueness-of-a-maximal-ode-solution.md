@@ -15,8 +15,7 @@ landmark: true
 short: "The maximal ODE solution"
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-21
+  repair: research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-published-focused/thm-existence-and-uniqueness-of-a-maximal-ode-solution/application/repair.json
 sources:
   scraped: []
   references:
@@ -43,6 +42,6 @@ Every initial value problem satisfying the Picard-Lindelof hypotheses has a uniq
 
 **Proof technique:** direct.
 
-1.1 Take the union $I$ of the domains of all local solutions through the initial point; [L1] makes the family nonempty, the union of intervals containing $t_0$ is an interval, and local existence around every graph point makes $I$ open. [given, L1]
+1.1 Take the union $I$ of the domains of all solutions through the initial point; [L1] makes the family nonempty, and the union of intervals containing $t_0$ is an interval. For $t\in I$, choose one such solution $x:J\to\mathbb R^n$ with $t\in J$. By [L1] at $(t,x(t))$, there is a local solution $y$ on an open interval $V$ about $t$. By [L2], $x$ and $y$ agree on $J\cap V$, so their union is a solution on $J\cup V$ through the original initial point. Hence $V\subseteq I$, proving that $I$ is open. [given, L1, L2]
 
 2.1 By [L2], all values assigned at a time in $I$ agree, so their pointwise union is a well-defined solution; every other solution is its restriction, which proves maximality, and the same property forces uniqueness of the maximal solution. [step 1.1, L2] ∎

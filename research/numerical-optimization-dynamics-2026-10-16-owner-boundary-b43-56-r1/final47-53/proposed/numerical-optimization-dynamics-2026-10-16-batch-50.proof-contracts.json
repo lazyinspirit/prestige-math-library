@@ -1,0 +1,1002 @@
+{
+  "version": 1,
+  "scope": [
+    "ex-left-preconditioned-residual-can-understate-physical-residual",
+    "thm-ilu0-factor-pattern-and-work-counts",
+    "ex-ilu0-tridiagonal-factorization",
+    "cex-ilu0-product-can-create-fill-outside-input-pattern",
+    "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span"
+  ],
+  "contracts": {
+    "ex-left-preconditioned-residual-can-understate-physical-residual": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+          "source_section": "Statement",
+          "quote": "Let $Ax=b$ be a linear system. In the error formulas in parts 2 and 3, assume\n$x_*$ is a solution of $Ax=b$ and put $e:=x-x_*$. The corresponding\ntransformed exact solutions are denoted by $y_*$.\n\n1. If $P\\in\\operatorname{GL}_n(\\mathbb F)$ and\n   $$P^{-1}Ax=P^{-1}b,$$\n   then the left-preconditioned system has exactly the same solution set as\n   $Ax=b$. Its residual is $\\tilde r=P^{-1}r$, where $r=b-Ax$.\n2. If $P\\in\\operatorname{GL}_n(\\mathbb F)$ and $y:=Px$, then\n   $$AP^{-1}y=b$$\n   is equivalent to $Ax=b$. Its residual is the same physical residual\n   $\\hat r=b-AP^{-1}y=r$, and its error is $\\hat e=y-y_*=Pe$, where\n   $y_*:=Px_*$.\n3. If $M=CC^*$ is Hermitian positive definite and $y:=C^*x$, then\n   $$C^{-1}AC^{-*}y=C^{-1}b$$\n   is equivalent to $Ax=b$. Its residual is\n   $$r_{\\mathrm{sym}}=C^{-1}r,$$\n   and its error is\n   $$e_{\\mathrm{sym}}=y-y_*=C^*e,$$\n   where $y_*:=C^*x_*$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "An **ordered field** is a field $F$ ([[def-field]]) together with a subset\n$P \\subseteq F$, the set of **positive** elements (the *positive cone*),\nsatisfying:\n\n- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.\n\nWe write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by\n\n$$a < b \\;:\\Longleftrightarrow\\; b - a \\in P, \\qquad a \\le b \\;:\\Longleftrightarrow\\; a < b \\text{ or } a = b.$$\n\nThus $a > b$ means $b < a$, and $a \\ge b$ means $b \\le a$. An element $x$ with\n$-x \\in P$ (equivalently $x < 0$) is called **negative**.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Since $\\epsilon>0$, it is nonzero; [F2] gives its inverse $\\epsilon^{-1}$. With $M=\\epsilon^{-1}$, commutativity gives $M\\epsilon=\\epsilon M=1$, so $M^{-1}=\\epsilon$. The physical residual is $r=b-Ax=1-1\\cdot0=1$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "By [F1], the left-preconditioned residual is $M^{-1}r=\\epsilon$. Both $1$ and $\\epsilon$ are positive by [F3], so [F4] gives absolute values $1$ and $\\epsilon$, respectively.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "Since $0<\\epsilon<1$, the left-preconditioned residual has strictly smaller absolute value than the physical residual. The ratio can be made as small as the chosen $\\epsilon$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a fixed scalar system and has no empty-set input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 show both residuals are nonzero because epsilon is positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 evaluate the one-dimensional system directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the preconditioner is invertible and the physical residual is 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example fixes 0<epsilon<1; verification step 1.1 uses epsilon>0 before taking its inverse, and step 3.1 uses epsilon<1 for strict residual understatement. The excluded epsilon=0 is not an invertible preconditioner, while epsilon=1 would remove the strict disparity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the specified scalar and selects no element from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a direct computation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a direct computation, not a biconditional."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Its residual is $\\tilde r=P^{-1}r$, where $r=b-Ax$.",
+          "use": "The example substitutes its scalar M and physical residual into the exact left-residual map at step 2.1."
+        },
+        {
+          "supplier": "def-field",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "every $x \\ne 0$ has a multiplicative inverse $x^{-1}$ with $x \\cdot x^{-1} = 1$",
+          "use": "The nonzero epsilon has an inverse, and the displayed reciprocal preconditioner is invertible at step 1.1."
+        },
+        {
+          "supplier": "def-ordered-field",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "We write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by",
+          "use": "The assumed order hypotheses imply epsilon is nonzero and both epsilon and 1 are positive."
+        },
+        {
+          "supplier": "def-abs-value",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "use": "The positive residual scalars have absolute values equal to themselves at step 2.1."
+        }
+      ]
+    },
+    "thm-ilu0-factor-pattern-and-work-counts": {
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-ilu0-fixed-pattern-factorization",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\ge1$, and let the input be a valid $n\\times n$ CSR\nrecord as in [[def-csr-matrix-with-stored-entry-semantics]], representing\n$A\\in M_n(F)$. Matrix positions in this definition use one-based notation:\n$(i,j)$ refers to CSR row $i-1$ and column index $j-1$. This row/column order\nis fixed before the procedure begins; vector component label $i$ refers to\ncoordinate $i-1$. The procedure performs no pivoting or reordering. All field\noperations below are exact.\n\nLet $P=\\{(i,j):a_{ij}\\ne0\\}$. Scan each row once to check the canonical and\nincreasing-index conditions and to record whether its diagonal position occurs.\nIf the input fails either pattern condition, return `invalid-pattern`. If a row\nhas no diagonal position, return `missing-diagonal(i)` for the least such $i$.\n\nCopy the value in each input slot to a work array $W$, and regard the unit\ndiagonal of $L$ as implicit. Process rows $i=1,\\ldots,n$ in increasing order.\nFor each $k<i$ with $(i,k)\\in P$, in increasing $k$ order, do the following:\n\n1. If $W_{kk}=0$, return `zero-pivot(k)`.\n2. Set $W_{ik}\\gets W_{ik}/W_{kk}$; this value is the stored factor $L_{ik}$.\n3. Let $R$ be the increasing list of one-based matrix column labels $j>k$\n   represented by row $i$'s CSR segment, and let $C$ be the corresponding\n   increasing list represented by row $k$'s CSR segment. Set each pointer to\n   the first entry of its list, or to\n   that list's end marker when it is empty. While both pointers are within\n   their lists, compare their current indices. If they are equal, call their\n   common value $j$ and update\n   $$W_{ij}\\gets W_{ij}-W_{ik}W_{kj}$$\n   and advance both pointers once. If the current index in $R$ is smaller,\n   advance only its pointer once; if the current index in $C$ is smaller,\n   advance only its pointer once, making no arithmetic update in either\n   unequal-index branch. Stop when either pointer passes the end of its list.\n   Do not skip a matching slot when a current work value is zero.\n\nAfter all such $k$ have been processed in row $i$, if $W_{ii}=0$, return\n`zero-pivot(i)`. Otherwise the upper row entries $U_{ij}$ are the current\n$W_{ij}$ for $(i,j)\\in P$ and $j\\ge i$. Continue to the next row.\n\nIf every row completes, return `ok` with the unit-lower factor $L$ (stored\nstrict-lower entries $L_{ik}=W_{ik}$ for $(i,k)\\in P$) and the upper factor\n$U$ (stored entries $U_{ij}=W_{ij}$ for $(i,j)\\in P$, $j\\ge i$). Both factors\nuse only positions in $P$; the diagonal of $L$ is implicit, and all other\nunstored off-diagonal entries are zero. The numeric values remain stored at\ntheir structural slots if an update makes a value zero.\n\nFor a successful factor pair and $r\\in F^n$, apply the preconditioner as\nfollows. For $i=1,\\ldots,n$ in order, initialize $y_i:=r_i$ and, for each\n$k<i$ with $(i,k)\\in P$ in increasing order, update\n$y_i:=y_i-L_{ik}y_k$. Then for $i=n,n-1,\\ldots,1$, initialize $x_i:=y_i$;\nfor each $k>i$ with $(i,k)\\in P$ in decreasing order, update\n$x_i:=x_i-U_{ik}x_k$; finally set $x_i:=x_i/U_{ii}$. Visit every such stored\nfactor slot exactly once, including slots whose current factor value is zero.\nThese are the forward and backward substitution recurrences, with their sums\ntraversed only over stored strict-triangular slots. The pivot checks ensure\nevery denominator in this application is nonzero. This procedure defines setup\nand application only; it asserts no factorization identity $A=LU$, Krylov\nconvergence, conditioning improvement, or accuracy guarantee.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-csr-matrix-with-stored-entry-semantics",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, and let $m,n,s\\in\\mathbb N$, where $\\mathbb N$ includes\n$0$. A **compressed sparse row (CSR) record** for an $m$ by $n$ matrix over\n$F$ consists of integer arrays $r=(r_0,\\ldots,r_m)$ and\n$c=(c_0,\\ldots,c_{s-1})$, and a value array $v=(v_0,\\ldots,v_{s-1})\\in F^s$,\nsatisfying\n\n$$r_0=0,\\qquad 0=r_0\\le r_1\\le\\cdots\\le r_m=s,\\qquad 0\\le c_t<n\\quad(0\\le t<s).$$\n\nFor each row $i<m$, its **stored entries** are the indices\n$t$ with $r_i\\le t<r_{i+1}$. The row is empty exactly when\n$r_i=r_{i+1}$. Repeated column indices within one row and stored values\n$v_t=0_F$ are permitted; each such entry remains a separate stored entry.\n\nThe represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by\n\n$$A_{ij}:=\\sum_{r_i\\le t<r_{i+1}}\\mathbf 1_{c_t=j}v_t\\qquad(0\\le i<m,\\ 0\\le j<n),$$\n\nwhere $\\mathbf 1_{c_t=j}$ is $1_F$ when $c_t=j$ and $0_F$ otherwise, and an\nempty sum is $0_F$. Repeated entries in column $j$ are therefore added. The\nnumber $s$ is the **stored-entry count**; it is not in general the number of\nnonzero entries of $A$.\n\nA CSR record is **canonical** when no row repeats a column and no stored value\nis zero. In that case every nonzero matrix entry is stored exactly once and\n$s=\\operatorname{nnz}(A)$, where $\\operatorname{nnz}(A)$ denotes the number of\nnonzero entries of $A$. If $m=0$, the endpoint conditions force $s=0$ and the\nrow-pointer array has its single entry $r_0=0$. If $n=0$, the column-index\ncondition forces $s=0$ as well.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-forward-and-back-substitution-for-triangular-systems",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\nIf $L=(\\ell_{ij})\\in M_n(F)$ is lower triangular with every diagonal entry\n$\\ell_{ii}\\ne 0$, the **forward substitution solve** of $Lx=b$ is the recursive\nconstruction\n\n$$x_i:=\\frac{1}{\\ell_{ii}}\\left(b_i-\\sum_{j<i}\\ell_{ij}x_j\\right)\\qquad(0\\le i<n).$$If $U=(u_{ij})\\in M_n(F)$ is upper triangular with every diagonal entry $u_{ii}\\ne 0$, the **backward substitution solve** of $Ux=b$ is the recursive construction$$x_i:=\\frac{1}{u_{ii}}\\left(b_i-\\sum_{j>i}u_{ij}x_j\\right)\\qquad(n-1\\ge i\\ge 0).$$\n\nThe triangular vocabulary is from\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]. The matrix\nproduct convention from [[def-matrix-product-and-identity-matrix]] is the one\nused when later items rewrite these recursions as matrix equations.",
+          "uses": [
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-forward-and-back-substitution-for-triangular-systems",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\nIf $L=(\\ell_{ij})\\in M_n(F)$ is lower triangular with every diagonal entry\n$\\ell_{ii}\\ne 0$, the **forward substitution solve** of $Lx=b$ is the recursive\nconstruction\n\n$$x_i:=\\frac{1}{\\ell_{ii}}\\left(b_i-\\sum_{j<i}\\ell_{ij}x_j\\right)\\qquad(0\\le i<n).$$If $U=(u_{ij})\\in M_n(F)$ is upper triangular with every diagonal entry $u_{ii}\\ne 0$, the **backward substitution solve** of $Ux=b$ is the recursive construction$$x_i:=\\frac{1}{u_{ii}}\\left(b_i-\\sum_{j>i}u_{ij}x_j\\right)\\qquad(n-1\\ge i\\ge 0).$$\n\nThe triangular vocabulary is from\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]. The matrix\nproduct convention from [[def-matrix-product-and-identity-matrix]] is the one\nused when later items rewrite these recursions as matrix equations.",
+          "uses": [
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\n1. If $L\\in M_n(F)$ is lower triangular with nonzero diagonal, the forward\n   substitution recursion of\n   [[def-forward-and-back-substitution-for-triangular-systems]] produces the\n   unique solution of $Lx=b$.\n2. If $U\\in M_n(F)$ is upper triangular with nonzero diagonal, the backward\n   substitution recursion produces the unique solution of $Ux=b$.\n\nEach solve uses exactly $n$ divisions,\n$\\frac{n(n-1)}{2}$ multiplications, and $\\frac{n(n-1)}{2}$ additions or\nsubtractions, hence $O(n^2)$ scalar operations.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\n1. If $L\\in M_n(F)$ is lower triangular with nonzero diagonal, the forward\n   substitution recursion of\n   [[def-forward-and-back-substitution-for-triangular-systems]] produces the\n   unique solution of $Lx=b$.\n2. If $U\\in M_n(F)$ is upper triangular with nonzero diagonal, the backward\n   substitution recursion produces the unique solution of $Ux=b$.\n\nEach solve uses exactly $n$ divisions,\n$\\frac{n(n-1)}{2}$ multiplications, and $\\frac{n(n-1)}{2}$ additions or\nsubtractions, hence $O(n^2)$ scalar operations.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The input has finite arrays and $n$ is finite. Validation visits the $n$ row intervals and $s$ stored entries once; the factorization loops over at most $n$ rows, finitely many pattern entries, and finite row-list merges. Every division is preceded by a nonzero-pivot check, and [A1] makes each such division defined. Thus the procedure either returns one of its specified failure statuses or completes with `ok`.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "If the procedure returns `ok`, each processed pivot is nonzero by its check, so the returned $U$ has nonzero diagonal. The definition sets $L$ to be unit lower triangular and retains only upper entries in $U$.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "Initially the work values occupy exactly the input slots $P$. Each multiplier is written only at a strict-lower slot in $P_L$, and each update is performed only when both matching row positions are in $P$. No update allocates a new position. Induction over the finite row and pivot loops therefore gives stored patterns $P_L$ and $P_U$ for $L$ and $U$, respectively.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "d7",
+          "step": "3.2",
+          "claim": "The forward recurrence in [F3] applied to unit-lower $L$ and the backward recurrence in [F4] applied to $U$ are well-defined because $L_{ii}=1$ and every $U_{ii}\\ne0$. By [F5] and [F6] they produce the unique successive triangular-solve outputs specified by the algorithm.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "The sets $P_L$ and $P_U$ are disjoint and partition $P$: every $(i,j)\\in P$ has exactly one of $i>j$ or $i\\le j$. Hence $\\ell+q=|P|=s$. Since the unit diagonal of $L$ is implicit, this is exactly the factor numeric-slot count.",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d5",
+          "step": "4.2",
+          "claim": "On success, the outer lower-pattern loop processes every one of the $\\ell$ positions once and performs one division there. For a fixed $(i,k)\\in P_L$, the update loop visits exactly the indices in $R_{ik}\\cap C_k$; each visit performs one multiplication and one subtraction. Summing these counts gives exactly $\\ell$ divisions and $I$ multiplications and subtractions.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d6",
+          "step": "5.1",
+          "claim": "Both lists in each intersection are strictly increasing. A two-pointer merge advances at least one pointer at every comparison and stops when one list ends, so it makes at most the sum of the two list lengths, $|R_{ik}|+|C_k|$, comparisons. Summing over $P_L$ gives the bound $J$; validation visits each row interval and stored entry once.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 4.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d8",
+          "step": "6.1",
+          "claim": "The forward recurrence in [F3] performs one multiplication and subtraction for each stored strict-lower slot, hence $\\ell$ of each and no diagonal divisions. The backward recurrence in [F4] performs one multiplication and subtraction for each stored strict-upper slot, hence $u$ of each, and one division for each of its $n$ rows. Since $\\ell+u=\\ell+q-n=s-n$, the stated application counts follow.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 4.2 sums over the strict-lower pattern P_L; if it is empty then ell=I=J=0, so setup has no multiplier division or matching update. Proof step 6.1 still counts the actual upper-factor slots and n diagonal divisions. A successful diagonal matrix is included rather than excluded as empty data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 cover a missing diagonal and a zero computed pivot by immediate status returns."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, step 1.1 has no lower-pattern loop; steps 4.1, 4.2, and 6.1 give one U slot, zero off-diagonal updates, and one application division."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 distinguish absent diagonal and zero-pivot failure from successful factor output."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The ILU work statement counts finite CSR slots, row intersections and two-pointer comparisons; its only loop boundaries are integer starts/stops, not a real interval on which an endpoint limit is asserted. Proof4.2 and6.1 count each visited stored slot exactly once."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All loops use explicit finite ordered lists; no choice from a nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a procedure property and exact count, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a procedure property and exact count, not a biconditional."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-field",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "every $x \\ne 0$ has a multiplicative inverse $x^{-1}$ with $x \\cdot x^{-1} = 1$",
+          "use": "Every division in the recurrence is by a checked nonzero pivot."
+        },
+        {
+          "supplier": "alg-ilu0-fixed-pattern-factorization",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Traverse the two increasing lists $\\{j>k:(i,j)\\in P\\}$ and $\\{j>k:(k,j)\\in P\\}$ by a two-pointer merge. For each matching index $j$, update $$W_{ij}\\gets W_{ij}-W_{ik}W_{kj}.$$",
+          "use": "The exact pattern intersection and in-place update used in the pattern and operation counts."
+        },
+        {
+          "supplier": "def-csr-matrix-with-stored-entry-semantics",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "In that case every nonzero matrix entry is stored exactly once and $s=\\operatorname{nnz}(A)$",
+          "use": "Canonical CSR identifies stored-entry count with the input support size."
+        },
+        {
+          "supplier": "def-forward-and-back-substitution-for-triangular-systems",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "The **forward substitution solve** of $Lx=b$ is the recursive construction",
+          "use": "The forward application recurrence is the published lower-triangular solve."
+        },
+        {
+          "supplier": "def-forward-and-back-substitution-for-triangular-systems",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "The **backward substitution solve** of $Ux=b$ is the recursive construction",
+          "use": "The backward application recurrence is the published upper-triangular solve."
+        },
+        {
+          "supplier": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "produces the unique solution of $Lx=b$",
+          "use": "The forward substitution output is unique."
+        },
+        {
+          "supplier": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "produces the unique solution of $Ux=b$",
+          "use": "The backward substitution output is unique."
+        }
+      ]
+    },
+    "ex-ilu0-tridiagonal-factorization": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ilu0-fixed-pattern-factorization",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\ge1$, and let the input be a valid $n\\times n$ CSR\nrecord as in [[def-csr-matrix-with-stored-entry-semantics]], representing\n$A\\in M_n(F)$. Matrix positions in this definition use one-based notation:\n$(i,j)$ refers to CSR row $i-1$ and column index $j-1$. This row/column order\nis fixed before the procedure begins; vector component label $i$ refers to\ncoordinate $i-1$. The procedure performs no pivoting or reordering. All field\noperations below are exact.\n\nLet $P=\\{(i,j):a_{ij}\\ne0\\}$. Scan each row once to check the canonical and\nincreasing-index conditions and to record whether its diagonal position occurs.\nIf the input fails either pattern condition, return `invalid-pattern`. If a row\nhas no diagonal position, return `missing-diagonal(i)` for the least such $i$.\n\nCopy the value in each input slot to a work array $W$, and regard the unit\ndiagonal of $L$ as implicit. Process rows $i=1,\\ldots,n$ in increasing order.\nFor each $k<i$ with $(i,k)\\in P$, in increasing $k$ order, do the following:\n\n1. If $W_{kk}=0$, return `zero-pivot(k)`.\n2. Set $W_{ik}\\gets W_{ik}/W_{kk}$; this value is the stored factor $L_{ik}$.\n3. Let $R$ be the increasing list of one-based matrix column labels $j>k$\n   represented by row $i$'s CSR segment, and let $C$ be the corresponding\n   increasing list represented by row $k$'s CSR segment. Set each pointer to\n   the first entry of its list, or to\n   that list's end marker when it is empty. While both pointers are within\n   their lists, compare their current indices. If they are equal, call their\n   common value $j$ and update\n   $$W_{ij}\\gets W_{ij}-W_{ik}W_{kj}$$\n   and advance both pointers once. If the current index in $R$ is smaller,\n   advance only its pointer once; if the current index in $C$ is smaller,\n   advance only its pointer once, making no arithmetic update in either\n   unequal-index branch. Stop when either pointer passes the end of its list.\n   Do not skip a matching slot when a current work value is zero.\n\nAfter all such $k$ have been processed in row $i$, if $W_{ii}=0$, return\n`zero-pivot(i)`. Otherwise the upper row entries $U_{ij}$ are the current\n$W_{ij}$ for $(i,j)\\in P$ and $j\\ge i$. Continue to the next row.\n\nIf every row completes, return `ok` with the unit-lower factor $L$ (stored\nstrict-lower entries $L_{ik}=W_{ik}$ for $(i,k)\\in P$) and the upper factor\n$U$ (stored entries $U_{ij}=W_{ij}$ for $(i,j)\\in P$, $j\\ge i$). Both factors\nuse only positions in $P$; the diagonal of $L$ is implicit, and all other\nunstored off-diagonal entries are zero. The numeric values remain stored at\ntheir structural slots if an update makes a value zero.\n\nFor a successful factor pair and $r\\in F^n$, apply the preconditioner as\nfollows. For $i=1,\\ldots,n$ in order, initialize $y_i:=r_i$ and, for each\n$k<i$ with $(i,k)\\in P$ in increasing order, update\n$y_i:=y_i-L_{ik}y_k$. Then for $i=n,n-1,\\ldots,1$, initialize $x_i:=y_i$;\nfor each $k>i$ with $(i,k)\\in P$ in decreasing order, update\n$x_i:=x_i-U_{ik}x_k$; finally set $x_i:=x_i/U_{ii}$. Visit every such stored\nfactor slot exactly once, including slots whose current factor value is zero.\nThese are the forward and backward substitution recurrences, with their sums\ntraversed only over stored strict-triangular slots. The pivot checks ensure\nevery denominator in this application is nonzero. This procedure defines setup\nand application only; it asserts no factorization identity $A=LU$, Krylov\nconvergence, conditioning improvement, or accuracy guarantee.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-csr-matrix-with-stored-entry-semantics",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, and let $m,n,s\\in\\mathbb N$, where $\\mathbb N$ includes\n$0$. A **compressed sparse row (CSR) record** for an $m$ by $n$ matrix over\n$F$ consists of integer arrays $r=(r_0,\\ldots,r_m)$ and\n$c=(c_0,\\ldots,c_{s-1})$, and a value array $v=(v_0,\\ldots,v_{s-1})\\in F^s$,\nsatisfying\n\n$$r_0=0,\\qquad 0=r_0\\le r_1\\le\\cdots\\le r_m=s,\\qquad 0\\le c_t<n\\quad(0\\le t<s).$$\n\nFor each row $i<m$, its **stored entries** are the indices\n$t$ with $r_i\\le t<r_{i+1}$. The row is empty exactly when\n$r_i=r_{i+1}$. Repeated column indices within one row and stored values\n$v_t=0_F$ are permitted; each such entry remains a separate stored entry.\n\nThe represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by\n\n$$A_{ij}:=\\sum_{r_i\\le t<r_{i+1}}\\mathbf 1_{c_t=j}v_t\\qquad(0\\le i<m,\\ 0\\le j<n),$$\n\nwhere $\\mathbf 1_{c_t=j}$ is $1_F$ when $c_t=j$ and $0_F$ otherwise, and an\nempty sum is $0_F$. Repeated entries in column $j$ are therefore added. The\nnumber $s$ is the **stored-entry count**; it is not in general the number of\nnonzero entries of $A$.\n\nA CSR record is **canonical** when no row repeats a column and no stored value\nis zero. In that case every nonzero matrix entry is stored exactly once and\n$s=\\operatorname{nnz}(A)$, where $\\operatorname{nnz}(A)$ denotes the number of\nnonzero entries of $A$. If $m=0$, the endpoint conditions force $s=0$ and the\nrow-pointer array has its single entry $r_0=0$. If $n=0$, the column-index\ncondition forces $s=0$ as well.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rat-field",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]]\nis a field: a commutative ring with $1 \\ne 0$ in which every nonzero element\nhas a multiplicative inverse.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "By [F4], the displayed matrix entries are in a field. Its nonzero pattern is the diagonal together with the four adjacent off-diagonal positions. It is canonical, sorted by column in every row, and contains all three diagonal positions, so the algorithm has no input-pattern or missing-diagonal failure.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "In row 1 the factors are $U_{11}=4$ and $U_{12}=-1$. In row 2 the multiplier is $L_{21}=-1/4$; the matching update at column 2 gives $U_{22}=4-(-1/4)(-1)=15/4$. The row-2 entry at column 3 remains $U_{23}=-1$ because row 1 has no position at column 3.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "Row 3 has no position at column 1. Its multiplier at column 2 is $L_{32}=(-1)/(15/4)=-4/15$. The matching update at column 3 gives $U_{33}=4-(-4/15)(-1)=56/15$. All three pivots are nonzero, so the procedure returns `ok` with the displayed factors.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "By [F3], the product has rows $(4,-1,0)$, $(-1,1/4+15/4,-1)$, and $(0,-1,4/15+56/15)$, hence $LU=A$.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a 3 by 3 matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 records the two zero corner entries; steps 2.1 and 1.3 show all pivots are nonzero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singleton parameter or one-dimensional case in the fixed example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20131.3 verify canonical input, present diagonals, and nonzero pivots."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example has fixed finite data and makes no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a fixed computation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a fixed computation, not a biconditional."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "alg-ilu0-fixed-pattern-factorization",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "For each $k<i$ with $(i,k)\\in P$, in increasing $k$ order, do the following: 1. If $W_{kk}=0$, return `zero-pivot(k)`. 2. Set $W_{ik}\\gets W_{ik}/W_{kk}$; this value is the stored factor $L_{ik}$. 3. Traverse the two increasing lists $\\{j>k:(i,j)\\in P\\}$ and $\\{j>k:(k,j)\\in P\\}$ by a two-pointer merge. For each matching index $j$, update $$W_{ij}\\gets W_{ij}-W_{ik}W_{kj}.$$",
+          "use": "The row-by-row factor calculations at steps 2.1 and 1.3."
+        },
+        {
+          "supplier": "def-csr-matrix-with-stored-entry-semantics",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "A CSR record is **canonical** when no row repeats a column and no stored value is zero.",
+          "use": "The displayed input is a canonical CSR instance with its zero entries omitted."
+        },
+        {
+          "supplier": "def-matrix-product-and-identity-matrix",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are",
+          "use": "The product check multiplies the displayed factor matrices entrywise."
+        },
+        {
+          "supplier": "thm-rat-field",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]] is a field",
+          "use": "All displayed integer and rational entries and divisions are interpreted in Q."
+        }
+      ]
+    },
+    "cex-ilu0-product-can-create-fill-outside-input-pattern": {
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ilu0-fixed-pattern-factorization",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\ge1$, and let the input be a valid $n\\times n$ CSR\nrecord as in [[def-csr-matrix-with-stored-entry-semantics]], representing\n$A\\in M_n(F)$. Matrix positions in this definition use one-based notation:\n$(i,j)$ refers to CSR row $i-1$ and column index $j-1$. This row/column order\nis fixed before the procedure begins; vector component label $i$ refers to\ncoordinate $i-1$. The procedure performs no pivoting or reordering. All field\noperations below are exact.\n\nLet $P=\\{(i,j):a_{ij}\\ne0\\}$. Scan each row once to check the canonical and\nincreasing-index conditions and to record whether its diagonal position occurs.\nIf the input fails either pattern condition, return `invalid-pattern`. If a row\nhas no diagonal position, return `missing-diagonal(i)` for the least such $i$.\n\nCopy the value in each input slot to a work array $W$, and regard the unit\ndiagonal of $L$ as implicit. Process rows $i=1,\\ldots,n$ in increasing order.\nFor each $k<i$ with $(i,k)\\in P$, in increasing $k$ order, do the following:\n\n1. If $W_{kk}=0$, return `zero-pivot(k)`.\n2. Set $W_{ik}\\gets W_{ik}/W_{kk}$; this value is the stored factor $L_{ik}$.\n3. Let $R$ be the increasing list of one-based matrix column labels $j>k$\n   represented by row $i$'s CSR segment, and let $C$ be the corresponding\n   increasing list represented by row $k$'s CSR segment. Set each pointer to\n   the first entry of its list, or to\n   that list's end marker when it is empty. While both pointers are within\n   their lists, compare their current indices. If they are equal, call their\n   common value $j$ and update\n   $$W_{ij}\\gets W_{ij}-W_{ik}W_{kj}$$\n   and advance both pointers once. If the current index in $R$ is smaller,\n   advance only its pointer once; if the current index in $C$ is smaller,\n   advance only its pointer once, making no arithmetic update in either\n   unequal-index branch. Stop when either pointer passes the end of its list.\n   Do not skip a matching slot when a current work value is zero.\n\nAfter all such $k$ have been processed in row $i$, if $W_{ii}=0$, return\n`zero-pivot(i)`. Otherwise the upper row entries $U_{ij}$ are the current\n$W_{ij}$ for $(i,j)\\in P$ and $j\\ge i$. Continue to the next row.\n\nIf every row completes, return `ok` with the unit-lower factor $L$ (stored\nstrict-lower entries $L_{ik}=W_{ik}$ for $(i,k)\\in P$) and the upper factor\n$U$ (stored entries $U_{ij}=W_{ij}$ for $(i,j)\\in P$, $j\\ge i$). Both factors\nuse only positions in $P$; the diagonal of $L$ is implicit, and all other\nunstored off-diagonal entries are zero. The numeric values remain stored at\ntheir structural slots if an update makes a value zero.\n\nFor a successful factor pair and $r\\in F^n$, apply the preconditioner as\nfollows. For $i=1,\\ldots,n$ in order, initialize $y_i:=r_i$ and, for each\n$k<i$ with $(i,k)\\in P$ in increasing order, update\n$y_i:=y_i-L_{ik}y_k$. Then for $i=n,n-1,\\ldots,1$, initialize $x_i:=y_i$;\nfor each $k>i$ with $(i,k)\\in P$ in decreasing order, update\n$x_i:=x_i-U_{ik}x_k$; finally set $x_i:=x_i/U_{ii}$. Visit every such stored\nfactor slot exactly once, including slots whose current factor value is zero.\nThese are the forward and backward substitution recurrences, with their sums\ntraversed only over stored strict-triangular slots. The pivot checks ensure\nevery denominator in this application is nonzero. This procedure defines setup\nand application only; it asserts no factorization identity $A=LU$, Krylov\nconvergence, conditioning improvement, or accuracy guarantee.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-csr-matrix-with-stored-entry-semantics",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, and let $m,n,s\\in\\mathbb N$, where $\\mathbb N$ includes\n$0$. A **compressed sparse row (CSR) record** for an $m$ by $n$ matrix over\n$F$ consists of integer arrays $r=(r_0,\\ldots,r_m)$ and\n$c=(c_0,\\ldots,c_{s-1})$, and a value array $v=(v_0,\\ldots,v_{s-1})\\in F^s$,\nsatisfying\n\n$$r_0=0,\\qquad 0=r_0\\le r_1\\le\\cdots\\le r_m=s,\\qquad 0\\le c_t<n\\quad(0\\le t<s).$$\n\nFor each row $i<m$, its **stored entries** are the indices\n$t$ with $r_i\\le t<r_{i+1}$. The row is empty exactly when\n$r_i=r_{i+1}$. Repeated column indices within one row and stored values\n$v_t=0_F$ are permitted; each such entry remains a separate stored entry.\n\nThe represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by\n\n$$A_{ij}:=\\sum_{r_i\\le t<r_{i+1}}\\mathbf 1_{c_t=j}v_t\\qquad(0\\le i<m,\\ 0\\le j<n),$$\n\nwhere $\\mathbf 1_{c_t=j}$ is $1_F$ when $c_t=j$ and $0_F$ otherwise, and an\nempty sum is $0_F$. Repeated entries in column $j$ are therefore added. The\nnumber $s$ is the **stored-entry count**; it is not in general the number of\nnonzero entries of $A$.\n\nA CSR record is **canonical** when no row repeats a column and no stored value\nis zero. In that case every nonzero matrix entry is stored exactly once and\n$s=\\operatorname{nnz}(A)$, where $\\operatorname{nnz}(A)$ denotes the number of\nnonzero entries of $A$. If $m=0$, the endpoint conditions force $s=0$ and the\nrow-pointer array has its single entry $r_0=0$. If $n=0$, the column-index\ncondition forces $s=0$ as well.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rat-field",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]]\nis a field: a commutative ring with $1 \\ne 0$ in which every nonzero element\nhas a multiplicative inverse.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Take $$A=\\begin{pmatrix}1&1&0\\\\0&1&0\\\\1&0&1\\end{pmatrix}.$$ By [F4], this is a matrix over a field. Its canonical sorted CSR pattern is $P=\\{(1,1),(1,2),(2,2),(3,1),(3,3)\\}$, with all diagonal entries equal to $1$. Thus the input satisfies the algorithm's domain and has no missing diagonal.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The first row gives $U_{11}=U_{12}=1$. Row 2 has no strict-lower position and gives $U_{22}=1$. In row 3 the only strict-lower position is $(3,1)$, so $L_{31}=1$. The update from this multiplier can reach only a column $j>1$ present in both row 3 and row 1; no such column exists. Hence $L_{32}$ is not stored, $U_{33}=1$, and the procedure returns `ok` with $$L=\\begin{pmatrix}1&0&0\\\\0&1&0\\\\1&0&1\\end{pmatrix},\\qquad U=\\begin{pmatrix}1&1&0\\\\0&1&0\\\\0&0&1\\end{pmatrix}.$$",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "By [F3], $(LU)_{32}=L_{31}U_{12}+L_{32}U_{22}+L_{33}U_{32}=1$, whereas $A_{32}=0$. Therefore $LU$ has a nonzero outside the input pattern, so the refuted statement is false.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes a 3 by 3 matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 compares the input zero A32 with the product nonzero (LU)32=1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singleton parameter or one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 verify all input and factorization pivots are nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample uses specified finite data and makes no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted claim is a universal inclusion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted claim is a universal inclusion, not a biconditional."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "alg-ilu0-fixed-pattern-factorization",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Traverse the two increasing lists $\\{j>k:(i,j)\\in P\\}$ and $\\{j>k:(k,j)\\in P\\}$ by a two-pointer merge. For each matching index $j$, update $$W_{ij}\\gets W_{ij}-W_{ik}W_{kj}.$$",
+          "use": "The exact fixed-pattern recurrence is applied to the stated matrix."
+        },
+        {
+          "supplier": "def-csr-matrix-with-stored-entry-semantics",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "The represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by",
+          "use": "The matrix's omitted coordinates are zero in its represented CSR matrix."
+        },
+        {
+          "supplier": "def-matrix-product-and-identity-matrix",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are",
+          "use": "The product entry (3,2) is computed from the finite matrix-product sum."
+        },
+        {
+          "supplier": "thm-rat-field",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]] is a field",
+          "use": "The integer matrix and ILU pivots are interpreted over Q."
+        }
+      ]
+    },
+    "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span": {
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-flexible-gmres-variable-right-preconditioning",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\in\\mathbb N$ with $n,m\\ge1$ ([[def-natural-numbers]]), let\n$A\\in M_n(\\mathbb C)$ ([[def-matrix-space]]), and let $b,x_0\\in\\mathbb C^n$.\nThe complex scalars form a field ([[thm-complex-numbers-form-a-field]]).\nAs additional input, take maps $\\mathcal P_1,\\ldots,\\mathcal P_m:\\mathbb C^n\\to\\mathbb C^n$.\nThe maps may vary with $j$; no linearity or fixedness is assumed. In the usual\nmatrix case, $\\mathcal P_j(v)=M_j^{-1}v$ for an invertible $M_j$\n([[def-invertible-matrix-and-general-linear-group]]).\nEquip each coordinate space $\\mathbb C^q$ used below with the standard\nHermitian inner product\n$$\\langle z,w\\rangle=\\sum_{a<q}z_a\\overline{w_a}$$\nand its induced Euclidean norm $\\|z\\|_2=\\sqrt{\\langle z,z\\rangle}$\n([[prop-standard-coordinate-inner-products]], [[def-inner-product-norm]]).\nAll arithmetic and orthogonalization are exact. Iteration and auxiliary\nHessenberg labels below start at $1$; coordinates of $A$ and ambient vectors\nretain the library's zero-based convention.\n\nThe algorithm uses and stores each actual $z_j$ and makes no fixed-matrix\nassumption.\n\nSet $r_0=b-Ax_0$ and $\\beta=\\|r_0\\|_2$. If $\\beta=0$, return\n`initial-solution($x_0$)`. Otherwise set $v_1=r_0/\\beta$. For\n$j=1,\\ldots,m$, perform:\n\n1. Obtain $z_j=\\mathcal P_j(v_j)$ and set $w:=Az_j$.\n2. For $i=1,\\ldots,j$ in order, set\n   $$h_{ij}:=\\langle w,v_i\\rangle,\\qquad w:=w-h_{ij}v_i.$$\n3. Set $h_{j+1,j}:=\\|w\\|_2$. If $h_{j+1,j}=0$, return\n   `breakdown($j,x_{j-1}$)` with the last fully formed iterate (for $j=1$ it\n   is $x_0$); do not normalize or claim a new iterate at this step.\n4. If $h_{j+1,j}>0$, set $v_{j+1}:=w/h_{j+1,j}$. Let $e_0\\in\\mathbb C^{j+1}$\n   be the standard unit vector at coordinate $0$ (coordinate $0$ is $1$ and\n   all other coordinates are $0$; [[lem-standard-basis-of-f-n]]). The\n   iteration labels $h_{ik}$ remain one-based, while matrix slots are\n   zero-based: put $Z_j\\in M_{n\\times j}(\\mathbb C)$ with\n   $(Z_j)_{a,k-1}=(z_k)_a$ for $0\\le a<n$, $1\\le k\\le j$, and let\n   $\\bar H_j\\in M_{(j+1)\\times j}(\\mathbb C)$ satisfy\n   $(\\bar H_j)_{i-1,k-1}=h_{ik}$ for $1\\le k\\le j$, $1\\le i\\le k+1$, and\n   $(\\bar H_j)_{a,b}=0$ when $a>b+1$. Choose any\n   $$y_j\\in\\operatorname*{argmin}_{y\\in\\mathbb C^j}\\|\\beta e_0-\\bar H_jy\\|_2$$\n   and set $x_j:=x_0+Z_jy_j$.\n\nIf all $m$ steps complete without breakdown, return\n`budget-complete($m,x_m,Z_m$)`. The finite-dimensional least-squares minimizer\nexists because each coordinate space $\\mathbb C^q$ is finite-dimensional by\n[[lem-standard-basis-of-f-n]], and the least-squares theorem\n[[thm-least-squares-solutions-and-normal-equation]] applies; the output\nrelation permits any minimizer. The algorithm has no\nconvergence test: `budget-complete` and `breakdown` assert neither convergence\nnor that a breakdown iterate solves $Ax=b$. The residual-minimization property\nover the actual span of the $z_j$ is proved separately in\n[[thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span]].\nEvery division is by a positive real norm: the initial $\\beta=0$ case returns\nbefore normalizing $r_0$, and each later $h_{j+1,j}=0$ case returns before\nnormalizing $w$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-flexible-gmres-variable-right-preconditioning",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\in\\mathbb N$ with $n,m\\ge1$ ([[def-natural-numbers]]), let\n$A\\in M_n(\\mathbb C)$ ([[def-matrix-space]]), and let $b,x_0\\in\\mathbb C^n$.\nThe complex scalars form a field ([[thm-complex-numbers-form-a-field]]).\nAs additional input, take maps $\\mathcal P_1,\\ldots,\\mathcal P_m:\\mathbb C^n\\to\\mathbb C^n$.\nThe maps may vary with $j$; no linearity or fixedness is assumed. In the usual\nmatrix case, $\\mathcal P_j(v)=M_j^{-1}v$ for an invertible $M_j$\n([[def-invertible-matrix-and-general-linear-group]]).\nEquip each coordinate space $\\mathbb C^q$ used below with the standard\nHermitian inner product\n$$\\langle z,w\\rangle=\\sum_{a<q}z_a\\overline{w_a}$$\nand its induced Euclidean norm $\\|z\\|_2=\\sqrt{\\langle z,z\\rangle}$\n([[prop-standard-coordinate-inner-products]], [[def-inner-product-norm]]).\nAll arithmetic and orthogonalization are exact. Iteration and auxiliary\nHessenberg labels below start at $1$; coordinates of $A$ and ambient vectors\nretain the library's zero-based convention.\n\nThe algorithm uses and stores each actual $z_j$ and makes no fixed-matrix\nassumption.\n\nSet $r_0=b-Ax_0$ and $\\beta=\\|r_0\\|_2$. If $\\beta=0$, return\n`initial-solution($x_0$)`. Otherwise set $v_1=r_0/\\beta$. For\n$j=1,\\ldots,m$, perform:\n\n1. Obtain $z_j=\\mathcal P_j(v_j)$ and set $w:=Az_j$.\n2. For $i=1,\\ldots,j$ in order, set\n   $$h_{ij}:=\\langle w,v_i\\rangle,\\qquad w:=w-h_{ij}v_i.$$\n3. Set $h_{j+1,j}:=\\|w\\|_2$. If $h_{j+1,j}=0$, return\n   `breakdown($j,x_{j-1}$)` with the last fully formed iterate (for $j=1$ it\n   is $x_0$); do not normalize or claim a new iterate at this step.\n4. If $h_{j+1,j}>0$, set $v_{j+1}:=w/h_{j+1,j}$. Let $e_0\\in\\mathbb C^{j+1}$\n   be the standard unit vector at coordinate $0$ (coordinate $0$ is $1$ and\n   all other coordinates are $0$; [[lem-standard-basis-of-f-n]]). The\n   iteration labels $h_{ik}$ remain one-based, while matrix slots are\n   zero-based: put $Z_j\\in M_{n\\times j}(\\mathbb C)$ with\n   $(Z_j)_{a,k-1}=(z_k)_a$ for $0\\le a<n$, $1\\le k\\le j$, and let\n   $\\bar H_j\\in M_{(j+1)\\times j}(\\mathbb C)$ satisfy\n   $(\\bar H_j)_{i-1,k-1}=h_{ik}$ for $1\\le k\\le j$, $1\\le i\\le k+1$, and\n   $(\\bar H_j)_{a,b}=0$ when $a>b+1$. Choose any\n   $$y_j\\in\\operatorname*{argmin}_{y\\in\\mathbb C^j}\\|\\beta e_0-\\bar H_jy\\|_2$$\n   and set $x_j:=x_0+Z_jy_j$.\n\nIf all $m$ steps complete without breakdown, return\n`budget-complete($m,x_m,Z_m$)`. The finite-dimensional least-squares minimizer\nexists because each coordinate space $\\mathbb C^q$ is finite-dimensional by\n[[lem-standard-basis-of-f-n]], and the least-squares theorem\n[[thm-least-squares-solutions-and-normal-equation]] applies; the output\nrelation permits any minimizer. The algorithm has no\nconvergence test: `budget-complete` and `breakdown` assert neither convergence\nnor that a breakdown iterate solves $Ax=b$. The residual-minimization property\nover the actual span of the $z_j$ is proved separately in\n[[thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span]].\nEvery division is by a positive real norm: the initial $\\beta=0$ case returns\nbefore normalizing $r_0$, and each later $h_{j+1,j}=0$ case returns before\nnormalizing $w$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-flexible-gmres-variable-right-preconditioning",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\in\\mathbb N$ with $n,m\\ge1$ ([[def-natural-numbers]]), let\n$A\\in M_n(\\mathbb C)$ ([[def-matrix-space]]), and let $b,x_0\\in\\mathbb C^n$.\nThe complex scalars form a field ([[thm-complex-numbers-form-a-field]]).\nAs additional input, take maps $\\mathcal P_1,\\ldots,\\mathcal P_m:\\mathbb C^n\\to\\mathbb C^n$.\nThe maps may vary with $j$; no linearity or fixedness is assumed. In the usual\nmatrix case, $\\mathcal P_j(v)=M_j^{-1}v$ for an invertible $M_j$\n([[def-invertible-matrix-and-general-linear-group]]).\nEquip each coordinate space $\\mathbb C^q$ used below with the standard\nHermitian inner product\n$$\\langle z,w\\rangle=\\sum_{a<q}z_a\\overline{w_a}$$\nand its induced Euclidean norm $\\|z\\|_2=\\sqrt{\\langle z,z\\rangle}$\n([[prop-standard-coordinate-inner-products]], [[def-inner-product-norm]]).\nAll arithmetic and orthogonalization are exact. Iteration and auxiliary\nHessenberg labels below start at $1$; coordinates of $A$ and ambient vectors\nretain the library's zero-based convention.\n\nThe algorithm uses and stores each actual $z_j$ and makes no fixed-matrix\nassumption.\n\nSet $r_0=b-Ax_0$ and $\\beta=\\|r_0\\|_2$. If $\\beta=0$, return\n`initial-solution($x_0$)`. Otherwise set $v_1=r_0/\\beta$. For\n$j=1,\\ldots,m$, perform:\n\n1. Obtain $z_j=\\mathcal P_j(v_j)$ and set $w:=Az_j$.\n2. For $i=1,\\ldots,j$ in order, set\n   $$h_{ij}:=\\langle w,v_i\\rangle,\\qquad w:=w-h_{ij}v_i.$$\n3. Set $h_{j+1,j}:=\\|w\\|_2$. If $h_{j+1,j}=0$, return\n   `breakdown($j,x_{j-1}$)` with the last fully formed iterate (for $j=1$ it\n   is $x_0$); do not normalize or claim a new iterate at this step.\n4. If $h_{j+1,j}>0$, set $v_{j+1}:=w/h_{j+1,j}$. Let $e_0\\in\\mathbb C^{j+1}$\n   be the standard unit vector at coordinate $0$ (coordinate $0$ is $1$ and\n   all other coordinates are $0$; [[lem-standard-basis-of-f-n]]). The\n   iteration labels $h_{ik}$ remain one-based, while matrix slots are\n   zero-based: put $Z_j\\in M_{n\\times j}(\\mathbb C)$ with\n   $(Z_j)_{a,k-1}=(z_k)_a$ for $0\\le a<n$, $1\\le k\\le j$, and let\n   $\\bar H_j\\in M_{(j+1)\\times j}(\\mathbb C)$ satisfy\n   $(\\bar H_j)_{i-1,k-1}=h_{ik}$ for $1\\le k\\le j$, $1\\le i\\le k+1$, and\n   $(\\bar H_j)_{a,b}=0$ when $a>b+1$. Choose any\n   $$y_j\\in\\operatorname*{argmin}_{y\\in\\mathbb C^j}\\|\\beta e_0-\\bar H_jy\\|_2$$\n   and set $x_j:=x_0+Z_jy_j$.\n\nIf all $m$ steps complete without breakdown, return\n`budget-complete($m,x_m,Z_m$)`. The finite-dimensional least-squares minimizer\nexists because each coordinate space $\\mathbb C^q$ is finite-dimensional by\n[[lem-standard-basis-of-f-n]], and the least-squares theorem\n[[thm-least-squares-solutions-and-normal-equation]] applies; the output\nrelation permits any minimizer. The algorithm has no\nconvergence test: `budget-complete` and `breakdown` assert neither convergence\nnor that a breakdown iterate solves $Ax=b$. The residual-minimization property\nover the actual span of the $z_j$ is proved separately in\n[[thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span]].\nEvery division is by a positive real norm: the initial $\\beta=0$ case returns\nbefore normalizing $r_0$, and each later $h_{j+1,j}=0$ case returns before\nnormalizing $w$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-inner-product-norm",
+          "source_section": "Definition",
+          "quote": "For a vector $v$ in a real or complex inner product space, define its **inner-product norm** by\n\n$$\\lVert v\\rVert:=\\sqrt{\\langle v,v\\rangle}.$$\n\nPositive definiteness in [[def-inner-product-space]] makes the radicand a nonnegative real, and [[thm-nth-roots-exist]] supplies its unique nonnegative square root. The notation therefore defines one real number $\\lVert v\\rVert\\ge0$. Its norm axioms are established in [[cor-triangle-inequality-for-inner-product-norm]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-least-squares-solutions-and-normal-equation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces and let $b\\in W$. A vector $x\\in V$ minimises $\\lVert Tx-b\\rVert$ if and only if\n\n$$T^*(Tx-b)=0,$$\n\nequivalently $T^*Tx=T^*b$. Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-linear-combination-and-span",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n### Finite sums of vectors\n\nBy axiom (V1) the triple $(V, +, 0_V)$ is an abelian group ([[def-group]]), hence\nin particular a commutative monoid ([[def-semigroup-and-monoid]]). So the finite\nproducts of [[def-monoid-finite-product]] are available in it, and we write them\n**additively**: for $n \\in \\mathbb{N}$ and a finite list $u : n \\to V$, that is a\nfunction on the von Neumann natural $n = \\{0, \\dots, n-1\\}$\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]),\n\n$$\\sum_{i<n} u_i \\;:=\\; \\prod_{i<n} u_i \\quad \\text{computed in } (V,+,0_V),$$\n\nso that $\\sum_{i<0} u_i = 0_V$ and $\\sum_{i<\\sigma(n)} u_i = \\bigl(\\sum_{i<n} u_i\\bigr) + u_n$,\nand the value depends only on $u_0, \\dots, u_{n-1}$.\n\n### Linear combinations\n\nA **linear combination in $V$** is a vector of the form\n\n$$\\sum_{i<n} \\lambda_i v_i$$\n\nwhere $n \\in \\mathbb{N}$, $\\lambda : n \\to F$ is a finite list of scalars and\n$v : n \\to V$ is a finite list of vectors; the sum is the finite sum just\ndescribed, of the list $i \\mapsto \\lambda_i v_i$. For $S \\subseteq V$, a vector\n$w \\in V$ is a **linear combination of elements of $S$** when there are\n$n \\in \\mathbb{N}$, $\\lambda : n \\to F$ and $v : n \\to S$ with\n$w = \\sum_{i<n} \\lambda_i v_i$.\n\n**The empty case is a real case.** $\\mathbb{N}$ contains $0$\n([[def-natural-numbers]]), and at $n = 0$ the sum is the empty sum, which is\n$0_V$. So $0_V$ is a linear combination of elements of every subset of $V$,\nincluding $S = \\varnothing$. The lists are indexed from $0$, so a linear\ncombination of length $n$ is $\\lambda_0 v_0 + \\dots + \\lambda_{n-1}v_{n-1}$; no\nstatement here is restricted to $n \\ge 1$.\n\n### The span\n\nLet $S \\subseteq V$. The set of linear subspaces of $V$ containing $S$ is\nnonempty, since $V$ itself is one, so its intersection is a linear subspace of\n$V$ by [[lem-intersection-of-linear-subspaces]]. That intersection is the **span\nof $S$**,\n\n$$\\operatorname{span}(S) \\;:=\\; \\bigcap \\{\\, W \\;:\\; W \\text{ is a linear subspace of } V \\text{ and } S \\subseteq W \\,\\} .$$\n\nIt contains $S$, being an intersection of sets each of which contains $S$, and it\nis contained in every linear subspace of $V$ that contains $S$. So it is the\n**smallest** linear subspace of $V$ containing $S$, and those two properties\ndetermine it uniquely: if $W$ and $W'$ both contain $S$ and are each contained in\nevery linear subspace containing $S$, then each is contained in the other. This\nis what licenses the definite article.\n\nA subset $S \\subseteq V$ **spans** $V$, or is a **spanning set** of $V$, when\n$\\operatorname{span}(S) = V$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-span-is-the-set-of-linear-combinations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) and let\n$S \\subseteq V$. Write\n\n$$L(S) \\;:=\\; \\Bigl\\{\\, \\sum_{i<n} \\lambda_i v_i \\;:\\; n \\in \\mathbb{N},\\ \\lambda : n \\to F,\\ v : n \\to S \\,\\Bigr\\}$$\n\nfor the set of linear combinations of elements of $S$\n([[def-linear-combination-and-span]]). Then\n\n$$\\operatorname{span}(S) \\;=\\; L(S).$$\n\nIn particular $\\operatorname{span}(\\varnothing) = \\{0_V\\}$, and for every\n$S \\subseteq V$ the span of $S$ contains $0_V$ as the empty linear combination.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-standard-basis-of-f-n",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), let $n \\in \\mathbb{N}$ and let $F^{n}$ be the\nfunction space on the von Neumann natural $n = \\{0, \\dots, n-1\\}$, with the\npointwise operations ([[def-function-space]], [[def-natural-numbers]],\n[[lem-nat-order-is-membership]]). For $i < n$ define the **standard unit vector**\n$e_i \\in F^{n}$ by\n\n$$e_i(i) = 1_F, \\qquad e_i(j) = 0_F \\ \\text{ for } j < n \\text{ with } j \\ne i .$$\n\nThen:\n\n1. **Finite sums in a function space are pointwise.** For every set $X$, every\n   $p \\in \\mathbb{N}$, every list $u : p \\to F^{X}$ and every $j \\in X$,\n   $$\\Bigl(\\sum_{k<p} u_k\\Bigr)(j) \\;=\\; \\sum_{k<p} u_k(j),$$\n   the right-hand sum being taken in $(F,+,0_F)$. (Stated here for an arbitrary\n   $X$ because the companion page needs it at $X = \\mathbb{N}$.)\n2. $e : n \\to F^{n}$ is an ordered basis of $F^{n}$ ([[def-linear-basis]]); in\n   particular $e$ is injective and its image $e[n] = \\{\\, e_i : i < n \\,\\}$ is a\n   basis of $F^{n}$ with $e[n] \\approx n$ ([[def-equinumerous]]);\n3. for every $\\lambda : n \\to F$ and every $j < n$,\n   $\\bigl(\\sum_{i<n}\\lambda_i e_i\\bigr)(j) = \\lambda_j$; equivalently the\n   coordinate list of $x \\in F^{n}$ with respect to the ordered basis $e$\n   ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]) is\n   $i \\mapsto x(i)$;\n4. $F^{n}$ is finite-dimensional over $F$ with $\\dim_F F^{n} = n$\n   ([[def-dimension]]);\n5. at $n = 0$ this reads: $F^{0}$ has exactly one element, the empty function,\n   so $F^{0}$ is the zero space, the empty list is its ordered basis,\n   $\\varnothing$ is its basis and $\\dim_F F^{0} = 0$.\n\nEvery index runs from $0$, so the coordinates of an element of $F^{n}$ are\n$x_0, \\dots, x_{n-1}$ and no statement above is restricted to $n \\ge 1$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Since this run reaches the first step, [F1] gives $r_0\\ne0$ and $\\beta=\\sqrt{\\langle r_0,r_0\\rangle}>0$. Since $\\beta$ is real, $\\langle r_0/\\beta,r_0/\\beta\\rangle=\\beta^{-2}\\langle r_0,r_0\\rangle=1$, so $v_1$ has norm $1$. Inductively suppose $v_1,\\ldots,v_j$ are orthonormal. At the $i$th Gram\u2013Schmidt substep, the current vector $w$ is orthogonal to $v_k$ for $k<i$. The update $w':=w-h_{ij}v_i$, with $h_{ij}=\\langle w,v_i\\rangle$, satisfies $\\langle w',v_i\\rangle=h_{ij}-h_{ij}\\langle v_i,v_i\\rangle=0$ and $\\langle w',v_k\\rangle=\\langle w,v_k\\rangle-h_{ij}\\langle v_i,v_k\\rangle=0$ for each $k<i$. These equalities use linearity in the first argument and orthonormality [F4]. After all $i=1,\\ldots,j$, the final $w$ is orthogonal to every current basis vector. Nonbreakdown gives $h_{j+1,j}=\\|w\\|_2>0$; the same inner-product calculation gives $\\langle v_{j+1},v_{j+1}\\rangle=h_{j+1,j}^{-2}\\langle w,w\\rangle=1$, and its orthogonality follows from that of $w$. Induction proves orthonormality through $v_{m+1}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "d5",
+          "step": "1.2",
+          "claim": "The finite matrix $\\bar H_m$ defines a linear map $\\mathbb C^m\\to\\mathbb C^{m+1}$ between finite-dimensional inner-product spaces by [F6], [F10], and [F11]. By [F7], least-squares minimizers exist and any two differ by an element of $\\ker\\bar H_m$. This kernel is zero: if $\\bar H_my=0$, its zero-based last row $a=m$ gives $h_{m+1,m}y_{m-1}=0$, hence $y_{m-1}=0$. For each one-based row label $r=m,m-1,\\ldots,2$ in descending order, matrix row $r-1$ has coefficient $h_{r,r-1}$ in column $r-2$; its other possibly nonzero terms use coordinates $y_{k-1}$ with $k\\ge r$, already shown zero. Thus $h_{r,r-1}y_{r-2}=0$. Since $h_{r,r-1}=h_{(r-1)+1,r-1}>0$ by no breakdown, we obtain $y_{r-2}=0$. Thus every zero-based coordinate vanishes, $\\bar H_m$ is injective, and its least-squares minimizer is unique.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "F10",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.3",
+          "claim": "At the end of column $j$, the successive subtractions give $Az_j=\\sum_{i=1}^j h_{ij}v_i+w$. Since $w=h_{j+1,j}v_{j+1}$, this is $Az_j=\\sum_{i=1}^{j+1}h_{ij}v_i$. Assembling these column identities for $j=1,\\ldots,m$ yields $AZ_m=V_{m+1}\\bar H_m$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "The initial residual is $r_0=b-Ax_0=\\beta v_1$. The vector $e_0$ has value $1$ in coordinate $0$ and $0$ in every other coordinate by [F11], so $V_{m+1}\\beta e_0=\\beta v_1$. For any $y\\in\\mathbb C^m$, linearity and step 1.3 give $b-A(x_0+Z_my)=r_0-AZ_my=V_{m+1}(\\beta e_0-\\bar H_my)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F10",
+            "F11",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "3.1",
+          "claim": "For every $c\\in\\mathbb C^{m+1}$, orthonormality from step 1.1 and the coordinate inner product [F4] give $\\|V_{m+1}c\\|_2^2=\\langle V_{m+1}c,V_{m+1}c\\rangle=\\sum_{i=1}^{m+1}\\sum_{k=1}^{m+1}c_{i-1}\\overline{c_{k-1}}\\langle v_i,v_k\\rangle=\\sum_{i=1}^{m+1}|c_{i-1}|^2=\\|c\\|_2^2$. Taking the nonnegative square roots defined by [F5] proves norm preservation. Apply it to $c=\\beta e_0-\\bar H_my$ in step 2.1 to obtain the asserted norm identity.",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d6",
+          "step": "4.1",
+          "claim": "Put $S=\\{z_1,\\ldots,z_m\\}$. By [F9], every $u\\in\\operatorname{span}(S)$ is a finite combination $u=\\sum_{a<q}c_a z_{j_a}$ for some $q\\in\\mathbb N$, where $a$ is a zero-based list coordinate and each $j_a\\in\\{1,\\ldots,m\\}$ is a one-based column label. For each one-based column label $k=1,\\ldots,m$, define the zero-based coordinate $y_{k-1}$ of $y\\in\\mathbb C^m$ to be $\\sum_{a<q,\\ j_a=k}c_a$, taking this empty sum to be zero. The finite sum laws and distributivity give $u=\\sum_{k=1}^m y_{k-1}z_k=Z_my$ by the column convention in the algorithm. Conversely, each $Z_my$ is the finite linear combination $\\sum_{k=1}^m y_{k-1}z_k$, so it lies in $\\operatorname{span}(S)$ by [F8] and [F9]. Thus the two sets agree. By step 3.1, for every vector in this affine set its true residual norm equals $\\|\\beta e_0-\\bar H_my\\|_2$. Therefore the unique least-squares minimizer from step 1.2 gives $x_m=x_0+Z_my_m$ with minimum true residual over the whole affine span.",
+          "inputs": [
+            "step 1.2",
+            "step 3.1",
+            "F3",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=1 and m>=1, so the empty-coordinate case is outside its statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the nonzero initial-residual branch; the algorithm returns the initial solution when the residual is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1, steps 1.2, 1.3, 2.1, 3.1, and 4.1 give the unique small minimizer and the one-column residual relation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 proves injectivity from the nonzero subdiagonal even when A itself is singular; no nonsingularity of A is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement assumes m>=1 completed nonbreakdown steps. Proof step 1.1 excludes zero initial residual and zero Arnoldi subdiagonal before normalization; step 1.2 begins at the actual last row and includes the m=1 triangular-kernel case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the least-squares minimizer is unique on every nonbreakdown run, so no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct residual-minimization theorem, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct residual-minimization theorem, not a biconditional."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "alg-flexible-gmres-variable-right-preconditioning",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "For $i=1,\\ldots,j$ in order, set $$h_{ij}:=\\langle w,v_i\\rangle,\\qquad w:=w-h_{ij}v_i.$$",
+          "use": "Provides the exact modified Gram\u2013Schmidt column recurrence used to prove the Arnoldi relation."
+        },
+        {
+          "supplier": "thm-least-squares-solutions-and-normal-equation",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "use": "Supplies existence of the finite-dimensional least-squares minimizer; uniqueness follows from the locally proved zero kernel."
+        },
+        {
+          "supplier": "lem-standard-basis-of-f-n",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "$$e_i(i) = 1_F, \\qquad e_i(j) = 0_F \\ \\text{ for } j < n \\text{ with } j \\ne i .$$",
+          "use": "Identifies e_0 as the first coordinate vector in the residual relation."
+        }
+      ]
+    }
+  }
+}

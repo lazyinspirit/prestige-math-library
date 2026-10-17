@@ -1,0 +1,1811 @@
+{
+  "version": 1,
+  "scope": [
+    "def-uniform-grid-and-difference-operators",
+    "def-periodic-one-way-advection-schemes",
+    "def-centered-leapfrog-wave-scheme",
+    "lem-dirichlet-grid-summation-by-parts",
+    "lem-dirichlet-grid-poincare-inequality",
+    "thm-smooth-advection-stencils-consistent",
+    "thm-dirichlet-leapfrog-discrete-energy",
+    "lem-periodic-advection-amplification-symbols",
+    "thm-periodic-centered-wave-amplification-and-endpoint",
+    "thm-periodic-advection-power-stability",
+    "thm-nearest-neighbor-cfl-domain-condition",
+    "ex-wave-cfl-endpoint-and-energy-breakdown",
+    "ex-upwind-versus-downwind-advection",
+    "ex-centered-advection-consistent-but-unstable",
+    "ex-grid-fourier-stability-needs-a-common-space-lift"
+  ],
+  "contracts": {
+    "def-uniform-grid-and-difference-operators": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated grid or index family is required to be nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Definition: zero grid values are permitted and have zero weighted norm."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Definition: the grid is one-dimensional, with the scalar field and index set stated explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Definition: the N=2 grid is included or its alias behavior is explicitly stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Definition: finite-interval endpoints and periodic wraparound are specified."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition specifies grid conventions and stencils; it makes no existence claim requiring a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "def-periodic-one-way-advection-schemes": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated grid or index family is required to be nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Definition: zero initial data are permitted by all homogeneous stencil rows."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The grid convention assumes N≥2; no N=1 result is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Definition: the N=2 grid is included or its alias behavior is explicitly stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Definition: the finite-interval initial row and positive-speed inflow boundary row are stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition specifies grid conventions and stencils; it makes no existence claim requiring a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "def-centered-leapfrog-wave-scheme": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated grid or index family is required to be nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Definition: the zero starting rows satisfy the homogeneous recurrence."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The grid convention assumes N≥2; no N=1 result is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Definition: the N=2 grid is included or its alias behavior is explicitly stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: displacement and discrete initial velocity determine the start row; zero Dirichlet endpoints are imposed at every time level."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition specifies grid conventions and stencils; it makes no existence claim requiring a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "lem-dirichlet-grid-summation-by-parts": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "\\langle p,q\\rangle_h=h\\sum_{j=1}^{N-1}p_j\\overline{q_j}",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-telescope",
+          "claim": "Expanding the complex interior sum and shifting indices gives the edge inner product and both conjugated endpoint terms.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-boundary-specialization",
+          "claim": "Zero endpoint values remove the flux terms and identify the Dirichlet negative Laplacian as self-adjoint and nonnegative.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires N≥2 and a finite nonempty interval grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 sets u=v=0 and verifies both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is valid for N=2, the one-interior-node case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 keeps both endpoint terms for N=2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 displays the two boundary terms explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only finite sums and no selection principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "lem-dirichlet-grid-poincare-inequality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "\\langle p,q\\rangle_h=h\\sum_{j=1}^{N-1}p_j\\overline{q_j},\\qquad \\|v\\|_h^2=\\langle v,v\\rangle_h,",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "telescoping-bound",
+          "claim": "The complex pairwise-square identity bounds each interior value by the full edge sum.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weighted-sum",
+          "claim": "Summing over interior nodes gives the stated L²-to-edge-norm inequality.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires N≥2 and a finite interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 give equality for w=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers N=2, with one interior value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The N=2 one-interior-node case is included in steps 1.1–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The zero endpoint hypotheses are used in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The proof uses finite sums and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-smooth-advection-stencils-consistent": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-one-way-advection-schemes",
+          "source_section": "Definition",
+          "quote": "Use the index sets and uniform spacings of [[def-uniform-grid-and-difference-operators]]: $x_j=jh$, $j\\in\\mathbb Z$, or $j$ reduced modulo $N$ in the periodic case. Fix $a>0$, $h,k>0$, and $\\nu=ak/h$. The target equation is the one-dimensional constant-velocity transport equation $u_t+a u_x=0$, the constant-coefficient case of [[def-linear-transport-equation-and-its-characteristic-flow]]. Set $U_j^0=u_0(jh)$ and define, for $n\\ge0$,\n$$ \\begin{aligned} \\text{upwind: }&U_j^{n+1}=U_j^n-\\nu(U_j^n-U_{j-1}^n),\\\\ \\text{downwind: }&U_j^{n+1}=U_j^n-\\nu(U_{j+1}^n-U_j^n),\\\\ \\text{centered: }&U_j^{n+1}=U_j^n-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n),\\\\ \\text{Lax--Friedrichs: }&U_j^{n+1}=\\frac{U_{j-1}^n+U_{j+1}^n}{2}-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n),\\\\ \\text{Lax--Wendroff: }&U_j^{n+1}=U_j^n-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n)+\\frac{\\nu^2}{2}(U_{j+1}^n-2U_j^n+U_{j-1}^n). \\end{aligned} $$\nOn a periodic grid, every index in these formulas is reduced modulo $N$; no physical boundary data are present. For $a<0$, reflect the stencil by $j\\mapsto-j$ and replace $\\nu$ by $|a|k/h$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-taylor-remainder-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, and suppose $f$ has derivatives through order $n+1$ on the closed interval between $a$ and $x$, with the usual endpoint continuity.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "For $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-symmetry-of-higher-mixed-partials",
+          "source_section": "Statement",
+          "quote": "every iterated derivative of $f$ of order $k$ is unchanged by any permutation of its coordinate differentiations.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "velocity-sign-reflection",
+          "claim": "Reflecting x and the stencil reduces negative speed to positive speed while preserving periods, derivative bounds, and residual magnitudes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "transport-derivatives",
+          "claim": "For positive speed after reflection, mixed-partial symmetry gives u_tt=a^2u_xx and u_ttt=−a^3u_xxx; Taylor expansions have uniform remainders.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "residual-expansions",
+          "claim": "Substitution into each named stencil gives its displayed leading residual; the LW second-order time term cancels.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "mesh-scaling",
+          "claim": "The two-sided k/h bound turns LF's h²/k term into O(h) and all LW remainders into O(h²).",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a periodic refining mesh family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero solution has zero residual in every stencil."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the target equation is explicitly one-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "N=2 is a coarse grid and is not a separate refining-limit case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The positive lower mesh-ratio bound excludes the zero-ratio endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses bounded derivatives and deterministic Taylor expansions; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-dirichlet-leapfrog-discrete-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-centered-leapfrog-wave-scheme",
+          "source_section": "Definition",
+          "quote": "The centered leapfrog recurrence is",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-dirichlet-grid-summation-by-parts",
+          "source_section": "Statement",
+          "quote": "On the subspace of grid functions with zero endpoints, $-\\Delta_h$ is self-adjoint and nonnegative",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-dirichlet-grid-poincare-inequality",
+          "source_section": "Statement",
+          "quote": "\\|w\\|_h\\le L\\|D_+w\\|_{e,h}.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "energy-rewrite",
+          "claim": "Writing adjacent states as average plus/minus half-step velocity expands the cross-gradient term exactly.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "coercive-bound",
+          "claim": "The zero-endpoint difference estimate gives coefficient 1−ν² and strict positivity for ν<1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "state-control",
+          "claim": "Discrete Poincare controls the average state; the velocity term controls the difference of adjacent states.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "energy-conservation",
+          "claim": "Multiplication by the centered time difference and SBP gives the difference of consecutive energies.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a finite nonempty Dirichlet grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero energy for zero starting rows."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The N=2 interval grid with one interior value is covered by the finite identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.1 cover N=2 without a dimension restriction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the lower-bound coefficient is 1−nu² and strict 0<nu<1 is assumed; equality nu=1 is treated separately on the periodic endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The proof uses finite grid sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts an energy estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts an energy estimate, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "lem-periodic-advection-amplification-symbols": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-one-way-advection-schemes",
+          "source_section": "Definition",
+          "quote": "Fix $a>0$, $h,k>0$, and $\\nu=ak/h$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ and let $k,\\ell\\in\\mathbb Z$. Then",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "The displayed modes form a basis of the complexified grid space",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Define $$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$ and define its **modulus**",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "\\|v\\|_{2,h}=\\left(h\\sum_{j=0}^{N-1}|v_j|^2\\right)^{1/2}.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "mode-substitution",
+          "claim": "Substituting the periodic mode into the five stencils gives the five displayed amplification factors.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "modulus-identities",
+          "claim": "Using |z|=1 and conjugation yields each displayed squared modulus.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "full-grid-basis",
+          "claim": "Orthogonality and completeness make the computed factors the full periodic update spectrum.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires N≥2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the constant Fourier mode z=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The calculation is the explicitly one-dimensional periodic case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The N=2 Fourier basis and aliased stencils remain valid in steps 1.1–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The symbols are valid at ν=0 and ν=1; no range is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 enumerate a finite Fourier basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts formulas, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts formulas, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-periodic-centered-wave-amplification-and-endpoint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-centered-leapfrog-wave-scheme",
+          "source_section": "Definition",
+          "quote": "The centered leapfrog recurrence is",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "\\lambda_\\ell=4\\sum_{j=1}^d\\frac{\\kappa_j}{h_j^2}\\sin^2\\left(\\frac{\\pi\\ell_j}{N_j}\\right)\\ge0.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "The displayed modes form a basis of the complexified grid space",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ and let $k,\\ell\\in\\mathbb Z$. Then",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Define $$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$ and define its **modulus**",
+          "uses": [
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying",
+          "uses": [
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "\\|v\\|_{2,h}=\\left(h\\sum_{j=0}^{N-1}|v_j|^2\\right)^{1/2}.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "modal-recurrence",
+          "claim": "The one-dimensional periodic heat eigenvalue with diffusivity c^2 reduces the wave scheme to its scalar characteristic polynomial.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "root-branches",
+          "claim": "The mean mode is a double root 1; all other roots are distinct unit roots for strict CFL.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "modal-solution-bound",
+          "claim": "The explicit two-root solution and finite geometric sum give the uniform coefficient estimate.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "grid-norm-bound",
+          "claim": "Parseval and a finite Cauchy–Schwarz identity yield the stated weighted-grid estimate.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nyquist-endpoint",
+          "claim": "At nu=1 on an even grid, the Nyquist polynomial is (r+1)^2 and the initial compatibility is exactly w^1=-w^0.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "mean-mode-solution",
+          "claim": "The two initial coefficients determine the repeated-root mean-mode solution.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns N≥2 periodic grids."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The zero Fourier coefficient data give the zero recurrence solution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The result is explicitly for one spatial dimension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: N=2 is included; its nonconstant mode is exactly the Nyquist mode."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The ν=1 Nyquist root and compatibility are handled in step 5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The Fourier basis is finite and explicitly indexed; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem makes no equivalence claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "n2-wave-root-boundary",
+          "asserts": "For N=2, the sole nonconstant mode has s_1=1; at nu=1/sqrt(2) its roots are ±i, while at nu=1 the polynomial is (r+1)^2.",
+          "claim": "The strict-CFL root and repeated Nyquist endpoint formulas hold on N=2.",
+          "checked_in": "Steps 1.1-5.1",
+          "fixture_version": 1
+        }
+      ],
+      "axioms": []
+    },
+    "thm-periodic-advection-power-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-periodic-advection-amplification-symbols",
+          "source_section": "Statement",
+          "quote": "The $N$ Fourier vectors form an orthogonal basis",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-advection-amplification-symbols",
+          "source_section": "Statement",
+          "quote": "Their squared moduli, in the same order, are",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-periodic-one-way-advection-schemes",
+          "source_section": "Definition",
+          "quote": "On a periodic grid, every index in these formulas is reduced modulo $N$; no physical boundary data are present.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Define $$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$ and define its **modulus**",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "stable-symbol-ranges",
+          "claim": "Signs of the symbol factors give the upwind, Lax–Friedrichs, and Lax–Wendroff contraction ranges.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unstable-symbol-ranges",
+          "claim": "A nonconstant mode yields growth outside the stated ranges; N=2 aliases are separated.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "power-operator-norm",
+          "claim": "Orthogonal diagonalization makes the power norm the maximum mode modulus to the m-th power.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a finite periodic grid with N≥2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: At ν=0 the upwind, LF, and LW updates are the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The theorem is explicitly one-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: The N=2 centered and Lax--Friedrichs alias cases are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The ν=0 and |ν|=1 endpoints are included in the statement and step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The proof uses the explicit finite Fourier basis only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states stability ranges, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states stability ranges, not an equivalence."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "n2-periodic-alias-boundary",
+          "asserts": "For N=2, the only nonconstant mode has z=-1 and S=0: centered amplification is 1 and Lax–Friedrichs has modulus 1 for every nu.",
+          "claim": "The N=2 aliasing exceptions in the statement are necessary.",
+          "checked_in": "Steps 1.1-2.1",
+          "fixture_version": 1
+        }
+      ],
+      "axioms": []
+    },
+    "thm-nearest-neighbor-cfl-domain-condition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-one-way-advection-schemes",
+          "source_section": "Definition",
+          "quote": "\\text{centered: }&U_j^{n+1}=U_j^n-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n),",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-homogeneous-linear-transport-by-the-flow",
+          "source_section": "Statement",
+          "quote": "u(x,t)=u_0(X(0;t,x)).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "source_section": "Statement",
+          "quote": "there exists $\\chi\\in C_c^\\infty(\\mathbb R^n)$ with $0\\le\\chi\\le1$, $\\chi=1$ on $|x|\\le1$, and $\\chi=0$ on $|x|\\ge2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-transport-equation-and-its-characteristic-flow",
+          "source_section": "Definition",
+          "quote": "A **characteristic through $(x_0,t_0)$**",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Then there is $c \\in (a,b)$ with",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-integer-part",
+          "source_section": "Statement",
+          "quote": "there is **exactly one** integer $m$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-test-function-space-d-of-an-open-set",
+          "source_section": "Definition",
+          "quote": "The **test-function space** is $\\mathcal D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb C)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-periodic-advection-amplification-symbols",
+          "source_section": "Statement",
+          "quote": "g_{\\rm centered}=1-i\\nu S_\\ell",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "\\|v\\|_{2,h}=\\left(h\\sum_{j=0}^{N-1}|v_j|^2\\right)^{1/2}.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "smooth-datum",
+          "claim": "Scaling the supplied smooth cutoff produces a nonzero admissible datum supported strictly inside the required interval.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stencil-dependence",
+          "claim": "Induction on the number of steps shows dependence radius at most n grid cells.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "induction"
+          ]
+        },
+        {
+          "id": "strict-cfl-separation",
+          "claim": "Under nu>=1+epsilon, the target’s numerical dependence interval stays outside the fixed datum’s support.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-characteristic-error",
+          "claim": "The exact characteristic foot tends to zero while the computed value is zero, so a sampled error tends to one.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fixed-period-centered-instability",
+          "claim": "On N_q=4q grids at nu=1/2, the z=i mode forces unbounded power norms within each fixed time interval.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F7",
+            "F9",
+            "F10",
+            "F11",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns the nonempty infinite uniform grid."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example datum is required to satisfy u₀(0)=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The transport equation and stencil are explicitly one-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The argument uses the infinite grid and has no finite periodic alias case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The convergence obstruction assumes ν≥1+ε; equality is not the strict-violation case.",
+          "evidence": "Statement: the infinite-grid obstruction assumes nu>=1+epsilon, while the separate centered family has strict interior nu=1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: The nearest grid index is chosen by rounding, and the cutoff is fixed explicitly; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way necessity statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way necessity statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "ex-wave-cfl-endpoint-and-energy-breakdown": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-centered-leapfrog-wave-scheme",
+          "source_section": "Definition",
+          "quote": "The centered leapfrog recurrence is",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-centered-wave-amplification-and-endpoint",
+          "source_section": "Statement",
+          "quote": "At $\\nu=1$ and even $N$, the Nyquist mode has the repeated root $-1",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "\\lambda_\\ell=4\\sum_{j=1}^d\\frac{\\kappa_j}{h_j^2}\\sin^2\\left(\\frac{\\pi\\ell_j}{N_j}\\right)\\ge0.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ and let $k,\\ell\\in\\mathbb Z$. Then",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "\\|v\\|_{2,h}=\\left(h\\sum_{j=0}^{N-1}|v_j|^2\\right)^{1/2}.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "\\langle D_+p,D_+q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j},",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "endpoint-root",
+          "claim": "The Nyquist recurrence has the repeated root -1 at nu=1.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "supercfl-root",
+          "claim": "For nu>1 the characteristic roots are negative real reciprocals with one modulus greater than one.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "endpoint-energy-semidefinite",
+          "claim": "Fourier decomposition gives modal energy 1/2(1-nu^2 s_l)|v|^2 plus a nonnegative gradient term.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "supercfl-energy-negative",
+          "claim": "The Nyquist state pair Y=-X has energy 2k^{-2}(1-nu^2)||X||^2.",
+          "step": "1.4",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "indefiniteness",
+          "claim": "A separate state pair has positive energy, so the form takes both signs beyond CFL.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires an even periodic grid with N≥2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonzero Nyquist amplitude."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The spatial model is one-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "N=2 is even and its nonconstant mode is the Nyquist mode in steps 1.1–2.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition supplies both displacement and discrete initial velocity; the example separately verifies nu=1 and nu>1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The Nyquist mode is explicitly defined; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "n2-wave-nyquist-endpoint-and-supercfl",
+          "asserts": "For N=2 and the Nyquist mode, s_1=1. At nu=1 the polynomial is (r+1)^2 and the modified energy of (Y,X)=(-X,X) is zero; at nu=2 its roots are -7±4sqrt(3), one has modulus greater than one, and that energy is -6||X||^2/k^2.",
+          "claim": "The endpoint repeated root and strict super-CFL growth already occur on the smallest even periodic grid.",
+          "checked_in": "Steps 1.1-2.2",
+          "fixture_version": 1
+        }
+      ],
+      "axioms": []
+    },
+    "ex-upwind-versus-downwind-advection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-periodic-advection-amplification-symbols",
+          "source_section": "Statement",
+          "quote": "g_{\\rm up}=1-\\nu+\\nu z_\\ell^{-1},\\quad g_{\\rm down}=1+\\nu-\\nu z_\\ell",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-advection-power-stability",
+          "source_section": "Statement",
+          "quote": "Downwind powers grow for every $\\nu>0$ and $N\\ge2",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "upwind-evaluation",
+          "claim": "Substitution z=i and ν=1/2 gives upwind modulus squared 1/2.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "downwind-evaluation",
+          "claim": "The same substitution gives downwind modulus squared 5/2.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "power-comparison",
+          "claim": "Powers decay for the first multiplier and grow geometrically for the second.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a four-point nonempty periodic grid."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonzero Fourier mode."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes N=4 and has no N=1 case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example is specifically the N=4 grid."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example fixes ν=1/2, away from the CFL endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The mode z=i is explicitly selected from the finite Fourier basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "n4-z-i-upwind-downwind",
+          "asserts": "With N=4, z=i and nu=1/2, g_up=(1-i)/2 has squared modulus 1/2 and g_down=(3-i)/2 has squared modulus 5/2.",
+          "claim": "The same finite Fourier mode decays for upwind and grows for downwind.",
+          "checked_in": "Steps 1.1-2.1",
+          "fixture_version": 1
+        }
+      ],
+      "axioms": []
+    },
+    "ex-centered-advection-consistent-but-unstable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-smooth-advection-stencils-consistent",
+          "source_section": "Statement",
+          "quote": "the upwind, downwind, centered, and Lax--Friedrichs residuals are $O(h)$ uniformly",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-advection-amplification-symbols",
+          "source_section": "Statement",
+          "quote": "g_{\\rm centered}=1-i\\nu S_\\ell",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nearest-neighbor-cfl-domain-condition",
+          "source_section": "Statement",
+          "quote": "the domain-of-dependence bound does not suffice for uniform finite-time power stability of every periodic nearest-neighbor scheme",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "centered-factor",
+          "claim": "For z=i and nu=1/2, the centered factor has squared modulus 5/4.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "consistency-and-uniform-instability",
+          "claim": "The mesh ratio remains fixed so smooth residuals vanish, while the theorem supplies unbounded finite-time power norms.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a nonempty periodic grid."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonzero Fourier mode z=i."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is one-dimensional and fixes N=4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: q=1 gives N=4, and the fixed-period family uses the same z=i mode for every q."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: every mesh has the strict interior ratio nu=1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The Fourier mode is explicitly fixed as z=i."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "n4-centered-cfl-half",
+          "asserts": "With N=4, z=i and nu=1/2, g_centered=1-i/2 and |g_centered|^2=5/4>1 while 0<nu<1.",
+          "claim": "The centered stencil is power-unstable despite the strict upwind CFL range.",
+          "checked_in": "Steps 1.1-2.1",
+          "fixture_version": 1
+        }
+      ],
+      "axioms": []
+    },
+    "ex-grid-fourier-stability-needs-a-common-space-lift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-common-space-linear-scheme-interface",
+          "source_section": "Definition",
+          "quote": "A **common-space time-scheme family** is a sequence of positive time steps",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-common-space-linear-scheme-interface",
+          "source_section": "Definition",
+          "quote": "use the norm of this same space $X$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lax-equivalence-for-common-banach-space-schemes",
+          "source_section": "Statement",
+          "quote": "the scheme is consistent on its dense invariant subspace, then it is\nconvergent on every finite time interval if and only if it is stable there",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-periodic-advection-power-stability",
+          "source_section": "Statement",
+          "quote": "upwind powers are contractions in $\\|\\cdot\\|_{2,h}$ for $0\\le\\nu\\le1",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "grid-power-bound",
+          "claim": "Each grid-specific upwind update has a contraction bound at fixed 0<nu<1.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4"
+          ]
+        },
+        {
+          "id": "missing-common-space",
+          "claim": "The displayed maps have different finite-dimensional domains and no common-space lift is declared.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "lax-hypothesis-check",
+          "claim": "The common-space Lax theorem cannot be invoked from grid power bounds alone when its interface premise is absent.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns the nonempty family N≥2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The upwind update is homogeneous, so zero data remain zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "N=1 is outside the periodic grid convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The varying family includes N≥2; the fixed-X mismatch remains for every N."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example fixes 0<ν<1 and does not analyze endpoint stability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: Dependent Choice is declared as A1; the finite grid calculation is deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no iff claim of its own."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no iff claim of its own."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "n4-upwind-grid-mode-not-common-space-lift",
+          "asserts": "For N=4, z=i and nu=1/2, one upwind Fourier mode has factor (1-i)/2 with squared modulus 1/2. This verifies the per-grid contraction example and supplies no fixed Banach-space lift.",
+          "claim": "A finite grid power bound coexists with the absent common-space interface premise.",
+          "checked_in": "Steps 1.1-2.1",
+          "fixture_version": 1
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "Dependent Choice (DC)",
+          "declaration": "A1",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "The cited Lax-equivalence supplier assumes DC; the grid stability computation itself is choice-free."
+        }
+      ]
+    }
+  }
+}

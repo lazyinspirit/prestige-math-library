@@ -1,0 +1,75 @@
+---
+id: thm-d-optimality-equivalence-theorem
+kind: theorem
+title: "Equivalence criterion for D-optimal approximate designs"
+status: published
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 1
+deps:
+  - def-approximate-linear-model-design-and-optimality-criteria
+  - lem-log-determinant-concavity-on-positive-definite-matrices
+  - thm-determinant-differential-and-jacobis-formula
+  - def-matrix-minors-cofactors-and-adjugate
+  - thm-laplace-cofactor-expansion
+  - thm-adjugate-identity-over-a-commutative-ring
+  - def-trace-of-a-square-matrix
+  - thm-logarithm-derivative-and-integral
+  - thm-chain-rule-for-total-derivatives
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+sources:
+  references:
+    - title: "Stephen Boyd and Lieven Vandenberghe, Convex Optimization, §§3.1.5 and 7.5"
+      url: "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"
+---
+
+## Statement
+
+Let $\mathcal X$ be a finite nonempty candidate set, $f:\mathcal X\to\mathbb R^p$, and let $\xi^*$ be a nonsingular approximate design as in [[def-approximate-linear-model-design-and-optimality-criteria]]. Write $M^*=M(\xi^*)$ and $u^*(x)=f(x)^{\mathsf T}(M^*)^{-1}f(x)$. Then $\xi^*$ is D-optimal among nonsingular approximate designs if and only if $u^*(x)\le p$ for every $x\in\mathcal X$. Whenever this holds, $u^*(x)=p$ for every $x\in\operatorname{supp}(\xi^*)$. No existence of a nonsingular optimum is asserted.
+
+## Facts & Assumptions
+
+**Given:** A finite nonempty $\mathcal X$, $p\ge1$, a regression-vector map $f$, a nonsingular approximate design $\xi^*$, and its matrix $M^*$.
+
+[F1] [[def-approximate-linear-model-design-and-optimality-criteria]]: $M(\xi)=\sum_{x\in\mathcal X}\xi_x f(x)f(x)^{\mathsf T}$ for an approximate design $\xi$.
+
+[F2] [[def-approximate-linear-model-design-and-optimality-criteria]]: D-optimality maximizes $\log\det M(\xi)$ among nonsingular designs.
+
+[F3] [[lem-log-determinant-concavity-on-positive-definite-matrices]]: for positive-definite $A_0,A_1$, $\log\det((1-t)A_0+tA_1)\ge(1-t)\log\det A_0+t\log\det A_1$ for $0\le t\le1$.
+
+[F4] [[thm-determinant-differential-and-jacobis-formula]]: for invertible $A$, $D\det(A)[H]=\det(A)\operatorname{tr}(A^{-1}H)$.
+
+[F5] [[def-trace-of-a-square-matrix]]: $\operatorname{tr}(A)$ is the sum of the diagonal entries of $A$.
+
+[F6] [[def-matrix-minors-cofactors-and-adjugate]]: for a positive-sized square matrix, the cofactors are signed deleted-row-and-column minors and $\operatorname{adj}(A)=\operatorname{cof}(A)^{\mathsf T}$.
+
+[F7] [[thm-laplace-cofactor-expansion]]: for a positive-sized square matrix over a commutative ring, determinant expansion along any row or column is the sum of entries times their corresponding cofactors.
+
+[F8] [[thm-adjugate-identity-over-a-commutative-ring]]: for a positive-sized square matrix over a commutative ring, $A\operatorname{adj}(A)=\operatorname{adj}(A)A=\det(A)I$.
+
+[F9] [[thm-logarithm-derivative-and-integral]] gives $\log'(r)=1/r$ for $r>0$; [[thm-chain-rule-for-total-derivatives]] composes it with the determinant differential and affine matrix paths, using the entrywise Euclidean coordinates on real matrix space. Thus, along an affine path $A_t=A+tH$ with positive determinant, $(\log\det A_t)'=\operatorname{tr}(A_t^{-1}H)$ by [F4]. Determinant continuity keeps its positive value in the logarithm domain locally at every path point.
+
+## Proof
+
+**Proof technique:** use feasible directional derivatives for necessity and concavity for sufficiency.
+
+1.1 Fix $x\in\mathcal X$ and let $\delta_x$ be the design putting weight $1$ at $x$. For $0\le t<1$, $\xi_t=(1-t)\xi^*+t\delta_x$ has matrix $M_t=(1-t)M^*+t f(x)f(x)^{\mathsf T}$, which is positive definite because $M^*$ is positive definite and $f(x)f(x)^{\mathsf T}$ is positive semidefinite. [given, F1, choose, algebra]
+
+1.2 Conversely, suppose $u^*(x)\le p$ for every candidate. Let $\eta$ be any nonsingular approximate design and put $N=M(\eta)$. The segment $M_s=(1-s)M^*+sN$ is positive definite; by [F3], $g(s)=\log\det M_s$ is concave. By [F4], with its cofactor and adjugate support [F6], [F7], and [F8], and the logarithm-chain rule [F9], and by [F1], $g'(0)=\operatorname{tr}((M^*)^{-1}(N-M^*))=\sum_x\eta_x u^*(x)-p\le0$. [given, F1, F3, F4, F6, F7, F8, F9, choose, algebra]
+
+2.1 If $\xi^*$ is D-optimal, the defining maximum property in [F2] gives $g_x(t)=\log\det M_t\le g_x(0)$ for $0\le t<1$, so its right derivative at $0$ is nonpositive. By [F4], with its cofactor and adjugate support [F6], [F7], and [F8], the logarithm-chain rule [F9] gives $g_x'(0)=\operatorname{tr}((M^*)^{-1}(f(x)f(x)^{\mathsf T}-M^*))=u^*(x)-p$; the trace of the rank-one term is $f(x)^{\mathsf T}(M^*)^{-1}f(x)$ by the coordinate sum, and $\operatorname{tr}(I_p)=p$ by [F5]. Thus $u^*(x)\le p$. Since $x$ was arbitrary, the pointwise bound is necessary. [given, F2, F4, F5, F6, F7, F8, F9, step 1.1, choose, algebra]
+
+2.2 For $0<s<1$, the concavity in step 1.2 gives $g(s)\ge(1-s)g(0)+sg(1)$, hence $g(1)-g(0)\le(g(s)-g(0))/s$. Let $s\downarrow0$; the right derivative already computed in step 1.2 gives $g(1)-g(0)\le g'(0)\le0$. Thus $\log\det N\le\log\det M^*$. Since $\eta$ was arbitrary among nonsingular designs, $\xi^*$ is D-optimal. [F3, step 1.2, algebra]
+
+3.1 Finally, $\sum_x\xi_x^*u^*(x)=\operatorname{tr}((M^*)^{-1}\sum_x\xi_x^*f(x)f(x)^{\mathsf T})=\operatorname{tr}(I_p)=p$ by [F1] and [F5]. Each term is at most $p$ by the bound assumed in step 1.2, so every term with $\xi_x^*>0$ equals $p$. This proves equality on the support and completes both directions. [F1, F5, step 1.2, algebra] ∎

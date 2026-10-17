@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "75",
+  "round": 0,
+  "reviewed_items": [
+    "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+    "def-regular-differentiation-index",
+    "thm-index-one-dae-implicit-function-reduction",
+    "lem-index-one-dae-algebraic-residual-to-state-error",
+    "alg-index-one-dae-consistent-initialization",
+    "alg-index-one-dae-backward-euler-stepper",
+    "alg-index-one-dae-bdf2-stepper",
+    "lem-index-one-dae-backward-euler-local-branch",
+    "lem-index-one-dae-bdf2-local-branch",
+    "thm-index-one-dae-finite-budget-solvers-terminate",
+    "thm-index-one-dae-backward-euler-first-order-with-residuals",
+    "thm-index-one-dae-bdf2-second-order-with-residuals",
+    "ex-index-one-circuit-consistent-initialization-and-be-step",
+    "ex-index-two-dae-algebraic-residual-does-not-control-state",
+    "ex-index-three-pendulum-by-differentiation"
+  ],
+  "reviewed_pages": [
+    "differential-algebraic-equations-and-consistent-initialization",
+    "differential-algebraic-equations-and-consistent-initialization-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch is within the approved T06 scope, and the supplier uses match the assigned claims. The source cross-check supports the selected index-one reduction and the separate high-index limitations ([Hairer–Wanner, §VI.1](https://isy.gitlab-pages.liu.se/fs/phd-courses/simulation/Papers/HairerWanner_VI_1_clean.pdf); [Atkinson et al., ch. 10, §§10.3–10.4](https://homepage.math.uiowa.edu/~atkinson/papers/NAODE_Book.pdf)). One local repair can address the stepper input conditions and correct the finite-work counts.",
+  "findings": [
+    {
+      "id": "alg-index-one-dae-backward-euler-stepper",
+      "type": "prerequisite",
+      "reason": "Newton is called with the initial pair on the selected tube as its evaluation domain, but the Definition does not explicitly require or check that the initial pair lies in that tube. Newton's supplier requires its initial iterate to be in its domain. State this admissibility condition and return a status before the call if it fails."
+    },
+    {
+      "id": "alg-index-one-dae-bdf2-stepper",
+      "type": "prerequisite",
+      "reason": "The Newton seed (2X_{n-1}-X_{n-2}, Z_{n-1}) is not guaranteed to lie in the selected tube, while the Newton supplier requires its initial iterate to be in its evaluation domain. Add a pre-call membership check and define the resulting status. Also name the bound meant by “each starting algebraic residual must meet its supplied bound” and specify the check for both starts."
+    },
+    {
+      "id": "thm-index-one-dae-finite-budget-solvers-terminate",
+      "type": "local",
+      "reason": "The work bound omits the pre-loop algebraic residual checks: backward Euler evaluates the starting residual once, and BDF2 checks two starting residuals. For S attempted steps, account for up to 1+S(B+2) evaluations for backward Euler and 2+S(B+2) for BDF2."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-index-one-dae-backward-euler-local-branch",
+      "decision": "accept",
+      "reason": "Its proof uses the coupled root equation and IFT; an explicit Newton seed-domain check does not change that claim."
+    },
+    {
+      "id": "lem-index-one-dae-bdf2-local-branch",
+      "decision": "accept",
+      "reason": "Its proof establishes a local root branch from the stated residual equation, independently of the finite Newton seed."
+    },
+    {
+      "id": "thm-index-one-dae-finite-budget-solvers-terminate",
+      "decision": "repair",
+      "reason": "The theorem's current count must include the initial algebraic residual checks required by the stepper procedures."
+    },
+    {
+      "id": "thm-index-one-dae-backward-euler-first-order-with-residuals",
+      "decision": "accept",
+      "reason": "The proof is conditional on the stated branch and residual bounds; it does not infer solver success or arbitrary-seed convergence."
+    },
+    {
+      "id": "thm-index-one-dae-bdf2-second-order-with-residuals",
+      "decision": "accept",
+      "reason": "The proof is conditional on the stated branch, starting residuals, and step residuals; clarifying the algorithm's starting bound does not change its argument."
+    }
+  ]
+}

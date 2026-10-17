@@ -1,0 +1,168 @@
+--- items/alg-krawczyk-root-certification.md
++++ items/alg-krawczyk-root-certification.md
+@@ -30,7 +30,7 @@
+ 
+ ## Definition
+ 
+-Input $F:U\to\mathbb R^n$ of class $C^1$ on an open convex $U$, a nonempty initial real box $X_0\subset U$, interval evaluators whose returned $F(x_0)$ and $J(Y)$ enclose the exact values at each processed box $Y$, a dyadic point matrix $C$, a rational matrix $W$, a minimum side width $\eta>0$, and a box budget $B\ge0$. Check the inverse witness exactly by computing $WC$ and testing $WC=I$. If this test fails, return "inconclusive: preconditioner not certified nonsingular". For square matrices, a left inverse implies nonsingularity by rank-nullity ([[thm-rank-nullity]]).
++Input $F:U\to\mathbb R^n$ of class $C^1$ on an open convex $U$, a nonempty initial real box $X_0\subset U$, interval evaluators whose returned $F(x_0)$ and $J(Y)$ enclose the exact values at each processed box $Y$, a dyadic point matrix $C$, a rational matrix $W$, a minimum side width $\eta>0$, and a nonnegative integer box budget $B\ge0$. Check the inverse witness exactly by computing $WC$ and testing $WC=I$. If this test fails, return "inconclusive: preconditioner not certified nonsingular". For square matrices, a left inverse implies nonsingularity by rank-nullity ([[thm-rank-nullity]]).
+ 
+ Initialize a queue with $X_0$. Process at most $B$ boxes. For each box $Y$, take its coordinatewise midpoint $x_0$, evaluate a finite interval vector $F_0$ enclosing $F(x_0)$ and a finite interval Jacobian enclosure $J(Y)$, and compute
+ $$
+--- items/alg-rational-polynomial-root-isolation.md
++++ items/alg-rational-polynomial-root-isolation.md
+@@ -36,7 +36,7 @@
+ 
+ 3. Put $B=H(S)+2$, where $H(S)$ is the maximum absolute coefficient of $S$. If $\deg S\ge2$, compute $\sigma(S)$ from [[lem-squarefree-integer-polynomial-root-separation-bound]]; if $\deg S=1$, no separation value is needed. Initialize a queue with the open interval $(-B,B)$ and retain the active squarefree factors $Q_k$.
+ 
+-4. Remove exact dyadic rational roots at a queue interval endpoint or bisection midpoint before counting on the adjacent intervals. If $r$ is such a root, test the factors $Q_k(r)$ exactly; the unique factor vanishing at $r$ gives its multiplicity $k$. Record the singleton $\{r\}$, divide that factor by $x-r$, and remove the same factor from the active product $S$.
++4. Remove exact dyadic rational roots at a queue interval endpoint or bisection midpoint before counting on the adjacent intervals. If $r$ is such a root, test the factors $Q_k(r)$ exactly; the unique factor vanishing at $r$ gives its multiplicity $k$. Record the singleton $\{r\}$, divide that factor by $x-r$, and remove the same factor from the active product $S$. Immediately after any such removal, if $S$ is a nonzero constant, clear the remaining queue and return status "complete" with the records already obtained; every pending interval is then root-free. Do not form a Sturm sequence for a constant product.
+ 
+ 5. For a queued open interval $(a,b)$ whose endpoints are not roots of the active $S$, form its Sturm sequence and set $N=V(a)-V(b)$ using [[thm-sturm-sign-variation-counts-distinct-roots]]. If $N=0$, discard the interval. If $N=1$, compute the Sturm count for each nonconstant active $Q_k$ (a constant factor has count $0$) and output $(a,b,k)$ for the unique factor whose count is $1$. If $N\ge2$, compare its width with $\sigma(S_0)/4$, where $S_0$ is the initial squarefree primitive polynomial. A count $N\ge2$ below that threshold is an internal inconsistency; otherwise bisect at $m=(a+b)/2$. If $S(m)=0$, record and remove that exact root as in step 4. Enqueue the open halves $(a,m)$ and $(m,b)$.
+ 
+--- items/alg-safeguarded-hybrid-event-location-and-restart.md
++++ items/alg-safeguarded-hybrid-event-location-and-restart.md
+@@ -33,7 +33,7 @@
+ 
+ **Procedure.** At each trial, extend the current mode-prefix reconstruction by the proposed panel. Recheck the residual-tube certificate on the whole accumulated prefix and compute the reference error bound $\eta_{\rm ref}=\eta_{\rm loc}+e^{LH}E$ using its ledger. If the tube checker or any guard evaluator fails, is non-finite, or lacks a justified reference-error bound, return `inconclusive` with the certified prefix.
+ 
+-For every outgoing guard, apply [[alg-smooth-function-root-isolation]] to the exact reference guard $h(t)=g(t,y_{\rm ref}(t))$ over the new trial interval, using its certified range and derivative enclosures and box budget $B_{\mathrm{root}}$. If any isolator is `inconclusive` or has unresolved boxes, return `inconclusive`. For each certified root box, classify the crossing using its derivative enclosure and the guard's declared orientation. A box strictly on the opposite side is nontriggering; a box whose derivative enclosure meets zero is refined or makes the result `inconclusive`.
++For every outgoing guard, apply [[alg-smooth-function-root-isolation]] to the exact reference guard $h(t)=g(t,y_{\rm ref}(t))$ over the new trial interval, using its certified range and derivative enclosures, minimum width $\eta=\omega>0$, and nonnegative integer box budget $B_{\mathrm{root}}$. If any isolator is `inconclusive` or has unresolved boxes, return `inconclusive`. For each certified root box, classify the crossing using its derivative enclosure and the guard's declared orientation. A box strictly on the opposite side is nontriggering; a box whose derivative enclosure meets zero is refined or makes the result `inconclusive`.
+ 
+ If every isolator is `complete` and all certified roots are either excluded or nontriggering, accept the no-event panel, advance the reported time by its duration, append the dense panel, and retain the segment-start error bound $E$. Recompute the accumulated residual-tube and reference-error certificates. A no-event decision therefore follows complete root isolation and direction classification over the entire trial interval.
+ 
+--- items/alg-smooth-function-root-isolation.md
++++ items/alg-smooth-function-root-isolation.md
+@@ -31,7 +31,7 @@
+ 
+ ## Definition
+ 
+-Input a $C^1$ function $f:U\to\mathbb R$ on an open interval $U$, a nonempty finite dyadic interval $X_0\subset U$, valid interval range and derivative enclosures on every queried subinterval, a minimum width $\eta>0$, and a box budget $B\ge0$. The two enclosure evaluators must contain $f(I)$ and $f'(I)$, respectively; non-finite results cannot certify a root or its absence.
++Input a $C^1$ function $f:U\to\mathbb R$ on an open interval $U$, a nonempty finite dyadic interval $X_0\subset U$, valid interval range and derivative enclosures on every queried subinterval, a minimum width $\eta>0$, and a nonnegative integer box budget $B\ge0$. The two enclosure evaluators must contain $f(I)$ and $f'(I)$, respectively; non-finite results cannot certify a root or its absence.
+ 
+ Initialize a queue with $X_0$. While the queue is nonempty and fewer than $B$ boxes have been processed, remove its first interval $I$ and call [[alg-scalar-interval-newton-certification]] on $I$ with update budget $1$ and the supplied evaluators. If it returns "root-free", record $I$ as excluded. If it returns "unique-root", record $I$ as a certified box. Otherwise, if the width of $I$ exceeds $\eta$, bisect at its midpoint and append the two closed halves to the queue. If the width is at most $\eta$, record $I$ as unresolved. When the box budget is exhausted, append every remaining queued interval to the unresolved list.
+ 
+--- items/lem-brouwer-fixed-point-for-closed-box.md
++++ items/lem-brouwer-fixed-point-for-closed-box.md
+@@ -40,6 +40,6 @@
+ 
+ 1.1 Let $J=\{j:a_j<b_j\}$ and $m=|J|$. If $m=0$, $X$ is a singleton, so its sole point is fixed. If $m>0$, deleting the fixed coordinates identifies $X$ with a box $X_J$ whose side lengths are positive. The coordinatewise affine map $T:[-1,1]^m\to X_J$, with $T(u)_j=(a_j+b_j)/2+(b_j-a_j)u_j/2$, is a homeomorphism. Reinserting the fixed coordinate values defines $\iota:X_J\to X$, and projection onto the free coordinates defines $\pi_J:X\to X_J$; since the fixed output coordinates of $f$ equal their singleton values, $f_J=\pi_J\circ f\circ\iota$ is a continuous self-map of $X_J$. [given, F2, construct]
+ 
+-2.1 Define $\|u\|_2=(\sum_j|u_j|^2)^{1/2}$ and $\|u\|_\infty=\max_j|u_j|$, let $D^m=\{u:\|u\|_2\le1\}$, and put $C_m=[-1,1]^m$. For $u\ne0$ set $h(u)=(\|u\|_2/\|u\|_\infty)u$, and set $h(0)=0$. Then $\|h(u)\|_\infty=\|u\|_2\le1$. For $y\ne0$ in $C_m$, set $h^{-1}(y)=(\|y\|_\infty/\|y\|_2)y$, and set $h^{-1}(0)=0$. For $u\ne0$, $\|h(u)\|_2=\|u\|_2^2/\|u\|_\infty$ and $\|h(u)\|_\infty=\|u\|_2$, so substituting in $h^{-1}$ gives $h^{-1}(h(u))=u$; the same norm calculation gives $h(h^{-1}(y))=y$ for $y\ne0$. Both maps are continuous away from zero. At zero, $\|h(u)\|_2\le\sqrt m\,\|u\|_2$ and $\|h^{-1}(y)\|_2\le\|y\|_2$, so both are continuous there. Thus $h$ is a homeomorphism $D^m\to C_m$. [step 1.1, algebra, construct]
++2.1 Define $\|u\|_2=(\sum_j|u_j|^2)^{1/2}$ and $\|u\|_\infty=\max_j|u_j|$, let $D^m=\{u:\|u\|_2\le1\}$, and put $C_m=[-1,1]^m$. For $u\ne0$ set $h(u)=(\|u\|_2/\|u\|_\infty)u$, and set $h(0)=0$. Then $\|h(u)\|_\infty=\|u\|_2\le1$. For $y\ne0$ in $C_m$, set $h^{-1}(y)=(\|y\|_\infty/\|y\|_2)y$, and set $h^{-1}(0)=0$. For $u\ne0$, $\|h(u)\|_2=\|u\|_2^2/\|u\|_\infty$ and $\|h(u)\|_\infty=\|u\|_2$, so substituting in $h^{-1}$ gives $h^{-1}(h(u))=u$; the same norm calculation gives $h(h^{-1}(y))=y$ for $y\ne0$. Both maps are continuous away from zero. For any vector $v$, one coordinate attains $\|v\|_\infty$, so $\|v\|_\infty^2\le\sum_j|v_j|^2$; each of the $m$ summands is at most $\|v\|_\infty^2$, so $\|v\|_2^2\le m\|v\|_\infty^2$. Taking nonnegative square roots gives $\|v\|_\infty\le\|v\|_2\le\sqrt m\,\|v\|_\infty$. Therefore for nonzero $u$, $\|h(u)\|_2=\|u\|_2^2/\|u\|_\infty\le\sqrt m\,\|u\|_2$, and for nonzero $y$, $\|h^{-1}(y)\|_2=\|y\|_\infty\le\|y\|_2$. These inequalities also hold at zero and show both maps are continuous there. Thus $h$ is a homeomorphism $D^m\to C_m$. [step 1.1, algebra, construct]
+ 
+ 3.1 For $m>0$, $T\circ h$ is a homeomorphism from $D^m$ to $X_J$. The conjugate map $g=(T\circ h)^{-1}\circ f_J\circ(T\circ h):D^m\to D^m$ is continuous. By [F1], $g$ has a fixed point; mapping it back gives a fixed point of $f_J$, and applying $\iota$ gives a fixed point of $f$ in $X$. [given, F1, step 1.1, step 2.1, construct] ∎
+--- items/lem-interval-jacobian-mean-value-enclosure.md
++++ items/lem-interval-jacobian-mean-value-enclosure.md
+@@ -55,8 +55,8 @@
+ 
+ ## Proof
+ 
+-1.1 Fix a row index $i$ and define $\phi_i(t)=F_i(y+t(x-y))$ on $[0,1]$. Convexity keeps the segment in $U$. By [F1], $F_i$ is continuous there; by [F2] and [F3], $\phi_i$ is differentiable on $(0,1)$ with $\phi_i'(t)=\sum_{j=1}^n\partial_jF_i(y+t(x-y))(x_j-y_j)$. [given, F1, F2, F3, construct]
++1.1 Use coordinate indices $0\le i,j<n$, as for the Jacobian. Fix a row index $i$ and define $\phi_i(t)=F_i(y+t(x-y))$ on $[0,1]$. For $0\le t\le1$ and every coordinate $j$, both $x_j,y_j\in[a_j,b_j]$ imply $(1-t)y_j+tx_j\in[a_j,b_j]$. Thus the product box $X$ is convex and the segment stays in $X\subset U$. By [F1], $F_i$ is continuous there; by [F2] and [F3], $\phi_i$ is differentiable on $(0,1)$ with $\phi_i'(t)=\sum_{j=0}^{n-1}\partial_jF_i(y+t(x-y))(x_j-y_j)$. [given, F1, F2, F3, construct]
+ 
+-2.1 Apply [F4] to $\phi_i$ to obtain $t_i\in(0,1)$ with $F_i(x)-F_i(y)=\sum_{j=1}^n\partial_jF_i(z_i)(x_j-y_j)$, where $z_i=y+t_i(x-y)\in X$. [step 1.1, F4, construct]
++2.1 Apply [F4] to $\phi_i$ to obtain $t_i\in(0,1)$ with $F_i(x)-F_i(y)=\sum_{j=0}^{n-1}\partial_jF_i(z_i)(x_j-y_j)$, where $z_i=y+t_i(x-y)\in X$. [step 1.1, F4, construct]
+ 
+ 3.1 For each of the finitely many rows choose the point $z_i$ from step 2.1 and form $A$ whose $i$th row is $\nabla F_i(z_i)$. By [F5], every entry $A_{ij}$ lies in $J_{ij}(X)$, so $A\in\mathcal J(X)$; the row identities in step 2.1 give $F(x)-F(y)=A(x-y)$. This uses only finite choice. [step 2.1, F5, choose, algebra] ∎
+--- items/lem-polynomial-squarefree-decomposition-and-multiplicity.md
++++ items/lem-polynomial-squarefree-decomposition-and-multiplicity.md
+@@ -12,6 +12,9 @@
+   statement: literature-derived
+   proof: ai-generated
+ deps:
++  - def-monic-greatest-common-divisor-of-polynomials
++  - thm-bezout-identity-for-polynomials
++  - lem-polynomial-gcd-is-stable-under-field-extension
+   - def-polynomial-ring-over-a-commutative-ring
+   - def-formal-derivative-of-a-polynomial
+   - thm-polynomial-division-algorithm-over-a-field
+@@ -60,14 +63,18 @@
+ 
+ [F7] The complex numbers form a field containing the rationals ([[thm-complex-numbers-form-a-field]]).
+ 
++[F8] The monic gcd is the unique monic common divisor divisible by every common divisor; Euclidean division terminates at its nonzero scalar associate and yields a polynomial Bezout identity. [[def-monic-greatest-common-divisor-of-polynomials]], [[thm-bezout-identity-for-polynomials]]
++
++[F9] For polynomials over a base field that are not both zero, their monic gcd is unchanged on extending the coefficient field. [[lem-polynomial-gcd-is-stable-under-field-extension]]
++
+ ## Proof
+ 
+-1.1 The Euclidean divisions in the gcd of any two polynomials over $\mathbb Q$ terminate: each nonzero remainder has smaller nonnegative integer degree than the divisor by [F2]. The same argument defines $p_k$; if $\deg p_{k-1}>0$, then $p_{k-1}'\ne0$ and has smaller degree by [F3] and characteristic zero, so $\deg p_k<\deg p_{k-1}$. Thus $p_d=1$, and each $s_k=p_{k-1}/p_k$ is a polynomial. [given, F1, F2, F3, construct]
++1.1 By [F8], the monic gcd is constructed by Euclidean division over $\mathbb Q$, and the divisions terminate: each nonzero remainder has smaller nonnegative integer degree than the divisor by [F2]. The same argument defines $p_k$; if $\deg p_{k-1}>0$, then $p_{k-1}'\ne0$ and has smaller degree by [F3] and characteristic zero, so $\deg p_k<\deg p_{k-1}$. Thus $p_d=1$, and each $s_k=p_{k-1}/p_k$ is a polynomial. [given, F1, F2, F3, F8, construct]
+ 
+ 1.2 By [F4], repeated application of [F5] factors $f$ over $\mathbb C$: $f(x)=\prod_{\alpha}(x-\alpha)^{m_\alpha}$, where the finite list contains each distinct root once and $m_\alpha\ge1$. The induction is finite because each division by $x-\alpha$ lowers degree by one by [F6]. [given, F4, F5, F6, F7, induction]
+ 
+-2.1 Fix a current polynomial $p$ in the gcd chain and a root $\alpha$ of multiplicity $m>0$, so $p=(x-\alpha)^m u$ with $u(\alpha)\ne0$. The product rule [F3] gives $p'=(x-\alpha)^{m-1}\bigl(mu+(x-\alpha)u'\bigr)$, whose parenthesized factor is nonzero at $\alpha$ because the field has characteristic zero. Hence the gcd of $p$ and $p'$ has multiplicity exactly $m-1$ at $\alpha$; a root absent from $p$ is absent from their gcd. The Euclidean divisions over $\mathbb Q$ remain valid over $\mathbb C$, so this root-multiplicity computation applies to each $p_k$. [step 1.1, step 1.2, F1, F2, F3, F7]
++2.1 Fix a current polynomial $p$ in the gcd chain and a root $\alpha$ of multiplicity $m>0$, so $p=(x-\alpha)^m u$ with $u(\alpha)\ne0$. The product rule [F3] gives $p'=(x-\alpha)^{m-1}\bigl(mu+(x-\alpha)u'\bigr)$, whose parenthesized factor is nonzero at $\alpha$ because the field has characteristic zero. Hence the gcd of $p$ and $p'$ has multiplicity exactly $m-1$ at $\alpha$; a root absent from $p$ is absent from their gcd. By [F9] for the field extension $\mathbb Q\subseteq\mathbb C$, the monic gcd computed over $\mathbb Q$ is exactly the monic gcd over $\mathbb C$. Thus this root-multiplicity computation applies to each $p_k$. [step 1.1, step 1.2, F1, F2, F3, F7, F8, F9]
+ 
+ 3.1 Induction on $k$ now shows that the multiplicity of $\alpha$ in $p_k$ is $\max(m_\alpha-k,0)$. Therefore $\alpha$ occurs once in $s_k=p_{k-1}/p_k$ exactly when $k\le m_\alpha$, and it occurs in $s_k/s_{k+1}$ exactly when $k=m_\alpha$. This root factorization proves $s_{k+1}$ divides $s_k$ over $\mathbb C[x]$; division over $\mathbb Q[x]$ has the same zero remainder, so $q_k=s_k/s_{k+1}$ lies in $\mathbb Q[x]$. [step 2.1, F2, F7, algebra, induction]
+ 
+-4.1 Each complex root of $f$ occurs in exactly one $q_k$, with exponent one there and exponent $k$ in $q_k^k$. The factorization in [F1] therefore gives $f=\prod_{k=1}^d q_k^k$; it also proves that each $q_k$ is squarefree and that distinct $q_k$ have no common root, hence are pairwise coprime. The degree-zero case has $f=1$ and an empty root list. [step 1.2, step 3.1, F1, algebra] ∎
++4.1 Each complex root of $f$ occurs in exactly one $q_k$, with exponent one there and exponent $k$ in $q_k^k$. The factorization in step 1.2 therefore gives $f=\prod_{k=1}^d q_k^k$; it also proves that each $q_k$ is squarefree and that distinct $q_k$ have no common root, hence are pairwise coprime. The degree-zero case has $f=1$ and an empty root list. [step 1.2, step 3.1, F1, algebra] ∎
+--- items/thm-rational-polynomial-root-isolation-is-sound-and-finite.md
++++ items/thm-rational-polynomial-root-isolation-is-sound-and-finite.md
+@@ -49,11 +49,11 @@
+ 
+ 1.1 Clearing denominators and dividing by the nonzero integer content preserves every root and its multiplicity. By [F1], the active squarefree product has exactly the distinct roots of $p$, and its factors assign each such root its unique multiplicity label. [given, F1, F5, algebra]
+ 
+-1.2 The coefficient-height bound in [F3] places every root of the initial squarefree polynomial strictly inside $(-B,B)$ because $B=H+2>H+1$. Thus the initial endpoints are nonroots. Bisection endpoints are midpoints tested exactly: a root midpoint is recorded and removed before its open halves are queued, while a nonroot midpoint leaves both endpoints nonroots for the active product. [F3, F5, algebra]
++1.2 If the initial squarefree polynomial has degree at least two, the coefficient-height bound in [F3] places every root strictly inside $(-B,B)$ because $B=H+2>H+1$. In degree one, write $S(x)=a_1x+a_0$ with nonzero integer $a_1$. Its unique root is $-a_0/a_1$, whose absolute value is at most $|a_0|\le H<B$ since $|a_1|\ge1$. Thus the initial endpoints are nonroots in either case. Bisection endpoints are midpoints tested exactly: a root midpoint is recorded and removed before its open halves are queued, while a nonroot midpoint leaves both endpoints nonroots for the active product. [F3, F5, algebra]
+ 
+-2.1 In each queued interval with nonroot endpoints, [F2] makes the computed variation difference exactly its number of active roots. A zero count safely discards the interval. A count of one gives an isolating interval; the Sturm counts of the pairwise coprime $Q_k$ identify exactly one factor and hence the multiplicity label. If a midpoint is a root, exact division by $x-m$ removes it from that factor and the singleton record carries its multiplicity; otherwise the two open halves partition the parent interval. [step 1.1, step 1.2, F1, F2, F5]
++2.1 In each queued interval with nonroot endpoints, [F2] makes the computed variation difference exactly its number of active roots. A zero count safely discards the interval. A count of one gives an isolating interval; the Sturm counts of the pairwise coprime $Q_k$ identify exactly one factor and hence the multiplicity label. If a midpoint is a root, exact division by $x-m$ removes it from that factor and the singleton record carries its multiplicity; otherwise the two open halves partition the parent interval. If removal leaves a nonzero constant active product, it has no remaining roots; the immediate complete-return branch safely clears the root-free queue without requesting another Sturm sequence. [step 1.1, step 1.2, F1, F2, F5]
+ 
+-2.2 Whenever an interval has at least two distinct active roots, their separation [F3] forces its width to be at least $\sigma$. At bisection depth $n$ the width is $2B(1/2)^n$. Since $(1/2)^n\to0$ by [F4], some finite depth has width below $\sigma/4$; such an interval cannot still contain two roots, so each branch stops with count zero or one. The branching factor is at most two and the depth is bounded, so the entire queue tree is finite. For degree one, the initial Sturm count is already zero or one. [step 1.2, F3, F4, F5, algebra]
++2.2 Whenever an interval has at least two distinct active roots, their separation [F3] forces its width to be at least $\sigma$. At bisection depth $n$ the width is $2B(1/2)^n$. Since $(1/2)^n\to0$ by [F4], some finite depth has width below $\sigma/4$; such an interval cannot still contain two roots, so each branch stops with count zero or one. The branching factor is at most two and the depth is bounded, so the entire queue tree is finite. For degree one, the initial Sturm count is already zero or one. An earlier constant-active-product branch terminates immediately and cannot prolong the queue tree. [step 1.2, F3, F4, F5, algebra]
+ 
+ 3.1 At each split, the roots in the parent are partitioned between the open children and, when the midpoint is a root, its exact singleton; a nonroot midpoint contributes no root. Every discarded interval is root-free, and every one-root interval is emitted once. The finite tree therefore accounts for every real root exactly once with the correct multiplicity. [step 1.1, step 2.1, step 2.2, F1, F5] ∎
+ 
+--- items/thm-sturm-sign-variation-counts-distinct-roots.md
++++ items/thm-sturm-sign-variation-counts-distinct-roots.md
+@@ -12,6 +12,8 @@
+   statement: literature-derived
+   proof: ai-generated
+ deps:
++  - def-monic-greatest-common-divisor-of-polynomials
++  - thm-bezout-identity-for-polynomials
+   - def-polynomial-ring-over-a-commutative-ring
+   - def-formal-derivative-of-a-polynomial
+   - thm-polynomial-division-algorithm-over-a-field
+@@ -59,9 +61,11 @@
+ 
+ [F5] A nonzero polynomial has at most its degree many distinct roots, by the factor theorem and degree additivity ([[cor-factor-theorem-over-a-commutative-ring]], [[thm-polynomial-degree-of-a-product-over-a-domain]]).
+ 
++[F6] For two polynomials over a field that are not both zero, the last nonzero Euclidean remainder is a nonzero scalar multiple of their monic gcd, and the gcd is a polynomial linear combination of the two inputs. [[def-monic-greatest-common-divisor-of-polynomials]], [[thm-bezout-identity-for-polynomials]]
++
+ ## Proof
+ 
+-1.1 The degrees of nonzero Euclidean remainders strictly decrease by [F1], so the sequence terminates. Since the stated gcd is $1$, the last nonzero remainder is a nonzero constant $c$. Backward substitution in the division equations gives $A,B\in\mathbb Q[x]$ with $AP_0+BP_1=c$; dividing by $c$ gives a Bezout identity with right side $1$. [given, F1, F2, algebra, construct]
++1.1 The degrees of nonzero Euclidean remainders strictly decrease by [F1], so the sequence terminates. Changing each Euclidean remainder by a minus sign changes neither common divisors nor termination. Thus [F6] and the stated gcd $1$ make the last nonzero remainder a nonzero constant $c$. Backward substitution in the division equations gives $A,B\in\mathbb Q[x]$ with $AP_0+BP_1=c$; dividing by $c$ gives a Bezout identity with right side $1$. [given, F1, F2, F6, algebra, construct]
+ 
+ 1.2 Between zeros of the sequence, every polynomial keeps its sign: a sign change would give a zero by [F3] and [F4]. Each term has finitely many zeros by [F5], so it suffices to compute how $V$ changes when a real point crosses a zero of one or more sequence terms. [F3, F4, F5]
+ 
+--- library/numerical-linear-algebra-and-approximation/interval-newton-krawczyk-and-polynomial-root-isolation.md
++++ library/numerical-linear-algebra-and-approximation/interval-newton-krawczyk-and-polynomial-root-isolation.md
+@@ -27,5 +27,5 @@
+ 
+ For $C^1$ maps on an open convex domain, the Krawczyk operator combines a point preconditioner, an interval Jacobian, and outward interval operations. Strict inclusion in the box interior proves existence by Brouwer. Uniqueness requires a separately certified contraction bound; strict inclusion alone is not a uniqueness claim. The smooth-function isolator reports certified boxes plus unresolved boxes after finite budgets and makes no all-roots claim unless the unresolved list is empty.
+ 
+-The assigned nonlinear-equation, outward-interval, and verified-linear-systems pages remain the declared pair-level prerequisites. The item proofs use only their explicitly listed interfaces; the local box fixed-point reduction supplies the exact Brouwer form needed here.
++The nonlinear-equation, outward-interval, and verified-linear-systems interfaces are retained. The polynomial proofs also reuse the published fundamental theorem of algebra and exact polynomial gcd results. The local closed-box fixed-point reduction uses the published closed-ball Brouwer theorem; the interval Jacobian, Sturm count, multiplicity and root-separation arguments are proved locally with their explicitly listed prerequisites.
+ 
+--- research/plan-numerical-linear-track.md
++++ research/plan-numerical-linear-track.md
+@@ -2010,10 +2010,10 @@
+ - `VAL-INTERVAL` → `outward-rounded-interval-and-ball-arithmetic` (numerical-analysis; proposed same-frontier supplier, not a current library item).
+ - `VAL-LINEAR` → `verified-linear-systems-and-spectral-enclosures` (numerical-analysis; proposed same-frontier supplier, not a current library item).
+ 
+-No external library page token is recorded in `requires`.
+-
+-Exact item bodies inspected for this pair are listed in `numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md`; those interfaces are not widened by the surrounding page title.
+-No external canonical item is consumed as a proof premise in this pair. The linked repaired contract defines the needed local interfaces and gives their proof design; any same-frontier supplier is listed explicitly above.
++The three same-frontier edges above are retained. The authored proof route also reuses published foundational suppliers at their canonical homes: `analyticity-liouville-and-morera` supplies the complex fundamental theorem of algebra for finite factorization, and `homology-axioms-degree-and-classical-applications` supplies Brouwer for the locally proved closed-box reduction. The FTA page route is already present in the canonical plan specification and current batch inventory; the actual direct algebraic, calculus and topology prerequisites must remain represented by their ordinary page closure.
++
++Exact item bodies inspected for this pair are listed in `numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md`; those interfaces are not widened by the surrounding page title.
++Published canonical algebra and calculus results are reusable proof premises, with their exact types and hypotheses: polynomial division, monic gcd/Bezout and stability of gcd under field extension support the rational squarefree/Sturm route; the complex FTA supports finite factorization; the closed-ball Brouwer theorem supports only the local closed-box fixed-point reduction. Local squarefree multiplicity, Sturm root count, root separation, box reduction, interval Jacobian and finite-budget soundness obligations remain fully proved here. This reconciles the earlier planning inventory wording with the approved canonical-reuse rule and actual authored route; it neither drops a method nor replaces an owned proof by an external citation.
+ 
+ ### Local mathematical prerequisite ownership
+ 

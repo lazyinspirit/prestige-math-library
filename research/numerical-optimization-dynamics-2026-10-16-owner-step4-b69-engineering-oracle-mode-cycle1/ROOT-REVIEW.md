@@ -1,0 +1,5 @@
+Confirmed example oracle-mode defect; frozen Step4 research-only future Step5 proposal.
+
+Read complete before/proposed item and `source.diff`. Feasible design set, objective and four-call zero-gap result are preserved by explicitly representing [0,1] as affine constraints within outer box[-1,2]. The actual spatial procedure then uses its existing constrained-report interface; no generic supplier edit or new item is required. `proposal.json` gives original midpoint trace, corrected exact call trace, supplier/mode analysis and empty logical consumer cone with page dispositions.
+
+`future-metadata-mirrors.json` has4 field suggestions: Verification2.1 exact claims and finite-check explanation, each batch69/merged. All changes remain research only. Before any future authorized native application, require full actual source equality with archived before; root owns hashes. `native-evidence/current-step4-luna-status.json` records current actual verdict presence/absence. No keep is invented and no changed source is judged by an original verdict.

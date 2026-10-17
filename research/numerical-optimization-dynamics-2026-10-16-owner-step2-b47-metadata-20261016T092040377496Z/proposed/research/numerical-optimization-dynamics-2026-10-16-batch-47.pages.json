@@ -1,0 +1,571 @@
+[
+  {
+    "order": 2378,
+    "id": "finite-generator-master-equations-and-uniformization",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Finite generator master equations and uniformization",
+    "companion": "finite-generator-master-equations-and-uniformization-examples",
+    "requires": [
+      "markov-kernels-and-markov-chains",
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "poisson-and-cox-point-process-models",
+      "sparse-matrix-models-and-kernel-costs",
+      "one-step-ode-consistency-and-local-error",
+      "stochastic-reaction-jump-simulation-and-coupling",
+      "global-ode-and-density-error"
+    ],
+    "items": [
+      {
+        "id": "def-xd-finite-column-generator",
+        "kind": "definition",
+        "title": "Finite column generator",
+        "statement": "Define the column convention for a finite generator Q: off-diagonal entries are nonnegative, each column sums to zero, and q_ij is the rate from source j to destination i.",
+        "strategy": "State the finite state set, sign convention, column-sum condition, exit rates, and normalized column probability vectors.",
+        "deps": [
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": [
+          {
+            "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+            "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+            "locator": "§§3.1–3.2, PDF pp. 6–9; transpose the notes' row-vector convention to this page's stated column convention."
+          },
+          {
+            "title": "Brian Munsky and Mustafa Khammash, The Finite State Projection Algorithm for the Solution of the Chemical Master Equation",
+            "url": "https://www.engr.colostate.edu/~munsky/Papers/JChemPhys_124_044104.pdf",
+            "locator": "§II, equations (2.4)–(2.6), printed pp. 044104-2–044104-3; column probability vector and column-sum-zero reaction matrix."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-xd-finite-matrix-exponential-series",
+        "kind": "lemma",
+        "title": "Finite matrix exponential series and its identities",
+        "statement": "For a finite real matrix A, its factorial power series converges locally uniformly, differentiates to A exp(tA), and satisfies exp(A)exp(B)=exp(A+B) when A and B commute.",
+        "strategy": "Use an induced matrix norm to dominate the series and difference quotients, then regroup the absolutely convergent double series by total degree.",
+        "deps": [
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "def-real-exponential-function-and-e",
+          "lem-exponential-series-has-infinite-radius",
+          "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums",
+          "thm-matrix-multiplication-laws",
+          "def-group-power",
+          "thm-induction-principle",
+          "def-factorial-and-falling-factorial"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": [
+          {
+            "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+            "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+            "locator": "§3.2, Theorem 3.2 and its proof, PDF pp. 8–10; finite matrix exponential representation and its ODE."
+          },
+          {
+            "title": "Brian Munsky and Mustafa Khammash, The Finite State Projection Algorithm for the Solution of the Chemical Master Equation",
+            "url": "https://www.engr.colostate.edu/~munsky/Papers/JChemPhys_124_044104.pdf",
+            "locator": "§II, equation (2.6), printed pp. 044104-2–044104-3; finite-dimensional solution by exp(At)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-xd-geometric-poisson-tail-bound",
+        "kind": "lemma",
+        "title": "A geometric upper bound for a Poisson right tail",
+        "statement": "For N distributed as Pois(mu), mu>0, and integer K>=0 with mu<K+2, bound P(N>K) by the first omitted Poisson mass divided by 1-mu/(K+2).",
+        "strategy": "Bound each successive omitted mass by a geometric ratio using the exact Poisson mass recurrence.",
+        "deps": [
+          "def-scalar-poisson-count-law",
+          "lem-poisson-count-law-normalization-and-moments",
+          "def-factorial-and-falling-factorial",
+          "def-real-exponential-function-and-e",
+          "thm-geometric-series"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": [
+          {
+            "title": "Bennett L. Fox and Peter W. Glynn, Computing Poisson Probabilities",
+            "url": "https://web.stanford.edu/~glynn/papers/1988/FG88.pdf",
+            "locator": "§§1–6, printed pp. 440–445; recursive Poisson weights, rigorously bounded truncation tails, and warnings against estimating omitted mass by rounded subtraction."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-xd-countable-nonexplosive-ctmc",
+        "kind": "definition",
+        "title": "Given countable nonexplosive pure-jump chain with finite rates",
+        "statement": "Define the countable-state, time-homogeneous pure-jump Markov chain input, its finite exit rates and transition-rate convention, and state nonexplosion as an explicit hypothesis rather than a conclusion.",
+        "strategy": "Specify the state space, off-diagonal rates, holding and destination laws, Markov property, path convention, and nonexplosion condition.",
+        "deps": [
+          "def-countable",
+          "def-real-exponential-function-and-e",
+          "def-random-element-and-real-random-variable",
+          "def-composition-of-probability-kernels",
+          "lem-kernel-composition-is-well-defined-and-associative"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": [
+          {
+            "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+            "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+            "locator": "§§2–3, printed pp. 2–15; transition kernels, holding times, transition rates, and the finite-state restriction used in the matrix ODE argument."
+          },
+          {
+            "title": "Brian Munsky and Mustafa Khammash, The Finite State Projection Algorithm for the Solution of the Chemical Master Equation",
+            "url": "https://www.engr.colostate.edu/~munsky/Papers/JChemPhys_124_044104.pdf",
+            "locator": "§II, equations (2.3)–(2.5), printed pp. 044104-2–044104-3; countable reaction state space and transition-rate matrix."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-xd-countable-l1-distance",
+        "kind": "definition",
+        "title": "Countable-state l1 distance for mass functions",
+        "statement": "Define the l1 distance between nonnegative summable mass functions on a countable state space as the countable sum of absolute coordinate differences; it is finite for a probability mass and a subprobability mass.",
+        "strategy": "Give the nonnegative-series convention and the finite upper bound by the sum of the two total masses.",
+        "deps": [
+          "def-countable"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": [
+          {
+            "title": "Brian Munsky and Mustafa Khammash, The Finite State Projection Algorithm for the Solution of the Chemical Master Equation",
+            "url": "https://www.engr.colostate.edu/~munsky/Papers/JChemPhys_124_044104.pdf",
+            "locator": "§II, Theorem 2.2 and equation (2.8), printed p. 044104-4; componentwise truncation error and missing-mass certificate."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-xd-uniformized-matrix-is-stochastic",
+        "kind": "lemma",
+        "title": "The finite uniformized matrix is column stochastic",
+        "statement": "If nu>=max_j(-Q_jj)>0 for a finite column generator Q, then P=I+Q/nu has nonnegative entries and every column sums to one; if nu=0, Q=0.",
+        "strategy": "Check off-diagonal, diagonal, and column-sum conditions directly; handle the zero-rate case separately.",
+        "deps": [
+          "def-xd-finite-column-generator"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": [
+          {
+            "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+            "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+            "locator": "§3.4, equations (3.24)–(3.27), PDF pp. 14–15; transpose the row-stochastic matrix to the column convention used here."
+          },
+          {
+            "title": "Bennett L. Fox and Peter W. Glynn, Computing Poisson Probabilities",
+            "url": "https://web.stanford.edu/~glynn/papers/1988/FG88.pdf",
+            "locator": "§1, pp. 440–441; Poisson randomization for uniformizable finite-state Markov chains."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-xd-finite-state-projection-and-cemetery-lift",
+        "kind": "definition",
+        "title": "Killed finite-state projection and cemetery lift",
+        "statement": "For a given countable chain and finite nonempty F, define first-exit killing, the principal killed subgenerator, and the conservative finite generator obtained by appending an absorbing cemetery state.",
+        "strategy": "Define the first exit time, initial mass transfer to the cemetery state, and exact finite rate matrix under the column convention.",
+        "deps": [
+          "def-xd-countable-nonexplosive-ctmc",
+          "def-xd-finite-column-generator",
+          "def-xd-countable-l1-distance"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": [
+          {
+            "title": "Brian Munsky and Mustafa Khammash, The Finite State Projection Algorithm for the Solution of the Chemical Master Equation",
+            "url": "https://www.engr.colostate.edu/~munsky/Papers/JChemPhys_124_044104.pdf",
+            "locator": "§II, Theorems 2.1–2.2, printed pp. 044104-3–044104-4; principal finite submatrices retain lost probability as a certified error."
+          },
+          {
+            "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+            "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+            "locator": "§3.3–3.4, PDF pp. 11–15; holding rates, destination probabilities, and uniformization transitions."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-xd-finite-generator-master-equation-uniformization",
+        "kind": "theorem",
+        "title": "Finite master equation and uniformization formula",
+        "statement": "The unique solution of p'=Qp with probability initial vector p0 is exp(tQ)p0 and, for any admissible nu>0, the Poisson-weighted series of P^k p0; nu=0 gives p0.",
+        "strategy": "Identify the Poisson mixture with the matrix exponential, differentiate the locally convergent series, prove uniqueness by multiplying by exp(-tQ), and handle Q=0.",
+        "deps": [
+          "def-xd-finite-column-generator",
+          "lem-xd-uniformized-matrix-is-stochastic",
+          "lem-xd-finite-matrix-exponential-series",
+          "def-scalar-poisson-count-law",
+          "lem-poisson-count-law-normalization-and-moments",
+          "cor-mean-value-theorem",
+          "thm-algebra-of-derivatives"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": [
+          {
+            "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+            "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+            "locator": "§3.2 Theorems 3.1–3.2 and §3.4 equations (3.28)–(3.30), PDF pp. 7–16; row-vector formulas transposed to the declared column convention."
+          },
+          {
+            "title": "Bennett L. Fox and Peter W. Glynn, Computing Poisson Probabilities",
+            "url": "https://web.stanford.edu/~glynn/papers/1988/FG88.pdf",
+            "locator": "§1, pp. 440–441; finite Poisson-weighted uniformization sums for transient Markov-chain rewards."
+          },
+          {
+            "title": "Brian Munsky and Mustafa Khammash, The Finite State Projection Algorithm for the Solution of the Chemical Master Equation",
+            "url": "https://www.engr.colostate.edu/~munsky/Papers/JChemPhys_124_044104.pdf",
+            "locator": "§II, equation (2.6), printed pp. 044104-2–044104-3; finite chemical master equation solved by exp(At)."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-xd-budgeted-uniformization-accumulation",
+        "kind": "algorithm",
+        "title": "Budgeted uniformization accumulation with time splitting",
+        "statement": "Return a nonnegative finite Poisson-series approximation or an explicit budget/certificate-unavailable status, using substeps with Poisson parameter at most one and a certified geometric right-tail bound. Split nu*t into finitely many means at most one, choose a finite-budget truncation, and return an outward-certified Poisson-tail bound plus a separately certified l1 vector-arithmetic error. Rounded executions must certify scalar control/tail decisions as well as vector error; uncertain decisions return certificate-unavailable.",
+        "strategy": "Split nu*t into finitely many means at most one, choose the least tail-certified truncation within the total term budget, and apply matrix-free P actions and Poisson recurrences.",
+        "deps": [
+          "def-xd-finite-column-generator",
+          "lem-xd-uniformized-matrix-is-stochastic",
+          "def-matrix-free-access-model-for-krylov-methods",
+          "def-p-norms-on-rn",
+          "def-induced-matrix-p-norm",
+          "def-scalar-poisson-count-law",
+          "lem-xd-geometric-poisson-tail-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": [
+          {
+            "title": "Bennett L. Fox and Peter W. Glynn, Computing Poisson Probabilities",
+            "url": "https://web.stanford.edu/~glynn/papers/1988/FG88.pdf",
+            "locator": "§§1–3, printed pp. 440–443; stable recursive Poisson weights, finite truncation, and avoidance of rounded complementary-mass subtraction."
+          },
+          {
+            "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+            "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+            "locator": "§3.4, equations (3.27)–(3.28), PDF pp. 14–15; finite-state uniformization representation."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-xd-uniformization-truncation-and-error",
+        "kind": "theorem",
+        "title": "Uniformization truncation, mass loss, and arithmetic-error ledger",
+        "statement": "Exact partial sums are nonnegative and substochastic; their one-series omitted l1 mass equals the Poisson tail, and time-split transient error is bounded by certified Poisson-tail upper bounds plus separately certified arithmetic/algebraic vector error.",
+        "strategy": "Use stochastic column sums to compute exact missing mass, a telescoping difference of stochastic and substochastic operators for time-split truncation, and the triangle inequality for a certified execution error.",
+        "deps": [
+          "def-xd-finite-column-generator",
+          "lem-xd-uniformized-matrix-is-stochastic",
+          "alg-xd-budgeted-uniformization-accumulation",
+          "thm-xd-finite-generator-master-equation-uniformization",
+          "lem-xd-geometric-poisson-tail-bound",
+          "def-scalar-poisson-count-law",
+          "lem-poisson-count-law-normalization-and-moments",
+          "lem-xd-finite-matrix-exponential-series",
+          "def-p-norms-on-rn",
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": [
+          {
+            "title": "Bennett L. Fox and Peter W. Glynn, Computing Poisson Probabilities",
+            "url": "https://web.stanford.edu/~glynn/papers/1988/FG88.pdf",
+            "locator": "Proposition 1 and §§1–3, printed pp. 440–443; truncation-error bounds, recursive weights, and roundoff caveats."
+          },
+          {
+            "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+            "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+            "locator": "§3.4, equation (3.28), PDF pp. 14–15; Poisson mixture for transient probabilities."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-xd-finite-state-projection-loss-and-observable-bound",
+        "kind": "theorem",
+        "title": "Finite-state killed projection has an exact lost-mass certificate",
+        "statement": "For a given nonexplosive countable chain, the cemetery lift records first-exit probability; the killed vector is componentwise below the full marginal, its embedded l1 error equals lost mass, and bounded-observable error is at most half the observable oscillation times lost mass.",
+        "strategy": "Derive the finite cemetery generator from first-jump rates, identify its solution using the finite master equation, then compare pathwise the killed and full distributions.",
+        "deps": [
+          "def-xd-countable-nonexplosive-ctmc",
+          "def-xd-finite-column-generator",
+          "def-xd-finite-state-projection-and-cemetery-lift",
+          "def-xd-countable-l1-distance",
+          "lem-exponential-dominates-one-plus-x",
+          "def-real-exponential-function-and-e",
+          "lem-exponential-series-has-infinite-radius",
+          "thm-xd-finite-generator-master-equation-uniformization"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": [
+          {
+            "title": "Brian Munsky and Mustafa Khammash, The Finite State Projection Algorithm for the Solution of the Chemical Master Equation",
+            "url": "https://www.engr.colostate.edu/~munsky/Papers/JChemPhys_124_044104.pdf",
+            "locator": "§II, Theorems 2.1–2.2 and §III, printed pp. 044104-3–044104-5; monotone finite projection and a finite missing-mass error certificate."
+          },
+          {
+            "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+            "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+            "locator": "§§3.2–3.4, PDF pp. 7–16; finite-state master equations and uniformization."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-xd-finite-budget-adaptive-projection",
+        "kind": "algorithm",
+        "title": "Finite-budget adaptive finite-state projection",
+        "statement": "Try only a supplied finite nested list of finite projections, record a certified lost-mass interval for each completed solve, and return certified or inconclusive without claiming that a sufficient finite projection exists.",
+        "strategy": "For each finite candidate, solve its cemetery lift with the budgeted uniformization routine, form an outward-certified lost-mass interval, and stop at the first upper bound within tolerance or at a finite failure/budget boundary.",
+        "deps": [
+          "def-xd-finite-state-projection-and-cemetery-lift",
+          "thm-xd-finite-state-projection-loss-and-observable-bound",
+          "alg-xd-budgeted-uniformization-accumulation",
+          "thm-xd-uniformization-truncation-and-error"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": [
+          {
+            "title": "Brian Munsky and Mustafa Khammash, The Finite State Projection Algorithm for the Solution of the Chemical Master Equation",
+            "url": "https://www.engr.colostate.edu/~munsky/Papers/JChemPhys_124_044104.pdf",
+            "locator": "§III, finite-state projection algorithm, printed pp. 044104-4–044104-5; each enlargement is checked by its computed mass certificate."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-xd-finite-budget-adaptive-projection-soundness",
+        "kind": "theorem",
+        "title": "Adaptive projection certificates are sound and finite-budgeted",
+        "statement": "The adaptive algorithm terminates after at most its declared number of projections and can return certified only when a validated upper endpoint proves the actual lost mass, hence the l1 and bounded-observable errors, are within tolerance; inconclusive makes no existence claim.",
+        "strategy": "Use the finite loop bound for termination and the projection loss theorem plus interval containment for the certified branch.",
+        "deps": [
+          "alg-xd-finite-budget-adaptive-projection",
+          "thm-xd-finite-state-projection-loss-and-observable-bound",
+          "thm-xd-uniformization-truncation-and-error"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "sources": [
+          {
+            "title": "Brian Munsky and Mustafa Khammash, The Finite State Projection Algorithm for the Solution of the Chemical Master Equation",
+            "url": "https://www.engr.colostate.edu/~munsky/Papers/JChemPhys_124_044104.pdf",
+            "locator": "§III, printed pp. 044104-4–044104-5; the algorithm stops only when the computed finite projection mass passes its declared error criterion."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2379,
+    "id": "finite-generator-master-equations-and-uniformization-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Finite generator master equations and uniformization — Examples",
+    "companion": "finite-generator-master-equations-and-uniformization",
+    "requires": [
+      "finite-generator-master-equations-and-uniformization"
+    ],
+    "items": [
+      {
+        "id": "ex-xd-two-state-gating-uniformization",
+        "kind": "example",
+        "title": "Two-state gating through uniformization",
+        "statement": "For a two-state off/on gate with rates alpha and beta, compute the column generator, uniformization matrix, and transient on probability from the off state.",
+        "strategy": "Solve the scalar master equation and identify its solution with the Poisson mixture from the finite uniformization theorem.",
+        "deps": [
+          "def-xd-finite-column-generator",
+          "thm-xd-finite-generator-master-equation-uniformization",
+          "def-scalar-poisson-count-law",
+          "lem-poisson-count-law-normalization-and-moments"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": [
+          {
+            "title": "Ward Whitt, Continuous-Time Markov Chains, full lecture notes (2006)",
+            "url": "https://www.columbia.edu/~ww2040/4106S11/CTMCchapter121906.pdf",
+            "locator": "§3.2 and §3.4, PDF pp. 7–16; finite generator and uniformization formula."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-xd-birth-death-poisson-tail",
+        "kind": "example",
+        "title": "Three-state birth-death chain with a certified Poisson tail",
+        "statement": "For a specified three-state birth-death generator, compute P^k p0 through k=4 and the exact truncated mass at nu*t=1, then certify the omitted tail with the geometric bound.",
+        "strategy": "Multiply the explicit column-stochastic matrix four times and use exact Poisson weights and the local geometric tail theorem.",
+        "deps": [
+          "def-xd-finite-column-generator",
+          "lem-xd-geometric-poisson-tail-bound",
+          "alg-xd-budgeted-uniformization-accumulation",
+          "thm-xd-finite-generator-master-equation-uniformization",
+          "thm-xd-uniformization-truncation-and-error",
+          "def-scalar-poisson-count-law",
+          "lem-poisson-count-law-normalization-and-moments"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": [
+          {
+            "title": "Bennett L. Fox and Peter W. Glynn, Computing Poisson Probabilities",
+            "url": "https://web.stanford.edu/~glynn/papers/1988/FG88.pdf",
+            "locator": "Proposition 1 and §§1–3, printed pp. 440–443; truncated Poisson-weight calculations and certified omitted mass."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-xd-immigration-death-finite-state-projection",
+        "kind": "example",
+        "title": "Immigration-death chain projected onto two states",
+        "statement": "For unit immigration and linear death rates, verify nonexplosion by the declared Lyapunov supplier and compute the cemetery mass for F={0,1}, noting that the full chain can return to F after first exit.",
+        "strategy": "Check the reaction-network Lyapunov inequality, form the three-state cemetery generator, solve its finite ODE, and identify its cemetery coordinate with first-exit loss.",
+        "deps": [
+          "def-xd-countable-nonexplosive-ctmc",
+          "def-xd-finite-state-projection-and-cemetery-lift",
+          "thm-xd-finite-state-projection-loss-and-observable-bound",
+          "thm-xd-finite-generator-master-equation-uniformization",
+          "def-reaction-network-propensity-system-and-generator",
+          "thm-countable-state-reaction-networks-lyapunov-nonexplosion",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": [
+          {
+            "title": "Brian Munsky and Mustafa Khammash, The Finite State Projection Algorithm for the Solution of the Chemical Master Equation",
+            "url": "https://www.engr.colostate.edu/~munsky/Papers/JChemPhys_124_044104.pdf",
+            "locator": "§II Theorem 2.2 and §III, printed pp. 044104-4–044104-5; finite projection and cemetery/lost-mass certificate."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-xd-equal-mean-distinct-probability-vectors",
+        "kind": "example",
+        "title": "Equal mean trajectories do not determine a master-equation state",
+        "statement": "Two distinct finite generators with the same initial law give the same constant mean trajectory but different full probability vectors.",
+        "strategy": "Solve both finite master equations, compare their first moments, and exhibit a differing coordinate for every positive time.",
+        "deps": [
+          "def-xd-finite-column-generator",
+          "thm-xd-finite-generator-master-equation-uniformization"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": [
+          {
+            "title": "Brian Munsky and Mustafa Khammash, The Finite State Projection Algorithm for the Solution of the Chemical Master Equation",
+            "url": "https://www.engr.colostate.edu/~munsky/Papers/JChemPhys_124_044104.pdf",
+            "locator": "§II, equation (2.4), printed pp. 044104-2–044104-3; the chemical master equation evolves a full probability vector."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1170 @@
+{
+  "version": 1,
+  "scope": [
+    "def-matrix-contractivity-and-logarithmic-norm",
+    "def-absolute-stability-regions-for-one-step-and-multistep-methods",
+    "thm-backward-euler-a-and-l-stability",
+    "thm-trapezoidal-a-stable-not-l-stable",
+    "lem-bdf2-root-locus-location",
+    "thm-explicit-euler-absolute-stability-disk",
+    "thm-bdf2-is-a-stable",
+    "prop-bdf2-roots-vanish-in-stiff-limit",
+    "cex-backward-euler-scalar-stability-not-matrix-contractivity",
+    "ex-forward-euler-frequency-step-restriction",
+    "ex-diagonal-fast-slow-system-restricts-explicit-step",
+    "ex-stiff-decay-mode-damping-comparison"
+  ],
+  "contracts": {
+    "def-matrix-contractivity-and-logarithmic-norm": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition fixes its finite matrix or scalar test domain; no empty family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero parameters and the zero-vector boundary are stated or excluded explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one scalar update or one-dimensional instance is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: poles, singular denominators, and repeated unit roots are specified."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: closed half-plane and unit-circle boundaries are stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition makes no choice from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "Definition-only carrier; checked the inner-product domain and the induced-norm and logarithmic-norm formulas. The nonnormal implication is proved only in the assigned counterexample."
+      }
+    },
+    "def-absolute-stability-regions-for-one-step-and-multistep-methods": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition fixes its finite matrix or scalar test domain; no empty family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero parameters and the zero-vector boundary are stated or excluded explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one scalar update or one-dimensional instance is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: poles, singular denominators, and repeated unit roots are specified."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: closed half-plane and unit-circle boundaries are stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition makes no choice from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "Definition-only carrier; checked the one-step pole condition, closed left-half-plane convention, rational L-limit, and nonvanishing leading coefficient for multistep tests."
+      }
+    },
+    "thm-explicit-euler-absolute-stability-disk": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-absolute-stability-regions-for-one-step-and-multistep-methods",
+          "source_section": "Definition",
+          "quote": "For the scalar test equation $y'=\\lambda y$, a step size $h>0$ gives $z=h\\lambda$. A one-step scalar update has stability function $R$ when one step sends $y_n$ to $y_{n+1}=R(z)y_n$. If $R$ is rational, write it in reduced form; it is defined at $z$ exactly when its denominator is nonzero there. Its absolute-stability region is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-euler-midpoint-rk4-orders-and-stability-functions",
+          "source_section": "Statement",
+          "quote": "For the scalar test equation $y'=\\lambda y$, set $z=h\\lambda$. The corresponding stability functions, defined by $y^+=R(z)y$, are\n$$R_{\\mathrm E}(z)=1+z,\\qquad R_{\\mathrm M}(z)=1+z+\\frac{z^2}{2},\\qquad R_{\\mathrm{RK4}}(z)=1+z+\\frac{z^2}{2}+\\frac{z^3}{6}+\\frac{z^4}{24}.$$\nThe absolute stability region of a listed method is $\\{z\\in\\mathbb C:|R(z)|\\le1\\}$. On the negative real axis, the Euler and midpoint regions are exactly $[-2,0]$. No maximal real interval is asserted here for RK4.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "euler-multiplier-disk",
+          "claim": "Substitution of the supplied Euler multiplier into the absolute-stability definition gives the closed disk.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "euler-real-axis",
+          "claim": "The disk inequality on z=-h*rho is equivalent to 0<h*rho<=2.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a scalar test equation or a finite matrix dimension; no empty input family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the disk center."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the scalar multiplier."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the endpoint multiplier."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the closed interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The disk and both sides of the real-axis restriction are derived by exact modulus algebra; unit-modulus boundary points are included."
+      }
+    },
+    "thm-backward-euler-a-and-l-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-absolute-stability-regions-for-one-step-and-multistep-methods",
+          "source_section": "Definition",
+          "quote": "The update is A-stable when the closed left half-plane $\\{z:\\operatorname{Re}z\\le0\\}$ is contained in $\\mathcal S_R$. A rational one-step update is L-stable when it is A-stable and",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "backward-euler-multiplier",
+          "claim": "Solving the scalar implicit update yields R_BE(z)=1/(1-z).",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "backward-euler-half-plane",
+          "claim": "The squared denominator modulus is at least one on the closed left half-plane.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "backward-euler-limit",
+          "claim": "The reverse triangle inequality proves the L-stability limit along every sequence in the closed half-plane.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a scalar test equation or a finite matrix dimension; no empty input family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the scalar multiplier."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the denominator pole exclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the limit at infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The pole is outside the closed left half-plane; the L-limit is uniform along all sequences in that half-plane."
+      }
+    },
+    "thm-trapezoidal-a-stable-not-l-stable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-absolute-stability-regions-for-one-step-and-multistep-methods",
+          "source_section": "Definition",
+          "quote": "The update is A-stable when the closed left half-plane $\\{z:\\operatorname{Re}z\\le0\\}$ is contained in $\\mathcal S_R$. A rational one-step update is L-stable when it is A-stable and",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "trapezoid-multiplier",
+          "claim": "Solving the trapezoidal scalar update gives the stated rational stability function.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "trapezoid-half-plane",
+          "claim": "The denominator modulus dominates the numerator modulus on the closed left half-plane.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "trapezoid-limit-failure",
+          "claim": "The negative-real limit is -1, so the required L-stability limit is not zero.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a scalar test equation or a finite matrix dimension; no empty input family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the scalar multiplier."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the denominator pole exclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the negative-real limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The denominator has no zero in the closed left half-plane; the negative-real sequence is a decisive boundary-to-infinity test for L-stability."
+      }
+    },
+    "lem-bdf2-root-locus-location": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-variable-step-bdf2-with-selected-implicit-branch",
+          "source_section": "Definition",
+          "quote": "Input a vector field $f(t,y)$, a finite grid $t_0,\\ldots,t_N$, starting states $Y_0,Y_1\\in\\mathbb R^d$ (so $N\\ge1$), and for each later step a prescribed closed ball $B_{n+1}\\subset\\mathbb R^d$ that specifies the admissible implicit branch. Before any evaluation, if either starting state has dimension different from $d$, return `invalid-input`; otherwise, if any time increment is nonpositive, return `invalid-grid`. Set $h_n=t_{n+1}-t_n$ and $r_n=h_n/h_{n-1}$ for $1\\le n<N$.\n\nFor $n=1,\\ldots,N-1$, form the equation\n\n$$\\frac{(1+2r_n)Z-(1+r_n)^2Y_n+r_n^2Y_{n-1}}{h_n(1+r_n)}=f(t_{n+1},Z).$$\n\nIf this equation has exactly one root $Z$ in $B_{n+1}$, set $Y_{n+1}=Z$ and continue. If it has no root there, return `no-root` with the computed prefix; if it has more than one root there, return `ambiguous-branch` with the computed prefix. If an evaluation of $f$ is undefined, return `evaluation-failure` with the prefix. On reaching $N$, return `completed` and $(Y_0,\\ldots,Y_N)$. The procedure is defined for arbitrary positive adjacent step ratios; no convergence or accuracy property is part of this algorithm.\n\nThe coefficients are those obtained from the quadratic interpolation derivative in [[lem-variable-step-bdf2-interpolation-and-local-defect]]. A separate theorem gives the uniform ratio hypotheses needed for second-order convergence; they are not part of this algorithm.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-multistep-method-consistency-order-and-root-condition",
+          "source_section": "Definition",
+          "quote": "Let $k\\ge1$, $d\\ge1$, and let $f:U\\to\\mathbb R^d$ be the right-hand side of a first-order initial-value problem on an open set $U\\subseteq\\mathbb R\\times\\mathbb R^d$, using the convention of [[def-first-order-ode-initial-value-problem-and-solution]]. A **constant-step $k$-step linear multistep method** has real coefficients $\\alpha_0,\\ldots,\\alpha_k,\\beta_0,\\ldots,\\beta_k$ with $\\alpha_k\\ne0$ and advances values by\n\n$$\\sum_{j=0}^k\\alpha_jY_{n+j}=h\\sum_{j=0}^k\\beta_j f(t_{n+j},Y_{n+j}),\\qquad t_{n+j}=t_n+jh,\\quad h>0.$$\n\nMultiplying all coefficients by the same nonzero scalar leaves the method unchanged; one may normalize $\\alpha_k=1$. Its **characteristic polynomials** are\n\n$$\\rho(\\zeta)=\\sum_{j=0}^k\\alpha_j\\zeta^j,\\qquad \\sigma(\\zeta)=\\sum_{j=0}^k\\beta_j\\zeta^j.$$\n\nFor an exact solution $y$ with $p+1$ continuous derivatives, the **unscaled local residual** at $t_n$ is\n\n$$\\tau_n(h;y)=\\sum_{j=0}^k\\alpha_jy(t_n+jh)-h\\sum_{j=0}^k\\beta_jy'(t_n+jh).$$\n\nThe method has **order at least $p$**, where $p\\ge1$ is an integer, if this residual is $O(h^{p+1})$ uniformly for admitted starting times in every fixed compact interval on which the indicated derivatives are bounded. It is **consistent** if it has order at least one. Equivalently, with the above coefficient convention, consistency is $\\rho(1)=0$ and $\\rho'(1)=\\sigma(1)$.\n\nThe **root condition** is that every complex root of $\\rho$ has modulus at most one and every root of modulus one has algebraic multiplicity one. The method is **zero-stable** if for each $T>0$ there is a constant $M_T$ independent of $N$ such that every solution of the homogeneous recurrence $\\sum_j\\alpha_jY_{n+j}=0$ on the uniform grid $h=T/N$ satisfies\n\n$$\\max_{0\\le n\\le N}\\|Y_n\\|_\\infty\\le M_T\\max_{0\\le j<k}\\|Y_j\\|_\\infty.$$\n\nHere $\\|x\\|_\\infty=\\max_{1\\le i\\le d}|x_i|$ for $x\\in\\mathbb R^d$. The root-condition equivalence for zero-stability is established separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-absolute-stability-regions-for-one-step-and-multistep-methods",
+          "source_section": "Definition",
+          "quote": "For a linear multistep method with the coefficient and polynomial convention of [[def-linear-multistep-method-consistency-order-and-root-condition]], substitution of the scalar test equation gives the characteristic polynomial",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "uniform-bdf2-polynomial",
+          "claim": "The ratio-one procedure and scalar test equation give the displayed quadratic characteristic polynomial.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "root-locus-identity",
+          "claim": "Solving for z and writing w=1/zeta gives the real-part identity.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "root-locus-half-plane",
+          "claim": "The modulus cases distinguish roots outside the unit disk from the sole possible unit-circle equality.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a scalar test equation or a finite matrix dimension; no empty input family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the sole unit-root equality case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the first root mode."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the excluded zero root."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the unit-circle boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The root zeta=0 is excluded by the polynomial's constant term; the unit-circle equality case is explicitly retained at z=0, zeta=1."
+      }
+    },
+    "thm-bdf2-is-a-stable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-absolute-stability-regions-for-one-step-and-multistep-methods",
+          "source_section": "Definition",
+          "quote": "The multistep absolute-stability region consists of those $z$ for which the leading coefficient $\\alpha_k-z\\beta_k$ is nonzero and every root of $\\pi_z$ satisfies the root condition: all roots have modulus at most one, and every root of modulus one is simple. This criterion concerns constant-step scalar test recurrences.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bdf2-root-locus-location",
+          "source_section": "Statement",
+          "quote": "On a uniform grid, the variable-step BDF2 algorithm of [[alg-variable-step-bdf2-with-selected-implicit-branch]] has the scalar test-equation polynomial",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "bdf2-degree",
+          "claim": "The leading coefficient cannot vanish in the closed left half-plane.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bdf2-root-condition",
+          "claim": "The root-locus lemma excludes exterior roots and identifies the only possible unit root; factoring at zero proves simplicity.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bdf2-a-stability",
+          "claim": "The degree and root condition meet the exact multistep criterion throughout the closed half-plane.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a scalar test equation or a finite matrix dimension; no empty input family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 checks the z=0 factorization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 checks the unit root."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the leading coefficient."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the unit-circle root."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The z=0 root is simple and its companion root is 1/3; no assumption about nonlinear convergence or higher BDF order is used."
+      }
+    },
+    "prop-bdf2-roots-vanish-in-stiff-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-bdf2-root-locus-location",
+          "source_section": "Statement",
+          "quote": "On a uniform grid, the variable-step BDF2 algorithm of [[alg-variable-step-bdf2-with-selected-implicit-branch]] has the scalar test-equation polynomial",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "bdf2-root-modulus-bound",
+          "claim": "The polynomial equation gives C*r^2<=4r+1 and C grows without bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bdf2-root-limit",
+          "claim": "For C>5, the root must have r<1 and then r<sqrt(5/C), which tends to zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a scalar test equation or a finite matrix dimension; no empty input family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the zero-root boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks all root moduli."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the C>5 branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the stiff limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The bound applies to each root without choosing a square-root branch; no multistep L-stability label is introduced."
+      }
+    },
+    "ex-forward-euler-frequency-step-restriction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-explicit-euler-absolute-stability-disk",
+          "source_section": "Statement",
+          "quote": "For forward Euler applied to $y'=\\lambda y$, let $z=h\\lambda$. Its stability function is $R_{\\mathrm E}(z)=1+z$, and its absolute-stability region is exactly the closed disk",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "euler-frequency-modulus",
+          "claim": "The real and imaginary parts give the exact squared multiplier modulus.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "euler-frequency-step-bound",
+          "claim": "The unit-disk inequality rearranges to the stated frequency-dependent step bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a scalar test equation or a finite matrix dimension; no empty input family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the zero-frequency case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the scalar multiplier."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the zero-step limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the equality step bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The case omega=0 reduces to the real-axis restriction; no frequency-independent step bound is claimed."
+      }
+    },
+    "ex-diagonal-fast-slow-system-restricts-explicit-step": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-explicit-euler-absolute-stability-disk",
+          "source_section": "Statement",
+          "quote": "On the negative real axis, for $y'=-\\rho y$ with $\\rho>0$, the method is absolutely stable exactly when $0<h\\rho\\le2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "diagonal-euler-multipliers",
+          "claim": "Forward Euler acts componentwise with the two displayed multipliers.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fast-component-intersection",
+          "claim": "Applying the scalar bound to each component gives the common step interval.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a scalar test equation or a finite matrix dimension; no empty input family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the componentwise zero state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks both scalar multipliers."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the diagonal component cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the fast-mode equality step."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "Both components are included; equality at h=1/500 gives a unit-modulus fast multiplier and is bounded, not decaying."
+      }
+    },
+    "ex-stiff-decay-mode-damping-comparison": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-limits-and-range",
+          "source_section": "Statement",
+          "quote": "$$\\exp(x)\\to+\\infty\\quad(x\\to+\\infty),\\qquad \\exp(x)\\to0\\quad(x\\to-\\infty),$$\nand the range of $\\exp$ is contained in $(0,\\infty)$ and is unbounded above with infimum $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-backward-euler-a-and-l-stability",
+          "source_section": "Statement",
+          "quote": "Backward Euler on $y'=\\lambda y$ is the scalar update $y_{n+1}=y_n+z y_{n+1}$, where $z=h\\lambda$. Its stability function is",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-trapezoidal-a-stable-not-l-stable",
+          "source_section": "Statement",
+          "quote": "Its stability function is $R_{\\mathrm T}(z)=(1+z/2)/(1-z/2)$. It is A-stable but not L-stable.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-bdf2-roots-vanish-in-stiff-limit",
+          "source_section": "Statement",
+          "quote": "For $\\operatorname{Re}z\\le0$, let $\\zeta$ be any root of the constant-step BDF2 test polynomial $P_z(\\zeta)=(3-2z)\\zeta^2-4\\zeta+1$. As $|z|\\to\\infty$ within the closed left half-plane, every such root satisfies $\\zeta\\to0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Then $f$ is constant on $I$: there is a real $k$ with $f(x) = k$ for every $x \\in I$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-fast-decay-trajectory",
+          "claim": "The candidate exponential function satisfies the scalar initial-value problem.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unique-exact-fast-decay-factor",
+          "claim": "An integrating factor and the zero-derivative theorem show every classical solution has one-step factor exp(-x).",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "one-step-damping-factors",
+          "claim": "The supplied backward-Euler and trapezoidal formulas have the stated stiff limits.",
+          "step": "1.3",
+          "inputs": [
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fast-mode-damping-contrast",
+          "claim": "BDF2 roots and the exact flow tend to zero, while the trapezoidal factor tends to -1 and its one-step error tends to one.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a scalar test equation or a finite matrix dimension; no empty input family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the initial value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 checks the method multipliers."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 checks the negative-real stiff step."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the limit at infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The example compares one scalar fast mode only; it makes no general nonlinear, global-error, or unconditional stiffness classification."
+      }
+    },
+    "cex-backward-euler-scalar-stability-not-matrix-contractivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matrix-contractivity-and-logarithmic-norm",
+          "source_section": "Definition",
+          "quote": "For a real matrix $M$, its induced operator norm is $\\|M\\|_G=\\sup_{x\\ne0}\\|Mx\\|_G/\\|x\\|_G$. A matrix step $M$ is contractive in this specified inner product when $\\|M\\|_G\\le1$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-backward-euler-a-and-l-stability",
+          "source_section": "Statement",
+          "quote": "It is A-stable and L-stable.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nonnormal-scalar-spectrum",
+          "claim": "The matrix characteristic polynomial has only the root -1, which is scalar-stable for backward Euler.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "matrix-step-expansion",
+          "claim": "The exact inverse matrix sends a unit vector to a vector of norm greater than one.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "logarithmic-norm-value",
+          "claim": "A completed-square bound gives the exact positive Euclidean logarithmic norm.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a scalar test equation or a finite matrix dimension; no empty input family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a fixed nonzero witness vector; the zero vector cannot witness failure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 checks the nonzero witness vector."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the repeated characteristic root."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample has no stability-parameter endpoint; its fixed matrix is a strict counterexample."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The nonzero vector e2 witnesses failure of contractivity; the zero vector is not used in the induced-norm supremum."
+      }
+    }
+  }
+}

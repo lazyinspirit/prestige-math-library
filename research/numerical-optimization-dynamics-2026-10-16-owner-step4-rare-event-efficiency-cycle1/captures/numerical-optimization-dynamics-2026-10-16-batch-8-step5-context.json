@@ -1,0 +1,299 @@
+{
+  "group": "v",
+  "batches": [
+    "8"
+  ],
+  "pages_read": [
+    "rare-event-importance-sampling-and-multilevel-splitting",
+    "rare-event-importance-sampling-and-multilevel-splitting-examples"
+  ],
+  "items_read": [
+    "def-rare-event-efficiency-criteria",
+    "lem-standard-normal-mills-ratio",
+    "alg-cross-entropy-pilot-production",
+    "def-nested-rare-event-levels",
+    "def-finite-budget-stopped-event-kernel",
+    "lem-sir-bounded-potential-unnormalized-update-variance",
+    "thm-zero-variance-importance-sampling-proposal",
+    "thm-gaussian-tail-exponential-tilting",
+    "thm-cross-entropy-production-unbiased-given-pilot",
+    "lem-nested-level-probability-factorization",
+    "alg-independent-fixed-level-splitting",
+    "alg-fixed-level-sir-splitting",
+    "lem-finite-budget-stopped-normalizer",
+    "lem-stopped-kernel-discretization-bias",
+    "thm-independent-splitting-product-moments-and-work",
+    "thm-fixed-level-sir-estimator-unbiased",
+    "thm-fixed-level-sir-absolute-mse-bound",
+    "cex-sir-l2-bound-from-conditional-means-is-false",
+    "rem-sir-finite-particle-error-bound-scope",
+    "thm-fixed-level-sir-relative-mse-under-conditional-event-second-moment-bounds",
+    "ex-gaussian-barrier-exponential-tilting",
+    "ex-queue-overflow-and-redundant-splitting-work",
+    "ex-cross-entropy-pilot-misses-event-support",
+    "cex-dependent-level-samples-bias-product-estimator",
+    "ex-sir-zero-particle-prefix-positive-event",
+    "ex-finite-budget-crossing-misses-between-grid-times",
+    "ex-importance-sampling-finite-mean-infinite-second-moment"
+  ],
+  "conventions": [
+    {
+      "convention": "Rare-event probabilities are positive and tend to zero. Relative error is standard deviation divided by the target probability; logarithmic efficiency additionally requires a nonnegative estimator and a positive finite second moment.",
+      "fixed_by": "def-rare-event-efficiency-criteria",
+      "matters_for": [
+        "thm-gaussian-tail-exponential-tilting",
+        "ex-importance-sampling-finite-mean-infinite-second-moment"
+      ]
+    },
+    {
+      "convention": "Nested levels have L ≥ 1, A₀ = Ω, and strictly positive prefix probabilities. Independence across levels means mutual independence of the complete sample arrays.",
+      "fixed_by": "def-nested-rare-event-levels",
+      "matters_for": [
+        "lem-nested-level-probability-factorization",
+        "alg-independent-fixed-level-splitting",
+        "thm-independent-splitting-product-moments-and-work",
+        "cex-dependent-level-samples-bias-product-estimator"
+      ]
+    },
+    {
+      "convention": "Independent splitting uses exact conditional draws, N draws per level, and declared work W = N Σ cℓ; unavailable conditional samplers produce a failure status.",
+      "fixed_by": "alg-independent-fixed-level-splitting",
+      "matters_for": [
+        "thm-independent-splitting-product-moments-and-work",
+        "ex-queue-overflow-and-redundant-splitting-work"
+      ]
+    },
+    {
+      "convention": "SIR splitting invokes canonical multinomial full resampling at every selection, including before the identity transition M₁. G₀ = 1; subsequent potentials are event indicators. Mutations preserve the corresponding conditional laws and remain inside their levels.",
+      "fixed_by": "alg-fixed-level-sir-splitting",
+      "matters_for": [
+        "thm-fixed-level-sir-estimator-unbiased",
+        "thm-fixed-level-sir-absolute-mse-bound",
+        "thm-fixed-level-sir-relative-mse-under-conditional-event-second-moment-bounds",
+        "ex-sir-zero-particle-prefix-positive-event"
+      ]
+    },
+    {
+      "convention": "The cross-entropy candidate set is finite and ordered lexicographically. Production follows an exact support/integrability checker and is independent of the pilot conditional on the selected parameter; failed branches return no production estimate.",
+      "fixed_by": "alg-cross-entropy-pilot-production",
+      "matters_for": [
+        "thm-cross-entropy-production-unbiased-given-pilot",
+        "ex-cross-entropy-pilot-misses-event-support"
+      ]
+    },
+    {
+      "convention": "A target hit at the initial state counts at budget zero. Each additional budget unit permits one transition; cemetery means neither target nor return was reached within the budget.",
+      "fixed_by": "def-finite-budget-stopped-event-kernel",
+      "matters_for": [
+        "lem-finite-budget-stopped-normalizer",
+        "lem-stopped-kernel-discretization-bias",
+        "ex-finite-budget-crossing-misses-between-grid-times"
+      ]
+    },
+    {
+      "convention": "Total variation is sup over measurable sets of the absolute difference of probability masses. The perturbation bound uses identical initial laws and potentials valued in [0,1].",
+      "fixed_by": "lem-stopped-kernel-discretization-bias",
+      "matters_for": [
+        "lem-stopped-kernel-discretization-bias",
+        "ex-finite-budget-crossing-misses-between-grid-times"
+      ]
+    },
+    {
+      "convention": "The relative SIR bound assumes actual conditional event-weight second moments under random empirical predictive laws, only on positive-normalizer branches, and includes an initial sampling factor B₀.",
+      "fixed_by": "thm-fixed-level-sir-relative-mse-under-conditional-event-second-moment-bounds",
+      "matters_for": [
+        "thm-fixed-level-sir-relative-mse-under-conditional-event-second-moment-bounds",
+        "rare-event-importance-sampling-and-multilevel-splitting"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-fixed-level-sir-splitting",
+      "statement": "Apply canonical full-resampling SIR with initial law P, G₀ ≡ 1, identity M₁, G₁ = 1_A₁, and Mℓ = Kℓ₋₁, Gℓ = 1_Aℓ for 2 ≤ ℓ ≤ L. Use multinomial full resampling and proposals equal to target transitions; required mutations preserve πℓ and stay in Aℓ.",
+      "used_by": [
+        "thm-fixed-level-sir-estimator-unbiased",
+        "thm-fixed-level-sir-absolute-mse-bound",
+        "cex-sir-l2-bound-from-conditional-means-is-false",
+        "thm-fixed-level-sir-relative-mse-under-conditional-event-second-moment-bounds",
+        "ex-sir-zero-particle-prefix-positive-event"
+      ]
+    },
+    {
+      "id": "lem-sir-bounded-potential-unnormalized-update-variance",
+      "statement": "For a probability ν, probability kernel M, measurable G,f valued in [0,1], z ∈ [0,1], and N ≥ 1 IID proposals from νM, the weighted unnormalized update Γᴺ(f) has mean z νM(Gf) and variance at most z²/(4N), including the zero-weight branch.",
+      "used_by": [
+        "thm-fixed-level-sir-absolute-mse-bound",
+        "thm-fixed-level-sir-relative-mse-under-conditional-event-second-moment-bounds"
+      ]
+    },
+    {
+      "id": "thm-fixed-level-sir-estimator-unbiased",
+      "statement": "Assume AC. Under the full-resampling SIR model, positive level probabilities, and mutations supported on Aℓ and invariant for πℓ, every prefix normalizer is Zℓ = P(Aℓ), and E[p̂] = P(A_L).",
+      "used_by": [
+        "thm-fixed-level-sir-absolute-mse-bound",
+        "thm-fixed-level-sir-relative-mse-under-conditional-event-second-moment-bounds",
+        "rem-sir-finite-particle-error-bound-scope",
+        "ex-sir-zero-particle-prefix-positive-event"
+      ]
+    },
+    {
+      "id": "thm-independent-splitting-product-moments-and-work",
+      "statement": "For independent fixed-level splitting with N ≥ 1 draws per level, E[p̂] = p, Var(p̂)/p² = ∏ℓ(1 + (1−pℓ)/(Npℓ)) − 1, W = N Σℓ cℓ, and Var(p̂) ≤ (1 + 1/(4N))^L − 1.",
+      "used_by": [
+        "ex-queue-overflow-and-redundant-splitting-work",
+        "cex-dependent-level-samples-bias-product-estimator"
+      ]
+    },
+    {
+      "id": "lem-standard-normal-mills-ratio",
+      "statement": "For x > 0, x φ(x)/(x²+1) ≤ Φ̄(x) ≤ φ(x)/x. Consequently Φ̄(x) ∼ φ(x)/x and log Φ̄(x) ∼ −x²/2 as x → ∞.",
+      "used_by": [
+        "thm-gaussian-tail-exponential-tilting"
+      ]
+    },
+    {
+      "id": "thm-gaussian-tail-exponential-tilting",
+      "statement": "Assume AC. For a > 0, P = N(0,1), A_a = [a,∞), and Q_a = N(a,1), the event contribution satisfies E[Z_a] = Φ̄(a) and E[Z_a²] = exp(a²) Φ̄(2a). Its IID average is logarithmically efficient, while the one-sample relative error is asymptotic to (π/2)^(1/4) √a.",
+      "used_by": [
+        "ex-gaussian-barrier-exponential-tilting"
+      ]
+    },
+    {
+      "id": "lem-finite-budget-stopped-normalizer",
+      "statement": "Assume AC. Each κ_m is a measurable probability kernel, p_m = Pμ(τ_T < τ_R, τ_T ≤ m) is the one-step stopped-status Feynman–Kac normalizer, and p_m increases to Pμ(τ_T < τ_R).",
+      "used_by": [
+        "lem-stopped-kernel-discretization-bias",
+        "ex-finite-budget-crossing-misses-between-grid-times"
+      ]
+    },
+    {
+      "id": "thm-cross-entropy-production-unbiased-given-pilot",
+      "statement": "With H the successful, admissible pilot event and p̃_CE equal to the production estimate on H and zero otherwise, E[p̃_CE | G] = 1_H P(A) almost surely.",
+      "used_by": [
+        "ex-cross-entropy-pilot-misses-event-support"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "alg-importance-sampling",
+      "used_for": "Piecewise measurable importance contributions, support requirements, integrability, and IID production averaging.",
+      "opened": true
+    },
+    {
+      "id": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+      "used_for": "Weighted second moments and the finite-sample importance-sampling variance formula; no CLT is needed by the owned calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Normal density and translated normal proposal conventions, including inherited AC.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited choice assumptions in normal-law, Feynman–Kac, SIR, and conditional-variance suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "IID means mutual independence and a common law.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Probability normalization, nested conditional laws, and event calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-borel-space",
+      "used_for": "State-space assumptions for stopped kernels and the canonical SIR model.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability-kernel rows and measurable evaluations.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Finite path spaces and measurable coordinate projections.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurability of stopped-status recursion and backward kernel integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Variance and centered-square identities in particle and independent-sampling bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-iid-monte-carlo-mean-moments",
+      "used_for": "IID sample-mean expectations and variance divided by sample size.",
+      "opened": true
+    },
+    {
+      "id": "thm-ordinary-importance-sampling-is-unbiased",
+      "used_for": "Gaussian tilting, conditional production unbiasedness, and the infinite-second-moment example.",
+      "opened": true
+    },
+    {
+      "id": "def-feynman-kac-path-targets-and-normalizers",
+      "used_for": "Ordered path integrals, bounded potentials, and the event normalizer representation.",
+      "opened": true
+    },
+    {
+      "id": "alg-sequential-importance-resampling",
+      "used_for": "Resampling-propagation order, weighted empirical measures, product normalizers, and zero-weight fallback.",
+      "opened": true
+    },
+    {
+      "id": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+      "used_for": "Joint path laws with the prescribed iterated probability kernels.",
+      "opened": true
+    },
+    {
+      "id": "def-iid-monte-carlo-estimators",
+      "used_for": "Sample-mean notation in the independent splitting moment calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-sequential-particle-estimator-is-unbiased",
+      "used_for": "Normalizer unbiasedness after checking finite positive prefixes and canonical SIR hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "lem-feynman-kac-path-measures-satisfy-forward-recursion",
+      "used_for": "Identification of successive event normalizers and conditional state laws.",
+      "opened": true
+    },
+    {
+      "id": "cor-conditional-variance-decomposition",
+      "used_for": "Variance accumulation and conditional second-moment recursion in the finite-particle bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-smc-time-uniform-variance-bound-under-uniform-incremental-weights",
+      "used_for": "Checking the remark's distinction between fixed-horizon CLT variance bounds and finite-particle error bounds.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-rare-event-efficiency-criteria",
+      "concern": "The Definition says, “Logarithmic efficiency is a weaker asymptotic property than bounded relative error,” but its bounded-relative-error definition permits signed unbiased estimators, whereas logarithmic efficiency explicitly requires nonnegativity. For pλ → 0, let R take ±1 with equal probability and set p̂λ = pλ(1 + 2R). Then E[p̂λ] = pλ and RE(p̂λ) = 2, so bounded relative error holds, but p̂λ is negative with probability 1/2 and therefore fails the stated logarithmic-efficiency definition. The comparison needs a nonnegativity qualification.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "ex-sir-zero-particle-prefix-positive-event",
+      "concern": "The Example calls the failure event “the all-zero initial potential branch.” In alg-fixed-level-sir-splitting the initial potential is G₀ ≡ 1, so that branch cannot occur. The verification instead correctly uses the event that both initial particles lie outside A₁, which forces zero event weights after the intervening resampling. The wording should distinguish initial sampling from the first event potential.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": []
+}

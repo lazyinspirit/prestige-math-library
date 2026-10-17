@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "26",
+  "round": 0,
+  "reviewed_items": [
+    "def-revised-simplex-standard-form-linear-program",
+    "def-revised-simplex-basis-dictionary",
+    "alg-revised-simplex-residual-audit",
+    "lem-revised-simplex-basic-feasible-extreme-point-equivalence",
+    "thm-revised-simplex-primal-pivot-objective-ray-optimality",
+    "alg-revised-primal-simplex-bland-rule",
+    "alg-revised-dual-simplex-with-finite-budget",
+    "prop-revised-simplex-sparse-pricing-operation-count",
+    "thm-revised-simplex-primal-dual-residual-gap",
+    "thm-revised-simplex-bland-rule-finite-termination",
+    "thm-revised-dual-simplex-invariant-and-farkas",
+    "alg-revised-simplex-phase-one",
+    "thm-revised-simplex-phase-one-extraction-and-farkas",
+    "alg-revised-simplex-qr-basis-recompute-and-audit",
+    "thm-revised-simplex-qr-basis-residual-status-sound",
+    "ex-revised-simplex-unbounded-ray",
+    "ex-revised-simplex-ill-conditioned-basis-residual",
+    "ex-revised-simplex-primal-dual-trace",
+    "ex-revised-simplex-degenerate-cycle-prevented-by-bland",
+    "ex-revised-simplex-phase-one-infeasible"
+  ],
+  "reviewed_pages": [
+    "revised-simplex-linear-programming-and-certificates",
+    "revised-simplex-linear-programming-and-certificates-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch, approved OPT13 design, and actual supplier proofs were reviewed. The mathematical claims and examples are sound; the QR basis algorithm needs a more precise operational and transition-input contract before acceptance.",
+  "findings": [
+    {
+      "id": "alg-revised-simplex-qr-basis-recompute-and-audit:transition-input",
+      "type": "prerequisite",
+      "reason": "Step 5 admits transitions from the exact OPT13 methods, but does not define a checkable transition-record format or admission predicate. If it invokes the primal or dual drivers, add alg-revised-primal-simplex-bland-rule and alg-revised-dual-simplex-with-finite-budget to deps; otherwise specify already-verified transition records and how unestablished records are rejected."
+    },
+    {
+      "id": "alg-revised-simplex-qr-basis-recompute-and-audit:qr-instructions",
+      "type": "local",
+      "reason": "Step 2 calls for canonical successive Householder calls without specifying the finite QR loop's active columns and trailing blocks or the order for replaying stored reflectors on right-hand sides. State the exact composition and its failure branches so the procedure is operational."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-revised-simplex-qr-basis-residual-status-sound",
+      "decision": "accept",
+      "reason": "Its proof uses the algorithm's residual bounds, attempt cap, audit, and statuses; clarifying the loop and transition inputs preserves these claims."
+    },
+    {
+      "id": "revised-simplex-linear-programming-and-certificates",
+      "decision": "accept",
+      "reason": "Its page summary remains accurate with the QR loop and transition interface made explicit."
+    },
+    {
+      "id": "revised-simplex-linear-programming-and-certificates-examples",
+      "decision": "accept",
+      "reason": "The examples do not use the QR basis service and remain compatible with the A-page prerequisite."
+    }
+  ]
+}

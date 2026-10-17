@@ -1,0 +1,460 @@
+{
+  "group": "m",
+  "batches": ["1"],
+  "pages_read": [
+    "finite-precision-direct-factorizations",
+    "finite-precision-direct-factorizations-examples"
+  ],
+  "items_read": [
+    "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "alg-balanced-pairwise-summation",
+    "alg-two-sum-error-free-transform",
+    "alg-two-product-fma-error-free-transform",
+    "alg-kahan-compensated-summation",
+    "alg-neumaier-compensated-summation",
+    "alg-rounded-cholesky-with-failure-status",
+    "alg-scaled-householder-reflector-formation-and-application",
+    "lem-scaled-real-householder-step-termination-and-status",
+    "alg-bounded-mixed-precision-iterative-refinement",
+    "thm-balanced-pairwise-summation-error-bound",
+    "lem-binary-rounding-grid-and-ordered-two-sum",
+    "thm-two-sum-error-free-transform",
+    "thm-two-product-fma-error-free-transform",
+    "thm-kahan-and-neumaier-finite-error-identities",
+    "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+    "lem-scaled-householder-step-meets-local-backward-error-premise",
+    "thm-mixed-precision-refinement-error-recurrence-and-floor",
+    "thm-scaled-householder-qr-backward-stability",
+    "thm-computed-full-rank-least-squares-backward-stability",
+    "lem-rounded-triangular-substitution-componentwise-backward-error",
+    "lem-rounded-linear-and-normal-residual-certificates",
+    "ex-subnormal-and-overflow-range-failure",
+    "ex-neumaier-recovers-low-order-term-after-cancellation",
+    "ex-rounded-cholesky-two-by-two-residual",
+    "ex-two-sum-recovers-a-rounded-away-low-part",
+    "ex-full-rank-least-squares-normal-equations-versus-qr",
+    "ex-ill-conditioned-design-stability-versus-forward-error"
+  ],
+  "conventions": [
+    {
+      "convention": "Arithmetic uses finite binary formats with precision p≥2 and round-to-nearest, ties-to-even. Every nonzero exact intermediate outside the normal range causes range failure; exact zeros are allowed. This is not a gradual-underflow success model.",
+      "fixed_by": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+      "matters_for": [
+        "thm-two-sum-error-free-transform",
+        "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+        "lem-scaled-householder-step-meets-local-backward-error-premise",
+        "lem-rounded-triangular-substitution-componentwise-backward-error",
+        "lem-rounded-linear-and-normal-residual-certificates",
+        "ex-subnormal-and-overflow-range-failure"
+      ]
+    },
+    {
+      "convention": "Complex multiplication uses four rounded real products followed by a rounded subtraction and addition. Conjugation and sign changes are exact; division by a positive real scalar rounds each component separately.",
+      "fixed_by": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+      "matters_for": [
+        "alg-rounded-cholesky-with-failure-status",
+        "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+        "lem-rounded-linear-and-normal-residual-certificates"
+      ]
+    },
+    {
+      "convention": "Pairwise summation requires n≥1, pads to a power of two with exact zeros, and uses a level-by-level, left-to-right tree. For n=1 it performs no additions.",
+      "fixed_by": "alg-balanced-pairwise-summation",
+      "matters_for": [
+        "thm-balanced-pairwise-summation-error-bound",
+        "ex-subnormal-and-overflow-range-failure"
+      ]
+    },
+    {
+      "convention": "The scaled Householder procedure admits real active columns, although trailing blocks may be complex. Its exact representative is H(v)=I−2vvᵀ/(vᵀv); stored reflector products represent exact orthogonal factors, whereas a rounded explicit dense product has separate arithmetic error. Zero columns return identity records.",
+      "fixed_by": "alg-scaled-householder-reflector-formation-and-application",
+      "matters_for": [
+        "lem-scaled-real-householder-step-termination-and-status",
+        "lem-scaled-householder-step-meets-local-backward-error-premise",
+        "thm-scaled-householder-qr-backward-stability",
+        "thm-computed-full-rank-least-squares-backward-stability"
+      ]
+    },
+    {
+      "convention": "Mixed-precision refinement uses distinct factorization, residual, and solve/update precisions. Certificate checks are exact real computations; successful stagnation certifies repeated computed residuals, not a small exact error.",
+      "fixed_by": "alg-bounded-mixed-precision-iterative-refinement",
+      "matters_for": [
+        "thm-mixed-precision-refinement-error-recurrence-and-floor"
+      ]
+    },
+    {
+      "convention": "Residual-certificate norms are exact norms or certified upper bounds. Ordinary uncontrolled rounding of the certificate expression is not authorized.",
+      "fixed_by": "lem-rounded-linear-and-normal-residual-certificates",
+      "matters_for": [
+        "lem-rounded-linear-and-normal-residual-certificates"
+      ]
+    },
+    {
+      "convention": "The computed least-squares uniqueness conclusion requires the perturbed triangular factor to be nonsingular. The 20 gamma_(n+3) bounds additionally require the two stated coefficient comparisons.",
+      "fixed_by": "thm-computed-full-rank-least-squares-backward-stability",
+      "matters_for": [
+        "ex-full-rank-least-squares-normal-equations-versus-qr",
+        "ex-ill-conditioned-design-stability-versus-forward-error"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+      "statement": "A procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index.",
+      "used_by": [
+        "alg-balanced-pairwise-summation",
+        "alg-two-sum-error-free-transform",
+        "alg-two-product-fma-error-free-transform",
+        "alg-rounded-cholesky-with-failure-status",
+        "alg-scaled-householder-reflector-formation-and-application",
+        "alg-bounded-mixed-precision-iterative-refinement",
+        "lem-rounded-linear-and-normal-residual-certificates"
+      ]
+    },
+    {
+      "id": "lem-scaled-householder-step-meets-local-backward-error-premise",
+      "statement": "For a successful real step on C=[x B], with r≥1, q≥0, 0<u<1 and ru<1, there is an exact orthogonal H, identity for x=0 and H(v) otherwise, and E such that H(C+E)=C₊ and ‖E‖F≤κr‖C‖F, with the displayed κr. The column overwrite is included. Successful separate-block application has discrepancy at most ((1+u)cr+3u)‖Y‖F.",
+      "used_by": [
+        "thm-scaled-householder-qr-backward-stability"
+      ]
+    },
+    {
+      "id": "thm-scaled-householder-qr-backward-stability",
+      "statement": "For A∈R^(m×n), m≥n≥1, undergoing successful scaled Householder QR with mu<1, the stored reflectors represent an exact orthogonal product whose reduced factor satisfies A+ΔA=Q̂R̂ and ‖ΔA‖F≤βQ‖A‖F, where βQ=(1+κm)^n−1.",
+      "used_by": [
+        "thm-computed-full-rank-least-squares-backward-stability"
+      ]
+    },
+    {
+      "id": "lem-rounded-triangular-substitution-componentwise-backward-error",
+      "statement": "For stored real upper triangular R with nonzero diagonal, stored y, n≥1 and (n+3)u<1, successful rounded descending substitution supplies upper triangular ΔR with (R+ΔR)x̂=y, |ΔR|≤gamma_(n+3)|R| and ‖ΔR‖F≤gamma_(n+3)‖R‖F. Forward substitution has the transposed conclusion.",
+      "used_by": [
+        "thm-computed-full-rank-least-squares-backward-stability"
+      ]
+    },
+    {
+      "id": "lem-rounded-linear-and-normal-residual-certificates",
+      "statement": "For stored real or complex A,x,y, m,n≥1, successful sequential dots, 0<u<1 and (max(m,n)−1)u<1, the displayed W bounds ‖ŵ−(Ax−y)‖₂. With stored real λ>0 and the stated successful normal-residual evaluation, the displayed rho bounds ‖r̂−[A*(Ax−y)+λx]‖₂. Certificate norms are exact or certified upper bounds.",
+      "used_by": [
+        "thm-patankar-inexact-solve-residual-ledger",
+        "alg-point-verified-linear-system-certifier",
+        "lem-certified-linear-solve-jacobian-and-pullback-error",
+        "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+        "alg-revised-simplex-qr-basis-recompute-and-audit",
+        "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check"
+      ]
+    },
+    {
+      "id": "thm-computed-full-rank-least-squares-backward-stability",
+      "statement": "Under the stated full-column-rank, successful QR, right-hand-side evaluation, substitution and arithmetic hypotheses, there are δb and upper triangular ΔR with (R̂+ΔR)x̂=Q̂ᵀ(b+δb), ‖δb‖₂≤βb‖b‖₂ and ‖ΔR‖F≤gamma_(n+3)‖R̂‖F. If R̂+ΔR is nonsingular, x̂ is the unique least-squares solution for Q̂(R̂+ΔR) and b+δb, with relative matrix perturbation at most βQ+gamma_(n+3)(1+βQ).",
+      "used_by": [
+        "ex-full-rank-least-squares-normal-equations-versus-qr",
+        "ex-ill-conditioned-design-stability-versus-forward-error",
+        "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+        "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+        "alg-revised-simplex-qr-basis-recompute-and-audit",
+        "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check"
+      ]
+    },
+    {
+      "id": "lem-binary-rounding-grid-and-ordered-two-sum",
+      "statement": "For the unbounded binary set of precision p≥2 with nearest-even rounding R, if A,B are representable and |A|≥|B|, then S=R(A+B), Z=R(S−A), T=R(B−Z) satisfy Z=S−A and T=A+B−S exactly.",
+      "used_by": [
+        "thm-two-sum-error-free-transform"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-standard-relative-floating-point-model-and-unit-roundoff",
+      "used_for": "Representable-set, unit-roundoff, normal-range and exact-zero conventions underlying the operationwise model.",
+      "opened": true
+    },
+    {
+      "id": "def-cholesky-factorisation-with-positive-diagonal",
+      "used_for": "Hermitian positive definiteness and lower triangular positive-diagonal Cholesky convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Exact existence and uniqueness, kept separate from rounded success.",
+      "opened": true
+    },
+    {
+      "id": "def-householder-reflector",
+      "used_for": "Exact reflector convention.",
+      "opened": true
+    },
+    {
+      "id": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+      "used_for": "Full and reduced orthogonal-product and triangular-block conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-forward-and-back-substitution-for-triangular-systems",
+      "used_for": "Exact triangular recursion underlying rounded solves and refinement.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+      "used_for": "Unitary invariance, spectral-to-Frobenius comparison, and the norm bounds used by refinement certificates.",
+      "opened": true
+    },
+    {
+      "id": "lem-product-of-one-plus-deltas-gives-theta-n",
+      "used_for": "Accumulated relative-factor bounds in summation, dot products, Cholesky, Householder updates and substitution.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Existence of binary binades in the unbounded-grid lemma.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Cholesky Frobenius and trace estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+      "used_for": "Exact Householder orthogonality and annihilation in the local error proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Dot-product, rank-one operator, local reflector, least-squares and residual estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-frobenius-matrix-norm",
+      "used_for": "Entrywise and disjoint-column squared-norm identities.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Rank-one and reflector-difference operator estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+      "used_for": "Matrix-vector compatibility in the refinement recurrence.",
+      "opened": true
+    },
+    {
+      "id": "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+      "used_for": "Exact transformation-product and reduced-QR conventions, including zero-column identity steps.",
+      "opened": true
+    },
+    {
+      "id": "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+      "used_for": "Unique exact least-squares identification and the distinction between QR and normal-equation conditioning.",
+      "opened": true
+    },
+    {
+      "id": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+      "used_for": "Exact triangular row identities behind the rounded substitution lemma.",
+      "opened": true
+    },
+    {
+      "id": "def-condition-number-of-a-nonsingular-linear-system",
+      "used_for": "Condition-number convention in the ill-conditioned diagonal example.",
+      "opened": true
+    },
+    {
+      "id": "def-induced-matrix-p-norm",
+      "used_for": "Direct computation of the spectral condition number in the diagonal example.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-scaled-householder-qr-backward-stability",
+      "concern": "The Statement says that applying the stored reflectors to a separate b 'gives a full vector' with the stated error bound, but explicitly assumes success only for the QR steps. Its Facts section additionally assumes successful vector updates. This qualification should also appear in the Statement: in binary64, A=[1] factors successfully with stored v=2 and tau=1/2, while applying that reflector to b=[N_max] fails at the dot product 2*N_max. The proof is sound under its stated successful-vector-update assumption.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "alg-balanced-pairwise-summation",
+      "concern": "The algorithm carrier contains a numbered ## Proof establishing termination. The dispatch requires algorithmic termination properties in a separate proved result, with justified_by used for well-definedness; justified_by is currently empty.",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-two-sum-error-free-transform",
+      "concern": "The algorithm carrier contains a numbered ## Proof establishing termination rather than placing that property in a separate proved result as the dispatch requires; justified_by is empty.",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-two-product-fma-error-free-transform",
+      "concern": "The algorithm carrier contains a numbered ## Proof establishing termination rather than placing that property in a separate proved result as the dispatch requires; justified_by is empty.",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-kahan-compensated-summation",
+      "concern": "The algorithm carrier contains a numbered ## Proof establishing termination rather than placing that property in a separate proved result as the dispatch requires; justified_by is empty.",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-neumaier-compensated-summation",
+      "concern": "The algorithm carrier contains a numbered ## Proof establishing termination rather than placing that property in a separate proved result as the dispatch requires; justified_by is empty.",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-rounded-cholesky-with-failure-status",
+      "concern": "The algorithm carrier contains a numbered ## Proof establishing termination rather than placing that property in a separate proved result as the dispatch requires; justified_by is empty.",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-bounded-mixed-precision-iterative-refinement",
+      "concern": "The algorithm carrier contains a numbered ## Proof establishing termination rather than placing that property in a separate proved result as the dispatch requires; justified_by is empty.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-subnormal-and-overflow-range-failure",
+      "concern": "This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-neumaier-recovers-low-order-term-after-cancellation",
+      "concern": "This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-rounded-cholesky-two-by-two-residual",
+      "concern": "This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-full-rank-least-squares-normal-equations-versus-qr",
+      "concern": "This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-ill-conditioned-design-stability-versus-forward-error",
+      "concern": "This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "certified-stationary-distribution-and-hitting-statistic-numerics",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Retained page prerequisite; current stationary-candidate calculations use exact rational residuals or supplied certified upper bounds, without asserting direct-solver convergence."
+    },
+    {
+      "from": "rosenbrock-and-linearly-implicit-methods",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "The shifted QR service uses the actual reflector schedule, propagates failures, checks representation before calls, and certifies residuals without inferring forward accuracy."
+    },
+    {
+      "from": "positive-conservative-production-destruction-integrators",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "The inexact-solve ledger states the residual supplier's dimension, roundoff, successful-operation and certified-norm conditions."
+    },
+    {
+      "from": "outward-rounded-interval-and-ball-arithmetic",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "The page explicitly retains this edge as reading context; its directed-rounding proofs do not import the round-to-nearest model or a factorization guarantee."
+    },
+    {
+      "from": "computed-fast-transforms-and-convolution",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Complex-product, butterfly and scaling uses match the six-operation complex model and successful normal-range arithmetic; phase-input representability is checked."
+    },
+    {
+      "from": "sparse-direct-elimination-and-ordering",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Real LU preserves the real-division restriction and actual growth. Complex LDL kernels use real-component division and the residual lemma's dot-product proof under its applicable hypotheses."
+    },
+    {
+      "from": "computed-singular-values-and-rank-revealing-factorizations",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "The complex kernels specify the same real primitive model and separate exact unitary representatives from rounded dense accumulators; no complex-column guarantee is attributed to the real-column supplier."
+    },
+    {
+      "from": "computed-schur-decompositions-and-nonnormal-spectra",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Real similarities use the actual local target-overwrite or separate-block coefficient, and right updates use the separate-block bound. Arithmetic and certificate failures remain explicit."
+    },
+    {
+      "from": "krylov-methods-and-lanczos-convergence",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Arnoldi, CG and GMRES uses retain exact-zero handling, normal-range successful operations and appropriate gamma conditions; exact-arithmetic convergence claims remain separate."
+    },
+    {
+      "from": "generalized-eigenvalue-pencils-and-qz-methods",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "QZ residual certificates apply the residual lemma only to stored matvec inputs, retain final subtraction allowances, and do not treat normalized exact factor entries as stored inputs."
+    },
+    {
+      "from": "verified-linear-systems-and-spectral-enclosures",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "The point certifier uses the stated g_n product allowances and outward bounds, returning range failure or inconclusive when certification fails."
+    },
+    {
+      "from": "matrix-functions-and-scaling-squaring",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Rounded candidate kernels use the operationwise model with primitive budgets and failure propagation; exact controller audits and conditional error claims are kept separate."
+    },
+    {
+      "from": "automatic-differentiation-and-computational-graphs",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "The solve-Jacobian lemma uses stored-input residual allowances and explicit successful rounded pullback operations; it distinguishes mathematical solve derivatives from rounded-program derivatives."
+    },
+    {
+      "from": "numerical-inverse-problems-and-regularization-error",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Augmented QR is used under its real-arithmetic and nonsingularity conditions, with complex realification and a separate allowance for the represented square root of lambda."
+    },
+    {
+      "from": "revised-simplex-linear-programming-and-certificates",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "The basis service uses current reflector replay, the actual QR coefficients and certified residual evaluation. It uses the perturbation equations without claiming the optional least-squares uniqueness conclusion."
+    },
+    {
+      "from": "barrier-and-primal-dual-interior-point-methods",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "The Newton service checks the arithmetic bounds and an explicit inverse-norm condition sufficient for nonsingularity of the perturbed triangular factor before attaching the nearby-system conclusion."
+    },
+    {
+      "from": "bfgs-and-limited-memory-quasi-newton-methods",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "The rounded direction path calls failure-aware Cholesky and propagates failure; the page does not attach an unstated backward-error or convergence guarantee to that path."
+    },
+    {
+      "from": "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Retractions are exact-arithmetic definitions. The finite-precision warning is consistent with the supplier's distinction between exact represented orthogonal factors and a rounded explicit dense product."
+    },
+    {
+      "from": "gauss-newton-and-levenberg-marquardt-methods",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Computed and exact QR branches are separated. Computed candidates require an independent rank certificate, and backward-stability claims retain the supplier's arithmetic and perturbed-factor nonsingularity hypotheses."
+    },
+    {
+      "from": "sqp-active-set-and-augmented-lagrangian-methods",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "The KKT service checks exact storage, uses actual reflector replay and QR coefficients, and returns a certified residual bound without inferring a forward-error guarantee."
+    }
+  ]
+}

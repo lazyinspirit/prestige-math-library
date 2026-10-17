@@ -52,6 +52,8 @@ A: `nonlinear-equations-and-newton-methods`. B: `nonlinear-equations-and-newton-
 
 ### Scope
 
+When $F=\nabla f$, reuse canonical objective Newton only when $f\in C^2$ and the Hessian is positive definite at each attempted solve; its decrement test may stop before an update. A general vector root, or a gradient root with indefinite nonsingular Hessian, remains the general NA-09 Newton branch. The canonical objective Armijo lemma does not automatically prove decrease for a vector-root merit function.
+
 New general nonlinear F root solver/finite-difference Jacobian bounded variants and ordinary updated-Jacobian local quadratic theorem, distinct from existing scalar objective-Hessian Newton and frozen-Jacobian contraction. Reuse actual gradient/objective Newton algorithm when F is a gradient instead of cloning it.
 
 ### Proof construction
@@ -63,6 +65,8 @@ Taylor-expand F(x_j) at the root, use a uniform local inverse-Jacobian bound and
 scalar Newton near a simple root; double root with reduced order; a starting point outside the local basin; frozen versus updated Jacobian.
 
 ### Prerequisite interfaces
+
+- `numerical-optimization-for-statistical-computation` — published A-page supplier; the exact canonical bodies and hypotheses in the controlling contract govern reuse.
 
 - `completeness-and-uniform-continuity` — existing-library A-page navigation target; only the exact canonical items named in this contract count as logical suppliers.
 - `inverse-and-implicit-function-theorems` — existing-library A-page navigation target; only the exact canonical items named in this contract count as logical suppliers.
@@ -167,7 +171,7 @@ The concrete missing lemmas, algorithms, and theorem hypotheses are stated in th
         "lem-feynman-kac-path-measures-satisfy-forward-recursion"
       ],
       "missing_prerequisites_owner": "RARE1",
-      "scope_and_proof_route": "## XA-01 — extend canonical rare-event/SMC guarantees; do not duplicate algorithms\n\n**Existing home:** `library/bayesian-computational-statistics/feynman-kac-particle-filters.md` and its examples. Existing `alg-sequential-importance-resampling`, `alg-multinomial-and-residual-offspring-resampling`, `thm-sequential-particle-estimator-is-unbiased`, `lem-feynman-kac-path-measures-satisfy-forward-recursion` retain their homes. Existing IS unbiasedness, finite variance and CLT are already covered; no new IS pair.\n\n**New delta.** Integration owner: optimization/statistics RARE1 absorbs this amendment; no separate pair or competing procedure. Define a finite sequence of nested events/levels with exact stopped transition kernels and potentials 0≤G≤1. Prove measurability of finite-budget stopped kernels (or a declared exact-hitting oracle), connection of their Feynman–Kac normalizer to the target event probability, and error of any time-discretized crossing approximation separately. Use existing SMC product-normalizer estimator; its unbiasedness is reused only under all positive-prefix-normalizer/full-resampling hypotheses. Then prove a finite-horizon L2 bound with explicit dependence on number of levels, prefix probabilities, bounded normalized potentials and kernel mixing. A safe first contract is an O(1/N) **absolute** mean-square bound for a fixed number of bounded-potential levels, proved by conditional variance and induction. Relative error divides by the squared rare probability and may be huge. An efficiency claim uniform in rarity needs an additional theorem and actual lower bounds/minorization; not “splitting reduces variance” by name.\n\n**Missing local suppliers / owner.** Local to this amendment: stopped-kernel construction and cemetery handling; Feynman–Kac event identity; conditional empirical variance identity for the actual resampling procedure; finite-level martingale/variance recursion; bias from approximate crossing/hitting kernels. Existing finite-horizon SMC unbiasedness does not by itself imply finite-particle accuracy or uniform-in-time stability (the canonical page explicitly says so). No adaptive-level unbiasedness without its separate order-statistic/martingale proof. Root must assign this amendment to the statistics guarantee owner and check affected consumers if an existing statement changes; prefer new theorem carriers without altering original definitions.\n\n**Examples.** Reliability chain crossing; extinction estimate; all particles die (zero estimate, not algorithmic proof of zero probability); an IS proposal with infinite weighted second moment; same budget splitting with worse relative error. **Sources:** Cérou–Del Moral–Furon–Guyader, “Sequential Monte Carlo for rare event estimation,” Statistics and Computing 22 (2012), pp. 795–808, DOI `10.1007/s11222-011-9231-6`; Del Moral, *Feynman–Kac Formulae* (2004), particle variance/martingale chapters, DOI `10.1007/978-1-4684-9393-1`. Exact source hypotheses are intake obligations.\n",
+      "scope_and_proof_route": "## XA-01 — extend canonical rare-event/SMC guarantees; do not duplicate algorithms\n\n**Existing home:** `library/bayesian-computational-statistics/feynman-kac-particle-filters.md` and its examples. Existing `alg-sequential-importance-resampling`, `alg-multinomial-and-residual-offspring-resampling`, `thm-sequential-particle-estimator-is-unbiased`, `lem-feynman-kac-path-measures-satisfy-forward-recursion` retain their homes. Existing IS unbiasedness, finite variance and CLT are already covered; no new IS pair.\n\n**New delta.** Integration owner: optimization/statistics RARE1 absorbs this amendment; no separate pair or competing procedure. Define a finite sequence of nested events/levels with exact stopped transition kernels and potentials 0≤G≤1. Prove measurability of finite-budget stopped kernels (or a declared exact-hitting oracle), connection of their Feynman–Kac normalizer to the target event probability, and error of any time-discretized crossing approximation separately. Use existing SMC product-normalizer estimator; its unbiasedness is reused only under all positive-prefix-normalizer/full-resampling hypotheses. Then prove a finite-horizon L2 bound with explicit dependence on number of levels, prefix probabilities, bounded normalized potentials and kernel mixing. A safe first contract is an O(1/N) **absolute** mean-square bound for a fixed number of bounded-potential levels, proved by conditional variance and induction. Relative error is the standard deviation divided by the rare probability; relative variance is the variance divided by its square. Either may be huge. The conditional-mean-only stability bound is false; retain its finite counterexample and the proved absolute bound, and retain the separate finite-particle relative-bound obligation under the actual event-weighted conditional second-moment hypotheses in the controlling RARE1 contract. An efficiency claim uniform in rarity needs an additional theorem and actual lower bounds/minorization; not “splitting reduces variance” by name.\n\n**Missing local suppliers / owner.** Local to this amendment: stopped-kernel construction and cemetery handling; Feynman–Kac event identity; conditional empirical variance identity for the actual resampling procedure; finite-level martingale/variance recursion; bias from approximate crossing/hitting kernels. Existing finite-horizon SMC unbiasedness does not by itself imply finite-particle accuracy or uniform-in-time stability (the canonical page explicitly says so). No adaptive-level unbiasedness without its separate order-statistic/martingale proof. Root must assign this amendment to the statistics guarantee owner and check affected consumers if an existing statement changes; prefer new theorem carriers without altering original definitions.\n\n**Examples.** Reliability chain crossing; extinction estimate; all particles die (zero estimate, not algorithmic proof of zero probability); an IS proposal with infinite weighted second moment; same budget splitting with worse relative error. **Sources:** Cérou–Del Moral–Furon–Guyader, “Sequential Monte Carlo for rare event estimation,” Statistics and Computing 22 (2012), pp. 795–808, DOI `10.1007/s11222-011-9231-6`; Del Moral, *Feynman–Kac Formulae* (2004), particle variance/martingale chapters, DOI `10.1007/978-1-4684-9393-1`. Exact source hypotheses are intake obligations.\n",
       "source_urls": [
         "https://doi.org/10.1007/s11222-011-9231-6",
         "https://doi.org/10.1007/978-1-4684-9393-1"
@@ -514,6 +518,8 @@ preserve all original NA43 examples; add approximate-gradient residual and inner
 
 ### Prerequisite interfaces
 
+- `numerical-optimization-for-statistical-computation` — published A-page supplier; the exact canonical bodies and hypotheses in the controlling contract govern reuse.
+
 - `NA-09` — same-frontier pair owned by **optimization**; its exact proved items, not the key alone, are the supplier interface.
 - `DIF1` — same-frontier pair owned by **optimization**; its exact proved items, not the key alone, are the supplier interface.
 - `convex-and-semicontinuous-functions-on-rn` — existing-library A-page navigation target; only the exact canonical items named in this contract count as logical suppliers.
@@ -567,6 +573,8 @@ The concrete missing lemmas, algorithms, and theorem hypotheses are stated in th
 A: `coordinate-and-block-descent-methods`. B: `coordinate-and-block-descent-methods-examples`.
 
 ### Scope
+
+The controlling composite proximal rates distinguish curvature locations: if the full $F=f+g$ is $\mu$-strongly convex, use $q_c=1-\mu/[n(L_{max}+\mu)]$; if smooth $f$ is itself $\mu$-strongly convex, retain the sharper $q_f=1-\mu/(nL_{max})$. Both include the accepted per-history model-error convolution. Composite-only curvature does not imply $q_f$, as the retained counterexample shows. General composite convexity alone supplies no penalty-independent smooth-branch $R$-only rate. This corrects the rate wording in the preserved historical design below without dropping the composite-curvature case.
 
 Define cyclic exact coordinate/block minimization, randomized coordinate gradient/proximal updates with independent uniform block sampling, separable nonsmooth g, per-block Lipschitz constants and finite inner solve tolerance. For smooth convex f with L_i-coordinate Lipschitz derivatives, a nonempty minimizer set, bounded initial sublevel radius R and a common Lmax, prove expected objective O(n Lmax R²/k) for random coordinate gradient; under global mu-strong convexity prove expected gap contraction 1−mu/(n Lmax) for step 1/Lmax. Importance sampling uses its separately proved probability/step relation rather than inheriting uniform constants. Cyclic exact block descent: under compact sublevel, continuously differentiable convex f plus proper closed convex separable g, and unique continuous block minimizers (or a proved uniformly strongly convex block proximal surrogate), prove every accumulation point is coordinatewise stationary; separability yields full convex stationarity/global optimum; uniqueness of global minimizer gives iterate convergence. Do not infer stationary convergence for arbitrary nonconvex/nonseparable nonsmooth cyclic updates; give a cycling/failure caveat. Derive lasso coordinate soft threshold with zero-column rule, reuse canonical lasso estimator/minimizer and orthogonal soft-threshold example, and distinguish convergence of fitted values/objectives from coefficient uniqueness. Proof: per-coordinate descent, conditional sampling expectation and telescoping; cyclic compactness plus continuity of block map; subgradient product rule proved locally. 
 
@@ -716,6 +724,8 @@ A: `stochastic-approximation-and-stochastic-gradient-methods`. B: `stochastic-ap
 
 ### Scope
 
+Assume AC for the canonical conditional-expectation and Doob interfaces. Apply Doob to the negative of the nonnegative compensated supermartingale, whose positive part is zero; verify adaptedness and integrability. The controlling contract gives the decrement-sum argument. These assumptions accompany every almost-sure STO1 application, including STO3; finite-time expectation bounds retain their own conditional-moment hypotheses.
+
 Define filtration-adapted Robbins–Monro/SGD/projected SGD, conditional unbiased gradients, conditional second-moment and bounded-variance hypotheses and step schedules. Prove Robbins–Siegmund almost-supermartingale lemma locally from published martingale convergence; use it for a.s. convergence under strongly monotone drift/strong convexity, sum alpha=infinity and sum alpha²<infinity, bounded second moments and coercivity/stability assumptions. Prove finite-time convex averaged O(1/sqrt(k)), strongly convex O(1/k) expected objective bounds with exact schedule/constants; nonconvex expected randomized-iterate gradient² O(1/sqrt(k)) under L-smoothness and f bounded below. Constant-step noise floor and biased gradients have explicit extra terms. 
 
 ### Preserved mathematical design
@@ -736,6 +746,8 @@ streaming least squares, noisy root, biased simulator gradients.
 
 ### Prerequisite interfaces
 
+- `martingale-inequalities-and-convergence` — published A-page supplier; the exact canonical bodies and hypotheses in the controlling contract govern reuse.
+
 - `OPT0` — same-frontier pair owned by **optimization**; its exact proved items, not the key alone, are the supplier interface.
 - `OPT8` — same-frontier pair owned by **optimization**; its exact proved items, not the key alone, are the supplier interface.
 
@@ -751,6 +763,8 @@ The concrete missing lemmas, algorithms, and theorem hypotheses are stated in th
 A: `global-optimization-and-certified-branch-and-bound`. B: `global-optimization-and-certified-branch-and-bound-examples`.
 
 ### Scope
+
+The GP posterior branch assumes AC, a specified real GP prior and independent centered Gaussian observation noise, and positive-definite observed covariance. Positive noise suffices even for singular prior Gram matrices; zero noise is allowed when the observed Gram matrix is positive definite. An unavailable observed solve returns a distinct status, without a posterior or acquisition claim. See the complete model, initialization and adaptive-observation qualification in the controlling contract.
 
 Genuinely-new global numerical optimization, separate from finding nonconvex stationary points. On a compact box, define spatial branch-and-bound with a finite budget, a rigorous lower-bounding oracle, feasible incumbents, deterministic splitting and epsilon gap termination. Prove global epsilon-optimality from the invariant lower≤inf over each live box and incumbent feasibility; prove eventual epsilon termination when bounds are consistent as box diameter→0, subdivisions are exhaustive and the objective is continuous. Instantiate interval/Lipschitz bounds using the linear/approximation agent's validated arithmetic contracts and locally proved convex McCormick envelopes for products; relaxations must enclose the objective/constraints including floating-point error. For constrained problems, pruning requires a proved infeasibility bound; empty feasible set detection needs a separate separation margin, not mere continuity. Define mixed-integer branch-and-bound for bounded integer domains with certified continuous relaxation bounds, finite enumeration fallback and exact gap certificate; do not claim polynomial complexity. Include derivative-free Bayesian optimization as a separate finite acquisition procedure consuming published GP posterior laws, with no generic global theorem unless an explicit RKHS/GP confidence-and-information-gain contract is proved locally; acquisition maximization error is retained. 
 
@@ -771,6 +785,8 @@ Exact proof design/recurrences and same-owner lemma obligations are embedded in 
 multimodal polynomial certified gap, engineering mixed design, invalid lower bound loses optimum, noisy biological simulator Bayesian search whose surrogate uncertainty is conditional on the kernel/model.
 
 ### Prerequisite interfaces
+
+- `gaussian-process-priors-and-posterior-laws` — published A-page supplier; the exact canonical bodies and hypotheses in the controlling contract govern reuse.
 
 - `OPT5` — same-frontier pair owned by **optimization**; its exact proved items, not the key alone, are the supplier interface.
 - `OPT7` — same-frontier pair owned by **optimization**; its exact proved items, not the key alone, are the supplier interface.
@@ -898,6 +914,10 @@ The concrete missing lemmas, algorithms, and theorem hypotheses are stated in th
 A: `variance-reduced-finite-sum-and-adaptive-gradient-optimization`. B: `variance-reduced-finite-sum-and-adaptive-gradient-optimization-examples`.
 
 ### Scope
+
+For SAGA preserve both proved branches for $V_k+7\eta^2nS_k$: constant $\eta\le1/(10L)$ gives $1-\min\{\mu\eta,1/(7n)\}$, with the faster $1-\mu\eta$ when $\mu\eta\le1/(7n)$. Retain the separate memory-scaled sufficient theorem and its counterexample to the unamended faster claim. Geometric expected-objective bounds accompany this practical constant step; gradient-evaluation counts do not bound total component-oracle runtime.
+
+Assume AC for conditional-expectation interfaces inherited through STO1. The finite-time SVRG/SAGA expectation proofs require finite moments at each step; they do not use Doob or assert almost-sure convergence.
 
 Define finite-sum SVRG and SAGA with independent uniform index, stored-gradient/control update, work/storage ledgers; prove unbiased conditional estimators, variance bound relative to optimum, and geometric expected objective convergence for convex L-smooth components and mu-strongly convex sum under explicit epoch/step choices. Count full-gradient cost O(n), gradient cost per inner iteration, and memory. Define AdaGrad with proved online-regret/convex optimization bound under bounded gradients; Adam procedure accompanied by an explicit divergence counterexample or corrected AMSGrad theorem with exact denominator/moment assumptions. Mini-batch independent sampling reduces conditional variance by batch size; sampling without replacement requires different covariance accounting. 
 
@@ -1050,6 +1070,8 @@ The concrete missing lemmas, algorithms, and theorem hypotheses are stated in th
 A: `iterative-regularization-and-early-stopping`. B: `iterative-regularization-and-early-stopping-examples`.
 
 ### Scope
+
+The controlling nonlinear theorem uses a separate anchored IRGNM update with $\alpha_k(x_0-x_k)$ and explicit reference-factorization, source-smallness and discrepancy constants from its same-pair theorem. Preserve the unanchored LM algorithm/one-step identity/example separately. The real/complex source-power/filter supplier, every $0<\nu\le1/2$, and ill-posed Hilbert scope are retained; ball invariance and ordinary first discrepancy crossing are proved for the anchored method, with finite-budget failures distinct. The active audit contract gives the exact formula and additional hypotheses; they are not silently inferred from the original cone/Lipschitz design.
 
 Define Landweber `x_(k+1)=x_k+omega A*(y_delta-Ax_k)`, 0<omega<2/||A||², x0=0; prove monotone exact-data convergence to minimum-norm solution, noise amplification ≤C delta sqrt(k), and source bias ≤C k^-nu; balance k and prove discrepancy-stopped convergence. Define CGLS/LSQR via Golub–Kahan bidiagonalization (algorithm supplier may be linear-algebra expansion; do not duplicate its stable factorization proof). Prove exact-arithmetic LSQR iterate minimizes residual over its Krylov space and regularization requires stopping, not just residual minimization. Nonlinear iteratively regularized Gauss–Newton gets a stated local theorem with tangential-cone/Lipschitz derivative/source assumptions and noise-aware stopping; author its contraction/error recurrence rather than importing linear filter proof. 
 
@@ -1471,6 +1493,8 @@ The concrete missing lemmas, algorithms, and theorem hypotheses are stated in th
 A: `simulation-gradient-estimation-and-simultaneous-perturbation`. B: `simulation-gradient-estimation-and-simultaneous-perturbation-examples`.
 
 ### Scope
+
+The STO1 almost-sure convergence application assumes AC and must exhibit the estimator's history filtration, adapted integrable Lyapunov process, conditional bias/noise estimates, stability and deterministic summable error bounds. The repaired STO1 contract supplies the exact Doob interface; the SPSA bias order alone does not satisfy it.
 
 Define pathwise/reparameterized gradient, likelihood-ratio/score gradient, coupled finite difference and SPSA with two function evaluations. Prove interchange under a common integrable derivative envelope, score identity under parameter-independent dominating support (or include boundary term), and unbiasedness/finite variance under explicit weighted moments. Prove coupled-difference variance identity; derive SPSA bias O(c²) with symmetric independent perturbations and reciprocal moments, conditional variance bound O(c^-2), and convergence using STO1 with summability conditions on alpha/c. Stochastic adjoint gradient under SDE discretization is a separate derivative/error interchange, not a consequence of weak payoff convergence. 
 

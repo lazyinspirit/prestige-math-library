@@ -11,12 +11,7 @@ deps: [def-rat-operations, lem-rat-ops-well-defined, thm-int-comm-ring, lem-int-
 aliases: []
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-24
-  audited: 2026-07-24
+  repair: research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-published-focused/thm-rat-field/application/repair.json
 sources:
   scraped: []
   references:
@@ -55,7 +50,7 @@ has a multiplicative inverse.
 
 1.4 Additive identity: $(a,b) + (0,1) = (a \cdot 1 + 0 \cdot b,\; b \cdot 1) = (a,b)$. [L2]
 
-1.5 Additive inverses: $(a,b) + (-a,b) = (ab - ab,\; b^2) = (0, b^2) \sim (0,1)$. [L2]
+1.5 Additive inverses: since $b \ne 0$, [L3] gives $b^2 \ne 0$. Thus $(a,b) + (-a,b) = (ab - ab,\; b^2) = (0, b^2) \sim (0,1)$. [L2, L3]
 
 1.6 Associativity and commutativity of $\cdot$: $((ac)e,\, (bd)f) = (a(ce),\, b(df))$ and $(ac,\, bd) = (ca,\, db)$. [L2]
 

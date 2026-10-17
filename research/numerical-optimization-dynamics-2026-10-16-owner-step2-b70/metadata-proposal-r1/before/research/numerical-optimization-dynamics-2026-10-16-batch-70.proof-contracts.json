@@ -1,0 +1,1150 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-fr-descent-and-direction-growth-bound",
+    "lem-safeguarded-pr-plus-uniform-angle",
+    "thm-nonlinear-cg-finite-budget-terminates",
+    "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe",
+    "thm-safeguarded-pr-plus-gradient-norms-converge",
+    "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg",
+    "ex-rosenbrock-fr-prplus-trace",
+    "cex-raw-prplus-loses-descent-and-safeguard-restarts",
+    "ex-spd-quadratic-nonlinear-cg-matches-linear-cg"
+  ],
+  "contracts": {
+    "lem-fr-descent-and-direction-growth-bound": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "For $k\\ge1$, set",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "It is a **strong Wolfe step** when it satisfies the first inequality",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "From the initial direction d_0=-g_0, q_0=1.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The FR recurrence and coefficient give q_k=1-(g_k^T d_{k-1})/||g_{k-1}||^2.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Strong Wolfe curvature yields 1-c_2 q_{k-1} <= q_k <= 1+c_2 q_{k-1}; induction gives q_k <= (1-c_2)^-1 and q_k >= (1-2c_2)/(1-c_2)>0.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Expanding the direction norm, bounding the cross term with strong Wolfe and q_{k-1} <= (1-c_2)^-1 gives ||d_k||^2 <= C_3 ||g_k||^2 + (||g_k||^4/||g_{k-1}||^4)||d_{k-1}||^2.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The base case and induction in the norm recurrence telescope to ||d_k||^2 <= C_3 ||g_k||^4 sum_{j=0}^k ||g_j||^-2.",
+          "inputs": [
+            "step 3.1",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family.",
+          "evidence": null
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement assumes every gradient is nonzero; the outer algorithm exits at a zero gradient before a denominator is formed.",
+          "evidence": null
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-step/base case is covered in step 1.1.",
+          "reason": null
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The strict c2<1/2 hypothesis makes delta positive in step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The curvature hypothesis is used at each accepted endpoint in step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses a fixed run and finite induction; no choice principle is required in steps 1.1 and 1.2.",
+          "reason": null
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "The induction and norm-growth recurrence were checked algebraically; no registered finite-smoke fixture applies. Author self-review only; this is not independent approval."
+      }
+    },
+    "lem-safeguarded-pr-plus-uniform-angle": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "restart by setting",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "For a descent direction define its **descent angle**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "**Cauchy-Schwarz.**",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If the candidate passes both tests, g^T d <= -sigma ||g||^2<0 and the angle definition plus ||d||<=C||g|| gives cos(theta)>=sigma/C.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Cauchy-Schwarz forces cos(theta)<=1, so a kept candidate can occur only when sigma/C<=1; a reset d=-g has cos(theta)=1. Both branches therefore give cos(theta)>=min(1,sigma/C)>0 and strict descent.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family.",
+          "evidence": null
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement assumes g is nonzero; the algorithm handles a zero gradient before constructing a direction.",
+          "evidence": null
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The reset branch has d=-g and angle one in step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When sigma/C>1 the kept branch is impossible by Cauchy-Schwarz, so step 2.1 gives the reset angle.",
+          "reason": null
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement concerns one direction at one point and has no interval endpoint condition.",
+          "evidence": null
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The kept and reset branches are checked directly in steps 1.1 and 2.1 without choice.",
+          "reason": null
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "Both keep and restart branches were checked, including arbitrary positive sigma and C; no registered finite-smoke fixture applies. Author self-review only; this is not independent approval."
+      }
+    },
+    "thm-nonlinear-cg-finite-budget-terminates": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "For $k=0,\\ldots,K-1$, if $g_k=0$, return **stationary** with $x_k$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-bracketing-zoom-strong-wolfe-search",
+          "source_section": "Definition",
+          "quote": "For at most $E$ expansion trials, in order:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-bracketing-zoom-strong-wolfe-search",
+          "source_section": "Definition",
+          "quote": "For at most $Z$ zoom trials, in order:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-bracketing-zoom-strong-wolfe-search",
+          "source_section": "Definition",
+          "quote": "Evaluate $\\phi(t)$ and $\\phi'(t)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "1. Evaluate $g_0=g(x_0)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "6. For an accepted step, set $x_{k+1}=x_k+t_kd_k$ and evaluate $g_{k+1}$. If $g_{k+1}=0$, return **stationary** with $x_{k+1}$. After the loop, return **iteration-limit** with the last iterate, the accepted trace, and all restart flags. A failure or stationary status returns immediately with the trace so far.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "A bounded Wolfe call has at most E expansion and Z zoom trials; each trial evaluates the objective and directional derivative, and the call returns a checked step or failure. Exact-SPD-quadratic mode computes and checks one formula step.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The outer loop has at most K iterations; each returns a terminal status or accepts one step, and after the loop any nonzero last gradient yields iteration-limit. There are at most K bounded searches and K(E+Z) trial evaluations, plus at most K+1 outer-iterate gradient evaluations. No total gradient count is asserted.",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "K=0 leaves no outer iteration; the initial check and iteration-limit return are covered by step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero expansion or zoom budget may fail immediately, but steps 1.1 and 2.1 still give a finite return.",
+          "reason": null
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For K=1 there is at most one bounded search; steps 1.1 and 2.1 give the stated count.",
+          "reason": null
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A domain-exit or exhausted search budget is terminal by step 1.1.",
+          "reason": null
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The initial and post-update iterate-gradient evaluations are counted in step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The outer, expansion, and zoom loops are finite and deterministic in steps 1.1 and 2.1.",
+          "reason": null
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "The stated bounds count only evaluations and calls, not arithmetic work; no registered finite-smoke fixture applies. Author self-review only; this is not independent approval."
+      }
+    },
+    "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fr-descent-and-direction-growth-bound",
+          "source_section": "Statement",
+          "quote": "Then, for every $k$,",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "It is a **strong Wolfe step** when it satisfies the first inequality",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-zoutendijk-summability-for-wolfe-steps",
+          "source_section": "Statement",
+          "quote": "\\sum_{k=0}^{\\infty}\\cos^2\\theta_k\\,\\|\\nabla f(x_k)\\|_2^2<\\infty",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The FR lemma gives strict descent; strong Wolfe implies Wolfe, so Zoutendijk summability applies under the stated lower-bound and Lipschitz-segment hypotheses.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Assuming the gradient norms stay above gamma after K, the reciprocal-gradient sum S_k is bounded above by A_0 k for a fixed positive A_0.",
+          "inputs": [
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The FR norm bound then makes each Zoutendijk summand at least delta^2/(C_3 A_0 k); the harmonic series diverges, contradicting step 1.1, so the gradient liminf is zero.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra",
+            "contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family.",
+          "evidence": null
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The infinite-run hypothesis assumes nonzero gradients at every iterate.",
+          "evidence": null
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The contradiction uses the initial term and all later iterates beginning in steps 1.1 and 2.1.",
+          "reason": null
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The strict c2<1/2 hypothesis makes the FR slope delta positive in step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement assumes every feasible trial segment lies in the common Lipschitz neighborhood used in step 1.1.",
+          "reason": null
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The contradiction uses a fixed sequence and the harmonic series in steps 1.2 and 2.1; no choice principle is used.",
+          "reason": null
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "The local slope and direction-growth estimates were checked against each other; source theorem hypotheses are stronger than the contract and are not imported. Author self-review only; this is not independent approval."
+      }
+    },
+    "thm-safeguarded-pr-plus-gradient-norms-converge": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-safeguarded-pr-plus-uniform-angle",
+          "source_section": "Statement",
+          "quote": "The resulting direction is strictly descending",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-uniform-descent-angle-implies-gradient-vanishing",
+          "source_section": "Statement",
+          "quote": "Then $\\|\\nabla f(x_k)\\|_2\\to0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The safeguard lemma gives one uniform positive angle constant for every nonzero gradient, including a reset direction.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Strong Wolfe steps are Wolfe steps; the stated smoothness and lower-bound assumptions plus step 1.1 are exactly those of the supplier corollary, which gives gradient-norm convergence.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family.",
+          "evidence": null
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement concerns an infinite successful run with nonzero gradients; zero returns stationary in the algorithm.",
+          "evidence": null
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The uniform positive angle is established for each direction in step 1.1.",
+          "reason": null
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant min{1,sigma/C} remains positive even when sigma/C exceeds one, as used in step 1.1.",
+          "reason": null
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Every successful step is a feasible Wolfe step under the carried hypotheses in step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof applies the deterministic safeguard and a fixed supplier theorem in steps 1.1 and 2.1.",
+          "reason": null
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "The angle hypothesis is verified directly for both algorithm branches; no registered finite-smoke fixture applies. Author self-review only; this is not independent approval."
+      }
+    },
+    "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "Otherwise set $d_0=-g_0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conjugate-gradient-recurrence",
+          "source_section": "Definition",
+          "quote": "For every index $k$ with $r_k\\ne0$, define",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate",
+          "source_section": "Statement",
+          "quote": "For all indices $i\\ne j$ for which the quantities are defined,",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-conjugate-gradient-denominators-are-positive-before-convergence",
+          "source_section": "Statement",
+          "quote": "If $r_k\\ne0$, then $p_k\\ne0$ and",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "Choose the selected coefficient and form",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Differentiating the given quadratic gives g_k=Ax_k-b=-r_k; if r0=0 both methods exit, otherwise d0=r0=p0.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Assuming the directions agree through k-1, exact minimization on their common preceding direction makes the next gradient orthogonal to that direction.",
+          "inputs": [
+            "given",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "CG residual orthogonality makes raw PR+ equal FR; both recurrences then produce the same direction, completing the induction. Safeguarded PR+ agrees when it does not restart.",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The common nonzero CG direction has a positive denominator, and exact quadratic minimization gives alpha_k from the CG recurrence, so iterates and residuals agree.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The common update gives the same next FR and raw PR+ coefficient; induction continues until the shared zero-residual exit.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 3.1",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family.",
+          "evidence": null
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The initial zero-residual exit is handled in step 1.1 and each later zero residual before the next coefficient is formed in step 4.1.",
+          "reason": null
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The initial direction is matched in step 1.1 and the generic induction step is completed in step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a real SPD matrix; non-SPD and singular quadratic branches are expressly excluded.",
+          "evidence": null
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The line minimizer is positive and feasible on R^n by the descent and denominator argument in step 3.1.",
+          "reason": null
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The equivalence follows by deterministic induction on the exact recurrences in steps 1.2, 2.1, and 4.1.",
+          "reason": null
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "The equivalence induction was checked against the published CG recurrence, orthogonality theorem and positive-denominator proposition. Author self-review only; this is not independent approval."
+      }
+    },
+    "ex-rosenbrock-fr-prplus-trace": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "Otherwise set $d_0=-g_0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "It is a **strong Wolfe step** when it satisfies the first inequality",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "For $k\\ge1$, set",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Differentiate the specified Rosenbrock function at x_0 and form d_0=-g_0 and x_1=x_0+t_0d_0; compute the exact residual y_1-x_1^2.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Substitution gives f(x_1) below the Armijo bound and |phi'(t_0)| below c_2|phi'(0)|, so the step satisfies strong Wolfe.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Using G_0, G_1 and h=g_1^Td_0, compute beta_FR=G_1/G_0 and beta_PR+=(G_1+h)/G_0; h>0 makes them distinct.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The explicit gradients at the start and trial point are nonzero in steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item verifies exactly one accepted step in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The chosen curvature constant is 49/100<1/2 in the Statement and step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The explicit trial point belongs to the open domain R^2 in steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every value is a fixed exact computation in steps 1.1 through 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "The rational and terminating-decimal arithmetic was recomputed; no registered finite-smoke fixture applies. Author self-review only; this is not independent approval."
+      }
+    },
+    "cex-raw-prplus-loses-descent-and-safeguard-restarts": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "\\beta_{k-1}^{\\rm PR+}=\\max\\!\\left\\{0,\\frac{g_k^T(g_k-g_{k-1})}{\\|g_{k-1}\\|_2^2}\\right\\}",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "A feasible step $t>0$ is a **Wolfe step**",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "restart by setting $\\beta_{k-1}=0$ and $d_k=-g_k$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Complete the square to show the specified Hessian is positive definite; compute f(x_0), g_0 and d_0.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "At t_0=1 compute x_1, f(x_1), g_1 and both directional derivatives; the exact inequalities verify a strong Wolfe step.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Substitute g_0 and g_1 into the PR+ formula; it gives beta=57/100, d_1^cand=(-17/100,-1/10), and g_1^T d_1^cand=29/500>0.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For sigma=1/2 and C=2 the descent test triggers and the norm test does not. Resetting to -g_1 gives a strict descent direction with cos(theta)=1.",
+          "inputs": [
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The displayed nonzero gradients are computed in steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The witness uses one strong-Wolfe step in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Hessian is SPD and both safeguard tests are evaluated in steps 1.1 and 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The trial at t=1 is feasible because the quadratic domain is R^2 in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The witness and restart are exact finite calculations in steps 1.1 through 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "The exact quadratic witness and restart arithmetic were recomputed; no registered finite-smoke fixture applies. Author self-review only; this is not independent approval."
+      }
+    },
+    "ex-spd-quadratic-nonlinear-cg-matches-linear-cg": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg",
+          "source_section": "Statement",
+          "quote": "Its iterates, residuals $r_k=b-Ax_k$, and directions coincide",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conjugate-gradient-recurrence",
+          "source_section": "Definition",
+          "quote": "For every index $k$ with $r_k\\ne0$, define",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Compute r_0, g_0, d_0, alpha_0, x_1 and r_1 exactly from A=diag(1,2) and b=(1,1).",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Compute beta_0=1/9, d_1=(4/9,-2/9), d_1^T A d_1=8/27 and alpha_1=3/4.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The resulting x_2=(1,1/2) solves Ax=b, and the exact-equivalence theorem gives the same trace for nonlinear FR.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The first residuals are nonzero and the common zero residual is checked in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The two exact recurrence updates are calculated in steps 1.1 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example uses a fixed positive-definite diagonal matrix and has no singular or indefinite branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both exact line minimizers are feasible on R^2 in steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The trace uses exact rational arithmetic and a fixed finite calculation in steps 1.1 through 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "Every displayed vector and scalar is rational and was recomputed; no registered finite-smoke fixture applies. Author self-review only; this is not independent approval."
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "27",
+  "round": 1,
+  "reviewed_items": [
+    "def-indicator-function-of-closed-convex-set",
+    "def-proper-closed-convex-function-on-rn",
+    "lem-l-smoothness-descent-inequality",
+    "def-extended-real-epsilon-subdifferential",
+    "def-proximal-mapping",
+    "def-strong-convex-composite-objective",
+    "lem-proper-closed-convex-function-affine-minorant",
+    "lem-smooth-composite-sum-preserves-proper-closed-convexity",
+    "lem-prox-indicator-is-euclidean-projection",
+    "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+    "def-proximal-gradient-mapping",
+    "lem-prox-l1-is-soft-thresholding",
+    "lem-proximal-three-point-inequality",
+    "alg-proximal-gradient-and-fista",
+    "lem-proximal-gradient-one-step-estimate",
+    "thm-projected-gradient-fixed-point-kkt-certificate",
+    "alg-certified-inexact-proximal-gradient-and-fista",
+    "lem-fista-energy-estimate-sequence",
+    "thm-proximal-gradient-o1k-objective-bound",
+    "lem-inexact-proximal-gradient-one-step-estimate",
+    "thm-fista-o1k2-objective-bound",
+    "lem-inexact-fista-energy-estimate",
+    "thm-inexact-proximal-gradient-summable-error-bound",
+    "thm-strong-convex-proximal-gradient-and-restarted-fista-rates",
+    "thm-inexact-fista-weighted-error-bound",
+    "ex-two-pixel-total-variation-proximal-map",
+    "ex-fista-objective-increases-on-a-quadratic",
+    "ex-nonorthogonal-lasso-proximal-gradient-step",
+    "ex-projected-gradient-on-nonnegative-orthant"
+  ],
+  "reviewed_pages": [
+    "proximal-gradient-and-accelerated-composite-optimization",
+    "proximal-gradient-and-accelerated-composite-optimization-examples"
+  ],
+  "decision": "accept",
+  "reason": "This read-only external owner evidence completes the same repairer's omitted consumer duty, including the explicit FISTA theorem disposition; it does not alter native coverage or create another engine round. Current supplier proofs and all eleven affected consumers were checked against preserved old interfaces and paths. No unresolved prerequisite, additional affected item consumer, alias use, or required outside repair was found. No files were edited.",
+  "findings": [
+    {
+      "id": "thm-fista-o1k2-objective-bound",
+      "type": "local",
+      "reason": "The native report omitted this explicit disposition along lem-proximal-gradient-one-step-estimate → lem-fista-energy-estimate-sequence → thm-fista-o1k2-objective-bound. The current proof is sound: properness and minimality make F(x_*) finite, proximal outputs have finite objective values, the energy base case avoids F(x_0), telescoping gives gap ≤ L||x_0−x_*||²/(2t_k²), and t_k ≥ (k+1)/2 gives the claimed bound."
+    },
+    {
+      "id": "alg-certified-inexact-proximal-gradient-and-fista",
+      "type": "local",
+      "reason": "The retained certificate preserves the deleted η=0 explanation: ∂_0g=∂g, and the actual resolvent proof with t=1/L and v=y−∇f(y)/L establishes equivalence to the exact proximal call. The certificate also implies Q(z) ≥ Q(x)+L||z−x||²/2−η for the proximal subproblem, hence value error at most η. Consumers use the certificate itself and do not substitute an unverified value-gap tolerance."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-inexact-proximal-gradient-one-step-estimate",
+      "decision": "accept",
+      "reason": "The retained algorithm certificate supplies exactly the required ε-subgradient inequality and finite output value. The infinite-comparison branch and corrected finite-case algebra prove the order-form estimate."
+    },
+    {
+      "id": "lem-fista-energy-estimate-sequence",
+      "decision": "accept",
+      "reason": "The exact one-step supplier applies at z_1=x_* without using F(x_0). Later comparison points are convex combinations of finite-domain points. The momentum identities and norm expansion give the stated energy recurrence."
+    },
+    {
+      "id": "thm-proximal-gradient-o1k-objective-bound",
+      "decision": "accept",
+      "reason": "Comparison with the finite minimizer telescopes squared distances from the arbitrary initial point. Monotonicity is used only from x_1 onward, where objective values are finite, yielding the last-iterate bound."
+    },
+    {
+      "id": "thm-fista-o1k2-objective-bound",
+      "decision": "accept",
+      "reason": "Checked the indirect changed-supplier use through the energy lemma. Finite gaps, the base case independent of possibly infinite F(x_0), telescoping, nonnegativity, and t_k ≥ (k+1)/2 rigorously yield 2L||x_0−x_*||²/(k+1)²."
+    },
+    {
+      "id": "lem-inexact-fista-energy-estimate",
+      "decision": "accept",
+      "reason": "Certified outputs and the minimizer have finite values; later convex comparisons are finite. The inexact one-step estimate contributes precisely 2t_k²η_k/L, including the direct base case without F(x_0)."
+    },
+    {
+      "id": "thm-inexact-proximal-gradient-summable-error-bound",
+      "decision": "accept",
+      "reason": "The certificate-based estimate at x_* gives the finite-gap telescoping bound. Averaging proves the best-iterate estimate; summable errors bound partial sums of nonnegative gaps and imply convergence to zero."
+    },
+    {
+      "id": "thm-inexact-fista-weighted-error-bound",
+      "decision": "accept",
+      "reason": "Telescoping the certified energy recurrence is valid for finite gaps. The bounds t_j≤j and t_k≥(k+1)/2, together with η_j≥0, yield the displayed weighted-error bound and summability conclusion."
+    },
+    {
+      "id": "thm-strong-convex-proximal-gradient-and-restarted-fista-rates",
+      "decision": "accept",
+      "reason": "The finite starting value permits every decrease comparison. The resolvent supplies the subgradient residual, strong convexity gives the gap and distance estimates, and the checked FISTA bound gives contraction by at most one half per full restart block."
+    },
+    {
+      "id": "ex-two-pixel-total-variation-proximal-map",
+      "decision": "accept",
+      "reason": "The TV input is explicitly proper, closed and convex. The scalar R^1 call uses the admissible penalty 2λ|·| and parameter t/2, giving threshold tλ and the claimed mean-preserving map."
+    },
+    {
+      "id": "ex-nonorthogonal-lasso-proximal-gradient-step",
+      "decision": "accept",
+      "reason": "The strengthened l1 lemma supplies admissibility for n=2. Convexity and the gradient bound justify L=3; threshold 1/15 applied to (2/3,1/3) gives (3/5,4/15)."
+    },
+    {
+      "id": "ex-projected-gradient-on-nonnegative-orthant",
+      "decision": "accept",
+      "reason": "The n=2 polyhedron and convex smooth objective meet the current theorem's hypotheses. Projection, the outward normal, and λ=(2,0) satisfy the stated fixed-point and KKT implications; the supplier's direct zero-dimensional cases remain intact."
+    },
+    {
+      "id": "proximal-gradient-and-accelerated-composite-optimization",
+      "decision": "accept",
+      "reason": "Its inventory and prose accurately describe the retained exact and certified inexact claims, rate hypotheses, and one-way KKT multiplier implication."
+    },
+    {
+      "id": "proximal-gradient-and-accelerated-composite-optimization-examples",
+      "decision": "accept",
+      "reason": "Its inventory and summary remain consistent with the checked example calculations and the FISTA objective bound."
+    }
+  ]
+}

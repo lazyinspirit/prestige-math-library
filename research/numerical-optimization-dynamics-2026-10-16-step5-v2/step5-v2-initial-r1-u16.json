@@ -1,0 +1,510 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "16",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-certified-hermitian-one-and-two-by-two-ldl-kernel",
+      "model": "gpt-6-luna",
+      "context_sha256": "d41649ad2f045ac40d1642e21feb18c521507e4de293bcc95d3f64a5e1fd61f7",
+      "outcome": "false_positive",
+      "reason": "The failure guard bounds the declared conservative threshold |D^{-1}|c, not |BD^{-1}|. For the proposed D, D^{-1}=[[4/3,2/3],[2/3,4/3]] and c=(1,1), so the exact threshold vector is (2,2)>theta^{-1}(1,1). Cancellation in BD^{-1} does not change that test. The adjugate and determinant bounds give V<=|D^{-1}| entrywise and c^-<=c, hence Vc^-<=|D^{-1}|c. The scalar and two-by-two guard branches, finite budget, normal-range exits and local certificate proof were checked; no edit is required.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-threshold-partial-pivot-sparse-lu",
+      "model": "gpt-6-luna",
+      "context_sha256": "bacbdf2b7b1cde687965c0470166ad1e2ca5da1e33b4b7d48f8ced22369f2fdf",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The finite branch initialized a stored matrix from arbitrary real entries without a representation rule. It now explicitly requires stored input values and copies them under P; the separate exact branch retains arbitrary real A. No input-rounding error is silently omitted. Pivot selection, prior-L row swaps, multiplication/subtraction order and failure exits are unchanged. The direct residual theorem assumes a successful run of this procedure, so it remains valid with the same original-A identity and rho>=1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-symmetric-indefinite-block-ldl-star",
+      "model": "gpt-6-luna",
+      "context_sha256": "0342b65b3cf608891541f17474f9b044ab779d4602b619a850375d02550c3e0c",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The rejection incorrectly says no separate correctness theorem exists: thm-block-ldl-star-residual-with-actual-growth already states exact correctness and proves the block congruence in step 1.1. The confirmed nonfatal defect instead is the digest concern: a union of neighbors of a two-vertex pivot includes pivot vertices, so the literal symbolic update could reconnect deleted vertices. Restricting N(J_r) to R_r fixes it without changing any numerical step or pivot test. The exact factor identity is now cited in Remarks through justified_by, rather than asserted as an instruction.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-elimination-tree-and-column-reach",
+      "model": "gpt-6-luna",
+      "context_sha256": "8aef981edbd5496e0e0f1459093b162aa2cccdbb3731397d430e840ad381c3cb",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The supplier defines fill and parents conditional on an ordering; it does not select one. The Definition now explicitly fixes pi as an input parameter before constructing its filled graphs, counts and parent paths. This is a nonfatal omitted parameter made recoverable by all existing consumers, which already fix ordered vertices. No column, ancestor or reach convention changes: reach includes its start and ancestors require at least one parent edge. Empty and singleton forests cause no selection issue.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-block-ldl-star-residual-with-actual-growth",
+      "model": "gpt-6-luna",
+      "context_sha256": "80befc02110f224c3dc1c946c5afc1e878ca1adb0eece1c4ee1c255bdd15b326",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The local F in the kernel lemma has active dimension k_r+t_r, so the previous global product W_hat_r F_r W_hat_r* omitted a required embedding. The Statement now defines F_(r,act) and its zero-padded n-by-n F_r, and identity-pads T_hat_r on eliminated coordinates. Proof step 5.1 keeps the active identity separately typed and proves padding preserves the local norm bound. Telescoping gives the same positive-sign full residual and negative-sign trailing Delta residual. Step 1.1 now also explicitly identifies the transformation product with the stored multiplier columns. This is a nonfatal missing embedding convention, not a changed estimate.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-sparse-cholesky-structural-pattern-without-cancellation",
+      "model": "gpt-6-luna",
+      "context_sha256": "b37eba940ca44759508b3beb7d47c16a719ecf4db4f7f81f0f1ff76d2ce0f491",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The previous induction equated the sparse column with R before establishing that structurally omitted R entries vanish. The proof now constructs the dense Schur sequence directly from B=RR*, proves all scalar pivots positive, invokes Hermitian Schur-support on that independent sequence, and obtains r_ij=0 at omitted positions. Only then does column induction prove the sparse recurrence equals R. The original Statement, complex-Hermitian scope and no-cancellation condition are unchanged; no downstream propagation is triggered. This repairs the circular proof inference without new prerequisites.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-two-dimensional-poisson-nested-dissection-cost",
+      "model": "gpt-6-luna",
+      "context_sha256": "20e2ef87fa373fb95ab8d442364e5bcf991cb2e461d99095f142972c34518d5b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The positive-definiteness energy identity is correct, including k=1. The supplier cost theorem specifically analyzes exact scalar multifrontal Cholesky, whereas F2 and step 2.1 previously left the factorization unnamed. Both now name that procedure and preserve the supplier storage convention: allocated factor entries, including structural zeros, excluding temporary contribution arrays. Substituting n=k^2 yields the same O(k^3) work and O(k^2 log k) storage for k>=2, with the separate constant one-entry case. The Example interface is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-certified-hermitian-one-and-two-by-two-ldl-kernel",
+      "disposition": "unaffected",
+      "post_sha256": "981b47c84d12e79d097845a5298783fd267c5ca0d1dd3be63cee558237e8cb1b",
+      "review_context_sha256": "2a1367413eb349fc03c40ff78439a3eec0455159d2e13a1f27b88395a2e691cf",
+      "reason": "The failure guard bounds the declared conservative threshold |D^{-1}|c, not |BD^{-1}|. For the proposed D, D^{-1}=[[4/3,2/3],[2/3,4/3]] and c=(1,1), so the exact threshold vector is (2,2)>theta^{-1}(1,1). Cancellation in BD^{-1} does not change that test. The adjugate and determinant bounds give V<=|D^{-1}| entrywise and c^-<=c, hence Vc^-<=|D^{-1}|c. The scalar and two-by-two guard branches, finite budget, normal-range exits and local certificate proof were checked; no edit is required.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-threshold-partial-pivot-sparse-lu",
+      "disposition": "repaired",
+      "post_sha256": "d257f14ada3192cb9ec997fc23ef287c7183a978d31d54d6a05e265ba638d335",
+      "review_context_sha256": "7a340fb3581695b20bd63291f17600d6da97a9bcb425ab1b06930e1d021bc23e",
+      "reason": "The finite branch initialized a stored matrix from arbitrary real entries without a representation rule. It now explicitly requires stored input values and copies them under P; the separate exact branch retains arbitrary real A. No input-rounding error is silently omitted. Pivot selection, prior-L row swaps, multiplication/subtraction order and failure exits are unchanged. The direct residual theorem assumes a successful run of this procedure, so it remains valid with the same original-A identity and rho>=1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-symmetric-indefinite-block-ldl-star",
+      "disposition": "repaired",
+      "post_sha256": "3f5687fade3c68812a37afa3a79b262423496ed92393e3a39c6e550ebf86521c",
+      "review_context_sha256": "e381fd5590d16bd142d2f8df818e90e479d5d7421a0b68ec6106a04e00314dbb",
+      "reason": "The rejection incorrectly says no separate correctness theorem exists: thm-block-ldl-star-residual-with-actual-growth already states exact correctness and proves the block congruence in step 1.1. The confirmed nonfatal defect instead is the digest concern: a union of neighbors of a two-vertex pivot includes pivot vertices, so the literal symbolic update could reconnect deleted vertices. Restricting N(J_r) to R_r fixes it without changing any numerical step or pivot test. The exact factor identity is now cited in Remarks through justified_by, rather than asserted as an instruction. Reexamined its justified_by use after the residual theorem Statement change: the exact-factorization clause is unchanged, and the direct proof now explicitly identifies the stored unit lower factor. The new active/full residual distinction concerns only the rounded estimate.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-elimination-tree-and-column-reach",
+      "disposition": "repaired",
+      "post_sha256": "6c629398f491ae1153686020d6665cb7811a8278d069c329020434f2097b9737",
+      "review_context_sha256": "669b09ed1a0bcf6f47e3d6f36b69836f40068f26ca49e0a91bcd61c6dd255cd5",
+      "reason": "The supplier defines fill and parents conditional on an ordering; it does not select one. The Definition now explicitly fixes pi as an input parameter before constructing its filled graphs, counts and parent paths. This is a nonfatal omitted parameter made recoverable by all existing consumers, which already fix ordered vertices. No column, ancestor or reach convention changes: reach includes its start and ancestors require at least one parent edge. Empty and singleton forests cause no selection issue.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-block-ldl-star-residual-with-actual-growth",
+      "disposition": "repaired",
+      "post_sha256": "7634e5844ac123d5ab6d04612d2ff1905a9bc8b334b2366e292ca356fa55ee58",
+      "review_context_sha256": "db83e23618e44c9b1713dc49b0040e699c2174305930c73960ac2d27fa50cf82",
+      "reason": "The local F in the kernel lemma has active dimension k_r+t_r, so the previous global product W_hat_r F_r W_hat_r* omitted a required embedding. The Statement now defines F_(r,act) and its zero-padded n-by-n F_r, and identity-pads T_hat_r on eliminated coordinates. Proof step 5.1 keeps the active identity separately typed and proves padding preserves the local norm bound. Telescoping gives the same positive-sign full residual and negative-sign trailing Delta residual. Step 1.1 now also explicitly identifies the transformation product with the stored multiplier columns. This is a nonfatal missing embedding convention, not a changed estimate.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-sparse-cholesky-structural-pattern-without-cancellation",
+      "disposition": "repaired",
+      "post_sha256": "603da6a0f2c680442fbcb5c30aadbeee99a1193cd92d0221ad9b93fd9f0265ea",
+      "review_context_sha256": "dac17c792e4280374f002107c18bf408ad3712378e3df1048b52ce4629f39cfd",
+      "reason": "The previous induction equated the sparse column with R before establishing that structurally omitted R entries vanish. The proof now constructs the dense Schur sequence directly from B=RR*, proves all scalar pivots positive, invokes Hermitian Schur-support on that independent sequence, and obtains r_ij=0 at omitted positions. Only then does column induction prove the sparse recurrence equals R. The original Statement, complex-Hermitian scope and no-cancellation condition are unchanged; no downstream propagation is triggered. This repairs the circular proof inference without new prerequisites.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-two-dimensional-poisson-nested-dissection-cost",
+      "disposition": "repaired",
+      "post_sha256": "5cf3a66911dd9894a70980bd2f5491223d0c9968d06dea1d4b18c2a12f9a3dac",
+      "review_context_sha256": "89bdada7a7a261abe9d590dad8d32fb889eeabaf503969fac74c27cceb4059c5",
+      "reason": "The positive-definiteness energy identity is correct, including k=1. The supplier cost theorem specifically analyzes exact scalar multifrontal Cholesky, whereas F2 and step 2.1 previously left the factorization unnamed. Both now name that procedure and preserve the supplier storage convention: allocated factor entries, including structural zeros, excluding temporary contribution arrays. Substituting n=k^2 yields the same O(k^3) work and O(k^2 log k) storage for k>=2, with the separate constant one-entry case. The Example interface is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-interval-hermitian-ldl-inertia-certifier",
+    "alg-multifrontal-cholesky-and-sparse-triangular-solves",
+    "alg-symmetric-indefinite-block-ldl-star",
+    "ex-nonsingular-indefinite-requires-two-by-two-pivot",
+    "lem-elimination-tree-reach-contains-each-filled-neighbor",
+    "thm-block-ldl-star-residual-with-actual-growth",
+    "thm-threshold-sparse-lu-residual-with-growth"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "alg-certified-hermitian-one-and-two-by-two-ldl-kernel",
+      "reason": "The failure guard bounds the declared conservative threshold |D^{-1}|c, not |BD^{-1}|. For the proposed D, D^{-1}=[[4/3,2/3],[2/3,4/3]] and c=(1,1), so the exact threshold vector is (2,2)>theta^{-1}(1,1). Cancellation in BD^{-1} does not change that test. The adjugate and determinant bounds give V<=|D^{-1}| entrywise and c^-<=c, hence Vc^-<=|D^{-1}|c. The scalar and two-by-two guard branches, finite budget, normal-range exits and local certificate proof were checked; no edit is required.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-threshold-partial-pivot-sparse-lu",
+      "severity": "fatal",
+      "defect_type": "other",
+      "reason": "The finite branch initialized a stored matrix from arbitrary real entries without a representation rule. It now explicitly requires stored input values and copies them under P; the separate exact branch retains arbitrary real A. No input-rounding error is silently omitted. Pivot selection, prior-L row swaps, multiplication/subtraction order and failure exits are unchanged. The direct residual theorem assumes a successful run of this procedure, so it remains valid with the same original-A identity and rho>=1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-symmetric-indefinite-block-ldl-star",
+      "severity": "nonfatal",
+      "reason": "The rejection incorrectly says no separate correctness theorem exists: thm-block-ldl-star-residual-with-actual-growth already states exact correctness and proves the block congruence in step 1.1. The confirmed nonfatal defect instead is the digest concern: a union of neighbors of a two-vertex pivot includes pivot vertices, so the literal symbolic update could reconnect deleted vertices. Restricting N(J_r) to R_r fixes it without changing any numerical step or pivot test. The exact factor identity is now cited in Remarks through justified_by, rather than asserted as an instruction.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-elimination-tree-and-column-reach",
+      "severity": "nonfatal",
+      "reason": "The supplier defines fill and parents conditional on an ordering; it does not select one. The Definition now explicitly fixes pi as an input parameter before constructing its filled graphs, counts and parent paths. This is a nonfatal omitted parameter made recoverable by all existing consumers, which already fix ordered vertices. No column, ancestor or reach convention changes: reach includes its start and ancestors require at least one parent edge. Empty and singleton forests cause no selection issue.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-block-ldl-star-residual-with-actual-growth",
+      "severity": "nonfatal",
+      "reason": "The local F in the kernel lemma has active dimension k_r+t_r, so the previous global product W_hat_r F_r W_hat_r* omitted a required embedding. The Statement now defines F_(r,act) and its zero-padded n-by-n F_r, and identity-pads T_hat_r on eliminated coordinates. Proof step 5.1 keeps the active identity separately typed and proves padding preserves the local norm bound. Telescoping gives the same positive-sign full residual and negative-sign trailing Delta residual. Step 1.1 now also explicitly identifies the transformation product with the stored multiplier columns. This is a nonfatal missing embedding convention, not a changed estimate.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-sparse-cholesky-structural-pattern-without-cancellation",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "reason": "The previous induction equated the sparse column with R before establishing that structurally omitted R entries vanish. The proof now constructs the dense Schur sequence directly from B=RR*, proves all scalar pivots positive, invokes Hermitian Schur-support on that independent sequence, and obtains r_ij=0 at omitted positions. Only then does column induction prove the sparse recurrence equals R. The original Statement, complex-Hermitian scope and no-cancellation condition are unchanged; no downstream propagation is triggered. This repairs the circular proof inference without new prerequisites.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-two-dimensional-poisson-nested-dissection-cost",
+      "severity": "nonfatal",
+      "reason": "The positive-definiteness energy identity is correct, including k=1. The supplier cost theorem specifically analyzes exact scalar multifrontal Cholesky, whereas F2 and step 2.1 previously left the factorization unnamed. Both now name that procedure and preserve the supplier storage convention: allocated factor entries, including structural zeros, excluding temporary contribution arrays. Substituting n=k^2 yields the same O(k^3) work and O(k^2 log k) storage for k>=2, with the separate constant one-entry case. The Example interface is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-multifrontal-elimination-equivalence-and-sparse-costs",
+      "severity": "nonfatal",
+      "route": "owner-outside-assigned-item-scope",
+      "path": "items/thm-multifrontal-elimination-equivalence-and-sparse-costs.md",
+      "source_excerpt": "$$O\\!\\left(\\sum_{r=1}^n d_r^2\\right),$$",
+      "affected_use": "Statement indexes front sizes d_r by r=1,...,n while the supplying algorithm defines fronts F_r only for positions 0,...,n-1.",
+      "invalidated_claim": "The literal displayed work and exact allocation sums omit d_0 and refer to undefined d_n. The intended all-front cost theorem is recoverable by reindexing.",
+      "minimality": "Replace both explicit sum ranges by r=0,...,n-1, preserving the proved all-front bounds; the owner must compare the changed Statement and inspect its direct consumers.",
+      "reason": "Confirmed the digest concern against the current Statement and the actual algorithm Definition. This unassigned frontier theorem was not edited or adjudicated; its owner must perform the minimal indexing repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "alg-certified-hermitian-one-and-two-by-two-ldl-kernel",
+      "alg-threshold-partial-pivot-sparse-lu",
+      "alg-symmetric-indefinite-block-ldl-star",
+      "def-elimination-tree-and-column-reach",
+      "thm-block-ldl-star-residual-with-actual-growth",
+      "thm-sparse-cholesky-structural-pattern-without-cancellation",
+      "ex-two-dimensional-poisson-nested-dissection-cost"
+    ],
+    "next_action": "Controller collects this evidence, routes the unassigned indexing finding and consumer metadata mirrors, and performs its ordinary independent rejudgment and certification.",
+    "sources_consulted": [
+      "items/alg-certified-hermitian-one-and-two-by-two-ldl-kernel.md: complete Definition",
+      "items/lem-hermitian-block-ldl-kernel-roundoff-and-reconstruction-residual.md: complete Statement, Facts and Proof",
+      "items/def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma.md: complete Definition",
+      "items/def-standard-relative-floating-point-model-and-unit-roundoff.md: complete Definition",
+      "items/def-permutation-matrix-partial-pivoting-and-pivot-growth.md: complete Definition",
+      "items/def-symmetric-structural-elimination-graph-and-ordering.md: complete Definition",
+      "items/lem-hermitian-schur-support-is-contained-in-structural-fill.md: complete Statement, Facts and Proof",
+      "items/alg-sparse-cholesky-with-invalid-pivot-status.md: complete Definition",
+      "items/thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique.md: exact Statement excerpt in the owning proof contract",
+      "items/def-hermitian-structural-graph-adapter.md: exact Definition excerpt in the owning proof contract",
+      "items/def-operator-norm-on-a-finite-dimensional-inner-product-space.md: exact Definition excerpt in the owning proof contract",
+      "items/thm-nested-dissection-grid-work-and-storage-bounds.md: complete Statement, Facts and Proof",
+      "items/alg-nested-dissection-ordering-on-regular-grids.md: complete Definition",
+      "All seven assigned item carriers, both owning page carriers and the affected direct consumers listed above were examined."
+    ],
+    "unresolved_obligations": [],
+    "consumer_examinations": [
+      {
+        "supplier": "alg-threshold-partial-pivot-sparse-lu",
+        "consumer": "thm-threshold-sparse-lu-residual-with-growth",
+        "path": "items/thm-threshold-sparse-lu-residual-with-growth.md",
+        "affected_use": "Statement assumes a successful run; Proof step 1.1 and step 3.1 use S^(0)=PAP^T exactly.",
+        "disposition": "unchanged_sound",
+        "reason": "Stored-input admissibility makes initialization an exact permutation of original A, so the proof and rho>=1 remain valid. The exact-arithmetic branch still accepts arbitrary real matrices; no conversion perturbation is introduced.",
+        "source_excerpt": "Assume a successful run under the real operation model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], with unit roundoff $u<1$ and every exact intermediate either zero or normal. Let $M=\\max_{i,j}|a_{ij}|>0$, let $S^{(k)}$ be the active matrix at stage $k$ including its current pivot row, and define the actual growth of this run by\n$$\n\\rho=\\frac{\\max_{k,i,j}|S^{(k)}_{ij}|}{M}\\ge1.\n$$\nFor its computed factors and accumulated row permutation, there is a residual $\\Delta A$ such that\n$$\\widehat QPA P^T+\\Delta A=\\widehat L\\widehat U, \\qquad \\max_{i,j}|\\Delta A_{ij}|\\le \\frac{8nu}{\\theta}\\rho M, \\qquad \\|\\Delta A\\|_\\infty\\le \\frac{8n^2u}{\\theta}\\rho M, \\qquad \\|X\\|_",
+        "source_raw_sha256": "bc2d3462985bc3adf3f5a28ae25ec150c6c93d1934876007e678d77360272846",
+        "route": "frontier-owner",
+        "owning_batch": "16",
+        "invalidated_claim": "None: the exact affected mathematical use remains valid for the repaired supplier interface.",
+        "minimality": "No mathematical consumer edit is required; preserve its Statement and proof."
+      },
+      {
+        "supplier": "alg-symmetric-indefinite-block-ldl-star",
+        "consumer": "ex-nonsingular-indefinite-requires-two-by-two-pivot",
+        "path": "items/ex-nonsingular-indefinite-requires-two-by-two-pivot.md",
+        "affected_use": "Verification steps 1.2-2.1 use the exact scalar/pair threshold guards and directly multiply the returned factors.",
+        "disposition": "unchanged_sound",
+        "reason": "No trailing vertices exist in the example, so the corrected neighbor set is empty and its explicit numerical factorization is unchanged.",
+        "source_excerpt": "[F1] [[alg-symmetric-indefinite-block-ldl-star]]: A one-by-one pivot must be nonzero and pass the stated column threshold; a two-by-two pivot must be nonsingular and pass the componentwise inverse-block test.",
+        "source_raw_sha256": "3675e80d723ee630b830af2cc8f74dbf688b0e6123a6dce17540a15931b4d274",
+        "route": "frontier-owner",
+        "owning_batch": "16",
+        "invalidated_claim": "None: the exact affected mathematical use remains valid for the repaired supplier interface.",
+        "minimality": "No mathematical consumer edit is required; preserve its Statement and proof.",
+        "metadata_followup": "The unassigned example contract may quote the former full Definition. Refresh only that exact supplier quote through the controller integration path; no item repair is needed."
+      },
+      {
+        "supplier": "alg-symmetric-indefinite-block-ldl-star",
+        "consumer": "alg-interval-hermitian-ldl-inertia-certifier",
+        "path": "items/alg-interval-hermitian-ldl-inertia-certifier.md",
+        "affected_use": "Definition first runs the exact-arithmetic branch on the Hermitian midpoint with the same ordering, partition and threshold.",
+        "disposition": "unchanged_sound",
+        "reason": "The exact pivot tests and Schur matrices are unchanged. Removing eliminated pivot vertices from the symbolic clique restores the intended graph without affecting candidate acceptance or independent interval updates.",
+        "source_excerpt": "First run the exact-arithmetic branch of [[alg-symmetric-indefinite-block-ldl-star]] on that midpoint with this same ordering, block partition and threshold. If it reports pivot-failure, return `pivot-inconclusive`; this is only failure of this candidate plan.",
+        "source_raw_sha256": "fa66a08aaf5a0a3242ea58e27517d31d0ab6b700401d324614fb5e05af5d0298",
+        "route": "frontier-owner",
+        "owning_batch": "61",
+        "invalidated_claim": "None: the exact affected mathematical use remains valid for the repaired supplier interface.",
+        "minimality": "No mathematical consumer edit is required; preserve its Statement and proof."
+      },
+      {
+        "supplier": "alg-symmetric-indefinite-block-ldl-star",
+        "consumer": "thm-block-ldl-star-residual-with-actual-growth",
+        "path": "items/thm-block-ldl-star-residual-with-actual-growth.md",
+        "affected_use": "Facts F1 and Proof step 1.1 use nonsingular accepted pivots and the C-BD^{-1}B* update to derive block congruence.",
+        "disposition": "assigned_review_completed",
+        "reason": "The update is identical. The correctness proof multiplies the blocks directly, so moving its already proved conclusion out of the procedure introduces no circular premise. Its separate assigned zero-padding defect is now repaired.",
+        "source_excerpt": "[F1] [[alg-symmetric-indefinite-block-ldl-star]]: The declared permutation is applied once; each accepted pivot block is Hermitian and nonsingular, and the exact trailing update is $C-BD^{-1}B^*$.",
+        "source_raw_sha256": "881b9dcf1de63a43e570af6e04c086fc6842fb5a79ed2c68cd22f74e6782de5d",
+        "route": "frontier-owner",
+        "owning_batch": "16",
+        "invalidated_claim": "None: the exact affected mathematical use remains valid for the repaired supplier interface.",
+        "minimality": "No mathematical consumer edit is required; preserve its Statement and proof."
+      },
+      {
+        "supplier": "def-elimination-tree-and-column-reach",
+        "consumer": "lem-elimination-tree-reach-contains-each-filled-neighbor",
+        "path": "items/lem-elimination-tree-reach-contains-each-filled-neighbor.md",
+        "affected_use": "Statement and Facts F1-F3 use C_k, later filled neighbors and the earliest-later-neighbor parent map for given ordered vertices.",
+        "disposition": "unchanged_sound",
+        "reason": "Its Given already fixes zero-based ordered vertices. For that same pi, the parent-chain proof and child-column inclusion use exactly the unchanged definitions.",
+        "source_excerpt": "[F1] [[def-elimination-tree-and-column-reach]]: $\\mathcal C_k=\\{v_k\\}\\cup N_k(v_k)$, and reach follows the supplied parent path.",
+        "source_raw_sha256": "db98125632c16f54a49f737b932f3d152880cd3486b3a4a0302b64b8f67e4c54",
+        "route": "frontier-owner",
+        "owning_batch": "16",
+        "invalidated_claim": "None: the exact affected mathematical use remains valid for the repaired supplier interface.",
+        "minimality": "No mathematical consumer edit is required; preserve its Statement and proof.",
+        "metadata_followup": "Any full-Definition supplier quote in this unassigned consumer contract needs the current explicit-ordering text; this is a metadata mirror, not a mathematical defect."
+      },
+      {
+        "supplier": "def-elimination-tree-and-column-reach",
+        "consumer": "alg-multifrontal-cholesky-and-sparse-triangular-solves",
+        "path": "items/alg-multifrontal-cholesky-and-sparse-triangular-solves.md",
+        "affected_use": "Definition inputs pi=(v_0,...,v_(n-1)) and sets fronts F_r={v_r} union N_r^+ using the supplied column patterns.",
+        "disposition": "unchanged_sound",
+        "reason": "The input ordering now explicitly instantiates the parameter of the supplier; original labels, ordered factor coordinates and child-front inclusion are unchanged.",
+        "source_excerpt": "Use the filled graph and parent forest of [[def-symmetric-structural-elimination-graph-and-ordering]] and the column patterns of [[def-elimination-tree-and-column-reach]]. For each original vertex $v_r$, let its front index set be\n$$F_r=\\{v_r\\}\\cup N_r^+,$$\nwhere $N_r^+$ is its later-neighbor set in the filled graph. Assign each nonzero off-diagonal matrix entry $A_{pq}$ and each diagonal entry $A_{pp}$ once to the front of the endpoint eliminated first (the diagonal goes to its own front); zero off-diagonal entries need no assignment. Treat front arrays as indexed by original-vertex labels, but store the factor in ordered coordinates of $B$: for $v_q\\in F_r\\setminus\\{v_r\\}$, its factor entr",
+        "source_raw_sha256": "295fa2a21f5f0884715dc728d246e331eb12dc30784d11722ee565a2cf4c33c4",
+        "route": "frontier-owner",
+        "owning_batch": "16",
+        "invalidated_claim": "None: the exact affected mathematical use remains valid for the repaired supplier interface.",
+        "minimality": "No mathematical consumer edit is required; preserve its Statement and proof.",
+        "metadata_followup": "Any full-Definition supplier quote in this unassigned consumer contract needs the current explicit-ordering text; this is a metadata mirror, not a mathematical defect."
+      },
+      {
+        "supplier": "thm-block-ldl-star-residual-with-actual-growth",
+        "consumer": "alg-symmetric-indefinite-block-ldl-star",
+        "path": "items/alg-symmetric-indefinite-block-ldl-star.md",
+        "affected_use": "justified_by and Remarks cite the exact-arithmetic correctness clause PAP*=L D_blk L*; no rounded residual formula is used.",
+        "disposition": "unchanged_sound",
+        "reason": "Zero-padding only types the rounded-output residual; exact correctness and empty-case identity remain unchanged and are proved directly in step 1.1. This use was reexamined before refreshing the block review context.",
+        "source_excerpt": "[[thm-block-ldl-star-residual-with-actual-growth]] proves that a successful exact-arithmetic run returns a unit lower block-triangular $L$ and block-diagonal $D_{\\rm blk}$ with $PAP^*=LD_{\\rm blk}L^*$, including the empty case. Its proof derives the block congruence directly from the update instructions; the identity is a correctness result, not an additional instruction.\n",
+        "source_raw_sha256": "a61ea6b73c844a23bc68ec0470c846b5d44072586685a73732dcf5d5711dd0d9",
+        "route": "frontier-owner",
+        "owning_batch": "16",
+        "invalidated_claim": "None: the exact affected mathematical use remains valid for the repaired supplier interface.",
+        "minimality": "No mathematical consumer edit is required; preserve its Statement and proof."
+      }
+    ],
+    "repair_complete": true,
+    "independent_review_of_repairs_claimed": false,
+    "validation": [
+      {
+        "command": "node tools/proof-layout.mjs items/alg-threshold-partial-pivot-sparse-lu.md items/alg-symmetric-indefinite-block-ldl-star.md items/def-elimination-tree-and-column-reach.md items/thm-block-ldl-star-residual-with-actual-growth.md items/thm-sparse-cholesky-structural-pattern-without-cancellation.md items/ex-two-dimensional-poisson-nested-dissection-cost.md",
+        "exit_code": 0,
+        "output": "proof-layout: 6 items, 16 steps, 0 defects\n"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-certified-hermitian-one-and-two-by-two-ldl-kernel.md items/alg-threshold-partial-pivot-sparse-lu.md items/alg-symmetric-indefinite-block-ldl-star.md items/def-elimination-tree-and-column-reach.md items/thm-block-ldl-star-residual-with-actual-growth.md items/thm-sparse-cholesky-structural-pattern-without-cancellation.md items/ex-two-dimensional-poisson-nested-dissection-cost.md --json",
+        "exit_code": 0,
+        "output": "{\n  \"summary\": {\n    \"files\": 7,\n    \"checked\": 3,\n    \"failed\": 0\n  },\n  \"results\": [\n    {\n      \"file\": \"items/alg-certified-hermitian-one-and-two-by-two-ldl-kernel.md\",\n      \"item_id\": \"alg-certified-hermitian-one-and-two-by-two-ldl-kernel\",\n      \"status\": \"not-applicable\"\n    },\n    {\n      \"file\": \"items/alg-threshold-partial-pivot-sparse-lu.md\",\n      \"item_id\": \"alg-threshold-partial-pivot-sparse-lu\",\n      \"status\": \"not-applicable\"\n    },\n    {\n      \"file\": \"items/alg-symmetric-indefinite-block-ldl-star.md\",\n      \"item_id\": \"alg-symmetric-indefinite-block-ldl-star\",\n      \"status\": \"not-applicable\"\n    },\n    {\n      \"file\": \"items/def-elimination-tree-and-column-reach.md\",\n      \"item_id\": \"def-elimination-tree-and-column-reach\",\n      \"status\": \"not-applicable\"\n    },\n    {\n      \"file\": \"items/thm-block-ldl-star-residual-with-actual-growth.md\",\n      \"item_id\": \"thm-block-ldl-star-residual-with-actual-growth\",\n      \"status\": \"pass\",\n      \"strategy\": \"induction\"\n    },\n    {\n      \"file\": \"items/thm-sparse-cholesky-structural-pattern-without-cancellation.md\",\n      \"item_id\": \"thm-sparse-cholesky-structural-pattern-without-cancellation\",\n      \"status\": \"pass\",\n      \"strategy\": \"induction\"\n    },\n    {\n      \"file\": \"items/ex-two-dimensional-poisson-nested-dissection-cost.md\",\n      \"item_id\": \"ex-two-dimensional-poisson-nested-dissection-cost\",\n      \"status\": \"pass\",\n      \"strategy\": \"direct\"\n    }\n  ]\n}\n"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-certified-hermitian-one-and-two-by-two-ldl-kernel.md items/alg-threshold-partial-pivot-sparse-lu.md items/alg-symmetric-indefinite-block-ldl-star.md items/def-elimination-tree-and-column-reach.md items/thm-block-ldl-star-residual-with-actual-growth.md items/thm-sparse-cholesky-structural-pattern-without-cancellation.md items/ex-two-dimensional-poisson-nested-dissection-cost.md --json",
+        "exit_code": 0,
+        "output": "{\n  \"errors\": [],\n  \"warnings\": [],\n  \"checked\": 7\n}\n"
+      },
+      {
+        "command": "node tools/finite-smoke.mjs research/numerical-optimization-dynamics-2026-10-16-batch-16.proof-contracts.json --items ex-two-dimensional-poisson-nested-dissection-cost --json",
+        "exit_code": 0,
+        "output": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"outcomes\": [\n    {\n      \"id\": \"ex-two-dimensional-poisson-nested-dissection-cost\",\n      \"check\": \"numerical-sparse-fixture\",\n      \"ok\": true,\n      \"summary\": \"k=1: one vertex/no edges, A=[4], four exact energy samples, terminal order[0], Cholesky[2] has one factor entry\"\n    }\n  ]\n}\n"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-16.proof-contracts.json --items alg-certified-hermitian-one-and-two-by-two-ldl-kernel,alg-threshold-partial-pivot-sparse-lu,alg-symmetric-indefinite-block-ldl-star,def-elimination-tree-and-column-reach,thm-block-ldl-star-residual-with-actual-growth,thm-sparse-cholesky-structural-pattern-without-cancellation,ex-two-dimensional-poisson-nested-dissection-cost --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; seven assigned contracts checked; zero errors and zero warnings."
+      },
+      {
+        "command": "Read-only comparison of all seven saved review hashes with reviewContextHashes on current disk",
+        "exit_code": 0,
+        "result": "All seven saved item guards and review contexts match; no review hash was refreshed by this check."
+      }
+    ],
+    "validation_history": "The first scoped contract pass exposed the expected stale block-definition quote and changed Cholesky step-use maps. After acquiring the shared-write lock, the six repaired-item rows were reread, synchronized and checked successfully before release. The unchanged kernel row and all unassigned rows were preserved.",
+    "shared_metadata_integration": {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-16.proof-contracts.json",
+      "owner": "step5-v2-initial-r1-u16",
+      "lock_protocol": "acquire/reread/edit/scoped strict contract check/release",
+      "changed_rows": [
+        "alg-threshold-partial-pivot-sparse-lu",
+        "alg-symmetric-indefinite-block-ldl-star",
+        "def-elimination-tree-and-column-reach",
+        "thm-block-ldl-star-residual-with-actual-growth",
+        "thm-sparse-cholesky-structural-pattern-without-cancellation",
+        "ex-two-dimensional-poisson-nested-dissection-cost"
+      ],
+      "manifest_change_required": false,
+      "reason": "No IDs, logical deps, kinds, homes or dependency levels changed. The new block justified_by backlink follows the existing reverse-dependency rule and introduces no logical deps cycle."
+    },
+    "scope_check": {
+      "all_assigned_ids_in_frozen_frontier": true,
+      "all_assigned_statuses_draft": true
+    },
+    "interface_changes": [
+      {
+        "id": "alg-threshold-partial-pivot-sparse-lu",
+        "section": "Definition",
+        "before_clause": "Initialize the active matrix $S^{(0)}=PAP^T$",
+        "after_clause": "In the latter, additionally supply a format from [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]; the entries of $A$ must already be stored values in that format, with no input conversion.",
+        "reason": "Finite-format admissibility and exact-arithmetic input scope are now explicit; no conversion error is introduced."
+      },
+      {
+        "id": "alg-symmetric-indefinite-block-ldl-star",
+        "section": "Definition",
+        "before_clause": "let $N(J_r)$ be the union of the active graph neighbors of the vertices in $J_r$; remove $J_r$",
+        "after_clause": "let $N(J_r)$ be the union of the active graph neighbors of the vertices in $J_r$, restricted to $R_r$; remove $J_r$",
+        "reason": "The symbolic clique cannot include deleted pivot vertices. Exact correctness is retained in the existing theorem and linked in Remarks."
+      },
+      {
+        "id": "def-elimination-tree-and-column-reach",
+        "section": "Definition",
+        "before_clause": "The graph definition [[def-symmetric-structural-elimination-graph-and-ordering]] supplies the ordering $v_0,\\ldots,v_{n-1}$, filled graphs, parent map, and elimination forest.",
+        "after_clause": "fix an elimination ordering $\\pi=(v_0,\\ldots,v_{n-1})$ of its vertices.",
+        "reason": "The ordering is an explicit parameter rather than an output attributed to the supplier."
+      },
+      {
+        "id": "thm-block-ldl-star-residual-with-actual-growth",
+        "section": "Statement",
+        "before_clause": "its full reconstruction residual $F_r$ from the local kernel lemma",
+        "after_clause": "Let $F_{r,\\mathrm{act}}$ be the $(k_r+t_r)\\times(k_r+t_r)$ reconstruction residual from the local kernel lemma, and define $F_r$ by embedding $F_{r,\\mathrm{act}}$ into the current pivot and trailing coordinates, with zero rows and columns on all previously eliminated indices.",
+        "reason": "Every global residual summand is now n-by-n. The estimates and exact-correctness clause are preserved."
+      }
+    ],
+    "unchanged_interfaces": {
+      "alg-certified-hermitian-one-and-two-by-two-ldl-kernel": "Item unchanged from assignment guard.",
+      "thm-sparse-cholesky-structural-pattern-without-cancellation": "Original Statement exactly preserved; only Proof steps 2.1-6.1 changed.",
+      "ex-two-dimensional-poisson-nested-dissection-cost": "Original Example exactly preserved; only F2 and Verification step 2.1 changed. It has no Statement or Definition section."
+    },
+    "page_examinations": [
+      {
+        "path": "library/numerical-linear-algebra-and-approximation/sparse-direct-elimination-and-ordering.md",
+        "affected_use": "The summary describes column patterns and elimination-tree reach, threshold LU failure rules, and the distinction between conditional exact-multiplier residuals and actual rounded-factor reconstruction.",
+        "disposition": "unchanged_sound",
+        "reason": "All those conventions and conclusions are preserved; no page claim relies on an implicit ordering choice or an unpadded matrix product."
+      },
+      {
+        "path": "library/numerical-linear-algebra-and-approximation/sparse-direct-elimination-and-ordering-examples.md",
+        "affected_use": "The summary says nested dissection applies to the five-point Poisson matrix and a nonsingular indefinite matrix may require a two-by-two pivot.",
+        "disposition": "unchanged_sound",
+        "reason": "The example energy proof and explicit two-by-two factorization are preserved; the cost qualification now matches the supplier theorem."
+      }
+    ],
+    "published_consumer_findings": [],
+    "outside_frontier_consumer_maintenance": [],
+    "source_method": "The adjudications use familiar finite-dimensional matrix algebra, graph elimination and the explicitly stated operation model. No external source URL was consulted, and no external-source reading is claimed.",
+    "owner_handoffs": [
+      {
+        "ledger": "canonical-defect-ledger",
+        "action": "record-open-finding",
+        "id": "thm-multifrontal-elimination-equivalence-and-sparse-costs",
+        "severity": "nonfatal",
+        "route": "owner-outside-assigned-item-scope",
+        "path": "items/thm-multifrontal-elimination-equivalence-and-sparse-costs.md",
+        "source_excerpt": "$$O\\!\\left(\\sum_{r=1}^n d_r^2\\right),$$",
+        "affected_use": "Statement indexes front sizes d_r by r=1,...,n while the supplying algorithm defines fronts F_r only for positions 0,...,n-1.",
+        "invalidated_claim": "The literal displayed work and exact allocation sums omit d_0 and refer to undefined d_n. The intended all-front cost theorem is recoverable by reindexing.",
+        "minimality": "Replace both explicit sum ranges by r=0,...,n-1, preserving the proved all-front bounds; the owner must compare the changed Statement and inspect its direct consumers.",
+        "reason": "Confirmed the digest concern against the current Statement and the actual algorithm Definition. This unassigned frontier theorem was not edited or adjudicated; its owner must perform the minimal indexing repair.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    ]
+  }
+}

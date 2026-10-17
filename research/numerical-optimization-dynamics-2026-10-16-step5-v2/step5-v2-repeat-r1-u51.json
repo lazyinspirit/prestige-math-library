@@ -1,0 +1,96 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "51",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "lem-composite-simpson-asymptotic-error-expansion",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "82619327caa2b3e586fe6404098039190d1832b4d90c1d3d7562439d26090f5f",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F6 incorrectly asserts integral additivity for every bounded function, whereas thm-additivity-over-subintervals, Statement clauses 1–2, requires integrability. A bounded Dirichlet function on a nondegenerate interval has no Riemann integral. This is nonfatal because step 1.2 already establishes integrability of f and g=f^(4) from C^4 regularity and F5 before both applications in step 3.1. Replaced boundedness in F6 with Riemann integrability on [a,b] and explicitly included integrability of the restrictions; no proof inference or Statement changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-composite-simpson-asymptotic-error-expansion",
+      "disposition": "repaired",
+      "post_sha256": "1bb2f65c34b73c4226f4374cf5c84aba3c9bb7a542aa5f408c3f82c9b52bb968",
+      "review_context_sha256": "54865303939027906c2e171beee6aeef0e7d8b4b39128134b8170d77c999e097",
+      "reason": "Checked the complete assigned proof, current supplier statements, the complete Simpson kernel argument, owning contract and both page interfaces. F6 now accurately states the integrability prerequisite already met in step 1.2. The kernel has nonpositive quartic pieces and mass (2h)^5/2880; summing (b-a)/(2h) local remainders gives (b-a)epsilon h^4/180. Uniform continuity also bounds the midpoint-sum discrepancy by (b-a)epsilon, giving the final normalized bound (b-a)epsilon/90 and the signed coefficient -1/180, including a zero leading coefficient. Archimedean/Bernoulli reasoning establishes h_k→0. No choice principle or finite-level error guarantee is introduced. This is the repair author's verification, not independent acceptance of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-composite-simpson-asymptotic-error-expansion",
+      "locus": "facts-block",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "F6 omitted the integrability hypothesis of thm-additivity-over-subintervals. Restored it and the restriction-integrability conclusion. Both actual uses in proof step 3.1 already satisfy the hypothesis by step 1.2, so the asymptotic claim and proof remain sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_paths": [
+      "items/lem-composite-simpson-asymptotic-error-expansion.md"
+    ],
+    "interface": "Only the F6 facts paragraph changed. The original Statement, all five proof steps, dependency list, contract quotations and page interfaces are unchanged; there is no downstream propagation event or new prerequisite.",
+    "digest_concern": "The Step-4 digest's cubic-versus-quartic wording concern is already resolved in the assigned carrier: F1 says quartic. No additional edit was needed.",
+    "local_evidence": [
+      "items/thm-additivity-over-subintervals.md: Statement clauses 1–2 and complete proof",
+      "items/lem-simpson-panel-peano-kernel.md: Statement and complete proof",
+      "items/alg-composite-simpson-rule.md: Definition",
+      "Current Statement/Definition sections of every other declared supplier",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-51.proof-contracts.json: assigned contract",
+      "library/numerical-linear-algebra-and-approximation/adaptive-quadrature-and-error-indicators.md",
+      "library/numerical-linear-algebra-and-approximation/adaptive-quadrature-and-error-indicators-examples.md"
+    ],
+    "checks": [
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items lem-composite-simpson-asymptotic-error-expansion",
+        "exit_code": 0,
+        "result": "Run immediately after the completed mathematical review and F6 repair; copied both returned hashes into reviews."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-composite-simpson-asymptotic-error-expansion.md --json",
+        "exit_code": 0,
+        "result": "One proof checked, zero failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-composite-simpson-asymptotic-error-expansion.md --json",
+        "exit_code": 0,
+        "result": "One item checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-51.proof-contracts.json --items lem-composite-simpson-asymptotic-error-expansion --strict --json",
+        "exit_code": 0,
+        "result": "Assigned contract passed with no errors. One shotgun-bracket advisory: step 1.2 cites seven facts while two steps cite none. Each cited fact is used in that step; the two steps use earlier-step conclusions. No mathematical defect or contract edit is required."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-composite-simpson-asymptotic-error-expansion.md",
+        "exit_code": 0,
+        "result": "One item, five steps, zero defects; run once after the final item edit."
+      }
+    ],
+    "published_findings": [],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and ordinary current-context certification/rejudgment routing; no judges, stamps, certificates or round state were written by this worker."
+  }
+}

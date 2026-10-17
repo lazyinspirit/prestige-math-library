@@ -1,0 +1,65 @@
+{
+  "research_only": true,
+  "cycle": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "edits": [
+    {
+      "path": "items/alg-certified-spatial-branch-and-bound.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-sol54-spatial-empty-leaf-invariant-cycle1/before/items/alg-certified-spatial-branch-and-bound.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-owner-sol54-spatial-empty-leaf-invariant-cycle1/proposed/items/alg-certified-spatial-branch-and-bound.md",
+      "require": "Canonical entire current bytes equal before_file immediately before future native adoption; root owns current hashes and rebinding.",
+      "literal_edits": [
+        {
+          "before": "Initialize a leaf ledger with the root box $D_0$, no incumbent, and zero calls.",
+          "after": "Initialize a leaf ledger with the root box $D_0$, no incumbent ($U=+\\infty$), and zero calls."
+        },
+        {
+          "before": "An empty-box proof marks that leaf empty.",
+          "after": "An empty-box proof marks that leaf certified empty; retain it and its proof in the ledger, but never split or refine it and do not require a lower bound for it."
+        },
+        {
+          "before": "A missing or non-finite required field returns inconclusive; it never becomes a bound.",
+          "after": "A finite valid lower bound is required for every evaluated leaf not certified empty. A missing or non-finite required field returns inconclusive; it never becomes a bound."
+        },
+        {
+          "before": "Otherwise put $L=\\min\\{\\ell_B:B\\text{ is not certified empty}\\}$ if every nonempty leaf has a lower bound.",
+          "after": "Otherwise put $L=\\min\\{\\ell_B:B\\text{ is not certified empty}\\}$; this is the minimum of a nonempty finite set of finite lower bounds."
+        },
+        {
+          "before": "Mark any leaf with $\\ell_B\\ge U-\\varepsilon$ closed while retaining its lower bound.",
+          "after": "Mark any leaf not certified empty with $\\ell_B\\ge U-\\varepsilon$ closed while retaining its lower bound."
+        },
+        {
+          "before": "split the nonclosed leaf with least lower bound; ties use creation order.",
+          "after": "split the evaluated leaf that is neither certified empty nor closed with least finite lower bound; ties use creation order."
+        },
+        {
+          "before": "Replace the parent by its two closed children, which cover it.",
+          "after": "Replace the parent by its two closed child boxes, which cover it and are initially pending evaluation."
+        }
+      ]
+    },
+    {
+      "path": "items/alg-bounded-mixed-integer-branch-and-bound.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-sol54-spatial-empty-leaf-invariant-cycle1/before/items/alg-bounded-mixed-integer-branch-and-bound.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-owner-sol54-spatial-empty-leaf-invariant-cycle1/proposed/items/alg-bounded-mixed-integer-branch-and-bound.md",
+      "require": "Canonical entire current bytes equal before_file immediately before future native adoption; root owns current hashes and rebinding.",
+      "literal_edits": [
+        {
+          "before": "Store lower bounds for terminal nodes and prune only nodes with a certified-empty proof;",
+          "after": "Retain certified-empty nodes and their proofs in the ledger, but exclude them from further branching and lower-bound minima; they need no lower bound. Store lower bounds for terminal nodes and prune only nodes with a certified-empty proof;"
+        },
+        {
+          "before": "Otherwise choose an evaluated nonclosed node with least lower bound, breaking ties by creation order.",
+          "after": "Otherwise choose an evaluated node that is neither certified empty nor closed with least finite lower bound, breaking ties by creation order."
+        },
+        {
+          "before": "If a mixed relaxation bound is unavailable or non-finite on a node not certified empty,",
+          "after": "If a mixed relaxation bound is missing, unavailable or non-finite on a node not certified empty,"
+        }
+      ]
+    }
+  ],
+  "no_current_acceptance": true,
+  "integration": "Ordinary genuine native5.5 adjudicator may adopt after actual current review; no canonical or metadata edit by this helper."
+}

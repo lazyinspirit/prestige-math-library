@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "67",
+  "round": 0,
+  "reviewed_items": [
+    "alg-thick-and-implicitly-restarted-arnoldi-with-locking",
+    "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+    "alg-block-lobpcg-with-rank-loss-status",
+    "thm-finite-budget-restarted-and-block-procedures-return-a-status",
+    "lem-generalized-ritz-values-monotone-under-nested-subspaces",
+    "lem-block-principal-angle-squared-ritz-enclosure",
+    "thm-lobpcg-selected-ritz-values-do-not-increase",
+    "alg-shift-invert-and-harmonic-ritz-extraction",
+    "thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status",
+    "thm-shift-invert-map-and-inexact-solve-residual-transfer",
+    "ex-implicit-restart-shift-can-suppress-wanted-component",
+    "ex-clustered-vibration-modes-with-block-lobpcg",
+    "ex-interior-vibration-mode-shift-invert"
+  ],
+  "reviewed_pages": [
+    "restarted-and-block-eigensolvers",
+    "restarted-and-block-eigensolvers-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete batch, approved scope, page context, and actual supplier claims and proofs reviewed. The Arnoldi, LOBPCG, and QZ prerequisite arguments support their uses; local specification repairs are needed.",
+  "findings": [
+    {
+      "id": "alg-thick-and-implicitly-restarted-arnoldi-with-locking",
+      "type": "local",
+      "reason": "Step 1 locks every accepted pair. If implicit mode accepts 0<k<r pairs, step 2 reaches a restart, but step 4 permits implicit restart only when k=0 and step 3 applies only in thick mode, leaving no next action or status. Also, step 4 handles a wrong-length shift list but not the defined unavailable-list result. Specify a valid locked-pair path and map unavailable to shift-count-unavailable."
+    },
+    {
+      "id": "thm-finite-budget-restarted-and-block-procedures-return-a-status",
+      "type": "local",
+      "reason": "The statement allows projected eigensolves and finite-dimensional operations to return failure statuses, but the algorithms do not map those failures to listed outputs; step 1.1 assumes every failure branch does. Restrict the hypothesis to value-returning exact primitives or specify failure propagation. The theorem also needs the implicit-restart gap above resolved."
+    },
+    {
+      "id": "thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status",
+      "type": "local",
+      "reason": "A1 permits projected eigensolves, QR, arithmetic, and other non-QZ operations to return failure statuses, but the algorithm maps only solve and QZ failures. Restrict the hypothesis to value-returning primitives except for explicitly handled failures, or specify their status mappings."
+    },
+    {
+      "id": "ex-interior-vibration-mode-shift-invert",
+      "type": "local",
+      "reason": "Verification step 1.1 adds a harmonic-extraction run, but the example does not specify that run's QZ sweep budget and tolerance. State the separate harmonic invocation and its QZ inputs, or remove that extra algorithm claim."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+      "decision": "accept",
+      "reason": "Its exact identity applies to the no-lock implicit-restart branch and does not rely on the undefined locked-pair case."
+    },
+    {
+      "id": "thm-finite-budget-restarted-and-block-procedures-return-a-status",
+      "decision": "repair",
+      "reason": "Its termination claim consumes the incomplete implicit-restart branch and the unmapped primitive-failure cases identified above."
+    },
+    {
+      "id": "ex-implicit-restart-shift-can-suppress-wanted-component",
+      "decision": "accept",
+      "reason": "The worked implicit-restart cycles have no accepted pairs before restart; the polynomial and component-ratio calculations check out."
+    },
+    {
+      "id": "alg-golub-welsch-certified-node-and-weight-enclosures",
+      "decision": "accept",
+      "reason": "This outside-batch consumer invokes thick mode on a full-dimensional Jacobi matrix and returns before any restart, so the implicit-mode repair does not affect its use."
+    },
+    {
+      "id": "restarted-and-block-eigensolvers",
+      "decision": "accept",
+      "reason": "The overview remains accurate once the algorithm specifies the missing restart outcome."
+    },
+    {
+      "id": "restarted-and-block-eigensolvers-examples",
+      "decision": "accept",
+      "reason": "The page summary's shift-invert example remains supported; it makes no separate harmonic-run claim."
+    }
+  ]
+}

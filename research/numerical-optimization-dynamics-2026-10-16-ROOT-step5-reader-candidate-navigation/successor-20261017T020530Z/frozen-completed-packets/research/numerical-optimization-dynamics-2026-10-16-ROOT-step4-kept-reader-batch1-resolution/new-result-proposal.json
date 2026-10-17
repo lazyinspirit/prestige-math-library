@@ -1,0 +1,326 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "research_only": true,
+  "status": "NEW RESULT PROPOSAL ONLY, not authored/certified in native Step5",
+  "proposed_id": "lem-two-product-kahan-neumaier-termination-and-status",
+  "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/lem-two-product-kahan-neumaier-termination-and-status.md",
+  "canonical_target_if_natively_created": "items/lem-two-product-kahan-neumaier-termination-and-status.md",
+  "guard": "Canonical target must be absent before native creation. No existing authorship, owner-create receipt, native route, manifest membership, dispatch, or acceptance is asserted.",
+  "purpose": "Preserve and relocate termination proofs from three algorithm carriers without changing their Definitions or deleting their valid property claims.",
+  "suggested_home": "finite-precision-direct-factorizations A page, after the three analyzed algorithms; native Step5 owner must authorize/create and integrate.",
+  "required_native_work": [
+    "Create actual Step5 authoring obligation and route, preserving original evidence.",
+    "Integrate lemma into current manifest, page and proof-contract inventory with deps listed in proposed source; check capacity and native creation authority.",
+    "Only after lemma exists, apply the three proposed algorithm-only proof/metadata relocations.",
+    "Bind current sources and full consumer context, run actual reviews and recertification, compute hashes and authorized checks under root ownership."
+  ],
+  "proof_contract_proposal": {
+    "citations": [
+      {
+        "fact": "F1",
+        "source": "alg-two-product-fma-error-free-transform",
+        "source_section": "Definition",
+        "quote": "For real floating-point a,b compute p=fl(ab), then e=fma(a,b,-p). Return range-failure if the product overflows, the exact FMA residual is nonzero subnormal or overflow, or another operationwise range condition fails; otherwise return (p,e). The procedure uses one multiplication and one fused multiply-add and terminates. Exact recovery is claimed only if ab-p is representable as zero or a normal number.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F2",
+        "source": "alg-kahan-compensated-summation",
+        "source_section": "Definition",
+        "quote": "For a finite list of $n\\ge0$ real floating-point inputs $x_1,\\ldots,x_n$, initialize $s_0=c_0=0$. For $i=1,\\ldots,n$ compute $y_i=\\operatorname{fl}(x_i-c_{i-1})$, $s_i=\\operatorname{fl}(s_{i-1}+y_i)$, $d_i=\\operatorname{fl}(s_i-s_{i-1})$, and $c_i=\\operatorname{fl}(d_i-y_i)$, in that order. Return $s_n$, or the first range-failure and its operation index. There are $4n$ rounded operations, so the finite loop terminates. Its data-dependent error identity is proved separately.",
+        "uses": [
+          "1.2"
+        ]
+      },
+      {
+        "fact": "F3",
+        "source": "alg-neumaier-compensated-summation",
+        "source_section": "Definition",
+        "quote": "For a finite list of $n\\ge0$ real floating-point inputs $x_1,\\ldots,x_n$, initialize $s_0=c_0=0$. For each $i=1,\\ldots,n$, set $t_i=\\operatorname{fl}(s_{i-1}+x_i)$. If $|s_{i-1}|\\ge|x_i|$, set $q_i=\\operatorname{fl}(s_{i-1}-t_i)$ and $a_i=\\operatorname{fl}(q_i+x_i)$; otherwise set $q_i=\\operatorname{fl}(x_i-t_i)$ and $a_i=\\operatorname{fl}(q_i+s_{i-1})$. Then set $c_i=\\operatorname{fl}(c_{i-1}+a_i)$ and $s_i=t_i$. Return $\\operatorname{fl}(s_n+c_n)$, or the first range-failure and operation index. The branch test is defined for all real inputs and the loop terminates.",
+        "uses": [
+          "1.3"
+        ]
+      },
+      {
+        "fact": "F4",
+        "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+        "source_section": "Definition",
+        "quote": "At each precision, let the representable set, normal range, and unit roundoff be an instance of [[def-standard-relative-floating-point-model-and-unit-roundoff]] specialized to a finite binary format of integer precision $p\\ge2$ and integer normal-exponent bounds $j_{\\min}\\le j\\le j_{\\max}$. Its normal values are $\\pm m2^{j-p+1}$ for integers $2^{p-1}\\le m<2^p$ and $j_{\\min}\\le j\\le j_{\\max}$, with $N_{\\min}=2^{j_{\\min}}$ and $N_{\\max}=(2^p-1)2^{j_{\\max}-p+1}$. The rounding rule is round-to-nearest, ties-to-even by the parity of the normalized significand. Each precision in a mixed-precision procedure has its own format, range, and valid unit-roundoff bound. On every real exact result that is zero or normal, $\\operatorname{fl}$ uses this rule; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range $x$, $\\operatorname{fl}(\\sqrt{x})$ is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression $ab+c$; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+        "uses": [
+          "1.1",
+          "1.2",
+          "1.3"
+        ]
+      }
+    ],
+    "derivations": [
+      {
+        "id": "derive-1.1",
+        "claim": "By",
+        "step": "1.1",
+        "inputs": [
+          "F1]",
+          "TwoProduct has just the ordered multiply and FMA. By [F4]",
+          "either the multiplication fails and the procedure returns",
+          "or it supplies a finite $p$ for the FMA",
+          "which returns a finite $e$ or a failure. The extra range checks are finite. Hence at most two rounded operations are attempted",
+          "and if neither fails the specified pair is returned. [given",
+          "F1",
+          "F4",
+          "algebra"
+        ]
+      },
+      {
+        "id": "derive-1.2",
+        "claim": "For Kahan, the initial state is finite. Each loop index executes the fixed four-operation schedule in",
+        "step": "1.2",
+        "inputs": [
+          "F2]; [F4] either supplies the finite state for the next operation or returns a failure immediately. Induction over the $n$ indices therefore gives termination after at most $4n$ attempted rounded operations",
+          "with the specified output if all succeed. If $n=0$",
+          "there is no loop operation and the returned $s_0$ is exactly zero. [given",
+          "F2",
+          "F4",
+          "induction",
+          "algebra"
+        ]
+      },
+      {
+        "id": "derive-1.3",
+        "claim": "For Neumaier, every reached state and input is finite, so its magnitude comparison selects exactly one of the branches in",
+        "step": "1.3",
+        "inputs": [
+          "F3]",
+          "including equality in the first branch. Either branch has exactly the four ordered rounded operations described there",
+          "and [F4] supplies a next finite state or an immediate failure. Induction over the $n$ indices",
+          "followed by the one final addition",
+          "bounds attempted operations by $4n+1$ and proves the specified output-or-failure return. At $n=0$",
+          "that final addition is the exact zero $0+0$ and returns zero by [F4]. [given",
+          "F3",
+          "F4",
+          "induction",
+          "algebra"
+        ]
+      },
+      {
+        "id": "derive-2.1",
+        "claim": "On a branch with no failure, all scheduled operations in steps 1.1\u20131.3 are executed, so the corresponding counts are exactly $2$, $4n$, and $4n+1$. Each failure branch exits at the first prescribed failure and cannot execute more operations. These steps establish all stated termination, status, count, and empty-input conclusions without assuming arithmetic success.",
+        "step": "2.1",
+        "inputs": [
+          "step 1.1",
+          "step 1.2",
+          "step 1.3",
+          "algebra"
+        ]
+      }
+    ],
+    "boundaries": [
+      {
+        "case": "empty",
+        "status": "checked",
+        "evidence": "Kahan n=0 has no rounded operations; Neumaier n=0 executes exact fl(0+0)=0."
+      },
+      {
+        "case": "zero",
+        "status": "checked",
+        "evidence": "All-zero list uses exact zeros and returns zero. TwoProduct zero product/residual are admissible."
+      },
+      {
+        "case": "one",
+        "status": "checked",
+        "evidence": "Kahan one index has four operations; Neumaier one index has four and a final addition."
+      },
+      {
+        "case": "degenerate",
+        "status": "checked",
+        "evidence": "Either comparison branch and equality are covered; range failures are returned rather than assumed absent."
+      },
+      {
+        "case": "endpoints",
+        "status": "checked",
+        "evidence": "Normal-range endpoint failure is allowed; no success claim at a forbidden result."
+      },
+      {
+        "case": "nonempty-choice",
+        "status": "not_applicable",
+        "reason": "No set-theoretic choice or existence search."
+      },
+      {
+        "case": "iff-forward",
+        "status": "not_applicable",
+        "reason": "No if-and-only-if assertion is made."
+      },
+      {
+        "case": "iff-reverse",
+        "status": "not_applicable",
+        "reason": "No if-and-only-if assertion is made."
+      }
+    ],
+    "routine_steps": [],
+    "risk_review": {
+      "status": "complete",
+      "reviewer": "ROOT delegated kept-batch1 reviewer; research proposal review only, not native mathematical acceptance",
+      "notes": "Finite deterministic schedule checked independently. TwoProduct has no loop; Kahan and Neumaier have four operations per index, Neumaier one final addition. Both n=0 returns are exact zero. Does not promise successful arithmetic or a new error bound. All native authoring, independent review and certification remain owed."
+    }
+  },
+  "verification": "No validators, hashes, tests, gates, native dispatch, commits, or certification performed.",
+  "future_contract_file_proposal": {
+    "version": 1,
+    "scope": [
+      "lem-two-product-kahan-neumaier-termination-and-status"
+    ],
+    "contracts": {
+      "lem-two-product-kahan-neumaier-termination-and-status": {
+        "citations": [
+          {
+            "fact": "F1",
+            "source": "alg-two-product-fma-error-free-transform",
+            "source_section": "Definition",
+            "quote": "For real floating-point a,b compute p=fl(ab), then e=fma(a,b,-p). Return range-failure if the product overflows, the exact FMA residual is nonzero subnormal or overflow, or another operationwise range condition fails; otherwise return (p,e). The procedure uses one multiplication and one fused multiply-add and terminates. Exact recovery is claimed only if ab-p is representable as zero or a normal number.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "alg-kahan-compensated-summation",
+            "source_section": "Definition",
+            "quote": "For a finite list of $n\\ge0$ real floating-point inputs $x_1,\\ldots,x_n$, initialize $s_0=c_0=0$. For $i=1,\\ldots,n$ compute $y_i=\\operatorname{fl}(x_i-c_{i-1})$, $s_i=\\operatorname{fl}(s_{i-1}+y_i)$, $d_i=\\operatorname{fl}(s_i-s_{i-1})$, and $c_i=\\operatorname{fl}(d_i-y_i)$, in that order. Return $s_n$, or the first range-failure and its operation index. There are $4n$ rounded operations, so the finite loop terminates. Its data-dependent error identity is proved separately.",
+            "uses": [
+              "1.2"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "alg-neumaier-compensated-summation",
+            "source_section": "Definition",
+            "quote": "For a finite list of $n\\ge0$ real floating-point inputs $x_1,\\ldots,x_n$, initialize $s_0=c_0=0$. For each $i=1,\\ldots,n$, set $t_i=\\operatorname{fl}(s_{i-1}+x_i)$. If $|s_{i-1}|\\ge|x_i|$, set $q_i=\\operatorname{fl}(s_{i-1}-t_i)$ and $a_i=\\operatorname{fl}(q_i+x_i)$; otherwise set $q_i=\\operatorname{fl}(x_i-t_i)$ and $a_i=\\operatorname{fl}(q_i+s_{i-1})$. Then set $c_i=\\operatorname{fl}(c_{i-1}+a_i)$ and $s_i=t_i$. Return $\\operatorname{fl}(s_n+c_n)$, or the first range-failure and operation index. The branch test is defined for all real inputs and the loop terminates.",
+            "uses": [
+              "1.3"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+            "source_section": "Definition",
+            "quote": "At each precision, let the representable set, normal range, and unit roundoff be an instance of [[def-standard-relative-floating-point-model-and-unit-roundoff]] specialized to a finite binary format of integer precision $p\\ge2$ and integer normal-exponent bounds $j_{\\min}\\le j\\le j_{\\max}$. Its normal values are $\\pm m2^{j-p+1}$ for integers $2^{p-1}\\le m<2^p$ and $j_{\\min}\\le j\\le j_{\\max}$, with $N_{\\min}=2^{j_{\\min}}$ and $N_{\\max}=(2^p-1)2^{j_{\\max}-p+1}$. The rounding rule is round-to-nearest, ties-to-even by the parity of the normalized significand. Each precision in a mixed-precision procedure has its own format, range, and valid unit-roundoff bound. On every real exact result that is zero or normal, $\\operatorname{fl}$ uses this rule; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range $x$, $\\operatorname{fl}(\\sqrt{x})$ is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression $ab+c$; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+            "uses": [
+              "1.1",
+              "1.2",
+              "1.3"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "derive-1.1",
+            "claim": "By",
+            "step": "1.1",
+            "inputs": [
+              "F1]",
+              "TwoProduct has just the ordered multiply and FMA. By [F4]",
+              "either the multiplication fails and the procedure returns",
+              "or it supplies a finite $p$ for the FMA",
+              "which returns a finite $e$ or a failure. The extra range checks are finite. Hence at most two rounded operations are attempted",
+              "and if neither fails the specified pair is returned. [given",
+              "F1",
+              "F4",
+              "algebra"
+            ]
+          },
+          {
+            "id": "derive-1.2",
+            "claim": "For Kahan, the initial state is finite. Each loop index executes the fixed four-operation schedule in",
+            "step": "1.2",
+            "inputs": [
+              "F2]; [F4] either supplies the finite state for the next operation or returns a failure immediately. Induction over the $n$ indices therefore gives termination after at most $4n$ attempted rounded operations",
+              "with the specified output if all succeed. If $n=0$",
+              "there is no loop operation and the returned $s_0$ is exactly zero. [given",
+              "F2",
+              "F4",
+              "induction",
+              "algebra"
+            ]
+          },
+          {
+            "id": "derive-1.3",
+            "claim": "For Neumaier, every reached state and input is finite, so its magnitude comparison selects exactly one of the branches in",
+            "step": "1.3",
+            "inputs": [
+              "F3]",
+              "including equality in the first branch. Either branch has exactly the four ordered rounded operations described there",
+              "and [F4] supplies a next finite state or an immediate failure. Induction over the $n$ indices",
+              "followed by the one final addition",
+              "bounds attempted operations by $4n+1$ and proves the specified output-or-failure return. At $n=0$",
+              "that final addition is the exact zero $0+0$ and returns zero by [F4]. [given",
+              "F3",
+              "F4",
+              "induction",
+              "algebra"
+            ]
+          },
+          {
+            "id": "derive-2.1",
+            "claim": "On a branch with no failure, all scheduled operations in steps 1.1\u20131.3 are executed, so the corresponding counts are exactly $2$, $4n$, and $4n+1$. Each failure branch exits at the first prescribed failure and cannot execute more operations. These steps establish all stated termination, status, count, and empty-input conclusions without assuming arithmetic success.",
+            "step": "2.1",
+            "inputs": [
+              "step 1.1",
+              "step 1.2",
+              "step 1.3",
+              "algebra"
+            ]
+          }
+        ],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "checked",
+            "evidence": "Kahan n=0 has no rounded operations; Neumaier n=0 executes exact fl(0+0)=0."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "All-zero list uses exact zeros and returns zero. TwoProduct zero product/residual are admissible."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "Kahan one index has four operations; Neumaier one index has four and a final addition."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "Either comparison branch and equality are covered; range failures are returned rather than assumed absent."
+          },
+          {
+            "case": "endpoints",
+            "status": "checked",
+            "evidence": "Normal-range endpoint failure is allowed; no success claim at a forbidden result."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "not_applicable",
+            "reason": "No set-theoretic choice or existence search."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "No if-and-only-if assertion is made."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "No if-and-only-if assertion is made."
+          }
+        ],
+        "routine_steps": [],
+        "risk_review": {
+          "status": "complete",
+          "reviewer": "ROOT delegated kept-batch1 reviewer; research proposal review only, not native mathematical acceptance",
+          "notes": "Finite deterministic schedule checked independently. TwoProduct has no loop; Kahan and Neumaier have four operations per index, Neumaier one final addition. Both n=0 returns are exact zero. Does not promise successful arithmetic or a new error bound. All native authoring, independent review and certification remain owed."
+        }
+      }
+    }
+  }
+}

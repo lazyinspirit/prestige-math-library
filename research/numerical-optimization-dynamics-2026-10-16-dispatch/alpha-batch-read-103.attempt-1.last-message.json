@@ -1,0 +1,365 @@
+{
+  "group": "af",
+  "batches": ["103"],
+  "pages_read": [
+    "simulation-gradient-estimation-and-simultaneous-perturbation",
+    "simulation-gradient-estimation-and-simultaneous-perturbation-examples"
+  ],
+  "items_read": [
+    "cex-uniform-payoff-convergence-does-not-imply-gradient-convergence",
+    "def-simulation-gradient-objective-and-payoff-oracle",
+    "alg-two-evaluation-spsa-gradient-estimator",
+    "def-coupled-simulation-finite-difference-estimator",
+    "def-pathwise-simulation-gradient-estimator",
+    "thm-likelihood-ratio-gradient-identity-on-fixed-support",
+    "prop-coupled-simulation-difference-variance-identity",
+    "thm-pathwise-simulation-gradient-is-unbiased-under-envelope",
+    "thm-spsa-gradient-bias-is-second-order",
+    "thm-spsa-gradient-has-inverse-step-variance-bound",
+    "thm-spsa-stochastic-approximation-has-stationary-limit-points",
+    "thm-discrete-sde-adjoint-gradient-interchange",
+    "ex-moving-support-score-estimator-misses-boundary-term",
+    "ex-two-call-spsa-biological-simulator",
+    "ex-coupled-differences-reduce-variance",
+    "ex-gaussian-reparameterization-and-score-gradient"
+  ],
+  "conventions": [
+    {
+      "convention": "Simulation payoffs are jointly measurable and integrable at each parameter; oracle calls are individually integrable and unbiased, and their coupling is specified separately.",
+      "fixed_by": "def-simulation-gradient-objective-and-payoff-oracle",
+      "matters_for": [
+        "alg-two-evaluation-spsa-gradient-estimator",
+        "def-coupled-simulation-finite-difference-estimator",
+        "thm-pathwise-simulation-gradient-is-unbiased-under-envelope"
+      ]
+    },
+    {
+      "convention": "SPSA uses independent symmetric perturbation coordinates, nonzero almost surely, c > 0, and admissible perturbed parameters almost surely; invalid draws return zero before any oracle calls.",
+      "fixed_by": "alg-two-evaluation-spsa-gradient-estimator",
+      "matters_for": [
+        "thm-spsa-gradient-bias-is-second-order",
+        "thm-spsa-gradient-has-inverse-step-variance-bound",
+        "thm-spsa-stochastic-approximation-has-stationary-limit-points",
+        "ex-two-call-spsa-biological-simulator"
+      ]
+    },
+    {
+      "convention": "Scalar gradients are Euclidean column vectors, and vector expectations are coordinatewise.",
+      "fixed_by": "thm-pathwise-simulation-gradient-is-unbiased-under-envelope",
+      "matters_for": [
+        "thm-likelihood-ratio-gradient-identity-on-fixed-support",
+        "thm-spsa-gradient-bias-is-second-order",
+        "thm-discrete-sde-adjoint-gradient-interchange"
+      ]
+    },
+    {
+      "convention": "The score identity uses a fixed sigma-finite dominating measure, common support outside one common null set, and an integrable density-derivative envelope on a neighborhood.",
+      "fixed_by": "thm-likelihood-ratio-gradient-identity-on-fixed-support",
+      "matters_for": [
+        "ex-moving-support-score-estimator-misses-boundary-term",
+        "ex-gaussian-reparameterization-and-score-gradient"
+      ]
+    },
+    {
+      "convention": "Conditional expectations and variances assume AC; vector conditional variance is the sum of scalar coordinate conditional variances.",
+      "fixed_by": "thm-spsa-gradient-has-inverse-step-variance-bound",
+      "matters_for": [
+        "thm-spsa-stochastic-approximation-has-stationary-limit-points"
+      ]
+    },
+    {
+      "convention": "The stochastic adjoint permits N = 0, defines its adjoint integrand as zero on the common measurable exceptional null set, and does not assume completeness of the probability space.",
+      "fixed_by": "thm-discrete-sde-adjoint-gradient-interchange",
+      "matters_for": [
+        "thm-discrete-sde-adjoint-gradient-interchange"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-two-evaluation-spsa-gradient-estimator",
+      "statement": "For an admissible draw, call the oracle at θ + cΔ and θ − cΔ and return Ĝ_i = (Y⁺ − Y⁻)/(2cΔ_i); an invalid draw returns zero without oracle calls.",
+      "used_by": [
+        "thm-spsa-gradient-bias-is-second-order",
+        "thm-spsa-gradient-has-inverse-step-variance-bound",
+        "thm-spsa-stochastic-approximation-has-stationary-limit-points",
+        "ex-two-call-spsa-biological-simulator"
+      ]
+    },
+    {
+      "id": "def-simulation-gradient-objective-and-payoff-oracle",
+      "statement": "A simulation payoff is jointly measurable and integrable at each parameter; J(θ) = E[H(θ,·)]. A payoff-oracle call at θ returns an integrable real random variable Y(θ) with E[Y(θ)] = J(θ).",
+      "used_by": [
+        "def-pathwise-simulation-gradient-estimator",
+        "def-coupled-simulation-finite-difference-estimator",
+        "alg-two-evaluation-spsa-gradient-estimator",
+        "thm-likelihood-ratio-gradient-identity-on-fixed-support",
+        "thm-discrete-sde-adjoint-gradient-interchange"
+      ]
+    },
+    {
+      "id": "thm-pathwise-simulation-gradient-is-unbiased-under-envelope",
+      "statement": "For the jointly measurable simulation payoff, a common almost-sure C¹ neighborhood, measurable gradient sections, a common integrable gradient envelope, and a square-integrable gradient at θ₀ imply Fréchet differentiability of J at θ₀, ∇J(θ₀) = E[∇θH(θ₀,·)], and finite coordinate variances.",
+      "used_by": [
+        "thm-discrete-sde-adjoint-gradient-interchange",
+        "ex-gaussian-reparameterization-and-score-gradient"
+      ]
+    },
+    {
+      "id": "thm-spsa-gradient-bias-is-second-order",
+      "statement": "Under AC, the stated C³ segment-neighborhood bound, independent symmetric nonzero perturbations with the stated reciprocal moments, conditionally unbiased calls, and weighted noise integrability, |E[Ĝ_i] − ∂_i f(θ)| ≤ M₃c²q_i/6 and the vector bias is at most M₃c²(Σ_i q_i²)^(1/2)/6.",
+      "used_by": [
+        "thm-spsa-stochastic-approximation-has-stationary-limit-points"
+      ]
+    },
+    {
+      "id": "thm-spsa-gradient-has-inverse-step-variance-bound",
+      "statement": "Under AC and the deterministic weighted conditional second-moment bound B, E[‖Ĝ‖₂² | F] ≤ B/(2c²) and Var(Ĝ | F) ≤ B/(2c²).",
+      "used_by": [
+        "thm-spsa-stochastic-approximation-has-stationary-limit-points"
+      ]
+    },
+    {
+      "id": "prop-coupled-simulation-difference-variance-identity",
+      "statement": "For square-integrable outputs with any specified joint law and h > 0, Var((Y⁺ − Y⁻)/(2h)) = (Var(Y⁺) + Var(Y⁻) − 2Cov(Y⁺,Y⁻))/(4h²).",
+      "used_by": [
+        "ex-coupled-differences-reduce-variance"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-probability-measure",
+      "used_for": "Probability-space and unit-mass conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Payoff objectives and integrable expectations.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit assumptions inherited by conditional expectations, scores, normal laws, and Doob convergence.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Choice hypothesis of the Lebesgue change-of-variables interface.",
+      "opened": true
+    },
+    {
+      "id": "thm-choice-implies-dependent-implies-countable-choice",
+      "used_for": "Obtaining Countable Choice from AC in Gaussian examples.",
+      "opened": true
+    },
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Measurability of simulation inputs and deterministic counterexample outputs.",
+      "opened": true
+    },
+    {
+      "id": "def-law-or-distribution-of-a-random-element",
+      "used_for": "Output laws in the weak-convergence counterexample.",
+      "opened": true
+    },
+    {
+      "id": "def-dirac-measure",
+      "used_for": "Laws of deterministic payoffs.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-derivatives",
+      "used_for": "Derivative n at zero in the uniform-payoff counterexample.",
+      "opened": true
+    },
+    {
+      "id": "def-likelihood-density",
+      "used_for": "Selected density representatives relative to a fixed dominating measure.",
+      "opened": true
+    },
+    {
+      "id": "def-score-and-fisher-information",
+      "used_for": "Score definition, positive-density convention, and representative qualifications.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Pathwise derivatives, directional SPSA derivatives, and tangent/adjoint recursions.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Integral remainder representations along parameter segments.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Riemann integrability of continuous derivatives along compact segments.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Fréchet derivative interchange under common integrable envelopes.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Column-gradient, pairing, and Euclidean norm conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Derivative remainder estimates and the norm bound for vector expectations.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-density",
+      "used_for": "Density integration in score identities and Gaussian examples; signed uses are reduced to positive and negative parts.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Signed density derivative calculations.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Expectation expansions, symmetry calculations, and remainder bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Square-integrability, variance, and covariance conventions.",
+      "opened": true
+    },
+    {
+      "id": "lem-variance-and-covariance-identities-for-random-variables",
+      "used_for": "Variance expansions and coupled-output covariance calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-expectation",
+      "used_for": "Integration against output laws, symmetry, and scaled Gaussian moments.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Zero cross-coordinate SPSA means and zero covariance for independent simulation noises.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-as-an-ae-class",
+      "used_for": "Almost-sure interpretation and AC assumptions of conditional moments.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Conditioning a measurable integrable payoff value on the perturbation.",
+      "opened": true
+    },
+    {
+      "id": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+      "used_for": "Conditional linearity, monotonicity, and expectation preservation.",
+      "opened": true
+    },
+    {
+      "id": "thm-taking-out-what-is-known",
+      "used_for": "Taking reciprocal perturbations and adapted gradient factors outside conditional expectations after product integrability checks.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-variance",
+      "used_for": "Conditional variance as a nonnegative almost-sure class.",
+      "opened": true
+    },
+    {
+      "id": "lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula",
+      "used_for": "Conditional second-moment decomposition and variance bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Gaussian probability laws and affine representations.",
+      "opened": true
+    },
+    {
+      "id": "lem-gaussian-even-moment-bound-for-brownian-increments",
+      "used_for": "Second and fourth standard-normal moments in the examples.",
+      "opened": true
+    },
+    {
+      "id": "lem-normal-location-scale-density",
+      "used_for": "Gaussian location density and the N(0,2) envelope comparison.",
+      "opened": true
+    },
+    {
+      "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "used_for": "Reflection invariance used to establish Gaussian symmetry.",
+      "opened": true
+    },
+    {
+      "id": "thm-composition-with-borel-functions-preserves-measurability",
+      "used_for": "Measurability of the finite stochastic simulation graph.",
+      "opened": true
+    },
+    {
+      "id": "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+      "used_for": "Measurable tuples of parameters, states, and random inputs.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurable payoff sums and derivative difference quotients.",
+      "opened": true
+    },
+    {
+      "id": "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+      "used_for": "Measurable derivative versions obtained as limits of modified difference quotients.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Finite simulation-state and tangent recursions.",
+      "opened": true
+    },
+    {
+      "id": "thm-doob-submartingale-convergence",
+      "used_for": "Checking the convergence interface underlying the cited Robbins–Siegmund supplier.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-two-evaluation-spsa-gradient-estimator",
+      "concern": "The Definition inputs only 'a payoff oracle from [[def-simulation-gradient-objective-and-payoff-oracle]]' before evaluating it at θ ± cΔ. That supplier requires an integrable unbiased random variable at each fixed parameter, but no jointly measurable oracle realization or measurable probability kernel. These conditions do not ensure that the random-parameter calls, hence the returned estimator, are measurable. For example, take Θ = R, H = J = 0, θ = 0, c = 1, Δ uniform on [-2,-1] ∪ [1,2], and an independent centered Rademacher simulator input Z. For a non-Lebesgue-measurable A ⊂ [1,2], define the oracle family Y(η,Z) = 1_A(η)Z. Every fixed-η call is integrable and unbiased, and all algorithm input conditions hold. With shared Z, the returned output is (1_A(Δ) − 1_A(−Δ))Z/(2Δ), whose nonzero event is {Δ ∈ A ∪ (−A)}, which is not measurable. The algorithm therefore needs an explicit measurability condition on random-parameter oracle calls or on the oracle realization. The moment theorems separately assume conditional expectations of their outputs and are not refuted by this example.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "thm-discrete-sde-adjoint-gradient-interchange",
+      "concern": "Proof 1.1 says to apply the chain rule to 'u_{k+1}=Ψ_k(u_k,θ₀,ξ_{k+1})' while deriving Dθu_{k+1}=D_uΨ_k Dθu_k + DθΨ_k. The parameter must remain variable in the composition before evaluating its derivative at θ₀; freezing that argument literally removes the displayed direct parameter derivative. The intended composition is explicit in the Statement and the rest of the proof, so this is a local notation correction.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "simulation-gradient-estimation-and-simultaneous-perturbation",
+      "to": "numerical-differentiation-and-derivative-error-control",
+      "faithful": true,
+      "note": "The central-difference supplier assumes C³ regularity on a neighborhood of the full segment and gives M₃h²/6. The SPSA bias proof applies it to g(t) = f(θ + tΔ), with third derivative bounded by M₃‖Δ‖³ on precisely such a neighborhood. The supplier page claims no stochastic or optimization conclusion."
+    },
+    {
+      "from": "simulation-gradient-estimation-and-simultaneous-perturbation",
+      "to": "stochastic-approximation-and-stochastic-gradient-methods",
+      "faithful": true,
+      "note": "The oracle definition supplies the vector conditional second-moment identity. The convergence proof meets Robbins–Siegmund with zero multiplicative error, predictable integrable decrement α_k‖∇f(x_k)‖², deterministic summable additive error, adapted integrable nonnegative X_k, and AC. Both page summaries preserve the distinction between moment assumptions and convergence conclusions; no minimizer or full-gradient convergence is inferred."
+    },
+    {
+      "from": "simulation-gradient-estimation-and-simultaneous-perturbation",
+      "to": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "faithful": true,
+      "note": "For N ≥ 1, freezing a valid sample produces the supplier's finite C¹ state-step graph with matching Jacobian dimensions and column-gradient convention. N = 0 is proved directly. Expectation interchange, measurability, and L¹ convergence of adjoint integrands are imposed separately by the consumer. Neither page infers derivative convergence from state or payoff convergence alone."
+    }
+  ]
+}

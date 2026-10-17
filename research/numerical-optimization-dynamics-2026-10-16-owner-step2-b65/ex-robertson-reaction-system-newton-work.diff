@@ -1,0 +1,20 @@
+--- before/items/ex-robertson-reaction-system-newton-work.md
++++ proposed/items/ex-robertson-reaction-system-newton-work.md
+@@ -39,7 +39,7 @@
+ 
+ The Robertson stiff reaction field is
+ $$f(y)=\begin{pmatrix}-0.04y_1+10^4y_2y_3\\0.04y_1-10^4y_2y_3-3\cdot10^7y_2^2\\3\cdot10^7y_2^2\end{pmatrix},\qquad y_0=(1,0,0)^T.$$
+-For one backward Euler step with $h=10^{-3}$, compare exact-Jacobian Newton (budget 12) and chord iteration with the Jacobian frozen at $y_0$ (budget 8, refresh period 8). Both use the Euclidean residual norm and tolerance $10^{-12}$ with partial-pivoting binary64 Gaussian elimination. The record below is finite-precision work evidence; it is not a general convergence or forward-error theorem.
++For one backward Euler step with $h=10^{-3}$, compare exact-Jacobian Newton (budget 12) and chord iteration with the Jacobian frozen at $y_0$ (budget 8, refresh period 8). Both use the Euclidean residual norm and tolerance $10^{-12}$ with partial-pivoting binary64 Gaussian elimination. The record below is finite-precision work evidence from an implementation-level approximation of the mathematical solver. Binary64 Gaussian elimination does not meet the exact-solve backend contract of [[alg-newton-chord-implicit-residual-with-factorization-reuse]], so this trace is not asserted to be an exact execution of that contract or a general convergence or forward-error theorem.
+ 
+ ## Numerical record
+ 
+@@ -79,6 +79,6 @@
+ 
+ 1.2 At the start, $f(y_0)=(-0.04,0.04,0)^T$, so $G(y_0)=(0.00004,-0.00004,0)^T$ and $\|G(y_0)\|_2=\sqrt{2}(4\cdot10^{-5})=5.65685425\cdot10^{-5}>10^{-12}$ by [F6]. Thus neither mode returns at count zero. [F1, F6, algebra]
+ 
+-2.1 Applying the stated Newton correction formula with the displayed Jacobian and binary64 partial-pivoting elimination gives the Newton residual sequence in the Numerical record. It first falls below $10^{-12}$ at count five; the residuals at counts zero through four exceed the tolerance. Since the budget is 12, the algorithm returns `root` after five corrections. Each correction refreshes and factors one Jacobian, then solves once, giving five assemblies/factorizations and five solves. [F2, F3, step 1.2, algebra]
++2.1 Applying the stated Newton correction formula with the displayed Jacobian and binary64 partial-pivoting elimination gives the Newton residual sequence in the Numerical record. It first falls below $10^{-12}$ at count five; the residuals at counts zero through four exceed the tolerance. Since the budget is 12, this binary64 implementation returns `root` after five corrections. Each correction refreshes and factors one Jacobian, then solves once, giving five assemblies/factorizations and five solves. [F2, F3, step 1.2, algebra]
+ 
+-3.1 With chord refresh period eight, [F2] refreshes at count zero and retains that factorization for corrections zero through seven. The residuals at counts zero through eight all exceed $10^{-12}$, and the budget is eight, so the algorithm returns `iteration-budget-exhausted`. This uses one assembly/factorization and eight linear solves. The mode is unconstrained, so negative intermediate second components do not violate its domain $\mathbb R^3$. [F2, F3, step 1.2, algebra] ∎
++3.1 With chord refresh period eight, [F2] refreshes at count zero and retains that factorization for corrections zero through seven. The residuals at counts zero through eight all exceed $10^{-12}$, and the budget is eight, so this binary64 implementation returns `iteration-budget-exhausted`. This uses one assembly/factorization and eight linear solves. The mode is unconstrained, so negative intermediate second components do not violate its domain $\mathbb R^3$. [F2, F3, step 1.2, algebra] ∎

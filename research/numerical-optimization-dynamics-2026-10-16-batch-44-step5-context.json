@@ -1,0 +1,296 @@
+{
+  "group": "e",
+  "batches": [
+    "44"
+  ],
+  "pages_read": [
+    "delay-differential-equations-and-history-discretization",
+    "delay-differential-equations-and-history-discretization-examples"
+  ],
+  "items_read": [
+    "def-retarded-delay-equation-and-history-space",
+    "lem-delay-history-space-is-banach",
+    "lem-retarded-delay-gronwall-bound",
+    "thm-retarded-delay-method-of-steps-well-posedness",
+    "alg-retarded-delay-euler-with-stored-history",
+    "lem-piecewise-linear-delay-history-error",
+    "thm-retarded-delay-euler-first-order-global-error",
+    "def-scalar-neutral-delay-equation-and-segment-shift",
+    "thm-neutral-delay-method-of-steps-well-posedness",
+    "lem-neutral-delay-shift-neumann-inverse",
+    "alg-neutral-delay-euler-compatible-grid",
+    "thm-neutral-delay-euler-first-order-error",
+    "def-distributed-delay-equation-and-window-integral",
+    "alg-distributed-delay-composite-midpoint-rule",
+    "lem-distributed-delay-midpoint-error-split",
+    "ex-retarded-delayed-feedback-euler",
+    "ex-rk4-delay-breakpoint-local-order-loss",
+    "ex-neutral-delay-derivative-amplification",
+    "ex-distributed-delay-midpoint-history-error"
+  ],
+  "conventions": [
+    {
+      "convention": "The delay is a fixed constant τ>0, the history is continuous on [-τ,0], and the retarded field is continuous on an open time interval and globally Lipschitz in both state arguments with their norm differences added. The solution is C1 on [0,T], using the right derivative at zero; differentiability across the initial-history junction is not required.",
+      "fixed_by": "def-retarded-delay-equation-and-history-space",
+      "matters_for": [
+        "thm-retarded-delay-method-of-steps-well-posedness",
+        "thm-retarded-delay-euler-first-order-global-error",
+        "ex-rk4-delay-breakpoint-local-order-loss"
+      ]
+    },
+    {
+      "convention": "Retarded Euler uses h=τ/m, N=ceil(T/h), exact initial history nodes indexed -m through 0, and retains every node through T_h=Nh. Its returned path is piecewise linear. A budget counts field evaluations and can stop the run before completion.",
+      "fixed_by": "alg-retarded-delay-euler-with-stored-history",
+      "matters_for": [
+        "lem-piecewise-linear-delay-history-error",
+        "thm-retarded-delay-euler-first-order-global-error",
+        "alg-distributed-delay-composite-midpoint-rule",
+        "ex-retarded-delayed-feedback-euler"
+      ]
+    },
+    {
+      "convention": "The interpolation estimate assumes C2 regularity separately on each mesh cell, including one-sided endpoint derivatives, and a uniform bound on the second derivative. It does not assume smoothness across delay breakpoints.",
+      "fixed_by": "lem-piecewise-linear-delay-history-error",
+      "matters_for": [
+        "thm-retarded-delay-euler-first-order-global-error",
+        "lem-distributed-delay-midpoint-error-split"
+      ]
+    },
+    {
+      "convention": "Neutral problems have scalar states, T=Kτ, C1 initial history, and compatibility φ'(0)=aφ'(-τ)+f(0,φ(0),φ(-τ)). Existence permits every real a; the uniform inverse and Euler error bounds require |a|<1.",
+      "fixed_by": "def-scalar-neutral-delay-equation-and-segment-shift",
+      "matters_for": [
+        "thm-neutral-delay-method-of-steps-well-posedness",
+        "lem-neutral-delay-shift-neumann-inverse",
+        "alg-neutral-delay-euler-compatible-grid",
+        "thm-neutral-delay-euler-first-order-error",
+        "ex-neutral-delay-derivative-amplification"
+      ]
+    },
+    {
+      "convention": "Segment and mesh shifts insert zero in the first segment or first m coordinates. For an empty mesh array the space has one zero vector, its norm is zero, and its identity and zero operators coincide.",
+      "fixed_by": "def-scalar-neutral-delay-equation-and-segment-shift",
+      "matters_for": [
+        "lem-neutral-delay-shift-neumann-inverse",
+        "thm-neutral-delay-euler-first-order-error"
+      ]
+    },
+    {
+      "convention": "Neutral Euler returns states Y_0 through Y_N and derivative approximations V_0 through V_{N-1}; no approximation V_N is asserted. The error theorem requires a completed run and exact initial history values and derivatives.",
+      "fixed_by": "alg-neutral-delay-euler-compatible-grid",
+      "matters_for": [
+        "thm-neutral-delay-euler-first-order-error"
+      ]
+    },
+    {
+      "convention": "Distributed quadrature uses r=qm, Δ=h/q, midpoint nodes (j+1/2)Δ, and query times on the h-grid. Its second-derivative bound concerns the exact integrand K(θ)y(t_n-θ) separately on every quadrature cell.",
+      "fixed_by": "alg-distributed-delay-composite-midpoint-rule",
+      "matters_for": [
+        "lem-distributed-delay-midpoint-error-split",
+        "ex-distributed-delay-midpoint-history-error"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-retarded-delay-equation-and-history-space",
+      "statement": "Defines the continuous history space with its supremum Euclidean norm and the fixed-positive-delay problem y'(t)=f(t,y(t),y(t-τ)), with continuous globally state-Lipschitz f and prescribed continuous history.",
+      "used_by": [
+        "lem-delay-history-space-is-banach",
+        "thm-retarded-delay-method-of-steps-well-posedness",
+        "alg-retarded-delay-euler-with-stored-history",
+        "thm-retarded-delay-euler-first-order-global-error",
+        "def-scalar-neutral-delay-equation-and-segment-shift",
+        "def-distributed-delay-equation-and-window-integral"
+      ]
+    },
+    {
+      "id": "lem-retarded-delay-gronwall-bound",
+      "statement": "For nonnegative continuous u and q satisfying the stated history bound H and retarded integral inequality with coefficient L≥0, U(t)=max{H,sup_{0≤r≤t}u(r)} satisfies U(t)≤(H+∫_0^t q(s)ds)e^{2Lt}.",
+      "used_by": [
+        "thm-retarded-delay-method-of-steps-well-posedness",
+        "thm-retarded-delay-euler-first-order-global-error"
+      ]
+    },
+    {
+      "id": "thm-retarded-delay-method-of-steps-well-posedness",
+      "statement": "For d≥1, T,τ>0, continuous history, and a continuous field on an open time interval containing [0,T] satisfying the global state Lipschitz bound, the retarded-delay initial-value problem has exactly one solution on [-τ,T].",
+      "used_by": [
+        "thm-retarded-delay-euler-first-order-global-error",
+        "ex-retarded-delayed-feedback-euler"
+      ]
+    },
+    {
+      "id": "lem-piecewise-linear-delay-history-error",
+      "statement": "For the stated aligned mesh, continuous cellwise-C2 path with second derivative norm bounded by M, and nodal errors bounded by E, the piecewise-linear interpolant satisfies sup_t‖ŷ_h(t)-y(t)‖_2≤E+Mh²/8.",
+      "used_by": [
+        "thm-retarded-delay-euler-first-order-global-error",
+        "lem-distributed-delay-midpoint-error-split"
+      ]
+    },
+    {
+      "id": "def-scalar-neutral-delay-equation-and-segment-shift",
+      "statement": "Defines the compatible scalar neutral equation y'(t)-a y'(t-τ)=f(t,y(t),y(t-τ)), its finite derivative-segment product, and the zero-inserting segment and mesh shifts.",
+      "used_by": [
+        "thm-neutral-delay-method-of-steps-well-posedness",
+        "lem-neutral-delay-shift-neumann-inverse",
+        "alg-neutral-delay-euler-compatible-grid",
+        "thm-neutral-delay-euler-first-order-error",
+        "ex-neutral-delay-derivative-amplification"
+      ]
+    },
+    {
+      "id": "lem-neutral-delay-shift-neumann-inverse",
+      "statement": "For the stated segment or finite mesh shift S, ‖S‖op≤1 and S^J=0, with J=K or ceil(M/m). For |a|<1, (I-aS)^{-1}=Σ_{j=0}^{J-1}a^jS^j and its operator norm is at most 1/(1-|a|), including the explicitly defined zero-space case.",
+      "used_by": [
+        "thm-neutral-delay-euler-first-order-error",
+        "ex-neutral-delay-derivative-amplification"
+      ]
+    },
+    {
+      "id": "lem-distributed-delay-midpoint-error-split",
+      "statement": "Under the stated cellwise C2 bound ‖g_n''‖_2≤M_g and uniform stored-history error E_h, the composite midpoint error is at most E_hΔΣ_j|K(θ_j)|+M_gτΔ²/24.",
+      "used_by": [
+        "ex-distributed-delay-midpoint-history-error"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "Ordinary IVP and domain-relative endpoint solution conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Euclidean norm and finite-dimensional vector conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-lipschitz-holder-contraction",
+      "used_for": "Nonnegative Lipschitz constants and the state Lipschitz hypothesis.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-valued-functions-limits-and-continuity",
+      "used_for": "Vector continuity, coordinate projections, and scalar-coordinate interpretation.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-valued-derivative-and-integral",
+      "used_for": "Domain-relative derivatives and componentwise Riemann integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-banach-space",
+      "used_for": "Completeness of the norm-induced metric as the Banach condition.",
+      "opened": true
+    },
+    {
+      "id": "lem-vector-valued-continuous-curve-space-is-complete",
+      "used_for": "Completeness of continuous vector curves on the nonempty compact history interval.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Euclidean norm axioms and triangle inequalities throughout the estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-gronwall-integral-inequality",
+      "used_for": "Continuous running-maximum bounds and bounded continuation of auxiliary ODE solutions.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-cantor-r",
+      "used_for": "Continuity of the running maximum through uniform continuity of u.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Bounded histories, forcing functions, and compact-time field bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-picard-lindelof-local-existence-and-uniqueness",
+      "used_for": "Local existence, uniqueness, and quantitative short-time continuation on method-of-steps intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-inequality-for-the-vector-valued-integral",
+      "used_for": "Norm estimates for increments, Taylor remainders, and quadrature errors with increasing integration limits.",
+      "opened": true
+    },
+    {
+      "id": "cor-vector-valued-ftc-and-lipschitz-bound",
+      "used_for": "Integral representations of increments and Lipschitz bounds from bounded derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-continuity-real",
+      "used_for": "Scalar history and derivative-segment continuity.",
+      "opened": true
+    },
+    {
+      "id": "def-derivative",
+      "used_for": "Scalar derivatives, including domain-relative endpoint derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-function-space",
+      "used_for": "Finite coordinate arrays, including the singleton zero-dimensional space.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-triangle-inequality",
+      "used_for": "Scalar absolute-value estimates in neutral method-of-steps continuation.",
+      "opened": true
+    },
+    {
+      "id": "thm-componentwise-limits-and-continuity",
+      "used_for": "Continuity of the components of the distributed-delay integrand.",
+      "opened": true
+    },
+    {
+      "id": "thm-composition-of-continuous-functions",
+      "used_for": "Continuity of θ↦y_i(t-θ).",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of affine time shifts and products with the kernel.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Existence of each component of the finite-window history integral.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-retarded-delay-euler-with-stored-history",
+      "concern": "The Definition includes complexity claims: “its history storage is O(d(N+m))=O(d(T+τ)/h)” and “An arbitrary stored-history query uses O(d) arithmetic with direct array indexing,” together with evaluation counts. These elementary counts appear sound, but the task's algorithm rule requires complexity and other properties in separate proved result items.",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-neutral-delay-euler-compatible-grid",
+      "concern": "Definition step 3 includes “The full method uses N evaluations of f and stores O(N+m) scalar state and derivative values.” The counts appear sound, but complexity properties belong in separate proved result items under the task's algorithm rule.",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-distributed-delay-composite-midpoint-rule",
+      "concern": "The Definition asserts “O(rd) arithmetic,” “O(d) working memory if weights are recomputed,” and “O(r+d) if cached.” These are plausible operation counts, but the task's algorithm rule requires complexity properties in separate proved result items.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "delay-differential-equations-and-history-discretization",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "Checked the supplier statements against the consuming arguments. Retarded Euler first constructs a fixed-history auxiliary ODE, bounds its exact and numerical paths in a common compact tube, and derives uniform local defect C_loc h² and stability 1+L_s h before applying the ODE theorem on T_h. The neutral theorem separately applies the finite recurrence with p=1, initial error zero, coefficient Λ=2L/(1-|a|), and both Λ branches. The supplier page makes no reciprocal delay-specific claim, and no density interpretation or density-related choice assumption is imported."
+    }
+  ]
+}

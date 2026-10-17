@@ -1,0 +1,12 @@
+--- before/items/alg-symmetric-indefinite-block-ldl-star.md
++++ proposed/items/alg-symmetric-indefinite-block-ldl-star.md
+@@ -34,8 +34,7 @@
+ For a $2\times2$ block $J_r=\{s,t\}$, $D_r=S_{J_r,J_r}$ is the Hermitian principal block
+ $$D_r=\begin{pmatrix}S_{ss}&S_{st}\\\overline{S_{st}}&S_{tt}\end{pmatrix}.$$
+ Require $\det D_r\ne0$, and let $c_1=\max_{i\in R_r}|(B_r)_{i1}|$ and $c_2=\max_{i\in R_r}|(B_r)_{i2}|$, with an empty maximum equal to zero. Accept the pair only if
+-$$\bigl(|(D_r^{-1})_{ij}|\bigr)_{i,j=1}^2\begin{pmatrix}c_1\\c_2\end{pmatrix}
+-\le\theta^{-1}\begin{pmatrix}1\\1\end{pmatrix}$$
++$$\bigl(|(D_r^{-1})_{ij}|\bigr)_{i,j=1}^2\begin{pmatrix}c_1\\c_2\end{pmatrix} \le\theta^{-1}\begin{pmatrix}1\\1\end{pmatrix}$$
+ componentwise, where scalar absolute values are complex moduli. If a declared block fails its test, return **pivot-failure**$(r)$.
+ 
+ For each accepted block in the exact branch, compute $M_r=B_rD_r^{-1}$, store $D_r$ in the $J_r\times J_r$ block of $D_{\rm blk}$ and $M_r$ in the $R_r\times J_r$ block of $L$, and update the active trailing matrix to $C_r-B_rD_r^{-1}B_r^*$. In the symbolic graph, let $N(J_r)$ be the union of the active graph neighbors of the vertices in $J_r$; remove $J_r$ and connect every pair of distinct vertices in $N(J_r)$. Retain all positions allowed by this symbolic update, including positions whose current numerical value is zero. If a block fails its test, return **pivot-failure**$(r)$ with no factor arrays. On completion return $(P,L,D_{\rm blk})$, where $L$ is unit lower block-triangular and $D_{\rm blk}$ is block diagonal; in exact arithmetic $PAP^*=LD_{\rm blk}L^*$, including the empty zero-dimensional case. The exact branch makes no universal growth bound.

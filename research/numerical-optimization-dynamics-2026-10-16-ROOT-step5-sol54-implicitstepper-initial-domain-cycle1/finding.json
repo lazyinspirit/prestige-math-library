@@ -1,0 +1,31 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "research_only": true,
+  "cycle": 1,
+  "finding_id": "sol54-implicitstepper-missing-be-rk-base-domain-admission",
+  "subject": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+  "classification": "confirmed-current-interface-defect",
+  "native_observation": {
+    "path": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+    "line_1based": 2062,
+    "model": "gpt-6.1-sol",
+    "keep": false,
+    "exact_original_row_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol54-implicitstepper-initial-domain-cycle1/native-observations.json"
+  },
+  "focused_evidence": [
+    "The BE supplier Definition explicitly assumes (t_n,y_n)\u2208D in addition to an admissible endpoint. The implicit-RK supplier similarly assumes (t,y)\u2208D before giving its stage equations. The wrapper Inputs specify only Y0\u2208R^d and f defined at attempted evaluation points. That latter condition concerns endpoint/stage queries and does not imply base-pair membership.",
+    "Take D=(0,2)\u00d7R, grid (0,1), f(t,y)=0 on D, Y0=0. For BE set U0=R, G0(z)=z, initial iterate z00=0, epsilon0=0, M0=0, a valid refresh period and returning exact backend. Every attempted endpoint/residual/derivative evaluation is defined at time 1; G0 is C1 and the finite solver can return root at count zero. Nonetheless (0,0)\u2209D, so invoking the cited BE definition is not admitted.",
+    "For either selected SDIRK or Radau IIA, all stage abscissae are strictly positive and at most 1. Under the same D, field and grid, every zero stage tuple is admissible at its stage time, and the C1 residual vanishes at the zero initial iterate. Thus attempted-stage validity alone also does not discharge the generic RK base requirement.",
+    "The proposed guard is evaluated before constructing the BE/RK residual and calling its finite solver. Invalid initial data therefore produce domain-failure with the supplied prefix/log and zero residual-solver work, even when a zero correction budget would otherwise permit an initial-residual root. An admitted base pair follows exactly the old residual solve and its original statuses.",
+    "Applying the same guard before each later BE/RK call is required by the same supplier interface, rather than a new mathematical assumption. A finite-tolerance RK update need not be identified with the admissible last stage: its update may differ by the last-stage residual. Consequently it is the actual current base that must be tested before a later call. This guard makes no forward-error or invariant-set claim.",
+    "A BE startup for BDF2 invokes the same BE definition and therefore gets the guard. Externally supplied BDF2 history does not invoke a BE/RK base contract: the exact branch procedure requires dimension/positive-grid checks and its oracle evaluates the next-time branch ball; the finite BDF2 residual uses history states only algebraically. No extra D-membership restriction is imposed on that distinct history interface."
+  ],
+  "smallest_correction": "Insert one Procedure-entry paragraph admitting every actual BE/SDIRK/Radau base pair (including BE startup), returning domain-failure before residual/solver work when not admitted. Leave every supplier, method, formula, correction budget and successful-call status unchanged.",
+  "no_new_prerequisite": "Membership tests are already specified as returning primitives in Inputs. The correction is an explicit admission check; no new proved result, existence theorem, extension argument or generic domain change is needed.",
+  "unsupported_extensions": [
+    "No defect in generic open D itself is asserted, and no closed-time adapter is introduced here.",
+    "No root existence/uniqueness, Newton convergence, positivity, exact finite-tolerance root, forward accuracy or finite-BDF2 stability conclusion is inferred.",
+    "This defect is distinct from CTRL1 finite closed-horizon stage sampling and does not reopen or modify that research packet."
+  ],
+  "native_limit": "Current focused source reasoning only. Genuine native5.5 adjudication/repair/recertification remains required; no current acceptance is supplied."
+}

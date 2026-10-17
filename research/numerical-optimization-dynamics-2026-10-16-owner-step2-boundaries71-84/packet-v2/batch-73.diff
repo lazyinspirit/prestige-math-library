@@ -1,0 +1,139 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-73.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-73.proof-contracts.json (proposed)
+@@ -143,8 +143,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
++          "status": "checked",
++          "evidence": "The Statement requires n>=1 for its normalized component average. The auxiliary partial sum in proof step 1.1 does include m=0: S_0 is explicitly the zero function with zero total derivative before induction reaches the nonempty average."
+         },
+         {
+           "case": "zero",
+@@ -752,7 +752,12 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
++          "reason": "The component sum in this cocoercivity Statement is indexed by i=1,...,n with n>=1 explicitly assumed. Proof step 3.1 divides that nonempty sum by n; no zero-component average is asserted.",
++          "reviewed": {
++            "upheld": true,
++            "by": "num_remaining_triage",
++            "reason": "The component sum in this cocoercivity Statement is indexed by i=1,...,n with n>=1 explicitly assumed. Proof step 3.1 divides that nonempty sum by n; no zero-component average is asserted."
++          }
+         },
+         {
+           "case": "zero",
+@@ -983,8 +988,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
++          "status": "checked",
++          "evidence": "The Statement excludes an empty batch by b>=1 and fixes n>=1. Proof step 1.2 nevertheless includes the empty off-diagonal pair sum at b=1: b(b-1)=0 gives r=0; step 2.1 separately makes both errors zero when n=b=1."
+         },
+         {
+           "case": "zero",
+@@ -1432,12 +1437,17 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
++          "reason": "The Statement normalizes a component table by 1/n and samples a uniform index from the finite component set of alg-saga-finite-sum-method. That algorithm requires n>=1; proof step 4.1 averages exactly these n entries, so no empty-table conditional expectation is asserted.",
++          "reviewed": {
++            "upheld": true,
++            "by": "num_remaining_triage",
++            "reason": "The Statement normalizes a component table by 1/n and samples a uniform index from the finite component set of alg-saga-finite-sum-method. That algorithm requires n>=1; proof step 4.1 averages exactly these n entries, so no empty-table conditional expectation is asserted."
++          }
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "At x_k=x* and alpha_i=grad f_i(x*), estimator and table error vanish in steps 1.2–3.1."
++          "evidence": "For x_k=x* and alpha_i^k=grad f_i(x*), the maintained mean in proof step 1.1 is zero because grad F(x*)=0; steps 2.1 and 2.2 give v_k=0 and S_k=0, and step 4.1 preserves the zero table error."
+         },
+         {
+           "case": "one",
+@@ -1447,7 +1457,7 @@
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "The centered stationary-table state gives zero in steps 1.2–3.1."
++          "evidence": "The centered stationary table is admissible: proof step 2.2 sets every g_i and h_i to zero, so v_k and its squared norm vanish; step 4.1 gives zero next table error without a positive-variance assumption."
+         },
+         {
+           "case": "endpoints",
+@@ -1457,7 +1467,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "AC is declared at [A1] and used in steps 1.1, 1.2, 2.1, 3.1 for conditional-expectation existence."
++          "evidence": "The Facts A1 and Given assume AC for the conditional-expectation classes. Proof step 2.1 applies the independent uniform-index and finite-sum rules, while step 4.1 averages the one-entry replacement; no nonexistent intermediate proof label is needed."
+         },
+         {
+           "case": "iff-forward",
+@@ -2325,7 +2335,12 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
++          "reason": "The SVRG Statement fixes n>=1 and an epoch length m>=1 before defining q with denominator m. Proof step 2.1 sums exactly t=0,...,m-1 and samples J from those m indices; a zero-length epoch is excluded.",
++          "reviewed": {
++            "upheld": true,
++            "by": "num_remaining_triage",
++            "reason": "The SVRG Statement fixes n>=1 and an epoch length m>=1 before defining q with denominator m. Proof step 2.1 sums exactly t=0,...,m-1 and samples J from those m indices; a zero-length epoch is excluded."
++          }
+         },
+         {
+           "case": "zero",
+@@ -2795,8 +2810,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
++          "status": "checked",
++          "evidence": "The Statement requires C nonempty and T>=1. The accumulator at its initial index has no preceding gradients: proof step 2.1 explicitly sets s_(0,j)=epsilon, and the t=2,...,T increment sum in step 1.1 is empty when T=1, leaving the initial metric term."
+         },
+         {
+           "case": "zero",
+@@ -3122,7 +3137,12 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
++          "reason": "The Statement fixes exactly fourteen logistic examples, seven of each label, and epoch length28. Proof step 3.1 uses that fourteen-term average and its two seven-term groups; neither an empty sample nor an empty epoch occurs.",
++          "reviewed": {
++            "upheld": true,
++            "by": "num_remaining_triage",
++            "reason": "The Statement fixes exactly fourteen logistic examples, seven of each label, and epoch length28. Proof step 3.1 uses that fourteen-term average and its two seven-term groups; neither an empty sample nor an empty epoch occurs."
++          }
+         },
+         {
+           "case": "zero",
+@@ -3664,7 +3684,7 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "n=1 permitted, delta=min{mu eta,1/7}; positivity checked1.2."
++          "evidence": "The Statement permits n=1. Proof step 1.2 then gives 0<delta<=1/7<1, and step 4.1 compares the single-table coefficient with the same capped delta."
+         },
+         {
+           "case": "degenerate",
+@@ -3674,12 +3694,12 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "eta=1/(10L) allowed; gap coefficient zero. k=0 expectation equality; memory-cap tie allowed."
++          "evidence": "The Statement includes eta=1/(10L). Proof step 3.1 makes the gap coefficient -2 eta+20L eta^2 equal zero at that endpoint; step 5.1 starts with equality at k=0 and substitutes this same maximal step size. The minimum used in step 4.1 includes the tie mu eta=1/(7n)."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "AC declared at A1 for conditional expectations; finite-time moments follow finite independent index histories; no almost-sure claim."
++          "evidence": "The Statement and Facts A1 assume AC for conditional expectations. Proof step 2.1 explicitly uses finite-time moments from the Given finite-history construction; step 5.1 applies the tower property to the resulting integrable quantities and makes no almost-sure claim."
+         },
+         {
+           "case": "iff-forward",

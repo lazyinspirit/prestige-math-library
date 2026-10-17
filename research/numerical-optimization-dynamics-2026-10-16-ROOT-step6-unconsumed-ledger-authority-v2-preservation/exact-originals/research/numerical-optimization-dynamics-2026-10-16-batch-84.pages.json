@@ -1,0 +1,219 @@
+[
+  {
+    "order": 2452,
+    "id": "gauss-newton-and-levenberg-marquardt-methods",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Gauss newton and levenberg marquardt methods",
+    "companion": "gauss-newton-and-levenberg-marquardt-methods-examples",
+    "requires": [
+      "finite-precision-direct-factorizations",
+      "nonlinear-equations-and-newton-methods",
+      "trust-region-and-cubic-regularization-methods"
+    ],
+    "items": [
+      {
+        "id": "thm-nonlinear-least-squares-gradient-and-hessian",
+        "kind": "theorem",
+        "title": "The nonlinear least-squares gradient and Hessian formulas",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-euclidean-inner-product",
+          "def-hessian-and-euclidean-critical-point",
+          "def-jacobian-matrix-and-gradient",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-algebra-of-derivatives",
+          "thm-algebra-of-continuous-functions",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian",
+        "kind": "lemma",
+        "title": "Rectangular residual linearization error under a Lipschitz Jacobian",
+        "deps": [
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "def-c-one-map-and-local-inverse",
+          "def-euclidean-inner-product",
+          "def-induced-matrix-p-norm",
+          "def-jacobian-matrix-and-gradient",
+          "def-vector-valued-derivative-and-integral",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-continuous-implies-integrable",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-monotonicity-of-the-integral",
+          "thm-newton-leibniz-with-interior-derivative",
+          "thm-norm-inequality-for-the-vector-valued-integral"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+        "kind": "lemma",
+        "title": "A damped least-squares step solves a scaled trust-region model",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-positive-definite-model-has-unique-newton-step"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+        "kind": "algorithm",
+        "title": "Gauss-Newton linearized least-squares step with QR/SVD rank safeguards",
+        "deps": [
+          "alg-scaled-householder-reflector-formation-and-application",
+          "def-forward-and-back-substitution-for-triangular-systems",
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "def-jacobian-matrix-and-gradient",
+          "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-computed-full-rank-least-squares-backward-stability",
+          "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "alg-safeguarded-levenberg-marquardt",
+        "kind": "algorithm",
+        "title": "Finite-budget Levenberg-Marquardt with a trust-ratio safeguard",
+        "deps": [
+          "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "def-euclidean-inner-product",
+          "def-c-one-map-and-local-inverse",
+          "def-jacobian-matrix-and-gradient",
+          "def-matrix-product-and-identity-matrix",
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-of-square-roots",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-gauss-newton-local-linear-contraction",
+        "kind": "theorem",
+        "title": "Gauss-Newton contracts linearly under a controlled residual-curvature bound",
+        "deps": [
+          "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "def-euclidean-inner-product",
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-nonlinear-least-squares-gradient-and-hessian",
+          "thm-singular-value-decomposition",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-norm-inequality-for-the-vector-valued-integral"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $m,n\\ge1$, and let $r:U\\to\\mathbb R^m$ be $C^2$ on an open $U\\subseteq\\mathbb R^n$, let\n$\\phi=\\|r\\|_2^2/2$, $J=Dr$, $A=J^TJ$, and\n$S(x)=\\sum_i r_i(x)\\nabla^2r_i(x)$. Let $x_*\\in U$ satisfy\n$J(x_*)^Tr(x_*)=0$, and let the closed ball\n$B=\\{x:\\|x-x_*\\|_2\\le R\\}$ lie in $U$, with $R>0$. Suppose on $B$:\n\n- $J(x)$ has full column rank and smallest singular value at least $\\sigma>0$;\n- $\\|J(x)\\|_2\\le M$;\n- $J$ is $L$-Lipschitz in the Euclidean induced matrix norm;\n- $\\|S(x)\\|_2\\le\\kappa$.\n\nDefine $q=(\\kappa+MLR)/\\sigma^2$ and assume $q<1$. For the exact full-rank\nGauss-Newton step $p(x)=-A(x)^{-1}J(x)^Tr(x)$, supply an exact reduced QR\nfactorization of $J(x)$ to the exact branch of\n[[alg-gauss-newton-qr-svd-step-with-rank-safeguard]] at each $x\\in B$; the\nfull-column-rank hypothesis guarantees such a factorization. Every $x\\in B$ satisfies\n$$\\|x+p(x)-x_*\\|_2\\le q\\|x-x_*\\|_2.$$\nConsequently the exact iterates from any $x_0\\in B$ stay in $B$ and converge\nto $x_*$ at a linear rate no larger than $q$. The curvature hypothesis\ncontrols the residual term $S$; no quadratic rate is claimed when it is\nnonzero.\n\n"
+      },
+      {
+        "id": "thm-gauss-newton-zero-residual-quadratic-convergence",
+        "kind": "theorem",
+        "title": "Gauss-Newton converges quadratically at a full-rank zero-residual root",
+        "deps": [
+          "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "def-euclidean-inner-product",
+          "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $m,n\\ge1$, and let $r:U\\to\\mathbb R^m$ be $C^1$ on an open $U\\subseteq\\mathbb R^n$, and let\n$x_*\\in U$ satisfy $r(x_*)=0$. Let $B=\\{x:\\|x-x_*\\|_2\\le R\\}\\subseteq U$ be\nconvex. Suppose $J=Dr$ is $L$-Lipschitz on $B$ and, for some $\\sigma>0$,\n$$\\|J(x)v\\|_2\\ge\\sigma\\|v\\|_2\\qquad(x\\in B,\\ v\\in\\mathbb R^n).$$\nThus every $J(x)$ has full column rank. For the exact Gauss-Newton iteration\n$x_{k+1}=x_k+p_k$, where $p_k$ is the unique minimizer of\n$\\|r(x_k)+J(x_k)p\\|_2^2$. When the iteration uses the exact branch of\n[[alg-gauss-newton-qr-svd-step-with-rank-safeguard]], assume each invocation is\nsupplied with an exact reduced QR factorization of $J(x_k)$. Set\n$C=L/(2\\sigma)$. Then every $x_k\\in B$ satisfies\n$$\\|x_{k+1}-x_*\\|_2\\le C\\|x_k-x_*\\|_2^2.$$\nIf $C>0$ and $\\|x_0-x_*\\|_2\\le\\min\\{R,1/(2C)\\}$, all iterates stay in the ball,\nconverge to $x_*$, and contract at least by $1/2$ per iteration after the\nquadratic estimate. If $C=0$ and $x_0\\in B$, one exact step reaches $x_*$. This result concerns\nexact solves; it asserts no finite-precision convergence rate.\n\n"
+      },
+      {
+        "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+        "kind": "lemma",
+        "title": "Uniformly large damping forces an acceptable LM trial in finitely many attempts",
+        "deps": [
+          "alg-safeguarded-levenberg-marquardt",
+          "def-euclidean-inner-product",
+          "def-induced-matrix-p-norm",
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+          "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-singular-value-decomposition",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+        "kind": "theorem",
+        "title": "Exact safeguarded Levenberg-Marquardt iterates approach stationarity on compact sublevels",
+        "deps": [
+          "alg-safeguarded-levenberg-marquardt",
+          "def-euclidean-inner-product",
+          "def-induced-matrix-p-norm",
+          "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+          "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+          "thm-singular-value-decomposition",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "def-c-one-map-and-local-inverse",
+          "def-jacobian-matrix-and-gradient",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-total-differentiability-gives-a-local-linear-bound-and-continuity"
+        ],
+        "dependency_level": 8
+      }
+    ]
+  },
+  {
+    "order": 2453,
+    "id": "gauss-newton-and-levenberg-marquardt-methods-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Gauss newton and levenberg marquardt methods — Examples",
+    "companion": "gauss-newton-and-levenberg-marquardt-methods",
+    "requires": [
+      "gauss-newton-and-levenberg-marquardt-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-exponential-kinetics-gauss-newton-fit",
+        "kind": "example",
+        "title": "An exponential-decay kinetics fit has a full-rank exact solution",
+        "deps": [
+          "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-derivative-of-exponential"
+        ],
+        "dependency_level": 6,
+        "statement": "Fit the one-rate exponential-decay model $y(t;a,k)=ae^{-kt}$ to observations at\n$t=0$ and $t=1$ with values $2$ and $2e^{-1}$. Its residual is\n$r(a,k)=(a-2,\\;ae^{-k}-2e^{-1})^T$. The parameter $x_*=(2,1)$ is an exact fit,\nand the Jacobian there has full column rank. Thus the exact full-rank\nGauss-Newton step at $x_*$ is zero. This is a local exact-fit illustration; it\ndoes not claim that a nonlinear iteration from every initial parameter\nconverges to $x_*$.\n\n"
+      },
+      {
+        "id": "ex-rank-deficient-identifiability-and-lm-step",
+        "kind": "example",
+        "title": "Rank-deficient data do not identify both parameters, while LM has a unique damped step",
+        "deps": [
+          "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "alg-safeguarded-levenberg-marquardt",
+          "def-euclidean-inner-product",
+          "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer"
+        ],
+        "dependency_level": 7,
+        "statement": "Let $r(a,b)=(a+b-1,\\;2(a+b-1))^T$. The data depend only on $a+b$, so they do\nnot identify $a$ and $b$ separately. At $(0,0)$ the Gauss-Newton Jacobian is\nrank deficient and its linearized least-squares problem has many minimizers.\nWith $D=I$, damping $\\lambda=1$ gives a unique trial step. For trust radius\n$\\Delta=1$, ratio thresholds $\\eta_1=1/4,\\eta_2=3/4$, lower damping\n$\\lambda_{\\min}=1/2$, update factor $\\gamma=2$, and one allowed trial, that\nstep is accepted with ratio $1$.\n\n"
+      },
+      {
+        "id": "ex-nonzero-residual-gauss-newton-is-only-linear",
+        "kind": "example",
+        "title": "A nonzero-residual stationary point gives only linear Gauss-Newton convergence",
+        "deps": [
+          "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "thm-gauss-newton-local-linear-contraction",
+          "thm-nonlinear-least-squares-gradient-and-hessian"
+        ],
+        "dependency_level": 7
+      }
+    ]
+  }
+]

@@ -1,0 +1,1109 @@
+{
+  "version": 1,
+  "level": "numerical-optimization-dynamics-2026-10-16-batch-3",
+  "scope": [
+    "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+    "lem-forward-difference-jacobian-error-bound",
+    "thm-updated-jacobian-newton-local-quadratic-convergence",
+    "thm-damped-newton-vector-residual-accepted-merit-decrease",
+    "ex-nonlinear-equations-and-newton-methods-boundary-cases",
+    "lem-finite-budget-fixed-point-iteration-work",
+    "lem-finite-budget-newton-work-and-status"
+  ],
+  "contracts": {
+    "lem-vector-newton-correction-error-under-lipschitz-jacobian": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.\n\nFor an open $U\\subseteq\\mathbb R^n$ and $a\\in U$, a **local inverse of $f$ at\n$a$** is a function $g:W\\to V$ for open neighbourhoods $a\\in V\\subseteq U$\nand $f(a)\\in W\\subseteq\\mathbb R^n$ such that $f|_V:V\\to W$ is bijective and\n$g=(f|_V)^{-1}$. If both $f|_V$ and $g$ are $C^1$, this restriction is a\n**local diffeomorphism** at $a$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their\ncomponents and their limits are as in\n[[def-vector-valued-functions-limits-and-continuity]].\n\n### The derivative\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}^{m}$ and let $c \\in A$ be\na **limit point of $A$** ([[def-limit-point-r]]). The **difference quotient of\n$f$ at $c$** is the vector-valued function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}^{m}, \\qquad q_{f,c}(x) \\;:=\\; \\frac{1}{x - c}\\,\\bigl(f(x) - f(c)\\bigr),$$\n\nthe scalar multiple being that of the vector space $\\mathbb{R}^{m}$\n([[def-function-space]]); the division is legitimate because $x \\ne c$ gives\n$x - c \\ne 0$. As in [[def-derivative]], $c$ is a limit point of\n$A \\setminus \\{c\\}$ as well, since a punctured neighbourhood of $c$ omits $c$.\n\n$f$ is **differentiable at $c$** when $\\lim_{x \\to c} q_{f,c}(x)$ exists in\n$\\mathbb{R}^{m}$, and then the **derivative** is\n\n$$f'(c) \\;:=\\; \\lim_{x\\to c} q_{f,c}(x) \\;\\in\\; \\mathbb{R}^{m}.$$\n\n**The notation denotes a single vector.** At most one $L \\in \\mathbb{R}^{m}$\nsatisfies the limit condition, as proved in\n[[def-vector-valued-functions-limits-and-continuity]]; this is the vector-valued\nform of the obligation [[lem-function-limit-unique]] discharges for real-valued\nfunctions and [[lem-metric-limits-unique]] for sequences.\n\n**The intrinsic form is the definition; the componentwise form is a theorem.**\nFor $i < m$ the $i$-th component of $q_{f,c}(x)$ is\n$\\bigl(f_i(x)-f_i(c)\\bigr)/(x-c)$, which is the real difference quotient of\n$f_i$ at $c$ ([[def-derivative]]). So by\n[[thm-componentwise-limits-and-continuity]] clause 2:\n\n> $f$ is differentiable at $c$ **if and only if** every $f_i$ is differentiable\n> at $c$, and then $f'(c)_i = f_i'(c)$ for every $i<m$.\n\nNothing below reverses this order of presentation: the intrinsic limit is what is\ndefined, and the coordinates are read off it.\n\n**Algebra of derivatives.** If $f, g : A \\to \\mathbb{R}^{m}$ are differentiable at\n$c$ and $\\lambda \\in \\mathbb{R}$, then $f + g$ and $\\lambda f$ are differentiable\nat $c$ with $(f+g)'(c) = f'(c)+g'(c)$ and $(\\lambda f)'(c) = \\lambda f'(c)$: read\ncomponentwise through the displayed equivalence, these are clauses 1 and 2 of the\npublished [[thm-algebra-of-derivatives]].\n\n### The integral\n\nLet $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}^{m}$\n([[def-interval]]). $f$ is **integrable on $[a,b]$** when every component\n$f_i : [a,b] \\to \\mathbb{R}$ is bounded ([[def-bounded-set]]) and Darboux\nintegrable in the sense of [[def-darboux-integral]], and then\n\n$$\\int_a^b f \\;:=\\; \\text{the function } m \\to \\mathbb{R} \\text{ sending } i \\mapsto \\int_a^b f_i .$$\n\n**That really is an element of $\\mathbb{R}^{m}$.** In this library\n$\\mathbb{R}^{m}$ is the set of functions $m \\to \\mathbb{R}$\n([[def-function-space]]), not a set of tuples, so the displayed assignment is\nliterally an element of it; each value $\\int_a^b f_i$ is a single real by\n[[def-darboux-integral]]. In the standard basis\n([[lem-standard-basis-of-f-n]]) the same object is\n$\\int_a^b f = \\sum_{i<m}\\bigl(\\int_a^b f_i\\bigr)e_i$.\n\n**Oriented limits.** Following [[def-oriented-integral]] componentwise, set\n\n$$\\int_a^a f \\;:=\\; 0 \\in \\mathbb{R}^{m}, \\qquad \\int_b^a f \\;:=\\; -\\int_a^b f \\quad (a < b),$$\n\nso that $\\int_u^v f = -\\int_v^u f$ for all $u,v$ in an interval on which $f$ is\nintegrable. The clauses do not overlap with the case $a<b$, so nothing has to be\nchecked for consistency, exactly as in [[def-oriented-integral]].\n\n**Linearity.** If $f, g : [a,b] \\to \\mathbb{R}^{m}$ are integrable and\n$\\lambda,\\mu \\in \\mathbb{R}$ then $\\lambda f + \\mu g$ is integrable with\n\n$$\\int_a^b (\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f + \\mu\\int_a^b g ,$$\n\nsince each side has $i$-th coordinate $\\int_a^b(\\lambda f_i + \\mu g_i)$ and\n$\\lambda\\int_a^b f_i + \\mu\\int_a^b g_i$ respectively, and those agree by\n[[thm-linearity-of-the-integral]].\n\n**Restriction and splitting.** If $f$ is integrable on $[a,b]$ then it is\nintegrable on every nondegenerate closed subinterval $[c,d]$ with\n$a\\le c<d\\le b$, and for $a<c<b$,\n$\\int_a^b f = \\int_a^c f + \\int_c^b f$; both are the componentwise readings of\n[[lem-integrability-on-a-subinterval]] and\n[[thm-additivity-over-subintervals]], applied to each $f_i$ and reassembled\ncoordinate by coordinate.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$ and let $a, b \\in \\mathbb{R}$ with $a < b$.\n\n1. **Fundamental theorem, second part, in $\\mathbb{R}^{m}$.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be differentiable at every point of $[a,b]$ as\n   a function on $[a,b]$ ([[def-vector-valued-derivative-and-integral]]), and\n   suppose $f' : [a,b] \\to \\mathbb{R}^{m}$ is integrable. Then\n   $$\\int_a^b f' \\;=\\; f(b) - f(a).$$\n2. **A bounded derivative gives a Lipschitz function.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and differentiable at\n   every point of $(a,b)$, and let $M \\ge 0$ satisfy\n   $\\lVert f'(t)\\rVert_2 \\le M$ for every $t \\in (a,b)$. Then\n   $$\\lVert f(t) - f(s)\\rVert_2 \\;\\le\\; M\\,|t-s| \\qquad \\text{for all } s,t \\in [a,b],$$\n   that is, $f$ is Lipschitz with constant $M$ as a map\n   $([a,b], d_{\\mathbb{R}}) \\to (\\mathbb{R}^{m}, d_2)$\n   ([[def-lipschitz-holder-contraction]], [[lem-real-line-is-a-metric-space]],\n   [[lem-metrics-on-rn]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. $f + g$ is integrable on $[a,b]$ and\n   $\\int_a^b (f+g) = \\int_a^b f + \\int_a^b g$;\n2. for every real $\\lambda$, $\\lambda f$ is integrable on $[a,b]$ and\n   $\\int_a^b \\lambda f = \\lambda \\int_a^b f$;\n3. consequently, for all reals $\\lambda, \\mu$ the function $\\lambda f + \\mu g$ is\n   integrable and\n   $$\\int_a^b(\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f \\;+\\; \\mu\\int_a^b g ;$$\n4. the same identity holds with oriented limits: if $u, v \\in [a,b]$ and $f, g$\n   are integrable between $u$ and $v$ ([[def-oriented-integral]]), then\n   $\\int_u^v(\\lambda f + \\mu g) = \\lambda\\int_u^v f + \\mu\\int_u^v g$.\n\n**Linearity of the integral is not linearity of the Darboux sums**, and the\nproof of claim 1 has to squeeze rather than compute. On a subinterval the\ninequality $\\sup(f+g) \\le \\sup f + \\sup g$ can be strict — take $f(x) = x$ and\n$g(x) = -x$ on $[0,1]$, where the left side is $0$ and the right side is $1$ —\nso $U(f+g,P)$ is in general strictly below $U(f,P) + U(g,P)$ and no identity\nbetween upper sums is available. Claim 2, by contrast, is an identity at the\nlevel of the sums, with the roles of $\\sup$ and $\\inf$ exchanged when\n$\\lambda < 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "vector-path-derivative",
+          "claim": "Put $e:=x-x_*$ and $g(t):=F(x_*+te)$ for $0\\le t\\le1$. Convexity keeps the segment in $K\\subseteq U$; openness of $U$ gives an open parameter interval containing $[0,1]$ on which $g$ is defined. The chain rule gives $g'(t)=J(x_*+te)e$, continuous because $J$ is Lipschitz on $K$, so its coordinates are integrable by [F4] and [F5].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "vector-ftc-increment",
+          "claim": "Applying [F6] to $g$ yields $F(x)-F(x_*)=\\int_0^1J(x_*+te)e\\,dt$. Also $\\int_0^1J(x)e\\,dt=J(x)e$, by [F4], [F7], and [F10] applied coordinatewise to the constant vector.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F6",
+            "F7",
+            "F10"
+          ]
+        },
+        {
+          "id": "lipschitz-remainder-bound",
+          "claim": "By linearity, $J(x)e-[F(x)-F(x_*)]=\\int_0^1[J(x)-J(x_*+te)]e\\,dt$. The vector integrand has continuous coordinates, so it is integrable by [F4] and [F5]. The norm inequality [F8], the operator-norm definition, and the Lipschitz hypothesis give $\\|J(x)e-[F(x)-F(x_*)]\\|_2\\le\\int_0^1L(1-t)\\|e\\|_2^2\\,dt=\\frac{L}{2}\\|e\\|_2^2$. The scalar comparison function $t\\mapsto L(1-t)\\|e\\|_2^2$ is continuous and hence integrable by [F5], so [F9] applies to the pointwise bound; also $\\|x-(x_*+te)\\|_2=(1-t)\\|e\\|_2$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F4",
+            "F5",
+            "F8",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n≥1 and two points in a convex set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If x=x_*, then e=0 and step 3.1 gives zero remainder."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 is dimension independent and includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The coincident-point case x=x_* is covered explicitly by step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats t=0 and t=1 using differentiability on an open neighborhood of the contained segment."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use a fixed segment and finite-dimensional integrals; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way remainder bound, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way remainder bound, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read all three proof steps and the eleven exact supplier statements. The affine segment stays in convex K, its preimage in open U contains an interval around [0,1], including e=0. Chain rule and C1 continuity give an integrable vector derivative; vector FTC, scalar linearity and Newton–Leibniz give the remainder identity. The integral norm theorem also supplies integrability of the norm; the newly explicit continuous scalar majorant permits monotonicity on [0,1] and integrates to L||e||²/2. Checked L=0, x=x*, n=1 and both endpoints; no arbitrary choice or common vector Taylor point is used. Reader/refuter artifacts contain no findings."
+      }
+    },
+    "lem-forward-difference-jacobian-error-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-forward-difference-jacobian",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $F:U\\to\\mathbb R^n$\nbe $C^1$ in the sense of [[def-c-one-map-and-local-inverse]]. Its Jacobian\n$J_F(x)$ is the matrix of first partial derivatives from\n[[def-jacobian-matrix-and-gradient]], and the matrix of $DF(x)$ in the standard\nbasis is $J_F(x)$ by\n[[thm-total-derivative-computes-directional-and-partial-derivatives]]. For\n$x\\in U$, supply increments $h=(h_0,\\ldots,h_{n-1})\\in\\mathbb R^n$. For each\nstandard basis vector $e_i$ with $0\\le i<n$, the admissible stencil conditions\nare $h_i\\ne0$ and $x+h_i e_i\\in U$.\n\nIf any admissibility condition fails, return `invalid-stencil`. Otherwise form\nthe matrix $J_hF(x)$ column by column:\n$$J_hF(x)e_i:=\\frac{F(x+h_i e_i)-F(x)}{h_i},\\qquad 0\\le i<n.$$\nReturn `success` and this matrix. Each evaluation point is in $U$. This\nprocedure defines a forward-difference approximation; it asserts no accuracy\nor convergence guarantee.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "coordinate-taylor-remainders",
+          "claim": "By [F7], the $C^2$ components and their first partials have the total derivatives needed for the chain rule, and $F$ is admissible for [F1]. For each input coordinate $i<n$ and output component $j<n$, put $g_{ij}(t):=F_j(x+t h_i e_i)$ on $I_i$. The chain rule [F4] and Jacobian identification [F3] give $g_{ij}'(t)=h_i\\partial_iF_j(x+t h_i e_i)$ and $g_{ij}''(t)=h_i^2\\partial_{ii}F_j(x+t h_i e_i)$. Taylor's theorem [F5] between $0$ and $1$ supplies $\\theta_{ij}\\in(0,1)$ with $F_j(x+h_i e_i)-F_j(x)=h_i\\partial_iF_j(x)+\\frac{h_i^2}{2}\\partial_{ii}F_j(x+\\theta_{ij}h_i e_i)$. The points $\\theta_{ij}$ may differ between components.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "choose",
+            "F1"
+          ]
+        },
+        {
+          "id": "column-error-bound",
+          "claim": "Divide by the nonzero $h_i$. In column $i$, output coordinate $j$ has error at most $M_{ij}|h_i|/2$; hence the Euclidean column error is at most $M_i|h_i|/2$, even though the remainder points $\\theta_{ij}$ may differ.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "operator-error-bound",
+          "claim": "For a unit vector $v$, the triangle inequality and [F6] give $\\|(J_hF(x)-J_F(x))v\\|_2\\le\\sum_{i<n}|v_i|\\|(J_hF(x)-J_F(x))e_i\\|_2\\le\\frac12(\\sum_{i<n}v_i^2)^{1/2}(\\sum_{i<n}M_i^2h_i^2)^{1/2}\\le\\frac M2\\|h\\|_2$. Taking the supremum over unit $v$ proves the operator-norm bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n≥1 and a coordinate stencil. The Statement requires n>=1 and a nonzero increment in every input coordinate, so its component sum and maximum index sets are nonempty. The proof divides only by the prescribed nonzero h_i and combines the componentwise remainder bounds by Cauchy-Schwarz. This is a specified coordinate stencil, not an empty-dimensional or zero-step claim.",
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex root owner adjudication accepting the cited named Codex source/case owner review",
+            "reason": "The theorem assumes n≥1 and a coordinate stencil. The Statement requires n>=1 and a nonzero increment in every input coordinate, so its component sum and maximum index sets are nonempty. The proof divides only by the prescribed nonzero h_i and combines the componentwise remainder bounds by Cauchy-Schwarz. This is a specified coordinate stencil, not an empty-dimensional or zero-step claim.",
+            "item_sha256": "d41002e7c2594838410fe881c6795ad2a7f8d3f658c1584fdd3b618e40e66e68",
+            "row_sha256": "0aa7ab84be0e603c3593f2f6d46c3583d194bd440892b7ae356da810a95c3789"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero increment is rejected as invalid-stencil by the definition; the error lemma assumes each h_i≠0 before dividing."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the matrix bound reduces to the scalar forward-difference remainder in steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If all second partial bounds M_ij are zero, step 2.1 gives zero column error."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: each theta_ij lies in (0,1), so the segment bounds cover every possible remainder point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 makes only finitely many coordinate/component remainder selections; no arbitrary-index choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way approximation-error bound."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way approximation-error bound."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read all three steps and all eight actual prerequisite Statements/Definitions. C2 components give C1 admissibility and twice differentiable scalar coordinate paths on open convex intervals containing [0,1]. Taylor with k=1 is applied separately to every (i,j), so theta_ij need not agree. Division uses h_i != 0; negative increments are handled by |h_i|. Squared component bounds yield M_i|h_i|/2 per column; triangle inequality and Cauchy–Schwarz yield the operator bound M||h||/2. Checked n=1, zero M and mixed-sign increments; h_i=0 is excluded and no roundoff or Newton-convergence assertion is made. Finite choices only. Reader/refuter contain no findings."
+      }
+    },
+    "thm-updated-jacobian-newton-local-quadratic-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-newton-contraction-near-an-invertible-derivative",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  Suppose $A:=Df(a)$ is invertible and put\n$B:=A^{-1}$.  Then there are $R>0$, $0\\le q<1$, and $C>0$ such that\n$\\overline B(a,R)\\subseteq U$, $\\|Bv\\|_2\\le C\\|v\\|_2$, and, for every\n$y\\in\\mathbb R^n$, the Newton map\n\n$$T_y(x):=x+B(y-f(x))$$\n\nsatisfies\n\n$$\\|T_y(x)-T_y(z)\\|_2\\le q\\|x-z\\|_2\\qquad(x,z\\in\\overline B(a,R)).$$\n\nMoreover $Df(x)$ is invertible for every $x\\in\\overline B(a,R)$ and\n\n$$\\|Df(x)^{-1}v\\|_2\\le\\frac C{1-q}\\|v\\|_2.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $F:U\\to\\mathbb R^n$ be\n$C^1$, and write $J(x)=DF(x)$ as a matrix in the standard basis. The matrix\nof $DF(x)$ agrees with the Jacobian matrix by\n[[thm-total-derivative-computes-directional-and-partial-derivatives]]. For a\nmatrix $A$ let\n$\\|A\\|_{\\rm op}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$. Let $K\\subseteq U$ be convex,\nlet $x_*,x\\in K$, and suppose for some $L\\ge0$ that\n$$\\|J(y)-J(z)\\|_{\\rm op}\\le L\\|y-z\\|_2\\qquad(y,z\\in K).$$\nThen\n$$\\|F(x)-F(x_*)-J(x)(x-x_*)\\|_2\\le\\frac{L}{2}\\|x-x_*\\|_2^2.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-newton-correction-for-vector-residuals",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $A:\\mathbb R^n\\to\\mathbb R^n$ be a linear map, and let\n$r\\in\\mathbb R^n$ be a residual vector. If $A$ is not invertible in the sense\nof [[def-invertible-euclidean-linear-map]], return\n$(\\texttt{singular-jacobian},\\varnothing)$. If $A$ is invertible, return\n$(\\texttt{correction},s)$, where $s$ is the unique vector solving\n$$As=-r.$$\n\nThe output is a linear correction, not a claim that $r$ came from a nonlinear\nfunction or that applying the correction decreases a residual.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-finite-budget-newton-for-vector-residuals",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $F:U\\to\\mathbb R^n$ be\n$C^1$ ([[def-c-one-map-and-local-inverse]]) with Jacobian $J_F$ as in\n[[def-jacobian-matrix-and-gradient]]. The matrix of $DF(x)$ in the standard\nbasis is $J_F(x)$ by\n[[thm-total-derivative-computes-directional-and-partial-derivatives]].\n**Inputs:** $x_0\\in U$, residual\ntolerance $\\varepsilon\\ge0$, and update budget $N\\in\\mathbb N_0$.\n**Output:** the last valid iterate and one of `root`, `singular-jacobian`,\n`invalid-trial`, or `iteration-budget-exhausted`.\n\nFor $k=0,1,\\ldots,N$, in this order:\n\n1. Compute $F(x_k)$. If $\\|F(x_k)\\|_2\\le\\varepsilon$, return\n   $(x_k,\\texttt{root})$. Here `root` means the residual tolerance was met; it\n   does not certify an exact zero when $\\varepsilon>0$.\n2. If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n3. Call [[alg-newton-correction-for-vector-residuals]] with\n   $A=J_F(x_k)$ and $r=F(x_k)$. If it returns `singular-jacobian`, return that\n   status.\n4. Let $s_k$ be its correction. If $x_k+s_k\\notin U$, return\n   $(x_k,\\texttt{invalid-trial})$. Otherwise set $x_{k+1}=x_k+s_k$.\n\nIt makes no arbitrary-start, global-convergence, or discretization-error claim.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.\n\nFor an open $U\\subseteq\\mathbb R^n$ and $a\\in U$, a **local inverse of $f$ at\n$a$** is a function $g:W\\to V$ for open neighbourhoods $a\\in V\\subseteq U$\nand $f(a)\\in W\\subseteq\\mathbb R^n$ such that $f|_V:V\\to W$ is bijective and\n$g=(f|_V)^{-1}$. If both $f|_V$ and $g$ are $C^1$, this restriction is a\n**local diffeomorphism** at $a$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "local-uniform-inverse-bound",
+          "claim": "Apply [F1] at $x_*$. It supplies a radius $r_0>0$ and a finite inverse bound $K>0$ on $\\overline B_2(x_*,r_0)$. Set $r:=\\min\\{R,r_0\\}$, so the ball remains inside $U$, the Jacobian remains $L$-Lipschitz, and $\\|J(x)^{-1}\\|_{\\rm op}\\le K$ throughout it. Only this inverse-bound conclusion of [F1] is used; the contraction there is for a fixed inverse matrix, not for the updated-Jacobian recurrence.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "choose"
+          ]
+        },
+        {
+          "id": "invariant-radius",
+          "claim": "Let $C:=KL/2$. If $C>0$, choose $0<\\rho\\le\\min\\{r,(2C)^{-1}\\}$; if $C=0$, choose any $0<\\rho\\le r$. Then $C\\rho\\le1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "quadratic-update-estimate",
+          "claim": "Suppose an update is attempted at $x_k\\in\\overline B_2(x_*,\\rho)$ and put $e_k:=x_k-x_*$. The inverse bound makes the correction in [F3] unique. Since $F(x_*)=0$, [F2] and $J(x_k)e_k-F(x_k)=J(x_k)e_k-[F(x_k)-F(x_*)]$ give $e_{k+1}=J(x_k)^{-1}(J(x_k)e_k-F(x_k))$ and $\\|e_{k+1}\\|_2\\le C\\|e_k\\|_2^2$. The full trial is in $U$ because $\\|e_{k+1}\\|_2\\le C\\rho\\|e_k\\|_2\\le\\|e_k\\|_2/2\\le\\rho/2$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "invariance-and-convergence",
+          "claim": "Starting from $x_0$ in the stated ball, induction using step 3.1 shows every attempted update is valid, remains in the ball, and obeys the quadratic bound. It also gives $\\|x_k-x_*\\|_2\\le2^{-k}\\|x_0-x_*\\|_2$ for every generated iterate; [F7] makes this tend to zero if the recurrence is continued indefinitely. The finite-budget algorithm may stop earlier under its own residual or budget rule.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F7",
+            "step 3.1",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n≥1, a root, and a nonempty neighborhood."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At L=0, step 3.1 gives zero error, so the correction lands exactly at the root."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits n=1, and step 3.1 is dimension independent."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At x_k=x_*, step 3.1 gives zero correction; the residual test is checked before updates."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The closed ball is contained in U; step 3.1 shows every attempted update lies within radius rho/2, including starts on its boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 choose only finite scalar constants and use no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a sufficient local convergence guarantee, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a sufficient local convergence guarantee, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read all four proof steps and eight exact suppliers. The fixed-inverse contraction lemma supplies only uniform invertibility on a closed ball: its C/(1-q) is finite positive, so choose K accordingly and shrink radius to min(R,r0). Updated Newton uses J(xk)^-1, not the frozen B. The proved remainder yields e_next=J(xk)^-1(J(xk)e-F(xk)), hence ||e_next||<=KL||e||²/2. Choosing C rho<=1/2 keeps every full trial in U and gives 2^-k decay by induction and the geometric-null lemma. Checked L=0 (one-step exactness), x0=x*, boundary rho, n=1, N=0 and early residual stops. Indefinite recurrence and finite-budget execution are explicitly distinguished. No global or finite-tolerance guarantee, and no AC. Reader/refuter contain no findings."
+      }
+    },
+    "thm-damped-newton-vector-residual-accepted-merit-decrease": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-damped-newton-for-vector-residuals",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $F:U\\to\\mathbb R^n$ be\n$C^1$ ([[def-c-one-map-and-local-inverse]]) with Jacobian $J_F$ as in\n[[def-jacobian-matrix-and-gradient]]. The matrix of $DF(x)$ in the standard\nbasis is $J_F(x)$ by\n[[thm-total-derivative-computes-directional-and-partial-derivatives]]. Define\nthe residual merit\n$\\Phi(x):=\\tfrac12\\|F(x)\\|_2^2$. **Inputs:** $x_0\\in U$, residual tolerance\n$\\varepsilon\\ge0$, update budget $N\\in\\mathbb N_0$, sufficient-decrease\nparameter $\\alpha\\in(0,1)$, reduction factor $\\beta\\in(0,1)$, and finite\nbacktrack budget $B\\in\\mathbb N_0$. **Output:** the last valid iterate and one\nof `root`, `singular-jacobian`, `invalid-trial`, `line-search-exhausted`, or\n`iteration-budget-exhausted`.\n\nAt iteration $k=0,1,\\ldots,N$, apply these instructions in order:\n\n1. Evaluate $F(x_k)$. If $\\|F(x_k)\\|_2\\le\\varepsilon$, return\n   $(x_k,\\texttt{root})$. This status records the residual test only.\n2. If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n3. Call [[alg-newton-correction-for-vector-residuals]] with\n   $A=J_F(x_k)$ and $r=F(x_k)$. If it returns `singular-jacobian`, return\n   that status. Otherwise let $s_k$ be its correction.\n4. For $j=0,1,\\ldots,B$, set $t=\\beta^j$ and trial $y=x_k+t s_k$. If\n   $y\\notin U$, reject the trial and continue. If $y\\in U$, evaluate\n   $\\Phi(y)$ and accept the first trial satisfying\n   $$\\Phi(y)\\le\\Phi(x_k)-\\alpha t\\|F(x_k)\\|_2^2.$$\n   On acceptance set $x_{k+1}=y$ and continue at iteration $k+1$.\n5. If no trial was accepted, return `invalid-trial` if every tested point was\n   outside $U$; otherwise return `line-search-exhausted`.\n\nThe residual-merit test is defined directly for a vector root problem. A finite\nbacktrack budget can return failure; no global convergence or quadratic-rate\nclaim is made.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-accepted-decrement",
+          "claim": "Since $0<\\beta<1$ and $j\\ge0$, the tested size $t=\\beta^j$ is positive. Because the Euclidean norm is defined by the square root of the sum of coordinate squares, $F(x)\\ne0$ gives a nonzero coordinate and hence $\\|F(x)\\|_2^2>0$; with $\\alpha>0$, this gives $\\alpha t\\|F(x)\\|_2^2>0.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "accepted-merit-decrease",
+          "claim": "The acceptance condition in [F1] therefore gives $\\Phi(x_+)\\le\\Phi(x)-\\alpha t\\|F(x)\\|_2^2<\\Phi(x)$, as claimed.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A zero residual is returned by the root-tolerance check before a line-search trial; the theorem assumes F(x)≠0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement applies in dimension n=1 because it uses only the Euclidean residual norm."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The parameter boundary alpha=0 is excluded; alpha>0 is the strict-decrease input in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition rejects trials outside U; the theorem concerns only a trial accepted in U."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses a finite deterministic list of step sizes and no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves one direction from acceptance to merit decrease."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A merit-decreasing trial need not meet the specified sufficient-decrease test."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-3",
+        "notes": "The conclusion is conditional on an accepted trial. The finite backtrack cap may return invalid-trial or line-search-exhausted; no eventual-acceptance or global-convergence claim is made."
+      }
+    },
+    "ex-nonlinear-equations-and-newton-methods-boundary-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-fixed-point-iteration",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $G:X\\to X$ be a\nspecified map, and choose an initial point $x_0\\in X$, a residual tolerance\n$\\varepsilon\\ge0$, and an iteration budget $N\\in\\mathbb N_0$. A **fixed point**\nof $G$ is a point $x$ with $G(x)=x$. The procedure returns a point and a\nstatus as follows. For $k=0,1,\\ldots,N$, compute the fixed-point residual\n$r_k:=d(G(x_k),x_k)$. If $r_k\\le\\varepsilon$, return\n$(x_k,\\texttt{residual-tolerance-met},r_k,k)$. Otherwise, if $k=N$, return\n$(x_k,\\texttt{iteration-budget-exhausted},r_k,k)$. Otherwise set\n$x_{k+1}:=G(x_k)$ and continue.\n\nA positive residual tolerance reports an approximate fixed point only; this\ndefinition asserts no convergence or error bound.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty complete metric space ([[def-complete-metric-space]])\nand let $f : X \\to X$ be a contraction with constant $q$, so\n$d(f(u),f(v)) \\le q\\,d(u,v)$ for all $u,v \\in X$ and $0 \\le q < 1$\n([[def-lipschitz-holder-contraction]]). Then:\n\n1. There is exactly one $x^{*} \\in X$ with $f(x^{*}) = x^{*}$.\n2. For every $x_0 \\in X$ the sequence of **iterates**, defined by recursion\n   ([[thm-recursion]]) by $x_{n+1} := f(x_n)$, converges to $x^{*}$ in $(X,d)$\n   ([[def-metric-convergence]]). In particular the limit does not depend on\n   $x_0$.\n3. For all $m, n \\in \\mathbb{N}$ with $m \\ge n$,\n   $$d(x_m, x_n) \\;\\le\\; \\frac{q^{\\,n}\\, d(x_1,x_0)}{1-q},$$\n   with the integer power of [[def-integer-power]].\n\nClaim 3 is the quantitative form of the argument that proves claims 1 and 2, and\nit is recorded in the statement because the error estimates\n([[cor-banach-error-estimates]]) are read off from it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-banach-error-estimates",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty complete metric space, let $f : X \\to X$ be a\ncontraction with constant $q$, $0 \\le q < 1$\n([[def-lipschitz-holder-contraction]]), let $x_0 \\in X$, let\n$x_{n+1} := f(x_n)$ be the iterates, and let $x^{*}$ be the unique fixed point of\n$f$, so that $x^{*} = \\lim_{n} x_n$ ([[thm-banach-fixed-point]],\n[[lem-metric-limits-unique]]). Then for every $n \\in \\mathbb{N}$:\n\n1. **A priori bound.**\n   $$d(x^{*}, x_n) \\;\\le\\; \\frac{q^{\\,n}\\, d(x_1,x_0)}{1-q}.$$\n2. **A posteriori bound.**\n   $$d(x^{*}, x_{n+1}) \\;\\le\\; \\frac{q\\, d(x_{n+1}, x_n)}{1-q}.$$\n\nThe first bound is computable before the iteration is run, from the first step\nalone; the second uses the step just taken and is therefore sharper in practice.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-newton-correction-for-vector-residuals",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $A:\\mathbb R^n\\to\\mathbb R^n$ be a linear map, and let\n$r\\in\\mathbb R^n$ be a residual vector. If $A$ is not invertible in the sense\nof [[def-invertible-euclidean-linear-map]], return\n$(\\texttt{singular-jacobian},\\varnothing)$. If $A$ is invertible, return\n$(\\texttt{correction},s)$, where $s$ is the unique vector solving\n$$As=-r.$$\n\nThe output is a linear correction, not a claim that $r$ came from a nonlinear\nfunction or that applying the correction decreases a residual.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-finite-budget-newton-for-vector-residuals",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $F:U\\to\\mathbb R^n$ be\n$C^1$ ([[def-c-one-map-and-local-inverse]]) with Jacobian $J_F$ as in\n[[def-jacobian-matrix-and-gradient]]. The matrix of $DF(x)$ in the standard\nbasis is $J_F(x)$ by\n[[thm-total-derivative-computes-directional-and-partial-derivatives]].\n**Inputs:** $x_0\\in U$, residual\ntolerance $\\varepsilon\\ge0$, and update budget $N\\in\\mathbb N_0$.\n**Output:** the last valid iterate and one of `root`, `singular-jacobian`,\n`invalid-trial`, or `iteration-budget-exhausted`.\n\nFor $k=0,1,\\ldots,N$, in this order:\n\n1. Compute $F(x_k)$. If $\\|F(x_k)\\|_2\\le\\varepsilon$, return\n   $(x_k,\\texttt{root})$. Here `root` means the residual tolerance was met; it\n   does not certify an exact zero when $\\varepsilon>0$.\n2. If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n3. Call [[alg-newton-correction-for-vector-residuals]] with\n   $A=J_F(x_k)$ and $r=F(x_k)$. If it returns `singular-jacobian`, return that\n   status.\n4. Let $s_k$ be its correction. If $x_k+s_k\\notin U$, return\n   $(x_k,\\texttt{invalid-trial})$. Otherwise set $x_{k+1}=x_k+s_k$.\n\nIt makes no arbitrary-start, global-convergence, or discretization-error claim.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-updated-jacobian-newton-local-quadratic-convergence",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$, meaning $F$ is $C^1$ and its first derivative\nis itself continuously differentiable. Write $J(x)=DF(x)$ as a matrix in the\nstandard basis. Let $x_*\\in U$ satisfy $F(x_*)=0$ and suppose $J(x_*)$ is\ninvertible. Suppose there are $R>0$ and $L\\ge0$ such that the closed Euclidean\nball\n$$\\overline B_2(x_*,R):=\\{x\\in\\mathbb R^n:\\|x-x_*\\|_2\\le R\\}$$\nlies in $U$ and\n$$\\|J(x)-J(y)\\|_{\\rm op}\\le L\\|x-y\\|_2\\qquad(x,y\\in\\overline B_2(x_*,R)),$$\nwhere $\\|A\\|_{\\rm op}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$. Then there are\n$r\\in(0,R]$ and $K>0$ such that every $J(x)$ on $\\overline B_2(x_*,r)$ is\ninvertible with $\\|J(x)^{-1}\\|_{\\rm op}\\le K$. Put $C:=KL/2$ and choose\n$\\rho\\in(0,r]$ with $C\\rho\\le1/2$ (if $L=0$, any $\\rho\\le r$ works).\n\nFor every $x_0\\in\\overline B_2(x_*,\\rho)$, each update attempted by\n[[alg-finite-budget-newton-for-vector-residuals]] is defined, remains in this\nball, and satisfies\n$$\\|x_{k+1}-x_*\\|_2\\le C\\|x_k-x_*\\|_2^2.$$\nIf the ordinary exact-Jacobian Newton recurrence is continued indefinitely,\nthese estimates imply $x_k\\to x_*$ with a quadratic error bound. A finite\nbudget may stop before the residual tolerance is met; `root` status records\nonly that tolerance, not an exact-zero certificate. This result gives no\narbitrary-start or global-convergence guarantee.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-newton-contraction-near-an-invertible-derivative",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  Suppose $A:=Df(a)$ is invertible and put\n$B:=A^{-1}$.  Then there are $R>0$, $0\\le q<1$, and $C>0$ such that\n$\\overline B(a,R)\\subseteq U$, $\\|Bv\\|_2\\le C\\|v\\|_2$, and, for every\n$y\\in\\mathbb R^n$, the Newton map\n\n$$T_y(x):=x+B(y-f(x))$$\n\nsatisfies\n\n$$\\|T_y(x)-T_y(z)\\|_2\\le q\\|x-z\\|_2\\qquad(x,z\\in\\overline B(a,R)).$$\n\nMoreover $Df(x)$ is invertible for every $x\\in\\overline B(a,R)$ and\n\n$$\\|Df(x)^{-1}v\\|_2\\le\\frac C{1-q}\\|v\\|_2.$$",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) constructed in this\nlibrary ([[def-real-numbers]]) and carrying its order ([[def-real-order]]).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\n[[rem-metric-axiom-conventions]] records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as [[lem-metric-nonnegativity]] proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n([[def-max-min]], [[lem-finite-set-has-max]]). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field. For $a, b \\ge 0$:\n\n$$a < b \\iff a^2 < b^2, \\qquad a \\le b \\iff a^2 \\le b^2.$$\n\nMore generally, for arbitrary $a, b \\in F$, $a^2 < b^2 \\iff |a| < |b|$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "contractive-fixed-point-example",
+          "claim": "The distance $d(u,v)=|u-v|$ is a metric by [F11], and $\\mathbb R$ with it is complete by [F2]. It is nonempty because $0\\in\\mathbb R$, as $\\mathbb R$ is a field by [F11]. For all $u,v\\in\\mathbb R$, $|G(u)-G(v)|=\\tfrac12|u-v|$, so $G$ is a contraction with factor $q=1/2$. Its fixed-point equation gives $x=1$, and [F3] gives convergence of the iterates from every $x_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fixed-point-residual-and-stopping-boundary",
+          "claim": "The recurrence $x_{k+1}=(x_k+1)/2$ gives $x_k=1-2^{-k}(1-x_0)$ by induction. Hence $d(G(x_k),x_k)=2^{-(k+1)}|1-x_0|$, which tends to zero by [F5]; the finite-budget algorithm therefore meets any $\\varepsilon>0$ if allowed enough updates. For $\\varepsilon=0$ and $x_0\\ne1$, no finite iterate meets the test, so a finite budget returns `iteration-budget-exhausted`. Also [F4] gives $|x_k-1|\\le2^{-k}|x_1-x_0|/(1-1/2)=2^{-k}|1-x_0|$, agreeing with the exact formula.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "simple-root-newton-recurrence",
+          "claim": "For $x>0$, [F6] solves $2x s=-(x^2-2)$, so the exact Newton update in [F7] is $x_+=(x^2+2)/(2x)$. Direct subtraction using [F10] gives $x_+-r=(x-r)^2/(2x)$. If $|x-r|\\le r/2$, then $x\\ge r/2$ and $|x_+-r|\\le |x-r|^2/r\\le|x-r|/2$. Thus the ball of radius $r/2$ is invariant and the error decreases at least linearly by a factor $1/2$, with the sharper quadratic bound $|e_+|\\le |e|^2/r$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "frozen-and-updated-maps-differ",
+          "claim": "At $a=1$, $F'(1)=2$ and the fixed-inverse map from [F9] with $y=0$ is $T_0(x)=x-\\tfrac12(x^2-2)$. Starting at $1$, it gives $T_0(1)=3/2$ and $T_0(3/2)=11/8$. Updated-Jacobian Newton uses the [F6] correction at $x=3/2$, where $F'(3/2)=3$, and gives $x_2=17/12$. Since $11/8\\ne17/12$, the fixed-inverse and updated-Jacobian maps differ; [F9] does not itself assert a Newton convergence theorem.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "simple-root-start",
+          "claim": "The start $x_0=3/2$ lies in the radius-$r/2$ ball of step 1.3 because $1<r<3$, which follows from $r^2=2$ and [F12]. Iteration gives $|x_k-r|\\le2^{-k}|x_0-r|\\to0$ by [F5]. Also $|F(x_k)|=|x_k-r|\\,|x_k+r|$; since $|x_k-r|\\le r/2$, we have $0<x_k\\le3r/2$ and hence $|x_k+r|\\le5r/2$, so the residual tends to zero and any positive tolerance is eventually met if the update budget is large enough.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "F5",
+            "F10",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "double-root-linear-order",
+          "claim": "For the double-root residual $H(x)=(x-1)^2$ and any $x>1$, [F6] and [F7] give the Newton formula $x_+=x-(x-1)^2/(2(x-1))=(x+1)/2$, so $e_+:=x_+-1=e/2$ for $e:=x-1>0$. Iterating gives $e_k=2^{-k}e_0\\to0$ by [F5]. Suppose a local quadratic bound held on some radius $\\delta>0$, so $|e_+|\\le C|e|^2$ for every $0<e<\\delta$ and some finite $C\\ge0$. Since $e_+=e/2$, it would require $1/2\\le Ce$ for every such $e$. If $C>0$, choose $0<e<\\min\\{\\delta,1/(2C)\\}$; if $C=0$, choose any $0<e<\\delta$. Either choice contradicts the required inequality. Unlike the simple-root bound in step 1.3, $H'(1)=0$, so the simple-root hypothesis in [F8] fails.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "singular-start-outside-local-radius",
+          "claim": "For $F(x)=x^2-2$, the start $x_0=0$ lies outside the radius-$r/2$ ball of step 1.3 because $r>0$. At $0$, $F(0)=-2$ and $F'(0)=0$, so [F6] returns the `singular-jacobian` status before any update, despite the two exact roots $\\pm r$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.3",
+            "F6",
+            "F10",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Newton demonstrations use n=1 and the fixed-point example uses nonempty R."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 treats epsilon=0; steps 1.3 and 3.1 distinguish exact root residuals from a singular nonroot start."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement examples are scalar, and steps 1.3 and 2.2 compute their n=1 updates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The double-root Jacobian vanishes in step 2.2; the start x=0 has a singular Jacobian in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "All functions are defined on R, which has no finite domain endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use explicit finite recurrences and arithmetic; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim. The example computes contraction iterates, simple-root Newton, a double-root countercase and singular-Jacobian exit. Its zero-tolerance discussion distinguishes finite-budget failure from positive-tolerance convergence, and its fixed-inverse comparison is not updated Newton. These are explicit computations and countercases, not a biconditional assertion requiring two directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim. The example computes contraction iterates, simple-root Newton, a double-root countercase and singular-Jacobian exit. Its zero-tolerance discussion distinguishes finite-budget failure from positive-tolerance convergence, and its fixed-inverse comparison is not updated Newton. These are explicit computations and countercases, not a biconditional assertion requiring two directions."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read all seven verification steps and twelve cited interfaces. R is nonempty (0 witness from the complete ordered field convention), complete and the affine G is a 1/2 contraction. Recomputed xk=1-2^-k(1-x0), residual=2^(-k-1)|1-x0|, Banach bound and epsilon=0 boundary. For x²-2, r²=2 and r>0 give e_next=e²/(2x); |e|<=r/2 implies x>=r/2 and invariant quadratic bound e_next<=e²/r<=|e|/2. Starting 3/2 is inside using 1<r<3; residual tends to zero by the explicit 5r/2 factor. Recomputed frozen iterates 3/2,11/8 versus updated 17/12. Double root gives exact e/2 and contradicts any uniform quadratic bound by an arbitrarily small positive e, with C=0 handled. At x=0 the correction supplier is singular independently of outer stop rules; no global claim follows. No arbitrary choice. Reader/refuter contain no findings."
+      }
+    },
+    "lem-finite-budget-fixed-point-iteration-work": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-fixed-point-iteration",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $G:X\\to X$ be a\nspecified map, and choose an initial point $x_0\\in X$, a residual tolerance\n$\\varepsilon\\ge0$, and an iteration budget $N\\in\\mathbb N_0$. A **fixed point**\nof $G$ is a point $x$ with $G(x)=x$. The procedure returns a point and a\nstatus as follows. For $k=0,1,\\ldots,N$, compute the fixed-point residual\n$r_k:=d(G(x_k),x_k)$. If $r_k\\le\\varepsilon$, return\n$(x_k,\\texttt{residual-tolerance-met},r_k,k)$. Otherwise, if $k=N$, return\n$(x_k,\\texttt{iteration-budget-exhausted},r_k,k)$. Otherwise set\n$x_{k+1}:=G(x_k)$ and continue.\n\nA positive residual tolerance reports an approximate fixed point only; this\ndefinition asserts no convergence or error bound.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "At the initial entered index $0$, the point $x_0$ belongs to $X$, no update has occurred, and the single pass evaluates one residual.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "For an entered index $k\\le N$, assume the preceding entered indices are exactly $0,\\ldots,k-1$, every entered point through $x_k$ lies in $X$, and at most $k$ updates have occurred before pass $k$.",
+          "step": "1.2",
+          "inputs": [
+            "IH"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "If pass $k$ continues, [F1] requires $k<N$ and sets $x_{k+1}=G(x_k)\\in X$ by the self-map condition. The next index is $k+1$ and exactly one additional update has occurred. Thus the assertion of step 1.2 holds at the next entered index. A return creates no further index or update.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "The base and induction step prove membership of every entered iterate and that the entered indices form an initial segment of $0,\\ldots,N$. At index $N$, either the residual test returns or the budget test returns before another update. Hence there are at most $N+1$ residual evaluations and $N$ updates. Every pass contains finitely many returning primitives, so the procedure terminates with a stated status, including when $N=0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Admissible inputs specify an initial point, so an empty input domain is excluded; zero update budget is treated separately. The Statement permits zero update budget and only assumes returning primitives. Its proof checks the initial residual before budget, keeps every entered point in the self-map space, and bounds updates by N and residual evaluations by N+1. The initial point excludes an empty state space; zero budget, singleton space and early return obey the same counted branches."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof 3.1 explicitly includes N=0: at most one entered pass, with no update. Earlier failure or tolerance returns remain stated statuses. The Statement permits zero update budget and only assumes returning primitives. Its proof checks the initial residual before budget, keeps every entered point in the self-map space, and bounds updates by N and residual evaluations by N+1. The initial point excludes an empty state space; zero budget, singleton space and early return obey the same counted branches."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof 1.1 initializes the first pass and Proof 2.1 covers its only possible update when N=1; Proof 3.1 bounds the two entered passes. The Statement permits zero update budget and only assumes returning primitives. Its proof checks the initial residual before budget, keeps every entered point in the self-map space, and bounds updates by N and residual evaluations by N+1. The initial point excludes an empty state space; zero budget, singleton space and early return obey the same counted branches."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 2.1 and 3.1 allow an immediate early return, which only shortens the finite index segment; no tolerance attainment is assumed. The Statement permits zero update budget and only assumes returning primitives. Its proof checks the initial residual before budget, keeps every entered point in the self-map space, and bounds updates by N and residual evaluations by N+1. The initial point excludes an empty state space; zero budget, singleton space and early return obey the same counted branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof 3.1 returns at entered index N before another update; the index-zero endpoint is initialized in Proof 1.1. The Statement permits zero update budget and only assumes returning primitives. Its proof checks the initial residual before budget, keeps every entered point in the self-map space, and bounds updates by N and residual evaluations by N+1. The initial point excludes an empty state space; zero budget, singleton space and early return obey the same counted branches."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The procedures have supplied initial data and returning primitives; the finite counter proof selects no arbitrary family of witnesses. The Statement permits zero update budget and only assumes returning primitives. Its proof checks the initial residual before budget, keeps every entered point in the self-map space, and bounds updates by N and residual evaluations by N+1. The initial point excludes an empty state space; zero budget, singleton space and early return obey the same counted branches."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a conditional work/status implication, not an equivalence. The Statement permits zero update budget and only assumes returning primitives. Its proof checks the initial residual before budget, keeps every entered point in the self-map space, and bounds updates by N and residual evaluations by N+1. The initial point excludes an empty state space; zero budget, singleton space and early return obey the same counted branches."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a conditional work/status implication, not an equivalence. The Statement permits zero update budget and only assumes returning primitives. Its proof checks the initial residual before budget, keeps every entered point in the self-map space, and bounds updates by N and residual evaluations by N+1. The initial point excludes an empty state space; zero budget, singleton space and early return obey the same counted branches."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "original3 same-session completion",
+        "notes": "Exact local induction and returning-primitive qualifications accepted in the original-owner final result; no convergence, success, backend-cost or independently read external proof is asserted."
+      }
+    },
+    "lem-finite-budget-newton-work-and-status": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-budget-newton-for-vector-residuals",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $F:U\\to\\mathbb R^n$ be\n$C^1$ ([[def-c-one-map-and-local-inverse]]) with Jacobian $J_F$ as in\n[[def-jacobian-matrix-and-gradient]]. The matrix of $DF(x)$ in the standard\nbasis is $J_F(x)$ by\n[[thm-total-derivative-computes-directional-and-partial-derivatives]].\n**Inputs:** $x_0\\in U$, residual\ntolerance $\\varepsilon\\ge0$, and update budget $N\\in\\mathbb N_0$.\n**Output:** the last valid iterate and one of `root`, `singular-jacobian`,\n`invalid-trial`, or `iteration-budget-exhausted`.\n\nFor $k=0,1,\\ldots,N$, in this order:\n\n1. Compute $F(x_k)$. If $\\|F(x_k)\\|_2\\le\\varepsilon$, return\n   $(x_k,\\texttt{root})$. Here `root` means the residual tolerance was met; it\n   does not certify an exact zero when $\\varepsilon>0$.\n2. If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n3. Call [[alg-newton-correction-for-vector-residuals]] with\n   $A=J_F(x_k)$ and $r=F(x_k)$. If it returns `singular-jacobian`, return that\n   status.\n4. Let $s_k$ be its correction. If $x_k+s_k\\notin U$, return\n   $(x_k,\\texttt{invalid-trial})$. Otherwise set $x_{k+1}=x_k+s_k$.\n\nIt makes no arbitrary-start, global-convergence, or discretization-error claim.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "At the initial entered index $0$, the point $x_0$ lies in $U$, no correction or update has occurred, and the pass explicitly evaluates one residual.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "For an entered index $k\\le N$, assume the preceding entered indices are exactly $0,\\ldots,k-1$, every entered point through $x_k$ lies in $U$, and at most $k$ correction calls and accepted updates have occurred before pass $k$.",
+          "step": "1.2",
+          "inputs": [
+            "IH"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "A continuing pass requires $k<N$. It makes one correction call; a singular correction or invalid trial returns without entering another index. Otherwise the domain test gives $x_{k+1}\\in U$, and the next index is $k+1$ with one additional correction call and accepted update. Thus the assertion of step 1.2 holds at the next entered index.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "The base and induction step prove membership of all entered iterates and that their indices form an initial segment of $0,\\ldots,N$. At $k=N$ the residual or budget branch returns before a correction. Hence there are at most $N+1$ explicit residual evaluations, $N$ correction calls and $N$ accepted updates. Singular or invalid-trial returns only shorten the execution. The finitely many returning primitives therefore terminate with a stated status, including when $N=0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Admissible inputs specify an initial point, so an empty input domain is excluded; zero update budget is treated separately. The Statement permits zero correction budget, while the initial point belongs to the open domain. Its proof returns before correction at the final allowed index and treats singular correction or invalid trial as early exits. This bounds outer calls only, including N=0; no convergence, tolerance attainment or backend complexity is inferred."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof 3.1 explicitly includes N=0: at most one entered pass, with no update. Earlier failure or tolerance returns remain stated statuses. The Statement permits zero correction budget, while the initial point belongs to the open domain. Its proof returns before correction at the final allowed index and treats singular correction or invalid trial as early exits. This bounds outer calls only, including N=0; no convergence, tolerance attainment or backend complexity is inferred."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof 1.1 initializes the first pass and Proof 2.1 covers its only possible update when N=1; Proof 3.1 bounds the two entered passes. The Statement permits zero correction budget, while the initial point belongs to the open domain. Its proof returns before correction at the final allowed index and treats singular correction or invalid trial as early exits. This bounds outer calls only, including N=0; no convergence, tolerance attainment or backend complexity is inferred."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 2.1 and 3.1 allow an immediate early return, which only shortens the finite index segment; no tolerance attainment is assumed. The Statement permits zero correction budget, while the initial point belongs to the open domain. Its proof returns before correction at the final allowed index and treats singular correction or invalid trial as early exits. This bounds outer calls only, including N=0; no convergence, tolerance attainment or backend complexity is inferred."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof 3.1 returns at entered index N before another update; the index-zero endpoint is initialized in Proof 1.1. The Statement permits zero correction budget, while the initial point belongs to the open domain. Its proof returns before correction at the final allowed index and treats singular correction or invalid trial as early exits. This bounds outer calls only, including N=0; no convergence, tolerance attainment or backend complexity is inferred."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The procedures have supplied initial data and returning primitives; the finite counter proof selects no arbitrary family of witnesses. The Statement permits zero correction budget, while the initial point belongs to the open domain. Its proof returns before correction at the final allowed index and treats singular correction or invalid trial as early exits. This bounds outer calls only, including N=0; no convergence, tolerance attainment or backend complexity is inferred."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a conditional work/status implication, not an equivalence. The Statement permits zero correction budget, while the initial point belongs to the open domain. Its proof returns before correction at the final allowed index and treats singular correction or invalid trial as early exits. This bounds outer calls only, including N=0; no convergence, tolerance attainment or backend complexity is inferred."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a conditional work/status implication, not an equivalence. The Statement permits zero correction budget, while the initial point belongs to the open domain. Its proof returns before correction at the final allowed index and treats singular correction or invalid trial as early exits. This bounds outer calls only, including N=0; no convergence, tolerance attainment or backend complexity is inferred."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read all four proof steps and the complete exact-budget algorithm. Initial x0 lies in U; indices are an initial segment 0..N, and entering k+1 requires k<N, a successful solve and a domain-valid trial. Thus at most N corrections and updates, and N+1 explicit outer residual evaluations occur. At N=0, residual takes precedence over budget; singular and invalid-trial branches terminate without another update. Primitive-return assumptions explicitly include domain decisions, evaluations and solves, so no convergence, successful tolerance or backend complexity claim is inferred. No AC. Reader/refuter contain no findings."
+      }
+    }
+  }
+}

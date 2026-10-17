@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "78",
+  "round": 0,
+  "reviewed_items": [
+    "def-finite-conservative-production-destruction-system",
+    "lem-strict-column-dominance-implies-nonnegative-inverse",
+    "alg-modified-patankar-euler",
+    "def-source-factored-production-destruction-rates",
+    "alg-zero-compatible-modified-patankar-euler",
+    "alg-mprk22-1",
+    "thm-modified-patankar-euler-positive-conservative",
+    "lem-modified-patankar-euler-positive-tube-local-error-and-stability",
+    "thm-zero-compatible-modified-patankar-euler-admissibility",
+    "thm-mprk22-1-positive-conservative",
+    "lem-mprk22-1-positive-tube-local-error-and-stability",
+    "thm-modified-patankar-euler-global-first-order-error",
+    "thm-patankar-inexact-solve-residual-ledger",
+    "thm-mprk22-1-global-second-order-error",
+    "ex-two-compartment-stiff-reversible-transfer",
+    "ex-three-species-weighted-stoichiometric-conservation",
+    "ex-zero-denominator-corner-and-factorized-extension",
+    "cex-small-residual-does-not-certify-positivity",
+    "cex-forward-euler-negative-concentration-despite-stability"
+  ],
+  "reviewed_pages": [
+    "positive-conservative-production-destruction-integrators",
+    "positive-conservative-production-destruction-integrators-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch and its actual supplier arguments were reviewed against the approved XD-03 scope. Three repairable issues remain on the assigned pages; the other preservation, error, residual, and example arguments check under their stated hypotheses.",
+  "findings": [
+    {
+      "id": "prerequisite-c2-calculus",
+      "type": "prerequisite",
+      "reason": "The source-factored definition cites def-higher-derivatives-and-smoothness, whose actual definition covers scalar functions on subsets of R; the two tube lemmas also cite thm-algebra-of-derivatives, whose actual theorem is one-dimensional. These do not supply multivariable C² regularity or the product and quotient rules used for rates and matrices on U⊂R^m. Use def-ck-and-multi-index-notation-in-several-variables and provide the needed multivariable product/reciprocal calculations (thm-chain-sum-product-and-composition-rules-for-banach-derivatives supplies the bounded-bilinear product rule). Also change “smooth extension” in thm-zero-compatible-modified-patankar-euler-admissibility to C²: only C² factors are assumed."
+    },
+    {
+      "id": "pds-rate-domain",
+      "type": "local",
+      "reason": "The PDS definition permits an arbitrary Ω, but alg-modified-patankar-euler and alg-mprk22-1 admit any nonnegative or positive input without requiring rates to be defined there; MPRK also evaluates rates at its stage z. For example, take Ω a small positive neighborhood of (1,1), p₂₁=d₁₂=10y₁, yⁿ=(1,1), and h=1. The Patankar stage is z=(1/11,21/11), outside Ω, so the MPRK rate evaluation p₂₁(z) is undefined. Make rate availability on all nonnegative states explicit, with local open extensions where smooth analysis needs them, or restrict the algorithms and theorem hypotheses to cover every required evaluation."
+    },
+    {
+      "id": "algorithm-invalid-input-branches",
+      "type": "local",
+      "reason": "alg-zero-compatible-modified-patankar-euler and alg-mprk22-1 identify inadmissible inputs but do not specify the returned status for them. Add an explicit inadmissible-input branch before rate evaluation or linear solves; the modified Patankar Euler algorithm already specifies this branch."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-modified-patankar-euler",
+      "decision": "accept",
+      "reason": "Its valid-state matrix argument is correct once the PDS interface ensures the required rates are defined."
+    },
+    {
+      "id": "def-source-factored-production-destruction-rates",
+      "decision": "repair",
+      "reason": "Replace the one-variable C² reference with the multivariable definition and establish the required multivariable closure rules."
+    },
+    {
+      "id": "alg-zero-compatible-modified-patankar-euler",
+      "decision": "repair",
+      "reason": "Specify the invalid-input status; its valid factorized solve is correct."
+    },
+    {
+      "id": "alg-mprk22-1",
+      "decision": "repair",
+      "reason": "Specify the invalid-input status and ensure the stage-rate evaluations are in the rate domain."
+    },
+    {
+      "id": "thm-modified-patankar-euler-positive-conservative",
+      "decision": "accept",
+      "reason": "The inverse-positivity and column-sum proof is sound for defined rates and admissible inputs."
+    },
+    {
+      "id": "lem-modified-patankar-euler-positive-tube-local-error-and-stability",
+      "decision": "repair",
+      "reason": "Its multivariable regularity and derivative-algebra steps need the correct C² interface and product/quotient justification."
+    },
+    {
+      "id": "thm-zero-compatible-modified-patankar-euler-admissibility",
+      "decision": "repair",
+      "reason": "Its local consistency proof needs the corrected multivariable C² interface, and its smoothness wording overstates the C² hypothesis."
+    },
+    {
+      "id": "thm-mprk22-1-positive-conservative",
+      "decision": "accept",
+      "reason": "The stage and update matrix arguments are sound once rates at the input and stage are defined."
+    },
+    {
+      "id": "lem-mprk22-1-positive-tube-local-error-and-stability",
+      "decision": "repair",
+      "reason": "Its multivariable regularity and derivative-algebra steps need the correct C² interface and product/quotient justification."
+    },
+    {
+      "id": "thm-modified-patankar-euler-global-first-order-error",
+      "decision": "accept",
+      "reason": "The global recurrence applies the local defect and stability estimates under its stated common positive-tube conditions."
+    },
+    {
+      "id": "thm-patankar-inexact-solve-residual-ledger",
+      "decision": "accept",
+      "reason": "The stored-system residual bounds and component-margin conclusion follow from its stated arithmetic and matrix premises."
+    },
+    {
+      "id": "thm-mprk22-1-global-second-order-error",
+      "decision": "accept",
+      "reason": "The global recurrence applies the local MPRK estimates under its stated common positive-tube conditions."
+    },
+    {
+      "id": "ex-two-compartment-stiff-reversible-transfer",
+      "decision": "accept",
+      "reason": "The transfer convention, computed solve, positivity, mass, and damping factor check."
+    },
+    {
+      "id": "ex-three-species-weighted-stoichiometric-conservation",
+      "decision": "accept",
+      "reason": "The number-to-mass transfer factors and zero-compatible solve check; the polynomial factors satisfy multivariable C²."
+    },
+    {
+      "id": "ex-zero-denominator-corner-and-factorized-extension",
+      "decision": "accept",
+      "reason": "The ratio failure and factorized solve check; the constant factors satisfy multivariable C²."
+    },
+    {
+      "id": "cex-small-residual-does-not-certify-positivity",
+      "decision": "accept",
+      "reason": "The one-dimensional negative candidate has arbitrarily small residual and fails the stated margin."
+    },
+    {
+      "id": "cex-forward-euler-negative-concentration-despite-stability",
+      "decision": "accept",
+      "reason": "The finite generator, Euler step, eigenvalue multipliers, and negative coordinate are computed correctly."
+    }
+  ]
+}

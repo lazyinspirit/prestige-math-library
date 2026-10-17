@@ -19,6 +19,7 @@ deps:
   - thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral
   - thm-choice-implies-dependent-implies-countable-choice
   - cor-trigonometric-parity-and-pythagorean-identity
+  - thm-sine-cosine-signs-monotonicity-and-ranges
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -32,8 +33,8 @@ sources:
       url: "https://maths.qmul.ac.uk/~boris/potential_th_notes.pdf"
       locator: "§5, Chebyshev nodes and the arcsine measure"
 verification:
-  audited: 2026-10-02
   precheck: pass
+  repair: research/numerical-optimization-dynamics-2026-10-16-owner-step2-preclaimed-published-receipts-ROOT-1035/ex-chebyshev-extremal-nodes-and-arcsine-measure.repair.json
 ---
 
 ## Statement
@@ -50,7 +51,7 @@ attains its extreme values $\pm1$, alternately signed.
 
 **Given:** the nodes $x_{k,n}=\cos\frac{k\pi}n$, the empirical measures $\nu_n$, the Chebyshev polynomials $T_n$ of [[def-chebyshev-polynomials-first-and-second-kind]], and the Axiom of Choice.
 
-[F1] The multiple-angle identity $T_n(\cos\theta)=\cos(n\theta)$ holds for all real $\theta$ ([[thm-chebyshev-multiple-angle-identities]]), and $|\cos u|\le1$ for real $u$, with $\cos(k\pi)=(-1)^k$ ([[cor-trigonometric-parity-and-pythagorean-identity]]).
+[F1] The multiple-angle identity $T_n(\cos\theta)=\cos(n\theta)$ holds for all real $\theta$, and for $n\ge1$ and $0\le k\le n$ its alternating-value clause gives $T_n(\cos(k\pi/n))=(-1)^k$ ([[thm-chebyshev-multiple-angle-identities]]). Also $|\cos u|\le1$ for real $u$ ([[cor-trigonometric-parity-and-pythagorean-identity]]).
 
 [F2] The arcsine measure $\mu$ of $[-1,1]$ is the unique equilibrium measure of $[-1,1]$, and for every continuous $f$ on $[-1,1]$ one has $\int f\,d\mu=\frac1\pi\int_0^\pi f(\cos\theta)\,d\theta$ ([[ex-logarithmic-capacity-of-a-real-interval]]).
 
@@ -60,13 +61,15 @@ attains its extreme values $\pm1$, alternately signed.
 
 [F5] A continuous real function on the closed bounded interval $[0,\pi]$ is Riemann integrable, and its uniform-mesh Riemann sums converge to the integral: $\frac1m\sum_{j=0}^{m-1}g\bigl(\frac{j\pi}m\bigr)\to\frac1\pi\int_0^\pi g(\theta)\,d\theta$ (apply [[thm-continuous-on-a-rectangle-is-riemann-integrable]] in dimension $1$, then [[thm-darboux-equals-riemann]]). Its Riemann integral equals its Lebesgue integral by [[thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral]], whose Countable Choice hypothesis is supplied by the assumed Axiom of Choice through [[thm-choice-implies-dependent-implies-countable-choice]].
 
+[F6] [[thm-sine-cosine-signs-monotonicity-and-ranges]]: cosine maps $[0,\pi]$ onto $[-1,1]$ and is strictly monotone on each interval $[j\pi,(j+1)\pi]$, decreasing for even $j$ and increasing for odd $j$.
+
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 For each $n\ge1$ the points $x_{k,n}=\cos\frac{k\pi}n$ lie in $[-1,1]$; since $\cos$ is strictly decreasing on $[0,\pi]$ and $\frac{k\pi}n$ are strictly increasing for $k=0,\dots,n$, the $n+1$ points are pairwise distinct, and by [F3] each $\nu_n$ is a Borel probability measure on $[-1,1]$. [F3, given, algebra]
+1.1 For each $n\ge1$ the points $x_{k,n}=\cos\frac{k\pi}n$ lie in $[-1,1]$; since $\cos$ is strictly decreasing on $[0,\pi]$ and $\frac{k\pi}n$ are strictly increasing for $k=0,\dots,n$, the $n+1$ points are pairwise distinct, and by [F3] each $\nu_n$ is a Borel probability measure on $[-1,1]$. [F3, F6, given, algebra]
 
-1.2 By the multiple-angle identity [F1], $T_n(x_{k,n})=\cos(k\pi)=(-1)^k$; moreover every $x\in[-1,1]$ is $x=\cos\theta$ for some $\theta\in[0,\pi]$, so $|T_n(x)|=|\cos(n\theta)|\le1$ for every $x\in[-1,1]$, with equality exactly at the points where $|\cos n\theta|=1$, that is, where $n\theta$ is an integer multiple of $\pi$. [F1, given, algebra]
+1.2 The alternating-value clause in [F1] gives $T_n(x_{k,n})=(-1)^k$, and its multiple-angle identity therefore also gives $\cos(k\pi)=(-1)^k$ for $0\le k\le n$. By [F6], every $x\in[-1,1]$ is $x=\cos\theta$ for some $\theta\in[0,\pi]$, so $|T_n(x)|=|\cos(n\theta)|\le1$ by [F1]. The interval $[0,n\pi]$ is the union of the finitely many $[j\pi,(j+1)\pi]$, $0\le j<n$. On each such interval cosine is strictly monotone by [F6], with the alternating endpoint values just proved; its absolute value is therefore $1$ only at the endpoints. Hence equality holds exactly when $n\theta=k\pi$ for some $k\in\{0,\ldots,n\}$, or exactly at the listed nodes. [F1, F6, given, algebra]
 
 1.3 **Weak convergence.** Let $f$ be a continuous real function on $[-1,1]$ and put $g(\theta):=f(\cos\theta)$; then $g$ is continuous on $[0,\pi]$, so [F5] applied with $m=n$ gives $\frac1n\sum_{k=0}^{n-1}g\bigl(\frac{k\pi}n\bigr)\to\frac1\pi\int_0^\pi g(\theta)\,d\theta$. [F5, given]
 

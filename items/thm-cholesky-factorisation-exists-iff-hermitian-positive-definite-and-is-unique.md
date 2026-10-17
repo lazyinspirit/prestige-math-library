@@ -7,12 +7,12 @@ origin: pipeline
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-cholesky-factorisation-with-positive-diagonal, thm-determinant-of-a-triangular-matrix, thm-determinant-multiplicative, def-matrix-product-and-identity-matrix]
+deps: [def-cholesky-factorisation-with-positive-diagonal, thm-determinant-of-a-triangular-matrix, thm-determinant-multiplicative, def-matrix-product-and-identity-matrix, thm-operator-invertible-iff-determinant-nonzero]
 aliases: []
 proof_strategy: induction
 verification:
-  audited: 2026-08-30
   precheck: pass
+  repair: research/numerical-optimization-dynamics-2026-10-16-owner-step2-preclaimed-published-receipts-ROOT-1035/thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique.repair.json
 sources:
   scraped: []
   references:
@@ -45,11 +45,13 @@ When these conditions hold, the factor $L$ is unique.
 
 [L4] Matrix multiplication uses the convention of [[def-matrix-product-and-identity-matrix]].
 
+[L5] A finite-dimensional operator over a field is invertible exactly when its determinant is nonzero ([[thm-operator-invertible-iff-determinant-nonzero]]), applied to the operator represented by a square matrix.
+
 ## Proof
 
 **Proof technique:** block induction with a quotient comparison for uniqueness.
 
-1.1 Suppose $A=LL^*$ as in [L1]. Then $A^*=LL^*=A$, so $A$ is Hermitian. For any nonzero $x$, one has $$x^*Ax=x^*LL^*x=(L^*x)^*(L^*x)=\|L^*x\|_2^2.$$ The diagonal of $L$ is positive, hence nonzero; [L2] and [L3] give $\det L\ne 0$, so $L$ is invertible and $L^*x\ne 0$ when $x\ne 0$. Therefore $x^*Ax>0$. [L1, L2, L3, L4, algebra]
+1.1 Suppose $A=LL^*$ as in [L1]. Then $A^*=LL^*=A$, so $A$ is Hermitian. For any nonzero $x$, one has $$x^*Ax=x^*LL^*x=(L^*x)^*(L^*x)=\|L^*x\|_2^2.$$ The diagonal of $L$ is positive, hence nonzero; [L2] and [L3] give $\det L\ne 0$, so [L5] makes $L$ invertible and $L^*x\ne 0$ when $x\ne 0$. Therefore $x^*Ax>0$. [L1, L2, L3, L4, L5, algebra]
 
 1.2 For the converse, use induction on $n$. The case $n=1$ is immediate: $A=[a]$ is Hermitian positive definite exactly when $a>0$, in which case $A=[\sqrt a][\sqrt a]^*$. [base, L1, algebra]
 
@@ -57,6 +59,6 @@ When these conditions hold, the factor $L$ is unique.
 
 2.1 Define $$L:=\begin{pmatrix}\sqrt a&0\\ \ell&\widetilde L\end{pmatrix}.$$ Direct multiplication gives $$LL^*=\begin{pmatrix}a&r^*\\ r&\ell\ell^*+\widetilde L\widetilde L^*\end{pmatrix} =\begin{pmatrix}a&r^*\\ r&C\end{pmatrix}=A.$$ The matrix $L$ is lower triangular and its diagonal is positive real, so this is a Cholesky factorisation. [step 1.3, L1, L4, algebra]
 
-3.1 For uniqueness, suppose $A=L_1L_1^*=L_2L_2^*$ are two such factorizations. Then $M:=L_2^{-1}L_1$ is lower triangular, and $MM^*=I$ because $L_2MM^*L_2^*=L_1L_1^*=L_2L_2^*$. A lower-triangular unitary matrix has zero strict-lower entries and diagonal entries of modulus $1$; since the diagonal of $M$ is the ratio of two positive real diagonals, each diagonal entry is also positive real, hence equals $1$. Therefore $M=I$ and $L_1=L_2$. [step 1.1, step 2.1, L2, L3, algebra]
+3.1 For uniqueness, suppose $A=L_1L_1^*=L_2L_2^*$ are two such factorizations. By [L2] and [L5], both factors are invertible. Forward substitution in $L_2u=e_j$ gives $u_i=0$ for $i<j$ and $u_j=1/(L_2)_{jj}$, so $L_2^{-1}$ is lower triangular with reciprocal diagonal. Hence $M:=L_2^{-1}L_1$ is lower triangular with positive real diagonal, and $MM^*=I$ follows by multiplying $L_2MM^*L_2^*=L_1L_1^*=L_2L_2^*$ by the inverses. Its first row contains only $M_{11}$, so $MM^*=I$ gives $|M_{11}|=1$ and $M_{i1}\overline{M_{11}}=0$ for $i>1$. Removing this first row and column leaves a lower triangular block satisfying the same identity; induction gives zero strict-lower entries and unit-modulus diagonal throughout. Every diagonal entry is positive real, hence $1$, so $M=I$ and $L_1=L_2$. [step 1.1, step 2.1, L2, L3, L4, L5, algebra]
 
 4.1 Step 1.1 proves that a Cholesky factorisation implies Hermitian positive definiteness. Steps 1.2-2.1 prove the converse by induction, and step 3.1 gives uniqueness. [step 1.1, step 1.2, step 2.1, step 3.1, discharge-induction] ∎

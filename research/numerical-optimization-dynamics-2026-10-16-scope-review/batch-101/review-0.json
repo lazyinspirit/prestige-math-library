@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "101",
+  "round": 0,
+  "reviewed_items": [
+    "def-pde-box-control-set",
+    "lem-pde-box-control-set-basic-properties",
+    "lem-pde-l2-control-space-separable",
+    "def-linear-elliptic-pde-constrained-control-problem",
+    "lem-separable-hilbert-bounded-sequence-weak-subsequence",
+    "lem-pde-box-control-set-weakly-sequentially-closed",
+    "thm-linear-elliptic-control-state-and-adjoint-wellposedness",
+    "thm-linear-elliptic-reduced-control-gradient-and-hessian",
+    "thm-linear-elliptic-control-existence-and-variational-inequality",
+    "lem-box-control-projection-is-pointwise-clipping",
+    "cor-linear-elliptic-control-projection-formula",
+    "lem-piecewise-constant-control-h1-projection-error",
+    "lem-fem-control-gradient-residual-bound",
+    "thm-p0-control-fem-o-h-error",
+    "thm-variational-fem-control-o-h2-error",
+    "thm-parabolic-control-adjoint-gradient-extension",
+    "alg-fem-control-proximal-gradient-certified-residual",
+    "thm-fem-control-proximal-gradient-residual-distance-bound",
+    "alg-fem-control-active-set-box-quadratic-solve",
+    "thm-fem-control-active-set-box-quadratic-solve-sound-finite",
+    "alg-fem-control-active-set-sqp-with-finite-residual-status",
+    "thm-fem-control-active-set-sqp-finite-budget-certificate",
+    "lem-p0-box-projection-is-clipped-cell-average",
+    "ex-distributed-heat-source-control-with-an-exact-box-optimum",
+    "ex-boundary-control-needs-a-trace-space",
+    "ex-bang-bang-control-is-the-alpha-zero-box-limit"
+  ],
+  "reviewed_pages": [
+    "finite-element-pde-constrained-optimization",
+    "finite-element-pde-constrained-optimization-examples"
+  ],
+  "decision": "repair",
+  "reason": "Reviewed the complete batch against its approved CTRL2 scope and current supplier statements and proofs. Five local repairs are needed; the current prerequisite scope includes the SQP page, and I found no unresolved outside-batch prerequisite gap.",
+  "findings": [
+    {
+      "id": "def-linear-elliptic-pde-constrained-control-problem",
+      "type": "prerequisite",
+      "reason": "The definition assigns V=H₀¹ but fixes no norm or Hilbert structure. The state/adjoint proof assumes V is a real Hilbert space for Lax–Milgram. Specify and establish the standard H¹ Hilbert structure under the stated Countable Choice scope; the available generic Sobolev completeness result assumes full AC."
+    },
+    {
+      "id": "thm-p0-control-fem-o-h-error",
+      "type": "local",
+      "reason": "The discrete reduced objective and its gradient g_h are not defined. The proof needs the discrete variational inequality and the identity g_h(q)=B*p_h(q)+αq for the same objective. State the objective and adjoint-consistency conditions explicitly."
+    },
+    {
+      "id": "thm-variational-fem-control-o-h2-error",
+      "type": "local",
+      "reason": "The proof infers g_h−g=p_h−p, but the finite-element objective, discrete adjoint, and gradient relation are not specified. Define the discrete objective and adjoint or explicitly assume the required uniform gradient-error bound."
+    },
+    {
+      "id": "alg-fem-control-proximal-gradient-certified-residual",
+      "type": "local",
+      "reason": "Step 1 delegates state, adjoint, and Strang-bound computation to unspecified calls. A finite iteration budget does not ensure termination if a call does not return. Specify a finite solver procedure with failure handling, or state its finite-return admissibility condition and carry it into the termination claim."
+    },
+    {
+      "id": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+      "type": "local",
+      "reason": "Step 2 calls the exact-Hessian Newton algorithm, which itself solves and returns a step, then calls the finite-precision QR solver for the same system. The output step is ambiguous. Specify that the QR result is the returned step and clarify the role of the exact-Hessian procedure without performing a second exact solve."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-linear-elliptic-control-state-and-adjoint-wellposedness",
+      "decision": "accept",
+      "reason": "The Hilbert-structure clarification supplies the exact condition required by its Lax–Milgram use."
+    },
+    {
+      "id": "thm-linear-elliptic-reduced-control-gradient-and-hessian",
+      "decision": "accept",
+      "reason": "Its state, adjoint, and Riesz uses are consistent with V carrying the standard H¹ Hilbert structure."
+    },
+    {
+      "id": "thm-linear-elliptic-control-existence-and-variational-inequality",
+      "decision": "accept",
+      "reason": "Its weak-subsequence and reduced-gradient argument remains valid under the clarified V structure."
+    },
+    {
+      "id": "lem-fem-control-gradient-residual-bound",
+      "decision": "accept",
+      "reason": "Its primal and transposed Strang applications require precisely the Hilbert structure being clarified."
+    },
+    {
+      "id": "cor-linear-elliptic-control-projection-formula",
+      "decision": "accept",
+      "reason": "Its projection and variational-inequality uses are unchanged by the clarification."
+    },
+    {
+      "id": "thm-p0-control-fem-o-h-error",
+      "decision": "repair",
+      "reason": "It also requires the local discrete-objective and gradient-consistency repair identified above."
+    },
+    {
+      "id": "thm-variational-fem-control-o-h2-error",
+      "decision": "repair",
+      "reason": "It also requires the local discrete-objective and adjoint-gradient interface repair identified above."
+    },
+    {
+      "id": "alg-fem-control-proximal-gradient-certified-residual",
+      "decision": "repair",
+      "reason": "Its solver-call termination contract must be made explicit as identified above."
+    },
+    {
+      "id": "thm-fem-control-proximal-gradient-residual-distance-bound",
+      "decision": "repair",
+      "reason": "Its at-most-N termination conclusion depends on finite-return FE evaluation calls; check it against the algorithm repair."
+    },
+    {
+      "id": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+      "decision": "repair",
+      "reason": "Clarify that the finite-precision QR result supplies the step used in the status and update."
+    },
+    {
+      "id": "thm-fem-control-active-set-sqp-finite-budget-certificate",
+      "decision": "accept",
+      "reason": "Its residual argument follows from the QR-certified step once that step is identified unambiguously."
+    },
+    {
+      "id": "ex-distributed-heat-source-control-with-an-exact-box-optimum",
+      "decision": "accept",
+      "reason": "Its exact state, adjoint, and projection uses satisfy the clarified Hilbert-space setting."
+    },
+    {
+      "id": "finite-element-pde-constrained-optimization",
+      "decision": "accept",
+      "reason": "Its stated error-rate hypotheses and residual-status limitations remain consistent with these clarifications."
+    },
+    {
+      "id": "finite-element-pde-constrained-optimization-examples",
+      "decision": "accept",
+      "reason": "Its example summaries remain within the clarified elliptic-control interface."
+    }
+  ]
+}

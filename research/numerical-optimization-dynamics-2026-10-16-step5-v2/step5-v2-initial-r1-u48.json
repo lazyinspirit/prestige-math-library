@@ -1,0 +1,160 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "48",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-projective-determinant-is-homogeneous-and-scale-invariant",
+      "model": "gpt-6-luna",
+      "context_sha256": "d4095d0e4ca8dcc390906003933a8de3ea931e2e17f46bf66e21f1dd12ef43c3",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The title incorrectly made the determinant value scale invariant: for n=1, A=1, B=0, p(0,1)=1 but p(0,2)=2. The Statement and both proof steps correctly give c^n homogeneity and invariant vanishing. Corrected only the title to distinguish the two; the mathematics, prerequisites and contract remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qz-two-sided-local-computed-update-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "75f41a9d53c5e4e443260ceaac062b2c2fe685c363969a0b3237784fafe2978c",
+      "outcome": "false_positive",
+      "reason": "The rejected decomposition is explicitly proved in the cited supplier, lem-scaled-complex-householder-and-givens-local-backward-error, Proof 4.1: normalized exact target residual <=(u+2q)||r||, and overwriting the rounded target costs <=(u+2q+v_source)||r||. Its Proof 3.2 supplies the raw coefficient. Replacing sqrt(2) by 2 enlarges v_source to the current v, yielding h=u+2q+v and eta=v+h. Thus F2 accurately cites an established part of the supplier proof even though its Statement packages the complete bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+      "model": "gpt-6-luna",
+      "context_sha256": "a312cd3f2509e82007e941b69a124b6a8dff4497601f88c055319772b6644e28",
+      "outcome": "false_positive",
+      "reason": "The claimed triangularity failure ignores the zero being chased. At descending index j, T[j+1,j+1]=0 by the preceding zero move (initially T[k,k]=0), and triangularity gives T[j+1,j]=0. Hence right multiplication of columns j,j+1 acts on the zero lower row (0,0), creating no T subdiagonal. The target overwrite sets T[j,j]=0. The following left action on rows j+1,j+2 preserves triangularity since both entries of column j+1 are zero; it removes the sole H[j+2,j] bulge. The final left action preserves T column a, which is zero in the active block, and isolates the infinite pair. This is also explicitly established in the correctness proposition, Proof 1.2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-computed-qz-pair-has-certified-backward-error",
+      "model": "gpt-6-luna",
+      "context_sha256": "4b788250d4bba2a8103ed9f47c9dfc25676754fbaba839a4dde5180ba3187757",
+      "outcome": "false_positive",
+      "reason": "The concrete formula is explicitly qualified in the Statement: structural writes are included in E_j and there are only separate tolerance writes D_tol,j. Under that hypothesis the complete D_j ledger equals the tolerance ledger, so the accumulation lemma gives exactly the displayed sum. The algorithm prescribes no additional non-target, non-tolerance overwrite in its rotation schedules; its instruction to record all OTHER explicit zero writes prevents silent discards, rather than requiring an additional write. If any such discard were added, the generic first bound would include its norm and the concrete formula\u2019s only-tolerance hypothesis would not hold. Thus no error term is silently omitted from the stated implication.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-projective-determinant-is-homogeneous-and-scale-invariant",
+      "disposition": "repaired",
+      "post_sha256": "1202d5a28d3de0f4b27cdd827ce4170ac598edd3b18be99bd388ffb6ae71067c",
+      "review_context_sha256": "07314568e6e3aab0b798118e906bb611552579cd58983db773a1118dc071e2d1",
+      "reason": "The title incorrectly made the determinant value scale invariant: for n=1, A=1, B=0, p(0,1)=1 but p(0,2)=2. The Statement and both proof steps correctly give c^n homogeneity and invariant vanishing. Corrected only the title to distinguish the two; the mathematics, prerequisites and contract remain unchanged. Column multilinearity over C also covers c=0; only the zero-equivalence conclusion requires c nonzero, and the ratio formula requires beta nonzero. No choice assumption is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qz-two-sided-local-computed-update-bound",
+      "disposition": "unaffected",
+      "post_sha256": "efa4530965f32cc486ff1546935ca101f1a955d72ef395c0ce4045f443565843",
+      "review_context_sha256": "eda8fc4b8736e82a56797fd8d8f155df5a786da93de5a7a376ca0cb72bffbf61",
+      "reason": "The rejected decomposition is explicitly proved in the cited supplier, lem-scaled-complex-householder-and-givens-local-backward-error, Proof 4.1: normalized exact target residual <=(u+2q)||r||, and overwriting the rounded target costs <=(u+2q+v_source)||r||. Its Proof 3.2 supplies the raw coefficient. Replacing sqrt(2) by 2 enlarges v_source to the current v, yielding h=u+2q+v and eta=v+h. Thus F2 accurately cites an established part of the supplier proof even though its Statement packages the complete bound. Checked the scaled target perturbation, unitary normalization, adjoint/reversal row orientation, pair sum-of-squares bound and pullback. The independent residual recurrence preserves preceding error by unitarity, uses stored matvec inputs and the stated dimension/range conditions, and component sums give exact-controller upper bounds. No edit needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+      "disposition": "unaffected",
+      "post_sha256": "855a102ee3edc90544581e548daecfe669e2d497a2eff034874d193dca3d126c",
+      "review_context_sha256": "b1d817a743579cf253448d6642c2b7c862fa91b56853c0a3d97d268a8f34c5ab",
+      "reason": "The claimed triangularity failure ignores the zero being chased. At descending index j, T[j+1,j+1]=0 by the preceding zero move (initially T[k,k]=0), and triangularity gives T[j+1,j]=0. Hence right multiplication of columns j,j+1 acts on the zero lower row (0,0), creating no T subdiagonal. The target overwrite sets T[j,j]=0. The following left action on rows j+1,j+2 preserves triangularity since both entries of column j+1 are zero; it removes the sole H[j+2,j] bulge. The final left action preserves T column a, which is zero in the active block, and isolates the infinite pair. This is also explicitly established in the correctness proposition, Proof 1.2. Successful rounded kernels preserve zero pairs exactly, with only their intended targets overwritten. Checked initialization schedule, full-array updates, ordinary sweep bulge support, tolerance perturbation signs, N=0 and n=1 branches, finite isolation/sweep bounds, range exits and residual-controller prerequisites. Algorithm properties remain in the separate dependent proposition; no edit needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-computed-qz-pair-has-certified-backward-error",
+      "disposition": "unaffected",
+      "post_sha256": "0842f88ba13c4e4e69905f13651e3595248d8526d5f712f2fad545c37eb92d99",
+      "review_context_sha256": "4d4a5d28abfb4d5dfe6794f370ff17ab0828357780bf7cae658739aba254bc18",
+      "reason": "The concrete formula is explicitly qualified in the Statement: structural writes are included in E_j and there are only separate tolerance writes D_tol,j. Under that hypothesis the complete D_j ledger equals the tolerance ledger, so the accumulation lemma gives exactly the displayed sum. The algorithm prescribes no additional non-target, non-tolerance overwrite in its rotation schedules; its instruction to record all OTHER explicit zero writes prevents silent discards, rather than requiring an additional write. If any such discard were added, the generic first bound would include its norm and the concrete formula\u2019s only-tolerance hypothesis would not hold. Thus no error term is silently omitted from the stated implication. Checked that post-action writes are pulled back unitarily, pure tolerance stages have identity factors, and the independent construction Delta=-Q R Z* has the correct sign and exactly preserves the two Frobenius norms. Failed residual evaluation does not invalidate an independently certified accumulation bound. No edit needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-projective-determinant-is-homogeneous-and-scale-invariant",
+      "severity": "nonfatal",
+      "locus": "frontmatter",
+      "reason": "The title incorrectly made the determinant value scale invariant: for n=1, A=1, B=0, p(0,1)=1 but p(0,2)=2. The Statement and both proof steps correctly give c^n homogeneity and invariant vanishing. Corrected only the title to distinguish the two; the mathematics, prerequisites and contract remain unchanged.",
+      "repair": "Title now identifies the scale-invariant zero condition; Statement and Proof unchanged."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "lem-projective-determinant-is-homogeneous-and-scale-invariant",
+      "lem-qz-two-sided-local-computed-update-bound",
+      "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+      "thm-computed-qz-pair-has-certified-backward-error"
+    ],
+    "remaining_items": [],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-projective-determinant-is-homogeneous-and-scale-invariant.md items/lem-qz-two-sided-local-computed-update-bound.md items/alg-finite-budget-qz-iteration-with-deflation-and-residual.md items/thm-computed-qz-pair-has-certified-backward-error.md --json",
+        "exit_code": 0,
+        "result": "4 files: 3 proofs pass; algorithm not-applicable; zero failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-projective-determinant-is-homogeneous-and-scale-invariant.md items/lem-qz-two-sided-local-computed-update-bound.md items/alg-finite-budget-qz-iteration-with-deflation-and-residual.md items/thm-computed-qz-pair-has-certified-backward-error.md --json",
+        "exit_code": 0,
+        "result": "4 files checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-48.proof-contracts.json --items lem-projective-determinant-is-homogeneous-and-scale-invariant,lem-qz-two-sided-local-computed-update-bound,alg-finite-budget-qz-iteration-with-deflation-and-residual,thm-computed-qz-pair-has-certified-backward-error --strict --json",
+        "exit_code": 0,
+        "result": "All four assigned contracts checked; ok=true, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-projective-determinant-is-homogeneous-and-scale-invariant.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects; run after the final item edit."
+      }
+    ],
+    "sources_consulted": [
+      "items/def-regular-generalized-eigenvalue-pencil.md, Definition",
+      "items/thm-leibniz-determinant-is-alternating-multilinear-and-normalized.md, Statement and Proof",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-48.proof-contracts.json, assigned contract",
+      "library/numerical-linear-algebra-and-approximation/generalized-eigenvalue-pencils-and-qz-methods.md, Objective and item placement",
+      "items/alg-scaled-complex-householder-and-givens-updates.md, Definition (Givens schedule and zero branches)",
+      "items/lem-scaled-complex-householder-and-givens-local-backward-error.md, Statement and complete Proof, especially 2.2, 3.2 and 4.1",
+      "items/lem-rounded-linear-and-normal-residual-certificates.md, Statement and Proof",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-48.proof-contracts.json, common-update contract",
+      "items/alg-generalized-hessenberg-triangular-reduction.md, complete Definition",
+      "items/prop-generalized-hessenberg-triangular-reduction-preserves-form-and-equivalence.md, Statement",
+      "items/prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence.md, Statement and complete Proof, especially 1.2",
+      "items/def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma.md, Definition",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-48.proof-contracts.json, QZ algorithm contract",
+      "items/lem-two-sided-unitary-equivalence-errors-accumulate-for-pencil.md, Statement and Proof",
+      "items/thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison.md, Statement (unitary invariance)",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-48.proof-contracts.json, backward-error contract"
+    ],
+    "repair_complete": true,
+    "unresolved_obligations": [],
+    "interface_comparison": "All four current Statement/Definition hashes equal initial-1.json before_statements. The sole edit changes the determinant lemma title. No supplier interface changed, so downstream is empty and no maintenance work is triggered.",
+    "published_ledger_updates": "None: no potentially defective published item or consumer was identified in this review.",
+    "next_action": "Controller collects the report and performs ordinary currency and certification work; no judge or state transition was launched by this worker."
+  }
+}

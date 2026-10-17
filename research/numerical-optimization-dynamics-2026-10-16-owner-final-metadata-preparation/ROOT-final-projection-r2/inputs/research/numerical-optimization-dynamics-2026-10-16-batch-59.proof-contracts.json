@@ -1,0 +1,1884 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-self-concordant-local-newton-calculus",
+    "lem-nonnegative-orthant-log-barrier",
+    "lem-lorentz-cone-log-barrier",
+    "lem-psd-cone-self-dual-logdet-barrier",
+    "lem-loghom-barrier-gradient-is-dual",
+    "thm-phase-i-margin-status-and-weak-infeasibility",
+    "thm-central-path-barrier-gap-and-dual-certificate",
+    "thm-inexact-central-path-distance-and-gap-certificate",
+    "thm-short-step-complexity-and-primal-gap-bound",
+    "lem-primal-dual-lp-qp-newton-matrix-nonsingular",
+    "thm-fraction-to-boundary-and-primal-dual-gap-certificates",
+    "ex-robust-least-squares-as-a-second-order-cone-program",
+    "ex-boundary-barrier-conditioning",
+    "ex-strict-versus-weak-semidefinite-feasibility",
+    "ex-resource-allocation-barrier-central-path",
+    "ex-lp-primal-dual-residual-and-gap",
+    "ex-small-semidefinite-relaxation-primal-dual-certificate"
+  ],
+  "contracts": {
+    "lem-self-concordant-local-newton-calculus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-self-concordant-log-homogeneous-barrier",
+          "source_section": "Definition",
+          "quote": "Let $E$ be a finite-dimensional real inner-product space, let $D\\subset E$ be open and convex, and let $F:D\\to\\mathbb R$ be $C^3$. Write $H_F(x)=D^2F(x)$ for its Hessian as a self-adjoint operator. A **self-concordant barrier** on $D$ is a strictly convex $F$ with positive-definite Hessian, with $F(x_k)\\to+\\infty$ whenever $x_k$ approaches a finite boundary point of $D$, and satisfying both conditions below.\n\nFor $x\\in D$, define the local norm and its dual by\n$$\\|h\\|_x=\\sqrt{D^2F(x)[h,h]},\\qquad \\|\\ell\\|_{x,*}=\\sup_{\\|h\\|_x\\le1}|\\ell[h]|.$$\nThe **Dikin inclusion** is $\\{x+h:\\|h\\|_x<1\\}\\subset D$. The **self-concordance inequality** is\n$$|D^3F(x)[u,v,v]|\\le2\\|u\\|_x\\|v\\|_x^2\\qquad(u,v\\in E).$$\nThe Newton decrement is $\\lambda_F(x)=\\|DF(x)\\|_{x,*}$.\n\nIf $K\\subset E$ is a closed convex cone with nonempty interior and $D=\\operatorname{int}K$, the barrier is **$\\nu$-log-homogeneous** when $\\nu>0$, $F(\\alpha x)=F(x)-\\nu\\log\\alpha$ for every $x\\in D$ and $\\alpha>0$, and $\\lambda_F(x)\\le\\sqrt\\nu$ for every $x\\in D$. The number $\\nu$ is its barrier parameter. When equality constraints $Ax=b$ are imposed, local norms and decrements are computed after restricting $D^2F$ and $DF$ to the tangent space $\\ker A$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-self-concordant-log-homogeneous-barrier",
+          "source_section": "Definition",
+          "quote": "Let $E$ be a finite-dimensional real inner-product space, let $D\\subset E$ be open and convex, and let $F:D\\to\\mathbb R$ be $C^3$. Write $H_F(x)=D^2F(x)$ for its Hessian as a self-adjoint operator. A **self-concordant barrier** on $D$ is a strictly convex $F$ with positive-definite Hessian, with $F(x_k)\\to+\\infty$ whenever $x_k$ approaches a finite boundary point of $D$, and satisfying both conditions below.\n\nFor $x\\in D$, define the local norm and its dual by\n$$\\|h\\|_x=\\sqrt{D^2F(x)[h,h]},\\qquad \\|\\ell\\|_{x,*}=\\sup_{\\|h\\|_x\\le1}|\\ell[h]|.$$\nThe **Dikin inclusion** is $\\{x+h:\\|h\\|_x<1\\}\\subset D$. The **self-concordance inequality** is\n$$|D^3F(x)[u,v,v]|\\le2\\|u\\|_x\\|v\\|_x^2\\qquad(u,v\\in E).$$\nThe Newton decrement is $\\lambda_F(x)=\\|DF(x)\\|_{x,*}$.\n\nIf $K\\subset E$ is a closed convex cone with nonempty interior and $D=\\operatorname{int}K$, the barrier is **$\\nu$-log-homogeneous** when $\\nu>0$, $F(\\alpha x)=F(x)-\\nu\\log\\alpha$ for every $x\\in D$ and $\\alpha>0$, and $\\lambda_F(x)\\le\\sqrt\\nu$ for every $x\\in D$. The number $\\nu$ is its barrier parameter. When equality constraints $Ax=b$ are imposed, local norms and decrements are computed after restricting $D^2F$ and $DF$ to the tangent space $\\ker A$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Fix $h\\ne0$ and put $q(t)=\\|h\\|_{x+th}$. Differentiation gives $q'(t)=D^3F(x+th)[h,h,h]/(2q(t))$, so [F1] implies $|q'(t)|\\le q(t)^2$. Therefore $|(1/q)'|\\le1$. Integrating from $0$ to $t$ yields $1/r-t\\le1/q(t)\\le1/r+t$ whenever $tr<1$, and the lower inequality $1/q(t)\\le1/r+t$ holds along every segment in $D$. Taking reciprocals gives the asserted two-sided metric bound for $tr<1$ and the lower bound for all $t\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For a fixed $v\\ne0$, put $p(t)=\\sqrt{D^2F(x+th)[v,v]}$. By [F1], $|(\\log p)'|=|D^3F[h,v,v]|/(2p^2)\\le q(t)$. When $tr<1$, step 1.1 gives $q(t)\\le r/(1-tr)$; integration gives $|\\log(p(t)/p(0))|\\le-\\log(1-tr)$. Squaring this inequality for every $v$ proves the stated Hessian comparison.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "claim": "For any $y\\in D$, put $h=y-x$ and $r=\\|h\\|_x$. Taylor's formula with integral remainder and step 1.1 give $F(y)\\ge F(x)+DF(x)[h]+r^2\\int_0^1\\frac{1-t}{(1+tr)^2}\\,dt=F(x)+DF(x)[h]+r-\\log(1+r)$. The dual-norm inequality $DF(x)[h]\\ge-\\lambda_F(x)r$ makes the right side at least $F(x)+(1-\\lambda_F(x))r-\\log(1+r)$, which tends to $+\\infty$ as $r\\to\\infty$. Thus the sublevel set $\\{y\\in D:F(y)\\le F(x)\\}$ is bounded.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Since $\\|d\\|_x=\\lambda$, the damped displacement $h=d/(1+\\lambda)$ has local length $r=\\lambda/(1+\\lambda)<1$, so Dikin inclusion places $y$ in $D$. The gradient expansion is $\\nabla F(y)=\\nabla F(x)+H_xh+R$, where $R=\\int_0^1(H_{x+th}-H_x)h\\,dt$. The first two terms have $x$-dual norm $\\lambda^2/(1+\\lambda)$. By step 2.1, $\\|R\\|_{x,*}\\le r\\int_0^1((1-tr)^{-2}-1)\\,dt=r^2/(1-r)=\\lambda^2/(1+\\lambda)$. Thus $\\|\\nabla F(y)\\|_{x,*}\\le2\\lambda^2/(1+\\lambda)$. Since $H_y\\succeq(1-r)^2H_x$, the dual norm at $y$ is at most $(1-r)^{-1}=1+\\lambda$ times the $x$-dual norm, giving $\\lambda_F(y)\\le2\\lambda^2$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-3.2",
+          "claim": "The sublevel set in step 2.2 cannot accumulate at a finite boundary point of $D$, because $F$ blows up there while its values on the sublevel are at most $F(x)$. It is closed in $E$ and bounded, hence compact. Continuity gives a minimizer on it, which is a global minimizer on $D$; positive-definite Hessian makes it unique.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "Let $h=x_*-x$ and $r=\\|h\\|_x$. If $r=0$ the claim holds. Otherwise, stationarity at the minimizer from step 3.2 and the fundamental theorem of calculus give $-\\nabla F(x)^Th=\\int_0^1\\|h\\|_{x+th}^2\\,dt$. By the global lower bound from step 1.1, this is at least $r^2\\int_0^1(1+tr)^{-2}\\,dt=r^2/(1+r)$. Cauchy–Schwarz in the local metric bounds it above by $\\lambda_F(x)r$. Dividing by $r$ and rearranging gives $r\\le\\lambda_F(x)/(1-\\lambda_F(x))$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.2",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The metric inequalities require a base point x∈D; the theorem makes no assertion if D has no such point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The r=0 branch is handled explicitly. (step 4.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The comparison range is strict tr<1; equality tr=1 is excluded and no limiting estimate there is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Hessian is assumed positive definite at every point, so zero-curvature directions fall outside the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The metric integral starts at t=0 and treats the strict tr<1 range. (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The compact sublevel argument constructs an attained minimizer. (step 3.2)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The local metric bounds are sufficient consequences of self-concordance; the theorem does not characterize self-concordance from those bounds."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The minimizer-distance estimate is an upper bound, not a converse test for whether x is a minimizer."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-nonnegative-orthant-log-barrier": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conic-optimization-primal-dual-models",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional real inner-product space $E$, a **cone** is a set closed under addition and multiplication by nonnegative scalars. A cone $K\\subset E$ is **proper** when it is closed, convex, pointed ($K\\cap(-K)=\\{0\\}$), and has nonempty interior. Its dual cone is\n$$K^*=\\{z\\in E:\\langle z,s\\rangle\\ge0\\text{ for every }s\\in K\\}.$$\n\nLet $A:\\mathbb R^n\\to\\mathbb R^p$ and $G:\\mathbb R^n\\to E$ be linear, let $b\\in\\mathbb R^p$, $c\\in\\mathbb R^n$, and $h\\in E$. A matrix $A$ has full row rank when its rows are linearly independent. The conic primal problem and its displayed dual pair are\n$$\\inf\\{c^Tx:Ax=b,\\ h-Gx\\in K\\},\\qquad \\sup\\{b^Ty-\\langle h,z\\rangle:A^Ty-G^*z=c,\\ z\\in K^*\\},$$\nwhere $G^*$ is the adjoint, defined by $\\langle Gx,z\\rangle=x^TG^*z$. For any feasible pair, its gap is\n$$c^Tx-b^Ty+\\langle h,z\\rangle=\\langle z,h-Gx\\rangle\\ge0.$$\nThe special case $\\inf\\{c^Tx:Ax=b,\\ x\\in K\\}$ has dual $\\sup\\{b^Ty:A^Ty+z=c,\\ z\\in K^*\\}$ and gap $\\langle z,x\\rangle$.\n\nFor $K=\\mathbb R_+^n$, the latter is the standard-form LP $\\min c^Tx$ subject to $Ax=b$, $x\\ge0$, with dual variables $y$ free and $s=c-A^Ty\\ge0$. A convex QP in this convention has objective $f_0(x)=\\tfrac12x^TQx+c^Tx$, with symmetric $Q\\succeq0$, the same equality, and $x\\ge0$. Its Lagrangian is $L(x,y,s)=f_0(x)+y^T(b-Ax)-s^Tx$; a feasible KKT tuple obeys $Qx+c-A^Ty-s=0$, and its dual value is $\\inf_{w\\in\\mathbb R^n}L(w,y,s)$.\n\nFor a Lorentz cone $\\mathcal L_{d+1}=\\{(t,u)\\in\\mathbb R\\times\\mathbb R^d:t\\ge\\|u\\|_2\\}$, let $F_j\\in\\mathbb R^{d_j\\times n}$, $f_j\\in\\mathbb R^{d_j}$, $g_j\\in\\mathbb R^n$, and $h_j\\in\\mathbb R$. Then $\\|F_jx+f_j\\|_2\\le g_j^Tx+h_j$ is membership of $(g_j^Tx+h_j,F_jx+f_j)$ in $\\mathcal L_{d_j+1}$. With no equality constraints, the SOCP $\\min c^Tx$ under these constraints has dual\n$$\\max -\\sum_j(f_j^Tu_j+h_j\\tau_j)\\quad\\text{subject to }\\sum_j(F_j^Tu_j+g_j\\tau_j)=c,\\quad(\\tau_j,u_j)\\in\\mathcal L_{d_j+1}.$$\nFor symmetric matrices, $S\\succeq0$ means $v^TSv\\ge0$ for every $v$ and the pairing is $\\langle X,S\\rangle=X\\bullet S:=\\operatorname{tr}(XS)$. Thus $\\min C\\bullet X$ subject to $\\mathcal A(X)=b$, $X\\succeq0$ has dual $\\max b^Ty$ subject to $\\mathcal A^*y+S=C$, $S\\succeq0$, with gap $X\\bullet S$. The affine-matrix SDP $\\min c^Tx$ subject to $F_0+\\sum_i x_iF_i\\succeq0$ has dual $\\max -F_0\\bullet Z$ subject to $F_i\\bullet Z=c_i$ for every $i$ and $Z\\succeq0$.\n\nThe smooth convex inequality convention is that of [[def-inequality-constrained-program-and-kkt-geometry]]: inequalities are written $g_i(x)\\le0$ and their multipliers are nonnegative. The Lagrangian dual-value convention is that of [[def-convex-program-duality-and-slater-condition]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Coordinatewise inequalities show that $K$ is closed, convex, and closed under addition and nonnegative scaling. If both $z$ and $-z$ lie in $K$, every coordinate is zero, so $K$ is pointed; because $m\\ge1$, $D=\\mathbb R_{++}^m$ is nonempty and is the interior of $K$. If $z\\in K$, then $\\langle z,y\\rangle=\\sum_i z_i y_i\\ge0$ for every $y\\in K$, so $z\\in K^*$ by [F2]. Conversely, if $z\\in K^*$, testing against each standard basis vector $e_i\\in K$ gives $z_i=\\langle z,e_i\\rangle\\ge0$. Hence $z\\in K$ and $K^*=K$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Direct differentiation gives $DF(x)[h]=-\\sum_i h_i/x_i$, $D^2F(x)[h,k]=\\sum_i h_i k_i/x_i^2$, and $D^3F(x)[u,v,v]=-2\\sum_i u_i v_i^2/x_i^3$. The Hessian is positive definite because $D^2F(x)[h,h]=\\sum_i(h_i/x_i)^2>0$ for $h\\ne0$. If $\\|h\\|_x<1$, then each $|h_i|/x_i<1$, hence $x_i+h_i>0$ and the Dikin inclusion holds. If a sequence in $D$ approaches a finite boundary point, at least one coordinate tends to zero while all coordinates remain bounded above; each term $-\\log x_i$ is bounded below and one tends to $+\\infty$, so $F\\to+\\infty$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Put $a_i=u_i/x_i$ and $b_i=v_i/x_i$. By [F1] and $\\sum_i b_i^4\\le(\\sum_i b_i^2)^2$, $|D^3F(x)[u,v,v]|\\le2\\|a\\|_2(\\sum_i b_i^4)^{1/2}\\le2\\|u\\|_x\\|v\\|_x^2$. Also $F(\\alpha x)=F(x)-m\\log\\alpha$, and $\\|DF(x)\\|_{x,*}^2=\\sum_i(1/x_i)^2x_i^2=m$. These are exactly the required self-concordance and parameter conditions.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The hypothesis m≥1 explicitly excludes the empty indexed sum case; the finite-coordinate computation uses a nonempty index set (step 2.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero dual vector satisfies the tested-coordinate argument. (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The formula and inequalities remain valid in the scalar case m=1. (step 2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The minimal dimension m=1 is included by the same finite sums. (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Dikin condition is strict and boundary blow-up is established. (step 1.2)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The standard basis tests exist because m≥1. (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The K⊆K* implication is proved by nonnegative coordinate products. (step 1.1)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The K*⊆K implication is proved by testing each standard basis vector. (step 1.1)."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-lorentz-cone-log-barrier": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-self-concordant-log-homogeneous-barrier",
+          "source_section": "Definition",
+          "quote": "Let $E$ be a finite-dimensional real inner-product space, let $D\\subset E$ be open and convex, and let $F:D\\to\\mathbb R$ be $C^3$. Write $H_F(x)=D^2F(x)$ for its Hessian as a self-adjoint operator. A **self-concordant barrier** on $D$ is a strictly convex $F$ with positive-definite Hessian, with $F(x_k)\\to+\\infty$ whenever $x_k$ approaches a finite boundary point of $D$, and satisfying both conditions below.\n\nFor $x\\in D$, define the local norm and its dual by\n$$\\|h\\|_x=\\sqrt{D^2F(x)[h,h]},\\qquad \\|\\ell\\|_{x,*}=\\sup_{\\|h\\|_x\\le1}|\\ell[h]|.$$\nThe **Dikin inclusion** is $\\{x+h:\\|h\\|_x<1\\}\\subset D$. The **self-concordance inequality** is\n$$|D^3F(x)[u,v,v]|\\le2\\|u\\|_x\\|v\\|_x^2\\qquad(u,v\\in E).$$\nThe Newton decrement is $\\lambda_F(x)=\\|DF(x)\\|_{x,*}$.\n\nIf $K\\subset E$ is a closed convex cone with nonempty interior and $D=\\operatorname{int}K$, the barrier is **$\\nu$-log-homogeneous** when $\\nu>0$, $F(\\alpha x)=F(x)-\\nu\\log\\alpha$ for every $x\\in D$ and $\\alpha>0$, and $\\lambda_F(x)\\le\\sqrt\\nu$ for every $x\\in D$. The number $\\nu$ is its barrier parameter. When equality constraints $Ax=b$ are imposed, local norms and decrements are computed after restricting $D^2F$ and $DF$ to the tangent space $\\ker A$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conic-optimization-primal-dual-models",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional real inner-product space $E$, a **cone** is a set closed under addition and multiplication by nonnegative scalars. A cone $K\\subset E$ is **proper** when it is closed, convex, pointed ($K\\cap(-K)=\\{0\\}$), and has nonempty interior. Its dual cone is\n$$K^*=\\{z\\in E:\\langle z,s\\rangle\\ge0\\text{ for every }s\\in K\\}.$$\n\nLet $A:\\mathbb R^n\\to\\mathbb R^p$ and $G:\\mathbb R^n\\to E$ be linear, let $b\\in\\mathbb R^p$, $c\\in\\mathbb R^n$, and $h\\in E$. A matrix $A$ has full row rank when its rows are linearly independent. The conic primal problem and its displayed dual pair are\n$$\\inf\\{c^Tx:Ax=b,\\ h-Gx\\in K\\},\\qquad \\sup\\{b^Ty-\\langle h,z\\rangle:A^Ty-G^*z=c,\\ z\\in K^*\\},$$\nwhere $G^*$ is the adjoint, defined by $\\langle Gx,z\\rangle=x^TG^*z$. For any feasible pair, its gap is\n$$c^Tx-b^Ty+\\langle h,z\\rangle=\\langle z,h-Gx\\rangle\\ge0.$$\nThe special case $\\inf\\{c^Tx:Ax=b,\\ x\\in K\\}$ has dual $\\sup\\{b^Ty:A^Ty+z=c,\\ z\\in K^*\\}$ and gap $\\langle z,x\\rangle$.\n\nFor $K=\\mathbb R_+^n$, the latter is the standard-form LP $\\min c^Tx$ subject to $Ax=b$, $x\\ge0$, with dual variables $y$ free and $s=c-A^Ty\\ge0$. A convex QP in this convention has objective $f_0(x)=\\tfrac12x^TQx+c^Tx$, with symmetric $Q\\succeq0$, the same equality, and $x\\ge0$. Its Lagrangian is $L(x,y,s)=f_0(x)+y^T(b-Ax)-s^Tx$; a feasible KKT tuple obeys $Qx+c-A^Ty-s=0$, and its dual value is $\\inf_{w\\in\\mathbb R^n}L(w,y,s)$.\n\nFor a Lorentz cone $\\mathcal L_{d+1}=\\{(t,u)\\in\\mathbb R\\times\\mathbb R^d:t\\ge\\|u\\|_2\\}$, let $F_j\\in\\mathbb R^{d_j\\times n}$, $f_j\\in\\mathbb R^{d_j}$, $g_j\\in\\mathbb R^n$, and $h_j\\in\\mathbb R$. Then $\\|F_jx+f_j\\|_2\\le g_j^Tx+h_j$ is membership of $(g_j^Tx+h_j,F_jx+f_j)$ in $\\mathcal L_{d_j+1}$. With no equality constraints, the SOCP $\\min c^Tx$ under these constraints has dual\n$$\\max -\\sum_j(f_j^Tu_j+h_j\\tau_j)\\quad\\text{subject to }\\sum_j(F_j^Tu_j+g_j\\tau_j)=c,\\quad(\\tau_j,u_j)\\in\\mathcal L_{d_j+1}.$$\nFor symmetric matrices, $S\\succeq0$ means $v^TSv\\ge0$ for every $v$ and the pairing is $\\langle X,S\\rangle=X\\bullet S:=\\operatorname{tr}(XS)$. Thus $\\min C\\bullet X$ subject to $\\mathcal A(X)=b$, $X\\succeq0$ has dual $\\max b^Ty$ subject to $\\mathcal A^*y+S=C$, $S\\succeq0$, with gap $X\\bullet S$. The affine-matrix SDP $\\min c^Tx$ subject to $F_0+\\sum_i x_iF_i\\succeq0$ has dual $\\max -F_0\\bullet Z$ subject to $F_i\\bullet Z=c_i$ for every $i$ and $Z\\succeq0$.\n\nThe smooth convex inequality convention is that of [[def-inequality-constrained-program-and-kkt-geometry]]: inequalities are written $g_i(x)\\le0$ and their multipliers are nonnegative. The Lagrangian dual-value convention is that of [[def-convex-program-duality-and-slater-condition]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Continuity of the Euclidean norm makes $K$ closed, and its triangle inequality makes $K$ convex and closed under addition and nonnegative scaling. If $(t,u)$ and its negative are both in $K$, then $t\\ge\\|u\\|$ and $-t\\ge\\|u\\|$, forcing $t=0,u=0$; hence $K$ is pointed. The point $(1,0)$ is interior, so $K$ is proper. If $(a,v)\\in K$ and $(t,u)\\in K$, then $at+v^Tu\\ge at-\\|v\\|_2\\|u\\|_2\\ge0$, so $K\\subseteq K^*$ by [F2]. Conversely, suppose $(a,v)\\in K^*$. If $v=0$ and $a<\\|v\\|_2=0$, then pairing with $(1,0)\\in K$ gives $a<0$, a contradiction. If $v\\ne0$ and $a<\\|v\\|_2$, pairing with $(1,-v/\\|v\\|_2)\\in K$ gives $a-\\|v\\|_2<0$, also a contradiction. Thus $a\\ge\\|v\\|_2$ and $K^*=K$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Write $\\rho=t^2-\\|u\\|_2^2>0$. An orthogonal change of spatial coordinates followed by the Lorentz boost $\\rho^{-1/2}\\begin{pmatrix}t&-\\|u\\|\\\\-\\|u\\|&t\\end{pmatrix}$ on the time and first spatial coordinate preserves $\\rho$ and maps $(t,u)$ to $(\\sqrt\\rho,0)$. Since $F$ is invariant under this invertible linear cone map, the chain rule transports its Hessian, third derivative, and local norms; the Newton decrement is invariant as well. At the canonical point $\\nabla F=(-2/\\sqrt\\rho,0)$ and $D^2F=(2/\\rho)I$. For directions $h=(a,p)$ and $k=(b,v)$, direct differentiation gives $D^3F[h,k,k]=-\\frac{4\\{a(b^2+\\|v\\|_2^2)+2b\\,p^Tv\\}}{\\rho^{3/2}}$. These formulas also show the Hessian is positive definite.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "By Cauchy–Schwarz and $2|b|\\|v\\|_2\\le b^2+\\|v\\|_2^2$, the numerator in step 1.2 has absolute value at most $4\\sqrt2\\sqrt{a^2+\\|p\\|_2^2}(b^2+\\|v\\|_2^2)/\\rho^{3/2}=2\\|h\\|_x\\|k\\|_x^2$. If $\\|h\\|_x<1$, set $A=|a|/\\sqrt\\rho$ and $B=\\|p\\|_2/\\sqrt\\rho$. Then $A^2+B^2<1/2$, so $1+a/\\sqrt\\rho\\ge1-A>0$ and $(1+a/\\sqrt\\rho)^2-B^2\\ge(1-A)^2-B^2>2(A-1/2)^2\\ge0$. Thus $\\sqrt\\rho+a>\\|p\\|_2$ and the Dikin ball stays inside $D$. The Lorentz transformation carries this inclusion to every $x$. Approaching a finite boundary point makes $\\rho\\downarrow0$, hence $F\\to+\\infty$. Finally, $F(\\alpha x)=F(x)-2\\log\\alpha$, and step 1.2 gives $\\|DF(x)\\|_{x,*}^2=2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Lorentz cone contains (1,0) in its interior, so this barrier domain is nonempty by construction."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The v=0 dual-cone branch is stated separately. (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Dikin inclusion uses the strict unit local-norm radius, with the radius-one boundary excluded by the estimate (step 2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The spatial dimension satisfies d≥1 and the proof handles the lowest case through the same norm and cone formulas."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict Dikin inclusion and finite-boundary blow-up are verified. (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "When v≠0 the unit vector v/||v|| is explicitly constructed. (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The inclusion K⊆K* follows from Cauchy–Schwarz. (step 1.1)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse inclusion follows from the explicit dual-cone test vector. (step 1.1)."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-psd-cone-self-dual-logdet-barrier": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conic-optimization-primal-dual-models",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional real inner-product space $E$, a **cone** is a set closed under addition and multiplication by nonnegative scalars. A cone $K\\subset E$ is **proper** when it is closed, convex, pointed ($K\\cap(-K)=\\{0\\}$), and has nonempty interior. Its dual cone is\n$$K^*=\\{z\\in E:\\langle z,s\\rangle\\ge0\\text{ for every }s\\in K\\}.$$\n\nLet $A:\\mathbb R^n\\to\\mathbb R^p$ and $G:\\mathbb R^n\\to E$ be linear, let $b\\in\\mathbb R^p$, $c\\in\\mathbb R^n$, and $h\\in E$. A matrix $A$ has full row rank when its rows are linearly independent. The conic primal problem and its displayed dual pair are\n$$\\inf\\{c^Tx:Ax=b,\\ h-Gx\\in K\\},\\qquad \\sup\\{b^Ty-\\langle h,z\\rangle:A^Ty-G^*z=c,\\ z\\in K^*\\},$$\nwhere $G^*$ is the adjoint, defined by $\\langle Gx,z\\rangle=x^TG^*z$. For any feasible pair, its gap is\n$$c^Tx-b^Ty+\\langle h,z\\rangle=\\langle z,h-Gx\\rangle\\ge0.$$\nThe special case $\\inf\\{c^Tx:Ax=b,\\ x\\in K\\}$ has dual $\\sup\\{b^Ty:A^Ty+z=c,\\ z\\in K^*\\}$ and gap $\\langle z,x\\rangle$.\n\nFor $K=\\mathbb R_+^n$, the latter is the standard-form LP $\\min c^Tx$ subject to $Ax=b$, $x\\ge0$, with dual variables $y$ free and $s=c-A^Ty\\ge0$. A convex QP in this convention has objective $f_0(x)=\\tfrac12x^TQx+c^Tx$, with symmetric $Q\\succeq0$, the same equality, and $x\\ge0$. Its Lagrangian is $L(x,y,s)=f_0(x)+y^T(b-Ax)-s^Tx$; a feasible KKT tuple obeys $Qx+c-A^Ty-s=0$, and its dual value is $\\inf_{w\\in\\mathbb R^n}L(w,y,s)$.\n\nFor a Lorentz cone $\\mathcal L_{d+1}=\\{(t,u)\\in\\mathbb R\\times\\mathbb R^d:t\\ge\\|u\\|_2\\}$, let $F_j\\in\\mathbb R^{d_j\\times n}$, $f_j\\in\\mathbb R^{d_j}$, $g_j\\in\\mathbb R^n$, and $h_j\\in\\mathbb R$. Then $\\|F_jx+f_j\\|_2\\le g_j^Tx+h_j$ is membership of $(g_j^Tx+h_j,F_jx+f_j)$ in $\\mathcal L_{d_j+1}$. With no equality constraints, the SOCP $\\min c^Tx$ under these constraints has dual\n$$\\max -\\sum_j(f_j^Tu_j+h_j\\tau_j)\\quad\\text{subject to }\\sum_j(F_j^Tu_j+g_j\\tau_j)=c,\\quad(\\tau_j,u_j)\\in\\mathcal L_{d_j+1}.$$\nFor symmetric matrices, $S\\succeq0$ means $v^TSv\\ge0$ for every $v$ and the pairing is $\\langle X,S\\rangle=X\\bullet S:=\\operatorname{tr}(XS)$. Thus $\\min C\\bullet X$ subject to $\\mathcal A(X)=b$, $X\\succeq0$ has dual $\\max b^Ty$ subject to $\\mathcal A^*y+S=C$, $S\\succeq0$, with gap $X\\bullet S$. The affine-matrix SDP $\\min c^Tx$ subject to $F_0+\\sum_i x_iF_i\\succeq0$ has dual $\\max -F_0\\bullet Z$ subject to $F_i\\bullet Z=c_i$ for every $i$ and $Z\\succeq0$.\n\nThe smooth convex inequality convention is that of [[def-inequality-constrained-program-and-kkt-geometry]]: inequalities are written $g_i(x)\\le0$ and their multipliers are nonnegative. The Lagrangian dual-value convention is that of [[def-convex-program-duality-and-slater-condition]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-determinant-differential-and-jacobis-formula",
+          "source_section": "Statement",
+          "quote": "Let $A$ be an $n\\times n$ matrix and let $H$ be a direction matrix. Then\n\n$$D\\det(A)[H]=\\operatorname{tr}(\\operatorname{adj}(A)H).$$\n\nIf $A$ is invertible, then\n\n$$D\\det(A)[H]=\\det(A)\\operatorname{tr}(A^{-1}H).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-derivative-of-matrix-inversion",
+          "source_section": "Statement",
+          "quote": "Let $A$ be invertible. Then the inversion map is real Fr\\'echet differentiable\nat $A$, and for every direction $H$,\n\n$$D\\operatorname{inv}(A)[H]=-A^{-1}HA^{-1}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-differentials-of-trace-and-frobenius-linear-functionals",
+          "source_section": "Statement",
+          "quote": "For square matrices,\n\n$$D(\\operatorname{tr})(A)[H]=\\operatorname{tr}(H).$$\n\nFor a fixed matrix $B$, the real-valued Frobenius-linear functional\n\n$$\\Phi_B(A):=\\operatorname{Re}\\operatorname{tr}(B^\\ast A)$$\n\nsatisfies\n\n$$D\\Phi_B(A)[H]=\\operatorname{Re}\\operatorname{tr}(B^\\ast H).$$\n\nThus the Frobenius gradient of $\\Phi_B$ is $B$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-log-determinant-concavity-on-positive-definite-matrices",
+          "source_section": "Statement",
+          "quote": "For $p\\ge1$, if $A_0,A_1\\in\\mathbb R^{p\\times p}$ are symmetric and $v^{\\mathsf T}A_i v>0$ for every nonzero $v\\in\\mathbb R^p$ and $i\\in\\{0,1\\}$, then for every $t\\in[0,1]$,\n$$\\log\\det((1-t)A_0+tA_1)\\ge(1-t)\\log\\det A_0+t\\log\\det A_1.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The set $\\mathbb S_+^n$ is a closed convex cone because quadratic-form inequalities are preserved by nonnegative sums and limits. If both $X$ and $-X$ are positive semidefinite, their quadratic forms vanish on every vector; testing $e_i$ gives $X_{ii}=0$, then testing $e_i+e_j$ gives $X_{ij}=0$, so the cone is pointed. The identity is interior: diagonalize $E=E^T=U\\operatorname{diag}(\\lambda_i)U^T$. From the entry definition, $\\|E\\|_F^2=\\sum_{i,j}E_{ij}^2=\\operatorname{tr}(E^2)$; the finite sums give $\\operatorname{tr}(AB)=\\sum_{i,j}A_{ij}B_{ji}=\\sum_{j,i}B_{ji}A_{ij}=\\operatorname{tr}(BA)$, so $\\operatorname{tr}(E^2)=\\operatorname{tr}(\\operatorname{diag}(\\lambda_i^2))=\\sum_i\\lambda_i^2$. Thus $\\|E\\|_F<1$ implies $|\\lambda_i|<1$ for every $i$, hence $I+E\\succ0$, proving that $I$ is interior and the cone is proper. If $X,Y\\succeq0$, their positive square roots exist by [F1]. The same trace identity gives $\\operatorname{tr}(XY)=\\operatorname{tr}(X^{1/2}YX^{1/2})\\ge0$, since $X^{1/2}YX^{1/2}\\succeq0$ and its diagonal entries are nonnegative. Thus $\\mathbb S_+^n\\subseteq(\\mathbb S_+^n)^*$. Conversely, if $Y$ is in the dual cone under [F2], testing against $vv^T\\succeq0$ gives $v^TYv=\\operatorname{tr}(Yvv^T)\\ge0$ for every $v$, so $Y\\succeq0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "For $X\\succ0$ and symmetric $H$, set $Z=X^{-1/2}HX^{-1/2}$. Then $\\det(X+sH)=\\det(X)\\det(I+sZ)$. Diagonalizing the symmetric $Z$ and differentiating the scalar sum $-\\log\\det(X+sH)=-\\log\\det X-\\sum_i\\log(1+s\\lambda_i(Z))$ gives $DF(X)[H]=-\\operatorname{tr}(X^{-1}H)$ and $D^2F(X)[H,H]=\\operatorname{tr}(Z^2)$. Polarization gives the displayed bilinear Hessian formula. Equivalently the first derivative follows from [F3], and differentiating it uses [F4]–[F5].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Differentiating the inverse formula once more gives $D^3F(X)[U,V,V]=-2\\operatorname{tr}(Z_U Z_V^2)$, where $Z_U=X^{-1/2}UX^{-1/2}$ and $Z_V=X^{-1/2}VX^{-1/2}$. By [F8] after vectorizing matrices, $|\\operatorname{tr}(Z_UZ_V^2)|\\le\\|Z_U\\|_F\\|Z_V^2\\|_F$. Diagonalizing the symmetric $Z_V$ gives $\\|Z_V^2\\|_F^2=\\sum_i\\lambda_i^4\\le(\\sum_i\\lambda_i^2)^2=\\|Z_V\\|_F^4$. The latter Frobenius norms are exactly the local norms, proving the mixed self-concordance inequality. Also $\\|Z\\|_2=\\max_i|\\lambda_i(Z)|\\le(\\sum_i\\lambda_i(Z)^2)^{1/2}=\\|Z\\|_F$, so if $\\|H\\|_X=\\|Z\\|_F<1$, then $I+Z\\succ0$ and $X+H\\succ0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "F8",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Scaling gives $F(\\alpha X)=F(X)-n\\log\\alpha$. The local dual norm satisfies $\\|DF(X)\\|_{X,*}^2=\\operatorname{tr}(I_n)=n$. If a sequence tends to a finite boundary matrix, its determinant tends to zero through positive values, so $F\\to+\\infty$. These facts, [F6], and the positive-definite Hessian in step 1.2 establish the stated barrier properties.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For n≥1, I∈S₊₊ⁿ witnesses that the barrier domain is nonempty; the cone and domain construction is explicit (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The determinant tends to zero at every finite boundary matrix. (step 3.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The determinant, trace, and parameter formulas include n=1. (step 3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The argument includes singular boundary matrices, including zero. (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Finite boundary approach and barrier divergence are treated. (step 3.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The eigenbasis and square root are supplied by the spectral theorem. (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Positive semidefinite pairs have nonnegative trace pairing. (step 1.1)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Testing vvᵀ establishes the converse dual-cone inclusion. (step 1.1)."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-loghom-barrier-gradient-is-dual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conic-optimization-primal-dual-models",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional real inner-product space $E$, a **cone** is a set closed under addition and multiplication by nonnegative scalars. A cone $K\\subset E$ is **proper** when it is closed, convex, pointed ($K\\cap(-K)=\\{0\\}$), and has nonempty interior. Its dual cone is\n$$K^*=\\{z\\in E:\\langle z,s\\rangle\\ge0\\text{ for every }s\\in K\\}.$$\n\nLet $A:\\mathbb R^n\\to\\mathbb R^p$ and $G:\\mathbb R^n\\to E$ be linear, let $b\\in\\mathbb R^p$, $c\\in\\mathbb R^n$, and $h\\in E$. A matrix $A$ has full row rank when its rows are linearly independent. The conic primal problem and its displayed dual pair are\n$$\\inf\\{c^Tx:Ax=b,\\ h-Gx\\in K\\},\\qquad \\sup\\{b^Ty-\\langle h,z\\rangle:A^Ty-G^*z=c,\\ z\\in K^*\\},$$\nwhere $G^*$ is the adjoint, defined by $\\langle Gx,z\\rangle=x^TG^*z$. For any feasible pair, its gap is\n$$c^Tx-b^Ty+\\langle h,z\\rangle=\\langle z,h-Gx\\rangle\\ge0.$$\nThe special case $\\inf\\{c^Tx:Ax=b,\\ x\\in K\\}$ has dual $\\sup\\{b^Ty:A^Ty+z=c,\\ z\\in K^*\\}$ and gap $\\langle z,x\\rangle$.\n\nFor $K=\\mathbb R_+^n$, the latter is the standard-form LP $\\min c^Tx$ subject to $Ax=b$, $x\\ge0$, with dual variables $y$ free and $s=c-A^Ty\\ge0$. A convex QP in this convention has objective $f_0(x)=\\tfrac12x^TQx+c^Tx$, with symmetric $Q\\succeq0$, the same equality, and $x\\ge0$. Its Lagrangian is $L(x,y,s)=f_0(x)+y^T(b-Ax)-s^Tx$; a feasible KKT tuple obeys $Qx+c-A^Ty-s=0$, and its dual value is $\\inf_{w\\in\\mathbb R^n}L(w,y,s)$.\n\nFor a Lorentz cone $\\mathcal L_{d+1}=\\{(t,u)\\in\\mathbb R\\times\\mathbb R^d:t\\ge\\|u\\|_2\\}$, let $F_j\\in\\mathbb R^{d_j\\times n}$, $f_j\\in\\mathbb R^{d_j}$, $g_j\\in\\mathbb R^n$, and $h_j\\in\\mathbb R$. Then $\\|F_jx+f_j\\|_2\\le g_j^Tx+h_j$ is membership of $(g_j^Tx+h_j,F_jx+f_j)$ in $\\mathcal L_{d_j+1}$. With no equality constraints, the SOCP $\\min c^Tx$ under these constraints has dual\n$$\\max -\\sum_j(f_j^Tu_j+h_j\\tau_j)\\quad\\text{subject to }\\sum_j(F_j^Tu_j+g_j\\tau_j)=c,\\quad(\\tau_j,u_j)\\in\\mathcal L_{d_j+1}.$$\nFor symmetric matrices, $S\\succeq0$ means $v^TSv\\ge0$ for every $v$ and the pairing is $\\langle X,S\\rangle=X\\bullet S:=\\operatorname{tr}(XS)$. Thus $\\min C\\bullet X$ subject to $\\mathcal A(X)=b$, $X\\succeq0$ has dual $\\max b^Ty$ subject to $\\mathcal A^*y+S=C$, $S\\succeq0$, with gap $X\\bullet S$. The affine-matrix SDP $\\min c^Tx$ subject to $F_0+\\sum_i x_iF_i\\succeq0$ has dual $\\max -F_0\\bullet Z$ subject to $F_i\\bullet Z=c_i$ for every $i$ and $Z\\succeq0$.\n\nThe smooth convex inequality convention is that of [[def-inequality-constrained-program-and-kkt-geometry]]: inequalities are written $g_i(x)\\le0$ and their multipliers are nonnegative. The Lagrangian dual-value convention is that of [[def-convex-program-duality-and-slater-condition]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-self-concordant-log-homogeneous-barrier",
+          "source_section": "Definition",
+          "quote": "Let $E$ be a finite-dimensional real inner-product space, let $D\\subset E$ be open and convex, and let $F:D\\to\\mathbb R$ be $C^3$. Write $H_F(x)=D^2F(x)$ for its Hessian as a self-adjoint operator. A **self-concordant barrier** on $D$ is a strictly convex $F$ with positive-definite Hessian, with $F(x_k)\\to+\\infty$ whenever $x_k$ approaches a finite boundary point of $D$, and satisfying both conditions below.\n\nFor $x\\in D$, define the local norm and its dual by\n$$\\|h\\|_x=\\sqrt{D^2F(x)[h,h]},\\qquad \\|\\ell\\|_{x,*}=\\sup_{\\|h\\|_x\\le1}|\\ell[h]|.$$\nThe **Dikin inclusion** is $\\{x+h:\\|h\\|_x<1\\}\\subset D$. The **self-concordance inequality** is\n$$|D^3F(x)[u,v,v]|\\le2\\|u\\|_x\\|v\\|_x^2\\qquad(u,v\\in E).$$\nThe Newton decrement is $\\lambda_F(x)=\\|DF(x)\\|_{x,*}$.\n\nIf $K\\subset E$ is a closed convex cone with nonempty interior and $D=\\operatorname{int}K$, the barrier is **$\\nu$-log-homogeneous** when $\\nu>0$, $F(\\alpha x)=F(x)-\\nu\\log\\alpha$ for every $x\\in D$ and $\\alpha>0$, and $\\lambda_F(x)\\le\\sqrt\\nu$ for every $x\\in D$. The number $\\nu$ is its barrier parameter. When equality constraints $Ax=b$ are imposed, local norms and decrements are computed after restricting $D^2F$ and $DF$ to the tangent space $\\ker A$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Fix $y\\in\\operatorname{int}K$ and let $\\phi(t)=F(x+ty)$ for $t\\ge0$. The sum of an interior cone point and a cone point is interior, so $\\phi$ is defined and convex. Log-homogeneity gives $\\phi(t)=F(y+x/t)-\\nu\\log t$ for $t>0$, which tends to $-\\infty$ as $t\\to\\infty$. If $DF(x)[y]=\\phi'(0)>0$, convexity would imply $\\phi(t)\\ge\\phi(0)+t\\phi'(0)\\to+\\infty$, a contradiction. Thus $DF(x)[y]\\le0$ for all interior $y$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For any $y\\in K$ and $\\varepsilon>0$, $y+\\varepsilon x\\in\\operatorname{int}K$: an open ball around $\\varepsilon x$ lies in $K$, and adding $y\\in K$ keeps that ball in $K$. Step 1.1 applied to $y+\\varepsilon x$ and continuity of the linear functional $DF(x)$ as $\\varepsilon\\downarrow0$ give $DF(x)[y]\\le0$. Hence $-\\nabla F(x)$ pairs nonnegatively with every $y\\in K$, so it lies in $K^*$ by [F1]. Differentiating $F(\\alpha x)=F(x)-\\nu\\log\\alpha$ at $\\alpha=1$ gives $DF(x)[x]=-\\nu$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Properness includes nonempty interior, and the claim is evaluated at the specified x∈int K."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The ε↓0 limit includes the boundary cone element y=0. (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Log homogeneity is asserted for every α>0; the result has no exceptional threshold at ν or α equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The cone is assumed proper with nonempty interior, so cones with lineality or empty interior are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The one-sided ray starts at t=0 and the scaling argument is for t>0. (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "An arbitrary interior y is selected from the nonempty cone interior. (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The negative gradient belongs to K*; the lemma does not characterize every element of K* as a barrier gradient."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Euler identity and dual membership are consequences of log homogeneity; no converse reconstruction of F is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-phase-i-margin-status-and-weak-infeasibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conic-optimization-primal-dual-models",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional real inner-product space $E$, a **cone** is a set closed under addition and multiplication by nonnegative scalars. A cone $K\\subset E$ is **proper** when it is closed, convex, pointed ($K\\cap(-K)=\\{0\\}$), and has nonempty interior. Its dual cone is\n$$K^*=\\{z\\in E:\\langle z,s\\rangle\\ge0\\text{ for every }s\\in K\\}.$$\n\nLet $A:\\mathbb R^n\\to\\mathbb R^p$ and $G:\\mathbb R^n\\to E$ be linear, let $b\\in\\mathbb R^p$, $c\\in\\mathbb R^n$, and $h\\in E$. A matrix $A$ has full row rank when its rows are linearly independent. The conic primal problem and its displayed dual pair are\n$$\\inf\\{c^Tx:Ax=b,\\ h-Gx\\in K\\},\\qquad \\sup\\{b^Ty-\\langle h,z\\rangle:A^Ty-G^*z=c,\\ z\\in K^*\\},$$\nwhere $G^*$ is the adjoint, defined by $\\langle Gx,z\\rangle=x^TG^*z$. For any feasible pair, its gap is\n$$c^Tx-b^Ty+\\langle h,z\\rangle=\\langle z,h-Gx\\rangle\\ge0.$$\nThe special case $\\inf\\{c^Tx:Ax=b,\\ x\\in K\\}$ has dual $\\sup\\{b^Ty:A^Ty+z=c,\\ z\\in K^*\\}$ and gap $\\langle z,x\\rangle$.\n\nFor $K=\\mathbb R_+^n$, the latter is the standard-form LP $\\min c^Tx$ subject to $Ax=b$, $x\\ge0$, with dual variables $y$ free and $s=c-A^Ty\\ge0$. A convex QP in this convention has objective $f_0(x)=\\tfrac12x^TQx+c^Tx$, with symmetric $Q\\succeq0$, the same equality, and $x\\ge0$. Its Lagrangian is $L(x,y,s)=f_0(x)+y^T(b-Ax)-s^Tx$; a feasible KKT tuple obeys $Qx+c-A^Ty-s=0$, and its dual value is $\\inf_{w\\in\\mathbb R^n}L(w,y,s)$.\n\nFor a Lorentz cone $\\mathcal L_{d+1}=\\{(t,u)\\in\\mathbb R\\times\\mathbb R^d:t\\ge\\|u\\|_2\\}$, let $F_j\\in\\mathbb R^{d_j\\times n}$, $f_j\\in\\mathbb R^{d_j}$, $g_j\\in\\mathbb R^n$, and $h_j\\in\\mathbb R$. Then $\\|F_jx+f_j\\|_2\\le g_j^Tx+h_j$ is membership of $(g_j^Tx+h_j,F_jx+f_j)$ in $\\mathcal L_{d_j+1}$. With no equality constraints, the SOCP $\\min c^Tx$ under these constraints has dual\n$$\\max -\\sum_j(f_j^Tu_j+h_j\\tau_j)\\quad\\text{subject to }\\sum_j(F_j^Tu_j+g_j\\tau_j)=c,\\quad(\\tau_j,u_j)\\in\\mathcal L_{d_j+1}.$$\nFor symmetric matrices, $S\\succeq0$ means $v^TSv\\ge0$ for every $v$ and the pairing is $\\langle X,S\\rangle=X\\bullet S:=\\operatorname{tr}(XS)$. Thus $\\min C\\bullet X$ subject to $\\mathcal A(X)=b$, $X\\succeq0$ has dual $\\max b^Ty$ subject to $\\mathcal A^*y+S=C$, $S\\succeq0$, with gap $X\\bullet S$. The affine-matrix SDP $\\min c^Tx$ subject to $F_0+\\sum_i x_iF_i\\succeq0$ has dual $\\max -F_0\\bullet Z$ subject to $F_i\\bullet Z=c_i$ for every $i$ and $Z\\succeq0$.\n\nThe smooth convex inequality convention is that of [[def-inequality-constrained-program-and-kkt-geometry]]: inequalities are written $g_i(x)\\le0$ and their multipliers are nonnegative. The Lagrangian dual-value convention is that of [[def-convex-program-duality-and-slater-condition]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "If $\\rho_*<0$, then by the definition of an infimum some feasible pair $(x,\\tau)$ has $\\tau<0$. Write $h-Gx+\\tau e=k\\in K$. Then $h-Gx=k+(-\\tau)e$. An open ball around $(-\\tau)e\\in\\operatorname{int}K$ lies in $K$; translating that ball by $k\\in K$ keeps it in $K+K\\subseteq K$. Hence $k+(-\\tau)e\\in\\operatorname{int}K$, so $Ax=b$ and $h-Gx\\in\\operatorname{int}K$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "If the original system has a feasible $x$, then $\\tau=0$ is feasible for the Phase-I set, hence $\\rho_*\\le0$. This proves infeasibility when $\\rho_*>0$ or the Phase-I set is empty. If $\\rho_*=0$ is attained, the attaining pair cannot have $\\tau<0$, since that would force $\\rho_*<0$; hence it has $\\tau=0$ and its $x$ is originally feasible. Strict feasibility at some $x$ would give $s=h-Gx\\in\\operatorname{int}K$. Because $\\operatorname{int}K$ is open and $e\\in\\operatorname{int}K$, there is $\\delta>0$ small enough that $s-\\delta e\\in K$, making $\\tau=-\\delta$ feasible and contradicting $\\rho_*=0$. If $\\rho_*=0$ is not attained, original feasibility would itself provide an attaining pair at $\\tau=0$, a contradiction. Thus zero is inconclusive until attainment is checked.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition assigns ρ*=+∞ when the Phase-I feasible set is empty, and the infeasibility conclusion covers that branch (step 2.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The attained and unattained zero-margin cases are distinguished. (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The classification uses the sign of ρ* and attainment; the numerical value 1 is not a threshold in the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem requires a proper cone and e∈int K, excluding nonproper or boundary-direction versions of Phase I."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The case τ=0 is treated directly. (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The infimum property supplies a feasible pair with negative τ when ρ*<0. (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A negative margin certifies strict feasibility; the theorem does not claim that every particular feasible margin point is optimal."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The sign and attainment statements classify the listed cases, but do not assert an equivalence for arbitrary finite-budget algorithm statuses."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-central-path-barrier-gap-and-dual-certificate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-inequality-constrained-program-and-kkt-geometry",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$\nbe $C^2$. Let $p,m\\in\\mathbb N$ with zero allowed; when the target\ndimension is positive, let $h:U\\to\\mathbb R^p$ and\n$g=(g_1,\\ldots,g_m):U\\to\\mathbb R^m$ be componentwise $C^2$, and when it\nis zero use the unique empty map. The $C^2$ convention for positive\ndimensions is [[def-ck-euclidean-maps-and-diffeomorphisms]].\nThe smooth inequality program is to minimize $f(x)$ subject to\n$h(x)=0$ and $g_i(x)\\le0$ for every $i$. Its feasible set is\n$C=\\{x\\in U:h(x)=0,\\ g_i(x)\\le0\\ (1\\le i\\le m)\\}$. A feasible point $x_*$ is\na local minimizer if some open neighborhood $V$ of $x_*$ satisfies\n$f(x_*)\\le f(y)$ for every $y\\in C\\cap V$.\n\nAt a feasible $x$, the active set is\n$I(x)=\\{i:g_i(x)=0\\}$. The Bouligand tangent cone and linearized cone are,\nrespectively,\n$$\nT_C(x)=\\{d:\\exists\\,t_k>0,\\ t_k\\downarrow0,\\ d_k\\to d,\\ x+t_kd_k\\in C\\},\n$$\nand\n$$\n\\mathcal L_C(x)=\\{d:Dh(x)d=0,\\ Dg_i(x)d\\le0\\text{ for every }i\\in I(x)\\}.\n$$\nGradients are column vectors and $Dg_i(x)d=\\nabla g_i(x)^Td$.\n\nThe linear independence constraint qualification (LICQ) holds at $x$ when the rows of $Dh(x)$ together with\n$\\{\\nabla g_i(x)^T:i\\in I(x)\\}$ are linearly independent. MFCQ holds at $x$\nwhen $Dh(x)$ has full row rank (its rows are linearly independent) and there is $w\\in\\ker Dh(x)$ with\n$Dg_i(x)w<0$ for every active $i$; the latter condition is vacuous if\n$I(x)=\\varnothing$. Here full row rank for a matrix with zero rows is\nunderstood vacuously.\n\nThe Mangasarian–Fromovitz constraint qualification (MFCQ) is the condition\njust stated. The Karush–Kuhn–Tucker (KKT) system is the stationarity,\nfeasibility, dual-feasibility, and complementarity system below.\n\nFor $\\nu\\in\\mathbb R^p$ and $\\lambda\\in\\mathbb R^m$, the Lagrangian and KKT\nsystem are\n$$\nL(x,\\nu,\\lambda)=f(x)+\\nu^Th(x)+\\lambda^Tg(x),\n$$\n$$\nh(x)=0,\\quad g(x)\\le0,\\quad \\lambda\\ge0,\\quad \\lambda_i g_i(x)=0\\ (1\\le i\\le m),\\quad \\nabla_xL(x,\\nu,\\lambda)=0.\n$$\nThe critical cone for a KKT tuple is\n$\\mathcal K(x,\\nu,\\lambda)=\\mathcal L_C(x)\\cap\n\\{d:\\nabla f(x)^Td=0\\}$. These definitions use the differentiability and\ngradient conventions of [[def-ck-euclidean-maps-and-diffeomorphisms]],\n[[def-euclidean-inner-product]], and [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-differentiable-convex-functions-and-gradient-inequality",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^n$ be open and convex, and let $f:U\\to\\mathbb R$ be differentiable. Then $f$ is convex if and only if\n\n$$f(y)\\ge f(x)+\\langle\\nabla f(x),y-x\\rangle\\qquad(x,y\\in U).$$\n\nEquivalently, $\\nabla f(x)$ is a subgradient at every $x$ ([[def-subgradient-and-subdifferential]], [[def-jacobian-matrix-and-gradient]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-loghom-barrier-gradient-is-dual",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a proper cone in a finite-dimensional real inner-product space and let $F$ be a differentiable $\\nu$-log-homogeneous barrier on $\\operatorname{int}K$. Then for every $x\\in\\operatorname{int}K$,\n$$-\\nabla F(x)\\in K^*,\\qquad DF(x)[x]=-\\nu.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "In the smooth case, differentiating $\\Psi_t$ at its affine-constrained minimizer gives $t\\nabla f_0(x_t)+Dg(x_t)^T(-1/g(x_t))+A^Tw=0$. Since $g_i(x_t)<0$, $\\lambda_i=-1/(t g_i(x_t))>0$, and $\\nu=w/t$ make this $\\nabla f_0+Dg^T\\lambda+A^T\\nu=0$. Also $\\lambda_i g_i(x_t)=-1/t$ for every $i$. Thus $\\nabla_x L(x_t,\\lambda,\\nu)=0$ and $L(\\cdot,\\lambda,\\nu)$ is convex; [F2] proves that $x_t$ globally minimizes this Lagrangian on $D$. Therefore $q_D(\\lambda,\\nu)=L(x_t,\\lambda,\\nu)=f_0(x_t)-m/t$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For every primal feasible $x\\in D$, [F1] gives $\\lambda_i\\ge0$ and $g_i(x)\\le0$, hence $L(x,\\lambda,\\nu)=f_0(x)+\\lambda^Tg(x)\\le f_0(x)$. Thus $q_D(\\lambda,\\nu)\\le f_0(x)$ for every feasible $x$, so $q_D(\\lambda,\\nu)\\le p^*$. Since $x_t$ is feasible, $p^*\\le f_0(x_t)$. Combining this with step 1.1 yields $0\\le f_0(x_t)-p^*\\le m/t$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "In the conic case set $z_t=-\\nabla F(s_t)/t\\in K^*$ by [F3] and $y_t=-w/t$. The stationarity equation in [[def-barrier-central-path-and-newton-residuals]] gives $A^Ty_t-G^*z_t=c$, so the pair is dual feasible. The conic gap identity in [[def-conic-optimization-primal-dual-models]] gives $c^Tx_t-(b^Ty_t-\\langle h,z_t\\rangle)=\\langle z_t,s_t\\rangle=-DF(s_t)[s_t]/t=\\nu/t$. For every primal feasible $x$, the same identity and $z_t\\in K^*$ make its objective at least the dual value, so $b^Ty_t-\\langle h,z_t\\rangle\\le p^*$. Since $x_t$ is primal feasible, $p^*\\le c^Tx_t$; combining these inequalities with the exact gap gives $0\\le c^Tx_t-p^*\\le\\nu/t$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The smooth conclusion assumes a strict feasible exact minimizer, and the conic conclusion assumes an exact barrier minimizer."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The weak-duality comparison includes zero primal-dual gap. (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The error terms are m/t and ν/t for arbitrary positive t; t=1 is not a separate boundary regime."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a finite primal value and exact central minimizers; it gives no assertion for missing minimizers or an undefined primal value."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim concerns strict interior central points at finite t>0, not a limit on the feasible boundary as t tends to infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The exact minimizer and equality multiplier are explicit hypotheses. (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Exact centrality yields a gap bound; the estimate is not a necessary condition for centrality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A small objective error alone does not imply the central-point equations or exact dual feasibility."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-inexact-central-path-distance-and-gap-certificate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-inexact-gradient-residual-distance-certificate",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and convex, let $f\\in C^2(U,\\mathbb R)$ have an attained interior global minimizer $x^*$, and suppose $H_f(x)\\succeq\\mu I$ on $U$ for some $\\mu>0$. For a candidate $\\widetilde x\\in U$, let $\\widehat g\\in\\mathbb R^d$ be a computed gradient vector. If independently verified bounds\n\n$$\\|\\widehat g\\|_2\\le\\eta,\\qquad \\|\\widehat g-\\nabla f(\\widetilde x)\\|_2\\le\\delta$$\n\nhold for $\\eta,\\delta\\ge0$, then\n\n$$\\|\\widetilde x-x^*\\|_2\\le\\frac{\\eta+\\delta}{\\mu}.$$\n\nThe residual $\\eta$ and discrepancy $\\delta$ are mathematical hypotheses. A software stopping flag alone establishes neither bound.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-loghom-barrier-gradient-is-dual",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a proper cone in a finite-dimensional real inner-product space and let $F$ be a differentiable $\\nu$-log-homogeneous barrier on $\\operatorname{int}K$. Then for every $x\\in\\operatorname{int}K$,\n$$-\\nabla F(x)\\in K^*,\\qquad DF(x)[x]=-\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-central-path-barrier-gap-and-dual-certificate",
+          "source_section": "Statement",
+          "quote": "For the smooth convex inequality problem of [[def-barrier-central-path-and-newton-residuals]], suppose a strict feasible exact minimizer $x_t$ of the barrier objective exists, the primal value $p^*$ is finite, and the equality multiplier is included. Use the sign convention $L(x,\\lambda,\\nu)=f_0(x)+\\lambda^Tg(x)+\\nu^T(Ax-b)$, and define $q_D(\\lambda,\\nu)=\\inf_{x\\in D}L(x,\\lambda,\\nu)$ on the common open domain $D$. Then the Lagrangian dual pair generated by $\\lambda_i=-1/(t g_i(x_t))$ has value $q_D(\\lambda,\\nu)=f_0(x_t)-m/t$, so\n$$0\\le f_0(x_t)-p^*\\le m/t.$$\nFor the conic model of [[def-conic-optimization-primal-dual-models]], suppose $x_t$ is an exact barrier minimizer and $F$ is a $\\nu$-log-homogeneous barrier. Its barrier multiplier $z_t=-\\nabla F(s_t)/t$ and equality multiplier give a dual feasible pair with gap $\\nu/t$, and hence\n$$0\\le c^Tx_t-p^*\\le\\nu/t.$$\nNo primal attainment or strong-duality assumption is used; existence of the exact barrier minimizer and finiteness of $p^*$ are required.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-barrier-central-path-and-newton-residuals",
+          "source_section": "Definition",
+          "quote": "For a smooth inequality problem with the convention of [[def-inequality-constrained-program-and-kkt-geometry]], let $D\\subseteq\\mathbb R^n$ be open and convex, let $f_0,g_1,\\ldots,g_m$ be convex $C^2$ functions on $D$, and let $A\\in\\mathbb R^{p\\times n}$ and $b\\in\\mathbb R^p$. Assume there exists $x\\in D$ with $Ax=b$ and $g_i(x)<0$ for every $i$. For $t>0$, its **log-barrier objective** is\n$$\\Psi_t(x)=t f_0(x)-\\sum_{i=1}^m\\log(-g_i(x)),\\qquad Ax=b,\\quad g_i(x)<0.$$\nAny attained minimizer is a central point. Its central multipliers are $\\lambda_i=-1/(t g_i(x))>0$. A central point and multiplier tuple satisfy $Ax=b$, $g(x)<0$, and $\\nabla f_0(x)+Dg(x)^T\\lambda+A^T\\nu=0$ for an equality multiplier $\\nu$.\n\nFor the conic model of [[def-conic-optimization-primal-dual-models]], let $s=h-Gx\\in\\operatorname{int}K$ and let $F$ be a self-concordant barrier on $K$. The conic **barrier objective** is $\\Phi_t(x)=t c^Tx+F(h-Gx)$ restricted to $Ax=b$. An attained minimizer $x_t$ satisfies\n$$t c-G^*\\nabla F(s_t)+A^Tw=0,\\qquad Ax_t=b,\\qquad s_t=h-Gx_t\\in\\operatorname{int}K$$\nfor some $w\\in\\mathbb R^p$. Its barrier multiplier is $z_t=-\\nabla F(s_t)/t$.\n\nFor a standard-form LP or convex QP with $Ax=b$, $x\\ge0$, and objective $f_0(x)=\\tfrac12x^TQx+c^Tx$ ($Q=0$ for an LP), define the primal-dual residuals\n$$r_d=Qx+c-A^Ty-s,\\qquad r_p=Ax-b,\\qquad r_c=Xs-\\sigma\\mu\\mathbf1,$$\nwhere $X=\\operatorname{diag}(x)$, $S=\\operatorname{diag}(s)$, $\\mu=x^Ts/n$, and $0<\\sigma<1$. For $x,s>0$, the modified KKT Newton direction solves\n$$\\begin{bmatrix}Q&-A^T&-I\\\\ A&0&0\\\\ S&0&X\\end{bmatrix}\\begin{bmatrix}\\Delta x\\\\\\Delta y\\\\\\Delta s\\end{bmatrix}=-\\begin{bmatrix}r_d\\\\r_p\\\\r_c\\end{bmatrix}.$$\n\nFor orthant, Lorentz, or positive-semidefinite cone factors, the analogous conic residuals are $r_p=Ax-b$, $r_d=A^Ty-G^*z-c$, and $r_c=s\\circ z-\\sigma\\mu e$. These factors are self-dual under their standard Euclidean or trace pairings by [[lem-nonnegative-orthant-log-barrier]], [[lem-lorentz-cone-log-barrier]], and [[lem-psd-cone-self-dual-logdet-barrier]], so $s$ and $z$ occupy the same factor spaces. For the orthant, $\\circ$ is coordinatewise multiplication and $e=\\mathbf1$. The Lorentz Jordan product is $(t,u)\\circ(q,v)=(tq+u^Tv,tv+qu)$ with $e=(1,0)$; for symmetric matrices $X\\circ S=(XS+SX)/2$ with $e=I$. In each factor, pairing $s\\circ z$ with $e$ gives $\\langle s,z\\rangle$: this is the coordinate sum for the orthant, the first coordinate for the Lorentz product, and $\\operatorname{tr}((XS+SX)/2)=\\operatorname{tr}(XS)$ for symmetric matrices by the finite-index trace identity. In each product cone, $\\mu=\\langle s,z\\rangle/\\nu$, where $\\nu$ is the sum of the factor barrier parameters. The linearized slack is $\\Delta s=-G\\Delta x$.\n\nResidual tolerances describe a candidate unless an independent argument also verifies feasibility and a primal-dual gap. A finite iteration or factorization budget that returns a candidate, failure, or inconclusive status is not itself an optimality certificate.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The linear map $z\\mapsto x_0+Pz$ preserves Euclidean distances because $P^TP=I$. The restriction $\\varphi_t$ is $C^2$ on the stated open convex coordinate region, its exact minimizer is attained in the interior, and the assumed Hessian lower bound is precisely the strong-convexity hypothesis in [F1]. Applying [F1] gives $\\|\\widetilde z-z_*\\|_2\\le(\\eta+\\delta)/\\mu$, hence the same bound for $\\widetilde x-x_*(t)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Let $x_*=x_0+Pz_*$ and $s_*=h-Gx_*$. By [F5], $t c-G^*\\nabla F(s_*)+A^Tw=0$ for some $w$. Set $\\widehat z_*=-\\nabla F(s_*)/t\\in K^*$ by [F2] and $y_*=-w/t$. The stationarity equation gives $A^Ty_*-G^*\\widehat z_*=c$, so $(y_*,\\widehat z_*)$ is dual feasible. The conic gap identity in [[def-conic-optimization-primal-dual-models]] then gives a finite dual lower bound on every primal feasible objective. Since $x_*$ is primal feasible with finite objective, this proves that $p^*$ is finite, establishing the finiteness hypothesis needed for [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Since $P^TP=I$, $|c^T(\\widetilde x-x_*(t))|=|(P^Tc)^T(\\widetilde z-z_*)|\\le\\|c\\|_2(\\eta+\\delta)/\\mu$ by [F4] and $\\|P^Tc\\|_2\\le\\|c\\|_2$. Add the exact-center gap [F3]. Primal feasibility of $\\widetilde x$ makes $p^*\\le c^T\\widetilde x$, giving the stated candidate bound.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The region is assumed to contain both z* and the strict feasible candidate; the estimate is not stated for an empty coordinate region."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The verified η=δ=0 boundary yields zero distance through the stated estimate. (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The bound depends continuously on η, δ, and μ>0; no special unit-residual threshold is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "An orthonormal basis of ker A, including an empty basis, preserves the asserted distance identity. (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The candidate is strict feasible and t is fixed positive; no boundary limit of the certificate is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The exact minimizer and strict feasible candidate are explicit hypotheses. (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Verified residual and discrepancy bounds imply the stated error bound, with no converse claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A small distance or objective error does not certify the two computed-gradient bounds."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-short-step-complexity-and-primal-gap-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-self-concordant-log-homogeneous-barrier",
+          "source_section": "Definition",
+          "quote": "Let $E$ be a finite-dimensional real inner-product space, let $D\\subset E$ be open and convex, and let $F:D\\to\\mathbb R$ be $C^3$. Write $H_F(x)=D^2F(x)$ for its Hessian as a self-adjoint operator. A **self-concordant barrier** on $D$ is a strictly convex $F$ with positive-definite Hessian, with $F(x_k)\\to+\\infty$ whenever $x_k$ approaches a finite boundary point of $D$, and satisfying both conditions below.\n\nFor $x\\in D$, define the local norm and its dual by\n$$\\|h\\|_x=\\sqrt{D^2F(x)[h,h]},\\qquad \\|\\ell\\|_{x,*}=\\sup_{\\|h\\|_x\\le1}|\\ell[h]|.$$\nThe **Dikin inclusion** is $\\{x+h:\\|h\\|_x<1\\}\\subset D$. The **self-concordance inequality** is\n$$|D^3F(x)[u,v,v]|\\le2\\|u\\|_x\\|v\\|_x^2\\qquad(u,v\\in E).$$\nThe Newton decrement is $\\lambda_F(x)=\\|DF(x)\\|_{x,*}$.\n\nIf $K\\subset E$ is a closed convex cone with nonempty interior and $D=\\operatorname{int}K$, the barrier is **$\\nu$-log-homogeneous** when $\\nu>0$, $F(\\alpha x)=F(x)-\\nu\\log\\alpha$ for every $x\\in D$ and $\\alpha>0$, and $\\lambda_F(x)\\le\\sqrt\\nu$ for every $x\\in D$. The number $\\nu$ is its barrier parameter. When equality constraints $Ax=b$ are imposed, local norms and decrements are computed after restricting $D^2F$ and $DF$ to the tangent space $\\ker A$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-self-concordant-local-newton-calculus",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a self-concordant barrier as in [[def-self-concordant-log-homogeneous-barrier]]. Put $H_x=D^2F(x)$, $\\lambda=\\lambda_F(x)$, and let $d=-H_x^{-1}\\nabla F(x)$ be the Newton direction when the ambient Hessian is used. The analogous statements hold on an affine feasible subspace with its restricted Hessian and gradient.\n\nFor $h\\in E$, put $r=\\|h\\|_x$. Whenever the whole segment $x+[0,t]h$ lies in $D$, the local metric satisfies the lower bound below. If $tr<1$ (with no restriction when $r=0$), Dikin inclusion guarantees that the segment lies in $D$ and the upper bound also holds:\n$$\\frac{r}{1+tr}\\le\\|h\\|_{x+th}\\le\\frac{r}{1-tr}.$$\nIf $tr<1$, then\n$$ (1-tr)^2H_x\\preceq H_{x+th}\\preceq(1-tr)^{-2}H_x. $$\nFor every $\\lambda\\ge0$, the damped step $y=x+d/(1+\\lambda)$ lies in $D$ and obeys $\\lambda_F(y)\\le2\\lambda^2$. If $\\lambda_F(x)<1$, then $F$ has a unique attained global minimizer $x_*$ in $D$, and\n$$\\|x-x_*\\|_x\\le\\frac{\\lambda_F(x)}{1-\\lambda_F(x)}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-central-path-barrier-gap-and-dual-certificate",
+          "source_section": "Statement",
+          "quote": "For the smooth convex inequality problem of [[def-barrier-central-path-and-newton-residuals]], suppose a strict feasible exact minimizer $x_t$ of the barrier objective exists, the primal value $p^*$ is finite, and the equality multiplier is included. Use the sign convention $L(x,\\lambda,\\nu)=f_0(x)+\\lambda^Tg(x)+\\nu^T(Ax-b)$, and define $q_D(\\lambda,\\nu)=\\inf_{x\\in D}L(x,\\lambda,\\nu)$ on the common open domain $D$. Then the Lagrangian dual pair generated by $\\lambda_i=-1/(t g_i(x_t))$ has value $q_D(\\lambda,\\nu)=f_0(x_t)-m/t$, so\n$$0\\le f_0(x_t)-p^*\\le m/t.$$\nFor the conic model of [[def-conic-optimization-primal-dual-models]], suppose $x_t$ is an exact barrier minimizer and $F$ is a $\\nu$-log-homogeneous barrier. Its barrier multiplier $z_t=-\\nabla F(s_t)/t$ and equality multiplier give a dual feasible pair with gap $\\nu/t$, and hence\n$$0\\le c^Tx_t-p^*\\le\\nu/t.$$\nNo primal attainment or strong-duality assumption is used; existence of the exact barrier minimizer and finiteness of $p^*$ are required.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-self-concordant-local-newton-calculus",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a self-concordant barrier as in [[def-self-concordant-log-homogeneous-barrier]]. Put $H_x=D^2F(x)$, $\\lambda=\\lambda_F(x)$, and let $d=-H_x^{-1}\\nabla F(x)$ be the Newton direction when the ambient Hessian is used. The analogous statements hold on an affine feasible subspace with its restricted Hessian and gradient.\n\nFor $h\\in E$, put $r=\\|h\\|_x$. Whenever the whole segment $x+[0,t]h$ lies in $D$, the local metric satisfies the lower bound below. If $tr<1$ (with no restriction when $r=0$), Dikin inclusion guarantees that the segment lies in $D$ and the upper bound also holds:\n$$\\frac{r}{1+tr}\\le\\|h\\|_{x+th}\\le\\frac{r}{1-tr}.$$\nIf $tr<1$, then\n$$ (1-tr)^2H_x\\preceq H_{x+th}\\preceq(1-tr)^{-2}H_x. $$\nFor every $\\lambda\\ge0$, the damped step $y=x+d/(1+\\lambda)$ lies in $D$ and obeys $\\lambda_F(y)\\le2\\lambda^2$. If $\\lambda_F(x)<1$, then $F$ has a unique attained global minimizer $x_*$ in $D$, and\n$$\\|x-x_*\\|_x\\le\\frac{\\lambda_F(x)}{1-\\lambda_F(x)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Log homogeneity gives $DF(x)[x]=-\\nu$, $D^2F(x)[x,x]=\\nu$, and $D^3F(x)[x,x,x]=-2\\nu$. The self-concordance inequality in [F1] therefore implies $2\\nu\\le2\\nu^{3/2}$, hence $\\nu\\ge1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "At an iterate with $\\lambda_t(x)\\le1/4$, set $\\alpha=1+1/(8\\sqrt\\nu)$ and $B(x)=F(h-Gx)$. On $\\ker A$, $D^2B(x)[d,d]=D^2F(s)[Gd,Gd]$, so the restricted dual norm of $DB(x)$ is at most the ambient dual norm of $DF(s)$, hence at most $\\sqrt\\nu$ by [F1]. Since $D\\Phi_{\\alpha t}=\\alpha D\\Phi_t+(1-\\alpha)DB$, the triangle inequality gives $\\lambda_{\\alpha t}(x)\\le\\alpha\\lambda_t(x)+(\\alpha-1)\\sqrt\\nu\\le3/8+1/(32\\sqrt\\nu)\\le13/32$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Adding the linear term $t^+c^Tx$ does not change the barrier Hessian, local norms, or third derivatives, so [F2] applies to $\\Phi_{t^+}$. The starting decrement is at most $13/32<1$, so [F4] gives a unique attained center for that subproblem. After the first damped correction the decrement is at most $2(13/32)^2=338/1024$. Applying [F2] once more gives at most $2(338/1024)^2<1/4$. Dikin inclusion keeps both corrections in the cone interior. Thus each path update is recentered in at most two corrections.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Let $x_*(t)$ be the exact center at the new $t$ and let $x$ be the accepted iterate with $\\lambda_t(x)\\le1/4$. By [F2], $r=\\|x-x_*(t)\\|_x\\le1/3$. Applying its local Hessian comparison to this segment gives $\\|x-x_*(t)\\|_{x_*(t)}\\le r/(1-r)\\le1/2$. For $h=x-x_*(t)$, the restricted barrier norm is $\\|G h\\|_{s_*(t)}=\\|h\\|_{x_*(t)}$. Stationarity of $x_*(t)$ along the feasible affine space gives $t c^Th=-DF(s_*(t))[s(x)-s_*(t)]$. The restricted barrier dual norm of this functional is at most the ambient $\\sqrt\\nu$ from [F1], because restricting the unit-vector supremum can only decrease it. Hence $|c^Th|\\le\\sqrt\\nu/(2t)$. Combining this with [F3] yields $c^Tx-p^*\\le(\\nu+\\sqrt\\nu/2)/t\\le3\\nu/(2t)$, since $\\nu\\ge1$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "Each path update multiplies $t$ by $\\alpha$, so $t_k=t_0\\alpha^k$. The bound in step 3.1 is at most $\\varepsilon$ once $t_k\\ge3\\nu/(2\\varepsilon)$, which gives the displayed ceiling. For $u=1/(8\\sqrt\\nu)\\le1/8$, $\\log(1+u)\\ge u/(1+u)\\ge1/(9\\sqrt\\nu)$; hence $k\\le1+9\\sqrt\\nu\\log R$. Step 2.1 bounds corrections by $2k$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm requires a strictly feasible start and a positive barrier parameter, so the complexity claim assumes a nonempty interior feasible region."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The decrement bound includes λ=0. (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof establishes ν≥1, covering the lowest admissible parameter. (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The case ν=1 is covered by the displayed logarithmic inequality. (step 4.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The permitted λ≤1/4 boundary is included in the update estimate. (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The local lemma constructs the attained center at each next path parameter. (step 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The update count is a sufficient upper bound for reaching the target tolerance; no lower bound is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Failure under a smaller cap does not imply that the target is mathematically unattainable."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-primal-dual-lp-qp-newton-matrix-nonsingular": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-barrier-central-path-and-newton-residuals",
+          "source_section": "Definition",
+          "quote": "For a smooth inequality problem with the convention of [[def-inequality-constrained-program-and-kkt-geometry]], let $D\\subseteq\\mathbb R^n$ be open and convex, let $f_0,g_1,\\ldots,g_m$ be convex $C^2$ functions on $D$, and let $A\\in\\mathbb R^{p\\times n}$ and $b\\in\\mathbb R^p$. Assume there exists $x\\in D$ with $Ax=b$ and $g_i(x)<0$ for every $i$. For $t>0$, its **log-barrier objective** is\n$$\\Psi_t(x)=t f_0(x)-\\sum_{i=1}^m\\log(-g_i(x)),\\qquad Ax=b,\\quad g_i(x)<0.$$\nAny attained minimizer is a central point. Its central multipliers are $\\lambda_i=-1/(t g_i(x))>0$. A central point and multiplier tuple satisfy $Ax=b$, $g(x)<0$, and $\\nabla f_0(x)+Dg(x)^T\\lambda+A^T\\nu=0$ for an equality multiplier $\\nu$.\n\nFor the conic model of [[def-conic-optimization-primal-dual-models]], let $s=h-Gx\\in\\operatorname{int}K$ and let $F$ be a self-concordant barrier on $K$. The conic **barrier objective** is $\\Phi_t(x)=t c^Tx+F(h-Gx)$ restricted to $Ax=b$. An attained minimizer $x_t$ satisfies\n$$t c-G^*\\nabla F(s_t)+A^Tw=0,\\qquad Ax_t=b,\\qquad s_t=h-Gx_t\\in\\operatorname{int}K$$\nfor some $w\\in\\mathbb R^p$. Its barrier multiplier is $z_t=-\\nabla F(s_t)/t$.\n\nFor a standard-form LP or convex QP with $Ax=b$, $x\\ge0$, and objective $f_0(x)=\\tfrac12x^TQx+c^Tx$ ($Q=0$ for an LP), define the primal-dual residuals\n$$r_d=Qx+c-A^Ty-s,\\qquad r_p=Ax-b,\\qquad r_c=Xs-\\sigma\\mu\\mathbf1,$$\nwhere $X=\\operatorname{diag}(x)$, $S=\\operatorname{diag}(s)$, $\\mu=x^Ts/n$, and $0<\\sigma<1$. For $x,s>0$, the modified KKT Newton direction solves\n$$\\begin{bmatrix}Q&-A^T&-I\\\\ A&0&0\\\\ S&0&X\\end{bmatrix}\\begin{bmatrix}\\Delta x\\\\\\Delta y\\\\\\Delta s\\end{bmatrix}=-\\begin{bmatrix}r_d\\\\r_p\\\\r_c\\end{bmatrix}.$$\n\nFor orthant, Lorentz, or positive-semidefinite cone factors, the analogous conic residuals are $r_p=Ax-b$, $r_d=A^Ty-G^*z-c$, and $r_c=s\\circ z-\\sigma\\mu e$. These factors are self-dual under their standard Euclidean or trace pairings by [[lem-nonnegative-orthant-log-barrier]], [[lem-lorentz-cone-log-barrier]], and [[lem-psd-cone-self-dual-logdet-barrier]], so $s$ and $z$ occupy the same factor spaces. For the orthant, $\\circ$ is coordinatewise multiplication and $e=\\mathbf1$. The Lorentz Jordan product is $(t,u)\\circ(q,v)=(tq+u^Tv,tv+qu)$ with $e=(1,0)$; for symmetric matrices $X\\circ S=(XS+SX)/2$ with $e=I$. In each factor, pairing $s\\circ z$ with $e$ gives $\\langle s,z\\rangle$: this is the coordinate sum for the orthant, the first coordinate for the Lorentz product, and $\\operatorname{tr}((XS+SX)/2)=\\operatorname{tr}(XS)$ for symmetric matrices by the finite-index trace identity. In each product cone, $\\mu=\\langle s,z\\rangle/\\nu$, where $\\nu$ is the sum of the factor barrier parameters. The linearized slack is $\\Delta s=-G\\Delta x$.\n\nResidual tolerances describe a candidate unless an independent argument also verifies feasibility and a primal-dual gap. A finite iteration or factorization budget that returns a candidate, failure, or inconclusive status is not itself an optimality certificate.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conic-optimization-primal-dual-models",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional real inner-product space $E$, a **cone** is a set closed under addition and multiplication by nonnegative scalars. A cone $K\\subset E$ is **proper** when it is closed, convex, pointed ($K\\cap(-K)=\\{0\\}$), and has nonempty interior. Its dual cone is\n$$K^*=\\{z\\in E:\\langle z,s\\rangle\\ge0\\text{ for every }s\\in K\\}.$$\n\nLet $A:\\mathbb R^n\\to\\mathbb R^p$ and $G:\\mathbb R^n\\to E$ be linear, let $b\\in\\mathbb R^p$, $c\\in\\mathbb R^n$, and $h\\in E$. A matrix $A$ has full row rank when its rows are linearly independent. The conic primal problem and its displayed dual pair are\n$$\\inf\\{c^Tx:Ax=b,\\ h-Gx\\in K\\},\\qquad \\sup\\{b^Ty-\\langle h,z\\rangle:A^Ty-G^*z=c,\\ z\\in K^*\\},$$\nwhere $G^*$ is the adjoint, defined by $\\langle Gx,z\\rangle=x^TG^*z$. For any feasible pair, its gap is\n$$c^Tx-b^Ty+\\langle h,z\\rangle=\\langle z,h-Gx\\rangle\\ge0.$$\nThe special case $\\inf\\{c^Tx:Ax=b,\\ x\\in K\\}$ has dual $\\sup\\{b^Ty:A^Ty+z=c,\\ z\\in K^*\\}$ and gap $\\langle z,x\\rangle$.\n\nFor $K=\\mathbb R_+^n$, the latter is the standard-form LP $\\min c^Tx$ subject to $Ax=b$, $x\\ge0$, with dual variables $y$ free and $s=c-A^Ty\\ge0$. A convex QP in this convention has objective $f_0(x)=\\tfrac12x^TQx+c^Tx$, with symmetric $Q\\succeq0$, the same equality, and $x\\ge0$. Its Lagrangian is $L(x,y,s)=f_0(x)+y^T(b-Ax)-s^Tx$; a feasible KKT tuple obeys $Qx+c-A^Ty-s=0$, and its dual value is $\\inf_{w\\in\\mathbb R^n}L(w,y,s)$.\n\nFor a Lorentz cone $\\mathcal L_{d+1}=\\{(t,u)\\in\\mathbb R\\times\\mathbb R^d:t\\ge\\|u\\|_2\\}$, let $F_j\\in\\mathbb R^{d_j\\times n}$, $f_j\\in\\mathbb R^{d_j}$, $g_j\\in\\mathbb R^n$, and $h_j\\in\\mathbb R$. Then $\\|F_jx+f_j\\|_2\\le g_j^Tx+h_j$ is membership of $(g_j^Tx+h_j,F_jx+f_j)$ in $\\mathcal L_{d_j+1}$. With no equality constraints, the SOCP $\\min c^Tx$ under these constraints has dual\n$$\\max -\\sum_j(f_j^Tu_j+h_j\\tau_j)\\quad\\text{subject to }\\sum_j(F_j^Tu_j+g_j\\tau_j)=c,\\quad(\\tau_j,u_j)\\in\\mathcal L_{d_j+1}.$$\nFor symmetric matrices, $S\\succeq0$ means $v^TSv\\ge0$ for every $v$ and the pairing is $\\langle X,S\\rangle=X\\bullet S:=\\operatorname{tr}(XS)$. Thus $\\min C\\bullet X$ subject to $\\mathcal A(X)=b$, $X\\succeq0$ has dual $\\max b^Ty$ subject to $\\mathcal A^*y+S=C$, $S\\succeq0$, with gap $X\\bullet S$. The affine-matrix SDP $\\min c^Tx$ subject to $F_0+\\sum_i x_iF_i\\succeq0$ has dual $\\max -F_0\\bullet Z$ subject to $F_i\\bullet Z=c_i$ for every $i$ and $Z\\succeq0$.\n\nThe smooth convex inequality convention is that of [[def-inequality-constrained-program-and-kkt-geometry]]: inequalities are written $g_i(x)\\le0$ and their multipliers are nonnegative. The Lagrangian dual-value convention is that of [[def-convex-program-duality-and-slater-condition]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Let $(u,v,w)$ lie in the kernel of $M$. The last block equation is $Su+Xw=0$. Since $X$ is invertible, $w=-X^{-1}Su=-Du$, where $D=\\operatorname{diag}(s_i/x_i)\\succ0$. Substituting into the first block gives $(Q+D)u-A^Tv=0$, and the second block gives $Au=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Take the inner product of $(Q+D)u-A^Tv=0$ with $u$. Since $Au=0$, this yields $u^TQu+u^TDu=0$. Both terms are nonnegative by [F2], and $D\\succ0$, so $u=0$. The first block then gives $A^Tv=0$, hence $v=0$ by [F2], and the last block gives $w=0$. The square matrix $M$ has trivial kernel and is therefore nonsingular.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The matrix is defined for n≥1 with strict positive x and s; no zero-variable problem is included."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The kernel argument concludes with the zero vector. (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Nonsingularity depends on positive coordinates and the rank condition, not on a coordinate being equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof also covers p=0, when the equality-multiplier block is absent. (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Strict positivity of x and s is used to invert X and make D positive definite. (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "An arbitrary kernel vector is taken. (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The listed hypotheses suffice for nonsingularity; necessity of each hypothesis is not asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A nonsingular matrix need not recover the stated PSD, full-row-rank, and positive-start hypotheses."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-fraction-to-boundary-and-primal-dual-gap-certificates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conic-optimization-primal-dual-models",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional real inner-product space $E$, a **cone** is a set closed under addition and multiplication by nonnegative scalars. A cone $K\\subset E$ is **proper** when it is closed, convex, pointed ($K\\cap(-K)=\\{0\\}$), and has nonempty interior. Its dual cone is\n$$K^*=\\{z\\in E:\\langle z,s\\rangle\\ge0\\text{ for every }s\\in K\\}.$$\n\nLet $A:\\mathbb R^n\\to\\mathbb R^p$ and $G:\\mathbb R^n\\to E$ be linear, let $b\\in\\mathbb R^p$, $c\\in\\mathbb R^n$, and $h\\in E$. A matrix $A$ has full row rank when its rows are linearly independent. The conic primal problem and its displayed dual pair are\n$$\\inf\\{c^Tx:Ax=b,\\ h-Gx\\in K\\},\\qquad \\sup\\{b^Ty-\\langle h,z\\rangle:A^Ty-G^*z=c,\\ z\\in K^*\\},$$\nwhere $G^*$ is the adjoint, defined by $\\langle Gx,z\\rangle=x^TG^*z$. For any feasible pair, its gap is\n$$c^Tx-b^Ty+\\langle h,z\\rangle=\\langle z,h-Gx\\rangle\\ge0.$$\nThe special case $\\inf\\{c^Tx:Ax=b,\\ x\\in K\\}$ has dual $\\sup\\{b^Ty:A^Ty+z=c,\\ z\\in K^*\\}$ and gap $\\langle z,x\\rangle$.\n\nFor $K=\\mathbb R_+^n$, the latter is the standard-form LP $\\min c^Tx$ subject to $Ax=b$, $x\\ge0$, with dual variables $y$ free and $s=c-A^Ty\\ge0$. A convex QP in this convention has objective $f_0(x)=\\tfrac12x^TQx+c^Tx$, with symmetric $Q\\succeq0$, the same equality, and $x\\ge0$. Its Lagrangian is $L(x,y,s)=f_0(x)+y^T(b-Ax)-s^Tx$; a feasible KKT tuple obeys $Qx+c-A^Ty-s=0$, and its dual value is $\\inf_{w\\in\\mathbb R^n}L(w,y,s)$.\n\nFor a Lorentz cone $\\mathcal L_{d+1}=\\{(t,u)\\in\\mathbb R\\times\\mathbb R^d:t\\ge\\|u\\|_2\\}$, let $F_j\\in\\mathbb R^{d_j\\times n}$, $f_j\\in\\mathbb R^{d_j}$, $g_j\\in\\mathbb R^n$, and $h_j\\in\\mathbb R$. Then $\\|F_jx+f_j\\|_2\\le g_j^Tx+h_j$ is membership of $(g_j^Tx+h_j,F_jx+f_j)$ in $\\mathcal L_{d_j+1}$. With no equality constraints, the SOCP $\\min c^Tx$ under these constraints has dual\n$$\\max -\\sum_j(f_j^Tu_j+h_j\\tau_j)\\quad\\text{subject to }\\sum_j(F_j^Tu_j+g_j\\tau_j)=c,\\quad(\\tau_j,u_j)\\in\\mathcal L_{d_j+1}.$$\nFor symmetric matrices, $S\\succeq0$ means $v^TSv\\ge0$ for every $v$ and the pairing is $\\langle X,S\\rangle=X\\bullet S:=\\operatorname{tr}(XS)$. Thus $\\min C\\bullet X$ subject to $\\mathcal A(X)=b$, $X\\succeq0$ has dual $\\max b^Ty$ subject to $\\mathcal A^*y+S=C$, $S\\succeq0$, with gap $X\\bullet S$. The affine-matrix SDP $\\min c^Tx$ subject to $F_0+\\sum_i x_iF_i\\succeq0$ has dual $\\max -F_0\\bullet Z$ subject to $F_i\\bullet Z=c_i$ for every $i$ and $Z\\succeq0$.\n\nThe smooth convex inequality convention is that of [[def-inequality-constrained-program-and-kkt-geometry]]: inequalities are written $g_i(x)\\le0$ and their multipliers are nonnegative. The Lagrangian dual-value convention is that of [[def-convex-program-duality-and-slater-condition]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conic-optimization-primal-dual-models",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional real inner-product space $E$, a **cone** is a set closed under addition and multiplication by nonnegative scalars. A cone $K\\subset E$ is **proper** when it is closed, convex, pointed ($K\\cap(-K)=\\{0\\}$), and has nonempty interior. Its dual cone is\n$$K^*=\\{z\\in E:\\langle z,s\\rangle\\ge0\\text{ for every }s\\in K\\}.$$\n\nLet $A:\\mathbb R^n\\to\\mathbb R^p$ and $G:\\mathbb R^n\\to E$ be linear, let $b\\in\\mathbb R^p$, $c\\in\\mathbb R^n$, and $h\\in E$. A matrix $A$ has full row rank when its rows are linearly independent. The conic primal problem and its displayed dual pair are\n$$\\inf\\{c^Tx:Ax=b,\\ h-Gx\\in K\\},\\qquad \\sup\\{b^Ty-\\langle h,z\\rangle:A^Ty-G^*z=c,\\ z\\in K^*\\},$$\nwhere $G^*$ is the adjoint, defined by $\\langle Gx,z\\rangle=x^TG^*z$. For any feasible pair, its gap is\n$$c^Tx-b^Ty+\\langle h,z\\rangle=\\langle z,h-Gx\\rangle\\ge0.$$\nThe special case $\\inf\\{c^Tx:Ax=b,\\ x\\in K\\}$ has dual $\\sup\\{b^Ty:A^Ty+z=c,\\ z\\in K^*\\}$ and gap $\\langle z,x\\rangle$.\n\nFor $K=\\mathbb R_+^n$, the latter is the standard-form LP $\\min c^Tx$ subject to $Ax=b$, $x\\ge0$, with dual variables $y$ free and $s=c-A^Ty\\ge0$. A convex QP in this convention has objective $f_0(x)=\\tfrac12x^TQx+c^Tx$, with symmetric $Q\\succeq0$, the same equality, and $x\\ge0$. Its Lagrangian is $L(x,y,s)=f_0(x)+y^T(b-Ax)-s^Tx$; a feasible KKT tuple obeys $Qx+c-A^Ty-s=0$, and its dual value is $\\inf_{w\\in\\mathbb R^n}L(w,y,s)$.\n\nFor a Lorentz cone $\\mathcal L_{d+1}=\\{(t,u)\\in\\mathbb R\\times\\mathbb R^d:t\\ge\\|u\\|_2\\}$, let $F_j\\in\\mathbb R^{d_j\\times n}$, $f_j\\in\\mathbb R^{d_j}$, $g_j\\in\\mathbb R^n$, and $h_j\\in\\mathbb R$. Then $\\|F_jx+f_j\\|_2\\le g_j^Tx+h_j$ is membership of $(g_j^Tx+h_j,F_jx+f_j)$ in $\\mathcal L_{d_j+1}$. With no equality constraints, the SOCP $\\min c^Tx$ under these constraints has dual\n$$\\max -\\sum_j(f_j^Tu_j+h_j\\tau_j)\\quad\\text{subject to }\\sum_j(F_j^Tu_j+g_j\\tau_j)=c,\\quad(\\tau_j,u_j)\\in\\mathcal L_{d_j+1}.$$\nFor symmetric matrices, $S\\succeq0$ means $v^TSv\\ge0$ for every $v$ and the pairing is $\\langle X,S\\rangle=X\\bullet S:=\\operatorname{tr}(XS)$. Thus $\\min C\\bullet X$ subject to $\\mathcal A(X)=b$, $X\\succeq0$ has dual $\\max b^Ty$ subject to $\\mathcal A^*y+S=C$, $S\\succeq0$, with gap $X\\bullet S$. The affine-matrix SDP $\\min c^Tx$ subject to $F_0+\\sum_i x_iF_i\\succeq0$ has dual $\\max -F_0\\bullet Z$ subject to $F_i\\bullet Z=c_i$ for every $i$ and $Z\\succeq0$.\n\nThe smooth convex inequality convention is that of [[def-inequality-constrained-program-and-kkt-geometry]]: inequalities are written $g_i(x)\\le0$ and their multipliers are nonnegative. The Lagrangian dual-value convention is that of [[def-convex-program-duality-and-slater-condition]].",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-conic-optimization-primal-dual-models",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional real inner-product space $E$, a **cone** is a set closed under addition and multiplication by nonnegative scalars. A cone $K\\subset E$ is **proper** when it is closed, convex, pointed ($K\\cap(-K)=\\{0\\}$), and has nonempty interior. Its dual cone is\n$$K^*=\\{z\\in E:\\langle z,s\\rangle\\ge0\\text{ for every }s\\in K\\}.$$\n\nLet $A:\\mathbb R^n\\to\\mathbb R^p$ and $G:\\mathbb R^n\\to E$ be linear, let $b\\in\\mathbb R^p$, $c\\in\\mathbb R^n$, and $h\\in E$. A matrix $A$ has full row rank when its rows are linearly independent. The conic primal problem and its displayed dual pair are\n$$\\inf\\{c^Tx:Ax=b,\\ h-Gx\\in K\\},\\qquad \\sup\\{b^Ty-\\langle h,z\\rangle:A^Ty-G^*z=c,\\ z\\in K^*\\},$$\nwhere $G^*$ is the adjoint, defined by $\\langle Gx,z\\rangle=x^TG^*z$. For any feasible pair, its gap is\n$$c^Tx-b^Ty+\\langle h,z\\rangle=\\langle z,h-Gx\\rangle\\ge0.$$\nThe special case $\\inf\\{c^Tx:Ax=b,\\ x\\in K\\}$ has dual $\\sup\\{b^Ty:A^Ty+z=c,\\ z\\in K^*\\}$ and gap $\\langle z,x\\rangle$.\n\nFor $K=\\mathbb R_+^n$, the latter is the standard-form LP $\\min c^Tx$ subject to $Ax=b$, $x\\ge0$, with dual variables $y$ free and $s=c-A^Ty\\ge0$. A convex QP in this convention has objective $f_0(x)=\\tfrac12x^TQx+c^Tx$, with symmetric $Q\\succeq0$, the same equality, and $x\\ge0$. Its Lagrangian is $L(x,y,s)=f_0(x)+y^T(b-Ax)-s^Tx$; a feasible KKT tuple obeys $Qx+c-A^Ty-s=0$, and its dual value is $\\inf_{w\\in\\mathbb R^n}L(w,y,s)$.\n\nFor a Lorentz cone $\\mathcal L_{d+1}=\\{(t,u)\\in\\mathbb R\\times\\mathbb R^d:t\\ge\\|u\\|_2\\}$, let $F_j\\in\\mathbb R^{d_j\\times n}$, $f_j\\in\\mathbb R^{d_j}$, $g_j\\in\\mathbb R^n$, and $h_j\\in\\mathbb R$. Then $\\|F_jx+f_j\\|_2\\le g_j^Tx+h_j$ is membership of $(g_j^Tx+h_j,F_jx+f_j)$ in $\\mathcal L_{d_j+1}$. With no equality constraints, the SOCP $\\min c^Tx$ under these constraints has dual\n$$\\max -\\sum_j(f_j^Tu_j+h_j\\tau_j)\\quad\\text{subject to }\\sum_j(F_j^Tu_j+g_j\\tau_j)=c,\\quad(\\tau_j,u_j)\\in\\mathcal L_{d_j+1}.$$\nFor symmetric matrices, $S\\succeq0$ means $v^TSv\\ge0$ for every $v$ and the pairing is $\\langle X,S\\rangle=X\\bullet S:=\\operatorname{tr}(XS)$. Thus $\\min C\\bullet X$ subject to $\\mathcal A(X)=b$, $X\\succeq0$ has dual $\\max b^Ty$ subject to $\\mathcal A^*y+S=C$, $S\\succeq0$, with gap $X\\bullet S$. The affine-matrix SDP $\\min c^Tx$ subject to $F_0+\\sum_i x_iF_i\\succeq0$ has dual $\\max -F_0\\bullet Z$ subject to $F_i\\bullet Z=c_i$ for every $i$ and $Z\\succeq0$.\n\nThe smooth convex inequality convention is that of [[def-inequality-constrained-program-and-kkt-geometry]]: inequalities are written $g_i(x)\\le0$ and their multipliers are nonnegative. The Lagrangian dual-value convention is that of [[def-convex-program-duality-and-slater-condition]].",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lagrangian-weak-duality",
+          "source_section": "Statement",
+          "quote": "For the convex program and Lagrangian dual of\n[[def-convex-program-duality-and-slater-condition]], every primal feasible\n$x$ and every dual feasible $(\\lambda,\\nu)$ satisfy\n$$q(\\lambda,\\nu)\\le f_0(x).$$\nConsequently, when the primal feasible set is nonempty, $d^*\\le p^*$.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-differentiable-convex-functions-and-gradient-inequality",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^n$ be open and convex, and let $f:U\\to\\mathbb R$ be differentiable. Then $f$ is convex if and only if\n\n$$f(y)\\ge f(x)+\\langle\\nabla f(x),y-x\\rangle\\qquad(x,y\\in U).$$\n\nEquivalently, $\\nabla f(x)$ is a subgradient at every $x$ ([[def-subgradient-and-subdifferential]], [[def-jacobian-matrix-and-gradient]]).",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-primal-dual-lp-qp-newton-matrix-nonsingular",
+          "source_section": "Statement",
+          "quote": "Let $Q\\succeq0$ be symmetric, let $A\\in\\mathbb R^{p\\times n}$ have full row rank, and let $x,s\\in\\mathbb R^n$ have strictly positive coordinates. Then the LP/QP Newton matrix\n$$M=\\begin{bmatrix}Q&-A^T&-I\\\\ A&0&0\\\\ S&0&X\\end{bmatrix},\\qquad X=\\operatorname{diag}(x),\\quad S=\\operatorname{diag}(s),$$\nis nonsingular.",
+          "uses": [
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Because $s$ is interior, a small positive segment from $s$ in direction $\\Delta s$ remains in $K$. The set of feasible fractions in $[0,1]$ is closed by [F2], so its maximum $\\bar\\alpha_s>0$ is attained and $s+\\bar\\alpha_s\\Delta s\\in K$. Any $0<\\alpha\\le\\eta\\bar\\alpha_s$ has $\\theta=\\alpha/\\bar\\alpha_s<1$, and the update is $(1-\\theta)s+\\theta(s+\\bar\\alpha_s\\Delta s)$. An open ball about $s$ lies in $K$; scaling that ball by $1-\\theta>0$ and adding $\\theta(s+\\bar\\alpha_s\\Delta s)\\in K$ shows the updated point is interior. The same argument applies to $z$ in $K^*$. In the orthant, the coordinate-ratio formula is the maximal nonnegative boundary fraction. For a negative coordinate direction, $\\alpha\\le\\eta(-x_i/\\Delta x_i)$ gives $x_i+\\alpha\\Delta x_i\\ge(1-\\eta)x_i>0$; nonnegative directions preserve positivity, and the same two cases apply to $s$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "For a Lorentz factor, write $s=(t,u)$ and $\\Delta s=(\\dot t,v)$, with $t>\\|u\\|_2$. Set $q=t^2-\\|u\\|_2^2>0$ and $c=|\\dot t|+\\sum_i|v_i|$. If $c=0$ the step is unchanged. Otherwise $t-\\|u\\|_2=q/(t+\\|u\\|_2)\\ge q/(2t)$, while $|\\dot t|+\\|v\\|_2\\le c$. The algorithm's safe fraction $\\beta=\\min(1,q/(2tc))$ therefore gives $\\alpha=\\eta\\beta$ with $\\alpha(|\\dot t|+\\|v\\|_2)<t-\\|u\\|_2$. The triangle inequality then yields $t+\\alpha\\dot t>\\|u+\\alpha v\\|_2$, so the updated Lorentz vector is interior. For a PSD factor $Y\\succ0$ and symmetric direction $D$, let $C=L(Y^{-1})L(D)$ as in the algorithm, where $L(M)=\\sum_{i,j}|M_{ij}|$. If $C=0$, then $D=0$. Otherwise set $B=Y^{-1/2}DY^{-1/2}$. Submultiplicativity of the operator norm and [F7] give $\\|B\\|_2\\le\\|Y^{-1}\\|_2\\|D\\|_2\\le\\|Y^{-1}\\|_F\\|D\\|_F\\le C$. Since $\\alpha=\\eta\\min(1,1/C)$, $\\alpha C<1$, and for every nonzero $w$, $w^T(I+\\alpha B)w\\ge(1-\\alpha\\|B\\|_2)\\|w\\|_2^2>0$. Thus $Y+\\alpha D=Y^{1/2}(I+\\alpha B)Y^{1/2}\\succ0$. The same bounds apply separately to primal and dual factors, so each computed safe fraction is no larger than its maximal boundary-preserving fraction.",
+          "step": "1.2",
+          "inputs": [
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "claim": "For any feasible conic pair, [F1] and [F2] give $b^Ty-\\langle h,z\\rangle\\le c^Tx$. Taking the infimum over primal feasible $x$ and the supremum over dual feasible pairs shows that a feasible dual value is a lower bound on $p^*$. Hence a computed primal-dual feasible pair with exact gap $\\langle z,s\\rangle\\le\\varepsilon$ is an $\\varepsilon$-suboptimality certificate.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.4",
+          "claim": "In LP/QP mode, exact $Ax=b$, $x\\ge0$, $s\\ge0$, and $Qx+c-A^Ty-s=0$ make $\\nabla_w L(x,y,s)=0$. To apply [F4], use the smooth inequality convention $g_i(w)=-w_i\\le0$, multiplier $\\lambda=s$, and equality multiplier $\\nu=-y$. Since $Q\\succeq0$, $L$ is convex, so [F5] implies $L(w,y,s)\\ge L(x,y,s)$ for every $w$; therefore $q(y,s)=L(x,y,s)=f_0(x)-x^Ts$. By [F4], $q(y,s)\\le p^*$, and primal feasibility gives $p^*\\le f_0(x)$. Thus $0\\le f_0(x)-p^*\\le x^Ts$.",
+          "step": "1.4",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.5",
+          "claim": "In LP/QP mode, [F6] supplies a unique exact Newton direction under the stated rank and strict-interiority hypotheses. Symmetric-cone mode may have a singular derivative, which the algorithm tests and reports.",
+          "step": "1.5",
+          "inputs": [
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Each loop of the algorithm is bounded by the input dimension, and the outer loop increments an integer counter until it reaches the finite cap $N$ or returns an earlier status. Therefore every invocation terminates with one of its declared statuses. A tolerance status with nonzero residual is explicitly `residual-candidate`, so no step above treats it as a certificate.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both cone variables are assumed interior and the QP variables are explicitly defined, so empty cone data are outside the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The c=0 Lorentz and C=0 PSD direction branches are explicit. (step 1.2)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The safe-fraction branches β=1 are included. (step 1.2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero cone directions are handled without division by zero. (step 1.2)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The step factor has 0<η<1 and positive safe fractions; the full boundary step η=1 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Compactness of the feasible fraction interval gives the attained maximal fraction. (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conservative Lorentz and PSD fractions are sufficient safe choices; they are not claimed to be maximal."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A feasible gap certificate follows from exact feasibility; the theorem does not claim every optimal pair must arise from this audit."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-robust-least-squares-as-a-second-order-cone-program": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conic-optimization-primal-dual-models",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional real inner-product space $E$, a **cone** is a set closed under addition and multiplication by nonnegative scalars. A cone $K\\subset E$ is **proper** when it is closed, convex, pointed ($K\\cap(-K)=\\{0\\}$), and has nonempty interior. Its dual cone is\n$$K^*=\\{z\\in E:\\langle z,s\\rangle\\ge0\\text{ for every }s\\in K\\}.$$\n\nLet $A:\\mathbb R^n\\to\\mathbb R^p$ and $G:\\mathbb R^n\\to E$ be linear, let $b\\in\\mathbb R^p$, $c\\in\\mathbb R^n$, and $h\\in E$. A matrix $A$ has full row rank when its rows are linearly independent. The conic primal problem and its displayed dual pair are\n$$\\inf\\{c^Tx:Ax=b,\\ h-Gx\\in K\\},\\qquad \\sup\\{b^Ty-\\langle h,z\\rangle:A^Ty-G^*z=c,\\ z\\in K^*\\},$$\nwhere $G^*$ is the adjoint, defined by $\\langle Gx,z\\rangle=x^TG^*z$. For any feasible pair, its gap is\n$$c^Tx-b^Ty+\\langle h,z\\rangle=\\langle z,h-Gx\\rangle\\ge0.$$\nThe special case $\\inf\\{c^Tx:Ax=b,\\ x\\in K\\}$ has dual $\\sup\\{b^Ty:A^Ty+z=c,\\ z\\in K^*\\}$ and gap $\\langle z,x\\rangle$.\n\nFor $K=\\mathbb R_+^n$, the latter is the standard-form LP $\\min c^Tx$ subject to $Ax=b$, $x\\ge0$, with dual variables $y$ free and $s=c-A^Ty\\ge0$. A convex QP in this convention has objective $f_0(x)=\\tfrac12x^TQx+c^Tx$, with symmetric $Q\\succeq0$, the same equality, and $x\\ge0$. Its Lagrangian is $L(x,y,s)=f_0(x)+y^T(b-Ax)-s^Tx$; a feasible KKT tuple obeys $Qx+c-A^Ty-s=0$, and its dual value is $\\inf_{w\\in\\mathbb R^n}L(w,y,s)$.\n\nFor a Lorentz cone $\\mathcal L_{d+1}=\\{(t,u)\\in\\mathbb R\\times\\mathbb R^d:t\\ge\\|u\\|_2\\}$, let $F_j\\in\\mathbb R^{d_j\\times n}$, $f_j\\in\\mathbb R^{d_j}$, $g_j\\in\\mathbb R^n$, and $h_j\\in\\mathbb R$. Then $\\|F_jx+f_j\\|_2\\le g_j^Tx+h_j$ is membership of $(g_j^Tx+h_j,F_jx+f_j)$ in $\\mathcal L_{d_j+1}$. With no equality constraints, the SOCP $\\min c^Tx$ under these constraints has dual\n$$\\max -\\sum_j(f_j^Tu_j+h_j\\tau_j)\\quad\\text{subject to }\\sum_j(F_j^Tu_j+g_j\\tau_j)=c,\\quad(\\tau_j,u_j)\\in\\mathcal L_{d_j+1}.$$\nFor symmetric matrices, $S\\succeq0$ means $v^TSv\\ge0$ for every $v$ and the pairing is $\\langle X,S\\rangle=X\\bullet S:=\\operatorname{tr}(XS)$. Thus $\\min C\\bullet X$ subject to $\\mathcal A(X)=b$, $X\\succeq0$ has dual $\\max b^Ty$ subject to $\\mathcal A^*y+S=C$, $S\\succeq0$, with gap $X\\bullet S$. The affine-matrix SDP $\\min c^Tx$ subject to $F_0+\\sum_i x_iF_i\\succeq0$ has dual $\\max -F_0\\bullet Z$ subject to $F_i\\bullet Z=c_i$ for every $i$ and $Z\\succeq0$.\n\nThe smooth convex inequality convention is that of [[def-inequality-constrained-program-and-kkt-geometry]]: inequalities are written $g_i(x)\\le0$ and their multipliers are nonnegative. The Lagrangian dual-value convention is that of [[def-convex-program-duality-and-slater-condition]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For every admissible $\\Delta$, [F1] gives $\\|(A+\\Delta)x-b\\|_2\\le\\|Ax-b\\|_2+\\rho\\|x\\|_2$. If $x\\ne0$ and $r=Ax-b\\ne0$, choose $u=r/\\|r\\|_2$ and $\\Delta=\\rho u x^T/\\|x\\|_2$; then $\\|\\Delta\\|_F=\\rho$ and $\\Delta x=\\rho\\|x\\|_2u$, attaining the upper bound. If $r=0$, any unit $u$ gives the same supremum; if $x=0$, the perturbation term vanishes.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Therefore the robust objective equals $\\|Ax-b\\|_2+\\rho\\|x\\|_2$. Introducing epigraph variables $t,u$ gives $\\min t+\\rho u$ subject to $(t,Ax-b)\\in\\mathcal L_{m+1}$ and $(u,x)\\in\\mathcal L_{n+1}$ by [F2], which is an SOCP.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The uncertainty ball contains Δ=0 for every ρ≥0, so the perturbation family is never empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The cases ρ=0, x=0, and r=0 are handled separately. (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The radius ρ ranges over all nonnegative values; there is no special branch at ρ=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The rank-zero perturbation cases x=0 and ρ=0 are explicit. (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The extremizing perturbation has Frobenius norm exactly ρ. (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A unit vector exists because m≥1. (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Every admissible perturbation is bounded by the displayed robust objective. (step 1.1)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The constructed perturbation attains that bound, including zero cases. (step 1.1)."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-boundary-barrier-conditioning": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-barrier-central-path-and-newton-residuals",
+          "source_section": "Definition",
+          "quote": "For a smooth inequality problem with the convention of [[def-inequality-constrained-program-and-kkt-geometry]], let $D\\subseteq\\mathbb R^n$ be open and convex, let $f_0,g_1,\\ldots,g_m$ be convex $C^2$ functions on $D$, and let $A\\in\\mathbb R^{p\\times n}$ and $b\\in\\mathbb R^p$. Assume there exists $x\\in D$ with $Ax=b$ and $g_i(x)<0$ for every $i$. For $t>0$, its **log-barrier objective** is\n$$\\Psi_t(x)=t f_0(x)-\\sum_{i=1}^m\\log(-g_i(x)),\\qquad Ax=b,\\quad g_i(x)<0.$$\nAny attained minimizer is a central point. Its central multipliers are $\\lambda_i=-1/(t g_i(x))>0$. A central point and multiplier tuple satisfy $Ax=b$, $g(x)<0$, and $\\nabla f_0(x)+Dg(x)^T\\lambda+A^T\\nu=0$ for an equality multiplier $\\nu$.\n\nFor the conic model of [[def-conic-optimization-primal-dual-models]], let $s=h-Gx\\in\\operatorname{int}K$ and let $F$ be a self-concordant barrier on $K$. The conic **barrier objective** is $\\Phi_t(x)=t c^Tx+F(h-Gx)$ restricted to $Ax=b$. An attained minimizer $x_t$ satisfies\n$$t c-G^*\\nabla F(s_t)+A^Tw=0,\\qquad Ax_t=b,\\qquad s_t=h-Gx_t\\in\\operatorname{int}K$$\nfor some $w\\in\\mathbb R^p$. Its barrier multiplier is $z_t=-\\nabla F(s_t)/t$.\n\nFor a standard-form LP or convex QP with $Ax=b$, $x\\ge0$, and objective $f_0(x)=\\tfrac12x^TQx+c^Tx$ ($Q=0$ for an LP), define the primal-dual residuals\n$$r_d=Qx+c-A^Ty-s,\\qquad r_p=Ax-b,\\qquad r_c=Xs-\\sigma\\mu\\mathbf1,$$\nwhere $X=\\operatorname{diag}(x)$, $S=\\operatorname{diag}(s)$, $\\mu=x^Ts/n$, and $0<\\sigma<1$. For $x,s>0$, the modified KKT Newton direction solves\n$$\\begin{bmatrix}Q&-A^T&-I\\\\ A&0&0\\\\ S&0&X\\end{bmatrix}\\begin{bmatrix}\\Delta x\\\\\\Delta y\\\\\\Delta s\\end{bmatrix}=-\\begin{bmatrix}r_d\\\\r_p\\\\r_c\\end{bmatrix}.$$\n\nFor orthant, Lorentz, or positive-semidefinite cone factors, the analogous conic residuals are $r_p=Ax-b$, $r_d=A^Ty-G^*z-c$, and $r_c=s\\circ z-\\sigma\\mu e$. These factors are self-dual under their standard Euclidean or trace pairings by [[lem-nonnegative-orthant-log-barrier]], [[lem-lorentz-cone-log-barrier]], and [[lem-psd-cone-self-dual-logdet-barrier]], so $s$ and $z$ occupy the same factor spaces. For the orthant, $\\circ$ is coordinatewise multiplication and $e=\\mathbf1$. The Lorentz Jordan product is $(t,u)\\circ(q,v)=(tq+u^Tv,tv+qu)$ with $e=(1,0)$; for symmetric matrices $X\\circ S=(XS+SX)/2$ with $e=I$. In each factor, pairing $s\\circ z$ with $e$ gives $\\langle s,z\\rangle$: this is the coordinate sum for the orthant, the first coordinate for the Lorentz product, and $\\operatorname{tr}((XS+SX)/2)=\\operatorname{tr}(XS)$ for symmetric matrices by the finite-index trace identity. In each product cone, $\\mu=\\langle s,z\\rangle/\\nu$, where $\\nu$ is the sum of the factor barrier parameters. The linearized slack is $\\Delta s=-G\\Delta x$.\n\nResidual tolerances describe a candidate unless an independent argument also verifies feasibility and a primal-dual gap. A finite iteration or factorization budget that returns a candidate, failure, or inconclusive status is not itself an optimality certificate.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The closed feasible triangle $\\{x_1\\ge0,x_2\\ge0,x_1+x_2\\le1\\}$ is compact, and $x_1,x_2,q$ lie in $[0,1]$. On its strict interior, each barrier term is nonnegative; as any boundary point is approached, at least one of $x_1,x_2,q$ tends to zero and its negative logarithm tends to $+\\infty$, while $t x_1$ is bounded. Fix any strict-interior point. Its objective sublevel set is therefore separated from the boundary, closed in the compact triangle by continuity, and compact; the objective attains a strict-interior minimizer. Direct differentiation gives $H_t=\\begin{pmatrix}x_1^{-2}+q^{-2}&q^{-2}\\\\q^{-2}&x_2^{-2}+q^{-2}\\end{pmatrix}$, whose quadratic form is $h_1^2/x_1^2+h_2^2/x_2^2+(h_1+h_2)^2/q^2>0$ for every nonzero $h$, so the minimizer is unique. At the central point, the $x_2$ derivative is $-1/x_2+1/q=0$, hence $q=x_2$ and $x_1+2x_2=1$. The $x_1$ derivative is $t-1/x_1+1/q=0$, so $1/x_1=t+1/x_2>t$ and $0<x_1<1/t$. Consequently $x_1\\to0$ and $x_2=q\\to1/2$ as $t\\to\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For $t\\ge4$, step 1.1 gives $x_1<1/4$ and $x_2=q=(1-x_1)/2>3/8$. By [F2] applied to the coordinate unit vectors, $\\lambda_{\\max}(H_t)\\ge(H_t)_{11}>x_1^{-2}>t^2$ and $0<\\lambda_{\\min}(H_t)\\le(H_t)_{22}=x_2^{-2}+q^{-2}<2(8/3)^2=128/9$. With $\\kappa_2(H_t):=\\lambda_{\\max}(H_t)/\\lambda_{\\min}(H_t)$ for this positive-definite Hessian, $\\kappa_2(H_t)>9t^2/128$, exhibiting growing conditioning as the central path approaches the boundary.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The feasible triangle has a nonempty strict interior and a fixed interior point supplies a compact sublevel set (step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The path limit x₁→0 is derived from 0<x₁<1/t. (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The parameter is any t>0; the conditioning lower bound is stated for t≥4, with no special assertion at t=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The displayed Hessian is positive definite on the strict triangle interior; no singular interior Hessian case occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The limit t→∞ and approach to the feasible boundary are established. (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A fixed strict-interior point supplies a nonempty sublevel set and minimizer. (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This one example shows a path with diverging condition number; it is not an iff characterization of boundary convergence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The estimate does not classify all barrier paths or imply that every boundary approach has this rate."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-strict-versus-weak-semidefinite-feasibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-psd-cone-self-dual-logdet-barrier",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $\\mathbb S^n$ have trace pairing $\\langle X,Y\\rangle=\\operatorname{tr}(XY)$, and let $\\mathbb S_+^n$ be the cone of real symmetric positive semidefinite matrices. Then $(\\mathbb S_+^n)^*=\\mathbb S_+^n$. On $\\mathbb S_{++}^n$, $F(X)=-\\log\\det X$ is an $n$-log-homogeneous self-concordant barrier, with\n$$DF(X)[H]=-\\operatorname{tr}(X^{-1}H),\\qquad D^2F(X)[H,J]=\\operatorname{tr}(X^{-1}HX^{-1}J),$$\nand $\\lambda_F(X)=\\sqrt n$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-phase-i-margin-status-and-weak-infeasibility",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a proper cone, let $e\\in\\operatorname{int}K$, and consider the conic feasibility system $Ax=b$, $h-Gx\\in K$. Define its **Phase-I margin value**\n$$\\rho_* = \\inf\\{\\tau\\in\\mathbb R: Ax=b,\\ h-Gx+\\tau e\\in K\\},$$\nwith $\\rho_*=+\\infty$ if the set is empty. If $\\rho_*<0$, the original system has a strictly feasible point. If $\\rho_*>0$ or $\\rho_*=+\\infty$, the original system is infeasible. If $\\rho_*=0$ and the infimum is attained, the original system is feasible but not strictly feasible; if $\\rho_*=0$ and the infimum is not attained, the original system is infeasible. Thus a zero value without an attainment check decides neither. A finite-budget Phase-I computation certifies a negative sign from a verified feasible margin point with $\\tau<0$, or a positive sign from a verified positive lower bound; failure to find strict feasibility is not an infeasibility certificate.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The slice $X_{11}=1$, $X_{22}=0$ is feasible at $X=\\operatorname{diag}(1,0)$ but has no positive-definite point: a symmetric matrix in the slice is $X(a)=\\begin{pmatrix}1&a\\\\a&0\\end{pmatrix}$. If $a\\ne0$, the vector $(-a,1)$ gives $(-a,1)X(a)(-a,1)^T=-a^2<0$, so $X(a)$ is not positive semidefinite; if $a=0$, it is singular. Its Phase-I margin with $e=I$ is $0$, since $X(0)+\\tau I=\\operatorname{diag}(1+\\tau,\\tau)\\succeq0$ for $\\tau\\ge0$ and is impossible for $\\tau<0$ by testing the second coordinate.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Every matrix in the slice $X_{22}=0$, $X_{12}=1$ has form $X(t)=\\begin{pmatrix}t&1\\\\1&0\\end{pmatrix}$. If $t>0$, the vector $(-1/t,1)$ gives quadratic form $-1/t<0$; if $t=0$, vector $(-1,1)$ gives $-2<0$; if $t<0$, vector $(1,0)$ gives $t<0$. Thus the slice is infeasible. For $t>0$, the matrix $Y(t)=\\begin{pmatrix}t&1\\\\1&1/t\\end{pmatrix}$ is positive semidefinite because its quadratic form is $t(u+v/t)^2$; its Frobenius distance from $X(t)$ is $1/t\\to0$. For any $\\tau>0$, choose $t=1/\\tau$. Then $X(t)+\\tau I$ has quadratic form $\\left(\\frac1\\tau+\\tau\\right)u^2+2uv+\\tau v^2=\\left(\\frac1\\tau+\\tau\\right)\\left(u+\\frac{\\tau v}{1+\\tau^2}\\right)^2+\\frac{\\tau^3}{1+\\tau^2}v^2$, which is positive for every nonzero $(u,v)$, so it is positive definite and $\\tau$ is Phase-I feasible. If $\\tau<0$, the lower-right diagonal entry of $X(t)+\\tau I$ is $\\tau<0$, so it cannot be positive semidefinite. Hence the Phase-I infimum is zero and is not attained.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The two affine slices are explicitly populated by finite matrices or shown infeasible; no empty-space convention is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The first slice has attained Phase-I margin zero. (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The examples depend on zero and positive Phase-I margins, not on the numerical value one as a threshold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The rank-deficient boundary feasible matrix is explicit; step 2.1 gives infeasibility with zero distance. (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The τ=0 boundary and τ>0 strict feasibility are separated. (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The witness matrix and test vectors are explicitly constructed. (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The two slices illustrate distinct feasibility statuses; they do not characterize all zero-margin systems."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Neither example claims that every weakly infeasible SDP has the displayed two-by-two form."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-resource-allocation-barrier-central-path": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-central-path-barrier-gap-and-dual-certificate",
+          "source_section": "Statement",
+          "quote": "For the smooth convex inequality problem of [[def-barrier-central-path-and-newton-residuals]], suppose a strict feasible exact minimizer $x_t$ of the barrier objective exists, the primal value $p^*$ is finite, and the equality multiplier is included. Use the sign convention $L(x,\\lambda,\\nu)=f_0(x)+\\lambda^Tg(x)+\\nu^T(Ax-b)$, and define $q_D(\\lambda,\\nu)=\\inf_{x\\in D}L(x,\\lambda,\\nu)$ on the common open domain $D$. Then the Lagrangian dual pair generated by $\\lambda_i=-1/(t g_i(x_t))$ has value $q_D(\\lambda,\\nu)=f_0(x_t)-m/t$, so\n$$0\\le f_0(x_t)-p^*\\le m/t.$$\nFor the conic model of [[def-conic-optimization-primal-dual-models]], suppose $x_t$ is an exact barrier minimizer and $F$ is a $\\nu$-log-homogeneous barrier. Its barrier multiplier $z_t=-\\nabla F(s_t)/t$ and equality multiplier give a dual feasible pair with gap $\\nu/t$, and hence\n$$0\\le c^Tx_t-p^*\\le\\nu/t.$$\nNo primal attainment or strong-duality assumption is used; existence of the exact barrier minimizer and finiteness of $p^*$ are required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-short-step-complexity-and-primal-gap-bound",
+          "source_section": "Statement",
+          "quote": "Assume the inputs of [[alg-short-step-self-concordant-path-following]], with a positive-definite restricted barrier Hessian, and assume the primal value $p^*$ is finite. The initial decrement and the update rule imply existence of the exact center at each path parameter. If the finite caps permit each path update, then after $k$ path updates the returned iterate satisfies\n$$c^Tx-p^*\\le\\frac{\\nu+\\sqrt\\nu/2}{t_k}\\le\\frac{3\\nu}{2t_k},\\qquad t_k=t_0\\left(1+\\frac1{8\\sqrt\\nu}\\right)^k.$$\nConsequently, for $R=3\\nu/(2\\varepsilon t_0)>1$, at most\n$$k=\\left\\lceil\\frac{\\log R}{\\log(1+1/(8\\sqrt\\nu))}\\right\\rceil\\le 1+9\\sqrt\\nu\\log R$$\npath updates suffice, with at most two damped Newton corrections per update. This is $O(\\sqrt\\nu\\log(\\nu/(\\varepsilon t_0)))$ Newton corrections. If an input cap is smaller than the required number, the algorithm returns its named failure status and makes no successful-complexity claim.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-nonnegative-orthant-log-barrier",
+          "source_section": "Statement",
+          "quote": "For $m\\ge1$, let $K=\\mathbb R_+^m$, $D=\\mathbb R_{++}^m$, and $F(x)=-\\sum_{i=1}^m\\log x_i$. Under the standard Euclidean pairing, $K^*=K$. The function $F$ is an $m$-log-homogeneous self-concordant barrier on $D$ and $\\lambda_F(x)=\\sqrt m$ for every $x\\in D$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Substituting $x_2=1-x_1$, stationarity of the barrier objective gives $-t-1/x_1+1/x_2=0$, or $1/x_2-1/x_1=t$. Multiplying by $x_1x_2>0$ and using $x_1+x_2=1$ yields $t x_1^2+(2-t)x_1-1=0$. Its roots are $(t-2\\pm\\sqrt{t^2+4})/(2t)$; because $\\sqrt{t^2+4}>|t-2|$, only the plus root is positive. Thus $x_1=(t-2+\\sqrt{t^2+4})/(2t)$, and rationalizing $1-x_1$ gives $x_2=2/(t+2+\\sqrt{t^2+4})>0$. These coordinates sum to one and satisfy stationarity. The restricted second derivative is $1/x_1^2+1/x_2^2>0$, so the stationary point is the unique exact central point. At $t_0=1$ these become the values in **Given**, whose reciprocal difference is $1$; hence the supplied start is exact and its decrement is zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The central inequality multipliers are $\\lambda_i=1/(t x_i)>0$. Their difference is $\\lambda_2-\\lambda_1=(1/t)(1/x_2-1/x_1)=1$, so the equality multiplier $y=1-\\lambda_1=2-\\lambda_2$ satisfies both dual stationarity equations. Every primal feasible vector has objective $x_1+2x_2=1+x_2\\ge1$, while $(1,0)$ attains $1$, so $p^*=1$ and the objective excess is $x_2$. The primal-dual gap is $x_1\\lambda_1+x_2\\lambda_2=2/t$; hence $x_2\\le2/t$ by [F1]. By [F3], $\\nu=2$, and with the exact $t_0=1$ start from step 1.1, [F2] gives at most $\\lceil\\log(3/\\varepsilon)/\\log(1+1/(8\\sqrt2))\\rceil$ path updates for $0<\\varepsilon<3$, with at most two corrections each.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The simplex contains strict points such as (1/2,1/2), and the displayed central path is defined for t>0."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The formulas assume t>0 and the example makes no claim at t=0, where its logarithmic barrier is not the stated problem."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplied t₀=1 central point is verified exactly. (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The primal optimum is attained at the boundary point (1,0). (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The theorem is invoked only on the stated open range 0<ε<3. (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The positive root and its complementary coordinate are explicitly constructed. (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The exact path and gap bound are computed for this LP only; no converse is asserted for arbitrary allocations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The step count is a sufficient bound for this example, not a characterization of all algorithms that reach ε."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-lp-primal-dual-residual-and-gap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+          "source_section": "Definition",
+          "quote": "This procedure has two admissible modes. All input values are finite stored floating-point numbers. Audits interpret them as exact dyadic rationals, and rounded operations obey [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]].\n\n**LP/QP mode.** Let $n\\ge1$, $p\\ge0$, $Q\\in\\mathbb R^{n\\times n}$ be symmetric positive semidefinite, and $A\\in\\mathbb R^{p\\times n}$ have full row rank. The supplied data are $A,b,c,Q$ for $\\min\\tfrac12x^TQx+c^Tx$ subject to $Ax=b$, $x\\ge0$; LP is $Q=0$. The iterate inputs are $x>0$, $s>0$, and free $y$. Also supply $0<\\sigma<1$, $0<\\eta<1$, finite tolerances $\\epsilon_p,\\epsilon_d,\\epsilon_g\\ge0$, and an integer update cap $N\\ge0$.\n\n**Symmetric-cone mode.** Let $K$ be a nonempty finite product of nonnegative orthant, Lorentz, or positive-semidefinite cones, let $A$ have full row rank, and use the primal-dual pair of [[def-conic-optimization-primal-dual-models]]. Supply $A,b,c,G,h$, a point $x$ with $s=h-Gx\\in\\operatorname{int}K$, a dual point $z\\in\\operatorname{int}K^*$, and free $y$. Equality feasibility $Ax=b$ is checked as a residual, not required of the initial point. Also supply $0<\\sigma<1$, $0<\\eta<1$, finite tolerances $\\epsilon_p,\\epsilon_d,\\epsilon_g\\ge0$, and integer cap $N\\ge0$. The positive barrier parameter $\\nu$ is the sum of the cone-factor parameters.\n\nThe input audit checks all dimensions, exact symmetry of $Q$, and full row rank of $A$ by rational elimination. It checks $Q\\succeq0$ by finite exact symmetric Schur elimination: reject a negative diagonal; if a positive diagonal exists, permute it to the first position and recurse on its Schur complement; if every diagonal is zero, accept only when every off-diagonal entry is zero. This test is equivalent by completing the square at each positive pivot; with zero diagonal, a nonzero off-diagonal makes one of the vectors $e_i+e_j$ or $e_i-e_j$ have negative quadratic form. In symmetric-cone mode it also checks that each listed factor has a positive finite dimension, that the data match the declared product spaces, and that $A$ has full row rank. All these checks use exact rational arithmetic on the stored dyadic inputs.\n\nIn LP/QP mode form\n$$r_d=Qx+c-A^Ty-s,\\quad r_p=Ax-b,\\quad \\mu=x^Ts/n,\\quad r_c=Xs-\\sigma\\mu\\mathbf1.$$\nIn symmetric-cone mode form\n$$r_d=A^Ty-G^*z-c,\\quad r_p=Ax-b,\\quad \\mu=\\langle s,z\\rangle/\\nu,\\quad r_c=s\\circ z-\\sigma\\mu e.$$\nIn either mode, $\\epsilon_p$ bounds $\\|r_p\\|_2$, $\\epsilon_d$ bounds both $\\|r_d\\|_2$ and $\\|r_c\\|$, and $\\epsilon_g$ bounds the surrogate complementarity gap $n\\mu=x^Ts$ in LP/QP mode or $\\nu\\mu=\\langle s,z\\rangle$ in symmetric-cone mode. On product cones use Euclidean norms on orthant and Lorentz factors and Frobenius norms on matrix factors. Norm tests compare exact squared values with squared tolerances. The output is a record containing `status`, the last accepted iterate when one exists, update count, audited residuals, and audited gap; it carries the exact audited gap as an objective-suboptimality bound only for status `certified-gap`. The possible statuses are `invalid-input`, `strict-start-unavailable`, `nonpositive-gap`, `certified-gap`, `residual-candidate`, `singular-system`, `lost-range`, `uncertified-newton-solve`, `boundary-status-unavailable`, and `budget-exhausted`. `invalid-input` has no iterate. A residual candidate is diagnostic, never a certificate.\n\n**Interior audits.** For an orthant factor, require every coordinate to be positive. For a Lorentz factor $(t,u)$, require $t>0$ and $t^2-\\|u\\|_2^2>0$. For a symmetric matrix factor $Y$, test positive definiteness by exact rational Schur elimination: require $Y_{11}>0$, form $S=Y_{2:n,2:n}-Y_{2:n,1}Y_{1,2:n}/Y_{11}$, and repeat on $S$ until the matrix is empty. Completing the square gives $v^TYv=Y_{11}(v_1+Y_{1,2:n}v_{2:n}/Y_{11})^2+v_{2:n}^TSv_{2:n}$, so this finite test succeeds exactly for $Y\\succ0$.\n\n**Instructions.** First reject invalid dimensions, nonfinite data, parameters outside their stated domains, or a negative cap with `invalid-input`. Reject an LP/QP start unless $x,s>0$, or a cone start unless $s,z$ pass the interior audits, with `strict-start-unavailable`; this is not an infeasibility claim. Set the accepted-update count to zero and repeat the following audit and update loop.\n\nCompute the residuals and complementarity gap exactly as rational expressions in the stored inputs; compare exact squared norms with squared tolerances. A nonpositive or nonfinite gap returns `nonpositive-gap`. Return `certified-gap` in LP/QP mode only when $Ax=b$, $x,s\\ge0$, $Qx+c-A^Ty-s=0$, and $x^Ts\\le\\epsilon_g$; in cone mode require $Ax=b$, $s=h-Gx\\in K$, $z\\in K^*$, $A^Ty-G^*z=c$, and $\\langle s,z\\rangle\\le\\epsilon_g$. Otherwise, if $\\|r_p\\|_2\\le\\epsilon_p$, $\\|r_d\\|_2\\le\\epsilon_d$, $\\|r_c\\|\\le\\epsilon_d$, and the surrogate gap is at most $\\epsilon_g$, return `residual-candidate`. If the update count equals $N$, return `budget-exhausted`.\n\nAssemble the Newton derivative specified in [[def-barrier-central-path-and-newton-residuals]]. In LP/QP mode solve its displayed block system. In symmetric-cone mode solve\n$$A\\Delta x=-r_p,\\qquad A^T\\Delta y-G^*\\Delta z=-r_d,\\qquad \\Delta s=-G\\Delta x,\\qquad \\Delta s\\circ z+s\\circ\\Delta z=-r_c.$$\nThe exact equations form a square system after eliminating $\\Delta s$. Form each system coefficient as an exact dyadic expression in the stored inputs, then round that coefficient once to the nearest normal representable value, preserving exact zeros; any failed conversion returns `lost-range`. Convert the exact rational right-hand side $(-r_d,-r_p,-r_c)$ componentwise by the same nearest-normal rule, preserving exact zeros; a failed conversion also returns `lost-range`. In LP/QP mode, [[lem-primal-dual-lp-qp-newton-matrix-nonsingular]] proves nonsingularity of the exact Newton matrix under the stated rank and strict-start hypotheses; in either mode an exact rank audit detects a singular stored system.\n\nStored floating-point numbers are treated as exact dyadic rationals (rationals with denominator a power of two) for audits; the unit roundoff $u$ and failure behavior of elementary operations are those of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. For a matrix $M$, $\\|M\\|_F^2$ is the sum of the squares of its entries. Check exact rank by rational row elimination: scan columns from left to right, find the first nonzero entry at or below the next pivot row, swap it into that row, subtract exact multiples to clear entries below, and count pivots. If fewer pivots than rows are found, return `singular-system`. For a full-rank matrix, use a reduced QR solve: for each active column apply [[alg-scaled-householder-reflector-formation-and-application]] to the column and trailing block, store the reflector, apply the stored reflectors in order to the right-hand side using the same sequential dot, scale, multiply, and subtraction order as that procedure, and solve the resulting upper-triangular system by descending substitution $t_i=\\operatorname{fl}(q_i-\\operatorname{fl}(\\sum_{j>i}\\widehat R_{ij}\\widehat d_j))$, $\\widehat d_i=\\operatorname{fl}(t_i/\\widehat R_{ii})$. A range exception returns `lost-range`; a zero pivot returns `singular-system`. Let $d$ be the system dimension and $\\gamma_{d+3}=(d+3)u/(1-(d+3)u)$. Require $(d+3)u<1$, $\\gamma_{d+3}<1/8$, and, for the computed triangular factor $\\widehat R$, verify with exact dyadic arithmetic that\n$$\\gamma_{d+3}^2\\|\\widehat R\\|_F^2\\|\\widehat R^{-1}\\|_F^2<1.$$\nIf the test fails, return `uncertified-newton-solve`. Otherwise [[thm-computed-full-rank-least-squares-backward-stability]] applies: the returned direction solves a nearby system with a nonsingular perturbed factor. Compute exactly and report the direction residual both against the rounded stored Newton system and against the original exact rational Newton equations.\n\nFor LP/QP mode set\n$$\\bar\\alpha=\\min\\left(1,\\min_{\\Delta x_i<0}\\frac{-x_i}{\\Delta x_i},\\min_{\\Delta s_i<0}\\frac{-s_i}{\\Delta s_i}\\right),$$\nwhere an empty minimum is $+\\infty$, and use $\\alpha=\\eta\\bar\\alpha$. In symmetric-cone mode compute a positive safe fraction $\\beta$ for each primal-slack and dual factor, and use $\\alpha=\\eta$ times the minimum of those bounds. For an orthant factor use the same coordinate ratios. For a Lorentz factor at $(t,u)\\in\\operatorname{int}\\mathcal L$ with direction $(\\dot t,v)$, set $q=t^2-\\|u\\|_2^2$ and $c=|\\dot t|+\\sum_i|v_i|$; take $\\beta=1$ if $c=0$, and otherwise $\\beta=\\min(1,q/(2tc))$. For a positive-semidefinite factor at $Y\\succ0$ with symmetric direction $D$, let $L(M)=\\sum_{i,j}|M_{ij}|$, compute $Y^{-1}$ by exact rational elimination, and set $C=L(Y^{-1})L(D)$; take $\\beta=1$ if $C=0$ and otherwise $\\beta=\\min(1,1/C)$. These calculations are finite and use exact rational comparisons; their safety is proved by the fraction-to-boundary theorem on the A page.\n\nRound $\\alpha$ downward to a positive normal representable value; if none exists, return `lost-range`. Update each stored coordinate as $\\operatorname{fl}(v+\\operatorname{fl}(\\alpha\\Delta v))$ under the operationwise model. Any failed operation returns `lost-range`. Before accepting the candidate update, verify exactly that LP/QP variables $x,s$ remain positive, or that cone variables remain interior and $s=h-Gx$ still holds. If an audit fails, reject the candidate and return `boundary-status-unavailable` with the previous accepted iterate. Otherwise accept it, increment the update count, and return to the audit loop. Every factorization, inverse, rank, and safe-fraction calculation is bounded by finite matrix dimensions, and the outer loop is bounded by $N$. No failure status is an infeasibility conclusion; Phase I is a separate model.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fraction-to-boundary-and-primal-dual-gap-certificates",
+          "source_section": "Statement",
+          "quote": "In symmetric-cone mode of [[alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones]], let $s,z$ be strictly interior primal and dual cone variables and let $\\bar\\alpha_s,\\bar\\alpha_z\\in(0,1]$ be their largest boundary-preserving step fractions. If $0<\\beta_s\\le\\bar\\alpha_s$, $0<\\beta_z\\le\\bar\\alpha_z$, and $0<\\eta<1$, then $\\alpha=\\eta\\min(\\beta_s,\\beta_z)$ keeps both updated cone variables interior. The conservative fractions in the algorithm's Lorentz and PSD branches satisfy these inequalities. For any exactly primal- and dual-feasible conic pair, the gap $\\langle z,s\\rangle$ is a rigorous upper bound on primal suboptimality.\n\nIn LP/QP mode, the coordinate fraction-to-boundary formula keeps $x,s>0$. For the convex QP of that algorithm, if $x$ is primal feasible, $s\\ge0$, $y$ is free, and the exact stationarity residual $Qx+c-A^Ty-s$ vanishes, then\n$$0\\le f_0(x)-p^*\\le x^Ts.$$\nFor LP/QP iterates with full-row-rank $A$, $Q\\succeq0$, and $x,s>0$, the exact Newton matrix is nonsingular. Thus a requested gap is certified only under exact feasibility and stationarity conditions. Nonzero residual tolerances alone are not a certificate. Every finite iteration cap returns a status after finitely many bounded updates; a failure status proves no infeasibility claim.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The primal residual is $(1,1)\\cdot(3/5,2/5)-1=0$. The dual stationarity residual is $c-A^Ty-s=(1,2)-(1,1)-(0,1)=(0,0)$, and $x\\ge0$, $s\\ge0$, so the candidate pair is exactly feasible.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The primal objective is $3/5+2(2/5)=7/5$, the dual value is $b y=1$, and the gap is $x^Ts=2/5$. Every primal feasible vector has $x_1+x_2=1$, $x_i\\ge0$, and objective $x_1+2x_2=1+x_2\\ge1$; the feasible point $(1,0)$ attains $1$, so $p^*=1$. Thus the objective error is exactly $7/5-1=2/5=x^Ts$, and [F2] gives the same certified upper bound.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The candidate primal vector is feasible and the displayed dual variables are defined; the example has no empty feasible set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Both equality and stationarity residuals are computed as zero. (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The optimal objective value is explicitly one. (step 2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The primal and dual feasible boundary coordinates include x₂=0 and s₁=0. (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The exact gap equals the objective error for this boundary-feasible pair. (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The attaining optimum (1,0) is explicitly exhibited. (step 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The calculation verifies one feasible pair and its exact gap; it does not characterize every certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An objective gap identity for this candidate does not recover the unique displayed residuals or variables."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-small-semidefinite-relaxation-primal-dual-certificate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-psd-cone-self-dual-logdet-barrier",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $\\mathbb S^n$ have trace pairing $\\langle X,Y\\rangle=\\operatorname{tr}(XY)$, and let $\\mathbb S_+^n$ be the cone of real symmetric positive semidefinite matrices. Then $(\\mathbb S_+^n)^*=\\mathbb S_+^n$. On $\\mathbb S_{++}^n$, $F(X)=-\\log\\det X$ is an $n$-log-homogeneous self-concordant barrier, with\n$$DF(X)[H]=-\\operatorname{tr}(X^{-1}H),\\qquad D^2F(X)[H,J]=\\operatorname{tr}(X^{-1}HX^{-1}J),$$\nand $\\lambda_F(X)=\\sqrt n$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Write the minimization objective as $C\\bullet X=-X_{12}$ with $C=\\begin{pmatrix}0&-1/2\\\\-1/2&0\\end{pmatrix}$. For any feasible $X$, [F1] applied to $e_1-e_2$ gives $2-2X_{12}\\ge0$, hence $-X_{12}\\ge-1$. The feasible matrix $X_*=\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$ attains $-1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The dual multiplier $y=(-1/2,-1/2)$ and slack $S=\\tfrac12\\begin{pmatrix}1&-1\\\\-1&1\\end{pmatrix}$ satisfy $v^TSv=\\tfrac12(v_1-v_2)^2\\ge0$ for every $v$, hence $S\\succeq0$. Direct addition gives $\\operatorname{diag}(y)+S=C$. Their dual value is $y_1+y_2=-1$, and $X_*\\bullet S=0$. Thus the displayed primal and dual values match and certify the relaxation optimum.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The explicit matrix X* is feasible, so the relaxation has a nonempty feasible set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The primal-dual complementarity gap is exactly zero. (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The relaxation optimum is exactly one, equivalently minimization value −1. (step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The primal matrix and dual slack are singular PSD boundary matrices. (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The matching boundary primal and dual certificates are verified. (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The feasible matrix X* is explicitly constructed. (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The displayed primal and dual matrices certify this optimum; the example does not claim every optimum has this form."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The matching certificate proves the stated value but does not classify all optimal primal or dual matrices."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

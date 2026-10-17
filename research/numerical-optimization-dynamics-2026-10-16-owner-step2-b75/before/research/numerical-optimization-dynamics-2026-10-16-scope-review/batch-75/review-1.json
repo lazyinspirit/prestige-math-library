@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "75",
+  "round": 1,
+  "reviewed_items": [
+    "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+    "def-regular-differentiation-index",
+    "thm-index-one-dae-implicit-function-reduction",
+    "lem-index-one-dae-algebraic-residual-to-state-error",
+    "alg-index-one-dae-consistent-initialization",
+    "alg-index-one-dae-backward-euler-stepper",
+    "alg-index-one-dae-bdf2-stepper",
+    "lem-index-one-dae-backward-euler-local-branch",
+    "lem-index-one-dae-bdf2-local-branch",
+    "thm-index-one-dae-finite-budget-solvers-terminate",
+    "thm-index-one-dae-backward-euler-first-order-with-residuals",
+    "thm-index-one-dae-bdf2-second-order-with-residuals",
+    "ex-index-one-circuit-consistent-initialization-and-be-step",
+    "ex-index-two-dae-algebraic-residual-does-not-control-state",
+    "ex-index-three-pendulum-by-differentiation"
+  ],
+  "reviewed_pages": [
+    "differential-algebraic-equations-and-consistent-initialization",
+    "differential-algebraic-equations-and-consistent-initialization-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The prior findings are resolved: both stepper definitions now check Newton seed membership, BDF2 names and checks its starting residual bounds, and the termination theorem counts the initial checks. The T06 scope and supplier uses remain sound; the source cross-check is consistent with the local index-one reduction and separate high-index treatment ([Hairer–Wanner, §VI.1](https://isy.gitlab-pages.liu.se/fs/phd-courses/simulation/Papers/HairerWanner_VI_1_clean.pdf); [Atkinson et al., ch. 10, §§10.3–10.4](https://homepage.math.uiowa.edu/~atkinson/papers/NAODE_Book.pdf)). One proof-reference defect remains after the single repair. Since this is the final review, escalate it to the owner.",
+  "findings": [
+    {
+      "id": "thm-index-one-dae-finite-budget-solvers-terminate",
+      "type": "local",
+      "reason": "In the Proof, numbering jumps from step 2.1 to 2.3, while step 3.1 cites nonexistent [step 2.2]. The count argument is now correct, but this explicit proof reference remains unresolved."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-index-one-dae-backward-euler-local-branch",
+      "decision": "accept",
+      "reason": "Its IFT proof uses the coupled root equations; the added Newton-domain checks do not change that claim."
+    },
+    {
+      "id": "lem-index-one-dae-bdf2-local-branch",
+      "decision": "accept",
+      "reason": "Its IFT proof establishes the local root branch independently of the finite Newton seed."
+    },
+    {
+      "id": "thm-index-one-dae-backward-euler-first-order-with-residuals",
+      "decision": "accept",
+      "reason": "Its proof is conditional on the branch and residual bounds and does not infer Newton success."
+    },
+    {
+      "id": "thm-index-one-dae-bdf2-second-order-with-residuals",
+      "decision": "accept",
+      "reason": "Its proof is conditional on the stated starting and step residuals and selected branch; the clarified algorithm bounds do not alter the argument."
+    },
+    {
+      "id": "thm-index-one-dae-finite-budget-solvers-terminate",
+      "decision": "escalate",
+      "reason": "The revised evaluation counts match the procedures, but the proof still cites nonexistent step 2.2 in step 3.1."
+    }
+  ]
+}

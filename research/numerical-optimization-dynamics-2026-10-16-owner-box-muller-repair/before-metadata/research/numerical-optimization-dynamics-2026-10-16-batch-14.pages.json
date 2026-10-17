@@ -1,0 +1,1122 @@
+[
+  {
+    "order": 2312,
+    "id": "outward-rounded-interval-and-ball-arithmetic",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Outward rounded interval and ball arithmetic",
+    "companion": "outward-rounded-interval-and-ball-arithmetic-examples",
+    "requires": [
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "finite-precision-direct-factorizations"
+    ],
+    "items": [
+      {
+        "id": "def-complete-ordered-real-field",
+        "kind": "definition",
+        "title": "Dedekind-complete ordered real field",
+        "deps": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steven G. Krantz, Foundations of Analysis, §1.1, Theorems 1.7 and 1.10",
+              "url": "https://api.pageplace.de/preview/DT0400.9781482220759_A37871115/preview-9781482220759_A37871115.pdf"
+            }
+          ]
+        },
+        "statement": "A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with\nidentity $1>0$, a total order compatible with addition and multiplication, and\nthe least-upper-bound axiom: every nonempty subset of $\\mathbb R$ that is\nbounded above has a least upper bound in $\\mathbb R$. Throughout this batch,\nall real variables, intervals, limits, derivatives and integrals are taken in\nsuch a field. The integers and rationals are interpreted in their usual\nembedded copies. For $x\\in\\mathbb R$, define $|x|=x$ when $x\\ge0$ and\n$|x|=-x$ when $x<0$."
+      },
+      {
+        "id": "def-continuity-and-derivative-on-real-interval",
+        "kind": "definition",
+        "title": "Continuity and derivative on a real interval",
+        "deps": [
+          "def-complete-ordered-real-field"
+        ],
+        "statement": "For $f:[a,b]\\to\\mathbb R$, continuity at $x\\in[a,b]$ means that for every\n$\\varepsilon>0$ there is $\\delta>0$ such that\n$|f(t)-f(x)|<\\varepsilon$ whenever $t\\in[a,b]$ and $|t-x|<\\delta$.\nDifferentiability at an interior point $c$ means that the two-sided limit\n$$\nf'(c)=\\lim_{h\\to0}\\frac{f(c+h)-f(c)}{h}\n$$\nexists in the real field; differentiability on $(a,b)$ means this holds at\nevery interior point. For higher derivatives, define recursively\n$f^{(j+1)}=(f^{(j)})'$ on the points where the derivative exists. The class\n$C^{n+1}$ on an open interval means that these derivatives through order\n$n+1$ exist and are continuous there.",
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 15: Derivatives; Laws for Differentiation",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec15.pdf"
+            },
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 16",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec16.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-dyadic-floating-point-format-and-directed-rounding",
+        "kind": "definition",
+        "title": "Dyadic floating-point format and directed rounding",
+        "deps": [
+          "def-complete-ordered-real-field"
+        ],
+        "statement": "An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.\n\nFor a real $x$ with $|x|\\le N_{\\max}$, define $\\operatorname{rd}(x)$ as the\ngreatest member of $\\mathbb F$ not exceeding $x$, and $\\operatorname{ru}(x)$ as\nthe least member of $\\mathbb F$ not less than $x$. Define\n$\\rho(x)=\\operatorname{ru}(x)-\\operatorname{rd}(x)$. For nonzero $x$ in the\nsubnormal range, define the absolute-error bound $\\epsilon_{\\rm abs}(x)=\\eta$;\nfor $2^e\\le |x|<2^{e+1}$ in the normal range, define\n$\\epsilon_{\\rm abs}(x)=2^{e-p+2}$. At finite overflow, a directed result is\nthe corresponding infinite sentinel and its error bound is $+\\infty$; the\nstatus is `overflow`. The rounding procedure reports `finite`, `subnormal`, or\n`overflow`, so no relative-error assumption is implicit.\n\nAn exact rational intermediate may be converted by comparing integer\nnumerators and denominators after clearing powers of two. A directed interval\nendpoint is the resulting greatest lower or least upper member of $\\mathbb F$.",
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tucker, Validated Numerics: A Short Introduction to Rigorous Computations, Ch. 1 Computer Arithmetic",
+              "url": "https://pup-assets.imgix.net/onix/images/9780691247656/9780691247656.pdf?fm=pdf"
+            },
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §4",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-archimedean-property-from-completeness",
+        "kind": "lemma",
+        "title": "Dedekind completeness implies the Archimedean property",
+        "deps": [
+          "def-complete-ordered-real-field"
+        ],
+        "statement": "In a Dedekind-complete ordered field, the natural numbers are unbounded above.",
+        "dependency_level": 1,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steven G. Krantz, Foundations of Analysis, §1.1, Theorem 1.10",
+              "url": "https://api.pageplace.de/preview/DT0400.9781482220759_A37871115/preview-9781482220759_A37871115.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-closed-interval-compactness-from-completeness",
+        "kind": "lemma",
+        "title": "Closed real intervals are compact by completeness",
+        "deps": [
+          "def-complete-ordered-real-field"
+        ],
+        "statement": "If $a<b$ in a Dedekind-complete ordered field, every relative open cover of\n$[a,b]$ has a finite subcover. Relative openness means openness in the\nsubspace topology inherited from the real line.",
+        "dependency_level": 1,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 16",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec16.pdf"
+            },
+            {
+              "title": "Steven G. Krantz, Foundations of Analysis, §1.1",
+              "url": "https://api.pageplace.de/preview/DT0400.9781482220759_A37871115/preview-9781482220759_A37871115.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nonnegative-square-root-exists-and-unique",
+        "kind": "lemma",
+        "title": "Nonnegative real square roots exist uniquely",
+        "deps": [
+          "def-complete-ordered-real-field"
+        ],
+        "dependency_level": 1,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steven G. Krantz, Foundations of Analysis, §1.1, Theorem 1.8",
+              "url": "https://api.pageplace.de/preview/DT0400.9781482220759_A37871115/preview-9781482220759_A37871115.pdf"
+            }
+          ]
+        },
+        "statement": "In a Dedekind-complete ordered field, every $x\\ge0$ has a unique $y\\ge0$ with\n$y^2=x$."
+      },
+      {
+        "id": "alg-dyadic-square-root-bisection",
+        "kind": "algorithm",
+        "title": "Exact dyadic bisection for square-root endpoints",
+        "deps": [
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "lem-nonnegative-square-root-exists-and-unique"
+        ],
+        "statement": "Input: a nonnegative exact dyadic rational $x$ and integer request $n\\ge1$.\nReturn exact dyadic bounds for $\\sqrt{x}$ as follows.\n\n1. If $x=0$, return $[0,0]$.\n2. Otherwise determine the unique integer $j$ with $2^j\\le x<2^{j+1}$ from the\n   exact dyadic representation, put $m=\\lfloor j/2\\rfloor$ and\n   $\\delta=2^{m-n}$.\n3. Set integer indices $L=0$ and $U=2^{n+1}$. While $U-L>1$, put\n   $Q=\\lfloor(L+U)/2\\rfloor$. If $(Q\\delta)^2\\le x$, replace $L$ by $Q$;\n   otherwise replace $U$ by $Q$.\n4. Return $[L\\delta,U\\delta]$. To store the endpoints in a selected finite\n   format, round the lower endpoint down and the upper endpoint up, reporting\n   `subnormal` or `overflow` as required.\n\nAll comparisons and multiplications in the loop are exact integer/dyadic\noperations. The loop has at most $n+1$ iterations.",
+        "dependency_level": 2,
+        "justified_by": [
+          "thm-dyadic-square-root-bisection-encloses"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kearfott, Interval Computations: Introduction, Uses, and Resources, §1",
+              "url": "https://interval.louisiana.edu/preprints/survey.pdf"
+            },
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §7",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-intervals-rectangles-and-complex-balls",
+        "kind": "definition",
+        "title": "Real intervals, complex rectangles and ball enclosures",
+        "deps": [
+          "def-complete-ordered-real-field",
+          "lem-nonnegative-square-root-exists-and-unique"
+        ],
+        "statement": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.\n\nA **complex rectangle** is $X+iY=\\{x+iy:x\\in X,\\ y\\in Y\\}$ for real intervals\n$X,Y$. Complex addition and multiplication use\n$(x+iy)+(u+iv)=(x+u)+i(y+v)$ and\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$. For $z=x+iy$, its complex modulus is\n$|z|=\\sqrt{x^2+y^2}$, and for $z\\ne0$ its reciprocal is\n$1/z=(x-iy)/(x^2+y^2)$. A\n**complex ball** $B(c,r)$ is\n$\\{z\\in\\mathbb C:|z-c|\\le r\\}$ with dyadic complex center $c$ and dyadic\n$r\\ge0$. For any two represented sets $S,T$, the inclusion order is\n$S\\sqsubseteq T$ iff $S\\subseteq T$.\n\nThe width of a complex rectangle with coordinate widths $w_X,w_Y$ is its\nEuclidean diameter $\\sqrt{w_X^2+w_Y^2}$; the width of a ball $B(c,r)$ is its\ndiameter $2r$. Width comparisons against a dyadic tolerance can be decided by\nexact rational comparisons after squaring the nonnegative quantities.\n\nThe **range** of a real or complex function $f$ on a set $S$ is\n$f(S)=\\{f(x):x\\in S\\cap\\operatorname{dom}(f)\\}$. A finite expression DAG is a\nfinite directed acyclic graph with input nodes, constant nodes, and operation\nnodes; constants are exact dyadics or are supplied with certified enclosing\nintervals. Sharing a node means the exact same intermediate value is reused.",
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kearfott, Interval Computations: Introduction, Uses, and Resources, §§1–2",
+              "url": "https://interval.louisiana.edu/preprints/survey.pdf"
+            },
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §5.1",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-directed-dyadic-rounding-enclosure-and-error",
+        "kind": "lemma",
+        "title": "Directed dyadic rounding encloses with explicit underflow and overflow bounds",
+        "deps": [
+          "def-dyadic-floating-point-format-and-directed-rounding"
+        ],
+        "statement": "For finite $x$ with $|x|\\le N_{\\max}$, the directed roundings defined in\n[[def-dyadic-floating-point-format-and-directed-rounding]] satisfy\n$\\operatorname{rd}(x)\\le x\\le\\operatorname{ru}(x)$ and each endpoint error is\nat most the stated $\\epsilon_{\\rm abs}(x)$ (with zero error when $x$ is\nrepresentable). For $x>N_{\\max}$ the pair $(N_{\\max},+\\infty)$ encloses $x$;\nfor $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has\nerror bound $+\\infty$ and cannot be reported as a finite-error result.",
+        "dependency_level": 2,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tucker, Validated Numerics: A Short Introduction to Rigorous Computations, Ch. 1 §§1.2–1.5",
+              "url": "https://pup-assets.imgix.net/onix/images/9780691247656/9780691247656.pdf?fm=pdf"
+            },
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §§4–5.3",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-outward-rounded-interval-and-ball-operations",
+        "kind": "definition",
+        "title": "Outward-rounded interval, rectangle and ball operations",
+        "deps": [
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-intervals-rectangles-and-complex-balls",
+          "alg-dyadic-square-root-bisection"
+        ],
+        "statement": "For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints and rounding\noutward for storage.\n\nIf $0\\in Y$ for division, return `split-domain` with the two subdomains\n$Y\\cap(-\\infty,0)$ and $Y\\cap(0,\\infty)$, or `entire` when the caller does not\nrequest subdivision. No finite quotient interval is returned in this case.\nAn invalid square-root domain returns `domain-error` or an explicitly\nrestricted nonnegative subdomain.\n\nComplex-rectangle addition, subtraction and multiplication use\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$, applying the real interval operations to\neach component. For a rectangle $X+iY$ excluding $0$, define its reciprocal by\n$(X-iY)/(X^2+Y^2)$; the denominator interval is strictly positive because at\nleast one coordinate interval excludes zero. Division multiplies by this\nreciprocal.\n\nFor a ball $B(c,r)$, let $X_B=[\\Re c-r,\\Re c+r]$ and\n$Y_B=[\\Im c-r,\\Im c+r]$ be its coordinate projection intervals. For a real\ninterval $J$, let $M(J)=\\max(|\\inf J|,|\\sup J|)$ and let $d(J)=0$ if\n$0\\in J$, otherwise $d(J)=\\min(|\\inf J|,|\\sup J|)$. Put\n$M_B=M(X_B)+M(Y_B)$ and $m_B=\\max(d(X_B),d(Y_B))$. Then\n$|z|\\le M_B$ for every $z\\in B(c,r)$ and $|z|\\ge m_B$ for every such $z$.\nDefine ball addition and subtraction as\n$B(0,\\operatorname{ru}(M_{B_1}+M_{B_2}))$, multiplication as\n$B(0,\\operatorname{ru}(M_{B_1}M_{B_2}))$, and division as\n$B(0,\\operatorname{ru}(M_{B_1}/m_{B_2}))$ only when $m_{B_2}>0$. These\norigin-centered output balls are conservative but inclusion-isotone. If\n$m_{B_2}=0$, return `split-domain`, `entire`, or `inconclusive`; if a radius\noverlows, return `overflow`.",
+        "dependency_level": 3,
+        "justified_by": [
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kearfott, Interval Computations: Introduction, Uses, and Resources, §1",
+              "url": "https://interval.louisiana.edu/preprints/survey.pdf"
+            },
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §§5.1–5.5",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-real-and-complex-modulus-rules",
+        "kind": "lemma",
+        "title": "Real and complex modulus product and triangle inequalities",
+        "deps": [
+          "def-complete-ordered-real-field",
+          "def-intervals-rectangles-and-complex-balls",
+          "lem-nonnegative-square-root-exists-and-unique"
+        ],
+        "statement": "For real $x,y$, $|xy|=|x||y|$ and $|x+y|\\le|x|+|y|$. For complex\n$z,w$, $|zw|=|z||w|$, $|z+w|\\le|z|+|w|$, and if $w\\ne0$ then\n$|z/w|=|z|/|w|$.",
+        "dependency_level": 3,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steven G. Krantz, Foundations of Analysis, §1.2",
+              "url": "https://api.pageplace.de/preview/DT0400.9781482220759_A37871115/preview-9781482220759_A37871115.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-dyadic-square-root-bisection-encloses",
+        "kind": "theorem",
+        "title": "Dyadic square-root bisection gives outward endpoints",
+        "deps": [
+          "alg-dyadic-square-root-bisection",
+          "lem-directed-dyadic-rounding-enclosure-and-error",
+          "lem-nonnegative-square-root-exists-and-unique"
+        ],
+        "statement": "For every nonnegative exact dyadic input $x$ and $n\\ge1$, the exact dyadic\npair returned by [[alg-dyadic-square-root-bisection]] contains $\\sqrt{x}$ and\nhas width $2^{\\lfloor j/2\\rfloor-n}$ when $x>0$, where $j$ is the exponent\nselected by that algorithm. Storing the endpoints after outward rounding\npreserves enclosure, although storage rounding may increase the width.\nFor fixed $n$, both exact endpoint functions are nondecreasing in $x\\ge0$;\ndirected storage rounding preserves that monotonicity.",
+        "dependency_level": 3,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kearfott, Interval Computations: Introduction, Uses, and Resources, §1",
+              "url": "https://interval.louisiana.edu/preprints/survey.pdf"
+            },
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §7",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-centered-taylor-model-with-derivative-interval",
+        "kind": "definition",
+        "title": "Centered Taylor model with derivative-interval remainder",
+        "deps": [
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "def-continuity-and-derivative-on-real-interval",
+          "lem-real-and-complex-modulus-rules"
+        ],
+        "statement": "Let $f$ be a real function that is $n+1$ times continuously differentiable on\nan open interval containing the finite real interval $X=[a,b]$. Here\n$n\\ge0$ is an integer, and continuous differentiability means that the\nderivatives through order $n+1$ exist there and are continuous. Let $c\\in X$\nbe a dyadic point. Put\n$$\nP_n(t)=\\sum_{j=0}^n\\frac{f^{(j)}(c)}{j!}(t-c)^j.\n$$\nSupply dyadic intervals $C_j$ containing $f^{(j)}(c)/j!$ for $0\\le j\\le n$\nand a dyadic interval $D$ containing $f^{(n+1)}(X)$. Put\n$M=\\max(|\\inf D|,|\\sup D|)$ and\n$R=\\max(|a-c|,|b-c|)$. The **centered Taylor-model enclosure** is\n$$\n\\mathcal T_n(f,X,c,(C_j)_{j=0}^n,D)\n=\\sum_{j=0}^n C_j(X-c)^j+\n\\left[-\\frac{M R^{n+1}}{(n+1)!},\\frac{M R^{n+1}}{(n+1)!}\\right],\n$$\nwhere products, powers, sums, and the final sum are evaluated by\noutward-rounded interval operations. The first term carries input variation\nthrough the polynomial; the symmetric second interval is the explicit\nderivative-based remainder. If a required coefficient or derivative\nenclosure is unavailable, no Taylor-model certificate is returned.",
+        "dependency_level": 4,
+        "justified_by": [
+          "thm-centered-taylor-model-encloses-function-range"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §11.6",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-absolutely-convergent-series-cauchy-product",
+        "kind": "lemma",
+        "title": "Cauchy products of absolutely convergent series multiply their sums",
+        "deps": [
+          "def-complete-ordered-real-field",
+          "lem-real-and-complex-modulus-rules"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jiří Lebl, Basic Analysis: Introduction to Real Analysis, Volume I, §2.6.4, Theorem 2.6.5",
+              "url": "https://www.jirka.org/ra/realanal.pdf"
+            }
+          ]
+        },
+        "statement": "Let $\\sum_{n\\ge0}a_n=A$ and $\\sum_{n\\ge0}b_n=B$ be absolutely convergent\nreal series. Define\n$$\nc_n=\\sum_{j=0}^n a_jb_{n-j}.\n$$\nThen $\\sum_{n\\ge0}c_n$ converges absolutely and has sum $AB$. Thus the\nproduct of the two series can be grouped by total degree without changing\nits sum.",
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-derivative-algebra-and-chain-rules",
+        "kind": "lemma",
+        "title": "Sum, product, quotient, and chain rules from difference quotients",
+        "deps": [
+          "def-continuity-and-derivative-on-real-interval",
+          "lem-real-and-complex-modulus-rules"
+        ],
+        "statement": "Every function differentiable at $c$ is continuous at $c$.\nIf $f,g$ are real functions differentiable at $c$, then $f+g$ and $fg$ are\ndifferentiable there and\n$$\n(f+g)'(c)=f'(c)+g'(c),\\qquad (fg)'(c)=f'(c)g(c)+f(c)g'(c).\n$$\nIf $g(c)\\ne0$, then $f/g$ is differentiable at $c$ and\n$$\n(f/g)'(c)=\\frac{f'(c)g(c)-f(c)g'(c)}{g(c)^2}.\n$$\nIf $f$ is differentiable at $c$, $g$ is differentiable at $f(c)$, and the\ncomposition is defined near $c$, then $g\\circ f$ is differentiable at $c$ and\n$(g\\circ f)'(c)=g'(f(c))f'(c)$. For every integer $m\\ge1$,\n$(x^m)'=mx^{m-1}$.",
+        "dependency_level": 4,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 15: Derivatives; Laws for Differentiation",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec15.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+        "kind": "lemma",
+        "title": "Elementary factorial and geometric series converge uniformly",
+        "deps": [
+          "def-complete-ordered-real-field",
+          "lem-archimedean-property-from-completeness",
+          "lem-real-and-complex-modulus-rules"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 22: Differentiating and Integrating Power Series",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec22.pdf"
+            },
+            {
+              "title": "Jiří Lebl, Basic Analysis: Introduction to Real Analysis, Volume I, §2.6.5, Example 2.6.7",
+              "url": "https://www.jirka.org/ra/realanal.pdf"
+            }
+          ]
+        },
+        "statement": "For every real $R\\ge0$, the factorial series\n$\\sum_{n=0}^{\\infty}R^n/n!$ converges. If $N\\ge0$ and\n$q=R/(N+2)<1$, its tail after index $N$ satisfies\n$$\n\\sum_{n=N+1}^{\\infty}\\frac{R^n}{n!}\n\\le \\frac{R^{N+1}}{(N+1)!(1-q)}.\n$$\nConsequently the series defining $\\exp x$, $\\sin x$, $\\cos x$ and each of\ntheir formal derivative series converge absolutely and uniformly on every\nbounded interval $|x|\\le R$. For $0\\le r<1$, the geometric series and the\nodd power series $\\sum_{k\\ge0}x^{2k+1}/(2k+1)$, with their formal derivative\nseries, converge absolutely and uniformly on $|x|\\le r$.",
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-extreme-value-theorem-from-compactness",
+        "kind": "lemma",
+        "title": "Continuous functions on a closed interval attain their extrema",
+        "deps": [
+          "def-complete-ordered-real-field",
+          "def-continuity-and-derivative-on-real-interval",
+          "lem-archimedean-property-from-completeness",
+          "lem-closed-interval-compactness-from-completeness",
+          "lem-real-and-complex-modulus-rules"
+        ],
+        "statement": "If $f:[a,b]\\to\\mathbb R$ is continuous and $a\\le b$, then $f$ is bounded and\nattains both a maximum and a minimum on $[a,b]$.",
+        "dependency_level": 4,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 16",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec16.pdf"
+            },
+            {
+              "title": "Steven G. Krantz, Foundations of Analysis, §1.1",
+              "url": "https://api.pageplace.de/preview/DT0400.9781482220759_A37871115/preview-9781482220759_A37871115.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-power-series-termwise-differentiation",
+        "kind": "lemma",
+        "title": "Power series may be differentiated term by term inside their radius",
+        "deps": [
+          "def-complete-ordered-real-field",
+          "def-continuity-and-derivative-on-real-interval",
+          "lem-real-and-complex-modulus-rules"
+        ],
+        "statement": "Let $R_0>0$ and let $(a_n)_{n\\ge0}$ be real coefficients such that for every\n$0<R<R_0$ both $\\sum_{n\\ge0}|a_n|R^n$ and\n$\\sum_{n\\ge1}n|a_n|R^{n-1}$ converge. Then\n$F(x)=\\sum_{n\\ge0}a_nx^n$ is differentiable for $|x|<R_0$, with\n$F'(x)=\\sum_{n\\ge1}na_nx^{n-1}$.",
+        "dependency_level": 4,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 22: Differentiating and Integrating Power Series",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec22.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+        "kind": "theorem",
+        "title": "Outward-rounded operations are inclusion-isotone and enclose DAG evaluations",
+        "deps": [
+          "def-outward-rounded-interval-and-ball-operations",
+          "def-intervals-rectangles-and-complex-balls",
+          "lem-directed-dyadic-rounding-enclosure-and-error",
+          "thm-dyadic-square-root-bisection-encloses",
+          "lem-real-and-complex-modulus-rules"
+        ],
+        "statement": "For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosure is asserted.",
+        "dependency_level": 4,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kearfott, Interval Computations: Introduction, Uses, and Resources, §1",
+              "url": "https://interval.louisiana.edu/preprints/survey.pdf"
+            },
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §5.5",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-continuous-functions-riemann-integrable",
+        "kind": "lemma",
+        "title": "Continuous functions have an oriented Riemann integral",
+        "deps": [
+          "def-complete-ordered-real-field",
+          "def-continuity-and-derivative-on-real-interval",
+          "lem-archimedean-property-from-completeness",
+          "lem-closed-interval-compactness-from-completeness",
+          "lem-extreme-value-theorem-from-compactness",
+          "lem-real-and-complex-modulus-rules"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 18: Integrable Functions",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec18.pdf"
+            },
+            {
+              "title": "Jiří Lebl, Basic Analysis: Introduction to Real Analysis, Volume I, §5.2.3, Lemma 5.2.7",
+              "url": "https://www.jirka.org/ra/realanal.pdf"
+            }
+          ]
+        },
+        "statement": "Let $g:[a,b]\\to\\mathbb R$ be continuous, with $a<b$, in a Dedekind-complete\nordered field. For a partition $P=(a=x_0<\\cdots<x_m=b)$ put\n$$\nU(g,P)=\\sum_{i=1}^m \\left(\\max_{t\\in[x_{i-1},x_i]}g(t)\\right)(x_i-x_{i-1}),\\qquad\nL(g,P)=\\sum_{i=1}^m \\left(\\min_{t\\in[x_{i-1},x_i]}g(t)\\right)(x_i-x_{i-1}).\n$$\nThe supremum of the lower sums equals the infimum of the upper sums. Define\n$\\int_a^b g$ to be this common value, set $\\int_a^a g=0$, and set\n$\\int_b^a g=-\\int_a^b g$. This oriented Riemann integral is additive over\nintervals. Refining a partition increases its lower sum and decreases its\nupper sum, and any two partitions have a common refinement. It satisfies\n$$\n\\left|\\int_a^b g(t)\\,dt\\right|\n\\le |b-a|\\max_{t\\text{ between }a\\text{ and }b}|g(t)|.\n$$\nIf $a<b$ and constants $m,M$ satisfy $m\\le g(t)\\le M$ on $[a,b]$, then\n$m(b-a)\\le\\int_a^b g\\le M(b-a)$; reversing the endpoints reverses these\ninequalities. The integral is monotone in its integrand: if continuous\n$g\\le h$ on $[a,b]$, then $\\int_a^b g\\le\\int_a^b h$.\nIf $g$ is continuous on an open interval $J$ and $x_0\\in J$, then\n$G(x)=\\int_{x_0}^x g(t)\\,dt$ is defined for $x\\in J$ and $G'(x)=g(x)$.",
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-rolle-theorem-from-extreme-values",
+        "kind": "lemma",
+        "title": "Rolle's theorem from attained extrema",
+        "deps": [
+          "def-continuity-and-derivative-on-real-interval",
+          "lem-extreme-value-theorem-from-compactness"
+        ],
+        "statement": "Let $a<b$, and let $g:[a,b]\\to\\mathbb R$ be continuous on $[a,b]$ and\ndifferentiable on $(a,b)$. If $g(a)=g(b)$, then there is $c\\in(a,b)$ with\n$g'(c)=0$.",
+        "dependency_level": 5,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 16",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec16.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-real-elementary-functions-and-domains",
+        "kind": "definition",
+        "title": "Real elementary functions and their domains",
+        "deps": [
+          "lem-nonnegative-square-root-exists-and-unique",
+          "def-intervals-rectangles-and-complex-balls",
+          "lem-continuous-functions-riemann-integrable",
+          "lem-elementary-power-series-converge-uniformly-on-bounded-sets"
+        ],
+        "statement": "Every integral below is the oriented Riemann integral constructed from upper\nand lower Darboux sums in\n[[lem-continuous-functions-riemann-integrable]]. It exists for each displayed\ncontinuous integrand on the finite interval between its endpoints, is additive\nin intervals, reverses sign when the endpoints are reversed, is monotone in\nthe integrand, and satisfies\n$|\\int_a^b g(t)\\,dt|\\le|b-a|\\max_{t\\text{ between }a\\text{ and }b}|g(t)|$.\nThese properties also\ngive constant comparison bounds and the average-value difference quotient\nused to differentiate the integral-defined functions.\n\nThe exponential is $\\exp(x)=\\sum_{k=0}^{\\infty}x^k/k!$ for $x\\in\\mathbb R$.\nThe sine and cosine are the everywhere-convergent power series\n$\\sin x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k+1}/(2k+1)!$ and\n$\\cos x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k}/(2k)!$. Define\n$\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$. The natural\nlogarithm $\\ln$ is defined on $(0,\\infty)$ by $\\ln x=\\int_1^x dt/t$.\n\nThe square root is the unique nonnegative real $y$ with $y^2=x$ for $x\\ge0$;\nexistence and uniqueness follow from\n[[lem-nonnegative-square-root-exists-and-unique]]. The tangent is\n$\\tan x=\\sin x/\\cos x$ on the set where $\\cos x\\ne0$.\n\nFor complex $z=x+iy$, the modulus $|z|=\\sqrt{x^2+y^2}$ is defined in\n[[def-intervals-rectangles-and-complex-balls]]. The complex exponential is\n$\\exp(x+iy)=\\exp(x)(\\cos y+i\\sin y)$. The principal complex logarithm is\n$\\operatorname{Log}(z)=\\ln|z|+i\\operatorname{Arg}(z)$ on\n$\\mathbb C\\setminus(-\\infty,0]$. For $z=x+iy$ in this domain, define\n$$\n\\operatorname{Arg}(x+iy)=\n\\begin{cases}\n\\arctan(y/x),&x>0,\\\\\n\\pi/2,&x=0,\\ y>0,\\\\\n-\\pi/2,&x=0,\\ y<0,\\\\\n\\pi-\\arctan(y/(-x)),&x<0,\\ y>0,\\\\\n-\\pi+\\arctan((-y)/(-x)),&x<0,\\ y<0.\n\\end{cases}\n$$\nThe excluded negative real axis is the remaining case $x<0,y=0$; zero is\nalso excluded.\n\nThese are point functions. An interval extension must separately enclose their\nexact ranges, test the stated domains, and return a non-finite status when its\nfinite budget cannot certify a reduction or endpoint.",
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rump, Rigorous and Portable Standard Functions, §§5–7",
+              "url": "https://www.tuhh.de/ti3/paper/rump/Ru01b.pdf"
+            },
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §7",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-mean-value-theorem-on-closed-interval",
+        "kind": "lemma",
+        "title": "Mean value theorem on a closed real interval",
+        "deps": [
+          "def-complete-ordered-real-field",
+          "def-continuity-and-derivative-on-real-interval",
+          "lem-rolle-theorem-from-extreme-values"
+        ],
+        "statement": "Let $f:[a,b]\\to\\mathbb R$ be continuous on $[a,b]$ and differentiable on\n$(a,b)$, with $a<b$. Then there is $c\\in(a,b)$ such that\n$$\nf(b)-f(a)=f'(c)(b-a).\n$$",
+        "dependency_level": 6,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 16",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec16.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-riemann-integral-linearity",
+        "kind": "lemma",
+        "title": "The oriented Riemann integral is linear in continuous integrands",
+        "deps": [
+          "lem-continuous-functions-riemann-integrable"
+        ],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 18: Integrable Functions",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec18.pdf"
+            },
+            {
+              "title": "Jiří Lebl, Basic Analysis: Introduction to Real Analysis, Volume I, §5.2.4",
+              "url": "https://www.jirka.org/ra/realanal.pdf"
+            }
+          ]
+        },
+        "statement": "Let $f,g$ be continuous on $[a,b]$, $a<b$, and let $\\alpha,\\beta\\in\\mathbb R$.\nThen $\\alpha f+\\beta g$ is continuous and\n$$\n\\int_a^b(\\alpha f(t)+\\beta g(t))\\,dt\n=\\alpha\\int_a^b f(t)\\,dt+\\beta\\int_a^b g(t)\\,dt.\n$$\nThe same identity holds for the oriented integral when $b<a$, and for the\nzero-length interval both sides are zero.",
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-fundamental-theorem-and-integration-by-parts",
+        "kind": "lemma",
+        "title": "The fundamental theorem of calculus and integration by parts",
+        "deps": [
+          "def-continuity-and-derivative-on-real-interval",
+          "lem-continuous-functions-riemann-integrable",
+          "lem-riemann-integral-linearity",
+          "lem-derivative-algebra-and-chain-rules",
+          "lem-mean-value-theorem-on-closed-interval"
+        ],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 18: Integrable Functions",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec18.pdf"
+            },
+            {
+              "title": "Jiří Lebl, Basic Analysis: Introduction to Real Analysis, Volume I, §5.3",
+              "url": "https://www.jirka.org/ra/realanal.pdf"
+            }
+          ]
+        },
+        "statement": "Let $a,b$ lie in an open interval $J$, and let $f$ be continuously\ndifferentiable on $J$. Then\n$$\n\\int_a^b f'(t)\\,dt=f(b)-f(a).\n$$\nIf $f,g$ are continuously differentiable on $J$, then\n$$\n\\int_a^b f(t)g'(t)\\,dt\n=f(b)g(b)-f(a)g(a)-\\int_a^b f'(t)g(t)\\,dt.\n$$\nBoth identities hold for oriented endpoints.",
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-range-reduced-exp-log-and-arctan-series-enclosures",
+        "kind": "lemma",
+        "title": "Range-reduced exponential, logarithm and arctangent series have certified tails",
+        "deps": [
+          "def-real-elementary-functions-and-domains",
+          "lem-mean-value-theorem-on-closed-interval",
+          "lem-derivative-algebra-and-chain-rules",
+          "lem-power-series-termwise-differentiation",
+          "lem-real-and-complex-modulus-rules",
+          "lem-elementary-power-series-converge-uniformly-on-bounded-sets"
+        ],
+        "statement": "For $|u|\\le1/2$ and integer $N\\ge1$, set\n$E_N(u)=\\sum_{k=0}^N u^k/k!$ and\n$R_E=|u|^{N+1}/((N+1)!(1-|u|/(N+2)))$. Then\n$\\exp(u)\\in[E_N(u)-R_E,E_N(u)+R_E]$, and the lower endpoint is positive.\nFor $y\\in[1,2]$, put $v=(y-1)/(y+1)$ and\n$L_N(v)=2\\sum_{k=0}^N v^{2k+1}/(2k+1)$. Then\n$$\n\\left|\\ln y-L_N(v)\\right|\\le\n\\frac{2|v|^{2N+3}}{(2N+3)(1-v^2)}.\n$$\nFor every integer $j$ and $y>0$, the natural logarithm also satisfies\n$\\ln(2^j y)=j\\ln2+\\ln y$.\nFor $|t|\\le1/2$, set $A_N(t)=\\sum_{k=0}^N(-1)^kt^{2k+1}/(2k+1)$. Then\n$$\n\\left|\\arctan t-A_N(t)\\right|\\le\n\\frac{|t|^{2N+3}}{(2N+3)(1-t^2)}.\n$$",
+        "dependency_level": 7,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rump, Rigorous and Portable Standard Functions, §§5–7",
+              "url": "https://www.tuhh.de/ti3/paper/rump/Ru01b.pdf"
+            },
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 22: Differentiating and Integrating Power Series",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec22.pdf"
+            },
+            {
+              "title": "Tucker, Validated Numerics: A Short Introduction to Rigorous Computations, Ch. 1",
+              "url": "https://pup-assets.imgix.net/onix/images/9780691247656/9780691247656.pdf?fm=pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-taylor-lagrange-remainder-from-mean-value",
+        "kind": "lemma",
+        "title": "Taylor's Lagrange remainder follows from repeated Rolle steps",
+        "deps": [
+          "lem-mean-value-theorem-on-closed-interval",
+          "def-continuity-and-derivative-on-real-interval",
+          "lem-derivative-algebra-and-chain-rules"
+        ],
+        "statement": "Let $n\\ge0$, let $f$ have continuous derivatives through order $n+1$ on an\nopen interval containing the closed interval between $c$ and $x$, and define\n$P_n(t)=\\sum_{j=0}^n f^{(j)}(c)(t-c)^j/j!$. If $x\\ne c$, there is a point\n$\\xi$ strictly between $c$ and $x$ such that\n$$\nf(x)-P_n(x)=\\frac{f^{(n+1)}(\\xi)}{(n+1)!}(x-c)^{n+1}.\n$$\nFor $x=c$, the remainder is zero.",
+        "dependency_level": 7,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §11.4",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            },
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 16",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec16.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-taylor-integral-remainder",
+        "kind": "lemma",
+        "title": "Taylor's theorem with an integral remainder",
+        "deps": [
+          "def-continuity-and-derivative-on-real-interval",
+          "lem-fundamental-theorem-and-integration-by-parts",
+          "lem-riemann-integral-linearity",
+          "lem-continuous-functions-riemann-integrable",
+          "lem-real-and-complex-modulus-rules"
+        ],
+        "dependency_level": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Siegfried M. Rump, Verification Methods: Rigorous Results Using Floating-Point Arithmetic, §11.6",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            },
+            {
+              "title": "Jiří Lebl, Basic Analysis: Introduction to Real Analysis, Volume I, §5.3",
+              "url": "https://www.jirka.org/ra/realanal.pdf"
+            }
+          ]
+        },
+        "statement": "Let $n\\ge0$, let $f$ have continuous derivatives through order $n+1$ on an\nopen interval containing the segment between $c$ and $x$, and put\n$$\nP_n(x)=\\sum_{j=0}^n\\frac{f^{(j)}(c)}{j!}(x-c)^j.\n$$\nThen\n$$\nf(x)-P_n(x)=\\frac1{n!}\\int_c^x f^{(n+1)}(t)(x-t)^n\\,dt.\n$$\nIf $M\\ge0$ and $|f^{(n+1)}(t)|\\le M$ between $c$ and $x$, then\n$$\n|f(x)-P_n(x)|\\le\\frac{M|x-c|^{n+1}}{(n+1)!}.\n$$\nThe formula and bound include $x=c$ and oriented endpoints.",
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-trigonometric-identities-machin-and-range-reduction",
+        "kind": "lemma",
+        "title": "Trigonometric identities, Machin's formula and reduced Taylor tails",
+        "deps": [
+          "def-real-elementary-functions-and-domains",
+          "lem-mean-value-theorem-on-closed-interval",
+          "lem-range-reduced-exp-log-and-arctan-series-enclosures",
+          "lem-derivative-algebra-and-chain-rules",
+          "lem-power-series-termwise-differentiation",
+          "lem-archimedean-property-from-completeness",
+          "lem-real-and-complex-modulus-rules",
+          "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+          "lem-absolutely-convergent-series-cauchy-product"
+        ],
+        "statement": "The power-series sine and cosine satisfy the addition identities and\n$\\sin^2x+\\cos^2x=1$. For $A(t)=\\arctan t$ from\n[[def-real-elementary-functions-and-domains]],\n$$\n\\sin(A(t))=t\\cos(A(t)),\\qquad \\cos(A(t))>0,\n$$\nso $A(t)$ is the inverse tangent with values in $(-\\pi/2,\\pi/2)$ when\n$\\pi=4A(1)$. It is odd; for $u,v\\ge0$ with $uv<1$,\n$A(u)+A(v)=A((u+v)/(1-uv))$; and for $t>0$,\n$A(t)=\\pi/2-A(1/t)$. In particular $\\sin(\\pi/2)=1$ and\n$\\cos(\\pi/2)=0$. Also,\n$$\n\\pi=16\\arctan(1/5)-4\\arctan(1/239).\n$$\nFor every real $x$ there is an integer $k$ and $r=x-k\\pi/2$ with\n$|r|\\le\\pi/4$; the sine and cosine of $x$ are obtained from those of $r$ by\nthe quarter-period identities. If $|r|\\le\\pi/4$ and $N\\ge0$, truncating sine\nthrough degree $2N+1$ and cosine through degree $2N$ gives absolute tail bounds\n$$\nT_s=\\frac{|r|^{2N+3}}{(2N+3)!(1-|r|^2/((2N+4)(2N+5)))}\n$$\nand\n$$\nT_c=\\frac{|r|^{2N+2}}{(2N+2)!(1-|r|^2/((2N+3)(2N+4)))}.\n$$",
+        "dependency_level": 8,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rump, Rigorous and Portable Standard Functions, §7",
+              "url": "https://www.tuhh.de/ti3/paper/rump/Ru01b.pdf"
+            },
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 15: Derivatives; Laws for Differentiation",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec15.pdf"
+            },
+            {
+              "title": "Michael C. Colding, MIT 18.100B Real Analysis, Lecture 22: Differentiating and Integrating Power Series",
+              "url": "https://ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec22.pdf"
+            },
+            {
+              "title": "Kearfott, Interval Computations: Introduction, Uses, and Resources, §1",
+              "url": "https://interval.louisiana.edu/preprints/survey.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-certified-elementary-range-evaluation",
+        "kind": "algorithm",
+        "title": "Certified range evaluation for elementary real and complex functions",
+        "deps": [
+          "def-real-elementary-functions-and-domains",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "lem-range-reduced-exp-log-and-arctan-series-enclosures",
+          "lem-trigonometric-identities-machin-and-range-reduction"
+        ],
+        "statement": "Input: a finite expression DAG with real interval or complex rectangle input,\na finite dyadic format and an integer truncation index $N\\ge1$. All constants,\nincluding the Machin enclosure of $\\pi$, use the same fixed $N$ and format\nthroughout a call. Output: a finite interval/rectangle enclosure, or one of\n`empty`, `domain-error`, `split-domain`, `overflow`, or `inconclusive` with the\nunresolved domain piece. No value from a system `libm` routine is treated as a\ncertified endpoint.\n\n1. Evaluate arithmetic nodes by\n[[def-outward-rounded-interval-and-ball-operations]]. On an invalid divisor\nreturn its declared status. For $\\sqrt{X}$ require $X\\subseteq[0,\\infty)$; for\n$\\ln X$ require $X\\subseteq(0,\\infty)$. If an input is not wholly in the\nstated domain, return `domain-error` rather than silently discarding points.\n\n2. Set $s=\\max(0,e_{\\max}+2)$, using the exponent in\n[[def-dyadic-floating-point-format-and-directed-rounding]]. Since\n$N_{\\max}<2^{e_{\\max}+1}$, exact dyadic comparison gives\n$N_{\\max}/2^s<1/2$. For an\ninterval $X$, evaluate the truncated exponential polynomial on $U=X/2^s$ by\ninterval arithmetic, add the symmetric tail using $\\max_{u\\in U}|u|$, then\nsquare the resulting interval $s$ times. If its lower endpoint is not\npositive or an endpoint overflows, return `inconclusive` or `overflow`. For\n$\\ln$, split $X\\subset(0,\\infty)$ into its intersections with the fixed\ndyadic bins $[2^j,2^{j+1}]$. On each nonempty piece set\n$Y=2^{-j}X_j\\subseteq[1,2]$, $V=(Y-1)/(Y+1)$, evaluate the positive logarithm\nseries on $V$ with its tail determined by $\\max|V|$, and combine\n$j\\ln2+\\ln Y$ by outward arithmetic. Take the hull over all intersected\nbins.\n\n3. Partition $\\arctan$ input at the fixed real breakpoints\n$-3,-1/2,1/2,3$. On pieces within $[-1/2,1/2]$, use its alternating power\nseries interval evaluation. For $t\\in[1/2,1]$, use\n$\\arctan t=\\pi/4-\\arctan((1-t)/(1+t))$; for $t\\in[1,3]$, use\n$\\arctan t=\\pi/4+\\arctan((t-1)/(t+1))$; for $t>3$, use\n$\\arctan t=\\pi/2-\\arctan(1/t)$. Use odd symmetry on negative pieces.\nEnclose $\\pi$ by Machin's identity and the alternating series at $1/5$ and\n$1/239$, forming their rational partial sums and tail endpoints exactly\nbefore the final outward conversion. If any branch test is unresolved, return\n`inconclusive`.\n\n4. For sine and cosine, first compute one outward Machin interval $P_N$ for\n$\\pi$ using the same $N$ and format, with the rational series endpoints\ncombined exactly before final outward conversion. If $P_N$ is non-finite or\nits lower endpoint is not positive, return `inconclusive`. For finite input\n$X=[a,b]$, put $M_X=\\max(|a|,|b|)$, $p_-:=\\inf(P_N)>0$, and\n$K=\\lceil2M_X/p_-\\rceil+1$, with the ceiling computed by exact rational\ncomparisons. For $k>K$, the outward lower endpoint of cell $k$ is\n$(2k-1)p_-/4>M_X$; for $k<-K$, its outward upper endpoint is\n$-(2|k|-1)p_-/4<-M_X$. Thus every cell enclosure that can intersect $X$ is\nin the finite candidate list $-K,\\ldots,K$. Use the fixed canonical cells\n$[k\\pi/2-\\pi/4,k\\pi/2+\\pi/4]$, $k\\in\\mathbb Z$. Enclose each cell using\nexact rational expressions from $P_N$ and let $X_k$ be the interval hull of\nits intersection with $X$; do not round candidate-cell or residual endpoints.\nInclude every cell whose $P_N$ enclosure cannot be ruled out as intersecting\n$X$. Certify the residual enclosure $R=X_k-kP_N/2$ satisfies\n$R\\subseteq[-\\sup(P_N)/4,\\sup(P_N)/4]$, evaluate the corresponding power\npolynomial and add the explicit geometric tail by exact rational interval\narithmetic, then round the final endpoints outward. The tail comes from\n[[lem-trigonometric-identities-machin-and-range-reduction]], and map by the\nquarter-period identities. If the input width is at least $2\\sup(P_N)$,\nreturn $[-1,1]$. If a cell cannot be certified in the reduced interval or the\nfinite candidate list cannot be resolved, return `inconclusive`. For tangent,\ndivide the sine enclosure by the cosine enclosure only on canonical pieces\nwhere the latter excludes zero; otherwise return `split-domain` or\n`inconclusive`.\n\n5. For complex exponential, evaluate real $\\exp(X)$, $\\cos(Y)$ and\n$\\sin(Y)$ and combine them by rectangle operations. For principal\n$\\operatorname{Log}$, require a rectangle excluding zero and every point of\nthe negative real branch cut; otherwise return `domain-error`. Subdivide into\nsign-stable quadrants and axis pieces; on the quadrants use\n$$\n\\operatorname{Arg}(x+iy)=\n\\begin{cases}\n\\arctan(y/x),&x>0,\\ y>0,\\\\\n-\\arctan((-y)/x),&x>0,\\ y<0,\\\\\n\\pi-\\arctan(y/(-x)),&x<0,\\ y>0,\\\\\n-\\pi+\\arctan((-y)/(-x)),&x<0,\\ y<0.\n\\end{cases}\n$$\nFor $x=0,y>0$ set $\\operatorname{Arg}(iy)=\\pi/2$, for $x=0,y<0$ set it to\n$-\\pi/2$, and on the positive real axis set it to zero. Enclose\n$\\ln\\sqrt{X^2+Y^2}$ by the real operations and elementary evaluators. If the\nbranch or sign cannot be certified, return `inconclusive`.\n\n6. Each displayed series uses indices $0,\\ldots,N$, hence at most $N+1$\nterms; $N$ is the truncation index. Branch breakpoints, dyadic scales and\n$P_N$ are fixed by the call parameters, independent of the input box; no\nadaptive subdivision or precision refinement is hidden inside this evaluator.",
+        "dependency_level": 9,
+        "justified_by": [
+          "thm-real-elementary-range-enclosures",
+          "thm-complex-elementary-range-enclosures"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rump, Rigorous and Portable Standard Functions, §§5–7 and 10",
+              "url": "https://www.tuhh.de/ti3/paper/rump/Ru01b.pdf"
+            },
+            {
+              "title": "Kearfott, Interval Computations: Introduction, Uses, and Resources, §§1–2",
+              "url": "https://interval.louisiana.edu/preprints/survey.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-centered-taylor-model-encloses-function-range",
+        "kind": "theorem",
+        "title": "Centered Taylor models with derivative intervals enclose the function range",
+        "deps": [
+          "def-centered-taylor-model-with-derivative-interval",
+          "lem-taylor-integral-remainder",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "statement": "Under the hypotheses in\n[[def-centered-taylor-model-with-derivative-interval]],\n$f(X)\\subseteq\\mathcal T_n(f,X,c,(C_j)_{j=0}^n,D)$. For $n=0$ this gives\n$f(X)\\subseteq C_0+[-M R,M R]$.",
+        "dependency_level": 9,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §11.6",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-budgeted-validated-range-evaluation",
+        "kind": "algorithm",
+        "title": "Finite-budget validated range evaluation",
+        "deps": [
+          "alg-certified-elementary-range-evaluation",
+          "def-intervals-rectangles-and-complex-balls",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "statement": "Input: a finite expression DAG, a closed interval/rectangle domain box $X$, a\ndyadic requested width $\\varepsilon>0$, finite-format parameters, series\ntruncation index $N\\ge1$, and integer total box-split budget $B\\ge0$. Set a shared counter\n$R:=B$ and a queue containing $X$. Process boxes in a fixed order. For each\nbox $Q$, evaluate the DAG by\n[[alg-certified-elementary-range-evaluation]] with the same format and $N$.\n\n- If evaluation returns a non-finite status, return that status and the exact\n  unresolved box $Q$; it is not a tolerance certificate.\n- If it returns a finite enclosure $I$ with width at most $\\varepsilon$, save\n  $I$ as a completed leaf enclosure.\n- If it returns a finite enclosure wider than $\\varepsilon$ and $R=0$, return\n  `inconclusive` with the completed-leaf hull, $Q$, and the unmet width test.\n- If it returns a finite enclosure wider than $\\varepsilon$ and $R>0$, select\n  a widest nondegenerate input coordinate (breaking ties by the first\n  coordinate in the input order), split it at its dyadic midpoint\n  into two closed halves, decrement the shared counter $R$ by one, and append\n  both halves to the queue. If no coordinate can be split, return\n  `inconclusive` with the unmet width test.\n\nWhen the queue is empty, take the hull $J$ of all completed leaf enclosures.\nReturn `certified(J,X)` only if $\\operatorname{width}(J)\\le\\varepsilon$;\notherwise return `inconclusive(J,X)` and state that the global width test\nfailed. Each split covers its parent because the two closed halves overlap at\nthe midpoint and their union is the parent coordinate interval. The shared\ncounter makes $B$ a total split limit across the full computation.",
+        "dependency_level": 10,
+        "justified_by": [
+          "thm-budgeted-range-evaluation-terminates-and-is-sound"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kearfott, Interval Computations: Introduction, Uses, and Resources, §§1–2",
+              "url": "https://interval.louisiana.edu/preprints/survey.pdf"
+            },
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §8.3",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-real-elementary-range-enclosures",
+        "kind": "theorem",
+        "title": "Certified real elementary-function evaluations enclose their ranges",
+        "deps": [
+          "alg-certified-elementary-range-evaluation",
+          "def-real-elementary-functions-and-domains",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "lem-range-reduced-exp-log-and-arctan-series-enclosures",
+          "lem-trigonometric-identities-machin-and-range-reduction",
+          "lem-mean-value-theorem-on-closed-interval"
+        ],
+        "statement": "Every finite enclosure returned by\n[[alg-certified-elementary-range-evaluation]] for a real interval in the\ndomain of $\\exp$, $\\ln$, $\\sqrt{\\phantom{x}}$, $\\arctan$, $\\sin$, $\\cos$, or\n$\\tan$ contains the exact range of that function on the represented domain.\nIf two input intervals are nested and both calls return finite enclosures,\nthe canonical branch-cell and fixed-term construction in the algorithm makes\nthe smaller interval's computed enclosure a subset of the larger one's.\nAn unresolved fixed branch, pole, invalid domain or overflow returns its\nstated non-finite status and carries no finite success claim.",
+        "dependency_level": 10,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rump, Rigorous and Portable Standard Functions, §§5–7",
+              "url": "https://www.tuhh.de/ti3/paper/rump/Ru01b.pdf"
+            },
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §§5–8",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-complex-elementary-range-enclosures",
+        "kind": "theorem",
+        "title": "Certified complex exponential and principal logarithm enclose their ranges",
+        "deps": [
+          "alg-certified-elementary-range-evaluation",
+          "thm-real-elementary-range-enclosures",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "def-outward-rounded-interval-and-ball-operations",
+          "def-real-elementary-functions-and-domains",
+          "lem-trigonometric-identities-machin-and-range-reduction"
+        ],
+        "statement": "For any finite complex rectangle on which the principal branch is defined,\nevery finite output of [[alg-certified-elementary-range-evaluation]] for\n$\\exp$ or $\\operatorname{Log}$ contains the exact image. For nested rectangles\nwithin the same admissible branch, the canonical quadrant subdivision and\noutward operations preserve inclusion. Rectangles meeting zero, the negative\nreal branch cut, or an unresolved quadrant return the declared domain or\ninconclusive status.",
+        "dependency_level": 11,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rump, Rigorous and Portable Standard Functions, §10",
+              "url": "https://www.tuhh.de/ti3/paper/rump/Ru01b.pdf"
+            },
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §§5.1–5.5 and 7",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-budgeted-range-evaluation-terminates-and-is-sound",
+        "kind": "theorem",
+        "title": "Budgeted range evaluation terminates and certifies only sound enclosures",
+        "deps": [
+          "alg-budgeted-validated-range-evaluation",
+          "thm-real-elementary-range-enclosures",
+          "thm-complex-elementary-range-enclosures"
+        ],
+        "statement": "For every finite input DAG and finite total split budget $B$, the algorithm\n[[alg-budgeted-validated-range-evaluation]] terminates. If it returns\n`certified(I,X)`, then $I$ contains the exact function range on all of $X$ and\nhas width at most the requested $\\varepsilon$. If it returns `inconclusive`,\ndomain error, split-domain, or overflow, it makes no unconditional\ntolerance-success claim.",
+        "dependency_level": 12,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kearfott, Interval Computations: Introduction, Uses, and Resources, §§1–2",
+              "url": "https://interval.louisiana.edu/preprints/survey.pdf"
+            },
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §8.3",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2313,
+    "id": "outward-rounded-interval-and-ball-arithmetic-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Outward rounded interval and ball arithmetic — Examples",
+    "companion": "outward-rounded-interval-and-ball-arithmetic",
+    "requires": [
+      "outward-rounded-interval-and-ball-arithmetic"
+    ],
+    "items": [
+      {
+        "id": "ex-division-by-interval-containing-zero",
+        "kind": "example",
+        "title": "Division by an interval containing zero has no finite hull",
+        "deps": [
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "statement": "Take numerator interval $X=[1,2]$ and divisor interval $Y=[-1,1]$. The exact\nquotient set over $y\\ne0$ is unbounded above and below. Therefore no finite\ninterval is a sound hull; the permitted results are a sign split or an\n`entire`/`inconclusive` status.",
+        "dependency_level": 5,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kearfott, Interval Computations: Introduction, Uses, and Resources, §1",
+              "url": "https://interval.louisiana.edu/preprints/survey.pdf"
+            },
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §§5.1 and 5.4",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-interval-subtraction-dependency",
+        "kind": "example",
+        "title": "Natural interval subtraction loses repeated-input correlation",
+        "deps": [
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "statement": "Let the single real input $x$ range over $X=[1,2]$, and evaluate the expression\nDAG $f(x)=x-x$ by its natural interval extension. The exact range is\n$f(X)=\\{0\\}$, while the interval computation returns $X-X=[-1,1]$. Both\nendpoints are sound, but the output is wider because the two occurrences of\n$x$ are evaluated as independent members of $X$.",
+        "dependency_level": 5,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kearfott, Interval Computations: Introduction, Uses, and Resources, §1",
+              "url": "https://interval.louisiana.edu/preprints/survey.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-certified-sine-near-a-multiple-of-pi",
+        "kind": "example",
+        "title": "Certified sine range near a multiple of pi",
+        "deps": [
+          "alg-certified-elementary-range-evaluation",
+          "alg-budgeted-validated-range-evaluation",
+          "thm-real-elementary-range-enclosures",
+          "thm-budgeted-range-evaluation-terminates-and-is-sound",
+          "lem-trigonometric-identities-machin-and-range-reduction",
+          "lem-range-reduced-exp-log-and-arctan-series-enclosures",
+          "lem-continuous-functions-riemann-integrable"
+        ],
+        "statement": "Use truncation index $N=12$ (13 retained terms) and the finite format\n$p=128$, $e_{\\min}=-512$, $e_{\\max}=512$. Form the Machin interval $P$\nfrom exact rational partial\nsums and the alternating-series tail bounds, and round only its final two\nendpoints outward. The formula in the trigonometric lemma gives\n$$\n\\operatorname{width}(P)\\le\n\\frac{32(1/5)^{27}}{27(1-1/25)}+\n\\frac{8(1/239)^{27}}{27(1-1/239^2)}+2\\cdot2^{-126}<10^{-18}.\n$$\nLet $X=2P$, request width $\\varepsilon=1$, and use total box-split budget\n$B=0$. The certified sine evaluator uses the canonical cell $k=4$ and the\nrange reduction centered at $2\\pi$.",
+        "dependency_level": 13,
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rump, Rigorous and Portable Standard Functions, §7",
+              "url": "https://www.tuhh.de/ti3/paper/rump/Ru01b.pdf"
+            },
+            {
+              "title": "Rump, Verification methods: Rigorous results using floating-point arithmetic, §7",
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

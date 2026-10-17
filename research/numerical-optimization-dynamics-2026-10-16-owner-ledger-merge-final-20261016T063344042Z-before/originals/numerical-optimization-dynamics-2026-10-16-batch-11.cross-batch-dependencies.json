@@ -1,0 +1,82 @@
+[
+  {
+    "kind": "page",
+    "consumer": "finite-bit-random-streams-and-variate-generation",
+    "supplier": "outward-rounded-interval-and-ball-arithmetic",
+    "status": "owner-escalation",
+    "batch": "14",
+    "supplier_item_ids": [
+      "alg-budgeted-validated-range-evaluation",
+      "thm-budgeted-range-evaluation-terminates-and-is-sound"
+    ],
+    "required_interface": "Fixed deterministic finite log/root interval evaluation with explicit failure and certified widths.",
+    "supplier_excerpts": [
+      {
+        "item": "alg-budgeted-validated-range-evaluation",
+        "section": "Definition",
+        "quote": "Input: a finite expression DAG, a closed interval/rectangle domain box $X$, a\ndyadic requested width $\\varepsilon>0$, finite-format parameters, series\ntruncation index $N\\ge1$, and integer total box-split budget $B\\ge0$. Set a shared counter\n$R:=B$ and a queue containing $X$. Process boxes in a fixed order. For each\nbox $Q$, evaluate the DAG by\n[[alg-certified-elementary-range-evaluation]] with the same format and $N$.\n\n- If evaluation returns a non-finite status, return that status and the exact\n  unresolved box $Q$; it is not a tolerance certificate.\n- If it returns a finite enclosure $I$ with width at most $\\varepsilon$, save\n  $I$ as a completed leaf enclosure.\n- If it returns a finite enclosure wider than $\\varepsilon$ and $R=0$, return\n  `inconclusive` with the completed-leaf hull, $Q$, and the unmet width test.\n- If it returns a finite enclosure wider than $\\varepsilon$ and $R>0$, select\n  a widest nondegenerate input coordinate (breaking ties by the first\n  coordinate in the input order), split it at its dyadic midpoint\n  into two closed halves, decrement the shared counter $R$ by one, and append\n  both halves to the queue. If no coordinate can be split, return\n  `inconclusive` with the unmet width test.\n\nWhen the queue is empty, take the hull $J$ of all completed leaf enclosures.\nReturn `certified(J,X)` only if $\\operatorname{width}(J)\\le\\varepsilon$;\notherwise return `inconclusive(J,X)` and state that the global width test\nfailed. Each split covers its parent because the two closed halves overlap at\nthe midpoint and their union is the parent coordinate interval. The shared\ncounter makes $B$ a total split limit across the full computation."
+      },
+      {
+        "item": "thm-budgeted-range-evaluation-terminates-and-is-sound",
+        "section": "Statement",
+        "quote": "For every finite input DAG and finite total split budget $B$, the algorithm\n[[alg-budgeted-validated-range-evaluation]] terminates. If it returns\n`certified(I,X)`, then $I$ contains the exact function range on all of $X$ and\nhas width at most the requested $\\varepsilon$. If it returns `inconclusive`,\ndomain error, split-domain, or overflow, it makes no unconditional\ntolerance-success claim."
+      }
+    ],
+    "affected_claims": [
+      "alg-box-muller-finite-bit-transform",
+      "thm-box-muller-finite-bit-coupling-error"
+    ],
+    "evidence": "Owner inspected actual supplier bodies and repaired source consumer to call these exact APIs. Fixed configuration must succeed on every b-bit pair with uniform finite certificate upper bounds for the law theorem; no conditioning on sampled success is used. Source page now requires both suppliers. Root-owned canonical manifest order/requirements and native readiness/bindings remain pending; desired A/B orders are2315.25/2315.5. The original nonexistent-candidate allegation is superseded by present bodies."
+  },
+  {
+    "kind": "page",
+    "consumer": "finite-bit-random-streams-and-variate-generation",
+    "supplier": "computed-fast-transforms-and-convolution",
+    "status": "owner-escalation",
+    "batch": "15",
+    "supplier_item_ids": [
+      "alg-na-certified-unit-circle-phase",
+      "thm-na-certified-unit-circle-phase-enclosure"
+    ],
+    "required_interface": "Existing finite certified canonical unit-circle phase at q=2v, including its existing pi bridge and width-sum modulus certificate.",
+    "supplier_excerpts": [
+      {
+        "item": "alg-na-certified-unit-circle-phase",
+        "section": "Definition",
+        "quote": "Input an exact rational $q$, a target $0<\\tau\\le1/4$, a dyadic exponent range, an initial precision $p_0\\ge2$, a finite precision cap $p_{\\max}\\ge p_0$, and a finite elementary-series cap. The target value is $w=e^{\\pi iq}=\\cos(\\pi q)+i\\sin(\\pi q)$ for the canonical Fourier $\\pi$, identified with the interval evaluator's constant by [[thm-na-interval-pi-matches-canonical-fourier-pi]]. For precision $p=p_0,p_0+1,\\ldots,p_{\\max}$, build the finite expression DAG for $\\cos(\\pi q)$ and $\\sin(\\pi q)$, with rational constants enclosed by directed dyadic rounding, and call [[alg-certified-elementary-range-evaluation]] with that precision and series cap; its fixed finite-cell rules govern range reduction. If either result is non-finite, continue at the next precision unless the precision cap is reached, in which case return `inconclusive` with the supplier status. If the results are finite intervals $C=[c_-,c_+]$ and $S=[s_-,s_+]$, set $\\widehat w=c_-+is_-$ and compute an upward-rounded dyadic $\\epsilon\\ge(c_+-c_-)+(s_+-s_-)$. If $\\epsilon\\le\\tau$, return `certified(\\widehat w,\\epsilon)`; otherwise continue or return `inconclusive` at the cap. A non-finite endpoint or overflow returns its explicit failure status. The routine makes no finite-error claim on a failure branch."
+      },
+      {
+        "item": "thm-na-certified-unit-circle-phase-enclosure",
+        "section": "Statement",
+        "quote": "Whenever [[alg-na-certified-unit-circle-phase]] returns `certified(\\widehat w,\\epsilon)` on rational input $q$, its output satisfies $|\\widehat w-e^{\\pi iq}|\\le\\epsilon\\le\\tau$."
+      }
+    ],
+    "affected_claims": [
+      "alg-box-muller-finite-bit-transform",
+      "thm-box-muller-finite-bit-coupling-error"
+    ],
+    "evidence": "Owner inspected actual supplier bodies and repaired source consumer to call these exact APIs. Fixed configuration must succeed on every b-bit pair with uniform finite certificate upper bounds for the law theorem; no conditioning on sampled success is used. Source page now requires both suppliers. Root-owned canonical manifest order/requirements and native readiness/bindings remain pending; desired A/B orders are2315.25/2315.5. The original nonexistent-candidate allegation is superseded by present bodies."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-box-muller-finite-bit-transform",
+    "supplier": "thm-logarithm-derivative-and-integral",
+    "status": "verified",
+    "batch": "published",
+    "supplier_item_ids": [
+      "thm-logarithm-derivative-and-integral"
+    ],
+    "required_interface": "Canonical natural log equals the oriented integral of1/t on positive reals.",
+    "supplier_excerpts": [
+      {
+        "item": "thm-logarithm-derivative-and-integral",
+        "section": "Statement",
+        "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$"
+      }
+    ],
+    "affected_claims": [
+      "Interval log certificate is for the same logarithm used in the Box–Muller law."
+    ],
+    "evidence": "Full published theorem/proof inspected; owning published page is already in T21 transitive page closure. Exact item dependency added, with no duplicate log or pi method."
+  }
+]

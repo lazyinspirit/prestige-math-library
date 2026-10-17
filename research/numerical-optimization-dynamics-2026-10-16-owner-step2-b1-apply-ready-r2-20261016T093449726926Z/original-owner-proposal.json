@@ -1,0 +1,427 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "1",
+  "decision": "proposal-ready",
+  "reason": "Final focused cycle: guarded source replacements below resolve this owner's remaining findings while preserving current root33/root59/native74 changes. Prior individual consumer dispositions carry forward except where updated below. No source, metadata, report, history, counter or control was written. Proposal readiness is not application or native acceptance. Apply Francis first, before the pending batch49 migration. LM application and the published derivative proof remain with their designated owners.",
+  "proposed_edits": [
+    {
+      "path": "items/alg-finite-budget-francis-schur-reduction.md",
+      "exact_current_excerpt": "For each stored reflector with active indices $S=(s_1,\\ldots,s_m)$, vector $v\\in\\mathbb F^m$, and real computed coefficient $\\widehat\\tau$, the real or complex formation routine first performs the stated finite left application.",
+      "replacement": "Before every real or complex formation in steps 1 and 4, test the target vector componentwise for exact zero, including an external initial polynomial vector. If it is zero, mark the stage `identity`, copy all affected matrix entries unchanged, skip formation and both left and right updates, append the embedded identity $P_j=I$ to the product representation, and record $E_j=0$ and arithmetic coefficient $\\alpha_j=\\bar\\alpha_j=0$. Do not evaluate $P(v)$ or a stored-vector norm in this branch. For a matrix target its column is already zero, so its target zero writes change nothing; for an external vector no matrix column is overwritten. Continue with the invariant checks, sweep counters and stopping tests specified below. Record and process every deflation write separately exactly as specified below; this branch does not discard a deflation perturbation. These identity instructions take precedence over the formation/update instructions in steps 1 and 4.\n\nFor each nonidentity stored reflector with active indices $S=(s_1,\\ldots,s_m)$, nonzero vector $v\\in\\mathbb F^m$, and real computed coefficient $\\widehat\\tau$, the real or complex formation routine first performs the stated finite left application.",
+      "mathematical_justification": "For a zero matrix target, the identity leaves both the column and trailing panels unchanged. A zero external polynomial vector supplies no nonidentity reflector. Taking P_j=I and E_j=0 gives the required local relation with zero arithmetic error without dividing by v*v. This guard covers both scalar branches and preserves all existing cost declarations, one-entry deflation norms and outward bookkeeping."
+    },
+    {
+      "path": "items/alg-finite-budget-francis-schur-reduction.md",
+      "exact_current_excerpt": "By [F8], the exact reflector product $Q$ is unitary, so its orthogonality residual is zero.",
+      "replacement": "Every zero-target stage appends $I$ and changes no matrix entry, while every nonidentity successful formation supplies a nonzero stored vector and hence a unitary representative by [F8]. Their finite product $Q$ is therefore unitary, so its orthogonality residual is zero.",
+      "mathematical_justification": "This proves the product claim for both branches of the repaired procedure. Identity stages require no nonzero-vector formula or active-dimension rounding bound."
+    },
+    {
+      "path": "items/alg-complex-scaled-householder-reflector-step.md",
+      "exact_current_excerpt": "1.2 Success requires positive stored-vector squared norm. If $v=0$, its squares and sum are exactly zero, contradicting success. Thus $v\\ne0$, and [F2] makes the representative unitary with its explicit target/separate-block error bounds. [F1, F2, step 1.1, algebra] ∎",
+      "replacement": "1.2 In the nonzero-input formation branch, success requires positive stored-vector squared norm. If $v=0$, its squares and sum are exactly zero, contradicting success in that branch. Thus $v\\ne0$, and [F2] makes $P(v)$ unitary with its explicit target/separate-block error bounds. In the zero-input branch the representative is $I$, the block is copied exactly, and both target and separate-block errors are zero; no expression $P(0)$ is evaluated. [F1, F2, step 1.1, algebra] ∎",
+      "mathematical_justification": "The existing Definition already admits an identity return. The nonzero-vector argument applies only to nonidentity formation; the copied zero-input branch has an independent exact representative and zero error."
+    },
+    {
+      "path": "items/alg-bounded-mixed-precision-iterative-refinement.md",
+      "exact_current_excerpt": "For each $k=0,\\ldots,N$, compute the residual by rows in increasing $i$:",
+      "replacement": "Before entering the iteration loop, initialize the consecutive-equality counter $c_{\\rm stag}=0$ and mark the preceding residual as undefined. Retain this counter and preceding residual across iterations; do not reinitialize them inside the loop. The counter records the number of consecutive equalities between adjacent successfully certified computed residual vectors.\n\nFor each $k=0,\\ldots,N$, compute the residual by rows in increasing $i$:",
+      "mathematical_justification": "With retained state, after K_stag equal adjacent residual comparisons there are K_stag consecutive successful update transitions with unchanged computed residual. Initialization occurs once, including when N=0."
+    },
+    {
+      "path": "items/alg-bounded-mixed-precision-iterative-refinement.md",
+      "exact_current_excerpt": "Initialize the consecutive-equality counter $c_{\\rm stag}=0$ and mark the preceding residual as undefined. Use the exact Euclidean norm of the stored residual vector for the status comparison;",
+      "replacement": "Use the retained consecutive-equality counter and preceding residual. Use the exact Euclidean norm of the stored residual vector for the status comparison;",
+      "mathematical_justification": "Removing the loop-local reset makes the existing comparison, reset, increment and status branches implement the stated finite stagnation criterion. Residual and update certificates remain unchanged."
+    },
+    {
+      "path": "items/thm-kahan-and-neumaier-finite-error-identities.md",
+      "exact_current_excerpt": "$$\\widehat s-\\sum_i x_i=\\sum_i(\\epsilon_i^t+\\epsilon_i^q+\\epsilon_i^a+\\epsilon_i^c)+\\epsilon^f.$$",
+      "replacement": "$$\\widehat s-\\sum_i x_i=\\sum_i(\\epsilon_i^q+\\epsilon_i^a+\\epsilon_i^c)+\\epsilon^f.$$\nThe leading-sum error $\\epsilon_i^t$ cancels from this exact identity; its nonnegative allowance may still be retained in the conservative bound below.",
+      "mathematical_justification": "Each branch forms its correction from the actual computed t_i, so adding t_i back cancels its error. This preserves the Kahan identity and the promised conservative finite bound."
+    },
+    {
+      "path": "items/thm-kahan-and-neumaier-finite-error-identities.md",
+      "exact_current_excerpt": "1.2 In either Neumaier branch exact algebra gives t_i+a_i=s_{i-1}+x_i+epsilon_i^t+epsilon_i^q+epsilon_i^a: substitute q_i=s_{i-1}-t_i in the first branch or q_i=x_i-t_i in the second, including their signed rounding errors. The compensation update adds epsilon_i^c. Summing s_i+c_i-(s_{i-1}+c_{i-1}) telescopes, and the final rounded return adds epsilon^f. [given, F2, F3, algebra]",
+      "replacement": "1.2 In the first Neumaier branch, q_i=s_{i-1}-t_i+epsilon_i^q and a_i=q_i+x_i+epsilon_i^a, so t_i+a_i=s_{i-1}+x_i+epsilon_i^q+epsilon_i^a. In the second branch, q_i=x_i-t_i+epsilon_i^q and a_i=q_i+s_{i-1}+epsilon_i^a give the same identity. Thus the error in forming t_i cancels in both branches. Since s_i=t_i and c_i=c_{i-1}+a_i+epsilon_i^c, summing s_i+c_i-(s_{i-1}+c_{i-1}) telescopes to the corrected Neumaier identity before final rounding; the returned addition contributes epsilon^f. [given, F2, F3, algebra]",
+      "mathematical_justification": "This expands the actually executed rounded nodes and proves cancellation without assuming any subtraction is exact."
+    },
+    {
+      "path": "items/thm-kahan-and-neumaier-finite-error-identities.md",
+      "exact_current_excerpt": "3.1 Taking absolute values and applying [F3] gives exactly uP_i for the four executed operations in iteration i; the final operation contributes u|s_n+c_n|. This proves the displayed Neumaier bound. No step divides by the exact sum, so no uniform relative bound follows. [step 1.2, F3, algebra] ∎",
+      "replacement": "3.1 Take absolute values in the corrected identity. By [F3], the q_i error is bounded by u times the sum of the magnitudes in the first branch-specific term of P_i, the a_i error by u times the second branch-specific term, and the c_i error by u(|c_{i-1}|+|a_i|). Their sum is at most uP_i because the remaining term u(|s_{i-1}|+|x_i|) is nonnegative. The final addition contributes at most u|s_n+c_n|. This proves the unchanged conservative Neumaier bound. No step divides by the exact sum, so no uniform relative bound follows. [step 1.2, F3, algebra] ∎",
+      "mathematical_justification": "The stated P_i remains a valid majorant after epsilon_i^t is removed. The proof now distinguishes equality of the error identity from a conservative inequality."
+    },
+    {
+      "path": "items/alg-sqp-finite-precision-kkt-qr-solve-and-residual-check.md",
+      "exact_current_excerpt": "nonsingular. Assume $Nu<1$, $\\gamma_{N+3}<1/8$, and the successful-operation",
+      "replacement": "nonsingular. Also supply a terminating exact-storage routine which, for each requested real entry, either returns that same value with an exact representability certificate in the selected floating-point set or returns `unavailable`. Before QR, invoke this routine on every entry of the intended $K$ and $b$, in increasing row and column order for $K$ and increasing index for $b$. If any call is unavailable or its equality/representability certificate is not verified, return `numerical-failure` without a solve certificate. Otherwise use these unchanged stored values, still denoted $K,b$, for both the solve and residual evaluation. No rounded conversion is performed: every successful residual certificate below concerns the original intended data. Assume $Nu<1$, $\\gamma_{N+3}<1/8$, and the successful-operation",
+      "mathematical_justification": "Householder and residual suppliers require stored operands. Exact admission establishes that premise while preserving the intended-data residual claim; unavailable representation is an explicit failure rather than an unaccounted data perturbation. Termination of the supplied routine is an input contract, with no universal real-number representation decision or bit-cost claim."
+    },
+    {
+      "path": "items/alg-sqp-finite-precision-kkt-qr-solve-and-residual-check.md",
+      "exact_current_excerpt": "[A1] $N\\ge1$, $Nu<1$, $\\gamma_{N+3}<1/8$, $(N-1)u<1$, all factorization",
+      "replacement": "[A1] The terminating exact-storage admission has succeeded and its stored $K,b$ equal the intended inputs entrywise. Also $N\\ge1$, $Nu<1$, $\\gamma_{N+3}<1/8$, $(N-1)u<1$, all factorization",
+      "mathematical_justification": "This records the exact premise needed by both numerical suppliers without changing the existing beta coefficients or certificate formula."
+    },
+    {
+      "path": "items/alg-sqp-finite-precision-kkt-qr-solve-and-residual-check.md",
+      "exact_current_excerpt": "1.1 By [F4], $K$ is nonsingular and, being square, has full column rank, so [F2] applies under [A1].",
+      "replacement": "1.1 The admission in [A1] supplies stored $K,b$ equal to the intended data; the factorization and transformed right-hand side are therefore admissible stored operands. By [F4], $K$ is nonsingular and, being square, has full column rank, so the perturbation equations of [F2] apply under [A1]. Their additional perturbed-least-squares uniqueness condition is not needed for this residual calculation.",
+      "mathematical_justification": "Successful rounded substitution produces the perturbed triangular equation independently of uniqueness. For square orthogonal Q, multiplying that equation gives the intended-system residual bound used here."
+    },
+    {
+      "path": "items/thm-sqp-finite-precision-kkt-residual-certificate-sound.md",
+      "exact_current_excerpt": "1.1 By [F5], $K$ is nonsingular. Put $r=K\\widehat z-b$.",
+      "replacement": "1.1 By [F1], a successful return includes successful exact-storage admission, so its stored $K,b$ equal the intended data. By [F5], $K$ is nonsingular. Put $r=K\\widehat z-b$ for those same intended data.",
+      "mathematical_justification": "The proof must certify the residual of the caller's data, not an unstated rounded conversion. The existing two upper bounds and inverse-norm argument then apply unchanged."
+    },
+    {
+      "path": "items/alg-fem-control-active-set-sqp-with-finite-residual-status.md",
+      "exact_current_excerpt": "Solve its active KKT system by the finite-precision QR algorithm of [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]]. A failed check or solve records `numerical-failure`,",
+      "replacement": "Pass the intended $K_j$ and right-hand side $-F_{A_j}(z_j)$, together with the required terminating exact-storage routine, to [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]]. Its admission must establish stored values equal to these intended data before solving; an unavailable representation or unverified admission is a failed solve and supplies no residual certificate. A failed check or solve records `numerical-failure`,",
+      "mathematical_justification": "The supplier's new admitted branch preserves the exact linear residual K_j s_j+F_Aj(z_j). The caller already propagates failure and therefore needs no weakened success theorem or conversion allowance."
+    },
+    {
+      "path": "items/lem-rosenbrock-euler-local-defect.md",
+      "exact_current_excerpt": "the step $\\Phi_h(y)$ of [[alg-rosenbrock-euler-step]] satisfies",
+      "replacement": "the exact-arithmetic step $\\Phi_h(y)$ of [[def-rosenbrock-euler-step-map]], with $\\gamma=1$, autonomous field $f$ and exact Jacobian $Df(y)$, satisfies",
+      "mathematical_justification": "The displayed proof is an exact-method defect proof. The exact definition supplies M^-1 f without asserting that a rounded residual-certified stage equals it."
+    },
+    {
+      "path": "items/lem-rosenbrock-euler-local-defect.md",
+      "exact_current_excerpt": "[F1] [[alg-rosenbrock-euler-step]]: at state $y$, the successful stage solves $(I-hDf(y))k=f(y)$ and returns $\\Phi_h(y)=y+hk$.",
+      "replacement": "[F1] [[def-rosenbrock-euler-step-map]]: for the autonomous exact-Jacobian branch with $\\gamma=1$, the exact stage solves $(I-hDf(y))k=f(y)$ and the exact-method update is $\\Phi_h(y)=y+hk$. No finite-precision execution or success status is used.",
+      "mathematical_justification": "This repairs the actual supplier contract while retaining the established FL(B+1) bound and its existing proof."
+    },
+    {
+      "path": "items/lem-rosenbrock-euler-step-map-lipschitz.md",
+      "exact_current_excerpt": "The successful Rosenbrock-Euler step map then satisfies",
+      "replacement": "The exact-arithmetic autonomous exact-Jacobian Rosenbrock-Euler map $\\Phi_h(y)=y+hM_h(y)^{-1}f(y)$ of [[def-rosenbrock-euler-step-map]], with $\\gamma=1$, then satisfies",
+      "mathematical_justification": "The inverse-perturbation argument proves Lipschitz continuity of the exact map. It does not bound differences between arbitrarily chosen residual-certified computed stages."
+    },
+    {
+      "path": "items/lem-rosenbrock-euler-step-map-lipschitz.md",
+      "exact_current_excerpt": "[F1] [[alg-rosenbrock-euler-step]]: $\\Phi_h(y)=y+hM_h(y)^{-1}f(y)$ when $M_h(y)$ is invertible.",
+      "replacement": "[F1] [[def-rosenbrock-euler-step-map]]: in the autonomous exact-Jacobian branch with $\\gamma=1$, the exact-method map is $\\Phi_h(y)=y+hM_h(y)^{-1}f(y)$ when $M_h(y)$ is invertible.",
+      "mathematical_justification": "This supplies exactly the formula used in Proofs 1.3–1.4 without importing rounded execution."
+    },
+    {
+      "path": "items/thm-rosenbrock-euler-global-first-order.md",
+      "exact_current_excerpt": "Let an exact solution $y(t)$ and the numerical iterates $Y_n$ stay in $K$",
+      "replacement": "Let an exact solution $y(t)$ and the exact-method iterates $Y_{n+1}=\\Phi_h(Y_n)$ of the autonomous exact-Jacobian map [[def-rosenbrock-euler-step-map]] with $\\gamma=1$ stay in $K$",
+      "mathematical_justification": "The error recurrence is for exact-method iterates. General computed iterations retain the separate residual terms in the newer first-order-error theorem."
+    },
+    {
+      "path": "items/thm-rosenbrock-euler-global-first-order.md",
+      "exact_current_excerpt": "[F1] [[alg-rosenbrock-euler-step]] defines the step map $\\Phi_h$ by the exact solve $(I-hDf(y))k=f(y)$ and $y^+=y+hk$.",
+      "replacement": "[F1] [[def-rosenbrock-euler-step-map]] defines the autonomous exact-Jacobian map with $\\gamma=1$ by the exact solve $(I-hDf(y))k=f(y)$ and $\\Phi_h(y)=y+hk$.",
+      "mathematical_justification": "This is the exact map used in the stated recurrence and avoids an unsupported exact-output assertion about the rounded algorithm."
+    },
+    {
+      "path": "items/thm-rosenbrock-euler-global-first-order.md",
+      "exact_current_excerpt": "[F2] [[lem-rosenbrock-euler-local-defect]] gives $\\|\\Phi_h(y(t_j))-y(t_{j+1})\\|\\le C_0h^2$.",
+      "replacement": "[F2] Apply [[lem-rosenbrock-euler-local-defect-and-residual-error]] to the autonomous extension $\\bar f(t,y)=f(y)$, with $\\gamma=1$, $\\widetilde J=J=Df(y(t_j))$, $\\delta=0$, $\\kappa_0=\\kappa_1=B$, and the exact stage, whose residual is zero. The $C^2$ hypothesis supplies that lemma's regularity, and along the solution $\\bar f_t=0$ and $\\|D_y\\bar f\\,\\bar f\\|\\le LF$, so take $M_1=LF$. Its bound gives $\\|\\Phi_h(y(t_j))-y(t_{j+1})\\|\\le FL(B+1/2)h^2=C_0h^2$.",
+      "mathematical_justification": "The current residual-defect lemma proves the half-factor integral remainder. Specialization yields the promised sharper constant without falsely attributing it to the older FL(B+1) lemma."
+    },
+    {
+      "path": "items/thm-rosenbrock-euler-a-l-stable.md",
+      "exact_current_excerpt": "Apply [[alg-rosenbrock-euler-step]] to $y'=\\lambda y$ over $\\mathbb C$, with exact Jacobian $J=\\lambda$ and $z=h\\lambda$. Its scalar amplification factor is $R(z)=(1-z)^{-1}$. For this statement, A-stability means $|R(z)|\\le1$ for every $z$ with $\\operatorname{Re}z\\le0$, and L-stability means A-stability together with $R(z)\\to0$ as real $z\\to-\\infty$. The method is both A-stable and L-stable, and its scalar amplification factor agrees with backward Euler.",
+      "replacement": "Consider the exact-arithmetic Rosenbrock-Euler map of [[def-rosenbrock-euler-step-map]] with $\\gamma=1$, exact Jacobian, and its complex scalar test equation $y'=\\lambda y$, $z=h\\lambda$. The complexification is the real two-dimensional exact map under $(\\operatorname{Re}y,\\operatorname{Im}y)$, with multiplication by $\\lambda$ represented by $C_\\lambda=\\begin{pmatrix}\\operatorname{Re}\\lambda&-\\operatorname{Im}\\lambda\\\\\\operatorname{Im}\\lambda&\\operatorname{Re}\\lambda\\end{pmatrix}$. Thus its exact stage equation is $(I_2-hC_\\lambda)k=C_\\lambda y$, equivalently $(1-z)k=\\lambda y$, and its update is $y+hk$. This is the $\\gamma=1$ exact complexification used in [[thm-rosenbrock-euler-scalar-a-and-l-stability]], not execution of a real rounded solver. Its amplification factor is $R(z)=(1-z)^{-1}$. A-stability means no pole and $|R(z)|\\le1$ throughout $\\operatorname{Re}z\\le0$; L-stability additionally means $R(z)\\to0$ as $|z|\\to\\infty$ within that half-plane. The exact method is both A-stable and L-stable, and its amplification factor agrees with backward Euler.",
+      "mathematical_justification": "Complex scalar multiplication is precisely the displayed real 2-by-2 linear map. This preserves the exact stability claim, fixes gamma=1, avoids invoking the real rounded backend over complex inputs, and uses the full half-plane L-stability criterion."
+    },
+    {
+      "path": "items/thm-rosenbrock-euler-a-l-stable.md",
+      "exact_current_excerpt": "[F1] [[alg-rosenbrock-euler-step]] gives $y^+=y+hk$ with $(1-h\\lambda)k=\\lambda y$.",
+      "replacement": "[F1] [[def-rosenbrock-euler-step-map]] gives the real exact-Jacobian equation and update at $\\gamma=1$. Under the real two-dimensional representation in the Statement these are exactly $y^+=y+hk$ and $(1-h\\lambda)k=\\lambda y$; [[thm-rosenbrock-euler-scalar-a-and-l-stability]] uses the same exact complexification and rational-function stability criteria.",
+      "mathematical_justification": "The exact definition and current native74 scalar supplier have the required domain and arithmetic semantics."
+    },
+    {
+      "path": "items/thm-rosenbrock-euler-a-l-stable.md",
+      "exact_current_excerpt": "1.2 For $\\operatorname{Re}z\\le0$, $|1-z|^2=1-2\\operatorname{Re}z+|z|^2\\ge1$, whence $|R(z)|\\le1$. For real $z\\to-\\infty$, $|(1-z)^{-1}|\\to0$. These are exactly the stated A- and L-stability conditions. [given, step 1.1, algebra] ∎",
+      "replacement": "1.2 For $\\operatorname{Re}z\\le0$, $|1-z|^2=1-2\\operatorname{Re}z+|z|^2\\ge1+|z|^2>0$. Hence there is no pole there and $|R(z)|\\le1/\\sqrt{1+|z|^2}\\le1$. The same bound tends to zero whenever $|z|\\to\\infty$ within the closed left half-plane. These prove the stated A- and full L-stability conditions. [given, F1, step 1.1, algebra] ∎",
+      "mathematical_justification": "The uniform bound proves the full complex half-plane limit, rather than only the negative-real-axis limit."
+    },
+    {
+      "path": "items/thm-rosenbrock-euler-one-newton-step-for-backward-euler.md",
+      "exact_current_excerpt": "Consequently, the state $y+s_1$ equals the Rosenbrock-Euler output.",
+      "replacement": "Consequently, the state $y+s_1$ equals the exact-arithmetic autonomous exact-Jacobian Rosenbrock-Euler map [[def-rosenbrock-euler-step-map]] with $\\gamma=1$.",
+      "mathematical_justification": "The Newton correction is an exact algebraic identity. It does not imply an exact returned value or success of a rounded implementation."
+    },
+    {
+      "path": "items/thm-rosenbrock-euler-one-newton-step-for-backward-euler.md",
+      "exact_current_excerpt": "[F1] [[alg-rosenbrock-euler-step]] returns $y+h(I-hDf(y))^{-1}f(y)$ whenever the stage matrix is invertible.",
+      "replacement": "[F1] [[def-rosenbrock-euler-step-map]]: the exact-arithmetic autonomous exact-Jacobian map at $\\gamma=1$ is $y+h(I-hDf(y))^{-1}f(y)$ whenever the stage matrix is invertible.",
+      "mathematical_justification": "This supplies the exact formula used in Proof 1.3 under precisely its invertibility premise."
+    },
+    {
+      "path": "items/ex-rosenbrock-euler-stiff-linear-damping.md",
+      "exact_current_excerpt": "**Given:** $f(y)=-10y$, $y_n=1$, and $h=1/5$.",
+      "replacement": "**Given:** $f(y)=-10y$, $y_n=1$, $h=1/5$, and exact-arithmetic stage equations with $\\gamma=1$.",
+      "mathematical_justification": "The displayed output 1/3 is an exact-method calculation, not generally a representable returned floating-point value."
+    },
+    {
+      "path": "items/ex-rosenbrock-euler-stiff-linear-damping.md",
+      "exact_current_excerpt": "[F1] [[alg-rosenbrock-euler-step]] solves $(1-h\\lambda)k=\\lambda y_n$ and returns $y_{n+1}=y_n+hk$.",
+      "replacement": "[F1] [[def-rosenbrock-euler-step-map]]: the exact scalar method with $\\gamma=1$ solves $(1-h\\lambda)k=\\lambda y_n$ and has update $y_{n+1}=y_n+hk$.",
+      "mathematical_justification": "The unchanged verification then follows from the actual exact supplier; the repaired older stability theorem supplies its exact amplification factor."
+    },
+    {
+      "path": "items/ex-two-stage-rosenbrock-factorization-reuse.md",
+      "exact_current_excerpt": "Choose a stored finite system containing $0,\\pm\\frac12,\\pm1,\\pm2,\\pm4$ in its normal range, with unit roundoff $0<u\\le1/100$.",
+      "replacement": "Choose a stored finite system containing zero and the normal values $\\pm\\frac12,\\pm1,\\pm2,\\pm4,\\pm8$, with unit roundoff $0<u\\le1/100$.",
+      "mathematical_justification": "Both RHS replays form magnitude-8 dots and updates. Exact representability and normality of these values are sufficient for the explicitly verified operations; they do not guarantee exactness of arbitrary solves."
+    },
+    {
+      "path": "items/ex-two-stage-rosenbrock-factorization-reuse.md",
+      "exact_current_excerpt": "2.1 The first RHS is $f(y)=(-1,-4)^T$. The stored reflectors send it to $(1,4)^T$, and back substitution with $R=-I_2$ gives $k_1=(-1,-4)^T$.",
+      "replacement": "2.1 The first RHS is $f(y)=(-1,-4)^T$. In the first reflector replay the dot is $-2$ and the active vector $p=\\widehat\\tau v$ is $(1,0)^T$, so the update sends $(-1,-4)^T$ to $(1,-4)^T$. The second replay has dot $-8$ and scalar $p=1$, so it sends the second coordinate to $-4-(-8)=4$. Every replay product, accumulated sum and subtraction is zero or one of the stipulated normal values, hence is represented exactly by [F5]. Thus the transformed RHS is $(1,4)^T$, and descending substitution with $R=-I_2$ has zero off-diagonal products and exact divisions by $-1$, giving $k_1=(-1,-4)^T$.",
+      "mathematical_justification": "This checks the successful rounded execution node by node for the first RHS, including the previously omitted -8 intermediate."
+    },
+    {
+      "path": "items/ex-two-stage-rosenbrock-factorization-reuse.md",
+      "exact_current_excerpt": "3.1 The second RHS is $F_1-k_1=(1/2,4)^T$. The same stored reflectors send it to $(-1/2,-4)^T$ and back substitution gives $q_2=(1/2,4)^T$.",
+      "replacement": "3.1 The second RHS is $F_1-k_1=(1/2,4)^T$. The first stored reflector has dot $1$ and active $p=(1,0)^T$, so it sends the first coordinate to $1/2-1=-1/2$ and leaves the second at $4$. The second reflector has dot $8$ and scalar $p=1$, so it sends the second coordinate to $4-8=-4$. All replay products, sums and subtractions are again zero or stipulated normal represented values. Descending substitution with $R=-I_2$ is exact as in step 2.1 and gives $q_2=(1/2,4)^T$.",
+      "mathematical_justification": "This verifies the second RHS replay and solve without asserting automatic exactness from the format alone. Native74's terminating evaluator assumptions and residual-certificate proof remain unchanged."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-finite-budget-francis-schur-reduction",
+      "status": "repair-proposed",
+      "evidence": "The universal pre-formation guard covers Hessenberg initialization, matrix-target chases and external polynomial vectors in both scalar branches. Identity stages append I, skip both updates and contribute zero arithmetic error; invariant/status tests and separate signed deflation bookkeeping remain in force."
+    },
+    {
+      "id": "alg-complex-scaled-householder-reflector-step",
+      "status": "repair-proposed",
+      "evidence": "Only Proof 1.2 changes: nonzero stored-vector reasoning is restricted to nonidentity formation, while the existing zero-input Definition is justified by I and zero error. No interface change or new caller requirement is proposed."
+    },
+    {
+      "id": "lem-two-sided-scaled-householder-similarity-error",
+      "status": "supported",
+      "evidence": "Its identity branch already skips both updates and uses E=0. The proposed Francis guard implements that premise. Its nonidentity a+b+ab calculation and target-versus-separate-panel distinction remain unchanged."
+    },
+    {
+      "id": "thm-computed-francis-schur-backward-error",
+      "status": "repair-proposed",
+      "evidence": "After the caller guard, every identity stage has P_j=I, E_j=0 and alpha_j=0, as required by the current concrete-instance paragraph. The general conditional accumulation proof and current outward recurrence require no rewrite."
+    },
+    {
+      "id": "alg-bartels-stewart-sylvester-equation",
+      "status": "repair-proposed",
+      "evidence": "Its delegated real/complex Francis calls become defined at zero targets after the supplier repair. Step 2 still independently checks exact Schur identities, so no rounded candidate is accepted as an exact factorization."
+    },
+    {
+      "id": "thm-bartels-stewart-dense-operation-count",
+      "status": "repair-proposed",
+      "evidence": "The zero-target comparison and identity marker cost O(m) for a target of length m and skip matrix updates. Existing cubic initialization, bounded-support sweep and direct certificate-cost bounds remain valid; root33's one-entry deflation norm is preserved."
+    },
+    {
+      "id": "thm-bartels-stewart-sylvester-exact-correctness",
+      "status": "supported",
+      "evidence": "The proof remains conditional on verified exact Schur identities and exact local block solves. Adding a defined identity route upstream does not change its block substitution equations or uniqueness premise."
+    },
+    {
+      "id": "alg-schur-parlett-matrix-function",
+      "status": "repair-proposed",
+      "evidence": "Its Francis candidate generation and delegated Bartels-Stewart solves inherit the identity repair. Exact Schur/Jordan/local-solve admissions and its lack of a floating-point stability claim remain intact."
+    },
+    {
+      "id": "thm-schur-parlett-recurrence-correctness",
+      "status": "supported",
+      "evidence": "The induction consumes exact admitted factors and exact unique block solves, not a rounded-success-to-exact-factorization inference. The Francis repair changes only previously undefined candidate-generation paths."
+    },
+    {
+      "id": "alg-principal-matrix-logarithm-and-square-root",
+      "status": "repair-proposed",
+      "evidence": "Its complex Francis call receives a defined zero-target route. Exact Schur verification and branch-domain checks remain prerequisites before analytic evaluation."
+    },
+    {
+      "id": "ex-rotation-logarithm-branch-cut",
+      "status": "supported",
+      "evidence": "The specific n=2, zero-sweep call performs no Hessenberg reflector formation and still returns Q=I,T=-I. Its exact branch-cut rejection is unchanged."
+    },
+    {
+      "id": "computed-schur-decompositions-and-nonnormal-spectra",
+      "status": "supported",
+      "evidence": "The current page summary distinguishes represented unitary products, conditional local coefficients, separate deflations and inconclusive certificates. The identity guard makes that advertised procedure consistent without altering the summary."
+    },
+    {
+      "id": "alg-bounded-mixed-precision-iterative-refinement",
+      "status": "repair-proposed",
+      "evidence": "Moving initialization before the loop and retaining state makes K_stag consecutive adjacent equalities reachable. The tolerance, budget, certificate-failure and update branches retain their current order."
+    },
+    {
+      "id": "thm-mixed-precision-refinement-error-recurrence-and-floor",
+      "status": "supported",
+      "evidence": "The recurrence uses accepted residual and residual-equivalent update defects. Correcting the status counter neither changes those equations nor promises further iterations after a terminal status."
+    },
+    {
+      "id": "thm-kahan-and-neumaier-finite-error-identities",
+      "status": "repair-proposed",
+      "evidence": "Both actual correction branches cancel t_i's rounding error exactly. The Kahan part is untouched, and unchanged P_i remains a conservative bound because its discarded leading-sum allowance is nonnegative."
+    },
+    {
+      "id": "ex-neumaier-recovers-low-order-term-after-cancellation",
+      "status": "supported",
+      "evidence": "The new Statement cone has this one direct item consumer. Its binary64 nodes give epsilon_2^t=-2^-53, zero correction/compensation/final errors and exact output 2^-53. Its F2 wording refers to executed corrections and final rounding, which matches the repaired identity; no example edit is needed."
+    },
+    {
+      "id": "finite-precision-direct-factorizations",
+      "status": "supported",
+      "evidence": "The page inventories the changed refinement algorithm and Neumaier theorem but states no erroneous epsilon_t formula. Its finite-precision contracts, local proofs and conditional-success summary remain accurate after application."
+    },
+    {
+      "id": "finite-precision-direct-factorizations-examples",
+      "status": "supported",
+      "evidence": "The indirect Neumaier consumer page promises compensation after cancellation and retains the verified example. It states no specific error identity requiring repair."
+    },
+    {
+      "id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+      "status": "repair-proposed",
+      "evidence": "Exact admission precedes every numerical use of intended K,b. Successful stored operands equal intended data; otherwise numerical-failure returns no certificate. The explicit beta_K and independent residual allowance remain valid without the optional raw-20gamma checks."
+    },
+    {
+      "id": "thm-sqp-finite-precision-kkt-residual-certificate-sound",
+      "status": "repair-proposed",
+      "evidence": "Its proof now obtains unchanged stored inputs from successful admission before applying both bounds. The claimed residual and inverse-norm error therefore remain for the original intended K,b."
+    },
+    {
+      "id": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+      "status": "repair-proposed",
+      "evidence": "Step 2 explicitly passes intended K_j,-F_Aj(z_j) and propagates unavailable/unverified exact storage as solve failure. Successful eta_j still bounds K_j s_j+F_Aj(z_j); no data-conversion or nonlinear-remainder term is hidden."
+    },
+    {
+      "id": "thm-fem-control-active-set-sqp-finite-budget-certificate",
+      "status": "supported",
+      "evidence": "The intended-data equality established by the repaired caller/supplier closes Proof 1.1's premise. The affine KKT identity and separate exact local convergence claim need no Statement change; nonlinear next-point residuals are still not inferred from linear solve residuals."
+    },
+    {
+      "id": "sqp-active-set-and-augmented-lagrangian-methods",
+      "status": "supported",
+      "evidence": "The page's finite-precision paragraph promises an exact linear-system residual upper bound. The new admission branch preserves that promise on success and adds an explicit failure route rather than weakening the residual target."
+    },
+    {
+      "id": "lem-rosenbrock-euler-local-defect",
+      "status": "repair-proposed",
+      "evidence": "The Statement and F1 now use the exact autonomous gamma=1 map. Its existing FL(B+1) proof is retained; it no longer misattributes an exact inverse result to rounded solver success."
+    },
+    {
+      "id": "lem-rosenbrock-euler-step-map-lipschitz",
+      "status": "repair-proposed",
+      "evidence": "The inverse-difference proof applies to the explicitly defined exact map. This preserves L_*=BL+h_0 B^2 HF and makes no claim about arbitrary residual-certified numerical outputs."
+    },
+    {
+      "id": "thm-rosenbrock-euler-global-first-order",
+      "status": "repair-proposed",
+      "evidence": "The exact-method recurrence is explicit. The current residual-defect lemma, specialized to autonomous f, gamma=1, delta=0 and zero residual, supplies C0=FL(B+1/2); the older weaker local lemma is not falsely cited for that coefficient."
+    },
+    {
+      "id": "thm-rosenbrock-euler-a-l-stable",
+      "status": "repair-proposed",
+      "evidence": "The proposed exact gamma=1 real-2D complexification matches the already repaired native74 scalar supplier. The explicit bound 1/sqrt(1+|z|^2) proves the full half-plane L-limit and preserves A-stability and backward-Euler equality."
+    },
+    {
+      "id": "thm-rosenbrock-euler-one-newton-step-for-backward-euler",
+      "status": "repair-proposed",
+      "evidence": "The Newton correction algebra is unchanged. Its output equality is now explicitly with the exact-method definition, with no assertion of exact rounded output or numerical success."
+    },
+    {
+      "id": "ex-rosenbrock-euler-stiff-linear-damping",
+      "status": "repair-proposed",
+      "evidence": "Its exact k=-10/3 and output 1/3 use the exact gamma=1 definition and the repaired exact stability theorem. The example does not claim those rationals are returned floating-point values."
+    },
+    {
+      "id": "thm-rosenbrock-euler-scalar-a-and-l-stability",
+      "status": "supported",
+      "evidence": "Actual current native74 Statement specifies exact complexification through C_lambda; F2 explicitly disclaims numerical execution, and Proof 4.1 proves the full half-plane limit. The prior F2 finding is already repaired; no edit is proposed."
+    },
+    {
+      "id": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+      "status": "supported",
+      "evidence": "Actual current native74 source has factor(M,u,evaluator), independently callable later RHS solves, explicit rounded substitution/residual order and terminating certified expression evaluation. None of these changes is overwritten by this proposal."
+    },
+    {
+      "id": "ex-two-stage-rosenbrock-factorization-reuse",
+      "status": "repair-proposed",
+      "evidence": "The first RHS replay has dots -2,-8 and the second has 1,8; p is 1 on each nonzero active coordinate. Adding normal +/-8 and verifying these operations closes range success for both exact represented executions while preserving native74 evaluator hypotheses and residual proof."
+    },
+    {
+      "id": "prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves",
+      "status": "supported",
+      "evidence": "The current factor-only object is created once and its solve operation is invoked twice. This proposition is conditional on success and does not infer range success from the example's format assumptions."
+    },
+    {
+      "id": "rosenbrock-and-linearly-implicit-methods",
+      "status": "supported",
+      "evidence": "The current summary separates exact stability analysis, residual-certified stored execution and exact outer operations. The older exact-method source repairs preserve that separation; no page rewrite is proposed."
+    },
+    {
+      "id": "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+      "status": "supported",
+      "evidence": "Current Proof 1.1 uses the published total-derivative theorem only to identify the derivative matrix with the Jacobian through nonzero state basis vectors. This use does not require the omitted v=0 quotient argument. Original3's proof-only completion remains pending and is not duplicated here."
+    },
+    {
+      "id": "lem-rosenbrock-euler-local-defect-and-residual-error",
+      "status": "supported",
+      "evidence": "Current F8/F9 and Proof 1.1 establish total differentiability from componentwise C2 and identify time/state columns on nonzero standard basis vectors. Its continuous-integrand FTC and integral-norm argument give M1 h^2/2. The proposed older global theorem uses its zero-residual specialization."
+    },
+    {
+      "id": "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+      "status": "supported",
+      "evidence": "Current F8/F9 and Proofs 2.1/5.1 use nonzero time/state basis vectors to identify first and second derivative blocks. Chain/product rules act on actual curves independently of the published theorem's omitted zero-direction branch. Native74 regularity and integral repairs remain intact."
+    },
+    {
+      "id": "thm-rosenbrock-euler-global-first-order-error",
+      "status": "supported",
+      "evidence": "Current F8–F10 and Proofs 1.1/4.1 use the published theorem for nonzero coordinate-basis identification. The proof explicitly separates the exact map from computed stage residuals; the older exact-method rerouting does not remove these residual terms."
+    },
+    {
+      "id": "thm-two-stage-rosenbrock-global-order-two",
+      "status": "supported",
+      "evidence": "Current F7–F9 and Proofs 1.2/6.1 identify derivative blocks using nonzero standard joint-variable basis vectors. The local exact defect and both computed residual perturbations remain separate. No Statement narrowing or duplicate published repair is needed."
+    },
+    {
+      "id": "thm-computed-full-rank-least-squares-backward-stability",
+      "status": "supported",
+      "evidence": "Actual current root59 text retains beta_Q+g(1+beta_Q), beta_b and fixed-dimension O(u), and requires beta_Q<=19g/(1+g), beta_b<=20g before granting raw total 20g bounds. Proof 3.1 verifies (1+g)beta_Q+g<=20g. No reverting or reapplication is proposed."
+    },
+    {
+      "id": "ex-nonzero-residual-gauss-newton-is-only-linear",
+      "status": "supported",
+      "evidence": "Actual current root59 Verification 1.1 reads x+x/2+x^3/2=3x/2+x^3/2. The corrected gradient supports the unchanged update and linear-rate calculation; no edit is proposed."
+    },
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "status": "open",
+      "evidence": "The designated original84 merged proposal reconstructs the augmented matrix and obtains a fresh report inside each current-damping attempt, retaining range/status checks. Both current and proposed versions already return zero-step-unverified before pred for computed p=0. No LM edit is included here. Actual current source still differs from the merged proposal, so applied-source binding remains outstanding."
+    },
+    {
+      "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+      "status": "open",
+      "evidence": "Its exact single-trial inequalities remain sound. The repeated-rejection conclusion requires original84's fresh current-damping solve to be applied and bound before this outstanding consumer disposition can close."
+    },
+    {
+      "id": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "status": "open",
+      "evidence": "The exact-mode damping/decrease proof relies on the large-damping lemma's repeated fresh solve. Bind the actual original84 applied source; do not transfer exact convergence to computed candidates."
+    },
+    {
+      "id": "ex-rank-deficient-identifiability-and-lm-step",
+      "status": "supported",
+      "evidence": "Its one exact lambda=1 trial uses no rejected-attempt reuse. The accepted interior p=(5/11,5/11), positive prediction and rho=1 remain valid under the delegated LM proposal."
+    }
+  ],
+  "already_repaired_elsewhere": [
+    "Root59: items/thm-computed-full-rank-least-squares-backward-stability.md now proves raw 20gamma bounds only under explicit beta coefficient checks; its general beta route is retained.",
+    "Root59: items/ex-nonzero-residual-gauss-newton-is-only-linear.md has the corrected middle gradient summand.",
+    "Native74: items/thm-rosenbrock-euler-scalar-a-and-l-stability.md already has exact real-2D complexification, a contextual rounded-algorithm F2 and a full half-plane L-limit proof.",
+    "Native74: the shifted QR solver already has factor-only reusable-object semantics, explicit rounded solve/residual order and terminating certified expression evaluation.",
+    "Native84's current LM source already handles computed p=0 with zero-step-unverified before prediction; the separate merged per-attempt construction proposal remains designated to original84."
+  ],
+  "unresolved": [
+    "Original84 must apply its single merged LM proposal and bind the resulting actual source before closing the repeated-trial LM lemma/theorem dispositions. This receipt neither duplicates that edit nor claims it is applied.",
+    "The actual published thm-total-derivative-computes-directional-and-partial-derivatives proof still divides by ||tv|| without a v=0 branch. Original3 retains ownership of that proof-only completion. The five inspected native74 uses require only nonzero standard basis directions and need no Statement narrowing.",
+    "All proposed edits remain unapplied. Root must check exact current guards, authorize application, reconcile the newly explicit mathematical supplier uses, and perform its own metadata/recertification/native owner resolution. The prior 86-item receipt remains the carried-forward reading record; this focused proposal is not a replacement native review or acceptance."
+  ]
+}

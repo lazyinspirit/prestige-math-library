@@ -1,0 +1,251 @@
+{
+  "group": "o",
+  "batches": [
+    "16"
+  ],
+  "pages_read": [
+    "sparse-direct-elimination-and-ordering",
+    "sparse-direct-elimination-and-ordering-examples"
+  ],
+  "items_read": [
+    "alg-threshold-partial-pivot-sparse-lu",
+    "def-hermitian-structural-graph-adapter",
+    "alg-nested-dissection-ordering-on-regular-grids",
+    "lem-filled-edge-path-characterisation",
+    "thm-threshold-sparse-lu-residual-with-growth",
+    "def-elimination-tree-and-column-reach",
+    "lem-nested-dissection-fronts-are-boundary-limited",
+    "lem-hermitian-schur-support-is-contained-in-structural-fill",
+    "alg-symmetric-indefinite-block-ldl-star",
+    "lem-elimination-tree-reach-contains-each-filled-neighbor",
+    "alg-sparse-cholesky-with-invalid-pivot-status",
+    "thm-block-ldl-star-residual-with-actual-growth",
+    "thm-sparse-cholesky-structural-pattern-without-cancellation",
+    "alg-multifrontal-cholesky-and-sparse-triangular-solves",
+    "thm-multifrontal-elimination-equivalence-and-sparse-costs",
+    "thm-nested-dissection-grid-work-and-storage-bounds",
+    "alg-certified-hermitian-one-and-two-by-two-ldl-kernel",
+    "lem-hermitian-block-ldl-kernel-roundoff-and-reconstruction-residual",
+    "ex-star-orderings-produce-different-sparse-fill",
+    "ex-nonsingular-indefinite-requires-two-by-two-pivot",
+    "ex-two-dimensional-poisson-nested-dissection-cost"
+  ],
+  "conventions": [
+    {
+      "convention": "A Hermitian matrix supplies a real symmetric zero-one off-diagonal support matrix; symbolic elimination uses that matrix, while numerical Schur complements use the original Hermitian matrix.",
+      "fixed_by": "def-hermitian-structural-graph-adapter",
+      "matters_for": [
+        "lem-hermitian-schur-support-is-contained-in-structural-fill",
+        "alg-sparse-cholesky-with-invalid-pivot-status",
+        "alg-symmetric-indefinite-block-ldl-star",
+        "thm-sparse-cholesky-structural-pattern-without-cancellation"
+      ]
+    },
+    {
+      "convention": "Ordering positions are zero-based. Row j of P is row v_j of the identity, so B=PAP* has B_ij=A_(v_i,v_j). Factor entries use ordered coordinates.",
+      "fixed_by": "alg-sparse-cholesky-with-invalid-pivot-status",
+      "matters_for": [
+        "thm-sparse-cholesky-structural-pattern-without-cancellation",
+        "alg-multifrontal-cholesky-and-sparse-triangular-solves",
+        "thm-multifrontal-elimination-equivalence-and-sparse-costs"
+      ]
+    },
+    {
+      "convention": "A structural column contains its pivot and its later filled neighbors. Reach includes the starting vertex; ancestors require one or more parent edges.",
+      "fixed_by": "def-elimination-tree-and-column-reach",
+      "matters_for": [
+        "lem-elimination-tree-reach-contains-each-filled-neighbor",
+        "alg-multifrontal-cholesky-and-sparse-triangular-solves",
+        "thm-multifrontal-elimination-equivalence-and-sparse-costs"
+      ]
+    },
+    {
+      "convention": "Coordinate nested dissection splits every coordinate side of length at least two at its lower median, orders child boxes first, and appends the union of separator hyperplanes lexicographically.",
+      "fixed_by": "alg-nested-dissection-ordering-on-regular-grids",
+      "matters_for": [
+        "lem-nested-dissection-fronts-are-boundary-limited",
+        "thm-nested-dissection-grid-work-and-storage-bounds",
+        "ex-two-dimensional-poisson-nested-dissection-cost"
+      ]
+    },
+    {
+      "convention": "The LU growth parameter is the maximum magnitude over all active matrices divided by the original maximum entry magnitude; it is not merely the maximum entry of U divided by that magnitude.",
+      "fixed_by": "thm-threshold-sparse-lu-residual-with-growth",
+      "matters_for": [
+        "thm-threshold-sparse-lu-residual-with-growth"
+      ]
+    },
+    {
+      "convention": "The Hermitian kernel separates rounded real-component numerical arithmetic from a finite-budget exact real controller. Unresolved pivot certificates return pivot-inconclusive; nonzero out-of-normal intermediates return range-failure.",
+      "fixed_by": "alg-certified-hermitian-one-and-two-by-two-ldl-kernel",
+      "matters_for": [
+        "alg-symmetric-indefinite-block-ldl-star",
+        "lem-hermitian-block-ldl-kernel-roundoff-and-reconstruction-residual",
+        "thm-block-ldl-star-residual-with-actual-growth"
+      ]
+    },
+    {
+      "convention": "Trailing-update residual bounds use conceptual exact multipliers. Actual stored-factor reconstruction additionally includes multiplier coupling residuals and uses stored-multiplier transformation growth.",
+      "fixed_by": "thm-block-ldl-star-residual-with-actual-growth",
+      "matters_for": [
+        "thm-block-ldl-star-residual-with-actual-growth"
+      ]
+    },
+    {
+      "convention": "Grid storage bounds count allocated factor entries, including structural zeros, and exclude temporary contribution arrays. Pattern equality for Cholesky requires every permitted recurrence numerator to be nonzero.",
+      "fixed_by": "thm-nested-dissection-grid-work-and-storage-bounds",
+      "matters_for": [
+        "ex-two-dimensional-poisson-nested-dissection-cost"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-filled-edge-path-characterisation",
+      "statement": "For distinct remaining vertices x,y in V_k, {x,y} is an edge of G_k if and only if the original graph contains a finite walk from x to y whose internal vertices belong to {v_0,...,v_(k−1)}.",
+      "used_by": [
+        "lem-nested-dissection-fronts-are-boundary-limited",
+        "thm-nested-dissection-grid-work-and-storage-bounds"
+      ]
+    },
+    {
+      "id": "lem-elimination-tree-reach-contains-each-filled-neighbor",
+      "statement": "Every later filled neighbor of v_k lies on its parent path and is therefore an ancestor. If v_s is a child of v_k, then C_s minus {v_s} is contained in C_k.",
+      "used_by": [
+        "alg-multifrontal-cholesky-and-sparse-triangular-solves",
+        "thm-multifrontal-elimination-equivalence-and-sparse-costs"
+      ]
+    },
+    {
+      "id": "lem-hermitian-schur-support-is-contained-in-structural-fill",
+      "statement": "For a Hermitian matrix, a fixed ordering and nonzero scalar pivots, the stated Schur updates preserve Hermitian symmetry, and every nonzero off-diagonal entry is an edge of the corresponding filled graph.",
+      "used_by": [
+        "alg-sparse-cholesky-with-invalid-pivot-status",
+        "thm-sparse-cholesky-structural-pattern-without-cancellation"
+      ]
+    },
+    {
+      "id": "thm-multifrontal-elimination-equivalence-and-sparse-costs",
+      "statement": "Under exact arithmetic, a Hermitian positive-definite input and a successful ordered multifrontal factorization, fronts produce the scalar Cholesky factor; assembly and scalar updates cost O(sum d_r²), symbolic factor allocation has exactly sum d_r positions, and each triangular solve costs O(sum d_r).",
+      "used_by": [
+        "thm-nested-dissection-grid-work-and-storage-bounds"
+      ]
+    },
+    {
+      "id": "lem-hermitian-block-ldl-kernel-roundoff-and-reconstruction-residual",
+      "statement": "Every accepted kernel pivot is nonsingular and passes the exact componentwise threshold test. The displayed explicit coefficients bound multiplier error, trailing Schur error and the full reconstruction residual, including stored-multiplier coupling errors.",
+      "used_by": [
+        "thm-block-ldl-star-residual-with-actual-growth"
+      ]
+    },
+    {
+      "id": "lem-nested-dissection-fronts-are-boundary-limited",
+      "statement": "For a separator vertex v of recursion box B, every later filled neighbor lies in S_B union the exterior grid boundary of B; when every side has length at most s, its column size is at most 3d s^(d−1).",
+      "used_by": [
+        "thm-nested-dissection-grid-work-and-storage-bounds"
+      ]
+    },
+    {
+      "id": "thm-nested-dissection-grid-work-and-storage-bounds",
+      "statement": "For real symmetric positive-definite grid-subgraph matrices with n=k^d, coordinate nested dissection gives O(n^(3/2)) work and O(n log n) factor storage in dimension two, and O(n²) work and O(n^(4/3)) factor storage in dimension three; k=1 has constant work and storage.",
+      "used_by": [
+        "ex-two-dimensional-poisson-nested-dissection-cost"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-permutation-matrix-partial-pivoting-and-pivot-growth",
+      "used_for": "Row-action permutation convention and partial-pivoting context. The local LU theorem separately defines its stronger active-matrix growth quantity.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-relative-floating-point-model-and-unit-roundoff",
+      "used_for": "Underlying successful-operation relative error and exact-zero rules, with normal-range exclusions.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-no-zero-divisors",
+      "used_for": "Nonzero Schur correction products imply nonzero pivot couplings in the Hermitian support proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-numbers-form-a-field",
+      "used_for": "Complex field arithmetic and reality of the inverse of a nonzero real Hermitian scalar pivot.",
+      "opened": true
+    },
+    {
+      "id": "def-cholesky-factorisation-with-positive-diagonal",
+      "used_for": "Hermitian positive definiteness and the positive-real-diagonal Cholesky convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Existence and uniqueness of the exact Cholesky factor and invertibility of positive-definite principal blocks.",
+      "opened": true
+    },
+    {
+      "id": "def-forward-and-back-substitution-for-triangular-systems",
+      "used_for": "Triangular solve recurrences used by the multifrontal procedure.",
+      "opened": true
+    },
+    {
+      "id": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+      "used_for": "Exact correctness and uniqueness of triangular solves; sparse operation counts are derived locally.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Induced Euclidean operator norm, including the zero-domain convention, in block residual estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-norm",
+      "used_for": "Meaning of the Euclidean norms underlying the operator and Frobenius estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Rowwise dot-product bounds and Frobenius-to-vector norm estimates in the rounded-residual supplier.",
+      "opened": true
+    },
+    {
+      "id": "lem-product-of-one-plus-deltas-gives-theta-n",
+      "used_for": "Sequential rounding coefficient estimates in the rounded-residual supplier; the empty-product case is handled there by gamma_0=0.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-symmetric-indefinite-block-ldl-star",
+      "concern": "The symbolic update says: “let N(J_r) be the union of the active graph neighbors of the vertices in J_r; remove J_r and connect every pair of distinct vertices in N(J_r).” For an internally adjacent two-vertex pivot block, this union includes the pivot vertices themselves. For example, J_r={0,1} with edge {0,1} gives N(J_r)={0,1}, so the literal instruction connects vertices just removed. The neighbor union needs restriction to remaining vertices. The intended correction is immediate and does not affect the displayed numerical Schur update.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "thm-multifrontal-elimination-equivalence-and-sparse-costs",
+      "concern": "The Statement writes its work and exact allocation sums over r=1,...,n, although the supplying algorithm defines F_r and pivot position r over 0,...,n−1. Thus d_n is undefined and d_0 is omitted. Use the established zero-based range, or explicitly reindex the column sizes.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "sparse-direct-elimination-and-ordering",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Checked the operationwise model and rounded linear-residual supplier against their local uses. LU is explicitly real; complex kernels use real-component operations and real denominators. The kernel lemma imports the supplier's length-j dot argument for j≤2, whose rounding condition follows from u<1, without imposing an unnecessary trailing-dimension restriction."
+    },
+    {
+      "from": "sparse-direct-elimination-and-ordering",
+      "to": "sparse-matrix-models-and-kernel-costs",
+      "faithful": true,
+      "note": "Checked the zero-based graph, clique update and parent convention, and the symmetric Schur-support theorem. The local adapter supplies a real symmetric support matrix and a separate proof establishes Hermitian numerical support. No complex-Hermitian conclusion is attributed directly to the symmetric numerical theorem. The block-neighbor wording concern is recorded separately."
+    },
+    {
+      "from": "verified-linear-systems-and-spectral-enclosures",
+      "to": "sparse-direct-elimination-and-ordering",
+      "faithful": true,
+      "note": "Read the interval Hermitian LDL inertia certifier and its soundness theorem. The midpoint candidate invokes the supplier's exact-arithmetic branch with the same permutation, consecutive block partition and threshold. Candidate failure becomes pivot-inconclusive. Family inertia certification then uses independent outward interval Schur updates and does not infer verified inertia or singularity from rounded factorization success or failure."
+    }
+  ]
+}

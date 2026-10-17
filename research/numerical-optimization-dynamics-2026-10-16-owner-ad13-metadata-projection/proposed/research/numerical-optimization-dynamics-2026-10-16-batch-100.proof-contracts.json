@@ -1,0 +1,2978 @@
+{
+  "version": 1,
+  "level": 8,
+  "scope": [
+    "def-ctrl1-linear-lqr-control-problem",
+    "def-ctrl1-smooth-transcription-data",
+    "lem-ctrl1-measurable-linear-ode-state-map",
+    "lem-ctrl1-control-box-is-weakly-closed",
+    "def-ctrl1-control-mesh-and-piecewise-constant-parameterization",
+    "lem-ctrl1-weak-control-convergence-implies-uniform-state-convergence",
+    "lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence",
+    "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+    "def-ctrl1-lqr-adjoint-equation",
+    "lem-ctrl1-lqr-cost-is-weakly-lower-semicontinuous",
+    "lem-ctrl1-lqr-adjoint-exists-uniquely",
+    "thm-ctrl1-lqr-existence-and-unique-optimal-control",
+    "alg-ctrl1-indirect-shooting-for-the-ode-optimality-system",
+    "lem-ctrl1-lqr-adjoint-identity-and-gradient",
+    "thm-ctrl1-lqr-variational-inequality-and-pointwise-control-branch",
+    "cex-ctrl1-terminal-constraints-break-pointwise-control-vi",
+    "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+    "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent",
+    "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+    "thm-ctrl1-mesh-consistent-lqr-minimizers-converge",
+    "thm-ctrl1-objective-and-control-error-from-consistency-bounds",
+    "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+    "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+    "ex-ctrl1-bounded-actuator-lqr",
+    "ex-ctrl1-chemical-dosing-linear-model",
+    "ex-ctrl1-single-versus-multiple-shooting-two-intervals"
+  ],
+  "contracts": {
+    "def-ctrl1-linear-lqr-control-problem": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition statement addresses empty input; see the statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition statement addresses zero-value data; see the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition statement addresses its first positive case; see the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement assumes a positive horizon or nondegenerate interval, excluding the degenerate case; see the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition statement specifies its interval endpoint data; see the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition statement fixes nonempty feasible data or identifies an existence choice; see the statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "def-ctrl1-smooth-transcription-data": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition statement addresses empty input; see the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-index or zero-input branch; its hypotheses fix positive data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition statement addresses its first positive case; see the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition statement specifies its interval endpoint data; see the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition statement fixes nonempty feasible data or identifies an existence choice; see the statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-ctrl1-measurable-linear-ode-state-map": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+          "source_section": "Statement",
+          "quote": "For $f\\in L^1[a,b]$, the function $I_f(x)=\\int_a^x f$ is absolutely continuous.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-first-fundamental-theorem-of-calculus-for-l-one",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-c-k-complete-in-the-sup-metric",
+          "source_section": "Statement",
+          "quote": "Let $(K,d)$ be a nonempty compact metric space. Every member of\n$C(K,\\mathbb{R})$ is bounded, so the supremum metric",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $g=Bu\\in L^1(0,T;\\mathbb R^n)$. Choose a finite partition $0=t_0<\\cdots<t_N=T$ with $\\|A\\|_\\infty(t_{j+1}-t_j)<1$ on each subinterval when $\\|A\\|_\\infty>0$; if $\\|A\\|_\\infty=0$, use $N=1$. Given the already constructed value $x(t_j)$, define $\\mathcal T z(t)=x(t_j)+\\int_{t_j}^t(A(s)z(s)+g(s))ds$ on $C([t_j,t_{j+1}];\\mathbb R^n)$. By [F2], $\\mathcal T$ maps continuous functions to continuous functions, and [F1] gives $\\|\\mathcal T z-\\mathcal T w\\|_\\infty\\le q_j\\|z-w\\|_\\infty$ with $q_j=\\|A\\|_\\infty(t_{j+1}-t_j)<1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Starting from the constant function $z_0=x(t_j)$, let $z_{k+1}=\\mathcal T z_k$. Then $\\|z_{k+1}-z_k\\|_\\infty\\le q_j^k\\|z_1-z_0\\|_\\infty$, so the successive differences have summable norms. Each coordinate converges uniformly by [F3], and the finite coordinate limit is a continuous vector function $z$. The integral estimate in step 1.1 makes $\\mathcal T$ continuous in the supremum norm, hence $z=\\mathcal Tz$. If $z,w$ are two fixed points, $\\|z-w\\|_\\infty\\le q_j\\|z-w\\|_\\infty$, so $z=w$. Solving the finitely many subintervals in order gives one continuous solution on $[0,T]$, and the same uniqueness on each subinterval proves global uniqueness.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The integrand $Ax+Bu$ lies in $L^1$, so [F2] differentiates the integral equation almost everywhere and yields $\\dot x=Ax+Bu$. The same equation is independent of the chosen representatives of $A,B,u$ by [F6].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "From the integral equation and [F1], $\\|x(t)\\|_2\\le \\|x_0\\|_2+\\|B\\|_\\infty\\|u\\|_{L^1}+\\|A\\|_\\infty\\int_0^t\\|x(s)\\|_2ds$. Apply [F4] with $c=\\|x_0\\|_2+\\|B\\|_\\infty\\|u\\|_{L^1}$ and then [F5]; this gives the displayed supremum bound.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Linearity of the integral [F6] shows that a linear combination of two zero-initial-state solutions is the solution for the same linear combination of controls; uniqueness from step 2.1 makes the zero-initial-state map linear. Step 3.2 with $x_0=0$ bounds this linear map in the $L^2$ and supremum norms, while the fixed initial-state contribution is independent of $u$. Hence the full map is affine and bounded as claimed.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The lemma statement addresses zero-value data; see step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The lemma statement addresses its first positive case; see step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement assumes a positive horizon or nondegenerate interval, excluding the degenerate case; see step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lemma statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The lemma statement fixes nonempty feasible data or identifies an existence choice; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-ctrl1-control-box-is-weakly-closed": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ctrl1-linear-lqr-control-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$, state and control dimensions $n,m\\ge1$, and the real quotient space $L^2(0,T;\\mathbb R^m)$ of measurable controls modulo equality almost everywhere ([[def-l-p-space-as-a-quotient-by-null-functions]]). Let $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$ and $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m}",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-des",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-weak-convergence-of-nets-and-sequences",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real or complex normed space. Let $I$ be a nonempty directed preorder and $(x_i)_{i\\in I}$ a net in $X$ ([[def-directed-set-and-net]]). For $x\\in X$, write $x_i\\rightharpoonup x$ and say the net **converges weakly to $x$** when it converges to $x$ in $\\sigma(X,X^*)$ ([[def-weak-topology-on-a-normed-space]]",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above a",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $q\\in\\mathbb R^m$ set $h(q)=\\sup_{c\\in U_c}q^Tc$, which is finite because $U_c$ is compact and hence bounded. If $z\\notin U_c$, [F3] gives a nearest point $y\\in U_c$ to $z$. For each $c\\in U_c$ and $0<\\theta\\le1$, convexity gives $y+\\theta(c-y)\\in U_c$; minimality of $y$ implies $\\|z-y-\\theta(c-y)\\|_2^2\\ge\\|z-y\\|_2^2$, and division by $\\theta$ followed by $\\theta\\downarrow0$ gives $(z-y)^T(c-y)\\le0$. Thus $q_0=z-y$ satisfies $q_0^Tz-h(q_0)\\ge\\|z-y\\|_2^2>0$. If $M_c=\\sup_{c\\in U_c}\\|c\\|_2$, then $|h(q)-h(q_0)|\\le M_c\\|q-q_0\\|_2$ and $|(q-q_0)^Tz|\\le\\|q-q_0\\|_2\\|z\\|_2$. Rational vectors are dense in $\\mathbb R^m$, so one can choose rational $q$ close enough to $q_0$ that $q^Tz>h(q)$. Therefore a point $z$ belongs to $U_c$ exactly when $q^Tz\\le h(q)$ for every rational vector $q$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a rational $q$. Every $u_k$ is in $\\mathcal U_c$, so $h(q)-q^Tu_k(t)\\ge0$ almost everywhere. For any measurable $E\\subseteq[0,T]$, the test function $q\\mathbf1_E$ lies in $L^2$ because $T<\\infty$; weak convergence, [F2], and [F4] give $\\int_Eq^Tu\\,dt=\\lim_k\\int_Eq^Tu_k\\,dt\\le h(q)|E|$. If $q^Tu>h(q)$ on a set of positive measure, then for some integer $r\\ge1$ the measurable set $E_r=\\{t:q^Tu(t)\\ge h(q)+1/r\\}$ has positive measure, contradicting the integral inequality with $E=E_r$. Hence $q^Tu(t)\\le h(q)$ almost everywhere.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The rational vectors form a countable set, so the exceptional null sets from step 1.2 have a null union. Outside that union all rational support inequalities hold simultaneously; step 1.1 then gives $u(t)\\in U_c$ almost everywhere. This is exactly $u\\in\\mathcal U_c$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The lemma statement addresses empty input; see step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The lemma statement addresses zero-value data; see step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The lemma statement addresses its first positive case; see step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement assumes a positive horizon or nondegenerate interval, excluding the degenerate case; see step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lemma statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The lemma statement fixes nonempty feasible data or identifies an existence choice; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "def-ctrl1-control-mesh-and-piecewise-constant-parameterization": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition statement addresses zero-value data; see the statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-index or first-positive-index boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition statement specifies its interval endpoint data; see the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement fixes finite input data and makes no existential selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-ctrl1-weak-control-convergence-implies-uniform-state-convergence": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ctrl1-measurable-linear-ode-state-map",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$, $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m})$, $u\\in L^2(0,T;\\mathbb R^m)$, and $x_0\\in\\mathbb R^n$. Write $\\|A\\|_\\infty$ and $\\|B\\|_\\infty$ for the essential suprema of their Euclidean operator norms. There is a unique absolutely continuous $x:[0,T]\\to\\mathbb R^n$ sa",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ctrl1-linear-lqr-control-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$, state and control dimensions $n,m\\ge1$, and the real quotient space $L^2(0,T;\\mathbb R^m)$ of measurable controls modulo equality almost everywhere ([[def-l-p-space-as-a-quotient-by-null-functions]]). Let $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$ and $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-weak-convergence-of-nets-and-sequences",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real or complex normed space. Let $I$ be a nonempty directed preorder and $(x_i)_{i\\in I}$ a net in $X$ ([[def-directed-set-and-net]]). For $x\\in X$, write $x_i\\rightharpoonup x$ and say the net **converges weakly to $x$** when it converges to $x$ in $\\sigma(X,X^*)$ ([[def-weak-topology-on-a-normed-space]]",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [F2], the states have a common bound $M_x$ in supremum norm. For $s,t\\in[0,T]$, the integral equation and [F4] give $\\|x_{u_k}(t)-x_{u_k}(s)\\|_2\\le L|t-s|$, where $L:=\\|A\\|_\\infty M_x+\\|B\\|_\\infty M_c$. The same bound holds for $x_u$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each fixed $t$, evaluation at $t$ composed with the bounded linear zero-initial-state map in [F1] is a bounded linear functional on $L^2$. Thus [F3] gives $x_{u_k}(t)\\to x_u(t)$ coordinatewise.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $L=0$, step 1.1 makes each state constant, and step 1.2 gives uniform convergence. If $L>0$, fix $\\varepsilon>0$ and choose a finite partition of $[0,T]$ with mesh smaller than $\\varepsilon/(3L)$. By step 1.2 and finiteness of its nodes, there is an index after which $\\|x_{u_k}-x_u\\|_2<\\varepsilon/3$ at every node. Any $t$ is within the mesh of a node, so step 1.1 gives $\\|x_{u_k}(t)-x_u(t)\\|_2\\le L|t-t_j|+\\|x_{u_k}(t_j)-x_u(t_j)\\|_2+L|t-t_j|<\\varepsilon$. Hence the convergence is uniform.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The lemma statement addresses zero-value data; see step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-index or first-positive-index boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lemma statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The lemma statement fixes nonempty feasible data or identifies an existence choice; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-box-step-functions-are-dense-in-l-p-of-rn",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above a",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On each interval $I_j=[t_j,t_{j+1}]$, let $m_j=h^{-1}\\int_{I_j}u(s)ds$. If $m_j\\notin U_c$, compactness and [F3] give a nearest point $y\\in U_c$. For every $c\\in U_c$, the segment $y+\\theta(c-y)$ belongs to $U_c$ for $0\\le\\theta\\le1$; minimality of $y$ gives $\\|m_j-y-\\theta(c-y)\\|_2^2\\ge\\|m_j-y\\|_2^2$. Divide by $\\theta>0$ and let $\\theta\\downarrow0$ to get $(m_j-y)^T(c-y)\\le0$. With $q_0=m_j-y\\ne0$, this implies $q_0^Tm_j>\\sup_{c\\in U_c}q_0^Tc$. But $q_0^Tu(s)\\le\\sup_{c\\in U_c}q_0^Tc$ almost everywhere, so integration contradicts the strict inequality. Thus every cell average lies in $U_c$ and $P_Nu$ is pointwise admissible.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any $w\\in L^2$, Cauchy–Schwarz on each cell gives $h\\|h^{-1}\\int_{I_j}w\\|_2^2\\le\\int_{I_j}\\|w(s)\\|_2^2ds$; summing proves $\\|P_Nw\\|_2\\le\\|w\\|_2$. For an interval indicator, $P_N$ agrees with it on cells not meeting an endpoint, and at most two endpoint cells contribute to the squared error, at most $2h$. By linearity, $P_Ns\\to s$ for every finite linear combination $s$ of interval indicators.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $u\\in L^2$ and $\\varepsilon>0$. By [F1] choose such an interval step function $s$ with $\\|u-s\\|_2<\\varepsilon$. The contraction bound in step 1.2 gives $\\|P_Nu-u\\|_2\\le2\\varepsilon+\\|P_Ns-s\\|_2$. Taking $N\\to\\infty$ yields $\\limsup_N\\|P_Nu-u\\|_2\\le2\\varepsilon$. Since $\\varepsilon$ is arbitrary, $P_Nu\\to u$ strongly in $L^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The lemma statement addresses empty input; see step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The lemma statement addresses zero-value data; see step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The lemma statement addresses its first positive case; see step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement assumes a positive horizon or nondegenerate interval, excluding the degenerate case; see step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lemma statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The lemma statement fixes nonempty feasible data or identifies an existence choice; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "def-ctrl1-runge-kutta-tableau-and-stage-collocation": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-index or zero-input branch; its hypotheses fix positive data."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-index or first-positive-index boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition statement specifies its interval endpoint data; see the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition statement fixes nonempty feasible data or identifies an existence choice; see the statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "def-ctrl1-lqr-adjoint-equation": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-index or zero-input branch; its hypotheses fix positive data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition statement addresses its first positive case; see the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition statement specifies its interval endpoint data; see the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition statement fixes nonempty feasible data or identifies an existence choice; see the statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-ctrl1-lqr-cost-is-weakly-lower-semicontinuous": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ctrl1-linear-lqr-control-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$, state and control dimensions $n,m\\ge1$, and the real quotient space $L^2(0,T;\\mathbb R^m)$ of measurable controls modulo equality almost everywhere ([[def-l-p-space-as-a-quotient-by-null-functions]]). Let $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$ and $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m}",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ctrl1-weak-control-convergence-implies-uniform-state-convergence",
+          "source_section": "Statement",
+          "quote": "For the data of [[def-ctrl1-linear-lqr-control-problem]], if $u_k,u\\in\\mathcal U_c$ and $u_k\\rightharpoonup u$ weakly in $L^2(0,T;\\mathbb R^m)$, then $x_{u_k}\\to x_u$ uniformly on $[0,T]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-des",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $e_k=x_{u_k}-x_d$ and $e=x_u-x_d$. By [F2], $e_k\\to e$ uniformly. Since $Q$ is essentially bounded, the estimate $|a^TQ(t)a-b^TQ(t)b|\\le\\|Q(t)\\|_2(\\|a\\|_2+\\|b\\|_2)\\|a-b\\|_2$ shows that $\\int_0^T e_k^TQe_k\\,dt\\to\\int_0^T e^TQe\\,dt$. The terminal terms converge by the same estimate with $P$ and $x_{u_k}(T)\\to x_u(T)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $\\mathscr R:L^2\\to L^2$ be multiplication by $R(t)$. It is a bounded positive self-adjoint operator by [F1] and [F3]. For every fixed $w\\in L^2$, $\\langle\\mathscr Ru_k,u_k\\rangle\\ge2\\langle\\mathscr Ru_k,w\\rangle-\\langle\\mathscr Rw,w\\rangle$, because the difference is $\\langle\\mathscr R(u_k-w),u_k-w\\rangle\\ge0$. The right-hand side converges to $2\\langle\\mathscr Ru,w\\rangle-\\langle\\mathscr Rw,w\\rangle$ by weak convergence, as $v\\mapsto\\langle\\mathscr Rv,w\\rangle=\\langle v,\\mathscr Rw\\rangle$ is a bounded linear functional. Taking the supremum over $w$ gives $\\liminf_k\\langle\\mathscr Ru_k,u_k\\rangle\\ge\\langle\\mathscr Ru,u\\rangle$, with equality in the supremum at $w=u$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The state and terminal cost terms converge by step 1.1, while the control quadratic term is lower semicontinuous by step 1.2. Multiplying by $1/2$ and adding these three terms gives $J(u)\\le\\liminf_k J(u_k)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-index or zero-input branch; its hypotheses fix positive data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The lemma statement addresses its first positive case; see step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lemma statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement fixes finite input data and makes no existential selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-ctrl1-lqr-adjoint-exists-uniquely": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ctrl1-measurable-linear-ode-state-map",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$, $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m})$, $u\\in L^2(0,T;\\mathbb R^m)$, and $x_0\\in\\mathbb R^n$. Write $\\|A\\|_\\infty$ and $\\|B\\|_\\infty$ for the essential suprema of their Euclidean operator norms. There is a unique absolutely continuous $x:[0,T]\\to\\mathbb R^n$ sa",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ctrl1-lqr-adjoint-equation",
+          "source_section": "Definition",
+          "quote": "For the data of [[def-ctrl1-linear-lqr-control-problem]] and an admissible control $u$ with state $x_u$, a **continuous LQR adjoint** is an absolutely continuous curve $p:[0,T]\\to\\mathbb R^n$ satisfying, almost everywhere,\n$$\n-\\dot p(t)=A(t)^Tp(t)+Q(t)(x_u(t)-x_d(t)),\\qquad p(T)=P(x_u(T)-x_T).\n$$\nExistence and uniquene",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The forcing $g(s):=Q(T-s)(x_u(T-s)-x_d(T-s))$ lies in $L^2(0,T;\\mathbb R^n)$: $Q$ is essentially bounded, $x_u$ is continuous on a compact interval and hence bounded, and $x_d\\in L^2$. Also $C(s):=A(T-s)^T\\in L^\\infty$. Apply [F1] with $D(s)=I$ and initial value $q(0)=P(x_u(T)-x_T)$ to obtain a unique absolutely continuous solution of $\\dot q=Cq+g$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $p(t)=q(T-t)$. Time reversal preserves absolute continuity, and differentiating almost everywhere gives $-\\dot p(t)=A(t)^Tp(t)+Q(t)(x_u(t)-x_d(t))$ with $p(T)=q(0)=P(x_u(T)-x_T)$. Thus $p$ satisfies [F2].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\widetilde p$ is another adjoint solution, $\\widetilde q(s)=\\widetilde p(T-s)$ solves the same forward initial-value equation as $q$; uniqueness in [F1] gives $\\widetilde q=q$ and hence $\\widetilde p=p$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-index or zero-input branch; its hypotheses fix positive data."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-index or first-positive-index boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lemma statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The lemma statement fixes nonempty feasible data or identifies an existence choice; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-ctrl1-lqr-existence-and-unique-optimal-control": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-ultrafilter-extension-principle",
+          "source_section": "Definition",
+          "quote": "The **ultrafilter extension principle** says that every filter on a set is contained in an ultrafilter on that set ([[def-ultrafilter]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-des",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-hilbert-spaces-are-reflexive",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Every real or complex Hilbert space $H$ is reflexive: the canonical evaluation map $J_H:H\\to H^{**}$ is surjective.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-dependent-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, the Axiom of Dependent Choice implies the Axiom of Countable Choice:\nevery at most countable family of nonempty sets has a choice function\n([[def-countable-choice]], [[def-choice-function]],\n[[def-dependent-choice]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-direct-method-in-a-reflexive-banach-space",
+          "source_section": "Statement",
+          "quote": "Assume the ultrafilter lemma, DC and HB. Let $X$ be a real reflexive Banach space ([[def-reflexive-banach-space]]), let $A\\subseteq X$ be nonempty and weakly sequentially closed ([[def-weak-convergence-of-nets-and-sequences]]), and let $I:A\\to(-\\infty,+\\infty]$ be proper, coercive on $A$ and weakly sequentially lower s",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ctrl1-control-box-is-weakly-closed",
+          "source_section": "Statement",
+          "quote": "Let $U_c\\subset\\mathbb R^m$ be nonempty, compact and convex, and let $\\mathcal U_c$ be the pointwise admissible set in [[def-ctrl1-linear-lqr-control-problem]]. If $u_k\\in\\mathcal U_c$ and $u_k\\rightharpoonup u$ weakly in real $L^2(0,T;\\mathbb R^m)$, then $u\\in\\mathcal U_c$. Thus $\\mathcal U_c$ is weakly sequentially c",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ctrl1-linear-lqr-control-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$, state and control dimensions $n,m\\ge1$, and the real quotient space $L^2(0,T;\\mathbb R^m)$ of measurable controls modulo equality almost everywhere ([[def-l-p-space-as-a-quotient-by-null-functions]]). Let $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$ and $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m}",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-ctrl1-lqr-cost-is-weakly-lower-semicontinuous",
+          "source_section": "Statement",
+          "quote": "For the data of [[def-ctrl1-linear-lqr-control-problem]], if $u_k\\in\\mathcal U_c$ and $u_k\\rightharpoonup u$ weakly in $L^2(0,T;\\mathbb R^m)$, then $J(u)\\le\\liminf_{k\\to\\infty}J(u_k)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-ctrl1-measurable-linear-ode-state-map",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$, $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m})$, $u\\in L^2(0,T;\\mathbb R^m)$, and $x_0\\in\\mathbb R^n$. Write $\\|A\\|_\\infty$ and $\\|B\\|_\\infty$ for the essential suprema of their Euclidean operator norms. There is a unique absolutely continuous $x:[0,T]\\to\\mathbb R^n$ sa",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1] and [F3], Countable Choice is available. Hence [F1] makes $L^2(0,T;\\mathbb R^m)$ a real Hilbert space and [F2] makes it reflexive.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The set $\\mathcal F$ is nonempty by hypothesis and weakly sequentially closed by [F5]. For $u\\in\\mathcal F$, every state and terminal quadratic term in $J$ is nonnegative, while $R(t)\\succeq rI$ gives $J(u)\\ge\\tfrac r2\\|u\\|_2^2$. The cost is finite on $\\mathcal F$ by [F7], so $J$ is proper and coercive there.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F6], $J$ is weakly sequentially lower semicontinuous on $\\mathcal F$. The axioms in [A1] and the reflexivity and admissibility checks in steps 1.1–1.2 verify every hypothesis of [F4]; therefore there exists $u^*\\in\\mathcal F$ with $J(u^*)=\\inf_{u\\in\\mathcal F}J(u)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The state map is affine by [F7]. For $0<\\theta<1$, each positive-semidefinite quadratic state or terminal form satisfies $q(\\theta a+(1-\\theta)b)=\\theta q(a)+(1-\\theta)q(b)-\\theta(1-\\theta)q(a-b)\\le\\theta q(a)+(1-\\theta)q(b)$. The control form satisfies $\\frac12\\langle R(\\theta u+(1-\\theta)v),\\theta u+(1-\\theta)v\\rangle=\\frac\\theta2\\langle Ru,u\\rangle+\\frac{1-\\theta}2\\langle Rv,v\\rangle-\\frac{\\theta(1-\\theta)}2\\langle R(u-v),u-v\\rangle$. If $u\\ne v$, then $\\langle R(u-v),u-v\\rangle\\ge r\\|u-v\\|_2^2>0$, so $J$ is strictly convex on the convex set $\\mathcal F$. Two distinct minimizers would have a feasible strict convex combination with smaller cost, contradicting the minimum value established in step 2.1. Thus $u^*$ is unique.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F7",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The theorem statement addresses empty input; see step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The theorem statement addresses zero-value data; see step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The theorem statement addresses its first positive case; see step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The theorem statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The theorem statement fixes nonempty feasible data or identifies an existence choice; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "alg-ctrl1-indirect-shooting-for-the-ode-optimality-system": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-index or zero-input branch; its hypotheses fix positive data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The algorithm statement addresses its first positive case; see the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The algorithm statement specifies its interval endpoint data; see the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement fixes finite input data and makes no existential selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-ctrl1-lqr-adjoint-identity-and-gradient": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ctrl1-measurable-linear-ode-state-map",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$, $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m})$, $u\\in L^2(0,T;\\mathbb R^m)$, and $x_0\\in\\mathbb R^n$. Write $\\|A\\|_\\infty$ and $\\|B\\|_\\infty$ for the essential suprema of their Euclidean operator norms. There is a unique absolutely continuous $x:[0,T]\\to\\mathbb R^n$ sa",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ctrl1-lqr-adjoint-equation",
+          "source_section": "Definition",
+          "quote": "For the data of [[def-ctrl1-linear-lqr-control-problem]] and an admissible control $u$ with state $x_u$, a **continuous LQR adjoint** is an absolutely continuous curve $p:[0,T]\\to\\mathbb R^n$ satisfying, almost everywhere,\n$$\n-\\dot p(t)=A(t)^Tp(t)+Q(t)(x_u(t)-x_d(t)),\\qquad p(T)=P(x_u(T)-x_T).\n$$\nExistence and uniquene",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ctrl1-lqr-adjoint-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "For every LQR data set in [[def-ctrl1-linear-lqr-control-problem]] and every admissible control $u$, the adjoint in [[def-ctrl1-lqr-adjoint-equation]] exists and is unique.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-integration-by-parts-for-absolutely-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axioms of Countable Choice and Dependent Choice. For $F,G\\in AC[a,b]$,\n$$\\int_a^bFG'+\\int_a^bF'G=F(b)G(b)-F(a)G(a).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the state variation $\\delta x=x_{u+w}-x$ is linear in $w$ and satisfies $\\|\\delta x\\|_\\infty\\le C_0\\|w\\|_2$ for a fixed constant $C_0$. Expanding the running and terminal quadratic forms gives the linear term $\\int_0^T (x-x_d)^TQ\\delta x\\,dt+\\int_0^T u^TRw\\,dt+(x(T)-x_T)^TP\\delta x(T)$ and a remainder $\\frac12\\int_0^T(\\delta x^TQ\\delta x+w^TRw)dt+\\frac12\\delta x(T)^TP\\delta x(T)$. Boundedness of $Q,R,P$ and the state-map estimate bound this remainder by $C\\|w\\|_2^2$. Thus the displayed linear term is the first-order norm derivative before rewriting its state contributions through the adjoint.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply [F3] to $p$ and $\\delta x$, whose absolute continuity follows from [F1] and [F2]. Using their differential equations gives $p(T)^T\\delta x(T)-p(0)^T\\delta x(0)=-\\int_0^T(x-x_d)^TQ\\delta x\\,dt+\\int_0^T p^TBw\\,dt$. Since $\\delta x(0)=0$ and $p(T)=P(x(T)-x_T)$, rearranging yields $\\int_0^T(x-x_d)^TQ\\delta x\\,dt+(x(T)-x_T)^TP\\delta x(T)=\\int_0^T p^TBw\\,dt$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute the identity from step 1.2 into the derivative coefficient of step 1.1 and use $(p^TBw)=(B^Tp)^Tw$ and $(u^TRw)=(Ru)^Tw$ because $R=R^T$ almost everywhere. The resulting coefficient is $DJ(u)[w]$. Moreover, $B^Tp+Ru\\in L^2$ since $B,R$ are essentially bounded, $p$ is continuous, and $u\\in L^2$; [F4] therefore makes $DJ(u)$ a bounded linear map. The quadratic remainder bound in step 1.1 proves the stated first-order norm expansion.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-index or zero-input branch; its hypotheses fix positive data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The lemma statement addresses its first positive case; see step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lemma statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The lemma statement fixes nonempty feasible data or identifies an existence choice; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-ctrl1-lqr-variational-inequality-and-pointwise-control-branch": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ctrl1-lqr-adjoint-identity-and-gradient",
+          "source_section": "Statement",
+          "quote": "For the LQR problem of [[def-ctrl1-linear-lqr-control-problem]], let $u\\in\\mathcal U_c$, let $x=x_u$, and let $p$ be its adjoint from [[def-ctrl1-lqr-adjoint-equation]]. Define the bounded linear map $DJ(u):L^2(0,T;\\mathbb R^m)\\to\\mathbb R$ by\n$$DJ(u)[w]=\\int_0^T\\big(B(t)^Tp(t)+R(t)u(t)\\big)^Tw(t)\\,dt.$$\nIt is the firs",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ctrl1-linear-lqr-control-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$, state and control dimensions $n,m\\ge1$, and the real quotient space $L^2(0,T;\\mathbb R^m)$ of measurable controls modulo equality almost everywhere ([[def-l-p-space-as-a-quotient-by-null-functions]]). Let $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$ and $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m}",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ctrl1-measurable-linear-ode-state-map",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$, $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m})$, $u\\in L^2(0,T;\\mathbb R^m)$, and $x_0\\in\\mathbb R^n$. Write $\\|A\\|_\\infty$ and $\\|B\\|_\\infty$ for the essential suprema of their Euclidean operator norms. There is a unique absolutely continuous $x:[0,T]\\to\\mathbb R^n$ sa",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-dependent-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, the Axiom of Dependent Choice implies the Axiom of Countable Choice:\nevery at most countable family of nonempty sets has a choice function\n([[def-countable-choice]], [[def-choice-function]],\n[[def-dependent-choice]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $u$ minimizes $J$ on $\\mathcal F$ and fix $v\\in\\mathcal F$. Convexity gives $u_\\theta=u+\\theta(v-u)\\in\\mathcal F$ for $0\\le\\theta\\le1$. Hence $(J(u_\\theta)-J(u))/\\theta\\ge0$ for $0<\\theta\\le1$. The first-order expansion [F1] with increment $\\theta(v-u)$ has quotient $DJ(u)[v-u]+O(\\theta\\|v-u\\|_2^2)$, so its limit is $DJ(u)[v-u]$. This proves the displayed variational inequality.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose the pointwise inequalities hold outside one null set and $\\mathcal F=\\mathcal U_c$. For any $v\\in\\mathcal U_c$, substitute $c=v(t)$ outside that null set and the null set on which $v(t)\\notin U_c$. The vector $g=B^Tp+Ru$ lies in $L^2$ because $B,R$ are essentially bounded, $p$ is continuous on the compact horizon, and $u\\in L^2$; [F3] makes $g^T(v-u)$ integrable. Integrating proves the global variational inequality.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Assume the variational inequality at $u$. For any $v\\in\\mathcal F$, [F2] and $Q\\succeq0$, $R\\succeq rI$ give $J(v)-J(u)\\ge DJ(u)[v-u]+\\frac r2\\|v-u\\|_2^2$. The linear term is nonnegative by the assumed inequality; hence $J(v)\\ge J(u)$, with strict inequality if $v\\ne u$. Thus $u$ is the unique minimizer.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume the global variational inequality and suppose no common null set makes all pointwise inequalities true. Construct a countable dense $D\\subseteq U_c$ by choosing, using [A1], one point from each rational open ball that meets $U_c$; the countable base property makes the chosen set dense. Define $M=\\bigcup_{d\\in D,k\\ge1}E_{d,k}$, where $E_{d,k}=\\{t:g(t)^T(d-u(t))\\le-1/k\\}$. This is measurable. Continuity in $c$ and density show that $M$ is exactly the set where some $c\\in U_c$ violates the pointwise inequality, so the absence of a common null set means $|M|>0$. Countability implies some $E_{d,k}$ has positive measure. Put $v(t)=d$ on that set and $v(t)=u(t)$ elsewhere. This measurable control lies in $\\mathcal U_c$, but $\\int_0^Tg^T(v-u)dt\\le-|E_{d,k}|/k<0$, contradicting the assumed global variational inequality. Therefore one null set suffices for every $c\\in U_c$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The theorem statement addresses empty input; see step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The theorem statement addresses zero-value data; see step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The theorem statement addresses its first positive case; see step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The theorem statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The theorem statement fixes nonempty feasible data or identifies an existence choice; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction is at step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction is at step 2.1."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "cex-ctrl1-terminal-constraints-break-pointwise-control-vi": {
+      "risk": "high",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ctrl1-lqr-adjoint-equation",
+          "source_section": "Definition",
+          "quote": "For the data of [[def-ctrl1-linear-lqr-control-problem]] and an admissible control $u$ with state $x_u$, a **continuous LQR adjoint** is an absolutely continuous curve $p:[0,T]\\to\\mathbb R^n$ satisfying, almost everywhere,\n$$\n-\\dot p(t)=A(t)^Tp(t)+Q(t)(x_u(t)-x_d(t)),\\qquad p(T)=P(x_u(T)-x_T).\n$$\nExistence and uniquene",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ctrl1-lqr-adjoint-identity-and-gradient",
+          "source_section": "Statement",
+          "quote": "For the LQR problem of [[def-ctrl1-linear-lqr-control-problem]], let $u\\in\\mathcal U_c$, let $x=x_u$, and let $p$ be its adjoint from [[def-ctrl1-lqr-adjoint-equation]]. Define the bounded linear map $DJ(u):L^2(0,T;\\mathbb R^m)\\to\\mathbb R$ by\n$$DJ(u)[w]=\\int_0^T\\big(B(t)^Tp(t)+R(t)u(t)\\big)^Tw(t)\\,dt.$$\nIt is the firs",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every feasible $u$, [F1] applied to $u\\ge0$ and $\\int_0^1u=0$ gives $u=0$ almost everywhere. Thus $\\mathcal F=\\{0\\}$ and $u^*=0$ is its unique feasible control and hence a minimizer.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The state is $x(t)=0$. The adjoint equation becomes $-\\dot p=-1$ with $p(1)=0$, whose unique solution is $p(t)=t-1$. The reduced gradient at $u^*$ is therefore $g(t)=p(t)=t-1$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the pointwise control-only condition, choose the admissible point $c=1$. Then $g(t)(c-u^*(t))=t-1<0$ for every $t\\in[0,1)$, a set of positive measure. Hence the asserted pointwise condition fails, although the global variational inequality over the singleton $\\mathcal F$ holds with equality.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The counterexample statement addresses zero-value data; see step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The counterexample statement addresses its first positive case; see step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The counterexample statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The counterexample statement fixes nonempty feasible data or identifies an existence choice; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [
+        {
+          "supplier": "thm-discrete-adjoint-gradient-recursion",
+          "status": "body-inspected",
+          "source_section": "Statement",
+          "exact_excerpt": "Use the setting of [[def-parameterized-finite-state-step-objective]]. Write $A_n=D_x\\Psi_n(x_n,\\theta)$, $B_n=D_\\theta\\Psi_n(x_n,\\theta)$, and let $S_n=D_\\theta x_n$. Then\n$$S_0=D x_0(\\theta),\\qquad S_{n+1}=A_nS_n+B_n.$$\nDefine $p_N=D_x\\phi(x_N,\\theta)^T$ and, backward for $n=N-1,\\ldots,0$,\n$$p_n=D_x\\ell_n(x_n,\\theta)^T+A_n^Tp_{n+1}.$$\nThe exact gradient of the finite objective is\n$$\\nabla_\\theta J=D_\\theta\\phi(x_N,\\",
+          "required_hypotheses": "C1 finite state-step map and objective represented by explicit RK stages; exact real-arithmetic graph derivative.",
+          "affected_claims": [
+            "exact reduced single-shooting gradient"
+          ]
+        },
+        {
+          "supplier": "thm-discrete-continuous-gradient-error-order-p",
+          "status": "body-inspected-conditional",
+          "source_section": "Statement",
+          "exact_excerpt": "Let $J$ and $J_h$ be the continuous and finite state-step objectives of [[thm-continuous-ode-adjoint-gradient-formula]] and [[thm-discrete-adjoint-gradient-recursion]], respectively, and put $h=T/N$. Let $q(t,u,p)=D_\\theta\\ell(t,u,\\theta)^T+D_\\theta f(t,u,\\theta)^Tp$ be the continuous running-gradient vector, evaluated on its exact state and adjoint as $q(t):=q(t,u(t),p(t))$. Suppose the exact and numerical state/adj",
+          "required_hypotheses": "state and adjoint error, derivative-data, endpoint, and quadrature bounds as stated by supplier.",
+          "affected_claims": [
+            "order-p discrete/continuous gradient comparison"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The algorithm statement addresses zero-value data; see the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The algorithm statement addresses its first positive case; see the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The algorithm statement specifies its interval endpoint data; see the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement fixes finite input data and makes no existential selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "source_section": "Definition",
+          "quote": "Take a mesh $0=t_0<\\cdots<t_N=T$, a pointwise-defined smooth-data model from [[def-ctrl1-smooth-transcription-data]], a control parameterization from [[def-ctrl1-control-mesh-and-piecewise-constant-parameterization]], an explicit tableau from [[def-explicit-runge-kutta-tableau-and-stage-map]], and a possibly implicit tableau as defined by [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]]. For each interval $[t_j,t_{j+1}]$, let $h_j=t_{j+1}-t_j$ and write $u_j\\in U_c$ for its constant control. For any proposed start $X_{j,0}$, an explicit tableau forms the stages recursively:\n$$X_{j,i}=X_{j,0}+h_j\\sum_{k<i}a_{ik}F_{j,k},\\quad t_{j,i}=t_j+c_ih_j,\\quad F_{j,i}=f(t_{j,i},X_{j,i},u_j),\\quad \\Phi_j(X_{j,0},u_j)=X_{j,0}+h_j\\sum_i b_iF_{j,i}.$$\nReturn one of the following finite-dimensional nonlinear programs, with the same chosen node constraints and quadrature objective in each form.\n\n**Single shooting:** set $X_{0,0}=x_0$ and recursively impose $X_{j+1,0}=\\Phi_j(X_{j,0},u_j)$; the decision variables are the $u_j$.\n\n**Multiple shooting:** use $X_{j,0}$ and $u_j$ as decision variables, fix $X_{0,0}=x_0$, and impose $X_{j+1,0}-\\Phi_j(X_{j,0},u_j)=0$.\n\n**RK collocation:** introduce stage variables $X_{j,i}$ and impose the general collocation stage equations and endpoint equation from [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]]. This includes implicit tableaus such as Gauss collocation: their stages remain coupled equality constraints in the NLP and are not required to be solved while constructing the transcription. Approximate the objective by $\\sum_j h_j\\sum_i b_iL(t_{j,i},X_{j,i},u_j)+\\phi(X_{N,0})$; include path constraints only at their explicitly declared nodes.\n\nFor single or multiple shooting, check the pointwise domain before evaluating an explicit stage map; an unavailable stage evaluation returns a domain or evaluation failure and supplies no NLP candidate. For collocation, the stage values are decision variables, so construct the finite NLP and check each queried stage domain whenever its objective or constraint functions are evaluated; a failed query returns a failure status. This direct transcription samples actual pointwise data; an $L^\\infty$ equivalence class without a specified representative is not stage-evaluable. For a single-shooting reduced objective represented as the finite state-step graph of [[def-parameterized-finite-state-step-objective]], its exact real-arithmetic reduced gradient is given by [[thm-discrete-adjoint-gradient-recursion]]. Agreement of that gradient with the continuous ODE adjoint gradient is only conditional on the weighted discrete-gradient representation and the separate state, adjoint, derivative-data, endpoint, and quadrature estimates in [[thm-discrete-continuous-gradient-error-order-p]]. An embedded adaptive RK controller may be used to produce a separate trajectory estimate, but its embedded difference is not a certified global error bound and does not define the fixed smooth NLP map above. The algorithm makes no continuous-path feasibility, convergence-rate, global-optimality, or unconditioned discrete-adjoint accuracy claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "source_section": "Definition",
+          "quote": "Take a mesh $0=t_0<\\cdots<t_N=T$, a pointwise-defined smooth-data model from [[def-ctrl1-smooth-transcription-data]], a control parameterization from [[def-ctrl1-control-mesh-and-piecewise-constant-parameterization]], an explicit tableau from [[def-explicit-runge-kutta-tableau-and-stage-map]], and a possibly implicit tableau as defined by [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]]. For each interval $[t_j,t_{j+1}]$, let $h_j=t_{j+1}-t_j$ and write $u_j\\in U_c$ for its constant control. For any proposed start $X_{j,0}$, an explicit tableau forms the stages recursively:\n$$X_{j,i}=X_{j,0}+h_j\\sum_{k<i}a_{ik}F_{j,k},\\quad t_{j,i}=t_j+c_ih_j,\\quad F_{j,i}=f(t_{j,i},X_{j,i},u_j),\\quad \\Phi_j(X_{j,0},u_j)=X_{j,0}+h_j\\sum_i b_iF_{j,i}.$$\nReturn one of the following finite-dimensional nonlinear programs, with the same chosen node constraints and quadrature objective in each form.\n\n**Single shooting:** set $X_{0,0}=x_0$ and recursively impose $X_{j+1,0}=\\Phi_j(X_{j,0},u_j)$; the decision variables are the $u_j$.\n\n**Multiple shooting:** use $X_{j,0}$ and $u_j$ as decision variables, fix $X_{0,0}=x_0$, and impose $X_{j+1,0}-\\Phi_j(X_{j,0},u_j)=0$.\n\n**RK collocation:** introduce stage variables $X_{j,i}$ and impose the general collocation stage equations and endpoint equation from [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]]. This includes implicit tableaus such as Gauss collocation: their stages remain coupled equality constraints in the NLP and are not required to be solved while constructing the transcription. Approximate the objective by $\\sum_j h_j\\sum_i b_iL(t_{j,i},X_{j,i},u_j)+\\phi(X_{N,0})$; include path constraints only at their explicitly declared nodes.\n\nFor single or multiple shooting, check the pointwise domain before evaluating an explicit stage map; an unavailable stage evaluation returns a domain or evaluation failure and supplies no NLP candidate. For collocation, the stage values are decision variables, so construct the finite NLP and check each queried stage domain whenever its objective or constraint functions are evaluated; a failed query returns a failure status. This direct transcription samples actual pointwise data; an $L^\\infty$ equivalence class without a specified representative is not stage-evaluable. For a single-shooting reduced objective represented as the finite state-step graph of [[def-parameterized-finite-state-step-objective]], its exact real-arithmetic reduced gradient is given by [[thm-discrete-adjoint-gradient-recursion]]. Agreement of that gradient with the continuous ODE adjoint gradient is only conditional on the weighted discrete-gradient representation and the separate state, adjoint, derivative-data, endpoint, and quadrature estimates in [[thm-discrete-continuous-gradient-error-order-p]]. An embedded adaptive RK controller may be used to produce a separate trajectory estimate, but its embedded difference is not a certified global error bound and does not define the fixed smooth NLP map above. The algorithm makes no continuous-path feasibility, convergence-rate, global-optimality, or unconditioned discrete-adjoint accuracy claim.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Given any control tuple feasible in single shooting, calculate $X_{1,0}=\\Phi_0(x_0,u_0)$, then each later $X_{j+1,0}=\\Phi_j(X_{j,0},u_j)$. Uniqueness of each deterministic map makes this recursively defined state tuple well-defined; by construction it satisfies every multiple-shooting continuity equation.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely, a multiple-shooting feasible tuple has fixed $X_{0,0}=x_0$ and satisfies each continuity equation. Induction on $j$ forces its $X_{j,0}$ to equal the recursive single-shooting value for the same controls. Hence there is exactly one multiple-shooting state tuple for each feasible control tuple and the projection is bijective.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under this bijection the states at all shared nodes agree. Therefore every node constraint has the same value and every objective formed from the same node/stage values is identical. Thus reduced feasibility and objective values coincide.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-index or zero-input branch; its hypotheses fix positive data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The lemma statement addresses its first positive case; see step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lemma statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The lemma statement fixes nonempty feasible data or identifies an existence choice; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction is at step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction is at step 3.1."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-explicit-runge-kutta-tableau-and-stage-map",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be an open time-state domain, and let $f:D\\to\\mathbb R^d$ be the right-hand side of a first-order initial-value problem in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. An explicit $s$-stage Runge–Kutta tableau consists of a positive int",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+          "source_section": "Definition",
+          "quote": "Let $s\\ge1$ be a stage count, $A=(a_{ik})\\in\\mathbb R^{s\\times s}$, and $b,c\\in\\mathbb R^s$ satisfy $c_i=\\sum_{k=1}^s a_{ik}$ for each $i$. This is a (possibly implicit) Runge–Kutta tableau. On mesh cell $[t_j,t_{j+1}]$ with width $h_j$, a start state $X_{j,0}$ and piecewise-constant control $u_j$, define stage times $",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "source_section": "Definition",
+          "quote": "Take a mesh $0=t_0<\\cdots<t_N=T$, a pointwise-defined smooth-data model from [[def-ctrl1-smooth-transcription-data]], a control parameterization from [[def-ctrl1-control-mesh-and-piecewise-constant-parameterization]], an explicit tableau from [[def-explicit-runge-kutta-tableau-and-stage-map]], and a possibly implicit tableau as defined by [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]]. For each interval $[t_j,t_{j+1}]$, let $h_j=t_{j+1}-t_j$ and write $u_j\\in U_c$ for its constant control. For any proposed start $X_{j,0}$, an explicit tableau forms the stages recursively:\n$$X_{j,i}=X_{j,0}+h_j\\sum_{k<i}a_{ik}F_{j,k},\\quad t_{j,i}=t_j+c_ih_j,\\quad F_{j,i}=f(t_{j,i},X_{j,i},u_j),\\quad \\Phi_j(X_{j,0},u_j)=X_{j,0}+h_j\\sum_i b_iF_{j,i}.$$\nReturn one of the following finite-dimensional nonlinear programs, with the same chosen node constraints and quadrature objective in each form.\n\n**Single shooting:** set $X_{0,0}=x_0$ and recursively impose $X_{j+1,0}=\\Phi_j(X_{j,0},u_j)$; the decision variables are the $u_j$.\n\n**Multiple shooting:** use $X_{j,0}$ and $u_j$ as decision variables, fix $X_{0,0}=x_0$, and impose $X_{j+1,0}-\\Phi_j(X_{j,0},u_j)=0$.\n\n**RK collocation:** introduce stage variables $X_{j,i}$ and impose the general collocation stage equations and endpoint equation from [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]]. This includes implicit tableaus such as Gauss collocation: their stages remain coupled equality constraints in the NLP and are not required to be solved while constructing the transcription. Approximate the objective by $\\sum_j h_j\\sum_i b_iL(t_{j,i},X_{j,i},u_j)+\\phi(X_{N,0})$; include path constraints only at their explicitly declared nodes.\n\nFor single or multiple shooting, check the pointwise domain before evaluating an explicit stage map; an unavailable stage evaluation returns a domain or evaluation failure and supplies no NLP candidate. For collocation, the stage values are decision variables, so construct the finite NLP and check each queried stage domain whenever its objective or constraint functions are evaluated; a failed query returns a failure status. This direct transcription samples actual pointwise data; an $L^\\infty$ equivalence class without a specified representative is not stage-evaluable. For a single-shooting reduced objective represented as the finite state-step graph of [[def-parameterized-finite-state-step-objective]], its exact real-arithmetic reduced gradient is given by [[thm-discrete-adjoint-gradient-recursion]]. Agreement of that gradient with the continuous ODE adjoint gradient is only conditional on the weighted discrete-gradient representation and the separate state, adjoint, derivative-data, endpoint, and quadrature estimates in [[thm-discrete-continuous-gradient-error-order-p]]. An embedded adaptive RK controller may be used to produce a separate trajectory estimate, but its embedded difference is not a certified global error bound and does not define the fixed smooth NLP map above. The algorithm makes no continuous-path feasibility, convergence-rate, global-optimality, or unconditioned discrete-adjoint accuracy claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-conic-optimization-primal-dual-models",
+          "source_section": "Definition",
+          "quote": "For a finite-dimensional real inner-product space $E$, a **cone** is a set closed under addition and multiplication by nonnegative scalars. A cone $K\\subset E$ is **proper** when it is closed, convex, pointed ($K\\cap(-K)=\\{0\\}$), and has nonempty interior. Its dual cone is\n$$K^*=\\{z\\in E:\\langle z,s\\rangle\\ge0\\text{ fo",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-inequality-constrained-program-and-kkt-geometry",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$\nbe $C^2$. Let $p,m\\in\\mathbb N$ with zero allowed; when the target\ndimension is positive, let $h:U\\to\\mathbb R^p$ and\n$g=(g_1,\\ldots,g_m):U\\to\\mathbb R^m$ be componentwise $C^2$, and when it\nis zero use the unique empty map. The $C^2$ conventio",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On each interval with linear dynamics, an explicit tableau has affine stages by recursion: the first stage is affine in the start and control, and if previous stages are affine then $X_i=X_0+h\\sum_{k<i}a_{ik}F_k$ and $F_i=A(t_i)X_i+B(t_i)u$ are affine. For a general collocation tableau, the stage equation $X_i=X_0+h\\sum_k a_{ik}(A(t_k)X_k+B(t_k)u)$ is affine in all stage variables, including when $A$ is not triangular. Thus the endpoint and stage equations over the finite mesh are affine equalities in the transcription variables.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each quadrature term is a nonnegative scalar weight times a positive-semidefinite quadratic form applied to an affine state/control map, hence has positive-semidefinite Hessian; the terminal form has the same property. A finite sum of such Hessians is positive semidefinite, so the objective is convex quadratic. The remaining constraints are affine by hypothesis; thus [F3] identifies the transcription as a convex QP.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-index or zero-input branch; its hypotheses fix positive data."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-index or first-positive-index boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lemma statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement fixes finite input data and makes no existential selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-ctrl1-mesh-consistent-lqr-minimizers-converge": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ctrl1-lqr-existence-and-unique-optimal-control",
+          "source_section": "Statement",
+          "quote": "Assume the ultrafilter lemma, Dependent Choice, and Hahn–Banach. For the LQR data of [[def-ctrl1-linear-lqr-control-problem]], if the feasible-control set $\\mathcal F$ is nonempty, convex, and weakly sequentially closed, then $J$ attains its minimum on $\\mathcal F$ at a unique control $u^*$. The direct-method branch us",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ctrl1-linear-lqr-control-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$, state and control dimensions $n,m\\ge1$, and the real quotient space $L^2(0,T;\\mathbb R^m)$ of measurable controls modulo equality almost everywhere ([[def-l-p-space-as-a-quotient-by-null-functions]]). Let $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$ and $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ctrl1-control-box-is-weakly-closed",
+          "source_section": "Statement",
+          "quote": "Let $U_c\\subset\\mathbb R^m$ be nonempty, compact and convex, and let $\\mathcal U_c$ be the pointwise admissible set in [[def-ctrl1-linear-lqr-control-problem]]. If $u_k\\in\\mathcal U_c$ and $u_k\\rightharpoonup u$ weakly in real $L^2(0,T;\\mathbb R^m)$, then $u\\in\\mathcal U_c$. Thus $\\mathcal U_c$ is weakly sequentially c",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "source_section": "Statement",
+          "quote": "Assume the ultrafilter lemma, DC and HB. Let $X$ be a real reflexive Banach space ([[def-reflexive-banach-space]]) and let $(u_j)$ be a norm-bounded sequence in $X$. Then $(u_j)$ has a subsequence converging weakly to a point of $X$ ([[def-weak-convergence-of-nets-and-sequences]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-ctrl1-lqr-cost-is-weakly-lower-semicontinuous",
+          "source_section": "Statement",
+          "quote": "For the data of [[def-ctrl1-linear-lqr-control-problem]], if $u_k\\in\\mathcal U_c$ and $u_k\\rightharpoonup u$ weakly in $L^2(0,T;\\mathbb R^m)$, then $J(u)\\le\\liminf_{k\\to\\infty}J(u_k)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ctrl1-weak-control-convergence-implies-uniform-state-convergence",
+          "source_section": "Statement",
+          "quote": "For the data of [[def-ctrl1-linear-lqr-control-problem]], if $u_k,u\\in\\mathcal U_c$ and $u_k\\rightharpoonup u$ weakly in $L^2(0,T;\\mathbb R^m)$, then $x_{u_k}\\to x_u$ uniformly on $[0,T]$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-ctrl1-measurable-linear-ode-state-map",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$, $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m})$, $u\\in L^2(0,T;\\mathbb R^m)$, and $x_0\\in\\mathbb R^n$. Write $\\|A\\|_\\infty$ and $\\|B\\|_\\infty$ for the essential suprema of their Euclidean operator norms. There is a unique absolutely continuous $x:[0,T]\\to\\mathbb R^n$ sa",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ctrl1-linear-lqr-control-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$, state and control dimensions $n,m\\ge1$, and the real quotient space $L^2(0,T;\\mathbb R^m)$ of measurable controls modulo equality almost everywhere ([[def-l-p-space-as-a-quotient-by-null-functions]]). Let $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$ and $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m}",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-ultrafilter-extension-principle",
+          "source_section": "Definition",
+          "quote": "The **ultrafilter extension principle** says that every filter on a set is contained in an ultrafilter on that set ([[def-ultrafilter]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-des",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "cor-hilbert-spaces-are-reflexive",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Every real or complex Hilbert space $H$ is reflexive: the canonical evaluation map $J_H:H\\to H^{**}$ is surjective.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $u_N\\in\\mathcal F_N\\subseteq\\mathcal U_c$ and $U_c$ is compact, $\\sup_N\\|u_N\\|_2\\le\\sqrt T\\sup_{c\\in U_c}\\|c\\|_2<\\infty$. Real $L^2$ is reflexive by [A1], so [F3] gives a weakly convergent subsequence from every subsequence of $(u_N)$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let a subsequence $u_{N_k}$ converge weakly to $\\bar u$. Because each $u_{N_k}\\in\\mathcal F$ and $\\mathcal F$ is weakly sequentially closed, $\\bar u\\in\\mathcal F$. By [F4] and consistency, $J(\\bar u)\\le\\liminf_kJ(u_{N_k})\\le\\limsup_k(J_{N_k}(u_{N_k})+\\varepsilon_{N_k})$. Global discrete minimality gives $J_{N_k}(u_{N_k})\\le J_{N_k}(v_{N_k})\\le J(v_{N_k})+\\varepsilon_{N_k}$. To see $J(v_{N_k})\\to J(u^*)$, [F6] gives $\\|x_{v_{N_k}}-x_{u^*}\\|_\\infty\\le C\\|v_{N_k}-u^*\\|_2\\to0$; the control quadratic difference is bounded by $\\frac M2(\\|v_{N_k}\\|_2+\\|u^*\\|_2)\\|v_{N_k}-u^*\\|_2$, and state and terminal quadratic differences tend to zero by the corresponding bounded-quadratic estimate and uniform state convergence. Hence $J(v_{N_k})\\to J(u^*)$, so $J(\\bar u)\\le J(u^*)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $\\bar u\\in\\mathcal F$ and $u^*$ is the unique minimizer there, step 2.1 forces $\\bar u=u^*$. Every subsequence therefore has a weakly convergent subsubsequence whose limit is $u^*$. If the full sequence failed to converge weakly to $u^*$, some bounded linear functional and some positive tolerance would witness failure along a subsequence; a weakly convergent subsubsequence from step 1.1 would contradict that witness. Thus $u_N\\rightharpoonup u^*$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F5] to the weakly convergent admissible controls from step 3.1 to obtain $x_{u_N}\\to x_{u^*}$ uniformly on $[0,T]$.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The theorem statement addresses empty input; see step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The theorem statement addresses zero-value data; see step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The theorem statement addresses its first positive case; see step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The theorem statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The theorem statement fixes nonempty feasible data or identifies an existence choice; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-ctrl1-objective-and-control-error-from-consistency-bounds": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ctrl1-lqr-variational-inequality-and-pointwise-control-branch",
+          "source_section": "Statement",
+          "quote": "For the LQR data of [[def-ctrl1-linear-lqr-control-problem]], let $\\mathcal F$ be nonempty and convex and let $u\\in\\mathcal F$. Put $g(t)=B(t)^Tp(t)+R(t)u(t)$, with the adjoint from [[def-ctrl1-lqr-adjoint-equation]]. If $u$ minimizes $J$ on $\\mathcal F$, then\n$$\\int_0^T g(t)^T(v(t)-u(t))\\,dt\\ge0\\qquad(v\\in\\mathcal F).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ctrl1-linear-lqr-control-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$, state and control dimensions $n,m\\ge1$, and the real quotient space $L^2(0,T;\\mathbb R^m)$ of measurable controls modulo equality almost everywhere ([[def-l-p-space-as-a-quotient-by-null-functions]]). Let $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$ and $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ctrl1-measurable-linear-ode-state-map",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$, $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m})$, $u\\in L^2(0,T;\\mathbb R^m)$, and $x_0\\in\\mathbb R^n$. Write $\\|A\\|_\\infty$ and $\\|B\\|_\\infty$ for the essential suprema of their Euclidean operator norms. There is a unique absolutely continuous $x:[0,T]\\to\\mathbb R^n$ sa",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F2] with $u=u^*$ and any $v\\in\\mathcal F$. The variational inequality [F1] makes the linear term nonnegative, while the state and terminal quadratic remainders are nonnegative and the control remainder is at least $\\frac r2\\|v-u^*\\|_2^2$. Thus $J(v)-J(u^*)\\ge\\frac r2\\|v-u^*\\|_2^2\\ge0$ for every feasible $v$, which is the asserted quadratic growth inequality.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The assumed inequalities and consistency give $J(u_N)\\le J_N(u_N)+\\delta_N\\le J_N(v_N)+\\eta_N+\\delta_N\\le J(v_N)+\\eta_N+2\\delta_N\\le J(u^*)+\\rho_N+\\eta_N+2\\delta_N$. Subtract $J(u^*)$ and combine with step 1.1 to get the objective-gap bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the growth inequality of step 1.1 at $v=u_N$. Substitute the upper objective-gap bound from step 2.1, divide by $r/2>0$, and take nonnegative square roots to obtain the control-error estimate.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-index or zero-input branch; its hypotheses fix positive data."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-index or first-positive-index boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The theorem statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement fixes finite input data and makes no existential selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "alg-ctrl1-finite-budget-transcription-solver-dispatch": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The algorithm statement addresses zero-value data; see the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The algorithm statement addresses its first positive case; see the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint is part of the stated object or conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The algorithm statement fixes nonempty feasible data or identifies an existence choice; see the statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ctrl1-smooth-transcription-data",
+          "source_section": "Definition",
+          "quote": "For pointwise numerical transcription on $[0,T]$, the data consist of an integer $n\\ge1$, open sets $\\Omega_x\\subseteq\\mathbb R^n$ and $\\Omega_u\\subseteq\\mathbb R^m$, a nonempty compact convex control set $U_c\\subset\\Omega_u$, an initial state $x_0\\in\\Omega_x$, a pointwise-defined vector field $f:[0,T]\\times\\Omega_x\\ti",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "source_section": "Definition",
+          "quote": "Take a mesh $0=t_0<\\cdots<t_N=T$, a pointwise-defined smooth-data model from [[def-ctrl1-smooth-transcription-data]], a control parameterization from [[def-ctrl1-control-mesh-and-piecewise-constant-parameterization]], an explicit tableau from [[def-explicit-runge-kutta-tableau-and-stage-map]], and a possibly implicit tableau as defined by [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]]. For each interval $[t_j,t_{j+1}]$, let $h_j=t_{j+1}-t_j$ and write $u_j\\in U_c$ for its constant control. For any proposed start $X_{j,0}$, an explicit tableau forms the stages recursively:\n$$X_{j,i}=X_{j,0}+h_j\\sum_{k<i}a_{ik}F_{j,k},\\quad t_{j,i}=t_j+c_ih_j,\\quad F_{j,i}=f(t_{j,i},X_{j,i},u_j),\\quad \\Phi_j(X_{j,0},u_j)=X_{j,0}+h_j\\sum_i b_iF_{j,i}.$$\nReturn one of the following finite-dimensional nonlinear programs, with the same chosen node constraints and quadrature objective in each form.\n\n**Single shooting:** set $X_{0,0}=x_0$ and recursively impose $X_{j+1,0}=\\Phi_j(X_{j,0},u_j)$; the decision variables are the $u_j$.\n\n**Multiple shooting:** use $X_{j,0}$ and $u_j$ as decision variables, fix $X_{0,0}=x_0$, and impose $X_{j+1,0}-\\Phi_j(X_{j,0},u_j)=0$.\n\n**RK collocation:** introduce stage variables $X_{j,i}$ and impose the general collocation stage equations and endpoint equation from [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]]. This includes implicit tableaus such as Gauss collocation: their stages remain coupled equality constraints in the NLP and are not required to be solved while constructing the transcription. Approximate the objective by $\\sum_j h_j\\sum_i b_iL(t_{j,i},X_{j,i},u_j)+\\phi(X_{N,0})$; include path constraints only at their explicitly declared nodes.\n\nFor single or multiple shooting, check the pointwise domain before evaluating an explicit stage map; an unavailable stage evaluation returns a domain or evaluation failure and supplies no NLP candidate. For collocation, the stage values are decision variables, so construct the finite NLP and check each queried stage domain whenever its objective or constraint functions are evaluated; a failed query returns a failure status. This direct transcription samples actual pointwise data; an $L^\\infty$ equivalence class without a specified representative is not stage-evaluable. For a single-shooting reduced objective represented as the finite state-step graph of [[def-parameterized-finite-state-step-objective]], its exact real-arithmetic reduced gradient is given by [[thm-discrete-adjoint-gradient-recursion]]. Agreement of that gradient with the continuous ODE adjoint gradient is only conditional on the weighted discrete-gradient representation and the separate state, adjoint, derivative-data, endpoint, and quadrature estimates in [[thm-discrete-continuous-gradient-error-order-p]]. An embedded adaptive RK controller may be used to produce a separate trajectory estimate, but its embedded difference is not a certified global error bound and does not define the fixed smooth NLP map above. The algorithm makes no continuous-path feasibility, convergence-rate, global-optimality, or unconditioned discrete-adjoint accuracy claim.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-inequality-constrained-program-and-kkt-geometry",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$\nbe $C^2$. Let $p,m\\in\\mathbb N$ with zero allowed; when the target\ndimension is positive, let $h:U\\to\\mathbb R^p$ and\n$g=(g_1,\\ldots,g_m):U\\to\\mathbb R^m$ be componentwise $C^2$, and when it\nis zero use the unique empty map. The $C^2$ conventio",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sqp-exact-hessian-local-quadratic-convergence",
+          "source_section": "Statement",
+          "quote": "Let $x_*$ be a KKT point of a $C^2$ nonlinear program, with multiplier\n$\\mu_*=(\\nu_*,\\lambda_{*,I})$ and active set $I=I(x_*)$. Assume LICQ,\nstrict complementarity $\\lambda_{*,i}>0$ for every $i\\in I$, and the\nsecond-order sufficient condition\n$$d^T\\nabla^2_{xx}L(x_*,\\mu_*)d>0 \\quad\\text{for every nonzero critical dire",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-second-order-sufficient-condition-on-the-critical-cone",
+          "source_section": "Statement",
+          "quote": "For the $C^2$ program of\n[[def-inequality-constrained-program-and-kkt-geometry]], suppose $x_*$ is\nfeasible and has KKT multipliers $(\\nu,\\lambda)$. If\n$$\nd^T\\nabla_{xx}^2L(x_*,\\nu,\\lambda)d>0\\quad\\text{for every nonzero }d\\in\\mathcal K(x_*,\\nu,\\lambda),\n$$\nthen $x_*$ is a strict local minimizer. The condition is vacuo",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ctrl1-smooth-transcription-data",
+          "source_section": "Definition",
+          "quote": "For pointwise numerical transcription on $[0,T]$, the data consist of an integer $n\\ge1$, open sets $\\Omega_x\\subseteq\\mathbb R^n$ and $\\Omega_u\\subseteq\\mathbb R^m$, a nonempty compact convex control set $U_c\\subset\\Omega_u$, an initial state $x_0\\in\\Omega_x$, a pointwise-defined vector field $f:[0,T]\\times\\Omega_x\\ti",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A fixed transcription has finitely many state, stage, and control variables. Its constraints and objective are finite compositions and sums of the pointwise data with three continuous derivatives and polynomial RK stage expressions, so they have continuous derivatives through order three on a neighborhood where every stage remains in the declared smooth tube.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The KKT map for the identified active set is built from the first derivatives of those objective and constraint functions. Its Jacobian is locally Lipschitz by continuity and local boundedness of their third derivatives in [F5]. The assumed LICQ, strict complementarity, and SOSC from [F4] are exactly the remaining hypotheses of [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F3] to the active KKT system. It provides a neighborhood in which exact-Hessian full Newton steps are defined and converge quadratically from a sufficiently close start, which is the asserted local branch. The dispatcher has a finite outer cap, so it can stop before the infinite local sequence converges; no global or mesh-refinement claim follows.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The theorem statement addresses zero-value data; see step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The theorem statement addresses its first positive case; see step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint is part of the stated object or conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement fixes finite input data and makes no existential selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-ctrl1-bounded-actuator-lqr": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ctrl1-linear-lqr-control-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$, state and control dimensions $n,m\\ge1$, and the real quotient space $L^2(0,T;\\mathbb R^m)$ of measurable controls modulo equality almost everywhere ([[def-l-p-space-as-a-quotient-by-null-functions]]). Let $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$ and $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m}",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ctrl1-lqr-existence-and-unique-optimal-control",
+          "source_section": "Statement",
+          "quote": "Assume the ultrafilter lemma, Dependent Choice, and Hahn–Banach. For the LQR data of [[def-ctrl1-linear-lqr-control-problem]], if the feasible-control set $\\mathcal F$ is nonempty, convex, and weakly sequentially closed, then $J$ attains its minimum on $\\mathcal F$ at a unique control $u^*$. The direct-method branch us",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ctrl1-lqr-variational-inequality-and-pointwise-control-branch",
+          "source_section": "Statement",
+          "quote": "For the LQR data of [[def-ctrl1-linear-lqr-control-problem]], let $\\mathcal F$ be nonempty and convex and let $u\\in\\mathcal F$. Put $g(t)=B(t)^Tp(t)+R(t)u(t)$, with the adjoint from [[def-ctrl1-lqr-adjoint-equation]]. If $u$ minimizes $J$ on $\\mathcal F$, then\n$$\\int_0^T g(t)^T(v(t)-u(t))\\,dt\\ge0\\qquad(v\\in\\mathcal F).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $m=\\int_0^1u(t)dt$. Since $\\int_0^1(u-m)^2dt=\\int_0^1u^2dt-m^2$, direct expansion gives $J(u)=\\frac12\\|u-m\\|_2^2+\\frac12[m^2+(m-1)^2]=\\frac12\\|u-m\\|_2^2+(m-\\frac12)^2+\\frac14\\ge\\frac14$. Equality requires $u=m$ almost everywhere and $m=\\frac12$, so it occurs exactly at $u^*(t)=\\frac12$, which satisfies the actuator bound.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2] an optimizer exists uniquely; step 1.1 identifies its value and control as $u^*$. Its state is $x(t)=t/2$, adjoint is constant $p(t)=x(1)-1=-1/2$, and reduced gradient $p+u^*=0$. Thus the pointwise control variational inequality from [F3] holds with equality for every admissible actuator value. Substitution into the objective gives $J(u^*)=\\frac12(1/4)+\\frac12(1/2-1)^2=\\frac14$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-index or zero-input branch; its hypotheses fix positive data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example statement addresses its first positive case; see step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example statement fixes nonempty feasible data or identifies an existence choice; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "displayed exact computation",
+          "status": "checked",
+          "evidence": "Exact arithmetic appears in Verification steps 1.1, 2.1."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-ctrl1-chemical-dosing-linear-model": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ctrl1-measurable-linear-ode-state-map",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $A\\in L^\\infty(0,T;\\mathbb R^{n\\times n})$, $B\\in L^\\infty(0,T;\\mathbb R^{n\\times m})$, $u\\in L^2(0,T;\\mathbb R^m)$, and $x_0\\in\\mathbb R^n$. Write $\\|A\\|_\\infty$ and $\\|B\\|_\\infty$ for the essential suprema of their Euclidean operator norms. There is a unique absolutely continuous $x:[0,T]\\to\\mathbb R^n$ sa",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-explicit-runge-kutta-tableau-and-stage-map",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be an open time-state domain, and let $f:D\\to\\mathbb R^d$ be the right-hand side of a first-order initial-value problem in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. An explicit $s$-stage Runge–Kutta tableau consists of a positive int",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ctrl1-control-mesh-and-piecewise-constant-parameterization",
+          "source_section": "Definition",
+          "quote": "For the horizon $[0,T]$ of [[def-ctrl1-linear-lqr-control-problem]], a time mesh is a finite partition $0=t_0<t_1<\\cdots<t_N=T$ with $N\\ge1$. Its cell widths are $h_j=t_{j+1}-t_j>0$ and its mesh size is $|\\Delta|=\\max_{0\\le j<N}h_j$. A piecewise-constant control vector is $(u_0,\\ldots,u_{N-1})$ and represents the measu",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-bounded-adaptive-runge-kutta-controller",
+          "source_section": "Definition",
+          "quote": "Inputs are an initial value problem on $[t_0,T]$ with $t_0\\le T$ and states in $\\mathbb R^d$ for an integer $d\\ge1$, an initial proposal $0<h_{\\rm init}\\le h_{\\max}$, an embedded pair with low order $p\\ge1$ as in [[def-embedded-runge-kutta-pair-and-error-estimator]], initial value $y_0$, tolerances $\\mathrm{atol}>0$ an",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-bounded-adaptive-runge-kutta-controller-terminates",
+          "source_section": "Statement",
+          "quote": "For finite-dimensional states and the finite-budget procedure in [[alg-bounded-adaptive-runge-kutta-controller]], the controller returns one of `success`, `failure`, `minimum-step-rejected`, or `attempt-budget-exhausted` after at most $N$ trial attempts. Each individual attempt uses finitely many stage evaluations and ",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The exact integral equation is $x(t)=\\int_0^t(-x(s)+1)ds$. The function $x(t)=1-e^{-t}$ has $x(0)=0$ and derivative $e^{-t}=-(1-e^{-t})+1$, so it solves the equation; uniqueness follows from [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the one-cell mesh, the explicit midpoint first slope is $K_1=-x_0+u=1$. The second stage is $X_2=x_0+\\frac12K_1=\\frac12$, so $K_2=-X_2+u=\\frac12$. The output is $x_1=x_0+K_2=\\frac12$ by [F2]; the exact endpoint is $1-e^{-1}$ by step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The exponential series gives $e=1+1+\\sum_{k\\ge2}1/k!>2$, so $1-e^{-1}>1/2$ and the midpoint endpoint differs from the exact endpoint. The procedure returns the stated value, not a bound on the true error, by [F4].",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example statement addresses zero-value data; see step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example statement addresses its first positive case; see step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement fixes finite input data and makes no existential selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a one-way result, definition, or example and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "displayed exact computation",
+          "status": "checked",
+          "evidence": "Exact arithmetic appears in Verification steps 1.1, 2.1, 3.1."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-ctrl1-single-versus-multiple-shooting-two-intervals": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ctrl1-control-mesh-and-piecewise-constant-parameterization",
+          "source_section": "Definition",
+          "quote": "For the horizon $[0,T]$ of [[def-ctrl1-linear-lqr-control-problem]], a time mesh is a finite partition $0=t_0<t_1<\\cdots<t_N=T$ with $N\\ge1$. Its cell widths are $h_j=t_{j+1}-t_j>0$ and its mesh size is $|\\Delta|=\\max_{0\\le j<N}h_j$. A piecewise-constant control vector is $(u_0,\\ldots,u_{N-1})$ and represents the measu",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "source_section": "Definition",
+          "quote": "Take a mesh $0=t_0<\\cdots<t_N=T$, a pointwise-defined smooth-data model from [[def-ctrl1-smooth-transcription-data]], a control parameterization from [[def-ctrl1-control-mesh-and-piecewise-constant-parameterization]], an explicit tableau from [[def-explicit-runge-kutta-tableau-and-stage-map]], and a possibly implicit tableau as defined by [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]]. For each interval $[t_j,t_{j+1}]$, let $h_j=t_{j+1}-t_j$ and write $u_j\\in U_c$ for its constant control. For any proposed start $X_{j,0}$, an explicit tableau forms the stages recursively:\n$$X_{j,i}=X_{j,0}+h_j\\sum_{k<i}a_{ik}F_{j,k},\\quad t_{j,i}=t_j+c_ih_j,\\quad F_{j,i}=f(t_{j,i},X_{j,i},u_j),\\quad \\Phi_j(X_{j,0},u_j)=X_{j,0}+h_j\\sum_i b_iF_{j,i}.$$\nReturn one of the following finite-dimensional nonlinear programs, with the same chosen node constraints and quadrature objective in each form.\n\n**Single shooting:** set $X_{0,0}=x_0$ and recursively impose $X_{j+1,0}=\\Phi_j(X_{j,0},u_j)$; the decision variables are the $u_j$.\n\n**Multiple shooting:** use $X_{j,0}$ and $u_j$ as decision variables, fix $X_{0,0}=x_0$, and impose $X_{j+1,0}-\\Phi_j(X_{j,0},u_j)=0$.\n\n**RK collocation:** introduce stage variables $X_{j,i}$ and impose the general collocation stage equations and endpoint equation from [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]]. This includes implicit tableaus such as Gauss collocation: their stages remain coupled equality constraints in the NLP and are not required to be solved while constructing the transcription. Approximate the objective by $\\sum_j h_j\\sum_i b_iL(t_{j,i},X_{j,i},u_j)+\\phi(X_{N,0})$; include path constraints only at their explicitly declared nodes.\n\nFor single or multiple shooting, check the pointwise domain before evaluating an explicit stage map; an unavailable stage evaluation returns a domain or evaluation failure and supplies no NLP candidate. For collocation, the stage values are decision variables, so construct the finite NLP and check each queried stage domain whenever its objective or constraint functions are evaluated; a failed query returns a failure status. This direct transcription samples actual pointwise data; an $L^\\infty$ equivalence class without a specified representative is not stage-evaluable. For a single-shooting reduced objective represented as the finite state-step graph of [[def-parameterized-finite-state-step-objective]], its exact real-arithmetic reduced gradient is given by [[thm-discrete-adjoint-gradient-recursion]]. Agreement of that gradient with the continuous ODE adjoint gradient is only conditional on the weighted discrete-gradient representation and the separate state, adjoint, derivative-data, endpoint, and quadrature estimates in [[thm-discrete-continuous-gradient-error-order-p]]. An embedded adaptive RK controller may be used to produce a separate trajectory estimate, but its embedded difference is not a certified global error bound and does not define the fixed smooth NLP map above. The algorithm makes no continuous-path feasibility, convergence-rate, global-optimality, or unconditioned discrete-adjoint accuracy claim.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent",
+          "source_section": "Statement",
+          "quote": "Fix a mesh, controls $u_0,\\ldots,u_{N-1}$, and a successful deterministic Runge–Kutta interval map $\\Phi_j$ from [[alg-ctrl1-runge-kutta-shooting-and-collocation-transcription]]. In the single-shooting NLP, define states recursively from $X_{0,0}=x_0$ and $X_{j+1,0}=\\Phi_j(X_{j,0},u_j)$. In the multiple-shooting NLP, i",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the first cell every stage slope equals $v_0$, so its endpoint increment is $\\frac12v_0\\sum_i b_i=\\frac12v_0$. The second cell adds $\\frac12v_1\\sum_i b_i=\\frac12v_1$. Thus single shooting gives the stated $x_1$ and $x_2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The multiple-shooting continuity equations uniquely impose $x_1=\\frac12v_0$ and $x_2=x_1+\\frac12v_1=\\frac12(v_0+v_1)$. Substitution into its objective gives exactly the single-shooting objective. This is the concrete bijection and reduced-objective identity stated in [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes nonempty finite-horizon data and has no empty index or empty collection case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-index or zero-input branch; its hypotheses fix positive data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example statement addresses its first positive case; see step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no variable interval, or fixes a nondegenerate horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example statement specifies its interval endpoint data; see step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example statement fixes nonempty feasible data or identifies an existence choice; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction is at step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction is at step 2.1."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "displayed exact computation",
+          "status": "checked",
+          "evidence": "Exact arithmetic appears in Verification steps 1.1, 2.1."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

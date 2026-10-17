@@ -1,0 +1,57 @@
+A comparison of CE and VM strategies
+185
+sampling estimator has minimum variance within the parametric family F . The minimizer vvm
+is referred to as the optimal VM parameter vector. For any unbiased estimator ℓof ℓ, we have
+var ℓ= Eℓ2 −ℓ2. Therefore, vvm can be written as
+vvm = argmin
+v
+Ev Z(v)2 = argmin
+v
+Eu Z(v) = argmin
+v
+log Eu Z(v),
+(2.1)
+where the expectation operators Eu and Ev are taken with respect to the densities f (·; u) and
+f (·; v), respectively. A related approach to locating a good importance density involves the
+Kullback–Leibler divergence, or CE distance. To motivate the method, ﬁrst note that the zero-
+variance importance density for estimating ℓis simply g∗(x) = ℓ−1f (x; u) 1(S(x) > γ )—the
+conditional density given the rare event. Obviously, g∗cannot be used directly in practice
+as it involves the unknown constant ℓ. Nevertheless, this provides a practical criterion to
+locate a good importance density. Speciﬁcally, if we choose the density within F that is the
+closest to g∗in the CE distance, then intuitively the associated estimator should have reasonable
+performance. Let vce denote the minimizer, which we refer to as the optimal CE parameter
+vector. It can be shown [16, pp. 67–68] that solving the CE minimization problem is equivalent
+to ﬁnding
+vce = argmax
+v
+
+f (x; u) 1(S(x) > γ ) log f (x; v) dx.
+(2.2)
+Although the optimal CE and VM parameter vectors can be obtained analytically for a few
+speciﬁc cases, in general the optimization problems in (2.1) and (2.2) are difﬁcult to solve.
+Thus, in practice, we often need to estimate vvm or vce via a multilevel procedure, which we
+shall call multilevel VM or CE (see [11] for a more thorough discussion).
+Recent research has shown that in certain high-dimensional cases the estimates for vvm
+and vce obtained from the multilevel procedures are not accurate, and, as a consequence, the
+associated estimators perform poorly [8], [9], [14], [15]. A recent variant, called the screening
+method, introduced in [15], aims to reduce the dimension of the likelihood ratio, and is shown to
+perform better than the multilevel VM and CE methods in various high-dimensional estimation
+problems. To motivate the method, partition the parameter vector u into two subsets: u =
+(u0, u1), where the occurrence of the rare event {S(X) > γ } is substantially affected by u1 but
+not by u0. The vector u1 is referred to as the bottleneck parameter. Now consider the parametric
+family F0 = {f (x;v)} indexed by v, where v = (u0, v1) and u0 is ﬁxed—therefore, F0 is in
+fact indexed by v1. The screening method proceeds in the same way as the multilevel CE and
+VM methods, but instead of twisting the whole parameter vector u, we only twist the bottleneck
+parameter u1.
+Since F0 ⊂F , the variance of the importance sampling estimator associated with vvm
+is at least as small as the variance of the estimator associated with vvm simply by deﬁnition.
+Paradoxically, however, the empirical ﬁndings in [15] suggest otherwise for the situation where
+the parameters are estimated via a multilevel procedure. A possible explanation is that the
+parameter vector obtained via the multilevel procedure, say, vvm,T , is not an accurate estimate
+for vvm. By reducing the dimension of the likelihood ratio via the screening method, we can
+estimate vvm—the optimal VM parameter vector within F0—more accurately. As a result, the
+importance density f (x;vvm,T ), where vvm,T denotes the parameter vector obtained via the
+screening method, is ‘closer’to g∗compared to f (x;vvm,T ), and, thus, the estimator associated
+with the former density has a smaller variance than that of the latter.
+Another improved variant proposed by Chan and Kroese [8] aims to estimate vce in one step
+so as to circumvent likelihood degeneracy of the estimation procedure. Speciﬁcally, instead of

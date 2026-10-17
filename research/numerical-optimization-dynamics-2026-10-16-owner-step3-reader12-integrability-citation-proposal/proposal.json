@@ -1,0 +1,373 @@
+{
+  "status": "research-only-proposal-awaiting-root/native-Alpha12-handoff",
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "consumer": "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds",
+  "guarded_operations": [
+    {
+      "file": "items/thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds.md",
+      "kind": "exact_text_replace",
+      "before": "[F9] On a probability space, every square-integrable real random variable is integrable; [[lem-variance-and-covariance-identities-for-random-variables]], Proof step 1.1, derives this from $2|X|\\le1+X^2$.\n\n",
+      "after": ""
+    },
+    {
+      "file": "items/thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds.md",
+      "kind": "exact_text_replace",
+      "before": "1.3 For centered square-integrable coordinate noises $E_1,E_0$, [F6] and the definitions of variance and covariance give $\\operatorname{Var}(E_1-E_0)=\\operatorname{Cov}(E_1-E_0,E_1-E_0)$. Bilinearity and symmetry then yield $\\sigma_1^2+\\sigma_0^2-2c$. Dividing by $h^2$ or $(2h)^2$ gives the forward and central formulas. If the noises are independent with common variance $\\sigma^2$, [F9] makes them integrable, so [F7] gives $\\mathbb E[E_1E_0]=\\mathbb E[E_1]\\mathbb E[E_0]=0$; their covariance is $0$ by [F6], yielding $2\\sigma^2/h^2$ and $\\sigma^2/(2h^2)$. [given, F6, F7, F9, algebra]",
+      "after": "1.3 For centered square-integrable coordinate noises $E_1,E_0$, [F6] and the definitions of variance and covariance give $\\operatorname{Var}(E_1-E_0)=\\operatorname{Cov}(E_1-E_0,E_1-E_0)$. Bilinearity and symmetry then yield $\\sigma_1^2+\\sigma_0^2-2c$. Dividing by $h^2$ or $(2h)^2$ gives the forward and central formulas. If the noises are independent with common variance $\\sigma^2$, then for $j=0,1$ the pointwise bound $2|E_j|\\le1+E_j^2$ and total probability mass one give $\\mathbb E|E_j|\\le(1+\\mathbb E[E_j^2])/2<\\infty$. Thus [F7] gives $\\mathbb E[E_1E_0]=\\mathbb E[E_1]\\mathbb E[E_0]=0$; their covariance is $0$ by [F6], yielding $2\\sigma^2/h^2$ and $\\sigma^2/(2h^2)$. [given, F6, F7, algebra]"
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-12.proof-contracts.json",
+      "pointer": [
+        "contracts",
+        "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds",
+        "citations"
+      ],
+      "before": [
+        {
+          "fact": "F1",
+          "source": "def-jacobian-and-hessian-vector-difference-products",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\ge1$, $U\\subseteq\\mathbb R^n$ be open, $x\\in U$, $F:U\\to\\mathbb R^m$, $f:U\\to\\mathbb R$, and let $v\\in\\mathbb R^n$. Use the Jacobian $JF(x)$ and gradient $\\nabla f(x)$ of [[def-jacobian-matrix-and-gradient]], the Hessian $H_f(x)$ of [[def-hessian-and-euclidean-critical-point]], and the published Euclidean vector norm $\\|\\cdot\\|_2$ of [[def-p-norms-on-rn]]. The Jacobian-vector products below require $JF(x)$ to exist, and the Hessian-vector products require $H_f(x)$ to exist. Each gradient-difference Hessian-vector estimate also requires $\\nabla f$ to exist at every point in its stencil. The exact products are $JF(x)v$ and $H_f(x)v$, respectively.\n\nFor $h>0$ with the required points in $U$, define the forward and central Jacobian-vector estimates\n\n$$J_h^+(F,x,v):=\\frac{F(x+hv)-F(x)}h,\\qquad J_h^0(F,x,v):=\\frac{F(x+hv)-F(x-hv)}{2h},$$\n\nand the gradient-difference Hessian-vector estimates\n\n$$H_h^+(f,x,v):=\\frac{\\nabla f(x+hv)-\\nabla f(x)}h,\\qquad H_h^0(f,x,v):=\\frac{\\nabla f(x+hv)-\\nabla f(x-hv)}{2h}.$$\n\nFor each requested vector value $z(y)$, write an inexact evaluation as $\\widehat z(y)=z(y)+e$. When an error bound is specified, it is per call: $\\|e\\|_2\\le\\delta$ for that call's $\\delta\\ge0$. Errors may be dependent or random; a stated bound on a random error is understood to hold almost surely. Define the inexact estimates by substitution:\n\n$$\\widehat J_h^+(F,x,v):=\\frac{\\widehat F(x+hv)-\\widehat F(x)}h,\\qquad \\widehat J_h^0(F,x,v):=\\frac{\\widehat F(x+hv)-\\widehat F(x-hv)}{2h},$$\n\n$$\\widehat H_h^+(f,x,v):=\\frac{\\widehat{\\nabla f}(x+hv)-\\widehat{\\nabla f}(x)}h,\\qquad \\widehat H_h^0(f,x,v):=\\frac{\\widehat{\\nabla f}(x+hv)-\\widehat{\\nabla f}(x-hv)}{2h}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-derivatives-along-a-line-have-the-multinomial-expansion",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open, $f\\in C^k(U)$, and let $I\\subseteq\\mathbb R$ be an open interval such that $a+th\\in U$ for every $t\\in I$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-canonical-natural]]. For $g(t)=f(a+th)$ and every $0\\le r\\le k$,\n\n$$g^{(r)}(t)=\\sum_{|\\alpha|=r}\\frac{\\iota(r!)}{\\iota(\\alpha!)}D^\\alpha f(a+th)h^\\alpha\\qquad(t\\in I).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-symmetry-of-higher-mixed-partials",
+          "source_section": "Statement",
+          "quote": "Let $k\\ge2$. If $f\\in C^k(U)$ for an open $U\\subseteq\\mathbb R^m$, then every iterated derivative of $f$ of order $k$ is unchanged by any permutation of its coordinate differentiations.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-taylor-lagrange-and-cauchy-remainders",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-taylor-schlomilch-roche-remainder]], there are points $\\xi_L,\\xi_C$ between $a$ and $x$ such that\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_L)}{\\iota((n+1)!)}(x-a)^{n+1}$$\nand\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_C)}{\\iota(n!)}(x-\\xi_C)^n(x-a).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-taylor-polynomial-and-remainder",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$, let $f$ have derivatives through order $n$ at $a$, and let $\\iota:\\mathbb N\\to\\mathbb R$ be the canonical embedding. The **Taylor polynomial of degree at most $n$ about $a$** is\n$$T_{n,a}f(x):=\\sum_{j=0}^{n}\\frac{f^{(j)}(a)}{\\iota(j!)}(x-a)^j.$$\nThe **Taylor remainder** is $R_{n,a}f(x):=f(x)-T_{n,a}f(x)$.\n\nThe factorials are natural numbers as in [[def-factorial-and-falling-factorial]] and enter real arithmetic only through $\\iota$ ([[def-canonical-natural]]); they are nonzero ([[lem-of-naturals-positive]]). The sum and powers are those of [[def-finite-sum]], [[lem-finite-sum-laws]], and [[def-integer-power]]. For $n=0$, $T_{0,a}f$ is the constant $f(a)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $p \\in \\mathbb{Q}$ with $p \\ge 1$, with the norms\nof [[def-p-norms-on-rn]]. Then:\n\n1. $\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$\n   ([[def-norm-and-normed-space]]).\n2. For $n \\ge 1$, $\\lVert\\cdot\\rVert_\\infty$ is a norm on $\\mathbb{R}^{n}$.\n3. **The dictionary.** For $n \\ge 1$ and all $x, y \\in \\mathbb{R}^{n}$,\n   $$\\lVert x-y\\rVert_1 = d_1(x,y), \\qquad \\lVert x-y\\rVert_2 = d_2(x,y), \\qquad \\lVert x-y\\rVert_\\infty = d_\\infty(x,y),$$\n   where $d_1$, $d_2$, $d_\\infty$ are the metrics of the published\n   [[lem-metrics-on-rn]]. So the metric induced by each of these three norms\n   ([[def-norm-and-normed-space]]) **is** the correspondingly named published\n   metric, not merely one equivalent to it.\n\n**Consequence, used repeatedly below and stated once here.** By clause 3 at\n$p = 2$, the metric space $(\\mathbb{R}^{n}, d_2)$ of the published metric-spaces\npage and the metric space underlying the normed space\n$(\\mathbb{R}^{n}, \\lVert\\cdot\\rVert_2)$ of this page are the same object. Hence\ncompleteness ([[thm-euclidean-space-complete]] clause 2), Heine-Borel\n([[thm-heine-borel-rn]] clause 2) and the compactness equivalences\n([[thm-metric-compactness-equivalences]]) are statements about this page's normed\nspace, **with their hypothesis $n \\ge 1$ inherited unchanged and not weakened**.\nNothing below cites any of those three theorems for $n = 0$.\n\n**Why this lemma exists.** Without it the library would hold a norm-induced\nmetric on $\\mathbb{R}^{n}$ and a separately published metric on the same set with\nno recorded relation, and every later citation would have to guess which was\nmeant. The proof of clause 3 is a comparison of two written expressions; the\nvalue is that the comparison is made and recorded.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Proof",
+          "quote": "Since the probability measure has total mass one, $2|X|\\le1+X^2$ makes $X$ integrable.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "after": [
+        {
+          "fact": "F1",
+          "source": "def-jacobian-and-hessian-vector-difference-products",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\ge1$, $U\\subseteq\\mathbb R^n$ be open, $x\\in U$, $F:U\\to\\mathbb R^m$, $f:U\\to\\mathbb R$, and let $v\\in\\mathbb R^n$. Use the Jacobian $JF(x)$ and gradient $\\nabla f(x)$ of [[def-jacobian-matrix-and-gradient]], the Hessian $H_f(x)$ of [[def-hessian-and-euclidean-critical-point]], and the published Euclidean vector norm $\\|\\cdot\\|_2$ of [[def-p-norms-on-rn]]. The Jacobian-vector products below require $JF(x)$ to exist, and the Hessian-vector products require $H_f(x)$ to exist. Each gradient-difference Hessian-vector estimate also requires $\\nabla f$ to exist at every point in its stencil. The exact products are $JF(x)v$ and $H_f(x)v$, respectively.\n\nFor $h>0$ with the required points in $U$, define the forward and central Jacobian-vector estimates\n\n$$J_h^+(F,x,v):=\\frac{F(x+hv)-F(x)}h,\\qquad J_h^0(F,x,v):=\\frac{F(x+hv)-F(x-hv)}{2h},$$\n\nand the gradient-difference Hessian-vector estimates\n\n$$H_h^+(f,x,v):=\\frac{\\nabla f(x+hv)-\\nabla f(x)}h,\\qquad H_h^0(f,x,v):=\\frac{\\nabla f(x+hv)-\\nabla f(x-hv)}{2h}.$$\n\nFor each requested vector value $z(y)$, write an inexact evaluation as $\\widehat z(y)=z(y)+e$. When an error bound is specified, it is per call: $\\|e\\|_2\\le\\delta$ for that call's $\\delta\\ge0$. Errors may be dependent or random; a stated bound on a random error is understood to hold almost surely. Define the inexact estimates by substitution:\n\n$$\\widehat J_h^+(F,x,v):=\\frac{\\widehat F(x+hv)-\\widehat F(x)}h,\\qquad \\widehat J_h^0(F,x,v):=\\frac{\\widehat F(x+hv)-\\widehat F(x-hv)}{2h},$$\n\n$$\\widehat H_h^+(f,x,v):=\\frac{\\widehat{\\nabla f}(x+hv)-\\widehat{\\nabla f}(x)}h,\\qquad \\widehat H_h^0(f,x,v):=\\frac{\\widehat{\\nabla f}(x+hv)-\\widehat{\\nabla f}(x-hv)}{2h}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-derivatives-along-a-line-have-the-multinomial-expansion",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open, $f\\in C^k(U)$, and let $I\\subseteq\\mathbb R$ be an open interval such that $a+th\\in U$ for every $t\\in I$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-canonical-natural]]. For $g(t)=f(a+th)$ and every $0\\le r\\le k$,\n\n$$g^{(r)}(t)=\\sum_{|\\alpha|=r}\\frac{\\iota(r!)}{\\iota(\\alpha!)}D^\\alpha f(a+th)h^\\alpha\\qquad(t\\in I).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-symmetry-of-higher-mixed-partials",
+          "source_section": "Statement",
+          "quote": "Let $k\\ge2$. If $f\\in C^k(U)$ for an open $U\\subseteq\\mathbb R^m$, then every iterated derivative of $f$ of order $k$ is unchanged by any permutation of its coordinate differentiations.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-taylor-lagrange-and-cauchy-remainders",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-taylor-schlomilch-roche-remainder]], there are points $\\xi_L,\\xi_C$ between $a$ and $x$ such that\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_L)}{\\iota((n+1)!)}(x-a)^{n+1}$$\nand\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_C)}{\\iota(n!)}(x-\\xi_C)^n(x-a).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-taylor-polynomial-and-remainder",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$, let $f$ have derivatives through order $n$ at $a$, and let $\\iota:\\mathbb N\\to\\mathbb R$ be the canonical embedding. The **Taylor polynomial of degree at most $n$ about $a$** is\n$$T_{n,a}f(x):=\\sum_{j=0}^{n}\\frac{f^{(j)}(a)}{\\iota(j!)}(x-a)^j.$$\nThe **Taylor remainder** is $R_{n,a}f(x):=f(x)-T_{n,a}f(x)$.\n\nThe factorials are natural numbers as in [[def-factorial-and-falling-factorial]] and enter real arithmetic only through $\\iota$ ([[def-canonical-natural]]); they are nonzero ([[lem-of-naturals-positive]]). The sum and powers are those of [[def-finite-sum]], [[lem-finite-sum-laws]], and [[def-integer-power]]. For $n=0$, $T_{0,a}f$ is the constant $f(a)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $p \\in \\mathbb{Q}$ with $p \\ge 1$, with the norms\nof [[def-p-norms-on-rn]]. Then:\n\n1. $\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$\n   ([[def-norm-and-normed-space]]).\n2. For $n \\ge 1$, $\\lVert\\cdot\\rVert_\\infty$ is a norm on $\\mathbb{R}^{n}$.\n3. **The dictionary.** For $n \\ge 1$ and all $x, y \\in \\mathbb{R}^{n}$,\n   $$\\lVert x-y\\rVert_1 = d_1(x,y), \\qquad \\lVert x-y\\rVert_2 = d_2(x,y), \\qquad \\lVert x-y\\rVert_\\infty = d_\\infty(x,y),$$\n   where $d_1$, $d_2$, $d_\\infty$ are the metrics of the published\n   [[lem-metrics-on-rn]]. So the metric induced by each of these three norms\n   ([[def-norm-and-normed-space]]) **is** the correspondingly named published\n   metric, not merely one equivalent to it.\n\n**Consequence, used repeatedly below and stated once here.** By clause 3 at\n$p = 2$, the metric space $(\\mathbb{R}^{n}, d_2)$ of the published metric-spaces\npage and the metric space underlying the normed space\n$(\\mathbb{R}^{n}, \\lVert\\cdot\\rVert_2)$ of this page are the same object. Hence\ncompleteness ([[thm-euclidean-space-complete]] clause 2), Heine-Borel\n([[thm-heine-borel-rn]] clause 2) and the compactness equivalences\n([[thm-metric-compactness-equivalences]]) are statements about this page's normed\nspace, **with their hypothesis $n \\ge 1$ inherited unchanged and not weakened**.\nNothing below cites any of those three theorems for $n = 0$.\n\n**Why this lemma exists.** Without it the library would hold a norm-induced\nmetric on $\\mathbb{R}^{n}$ and a separately published metric on the same set with\nno recorded relation, and every later citation would have to guess which was\nmeant. The proof of clause 3 is a comparison of two written expressions; the\nvalue is that the comparison is made and recorded.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-12.proof-contracts.json",
+      "pointer": [
+        "contracts",
+        "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds",
+        "derivations",
+        2
+      ],
+      "before": {
+        "id": "step-1-3",
+        "claim": "For centered square-integrable coordinate noises $E_1,E_0$, [F6] and the definitions of variance and covariance give $\\operatorname{Var}(E_1-E_0)=\\operatorname{Cov}(E_1-E_0,E_1-E_0)$. Bilinearity and symmetry then yield $\\sigma_1^2+\\sigma_0^2-2c$. Dividing by $h^2$ or $(2h)^2$ gives the forward and central formulas. If the noises are independent with common variance $\\sigma^2$, [F9] makes them integrable, so [F7] gives $\\mathbb E[E_1E_0]=\\mathbb E[E_1]\\mathbb E[E_0]=0$; their covariance is $0$ by [F6], yielding $2\\sigma^2/h^2$ and $\\sigma^2/(2h^2)$.",
+        "step": "1.3",
+        "inputs": [
+          "given",
+          "F6",
+          "F7",
+          "F9",
+          "algebra"
+        ]
+      },
+      "after": {
+        "id": "step-1-3",
+        "claim": "For centered square-integrable coordinate noises $E_1,E_0$, [F6] and the definitions of variance and covariance give $\\operatorname{Var}(E_1-E_0)=\\operatorname{Cov}(E_1-E_0,E_1-E_0)$. Bilinearity and symmetry then yield $\\sigma_1^2+\\sigma_0^2-2c$. Dividing by $h^2$ or $(2h)^2$ gives the forward and central formulas. If the noises are independent with common variance $\\sigma^2$, then for $j=0,1$ the pointwise bound $2|E_j|\\le1+E_j^2$ and total probability mass one give $\\mathbb E|E_j|\\le(1+\\mathbb E[E_j^2])/2<\\infty$. Thus [F7] gives $\\mathbb E[E_1E_0]=\\mathbb E[E_1]\\mathbb E[E_0]=0$; their covariance is $0$ by [F6], yielding $2\\sigma^2/h^2$ and $\\sigma^2/(2h^2)$.",
+        "step": "1.3",
+        "inputs": [
+          "given",
+          "F6",
+          "F7",
+          "algebra"
+        ]
+      }
+    }
+  ],
+  "guards": "Full current source and contract before snapshots plus exact per-field/text guards. Native Alpha12 may be active: root must rebase after native handoff, never overwrite newer proof/carrier fields. No script has applied these operations.",
+  "finding": "F9 current citation quotes supplier Proof1.1, which is not an allowed source_section. Its L2-to-L1 claim does not occur in the supplier Statement; changing only source_section would be false. Existing F6 validly cites the same supplier Statement for variance/covariance identities and bilinearity.",
+  "repair_rationale": "Delete externally attributed F9 and expose its short domination argument inside actual use Proof1.3. Square integrability gives finite E[E_j^2]; nonnegative integral monotonicity applied to 2|E_j|<=1+E_j^2 and total probability mass1 gives finite E|E_j|. This is the same elementary argument already explicitly proved in the supplier Proof1.1; no independent theorem with false interface is being manufactured. F7 Statement case2 then applies to independent integrable noises using identity Borel functions, with centering giving product expectation zero.",
+  "hypotheses": "Real noises on common probability space are square-integrable and centered in consumer Statement; independent/common-variance branch explicitly assumes independence. Mass1 is the probability-space condition. No new choice axiom, new logical dependency or new lemma is required for this explicit elementary dominance step.",
+  "preserved": "All Statements, existing F1–F8 paragraphs, deps, numerical bounds, stochastic conclusions and remaining proof words preserved; only the integrability sentence, F9 paragraph/input and corresponding metadata change.",
+  "batch8_disposition": {
+    "status": "no-change-current-valid",
+    "consumer": "thm-fixed-level-sir-relative-mse-under-conditional-event-second-moment-bounds",
+    "fact": "F2",
+    "current_source": "alg-fixed-level-sir-splitting",
+    "current_source_section": "Definition",
+    "evidence": "Current source F2 states initial P, G0=1, probability transitions and indicator potentials. Current contract quotes that algorithm Definition. Consumer Proof1.1 explicitly performs backward induction 0<=q_p<=1 and identifies P(q0)=Z using F2/F4; no current reliance on absolute-MSE supplier Proof excerpt. Historical draft Proof excerpt is not current authority."
+  },
+  "missing_prerequisite": null,
+  "inspected_paths": [
+    "CLAUDE.md",
+    "tools/facts-block.mjs",
+    "tools/proof-contract.mjs",
+    "items/thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds.md",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-12.proof-contracts.json",
+    "items/lem-variance-and-covariance-identities-for-random-variables.md",
+    "items/def-moments-variance-and-covariance.md",
+    "items/thm-factorization-of-expectations-for-independent-variables.md",
+    "items/cor-cauchy-schwarz-for-random-variables.md",
+    "items/cor-holder-inequality-for-random-variables.md",
+    "items/cor-expectation-linearity-monotonicity-and-modulus-bound.md",
+    "items/thm-fixed-level-sir-relative-mse-under-conditional-event-second-moment-bounds.md",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-8.proof-contracts.json"
+  ],
+  "canonical_writes": false,
+  "native_changes": false,
+  "hashes": false,
+  "checks_tests_gates_executed": false
+}

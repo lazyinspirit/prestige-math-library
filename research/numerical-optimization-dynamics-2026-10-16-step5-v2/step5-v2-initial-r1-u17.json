@@ -1,0 +1,422 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "17",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-strong-rank-revealing-qr-with-finite-swaps",
+      "model": "gpt-6-luna",
+      "context_sha256": "12a75e7c443b9fc92bc3c31bf7d394849ff219e8ec9032617cc125c7258bb255",
+      "outcome": "false_positive",
+      "reason": "False positive: the certificate asserts only a verified residual epsilon and exact score bounds for the nearby factorization, not unadjusted bounds for selected columns of A. For the proposed A=diag(0.01,1), Rhat=diag(1,0), epsilon=1, g=sqrt(2), the advertised lower bound is (1-1)/sqrt(2)=0 and the upper bound for the zero trailing block is sqrt(2)(0.01+1), both valid. A large epsilon can make the guarantee uninformative without making it false.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-strong-rrqr-singular-value-comparisons",
+      "model": "gpt-6-luna",
+      "context_sha256": "df3a4b7040e2c7d32d6ed6bc2354dc0793bc80f51995765b92c7e72eee0baedf",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The cited norm theorem states norm invariance, whereas F3 claimed ordered-singular-value invariance. The latter is true and even appears in its proof, but it is not its stated interface. Repaired this nonfatal citation overstatement by stating the actual norm interface and deriving ordered invariance in step 1.1 from both already-declared product inequalities applied in both directions to unitary factors. Checked the two block factorizations, trace bounds, rectangular block spectra, C=0 and k=0 branches and epsilon-adjusted extension; Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://math.berkeley.edu/~mgu/MA273/Strong_RRQR.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-nearly-rank-deficient-design-matrix",
+      "model": "gpt-6-luna",
+      "context_sha256": "07678d9fdb5f4e81a8b6434d6157745d98ad5fb4b7ffb0b34467bce84fc7d587",
+      "outcome": "false_positive",
+      "reason": "False positive: items/prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex.md exists with that exact canonical id, is declared in deps and F1, and its Statement counts strict-threshold singular values for m,n>=1 over R or C. The present 2-by-2 real matrix satisfies those hypotheses. Determinants give sigma1*sigma2=epsilon and 1<=sigma1<2, hence epsilon/2<sigma2<=epsilon; both displayed numerical-rank counts follow. No edit is required.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-exact-householder-bidiagonal-reduction",
+      "model": "gpt-6-luna",
+      "context_sha256": "e799c62682f9cc2a981e2f46175801642231cb57eccaf60dffa1d15572a8c70d",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 attributed selected-vector annihilation to a theorem whose Statement asserts existence of an annihilator, not the negative-phase choice made here. This is a nonfatal routine derivation gap: for N=norm(z), alpha=-phase(z1)N, v=z-alpha*e1, one has v*z=N^2+N|z1|>0 and v*v=2(v*z), so the selected H sends z to alpha*e1. Added this calculation and retained the actual unitarity interface. Checked preservation of earlier row/column zeros, the bottom zero block, p=0 and wide-adjoint orientation; Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-rank-thresholded-least-squares-by-svd",
+      "model": "gpt-6-luna",
+      "context_sha256": "6efdf743e8435e658a5eec0b217317057ce902f235e6d1d335f432bee971ff73",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed undefined failure output: Householder range-failure supplies partial factors and stored transformations, while B and reconstruction/orthogonality reports require success. The original solver requested triplet/orthogonality reports even on this early failure and did not explicitly stop before the QR call. Repaired by short-circuiting the two calls, naming the failed stage, and returning only each failed supplier record and available reports. Exact convergence, strict-threshold truncation, wide orientation and finite-precision unverified-candidate semantics are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-bidiagonal-svd-backward-error-under-local-stability",
+      "model": "gpt-6-luna",
+      "context_sha256": "d99a8a3017a38a5370e4d22678eff35b0e4099acced4c7b7880445cd76966c1e",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed overapplication of the local error lemma: successful range checks alone do not imply 0<u<1 and (r_j-1)u<1. The eta_H coefficient contains 1/(1-(r_j-1)u), so the missing condition is essential to that certified bound. The generic conditional aggregation theorem is unchanged; its concrete instantiation now explicitly assumes all supplier arithmetic/dimension hypotheses. Also replaced the inaccurate later-factor transport wording by the exact P_j,Q_j accumulated-coordinate recurrence, which proves the same product/sum bound, including J=0 and cleanup writes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-svd-thresholded-least-squares-minimum-norm-model",
+      "model": "gpt-6-luna",
+      "context_sha256": "6460df3cc58285c44f24135e3abae89df1825ce6b6c34d63e44b781bbed1ecf2",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed missing success qualification: a finite sweep budget N=0 with a nonzero bidiagonal off-diagonal returns inconclusive, so an arbitrary exact SVD does not establish that the procedure returns x_tau. Preserved the unconditional algebraic theorem for the vector x_tau=A_tau^+b, and explicitly conditioned its identification as algorithm output on exact-arithmetic convergence within the supplied budget with that SVD record. Added the actual algorithm contract as F10 and used it in step 2.1. Checked Penrose equations, q=0, q=p, p=0, strict-threshold rank, tail norm, and residual triangle inequality; no convergence theorem is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-strong-rank-revealing-qr-with-finite-swaps",
+      "disposition": "unaffected",
+      "post_sha256": "b94982a62682ba49569f0ba3dcc957c7131c1848cee13e6cc0fd1957c282b16f",
+      "review_context_sha256": "f1d74da64bfb9450f84e0bf6df5b7410c3f22de0a20d35ce14422198e42d6299",
+      "reason": "False positive: the certificate asserts only a verified residual epsilon and exact score bounds for the nearby factorization, not unadjusted bounds for selected columns of A. For the proposed A=diag(0.01,1), Rhat=diag(1,0), epsilon=1, g=sqrt(2), the advertised lower bound is (1-1)/sqrt(2)=0 and the upper bound for the zero trailing block is sqrt(2)(0.01+1), both valid. A large epsilon can make the guarantee uninformative without making it false. Checked full-factor dimensions, strict score-trigger branches, finite budget, k=0 and rank-deficient status; the separate exact and computed-certificate contracts are consistent.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-strong-rrqr-singular-value-comparisons",
+      "disposition": "repaired",
+      "post_sha256": "f17d48c2ac6d1fbc2b1050cf1165fa51e6981a1df75ab608341fae38361518f9",
+      "review_context_sha256": "26a702c17c91c5f54028b95fcb8c983ea0e1a5cb6c5d2eab87addcb312c25f6a",
+      "reason": "The cited norm theorem states norm invariance, whereas F3 claimed ordered-singular-value invariance. The latter is true and even appears in its proof, but it is not its stated interface. Repaired this nonfatal citation overstatement by stating the actual norm interface and deriving ordered invariance in step 1.1 from both already-declared product inequalities applied in both directions to unitary factors. Checked the two block factorizations, trace bounds, rectangular block spectra, C=0 and k=0 branches and epsilon-adjusted extension; Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://math.berkeley.edu/~mgu/MA273/Strong_RRQR.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-nearly-rank-deficient-design-matrix",
+      "disposition": "unaffected",
+      "post_sha256": "e081a23b3752d756837eb387721f6ac992cc39fc81f6ede95bbcdbc76159a6c3",
+      "review_context_sha256": "fe59f0b5e987b8f2889f3af9aed67a92cb1d448795acdf8f2d78385e46f4ad97",
+      "reason": "False positive: items/prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex.md exists with that exact canonical id, is declared in deps and F1, and its Statement counts strict-threshold singular values for m,n>=1 over R or C. The present 2-by-2 real matrix satisfies those hypotheses. Determinants give sigma1*sigma2=epsilon and 1<=sigma1<2, hence epsilon/2<sigma2<=epsilon; both displayed numerical-rank counts follow. No edit is required.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-exact-householder-bidiagonal-reduction",
+      "disposition": "repaired",
+      "post_sha256": "7cd6d07c3033a33bfbdd7a6d7adc0c59c8227c743434873e98253d6aea4423e3",
+      "review_context_sha256": "e77a8e38a24ed106a177bd2a587fdbbef0f64ac1765871176a66aed8816cb336",
+      "reason": "F2 attributed selected-vector annihilation to a theorem whose Statement asserts existence of an annihilator, not the negative-phase choice made here. This is a nonfatal routine derivation gap: for N=norm(z), alpha=-phase(z1)N, v=z-alpha*e1, one has v*z=N^2+N|z1|>0 and v*v=2(v*z), so the selected H sends z to alpha*e1. Added this calculation and retained the actual unitarity interface. Checked preservation of earlier row/column zeros, the bottom zero block, p=0 and wide-adjoint orientation; Statement unchanged. The focused precheck required phase renumbering: adopted 1.1,2.1,3.1,4.1 and rereviewed the same reflector/zero-preservation argument; F1 now explicitly states the actual selected construction. Statement still unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-rank-thresholded-least-squares-by-svd",
+      "disposition": "repaired",
+      "post_sha256": "887d84dc854a21c6b52067ed7b420ba5f8707079e8d7db80ce11621db216e624",
+      "review_context_sha256": "00332419ba34e9bff5dc0d9c74796b9aeff99174c3539f623f478d7cec7af04e",
+      "reason": "Confirmed undefined failure output: Householder range-failure supplies partial factors and stored transformations, while B and reconstruction/orthogonality reports require success. The original solver requested triplet/orthogonality reports even on this early failure and did not explicitly stop before the QR call. Repaired by short-circuiting the two calls, naming the failed stage, and returning only each failed supplier record and available reports. Exact convergence, strict-threshold truncation, wide orientation and finite-precision unverified-candidate semantics are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-bidiagonal-svd-backward-error-under-local-stability",
+      "disposition": "repaired",
+      "post_sha256": "7394636ebc3cf71028e362bda7a27b0eb487c1752a892423fc38632397d7e7f3",
+      "review_context_sha256": "8570ed763c5eea13c68b59eb0569d9251827f595076e6d95f2c398417f6e73e7",
+      "reason": "Confirmed overapplication of the local error lemma: successful range checks alone do not imply 0<u<1 and (r_j-1)u<1. The eta_H coefficient contains 1/(1-(r_j-1)u), so the missing condition is essential to that certified bound. The generic conditional aggregation theorem is unchanged; its concrete instantiation now explicitly assumes all supplier arithmetic/dimension hypotheses. Also replaced the inaccurate later-factor transport wording by the exact P_j,Q_j accumulated-coordinate recurrence, which proves the same product/sum bound, including J=0 and cleanup writes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-svd-thresholded-least-squares-minimum-norm-model",
+      "disposition": "repaired",
+      "post_sha256": "f187998d27c4032db9c137aafe1c4771b37f3cb974d324ce2fbef9f900a29c8a",
+      "review_context_sha256": "0379af1e36cfb82b2a23884208357597f1c72789fb33a0d59238b0c72c1eb676",
+      "reason": "Confirmed missing success qualification: a finite sweep budget N=0 with a nonzero bidiagonal off-diagonal returns inconclusive, so an arbitrary exact SVD does not establish that the procedure returns x_tau. Preserved the unconditional algebraic theorem for the vector x_tau=A_tau^+b, and explicitly conditioned its identification as algorithm output on exact-arithmetic convergence within the supplied budget with that SVD record. Added the actual algorithm contract as F10 and used it in step 2.1. Checked Penrose equations, q=0, q=p, p=0, strict-threshold rank, tail norm, and residual triangle inequality; no convergence theorem is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-svd-thresholded-least-squares-minimum-norm-model",
+    "cor-computed-singular-values-absolute-error-from-backward-stability",
+    "thm-computed-pseudospectrum-membership-enclosure"
+  ],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-strong-rrqr-singular-value-comparisons",
+      "proposed_row": {
+        "defect_id": "nod-b17-step5-initial-r1-norm-interface",
+        "run": "numerical-optimization-dynamics-2026-10-16",
+        "at": "2026-10-17T02:15:45.398466+00:00",
+        "subject": "thm-strong-rrqr-singular-value-comparisons",
+        "batch": "17",
+        "class": "accuracy",
+        "subclass": "citation-inflated",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "evidence": "The cited norm theorem states norm invariance, whereas F3 claimed ordered-singular-value invariance. The latter is true and even appears in its proof, but it is not its stated interface. Repaired this nonfatal citation overstatement by stating the actual norm interface and deriving ordered invariance in step 1.1 from both already-declared product inequalities applied in both directions to unitary factors. Checked the two block factorizations, trace bounds, rectangular block spectra, C=0 and k=0 branches and epsilon-adjusted extension; Statement unchanged.",
+        "adjudication_ref": [
+          "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u17.json"
+        ],
+        "source": "Current assigned tuple and direct local mathematical review; not a reclassification of historical ledger evidence."
+      }
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-exact-householder-bidiagonal-reduction",
+      "proposed_row": {
+        "defect_id": "nod-b17-step5-initial-r1-selected-reflector",
+        "run": "numerical-optimization-dynamics-2026-10-16",
+        "at": "2026-10-17T02:15:45.398466+00:00",
+        "subject": "lem-exact-householder-bidiagonal-reduction",
+        "batch": "17",
+        "class": "accuracy",
+        "subclass": "citation-inflated",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "evidence": "F2 attributed selected-vector annihilation to a theorem whose Statement asserts existence of an annihilator, not the negative-phase choice made here. This is a nonfatal routine derivation gap: for N=norm(z), alpha=-phase(z1)N, v=z-alpha*e1, one has v*z=N^2+N|z1|>0 and v*v=2(v*z), so the selected H sends z to alpha*e1. Added this calculation and retained the actual unitarity interface. Checked preservation of earlier row/column zeros, the bottom zero block, p=0 and wide-adjoint orientation; Statement unchanged.",
+        "adjudication_ref": [
+          "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u17.json"
+        ],
+        "source": "Current assigned tuple and direct local mathematical review; not a reclassification of historical ledger evidence."
+      }
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-rank-thresholded-least-squares-by-svd",
+      "proposed_row": {
+        "defect_id": "nod-b17-step5-initial-r1-failure-record",
+        "run": "numerical-optimization-dynamics-2026-10-16",
+        "at": "2026-10-17T02:15:45.398466+00:00",
+        "subject": "alg-rank-thresholded-least-squares-by-svd",
+        "batch": "17",
+        "class": "accuracy",
+        "subclass": "ill-typed-construction",
+        "severity": "fatal",
+        "location": "definition",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "evidence": "Confirmed undefined failure output: Householder range-failure supplies partial factors and stored transformations, while B and reconstruction/orthogonality reports require success. The original solver requested triplet/orthogonality reports even on this early failure and did not explicitly stop before the QR call. Repaired by short-circuiting the two calls, naming the failed stage, and returning only each failed supplier record and available reports. Exact convergence, strict-threshold truncation, wide orientation and finite-precision unverified-candidate semantics are preserved.",
+        "adjudication_ref": [
+          "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u17.json"
+        ],
+        "source": "Current assigned tuple and direct local mathematical review; not a reclassification of historical ledger evidence."
+      }
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-bidiagonal-svd-backward-error-under-local-stability",
+      "proposed_row": {
+        "defect_id": "nod-b17-step5-initial-r1-local-dimension",
+        "run": "numerical-optimization-dynamics-2026-10-16",
+        "at": "2026-10-17T02:15:45.398466+00:00",
+        "subject": "thm-bidiagonal-svd-backward-error-under-local-stability",
+        "batch": "17",
+        "class": "accuracy",
+        "subclass": "missing-hypothesis",
+        "severity": "fatal",
+        "location": "statement",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "evidence": "Confirmed overapplication of the local error lemma: successful range checks alone do not imply 0<u<1 and (r_j-1)u<1. The eta_H coefficient contains 1/(1-(r_j-1)u), so the missing condition is essential to that certified bound. The generic conditional aggregation theorem is unchanged; its concrete instantiation now explicitly assumes all supplier arithmetic/dimension hypotheses. Also replaced the inaccurate later-factor transport wording by the exact P_j,Q_j accumulated-coordinate recurrence, which proves the same product/sum bound, including J=0 and cleanup writes.",
+        "adjudication_ref": [
+          "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u17.json"
+        ],
+        "source": "Current assigned tuple and direct local mathematical review; not a reclassification of historical ledger evidence."
+      }
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-svd-thresholded-least-squares-minimum-norm-model",
+      "proposed_row": {
+        "defect_id": "nod-b17-step5-initial-r1-converged-output",
+        "run": "numerical-optimization-dynamics-2026-10-16",
+        "at": "2026-10-17T02:15:45.398466+00:00",
+        "subject": "thm-svd-thresholded-least-squares-minimum-norm-model",
+        "batch": "17",
+        "class": "accuracy",
+        "subclass": "missing-hypothesis",
+        "severity": "fatal",
+        "location": "statement",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "evidence": "Confirmed missing success qualification: a finite sweep budget N=0 with a nonzero bidiagonal off-diagonal returns inconclusive, so an arbitrary exact SVD does not establish that the procedure returns x_tau. Preserved the unconditional algebraic theorem for the vector x_tau=A_tau^+b, and explicitly conditioned its identification as algorithm output on exact-arithmetic convergence within the supplied budget with that SVD record. Added the actual algorithm contract as F10 and used it in step 2.1. Checked Penrose equations, q=0, q=p, p=0, strict-threshold rank, tail norm, and residual triangle inequality; no convergence theorem is claimed.",
+        "adjudication_ref": [
+          "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u17.json"
+        ],
+        "source": "Current assigned tuple and direct local mathematical review; not a reclassification of historical ledger evidence."
+      }
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "action": "no-change",
+      "ids": [
+        "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+        "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries"
+      ],
+      "reason": "The bounded current reviews found consumer citation overstatements, not defects in these published suppliers. The norm theorem states norm invariance and proves ordered invariance in proof 1.4; the Householder theorem states unitarity and existence, while the consumer now directly proves its selected negative-phase rule. No published edit or whole-item audit is proposed."
+    }
+  ],
+  "repair_notes": [
+    "Checkpoint: first supplier reviewed unchanged. Next: correct RRQR F3 citation by deriving ordered invariance from the already-declared product bound; then the exact-rank example, reflector lemma, SVD failure path, aggregate-bound hypotheses, and solver-output qualification. No independent review of a repair is claimed.",
+    "Checkpoint: RRQR proof repair and exact-rank example review complete, hashes captured before any later supplier edit. Gu-Eisenstat Theorem 3.2, p.854 (PDF p.7), including its complete block-factor proof, was consulted as corroboration. Shared contract update is pending the busy native shared-write lock; only the assigned RRQR contract derivations/uses need mirroring. Next: exact Householder phase construction.",
+    "Checkpoint: exact reduction repaired, review hashes captured. Under acquired shared-write lock, reread the current batch-17 contract and mirrored only RRQR/exact-reduction derivations and fact uses; scoped strict proof-contract check passed. No statements changed so far. Next: solver failure branch, then local-bound condition and solver result.",
+    "Checkpoint: solver Definition repaired, hashes captured. Direct-reference search in current items/library found its sole item consumer is the assigned minimum-norm theorem; the owning page uses it in prose and already describes budget exhaustion as inconclusive. Contract failure-boundary note and theorem supplier quote update await the shared lock. Next: explicit local roundoff/dimension hypothesis in aggregate theorem.",
+    "Checkpoint: aggregate theorem repaired and hashes captured. Direct dependency/reference consumers are the absolute-error corollary and pseudospectrum enclosure, both draft frozen-frontier items; actual F1/A1 uses examined and sound, no repairs proposed. Owning page already calls aggregation conditional and mentions range conditions. Separate discovery: corollary F3 repeats the same overstatement of the published norm theorem; its own F4 exact-SVD supplier can derive invariance. Route that preexisting nonfatal citation concern to its owner; it is not caused by this supplier-interface change. Next: conditional algorithm-output link in minimum-norm theorem.",
+    "Checkpoint: all seven assigned tuples adjudicated, five item carriers repaired, two false positives left untouched, and every immediate review-context hash captured. Direct search found no item dependency/reference consumers of the minimum-norm theorem; the owning page already states inconclusive budget exhaustion and its truncated-model optimality sentence remains valid on successful solution output. Pending: shared-contract mirrors, full focused checks, batched proof-layout, proposed canonical-ledger rows and final report validation. No new prerequisites, published item edits or independent review claims.",
+    "Focused checks so far: renderer passed all seven assigned items. Initial precheck found one requested canonical phase-number repair in exact reduction; adopted it and the one-file repeat passed. The repeat mathematical review and its new hashes are recorded. finite-smoke selected the design example but executed zero checks because its legacy finite_checks is not an active obligation; this is not claimed as witness validation. Shared lock remains occupied by another writer.",
+    "Final item validation: precheck on all seven passed (five proof-bearing, two not applicable); rendering passed all seven and the one changed-again reflector carrier passed on repeat. Required post-edit batched proof-layout passed five changed items / 19 steps / zero defects. Independent Decimal(70) calculation of the 2-by-2 design returned sigma1=1.41421356237309506648..., sigma2=7.07106781186547515562e-9 and threshold counts 1,2. This bounded calculation does not replace the general proof. Exact Statement/Definition hash comparison shows only the solver Definition, aggregate theorem Statement and minimum-norm theorem Statement changed. Pending shared metadata: strict contract check needs three explicit step-4.1 inputs restored; two assigned manifest mirrors must be updated using the unrestricted section parser. No item mathematics remains unfinished.",
+    "Completed: reacquired the native shared-write lock, reread current metadata, restored all explicit derivation inputs for aggregate proof 4.1, and updated only the assigned solver Definition and aggregate Statement/proof manifest mirrors. Scoped strict proof-contract check: 7/7 checked, zero errors, one heuristic shotgun-bracket warning for minimum-norm proof 1.2. Examined that warning: F1,F4,F5,F7,F9 each serve its exact-SVD, tail-distance, positive-dimension rank, zero-norm or empty-dimension branch, while later steps legitimately use earlier established results; no defect is indicated. Lock released. Final report guards, draft/frozen-frontier ownership and exact rejected-tuple coverage all pass (7/7). No gate diagnostics were assigned; gate_resolutions is empty. No unresolved assigned mathematics, additions, published edits, stamps, judgments, certificates or round-state writes. Final result is a repair handoff, not independent acceptance or run certification."
+  ],
+  "downstream_examination": [
+    {
+      "supplier": "alg-rank-thresholded-least-squares-by-svd",
+      "consumer": "thm-svd-thresholded-least-squares-minimum-norm-model",
+      "path": "items/thm-svd-thresholded-least-squares-minimum-norm-model.md",
+      "affected_use": "Statement calls x_tau=A_tau^+b the output of the finite-budget solver without conditioning on exact-arithmetic convergence.",
+      "disposition": "repaired_in_assigned_review",
+      "invalidated_claim": "Failure output is inconclusive, not x_tau; this preexisting defect is independently assigned in this unit.",
+      "minimality": "Keep the unconditional algebraic minimum-norm theorem, but qualify its identification with an algorithmic output by exact-arithmetic convergence."
+    },
+    {
+      "supplier": "thm-bidiagonal-svd-backward-error-under-local-stability",
+      "consumer": "cor-computed-singular-values-absolute-error-from-backward-stability",
+      "path": "items/cor-computed-singular-values-absolute-error-from-backward-stability.md",
+      "affected_use": "F1 supplies the nearby factorization only under its local arithmetic hypotheses; the Statement independently assumes the successful represented-unitary nearby factorization.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None: the existing use is conditional on the required local hypotheses or an actual certified interval.",
+      "minimality": "The consumer does not infer the concrete coefficient from arithmetic success alone; its error inequality follows from the assumed E, and its existing local-hypothesis qualifier includes the explicit roundoff/dimension conditions.",
+      "frontier": true
+    },
+    {
+      "supplier": "thm-bidiagonal-svd-backward-error-under-local-stability",
+      "consumer": "thm-computed-pseudospectrum-membership-enclosure",
+      "path": "items/thm-computed-pseudospectrum-membership-enclosure.md",
+      "affected_use": "A1 invokes the aggregate theorem as the upstream premise for a successful certified singular-value interval; the Statement explicitly assumes |s_hat-sigma_min(zI-A)|<=delta.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None: the existing use is conditional on the required local hypotheses or an actual certified interval.",
+      "minimality": "The classification proof only uses the certified interval and retains all arithmetic allowances and unavailable-bound undecided status. It does not certify a path merely from successful arithmetic.",
+      "frontier": true
+    }
+  ],
+  "outside_lane_findings": [
+    {
+      "id": "cor-computed-singular-values-absolute-error-from-backward-stability",
+      "path": "items/cor-computed-singular-values-absolute-error-from-backward-stability.md",
+      "route": "ordinary frozen-frontier owner",
+      "severity": "nonfatal",
+      "affected_use": "F3: unitary factors preserve singular values and ||E||2<=||E||F; proof 1.1 uses this to identify each ordered singular value.",
+      "evidence": "The declared published norm theorem states norm invariance, not ordered-singular-value invariance. The corollary already declares thm-singular-value-decomposition as F4, so the needed derivation is local: if M=U0 Sigma V0*, then PMT=(PU0)Sigma(T*V0)* is an SVD.",
+      "minimality": "State the actual norm interface in F3 and derive ordered invariance from the already-declared SVD in proof 1.1. No Statement change or published supplier repair is needed.",
+      "edited": false
+    }
+  ],
+  "reader_digest_routes": [
+    {
+      "id": "lem-strong-rrqr-column-swap-volume-ratio",
+      "route": "ordinary frozen-frontier owner; unassigned digest concern",
+      "finding": "Digest concern 0 identifies selected/trailing position indices used literally as original-column labels in the replacement set. No adjudication or edit by this unit."
+    },
+    {
+      "id": "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+      "route": "ordinary frozen-frontier owner; unassigned digest concern",
+      "finding": "Digest concern 1 identifies missing finite-precision scalar shift/deflation evaluation schedule. This unit uses only conditional successful exact/unitary supplier interfaces; no adjudication or edit of that algorithm."
+    },
+    {
+      "id": "computed-singular-values-and-rank-revealing-factorizations-examples",
+      "route": "owning page metadata/editorial lane",
+      "finding": "Digest concern 2 is confirmed by current page prose: last example describes pivot order although the CPQR counterexample is listed second. No page prose edit by this unit."
+    }
+  ],
+  "page_examination": [
+    {
+      "path": "library/numerical-linear-algebra-and-approximation/computed-singular-values-and-rank-revealing-factorizations.md",
+      "suppliers": [
+        "alg-rank-thresholded-least-squares-by-svd",
+        "thm-bidiagonal-svd-backward-error-under-local-stability",
+        "thm-svd-thresholded-least-squares-minimum-norm-model"
+      ],
+      "affected_use": "Opening paragraph explicitly describes an inconclusive status when the budget ends first. It calls the local-update backward bound conditional, and the last paragraph mentions arithmetic range conditions. The least-squares paragraph states truncated-model optimality and the all-discarded-zero specialization.",
+      "disposition": "unchanged_sound",
+      "reason": "Stage-specific failure records do not invalidate this prose. The backward guarantee remains conditional, and exact successful solver output has the stated truncated-model optimality. No page claim guarantees arbitrary-budget convergence or obtains the concrete bound without local hypotheses."
+    }
+  ],
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-17.proof-contracts.json": "922d6278b378736cb5e1adaef815f4dd53f75b6d4aa2c75f59fa3e9cd82d7a9c",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-17.pages.json": "02041cc53f72e171cdd1d1cf2c0ad042e3beda7f25c4180a269cd7834eb2179f"
+  },
+  "checks": [
+    {
+      "name": "precheck",
+      "scope": "all seven assigned item paths",
+      "exit_code": 0,
+      "result": "5 proof-bearing items passed; 2 algorithm items not applicable; 0 failures"
+    },
+    {
+      "name": "rendercheck",
+      "scope": "all seven assigned item paths; exact-reduction item repeated after its final phase-number/F1 edit",
+      "exit_code": 0,
+      "result": "All renderer YAML and KaTeX checks passed"
+    },
+    {
+      "name": "proof-contract",
+      "scope": "all seven assigned IDs in the current batch-17 contract, --strict",
+      "exit_code": 0,
+      "result": "7/7 items checked, 0 errors, 1 examined heuristic warning"
+    },
+    {
+      "name": "proof-layout",
+      "command": "node tools/proof-layout.mjs items/thm-strong-rrqr-singular-value-comparisons.md items/lem-exact-householder-bidiagonal-reduction.md items/alg-rank-thresholded-least-squares-by-svd.md items/thm-bidiagonal-svd-backward-error-under-local-stability.md items/thm-svd-thresholded-least-squares-minimum-norm-model.md",
+      "exit_code": 0,
+      "result": "5 changed items, 19 steps, 0 defects"
+    },
+    {
+      "name": "finite-smoke",
+      "scope": "ex-nearly-rank-deficient-design-matrix",
+      "exit_code": 0,
+      "result": "0 checks executed; legacy finite_checks field supplies no active finite_smoke obligations, so no witness-validation credit claimed"
+    },
+    {
+      "name": "bounded design witness calculation",
+      "scope": "2-by-2 design at epsilon=1e-8, Decimal precision 70",
+      "exit_code": 0,
+      "result": "sigma1 approximately 1.41421356237309506648; sigma2 approximately 7.07106781186547515562e-9; inequalities and counts 1,2 passed"
+    }
+  ]
+}

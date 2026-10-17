@@ -1,0 +1,709 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "kind": "focused-directed-overflow-research-proposal",
+  "cycle": 1,
+  "reviewer": "/root/kept_low_editorial",
+  "research_only": true,
+  "native_coverage_adopted": false,
+  "finding": {
+    "id": "def-dyadic-floating-point-format-and-directed-rounding",
+    "classification": "confirmed-definition-overflow-contract-defect",
+    "reason": "rd/ru are formally defined only within the finite range; the overflow sentence says a directed result is the corresponding infinite sentinel without distinguishing the two directions. Read as same-sign overflow, downward positive +infinity violates rd(x)<=x and upward negative -infinity violates x<=ru(x). An alternative overflow-only failure sentinel could be legitimate if no enclosure were promised, but this source labels them enclosure sentinels and its actual rounding lemma/operations promise outward overflow endpoints. The existing correct lemma fixes the intended direction-dependent contract.",
+    "native_verdict_file": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+    "actual_original_rows": [
+      {
+        "line": 229,
+        "row": {
+          "id": "def-dyadic-floating-point-format-and-directed-rounding",
+          "model": "gpt-6-luna",
+          "keep": false,
+          "reason": "No domain is given for k. If it ranges over the reals as written, the bounded k intervals make F infinite, contradicting “finite representable set”; the format requires k to be an integer.",
+          "context_sha256": "e45ebb7c6d93c5ec573f3923ab195bc939e0745a277c0f7f158e13bfba38e876",
+          "item_sha256": "ad6cdb79b4da701a6c9126f250937b3ea2ebc5833b68570da9940b4aa3bc5d16",
+          "at": "2026-10-16T17:50:24.330Z"
+        }
+      },
+      {
+        "line": 2165,
+        "row": {
+          "id": "def-dyadic-floating-point-format-and-directed-rounding",
+          "model": "gpt-6.1-sol",
+          "keep": false,
+          "reason": "The overflow rule fails for downward rounding of x>N_max: the corresponding +∞ sentinel exceeds x, so it is not a lower enclosure. Downward positive overflow must return N_max; upward negative overflow must return -N_max.",
+          "context_sha256": "e67ffb8a8ecb05b88ec8d497737815867b1c0f916e581a7caed1212091373c6e",
+          "item_sha256": "4f2d74162c5772ed06a0be1eb4e3194a0112d5bed1b40b352765909abc6aedba",
+          "at": "2026-10-17T04:42:25.635Z"
+        }
+      }
+    ]
+  },
+  "source_guard": {
+    "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-sol54-directed-overflow-cycle1/before/items/def-dyadic-floating-point-format-and-directed-rounding.md",
+    "proposal_file": "research/numerical-optimization-dynamics-2026-10-16-owner-sol54-directed-overflow-cycle1/proposed/items/def-dyadic-floating-point-format-and-directed-rounding.md",
+    "candidate_patch_file": "research/numerical-optimization-dynamics-2026-10-16-owner-sol54-directed-overflow-cycle1/def-dyadic-floating-point-format-and-directed-rounding.diff",
+    "apply_only_if": "Exact current source bytes equal complete before file; root binds actual hashes.",
+    "proposed_edits": [
+      {
+        "source_excerpt": "At finite overflow, a directed result is\nthe corresponding infinite sentinel and its error bound is $+\\infty$; the\nstatus is `overflow`. The rounding procedure reports `finite`, `subnormal`, or\n`overflow`, so no relative-error assumption is implicit.",
+        "proposed_replacement": "For real inputs outside the finite range, extend the directed roundings by\n$$ (\\operatorname{rd}(x),\\operatorname{ru}(x))=\\begin{cases}(N_{\\max},+\\infty),&x>N_{\\max},\\\\(-\\infty,-N_{\\max}),&x<-N_{\\max}.\\end{cases} $$\nFor either direction, every such conversion reports `overflow` and has error\nbound $\\epsilon_{\\rm abs}(x)=+\\infty$, including when the returned one-sided\nendpoint is finite. An `overflow` status must be propagated and is not a\nsuccessful finite-error conversion. The rounding procedure reports `finite`,\n`subnormal`, or `overflow`, so no relative-error assumption is implicit."
+      },
+      {
+        "source_excerpt": "A directed interval\nendpoint is the resulting greatest lower or least upper member of $\\mathbb F$.",
+        "proposed_replacement": "A directed interval\nendpoint uses the downward or upward conversion rule above, respectively,\nand carries its reported status."
+      }
+    ]
+  },
+  "mathematical_evidence": {
+    "positive_overflow": "For real x>Nmax, every finite representable y satisfies y<=Nmax<x, so greatest finite lower endpoint is Nmax and the least extended upper endpoint is +infinity.",
+    "negative_overflow": "For real x<-Nmax, the greatest extended lower endpoint is -infinity and the least finite upper endpoint is -Nmax.",
+    "finite_preservation": "Finite F, precision/exponent parameters, eta, normal/subnormal spacing, in-range rd/ru definitions, rho and all finite error bounds are byte-identical. In particular rd/ru(+-Nmax)=+-Nmax; zero and subnormal conversions unchanged.",
+    "status_preservation": "Both directions on every out-of-range exact input retain overflow status and error bound +infinity; returned numeric finiteness alone is never a success predicate.",
+    "scope_preservation": "No new successful finite domain restriction; all important validated methods retain their finite/subnormal success, explicit failure and outward enclosure interfaces."
+  },
+  "actual_full_source_reads": [
+    "items/def-dyadic-floating-point-format-and-directed-rounding.md",
+    "items/alg-na-certified-unit-circle-phase.md",
+    "items/alg-interval-dag-box-enclosure-and-bound.md",
+    "items/lem-directed-dyadic-rounding-enclosure-and-error.md",
+    "items/alg-dyadic-square-root-bisection.md",
+    "items/thm-certified-adaptive-simpson-enclosure.md",
+    "items/alg-budgeted-validated-range-evaluation.md",
+    "items/alg-golub-welsch-certified-node-and-weight-enclosures.md",
+    "items/alg-certified-elementary-range-evaluation.md",
+    "items/alg-certified-adaptive-simpson.md",
+    "items/thm-interval-lipschitz-bound-sound-consistent.md",
+    "items/def-outward-rounded-interval-and-ball-operations.md",
+    "items/lem-rational-box-affine-chart-and-dyadic-enclosure.md",
+    "items/def-complete-ordered-real-field.md",
+    "items/alg-lipschitz-midpoint-box-lower-bound.md",
+    "items/thm-outward-rounded-operations-are-isotone-and-dag-sound.md",
+    "items/lem-real-interval-arithmetic-preserves-enclosure.md",
+    "library/numerical-linear-algebra-and-approximation/outward-rounded-interval-and-ball-arithmetic.md"
+  ],
+  "direct_consumer_dispositions": [
+    {
+      "id": "alg-na-certified-unit-circle-phase",
+      "read_scope": "entire actual source, focused reasoning on directed rounding/overflow uses; not a new whole-proof audit",
+      "source_changed": false,
+      "statement_or_definition_changed": false,
+      "disposition": "unchanged-compatible-interface",
+      "evidence": "Full source read. qP endpoint conversion overflow makes the precision non-finite; any non-finite endpoint OR overflow is an explicit failure; only certified finite rectangles and a checked radius return. The returned finite lower side alone never licenses the phase certificate."
+    },
+    {
+      "id": "alg-interval-dag-box-enclosure-and-bound",
+      "read_scope": "entire actual source, focused reasoning on directed rounding/overflow uses; not a new whole-proof audit",
+      "source_changed": false,
+      "statement_or_definition_changed": false,
+      "disposition": "unchanged-compatible-interface",
+      "evidence": "Full source read. Input endpoint, constant and operation overflow is explicitly tested and returns no finite bound claim. Fixed exponent refinement assumes no exact intermediate overflow. The proposed status remains overflow independently of numeric finiteness."
+    },
+    {
+      "id": "lem-directed-dyadic-rounding-enclosure-and-error",
+      "read_scope": "entire actual source, focused reasoning on directed rounding/overflow uses; not a new whole-proof audit",
+      "source_changed": false,
+      "statement_or_definition_changed": false,
+      "disposition": "unchanged-compatible-interface",
+      "evidence": "Full source read. Statement already supplies exactly (Nmax,+infty) and (-infty,-Nmax), with infinite-error overflow status. Proof 2.1 uses those pairs, not same-sign infinities for both directions. No Statement or proof change is required for this overflow repair; this unchanged proved interface stops propagation to its consumers."
+    },
+    {
+      "id": "alg-dyadic-square-root-bisection",
+      "read_scope": "entire actual source, focused reasoning on directed rounding/overflow uses; not a new whole-proof audit",
+      "source_changed": false,
+      "statement_or_definition_changed": false,
+      "disposition": "unchanged-compatible-interface",
+      "evidence": "Full source read. Its outputs are exact dyadics without a finite storage format. Separate caller conversion explicitly propagates subnormal or overflow status. No finite approximation domain changes."
+    },
+    {
+      "id": "thm-certified-adaptive-simpson-enclosure",
+      "read_scope": "entire actual source, focused reasoning on directed rounding/overflow uses; not a new whole-proof audit",
+      "source_changed": false,
+      "statement_or_definition_changed": false,
+      "disposition": "unchanged-compatible-interface",
+      "evidence": "Full source read. F5 already limits finite representable ru to within-range arguments and otherwise reports overflow. Algorithm failure is no finite enclosure; the theorem assumes returned finite enclosure and sound oracles, not raw numeric finiteness of one conversion. No Statement change."
+    },
+    {
+      "id": "alg-budgeted-validated-range-evaluation",
+      "read_scope": "entire actual source, focused reasoning on directed rounding/overflow uses; not a new whole-proof audit",
+      "source_changed": false,
+      "statement_or_definition_changed": false,
+      "disposition": "unchanged-compatible-interface",
+      "evidence": "Full source read. Explicit finite representable membership and supplied format are unchanged. Coordinate constants overflow in evaluator; any non-finite status is immediately returned and is not a tolerance certificate. It never admits a merely finite downward-overflow scalar."
+    },
+    {
+      "id": "alg-golub-welsch-certified-node-and-weight-enclosures",
+      "read_scope": "entire actual source, focused reasoning on directed rounding/overflow uses; not a new whole-proof audit",
+      "source_changed": false,
+      "statement_or_definition_changed": false,
+      "disposition": "unchanged-compatible-interface",
+      "evidence": "Full source read. Opening universal rule makes any overflow inconclusive. Downward rounding of proposals in steps 1 and 4 is covered by that rule (step 1 additionally explicit). Finite Nmax/-Nmax output on a one-sided overflow cannot bypass this status. Certified node/weight branches unchanged."
+    },
+    {
+      "id": "alg-certified-elementary-range-evaluation",
+      "read_scope": "entire actual source, focused reasoning on directed rounding/overflow uses; not a new whole-proof audit",
+      "source_changed": false,
+      "statement_or_definition_changed": false,
+      "disposition": "unchanged-compatible-interface",
+      "evidence": "Full source read. Constant conversion explicitly checks overflow; arithmetic non-finite statuses propagate; all real/complex branch final conversions propagate overflow. Finite subnormal endpoints are expressly accepted. Hulls require every piece finite; an overflow branch cannot be omitted."
+    },
+    {
+      "id": "alg-certified-adaptive-simpson",
+      "read_scope": "entire actual source, focused reasoning on directed rounding/overflow uses; not a new whole-proof audit",
+      "source_changed": false,
+      "statement_or_definition_changed": false,
+      "disposition": "unchanged-compatible-interface",
+      "evidence": "Full source read. Direct ru is used only for a nonnegative Peano radius; it explicitly returns failure on overflow. Other arithmetic has non-finite-status failure and midpoint representability requirements. No successful finite/subnormal domain removed."
+    },
+    {
+      "id": "thm-interval-lipschitz-bound-sound-consistent",
+      "read_scope": "entire actual source, focused reasoning on directed rounding/overflow uses; not a new whole-proof audit",
+      "source_changed": false,
+      "statement_or_definition_changed": false,
+      "disposition": "unchanged-compatible-interface",
+      "evidence": "Full source read. Statement assumes all operation results finite and a fixed exponent range avoiding overflow for convergence. F2 obtains enclosure/precision facts from the unchanged rounding lemma. No new status-dependent proof step or Statement change."
+    },
+    {
+      "id": "def-outward-rounded-interval-and-ball-operations",
+      "read_scope": "entire actual source, focused reasoning on directed rounding/overflow uses; not a new whole-proof audit",
+      "source_changed": false,
+      "statement_or_definition_changed": false,
+      "disposition": "unchanged-compatible-interface",
+      "evidence": "Full source read. If either exact endpoint overflows, operation returns overflow with outward extended endpoints. The prohibition on substituting a finite endpoint for an overflow sentinel forbids replacing a required infinity; it does not forbid the correctly directed finite opposite endpoint. Ball radii are nonnegative upward conversions and return overflow. Well-definedness explicitly excludes finite-result claims on every endpoint overflow. No consumer edit needed."
+    },
+    {
+      "id": "lem-rational-box-affine-chart-and-dyadic-enclosure",
+      "read_scope": "entire actual source, focused reasoning on directed rounding/overflow uses; not a new whole-proof audit",
+      "source_changed": false,
+      "statement_or_definition_changed": false,
+      "disposition": "unchanged-compatible-interface",
+      "evidence": "Full source read. Statement explicitly denies any finite-enclosure claim on overflow. The both-endpoints-finite criterion in step 2.1 is safe for an ORDERED rational interval [l,u]: l>Nmax implies u>=l>Nmax so ru(u)=+infty; u<-Nmax implies l<=u<-Nmax so rd(l)=-infty. Thus a finite pair cannot hide either endpoint overflow. F3 wording about no finite endpoints describes the overflow pair, not a claim that each direction must be infinite. No Statement change."
+    }
+  ],
+  "additional_actual_use_reads": [
+    {
+      "id": "alg-lipschitz-midpoint-box-lower-bound",
+      "evidence": "Full source read because it uses directed upper radius and lower ell_B. Its final unavailable/non-finite arithmetic rule applies to tagged rounding outcomes; new explicit source status propagation removes numeric-finite ambiguity. A downward positive-overflow Nmax remains a sound lower bound but still carries overflow, never an ordinary finite certificate. No source edit required."
+    },
+    {
+      "id": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+      "evidence": "Full source read. Statement excludes overflow statuses from finite claims and keeps finite-result isotonicity/DAG soundness. Unchanged rounding lemma and operation contracts suffice; no theorem change."
+    },
+    {
+      "id": "lem-real-interval-arithmetic-preserves-enclosure",
+      "evidence": "Full source read. Statement and proof expressly condition enclosure on finite interval-operation returns and deny finite claims on endpoint overflow. No source change."
+    }
+  ],
+  "closure_navigation": {
+    "count": 101,
+    "note": "deps/justified_by descendant inventory is navigation only. Indirect items listed below are not represented as newly proof-read; propagation stops at unchanged proved rounding/interval interfaces absent an actual independent contradiction.",
+    "items": [
+      {
+        "id": "alg-na-certified-unit-circle-phase",
+        "direct": true,
+        "disposition": "focused actual-use review above"
+      },
+      {
+        "id": "alg-interval-dag-box-enclosure-and-bound",
+        "direct": true,
+        "disposition": "focused actual-use review above"
+      },
+      {
+        "id": "lem-directed-dyadic-rounding-enclosure-and-error",
+        "direct": true,
+        "disposition": "focused actual-use review above"
+      },
+      {
+        "id": "alg-dyadic-square-root-bisection",
+        "direct": true,
+        "disposition": "focused actual-use review above"
+      },
+      {
+        "id": "thm-certified-adaptive-simpson-enclosure",
+        "direct": true,
+        "disposition": "focused actual-use review above"
+      },
+      {
+        "id": "alg-budgeted-validated-range-evaluation",
+        "direct": true,
+        "disposition": "focused actual-use review above"
+      },
+      {
+        "id": "alg-golub-welsch-certified-node-and-weight-enclosures",
+        "direct": true,
+        "disposition": "focused actual-use review above"
+      },
+      {
+        "id": "alg-certified-elementary-range-evaluation",
+        "direct": true,
+        "disposition": "focused actual-use review above"
+      },
+      {
+        "id": "alg-certified-adaptive-simpson",
+        "direct": true,
+        "disposition": "focused actual-use review above"
+      },
+      {
+        "id": "thm-interval-lipschitz-bound-sound-consistent",
+        "direct": true,
+        "disposition": "focused actual-use review above"
+      },
+      {
+        "id": "def-outward-rounded-interval-and-ball-operations",
+        "direct": true,
+        "disposition": "focused actual-use review above"
+      },
+      {
+        "id": "lem-rational-box-affine-chart-and-dyadic-enclosure",
+        "direct": true,
+        "disposition": "focused actual-use review above"
+      },
+      {
+        "id": "alg-na-computed-unitary-radix-two-fft",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-box-muller-finite-bit-transform",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-na-certified-unit-circle-phase-enclosure",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-na-computed-fast-transforms-and-convolution",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-factorable-mccormick-box-relaxation",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-lipschitz-midpoint-box-lower-bound",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "def-validated-periodic-shooting-jet-enclosure",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "lem-real-interval-arithmetic-preserves-enclosure",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-dyadic-square-root-bisection-encloses",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-budgeted-range-evaluation-terminates-and-is-sound",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "ex-certified-sine-near-a-multiple-of-pi",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-golub-welsch-certified-enclosures-are-sound",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-complex-elementary-range-enclosures",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-real-elementary-range-enclosures",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-uniform-constraint-margin-enables-empty-box-detection",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-certified-constraint-emptiness-search",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-interval-determinant-sign-certifier",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-uniform-interval-linear-residual-certifier",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-krawczyk-root-certification",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-scalar-interval-newton-exclusion-and-inclusion",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-validated-residual-tube-certificate-checker",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-scalar-interval-newton-certification",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "def-factorable-box-convex-relaxation-interface",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "def-validated-residual-tube-certificate",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-validated-residual-tube-checker-terminates",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-point-verified-linear-system-certifier",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "def-centered-taylor-model-with-derivative-interval",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-complex-resolvent-cover-validator",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "ex-division-by-interval-containing-zero",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-ordered-hermitian-eigenvalue-bisection",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "ex-interval-subtraction-dependency",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-near-orthonormal-hermitian-eigenvalue-certifier",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-smooth-function-root-isolation",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-interval-linear-krawczyk-certifier",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-interval-hermitian-ldl-inertia-certifier",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-orbital-stability-from-certified-floquet-multipliers",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-validated-periodic-orbit-certificate-soundness",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-validated-periodic-orbit-corrector",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-periodic-orbit-pseudoarclength-continuation",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-na-computed-fft-cyclic-and-linear-convolution",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "lem-na-computed-unitary-butterfly-error-bound",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-box-muller-finite-bit-coupling-error",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-na-bluestein-chirp-phase-error-separate-from-fft-error",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-na-computed-clenshaw-curtis-via-fast-dft",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-na-arbitrary-length-fft-correctness-and-cost",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-factorable-dual-certificate-is-valid-box-lower-bound",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-bounded-mixed-integer-branch-and-bound",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-floquet-multiplier-cluster-certifier",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "lem-separated-simple-floquet-multiplier-perturbation-bound",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-periodic-shooting-residual-to-orbit-error-budget",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "ex-near-unit-floquet-multiplier-is-inconclusive",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-centered-taylor-model-encloses-function-range",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-ordered-hermitian-eigenvalue-bisection-soundness",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-interval-hermitian-ldl-inertia-certifier-soundness",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-point-verified-linear-system-certifier-soundness",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-near-orthonormal-hermitian-eigenvalue-certifier-soundness",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-validated-residual-tube-certificate-sound",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-complex-resolvent-cover-validator-soundness",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-uniform-interval-linear-residual-certifier-soundness",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-interval-linear-krawczyk-certifier-soundness",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-interval-determinant-sign-certifier-soundness",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "ex-validated-mass-action-equilibrium-root",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "ex-event-root-with-derivative-separated-from-zero",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-krawczyk-inclusion-exclusion-and-uniqueness",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-smooth-function-root-isolation-soundness",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "def-certified-hybrid-event-enclosure",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-finite-hybrid-trajectory-error-under-separated-events",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "lem-rational-expression-derivative-recursion-correct",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-matrix-function-finite-algorithms-termination-and-budget-status",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-pade-scaling-and-squaring-exponential",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "ex-hermitian-eigenvalue-bisection-by-verified-inertia",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-safeguarded-hybrid-event-location-and-restart",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "ex-van-der-pol-stability-conditional-on-validated-enclosure",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-na-computed-fft-convolution-error-bound",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-bounded-mixed-integer-gap-certificate-sound",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "ex-bounded-engineering-design-mixed-integer-gap-certificate",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-bounded-mixed-integer-finite-budget-terminates",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-floquet-multiplier-cluster-certificate-soundness",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "thm-pade-scaling-and-squaring-error-bound",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "lem-transverse-hybrid-event-time-error",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "ex-two-events-between-endpoints-defeat-sign-screening",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "ex-bouncing-ball-transverse-event-error-and-reset",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "cex-grazing-event-time-error-is-not-linearly-bounded",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      },
+      {
+        "id": "lem-naive-all-pairs-collision-search-has-quadratic-work",
+        "direct": false,
+        "disposition": "inherits unchanged proved enclosure/status interface; no new Statement/Definition propagation and no claimed fresh proof read"
+      }
+    ]
+  },
+  "other_source_uses": "Canonical item and library searches for the seed ID and rd/ru/Nmax notation supplied direct references and the Lipschitz actual use above. No aliases are declared by the seed. The home page was fully read; overflow remains an explicit non-finite status and its summary needs no edit.",
+  "limitations": "This is first-cycle owner-requested research only. No canonical source/metadata/ledger/runtime edits, hashes, tests, gates, native dispatch or control commands. Existing native verdict hashes are preserved verbatim as historical row data, not recomputed or certified. Native 5.5 later owns adoption and actual repair/consumer review. Unrelated historical concerns and the lemma proof typographical token are outside this overflow proposal."
+}

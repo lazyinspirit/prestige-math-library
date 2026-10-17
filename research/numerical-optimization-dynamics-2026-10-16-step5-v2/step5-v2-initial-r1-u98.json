@@ -1,0 +1,183 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "98",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-dirichlet-sine-mode-heat-splitting-model",
+      "model": "gpt-6-luna",
+      "context_sha256": "efcbcb4969e005bfd086b534212635dc03e3b6c3b0b4371931f1b4afd544b909",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original space includes coordinate zero by def-natural-numbers, but E_t is a family only on k>=1, so it is not an endomorphism of that space and the Strang composition is ill-typed. Define I={k in N:k>=1} and H=l2(I,R), matching every stated heat mode.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-diagonal-heat-semigroup-generator-domain",
+      "model": "gpt-6-luna",
+      "context_sha256": "c4b5f75918fbe3e506228a4dcdb7a51f08fae7112e68d778f5fdc1e38509c836",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The rejected carrier inherits an ill-defined E_t from its model supplier, so its norm generator limit is ill-typed. Repairing that supplier to positive indices and explicitly recording u=(u_k)_{k>=1} in F1 restores the claimed semigroup and generator without changing the lemma Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-dirichlet-sine-mode-heat-splitting-model",
+      "disposition": "repaired",
+      "post_sha256": "97d76ee42587f866550ee36d4ec335ca1a25fbad0fccad38b7dfac771973bc61",
+      "review_context_sha256": "b8854d7737a7b59a14b50aa2013f91a4f30d182677854bb3424257c39d843ebc",
+      "reason": "All coordinates now have the explicit positive index set I. Weighted summability makes A:D(A)->H well-defined; sum |g_k|^2 <= sum k^-2 is finite, heat multipliers lie in (0,1], and translation preserves H. Thus both subflows and their composition are defined, including zero time and zero states. No AC or general PDE theorem is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-diagonal-heat-semigroup-generator-domain",
+      "disposition": "repaired",
+      "post_sha256": "fd038145e46e1bc6fb72e5bc166f6058b1fbf01ba9137ddf2ec8347ef0ffb5e8",
+      "review_context_sha256": "495e188358d68d35bcd2e7657f0dfc5fd6cacc21fec6f79cdef49b2d18c1ece2",
+      "reason": "Reviewed all four steps after the positive-index supplier repair. Exponential addition and bounds give the semigroup and contraction; finite heads and square-summable tails give strong continuity. For u in D(A), the difference-quotient error is bounded by 2k^2|u_k| with squared tail at most 4 sum k^4|u_k|^2. Conversely coordinate evaluation is norm continuous, so any norm derivative is (-k^2u_k), which must be square summable. F1 now explicitly uses positive-index families; Statement and proof steps are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-diagonal-heat-semigroup-generator-domain",
+    "lem-dirichlet-forcing-coefficients-exceed-the-generator-domain",
+    "ex-dirichlet-boundary-forcing-strang-order-reduction"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-dirichlet-sine-mode-heat-splitting-model",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "reason": "The original space includes coordinate zero by def-natural-numbers, but E_t is a family only on k>=1, so it is not an endomorphism of that space and the Strang composition is ill-typed. Define I={k in N:k>=1} and H=l2(I,R), matching every stated heat mode.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-diagonal-heat-semigroup-generator-domain",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The rejected carrier inherits an ill-defined E_t from its model supplier, so its norm generator limit is ill-typed. Repairing that supplier to positive indices and explicitly recording u=(u_k)_{k>=1} in F1 restores the claimed semigroup and generator without changing the lemma Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "lem-dirichlet-forcing-coefficients-exceed-the-generator-domain",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "reason": "After the supplier Definition is corrected to positive-index families, F1 still asserts H=l2(N,R). Route the exact fact-only correction in downstream_reviews to its frontier owner; no published consumer was found.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Both assigned rejected tuples are confirmed fatal and repaired. Definition now uses I={k in N:k>=1} and H=l2(I,R), with every modal coordinate explicitly indexed in I. Generator F1 explicitly uses families (u_k)_{k>=1}; its Statement and all four proof steps are unchanged. Review hashes were captured immediately after each mathematical review, supplier before consumer.",
+    "Local evidence consulted: items/def-natural-numbers.md Definition (zero belongs to N); items/def-square-summable-family-on-an-arbitrary-index-set.md Definition (arbitrary-index norm, square sums and small tails); exact dependency Statements for p-series, exponential positivity, monotonicity, addition and derivative, chain rule and mean-value theorem. Familiar elementary sequence-space arguments; no external source reading or independent review of these repairs is claimed. No AC or general unbounded-PDE theorem is used.",
+    "Changed only the two assigned item carriers and the generator citation quote in their owning batch-98 contract, plus this report. Contract edit reread current bytes under the shared lock and verified that no other parsed contract field changed. The first focused contract check detected the stale supplier quote; the final check passed after its correction. Precheck, rendering and final batched proof-layout all passed.",
+    "All three direct dependency/reference consumers of the changed Definition are listed in downstream and examined in downstream_reviews. All are draft frozen-frontier items. Both owning page summaries remain compatible. No published or outside-frontier consumer was found, so no published-consumer-ledger update or separate outside maintenance is proposed.",
+    "Remaining owner work: align unassigned lem-dirichlet-forcing-coefficients-exceed-the-generator-domain F1 with positive-index H; refresh its and ex-dirichlet-boundary-forcing-strang-order-reduction contract quotations of the changed Definition. These are ordinary frontier-owner effects, recorded precisely below and not edited by this unit. No Statement/Definition change is needed for those consumer repairs. Generator Statement exactly matches both unchanged consumer contract quotations, so it triggers no additional interface event. Assigned mathematics has no unresolved uncertainty; this report does not claim run closure or independent acceptance."
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "def-dirichlet-sine-mode-heat-splitting-model",
+      "id": "lem-diagonal-heat-semigroup-generator-domain",
+      "path": "items/lem-diagonal-heat-semigroup-generator-domain.md",
+      "affected_use": "Statement imports H, A and E_t; F1 and proof steps 1.1, 1.2, 2.1, 3.1 use positive-coordinate square sums and differences.",
+      "invalidated_claim": "The original supplier did not map its declared zero-indexed space to itself.",
+      "disposition": "repaired",
+      "minimality": "Supplier index correction and explicit positive-index F1 suffice; the Statement and all four proof steps are unchanged."
+    },
+    {
+      "supplier": "def-dirichlet-sine-mode-heat-splitting-model",
+      "id": "lem-dirichlet-forcing-coefficients-exceed-the-generator-domain",
+      "path": "items/lem-dirichlet-forcing-coefficients-exceed-the-generator-domain.md",
+      "affected_use": "F1 repeats H=l2(N,R); proof 1.1 divides by k in the sine antiderivative, 2.1 sums positive forcing squares, and 2.2 uses the positive weighted generator sum.",
+      "source_excerpt": "$\\mathcal H=\\ell^2(\\mathbb N,\\mathbb R)$",
+      "proposed_replacement": "$\\mathcal H=\\ell^2(\\{k\\in\\mathbb N:k\\ge1\\},\\mathbb R)$",
+      "invalidated_claim": "F1 now misquotes the supplier index set; there is no zeroth sine mode in the repaired model.",
+      "disposition": "frontier_owner_repair_required",
+      "route": "ordinary frontier owner lane for batch 98; not an assigned write subject in unit 98",
+      "minimality": "Change only the displayed space in F1 and its affected contract quotation. The inherited positive-mode Statement, Fourier calculation, square summability and divergent weighted sum remain sound, so no Statement/Definition change or further propagation is needed."
+    },
+    {
+      "supplier": "def-dirichlet-sine-mode-heat-splitting-model",
+      "id": "ex-dirichlet-boundary-forcing-strang-order-reduction",
+      "path": "items/ex-dirichlet-boundary-forcing-strang-order-reduction.md",
+      "affected_use": "Example imports the model; F1 supplies the coordinate heat and translation maps, proof 1.1 divides by k^2, and proof 1.2 sets x=k^2h>0 to sum the Strang recurrence.",
+      "invalidated_claim": "None after the supplier correction: every modal index is now explicitly positive.",
+      "disposition": "unaffected",
+      "minimality": "All reference coordinates and error sums already use k>=1; the positive-mode fix validates the existing k^2 divisions and geometric denominators. No item edit is needed; stale source-Definition quotation in its contract needs owner metadata refresh."
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/numerical-differential-equations-and-stochastic-dynamics/imex-and-operator-splitting-methods.md",
+      "affected_use": "Final paragraph describes a diagonal sequence-space model, generator domain and fixed-time h^(5/4) error.",
+      "disposition": "unaffected",
+      "reason": "No index set is repeated; the explicit positive-mode repair preserves each page claim."
+    },
+    {
+      "path": "library/numerical-differential-equations-and-stochastic-dynamics/imex-and-operator-splitting-methods-examples.md",
+      "affected_use": "Summary describes the modal example and its two-sided fixed-time h^(5/4) error.",
+      "disposition": "unaffected",
+      "reason": "No zero mode or alternative index set is asserted; the modal interpretation is preserved."
+    }
+  ],
+  "validation": [
+    {
+      "check": "precheck",
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-dirichlet-sine-mode-heat-splitting-model.md items/lem-diagonal-heat-semigroup-generator-domain.md --json",
+      "exit_code": 0,
+      "result": "2 files; 1 proof checked, 0 failed; definition not-applicable."
+    },
+    {
+      "check": "rendercheck",
+      "command": "node tools/rendercheck.mjs items/def-dirichlet-sine-mode-heat-splitting-model.md items/lem-diagonal-heat-semigroup-generator-domain.md --json",
+      "exit_code": 0,
+      "result": "2 files checked, no errors or warnings."
+    },
+    {
+      "check": "proof-contract",
+      "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-98.proof-contracts.json --strict --items def-dirichlet-sine-mode-heat-splitting-model,lem-diagonal-heat-semigroup-generator-domain --json",
+      "exit_code": 1,
+      "result": "One citation-quote-mismatch: generator F1 supplier Definition quotation still has the old index set. Planned exact mirror correction awaits shared metadata lock."
+    },
+    {
+      "check": "proof-layout",
+      "command": "node tools/proof-layout.mjs items/def-dirichlet-sine-mode-heat-splitting-model.md items/lem-diagonal-heat-semigroup-generator-domain.md",
+      "exit_code": 0,
+      "result": "2 items, 4 steps, 0 defects; run after final item edits."
+    },
+    {
+      "check": "proof-contract",
+      "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-98.proof-contracts.json --strict --items def-dirichlet-sine-mode-heat-splitting-model,lem-diagonal-heat-semigroup-generator-domain --json",
+      "exit_code": 0,
+      "result": "Both assigned contracts checked; ok=true, no errors or warnings. Refreshed only the generator citation of the changed model Definition, under acquire/reread/edit/check/release shared-write lock."
+    }
+  ],
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-98.proof-contracts.json": "8dc452ebf72d5f1e3884b0831243abb14f9c1f87f4ec7cbfa2f885fd415fd34c"
+  }
+}

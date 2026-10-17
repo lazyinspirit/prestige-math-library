@@ -1,0 +1,1172 @@
+{
+  "version": 1,
+  "scope": [
+    "def-common-space-linear-scheme-interface",
+    "thm-diagonal-heat-semigroup-on-c-zero",
+    "def-finite-grid-common-space-lift",
+    "thm-lax-equivalence-for-common-banach-space-schemes",
+    "lem-grid-stability-transfers-under-uniform-norm-comparison",
+    "ex-stable-explicit-grid-heat-step",
+    "ex-consistent-unstable-explicit-grid-heat-step",
+    "ex-mesh-grid-norm-hides-common-space-instability"
+  ],
+  "contracts": {
+    "def-common-space-linear-scheme-interface": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the zero Banach space and its identity solution map are permitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero initial vector has zero local defect and zero solution error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one-dimensional Banach spaces and a single admissible time step are allowed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: no generator invertibility or positive order of accuracy is required."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the maxima include time zero and every grid time satisfying n tau_nu = T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the interface specifies data and bounds and makes no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-diagonal-heat-semigroup-on-c-zero": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-c-zero-and-ell-infinity",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K=\\mathbb R$ or $\\mathbb C$, with absolute value in the real\ncase and modulus $|a+ib|=\\sqrt{a^2+b^2}$ in the complex case. A scalar\nsequence here is a function $x:\\mathbb N\\to\\mathbb K$, including index zero. Let\n\n$$\\ell^\\infty=\\{x=(x_n)_{n\\in\\mathbb N}:\\text{there is }C\\ge0\\text{ with }|x_n|\\le C\\text{ for all }n\\},\\qquad c_0=\\{x\\in\\ell^\\infty:x_n\\to0\\},$$\n\nboth equipped with $\\|x\\|_\\infty=\\sup_{n\\in\\mathbb N}|x_n|$.  Thus $c_0$ is\na specified linear subspace of the bounded-sequence space $\\ell^\\infty$.\n\nFor each bounded sequence, the nonempty real set $\\{|x_n|:n\\in\\mathbb N\\}$\nhas a finite supremum by [[cor-cauchy-reals-lub-complete]]. This proves that\nthe displayed norm exists, rather than presuming existence in the definition\nof boundedness. Its uniqueness requires no choice of supremum witnesses.\n\nHere $x_n\\to0$ means that for every real $\\varepsilon>0$ there is\n$N\\in\\mathbb N$ such that $|x_n|<\\varepsilon$ for all $n\\ge N$.\nAddition and scalar multiplication are coordinatewise. The scalar triangle\ninequality makes bounded sequences and null sequences linear spaces and gives\nthe triangle inequality for the displayed supremum norm. Absolute homogeneity\nfollows coordinatewise, and a zero supremum forces every coordinate to vanish.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-real-and-complex-c-zero-are-banach",
+          "source_section": "Statement",
+          "quote": "For either scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, the space\n$c_0(\\mathbb K)$ with the supremum norm is a Banach space.  No choice\nprinciple is used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $t\\ge0$ and $j\\in\\mathbb N$, [F4] and [F5] give $0<\\exp(-j^2t)\\le\\exp(0)=1$. Thus the coordinate formula is linear and $\\|U(t)x\\|_\\infty\\le\\|x\\|_\\infty.$ If $x\\in c_0$ and $\\varepsilon>0$, choose $N$ so that $|x_j|<\\varepsilon$ for all $j\\ge N$; then $|(U(t)x)_j|\\le|x_j|<\\varepsilon$ for $j\\ge N$. So $U(t)x\\in c_0$, $U(t)$ is bounded, and [F6] gives $\\|U(t)\\|_{\\mathrm{op}}\\le1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\exp(0)=1$, $U(0)=I_X$. For $s,t\\ge0$, [F3] gives $U(t)U(s)x=(\\exp(-j^2t)\\exp(-j^2s)x_j)_j =(\\exp(-j^2(t+s))x_j)_j=U(t+s)x.$ Thus the semigroup identities hold on every coordinate and hence on $X$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Fix $x\\in X$, $t_0\\ge0$, and $\\varepsilon>0$. By [F1], choose $N$ such that $|x_j|<\\varepsilon/3$ for $j\\ge N$. For those indices, $|\\exp(-j^2t)-\\exp(-j^2t_0)|\\,|x_j|<\\varepsilon/3$ for every $t\\ge0$, because both exponential factors lie in $[0,1]$. For the finitely many indices $j<N$, continuity in [F4] supplies a common $\\delta>0$ such that the same coordinate differences are below $\\varepsilon/3$ whenever $t\\ge0$ and $|t-t_0|<\\delta$. Taking the supremum over all coordinates proves $\\|U(t)x-U(t_0)x\\|_\\infty<\\varepsilon$. Therefore every orbit is continuous, so $U$ is strongly continuous.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The boundedness in step 1.1 holds for every $t$, so for each $T>0$, $\\sup_{0\\le t\\le T}\\|U(t)\\|_{\\mathrm{op}}\\le1.$ Together with the Banach property [F2], the semigroup identities in step 2.1, and strong continuity in step 2.2, this proves the statement.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero sequence and maps it to itself."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives U(t)0=0 and the contractive estimate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers coordinate j=0, whose multiplier is exp(0)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.1 require no nonzero mode or invertible operator."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 include U(0)=I and the uniform bound on each closed interval [0,T]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 chooses a tail threshold for one fixed x and epsilon; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "def-finite-grid-common-space-lift": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the finite spanning list may be empty, so the zero grid space is included."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the lift formula is defined on zero grid vectors and zero-dimensional spaces."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a grid space spanned by one vector is an admissible finite grid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Q_nu need not be injective or surjective; only bounded linearity is required."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition specifies a single-step map and has no interval endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all projection, reconstruction, and update maps are supplied as data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-lax-equivalence-for-common-banach-space-schemes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-common-space-linear-scheme-interface",
+          "source_section": "Definition",
+          "quote": "Fix a scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. A **common-space\nlinear IVP interface** consists of a Banach space $X$ over $\\mathbb K$ and a\nstrongly continuous semigroup $U(t)\\in\\mathcal B(X)$, $t\\ge0$, as defined in\n[[def-strongly-continuous-semigroup]], together with a finite-time bound: for\neach $T>0$ there is $M_T<\\infty$ such that\n$$\\sup_{0\\le t\\le T}\\|U(t)\\|\\le M_T.$$\nThe solution with initial value $x\\in X$ is $u(t)=U(t)x$. This definition\nrecords the solution operators and their continuous dependence in the same\nnorm; it makes no claim about a generator domain.\n\nA **consistency subspace** is a dense linear subspace $D\\subseteq X$ satisfying\n$U(t)D\\subseteq D$ for every $t\\ge0$. Here dense means\n$\\overline D^{\\,X}=X$, and invariant means the displayed inclusion. It need\nnot be the domain of a differential generator.\n\nA **common-space time-scheme family** is a sequence of positive time steps\n$(\\tau_\\nu)_{\\nu\\in\\mathbb N}$ with $\\tau_\\nu\\to0$ and bounded linear maps\n$S_\\nu:X\\to X$ in the sense of [[def-bounded-linear-operator]]. Write\n$S_\\nu^0=I_X$ and recursively set $S_\\nu^{n+1}=S_\\nu S_\\nu^n$ for\n$n\\in\\mathbb N$. All scheme and solution errors below\nuse the norm of this same space $X$; write $\\|\\cdot\\|$ for that norm and\n$\\|\\cdot\\|_{\\mathrm{op}}$ for the operator norm of [[def-operator-norm]].\n\nThe family is **consistent on $D$** when for every $x\\in D$ and $T>0$,\n$$\\lim_{\\nu\\to\\infty}\\max_{\\substack{r\\in\\mathbb N\\\\r\\tau_\\nu\\le T}}\\frac{\\|(S_\\nu-U(\\tau_\\nu))U(r\\tau_\\nu)x\\|}{\\tau_\\nu}=0.$$\nThe maximum is over a nonempty finite set because it includes $r=0$. This is\nthe local defect divided by one time step, uniformly over the exact orbit on\nthe finite time interval.\n\nThe family is **stable on finite time intervals** when for every $T>0$ there\nis $C_T<\\infty$ such that\n$$\\|S_\\nu^n\\|_{\\mathrm{op}}\\le C_T\\quad\\text{whenever }\\nu,n\\in\\mathbb N\\text{ and }n\\tau_\\nu\\le T.$$\nIt is **convergent on finite time intervals** when for every $x\\in X$ and\n$T>0$,\n$$\\lim_{\\nu\\to\\infty}\\max_{\\substack{n\\in\\mathbb N\\\\n\\tau_\\nu\\le T}}\\|S_\\nu^n x-U(n\\tau_\\nu)x\\|=0.$$\nThe maximum convention includes time zero. This locally uniform-in-grid-time\nconvergence is the hypothesis used for the reverse implication in the\nequivalence theorem below.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-uniform-boundedness-principle",
+          "source_section": "Statement",
+          "quote": "Assume DC. Let $X$ be a Banach space, $Y$ a normed space, and let $\\mathcal F$ be a family of bounded linear operators $X\\to Y$ ([[def-bounded-linear-operator]]). If $\\sup_{T\\in\\mathcal F}\\|Tx\\|<\\infty$ for every $x\\in X$, then $\\sup_{T\\in\\mathcal F}\\|T\\|<\\infty$, where the norm is [[def-operator-norm]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cartesian-product",
+          "source_section": "Definition",
+          "quote": "Let $A$ and $B$ be sets. By\n[[lem-ordered-pairs-lie-in-the-double-power-set]] every ordered pair $(a,b)$ with\n$a \\in A$ and $b \\in B$ is an element of $\\mathcal{P}(\\mathcal{P}(A \\cup B))$, so\n[[def-axiom-schema-of-separation]] applied inside that set produces the\n**Cartesian product**\n\n$$A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}.$$\n\nIts elements are exactly the ordered pairs $(a,b)$ ([[def-ordered-pair]]) with\n$a \\in A$ and $b \\in B$: no such pair is lost, because each such pair lies in\nthe ambient set being separated. Thus $z \\in A \\times B$ holds if and only if\n$z = (a,b)$ for some $a \\in A$ and some $b \\in B$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-schema-of-separation",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi(z, \\bar p)$ be a formula of the language of set theory\n([[def-language-of-set-theory]]) in which the variable $y$ does not occur free.\nThe **Separation instance** for $\\varphi$ is the sentence\n\n$$\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,\\bigl(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p))\\bigr).$$\n\nThe **Axiom Schema of Separation** is the collection of all these sentences, one\nfor each such $\\varphi$. In words: for any parameters $\\bar p$ and any set $x$,\nthere is a set $y$ whose elements are exactly the elements $z$ of $x$ for which\n$\\varphi(z,\\bar p)$ holds.\n\nIt is a schema and not a single axiom because $\\varphi$ ranges over the formulas\nof the language, of which there are infinitely many, and the language provides no\nway to quantify over them.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-schema-of-replacement",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi(z, w, \\bar p)$ be a formula of the language of set theory\n([[def-language-of-set-theory]]) in which $A$ and $B$ do not occur free. The\n**Replacement instance** for $\\varphi$ is the sentence\n\n$$\\forall \\bar p\\,\\forall A\\,\\Bigl(\\forall z\\,\\bigl(z \\in A \\to \\exists! w\\,\\varphi(z,w,\\bar p)\\bigr) \\to \\exists B\\,\\forall w\\,\\bigl(w \\in B \\leftrightarrow \\exists z\\,(z \\in A \\wedge \\varphi(z,w,\\bar p))\\bigr)\\Bigr).$$\n\nThe **Axiom Schema of Replacement** is the collection of all these sentences, one\nfor each such $\\varphi$. In words: if for every $z \\in A$ there is exactly one\n$w$ with $\\varphi(z,w,\\bar p)$, then there is a set $B$ whose elements are\nexactly those $w$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $T>0$ and suppose the family is stable, with a bound $C_T$ from [F1]. For $x\\in D$, set $\\eta_\\nu(x,T):=\\max_{\\substack{r\\in\\mathbb N\\\\r\\tau_\\nu\\le T}} \\frac{\\|(S_\\nu-U(\\tau_\\nu))U(r\\tau_\\nu)x\\|}{\\tau_\\nu}.$ Consistency says $\\eta_\\nu(x,T)\\to0$ for each $x\\in D$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each integer $n\\ge0$, the finite telescoping identity is $S_\\nu^n-U(n\\tau_\\nu)= \\sum_{r=0}^{n-1}S_\\nu^{n-1-r}(S_\\nu-U(\\tau_\\nu))U(r\\tau_\\nu).$ For $n=0$ both sides are zero. For $n\\ge1$, expand each summand as $S_\\nu^{n-r}U(r\\tau_\\nu)-S_\\nu^{n-1-r}U((r+1)\\tau_\\nu)$; adjacent terms cancel, leaving $S_\\nu^n-U(n\\tau_\\nu)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Conversely, suppose the family is convergent. Fix $T>0$ and $x\\in X$. By convergence, for all sufficiently large $\\nu$, $\\max_{n\\tau_\\nu\\le T}\\|S_\\nu^nx-U(n\\tau_\\nu)x\\|\\le1.$ The finite-time solution bound in [F1] then gives $\\max_{n\\tau_\\nu\\le T}\\|S_\\nu^nx\\|\\le M_T\\|x\\|+1$ for those $\\nu$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $x\\in D$ and $n\\tau_\\nu\\le T$, [F1], step 1.2, and the definition of $\\eta_\\nu$ yield $\\|S_\\nu^nx-U(n\\tau_\\nu)x\\| \\le C_T\\sum_{r=0}^{n-1}\\|(S_\\nu-U(\\tau_\\nu))U(r\\tau_\\nu)x\\| \\le C_T n\\tau_\\nu\\eta_\\nu(x,T) \\le C_TT\\eta_\\nu(x,T).$ The last quantity tends to zero independently of the allowed $n$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Only finitely many indices $\\nu$ were omitted in step 1.3. For each fixed omitted $\\nu$, there are only finitely many integers $n$ with $n\\tau_\\nu\\le T$, and each $S_\\nu^n x$ is a vector of finite norm. Thus the powers are pointwise bounded on every $x\\in X$. The admissible index set $I_T:=\\{(\\nu,n)\\in\\mathbb N\\times\\mathbb N:n\\tau_\\nu\\le T\\}$ exists by Separation; each pair determines a unique bounded linear operator $S_\\nu^n$, so Replacement gives the set-family $\\mathcal F_T:=\\{S_\\nu^n:(\\nu,n)\\in I_T\\}$. Each member is bounded and linear because each $S_\\nu$ is, and $X$ is Banach by [F1].",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $x\\in X$ and $\\varepsilon>0$. By density in [F1], choose $y\\in D$ with $\\|x-y\\|<\\varepsilon/[2(1+C_T+M_T)]$. For every $n\\tau_\\nu\\le T$, $\\|S_\\nu^nx-U(n\\tau_\\nu)x\\| \\le (C_T+M_T)\\|x-y\\|+\\|S_\\nu^ny-U(n\\tau_\\nu)y\\|.$ By step 2.1, the second term is below $\\varepsilon/2$ for all such $n$ once $\\nu$ is sufficiently large. This proves convergence for $x$, uniformly over the grid times in $[0,T]$. Since $x,T$ were arbitrary, stability implies convergence.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply the uniform boundedness principle [F2] to $\\mathcal F_T$, using the explicit DC assumption [A1]. It gives $\\sup_{\\substack{\\nu,n\\in\\mathbb N\\\\n\\tau_\\nu\\le T}} \\|S_\\nu^n\\|_{\\mathrm{op}}<\\infty,$ which is stability on $[0,T]$. Since $T>0$ was arbitrary, convergence implies stability; together with step 3.1 this proves the equivalence.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 4.1 remain valid on the zero Banach space; the power-family bound is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.3–3.1 include zero initial data through the norm estimates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly covers n=0; the argument has no dimension restriction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2–4.1 use bounded powers and no generator inverse, strict stability, or nonzero local defect."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2, 1.3, and 2.1 include n=0 and all grid times n tau_nu <= T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 uses DC explicitly for UBP; step 3.1 makes only one density approximation for each fixed x and epsilon, with no AC or CC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 prove stability implies convergence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.3–4.1 prove convergence implies stability using UBP under DC."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [
+        {
+          "axiom": "Dependent Choice (DC)",
+          "declaration": "A1",
+          "uses": [
+            "4.1"
+          ],
+          "reason": "The convergence-to-stability direction applies the published Uniform Boundedness Principle, whose statement explicitly assumes DC."
+        }
+      ]
+    },
+    "lem-grid-stability-transfers-under-uniform-norm-comparison": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-grid-common-space-lift",
+          "source_section": "Definition",
+          "quote": "Let $(X,U,D,(\\tau_\\nu))$ be a common-space IVP interface from\n[[def-common-space-linear-scheme-interface]]. A **finite grid space**\n$G_\\nu$ is a normed vector space spanned by a possibly empty finite list over the same field\n$\\mathbb K$. A grid realization consists, for each $\\nu$, of bounded linear\nmaps\n$$P_\\nu:X\\to G_\\nu,\\qquad R_\\nu:G_\\nu\\to X,\\qquad Q_\\nu:G_\\nu\\to G_\\nu,$$\nwhere bounded linearity is in the sense of [[def-bounded-linear-operator]],\nsuch that $P_\\nu R_\\nu=I_{G_\\nu}$ and\n$$U(\\tau_\\nu)(\\ker P_\\nu)\\subseteq\\ker P_\\nu,\\qquad \\ker P_\\nu:=\\{x\\in X:P_\\nu x=0\\}.$$\nHere $P_\\nu$ is restriction to grid data, $R_\\nu$ reconstructs grid data in\n$X$, and $Q_\\nu$ is the one-step grid update.\n\nThe **common-space lift** of the grid update is\n$$S_\\nu:=R_\\nu Q_\\nu P_\\nu+U(\\tau_\\nu)(I_X-R_\\nu P_\\nu).$$\nThe first summand advances the reconstructed grid component; the second\ncontinues the exact semigroup on the complementary component. The lift is\nbounded because all factors are bounded. More explicitly, if $c_P,c_R,c_Q$\nbound $P_\\nu,R_\\nu,Q_\\nu$ and $c_U$ bounds $U(\\tau_\\nu)$, then\n$$\\|S_\\nu x\\|\\le\\bigl(c_Rc_Qc_P+c_U(1+c_Rc_P)\\bigr)\\|x\\|$$\nby the factor bounds and the triangle inequality. This finite bound proves\nthat $S_\\nu$ is bounded. The invariance hypothesis on $\\ker P_\\nu$ is used\nlater to identify the lift's powers when comparing grid and common-space\nstability. This definition is an analysis interface; it does not assert\nthat evaluating the complementary semigroup is part of a finite-grid\nimplementation.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-common-space-linear-scheme-interface",
+          "source_section": "Definition",
+          "quote": "Fix a scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. A **common-space\nlinear IVP interface** consists of a Banach space $X$ over $\\mathbb K$ and a\nstrongly continuous semigroup $U(t)\\in\\mathcal B(X)$, $t\\ge0$, as defined in\n[[def-strongly-continuous-semigroup]], together with a finite-time bound: for\neach $T>0$ there is $M_T<\\infty$ such that\n$$\\sup_{0\\le t\\le T}\\|U(t)\\|\\le M_T.$$\nThe solution with initial value $x\\in X$ is $u(t)=U(t)x$. This definition\nrecords the solution operators and their continuous dependence in the same\nnorm; it makes no claim about a generator domain.\n\nA **consistency subspace** is a dense linear subspace $D\\subseteq X$ satisfying\n$U(t)D\\subseteq D$ for every $t\\ge0$. Here dense means\n$\\overline D^{\\,X}=X$, and invariant means the displayed inclusion. It need\nnot be the domain of a differential generator.\n\nA **common-space time-scheme family** is a sequence of positive time steps\n$(\\tau_\\nu)_{\\nu\\in\\mathbb N}$ with $\\tau_\\nu\\to0$ and bounded linear maps\n$S_\\nu:X\\to X$ in the sense of [[def-bounded-linear-operator]]. Write\n$S_\\nu^0=I_X$ and recursively set $S_\\nu^{n+1}=S_\\nu S_\\nu^n$ for\n$n\\in\\mathbb N$. All scheme and solution errors below\nuse the norm of this same space $X$; write $\\|\\cdot\\|$ for that norm and\n$\\|\\cdot\\|_{\\mathrm{op}}$ for the operator norm of [[def-operator-norm]].\n\nThe family is **consistent on $D$** when for every $x\\in D$ and $T>0$,\n$$\\lim_{\\nu\\to\\infty}\\max_{\\substack{r\\in\\mathbb N\\\\r\\tau_\\nu\\le T}}\\frac{\\|(S_\\nu-U(\\tau_\\nu))U(r\\tau_\\nu)x\\|}{\\tau_\\nu}=0.$$\nThe maximum is over a nonempty finite set because it includes $r=0$. This is\nthe local defect divided by one time step, uniformly over the exact orbit on\nthe finite time interval.\n\nThe family is **stable on finite time intervals** when for every $T>0$ there\nis $C_T<\\infty$ such that\n$$\\|S_\\nu^n\\|_{\\mathrm{op}}\\le C_T\\quad\\text{whenever }\\nu,n\\in\\mathbb N\\text{ and }n\\tau_\\nu\\le T.$$\nIt is **convergent on finite time intervals** when for every $x\\in X$ and\n$T>0$,\n$$\\lim_{\\nu\\to\\infty}\\max_{\\substack{n\\in\\mathbb N\\\\n\\tau_\\nu\\le T}}\\|S_\\nu^n x-U(n\\tau_\\nu)x\\|=0.$$\nThe maximum convention includes time zero. This locally uniform-in-grid-time\nconvergence is the hypothesis used for the reverse implication in the\nequivalence theorem below.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The identity $P_\\nu R_\\nu=I$ gives $x=R_\\nu P_\\nu x+(I_X-R_\\nu P_\\nu)x.$ The first term is in $R_\\nu(G_\\nu)$ and the second is in $\\ker P_\\nu$. For $g\\in G_\\nu$, the lift satisfies $S_\\nu R_\\nu g=R_\\nu Q_\\nu g$; for $y\\in\\ker P_\\nu$, it satisfies $S_\\nu y=U(\\tau_\\nu)y$, which remains in $\\ker P_\\nu$ by [F1]. Thus both summands are invariant under $S_\\nu$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Induction [F4] on $n\\in\\mathbb N$, using the two invariant summands from step 1.1 and the semigroup identity $U(\\tau_\\nu)^n=U(n\\tau_\\nu)$, gives $S_\\nu^n=R_\\nu Q_\\nu^nP_\\nu+U(n\\tau_\\nu)(I_X-R_\\nu P_\\nu).$ For $n=0$ the right side is $R_\\nu P_\\nu+(I_X-R_\\nu P_\\nu)=I_X$; the induction step applies $R_\\nu Q_\\nu$ on the first summand and $U(\\tau_\\nu)$ on the second.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose the grid updates are stable, with $\\|Q_\\nu^n\\|_{G_\\nu\\to G_\\nu}\\le C_T$ whenever $n\\tau_\\nu\\le T$. For every $x\\in X$, step 2.1 and the comparison bounds give $\\|S_\\nu^nx\\|_X\\le bC_TP\\|x\\|_X+M_T(1+bP)\\|x\\|_X$: indeed, $\\|R_\\nu Q_\\nu^nP_\\nu x\\|_X\\le bC_TP\\|x\\|_X$ and $\\|U(n\\tau_\\nu)(I_X-R_\\nu P_\\nu)x\\|_X\\le M_T(1+bP)\\|x\\|_X$. Taking the supremum over $\\|x\\|_X\\le1$ using [F3] proves the uniform common-space power bound, hence stability.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Conversely, suppose $\\|S_\\nu^n\\|_{X\\to X}\\le C_T$ for $n\\tau_\\nu\\le T$. For every $g\\in G_\\nu$, step 1.1 gives $S_\\nu^nR_\\nu g=R_\\nu Q_\\nu^ng$. The lower and upper norm comparisons and [F3] therefore give $a\\|Q_\\nu^ng\\|_{G_\\nu}\\le\\|R_\\nu Q_\\nu^ng\\|_X =\\|S_\\nu^nR_\\nu g\\|_X\\le C_T\\|R_\\nu g\\|_X \\le C_Tb\\|g\\|_{G_\\nu}.$ Thus $\\|Q_\\nu^n\\|_{G_\\nu\\to G_\\nu}\\le C_Tb/a$ uniformly on the same finite interval. The two stability notions are equivalent under the stated uniform comparisons.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 remain valid for a zero grid space; step 2.1 includes n=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 are operator identities and norm bounds that include the zero vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers n=0 and every positive power, including a one-step grid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 impose no invertibility condition on Q_nu."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 use all n tau_nu <= T, including the interval boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 use only supplied maps, uniform constants, and algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 prove grid power stability implies lifted stability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 prove lifted stability implies grid power stability."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "ex-stable-explicit-grid-heat-step": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-common-space-linear-scheme-interface",
+          "source_section": "Definition",
+          "quote": "Fix a scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. A **common-space\nlinear IVP interface** consists of a Banach space $X$ over $\\mathbb K$ and a\nstrongly continuous semigroup $U(t)\\in\\mathcal B(X)$, $t\\ge0$, as defined in\n[[def-strongly-continuous-semigroup]], together with a finite-time bound: for\neach $T>0$ there is $M_T<\\infty$ such that\n$$\\sup_{0\\le t\\le T}\\|U(t)\\|\\le M_T.$$\nThe solution with initial value $x\\in X$ is $u(t)=U(t)x$. This definition\nrecords the solution operators and their continuous dependence in the same\nnorm; it makes no claim about a generator domain.\n\nA **consistency subspace** is a dense linear subspace $D\\subseteq X$ satisfying\n$U(t)D\\subseteq D$ for every $t\\ge0$. Here dense means\n$\\overline D^{\\,X}=X$, and invariant means the displayed inclusion. It need\nnot be the domain of a differential generator.\n\nA **common-space time-scheme family** is a sequence of positive time steps\n$(\\tau_\\nu)_{\\nu\\in\\mathbb N}$ with $\\tau_\\nu\\to0$ and bounded linear maps\n$S_\\nu:X\\to X$ in the sense of [[def-bounded-linear-operator]]. Write\n$S_\\nu^0=I_X$ and recursively set $S_\\nu^{n+1}=S_\\nu S_\\nu^n$ for\n$n\\in\\mathbb N$. All scheme and solution errors below\nuse the norm of this same space $X$; write $\\|\\cdot\\|$ for that norm and\n$\\|\\cdot\\|_{\\mathrm{op}}$ for the operator norm of [[def-operator-norm]].\n\nThe family is **consistent on $D$** when for every $x\\in D$ and $T>0$,\n$$\\lim_{\\nu\\to\\infty}\\max_{\\substack{r\\in\\mathbb N\\\\r\\tau_\\nu\\le T}}\\frac{\\|(S_\\nu-U(\\tau_\\nu))U(r\\tau_\\nu)x\\|}{\\tau_\\nu}=0.$$\nThe maximum is over a nonempty finite set because it includes $r=0$. This is\nthe local defect divided by one time step, uniformly over the exact orbit on\nthe finite time interval.\n\nThe family is **stable on finite time intervals** when for every $T>0$ there\nis $C_T<\\infty$ such that\n$$\\|S_\\nu^n\\|_{\\mathrm{op}}\\le C_T\\quad\\text{whenever }\\nu,n\\in\\mathbb N\\text{ and }n\\tau_\\nu\\le T.$$\nIt is **convergent on finite time intervals** when for every $x\\in X$ and\n$T>0$,\n$$\\lim_{\\nu\\to\\infty}\\max_{\\substack{n\\in\\mathbb N\\\\n\\tau_\\nu\\le T}}\\|S_\\nu^n x-U(n\\tau_\\nu)x\\|=0.$$\nThe maximum convention includes time zero. This locally uniform-in-grid-time\nconvergence is the hypothesis used for the reverse implication in the\nequivalence theorem below.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-grid-common-space-lift",
+          "source_section": "Definition",
+          "quote": "Let $(X,U,D,(\\tau_\\nu))$ be a common-space IVP interface from\n[[def-common-space-linear-scheme-interface]]. A **finite grid space**\n$G_\\nu$ is a normed vector space spanned by a possibly empty finite list over the same field\n$\\mathbb K$. A grid realization consists, for each $\\nu$, of bounded linear\nmaps\n$$P_\\nu:X\\to G_\\nu,\\qquad R_\\nu:G_\\nu\\to X,\\qquad Q_\\nu:G_\\nu\\to G_\\nu,$$\nwhere bounded linearity is in the sense of [[def-bounded-linear-operator]],\nsuch that $P_\\nu R_\\nu=I_{G_\\nu}$ and\n$$U(\\tau_\\nu)(\\ker P_\\nu)\\subseteq\\ker P_\\nu,\\qquad \\ker P_\\nu:=\\{x\\in X:P_\\nu x=0\\}.$$\nHere $P_\\nu$ is restriction to grid data, $R_\\nu$ reconstructs grid data in\n$X$, and $Q_\\nu$ is the one-step grid update.\n\nThe **common-space lift** of the grid update is\n$$S_\\nu:=R_\\nu Q_\\nu P_\\nu+U(\\tau_\\nu)(I_X-R_\\nu P_\\nu).$$\nThe first summand advances the reconstructed grid component; the second\ncontinues the exact semigroup on the complementary component. The lift is\nbounded because all factors are bounded. More explicitly, if $c_P,c_R,c_Q$\nbound $P_\\nu,R_\\nu,Q_\\nu$ and $c_U$ bounds $U(\\tau_\\nu)$, then\n$$\\|S_\\nu x\\|\\le\\bigl(c_Rc_Qc_P+c_U(1+c_Rc_P)\\bigr)\\|x\\|$$\nby the factor bounds and the triangle inequality. This finite bound proves\nthat $S_\\nu$ is bounded. The invariance hypothesis on $\\ker P_\\nu$ is used\nlater to identify the lift's powers when comparing grid and common-space\nstability. This definition is an analysis interface; it does not assert\nthat evaluating the complementary semigroup is part of a finite-grid\nimplementation.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-diagonal-heat-semigroup-on-c-zero",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and let $X=c_0(\\mathbb K)$ with\nthe supremum norm, as in [[def-c-zero-and-ell-infinity]]. For $t\\ge0$ define\n$$U(t)x=(\\exp(-j^2t)x_j)_{j\\in\\mathbb N}.$$\nThen $U(t)$ is a strongly continuous semigroup on the Banach space $X$ and\n$$\\|U(t)\\|_{\\mathrm{op}}\\le1\\qquad(t\\ge0).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-c-zero-and-ell-infinity",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K=\\mathbb R$ or $\\mathbb C$, with absolute value in the real\ncase and modulus $|a+ib|=\\sqrt{a^2+b^2}$ in the complex case. A scalar\nsequence here is a function $x:\\mathbb N\\to\\mathbb K$, including index zero. Let\n\n$$\\ell^\\infty=\\{x=(x_n)_{n\\in\\mathbb N}:\\text{there is }C\\ge0\\text{ with }|x_n|\\le C\\text{ for all }n\\},\\qquad c_0=\\{x\\in\\ell^\\infty:x_n\\to0\\},$$\n\nboth equipped with $\\|x\\|_\\infty=\\sup_{n\\in\\mathbb N}|x_n|$.  Thus $c_0$ is\na specified linear subspace of the bounded-sequence space $\\ell^\\infty$.\n\nFor each bounded sequence, the nonempty real set $\\{|x_n|:n\\in\\mathbb N\\}$\nhas a finite supremum by [[cor-cauchy-reals-lub-complete]]. This proves that\nthe displayed norm exists, rather than presuming existence in the definition\nof boundedness. Its uniqueness requires no choice of supremum witnesses.\n\nHere $x_n\\to0$ means that for every real $\\varepsilon>0$ there is\n$N\\in\\mathbb N$ such that $|x_n|<\\varepsilon$ for all $n\\ge N$.\nAddition and scalar multiplication are coordinatewise. The scalar triangle\ninequality makes bounded sequences and null sequences linear spaces and gives\nthe triangle inequality for the displayed supremum norm. Absolute homogeneity\nfollows coordinatewise, and a zero supremum forces every coordinate to vanish.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-truncations-are-dense-in-c0-and-ell-one",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb K=\\mathbb R$ or $\\mathbb C$. Use coordinates indexed by $\\mathbb N=\\{0,1,\\ldots\\}$. Define $\\ell^1(\\mathbb K)=\\{a:\\sum_{n=0}^\\infty|a_n|<\\infty\\}$, with coordinatewise operations and norm $\\|a\\|_1=\\sum_n|a_n|$. Let $P_N$ retain coordinates $0,\\ldots,N$ and set all others to zero. Then $$\\|x-P_Nx\\|_\\infty\\longrightarrow0\\quad(x\\in c_0(\\mathbb K)),\\qquad\\|a-P_Na\\|_1\\longrightarrow0\\quad(a\\in\\ell^1(\\mathbb K)).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lax-equivalence-for-common-banach-space-schemes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice ($\\mathrm{DC}$). Let a common-space IVP\ninterface and bounded time-scheme family be given as in\n[[def-common-space-linear-scheme-interface]]. If\nthe scheme is consistent on its dense invariant subspace, then it is\nconvergent on every finite time interval if and only if it is stable there,\nwith stability, consistency, and convergence all measured in the same norm\nof $X$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $D$ be the finite-support sequences. By [F4], $D$ is dense in $X$; it is invariant under $U(t)$ because $U(t)$ multiplies coordinates and does not add support. The heat IVP and its finite-time bound are supplied by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $m=\\nu+1$, $\\tau_m=m^{-2}>0$ and $\\tau_m\\to0$ as $\\nu\\to\\infty$. Let $P_m$ be truncation to coordinates $0,\\ldots,m-1$ and $R_m$ inclusion. Their norms are at most $1$ by the coordinate supremum estimates and at least $1$ by testing $e_0$, so both have norm $1$ by [F7]. Also $P_mR_m=I_{G_m}$ and $\\ker P_m$ is invariant under $U(\\tau_m)$ because $U$ is diagonal. The finite maximum $L_m:=\\max_{0\\le j<m}|1-\\tau_mj^2|$ bounds every diagonal multiplier, so $\\|Q_mg\\|_\\infty\\le L_m\\|g\\|_\\infty$ and $Q_m$ is bounded. Thus [F2] defines the common-space step $S_m$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F7",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $j<m$, $0\\le1-j^2/m^2\\le1$; on coordinates $j\\ge m$ the lift uses the multipliers $\\exp(-j^2/m^2)\\in(0,1]$ from [F3]. Hence every coordinate multiplier of $S_m$ lies in $[0,1]$. Therefore $\\|S_mx\\|_\\infty\\le \\|x\\|_\\infty$ for every $x\\in c_0$, and [F7] gives $\\|S_m\\|_{\\mathrm{op}}\\le1$. The bound $\\|S_m^n x\\|_\\infty\\le\\|x\\|_\\infty$ holds at $n=0$; if it holds at $n$, applying the contraction estimate to $S_m^nx$ proves it at $n+1$. Induction [F8] gives it for every $n$, and then [F7] gives $\\|S_m^n\\|_{\\mathrm{op}}\\le1$. The family is stable on every finite time interval.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Fix $v\\in D$, supported in coordinates $0,\\ldots,N$. For $m>N$, direct evaluation and $0<\\exp(-r\\tau_mj^2)\\le1$ give $\\max_{\\substack{r\\in\\mathbb N\\\\r\\tau_m\\le T}}\\frac{\\|(S_m-U(\\tau_m))U(r\\tau_m)v\\|_\\infty}{\\tau_m}\\le\\|v\\|_\\infty\\max_{0\\le j\\le N}\\frac{|1-\\tau_mj^2-\\exp(-\\tau_mj^2)|}{\\tau_m}.$ For $j=0$ the quotient is zero. For each fixed $1\\le j\\le N$, put $z=\\tau_mj^2$; [F5] gives $\\frac{|1-z-\\exp(-z)|}{\\tau_m}=j^2\\left|\\frac{1-\\exp(-z)}{z}-1\\right|\\to0$, because the quotient tends to $\\exp'(0)=1$ as $z\\to0$. The maximum of these finitely many quotients tends to zero: for any tolerance choose a threshold for each $j$ (or use threshold $1$ if there is no positive $j$), then take the largest threshold. Multiplication by the fixed $\\|v\\|_\\infty$ preserves this limit. The bound is independent of $r$, so the family is consistent on $D$.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.2",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F6] and the explicit DC assumption [A1], this consistent stable family converges to the heat semigroup in the common supremum norm, uniformly over grid times in each bounded time interval.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "A1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 include the zero grid vector and zero initial sequence."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 preserve zero data and give zero local error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the m=1 grid, where only the constant mode j=0 is present."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.2 impose no invertibility or nonzero-mode assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 cover n=0 and every grid time up to T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 invokes the explicitly declared DC assumption; all grid maps and finite-support data are deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts a stable-to-convergent instance, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts a stable-to-convergent instance, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [
+        {
+          "axiom": "Dependent Choice (DC)",
+          "declaration": "A1",
+          "uses": [
+            "3.1"
+          ],
+          "reason": "The example invokes the Lax equivalence theorem, whose proof applies the published Uniform Boundedness Principle under DC."
+        }
+      ]
+    },
+    "ex-consistent-unstable-explicit-grid-heat-step": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-common-space-linear-scheme-interface",
+          "source_section": "Definition",
+          "quote": "Fix a scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. A **common-space\nlinear IVP interface** consists of a Banach space $X$ over $\\mathbb K$ and a\nstrongly continuous semigroup $U(t)\\in\\mathcal B(X)$, $t\\ge0$, as defined in\n[[def-strongly-continuous-semigroup]], together with a finite-time bound: for\neach $T>0$ there is $M_T<\\infty$ such that\n$$\\sup_{0\\le t\\le T}\\|U(t)\\|\\le M_T.$$\nThe solution with initial value $x\\in X$ is $u(t)=U(t)x$. This definition\nrecords the solution operators and their continuous dependence in the same\nnorm; it makes no claim about a generator domain.\n\nA **consistency subspace** is a dense linear subspace $D\\subseteq X$ satisfying\n$U(t)D\\subseteq D$ for every $t\\ge0$. Here dense means\n$\\overline D^{\\,X}=X$, and invariant means the displayed inclusion. It need\nnot be the domain of a differential generator.\n\nA **common-space time-scheme family** is a sequence of positive time steps\n$(\\tau_\\nu)_{\\nu\\in\\mathbb N}$ with $\\tau_\\nu\\to0$ and bounded linear maps\n$S_\\nu:X\\to X$ in the sense of [[def-bounded-linear-operator]]. Write\n$S_\\nu^0=I_X$ and recursively set $S_\\nu^{n+1}=S_\\nu S_\\nu^n$ for\n$n\\in\\mathbb N$. All scheme and solution errors below\nuse the norm of this same space $X$; write $\\|\\cdot\\|$ for that norm and\n$\\|\\cdot\\|_{\\mathrm{op}}$ for the operator norm of [[def-operator-norm]].\n\nThe family is **consistent on $D$** when for every $x\\in D$ and $T>0$,\n$$\\lim_{\\nu\\to\\infty}\\max_{\\substack{r\\in\\mathbb N\\\\r\\tau_\\nu\\le T}}\\frac{\\|(S_\\nu-U(\\tau_\\nu))U(r\\tau_\\nu)x\\|}{\\tau_\\nu}=0.$$\nThe maximum is over a nonempty finite set because it includes $r=0$. This is\nthe local defect divided by one time step, uniformly over the exact orbit on\nthe finite time interval.\n\nThe family is **stable on finite time intervals** when for every $T>0$ there\nis $C_T<\\infty$ such that\n$$\\|S_\\nu^n\\|_{\\mathrm{op}}\\le C_T\\quad\\text{whenever }\\nu,n\\in\\mathbb N\\text{ and }n\\tau_\\nu\\le T.$$\nIt is **convergent on finite time intervals** when for every $x\\in X$ and\n$T>0$,\n$$\\lim_{\\nu\\to\\infty}\\max_{\\substack{n\\in\\mathbb N\\\\n\\tau_\\nu\\le T}}\\|S_\\nu^n x-U(n\\tau_\\nu)x\\|=0.$$\nThe maximum convention includes time zero. This locally uniform-in-grid-time\nconvergence is the hypothesis used for the reverse implication in the\nequivalence theorem below.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-grid-common-space-lift",
+          "source_section": "Definition",
+          "quote": "Let $(X,U,D,(\\tau_\\nu))$ be a common-space IVP interface from\n[[def-common-space-linear-scheme-interface]]. A **finite grid space**\n$G_\\nu$ is a normed vector space spanned by a possibly empty finite list over the same field\n$\\mathbb K$. A grid realization consists, for each $\\nu$, of bounded linear\nmaps\n$$P_\\nu:X\\to G_\\nu,\\qquad R_\\nu:G_\\nu\\to X,\\qquad Q_\\nu:G_\\nu\\to G_\\nu,$$\nwhere bounded linearity is in the sense of [[def-bounded-linear-operator]],\nsuch that $P_\\nu R_\\nu=I_{G_\\nu}$ and\n$$U(\\tau_\\nu)(\\ker P_\\nu)\\subseteq\\ker P_\\nu,\\qquad \\ker P_\\nu:=\\{x\\in X:P_\\nu x=0\\}.$$\nHere $P_\\nu$ is restriction to grid data, $R_\\nu$ reconstructs grid data in\n$X$, and $Q_\\nu$ is the one-step grid update.\n\nThe **common-space lift** of the grid update is\n$$S_\\nu:=R_\\nu Q_\\nu P_\\nu+U(\\tau_\\nu)(I_X-R_\\nu P_\\nu).$$\nThe first summand advances the reconstructed grid component; the second\ncontinues the exact semigroup on the complementary component. The lift is\nbounded because all factors are bounded. More explicitly, if $c_P,c_R,c_Q$\nbound $P_\\nu,R_\\nu,Q_\\nu$ and $c_U$ bounds $U(\\tau_\\nu)$, then\n$$\\|S_\\nu x\\|\\le\\bigl(c_Rc_Qc_P+c_U(1+c_Rc_P)\\bigr)\\|x\\|$$\nby the factor bounds and the triangle inequality. This finite bound proves\nthat $S_\\nu$ is bounded. The invariance hypothesis on $\\ker P_\\nu$ is used\nlater to identify the lift's powers when comparing grid and common-space\nstability. This definition is an analysis interface; it does not assert\nthat evaluating the complementary semigroup is part of a finite-grid\nimplementation.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-diagonal-heat-semigroup-on-c-zero",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and let $X=c_0(\\mathbb K)$ with\nthe supremum norm, as in [[def-c-zero-and-ell-infinity]]. For $t\\ge0$ define\n$$U(t)x=(\\exp(-j^2t)x_j)_{j\\in\\mathbb N}.$$\nThen $U(t)$ is a strongly continuous semigroup on the Banach space $X$ and\n$$\\|U(t)\\|_{\\mathrm{op}}\\le1\\qquad(t\\ge0).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-c-zero-and-ell-infinity",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K=\\mathbb R$ or $\\mathbb C$, with absolute value in the real\ncase and modulus $|a+ib|=\\sqrt{a^2+b^2}$ in the complex case. A scalar\nsequence here is a function $x:\\mathbb N\\to\\mathbb K$, including index zero. Let\n\n$$\\ell^\\infty=\\{x=(x_n)_{n\\in\\mathbb N}:\\text{there is }C\\ge0\\text{ with }|x_n|\\le C\\text{ for all }n\\},\\qquad c_0=\\{x\\in\\ell^\\infty:x_n\\to0\\},$$\n\nboth equipped with $\\|x\\|_\\infty=\\sup_{n\\in\\mathbb N}|x_n|$.  Thus $c_0$ is\na specified linear subspace of the bounded-sequence space $\\ell^\\infty$.\n\nFor each bounded sequence, the nonempty real set $\\{|x_n|:n\\in\\mathbb N\\}$\nhas a finite supremum by [[cor-cauchy-reals-lub-complete]]. This proves that\nthe displayed norm exists, rather than presuming existence in the definition\nof boundedness. Its uniqueness requires no choice of supremum witnesses.\n\nHere $x_n\\to0$ means that for every real $\\varepsilon>0$ there is\n$N\\in\\mathbb N$ such that $|x_n|<\\varepsilon$ for all $n\\ge N$.\nAddition and scalar multiplication are coordinatewise. The scalar triangle\ninequality makes bounded sequences and null sequences linear spaces and gives\nthe triangle inequality for the displayed supremum norm. Absolute homogeneity\nfollows coordinatewise, and a zero supremum forces every coordinate to vanish.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-truncations-are-dense-in-c0-and-ell-one",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb K=\\mathbb R$ or $\\mathbb C$. Use coordinates indexed by $\\mathbb N=\\{0,1,\\ldots\\}$. Define $\\ell^1(\\mathbb K)=\\{a:\\sum_{n=0}^\\infty|a_n|<\\infty\\}$, with coordinatewise operations and norm $\\|a\\|_1=\\sum_n|a_n|$. Let $P_N$ retain coordinates $0,\\ldots,N$ and set all others to zero. Then $$\\|x-P_Nx\\|_\\infty\\longrightarrow0\\quad(x\\in c_0(\\mathbb K)),\\qquad\\|a-P_Na\\|_1\\longrightarrow0\\quad(a\\in\\ell^1(\\mathbb K)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $D$ be the finite-support sequences. It is dense by [F4] and invariant under the diagonal semigroup [F3]. Since $m=\\nu+1$, $\\tau_m=m^{-1}>0$ and $\\tau_m\\to0$. For each $m$, take $P_m$ to be coordinate truncation and $R_m$ inclusion. The estimate $\\|P_mx\\|_\\infty\\le\\|x\\|_\\infty$ and identity $\\|R_mg\\|_\\infty=\\|g\\|_\\infty$, together with testing $e_0$ in [F6], give $\\|P_m\\|=\\|R_m\\|=1$. Then $P_mR_m=I$ and $\\ker P_m$ is invariant under diagonal $U(\\tau_m)$. The finite maximum $L_m:=\\max_{0\\le j<m}|1-\\tau_mj^2|$ gives $\\|Q_mg\\|_\\infty\\le L_m\\|g\\|_\\infty$, so $Q_m$ is bounded. Thus [F2] gives a bounded common-space step.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $v\\in D$ with support in coordinates $0,\\ldots,N$. For $m>N$, every supported coordinate is updated by $1-\\tau_mj^2$; since $0<\\exp(-r\\tau_mj^2)\\le1$, we have $\\max_{\\substack{r\\in\\mathbb N\\\\r\\tau_m\\le T}}\\frac{\\|(S_m-U(\\tau_m))U(r\\tau_m)v\\|_\\infty}{\\tau_m}\\le\\|v\\|_\\infty\\max_{0\\le j\\le N}\\frac{|1-\\tau_mj^2-\\exp(-\\tau_mj^2)|}{\\tau_m}.$ For $j=0$ the quotient vanishes. For each fixed $1\\le j\\le N$, with $z=\\tau_mj^2$, the quotient equals $j^2|(1-\\exp(-z))/z-1|$, which tends to zero by [F5]. The finite maximum tends to zero: for any tolerance choose a threshold for each of the finitely many $j$ (or use threshold $1$ if there is no positive $j$), then take the largest threshold. Multiplication by fixed $\\|v\\|_\\infty$ preserves the limit, uniformly in the permitted $r$. Thus the family is consistent.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On the highest grid mode $e_{m-1}$, the one-step multiplier is $1-\\frac{(m-1)^2}{m}=3-m-\\frac1m.$ For $m\\ge4$ its magnitude is $m-3+1/m$, which tends to infinity. Given any $T>0$, all sufficiently large $m$ also satisfy $\\tau_m=1/m\\le T$; then the allowed power $n=1$ already has $\\|S_m\\|_{\\mathrm{op}}\\ge m-3+1/m$ by testing the unit vector $e_{m-1}$ in [F6]. No uniform finite-time power bound can hold, so the family is unstable.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.1 show zero data remain zero, while instability is witnessed by nonzero high modes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 is an operator-norm witness independent of the zero initial datum."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 states instability begins for m>=4; the m=1 case remains a finite constant-mode step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 allow grid multipliers to vanish or have either sign."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses n=1 once tau_m<=T, so every T>0 is covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use explicit diagonal maps and finite-support vectors; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts one consistent unstable family, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts one consistent unstable family, not a biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "ex-mesh-grid-norm-hides-common-space-instability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-common-space-linear-scheme-interface",
+          "source_section": "Definition",
+          "quote": "Fix a scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. A **common-space\nlinear IVP interface** consists of a Banach space $X$ over $\\mathbb K$ and a\nstrongly continuous semigroup $U(t)\\in\\mathcal B(X)$, $t\\ge0$, as defined in\n[[def-strongly-continuous-semigroup]], together with a finite-time bound: for\neach $T>0$ there is $M_T<\\infty$ such that\n$$\\sup_{0\\le t\\le T}\\|U(t)\\|\\le M_T.$$\nThe solution with initial value $x\\in X$ is $u(t)=U(t)x$. This definition\nrecords the solution operators and their continuous dependence in the same\nnorm; it makes no claim about a generator domain.\n\nA **consistency subspace** is a dense linear subspace $D\\subseteq X$ satisfying\n$U(t)D\\subseteq D$ for every $t\\ge0$. Here dense means\n$\\overline D^{\\,X}=X$, and invariant means the displayed inclusion. It need\nnot be the domain of a differential generator.\n\nA **common-space time-scheme family** is a sequence of positive time steps\n$(\\tau_\\nu)_{\\nu\\in\\mathbb N}$ with $\\tau_\\nu\\to0$ and bounded linear maps\n$S_\\nu:X\\to X$ in the sense of [[def-bounded-linear-operator]]. Write\n$S_\\nu^0=I_X$ and recursively set $S_\\nu^{n+1}=S_\\nu S_\\nu^n$ for\n$n\\in\\mathbb N$. All scheme and solution errors below\nuse the norm of this same space $X$; write $\\|\\cdot\\|$ for that norm and\n$\\|\\cdot\\|_{\\mathrm{op}}$ for the operator norm of [[def-operator-norm]].\n\nThe family is **consistent on $D$** when for every $x\\in D$ and $T>0$,\n$$\\lim_{\\nu\\to\\infty}\\max_{\\substack{r\\in\\mathbb N\\\\r\\tau_\\nu\\le T}}\\frac{\\|(S_\\nu-U(\\tau_\\nu))U(r\\tau_\\nu)x\\|}{\\tau_\\nu}=0.$$\nThe maximum is over a nonempty finite set because it includes $r=0$. This is\nthe local defect divided by one time step, uniformly over the exact orbit on\nthe finite time interval.\n\nThe family is **stable on finite time intervals** when for every $T>0$ there\nis $C_T<\\infty$ such that\n$$\\|S_\\nu^n\\|_{\\mathrm{op}}\\le C_T\\quad\\text{whenever }\\nu,n\\in\\mathbb N\\text{ and }n\\tau_\\nu\\le T.$$\nIt is **convergent on finite time intervals** when for every $x\\in X$ and\n$T>0$,\n$$\\lim_{\\nu\\to\\infty}\\max_{\\substack{n\\in\\mathbb N\\\\n\\tau_\\nu\\le T}}\\|S_\\nu^n x-U(n\\tau_\\nu)x\\|=0.$$\nThe maximum convention includes time zero. This locally uniform-in-grid-time\nconvergence is the hypothesis used for the reverse implication in the\nequivalence theorem below.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-grid-common-space-lift",
+          "source_section": "Definition",
+          "quote": "Let $(X,U,D,(\\tau_\\nu))$ be a common-space IVP interface from\n[[def-common-space-linear-scheme-interface]]. A **finite grid space**\n$G_\\nu$ is a normed vector space spanned by a possibly empty finite list over the same field\n$\\mathbb K$. A grid realization consists, for each $\\nu$, of bounded linear\nmaps\n$$P_\\nu:X\\to G_\\nu,\\qquad R_\\nu:G_\\nu\\to X,\\qquad Q_\\nu:G_\\nu\\to G_\\nu,$$\nwhere bounded linearity is in the sense of [[def-bounded-linear-operator]],\nsuch that $P_\\nu R_\\nu=I_{G_\\nu}$ and\n$$U(\\tau_\\nu)(\\ker P_\\nu)\\subseteq\\ker P_\\nu,\\qquad \\ker P_\\nu:=\\{x\\in X:P_\\nu x=0\\}.$$\nHere $P_\\nu$ is restriction to grid data, $R_\\nu$ reconstructs grid data in\n$X$, and $Q_\\nu$ is the one-step grid update.\n\nThe **common-space lift** of the grid update is\n$$S_\\nu:=R_\\nu Q_\\nu P_\\nu+U(\\tau_\\nu)(I_X-R_\\nu P_\\nu).$$\nThe first summand advances the reconstructed grid component; the second\ncontinues the exact semigroup on the complementary component. The lift is\nbounded because all factors are bounded. More explicitly, if $c_P,c_R,c_Q$\nbound $P_\\nu,R_\\nu,Q_\\nu$ and $c_U$ bounds $U(\\tau_\\nu)$, then\n$$\\|S_\\nu x\\|\\le\\bigl(c_Rc_Qc_P+c_U(1+c_Rc_P)\\bigr)\\|x\\|$$\nby the factor bounds and the triangle inequality. This finite bound proves\nthat $S_\\nu$ is bounded. The invariance hypothesis on $\\ker P_\\nu$ is used\nlater to identify the lift's powers when comparing grid and common-space\nstability. This definition is an analysis interface; it does not assert\nthat evaluating the complementary semigroup is part of a finite-grid\nimplementation.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-grid-stability-transfers-under-uniform-norm-comparison",
+          "source_section": "Statement",
+          "quote": "Let a finite-grid lift be as in [[def-finite-grid-common-space-lift]] over the\ncommon Banach-space interface of [[def-common-space-linear-scheme-interface]].\nAssume there are constants $a,b,P>0$, independent of $\\nu$, such that for\nevery $g\\in G_\\nu$ and $x\\in X$,\n$$a\\|g\\|_{G_\\nu}\\le\\|R_\\nu g\\|_X\\le b\\|g\\|_{G_\\nu},\\qquad \\|P_\\nu\\|_{X\\to G_\\nu}\\le P.$$\nThen the lifted family $(S_\\nu)$ is stable on finite time intervals if and\nonly if the grid-update family $(Q_\\nu)$ is stable in the declared grid norms\non finite time intervals.\n\nHere grid stability means that for every $T>0$ there is $C_T<\\infty$ such\nthat $\\|Q_\\nu^n\\|_{G_\\nu\\to G_\\nu}\\le C_T$ whenever $\\nu,n\\in\\mathbb N$ and\n$n\\tau_\\nu\\le T$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-c-zero-and-ell-infinity",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K=\\mathbb R$ or $\\mathbb C$, with absolute value in the real\ncase and modulus $|a+ib|=\\sqrt{a^2+b^2}$ in the complex case. A scalar\nsequence here is a function $x:\\mathbb N\\to\\mathbb K$, including index zero. Let\n\n$$\\ell^\\infty=\\{x=(x_n)_{n\\in\\mathbb N}:\\text{there is }C\\ge0\\text{ with }|x_n|\\le C\\text{ for all }n\\},\\qquad c_0=\\{x\\in\\ell^\\infty:x_n\\to0\\},$$\n\nboth equipped with $\\|x\\|_\\infty=\\sup_{n\\in\\mathbb N}|x_n|$.  Thus $c_0$ is\na specified linear subspace of the bounded-sequence space $\\ell^\\infty$.\n\nFor each bounded sequence, the nonempty real set $\\{|x_n|:n\\in\\mathbb N\\}$\nhas a finite supremum by [[cor-cauchy-reals-lub-complete]]. This proves that\nthe displayed norm exists, rather than presuming existence in the definition\nof boundedness. Its uniqueness requires no choice of supremum witnesses.\n\nHere $x_n\\to0$ means that for every real $\\varepsilon>0$ there is\n$N\\in\\mathbb N$ such that $|x_n|<\\varepsilon$ for all $n\\ge N$.\nAddition and scalar multiplication are coordinatewise. The scalar triangle\ninequality makes bounded sequences and null sequences linear spaces and gives\nthe triangle inequality for the displayed supremum norm. Absolute homogeneity\nfollows coordinatewise, and a zero supremum forces every coordinate to vanish.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-real-and-complex-c-zero-are-banach",
+          "source_section": "Statement",
+          "quote": "For either scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, the space\n$c_0(\\mathbb K)$ with the supremum norm is a Banach space.  No choice\nprinciple is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-truncations-are-dense-in-c0-and-ell-one",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb K=\\mathbb R$ or $\\mathbb C$. Use coordinates indexed by $\\mathbb N=\\{0,1,\\ldots\\}$. Define $\\ell^1(\\mathbb K)=\\{a:\\sum_{n=0}^\\infty|a_n|<\\infty\\}$, with coordinatewise operations and norm $\\|a\\|_1=\\sum_n|a_n|$. Let $P_N$ retain coordinates $0,\\ldots,N$ and set all others to zero. Then $$\\|x-P_Nx\\|_\\infty\\longrightarrow0\\quad(x\\in c_0(\\mathbb K)),\\qquad\\|a-P_Na\\|_1\\longrightarrow0\\quad(a\\in\\ell^1(\\mathbb K)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $D$ be the finite-support sequences. By [F4], $X$ is Banach; the identity maps $U(t)=I_X$ form a strongly continuous semigroup with finite-time bound $M_T=1$. By [F5], $D$ is dense and it is invariant under $U$. The positive steps $\\tau_m=1/m$ tend to zero, so this is common-space scheme data.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The positive coordinate weights make the displayed maximum a norm: homogeneity and definiteness hold coordinatewise, and the triangle inequality follows by applying the scalar triangle inequality in every coordinate before taking the maximum. The truncation satisfies $\\|P_mx\\|_{G_m}\\le m\\|x\\|_\\infty$, and inclusion satisfies $\\|R_mg\\|_\\infty\\le\\|g\\|_{G_m}$, so both are bounded. Also $P_mR_m=I_{G_m}$ and $\\ker P_m$ is invariant under $U=I$. For $g=\\sum_{j<m}g_je_j$, the zeroth output coordinate is $g_0+mg_{m-1}$, coordinates $1$ through $m-2$ if present remain $g_j$, and coordinate $m-1$ becomes $0$. Since $|g_0|\\le\\|g\\|_{G_m}$, $m|g_{m-1}|\\le\\|g\\|_{G_m}$, and $|g_j|\\le\\|g\\|_{G_m}$ for $1\\le j\\le m-2$, it follows that $\\|Q_mg\\|_{G_m}\\le2\\|g\\|_{G_m}$, including $m=2$. Thus $Q_m$ is bounded and the grid lift [F2] is defined. Also $Q_m^2=Q_m$: it fixes each $e_j$ for $j<m-1$, and $Q_m^2e_{m-1}=Q_m(me_0)=me_0=Q_me_{m-1}$. By induction [F7], $Q_m^n=Q_m$ for every $n\\ge1$: the base $n=1$ is immediate, and $Q_m^n=Q_m$ implies $Q_m^{n+1}=Q_mQ_m=Q_m^2=Q_m$. Meanwhile $Q_m^0=I$. By [F6], $\\|Q_m^n\\|_{G_m\\to G_m}\\le2$ for every $n\\ge0$, so the grid updates are stable in their mesh norms.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $v\\in D$ and $m$ exceeds its support, then $P_mv=v$, the high coordinate $v_{m-1}$ is zero, and $Q_mv=v$. Since $U=I$, the lift gives $S_mv=v$. Thus the local defect is zero on every $v\\in D$ for all sufficiently large $m$, which proves consistency.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For $e_{m-1}$, the lift gives $S_me_{m-1}=m e_0$. Its common-space norm is therefore $m$, while $\\|e_{m-1}\\|_\\infty=1$. Testing this unit vector in [F6] gives $\\|S_m\\|_{X\\to X}\\ge m$. For every $T>0$, all sufficiently large $m$ have $\\tau_m\\le T$, so the common-space family is not stable.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The same vector satisfies $\\|e_{m-1}\\|_{G_m}=m$ but $\\|R_me_{m-1}\\|_\\infty=1$; thus no positive uniform lower comparison constant $a$ exists. Also $\\|P_m\\|_{X\\to G_m}\\ge m$ by testing the unit vector $e_{m-1}$ in [F6]. The hypotheses needed in [F3] fail, exactly where the grid norm ceases to control the reconstructed common-space norm and the restriction norm. The grid stability calculation therefore cannot certify common-space stability.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 2.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example family is deliberately indexed by finite grids m>=2, not by an empty grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 include zero grid and common-space vectors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the smallest allowed grid m=2, which has one low and one high mode."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses an idempotent, noninvertible grid update Q_m."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.2 and 4.1 use the one-step time n=1 for every sufficiently fine grid."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 use explicit truncations, inclusions, and coordinate vectors only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives a counterexample to an unqualified transfer, not a biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives a counterexample to an unqualified transfer, not a biconditional theorem."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    }
+  }
+}

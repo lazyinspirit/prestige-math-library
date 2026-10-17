@@ -1,0 +1,2200 @@
+{
+  "version": 1,
+  "scope": [
+    "def-implicit-residual-and-algebraic-error-units",
+    "lem-strongly-monotone-continuous-map-is-bijective",
+    "def-backward-euler-step-equation",
+    "def-implicit-runge-kutta-stage-equations",
+    "def-two-stage-sdirk-tableau",
+    "def-two-stage-radau-iia-tableau",
+    "def-scalar-rk-a-and-l-stability",
+    "lem-small-step-implicit-rk-branch-and-residual-error",
+    "alg-newton-chord-implicit-residual-with-factorization-reuse",
+    "thm-backward-euler-dissipative-resolvent-contraction",
+    "prop-two-stage-sdirk-order-two-and-l-stability",
+    "prop-two-stage-radau-iia-order-three-and-l-stability",
+    "thm-backward-euler-algebraic-update-residual-error-budget",
+    "thm-implicit-rk-global-order-with-stage-residual-control",
+    "cor-constant-step-bdf2-order-two-with-consistent-start",
+    "alg-implicit-stiff-time-stepper-with-consistent-starts",
+    "ex-newton-budget-exhaustion-with-a-unique-backward-euler-root",
+    "ex-stiff-scalar-decay-and-trapezoid-ringing",
+    "ex-dissipative-backward-euler-residual-contraction",
+    "ex-robertson-reaction-system-newton-work"
+  ],
+  "contracts": {
+    "def-implicit-residual-and-algebraic-error-units": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The def-implicit-residual-and-algebraic-error-units item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition identifies a zero residual as an exact root and separates it from any forward-error estimate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition applies to m=1 without a special convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition requires a positive scaling sigma before dividing a residual."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition spells out the BE endpoint and stage-time residual conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The def-implicit-residual-and-algebraic-error-units item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The def-implicit-residual-and-algebraic-error-units item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The def-implicit-residual-and-algebraic-error-units item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "lem-strongly-monotone-continuous-map-is-bijective": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-brouwer-fixed-point-theorem",
+          "source_section": "Statement",
+          "quote": "Every continuous map $f:D^n\\to D^n$ of the closed unit ball has a fixed point, for every integer $n\\ge0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 Fix $b\\in\\mathbb R^d$ and put $F(x)=H(x)-b$. Applying [A1] with $y=0$ and using [F2] gives $\\langle F(x),x\\rangle=\\langle H(x)-H(0),x\\rangle+\\langle H(0)-b,x\\rangle\\ge\\kappa\\|x\\|_2^2-\\|H(0)-b\\|_2\\|x\\|_2$. Choose $R>\\|H(0)-b\\|_2/\\kappa$; then $\\langle F(x),x\\rangle>0$ whenever $\\|x\\|_2=R$. [A1, F1, F2, choose, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "1.2 Let $P_R(v)=v$ when $\\|v\\|_2\\le R$, and $P_R(v)=Rv/\\|v\\|_2$ when $\\|v\\|_2>R$. The two formulas agree on the sphere, so $P_R$ is continuous and maps $\\mathbb R^d$ into the closed ball $\\overline B_R$. Thus $T(x)=P_R(x-F(x))$ is a continuous self-map of $\\overline B_R$; rescaling by $x\\mapsto x/R$ and applying [F3] gives a fixed point $x=T(x)$. [F1, F3, construct]",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 If $\\|x\\|_2<R$, the radial projection $P_R$ can equal $x$ only when its input equals $x$, hence $x-F(x)=x$ and $F(x)=0$. If $\\|x\\|_2=R$, the equality $P_R(x-F(x))=x$ implies $x-F(x)=\\alpha x$ for some $\\alpha\\ge1$; therefore $\\langle F(x),x\\rangle=(1-\\alpha)R^2\\le0$, contradicting step 1.1. So the fixed point is interior and $H(x)=b$. Since $b$ was arbitrary, $H$ is onto. [step 1.1, step 1.2, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 If $H(x)=H(y)$, [A1] gives $0\\ge\\kappa\\|x-y\\|_2^2$, hence $x=y$; thus $H$ is one-to-one. For $u=H(x)$ and $v=H(y)$, [A1] and [F2] give $\\kappa\\|x-y\\|_2^2\\le\\|u-v\\|_2\\|x-y\\|_2$. Dividing when $x\\ne y$, with equality of inverse values when $x=y$, proves the inverse bound and completes bijectivity. [A1, F1, F2, step 2.1, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lem-strongly-monotone-continuous-map-is-bijective item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement assumes d>=1, so the zero-dimensional space is outside scope."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof apply when d=1; the Brouwer ball argument remains valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The strict constant kappa>0 is used in steps 1.1 and 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lem-strongly-monotone-continuous-map-is-bijective item makes no separate claim requiring a endpoints boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The ball contains the origin and Brouwer supplies the fixed point in step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lem-strongly-monotone-continuous-map-is-bijective item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lem-strongly-monotone-continuous-map-is-bijective item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "def-backward-euler-step-equation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The def-backward-euler-step-equation item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The def-backward-euler-step-equation item makes no separate claim requiring a zero boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits d=1 and h_n>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition explicitly makes no existence or uniqueness claim on a restricted branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition evaluates f at t_n+h_n and defines the endpoint residual there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The def-backward-euler-step-equation item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The def-backward-euler-step-equation item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The def-backward-euler-step-equation item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "def-implicit-runge-kutta-stage-equations": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The def-implicit-runge-kutta-stage-equations item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The def-implicit-runge-kutta-stage-equations item makes no separate claim requiring a zero boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits s=1, including backward Euler."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition allows singular or nonunique stage systems and asserts no solvability."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition fixes each stage time t+c_i h and the update endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The def-implicit-runge-kutta-stage-equations item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The def-implicit-runge-kutta-stage-equations item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The def-implicit-runge-kutta-stage-equations item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "def-two-stage-sdirk-tableau": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The def-two-stage-sdirk-tableau item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The def-two-stage-sdirk-tableau item makes no separate claim requiring a zero boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The def-two-stage-sdirk-tableau item makes no separate claim requiring a one boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition records gamma and the selected fixed coefficients, with both diagonal entries equal."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The def-two-stage-sdirk-tableau item makes no separate claim requiring a endpoints boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The def-two-stage-sdirk-tableau item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The def-two-stage-sdirk-tableau item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The def-two-stage-sdirk-tableau item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "def-two-stage-radau-iia-tableau": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The def-two-stage-radau-iia-tableau item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The def-two-stage-radau-iia-tableau item makes no separate claim requiring a zero boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The def-two-stage-radau-iia-tableau item makes no separate claim requiring a one boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition records the fixed tableau and its stiffly accurate final row."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The def-two-stage-radau-iia-tableau item makes no separate claim requiring a endpoints boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The def-two-stage-radau-iia-tableau item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The def-two-stage-radau-iia-tableau item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The def-two-stage-radau-iia-tableau item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "def-scalar-rk-a-and-l-stability": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The def-scalar-rk-a-and-l-stability item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: At z=0 the stability function equals 1 whenever defined."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The def-scalar-rk-a-and-l-stability item makes no separate claim requiring a one boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition separates scalar linear-test stability from nonlinear or nonnormal behavior."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition includes the closed left half-plane boundary Re z=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The def-scalar-rk-a-and-l-stability item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The def-scalar-rk-a-and-l-stability item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The def-scalar-rk-a-and-l-stability item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "lem-small-step-implicit-rk-branch-and-residual-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty complete metric space ([[def-complete-metric-space]])\nand let $f : X \\to X$ be a contraction with constant $q$, so\n$d(f(u),f(v)) \\le q\\,d(u,v)$ for all $u,v \\in X$ and $0 \\le q < 1$\n([[def-lipschitz-holder-contraction]]). Then:\n\n1. There is exactly one $x^{*} \\in X$ with $f(x^{*}) = x^{*}$.\n2. For every $x_0 \\in X$ the sequence of **iterates**, defined by recursion\n   ([[thm-recursion]]) by $x_{n+1} := f(x_n)$, converges to $x^{*}$ in $(X,d)$\n   ([[def-metric-convergence]]). In particular the limit does not depend on\n   $x_0$.\n3. For all $m, n \\in \\mathbb{N}$ with $m \\ge n$,\n   $$d(x_m, x_n) \\;\\le\\; \\frac{q^{\\,n}\\, d(x_1,x_0)}{1-q},$$\n   with the integer power of [[def-integer-power]].\n\nClaim 3 is the quantitative form of the argument that proves claims 1 and 2, and\nit is recorded in the statement because the error estimates\n([[cor-banach-error-estimates]]) are read off from it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) constructed in this\nlibrary ([[def-real-numbers]]) and carrying its order ([[def-real-order]]).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\n[[rem-metric-axiom-conventions]] records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as [[lem-metric-nonnegativity]] proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n([[def-max-min]], [[lem-finite-set-has-max]]). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-complete-metric-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\n$(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$\n([[def-cauchy-in-metric]]) converges to a point of $X$\n([[def-metric-convergence]]).\n\nA subset $A \\subseteq X$ is called **complete** when the metric subspace\n$(A, d_A)$ is complete ([[def-isometry-and-metric-embedding]]); as always, the\nmetric is part of the data, and $d_A$ is the restriction of $d$ to $A \\times A$.\n\n**The limit is unique when it exists**, since limits in a metric space are unique\n([[lem-metric-limits-unique]]), so a complete space assigns to each of its Cauchy\nsequences one point and not a set of points.\n\n**Completeness is a property of the pair $(X,d)$, not of $X$ and not of the\ntopology of $d$.** Both quantifiers in the definition are about the metric: the\nCauchy condition is stated with distances, and so is convergence. Two metrics on\nthe same set can have the same open sets while exactly one of them is complete,\nwhich is the content of [[fs-completeness-is-a-topological-property]] and its\nwitness. Read the word *complete* as an abbreviation for *complete with respect\nto this metric*, always.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 The formula $d(Y,Z)=\\|Y-Z\\|_{\\infty,2}$ satisfies the metric axioms [F5]: nonnegativity, symmetry, and separation hold coordinatewise from the Euclidean norm, while the triangle inequality follows from [F2] in each block and then taking the maximum. The ball $\\mathcal B$ is nonempty because it contains $c$. Any Cauchy sequence in $(\\mathcal B,d)$ is Cauchy in each of its $m$ Euclidean coordinates, so [F3] gives coordinate limits $Y_i$. Since $\\|Y_i-c_i\\|_2\\le\\|Y_i-Y_i^{(n)}\\|_2+\\|Y_i^{(n)}-c_i\\|_2$, passing to the limit shows $\\|Y_i-c_i\\|_2\\le R$; hence the block limit lies in $\\mathcal B$. By [F6], $(\\mathcal B,d)$ is complete. [given, F1, F2, F3, F5, F6, construct]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "1.2 For each block $i$, the Euclidean triangle inequality and homogeneity give $\\|\\sum_j a_{ij}F_j(Y)\\|_2\\le\\sum_j|a_{ij}|\\|F_j(Y)\\|_2\\le(\\sum_j|a_{ij}|)M$; taking the maximum over $i$ gives $\\|\\Phi(Y)-c\\|_{\\infty,2}\\le h\\|A\\|_\\infty M\\le R$, so $\\Phi(Y)\\in\\mathcal B$. Applying the same blockwise estimate to $F(Y)-F(Z)$ gives $\\|\\Phi(Y)-\\Phi(Z)\\|_{\\infty,2}\\le h\\|A\\|_\\infty L\\|Y-Z\\|_{\\infty,2}=q\\|Y-Z\\|_{\\infty,2}$. [given, A1, F1, F2, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 The hypotheses of [F4] hold by step 1.1 and step 1.2, so there is exactly one $Y^*\\in\\mathcal B$ with $\\Phi(Y^*)=Y^*$. The equation $\\Phi(Y^*)=Y^*$ is equivalent to $G(Y^*)=0$ by the definition of $G$. [step 1.1, step 1.2, F4]",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 For any $\\widetilde Y\\in\\mathcal B$, $G(\\widetilde Y)=\\widetilde Y-\\Phi(\\widetilde Y)$ and $Y^*=\\Phi(Y^*)$, so $\\|\\widetilde Y-Y^*\\|_{\\infty,2}\\le\\|G(\\widetilde Y)\\|_{\\infty,2}+\\|\\Phi(\\widetilde Y)-\\Phi(Y^*)\\|_{\\infty,2}\\le\\|G(\\widetilde Y)\\|_{\\infty,2}+q\\|\\widetilde Y-Y^*\\|_{\\infty,2}$. Since $1-q>0$, rearranging proves the stated residual-to-stage-error bound, and $G(\\widetilde Y)=h r$ proves the derivative-scaled form. [A1, step 1.2, step 2.1, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lem-small-step-implicit-rk-branch-and-residual-error item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: The allowed case q=0 gives the residual bound with denominator 1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: The product norm and proof apply for a single stage and dimension one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: The invariant-ball equality h||A|| M=R is allowed by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lem-small-step-implicit-rk-branch-and-residual-error item makes no separate claim requiring a endpoints boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The product ball contains its center c and is complete, as shown in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lem-small-step-implicit-rk-branch-and-residual-error item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lem-small-step-implicit-rk-branch-and-residual-error item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "alg-newton-chord-implicit-residual-with-factorization-reuse": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The alg-newton-chord-implicit-residual-with-factorization-reuse item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition handles a zero correction budget by returning the initial iterate if its residual misses tolerance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition applies to scalar residual maps as well as vector maps."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition explicitly reports singular Jacobians and invalid trials."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The alg-newton-chord-implicit-residual-with-factorization-reuse item makes no separate claim requiring a endpoints boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The alg-newton-chord-implicit-residual-with-factorization-reuse item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The alg-newton-chord-implicit-residual-with-factorization-reuse item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The alg-newton-chord-implicit-residual-with-factorization-reuse item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "thm-backward-euler-dissipative-resolvent-contraction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-backward-euler-step-equation",
+          "source_section": "Definition",
+          "quote": "Let $f:D\\to\\mathbb R^d$ define a first-order initial-value problem on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$. Given a time $t_n$, step $h_n>0$, and state $y_n$ with $(t_n,y_n)\\in D$, an admissible endpoint $y_{n+1}$ must satisfy $(t_n+h_n,y_{n+1})\\in D$. The backward Euler endpoint is any such $y_{n+1}$ satisfying\n\n$$y_{n+1}=y_n+h_n f(t_n+h_n,y_{n+1}).$$\n\nIts update residual at an approximate endpoint $z$ with $(t_n+h_n,z)\\in D$ is\n\n$$G_n^{\\rm BE}(z)=z-y_n-h_n f(t_n+h_n,z).$$\n\nWhen $f$ is defined at the endpoint, the derivative residual is $G_n^{\\rm BE}(z)/h_n$. The equation can have no, one, or several roots on a restricted admissible branch set; this definition by itself asserts neither existence nor uniqueness.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-strongly-monotone-continuous-map-is-bijective",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $\\kappa>0$, and let $H:\\mathbb R^d\\to\\mathbb R^d$ be continuous. Suppose\n\n$$\\langle H(x)-H(y),x-y\\rangle\\ge\\kappa\\|x-y\\|_2^2\\qquad(x,y\\in\\mathbb R^d).$$\n\nThen $H$ is bijective. Its inverse satisfies\n\n$$\\|H^{-1}(u)-H^{-1}(v)\\|_2\\le\\kappa^{-1}\\|u-v\\|_2\\qquad(u,v\\in\\mathbb R^d).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 For fixed $t,h$ and $x,y\\in\\mathbb R^d$, [F3] and the dissipativity assumption give $\\langle H_{t,h}(x)-H_{t,h}(y),x-y\\rangle=\\|x-y\\|_2^2-h\\langle f(t,x)-f(t,y),x-y\\rangle\\ge(1+h\\mu)\\|x-y\\|_2^2$. The constant $1+h\\mu$ is positive, and $H_{t,h}$ is continuous by [A1]. [A1, F1, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 Apply [F2] with $\\kappa=1+h\\mu$. It gives a unique inverse image $z=R_{t,h}(u)$ for every $u$, and the inverse Lipschitz bound in the Statement. By [F1], this inverse image is exactly the backward Euler root. [F1, F2, step 1.1] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The thm-backward-euler-dissipative-resolvent-contraction item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits mu=0; step 1.1 gives inverse Lipschitz constant 1, hence nonexpansiveness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof include d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The strict contraction conclusion is separated from the mu=0 nonexpansive case in the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement applies at every fixed endpoint time and every h>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The thm-backward-euler-dissipative-resolvent-contraction item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The thm-backward-euler-dissipative-resolvent-contraction item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The thm-backward-euler-dissipative-resolvent-contraction item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "alg-implicit-stiff-time-stepper-with-consistent-starts": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The alg-implicit-stiff-time-stepper-with-consistent-starts item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The alg-implicit-stiff-time-stepper-with-consistent-starts item makes no separate claim requiring a zero boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: The BE one-step case is included; BDF2 is supplied two starting states."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: The procedure returns a computed prefix on singularity, invalid trial, or budget exhaustion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: The stored ledger includes each endpoint, stage residual, branch, and solver status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The alg-implicit-stiff-time-stepper-with-consistent-starts item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The alg-implicit-stiff-time-stepper-with-consistent-starts item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The alg-implicit-stiff-time-stepper-with-consistent-starts item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "prop-two-stage-sdirk-order-two-and-l-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-stage-sdirk-tableau",
+          "source_section": "Definition",
+          "quote": "Let $\\gamma=1-1/\\sqrt2$. The selected two-stage singly diagonally implicit Runge–Kutta method has\n\n$$A=\\begin{pmatrix}\\gamma&0\\\\1-\\gamma&\\gamma\\end{pmatrix},\\qquad b=\\begin{pmatrix}1-\\gamma\\\\\\gamma\\end{pmatrix},\\qquad c=\\begin{pmatrix}\\gamma\\\\1\\end{pmatrix}.$$\n\nApplied to $y'=f(t,y)$, its stages and update are those of [[def-implicit-runge-kutta-stage-equations]]. Both diagonal entries of $A$ equal $\\gamma$, the row sums are $c$, and the final row of $A$ is $b^\\mathsf T$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-implicit-runge-kutta-stage-equations",
+          "source_section": "Definition",
+          "quote": "Let $d,s\\ge1$, $A=(a_{ij})\\in\\mathbb R^{s\\times s}$, $b,c\\in\\mathbb R^s$, and let $f:D\\to\\mathbb R^d$ be a vector field on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$ ([[def-first-order-ode-initial-value-problem-and-solution]]). For an initial state $y\\in\\mathbb R^d$ and time $t$ with $(t,y)\\in D$, and a step $h>0$, a stage vector $Y=(Y_1,\\ldots,Y_s)\\in(\\mathbb R^d)^s$ is admissible only when $(t+c_jh,Y_j)\\in D$ for every $j$. An admissible vector solves\n\n$$Y_i=y+h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j),\\qquad i=1,\\ldots,s.$$\n\nWhen a solution $Y$ is selected, the method update is\n\n$$\\Psi_h(t,y)=y+h\\sum_{i=1}^s b_i f(t+c_ih,Y_i).$$\n\nOn the admissible stage set, the **stage update residual** is the vector with blocks\n\n$$G_i(Y)=Y_i-y-h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j).$$\n\nThe associated stage derivative residual is $G(Y)/h$. The tableau is **stiffly accurate** when $b_j=a_{sj}$ for all $j$ and $c_s=1$; in that case the last stage $Y_s$ equals the method update. The equations may have no, one, or several solutions in a proposed branch set; this definition alone asserts no solvability.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field. For $a, b \\ge 0$:\n\n$$a < b \\iff a^2 < b^2, \\qquad a \\le b \\iff a^2 \\le b^2.$$\n\nMore generally, for arbitrary $a, b \\in F$, $a^2 < b^2 \\iff |a| < |b|$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-small-step-implicit-rk-branch-and-residual-error",
+          "source_section": "Statement",
+          "quote": "Let $m,d\\ge1$, $h>0$, $A\\in\\mathbb R^{m\\times m}$, and centers $c=(c_1,\\ldots,c_m)\\in(\\mathbb R^d)^m$. On block vectors define\n\n$$\\|Y\\|_{\\infty,2}:=\\max_{1\\le i\\le m}\\|Y_i\\|_2,\\qquad \\|A\\|_\\infty:=\\max_i\\sum_{j=1}^m|a_{ij}|.$$\n\nLet $F:\\mathcal B\\to(\\mathbb R^d)^m$, with components $F_i:\\mathcal B\\to\\mathbb R^d$, be defined on the closed product ball $\\mathcal B=\\{Y:\\|Y-c\\|_{\\infty,2}\\le R\\}$, where $R>0$. Suppose constants $M,L\\ge0$ satisfy, for all $Y,Z\\in\\mathcal B$,\n\n$$\\|F(Y)\\|_{\\infty,2}\\le M,\\qquad \\|F(Y)-F(Z)\\|_{\\infty,2}\\le L\\|Y-Z\\|_{\\infty,2},$$\n\nand $h\\|A\\|_\\infty M\\le R$, $q:=h\\|A\\|_\\infty L<1$. Define $\\Phi(Y)=c+h(A\\otimes I_d)F(Y)$ and $G(Y)=Y-\\Phi(Y)$. Then $\\Phi$ has a unique fixed point $Y^*\\in\\mathcal B$, equivalently $G(Y^*)=0$. Every approximate stage vector $\\widetilde Y\\in\\mathcal B$ satisfies\n\n$$\\|\\widetilde Y-Y^*\\|_{\\infty,2}\\le\\frac{\\|G(\\widetilde Y)\\|_{\\infty,2}}{1-q}.$$\n\nIf the derivative-scaled stage residual is $r=G(\\widetilde Y)/h$, the right side is $h\\|r\\|_{\\infty,2}/(1-q)$. The hypotheses $h\\|A\\|_\\infty L<1$ and the invariant-ball bound are local solvability conditions; this result gives no global branch outside $\\mathcal B$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 Since $\\sqrt2\\ge0$ and $(\\sqrt2)^2=2$ by [F3], [F4] rules out $\\sqrt2\\le1$ because that would imply $2\\le1$. Thus $\\sqrt2>1$, so $0<1/\\sqrt2<1$ and $0<\\gamma<1$. The row sums of $A$ are $c$, and $b^T$ is the last row of $A$, so the method is internally consistent and stiffly accurate by [F1] and [F2]. Also $\\sum_i b_i=1$ and $b^Tc=(1-\\gamma)\\gamma+\\gamma=2\\gamma-\\gamma^2=1/2$, since substituting $\\gamma=1-1/\\sqrt2$ gives $2\\gamma-\\gamma^2=1/2$. [F1, F2, F3, F4, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 To check order, augment the nonautonomous equation by the clock variable and write $X'=Q(X)$, $Q(t,y)=(1,f(t,y))$. The row-sum condition in step 1.1 makes its Runge–Kutta stage time coordinates $t+c_i h$. Writing $K_i=Q(X_i)$, the stage bound [F5] gives $X_i-X=O(h)$. Taylor's formula [F5] and the bounded derivatives [A1] then give $K_i=Q+h c_iQ'Q+O(h^2)$: indeed $X_i-X=h\\sum_j a_{ij}K_j=h c_iQ+O(h^2)$. Thus the update is $X+h(\\sum_i b_i)Q+h^2(\\sum_i b_i c_i)Q'Q+O(h^3)=X+hQ+\\frac{h^2}{2}Q'Q+O(h^3)$, which agrees with the exact Taylor expansion through degree two. Its local defect is therefore $O(h^3)$. [A1, F1, F2, F5, F6, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "2.2 On the scalar equation, solving the first stage gives $K_1=\\lambda y/(1-\\gamma z)$; substitution into the second gives $Y_2/y=(1+(1-2\\gamma)z)/(1-\\gamma z)^2$. Stiff accuracy identifies $Y_2$ with the update, proving the displayed rational formula wherever the stages are defined. [F1, F2, step 1.1, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 Put $w=-z=s+it$, $s\\ge0$, $v=\\gamma s\\ge0$, and $u=\\gamma t$. From [F3] and $\\gamma=1-1/\\sqrt2$, one obtains $(1-2\\gamma)/\\gamma=\\sqrt2$. Direct expansion gives $|1+\\gamma w|^4-|1-\\sqrt2\\gamma w|^2=(4+2\\sqrt2)v+4v^2+4v^3+v^4+4vu^2+2v^2u^2+u^4\\ge0.$ Also $\\operatorname{Re}(1+\\gamma w)=1+v>0$, so the denominator is nonzero for $s\\ge0$. The inequality proves $|R(z)|\\le1$ for $\\operatorname{Re}z\\le0$, and the numerator degree is one while the denominator degree is two, so $R(z)\\to0$ as $|z|\\to\\infty$ in that half-plane. By the scalar definition this is L-stability. [F1, F3, step 1.1, step 2.2, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The prop-two-stage-sdirk-order-two-and-l-stability item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: The scalar stability function has R(0)=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: The exact order argument applies to scalar vector fields as a special case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the limit R(z)->0 at infinity in the closed left half-plane."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the closed boundary Re z=0 has no poles and |R(z)|<=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The prop-two-stage-sdirk-order-two-and-l-stability item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The prop-two-stage-sdirk-order-two-and-l-stability item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The prop-two-stage-sdirk-order-two-and-l-stability item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "tableau order and scalar stability",
+          "check": "The two order moments are 1 and 1/2; the expanded modulus difference is a sum of nonnegative monomials for Re(z)<=0."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "prop-two-stage-radau-iia-order-three-and-l-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-stage-radau-iia-tableau",
+          "source_section": "Definition",
+          "quote": "The two-stage Radau IIA method has\n\n$$A=\\begin{pmatrix}5/12&-1/12\\\\3/4&1/4\\end{pmatrix},\\qquad b=\\begin{pmatrix}3/4\\\\1/4\\end{pmatrix},\\qquad c=\\begin{pmatrix}1/3\\\\1\\end{pmatrix}.$$\n\nApplied to $y'=f(t,y)$, its stages and update are those of [[def-implicit-runge-kutta-stage-equations]]. The row sums of $A$ equal $c$, and the final row of $A$ is $b^\\mathsf T$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-implicit-runge-kutta-stage-equations",
+          "source_section": "Definition",
+          "quote": "Let $d,s\\ge1$, $A=(a_{ij})\\in\\mathbb R^{s\\times s}$, $b,c\\in\\mathbb R^s$, and let $f:D\\to\\mathbb R^d$ be a vector field on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$ ([[def-first-order-ode-initial-value-problem-and-solution]]). For an initial state $y\\in\\mathbb R^d$ and time $t$ with $(t,y)\\in D$, and a step $h>0$, a stage vector $Y=(Y_1,\\ldots,Y_s)\\in(\\mathbb R^d)^s$ is admissible only when $(t+c_jh,Y_j)\\in D$ for every $j$. An admissible vector solves\n\n$$Y_i=y+h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j),\\qquad i=1,\\ldots,s.$$\n\nWhen a solution $Y$ is selected, the method update is\n\n$$\\Psi_h(t,y)=y+h\\sum_{i=1}^s b_i f(t+c_ih,Y_i).$$\n\nOn the admissible stage set, the **stage update residual** is the vector with blocks\n\n$$G_i(Y)=Y_i-y-h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j).$$\n\nThe associated stage derivative residual is $G(Y)/h$. The tableau is **stiffly accurate** when $b_j=a_{sj}$ for all $j$ and $c_s=1$; in that case the last stage $Y_s$ equals the method update. The equations may have no, one, or several solutions in a proposed branch set; this definition alone asserts no solvability.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-small-step-implicit-rk-branch-and-residual-error",
+          "source_section": "Statement",
+          "quote": "Let $m,d\\ge1$, $h>0$, $A\\in\\mathbb R^{m\\times m}$, and centers $c=(c_1,\\ldots,c_m)\\in(\\mathbb R^d)^m$. On block vectors define\n\n$$\\|Y\\|_{\\infty,2}:=\\max_{1\\le i\\le m}\\|Y_i\\|_2,\\qquad \\|A\\|_\\infty:=\\max_i\\sum_{j=1}^m|a_{ij}|.$$\n\nLet $F:\\mathcal B\\to(\\mathbb R^d)^m$, with components $F_i:\\mathcal B\\to\\mathbb R^d$, be defined on the closed product ball $\\mathcal B=\\{Y:\\|Y-c\\|_{\\infty,2}\\le R\\}$, where $R>0$. Suppose constants $M,L\\ge0$ satisfy, for all $Y,Z\\in\\mathcal B$,\n\n$$\\|F(Y)\\|_{\\infty,2}\\le M,\\qquad \\|F(Y)-F(Z)\\|_{\\infty,2}\\le L\\|Y-Z\\|_{\\infty,2},$$\n\nand $h\\|A\\|_\\infty M\\le R$, $q:=h\\|A\\|_\\infty L<1$. Define $\\Phi(Y)=c+h(A\\otimes I_d)F(Y)$ and $G(Y)=Y-\\Phi(Y)$. Then $\\Phi$ has a unique fixed point $Y^*\\in\\mathcal B$, equivalently $G(Y^*)=0$. Every approximate stage vector $\\widetilde Y\\in\\mathcal B$ satisfies\n\n$$\\|\\widetilde Y-Y^*\\|_{\\infty,2}\\le\\frac{\\|G(\\widetilde Y)\\|_{\\infty,2}}{1-q}.$$\n\nIf the derivative-scaled stage residual is $r=G(\\widetilde Y)/h$, the right side is $h\\|r\\|_{\\infty,2}/(1-q)$. The hypotheses $h\\|A\\|_\\infty L<1$ and the invariant-ball bound are local solvability conditions; this result gives no global branch outside $\\mathcal B$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 The row sums of $A$ equal $c$, $b^T$ is the final row of $A$, and direct arithmetic gives $\\sum_i b_i=1,\\qquad b^Tc=\\frac34\\frac13+\\frac14=\\frac12,\\qquad b^Tc^2=\\frac34\\frac19+\\frac14=\\frac13.$ Also $Ac=(1/18,1/2)^T$, so $b^TAc=(3/4)(1/18)+(1/4)(1/2)=1/6$. [F1, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "1.2 Augment the equation by $Q(t,y)=(1,f(t,y))$. Because the rows of $A$ sum to $c$, the augmented stage times are exactly $t+c_i h$. Write $K_i=Q(X_i)$ for augmented stage derivatives. The invariant-ball bound [F3] gives $X_i-X=O(h)$, and Taylor's formula [F4] yields, uniformly on the local tube, $K_i=Q+h c_iQ'Q+h^2\\left(\\sum_j a_{ij}c_jQ'Q'Q+\\frac{c_i^2}{2}Q''(Q,Q)\\right)+O(h^3).$ Indeed first $K_j=Q+O(h)$ gives $X_i-X=hc_iQ+O(h^2)$; substituting this into the first-order Taylor expansion gives the $h c_iQ'Q$ term, and substituting once more into the second-order Taylor expansion gives the displayed $h^2$ terms, with $O(h^3)$ remainder because $Q\\in C^3$ and its third derivative is bounded. [A1, F2, F3, F4, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "1.3 On $y'=\\lambda y$, direct solution of the two-stage linear system gives $\\det(I-zA)=1-\\frac{2z}{3}+\\frac{z^2}{6},\\qquad 1+z b^T(I-zA)^{-1}\\mathbf1=\\frac{1+z/3}{1-2z/3+z^2/6}.$ Stiff accuracy makes the update the second stage, so this is the stated scalar stability function. [F1, F2, algebra]",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 Multiplying the expansion of step 1.2 by $h b_i$ and summing gives $X+hQ+\\frac{h^2}{2}Q'Q+\\frac{h^3}{6}\\left(Q''(Q,Q)+Q'Q'Q\\right)+O(h^4),$ using all four identities in step 1.1. The exact solution has the same expansion: $X'=Q$, $X''=Q'Q$, and $X'''=Q''(Q,Q)+Q'Q'Q$; Taylor's formula in time with bounded fourth derivative gives remainder $O(h^4)$. Thus the local defect is $O(h^4)$. [A1, F1, F2, F4, step 1.1, step 1.2, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 Put $w=-z=s+it$, $s\\ge0$. Expanding real and imaginary parts gives $\\left|1+\\frac{2w}{3}+\\frac{w^2}{6}\\right|^2-\\left|1-\\frac{w}{3}\\right|^2=2s+\\frac23s^2+\\frac29s^3+\\frac1{36}s^4+\\left(\\frac{2s}{9}+\\frac{s^2}{18}\\right)t^2+\\frac{t^4}{36}\\ge0.$ If the denominator vanished, this inequality would force the numerator to vanish; the numerator $1-w/3$ vanishes only at $w=3$, where the denominator is $1+2+9/6\\ne0$. Hence there are no poles for $\\operatorname{Re}z\\le0$, and the inequality gives $|R(z)|\\le1$ there. Since the numerator degree is one and denominator degree is two, $R(z)\\to0$ as $|z|\\to\\infty$ in that half-plane. This is scalar L-stability. [F1, step 1.3, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The prop-two-stage-radau-iia-order-three-and-l-stability item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: The scalar stability function has R(0)=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: The order expansion applies in dimension one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the denominator has no zeros and that the limit at infinity is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 includes s=0 on the imaginary-axis boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The prop-two-stage-radau-iia-order-three-and-l-stability item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The prop-two-stage-radau-iia-order-three-and-l-stability item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The prop-two-stage-radau-iia-order-three-and-l-stability item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "Radau order moments",
+          "check": "The four moments are 1, 1/2, 1/3, and 1/6; the scalar modulus difference is nonnegative on the closed left half-plane."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "thm-backward-euler-algebraic-update-residual-error-budget": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-backward-euler-dissipative-resolvent-contraction",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $f:\\mathbb R\\times\\mathbb R^d\\to\\mathbb R^d$ be continuous, and suppose for every fixed $t$ and all $x,y\\in\\mathbb R^d$,\n\n$$\\langle f(t,x)-f(t,y),x-y\\rangle\\le-\\mu\\|x-y\\|_2^2$$\n\nfor some $\\mu\\ge0$. For every $h>0$, define $H_{t,h}(x)=x-hf(t,x)$. Then $H_{t,h}$ is bijective and its inverse $R_{t,h}=H_{t,h}^{-1}$, the backward Euler step map, satisfies\n\n$$\\|R_{t,h}(u)-R_{t,h}(v)\\|_2\\le\\frac{1}{1+h\\mu}\\|u-v\\|_2.$$\n\nIn particular, for each input state $u$, the equation $z=u+h f(t,z)$ has exactly one solution on all of $\\mathbb R^d$. No $hL<1$ contraction assumption is needed for this dissipative branch.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-implicit-residual-and-algebraic-error-units",
+          "source_section": "Definition",
+          "quote": "Let $G:U\\to\\mathbb R^m$ be the residual map of an implicit equation, where $U\\subseteq\\mathbb R^m$ is the admissible set for the unknown vector. An exact solution is a point $z^*\\in U$ with $G(z^*)=0$.\n\nThe **update residual** at an approximate solution $\\widetilde z\\in U$ is the vector $G(\\widetilde z)$, measured in the same units as $z$. If the original equation was divided by a positive step scale $\\sigma$, then the **derivative residual** is $G(\\widetilde z)/\\sigma$, and the corresponding update residual is $\\sigma$ times that derivative residual. A residual norm is not a forward-error bound unless a separate inverse or stability estimate converts it to $\\|\\widetilde z-z^*\\|$.\n\nFor a first-order vector field $f:D\\to\\mathbb R^d$ on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$ ([[def-first-order-ode-initial-value-problem-and-solution]]), take a time $t$, input $y\\in\\mathbb R^d$, and step $h>0$ with $(t,y)\\in D$. For backward Euler, an endpoint $z$ is admissible only when $(t+h,z)\\in D$, and its update residual is\n\n$$G_{\\rm BE}(z)=z-y-hf(t+h,z),$$\n\nso the derivative residual is $G_{\\rm BE}(z)/h$.\n\nFor an $s$-stage implicit Runge–Kutta tableau $(A,b,c)$, a stage vector $Y=(Y_1,\\ldots,Y_s)$ is admissible only when $(t+c_jh,Y_j)\\in D$ for every $j$. On that admissible set, its stage update residual has blocks\n\n$$G_i(Y)=Y_i-y-h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j),\\qquad i=1,\\ldots,s.$$\n\nThe stage derivative residual is $G(Y)/h$. These conventions distinguish an equation residual from the distance to its exact root.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 Write $H_{n+1}(z)=z-hf(t_{n+1},z)$. By [F2], $H_{n+1}(\\widetilde u_{n+1})=\\widetilde u_n+\\eta_n$, while the exact update satisfies $H_{n+1}(u_{n+1})=u_n$. [A1, F1, F2, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 Apply the inverse Lipschitz estimate [F1] to these two right-hand sides. With $e_n=\\|\\widetilde u_n-u_n\\|_2$, it gives $e_{n+1}\\le q\\|\\widetilde u_n+\\eta_n-u_n\\|_2\\le q e_n+q\\|\\eta_n\\|_2$ by the Euclidean triangle inequality [F3]. [F1, F3, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 Induction in the recurrence of step 2.1 gives $e_N\\le q^N e_0+\\sum_{j=0}^{N-1}q^{N-j}\\|\\eta_j\\|_2$: for $N=0$ this is equality, and multiplying the bound at $N$ by $q$ and appending $q\\|\\eta_N\\|_2$ proves the next case. The derivative-residual form follows from $\\eta_j=h r_j$ in [F2]. [F2, step 2.1, induction, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The thm-backward-euler-algebraic-update-residual-error-budget item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If every eta_j is zero, the recurrence in step 2.1 reduces to pure contraction of the initial error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof apply to d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: At mu=0, q=1 and the result remains a valid nonexpansive residual accumulation bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: The index N=0 gives equality with an empty residual sum."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The thm-backward-euler-algebraic-update-residual-error-budget item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The thm-backward-euler-algebraic-update-residual-error-budget item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The thm-backward-euler-algebraic-update-residual-error-budget item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "thm-implicit-rk-global-order-with-stage-residual-control": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-implicit-runge-kutta-stage-equations",
+          "source_section": "Definition",
+          "quote": "Let $d,s\\ge1$, $A=(a_{ij})\\in\\mathbb R^{s\\times s}$, $b,c\\in\\mathbb R^s$, and let $f:D\\to\\mathbb R^d$ be a vector field on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$ ([[def-first-order-ode-initial-value-problem-and-solution]]). For an initial state $y\\in\\mathbb R^d$ and time $t$ with $(t,y)\\in D$, and a step $h>0$, a stage vector $Y=(Y_1,\\ldots,Y_s)\\in(\\mathbb R^d)^s$ is admissible only when $(t+c_jh,Y_j)\\in D$ for every $j$. An admissible vector solves\n\n$$Y_i=y+h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j),\\qquad i=1,\\ldots,s.$$\n\nWhen a solution $Y$ is selected, the method update is\n\n$$\\Psi_h(t,y)=y+h\\sum_{i=1}^s b_i f(t+c_ih,Y_i).$$\n\nOn the admissible stage set, the **stage update residual** is the vector with blocks\n\n$$G_i(Y)=Y_i-y-h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j).$$\n\nThe associated stage derivative residual is $G(Y)/h$. The tableau is **stiffly accurate** when $b_j=a_{sj}$ for all $j$ and $c_s=1$; in that case the last stage $Y_s$ equals the method update. The equations may have no, one, or several solutions in a proposed branch set; this definition alone asserts no solvability.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-small-step-implicit-rk-branch-and-residual-error",
+          "source_section": "Statement",
+          "quote": "Let $m,d\\ge1$, $h>0$, $A\\in\\mathbb R^{m\\times m}$, and centers $c=(c_1,\\ldots,c_m)\\in(\\mathbb R^d)^m$. On block vectors define\n\n$$\\|Y\\|_{\\infty,2}:=\\max_{1\\le i\\le m}\\|Y_i\\|_2,\\qquad \\|A\\|_\\infty:=\\max_i\\sum_{j=1}^m|a_{ij}|.$$\n\nLet $F:\\mathcal B\\to(\\mathbb R^d)^m$, with components $F_i:\\mathcal B\\to\\mathbb R^d$, be defined on the closed product ball $\\mathcal B=\\{Y:\\|Y-c\\|_{\\infty,2}\\le R\\}$, where $R>0$. Suppose constants $M,L\\ge0$ satisfy, for all $Y,Z\\in\\mathcal B$,\n\n$$\\|F(Y)\\|_{\\infty,2}\\le M,\\qquad \\|F(Y)-F(Z)\\|_{\\infty,2}\\le L\\|Y-Z\\|_{\\infty,2},$$\n\nand $h\\|A\\|_\\infty M\\le R$, $q:=h\\|A\\|_\\infty L<1$. Define $\\Phi(Y)=c+h(A\\otimes I_d)F(Y)$ and $G(Y)=Y-\\Phi(Y)$. Then $\\Phi$ has a unique fixed point $Y^*\\in\\mathcal B$, equivalently $G(Y^*)=0$. Every approximate stage vector $\\widetilde Y\\in\\mathcal B$ satisfies\n\n$$\\|\\widetilde Y-Y^*\\|_{\\infty,2}\\le\\frac{\\|G(\\widetilde Y)\\|_{\\infty,2}}{1-q}.$$\n\nIf the derivative-scaled stage residual is $r=G(\\widetilde Y)/h$, the right side is $h\\|r\\|_{\\infty,2}/(1-q)$. The hypotheses $h\\|A\\|_\\infty L<1$ and the invariant-ball bound are local solvability conditions; this result gives no global branch outside $\\mathcal B$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-two-stage-sdirk-order-two-and-l-stability",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma=1-1/\\sqrt2$, and use the tableau in [[def-two-stage-sdirk-tableau]]. The coefficient satisfies $0<\\gamma<1$. For a $C^2$ vector field on a neighborhood of the exact solution segment, the local small-step stage branch specified by [[lem-small-step-implicit-rk-branch-and-residual-error]] has local defect $O(h^3)$; hence the method has classical order at least two. Its scalar stability function is\n$$R(z)=\\frac{1+(1-2\\gamma)z}{(1-\\gamma z)^2},$$\nand it is L-stable in the scalar sense of [[def-scalar-rk-a-and-l-stability]]. This is only a scalar linear-test-equation assertion, not a nonlinear contractivity claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-two-stage-radau-iia-order-three-and-l-stability",
+          "source_section": "Statement",
+          "quote": "For the tableau in [[def-two-stage-radau-iia-tableau]], on a $C^3$ vector field and the local small-step branch specified by [[lem-small-step-implicit-rk-branch-and-residual-error]], the local defect is $O(h^4)$, so the method has classical order at least three. Its scalar stability function is\n$$R(z)=\\frac{1+z/3}{1-2z/3+z^2/6},$$\nand it is L-stable in the scalar sense of [[def-scalar-rk-a-and-l-stability]]. No nonlinear contractivity assertion follows.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-global-error-from-one-step-defect-and-stability",
+          "source_section": "Statement",
+          "quote": "Let $d,N,p\\ge1$, $T>0$, $h=T/N$, and $t_n=nh$. Let $y:[0,T]\\to\\mathbb R^d$ solve an initial-value problem in an open time-state domain $D$. Use the Euclidean norm $\\|v\\|_2=(\\sum_{i=1}^d v_i^2)^{1/2}$ of [[def-euclidean-inner-product]], whose triangle inequality is proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]]. Let $\\mathcal T\\subset D$ be a common compact time-state tube with positive margin in $D$, and write $\\mathcal T_t:=\\{v\\in\\mathbb R^d:(t,v)\\in\\mathcal T\\}$. Suppose a one-step map $\\Psi_{h,n}$ is defined on $\\mathcal T_{t_n}$, produces $y_{n+1}=\\Psi_{h,n}(y_n)$, and the entire exact path, all numerical grid states, and every method stage lie in $\\mathcal T$. If constants $C,C_0,L\\ge0$, independent of $N$ and $n$, satisfy\n$$\\|y_0-y(0)\\|_2\\le C_0h^p,\\qquad \\|\\Psi_{h,n}(y(t_n))-y(t_{n+1})\\|_2\\le Ch^{p+1},$$\nand\n$$\\|\\Psi_{h,n}(u)-\\Psi_{h,n}(v)\\|_2\\le(1+Lh)\\|u-v\\|_2$$\nfor every $u,v\\in\\mathcal T_{t_n}$ and $0\\le n<N$, then, for $L>0$,\n$$\\max_{0\\le n\\le N}\\|y_n-y(t_n)\\|_2\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, for $L=0$,\n$$\\max_{0\\le n\\le N}\\|y_n-y(t_n)\\|_2\\le(C_0+CT)h^p.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-discrete-one-step-error-recurrence-bound",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-backward-euler-step-equation",
+          "source_section": "Definition",
+          "quote": "Let $f:D\\to\\mathbb R^d$ define a first-order initial-value problem on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$. Given a time $t_n$, step $h_n>0$, and state $y_n$ with $(t_n,y_n)\\in D$, an admissible endpoint $y_{n+1}$ must satisfy $(t_n+h_n,y_{n+1})\\in D$. The backward Euler endpoint is any such $y_{n+1}$ satisfying\n\n$$y_{n+1}=y_n+h_n f(t_n+h_n,y_{n+1}).$$\n\nIts update residual at an approximate endpoint $z$ with $(t_n+h_n,z)\\in D$ is\n\n$$G_n^{\\rm BE}(z)=z-y_n-h_n f(t_n+h_n,z).$$\n\nWhen $f$ is defined at the endpoint, the derivative residual is $G_n^{\\rm BE}(z)/h_n$. The equation can have no, one, or several roots on a restricted admissible branch set; this definition by itself asserts neither existence nor uniqueness.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 BE and both tableaux are stiffly accurate. Their row-sum norms satisfy $\\|A\\|_\\infty=1$, and their positive weights satisfy $\\|b\\|_1=1$: for BE this is immediate; for SDIRK the absolute row sums are $\\gamma,1$ and $b_1+b_2=1$; for Radau they are $1/2,1$ and $b_1+b_2=1$. [F1, F2, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "1.2 For exact stages at two inputs $u,v$, subtract the fixed-point equations. The state Lipschitz bound [A1] gives $\\|Y(u)-Y(v)\\|_{\\infty,2}\\le\\|u-v\\|_2+q\\|Y(u)-Y(v)\\|_{\\infty,2},$ hence $\\|Y(u)-Y(v)\\|_{\\infty,2}\\le2\\|u-v\\|_2$. The update formula and $\\|b\\|_1=1$ now give $\\|\\Psi_h(u)-\\Psi_h(v)\\|_2\\le(1+2Lh)\\|u-v\\|_2.$ [F1, A1, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "1.3 For an approximate stage vector and the exact stages with the same input, [F2] and $q\\le1/2$ give $\\|\\widetilde Y_n-Y_n\\|_{\\infty,2}\\le2D h^{p+1}$. Stiff accuracy and the residual equation give the method output $\\widetilde y_{n+1}=\\widetilde Y_{n,s}-G_{n,s}(\\widetilde Y_n)$, whereas the exact output is $Y_{n,s}$. Since $\\|G_{n,s}\\|_2\\le\\|G_n\\|_{\\infty,2}\\le D h^{p+1}$, the output perturbation is at most $3D h^{p+1}$. [F1, F2, algebra]",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 The exact one-step map has local defect order $p$: for BE, [F8] identifies the endpoint with its one-stage value, [F7] gives residual $O(h^2)$ at the exact endpoint, and [F2] turns this into endpoint error $O(h^2)$ because both the endpoint and the selected stage root lie in the same ball; for SDIRK and Radau, use [F3] and [F4]. With the stability estimate in step 1.2, the exact-solve trajectory satisfies [F5] and has global error $O(h^p)$. [F2, F3, F4, F5, F7, F8, step 1.2]",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 Let $z_n$ be the exact-solve trajectory from the same initial value and set $d_n=\\|\\widetilde y_n-z_n\\|_2$. Steps 1.2 and 1.3 give $d_{n+1}\\le(1+2Lh)d_n+3D h^{p+1},\\qquad d_0=0.$ Applying [F6] yields $d_n=O(h^p)$ uniformly in $n$. The triangle inequality and step 2.1 give $\\|\\widetilde y_n-y(t_n)\\|_2\\le d_n+\\|z_n-y(t_n)\\|_2=O(h^p)$. An initial $O(h^p)$ error is handled by the same recurrence and [F5]. [F5, F6, step 1.2, step 1.3, step 2.1, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The thm-implicit-rk-global-order-with-stage-residual-control item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero stage residual removes the algebraic perturbation term in step 1.3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: The theorem covers d=1 and the one-stage BE method."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The thm-implicit-rk-global-order-with-stage-residual-control item makes no separate claim requiring a degenerate boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: The permitted q=hL=1/2 boundary is covered by the factor 1/(1-q)=2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary: Each assumed invariant stage ball contains the exact and approximate stage vectors."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The thm-implicit-rk-global-order-with-stage-residual-control item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The thm-implicit-rk-global-order-with-stage-residual-control item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "residual rate",
+          "check": "An update residual bounded by D*h^(p+1) contributes at most 3D*h^(p+1) per step and preserves global order p."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "cor-constant-step-bdf2-order-two-with-consistent-start": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-variable-step-bdf2-with-selected-implicit-branch",
+          "source_section": "Definition",
+          "quote": "Input a vector field $f(t,y)$, a finite grid $t_0,\\ldots,t_N$, starting states $Y_0,Y_1\\in\\mathbb R^d$ (so $N\\ge1$), and for each later step a prescribed closed ball $B_{n+1}\\subset\\mathbb R^d$ that specifies the admissible implicit branch. Before any evaluation, if either starting state has dimension different from $d$, return `invalid-input`; otherwise, if any time increment is nonpositive, return `invalid-grid`. Set $h_n=t_{n+1}-t_n$ and $r_n=h_n/h_{n-1}$ for $1\\le n<N$.\n\nFor $n=1,\\ldots,N-1$, form the equation\n\n$$\\frac{(1+2r_n)Z-(1+r_n)^2Y_n+r_n^2Y_{n-1}}{h_n(1+r_n)}=f(t_{n+1},Z).$$\n\nIf this equation has exactly one root $Z$ in $B_{n+1}$, set $Y_{n+1}=Z$ and continue. If it has no root there, return `no-root` with the computed prefix; if it has more than one root there, return `ambiguous-branch` with the computed prefix. If an evaluation of $f$ is undefined, return `evaluation-failure` with the prefix. On reaching $N$, return `completed` and $(Y_0,\\ldots,Y_N)$. The procedure is defined for arbitrary positive adjacent step ratios; no convergence or accuracy property is part of this algorithm.\n\nThe coefficients are those obtained from the quadratic interpolation derivative in [[lem-variable-step-bdf2-interpolation-and-local-defect]]. A separate theorem gives the uniform ratio hypotheses needed for second-order convergence; they are not part of this algorithm.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-variable-step-bdf2-order-two-under-ratio-bound",
+          "source_section": "Statement",
+          "quote": "Let $y'=f(t,y)$ on $[0,T]$, with $y:[0,T]\\to\\mathbb R^d$ having three continuous derivatives. Let $K\\subset\\mathbb R^d$ be compact with $y([0,T])\\subset\\operatorname{int}K$, and suppose $f$ is defined on $[0,T]\\times K$ and Lipschitz in its state variable there with constant $L$ in the max norm. Let $h_n=t_{n+1}-t_n>0$, $t_0=0$, $t_N=T$, $H=\\max_n h_n\\to0$, and suppose\n\n$$0<r_{\\min}\\le r_n:=\\frac{h_n}{h_{n-1}}\\le r_*<1+\\sqrt2\\qquad(1\\le n<N).$$\n\nAssume $\\|Y_0-y(t_0)\\|_\\infty+\\|Y_1-y(t_1)\\|_\\infty=O(H^2)$. For each step prescribe a closed branch ball $B_{n+1}\\subset K$ as in [[alg-variable-step-bdf2-with-selected-implicit-branch]]. Assume there are radii $\\eta,\\varepsilon>0$, independent of the grid and step index, such that for every sufficiently small $H$ and each $1\\le n<N$, whenever\n\n$$\\max\\{\\|Y_n-y(t_n)\\|_\\infty,\\|Y_{n-1}-y(t_{n-1})\\|_\\infty\\}\\le\\eta,$$\n\nthe step equation has exactly one root in $\\overline B(y(t_{n+1}),\\varepsilon)\\subset K$, and $B_{n+1}$ contains exactly one root, which is this same local root selected by the algorithm. Then for sufficiently small $H$ all computed states remain in $K$ and\n\n$$\\max_{0\\le n\\le N}\\|Y_n-y(t_n)\\|_\\infty=O(H^2).$$\n\nThe lower ratio bound controls the local residual constant; the upper bound controls the parasitic increment. This is a separate variable-grid theorem and does not follow from the constant-step root condition alone.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-backward-euler-step-equation",
+          "source_section": "Definition",
+          "quote": "Let $f:D\\to\\mathbb R^d$ define a first-order initial-value problem on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$. Given a time $t_n$, step $h_n>0$, and state $y_n$ with $(t_n,y_n)\\in D$, an admissible endpoint $y_{n+1}$ must satisfy $(t_n+h_n,y_{n+1})\\in D$. The backward Euler endpoint is any such $y_{n+1}$ satisfying\n\n$$y_{n+1}=y_n+h_n f(t_n+h_n,y_{n+1}).$$\n\nIts update residual at an approximate endpoint $z$ with $(t_n+h_n,z)\\in D$ is\n\n$$G_n^{\\rm BE}(z)=z-y_n-h_n f(t_n+h_n,z).$$\n\nWhen $f$ is defined at the endpoint, the derivative residual is $G_n^{\\rm BE}(z)/h_n$. The equation can have no, one, or several roots on a restricted admissible branch set; this definition by itself asserts neither existence nor uniqueness.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-implicit-runge-kutta-stage-equations",
+          "source_section": "Definition",
+          "quote": "Let $d,s\\ge1$, $A=(a_{ij})\\in\\mathbb R^{s\\times s}$, $b,c\\in\\mathbb R^s$, and let $f:D\\to\\mathbb R^d$ be a vector field on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$ ([[def-first-order-ode-initial-value-problem-and-solution]]). For an initial state $y\\in\\mathbb R^d$ and time $t$ with $(t,y)\\in D$, and a step $h>0$, a stage vector $Y=(Y_1,\\ldots,Y_s)\\in(\\mathbb R^d)^s$ is admissible only when $(t+c_jh,Y_j)\\in D$ for every $j$. An admissible vector solves\n\n$$Y_i=y+h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j),\\qquad i=1,\\ldots,s.$$\n\nWhen a solution $Y$ is selected, the method update is\n\n$$\\Psi_h(t,y)=y+h\\sum_{i=1}^s b_i f(t+c_ih,Y_i).$$\n\nOn the admissible stage set, the **stage update residual** is the vector with blocks\n\n$$G_i(Y)=Y_i-y-h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j).$$\n\nThe associated stage derivative residual is $G(Y)/h$. The tableau is **stiffly accurate** when $b_j=a_{sj}$ for all $j$ and $c_s=1$; in that case the last stage $Y_s$ equals the method update. The equations may have no, one, or several solutions in a proposed branch set; this definition alone asserts no solvability.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-small-step-implicit-rk-branch-and-residual-error",
+          "source_section": "Statement",
+          "quote": "Let $m,d\\ge1$, $h>0$, $A\\in\\mathbb R^{m\\times m}$, and centers $c=(c_1,\\ldots,c_m)\\in(\\mathbb R^d)^m$. On block vectors define\n\n$$\\|Y\\|_{\\infty,2}:=\\max_{1\\le i\\le m}\\|Y_i\\|_2,\\qquad \\|A\\|_\\infty:=\\max_i\\sum_{j=1}^m|a_{ij}|.$$\n\nLet $F:\\mathcal B\\to(\\mathbb R^d)^m$, with components $F_i:\\mathcal B\\to\\mathbb R^d$, be defined on the closed product ball $\\mathcal B=\\{Y:\\|Y-c\\|_{\\infty,2}\\le R\\}$, where $R>0$. Suppose constants $M,L\\ge0$ satisfy, for all $Y,Z\\in\\mathcal B$,\n\n$$\\|F(Y)\\|_{\\infty,2}\\le M,\\qquad \\|F(Y)-F(Z)\\|_{\\infty,2}\\le L\\|Y-Z\\|_{\\infty,2},$$\n\nand $h\\|A\\|_\\infty M\\le R$, $q:=h\\|A\\|_\\infty L<1$. Define $\\Phi(Y)=c+h(A\\otimes I_d)F(Y)$ and $G(Y)=Y-\\Phi(Y)$. Then $\\Phi$ has a unique fixed point $Y^*\\in\\mathcal B$, equivalently $G(Y^*)=0$. Every approximate stage vector $\\widetilde Y\\in\\mathcal B$ satisfies\n\n$$\\|\\widetilde Y-Y^*\\|_{\\infty,2}\\le\\frac{\\|G(\\widetilde Y)\\|_{\\infty,2}}{1-q}.$$\n\nIf the derivative-scaled stage residual is $r=G(\\widetilde Y)/h$, the right side is $h\\|r\\|_{\\infty,2}/(1-q)$. The hypotheses $h\\|A\\|_\\infty L<1$ and the invariant-ball bound are local solvability conditions; this result gives no global branch outside $\\mathcal B$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field. For $a, b \\ge 0$:\n\n$$a < b \\iff a^2 < b^2, \\qquad a \\le b \\iff a^2 \\le b^2.$$\n\nMore generally, for arbitrary $a, b \\in F$, $a^2 < b^2 \\iff |a| < |b|$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose $\\varepsilon>0$ so that every closed max-norm $\\varepsilon$-ball about $y([0,T])$ lies in $K$; such a uniform $\\varepsilon$ exists by compactness and the interior assumption. Set $\\eta=\\varepsilon/10$. Taylor expansion and $y\\in C^3$ give $\\rho_n=3y(t_{n+1})-4y(t_n)+y(t_{n-1})-2h f(t_{n+1},y(t_{n+1}))$, with $\\|\\rho_n\\|_\\infty\\le C_\\rho h^3$ uniformly in $n$ and $h$. For any $U,V$ within $\\eta$ of $y(t_n),y(t_{n-1})$, respectively, $U,V\\in K$, so the assumed all-histories condition supplies the unique root $Z$ in $B_{n+1}\\subset K$. Subtracting the exact residual equation and using the common Lipschitz constant $L$ gives $$(3-2hL)\\|Z-y(t_{n+1})\\|_\\infty\\le4\\|U-y(t_n)\\|_\\infty+\\|V-y(t_{n-1})\\|_\\infty+C_\\rho h^3\\le5\\eta+C_\\rho h^3.$$ Choose $h$ uniformly small enough that $2hL\\le1$ and $C_\\rho h^3\\le\\varepsilon/2$. Then $\\|Z-y(t_{n+1})\\|_\\infty\\le\\varepsilon/2<\\varepsilon$. Any two roots $Z,W\\in K$ for the same history satisfy $3\\|Z-W\\|_\\infty\\le2hL\\|Z-W\\|_\\infty$, hence coincide. Therefore the $\\varepsilon$-ball contains exactly one root, and it is exactly the unique root in the prescribed $B_{n+1}$ selected by the algorithm. These $\\varepsilon,\\eta$ and the step threshold are independent of $n$ and $N$. On the constant grid choose $r_{\\min}=r_*=1$ and $H=h$. All premises of the full revised theorem [F2], including its uniform local branch and selection premise, now hold, so it yields the asserted $O(h^2)$ maximum error.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For an exact-start BE startup, the solution identity [F3] gives $y'(0)=f(0,y(0))$ and $y'(h)=f(h,y(h))$. By [F4], $y(h)-y(0)-hy'(0)=O(h^2)$ and $y'(h)-y'(0)=O(h)$, so [F5] gives $G_{\\rm BE}(y(h))=y(h)-y(0)-hf(h,y(h))=O(h^2)$. By [F6], this is the stage update residual for the one-stage tableau $A=b=c=(1)$. The point $y(h)$ and the selected root lie in the same invariant ball by [A1], so [F7] gives $\\|Y_1-y(h)\\|_2\\le\\|G_{\\rm BE}(y(h))\\|_2/(1-q)=O(h^2)$ because $q=hL_2\\le1/2$. For each coordinate $i$, $|v_i|^2\\le\\sum_j v_j^2=\\|v\\|_2^2$ by [F8], and [F9] therefore gives $\\|v\\|_\\infty\\le\\|v\\|_2$. Applying this to $v=Y_1-y(h)$ proves the required max-norm starter bound.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The cor-constant-step-bdf2-order-two-with-consistent-start item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The cor-constant-step-bdf2-order-two-with-consistent-start item makes no separate claim requiring a zero boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: For N=2 there is exactly one BDF2 update after the supplied start pair."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The exact-start BE startup is verified in step 2.1 using the local branch bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 sets both ratio endpoints to r_min=r_*=1, strictly below 1+sqrt(2)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The cor-constant-step-bdf2-order-two-with-consistent-start item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The cor-constant-step-bdf2-order-two-with-consistent-start item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The cor-constant-step-bdf2-order-two-with-consistent-start item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "constant step ratio",
+          "check": "Every adjacent ratio equals 1, strictly below the BDF2 threshold 1+sqrt(2)."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "ex-newton-budget-exhaustion-with-a-unique-backward-euler-root": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-backward-euler-dissipative-resolvent-contraction",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $f:\\mathbb R\\times\\mathbb R^d\\to\\mathbb R^d$ be continuous, and suppose for every fixed $t$ and all $x,y\\in\\mathbb R^d$,\n\n$$\\langle f(t,x)-f(t,y),x-y\\rangle\\le-\\mu\\|x-y\\|_2^2$$\n\nfor some $\\mu\\ge0$. For every $h>0$, define $H_{t,h}(x)=x-hf(t,x)$. Then $H_{t,h}$ is bijective and its inverse $R_{t,h}=H_{t,h}^{-1}$, the backward Euler step map, satisfies\n\n$$\\|R_{t,h}(u)-R_{t,h}(v)\\|_2\\le\\frac{1}{1+h\\mu}\\|u-v\\|_2.$$\n\nIn particular, for each input state $u$, the equation $z=u+h f(t,z)$ has exactly one solution on all of $\\mathbb R^d$. No $hL<1$ contraction assumption is needed for this dissipative branch.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, $G:U\\to\\mathbb R^m$ be $C^1$, $z_0\\in U$, residual tolerance $\\varepsilon\\ge0$, correction budget $N\\in\\mathbb N_0$, and refresh period $q\\in\\mathbb N$, $q\\ge1$. Use the Jacobian convention $J(z)=DG(z)$ of [[def-jacobian-matrix-and-gradient]]. The output is a last valid iterate $z\\in U$, a status, and the actual residual norm $\\|G(z)\\|_2$.\n\nIn **updated-Newton mode**, invoke [[alg-finite-budget-newton-for-vector-residuals]] with $G,z_0,\\varepsilon,N$. It recomputes the Jacobian at every correction and returns its stated residual/budget/failure status. Re-evaluate $G$ at the returned iterate to provide the output residual norm. Count each Jacobian assembly, factorization attempt, and linear solve actually performed.\n\nIn **chord mode**, for $k=0,1,\\ldots,N$, first evaluate $G(z_k)$ and put $r_k=\\|G(z_k)\\|_2$. If $r_k\\le\\varepsilon$, return $(z_k,\\texttt{root},r_k)$; this status means only that the residual tolerance was met. If $k=N$, return $(z_k,\\texttt{iteration-budget-exhausted},r_k)$. Otherwise, at $k=0,q,2q,\\ldots$, refresh by forming $J_k=DG(z_k)$, attempting to factor it, and retaining the factorization until the next scheduled refresh. The factorization backend must either report singularity or return a factor object whose solve operation gives the exact unique solution of $J_k s=-G(z_k)$. If it reports singularity, return $(z_k,\\texttt{singular-jacobian},r_k)$. At each correction call [[alg-newton-correction-for-vector-residuals]] with the retained $J_k$ and current residual. If that procedure reports a singular Jacobian, return $(z_k,\\texttt{singular-jacobian},r_k)$. If its correction $s_k$ has $z_k+s_k\\notin U$, return $(z_k,\\texttt{invalid-trial},r_k)$; otherwise set $z_{k+1}=z_k+s_k$ and continue. A refresh period $q=1$ updates the Jacobian every correction; $q>1$ is a chord iteration.\n\nBoth modes make no claim that a finite budget reaches an exact root or that a small residual is a forward-error bound. Record the number of Jacobian assemblies, factorization attempts, and linear solves actually performed; a dense LU correction uses one forward and one backward triangular solve. Sparse cost depends on the actual stage matrix and factorization backend and is not bounded here.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-backward-euler-step-equation",
+          "source_section": "Definition",
+          "quote": "Let $f:D\\to\\mathbb R^d$ define a first-order initial-value problem on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$. Given a time $t_n$, step $h_n>0$, and state $y_n$ with $(t_n,y_n)\\in D$, an admissible endpoint $y_{n+1}$ must satisfy $(t_n+h_n,y_{n+1})\\in D$. The backward Euler endpoint is any such $y_{n+1}$ satisfying\n\n$$y_{n+1}=y_n+h_n f(t_n+h_n,y_{n+1}).$$\n\nIts update residual at an approximate endpoint $z$ with $(t_n+h_n,z)\\in D$ is\n\n$$G_n^{\\rm BE}(z)=z-y_n-h_n f(t_n+h_n,z).$$\n\nWhen $f$ is defined at the endpoint, the derivative residual is $G_n^{\\rm BE}(z)/h_n$. The equation can have no, one, or several roots on a restricted admissible branch set; this definition by itself asserts neither existence nor uniqueness.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 For all $x,y\\in\\mathbb R$, $(f(x)-f(y))(x-y)=-(x-y)^2(x^2+xy+y^2)\\le0,$ because $x^2+xy+y^2=(x+y/2)^2+3y^2/4\\ge0$. Thus the field is globally dissipative with $\\mu=0$. [F1, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 By [F1], the equation $z=1-z^3$, equivalently $z+z^3=1$, has exactly one real root. At the supplied initial iterate $x_0=0$, [F3] gives $G(0)=0-1-(-0)=-1$, so $\\|G(0)\\|=1>0.1$. [F1, F3, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 Since the current residual exceeds tolerance and the correction budget is already zero, the finite solver returns iteration-budget-exhausted, despite the unique BE root proved in step 2.1. No forward-error statement follows from this status. [F2, step 2.1, cases] ∎",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The ex-newton-budget-exhaustion-with-a-unique-backward-euler-root item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero correction budget is the example boundary; step 3.1 derives budget exhaustion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar case is the complete example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The root is unique although the initial residual misses tolerance in steps 2.1–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The ex-newton-budget-exhaustion-with-a-unique-backward-euler-root item makes no separate claim requiring a endpoints boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The ex-newton-budget-exhaustion-with-a-unique-backward-euler-root item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The ex-newton-budget-exhaustion-with-a-unique-backward-euler-root item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The ex-newton-budget-exhaustion-with-a-unique-backward-euler-root item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "zero correction budget",
+          "check": "Initial residual norm is 1, above tolerance 0.1, so the finite solver returns budget exhaustion."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "ex-stiff-scalar-decay-and-trapezoid-ringing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-scalar-rk-a-and-l-stability",
+          "source_section": "Definition",
+          "quote": "For a Runge–Kutta tableau $(A,b,c)$, apply its stage equations to the scalar test equation $y'=\\lambda y$, with $z=h\\lambda$. Whenever $I-zA$ is invertible, the stages satisfy $Y=(I-zA)^{-1}\\mathbf 1\\,y$, and the **scalar stability function** is\n\n$$R(z)=1+z\\,b^\\mathsf T(I-zA)^{-1}\\mathbf 1.$$\n\nThe **scalar stability region** is the set of $z\\in\\mathbb C$ for which the scalar update has $|R(z)|\\le1$. The method is **A-stable** when its rational stability function has no pole in $\\{\\operatorname{Re}z\\le0\\}$ and $|R(z)|\\le1$ throughout that closed half-plane. It is **L-stable** when it is A-stable and $R(z)\\to0$ as $|z|\\to\\infty$ with $\\operatorname{Re}z\\le0$.\n\nThese are properties of the scalar linear test equation and the tableau's rational function. They do not assert nonlinear contractivity or control of nonnormal matrix growth.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-two-stage-sdirk-order-two-and-l-stability",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma=1-1/\\sqrt2$, and use the tableau in [[def-two-stage-sdirk-tableau]]. The coefficient satisfies $0<\\gamma<1$. For a $C^2$ vector field on a neighborhood of the exact solution segment, the local small-step stage branch specified by [[lem-small-step-implicit-rk-branch-and-residual-error]] has local defect $O(h^3)$; hence the method has classical order at least two. Its scalar stability function is\n$$R(z)=\\frac{1+(1-2\\gamma)z}{(1-\\gamma z)^2},$$\nand it is L-stable in the scalar sense of [[def-scalar-rk-a-and-l-stability]]. This is only a scalar linear-test-equation assertion, not a nonlinear contractivity claim.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-two-stage-radau-iia-order-three-and-l-stability",
+          "source_section": "Statement",
+          "quote": "For the tableau in [[def-two-stage-radau-iia-tableau]], on a $C^3$ vector field and the local small-step branch specified by [[lem-small-step-implicit-rk-branch-and-residual-error]], the local defect is $O(h^4)$, so the method has classical order at least three. Its scalar stability function is\n$$R(z)=\\frac{1+z/3}{1-2z/3+z^2/6},$$\nand it is L-stable in the scalar sense of [[def-scalar-rk-a-and-l-stability]]. No nonlinear contractivity assertion follows.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-backward-euler-step-equation",
+          "source_section": "Definition",
+          "quote": "Let $f:D\\to\\mathbb R^d$ define a first-order initial-value problem on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$. Given a time $t_n$, step $h_n>0$, and state $y_n$ with $(t_n,y_n)\\in D$, an admissible endpoint $y_{n+1}$ must satisfy $(t_n+h_n,y_{n+1})\\in D$. The backward Euler endpoint is any such $y_{n+1}$ satisfying\n\n$$y_{n+1}=y_n+h_n f(t_n+h_n,y_{n+1}).$$\n\nIts update residual at an approximate endpoint $z$ with $(t_n+h_n,z)\\in D$ is\n\n$$G_n^{\\rm BE}(z)=z-y_n-h_n f(t_n+h_n,z).$$\n\nWhen $f$ is defined at the endpoint, the derivative residual is $G_n^{\\rm BE}(z)/h_n$. The equation can have no, one, or several roots on a restricted admissible branch set; this definition by itself asserts neither existence nor uniqueness.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 Here the test argument is $z=-\\lambda h=-100$. The trapezoidal rule equation $y_{n+1}=y_n+\\frac h2\\bigl(-\\lambda y_n-\\lambda y_{n+1}\\bigr)$ rearranges to the factor $R_{\\mathrm{trap}}(-100)=\\frac{1-100/2}{1+100/2}=-\\frac{49}{51}.$ Thus successive trapezoidal values alternate sign, while the magnitude after each step is multiplied by $49/51\\approx0.961$. [F1, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 Backward Euler gives $R_{\\mathrm{BE}}(-100)=1/101\\approx0.00990$. The proved scalar functions give $R_S(-100)=\\frac{1-100(1-2\\gamma)}{(1+100\\gamma)^2}\\approx-0.0441,\\qquad R_R(-100)=\\frac{1-100/3}{1+200/3+10000/6}\\approx-0.0186.$ Each L-stable method damps this stiff mode strongly at this step size; the trapezoidal factor instead changes sign and has magnitude near one. These are scalar linear-test calculations only and imply no nonlinear stability comparison. [F2, F3, F4, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The ex-stiff-scalar-decay-and-trapezoid-ringing item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: The displayed test argument is z=-100, away from the zero-mode boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: All computations use the scalar test equation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 compares factors whose magnitudes remain below one but differ sharply in the stiff regime."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The ex-stiff-scalar-decay-and-trapezoid-ringing item makes no separate claim requiring a endpoints boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The ex-stiff-scalar-decay-and-trapezoid-ringing item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The ex-stiff-scalar-decay-and-trapezoid-ringing item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The ex-stiff-scalar-decay-and-trapezoid-ringing item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "lambda*h=100",
+          "check": "Exact factors: trapezoid -49/51, BE 1/101, SDIRK formula from exact gamma, and Radau formula from its rational function."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "ex-dissipative-backward-euler-residual-contraction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-backward-euler-dissipative-resolvent-contraction",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $f:\\mathbb R\\times\\mathbb R^d\\to\\mathbb R^d$ be continuous, and suppose for every fixed $t$ and all $x,y\\in\\mathbb R^d$,\n\n$$\\langle f(t,x)-f(t,y),x-y\\rangle\\le-\\mu\\|x-y\\|_2^2$$\n\nfor some $\\mu\\ge0$. For every $h>0$, define $H_{t,h}(x)=x-hf(t,x)$. Then $H_{t,h}$ is bijective and its inverse $R_{t,h}=H_{t,h}^{-1}$, the backward Euler step map, satisfies\n\n$$\\|R_{t,h}(u)-R_{t,h}(v)\\|_2\\le\\frac{1}{1+h\\mu}\\|u-v\\|_2.$$\n\nIn particular, for each input state $u$, the equation $z=u+h f(t,z)$ has exactly one solution on all of $\\mathbb R^d$. No $hL<1$ contraction assumption is needed for this dissipative branch.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-backward-euler-algebraic-update-residual-error-budget",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of [[thm-backward-euler-dissipative-resolvent-contraction]] with a common $\\mu\\ge0$, let $N\\in\\mathbb N_0$, and use a constant $h>0$ grid $t_n=t_0+nh$ for $0\\le n\\le N$. Let $u_0\\in\\mathbb R^d$ and let $u_{n+1}$ be the exact backward Euler sequence, $u_{n+1}=R_{t_{n+1},h}(u_n)$. For any approximate sequence $\\widetilde u_n\\in\\mathbb R^d$, define its update residual\n$$\\eta_n=\\widetilde u_{n+1}-\\widetilde u_n-hf(t_{n+1},\\widetilde u_{n+1}).$$\nWith $q=(1+h\\mu)^{-1}\\le1$, for $0\\le n\\le N$,\n$$\\|\\widetilde u_N-u_N\\|_2\\le q^N\\|\\widetilde u_0-u_0\\|_2+\\sum_{j=0}^{N-1}q^{N-j}\\|\\eta_j\\|_2.$$\nThis bound uses the unscaled update residual. If $r_n=\\eta_n/h$ is the derivative residual, its contribution is $h q^{N-j}\\|r_j\\|_2$. The result compares to the exact discrete BE sequence, not directly to the continuous solution.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-backward-euler-step-equation",
+          "source_section": "Definition",
+          "quote": "Let $f:D\\to\\mathbb R^d$ define a first-order initial-value problem on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$. Given a time $t_n$, step $h_n>0$, and state $y_n$ with $(t_n,y_n)\\in D$, an admissible endpoint $y_{n+1}$ must satisfy $(t_n+h_n,y_{n+1})\\in D$. The backward Euler endpoint is any such $y_{n+1}$ satisfying\n\n$$y_{n+1}=y_n+h_n f(t_n+h_n,y_{n+1}).$$\n\nIts update residual at an approximate endpoint $z$ with $(t_n+h_n,z)\\in D$ is\n\n$$G_n^{\\rm BE}(z)=z-y_n-h_n f(t_n+h_n,z).$$\n\nWhen $f$ is defined at the endpoint, the derivative residual is $G_n^{\\rm BE}(z)/h_n$. The equation can have no, one, or several roots on a restricted admissible branch set; this definition by itself asserts neither existence nor uniqueness.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 The scalar field is strongly dissipative with $\\mu=1$, since for all $x,y$, $(f(x)-f(y))(x-y)=-(x-y)^2(1+x^2+xy+y^2)\\le-(x-y)^2,$ where $x^2+xy+y^2\\ge0$. Hence [F1] gives a unique BE root on all of $\\mathbb R$. The root equation is $z+2z+2z^3=1$, or $3z+2z^3=1$. [F1, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 At $\\widetilde u_1=1/3$, the left side of the root equation is $1+2/27$, so the update residual is $\\eta_0=2/27$ and the derivative residual is $\\eta_0/h=1/27$. Here $q=1/(1+2)=1/3$. Applying [F2] gives $|\\widetilde u_1-u_1|\\le q|\\eta_0|=\\frac13\\frac{2}{27}=\\frac{2}{81}.$ [F2, step 1.1, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The ex-dissipative-backward-euler-residual-contraction item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes a nonzero residual and its forward-error contribution explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is scalar."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 covers a strictly dissipative cubic-plus-linear field."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: The input and single BE endpoint are fixed in Facts & Assumptions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The ex-dissipative-backward-euler-residual-contraction item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The ex-dissipative-backward-euler-residual-contraction item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The ex-dissipative-backward-euler-residual-contraction item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "h=2, mu=1",
+          "check": "Approximate endpoint 1/3 has update residual 2/27 and the theorem gives error bound 2/81."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    },
+    "ex-robertson-reaction-system-newton-work": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-implicit-residual-and-algebraic-error-units",
+          "source_section": "Definition",
+          "quote": "Let $G:U\\to\\mathbb R^m$ be the residual map of an implicit equation, where $U\\subseteq\\mathbb R^m$ is the admissible set for the unknown vector. An exact solution is a point $z^*\\in U$ with $G(z^*)=0$.\n\nThe **update residual** at an approximate solution $\\widetilde z\\in U$ is the vector $G(\\widetilde z)$, measured in the same units as $z$. If the original equation was divided by a positive step scale $\\sigma$, then the **derivative residual** is $G(\\widetilde z)/\\sigma$, and the corresponding update residual is $\\sigma$ times that derivative residual. A residual norm is not a forward-error bound unless a separate inverse or stability estimate converts it to $\\|\\widetilde z-z^*\\|$.\n\nFor a first-order vector field $f:D\\to\\mathbb R^d$ on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$ ([[def-first-order-ode-initial-value-problem-and-solution]]), take a time $t$, input $y\\in\\mathbb R^d$, and step $h>0$ with $(t,y)\\in D$. For backward Euler, an endpoint $z$ is admissible only when $(t+h,z)\\in D$, and its update residual is\n\n$$G_{\\rm BE}(z)=z-y-hf(t+h,z),$$\n\nso the derivative residual is $G_{\\rm BE}(z)/h$.\n\nFor an $s$-stage implicit Runge–Kutta tableau $(A,b,c)$, a stage vector $Y=(Y_1,\\ldots,Y_s)$ is admissible only when $(t+c_jh,Y_j)\\in D$ for every $j$. On that admissible set, its stage update residual has blocks\n\n$$G_i(Y)=Y_i-y-h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j),\\qquad i=1,\\ldots,s.$$\n\nThe stage derivative residual is $G(Y)/h$. These conventions distinguish an equation residual from the distance to its exact root.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, $G:U\\to\\mathbb R^m$ be $C^1$, $z_0\\in U$, residual tolerance $\\varepsilon\\ge0$, correction budget $N\\in\\mathbb N_0$, and refresh period $q\\in\\mathbb N$, $q\\ge1$. Use the Jacobian convention $J(z)=DG(z)$ of [[def-jacobian-matrix-and-gradient]]. The output is a last valid iterate $z\\in U$, a status, and the actual residual norm $\\|G(z)\\|_2$.\n\nIn **updated-Newton mode**, invoke [[alg-finite-budget-newton-for-vector-residuals]] with $G,z_0,\\varepsilon,N$. It recomputes the Jacobian at every correction and returns its stated residual/budget/failure status. Re-evaluate $G$ at the returned iterate to provide the output residual norm. Count each Jacobian assembly, factorization attempt, and linear solve actually performed.\n\nIn **chord mode**, for $k=0,1,\\ldots,N$, first evaluate $G(z_k)$ and put $r_k=\\|G(z_k)\\|_2$. If $r_k\\le\\varepsilon$, return $(z_k,\\texttt{root},r_k)$; this status means only that the residual tolerance was met. If $k=N$, return $(z_k,\\texttt{iteration-budget-exhausted},r_k)$. Otherwise, at $k=0,q,2q,\\ldots$, refresh by forming $J_k=DG(z_k)$, attempting to factor it, and retaining the factorization until the next scheduled refresh. The factorization backend must either report singularity or return a factor object whose solve operation gives the exact unique solution of $J_k s=-G(z_k)$. If it reports singularity, return $(z_k,\\texttt{singular-jacobian},r_k)$. At each correction call [[alg-newton-correction-for-vector-residuals]] with the retained $J_k$ and current residual. If that procedure reports a singular Jacobian, return $(z_k,\\texttt{singular-jacobian},r_k)$. If its correction $s_k$ has $z_k+s_k\\notin U$, return $(z_k,\\texttt{invalid-trial},r_k)$; otherwise set $z_{k+1}=z_k+s_k$ and continue. A refresh period $q=1$ updates the Jacobian every correction; $q>1$ is a chord iteration.\n\nBoth modes make no claim that a finite budget reaches an exact root or that a small residual is a forward-error bound. Record the number of Jacobian assemblies, factorization attempts, and linear solves actually performed; a dense LU correction uses one forward and one backward triangular solve. Sparse cost depends on the actual stage matrix and factorization backend and is not bounded here.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Take a finite strictly increasing time grid $t_0<\\cdots<t_N$, $N\\ge1$, a vector field $f$ defined at every attempted evaluation, a method selector in {BE, the selected two-stage SDIRK, two-stage Radau IIA, variable-step BDF2}, and an initial state $Y_0$. For every BE or Runge–Kutta solve supply an admissible open residual domain $U_n$, an initial iterate $z_{n,0}\\in U_n$, tolerance $\\varepsilon_n\\ge0$, correction budget $M_n\\in\\mathbb N_0$, Newton or chord mode, refresh period $q_n\\ge1$, and a linear-system backend. In chord mode that backend must satisfy the exact-solve interface of [[alg-newton-chord-implicit-residual-with-factorization-reuse]]. For BDF2 supply $Y_1$, or select a BE startup and give that solve its own domain, initial iterate, tolerance, budget, mode, and refresh period. Also supply a closed BDF2 branch ball for each later BDF2 step.\n\n**Procedure.** For BE, form the endpoint residual of [[def-backward-euler-step-equation]]. For SDIRK or Radau IIA, form the stage residual of [[def-implicit-runge-kutta-stage-equations]] with the selected tableau and update by its formula. Call [[alg-newton-chord-implicit-residual-with-factorization-reuse]] for each finite solve. If it returns `root`, store the returned endpoint or stages, update the state, and record the returned residual norm and solver work; this status means only that the tolerance was met. On any other status, return immediately with the computed prefix, residual norm when available, and work log. An evaluation failure, singular Jacobian, invalid trial, or exhausted correction budget therefore cannot be reported as a successful step.\n\nFor an exact-root BDF2 run, call [[alg-variable-step-bdf2-with-selected-implicit-branch]] on the supplied starter pair for steps $n=1,\\ldots,N-1$ with the supplied branch balls; it returns a computed prefix and `completed`, `no-root`, `ambiguous-branch`, or `evaluation-failure`. In a finite-solve BDF2 run, use the same branch balls for steps $n=1,\\ldots,N-1$ and form the unscaled residual\n$$G_n(Z)=(1+2r_n)Z-(1+r_n)^2Y_n+r_n^2Y_{n-1}-h_n(1+r_n)f(t_{n+1},Z),\\qquad r_n=h_n/h_{n-1}.$$\nCall the finite solver with this $G_n$; after a `root` status, store its approximate iterate and continue, labelling the run `completed-with-residual-tolerances` only after every requested step returns `root`. A finite residual status does not establish the exact-root completion of the BDF2 branch algorithm.\n\nFor BDF2, the order guarantee in [[thm-variable-step-bdf2-order-two-under-ratio-bound]] requires its smoothness, ratio, tube, unique-root, and $O(H^2)$ starter hypotheses. The exact-start BE estimate and branch conditions are proved in [[cor-constant-step-bdf2-order-two-with-consistent-start]]; a finite-tolerance startup must separately meet that result's starter error budget. For any method, a forward-error claim requires a separate residual-to-error estimate such as [[lem-small-step-implicit-rk-branch-and-residual-error]], [[thm-backward-euler-algebraic-update-residual-error-budget]], or the BDF2 order theorem.\n\n**Work record.** Count every Jacobian assembly and factorization attempt at a refresh, every linear solve, and, for dense LU, each correction's forward and backward triangular solve. Reuse a chord factorization only for its declared refresh period. Sparse cost depends on the actual stage matrix and backend; this procedure assigns no sparse complexity bound. No general Newton convergence or forward-accuracy claim is part of the algorithm.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.\n\nFor an open $U\\subseteq\\mathbb R^n$ and $a\\in U$, a **local inverse of $f$ at\n$a$** is a function $g:W\\to V$ for open neighbourhoods $a\\in V\\subseteq U$\nand $f(a)\\in W\\subseteq\\mathbb R^n$ such that $f|_V:V\\to W$ is bijective and\n$g=(f|_V)^{-1}$. If both $f|_V$ and $g$ are $C^1$, this restriction is a\n**local diffeomorphism** at $a$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 Differentiating the polynomial components gives the displayed $Df$ by [F5]. For an increment $v$, the remainder $f(y+v)-f(y)-Df(y)v$ is $(10^4v_2v_3,-10^4v_2v_3-3\\cdot10^7v_2^2,3\\cdot10^7v_2^2)^T$, whose Euclidean norm is bounded by $C\\|v\\|_2^2$; hence $Df(y)$ is the total derivative and its affine entries are continuous. Thus $J_G=I-hDf$; by [F4], both $f$ and $G(y)=y-y_0-hf(y)$ are $C^1$, as required by [F2]. Summing the components of $f$ cancels all terms, so a root satisfies $\\sum_i(y_i-y_{0,i})=0$ and preserves total concentration. [F1, F2, F4, F5, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "1.2 At the start, $f(y_0)=(-0.04,0.04,0)^T$, so $G(y_0)=(0.00004,-0.00004,0)^T$ and $\\|G(y_0)\\|_2=\\sqrt{2}(4\\cdot10^{-5})=5.65685425\\cdot10^{-5}>10^{-12}$ by [F6]. Thus neither mode returns at count zero. [F1, F6, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 Applying the stated Newton correction formula with the displayed Jacobian and binary64 partial-pivoting elimination gives the Newton residual sequence in the Numerical record. It first falls below $10^{-12}$ at count five; the residuals at counts zero through four exceed the tolerance. Since the budget is 12, the algorithm returns `root` after five corrections. Each correction refreshes and factors one Jacobian, then solves once, giving five assemblies/factorizations and five solves. [F2, F3, step 1.2, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 With chord refresh period eight, [F2] refreshes at count zero and retains that factorization for corrections zero through seven. The residuals at counts zero through eight all exceed $10^{-12}$, and the budget is eight, so the algorithm returns `iteration-budget-exhausted`. This uses one assembly/factorization and eight linear solves. The mode is unconstrained, so negative intermediate second components do not violate its domain $\\mathbb R^3$. [F2, F3, step 1.2, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The ex-robertson-reaction-system-newton-work item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The ex-robertson-reaction-system-newton-work item makes no separate claim requiring a zero boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: The finite work record uses a three-component state and one step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: The chord mode negative intermediate y2 is recorded; no positivity constraint is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: The residual, initial state, step, tolerance, budget, and refresh schedule are fixed in Facts & Assumptions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The ex-robertson-reaction-system-newton-work item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The ex-robertson-reaction-system-newton-work item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The ex-robertson-reaction-system-newton-work item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "Newton, binary64, budget 12",
+          "check": "Starting residual 5.6568542494923805e-5; residual falls to 1.43041173542e-16 after five exact-Jacobian corrections, below 1e-12."
+        },
+        {
+          "case": "chord, binary64, budget 8, refresh 8",
+          "check": "After eight frozen-Jacobian corrections residual is 6.19977506348e-5, above 1e-12; one factorization and eight solves."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 65 author — not independent approval",
+        "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+      }
+    }
+  }
+}

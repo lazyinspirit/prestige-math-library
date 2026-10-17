@@ -1,0 +1,261 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "44",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-distributed-delay-equation-and-window-integral",
+      "model": "gpt-6-luna",
+      "context_sha256": "21acb55ae6e4014bd46a1047d9c54c8399a324490fd56a5b1d2cb0544badd546",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The equation used an undeclared U and an arbitrary continuous path, without an equation time range or differentiability condition. These are missing typing/domain conditions, not a quadrature-estimate failure. Declared U an open real interval containing [0,T], required the path restricted to [0,T] to be C1 for this equation, specified 0<=t<=T and domain-relative endpoint derivatives. The unchanged integral is well-defined because every shifted component times continuous K is continuous on [0,tau].",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-piecewise-linear-delay-history-error",
+      "model": "gpt-6-luna",
+      "context_sha256": "c5b224d5eb666c4d28bf0eeb361015262fbb5851576e906d6fb04c7d4aa51ced",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F4 incorrectly cited the retarded-equation definition, which has no grid. The Euler algorithm explicitly sets h=tau/m and uses nodes jh, so ktau=(km)h gives the claimed alignment. Corrected that citation to the already-declared algorithm dependency. This is nonfatal because the Statement itself already assumes the grid and alignment, and the interpolation proof follows from those hypotheses independently of F4\u2019s former attribution.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-distributed-delay-midpoint-history-error",
+      "model": "gpt-6-luna",
+      "context_sha256": "3af844dce982d0d3ea2d6281af6154bace3d156ee8b74fcbec6d374f1367a5a3",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 3.1 claimed the split lemma applied with a global E_h=h^2/4 although only [-tau,0] was controlled. That invocation is unsupported. It is nonfatal to the example\u2019s numerical conclusions because steps 1.1 and 2.1 already compute the exact quadrature and node-history contributions and the total error independently. Replaced the invocation by the direct finite-sum bound: every sampled -theta_j lies in [-tau,0], so the node difference is at most Delta*r*h^2/4=tau*h^2/4. F3 now explicitly states its global-bound hypothesis and serves only as comparison of the two error terms.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-distributed-delay-equation-and-window-integral",
+      "disposition": "repaired",
+      "post_sha256": "3cf4d6843df1b85665a79d8130c7f12e3d7545e30f6fc49dd11bba59d5d04254",
+      "review_context_sha256": "0c4b654c3d12106117553270a0c19fb8364cad462809c27033bd30a2a00bbce2",
+      "reason": "Checked the shift maps [0,tau] into [-tau,T] for every t in [0,T], componentwise continuity and Riemann integrability against the actual local supplier statements. The repaired equation has a defined field value and derivative at every declared time, using one-sided endpoint derivatives. No Lipschitz, existence or uniqueness claim is introduced; the history integral interface is preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-piecewise-linear-delay-history-error",
+      "disposition": "repaired",
+      "post_sha256": "881e0a24e429ae90907d5b4c37b9d76bed198b516812b167f2ddabcc98e64d0e",
+      "review_context_sha256": "61d46e19140d4948dba00b572ee5565d4c2fae491e23ee5b25f90a564ec6829b",
+      "reason": "Checked convex nodal interpolation gives E, cellwise C2 permits integral Taylor remainders bounded by M times distance squared/2, and cancellation of the linear terms gives M h^2 lambda(1-lambda)/2<=Mh^2/8. One-sided derivatives suffice at cell endpoints; M=0 and E=0 are included. Corrected F4 to the actual Euler mesh supplier; the Statement is byte-for-byte unchanged. Focused precheck: one proof checked, zero failures.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-distributed-delay-midpoint-history-error",
+      "disposition": "repaired",
+      "post_sha256": "017417d5f3f8e48f5ac304bb3cef4f6ebf74cd486b384d1198805adc007d6331",
+      "review_context_sha256": "f95919797ba1383e645886e8c0cb84cc88b47389a2679aa826fc6d5b902f7449",
+      "reason": "Integrated each centered quadratic cell to obtain I-Q_ex=tau*Delta^2/12. The initialized-history chord error is v(h-v), has maximum h^2/4 and integral h^3/6; the q subcells lie within one affine chord, so their midpoint sum integrates it exactly. Thus Q_st-I=tau*h^2/6 and Q_st-Q_ex=tau*h^2/6+tau*Delta^2/12. The revised direct node-sum bound is valid on the queried negative-time window alone, for all m,q>=1 including m=q=1; no positive-time error assumption or global lemma application is made. The Example section is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-distributed-delay-composite-midpoint-rule",
+    "lem-distributed-delay-midpoint-error-split",
+    "ex-distributed-delay-midpoint-history-error"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "append",
+      "row": {
+        "defect_id": "nod-b44-step5-initial-r1-equation-domain",
+        "run": "numerical-optimization-dynamics-2026-10-16",
+        "at": "2026-10-17",
+        "class": "accuracy",
+        "subclass": "ill-typed-claim",
+        "severity": "fatal",
+        "location": "definition",
+        "subject": "def-distributed-delay-equation-and-window-integral",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "batch": "44",
+        "evidence": [
+          {
+            "path": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u44.json",
+            "note": "The equation used an undeclared U and an arbitrary continuous path, without an equation time range or differentiability condition. These are missing typing/domain conditions, not a quadrature-estimate failure. Declared U an open real interval containing [0,T], required the path restricted to [0,T] to be C1 for this equation, specified 0<=t<=T and domain-relative endpoint derivatives. The unchanged integral is well-defined because every shifted component times continuous K is continuous on [0,tau]."
+          }
+        ],
+        "adjudication_ref": [
+          "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u44.json#decisions:def-distributed-delay-equation-and-window-integral"
+        ]
+      }
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "append",
+      "row": {
+        "defect_id": "nod-b44-step5-initial-r1-interpolation-grid-citation",
+        "run": "numerical-optimization-dynamics-2026-10-16",
+        "at": "2026-10-17",
+        "class": "accuracy",
+        "subclass": "citation-misattributed",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "lem-piecewise-linear-delay-history-error",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "batch": "44",
+        "evidence": [
+          {
+            "path": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u44.json",
+            "note": "F4 incorrectly cited the retarded-equation definition, which has no grid. The Euler algorithm explicitly sets h=tau/m and uses nodes jh, so ktau=(km)h gives the claimed alignment. Corrected that citation to the already-declared algorithm dependency. This is nonfatal because the Statement itself already assumes the grid and alignment, and the interpolation proof follows from those hypotheses independently of F4\u2019s former attribution."
+          }
+        ],
+        "adjudication_ref": [
+          "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u44.json#decisions:lem-piecewise-linear-delay-history-error"
+        ]
+      }
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "append",
+      "row": {
+        "defect_id": "nod-b44-step5-initial-r1-example-global-bound-invocation",
+        "run": "numerical-optimization-dynamics-2026-10-16",
+        "at": "2026-10-17",
+        "class": "accuracy",
+        "subclass": "citation-inflated",
+        "severity": "nonfatal",
+        "location": "proof-step",
+        "subject": "ex-distributed-delay-midpoint-history-error",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "batch": "44",
+        "evidence": [
+          {
+            "path": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u44.json",
+            "note": "Step 3.1 claimed the split lemma applied with a global E_h=h^2/4 although only [-tau,0] was controlled. That invocation is unsupported. It is nonfatal to the example\u2019s numerical conclusions because steps 1.1 and 2.1 already compute the exact quadrature and node-history contributions and the total error independently. Replaced the invocation by the direct finite-sum bound: every sampled -theta_j lies in [-tau,0], so the node difference is at most Delta*r*h^2/4=tau*h^2/4. F3 now explicitly states its global-bound hypothesis and serves only as comparison of the two error terms."
+          }
+        ],
+        "adjudication_ref": [
+          "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u44.json#decisions:ex-distributed-delay-midpoint-history-error"
+        ]
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "source_reading": "All reasoning uses familiar elementary continuity, Riemann integration, cellwise Taylor estimates, and exact quadratic arithmetic; no external source was consulted and no external reading is claimed. Relevant local supplier statements and full assigned arguments were examined.",
+    "interface_comparison": {
+      "def-distributed-delay-equation-and-window-integral": "Definition changed only in the example equation: U is now an open real interval containing [0,T], the equation is imposed for 0<=t<=T on C1 restrictions, and derivatives at endpoints are domain-relative. The integral formula and continuous-path conditions remain unchanged.",
+      "lem-piecewise-linear-delay-history-error": "Statement unchanged; only F4 citation changed to the already-declared Euler algorithm.",
+      "ex-distributed-delay-midpoint-history-error": "Example unchanged; F3 now states the global hypothesis, step 1.2 labels its bound as local, and step 3.1 proves the node-sum bound directly."
+    },
+    "contract_repairs": "Acquired step5-shared-write-lock, reread the current batch-44 contract, regenerated citations and derivations for only the two assigned proof-bearing items, synchronized their supplier interfaces to those citations/facts, passed strict focused validation, and released the lock. The example F1 quote now includes the repaired definition. Original independent risk-review records were preserved; these edits do not constitute independent review of these repairs.",
+    "consumer_examination": [
+      {
+        "supplier": "def-distributed-delay-equation-and-window-integral",
+        "id": "alg-distributed-delay-composite-midpoint-rule",
+        "path": "items/alg-distributed-delay-composite-midpoint-rule.md",
+        "affected_use": "Definition inputs: continuous K:[0,tau]->R and the completed piecewise-linear history on [-tau,T_h]; the computation returns Delta times the weighted history samples. The distributed-delay definition is a declared dependency.",
+        "invalidated_claim": "None: the quadrature needs the unchanged integral interface and never uses the example differential equation or its time field.",
+        "minimality": "No item change is necessary. The existing quadrature instructions and admissibility conditions remain valid.",
+        "disposition": "unaffected",
+        "route": "frontier-owner consumer review",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "supplier": "def-distributed-delay-equation-and-window-integral",
+        "id": "lem-distributed-delay-midpoint-error-split",
+        "path": "items/lem-distributed-delay-midpoint-error-split.md",
+        "affected_use": "Statement introduces I_K[y](t) from the definition; F1 gives I_K[y](t)=integral_0^tau K(theta)y(t-theta)dtheta; proof 1.1 bounds its exact-history midpoint error.",
+        "invalidated_claim": "None from this change: the integral definition, continuous kernel/path conditions, and integration domain are preserved. The example equation is not used in this proof.",
+        "minimality": "No mathematical item repair is necessary. Its unassigned F1 contract quote and supplier-interface excerpt mirror the full old Definition and require the owner to refresh those quotations; this unit changed only assigned contract entries.",
+        "disposition": "mathematically_unaffected_contract_quote_refresh_required",
+        "route": "frontier-owner metadata and consumer review",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "supplier": "def-distributed-delay-equation-and-window-integral",
+        "id": "ex-distributed-delay-midpoint-history-error",
+        "path": "items/ex-distributed-delay-midpoint-history-error.md",
+        "affected_use": "F1 defines the window integral, and proof 1.1 substitutes t=0, K=1, y(-theta)=theta^2 to compute I=tau^3/3.",
+        "invalidated_claim": "None from the supplier change: t=0 remains admissible and the integral formula is unchanged. Its separately assigned invalid global-bound invocation has been repaired.",
+        "minimality": "Retained the Example and exact integrals; refreshed its assigned F1 contract quotation and replaced only the unsupported theorem invocation by a direct local finite-sum estimate.",
+        "disposition": "supplier_use_unaffected_assigned_proof_repaired",
+        "route": "covered by this assigned review",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    ],
+    "page_interfaces": [
+      {
+        "path": "library/numerical-differential-equations-and-stochastic-dynamics/delay-differential-equations-and-history-discretization.md",
+        "affected_use": "Objective: distributed delays use a finite-window integral and composite midpoint rule with separate history and quadrature errors.",
+        "disposition": "unaffected; no dependence on the formerly unspecified example equation domain."
+      },
+      {
+        "path": "library/numerical-differential-equations-and-stochastic-dynamics/delay-differential-equations-and-history-discretization-examples.md",
+        "affected_use": "Objective: the quadratic-history example computes separate midpoint and stored-history contributions with signed cancellation.",
+        "disposition": "unaffected; all exact numerical conclusions are preserved."
+      }
+    ],
+    "published_consumer_ledger": "No proposed update: the complete direct dependency/reference/body-link inventory contains exactly the three listed draft frontier consumers; no published or outside-frontier consumer was found.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-piecewise-linear-delay-history-error.md --json",
+        "exit_code": 0,
+        "result": "1 proof checked; 0 failures."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-distributed-delay-equation-and-window-integral.md items/ex-distributed-delay-midpoint-history-error.md --json",
+        "exit_code": 0,
+        "result": "Definition not applicable; example pass; 1 proof checked, 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-distributed-delay-equation-and-window-integral.md items/lem-piecewise-linear-delay-history-error.md items/ex-distributed-delay-midpoint-history-error.md --json",
+        "exit_code": 0,
+        "result": "3 files checked; errors [], warnings []."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-44.proof-contracts.json --strict --items lem-piecewise-linear-delay-history-error,ex-distributed-delay-midpoint-history-error --json",
+        "exit_code": 0,
+        "result": "Both assigned proof contracts checked; ok true; errors [], warnings []."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-distributed-delay-equation-and-window-integral.md items/lem-piecewise-linear-delay-history-error.md items/ex-distributed-delay-midpoint-history-error.md",
+        "exit_code": 0,
+        "result": "3 items, 8 steps, 0 defects; run once after all final item edits."
+      }
+    ],
+    "unresolved_mathematics": [],
+    "new_prerequisites": [],
+    "choice_assumptions": "No AC or DC used; all constructions and sums are explicit and finite.",
+    "handoff": "The controller owns remaining consumer context routing, the unassigned quote refresh, independent rejudgment, ledger merging and certification. This report records repair evidence, not independent acceptance or a gate waiver."
+  },
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-44.proof-contracts.json": "2e3e3f09bb1c9d5ee7e735a071ffd5927d8329790cd00fa7199f39a8341c9c61"
+  }
+}

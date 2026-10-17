@@ -1,0 +1,129 @@
+--- a/tools/auditor-created-items.mjs
++++ b/tools/auditor-created-items.mjs
+@@ -1521,24 +1521,85 @@
+   return false;
+ }
+ 
++// Stable aliases remain readable for existing receipts. Historical write windows
++// may additionally use exact, successfully completed immutable native attempts.
++function immutableAuthorResult(root, run, step, file, row) {
++  if (row.run !== run || !authorResultAllowed(step, row)
++    || !Number.isSafeInteger(row.attempt) || row.attempt < 1
++    || !new RegExp(`^\\.attempt-${row.attempt}(?:\\.replay-[1-9]\\d*)?$`).test(row.evidence_tag ?? '')
++    || file !== `${row.role}-${row.label}${row.evidence_tag}.result.json`
++    || row.exit_code !== 0 || row.process_exit_code !== 0 || row.timed_out !== false
++    || row.terminal_summary?.available !== true
++    || row.terminal_summary?.last_event !== 'task_complete'
++    || row.terminal_summary?.task_completed !== true
++    || row.terminal_summary?.task_aborted !== false
++    || row.terminal_summary?.final_response_present !== true
++    || typeof row.session_id !== 'string' || !row.session_id
++    || !row.covers.every(unit => typeof unit === 'string')
++    || !Number.isFinite(Date.parse(row.started_at)) || !Number.isFinite(Date.parse(row.ended_at))
++    || Date.parse(row.started_at) > Date.parse(row.ended_at)) return false;
++  const dir = resolve(root, 'research', `${run}-dispatch`);
++  const resultPath = join(dir, file);
++  const promptPath = join(dir, `${row.role}-${row.label}${row.evidence_tag}.prompt.md`);
++  if (![promptPath, `research/${run}-dispatch/${row.role}-${row.label}${row.evidence_tag}.prompt.md`].includes(row.prompt)
++    || !statSync(resultPath).isFile() || !statSync(promptPath).isFile()
++    || realpathSync(resultPath) !== resultPath || realpathSync(promptPath) !== promptPath) return false;
++  const identity = [`run: ${run}`, `role: ${row.role}`, `label: ${row.label}`,
++    ...(row.covers.length ? [`covers: ${row.covers.join(', ')}`] : [])].join('\n');
++  return readFileSync(promptPath, 'utf8').includes(`\n# This dispatch\n\n${identity}\n`);
++}
++
+ function successfulAuthorResults(root, run, step) {
+   const dir = join(root, 'research', `${run}-dispatch`);
+   if (!existsSync(dir)) return [];
+   const rows = [];
+-  for (const file of readdirSync(dir).filter(name => name.endsWith('.result.json') && !name.includes('.attempt-'))) {
++  for (const file of readdirSync(dir).filter(name => name.endsWith('.result.json')).sort()) {
+     try {
+-      const row = read(join(dir, file));
+-      if (row.run === run && authorResultAllowed(step, row)) rows.push({ ...row, result_file: file });
+-    } catch { /* malformed result is not evidence */ }
++      const text = readFileSync(join(dir, file), 'utf8'), row = JSON.parse(text);
++      if (row.run !== run || !authorResultAllowed(step, row)) continue;
++      if (file.includes('.attempt-')) {
++        if (immutableAuthorResult(root, run, step, file, row))
++          rows.push({ ...row, result_file: file, immutable_result_file: file });
++      } else {
++        // Retain historical alias references without counting an alias as a
++        // second authoring window when its authentic immutable result exists.
++        const immutable = `${row.role}-${row.label}${row.evidence_tag}.result.json`;
++        let bound = false;
++        try {
++          bound = existsSync(join(dir, immutable))
++            && readFileSync(join(dir, immutable), 'utf8') === text
++            && immutableAuthorResult(root, run, step, immutable, row);
++        } catch { /* a missing optional immutable companion cannot erase an old alias */ }
++        rows.push({ ...row, result_file: file, ...(bound ? { immutable_result_file: immutable } : {}) });
++      }
++    } catch { /* malformed or unbound attempt is not evidence */ }
+   }
+   return rows;
++}
++
++// New immutable author links freeze the exact result and dispatched prompt;
++// existing alias-only receipts retain their original validation policy.
++function immutableAuthorEvidence(root, run, authors, resultFile) {
++  const author = authors.find(row => row.result_file === resultFile
++    && row.immutable_result_file === resultFile);
++  if (!author) return null;
++  const prefix = `research/${run}-dispatch/${author.role}-${author.label}${author.evidence_tag}`;
++  return { result: { path: `${prefix}.result.json`,
++    sha256: sha(readFileSync(join(root, `${prefix}.result.json`))) },
++  prompt: { path: `${prefix}.prompt.md`,
++    sha256: sha(readFileSync(join(root, `${prefix}.prompt.md`))) } };
+ }
+ 
+ function coveringResult(results, itemPath, manifestPath, contractPath, batch) {
+   const carriers = [itemPath, manifestPath];
+   if (existsSync(contractPath)) carriers.push(contractPath);
+   const changedAt = Math.max(...carriers.map(path => statSync(path).mtimeMs));
+-  return results.filter(row => {
++  const candidates = new Map();
++  for (const row of results) {
++    const key = row.immutable_result_file ?? row.result_file;
++    if (!candidates.has(key) || row.result_file === key) candidates.set(key, row);
++  }
++  return [...candidates.values()].filter(row => {
+     const started = Date.parse(row.started_at), ended = Date.parse(row.ended_at);
+     if (!Number.isFinite(started) || !Number.isFinite(ended) || started > ended
+       || changedAt < started - 1500 || changedAt > ended) return false;
+@@ -1605,6 +1666,11 @@
+       || (step === LEGACY_AUTHOR_STEP && (!/^[a-f0-9]{64}$/.test(row.sha256 ?? '') || !Array.isArray(row.dependencies))))
+       throw Error(`Invalid auditor-created item provenance: ${row.id}`);
+     ids.add(row.id);
++    if (row.author_evidence) {
++      const current = immutableAuthorEvidence(root, run, authors, row.author_result);
++      if (!current || JSON.stringify(current) !== JSON.stringify(row.author_evidence))
++        throw Error(`${row.id}: changed immutable author result/prompt evidence`);
++    }
+     // Receipts are engine-owned records of the historical write-window check;
+     // their author link must still resolve to genuine dispatch evidence. Do not
+     // compare current mtimes here: an unchanged V2 receipt survives file touches.
+@@ -1838,9 +1904,12 @@
+     if (!author) throw Error(`${id}: no successful Step ${step} auditor/adjudicator dispatch authored its current carriers`);
+     const originStep = carried?.origin_step ?? carried?.step;
+     if (priorCurrent) for (const key of Object.keys(hashes)) hashes[key] = prior[key];
++    const authorEvidence = immutableAuthorEvidence(root, run, results, author.result_file)
++      ?? (prior?.author_result === author.result_file ? prior.author_evidence : null);
+     certified.push({ id, page: row.page, batch,
+       ...hashes,
+       author_result: author.result_file,
++      ...(authorEvidence ? { author_evidence: authorEvidence } : {}),
+       ...((priorCurrent && prior.owner_recertification) || owner
+         ? { owner_recertification: priorCurrent ? prior.owner_recertification : owner } : {}),
+       ...(carried ? { origin_step: originStep,
+--- a/WORKFLOW.md
++++ b/WORKFLOW.md
+@@ -630,6 +630,8 @@
+ 
+ Guarded same-ID relocation of proved prerequisites uses [tools/step3-owner-rehomes.md](tools/step3-owner-rehomes.md). It preserves the original Step-3a obligation batches while hashing actual current homes; it grants no new review coverage.
+ 
++Native auditor-created certification considers genuine successful immutable dispatch attempts as historical authoring windows, alongside the stable aliases retained for existing receipts. An immutable attempt must match its run, allowed role/label, attempt/replay filename and evidence tag, complete unaborted successful terminal result, and exact dispatched prompt identity. Identical stable/immutable observations count as one candidate window, preferring the immutable filename; new immutable links freeze the result and prompt bytes. A newer annotation-only dispatch does not erase an earlier authentic carrier-write window or supply coverage outside its own interval. Baseline exclusion, actual carrier time bounds, current carrier hashes and independent-review obligations remain unchanged.
++
+ Current Step-3 owner repair helpers use `tools/auditor-created-items.mjs
+ owner-create --run RUN --step 3 --id ITEM --evidence research/JSON` after
+ stable source, manifest and proof-contract integration. Immutable origins bind

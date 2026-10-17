@@ -1,0 +1,310 @@
+[
+  {
+    "order": 2454,
+    "id": "sqp-active-set-and-augmented-lagrangian-methods",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Sqp active set and augmented lagrangian methods",
+    "companion": "sqp-active-set-and-augmented-lagrangian-methods-examples",
+    "requires": [
+      "finite-precision-direct-factorizations",
+      "inequality-kkt-duality-and-optimality-certificates",
+      "nonconvex-line-search-and-inexact-newton-methods",
+      "bfgs-and-limited-memory-quasi-newton-methods"
+    ],
+    "items": [
+      {
+        "id": "def-sqp-linearized-quadratic-subproblem",
+        "kind": "definition",
+        "title": "The linearized quadratic subproblem in sequential quadratic programming",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-sqp-augmented-lagrangian-equality-and-inequality",
+        "kind": "definition",
+        "title": "Equality and inequality augmented Lagrangians and multiplier updates",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+        "kind": "lemma",
+        "title": "The SQP KKT matrix is nonsingular under positive reduced curvature",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "def-sqp-l1-exact-penalty-merit",
+        "kind": "definition",
+        "title": "L1 exact-penalty merit and predicted decrease for SQP",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-sqp-augmented-lagrangian-multiplier-method",
+        "kind": "algorithm",
+        "title": "Finite-budget augmented-Lagrangian multiplier method",
+        "deps": [
+          "def-sqp-augmented-lagrangian-equality-and-inequality",
+          "def-kkt-residual-and-normal-cone"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate",
+        "kind": "lemma",
+        "title": "A feasible strictly convex linear-constrained QP has a unique KKT minimizer with independent active support",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "thm-farkas-alternative-for-finite-linear-systems",
+          "thm-convex-kkt-sufficiency-and-normal-cone-certificate",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-sqp-exhaustive-active-set-qp-solve",
+        "kind": "algorithm",
+        "title": "Exact exhaustive active-set solve for the SQP quadratic subproblem",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-sqp-feasible-working-set-qp-solve",
+        "kind": "algorithm",
+        "title": "Feasible active-set QP solve with blocking constraints and a finite cap",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-sqp-second-order-correction",
+        "kind": "algorithm",
+        "title": "Minimum-norm second-order correction for identified active constraints",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-sqp-exact-hessian-newton-step",
+        "kind": "algorithm",
+        "title": "Full-step exact-Hessian SQP after active-set identification",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $c_A(x)=(h(x),g_I(x))$ stack all equalities and the identified active\ninequalities, and let $\\mu=(\\nu,\\lambda_I)$. For a current pair $(x,\\mu)$,\nform\n$$F_A(x,\\mu)=\\binom{\\nabla_x L(x,\\nu,\\lambda_I,0_{I^c})}{c_A(x)},\\qquad J_A(x,\\mu)=\\begin{bmatrix}\\nabla^2_{xx}L(x,\\nu,\\lambda_I,0_{I^c})&Dc_A(x)^T\\\\Dc_A(x)&0\\end{bmatrix}.$$\nIf $J_A$ is nonsingular, solve\n$$J_A\\binom{p}{\\delta\\mu}=-F_A(x,\\mu)$$\nand return the full Newton pair $(x+p,\\mu+\\delta\\mu)$. A failed rank test\nor solve returns `kkt-solve-failure`. The active set is supplied to this\nstep; this algorithm has no line search and makes no global convergence\nclaim.",
+        "strategy": "1.1 Differentiating $F_A$ with respect to $(x,\\mu)$ gives the block matrix $J_A$: the derivative of stationarity in $x$ is the exact Lagrangian Hessian, its derivative in $\\mu$ is $Dc_A(x)^T$, and the derivative of the constraint block is $Dc_A(x)$. Thus the linear solve is precisely the Newton equation for $F_A=0$. [given, F1, F3, algebra]\n\n2.1 When the active rows are independent and the Lagrangian Hessian is positive on their null space, [F2] makes that Newton equation uniquely solvable. Otherwise the algorithm reports failure and does not return a Newton step; a returned pair is the stated full step. [given, A1, F2, step 1.1, algebra] ∎"
+      },
+      {
+        "id": "alg-sqp-reduced-bfgs-kkt-step",
+        "kind": "algorithm",
+        "title": "Reduced-BFGS SQP KKT step with projected Hessian error",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "alg-sqp-exact-hessian-newton-step",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+          "def-bfgs-curvature-pair-and-update-formulas",
+          "lem-bfgs-updates-preserve-secant-symmetry-and-spd"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "alg-sqp-merit-globalization-with-finite-budgets",
+        "kind": "algorithm",
+        "title": "L1 merit globalization with finite penalty and backtracking budgets",
+        "deps": [
+          "alg-sqp-exhaustive-active-set-qp-solve",
+          "def-sqp-l1-exact-penalty-merit",
+          "alg-sqp-second-order-correction"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+        "kind": "theorem",
+        "title": "The exhaustive active-set QP solve terminates with the unique minimizer exactly when feasible",
+        "deps": [
+          "lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate",
+          "alg-sqp-exhaustive-active-set-qp-solve",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+          "def-sqp-linearized-quadratic-subproblem"
+        ],
+        "dependency_level": 4,
+        "statement": "For the SQP subproblem of [[def-sqp-linearized-quadratic-subproblem]] with\n$B$ symmetric positive definite, the exact algorithm of\n[[alg-sqp-exhaustive-active-set-qp-solve]] terminates after finitely many\nsubset tests. It returns `QP-infeasible` exactly when the subproblem's\npolyhedron is empty; otherwise it returns the unique global minimizer, full\nequality and inequality multiplier vectors, and the retained equality basis\n$E$ and inequality support $J$ of its KKT certificate.",
+        "strategy": "1.1 The equality reduction is finite: there are finitely many row subsets to check, and exact rank and consistency tests decide each one. Under [A1] it preserves the equality feasible set; if it reports inconsistency, that set is empty and the full QP is infeasible. [A1, F3, algebra]\n\n1.2 For any enumerated subset whose rows are independent, the KKT matrix is nonsingular by [F2], because $B$ is positive definite on every subspace. Thus its equality-constrained candidate is uniquely defined. If that candidate passes the inequality feasibility and multiplier-sign filters, its zero-extended multipliers give a feasible KKT tuple for the original QP, with primal point $\\bar p$. For every feasible $y$, stationarity and complementarity give $(B\\bar p+c)^T(y-\\bar p)=-\\sum_i\\lambda_iG_i(y-\\bar p)\\ge0$, since only active inequalities have positive multipliers. Thus $q(y)-q(\\bar p)=(B\\bar p+c)^T(y-\\bar p)+\\tfrac12(y-\\bar p)^TB(y-\\bar p)\\ge0$, with equality only for $y=\\bar p$. Hence the accepted candidate is the unique global minimizer. [given, F2, F3, algebra]\n\n2.1 If the QP is feasible, [F1] supplies an active KKT support whose rows are independent together with the reduced equality rows. [F3] therefore tests that support. The solve in step 1.2 returns its KKT point, and its feasibility and nonnegative multipliers make it pass both filters. Hence the algorithm cannot report `QP-infeasible` on a feasible subproblem. [A1, F1, F2, F3]\n\n3.1 There are exactly $2^m$ inequality subsets. Every subset requires only finitely many exact rank, solve, and feasibility operations, so [F3] terminates. If no candidate was found, step 2.1 shows the QP is infeasible; if a candidate was found, step 1.2 shows it is the unique minimizer with the returned full KKT multipliers and support data. [F1, F3, step 1.1, step 1.2, step 2.1] ∎"
+      },
+      {
+        "id": "thm-sqp-working-set-qp-terminates-under-nondegeneracy-anticycling",
+        "kind": "theorem",
+        "title": "A feasible working-set QP solve terminates under nondegenerate steps",
+        "deps": [
+          "lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate",
+          "alg-sqp-feasible-working-set-qp-solve",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature"
+        ],
+        "dependency_level": 4,
+        "statement": "Consider a feasible SQP quadratic subproblem with $B\\succ0$, $m$ inequality\nrows, and $r$ independent equality rows. Run\n[[alg-sqp-feasible-working-set-qp-solve]] with an independent initial working\nset and cap $N\\ge(n+2)2^m$. Assume exact subproblem solves, every nonzero\nworking-set direction has a strictly positive maximal feasible step, and a\nblocker is selected by the algorithm's least-index tie rule. Then the\nalgorithm returns the unique global minimizer and a KKT certificate in at\nmost $N$ iterations. If a zero blocking step, dependent blocker, failed solve,\nor smaller user cap occurs, the algorithm returns its stated inconclusive\nstatus and no optimality claim follows.\n\nThe positive-step hypothesis is the nondegeneracy condition that prevents\nzero-length working-set cycling. The proof also shows that a working set\nalready minimized with negative multipliers cannot recur after progress.",
+        "strategy": "1.1 Let $z$ be a feasible iterate, $W$ its working set, and $u\\ne0$ the exact direction minimizer. Its KKT equation is $Bu+(Bz+c)+A^T\\nu+\\sum_{i\\in W}\\mu_iG_i^T=0$, with $Au=0$ and $G_iu=0$ for $i\\in W$. Multiplying by $u^T$ gives $(Bz+c)^Tu=-u^TBu$. Hence for every accepted $0<\\alpha\\le1$, $$q(z+\\alpha u)-q(z)=-\\alpha(1-\\alpha/2)u^TBu<0.$$ If $\\alpha<1$, a blocking row cannot lie in the span of the current rows, since it has $G_iu>0$ while every row in that span annihilates $u$; adding it preserves independence. [A1, F1, F2, algebra]\n\n1.2 Suppose instead $u=0$ and the multiplier of a working inequality $j$ is negative. After deleting $j$, let $v$ be the next exact direction. If $v=0$, the new stationarity equation, extended with a zero multiplier on row $j$, and the old one give two multiplier representations for the same gradient on independent old working rows; uniqueness would force $\\mu_j=0$, a contradiction. Hence $v\\ne0$. The new direction stationarity, dotted with $v$, gives $(Bz+c)^Tv=-v^TBv$. The old face stationarity, also dotted with $v$, gives $(Bz+c)^Tv+\\mu_jG_jv=0$, because all retained working rows annihilate $v$. Therefore $\\mu_jG_jv=v^TBv>0$, so $v\\ne0$ and $G_jv<0$. The dropped inequality is feasible to first order, and by the positive-step hypothesis the next iterate moves strictly along this descent direction. [A1, F1, F2, algebra]\n\n2.1 For a fixed working set $W$, positive definiteness makes the face objective have at most one minimizer. Once the algorithm reaches that face minimizer, either all working inequality multipliers are nonnegative and it terminates, or step 1.2 gives a strict objective decrease after a negative multiplier is dropped. Every later iterate is then below the minimum value on that face, so the same working set cannot be face-minimized again. There are at most $2^m$ working sets. [A1, step 1.1, step 1.2, algebra]\n\n3.1 Between successive face minimizers, each nonterminal partial step adds an independent blocker, so there can be at most $n-r$ such additions before the feasible direction space is zero. A full step with no blocker reaches a face minimizer immediately. Thus each of the at most $2^m$ face-minimization episodes uses at most $n-r+2\\le n+2$ iterations. The cap $N\\ge(n+2)2^m$ cannot be reached before a terminal KKT point. [step 2.1, F1, induction, algebra]\n\n4.1 At termination, feasibility is maintained and every working inequality multiplier is nonnegative; assign zero multipliers to inequalities outside the working set. This is a KKT tuple at a point $z$. For every feasible $y$, stationarity and complementarity give $(Bz+c)^T(y-z)=-\\sum_i\\lambda_iG_i(y-z)\\ge0$. Consequently $q(y)-q(z)=(Bz+c)^T(y-z)+\\tfrac12(y-z)^TB(y-z)\\ge0$, strictly if $y\\ne z$ by [A1]. Thus $z$ is the unique global minimizer. If a degeneracy or cap status occurs instead, the algorithm reports no KKT certificate, as stated. [A1, F1, F3, step 3.1] ∎"
+      },
+      {
+        "id": "thm-sqp-second-order-correction-residual-order",
+        "kind": "theorem",
+        "title": "Second-order correction reduces the active constraint residual to cubic order",
+        "deps": [
+          "alg-sqp-second-order-correction",
+          "def-sqp-linearized-quadratic-subproblem",
+          "cor-second-order-taylor-expansion-with-the-hessian"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-sqp-exact-hessian-local-quadratic-convergence",
+        "kind": "theorem",
+        "title": "Exact-Hessian SQP converges quadratically on the identified active KKT system",
+        "deps": [
+          "alg-sqp-exact-hessian-newton-step",
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+          "thm-inexact-newton-local-forcing-rates"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-sqp-reduced-bfgs-superlinear-under-dm",
+        "kind": "theorem",
+        "title": "Reduced-BFGS SQP is locally superlinear under reduced Dennis-More and inverse bounds",
+        "deps": [
+          "alg-sqp-reduced-bfgs-kkt-step",
+          "alg-sqp-exact-hessian-newton-step",
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+          "thm-inexact-newton-local-forcing-rates"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-sqp-augmented-lagrangian-local-convergence",
+        "kind": "theorem",
+        "title": "Augmented-Lagrangian multipliers converge locally with summable inner residuals",
+        "deps": [
+          "def-sqp-augmented-lagrangian-equality-and-inequality",
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "alg-sqp-augmented-lagrangian-multiplier-method",
+          "thm-euclidean-implicit-function-theorem"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $x_*$ be a KKT point of a $C^2$ program with active inequality set\n$I=I(x_*)$, multiplier $\\mu_*=(\\nu_*,\\lambda_{*,I})$, and active\nconstraint vector $c=(h,g_I)$, with $r=\\dim c$. Assume LICQ, strict complementarity\n$\\lambda_{*,i}>0$ for $i\\in I$, and the second-order sufficient condition\n$d^TH_*d>0$ for every nonzero $d\\in\\ker A_*$, where\n$A_*=Dc(x_*)$ and $H_*=\\nabla^2_{xx}L(x_*,\\mu_*)$.\n\nFor all sufficiently large fixed $\\rho$, the PHR augmented-Lagrangian\nmultiplier update has a local contraction when each inner minimization is\nsolved exactly. When $r>0$, the same local multiplier convergence holds for inner\npoints $\\widehat x_k$ with stationarity residuals\n$\\epsilon_k=\\|\\nabla_x\\mathcal L_\\rho(\\widehat x_k,\\nu_k,\\lambda_k)\\|_2$\nwhose sum is sufficiently small, provided each point stays in the local\nstrongly convex branch. More precisely, there are local radii $\\delta_\\mu$\nand $d_x>0$, a strong-convexity constant $\\alpha>0$, and a contraction\nfactor $q<1$ such that convergence holds whenever\n$$\\|\\mu_0-\\mu_*\\|_2\\le\\delta_\\mu/2,\\qquad \\sum_{k=0}^\\infty\\epsilon_k\\le \\min\\left\\{\\alpha d_x,\\frac{(1-q)\\delta_\\mu}{2C}\\right\\},$$\nwhere $C=\\rho L_c/\\alpha$ and $L_c$ is a Lipschitz constant for $c$ on\nthe local primal neighborhood. Inactive multipliers are initialized at\nzero. If $c$ has zero components, the multiplier update is absent and the\nbound involving $C$ is omitted; sufficiently local inner points with\nsummable residuals converge to $x_*$ by strong convexity.\n\nThis is a limit theorem for an infinite sequence of successful inner\nreturns. The contraction estimates apply to any successful prefix of the\nfinite-budget procedure; the limit conclusion applies only to an infinite\ncontinuation whose calls continue to return within their finite inner caps.\nFor that procedure, the residual sequence in this theorem is the reported\n$\\widehat\\epsilon_k$; its input tolerances must be chosen so these reports\nsatisfy the displayed summability bound.",
+        "strategy": "1.1 Write $A=A_*$, $H=H_*$ and $r=\\dim c$. Strict complementarity and continuity give a neighborhood in which every active inequality satisfies $\\lambda_i+\\rho g_i(x)>0$ and every inactive inequality, whose multiplier is initialized at zero, satisfies $\\lambda_j+\\rho g_j(x)<0$. On this branch, [F2] reduces the $x$-dependent augmented Lagrangian to $$\\Phi_\\rho(x,\\mu)=f(x)+\\mu^Tc(x)+\\frac\\rho2\\|c(x)\\|_2^2,$$ where $\\mu=(\\nu,\\lambda_I)$. Its gradient vanishes at $(x_*,\\mu_*)$. [given, F1, F2, algebra, algebra]\n\n1.2 The $x$-Hessian at the base point is $W_\\rho=H+\\rho A^TA$. If $r=0$, the assumed condition says $H\\succ0$. For $r>0$, choose orthonormal matrices $Z,Y$ spanning $\\ker A$ and its orthogonal complement, respectively; then $C_0=AY$ is invertible. In this basis the tangent block is $H_T=Z^THZ\\succ0$ when its dimension is positive, the cross blocks are those of $H$, and the normal block is $Y^THY+\\rho C_0^TC_0$. Its Schur complement over the tangent block is $D+\\rho C_0^TC_0$, where $D=Y^THY-Y^THZ H_T^{-1}Z^THY$; if the tangent block is empty, take $D=Y^THY$. Since $C_0^TC_0\\succ0$, this Schur complement is positive definite for sufficiently large $\\rho$. Hence $W_\\rho\\succ0$. [given, algebra, choose]\n\n2.1 If $r>0$, apply [F3] to $G(x,\\mu)=\\nabla_x\\Phi_\\rho(x,\\mu)=0$. Its $x$ derivative is $W_\\rho$, which is invertible by step 1.2, and its $\\mu$ derivative is $A^T$. Therefore there is a local $C^1$ branch $x(\\mu)$ with $x(\\mu_*)=x_*$ and $$Dx(\\mu_*)=-W_\\rho^{-1}A^T.$$ If $r=0$, the empty-multiplier branch consists of the local minimizer $x_*$. By continuity of the Hessian, after shrinking to a convex neighborhood $\\Phi_\\rho(\\cdot,\\mu)$ is uniformly strongly convex there; its stationary branch point is its unique local minimizer. [F3, step 1.2, algebra]\n\n3.1 For $r>0$, the exact multiplier map is $T(\\mu)=\\mu+\\rho c(x(\\mu))$, so $$DT(\\mu_*)=I-\\rho A W_\\rho^{-1}A^T.$$ In the orthonormal coordinates of step 1.2, block elimination gives $A W_\\rho^{-1}A^T=C_0(D+\\rho C_0^TC_0)^{-1}C_0^T$ $=(\\rho I+E)^{-1}$, where $E=C_0^{-T}DC_0^{-1}$ is symmetric. Thus $DT(\\mu_*)=E(\\rho I+E)^{-1}$. Its eigenvalues are $e_i/(\\rho+e_i)$, which have absolute value less than $1$ for all sufficiently large $\\rho$. Continuity of $DT$ then gives a closed multiplier ball on which $T$ is a contraction with some factor $q<1$. For $r=0$ the multiplier update is absent. [step 1.2, step 2.1, algebra]\n\n4.1 Let $\\widehat x_k$ be an inner point in the selected branch with residual at most $\\epsilon_k$, and let $x(\\mu_k)$ be the exact branch minimizer. Strong convexity with constant $\\alpha$ gives $$\\alpha\\|\\widehat x_k-x(\\mu_k)\\|_2^2\\le \\langle\\nabla\\Phi_\\rho(\\widehat x_k,\\mu_k)- \\nabla\\Phi_\\rho(x(\\mu_k),\\mu_k),\\widehat x_k-x(\\mu_k)\\rangle \\le\\epsilon_k\\|\\widehat x_k-x(\\mu_k)\\|_2.$$ After cancellation (with the zero-distance case immediate), $\\|\\widehat x_k-x(\\mu_k)\\|_2\\le\\epsilon_k/\\alpha$. The multiplier update is on the same PHR branch, so its difference from $T(\\mu_k)$ has norm at most $\\rho L_c\\epsilon_k/\\alpha=C\\epsilon_k$. Hence $$\\|\\mu_{k+1}-\\mu_*\\|_2\\le q\\|\\mu_k-\\mu_*\\|_2+C\\epsilon_k.$$ The stated sum bound keeps this recurrence inside the multiplier ball and keeps every inner point within the primal branch tube. [A1, A2, F2, F4, step 2.1, step 3.1, algebra]\n\n5.1 Iterating the inequality gives $$\\|\\mu_k-\\mu_*\\|_2\\le q^k\\|\\mu_0-\\mu_*\\|_2+ C\\sum_{j=0}^{k-1}q^{k-1-j}\\epsilon_j.$$ The first term tends to zero. For the sum, any fixed finite prefix tends to zero as $k\\to\\infty$, while the remaining tail is bounded by $C\\sum_{j\\ge J}\\epsilon_j$, which tends to zero as $J\\to\\infty$. Therefore $\\mu_k\\to\\mu_*$. Also $\\epsilon_k\\to0$ because it is summable, so step 4.1 gives $\\widehat x_k-x(\\mu_k)\\to0$ and continuity gives $\\widehat x_k\\to x_*$. When $r=0$, step 1.2 gives a strongly convex local objective and the same residual estimate directly yields $\\widehat x_k\\to x_*$. [given, A1, A2, step 4.1, algebra]\n\n6.1 The hypotheses and local restrictions used above are exactly the regularity, branch, residual, and successful-inner-call conditions in the Statement and [A2]. This proves the limit claim for the successful update sequence; a finite dispatch may return a cap or failure status first and no global convergence is asserted. [step 1.1, step 1.2, step 2.1, step 3.1, step 4.1, step 5.1] ∎"
+      },
+      {
+        "id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+        "kind": "algorithm",
+        "title": "Finite-precision reduced-QR KKT solve with certified residual status",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+          "alg-scaled-householder-reflector-formation-and-application",
+          "def-forward-and-back-substitution-for-triangular-systems",
+          "lem-scaled-householder-step-meets-local-backward-error-premise",
+          "thm-computed-full-rank-least-squares-backward-stability",
+          "lem-rounded-linear-and-normal-residual-certificates"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-sqp-merit-globalization-finite-budget-status",
+        "kind": "theorem",
+        "title": "Finite merit-globalization budgets return a defined status",
+        "deps": [
+          "alg-sqp-merit-globalization-with-finite-budgets"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-sqp-finite-precision-kkt-residual-certificate-sound",
+        "kind": "theorem",
+        "title": "The computed KKT residual certificate bounds the exact linear-system residual",
+        "deps": [
+          "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+          "lem-rounded-linear-and-normal-residual-certificates",
+          "thm-computed-full-rank-least-squares-backward-stability",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 2455,
+    "id": "sqp-active-set-and-augmented-lagrangian-methods-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Sqp active set and augmented lagrangian methods — Examples",
+    "companion": "sqp-active-set-and-augmented-lagrangian-methods",
+    "requires": [
+      "sqp-active-set-and-augmented-lagrangian-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-sqp-engineering-design-active-inequality",
+        "kind": "example",
+        "title": "Two-component design with an active demand constraint",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "alg-sqp-exhaustive-active-set-qp-solve",
+          "thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+          "thm-convex-kkt-sufficiency-and-normal-cone-certificate"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-sqp-maratos-effect-and-second-order-correction",
+        "kind": "example",
+        "title": "A full SQP step is rejected by the L1 merit test and repaired by SOC",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "def-sqp-l1-exact-penalty-merit",
+          "alg-sqp-merit-globalization-with-finite-budgets",
+          "alg-sqp-second-order-correction",
+          "thm-sqp-second-order-correction-residual-order"
+        ],
+        "dependency_level": 5,
+        "strategy": "1.1 At $x=(c,s)$, $h(x)=0$, $Dh(x)=2(c,s)$, and $\\nabla f(x)=4(c,s)-(1,0)$. The unit tangent $t=(-s,c)$ satisfies $t^T\\nabla f(x)=s$. The QP constraint gives $p\\in\\operatorname{span}(t)$; minimizing $\\nabla f(x)^Tp+\\tfrac12\\|p\\|_2^2$ on this line gives $p=-st=(s^2,-sc)$. Its QP multiplier is $-(4-c)/2$, since $p+\\nabla f(x)=(4-c)(c,s)$. [given, F1, A1, algebra]\n\n1.2 Here $Dh(x)Dh(x)^T=4$, so [F3] gives $w=(-cs^2/2,-s^3/2)$ and $\\|w\\|_2=s^2/2$. Direct substitution into the quadratic constraint yields $$h(x+p+w)=\\frac{s^4}{4}.$$ The corrected first coordinate is $c+s^2(1-c/2)$, so the corrected objective change is $-s^2(1-c/2)+s^4/2$. Adding the penalty contribution gives $$\\psi_\\rho(x+p+w)-\\psi_\\rho(x) =-s^2(1-c/2)+s^4(1/2+\\rho/4).$$ [A1, F3, algebra]\n\n2.1 Since $x^Tp=0$ and $\\|p\\|_2^2=s^2$, $h(x+p)=s^2$. Also $\\nabla f(x)^Tp=-s^2$, so [F2] gives $D_\\rho=s^2$. The objective changes by $s^2$, while the equality violation changes from zero to $s^2$; hence the full-step merit change is $(1+\\rho)s^2>0$, which fails the Armijo right side $-\\sigma s^2<0$. [A1, F2, step 1.1, algebra]\n\n3.1 Divide the corrected merit change plus $\\sigma D_\\rho$ by $s^2$. With $\\sigma=1/4$, the result is $-1+c/2+s^2(1/2+\\rho/4)+1/4$, which tends to $-1/4$ as $\\theta\\to0$. It is therefore negative for all sufficiently small nonzero $\\theta$, proving the SOC Armijo test passes. The explicit $O(s^2)$ correction norm and $O(s^4)$ residual satisfy the quadratic-size and cubic-residual bounds of [F4]. [A1, F4, F5, step 1.2, algebra] ∎"
+      },
+      {
+        "id": "ex-sqp-augmented-lagrangian-penalty-conditioning",
+        "kind": "example",
+        "title": "A quadratic equality model shows the AL conditioning tradeoff",
+        "deps": [
+          "def-sqp-augmented-lagrangian-equality-and-inequality",
+          "alg-sqp-augmented-lagrangian-multiplier-method"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  }
+]

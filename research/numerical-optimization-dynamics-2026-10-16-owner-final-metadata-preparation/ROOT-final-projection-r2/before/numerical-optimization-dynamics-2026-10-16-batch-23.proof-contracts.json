@@ -1,0 +1,215 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+    "lem-variable-coefficient-flux-stencil-second-order-consistency",
+    "thm-elliptic-finite-difference-l2-error-on-rectangles",
+    "ex-first-order-neumann-closure-causes-first-order-error",
+    "ex-dirichlet-laplacian-has-uniform-infinity-inverse-bound",
+    "ex-variable-coefficient-flux-and-expanded-stencils",
+    "ex-five-point-laplacian-is-exact-on-quadratics"
+  ],
+  "contracts": {
+    "lem-discrete-summation-by-parts-poincare-and-inverse-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rectangular-grid-and-dirichlet-flux-stencil",
+          "source_section": "Definition",
+          "quote": "The positive divergence-form Dirichlet operator on interior nodes is",
+          "uses": ["1.1", "1.2", "2.1", "4.1"]
+        }
+      ],
+      "derivations": [
+        { "id": "horizontal-sbp", "claim": "The horizontal discrete divergence transfers to edge differences plus the left and right boundary flux terms.", "step": "1.1", "inputs": ["given", "F1"] },
+        { "id": "discrete-poincare", "claim": "A horizontal telescoping sum and Cauchy–Schwarz give the grid Poincare inequality with constant Lx squared.", "step": "1.2", "inputs": ["given", "F1"] },
+        { "id": "two-dimensional-sbp", "claim": "Adding the vertical telescoping identity gives the full summation-by-parts formula with all four boundary sides.", "step": "2.1", "inputs": ["F1", "step 1.1"] },
+        { "id": "zero-boundary-energy", "claim": "The boundary flux terms vanish for a zero-boundary test grid function.", "step": "3.1", "inputs": ["step 2.1", "given"] },
+        { "id": "coercivity", "claim": "The positive face lower bound and discrete Poincare estimate imply weighted grid L2 coercivity.", "step": "4.1", "inputs": ["F1", "step 3.1", "step 1.2"] },
+        { "id": "invertibility", "claim": "Coercivity gives zero kernel and finite-dimensional injectivity gives invertibility.", "step": "5.1", "inputs": ["step 4.1"] },
+        { "id": "inverse-norm", "claim": "Testing the equation against its solution gives the mesh-uniform inverse operator bound.", "step": "6.1", "inputs": ["step 3.1", "step 4.1", "step 5.1"] }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        { "case": "empty", "status": "not_applicable", "reason": "The hypotheses require Nx,Ny at least 2 and positive side lengths, so the grid and its interior vector space are nonempty." },
+        { "case": "zero", "status": "checked", "evidence": "Step 4.1 gives coercivity; at v=0 both sides vanish without division." },
+        { "case": "one", "status": "checked", "evidence": "Step 4.1 applies in particular when every face value equals 1, the constant-coefficient five-point case." },
+        { "case": "degenerate", "status": "checked", "evidence": "The telescoping and coercivity steps remain valid on the smallest allowed grid Nx=Ny=2; see steps 1.1 and 4.1." },
+        { "case": "endpoints", "status": "checked", "evidence": "Steps 1.1–3.1 retain all boundary flux terms and show their exact cancellation for zero boundary values." },
+        { "case": "nonempty-choice", "status": "checked", "evidence": "Step 5.1 uses only finite-dimensional injectivity and makes no selection from an infinite family." },
+        { "case": "iff-forward", "status": "not_applicable", "reason": "The lemma states identities and inequalities, not an equivalence." },
+        { "case": "iff-reverse", "status": "not_applicable", "reason": "The lemma states identities and inequalities, not an equivalence." }
+      ]
+    },
+    "lem-variable-coefficient-flux-stencil-second-order-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rectangular-grid-and-dirichlet-flux-stencil",
+          "source_section": "Definition",
+          "quote": "The positive divergence-form Dirichlet operator on interior nodes is",
+          "uses": ["1.1", "4.1"]
+        }
+      ],
+      "derivations": [
+        { "id": "directional-taylor", "claim": "Taylor expansions at opposite face midpoints and forward/backward differences have the displayed remainder bounds.", "step": "1.1", "inputs": ["given", "A1", "F1"] },
+        { "id": "flux-remainder", "claim": "Multiplication gives a common quadratic flux term and the explicit Cx bound for every discarded product.", "step": "2.1", "inputs": ["given", "A1", "step 1.1"] },
+        { "id": "horizontal-flux-error", "claim": "The equal quadratic flux terms cancel, leaving the horizontal divergence error at most 2 Cx hx squared; the coordinate-swapped calculation gives the vertical bound.", "step": "3.1", "inputs": ["given", "step 2.1"] },
+        { "id": "complete-interior-residual", "claim": "The operator and PDE have matching negative-divergence signs, so the complete pointwise interior residual is bounded by the sum of the horizontal and vertical errors.", "step": "4.1", "inputs": ["F1", "given", "step 3.1"] }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        { "case": "empty", "status": "not_applicable", "reason": "The statement is quantified over interior nodes on grids with Nx,Ny at least 2; an empty grid is excluded." },
+        { "case": "zero", "status": "checked", "evidence": "Steps 1.1–4.1 give zero residual for u=0 because all U derivative bounds vanish." },
+        { "case": "one", "status": "checked", "evidence": "For a=1 the higher coefficient derivatives vanish and Cx reduces to ||uxxxx||/24; see steps 2.1–3.1." },
+        { "case": "degenerate", "status": "checked", "evidence": "The face expansions apply to the single interior point when Nx=Ny=2; step 4.1 is pointwise." },
+        { "case": "endpoints", "status": "checked", "evidence": "Step 4.1 includes every interior row next to the boundary and the statement imposes boundary samples exactly." },
+        { "case": "nonempty-choice", "status": "checked", "evidence": "Steps 1.1–4.1 use pointwise Taylor formulas and finite algebra only; no choices are made." },
+        { "case": "iff-forward", "status": "not_applicable", "reason": "The consistency result is a one-way residual estimate, not an equivalence." },
+        { "case": "iff-reverse", "status": "not_applicable", "reason": "The consistency result is a one-way residual estimate, not an equivalence." }
+      ]
+    },
+    "thm-elliptic-finite-difference-l2-error-on-rectangles": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rectangular-grid-and-dirichlet-flux-stencil",
+          "source_section": "Definition",
+          "quote": "The positive divergence-form Dirichlet operator on interior nodes is",
+          "uses": ["1.1", "2.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+          "source_section": "Statement",
+          "quote": "If all horizontal and vertical face values satisfy $a_{i+1/2,j},a_{i,j+1/2}\\ge a_0>0$, then the homogeneous Dirichlet matrix $A_h^a$ is invertible and",
+          "uses": ["1.1", "4.1"]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-variable-coefficient-flux-stencil-second-order-consistency",
+          "source_section": "Statement",
+          "quote": "\\left|(A_h^au^*)_{ij}-f_{h,ij}\\right|\\le 2C_xh_x^2+2C_yh_y^2,",
+          "uses": ["2.1", "3.1"]
+        }
+      ],
+      "derivations": [
+        { "id": "unique-discrete-solution", "claim": "Subtracting the exact boundary samples reduces the affine Dirichlet system to the invertible homogeneous matrix, proving existence and uniqueness.", "step": "1.1", "inputs": ["given", "F1", "F2"] },
+        { "id": "error-residual-equation", "claim": "The grid error has zero boundary data and solves the negative complete interior residual equation.", "step": "2.1", "inputs": ["F1", "F3", "step 1.1"] },
+        { "id": "residual-grid-norm", "claim": "The weighted interior sum has total weight at most the rectangle area, yielding the stated L2 residual norm bound.", "step": "3.1", "inputs": ["given", "F3", "step 2.1"] },
+        { "id": "global-error-bound", "claim": "Applying the uniform inverse norm to the residual equation yields the explicit second-order grid L2 error bound.", "step": "4.1", "inputs": ["F2", "step 2.1", "step 3.1"] }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        { "case": "empty", "status": "not_applicable", "reason": "The rectangle has positive side lengths and the grids have Nx,Ny at least 2, so the discrete system is nonempty." },
+        { "case": "zero", "status": "checked", "evidence": "Step 4.1 handles zero residual directly and requires no division by its norm." },
+        { "case": "one", "status": "checked", "evidence": "The coefficient choice a=1 is included with a0=1 and zero higher coefficient derivatives; steps 1.1 and 4.1 still apply." },
+        { "case": "degenerate", "status": "checked", "evidence": "Steps 1.1–4.1 apply when Nx=Ny=2, the smallest allowed grid, because the inverse estimate is mesh independent." },
+        { "case": "endpoints", "status": "checked", "evidence": "Step 2.1 uses exact boundary samples to make the error zero on every boundary node." },
+        { "case": "nonempty-choice", "status": "checked", "evidence": "Steps 1.1–4.1 use finite-dimensional inversion and pointwise bounds; no choice axiom is used." },
+        { "case": "iff-forward", "status": "not_applicable", "reason": "The theorem is a one-way error estimate and states no equivalence." },
+        { "case": "iff-reverse", "status": "not_applicable", "reason": "The theorem is a one-way error estimate and states no equivalence." }
+      ]
+    },
+    "ex-first-order-neumann-closure-causes-first-order-error": {
+      "citations": [],
+      "derivations": [
+        { "id": "boundary-residual", "claim": "The one-sided derivative of the exact quadratic samples differs from the exact Neumann datum by h.", "step": "1.1", "inputs": ["given", "A1"] },
+        { "id": "candidate-solution", "claim": "The stated affine correction preserves the centered interior equations and satisfies both discrete boundary rows.", "step": "1.2", "inputs": ["A1", "step 1.1"] },
+        { "id": "uniqueness", "claim": "The homogeneous error recurrence has constant first differences and the two boundary rows force the difference to vanish.", "step": "2.1", "inputs": ["A1", "step 1.2"] },
+        { "id": "first-order-global-error", "claim": "The exact grid error has maximum norm h, so this closure produces only first-order error.", "step": "3.1", "inputs": ["step 1.1", "step 1.2"] }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        { "case": "empty", "status": "not_applicable", "reason": "The example assumes N at least 2 and a nonempty interval grid." },
+        { "case": "zero", "status": "not_applicable", "reason": "The example fixes u=x squared and f=-2, so it has no zero-data branch." },
+        { "case": "one", "status": "checked", "evidence": "The exact boundary value at x=1 is 1 and is verified in step 1.2." },
+        { "case": "degenerate", "status": "checked", "evidence": "The recurrence and both closure rows remain valid at the smallest mesh N=2; see step 2.1." },
+        { "case": "endpoints", "status": "checked", "evidence": "Steps 1.1–2.1 compute the left Neumann residual and enforce both left and right discrete boundary rows." },
+        { "case": "nonempty-choice", "status": "checked", "evidence": "Steps 1.2–2.1 give an explicit formula and finite recurrence proof, with no choice principle." },
+        { "case": "iff-forward", "status": "not_applicable", "reason": "The example proves a concrete error value, not an equivalence." },
+        { "case": "iff-reverse", "status": "not_applicable", "reason": "The example proves a concrete error value, not an equivalence." }
+      ]
+    },
+    "ex-dirichlet-laplacian-has-uniform-infinity-inverse-bound": {
+      "citations": [],
+      "derivations": [
+        { "id": "quadratic-barrier", "claim": "The quadratic barrier has zero endpoints, maps to the all-ones vector, and is bounded by one eighth.", "step": "1.1", "inputs": ["given", "A1"] },
+        { "id": "discrete-minimum-principle", "claim": "A negative interior minimum under a nonnegative operator image propagates to a zero endpoint, which is impossible.", "step": "1.2", "inputs": ["given", "A1"] },
+        { "id": "matrix-invertibility", "claim": "The homogeneous system has no nonzero positive maximum or negative minimum, hence zero kernel and an inverse.", "step": "2.1", "inputs": ["given", "A1", "step 1.2"] },
+        { "id": "maximum-norm-inverse", "claim": "Comparison with the barrier bounds both signs of the inverse solution by one eighth of the data norm.", "step": "3.1", "inputs": ["step 1.1", "step 1.2", "step 2.1", "A1"] }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        { "case": "empty", "status": "not_applicable", "reason": "N is at least 2, so the interval grid has an interior vector space." },
+        { "case": "zero", "status": "checked", "evidence": "Step 3.1 treats M=0 separately and obtains v=0." },
+        { "case": "one", "status": "checked", "evidence": "Step 1.1 uses A_N phi=1, and the inverse estimate is normalized for unit maximum data in step 3.1." },
+        { "case": "degenerate", "status": "checked", "evidence": "For N=2 the barrier and minimum-principle arguments use the single interior node and both endpoints; see steps 1.1–2.1." },
+        { "case": "endpoints", "status": "checked", "evidence": "Steps 1.1–3.1 impose zero endpoint values in the barrier comparisons." },
+        { "case": "nonempty-choice", "status": "checked", "evidence": "Steps 1.1–3.1 use explicit finite-grid formulas and no choice principle." },
+        { "case": "iff-forward", "status": "not_applicable", "reason": "The example states a direct operator norm bound, not an equivalence." },
+        { "case": "iff-reverse", "status": "not_applicable", "reason": "The example states a direct operator norm bound, not an equivalence." }
+      ]
+    },
+    "ex-variable-coefficient-flux-and-expanded-stencils": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rectangular-grid-and-dirichlet-flux-stencil",
+          "source_section": "Definition",
+          "quote": "For a scalar coefficient $a$ sampled at face midpoints, write $a_{i+1/2,j}=a(x_i+h_x/2,y_j)$ and $a_{i,j+1/2}=a(x_i,y_j+h_y/2)$.",
+          "uses": ["1.1", "2.1"]
+        }
+      ],
+      "derivations": [
+        { "id": "flux-evaluation", "claim": "The exact midpoint coefficients and one-sided differences give the flux divergence 2+6x squared plus hx squared over two.", "step": "1.1", "inputs": ["given", "F1", "algebra"] },
+        { "id": "expanded-evaluation", "claim": "The centered second and first differences give the expanded value 2+6x squared, so the two stencils differ by hx squared over two.", "step": "2.1", "inputs": ["F1", "step 1.1", "algebra"] }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        { "case": "empty", "status": "not_applicable", "reason": "The example uses a positive rectangle and an interior grid point." },
+        { "case": "zero", "status": "not_applicable", "reason": "The example fixes nonzero u=x squared and a=1+x squared." },
+        { "case": "one", "status": "checked", "evidence": "At x=0 the coefficient equals one, while the derivatives still distinguish the variable-coefficient stencils in step 1.1." },
+        { "case": "degenerate", "status": "checked", "evidence": "The exact face formulas in steps 1.1–2.1 hold at the smallest allowed rectangular subdivisions Nx=Ny=2." },
+        { "case": "endpoints", "status": "checked", "evidence": "The calculation uses every midpoint face adjacent to an interior node and remains valid for the first and last interior nodes; see step 1.1." },
+        { "case": "nonempty-choice", "status": "checked", "evidence": "Steps 1.1–2.1 are direct polynomial evaluations and make no choices." },
+        { "case": "iff-forward", "status": "not_applicable", "reason": "The example compares two operators and asserts no equivalence." },
+        { "case": "iff-reverse", "status": "not_applicable", "reason": "The example compares two operators and asserts no equivalence." }
+      ]
+    },
+    "ex-five-point-laplacian-is-exact-on-quadratics": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rectangular-grid-and-dirichlet-flux-stencil",
+          "source_section": "Definition",
+          "quote": "For $a\\equiv1$, this is the five-point Dirichlet Laplacian $-D_x^+D_x^- -D_y^+D_y^-$.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+          "source_section": "Statement",
+          "quote": "If all horizontal and vertical face values satisfy $a_{i+1/2,j},a_{i,j+1/2}\\ge a_0>0$, then the homogeneous Dirichlet matrix $A_h^a$ is invertible",
+          "uses": ["3.1"]
+        }
+      ],
+      "derivations": [
+        { "id": "quadratic-stencil", "claim": "Each coordinate's central second difference is exactly 2, so the positive five-point operator returns -4.", "step": "1.1", "inputs": ["given", "F1"] },
+        { "id": "discrete-solution", "claim": "The exact samples satisfy the interior equations and all exact Dirichlet boundary rows.", "step": "2.1", "inputs": ["given", "step 1.1"] },
+        { "id": "unique-exact-grid", "claim": "Invertibility of the zero-boundary difference operator makes the exact samples the unique discrete solution.", "step": "3.1", "inputs": ["F2", "step 2.1"] }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        { "case": "empty", "status": "not_applicable", "reason": "The statement assumes a rectangle with positive side lengths and Nx,Ny at least 2." },
+        { "case": "zero", "status": "not_applicable", "reason": "The example fixes the nonzero quadratic u=x squared plus y squared." },
+        { "case": "one", "status": "checked", "evidence": "The coefficient is exactly a=1, and the five-point specialization is used in step 1.1." },
+        { "case": "degenerate", "status": "checked", "evidence": "Step 1.1 is exact at each interior node even for Nx=Ny=2; step 3.1 supplies uniqueness." },
+        { "case": "endpoints", "status": "checked", "evidence": "Step 2.1 imposes exact sampled Dirichlet values on every boundary node." },
+        { "case": "nonempty-choice", "status": "checked", "evidence": "Steps 1.1–3.1 use polynomial identities and finite-dimensional invertibility only." },
+        { "case": "iff-forward", "status": "not_applicable", "reason": "The example proves exactness for one quadratic, not an equivalence." },
+        { "case": "iff-reverse", "status": "not_applicable", "reason": "The example proves exactness for one quadratic, not an equivalence." }
+      ]
+    }
+  }
+}

@@ -1,0 +1,574 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "archive": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-owner-barycentric-caputo-l1-metadata-projection/applied-before-20261016T070732241468Z",
+  "applied_fields": [
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-4.proof-contracts.json",
+      "path": [
+        "contracts",
+        "alg-finite-barycentric-interpolation-evaluator",
+        "boundaries"
+      ],
+      "before": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition accepts n=0 as one node and an empty inner loop."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition accepts zero data; checked arithmetic returns success or range_failure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition specifies n=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition returns invalid_nodes for duplicate or unordered nodes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition handles exact-node queries before quotient evaluation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "alg-finite-barycentric-interpolation-evaluator constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires n>=0 and finite arrays with checked statuses; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires n>=0 and finite arrays with checked statuses; it has no separate reverse branch."
+        }
+      ],
+      "after": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition accepts n=0 as one node and an empty inner loop."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition accepts zero data; checked arithmetic returns success or range_failure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition specifies n=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition returns invalid_nodes for duplicate or unordered nodes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition returns exact-node data before the representable-one guard; off-node inputs with1 not in F return the existing range_failure status before arithmetic."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "alg-finite-barycentric-interpolation-evaluator constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires n>=0 and finite arrays with checked statuses; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires n>=0 and finite arrays with checked statuses; it has no separate reverse branch."
+        }
+      ]
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-4.proof-contracts.json",
+      "path": [
+        "contracts",
+        "prop-finite-barycentric-interpolation-evaluator-returns-status",
+        "citations"
+      ],
+      "before": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-barycentric-interpolation-evaluator",
+          "source_section": "Definition",
+          "quote": "The input is a natural number $n\\ge0$, a floating-point system $(\\mathbb F,N_{\\min},N_{\\max},\\operatornam",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "after": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-barycentric-interpolation-evaluator",
+          "source_section": "Definition",
+          "quote": "The input is a natural number $n\\ge0$, a floating-point system $(\\mathbb F,N_{\\min},N_{\\max},\\operatorname{fl})$ satisfying [[def-standard-relative-floating-point-model-and-unit-roundoff]], a node array of exactly $n+1$ candidates $x_0,\\ldots,x_n$, a data array of exactly $n+1$ values $y_0,\\ldots,y_n$, and a query $x$. The output is either a record with status *success* and a value in $\\mathbb F$, or one of the statuses *invalid_nodes*, *invalid_data*, and *range_failure*.\n\nUse checked operations as follows. For $a,b\\in\\mathbb F$ and $\\circ\\in\\{+,-,\\times,\\div\\}$, return *range_failure* if division has $b=0$ or if the exact real result $a\\circ b$ is nonzero and outside the normal range $N_{\\min}\\le|a\\circ b|\\le N_{\\max}$. Otherwise return $\\operatorname{fl}(a\\circ b)$, using the exact-zero rule when the result is zero. Each checked operation has the tagged outcome either *range_failure* or a value in $\\mathbb F$; if an operation in a displayed sequence returns *range_failure*, stop before evaluating the next operation and return that status. Thus $\\operatorname{fl}$ is called only on arguments in the domain of the stated model.\n\nProcedure:\n\n1. If the node array has length other than $n+1$, any node is not in $\\mathbb F$, or the nodes are not strictly increasing, return *invalid_nodes*. If the data array has length other than $n+1$, or any data value or the query is not in $\\mathbb F$, return *invalid_data*.\n2. If $x=x_i$ for some $i$, return *success* with value $y_i$.\n3. If $1\\notin\\mathbb F$, return *range_failure*. Otherwise, for each $j=0,\\ldots,n$, initialize $d_j=1$. For each $k=0,\\ldots,n$ with $k\\ne j$, compute $\\delta=\\operatorname{checked}_{-}(x_j,x_k)$ and then replace $d_j$ by $\\operatorname{checked}_{\\times}(d_j,\\delta)$. After this inner loop set $w_j=\\operatorname{checked}_{\\div}(1,d_j)$. Any checked-operation failure returns *range_failure*.\n4. Initialize $N=0$ and $D=0$. For each $j=0,\\ldots,n$, compute $\\delta_j=\\operatorname{checked}_{-}(x,x_j)$, $u_j=\\operatorname{checked}_{\\div}(\\operatorname{checked}_{\\times}(w_j,y_j),\\delta_j)$, and $v_j=\\operatorname{checked}_{\\div}(w_j,\\delta_j)$. Replace $N$ by $\\operatorname{checked}_{+}(N,u_j)$ and $D$ by $\\operatorname{checked}_{+}(D,v_j)$. Any checked-operation failure returns *range_failure*.\n5. If $D=0$, return *range_failure*. Otherwise return *success* with value $\\operatorname{checked}_{\\div}(N,D)$, unless that final checked operation returns *range_failure*.\n\nThe exact-arithmetic target of steps 3\u20135 is the quotient in [[thm-barycentric-interpolation-identities]]. This finite-arithmetic procedure provides no forward-error bound, conditioning guarantee, or accuracy certificate; close or widely separated nodes can cause a range failure or an inaccurate successful value.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-4.proof-contracts.json",
+      "path": [
+        "contracts",
+        "prop-finite-barycentric-interpolation-evaluator-returns-status",
+        "derivations"
+      ],
+      "before": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The input validation examines only the $n+1$ nodes and data values. If a node or ordering check fails it returns *invalid_nodes*; if a data or query check fails it returns *invalid_data*. Otherwise it either returns the node value at an exact node, which is in $\\mathbb F$, or proceeds to weight construction.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Weight construction visits at most $(n+1)n$ node pairs and performs finitely many checked operations. Each operation either returns a value in $\\mathbb F$ or returns *range_failure*, which stops the procedure, so this stage terminates.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "If weight construction completes, the evaluation loop visits exactly $n+1$ terms. Every checked operation either returns a value in $\\mathbb F$ or exits with *range_failure*. After the loop, a zero denominator returns *range_failure*; otherwise the checked final division either returns *range_failure* or returns *success* with a value in $\\mathbb F$.",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "These cases exhaust the procedure's branches and every loop is finite, so every input terminates with a declared status.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The input validation examines only the $n+1$ nodes and data values. If a node or ordering check fails it returns *invalid_nodes*; if a data or query check fails it returns *invalid_data*. Otherwise it returns the node value at an exact node, which is in $\\mathbb F$. For an off-node query, it next checks whether $1\\in\\mathbb F$: if not, it returns *range_failure* before initializing any arithmetic with $1$; if so, it proceeds to weight construction.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "After the guard in step 1.1, $1\\in\\mathbb F$, so each initial $d_j=1$ and each reciprocal numerator $1$ is in the checked-operation domain. Every successful checked operation returns an element of $\\mathbb F$, preserving that domain for the next operation. Weight construction visits at most $(n+1)n$ node pairs and performs finitely many such operations; any failure returns *range_failure* immediately, so this stage terminates.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "If weight construction completes, the evaluation loop visits exactly $n+1$ terms. Every checked operation either returns a value in $\\mathbb F$ or exits with *range_failure*. After the loop, a zero denominator returns *range_failure*; otherwise the checked final division either returns *range_failure* or returns *success* with a value in $\\mathbb F$.",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "These cases exhaust the procedure's branches and every loop is finite, so every input terminates with a declared status.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-4.proof-contracts.json",
+      "path": [
+        "contracts",
+        "prop-finite-barycentric-interpolation-evaluator-returns-status",
+        "boundaries"
+      ],
+      "before": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 include n=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes zero data and declared statuses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 cover one node."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 returns invalid_nodes for duplicate or unordered nodes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 covers exact-node queries."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "prop-finite-barycentric-interpolation-evaluator-returns-status constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires every finite evaluator input; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires every finite evaluator input; it has no separate reverse branch."
+        }
+      ],
+      "after": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 include n=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes zero data and declared statuses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 cover one node."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 returns invalid_nodes for duplicate or unordered nodes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step1.1 returns node values before checking representable one; no new input hypothesis narrows the nodal branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "prop-finite-barycentric-interpolation-evaluator-returns-status constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires every finite evaluator input; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires every finite evaluator input; it has no separate reverse branch."
+        }
+      ]
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-45.pages.json",
+      "path": [
+        0,
+        "items",
+        11,
+        "deps"
+      ],
+      "before": [
+        "def-caputo-derivative-and-fractional-integral",
+        "lem-continuous-fractional-integral-is-holder",
+        "lem-fractional-integral-semigroup",
+        "lem-weakly-singular-fractional-gronwall",
+        "def-real-gamma-function-by-the-euler-integral",
+        "thm-real-power-continuity-and-derivatives",
+        "def-banach-space",
+        "def-complete-metric-space",
+        "ex-c-of-a-compact-space-is-banach",
+        "thm-heine-borel-r",
+        "def-metric-compactness"
+      ],
+      "after": [
+        "def-caputo-derivative-and-fractional-integral",
+        "lem-continuous-fractional-integral-is-holder",
+        "lem-fractional-integral-semigroup",
+        "lem-weakly-singular-fractional-gronwall",
+        "def-real-gamma-function-by-the-euler-integral",
+        "thm-real-power-continuity-and-derivatives",
+        "def-banach-space",
+        "def-complete-metric-space",
+        "thm-c-k-complete-in-the-sup-metric",
+        "thm-heine-borel-r",
+        "def-metric-compactness"
+      ]
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-45.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-lipschitz-local-existence-for-caputo-volterra-equation",
+        "citations"
+      ],
+      "before": [
+        {
+          "fact": "F1",
+          "source": "def-caputo-derivative-and-fractional-integral",
+          "source_section": "Definition",
+          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]], so $u'\\in L^1(0,T)$ almost\neverywhere by [[thm-absolutely-continuous-functions-have-integrable-derivatives]].\nThe Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].\n",
+          "uses": [
+            "2.1",
+            "4.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-continuous-fractional-integral-is-holder",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $0<\\beta<1$, and $g\\in C([0,T])$. Then $I^\\beta g$ is continuous\non $[0,T]$, $I^\\beta g(0)=0$, and\n\n$$\\|I^\\beta g\\|_\\infty\\le\\frac{T^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\n\n$$|I^\\beta g(t)-I^\\beta g(s)|\\le\\frac{2\\|g\\|_\\infty}{\\Gamma(\\beta+1)}|t-s|^\\beta\\qquad(s,t\\in[0,T]).$$\n\n",
+          "uses": [
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fractional-integral-semigroup",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $a,b>0$, and $g\\in L^1(0,T)$. Then, almost everywhere on\n$(0,T)$,\n\n$$I^a(I^b g)=I^{a+b}g.$$\n\nMoreover,\n\n$$\\|I^a g\\|_{L^1(0,T)}\\le\\frac{T^a}{\\Gamma(a+1)}\\|g\\|_{L^1(0,T)}.$$\n\nIf $g\\in C([0,T])$, the semigroup identity holds at every\n$t\\in[0,T]$. For every $c>0$ and $t\\in[0,T]$,\n$$I^c\\mathbf 1(t)=\\frac{t^c}{\\Gamma(c+1)},$$\nwhere $\\mathbf 1$ is the constant function with value $1$.\n\n",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-weakly-singular-fractional-gronwall",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $0<\\alpha<1$, $A,L\\ge0$, and let $y\\in C([0,T])$ be\nnonnegative. If\n$$y(t)\\le A+L I^\\alpha y(t)\\qquad(0\\le t\\le T),$$\nthen for every $t\\in[0,T]$,\n$$y(t)\\le A\\sum_{k=0}^\\infty\\frac{L^k t^{k\\alpha}}{\\Gamma(k\\alpha+1)}.$$\nThe $k=0$ term is $1$, including when $L=0$, and the series converges\nuniformly on $[0,T]$. In particular, if $A=0$ then $y\\equiv0$.\n\n",
+          "uses": [
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-heine-borel-r",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$. Then the closed bounded interval\n$[a,b]$ ([[def-interval]]) is compact ([[def-open-cover-r]]): every family of\nopen subsets of $\\mathbb{R}$ whose union contains $[a,b]$ has a finite subfamily\nwhose union already contains $[a,b]$.\n\nThe proof is by repeated bisection. Supposing some open cover admits no finite\nsubcover, one halves the interval, keeps a half that still admits none, and\niterates; the halves shrink to a point, which the cover does reach, and a single\nmember of the cover then swallows a whole late-stage half. **The halving rule is\ncanonical**, taking the left half whenever the left half works, so the recursion\nuses [[thm-recursion]] and no choice principle.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-compactness",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open sets as in\n[[def-metric-topology]] and balls as in [[def-metric-ball]].\n\n- An **open cover** of $(X,d)$ is a family $\\mathcal{U}$ of open subsets of $X$\n  with $X = \\bigcup \\mathcal{U}$, where\n  $\\bigcup \\mathcal{U} = \\{\\, x \\in X : x \\in U \\text{ for some } U \\in \\mathcal{U} \\,\\}$.\n- A **subcover** of $\\mathcal{U}$ is a subfamily\n  $\\mathcal{V} \\subseteq \\mathcal{U}$ that is itself an open cover.\n- A family $\\mathcal{V}$ of sets is **finite** when $\\mathcal{V} = \\emptyset$ or\n  there are $n \\in \\mathbb{N}$ and sets $V_0, \\dots, V_n$ with\n  $\\mathcal{V} = \\{V_0, \\dots, V_n\\}$; repetitions in the list are allowed and\n  harmless.\n- $(X,d)$ is **compact** when every open cover of it has a finite subcover: for\n  every open cover $\\mathcal{U}$, either $X = \\emptyset$ and the empty subfamily\n  covers it, or there are $n \\in \\mathbb{N}$ and\n  $U_0, \\dots, U_n \\in \\mathcal{U}$ with\n  $$X = U_0 \\cup \\dots \\cup U_n .$$\n- A subset $A \\subseteq X$ is a **compact subset** of $X$ when the metric\n  subspace $(A, d_A)$ is a compact metric space, $d_A$ being the restriction of\n  $d$ to $A \\times A$ ([[def-isometry-and-metric-embedding]]).\n\n**Compactness of a subset is defined intrinsically, and only intrinsically.**\nThe last clause speaks about the subspace $(A,d_A)$ and its own open sets, not\nabout families of open subsets of the ambient $X$. The two readings do agree,\nbut that is a theorem and not a convention: it is\n[[lem-compactness-is-intrinsic]], and no item of this library may use the\nambient reading without citing it. Taking the intrinsic reading as the\ndefinition is what makes \"compact\" a property of the metric space $(A,d_A)$\nalone, so that a set compact in one ambient space is compact in every other one\ncontaining it isometrically.\n\n**The empty space is compact**, since the empty subfamily of any family covers\nit; this is the reason the clause above is written with the two cases. The\none-point space is compact too, and so is every space listed as\n$\\{x_0, \\dots, x_n\\}$: given a cover, each $x_i$ lies in some member, and\nfinitely many members chosen in this way already cover.\n\n**The finiteness convention, and how it is used both ways.** \"Finite\" above is\nthe listing form, matching the finite lists of\n[[def-finite-intersection-property]]. It agrees with the definition of\nfiniteness by equinumerosity with a natural number ([[def-countable]]), and\nboth directions of the agreement are available and are used below:\n\n- A nonempty finite set $F$ in the sense of [[def-countable]] satisfies\n  $F \\approx m$ for some $m \\ge 1$, and a bijection $m \\to F$ is exactly a\n  listing $F = \\{a_0, \\dots, a_{m-1}\\}$.\n- Conversely a set listed as $A = \\{a_0, \\dots, a_n\\}$, that is the image of a\n  function $a$ with domain $\\sigma(n)$, is finite in the sense of\n  [[def-countable]]: the map sending $x \\in A$ to the least $i \\le n$ with\n  $a_i = x$ is an injection of $A$ into $\\sigma(n)$, so $A$ is equinumerous with\n  a subset of $\\mathbb{N}$ bounded above, and such a subset is finite\n  ([[lem-subset-of-countable]]).\n\nNeither direction uses a choice principle: the second selects nothing, taking a\nleast index instead.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "ex-c-of-a-compact-space-is-banach",
+          "source_section": "Example",
+          "quote": "If $K$ is a nonempty compact metric space, then the space $C(K)$ of continuous\nscalar functions on $K$, with the supremum norm, is a Banach space.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, in the sense of [[def-norm-and-normed-space]] for $\\mathbb R$ and [[def-complex-norm-and-complex-normed-space]] for $\\mathbb C$, with\ninduced metric $d(x,y)=\\|x-y\\|$ (in the complex case supplied by [[lem-complex-norm-realification-is-a-real-norm]]). Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complete-metric-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\n$(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$\n([[def-cauchy-in-metric]]) converges to a point of $X$\n([[def-metric-convergence]]).\n\nA subset $A \\subseteq X$ is called **complete** when the metric subspace\n$(A, d_A)$ is complete ([[def-isometry-and-metric-embedding]]); as always, the\nmetric is part of the data, and $d_A$ is the restriction of $d$ to $A \\times A$.\n\n**The limit is unique when it exists**, since limits in a metric space are unique\n([[lem-metric-limits-unique]]), so a complete space assigns to each of its Cauchy\nsequences one point and not a set of points.\n\n**Completeness is a property of the pair $(X,d)$, not of $X$ and not of the\ntopology of $d$.** Both quantifiers in the definition are about the metric: the\nCauchy condition is stated with distances, and so is convergence. Two metrics on\nthe same set can have the same open sets while exactly one of them is complete,\nwhich is the content of [[fs-completeness-is-a-topological-property]] and its\nwitness. Read the word *complete* as an abbreviation for *complete with respect\nto this metric*, always.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-gamma-function-by-the-euler-integral",
+          "source_section": "Definition",
+          "quote": "For $s>0$, define $\\Gamma(s)=\\int_0^\\infty t^{s-1}e^{-t}\\,dt$.\n\nThe integral is improper at both $0$ and $+\\infty$. Its convergence for every $s>0$, and its failure for $s\\le0$, are proved in [[thm-real-gamma-euler-integral-convergence]], which justifies the definition on exactly the displayed domain. The integrand is positive, so $\\Gamma(s)>0$ throughout $(0,\\infty)$.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "after": [
+        {
+          "fact": "F1",
+          "source": "def-caputo-derivative-and-fractional-integral",
+          "source_section": "Definition",
+          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]], so $u'\\in L^1(0,T)$ almost\neverywhere by [[thm-absolutely-continuous-functions-have-integrable-derivatives]].\nThe Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].\n",
+          "uses": [
+            "2.1",
+            "4.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-continuous-fractional-integral-is-holder",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $0<\\beta<1$, and $g\\in C([0,T])$. Then $I^\\beta g$ is continuous\non $[0,T]$, $I^\\beta g(0)=0$, and\n\n$$\\|I^\\beta g\\|_\\infty\\le\\frac{T^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\n\n$$|I^\\beta g(t)-I^\\beta g(s)|\\le\\frac{2\\|g\\|_\\infty}{\\Gamma(\\beta+1)}|t-s|^\\beta\\qquad(s,t\\in[0,T]).$$\n\n",
+          "uses": [
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fractional-integral-semigroup",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $a,b>0$, and $g\\in L^1(0,T)$. Then, almost everywhere on\n$(0,T)$,\n\n$$I^a(I^b g)=I^{a+b}g.$$\n\nMoreover,\n\n$$\\|I^a g\\|_{L^1(0,T)}\\le\\frac{T^a}{\\Gamma(a+1)}\\|g\\|_{L^1(0,T)}.$$\n\nIf $g\\in C([0,T])$, the semigroup identity holds at every\n$t\\in[0,T]$. For every $c>0$ and $t\\in[0,T]$,\n$$I^c\\mathbf 1(t)=\\frac{t^c}{\\Gamma(c+1)},$$\nwhere $\\mathbf 1$ is the constant function with value $1$.\n\n",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-weakly-singular-fractional-gronwall",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $0<\\alpha<1$, $A,L\\ge0$, and let $y\\in C([0,T])$ be\nnonnegative. If\n$$y(t)\\le A+L I^\\alpha y(t)\\qquad(0\\le t\\le T),$$\nthen for every $t\\in[0,T]$,\n$$y(t)\\le A\\sum_{k=0}^\\infty\\frac{L^k t^{k\\alpha}}{\\Gamma(k\\alpha+1)}.$$\nThe $k=0$ term is $1$, including when $L=0$, and the series converges\nuniformly on $[0,T]$. In particular, if $A=0$ then $y\\equiv0$.\n\n",
+          "uses": [
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-heine-borel-r",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$. Then the closed bounded interval\n$[a,b]$ ([[def-interval]]) is compact ([[def-open-cover-r]]): every family of\nopen subsets of $\\mathbb{R}$ whose union contains $[a,b]$ has a finite subfamily\nwhose union already contains $[a,b]$.\n\nThe proof is by repeated bisection. Supposing some open cover admits no finite\nsubcover, one halves the interval, keeps a half that still admits none, and\niterates; the halves shrink to a point, which the cover does reach, and a single\nmember of the cover then swallows a whole late-stage half. **The halving rule is\ncanonical**, taking the left half whenever the left half works, so the recursion\nuses [[thm-recursion]] and no choice principle.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-compactness",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open sets as in\n[[def-metric-topology]] and balls as in [[def-metric-ball]].\n\n- An **open cover** of $(X,d)$ is a family $\\mathcal{U}$ of open subsets of $X$\n  with $X = \\bigcup \\mathcal{U}$, where\n  $\\bigcup \\mathcal{U} = \\{\\, x \\in X : x \\in U \\text{ for some } U \\in \\mathcal{U} \\,\\}$.\n- A **subcover** of $\\mathcal{U}$ is a subfamily\n  $\\mathcal{V} \\subseteq \\mathcal{U}$ that is itself an open cover.\n- A family $\\mathcal{V}$ of sets is **finite** when $\\mathcal{V} = \\emptyset$ or\n  there are $n \\in \\mathbb{N}$ and sets $V_0, \\dots, V_n$ with\n  $\\mathcal{V} = \\{V_0, \\dots, V_n\\}$; repetitions in the list are allowed and\n  harmless.\n- $(X,d)$ is **compact** when every open cover of it has a finite subcover: for\n  every open cover $\\mathcal{U}$, either $X = \\emptyset$ and the empty subfamily\n  covers it, or there are $n \\in \\mathbb{N}$ and\n  $U_0, \\dots, U_n \\in \\mathcal{U}$ with\n  $$X = U_0 \\cup \\dots \\cup U_n .$$\n- A subset $A \\subseteq X$ is a **compact subset** of $X$ when the metric\n  subspace $(A, d_A)$ is a compact metric space, $d_A$ being the restriction of\n  $d$ to $A \\times A$ ([[def-isometry-and-metric-embedding]]).\n\n**Compactness of a subset is defined intrinsically, and only intrinsically.**\nThe last clause speaks about the subspace $(A,d_A)$ and its own open sets, not\nabout families of open subsets of the ambient $X$. The two readings do agree,\nbut that is a theorem and not a convention: it is\n[[lem-compactness-is-intrinsic]], and no item of this library may use the\nambient reading without citing it. Taking the intrinsic reading as the\ndefinition is what makes \"compact\" a property of the metric space $(A,d_A)$\nalone, so that a set compact in one ambient space is compact in every other one\ncontaining it isometrically.\n\n**The empty space is compact**, since the empty subfamily of any family covers\nit; this is the reason the clause above is written with the two cases. The\none-point space is compact too, and so is every space listed as\n$\\{x_0, \\dots, x_n\\}$: given a cover, each $x_i$ lies in some member, and\nfinitely many members chosen in this way already cover.\n\n**The finiteness convention, and how it is used both ways.** \"Finite\" above is\nthe listing form, matching the finite lists of\n[[def-finite-intersection-property]]. It agrees with the definition of\nfiniteness by equinumerosity with a natural number ([[def-countable]]), and\nboth directions of the agreement are available and are used below:\n\n- A nonempty finite set $F$ in the sense of [[def-countable]] satisfies\n  $F \\approx m$ for some $m \\ge 1$, and a bijection $m \\to F$ is exactly a\n  listing $F = \\{a_0, \\dots, a_{m-1}\\}$.\n- Conversely a set listed as $A = \\{a_0, \\dots, a_n\\}$, that is the image of a\n  function $a$ with domain $\\sigma(n)$, is finite in the sense of\n  [[def-countable]]: the map sending $x \\in A$ to the least $i \\le n$ with\n  $a_i = x$ is an injection of $A$ into $\\sigma(n)$, so $A$ is equinumerous with\n  a subset of $\\mathbb{N}$ bounded above, and such a subset is finite\n  ([[lem-subset-of-countable]]).\n\nNeither direction uses a choice principle: the second selects nothing, taking a\nleast index instead.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-c-k-complete-in-the-sup-metric",
+          "source_section": "Statement",
+          "quote": "Let $(K,d)$ be a nonempty compact metric space. Every member of\n$C(K,\\mathbb{R})$ is bounded, so the supremum metric\n\n$$d_\\infty(f,g):=\\sup_{x\\in K}|f(x)-g(x)|$$\n\nis defined on $C(K,\\mathbb{R})$. With this metric,\n$C(K,\\mathbb{R})$ is complete.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, in the sense of [[def-norm-and-normed-space]] for $\\mathbb R$ and [[def-complex-norm-and-complex-normed-space]] for $\\mathbb C$, with\ninduced metric $d(x,y)=\\|x-y\\|$ (in the complex case supplied by [[lem-complex-norm-realification-is-a-real-norm]]). Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complete-metric-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\n$(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$\n([[def-cauchy-in-metric]]) converges to a point of $X$\n([[def-metric-convergence]]).\n\nA subset $A \\subseteq X$ is called **complete** when the metric subspace\n$(A, d_A)$ is complete ([[def-isometry-and-metric-embedding]]); as always, the\nmetric is part of the data, and $d_A$ is the restriction of $d$ to $A \\times A$.\n\n**The limit is unique when it exists**, since limits in a metric space are unique\n([[lem-metric-limits-unique]]), so a complete space assigns to each of its Cauchy\nsequences one point and not a set of points.\n\n**Completeness is a property of the pair $(X,d)$, not of $X$ and not of the\ntopology of $d$.** Both quantifiers in the definition are about the metric: the\nCauchy condition is stated with distances, and so is convergence. Two metrics on\nthe same set can have the same open sets while exactly one of them is complete,\nwhich is the content of [[fs-completeness-is-a-topological-property]] and its\nwitness. Read the word *complete* as an abbreviation for *complete with respect\nto this metric*, always.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-gamma-function-by-the-euler-integral",
+          "source_section": "Definition",
+          "quote": "For $s>0$, define $\\Gamma(s)=\\int_0^\\infty t^{s-1}e^{-t}\\,dt$.\n\nThe integral is improper at both $0$ and $+\\infty$. Its convergence for every $s>0$, and its failure for $s\\le0$, are proved in [[thm-real-gamma-euler-integral-convergence]], which justifies the definition on exactly the displayed domain. The integrand is positive, so $\\Gamma(s)>0$ throughout $(0,\\infty)$.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ]
+    }
+  ],
+  "canonical_files": [
+    "research/numerical-optimization-dynamics-2026-10-16-batch-4.proof-contracts.json",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-45.pages.json",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-45.proof-contracts.json"
+  ],
+  "crossledger_applied": false,
+  "53_contract_changed": false
+}

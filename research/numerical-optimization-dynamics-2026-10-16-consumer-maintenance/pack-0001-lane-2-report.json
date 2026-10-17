@@ -1,0 +1,74 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "pack": "pack-0001",
+  "lane": 2,
+  "input_sha256": "f1433e4d258372a9ab219d45f6f5eec44795efa104128747f0fd240978073a23",
+  "decisions": [
+    {
+      "id": "ex-rosenbrock-euler-stiff-linear-damping",
+      "disposition": "sound",
+      "reason": "The current supplier's exact-Jacobian branch with gamma=1, f(t,y)=-10y and h=1/5 gives stage coefficient 1-h(-10)=3. Thus k=-10/3 and y_next=1/3, while explicit Euler gives -1. The stated finite-step comparison remains valid without modifying any item bytes.",
+      "understanding": {
+        "basis": "familiarity",
+        "evidence": "Checked the complete frozen example, current items/def-rosenbrock-euler-step-map.md and items/thm-rosenbrock-euler-a-l-stable.md as supplied in the assignment. The autonomous scalar field embeds as a time-independent field on R times R; its exact derivative is -10. Elementary scalar substitution verifies both updates directly, without using approximate Jacobians, rounded solves or an asymptotic notion of stiffness. Disk comparison confirms the example equals its frozen input. No external source reading was needed or claimed; no mathematical obligation remains for this consumer.",
+        "uncertainty": false,
+        "sources": []
+      },
+      "event_uses": [
+        {
+          "event_key": "5fd633f11bdcb624dad3219a063ffbaa4fba0b2b5466b4f8d24f860e5cce0521",
+          "affected_use": "Fact F1 and Verification step 1.1 specialize def-rosenbrock-euler-step-map to the exact scalar stage (1-h lambda)k=lambda y_n and update y_n+h k at gamma=1.",
+          "reason": "The changed definition still supplies precisely this equation for the time-independent exact-Jacobian field f(t,y)=lambda y. The example's coefficient is 3, so the invertibility condition is satisfied; the additional approximate-Jacobian branch is never used."
+        }
+      ],
+      "affected_use": "The only assigned supplier event reaches the exact scalar equation in F1 and the explicit computation k=-10/3 in Verification step 1.1.",
+      "invalidated_claim": "No claim is invalidated: the retained exact-Jacobian branch yields magnitude 1/3 for Rosenbrock-Euler and magnitude 1 for explicit Euler on the stated step.",
+      "minimality": "No repair is necessary because both displayed numerical updates follow from the current supplier under all stated conditions; the entire example is preserved byte-for-byte.",
+      "edits": []
+    },
+    {
+      "id": "thm-rosenbrock-euler-a-l-stable",
+      "disposition": "sound",
+      "reason": "The supplier still gives (I-h C_lambda)k=C_lambda y for the exact real two-dimensional linear field at gamma=1. Complex identification therefore gives R(z)=1/(1-z). For Re z<=0, |1-z|^2=1-2 Re z+|z|^2>=1+|z|^2; this proves invertibility, A-stability and decay along every path to infinity in that half-plane. Neither the statement nor its proof is invalidated.",
+      "understanding": {
+        "basis": "familiarity",
+        "evidence": "Checked the complete frozen theorem and both current suppliers: items/def-rosenbrock-euler-step-map.md and items/thm-rosenbrock-euler-scalar-a-and-l-stability.md. Multiplication by lambda is exactly the real matrix C_lambda used in the statement; its shifted stage is invertible when 1-z is nonzero. Substitution gives y_next=y/(1-z), also the backward-Euler factor. The displayed modulus inequality proves the full half-plane limit rather than only a negative-real-axis limit. The gamma=1 specialization agrees with the general stability supplier. This uses familiar linear algebra and complex arithmetic, with no external source reading or unresolved mathematical obligation. Local validation confirms this item equals its frozen input byte-for-byte and the decision covers its one exact assigned supplier event.",
+        "uncertainty": false,
+        "sources": []
+      },
+      "event_uses": [
+        {
+          "event_key": "5fd633f11bdcb624dad3219a063ffbaa4fba0b2b5466b4f8d24f860e5cce0521",
+          "affected_use": "The Statement and F1 use the definition's gamma=1 exact-Jacobian stage and update, then Proof step 1.1 derives the complex amplification factor through the explicitly specified real two-dimensional representation.",
+          "reason": "Taking the supplier's real field f(t,u)=C_lambda u on R times R^2 gives D_y f=C_lambda and exactly the claimed stage equation. The theorem explicitly restricts to exact arithmetic and the exact Jacobian, so the supplier's approximate branch creates no additional hypothesis; Re z<=0 guarantees stage invertibility."
+        }
+      ],
+      "affected_use": "The supplier supplies the real exact-Jacobian equation in the Statement and F1, which Proof step 1.1 solves before the elementary stability estimate in step 2.1.",
+      "invalidated_claim": "No claim is invalidated: the exact gamma=1 branch retains the backward-Euler amplification factor and the theorem proves both stability conditions directly on the whole closed left half-plane.",
+      "minimality": "No repair is needed because the exact real representation and invertibility argument already meet the current definition's conditions; preserve every byte of the existing theorem.",
+      "edits": []
+    },
+    {
+      "id": "thm-rosenbrock-euler-one-newton-step-for-backward-euler",
+      "disposition": "sound",
+      "reason": "For the stated C1 autonomous field, G(0)=-h f(y) and DG(0)=I-h Df(y)=M. Its assumed invertibility gives the single Newton correction s1=h M^{-1}f(y). The current supplier's exact-Jacobian gamma=1 branch is still y+h M^{-1}f(y), so the identity and the explicit caveats about convergence and solving the residual remain valid.",
+      "understanding": {
+        "basis": "familiarity",
+        "evidence": "Checked the complete frozen theorem and current items/def-rosenbrock-euler-step-map.md. Interpret the C1 field on its usual open domain U, and embed it as F(t,u)=f(u) on R times U. Then D_y F(t,y)=Df(y), so the supplier's stage matrix is the stated M. The derivative and residual at zero suffice to compute the one correction; neither G(s1) nor f(y+s1) is evaluated, so no assertion that y+s1 stays in U or solves backward Euler is needed. Familiar differentiation and the Newton correction formula prove the identity directly. No external source was consulted and no mathematical uncertainty remains. Local validation confirms this item equals its frozen input byte-for-byte and the decision covers its one exact assigned supplier event.",
+        "uncertainty": false,
+        "sources": []
+      },
+      "event_uses": [
+        {
+          "event_key": "5fd633f11bdcb624dad3219a063ffbaa4fba0b2b5466b4f8d24f860e5cce0521",
+          "affected_use": "The Statement, fact F1 and Proof step 3.1 identify y+s1 with the exact autonomous gamma=1 exact-Jacobian map y+h(I-h Df(y))^{-1}f(y) from def-rosenbrock-euler-step-map.",
+          "reason": "The supplier's more general time-dependent definition specializes to F(t,u)=f(u), and its exact-Jacobian branch uses Df(y). The existing assumption that M is invertible is precisely the supplier's admissibility condition. The proof never uses an approximate Jacobian, a rounded stage solve or a converged nonlinear solve."
+        }
+      ],
+      "affected_use": "Fact F1 and Proof step 3.1 consume only the exact gamma=1 stage-map formula, after steps 1.1 and 2.1 compute one Newton correction independently.",
+      "invalidated_claim": "No claim is invalidated: the autonomous embedding retains the same matrix M and state update, and the theorem expressly declines to assert Newton convergence or a zero residual after correction.",
+      "minimality": "No edit is necessary because the existing differentiability and invertibility hypotheses support the exact formula used; retaining the theorem byte-for-byte avoids any unrelated strengthening or restyling.",
+      "edits": []
+    }
+  ]
+}

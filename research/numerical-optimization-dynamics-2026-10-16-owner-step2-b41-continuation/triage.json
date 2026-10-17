@@ -1,0 +1,233 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "41",
+  "purpose": "Read-only owner triage; no new native coverage or acceptance",
+  "changed_interfaces": [
+    "alg-randomized-coordinate-gradient-descent",
+    "thm-randomized-coordinate-gradient-descent-rates",
+    "alg-randomized-coordinate-proximal-descent",
+    "lem-coordinatewise-minimum-implies-composite-stationarity",
+    "thm-randomized-coordinate-proximal-strongly-convex-contraction",
+    "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction"
+  ],
+  "interface_deltas": [
+    {
+      "id": "alg-randomized-coordinate-gradient-descent",
+      "before": [
+        "## Definition\n\nLet $d,n\\ge1$, let $B_1,\\ldots,B_n$ be a partition of $\\{1,\\ldots,d\\}$ into nonempty blocks, and let $U_i:\\mathbb R^{|B_i|}\\to\\mathbb R^d$ insert a block vector in coordinates $B_i$ and put zero in the other coordinates. Let $f:\\mathbb R^d\\to\\mathbb R$ be convex and continuously differentiable. For each $i$, an **$L_i$ block-gradient Lipschitz bound** is a number $L_i>0$ such that\n$$\\|\\nabla_i f(x+U_i h)-\\nabla_i f(x)\\|_2\\le L_i\\|h\\|_2\\qquad(x\\in\\mathbb R^d,\\ h\\in\\mathbb R^{|B_i|}),$$\nwhere $\\nabla_i f$ is the gradient restricted to block $B_i$. Choose majorizers $M_i\\ge L_i$, probabilities $p_i>0$ with $\\sum_i p_i=1$, an initial point $x^0$, and a finite update budget $K\\in\\mathbb N$.\n\nAt each update $k<K$, draw $I_k\\in\\{1,\\ldots,n\\}$ with probabilities $(p_i)$, independently of earlier draws, and set\n$$x_{B_{I_k}}^{k+1}=x_{B_{I_k}}^k-\\frac{1}{M_{I_k}}\\nabla_{I_k} f(x^k),\\qquad x_{B_j}^{k+1}=x_{B_j}^k\\quad(j\\ne I_k).$$\nUniform sampling means $p_i=1/n$. The exact coordinate update is the minimizer of its quadratic model. If the caller supplies a stopping predicate, it is checked after each accepted update; on the first true result the procedure returns the current iterate with status `tolerance-met`. Otherwise it returns $x^K$ with status `budget-limit`. The latter status does not certify a specified finite objective gap. Every finite horizon uses only a finite product distribution on index histories."
+      ],
+      "current": [
+        "## Definition\n\nWhenever a subscript $i$ indexes a block, $x_i$ is shorthand for $x_{B_i}$.\n\nLet $d,n\\ge1$, let $B_1,\\ldots,B_n$ be a partition of $\\{1,\\ldots,d\\}$ into nonempty blocks, and let $U_i:\\mathbb R^{|B_i|}\\to\\mathbb R^d$ insert a block vector in coordinates $B_i$ and put zero in the other coordinates. Coordinate label $j\\in\\{1,\\ldots,d\\}$ here denotes standard coordinate $j-1\\in\\{0,\\ldots,d-1\\}$. Let $f:\\mathbb R^d\\to\\mathbb R$ be convex and continuously differentiable in the sense of [[def-c-one-map-and-local-inverse]]. Its gradient $\\nabla f$ is the one defined by [[def-jacobian-matrix-and-gradient]]; total differentiability supplies its partial derivatives by [[thm-total-derivative-computes-directional-and-partial-derivatives]]. Define $\\nabla_i f(x)$ to be the entries of $\\nabla f(x)$ with labels in $B_i$, in increasing order. For each $i$, an **$L_i$ block-gradient Lipschitz bound** is a number $L_i>0$ such that\n$$\\|\\nabla_i f(x+U_i h)-\\nabla_i f(x)\\|_2\\le L_i\\|h\\|_2\\qquad(x\\in\\mathbb R^d,\\ h\\in\\mathbb R^{|B_i|}),$$\nChoose majorizers $M_i\\ge L_i$, probabilities $p_i>0$ with $\\sum_i p_i=1$, an initial point $x^0$, and a finite update budget $K\\in\\mathbb N$.\n\nAt each update $k<K$, draw $I_k\\in\\{1,\\ldots,n\\}$ with probabilities $(p_i)$, independently of earlier draws, and set\n$$x_{B_{I_k}}^{k+1}=x_{B_{I_k}}^k-\\frac{1}{M_{I_k}}\\nabla_{I_k} f(x^k),\\qquad x_{B_j}^{k+1}=x_{B_j}^k\\quad(j\\ne I_k).$$\nUniform sampling means $p_i=1/n$. The exact coordinate update is the minimizer of its quadratic model. If the caller supplies a stopping predicate, it is checked after each accepted update; on the first true result the procedure returns the current iterate with status `tolerance-met`. Otherwise it returns $x^K$ with status `budget-limit`. The latter status does not certify a specified finite objective gap. Every finite horizon uses only a finite product distribution on index histories."
+      ]
+    },
+    {
+      "id": "thm-randomized-coordinate-gradient-descent-rates",
+      "before": [
+        "## Statement\n\nLet $f:\\mathbb R^d\\to\\mathbb R$ be convex and continuously differentiable, with a partition into $n\\ge1$ nonempty blocks and block-gradient Lipschitz constants $L_i>0$ as in [[lem-coordinate-block-smoothness-descent-model]]. Let $M_i\\ge L_i$, choose probabilities $p_i>0$ with $\\sum_i p_i=1$, and set $\\rho=\\min_i p_i/M_i$. Assume $f^*=\\min_x f(x)$ is attained at $x^*$ and the initial sublevel set has finite radius\n$$R=\\sup\\{\\|x-x^*\\|_2:f(x)\\le f(x^0)\\}<+\\infty.$$\nFor the exact updates of [[alg-randomized-coordinate-gradient-descent]], for every integer $k\\ge1$,\n$$\\mathbb E[f(x^k)-f^*]\\le\\frac{2R^2}{\\rho k}.$$\nIf, in addition, $f$ is globally $\\mu$-strongly convex in the sense that\n$$f(y)\\ge f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac\\mu2\\|y-x\\|_2^2\\qquad(x,y\\in\\mathbb R^d)$$\nfor some $\\mu>0$, then\n$$\\mathbb E[f(x^k)-f^*]\\le(1-\\mu\\rho)^k(f(x^0)-f^*).$$\nThe strong-convexity factor is in $[0,1]$. Uniform sampling with $M_i=L_{\\max}:=\\max_i L_i$ gives the factor $1-\\mu/(nL_{\\max})$ and the bound $2nL_{\\max}R^2/k$. For nonuniform sampling, choosing $M_i=L_i$ and $p_i=L_i/\\sum_jL_j$ maximizes $\\min_i p_i/M_i$, giving $\\rho=1/\\sum_iL_i$; its constants are not the uniform constants."
+      ],
+      "current": [
+        "## Statement\n\nLet $f:\\mathbb R^d\\to\\mathbb R$ be convex and continuously differentiable, with a partition into $n\\ge1$ nonempty blocks and block-gradient Lipschitz constants $L_i>0$ as in [[lem-coordinate-block-smoothness-descent-model]]. Let $M_i\\ge L_i$, choose probabilities $p_i>0$ with $\\sum_i p_i=1$, and set $\\rho=\\min_i p_i/M_i$. Assume $f^*=\\min_x f(x)$ is attained at $x^*$ and the initial sublevel set has finite radius\n$$R=\\sup\\{\\|x-x^*\\|_2:f(x)\\le f(x^0)\\}<+\\infty.$$\nRun [[alg-randomized-coordinate-gradient-descent]] from the initial point $x^0$ with exact updates, no stopping predicate, and finite budget $K\\in\\mathbb N$. For every integer $k$ with $1\\le k\\le K$,\n$$\\mathbb E[f(x^k)-f^*]\\le\\frac{2R^2}{\\rho k}.$$\nIf, in addition, $f$ is globally $\\mu$-strongly convex in the sense that\n$$f(y)\\ge f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac\\mu2\\|y-x\\|_2^2\\qquad(x,y\\in\\mathbb R^d)$$\nfor some $\\mu>0$, then\n$$\\mathbb E[f(x^k)-f^*]\\le(1-\\mu\\rho)^k(f(x^0)-f^*).$$\nThe strong-convexity factor is in $[0,1]$. Uniform sampling with $M_i=L_{\\max}:=\\max_i L_i$ gives the factor $1-\\mu/(nL_{\\max})$ and the bound $2nL_{\\max}R^2/k$. For nonuniform sampling, choosing $M_i=L_i$ and $p_i=L_i/\\sum_jL_j$ maximizes $\\min_i p_i/M_i$, giving $\\rho=1/\\sum_iL_i$; its constants are not the uniform constants."
+      ]
+    },
+    {
+      "id": "alg-randomized-coordinate-proximal-descent",
+      "before": [
+        "## Definition\n\nLet $F(x)=f(x)+\\sum_{i=1}^n g_i(x_{B_i})$ on $\\mathbb R^d$, where $B_1,\\ldots,B_n$ is a disjoint nonempty block partition, $f:\\mathbb R^d\\to\\mathbb R$ is convex and continuously differentiable, and each $g_i:\\mathbb R^{|B_i|}\\to(-\\infty,+\\infty]$ is proper, closed and convex. Let $L_i>0$ satisfy the block-gradient Lipschitz bound of [[lem-coordinate-block-smoothness-descent-model]], choose majorizers $M_i\\ge L_i$, probabilities $p_i>0$ with $\\sum_i p_i=1$, a feasible initial point $x^0$, an update budget $K$, and nonnegative inner tolerances $\\epsilon_0,\\ldots,\\epsilon_{K-1}$.\n\nAt update $k$, draw $I_k$ with probabilities $(p_i)$ independently of previous draws. For the selected block $i=I_k$, form\n$$q_i^k(u)=\\langle\\nabla_i f(x^k),u-x^k_{B_i}\\rangle+\\frac{M_i}{2}\\|u-x^k_{B_i}\\|_2^2+g_i(u).$$\nIn exact mode, set $x^{k+1}_{B_i}$ to the global minimizer of $q_i^k$; leave every other block unchanged. In certified-inexact mode, an inner oracle returns $(u_k,\\delta_k)$ with a certificate\n$$0\\le q_i^k(u_k)-\\inf_u q_i^k(u)\\le\\delta_k\\le\\epsilon_k;$$\naccept $u_k$ only when that certificate is available and valid. Otherwise return the last accepted point with status `inner-solve-failure`. The output is the current point, its objective value, the last certified inner gap when available, and status `tolerance-met`, `budget-limit`, or `inner-solve-failure`.\n\nIf a proximal-gradient stopping tolerance $\\eta\\ge0$ is requested, after each accepted update compute the block mapping\n$$G_M(x)=\\big(M_i[x_{B_i}-\\operatorname{prox}_{g_i/M_i}(x_{B_i}-M_i^{-1}\\nabla_i f(x))]\\big)_{i=1}^n.$$\nHere $\\operatorname{prox}_{g_i/M_i}$ is the singleton proximal map of [[def-proximal-mapping]]. Stop with `tolerance-met` when $\\|G_M(x)\\|_2\\le\\eta$; otherwise stop after at most $K$ accepted updates with `budget-limit`. A finite budget or tolerance status is not an uncomputed objective-gap guarantee. Uniform sampling is $p_i=1/n$; nonuniform choices require the separate probability/step relation proved for the smooth gradient branch on this page."
+      ],
+      "current": [
+        "## Definition\n\nWhenever a subscript $i$ indexes a block, $x_i$ is shorthand for $x_{B_i}$.\n\nLet $F(x)=f(x)+\\sum_{i=1}^n g_i(x_{B_i})$ on $\\mathbb R^d$, where $B_1,\\ldots,B_n$ is a disjoint nonempty partition of coordinate labels $\\{1,\\ldots,d\\}$, with label $j$ denoting standard coordinate $j-1$. Let $f:\\mathbb R^d\\to\\mathbb R$ be convex and continuously differentiable in the sense of [[def-c-one-map-and-local-inverse]], and let each $g_i:\\mathbb R^{|B_i|}\\to(-\\infty,+\\infty]$ be proper, closed and convex. Define $\\nabla_i f(x)$ from [[def-jacobian-matrix-and-gradient]] as the entries of $\\nabla f(x)$ on the labels in $B_i$, in increasing order; their existence follows from total differentiability and [[thm-total-derivative-computes-directional-and-partial-derivatives]]. Let $L_i>0$ satisfy the block-gradient Lipschitz bound of [[lem-coordinate-block-smoothness-descent-model]], choose majorizers $M_i\\ge L_i$, probabilities $p_i>0$ with $\\sum_i p_i=1$, a feasible initial point $x^0$, an update budget $K\\in\\mathbb N$, and nonnegative inner tolerances $\\epsilon_0,\\ldots,\\epsilon_{K-1}$.\n\nAt update $k$, draw $I_k$ with probabilities $(p_i)$ independently of previous draws. For the selected block $i=I_k$, form\n$$q_i^k(u)=\\langle\\nabla_i f(x^k),u-x^k_{B_i}\\rangle+\\frac{M_i}{2}\\|u-x^k_{B_i}\\|_2^2+g_i(u).$$\nIn exact mode, set $x^{k+1}_{B_i}$ to the global minimizer of $q_i^k$; leave every other block unchanged. In certified-inexact mode, an inner oracle returns $(u_k,\\delta_k)$ with a certificate\n$$0\\le q_i^k(u_k)-\\inf_u q_i^k(u)\\le\\delta_k\\le\\epsilon_k;$$\naccept $u_k$ only when that certificate is available and valid. Otherwise return the last accepted point with status `inner-solve-failure`. The output is the current point, its objective value, the last certified inner gap when available, and status `tolerance-met`, `budget-limit`, or `inner-solve-failure`.\n\nIf a proximal-gradient stopping tolerance $\\eta\\ge0$ is requested, after each accepted update compute the block mapping\n$$G_M(x)=\\big(M_i[x_{B_i}-\\operatorname{prox}_{g_i/M_i}(x_{B_i}-M_i^{-1}\\nabla_i f(x))]\\big)_{i=1}^n.$$\nHere $\\operatorname{prox}_{g_i/M_i}$ abbreviates $\\operatorname{prox}_{(1/M_i)g_i}$, a singleton by [[def-proximal-mapping]] and [[thm-proximal-operator-existence-resolvent-firm-nonexpansive]]; $M_i>0$ by the input conditions. Stop with `tolerance-met` when $\\|G_M(x)\\|_2\\le\\eta$; otherwise stop after at most $K$ accepted updates with `budget-limit`. A finite budget or tolerance status is not an uncomputed objective-gap guarantee. Uniform sampling is $p_i=1/n$; nonuniform choices require the separate probability/step relation proved for the smooth gradient branch on this page."
+      ]
+    },
+    {
+      "id": "lem-coordinatewise-minimum-implies-composite-stationarity",
+      "before": [
+        "## Statement\n\nLet $f:\\mathbb R^d\\to\\mathbb R$ be differentiable and convex, and let $g(x)=\\sum_{i=1}^n g_i(x_{B_i})$ be proper, closed and convex, with each $g_i$ proper, closed and convex on its block. Set $F=f+g$. If $F(x)<+\\infty$ and $x$ globally minimizes every block slice $u\\mapsto F(x_{-i},u)$, then\n$$-\\nabla_i f(x)\\in\\partial g_i(x_{B_i})\\quad(1\\le i\\le n),\\qquad -\\nabla f(x)\\in\\partial g(x),$$\nand $x$ is a global minimizer of $F$. For an extended-real convex $h$, $p\\in\\partial h(a)$ means $h(z)\\ge h(a)+\\langle p,z-a\\rangle$ for every $z$."
+      ],
+      "current": [
+        "## Statement\n\nLet $f:\\mathbb R^d\\to\\mathbb R$ be differentiable and convex, and let $B_1,\\ldots,B_n$ be a partition of the coordinate labels $\\{1,\\ldots,d\\}$ into nonempty blocks, with $n\\ge1$. Let $g(x)=\\sum_{i=1}^n g_i(x_{B_i})$ be proper, closed and convex, with each $g_i$ proper, closed and convex on its block. Set $F=f+g$. If $F(x)<+\\infty$ and $x$ globally minimizes every block slice $u\\mapsto F(x_{-i},u)$, where $(x_{-i},u)$ means replace block $B_i$ of $x$ by $u$ and keep all other blocks fixed, then\n$$-\\nabla_i f(x)\\in\\partial g_i(x_{B_i})\\quad(1\\le i\\le n),\\qquad -\\nabla f(x)\\in\\partial g(x),$$\nand $x$ is a global minimizer of $F$. For an extended-real convex $h$, $p\\in\\partial h(a)$ means $h(z)\\ge h(a)+\\langle p,z-a\\rangle$ for every $z$."
+      ]
+    },
+    {
+      "id": "thm-randomized-coordinate-proximal-strongly-convex-contraction",
+      "before": [
+        "## Statement\n\nLet $F(x)=f(x)+g(x)$ on a finite-dimensional block product $\\mathbb R^d$, where $f$ is convex, continuously differentiable, and globally $\\mu$-strongly convex for some $\\mu>0$, and $g(x)=\\sum_{i=1}^n g_i(x_{B_i})$ with each $g_i$ proper, closed and convex. Let $B_1,\\ldots,B_n$ partition the coordinates into nonempty blocks. Suppose each block gradient is $L_i$-Lipschitz and set $L_{\\max}=\\max_iL_i$. Start from a finite point $x^0$ with $F(x^0)<+\\infty$. Run [[alg-randomized-coordinate-proximal-descent]] with uniform independent block sampling and common majorizer $M_i=L_{\\max}$. For any finite horizon $k$, assume each of its first $k$ subproblem calls returns an accepted certificate with model error at most $\\epsilon_j\\ge0$ at update $j$; exact updates have $\\epsilon_j=0$. Then $F$ has a unique minimizer $x^*$, $\\mu\\le L_{\\max}$, and for $q=1-\\mu/(nL_{\\max})$,\n$$\\mathbb E[F(x^k)-F(x^*)]\\le q^k(F(x^0)-F(x^*))+\\sum_{j=0}^{k-1}q^{k-1-j}\\epsilon_j.$$\nThe expectation is the finite weighted sum over the $k$-step block histories, with the power convention $q^0=1$. In particular, exact updates contract the expected gap by the factor $q$. Curvature of $F$ supplied only by the nonsmooth penalties is not covered."
+      ],
+      "current": [
+        "## Statement\n\nFor a finite horizon $k$, choose an algorithm budget $K\\ge k$ and do not request a proximal-gradient stopping tolerance, so all $k$ updates are executed.\n\nLet $F(x)=f(x)+g(x)$ on a finite-dimensional block product $\\mathbb R^d$, where $f$ is convex, continuously differentiable, and globally $\\mu$-strongly convex for some $\\mu>0$, and $g(x)=\\sum_{i=1}^n g_i(x_{B_i})$ with each $g_i$ proper, closed and convex. Let $B_1,\\ldots,B_n$ partition the coordinates into nonempty blocks. Suppose each block gradient is $L_i$-Lipschitz and set $L_{\\max}=\\max_iL_i$. Start from a finite point $x^0$ with $F(x^0)<+\\infty$. Run [[alg-randomized-coordinate-proximal-descent]] with uniform independent block sampling and common majorizer $M_i=L_{\\max}$. For any finite horizon $k$, assume each of its first $k$ subproblem calls returns an accepted certificate with model error at most $\\epsilon_j\\ge0$ at update $j$; exact updates have $\\epsilon_j=0$. Then $F$ has a unique minimizer $x^*$, $\\mu\\le L_{\\max}$, and for $q=1-\\mu/(nL_{\\max})$,\n$$\\mathbb E[F(x^k)-F(x^*)]\\le q^k(F(x^0)-F(x^*))+\\sum_{j=0}^{k-1}q^{k-1-j}\\epsilon_j.$$\nThe expectation is the finite weighted sum over the $k$-step block histories, with the power convention $q^0=1$. In particular, exact updates contract the expected gap by the factor $q$. Curvature of $F$ supplied only by the nonsmooth penalties is not covered."
+      ]
+    },
+    {
+      "id": "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction",
+      "before": [
+        "## Statement\n\nLet $B_1,\\ldots,B_n$ be a partition of $\\mathbb R^d$ into nonempty coordinate blocks, with $n,d\\ge1$. Let $f:\\mathbb R^d\\to\\mathbb R$ be convex and continuously differentiable, with positive block-gradient Lipschitz constants $L_i$, and let $g(x)=\\sum_{i=1}^n g_i(x_{B_i})$, where each $g_i$ is proper, closed and convex in the closed-epigraph convention. Set $F=f+g$ and $L_{\\max}=\\max_iL_i>0$. Assume $F$ itself is $\\mu$-strongly convex for some $\\mu>0$: for finite-domain $x,y$ and $s\\in[0,1]$,\n$$F((1-s)x+sy)\\le(1-s)F(x)+sF(y)-\\frac\\mu2s(1-s)\\|x-y\\|_2^2.$$\nNo strong convexity of $f$ alone is required, and no inequality $\\mu\\le L_{\\max}$ is assumed.\n\nRun [[alg-randomized-coordinate-proximal-descent]] from $F(x^0)<+\\infty$, with common majorizer $M_i=L_{\\max}$ and uniform independent block draws. Fix a finite horizon $k$ and deterministic bounds $\\epsilon_0,\\ldots,\\epsilon_{k-1}\\ge0$. Assume the first $k$ updates are executed with accepted inner-model gap certificates at most $\\epsilon_j$ at every history in the finite block-history distribution; a stopping or failed call supplies no unexecuted later iterate. Then $F$ has a unique minimizer $x^*$ and, with\n$$q_c=1-\\frac{\\mu}{n(L_{\\max}+\\mu)}\\in(0,1),$$\n$$\\mathbb E[F(x^k)-F(x^*)]\\le q_c^k(F(x^0)-F(x^*))+\\sum_{j=0}^{k-1}q_c^{k-1-j}\\epsilon_j.$$\nThe expectation is the finite weighted sum over the uniformly sampled block histories, not a distribution conditioned on successful calls. At $k=0$ the sum is empty and the bound is equality. Exact updates have $\\epsilon_j=0$. This includes curvature contributed by the separable penalties; it does not assert the sharper factor $1-\\mu/(nL_{\\max})$ without additional smooth-part curvature."
+      ],
+      "current": [
+        "## Statement\n\nFor a finite horizon $k$, use an algorithm budget $K\\ge k$ and do not request a proximal-gradient stopping tolerance before that horizon.\n\nLet $B_1,\\ldots,B_n$ be a partition of $\\mathbb R^d$ into nonempty coordinate blocks, with $n,d\\ge1$. Let $f:\\mathbb R^d\\to\\mathbb R$ be convex and continuously differentiable, with positive block-gradient Lipschitz constants $L_i$, and let $g(x)=\\sum_{i=1}^n g_i(x_{B_i})$, where each $g_i$ is proper, closed and convex in the closed-epigraph convention. Set $F=f+g$ and $L_{\\max}=\\max_iL_i>0$. Assume $F$ itself is $\\mu$-strongly convex for some $\\mu>0$: for finite-domain $x,y$ and $s\\in[0,1]$,\n$$F((1-s)x+sy)\\le(1-s)F(x)+sF(y)-\\frac\\mu2s(1-s)\\|x-y\\|_2^2.$$\nNo strong convexity of $f$ alone is required, and no inequality $\\mu\\le L_{\\max}$ is assumed.\n\nRun [[alg-randomized-coordinate-proximal-descent]] from $F(x^0)<+\\infty$, with common majorizer $M_i=L_{\\max}$ and uniform independent block draws. Fix a finite horizon $k$ and deterministic bounds $\\epsilon_0,\\ldots,\\epsilon_{k-1}\\ge0$. Assume the first $k$ updates are executed with accepted inner-model gap certificates at most $\\epsilon_j$ at every history in the finite block-history distribution; a stopping or failed call supplies no unexecuted later iterate. Then $F$ has a unique minimizer $x^*$ and, with\n$$q_c=1-\\frac{\\mu}{n(L_{\\max}+\\mu)}\\in(0,1),$$\n$$\\mathbb E[F(x^k)-F(x^*)]\\le q_c^k(F(x^0)-F(x^*))+\\sum_{j=0}^{k-1}q_c^{k-1-j}\\epsilon_j.$$\nThe expectation is the finite weighted sum over the uniformly sampled block histories, not a distribution conditioned on successful calls. At $k=0$ the sum is empty and the bound is equality. Exact updates have $\\epsilon_j=0$. This includes curvature contributed by the separable penalties; it does not assert the sharper factor $1-\\mu/(nL_{\\max})$ without additional smooth-part curvature."
+      ]
+    }
+  ],
+  "unchanged_interfaces": [
+    "lem-coordinate-block-smoothness-descent-model",
+    "lem-na-coordinate-soft-threshold-minimizer",
+    "alg-cyclic-exact-block-minimization",
+    "lem-cyclic-block-minimizer-value-continuity",
+    "cex-cyclic-block-descent-may-cycle-outside-hypotheses",
+    "lem-coordinate-lasso-soft-threshold-update",
+    "lem-coordinate-separable-penalty-is-proper-closed-convex",
+    "lem-randomized-coordinate-prox-subproblem-well-defined",
+    "cex-composite-coordinate-proximal-rate-needs-penalty-error",
+    "cex-composite-strong-convexity-alone-does-not-give-coordinate-factor",
+    "thm-cyclic-block-descent-stationarity-and-convergence",
+    "ex-nonunique-lasso-coefficients-unique-fitted-value",
+    "ex-randomized-versus-cyclic-rank-one-quadratic",
+    "ex-two-block-simulation-calibration",
+    "ex-correlated-design-lasso-coordinate-cycle",
+    "ex-zero-feature-column-lasso-coordinate"
+  ],
+  "actual_old_current_consumer_union": [
+    {
+      "id": "cex-composite-coordinate-proximal-rate-needs-penalty-error",
+      "path": [
+        "alg-randomized-coordinate-proximal-descent",
+        "cex-composite-coordinate-proximal-rate-needs-penalty-error"
+      ],
+      "paths": [
+        [
+          "alg-randomized-coordinate-proximal-descent",
+          "cex-composite-coordinate-proximal-rate-needs-penalty-error"
+        ]
+      ]
+    },
+    {
+      "id": "cex-composite-strong-convexity-alone-does-not-give-coordinate-factor",
+      "path": [
+        "alg-randomized-coordinate-proximal-descent",
+        "cex-composite-strong-convexity-alone-does-not-give-coordinate-factor"
+      ],
+      "paths": [
+        [
+          "alg-randomized-coordinate-proximal-descent",
+          "cex-composite-strong-convexity-alone-does-not-give-coordinate-factor"
+        ]
+      ]
+    },
+    {
+      "id": "cex-cyclic-block-descent-may-cycle-outside-hypotheses",
+      "path": [
+        "lem-coordinatewise-minimum-implies-composite-stationarity",
+        "thm-cyclic-block-descent-stationarity-and-convergence",
+        "cex-cyclic-block-descent-may-cycle-outside-hypotheses"
+      ],
+      "paths": [
+        [
+          "lem-coordinatewise-minimum-implies-composite-stationarity",
+          "thm-cyclic-block-descent-stationarity-and-convergence",
+          "cex-cyclic-block-descent-may-cycle-outside-hypotheses"
+        ]
+      ]
+    },
+    {
+      "id": "ex-randomized-versus-cyclic-rank-one-quadratic",
+      "path": [
+        "alg-randomized-coordinate-gradient-descent",
+        "ex-randomized-versus-cyclic-rank-one-quadratic"
+      ],
+      "paths": [
+        [
+          "alg-randomized-coordinate-gradient-descent",
+          "ex-randomized-versus-cyclic-rank-one-quadratic"
+        ]
+      ]
+    },
+    {
+      "id": "lem-randomized-coordinate-prox-subproblem-well-defined",
+      "path": [
+        "alg-randomized-coordinate-proximal-descent",
+        "lem-randomized-coordinate-prox-subproblem-well-defined"
+      ],
+      "paths": [
+        [
+          "alg-randomized-coordinate-proximal-descent",
+          "lem-randomized-coordinate-prox-subproblem-well-defined"
+        ]
+      ]
+    },
+    {
+      "id": "thm-cyclic-block-descent-stationarity-and-convergence",
+      "path": [
+        "lem-coordinatewise-minimum-implies-composite-stationarity",
+        "thm-cyclic-block-descent-stationarity-and-convergence"
+      ],
+      "paths": [
+        [
+          "lem-coordinatewise-minimum-implies-composite-stationarity",
+          "thm-cyclic-block-descent-stationarity-and-convergence"
+        ]
+      ]
+    },
+    {
+      "id": "thm-randomized-coordinate-gradient-descent-rates",
+      "path": [
+        "alg-randomized-coordinate-gradient-descent",
+        "thm-randomized-coordinate-gradient-descent-rates"
+      ],
+      "paths": [
+        [
+          "alg-randomized-coordinate-gradient-descent",
+          "thm-randomized-coordinate-gradient-descent-rates"
+        ]
+      ]
+    },
+    {
+      "id": "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction",
+      "path": [
+        "alg-randomized-coordinate-proximal-descent",
+        "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction"
+      ],
+      "paths": [
+        [
+          "alg-randomized-coordinate-proximal-descent",
+          "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction"
+        ]
+      ]
+    },
+    {
+      "id": "thm-randomized-coordinate-proximal-strongly-convex-contraction",
+      "path": [
+        "alg-randomized-coordinate-proximal-descent",
+        "thm-randomized-coordinate-proximal-strongly-convex-contraction"
+      ],
+      "paths": [
+        [
+          "alg-randomized-coordinate-proximal-descent",
+          "thm-randomized-coordinate-proximal-strongly-convex-contraction"
+        ]
+      ]
+    }
+  ],
+  "missing_report_dispositions": [
+    {
+      "id": "cex-cyclic-block-descent-may-cycle-outside-hypotheses",
+      "path": [
+        "lem-coordinatewise-minimum-implies-composite-stationarity",
+        "thm-cyclic-block-descent-stationarity-and-convergence",
+        "cex-cyclic-block-descent-may-cycle-outside-hypotheses"
+      ],
+      "paths": [
+        [
+          "lem-coordinatewise-minimum-implies-composite-stationarity",
+          "thm-cyclic-block-descent-stationarity-and-convergence",
+          "cex-cyclic-block-descent-may-cycle-outside-hypotheses"
+        ]
+      ]
+    }
+  ],
+  "old_only_additions": [],
+  "native_session_id": "01a143b9-d1ca-7ab2-8761-0aad1ce6b9ad",
+  "native_session_home": "research/numerical-optimization-dynamics-2026-10-16-scope-review/batch-41/scope-repairer-session",
+  "focused_source_observation": "Read complete current coordinatewise-minimum lemma, cyclic convergence theorem and omitted counterexample. The counterexample reaches the theorem only in Remarks, correctly saying its nonconvex nonseparable nonunique-minimizer witness is outside the theorem. Added explicit block partition in supplier does not change that contextual exclusion; no source proposal identified. Same native repairer must supply actual explicit disposition.",
+  "remaining_native_findings": [],
+  "historical_limit": "prepared.before_interfaces retains native pre-edit interface text and consumer paths. before/ archives current complete carriers only, not historical native pre-edit complete bodies.",
+  "source_proposals": []
+}

@@ -1,0 +1,63 @@
+# Batch 27 authoring notes — Proximal gradient and accelerated composite optimization
+
+## Scope and controlling design
+
+The binding mathematical scope is the owner direction and its incorporated OPT8 contract at `research/numerical-analysis-four-category-scaffolds-2026-10-16/optimization-audit.md#contract-opt8`. The contract requires proximal-map existence and uniqueness, the subgradient resolvent and firm nonexpansiveness, proximal-gradient $O(1/k)$, FISTA $O(1/k^2)$, the strong-convexity and restarted-FISTA rate, an inexact-error recurrence, soft thresholding, and the listed B examples. OPT15 owns block coordinate descent; no coordinate-descent claim is included here.
+
+The complete design at `research/plan-numerical-optimization-track.md` L416–460 agrees on those claims and examples. Its L428 preserved prerequisite list says OPT5 plus the existing convex and constrained-variational pages. The current `plan-spec.json` row and generated dispatch additionally require `inequality-kkt-duality-and-optimality-certificates`. That is the controlling current page-level placement and is preserved in both page frontmatter and the scaffold manifest. The added page is used for the projected-gradient normal-cone/KKT result; its exact item-level interfaces are recorded below. This is a prerequisite-list enrichment, not a change to OPT8's mathematical scope.
+
+The active scheduling input is `ca41fcdd6d4a40fbd61e4921a8bfdd410bd704a05c937a5f709843ed28d2e97d`: batch 27 is dependency level 1 with prerequisite batch 6. The A page has 25 items and the B page has 4 examples, below the 100-item page cap. Exact item statements, direct `deps`, `justified_by`, provenance and dependency levels are mirrored in `numerical-optimization-dynamics-2026-10-16-batch-27.pages.json`.
+
+## Inventory and item dependency levels
+
+Levels were computed from in-run item `deps`; external published items and `justified_by` edges do not raise a level. `def-proximal-mapping` records the later singleton theorem in `justified_by`, so the definition-to-well-definedness relation does not create a scheduling cycle.
+
+| Level | Items and direct dependencies |
+|---:|---|
+| 0 | `def-indicator-function-of-closed-convex-set` ← `def-extended-reals`, `def-convex-subset-of-euclidean-space`; `def-proper-closed-convex-function-on-rn` ← `def-convex-and-strictly-convex-functionals-on-a-banach-space`, `def-proper-coercive-and-weakly-lower-semicontinuous-functional`, `def-extended-reals`, `def-euclidean-inner-product`; `lem-l-smoothness-descent-inequality` ← Lipschitz-gradient, Euclidean-inner-product, chain-rule, Cauchy–Schwarz, mean-value, reciprocal-Archimedean, finite-sum, and induction suppliers. |
+| 1 | `def-extended-real-epsilon-subdifferential` ← proper-closed-convex, subgradient, Euclidean-inner-product, extended-reals; `def-proximal-mapping` ← proper-closed-convex, Euclidean-inner-product (`justified_by`: the level-2 proximal theorem); `def-strong-convex-composite-objective` ← proper-closed-convex, Euclidean-inner-product, extended-reals; `lem-proper-closed-convex-function-affine-minorant` ← proper-closed-convex, Euclidean-inner-product, nearest-point, projection variational inequality, choice-free Bolzano–Weierstrass; `lem-smooth-composite-sum-preserves-proper-closed-convexity` ← proper-closed-convex, convex-functional, metric-space/topology/ball definitions. |
+| 2 | `lem-prox-indicator-is-euclidean-projection` ← proper-closed-convex, convex-set, prox definition, indicator definition, nearest-point; `thm-proximal-operator-existence-resolvent-firm-nonexpansive` ← proper-closed-convex, affine minorant, epsilon-subdifferential, prox definition, inner product, smooth-sum lemma, Heine–Borel, semicontinuous extreme value, level-set characterization, Cauchy–Schwarz. |
+| 3 | `def-proximal-gradient-mapping` ← proper-closed-convex, prox definition/theorem, indicator definition/projection lemma, Euclidean inner product; `lem-prox-l1-is-soft-thresholding` ← proper-closed-convex, prox definition/theorem, $p$-norms, soft-threshold definition; `lem-proximal-three-point-inequality` ← proper-closed-convex, prox definition/theorem, epsilon-subdifferential, Euclidean inner product. |
+| 4 | `alg-proximal-gradient-and-fista` ← proximal-gradient mapping, proximal theorem, smooth-sum lemma; `lem-proximal-gradient-one-step-estimate` ← proximal-gradient mapping, three-point lemma, descent lemma, smooth-sum lemma, convex-gradient inequality; `thm-projected-gradient-fixed-point-kkt-certificate` ← mapping, indicator-projection lemma, projection variational inequality, KKT normal-cone definition, batch-6 convex KKT sufficiency theorem; `ex-two-pixel-total-variation-proximal-map` ← prox definition/theorem, l1-prox lemma, proper-closed-convex definition, convex-functional definition. |
+| 5 | `alg-certified-inexact-proximal-gradient-and-fista` ← exact algorithm, epsilon-subdifferential, prox definition/theorem; `lem-fista-energy-estimate-sequence` ← exact algorithm, proximal-gradient estimate; `thm-proximal-gradient-o1k-objective-bound` ← exact algorithm, proximal-gradient estimate, smooth-sum lemma; `ex-fista-objective-increases-on-a-quadratic` ← exact algorithm; `ex-nonorthogonal-lasso-proximal-gradient-step` ← Lasso definition, exact algorithm, l1-prox lemma; `ex-projected-gradient-on-nonnegative-orthant` ← exact algorithm, projected-gradient/KKT theorem, indicator-projection lemma. |
+| 6 | `lem-inexact-proximal-gradient-one-step-estimate` ← certified-inexact algorithm, epsilon-subdifferential, descent lemma, smooth-sum lemma, convex-gradient inequality; `thm-fista-o1k2-objective-bound` ← exact algorithm, FISTA energy lemma. |
+| 7 | `lem-inexact-fista-energy-estimate` ← certified-inexact algorithm, inexact one-step lemma; `thm-inexact-proximal-gradient-summable-error-bound` ← certified-inexact algorithm, inexact one-step lemma; `thm-strong-convex-proximal-gradient-and-restarted-fista-rates` ← strong-convexity definition, exact algorithm, FISTA bound, one-step estimate, prox theorem, epsilon-subdifferential, convex-gradient inequality, Euclidean inner product, Cauchy–Schwarz. |
+| 8 | `thm-inexact-fista-weighted-error-bound` ← certified-inexact algorithm, inexact FISTA energy lemma. |
+
+The extra page-level requirements `constrained-variational-problems-and-variational-inequalities` and `convex-and-semicontinuous-functions-on-rn` are existing published pages. Their actual convex-analysis, finite-projection, choice-free compactness, gradient, and semicontinuity supplier bodies were inspected. The in-run OPT5 page and the exact `def-kkt-residual-and-normal-cone` and `thm-convex-kkt-sufficiency-and-normal-cone-certificate` bodies from batch 6 were also read in full. The latter theorem's actual hypotheses match the affine-polyhedron specialization used here. The interface check is authoring evidence, not independent supplier approval.
+
+## Mathematical and source-resolution record
+
+All missing local prerequisites were added to the A page before their consumers. The affine-minorant argument constructs a supporting normal from nearest points and a choice-free finite-dimensional subsequence; it does not use the separate boundary-support result whose library proof carries AC/CC assumptions. Proximal existence uses that affine minorant, closed sublevels, Heine–Borel, and the real-valued semicontinuous extreme-value theorem. No countable or full choice principle is used. The Hilbert-space projection route on the constrained-variational page, which assumes Countable Choice, is not imported into the finite-dimensional proof.
+
+The inexact update requires the explicit certificate
+$$L(y_k-x_k)-\nabla f(y_k)\in\partial_{\eta_k}g(x_k).$$
+Its verification locally proves a proximal-subproblem value error at most $\eta_k$; the rate arguments use the certificate itself and do not infer convergence rates from a bare value-gap tolerance. The proximal-gradient inexact result is a best-iterate $O(1/k)$ bound plus convergence under summable errors. FISTA uses the weighted error sum $\sum k^2\eta_k$. The exact strong-convexity bound has factor $1/(1+\mu/(4L))$; fixed restart period $\lceil\sqrt{8L/\mu}\rceil$ gives a factor at most one half per completed block.
+
+Three unique complete full-text treatments were read. The A-page coverage records all three; the B page records the two sources used by its examples. Exact locators, supported items, dispositions, retrieval history and fetch hashes are in `numerical-optimization-dynamics-2026-10-16-batch-27.coverage.json`:
+
+- Parikh–Boyd, *Proximal Algorithms*, complete 113-page monograph, including §§1.1, 2.3, 2.4.2, 4.2–4.3 and 6.5.2.
+- Beck–Teboulle, complete 20-page FISTA paper, including the full proofs of Lemma 2.3, Theorem 3.1, Lemma 4.1 and Theorem 4.4.
+- Schmidt–Le Roux–Bach, complete 31-page inexact proximal-gradient paper, including §3, Propositions 1–3, Appendix Lemma 2 and §§6.1–6.3.
+
+The FISTA paper's first CMU-hosted full text was opened and read; a later shell fetch reset. The original CMU URL was not retained in the active handoff, and the recorded search is a description by title/authors rather than a verbatim query string. A direct SIAM DOI PDF attempt (`https://epubs.siam.org/doi/pdf/10.1137/080716542`) returned HTTP 403. An alternative title/author search found the official Tau author copy, which was read in full and used as the coverage URL. The three unique full-text URLs all passed `source-fetch-check --stamp` on the first check attempt; the coverage has five fetch stamps because both pages record their own source support. No source was dropped or escalated, and no mathematical coverage was waived. Historical references in item frontmatter are bibliographic citations; only the three full texts above are claimed as inspected source treatments.
+
+Every harvested source result has an `included` or `inline` disposition in the coverage file. The B examples are verified locally: the two-pixel transform is exact; the nonorthogonal Lasso update uses exact fractions and a proved valid $L=3$; the orthant example supplies its normal-cone/KKT tuple; and the FISTA increase is proved with rational intervals around $t_2,t_3,t_4,t_5,x_4,x_5$.
+
+## Cross-batch and reconciliation inputs
+
+`numerical-optimization-dynamics-2026-10-16-batch-27.cross-batch-dependencies.json` records the in-run OPT5 page edge and the two exact KKT item edges used by `thm-projected-gradient-fixed-point-kkt-certificate`. They are marked `verified` only for current interface use. The other two required pages are published context, not in-run batch edges. There are no unresolved supplier IDs for this pair and no cycle.
+
+The output manifest retains the exact A/B page requirements and direct logical deps. No shared plan, published carrier, owner verdict, engine state, or other pair's carrier was modified. No `--owner` readiness override was used. The 29 Step-1 records mean authoring is ready for review; they do not confer independent mathematical approval.
+
+## Final scoped checks
+
+- `node tools/manifest-deps.mjs research/numerical-optimization-dynamics-2026-10-16-batch-27.pages.json`: 29 items, zero errors.
+- Scoped `dependencyLevels` over batches 6 and 27: 50 items, zero errors; all 29 owned labels match, maximum owned item level 8. The run-wide CLI currently remains open outside this pair: 148 empty scaffold inventories; no other dependency-level mismatch was reported in the final check.
+- Focused `depcheck --items-file` on the 29 IDs: zero errors/warnings; dependency closure 508 items and 311 pages. Focused `fwdcheck`: zero open forward references or errors/warnings. Focused `extcheck`: 29 items, zero unproved items, open problems, errors or warnings.
+- `coverage-checklist`: 2 pages, 33 harvested results, zero errors or warnings. `source-fetch-check` no-network check confirms 5/5 stamped sources; the stamp run fetched and verified 5/5 with no retry failures or documented drops.
+- Scoped `author-check` fingerprint `7910f857c62a9fddd8f2f2ea205f0c7e998e7519b93f0162c83884dd1d5c7c7e`: passed. It includes precheck (22 proof-bearing items, zero failures), rendercheck (31 files), content-policy (29 items, zero errors/warnings), and strict proof contracts (22/22, zero errors/warnings).
+- `proof-layout.mjs` on all 29 explicitly changed item carriers: 60 numbered steps, zero defects.
+- Step-1 readiness hash check: all 29 owned items closed/ready. Run-wide Step 1 remains open outside this batch (547 items total, 303 ready, 244 missing item decisions, and 146 empty page inventories).
+
+No test suite was run; only the requested scoped authoring, proof-format, dependency, source and readiness checks were used.

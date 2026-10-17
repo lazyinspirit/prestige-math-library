@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ex-distributed-heat-source-control-with-an-exact-box-optimum",
+    "source": "items/ex-distributed-heat-source-control-with-an-exact-box-optimum.md",
+    "exact_current_asserts": "Let $\\Omega=(0,1)$, $V=H^1_0(0,1)$, $U=H=L^2(0,1)$, and $a(u,v)=\\int_0^1(u'v'+uv)\\,dx$. Let $Bq$ be the $L^2$ load functional $v\\mapsto\\int_0^1qv\\,dx$, set $q_a=0$, $q_b=1$, and $\\alpha=1$. Put $q_*(x)=\\frac12\\sin(\\pi x)$ and $u_*(x)=q_*(x)/(\\pi^2+1)$, which solve the state equation. Set $p_*(x)=-q_*(x)$ and $u_d(x)=u_*(x)+\\frac12(\\pi^2+1)\\sin(\\pi x)$. Define $J(q)=\\frac12\\|u(q)-u_d\\|_{L^2}^2+\\frac12\\|q\\|_{L^2}^2$. Then $q_*$ is the unique optimal control, and its adjoint is $p_*$.",
+    "check": "numerical-elliptic-control-fixture",
+    "fixture": "heat-three-node-mode-and-box-projection",
+    "evidence": "Current exact text comparison only; fixture code not executed."
+  },
+  {
+    "id": "ex-coupled-fast-mode-destabilizes-frozen-slow-euler",
+    "source": "items/ex-coupled-fast-mode-destabilizes-frozen-slow-euler.md",
+    "exact_current_asserts": "It tends to zero as $t\\to\\infty$, so the continuous linear system is asymptotically stable, meaning every solution tends to the origin. Apply [[alg-frozen-slow-explicit-fast-euler]] with $H=3/5$, $m=2$, and $h=3/10$. The method gives $x^+=2/5$, $z_1=-11/10$, and $z_2=46/25$. At fixed frozen $x$, a fast-coordinate perturbation is multiplied per microstep by $1-8h=-7/5$, whose magnitude exceeds one; the exact homogeneous fast perturbation instead decays.",
+    "check": "numerical-multirate-fixture",
+    "fixture": "coupled-fast-two-microsteps",
+    "evidence": "Current exact text comparison only; fixture code not executed."
+  },
+  {
+    "id": "ex-frozen-slow-interpolation-limits-order",
+    "source": "items/ex-frozen-slow-interpolation-limits-order.md",
+    "exact_current_asserts": "Consider $x'=1$, $z'=x$, $(x_0,z_0)=(0,0)$ on $[0,T]$, with $T>0$ and $N\\ge1$ equal macro steps $H=T/N$. The exact solution is $x(t)=t$, $z(t)=t^2/2$. The frozen-slow method [[alg-frozen-slow-explicit-fast-euler]] has $x_n=nH$ and $z_N=T^2/2-TH/2$, so its terminal $z$ error is $TH/2$. For any integer $m\\ge1$, set $h=H/m$ and instead update each midpoint-sampled block by $z_{n,0}=z_n$ and $z_{n,j+1}=z_{n,j}+h(x_n+(j+\\tfrac12)h)$ for $0\\le j<m$. Then one macro update adds exactly $Hx_n+H^2/2$, and this alternative gives the exact solution at every macro node for this model. This is a model-specific diagnostic, not a claim about any unverified symmetric composition.",
+    "check": "numerical-multirate-fixture",
+    "fixture": "frozen-versus-midpoint-macro-nodes",
+    "evidence": "Current exact text comparison only; fixture code not executed."
+  },
+  {
+    "id": "ex-linear-electromechanical-multirate-block-cost",
+    "source": "items/ex-linear-electromechanical-multirate-block-cost.md",
+    "exact_current_asserts": "Thus the exact model dissipates this energy. Starting from $(q,v,i)=(0,1,0)$, apply [[alg-frozen-slow-explicit-fast-euler]] with $H=1/10$, $m=4$, and $h=1/40$. The macro method returns $(q^+,v^+,i_4)=(1/10,9/10,369/5000)$.",
+    "check": "numerical-multirate-fixture",
+    "fixture": "electromechanical-four-microsteps-and-cost",
+    "evidence": "Current exact text comparison only; fixture code not executed."
+  },
+  {
+    "id": "ex-perfectly-correlated-inputs-and-shapley-allocation",
+    "source": "items/ex-perfectly-correlated-inputs-and-shapley-allocation.md",
+    "exact_current_asserts": "2.1 For permutation $(1,2)$, the increments are $1-0=1$ for input 1 and $1-1=0$ for input 2. For permutation $(2,1)$, they are $1$ for input 2 and $0$ for input 1. There are exactly these two permutations, so [F3] returns $\\phi_1=\\phi_2=(1+0)/(2V)=1/2$. [F1, F3, step 1.1, algebra]",
+    "check": "numerical-sensitivity-fixture",
+    "fixture": "two-outcome-perfect-correlation-shapley",
+    "evidence": "Current exact text comparison only; fixture code not executed."
+  },
+  {
+    "id": "ex-ishigami-function-sobol-decomposition",
+    "source": "items/ex-ishigami-function-sobol-decomposition.md",
+    "exact_current_asserts": "3.1 The component variances are $V_1=(1+bm_4)^2/2$, $V_2=a^2/8$, and $V_{13}=\\frac{b^2}{2}(\\pi^8/9-\\pi^8/25)=8b^2\\pi^8/225$ by [F6]. They are mutually orthogonal by [F2]. Adding them yields $V=1/2+a^2/8+b\\pi^4/5+b^2\\pi^8/18$. This variance is positive: if $b\\ne0$ then $V_{13}>0$, and if $b=0$ then $V_1=1/2$; in either case $V_2\\ge0$. [F2, F6, step 1.1, step 2.1, algebra]",
+    "check": "numerical-sensitivity-fixture",
+    "fixture": "ishigami-six-variance-coefficient-cases",
+    "evidence": "Current exact text comparison only; fixture code not executed."
+  },
+  {
+    "id": "ex-polynomial-chaos-coefficients-and-sobol-indices",
+    "source": "items/ex-polynomial-chaos-coefficients-and-sobol-indices.md",
+    "exact_current_asserts": "1.1 Each coordinate has mean zero and second moment one, so its degree-one monomial Gram matrix is the identity. The construction [F2] therefore gives $1$ and $x_j$, whose products in [F3] are the four displayed functions. On the four equiprobable outcomes $(1,1),(1,-1),(-1,1),(-1,-1)$, their value vectors are $(1,1,1,1)$, $(1,1,-1,-1)$, $(1,-1,1,-1)$, and $(1,-1,-1,1)$. These vectors are pairwise orthogonal and each has squared length four, so under weights $1/4$ the functions are orthonormal. Four independent functions on a four-point support form a basis of its four-dimensional $L^2$ space. [F1, F2, F3, given, algebra]",
+    "check": "numerical-sensitivity-fixture",
+    "fixture": "four-sign-tensor-and-sobol",
+    "evidence": "Current exact text comparison only; fixture code not executed."
+  },
+  {
+    "id": "ex-zero-variance-sobol-indices-undefined",
+    "source": "items/ex-zero-variance-sobol-indices-undefined.md",
+    "exact_current_asserts": "2.1 The variance is $\\mathbb E[(c-c)^2]=0$, and all nonempty component variances vanish. Since the denominator condition in [F2] fails, neither $S_i$ nor $S_{T_i}$ is defined. [F2, step 1.1, algebra] ∎",
+    "check": "numerical-sensitivity-fixture",
+    "fixture": "constant-four-point-undefined-indices",
+    "evidence": "Current exact text comparison only; fixture code not executed."
+  },
+  {
+    "id": "ex-ratio-pick-freeze-index-estimator-is-biased",
+    "source": "items/ex-ratio-pick-freeze-index-estimator-is-biased.md",
+    "exact_current_asserts": "2.1 On the return event $K>0$, $\\bar D=K/4$ and $\\bar N=(N_1+N_2)/2$. Independence and $\\mathbb E[N_1+N_2]=1/2$ give $\\mathbb E[\\bar N/\\bar D\\mid K]=1/K$. Since $\\mathbb P(K=1\\mid K>0)=2/3$ and $\\mathbb P(K=2\\mid K>0)=1/3$, the conditional reported-ratio expectation is $2/3+(1/3)(1/2)=5/6$, different from the population index $1$ in step 1.1. Each $N_r$ and $D_r$ remains unbiased for $1/4$, but their ratio is biased when returned. [F1, F2, step 1.1, step 1.2, algebra] ∎",
+    "check": "numerical-sensitivity-fixture",
+    "fixture": "two-row-bernoulli-returned-ratio",
+    "evidence": "Current exact text comparison only; fixture code not executed."
+  }
+]

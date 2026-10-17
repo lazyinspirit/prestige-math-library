@@ -1,0 +1,172 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "31",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "ex-poisson-tau-leap-negative-population-pure-death",
+      "model": "gpt-6-luna",
+      "context_sha256": "98e78c1f732ccb94c6c6336f6510596769244239719c44fe74dc9b447be9a437",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 named the moments lemma instead of the Poisson definition. The mass formula is already available in declared dependency def-scalar-poisson-count-law, so this is a nonfatal citation defect, not a missing mathematical prerequisite. Corrected F3 and its exact contract quote; B=1 explicitly completes the single-channel leap. Directly checked P(K>=2)=1-exp(-ch)(1+ch)>0, its c^2h^2/2 expansion, and exact absorption at 0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-density-scaled-chemical-langevin-model-error",
+      "model": "gpt-6-luna",
+      "context_sha256": "32af0eada371a760a835ce524e42e658bafde19902470ffe2f8edad10ea06fe2",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original hypotheses did not fix either initial state, but Dynkin step 1.2 replaced E[u(0,X_0)] by u(0,x_0)=E[g(Zbar_T)]. With zero rates, X_0=0, Z_0=1 in K=[-2,2], V=1, and bounded g=tanh, all backward/boundary assumptions hold with u=g, yet the claimed zero bound fails. Added X^V_0=Z^V_0=x_0 to the Statement and Given text and made its exact use explicit in step 1.2. Taylor remainder and finite stopped-chain Dynkin then give the unchanged V^-2 estimate and the two 2G exit corrections.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-poisson-tau-leap-weak-order-one-with-exit-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "1e6e96b47b1fdf541fe0e3c114068994ac0365a0644e6a38c3e8aac6838b3b4d",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The cited algorithm returns an incomplete prefix when its scalar draw budget is insufficient (e.g. B<R at a positive-rate initial state), so an unrestricted execution has no Y_N or terminal Markov law K_h^N. Added B>=NR or infinity on the uniform positive-step grid, and justified in step 1.1 that at most NR draws are requested. Absorption and invalid endpoints already extend through T. Markov contraction and the telescoping identity still yield 4A^2Th||g||_infty; independent Poisson factorial moments and a first-exit union bound still yield A^2Th/2. N=0 needs no draws and both bounds are zero.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-poisson-tau-leap-negative-population-pure-death",
+      "disposition": "repaired",
+      "post_sha256": "06bbb2c4790a1ab1abf0a08d6cc4e0fb9dcc8c587c7681afd5de22114f7144ca",
+      "review_context_sha256": "c80bb2046d4ee7157f35ba28a185b90dc15f86406ff3dc8b7c4f96512950aa3d",
+      "reason": "F3 named the moments lemma instead of the Poisson definition. The mass formula is already available in declared dependency def-scalar-poisson-count-law, so this is a nonfatal citation defect, not a missing mathematical prerequisite. Corrected F3 and its exact contract quote; B=1 explicitly completes the single-channel leap. Directly checked P(K>=2)=1-exp(-ch)(1+ch)>0, its c^2h^2/2 expansion, and exact absorption at 0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-density-scaled-chemical-langevin-model-error",
+      "disposition": "repaired",
+      "post_sha256": "d86325d91bd5333fb5725b1b2b9ae5beffce034bcc228ce04862fee71d4c18cd",
+      "review_context_sha256": "9d3d6ae3524adcc5d9cba3585cc9dd48e0602ef4bb86a1614be01d481832eb98",
+      "reason": "The original hypotheses did not fix either initial state, but Dynkin step 1.2 replaced E[u(0,X_0)] by u(0,x_0)=E[g(Zbar_T)]. With zero rates, X_0=0, Z_0=1 in K=[-2,2], V=1, and bounded g=tanh, all backward/boundary assumptions hold with u=g, yet the claimed zero bound fails. Added X^V_0=Z^V_0=x_0 to the Statement and Given text and made its exact use explicit in step 1.2. Taylor remainder and finite stopped-chain Dynkin then give the unchanged V^-2 estimate and the two 2G exit corrections.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-poisson-tau-leap-weak-order-one-with-exit-bound",
+      "disposition": "repaired",
+      "post_sha256": "e717b107deaa446dddf1c52e6c7059244f4f35881e1b28422286964fad6caf6e",
+      "review_context_sha256": "a4f23b5bb44250be8005da22ad15014ba4fced87325d22af0186f249254a92e2",
+      "reason": "The cited algorithm returns an incomplete prefix when its scalar draw budget is insufficient (e.g. B<R at a positive-rate initial state), so an unrestricted execution has no Y_N or terminal Markov law K_h^N. Added B>=NR or infinity on the uniform positive-step grid, and justified in step 1.1 that at most NR draws are requested. Absorption and invalid endpoints already extend through T. Markov contraction and the telescoping identity still yield 4A^2Th||g||_infty; independent Poisson factorial moments and a first-exit union bound still yield A^2Th/2. N=0 needs no draws and both bounds are zero.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "ex-chemical-langevin-near-empty-poisson-birth",
+    "cor-mlmc-complexity-for-poisson-tau-leaping"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-poisson-tau-leap-negative-population-pure-death",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "reason": "F3 named the moments lemma instead of the Poisson definition. The mass formula is already available in declared dependency def-scalar-poisson-count-law, so this is a nonfatal citation defect, not a missing mathematical prerequisite. Corrected F3 and its exact contract quote; B=1 explicitly completes the single-channel leap. Directly checked P(K>=2)=1-exp(-ch)(1+ch)>0, its c^2h^2/2 expansion, and exact absorption at 0.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-density-scaled-chemical-langevin-model-error",
+      "severity": "fatal",
+      "locus": "statement",
+      "defect_type": "logic",
+      "reason": "The original hypotheses did not fix either initial state, but Dynkin step 1.2 replaced E[u(0,X_0)] by u(0,x_0)=E[g(Zbar_T)]. With zero rates, X_0=0, Z_0=1 in K=[-2,2], V=1, and bounded g=tanh, all backward/boundary assumptions hold with u=g, yet the claimed zero bound fails. Added X^V_0=Z^V_0=x_0 to the Statement and Given text and made its exact use explicit in step 1.2. Taylor remainder and finite stopped-chain Dynkin then give the unchanged V^-2 estimate and the two 2G exit corrections.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-poisson-tau-leap-weak-order-one-with-exit-bound",
+      "severity": "fatal",
+      "locus": "statement",
+      "defect_type": "logic",
+      "reason": "The cited algorithm returns an incomplete prefix when its scalar draw budget is insufficient (e.g. B<R at a positive-rate initial state), so an unrestricted execution has no Y_N or terminal Markov law K_h^N. Added B>=NR or infinity on the uniform positive-step grid, and justified in step 1.1 that at most NR draws are requested. Absorption and invalid endpoints already extend through T. Markov contraction and the telescoping identity still yield 4A^2Th||g||_infty; independent Poisson factorial moments and a first-exit union bound still yield A^2Th/2. N=0 needs no draws and both bounds are zero.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "cor-mlmc-complexity-for-poisson-tau-leaping",
+      "severity": "nonfatal",
+      "locus": "statement",
+      "route": "frontier owner; not assigned to unit 31",
+      "affected_use": "Statement says there are fine and coarse steps with R draws per step; Proof 1.1 repeats that literal accounting.",
+      "invalidated_claim": "Independent marginal R-draw-per-step accounting does not implement the prescribed shared-minimum coupling.",
+      "minimality": "Replace just the scalar-draw accounting in Statement and Proof 1.1 by at most 3R draws per fine half interval, plus O(R) propensity/update work. The inverse-step cost exponent and MLMC conclusion are unchanged. Its Statement repair will require that owner to inventory direct consumers.",
+      "reason": "Verified against thm-minimum-intensity-tau-leap-level-variance Statement: each channel on each half interval draws one shared count and two residual counts. This is at most 3R draws per fine interval, not R per fine/coarse marginal step. The overall O(h_l^-1) work bound remains valid. The rejected assigned items do not depend on this corollary.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "action": "record-no-published-impact",
+      "supplier_ids": [
+        "thm-density-scaled-chemical-langevin-model-error",
+        "thm-poisson-tau-leap-weak-order-one-with-exit-bound"
+      ],
+      "reason": "Direct dependency/reference search in items and library found only the two draft consumers inventoried in downstream. No published consumer or published repair is proposed. The Step-4 exactness alert names a draft supplier whose current Statement already explicitly requires unlimited event budgets; it is not a published-consumer issue.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed assigned mathematical reviews in dependency order and captured each review-context output immediately after that review, before editing the next item. These are local repair reviews, not independent acceptance of these repairs. No new items, judges, stamps, round state, certificates, or shared-ledger files were written.",
+    "Pure-death: F3 now cites the existing def-scalar-poisson-count-law dependency; owning contract changes only its F3 supplier/Definition quote. Example explicitly supplies B=1. Verification and mathematical claim are unchanged; no Statement or Definition exists in this example to propagate.",
+    "CLE: Statement and Given now require X^V_0=Z^V_0=x_0; Proof 1.2 and its contract derivation explicitly use that equality. Finite D and one-jump exit set, time-constant exit payoff, C3 jump-segment remainder, and the two separate 2G exit terms were checked. M is an assumed bound for the stated V; uniformity in V is not inferred.",
+    "Weak-order: Statement supplies h>0 and B>=NR or infinity; Given, F2, Proof 1.1 and its exact contract derivation agree. The finite kernel telescope is valid without commuting K_h and Q_h. Exit probability concerns first invalid endpoints while still in E. Zero total rate and N=0 give identity paths and zero bounds.",
+    "Under the shared metadata lock, reread the current batch-31 contract, changed only assigned item entries, checked the selected entries strictly, and released. The assigned weak-order F5 quote was refreshed to the current exactness Statement, which another owner already corrected to unlimited event budgets with finite-budget prefix semantics. Its reference-chain existence and finite-count clauses used here remain unchanged. No historical reader or risk-review text was rewritten.",
+    "Statement sections were directly compared: the CLE common-start and weak-order budget/grid clauses changed; their error bounds did not. Every direct item dependency/reference consumer is in downstream. The A-page weak-order and model-error paragraphs are conditional summaries and remain sound with the added qualifications; the B-page explicitly excludes the cubic example from the general theorem. No consumer Statement/Definition edit is needed because of these supplier changes; the distinct corollary draw-count defect is an owner route.",
+    "Actual checks: per-item node tools/tsx-run.mjs tools/precheck.mts passed for all three changed items (one proof each, zero failures). Per-item node tools/rendercheck.mjs PATH --quiet passed for all three items. Scoped node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-31.proof-contracts.json --strict --items selection passed: pure-death 1/1 and the two theorems 2/2, zero errors/warnings.",
+    "After all final item edits, ran once: node tools/proof-layout.mjs items/ex-poisson-tau-leap-negative-population-pure-death.md items/thm-density-scaled-chemical-langevin-model-error.md items/thm-poisson-tau-leap-weak-order-one-with-exit-bound.md. Result: 3 items, 8 steps, 0 defects, exit 0.",
+    "All cited local supplier statements/definitions and relevant complete local arguments were read; the remaining checks are elementary Poisson, Taylor, finite-chain Dynkin and kernel algebra familiar to this reviewer. No external source reading is claimed. No mathematical uncertainty remains for the assigned items; native independent rejudgment and owner handling of the separate unassigned corollary finding remain the engine/owner duties."
+  ],
+  "downstream_uses": {
+    "ex-chemical-langevin-near-empty-poisson-birth": "items/ex-chemical-langevin-near-empty-poisson-birth.md, Notes: the unbounded cubic payoff is expressly excluded from the stopped model-error theorem; it does not invoke the repaired bound.",
+    "cor-mlmc-complexity-for-poisson-tau-leaping": "items/cor-mlmc-complexity-for-poisson-tau-leaping.md, Statement and F1/Proof 2.1: uses the full-horizon Poisson hierarchy bias O(h_L), supplied by the repaired terminal-kernel estimate."
+  },
+  "downstream_reviews": [
+    {
+      "supplier": "thm-density-scaled-chemical-langevin-model-error",
+      "id": "ex-chemical-langevin-near-empty-poisson-birth",
+      "path": "items/ex-chemical-langevin-near-empty-poisson-birth.md",
+      "source_excerpt": "The cubic payoff is unbounded, so its exact discrepancy is not an application of [[thm-density-scaled-chemical-langevin-model-error]]",
+      "affected_use": "Notes distinguish the example from the general bounded-payoff stopped theorem. The example starts its jump and Brownian models at zero and proves its moments directly.",
+      "disposition": "unchanged_sound",
+      "reason": "No invocation of the repaired theorem occurs; adding its common-start hypothesis cannot invalidate this explicit nonapplication. No consumer statement changed."
+    },
+    {
+      "supplier": "thm-poisson-tau-leap-weak-order-one-with-exit-bound",
+      "id": "cor-mlmc-complexity-for-poisson-tau-leaping",
+      "path": "items/cor-mlmc-complexity-for-poisson-tau-leaping.md",
+      "source_excerpt": "[F1] [[thm-poisson-tau-leap-weak-order-one-with-exit-bound]]: the payoff bias\nat level $\\ell$ is at most $C_bh_\\ell$.",
+      "affected_use": "F1 feeds alpha=1 into Proof 2.1. Statement defines terminal fine/coarse paths by the full shared-minimum construction of thm-minimum-intensity-tau-leap-level-variance.",
+      "disposition": "unchanged_sound_for_supplier_change",
+      "reason": "The prescribed shared-minimum construction generates counts across every half interval through T; its marginal paths are the complete Poisson laws K_h^N, realizable with B=NR in the marginal algorithm. The added budget hypothesis does not alter the bias or cost exponent. The independent literal draw-accounting defect noted in the digest is routed separately below; no item edit is authorized here."
+    }
+  ]
+}

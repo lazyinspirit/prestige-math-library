@@ -1,0 +1,88 @@
+{
+  "summary": {
+    "files": 12,
+    "checked": 12,
+    "failed": 7
+  },
+  "results": [
+    {
+      "file": "items/alg-complex-scaled-householder-reflector-step.md",
+      "item_id": "alg-complex-scaled-householder-reflector-step",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** The finite stored input dimensions and canonical operationwise arithmetic realization.\n\n[F1] [[alg-scaled-complex-householder-and-givens-updates]] fixes every scaled norm, phase, update and failure operation.\n\n[F2] [[lem-scaled-complex-householder-and-givens-local-backward-error]] supplies the exact unitary representative and local error coefficients for successful calls.\n\n\n\n1.1 Every loop in [F1] is over a finite input dimension. Its zero branch returns immediately; its nonzero branch either terminates at its first range/invalid operation or completes the finite sequence. The wrapper preserves these results with the stated breakdown label. [given, F1, choose]\n\n2.1 In the nonzero-input formation branch, success requires positive stored-vector squared norm. If $v=0$, its squares and sum are exactly zero, contradicting success in that branch. Thus $v\\ne0$, and [F2] makes $P(v)$ unitary with its explicit target/separate-block error bounds. In the zero-input branch the representative is $I$, the block is copied exactly, and both target and separate-block errors are zero; no expression $P(0)$ is evaluated. [F1, F2, step 1.1, algebra] ∎"
+    },
+    {
+      "file": "items/alg-bounded-mixed-precision-iterative-refinement.md",
+      "item_id": "alg-bounded-mixed-precision-iterative-refinement",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/thm-kahan-and-neumaier-finite-error-identities.md",
+      "item_id": "thm-kahan-and-neumaier-finite-error-identities",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/alg-sqp-finite-precision-kkt-qr-solve-and-residual-check.md",
+      "item_id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/thm-sqp-finite-precision-kkt-residual-certificate-sound.md",
+      "item_id": "thm-sqp-finite-precision-kkt-residual-certificate-sound",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/lem-rosenbrock-euler-local-defect.md",
+      "item_id": "lem-rosenbrock-euler-local-defect",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** The compact convex set, vector field, bounds, exact solution segment, and uniform inverse bound in the statement.\n\n[F1] [[def-rosenbrock-euler-step-map]]: for the autonomous exact-Jacobian branch with $\\gamma=1$, the exact stage solves $(I-hDf(y))k=f(y)$ and the exact-method update is $\\Phi_h(y)=y+hk$. No finite-precision execution or success status is used.\n\n[F2] [[thm-chain-rule-for-total-derivatives]]: for differentiable maps, the derivative of a composition is the derivative of the outer map composed with the derivative of the inner map.\n\n[F3] [[cor-mean-value-theorem]]: if a real function is continuous on a closed interval and differentiable on its interior, its endpoint difference equals its derivative at some interior point times the interval length.\n\n[F4] [[def-first-order-ode-initial-value-problem-and-solution]]: a solution curve is differentiable and satisfies $y'=f(y)$ on its interval.\n\n\n\n1.1 Write $J=Df(y)$ and $M=I-hJ$. By [F1], $k=M^{-1}f(y)$; hence $\\|k\\|\\le BF$. Since $M^{-1}-I=M^{-1}(I-M)=hM^{-1}J$, $\\|k-f(y)\\|\\le hBLF$. [given, F1, algebra]\n\n1.2 By [F4], $y'(t+s)=f(y(t+s))$. Put $g(s)=f(y(t+s))$. By [F2], $g'(s)=Df(y(t+s))f(y(t+s))$, so $\\|g'(s)\\|\\le LF$. For any continuously differentiable vector curve $g$ with this derivative bound, the scalar mean-value theorem [F3] implies $\\|g(s)-g(0)\\|\\le LFs$: if the difference is nonzero, take its unit direction $u$, apply [F3] to $r\\mapsto u\\cdot g(r)$, and use $|u\\cdot g'(r)|\\le\\|g'(r)\\|$. Thus $q(s):=y(t+s)-y-sf(y)$ has $q'(s)=g(s)-g(0)$ with $\\|q'(s)\\|\\le LFs$. Applying the same vector-curve bound to $q$ on $[0,h]$ yields $\\|y(t+h)-y-hf(y)\\|=\\|q(h)\\|\\le LFh^2$. [given, F2, F3, F4, choose]\n\n2.1 The numerical increment differs from forward Euler by $h(k-f(y))$, bounded by $BLFh^2$ in step 1.1. The triangle inequality with step 1.2 proves the stated local defect bound with $C_0:=FL(B+1)$. [step 1.1, step 1.2, algebra] ∎"
+    },
+    {
+      "file": "items/lem-rosenbrock-euler-step-map-lipschitz.md",
+      "item_id": "lem-rosenbrock-euler-step-map-lipschitz",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** The sets, derivative bounds, and uniform inverse bound in the statement.\n\n[F1] [[def-rosenbrock-euler-step-map]]: in the autonomous exact-Jacobian branch with $\\gamma=1$, the exact-method map is $\\Phi_h(y)=y+hM_h(y)^{-1}f(y)$ when $M_h(y)$ is invertible.\n\n[F2] [[lem-rosenbrock-matrix-inverse-perturbation]]: for invertible $P,Q$, $\\|P^{-1}-Q^{-1}\\|\\le\\|P^{-1}\\|\\,\\|Q-P\\|\\,\\|Q^{-1}\\|$.\n\n[F3] [[thm-chain-rule-for-total-derivatives]]: differentiating a composition gives the product of the outer derivative and the inner derivative.\n\n[F4] [[cor-mean-value-theorem]]: a differentiable real function continuous on a closed interval has an interior derivative equal to its endpoint difference divided by the interval length.\n\n\n\n1.1 The segment from $v$ to $u$ lies in $K$. For any unit vector $a$, the scalar function $s\\mapsto a\\cdot f(v+s(u-v))$ has derivative bounded by $L\\|u-v\\|$ by [F3]; [F4] therefore gives $|a\\cdot(f(u)-f(v))|\\le L\\|u-v\\|$. Taking the supremum over unit $a$ yields $\\|f(u)-f(v)\\|\\le L\\|u-v\\|$. Applying the same argument to $s\\mapsto a\\cdot Df(v+s(u-v))b$ for unit $a,b$, with [F3] and the Hessian bound $H$, gives $\\|Df(u)-Df(v)\\|\\le H\\|u-v\\|$. [given, F3, F4, choose]\n\n2.1 Put $M_u=M_h(u)$ and $M_v=M_h(v)$. Then $\\|M_v-M_u\\|=h\\|Df(u)-Df(v)\\|\\le hH\\|u-v\\|$. By [F2], $\\|M_u^{-1}-M_v^{-1}\\|\\le B^2hH\\|u-v\\|$. [given, F2, step 1.1, algebra]\n\n3.1 Let $K_h(y)=M_h(y)^{-1}f(y)$. Adding and subtracting $M_u^{-1}f(v)$ and using steps 1.1–1.2 gives $\\|K_h(u)-K_h(v)\\|\\le(BL+B^2hHF)\\|u-v\\|$. [F1, step 1.1, step 2.1, algebra]\n\n4.1 By [F1], $\\|\\Phi_h(u)-\\Phi_h(v)\\|\\le[1+hBL+h^2B^2HF]\\|u-v\\|\\le(1+L_*h)\\|u-v\\|$, since $h\\le h_0$. [F1, step 3.1, algebra] ∎"
+    },
+    {
+      "file": "items/thm-rosenbrock-euler-global-first-order.md",
+      "item_id": "thm-rosenbrock-euler-global-first-order",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** A $C^2$ autonomous vector field and the exact and numerical trajectories satisfying the compact-tube and inverse hypotheses in the statement.\n\n[F1] [[def-rosenbrock-euler-step-map]] defines the autonomous exact-Jacobian map with $\\gamma=1$ by the exact solve $(I-hDf(y))k=f(y)$ and $\\Phi_h(y)=y+hk$.\n\n[F2] Apply [[lem-rosenbrock-euler-local-defect-and-residual-error]] to the autonomous extension $\\bar f(t,y)=f(y)$, with $\\gamma=1$, $\\widetilde J=J=Df(y(t_j))$, $\\delta=0$, $\\kappa_0=\\kappa_1=B$, and the exact stage, whose residual is zero. The $C^2$ hypothesis supplies that lemma's regularity, and along the solution $\\bar f_t=0$ and $\\|D_y\\bar f\\,\\bar f\\|\\le LF$, so take $M_1=LF$. Its bound gives $\\|\\Phi_h(y(t_j))-y(t_{j+1})\\|\\le FL(B+1/2)h^2=C_0h^2$.\n\n[F3] [[lem-rosenbrock-euler-step-map-lipschitz]] gives $\\|\\Phi_h(u)-\\Phi_h(v)\\|\\le(1+L_*h)\\|u-v\\|$ on $K$.\n\n\n\n1.1 Set $e_j=\\|Y_j-y(t_j)\\|$. Since $Y_{j+1}=\\Phi_h(Y_j)$, insert $\\Phi_h(y(t_j))$ and apply [F2] and [F3] to obtain $e_{j+1}\\le(1+L_*h)e_j+C_0h^2$. [given, F1, F2, F3, algebra]\n\n2.1 Starting with $e_0=0$, induction on $n$ in the recurrence of step 1.1 gives $e_n\\le C_0h^2\\sum_{j=0}^{n-1}(1+L_*h)^j\\le C_0n h^2e^{L_*nh}$; the last inequality follows from $1+x\\le e^x$ for $x\\ge0$. [given, step 1.1, algebra]\n\n3.1 Since $nh=t_n\\le T$, step 2.1 yields $e_n\\le C_0T e^{L_*T}h$. [given, step 2.1, algebra] ∎"
+    },
+    {
+      "file": "items/thm-rosenbrock-euler-a-l-stable.md",
+      "item_id": "thm-rosenbrock-euler-a-l-stable",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** A scalar complex test equation, a step $h>0$, and $\\operatorname{Re}\\lambda\\le0$ when stability is asserted.\n\n[F1] [[def-rosenbrock-euler-step-map]] gives the real exact-Jacobian equation and update at $\\gamma=1$. Under the real two-dimensional representation in the Statement these are exactly $y^+=y+hk$ and $(1-h\\lambda)k=\\lambda y$; [[thm-rosenbrock-euler-scalar-a-and-l-stability]] uses the same exact complexification and rational-function stability criteria.\n\n\n\n1.1 If $\\operatorname{Re}z\\le0$, then $1-z\\ne0$. Solving the stage equation in [F1] gives $y^+=y+h\\lambda y/(1-z)=y/(1-z)$, so $R(z)=(1-z)^{-1}$; this is also the scalar backward-Euler update. [given, F1, algebra]\n\n2.1 For $\\operatorname{Re}z\\le0$, $|1-z|^2=1-2\\operatorname{Re}z+|z|^2\\ge1+|z|^2>0$. Hence there is no pole there and $|R(z)|\\le1/\\sqrt{1+|z|^2}\\le1$. The same bound tends to zero whenever $|z|\\to\\infty$ within the closed left half-plane. These prove the stated A- and full L-stability conditions. [given, F1, step 1.1, algebra] ∎"
+    },
+    {
+      "file": "items/thm-rosenbrock-euler-one-newton-step-for-backward-euler.md",
+      "item_id": "thm-rosenbrock-euler-one-newton-step-for-backward-euler",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** The differentiable vector field, state, positive step, and invertible matrix in the statement.\n\n[F1] [[def-rosenbrock-euler-step-map]]: the exact-arithmetic autonomous exact-Jacobian map at $\\gamma=1$ is $y+h(I-hDf(y))^{-1}f(y)$ whenever the stage matrix is invertible.\n\n\n\n1.1 Differentiating $G(s)=s-hf(y+s)$ at $s=0$ gives $DG(0)=I-hDf(y)=M$, while direct substitution gives $G(0)=-hf(y)$. [given, algebra]\n\n2.1 The Newton correction is therefore $s_1=0-M^{-1}(-hf(y))=hM^{-1}f(y)$. [given, step 1.1, algebra]\n\n3.1 By [F1], the Rosenbrock-Euler output is $y+hM^{-1}f(y)=y+s_1$, as claimed. [F1, step 2.1, algebra] ∎"
+    },
+    {
+      "file": "items/ex-rosenbrock-euler-stiff-linear-damping.md",
+      "item_id": "ex-rosenbrock-euler-stiff-linear-damping",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** $f(y)=-10y$, $y_n=1$, $h=1/5$, and exact-arithmetic stage equations with $\\gamma=1$.\n\n[F1] [[def-rosenbrock-euler-step-map]]: the exact scalar method with $\\gamma=1$ solves $(1-h\\lambda)k=\\lambda y_n$ and has update $y_{n+1}=y_n+hk$.\n\n[F2] [[thm-rosenbrock-euler-a-l-stable]] gives Rosenbrock-Euler's scalar factor $R(z)=(1-z)^{-1}$ when the stage is invertible.\n\n\n\n1.1 Here $\\lambda=-10$ and $z=h\\lambda=-2$, so $1-h\\lambda=3$. The exact stage solve in [F1] gives $k=-10/3$ and $y_{n+1}=1-(1/5)(10/3)=1/3$. [given, F1, algebra]\n\n2.1 The explicit Euler update is $1+h\\lambda=1-2=-1$. The two amplification magnitudes are therefore $1/3$ and $1$, respectively, proving the stated contrast for this finite scalar example. [given, step 1.1, algebra] ∎"
+    },
+    {
+      "file": "items/ex-two-stage-rosenbrock-factorization-reuse.md",
+      "item_id": "ex-two-stage-rosenbrock-factorization-reuse",
+      "status": "pass",
+      "strategy": "direct"
+    }
+  ]
+}

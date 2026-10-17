@@ -1,0 +1,317 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "22",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-certified-ivp-approximation-and-sensitivity-interface",
+      "model": "gpt-6-luna",
+      "context_sha256": "32b32babd04c90a4381b83f1f173e136c08ae3bd56c61f6a4a227baf683ed07b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original universal output requirement and supremum over all U conflict with permitted failed calls, which supply no trajectory. The repair keeps the declared C1 endpoint map on all U, requires its exact derivative on success, and imposes the same time-uniform delta_IVP bound at every successful call only. This resolves the undefined failed-trial terms without inferring differentiability from a possibly nonopen success set.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-multiple-shooting-residual-zero-iff-bvp-solution",
+      "model": "gpt-6-luna",
+      "context_sha256": "7866744572e7f6469becb2cf227d364ed989156c8024f7f1150ff0bed3950160",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The converse in original Proof 3.1 replaces the given starts by samples of an arbitrary BVP solution and then applies uniqueness assumed only at the original starts. The repair keeps the original admissible tuple fixed and states the exact correspondence with BVP solutions having y(t_i)=s_i at every node, including the terminal node. Restriction uniqueness now applies precisely to those given starts. Forward gluing uses continuity and matching one-sided derivatives; the boundary row supplies the endpoint equation. No global uniqueness for other initial states is assumed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-midpoint-collocation-for-nonlinear-bvps",
+      "model": "gpt-6-luna",
+      "context_sha256": "d4266db3595c52fa12b24145bd71b766770ab7a4b77a9ceba90a41a2375f29ad",
+      "outcome": "false_positive",
+      "reason": "The Newton call explicitly inherits the supplier's root status and Euclidean stopping test with epsilon=tau. For residual blocks r_i, max_i ||r_i||_2 <= (sum_i ||r_i||_2^2)^(1/2), so that status implies the advertised block-maximum bound <=tau. The Definition says only that a root status means this bound; it does not assert the converse or promise a root status for every block-maximum-small vector. The stricter inherited test is compatible. The map has d(N+1) positive-dimensional variables, its midpoint and boundary compositions are C1 on the open nodal domain, and finite-budget/domain/singularity branches are specified by the named procedure.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-certified-ivp-approximation-and-sensitivity-interface",
+      "disposition": "repaired",
+      "post_sha256": "841989b33a8c8a8292b4ab8c1260974d8047558ab3540cebc5c4c248eee8e66c",
+      "review_context_sha256": "b04d70766de6016e9033d9cf4ba1692390afed2ef4d8ff6ef8f4851fc3e97383",
+      "reason": "The original universal output requirement and supremum over all U conflict with permitted failed calls, which supply no trajectory. The repair keeps the declared C1 endpoint map on all U, requires its exact derivative on success, and imposes the same time-uniform delta_IVP bound at every successful call only. This resolves the undefined failed-trial terms without inferring differentiability from a possibly nonopen success set. The owning contract now treats empty U without an initial-state supremum and explicitly distinguishes a declared map from a failed evaluation. This is a repair review, not independent acceptance of my edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-multiple-shooting-residual-zero-iff-bvp-solution",
+      "disposition": "repaired",
+      "post_sha256": "d05c4eb2b0fc2fdba8342f85b5ff974a842c6173acd576dd08d8463fb3cf1ab8",
+      "review_context_sha256": "12d2ac8c638f884ea08f4c685935caa49f93da1e8a34a5e79a5130f45461e80f",
+      "reason": "The converse in original Proof 3.1 replaces the given starts by samples of an arbitrary BVP solution and then applies uniqueness assumed only at the original starts. The repair keeps the original admissible tuple fixed and states the exact correspondence with BVP solutions having y(t_i)=s_i at every node, including the terminal node. Restriction uniqueness now applies precisely to those given starts. Forward gluing uses continuity and matching one-sided derivatives; the boundary row supplies the endpoint equation. No global uniqueness for other initial states is assumed. This records my repair review, not independent acceptance. The owning derivation and converse/endpoint/choice boundary notes were reconciled under the shared lock and passed the scoped strict contract check.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-midpoint-collocation-for-nonlinear-bvps",
+      "disposition": "unaffected",
+      "post_sha256": "dc3a1037f6e66a6cf094efc311e2363b2103b66ba39071d932948b51dd3168b0",
+      "review_context_sha256": "34a24fb364d3372f7b4a065a92152adf5d5808a53614495fe9581850eba6e9ee",
+      "reason": "The Newton call explicitly inherits the supplier's root status and Euclidean stopping test with epsilon=tau. For residual blocks r_i, max_i ||r_i||_2 <= (sum_i ||r_i||_2^2)^(1/2), so that status implies the advertised block-maximum bound <=tau. The Definition says only that a root status means this bound; it does not assert the converse or promise a root status for every block-maximum-small vector. The stricter inherited test is compatible. The map has d(N+1) positive-dimensional variables, its midpoint and boundary compositions are C1 on the open nodal domain, and finite-budget/domain/singularity branches are specified by the named procedure. Item guard equals the assignment before guard; no edit was made.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-single-shooting-for-nonlinear-bvps",
+    "alg-multiple-shooting-for-nonlinear-bvps",
+    "prop-shooting-residual-derivative",
+    "prop-multiple-shooting-residual-block-jacobian",
+    "cor-local-newton-convergence-for-shooting-bvp-residual",
+    "thm-shooting-residual-error-budget",
+    "ex-newton-shooting-fails-from-singular-start",
+    "ex-unstable-single-shooting-amplifies-error",
+    "alg-ctrl1-indirect-shooting-for-the-ode-optimality-system",
+    "alg-validated-periodic-orbit-corrector"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-certified-ivp-approximation-and-sensitivity-interface",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "reason": "The original universal output requirement and supremum over all U conflict with permitted failed calls, which supply no trajectory. The repair keeps the declared C1 endpoint map on all U, requires its exact derivative on success, and imposes the same time-uniform delta_IVP bound at every successful call only. This resolves the undefined failed-trial terms without inferring differentiability from a possibly nonopen success set.",
+      "locus": "Definition",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "path": "research/defect-ledger.jsonl"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "prop-multiple-shooting-residual-zero-iff-bvp-solution",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "Statement and Proof 3.1",
+      "status": "fixed",
+      "reason": "The converse in original Proof 3.1 replaces the given starts by samples of an arbitrary BVP solution and then applies uniqueness assumed only at the original starts. The repair keeps the original admissible tuple fixed and states the exact correspondence with BVP solutions having y(t_i)=s_i at every node, including the terminal node. Restriction uniqueness now applies precisely to those given starts. Forward gluing uses continuity and matching one-sided derivatives; the boundary row supplies the endpoint equation. No global uniqueness for other initial states is assumed.",
+      "historical_evidence": "Preserve 3a-batch-22-D02 unchanged: it concerns different missing C1 and boundary-domain premises, not this new quantifier finding.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "no-update-required",
+      "reason": "All ten direct item consumers of the changed evaluator Definition are draft frozen-frontier items, and the multiple-shooting proposition has no direct item consumer. The owning page prose remains sound. No published consumer defect or published repair was found in these interface examinations, so no published maintenance entry is proposed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      {
+        "id": "def-certified-ivp-approximation-and-sensitivity-interface",
+        "claim": "Declared C1 endpoint map on U; same delta_IVP error allowance at every successful call; failure supplies no trajectory or bound.",
+        "dependencies": [
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "def-c-one-map-and-local-inverse",
+          "def-total-derivative-in-euclidean-space"
+        ],
+        "source_evidence": "Actual Definition sections of these three local suppliers; no external source consultation was needed for this elementary contract repair.",
+        "statement_changed": true,
+        "page_use": "library/numerical-differential-equations-and-stochastic-dynamics/nonlinear-boundary-value-solvers.md: separates exact sensitivity from numerical evaluator error; remains accurate.",
+        "next_action": "Assigned review complete; controller-owned independent rejudgment/currency handling remains.",
+        "validation": "Scoped precheck and rendercheck passed; strict contract check passed for all three assigned items. Final proof-layout passed for the two changed items."
+      },
+      {
+        "id": "prop-multiple-shooting-residual-zero-iff-bvp-solution",
+        "claim": "For the given admissible segment tuple, residual zero iff a BVP solution interpolates all its nodes; restrictions equal the unique given segment solutions.",
+        "dependencies": [
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "thm-picard-lindelof-local-existence-and-uniqueness"
+        ],
+        "source_evidence": "Actual BVP Definition and direct gluing/restriction argument using the explicit uniqueness premise; Picard-Lindelof is not needed to establish the assumed segment uniqueness.",
+        "statement_changed": true,
+        "page_use": "library/numerical-differential-equations-and-stochastic-dynamics/nonlinear-boundary-value-solvers.md: exact residual solution correspondences are proved locally; unchanged prose remains accurate. No other item contains this ID as a dependency or reference.",
+        "next_action": "Assigned review complete; controller-owned independent rejudgment/currency handling remains.",
+        "validation": "Scoped precheck and rendercheck passed; strict contract check passed for all three assigned items. Final proof-layout passed for the two changed items."
+      },
+      {
+        "id": "alg-midpoint-collocation-for-nonlinear-bvps",
+        "claim": "Finite-budget exact-Jacobian Newton returns its inherited status; root implies the block-maximum tolerance because its Euclidean test is stronger.",
+        "dependencies": [
+          "def-midpoint-collocation-residual-for-bvps",
+          "alg-finite-budget-newton-for-vector-residuals"
+        ],
+        "source_evidence": "Actual Definition sections, Newton step 1 and explicit d(N+1)-dimensional Euclidean/block-maximum comparison.",
+        "statement_changed": false,
+        "next_action": "Assigned review complete; controller-owned independent rejudgment/currency handling remains.",
+        "validation": "Scoped precheck and rendercheck passed; strict contract check passed for all three assigned items. Final proof-layout passed for the two changed items."
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-certified-ivp-approximation-and-sensitivity-interface.md items/prop-multiple-shooting-residual-zero-iff-bvp-solution.md items/alg-midpoint-collocation-for-nonlinear-bvps.md --json",
+        "exit_code": 0,
+        "result": "3 selected files; 1 proof checked and passed, 2 not-applicable; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-certified-ivp-approximation-and-sensitivity-interface.md items/prop-multiple-shooting-residual-zero-iff-bvp-solution.md items/alg-midpoint-collocation-for-nonlinear-bvps.md --json",
+        "exit_code": 0,
+        "result": "3 files checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-22.proof-contracts.json --items def-certified-ivp-approximation-and-sensitivity-interface,prop-multiple-shooting-residual-zero-iff-bvp-solution,alg-midpoint-collocation-for-nonlinear-bvps --strict --json",
+        "exit_code": 0,
+        "result": "All three selected contracts checked; ok=true, no errors or warnings. Initial check found two unanchored evaluator boundary notes; both now explicitly cite Definition."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-certified-ivp-approximation-and-sensitivity-interface.md items/prop-multiple-shooting-residual-zero-iff-bvp-solution.md",
+        "exit_code": 0,
+        "result": "2 changed items, 3 steps, 0 defects. Run after the final item edit; subsequent changes were contract/manifest/report metadata only."
+      }
+    ],
+    "unresolved_obligations": [],
+    "consumer_examinations": [
+      {
+        "supplier": "def-certified-ivp-approximation-and-sensitivity-interface",
+        "id": "alg-single-shooting-for-nonlinear-bvps",
+        "path": "items/alg-single-shooting-for-nonlinear-bvps.md",
+        "affected_use": "Definition, input paragraph and loop steps 1-2: Every successful response must supply the approximate trajectory",
+        "disposition": "unchanged_sound",
+        "reason": "Already checks evaluator failure before forming the residual; it uses the declared C1 map on U and the error bound only on success.",
+        "scope": "frontier-owner-routing"
+      },
+      {
+        "supplier": "def-certified-ivp-approximation-and-sensitivity-interface",
+        "id": "alg-multiple-shooting-for-nonlinear-bvps",
+        "path": "items/alg-multiple-shooting-for-nonlinear-bvps.md",
+        "affected_use": "Definition, input paragraph and loop steps 1-2: If any evaluator fails, return the last valid tuple",
+        "disposition": "unchanged_sound",
+        "reason": "Requires each declared endpoint map C1 on its open product domain and returns no residual certificate after a failed call; the revised interface supplies exactly the successful data used.",
+        "scope": "frontier-owner-routing"
+      },
+      {
+        "supplier": "def-certified-ivp-approximation-and-sensitivity-interface",
+        "id": "prop-shooting-residual-derivative",
+        "path": "items/prop-shooting-residual-derivative.md",
+        "affected_use": "Statement final paragraph; Facts F4; Proof 3.1: the approximate endpoint map is $C^1$",
+        "disposition": "unchanged_sound",
+        "reason": "Its chain-rule argument uses the declared C1 map and its mathematical derivative, both retained on U. It does not require a successful call everywhere.",
+        "scope": "frontier-owner-routing"
+      },
+      {
+        "supplier": "def-certified-ivp-approximation-and-sensitivity-interface",
+        "id": "prop-multiple-shooting-residual-block-jacobian",
+        "path": "items/prop-multiple-shooting-residual-block-jacobian.md",
+        "affected_use": "Statement and Facts F3; Proof 1.2: a certified approximate segment endpoint map is $C^1$",
+        "disposition": "unchanged_sound",
+        "reason": "Its explicit C1 map hypotheses and formal block differentiation are unchanged; computing the derivative is required only when an evaluator succeeds.",
+        "scope": "frontier-owner-routing"
+      },
+      {
+        "supplier": "def-certified-ivp-approximation-and-sensitivity-interface",
+        "id": "cor-local-newton-convergence-for-shooting-bvp-residual",
+        "path": "items/cor-local-newton-convergence-for-shooting-bvp-residual.md",
+        "affected_use": "Statement exact evaluator assumption; Facts F1; Proof 2.1: $\\widetilde\\phi(\\cdot;s)=\\phi(\\cdot;s)$",
+        "disposition": "unchanged_sound",
+        "reason": "The supplied exact-flow evaluator in this theorem provides trajectories throughout the neighborhood and delta_IVP=0, a still-admissible total-success special case; no local Newton conclusion depends on a failed call.",
+        "scope": "frontier-owner-routing"
+      },
+      {
+        "supplier": "def-certified-ivp-approximation-and-sensitivity-interface",
+        "id": "thm-shooting-residual-error-budget",
+        "path": "items/thm-shooting-residual-error-budget.md",
+        "affected_use": "Statement successful evaluator on closed ball; Facts F2; Proof 2.1 and 3.1: succeeds on this ball with uniform trajectory error",
+        "disposition": "unchanged_sound",
+        "reason": "Explicit success throughout the ball supplies every used trajectory and bound; both residual and trajectory estimates remain unchanged.",
+        "scope": "frontier-owner-routing"
+      },
+      {
+        "supplier": "def-certified-ivp-approximation-and-sensitivity-interface",
+        "id": "ex-newton-shooting-fails-from-singular-start",
+        "path": "items/ex-newton-shooting-fails-from-singular-start.md",
+        "affected_use": "Verification Given, Facts F2 and step 1.1: an exact flow evaluator",
+        "disposition": "unchanged_sound",
+        "reason": "The explicitly supplied exact evaluator for y'=0 succeeds with the identity endpoint map and zero error. The changed failure clause is never used.",
+        "scope": "frontier-owner-routing"
+      },
+      {
+        "supplier": "def-certified-ivp-approximation-and-sensitivity-interface",
+        "id": "ex-unstable-single-shooting-amplifies-error",
+        "path": "items/ex-unstable-single-shooting-amplifies-error.md",
+        "affected_use": "Verification Given, Facts F2 and step 3.1: an exact IVP evaluator",
+        "disposition": "unchanged_sound",
+        "reason": "The explicitly supplied exact evaluator for the linear ODE is total, has its exact endpoint derivative and zero trajectory error; the amplification calculation is unaffected.",
+        "scope": "frontier-owner-routing"
+      },
+      {
+        "supplier": "def-certified-ivp-approximation-and-sensitivity-interface",
+        "id": "alg-ctrl1-indirect-shooting-for-the-ode-optimality-system",
+        "path": "items/alg-ctrl1-indirect-shooting-for-the-ode-optimality-system.md",
+        "affected_use": "Definition, interior-tube condition and call paragraph: Every successful IVP evaluation must keep its trajectory in this tube.",
+        "disposition": "unchanged_sound",
+        "reason": "Requires certification only for successful trajectories and delegates failure handling to single shooting. The declared endpoint-map and successful-call contract remain available.",
+        "scope": "frontier-owner-routing"
+      },
+      {
+        "supplier": "def-certified-ivp-approximation-and-sensitivity-interface",
+        "id": "alg-validated-periodic-orbit-corrector",
+        "path": "items/alg-validated-periodic-orbit-corrector.md",
+        "affected_use": "Definition, candidate modes 2-3 and status propagation: All modes propagate evaluator-failure",
+        "disposition": "unchanged_sound",
+        "reason": "Both differentiable candidate modes require the same declared C1 map and successful trajectory/derivative/error outputs; failure is explicitly propagated, and candidate generation is separate from independent interval validation.",
+        "scope": "frontier-owner-routing"
+      }
+    ],
+    "repair_complete": true,
+    "next_action": "Controller collects this evidence and routes the listed frontier consumer examinations under its normal current-context, independent rejudgment and convergence protocol. Two confirmed-fatal items remain counted for this round even though their assigned repairs are complete.",
+    "external_sources_consulted": [],
+    "mathematical_uncertainty": "None unresolved in the assigned scope. Familiarity records elementary contract logic, IVP restriction/gluing and finite-dimensional norm comparison; no claim of external source reading is made.",
+    "outside_consumer_maintenance": [],
+    "interface_comparisons": [
+      {
+        "id": "def-certified-ivp-approximation-and-sensitivity-interface",
+        "section": "Definition",
+        "before_clause": "for each $s\\in U$",
+        "before_bound": "\\sup_{s\\in U}\\sup_{t\\in[a,b]}",
+        "after_clause": "A call at s in U either returns failure or supplies the trajectory, endpoint and exact numerical-map derivative satisfying the same time-supremum error bound.",
+        "effect": "Definition changed; all ten direct item consumers listed in downstream and individually examined. Declared C1 map on U retained."
+      },
+      {
+        "id": "prop-multiple-shooting-residual-zero-iff-bvp-solution",
+        "section": "Statement",
+        "before_clause": "It vanishes exactly when the segment solutions join to form a BVP solution.",
+        "after_clause": "For this fixed tuple, it vanishes exactly when there is a BVP solution $y$ with $y(t_i)=s_i$ for every $0\\le i\\le N$; that solution restricts to the given segment solutions on all mesh intervals.",
+        "effect": "Statement changed; exhaustive ID-reference/dependency search found no direct item consumer. The owning page inventory and its local-solution-correspondence prose were examined and remain sound."
+      },
+      {
+        "id": "alg-midpoint-collocation-for-nonlinear-bvps",
+        "section": "Definition",
+        "effect": "Unchanged; no propagation."
+      }
+    ]
+  },
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-22.proof-contracts.json": "9387877b0274d5349fdf28ae4822ef493504db0f93ed4c6fdd9622b06b6419d9",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-22.pages.json": "bf07eaa6d005d8f5b9adcaa90b78e5dbe61caf13b3e37609eb97c95e6f84fead"
+  }
+}

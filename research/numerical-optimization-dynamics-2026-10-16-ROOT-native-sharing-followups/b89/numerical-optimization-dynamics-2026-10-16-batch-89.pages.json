@@ -1,0 +1,565 @@
+[
+  {
+    "order": 2462,
+    "id": "variational-crimes-and-strang-lemmas",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Variational crimes and Strang lemmas",
+    "companion": "variational-crimes-and-strang-lemmas-examples",
+    "requires": [
+      "lax-milgram-and-weak-elliptic-solutions",
+      "composite-quadrature-rules",
+      "finite-element-meshes-and-interpolation",
+      "ceas-lemma-and-aubin-nitsche-error-estimates",
+      "gaussian-quadrature"
+    ],
+    "items": [
+      {
+        "id": "def-variational-crime-error-framework",
+        "kind": "definition",
+        "title": "Variational-crime settings and consistency defects",
+        "statement": "Define the exact and discrete variational problems, the conforming perturbed-form branch, the nonconforming extended-form branch, their stability constants, and the form, load, and nonconforming consistency defects.",
+        "strategy": "Record the spaces, forms, norms, and exact domains on which each term is defined.",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-hilbert-space"
+        ],
+        "dependency_level": 0,
+        "local_order": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27, Error analysis with variational crimes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap27.pdf"
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-one-dimensional-p1-interpolation-error",
+        "kind": "lemma",
+        "title": "One-dimensional P1 interpolation has a first-derivative error bound",
+        "statement": "Assume Countable Choice. Let $0=x_0<x_1<\\cdots<x_N=1$ be a finite interval partition, $h:=\\max_j(x_{j+1}-x_j)$, and $u\\in C^2([0,1])$. Let $I_hu$ be the continuous piecewise-linear function with nodal values $I_hu(x_j)=u(x_j)$. Then\n\n$$\\|(u-I_hu)'\\|_{L^2(0,1)}\\le h\\|u''\\|_{L^\\infty(0,1)}.$$\n\nIf $u(0)=u(1)=0$, then $I_hu$ also vanishes at both endpoints.\n\n",
+        "strategy": "On each cell the interpolant slope is the mean of u-prime; bound its deviation by integrating u double-prime and sum the cell estimates.",
+        "deps": [
+          "thm-ftc-second-part",
+          "thm-monotonicity-of-the-integral",
+          "thm-extreme-value-r",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-countable-choice"
+        ],
+        "dependency_level": 0,
+        "local_order": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2023, Part III, Chapter 11, Local interpolation on affine meshes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2023/chap11.pdf",
+              "locator": "§§11.3–11.4, printed pp. 122–125; Theorem 11.13 and its complete proof, specialized to P1, d=1, p=2, r=2, m=1."
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 24, Finite element error analysis",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/erroranalysis.html",
+              "locator": "Complete 407-line Chapter 24 page. Relevant ranges: lines 196–221, Bramble–Hilbert interpolation lemma and the complete global H1 interpolation estimate proof."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-one-dimensional-zero-boundary-poincare",
+        "kind": "lemma",
+        "title": "Zero-boundary Poincaré inequality on the unit interval",
+        "statement": "For every v in H0^1(0,1), its L2 norm is at most its L2 derivative norm.",
+        "strategy": "Prove the inequality for compactly supported smooth functions by the fundamental theorem of calculus and Holder, then extend through the defining Sobolev closure.",
+        "deps": [
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice",
+          "thm-ftc-second-part",
+          "thm-holder-inequality-for-integrals",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "dependency_level": 0,
+        "local_order": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations, Chapter 3, Sobolev spaces",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "§3.10, Theorems 3.17–3.18 and their proofs, printed pp. 64–66; one-dimensional derivative control for W0^{1,p} on bounded intervals."
+            },
+            {
+              "title": "John K. Hunter, Notes on Partial Differential Equations, Chapter 4, Elliptic PDEs",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "§4.4, Theorem 4.9 and complete proof, printed pp. 98–99; Poincaré inequality for H0^1 on domains bounded in one direction."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-geometry-lift-and-tensor-discrepancy",
+        "kind": "definition",
+        "title": "Geometry lift and transformed elliptic tensor",
+        "statement": "For a C1 diffeomorphism from an approximate domain to the exact domain, define its positive Jacobian, the pulled-back diffusion tensor including both inverse Jacobians, the lifted form, and the cellwise tensor discrepancy from the implemented geometry.",
+        "strategy": "Apply the chain rule and change-of-variables convention to state the lifted form; retain Jacobian and derivative bounds explicitly.",
+        "deps": [
+          "def-variational-crime-error-framework",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-chain-rule-for-total-derivatives",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "local_order": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27, Error analysis with variational crimes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap27.pdf"
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-discrete-form-perturbation-preserves-coercivity",
+        "kind": "lemma",
+        "title": "A bounded form defect preserves discrete coercivity",
+        "statement": "If a coercive exact form has constant alpha and its discrete perturbation changes every diagonal value by at most eta times the squared norm, then the discrete form is coercive with constant at least alpha minus eta; eta at most alpha/2 gives the uniform constant alpha/2.",
+        "strategy": "Subtract the diagonal perturbation and use the exact coercivity inequality.",
+        "deps": [
+          "def-variational-crime-error-framework",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms"
+        ],
+        "dependency_level": 1,
+        "local_order": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27, Error analysis with variational crimes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap27.pdf"
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+        "kind": "theorem",
+        "title": "First Strang estimate for conforming perturbed Galerkin problems",
+        "statement": "For a conforming finite-dimensional subspace, a bounded coercive exact form, a bounded coercive discrete form, and bounded exact and discrete loads, the error is bounded by the best-approximation error plus the discrete form and load defects with explicit constants.",
+        "strategy": "Apply discrete coercivity to the difference from an arbitrary comparison function, add and subtract the exact variational equation, and use boundedness.",
+        "deps": [
+          "def-variational-crime-error-framework",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "thm-lax-milgram",
+          "cor-finite-dimensional-subspaces-are-closed",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "local_order": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27, Error analysis with variational crimes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap27.pdf"
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-second-strang-lemma-for-nonconforming-galerkin",
+        "kind": "theorem",
+        "title": "Second Strang estimate with a bounded extension to the comparison space",
+        "statement": "For a finite-dimensional nonconforming trial space, a discrete coercive form with a bounded extension to the sum of exact and discrete spaces, and a bounded discrete load, the error in the comparison norm is bounded by best approximation plus the exact-solution consistency residual.",
+        "strategy": "Compare the computed solution with an arbitrary discrete function, use coercivity and the extension bound, then take the infimum.",
+        "deps": [
+          "def-variational-crime-error-framework",
+          "thm-lax-milgram",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "local_order": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27, Error analysis with variational crimes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap27.pdf"
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-geometry-tensor-gap-bounds-cellwise-form-defect",
+        "kind": "lemma",
+        "title": "Cellwise geometry tensor gaps bound form error and stability loss",
+        "statement": "The difference between a lifted exact elliptic form and an approximate-geometry form is bounded by the sum over cells of the coefficient tensor discrepancy times the two cell gradient norms; a uniform O(h^s) discrepancy gives an O(h^s) form defect and an explicit coercivity threshold.",
+        "strategy": "Use the pulled-back tensor identity, the operator-norm inequality cell by cell, Cauchy–Schwarz over cells, and the diagonal perturbation lemma.",
+        "deps": [
+          "def-geometry-lift-and-tensor-discrepancy",
+          "lem-discrete-form-perturbation-preserves-coercivity",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-holder-inequality-for-integrals",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-countable-choice",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "dependency_level": 2,
+        "local_order": 8,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27, Error analysis with variational crimes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap27.pdf"
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-midpoint-quadrature-defect-for-p1-stiffness",
+        "kind": "lemma",
+        "title": "Midpoint quadrature defect for one-dimensional P1 stiffness",
+        "statement": "Assume Countable Choice. Let $0=x_0<\\cdots<x_N=1$ be a finite partition with cells $K=[x_{j-1},x_j]$, cell lengths $h_K$, and maximum $h$. Let $A\\in C^2([0,1])$, and let $v_h,w_h$ be continuous piecewise-linear functions. Write $v'_K,w'_K$ for their constant cell slopes and take their a.e. derivatives as $L^2$ representatives. Define the exact and midpoint stiffness forms by\n\n$$a(v_h,w_h):=\\int_{(0,1)}A(x)v_h'(x)w_h'(x)\\,d\\lambda_1(x),\\qquad a_h(v_h,w_h):=\\sum_Kh_KA(m_K)v'_Kw'_K,$$\n\nwhere $m_K$ is the cell midpoint and the cell derivatives are constant. Then\n\n$$|a(v_h,w_h)-a_h(v_h,w_h)|\\le\\frac{h^2}{24}\\|A''\\|_{L^\\infty(0,1)}\\|v_h'\\|_{L^2(0,1)}\\|w_h'\\|_{L^2(0,1)}.$$\n\nMoreover, $\\|v_h'\\|_{L^2(0,1)}^2=\\sum_Kh_K|v'_K|^2$, and likewise for $w_h'$.\n\nThe midpoint rule is exact for this stiffness integrand when $A$ is affine; for a general $C^2$ coefficient the displayed defect is retained. The bound is exact-arithmetic quadrature error, separate from roundoff.\n\n",
+        "strategy": "Apply the composite midpoint error on each cell to the C2 integrand A times the constant cell derivatives, convert cell sup norms to L2 norms, and sum.",
+        "deps": [
+          "def-variational-crime-error-framework",
+          "def-countable-choice",
+          "def-calligraphic-l-p-on-a-measure-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-l-infinity-on-a-measure-space",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "def-nonnegative-lebesgue-integral",
+          "def-nonnegative-simple-measurable-function",
+          "def-integral-of-a-nonnegative-simple-function",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-continuous-implies-integrable",
+          "lem-changing-a-function-at-finitely-many-points",
+          "alg-composite-midpoint-rule",
+          "thm-composite-midpoint-error-bound",
+          "thm-additivity-over-subintervals",
+          "lem-triangle-inequality-finite",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-extreme-value-r"
+        ],
+        "dependency_level": 2,
+        "local_order": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, Theorem 7.1",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6 Numerical Integration",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-midpoint-quadrature-strang-error-for-p1",
+        "kind": "corollary",
+        "title": "A midpoint-quadrature P1 solve has an explicit Strang error budget",
+        "statement": "For a real conforming P1 space, Countable Choice and a C2 exact solution u with F(v)=a(u,v), the midpoint solve has the stated explicit H1 Strang error budget. Positive sampled coefficients give coercivity alpha/2; the load defect is zero for the zero trial space and is otherwise the stated supremum.",
+        "strategy": "Use the cellwise midpoint estimate and perturbation stability threshold in the first Strang estimate, then substitute the proved P1 interpolation bound.",
+        "deps": [
+          "def-variational-crime-error-framework",
+          "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "lem-one-dimensional-p1-interpolation-error",
+          "lem-midpoint-quadrature-defect-for-p1-stiffness",
+          "lem-one-dimensional-zero-boundary-poincare",
+          "lem-w-one-two-is-a-hilbert-space",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice",
+          "thm-holder-inequality-for-integrals",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 3,
+        "local_order": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27, Error analysis with variational crimes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap27.pdf"
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-perturbed-conforming-galerkin-bound-from-cea",
+        "kind": "corollary",
+        "title": "Perturbed conforming solves are controlled by the exact Galerkin baseline",
+        "statement": "For a Hermitian exact form and a coercive perturbed discrete form, the perturbed solution differs from the exact Galerkin solution by at most the discrete residual at that baseline divided by discrete coercivity; the total energy error is bounded by best approximation plus this residual term.",
+        "strategy": "Use the exact Galerkin best-approximation result, bound the difference of the two discrete solutions by coercivity, and apply the triangle inequality.",
+        "deps": [
+          "def-variational-crime-error-framework",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "cor-symmetric-galerkin-best-approximation-in-energy-norm",
+          "thm-lax-milgram",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "local_order": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27, Error analysis with variational crimes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap27.pdf"
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-shape-regular-fe-strang-error-bound",
+        "kind": "corollary",
+        "title": "Shape-regular affine finite elements supply the Strang approximation term",
+        "statement": "Assume Countable Choice. For a conforming affine P1 Lagrange family in dimensions two or three, define h=max({0} union {diam(K)}), including h=0 for the empty mesh. An H2 exact solution with zero boundary nodal values has the explicit first-Strang approximation term C_V C_I h |u|_H2 plus the actual form and data defects, under the stated bounded-DOF, comparison-norm and discrete-stability hypotheses.",
+        "strategy": "Use the local interpolation estimate with p=2, ell=r=2 and m=1, assemble the cell bounds, then substitute the global interpolant in the first Strang estimate.",
+        "deps": [
+          "def-variational-crime-error-framework",
+          "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "def-matching-affine-simplicial-meshes",
+          "def-reference-finite-element-and-unisolvent-dofs",
+          "def-broken-and-conforming-polynomial-spaces",
+          "thm-local-finite-element-interpolation-estimates",
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-graphs-of-continuous-functions-have-content-zero",
+          "thm-jordan-measurable-sets-are-lebesgue-measurable-with-equal-content",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "cor-integral-over-a-null-set-vanishes"
+        ],
+        "dependency_level": 6,
+        "local_order": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Chapter 11, Local interpolation on affine meshes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap11.pdf"
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 4",
+              "url": "https://jschoeberl.github.io/iFEM/_downloads/900feda304f95ee42fd24abe742d7564/numpde.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2463,
+    "id": "variational-crimes-and-strang-lemmas-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Variational crimes and Strang lemmas — Examples",
+    "companion": "variational-crimes-and-strang-lemmas",
+    "requires": [
+      "variational-crimes-and-strang-lemmas"
+    ],
+    "items": [
+      {
+        "id": "ex-midpoint-underintegrated-p2-stiffness-loses-coercivity",
+        "kind": "example",
+        "title": "One midpoint sample destroys a quadratic stiffness coercivity bound",
+        "statement": "On a single interval with the one-dimensional P2 zero-boundary trial function x times (1 minus x), exact stiffness is positive but one midpoint sample gives zero discrete stiffness, so the first Strang stability hypothesis fails.",
+        "strategy": "Compute the exact derivative integral and the midpoint derivative value.",
+        "deps": [
+          "def-variational-crime-error-framework",
+          "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "alg-composite-midpoint-rule",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "def-hilbert-space"
+        ],
+        "dependency_level": 2,
+        "local_order": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27, Error analysis with variational crimes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap27.pdf"
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-nonconforming-residual-breaks-galerkin-orthogonality",
+        "kind": "example",
+        "title": "A broken P1 test exposes a nonzero consistency residual",
+        "statement": "For u(x)=x-x cubed on the two-cell interval mesh, a broken piecewise-linear test with a midpoint jump has exact load minus broken-gradient form equal to minus one quarter; the discrete residual is nonzero and the conforming Céa hypothesis Vh subset V fails.",
+        "strategy": "Verify the exact weak solution, calculate the two cell integrals, and compare the nonconforming space with Céa’s conforming hypothesis.",
+        "deps": [
+          "def-variational-crime-error-framework",
+          "thm-second-strang-lemma-for-nonconforming-galerkin",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "def-countable-choice",
+          "thm-reals-cauchy-complete",
+          "def-hilbert-space",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-holder-inequality-for-integrals",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-lax-milgram",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-continuous-implies-integrable",
+          "lem-changing-a-function-at-finitely-many-points",
+          "thm-additivity-over-subintervals"
+        ],
+        "dependency_level": 2,
+        "local_order": 2,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27, Error analysis with variational crimes",
+              "url": "https://people.tamu.edu/~guermond/M661_FALL_2025/chap27.pdf"
+            },
+            {
+              "title": "Joachim Schöberl, Numerical Methods for Partial Differential Equations, Chapter 25, Non-conforming Finite Element Methods",
+              "url": "https://jschoeberl.github.io/iFEM/FEM/nonconforming.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-two-node-gauss-polynomial-exactness-and-x4-error",
+        "kind": "example",
+        "title": "Two-node Gauss is exact through degree three but not for x to the fourth",
+        "statement": "Assume Countable Choice. For Lebesgue measure on $[-1,1]$, the two-node Gaussian rule has nodes $\\pm1/\\sqrt3$ and weights $1$. The supplier theorem gives exactness through degree three, but the error on $x^4$ is $8/45$.\n\n",
+        "strategy": "Compute the monic quadratic orthogonal polynomial and weights, then evaluate the exact integral and quadrature sum.",
+        "deps": [
+          "def-gauss-moment-data",
+          "def-gauss-quadrature-rule",
+          "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+          "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "def-countable-choice",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral"
+        ],
+        "dependency_level": 8,
+        "local_order": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MATH 373 Lecture Notes, Lecture 14, Gaussian Quadrature",
+              "url": "https://sites.math.rutgers.edu/~falk/math373/lecture14.pdf",
+              "locator": "§10.3, printed p. 44, gives $\\Phi_2(x)=x^2-1/3$; §10.4, printed p. 44, gives the two-node Legendre rule with nodes $\\pm1/\\sqrt3$ and weights $1$, and Theorem 11 gives exactness through degree three."
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

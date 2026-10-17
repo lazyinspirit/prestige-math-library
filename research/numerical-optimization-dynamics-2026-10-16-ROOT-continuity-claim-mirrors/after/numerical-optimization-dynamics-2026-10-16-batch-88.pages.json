@@ -1,0 +1,361 @@
+[
+  {
+    "order": 2460,
+    "id": "iterative-regularization-and-early-stopping",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Iterative regularization and early stopping",
+    "companion": "iterative-regularization-and-early-stopping-examples",
+    "requires": [
+      "numerical-inverse-problems-and-regularization-error",
+      "spectral-regularization-and-parameter-choice",
+      "krylov-methods-and-lanczos-convergence",
+      "preconditioner-algorithms-and-residual-metrics",
+      "gauss-newton-and-levenberg-marquardt-methods",
+      "continuous-functional-calculus-for-self-adjoint-and-normal-operators",
+      "banach-algebras-spectrum-and-holomorphic-functional-calculus",
+      "approximation-and-compactness-in-ck",
+      "hilbert-space-geometry-and-riesz-representation",
+      "the-logarithm-and-general-powers",
+      "relations-functions-and-quotients",
+      "the-derivative-and-mean-value-theorems",
+      "bounded-linear-operators-and-quotient-spaces",
+      "countability-and-uncountability",
+      "analytic-semigroups-and-linear-evolution-equations",
+      "strongly-continuous-semigroups-and-hille-yosida",
+      "banach-valued-integration-and-the-radon-nikodym-property",
+      "monotone-sequences-and-cauchy-completeness"
+    ],
+    "items": [
+      {
+        "id": "alg-landweber-iteration-with-discrepancy-stopping",
+        "kind": "algorithm",
+        "title": "Landweber iteration with discrepancy and budget statuses",
+        "statement": "Assume Countable Choice, as required for the Hilbert-space adjoint in the\niteration.\n\nLet $X,Y$ be real or complex Hilbert spaces, let $A:X\\to Y$ be a nonzero\ncompact linear operator, and let $\\omega$ satisfy\n$0<\\omega<2/\\|A\\|^2$. The input consists of data $y_\\delta\\in Y$, a noise\nbound $\\delta\\ge0$, a discrepancy factor $\\tau>1$, and a finite iteration\nbudget $N\\in\\mathbb N$. Define the associated infinite mathematical path by\n$x_0=0$ and\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k),\\qquad k\\ge0.$$\nFor the finite procedure, evaluate only the prefix through index $N$, in\nincreasing order, and return at its first stopping condition. Values of the\nmathematical path after an earlier return remain defined by the recurrence but\nneed not be computed by an implementation.\n\nFor $k=0,\\ldots,N$ in increasing order, compute\n$r_k=y_\\delta-Ax_k$. If $\\|r_k\\|\\le\\tau\\delta$, return\n$(x_k,k,\\texttt{discrepancy})$. If $k=N$, return\n$(x_k,k,\\texttt{budget-exhausted})$. Otherwise set\n$$x_{k+1}=x_k+\\omega A^*(y_\\delta-Ax_k).$$\n\nThe procedure uses exact Hilbert-space operations. It reports a finite-budget\nfailure to cross as inconclusive; that status is not a convergence conclusion.",
+        "strategy": "Give the finite inputs and every return branch; define the mathematical recurrence path through the budget and distinguish the lazy early return from its continuation.",
+        "deps": [
+          "def-hilbert-space",
+          "def-hilbert-space-adjoint",
+          "def-compact-linear-operator",
+          "def-operator-norm",
+          "def-natural-numbers",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-golub-kahan-lsqr-with-givens-and-status",
+        "kind": "algorithm",
+        "title": "Exact-arithmetic LSQR with Golub–Kahan bidiagonalization and explicit statuses",
+        "statement": "Let $A\\in\\mathbb R^{m\\times n}$, $b\\in\\mathbb R^m$, $x_0\\in\\mathbb R^n$,\n$\\delta\\ge0$, $\\tau>1$, and a budget $N\\in\\mathbb N$ be given. All\noperations are exact. Put $r_0=b-Ax_0$. If $\\|r_0\\|_2=0$, return\n$(x_0,0,\\text{zero-residual})$. If $\\|r_0\\|_2\\le\\tau\\delta$, return\n$(x_0,0,\\text{discrepancy})$. If $N=0$, return\n$(x_0,0,\\text{budget-exhausted})$. Otherwise initialize\n$\\beta_1=\\|r_0\\|_2$, $u_1=r_0/\\beta_1$, and\n$\\alpha_1=\\|A^Tu_1\\|_2$. If $\\alpha_1=0$, return\n$(x_0,0,\\text{stationary-nonzero-residual})$. Otherwise set\n$v_1=A^Tu_1/\\alpha_1$.\n\nInitialize the current best iterate and index to $(x_{\\rm best},j_{\\rm best})\n=(x_0,0)$. If a Givens rotation is undefined, return\n$(x_{\\rm best},j_{\\rm best},\\text{small-QR-breakdown})$.\n\nFor $j=1,\\ldots,N$, perform these steps.\n\n1. Compute $p_j=Av_j-\\alpha_j u_j$ and $\\beta_{j+1}=\\|p_j\\|_2$. If\n   $\\beta_{j+1}>0$, set $u_{j+1}=p_j/\\beta_{j+1}$.\n2. If $\\beta_{j+1}>0$, compute\n   $q_j=A^Tu_{j+1}-\\beta_{j+1}v_j$ and $\\alpha_{j+1}=\\|q_j\\|_2$. If\n   $\\alpha_{j+1}>0$, set $v_{j+1}=q_j/\\alpha_{j+1}$. A zero\n   $\\beta_{j+1}$ or $\\alpha_{j+1}$ marks bidiagonalization breakdown.\n3. Form the $(j+1)\\times j$ lower-bidiagonal matrix $B_j$ with diagonal\n   $\\alpha_1,\\ldots,\\alpha_j$ and subdiagonal\n   $\\beta_2,\\ldots,\\beta_{j+1}$, using $\\beta_{j+1}=0$ if step 1 broke down.\n   Let $e_1=(1,0,\\ldots,0)^T\\in\\mathbb R^{j+1}$ and $c=\\beta_1e_1$.\n   For $i=1,\\ldots,j$, let $a,b$ be the current entries at positions\n   $(i,i),(i+1,i)$ of the rotated matrix and put $\\rho=(a^2+b^2)^{1/2}$.\n   If $\\rho=0$, return the current best output with status\n   `small-QR-breakdown`. Otherwise put $c_i=a/\\rho$, $s_i=b/\\rho$ and\n   apply $\\begin{pmatrix}c_i&s_i\\\\-s_i&c_i\\end{pmatrix}$ to rows\n   $i,i+1$ of the full matrix and right-hand side. After these $j$ rotations,\n   let $R_j$ be the first $j$ rows of the rotated matrix and $d_j$ the first\n   $j$ entries of the rotated right-hand side. Solve $R_jz_j=d_j$ by back\n   substitution. Update $(x_{\\rm best},j_{\\rm best})=(x_0+V_jz_j,j)$.\n4. Put $V_j=[v_1,\\ldots,v_j]$ and $x_j=x_0+V_jz_j$. Compute the physical\n   residual $\\|Ax_j-b\\|_2$. If it is at most $\\tau\\delta$, return\n   $(x_j,j,\\text{discrepancy})$. If bidiagonalization broke down, return\n   $(x_j,j,\\text{bidiagonalization-breakdown})$. If $j=N$, return\n   $(x_j,j,\\text{budget-exhausted})$; otherwise continue.\n\nThe procedure makes no claim that a finite-budget status is a successful\nregularized approximation. Its exact-arithmetic residual-minimization property\nis a separate theorem.",
+        "strategy": "State the matrix/vector domains, all zero branches, the bidiagonal recurrence, the exact row rotations, triangular solve, physical residual test, and outputs. Claim no finite-precision stability.",
+        "deps": [
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "def-euclidean-inner-product",
+          "def-natural-numbers"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-local-lipschitz-derivative-quadratic-remainder",
+        "kind": "lemma",
+        "title": "A Lipschitz Fréchet derivative gives a quadratic linearization remainder",
+        "statement": "Assume Countable Choice. Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ and let\n$X,Y$ be Banach spaces over the same field $\\mathbb F$. Let $U\\subseteq X$ be\nopen and let $F:U\\to Y$ be continuously Fréchet differentiable over\n$\\mathbb F$. Thus $F'(u)$ is bounded $\\mathbb F$-linear for each $u\\in U$ and\n$$\\lim_{\\substack{h\\to0,\\ h\\ne0\\\\u+h\\in U}}\n\\frac{\\|F(u+h)-F(u)-F'(u)h\\|}{\\|h\\|}=0.$$\nIn particular, in the complex case $F'(u)$ is complex-linear and the limit\nranges over complex increments. Let $K\\subseteq U$ be convex and let\n$x,z\\in K$. If\n$\\|F'(u)-F'(v)\\|\\le L\\|u-v\\|$ for all $u,v\\in K$, where $L\\ge0$, then\n$$\\|F(x)-F(z)-F'(z)(x-z)\\|\\le\\frac L2\\|x-z\\|^2.$$",
+        "strategy": "Parametrize the segment from z to x, apply the Banach-valued fundamental theorem of calculus, subtract the constant derivative integral, and integrate the Lipschitz bound.",
+        "deps": [
+          "lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves",
+          "lem-linearity-of-the-bochner-integral",
+          "lem-bochner-integral-norm-inequality",
+          "def-bochner-integrable-function",
+          "def-banach-valued-simple-function-and-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-frechet-derivative-between-banach-spaces",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-iteratively-regularized-gauss-newton-step",
+        "kind": "algorithm",
+        "title": "Iteratively regularized Gauss–Newton step with explicit early stopping",
+        "statement": "Assume Countable Choice, as required for the Hilbert-space adjoints in the\nnormal equation.\n\nLet $X,Y$ be Hilbert spaces over the same field $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$,\nlet $U\\subseteq X$ be open, and let $F:U\\to Y$ be continuously Fréchet\ndifferentiable over $\\mathbb F$. In the complex case, each $F'(x)$ is a bounded\ncomplex-linear operator and the Fréchet remainder is measured over complex\nincrements, so\n$$\\lim_{\\substack{h\\to0,\\ h\\ne0\\\\x+h\\in U}}\n\\frac{\\|F(x+h)-F(x)-F'(x)h\\|}{\\|h\\|}=0.$$\nInputs are\n$x_0\\in U$, noisy data $y_\\delta\\in Y$, a bound $\\delta\\ge0$, a discrepancy\nfactor $\\tau>1$, a finite budget $N\\in\\mathbb N$, and parameters\n$\\alpha_0>0$ and $q\\in(0,1)$. At iteration $k$, if $x_k\\notin U$ return\n$(x_k,k,\\text{domain-failure})$. Otherwise put $A_k=F'(x_k)$ and\n$\\alpha_k=\\alpha_0q^k$. Before computing an update, if\n$\\|F(x_k)-y_\\delta\\|\\le\\tau\\delta$, return\n$(x_k,k,\\text{discrepancy})$. If $k=N$, return\n$(x_k,k,\\text{budget-exhausted})$.\n\nFor $k<N$, solve the unique Hilbert-space Tikhonov normal equation\n$$\\bigl(A_k^*A_k+\\alpha_k I_X\\bigr)s_k=A_k^*(y_\\delta-F(x_k))$$\nand set $x_{k+1}=x_k+s_k$. The shifted normal operator is invertible by\n[[lem-hilbert-tikhonov-normal-operator-invertible]]. If the returned iterate\nleaves $U$, the next call returns domain-failure. The procedure asserts no\nconvergence theorem; its prescribed step is the unanchored Levenberg–Marquardt\nform used in the assigned contract.",
+        "strategy": "State the open-domain and Hilbert-space inputs, check discrepancy before the solve, use the positive-shift normal inverse, update by x_{k+1}=x_k+s_k, and make no convergence assertion.",
+        "deps": [
+          "def-hilbert-space",
+          "def-hilbert-space-adjoint",
+          "def-bounded-linear-operator",
+          "def-countable-choice",
+          "def-natural-numbers",
+          "def-integer-power",
+          "lem-hilbert-tikhonov-normal-operator-invertible"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-lsqr-residual-minimizes-on-krylov-subspace",
+        "kind": "theorem",
+        "title": "A nonbreakdown LSQR iterate minimizes residual on its Krylov space",
+        "statement": "Let $A\\in\\mathbb R^{m\\times n}$, $b\\in\\mathbb R^m$, $x_0\\in\\mathbb R^n$, and\n$r_0=b-Ax_0$. Consider a $k$-step run of\n[[alg-golub-kahan-lsqr-with-givens-and-status]] with nonzero initial residual\nand no bidiagonalization or small-QR breakdown through step $k$. Then its\niterate $x_k$ minimizes $\\|Ax-b\\|_2$ over\n$$x_0+\\mathcal K_k(A^TA,A^Tr_0),$$\nwhere $\\mathcal K_k(M,v)=\\operatorname{span}\\{v,Mv,\\ldots,M^{k-1}v\\}$ is the\nKrylov subspace of [[def-krylov-subspace-of-a-matrix-and-start-vector]].\nThe assertion is exact-arithmetic residual minimization; it is not a\nconvergence or noise-stability theorem.",
+        "strategy": "Prove the two orthogonality recurrences by induction, assemble the bidiagonal projection and norm identity, transfer the projected least-squares minimizer, and identify the basis span with the Krylov space.",
+        "deps": [
+          "alg-golub-kahan-lsqr-with-givens-and-status",
+          "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "prop-krylov-subspace-is-the-polynomial-image-of-the-start-vector",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "def-euclidean-inner-product",
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "thm-least-squares-solutions-and-normal-equation"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-landweber-filter-and-residual-identities",
+        "kind": "lemma",
+        "title": "Landweber iterates and residuals are spectral-filter iterates",
+        "statement": "Assume Countable Choice. Let $A:X\\to Y$ and $\\omega$ satisfy the\nhypotheses of [[alg-landweber-iteration-with-discrepancy-stopping]] and put\n$T=A^*A$. For each integer $k\\ge0$, define\n$g_0(t)=0$ and\n$g_k(t)=\\omega\\sum_{j=0}^{k-1}(1-\\omega t)^j$ for $k\\ge1$, with\n$r_k(t)=(1-\\omega t)^k$. For the associated infinite mathematical path,\n$$x_k=g_k(T)A^*y_\\delta,\\qquad y_\\delta-Ax_k=r_k(AA^*)y_\\delta.$$\nIf $y_\\delta=Ax^\\dagger$, then\n$$x^\\dagger-x_k=r_k(T)x^\\dagger.$$\nHere $g_k(T)$ and $r_k(T)$ are the compact spectral multipliers defined in\n[[def-compact-spectral-filter-and-qualification]]; $r_k(AA^*)$ is the\nmultiplier with scalar function $t\\mapsto(1-\\omega t)^k$ on the compact\nself-adjoint operator $AA^*$, as supplied by\n[[lem-compact-spectral-multiplier-is-well-defined]].",
+        "strategy": "Induct on the vector recurrence and residual recurrence, then use the finite geometric identity to identify g_k and r_k.",
+        "deps": [
+          "alg-landweber-iteration-with-discrepancy-stopping",
+          "def-compact-spectral-filter-and-qualification",
+          "lem-compact-gram-operator-is-positive-and-has-kernel",
+          "lem-compact-spectral-multiplier-is-well-defined",
+          "def-hilbert-space-adjoint",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-irlgnm-one-step-error-recurrence",
+        "kind": "lemma",
+        "title": "One-step error recurrence for the assigned nonlinear regularized Gauss–Newton step",
+        "statement": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces over the\nsame scalar field and let $U\\subseteq X$ be open. Let $F:U\\to Y$ be\ncontinuously Fréchet differentiable over that field, with bounded\ncomplex-linear derivatives in the complex case. Let $x^\\dagger\\in U$ satisfy\n$F(x^\\dagger)=y$, and suppose $x_k,x^\\dagger$ lie in a convex subset of $U$\non which $F'$ is $L$-Lipschitz. Let $y_\\delta$ satisfy\n$\\|y_\\delta-y\\|\\le\\delta$, put $e_k=x_k-x^\\dagger$ and $A_k=F'(x_k)$,\nand use the step of\n[[alg-iteratively-regularized-gauss-newton-step]] with $\\alpha_k>0$.\nDefine\n$$R_k:=y-F(x_k)+A_ke_k.$$\nThen\n$$e_{k+1}=\\alpha_k(A_k^*A_k+\\alpha_kI)^{-1}e_k +(A_k^*A_k+\\alpha_kI)^{-1}A_k^*(y_\\delta-y+R_k),$$\nand\n$$\\|e_{k+1}\\|\\le\\|e_k\\|+ \\frac{\\delta+(L/2)\\|e_k\\|^2}{2\\sqrt{\\alpha_k}}.$$\nIf in addition the tangential-cone condition\n$$\\|F(x)-F(z)-F'(z)(x-z)\\|\\le\\eta\\|F(x)-F(z)\\|$$\nholds for all $x,z$ in that subset, then also\n$\\|R_k\\|\\le\\eta(\\|F(x_k)-y_\\delta\\|+\\delta)$, which may replace\n$(L/2)\\|e_k\\|^2$ in the recurrence bound. This lemma alone does not assert\ncontraction or discrepancy-stopped convergence.",
+        "strategy": "Multiply the error update by the shifted normal operator, isolate the noise and linearization remainder, then use the supplier norm bounds and triangle inequality.",
+        "deps": [
+          "alg-iteratively-regularized-gauss-newton-step",
+          "lem-local-lipschitz-derivative-quadratic-remainder",
+          "lem-hilbert-tikhonov-normal-operator-invertible",
+          "lem-hilbert-tikhonov-noise-amplification-bound",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-landweber-source-and-noise-error-bounds",
+        "kind": "theorem",
+        "title": "Landweber converges for exact data and balances source bias with noise",
+        "statement": "Assume Countable Choice. Let $A:X\\to Y$ be a nonzero compact operator between\nreal or complex Hilbert spaces, set $T=A^*A$, choose\n$0<\\omega<2/\\|A\\|^2$, and let $y=Ax^\\dagger$ with\n$x^\\dagger\\in(\\ker A)^\\perp$. Let $x_k$ be the exact-data Landweber iterates\nin the infinite recurrence-defined path of\n[[alg-landweber-iteration-with-discrepancy-stopping]] for datum $y$; this path\ndepends on $A,\\omega,y$ and not on a finite cap or stopping test. Put\n$r_k(t)=(1-\\omega t)^k$. Then $\\|x_k-x^\\dagger\\|$ is nonincreasing and\n$x_k\\to x^\\dagger$ in norm. For every $s>0$, if $x^\\dagger=T^s w$ with\n$w\\in X$, then for $k\\ge1$,\n$$\\|x_k-x^\\dagger\\|\\le C_{s,A,\\omega}\\|w\\|k^{-s}.$$\nThe scalar filter also satisfies\n$$\\sup_{t\\in\\Sigma}t^s|r_k(t)|\\le C_{s,A,\\omega}k^{-s},$$\nwhere $\\Sigma$ is the set of nonzero eigenvalues of $T$.\nFor noisy data $y_\\delta$ with $\\|y_\\delta-y\\|\\le\\delta$, let\n$x_k^\\delta$ be the infinite recurrence-defined path for datum $y_\\delta$.\nIt satisfies\n$$\\|x_k^\\delta-x_k\\|\\le\\sqrt{2\\omega k}\\,\\delta.$$\nConsequently, under the source condition $x^\\dagger=T^\\nu w$,\n$0<\\nu\\le1$, the total error obeys\n$$\\|x_k^\\delta-x^\\dagger\\|\\le C_{\\nu,A,\\omega}\\|w\\|k^{-\\nu} +\\sqrt{2\\omega k}\\,\\delta.$$",
+        "strategy": "Use compact spectral components for monotonicity and convergence, bound the scalar filter multiplier, and estimate the noise operator through Q_k Q_k*.",
+        "deps": [
+          "lem-landweber-filter-and-residual-identities",
+          "alg-landweber-iteration-with-discrepancy-stopping",
+          "def-compact-spectral-filter-and-qualification",
+          "lem-compact-gram-operator-is-positive-and-has-kernel",
+          "thm-spectral-theorem-for-compact-self-adjoint-operators",
+          "lem-compact-spectral-multiplier-is-well-defined",
+          "thm-hilbert-adjoint-properties",
+          "def-orthogonality-and-orthogonal-complement",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-landweber-discrepancy-stopped-convergence-rate",
+        "kind": "corollary",
+        "title": "Landweber discrepancy stopping converges under a source condition",
+        "statement": "Assume Countable Choice and the hypotheses of\n[[thm-landweber-source-and-noise-error-bounds]]. Let\n$x^\\dagger=T^\\nu w$ with $0<\\nu\\le1$ and $R=\\|w\\|\\ge0$. Fix $\\tau>1$ and\n$\\delta>0$ with $\\|y_\\delta-Ax^\\dagger\\|\\le\\delta$. Let $k_\\delta$ be the\nfirst index on the associated infinite mathematical path satisfying\n$\\|Ax_{k_\\delta}^\\delta-y_\\delta\\|\\le\\tau\\delta$, where $x_k^\\delta$ is\nthe corresponding noisy-data path.\nIf a finite budget is used, assume it is at least the upper bound $K_\\delta$\nconstructed in the proof when $R>0$. If $R=0$, the initial iterate is the\nfirst crossing and any finite budget suffices. For all sufficiently small\n$\\delta$,\n$$\\|x_{k_\\delta}^\\delta-x^\\dagger\\| \\le C_{\\nu,A,\\omega,\\tau}R^{1/(2\\nu+1)}\\delta^{2\\nu/(2\\nu+1)}.$$\nThe conclusion is conditional on an actual discrepancy crossing; a budget\nexhaustion status is inconclusive.",
+        "strategy": "Construct an upper crossing index from the residual source bound, control noise in data space, prove the spectral interpolation inequality on finite eigenvalue sets, and bound the propagated solution noise.",
+        "deps": [
+          "thm-landweber-source-and-noise-error-bounds",
+          "lem-landweber-filter-and-residual-identities",
+          "alg-landweber-iteration-with-discrepancy-stopping",
+          "def-compact-spectral-filter-and-qualification",
+          "lem-compact-gram-operator-is-positive-and-has-kernel",
+          "thm-spectral-theorem-for-compact-self-adjoint-operators",
+          "lem-compact-spectral-multiplier-is-well-defined",
+          "thm-hilbert-adjoint-properties",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+        "title": "Real and complex Hilbert source powers and fixed-reference Tikhonov filter bounds",
+        "kind": "lemma",
+        "deps": [
+          "thm-continuous-functional-calculus-for-bounded-self-adjoint-operators",
+          "lem-spectrum-of-a-positive-operator-is-nonnegative",
+          "thm-spectrum-is-nonempty-compact-and-norm-bounded",
+          "cor-weierstrass-approximation-on-a-closed-interval",
+          "thm-hilbert-adjoint-properties",
+          "def-real-and-complex-inner-product-space",
+          "def-hilbert-space",
+          "def-real-power",
+          "thm-real-power-laws",
+          "thm-real-power-continuity-and-derivatives",
+          "lem-hilbert-tikhonov-normal-operator-invertible",
+          "lem-hilbert-tikhonov-noise-amplification-bound",
+          "def-axiom-of-choice",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-anchored-irgnm-with-discrepancy-stopping",
+        "title": "Anchored iteratively regularized Gauss-Newton with finite discrepancy stopping",
+        "kind": "algorithm",
+        "deps": [
+          "def-natural-numbers",
+          "def-hilbert-space",
+          "def-hilbert-space-adjoint",
+          "def-bounded-linear-operator",
+          "def-frechet-derivative-between-banach-spaces",
+          "lem-hilbert-tikhonov-normal-operator-invertible",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-anchored-irgnm-fixed-reference-error-and-residual",
+        "title": "Anchored IRGNM error identity and fixed-reference residual inequality",
+        "kind": "lemma",
+        "deps": [
+          "alg-anchored-irgnm-with-discrepancy-stopping",
+          "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+          "lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves",
+          "lem-linearity-of-the-bochner-integral",
+          "lem-bochner-integral-norm-inequality",
+          "thm-hilbert-adjoint-properties",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-irlgnm-local-source-condition-discrepancy-convergence",
+        "title": "Anchored IRGNM local source-condition convergence with ordinary discrepancy stopping",
+        "kind": "theorem",
+        "deps": [
+          "alg-anchored-irgnm-with-discrepancy-stopping",
+          "lem-anchored-irgnm-fixed-reference-error-and-residual",
+          "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+          "lem-hilbert-tikhonov-normal-operator-invertible",
+          "thm-hilbert-adjoint-properties",
+          "lem-geometric-sequence-null",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 2461,
+    "id": "iterative-regularization-and-early-stopping-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Iterative regularization and early stopping — Examples",
+    "companion": "iterative-regularization-and-early-stopping",
+    "requires": [
+      "iterative-regularization-and-early-stopping"
+    ],
+    "items": [
+      {
+        "id": "cex-full-lsqr-can-amplify-data-noise",
+        "kind": "counterexample",
+        "title": "A fully converged LSQR solve can amplify a small singular-direction error",
+        "statement": "There is a constant independent of the matrix such that continuing the LSQR\nprojected solves to zero residual always gives an estimate within that\nconstant times the data-noise level of the exact solution.",
+        "strategy": "Compute the one-dimensional weak-singular-direction Golub–Kahan and projected solve exactly, then compare its solution error with the data-noise norm; distinguish the assigned early return.",
+        "deps": [
+          "alg-golub-kahan-lsqr-with-givens-and-status",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "def-euclidean-inner-product",
+          "def-natural-numbers"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-nonlinear-exponential-kinetics-one-step",
+        "kind": "example",
+        "title": "One regularized Gauss–Newton step for exponential reaction kinetics",
+        "statement": "For a first-order reaction with conversion fraction $F(c)=1-e^{-c}$ at unit\ntime, use $X=Y=U=\\mathbb R$, true rate $c^\\dagger=\\log 2$, exact datum\n$y=\\tfrac12$, initial rate $c_0=0$, $\\alpha_0=\\tfrac14$, $q=\\tfrac12$,\ndiscrepancy factor $\\tau=2$, and budget $N=1$. For\n$0<\\delta\\le\\tfrac1{10}$ and $|\\varepsilon|\\le\\delta$, the datum\n$y^\\delta=\\tfrac12+\\varepsilon$ does not meet the initial discrepancy stopping condition. The\nsingle update gives $c_1=\\tfrac25+\\tfrac45\\varepsilon$; the procedure returns\nthis state with status `discrepancy` if its post-update residual is at most\n$2\\delta$, and otherwise with status `budget-exhausted`.",
+        "strategy": "Differentiate the scalar model with the chain rule, verify exp(log 2)=2, check the initial residual exceeds tau delta, substitute the scalar normal equation, and bound the returned rate below.",
+        "deps": [
+          "alg-iteratively-regularized-gauss-newton-step",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-natural-logarithm",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+        "kind": "example",
+        "title": "Landweber semiconvergence for diagonal noisy data",
+        "statement": "Let $I=\\{j\\in\\mathbb N:j\\ge1\\}$ and $X=Y=\\ell^2(I,\\mathbb R)$, let $Ae_j=2^{-j}e_j$ for the standard unit\nvectors $e_j$, and take $\\omega=1$, exact solution $x^\\dagger=0$, and exact\ndata $y=0$. For $\\delta>0$ let\n$y^\\delta_j=\\delta\\,2^{-j/2}$, so $\\|y^\\delta-y\\|=\\delta$. The un-stopped\nLandweber residual tends to zero, but the reconstruction norms are unbounded\nalong the subsequence $k_j=4^j$.",
+        "strategy": "Approximate the diagonal operator by finite-rank truncations, compute residual and reconstruction coordinates, and use a geometric bound on (1-4^-j)^(4^j).",
+        "deps": [
+          "alg-landweber-iteration-with-discrepancy-stopping",
+          "lem-landweber-filter-and-residual-identities",
+          "def-compact-linear-operator",
+          "lem-finite-rank-operators-are-compact",
+          "thm-norm-limit-of-compact-operators-is-compact",
+          "lem-square-summable-sequences-form-a-hilbert-space",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "def-hilbert-space-adjoint",
+          "def-countable-choice",
+          "def-operator-norm",
+          "def-natural-numbers"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-three-pixel-blur-landweber-reconstruction",
+        "kind": "example",
+        "title": "Landweber reconstructs a three-pixel blurred signal",
+        "statement": "Consider the symmetric three-pixel averaging blur\n$$A=\\frac14\\begin{pmatrix}2&1&1\\\\1&2&1\\\\1&1&2\\end{pmatrix}.$$\nFor the zero-sum signal $x^\\dagger=(1,0,-1)^T$, exact data are\n$y=Ax^\\dagger=\\tfrac14x^\\dagger$. With $x_0=0$ and $\\omega=1$, the\nLandweber iterates are $x_k=(1-(15/16)^k)x^\\dagger$: the first reconstruction\nis only $x_1=\\tfrac1{16}x^\\dagger$, while the exact signal is recovered in the\nlimit.",
+        "strategy": "Diagonalize the displayed rank-one perturbation of the identity, verify the step interval, and apply the exact-data Landweber error filter.",
+        "deps": [
+          "alg-landweber-iteration-with-discrepancy-stopping",
+          "lem-landweber-filter-and-residual-identities",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

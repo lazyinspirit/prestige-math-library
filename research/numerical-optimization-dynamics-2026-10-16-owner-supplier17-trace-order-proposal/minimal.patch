@@ -1,0 +1,54 @@
+--- items/alg-scaled-complex-householder-and-givens-updates.md
++++ items/alg-scaled-complex-householder-and-givens-updates.md
+@@ -21,6 +21,51 @@
+ 
+ ## Definition
+ 
++**Scalar execution order.** These conventions expand every arithmetic
++expression below into a fixed finite scalar schedule; they do not execute the
++exact theoretical representatives. Visit vector indices increasingly and matrix
++columns increasingly, with row indices increasing within each column. Visit the
++real component before the imaginary component. For a complex vector $z$, its
++real-component list is $(\Re z_1,\Im z_1,\ldots,\Re z_r,\Im z_r)$.
++Evaluate displayed assignments in their written order and nested operations
++from the inside out, left operand before right operand. A complex product uses
++rounded real products $ac,bd,ad,bc$, in that order, followed by the rounded real
++subtraction $ac-bd$ and rounded imaginary addition $ad+bc$. Do not fuse
++operations. Return immediately at the first failing primitive; indices refer
++to this expanded order. Copies, sign changes and conjugations are exact.
++
++For a scaled norm, first form every rounded component divided by the common
++scale in list order. Then, in that same order, round each component square and
++accumulate it: copy the first square to the accumulator, and round each
++subsequent accumulator-plus-square addition. Use this same square-and-sum
++schedule for the stored-vector squared norm $w$, without scaling. An empty
++sum is exact zero and requests no primitive. Apply square root and rescaling
++only at their prescribed subsequent stages. The two-component and
++four-component norm calls use their displayed component lists in this order.
++
++For the Householder dot row $d$, visit columns $j$ increasingly. For each
++column visit $i=1,\ldots,r$, form the declared complex product
++$\overline v_iB_{ij}$, copy the first product as the partial dot, then add each
++later product by rounded real-component addition followed by rounded
++imaginary-component addition. Finish all of $d$ before forming $p$ in
++increasing row order, then all of $Z$ in the matrix order above, then all
++entries of $B-Z$ in that order. Evaluate both components of the formation of
++$v$ and every scalar scaling or division in real-then-imaginary order. A
++separate block call uses already stored $v,\widehat\tau$ and the same
++$d,p,Z,B-Z$ stages, omitting formation and target overwrite.
++
++For a Givens application, visit columns increasingly and copy the two old
++entries before changing either. Compute the upper output first, then the
++lower output, each by its two products in written order followed by its
++componentwise addition. Each of the prescribed two complex products uses
++the six-operation schedule above, including a real coefficient viewed as a
++complex number with zero imaginary component. Both outputs use the copied
++old entries.
++Perform an instructed target zero write only after these outputs. Right
++applications execute the stated conjugate-transpose reduction with these
++same conventions. No intermediate is reused across different expressions
++unless explicitly stored by the procedure.
++
+ Use the operationwise real/complex arithmetic model, with six-real-operation complex products and componentwise division by positive real scalars. A scaled norm of a nonzero complex vector first chooses the largest absolute real or imaginary component $s>0$, rounds every real component divided by $s$, sums their rounded squares sequentially, rounds the positive square root, and rounds multiplication by $s$. A norm of already scaled components omits the last multiplication. Zero input has exact norm zero. Reject every nonzero exact intermediate outside the normal range, nonfinite/invalid operation, and nonpositive required norm; return the first range-failure. All sign changes and conjugations are exact.
+ 
+ For a Householder active block $C=[x\;B]$, $x\in\mathbb C^r$, a zero $x$ copies the block with identity action. Otherwise compute $\widehat N$ by the scaled norm. If $x_1=0$ put $\widehat\phi=1$; otherwise compute its modulus $\widehat a$ by its own two-component scaled norm and divide its real and imaginary parts by $\widehat a$. Set $\widehat\alpha=-\operatorname{fl}(\widehat\phi\widehat N)$ using real-scalar component multiplication, and $v=\operatorname{fl}(x-\widehat\alpha e_1)$. Compute $w$ by sequential summation of all $2r$ rounded real component squares of $v$, and $\widehat\tau=\operatorname{fl}(2/w)$. Compute $d=\operatorname{fl}(v^*B)$, $p=\operatorname{fl}(\widehat\tau v)$, $Z=\operatorname{fl}(pd)$, and $\widehat B=\operatorname{fl}(B-Z)$. Return $C_+=[\widehat\alpha e_1\;\widehat B]$, writing exact zeros below the target diagonal, and store $v,\widehat\tau$. Its theoretical representative is $H(v)=I-2vv^*/(v^*v)$. For a separate block application omit the column overwrite. For a right step apply these instructions to the conjugate-transposed block and transpose back.

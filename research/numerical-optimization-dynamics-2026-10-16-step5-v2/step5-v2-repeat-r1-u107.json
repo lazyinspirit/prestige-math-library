@@ -1,0 +1,113 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "107",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "alg-pick-freeze-monte-carlo-sobol-estimators",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "05469691026197015915d7332525c3854a19a41717a813e70ee6c66c53d72fbf",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "With row vectors Z_r of size 1 by (2d+1), the original centered row times its transpose is scalar, so it neither defines the covariance matrix nor admits the stated Jacobian sandwich. Reversing the factors gives entry (a,b) equal to the centered coordinate cross-product sum divided by n-1, hence the required (2d+1)-square covariance matrix. This is a defective algorithm output, not a cosmetic convention.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-pick-freeze-monte-carlo-sobol-estimators",
+      "disposition": "repaired",
+      "post_sha256": "99b56f3dbe467737ea9d35f5fe1da654c8545ea222bec19302ae607137b69070",
+      "review_context_sha256": "613645561fcbd33bc413de5106f84f839fb693ed4f402bc82d864260a81bba96",
+      "reason": "Reversed only the two covariance factors, preserving row vectors, sampling, ratios and branches. For any column a, a^T Sigmahat a is a sum of squared centered row projections divided by n-1, so the matrix is symmetric positive semidefinite and has the dimensions required by the 2d by (2d+1) Jacobian. The two prerequisite items give exactly the hybrid numerator identities and positive-population-variance normalization. Finite sampled values give finite empirical products under the L2 input; a finite population covariance and MCSE validity still require the separately stated stronger assumptions. Dbar is nonnegative, so the two return branches exhaust the inputs. This is the repair author's review, not independent approval.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-pick-freeze-sobol-ratio-joint-clt-and-mcse",
+    "ex-ratio-pick-freeze-index-estimator-is-biased"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-pick-freeze-monte-carlo-sobol-estimators",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "affected_use": "items/alg-pick-freeze-monte-carlo-sobol-estimators.md, Definition: explicit empirical covariance and the returned Jacobian sandwich.",
+      "reason": "A centered row times its transpose produces a scalar and invalidates the plug-in covariance output. The repair transposes the first factor instead, yielding all centered coordinate cross-products and restoring the stated covariance interface.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "definition_change": "Only (Z_r-Zbar)(Z_r-Zbar)^T became (Z_r-Zbar)^T(Z_r-Zbar) in the explicit sample covariance formula. No hypotheses, dependencies, ratio definitions, branches or Remarks changed.",
+    "contract_repair": "Under the shared-write lock, reread the owning batch-107 contract and replaced exactly the two full-Definition quotation mirrors for the CLT theorem and bias example; all other contract bytes were preserved. No item judgment or stamp was written.",
+    "consumer_reviews": [
+      {
+        "id": "thm-pick-freeze-sobol-ratio-joint-clt-and-mcse",
+        "path": "items/thm-pick-freeze-sobol-ratio-joint-clt-and-mcse.md",
+        "affected_use": "Statement: M_n=Jhat Sigmahat Jhat^T/n and n M_n converges to J Sigma J^T. Fact F1 retains the algorithm row convention; proof step 3.2 expands each sample covariance entry using integrable products Z_a Z_b, and step 4.1 counts O(nd^2) covariance work.",
+        "disposition": "sound_without_item_edit",
+        "reason": "The repaired matrix has precisely the entrywise cross-products required by step 3.2. Under f in L4, all row coordinates have finite second moments, so the product weak law establishes convergence to the population covariance; the ratio derivative has the stated dimensions. The entry count and operation bound are unchanged. Its full-Definition contract quotation was updated.",
+        "scope": "draft_frozen_frontier"
+      },
+      {
+        "id": "ex-ratio-pick-freeze-index-estimator-is-biased",
+        "path": "items/ex-ratio-pick-freeze-index-estimator-is-biased.md",
+        "affected_use": "Example and fact F1 use the two-row algorithm ratio Nbar/Dbar conditional on Dbar>0. Verification steps 1.2 and 2.1 use N_r=X_r-U_r V_r, D_r=(1/2)1_{W_r!=Wprime_r}, and K distributed as Binomial(2,1/2).",
+        "disposition": "sound_without_item_edit",
+        "reason": "The covariance-factor correction changes none of those quantities. Independence gives E[N_1+N_2]=1/2 and E[Nbar/Dbar|K]=1/K; the positive-K weights 2/3 and 1/3 yield 5/6. The digest concern about the return condition is already resolved in the current F1, which explicitly says sample mean Dbar>0. Its full-Definition contract quotation was updated.",
+        "scope": "draft_frozen_frontier"
+      }
+    ],
+    "page_review": {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/global-sensitivity-anova-and-sobol-estimation.md",
+      "affected_use": "Objective links the independent-bundle procedure and states its joint CLT and plug-in MCSE under AC, finite fourth moment and positive output variance.",
+      "disposition": "sound_without_edit",
+      "reason": "The corrected covariance matches the CLT consumer; the page already states its stronger hypotheses and does not reproduce the erroneous product."
+    },
+    "published_consumer_ledger": "No published direct item consumer was found. Both direct item consumers are draft frozen-frontier subjects; no published-consumer update or outside maintenance repair is proposed.",
+    "validation": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-107.proof-contracts.json --items alg-pick-freeze-monte-carlo-sobol-estimators,thm-pick-freeze-sobol-ratio-joint-clt-and-mcse,ex-ratio-pick-freeze-index-estimator-is-biased --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; three selected contracts checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-pick-freeze-monte-carlo-sobol-estimators.md --json",
+        "exit_code": 0,
+        "result": "one file; zero checked proofs; not-applicable; zero failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-pick-freeze-monte-carlo-sobol-estimators.md --json",
+        "exit_code": 0,
+        "result": "one file checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-pick-freeze-monte-carlo-sobol-estimators.md",
+        "exit_code": 0,
+        "result": "one item; zero steps; zero defects; run once after the final item edit"
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items alg-pick-freeze-monte-carlo-sobol-estimators",
+        "exit_code": 0,
+        "result": "Captured the review hashes immediately after the item review and repair, before contract quotation maintenance; no supplier item was edited afterward."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this report and routes the two frontier consumer interfaces through ordinary owner processing; certification and rejudgment remain controller duties."
+  }
+}

@@ -1,0 +1,203 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-imex-euler-step",
+    "supplier": "def-implicit-residual-and-algebraic-error-units",
+    "supplier_batch": "65",
+    "status": "verified",
+    "required_hypotheses": [
+      "The unscaled update residual is in the units of the unknown state.",
+      "The derivative-scaled residual is the unscaled update residual divided by h."
+    ],
+    "evidence": "Read the complete definition; the algorithm computes the unscaled residual z-c-hb(z) and labels the solver result by that value."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-ars222-additive-tableau-and-stages",
+    "supplier": "def-explicit-runge-kutta-tableau-and-stage-map",
+    "supplier_batch": "35",
+    "status": "verified",
+    "required_hypotheses": [
+      "The explicit tableau stage convention uses strictly lower-triangular stage coefficients."
+    ],
+    "evidence": "Read the complete definition. The ARS explicit tableau uses exactly this stage convention; no general explicit RK order theorem is used for additive order."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-ars222-additive-tableau-and-stages",
+    "supplier": "def-implicit-residual-and-algebraic-error-units",
+    "supplier_batch": "65",
+    "status": "verified",
+    "required_hypotheses": [
+      "The unscaled stage-equation residual is measured in stage/state units."
+    ],
+    "evidence": "Read the complete definition. The ARS item explicitly identifies its stage residual as unscaled update residual."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-ars222-additive-tableau-and-stages",
+    "supplier": "def-implicit-runge-kutta-stage-equations",
+    "supplier_batch": "65",
+    "status": "verified",
+    "required_hypotheses": [
+      "Implicit RK stages solve Y_i=y+h sum_j a_ij f(Y_j).",
+      "The final output equals the last stage only under the stiffly accurate row condition."
+    ],
+    "evidence": "Read the complete statement. The ARS last row equals its weights and c_3=1, and the definition prints both stage equations and y+=Y_3."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-ars222-stage-branch-and-residual-control",
+    "supplier": "def-implicit-residual-and-algebraic-error-units",
+    "consumer_batch": "98",
+    "supplier_batch": "65",
+    "status": "verified",
+    "evidence": "The Statement defines r_j as unscaled stage-equation residual. F2 supplies error conversion from the separate invariant-ball contraction lemma with A=[gamma],|gamma|hM<=R,q=|gamma|hL<1 for each sequential stage. The residual-unit definition supplies terminology, not forward-error or solvability.",
+    "inspected_paths": [
+      "items/def-implicit-residual-and-algebraic-error-units.md",
+      "items/lem-ars222-stage-branch-and-residual-control.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-98.pages.json#deps",
+      "items/lem-ars222-stage-branch-and-residual-control.md#deps"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-91-99.json#reviews/101"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-ars222-stage-branch-and-residual-control",
+    "supplier": "lem-small-step-implicit-rk-branch-and-residual-error",
+    "supplier_batch": "65",
+    "status": "verified",
+    "required_hypotheses": [
+      "Closed product ball of radius R is invariant when h||A||_infty M<=R.",
+      "The contraction factor is q=h||A||_infty L<1.",
+      "The unscaled residual error bound is ||G(Ytilde)||/(1-q)."
+    ],
+    "evidence": "Read the complete supplier statement and proof. Each ARS diagonal stage is the one-stage case A=[gamma], so ||A||_infty=|gamma|; the stage-local balls and small-step inequalities are explicit."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-ars222-additive-order-two-and-tolerance",
+    "supplier": "def-implicit-residual-and-algebraic-error-units",
+    "consumer_batch": "98",
+    "supplier_batch": "65",
+    "status": "verified",
+    "evidence": "F3/proof1.3/5.1 uses update residuals: output error<=2||r3||+4Ks h||r2||, so r2=O(h2),r3=O(h3) gives O(h3). Branch contraction and exact-root stability are separate arguments. The residual-unit Definition supplies no forward-error estimate.",
+    "inspected_paths": [
+      "items/def-implicit-residual-and-algebraic-error-units.md",
+      "items/thm-ars222-additive-order-two-and-tolerance.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-98.pages.json#deps",
+      "items/thm-ars222-additive-order-two-and-tolerance.md#deps"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-91-99.json#reviews/104"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-ars222-additive-order-two-and-tolerance",
+    "supplier": "lem-discrete-one-step-error-recurrence-bound",
+    "supplier_batch": "28",
+    "status": "verified",
+    "required_hypotheses": [
+      "Nonnegative error recurrence e_(n+1)<=(1+Lh)e_n+C h^(p+1).",
+      "h=T/N and e_0<=C_0h^p."
+    ],
+    "evidence": "Read the complete recurrence statement and proof. The consumer derives the recurrence with p=2 after separately bounding stage residual contributions."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-imex-euler-algebraic-residual-budget",
+    "supplier": "def-implicit-residual-and-algebraic-error-units",
+    "consumer_batch": "98",
+    "supplier_batch": "65",
+    "status": "verified",
+    "evidence": "F4/proof3.1 uses update residual r=z−c−hb(z); derivative residual is r/h. Forward-error conversion comes from the separate branch lemma with hLb<=1/2, giving2C_r h2. The ensuing p=1 recurrence preserves order only for the update-unit budget; multiply derivative residual by h first.",
+    "inspected_paths": [
+      "items/def-implicit-residual-and-algebraic-error-units.md",
+      "items/thm-imex-euler-algebraic-residual-budget.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-98.pages.json#deps",
+      "items/thm-imex-euler-algebraic-residual-budget.md#deps"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-91-99.json#reviews/103"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-imex-euler-algebraic-residual-budget",
+    "supplier": "lem-discrete-one-step-error-recurrence-bound",
+    "supplier_batch": "28",
+    "status": "verified",
+    "required_hypotheses": [
+      "Nonnegative error recurrence e_(n+1)<=(1+Lh)e_n+C h^(p+1).",
+      "h=T/N and e_0<=C_0h^p."
+    ],
+    "evidence": "Read the complete recurrence statement and proof. The consumer derives the recurrence with p=1 and the exact-root stability factor."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-imex-euler-global-order-one",
+    "supplier": "thm-global-error-from-one-step-defect-and-stability",
+    "supplier_batch": "28",
+    "status": "verified",
+    "required_hypotheses": [
+      "Uniform exact-start O(h^(p+1)) defect.",
+      "One-step Lipschitz bound 1+Lh.",
+      "Exact and numerical states and stages lie in a common compact tube.",
+      "Exact initial values and fixed T/N mesh."
+    ],
+    "evidence": "Read the complete supplier statement and proof. The consumer states these same hypotheses, uses p=1, and supplies its own IMEX defect and stability theorem."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-lie-strang-global-orders-and-subflow-error",
+    "supplier": "thm-global-error-from-one-step-defect-and-stability",
+    "consumer_batch": "98",
+    "supplier_batch": "28",
+    "status": "verified",
+    "evidence": "F8/proof3.1 applies p=1,2 with exact initial data and uniform O(h2),O(h3) defects. Steps1.1–2.1 convert exponential subflow Lipschitz factors to1+Lh. Approximate subflows retain the propagated error budgets in2.2 and explicitly assume composed-map1+Lhat h stability before4.1 applies the theorem.",
+    "inspected_paths": [
+      "items/thm-global-error-from-one-step-defect-and-stability.md",
+      "items/thm-lie-strang-global-orders-and-subflow-error.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-98.pages.json#deps",
+      "items/thm-lie-strang-global-orders-and-subflow-error.md#deps"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-91-99.json#reviews/102"
+  },
+  {
+    "kind": "page",
+    "consumer": "imex-and-operator-splitting-methods",
+    "supplier": "exponential-and-integrating-factor-integrators",
+    "status": "verified",
+    "evidence": "The required library page body and the actual finite-matrix variation-of-constants and skew-Hermitian unitarity item bodies were inspected. The page-level requirement has an existing body. No batch-98 item imports a T94 item-level result, phi-action bound, Duhamel estimate, or unbounded-PDE theorem; the local splitting proofs state their finite-dimensional hypotheses."
+  },
+  {
+    "kind": "page",
+    "consumer": "imex-and-operator-splitting-methods",
+    "supplier": "global-ode-and-density-error",
+    "status": "verified",
+    "evidence": "Read the complete required page body and the actual global-error theorem and recurrence lemma. Consumers preserve the exact-start defect, (1+Lh) stability, common-tube, and fixed-time hypotheses."
+  },
+  {
+    "kind": "page",
+    "consumer": "imex-and-operator-splitting-methods",
+    "supplier": "implicit-stiff-time-stepping-and-algebraic-error",
+    "status": "verified",
+    "evidence": "Read the complete required page body and actual residual-unit definition, implicit stage equations, and small-step branch/residual lemma. Each ARS diagonal stage is matched to A=[gamma], row norm |gamma|, a closed invariant ball, and q=|gamma|hL_b<1."
+  },
+  {
+    "kind": "page",
+    "consumer": "imex-and-operator-splitting-methods",
+    "supplier": "runge-kutta-methods-and-order",
+    "status": "verified",
+    "evidence": "Read the complete required page body, explicit tableau definition, and generic explicit RK order proposition. Only tableau stage notation is imported; additive colored order is derived locally."
+  }
+]

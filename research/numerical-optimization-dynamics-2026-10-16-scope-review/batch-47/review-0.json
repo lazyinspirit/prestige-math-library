@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "47",
+  "round": 0,
+  "reviewed_items": [
+    "def-xd-finite-column-generator",
+    "lem-xd-finite-matrix-exponential-series",
+    "lem-xd-geometric-poisson-tail-bound",
+    "def-xd-countable-nonexplosive-ctmc",
+    "def-xd-countable-l1-distance",
+    "lem-xd-uniformized-matrix-is-stochastic",
+    "def-xd-finite-state-projection-and-cemetery-lift",
+    "thm-xd-finite-generator-master-equation-uniformization",
+    "alg-xd-budgeted-uniformization-accumulation",
+    "thm-xd-uniformization-truncation-and-error",
+    "thm-xd-finite-state-projection-loss-and-observable-bound",
+    "alg-xd-finite-budget-adaptive-projection",
+    "thm-xd-finite-budget-adaptive-projection-soundness",
+    "ex-xd-two-state-gating-uniformization",
+    "ex-xd-birth-death-poisson-tail",
+    "ex-xd-immigration-death-finite-state-projection",
+    "ex-xd-equal-mean-distinct-probability-vectors"
+  ],
+  "reviewed_pages": [
+    "finite-generator-master-equations-and-uniformization",
+    "finite-generator-master-equations-and-uniformization-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch matches the approved XD-01 scope, and the actual supplier uses check out in their stated domains. Request one local repair for two A-page items. A separate zero-dimension proof gap in a published norm supplier is reported; the finite-generator applications use positive dimensions.",
+  "findings": [
+    {
+      "id": "lem-xd-finite-matrix-exponential-series",
+      "type": "prerequisite",
+      "reason": "Step 1.1 infers convergence from a Cauchy bound without stating completeness or an entrywise convergence argument. Step 3.1 uses natural matrix powers, multiplication laws, and the commuting binomial identity, but the dependencies only define matrix space/product and norm bounds. Add the exact matrix monoid/power and multiplication-law interfaces (for example, thm-matrix-multiplication-laws and def-group-power), justify convergence, prove the commuting binomial step, and handle the stated 0-by-0 case without narrowing scope."
+    },
+    {
+      "id": "alg-xd-finite-budget-adaptive-projection",
+      "type": "local",
+      "reason": "Procedure step 1 calls alg-xd-budgeted-uniformization-accumulation without its required admissible rate, positive tail budget, or explicit arithmetic backend. Specify these for each projection; for example, use the maximum exit rate of the cemetery lift (including the zero-rate branch) and pass the adaptive tolerance as the tail budget."
+    },
+    {
+      "id": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+      "type": "outside-batch",
+      "reason": "The published statement includes q=0, but proof steps 3.1 and 4.1 establish submultiplicativity by taking ratios over nonzero vectors in R^q, which has no such vectors when q=0. Step 1.3 does not prove that case. The assigned CTMC applications use positive dimensions; the assigned matrix-series item should retain its 0-by-0 claim with a local trivial-case proof, and the owner should review this published supplier gap."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-xd-finite-budget-adaptive-projection-soundness",
+      "decision": "accept",
+      "reason": "Its proof uses the finite-attempt bound, term cap, and certified-return condition; specifying the inner solver rate, tail budget, and backend preserves those outputs."
+    },
+    {
+      "id": "finite-generator-master-equations-and-uniformization",
+      "decision": "accept",
+      "reason": "The A-page summary remains accurate after making the adaptive solver call explicit."
+    },
+    {
+      "id": "finite-generator-master-equations-and-uniformization-examples",
+      "decision": "accept",
+      "reason": "The B page depends on A but does not use the adaptive procedure in its examples."
+    }
+  ]
+}

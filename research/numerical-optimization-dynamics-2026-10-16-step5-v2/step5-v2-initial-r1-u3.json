@@ -1,0 +1,581 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "3",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-newton-correction-for-vector-residuals",
+      "model": "gpt-6-luna",
+      "context_sha256": "2ae9ba5bc777e35f37ac0171e56d5a69d21ebebc43c533df7f0f508c0757c98e",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The original Definition only selected outputs by invertibility and the equation As=-r; its sole dependency defined invertibility without computing it. This is an incomplete algorithm under SCHEMA. Added finite Leibniz determinant computation, an exact zero-test branch, and Cramer quotient instructions using existing proved suppliers; the input and correction/status interface are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-finite-budget-newton-for-vector-residuals",
+      "model": "gpt-6-luna",
+      "context_sha256": "c1ca727b04dc307a1411f82c77293fa1df07204cf0151a973b7cc5fe6a9445de",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The declared output includes the last valid iterate, but the singular branch returned only a status. For example U=R, F(x)=1, epsilon=0 and N=1 reach that branch at x0. Replaced that return by (x_k,singular-jacobian), preserving all stopping tests and successful updates.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-finite-budget-newton-work-and-status",
+      "model": "gpt-6-luna",
+      "context_sha256": "05d42ceac9a0ec246241771ab4aa12c47a04a46026ee92a403b18b3d81d8d03a",
+      "outcome": "false_positive",
+      "reason": "In the coordinated phrase “a stated residual, singular-Jacobian, invalid-trial or budget status”, status is the shared head noun: residual means the residual-test success status, named root in the procedure. The sentence does not assert that a residual vector is returned, or that only a status is returned. The induction proves the stated work and domain claims under returning primitives, including N=0; the repaired supplier preserves every premise.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-newton-correction-for-vector-residuals",
+      "disposition": "repaired",
+      "post_sha256": "fecc413eada7f6ffc1ff44c8d45a6769042da55f2323dd13e01e188629ebc0e7",
+      "review_context_sha256": "a7c41648e6dd93e72e70ada75f33576af9f8b83c0c70acf83bd7f6670f9c1536",
+      "reason": "Read the complete local Cramer and nonzero-determinant proofs and determinant definition. The finite permutation formula uses their column convention; det(A)=0 detects precisely noninvertibility, and det(A_j(-r))/det(A) gives the unique correction for every n>=1. Zero residual and n=1 are included, with division only after a nonzero test. No AC or backend efficiency claim. Focused rendercheck passed and precheck was correctly not-applicable. This is a repair review, not independent acceptance of my repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-finite-budget-newton-for-vector-residuals",
+      "disposition": "repaired",
+      "post_sha256": "a6fcd5eba96686eedbc82740fecc52d540a8823f3938dafcf9c4dc643d74ea22",
+      "review_context_sha256": "b2ba5933c2cf42e9545518ec9062e0e9aac9d266e50ac2da86fc963dcc9f50f5",
+      "reason": "Checked C1 and Jacobian supplier statements, all four ordered branches and the repaired correction supplier. Residual and budget tests precede each correction, the singular branch now carries x_k, and the trial test preserves U. The new finite Cramer implementation supplies the same unique step and failure condition. No convergence or exact-root assertion is introduced. This is my repair review, not an independent judgment.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-finite-budget-newton-work-and-status",
+      "disposition": "unaffected",
+      "post_sha256": "b0f2da7cf0a6757441f6928312ce38eb52e564ac47221d7cb4a6cc68e487fb09",
+      "review_context_sha256": "5868d156f24bc19909af4654f704fbb614d139bd3051a72af26198654e260fa6",
+      "reason": "Checked all four proof steps against the repaired ordered loop: entered indices form an initial segment of 0..N, each continuation requires k<N and an in-domain accepted trial, and the final index returns before correction. Counts are N corrections/updates and N+1 outer residual evaluations at most; root asserts tolerance only. The item guard is unchanged. Only its contract F1 quotation was synchronized to the supplier singular-pair repair under the shared lock; the strict assigned contract check passed.",
+      "metadata_repair_only": true,
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+    "alg-damped-newton-for-vector-residuals",
+    "alg-finite-budget-newton-for-vector-residuals",
+    "alg-finite-difference-newton-for-vector-residuals",
+    "alg-index-one-dae-backward-euler-stepper",
+    "alg-index-one-dae-bdf2-stepper",
+    "alg-index-one-dae-consistent-initialization",
+    "alg-index-one-eigenvector-following-step",
+    "alg-midpoint-collocation-for-nonlinear-bvps",
+    "alg-multiple-shooting-for-nonlinear-bvps",
+    "alg-newton-chord-implicit-residual-with-factorization-reuse",
+    "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+    "alg-single-shooting-for-nonlinear-bvps",
+    "alg-validated-periodic-orbit-corrector",
+    "ex-nonlinear-equations-and-newton-methods-boundary-cases",
+    "lem-finite-budget-newton-work-and-status",
+    "prop-index-one-eigenvector-step-is-the-local-newton-correction",
+    "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+    "thm-index-one-dae-finite-budget-solvers-terminate",
+    "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination",
+    "thm-pseudo-arclength-local-newton-correction",
+    "thm-updated-jacobian-newton-local-quadratic-convergence"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "alg-newton-correction-for-vector-residuals",
+      "model": "gpt-6-luna",
+      "context_sha256": "2ae9ba5bc777e35f37ac0171e56d5a69d21ebebc43c533df7f0f508c0757c98e",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "status": "fixed",
+      "locus": "Definition",
+      "reason": "The original Definition only selected outputs by invertibility and the equation As=-r; its sole dependency defined invertibility without computing it. This is an incomplete algorithm under SCHEMA. Added finite Leibniz determinant computation, an exact zero-test branch, and Cramer quotient instructions using existing proved suppliers; the input and correction/status interface are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "alg-finite-budget-newton-for-vector-residuals",
+      "model": "gpt-6-luna",
+      "context_sha256": "c1ca727b04dc307a1411f82c77293fa1df07204cf0151a973b7cc5fe6a9445de",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "status": "fixed",
+      "locus": "Definition",
+      "reason": "The declared output includes the last valid iterate, but the singular branch returned only a status. For example U=R, F(x)=1, epsilon=0 and N=1 reach that branch at x0. Replaced that return by (x_k,singular-jacobian), preserving all stopping tests and successful updates.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "lem-finite-budget-newton-work-and-status",
+      "model": "gpt-6-luna",
+      "context_sha256": "05d42ceac9a0ec246241771ab4aa12c47a04a46026ee92a403b18b3d81d8d03a",
+      "outcome": "false_positive",
+      "status": "dismissed",
+      "locus": "Statement",
+      "reason": "In the coordinated phrase “a stated residual, singular-Jacobian, invalid-trial or budget status”, status is the shared head noun: residual means the residual-test success status, named root in the procedure. The sentence does not assert that a residual vector is returned, or that only a status is returned. The induction proves the stated work and domain claims under returning primitives, including N=0; the repaired supplier preserves every premise.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-owner-alert",
+      "id": "alg-damped-newton-for-vector-residuals",
+      "status": "owner-review-required",
+      "path": "items/alg-damped-newton-for-vector-residuals.md",
+      "source_excerpt": "If it returns `singular-jacobian`, return\n   that status. Otherwise let $s_k$ be its correction.",
+      "affected_use": "Definition promises the last valid iterate plus a status, but step 3 returns only the status; step 5 likewise omits the iterate in the exhausted-line-search branches.",
+      "invalidated_claim": "The promised iterate/status output is not explicitly returned by every failure branch; this is an independent existing issue, not caused by either supplier repair.",
+      "minimality": "Owner should pair x_k with each step-3 and step-5 failure status; no change to merit tests, update or mathematical convergence claims is needed.",
+      "route": "ordinary frontier owner lane; outside this unit assignment",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-owner-alert",
+      "id": "alg-finite-difference-newton-for-vector-residuals",
+      "status": "owner-review-required",
+      "path": "items/alg-finite-difference-newton-for-vector-residuals.md",
+      "source_excerpt": "5. If the trial $x_k+s_k$ is outside $U$, return",
+      "affected_use": "Definition step 4 calls the correction routine but never explicitly binds its successful returned vector to s_k; step 5 then uses s_k.",
+      "invalidated_claim": "The intended correction is identifiable, but the defining procedure lacks an explicit variable binding. The Step-4 digest reports this same presentation issue.",
+      "minimality": "Owner should bind the successful returned correction to s_k after the failure branch in step 4; all statuses and tests can be preserved.",
+      "route": "ordinary frontier owner lane; outside this unit assignment",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "record-no-published-consumer-impact",
+      "suppliers": [
+        "alg-newton-correction-for-vector-residuals",
+        "alg-finite-budget-newton-for-vector-residuals"
+      ],
+      "reason": "All 22 direct dependency/reference consumers found in current items are draft members of the frozen frontier. No published or outside-frontier consumer of either changed Definition was found, and no published item was edited or adjudicated.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed supplier-before-consumer review of all three exact assigned tuples. Two algorithm interface defects are confirmed fatal (other: missing executable instructions, and an inconsistent return payload); the work/status rejection is a false positive. No unresolved mathematics remains in this assignment. Repairs were reviewed by their author and still require the engine-owned independent rejudgment.",
+    "The original and current Definition sections were compared directly: the correction Definition gained finite determinant/Cramer instructions, and the budget Definition changed only its singular return to (x_k,singular-jacobian). The work lemma Statement and item bytes remain unchanged. These two Definition changes produce the downstream examination inventory; no recursive propagation through unchanged consumer statements is asserted.",
+    "Local mathematical evidence actually read: items/def-invertible-euclidean-linear-map.md Definition; items/def-determinant-of-a-square-matrix.md Definition (columnwise Leibniz convention); complete Statements and Proofs of thm-real-square-matrix-invertible-iff-determinant-nonzero and thm-cramers-rule-over-a-commutative-ring; C1/Jacobian/total-derivative supplier interfaces; assigned procedures and the complete four-step work proof. These are familiar finite-dimensional algebra and loop-invariant arguments; no external source reading is claimed.",
+    "The correction deps and its unique owning manifest row now list determinant definition, nonzero-determinant invertibility and Cramer rule alongside invertibility. Existing suppliers suffice; no new item, AC assumption, page change or frozen-frontier expansion is needed. The implementation uses exact real arithmetic/zero tests, includes n=1 and zero residual, and makes no efficiency or finite-precision claim.",
+    "Under tools/step5-shared-write-lock.mjs, acquired/reread/edited/checked/released the batch-3 manifest row and the assigned work lemma contract F1 quotation. No other contract entries or shared ledgers were changed. Each review-context command ran immediately after its item review before editing the next assigned item; recorded hashes were not refreshed after supplier changes.",
+    "Focused checks: node tools/tsx-run.mjs tools/precheck.mts on all three assigned paths --json exited 0 (one induction proof passed; both algorithms not-applicable). node tools/rendercheck.mjs on all three paths --json exited 0 with zero errors/warnings. node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-3.proof-contracts.json --items lem-finite-budget-newton-work-and-status --strict --json exited 0 with no errors/warnings. node tools/manifest-deps.mjs on the batch-3 manifest exited 0 (13 items, zero errors). After final item edits, node tools/proof-layout.mjs items/alg-newton-correction-for-vector-residuals.md items/alg-finite-budget-newton-for-vector-residuals.md exited 0 (2 items, 0 proof steps, 0 defects).",
+    "All direct consumers were examined at their actual cited use. Two independent existing unassigned procedure issues are routed as owner alerts in ledger_updates without item edits. The Step-4 example singular-start concern refers to the standalone correction via F6, which still returns singular-jacobian regardless of a nonlinear tolerance or budget; it is not used here to assert a finite-solver status. No published or outside-frontier consumer was found; no maintenance edit is proposed. The engine owns further frontier routing, rejudgment, ledger integration and certification."
+  ],
+  "downstream_reviews": [
+    {
+      "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "path": "items/alg-ctrl1-runge-kutta-shooting-and-collocation-transcription.md",
+      "affected_use": "The implicit-stage paragraph calls finite Newton on the admitted C1 square stage residual, records its iterate and status, and only accepts root as a tolerance candidate. Returning x_k also on singular failure supports the partial record; no residual vector is supplied by Newton or assumed as its return.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "ge index, the partial result record, and no objective candidate. Otherwise call [[alg-finite-budget-newton-for-vector-residuals]] on $R_j$ with that open evaluation domain, tolerance $\\tau_s$ and cap $M_s$. Record its iterate, residual vector, and exact status for each cell. Only `root` supplies a stage candidate; it means $\\|R_j\\|_2\\le\\tau_s$, not an exact",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "alg-damped-newton-for-vector-residuals",
+      "path": "items/alg-damped-newton-for-vector-residuals.md",
+      "affected_use": "Definition step 3 uses the same singularity status and unique correction; the merit tests depend only on As=-r, which is preserved. Its separate incomplete return payloads are routed to the owner.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-newton-correction-for-vector-residuals",
+          "source_excerpt": "only.\n2. If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n3. Call [[alg-newton-correction-for-vector-residuals]] with\n   $A=J_F(x_k)$ and $r=F(x_k)$. If it returns `singular-jacobian`, return\n   that status. Otherwise let $s_k$ be its correction.\n4. For $j=0,1,\\ldots,B$, set $t=\\beta^j$ and trial $y=x_k+t s_k$. If\n   $y\\notin U$, reject the",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "alg-finite-budget-newton-for-vector-residuals",
+      "path": "items/alg-finite-budget-newton-for-vector-residuals.md",
+      "affected_use": "Definition steps 3–4 call the exact correction and update with it. The supplied singularity condition and correction vector are unchanged; this assigned consumer separately received the singular-pair repair.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-newton-correction-for-vector-residuals",
+          "source_excerpt": "on>0$.\n2. If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n3. Call [[alg-newton-correction-for-vector-residuals]] with\n   $A=J_F(x_k)$ and $r=F(x_k)$. If it returns `singular-jacobian`, return\n   $(x_k,\\texttt{singular-jacobian})$.\n4. Let $s_k$ be its correction. If $x_k+s_k\\notin U$, return\n   $(x_k,\\texttt{invalid-trial})$. Otherwise set $",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "assigned_consumer_repaired",
+      "invalidated_claim": "The correction supplier change invalidates no claim. Independently, the original singular branch omitted the promised last valid iterate; this dispatch repaired that assigned defect.",
+      "minimality": "The correction supplier change requires no consumer edit. This assigned consumer independently required its one-line singular-return payload repair, and that Definition change has its own complete direct-consumer inventory."
+    },
+    {
+      "id": "alg-finite-difference-newton-for-vector-residuals",
+      "path": "items/alg-finite-difference-newton-for-vector-residuals.md",
+      "affected_use": "Definition imports the open-domain/tolerance/budget inputs, then applies the same correction to its finite-difference matrix and pairs failures with x_k. Both supplier changes preserve these uses; the unbound successful s_k is separately routed.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-newton-correction-for-vector-residuals",
+          "source_excerpt": "`invalid-stencil`, return $(x_k,\\texttt{invalid-stencil})$.\n4. Otherwise call [[alg-newton-correction-for-vector-residuals]] with\n   $A=J_hF(x_k)$ and $r=F(x_k)$. If that correction is unavailable, return\n   $(x_k,\\texttt{singular-jacobian})$.\n5. If the trial $x_k+s_k$ is outside $U$, return\n   $(x_k,\\texttt{invalid-trial})$; otherwise set $x_{k+1}=x_k",
+          "location": "body dependency/reference"
+        },
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "entiability assumptions, initial point, residual\ntolerance and update budget as [[alg-finite-budget-newton-for-vector-residuals]].\nSupply one increment vector $h=(h_0,\\ldots,h_{n-1})$ with every $h_i\\ne0$ for\n$0\\le i<n$. **Output:** the last valid iterate and one of `root`,\n`invalid-stencil`, `singular-jacobian`, `invalid-trial`, or\n`iteration-budget-exhaus",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "alg-index-one-dae-backward-euler-stepper",
+      "path": "items/alg-index-one-dae-backward-euler-stepper.md",
+      "affected_use": "The Newton-call paragraph uses a scaled square residual on the checked open tube slice, appends only on root, and maps every other status to a prefix return. The singular-pair repair changes neither branch nor accepted residual bound.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "T_{t_n}$, return invalid-trial with the already computed prefix. Otherwise call [[alg-finite-budget-newton-for-vector-residuals]] on $\\mathcal R_n$ with residual tolerance $1$, budget $B$, and $\\mathcal T_{t_n}$ as its evaluation domain. If the returned status is root and the candidate lies in $\\mathcal T_{t_n}$, reevaluate $R_n$ once to retain both unscale",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "alg-index-one-dae-bdf2-stepper",
+      "path": "items/alg-index-one-dae-bdf2-stepper.md",
+      "affected_use": "The Newton-call paragraph checks its extrapolated seed, invokes the same finite solver on the scaled square residual, and propagates non-root statuses. The returned pair is compatible with its existing candidate/status handling.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "mathcal T_{t_n}$, return invalid-trial with the computed prefix. Otherwise call [[alg-finite-budget-newton-for-vector-residuals]] on $\\mathcal R_n$ with tolerance $1$, budget $B$, and $\\mathcal T_{t_n}$ as the evaluation domain. Append a candidate only when Newton reports root and the candidate lies in $\\mathcal T_{t_n}$; reevaluate $R_n$ once to record its",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "alg-index-one-dae-consistent-initialization",
+      "path": "items/alg-index-one-dae-consistent-initialization.md",
+      "affected_use": "Definition calls the solver on the open algebraic chart, reevaluates only after root, and returns the last valid iterate with every mapped failure. The repaired singular branch now directly supplies that iterate.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "Call [[alg-finite-budget-newton-for-vector-residuals]] on the square residual $G(z)=g(t_0,x_0,z)$, with initial value $z_{\\mathrm{seed}}$, tolerance $\\varepsilon_a$, and budget $N$, restricting evaluations to the chart's open $z$-domain. If it reports root, reevaluate $G(z_0)$ once:",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "alg-index-one-eigenvector-following-step",
+      "path": "items/alg-index-one-eigenvector-following-step.md",
+      "affected_use": "Definition step 3 uses the exact solution of H(x_k)p_k=-g_k after its eigenvalue checks. The new correction implementation gives exactly that solution and the same singularity status.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-newton-correction-for-vector-residuals",
+          "source_excerpt": "detects a mode-branch change but does not alter the Newton correction.\n3. Call [[alg-newton-correction-for-vector-residuals]] with $A=H(x_k)$ and $r=g_k$. If it returns `singular-jacobian`, return that status. Its correction $p_k$ is the exact Newton solution of $H(x_k)p_k=-g_k$ in the mathematical model; the eigenpair data certifies the index-one branc",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "alg-midpoint-collocation-for-nonlinear-bvps",
+      "path": "items/alg-midpoint-collocation-for-nonlinear-bvps.md",
+      "affected_use": "Definition returns the last node vector and the solver status for the square normalized collocation residual on D_h. The repaired singular payload fulfills exactly this existing interface.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "0\\in D_h$, tolerance $\\tau\\ge0$, and correction budget $M\\in\\mathbb N_0$, apply [[alg-finite-budget-newton-for-vector-residuals]] to $G_h$ using its exact Jacobian. Return the last node vector and its root, singular-jacobian, invalid-trial, or iteration-budget-exhausted status as defined by that procedure. A root status means only that $\\|G_h(Y)\\|\\le\\tau$;",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "alg-multiple-shooting-for-nonlinear-bvps",
+      "path": "items/alg-multiple-shooting-for-nonlinear-bvps.md",
+      "affected_use": "Definition step 4 uses the correction on its displayed square block Jacobian; the final paragraph imports finite-budget checks. The linear equation, singularity condition and stopping checks are unchanged.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-newton-correction-for-vector-residuals",
+          "source_excerpt": ". Solve the Newton correction equation with the displayed square Jacobian using [[alg-newton-correction-for-vector-residuals]]. A singular Jacobian returns status singular-jacobian.\n5. If the proposed tuple is outside the open product domain, return the last tuple with status invalid-trial; otherwise accept it as the next iterate.\n\nThe procedure applies",
+          "location": "body dependency/reference"
+        },
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "  - alg-finite-budget-newton-for-vector-residuals",
+          "location": "frontmatter dependency"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+      "path": "items/alg-newton-chord-implicit-residual-with-factorization-reuse.md",
+      "affected_use": "Updated-Newton mode reevaluates G at the returned iterate; the singular-pair repair now supplies it explicitly. Chord mode identifies its retained backend solve only with the mathematical correction As=-r; it need not use the new determinant implementation.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-newton-correction-for-vector-residuals",
+          "source_excerpt": "lve. The exact-solve backend contract makes this the mathematical correction in [[alg-newton-correction-for-vector-residuals]]. If the correction $s_k$ has $z_k+s_k\\notin U$, return $(z_k,\\texttt{invalid-trial},r_k)$; otherwise set $z_{k+1}=z_k+s_k$ and continue. A refresh period $q=1$ updates the Jacobian every correction; $q>1$ is a chord iteration.\n\nB",
+          "location": "body dependency/reference"
+        },
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "In **updated-Newton mode**, invoke [[alg-finite-budget-newton-for-vector-residuals]] with $G,z_0,\\varepsilon,N$. It recomputes the Jacobian at every correction and returns its stated residual/budget/failure status. Re-evaluate $G$ at the returned iterate to provide the output residual norm. Count each Jacobian as",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+      "path": "items/alg-pseudo-arclength-continuation-with-certified-local-corrector.md",
+      "affected_use": "Definition step 4 maps finite Newton statuses and retains candidates, while step 5 uses an exact correction of a supplied approximate bordered system. Status labels, exact correction and candidate-only interpretation remain unchanged.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-newton-correction-for-vector-residuals",
+          "source_excerpt": "the tests fail at $j=N_c$, return `corrector-budget-exhausted`. Otherwise call [[alg-newton-correction-for-vector-residuals]] on the supplied approximate augmented residual and matrix. Map `singular-jacobian` to `singular-corrector`; a trial outside the tube gives `tube-exit`; otherwise set $y_{j+1}=y_j+s_j$.  This bounded-error branch has no convergenc",
+          "location": "body dependency/reference"
+        },
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "t leaves the declared tube, return `tube-exit`.\n4. With exact evaluations, call [[alg-finite-budget-newton-for-vector-residuals]] on $G_k$ from $z_p$, tolerance $\\epsilon$ and update budget $N_c$. Map `singular-jacobian` to `singular-corrector` and `invalid-trial` to `tube-exit`. For `root` or `iteration-budget-exhausted`, retain the last valid iterate as a",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "alg-single-shooting-for-nonlinear-bvps",
+      "path": "items/alg-single-shooting-for-nonlinear-bvps.md",
+      "affected_use": "Definition step 4 solves the square numerical-endpoint residual system, and the final paragraph compares stopping checks with the finite procedure. The correction and checks remain identical; no new endpoint regularity or success assumption is required.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-newton-correction-for-vector-residuals",
+          "source_excerpt": "If $k=M$, return the last trial and status iteration-budget-exhausted.\n4. Call [[alg-newton-correction-for-vector-residuals]] with $A=D\\widetilde R(s_k)$ and $r=\\widetilde R(s_k)$. If it reports singular-jacobian, stop with that status.\n5. If the proposed trial $s_k+u_k$ is outside $U$ or its membership cannot be established, return the last accepted tr",
+          "location": "body dependency/reference"
+        },
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "_B$, this has the same residual, singularity, trial-domain and budget checks as [[alg-finite-budget-newton-for-vector-residuals]]. It makes no global-start, exact-root, or discretization-error claim. The numerical residual is $C^1$ on the open subset of $U$ where $(s,\\widetilde\\Phi(s))\\in D_B$; no boundary value is evaluated outside that subset.",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "alg-validated-periodic-orbit-corrector",
+      "path": "items/alg-validated-periodic-orbit-corrector.md",
+      "affected_use": "Definition candidate mode 1 corrects rational midpoint matrices and residuals. Cramer operations preserve rationality and the same correction; the existing arithmetic cap may still return failure. Its finite-Newton dependency does not create a new exact-root certificate.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-newton-correction-for-vector-residuals",
+          "source_excerpt": "independent validation below. If it does not validate and updates remain, call [[alg-newton-correction-for-vector-residuals]] on $(A_k,r_k)$. A singular matrix returns singular-jacobian; otherwise its rational correction $u_k$ proposes $z_{k+1}=z_k+u_k$. Reject a proposal outside $Z$ with invalid-trial. The midpoint matrix is only a proposal matrix: it",
+          "location": "body dependency/reference"
+        },
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "  - alg-finite-budget-newton-for-vector-residuals",
+          "location": "frontmatter dependency"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "ex-nonlinear-equations-and-newton-methods-boundary-cases",
+      "path": "items/ex-nonlinear-equations-and-newton-methods-boundary-cases.md",
+      "affected_use": "Facts F6–F7 and Verification 1.3–1.4, 2.2 and 3.1 use As=-r, accepted x+s and the standalone singular-correction branch. All are unchanged; the example does not rely on omitting the returned iterate.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-newton-correction-for-vector-residuals",
+          "source_excerpt": "[F6] [[alg-newton-correction-for-vector-residuals]]: an invertible linear map and residual have a unique correction solving $As=-r$; a noninvertible map returns the `singular-jacobian` status.\n\n[F7] [[alg-finite-budget-newton-for-vector-residuals]]: an exact-Jacobian update applie",
+          "location": "body dependency/reference"
+        },
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "[F7] [[alg-finite-budget-newton-for-vector-residuals]]: an exact-Jacobian update applies the correction and sets $x_{k+1}=x_k+s_k$ when the trial is in $U$.\n\n[F8] [[thm-updated-jacobian-newton-local-quadratic-convergence]]: if a simple root has a Lipschitz Jacobian and a uniform loca",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "lem-finite-budget-newton-work-and-status",
+      "path": "items/lem-finite-budget-newton-work-and-status.md",
+      "affected_use": "Fact F1 and all four proof steps use the ordered residual/budget checks, one correction per continuation and domain test. Pairing a singular status with x_k leaves the induction and counts unchanged; the assigned item is unchanged and its contract citation is synchronized.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "For admissible inputs of [[alg-finite-budget-newton-for-vector-residuals]] with budget $N\\in\\mathbb N_0$, every entered iterate lies in $U$. The procedure makes at most $N$ correction calls, at most $N$ accepted updates, and at most $N+1$ explicit outer residual evaluations. It returns a stated residual",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "assigned_consumer_unaffected",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "prop-index-one-eigenvector-step-is-the-local-newton-correction",
+      "path": "items/prop-index-one-eigenvector-step-is-the-local-newton-correction.md",
+      "affected_use": "Fact F2 and Proof 1.1 identify the correction by uniqueness of the Hessian linear-system solution. The Cramer implementation preserves that identity exactly.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-newton-correction-for-vector-residuals",
+          "source_excerpt": "[F2] [[alg-newton-correction-for-vector-residuals]]: if the Jacobian is invertible, its correction is the unique $p$ solving $J(x)p=-F(x)$.\n\n[F3] [[thm-updated-jacobian-newton-local-quadratic-convergence]]: for a $C^2$ square residual with a simple zero and locally Lipschitz Jacob",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+      "path": "items/prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler.md",
+      "affected_use": "Fact F6 and Proof 2.1 use uniqueness for (I-hDf(y))s=hf(y) to identify s=hk. The new procedure solves that same system for every invertible input.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-newton-correction-for-vector-residuals",
+          "source_excerpt": "[F6] [[alg-newton-correction-for-vector-residuals]]: for residual vector $r$ and invertible matrix $A$, the correction is the unique $s$ satisfying $As=-r$.\n\n[F7] [[def-rosenbrock-euler-step-map]]: at $\\gamma=1$, $k$ solves $(I_d-hDf(y))k=f(y)$ and the update is $y+hk$.\n\n## Proof",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "thm-index-one-dae-finite-budget-solvers-terminate",
+      "path": "items/thm-index-one-dae-finite-budget-solvers-terminate.md",
+      "affected_use": "Proof 1.1 uses that the procedure passes the current Jacobian and residual to a square correction, with counts supplied separately by the unchanged work lemma. The new returning correction implementation and paired singular output preserve this use.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "+1$ explicit residual evaluations and $B$ correction calls. The exact procedure [[alg-finite-budget-newton-for-vector-residuals]] passes its current Jacobian and residual to the correction routine; a successful correction solves that single square system. The input dimensions in [F2]–[F4] are $m$ and $d+m$, respectively, giving the asserted system dimension",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination",
+      "path": "items/thm-pseudo-arclength-finite-trace-partial-correctness-and-termination.md",
+      "affected_use": "Fact F5 and Proof 2.1/4.1 use finite statuses, the correction-call bound and the distinction between a residual stop and a root certificate. None changes, including the N_c=0 boundary.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "[F5] [[alg-finite-budget-newton-for-vector-residuals]] specifies its singular/domain/budget and residual-stop outputs; [[lem-finite-budget-newton-work-and-status]] proves its correction-call bound. Neither result makes a residual stop a root certificate.\n\n[F6] [[lem-regular-curve-cha",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "thm-pseudo-arclength-local-newton-correction",
+      "path": "items/thm-pseudo-arclength-local-newton-correction.md",
+      "affected_use": "Fact F5 and Proof 3.1 use exactly the local Newton updates with residual/domain/singular/budget branches. Pairing the singular return does not alter any attempted update or the independent certificate requirement.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "[F5] [[alg-finite-budget-newton-for-vector-residuals]] specifies the residual,\ntrial-domain, singularity and budget branches. Its correction-call bound is\nproved in [[lem-finite-budget-newton-work-and-status]]; budget exhaustion may\nprecede tolerance attainment.\n\n[F6] [[thm-augmented",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    },
+    {
+      "id": "thm-updated-jacobian-newton-local-quadratic-convergence",
+      "path": "items/thm-updated-jacobian-newton-local-quadratic-convergence.md",
+      "affected_use": "Facts F3–F4 and Proof 3.1–4.1 use the unique correction, residual/budget precedence and in-domain full trial. These are unchanged, so the quadratic recurrence and finite-stop caveat remain valid.",
+      "supplier_uses": [
+        {
+          "supplier": "alg-newton-correction-for-vector-residuals",
+          "source_excerpt": "[F3] [[alg-newton-correction-for-vector-residuals]]: if $J(x_k)$ is invertible, the unique correction solves $J(x_k)s_k=-F(x_k)$; otherwise the correction is unavailable.\n\n[F4] [[alg-finite-budget-newton-for-vector-residuals]]: the exact-Jacobian procedure tests the residual and u",
+          "location": "body dependency/reference"
+        },
+        {
+          "supplier": "alg-finite-budget-newton-for-vector-residuals",
+          "source_excerpt": "For every $x_0\\in\\overline B_2(x_*,\\rho)$, each update attempted by\n[[alg-finite-budget-newton-for-vector-residuals]] is defined, remains in this\nball, and satisfies\n$$\\|x_{k+1}-x_*\\|_2\\le C\\|x_k-x_*\\|_2^2.$$\nIf the ordinary exact-Jacobian Newton recurrence is continued indefinitely,\nthese estimates imply $x_k\\to x_*$ with a quadratic error boun",
+          "location": "body dependency/reference"
+        }
+      ],
+      "disposition": "unchanged_supplier_use_sound",
+      "invalidated_claim": "None: both changes preserve the correction equation and branch conditions; the budget output now consistently includes the current iterate.",
+      "minimality": "No additional mathematical repair is needed for these supplier changes; this item Statement/Definition was not changed by this dispatch."
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/nonlinear-equations-and-newton-methods.md",
+      "disposition": "unchanged",
+      "reason": "The page summary identifies the correction by DF(x)s=-F(x) and distinguishes residual tolerance, singularity, trial and budget statuses. Both repairs preserve these claims; no backend efficiency assertion is present."
+    },
+    {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/nonlinear-equations-and-newton-methods-examples.md",
+      "disposition": "unchanged",
+      "reason": "The companion describes fixed-point/Newton examples and a singular starting Jacobian. The exact correction equation, standalone singular case and Newton recurrence are unchanged."
+    }
+  ]
+}

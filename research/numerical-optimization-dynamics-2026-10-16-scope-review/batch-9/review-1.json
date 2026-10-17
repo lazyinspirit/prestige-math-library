@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "9",
+  "round": 1,
+  "reviewed_items": [
+    "def-milstein-scheme-and-iterated-integrals",
+    "lem-iterated-brownian-integral-identities",
+    "lem-event-weighted-ito-isometry",
+    "lem-bounded-sde-increment-moments",
+    "lem-milstein-local-defect-bounds",
+    "lem-stochastic-local-to-global-rms-bound",
+    "thm-commutative-milstein-strong-order-one",
+    "def-additive-noise-stochastic-heun-scheme",
+    "lem-additive-heun-one-step-weak-expansion",
+    "thm-additive-noise-stochastic-heun-weak-order-two",
+    "thm-milstein-mlmc-level-variance-and-cost",
+    "ex-geometric-brownian-milstein-update",
+    "ex-scalar-multiplicative-noise-milstein",
+    "ex-noncommuting-two-noise-milstein-area"
+  ],
+  "reviewed_pages": [
+    "milstein-stochastic-taylor-and-iterated-integrals",
+    "milstein-stochastic-taylor-and-iterated-integrals-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The three prior example repairs are present. The complete batch review found two remaining issues on this final review, so I am escalating rather than requesting another repair.",
+  "findings": [
+    {
+      "id": "def-milstein-scheme-and-iterated-integrals",
+      "type": "local",
+      "reason": "The area split defines S_ij and A_ij only for i≠j, but its displayed identity sums over all i,j and uses S_ii, which is undefined. Define the diagonal terms (for example, S_ii=I_ii and A_ii=0) or separate them from the sum. The direct consumers were checked; their current arguments do not use this split."
+    },
+    {
+      "id": "ex-scalar-multiplicative-noise-milstein",
+      "type": "prerequisite",
+      "reason": "Step 2.1 invokes the global strong-order theorem, but the stated assumptions specify only a first step of length h, not the fixed horizon and full uniform grid required by the theorem (T>0, h=T/N≤1). State that grid when making the global rate claim."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "milstein-stochastic-taylor-and-iterated-integrals",
+      "decision": "accept",
+      "reason": "The page’s summary claims remain supported; it does not use the undefined diagonal area notation."
+    },
+    {
+      "id": "milstein-stochastic-taylor-and-iterated-integrals-examples",
+      "decision": "accept",
+      "reason": "The examples-page summary is supported by the noncommuting example and does not use the undefined diagonal area notation."
+    },
+    {
+      "id": "lem-iterated-brownian-integral-identities",
+      "decision": "accept",
+      "reason": "Its product identity and commutative reduction use I_ij directly; they do not use the area split."
+    },
+    {
+      "id": "lem-bounded-sde-increment-moments",
+      "decision": "accept",
+      "reason": "Its use of the Milstein definition is limited to the SDE and coefficient conventions."
+    },
+    {
+      "id": "lem-milstein-local-defect-bounds",
+      "decision": "accept",
+      "reason": "Its Taylor expansion uses I_ij and L_iσ_j directly, not the area split."
+    },
+    {
+      "id": "thm-commutative-milstein-strong-order-one",
+      "decision": "accept",
+      "reason": "Its update reduction uses the product-increment identity, not the undefined diagonal area notation."
+    },
+    {
+      "id": "thm-milstein-mlmc-level-variance-and-cost",
+      "decision": "accept",
+      "reason": "Its commutative-path and cost arguments do not use the area split."
+    },
+    {
+      "id": "ex-geometric-brownian-milstein-update",
+      "decision": "accept",
+      "reason": "The exact-solution and scalar-update checks do not use the area split."
+    },
+    {
+      "id": "ex-scalar-multiplicative-noise-milstein",
+      "decision": "escalate",
+      "reason": "The scalar update use is sound, but the global-rate application still lacks the full uniform-grid premise stated in its finding."
+    },
+    {
+      "id": "ex-noncommuting-two-noise-milstein-area",
+      "decision": "accept",
+      "reason": "Its area claim is proved directly from I_12, I_21 and endpoint increments; it does not use the undefined diagonal area notation."
+    }
+  ]
+}

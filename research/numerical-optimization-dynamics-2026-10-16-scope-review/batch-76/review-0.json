@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "76",
+  "round": 0,
+  "reviewed_items": [
+    "def-locally-lipschitz-ito-sde-and-maximal-solution",
+    "lem-brownian-ito-integral-bdg-moment-bound",
+    "alg-cir-lamperti-positive-implicit-scheme",
+    "alg-tamed-euler-superlinear-drift",
+    "thm-local-sde-existence-and-uniqueness-until-exit",
+    "lem-cir-lamperti-transform-and-positive-root",
+    "lem-tamed-euler-uniform-moment-bounds",
+    "thm-superlinear-sde-global-existence-and-moments",
+    "alg-drift-implicit-euler-sde",
+    "thm-cir-positive-solution-and-nonattainment",
+    "thm-tamed-euler-strong-order-half",
+    "thm-cir-lamperti-scheme-converges-in-probability",
+    "thm-drift-implicit-euler-sde-strong-order-half",
+    "cex-euler-moments-diverge-for-cubic-dissipative-sde",
+    "ex-cir-lamperti-scheme-positive-root-at-boundary",
+    "ex-noise-induced-instability-in-explicit-em"
+  ],
+  "reviewed_pages": [
+    "stable-sde-schemes-for-superlinear-drift",
+    "stable-sde-schemes-for-superlinear-drift-examples"
+  ],
+  "decision": "repair",
+  "reason": "Reviewed the full batch against the approved T14 design and actual supplier claims and proofs. The backward-resolvent hypotheses match the consumers; the Euler and Milstein page edges are contextual and their rates are not transferred. Request one local repair pass for the findings below; no unresolved outside-scope prerequisite gap was found.",
+  "findings": [
+    {
+      "id": "alg-drift-implicit-euler-sde",
+      "type": "local",
+      "reason": "The Definition promises an interpolation but gives no interpolation formula, leaves the step process undefined at T, and does not specify a solver interface or exact finite-solver failure condition. Complete these outputs and branch semantics while preserving the stated grid update."
+    },
+    {
+      "id": "lem-cir-lamperti-transform-and-positive-root",
+      "type": "local",
+      "reason": "Step 1.1 applies the global Itô formula to sqrt(x) after stopping on [ε,R], although the function is only defined on the positive domain. Extend the test function to a global C² function agreeing on that interval, or state the localized Itô interface."
+    },
+    {
+      "id": "thm-cir-positive-solution-and-nonattainment",
+      "type": "local",
+      "reason": "Make explicit that the local theorem applies to the transformed drift q(z)=a/z−κz/2 on (0,∞), or construct the original local CIR solution before transforming it. Steps 2.1 and 4.1 also apply the global Itô formula to s and z^(2p), defined only on (0,∞); use global extensions or a localized Itô interface."
+    },
+    {
+      "id": "thm-tamed-euler-strong-order-half",
+      "type": "local",
+      "reason": "Step 1.2 cites |b(Y_n)| for the drift increment and then concludes an O(h^(r/2)) moment bound. Retain the factor (s−t_n)≤h, giving |(s−t_n)b_h(Y_n)|≤h|b(Y_n)|, before using the uniform moments."
+    },
+    {
+      "id": "thm-drift-implicit-euler-sde-strong-order-half",
+      "type": "local",
+      "reason": "Step 2.2 bounds the martingale integrand energy as if its integrand were σ(Y_n)−σ(X_s), omitting its factor e_n. Factor max|e_n| out of the L1 maximal estimate and apply Young's inequality to the remaining diffusion-difference energy to justify the claimed bound."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-drift-implicit-euler-sde-strong-order-half",
+      "decision": "repair",
+      "reason": "The grid update and resolvent interface remain unchanged by the algorithm clarification; this consumer independently needs the Step 2.2 proof repair above."
+    },
+    {
+      "id": "ex-noise-induced-instability-in-explicit-em",
+      "decision": "accept",
+      "reason": "It uses only the stated one-step grid update and exact linear resolvent; the missing interpolation output does not affect its calculation."
+    },
+    {
+      "id": "stable-sde-schemes-for-superlinear-drift",
+      "decision": "accept",
+      "reason": "The page describes the grid resolvent update and makes no claim that depends on the missing interpolation."
+    },
+    {
+      "id": "stable-sde-schemes-for-superlinear-drift-examples",
+      "decision": "accept",
+      "reason": "The companion page's noise-stability example uses the grid update through the A page; the requested output clarification does not change it."
+    }
+  ]
+}

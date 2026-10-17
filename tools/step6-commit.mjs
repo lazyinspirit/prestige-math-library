@@ -1,13 +1,14 @@
 // Final transaction only. Git plumbing never touches foreign working files,
 // runs filters, or checks out a tree. All content gates precede this operation.
 import { composeFragment, fragmentRecords, recordSignature, decodeLedger } from './step6-ledger-fragment.mjs';
+import { composePlanProjection, planForeignResidual, decodePlan } from './step6-plan-projection.mjs';
 import { copyFileSync, existsSync, lstatSync, mkdirSync, mkdtempSync, openSync,
   closeSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve, relative } from 'node:path';
 import { tmpdir } from 'node:os';
 import { ownedStep6Paths } from './step6-owned-inputs.mjs';
 import { preflightCloseoutScope, git, textGit, gitPath, regularPath,
-  treeEntries, indexEntries, fileState, refuseGitSideEffects, verifiedInertHook } from './run-commit-scope.mjs';
+  treeEntries, indexEntries, ignoredOwnedPaths, fileState, refuseGitSideEffects, verifiedInertHook } from './run-commit-scope.mjs';
 import { runScope, sha256 } from './step6-lib.mjs';
 
 const equal = (a, b, what) => {
@@ -51,23 +52,31 @@ export function preflightStep6(root, run, { physics = false, finalReceipt = fina
     for (const row of [headRow, indexRow])
       composeFragment(decodeLedger(git(gitRoot, ['cat-file', 'blob', row.oid])), fragment.spec, run, new Set(fragment.ownedIds));
   }
+  for (const projection of policy?.planProjections ?? []) {
+    const path = (prefix ? prefix + '/' : '') + projection.path;
+    const headRow = treeEntries(gitRoot).find(row => row.path === path);
+    const indexRow = preflightIndex.find(row => row.path === path);
+    if (!headRow || !indexRow || headRow.mode !== '100644' || indexRow.mode !== '100644' || indexRow.flags !== '0')
+      throw Error('step6 commit: plan projection requires ordinary existing HEAD/index carrier');
+    composePlanProjection(decodePlan(git(gitRoot, ['cat-file', 'blob', headRow.oid])), projection.spec, 'head');
+    composePlanProjection(decodePlan(git(gitRoot, ['cat-file', 'blob', indexRow.oid])), projection.spec, 'index');
+  }
   const scope = runScope(run, root);
   for (const row of [...scope.items, ...scope.pages]) {
     if (!localPaths.includes(row.file)) throw Error(`step6 commit: selected carrier is not owned: ${row.file}`);
     regularPath(root, row.file);
   }
   for (const path of localPaths) regularPath(root, path, true);
-  const ignored = git(gitRoot, ['check-ignore', '-z', '--stdin'],
-    { input: nul(paths), optional: true, literalPathspecs: false });
-  if (ignored?.length) throw Error('step6 commit: an owned artifact is ignored');
+  const ignored = ignoredOwnedPaths(gitRoot, paths, preflightIndex);
+  if (ignored.length) throw Error('step6 commit: an owned artifact is ignored');
   return { root, gitRoot, prefix, localPaths, paths, finalReceipt, policy, fragments: policy?.fragments ?? [],
-    owns: path => paths.includes(path) };
+    planProjections: policy?.planProjections ?? [], owns: path => paths.includes(path) };
 }
 
 export function commitStep6(root, run, { physics = false, finalReceipt = finalPath(run), receipt = {}, assertValidated } = {}) {
   if (typeof assertValidated !== 'function') throw Error('step6 commit: requires the genuine final-validation binding');
   const scope = preflightStep6(root, run, { physics, finalReceipt });
-  for (const suffix of ['proof-layout.json', 'publication-readiness.json', 'step6-evidence.json', 'step6-report-integrity.json', 'step6-report.response.json', 'step6-report.md'])
+  for (const suffix of ['proof-layout.json', 'publication-readiness.json', 'step6-evidence.json', 'step6-report-integrity.json', 'step6-report.response.json', 'step6-report.md', 'pathway-closure.json', 'judge-closure.json'])
     regularPath(scope.root, `research/${run}-${suffix}`);
   const { gitRoot, paths, localPaths } = scope;
   const actualIndex = gitPath(gitRoot, 'index'), lockPath = actualIndex + '.lock';
@@ -103,6 +112,22 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
       fragmentStates.set(path, { fragment, head, index, headRow, indexRow,
         headForeign: digest(residual(headText)), indexForeign: digest(residual(indexText)) });
     }
+    const planStates = new Map();
+    for (const projection of scope.planProjections) {
+      const path = (scope.prefix ? scope.prefix + '/' : '') + projection.path;
+      const headRow = beforeTree.find(row => row.path === path), indexRow = beforeIndex.find(row => row.path === path);
+      if (!headRow || !indexRow || headRow.mode !== '100644' || indexRow.mode !== '100644' || indexRow.flags !== '0')
+        throw Error('step6 commit: plan projection requires ordinary existing HEAD/index carrier');
+      const headText = decodePlan(git(gitRoot, ['cat-file', 'blob', headRow.oid]));
+      const indexText = decodePlan(git(gitRoot, ['cat-file', 'blob', indexRow.oid]));
+      const head = composePlanProjection(headText, projection.spec, 'head');
+      const index = composePlanProjection(indexText, projection.spec, 'index');
+      const residual = text => planForeignResidual(text, projection.spec.page_ids);
+      equal(residual(head.text), residual(headText), 'plan HEAD foreign raw residual');
+      equal(residual(index.text), residual(indexText), 'plan index foreign raw residual');
+      planStates.set(path, { projection, head, index, headRow, indexRow,
+        headForeign: sha256(residual(headText)), indexForeign: sha256(residual(indexText)) });
+    }
     const validated = paths.filter(path => path !== (scope.prefix ? scope.prefix + '/' : '') + finalReceipt)
       .map(path => fileState(gitRoot, path));
     mkdirSync(dirname(receiptFile), { recursive: true });
@@ -116,7 +141,12 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
         shared_fragments: [...fragmentStates].map(([path, row]) => ({ path, authority: row.fragment.authority,
           authority_sha256: row.fragment.sha256, before_head_blob: row.headRow.oid, before_index_blob: row.indexRow.oid,
           head_foreign_sha256: row.headForeign, index_foreign_sha256: row.indexForeign,
-          head_result_sha256: sha256(row.head.text), index_result_sha256: sha256(row.index.text) })) } }, null, 2) + '\n');
+          head_result_sha256: sha256(row.head.text), index_result_sha256: sha256(row.index.text) })),
+        ...(scope.planProjections.length ? { plan_projections: [...planStates].map(([path, row]) => ({ path, authority: row.projection.authority,
+          authority_sha256: row.projection.sha256, page_ids: row.projection.spec.page_ids,
+          before_head_blob: row.headRow.oid, before_index_blob: row.indexRow.oid,
+          head_foreign_raw_sha256: row.headForeign, index_foreign_raw_sha256: row.indexForeign,
+          head_result_sha256: sha256(row.head.text), index_result_sha256: sha256(row.index.text) })) } : {}) } }, null, 2) + '\n');
     // Keep native coverage FALSE until every commit/index assertion succeeds.
     // The tree receives the prospective successful blob; a crash before final
     // materialization leaves an explicit pending result, never adoptable success.
@@ -124,7 +154,7 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
       run, covers: ['all'], ok: false, transaction_pending: true, before_head: beforeHead }, null, 2) + '\n');
     writeFileSync(receiptFile, pendingReceipt);
     const expectedReceipt = pendingReceipt;
-    const present = paths.filter(path => !fragmentStates.has(path) && regularPath(gitRoot, path, true));
+    const present = paths.filter(path => !fragmentStates.has(path) && !planStates.has(path) && regularPath(gitRoot, path, true));
     const oids = textGit(gitRoot, ['hash-object', '-w', '--no-filters', '--stdin-paths'],
       { input: Buffer.from(present.join('\n') + '\n') }).split('\n');
     if (oids.length !== present.length) throw Error('step6 commit: incomplete owned object inventory');
@@ -139,6 +169,23 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
       blobs.set(path, { path, mode: '100644', oid: object(row.head.text) });
       indexBlobs.set(path, { path, mode: '100644', oid: object(row.index.text) });
     }
+    for (const [path, row] of planStates) {
+      const object = text => textGit(gitRoot, ['hash-object', '-w', '--no-filters', '--stdin'], { input: Buffer.from(text) });
+      blobs.set(path, { path, mode: '100644', oid: object(row.head.text) });
+      indexBlobs.set(path, { path, mode: '100644', oid: object(row.index.text) });
+    }
+    const assertPlanTree = (tree, kind, label) => {
+      const entries = new Map(treeEntries(gitRoot, tree).map(row => [row.path, row]));
+      for (const [path, row] of planStates) {
+        const actual = entries.get(path), expected = (kind === 'head' ? blobs : indexBlobs).get(path);
+        if (!actual || actual.oid !== expected.oid || actual.mode !== expected.mode)
+          throw Error(`step6 commit: ${label} plan projection blob mismatch: ${path}`);
+        const text = decodePlan(git(gitRoot, ['cat-file', 'blob', actual.oid]));
+        composePlanProjection(text, row.projection.spec, kind);
+        equal(sha256(planForeignResidual(text, row.projection.spec.page_ids)),
+          kind === 'head' ? row.headForeign : row.indexForeign, label + ' plan foreign raw residual');
+      }
+    };
     const assertFragmentTree = (tree, kind, label) => {
       const entries = new Map(treeEntries(gitRoot, tree).map(row => [row.path, row]));
       for (const [path, row] of fragmentStates) {
@@ -165,6 +212,7 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
     const tree = textGit(gitRoot, ['write-tree'], { env });
     equal(outside(treeEntries(gitRoot, tree)), outsideTree, 'outside proposed HEAD');
     assertFragmentTree(tree, 'head', 'proposed HEAD');
+    assertPlanTree(tree, 'head', 'proposed HEAD');
     const commit = textGit(gitRoot, ['commit-tree', tree, '-p', beforeHead], {
       input: Buffer.from(`chore(${run}): close out validated frontier\n\n${paths.length} exact owned paths; no push or publication.\n`) });
     // Construct the real-index result from its exact original, preserving all
@@ -173,13 +221,17 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
     git(gitRoot, ['update-index', '-z', '--index-info'],
       { env: { GIT_INDEX_FILE: integrateIndex }, input: nul(indexUpdates) });
     assertFragmentTree(textGit(gitRoot, ['write-tree'], { env: { GIT_INDEX_FILE: integrateIndex } }), 'index', 'proposed integrated index');
+    assertPlanTree(textGit(gitRoot, ['write-tree'], { env: { GIT_INDEX_FILE: integrateIndex } }), 'index', 'proposed integrated index');
     equal(paths.filter(path => path !== (scope.prefix ? scope.prefix + '/' : '') + finalReceipt)
       .map(path => fileState(gitRoot, path)), validated, 'validated owned working bytes');
     if (!readFileSync(receiptFile).equals(expectedReceipt)) throw Error('step6 commit: receipt changed');
     const currentScope = preflightStep6(root, run, { physics, finalReceipt });
+    for (const suffix of ['pathway-closure.json', 'judge-closure.json'])
+      regularPath(currentScope.root, `research/${run}-${suffix}`);
     equal(currentScope.paths, paths, 'owned inventory');
     equal(currentScope.policy?.contextSha256 ?? null, scope.policy?.contextSha256 ?? null, 'scope authority');
     equal(currentScope.fragments, scope.fragments, 'fragment authority');
+    equal(currentScope.planProjections, scope.planProjections, 'plan projection authority');
     if (!readFileSync(actualIndex).equals(originalIndex)) throw Error('step6 commit: real index changed despite lock');
     if (textGit(gitRoot, ['symbolic-ref', '--short', 'HEAD']) !== 'main') throw Error('step6 commit: branch changed');
     // Recheck only the validated frontier/context at the atomic ref boundary,
@@ -208,6 +260,8 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
       equal(digest(residual(committedText)), row.headForeign, 'committed fragment foreign residual');
       equal(digest(residual(indexedText)), row.indexForeign, 'indexed fragment foreign residual');
     }
+    assertPlanTree(commit, 'head', 'committed HEAD');
+    assertPlanTree(textGit(gitRoot, ['write-tree']), 'index', 'committed integrated index');
     equal(paths.filter(path => path !== (scope.prefix ? scope.prefix + '/' : '') + finalReceipt)
       .map(path => fileState(gitRoot, path)), validated, 'committed owned working bytes');
     if (!readFileSync(receiptFile).equals(expectedReceipt)) throw Error('step6 commit: committed receipt changed');

@@ -1,0 +1,186 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+    "supplier": "alg-scaled-householder-reflector-formation-and-application",
+    "supplier_batch": "1",
+    "status": "verified",
+    "required_hypotheses": [
+      "Each reflector call receives its stated active block and trailing columns, including the right-hand-side column.",
+      "The call either returns its stated transformed block or its finite failure status."
+    ],
+    "affected_claims": [
+      "finite QR-loop termination and failure propagation in step 1.1"
+    ],
+    "evidence": "The actual supplier Definition and Proof were read; its current Step 1 ready record is owner-authored. The local algorithm uses the stated loop and does not infer a stronger factorization accuracy result.",
+    "supplier_statement_or_definition": "## Definition\nLet $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. Input a real active column $x\\in\\mathbb R^r\\subseteq\\mathbb F^r$ and trailing block $B\\in\\mathbb F^{r\\times q}$ with entries in the floating-point system, $r\\ge1$, $q\\ge0$. If every component of $x$ is zero, return the identity action and a copy of $B$, with the active output column set to exact zeros, so that $C_+=[0e_1\\;B]$; return $(v=0,\\widehat\\tau=0,\\widehat\\alpha=0,C_+)$ marked `identity`. Otherwise compute $s=\\max_{1\\le i\\le r}|x_i|>0$, and then, in increasing $i$, compute $z_i=\\operatorname{fl}(x_i/s)$. Initialize $t=0$ and, in increasing $i$, compute $a_i=\\operatorname{fl}(z_i z_i)$ followed by $t=\\operatorname{fl}(t+a_i)$. Compute $h=\\operatorname{fl}(\\sqrt t)$ and then $\\widehat r=\\operatorname{fl}(s h)$. Set $\\sigma=1$ if $x_1=0$ and $\\sigma=\\operatorname{sign}(x_1)$ otherwise, and set $\\widehat\\alpha=-\\sigma\\widehat r$ using the exact sign change. Compute $v_1=\\operatorname{fl}(x_1-\\widehat\\alpha)$, then copy $v_i=x_i$ exactly for $i=2,\\ldots,r$.\n\nInitialize $w=0$ and, in increasing $i$, compute $a_i=\\operatorname{fl}(v_i v_i)$ followed by $w=\\operatorname{fl}(w+a_i)$. Then compute $\\widehat\\tau=\\operatorname{fl}(2/w)$. For each column $j=1,\\ldots,q$ in increasing order, initialize $d_j=0$ and, in increasing $i$, compute $a_{ij}=\\operatorname{fl}(v_i B_{ij})$ followed by $d_j=\\operatorname{fl}(d_j+a_{ij})$. After all $d_j$ have been computed, in increasing $i$ compute $p_i=\\operatorname{fl}(\\widehat\\tau v_i)$. Then, in increasing $j$ and within each column in increasing $i$, compute $U_{ij}=\\operatorname{fl}(p_i d_j)$ and $\\widehat B_{ij}=\\operatorname{fl}(B_{ij}-U_{ij})$ in that order. The complete active output is $C_+=[\\widehat\\alpha e_1\\;\\widehat B]$, with exact zeros written below its first diagonal entry. If any elementary operation fails, return the first range failure with its stage and indices in the order above. Also return failure if $t$, $\\widehat r$, or $w$ is not positive normal, or any intermediate is nonfinite. Otherwise return $(v,\\widehat\\tau,\\widehat\\alpha,C_+)$ marked `reflector`. For a separate block $Y\\in\\mathbb F^{r\\times q'}$, $q'\\ge0$, apply the stored reflector by computing its sequential column dots in increasing column order, then the vector $p_i=\\operatorname{fl}(\\widehat\\tau v_i)$ in increasing $i$, and then each rounded product and subtraction by increasing column and row; omit the target-column overwrite. Store reflector factors with their identity/reflector marker to represent the exact orthogonal product; a rounded explicit dense product is a separate output with its own arithmetic error. For a nonzero stored $v$, the associated exact reflector is $H(v)=I-2vv^T/(v^Tv)$, using [[def-householder-reflector]] and the QR convention of [[def-full-reduced-and-column-pivoted-computational-qr-factorisations]]. Since $v$ is real, this matrix acts on $\\mathbb F^r$ as an orthogonal reflector over $\\mathbb R$ and a unitary reflector over $\\mathbb C$. This definition does not assert a local backward-error bound.\n",
+    "alpha_review": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-84-3a.md",
+    "alpha_evidence": "Independently checked current supplier interface against the owned consumer. Actual active rows and trailing RHS match the finite-status procedure; termination/orthogonal-representative supplier proof also checked."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+    "supplier": "thm-computed-full-rank-least-squares-backward-stability",
+    "supplier_batch": "1",
+    "status": "verified",
+    "required_hypotheses": [
+      "Successful scaled Householder QR, right-hand-side transformation and triangular solve.",
+      "The supplier arithmetic bounds hold.",
+      "The perturbed triangular factor is nonsingular."
+    ],
+    "affected_claims": [
+      "conditional backward-stability annotation on the computed QR branch"
+    ],
+    "evidence": "The actual theorem Statement and complete Proof were inspected. Its current Step 1 record is owner-authored and ready; the local Definition expressly withholds backward stability unless the theorem\u2019s success, arithmetic, and nonsingularity premises are all supplied.",
+    "supplier_statement_or_definition": "## Statement\nLet $A\\in\\mathbb R^{m\\times n}$, $m\\ge n\\ge1$, have full column rank. Successful scaled Householder QR gives the exactly orthonormal reduced representative $\\widehat Q$ and computed triangular $\\widehat R$ with\n$$A+\\Delta_Q=\\widehat Q\\widehat R,\\qquad \\|\\Delta_Q\\|_F\\le\\beta_Q\\|A\\|_F,\\qquad \\beta_Q=(1+\\kappa_m)^n-1,$$\nwhere $\\kappa_m$ is the proved local-step coefficient. Apply the stored reflectors to $b$ by rounded rank-one updates and let $\\widehat y$ be the first $n$ coordinates. Set $\\beta_b=\\beta_Q$. Alternatively, if an explicitly supplied exactly orthonormal $\\widehat Q$ has entries admissible as arithmetic inputs and $\\widehat y=\\operatorname{fl}(\\widehat Q^Tb)$ uses sequential rounded dots, set $\\beta_b=\\sqrt n\\,\\gamma_m$. Solve $\\widehat R\\widehat x=\\widehat y$ by successful rounded back substitution. Suppose $mu<1$ and $\\gamma_{n+3}<1/8$. There exist $\\delta b$ and upper triangular $\\Delta R$ with\n$$(\\widehat R+\\Delta R)\\widehat x=\\widehat Q^T(b+\\delta b),\\qquad \\|\\delta b\\|_2\\le\\beta_b\\|b\\|_2,\\qquad \\|\\Delta R\\|_F\\le\\gamma_{n+3}\\|\\widehat R\\|_F.$$\nIf $\\widehat R+\\Delta R$ is nonsingular, $\\widehat x$ is the unique least-squares solution for $\\widetilde A=\\widehat Q(\\widehat R+\\Delta R)$ and $\\widetilde b=b+\\delta b$. The relative matrix perturbation is at most $\\beta_Q+\\gamma_{n+3}(1+\\beta_Q)$; the right-hand perturbation is at most $\\beta_b$. For fixed $m,n$, both perturbation coefficients are $O(u)$. If additionally $\\beta_Q\\le19\\gamma_{n+3}/(1+\\gamma_{n+3})$ and $\\beta_b\\le20\\gamma_{n+3}$, both relative data perturbation bounds are at most $20\\gamma_{n+3}$. These two coefficient comparisons are additional checks; they do not follow from $mu<1$ and $\\gamma_{n+3}<1/8$ alone. Success and nonsingularity are explicit hypotheses.\n",
+    "alpha_review": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-84-3a.md",
+    "alpha_evidence": "Independently checked current supplier interface against the owned consumer. All three proof steps checked. Stored reflector RHS error and rounded triangular error support the conditional perturbation result; consumer explicitly requires every arithmetic/success/nonsingularity premise."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-safeguarded-levenberg-marquardt",
+    "supplier": "def-trust-region-quadratic-model-and-ratio",
+    "consumer_batch": "84",
+    "status": "verified",
+    "evidence": "Checked actual real scaled quadratic/ratio conditions: nonsingular D, lambda>0 make JtJ+lambda DtD SPD; g!=0 gives positive reduction. Euclidean model/ratio is used only on feasible positive-prediction trials; no global trust-region result is automatically imported. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/def-trust-region-quadratic-model-and-ratio.md",
+      "items/alg-safeguarded-levenberg-marquardt.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-84.pages.json#deps",
+      "items/alg-safeguarded-levenberg-marquardt.md#deps"
+    ],
+    "supplier_statement_or_definition": "## Definition\nLet $n\\ge1$, let $f:\\mathbb R^n\\to\\mathbb R$ be differentiable at\n$x\\in\\mathbb R^n$, and put $g:=\\nabla f(x)$ using the gradient convention of\n[[def-jacobian-matrix-and-gradient]]. Let $B\\in\\mathbb R^{n\\times n}$ be a\nsymmetric matrix and let $\\Delta>0$. A quadratic model at $x$ is\n\n$$m(p):=f(x)+\\langle g,p\\rangle+\\tfrac12 p^TBp,\\qquad p\\in\\mathbb R^n,$$\n\nwith the Euclidean inner product and norm of [[def-euclidean-inner-product]]\nand matrix products as in [[def-matrix-product-and-identity-matrix]]. The\ntrust-region ball is $\\mathcal B_\\Delta:=\\{p:\\|p\\|_2\\le\\Delta\\}$. The\npredicted reduction of a feasible step $p\\in\\mathcal B_\\Delta$ is\n$\\operatorname{pred}(p):=m(0)-m(p)$. Its actual reduction is\n$\\operatorname{ared}(p):=f(x)-f(x+p)$. When $\\operatorname{pred}(p)>0$, the\nactual-to-predicted reduction ratio is\n\n$$\\rho(p):=\\frac{\\operatorname{ared}(p)}{\\operatorname{pred}(p)}.$$\n\nThe quantity $\\|B\\|_2$ means the matrix norm induced by the Euclidean vector\nnorm, namely the $p=2$ case of [[def-induced-matrix-p-norm]]. It is not required\nthat $B=\\nabla^2f(x)$ in this definition; exact Hessians and symmetric model\napproximations are both admitted. The ratio is undefined when predicted\nreduction is nonpositive, so an algorithm must use a separately justified\nfallback or return a failure status in that case.\n",
+    "consumer_use_anchors": "[F4] [[def-trust-region-quadratic-model-and-ratio]]: the actual-to-predicted reduction ratio is defined only for positive predicted reduction.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/42",
+    "alpha_review": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-84-3a.md",
+    "alpha_evidence": "Independently checked current supplier interface against the owned consumer. Consumer uses the Euclidean quadratic model and ratio only after positive predicted reduction. Scaling, exact system and sufficient decrease are proved locally."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+    "supplier": "def-trust-region-quadratic-model-and-ratio",
+    "consumer_batch": "84",
+    "status": "verified",
+    "evidence": "Checked actual real scaled quadratic/ratio conditions: nonsingular D, lambda>0 make JtJ+lambda DtD SPD; g!=0 gives positive reduction. Euclidean model/ratio is used only on feasible positive-prediction trials; no global trust-region result is automatically imported. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/def-trust-region-quadratic-model-and-ratio.md",
+      "items/lem-levenberg-marquardt-large-damping-forces-sufficient-decrease.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-84.pages.json#deps",
+      "items/lem-levenberg-marquardt-large-damping-forces-sufficient-decrease.md#deps"
+    ],
+    "supplier_statement_or_definition": "## Definition\nLet $n\\ge1$, let $f:\\mathbb R^n\\to\\mathbb R$ be differentiable at\n$x\\in\\mathbb R^n$, and put $g:=\\nabla f(x)$ using the gradient convention of\n[[def-jacobian-matrix-and-gradient]]. Let $B\\in\\mathbb R^{n\\times n}$ be a\nsymmetric matrix and let $\\Delta>0$. A quadratic model at $x$ is\n\n$$m(p):=f(x)+\\langle g,p\\rangle+\\tfrac12 p^TBp,\\qquad p\\in\\mathbb R^n,$$\n\nwith the Euclidean inner product and norm of [[def-euclidean-inner-product]]\nand matrix products as in [[def-matrix-product-and-identity-matrix]]. The\ntrust-region ball is $\\mathcal B_\\Delta:=\\{p:\\|p\\|_2\\le\\Delta\\}$. The\npredicted reduction of a feasible step $p\\in\\mathcal B_\\Delta$ is\n$\\operatorname{pred}(p):=m(0)-m(p)$. Its actual reduction is\n$\\operatorname{ared}(p):=f(x)-f(x+p)$. When $\\operatorname{pred}(p)>0$, the\nactual-to-predicted reduction ratio is\n\n$$\\rho(p):=\\frac{\\operatorname{ared}(p)}{\\operatorname{pred}(p)}.$$\n\nThe quantity $\\|B\\|_2$ means the matrix norm induced by the Euclidean vector\nnorm, namely the $p=2$ case of [[def-induced-matrix-p-norm]]. It is not required\nthat $B=\\nabla^2f(x)$ in this definition; exact Hessians and symmetric model\napproximations are both admitted. The ratio is undefined when predicted\nreduction is nonpositive, so an algorithm must use a separately justified\nfallback or return a failure status in that case.\n",
+    "consumer_use_anchors": "No direct Facts/Proof invocation: declared supplier is redundant/contextual; actual claim is established by the other explicit local facts. No theorem transfer is inferred.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/43",
+    "alpha_review": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-84-3a.md",
+    "alpha_evidence": "Independently checked current supplier interface against the owned consumer. Consumer uses the Euclidean quadratic model and ratio only after positive predicted reduction. Scaling, exact system and sufficient decrease are proved locally."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+    "supplier": "def-trust-region-quadratic-model-and-ratio",
+    "consumer_batch": "84",
+    "status": "verified",
+    "evidence": "Checked actual real scaled quadratic/ratio conditions: nonsingular D, lambda>0 make JtJ+lambda DtD SPD; g!=0 gives positive reduction. Euclidean model/ratio is used only on feasible positive-prediction trials; no global trust-region result is automatically imported. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/def-trust-region-quadratic-model-and-ratio.md",
+      "items/lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-84.pages.json#deps",
+      "items/lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer.md#deps"
+    ],
+    "supplier_statement_or_definition": "## Definition\nLet $n\\ge1$, let $f:\\mathbb R^n\\to\\mathbb R$ be differentiable at\n$x\\in\\mathbb R^n$, and put $g:=\\nabla f(x)$ using the gradient convention of\n[[def-jacobian-matrix-and-gradient]]. Let $B\\in\\mathbb R^{n\\times n}$ be a\nsymmetric matrix and let $\\Delta>0$. A quadratic model at $x$ is\n\n$$m(p):=f(x)+\\langle g,p\\rangle+\\tfrac12 p^TBp,\\qquad p\\in\\mathbb R^n,$$\n\nwith the Euclidean inner product and norm of [[def-euclidean-inner-product]]\nand matrix products as in [[def-matrix-product-and-identity-matrix]]. The\ntrust-region ball is $\\mathcal B_\\Delta:=\\{p:\\|p\\|_2\\le\\Delta\\}$. The\npredicted reduction of a feasible step $p\\in\\mathcal B_\\Delta$ is\n$\\operatorname{pred}(p):=m(0)-m(p)$. Its actual reduction is\n$\\operatorname{ared}(p):=f(x)-f(x+p)$. When $\\operatorname{pred}(p)>0$, the\nactual-to-predicted reduction ratio is\n\n$$\\rho(p):=\\frac{\\operatorname{ared}(p)}{\\operatorname{pred}(p)}.$$\n\nThe quantity $\\|B\\|_2$ means the matrix norm induced by the Euclidean vector\nnorm, namely the $p=2$ case of [[def-induced-matrix-p-norm]]. It is not required\nthat $B=\\nabla^2f(x)$ in this definition; exact Hessians and symmetric model\napproximations are both admitted. The ratio is undefined when predicted\nreduction is nonpositive, so an algorithm must use a separately justified\nfallback or return a failure status in that case.\n",
+    "consumer_use_anchors": "Let $J\\in\\mathbb R^{m\\times n}$, $r\\in\\mathbb R^m$, $m,n\\ge1$, let\n$D\\in\\mathbb R^{n\\times n}$ be nonsingular, let $\\lambda>0$, and put\n$g:=J^Tr$. Assume $g\\ne0$. There is a unique $p_\\lambda$ satisfying\n$$\\bigl(J^TJ+\\lambda D^TD\\bigr)p_\\lambda=-g.$$\nSet $z_\\lambda:=Dp_\\lambda$, $\\widetilde J:=JD^{-1}$, and\n$\\Delta_\\lambda:=\\|z_\\lambda\\|_2>0$. Then $z_\\lambda$ uniquely minimizes\n$$q_\\lambda(z):=\\tfrac12\\|r+\\widetilde Jz\\|_2^2+\\tfrac\\lambda2\\|z\\|_2^2$$\nover $\\mathbb R^n$, and globally minimizes the unregularized model\n$$m(z):=\\tfrac12\\|r+\\widetilde Jz\\|_2^2$$\nover the trust-region ball $\\|z\\|_2\\le\\Delta_\\lambda$ of\n[[def-trust-region-quadratic-model-and-ratio]]. Its predicted reduction is\npositive and, in the original step coordinates,\n$$m(0)-m(Dp_\\lambda)=\\tfrac12\\|Jp_\\lambda\\|_2^2+\\lambda\\|Dp_\\lambda\\|_2^2>0.$$\n\n[F1] [[def-trust-region-quadratic-model-and-ratio]]: a quadratic model is minimized over a Euclidean ball; its predicted reduction is $m(0)-m(z)$, and an actual-to-predicted ratio is defined only when that reduction is positive.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/40",
+    "alpha_review": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-84-3a.md",
+    "alpha_evidence": "Independently checked current supplier interface against the owned consumer. Consumer uses the Euclidean quadratic model and ratio only after positive predicted reduction. Scaling, exact system and sufficient decrease are proved locally."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+    "supplier": "lem-positive-definite-model-has-unique-newton-step",
+    "consumer_batch": "84",
+    "status": "verified",
+    "evidence": "Checked actual real scaled quadratic/ratio conditions: nonsingular D, lambda>0 make JtJ+lambda DtD SPD; g!=0 gives positive reduction. Euclidean model/ratio is used only on feasible positive-prediction trials; no global trust-region result is automatically imported. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/lem-positive-definite-model-has-unique-newton-step.md",
+      "items/lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-84.pages.json#deps",
+      "items/lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer.md#deps"
+    ],
+    "supplier_statement_or_definition": "## Statement\nLet $B$ be the real symmetric positive-definite model matrix of\n[[def-trust-region-quadratic-model-and-ratio]], with $n\\ge1$, $g\\in\\mathbb R^n$,\nand radius $\\Delta>0$. There is a unique $p_N\\in\\mathbb R^n$ satisfying\n$Bp_N=-g$. The [[alg-dogleg-trust-region-step]] procedure is well-defined on\nthis input and returns a feasible vector. If its boundary-intersection branch\nis taken, the displayed scalar formula is the unique root $t\\in(0,1)$ of\n$\\|p_C+t(p_N-p_C)\\|_2^2=\\Delta^2$. On a nonstationary input the\nprocedure performs one linear solve and, only on its boundary branch, one\nscalar-root computation; it has no iteration loop.\n",
+    "consumer_use_anchors": "[F2] [[lem-positive-definite-model-has-unique-newton-step]]: for a real symmetric positive-definite model matrix $B$, the system $Bp=-g$ has a unique solution.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/41",
+    "alpha_review": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-84-3a.md",
+    "alpha_evidence": "Independently checked current supplier interface against the owned consumer. Supplier proof step 1.1 constructs the inverse by positive eigenvalues; the owned consumer has real symmetric positive definite J^TJ+lambda D^TD. No dogleg result is used."
+  },
+  {
+    "kind": "page",
+    "consumer": "gauss-newton-and-levenberg-marquardt-methods",
+    "supplier": "finite-precision-direct-factorizations",
+    "supplier_batch": "1",
+    "status": "verified",
+    "supplier_item_ids": [
+      "alg-scaled-householder-reflector-formation-and-application",
+      "thm-computed-full-rank-least-squares-backward-stability"
+    ],
+    "supplier_item_ids_status": "Both actual bodies and current Step 1 ready records were inspected. The records are owner-authored readiness records, not independent proof acceptance.",
+    "affected_items": [
+      "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "alg-safeguarded-levenberg-marquardt"
+    ],
+    "required_interface": [
+      "Scaled Householder calls terminate or return a declared failure status; the QR algorithm propagates failure.",
+      "Computed full-rank least-squares backward stability is conditional on successful QR/RHS/triangular solve, arithmetic bounds, and nonsingularity of the perturbed triangular factor; the GN algorithm attaches no such conclusion unless every hypothesis holds."
+    ],
+    "evidence": "The exact QR supplier Definition and full computed least-squares theorem Statement/Proof were read. Their current Step 1 records say ready with owner:true. GN computed candidates remain candidates; the conditional theorem is not generalized."
+  },
+  {
+    "kind": "page",
+    "consumer": "gauss-newton-and-levenberg-marquardt-methods",
+    "supplier": "nonlinear-equations-and-newton-methods",
+    "supplier_batch": "3",
+    "status": "verified",
+    "supplier_item_ids": [
+      "lem-vector-newton-correction-error-under-lipschitz-jacobian"
+    ],
+    "supplier_item_ids_status": "The current batch-3 page and the square-map lemma body/Step 1 record were inspected. The lemma\u2019s domain is R^n\u2192R^n and is not used as a rectangular residual estimate.",
+    "affected_items": [
+      "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian",
+      "thm-gauss-newton-zero-residual-quadratic-convergence"
+    ],
+    "required_interface": [
+      "No square-map result is imported for a residual map R^n\u2192R^m with m possibly unequal to n.",
+      "The local rectangular lemma instead assumes C^1 residual on open U, convex K\u2282U, and L-Lipschitz Euclidean induced Jacobian on K, and proves the L||x\u2212x*||\u00b2/2 remainder by vector FTC."
+    ],
+    "evidence": "The actual batch-3 page context and square-only supplier statement/proof were read. The local rectangular lemma proves the needed bound from vector-valued FTC and norm inequalities; no logical item-level edge to the square Newton lemma is added."
+  },
+  {
+    "kind": "page",
+    "consumer": "gauss-newton-and-levenberg-marquardt-methods",
+    "supplier": "trust-region-and-cubic-regularization-methods",
+    "consumer_batch": "84",
+    "status": "verified",
+    "evidence": "Scaled LM uses the Euclidean quadratic model, ratio only after positive predicted reduction, and real-SPD unique normal solve; nonsingular D, positive damping and exact-solve conditions are explicit. Scaled-ball minimization/damping acceptance are proved locally.",
+    "inspected_paths": [
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/gauss-newton-and-levenberg-marquardt-methods.md",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/trust-region-and-cubic-regularization-methods.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-84.pages.json"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-84.pages.json#requires"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/39"
+  }
+]

@@ -1,0 +1,443 @@
+{
+  "group": "k",
+  "batches": [
+    "95"
+  ],
+  "pages_read": [
+    "deferred-correction-and-collocation-iterations",
+    "deferred-correction-and-collocation-iterations-examples"
+  ],
+  "items_read": [
+    "lem-continuous-riemann-lebesgue-agreement",
+    "lem-unit-interval-lebesgue-gauss-data-valid",
+    "def-collocation-quadrature-tableau",
+    "lem-collocation-quadrature-matrix-well-defined",
+    "alg-explicit-left-euler-sdc-sweep",
+    "lem-sdc-sweep-work-and-storage-bound",
+    "lem-sdc-fixed-point-is-collocation-stage",
+    "lem-one-node-gauss-data-is-midpoint",
+    "lem-sdc-scalar-linear-iteration-matrix",
+    "thm-sdc-sweep-contraction-and-error-bound",
+    "lem-collocation-polynomial-scaled-derivatives",
+    "thm-collocation-local-defect-order-m",
+    "thm-collocation-one-step-stability",
+    "lem-gauss-collocation-weighted-defect-bound",
+    "prop-one-node-gauss-collocation-order-two",
+    "thm-collocation-global-order-m",
+    "thm-sdc-finite-sweeps-raise-order",
+    "thm-sdc-residual-tolerance-preserves-order",
+    "thm-gauss-collocation-local-defect-order-2m",
+    "thm-gauss-collocation-global-order-2m",
+    "ex-sdc-cost-accounting-per-sweep",
+    "ex-sdc-one-node-gauss-stiff-iteration-diverges",
+    "ex-sdc-two-node-gauss-nonstiff-cubic-ivp",
+    "ex-sdc-constant-predictor-too-few-sweeps",
+    "ex-sdc-inexact-midpoint-stage-residual"
+  ],
+  "conventions": [
+    {
+      "convention": "M,d ≥ 1 and 0 ≤ c₁ < ⋯ < c_M ≤ 1; Q_ij is the oriented Riemann integral of the jth cardinal polynomial from 0 to c_i, and b_j is its integral from 0 to 1. Zero-length integrals vanish.",
+      "fixed_by": "def-collocation-quadrature-tableau",
+      "matters_for": [
+        "lem-collocation-quadrature-matrix-well-defined",
+        "alg-explicit-left-euler-sdc-sweep",
+        "thm-collocation-local-defect-order-m",
+        "lem-collocation-polynomial-scaled-derivatives"
+      ]
+    },
+    {
+      "convention": "Stage vectors use the maximum of Euclidean block norms; matrices acting on stages use the maximum absolute row sum. Node sets are fixed, and constants need not be uniform in M.",
+      "fixed_by": "def-collocation-quadrature-tableau",
+      "matters_for": [
+        "thm-sdc-sweep-contraction-and-error-bound",
+        "thm-collocation-one-step-stability",
+        "thm-sdc-finite-sweeps-raise-order"
+      ]
+    },
+    {
+      "convention": "The left-Euler stage block is strictly lower triangular, with (Q_Δ)_ij = Δc_(j+1) for j < i. The fixed initial-column contributions cancel, so no separate f(t,u) evaluation is instructed.",
+      "fixed_by": "alg-explicit-left-euler-sdc-sweep",
+      "matters_for": [
+        "lem-sdc-fixed-point-is-collocation-stage",
+        "lem-sdc-scalar-linear-iteration-matrix",
+        "lem-sdc-sweep-work-and-storage-bound",
+        "ex-sdc-one-node-gauss-stiff-iteration-diverges"
+      ]
+    },
+    {
+      "convention": "The residual test after computing U^(k+1) certifies and returns U^k and its cached endpoint. K = 0 performs predictor evaluations but no residual test and returns no accepted endpoint.",
+      "fixed_by": "alg-explicit-left-euler-sdc-sweep",
+      "matters_for": [
+        "lem-sdc-sweep-work-and-storage-bound",
+        "ex-sdc-cost-accounting-per-sweep",
+        "ex-sdc-constant-predictor-too-few-sweeps"
+      ]
+    },
+    {
+      "convention": "Residual-to-stage estimates apply inside a nonempty closed invariant product ball, with a < 1 and q < 1; a predictor or approximate stage being certified must belong to that ball.",
+      "fixed_by": "thm-sdc-sweep-contraction-and-error-bound",
+      "matters_for": [
+        "thm-sdc-finite-sweeps-raise-order",
+        "thm-sdc-residual-tolerance-preserves-order",
+        "ex-sdc-constant-predictor-too-few-sweeps"
+      ]
+    },
+    {
+      "convention": "Gaussian specialization uses Lebesgue measure restricted to the relative Borel sigma-algebra on [0,1] and explicitly assumes Countable Choice through the interval-measure theorem.",
+      "fixed_by": "lem-unit-interval-lebesgue-gauss-data-valid",
+      "matters_for": [
+        "lem-one-node-gauss-data-is-midpoint",
+        "lem-gauss-collocation-weighted-defect-bound",
+        "prop-one-node-gauss-collocation-order-two",
+        "thm-gauss-collocation-local-defect-order-2m",
+        "thm-gauss-collocation-global-order-2m"
+      ]
+    },
+    {
+      "convention": "Derivatives of u_h and g_h are in normalized time; vector smoothness and Taylor bounds are interpreted componentwise. Bounds concern a uniform small-step branch in a common compact tube.",
+      "fixed_by": "lem-collocation-polynomial-scaled-derivatives",
+      "matters_for": [
+        "lem-gauss-collocation-weighted-defect-bound",
+        "thm-gauss-collocation-local-defect-order-2m"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-collocation-quadrature-tableau",
+      "statement": "For fixed distinct nodes in [0,1], define Q_ij = ∫₀^{c_i} ℓ_j(s) ds and b_j = ∫₀¹ ℓ_j(s) ds. The collocation stages satisfy U = 1u + hQF(U), the endpoint is u + hΣ_j b_jF_j(U), and u_h(τ) = u + h∫₀^τ Σ_j ℓ_j(s)F_j(U) ds. The definition asserts no branch existence or uniqueness.",
+      "used_by": [
+        "alg-explicit-left-euler-sdc-sweep",
+        "lem-sdc-fixed-point-is-collocation-stage",
+        "lem-collocation-polynomial-scaled-derivatives",
+        "thm-collocation-local-defect-order-m",
+        "thm-collocation-one-step-stability",
+        "lem-gauss-collocation-weighted-defect-bound"
+      ]
+    },
+    {
+      "id": "thm-sdc-sweep-contraction-and-error-bound",
+      "statement": "On the stated nonempty closed product ball, assume the inner stage maps preserve the ball and F is L-Lipschitz. If a = hL‖Q_Δ‖∞ < 1 and q = hL‖Q−Q_Δ‖∞/(1−a) < 1, the sweep is a contraction with constant q, its unique fixed point is the unique collocation stage vector in the ball, and every V in the ball satisfies ‖V−U*‖ ≤ ‖S(V)−V‖/(1−q). Iterates starting in the ball satisfy ‖U^k−U*‖ ≤ q^k‖U^0−U*‖.",
+      "used_by": [
+        "thm-sdc-finite-sweeps-raise-order",
+        "thm-sdc-residual-tolerance-preserves-order",
+        "ex-sdc-constant-predictor-too-few-sweeps"
+      ]
+    },
+    {
+      "id": "lem-collocation-polynomial-scaled-derivatives",
+      "statement": "Under the stated fixed-node, exact-start, compact-tube, bounded componentwise C^(2M+1), and locally unique small-step branch hypotheses, ‖u_h^(j)‖∞ ≤ C_j h^j for 1 ≤ j ≤ M, higher polynomial derivatives vanish, and ‖g_h^(j)‖∞ ≤ C_j h^j through order 2M, with the stated residual derivative bounds.",
+      "used_by": [
+        "lem-gauss-collocation-weighted-defect-bound"
+      ]
+    },
+    {
+      "id": "lem-gauss-collocation-weighted-defect-bound",
+      "statement": "Assume Countable Choice and the M-node Gauss rule for Lebesgue measure on [0,1]. Under the stated exact-start, uniform compact convex tube and branch assumptions, bounded componentwise partial derivatives through order 2M+1, and ‖D_y f‖op ≤ L, the endpoint defect satisfies ‖y(t+h)−u_h(1)‖₂ ≤ C h^(2M+1).",
+      "used_by": [
+        "thm-gauss-collocation-local-defect-order-2m"
+      ]
+    },
+    {
+      "id": "thm-collocation-local-defect-order-m",
+      "statement": "For M fixed distinct nodes, under the stated componentwise C^M smoothness, state-Lipschitz, common compact convex tube, exact-path derivative, and unique small-step branch hypotheses, the endpoint map has uniform exact-start local defect O(h^(M+1)).",
+      "used_by": [
+        "thm-collocation-global-order-m",
+        "thm-sdc-finite-sweeps-raise-order",
+        "thm-sdc-residual-tolerance-preserves-order"
+      ]
+    },
+    {
+      "id": "thm-collocation-one-step-stability",
+      "statement": "For two collocation stage branches in a common tube where f is L-Lipschitz in state, hL‖Q‖∞ ≤ 1/2 implies ‖U(u)−U(v)‖∞,₂ ≤ 2‖u−v‖₂ and ‖Ψ_h(u)−Ψ_h(v)‖₂ ≤ (1+2hL‖b‖₁)‖u−v‖₂.",
+      "used_by": [
+        "prop-one-node-gauss-collocation-order-two",
+        "thm-collocation-global-order-m",
+        "thm-sdc-residual-tolerance-preserves-order",
+        "thm-gauss-collocation-global-order-2m"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Boundedness and Riemann integrability of continuous scalar data.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-cantor-r",
+      "used_for": "Uniform continuity in the continuous Riemann–Lebesgue comparison.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-characterisation-r",
+      "used_for": "Compactness of [0,1].",
+      "opened": true
+    },
+    {
+      "id": "def-bounded-set",
+      "used_for": "Boundedness conventions for interval integration.",
+      "opened": true
+    },
+    {
+      "id": "def-darboux-integral",
+      "used_for": "Darboux integrability and bracketing by lower and upper sums.",
+      "opened": true
+    },
+    {
+      "id": "def-darboux-sums",
+      "used_for": "Oscillation and uniform-partition sum estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-partition-and-refinement",
+      "used_for": "Uniform partitions and their cell lengths.",
+      "opened": true
+    },
+    {
+      "id": "def-continuity-real",
+      "used_for": "Continuity and relative measurability arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Relative Borel measurability of continuous functions and partition cells.",
+      "opened": true
+    },
+    {
+      "id": "def-interval",
+      "used_for": "Interval, endpoint, and degeneracy conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-integral-of-a-nonnegative-simple-function",
+      "used_for": "Integrating finite partition step functions.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Integrability through finite absolute integral and signed splitting.",
+      "opened": true
+    },
+    {
+      "id": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+      "used_for": "Identifying simple-function integrals with finite weighted sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Integrating finite sums and differences.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Dominating measurable bounded functions on the finite-measure interval.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Unit interval mass, partition-cell lengths, endpoint nullity, and positive relative-neighborhood measure under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Finite-sum and empty-sum conventions.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Finite-sum scaling, monotonicity, and telescoping.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-ordered-field",
+      "used_for": "Ordered-field arithmetic in integral comparison.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit axiom premise inherited by Lebesgue Gaussian specializations.",
+      "opened": true
+    },
+    {
+      "id": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+      "used_for": "Measurability of differences in the integral-comparison proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of polynomials, absolute values, and finite cardinal sums.",
+      "opened": true
+    },
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "IVP domains, admissible trajectories, and exact differential equations.",
+      "opened": true
+    },
+    {
+      "id": "def-oriented-integral",
+      "used_for": "Zero-length and reversed Riemann integral conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-r",
+      "used_for": "Finiteness of fixed-node cardinal maxima.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Exact increments, primitive evaluations, and weighted-defect integration.",
+      "opened": true
+    },
+    {
+      "id": "thm-banach-fixed-point",
+      "used_for": "Inner-stage and outer-sweep fixed points on the complete invariant ball.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-space-complete",
+      "used_for": "Completeness of block-stage spaces and matrix-entry limits.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-space",
+      "used_for": "Checking the block maximum distance is a metric.",
+      "opened": true
+    },
+    {
+      "id": "def-complete-metric-space",
+      "used_for": "Completeness required for the contraction theorem.",
+      "opened": true
+    },
+    {
+      "id": "def-cauchy-in-metric",
+      "used_for": "Coordinatewise completeness argument for the stage ball.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Euclidean block norms.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Euclidean triangle inequalities and block estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "Componentwise Taylor remainders and normalized-time scaling.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+      "used_for": "Repeated differentiation of paths, composites, and the matrix weight.",
+      "opened": true
+    },
+    {
+      "id": "def-higher-derivatives-and-smoothness",
+      "used_for": "Scalar C^k and one-sided endpoint derivative conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-valued-derivative-and-integral",
+      "used_for": "Componentwise vector derivatives and Riemann integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-first-part",
+      "used_for": "Differentiating the matrix-weight integral equation.",
+      "opened": true
+    },
+    {
+      "id": "thm-uniform-limit-continuous-real-functions",
+      "used_for": "Continuity of the entrywise uniform matrix-weight limit.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-inequality-for-the-vector-valued-integral",
+      "used_for": "Operator estimates obtained by applying vector integral bounds to unit vectors.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Exact exponential solution and factorial-series endpoint comparison.",
+      "opened": true
+    },
+    {
+      "id": "lem-exponential-dominates-one-plus-x",
+      "used_for": "Uniform bound on the loose-tolerance Euler trajectory.",
+      "opened": true
+    },
+    {
+      "id": "thm-binomial-theorem",
+      "used_for": "The h/2 endpoint-error lower bound in the too-few-sweeps example.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Exact solution and exact-path derivative verification.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Uniqueness of the scalar exponential IVP solution.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Integrating-factor identity and exponential trajectory bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Bounding exact and numerical states by e.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-sdc-finite-sweeps-raise-order",
+      "concern": "The Statement concludes global order p = min(M,k+1) without explicitly specifying the numerical initial error. Proof 3.1 introduces 'The initial error is e_0=0' without a corresponding stated premise. Exact initialization is the natural intended convention, but it should be stated, or replaced by an O(h^p) initial-error assumption. If arbitrary numerical starting data are admitted literally, y'=0 with numerical initial value different from the exact initial value satisfies the tube and contraction conditions while retaining a nonvanishing grid error.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "ex-sdc-inexact-midpoint-stage-residual",
+      "concern": "Verification 1.1 asserts 'The one-node SDC sweep has Q_Δ=0, so |S(V)−V|=|G(V)| and the SDC contraction factor is also h/2=1/20.' The item neither cites nor declares alg-explicit-left-euler-sdc-sweep, which defines Q_Δ and S. Its declared suppliers establish midpoint and the ordinary implicit-stage residual estimate, but do not supply that SDC procedure. The numerical identity is correct; its actual algorithm prerequisite is missing.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "deferred-correction-and-collocation-iterations",
+      "to": "polynomial-interpolation-and-remainder",
+      "faithful": true,
+      "note": "Cardinal definitions, nodal values, degree bounds, and uniqueness are used with n=M−1 and componentwise real data. Polynomial reproduction follows from exactly those interfaces."
+    },
+    {
+      "from": "deferred-correction-and-collocation-iterations",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "The global-error supplier requires uniform local defect, 1+Lh stability, a common tube, and compatible initial error. The global collocation proofs retain these conditions. The finite-sweep proof uses the discrete recurrence faithfully once its intended zero-initial-error premise is supplied; that statement omission is recorded in concerns."
+    },
+    {
+      "from": "deferred-correction-and-collocation-iterations",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "This is a contextual page prerequisite. The batch derives its collocation and midpoint order claims locally rather than importing explicit-RK order conclusions or stability guarantees."
+    },
+    {
+      "from": "deferred-correction-and-collocation-iterations",
+      "to": "implicit-stiff-time-stepping-and-algebraic-error",
+      "faithful": true,
+      "note": "The collocation tableau matches the implicit RK stage and endpoint definitions. The inexact-midpoint example checks the invariant ball and contraction hypotheses of the small-step residual supplier and retains update-residual scaling. Fully solved scalar stability is explicitly distinguished from sweep convergence."
+    },
+    {
+      "from": "deferred-correction-and-collocation-iterations",
+      "to": "gaussian-quadrature",
+      "faithful": true,
+      "note": "Lebesgue moment admissibility and integral agreement are proved locally. Uses distinguish the 2M−1 exactness branch from the 2M remainder branch, identify their common nodes by uniqueness, and apply the scalar C^(2M) remainder coordinatewise."
+    }
+  ]
+}

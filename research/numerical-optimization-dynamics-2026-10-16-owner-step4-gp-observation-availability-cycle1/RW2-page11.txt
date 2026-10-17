@@ -1,0 +1,96 @@
+C. E. Rasmussen & C. K. I. Williams, Gaussian Processes for Machine Learning, the MIT Press, 2006,
+ISBN 026218253X.
+c⃝2006 Massachusetts Institute of Technology.
+www.GaussianProcess.org/gpml
+2.2 Function-space View
+17
+Observations
+Gaussian ﬁeld
+Inputs
+y1
+yc
+x1
+x2
+x∗
+xc
+
+
+y∗
+
+
+f1
+
+
+
+
+
+
+f∗
+
+
+
+
+fc
+
+
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+Figure 2.3: Graphical model (chain graph) for a GP for regression. Squares rep-
+resent observed variables and circles represent unknowns. The thick horizontal bar
+represents a set of fully connected nodes. Note that an observation yi is conditionally
+independent of all other nodes given the corresponding latent variable, fi. Because of
+the marginalization property of GPs addition of further inputs, x, latent variables, f,
+and unobserved targets, y∗, does not change the distribution of any other variables.
+Notice that we now have exact correspondence with the weight space view in
+eq. (2.12) when identifying K(C, D) = Φ(C)⊤ΣpΦ(D), where C, D stand for ei-
+ther X or X∗. For any set of basis functions, we can compute the corresponding
+correspondence with
+weight-space view
+covariance function as k(xp, xq) = φ(xp)⊤Σpφ(xq); conversely, for every (posi-
+tive deﬁnite) covariance function k, there exists a (possibly inﬁnite) expansion
+in terms of basis functions, see section 4.3.
+The expressions involving K(X, X), K(X, X∗) and K(X∗, X∗) etc. can look
+compact notation
+rather unwieldy, so we now introduce a compact form of the notation setting
+K = K(X, X) and K∗= K(X, X∗). In the case that there is only one test
+point x∗we write k(x∗) = k∗to denote the vector of covariances between the
+test point and the n training points. Using this compact notation and for a
+single test point x∗, equations 2.23 and 2.24 reduce to
+¯f∗= k⊤
+∗(K + σ2
+nI)−1y,
+(2.25)
+V[f∗] = k(x∗, x∗) −k⊤
+∗(K + σ2
+nI)−1k∗.
+(2.26)
+Let us examine the predictive distribution as given by equations 2.25 and 2.26.
+predictive distribution
+Note ﬁrst that the mean prediction eq. (2.25) is a linear combination of obser-
+vations y; this is sometimes referred to as a linear predictor. Another way to
+linear predictor
+look at this equation is to see it as a linear combination of n kernel functions,
+each one centered on a training point, by writing
+¯f(x∗) =
+n
+X
+i=1
+αik(xi, x∗)
+(2.27)
+where α = (K + σ2
+nI)−1y. The fact that the mean prediction for f(x∗) can be
+written as eq. (2.27) despite the fact that the GP can be represented in terms
+of a (possibly inﬁnite) number of basis functions is one manifestation of the
+representer theorem; see section 6.2 for more on this point. We can understand
+representer theorem
+this result intuitively because although the GP deﬁnes a joint Gaussian dis-
+tribution over all of the y variables, one for each point in the index set X, for

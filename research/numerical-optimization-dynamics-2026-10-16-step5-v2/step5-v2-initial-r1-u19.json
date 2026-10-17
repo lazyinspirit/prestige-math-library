@@ -1,0 +1,142 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "19",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "ex-equispaced-runge-function-interpolation-diverges",
+      "model": "gpt-6-luna",
+      "context_sha256": "6873a88432d397d611500c9fd91f6cd958c7caa6f6f4cc78b848aaeb0f6b597f",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F7 omits the real embedding explicitly required by thm-binomial-theorem; F9 covered only inequalities. This is a coercion-convention defect, not an unavailable binomial identity or a failed divergence estimate. F7 now displays iota and F9 covers all real identities and inequalities, including factorials and binomial coefficients.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-chebyshev-interpolation-lebesgue-constant-log-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "c6deff6b6426fea438756bbfe9a782a4d216143353818af7762b67d48c0de37d",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The title suggests matching logarithmic-order growth, whereas the Statement, contract and page promise only upper bounds. The nearest-node and harmonic-sum proof establishes the stated explicit C log(n+1) inequalities. Retitled the item to say logarithmic upper bounds; no lower bound is required by its content contract.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-equispaced-runge-function-interpolation-diverges",
+      "disposition": "repaired",
+      "post_sha256": "f73bdc8f60c4efc9bede13e0197a21e0bcd5e3a54d8082d880809d78444e26a1",
+      "review_context_sha256": "f55df710cb08cb7f33bc90b47966cc75057fdb5451d472bfdf0ab7a20b8118e1",
+      "reason": "Checked the pole-interpolation identity using the real-root bound on real and imaginary parts, the central-binomial/factorial lower bound (2/3)^n/[n(2n+1)], bin-count upper bound A(5/8)^n, and both parity error factors, each at least 1/26 at y_n. Their quotient grows as (16/15)^n/[n(2n+1)]. Continuity follows from the positive denominator and the quotient-continuity clause, so best errors vanish. Repaired F7/F9 coercions and contract F14 quotation and nonexistent boundary-step reference; no claim or dependency changed and no AC is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-chebyshev-interpolation-lebesgue-constant-log-bound",
+      "disposition": "repaired",
+      "post_sha256": "72c6afd17600251fe44ba7dcd7fb90180f3b5410770f5c8299b4d2220036027b",
+      "review_context_sha256": "21ed46672954f661306bb7c20d2b1dc64a508d98c11468561789b2e08bcba52c",
+      "reason": "Checked both actual cardinal formulas, nearest-angle distance at most h/2 and rank-r separation (r-1/2)h. For unequal angles sin((theta+theta_j)/2)>0 permits cancellation, yielding pi/d_j. The nearest term is at most pi, the remaining terms sum to at most 4H_n, and H_n<=1+log n gives exactly C=4+(pi+4)/log 2. Exact-node sums equal 1, cosine covers [-1,1], and both degree-zero norms equal 1. Only the title changes; Statement and proof remain intact, and no AC is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-equispaced-runge-function-interpolation-diverges",
+      "severity": "nonfatal",
+      "location": "Facts F7/F9; owning proof contract F14 and nonempty-choice boundary",
+      "finding": "The real binomial identity lacked its explicit embedding convention; F14 quoted polynomial continuity rather than quotient continuity, and the boundary note ended at nonexistent step 4.1.",
+      "correction": "Displayed iota in F7 and broadened F9 to all real expressions. Replaced F14 quotation with the actual clause 4 and corrected the boundary range to steps 1.1 through 3.1."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-chebyshev-interpolation-lebesgue-constant-log-bound",
+      "severity": "nonfatal",
+      "location": "frontmatter title and owning manifest title mirror",
+      "finding": "The title suggests two-sided logarithmic growth although the item promises and proves only explicit logarithmic upper bounds.",
+      "correction": "Use the title Chebyshev-root and Lobatto interpolation norms have logarithmic upper bounds in the item and its manifest mirror."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "completed": [
+      "ex-equispaced-runge-function-interpolation-diverges",
+      "thm-chebyshev-interpolation-lebesgue-constant-log-bound"
+    ],
+    "pending": [],
+    "sources_consulted": [
+      "items/thm-binomial-theorem.md, Statement and complete proof",
+      "items/thm-binomial-closed-formula.md, Statement and complete proof",
+      "items/lem-binomial-coefficients-symmetric-and-unimodal.md, Statement and complete proof",
+      "items/def-canonical-natural.md, Definition and Remarks",
+      "Current contract supplier quotations checked literally against source bytes; rational-power and continuity hypotheses read directly",
+      "Current Chebyshev supplier quotations: node definition; cardinal norm and formulas; sine chord and Lipschitz bounds; trigonometric identities; log integral; cosine continuity, endpoints and IVT. No external source was needed or consulted for these familiar elementary arguments."
+    ],
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-19.proof-contracts.json --strict --items ex-equispaced-runge-function-interpolation-diverges",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-equispaced-runge-function-interpolation-diverges.md items/thm-chebyshev-interpolation-lebesgue-constant-log-bound.md",
+        "exit_code": 0,
+        "result": "2 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-equispaced-runge-function-interpolation-diverges.md items/thm-chebyshev-interpolation-lebesgue-constant-log-bound.md",
+        "exit_code": 0,
+        "result": "2 files; all math and YAML parsed with the actual renderer"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-equispaced-runge-function-interpolation-diverges.md items/thm-chebyshev-interpolation-lebesgue-constant-log-bound.md",
+        "exit_code": 0,
+        "result": "2 items, 10 steps, 0 defects; run once after final item edits"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-19.proof-contracts.json --strict --items ex-equispaced-runge-function-interpolation-diverges,thm-chebyshev-interpolation-lebesgue-constant-log-bound",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 2/2 items checked"
+      },
+      {
+        "command": "Read-only exact reverse-patch and claim-section comparison using tools/item-hash.mjs",
+        "exit_code": 0,
+        "result": "Both reconstructed originals match the frozen initial before guards. All original Statement/Definition/Example sections are byte-identical, so downstream is empty."
+      },
+      {
+        "command": "Read-only Python fractions calculation",
+        "exit_code": 0,
+        "result": "Bin product 3725137/200000000 < 1/50 < (5/8)^8; n=2 error 1875/3016."
+      },
+      {
+        "command": "Locked reread/edit/check of research/numerical-optimization-dynamics-2026-10-16-batch-19.pages.json",
+        "exit_code": 0,
+        "result": "Unique assigned row title matches current item title; JSON parses. Both shared-metadata edits used acquire/reread/edit/check/release."
+      }
+    ],
+    "unresolved_obligations": [],
+    "published_consumer_ledger": "No published defects or interface-change events were discovered; no published-ledger update is proposed.",
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_paths": [
+      "items/ex-equispaced-runge-function-interpolation-diverges.md",
+      "items/thm-chebyshev-interpolation-lebesgue-constant-log-bound.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-19.proof-contracts.json",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-19.pages.json"
+    ],
+    "review_attribution": "Current mathematical adjudication and self-checks of these repairs; no independent review of the repairs is claimed. No judge, stamp, certificate, round state, published carrier or shared ledger was written."
+  }
+}

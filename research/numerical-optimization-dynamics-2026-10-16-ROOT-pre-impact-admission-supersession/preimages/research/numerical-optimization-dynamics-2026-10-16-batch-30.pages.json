@@ -1,0 +1,252 @@
+[
+  {
+    "order": 2344,
+    "id": "adaptive-stochastic-paths-and-brownian-bridge-coupling",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Adaptive stochastic paths and brownian bridge coupling",
+    "companion": "adaptive-stochastic-paths-and-brownian-bridge-coupling-examples",
+    "requires": [
+      "euler-maruyama-scheme-and-conditions",
+      "milstein-stochastic-taylor-and-iterated-integrals"
+    ],
+    "items": [
+      {
+        "id": "alg-dyadic-brownian-bridge-increment-tree",
+        "kind": "algorithm",
+        "title": "Dyadic Brownian bridge increment tree",
+        "deps": [
+          "def-d-dimensional-brownian-motion",
+          "def-multivariate-normal-law",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0,
+        "statement": "Given a parent Brownian increment over an interval of length h and an independent Gaussian midpoint innovation, split it into path-consistent left and right increments; retain the parent and stored children after rejection."
+      },
+      {
+        "id": "thm-dyadic-brownian-bridge-tree-increment-laws",
+        "kind": "theorem",
+        "title": "Exact increment laws in the dyadic Brownian bridge tree",
+        "deps": [
+          "alg-dyadic-brownian-bridge-increment-tree",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "At each fixed dyadic depth, the tree increments are mutually independent centered Gaussian vectors with covariance equal to their interval length times the identity; every parent equals the sum of its children."
+      },
+      {
+        "id": "def-predictable-stopping-time-grid",
+        "kind": "definition",
+        "title": "Predictable stopping-time grid",
+        "deps": [
+          "def-continuous-time-stopping-time"
+        ],
+        "dependency_level": 0,
+        "statement": "A finite random partition by stopping times whose next interval length is measurable at the current stopped sigma-algebra and is bounded by a deterministic maximum."
+      },
+      {
+        "id": "lem-continuous-adapted-process-at-bounded-stopping-time",
+        "kind": "lemma",
+        "title": "Continuous adapted processes are measurable at bounded stopping times",
+        "deps": [
+          "def-natural-and-usual-augmented-brownian-filtrations",
+          "def-continuous-time-filtration-and-all-pairs-martingale",
+          "def-continuous-time-stopping-time",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0,
+        "statement": "On a usual augmented Brownian filtration, an adapted finite-dimensional process with almost surely continuous paths, evaluated at a bounded stopping time, is measurable at the stopped sigma-algebra."
+      },
+      {
+        "id": "lem-stopping-time-ito-step-interval-sum",
+        "kind": "lemma",
+        "title": "It\u00f4 integral of a step on a stopping-time interval",
+        "deps": [
+          "def-brownian-motion",
+          "lem-continuous-adapted-process-at-bounded-stopping-time",
+          "def-continuous-time-stopping-time",
+          "def-progressively-measurable-and-predictable-process",
+          "def-ito-integral-for-square-integrable-predictable-processes",
+          "thm-ito-isometry-and-linearity-in-predictable-l2",
+          "thm-ito-integral-process-has-a-continuous-martingale-version",
+          "lem-square-integrable-predictable-step-ito-integral-is-finite-sum",
+          "lem-rat-embeds-dense",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "For stopping times tau<=sigma and an L2 coefficient measurable at F_tau, the predictable integrand xi 1_(tau,sigma] integrates to xi times the stopped Brownian increment."
+      },
+      {
+        "id": "alg-adaptive-euler-maruyama-on-predictable-grid",
+        "kind": "algorithm",
+        "title": "Euler\u2013Maruyama on a predictable grid with bridge-refinement status",
+        "deps": [
+          "alg-dyadic-brownian-bridge-increment-tree",
+          "thm-dyadic-brownian-bridge-tree-increment-laws",
+          "def-predictable-stopping-time-grid",
+          "lem-continuous-adapted-process-at-bounded-stopping-time",
+          "def-continuous-time-stopping-time",
+          "lem-stopping-time-ito-step-interval-sum",
+          "alg-euler-maruyama",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Use the Euler\u2013Maruyama update on intervals selected from current stopped information, and use the saved bridge tree after endpoint-based rejection; finite budgets return complete or inconclusive status, with convergence asserted only on the predictable-grid branch. The filtered space satisfies the usual conditions and endpoint acceptance is a Borel function of finite history and trial data."
+      },
+      {
+        "id": "lem-finite-budget-adaptive-em-status",
+        "kind": "lemma",
+        "title": "A finite adaptive Euler\u2013Maruyama budget returns a status",
+        "deps": [
+          "alg-adaptive-euler-maruyama-on-predictable-grid",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3,
+        "statement": "A work budget B in the adaptive Euler\u2013Maruyama procedure yields at most B trial operations and returns complete exactly when the terminal time is reached; otherwise it returns inconclusive."
+      },
+      {
+        "id": "lem-adaptive-em-predictable-grid-second-moment",
+        "kind": "lemma",
+        "title": "Uniform second moment for Euler\u2013Maruyama on predictable grids",
+        "deps": [
+          "alg-adaptive-euler-maruyama-on-predictable-grid",
+          "alg-euler-maruyama",
+          "def-predictable-stopping-time-grid",
+          "lem-stopping-time-ito-step-interval-sum",
+          "thm-stopping-an-ito-integral",
+          "thm-doob-maximal-bound-for-the-ito-integral",
+          "thm-ito-isometry-and-linearity-in-predictable-l2",
+          "thm-gronwall-integral-inequality",
+          "thm-fatou-lemma",
+          "thm-dominated-convergence",
+          "def-continuous-time-stopping-time",
+          "lem-rat-embeds-dense",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3,
+        "statement": "Under global Lipschitz and linear-growth coefficient conditions, finite predictable meshes with maximum step at most T have a continuous Euler interpolation with uniformly bounded expected squared path supremum."
+      },
+      {
+        "id": "thm-adaptive-em-predictable-grid-strong-error",
+        "kind": "theorem",
+        "title": "Strong error bound for Euler\u2013Maruyama on a predictable grid",
+        "deps": [
+          "alg-adaptive-euler-maruyama-on-predictable-grid",
+          "alg-euler-maruyama",
+          "def-predictable-stopping-time-grid",
+          "def-d-dimensional-brownian-motion",
+          "def-ito-sde-and-strong-solution",
+          "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+          "lem-adaptive-em-predictable-grid-second-moment",
+          "lem-stopping-time-ito-step-interval-sum",
+          "thm-ito-isometry-and-linearity-in-predictable-l2",
+          "thm-doob-maximal-bound-for-the-ito-integral",
+          "thm-gronwall-integral-inequality",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 4,
+        "statement": "For a finite predictable stopping-time mesh with step lengths bounded by deterministic 0<h<=T (one may take h=min{h_max,T}), global Lipschitz, linear-growth and half-H\u00f6lder-in-time coefficients give sup_t E|X_t-Y_t|^2 <= C h; a finite expected step-count claim is not inferred without a budget or E[N]<infinity."
+      },
+      {
+        "id": "def-scalar-brownian-bridge-from-x-to-y",
+        "kind": "definition",
+        "title": "Scalar Brownian bridge from x to y",
+        "deps": [
+          "def-brownian-motion",
+          "def-axiom-of-choice",
+          "lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates",
+          "thm-dynkin-pi-lambda"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume AC. Let $h>0$, $x,y\\in\\mathbb R$, and let $W$ be a standard scalar\nBrownian motion on $[0,h]$. The **scalar Brownian bridge from $x$ to $y$ over\nduration $h$** is the continuous Gaussian process\n$$B^{x,y,h}_t=x+\\frac{t}{h}(y-x)+W_t-\\frac{t}{h}W_h, \\qquad 0\\le t\\le h.$$\nIt starts at $x$ and ends at $y$. Its law does not depend on which Brownian\nmotion is used: Brownian increment laws determine its finite-dimensional laws.\nFor the path-law assertion, give $C([0,h])$ the uniform topology and extend\neach path $f$ by $E_hf(s)=f(s\\wedge h)$ for $s\\ge0$. This is a homeomorphism\nonto the closed subspace of $C([0,\\infty))$ consisting of paths constant\nafter $h$, with inverse restriction to $[0,h]$. Thus\n[[lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates]]\nmakes the Borel sigma-algebra on $C([0,h])$ generated by its coordinates:\ncoordinates of the extension after $h$ equal $f(h)$, and continuity recovers\nevery coordinate, including $h$, from rational times in $[0,h]$.\nEquality on finite coordinate cylinders now gives equality of path laws by\n[[thm-dynkin-pi-lambda]]. The endpoint-conditional and restriction-density\nproperties are established separately on the A page.\n"
+      },
+      {
+        "id": "lem-scalar-brownian-bridge-restriction-density",
+        "kind": "lemma",
+        "title": "Endpoint law and restriction density of a scalar Brownian bridge",
+        "deps": [
+          "def-scalar-brownian-bridge-from-x-to-y",
+          "def-brownian-motion",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "lem-brownian-transition-semigroup-property",
+          "lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates",
+          "thm-dynkin-pi-lambda",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "For fixed endpoint y and t<h, the bridge path law up to time t is absolutely continuous with respect to Brownian motion from x, with density p_(h-t)(y-W_t)/p_h(y-x)."
+      },
+      {
+        "id": "thm-scalar-brownian-bridge-barrier-crossing-probability",
+        "kind": "theorem",
+        "title": "Scalar Brownian bridge barrier-crossing probability",
+        "deps": [
+          "def-scalar-brownian-bridge-from-x-to-y",
+          "lem-scalar-brownian-bridge-restriction-density",
+          "thm-brownian-reflection-principle",
+          "lem-brownian-transition-semigroup-property",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "For x,y>=c and h>0, a scalar Brownian bridge from x to y crosses the level c with probability exp(-2(x-c)(y-c)/h), including probability one when either endpoint equals c."
+      }
+    ]
+  },
+  {
+    "order": 2345,
+    "id": "adaptive-stochastic-paths-and-brownian-bridge-coupling-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Adaptive stochastic paths and brownian bridge coupling \u2014 Examples",
+    "companion": "adaptive-stochastic-paths-and-brownian-bridge-coupling",
+    "requires": [
+      "adaptive-stochastic-paths-and-brownian-bridge-coupling"
+    ],
+    "items": [
+      {
+        "id": "ex-redrawing-rejected-increment-biases-path",
+        "kind": "example",
+        "title": "Redrawing a rejected Brownian increment biases the path",
+        "deps": [
+          "alg-dyadic-brownian-bridge-increment-tree",
+          "thm-dyadic-brownian-bridge-tree-increment-laws",
+          "def-standard-normal-and-normal-laws",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Conditioning or repeatedly resampling a Gaussian increment after an endpoint-based rejection changes its law; bridge-tree refinement preserves the already drawn parent path."
+      },
+      {
+        "id": "ex-coarse-fine-em-bridge-coupling",
+        "kind": "example",
+        "title": "Coarse and fine Euler paths coupled by a bridge split",
+        "deps": [
+          "alg-euler-maruyama",
+          "alg-dyadic-brownian-bridge-increment-tree",
+          "thm-dyadic-brownian-bridge-tree-increment-laws",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "A one-step coarse Euler path and two-step fine Euler path share a parent Brownian increment through its bridge children, with an explicit nonzero difference for the linear drift b(x)=x."
+      },
+      {
+        "id": "ex-brownian-bridge-barrier-missed-by-endpoints",
+        "kind": "example",
+        "title": "A Brownian bridge can cross a barrier missed by its endpoints",
+        "deps": [
+          "thm-scalar-brownian-bridge-barrier-crossing-probability",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3,
+        "statement": "A bridge with both endpoints above a level has positive crossing probability; for endpoints 1 and 1, level 0 and duration 1 the probability is exp(-2)."
+      }
+    ]
+  }
+]

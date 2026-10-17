@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "18",
+  "round": 0,
+  "reviewed_items": [
+    "def-diagonal-lower-upper-splitting-convention",
+    "alg-richardson-stationary-iteration",
+    "lem-irreducible-row-substochastic-matrix-has-strict-weighted-contraction",
+    "alg-jacobi-stationary-iteration",
+    "alg-gauss-seidel-stationary-iteration",
+    "alg-sor-stationary-iteration",
+    "thm-strict-row-diagonal-dominance-implies-jacobi-and-gauss-seidel-convergence",
+    "thm-irreducibly-weakly-diagonally-dominant-jacobi-and-gauss-seidel-converge",
+    "thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two",
+    "ex-stationary-splitting-with-an-initial-error-missing-an-unstable-eigenspace",
+    "ex-jacobi-iteration-for-a-strictly-diagonally-dominant-matrix",
+    "ex-sor-iteration-for-a-positive-definite-matrix-with-omega-in-zero-two"
+  ],
+  "reviewed_pages": [
+    "stationary-iterations-and-relaxation",
+    "stationary-iterations-and-relaxation-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The generic convergence claims rely on an external supplier whose proof omits the zero-eigenvalue Jordan-block case. The affected hypotheses include G=0. Richardson also needs a deterministic invalid-status branch.",
+  "findings": [
+    {
+      "id": "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one",
+      "type": "prerequisite",
+      "reason": "Proof step 2.1 gives the Jordan-power sum through j=s−1 without restricting k≥s. For λ=0 and k<s, terms with j>k have negative powers, so the proof does not establish decay for zero eigenvalues as written. State the expansion for k≥s; then the nilpotent zero block vanishes. Saad’s full treatment makes the block-size condition explicit in §1.8.4, Theorem 1.10: [Saad, Iterative Methods for Sparse Linear Systems](https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf)."
+    },
+    {
+      "id": "alg-richardson-stationary-iteration",
+      "type": "local",
+      "reason": "The combined invalid branch does not specify which status takes precedence when dimensions mismatch and ω=0. Give the conditions separate, ordered checks, mapping the mismatch to invalid-input and ω=0 to invalid-relaxation."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-strict-row-diagonal-dominance-implies-jacobi-and-gauss-seidel-convergence",
+      "decision": "escalate",
+      "reason": "Steps 3.1–3.2 establish ρ(G)<1 and step 4.1 uses the supplier’s forward implication for general matrices; n=1 gives G=0 within these hypotheses."
+    },
+    {
+      "id": "thm-irreducibly-weakly-diagonally-dominant-jacobi-and-gauss-seidel-converge",
+      "decision": "escalate",
+      "reason": "Step 5.1 uses the same forward implication; n=1 with a strict row also yields G=0."
+    },
+    {
+      "id": "thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two",
+      "decision": "escalate",
+      "reason": "Steps 1.2 and 4.1 use ρ(G)<1 to conclude convergence for the general theorem; an SPD diagonal matrix with ω=1 gives G=0."
+    },
+    {
+      "id": "stationary-iterations-and-relaxation",
+      "decision": "escalate",
+      "reason": "Its summary states the generic all-start spectral-radius criterion. Its Richardson status summary remains accurate after the local branch clarification."
+    },
+    {
+      "id": "ex-stationary-splitting-with-an-initial-error-missing-an-unstable-eigenspace",
+      "decision": "accept",
+      "reason": "The example uses the converse direction at ρ(G)=2 and directly computes a divergent start; the zero-eigenvalue case is not used."
+    },
+    {
+      "id": "ex-jacobi-iteration-for-a-strictly-diagonally-dominant-matrix",
+      "decision": "accept",
+      "reason": "Its specific iteration matrix has nonzero eigenvalues ±1/√20; the zero-block omission does not affect this verified example."
+    },
+    {
+      "id": "ex-sor-iteration-for-a-positive-definite-matrix-with-omega-in-zero-two",
+      "decision": "accept",
+      "reason": "Its specific iteration matrix has nonzero eigenvalues; the displayed SPD, SOR matrix, and convergence calculations are sound."
+    },
+    {
+      "id": "stationary-iterations-and-relaxation-examples",
+      "decision": "accept",
+      "reason": "The three examples are locally checked; the first uses the converse criterion, and the Jacobi and SOR examples have nonzero iteration-matrix eigenvalues."
+    },
+    {
+      "id": "ex-jacobi-and-gauss-seidel-splittings-with-spectral-radius-comparison",
+      "decision": "escalate",
+      "reason": "This published item cites the supplier at steps 1.1 and 2.1, and its Gauss–Seidel matrix has eigenvalue 0. Its stated radius and finite-error comparisons are directly computed; the owner should resolve whether the citation also intends an all-start convergence claim."
+    }
+  ]
+}

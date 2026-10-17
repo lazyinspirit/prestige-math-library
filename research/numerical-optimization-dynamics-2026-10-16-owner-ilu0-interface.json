@@ -1,0 +1,395 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": 50,
+  "scope": "NA06 ILU(0) factor slots versus product support",
+  "round": 1,
+  "decision": "controlling-false-premise-repaired; final-drained-interface-reconciled; root-binding-pending",
+  "actual_escalation": "research/numerical-optimization-dynamics-2026-10-16-step1-thm-ilu0-factor-pattern-and-work-counts.json",
+  "confirmed_defect": "Controlling linear audit asserted pattern(LU) contained in original input pattern. This is false even with all pivots1 and successful fixed-pattern ILU(0). No intended strengthening can turn factor-slot preservation into product-support preservation.",
+  "independent_counterexample": {
+    "A": "[[1,1,0],[0,1,0],[1,0,1]]",
+    "P": "{(1,1),(1,2),(2,2),(3,1),(3,3)}",
+    "recurrence": "Rows1,2 give U11=U12=U22=1. Row3 has only lower slot(3,1), multiplier1. Its remaining row positions {3} do not intersect pivot row1 upper positions {2}, so no update occurs and U33=1.",
+    "L": "[[1,0,0],[0,1,0],[1,0,1]]",
+    "U": "[[1,1,0],[0,1,0],[0,0,1]]",
+    "conclusion": "All pivots1; L=I+E31,U=I+E12, LU=A+E32, so (LU)32=1 outside P and A-LU=-E32.",
+    "count_sanity_by_direct_algebra": "ell=1,q=4,s=5,u=1,I=0,J=2. Setup uses1 division, no multiply/subtract updates; sparse application uses2 multiplications,2 subtractions,3 divisions. This is mathematical inspection, not a test run."
+  },
+  "rich_sound_contract": {
+    "factor_slots": "For canonical sorted no-duplicate/no-input-zero CSR and successful setup, L strict-lower stored slots exactly P_L={(i,k) in P:i>k}; U stored slots exactly P_U={(k,j) in P:k<=j}; L unit diagonal implicit. Updated zero values retain structural slots.",
+    "storage": "ell=|P_L|,q=|P_U|,s=nnz(A); ell+q=s numeric slots. Does not assert nnz of product or all factor values remain nonzero.",
+    "setup": "R_ik={j>k:(i,j) in P},C_k={j>k:(k,j) in P}; I=sum|R_ik intersect C_k| and J=sum(|R_ik|+|C_k|) over P_L. Exactly ell divisions,I multiplications,I subtractions; at most J merge comparisons besides n row/s entry validation visits.",
+    "application": "Using stored strict-lower/strict-upper slots in two triangular solves: exactly s-n multiplications,s-n subtractions,n divisions. Successful nonzero pivots give well-defined invertible triangular factors.",
+    "failure_and_limits": "Preserve invalid-pattern/missing-diagonal/zero-pivot branches, and nonfinite failure for any rounded extension. No A=LU, no support(LU) subset P, no convergence/conditioning/accuracy guarantee and no universal O(nnz) setup bound.",
+    "smallest_missing_prerequisite": "No new item/page/pair. Correct the controlling premise to distinguish factor slots from matrix-product support; retain actual author count theorem and counterexample."
+  },
+  "complete_preimages": {
+    "directory": "research/numerical-optimization-dynamics-2026-10-16-owner-ilu0-interface-before",
+    "files": [
+      "research/plan-numerical-linear-track.md",
+      "research/numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md"
+    ]
+  },
+  "changed_files": [
+    "research/plan-numerical-linear-track.md",
+    "research/numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md"
+  ],
+  "edit_scope": "NA06 factor-slot/work contract paragraphs only. No legacy foreign plan-numerical-analysis-track.md edit. No active batch50 item, page, manifest, contract, coverage or readiness edit.",
+  "actual_batch50_dispositions": [
+    {
+      "item": "alg-ilu0-fixed-pattern-factorization",
+      "file": "items/alg-ilu0-fixed-pattern-factorization.md",
+      "disposition": "unchanged",
+      "actual_use_and_reason": "Current exact-field procedure matches repaired slot contract: canonical sorted CSR, fixed order/no pivoting, missing-diagonal/zero-pivot checks, intersection-only updates and retained zero-valued factor slots. No A=LU or product-pattern claim."
+    },
+    {
+      "item": "thm-ilu0-factor-pattern-and-work-counts",
+      "file": "items/thm-ilu0-factor-pattern-and-work-counts.md",
+      "disposition": "unchanged-carrier; controlling premise corrected",
+      "actual_use_and_reason": "Actual escalated theorem already states the richest sound slot/storage/setup/application guarantees and explicitly denies product-support containment. Its proof follows fixed allocated slots, counts exact intersections, bounds two-pointer comparisons and counts stored-factor triangular operations; no carrier repair needed for this premise."
+    },
+    {
+      "item": "alg-flexible-gmres-variable-right-preconditioning",
+      "file": "items/alg-flexible-gmres-variable-right-preconditioning.md",
+      "disposition": "unchanged",
+      "actual_use_and_reason": "Read actual body: arbitrary actual right actions P_j, saved z_j, exact Gram-Schmidt and least-squares on actual Z_j. It does not consume the ILU product-support assertion or assert general Krylov convergence; unchanged."
+    },
+    {
+      "item": "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+      "file": "items/thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span.md",
+      "disposition": "unchanged",
+      "actual_use_and_reason": "Read actual proof: nonbreakdown yields orthonormal V and AZ=VH, hence residual norm equals projected least-squares residual over actual z_j span. It uses no ILU product sparsity or A=LU identity; unchanged."
+    },
+    {
+      "item": "ex-left-preconditioned-residual-can-understate-physical-residual",
+      "file": "items/ex-left-preconditioned-residual-can-understate-physical-residual.md",
+      "disposition": "unchanged",
+      "actual_use_and_reason": "Read actual verification: scalar epsilon example uses canonical invertible-preconditioner residual map, not ILU support. Unchanged."
+    },
+    {
+      "item": "ex-ilu0-tridiagonal-factorization",
+      "file": "items/ex-ilu0-tridiagonal-factorization.md",
+      "disposition": "unchanged",
+      "actual_use_and_reason": "Read actual verification: multipliers -1/4,-4/15, pivots4,15/4,56/15 give LU=A for this specific tridiagonal matrix. No general no-defect claim is made; unchanged."
+    },
+    {
+      "item": "cex-ilu0-product-can-create-fill-outside-input-pattern",
+      "file": "items/cex-ilu0-product-can-create-fill-outside-input-pattern.md",
+      "disposition": "unchanged",
+      "actual_use_and_reason": "Independently verified successful counterexample gives L=I+E31,U=I+E12 and (LU)32=1 outside P. Preserve this refutation as a legitimate product-fill caveat."
+    }
+  ],
+  "selected_page_closure_dispositions": [
+    {
+      "page": "preconditioner-algorithms-and-residual-metrics",
+      "path_to_NA06": [
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "controlling contract repaired",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "preconditioner-algorithms-and-residual-metrics-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "restarted-and-block-eigensolvers",
+      "path_to_NA06": [
+        "restarted-and-block-eigensolvers",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "restarted-and-block-eigensolvers-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "gaussian-quadrature",
+      "path_to_NA06": [
+        "gaussian-quadrature",
+        "restarted-and-block-eigensolvers",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "gaussian-quadrature-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "iterative-regularization-and-early-stopping",
+      "path_to_NA06": [
+        "iterative-regularization-and-early-stopping",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "iterative-regularization-and-early-stopping-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "variational-crimes-and-strang-lemmas",
+      "path_to_NA06": [
+        "variational-crimes-and-strang-lemmas",
+        "gaussian-quadrature",
+        "restarted-and-block-eigensolvers",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "variational-crimes-and-strang-lemmas-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "spectral-collocation-and-galerkin-methods",
+      "path_to_NA06": [
+        "spectral-collocation-and-galerkin-methods",
+        "gaussian-quadrature",
+        "restarted-and-block-eigensolvers",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "spectral-collocation-and-galerkin-methods-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "sparse-grid-cubature-and-mixed-regularity",
+      "path_to_NA06": [
+        "sparse-grid-cubature-and-mixed-regularity",
+        "gaussian-quadrature",
+        "restarted-and-block-eigensolvers",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "sparse-grid-cubature-and-mixed-regularity-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "deferred-correction-and-collocation-iterations",
+      "path_to_NA06": [
+        "deferred-correction-and-collocation-iterations",
+        "gaussian-quadrature",
+        "restarted-and-block-eigensolvers",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "deferred-correction-and-collocation-iterations-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "path_to_NA06": [
+        "discrete-continuous-and-pde-adjoint-sensitivities",
+        "variational-crimes-and-strang-lemmas",
+        "gaussian-quadrature",
+        "restarted-and-block-eigensolvers",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "discrete-continuous-and-pde-adjoint-sensitivities-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "polynomial-chaos-stochastic-collocation-and-galerkin-uq",
+      "path_to_NA06": [
+        "polynomial-chaos-stochastic-collocation-and-galerkin-uq",
+        "gaussian-quadrature",
+        "restarted-and-block-eigensolvers",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "polynomial-chaos-stochastic-collocation-and-galerkin-uq-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "direct-transcription-and-numerical-ode-optimal-control",
+      "path_to_NA06": [
+        "direct-transcription-and-numerical-ode-optimal-control",
+        "discrete-continuous-and-pde-adjoint-sensitivities",
+        "variational-crimes-and-strang-lemmas",
+        "gaussian-quadrature",
+        "restarted-and-block-eigensolvers",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "direct-transcription-and-numerical-ode-optimal-control-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "finite-element-pde-constrained-optimization",
+      "path_to_NA06": [
+        "finite-element-pde-constrained-optimization",
+        "variational-crimes-and-strang-lemmas",
+        "gaussian-quadrature",
+        "restarted-and-block-eigensolvers",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "finite-element-pde-constrained-optimization-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "numerical-identifiability-and-optimal-experiment-design",
+      "path_to_NA06": [
+        "numerical-identifiability-and-optimal-experiment-design",
+        "discrete-continuous-and-pde-adjoint-sensitivities",
+        "variational-crimes-and-strang-lemmas",
+        "gaussian-quadrature",
+        "restarted-and-block-eigensolvers",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "numerical-identifiability-and-optimal-experiment-design-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "simulation-gradient-estimation-and-simultaneous-perturbation",
+      "path_to_NA06": [
+        "simulation-gradient-estimation-and-simultaneous-perturbation",
+        "discrete-continuous-and-pde-adjoint-sensitivities",
+        "variational-crimes-and-strang-lemmas",
+        "gaussian-quadrature",
+        "restarted-and-block-eigensolvers",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "simulation-gradient-estimation-and-simultaneous-perturbation-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "event-location-and-hybrid-trajectory-error",
+      "path_to_NA06": [
+        "event-location-and-hybrid-trajectory-error",
+        "discrete-continuous-and-pde-adjoint-sensitivities",
+        "variational-crimes-and-strang-lemmas",
+        "gaussian-quadrature",
+        "restarted-and-block-eigensolvers",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "event-location-and-hybrid-trajectory-error-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    },
+    {
+      "page": "global-sensitivity-anova-and-sobol-estimation",
+      "path_to_NA06": [
+        "global-sensitivity-anova-and-sobol-estimation",
+        "polynomial-chaos-stochastic-collocation-and-galerkin-uq",
+        "gaussian-quadrature",
+        "restarted-and-block-eigensolvers",
+        "preconditioner-algorithms-and-residual-metrics"
+      ],
+      "disposition": "unchanged",
+      "reason": "Current exact item-use search finds no outside authored use of the ILU algorithm/count theorem. A generic NA06 page closure does not imply consumption of the false product-support claim. Existing residual maps, solver application and separately assumed convergence/conditioning interfaces remain intact.",
+      "companion": {
+        "page": "global-sensitivity-anova-and-sobol-estimation-examples",
+        "disposition": "unchanged nonlogical examples; same legitimate interface"
+      }
+    }
+  ],
+  "other_planned_interface_dispositions": [
+    {
+      "pair": "NA-07",
+      "use": "Multigrid/smoother application and work; contraction still requires its own uniform estimates, not product sparsity.",
+      "disposition": "unchanged"
+    },
+    {
+      "pair": "LIN-EIGITER",
+      "use": "Generic preconditioning/shift solves; any SPD LOBPCG metric premise remains separate and is not implied by arbitrary ILU(0).",
+      "disposition": "unchanged"
+    },
+    {
+      "pair": "INV2",
+      "use": "Regularized solves/iteration stopping; residual/regularization proofs never follow from sparse factor slots alone.",
+      "disposition": "unchanged"
+    },
+    {
+      "pair": "PE25",
+      "use": "Schwarz local solves/preconditioning; stable decomposition/overlap constants remain its own theorem.",
+      "disposition": "unchanged"
+    },
+    {
+      "pair": "PE07",
+      "use": "Pressure/block preconditioning; inf-sup and mass/stiffness scalings remain mandatory.",
+      "disposition": "unchanged"
+    },
+    {
+      "pair": "PE26",
+      "use": "Substructuring/interface preconditioners; local nullspace/coarse-space/scaling proofs remain independent.",
+      "disposition": "unchanged"
+    }
+  ],
+  "actual_use_search": "Targeted exact ILU item references across current items/library and controlling four track plans/audits found only batch50 ILU count theorem, product-fill counterexample and tridiagonal example. No outside actual item consumer of the false premise found.",
+  "source_reading": "Full current ILU algorithm/count theorem, product-fill counterexample, tridiagonal example and other three batch50 carriers read. Counterexample and operation counts checked directly from recurrence. No external source reading or author reading credit claimed.",
+  "pending_root_work": [
+    "Final batch50 drained bytes now reconciled; root can resolve the exact genuine count-theorem escalation against current source/controlling bindings.",
+    "Root owns current controlling hashes, source readiness, levels, registry and native checks."
+  ],
+  "proof_layout": "No item edited, so no changed-item proof-layout invocation is applicable.",
+  "limits": "No tests, gates, hashes, stamps, commits or runtime mutations; no blanket numerical convergence acceptance. Batch43 post-drain Chebyshev quote duty remains retained separately.",
+  "final_drained_reconciliation": {
+    "round": 2,
+    "kind": "final focused interface reconciliation; no broader audit",
+    "drain_observation": {
+      "state_endedAt": "2026-10-16T00:57:26.733Z",
+      "state_lastExitOk": true,
+      "nativeRefreshes": [],
+      "attempt_result_ended_at": "2026-10-16T00:57:26.733Z",
+      "ok": true,
+      "exit_code": 0,
+      "process_exit_code": 0,
+      "task_completed": true,
+      "task_aborted": false
+    },
+    "exact_escalated_item": "thm-ilu0-factor-pattern-and-work-counts",
+    "disposition": "accepted for this specific owner controlling-interface issue",
+    "final_source_match": "Reread final ILU Definition, count theorem Statement and full product-fill counterexample. Exact factor-slot/work contract and explicit product-support disclaimer match the repaired controlling paragraphs. Count proof-contract derivations/citations are already about factor slots and intersections, not support(LU). No carrier or shared metadata correction is required.",
+    "final_archive": {
+      "directory": "research/numerical-optimization-dynamics-2026-10-16-owner-ilu0-interface-final-before",
+      "inventory": "research/numerical-optimization-dynamics-2026-10-16-owner-ilu0-interface-final-before/inventory.json",
+      "complete_file_count": 22,
+      "contents": "All7finalitems+their readiness records, A/Bpages, manifest/contracts/coverage/notes/crossbatch, genuine native attempt result."
+    },
+    "consumer_disposition": "Existing seven actual-carrier dispositions and16selected A/companion closure dispositions remain unchanged. Tridiagonal special equality and product-fill counterexample coexist without contradiction; FGMRES/residual-map results do not consume the false premise.",
+    "mutations": "Only this owner evidence/companion MD updated after drain. No batch50 item, manifest, proof-contract, page, coverage, notes, readiness, levels, hashes or runtime write.",
+    "root_work": "Root owns current controlling/source raw bindings, readiness resolution, levels and hashes; original author escalation and native evidence remain untouched."
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "group": "m",
+  "batches": [
+    "2"
+  ],
+  "pages_read": [
+    "sparse-matrix-models-and-kernel-costs",
+    "sparse-matrix-models-and-kernel-costs-examples"
+  ],
+  "items_read": [
+    "def-csr-matrix-with-stored-entry-semantics",
+    "def-symmetric-structural-elimination-graph-and-ordering",
+    "alg-csr-matrix-vector-product-with-validation",
+    "thm-filled-graph-contains-schur-complement-support",
+    "thm-csr-matvec-algorithm-terminates-with-status",
+    "thm-csr-matvec-returns-the-represented-matrix-product",
+    "thm-csr-storage-and-exact-matvec-cost",
+    "ex-csr-tridiagonal-matrix",
+    "ex-ordered-elimination-creates-fill",
+    "ex-numerical-cancellation-within-filled-graph",
+    "ex-csr-matvec-operation-count",
+    "ex-csr-duplicates-and-explicit-zero-entry-count"
+  ],
+  "conventions": [
+    {
+      "convention": "Indices start at zero; natural dimensions include zero. Row pointers satisfy r₀=0≤⋯≤rₘ=s. Duplicate columns and explicitly stored zeros are allowed, and duplicate contributions are summed. Only canonical records, with neither duplicates nor stored zeros, satisfy s=nnz(A).",
+      "fixed_by": "def-csr-matrix-with-stored-entry-semantics",
+      "matters_for": [
+        "alg-csr-matrix-vector-product-with-validation",
+        "thm-csr-matvec-returns-the-represented-matrix-product",
+        "thm-csr-storage-and-exact-matvec-cost",
+        "ex-csr-tridiagonal-matrix",
+        "ex-csr-matvec-operation-count",
+        "ex-csr-duplicates-and-explicit-zero-entry-count"
+      ]
+    },
+    {
+      "convention": "The structural graph is defined for a symmetric matrix over a field. Elimination deletes the pivot and completes its remaining neighbors to a clique. The parent is the later neighbor with least ordering position.",
+      "fixed_by": "def-symmetric-structural-elimination-graph-and-ordering",
+      "matters_for": [
+        "thm-filled-graph-contains-schur-complement-support",
+        "ex-ordered-elimination-creates-fill",
+        "ex-numerical-cancellation-within-filled-graph"
+      ]
+    },
+    {
+      "convention": "Inputs are finite integer index arrays and field-valued arrays. Dimension checks precede index checks and accumulation. Every stored entry receives one exact multiply-add update, including zero-valued entries.",
+      "fixed_by": "alg-csr-matrix-vector-product-with-validation",
+      "matters_for": [
+        "thm-csr-matvec-algorithm-terminates-with-status",
+        "thm-csr-matvec-returns-the-represented-matrix-product",
+        "thm-csr-storage-and-exact-matvec-cost"
+      ]
+    },
+    {
+      "convention": "All numerical Schur pivots are assumed nonzero. The graph conclusion is off-diagonal support inclusion, not equality, and supplies no factorization-cost bound.",
+      "fixed_by": "thm-filled-graph-contains-schur-complement-support",
+      "matters_for": [
+        "ex-ordered-elimination-creates-fill",
+        "ex-numerical-cancellation-within-filled-graph"
+      ]
+    },
+    {
+      "convention": "Storage counts include CSR arrays and, when stated, the returned output, but exclude the supplied vector and constant-size workspace. General work and storage bounds are O(m+s+1); O(s) requires square positive order and at least one stored entry in every row.",
+      "fixed_by": "thm-csr-storage-and-exact-matvec-cost",
+      "matters_for": [
+        "ex-csr-matvec-operation-count",
+        "ex-csr-duplicates-and-explicit-zero-entry-count",
+        "prop-sparse-unrestarted-gmres-work-and-storage",
+        "ex-two-pixel-pdhg-total-variation-step"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-csr-matrix-with-stored-entry-semantics",
+      "statement": "A valid CSR record represents Aᵢⱼ by summing all values stored in row i at column j. Duplicate columns and stored zeros are permitted; s counts stored entries. Canonical records have no repeated column within a row and no stored zero, and then s=nnz(A).",
+      "used_by": [
+        "alg-csr-matrix-vector-product-with-validation",
+        "thm-csr-matvec-returns-the-represented-matrix-product",
+        "thm-csr-storage-and-exact-matvec-cost",
+        "alg-ilu0-fixed-pattern-factorization",
+        "prop-revised-simplex-sparse-pricing-operation-count",
+        "prop-sparse-unrestarted-gmres-work-and-storage",
+        "ex-two-pixel-pdhg-total-variation-step"
+      ]
+    },
+    {
+      "id": "def-symmetric-structural-elimination-graph-and-ordering",
+      "statement": "For a symmetric matrix over a field, the structural graph records nonzero off-diagonal pairs. Each elimination step deletes its vertex, retains remaining edges, and joins every pair of distinct later neighbors. The earliest later neighbor is the parent, defining an elimination forest.",
+      "used_by": [
+        "thm-filled-graph-contains-schur-complement-support",
+        "ex-ordered-elimination-creates-fill",
+        "ex-numerical-cancellation-within-filled-graph",
+        "def-hermitian-structural-graph-adapter",
+        "def-elimination-tree-and-column-reach",
+        "lem-filled-edge-path-characterisation"
+      ]
+    },
+    {
+      "id": "thm-csr-storage-and-exact-matvec-cost",
+      "statement": "For valid CSR data with m rows and s stored entries, the CSR arrays occupy 2s+m+1 slots. The algorithm performs exactly s field multiplications, s field additions, and m zero initializations; index validation and loop control cost O(m+s+1). Including output gives 2s+2m+1 slots. Square positive-order records with every row nonempty have O(s) work and storage.",
+      "used_by": [
+        "ex-csr-matvec-operation-count",
+        "ex-csr-duplicates-and-explicit-zero-entry-count",
+        "prop-sparse-unrestarted-gmres-work-and-storage",
+        "ex-two-pixel-pdhg-total-variation-step"
+      ]
+    },
+    {
+      "id": "thm-csr-matvec-returns-the-represented-matrix-product",
+      "statement": "For a field F, natural dimensions m,n, a valid CSR record representing A, and x∈Fⁿ, the validated algorithm returns `ok` with output Ax in exact field arithmetic.",
+      "used_by": [
+        "ex-csr-matvec-operation-count",
+        "ex-csr-duplicates-and-explicit-zero-entry-count",
+        "ex-two-pixel-pdhg-total-variation-step"
+      ]
+    },
+    {
+      "id": "thm-filled-graph-contains-schur-complement-support",
+      "statement": "For a symmetric matrix over a field, a fixed ordering, and nonzero pivots throughout the stated Schur updates, every nonzero off-diagonal Schur-complement entry is an edge of the corresponding symbolic filled graph. Each eliminated vertex's later neighbors form a clique in the next graph; equality of numerical and symbolic patterns is not asserted.",
+      "used_by": [
+        "ex-ordered-elimination-creates-fill",
+        "ex-numerical-cancellation-within-filled-graph"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-field",
+      "used_for": "Exact field arithmetic, distributivity, identities, inverses, and the domain of the CSR and symmetric-elimination definitions.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-space",
+      "used_for": "Rectangular matrices with zero-based indices, including zero-sized shapes.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum-in-a-commutative-monoid",
+      "used_for": "Enumeration-independent finite sums and the empty-sum convention used in CSR reconstruction and product correctness.",
+      "opened": true
+    },
+    {
+      "id": "def-function-space",
+      "used_for": "Coordinatewise vector equality and the unique empty vector in F⁰.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "The rectangular matrix product defining Ax through a column matrix, including zero inner dimension.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-zero-mult",
+      "used_for": "Vanishing indicator terms, zero stored values, and zero numerators in the Schur-support proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-no-zero-divisors",
+      "used_for": "The field-product premise cited in the Schur-support proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-rat-field",
+      "used_for": "The rational field used by all five assigned numerical examples.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-free-access-model-for-krylov-methods",
+      "used_for": "Checking the assigned A-page's contextual reference to operator application without explicit matrix assembly.",
+      "opened": true
+    },
+    {
+      "id": "def-forward-and-back-substitution-for-triangular-systems",
+      "used_for": "Checking the substitution interface invoked by the published theorem and the ILU seam.",
+      "opened": true
+    },
+    {
+      "id": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+      "used_for": "Checking the A-page's contextual triangular-solve reference and the ILU seam without treating dense quadratic counts as sparse application counts.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "prop-revised-simplex-sparse-pricing-operation-count",
+      "finding": "The Statement says: “This loop uses exactly $s$ multiplications and $s$ additions, followed by $n$ zero initializations”. Its preceding instructions initialize w to zero before the accumulation loop, and Proof 1.1 requires that initialization for the accumulator invariant. The word “followed” reverses the stated execution order; the operation counts themselves are correct.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "finite-generator-master-equations-and-uniformization",
+      "to": "sparse-matrix-models-and-kernel-costs",
+      "faithful": true,
+      "note": "Page-context prerequisite. No direct CSR-item citation was found in the consumer items; the page makes no sparse kernel-cost or CSR stability claim."
+    },
+    {
+      "from": "certified-stationary-distribution-and-hitting-statistic-numerics",
+      "to": "sparse-matrix-models-and-kernel-costs",
+      "faithful": true,
+      "note": "Page-context prerequisite. The consumer uses finite exact matrix data and imports no CSR cost, storage, or convergence conclusion."
+    },
+    {
+      "from": "sparse-direct-elimination-and-ordering",
+      "to": "sparse-matrix-models-and-kernel-costs",
+      "faithful": true,
+      "note": "Graph, ordering, clique-update, and parent conventions match. The Hermitian adapter constructs a real symmetric support matrix, and a separate local lemma proves Hermitian Schur-support containment rather than applying the symmetric numerical theorem outside its domain."
+    },
+    {
+      "from": "stationary-iterations-and-relaxation",
+      "to": "sparse-matrix-models-and-kernel-costs",
+      "faithful": true,
+      "note": "Page-context prerequisite. No direct batch-2 item citation was found; stationary convergence claims do not rely on CSR arithmetic or storage bounds."
+    },
+    {
+      "from": "krylov-methods-and-lanczos-convergence",
+      "to": "sparse-matrix-models-and-kernel-costs",
+      "faithful": true,
+      "note": "The sparse GMRES proposition explicitly assumes canonical square CSR storage, positive order, every row nonempty, and exact arithmetic. These hypotheses justify s=nnz(A) and O(s) matvec work."
+    },
+    {
+      "from": "preconditioner-algorithms-and-residual-metrics",
+      "to": "sparse-matrix-models-and-kernel-costs",
+      "faithful": true,
+      "note": "ILU uses canonical CSR input and adds strictly increasing columns. Its one-based notation is explicitly translated to zero-based CSR coordinates. Factor slots retain numerical zeros separately from input canonicality."
+    },
+    {
+      "from": "revised-simplex-linear-programming-and-certificates",
+      "to": "sparse-matrix-models-and-kernel-costs",
+      "faithful": true,
+      "note": "Sparse pricing uses the CSR reconstruction definition faithfully, including duplicate columns and stored zeros. It proves the transpose accumulation locally rather than citing the forward-matvec theorem for a transpose routine. A separate initialization-order wording alert is recorded."
+    },
+    {
+      "from": "operator-splitting-admm-and-primal-dual-methods",
+      "to": "sparse-matrix-models-and-kernel-costs",
+      "faithful": true,
+      "note": "The two-pixel PDHG example uses a valid canonical 1×2 record with s=2. Its product, six CSR input slots, two multiplications, two additions, and one initialization match the supplier statements."
+    }
+  ]
+}

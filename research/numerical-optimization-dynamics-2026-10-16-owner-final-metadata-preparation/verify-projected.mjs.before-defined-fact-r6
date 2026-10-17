@@ -1,0 +1,200 @@
+// Independent read-only verification of a prepared packet; never imports/runs reconcile.mjs.
+import fs from 'node:fs';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
+const root=process.cwd(),run='numerical-optimization-dynamics-2026-10-16';
+const base=path.join(root,'research',`${run}-owner-final-metadata-preparation`);
+const {splitFrontmatter,numberedProofSteps,factParagraphs,sourceSectionText}=await import(pathToFileURL(path.join(root,'tools/facts-block.mjs')));
+const {frontmatterList}=await import(pathToFileURL(path.join(root,'tools/frontmatter-list.mjs')));
+const {yaml}=await import(pathToFileURL(path.join(root,'tools/pathway-lib.mjs')));
+const args=process.argv.slice(2),opt=k=>args.includes(k)?args[args.indexOf(k)+1]:null;
+const packetArg=opt('--packet');
+if(!packetArg)throw Error('Usage: node verify-projected.mjs --packet research/R-owner-final-metadata-preparation/NEWPACKET [--report NEWFILE]');
+function owned(p){const a=path.resolve(root,p);if(!a.startsWith(base+path.sep))throw Error('Packet/report must remain under own research preparation directory');return a;}
+const packet=owned(packetArg),read=p=>fs.readFileSync(path.resolve(root,p),'utf8');
+const journal=JSON.parse(read(path.join(packet,'journal.json'))),issues=[],checks=[],inputs=[];
+const optionForPhase=opt,phaseSpec=opt('--phase-map')??journal.phase_identity_spec,phases=loadPhaseIdentity(phaseSpec,read);
+const eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const sets=(a,b)=>eq([...new Set(a)].sort(),[...new Set(b)].sort());
+function check(ok,detail){checks.push({...detail,ok});if(!ok)issues.push(detail);}
+const cache=new Map();
+function source(id){if(cache.has(id))return cache.get(id);const raw=read(`items/${id}.md`),s=splitFrontmatter(raw),meta=yaml().parse(s.fm),v={...s,meta,steps:numberedProofSteps(s.body),facts:factParagraphs(s.body)};cache.set(id,v);return v;}
+function files(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?files(path.join(dir,e.name)):[path.join(dir,e.name)]);}
+// All bound source/metadata inputs must still be exact current bytes before any apply.
+for(const file of files(path.join(packet,'inputs'))){const rel=path.relative(path.join(packet,'inputs'),file);const ok=fs.existsSync(path.join(root,rel))&&fs.readFileSync(file).equals(fs.readFileSync(path.join(root,rel)));inputs.push({path:rel,ok});if(!ok)issues.push({kind:'input-byte-drift',path:rel});}
+for(const row of journal.rows??[]){
+ if(row.disposition!=='proposed-only')continue;
+ const before=JSON.parse(read(row.before)),after=JSON.parse(read(row.proposed));
+ check(read(row.before)===read(row.target),{kind:'metadata-before-current-byte-guard',target:row.target});
+ if(row.target.endsWith('.pages.json')){
+  for(const page of after){
+   const pg=splitFrontmatter(read(`library/${page.category}/${page.id}.md`));
+   const listed=[...frontmatterList(pg.fm,'items'),...frontmatterList(pg.fm,'examples')];
+   for(const entry of [...(page.items??[]),...(page.examples??[])]){
+    const id=typeof entry==='string'?entry:entry.id,s=source(id);
+    check(listed.includes(id),{kind:'manifest-listed-on-actual-page',target:row.target,id});
+    if(typeof entry==='string'){check(false,{kind:'manifest-string-without-exact-fields',id});continue;}
+    check(eq(entry.deps??[],frontmatterList(s.fm,'deps')),{kind:'manifest-exact-source-deps',target:row.target,id});
+    check(eq(entry.justified_by??[],frontmatterList(s.fm,'justified_by')),{kind:'manifest-exact-source-justification',target:row.target,id});
+    check(entry.kind===s.meta.kind&&entry.title===s.meta.title,{kind:'manifest-kind-title',target:row.target,id});
+   }
+  }
+  continue;
+ }
+ if(!row.target.endsWith('.proof-contracts.json'))throw Error('Unexpected projected metadata target '+row.target);
+ for(const id of after.scope??[]){
+  const s=source(id),c=after.contracts?.[id],old=before.contracts?.[id];
+  if(c&&Object.hasOwn(c,'supplier_interfaces'))verifySupplierInterfaces(id,s,c,old??{});
+  if(!s.steps.length)continue;
+  if(!c){check(false,{kind:'missing-scoped-contract',id});continue;}
+  const records=[...(c.derivations??[]),...(c.routine_steps??[])];
+  check(records.length===s.steps.length&&new Set(records.map(x=>x.step)).size===records.length,{kind:'exact-proof-step-set',id});
+  const identities=proofIdentities(id,s.steps,old??{},phases),oldIds=new Set([...(old?.derivations??[]),...(old?.routine_steps??[])].map(x=>x.id));
+  for(const st of s.steps){
+   const matches=records.filter(x=>x.step===st.id),d=matches[0];
+   check(matches.length===1&&d.claim===st.claim,{kind:'whole-source-proof-paragraph',id,step:st.id});
+   const declaredInputs=new Set(d?.inputs??[]),nativeTokens=explicitTokens(st.text,new Map(s.steps.map(x=>[x.id,x])));
+   check(matches.length===1&&Array.isArray(d.inputs)&&st.inputs.every(token=>declaredInputs.has(token)),{kind:'source-terminal-input-tags-retained',id,step:st.id});
+   check(matches.length===1&&[...nativeTokens].every(token=>declaredInputs.has(token)||declaredInputs.has(`step ${token}`)),{kind:'native-explicit-fact-and-known-step-inputs-covered',id,step:st.id});
+   const match=identities.get(st.id),actualRoutine=(c.routine_steps??[]).some(x=>x.step===st.id);
+   check(actualRoutine===(match?.group==='routine_steps'),{kind:'original-paragraph-classification-preserved',id,step:st.id,original_step:match?.row.step??null});
+   if(match){
+    check(d?.id===match.row.id,{kind:'original-paragraph-stable-record-id',id,step:st.id,original_step:match.row.step});
+    for(const key of Object.keys(match.row))if(!['id','claim','step','inputs'].includes(key))check(eq(d?.[key],match.row[key]),{kind:'original-paragraph-auxiliary-field-preserved',id,step:st.id,field:key});
+   }else{
+    check(!oldIds.has(d?.id)&&Object.keys(d??{}).every(key=>['id','claim','step','inputs'].includes(key)),{kind:'new-paragraph-no-fabricated-original-id-score-or-classification',id,step:st.id});
+   }
+  }
+  const expected=[];
+  for(const [fact,f]of s.facts)for(const supplier of new Set(f.links)){
+   const uses=s.steps.filter(st=>explicitTokens(st.text,new Map(s.steps.map(x=>[x.id,x]))).has(fact)).map(st=>st.id);
+   check(uses.length>0,{kind:'labelled-supplier-has-native-explicit-use',id,fact,supplier});
+   expected.push(`${fact}\0${supplier}`);
+   const found=(c.citations??[]).filter(x=>x.fact===fact&&x.source===supplier),cite=found[0];
+   check(found.length===1,{kind:'exact-fact-supplier-link',id,fact,supplier});
+   if(!cite)continue;
+   const section=sourceSectionText(source(supplier).body,cite.source_section);
+   check(Boolean(section?.trim())&&cite.quote===section.trim(),{kind:'whole-current-supplier-section',id,fact,supplier,section:cite.source_section});
+   check(Array.isArray(cite.uses)&&sets(cite.uses,uses),{kind:'citation-uses-native-explicit-token-membership',id,fact,supplier});
+   const declared=[...frontmatterList(s.fm,'deps'),...frontmatterList(s.fm,'justified_by'),...frontmatterList(s.fm,'forward_refs')];
+   check(declared.includes(supplier),{kind:'supplier-declared-in-source',id,fact,supplier});
+  }
+  check(sets((c.citations??[]).map(x=>`${x.fact}\0${x.source}`),expected)&&(c.citations??[]).length===new Set(expected).size,{kind:'complete-no-stale-citation-pair-set',id});
+  for(const key of new Set([...Object.keys(old??{}),...Object.keys(c)]))if(!['derivations','routine_steps','citations','supplier_interfaces'].includes(key))check(eq(old?.[key],c[key]),{kind:'preserved-unrelated-contract-field',id,field:key});
+ }
+}
+// Reject drift during verification as well as drift at entry.
+for(const guard of inputs){const file=path.join(packet,'inputs',guard.path);if(!fs.readFileSync(file).equals(fs.readFileSync(path.join(root,guard.path))))issues.push({kind:'input-changed-during-verification',path:guard.path});}
+const result={version:1,run,at:new Date().toISOString(),mode:'independent-repository-parser projected-metadata verification; no math audit',packet:packetArg,ok:issues.length===0,input_guards:inputs,checks,issues,canonical_writes:0,apply_utilities_executed:false};
+if(opt('--report'))fs.writeFileSync(owned(opt('--report')),JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({ok:result.ok,packet:packetArg,input_guards:inputs.length,checks:checks.length,issues:issues.length,report:opt('--report')??null}));
+process.exitCode=result.ok?0:1;
+
+// Exact native citation-use token grammar from tools/proof-contract.mjs;
+// inline fact mentions count; derivation.inputs retain terminal tags and cover native explicit tokens.
+function explicitTokens(text, steps) {
+  const out = new Set();
+  for (const match of text.matchAll(/\b(?:[Ss]teps?\s+)?(\d+\.\d+)\b|\b([FAL]\d+)\b/g)) {
+    if (match[2]) out.add(match[2]);
+    else if (/^steps?\s/i.test(match[0]) || steps.has(match[1])) out.add(match[1]);
+  }
+  return out;
+}
+
+// Paragraph identity is authenticated from root's direct map and archived source,
+// never inferred from a coincident step number after a phase insertion/reorder.
+function loadPhaseIdentity(specPath, reader) {
+  const entries=new Map();
+  if(!specPath)return entries;
+  const spec=JSON.parse(reader(specPath));
+  const config=Array.isArray(spec)?{maps:spec}:spec;
+  const receipt=optionForPhase('--phase-receipt')??config.root_receipt;
+  if(!receipt)throw Error('Phase identity requires the actual root application receipt');
+  reader(receipt);
+  const rows=config.map_file?JSON.parse(reader(config.map_file)):(config.maps??[]);
+  const origin=config.map_file??specPath;
+  for(const row of [...rows,...(config.extra_maps??[])]){
+    const file=row.path,id=path.basename(file,'.md'),map=row.old_to_final_step_labels;
+    if(!file?.startsWith('items/')||!map||entries.has(id))throw Error('Invalid/duplicate phase identity '+file);
+    if(new Set(Object.values(map)).size!==Object.values(map).length)throw Error('Noninjective phase identity '+id);
+    if(row.root_receipt)reader(row.root_receipt);
+    const before=row.before_file??path.join(path.dirname(origin),'before',file);
+    const original=numberedProofSteps(splitFrontmatter(reader(before)).body);
+    entries.set(id,{map,original:new Map(original.map(st=>[st.id,st])),before});
+  }
+  for(const id of config.rewritten_items??[]){if(entries.has(id))throw Error('Rewritten item also has old-paragraph phase map '+id);entries.set(id,{rewritten:true});}
+  return entries;
+}
+function paragraphClaim(text,map={},order=Object.keys(map)){
+  const refs=/(steps?\s+)((?:\d+\.\d+)(?:(?:\s*,\s*(?:and\s+)?|\s+and\s+|\s*&\s*|\s*[–—-]\s*)\d+\.\d+)*)/gi;
+  return String(text??'').replace(refs,(_,prefix,labels)=>{
+    const expanded=[];
+    for(const part of labels.match(/\d+\.\d+(?:\s*[–—-]\s*\d+\.\d+)?/g)??[]){
+      const ends=part.match(/\d+\.\d+/g);
+      if(ends.length===1)expanded.push(ends[0]);
+      else{const a=order.indexOf(ends[0]),z=order.indexOf(ends[1]);if(a<0||z<a)throw Error('Unbound/reversed paragraph reference range '+part);expanded.push(...order.slice(a,z+1));}
+    }
+    return 'step-references:'+expanded.map(label=>map[label]??label).join(',');
+  })
+    .replaceAll('\\{t_{ii}\\}','\\{t_{ii}}')
+    .replaceAll('\\lbrackih,s\\rbrack','[ih,s]')
+    .replaceAll('\\lbrackih,(i+1)h\\rbrack','[ih,(i+1)h]')
+    .replace(/\s+/g,'').replace(/∎$/,'');
+}
+function priorParagraphClaim(...args){
+  try{return paragraphClaim(...args);}catch(e){if(e.message.startsWith('Unbound/reversed paragraph reference range '))return null;throw e;}
+}
+function proofIdentities(id,steps,contract,phases){
+  const prior=['derivations','routine_steps'].flatMap(group=>(contract[group]??[]).map(row=>({row,group})));
+  const currentOrder=steps.map(st=>st.id),phase=phases.get(id),inverse=new Map(Object.entries(phase?.map??{}).map(([a,b])=>[b,a])),used=new Set(),out=new Map();
+  for(const step of steps){
+    let candidates=[];
+    if(phase?.rewritten){out.set(step.id,null);continue;}
+    if(phase){
+      const oldLabel=inverse.get(step.id);
+      if(oldLabel===undefined){out.set(step.id,null);continue;} // explicitly inserted new paragraph
+      const source=phase.original.get(oldLabel);
+      if(!source||paragraphClaim(source.claim,phase.map,[...phase.original.keys()])!==paragraphClaim(step.claim,{},currentOrder))throw Error('Mapped source paragraph identity drift '+id+' '+oldLabel+' -> '+step.id);
+      // Direct inverse-map candidate must actually carry that paragraph's claim.
+      const direct=prior.filter(x=>x.row.step===oldLabel&&priorParagraphClaim(x.row.claim,{},[...phase.original.keys()])===paragraphClaim(source.claim,{},[...phase.original.keys()]));
+      candidates=direct.length?direct:prior.filter(x=>priorParagraphClaim(x.row.claim,{},currentOrder)===paragraphClaim(step.claim,{},currentOrder)||priorParagraphClaim(x.row.claim,phase.map,[...phase.original.keys()])===paragraphClaim(step.claim,{},currentOrder));
+    }else{
+      // Rewritten paragraphs (e.g. a new proof) receive no invented old identity.
+      const direct=prior.filter(x=>x.row.step===step.id&&priorParagraphClaim(x.row.claim,{},currentOrder)===paragraphClaim(step.claim,{},currentOrder));
+      candidates=direct.length?direct:prior.filter(x=>priorParagraphClaim(x.row.claim,{},currentOrder)===paragraphClaim(step.claim,{},currentOrder));
+    }
+    if(candidates.length>1)throw Error('Ambiguous original paragraph identity '+id+' '+step.id);
+    const match=candidates[0]??null;
+    if(match){if(used.has(match.row))throw Error('Original paragraph reused '+id);used.add(match.row);}
+    out.set(step.id,match);
+  }
+  return out;
+}
+function supplierInterfaceProjection(contract,body){
+  const facts=[...factParagraphs(body)].flatMap(([fact,f])=>[...new Set(f.links)].map(supplier=>({fact,supplier,text:f.text.trim()})));
+  const prior=contract.supplier_interfaces??[];
+  return facts.map(pair=>{
+    const exact=prior.find(x=>x.fact===pair.fact&&(x.supplier??x.source)===pair.supplier);
+    const legacy=prior.filter(x=>!x.fact&&(x.supplier??x.source)===pair.supplier);
+    const old=exact??(legacy.length===1&&facts.filter(x=>x.supplier===pair.supplier).length===1?legacy[0]:null);
+    return {...old,fact:pair.fact,supplier:pair.supplier,required_hypotheses:pair.text};
+  });
+}
+
+// Independently compare the actual fact paragraphs/pairs, preserving only genuine
+// same-pair auxiliary fields. No new source-reading or body-inspected status.
+function verifySupplierInterfaces(id,s,contract,prior){
+  const pairs=[...s.facts].flatMap(([fact,f])=>[...new Set(f.links)].map(supplier=>({fact,supplier,paragraph:f.text.trim()})));
+  const rows=contract.supplier_interfaces??[];
+  check(rows.length===pairs.length,{kind:'supplier-interface-current-pair-count',id});
+  for(const pair of pairs){
+    const matches=rows.filter(x=>x.fact===pair.fact&&(x.supplier??x.source)===pair.supplier),row=matches[0];
+    check(matches.length===1&&row.required_hypotheses===pair.paragraph,{kind:'supplier-interface-full-current-fact-paragraph',id,fact:pair.fact,supplier:pair.supplier});
+    if(!row)continue;
+    const exact=(prior.supplier_interfaces??[]).find(x=>x.fact===pair.fact&&(x.supplier??x.source)===pair.supplier);
+    const legacy=(prior.supplier_interfaces??[]).filter(x=>!x.fact&&(x.supplier??x.source)===pair.supplier);
+    const old=exact??(legacy.length===1&&pairs.filter(x=>x.supplier===pair.supplier).length===1?legacy[0]:null);
+    if(old){for(const key of Object.keys(old))if(!['fact','supplier','required_hypotheses'].includes(key))check(eq(row[key],old[key]),{kind:'supplier-interface-same-pair-other-field-preserved',id,fact:pair.fact,supplier:pair.supplier,field:key});}
+    else check(Object.keys(row).every(k=>['fact','supplier','required_hypotheses'].includes(k)),{kind:'new-supplier-interface-no-invented-reading-status',id,fact:pair.fact,supplier:pair.supplier});
+  }
+}

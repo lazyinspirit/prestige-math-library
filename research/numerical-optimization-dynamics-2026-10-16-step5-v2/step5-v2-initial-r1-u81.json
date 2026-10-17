@@ -1,0 +1,235 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "81",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-scaled-taylor-exponential-action",
+      "model": "gpt-6-luna",
+      "context_sha256": "4006da081b74f55c35fd46fe96baba24d172aa1ae7ff8ae3258f3e68ee4ac9f9",
+      "outcome": "false_positive",
+      "reason": "The separate theorem exists as items/thm-scaled-taylor-exponential-action-error-and-work.md on the owning page. Its steps 1.1–3.1 prove the geometric tail majorant, term/sum error recurrence, and telescoping propagation, yielding exactly the reported B. The algorithm is definition-like and need not repeat that proof. The theorem call-count defect is separate from its valid error bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-scaled-taylor-exponential-action-error-and-work",
+      "model": "gpt-6-luna",
+      "context_sha256": "73dee2b6b5f3f20014ddde090d6efc3239318e428a1c9eaa42f3b83209eb51a3",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The final Statement asserted sp calls outside the zero branches, but A=[1], v=[1], t=1, s_max=p_max=1, rho_A=rho_t=rho_v=1 and tolerance=1/10 yield Q_0(1)=2 and Q_1(1)=3/4. Neither pair meets tolerance/2, so the algorithm exits before any A call. Qualified the exact count by completion, explicitly accounted for pre-recurrence and early exits, and matched proof step 4.1 and its contract. The analytic error bound is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-arnoldi-exponential-and-phi-actions",
+      "model": "gpt-6-luna",
+      "context_sha256": "228306e560c79a193e2b65bb11f81d3c89850561a8c12730e658f2f570d0efbd",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The outer procedure admitted arbitrary real t but its k=0 Taylor call required an exactly represented time and rational absolute-time bound, neither supplied explicitly. Added those reduced-configuration requirements and an inconclusive no-candidate exit before an unavailable or invalid call, preserving the outer real-time domain. The k>=1 call explicitly uses exact time and bound 1. Also repaired the digest-confirmed unassigned reduced-action status after a non-successful Taylor candidate with valid scaling, and the unassigned successful finite-precision projection status.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-scaled-taylor-exponential-action",
+      "disposition": "unaffected",
+      "post_sha256": "95ca8bd943f3231da205eab29539586181b99b8bd95f391e36948352112dadee",
+      "review_context_sha256": "60a143945954d310fb1a3614564cc1895ab2fa79ee0c3c104527c77909284c12",
+      "reason": "Checked the complete procedure, certified arithmetic definition, owning page and contract, and the error theorem proof. R_s bounds the scaled norm, Q has denominator at least 1/2, finite tie-breaking uses no AC, and d and epsilon cover both term and sum errors. For completed certified recurrences telescoping gives B; success requires B<=tolerance. Zero and p=0 branches agree. No item edit is needed for the rejected missing-theorem allegation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-scaled-taylor-exponential-action-error-and-work",
+      "disposition": "repaired",
+      "post_sha256": "72a07919c02ab3d9e81d561e003b635d5c5f2d67a54b31f7685ce4a1742d87b0",
+      "review_context_sha256": "396cd4ce6495ecb06c78562756c4a65caa7e3bf402283b1d6b78d187d17870d4",
+      "reason": "Reviewed all seven proof steps: the geometric tail, norm bound 3, term-error induction, summation error, and two telescoping identities establish the unchanged error bound for either sign of time, including p=0 and R=0. Repaired the overbroad work clause and step 4.1 to separate completed recurrences from early returns; owning contract passes strictly. Both direct consumers use only successful certificates and actual work counters, so need no edits. This is the repair author’s review, not an independent rejudgment.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-arnoldi-exponential-and-phi-actions",
+      "disposition": "repaired",
+      "post_sha256": "52b38b3cc9e309a73014b50d2dd9487ca99486c27136bd3ed26e8d6d0d28abbc",
+      "review_context_sha256": "85cf6bf42d136b7a4c8be6b762aa9069e04bf4106bb6fbebe01d37ac70517ae9",
+      "reason": "Reviewed the complete defining procedure, exact Arnoldi recurrence and factorization interface, certified arithmetic contract, reduced Taylor input requirements, and the augmented phi identity with its proof. The new pre-call checks preserve arbitrary real outer t while preventing an inadmissible Taylor invocation. For k>=1 the j+k-dimensional exponential at time 1 supplies phi_k(tH_j)e1; beta scaling gives beta*epsilon_aug+xi_beta. All reduced/projection branches now assign statuses, and happy breakdown still requires an exact recurrence. Direct consumers retain their exact projection formulas and successful-certificate premises. This is repair-author review, not independent rejudgment.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-certified-exponential-euler-etd2-step",
+    "lem-certified-exponential-step-action-error",
+    "ex-stiff-diagonal-arnoldi-action",
+    "ex-nonnormal-transient-action-certificate"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "alg-scaled-taylor-exponential-action",
+      "finding": "The allegedly absent error theorem is present on the owning page and its steps 1.1–3.1 establish B. No item change required.",
+      "status": "dismissed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-scaled-taylor-exponential-action-error-and-work",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "finding": "The unconditional sp count excluded budget exits only implicitly; the explicit scalar budget counterexample in decisions makes zero calls.",
+      "repair": "Statement and step 4.1 now count completed recurrences exactly and distinguish pre-recurrence and early exits. Owning contract derivation and boundary evidence updated under the shared-write lock.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-arnoldi-exponential-and-phi-actions",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "definition",
+      "finding": "Step 3 could invoke Taylor without its required exact-time input and rational time bound. Steps 4 and 5 also left reachable reduced-action and projection statuses unassigned.",
+      "repair": "Explicitly require all Taylor configuration inputs and exit inconclusively before an unavailable/invalid call. Use exact time/bound 1 for augmentation, assign reduced failure status explicitly, and assign certified projection status on a sound certificate. Owning contract boundary/risk evidence updated under lock.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "sources": "All mathematical reasoning was checked directly against current local items and owning page/contracts. Read the cited local norm, exponential-series, phi-series, exact Arnoldi and augmented-action interfaces; read the full augmented-action argument and full Taylor error proof. No external source was consulted or claimed. These finite-series and norm-error arguments are familiar.",
+    "scope": "Edited only the two assigned defective draft items, their entries in the owning batch-81 proof contract, and this report. The false-positive Taylor algorithm is unchanged. No prerequisite creation, AC use, new dependency, published repair, stamp, judge launch, or central state write.",
+    "interface_changes": [
+      {
+        "id": "thm-scaled-taylor-exponential-action-error-and-work",
+        "section": "Statement",
+        "before": "It uses exactly $sp$ calls to $A$ outside the exact zero-input or zero-action branches.",
+        "after": "A completed recurrence uses exactly $sp$ calls to $A$. A return before the recurrence makes zero such calls; an early stop during it makes at most $sp$ calls.",
+        "preserved": "All analytic error estimates, domains and provider hypotheses are unchanged."
+      },
+      {
+        "id": "alg-arnoldi-exponential-and-phi-actions",
+        "section": "Definition",
+        "changes": "Reduced configuration now includes exactly supplied call time, rational absolute-time bound and rational positive tolerance; Steps 3–4 check unavailable/invalid configurations before calling; Step 4 assigns inconclusive on every non-success branch; Step 5 assigns certified for sound finite-precision projection.",
+        "preserved": "Outer real-time domain, matrix dimensions, exact projection formula, augmented phi identity, happy-breakdown criterion and all error-certificate formulas are unchanged."
+      }
+    ],
+    "consumer_examination": [
+      {
+        "supplier": "thm-scaled-taylor-exponential-action-error-and-work",
+        "id": "alg-certified-exponential-euler-etd2-step",
+        "path": "items/alg-certified-exponential-euler-etd2-step.md",
+        "affected_use": "Definition paragraph beginning For each nonzero Arnoldi action request cites the theorem for the valid reduced-action error bound after Taylor success; work paragraphs instrument actual service counters.",
+        "disposition": "unchanged_sound",
+        "reason": "It never uses sp as the count of an incomplete request; the error certificate is unchanged."
+      },
+      {
+        "supplier": "thm-scaled-taylor-exponential-action-error-and-work",
+        "id": "lem-certified-exponential-step-action-error",
+        "path": "items/lem-certified-exponential-step-action-error.md",
+        "affected_use": "Fact F11 and proof step 1.1 use successful Taylor certification for epsilon_red; step 5.1 sums actual returned service work and nested-call counts.",
+        "disposition": "unchanged_sound",
+        "reason": "The corrected completed-recurrence qualifier leaves these uses intact."
+      },
+      {
+        "supplier": "alg-arnoldi-exponential-and-phi-actions",
+        "id": "alg-certified-exponential-euler-etd2-step",
+        "path": "items/alg-certified-exponential-euler-etd2-step.md",
+        "affected_use": "Definition Act(0,v) calls Arnoldi at time h; Act(k,v) for k=1,2 calls it on augmented matrices at time 1. Procedure Steps 2, 4 and 5 reject inconclusive requests and require reduced success and certified final projection.",
+        "disposition": "unchanged_sound",
+        "reason": "An unavailable exact h now returns inconclusive and is rejected by the existing branch. Time 1 is exact. Completed status assignments preserve every certified error premise and actual-counter accounting."
+      },
+      {
+        "supplier": "alg-arnoldi-exponential-and-phi-actions",
+        "id": "lem-certified-exponential-step-action-error",
+        "path": "items/lem-certified-exponential-step-action-error.md",
+        "affected_use": "F11 and step 1.1 infer a valid reduced-action bound from reduced_action_status=success; step 5.1 relies on finite service contracts and returns on missing certificates.",
+        "disposition": "unchanged_sound",
+        "reason": "Success still requires Taylor success; augmented scaling error is unchanged, and the new pre-call failure exit is finite."
+      },
+      {
+        "supplier": "alg-arnoldi-exponential-and-phi-actions",
+        "id": "ex-stiff-diagonal-arnoldi-action",
+        "path": "items/ex-stiff-diagonal-arnoldi-action.md",
+        "affected_use": "Fact F2 and proof step 2.1 use the exact projected formula sqrt(2)*q_1*exp(-101/20) at rational t=1/10; they do not assert a particular finite Taylor evaluation succeeds.",
+        "disposition": "unchanged_sound",
+        "reason": "The projected formula is unchanged and t=1/10 has an exact rational representation."
+      },
+      {
+        "supplier": "alg-arnoldi-exponential-and-phi-actions",
+        "id": "ex-nonnormal-transient-action-certificate",
+        "path": "items/ex-nonnormal-transient-action-certificate.md",
+        "affected_use": "Fact F2 and proof step 1.1 use the exact one-step projection exp(-1)*e_2 at t=1; subsequent residual calculations concern this exact mathematical projection.",
+        "disposition": "unchanged_sound",
+        "reason": "The projected formula and time 1 are unchanged; no success or projection-status gap is imported."
+      }
+    ],
+    "page_examination": "Both owning pages remain sound: the A-page summary describes a conditional Taylor certificate and call count, and separate Arnoldi error/status evidence; the examples page explicitly describes exact arithmetic. No page prose change is required.",
+    "consumer_metadata_routes": [
+      {
+        "id": "ex-stiff-diagonal-arnoldi-action",
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-81.proof-contracts.json",
+        "affected_use": "F2 citation to alg-arnoldi-exponential-and-phi-actions quotes its entire Definition.",
+        "disposition": "frontier-owner metadata refresh",
+        "minimality": "Refresh only the exact source quote to the changed Definition after rechecking unchanged projected-formula use; no consumer item edit is needed."
+      },
+      {
+        "id": "ex-nonnormal-transient-action-certificate",
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-81.proof-contracts.json",
+        "affected_use": "F2 citation to alg-arnoldi-exponential-and-phi-actions quotes its entire Definition.",
+        "disposition": "frontier-owner metadata refresh",
+        "minimality": "Refresh only the exact source quote to the changed Definition after rechecking unchanged projected-formula use; no consumer item edit is needed."
+      }
+    ],
+    "outside_consumer_maintenance": [],
+    "published_consumer_ledger_updates": [],
+    "validation": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-81.proof-contracts.json --strict --items alg-scaled-taylor-exponential-action,thm-scaled-taylor-exponential-action-error-and-work,alg-arnoldi-exponential-and-phi-actions",
+        "exit_code": 0,
+        "result": "3/3 assigned items checked; zero errors and warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-scaled-taylor-exponential-action.md items/thm-scaled-taylor-exponential-action-error-and-work.md items/alg-arnoldi-exponential-and-phi-actions.md --json",
+        "exit_code": 0,
+        "result": "Three files: theorem pass, both algorithms not-applicable; zero failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-scaled-taylor-exponential-action.md items/thm-scaled-taylor-exponential-action-error-and-work.md items/alg-arnoldi-exponential-and-phi-actions.md --json",
+        "exit_code": 0,
+        "result": "Three files; zero errors and warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-scaled-taylor-exponential-action-error-and-work.md items/alg-arnoldi-exponential-and-phi-actions.md",
+        "exit_code": 0,
+        "result": "After final source edits: two changed items, seven proof steps, zero defects."
+      }
+    ],
+    "review_hash_timing": "Each review-context command ran immediately after the corresponding mathematical review, before the next supplier edit. Earlier contexts were not refreshed after subsequent changes.",
+    "remaining": "No unresolved assigned mathematics. Controller owns downstream frontier quote refreshes, independent rejudgment and round certification; two confirmed-fatal items require another round."
+  }
+}

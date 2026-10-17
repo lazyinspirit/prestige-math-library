@@ -1,0 +1,306 @@
+[
+  {
+    "order": 2318,
+    "id": "computed-singular-values-and-rank-revealing-factorizations",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Computed singular values and rank revealing factorizations",
+    "companion": "computed-singular-values-and-rank-revealing-factorizations-examples",
+    "requires": [
+      "direct-matrix-factorisations-lu-cholesky-and-qr",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "finite-precision-direct-factorizations"
+    ],
+    "items": [
+      {
+        "id": "alg-householder-bidiagonalization",
+        "kind": "algorithm",
+        "title": "Householder bidiagonalization and its finite precision status",
+        "deps": [
+          "alg-scaled-complex-householder-and-givens-updates",
+          "def-householder-reflector",
+          "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+          "def-frobenius-matrix-norm"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $A\\in\\mathbb F^{m\\times n}$, where $\\mathbb F=\\mathbb R$ or $\\mathbb C$. Put $p=\\min(m,n)$ and $M=\\max(m,n)$. If $m\\ge n$, set $C=A$; if $m<n$, set $C=A^*$. Thus $C\\in\\mathbb F^{M\\times p}$.\n\nThe algorithm initializes $C_0=C$, $U=I_M$, and $V=I_p$. For $k=1,\\ldots,p$, in this order:\n\n1. Let $x=C_{k:M,k}$. If $x=0$, use the identity left transformation. Otherwise choose $\\phi=x_1/|x_1|$ when $x_1\\ne0$ and $\\phi=1$ when $x_1=0$, set $\\alpha=-\\phi\\|x\\|_2$, $v=x-\\alpha e_1$, and $h=v/\\|v\\|_2$. Use the Householder reflector $H=I-2hh^*$ on rows $k:M$. Update $C\\leftarrow H^*C$ on those rows and update $U\\leftarrow U\\operatorname{diag}(I_{k-1},H)$.\n2. If $k<p$, let $y=C_{k,k+1:p}^*$. If $y=0$, use the identity right transformation. Otherwise apply the same phase and normalization rule to $y$ to form the Householder reflector $G$, then apply $C\\leftarrow C\\operatorname{diag}(I_k,G)$ and $V\\leftarrow V\\operatorname{diag}(I_k,G)$.\n\nThe exact arithmetic output is the leading $p\\times p$ upper bidiagonal block $B$ of $C$, together with $U,V$. For $m\\ge n$ the output relation is $U^*AV=\\begin{bmatrix}B\\\\0\\end{bmatrix}$. For $m<n$ it is $U^*A^*V=\\begin{bmatrix}B\\\\0\\end{bmatrix}$; equivalently $A=V\\begin{bmatrix}B^*&0\\end{bmatrix}U^*$.\n\nIn finite precision, each left/right reflector uses [[alg-scaled-complex-householder-and-givens-updates]], including its real/complex scaled formation, range checks and exact target-column/row zero writes. This is the arithmetic realization of the exact steps above. A zero active vector takes the identity branch. Any nonfinite intermediate or overflow returns `range-failure` with the partial factors; otherwise return `success`, $B,U,V$, the reconstruction residual $\\|C-U\\begin{bmatrix}B\\\\0\\end{bmatrix}V^*\\|_F$, and the two orthogonality residuals $\\|U^*U-I\\|_F$ and $\\|V^*V-I\\|_F$. These reported residuals are computed quantities, not certified bounds by themselves. Matrix residuals use the Frobenius norm defined in [[def-frobenius-matrix-norm]].",
+        "strategy": "Let $A\\in\\mathbb F^{m\\times n}$, where $\\mathbb F=\\mathbb R$ or $\\mathbb C$. Put $p=\\min(m,n)$ and $M=\\max(m,n)$. If $m\\ge n$, set $C=A$; if $m<n$, set $C=A^*$. Thus $C\\in\\mathbb F^{M\\times p}$.\n\nThe algorithm initializes $C_0=C$, $U=I_M$, and $V=I_p$. For $k=1,\\ldots,p$, in this order:\n\n1. Let $x=C_{k:M,k}$. If $x=0$, use the identity left transformation. Otherwise choose $\\phi=x_1/|x_1|$ when $x_1\\ne0$ and $\\phi=1$ when $x_1=0$, set $\\alpha=-\\phi\\|x\\|_2$, $v=x-\\alpha e_1$, and $h=v/\\|v\\|_2$. Use the Householder reflector $H=I-2hh^*$ on rows $k:M$. Update $C\\leftarrow H^*C$ on those rows and update $U\\leftarrow U\\operatorname{diag}(I_{k-1},H)$.\n2. If $k<p$, let $y=C_{k,k+1:p}^*$. If $y=0$, use the identity right transformation. Otherwise apply the same phase and normalization rule to $y$ to form the Householder reflector $G$, then apply $C\\leftarrow C\\operatorname{diag}(I_k,G)$ and $V\\leftarrow V\\operatorname{diag}(I_k,G)$.\n\nThe exact arithmetic output is the leading $p\\times p$ upper bidiagonal block $B$ of $C$, together with $U,V$. For $m\\ge n$ the output relation is $U^*AV=\\begin{bmatrix}B\\\\0\\end{bmatrix}$. For $m<n$ it is $U^*A^*V=\\begin{bmatrix}B\\\\0\\end{bmatrix}$; equivalently $A=V\\begin{bmatrix}B^*&0\\end{bmatrix}U^*$.\n\nIn finite precision, each left/right reflector uses [[alg-scaled-complex-householder-and-givens-updates]], including its real/complex scaled formation, range checks and exact target-column/row zero writes. This is the arithmetic realization of the exact steps above. A zero active vector takes the identity branch. Any nonfinite intermediate or overflow returns `range-failure` with the partial factors; otherwise return `success`, $B,U,V$, the reconstruction residual $\\|C-U\\begin{bmatrix}B\\\\0\\end{bmatrix}V^*\\|_F$, and the two orthogonality residuals $\\|U^*U-I\\|_F$ and $\\|V^*V-I\\|_F$. These reported residuals are computed quantities, not certified bounds by themselves. Matrix residuals use the Frobenius norm defined in [[def-frobenius-matrix-norm]]."
+      },
+      {
+        "id": "alg-strong-rank-revealing-qr-with-finite-swaps",
+        "kind": "algorithm",
+        "title": "Strong rank-revealing QR with finite swaps and explicit statuses",
+        "deps": [
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block",
+          "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-singular-value-product-bound",
+        "kind": "lemma",
+        "title": "Singular values contract under left and right multiplication",
+        "deps": [
+          "thm-eckart-young-best-rank-k-approximation",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-singular-values-lipschitz-in-spectral-norm",
+        "kind": "lemma",
+        "title": "Singular values are Lipschitz in the spectral norm",
+        "deps": [
+          "thm-eckart-young-best-rank-k-approximation",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex",
+        "kind": "proposition",
+        "title": "Spectral numerical rank counts singular values above threshold over R or C",
+        "deps": [
+          "def-numerical-rank-relative-to-a-norm-scale-and-tolerance",
+          "thm-eckart-young-best-rank-k-approximation",
+          "cor-rank-equals-number-of-nonzero-singular-values"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+        "kind": "algorithm",
+        "title": "Finite budget implicit shifted QR for bidiagonal singular values",
+        "deps": [
+          "alg-scaled-complex-householder-and-givens-updates",
+          "alg-householder-bidiagonalization",
+          "def-real-and-complex-givens-transformations",
+          "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+          "def-frobenius-matrix-norm"
+        ],
+        "dependency_level": 3,
+        "statement": "Input the original $A\\in\\mathbb F^{m\\times n}$, its bidiagonal reduction $U_B^*CV_B=\\begin{bmatrix}B\\\\0\\end{bmatrix}$ from [[alg-householder-bidiagonalization]] (where $C=A$ if $m\\ge n$ and $C=A^*$ otherwise), a deflation tolerance $\\tau\\ge0$, and a finite nonnegative integer sweep budget $N$. Initialize sweep accumulators $U_\\Sigma,V_\\Sigma$ to identities and $B$ to the supplied upper bidiagonal matrix. Write its diagonal as $d_i$ and superdiagonal as $e_i$, and set $e_0=0$.\n\nBefore each sweep, set $e_i$ to zero and record its old value whenever $|e_i|\\le\\tau(|d_i|+|d_{i+1}|)$. The zero entries split the active blocks. For each active block $[\\ell,r]$ of size at least two, form only the tridiagonal entries of $T=B^*B$: $T_{ii}=|d_i|^2+|e_{i-1}|^2$ and $T_{i,i+1}=\\overline{d_i}e_i$. Choose $\\mu$ to be the eigenvalue of the trailing Hermitian block $\\begin{bmatrix}T_{r-1,r-1}&T_{r-1,r}\\\\T_{r,r-1}&T_{rr}\\end{bmatrix}$ closest to $T_{rr}$, resolving a tie by the smaller eigenvalue. If the leading pivot $d_\\ell$ is zero or has magnitude at most $\\tau\\max(|e_{\\ell-1}|,|e_\\ell|)$, use the zero-shift branch $\\mu=0$; in that branch start with a right Givens rotation that maps the row pair $(d_\\ell,e_\\ell)$ to $(\\rho,0)$, avoiding division by the small or zero diagonal.\n\nIn the ordinary branch choose the first right Givens factor $G_\\ell$ so that $G_\\ell^*(T_{\\ell\\ell}-\\mu,T_{\\ell+1,\\ell})^T=(\\rho,0)^T$, where $T_{\\ell+1,\\ell}=\\overline{e_\\ell}d_\\ell$. Apply $B\\leftarrow BG_\\ell$ and update the right accumulator. For $j=\\ell,\\ldots,r-1$, choose a left Givens factor $H_j$ so that $H_j^*(B_{j,j},B_{j+1,j})^T=(\\rho,0)^T$; apply it to rows $j,j+1$ and update the left accumulator. If $j<r-1$, choose a right Givens factor $G_{j+1}$ so that $(B_{j,j+1},B_{j,j+2})G_{j+1}=(\\rho,0)$; apply it to columns $j+1,j+2$ and update the right accumulator. Continue until the bulge reaches the active block endpoint. A zero annihilation vector uses the identity rotation. In finite precision each Givens formation/update uses [[alg-scaled-complex-householder-and-givens-updates]], conjugate-transposed as needed for the stated left/right orientation. Its exact representative is canonical unitary; target zero writes are included in its error bound. The initial shift-vector rotation does not zero an unrelated entry of $B$. Each Givens factor is chosen using [[def-real-and-complex-givens-transformations]] and its annihilation guarantee in [[thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries]].\n\nCount one sweep for each processed active block. Stop successfully when every active block has size one. If the total budget is exhausted first, return `budget-exhausted` with the current diagonal candidates, accumulated factors, discarded-entry list, triplet residuals, and orthogonality residuals. Return `range-failure` if any nonzero exact intermediate is outside the normal range, or if an operation, norm or pivot is invalid or nonfinite. On success return `converged`, candidate singular values obtained by the scaled two-component modulus evaluation of each $d_i$ (real absolute value is exact), and the accumulated triplet vectors. For a nonconverged block, the candidates are estimates only and carry no accuracy claim.\n\nIn tall orientation set $\\widehat U=U_BU_\\Sigma$ and $\\widehat V=V_BV_\\Sigma$; in wide orientation swap these roles when mapping back from $A^*$. For each $d_i\\ne0$, multiply the corresponding left column by $d_i/|d_i|$ so the candidate singular value is nonnegative. For every candidate triplet $(\\widehat\\sigma_i,\\widehat u_i,\\widehat v_i)$, report $\\|A\\widehat v_i-\\widehat\\sigma_i\\widehat u_i\\|_2$ and $\\|A^*\\widehat u_i-\\widehat\\sigma_i\\widehat v_i\\|_2$. Also report $\\|\\widehat U^*\\widehat U-I\\|_F$ and $\\|\\widehat V^*\\widehat V-I\\|_F$. The reports expose finite-budget and rounding behavior; they do not certify convergence by themselves. Matrix residuals use the Frobenius norm defined in [[def-frobenius-matrix-norm]].\n\nThe theoretical factors in backward-error conclusions are exact products of the stored local unitary representatives. Rounded dense accumulators are reported with their own orthogonality residuals and are not asserted exactly unitary. Any additional sparsity cleanup is recorded as a separate discarded-entry perturbation.",
+        "strategy": "Input the original $A\\in\\mathbb F^{m\\times n}$, its bidiagonal reduction $U_B^*CV_B=\\begin{bmatrix}B\\\\0\\end{bmatrix}$ from [[alg-householder-bidiagonalization]] (where $C=A$ if $m\\ge n$ and $C=A^*$ otherwise), a deflation tolerance $\\tau\\ge0$, and a finite nonnegative integer sweep budget $N$. Initialize sweep accumulators $U_\\Sigma,V_\\Sigma$ to identities and $B$ to the supplied upper bidiagonal matrix. Write its diagonal as $d_i$ and superdiagonal as $e_i$, and set $e_0=0$.\n\nBefore each sweep, set $e_i$ to zero and record its old value whenever $|e_i|\\le\\tau(|d_i|+|d_{i+1}|)$. The zero entries split the active blocks. For each active block $[\\ell,r]$ of size at least two, form only the tridiagonal entries of $T=B^*B$: $T_{ii}=|d_i|^2+|e_{i-1}|^2$ and $T_{i,i+1}=\\overline{d_i}e_i$. Choose $\\mu$ to be the eigenvalue of the trailing Hermitian block $\\begin{bmatrix}T_{r-1,r-1}&T_{r-1,r}\\\\T_{r,r-1}&T_{rr}\\end{bmatrix}$ closest to $T_{rr}$, resolving a tie by the smaller eigenvalue. If the leading pivot $d_\\ell$ is zero or has magnitude at most $\\tau\\max(|e_{\\ell-1}|,|e_\\ell|)$, use the zero-shift branch $\\mu=0$; in that branch start with a right Givens rotation that maps the row pair $(d_\\ell,e_\\ell)$ to $(\\rho,0)$, avoiding division by the small or zero diagonal.\n\nIn the ordinary branch choose the first right Givens factor $G_\\ell$ so that $G_\\ell^*(T_{\\ell\\ell}-\\mu,T_{\\ell+1,\\ell})^T=(\\rho,0)^T$, where $T_{\\ell+1,\\ell}=\\overline{e_\\ell}d_\\ell$. Apply $B\\leftarrow BG_\\ell$ and update the right accumulator. For $j=\\ell,\\ldots,r-1$, choose a left Givens factor $H_j$ so that $H_j^*(B_{j,j},B_{j+1,j})^T=(\\rho,0)^T$; apply it to rows $j,j+1$ and update the left accumulator. If $j<r-1$, choose a right Givens factor $G_{j+1}$ so that $(B_{j,j+1},B_{j,j+2})G_{j+1}=(\\rho,0)$; apply it to columns $j+1,j+2$ and update the right accumulator. Continue until the bulge reaches the active block endpoint. A zero annihilation vector uses the identity rotation. In finite precision each Givens formation/update uses [[alg-scaled-complex-householder-and-givens-updates]], conjugate-transposed as needed for the stated left/right orientation. Its exact representative is canonical unitary; target zero writes are included in its error bound. The initial shift-vector rotation does not zero an unrelated entry of $B$. Each Givens factor is chosen using [[def-real-and-complex-givens-transformations]] and its annihilation guarantee in [[thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries]].\n\nCount one sweep for each processed active block. Stop successfully when every active block has size one. If the total budget is exhausted first, return `budget-exhausted` with the current diagonal candidates, accumulated factors, discarded-entry list, triplet residuals, and orthogonality residuals. Return `range-failure` if any nonzero exact intermediate is outside the normal range, or if an operation, norm or pivot is invalid or nonfinite. On success return `converged`, candidate singular values obtained by the scaled two-component modulus evaluation of each $d_i$ (real absolute value is exact), and the accumulated triplet vectors. For a nonconverged block, the candidates are estimates only and carry no accuracy claim.\n\nIn tall orientation set $\\widehat U=U_BU_\\Sigma$ and $\\widehat V=V_BV_\\Sigma$; in wide orientation swap these roles when mapping back from $A^*$. For each $d_i\\ne0$, multiply the corresponding left column by $d_i/|d_i|$ so the candidate singular value is nonnegative. For every candidate triplet $(\\widehat\\sigma_i,\\widehat u_i,\\widehat v_i)$, report $\\|A\\widehat v_i-\\widehat\\sigma_i\\widehat u_i\\|_2$ and $\\|A^*\\widehat u_i-\\widehat\\sigma_i\\widehat v_i\\|_2$. Also report $\\|\\widehat U^*\\widehat U-I\\|_F$ and $\\|\\widehat V^*\\widehat V-I\\|_F$. The reports expose finite-budget and rounding behavior; they do not certify convergence by themselves. Matrix residuals use the Frobenius norm defined in [[def-frobenius-matrix-norm]].\n\nThe theoretical factors in backward-error conclusions are exact products of the stored local unitary representatives. Rounded dense accumulators are reported with their own orthogonality residuals and are not asserted exactly unitary. Any additional sparsity cleanup is recorded as a separate discarded-entry perturbation."
+      },
+      {
+        "id": "lem-exact-householder-bidiagonal-reduction",
+        "kind": "lemma",
+        "title": "Exact unitary equivalence of Householder bidiagonalization",
+        "deps": [
+          "alg-householder-bidiagonalization",
+          "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-strong-rrqr-column-swap-volume-ratio",
+        "kind": "lemma",
+        "title": "A strong RRQR column swap multiplies selected volume by its score",
+        "deps": [
+          "alg-strong-rank-revealing-qr-with-finite-swaps"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-bidiagonal-singular-values-relative-under-componentwise-perturbations",
+        "kind": "theorem",
+        "title": "Componentwise relative perturbations of bidiagonal matrices control every singular value relatively",
+        "deps": [
+          "lem-singular-value-product-bound",
+          "cor-rank-equals-number-of-nonzero-singular-values"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-strong-rrqr-singular-value-comparisons",
+        "kind": "theorem",
+        "title": "Strong RRQR block singular values compare to the full matrix spectrum",
+        "deps": [
+          "alg-strong-rank-revealing-qr-with-finite-swaps",
+          "lem-singular-value-product-bound",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-rank-thresholded-least-squares-by-svd",
+        "kind": "algorithm",
+        "title": "Rank-thresholded least squares by the singular value decomposition",
+        "deps": [
+          "alg-householder-bidiagonalization",
+          "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+          "def-numerical-rank-relative-to-a-norm-scale-and-tolerance",
+          "prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex",
+          "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+          "def-inner-product-norm"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence",
+        "kind": "lemma",
+        "title": "Bulge chase preserves bidiagonal singular values",
+        "deps": [
+          "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+          "def-real-and-complex-givens-transformations",
+          "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-strong-rrqr-swap-rule-terminates",
+        "kind": "theorem",
+        "title": "The strong RRQR swap rule terminates after finitely many swaps",
+        "deps": [
+          "alg-strong-rank-revealing-qr-with-finite-swaps",
+          "lem-strong-rrqr-column-swap-volume-ratio"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-bidiagonal-svd-backward-error-under-local-stability",
+        "kind": "theorem",
+        "title": "Local stable reflectors and rotations give an aggregate SVD backward error",
+        "deps": [
+          "alg-scaled-complex-householder-and-givens-updates",
+          "lem-scaled-complex-householder-and-givens-local-backward-error",
+          "alg-householder-bidiagonalization",
+          "lem-exact-householder-bidiagonal-reduction",
+          "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+          "lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence",
+          "def-frobenius-matrix-norm",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $C_0\\in\\mathbb F^{M\\times p}$, $M\\ge p$, be the tall orientation used by [[alg-householder-bidiagonalization]]. Suppose the computed bidiagonal reduction and QR sweeps perform $J$ elementary left/right unitary updates. At update $j$, assume the actual active matrix obeys\n$$C_j=L_j^*(C_{j-1}+E_j)R_j+D_j,$$\nwhere $L_j,R_j$ are unitary and $\\eta_j\\ge0$, $\\|E_j\\|_F\\le\\eta_j\\|C_{j-1}\\|_F$, and $D_j$ is the post-transform additive representation of entries discarded by deflation, with $\\delta_j=\\|D_j\\|_F$. Then the returned transformed matrix $C_J$ satisfies\n$$C_0+E=L C_J R^*$$\nfor unitary accumulated factors $L,R$ and some $E$ with\n$$\\|E\\|_F\\le\\left(\\prod_{j=1}^J(1+\\eta_j)-1\\right)\\|C_0\\|_F+\\sum_{j=1}^J\\delta_j\\prod_{\\ell=j+1}^J(1+\\eta_\\ell).$$\nIn the no-deflation case every $\\delta_j=0$. For the successful scaled arithmetic realization [[alg-scaled-complex-householder-and-givens-updates]], [[lem-scaled-complex-householder-and-givens-local-backward-error]] establishes these hypotheses: choose $\\eta_j=\\eta_H(r_j)$ for Householder updates, $\\eta_j=\\eta_G$ for Givens updates with an actual target zero write, and its smaller separate-block coefficient when no matrix entry is overwritten. This covers real/complex left and right updates. Every additional discarded entry is included in $D_j$. Rounded dense accumulators remain separate from these exact represented products.",
+        "strategy": "1.1 Iterating the norm inequality from [A1] gives $\\|C_j\\|_F\\le(1+\\eta_j)\\|C_{j-1}\\|_F+\\delta_j$. Induction from $C_0$ yields $\\|C_j\\|_F\\le\\left(\\prod_{r=1}^j(1+\\eta_r)\\right)\\|C_0\\|_F+\\sum_{r=1}^j\\delta_r\\prod_{s=r+1}^j(1+\\eta_s)$: the base case $j=0$ is equality, and the one-step inequality multiplies every prior term by $1+\\eta_j$ and adds $\\delta_j$. [A1, F3, induction, algebra]\n\n2.1 Unwind each update in the accumulated unitary coordinates supplied by [F1]–[F2]. The original-input perturbation is the sum of each $E_j$ and each $D_j$ transported by products of later unitary factors. Unitary left/right multiplication preserves Frobenius norm, so $\\|E\\|_F\\le\\sum_{j=1}^J\\eta_j\\|C_{j-1}\\|_F+\\sum_{j=1}^J\\delta_j$. Substitute step 1.1. For the $C_0$ terms, $\\sum_j\\eta_j\\prod_{r<j}(1+\\eta_r)=\\prod_r(1+\\eta_r)-1$. For a fixed $\\delta_i$, its contribution is $\\delta_i\\left(1+\\sum_{j>i}\\eta_j\\prod_{i<r<j}(1+\\eta_r)\\right)=\\delta_i\\prod_{r>i}(1+\\eta_r)$. These identities give the stated bound. [step 1.1, F1, F2, F3, F4, algebra]\n\n3.1 The same coordinate unwinding gives $C_J= L^*(C_0+E)R$ for products $L,R$ of the unitary update factors, hence $C_0+E=L C_JR^*$. Step 2.1 gives its error bound; setting every $\\delta_j=0$ gives the no-deflation case. [step 2.1, F1, F2, algebra]\n\n3.2 For the specified finite-precision algorithm, apply [F5] to each actual update, retaining its range and active-dimension hypotheses. It gives exactly [A1], including each target-zero write. Deflation and any additional discarded entries remain $D_j$, so steps 1.1–3.1 prove the displayed aggregate bound for the concrete implementation. Shift rounding affects which rotation is chosen, not the validity of its unitary backward-error certificate; no unconditional convergence is asserted. [F5, step 3.1, algebra] ∎"
+      },
+      {
+        "id": "thm-svd-thresholded-least-squares-minimum-norm-model",
+        "kind": "theorem",
+        "title": "The SVD threshold solver gives the unique minimum-norm fit to its truncated model",
+        "deps": [
+          "alg-rank-thresholded-least-squares-by-svd",
+          "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+          "thm-singular-value-decomposition",
+          "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+          "thm-eckart-young-best-rank-k-approximation",
+          "prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "cor-triangle-inequality-for-inner-product-norm"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-computed-singular-values-absolute-error-from-backward-stability",
+        "kind": "corollary",
+        "title": "Backward stable computed singular values have absolute error bounded by the perturbation",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-bidiagonal-svd-backward-error-under-local-stability",
+          "lem-singular-values-lipschitz-in-spectral-norm",
+          "thm-singular-value-decomposition",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $A\\in\\mathbb F^{m\\times n}$ and put $C=A$ when $m\\ge n$, $C=A^*$ when $m<n$. Suppose a successful computed SVD path in this tall orientation supplies a nearby matrix $C+E=\\widehat U\\widehat B\\widehat V^*$ with unitary factors, as in [[thm-bidiagonal-svd-backward-error-under-local-stability]]. If the returned values are the exact singular values of $\\widehat B$, then for every $1\\le i\\le p=\\min(m,n)$,\n$$|\\widehat\\sigma_i-\\sigma_i(A)|\\le\\|E\\|_2\\le\\|E\\|_F.$$\nFor actual rounded modulus readout from a diagonal $\\widehat B$, let $\\epsilon_{\\rm read}=((1+u)^4-1)\\max_i|d_i|$ for the successful scaled complex modulus algorithm; use zero for exact real absolute values. After ordering the candidates, the bound is $|\\widehat\\sigma_i-\\sigma_i(A)|\\le\\|E\\|_2+\\epsilon_{\\rm read}$. This assertion applies to a successful, fully reduced result; a finite-budget `budget-exhausted` output has residual reports but no such accuracy conclusion.",
+        "strategy": "1.1 By [F1], $C+E=\\widehat U\\widehat B\\widehat V^*$. By [F3], $\\widehat U\\widehat B\\widehat V^*$ has the same ordered singular values as $\\widehat B$, namely $s_i$; by [F4], $C$ and $A$ have the same $p$ singular values. [F1, F3, F4]\n\n2.1 Apply [F2] to $C$ and $C+E$. It gives $|\\sigma_i(C+E)-\\sigma_i(C)|\\le\\|E\\|_2$; step 1.1 identifies these singular values with $s_i$ and $\\sigma_i(A)$, respectively, and [F3] gives $\\|E\\|_2\\le\\|E\\|_F$. [step 1.1, F2, F3, algebra]\n\n2.2 A scaled modulus of two real components has relative norm factors between $(1-u)^4$ and $(1+u)^4$, by expanding the two scaling operations, square products and sum, square root and rescaling. Hence each rounded magnitude differs from $|d_i|$ by at most $\\epsilon_{\\rm read}$. If two finite lists differ coordinatewise by at most $\\epsilon$, their ordered lists do too: otherwise at the violating rank the count of entries above or below the corresponding threshold contradicts the coordinatewise bounds. Apply this to the diagonal magnitudes and combine with step 2.1. For exact readout $\\widehat\\sigma_i=s_i$ the first bound follows already from step 2.1; for rounded readout the additional modulus allowance gives the stated extension. Real sign removal is exact. [F5, step 2.1, algebra] ∎"
+      },
+      {
+        "id": "alg-scaled-complex-householder-and-givens-updates",
+        "kind": "algorithm",
+        "title": "Scaled real and complex Householder and Givens update arithmetic",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "def-householder-reflector",
+          "def-real-and-complex-givens-transformations"
+        ],
+        "statement": "Use the operationwise real/complex arithmetic model, with six-real-operation complex products and componentwise division by positive real scalars. A scaled norm of a nonzero complex vector first chooses the largest absolute real or imaginary component $s>0$, rounds every real component divided by $s$, sums their rounded squares sequentially, rounds the positive square root, and rounds multiplication by $s$. A norm of already scaled components omits the last multiplication. Zero input has exact norm zero. Reject every nonzero exact intermediate outside the normal range, nonfinite/invalid operation, and nonpositive required norm; return the first range-failure. All sign changes and conjugations are exact.\n\nFor a Householder active block $C=[x\\;B]$, $x\\in\\mathbb C^r$, a zero $x$ copies the block with identity action. Otherwise compute $\\widehat N$ by the scaled norm. If $x_1=0$ put $\\widehat\\phi=1$; otherwise compute its modulus $\\widehat a$ by its own two-component scaled norm and divide its real and imaginary parts by $\\widehat a$. Set $\\widehat\\alpha=-\\operatorname{fl}(\\widehat\\phi\\widehat N)$ using real-scalar component multiplication, and $v=\\operatorname{fl}(x-\\widehat\\alpha e_1)$. Compute $w$ by sequential summation of all $2r$ rounded real component squares of $v$, and $\\widehat\\tau=\\operatorname{fl}(2/w)$. Compute $d=\\operatorname{fl}(v^*B)$, $p=\\operatorname{fl}(\\widehat\\tau v)$, $Z=\\operatorname{fl}(pd)$, and $\\widehat B=\\operatorname{fl}(B-Z)$. Return $C_+=[\\widehat\\alpha e_1\\;\\widehat B]$, writing exact zeros below the target diagonal, and store $v,\\widehat\\tau$. Its theoretical representative is $H(v)=I-2vv^*/(v^*v)$. For a separate block application omit the column overwrite. For a right step apply these instructions to the conjugate-transposed block and transpose back.\n\nFor a Givens target pair $(a,b)$, use the identity when $b=0$, including $(0,0)$. Otherwise choose $\\lambda$ as the largest absolute real/imaginary component of $(a,b)$, round $z=a/\\lambda$ and $w=b/\\lambda$ componentwise, and compute $h$ as the norm of their four already scaled components. If $z\\ne0$, compute $n_z$ as the norm of its two components, $\\widehat\\phi=\\operatorname{fl}(z/n_z)$, $c=\\operatorname{fl}(n_z/h)$ and $s=\\operatorname{fl}(\\operatorname{fl}(\\widehat\\phi\\overline w)/h)$. If $z=0$, set $c=0$ and $s=\\operatorname{fl}(\\overline w/h)$. Store $T=\\begin{pmatrix}c&s\\\\-\\overline s&c\\end{pmatrix}$ and apply it to the chosen two rows using two complex products and one rounded componentwise addition for each output entry. For an actual target column, set its intended annihilated entry to exact zero after the update. The initial shift-vector rotation is formed from the shift vector but applied to the matrix without zeroing an unrelated matrix entry. Right applications use the conjugate-transposed form. Its exact unitary representative is $Q=T/\\sqrt{c^2+|s|^2}$; this normalization defines a mathematical representative and is not an additional rounded operation.\n\nThese are arithmetic realizations of the canonical Householder and Givens methods. Returned dense transformation accumulators may be rounded; the exact unitary products used in backward-error statements are represented by the stored local data. Additional discarded matrix entries must be recorded separately, including their magnitudes. Their omission is never implicit in a sparsity convention.",
+        "strategy": "Use the operationwise real/complex arithmetic model, with six-real-operation complex products and componentwise division by positive real scalars. A scaled norm of a nonzero complex vector first chooses the largest absolute real or imaginary component $s>0$, rounds every real component divided by $s$, sums their rounded squares sequentially, rounds the positive square root, and rounds multiplication by $s$. A norm of already scaled components omits the last multiplication. Zero input has exact norm zero. Reject every nonzero exact intermediate outside the normal range, nonfinite/invalid operation, and nonpositive required norm; return the first range-failure. All sign changes and conjugations are exact.\n\nFor a Householder active block $C=[x\\;B]$, $x\\in\\mathbb C^r$, a zero $x$ copies the block with identity action. Otherwise compute $\\widehat N$ by the scaled norm. If $x_1=0$ put $\\widehat\\phi=1$; otherwise compute its modulus $\\widehat a$ by its own two-component scaled norm and divide its real and imaginary parts by $\\widehat a$. Set $\\widehat\\alpha=-\\operatorname{fl}(\\widehat\\phi\\widehat N)$ using real-scalar component multiplication, and $v=\\operatorname{fl}(x-\\widehat\\alpha e_1)$. Compute $w$ by sequential summation of all $2r$ rounded real component squares of $v$, and $\\widehat\\tau=\\operatorname{fl}(2/w)$. Compute $d=\\operatorname{fl}(v^*B)$, $p=\\operatorname{fl}(\\widehat\\tau v)$, $Z=\\operatorname{fl}(pd)$, and $\\widehat B=\\operatorname{fl}(B-Z)$. Return $C_+=[\\widehat\\alpha e_1\\;\\widehat B]$, writing exact zeros below the target diagonal, and store $v,\\widehat\\tau$. Its theoretical representative is $H(v)=I-2vv^*/(v^*v)$. For a separate block application omit the column overwrite. For a right step apply these instructions to the conjugate-transposed block and transpose back.\n\nFor a Givens target pair $(a,b)$, use the identity when $b=0$, including $(0,0)$. Otherwise choose $\\lambda$ as the largest absolute real/imaginary component of $(a,b)$, round $z=a/\\lambda$ and $w=b/\\lambda$ componentwise, and compute $h$ as the norm of their four already scaled components. If $z\\ne0$, compute $n_z$ as the norm of its two components, $\\widehat\\phi=\\operatorname{fl}(z/n_z)$, $c=\\operatorname{fl}(n_z/h)$ and $s=\\operatorname{fl}(\\operatorname{fl}(\\widehat\\phi\\overline w)/h)$. If $z=0$, set $c=0$ and $s=\\operatorname{fl}(\\overline w/h)$. Store $T=\\begin{pmatrix}c&s\\\\-\\overline s&c\\end{pmatrix}$ and apply it to the chosen two rows using two complex products and one rounded componentwise addition for each output entry. For an actual target column, set its intended annihilated entry to exact zero after the update. The initial shift-vector rotation is formed from the shift vector but applied to the matrix without zeroing an unrelated matrix entry. Right applications use the conjugate-transposed form. Its exact unitary representative is $Q=T/\\sqrt{c^2+|s|^2}$; this normalization defines a mathematical representative and is not an additional rounded operation.\n\nThese are arithmetic realizations of the canonical Householder and Givens methods. Returned dense transformation accumulators may be rounded; the exact unitary products used in backward-error statements are represented by the stored local data. Additional discarded matrix entries must be recorded separately, including their magnitudes. Their omission is never implicit in a sparsity convention.",
+        "sources": [
+          {
+            "title": "Stuart and Voss, Matrix Analysis and Algorithms",
+            "url": "https://www.seehuhn.de/publications/StuaVo08/numlinalg.pdf"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-scaled-complex-householder-and-givens-local-backward-error",
+        "kind": "lemma",
+        "title": "Scaled complex Householder and Givens steps have explicit local backward errors",
+        "deps": [
+          "alg-scaled-complex-householder-and-givens-updates",
+          "lem-product-of-one-plus-deltas-gives-theta-n"
+        ],
+        "statement": "Use [[alg-scaled-complex-householder-and-givens-updates]] successfully, with $0<u<1$ and $(r-1)u<1$ for every Householder dimension $r$. For a nonzero Householder column define\n$$e=(1+u)^{r+3}-1,\\quad a_\\phi=\\frac{1+u}{(1-u)^4}-1,\\quad a_\\alpha=(1+a_\\phi)(1+e)(1+u)-1,\\quad d_v=a_\\alpha+u(2+a_\\alpha),$$\n$$a_\\tau=\\frac{1+u}{(1-u)^{2r}}-1,\\quad g=\\frac{1+6u}{1-(r-1)u}-1,\\quad c_U=2\\bigl((1+a_\\tau)(1+u)(1+6u)(1+g)-1\\bigr),$$\n$$\\eta_H(r)=\\max\\{a_\\alpha+8d_v,(1+u)c_U+3u\\}.$$\nFor a Givens step define\n$$a_2=\\frac{1+u}{(1-u)^2}-1,\\quad q=\\max\\left\\{\\left(\\frac{1+u}{1-u}\\right)^3-1,\\frac{(1+a_2)(1+6u)(1+u)}{(1-u)^3}-1\\right\\},$$\n$$\\epsilon=\\sqrt2(7u+6u^2)(1+q),\\quad v=q+\\epsilon,\\quad \\eta_G=2v+u+2q.$$\nEach complete left update, including its target zero write, has an exact unitary representative $W$ and perturbation $E$ with\n$$W(C+E)=C_+,\\qquad \\|E\\|_F\\le\\eta\\|C\\|_F,$$\nwhere $\\eta=\\eta_H(r)$ or $\\eta_G$. Identity branches have $E=0$. The corresponding right relation follows by conjugate transposition. For a Givens application without an annihilation overwrite use the smaller coefficient $v$; for a Householder separate-block application use $(1+u)c_U+3u$. All coefficients are explicit and $O(ru)$ or $O(u)$ for fixed dimensions.",
+        "strategy": "1.1 A complex product's real/imaginary error is at most $2(2u+u^2)|z||w|\\le6u|z||w|$: bound each of its four real products and then its two component additions. A sequential complex dot of length $r$ therefore has error at most $[6u+\\gamma_{r-1}(1+6u)]\\sum_i|z_i||w_i|=g\\sum_i|z_i||w_i|$. These expansions include exact zeros. [given, F1, F2, algebra]\n\n1.2 A scaled norm with $2r$ real components has its positive squared sum multiplied termwise by between $(1-u)^{2r+2}$ and $(1+u)^{2r+2}$, including two scaling factors. Square root and rescaling give relative norm error at most $e$. The independently scaled modulus of $x_1$ has lower/upper factors $(1-u)^4,(1+u)^4$, so the phase division error relative to $x_1/|x_1|$ is at most $a_\\phi$; when $x_1=0$ it is zero. Thus for $N=\\|x\\|$, $\\alpha_0=-\\operatorname{phase}(x_1)N$ and $v_0=x-\\alpha_0e_1$, one has $|\\widehat\\alpha-\\alpha_0|\\le a_\\alpha N$ and $\\|v-v_0\\|\\le d_vN$. For exponents at least one the lower deviation is bounded by the upper by convexity, justifying these two-sided estimates. [F1, F2, algebra]\n\n1.3 The identity $H(v)^*H(v)=I$ follows by multiplying $I-2vv^*/(v^*v)$. The exact phase choice gives $H(v_0)x=\\alpha_0e_1$ and $\\|v_0\\|\\ge N$ by direct inner-product expansion. Normalization gives $\\|a/\\|a\\|-b/\\|b\\|\\|\\le2\\|a-b\\|/\\|b\\|$; expanding the difference of unit-vector projectors therefore gives $\\|H(v)-H(v_0)\\|\\le8d_v$. The target-column error is at most $(a_\\alpha+8d_v)N$. [step 1.2, algebra]\n\n2.1 The positive real sum defining $w$ has bounds $(1-u)^{2r}\\|v\\|^2\\le w\\le(1+u)^{2r}\\|v\\|^2$. The final division gives $|\\widehat\\tau\\|v\\|^2/2-1|\\le a_\\tau$. The dot-product error in step 1.1, the componentwise real multiplication by $\\widehat\\tau$ and the final complex multiplication bound the rank-one update error by $c_U\\|B\\|_F$. Final subtraction adds at most $u(3+c_U)\\|B\\|_F$. Combine this with step 1.3 over disjoint columns to get the Householder bound. For the zero column take the identity exactly. [F1, step 1.1, step 1.3, algebra]\n\n3.1 For Givens formation at stored $z,w$, the norm $h$ has relative factors between $(1-u)^3$ and $(1+u)^3$, since its unscaled four-component squared sum has at most four rounding factors per term. The norm $n_z$ has exponents two. Let $G_0$ be the exact canonical Givens annihilator for $(z,w)$, with coefficients $c_0=|z|/\\|(z,w)\\|$ and $s_0=(z/|z|)\\overline w/\\|(z,w)\\|$ when $z\\ne0$. The phase error is at most $a_2$; the coefficient numerator, denominator, six-operation complex product and division errors therefore give $|c-c_0|\\le q c_0$ and $|s-s_0|\\le q|s_0|$. If $z=0$, $c=0$ and $s_0=\\overline w/|w|$; the smaller bound $(1+u)/(1-u)^3-1\\le q$ applies. Hence $\\|(c,s)-(c_0,s_0)\\|\\le q$. [F1, step 1.1, algebra]\n\n3.2 Put $t=\\sqrt{c^2+|s|^2}>0$ and $Q=T/t$. Direct multiplication gives $T^*T=t^2I$, so $Q$ is canonical unitary, $\\|T-Q\\|=|t-1|\\le q$ and $\\|T\\|\\le1+q$. Normalization also gives $\\|Q-G_0\\|\\le2q$; differences of canonical blocks have norm equal to the Euclidean norm of their coefficient differences. Each computed output entry has error at most $(7u+6u^2)(|c||C_{1j}|+|s||C_{2j}|)$, by two products and their addition. The absolute coefficient block has norm at most $\\sqrt2t$. Thus the raw update differs from $QC$ by at most $v\\|C\\|_F$. [step 3.1, algebra]\n\n3.3 Scaling introduced $\\|\\lambda(z,w)-(a,b)\\|\\le u\\|(a,b)\\|$. Because $G_0$ annihilates $(z,w)$, its exact target residual for $(a,b)$ is at most $u\\|(a,b)\\|$; under $Q$ it is at most $(u+2q)\\|(a,b)\\|$. Writing the rounded target to zero adds at most $(u+2q+v)\\|(a,b)\\|$ to the raw update discrepancy, so the total is at most $\\eta_G\\|C\\|_F$. No unrelated matrix entry is zeroed for a shift-vector rotation. Identity branches have zero discrepancy. [F1, step 3.1, step 3.2, algebra]\n\n4.1 In every left case choose $E=W^*C_+-C$, with $W=H(v)$ or $Q$; unitarity gives the stated equation and equal error norm. Right updates follow by conjugate transposition and invariance of Frobenius norm. All coefficients are finite explicit functions under the stated conditions, vanish at $u=0$, and have first derivatives bounded by a fixed multiple of the active dimension, proving the asymptotics. [step 2.1, step 3.3, algebra, construct] ∎",
+        "sources": [
+          {
+            "title": "Stuart and Voss, Matrix Analysis and Algorithms",
+            "url": "https://www.seehuhn.de/publications/StuaVo08/numlinalg.pdf"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 2319,
+    "id": "computed-singular-values-and-rank-revealing-factorizations-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Computed singular values and rank revealing factorizations — Examples",
+    "companion": "computed-singular-values-and-rank-revealing-factorizations",
+    "requires": [
+      "computed-singular-values-and-rank-revealing-factorizations"
+    ],
+    "items": [
+      {
+        "id": "ex-nearly-rank-deficient-design-matrix",
+        "kind": "example",
+        "title": "A nearly rank-deficient two-column design changes numerical rank with tolerance",
+        "deps": [
+          "def-numerical-rank-relative-to-a-norm-scale-and-tolerance",
+          "prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex",
+          "thm-singular-value-decomposition",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "cex-classical-column-pivoted-qr-is-not-strong-with-factor-one",
+        "kind": "counterexample",
+        "title": "Classical column-pivoted QR can fail the strong coefficient bound",
+        "deps": [
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block",
+          "alg-strong-rank-revealing-qr-with-finite-swaps"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-absolute-versus-relative-singular-value-error",
+        "kind": "example",
+        "title": "Absolute error can erase a tiny singular value while relative error preserves it",
+        "deps": [
+          "lem-singular-values-lipschitz-in-spectral-norm",
+          "thm-bidiagonal-singular-values-relative-under-componentwise-perturbations"
+        ],
+        "dependency_level": 2
+      }
+    ]
+  }
+]

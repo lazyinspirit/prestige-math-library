@@ -1,0 +1,114 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-na-computed-clenshaw-curtis-via-fast-dft",
+    "supplier": "alg-na-computed-fast-transforms-and-convolution",
+    "status": "verified",
+    "evidence": "Current supplier Definition requires N>=1, representable real and imaginary input coordinates in one floating-point model, matching integer controls, and unnormalised DFT output. Consumer Definition and steps 1–3 supply length 2n, representable samples and zero imaginary coordinates for n>=1, bypass the DFT for n=0, and propagate inconclusive/range-failure. Exact postprocessing of approximate outputs makes no accuracy or stability claim. Independently checked at Step 3a batch-43; supplier acceptance is not asserted."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-na-clenshaw-curtis-quadrature",
+    "supplier": "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+    "status": "verified",
+    "evidence": "Definition excerpt: “At $n=0$, define the Lobatto node to be $x_0^{L,0}=0$.” For $n\\ge1$ the quadrature definition uses the supplier’s Lobatto nodes; it handles the midpoint case separately at $n=0$. Interface check only; no supplier acceptance asserted. Independently checked against the current supplier and actual consumer at Step 3a batch-43; existing status and stable IDs retained."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-na-closed-newton-cotes-eight-panel-weights-and-exactness",
+    "supplier": "def-cardinal-polynomial-interpolation",
+    "status": "verified",
+    "evidence": "Definition excerpt: “For each $j$, the cardinal function is\n$$\\ell_j(X)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{X-x_k}{x_j-x_k}.$$” followed by the displayed product $\\ell_j(X)=\\prod_{k\\ne j}(X-x_k)/(x_j-x_k)$. The local proof substitutes the nine distinct nodes $x_j=-1+j/4$ and integrates these cardinal functions after the integer-grid change of variable. Used by steps 1.1 and 2.1; hypotheses checked: distinct ordered nodes and the supplied cardinal-product convention. This consumer-side interface check does not accept the supplier draft. Current Alpha locator: cardinal product in Proof 1.1, integrated weights in 2.1, polynomial uniqueness in 3.1, degree-nine symmetry in 4.1; zero is included. Nine nodes -1+j/4 are strictly increasing."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-na-closed-newton-cotes-eight-panel-weights-and-exactness",
+    "supplier": "lem-cardinal-basis-degree-and-values",
+    "status": "verified",
+    "evidence": "Statement excerpt: “Each cardinal function $\\ell_j$ of [[def-cardinal-polynomial-interpolation]] is the evaluation of a formal polynomial of degree $n$.” It also states the cardinal values at every node. The local proof uses degree-eight cardinal polynomials on nine distinct nodes. Used by steps 2.1 and 2.2; consumer-side check only, no supplier acceptance asserted. Current Alpha locator: cardinal product in Proof 1.1, integrated weights in 2.1, polynomial uniqueness in 3.1, degree-nine symmetry in 4.1; zero is included. Nine nodes -1+j/4 are strictly increasing."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-na-closed-newton-cotes-eight-panel-weights-and-exactness",
+    "supplier": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+    "status": "verified",
+    "evidence": "Statement excerpt: “Then $I_n y$ from [[def-cardinal-polynomial-interpolation]] is the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.” The consumer applies uniqueness to a degree-at-most-eight polynomial at nine distinct nodes. Used by step 2.1; consumer-side check only, no supplier acceptance asserted. Current Alpha locator: cardinal product in Proof 1.1, integrated weights in 2.1, polynomial uniqueness in 3.1, degree-nine symmetry in 4.1; zero is included. Nine nodes -1+j/4 are strictly increasing."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-na-clenshaw-curtis-exactness-and-near-best-error",
+    "supplier": "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+    "status": "verified",
+    "evidence": "Definition excerpt: “$\\|g\\|_\\infty\\leq1$. Define the best degree-$n$ uniform\napproximation error by” The same definition supplies $I_n^L$, $\\Lambda_n^L$, and the $n=0$ convention. The consumer applies these to the normalized continuous function and proves affine invariance of the best error. Used by steps 2.2 and 3.1; consumer-side check only. Independently checked against the current supplier and actual consumer at Step 3a batch-43; existing status and stable IDs retained."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-na-clenshaw-curtis-exactness-and-near-best-error",
+    "supplier": "lem-cardinal-lagrange-interpolation-and-operator-norm",
+    "status": "verified",
+    "evidence": "Statement excerpt: “Consequently $I_n^\\sigma p=p$ for every $p\\in\\mathcal P_n$.” The consumer uses polynomial reproduction for exactness, including $n=0. Used by step 2.1; the supplier norm formula is not used. Consumer-side check only. Independently checked against the current supplier and actual consumer at Step 3a batch-43; existing status and stable IDs retained."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-na-clenshaw-curtis-exactness-and-near-best-error",
+    "supplier": "thm-chebyshev-interpolation-near-best-error-bound",
+    "status": "verified",
+    "evidence": "Statement excerpt: “For either Chebyshev node family, every $n\\geq0$, and every\n$f\\in C[-1,1]$,\n$$\\|f-I_n^\\sigma f\\|_\\infty \\leq (1+\\Lambda_n^\\sigma)E_n(f).$$” The consumer applies it for $\\sigma=L$ to the normalized continuous function and multiplies by the physical interval length after integrating the residual. Used by step 2.2; consumer-side check only. Independently checked against the current supplier and actual consumer at Step 3a batch-43; existing status and stable IDs retained."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-na-clenshaw-curtis-interpolation-coefficients",
+    "supplier": "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+    "status": "verified",
+    "evidence": "Definition excerpt: “Chebyshev–Lobatto angles and nodes are” The consumer uses those nodes and the defined interpolant $I_n^L$; strict decrease on $[0,\\pi]$ gives distinctness. Used by step 2.1; consumer-side check only. Current Alpha locator: node reconstruction in Proof 1.1–2.1, degree and reordered-node uniqueness in 3.1; n>=1 including n=1 is admissible."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-na-clenshaw-curtis-interpolation-coefficients",
+    "supplier": "def-cardinal-polynomial-interpolation",
+    "status": "verified",
+    "evidence": "Definition excerpt: “For a real function $f$ defined at the nodes, write $I_n f:=I_n(f(x_0),\\ldots,f(x_n))$.” The consumer identifies the cosine reconstruction with this Lagrange interpolant after verifying the DCT-I nodal values. The Lobatto nodes are distinct after reordering. Used by step 2.1; consumer-side check only. Current Alpha locator: node reconstruction in Proof 1.1–2.1, degree and reordered-node uniqueness in 3.1; n>=1 including n=1 is admissible."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-na-clenshaw-curtis-interpolation-coefficients",
+    "supplier": "lem-cardinal-lagrange-interpolation-and-operator-norm",
+    "status": "verified",
+    "evidence": "Statement excerpt: “Consequently $I_n^\\sigma p=p$ for every $p\\in\\mathcal P_n$.” The consumer uses the supplier degree/value facts for $I_n^L g$ and compares it with the reconstructed polynomial. Used by step 2.1; consumer-side check only, no supplier acceptance asserted. Current Alpha locator: node reconstruction in Proof 1.1–2.1, degree and reordered-node uniqueness in 3.1; n>=1 including n=1 is admissible."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-na-clenshaw-curtis-interpolation-coefficients",
+    "supplier": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+    "status": "verified",
+    "evidence": "Statement excerpt: “the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.” Step 2.1 applies this after establishing degree at most $n$ and the same $n+1$ distinct Lobatto-node values. Consumer-side check only, no supplier acceptance asserted. Current Alpha locator: node reconstruction in Proof 1.1–2.1, degree and reordered-node uniqueness in 3.1; n>=1 including n=1 is admissible."
+  },
+  {
+    "kind": "page",
+    "consumer": "clenshaw-curtis-and-extrapolation-quadrature",
+    "supplier": "composite-quadrature-rules",
+    "status": "verified",
+    "evidence": "The page-level requirement is preserved as assigned context. No draft item from batch 20 is a logical premise: batch 43 directly uses the already-published def-composite-trapezoidal-rule and thm-composite-trapezoidal-rule-error-bound. The actual panel estimate is applied only on [ih,(i+1)h] for i>=1, where sqrt(x) is C^2. This row does not declare a batch-20 item accepted or required by an item proof."
+  },
+  {
+    "kind": "page",
+    "consumer": "clenshaw-curtis-and-extrapolation-quadrature",
+    "supplier": "computed-fast-transforms-and-convolution",
+    "status": "verified",
+    "evidence": "The current A-page dependency is retained. Its consumed algorithm states: ‘The output convention is the unnormalised DFT X_k=sum_j x_j exp(-2 pi i j k/N); the procedure returns an approximate vector or the first inconclusive/range-failure status.’ Batch 43 propagates those statuses and claims no new stability or accuracy guarantee. This interface review does not accept the supplier draft."
+  },
+  {
+    "kind": "page",
+    "consumer": "clenshaw-curtis-and-extrapolation-quadrature",
+    "supplier": "polynomial-approximation-and-chebyshev-interpolation",
+    "status": "verified",
+    "evidence": "The current A-page dependency is retained. The consumed items define the Lobatto nodes, best uniform error E_n, interpolation operator I_n^L and norm Lambda_n^L; lem-cardinal-lagrange-interpolation-and-operator-norm proves reproduction; thm-chebyshev-interpolation-near-best-error-bound states ||f-I_n^L f||_infty <= (1+Lambda_n^L)E_n(f). The batch-43 proof keeps n=0 explicit and applies the supplier estimate only to the normalized continuous function. This is an interface check, not acceptance of the supplier draft."
+  },
+  {
+    "kind": "page",
+    "consumer": "clenshaw-curtis-and-extrapolation-quadrature",
+    "supplier": "polynomial-interpolation-and-remainder",
+    "status": "verified",
+    "evidence": "The current A-page dependency is retained. The supplier page contains def-cardinal-polynomial-interpolation, lem-cardinal-basis-degree-and-values, and thm-cardinal-polynomial-interpolant-exists-uniquely. The batch-43 weights lemma checks the distinct increasing nodes -1+j/4; the Clenshaw–Curtis theorem reorders the decreasing cosine nodes before applying uniqueness. This verifies the declared interface only and does not accept the supplier draft."
+  }
+]

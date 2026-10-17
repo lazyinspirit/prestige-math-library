@@ -1,0 +1,280 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "14",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "def-dyadic-floating-point-format-and-directed-rounding",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "e67ffb8a8ecb05b88ec8d497737815867b1c0f916e581a7caed1212091373c6e",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original overflow clause assigns the corresponding infinite sentinel to a directed result. With p=2, emin=0, emax=2, Nmax=6: downward rounding of x=7 to +infinity exceeds x, and upward rounding of x=-7 to -infinity is below x. This violates the defining lower/upper enclosure interface, rather than merely its citation. Repaired by specifying (rd,ru)=(Nmax,+infinity) for positive overflow and (-infinity,-Nmax) for negative overflow, retaining overflow status and infinite error bound in both cases.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-dyadic-floating-point-format-and-directed-rounding",
+      "disposition": "repaired",
+      "post_sha256": "bc0f65aad631b54526cf2447f4e15be131ab052cc553375d0e72df034918df9a",
+      "review_context_sha256": "f58843a2c066618941747f38fa4692725b07322d8a544b5bfbc665d3693b87f2",
+      "reason": "Reviewed the complete definition, its ordered-field prerequisite, owning contract, and page interface. The finite set is symmetric, contains both finite extrema, and has subnormal spacing eta and normal-bin spacing 2^(e-p+1); hence both finite-range rounding selections exist and satisfy the conservative stated absolute bounds. The explicit overflow pairs now enclose every out-of-range real, and overflow remains reported even for a finite saturated endpoint. The rational conversion clause now selects from the extended endpoint set, making it consistent with both overflow branches. No claim, format parameter, dependency, or choice assumption was removed. This is a repair-author review, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-dyadic-square-root-bisection",
+    "lem-directed-dyadic-rounding-enclosure-and-error",
+    "def-outward-rounded-interval-and-ball-operations",
+    "alg-certified-elementary-range-evaluation",
+    "alg-budgeted-validated-range-evaluation",
+    "alg-certified-adaptive-simpson",
+    "thm-certified-adaptive-simpson-enclosure",
+    "alg-golub-welsch-certified-node-and-weight-enclosures",
+    "alg-na-certified-unit-circle-phase",
+    "alg-interval-dag-box-enclosure-and-bound",
+    "thm-interval-lipschitz-bound-sound-consistent",
+    "lem-rational-box-affine-chart-and-dyadic-enclosure",
+    "thm-real-elementary-range-enclosures"
+  ],
+  "downstream_uses": {
+    "thm-real-elementary-range-enclosures": "Proof step 1.2 uses monotonicity of rd(-1), rd(a), ru(b), and ru(1) to compare the rounded wide-input enclosure with a narrower finite cell result; this use has no direct dependency/reference edge to the format definition."
+  },
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-dyadic-floating-point-format-and-directed-rounding",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "locus": "definition",
+      "before_sha256": "73541501b3683dc0c55a7e98ef5a8c5f5f547a5178d4cf63d7f1378a11bbb01f",
+      "post_sha256": "bc0f65aad631b54526cf2447f4e15be131ab052cc553375d0e72df034918df9a",
+      "finding": "The original overflow clause assigns the corresponding infinite sentinel to a directed result. With p=2, emin=0, emax=2, Nmax=6: downward rounding of x=7 to +infinity exceeds x, and upward rounding of x=-7 to -infinity is below x. This violates the defining lower/upper enclosure interface, rather than merely its citation. Repaired by specifying (rd,ru)=(Nmax,+infinity) for positive overflow and (-infinity,-Nmax) for negative overflow, retaining overflow status and infinite error bound in both cases.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "before_sha256": "73541501b3683dc0c55a7e98ef5a8c5f5f547a5178d4cf63d7f1378a11bbb01f",
+    "definition_changed": true,
+    "original_overflow_clause": "At finite overflow, a directed result is\nthe corresponding infinite sentinel and its error bound is $+\\infty$; the\nstatus is `overflow`.",
+    "changes": [
+      "Specified both sign-dependent overflow pairs and retained overflow status even for a finite saturated endpoint.",
+      "Changed the rational endpoint conversion carrier from F to the extended endpoint set, consistent with those pairs."
+    ],
+    "mathematical_basis": "Finite total-order extrema and their explicit extended overflow cases; familiar elementary ordered-field arithmetic, with no external source consultation in this review. Existing source_locators are historical author evidence, not claimed reading by this adjudicator.",
+    "dependency_ids": [
+      "def-complete-ordered-real-field"
+    ],
+    "contract": "research/numerical-optimization-dynamics-2026-10-16-batch-14.proof-contracts.json: assigned definition boundaries; no change required.",
+    "page_review": "library/numerical-linear-algebra-and-approximation/outward-rounded-interval-and-ball-arithmetic.md: outward endpoints and explicit non-finite overflow summary remain accurate; no page edit.",
+    "consumer_reviews": [
+      {
+        "id": "alg-dyadic-square-root-bisection",
+        "path": "items/alg-dyadic-square-root-bisection.md",
+        "locator": "## Definition, step 4",
+        "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+        "source_excerpt": "these endpoints in a selected finite format must separately round the\n   lower endpoint down and the upper endpoint up, propagating the resulting\n   `subnormal` or `overflow` status.",
+        "affected_use": "The bisection itself uses exact dyadics; storage rounding remains outward and retains overflow status, including on the finite saturated side.",
+        "disposition": "unchanged-sound",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the examined use remains valid under the corrected directed-rounding interface.",
+        "minimality": "No consumer edit is required; the finite format and finite-result rules are unchanged and all out-of-range conversions retain overflow status."
+      },
+      {
+        "id": "lem-directed-dyadic-rounding-enclosure-and-error",
+        "path": "items/lem-directed-dyadic-rounding-enclosure-and-error.md",
+        "locator": "## Statement and ## Proof, step 2.1",
+        "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+        "source_excerpt": "for $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has\nerror bound $+\\infty$ and cannot be reported as a finite-error result.",
+        "affected_use": "The statement already specifies (Nmax,+infinity) and (-infinity,-Nmax). Proof 2.1 checks their ordering directly. The repaired definition supplies exactly those pairs; finite-range spacing and error arguments are unchanged.",
+        "disposition": "unchanged-sound",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the examined use remains valid under the corrected directed-rounding interface.",
+        "minimality": "No consumer edit is required; the finite format and finite-result rules are unchanged and all out-of-range conversions retain overflow status."
+      },
+      {
+        "id": "def-outward-rounded-interval-and-ball-operations",
+        "path": "items/def-outward-rounded-interval-and-ball-operations.md",
+        "locator": "## Definition, opening paragraph",
+        "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+        "source_excerpt": "If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel.",
+        "affected_use": "Both overflowing endpoint conversions keep overflow status; positive lower overflow saturates at Nmax and negative upper overflow at -Nmax. These values are prescribed directed endpoints, not substitutions for a prescribed sentinel. Every prescribed infinite endpoint remains infinite. Thus the existing instruction and finite-result restriction remain sound.",
+        "disposition": "unchanged-sound",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the examined use remains valid under the corrected directed-rounding interface.",
+        "minimality": "No consumer edit is required; the finite format and finite-result rules are unchanged and all out-of-range conversions retain overflow status."
+      },
+      {
+        "id": "alg-certified-elementary-range-evaluation",
+        "path": "items/alg-certified-elementary-range-evaluation.md",
+        "locator": "## Definition, step 1",
+        "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+        "source_excerpt": "A finite subnormal endpoint remains a valid endpoint; if a\ncoordinate conversion overflows, return `overflow` with that constant node.",
+        "affected_use": "All constant and final-endpoint conversions still propagate overflow even if the selected side saturates finitely. Finite branches, the format enumeration, and the Nmax scaling bound are unchanged.",
+        "disposition": "unchanged-sound",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the examined use remains valid under the corrected directed-rounding interface.",
+        "minimality": "No consumer edit is required; the finite format and finite-result rules are unchanged and all out-of-range conversions retain overflow status."
+      },
+      {
+        "id": "alg-budgeted-validated-range-evaluation",
+        "path": "items/alg-budgeted-validated-range-evaluation.md",
+        "locator": "## Definition, endpoint membership procedure",
+        "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+        "source_excerpt": "This is the representable set of\n[[def-dyadic-floating-point-format-and-directed-rounding]], including zero\nand subnormals.",
+        "affected_use": "The finite representable set and exact membership enumeration are unchanged. The queue continues to return non-finite evaluator statuses, so the overflow repair introduces no new finite success branch.",
+        "disposition": "unchanged-sound",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the examined use remains valid under the corrected directed-rounding interface.",
+        "minimality": "No consumer edit is required; the finite format and finite-result rules are unchanged and all out-of-range conversions retain overflow status."
+      },
+      {
+        "id": "alg-certified-adaptive-simpson",
+        "path": "items/alg-certified-adaptive-simpson.md",
+        "locator": "## Definition, panel remainder computation",
+        "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+        "source_excerpt": "Compute $B_P=\\operatorname{ru}(ML^5/2880)$ by upward rounding the\nexact real expression; if it overflows, return `failure`.",
+        "affected_use": "The remainder expression is nonnegative. Its finite upward rounding and positive-overflow sentinel are unchanged; all overflow statuses still fail. Midpoint membership and finite interval rules are unchanged.",
+        "disposition": "unchanged-sound",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the examined use remains valid under the corrected directed-rounding interface.",
+        "minimality": "No consumer edit is required; the finite format and finite-result rules are unchanged and all out-of-range conversions retain overflow status."
+      },
+      {
+        "id": "thm-certified-adaptive-simpson-enclosure",
+        "path": "items/thm-certified-adaptive-simpson-enclosure.md",
+        "locator": "## Facts & Assumptions, F5; ## Proof, step 1.2",
+        "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+        "source_excerpt": "overflow is reported otherwise.",
+        "affected_use": "F5 explicitly restricts the least finite representable characterization to within-range inputs, and step 1.2 uses upward rounding of the nonnegative remainder only on a finite return. Those hypotheses and inequalities are preserved.",
+        "disposition": "unchanged-sound",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the examined use remains valid under the corrected directed-rounding interface.",
+        "minimality": "No consumer edit is required; the finite format and finite-result rules are unchanged and all out-of-range conversions retain overflow status."
+      },
+      {
+        "id": "alg-golub-welsch-certified-node-and-weight-enclosures",
+        "path": "items/alg-golub-welsch-certified-node-and-weight-enclosures.md",
+        "locator": "## Definition, step 1 and global failure rule",
+        "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+        "source_excerpt": "Round every\nproposal down to a finite dyadic in the selected format; on overflow, return\n`inconclusive`.",
+        "affected_use": "Downward positive overflow now returns a finite saturated value with overflow status, so the explicit status check still rejects it. The global overflow rule also covers the step 4 Ritz proposals. No overflow is admitted as a certified finite proposal.",
+        "disposition": "unchanged-sound",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the examined use remains valid under the corrected directed-rounding interface.",
+        "minimality": "No consumer edit is required; the finite format and finite-result rules are unchanged and all out-of-range conversions retain overflow status."
+      },
+      {
+        "id": "alg-na-certified-unit-circle-phase",
+        "path": "items/alg-na-certified-unit-circle-phase.md",
+        "locator": "## Definition, qP conversion",
+        "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+        "source_excerpt": "If this conversion overflows, treat that precision as a non-finite evaluation.",
+        "affected_use": "The full outward pair for an out-of-range rational interval still has an infinite endpoint and overflow status. Non-finite conversions cannot certify a phase; finite conversions and width bounds are unchanged.",
+        "disposition": "unchanged-sound",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the examined use remains valid under the corrected directed-rounding interface.",
+        "minimality": "No consumer edit is required; the finite format and finite-result rules are unchanged and all out-of-range conversions retain overflow status."
+      },
+      {
+        "id": "alg-interval-dag-box-enclosure-and-bound",
+        "path": "items/alg-interval-dag-box-enclosure-and-bound.md",
+        "locator": "## Definition, input endpoint conversion",
+        "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+        "source_excerpt": "if an endpoint rounding overflows, return overflow.",
+        "affected_use": "The corrected endpoint values preserve enclosure and overflow status. Input, constant, and operation overflow therefore still terminate without a finite bound claim; finite-return behavior is unchanged.",
+        "disposition": "unchanged-sound",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the examined use remains valid under the corrected directed-rounding interface.",
+        "minimality": "No consumer edit is required; the finite format and finite-result rules are unchanged and all out-of-range conversions retain overflow status."
+      },
+      {
+        "id": "thm-interval-lipschitz-bound-sound-consistent",
+        "path": "items/thm-interval-lipschitz-bound-sound-consistent.md",
+        "locator": "## Facts & Assumptions, F2; ## Proof, steps 1.1 and 1.2",
+        "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+        "source_excerpt": "Directed lower and upper dyadic rounding enclose each exact endpoint",
+        "affected_use": "The repaired pairs satisfy the enclosure assertion for all real inputs. Its convergence proof assumes finite operations and an exponent range avoiding overflow; within-range errors and their convergence are unchanged.",
+        "disposition": "unchanged-sound",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the examined use remains valid under the corrected directed-rounding interface.",
+        "minimality": "No consumer edit is required; the finite format and finite-result rules are unchanged and all out-of-range conversions retain overflow status."
+      },
+      {
+        "id": "lem-rational-box-affine-chart-and-dyadic-enclosure",
+        "path": "items/lem-rational-box-affine-chart-and-dyadic-enclosure.md",
+        "locator": "## Statement; ## Facts & Assumptions, F2-F3; ## Proof, step 2.1",
+        "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+        "source_excerpt": "An overflow sentinel is not a finite interval and cannot supply the finite-return assertion.",
+        "affected_use": "The finite-pair assertion remains valid: a lower endpoint above Nmax forces the upper endpoint above Nmax as well, hence ru(u)=+infinity; an upper endpoint below -Nmax similarly forces rd(l)=-infinity. Thus no out-of-range ordered interval obtains two finite endpoints. The loose F3 phrase about overflow giving no finite endpoints is read as the interval pair, as required by step 2.1; individual directed endpoints may saturate finitely. No repair is necessary for this use.",
+        "disposition": "unchanged-sound",
+        "route": "separate-maintenance",
+        "invalidated_claim": "None: the examined use remains valid under the corrected directed-rounding interface.",
+        "minimality": "No consumer edit is required; the finite format and finite-result rules are unchanged and all out-of-range conversions retain overflow status."
+      },
+      {
+        "id": "thm-real-elementary-range-enclosures",
+        "path": "items/thm-real-elementary-range-enclosures.md",
+        "locator": "## Proof, step 1.2",
+        "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+        "source_excerpt": "monotonicity gives $\\operatorname{rd}(-1)\\le\\operatorname{rd}(a)$ and $\\operatorname{ru}(b)\\le\\operatorname{ru}(1)$",
+        "affected_use": "This additional unlinked use compares directed conversions on finite-return branches. Greatest-lower/least-upper selection on the extended ordered set remains nondecreasing, including the corrected overflow pairs. The proof comparisons and finite-return qualification remain sound.",
+        "disposition": "unchanged-sound",
+        "route": "frontier-owner",
+        "invalidated_claim": "None: the examined use remains valid under the corrected directed-rounding interface.",
+        "minimality": "No consumer edit is required; the finite format and finite-result rules are unchanged and all out-of-range conversions retain overflow status."
+      }
+    ],
+    "published_ledger_updates": [],
+    "published_findings": "No direct published consumers were found. Outside-frontier draft consumer lem-rational-box-affine-chart-and-dyadic-enclosure is recorded for separate maintenance, with no invalidated claim or proposed edit.",
+    "checks": [
+      {
+        "command": "node tools/rendercheck.mjs items/def-dyadic-floating-point-format-and-directed-rounding.md --json",
+        "exit_code": 0,
+        "result": "1 checked; errors=[], warnings=[]"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-dyadic-floating-point-format-and-directed-rounding.md --json",
+        "exit_code": 0,
+        "result": "1 file; 0 proof bodies checked; 0 failures; not-applicable"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-14.proof-contracts.json --items def-dyadic-floating-point-format-and-directed-rounding --strict --json",
+        "exit_code": 0,
+        "result": "ok=true; selected assigned definition checked; errors=[], warnings=[]"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-dyadic-floating-point-format-and-directed-rounding.md",
+        "exit_code": 0,
+        "result": "1 items, 0 steps, 0 defects"
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items def-dyadic-floating-point-format-and-directed-rounding",
+        "exit_code": 0,
+        "result": "Captured both review hashes immediately after completing the supplier repair review, before any other supplier edits."
+      },
+      {
+        "command": "Read-only report identity, assignment tuple, current itemHashGuard and native discoverDownstream comparison",
+        "exit_code": 0,
+        "result": "Frozen pack JSON digest matches task input_sha256; 1 of 1 rejected tuples covered; post guard matches current file; all 12 native direct consumers recorded, plus thm-real-elementary-range-enclosures as an unlinked actual use; every downstream ID has an affected-use disposition."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this evidence, routes frontier effects and separate outside maintenance, and obtains independent current judgment. No judgments, certification, shared ledgers, or round state were written."
+  }
+}

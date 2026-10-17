@@ -1,0 +1,539 @@
+[
+  {
+    "order": 2490,
+    "id": "simulation-gradient-estimation-and-simultaneous-perturbation",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Simulation gradient estimation and simultaneous perturbation",
+    "companion": "simulation-gradient-estimation-and-simultaneous-perturbation-examples",
+    "requires": [
+      "numerical-differentiation-and-derivative-error-control",
+      "stochastic-approximation-and-stochastic-gradient-methods",
+      "discrete-continuous-and-pde-adjoint-sensitivities",
+      "fisher-information-and-finite-sample-information-bounds",
+      "conformal-prediction-and-exchangeable-ranks"
+    ],
+    "items": [
+      {
+        "id": "cex-uniform-payoff-convergence-does-not-imply-gradient-convergence",
+        "kind": "counterexample",
+        "title": "Uniform payoff convergence does not imply gradient convergence",
+        "statement": "The deterministic payoffs n^{-1} sin(n^2 theta) converge uniformly, hence weakly as point-mass output laws, to zero, but their derivatives at zero diverge.",
+        "deps": [
+          "thm-sine-and-cosine-derivatives",
+          "def-probability-measure",
+          "def-random-element-and-real-random-variable",
+          "def-law-or-distribution-of-a-random-element",
+          "def-dirac-measure",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "thm-change-of-variables-for-expectation"
+        ],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-simulation-gradient-objective-and-payoff-oracle",
+        "kind": "definition",
+        "title": "Simulation objectives and unbiased payoff oracles",
+        "statement": "On an open parameter domain and probability space, define an integrable simulation payoff, its expectation objective, and an unbiased payoff-oracle call.",
+        "deps": [
+          "def-probability-measure",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Fu, Stochastic Gradient Estimation, preprint of Handbook of Simulation Optimization, §3",
+              "url": "https://drum.lib.umd.edu/bitstreams/87a3c71b-9eca-4d5d-9287-e1e432f68a69/download"
+            },
+            {
+              "title": "Paul Glasserman, Monte Carlo Methods in Financial Engineering, §7",
+              "url": "https://ai.stanford.edu/~bangpeng/download/book/Monte_Carlo_Methods_in_Financial_Engineering__--_by_Paul_Glasserman.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-two-evaluation-spsa-gradient-estimator",
+        "kind": "algorithm",
+        "title": "Two-evaluation simultaneous-perturbation gradient estimator",
+        "statement": "For admissible d, theta, c and independent symmetric perturbations with almost-sure nonzero coordinates and in-domain perturbed points, return zero before calling the oracle on an exceptional invalid draw; otherwise return the shared two-call coordinate quotients (Yplus-Yminus)/(2c Delta_i). Exactly two calls are made almost surely.",
+        "deps": [
+          "def-simulation-gradient-objective-and-payoff-oracle"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. C. Spall, An Overview of the Simultaneous Perturbation Method for Efficient Optimization, §§SPSA algorithm and perturbation conditions",
+              "url": "https://www.jhuapl.edu/spsa/PDF-SPSA/Spall_An_Overview.PDF"
+            },
+            {
+              "title": "Michael C. Fu, Stochastic Gradient Estimation, preprint of Handbook of Simulation Optimization, §3.2",
+              "url": "https://drum.lib.umd.edu/bitstreams/87a3c71b-9eca-4d5d-9287-e1e432f68a69/download"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-coupled-simulation-finite-difference-estimator",
+        "kind": "definition",
+        "title": "Coupled finite-difference simulation-gradient estimator",
+        "statement": "Define a central-difference estimator whose two simulator outputs use the same random input and whose coupling fixes their joint law and, for square-integrable outputs, their covariance.",
+        "deps": [
+          "def-simulation-gradient-objective-and-payoff-oracle"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Fu, Stochastic Gradient Estimation, preprint of Handbook of Simulation Optimization, §§3.1 and 3.3.4",
+              "url": "https://drum.lib.umd.edu/bitstreams/87a3c71b-9eca-4d5d-9287-e1e432f68a69/download"
+            },
+            {
+              "title": "Paul Glasserman, Monte Carlo Methods in Financial Engineering, §7.1",
+              "url": "https://ai.stanford.edu/~bangpeng/download/book/Monte_Carlo_Methods_in_Financial_Engineering__--_by_Paul_Glasserman.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-pathwise-simulation-gradient-estimator",
+        "kind": "definition",
+        "title": "Pathwise and reparameterized simulation-gradient estimators",
+        "statement": "For a fixed law of the simulation input, define the pathwise gradient as the sample derivative with that input held fixed.",
+        "deps": [
+          "def-simulation-gradient-objective-and-payoff-oracle",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Fu, Stochastic Gradient Estimation, preprint of Handbook of Simulation Optimization, §3.1",
+              "url": "https://drum.lib.umd.edu/bitstreams/87a3c71b-9eca-4d5d-9287-e1e432f68a69/download"
+            },
+            {
+              "title": "Paul Glasserman, Monte Carlo Methods in Financial Engineering, §7.2",
+              "url": "https://ai.stanford.edu/~bangpeng/download/book/Monte_Carlo_Methods_in_Financial_Engineering__--_by_Paul_Glasserman.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-likelihood-ratio-gradient-identity-on-fixed-support",
+        "kind": "theorem",
+        "title": "The likelihood-ratio score gradient is unbiased on fixed support",
+        "statement": "Gradients are Euclidean column vectors, and vector expectations are taken coordinatewise.\n\nAssume the Axiom of Choice. Let $\\Theta\\subseteq\\mathbb R^d$ be open, fix $\\theta_0\\in\\Theta$, let $\\nu$ be a fixed sigma-finite positive measure on a measurable space $(\\mathcal X,\\mathcal A)$, and let $p_\\eta$ be normalized densities of probability laws $P_\\eta$ relative to $\\nu$. Suppose there are an open ball $U\\subseteq\\Theta$ about $\\theta_0$, a measurable set $S\\in\\mathcal A$, and one $\\nu$-null set $N$ such that, for every $\\eta\\in U$ and every $x\\notin N$, $p_\\eta(x)>0$ exactly when $x\\in S$, and $\\eta\\mapsto p_\\eta(x)$ is continuously differentiable. Assume the coordinate derivatives are measurable, let $H:\\mathcal X\\to\\mathbb R$ be measurable, and suppose $\\int |H|p_\\eta\\,d\\nu<\\infty$ for each $\\eta\\in U$. Finally assume there is $G\\in L^1(\\nu)$ such that\n$|H(x)|\\sup_{\\eta\\in U}\\|\\nabla_\\eta p_\\eta(x)\\|_2\\le G(x)\\quad\\text{for }\\nu\\text{-almost every }x.$\nIf also\n$\\mathbb E_{\\theta_0}\\!\\left[H(X)^2\\|S_{\\theta_0}(X)\\|_2^2\\right]<\\infty,$\nwhere $S_{\\theta_0}=\\nabla_\\theta\\log p_{\\theta_0}$ is the score of [[def-score-and-fisher-information]], then $J(\\theta)=\\mathbb E_\\theta H(X)$ is Fréchet differentiable at $\\theta_0$ and\n$\\nabla J(\\theta_0)=\\mathbb E_{\\theta_0}[H(X)S_{\\theta_0}(X)].$\nThe score estimator is unbiased and has finite coordinate variances. The fixed-support hypothesis is a sufficient condition here.\n\n",
+        "deps": [
+          "def-simulation-gradient-objective-and-payoff-oracle",
+          "def-axiom-of-choice",
+          "def-score-and-fisher-information",
+          "def-likelihood-density",
+          "thm-dominated-convergence",
+          "thm-ftc-second-part",
+          "thm-chain-rule-for-total-derivatives",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-continuous-implies-integrable",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "thm-integration-against-a-density",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-moments-variance-and-covariance",
+          "lem-variance-and-covariance-identities-for-random-variables"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Paul Glasserman, Monte Carlo Methods in Financial Engineering, §7.3.1",
+              "url": "https://ai.stanford.edu/~bangpeng/download/book/Monte_Carlo_Methods_in_Financial_Engineering__--_by_Paul_Glasserman.pdf"
+            },
+            {
+              "title": "Michael C. Fu, Stochastic Gradient Estimation, preprint of Handbook of Simulation Optimization, §3.1",
+              "url": "https://drum.lib.umd.edu/bitstreams/87a3c71b-9eca-4d5d-9287-e1e432f68a69/download"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "prop-coupled-simulation-difference-variance-identity",
+        "kind": "proposition",
+        "title": "Coupled finite differences have a covariance-controlled variance",
+        "statement": "The variance of a coupled central difference is the sum of marginal variances minus twice the coupling covariance, divided by four times the squared step.",
+        "deps": [
+          "def-coupled-simulation-finite-difference-estimator",
+          "def-moments-variance-and-covariance",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "thm-factorization-of-expectations-for-independent-variables"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Fu, Stochastic Gradient Estimation, preprint of Handbook of Simulation Optimization, §§3.1 and 3.3.4",
+              "url": "https://drum.lib.umd.edu/bitstreams/87a3c71b-9eca-4d5d-9287-e1e432f68a69/download"
+            },
+            {
+              "title": "Paul Glasserman, Monte Carlo Methods in Financial Engineering, §7.1",
+              "url": "https://ai.stanford.edu/~bangpeng/download/book/Monte_Carlo_Methods_in_Financial_Engineering__--_by_Paul_Glasserman.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-pathwise-simulation-gradient-is-unbiased-under-envelope",
+        "kind": "theorem",
+        "title": "A dominated pathwise simulation gradient is unbiased",
+        "statement": "Gradients are Euclidean column vectors, and vector expectations are taken coordinatewise.\n\nLet $\\Theta\\subseteq\\mathbb R^d$ be open, let $H:\\Theta\\times\\Omega\\to\\mathbb R$ be the simulation payoff from [[def-simulation-gradient-objective-and-payoff-oracle]], and fix $\\theta_0\\in\\Theta$. Suppose there is an open ball $U$ about $\\theta_0$ such that for almost every $\\omega$, $H(\\cdot,\\omega)$ is continuously differentiable on $U$ and $\\nabla_\\theta H(\\cdot,\\omega)$ is continuous there, and $\\nabla_\\theta H(\\theta,\\cdot)$ is measurable for every $\\theta\\in U$. Assume $\\|\\nabla_\\theta H(\\theta,\\omega)\\|_2\\le M(\\omega)$ for all $\\theta\\in U$ outside one measurable null set, where $M$ is nonnegative and integrable, and assume $\\mathbb E\\|\\nabla_\\theta H(\\theta_0,\\cdot)\\|_2^2<\\infty$. Then $J(\\theta)=\\mathbb E H(\\theta,\\cdot)$ is Fréchet differentiable at $\\theta_0$ and\n$\\nabla J(\\theta_0)=\\mathbb E[\\nabla_\\theta H(\\theta_0,\\cdot)].$\nThus the pathwise estimator from [[def-pathwise-simulation-gradient-estimator]] is unbiased at $\\theta_0$ and has finite coordinate variances.\n\n",
+        "deps": [
+          "def-pathwise-simulation-gradient-estimator",
+          "def-simulation-gradient-objective-and-payoff-oracle",
+          "thm-dominated-convergence",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-moments-variance-and-covariance",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Paul Glasserman, Monte Carlo Methods in Financial Engineering, §7.2.2",
+              "url": "https://ai.stanford.edu/~bangpeng/download/book/Monte_Carlo_Methods_in_Financial_Engineering__--_by_Paul_Glasserman.pdf"
+            },
+            {
+              "title": "Michael C. Fu, Stochastic Gradient Estimation, preprint of Handbook of Simulation Optimization, §3.1",
+              "url": "https://drum.lib.umd.edu/bitstreams/87a3c71b-9eca-4d5d-9287-e1e432f68a69/download"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-spsa-gradient-bias-is-second-order",
+        "kind": "theorem",
+        "title": "Symmetric simultaneous perturbations have second-order gradient bias",
+        "statement": "Gradients are Euclidean column vectors, and vector expectations are taken coordinatewise.\n\nAssume AC for the conditional-expectation interface. Let $\\Theta\\subseteq\\mathbb R^d$ be open, $\\theta\\in\\Theta$, and $f:\\Theta\\to\\mathbb R$ be $C^3$. Let $\\Delta_1,\\ldots,\\Delta_d$ be independent, symmetric about zero, and nonzero almost surely, with\n$\\mathbb E|\\Delta_j|<\\infty,\\qquad \\mathbb E|\\Delta_i|^{-1}<\\infty,\\qquad q_i:=\\mathbb E\\!\\left[\\frac{\\|\\Delta\\|_2^3}{|\\Delta_i|}\\right]<\\infty.$\nFor each $0<c\\le c_0$, assume $\\{\\theta+t\\Delta:|t|\\le c\\}\\subseteq\\Theta$ almost surely and, for almost every realized $\\Delta$, this segment lies in an open set $V_{c,\\Delta}\\subseteq\\Theta$ on which $\\|D^3 f(y)\\|_{\\mathrm{op}}\\le M_3$, where the operator norm is the supremum of $|D^3f[u,v,w]|$ over unit vectors $u,v,w$.\nAssume the two oracle outputs in [[alg-two-evaluation-spsa-gradient-estimator]] satisfy $\\mathbb E[Y^\\pm\\mid\\Delta]=f(\\theta\\pm c\\Delta)$ and\n$\\mathbb E\\!\\left[\\frac{|Y^+-f(\\theta+c\\Delta)|+|Y^--f(\\theta-c\\Delta)|}{|\\Delta_i|}\\right]<\\infty$\nfor every $i$. Then\n$\\left|\\mathbb E[\\widehat G_i(\\theta)]-\\partial_i f(\\theta)\\right|\\le \\frac{M_3 c^2}{6}q_i,\\qquad \\left\\|\\mathbb E[\\widehat G(\\theta)]-\\nabla f(\\theta)\\right\\|_2\\le\\frac{M_3c^2}{6}\\left(\\sum_{i=1}^d q_i^2\\right)^{1/2}.$\n\n",
+        "deps": [
+          "alg-two-evaluation-spsa-gradient-estimator",
+          "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds",
+          "thm-chain-rule-for-total-derivatives",
+          "def-euclidean-inner-product",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-taking-out-what-is-known",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-axiom-of-choice",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "def-random-element-and-real-random-variable",
+          "thm-change-of-variables-for-expectation"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. C. Spall, An Overview of the Simultaneous Perturbation Method for Efficient Optimization, pp. 484–491",
+              "url": "https://www.jhuapl.edu/spsa/PDF-SPSA/Spall_An_Overview.PDF"
+            },
+            {
+              "title": "Michael C. Fu, Stochastic Gradient Estimation, preprint of Handbook of Simulation Optimization, §3.2",
+              "url": "https://drum.lib.umd.edu/bitstreams/87a3c71b-9eca-4d5d-9287-e1e432f68a69/download"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-spsa-gradient-has-inverse-step-variance-bound",
+        "kind": "theorem",
+        "title": "Weighted simulator moments give an inverse-step SPSA variance bound",
+        "statement": "Assume AC. At a current history $\\mathcal F$, let $c>0$, let $\\Delta_i\\ne0$ almost surely, and use the two-evaluation estimator from [[alg-two-evaluation-spsa-gradient-estimator]]. Suppose the weighted conditional second moment is bounded:\n$\\mathbb E\\!\\left[\\left(|Y^+|^2+|Y^-|^2\\right)\\sum_{i=1}^d|\\Delta_i|^{-2}\\,\\middle|\\,\\mathcal F\\right]\\le B$\nalmost surely, with deterministic $B<\\infty$. Then\n$\\mathbb E[\\|\\widehat G\\|_2^2\\mid\\mathcal F]\\le\\frac{B}{2c^2},\\qquad \\operatorname{Var}(\\widehat G\\mid\\mathcal F)\\le\\frac{B}{2c^2},$\nwhere the vector conditional variance is the sum of coordinate conditional variances as in [[def-stochastic-gradient-oracle-and-unconstrained-update]].\n\n",
+        "deps": [
+          "alg-two-evaluation-spsa-gradient-estimator",
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "def-conditional-variance",
+          "lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula",
+          "def-axiom-of-choice",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. C. Spall, An Overview of the Simultaneous Perturbation Method for Efficient Optimization, §§SPSA algorithm and perturbation conditions",
+              "url": "https://www.jhuapl.edu/spsa/PDF-SPSA/Spall_An_Overview.PDF"
+            },
+            {
+              "title": "Michael C. Fu, Stochastic Gradient Estimation, preprint of Handbook of Simulation Optimization, Proposition 3.1",
+              "url": "https://drum.lib.umd.edu/bitstreams/87a3c71b-9eca-4d5d-9287-e1e432f68a69/download"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-spsa-stochastic-approximation-has-stationary-limit-points",
+        "kind": "theorem",
+        "title": "Summably biased SPSA has convergent objective values and zero gradient liminf",
+        "statement": "Under AC, bounded gradients along the iterates, integrable Lyapunov values, summable SPSA bias and noise contributions, and nonsummable positive update steps, the objective values converge almost surely, the weighted squared gradients are summable, and the gradient norm has zero liminf.",
+        "deps": [
+          "def-simulation-gradient-objective-and-payoff-oracle",
+          "alg-two-evaluation-spsa-gradient-estimator",
+          "thm-spsa-gradient-bias-is-second-order",
+          "thm-spsa-gradient-has-inverse-step-variance-bound",
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "lem-robbins-siegmund-almost-supermartingale",
+          "lem-l-smoothness-descent-inequality",
+          "def-axiom-of-choice",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Fu, Stochastic Gradient Estimation, preprint of Handbook of Simulation Optimization, §§3–4",
+              "url": "https://drum.lib.umd.edu/bitstreams/87a3c71b-9eca-4d5d-9287-e1e432f68a69/download"
+            },
+            {
+              "title": "J. C. Spall, An Overview of the Simultaneous Perturbation Method for Efficient Optimization, §§SPSA algorithm and gain sequences",
+              "url": "https://www.jhuapl.edu/spsa/PDF-SPSA/Spall_An_Overview.PDF"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-discrete-sde-adjoint-gradient-interchange",
+        "kind": "theorem",
+        "title": "A finite stochastic adjoint gives the discrete gradient under domination",
+        "statement": "Gradients of scalar functions are Euclidean column vectors, with $Dg(\\theta)[v]=\\langle\\nabla g(\\theta),v\\rangle$ under [[def-euclidean-inner-product]]; vector expectations are taken coordinatewise.\n\nLet $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $(E_k,\\mathcal E_k)$ be measurable spaces for $0\\le k\\le N$, and let each $\\xi_k:\\Omega\\to E_k$ be a measurable random element; write $\\xi=(\\xi_0,\\ldots,\\xi_N)$. Let $\\Theta\\subseteq\\mathbb R^d$ be open, fix $\\theta_0\\in\\Theta$, and choose an open ball $U$ with $\\theta_0\\in U\\subseteq\\Theta$. Let $d,m\\ge1$, let $N\\ge0$ be a finite integer, and let the states lie in $\\mathbb R^m$. The maps are $u_0:\\Theta\\times E_0\\to\\mathbb R^m$, $\\Psi_k:\\mathbb R^m\\times\\Theta\\times E_{k+1}\\to\\mathbb R^m$, $\\ell_k:\\mathbb R^m\\times\\Theta\\to\\mathbb R$, and $\\phi:\\mathbb R^m\\times\\Theta\\to\\mathbb R$. Gradients of scalar functions are columns; $D_u\\Psi_k$ is an $m\\times m$ Jacobian and $D_\\theta\\Psi_k$ is an $m\\times d$ Jacobian. Let\n$u_0=u_0(\\theta,\\xi_0),\\qquad u_{k+1}=\\Psi_k(u_k,\\theta,\\xi_{k+1})\\quad(0\\le k<N).$\nAssume the displayed maps are measurable for the corresponding product sigma-algebras (Borel on Euclidean factors and $\\mathcal E_k$ on each input factor), and that there is a common measurable null set outside which their sections are continuously differentiable in their state and parameter variables on $U$. Define\n$F_N(\\theta,\\xi):=\\phi(u_N,\\theta)+\\sum_{k=0}^{N-1}\\ell_k(u_k,\\theta),\\qquad J_N(\\theta):=\\mathbb E[F_N(\\theta,\\xi)].$\nAssume $F_N(\\theta,\\xi)$ is integrable for every $\\theta\\in U$, and that there is a nonnegative integrable random variable $M$ with $\\|\\nabla_\\theta F_N(\\theta,\\xi)\\|_2\\le M$ for all $\\theta\\in U$ almost surely, while $\\mathbb E\\|\\nabla_\\theta F_N(\\theta_0,\\xi)\\|_2^2<\\infty$. Put $S_0=D_\\theta u_0$, propagate\n$S_{k+1}=D_u\\Psi_k\\,S_k+D_\\theta\\Psi_k,$\nand define reverse variables by\n$p_N=\\nabla_u\\phi(u_N,\\theta),\\qquad p_k=\\nabla_u\\ell_k(u_k,\\theta)+(D_u\\Psi_k)^\\mathsf T p_{k+1}.$\nThen the discrete adjoint integrand\n$\\Gamma_N=\\nabla_\\theta\\phi+S_0^\\mathsf T p_0+\\sum_{k=0}^{N-1}\\left(\\nabla_\\theta\\ell_k+(D_\\theta\\Psi_k)^\\mathsf T p_{k+1}\\right)$\nsatisfies $\\nabla J_N(\\theta_0)=\\mathbb E[\\Gamma_N(\\theta_0,\\xi)]$.\n\nFor a family of discretizations indexed by $h$, if each discrete objective satisfies the preceding pathwise interchange hypotheses, $\\mathbb E\\|\\Gamma_h(\\theta_0)-\\Gamma(\\theta_0)\\|_2\\to0$, and the continuous-limit objective has derivative $\\nabla J(\\theta_0)=\\mathbb E[\\Gamma(\\theta_0)]$ under the same pathwise interchange conditions, then $\\nabla J_h(\\theta_0)\\to\\nabla J(\\theta_0)$. This conclusion gives no rate unless a quantitative bound on $\\mathbb E\\|\\Gamma_h(\\theta_0)-\\Gamma(\\theta_0)\\|_2$ is also supplied. Euler–Maruyama is the special case $\\Psi_k(u,\\theta,\\Delta W_k)=u+b(u,\\theta)h_k+\\sigma(u,\\theta)\\Delta W_k$, with $\\Delta W_k$ the simulated Brownian increment.\n\nAll tangent, reverse and adjoint derivatives are evaluated on the common full-probability event where the sample maps are $C^1$. Define $\\Gamma_N=0$ on its measurable null complement, and use this version in expectations.\n\n",
+        "deps": [
+          "def-simulation-gradient-objective-and-payoff-oracle",
+          "thm-pathwise-simulation-gradient-is-unbiased-under-envelope",
+          "thm-discrete-adjoint-gradient-recursion",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-induction-principle",
+          "def-random-element-and-real-random-variable",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael C. Fu, Stochastic Gradient Estimation, preprint of Handbook of Simulation Optimization, §3",
+              "url": "https://drum.lib.umd.edu/bitstreams/87a3c71b-9eca-4d5d-9287-e1e432f68a69/download"
+            },
+            {
+              "title": "Paul Glasserman, Monte Carlo Methods in Financial Engineering, §§6–7",
+              "url": "https://ai.stanford.edu/~bangpeng/download/book/Monte_Carlo_Methods_in_Financial_Engineering__--_by_Paul_Glasserman.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2491,
+    "id": "simulation-gradient-estimation-and-simultaneous-perturbation-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Simulation gradient estimation and simultaneous perturbation — Examples",
+    "companion": "simulation-gradient-estimation-and-simultaneous-perturbation",
+    "requires": [
+      "simulation-gradient-estimation-and-simultaneous-perturbation"
+    ],
+    "items": [
+      {
+        "id": "ex-moving-support-score-estimator-misses-boundary-term",
+        "kind": "example",
+        "title": "A moving uniform support contributes a missing score boundary term",
+        "statement": "For X_theta uniform on (0,theta) and constant payoff, the pathwise derivative is zero while the interior score estimate is -1/theta; the moving endpoint contributes +1/theta.",
+        "deps": [
+          "def-score-and-fisher-information",
+          "def-pathwise-simulation-gradient-estimator",
+          "def-simulation-gradient-objective-and-payoff-oracle",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "thm-integration-against-a-density",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-two-call-spsa-biological-simulator",
+        "kind": "example",
+        "title": "One two-call SPSA estimate for an expensive biological simulator",
+        "statement": "For one three-rate simulator step with perturbation (1,-1,1), step 0.02, and outputs 13.1 and 12.7, the two-call SPSA estimate is (10,-10,10).",
+        "deps": [
+          "alg-two-evaluation-spsa-gradient-estimator"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-coupled-differences-reduce-variance",
+        "kind": "example",
+        "title": "Common random numbers can remove finite-difference noise",
+        "statement": "Assume AC and fix $c>0$. Let $Z\\sim N(0,1)$ and let one simulation output be $Y(\\theta,Z)=\\theta+Z$, so $J(\\theta)=\\theta$. Using the same $Z$ at $\\theta+c$ and $\\theta-c$ gives a central-difference estimate identically equal to $1$. Using independent $Z_+$ and $Z_-$ gives variance $1/(2c^2)$.\n\n",
+        "deps": [
+          "def-coupled-simulation-finite-difference-estimator",
+          "prop-coupled-simulation-difference-variance-identity",
+          "def-standard-normal-and-normal-laws",
+          "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-change-of-variables-for-expectation",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-moments-variance-and-covariance",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "thm-factorization-of-expectations-for-independent-variables"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-gaussian-reparameterization-and-score-gradient",
+        "kind": "example",
+        "title": "Gaussian reparameterization gives two gradient estimators",
+        "statement": "Let $Z\\sim N(0,1)$, set $X_\\theta=\\theta+Z$, and use payoff $H(x)=x$. The objective is $J(\\theta)=\\mathbb E X_\\theta=\\theta$. The pathwise estimator is constant $1$; the score estimator is $X_\\theta(X_\\theta-\\theta)$, which is unbiased and has variance $\\theta^2+2$.\n\n",
+        "deps": [
+          "def-pathwise-simulation-gradient-estimator",
+          "thm-pathwise-simulation-gradient-is-unbiased-under-envelope",
+          "def-score-and-fisher-information",
+          "thm-likelihood-ratio-gradient-identity-on-fixed-support",
+          "def-standard-normal-and-normal-laws",
+          "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "lem-normal-location-scale-density",
+          "thm-integration-against-a-density",
+          "thm-change-of-variables-for-expectation",
+          "def-moments-variance-and-covariance",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      }
+    ]
+  }
+]

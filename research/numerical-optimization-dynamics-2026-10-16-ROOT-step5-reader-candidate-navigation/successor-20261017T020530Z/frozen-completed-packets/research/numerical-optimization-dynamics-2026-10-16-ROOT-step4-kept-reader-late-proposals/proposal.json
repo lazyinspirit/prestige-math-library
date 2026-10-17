@@ -1,0 +1,447 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "research_only": true,
+  "entries": [
+    {
+      "id": "cor-constant-step-bdf2-order-two-with-consistent-start",
+      "batch": 65,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-65-step5-context.json",
+      "pointer": "/concerns/0",
+      "finding": {
+        "id": "cor-constant-step-bdf2-order-two-with-consistent-start",
+        "concern": "Clarify the scope of the Statement's sentence beginning “A sufficient condition is that B_BE is centered at y(0)”. Its endpoint-time bound ‖f(h,z)‖₂≤M, hM≤rad(B_BE), and state Lipschitz bound establish invariance and contraction, but do not themselves establish the preceding requirement y(h)∈B_BE. For example, y'=1−2t, y(0)=0, h=1/2, and B_BE=[−0.01,0.01] satisfy those listed conditions with M=L₂=0; the BE root is zero but y(h)=1/4 is outside the ball. The proof explicitly retains endpoint inclusion, so the main startup conclusion remains supported under its actual assumptions; the sufficient-condition wording should retain that requirement explicitly.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "cor-constant-step-bdf2-order-two-with-consistent-start",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The proof establishes F2’s uniform local-root and branch-selection hypotheses from the stated all-histories root condition; the BE startup correctly applies the one-stage residual bound to its invariant contractive ball.",
+        "context_sha256": "8ddb034db783fc181bdf098ebe6d1093d8e6cdc93d4457dbad69e19a28a6818a",
+        "item_sha256": "819700d9262cf10d34661e92ef3eccdbaf0a55ea7168b4de595ceaba7fcd546a",
+        "at": "2026-10-17T01:46:25.754Z"
+      },
+      "canonical_path": "items/cor-constant-step-bdf2-order-two-with-consistent-start.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/cor-constant-step-bdf2-order-two-with-consistent-start.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/proposed/cor-constant-step-bdf2-order-two-with-consistent-start.md",
+      "concern_index": 0,
+      "digest_pointer": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-65-step5-context.json",
+        "pointer": "/concerns/0"
+      },
+      "admission_status": "research-only proposal; root may formally admit only at supported paused 5.1; original Luna keep retained",
+      "guard": {
+        "kind": "exact-byte-equality",
+        "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/cor-constant-step-bdf2-order-two-with-consistent-start.md",
+        "action": "Refuse application unless current canonical bytes equal archived preimage. Root owns binding hashes."
+      },
+      "verdict": "confirmed presentation defect",
+      "focused_evidence": "Endpoint-time |f(h,z)| and Lipschitz bounds only control Phi on the chosen ball; they do not control the exact trajectory during [0,h]. Independently, y(t)=t-t^2 solves yprime=1-2t; at h=1/2 endpoint f=0 on every ball, yet y(h)=1/4 lies outside [-.01,.01]. Keep y(h) inclusion explicit. Once included, centered-ball hM<=R gives invariance and hL2<=1/2 gives the required contraction. The existing residual estimate applies to y(h) in the ball and yields exact-BE starter error O(h^2); the main all-histories BDF selected-root proof is unchanged.",
+      "changed_interface": "Statement",
+      "consumer_reviews": [
+        {
+          "id": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+          "relationship": "direct",
+          "source": "items/alg-implicit-stiff-time-stepper-with-consistent-starts.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/alg-implicit-stiff-time-stepper-with-consistent-starts.md",
+          "verdict": "compatible; no source edit needed",
+          "evidence": "The full Definition invokes the exact-start BE estimate and branch conditions as proved in the corollary, and explicitly demands the starter budget separately for finite tolerances. It never infers y(h) inclusion from endpoint-time bounds. Its finite BE/BDF residual status distinctions and exact-root completion labels remain unchanged."
+        },
+        {
+          "id": "ex-robertson-reaction-system-newton-work",
+          "relationship": "indirect via implicit stepper",
+          "source": "items/ex-robertson-reaction-system-newton-work.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/ex-robertson-reaction-system-newton-work.md",
+          "verdict": "compatible; no source edit needed",
+          "evidence": "This is a one-step BE binary64 work record with an explicit caveat that its backend is not an exact-solve contract execution. It uses only stepper work logging and makes no BDF startup or forward-error inference. Its field/Jacobian calculations and work interpretation are unaffected."
+        }
+      ],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-65.proof-contracts.json",
+          "pointer": "/contracts/cor-constant-step-bdf2-order-two-with-consistent-start",
+          "action": "Inspect any authored Statement/condition mirrors; no numbered proof change. Retain y(h) inclusion in any startup-condition summary; do not claim new proof/creation coverage."
+        }
+      ]
+    },
+    {
+      "id": "alg-principal-matrix-logarithm-and-square-root",
+      "batch": 68,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-68-step5-context.json",
+      "pointer": "/concerns/0",
+      "finding": {
+        "id": "alg-principal-matrix-logarithm-and-square-root",
+        "concern": "The exact scalar-data interface is unclear. The inputs list a branch request, finite Schur and Schur–Parlett controls, a partition and Jordan certificates. Step 3 says to 'evaluate the scalar branch' and call Schur–Parlett, whose own input requires finite derivative data and whose Jordan evaluator uses supplied exact derivatives. This wrapper does not explicitly supply those jets or a terminating evaluator, nor prescribe a missing-jet return here. Clarify whether the inherited controls include exact branch jets; finite exact evaluation of logarithms should not be inferred from field arithmetic alone. The seven-procedure termination theorem relies on this interface.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_row": {
+        "id": "alg-principal-matrix-logarithm-and-square-root",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The exact Schur check certifies the eigenvalues used for the branch test; avoiding the closed negative real axis makes each selected scalar branch holomorphic near the spectrum. The subsequent Schur–Parlett call and propagated statuses match its interface.",
+        "context_sha256": "3cfad2792115f3723a7f9fb0d4a1e97688c5ac1a9d5aed64fefbac14cafcce7b",
+        "item_sha256": "1aa9b33085151709516a30f1a0ebdd0033ecb49d88c83e86e893aa48539db03e",
+        "at": "2026-10-17T01:47:01.929Z"
+      },
+      "canonical_path": "items/alg-principal-matrix-logarithm-and-square-root.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/alg-principal-matrix-logarithm-and-square-root.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/proposed/alg-principal-matrix-logarithm-and-square-root.md",
+      "concern_index": 0,
+      "digest_pointer": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-68-step5-context.json",
+        "pointer": "/concerns/0"
+      },
+      "admission_status": "research-only proposal; root may formally admit only at supported paused 5.1; original Luna keep retained",
+      "guard": {
+        "kind": "exact-byte-equality",
+        "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/alg-principal-matrix-logarithm-and-square-root.md",
+        "action": "Refuse application unless current canonical bytes equal archived preimage. Root owns binding hashes."
+      },
+      "verdict": "confirmed missing input interface",
+      "focused_evidence": "Actual Schur–Parlett Definition requires finite derivative data, passes them to the exact Jordan evaluator, and returns missing-jordan-data when a required derivative is absent. The exact Jordan evaluator uses supplied f^(k)(lambda) for k less than block size, never deriving logarithms from field operations. A finite table of exact jets of the requested branch makes this wrapper composable. The branch check still precedes access to those data. Successful exact Schur T puts every eigenvalue on the diagonal; absence from the closed negative ray gives a holomorphic branch near spectrum. A second Schur run and merged blocks may need any supplied jet whose order is bounded by finite block size; absent entries retain missing-jordan-data. Exact oracle input semantics, unavailable comparison and all propagated statuses remain intact.",
+      "changed_interface": "Definition",
+      "consumer_reviews": [
+        {
+          "id": "thm-matrix-function-finite-algorithms-termination-and-budget-status",
+          "relationship": "direct",
+          "source": "items/thm-matrix-function-finite-algorithms-termination-and-budget-status.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/thm-matrix-function-finite-algorithms-termination-and-budget-status.md",
+          "verdict": "compatible; no source edit needed",
+          "evidence": "Full Statement already conditions termination on admitted finite inputs and terminating supplied evaluators/controllers. F3, Given, A1 and Proof 3.1 explicitly treat finite supplied exact jets and missing-data failures; F8 and Proof 4.1 treat branch tests before the Schur–Parlett call. With the clarified finite table, there is no hidden scalar transcendental evaluator, and finite table lookups plus existing finite algorithms establish the same termination/status conclusion. No theorem source repair needed."
+        },
+        {
+          "id": "ex-rotation-logarithm-branch-cut",
+          "relationship": "direct",
+          "source": "items/ex-rotation-logarithm-branch-cut.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/ex-rotation-logarithm-branch-cut.md",
+          "verdict": "compatible; no source edit needed",
+          "evidence": "Its full Given supplies exact zero-sweep Schur controls, singleton certificates and no jets. Proof 2.1 reaches exact Q=I,T=-I, then branch-domain-failure at lambda=-1 before requesting any jet. The proposed interface explicitly allows absent entries until requested, preserving this original branch-failure case without requiring principal Log(-1) data."
+        }
+      ],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-68.proof-contracts.json",
+          "pointer": "/contracts/ex-rotation-logarithm-branch-cut/citations/1/quote",
+          "action": "After formal admission mirror the exact changed supplier section; retain original Step-4 context/digest and kept judgment as history."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-68.proof-contracts.json",
+          "pointer": "/contracts/thm-matrix-function-finite-algorithms-termination-and-budget-status/citations/10/quote",
+          "action": "After formal admission mirror the exact changed supplier section; retain original Step-4 context/digest and kept judgment as history."
+        }
+      ]
+    },
+    {
+      "id": "thm-pade-scaling-and-squaring-error-bound",
+      "batch": 68,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-68-step5-context.json",
+      "pointer": "/concerns/1",
+      "finding": {
+        "id": "thm-pade-scaling-and-squaring-error-bound",
+        "concern": "The proof conflates the initial candidate and exact reference. Step 1.3 calls the candidate X₀ = r_m(B); step 2.1 then defines X_j = exp(2^j B), including X₀ = exp(B). Step 2.2 consequently writes norm(X₀ − exp(B)) ≤ E₀ rather than the required initial candidate bound norm(X̂₀ − exp(B)) ≤ E₀. The contour argument establishes the intended bound, but the notation as written does not state the induction base used in step 3.1.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_row": {
+        "id": "thm-pade-scaling-and-squaring-error-bound",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The denominator is nonzero on a neighborhood of the contour and spectrum, so the contour estimate gives E₀; the stated norm bounds and squaring recurrence propagate it to Eₛ. No defect found.",
+        "context_sha256": "b46870ca4547e9549c1532e4c6f1401c776dfadfa8e54103cf03209cae7ce2ba",
+        "item_sha256": "f87d538746535ec3b5a4b42ed1a26c4e4eb5282783c06179271d03cd6dc8296a",
+        "at": "2026-10-17T01:47:20.845Z"
+      },
+      "canonical_path": "items/thm-pade-scaling-and-squaring-error-bound.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/thm-pade-scaling-and-squaring-error-bound.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/proposed/thm-pade-scaling-and-squaring-error-bound.md",
+      "concern_index": 1,
+      "digest_pointer": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-68-step5-context.json",
+        "pointer": "/concerns/1"
+      },
+      "admission_status": "research-only proposal; root may formally admit only at supported paused 5.1; original Luna keep retained",
+      "guard": {
+        "kind": "exact-byte-equality",
+        "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/thm-pade-scaling-and-squaring-error-bound.md",
+        "action": "Refuse application unless current canonical bytes equal archived preimage. Root owns binding hashes."
+      },
+      "verdict": "confirmed proof notation gap",
+      "focused_evidence": "Step 1.3 solves Q_m(B) times initial candidate=P_m(B), giving rational candidate r_m(B); it must be denoted hat X0. Step 2.1 separately defines exact reference Xj=exp(2^j B). Contour error bounds hat X0-exp(B), which is precisely the base for the defect recurrence in Proof 3.1. Replacing only the two candidate occurrences and the local F2 notation closes the induction base, retaining all conditional denominator, topology, scalar-tail, resolvent and squaring-defect hypotheses. s=0 now directly yields the correctly notated initial bound.",
+      "changed_interface": "Proof/Facts only",
+      "consumer_reviews": [],
+      "consumer_policy": "No Statement or Definition changes; do not propagate proof-only repairs.",
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-68.proof-contracts.json",
+          "pointer": "/contracts/thm-pade-scaling-and-squaring-error-bound",
+          "action": "Mirror F2 candidate notation and revised derivation claims at steps 1.3 and 2.2 only; no Statement changes or downstream re-review propagation."
+        }
+      ]
+    },
+    {
+      "id": "ex-nonnormal-exponential-large-transient-norm",
+      "batch": 68,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-68-step5-context.json",
+      "pointer": "/concerns/2",
+      "finding": {
+        "id": "ex-nonnormal-exponential-large-transient-norm",
+        "concern": "Verification 1.1 says 'This is a single Jordan block at −1' for A = [[−1,10],[0,−1]]. Under the batch's Jordan convention, a canonical Jordan block has superdiagonal entry 1. This A is similar to that block, rather than literally that block. The displayed exponential is correct, but invoking the Jordan formula requires that similarity or a direct nilpotent-series argument.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_row": {
+        "id": "ex-nonnormal-exponential-large-transient-norm",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The Jordan formula gives the stated exponential; its row-sum norm is 11/e>1 since e<3, while its spectral radius is e^{-1}<1. The displayed products also establish nonnormality.",
+        "context_sha256": "34e03320b1d22d875984f5ee3291cf8a326a42853d9421e98e2714353bd8e9f8",
+        "item_sha256": "39051e9dcbbaf7225a2690f2975804f3ecd14dea535f24b4e769c93f143616bb",
+        "at": "2026-10-17T01:47:16.494Z"
+      },
+      "canonical_path": "items/ex-nonnormal-exponential-large-transient-norm.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/ex-nonnormal-exponential-large-transient-norm.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/proposed/ex-nonnormal-exponential-large-transient-norm.md",
+      "concern_index": 2,
+      "digest_pointer": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-68-step5-context.json",
+        "pointer": "/concerns/2"
+      },
+      "admission_status": "research-only proposal; root may formally admit only at supported paused 5.1; original Luna keep retained",
+      "guard": {
+        "kind": "exact-byte-equality",
+        "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/ex-nonnormal-exponential-large-transient-norm.md",
+        "action": "Refuse application unless current canonical bytes equal archived preimage. Root owns binding hashes."
+      },
+      "verdict": "confirmed Jordan convention gap",
+      "focused_evidence": "The canonical J=-I+N has superdiagonal one. S=diag(10,1) is invertible and SJS^-1=-I+10N=A by direct multiplication. The actual Jordan-contour-agreement theorem supplies similarity invariance, so exp(A)=S exp(J) S^-1=e^-1(I+10N). The displayed Astar A and A Astar differ; row norm=11/e>1 and eigenvalue modulus=e^-1<1. The proof repair uses the existing F1 supplier and preserves the original matrix and all spectral/norm cases.",
+      "changed_interface": "Verification only",
+      "consumer_reviews": [],
+      "consumer_policy": "No Statement or Definition changes; do not propagate proof-only repairs.",
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-68.proof-contracts.json",
+          "pointer": "/contracts/ex-nonnormal-exponential-large-transient-norm/derivations",
+          "action": "Mirror revised Verification 1.1 similarity argument only. Existing F1 supplies Jordan formula and similarity; no new dependency or changed Example."
+        }
+      ]
+    },
+    {
+      "id": "alg-nonlinear-conjugate-gradient-methods",
+      "batch": 70,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-70-step5-context.json",
+      "pointer": "/concerns/0",
+      "finding": {
+        "id": "alg-nonlinear-conjugate-gradient-methods",
+        "concern": "Definition step 2 says “For k=0, use d_0 above,” whereas step 3 tests or assigns d_k^{cand}, which has only been explicitly formed for k≥1. The intended initialization d_0^{cand}=d_0=−g_0 is immediately recoverable, but should be explicit for the procedure's first iteration. A first-iteration restart also assigns β_{−1}, although no such coefficient is otherwise needed.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "alg-nonlinear-conjugate-gradient-methods",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The recurrences, safeguards, line-search calls, and exact quadratic step are consistently typed and justified by the supplied interfaces. The stated parameter ranges and edge cases introduce no fatal defect.",
+        "context_sha256": "9235ce4ef54964ebd36bdc20536883122565a868bf2c7a5cf04ac00fb2e7ec2d",
+        "item_sha256": "f4a516eb8a093cf65b5426ab86ee3782373455084671853032e084ce7f0a5768",
+        "at": "2026-10-17T01:47:53.654Z"
+      },
+      "canonical_path": "items/alg-nonlinear-conjugate-gradient-methods.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/alg-nonlinear-conjugate-gradient-methods.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/proposed/alg-nonlinear-conjugate-gradient-methods.md",
+      "concern_index": 0,
+      "digest_pointer": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-70-step5-context.json",
+        "pointer": "/concerns/0"
+      },
+      "admission_status": "research-only proposal; root may formally admit only at supported paused 5.1; original Luna keep retained",
+      "guard": {
+        "kind": "exact-byte-equality",
+        "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/alg-nonlinear-conjugate-gradient-methods.md",
+        "action": "Refuse application unless current canonical bytes equal archived preimage. Root owns binding hashes."
+      },
+      "verdict": "confirmed operational notation omission",
+      "focused_evidence": "At k=0 the only defined direction is d0=-g0, yet safeguard and FR selection read candidate. Bind candidate d0 explicitly. If nonzero g0 and sigma>1 or C<1, PR+ can legitimately flag a first-iteration restart; it selects the same -g0 without any need for beta_-1. For k>=1 reset beta_(k-1)=0 as before. Stationary g0 exits before division, K=0 returns last initial iterate with iteration-limit unless stationary, all later denominators stay nonzero, finite strong Wolfe failures retain statuses, and exact-SPD-quadratic mode retains its checked exact minimizer.",
+      "changed_interface": "Definition",
+      "consumer_reviews": [
+        {
+          "id": "lem-fr-descent-and-direction-growth-bound",
+          "relationship": "direct",
+          "source": "items/lem-fr-descent-and-direction-growth-bound.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/lem-fr-descent-and-direction-growth-bound.md",
+          "verdict": "compatible; no source edit needed",
+          "evidence": "Proof 1.1 uses d0=-g0 to get q0=1; later recurrence and induction use only k>=1 coefficients. Explicit initial candidate gives exactly this same direction, so both normalized descent and direction-growth estimates are unchanged."
+        },
+        {
+          "id": "lem-safeguarded-pr-plus-uniform-angle",
+          "relationship": "direct",
+          "source": "items/lem-safeguarded-pr-plus-uniform-angle.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/lem-safeguarded-pr-plus-uniform-angle.md",
+          "verdict": "compatible; no source edit needed",
+          "evidence": "Kept-candidate and reset branches in full proof depend only on the two safeguard tests and selected d=-g on restart. At k=0 candidate=-g; even for sigma>1 or C<1, restart still selects -g and cosine one. Removing a beta_-1 assignment changes no direction or angle."
+        },
+        {
+          "id": "thm-nonlinear-cg-finite-budget-terminates",
+          "relationship": "direct",
+          "source": "items/thm-nonlinear-cg-finite-budget-terminates.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/thm-nonlinear-cg-finite-budget-terminates.md",
+          "verdict": "compatible; no source edit needed",
+          "evidence": "Full proof counts at most K finite iterations, K line searches and K+1 outer gradients. Explicit initial candidate and conditional coefficient reset add only finite assignments. K=0 and stationary exits remain unchanged; no budget/status change."
+        },
+        {
+          "id": "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg",
+          "relationship": "direct",
+          "source": "items/thm-fr-and-raw-prplus-exact-line-search-match-linear-cg.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/thm-fr-and-raw-prplus-exact-line-search-match-linear-cg.md",
+          "verdict": "compatible; no source edit needed",
+          "evidence": "Proof 1.1 already has d0=-g0=r0=p0. Joint induction uses coefficients only at k>=1, exact minimizer and strong Wolfe verification unchanged. Raw PR+ equivalence and safeguarded no-restart restriction are preserved."
+        },
+        {
+          "id": "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe",
+          "relationship": "direct and via FR lemma",
+          "source": "items/thm-fletcher-reeves-liminf-gradient-under-strong-wolfe.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/thm-fletcher-reeves-liminf-gradient-under-strong-wolfe.md",
+          "verdict": "compatible; no source edit needed",
+          "evidence": "Infinite recurrence is explicitly d0=-g0 with successful strong Wolfe updates and nonzero gradients; proof uses unchanged FR bounds and harmonic contradiction. Neither finite-K execution nor beta_-1 appears."
+        },
+        {
+          "id": "thm-safeguarded-pr-plus-gradient-norms-converge",
+          "relationship": "direct and via uniform-angle lemma",
+          "source": "items/thm-safeguarded-pr-plus-gradient-norms-converge.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/thm-safeguarded-pr-plus-gradient-norms-converge.md",
+          "verdict": "compatible; no source edit needed",
+          "evidence": "Statement is an infinite successful safeguarded recurrence with d0=-g0; two-branch uniform-angle bound still holds at all indices, including first-iteration restart. Full proof transfers this to the unchanged Wolfe uniform-angle corollary. No finite-budget convergence assertion is introduced."
+        },
+        {
+          "id": "cex-raw-prplus-loses-descent-and-safeguard-restarts",
+          "relationship": "direct",
+          "source": "items/cex-raw-prplus-loses-descent-and-safeguard-restarts.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/cex-raw-prplus-loses-descent-and-safeguard-restarts.md",
+          "verdict": "compatible; no source edit needed",
+          "evidence": "Initial g0=(1,0), candidate=-g0, sigma=1/2,C=2 keeps it. Strong-Wolfe update and beta0=57/100 form the unchanged k=1 candidate, whose derivative 29/500>0 triggers restart. Reset beta0 remains assigned at k=1; no new beta_-1 dependence."
+        },
+        {
+          "id": "ex-rosenbrock-fr-prplus-trace",
+          "relationship": "direct",
+          "source": "items/ex-rosenbrock-fr-prplus-trace.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/ex-rosenbrock-fr-prplus-trace.md",
+          "verdict": "compatible; no source edit needed",
+          "evidence": "At k=0 candidate=-g0 and sigma=1/2,C=2 keep it. Dyadic search accepts 1/1024 with unchanged direction; distinct FR/PR+ beta0 values and ascent/restart concern k=1 only. Both actual dyadic trace and separate hypothetical t=1/1000 case remain intact."
+        },
+        {
+          "id": "ex-spd-quadratic-nonlinear-cg-matches-linear-cg",
+          "relationship": "indirect via exact-line-search equivalence",
+          "source": "items/ex-spd-quadratic-nonlinear-cg-matches-linear-cg.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/ex-spd-quadratic-nonlinear-cg-matches-linear-cg.md",
+          "verdict": "compatible; no source edit needed",
+          "evidence": "The displayed d0=(1,1), first step 2/3, beta0=1/9, d1=(4/9,-2/9) and step 3/4 use unchanged directions. Initial candidate is explicitly the direction already used. Full proof reaches (1,1/2) with zero residual as before."
+        }
+      ],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-70.proof-contracts.json",
+          "pointer": "/contracts/lem-fr-descent-and-direction-growth-bound/citations/0/quote",
+          "action": "After formal admission mirror the exact changed supplier section; retain original Step-4 context/digest and kept judgment as history."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-70.proof-contracts.json",
+          "pointer": "/contracts/lem-safeguarded-pr-plus-uniform-angle/citations/0/quote",
+          "action": "After formal admission mirror the exact changed supplier section; retain original Step-4 context/digest and kept judgment as history."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-70.proof-contracts.json",
+          "pointer": "/contracts/thm-nonlinear-cg-finite-budget-terminates/citations/0/quote",
+          "action": "After formal admission mirror the exact changed supplier section; retain original Step-4 context/digest and kept judgment as history."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-70.proof-contracts.json",
+          "pointer": "/contracts/thm-nonlinear-cg-finite-budget-terminates/citations/4/quote",
+          "action": "After formal admission mirror the exact changed supplier section; retain original Step-4 context/digest and kept judgment as history."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-70.proof-contracts.json",
+          "pointer": "/contracts/thm-nonlinear-cg-finite-budget-terminates/citations/5/quote",
+          "action": "After formal admission mirror the exact changed supplier section; retain original Step-4 context/digest and kept judgment as history."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-70.proof-contracts.json",
+          "pointer": "/contracts/thm-fr-and-raw-prplus-exact-line-search-match-linear-cg/citations/0/quote",
+          "action": "After formal admission mirror the exact changed supplier section; retain original Step-4 context/digest and kept judgment as history."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-70.proof-contracts.json",
+          "pointer": "/contracts/thm-fr-and-raw-prplus-exact-line-search-match-linear-cg/citations/1/quote",
+          "action": "After formal admission mirror the exact changed supplier section; retain original Step-4 context/digest and kept judgment as history."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-70.proof-contracts.json",
+          "pointer": "/contracts/ex-rosenbrock-fr-prplus-trace/citations/0/quote",
+          "action": "After formal admission mirror the exact changed supplier section; retain original Step-4 context/digest and kept judgment as history."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-70.proof-contracts.json",
+          "pointer": "/contracts/cex-raw-prplus-loses-descent-and-safeguard-restarts/citations/0/quote",
+          "action": "After formal admission mirror the exact changed supplier section; retain original Step-4 context/digest and kept judgment as history."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-70.proof-contracts.json",
+          "pointer": "/contracts/cex-raw-prplus-loses-descent-and-safeguard-restarts/citations/1/quote",
+          "action": "After formal admission mirror the exact changed supplier section; retain original Step-4 context/digest and kept judgment as history."
+        }
+      ]
+    }
+  ],
+  "version": 1,
+  "reviewer": "ROOT/kept_low_stochastic",
+  "no_canonical_writes": true,
+  "no_hashes_checks_tests_gates_native_dispatch_or_commits": true,
+  "consumer_discovery": {
+    "method": "Full current items/*.md YAML deps/justified_by inventory, reverse transitive expansion; direct textual reference search supplements graph. All resulting consumer sources and relevant A/B pages read. This is research discovery, not a native check/gate certificate.",
+    "alias_note": "All three changed interfaces have no declared aliases.",
+    "closures": {
+      "cor-constant-step-bdf2-order-two-with-consistent-start": [
+        "alg-implicit-stiff-time-stepper-with-consistent-starts",
+        "ex-robertson-reaction-system-newton-work"
+      ],
+      "alg-principal-matrix-logarithm-and-square-root": [
+        "thm-matrix-function-finite-algorithms-termination-and-budget-status",
+        "ex-rotation-logarithm-branch-cut"
+      ],
+      "alg-nonlinear-conjugate-gradient-methods": [
+        "lem-fr-descent-and-direction-growth-bound",
+        "lem-safeguarded-pr-plus-uniform-angle",
+        "thm-nonlinear-cg-finite-budget-terminates",
+        "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg",
+        "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe",
+        "thm-safeguarded-pr-plus-gradient-norms-converge",
+        "cex-raw-prplus-loses-descent-and-safeguard-restarts",
+        "ex-rosenbrock-fr-prplus-trace",
+        "ex-spd-quadratic-nonlinear-cg-matches-linear-cg"
+      ]
+    }
+  },
+  "page_reviews": [
+    {
+      "path": "library/numerical-differential-equations-and-stochastic-dynamics/implicit-stiff-time-stepping-and-algebraic-error.md",
+      "verdict": "Full page read; prose remains compatible and no edit needed."
+    },
+    {
+      "path": "library/numerical-differential-equations-and-stochastic-dynamics/implicit-stiff-time-stepping-and-algebraic-error-examples.md",
+      "verdict": "Full page read; prose remains compatible and no edit needed."
+    },
+    {
+      "path": "library/numerical-linear-algebra-and-approximation/matrix-functions-and-scaling-squaring.md",
+      "verdict": "Full page read; prose remains compatible and no edit needed."
+    },
+    {
+      "path": "library/numerical-linear-algebra-and-approximation/matrix-functions-and-scaling-squaring-examples.md",
+      "verdict": "Full page read; prose remains compatible and no edit needed."
+    },
+    {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/nonlinear-conjugate-gradient-methods.md",
+      "verdict": "Full page read; prose remains compatible and no edit needed."
+    },
+    {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/nonlinear-conjugate-gradient-methods-examples.md",
+      "verdict": "Full page read; prose remains compatible and no edit needed."
+    }
+  ],
+  "new_property_result": "None needed. All changed algorithms retain procedural-only Definitions; branch wrapper termination and nonlinear-CG properties already have separate proved result carriers. No result or creation coverage is fabricated.",
+  "history_policy": "Distinct first-cycle late findings only. The prior four-case packet is unchanged. Original Luna keep=true rows and native digest pointers/concern_index remain intact; no canonical/source/metadata/runtime/ledger edits, hashes, tests, checks, gates, native dispatch or commits. Root owns binding hashes, supported paused5.1 admission and recertification."
+}

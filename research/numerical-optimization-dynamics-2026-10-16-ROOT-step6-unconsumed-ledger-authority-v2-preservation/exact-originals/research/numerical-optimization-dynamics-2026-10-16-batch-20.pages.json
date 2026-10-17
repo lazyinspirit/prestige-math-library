@@ -1,0 +1,384 @@
+[
+  {
+    "order": 2324,
+    "id": "composite-quadrature-rules",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Composite quadrature rules",
+    "companion": "composite-quadrature-rules-examples",
+    "requires": [
+      "properties-of-the-integral-and-the-working-ftc",
+      "the-riemann-integral-in-rn-and-jordan-content",
+      "polynomial-interpolation-and-remainder",
+      "laplace-approximation-and-marginal-integration"
+    ],
+    "items": [
+      {
+        "id": "alg-composite-midpoint-rule",
+        "kind": "algorithm",
+        "title": "Composite midpoint rule on a uniform grid",
+        "statement": "Input real endpoints $a,b$, an integer $n$, and a function $f$. If $a\\ge b$\nor $n<1$, return invalid-grid without evaluating $f$. For the remaining inputs,\nrequire a real-valued function $f:[a,b]\\to\\mathbb R$ evaluable at every point\nof $[a,b]$. Put $h=(b-a)/n$ and $m_j=a+(j+\\tfrac12)h$ for $0\\le j<n$. The\ncomposite midpoint rule returns\n\n$$Q_M(f;a,b,n):=h\\sum_{j<n} f(m_j).$$\n\nThe sum is the finite sum of [[def-finite-sum]]. The admissibility conditions\n$a<b$ and $n\\ge1$ ensure $h>0$ and all $m_j\\in(a+jh,a+(j+1)h)$. The rule is an\nexact-real formula; floating-point evaluation and summation error are separate\nfrom its quadrature error.",
+        "strategy": "A finite exact-real weighted sum; invalid intervals or panel counts return an explicit status.",
+        "deps": [
+          "def-finite-sum"
+        ],
+        "dependency_level": 0,
+        "local_order": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.1",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-composite-simpson-rule",
+        "kind": "algorithm",
+        "title": "Composite Simpson rule on an even uniform grid",
+        "statement": "Input real endpoints $a,b$, an integer $n$, and an evaluation function $f$.\nIf $a\\ge b$ or $n<2$, return invalid-grid without evaluating $f$. For the\nremaining inputs require $f:[a,b]\\to\\mathbb R$ to be evaluable at every\npoint of $[a,b]$. If $n$ is odd, the procedure returns\ninvalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
+        "strategy": "A finite exact-real weighted sum over n/2 two-panel blocks.",
+        "deps": [
+          "def-finite-sum"
+        ],
+        "dependency_level": 0,
+        "local_order": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.2",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-composite-midpoint-panel-error-kernel",
+        "kind": "lemma",
+        "title": "Midpoint panel error kernel and second-derivative bound",
+        "statement": "Let $a<b$, $m=(a+b)/2$, and $f\\in C^2([a,b])$ in the sense of\n[[def-higher-derivatives-and-smoothness]]. Define\n\n$$K(t)=\\begin{cases}\\frac12(t-a)^2,&a\\le t\\le m,\\\\\\frac12(b-t)^2,&m\\le t\\le b.\\end{cases}$$\n\nThen $K$ is nonnegative and continuous,\n\n$$\\int_a^b f(t)\\,dt-(b-a)f(m)=\\int_a^b K(t)f''(t)\\,dt,$$\n\nand, with $M_2:=\\max_{t\\in[a,b]}|f''(t)|$,\n\n$$\\left|\\int_a^b f(t)\\,dt-(b-a)f(m)\\right|\\le\\frac{(b-a)^3}{24}M_2.$$\n\nIn particular, if $f''\\ge0$ on $[a,b]$, the panel midpoint value does not\nexceed the integral.",
+        "strategy": "Apply integration by parts twice on the two half-panels, then use kernel positivity and its exact integral.",
+        "deps": [
+          "def-higher-derivatives-and-smoothness",
+          "thm-integration-by-parts",
+          "thm-additivity-over-subintervals",
+          "thm-linearity-of-the-integral",
+          "thm-monotonicity-of-the-integral",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-heine-borel-r",
+          "thm-extreme-value-r",
+          "thm-ftc-second-part",
+          "thm-algebra-of-continuous-functions",
+          "thm-chain-rule",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_level": 0,
+        "local_order": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.1",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-composite-midpoint-error-bound",
+        "kind": "theorem",
+        "title": "Composite midpoint error bound for a twice continuously differentiable function",
+        "statement": "Let $a<b$, let $n\\ge1$ be an integer, and put $h=(b-a)/n$. If\n$f\\in C^2([a,b])$, define $M_2=\\max_{x\\in[a,b]}|f''(x)|$. The composite\nmidpoint value $Q_M(f;a,b,n)$ of [[alg-composite-midpoint-rule]] satisfies\n\n$$\\left|\\int_a^b f(x)\\,dx-Q_M(f;a,b,n)\\right|\\le\\frac{(b-a)h^2}{24}M_2.$$\n\nThe integral is the Riemann integral. This is an exact-arithmetic quadrature\nbound; evaluation and summation roundoff are not included.",
+        "strategy": "Apply the local midpoint kernel estimate to every panel, use additivity, and sum the panel bounds.",
+        "deps": [
+          "alg-composite-midpoint-rule",
+          "lem-composite-midpoint-panel-error-kernel",
+          "thm-additivity-over-subintervals",
+          "lem-triangle-inequality-finite"
+        ],
+        "dependency_level": 1,
+        "local_order": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, Theorem 7.1",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-simpson-panel-peano-kernel",
+        "kind": "lemma",
+        "title": "Peano kernel identity for one Simpson panel",
+        "statement": "Let $a<b$, put $L=b-a$ and $m=(a+b)/2$, and let $f\\in C^4([a,b])$. Define\nthe one-block Simpson value and its kernel by\n\n$$S(f;a,b):=\\frac{L}{6}\\bigl(f(a)+4f(m)+f(b)\\bigr),\\qquad K_{a,b}(x):=\\begin{cases}\\frac{(x-a)^3(3(x-a)-2L)}{72},&a\\le x\\le m,\\\\\\frac{(b-x)^3(3(b-x)-2L)}{72},&m\\le x\\le b.\\end{cases}$$\n\nThen\n\n$$\\int_a^b f(x)\\,dx-S(f;a,b)=\\int_a^bK_{a,b}(x)f^{(4)}(x)\\,dx,$$\n\nand $K_{a,b}\\le0$ with\n$\\int_a^b|K_{a,b}(x)|\\,dx=L^5/2880$. The value $S(f;a,b)$ is the one-block\nspecialization of [[alg-composite-simpson-rule]].",
+        "strategy": "Integrate by parts four times on each half, compute the jump contribution at the midpoint, and integrate the kernel.",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "def-higher-derivatives-and-smoothness",
+          "thm-integration-by-parts",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-ftc-second-part",
+          "thm-algebra-of-continuous-functions",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-additivity-over-subintervals"
+        ],
+        "dependency_level": 1,
+        "local_order": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.2",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-composite-simpson-exact-through-degree-three",
+        "kind": "theorem",
+        "title": "Composite Simpson rule is exact through cubic degree",
+        "statement": "Let $a<b$, let $n\\ge2$ be an even integer, and let\n$p(x)=c_0+c_1x+c_2x^2+c_3x^3$ with real coefficients. Then\n\n$$\\int_a^b p(x)\\,dx=Q_S(p;a,b,n),$$\n\nwhere $Q_S$ is the composite Simpson value of\n[[alg-composite-simpson-rule]].",
+        "strategy": "The Peano kernel identity has zero remainder when the fourth derivative vanishes; sum over the two-panel blocks.",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "lem-simpson-panel-peano-kernel",
+          "thm-additivity-over-subintervals",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "def-higher-derivatives-and-smoothness",
+          "thm-algebra-of-continuous-functions"
+        ],
+        "dependency_level": 2,
+        "local_order": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.2",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-composite-simpson-error-bound",
+        "kind": "theorem",
+        "title": "Composite Simpson error bound for a four-times continuously differentiable function",
+        "statement": "Let $a<b$, let $n\\ge2$ be an even integer, and put $h=(b-a)/n$. If\n$f\\in C^4([a,b])$, set $M_4=\\max_{x\\in[a,b]}|f^{(4)}(x)|$. Then the value\n$Q_S(f;a,b,n)$ of [[alg-composite-simpson-rule]] satisfies\n\n$$\\left|\\int_a^b f(x)\\,dx-Q_S(f;a,b,n)\\right|\\le\\frac{(b-a)h^4}{180}M_4.$$\n\nThe integral is the Riemann integral. This is an exact-arithmetic quadrature\nbound; evaluation and summation roundoff are not included.",
+        "strategy": "Scale the one-panel Peano kernel to every two-panel block, add the block errors, and use the triangle inequality.",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "lem-simpson-panel-peano-kernel",
+          "thm-additivity-over-subintervals",
+          "lem-triangle-inequality-finite",
+          "def-higher-derivatives-and-smoothness",
+          "thm-heine-borel-r",
+          "thm-extreme-value-r",
+          "thm-monotonicity-of-the-integral",
+          "thm-linearity-of-the-integral"
+        ],
+        "dependency_level": 2,
+        "local_order": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.2",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2325,
+    "id": "composite-quadrature-rules-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Composite quadrature rules — Examples",
+    "companion": "composite-quadrature-rules",
+    "requires": [
+      "composite-quadrature-rules",
+      "convexity"
+    ],
+    "items": [
+      {
+        "id": "ex-convex-composite-midpoint-and-trapezoid-bracketing",
+        "kind": "example",
+        "title": "Convex data bracket the integral between composite midpoint and trapezoid values",
+        "statement": "Let $f:[a,b]\\to\\mathbb R$ be convex and Darboux integrable on $[a,b]$, with\n$a<b$, and let $n\\ge1$ be an integer. Then\n\n$$Q_M(f;a,b,n)\\le\\int_a^b f(x)\\,dx\\le T_n(f),$$\n\nwhere $Q_M$ is the composite midpoint value and $T_n(f)$ is the published\ncomposite trapezoidal value of [[def-composite-trapezoidal-rule]] on the same\ninterval and uniform grid. Darboux integrability is the explicit premise that\nmakes the displayed Riemann integral defined. The proof uses convexity directly\nfor both inequalities and assumes no differentiability.",
+        "strategy": "Reflect each panel to prove its midpoint lower bound from convexity, and integrate its endpoint chord for the upper bound.",
+        "deps": [
+          "alg-composite-midpoint-rule",
+          "def-composite-trapezoidal-rule",
+          "def-convex-concave-and-midpoint-convex-functions",
+          "thm-monotonicity-of-the-integral",
+          "thm-linearity-of-the-integral",
+          "thm-ftc-second-part",
+          "thm-additivity-over-subintervals",
+          "def-darboux-integral",
+          "thm-darboux-equals-riemann",
+          "def-darboux-sums",
+          "def-partition-and-refinement",
+          "lem-finite-sum-permutation-invariance",
+          "thm-algebra-of-continuous-functions",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_level": 1,
+        "local_order": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.1",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-quadratic-exact-for-composite-simpson",
+        "kind": "example",
+        "title": "Simpson rule integrates a quadratic exactly on one two-panel block",
+        "statement": "On $[0,2]$, the function $f(x)=x^2$ has exact integral $8/3$. With $n=2$,\n$h=1$, and the composite Simpson rule,\n\n$$Q_S(f;0,2,2)=\\frac13\\bigl(f(0)+4f(1)+f(2)\\bigr)=\\frac83.$$\n\nThis is the quadratic case of exactness through degree three.",
+        "strategy": "Evaluate the antiderivative and the three Simpson node values.",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "thm-composite-simpson-exact-through-degree-three",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable"
+        ],
+        "dependency_level": 3,
+        "local_order": 2,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.2",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-cubic-exact-for-composite-simpson",
+        "kind": "example",
+        "title": "Simpson rule integrates a cubic exactly on one two-panel block",
+        "statement": "On $[0,2]$, let $f(x)=x^3$. With $n=2$ and $h=1$, the Simpson value is\n\n$$Q_S(f;0,2,2)=\\frac13\\bigl(f(0)+4f(1)+f(2)\\bigr)=4,$$\n\nwhich equals the exact integral $\\int_0^2x^3\\,dx=4$. The full two-panel block\nis exact because the rule annihilates the Peano remainder of every cubic.",
+        "strategy": "Evaluate the antiderivative and the three Simpson node values.",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "thm-composite-simpson-exact-through-degree-three",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable"
+        ],
+        "dependency_level": 3,
+        "local_order": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.2",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,31 @@
+--- before/reapply.mjs
++++ proposed/reapply.mjs
+@@ -63,7 +63,19 @@
+  assert(/^verification:\n(?:[ \t]+[^\n]*\n)*? {2}(audited|verified):/m.test(beforeText),`${row.id}: archived preimage lacks actual prior audit.`);
+  assert(itemHashGuard(beforeText)!==itemHashGuard(firstText),`${row.id}: no substantive correction.`);
+  const at=beforeText.indexOf('\n## Proof\n'), bt=firstText.indexOf('\n## Proof\n');
+- assert(at>=0 && bt>=0 && beforeText.slice(0,at)===firstText.slice(0,bt),`${row.id}: repair is not proof-only with identical pre-Proof bytes.`);
++ assert(at>=0 && bt>=0,`${row.id}: missing Proof section.`);
++ const beforePrefix=beforeText.slice(0,at), firstPrefix=firstText.slice(0,bt);
++ if(row.id==='thm-baire-category-for-complete-metric-spaces'){
++  // The approved Baire proof also refines exactly its existing supporting L2 fact.
++  // This is not permission to change its Statement, frontmatter, or other facts.
++  const originalL2='[L2] Under the assumed Axiom of Dependent Choice, a recursively specified sequence of balls is permitted ([[def-dependent-choice]]).';
++  const approvedL2='[L2] Under the assumed Axiom of Dependent Choice, a serial sequence of states recording each ball together with its centre and positive radius is permitted ([[def-dependent-choice]]).';
++  assert(beforePrefix.split(originalL2).length===2 && firstPrefix.split(approvedL2).length===2
++   && beforePrefix.replace(originalL2,approvedL2)===firstPrefix,
++   `${row.id}: pre-Proof difference exceeds the one approved L2 refinement.`);
++ }else{
++  assert(beforePrefix===firstPrefix,`${row.id}: repair is not proof-only with identical pre-Proof bytes.`);
++ }
+  assert(typeof row.correction==='string' && row.correction.trim(),`${row.id}: concrete correction required.`);
+  const completion=read(row.completion_file);
+  assert(sha(completion)===row.expected_completion_raw_sha256,`${row.id}: completion changed.`);
+@@ -164,6 +176,7 @@
+    honest_reapplication_journal:`${output}/journal.jsonl`,actual_native_claim:claim,
+    final_proof_layout:`${output}/${row.id}.proof-layout.json`};
+   save(`${row.id}.repair.json`,JSON.stringify(receipt,null,2)+'\n');
++  same(row.item,Buffer.from(final)); // Re-read actual final bytes, not only the in-memory candidate.
+   const policy=recordedPublishedRepair(root,row.id,final,receiptPath);
+   save(`${row.id}.policy-result.json`,JSON.stringify(policy,null,2)+'\n');
+   assert(policy.ok,`${row.id}: local policy did not validate: ${policy.reason}`);

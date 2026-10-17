@@ -1,0 +1,1 @@
+Register three genuinely validated downstream routes after native post20 existed. Preserve all three failed native mechanical split attempts and successful original reader. Request scoped native unit20 retry after actual routing repair; no observation or native success fabricated.

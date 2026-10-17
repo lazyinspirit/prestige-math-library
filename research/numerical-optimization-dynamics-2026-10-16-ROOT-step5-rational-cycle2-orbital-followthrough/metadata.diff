@@ -1,0 +1,255 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-63.pages.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-63.pages.json
+@@ -381,6 +381,8 @@
+           "thm-poincare-map-stability-implies-orbital-stability",
+           "lem-autonomous-periodic-orbit-has-neutral-floquet-multiplier",
+           "lem-phase-bordered-shooting-jacobian-invertibility",
++          "alg-validated-periodic-orbit-corrector",
++          "lem-rational-box-affine-chart-and-dyadic-enclosure",
+           "alg-krawczyk-root-certification",
+           "lem-complex-infinity-neumann-inverse-norm-bound",
+           "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+@@ -400,7 +402,7 @@
+     "id": "periodic-orbit-shooting-collocation-and-floquet-error-examples",
+     "kind": "B",
+     "category": "numerical-differential-equations-and-stochastic-dynamics",
+-    "title": "Periodic orbit shooting collocation and floquet error \u2014 Examples",
++    "title": "Periodic orbit shooting collocation and floquet error — Examples",
+     "companion": "periodic-orbit-shooting-collocation-and-floquet-error",
+     "requires": [
+       "periodic-orbit-shooting-collocation-and-floquet-error"
+@@ -453,4 +455,4 @@
+       }
+     ]
+   }
+-]
++]
+--- research/numerical-optimization-dynamics-2026-10-16-batch-63.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-63.proof-contracts.json
+@@ -175,7 +175,7 @@
+           "fact": "F2",
+           "source": "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+           "source_section": "Statement",
+-          "quote": "Let U\u2282R^n be open and Y:U\u2192R^n be C\u00b9. There is a unique maximal flow \u03a6 on an open domain\nD\u2282R\u00d7U containing {0}\u00d7U, and \u03a6 is jointly C\u00b9. Its time slices are local C\u00b9\ndiffeomorphisms with inverse \u03a6_{\u2212t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V\u2032=DY(\\Phi)V$, V(0)=I. Each regular point has a C\u00b9 flow box. If Y\nis C\u00b2, \u03a6 and those flow boxes are C\u00b2; the second state variation W satisfies\n$W\u2032=DY(\\Phi)W+D\u00b2Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C\u00b9 field are\nC\u00b2 in time. A trajectory remaining in a compact K\u2282\u2282U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
++          "quote": "Let U⊂R^n be open and Y:U→R^n be C¹. There is a unique maximal flow Φ on an open domain\nD⊂R×U containing {0}×U, and Φ is jointly C¹. Its time slices are local C¹\ndiffeomorphisms with inverse Φ_{−t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V′=DY(\\Phi)V$, V(0)=I. Each regular point has a C¹ flow box. If Y\nis C², Φ and those flow boxes are C²; the second state variation W satisfies\n$W′=DY(\\Phi)W+D²Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C¹ field are\nC² in time. A trajectory remaining in a compact K⊂⊂U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
+           "uses": [
+             "1.1",
+             "2.1"
+@@ -354,7 +354,7 @@
+           "fact": "F6",
+           "source": "thm-ftc-second-part",
+           "source_section": "Statement",
+-          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable \u2014 then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) \u2014 and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
++          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+           "uses": [
+             "1.1",
+             "2.1",
+@@ -544,7 +544,7 @@
+           "fact": "F3",
+           "source": "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+           "source_section": "Statement",
+-          "quote": "Let U\u2282R^n be open and Y:U\u2192R^n be C\u00b9. There is a unique maximal flow \u03a6 on an open domain\nD\u2282R\u00d7U containing {0}\u00d7U, and \u03a6 is jointly C\u00b9. Its time slices are local C\u00b9\ndiffeomorphisms with inverse \u03a6_{\u2212t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V\u2032=DY(\\Phi)V$, V(0)=I. Each regular point has a C\u00b9 flow box. If Y\nis C\u00b2, \u03a6 and those flow boxes are C\u00b2; the second state variation W satisfies\n$W\u2032=DY(\\Phi)W+D\u00b2Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C\u00b9 field are\nC\u00b2 in time. A trajectory remaining in a compact K\u2282\u2282U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
++          "quote": "Let U⊂R^n be open and Y:U→R^n be C¹. There is a unique maximal flow Φ on an open domain\nD⊂R×U containing {0}×U, and Φ is jointly C¹. Its time slices are local C¹\ndiffeomorphisms with inverse Φ_{−t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V′=DY(\\Phi)V$, V(0)=I. Each regular point has a C¹ flow box. If Y\nis C², Φ and those flow boxes are C²; the second state variation W satisfies\n$W′=DY(\\Phi)W+D²Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C¹ field are\nC² in time. A trajectory remaining in a compact K⊂⊂U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
+           "uses": [
+             "1.1",
+             "2.1",
+@@ -565,7 +565,7 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "Suppose $G(x,\\theta)=0$. Set $u(s)=(\\phi_{\\theta s}(x),\\theta)$. By [F3] and [F4], $u'(s)=(\\theta f(\\phi_{\\theta s}(x)),0)=\\widetilde f(u(s))$. Its endpoint state has the same $x$ component as its initial state, and its initial phase residual is $\\psi(x)=0$, so [F1]\u2013[F2] make it an augmented BVP solution.",
++          "claim": "Suppose $G(x,\\theta)=0$. Set $u(s)=(\\phi_{\\theta s}(x),\\theta)$. By [F3] and [F4], $u'(s)=(\\theta f(\\phi_{\\theta s}(x)),0)=\\widetilde f(u(s))$. Its endpoint state has the same $x$ component as its initial state, and its initial phase residual is $\\psi(x)=0$, so [F1]–[F2] make it an augmented BVP solution.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+@@ -700,7 +700,7 @@
+           "fact": "F4",
+           "source": "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+           "source_section": "Statement",
+-          "quote": "Let U\u2282R^n be open and Y:U\u2192R^n be C\u00b9. There is a unique maximal flow \u03a6 on an open domain\nD\u2282R\u00d7U containing {0}\u00d7U, and \u03a6 is jointly C\u00b9. Its time slices are local C\u00b9\ndiffeomorphisms with inverse \u03a6_{\u2212t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V\u2032=DY(\\Phi)V$, V(0)=I. Each regular point has a C\u00b9 flow box. If Y\nis C\u00b2, \u03a6 and those flow boxes are C\u00b2; the second state variation W satisfies\n$W\u2032=DY(\\Phi)W+D\u00b2Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C\u00b9 field are\nC\u00b2 in time. A trajectory remaining in a compact K\u2282\u2282U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
++          "quote": "Let U⊂R^n be open and Y:U→R^n be C¹. There is a unique maximal flow Φ on an open domain\nD⊂R×U containing {0}×U, and Φ is jointly C¹. Its time slices are local C¹\ndiffeomorphisms with inverse Φ_{−t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V′=DY(\\Phi)V$, V(0)=I. Each regular point has a C¹ flow box. If Y\nis C², Φ and those flow boxes are C²; the second state variation W satisfies\n$W′=DY(\\Phi)W+D²Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C¹ field are\nC² in time. A trajectory remaining in a compact K⊂⊂U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
+           "uses": [
+             "4.1"
+           ]
+@@ -709,7 +709,7 @@
+           "fact": "F5",
+           "source": "thm-ftc-second-part",
+           "source_section": "Statement",
+-          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable \u2014 then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) \u2014 and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
++          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+           "uses": [
+             "1.1",
+             "2.1"
+@@ -1081,7 +1081,7 @@
+           "fact": "F5",
+           "source": "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+           "source_section": "Statement",
+-          "quote": "Let U\u2282R^n be open and Y:U\u2192R^n be C\u00b9. There is a unique maximal flow \u03a6 on an open domain\nD\u2282R\u00d7U containing {0}\u00d7U, and \u03a6 is jointly C\u00b9. Its time slices are local C\u00b9\ndiffeomorphisms with inverse \u03a6_{\u2212t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V\u2032=DY(\\Phi)V$, V(0)=I. Each regular point has a C\u00b9 flow box. If Y\nis C\u00b2, \u03a6 and those flow boxes are C\u00b2; the second state variation W satisfies\n$W\u2032=DY(\\Phi)W+D\u00b2Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C\u00b9 field are\nC\u00b2 in time. A trajectory remaining in a compact K\u2282\u2282U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
++          "quote": "Let U⊂R^n be open and Y:U→R^n be C¹. There is a unique maximal flow Φ on an open domain\nD⊂R×U containing {0}×U, and Φ is jointly C¹. Its time slices are local C¹\ndiffeomorphisms with inverse Φ_{−t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V′=DY(\\Phi)V$, V(0)=I. Each regular point has a C¹ flow box. If Y\nis C², Φ and those flow boxes are C²; the second state variation W satisfies\n$W′=DY(\\Phi)W+D²Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C¹ field are\nC² in time. A trajectory remaining in a compact K⊂⊂U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
+           "uses": [
+             "1.1"
+           ]
+@@ -1144,7 +1144,7 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "Steps 2.1\u20132.2 prove both directions of the invertibility criterion.",
++          "claim": "Steps 2.1–2.2 prove both directions of the invertibility criterion.",
+           "step": "3.1",
+           "inputs": [
+             "step 2.1",
+@@ -1261,7 +1261,7 @@
+           "fact": "F5",
+           "source": "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+           "source_section": "Statement",
+-          "quote": "Let U\u2282R^n be open and Y:U\u2192R^n be C\u00b9. There is a unique maximal flow \u03a6 on an open domain\nD\u2282R\u00d7U containing {0}\u00d7U, and \u03a6 is jointly C\u00b9. Its time slices are local C\u00b9\ndiffeomorphisms with inverse \u03a6_{\u2212t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V\u2032=DY(\\Phi)V$, V(0)=I. Each regular point has a C\u00b9 flow box. If Y\nis C\u00b2, \u03a6 and those flow boxes are C\u00b2; the second state variation W satisfies\n$W\u2032=DY(\\Phi)W+D\u00b2Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C\u00b9 field are\nC\u00b2 in time. A trajectory remaining in a compact K\u2282\u2282U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
++          "quote": "Let U⊂R^n be open and Y:U→R^n be C¹. There is a unique maximal flow Φ on an open domain\nD⊂R×U containing {0}×U, and Φ is jointly C¹. Its time slices are local C¹\ndiffeomorphisms with inverse Φ_{−t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V′=DY(\\Phi)V$, V(0)=I. Each regular point has a C¹ flow box. If Y\nis C², Φ and those flow boxes are C²; the second state variation W satisfies\n$W′=DY(\\Phi)W+D²Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C¹ field are\nC² in time. A trajectory remaining in a compact K⊂⊂U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
+           "uses": [
+             "2.1"
+           ]
+@@ -1270,7 +1270,7 @@
+           "fact": "F6",
+           "source": "thm-ftc-second-part",
+           "source_section": "Statement",
+-          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable \u2014 then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) \u2014 and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
++          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+           "uses": [
+             "1.1",
+             "2.2"
+@@ -1355,7 +1355,7 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "The boundary condition for this solution is $J\\xi+B_2p(1)=q$ by step 2.1. Thus its unique initial value is $\\xi=J^{-1}(q-B_2p(1))$. Writing $D=\\|(g,q)\\|_Z=\\max(\\|g\\|_\\infty,\\|q\\|_2)$ gives $\\|\\xi\\|_2\\le K_J(1+\\|B_2\\|_2E)D$ and, by steps 1.1\u20132.2, $\\|v\\|_\\infty\\le[EK_J(1+\\|B_2\\|_2E)+E]D$.",
++          "claim": "The boundary condition for this solution is $J\\xi+B_2p(1)=q$ by step 2.1. Thus its unique initial value is $\\xi=J^{-1}(q-B_2p(1))$. Writing $D=\\|(g,q)\\|_Z=\\max(\\|g\\|_\\infty,\\|q\\|_2)$ gives $\\|\\xi\\|_2\\le K_J(1+\\|B_2\\|_2E)D$ and, by steps 1.1–2.2, $\\|v\\|_\\infty\\le[EK_J(1+\\|B_2\\|_2E)+E]D$.",
+           "step": "3.1",
+           "inputs": [
+             "F1",
+@@ -1368,7 +1368,7 @@
+         },
+         {
+           "id": "step-4-1",
+-          "claim": "Since $v'=Av+g$, $\\|v'\\|_\\infty\\le a_0\\|v\\|_\\infty+D$. The definition of the $X$ norm now gives $\\|v\\|_X\\le K_{\\mathcal L}D$. Steps 2.1\u20132.2 construct a solution for every $(g,q)$; any solution is determined by $\\xi$ and the invertible matrix $J$, so it is unique. Hence $\\mathcal L$ is bijective with the stated inverse bound.",
++          "claim": "Since $v'=Av+g$, $\\|v'\\|_\\infty\\le a_0\\|v\\|_\\infty+D$. The definition of the $X$ norm now gives $\\|v\\|_X\\le K_{\\mathcal L}D$. Steps 2.1–2.2 construct a solution for every $(g,q)$; any solution is determined by $\\xi$ and the invertible matrix $J$, so it is unique. Hence $\\mathcal L$ is bijective with the stated inverse bound.",
+           "step": "4.1",
+           "inputs": [
+             "F1",
+@@ -1543,7 +1543,7 @@
+           "fact": "F7",
+           "source": "thm-ftc-second-part",
+           "source_section": "Statement",
+-          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable \u2014 then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) \u2014 and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
++          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+           "uses": [
+             "1.1",
+             "2.1",
+@@ -2164,7 +2164,7 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "For each fixed $M$, put $p_M(z)=\\det(zI-M)$. The boundary is in the resolvent by [F1], so $p_M$ is nonzero on $\\Gamma$. By [F2] with $A=zI-M$ and direction $I$, $p_M'(z)/p_M(z)=\\operatorname{tr}(zI-M)^{-1}$. Facts [F3]\u2013[F4] therefore identify $(2\\pi i)^{-1}\\int_\\Gamma\\operatorname{tr}(zI-M)^{-1}dz$ with the number of eigenvalues inside $P$, counted with algebraic multiplicity; it is an integer from $0$ to $n$.",
++          "claim": "For each fixed $M$, put $p_M(z)=\\det(zI-M)$. The boundary is in the resolvent by [F1], so $p_M$ is nonzero on $\\Gamma$. By [F2] with $A=zI-M$ and direction $I$, $p_M'(z)/p_M(z)=\\operatorname{tr}(zI-M)^{-1}$. Facts [F3]–[F4] therefore identify $(2\\pi i)^{-1}\\int_\\Gamma\\operatorname{tr}(zI-M)^{-1}dz$ with the number of eigenvalues inside $P$, counted with algebraic multiplicity; it is an integer from $0$ to $n$.",
+           "step": "3.1",
+           "inputs": [
+             "F1",
+@@ -2190,7 +2190,7 @@
+         {
+           "case": "empty",
+           "status": "checked",
+-          "evidence": "The Statement explicitly requires a nonempty matrix family. Step 1.1 fixes an arbitrary member M, and step 4.1 concludes simultaneously for every member. The finite polygon edges and N midpoint cells used in steps 1.1\u20132.1 come from a successful certifier with positive N and a simple polygon, not an empty aggregate."
++          "evidence": "The Statement explicitly requires a nonempty matrix family. Step 1.1 fixes an arbitrary member M, and step 4.1 concludes simultaneously for every member. The finite polygon edges and N midpoint cells used in steps 1.1–2.1 come from a successful certifier with positive N and a simple polygon, not an empty aggregate."
+         },
+         {
+           "case": "zero",
+@@ -2200,7 +2200,7 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "The algorithm Definition admits n=1 and positive subdivision/series budgets N=1 and K_pi=1, although a small budget need not certify. For a singleton matrix family, proof steps 1.1\u20132.1 still bound its scalar resolvent integral; steps 3.1\u20134.1 then certify c=0 or c=1 if the final tests succeed. No assumption of two state coordinates or a nonconstant orbit is used."
++          "evidence": "The algorithm Definition admits n=1 and positive subdivision/series budgets N=1 and K_pi=1, although a small budget need not certify. For a singleton matrix family, proof steps 1.1–2.1 still bound its scalar resolvent integral; steps 3.1–4.1 then certify c=0 or c=1 if the final tests succeed. No assumption of two state coordinates or a nonconstant orbit is used."
+         },
+         {
+           "case": "degenerate",
+@@ -2220,7 +2220,7 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The Statement is the soundness implication from an actual certified-count(c) return to a universal algebraic-multiplicity count. Proof steps 3.1\u20134.1 identify and isolate that count; there is no biconditional on matrix families or contour certificates."
++          "reason": "The Statement is the soundness implication from an actual certified-count(c) return to a universal algebraic-multiplicity count. Proof steps 3.1–4.1 identify and isolate that count; there is no biconditional on matrix families or contour certificates."
+         },
+         {
+           "case": "iff-reverse",
+@@ -2429,7 +2429,7 @@
+           "fact": "F6",
+           "source": "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+           "source_section": "Statement",
+-          "quote": "Let U\u2282R^n be open and Y:U\u2192R^n be C\u00b9. There is a unique maximal flow \u03a6 on an open domain\nD\u2282R\u00d7U containing {0}\u00d7U, and \u03a6 is jointly C\u00b9. Its time slices are local C\u00b9\ndiffeomorphisms with inverse \u03a6_{\u2212t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V\u2032=DY(\\Phi)V$, V(0)=I. Each regular point has a C\u00b9 flow box. If Y\nis C\u00b2, \u03a6 and those flow boxes are C\u00b2; the second state variation W satisfies\n$W\u2032=DY(\\Phi)W+D\u00b2Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C\u00b9 field are\nC\u00b2 in time. A trajectory remaining in a compact K\u2282\u2282U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
++          "quote": "Let U⊂R^n be open and Y:U→R^n be C¹. There is a unique maximal flow Φ on an open domain\nD⊂R×U containing {0}×U, and Φ is jointly C¹. Its time slices are local C¹\ndiffeomorphisms with inverse Φ_{−t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V′=DY(\\Phi)V$, V(0)=I. Each regular point has a C¹ flow box. If Y\nis C², Φ and those flow boxes are C²; the second state variation W satisfies\n$W′=DY(\\Phi)W+D²Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C¹ field are\nC² in time. A trajectory remaining in a compact K⊂⊂U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
+           "uses": [
+             "2.1",
+             "3.1",
+@@ -2522,12 +2522,30 @@
+           "uses": [
+             "1.1"
+           ]
++        },
++        {
++          "fact": "F7",
++          "source": "alg-validated-periodic-orbit-corrector",
++          "source_section": "Definition",
++          "quote": "For a state dimension $d\\\\ge1$, the vector-field input is a $C^2$ map $f:U\\\\to\\\\mathbb R^d$ in fixed-parameter mode or a $C^2$ one-parameter family $f:U\\\\times V\\\\to\\\\mathbb R^d$ with scalar parameter $\\\\mu\\\\in V\\\\subset\\\\mathbb R$ in section mode, where $U\\\\subset\\\\mathbb R^d$ and $V\\\\subset\\\\mathbb R$ are open. Also supply an affine phase with nonzero rational covector and rational reference point, a compact convex validation tube, and the sound range provider of [[def-verified-flow-variational-range-oracle]]. Supply positive finite step counts for each requested validated jet run, finite arithmetic and candidate-update budgets, a rational initial candidate, a dyadic point preconditioner $C$, a rational inverse witness $W$, a positive rational minimum box width $\\\\eta$, and a finite Krawczyk box budget. In fixed-parameter mode the rational candidate box is $Z=X\\\\times\\\\Theta\\\\subset U\\\\times(0,\\\\infty)$ with the parameter held fixed, so both the variable $z=(x,\\\\theta)$ and residual $F=G$ have dimension $d+1$. In section mode require exactly one scalar continuation parameter $\\\\mu\\\\in\\\\mathbb R$ (the $p=1$ case of [[def-validated-periodic-shooting-jet-enclosure]]), take $Z=X\\\\times\\\\Theta\\\\times\\\\Lambda$ with rational $\\\\Lambda\\\\subset V\\\\subset\\\\mathbb R$, and set $z=(x,\\\\theta,\\\\mu)$. Then $G$ has dimension $d+1$, the affine section adds one scalar equation, and both $z$ and $F$ have dimension $d+2$. Independent validation retains every admitted rational endpoint of $Z$ and uses the exact affine dyadic unit-box chart below; non-dyadic physical endpoints are not a failure condition. Supply an open convex shooting domain containing $Z$ on which the exact flow exists through every admitted positive period, so $F$ is $C^1$ there. All rational point, endpoint, interval and matrix operations below are exact or return an explicit arithmetic-failure status within the supplied cap.\\n\\nWrite $F=G$ in fixed-parameter mode. In **section mode**, used for continuation, require one scalar continuation parameter $\\\\mu\\\\in\\\\mathbb R$ and write $z=(x,\\\\theta,\\\\mu)$ and $F(z)=(G(x,\\\\theta,\\\\mu),\\\\tau^\\\\top(z-z_p))$, where $G$ is the parameterized map in [[def-validated-periodic-shooting-jet-enclosure]], $\\\\tau$ is a supplied unit normal, and $z_p$ is a supplied predictor. Supply certified rational enclosures for the coefficients and constant term of this affine row at every requested accuracy; if they are rational use their exact values, and otherwise use outward interval arithmetic. If a finite row enclosure cannot be obtained within the arithmetic cap, return inconclusive. For the one-parameter field use the static-parameter augmentation $g(x,\\\\mu)=(f(x,\\\\mu),0)$ in that definition and supply its sound augmented range provider and tube. For every section-mode jet query, first reorder its input $(x,\\\\theta,\\\\mu)$ to $(q,\\\\theta)=(x,\\\\mu,\\\\theta)$. Reorder the returned Jacobian columns from $(x,\\\\mu,\\\\theta)$ to $(x,\\\\theta,\\\\mu)$, leaving its residual rows unchanged. Then append a sound outward enclosure of the affine section row to every residual and Jacobian enclosure (the exact row when its data are rational). Apply this rule both to candidate updates and to every independent-validation callback. In fixed-parameter mode, $z=(x,\\\\theta)$ and $F=G$ both have dimension $d+1$; in section mode, $z=(x,\\\\theta,\\\\mu)$ and $F=(G,\\\\tau^\\\\top(z-z_p))$ both have dimension $d+2$.\\n\\nThe procedure retains the following candidate modes; candidate generation alone never validates a root.\\n\\n1. **Enclosure-guided single shooting:** this mode needs only the supplied range provider, not a pointwise differentiable numerical IVP evaluator. Start at the supplied rational $z_0\\\\in Z$. At each of at most the supplied number of updates, run the validated shooting-jet procedure of [[def-validated-periodic-shooting-jet-enclosure]] on the singleton $\\\\{z_k\\\\}$, using its validated Euler method and the supplied finite caps. If a tube, range, domain or arithmetic check fails, return its inconclusive status and the last candidate. Otherwise let $r_k$ and $A_k$ be the coordinatewise rational midpoints of the returned boxes for $F(z_k)$ and $DF(z_k)$. Record $z_k$ as a candidate and attempt the independent validation below. If it does not validate and updates remain, call [[alg-newton-correction-for-vector-residuals]] on $(A_k,r_k)$. A singular matrix returns singular-jacobian; otherwise its rational correction $u_k$ proposes $z_{k+1}=z_k+u_k$. Reject a proposal outside $Z$ with invalid-trial. The midpoint matrix is only a proposal matrix: it is not claimed to be the exact derivative of a numerical residual map. Exhaustion returns the last candidate and candidate-budget-exhausted.\\n2. **Differentiable single shooting:** supply, as an additional input for this mode, a certified differentiable evaluator satisfying [[def-certified-ivp-approximation-and-sensitivity-interface]] for the augmented BVP, including its approximate trajectories, $C^1$ endpoint map, exact numerical-map derivative, and uniform trajectory-error bound. Run [[alg-single-shooting-for-nonlinear-bvps]] on the phase-bordered BVP. In section mode augment the state by the constant parameter and append the affine section condition to its boundary residual. An interval jet alone is not this additional evaluator; if it is absent, return evaluator-unavailable without making the call.\\n3. **Discretized candidate:** either run [[alg-multiple-shooting-for-nonlinear-bvps]] on the augmented segment BVP with separately supplied certified differentiable segment evaluators satisfying the same interface, or run [[alg-midpoint-collocation-for-nonlinear-bvps]] using the pointwise field/boundary values and their exact derivatives required by its residual. Use the residuals of [[def-phase-bordered-multiple-shooting-and-midpoint-collocation]]; in section mode include the constant parameter and affine section row. Missing pointwise/segment evaluation data returns evaluator-unavailable. Use the last finite tuple's first physical state and positive period (and parameter in section mode) as a shooting candidate. Reject a candidate outside $Z$ or a nonrational candidate without a supplied rational proposal; rationalization is only a new candidate, not a trajectory or residual certificate.\\n\\nAll modes propagate evaluator-failure, invalid-endpoint-pair, invalid-trial, singular-jacobian, inconclusive and exhausted-budget statuses. No candidate mode is assumed to succeed from arbitrary data. In particular, the first mode composes the available interval-enclosure provider directly; it does not infer a $C^1$ point evaluator from interval boxes.\\n\\n**Independent validation:** retain the exact rational candidate box $Z=\\\\prod_{j=1}^N[a_j,b_j]$ in the declared physical variable order, where $N=d+1$ or $d+2$. If any side is degenerate, return inconclusive for validation, retaining the candidate: a box with empty ambient interior cannot pass the strict-interior inclusion required for a `unique-root` return. Degenerate boxes remain admitted inputs, and candidate-generation queries may still use their rational singleton or lower-dimensional boxes. Otherwise put $D=\\\\operatorname{diag}(b_j-a_j)$, $T(u)=a+Du$, $B=[0,1]^N$ and $\\\\widehat F(u)=F(T(u))$. Use the supplied open convex shooting domain containing $Z$, where the exact residual is $C^1$; failure to certify that domain returns inconclusive. The chart has an open convex preimage domain, and $D\\\\widehat F(u)=DF(T(u))D$, by [[lem-rational-box-affine-chart-and-dyadic-enclosure]]. Run [[alg-krawczyk-root-certification]] on $\\\\widehat F$ and the finite dyadic box $B$, using the supplied dyadic $C$, rational $W$, box budget and normalized minimum width $\\\\widehat\\\\eta=\\\\eta/\\\\max_j(b_j-a_j)>0$. Here $C$ is used as a preconditioner for this normalized residual; no approximate-inverse quality was assumed of it. The witness check remains the exact check $WC=I$. A normalized terminal box of maximum width at most $\\\\widehat\\\\eta$ has physical image of maximum width at most $\\\\eta$; the budget still bounds all processed boxes. For every processed dyadic subbox $A\\\\subseteq B$, let $m_A$ be its dyadic midpoint and set $Y=T(A)$ and $m_Y=T(m_A)$, the exact rational physical midpoint. The residual callback runs the validated shooting jet on $\\\\{m_Y\\\\}$ and appends the section-row enclosure when present. The Jacobian callback runs it on the rational box $Y$, appends the physical affine section row when present, and multiplies column $j$ of this physical Jacobian enclosure by $D_{jj}$. Exact rational endpoint operations followed by outward dyadic hull conversion give finite dyadic enclosures $F_0\\\\supseteq\\\\widehat F(m_A)$ and $\\\\widehat J(A)\\\\supseteq D\\\\widehat F(A)$. A failed conversion or overflow marks $A$ unresolved; it is never supplied as a finite interval. This uses the actual midpoint of the current normalized box, whose image is the actual midpoint of $Y$, even when it differs from the candidate center. A failed query or tube inclusion marks that box unresolved. Normalized Krawczyk interval operations are outward under [[lem-real-interval-arithmetic-preserves-enclosure]]. Retain the complete normalized Krawczyk output partition, including every terminal box and its status, and its exact physical image partition under $T$. Status labels on physical images mean the corresponding root conclusions transferred by the affine bijection, not a Krawczyk computation with an unscaled physical Jacobian. Continue only if the overall Krawczyk status is `complete`, exactly one normalized terminal box $A_Y$ has status `unique-root`, and every other terminal box has status `root-free`; if there is no such unique box, more than one, or any existence-only/unresolved box, return inconclusive. Set $Y=T(A_Y)$. Let $X_Y$ and $\\\\Theta_Y$ be the physical-state and period projections of this rational unique-root image box, and include $\\\\Lambda_Y$ in section mode. Form $Q_Y=(X_Y\\\\times\\\\Lambda_Y)\\\\times\\\\{I_{d+p}\\\\}\\\\times\\\\Theta_Y$ in section mode, or $Q_Y=X_Y\\\\times\\\\{I_d\\\\}\\\\times\\\\Theta_Y$ in fixed-parameter mode. Check $Q_Y$ is contained in the supplied augmented tube and query the same sound range provider for its augmented field enclosure. Divide the first $d$ coordinates by the positive interval $\\\\Theta_Y$ with exact rational endpoint arithmetic to obtain an interval box containing $f(X_Y,\\\\Lambda_Y)$ (or $f(X_Y)$ in fixed-parameter mode). Require at least one component interval to exclude zero; if inclusion, query or division fails, or no component excludes zero, return inconclusive. Finally require a successful full-box jet run on $Y$ to enclose the entire trajectory and monodromy; a failed query or tube check returns inconclusive.\\n\\nReturn `validated-root` only for such a box $Y$, and report it as the output box together with the complete terminal partition, the affine chart $(a,D)$, unique normalized box $A_Y$, the actual physical midpoint residual enclosure, physical Jacobian enclosure, normalized Jacobian enclosure, inverse witness, normalized strict inclusion and contraction inequalities, field component excluding zero, trajectory tube and monodromy enclosure. The bijection and complete mapped partition prove that $Y$ contains the only zero in the original rational box $Z$. If subdivision was used the output box is $Y$, not the original larger $Z$. Otherwise return inconclusive or the precise finite candidate failure status. Candidate midpoints and correction residuals never replace the independently validated callback enclosures.",
++          "uses": [
++            "4.1"
++          ]
++        },
++        {
++          "fact": "F7",
++          "source": "lem-rational-box-affine-chart-and-dyadic-enclosure",
++          "source_section": "Statement",
++          "quote": "For nonempty closed intervals with finite rational endpoints, the exact endpoint formulas\\n$$[a,b]+[c,d]=[a+c,b+d],\\\\qquad [a,b]-[c,d]=[a-d,b-c],$$\\nand the four-corner minimum and maximum for multiplication enclose every corresponding exact scalar value. Division uses the reciprocal interval $[1/d,1/c]$ only when $0\\\\notin[c,d]$. Every endpoint obtained in a finite such expression is rational. Replacing an exact rational interval $[l,u]$ by $[\\\\operatorname{rd}(l),\\\\operatorname{ru}(u)]$ in a selected dyadic format preserves inclusion whenever both returned endpoints are finite; a failed operation, unavailable exact computation, or overflow gives no finite-enclosure claim. This applies entrywise to vectors and matrices. For a point vector enclosure with midpoint $\\\\widehat v$ and coordinate radii $r_i$, $\\\\sum_i r_i$ bounds the Euclidean error of $\\\\widehat v$. For a point matrix enclosure with midpoint $\\\\widehat A$ and entry radii $s_{ij}$, $\\\\sum_{i,j}s_{ij}$ bounds its Euclidean operator error. If a rational matrix $V$ is checked to satisfy $V\\\\widehat A=\\\\widehat A V=I$, then $\\\\sum_{i,j}|V_{ij}|$ bounds $\\\\|\\\\widehat A^{-1}\\\\|_{\\\\rm op}$.\\n\\nLet $N\\\\ge1$, let $Z=\\\\prod_{j=1}^N[a_j,b_j]$ have finite rational endpoints with $a_j<b_j$, put $D=\\\\operatorname{diag}(b_j-a_j)$, and set $T(u)=a+Du$. Then $T$ maps the dyadic box $B=[0,1]^N$ bijectively onto $Z$, maps closed subboxes and their midpoints to their exact rational images and midpoints, and maps every finite covering partition of $B$ to a covering partition of $Z$. If $F:V\\\\to\\\\mathbb R^N$ is $C^1$ on an open convex neighborhood $V$ of $Z$, then $\\\\widehat F=F\\\\circ T$ is $C^1$ on the open convex neighborhood $T^{-1}(V)$ of $B$, with\\n$$D\\\\widehat F(u)=DF(T(u))D.$$\\nA residual enclosure for $F(T(m))$ encloses $\\\\widehat F(m)$, and a physical Jacobian enclosure $J(T(A))$ on a subbox $T(A)$ gives a normalized Jacobian enclosure $J(T(A))D$ on $A$, evaluated by the preceding rational endpoint rules and converted outward to finite dyadic intervals. Zeros and root-free, existence, and uniqueness conclusions transfer bijectively between each subbox $A$ and $T(A)$; no assumption about an ordering of roots is needed. If $C$ and $C\\\\,DF(T(u))D$ are nonsingular, then $DF(T(u))$ is nonsingular as well.",
++          "uses": [
++            "4.1"
++          ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "By [F1]\u2013[F3], exactly one multiplier of $M_*$ lies in $P_0$, and it is $1$ by [F2]. Thus the algebraic multiplicity of $1$ for $M_*$ is one. Every other multiplier lies in one of the polygons $P_j$, $j\\ge1$: their counts together with the count one in $P_0$ sum to $d$, while [F9] says a $d\\times d$ characteristic polynomial has exactly $d$ roots counted with multiplicity. The remaining multipliers therefore all have modulus at most $1-\\sigma<1$.",
++          "claim": "By [F1]–[F3], exactly one multiplier of $M_*$ lies in $P_0$, and it is $1$ by [F2]. Thus the algebraic multiplicity of $1$ for $M_*$ is one. Every other multiplier lies in one of the polygons $P_j$, $j\\ge1$: their counts together with the count one in $P_0$ sum to $d$, while [F9] says a $d\\times d$ characteristic polynomial has exactly $d$ roots counted with multiplicity. The remaining multipliers therefore all have modulus at most $1-\\sigma<1$.",
+           "step": "1.1",
+           "inputs": [
+             "F1",
+@@ -2564,7 +2582,7 @@
+         },
+         {
+           "id": "step-4-1",
+-          "claim": "The orbit with period $S$ is least-period by step 2.1. The certificate [F1] validates the phase-bordered shooting Jacobian for the possibly repeated period $T$, and that is the Jacobian used in the following nonsingularity check. For the exact real Jacobian $J$ at that root, [F7] gives $\\|I-CJ\\|_\\infty<1$. Regard $I-CJ$ as a complex matrix; [F8] makes $CJ$ invertible over $\\mathbb C$, so its real determinant is nonzero and $CJ$, then $J$, is invertible over $\\mathbb R$. Step 1.1 gives a simple phase multiplier, so the bordered criterion in [F8] implies $c^\\top f(\\gamma(0))\\ne0$. The same affine phase is therefore transverse for the least-period orbit. Apply [F4] to identify the Poincare derivative eigenvalues with all non-phase eigenvalues of $M_S$; step 3.1 places them strictly inside the unit circle.",
++          "claim": "The orbit with period $S$ is least-period by step 2.1. The certificate",
+           "step": "4.1",
+           "inputs": [
+             "F1",
+@@ -3181,7 +3199,7 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Steps 1.1\u20131.2: Zero interval entries and exact zero errors give zero endpoints/radii; division is performed only for intervals excluding zero."
++          "evidence": "Steps 1.1–1.2: Zero interval entries and exact zero errors give zero endpoints/radii; division is performed only for intervals excluding zero."
+         },
+         {
+           "case": "one",
+@@ -3201,7 +3219,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Steps 1.1\u20134.1: All endpoint, finite-sum and chart formulas are explicit; no choice axiom or root selection is invoked."
++          "evidence": "Steps 1.1–4.1: All endpoint, finite-sum and chart formulas are explicit; no choice axiom or root selection is invoked."
+         },
+         {
+           "case": "iff-forward",
+@@ -3219,4 +3237,4 @@
+       "unresolved_assumptions": []
+     }
+   }
+-}
++}

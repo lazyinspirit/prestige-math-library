@@ -1,0 +1,286 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+    "supplier": "alg-variable-step-bdf2-with-selected-implicit-branch",
+    "consumer_batch": "65",
+    "supplier_batch": "36",
+    "status": "verified",
+    "evidence": "The exact-root branch directly calls the source with supplied starter pair, positive steps and closed branch balls; its finite-solve branch is labelled completed-with-residual-tolerances and is explicitly distinguished from exact-root completion.",
+    "inspected_paths": [
+      "items/alg-variable-step-bdf2-with-selected-implicit-branch.md#Definition",
+      "items/alg-implicit-stiff-time-stepper-with-consistent-starts.md#Definition"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Input a vector field $f(t,y)$, a finite strictly increasing grid $t_0<\\cdots<t_N$, starting states $Y_0,Y_1\\in\\mathbb R^d$ (so $N\\ge1$), and for each later step a prescribed closed ball $B_{n+1}\\subset\\mathbb R^d$ that specifies the admissible implicit branch. Set $h_n=t_{n+1}-t_n$ and $r_n=h_n/h_{n-1}$ for $1\\le n<N$. If a time increment is nonpositive or the starting dimensions do not agree, return `invalid-grid` or `invalid-input`.\n\nFor $n=1,\\ldots,N-1$, form the equation\n\n$$\\frac{(1+2r_n)Z-(1+r_n)^2Y_n+r_n^2Y_{n-1}}{h_n(1+r_n)}=f(t_{n+1},Z).$$\n\nIf this equation has exactly one root $Z$ in $B_{n+1}$, set $Y_{n+1}=Z$ and continue. If it has no root there, return `no-root` with the computed prefix; if it has more than one root there, return `ambiguous-branch` with the computed prefix. If an evaluation of $f$ is undefined, return `evaluation-failure` with the prefix. On reaching $N$, return `completed` and $(Y_0,\\ldots,Y_N)$. The procedure is defined for arbitrary positive adjacent step ratios; no convergence or accuracy property is part of this algorithm.\n\nThe coefficients are those obtained from the quadratic interpolation derivative in [[lem-variable-step-bdf2-interpolation-and-local-defect]]. A separate theorem gives the uniform ratio hypotheses needed for second-order convergence; they are not part of this algorithm.",
+    "consumer_use_excerpts": [
+      "For an exact-root BDF2 run, call [[alg-variable-step-bdf2-with-selected-implicit-branch]] on the supplied starter pair for steps $n=1,\\ldots,N-1$ with the supplied branch balls; it returns a computed prefix and `completed`, `no-root`, `ambiguous-branch`, or `evaluation-failure`. In a finite-solve BDF2 run, use the same branch balls for steps $n=1,\\ldots,N-1$ and form the unscaled residual\n$$G_n(Z)=(1+2r_n)Z-(1+r_n)^2Y_n+r_n^2Y_{n-1}-h_n(1+r_n)f(t_{n+1},Z),\\qquad r_n=h_n/h_{n-1}.$$\nCall the finite solver with this $G_n$; after a `root` status, store its approximate iterate and continue, labelling the run `completed-with-residual-tolerances` only after every requested step returns `root`. A finite residual status does not establish the exact-root completion of the BDF2 branch algorithm."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[294]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-65.pages.json#deps",
+      "items/alg-implicit-stiff-time-stepper-with-consistent-starts.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/6"
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+    "supplier": "thm-variable-step-bdf2-order-two-under-ratio-bound",
+    "consumer_batch": "65",
+    "supplier_batch": "36",
+    "status": "verified",
+    "evidence": "The procedure invokes second-order accuracy only with the source smoothness, upper/lower ratio, tube, unique-root and O(H²) starter hypotheses. It expressly requires a separate starter/error budget for finite tolerances, so a solver root-status does not imply the convergence premise.",
+    "inspected_paths": [
+      "items/thm-variable-step-bdf2-order-two-under-ratio-bound.md#Statement",
+      "items/alg-implicit-stiff-time-stepper-with-consistent-starts.md#Definition"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $y'=f(t,y)$ on $[0,T]$, with $y:[0,T]\\to\\mathbb R^d$ having three continuous derivatives. Let $K\\subset\\mathbb R^d$ be compact with $y([0,T])\\subset\\operatorname{int}K$, and suppose $f$ is defined on $[0,T]\\times K$ and Lipschitz in its state variable there with constant $L$ in the max norm. Let $h_n=t_{n+1}-t_n>0$, $t_0=0$, $t_N=T$, $H=\\max_n h_n\\to0$, and suppose\n\n$$0<r_{\\min}\\le r_n:=\\frac{h_n}{h_{n-1}}\\le r_*<1+\\sqrt2\\qquad(1\\le n<N).$$\n\nAssume $\\|Y_0-y(t_0)\\|_\\infty+\\|Y_1-y(t_1)\\|_\\infty=O(H^2)$. For each step prescribe a closed branch ball $B_{n+1}\\subset K$ as in [[alg-variable-step-bdf2-with-selected-implicit-branch]], and suppose that for every pair of preceding states in $K$ the step equation has exactly one root in $B_{n+1}$. Select that root. Then for sufficiently small $H$ all computed states remain in $K$ and\n\n$$\\max_{0\\le n\\le N}\\|Y_n-y(t_n)\\|_\\infty=O(H^2).$$\n\nThe lower ratio bound controls the local residual constant; the upper bound controls the parasitic increment. This is a separate variable-grid theorem and does not follow from the constant-step root condition alone.",
+    "consumer_use_excerpts": [
+      "For BDF2, the order guarantee in [[thm-variable-step-bdf2-order-two-under-ratio-bound]] requires its smoothness, ratio, tube, unique-root, and $O(H^2)$ starter hypotheses. The exact-start BE estimate and branch conditions are proved in [[cor-constant-step-bdf2-order-two-with-consistent-start]]; a finite-tolerance startup must separately meet that result's starter error budget. For any method, a forward-error claim requires a separate residual-to-error estimate such as [[lem-small-step-implicit-rk-branch-and-residual-error]], [[thm-backward-euler-algebraic-update-residual-error-budget]], or the BDF2 order theorem."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[295]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-65.pages.json#deps",
+      "items/alg-implicit-stiff-time-stepper-with-consistent-starts.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/7"
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+    "supplier": "alg-finite-budget-newton-for-vector-residuals",
+    "consumer_batch": "65",
+    "supplier_batch": "3",
+    "status": "verified",
+    "evidence": "Updated-Newton mode directly invokes the source residual-before-budget status ordering with C1 residual on an open domain, finite correction budget and nonnegative tolerance. Root means tolerance met, not exact zero/global convergence; chord mode is separately specified.",
+    "inspected_paths": [
+      "items/alg-finite-budget-newton-for-vector-residuals.md#Definition",
+      "items/alg-newton-chord-implicit-residual-with-factorization-reuse.md#Definition"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $U\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $F:U\\to\\mathbb R^n$ be\n$C^1$ ([[def-c-one-map-and-local-inverse]]) with Jacobian $J_F$ as in\n[[def-jacobian-matrix-and-gradient]]. **Inputs:** $x_0\\in U$, residual\ntolerance $\\varepsilon\\ge0$, and update budget $N\\in\\mathbb N_0$.\n**Output:** the last valid iterate and one of `root`, `singular-jacobian`,\n`invalid-trial`, or `iteration-budget-exhausted`.\n\nFor $k=0,1,\\ldots,N$, in this order:\n\n1. Compute $F(x_k)$. If $\\|F(x_k)\\|_2\\le\\varepsilon$, return\n   $(x_k,\\texttt{root})$. Here `root` means the residual tolerance was met; it\n   does not certify an exact zero when $\\varepsilon>0$.\n2. If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n3. Call [[alg-newton-correction-for-vector-residuals]] with\n   $A=J_F(x_k)$ and $r=F(x_k)$. If it returns `singular-jacobian`, return that\n   status.\n4. Let $s_k$ be its correction. If $x_k+s_k\\notin U$, return\n   $(x_k,\\texttt{invalid-trial})$. Otherwise set $x_{k+1}=x_k+s_k$.\n\nThe procedure performs at most $N$ corrections. It makes no arbitrary-start,\nglobal-convergence, or discretization-error claim.",
+    "consumer_use_excerpts": [
+      "In **updated-Newton mode**, invoke [[alg-finite-budget-newton-for-vector-residuals]] with $G,z_0,\\varepsilon,N$. It recomputes the Jacobian at every correction and returns its stated residual/budget/failure status. Re-evaluate $G$ at the returned iterate to provide the output residual norm. Count each Jacobian assembly, factorization attempt, and linear solve actually performed."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[288]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-65.pages.json#deps",
+      "items/alg-newton-chord-implicit-residual-with-factorization-reuse.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/0"
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+    "supplier": "alg-newton-correction-for-vector-residuals",
+    "consumer_batch": "65",
+    "supplier_batch": "3",
+    "status": "verified",
+    "evidence": "Chord mode calls the retained square Jacobian correction As=-r with its exact-solve factor backend; singularity and invalid-trial statuses propagate. The correction sign, dimensions and invertibility condition match; no decrease or forward-error conclusion is imported.",
+    "inspected_paths": [
+      "items/alg-newton-correction-for-vector-residuals.md#Definition",
+      "items/alg-newton-chord-implicit-residual-with-factorization-reuse.md#Definition"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $n\\ge1$, let $A:\\mathbb R^n\\to\\mathbb R^n$ be a linear map, and let\n$r\\in\\mathbb R^n$ be a residual vector. If $A$ is not invertible in the sense\nof [[def-invertible-euclidean-linear-map]], return\n$(\\texttt{singular-jacobian},\\varnothing)$. If $A$ is invertible, return\n$(\\texttt{correction},s)$, where $s$ is the unique vector solving\n$$As=-r.$$\n\nThe output is a linear correction, not a claim that $r$ came from a nonlinear\nfunction or that applying the correction decreases a residual.",
+    "consumer_use_excerpts": [
+      "In **chord mode**, for $k=0,1,\\ldots,N$, first evaluate $G(z_k)$ and put $r_k=\\|G(z_k)\\|_2$. If $r_k\\le\\varepsilon$, return $(z_k,\\texttt{root},r_k)$; this status means only that the residual tolerance was met. If $k=N$, return $(z_k,\\texttt{iteration-budget-exhausted},r_k)$. Otherwise, at $k=0,q,2q,\\ldots$, refresh by forming $J_k=DG(z_k)$, attempting to factor it, and retaining the factorization until the next scheduled refresh. The factorization backend must either report singularity or return a factor object whose solve operation gives the exact unique solution of $J_k s=-G(z_k)$. If it reports singularity, return $(z_k,\\texttt{singular-jacobian},r_k)$. At each correction call [[alg-newton-correction-for-vector-residuals]] with the retained $J_k$ and current residual. If that procedure reports a singular Jacobian, return $(z_k,\\texttt{singular-jacobian},r_k)$. If its correction $s_k$ has $z_k+s_k\\notin U$, return $(z_k,\\texttt{invalid-trial},r_k)$; otherwise set $z_{k+1}=z_k+s_k$ and continue. A refresh period $q=1$ updates the Jacobian every correction; $q>1$ is a chord iteration."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[289]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-65.pages.json#deps",
+      "items/alg-newton-chord-implicit-residual-with-factorization-reuse.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/1"
+  },
+  {
+    "kind": "item",
+    "consumer": "cor-constant-step-bdf2-order-two-with-consistent-start",
+    "supplier": "alg-variable-step-bdf2-with-selected-implicit-branch",
+    "consumer_batch": "65",
+    "supplier_batch": "36",
+    "status": "verified",
+    "evidence": "FactsF1/proof1.1 retain the exact unique root in each prescribed closed ball and the same BDF2 equation; finite tolerance is not identified with branch selection.",
+    "inspected_paths": [
+      "items/alg-variable-step-bdf2-with-selected-implicit-branch.md#Definition",
+      "items/cor-constant-step-bdf2-order-two-with-consistent-start.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Input a vector field $f(t,y)$, a finite strictly increasing grid $t_0<\\cdots<t_N$, starting states $Y_0,Y_1\\in\\mathbb R^d$ (so $N\\ge1$), and for each later step a prescribed closed ball $B_{n+1}\\subset\\mathbb R^d$ that specifies the admissible implicit branch. Set $h_n=t_{n+1}-t_n$ and $r_n=h_n/h_{n-1}$ for $1\\le n<N$. If a time increment is nonpositive or the starting dimensions do not agree, return `invalid-grid` or `invalid-input`.\n\nFor $n=1,\\ldots,N-1$, form the equation\n\n$$\\frac{(1+2r_n)Z-(1+r_n)^2Y_n+r_n^2Y_{n-1}}{h_n(1+r_n)}=f(t_{n+1},Z).$$\n\nIf this equation has exactly one root $Z$ in $B_{n+1}$, set $Y_{n+1}=Z$ and continue. If it has no root there, return `no-root` with the computed prefix; if it has more than one root there, return `ambiguous-branch` with the computed prefix. If an evaluation of $f$ is undefined, return `evaluation-failure` with the prefix. On reaching $N$, return `completed` and $(Y_0,\\ldots,Y_N)$. The procedure is defined for arbitrary positive adjacent step ratios; no convergence or accuracy property is part of this algorithm.\n\nThe coefficients are those obtained from the quadratic interpolation derivative in [[lem-variable-step-bdf2-interpolation-and-local-defect]]. A separate theorem gives the uniform ratio hypotheses needed for second-order convergence; they are not part of this algorithm.",
+    "consumer_use_excerpts": [
+      "Let $T>0$ and consider the family of constant grids $t_n=nh$, $h=T/N\\to0$, $N\\ge2$. Let $y:[0,T]\\to\\mathbb R^d$ be a $C^3$ solution of $y'=f(t,y)$. Suppose $K\\subset\\mathbb R^d$ is compact, $y([0,T])\\subset\\operatorname{int}K$, and $f$ is defined on $[0,T]\\times K$ and is Lipschitz in the state variable there in the max norm. Start the BDF2 branch algorithm of [[alg-variable-step-bdf2-with-selected-implicit-branch]] with states $Y_0,Y_1$ satisfying\n$$\\|Y_0-y(0)\\|_\\infty+\\|Y_1-y(h)\\|_\\infty=O(h^2).$$\nAt each step prescribe a closed branch ball $B_{n+1}\\subset K$ and suppose that for every pair of preceding states in $K$ the BDF2 equation has exactly one root in $B_{n+1}$; select that root. Then, for all sufficiently small $h$, the selected sequence satisfies $\\max_{0\\le n\\le N}\\|Y_n-y(t_n)\\|_\\infty=O(h^2)$. If $Y_0=y(0)$, an exact BE startup in a local one-stage branch ball $B_{\\rm BE}\\subset K$ also has $\\|Y_1-y(h)\\|_\\infty=O(h^2)$, provided that $y(h)\\in B_{\\rm BE}$ and the BE stage map is invariant and contractive there with $q=hL_2\\le1/2$ in the Euclidean norm. The local invariant-ball hypotheses mean that the field is bounded by some $M$ and $hM\\le\\operatorname{rad}(B_{\\rm BE})$, and is $L_2$-Lipschitz on that ball. A finite-tolerance startup must separately meet the displayed $O(h^2)$ starter budget; a residual-tolerance status alone does not establish it. This statement makes no scalar stability claim.",
+      "[F1] [[alg-variable-step-bdf2-with-selected-implicit-branch]]: BDF2 selects the unique root in each prescribed closed branch ball and makes no convergence assertion by itself."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[292]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-65.pages.json#deps",
+      "items/cor-constant-step-bdf2-order-two-with-consistent-start.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/4"
+  },
+  {
+    "kind": "item",
+    "consumer": "cor-constant-step-bdf2-order-two-with-consistent-start",
+    "supplier": "thm-variable-step-bdf2-order-two-under-ratio-bound",
+    "consumer_batch": "65",
+    "supplier_batch": "36",
+    "status": "verified",
+    "evidence": "FactsF2/proof1.1 specialize r_min=r_*=1<1+sqrt2, H=h, C3 path, compact interior tube/max-norm Lipschitz, O(h²) starter and the source every-preceding-pair unique-root condition. Startup residual control is proved separately; no scalar stability assertion is inferred.",
+    "inspected_paths": [
+      "items/thm-variable-step-bdf2-order-two-under-ratio-bound.md#Statement",
+      "items/cor-constant-step-bdf2-order-two-with-consistent-start.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $y'=f(t,y)$ on $[0,T]$, with $y:[0,T]\\to\\mathbb R^d$ having three continuous derivatives. Let $K\\subset\\mathbb R^d$ be compact with $y([0,T])\\subset\\operatorname{int}K$, and suppose $f$ is defined on $[0,T]\\times K$ and Lipschitz in its state variable there with constant $L$ in the max norm. Let $h_n=t_{n+1}-t_n>0$, $t_0=0$, $t_N=T$, $H=\\max_n h_n\\to0$, and suppose\n\n$$0<r_{\\min}\\le r_n:=\\frac{h_n}{h_{n-1}}\\le r_*<1+\\sqrt2\\qquad(1\\le n<N).$$\n\nAssume $\\|Y_0-y(t_0)\\|_\\infty+\\|Y_1-y(t_1)\\|_\\infty=O(H^2)$. For each step prescribe a closed branch ball $B_{n+1}\\subset K$ as in [[alg-variable-step-bdf2-with-selected-implicit-branch]], and suppose that for every pair of preceding states in $K$ the step equation has exactly one root in $B_{n+1}$. Select that root. Then for sufficiently small $H$ all computed states remain in $K$ and\n\n$$\\max_{0\\le n\\le N}\\|Y_n-y(t_n)\\|_\\infty=O(H^2).$$\n\nThe lower ratio bound controls the local residual constant; the upper bound controls the parasitic increment. This is a separate variable-grid theorem and does not follow from the constant-step root condition alone.",
+    "consumer_use_excerpts": [
+      "[F2] [[thm-variable-step-bdf2-order-two-under-ratio-bound]]: if $0<r_{\\min}\\le r_n\\le r_*<1+\\sqrt2$, $y\\in C^3$, the exact path lies in a compact tube, $f$ is Lipschitz there, the starting pair has error $O(H^2)$, and each prescribed branch ball contains the selected unique root, then BDF2 has maximum error $O(H^2)$ for sufficiently small $H$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[293]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-65.pages.json#deps",
+      "items/cor-constant-step-bdf2-order-two-with-consistent-start.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/5"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-implicit-rk-global-order-with-stage-residual-control",
+    "supplier": "def-one-step-ode-method-local-defect-order-and-stability",
+    "status": "verified",
+    "supplier_batch": "7",
+    "supplier_item_ids": [
+      "def-one-step-ode-method-local-defect-order-and-stability"
+    ],
+    "required_interface": "Defines the exact-start one-step local defect, uniform O(h^(p+1)) local order, and one-step Lipschitz stability factor 1+Lh. Batch 28's global theorem uses this definition transitively; the new batch-65 theorem uses Batch 28's global result and does not cite this item as a direct dependency.",
+    "affected_claims": [
+      "thm-implicit-rk-global-order-with-stage-residual-control"
+    ],
+    "evidence": "Inspected the exact batch-7 definition and Batch 28's dependency and proof. The local SDIRK/Radau defect orders and the newly derived one-step stability estimate meet the interface; Batch 28's theorem is the direct cited supplier. This transitive edge explains the batch-7 prerequisite in the recomputed dependency closure and is not a direct batch-65 item dependency."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-implicit-rk-global-order-with-stage-residual-control",
+    "supplier": "lem-discrete-one-step-error-recurrence-bound",
+    "consumer_batch": "65",
+    "supplier_batch": "28",
+    "status": "verified",
+    "evidence": "FactsF6/proof3.1 use the nonnegative recurrence d_next≤(1+2Lh)d+3D h^(p+1), d0=0 (or stated initial O(h^p)), with h=T/N and fixed nonnegative constants. Thus both L=0 and L>0 supplier branches apply to the stage-residual perturbation.",
+    "inspected_paths": [
+      "items/lem-discrete-one-step-error-recurrence-bound.md#Statement",
+      "items/thm-implicit-rk-global-order-with-stage-residual-control.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+    "consumer_use_excerpts": [
+      "[F6] [[lem-discrete-one-step-error-recurrence-bound]]: if $e_0\\le C_0h^p$ and $e_{n+1}\\le(1+L_0h)e_n+C h^{p+1}$, then $\\max_{n\\le N}e_n=O(h^p)$ for $h=T/N$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[291]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-65.pages.json#deps",
+      "items/thm-implicit-rk-global-order-with-stage-residual-control.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/3"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-implicit-rk-global-order-with-stage-residual-control",
+    "supplier": "thm-global-error-from-one-step-defect-and-stability",
+    "consumer_batch": "65",
+    "supplier_batch": "28",
+    "status": "verified",
+    "evidence": "FactsF5/proof2.1 apply the exact one-step theorem after proving uniform local defects and stability on the common tube. Exact-solve trajectory/stages, initial error, positive fixed interval and uniform constants match; approximate-stage effects are treated separately.",
+    "inspected_paths": [
+      "items/thm-global-error-from-one-step-defect-and-stability.md#Statement",
+      "items/thm-implicit-rk-global-order-with-stage-residual-control.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $d,N,p\\ge1$, $T>0$, $h=T/N$, and $t_n=nh$. Let $y:[0,T]\\to\\mathbb R^d$ solve an initial-value problem in an open time-state domain $D$. Use the Euclidean norm $\\|v\\|_2=(\\sum_{i=1}^d v_i^2)^{1/2}$ of [[def-euclidean-inner-product]], whose triangle inequality is proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]]. Let $\\mathcal T\\subset D$ be a common compact time-state tube with positive margin in $D$, and write $\\mathcal T_t:=\\{v\\in\\mathbb R^d:(t,v)\\in\\mathcal T\\}$. Suppose a one-step map $\\Psi_{h,n}$ is defined on $\\mathcal T_{t_n}$, produces $y_{n+1}=\\Psi_{h,n}(y_n)$, and the entire exact path, all numerical grid states, and every method stage lie in $\\mathcal T$. If constants $C,C_0,L\\ge0$, independent of $N$ and $n$, satisfy\n$$\\|y_0-y(0)\\|_2\\le C_0h^p,\\qquad \\|\\Psi_{h,n}(y(t_n))-y(t_{n+1})\\|_2\\le Ch^{p+1},$$\nand\n$$\\|\\Psi_{h,n}(u)-\\Psi_{h,n}(v)\\|_2\\le(1+Lh)\\|u-v\\|_2$$\nfor every $u,v\\in\\mathcal T_{t_n}$ and $0\\le n<N$, then, for $L>0$,\n$$\\max_{0\\le n\\le N}\\|y_n-y(t_n)\\|_2\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, for $L=0$,\n$$\\max_{0\\le n\\le N}\\|y_n-y(t_n)\\|_2\\le(C_0+CT)h^p.$$",
+    "consumer_use_excerpts": [
+      "[F5] [[thm-global-error-from-one-step-defect-and-stability]]: on a common tube, an exact one-step method with local defect $O(h^{p+1})$, stability factor at most $1+L_0h$, and initial error $O(h^p)$ has global error $O(h^p)$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[290]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-65.pages.json#deps",
+      "items/thm-implicit-rk-global-order-with-stage-residual-control.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/2"
+  },
+  {
+    "kind": "page",
+    "consumer": "implicit-stiff-time-stepping-and-algebraic-error",
+    "supplier": "global-ode-and-density-error",
+    "status": "verified",
+    "supplier_batch": "28",
+    "supplier_item_ids": [
+      "thm-global-error-from-one-step-defect-and-stability",
+      "lem-discrete-one-step-error-recurrence-bound"
+    ],
+    "required_interface": "On a common compact tube, an exact one-step map with initial error O(h^p), local defect bounded by C h^(p+1), and fiberwise Lipschitz factor at most 1+L_0 h has global error O(h^p). The recurrence lemma also bounds e_(n+1) <= (1+L_0 h)e_n + C h^(p+1).",
+    "affected_claims": [
+      "thm-implicit-rk-global-order-with-stage-residual-control"
+    ],
+    "evidence": "Inspected the complete current batch-28 statement and proof of thm-global-error-from-one-step-defect-and-stability.md and the exact recurrence lemma. The local theorem verifies an exact-solve trajectory against the common tube; the stage-residual perturbation is proved separately before the recurrence lemma is applied. No supplier approval is asserted."
+  },
+  {
+    "kind": "page",
+    "consumer": "implicit-stiff-time-stepping-and-algebraic-error",
+    "supplier": "linear-multistep-methods-and-dahlquist-equivalence",
+    "status": "verified",
+    "supplier_batch": "36",
+    "supplier_item_ids": [
+      "alg-variable-step-bdf2-with-selected-implicit-branch",
+      "thm-variable-step-bdf2-order-two-under-ratio-bound"
+    ],
+    "required_interface": "The BDF2 algorithm selects the unique root in each prescribed branch ball and by itself makes no convergence claim. Its order theorem requires a C^3 exact solution, compact tube, Lipschitz field, adjacent ratios bounded below away from zero and above by r_* < 1+sqrt(2), O(H^2) starting pair, and a unique selected root in each prescribed ball.",
+    "affected_claims": [
+      "alg-implicit-stiff-time-stepper-with-consistent-starts",
+      "cor-constant-step-bdf2-order-two-with-consistent-start"
+    ],
+    "evidence": "Read the actual batch-36 BDF2 algorithm and convergence theorem, including their Facts & Assumptions and complete proofs. The constant-step corollary specializes r_min=r_*=1 and retains the branch and starter hypotheses; finite Newton status is not equated with exact-root selection."
+  },
+  {
+    "kind": "page",
+    "consumer": "implicit-stiff-time-stepping-and-algebraic-error",
+    "supplier": "nonlinear-equations-and-newton-methods",
+    "status": "verified",
+    "supplier_batch": "3",
+    "supplier_item_ids": [
+      "alg-finite-budget-newton-for-vector-residuals",
+      "alg-newton-correction-for-vector-residuals"
+    ],
+    "required_interface": "The finite Newton procedure checks the current residual before the update budget, returns the last valid iterate with root, singular-Jacobian, invalid-trial, or budget-exhausted status, and gives no arbitrary-start convergence or discretization-error theorem. Its correction solves the current square linear system J s = -r when J is invertible.",
+    "affected_claims": [
+      "alg-newton-chord-implicit-residual-with-factorization-reuse",
+      "alg-implicit-stiff-time-stepper-with-consistent-starts",
+      "ex-newton-budget-exhaustion-with-a-unique-backward-euler-root",
+      "ex-robertson-reaction-system-newton-work"
+    ],
+    "evidence": "Read the current batch-3 carriers alg-finite-budget-newton-for-vector-residuals.md and alg-newton-correction-for-vector-residuals.md, including their exact status ordering and correction convention. The local algorithm preserves their finite-budget scope and adds scheduled chord reuse. This verifies the interfaces and records no independent supplier acceptance."
+  }
+]

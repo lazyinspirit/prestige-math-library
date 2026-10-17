@@ -21,6 +21,9 @@ deps:
   - thm-derivative-of-matrix-inversion
   - prop-differentials-of-trace-and-frobenius-linear-functionals
   - def-trace-of-a-square-matrix
+  - thm-logarithm-derivative-and-integral
+  - thm-chain-rule-for-total-derivatives
+  - cor-mean-value-theorem
 justified_by: []
 aliases: []
 proof_strategy: direct
@@ -29,10 +32,7 @@ provenance:
   proof: ai-altered
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
-    date: 2026-10-15
+  repair: research/numerical-optimization-dynamics-2026-10-16-owner-step2-preclaimed-published-receipts-CONTINUED-ROOT-1035-v1/lem-log-determinant-concavity-on-positive-definite-matrices.repair.json
 sources:
   references:
     - title: "Stephen Boyd and Lieven Vandenberghe, Convex Optimization, §3.1.5"
@@ -76,6 +76,10 @@ $$\log\det((1-t)A_0+tA_1)\ge(1-t)\log\det A_0+t\log\det A_1.$$
 
 [F14] [[thm-adjugate-identity-over-a-commutative-ring]]: for a positive-sized square matrix over a commutative ring, $A\operatorname{adj}(A)=\operatorname{adj}(A)A=\det(A)I$.
 
+[F15] [[thm-logarithm-derivative-and-integral]]: $\log'(x)=1/x$ for $x>0$. Under the entrywise identification of a real matrix space with a finite-dimensional Euclidean space, [[thm-chain-rule-for-total-derivatives]] composes its Fréchet derivatives with the scalar logarithm and an affine matrix path. The path $t\mapsto A_0+tH$ has derivative $H$ and zero remainder.
+
+[F16] [[cor-mean-value-theorem]]: a real function continuous on a closed interval and differentiable on its interior has an increment equal to the interval length times an interior derivative.
+
 ## Proof
 
 **Proof technique:** restrict to a line and compute its second derivative.
@@ -84,10 +88,10 @@ $$\log\det((1-t)A_0+tA_1)\ge(1-t)\log\det A_0+t\log\det A_1.$$
 
 2.1 In that eigenbasis $A_t=Q\Lambda Q^{\mathsf T}$ with $Q Q^{\mathsf T}=I_p$ and $\Lambda=\operatorname{diag}(\lambda_1(t),\ldots,\lambda_p(t))$. By [F4] and [F5], $\det A_t=\det Q\,\det\Lambda\,\det Q^{\mathsf T}=\det\Lambda=\prod_i\lambda_i(t)>0$, since [F5] gives $\det Q\det Q^{\mathsf T}=\det I_p$ and [F6] gives $\det I_p=1$ from the Leibniz formula. Thus $g(t)=\log\det A_t$ is real-valued on $[0,1]$. [F4, F5, F6, step 1.1, algebra]
 
-3.1 Since $A_t$ is invertible, the determinant differential in [F8] is Jacobi's formula; its cofactor representation and invertible-matrix reduction use [F12], [F13], and [F14]. The scalar derivative of $\log$ then gives $g'(t)=\operatorname{tr}(A_t^{-1}H)$. [F8, F12, F13, F14, step 2.1, algebra]
+3.1 Since $A_t$ is invertible, the determinant differential in [F8] is Jacobi's formula; its cofactor representation and invertible-matrix reduction use [F12], [F13], and [F14]. Because the determinant is differentiable, it is continuous; its positive value at each $A_t$ remains positive on a small neighborhood of that path point, so the logarithm's domain condition in [F15] is met, including at $t=0,1$. The logarithm derivative and total chain rule [F15] then give $g'(t)=(\det A_t)^{-1}D\det(A_t)[H]=\operatorname{tr}(A_t^{-1}H)$. [F8, F12, F13, F14, F15, step 2.1, algebra]
 
-4.1 Differentiate this trace along the same line. The product rule [F7], inverse derivative [F9], and trace derivative [F10] give $g''(t)=-\operatorname{tr}(A_t^{-1}H A_t^{-1}H)$. [F7, F9, F10, step 3.1, algebra]
+4.1 Differentiate this trace along the same line. The product rule [F7], inverse derivative [F9], and trace derivative [F10], composed with the affine path by [F15], give $g''(t)=-\operatorname{tr}(A_t^{-1}H A_t^{-1}H)$. [F7, F9, F10, F15, step 3.1, algebra]
 
 5.1 Fix $t$ and define the symmetric matrix $S=A_t^{-1/2}HA_t^{-1/2}$ by diagonalizing $A_t$ from [F3] and taking the positive inverse square roots of its eigenvalues. By [F11], $\operatorname{tr}(XY)=\operatorname{tr}(YX)$ because both sides are $\sum_{i,j}X_{ij}Y_{ji}$ with indices interchanged; applying this identity gives $\operatorname{tr}(A_t^{-1}HA_t^{-1}H)=\operatorname{tr}(S^2)=\sum_{i,j}S_{ij}^2\ge0$. Hence [step 4.1] implies $g''(t)\le0$. [F3, F11, step 4.1, algebra]
 
-6.1 A twice-differentiable real function with nonpositive second derivative on an interval is concave there. Applying this to $g$ yields the stated chord inequality for the arbitrary endpoints $A_0,A_1$ and $t\in[0,1]$. [step 5.1, given, algebra] ∎
+6.1 The formulas in steps 3.1–4.1 make $g$ differentiable on a neighborhood of $[0,1]$ and $g'$ differentiable there; in particular each is continuous on the closed subintervals used below. For $0\le r<s\le1$, apply [F16] to $g'$ on $[r,s]$; step 5.1 gives $g'(s)-g'(r)=g''(c)(s-r)\le0$ for some $c\in(r,s)$. Thus $g'$ is nonincreasing. If $0<t<1$, apply [F16] to $g$ on $[0,t]$ and $[t,1]$. The respective slopes equal $g'(a)$ and $g'(b)$ for $a<t<b$, hence $(g(t)-g(0))/t\ge(g(1)-g(t))/(1-t)$. Rearrangement gives $g(t)\ge(1-t)g(0)+tg(1)$. At $t=0,1$ it is equality. This is precisely the stated log-determinant chord inequality. [F16, step 3.1, step 4.1, step 5.1, given, algebra] ∎

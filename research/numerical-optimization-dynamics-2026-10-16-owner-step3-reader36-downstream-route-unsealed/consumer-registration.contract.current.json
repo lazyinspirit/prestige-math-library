@@ -1,0 +1,110 @@
+{
+  "citations": [
+    {
+      "fact": "F1",
+      "source": "alg-variable-step-bdf2-with-selected-implicit-branch",
+      "source_section": "Definition",
+      "quote": "Input a vector field $f(t,y)$, a finite grid $t_0,\\ldots,t_N$, starting states $Y_0,Y_1\\in\\mathbb R^d$ (so $N\\ge1$), and for each later step a prescribed closed ball $B_{n+1}\\subset\\mathbb R^d$ that specifies the admissible implicit branch. Before any evaluation, if either starting state has dimension different from $d$, return `invalid-input`; otherwise, if any time increment is nonpositive, return `invalid-grid`. Set $h_n=t_{n+1}-t_n$ and $r_n=h_n/h_{n-1}$ for $1\\le n<N$.\n\nFor $n=1,\\ldots,N-1$, form the equation\n\n$$\\frac{(1+2r_n)Z-(1+r_n)^2Y_n+r_n^2Y_{n-1}}{h_n(1+r_n)}=f(t_{n+1},Z).$$\n\nIf this equation has exactly one root $Z$ in $B_{n+1}$, set $Y_{n+1}=Z$ and continue. If it has no root there, return `no-root` with the computed prefix; if it has more than one root there, return `ambiguous-branch` with the computed prefix. If an evaluation of $f$ is undefined, return `evaluation-failure` with the prefix. On reaching $N$, return `completed` and $(Y_0,\\ldots,Y_N)$. The procedure is defined for arbitrary positive adjacent step ratios; no convergence or accuracy property is part of this algorithm.\n\nThe coefficients are those obtained from the quadratic interpolation derivative in [[lem-variable-step-bdf2-interpolation-and-local-defect]]. A separate theorem gives the uniform ratio hypotheses needed for second-order convergence; they are not part of this algorithm.",
+      "uses": [
+        "1.1"
+      ]
+    },
+    {
+      "fact": "F2",
+      "source": "def-linear-multistep-method-consistency-order-and-root-condition",
+      "source_section": "Definition",
+      "quote": "Let $k\\ge1$, $d\\ge1$, and let $f:U\\to\\mathbb R^d$ be the right-hand side of a first-order initial-value problem on an open set $U\\subseteq\\mathbb R\\times\\mathbb R^d$, using the convention of [[def-first-order-ode-initial-value-problem-and-solution]]. A **constant-step $k$-step linear multistep method** has real coefficients $\\alpha_0,\\ldots,\\alpha_k,\\beta_0,\\ldots,\\beta_k$ with $\\alpha_k\\ne0$ and advances values by\n\n$$\\sum_{j=0}^k\\alpha_jY_{n+j}=h\\sum_{j=0}^k\\beta_j f(t_{n+j},Y_{n+j}),\\qquad t_{n+j}=t_n+jh,\\quad h>0.$$\n\nMultiplying all coefficients by the same nonzero scalar leaves the method unchanged; one may normalize $\\alpha_k=1$. Its **characteristic polynomials** are\n\n$$\\rho(\\zeta)=\\sum_{j=0}^k\\alpha_j\\zeta^j,\\qquad \\sigma(\\zeta)=\\sum_{j=0}^k\\beta_j\\zeta^j.$$\n\nFor an exact solution $y$ with $p+1$ continuous derivatives, the **unscaled local residual** at $t_n$ is\n\n$$\\tau_n(h;y)=\\sum_{j=0}^k\\alpha_jy(t_n+jh)-h\\sum_{j=0}^k\\beta_jy'(t_n+jh).$$\n\nThe method has **order at least $p$**, where $p\\ge1$ is an integer, if this residual is $O(h^{p+1})$ uniformly for admitted starting times in every fixed compact interval on which the indicated derivatives are bounded. It is **consistent** if it has order at least one. Equivalently, with the above coefficient convention, consistency is $\\rho(1)=0$ and $\\rho'(1)=\\sigma(1)$.\n\nThe **root condition** is that every complex root of $\\rho$ has modulus at most one and every root of modulus one has algebraic multiplicity one. The method is **zero-stable** if for each $T>0$ there is a constant $M_T$ independent of $N$ such that every solution of the homogeneous recurrence $\\sum_j\\alpha_jY_{n+j}=0$ on the uniform grid $h=T/N$ satisfies\n\n$$\\max_{0\\le n\\le N}\\|Y_n\\|_\\infty\\le M_T\\max_{0\\le j<k}\\|Y_j\\|_\\infty.$$\n\nHere $\\|x\\|_\\infty=\\max_{1\\le i\\le d}|x_i|$ for $x\\in\\mathbb R^d$. The root-condition equivalence for zero-stability is established separately.",
+      "uses": [
+        "1.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "def-absolute-stability-regions-for-one-step-and-multistep-methods",
+      "source_section": "Definition",
+      "quote": "For the scalar test equation $y'=\\lambda y$, a step size $h>0$ gives $z=h\\lambda$. A one-step scalar update has stability function $R$ when one step sends $y_n$ to $y_{n+1}=R(z)y_n$. If $R$ is rational, write it in reduced form; it is defined at $z$ exactly when its denominator is nonzero there. Its absolute-stability region is\n\n$$\\mathcal S_R=\\{z\\in\\mathbb C:R(z)\\text{ is defined and }|R(z)|\\le1\\}.$$\n\nThe update is A-stable when the closed left half-plane $\\{z:\\operatorname{Re}z\\le0\\}$ is contained in $\\mathcal S_R$. A rational one-step update is L-stable when it is A-stable and\n\n$$\\lim_{\\substack{|z|\\to\\infty\\\\ \\operatorname{Re}z\\le0}}R(z)=0,$$\n\nwhere the limit means that the values tend to zero along every sequence in the closed left half-plane whose modulus tends to infinity.\n\nFor a linear multistep method with the coefficient and polynomial convention of [[def-linear-multistep-method-consistency-order-and-root-condition]], substitution of the scalar test equation gives the characteristic polynomial\n\n$$\\pi_z(\\zeta)=\\rho(\\zeta)-z\\sigma(\\zeta).$$\n\nThe multistep absolute-stability region consists of those $z$ for which the leading coefficient $\\alpha_k-z\\beta_k$ is nonzero and every root of $\\pi_z$ satisfies the root condition: all roots have modulus at most one, and every root of modulus one is simple. This criterion concerns constant-step scalar test recurrences.",
+      "uses": [
+        "1.1"
+      ]
+    }
+  ],
+  "derivations": [
+    {
+      "id": "uniform-bdf2-polynomial",
+      "claim": "Setting $r_n=1$ in [F1] gives $3Y_{n+1}-4Y_n+Y_{n-1}=2h f(t_{n+1},Y_{n+1})$. Substituting $f(t,y)=\\lambda y$ and a trial mode $Y_n=\\zeta^n$, the polynomial convention in [F2] gives $(3-2z)\\zeta^2-4\\zeta+1=0$.",
+      "step": "1.1",
+      "inputs": [
+        "F1",
+        "F2",
+        "F3",
+        "algebra"
+      ]
+    },
+    {
+      "id": "root-locus-identity",
+      "claim": "The constant term is one, so a root has $\\zeta\\ne0$. Put $w=1/\\zeta$, $a=\\operatorname{Re}w$, and $r=|w|$. Solving the equation in step 1.1 for $z$ gives $z=3/2-2w+w^2/2$, and therefore $\\operatorname{Re}z=(1-a)^2+(1-r^2)/2$.",
+      "step": "2.1",
+      "inputs": [
+        "step 1.1",
+        "algebra"
+      ]
+    },
+    {
+      "id": "root-locus-half-plane",
+      "claim": "If $|\\zeta|>1$, then $r<1$ and step 2.1 gives $\\operatorname{Re}z>0$. If $|\\zeta|=1$, then $r=1$, so $\\operatorname{Re}z=(1-a)^2\\ge0$; equality forces $w=1$, hence $\\zeta=1$ and $z=0$. This proves both assertions.",
+      "step": "3.1",
+      "inputs": [
+        "step 2.1",
+        "algebra"
+      ]
+    }
+  ],
+  "routine_steps": [],
+  "boundaries": [
+    {
+      "case": "empty",
+      "status": "not_applicable",
+      "reason": "The root-locus lemma conditions on a root of its displayed BDF2 quadratic and analyzes its modulus; it does not average over a possibly empty root selection."
+    },
+    {
+      "case": "zero",
+      "status": "checked",
+      "evidence": "Step 3.1 checks the sole unit-root equality case."
+    },
+    {
+      "case": "one",
+      "status": "checked",
+      "evidence": "Step 1.1 checks the first root mode."
+    },
+    {
+      "case": "degenerate",
+      "status": "checked",
+      "evidence": "Step 2.1 checks the excluded zero root."
+    },
+    {
+      "case": "endpoints",
+      "status": "checked",
+      "evidence": "Step 3.1 checks the unit-circle boundary."
+    },
+    {
+      "case": "nonempty-choice",
+      "status": "not_applicable",
+      "reason": "The proof treats any given root and maps it to its reciprocal; its inequalities hold pointwise and require no choice of roots across test values."
+    },
+    {
+      "case": "iff-forward",
+      "status": "not_applicable",
+      "reason": "The root-locus statement says a root outside the unit disk forces a right-half-plane test value, with an equality restriction; it is not an equivalence of these conditions."
+    },
+    {
+      "case": "iff-reverse",
+      "status": "not_applicable",
+      "reason": "A right-half-plane test value is not claimed always to possess a specified outside-unit-disk root; only the stated implication and boundary equality are proved."
+    }
+  ],
+  "risk_review": {
+    "status": "complete",
+    "reviewer": "batch 52 author \u2014 not independent approval",
+    "notes": "The root zeta=0 is excluded by the polynomial's constant term; the unit-circle equality case is explicitly retained at z=0, zeta=1."
+  }
+}

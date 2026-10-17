@@ -1,0 +1,2111 @@
+{
+  "version": 1,
+  "scope": [
+    "def-simple-fold-complement-splitting-and-projection",
+    "lem-pseudo-arclength-border-matrix-invertibility-and-inverse-bound",
+    "thm-augmented-residual-contraction-certificate",
+    "lem-regular-curve-chart-and-pseudo-arclength-predictor-defect",
+    "lem-simple-fold-complement-restriction-is-an-isomorphism",
+    "lem-transverse-hyperplane-selects-unique-local-branch-point",
+    "thm-simple-fold-lyapunov-schmidt-parameterization",
+    "thm-pseudo-arclength-local-newton-correction",
+    "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+    "ex-zero-tangent-angle-makes-bordered-corrector-singular",
+    "ex-natural-parameterization-fails-at-x-squared-fold",
+    "ex-local-trace-misses-disconnected-branch",
+    "ex-pseudo-arclength-crosses-x-squared-fold"
+  ],
+  "contracts": {
+    "def-simple-fold-complement-splitting-and-projection": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n≥1 (or m≥1); there is no empty-dimensional case claimed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-parameter edge case is a separate claim here; any zero vectors or zero residuals are either excluded by the stated strict hypotheses or are not part of this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element classification claim; its quantified hypotheses and proof apply uniformly to the stated dimensions."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item does not assert a conclusion at a degenerate input outside its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no endpoint, boundary-value, or closed-interval assertion requiring a separate endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No proof step chooses an element from an arbitrary nonempty family; all selections are explicitly supplied data or finite-dimensional local constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "n=2 complement data",
+          "method": "exact-hand-calculation",
+          "input": "J=diag(1,0), v=w=b=e2, a=1.",
+          "result": "X=Y=span(e1), q=e2, and P=diag(1,0).",
+          "disposition": "checks the definition formulas; the next lemma proves their general properties."
+        }
+      ],
+      "author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps (no numbered proof; this is a definition/procedure item) against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      }
+    },
+    "lem-pseudo-arclength-border-matrix-invertibility-and-inverse-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-double-orthogonal-complement-and-dimension",
+          "source_section": "Statement",
+          "quote": "For every subspace $W$ of a finite-dimensional inner product space $V$,",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-linear-kernel-image-and-injectivity",
+          "source_section": "Statement",
+          "quote": "For a linear map $T:V\\to W$, the sets $\\ker T$ and $\\operatorname{im}T$ are\nlinear subspaces. Moreover, $T$ is injective if and only if $\\ker T=\\{0_V\\}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-standard-basis-of-f-n",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), let $n \\in \\mathbb{N}$ and let $F^{n}$ be the\nfunction space on the von Neumann natural $n = \\{0, \\dots, n-1\\}$, with the\npointwise operations ([[def-function-space]], [[def-natural-numbers]],\n[[lem-nat-order-is-membership]]). For $i < n$ define the **standard unit vector**\n$e_i \\in F^{n}$ by",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "source_section": "Statement",
+          "quote": "For every linear $L:\\mathbb R^m\\to\\mathbb R^n$ there is a unique matrix $A=(a_{ij})_{i<n,j<m}$ such that $(Lh)_i=\\sum_{j<m}a_{ij}h_j$. Moreover there is $K\\ge0$ with $\\|Lh\\|_2\\le K\\|h\\|_2$ for every $h$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-rank-and-nullity",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map whose domain $V$ is finite-dimensional over\n$F$. Its **nullity** and **rank** are",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By [F1], [F3], and [F6], $\\dim\\ker A=(n+1)-n=1$. Since $t$ is a unit vector in the kernel, $\\ker A=\\operatorname{span}\\{t\\}$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Apply [F2] to $W=\\ker A$ in $\\mathbb R^{n+1}$ to obtain $\\dim E=(n+1)-1=n$. The codomain $\\mathbb R^n$ also has dimension $n$ by [F3].",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "If $x=\\alpha t$ also lies in $E=t^\\perp$, then $0=t^Tx=\\alpha\\|t\\|_2^2=\\alpha$, so $E\\cap\\ker A=\\{0\\}$. Thus $A|_E$ is injective by [F3]. Its domain and codomain both have dimension $n$, so [F1] and [F3] make it surjective. Thus $Q$ is well-defined.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "For $(u,s)\\in\\mathbb R^n\\times\\mathbb R$, write a prospective solution as $v=e+\\alpha t$ with $e\\in E$. The first row equation $Av=u$ forces $e=Qu$, and the last row equation forces $$\\alpha=\\frac{s-\\tau^TQu}{\\tau^Tt}.$$ If $\\tau^Tt\\ne0$, these formulas give one solution for every $(u,s)$, so $B$ is invertible. If $\\tau^Tt=0$, then $Bt=0$ with $t\\ne0$, so $B$ is singular.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "Under $|\\tau^Tt|\\ge c$, [F5] gives $$|\\alpha|\\le c^{-1}\\bigl(|s|+K_A\\|u\\|_2\\bigr).$$ Consequently $$\\|v\\|_2\\le K_A(1+c^{-1})\\|u\\|_2+c^{-1}|s|.$$ Applying [F5] to the two scalar coefficients of $\\sqrt{\\|u\\|_2^2+|s|^2}$ gives the stated operator-norm bound for $B^{-1}$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-6.1",
+          "step": "6.1",
+          "claim": "Step 4.1 proves the exact invertibility criterion, and step 5.1 proves the quantitative inverse bound under the stated angular margin.",
+          "inputs": [
+            "step 4.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n≥1 (or m≥1); there is no empty-dimensional case claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof handles τᵀt=0 and proves Bt=0, so the bordered matrix is singular."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof and 2.1 include n=1: both E and the codomain have dimension one, so A|E is an isomorphism."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof treats the zero-angle degeneracy separately from the nonzero-angle inverse formula."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no endpoint, boundary-value, or closed-interval assertion requiring a separate endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No proof step chooses an element from an arbitrary nonempty family; all selections are explicitly supplied data or finite-dimensional local constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof proves τᵀt≠0 implies the bordered matrix is invertible."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof proves τᵀt=0 implies Bt=0 and hence singularity."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "n=1, zero angle",
+          "method": "exact-hand-calculation",
+          "input": "A=[1 0], t=(0,1), tau=(1,0).",
+          "result": "B=[[1,0],[1,0]] has Bt=0; the nonzero-angle condition fails.",
+          "disposition": "supports the singular branch in step 3.1; not a substitute for its general proof."
+        }
+      ],
+      "author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 2.1, 3.1, 4.1, 5.1, 6.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      }
+    },
+    "thm-augmented-residual-contraction-certificate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty complete metric space ([[def-complete-metric-space]])\nand let $f : X \\to X$ be a contraction with constant $q$, so\n$d(f(u),f(v)) \\le q\\,d(u,v)$ for all $u,v \\in X$ and $0 \\le q < 1$\n([[def-lipschitz-holder-contraction]]). Then:",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-power-difference-factorisation",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ and let $n \\in \\mathbb{N}$ with $n \\ge 1$, with powers\nas in [[def-integer-power]] and finite sums as in [[def-finite-sum]]. Then",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For matrices $X,Y$, the definition of the operator norm gives $\\|XYu\\|_2\\le\\|X\\|_{\\rm op}\\|Y\\|_{\\rm op}\\|u\\|_2$ for every $u$; taking the supremum over unit $u$ proves submultiplicativity. Put $A:=DG(y)$, $E:=A-\\widehat A$, $P:=\\widehat A^{-1}E$, and $a:=\\widehat\\beta\\epsilon_J<1$. Then $A=\\widehat A(I+P)$ and $\\|P^k\\|_{\\rm op}\\le a^k$ by induction.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The finite sums $S_N:=\\sum_{j=0}^{N}(-P)^j$ satisfy $(I+P)S_N=S_N(I+P)=I+(-1)^NP^{N+1}$. By [F6], the tails are bounded by $a^{N+1}/(1-a)\\to0$. Each matrix entry of $S_N-S_M$ is bounded in absolute value by $\\|S_N-S_M\\|_{\\rm op}$, by [F5] applied to standard unit vectors. Thus the entries are Cauchy; completeness [F2] gives a matrix limit $S$. Taking entrywise limits in the finite matrix products gives $(I+P)S=S(I+P)=I$. Also the finite-sum bound in [F6] gives $\\|S\\|_{\\rm op}\\le(1-a)^{-1}$ by taking limits on each vector. Hence $A^{-1}=S\\widehat A^{-1}$ and $\\|A^{-1}\\|_{\\rm op}\\le\\beta$.",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Define $T(x):=x-A^{-1}G(x)$ on the ball. Its derivative is $DT(x)=A^{-1}(A-DG(x))$. For $x$ in the open ball, the Lipschitz hypothesis gives $\\|DT(x)\\|_{\\rm op}\\le\\beta L\\|x-y\\|_2\\le q$. The open ball is convex, so [F4] gives $\\|T(u)-T(v)\\|_2\\le q\\|u-v\\|_2$ there; continuity extends this inequality to the closed ball.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Since $\\|T(y)-y\\|_2=\\|A^{-1}G(y)\\|_2\\le\\beta\\rho$, every $x\\in\\overline B_2(y,R)$ satisfies $$\\|T(x)-y\\|_2\\le\\|T(x)-T(y)\\|_2+\\|T(y)-y\\|_2\\le qR+\\beta\\rho\\le R.$$ Thus $T$ maps the nonempty complete ball into itself. By [F1] it has a unique fixed point $y^*$ there, and invertibility of $A$ makes $T(y^*)=y^*$ equivalent to $G(y^*)=0$. Any zero of $G$ is a fixed point, so this zero is unique.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "The contraction inequality and fixed-point identity give $$\\|y^*-y\\|_2\\le\\|T(y^*)-T(y)\\|_2+\\|T(y)-y\\|_2 \\le q\\|y^*-y\\|_2+\\beta\\rho,$$ which rearranges to the stated error bound because $1-q>0$.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n≥1 (or m≥1); there is no empty-dimensional case claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof permits ρ=0 and then the fixed point is the center y."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof are dimension independent and include m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof include L=0 and q=0; the contraction and error bound remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof proves the map sends the closed ball, including its boundary, into itself."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No proof step chooses an element from an arbitrary nonempty family; all selections are explicitly supplied data or finite-dimensional local constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "scalar identity residual",
+          "method": "exact-hand-calculation",
+          "input": "G(x)=x, y=0, Ahat=1, ghat=0, all error bounds 0, L=0, R=1.",
+          "result": "beta=1, rho=0, q=0; the closed ball is mapped to itself and the unique zero is y=0.",
+          "disposition": "checks the zero-residual and zero-Lipschitz boundary."
+        }
+      ],
+      "author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 2.1, 3.1, 4.1, 5.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      }
+    },
+    "lem-regular-curve-chart-and-pseudo-arclength-predictor-defect": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-pseudo-arclength-border-matrix-invertibility-and-inverse-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $A:\\mathbb R^{n+1}\\to\\mathbb R^n$ be linear of rank $n$,\nand let $t\\in\\ker A$ have $\\|t\\|_2=1$. Set $E=t^\\perp$ and let\n$Q=(A|_E)^{-1}:\\mathbb R^n\\to E$. For a unit vector $\\tau\\in\\mathbb R^{n+1}$,\nform the square bordered matrix\n$$B=\\begin{bmatrix}A\\\\ \\tau^T\\end{bmatrix}.$$\nThen $B$ is invertible exactly when $\\tau^Tt\\ne0$. If\n$0<c\\le1$, $|\\tau^Tt|\\ge c$, and $K_A\\ge0$ satisfies\n$\\|Qu\\|_2\\le K_A\\|u\\|_2$ for all $u\\in\\mathbb R^n$, then\n$$\\|B^{-1}\\|_{\\rm op}\\le\\sqrt{K_A^2(1+c^{-1})^2+c^{-2}}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "source_section": "Statement",
+          "quote": "Let $k,m,n\\ge1$ and $p\\in\\mathbb N$, let $U\\subseteq\\mathbb R^{m+n+p}$ be open, and let $F:U\\to\\mathbb R^n$ be $C^k$. Suppose $F(a,b,\\lambda_0)=0$ and $D_yF(a,b,\\lambda_0)$ is invertible. Then there are neighbourhoods and a unique $C^k$ map $\\varphi$ solving $F(x,\\varphi(x,\\lambda),\\lambda)=0$. More precisely, on suitable open neighbourhoods $P$ of $(a,\\lambda_0)$ and $Q$ of $b$,",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar component uses the word-derivative convention of [[def-ck-and-multi-index-notation-in-several-variables]], whose source dimension is positive. The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-rank-and-nullity",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map whose domain $V$ is finite-dimensional over\n$F$. Its **nullity** and **rank** are",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Define $\\Phi(z,r):=(F(z),t^T(z-z_0)-r)$. Its derivative in $z$ at $(z_0,0)$ is $\\begin{bmatrix}DF(z_0)\\\\t^T\\end{bmatrix}$, which is invertible by [F1] because $DF(z_0)t=0$ and $\\|t\\|_2=1$. Apply [F2] with parameter $r$ to obtain the unique local $C^2$ solution $z=\\gamma(r)$ and the stated normalization. For each nearby zero $z$ of $F$, setting $r=t^T(z-z_0)$ makes $\\Phi(z,r)=0$, so the local uniqueness clause in [F2] places $z$ on this graph. Differentiating the equations at $r=0$ using [F3] gives $DF(z_0)\\gamma'(0)=0$ and $t^T\\gamma'(0)=1$; the one-dimensional kernel and unit length of $t$ force $\\gamma'(0)=t$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "F9",
+            "F10",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The speed $v(r):=\\|\\gamma'(r)\\|_2$ is continuous and positive on a smaller interval because $v(0)=1$. Set $\\ell(r):=\\int_0^r v(u)\\,du$. By [F4], $\\ell'(r)=v(r)>0$; [F7] therefore gives a local inverse $r=r(s)$. The curve $c(s):=\\gamma(r(s))$ is $C^1$, satisfies $\\|c'(s)\\|_2=1$, and has $c(0)=z_0$, $c'(0)=t$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Fix an admissible $s,h$ and put $e:=h c'(s)$. Differentiating the identity $F(c(r))=0$ at $r=s$ by the chain rule gives $DF(c(s))c'(s)=0$, hence $DF(c(s))e=0$. For each coordinate $i\\in\\{1,\\ldots,n\\}$, apply [F3] and [F4] to $u\\mapsto F_i(c(s)+u e)$ and subtract the zero linear term $DF_i(c(s))e$ to obtain $$F_i(c(s)+e)=\\int_0^1\\bigl(DF_i(c(s)+u e)-DF_i(c(s))\\bigr)e\\,du.$$ The Lipschitz bound, [F6], and $\\|e\\|_2=h$ bound the integrand in absolute value by $Lu h^2$; [F5] then gives the coordinate bound $Lh^2/2$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "given",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Combining the $n$ coordinate bounds gives $\\|F(z_p)\\|_2\\le \\sqrt n Lh^2/2$. The last coordinate of $G_{s,h}(z_p)$ is zero by the definition of $z_p$, proving the augmented residual bound.",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n≥1 (or m≥1); there is no empty-dimensional case claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof fixes γ(0)=z₀ and the proof fixes c(0)=z₀; the chart basepoint is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof estimates each of the n coordinates and so includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: The rank-n and unit-kernel hypotheses exclude a zero tangent and are used in the proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof integrate on the closed predictor segment [0,1], with endpoint values supplied by continuity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No proof step chooses an element from an arbitrary nonempty family; all selections are explicitly supplied data or finite-dimensional local constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "straight regular branch",
+          "method": "exact-hand-calculation",
+          "input": "F(x,y)=y, z0=(0,0), t=(1,0), c(s)=(s,0), L=0.",
+          "result": "The exact predictor (s+h,0) remains on F=0 and the augmented residual is zero, matching the bound sqrt(n)Lh^2/2=0.",
+          "disposition": "checks the zero-defect boundary of the predictor estimate."
+        }
+      ],
+      "author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 2.1, 3.1, 4.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      }
+    },
+    "lem-simple-fold-complement-restriction-is-an-isomorphism": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-double-orthogonal-complement-and-dimension",
+          "source_section": "Statement",
+          "quote": "For every subspace $W$ of a finite-dimensional inner product space $V$,",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-linear-kernel-image-and-injectivity",
+          "source_section": "Statement",
+          "quote": "For a linear map $T:V\\to W$, the sets $\\ker T$ and $\\operatorname{im}T$ are\nlinear subspaces. Moreover, $T$ is injective if and only if $\\ker T=\\{0_V\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-standard-basis-of-f-n",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), let $n \\in \\mathbb{N}$ and let $F^{n}$ be the\nfunction space on the von Neumann natural $n = \\{0, \\dots, n-1\\}$, with the\npointwise operations ([[def-function-space]], [[def-natural-numbers]],\n[[lem-nat-order-is-membership]]). For $i < n$ define the **standard unit vector**\n$e_i \\in F^{n}$ by",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-independence",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). As in\n[[def-linear-combination-and-span]], a **finite list** of vectors is a function\n$v : n \\to V$ on a von Neumann natural $n = \\{0, \\dots, n-1\\}$\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), written\n$v_i := v(i)$, and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-rank-and-nullity",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map whose domain $V$ is finite-dimensional over\n$F$. Its **nullity** and **rank** are",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Since $v$ is unit it is nonzero. If $\\alpha v=0$, then $\\alpha\\|v\\|_2^2=0$, so $\\alpha=0$; thus $\\{v\\}$ is independent, and it spans $\\operatorname{span}\\{v\\}$ by definition. It is therefore a basis and that span has dimension one by [F5]. The orthogonal-complement formula [F2] gives $\\dim X=n-1$.",
+          "inputs": [
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Since $w^Tq=1$, the map $w^T$ is onto $\\mathbb R$. Rank-nullity [F1] and $\\dim\\mathbb R^n=n$ [F4] give $\\dim Y=n-1$; [F4] also gives $\\dim\\mathbb R^n=n$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "Since $w^Tq=1$, direct multiplication gives $P^2=(I-qw^T)^2=I-qw^T=P$. Also $w^TP=0$, so $\\operatorname{range}P\\subseteq Y$, while $Py=y$ for every $y\\in Y$; hence $\\operatorname{range}P=Y$. The equation $Pz=0$ is equivalent to $z=q(w^Tz)$, so $\\ker P=\\operatorname{span}\\{q\\}$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "From $w^TJ=0$ we have $\\operatorname{im}J\\subseteq Y$, and $J$ has rank $n-1$ by [F6]. Thus $\\dim\\operatorname{im}J=\\dim Y$, so [F3] gives $\\operatorname{im}J=Y$. Moreover, if $x\\in X\\cap\\ker J$, then $x=\\alpha v$ and $0=v^Tx=\\alpha$, so $J|_X$ is injective by [F3]. Its image has dimension $n-1$ by [F1] and therefore equals $Y$ by [F3]. This proves that $J|_X$ is an isomorphism.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Finally $PJ=J-q(w^TJ)=J$, and $Pb=b-q(w^Tb)=b-qa=0$ by the definitions.",
+          "inputs": [
+            "given",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n≥1 (or m≥1); there is no empty-dimensional case claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof proves X∩ker J={0}; this is the zero-kernel case establishing injectivity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof and the rank-nullity argument include n=1, where X and Y have dimension zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: The prerequisite Definition requires a=wᵀb≠0, which is necessary for q and P to be defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no endpoint, boundary-value, or closed-interval assertion requiring a separate endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No proof step chooses an element from an arbitrary nonempty family; all selections are explicitly supplied data or finite-dimensional local constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "n=2 rank-one fold matrix",
+          "method": "exact-hand-calculation",
+          "input": "J=diag(1,0), v=w=b=e2, a=1, X=Y=span(e1).",
+          "result": "J|X is the identity, q=e2, P=diag(1,0), P²=P, PJ=J and Pb=0.",
+          "disposition": "checks the complement and projection formulas."
+        }
+      ],
+      "author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 1.2, 1.3, 2.1, 3.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      }
+    },
+    "lem-transverse-hyperplane-selects-unique-local-branch-point": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-regular-curve-chart-and-pseudo-arclength-predictor-defect",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$. Suppose $F(z_0)=0$ and\n$\\operatorname{rank}DF(z_0)=n$. Let $t\\in\\ker DF(z_0)$ be a unit vector.\nThere is an interval about $0$ and a unique local $C^2$ curve\n$\\gamma(r)$ satisfying\n$$F(\\gamma(r))=0,\\qquad \\gamma(0)=z_0,\\qquad t^T(\\gamma(r)-z_0)=r.$$\nThere is a neighborhood $V$ of $z_0$ in which every solution $z$ of $F(z)=0$\nhas the form $z=\\gamma(t^T(z-z_0))$. It has $\\gamma'(0)=t$. After reparameterization by Euclidean arclength,\nthe same local curve is represented by a $C^1$ unit-speed curve $c(s)$ with\n$c(0)=z_0$ and $c'(0)=t$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Define $g(s):=\\tau^T(c(s)-z_p)$ on $[-r_-,r_+]$. By [F2], $g'(s)=\\tau^Tc'(s)\\ge\\kappa$. The fundamental theorem in [F3] therefore gives $g(r_+)-g(0)=\\int_0^{r_+}g'(u)\\,du\\ge\\kappa r_+$ by [F4]. Since $g(0)=-d$ and $d\\le\\kappa r_+$, we have $g(0)\\le0$ and $g(r_+)\\ge0$. If $d=0$, then $s_*=0$ is a zero; if $d>0$, the intermediate value theorem [F5] gives $s_*\\in(0,r_+]$ with $g(s_*)=0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "If $-r_-\\le s_1<s_2\\le r_+$, [F2]–[F4] give $$g(s_2)-g(s_1)=\\int_{s_1}^{s_2}g'(u)\\,du\\ge\\kappa(s_2-s_1)>0.$$ Thus $g$ is strictly increasing, so it has at most one zero on $[-r_-,r_+]$. The zero found in step 1.1 is therefore unique.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n≥1 (or m≥1); there is no empty-dimensional case claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof handles the zero offset d=0 by identifying s*=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof use only a scalar chart parameter and include n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: The strict κ>0 hypothesis excludes the zero-angle case; the separate angle example checks that failure."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof check the chart endpoints s=0 and s=r, including a root at s=r."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No proof step chooses an element from an arbitrary nonempty family; all selections are explicitly supplied data or finite-dimensional local constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "straight branch",
+          "method": "exact-hand-calculation",
+          "input": "c(s)=(s,0), tau=(1,0), z0=(0,0), zp=(h,0), kappa=1, r=h>0.",
+          "result": "g(s)=s-h has the unique zero s*=h on [0,h].",
+          "disposition": "checks endpoint equality d=kappa r."
+        }
+      ],
+      "author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 2.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      }
+    },
+    "thm-simple-fold-lyapunov-schmidt-parameterization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-simple-fold-complement-splitting-and-projection",
+          "source_section": "Definition",
+          "quote": "Let $J:\\mathbb R^n\\to\\mathbb R^n$ be linear of rank $n-1$\n([[def-rank-and-nullity]]). Let $v$ be a unit\nvector with $\\ker J=\\operatorname{span}\\{v\\}$, let $w\\ne0$ satisfy\n$w^TJ=0$, and let $b\\in\\mathbb R^n$ satisfy $a:=w^Tb\\ne0$. Define the\nstate-space complement and range complement by\n$$X:=v^\\perp,\\qquad Y:=\\ker(w^T).$$\nSet $q:=b/a$ and define the projection candidate\n$$P:=I-qw^T:\\mathbb R^n\\to\\mathbb R^n.$$\nFor a differentiable $F:U\\subseteq\\mathbb R^n\\times\\mathbb R\\to\\mathbb R^n$,\n$F_x$ and $F_\\lambda$ denote the restrictions of the total derivative\n[[def-total-derivative-in-euclidean-space]] to the state and scalar-parameter\ndirections. At a simple fold, the intended data are\n$J=F_x(x_0,\\lambda_0)$ and $b=F_\\lambda(x_0,\\lambda_0)$.\nThe next lemma proves that $J|_X:X\\to Y$ is an isomorphism and that $P$ is\nthe projection onto $Y$ along $\\operatorname{span}\\{q\\}$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-simple-fold-complement-restriction-is-an-isomorphism",
+          "source_section": "Statement",
+          "quote": "For the data and notation of [[def-simple-fold-complement-splitting-and-projection]],\n$J|_X:X\\to Y$ is a linear isomorphism. The map $P=I-qw^T$ satisfies\n$$P^2=P,\\qquad \\operatorname{range}P=Y,\\qquad \\ker P=\\operatorname{span}\\{q\\}, \\qquad PJ=J,\\qquad Pb=0.$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "source_section": "Statement",
+          "quote": "Let $k,m,n\\ge1$ and $p\\in\\mathbb N$, let $U\\subseteq\\mathbb R^{m+n+p}$ be open, and let $F:U\\to\\mathbb R^n$ be $C^k$. Suppose $F(a,b,\\lambda_0)=0$ and $D_yF(a,b,\\lambda_0)$ is invertible. Then there are neighbourhoods and a unique $C^k$ map $\\varphi$ solving $F(x,\\varphi(x,\\lambda),\\lambda)=0$. More precisely, on suitable open neighbourhoods $P$ of $(a,\\lambda_0)$ and $Q$ of $b$,",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-pseudo-arclength-border-matrix-invertibility-and-inverse-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $A:\\mathbb R^{n+1}\\to\\mathbb R^n$ be linear of rank $n$,\nand let $t\\in\\ker A$ have $\\|t\\|_2=1$. Set $E=t^\\perp$ and let\n$Q=(A|_E)^{-1}:\\mathbb R^n\\to E$. For a unit vector $\\tau\\in\\mathbb R^{n+1}$,\nform the square bordered matrix\n$$B=\\begin{bmatrix}A\\\\ \\tau^T\\end{bmatrix}.$$\nThen $B$ is invertible exactly when $\\tau^Tt\\ne0$. If\n$0<c\\le1$, $|\\tau^Tt|\\ge c$, and $K_A\\ge0$ satisfies\n$\\|Qu\\|_2\\le K_A\\|u\\|_2$ for all $u\\in\\mathbb R^n$, then\n$$\\|B^{-1}\\|_{\\rm op}\\le\\sqrt{K_A^2(1+c^{-1})^2+c^{-2}}.$$",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar component uses the word-derivative convention of [[def-ck-and-multi-index-notation-in-several-variables]], whose source dimension is positive. The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-rank-and-nullity",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map whose domain $V$ is finite-dimensional over\n$F$. Its **nullity** and **rank** are",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Let $c:=F_\\lambda(x_0,\\lambda_0)$. By [F2], $\\operatorname{im}J=Y=\\ker(w^T)$; and $w^Tc=a\\ne0$. For any $r\\in\\mathbb R^n$, the vector $r-(w^Tr/a)c$ lies in $Y$, so the columns of $[J\\ c]$ span $\\mathbb R^n$. Thus the full derivative has rank $n$. Its kernel is one-dimensional by [F9] and contains $(v,0)$, so its unit tangent at the fold is $(v,0)$. The local full-rank curve chart follows from [F3], as also recorded in the regular-curve lemma.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "First take $n=1$. Then $J=0$, $v\\in\\{-1,1\\}$, and $a=wF_\\lambda\\ne0$ implies $F_\\lambda\\ne0$. Apply [F3] solving for $\\lambda$ as a function of $x=x_0+sv$. Differentiating $F(x_0+sv,\\lambda(s))=0$ once gives $\\lambda'(0)=0$, and differentiating twice gives $F_{xx}[v,v]+F_\\lambda\\lambda''(0)=0$. Since $w$ is a nonzero scalar, this is $\\lambda''(0)=-b/a$. Local uniqueness is the uniqueness clause of [F3].",
+          "inputs": [
+            "F3",
+            "F4",
+            "F10",
+            "F11",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "Now take $n\\ge2$. Fix finite-dimensional coordinates on $X$ and $Y$ by [F8]. Apply [F3] to the complement equation $$P F(x_0+sv+u,\\lambda_0+\\mu)=0,\\qquad u\\in X.$$ Its derivative in $u$ at $(0,0,0)$ is $PJ|_X=J|_X$, invertible by [F1]–[F2]. It therefore has a unique local $C^3$ solution $u=\\psi(s,\\mu)\\in X$ with $\\psi(0,0)=0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "F10",
+            "F11",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Differentiating the complement equation at $(0,0)$ and using [F1]–[F2] gives $J\\psi_s(0,0)=0$ and $J\\psi_\\mu(0,0)=0$. Both derivatives lie in $X$, on which $J$ is injective, so $\\psi_s(0,0)=\\psi_\\mu(0,0)=0$. Define $$g(s,\\mu):=w^TF(x_0+sv+\\psi(s,\\mu),\\lambda_0+\\mu).$$ The identity $F=PF+q(w^TF)$ shows that $F=0$ is equivalent, locally, to the complement equation and $g=0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F10",
+            "F11",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The chain rule and $w^TJ=0$ give $$g(0,0)=0,\\quad g_s(0,0)=0,\\quad g_\\mu(0,0)=a,\\quad g_{ss}(0,0)=b.$$ For the last equality, terms involving $J\\psi_{ss}$ vanish after multiplication by $w^T$, and $\\psi_s(0,0)=0$ leaves exactly $w^TF_{xx}[v,v]$.",
+          "inputs": [
+            "F4",
+            "F10",
+            "F11",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Since $a\\ne0$, apply [F3] to $g(s,\\mu)=0$ to obtain a unique local $C^3$ function $\\mu=\\mu(s)$. Differentiating this scalar equation gives $\\mu'(0)=-g_s/g_\\mu=0$ and $\\mu''(0)=-g_{ss}/g_\\mu=-b/a$. The resulting $x(s)=x_0+sv+\\psi(s,\\mu(s))$, $\\lambda(s)=\\lambda_0+\\mu(s)$ has $x'(0)=v$ and $\\lambda'(0)=0$. The equivalence in step 2.1 proves local uniqueness among solutions.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F10",
+            "F11",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "Step 1.2 gives the stated curve and derivatives when $n=1$; steps 1.3–4.1 give them when $n\\ge2$. In both cases $x'(0)=v$, $\\lambda'(0)=0$, and $\\lambda''(0)=-b/a\\ne0$.",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "derivation-6.1",
+          "step": "6.1",
+          "claim": "In both cases $n=1$ and $n\\ge2$, the branch is $C^3$. Choose a compact subinterval $[-\\delta,\\delta]$ and use [F6] to set $M_3:=\\sup_{|s|\\le\\delta}|\\lambda'''(s)|<\\infty$. Repeatedly applying [F5] gives the integral remainder $$\\lambda(s)-\\lambda_0-\\lambda'(0)s-\\tfrac12\\lambda''(0)s^2 =\\int_0^s\\int_0^u\\int_0^t\\lambda'''(r)\\,dr\\,dt\\,du,$$ whose absolute value is at most $M_3|s|^3/6$.",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.2",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-7.1",
+          "step": "7.1",
+          "claim": "The tangent $(v,0)$ has unit length because $\\|v\\|_2=1$. Taking $\\tau=(v,0)$ in [F7] gives angular factor $1$, so the bordered derivative of the local pseudo-arclength corrector is invertible at the fold. More generally it remains invertible whenever $|\\tau^T(v,0)|>0$. The local curve has therefore a regular pseudo-arclength chart through the fold, while $\\lambda'(0)=0$ and $\\lambda''(0)\\ne0$ show that $\\lambda$ is not a local regular coordinate. No assertion about other components or global branch coverage follows.",
+          "inputs": [
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "step 4.1",
+            "step 5.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n≥1 (or m≥1); there is no empty-dimensional case claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof and 3.3 show λ′(0)=0 while λ″(0) is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof proves the scalar case n=1 separately."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: The Statement explicitly requires a≠0 and b≠0; no fold-curvature conclusion is claimed when either vanishes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof takes a compact subinterval strictly inside the local chart and bounds the remainder on its endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No proof step chooses an element from an arbitrary nonempty family; all selections are explicitly supplied data or finite-dimensional local constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof proves that, after the complement equation is solved, F=0 is equivalent to the scalar equation g=0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof proves both directions of the equivalence using F=PF+q(wᵀF)."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "scalar fold curvature",
+          "method": "exact-hand-calculation",
+          "input": "F(x,lambda)=x²−lambda, x0=lambda0=0, v=w=1.",
+          "result": "a=−1, b=2, lambda(s)=s² and lambda''(0)=−b/a=2.",
+          "disposition": "checks the n=1 branch and curvature formula proved in step 2.1."
+        }
+      ],
+      "author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 1.2, 1.3, 2.1, 3.1, 4.1, 5.1, 6.1, 7.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      }
+    },
+    "thm-pseudo-arclength-local-newton-correction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-regular-curve-chart-and-pseudo-arclength-predictor-defect",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$. Suppose $F(z_0)=0$ and\n$\\operatorname{rank}DF(z_0)=n$. Let $t\\in\\ker DF(z_0)$ be a unit vector.\nThere is an interval about $0$ and a unique local $C^2$ curve\n$\\gamma(r)$ satisfying\n$$F(\\gamma(r))=0,\\qquad \\gamma(0)=z_0,\\qquad t^T(\\gamma(r)-z_0)=r.$$\nThere is a neighborhood $V$ of $z_0$ in which every solution $z$ of $F(z)=0$\nhas the form $z=\\gamma(t^T(z-z_0))$. It has $\\gamma'(0)=t$. After reparameterization by Euclidean arclength,\nthe same local curve is represented by a $C^1$ unit-speed curve $c(s)$ with\n$c(0)=z_0$ and $c'(0)=t$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-transverse-hyperplane-selects-unique-local-branch-point",
+          "source_section": "Statement",
+          "quote": "Let $c:[-\\delta,\\delta]\\to U\\subseteq\\mathbb R^{n+1}$ be a unit-speed\nreparameterization of the unique locally normalized solution curve supplied\nby [[lem-regular-curve-chart-and-pseudo-arclength-predictor-defect]], with\n$c(0)=z_0$. Let $\\tau\\in\\mathbb R^{n+1}$ be a unit vector, let\n$0<r_-,r_+\\le\\delta$, and suppose that for some $\\kappa>0$,\n$$\\tau^Tc'(s)\\ge\\kappa\\qquad(-r_-\\le s\\le r_+).$$\nLet $z_p\\in\\mathbb R^{n+1}$ satisfy\n$$d:=\\tau^T(z_p-z_0),\\qquad 0\\le d\\le\\kappa r_+.$$\nThen there is exactly one $s_*\\in[-r_-,r_+]$ such that\n$$\\tau^T(c(s_*)-z_p)=0.$$\nThus the predictor hyperplane has exactly one intersection with this\nlocal branch segment containing its basepoint. The statement is local to\nthe supplied chart.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-pseudo-arclength-border-matrix-invertibility-and-inverse-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $A:\\mathbb R^{n+1}\\to\\mathbb R^n$ be linear of rank $n$,\nand let $t\\in\\ker A$ have $\\|t\\|_2=1$. Set $E=t^\\perp$ and let\n$Q=(A|_E)^{-1}:\\mathbb R^n\\to E$. For a unit vector $\\tau\\in\\mathbb R^{n+1}$,\nform the square bordered matrix\n$$B=\\begin{bmatrix}A\\\\ \\tau^T\\end{bmatrix}.$$\nThen $B$ is invertible exactly when $\\tau^Tt\\ne0$. If\n$0<c\\le1$, $|\\tau^Tt|\\ge c$, and $K_A\\ge0$ satisfies\n$\\|Qu\\|_2\\le K_A\\|u\\|_2$ for all $u\\in\\mathbb R^n$, then\n$$\\|B^{-1}\\|_{\\rm op}\\le\\sqrt{K_A^2(1+c^{-1})^2+c^{-2}}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-updated-jacobian-newton-local-quadratic-convergence",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$, meaning $F$ is $C^1$ and its first derivative\nis itself continuously differentiable. Write $J(x)=DF(x)$ as a matrix in the\nstandard basis. Let $x_*\\in U$ satisfy $F(x_*)=0$ and suppose $J(x_*)$ is\ninvertible. Suppose there are $R>0$ and $L\\ge0$ such that the closed Euclidean\nball\n$$\\overline B_2(x_*,R):=\\{x\\in\\mathbb R^n:\\|x-x_*\\|_2\\le R\\}$$\nlies in $U$ and\n$$\\|J(x)-J(y)\\|_{\\rm op}\\le L\\|x-y\\|_2\\qquad(x,y\\in\\overline B_2(x_*,R)),$$\nwhere $\\|A\\|_{\\rm op}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$. Then there are\n$r\\in(0,R]$ and $K>0$ such that every $J(x)$ on $\\overline B_2(x_*,r)$ is\ninvertible with $\\|J(x)^{-1}\\|_{\\rm op}\\le K$. Put $C:=KL/2$ and choose\n$\\rho\\in(0,r]$ with $C\\rho\\le1/2$ (if $L=0$, any $\\rho\\le r$ works).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-finite-budget-newton-for-vector-residuals",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $F:U\\to\\mathbb R^n$ be\n$C^1$ ([[def-c-one-map-and-local-inverse]]) with Jacobian $J_F$ as in\n[[def-jacobian-matrix-and-gradient]]. **Inputs:** $x_0\\in U$, residual\ntolerance $\\varepsilon\\ge0$, and update budget $N\\in\\mathbb N_0$.\n**Output:** the last valid iterate and one of `root`, `singular-jacobian`,\n`invalid-trial`, or `iteration-budget-exhausted`.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-augmented-residual-contraction-certificate",
+          "source_section": "Statement",
+          "quote": "For a linear map $A$ between Euclidean spaces, write\n$\\|A\\|_{\\rm op}:=\\sup_{\\|u\\|_2=1}\\|Au\\|_2$. Let $m\\ge1$, let\n$V\\subseteq\\mathbb R^m$ be open, and let\n$G:V\\to\\mathbb R^m$ be $C^1$. Let $y\\in V$, $R>0$, and suppose the closed\nball $\\overline B_2(y,R)$ lies in $V$. Assume that for some $L\\ge0$,\n$$\\|DG(u)-DG(v)\\|_{\\rm op}\\le L\\|u-v\\|_2\\qquad(u,v\\in\\overline B_2(y,R)).$$\nLet $\\widehat g\\in\\mathbb R^m$ and $\\widehat A\\in\\mathbb R^{m\\times m}$\ncome with certified bounds\n$$\\|\\widehat g-G(y)\\|_2\\le\\epsilon_g,\\qquad \\|\\widehat A-DG(y)\\|_{\\rm op}\\le\\epsilon_J,$$\nwhere $\\epsilon_g,\\epsilon_J\\ge0$. Suppose $\\widehat A$ is invertible and\n$\\|\\widehat A^{-1}\\|_{\\rm op}\\le\\widehat\\beta$, with\n$\\widehat\\beta\\epsilon_J<1$. Define\n$$\\beta:=\\frac{\\widehat\\beta}{1-\\widehat\\beta\\epsilon_J},\\qquad \\rho:=\\|\\widehat g\\|_2+\\epsilon_g,\\qquad q:=\\beta L R.$$\nIf $q<1$ and $\\beta\\rho\\le(1-q)R$, then $G$ has exactly one zero $y^*$\nin $\\overline B_2(y,R)$ and\n$$\\|y^*-y\\|_2\\le\\frac{\\beta\\rho}{1-q}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar component uses the word-derivative convention of [[def-ck-and-multi-index-notation-in-several-variables]], whose source dimension is positive. The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-rank-and-nullity",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map whose domain $V$ is finite-dimensional over\n$F$. Its **nullity** and **rank** are",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Apply [F1] to obtain a $C^1$ unit-speed branch chart $c(s)$ with $c(0)=z_*$ and $c'(0)=t$. Set $\\widetilde\\tau:=\\tau$ if $\\tau^Tt>0$ and $\\widetilde\\tau:=-\\tau$ if $\\tau^Tt<0$; it is a unit vector, its hyperplane is unchanged, and $\\widetilde\\tau^Tc'(0)=|\\tau^Tt|\\ge c$. By continuity of $c'$, shrink the chart to $[-r,r]$ so that $\\widetilde\\tau^Tc'(s)\\ge c/2$. For $g(s):=\\widetilde\\tau^T(c(s)-z_p)$ the offset in [F2] is zero because $z_*$ lies on the hyperplane. The $d=0$ case of [F2] gives exactly one intersection on this chart segment, at $s=0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F8",
+            "F9",
+            "F10",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "By [F7], the derivative of $G$ at $z_*$ is the bordered matrix $$DG(z_*)=\\begin{bmatrix}A\\\\\\tau^T\\end{bmatrix}.$$ The rank, kernel, angle and complement-inverse hypotheses let [F3] give its invertibility and the stated bound $\\beta_*$.",
+          "inputs": [
+            "F3",
+            "F7",
+            "F9",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The last component of $G$ is affine, so for $u,v$ in the ball, $$\\|DG(u)-DG(v)\\|_{\\rm op} =\\left\\|\\begin{bmatrix}DF(u)-DF(v)\\\\0\\end{bmatrix}\\right\\|_{\\rm op} \\le L\\|u-v\\|_2.$$ Also $G(z_*)=0$ by $F(z_*)=0$ and the section equation. Apply [F4] to the square map $G$ on this ball. It supplies a smaller radius $\\rho$, a uniform inverse bound $K$, and the quadratic estimate with $C=KL/2$; its induction also ensures every attempted update stays in the invariant ball.",
+          "inputs": [
+            "F4",
+            "F8",
+            "F9",
+            "F10",
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The finite procedure in [F5] uses exactly these updates and its own residual, domain, singularity and budget checks. Hence any update it attempts from the invariant ball has the bound of step 2.1; if it stops for the iteration budget before reaching tolerance, no exact-zero conclusion follows. For a separately supplied approximate residual/Jacobian tuple satisfying [F6], that certificate gives the stated unique local zero and error bound for this same augmented map $G$.",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n≥1 (or m≥1); there is no empty-dimensional case claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof uses G(z*)=0; the proof states separately how a zero residual is certified."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: Statement requires n≥1, and the proof includes the smallest case n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof require a positive angular margin; a zero tangent angle is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof applies the Newton supplier on a closed ball and keeps every update in that ball."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No proof step chooses an element from an arbitrary nonempty family; all selections are explicitly supplied data or finite-dimensional local constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "fold-section bordered derivative",
+          "method": "exact-hand-calculation",
+          "input": "F=x²−lambda at (h,h²), tau=(1,0), h>0.",
+          "result": "DG=[[2h,−1],[1,0]] has determinant 1; tau has positive dot product 1/sqrt(1+4h²) with the unit tangent.",
+          "disposition": "checks the regular bordered Jacobian used in proof step 2.1."
+        }
+      ],
+      "author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 1.2, 2.1, 3.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      }
+    },
+    "alg-pseudo-arclength-continuation-with-certified-local-corrector": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires n≥1 (or m≥1); there is no empty-dimensional case claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: Definition procedure step 1 returns the certified seed when N_req=0; the finite corrector also tests the initial candidate when N_c=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: Definition procedure steps 3–6 define a one-step trace and one-correction budget without changing the certificate conditions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: Definition procedure steps 1–2 return explicit rank/tangent or tangent-angle failure statuses when the regularity or angle margin fails."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: Definition procedure step 2 verifies chart endpoints and step 4 checks every corrector trial against the declared tube."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No proof step chooses an element from an arbitrary nonempty family; all selections are explicitly supplied data or finite-dimensional local constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps (no numbered proof; this is a definition/procedure item) against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      }
+    },
+    "ex-zero-tangent-angle-makes-bordered-corrector-singular": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-pseudo-arclength-border-matrix-invertibility-and-inverse-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $A:\\mathbb R^{n+1}\\to\\mathbb R^n$ be linear of rank $n$,\nand let $t\\in\\ker A$ have $\\|t\\|_2=1$. Set $E=t^\\perp$ and let\n$Q=(A|_E)^{-1}:\\mathbb R^n\\to E$. For a unit vector $\\tau\\in\\mathbb R^{n+1}$,\nform the square bordered matrix\n$$B=\\begin{bmatrix}A\\\\ \\tau^T\\end{bmatrix}.$$\nThen $B$ is invertible exactly when $\\tau^Tt\\ne0$. If\n$0<c\\le1$, $|\\tau^Tt|\\ge c$, and $K_A\\ge0$ satisfies\n$\\|Qu\\|_2\\le K_A\\|u\\|_2$ for all $u\\in\\mathbb R^n$, then\n$$\\|B^{-1}\\|_{\\rm op}\\le\\sqrt{K_A^2(1+c^{-1})^2+c^{-2}}.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The derivative is $DF(0,0)=[1\\ 0]$, which has rank $1$ and kernel $\\operatorname{span}\\{t\\}$ for the unit tangent $t=(0,1)$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Take the unit hyperplane normal $\\tau=(1,0)$. Then $\\tau^Tt=0$ and $$\\begin{bmatrix}DF(0,0)\\\\\\tau^T\\end{bmatrix} =\\begin{bmatrix}1&0\\\\1&0\\end{bmatrix},$$ whose rows are dependent and whose kernel contains $t\\ne0$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "By [F1], the bordered matrix is singular exactly at this failed angle; the inverse bound also cannot hold. This is the tangent-angle failure required by the continuation algorithm.",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a concrete nonempty Euclidean problem and makes no empty-set or zero-dimensional family claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof gives τᵀt=0 and exhibits the singular bordered matrix."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof is the n=1 scalar-residual case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: The example is exactly the zero-angle degeneracy excluded by the bordered invertibility criterion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no endpoint, boundary-value, or closed-interval assertion requiring a separate endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No proof step chooses an element from an arbitrary nonempty family; all selections are explicitly supplied data or finite-dimensional local constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "zero-angle bordered matrix",
+          "method": "exact-hand-calculation",
+          "input": "DF=[1 0], t=(0,1), tau=(1,0).",
+          "result": "B=[[1,0],[1,0]] has determinant 0.",
+          "disposition": "exact 2×2 computation in verification step 2.1."
+        }
+      ],
+      "author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 2.1, 3.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      }
+    },
+    "ex-natural-parameterization-fails-at-x-squared-fold": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-simple-fold-lyapunov-schmidt-parameterization",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n\\times\\mathbb R$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^3$. Write\n$D_xF(x,\\lambda)u:=DF(x,\\lambda)(u,0)$ and\n$F_\\lambda(x,\\lambda):=DF(x,\\lambda)(0,1)$. Define\n$$F_{xx}(x_0,\\lambda_0)[v,v] :=\\left.\\frac{d}{dt}\\bigl(D_xF(x_0+tv,\\lambda_0)v\\bigr)\\right|_{t=0}.$$\nSuppose\n$$F(x_0,\\lambda_0)=0,\\qquad J:=D_xF(x_0,\\lambda_0),\\qquad \\operatorname{rank}J=n-1.$$\nAssume that $v\\in\\mathbb R^n$ is a unit vector with\n$\\ker J=\\operatorname{span}\\{v\\}$, that $w\\in\\mathbb R^n\\setminus\\{0\\}$\nsatisfies $w^TJ=0$, and that\n$$a:=w^TF_\\lambda(x_0,\\lambda_0)\\ne0,\\qquad b:=w^TF_{xx}(x_0,\\lambda_0)[v,v]\\ne0.$$\nThen there is $\\delta>0$ and a unique local $C^3$ curve of solutions\n$(x(s),\\lambda(s))$, $|s|<\\delta$, with\n$$x(0)=x_0,\\quad \\lambda(0)=\\lambda_0,\\quad v^T(x(s)-x_0)=s,\\quad x'(0)=v,\\quad \\lambda'(0)=0,\\quad \\lambda''(0)=-\\frac{b}{a}\\ne0.$$\nIn particular, on a smaller interval there is a finite $M_3$ such that\n$$\\left|\\lambda(s)-\\lambda_0+\\frac{b}{2a}s^2\\right| \\le\\frac{M_3}{6}|s|^3.$$\nThe full derivative $D_{(x,\\lambda)}F$ has rank $n$ at the fold, and the\nsolution curve tangent there is $(v,0)$. Thus an augmented pseudo-arclength\nhyperplane with unit normal $\\tau$ remains locally regular whenever\n$|\\tau^T(v,0)|>0$. This is a local statement; it asserts no global branch\ncompleteness.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Solving for the parameter gives exactly $\\lambda=x^2$. At $x=0$ its derivative is $d\\lambda/dx=0$, and its second derivative is $2$. Thus the projection from the local solution curve to the $\\lambda$-axis has zero derivative at the fold.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "For every $\\lambda<0$ there is no real solution, while for every $\\lambda>0$ there are two, $x=\\sqrt\\lambda$ and $x=-\\sqrt\\lambda$. Hence no open interval about $0$ is the parameter domain of a single-valued local solution graph covering the whole nearby solution set. On either one-sided branch, $|dx/d\\lambda|=1/(2\\sqrt\\lambda)$ is unbounded as $\\lambda\\downarrow0$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The fold conditions are $F_x(0,0)=0$, $F_\\lambda(0,0)=-1\\ne0$, and $F_{xx}(0,0)=2\\ne0$, so [F1] gives the same nonzero curvature conclusion independently of the explicit graph calculation.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a concrete nonempty Euclidean problem and makes no empty-set or zero-dimensional family claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof computes λ=0 at x=0 and the vanishing first derivative."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof checks both one-sided roots x=±√λ for λ>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof verifies both strict nondegeneracy conditions at the fold."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof distinguishes λ<0, λ=0 and λ>0 at the fold boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No proof step chooses an element from an arbitrary nonempty family; all selections are explicitly supplied data or finite-dimensional local constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "real root count by parameter sign",
+          "method": "exact-hand-calculation",
+          "input": "x²=lambda with real x.",
+          "result": "There are 0 roots for lambda<0, 1 root x=0 for lambda=0, and 2 roots for lambda>0.",
+          "disposition": "supports verification step 2.1 and the failure of a two-sided natural-parameter chart."
+        }
+      ],
+      "author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 2.1, 3.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      }
+    },
+    "ex-local-trace-misses-disconnected-branch": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$ in the componentwise sense of\n[[def-ck-euclidean-maps-and-diffeomorphisms]] on a declared tube; its total\nderivative $DF$ has the linear first-order meaning of\n[[def-total-derivative-in-euclidean-space]]. Require $C^3$ on any subtube\nwhere a fold check is requested. A valid seed consists of a center\n$\\bar z_0$, a radius $r_0$, and a certified ball containing exactly one\nzero $z_0^*$ of an initial augmented section\n$$G_{-1}(z):=\\bigl(F(z),\\tau_{-1}^T(z-z_{p,-1})\\bigr),$$\nwhere $\\tau_{-1}$ is unit and the section is transverse to the regular local\nsolution branch. Thus the seed certifies one solution point of $F=0$ by\nintersecting the branch with a hyperplane; it does not claim that $F=0$ has an\nisolated zero in $\\mathbb R^{n+1}$. The seed also includes a neighborhood\nin which every zero of $F$ lies on the certified local curve chart and a\nverified rank-$n$ condition on that chart.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-augmented-residual-contraction-certificate",
+          "source_section": "Statement",
+          "quote": "For a linear map $A$ between Euclidean spaces, write\n$\\|A\\|_{\\rm op}:=\\sup_{\\|u\\|_2=1}\\|Au\\|_2$. Let $m\\ge1$, let\n$V\\subseteq\\mathbb R^m$ be open, and let\n$G:V\\to\\mathbb R^m$ be $C^1$. Let $y\\in V$, $R>0$, and suppose the closed\nball $\\overline B_2(y,R)$ lies in $V$. Assume that for some $L\\ge0$,\n$$\\|DG(u)-DG(v)\\|_{\\rm op}\\le L\\|u-v\\|_2\\qquad(u,v\\in\\overline B_2(y,R)).$$\nLet $\\widehat g\\in\\mathbb R^m$ and $\\widehat A\\in\\mathbb R^{m\\times m}$\ncome with certified bounds\n$$\\|\\widehat g-G(y)\\|_2\\le\\epsilon_g,\\qquad \\|\\widehat A-DG(y)\\|_{\\rm op}\\le\\epsilon_J,$$\nwhere $\\epsilon_g,\\epsilon_J\\ge0$. Suppose $\\widehat A$ is invertible and\n$\\|\\widehat A^{-1}\\|_{\\rm op}\\le\\widehat\\beta$, with\n$\\widehat\\beta\\epsilon_J<1$. Define\n$$\\beta:=\\frac{\\widehat\\beta}{1-\\widehat\\beta\\epsilon_J},\\qquad \\rho:=\\|\\widehat g\\|_2+\\epsilon_g,\\qquad q:=\\beta L R.$$\nIf $q<1$ and $\\beta\\rho\\le(1-q)R$, then $G$ has exactly one zero $y^*$\nin $\\overline B_2(y,R)$ and\n$$\\|y^*-y\\|_2\\le\\frac{\\beta\\rho}{1-q}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The equation factors as $(x-1)(x+1)=0$, so its complete solution set is $$S=(\\{1\\}\\times\\mathbb R)\\cup(\\{-1\\}\\times\\mathbb R).$$ Each set is connected and open-and-closed relative to $S$, and the two sets are disjoint; therefore they are the two connected components of $S$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "At $(1,0)$, $DF=[2\\ 0]$ has rank $1$ and unit tangent $t=(0,1)$. Choose the section normal $\\tau=(0,1)$ and step $h>0$. The augmented equation is $(x^2-1,\\lambda-h)=0$, whose unique root in any ball of radius less than $1$ centered at $(1,h)$ is $(1,h)$. Its bordered derivative is $\\begin{bmatrix}2&0\\\\0&1\\end{bmatrix}$, so the local corrector is nonsingular.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "At the exact center $(1,h)$ the augmented residual is zero and the Jacobian is invertible. The augmented Jacobian is $2$-Lipschitz; with exact data, choose a radius $R<1/2$, set $\\widehat\\beta=1$, and use zero residual and derivative errors. Then $q=2R<1$ and $\\beta\\rho=0$, so [F2] certifies the unique local section root. The ball of radius $R<1$ also excludes the other root $( -1,h)$.",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The other component $\\{-1\\}\\times\\mathbb R$ contains no point of that local chart around $(1,0)$, and the accepted one-step trace contains no point with $x=-1$. Nevertheless both components satisfy $F=0$. By [F1], the finite trace correctly certifies its local step but cannot certify that the second component is absent or that all branches have been found.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a concrete nonempty Euclidean problem and makes no empty-set or zero-dimensional family claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof verify both exact components and a zero-residual local section root."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof verifies a single accepted local continuation step."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both components are regular rank-one branches; no degenerate fold or singularity is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof checks the local section at λ=h and the root ball boundary excludes x=−1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No proof step chooses an element from an arbitrary nonempty family; all selections are explicitly supplied data or finite-dimensional local constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "two components and local section",
+          "method": "exact-hand-calculation",
+          "input": "F=x²−1, z0=(1,0), tau=(0,1), zp=(1,h), h>0.",
+          "result": "Section roots are (1,h) and (−1,h); a radius below 1 about (1,h) isolates the local root while the other component remains.",
+          "disposition": "supports verification steps 1.1–2.2; no code test was run."
+        }
+      ],
+      "author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 1.2, 2.1, 3.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      }
+    },
+    "ex-pseudo-arclength-crosses-x-squared-fold": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-simple-fold-lyapunov-schmidt-parameterization",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n\\times\\mathbb R$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^3$. Write\n$D_xF(x,\\lambda)u:=DF(x,\\lambda)(u,0)$ and\n$F_\\lambda(x,\\lambda):=DF(x,\\lambda)(0,1)$. Define\n$$F_{xx}(x_0,\\lambda_0)[v,v] :=\\left.\\frac{d}{dt}\\bigl(D_xF(x_0+tv,\\lambda_0)v\\bigr)\\right|_{t=0}.$$\nSuppose\n$$F(x_0,\\lambda_0)=0,\\qquad J:=D_xF(x_0,\\lambda_0),\\qquad \\operatorname{rank}J=n-1.$$\nAssume that $v\\in\\mathbb R^n$ is a unit vector with\n$\\ker J=\\operatorname{span}\\{v\\}$, that $w\\in\\mathbb R^n\\setminus\\{0\\}$\nsatisfies $w^TJ=0$, and that\n$$a:=w^TF_\\lambda(x_0,\\lambda_0)\\ne0,\\qquad b:=w^TF_{xx}(x_0,\\lambda_0)[v,v]\\ne0.$$\nThen there is $\\delta>0$ and a unique local $C^3$ curve of solutions\n$(x(s),\\lambda(s))$, $|s|<\\delta$, with\n$$x(0)=x_0,\\quad \\lambda(0)=\\lambda_0,\\quad v^T(x(s)-x_0)=s,\\quad x'(0)=v,\\quad \\lambda'(0)=0,\\quad \\lambda''(0)=-\\frac{b}{a}\\ne0.$$\nIn particular, on a smaller interval there is a finite $M_3$ such that\n$$\\left|\\lambda(s)-\\lambda_0+\\frac{b}{2a}s^2\\right| \\le\\frac{M_3}{6}|s|^3.$$\nThe full derivative $D_{(x,\\lambda)}F$ has rank $n$ at the fold, and the\nsolution curve tangent there is $(v,0)$. Thus an augmented pseudo-arclength\nhyperplane with unit normal $\\tau$ remains locally regular whenever\n$|\\tau^T(v,0)|>0$. This is a local statement; it asserts no global branch\ncompleteness.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pseudo-arclength-local-newton-correction",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$. Suppose $z_*\\in U$ satisfies $F(z_*)=0$ and\n$A:=DF(z_*)$ has rank $n$. Let $t\\in\\ker A$ be a unit vector, let\n$\\tau\\in\\mathbb R^{n+1}$ be a unit vector with\n$|\\tau^Tt|\\ge c$ for some $0<c\\le1$, and let $z_p$ satisfy\n$\\tau^T(z_*-z_p)=0$. Define\n$$G(z):=\\bigl(F(z),\\tau^T(z-z_p)\\bigr).$$\nLet $K_A\\ge0$ satisfy\n$$\\|(A|_{t^\\perp})^{-1}u\\|_2\\le K_A\\|u\\|_2\\qquad(u\\in\\mathbb R^n),$$\nand set\n$$\\beta_*:=\\sqrt{K_A^2(1+c^{-1})^2+c^{-2}}.$$\nThe derivative $DG(z_*)$ is invertible and\n$\\|DG(z_*)^{-1}\\|_{\\rm op}\\le\\beta_*$. There is a local regular\nunit-speed solution-curve chart through $z_*$, and after shrinking it, the\nhyperplane $\\tau^T(z-z_p)=0$ has exactly one intersection with that chart.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-augmented-residual-contraction-certificate",
+          "source_section": "Statement",
+          "quote": "For a linear map $A$ between Euclidean spaces, write\n$\\|A\\|_{\\rm op}:=\\sup_{\\|u\\|_2=1}\\|Au\\|_2$. Let $m\\ge1$, let\n$V\\subseteq\\mathbb R^m$ be open, and let\n$G:V\\to\\mathbb R^m$ be $C^1$. Let $y\\in V$, $R>0$, and suppose the closed\nball $\\overline B_2(y,R)$ lies in $V$. Assume that for some $L\\ge0$,\n$$\\|DG(u)-DG(v)\\|_{\\rm op}\\le L\\|u-v\\|_2\\qquad(u,v\\in\\overline B_2(y,R)).$$\nLet $\\widehat g\\in\\mathbb R^m$ and $\\widehat A\\in\\mathbb R^{m\\times m}$\ncome with certified bounds\n$$\\|\\widehat g-G(y)\\|_2\\le\\epsilon_g,\\qquad \\|\\widehat A-DG(y)\\|_{\\rm op}\\le\\epsilon_J,$$\nwhere $\\epsilon_g,\\epsilon_J\\ge0$. Suppose $\\widehat A$ is invertible and\n$\\|\\widehat A^{-1}\\|_{\\rm op}\\le\\widehat\\beta$, with\n$\\widehat\\beta\\epsilon_J<1$. Define\n$$\\beta:=\\frac{\\widehat\\beta}{1-\\widehat\\beta\\epsilon_J},\\qquad \\rho:=\\|\\widehat g\\|_2+\\epsilon_g,\\qquad q:=\\beta L R.$$\nIf $q<1$ and $\\beta\\rho\\le(1-q)R$, then $G$ has exactly one zero $y^*$\nin $\\overline B_2(y,R)$ and\n$$\\|y^*-y\\|_2\\le\\frac{\\beta\\rho}{1-q}.$$",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$ in the componentwise sense of\n[[def-ck-euclidean-maps-and-diffeomorphisms]] on a declared tube; its total\nderivative $DF$ has the linear first-order meaning of\n[[def-total-derivative-in-euclidean-space]]. Require $C^3$ on any subtube\nwhere a fold check is requested. A valid seed consists of a center\n$\\bar z_0$, a radius $r_0$, and a certified ball containing exactly one\nzero $z_0^*$ of an initial augmented section\n$$G_{-1}(z):=\\bigl(F(z),\\tau_{-1}^T(z-z_{p,-1})\\bigr),$$\nwhere $\\tau_{-1}$ is unit and the section is transverse to the regular local\nsolution branch. Thus the seed certifies one solution point of $F=0$ by\nintersecting the branch with a hyperplane; it does not claim that $F=0$ has an\nisolated zero in $\\mathbb R^{n+1}$. The seed also includes a neighborhood\nin which every zero of $F$ lies on the certified local curve chart and a\nverified rank-$n$ condition on that chart.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "At $(0,0)$, $F_x=0$, $F_\\lambda=-1$, and $F_{xx}=2$. With $v=w=1$, $a=-1$ and $b=2$, so [F1] gives $\\lambda''(0)=2$. The full derivative is $DF(x,\\lambda)=[2x,-1]$, which has rank $1$ everywhere, and at the fold its unit kernel tangent is $t=(1,0)$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Choose the unit section normal $\\tau=(1,0)$ and predictor $z_p=(h,0)$. The augmented residual is $$G_h(x,\\lambda)=(x^2-\\lambda,x-h),$$ whose unique zero is $(h,h^2)$. Its derivative there is $$DG_h(h,h^2)=\\begin{bmatrix}2h&-1\\\\1&0\\end{bmatrix},$$ with determinant $1$; the section is transverse since its normal has positive dot product $1/\\sqrt{1+4h^2}$ with the unit branch tangent $(1,2h)/\\sqrt{1+4h^2}$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "At the predictor, $G_h(h,0)=(h^2,0)$ and $$DG_h(h,0)=\\begin{bmatrix}2h&-1\\\\1&0\\end{bmatrix}.$$ Solving $DG_h(h,0)\\,s=-G_h(h,0)$ gives $s=(0,h^2)$, so one exact Newton correction reaches $(h,h^2)$ and makes the augmented residual zero. For the positive step in the statement, this is one exact update through the fold's turning parameter.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.2",
+          "step": "3.2",
+          "claim": "At the corrected center the residual and evaluation errors are zero, and the bordered Jacobian is invertible by step 2.1. Its derivative is Lipschitz on every bounded ball, so choose a sufficiently small positive radius to make $q<1$; the residual term is zero, hence the ball condition $\\beta\\rho\\le(1-q)R$ holds.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "The section root is therefore certifiable locally, and the normal remains transverse on a small chart. This gives a finite local continuation step through $(0,0)$ even though $\\lambda'(0)=0$; it asserts nothing about other components.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a concrete nonempty Euclidean problem and makes no empty-set or zero-dimensional family claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof evaluates the fold at (0,0), where λ′(0)=0 and the residual vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof verifies exactly one Newton correction from the predictor."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes h>0 and a transverse normal; it makes no claim at h=0 or zero angle."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/Proof boundary audit: the proof identifies the fold point as the endpoint at s=0 of the normalized branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No proof step chooses an element from an arbitrary nonempty family; all selections are explicitly supplied data or finite-dimensional local constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim with a reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one Newton correction",
+          "method": "exact-hand-calculation",
+          "input": "h>0, y0=(h,0), G=(x²−lambda,x−h).",
+          "result": "DG(y0)=[[2h,−1],[1,0]] and s=(0,h²), so y1=(h,h²) and G(y1)=0.",
+          "disposition": "supports verification step 3.1; no code test was run."
+        }
+      ],
+      "author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 2.1, 3.1, 3.2, 4.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      }
+    }
+  }
+}

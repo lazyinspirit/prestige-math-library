@@ -1,0 +1,1431 @@
+ELSEVIER 
+Applied Numerical Mathematics 25 (1997) 151-167 
+
+APPLIED 
+NUMERICAL 
+MATHEMATICS 
+
+Implicit-explicit Runge-Kutta methods for time-dependent 
+
+partial differential equations 
+
+Uri M. Ascher a'*'l, Steven J. Ruuth b,2, Raymond J. Spiteri c,1,3 
+
+a Institute of Applied Mathematics and Department of Computer Science, University of British Columbia, Vancouver, BC, 
+
+Canada V6T 1Z4 
+b Department of Mathematics, University of California, Los Angeles, CA, USA 
+c Institute of Applied Mathematics and Department of Mathematics, University of British Columbia, Vancouver, BC, 
+
+Canada V6T 1Z2 
+
+Abstract 
+
+Implicit-explicit (IMEX) linear multistep time-discretization schemes for partial differential equations have 
+proved useful in many applications. However, they tend to have undesirable time-step restrictions when applied 
+to convection-diffusion problems, unless diffusion strongly dominates and an appropriate BDF-based scheme is 
+selected (Ascher et al., 1995). 
+
+In this paper, we develop Runge-Kutta-based IMEX schemes that have better stability regions than the best 
+known IMEX multistep schemes over a wide parameter range. © 1997 Elsevier Science B.V. 
+
+I. Introduction 
+
+When a time-dependent partial differential equation (PDE) involves terms of different types, it is a 
+natural idea to employ different discretizations for them. Implicit-explicit (IMEX) time-discretization 
+schemes are an example of such a strategy. Linear multistep IMEX schemes have been used by many 
+researchers, especially in conjunction with spectral methods [3,10]. Some schemes of this type were 
+proposed and analyzed as far back as the late 1970s [5,15]. Instances of these methods have been 
+successfully applied to the incompressible Navier-Stokes equations [9] and in environmental modeling 
+studies [16]. A systematic, comparative study for PDEs of convection-diffusion type was carried out 
+in [2], and a corresponding study for reaction--diffusion problems arising in morphology is reported 
+in [11]. 
+
+* Corresponding author. E-mail: ascher@cs.ubc.ca. 
+
+J The work of this author was partially supported under NSERC Canada Grant OGP0004306. 
+a The work of this author was partially supported by an NSERC Postdoctoral Scholarship and NSF DMS94-04942. E-mail: 
+ruuth@math.ucla.edu. 
+
+3 The work of this author was partially supported under NSERC Canada Grant OGP0004306. E-mail: spiteri@math.ubc.ca. 
+
+0168-9274/97/$17.00 © 1997 Elsevier Science B.V. All rights reserved. 
+PH SO 168-9274(97)0005 6- 1 
+
+
+152 
+U.M. Ascher et al. / Applied Numerical Mathematics 25 (1997) 151-167 
+
+In this work, we consider problems of convection-diffusion type (or hyperbolic-parabolic equations), 
+e.g., 
+
+ut = uuz + uAu, 
+u > O. 
+(1.1) 
+
+Discretization of the spatial derivatives (e.g., by finite-difference, finite-element, finite-volume, or 
+spectral methods) yields a very large ODE system in time, 
+
+iz = f(u) + g(u), 
+(1.2) 
+
+where f corresponds to the convection (hyperbolic) term, UUx, and g corresponds to the diffusion 
+(parabolic) term, uAu. An IMEX scheme consists of applying an implicit discretization for 9 and an 
+explicit one for f. This is natural because the system (1.2) with f -- 0 is generally stiff and linear, 
+whereas with 9 -= 0 the system is not too stiff and it is often nonlinear. Moreover, if one insists 
+on using an implicit discretization for the latter case, the construction of iterative solvers is made 
+challenging by the properties of the matrix to be inverted. 
+
+In [2] we have analyzed and experimented with linear multistep schemes for (1.2). For diffusion- 
+dominated problems, schemes utilizing Backward Differentiation Formulae (BDF) for 9 have optimal 
+damping properties. The corresponding IMEX scheme is a semi-explicit BDF (SBDF) [5,9,15]. How- 
+ever, when diffusion is not dominant, the choice of method is less obvious. Ideally, one would like 
+a dissipative scheme for the hyperbolic term, so that the resulting IMEX scheme would have good 
+stability and smoothing properties, independent of 9(u). Yet, it is well known that this necessitates 
+looking for schemes of order (or more accurately, backward steps) at least 3 (cf. [2]). The main dif- 
+ficulty plaguing multistep IMEX schemes is the possibility that relatively small time steps become 
+necessary due to stability restrictions (e.g., [14]). Such restrictions become worse when working with 
+higher-order multistep schemes, as demonstrated in [2]. On the other hand, the stability region of 
+explicit Runge-Kutta schemes actually increases slightly when three- and four-stage schemes are con- 
+templated. Thus, we are led to investigate the development and performance of IMEX Runge-Kutta 
+schemes. 
+
+When the system (1.2) arises from a PDE in more than one spatial variable, the simplicity and 
+efficiency of solving the algebraic equations corresponding to the implicit part of the discretization at 
+each time step is of paramount importance. In [2], we show that, under appropriate circumstances and 
+for certain IMEX schemes, not much more than one multigrid W-cycle per time step is needed. Here, 
+we aim at such a performance per Runge-Kutta stage. Hence, we concentrate on diagonally-implicit 
+Runge-Kutta (DIRK) schemes for 9(u), paying particular attention to their attenuation properties. We 
+construct a number of IMEX schemes of this sort, and investigate their properties. Since the effective 
+order of DIRK schemes drops to 1 for very stiff ODEs [8], we do not expect the Runge-Kutta schemes 
+to be competitive with SBDF in the limit where 9(u) is heavily dominant and very stiff. However, 
+our Runge-Kutta schemes are shown to have excellent properties for other parameter ranges. 
+
+It is well known that, despite its recent rise in popularity, the use of Runge-Kutta schemes for 
+the integration of time-dependent PDEs is not without drawbacks. One problem is a loss of accuracy 
+order when time-dependent inflow boundary conditions are prescribed [4]. A remedy is proposed in 
+[1]. Note also that, in the (usual) case where the accuracy of the solution at the end of the step is 
+higher than at internal stages, the accuracy to which these internal stages must be calculated (say by 
+an iterative method, as in Section 5) cannot be lowered. 
+
+
+U.M. Ascher et al./ Applied Numerical Mathematics 25 (1997) 151-167 
+153 
+
+The system (1.2) can be cast as a partitioned system, 
+
++ = f(v, w), 
+(1.3a) 
+
+~b = ~(v, w), 
+(l.3b) 
+
+with u = v + w, f = f(v + w) and ~ = 9(v + w). The IMEX Runge-Kutta schemes devised below 
+are then partitioned Runge-Kutta schemes. Their orders are discussed in [7, Section II.15]. They can 
+also be seen as a particular class of splitting methods. We note that for (1.2), v and w need not be 
+known individually (indeed we may not have initial conditions for them). All we need to have is their 
+smooth, local existence. 
+
+In Section 2, we develop a number of IMEX Runge-Kutta schemes of up to four stages, which are 
+up to third-order accurate. The schemes divide naturally into two classes--those whose last internal 
+stage is identified with the solution at the next time instance (i.e., at the end of the time step), and 
+those where an additional quadrature is used at the end of the step. The first class is particularly good 
+for highly-stiff problems, but it is the second class which seems to yield some of the more promising 
+variants for a wide range of parameters, particularly the scheme identified as (3,4,3) (3 internal stages 
+for the implicit formula, 4 stages for the explicit and a combined accuracy of order 3). 
+
+In Section 3, we investigate the performance of the various schemes for a simple test equation, 
+which arises from avon Neumann analysis of an advection-diffusion equation. Stability regions are 
+plotted in Figs. 1 and 2. Results of test runs for a linear advection-diffusion equation are reported in 
+Section 4.1 and the Burgers equation is experimented with in Section 4.2. In Section 5, we investi- 
+gate the performance of our various schemes in conjunction with employing a multigrid method for 
+resolving the implicitness at each stage. 
+
+2. IMEX Runge-Kutta schemes 
+
+We now develop some IMEX Runge-Kutta schemes. For 9, we consider an implicit s-stage DIRK 
+scheme [8] with coefficients A E N sxs, c, b E IR s, in the usual Butcher notation. Let a = s + 1. 
+For f, we consider an (s + 1)-stage explicit scheme with the abscissae ~" = (0) and coefficients 
+
+E R~X~,b E R ~. To cast the DIRK scheme as an (s + 1)-stage scheme as well, we can pad the 
+s-stage scheme with zeroes, obtaining the tableau 
+
+0 
+0 
+0 
+... 
+0 
+
+0 
+all 
+0 
+... 
+0 
+
+0 
+a21 
+a22 
+"'" 
+0 
+
+: 
+: 
+: 
+".. 
+: 
+
+0 
+asl 
+as2 
+"'" 
+ass 
+
+0 
+
+C1 
+
+c2 
+
+cs 
+
+0 
+bl 
+b2 
+"- 
+bs 
+
+Referring to the coefficients of this padded tableau as J~ E IR ~'x~, b E R ~, ~ E IR ~, we see that 
+
+= ~'. This property simplifies significantly the form of the order conditions on the method's coeffi- 
+cients due to coupling between the individual schemes. 
+
+
+154 
+U.M. Ascher et al. / Applied Numerical Mathematics 25 (1997) 151-167 
+
+One step from tn-1 to tn = tn-1 + k of the IMEX scheme is given as follows: 
+Set 
+
+K1 = f(un-1). 
+
+Fori=l,...,sdo: 
+
+• Solve for Ki: 
+
+= g(ud, 
+
+where 
+
+i 
+i 
+
+Ui 
+~tn-l+lgEai,jKjq-kE 
+A 
+A 
+= 
+ai+l,jlT(j. 
+j=l 
+j=l 
+
+• Evaluate 
+
+(2.1a) 
+
+(2.1b) 
+
+(2.1 c) 
+
+0 
+
+c1 
+
+c2 
+
+Cs- 1 
+
+0 
+0 
+0 
+.-- 
+0 
+
+321 
+0 
+0 
+"'" 
+0 
+
+331 
+332 
+0 
+"'' 
+0 
+
+: 
+: 
+: 
+".. 
+: 
+
+asl 
+as2 
+as3 
+"'" 
+0 
+
+Ki+l =f(ui). 
+(2.1d) 
+
+Finally, evaluate 
+
+Un:Un_l 
+"OF k 
+bjKj --~- k E*~)j2 j . 
+(2.1e) 
+
+j=l 
+j=l 
+
+We consider two special cases, which lead to two sub-families of methods: those which satisfy (2.2) 
+and those which satisfy (2.3)-(2.4): 
+
+(1) In the case that b = b (and in particular bl = 0), we have in place of (2.1e) 
+
+?.tn=Un_ 1 ~- lg ~-~ bj(Kj -}- Kj+I). 
+(2.2) 
+j=l 
+
+(2) In the case that bs+l = 0, 2,+1 need not be evaluated. Furthermore, if 
+
+bj = as,j, 
+bj = as+l,j, 
+j = 1,...,s 
+(2.3) 
+
+(implying that the implicit scheme is stiffly accurate and cs = 1), then substituting (2.1e) into 
+the expression for u,, we see that 
+
+un = us. 
+(2.4) 
+
+This is useful for very stiff problems. We note also that the explicit scheme can now be generated 
+from a general explicit s-stage scheme based on the abscissae el,..., cs-1, 
+
+
+U.M. Ascher et al. / Applied Numerical Mathematics 25 (1997) 151-167 
+155 
+
+In (2.1b), there are s nonlinear systems to solve involving 9 alone, and the operators to be inverted 
+are 
+
+I -- kaiigu. 
+
+Assuming that the Jacobian gu is evaluated only once (at tn-1), this operator is the same for each i if 
+aii is independent of i, i.e., for SDIRK schemes. However, if an iterative method like 1-cycle multigrid 
+is used for the implicit scheme, then perhaps it is less critical for the overall efficiency to insist on 
+SDIRK, and a more general DIRK scheme can be contemplated. See [8, Section IV.6], for stiffly- 
+accurate SDIRK schemes. In our search for particularly accurate and stable schemes, we have allowed 
+the diagonal elements of A to differ from one another. Despite this, the schemes we recommend are 
+all SDIRK, since there were sufficient excess degrees of freedom in the solution process to allow for 
+this computationally-efficient choice. 
+
+Example 1. Consider the case of (1.2) where 
+
+(q) 
+u= 
+, 
+f= 
+, 
+g= 
+. 
+P 
+f2 
+0 
+
+Thus, we apply the implicit scheme to advance q and the explicit one to advance p. Observe that if 
+
+f2 is influenced by a control function, for instance, then at each stage i, this influence is propagated 
+to Ki from/fi. This does not happen when using a "normal" explicit scheme (cf. [13]). Moreover, if 
+fl is independent of q then 
+
+, 
+
+and the scheme becomes explicit! 
+
+In particular, for Hamiltonian systems we can set u = (q,p)T, f = (0,-Hq) T, g = (Hp, O) T. If 
+H~ is independent of q, then we obtain an explicit scheme which still retains some advantages of the 
+implicit one. 
+
+We now proceed to construct some instances of our IMEX RK family of schemes. We will use the 
+triplet (s, or, p) to identify a scheme (2.1), where s is the number of stages of the implicit scheme, a 
+is the number of explicit scheme stages (so cr = s + 1 for case (1), i.e., (2.2), and o- = s for case (2), 
+i.e., (2.3)-(2.4) above), and p is the combined order of the scheme. 
+
+2.1. Forward-backwardEuler (1, 1, 1) 
+
+The pair of backward and forward Euler schemes 
+
+1 1 
+0~ 
+
+1 
+
+can be padded to read 
+
+
+156 
+U.M. Ascher et al. /Applied Numerical Mathematics 25 (1997) 151-167 
+
+00 
+0 
+00 
+0 
+
+10 
+1 
+11 
+0 
+
+0 
+1 
+1 
+0 
+
+This yields the linear one-step IMEX (cf. [2]): 
+
+un = Un-1 + k(f(u~_l) + g(Un)). 
+
+Note that this scheme satisfies (2.3). 
+
+2.2. Forward-backward Euler (1,2, 1) 
+
+A 
+The above form of Euler's method does not satisfy b = b. The variant that does is 
+
+i.e., un 
+
+0 
+0 
+0 
+
+0 
+1 
+1 
+
+0 
+1 
+
+= Un--1 + k(g(ul 
+
+0 
+0 
+
+1 
+0 
+
+0 
+1 
+
++ f(ul)), where Ul = un-1 + kg(ul) + kf(un-1). This scheme involves 
+an additional evaluation of f per step, compared to the previous one. 
+
+2.3. Implicit-explicit midpoint (1,2, 2) 
+
+The Euler pairs are first-order accurate and the (1,1,1) scheme has well-known disadvantages when 
+9 = 0 (cf. Section 3 and [2]). The following pair of implicit-explicit schemes: 
+
+i! 
+0 
+00 
+0 
+
+1 
+1 ~ 1 
+0 
+
+1 
+0 
+1 
+
+correspond to applying explicit midpoint for f and implicit midpoint for g. It is second-order accurate 
+because the two schemes from which it is composed are each second-order accurate and ~ = ~" [7]. 
+This scheme performs usually comparably to the unreasonably popular CNAB considered in [2], and 
+has better symmetry properties. 
+
+Example 2. Applying the scheme (1,2, 2) to the separable Hamiltonian system 
+
+0 = HAp), 
+= -Hq(q) 
+
+and defining 
+
+u z  
+, 
+= 
+, 
+g =  
+, 
+
+we obtain (%. l>) 
+(o>) 
+Kl = 
+, 
+K1 = 
+-Hq(ql 
+' 
+
+
+U.M. Ascher et al. / Applied Numerical Mathematics 25 (1997) 151-167 
+157 
+
+pl 
+kPn-1] 
+\Pn--l/ 
+2 \ --Hq(ql) ] 
+
+' 
+Pn 
+\Pn-1/ 
+\Pn-1./ 
+\-Hq(ql)J" 
+
+We note that this scheme is explicit, and it can also be shown to be symplectic. It is identical to the 
+leap-frog/Verlet scheme [12] 
+
+Pn =Vn-, - kHq(qn-1 + k/2Hp(Pn-1)), 
+
+qn=qn-I +kHP(Pn+Pn-1) 
+" 2  
+
+2.4. A third-order combination (2, 3, 3) 
+
+The two-stage, third-order DIRK scheme with the best damping properties turns out to be the DIRK 
+scheme [7, p. 207] 
+
+7 7 
+7 
+0 
+
+1 - 
+1 - 
+27 
+3' 
+
+1 
+1 
+
+with 3' = (3 + v/3)/6. For the test equation ~t = c~u, if we let z = c~k, then as z ~ -~, 
+R(cxD) = 
+
+1 - v~ ~ -0.7321. This is a marked improvement over the midpoint scheme (1,2,2) which has no 
+attenuation at the stiffness limit c¢. 
+
+The corresponding third-order explicit Runge-Kutta scheme (ERK) is 
+
+0 
+
+3' 
+
+1-3' 
+
+0 
+0 
+0 
+
+3' 
+0 
+0 
+
+3'-1 
+2(1-'7) 
+0 
+
+1 
+1 
+0 
+~ 
+
+The resulting IMEX combination is third-order accurate, has some dissipation near the imaginary axis 
+(like all three-stage third-order ERK methods) and has some attenuation of the stability function at oc. 
+
+2.5. L-stable, two-stage, second-order DIRK (2, 3, 2) 
+
+One may be concemed that the attenuation that the above scheme has may not be sufficient for 
+some problems. A two-stage, second-order DIRK scheme which is stiffly accurate is [8, p. 106] 
+
+° 
+
+1-,,/ 
+7 
+
+1-~ 
+3' 
+
+
+158 
+U.M. Ascher et al. / Applied Numerical Mathematics 25 (1997) 151-167 
+
+where 7 = (2 - x/2)/2. The corresponding three-stage second-order ERK is 
+
+00 
+0 
+0 
+
+77 
+0 
+0 
+
+15 
+1-5 
+0 
+
+0 
+1- 7 
+7 
+
+Varying 5 to get a dissipative stability region, we match the terms of the exponential in the stability 
+function up to third order. This yields the stability region of a three-stage, third-order explicit RK 
+scheme, with 5 = -2x/2/3. The resulting IMEX combination is second-order accurate. 
+
+2.6. L-stable, two-stage, second-order DIRK (2, 2, 2) 
+
+We use the same form (with the same 7 but with 5 not yet specified) as in the previous IMEX 
+scheme, except for requiring that (2.3) hold instead of (2.2), i.e., bl = 5, b2 = 1 - 5, b3 = 0. This 
+gives a second-order scheme 
+
+7 
+7 
+
+11-7 
+
+1-7 
+
+0 
+
+7 
+
+7 
+
+O0 
+
+77 
+
+1 5 
+
+5 
+
+0 
+0 
+
+0 
+0 
+
+1-5 
+0 
+
+1-5 
+0 
+
+with 5 = 1- 1/(27). 
+
+2.7. L-stable, three-stage, third-order DIRK (3, 4, 3) 
+
+We would now like to exploit the larger dissipativity region, which four-stage, fourth-order ERK 
+schemes have near the imaginary axis. A three-stage, third-order DIRK scheme which is stiffly accurate 
+is [8, p. 106] 
+
+7 
+(1 +7) 
+
+7 
+0 
+0 
+(1 -7) 
+
+2 
+7 
+0 
+
+bl(7) 
+b2(~) 7 
+
+b1(7) 
+b2(7) 
+7 
+
+where 7 is the middle root of 6x 3 - 18x 2 + 9x - 1 = 0, 
+
+5 
+b1(7)=-372 +47-¼ 
+and b2(7)= 372-57-[- g. 
+
+
+U.M. Ascher et al. / Applied Numerical Mathematics 25 (1997) 151-167 
+159 
+
+Numerically, this evaluates to 
+
+0.4358665215 
+
+0.7179332608 
+
+1 
+
+0.4358665215 
+0 
+0 
+
+0.2820667392 
+0.4358665215 
+0 
+
+1.208496649 
+-0.644363171 
+0.4358665215 
+
+1.208496649 
+-0.644363171 
+0.4358665215 
+
+The corresponding four-stage, third-order ERK, constructed such that it has the same (desirable) 
+stability region as all four-stage, fourth-order ERK schemes, is 
+
+0 
+
+"7 
+(1 4-7) 
+
+2 
+
+1 
+
+0 
+0 
+0 
+0 
+
+7 
+0 
+0 
+0 
+
+~31 (')') ~32 (7) 
+0 
+0 
+
+a41 (7) 
+~42 
+q43 
+0 
+
+0 
+b1(7) 
+b2 ('y) 
+7 
+
+The third-order conditions indicate that this is a two-parameter family of schemes. Taking our degrees 
+of freedom to be a42, ~43, the remaining expressions are 
+
+~31 = 
+(1 - 9,,/4- 3'~2)~42 4- (~ - ~7 4- ~-72)~43 - 7 4- 137- 972, 
+
+~32 = (--1 4- 9 7 -- 372)~42 4- (--~ 4- ~7 -- ~72)a43 4- 4 -- ~7 4- 972, 
+
+~41 ~--- 1 -- ~42 -- a~43. 
+
+Selecting particular values for a42 (7) and ~43 (7) so as to match the terms of the exponential in the 
+stability function up to fourth order, we obtain the scheme 
+
+0 
+
+0.4358665215 
+
+0.7179332608 
+
+1 
+
+0 
+0 
+0 
+0 
+
+0.4358665215 
+0 
+0 
+0 
+
+0.3212788860 
+0.3966543747 
+0 
+0 
+
+-0.105858296 
+0.5529291479 
+0.5529291479 
+0 
+
+0 
+1.208496649 
+-0.644363171 
+0.4358665215 
+
+The resulting IMEX combination is third-order accurate. 
+
+2.8. A four-stage, third-order combination (4, 4, 3) 
+
+No pair consisting of a three-stage, L-stable DIRK and a four-stage ERK satisfying (2.3) with a 
+combined third-order accuracy could be found. In order to obtain a third-order formula satisfying 
+(2.3), we need to go to a four-stage, third-order, L-stable DIRK, coupled with a four-stage ERK in 
+the manner indicated in case (2) of Section 2. After having satisfied the order conditions and imposed 
+L-stability, we are left with a few families of schemes. 
+
+
+160 
+U.M. Ascher et al. /Applied Numerical Mathematics 25 (1997) 151-167 
+
+Experimenting with the test equation of Section 3, 
+coefficients which are not too large, and a diagonal 
+
+fourth-order, 
+L-stable DIRK. In particular, we have 
+
+C3 = 1, b4 = 1, and a43 = 1. The resulting scheme is 
+
+1 
+
+2 
+1 
+3 
+6 
+
+1 
+1 
+2 
+2 
+3 
+1 
+
+3 
+
+0 
+0 
+0 
+
+1 
+0 
+0 
+
+1 
+1 
+0 
+
+3 
+1 
+1 
+2 
+2 
+3 
+1 
+1 
+2 
+2 
+2 
+
+0 0 
+
+1 
+
+2 
+11 
+3 
+18 
+
+1 
+5 
+2 
+6 
+
+1 
+1 
+
+1 
+
+we have selected a scheme which has rational 
+entry which is close to that of the four-stage, 
+
+chosen Cl = 1, accompanied by the choices 
+
+0 
+0 
+0 
+0 
+
+0 
+0 
+0 
+0 
+
+1__ 
+0 
+0 
+0 
+18 
+
+5 
+1 
+0 
+0 
+6 
+2 
+
+7 
+3 
+7 
+0 
+4 
+4 
+
+7 
+3 
+7 
+0 
+4 
+4 
+
+3. Test equation for convection-diffusion 
+
+As is shown in [2], using a centered discretization scheme for the spatial derivatives of advection- 
+diffusion PDEs, avon Neumann analysis yields that a simple yet appropriate test equation is the scalar 
+ODE (1.2) with 
+
+f = i/3u, 
+g = c~u, 
+
+where c~, /3 are real constants, usually ~ ~< 0,/3 > 0, and i = v/Z-] -. 4 
+
+For a given time step k, we can define 
+
+x = kc~, 
+y = k/3, 
+z = x + iy, 
+
+and write an IMEX step (2.1)-(2.2) as 
+
+?l n = ~Zn_ 1 -~- z ~-~ bjuj ~ /~(Z)~n_l, 
+(3.1) 
+
+j=l 
+
+where 
+
+i-I 
+(1 + iy3i+l,1)Un-~ + ~-~j=l(xaij q- iy3i+l,j+l)Uj 
+u~= 
+, 
+i= 1,...,s. 
+(3.2) 
+1 -- xaii 
+
+For schemes where o- = s, i.e., where (2.3) holds, an expression like (3.1) need not be used because 
+
+Let us consider the two Euler schemes first. For the usual pair (1,1,1), Eq. (3.2) implies 
+
+1 +iy 
+Un -- -
+-
+ 
+Un-- 1 - 
+1--X 
+
+4 W. Hunsdorfer (Workshop on Innovative Time Integrators, CWI, Amsterdam, 1996) has indicated that a more general test 
+equation where c~ and/3 are allowed to be complex is useful, but we stay with the simpler test equations and lend further 
+support to the analysis with more general numerical experiments in the following sections. 
+
+
+U.M. Ascher et al. / Applied Numerical Mathematics 25 (1997) 151-167 
+161 
+
+kB 
+
+10 
+
+Time-Step Restrictions 
+
+0 
+I 
+-10 ~ 
+-10 a 
+
+I 
+I 
+
+(1,1,1) -- 
+(2,2,2) 
+• 
+(4,4,3) -- 
+
+_10 o 
+_10 -1 
+_10-~ 
+
+Fig. 1. Time step stability restrictions for various values of c~ and/3, for IMEX schemes satisfying (2.3). Note that all these 
+schemes perform well in the high-attenuation limit. 
+
+On the imaginary axis, ]u~ I ~< (1 + y2)lUn_ll, and the scheme is unconditionally unstable for any 
+y ¢ 0 (cf. [2]). As x ---, -oc and with y bounded, however, the scheme is unconditionally stable 
+and un ---, 0, i.e., attenuation compatible with that of the exact solution is realized. For the other pair, 
+(1,2,1), we get from (3.1)-(3.2) 
+
+1 +iy'~ 
+u,~= I+Z~_x)Un_I. 
+
+Setting x = 0 initially, we obtain that, along the imaginary axis, 
+
+lunl 2 
+(1 - 
+y2 + y4)lu,~_l]2 ' 
+
+so stability is achieved provided that 
+
+lyl 
+1. 
+
+This corresponds to the CFL condition. On the other hand, letting x + 
+-oc, we also obtain the 
+restriction [Y] ~< 1 in the high-attenuation limit. Thus, we see that the variant (1,2,1) has stability 
+characteristics which are preferable over the usual backward-forward Euler scheme in the hyperbolic 
+limit and worse in the parabolic limit. 
+
+Now, we can ask, given a fixed ratio z/y = c~//3, what is the maximum y > 0 for which the scheme 
+is stable, i.e., ]R(z)l < 1? This gives the stability restriction on the step size for a given problem. In 
+Fig. 1, we plot the resulting curves for the IMEX scheme presented earlier of the second type, i.e., 
+those satisfying (2.3). Corresponding curves for the schemes satisfying (2.2) are plotted in Fig. 2. 
+
+Common to all the schemes in Fig. 2 is that, as c~ + -oc, there is a time step restriction involving 
+/3, typically k/3 < 1. In contrast, no such restriction occurs for schemes satisfying (2.3), and hence 
+(2.4), in Fig. 1. The behavior of these latter schemes is qualitatively similar in the high-attenuation 
+limit to that of the SBDF schemes [2]. On the other hand, the scheme (3, 4, 3) in Fig. 2 suggests a 
+potential advantage, in terms of allowable time steps, over a large range of parameter values. 
+
+
+162 
+U.M. Ascher et al. / Applied Numerical Mathematics 25 (1997) 151-167 
+
+12 
+
+10 
+
+8 
+
+kZ 
+6 
+
+4 
+
+2 
+
+0 
+
+Time-Step Restrictions 
+
+l 
+} 
+I 
+
+(1,2,1) -- 
+x 
+(1,2,2) 
+"
+k
+ 
+(2,3,3) 
+(2,3,2) 
+
+3) 
+
+I 
+I 
+I 
+[0 2 
+-101 
+-10 0 
+-10 -1 
+-1, 
+~/~ 
+
+-2 
+
+Fig. 2. Time step stability restrictions for various values of a and /3, for IMEX schemes satisfying (2.2). Note that some 
+of these schemes, especially (3, 4, 3), perform well when -a is not too large in magnitude, but they all have time step 
+restrictions in the high-attenuation limit. 
+
+4. Finite-difference approximations in 1D 
+
+4.1. A linear problem 
+
+Consider the one-dimensional variable-coefficient problem 
+
+ut + sin(27rx)uz = vuxx, 
+(4.1) 
+
+subject to periodic boundary conditions on the interval [0,1] and initial condition 
+
+u(x, 0) = sin(ZTrx). 
+
+We use centered, second-order differences for the spatial derivatives. Note that the solution is smooth 
+for all v ~> 0. 
+
+4.1.1. Large-viscosity examples 
+
+To examine the behavior of IMEX RK schemes for large viscosities, 5 the model problem (4.1) 
+was approximated using the time step k = 1.8h0, h0 = ~3" For the spatial discretization, we chose a 
+grid spacing of h = ho, ho/2, ho/4 or ho/8. Utilizing several schemes, computations to time t = 2 
+were performed for viscosities, u, in the range 0.01 ~< u ~< 0.1. For h = h0, these values correspond 
+to mesh Reynolds numbers, R, in the range 1.59 ~> R ~> 0.159. For smaller h, R is correspondingly 
+smaller. 
+
+The relative errors measured in the maximum norm are plotted against u in Fig. 3. In Fig. 3(a), the 
+errors for the three- and four-stage schemes are omitted since they are always within a factor of 2 of 
+the two-stage, second-order scheme (2, 3, 2). As expected from the theory of the previous section, the 
+
+s By large viscosity, we mean that the mesh Reynolds number is small (< 2; see, e.g., [2]). An estimate for the mesh 
+Reynolds number is given by R --= ah/u where u represents viscosity, a represents characteristic speed, and h represents 
+grid spacing. 
+
+
+U.M. Ascher et al. / Applied Numerical Mathematics 25 (1997) 151-167 
+163 
+
+I0 ° 
+
+10 -t 
+
+1 
+
+10 -I 
+
+1010-1 
+
+~,,~i,,<~.o. 
+(2.3.3) 
+
+2-Stage. 2rio-oi'Oer DIRK 12,3,l 
+
+V ~  
+
+10 -I 
+
+10 o 
+
+10 "1 
+
+10 "i 
+
+10 -2 
+10 -I 
+
+(a) h= 
+! 63 
+(b) h = 
+,ool, 
+
+,o-,t\ 
+
+~.10 "~ 
+m 
+
+10 ~ 
+
+(2.2,2) 
+
+13,4,3) 
+
+10 ° 
+
+10 -I 
+
+~ 10 "2 
+
+10 -:l 
+
+10 -4 
+
+(
+4
+,
+4
+,
+3
+)
+~
+ 
+/ 
+
+1010-1 
+10-'~ 
+lO-Z 
+10 -I 
+vi~osleq 
+vi~ily 
+
+(c) h = 
+1 
+2s-'5 
+(d) h = 
+
+Fig. 3. Large-viscosity behavior for k = 1.8h0, h0 - i 
+
+three-stage DIRK (3, 4, 3) and the schemes satisfying property (2.3) allow for the largest stable time 
+steps when v is large. 
+
+When we decrease h, keeping k fixed, the methods (1,2, 2), (2, 3, 3) and (2, 3, 2) become unstable 
+over the entire depicted range of v. Among the stable methods, the higher order of (3,4, 3) and (4, 4, 3) 
+becomes more apparent as the spatial error ceases to dominate the temporal error. For h = ho/8, only 
+the methods satisfying (2.3) remain stable. No effective error reduction is detected for these values of 
+h and k. 
+
+
+164 
+U.M. Ascher et al. /Applied Numerical Mathematics 25 (1997) 151-167 
+
+10 0 
+
+10 -~ 
+
+uJ 
+
+=> 
+
+¢z: 
+
+10 -2 
+
+I010-2 
+
+/ 
+~-,,t~, ,,,~~,,: (~,,Z~,) 
+
+3-stage DIRK (3,4,3) 
+
+Viscosity 
+
+10 -1 
+
+Fig. 4. Large-viscosity behavior for k = 5.4h, h = h0. 
+
+Doubling the time step while keeping h = h0 also causes the two-stage methods (2, 3, 2) and 
+(2, 3, 3) to become unstable for almost the entire r-interval depicted. Nonetheless, the three- and 
+four-stage methods remain stable over the entire interval and the scheme (2, 2, 2) is stable over most 
+of the interval. Even upon tripling the time step (see Fig. 4), the three- and four-stage schemes are 
+appropriate for approximating strongly-damped flows. Indeed, a comparison with the results of [2] 
+indicates that the three-stage method (3, 4, 3) is more accurate and stable in this example than the 
+popular CNAB scheme with one-third the step size, even for this relatively coarse step size k. 
+
+4.1.2. Small-viscosity examples 
+
+To examine the behavior of IMEX RK methods for large mesh Reynolds numbers, example (4.1) was 
+approximated using discretization step sizes h -- ~ in space and k = 1.8h in time. Using several IMEX 
+schemes, computations to time t = 2 are performed for viscosities, u, in the range 0.001 ~< u ~< 0.01. 
+These values correspond to mesh Reynolds numbers, R, in the range 12.3 /> R ~> 1.23. 
+
+The relative errors in maximum norm for these computations are plotted against u in Fig. 5. Here, we 
+find that the errors for the third-order schemes and the two-stage, second-order DIRK (2, 3, 2) nearly 
+coincide since they arise predominantly from the spatial discretization. It is especially noteworthy that 
+the errors for these four schemes are always smaller than those arising for the two-step IMEX schemes 
+considered in [2] even though twice the time step is applied. 
+
+4.2. Burgers equation 
+
+Qualitatively similar results to those obtained above for the linear problem (4.1) are obtained for 
+the Burgers equation 
+
+ut + uux = UUxx, 
+(4.2) 
+
+
+U.M. Ascher et al. /Applied Numerical Mathematics 25 (1997) 151-167 
+165 
+
+10 0 
+
+10 -1 
+
+w 
+
+ID 
+
+10 -2 
+
+10 ¸ 
+
+10-3 
+
+I 
+Focward-backward Euler 
+
+(1,1,1), 0,2,1) 
+
+~,...~._ 
+~ 
+Impticit-expli~! midl)O, int (I,2,2) 
+,, 
+
+vi~o~ 
+
+Fig. 5. Small-viscosity example for k = 1.8h, h = ~. 
+
+10 -2 
+
+with which we have experimented, subject to homogeneous Dirichlet boundary conditions and the 
+initial conditions 
+
+u(z,0)=sin(Trz), 
+0<z<l. 
+
+For small u, a boundary layer develops near z = 1. This necessitates the use of upwinding. Note 
+that upwinding can be viewed as an addition of a discrete O(h) diffusion term (where h is the spatial 
+step-size) to a centered-difference approximation of uuz. 
+
+5. Time-dependent multigrid in 2D 
+
+We consider the two-dimensional convection-diffusion problem, 
+
+ut + (u. V)u = uAu, 
+(5.1) 
+
+where u - (u, v). We carry out our computations on the square ~ _=[0,1] × [0,1] and consider periodic 
+boundary conditions and the initial conditions 
+
+u(x, y, 0)---- sin[27r(x + y)] + 0.005 cos [27r(64x + 63y)], 
+
+v(x,y,O) = sin[27r(x + y)] + 0.005 cos[ZTr(64x + 63y)]. 
+
+For the spatial discretization, we use standard second-order centered differences. Time stepping is 
+carded out using a variety of IMEX RK schemes (the convection term, (u. V)u, is handled explicitly 
+and the diffusion term, uAu, is handled implicitly). This treatment yields a positive-definite, symmetric, 
+sparse, linear system to be solved at each stage. Such systems are solved efficiently using a multigrid 
+algorithm, the components of which are outlined in [2]. 
+
+The model problem (5.1) was approximated using a mesh size h = ~ 
+and a residual tolerance 
+of TOL ---- 0.003 at each stage. The time step was selected to be k = 0.00625 to achieve stable 
+
+
+166 
+U.M. Ascher et al. / Applied Numerical Mathematics 25 (1997) 151-167 
+
+Table 1 
+
+Viscosity, u 
+
+Scheme 
+0.01 
+0.02 0.03 0.04 0.05 
+
+Forward-backward Euler (1,1,1) 
+1.94 
+1.90 
+1.71 
+1.29 
+1.19 
+
+Forward-backward Euler (1,2,1) 
+1.97 
+1.94 1.48 1.19 1.19 
+
+Implicit-explicit midpoint (1,2,2) 
+2.23 2.87 3.13 3.29 3.68 
+
+Third-order combination (2,3,3) 
+4.32 4.42 3.68 3.71 3.81 
+
+Griepentrog's scheme 
+4.58 5.23 5.39 5.61 5.90 
+
+L-stable, 2-stage, 2nd-order DIRK (2, 3, 2) 
+3.81 
+3.35 2.74 2.58 2.61 
+
+L-stable, 2-stage, 2nd-order DIRK (2, 2, 2) 
+3.90 3.35 2.81 2.58 2.58 
+
+L-stable, 3-stage, DIRK (3, 4, 3) 
+5.87 5.35 3.81 3.61 3.58 
+
+L-stable, 4-stage, 3rd-order scheme (4, 4, 3) 
+7.84 7.35 5.16 4.81 4.77 
+
+results. For several IMEX RK schemes, the average number of fine-grid iterations at each time step 
+was computed. The results for V(1, 1)-cycles are provided in Table 1. In addition to the schemes 
+developed in Section 2, we include results for Griepentrog's scheme [6,7], which is not of the form 
+(2.1). 
+
+From the table, we see that the strongly-damping L-stable schemes require the fewest fine-grid 
+iterations per stage for large-viscosity problems. Weakly-damping schemes require far more effort to 
+solve the implicit equations accurately, because lingering high-frequency modes necessitate more work 
+on the finest grid. This is especially evident for the implicit-explicit midpoint scheme (1,2, 2) since 
+more than three iterations were required per stage when u ~> 0.03. Griepentrog's scheme also requires 
+extra fine-grid iterations, presumably to damp out the high-frequency components which arise during 
+the initial stage. 
+
+References 
+
+[1] S. Abarbanel, D. Gottlieb and M. Carpenter, On the removal of boundary errors caused by Runge-Kutta 
+
+integration of nonlinear partial differential equations, SlAM J. Sci. Comput. 17 (1996) 777-782. 
+[2] U. Ascher, S. Ruuth and B. Wetton, Implicit--explicit methods for time-dependent PDE's, SlAM J. Numer. 
+
+Anal. 32 (1995) 797-823. 
+[3] C. Canuto, M.Y. Hussaini, A. Quarteroni and T.A. Zang, Spectral Methods in Fluid Dynamics (Springer, 
+
+1987). 
+[4] M. Carpenter, D. Gottlieb, S. Abarbanel and W. Don, The theoretical accuracy of Runge-Kutta time 
+
+discretizations for the initial-boundary value problem: A study of the boundary error, SlAM J. Sci. Comput. 
+
+16 (1995) 1241-1252. 
+[5] M. Crouziex, Une m6thode multipas implicite-explicite pour l'approximation des 6quations d'6volution 
+
+paraboliques, Numer. Math. 35 (1980) 257-276. 
+[6] E. Griepentrog, Gemischte Runge-Kutta-verfahren fur steife systeme, in: Seminarbereicht Sekt. Math. 11 
+
+(Humboldt-Universit~t, Berlin, 1978) 19-29. 
+
+
+U.M. Ascher et al. /Applied Numerical Mathematics 25 (1997) 151-167 
+167 
+
+[7] E. Hairer, S.R Ncrsett and G. Wanner, Solving Ordinary Differential Equations I: Nonstiff Problems 
+
+(Springer, New York, 1993). 
+[8] E. Hairer and G. Wanner, Solving Ordinary Differential Equations II: Stiff and Differential-Algebraic 
+
+Problems (Springer, New York, 1991). 
+[9] G.E. Karniadakis, M. Israeli and S.A. Orszag, High-order splitting methods for the incompressible Navier- 
+
+Stokes equations, J. Comput. Phys. 97 (1991) 414 443. 
+[10] J. Kim and E Moin, Application of a fractional-step method to incompressible Navier-Stokes equations, 
+
+J. Comput. Phys. 59 (1985) 308-323. 
+[ 11 ] S. Ruuth, Implicit-explicit methods for reaction-diffusion problems in pattern formation, J. Math. Biol. 34 
+
+(2) (1995) 148-176. 
+[12] R.D. Skeel, G. Zhang and T. Schlick, A family of symplectic integrators: stability, accuracy, and molecular 
+
+dynamics applications, SIAM J. Sci. Comput. 18 (1) (1997) 203-222. 
+[13] R. Spiteri, U. Ascher and D. Pai, Numerical solution of differential systems with algebraic inequalities 
+
+arising in robot programming, in: Proceedings of the IEEE Conference on Robotics and Automation (1995). 
+[14] S. Turek, A comparative study of time stepping techniques for the incompressible Navier-Stokes equations: 
+
+from fully implicit non-linear schemes to semi-explicit projection methods, Internat. J. Numer. Methods 
+Fluids 22 (1996) 987-1011. 
+[15] J.M. Varah, Stability restrictions on second order, three level finite difference schemes for parabolic 
+
+equations, SIAM J. Numer. Anal. 17 (2) (1980) 300-309. 
+[16] J.G. Verwer, J.G. Blom and W. Hundsdorfer, An implicit-explicit approach for atmospheric transport- 
+
+chemistry problems, Appl. Numer. Math. 20 (1996) 191-209. 
+
+

@@ -1,0 +1,841 @@
+{
+  "version": 1,
+  "level": "numerical-optimization-dynamics-2026-10-16-batch-3",
+  "scope": [
+    "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+    "lem-forward-difference-jacobian-error-bound",
+    "thm-updated-jacobian-newton-local-quadratic-convergence",
+    "thm-damped-newton-vector-residual-accepted-merit-decrease",
+    "ex-nonlinear-equations-and-newton-methods-boundary-cases"
+  ],
+  "contracts": {
+    "lem-vector-newton-correction-error-under-lipschitz-jacobian": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "The map $f$ is **continuously differentiable**, or of class $C^1$, when it is totally differentiable at every point of $U$ and the entries of its derivative matrix are continuous functions on $U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "$f$ is **integrable on $[a,b]$** when every component $f_i : [a,b] \\to \\mathbb{R}$ is bounded ([[def-bounded-set]]) and Darboux integrable in the sense of [[def-darboux-integral]], and then $$\\int_a^b f \\;:=\\; \\text{the function } m \\to \\mathbb{R} \\text{ sending } i \\mapsto \\int_a^b f_i .$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$ ([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann integrable on $[a,b]$ ([[def-darboux-integral]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "Then $$\\int_a^b f' \\;=\\; f(b) - f(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "1. $f + g$ is integrable on $[a,b]$ and $\\int_a^b (f+g) = \\int_a^b f + \\int_a^b g$;",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and $$f(x)=G'(x)\\qquad(a<x<b),$$ then $$\\int_a^b f=G(b)-G(a).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "vector-path-derivative",
+          "claim": "The segment path stays in the open domain, its derivative is the Jacobian applied to the segment direction, and that continuous vector derivative is integrable.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "vector-ftc-increment",
+          "claim": "The endpoint difference of F is the integral of the vector derivative; the constant-vector integral is its value times the interval length one.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F6",
+            "F7",
+            "F10"
+          ]
+        },
+        {
+          "id": "lipschitz-remainder-bound",
+          "claim": "Linearity identifies the Newton remainder with an integral of Jacobian differences; the vector norm inequality, Lipschitz bound, and integral monotonicity give the factor one half.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F4",
+            "F5",
+            "F8",
+            "F9",
+            "F10"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n≥1 and two points in a convex set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If x=x_*, then e=0 and step 3.1 gives zero remainder."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 is dimension independent and includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The coincident-point case x=x_* is covered explicitly by step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats t=0 and t=1 using differentiability on an open neighborhood of the contained segment."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use a fixed segment and finite-dimensional integrals; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way remainder bound, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way remainder bound, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-3",
+        "notes": "Read the exact vector FTC, componentwise integral definition, vector integral norm inequality, and linearity/monotonicity suppliers. The factor 1/2 comes from integrating L(1-t), with all integrability hypotheses stated. The lemma does not use one vector-valued Lagrange remainder point."
+      }
+    },
+    "lem-forward-difference-jacobian-error-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-forward-difference-jacobian",
+          "source_section": "Definition",
+          "quote": "the admissible stencil conditions are $h_i\\ne0$ and $x+h_i e_i\\in U$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Then some $\\theta\\in(0,1)$ satisfies $$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "1. **Cauchy-Schwarz.** $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$ with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "coordinate-taylor-remainders",
+          "claim": "Applying scalar Taylor to each component along each coordinate path gives a remainder with its own point theta_ij.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "column-error-bound",
+          "claim": "Dividing by the nonzero increment bounds the Euclidean error in column i by M_i|h_i|/2, including distinct component remainder points.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "operator-error-bound",
+          "claim": "Cauchy–Schwarz bounds the operator norm by the column Frobenius sum, yielding M||h||/2.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n≥1 and a coordinate stencil."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero increment is rejected as invalid-stencil by the definition; the error lemma assumes each h_i≠0 before dividing."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the matrix bound reduces to the scalar forward-difference remainder in steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If all second partial bounds M_ij are zero, step 2.1 gives zero column error."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: each theta_ij lies in (0,1), so the segment bounds cover every possible remainder point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 makes only finitely many coordinate/component remainder selections; no arbitrary-index choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way approximation-error bound."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way approximation-error bound."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-3",
+        "notes": "The vector bound uses coordinatewise second-partial bounds M_ij. Distinct theta_ij are retained; no single common theta for the vector output is asserted. The result bounds Jacobian error only and gives no Newton rate."
+      }
+    },
+    "thm-updated-jacobian-newton-local-quadratic-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-newton-contraction-near-an-invertible-derivative",
+          "source_section": "Statement",
+          "quote": "Moreover $Df(x)$ is invertible for every $x\\in\\overline B(a,R)$ and $$\\|Df(x)^{-1}v\\|_2\\le\\frac C{1-q}\\|v\\|_2.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+          "source_section": "Statement",
+          "quote": "Then $$\\|F(x)-F(x_*)-J(x)(x-x_*)\\|_2\\le\\frac{L}{2}\\|x-x_*\\|_2^2.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-newton-correction-for-vector-residuals",
+          "source_section": "Definition",
+          "quote": "If $A$ is invertible, return $(\\texttt{correction},s)$, where $s$ is the unique vector solving $$As=-r.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-finite-budget-newton-for-vector-residuals",
+          "source_section": "Definition",
+          "quote": "The procedure performs at most $N$ corrections.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "The map $f$ is **continuously differentiable**, or of class $C^1$, when it is totally differentiable at every point of $U$ and the entries of its derivative matrix are continuous functions on $U$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$ ([[def-real-limit]]).",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "local-uniform-inverse-bound",
+          "claim": "The published fixed-inverse lemma supplies a smaller ball on which the updated Jacobian is invertible with a uniform bound; only that clause is used.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "choose"
+          ]
+        },
+        {
+          "id": "invariant-radius",
+          "claim": "Choose a positive radius small enough that the quadratic coefficient times radius is at most one half.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "quadratic-update-estimate",
+          "claim": "The exact Newton equation expresses the next error as J(x_k)^{-1} times the remainder; the local lemma yields C||e_k||^2.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra",
+            "F5",
+            "F5"
+          ]
+        },
+        {
+          "id": "invariance-and-convergence",
+          "claim": "The update bound contracts errors by at least one half on the selected ball, so induction proves invariance and the geometric bound; the geometric sequence tends to zero.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F7",
+            "step 3.1",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n≥1, a root, and a nonempty neighborhood."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At L=0, step 3.1 gives zero error, so the correction lands exactly at the root."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits n=1, and step 3.1 is dimension independent."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At x_k=x_*, step 3.1 gives zero correction; the residual test is checked before updates."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The closed ball is contained in U; step 3.1 shows every attempted update lies within radius rho/2, including starts on its boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 choose only finite scalar constants and use no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a sufficient local convergence guarantee, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a sufficient local convergence guarantee, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-3",
+        "notes": "The frozen-map lemma is used only for the uniform inverse bound; its fixed-B contraction is not identified with updated Newton. The theorem asserts the exact full-step rate only for exact Jacobians in the invariant ball. Finite update budget does not promise the residual status will be reached."
+      }
+    },
+    "thm-damped-newton-vector-residual-accepted-merit-decrease": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-damped-newton-for-vector-residuals",
+          "source_section": "Definition",
+          "quote": "accept the first trial satisfying $$\\Phi(y)\\le\\Phi(x_k)-\\alpha t\\|F(x_k)\\|_2^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-accepted-decrement",
+          "claim": "The reduction parameter, tested step size, and residual norm are all positive under the theorem hypotheses.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "accepted-merit-decrease",
+          "claim": "The algorithm's accepted-trial condition subtracts a strictly positive quantity from the current residual merit.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A zero residual is returned by the root-tolerance check before a line-search trial; the theorem assumes F(x)≠0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement applies in dimension n=1 because it uses only the Euclidean residual norm."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The parameter boundary alpha=0 is excluded; alpha>0 is the strict-decrease input in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition rejects trials outside U; the theorem concerns only a trial accepted in U."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses a finite deterministic list of step sizes and no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves one direction from acceptance to merit decrease."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A merit-decreasing trial need not meet the specified sufficient-decrease test."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-3",
+        "notes": "The conclusion is conditional on an accepted trial. The finite backtrack cap may return invalid-trial or line-search-exhausted; no eventual-acceptance or global-convergence claim is made."
+      }
+    },
+    "ex-nonlinear-equations-and-newton-methods-boundary-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-fixed-point-iteration",
+          "source_section": "Definition",
+          "quote": "If $r_k\\le\\varepsilon$, return $(x_k,\\texttt{residual-tolerance-met},r_k,k)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$ ([[lem-real-line-is-a-metric-space]]) is a complete metric space ([[def-complete-metric-space]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "2. For every $x_0 \\in X$ the sequence of **iterates**, defined by recursion ([[thm-recursion]]) by $x_{n+1} := f(x_n)$, converges to $x^{*}$ in $(X,d)$ ([[def-metric-convergence]]). In particular the limit does not depend on $x_0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-banach-error-estimates",
+          "source_section": "Statement",
+          "quote": "$$d(x^{*}, x_n) \\;\\le\\; \\frac{q^{\\,n}\\, d(x_1,x_0)}{1-q}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$ ([[def-real-limit]]).",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-newton-correction-for-vector-residuals",
+          "source_section": "Definition",
+          "quote": "If $A$ is not invertible in the sense of [[def-invertible-euclidean-linear-map]], return $(\\texttt{singular-jacobian},\\varnothing)$. If $A$ is invertible, return $(\\texttt{correction},s)$, where $s$ is the unique vector solving $$As=-r.$$",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-finite-budget-newton-for-vector-residuals",
+          "source_section": "Definition",
+          "quote": "If $x_k+s_k\\notin U$, return $(x_k,\\texttt{invalid-trial})$. Otherwise set $x_{k+1}=x_k+s_k$.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-updated-jacobian-newton-local-quadratic-convergence",
+          "source_section": "Statement",
+          "quote": "If the ordinary exact-Jacobian Newton recurrence is continued indefinitely, these estimates imply $x_k\\to x_*$ with a quadratic error bound.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-newton-contraction-near-an-invertible-derivative",
+          "source_section": "Statement",
+          "quote": "$$\\|T_y(x)-T_y(z)\\|_2\\le q\\|x-z\\|_2\\qquad(x,z\\in\\overline B(a,R)).$$",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every $a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$; we write $s = \\sqrt{a}$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **metric** on $X$ is a function $d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "For $a, b \\ge 0$: $$a < b \\iff a^2 < b^2, \\qquad a \\le b \\iff a^2 \\le b^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "contractive-fixed-point-example",
+          "claim": "The affine map is a contraction of the complete real metric space and has fixed point 1.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fixed-point-residual-and-stopping-boundary",
+          "claim": "The iterate formula gives a geometric residual and distinguishes positive tolerance from exact zero tolerance under a finite budget.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "simple-root-newton-recurrence",
+          "claim": "The Newton update for x^2-2 has an exact quadratic error identity and preserves the radius r/2.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "frozen-and-updated-maps-differ",
+          "claim": "The fixed-inverse map and the updated-Jacobian Newton map agree on the first step here but differ on the second.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "simple-root-start",
+          "claim": "The chosen start lies in the explicit invariant radius and its residual eventually meets any positive tolerance.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "F5",
+            "F10",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "double-root-linear-order",
+          "claim": "At the double root the error halves exactly, so no fixed local quadratic constant can hold for all small errors.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "singular-start-outside-local-radius",
+          "claim": "The start zero lies outside the explicit local radius and produces a singular-Jacobian status despite existing roots.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.3",
+            "F6",
+            "F10",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Newton demonstrations use n=1 and the fixed-point example uses nonempty R."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 treats epsilon=0; steps 1.3 and 3.1 distinguish exact root residuals from a singular nonroot start."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement examples are scalar, and steps 1.3 and 2.2 compute their n=1 updates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The double-root Jacobian vanishes in step 2.2; the start x=0 has a singular Jacobian in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "All functions are defined on R, which has no finite domain endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use explicit finite recurrences and arithmetic; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-3",
+        "notes": "All finite formulas were recomputed exactly. The double-root recurrence is linear, the exact Newton local radius is explicit, and the frozen-inverse calculation uses only the fixed-map formula. No source statement or example is used as a proof shortcut."
+      }
+    }
+  }
+}

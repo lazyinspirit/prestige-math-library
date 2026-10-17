@@ -1,0 +1,60 @@
+[
+  {
+    "kind": "item",
+    "consumer": "def-parabolic-theta-finite-difference-scheme",
+    "supplier": "def-rectangular-grid-and-dirichlet-flux-stencil",
+    "status": "verified",
+    "evidence": "The actual batch-23 definition fixes the two-dimensional rectangular nodes, interior/boundary split, weighted grid inner product, and five-point Dirichlet stencil. The consumer uses that exact grid convention for its two-dimensional Dirichlet branch; periodic d-dimensional wraparound is defined locally. Supplier body inspected; it is draft, not independently approved."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+    "supplier": "def-rectangular-grid-and-dirichlet-flux-stencil",
+    "status": "verified",
+    "consumer_batch": "37",
+    "evidence": "Supplier Definition specifies real zero-boundary rectangular grid, hxhy interior inner product, Dx/Dy edge differences and both edge energies. Consumer F1 and proof1.1–3.1 use precisely these weights/ranges; separate telescoping gives directional energies and positive diffusivities yield symmetric nonnegative sum. No Neumann/nonrectangular closure is transferred.",
+    "inspected_paths": [
+      "items/def-rectangular-grid-and-dirichlet-flux-stencil.md",
+      "items/lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint.md"
+    ],
+    "basis": "newfocusedcheck",
+    "original_mapping": {
+      "master_gap_index": 124,
+      "declarations": [
+        "research/numerical-optimization-dynamics-2026-10-16-batch-37.pages.json#deps",
+        "items/lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint.md#deps"
+      ],
+      "structured_candidates": [],
+      "original_candidate_record": false
+    },
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-37-45.json#reviews/0"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+    "supplier": "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+    "status": "verified",
+    "evidence": "The actual batch-23 lemma proves the rectangular summation-by-parts identity and zero-boundary edge-energy identity for positive face coefficients. Batch 37 uses its a≡1 two-dimensional identity and separately scales the horizontal and vertical edge sums by positive κ_x and κ_y; it does not import the supplier's inverse bound or claim a periodic implication. Supplier hypotheses, proof, and finite-sum/no-choice scope were inspected. Supplier remains draft pending independent review."
+  },
+  {
+    "kind": "page",
+    "consumer": "parabolic-finite-difference-methods",
+    "supplier": "elliptic-finite-difference-methods",
+    "status": "verified",
+    "evidence": "This is the assigned batch-23 page requirement. The exact batch-23 grid and summation-by-parts items above supply the only local logical edges from that page. No elliptic inverse estimate or convergence theorem is used for the parabolic error proof. Page and item bodies were inspected; no independent approval is inferred."
+  },
+  {
+    "kind": "page",
+    "consumer": "parabolic-finite-difference-methods",
+    "supplier": "heat-equation-maximum-principles-duhamel-and-smoothing",
+    "status": "verified",
+    "evidence": "This published PDE page is required as continuous-model and boundary context. The actual weak maximum-principle statement assumes a bounded domain and C^{2,1} subsolutions of u_t−Δu≤0; the inhomogeneous L∞ stability theorem assumes Countable Choice, bounded domain, C^{2,1} solutions, and continuous forcing; the Duhamel item is a whole-space result with its own forcing hypotheses and Countable Choice. Their actual statements/proofs were inspected. Batch 37 makes no imported continuous comparison or Duhamel claim: its continuous example verifies the explicit solution directly, and all discrete estimates are local. No published item is added as a logical deps target."
+  },
+  {
+    "kind": "page",
+    "consumer": "parabolic-finite-difference-methods",
+    "supplier": "linear-scheme-stability-and-lax-equivalence",
+    "status": "verified",
+    "evidence": "The assigned plan requires this batch-5 page. Its actual draft def-common-space-linear-scheme-interface defines stability for operators on one fixed Banach space with a strongly continuous semigroup, dense invariant subspace, and one common norm. The actual thm-lax-equivalence-for-common-banach-space-schemes additionally assumes DC. Batch 37 defines and proves only mesh-dependent periodic/Dirichlet grid-norm estimates and a smooth-data grid error bound; it claims no common-space lift or Lax equivalence, so no batch-5 item appears in the batch-37 logical deps. Both supplier bodies were inspected; draft status and lack of independent approval are retained."
+  }
+]

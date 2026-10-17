@@ -1,0 +1,553 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "14",
+  "decision": "proposal-ready",
+  "reason": "Exact replacements below resolve the remaining wrapper, complex-Log and sine-example obligations without narrowing their Statements. The current BNB example already resolves the fourth finding. These are read-only proposals, not applied repairs or native acceptance. The original inventory and completed 97-consumer review carry forward; individual affected-use dispositions are recorded below. Native repair-1, history and counters remain intact.",
+  "proposed_edits": [
+    {
+      "path": "items/alg-budgeted-validated-range-evaluation.md",
+      "exact_current_excerpt": "Input: a finite expression DAG with one designated output node, a closed\ninterval/rectangle domain box $X$, a dyadic requested width $\\varepsilon>0$,\nfinite-format parameters, series truncation index $N\\ge1$, and integer total\nbox-split budget $B\\ge0$. Set a shared counter\n$R:=B$ and a queue containing $X$. Process the queue in first-in, first-out\norder. For each\nbox $Q$, evaluate the DAG by\n[[alg-certified-elementary-range-evaluation]] with the same format and $N$,\nrequesting the designated output node's enclosure.",
+      "replacement": "Input: a finite, well-formed, typed expression DAG with exactly one designated\noutput node, an interval/rectangle assignment box $X$ for its input nodes, a\ndyadic requested width $\\varepsilon>0$, finite-format parameters\n$(p,e_{\\min},e_{\\max})$ with $p\\ge2$ and $e_{\\min}\\le e_{\\max}$, series\ntruncation index $N\\ge1$, and integer total box-split budget $B\\ge0$.\nThe supported node types, input assignments, exact dyadic constants and\nsupplied certified constant enclosures satisfy the admissibility conditions\nof [[alg-certified-elementary-range-evaluation]]. In particular, every input\nendpoint and every endpoint of a supplied constant enclosure belongs to the\nselected finite representable set $\\mathbb F$. Truth of a supplied constant's\ncertified inclusion is a mathematical input promise, not something inferred\nfrom its endpoints. Exact dyadic constants need not themselves be\nrepresentable; their conversion and any overflow remain the evaluator's task.\n\nUse the following exact membership procedure for each supplied finite\nendpoint and for every proposed split midpoint. Put\n$\\eta=2^{e_{\\min}-p+1}$. Compare the value with zero, then enumerate both\nsigns of $k\\eta$ for $k=1,\\ldots,2^{p-1}-1$, and both signs of\n$k2^{e-p+1}$ for $e=e_{\\min},\\ldots,e_{\\max}$ and\n$k=2^{p-1},\\ldots,2^p-1$, stopping at a match. If the finite enumeration\nends without a match, report `not-in-format`. Every comparison is an exact\ndyadic equality test. This is the representable set of\n[[def-dyadic-floating-point-format-and-directed-rounding]], including zero\nand subnormals. Before initializing the queue, check the integer/format\nconditions and the finite input and supplied-constant endpoint memberships;\nmalformed data or a failed membership returns `inconclusive` with the\nidentifying input status, without an evaluator call. An empty input returns\n`empty` as in the elementary evaluator.\n\nKeep the DAG, designated output, constant enclosures, format and $N$ fixed.\nSet a shared counter $R:=B$ and a queue containing $X$. Process the queue in\nfirst-in, first-out order. For each box $Q$, evaluate the DAG by\n[[alg-certified-elementary-range-evaluation]] with the same format and $N$,\nrequesting only the designated output node's enclosure. The hull of no\ncompleted leaves is recorded as `empty`.",
+      "mathematical_justification": "The membership instructions enumerate exactly the existing format definition, using finite integer ranges and decidable exact dyadic comparisons. They introduce no membership oracle. They distinguish supplied enclosure endpoints, which must use the format, from arbitrary exact dyadic constants, which the evaluator converts. The exact square-root algorithm retains its unrestricted nonnegative dyadic input, zero branch, format-free exact output pair and caller storage conversion."
+    },
+    {
+      "path": "items/alg-budgeted-validated-range-evaluation.md",
+      "exact_current_excerpt": "- If it returns a finite enclosure wider than $\\varepsilon$ and $R>0$, select\n  a widest nondegenerate input coordinate (breaking ties by the first\n  coordinate in the input order), split it at its dyadic midpoint\n  into two closed halves, decrement the shared counter $R$ by one, and append\n  both halves to the queue. If no coordinate can be split, return\n  `inconclusive` with the unmet width test.",
+      "replacement": "- If it returns a finite enclosure wider than $\\varepsilon$ and $R>0$, select\n  a widest nondegenerate input coordinate (breaking ties by the first\n  coordinate in the input order). If there is no such coordinate, return\n  `inconclusive` with the completed-leaf hull, the unresolved parent $Q$,\n  the remaining queue, and status `no-splittable-coordinate` with the unmet\n  width test. Otherwise compute its midpoint $m$ by exact dyadic arithmetic\n  and apply the membership procedure above in the actual selected format.\n  If it reports `not-in-format`, return `inconclusive` with the completed-leaf\n  hull, the unresolved parent $Q$, the remaining queue, and status\n  `midpoint-not-in-format`, identifying the coordinate and exact midpoint.\n  Do not enqueue either child or call the evaluator on it in this case.\n  If $m\\in\\mathbb F$, split that coordinate into the two closed halves at\n  $m$, decrement $R$ by one, and append both children to the queue.",
+      "mathematical_justification": "For p=2, e_min=0, e_max=4, the identity DAG on [1,3/2] with epsilon=1/8 and B=1 reaches midpoint 5/4, which is absent from the format enumeration. The replacement returns the unresolved parent instead of making an inadmissible child call. On an admitted split, unchanged endpoints and the checked midpoint all belong to the same format; the children cover their parent exactly. No precision change or unconditional width success is introduced."
+    },
+    {
+      "path": "items/thm-budgeted-range-evaluation-terminates-and-is-sound.md",
+      "exact_current_excerpt": "1.1 There are at most $B$ splits. Each split adds one net box to the queue,\nso at most $2B+1$ boxes are processed. Each leaf evaluation has a finite DAG,\nuses at most $N+1$ terms per series, and has finitely many fixed domain bins or\nquadrant pieces. Thus each evaluation and the whole queue procedure terminate.\n[given, L1, algebra]",
+      "replacement": "1.1 The initial admission checks terminate: the format's subnormal index\nrange, exponent range and significand ranges are finite, and each equality\ncomparison of exact dyadics is decided by clearing powers of two and comparing\nintegers. Their enumeration is exactly the selected representable set, so a\npassing endpoint test establishes membership, including for zero and\nsubnormals. Invalid initial data stop before an evaluator call. For admitted\ndata, every endpoint of the initial box belongs to that format. Inductively,\na split enqueues children only after the exact midpoint passes the same\nmembership test; all other endpoints are inherited from the parent.\nThe DAG, output, constants, format and $N$ are unchanged. Hence every queued\nbox satisfies the elementary evaluator's input conditions. Each such call\nterminates through its finite DAG, finite series, finite bisection and finite\nbin/cell/quadrant lists, or returns a specified failure. The membership guard\nalso terminates and can stop immediately with `inconclusive`. There are at\nmost $B$ admitted splits and therefore at most $2B+1$ processed boxes.\nThus the entire procedure terminates, including every guard-stop branch.\n[given, L1, algebra, induction]",
+      "mathematical_justification": "This supplies both the finite membership decision and the missing induction establishing admissibility of every subcall. The finite split-count bound remains valid when a guard returns early."
+    },
+    {
+      "path": "items/thm-budgeted-range-evaluation-terminates-and-is-sound.md",
+      "exact_current_excerpt": "1.2 The two halves at every split cover their parent by [L1]. Every completed\nreal or complex leaf enclosure contains its exact range by [L2] or [L3].\nInduction upward through the finite split tree shows that the hull of all\ncompleted leaf enclosures contains the range on the union of their boxes,\nwhich is $X$. [step 1.1, L1, L2, L3, induction]",
+      "replacement": "1.2 Before a box is processed, the completed leaf boxes together with the\nqueued boxes cover $X$. Removing a current box preserves this cover when that\nbox is counted as the current unresolved parent. Completing it transfers it\nto the completed leaves; an admitted split replaces it by two closed children\nwhose union is the parent by [L1]. A failed midpoint test retains the parent\nas unresolved and therefore discards no part of the cover. This proves the\ncoverage invariant by induction. By step 1.1, each completed leaf was evaluated\non admissible input, so its finite enclosure contains its exact range by [L2]\nor [L3]. If the queue empties without an early return, all covering leaves are\ncompleted; their enclosure hull therefore contains the exact range on all of\n$X$. On an early return, the completed-leaf hull is not asserted to cover the\nunresolved parent or remaining queue. [step 1.1, L1, L2, L3, induction]",
+      "mathematical_justification": "The existing paragraph incorrectly states that completed leaves cover X without restricting to completed runs. The replacement proves the invariant for all branches and obtains full-range enclosure only on completion."
+    },
+    {
+      "path": "items/thm-budgeted-range-evaluation-terminates-and-is-sound.md",
+      "exact_current_excerpt": "1.3 The algorithm returns `certified` only after the queue is empty, every box\nhas a finite completed leaf, and the final hull satisfies the width test.\nOtherwise it returns a non-finite status or `inconclusive`, retaining the\nunresolved box or failed global-width result. Hence no failed branch or wide\nhull is silently treated as tolerance success. [given, step 1.2, algebra] ∎",
+      "replacement": "1.3 A `certified` return occurs only after the queue is empty without an\nadmission, evaluator, split-guard or budget stop, and after the completed-leaf\nhull passes the final global width test. Step 1.2 then proves enclosure of the\nwhole range, and the exact width comparison proves the requested tolerance.\nA failed midpoint membership instead returns `inconclusive` with the\ncompleted-leaf hull, unresolved parent, remaining queue and actual guard\nstatus; that partial hull is not a full-domain certificate. The other\nnon-finite, exhausted-budget, unsplittable-coordinate and failed global-width\nbranches likewise make no tolerance-success claim. Thus the finite guard\npreserves the stated certified-range, coverage and failure conclusions.\n[given, step 1.1, step 1.2, algebra] ∎",
+      "mathematical_justification": "This explicitly excludes guard stops from certification while preserving every existing successful enclosure/width claim and non-success status."
+    },
+    {
+      "path": "items/alg-certified-elementary-range-evaluation.md",
+      "exact_current_excerpt": "If a quadrant piece has a zero endpoint in its denominator interval, use the\ncoarse argument intervals $[0,p_+/2]$ in quadrant I,\n$[p_-/2,p_+]$ in quadrant II, $[-p_+,-p_-/2]$ in quadrant III, or\n$[-p_+/2,0]$ in quadrant IV, where $P_N=[p_-,p_+]$. On the\npositive imaginary axis set $\\operatorname{Arg}(iy)=\\pi/2$, on the negative\nimaginary axis use $P_N/2$ or $-P_N/2$, respectively, and on the positive\nreal axis set it to zero. The initial domain check excludes the origin and negative real axis, so\nthese are all remaining axis cases. On each piece enclose\n$\\ln\\sqrt{X^2+Y^2}$ and its argument using the real evaluator, then combine\nthem into a rectangle. If every piece is finite, take the coordinatewise hull\nof all piece rectangles. If any piece or branch is unresolved, return its\nstatus and piece without forming a partial hull.",
+      "replacement": "Write this call's fixed interval as $P_N=[p_-,p_+]$ and form the exact\ndyadic sector intervals\n$$\nS_{\\rm I}=[0,p_+/2],\\qquad S_{\\rm II}=[p_-/2,p_+],\\qquad\nS_{\\rm III}=[-p_+,-p_-/2],\\qquad S_{\\rm IV}=[-p_+/2,0].\n$$\nFor every ratio-based quadrant piece, obtain its finite real arctangent\nenclosure by the real rules above; propagate any non-finite result. Form the\nfull argument interval $A$ in the displayed quadrant formula by exact\nrational endpoint arithmetic, using this same $P_N$ for each occurrence of\n$\\pi$. Before final outward conversion or hull formation, replace $A$ by\n$J=A\\cap S_q$, where $q$ is that piece's quadrant. Compute the intersection\nby exact endpoint maxima and minima. If it is empty, return `inconclusive`\nwith the piece and status `empty-argument-intersection`; do not omit the\npiece. If the denominator interval has a zero endpoint, use $J=S_q$\ninstead of a ratio formula.\n\nFor an interval $J=[a,b]$ produced by either branch, apply the same final\nconversion $H(J)=[\\operatorname{rd}(a),\\operatorname{ru}(b)]$ in the selected\nformat. Perform this conversion after intersection for a ratio branch and\nafter selecting $S_q$ for a coarse branch. Finite subnormal endpoints are\naccepted; an overflow returns `overflow` with the piece. On the positive\nimaginary axis use $H(P_N/2)$, on the negative imaginary axis use\n$H(-P_N/2)$, and on the positive real axis use $H([0,0])$. The initial domain\ncheck excludes the origin and negative real axis, so these are all remaining\naxis cases.\n\nOn each piece enclose $\\ln\\sqrt{X^2+Y^2}$ using the real operations and\nevaluator, and combine it with the converted argument interval into a\nrectangle. If every piece is finite, take the coordinatewise hull of all\npiece rectangles. If any piece, conversion or branch is unresolved, return\nits status and piece without forming a partial hull.",
+      "mathematical_justification": "Every exact quadrant argument lies in its listed sector because p_- <= pi <= p_+. Intersection therefore preserves exact values. The common monotone conversion H ensures H(A intersect S_q) is contained in H(S_q), including when sector endpoints require storage rounding. This resolves the N=1 witness [1,256]+i{1024} contained in [0,256]+i{1024}: the unclipped smaller-call upper argument can exceed p_+/2 because 1/1024-1/192-1/4800<0, but its clipped result cannot exceed the consistently rounded coarse result. Complex exponential, all quadrant formulas, axis values and failure propagation remain available."
+    },
+    {
+      "path": "items/thm-complex-elementary-range-enclosures.md",
+      "exact_current_excerpt": "The range of $A$ in [L4] places these\nangles in the respective subintervals of $(-\\pi,\\pi)$, so they are the\nprincipal arguments. If a quadrant piece touches an axis and its denominator\ninterval contains zero, [L4] places every argument in the corresponding\ncoarse quadrant interval used by the algorithm; the listed axis values are\nhandled separately. The initial domain test excludes the origin and negative\nreal axis, so these pieces cover every admissible point. On the positive real\naxis the argument is zero, while the imaginary axes use $\\pm\\pi/2$.\n[given, L1, L2, L3, L4, construct]",
+      "replacement": "The range of $A$ in [L4] places these angles in the respective\nsubintervals of $(-\\pi,\\pi)$, so they are the principal arguments. On the\nadmissible closure of quadrant I the argument lies in $[0,\\pi/2]$; on\nquadrants II, III and IV it lies respectively in $[\\pi/2,\\pi]$,\n$[-\\pi,-\\pi/2]$ and $[-\\pi/2,0]$. Since $p_-\\le\\pi\\le p_+$ and\n$p_->0$, these sets are contained respectively in the algorithm's fixed\nsectors $S_{\\rm I},S_{\\rm II},S_{\\rm III},S_{\\rm IV}$. A finite raw\nratio-based argument interval contains each exact argument by [L2]–[L3],\nso intersecting it with its sector retains every exact argument. Each\nnonempty quadrant piece has an actual point and hence an argument in that\nintersection; an empty intersection cannot be used for a success claim and\nis explicitly rejected. When the denominator reaches zero, the sector alone\nis a sound enclosure. The common final outward conversion $H$ preserves\nthese containments; an overflow gives no finite claim.\n\nOn the positive real axis the exact argument is zero, and on the positive\nand negative imaginary axes it is respectively $\\pi/2$ and $-\\pi/2$.\nThus $H([0,0])$, $H(P_N/2)$ and $H(-P_N/2)$ enclose the axis values.\nThe initial domain test excludes the origin and negative real axis. The\nstrict-sign pieces, their closures and these axis pieces therefore cover\nevery admissible point. The radial enclosure established above and the\nconverted argument enclosure jointly contain its principal logarithm;\ntaking the coordinatewise hull over every finite piece contains the full\nimage. Any failed piece prevents a finite hull return.\n[given, L1, L2, L3, L4, construct, algebra]",
+      "mathematical_justification": "This replaces only the closing part of Proof 1.2, retaining its existing quotient/trigonometric derivation. It proves soundness of the new intersections, covers closures and axis values, and states the actual nonemptiness and failure rules."
+    },
+    {
+      "path": "items/thm-complex-elementary-range-enclosures.md",
+      "exact_current_excerpt": "1.3 The fixed strict-sign and axis pieces of a smaller rectangle are contained\nin the corresponding pieces of a larger rectangle. Where the denominator\nexcludes zero, [L2]–[L3] preserve inclusion through the arctangent formulas.\nIf enlargement makes a quadrant denominator reach zero, its coarse sector\ninterval from step 1.2 contains both the narrower argument interval and the\naxis value; the resulting coordinatewise hull therefore preserves inclusion.\nIf a rectangle meets zero or the negative real branch cut, the algorithm\nreturns `domain-error`; an unresolved piece returns a non-finite status, so no\ninvalid finite enclosure is asserted. [step 1.1, step 1.2, L2, L3, L4,\nalgebra] ∎",
+      "replacement": "1.3 Fix the DAG, designated output, constant enclosures, format and $N$ in\nthe Statement, so both calls use the same $P_N$, sectors and conversion $H$.\nEvery nonempty strict-sign piece of a smaller input rectangle, after closure,\nis contained in the corresponding piece of the larger rectangle. Every axis\npiece likewise has a corresponding containing axis piece, with the same\nargument interval. The radial expression $\\ln\\sqrt{X^2+Y^2}$ preserves\ninclusion on these nested pieces by [L2]–[L3].\n\nFor a quadrant whose denominator excludes zero in both calls, outward\nquotients and the fixed real arctangent evaluator give nested finite raw\nargument intervals $A\\subseteq A'$ by [L2]–[L3]. Exact translations by the\nsame $P_N$ and sign changes in the quadrant formulas preserve this inclusion.\nIntersection with the same sector gives\n$A\\cap S_q\\subseteq A'\\cap S_q$. The greatest-lower and least-upper\nrounding definitions make $H$ inclusion-preserving, hence the converted\nargument intervals are nested as well. If enlargement changes a ratio branch\nto a zero-denominator coarse branch, the smaller preconversion interval is\n$A\\cap S_q\\subseteq S_q$, and therefore\n$H(A\\cap S_q)\\subseteq H(S_q)$. If both branches are coarse they use the\nsame $H(S_q)$. The reverse change under enlargement is impossible: a\ncontaining denominator interval cannot exclude zero when the smaller one\ncontains it. These cases exhaust quadrant branch transitions. Axis pieces\nremain present under enlargement and use the identical converted axis\nintervals, so their corresponding rectangles are nested too.\n\nTaking coordinatewise hulls preserves the inclusions for all corresponding\npieces, including any additional pieces in the larger call. Complex\nexponential preserves inclusion through its fixed real component evaluations\nand rectangle operations in step 1.1. Together with [L2]–[L3], these primitive\nresults give soundness and inclusion for the same finite typed DAG by\ninduction in its prescribed topological order; fixed input-independent\nconstants start the induction, and every designated output inherits it.\nA rectangle meeting zero or the negative real branch cut at a Log node\nreturns `domain-error`; a failed piece, empty argument intersection or failed\nconversion returns its specified non-finite status. Such a branch gives no\nfinite enclosure or nesting claim.\n[step 1.1, step 1.2, L1, L2, L3, L4, algebra, induction] ∎",
+      "mathematical_justification": "The proof covers ratio-to-ratio, ratio-to-coarse, coarse-to-coarse and axis cases using the same rounded sectors. It does not confuse containment of true arguments with containment of computed intervals. Corresponding axis pieces persist under enlargement, so no additional axis clipping is required. The final DAG induction preserves the full generic typed-DAG and fixed-parameter nestedness Statements."
+    },
+    {
+      "path": "items/ex-certified-sine-near-a-multiple-of-pi.md",
+      "exact_current_excerpt": "$P=[p_-,p_+]$, the neighboring cell enclosures end at $7p_+/4$ and begin at\n$9p_-/4$. Since $p_->2$ and $W<10^{-18}$, $p_->8W$ and $p_->7W$, so exact\ncomparison shows that $X=2P$ meets neither neighbor; the candidate list\ncontains only $k=4$; all farther cells are separated as well because their\nendpoints are monotone in the integer cell index.",
+      "replacement": "$P=[p_-,p_+]$, the actual cell formula\n$C_k=kP/2+[-1/4,1/4]P$ gives\n$\\sup C_3=7p_+/4$ and\n$\\inf C_5=5p_-/2-p_+/4=9p_-/4-W/4$.\nSince $p_->2$ and $W<10^{-18}$, both $p_->7W$ and $p_->9W$ hold.\nConsequently\n$2p_- -\\sup C_3=(p_--7W)/4>0$ and\n$\\inf C_5-2p_+=(p_--9W)/4>0$.\nThus $X=2P$ meets neither neighboring enclosure. All farther cells are\nseparated as well by monotonicity of their endpoints in the integer cell\nindex, while $C_4$ contains $X$. Hence the only included candidate is $k=4$.",
+      "mathematical_justification": "These are exact endpoint calculations for the current evaluator's C_k, rather than correlated scalar multiples of pi. They preserve the residual [-2W,2W], existing width estimate and single-output B=0 certificate."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-bounded-mixed-integer-branch-and-bound",
+      "status": "supported",
+      "evidence": "Carry forward: pruning requires verified relaxation/dual bounds; these proposals change neither those premises nor integer-child coverage."
+    },
+    {
+      "id": "alg-box-muller-finite-bit-transform",
+      "status": "repair-proposed",
+      "evidence": "The wrapper guard resolves its log/root subcall obligation. Initial log endpoints are outward-converted and positive; root endpoints are outward-converted and nonnegative. Each DAG has one output. Its existing failure propagation handles the new inconclusive status; no consumer edit or unconditional success claim is needed."
+    },
+    {
+      "id": "alg-budgeted-validated-range-evaluation",
+      "status": "repair-proposed",
+      "evidence": "Proposed admission and midpoint enumeration make every queued fixed-format subcall admissible, retaining FIFO order, designated output, shared split limit and unresolved-parent diagnostics."
+    },
+    {
+      "id": "alg-certified-adaptive-simpson",
+      "status": "supported",
+      "evidence": "Carry forward: uses outward arithmetic and already rejects unrepresentable midpoints; it does not call the changed wrapper."
+    },
+    {
+      "id": "alg-certified-constraint-emptiness-search",
+      "status": "supported",
+      "evidence": "Carry forward: arithmetic-DAG lower bounds use their explicit increasing-precision consistency conditions, not elementary fixed-parameter nestedness."
+    },
+    {
+      "id": "alg-certified-elementary-range-evaluation",
+      "status": "repair-proposed",
+      "evidence": "Step-5 sector intersection and consistent H conversion repair its complex nestedness justification. Real nodes, supported types, traversal, multi-output interface and all-piece failure propagation remain intact."
+    },
+    {
+      "id": "alg-complex-resolvent-cover-validator",
+      "status": "supported",
+      "evidence": "Carry forward: uses outward rectangle arithmetic and modulus bounds, not principal Log or the budgeted wrapper."
+    },
+    {
+      "id": "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+      "status": "supported",
+      "evidence": "Carry forward: transverse timing requires supplied valid reference-error and guard certificates; its rational checker provider is explicitly limited."
+    },
+    {
+      "id": "alg-factorable-mccormick-box-relaxation",
+      "status": "supported",
+      "evidence": "Carry forward: requires certified operand ranges and verified nonlinear graph bounds; neither proposal supplies unsupported relaxations."
+    },
+    {
+      "id": "alg-floquet-multiplier-cluster-certifier",
+      "status": "supported",
+      "evidence": "Carry forward: uses resolvent-cover certificates and its separately specified rational root/pi bounds, not elementary Log."
+    },
+    {
+      "id": "alg-golub-welsch-certified-node-and-weight-enclosures",
+      "status": "supported",
+      "evidence": "Carry forward: square-root and solve bounds use successful outward operations; exact bisection remains format-free with caller conversion."
+    },
+    {
+      "id": "alg-interval-dag-box-enclosure-and-bound",
+      "status": "supported",
+      "evidence": "Its arithmetic-only node inventory remains unchanged. No square primitive or elementary nestedness is added to accommodate the BNB example."
+    },
+    {
+      "id": "alg-interval-determinant-sign-certifier",
+      "status": "supported",
+      "evidence": "Carry forward: all Leibniz terms are evaluated outward, with non-finite operations rejected before sign tests."
+    },
+    {
+      "id": "alg-interval-hermitian-ldl-inertia-certifier",
+      "status": "supported",
+      "evidence": "Carry forward: finite pivot sign, inverse and Schur-update checks use outward arithmetic and propagate unresolved conditions."
+    },
+    {
+      "id": "alg-interval-linear-krawczyk-certifier",
+      "status": "supported",
+      "evidence": "Carry forward: requires its inverse witness, outward set inclusion and separate uniqueness defect bound; no changed elementary call occurs."
+    },
+    {
+      "id": "alg-krawczyk-root-certification",
+      "status": "supported",
+      "evidence": "Carry forward: generic admissible residual/Jacobian callbacks and unresolved-box propagation do not assume the changed wrapper."
+    },
+    {
+      "id": "alg-lipschitz-midpoint-box-lower-bound",
+      "status": "supported",
+      "evidence": "Carry forward: uses an arithmetic singleton enclosure and outward Lipschitz allowance, without elementary range-controller calls."
+    },
+    {
+      "id": "alg-na-certified-unit-circle-phase",
+      "status": "supported",
+      "evidence": "Directly calls the supported multi-output elementary evaluator for real cosine and sine. The complex-only clipping change leaves those outputs unchanged; no budgeted multi-output call or cross-precision nestedness is inferred."
+    },
+    {
+      "id": "alg-na-computed-clenshaw-curtis-via-fast-dft",
+      "status": "supported",
+      "evidence": "Carry forward: forwards phase/FFT controls and failures; exact postprocessing creates no additional elementary success assumption."
+    },
+    {
+      "id": "alg-na-computed-fast-transforms-and-convolution",
+      "status": "supported",
+      "evidence": "Carry forward: rational phase arguments and finite controls remain valid, with failures propagated in all branches."
+    },
+    {
+      "id": "alg-na-computed-fft-cyclic-and-linear-convolution",
+      "status": "supported",
+      "evidence": "Carry forward: all phase, transform and arithmetic subcalls must succeed before vector output."
+    },
+    {
+      "id": "alg-na-computed-unitary-radix-two-fft",
+      "status": "supported",
+      "evidence": "Carry forward: phase-call arguments and propagation are unchanged; its operationwise sqrt primitive is distinct from exact dyadic bisection."
+    },
+    {
+      "id": "alg-near-orthonormal-hermitian-eigenvalue-certifier",
+      "status": "supported",
+      "evidence": "Carry forward: outward root/norm and residual checks reject failed bounds before certification."
+    },
+    {
+      "id": "alg-ordered-hermitian-eigenvalue-bisection",
+      "status": "supported",
+      "evidence": "Carry forward: outward initial norm bounds and successful inertia queries preserve brackets; failed queries do not update them."
+    },
+    {
+      "id": "alg-pade-scaling-and-squaring-exponential",
+      "status": "supported",
+      "evidence": "Carry forward: uses covered-contour resolvent bounds and a separate scalar controller, retaining its caller topology premises."
+    },
+    {
+      "id": "alg-periodic-orbit-pseudoarclength-continuation",
+      "status": "supported",
+      "evidence": "Carry forward: complete corrector packages and finite-returning callbacks remain required; no elementary wrapper guarantee is imported."
+    },
+    {
+      "id": "alg-point-verified-linear-system-certifier",
+      "status": "supported",
+      "evidence": "Carry forward: operationwise residual allowances and outward norm bounds retain their non-finite failure checks."
+    },
+    {
+      "id": "alg-safeguarded-hybrid-event-location-and-restart",
+      "status": "supported",
+      "evidence": "Carry forward: complete root isolation and valid reference-error data remain required before successful event decisions."
+    },
+    {
+      "id": "alg-scalar-interval-newton-certification",
+      "status": "supported",
+      "evidence": "Carry forward: valid range/derivative callbacks and zero-excluding derivative intervals remain prerequisites."
+    },
+    {
+      "id": "alg-smooth-function-root-isolation",
+      "status": "supported",
+      "evidence": "Carry forward: finite scalar calls and unresolved-box coverage do not depend on the changed elementary controller."
+    },
+    {
+      "id": "alg-uniform-interval-linear-residual-certifier",
+      "status": "supported",
+      "evidence": "Carry forward: outward modulus/root computations reject non-finite results; exact bisection/storage semantics are preserved."
+    },
+    {
+      "id": "alg-validated-periodic-orbit-corrector",
+      "status": "supported",
+      "evidence": "Carry forward: current-box residual/Jacobian callbacks, inverse witness and independent Krawczyk validation remain explicit."
+    },
+    {
+      "id": "alg-validated-residual-tube-certificate-checker",
+      "status": "supported",
+      "evidence": "Carry forward: uses rational real-operation DAGs and outward conversions only, with no elementary or automatic-subdivision call."
+    },
+    {
+      "id": "cex-grazing-event-time-error-is-not-linearly-bounded",
+      "status": "supported",
+      "evidence": "Carry forward: its exact construction identifies the absent positive derivative margin; no numerical square-root call is assumed."
+    },
+    {
+      "id": "def-centered-taylor-model-with-derivative-interval",
+      "status": "supported",
+      "evidence": "Carry forward: independently supplied coefficient and derivative inclusions remain necessary."
+    },
+    {
+      "id": "def-certified-hybrid-event-enclosure",
+      "status": "supported",
+      "evidence": "Carry forward: local checker success and total reference-error ledger remain distinct prerequisites."
+    },
+    {
+      "id": "def-factorable-box-convex-relaxation-interface",
+      "status": "supported",
+      "evidence": "Carry forward: verified graph and coefficient enclosures remain required; failed bounds do not define a relaxation."
+    },
+    {
+      "id": "def-outward-rounded-interval-and-ball-operations",
+      "status": "supported",
+      "evidence": "The exact dyadic square-root pair is still requested with n=p and stored by separate downward/upward caller conversions. No format input or restriction on the exact bisection domain is proposed."
+    },
+    {
+      "id": "def-validated-periodic-shooting-jet-enclosure",
+      "status": "supported",
+      "evidence": "Carry forward: successful validated flow/variational range providers and positive-period division remain explicit."
+    },
+    {
+      "id": "def-validated-residual-tube-certificate",
+      "status": "supported",
+      "evidence": "Carry forward: rational arithmetic DAG, denominator and strict-margin contracts are unchanged."
+    },
+    {
+      "id": "ex-bouncing-ball-transverse-event-error-and-reset",
+      "status": "supported",
+      "evidence": "Carry forward: exact state-error, transverse margin and reset bounds justify its estimate independently of elementary procedures."
+    },
+    {
+      "id": "ex-bounded-engineering-design-mixed-integer-gap-certificate",
+      "status": "supported",
+      "evidence": "Carry forward: uses exact square-completion bounds for every integer assignment, not an unsupported interval primitive."
+    },
+    {
+      "id": "ex-certified-sine-near-a-multiple-of-pi",
+      "status": "repair-proposed",
+      "evidence": "The proposed C_3/C_5 calculation proves only k=4 is included. Existing residual and width arguments remain; X=2P has selected-format endpoints and B=0 never reaches the new split guard."
+    },
+    {
+      "id": "ex-division-by-interval-containing-zero",
+      "status": "supported",
+      "evidence": "Carry forward: the unbounded quotient proof still matches the refusal of finite division across zero."
+    },
+    {
+      "id": "ex-event-root-with-derivative-separated-from-zero",
+      "status": "supported",
+      "evidence": "Carry forward: its exact dyadic Newton image is strictly inside the original box and uses valid range/derivative enclosures."
+    },
+    {
+      "id": "ex-hermitian-eigenvalue-bisection-by-verified-inertia",
+      "status": "supported",
+      "evidence": "Carry forward: supplied norm bound and successful diagonal inertia queries support the listed brackets."
+    },
+    {
+      "id": "ex-interval-subtraction-dependency",
+      "status": "supported",
+      "evidence": "Carry forward: natural subtraction gives [-1,1] while the shared exact input gives zero; proposals preserve these semantics."
+    },
+    {
+      "id": "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+      "status": "supported",
+      "evidence": "Actual current source already specifies t=x*x, u=t*t, f=u-t, an alpha-renaming of the requested multiplication-only DAG. Root enclosures are [-1,1], [-1,1], [-2,2] with gap 2; sign-separated children give lower bound -1 and final gap 13/16. Its detailed minimizer-location proof is preserved. No edit is needed."
+    },
+    {
+      "id": "ex-near-unit-floquet-multiplier-is-inconclusive",
+      "status": "supported",
+      "evidence": "Carry forward: cluster count is correctly distinguished from strict unit-circle separation."
+    },
+    {
+      "id": "ex-two-events-between-endpoints-defeat-sign-screening",
+      "status": "supported",
+      "evidence": "Carry forward: the two exact roots and opposite directions explain why complete isolation is required."
+    },
+    {
+      "id": "ex-validated-mass-action-equilibrium-root",
+      "status": "supported",
+      "evidence": "Carry forward: zero midpoint residual and zero-excluding derivative yield the stated strict Newton inclusion."
+    },
+    {
+      "id": "ex-van-der-pol-stability-conditional-on-validated-enclosure",
+      "status": "supported",
+      "evidence": "Carry forward: remains conditional on actual successful orbit and separated-cluster certificates."
+    },
+    {
+      "id": "lem-na-computed-unitary-butterfly-error-bound",
+      "status": "supported",
+      "evidence": "Carry forward: uses certified twiddle error and successful normal-range arithmetic, not enclosure nesting across precision changes."
+    },
+    {
+      "id": "lem-naive-all-pairs-collision-search-has-quadratic-work",
+      "status": "supported",
+      "evidence": "Carry forward: counts the explicit pair list and excludes certificate-solving work."
+    },
+    {
+      "id": "lem-rational-expression-derivative-recursion-correct",
+      "status": "supported",
+      "evidence": "Carry forward: rational node inventory and nonzero-denominator neighborhood assumptions are unchanged."
+    },
+    {
+      "id": "lem-real-interval-arithmetic-preserves-enclosure",
+      "status": "supported",
+      "evidence": "Carry forward: arithmetic enclosure and squaring as a distinct primitive remain sound; the arithmetic-only BNB oracle is not widened."
+    },
+    {
+      "id": "lem-separated-simple-floquet-multiplier-perturbation-bound",
+      "status": "supported",
+      "evidence": "Carry forward: the jet reference supplies monodromy interpretation; separate resolvent and separation premises remain required."
+    },
+    {
+      "id": "lem-transverse-hybrid-event-time-error",
+      "status": "supported",
+      "evidence": "Carry forward: uses an explicit total state bound and uniform signed derivative margin before MVT."
+    },
+    {
+      "id": "thm-bounded-mixed-integer-finite-budget-terminates",
+      "status": "supported",
+      "evidence": "Carry forward: finite oracle-return hypotheses and shared node budget are independent of the changed wrapper."
+    },
+    {
+      "id": "thm-bounded-mixed-integer-gap-certificate-sound",
+      "status": "supported",
+      "evidence": "Carry forward: complete covering ledgers and valid lower bounds remain required."
+    },
+    {
+      "id": "thm-box-muller-finite-bit-coupling-error",
+      "status": "supported",
+      "evidence": "Its all-midpoint-input certified-success hypothesis and uniform certificate maxima remain unchanged. A midpoint guard failure simply prevents that hypothesis for the chosen configuration; no sampled success or unconditional all-success promotion is proposed."
+    },
+    {
+      "id": "thm-budgeted-range-evaluation-terminates-and-is-sound",
+      "status": "repair-proposed",
+      "evidence": "Proposed proofs establish finite admission, admissible queued subcalls, complete/unresolved coverage and certified-only global width. It consumes complex finite containment, not complex nestedness."
+    },
+    {
+      "id": "thm-centered-taylor-model-encloses-function-range",
+      "status": "supported",
+      "evidence": "Carry forward: supplied coefficient/derivative inclusions and integral remainder support outward evaluation independently of these changes."
+    },
+    {
+      "id": "thm-certified-adaptive-simpson-enclosure",
+      "status": "supported",
+      "evidence": "Carry forward: its own midpoint admission, Peano remainder and outward recursive sums remain intact."
+    },
+    {
+      "id": "thm-complex-elementary-range-enclosures",
+      "status": "repair-proposed",
+      "evidence": "Proposed 1.2 tail and 1.3 prove sector-clipping containment, consistent-rounding nestedness, all quadrant transitions, persistent axis pieces and full typed-DAG induction. No Statement weakening is needed."
+    },
+    {
+      "id": "thm-complex-resolvent-cover-validator-soundness",
+      "status": "supported",
+      "evidence": "Carry forward: finite disk norm bounds and segment coverage establish its resolvent conclusion without Log evaluation."
+    },
+    {
+      "id": "thm-dyadic-square-root-bisection-encloses",
+      "status": "supported",
+      "evidence": "Exact bisection invariant, zero case, grid width and monotone endpoints remain unchanged; optional caller storage rounding remains separate."
+    },
+    {
+      "id": "thm-factorable-dual-certificate-is-valid-box-lower-bound",
+      "status": "supported",
+      "evidence": "Carry forward: verified operand/graph enclosures establish feasible embedding before weak duality."
+    },
+    {
+      "id": "thm-finite-hybrid-trajectory-error-under-separated-events",
+      "status": "supported",
+      "evidence": "Carry forward: separates local residual error from propagated reset-state error and uses matched transverse brackets."
+    },
+    {
+      "id": "thm-floquet-multiplier-cluster-certificate-soundness",
+      "status": "supported",
+      "evidence": "Carry forward: consumes the covered-contour resolvent bound, then its own quadrature and perturbation allowances."
+    },
+    {
+      "id": "thm-golub-welsch-certified-enclosures-are-sound",
+      "status": "supported",
+      "evidence": "Carry forward: certified coefficient solves, outward Jacobi construction and residual-gap bounds retain the same root endpoint directions."
+    },
+    {
+      "id": "thm-interval-determinant-sign-certifier-soundness",
+      "status": "supported",
+      "evidence": "Carry forward: containment of all Leibniz values precedes determinant sign and exact-zero conclusions."
+    },
+    {
+      "id": "thm-interval-hermitian-ldl-inertia-certifier-soundness",
+      "status": "supported",
+      "evidence": "Carry forward: finite Schur-update enclosure and verified nonsingular pivot signs support the inertia induction."
+    },
+    {
+      "id": "thm-interval-linear-krawczyk-certifier-soundness",
+      "status": "supported",
+      "evidence": "Carry forward: inverse witness, set inclusion and separate defect bound retain their distinct roles."
+    },
+    {
+      "id": "thm-interval-lipschitz-bound-sound-consistent",
+      "status": "supported",
+      "evidence": "Carry forward: increasing-precision arithmetic consistency uses continuous endpoint formulas away from zero denominators, not fixed-N elementary nesting."
+    },
+    {
+      "id": "thm-krawczyk-inclusion-exclusion-and-uniqueness",
+      "status": "supported",
+      "evidence": "Carry forward: finite real-operation images and separate contraction bounds support its certificates and unresolved-box coverage."
+    },
+    {
+      "id": "thm-na-arbitrary-length-fft-correctness-and-cost",
+      "status": "supported",
+      "evidence": "Carry forward: formal exact phase substitution and excluded interval-generation costs remain explicit."
+    },
+    {
+      "id": "thm-na-bluestein-chirp-phase-error-separate-from-fft-error",
+      "status": "supported",
+      "evidence": "Carry forward: successful chirp certificates and separate convolution-error premises are unchanged."
+    },
+    {
+      "id": "thm-na-certified-unit-circle-phase-enclosure",
+      "status": "supported",
+      "evidence": "Real sine/cosine containment and the canonical-pi bridge still justify the lower-corner width certificate. The complex-only clipping proposal changes none of those outputs."
+    },
+    {
+      "id": "thm-na-computed-fft-convolution-error-bound",
+      "status": "supported",
+      "evidence": "Carry forward: successful transform/twiddle hypotheses and separate product/scaling errors remain required."
+    },
+    {
+      "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+      "status": "supported",
+      "evidence": "Carry forward: butterfly error and unitary norm preservation support the recursion without interval nestedness."
+    },
+    {
+      "id": "thm-near-orthonormal-hermitian-eigenvalue-certifier-soundness",
+      "status": "supported",
+      "evidence": "Carry forward: outward residual, Gram and square-root bounds establish its separate spectral-certificate hypotheses."
+    },
+    {
+      "id": "thm-orbital-stability-from-certified-floquet-multipliers",
+      "status": "supported",
+      "evidence": "Carry forward: actual corrector contraction and complete strictly separated cluster counts remain prerequisites."
+    },
+    {
+      "id": "thm-ordered-hermitian-eigenvalue-bisection-soundness",
+      "status": "supported",
+      "evidence": "Carry forward: norm initialization and successful inertia counts preserve brackets; failed queries are no-ops."
+    },
+    {
+      "id": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+      "status": "supported",
+      "evidence": "Exact square-root monotonicity plus caller storage conversion, ball coordinate bounds and arithmetic DAG induction remain unchanged."
+    },
+    {
+      "id": "thm-pade-scaling-and-squaring-error-bound",
+      "status": "supported",
+      "evidence": "Carry forward: uses resolvent-cover soundness with separate solve, topology, scalar-tail and squaring-defect premises."
+    },
+    {
+      "id": "thm-periodic-shooting-residual-to-orbit-error-budget",
+      "status": "supported",
+      "evidence": "Carry forward: actual jet residual inclusion is used with independent inverse and neighborhood bounds."
+    },
+    {
+      "id": "thm-point-verified-linear-system-certifier-soundness",
+      "status": "supported",
+      "evidence": "Carry forward: outward norm allowances establish defect/residual data before its solution-enclosure theorem."
+    },
+    {
+      "id": "thm-real-elementary-range-enclosures",
+      "status": "supported",
+      "evidence": "Real primitive rules and the explicit exponential Cauchy-product calculation remain unchanged. Its fixed-DAG/constants/format/N nestedness hypotheses continue to supply the complex proof's real subcalls."
+    },
+    {
+      "id": "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+      "status": "supported",
+      "evidence": "Carry forward: complete isolation and propagated reference error remain necessary before timing or event-absence conclusions."
+    },
+    {
+      "id": "thm-scalar-interval-newton-exclusion-and-inclusion",
+      "status": "supported",
+      "evidence": "Carry forward: zero-excluding derivative interval, outward division and MVT/endpoint arguments remain intact."
+    },
+    {
+      "id": "thm-smooth-function-root-isolation-soundness",
+      "status": "supported",
+      "evidence": "Carry forward: scalar certificates and covering children retain all roots in certified or unresolved boxes."
+    },
+    {
+      "id": "thm-uniform-constraint-margin-enables-empty-box-detection",
+      "status": "supported",
+      "evidence": "Carry forward: valid arithmetic DAGs, increasing precision, no-overflow range and finite-returning queries remain explicit."
+    },
+    {
+      "id": "thm-uniform-interval-linear-residual-certifier-soundness",
+      "status": "supported",
+      "evidence": "Carry forward: outward component moduli and norm bounds establish uniform q<1 residual certificate data."
+    },
+    {
+      "id": "thm-validated-periodic-orbit-certificate-soundness",
+      "status": "supported",
+      "evidence": "Carry forward: actual residual/Jacobian, contraction, nonstationarity and full-box jet records remain required."
+    },
+    {
+      "id": "thm-validated-residual-tube-certificate-sound",
+      "status": "supported",
+      "evidence": "Carry forward: finite rational interval checks establish exact residual/Jacobian/tube inequalities independently of elementary evaluation."
+    },
+    {
+      "id": "thm-validated-residual-tube-checker-terminates",
+      "status": "supported",
+      "evidence": "Carry forward: its loops use supplied finite arrays and rational arithmetic DAGs, not the budgeted elementary split procedure."
+    }
+  ],
+  "already_repaired_elsewhere": [
+    "items/ex-multimodal-polynomial-spatial-bnb-gap-certificate.md: current Facts specify t=x*x, u=t*t, f=u-t; Verification 1.2 already derives ordinary interval products [-1,1], [-1,1], then [-2,2] and root gap 2. Verification 2.1 already derives child lower bound -1, and 3.1 retains gap 13/16. The current detailed proof locating the two minimizers is also preserved. No replacement is proposed for this already-resolved finding."
+  ],
+  "unresolved": []
+}

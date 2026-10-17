@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "17",
+  "round": 0,
+  "reviewed_items": [
+    "alg-householder-bidiagonalization",
+    "alg-strong-rank-revealing-qr-with-finite-swaps",
+    "lem-singular-value-product-bound",
+    "lem-singular-values-lipschitz-in-spectral-norm",
+    "prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex",
+    "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+    "lem-exact-householder-bidiagonal-reduction",
+    "lem-strong-rrqr-column-swap-volume-ratio",
+    "thm-bidiagonal-singular-values-relative-under-componentwise-perturbations",
+    "thm-strong-rrqr-singular-value-comparisons",
+    "alg-rank-thresholded-least-squares-by-svd",
+    "lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence",
+    "thm-strong-rrqr-swap-rule-terminates",
+    "thm-bidiagonal-svd-backward-error-under-local-stability",
+    "thm-svd-thresholded-least-squares-minimum-norm-model",
+    "cor-computed-singular-values-absolute-error-from-backward-stability",
+    "alg-scaled-complex-householder-and-givens-updates",
+    "lem-scaled-complex-householder-and-givens-local-backward-error",
+    "ex-nearly-rank-deficient-design-matrix",
+    "cex-classical-column-pivoted-qr-is-not-strong-with-factor-one",
+    "ex-absolute-versus-relative-singular-value-error"
+  ],
+  "reviewed_pages": [
+    "computed-singular-values-and-rank-revealing-factorizations",
+    "computed-singular-values-and-rank-revealing-factorizations-examples"
+  ],
+  "decision": "repair",
+  "reason": "Reviewed both pages, the approved LIN-SVD scope, all assigned items, and their relevant supplier claims and proofs. The mathematical results retain the approved claims and their stated exact or conditional hypotheses. Request one local repair for the procedure-output and RRQR exact-factorization issues below; no unresolved outside prerequisite gap remains.",
+  "findings": [
+    {
+      "id": "alg-householder-bidiagonalization",
+      "type": "local",
+      "reason": "After the loop, C has been overwritten, but the reported reconstruction residual uses C rather than the saved input C0; it is generally wrong even in exact arithmetic. The finite-precision instructions also do not say how returned U,V accumulators are updated from the stored local transformations."
+    },
+    {
+      "id": "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+      "type": "local",
+      "reason": "The successful output omits the final transformed bidiagonal matrix and deflation record needed by the backward-error consumer. Accumulator updates are described only as “update” operations, without specifying the left/right product instructions needed to form the returned triplet vectors."
+    },
+    {
+      "id": "alg-strong-rank-revealing-qr-with-finite-swaps",
+      "type": "local",
+      "reason": "The CPQR dependency permits full or reduced QR, but this procedure does not specify which factor shape it returns. Its comparison and volume arguments use Q as though it were square unitary. Specify full Q or make the reduced-isometry case explicit."
+    },
+    {
+      "id": "thm-strong-rrqr-singular-value-comparisons",
+      "type": "local",
+      "reason": "The proof's success condition F1 is guaranteed for exact-arithmetic success, but the algorithm also defines finite-precision success, whose computed score tests do not imply the exact score inequalities. Restrict the theorem to exact-arithmetic success or supply certified score bounds."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-exact-householder-bidiagonal-reduction",
+      "decision": "accept",
+      "reason": "Checked the exact-arithmetic invariant and wide-orientation adjoint; these remain valid under the requested finite-precision output clarification."
+    },
+    {
+      "id": "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+      "decision": "repair",
+      "reason": "It consumes the bidiagonal reduction factors and has the separate accumulator/output omissions identified above."
+    },
+    {
+      "id": "alg-rank-thresholded-least-squares-by-svd",
+      "decision": "accept",
+      "reason": "The exact-SVD model and the explicitly unverified finite-precision candidate remain distinct; no current claim depends on the erroneous reconstruction residual."
+    },
+    {
+      "id": "thm-bidiagonal-svd-backward-error-under-local-stability",
+      "decision": "accept",
+      "reason": "Its conditional aggregation uses exact unitary representatives and the explicit local error bounds, not the returned rounded dense accumulators."
+    },
+    {
+      "id": "lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence",
+      "decision": "accept",
+      "reason": "The exact one-sweep unitary identity and deflation perturbation remain valid under accumulator-output clarification."
+    },
+    {
+      "id": "cor-computed-singular-values-absolute-error-from-backward-stability",
+      "decision": "accept",
+      "reason": "It is conditional on the exact unitary nearby-factorization relation and keeps the rounded readout allowance separate."
+    },
+    {
+      "id": "thm-svd-thresholded-least-squares-minimum-norm-model",
+      "decision": "accept",
+      "reason": "Its proof concerns the exact truncated model and explicitly withholds original-matrix optimality when a positive singular value is discarded."
+    },
+    {
+      "id": "lem-strong-rrqr-column-swap-volume-ratio",
+      "decision": "accept",
+      "reason": "The determinant and volume identity is sound once the algorithm's Q factor shape is fixed or the reduced-isometry argument is stated."
+    },
+    {
+      "id": "thm-strong-rrqr-swap-rule-terminates",
+      "decision": "accept",
+      "reason": "Its volume-potential proof explicitly assumes exact arithmetic and the combined-score swap rule."
+    },
+    {
+      "id": "thm-strong-rrqr-singular-value-comparisons",
+      "decision": "repair",
+      "reason": "Clarify exact-arithmetic success; the Q-shape ambiguity is addressed by the algorithm repair."
+    },
+    {
+      "id": "cex-classical-column-pivoted-qr-is-not-strong-with-factor-one",
+      "decision": "accept",
+      "reason": "The exact greedy-pivot example and its coefficient violation are unaffected by the algorithm clarifications."
+    }
+  ]
+}

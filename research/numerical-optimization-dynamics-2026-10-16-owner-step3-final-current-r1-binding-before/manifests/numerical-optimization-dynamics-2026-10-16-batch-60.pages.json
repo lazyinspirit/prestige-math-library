@@ -1,0 +1,431 @@
+[
+  {
+    "order": 2404,
+    "id": "operator-splitting-admm-and-primal-dual-methods",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Operator splitting admm and primal dual methods",
+    "companion": "operator-splitting-admm-and-primal-dual-methods-examples",
+    "requires": [
+      "sparse-matrix-models-and-kernel-costs",
+      "inequality-kkt-duality-and-optimality-certificates",
+      "proximal-gradient-and-accelerated-composite-optimization",
+      "krylov-methods-and-lanczos-convergence"
+    ],
+    "items": [
+      {
+        "id": "def-maximal-monotone-relation-on-euclidean-space",
+        "kind": "definition",
+        "title": "Monotone and maximal-monotone relations on Euclidean space",
+        "statement": "Define a set-valued relation on a finite-dimensional real Euclidean space, monotonicity of its graph, and maximal monotonicity by inclusion among monotone graphs.",
+        "strategy": "State graph-level definitions with quantified pairs and make the ambient finite-dimensional Euclidean domain explicit.",
+        "deps": [
+          "def-euclidean-inner-product"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "def-saddle-point-for-convex-concave-lagrangian",
+        "kind": "definition",
+        "title": "Saddle points of extended-real Lagrangians",
+        "statement": "For an extended-real saddle function Ψ on a product of finite-dimensional Euclidean spaces, define a saddle pair (x*,y*) by Ψ(x*,y*) being finite and Ψ(x*,y)≤Ψ(x*,y*)≤Ψ(x,y*) for every x,y.",
+        "strategy": "State the quantified inequalities and finite-value condition, then specialize the definition to the equality-constrained ADMM Lagrangian and the PDHG saddle function.",
+        "deps": [
+          "def-extended-reals",
+          "def-euclidean-inner-product"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "lem-firmly-nonexpansive-picard-iteration-converges",
+        "kind": "lemma",
+        "title": "Picard iterates of a firmly nonexpansive map converge in finite dimensions",
+        "statement": "If T is firmly nonexpansive on a finite-dimensional Euclidean space and Fix(T) is nonempty, then T^k w0 converges to a fixed point.",
+        "strategy": "Firm nonexpansiveness yields Fejer descent and square-summable increments; boundedness and the finite-dimensional Bolzano–Weierstrass theorem supply a fixed cluster point, whose distance then forces convergence of the whole sequence.",
+        "deps": [
+          "def-euclidean-inner-product",
+          "cor-bolzano-weierstrass-in-rn",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "axiom_base": "ZF finite-dimensional real analysis via the cited choice-free Bolzano–Weierstrass result; no additional choice principle."
+      },
+      {
+        "id": "lem-one-point-extension-for-finite-dimensional-nonexpansive-map",
+        "kind": "lemma",
+        "title": "One-point extension of a nonexpansive map in finite dimensions",
+        "statement": "If T is 1-Lipschitz from a subset D of a finite-dimensional Euclidean space to that space, then for each y there is q with ||q-T(p)|| <= ||y-p|| for every p in D.",
+        "strategy": "Prove the finite-family ball intersection by minimizing the maximum squared-radius excess; reduce an arbitrary family to a compact finite-intersection argument.",
+        "deps": [
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-heine-borel-rn",
+          "thm-euclidean-semicontinuous-extreme-value-theorem",
+          "thm-nearest-point-in-a-nonempty-closed-convex-set",
+          "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+          "thm-compact-iff-finite-intersection-property"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "axiom_base": "ZF finite-dimensional compactness and finite convex combinations only. The sole point $p_0$ is chosen once from a stated nonempty set; no axiom of choice is used."
+      },
+      {
+        "id": "lem-schur-reduction-for-polynomial-unit-disk-roots",
+        "kind": "lemma",
+        "title": "Schur reduction preserves strict unit-disk root location",
+        "statement": "For a real monic polynomial p with |p(0)|<1, if every zero of p lies strictly inside the unit disk, then the degree-lowered normalized polynomial (p-p(0)p#)/z also has all zeros strictly inside, where p#(z)=z^n p(1/z).",
+        "strategy": "On the unit circle |p#|=|p|; Rouché gives the same zero count for p and p-p(0)p#, whose factor z removes one zero at the origin.",
+        "deps": [
+          "thm-rouche-theorem"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "axiom_base": "No additional set-theoretic axiom; finite polynomial algebra and the cited Rouché theorem."
+      },
+      {
+        "id": "alg-naive-sequential-three-block-admm",
+        "kind": "algorithm",
+        "title": "Naive sequential three-block ADMM",
+        "statement": "Define the direct three-block Gauss-Seidel extension for a sum of three proper closed convex objectives under A1x1+A2x2+A3x3=b, including its multiplier update and exact-solve/failure conventions, without asserting convergence.",
+        "strategy": "List the three successive augmented-Lagrangian block minimizations and the final dual update; distinguish this procedure from two-block ADMM.",
+        "deps": [
+          "def-proper-closed-convex-function-on-rn",
+          "def-euclidean-inner-product"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "alg-two-block-admm-scaled",
+        "kind": "algorithm",
+        "title": "Scaled two-block ADMM with explicit capped-solve statuses",
+        "statement": "For min f(x)+g(z) subject to Kx+Lz=c, rho>0, and scaled dual u, specify the sequential x and z augmented-quadratic minimizations, u update, residuals, objective, least-norm tie-break, finite inner caps, and failure statuses.",
+        "strategy": "Define the exact recurrence and a budgeted wrapper separately; only an attained exact subproblem result advances the outer state, while any exhausted/failed solve returns an explicit non-certificate status.",
+        "deps": [
+          "def-proper-closed-convex-function-on-rn",
+          "def-saddle-point-for-convex-concave-lagrangian",
+          "def-euclidean-inner-product",
+          "thm-nearest-point-in-a-nonempty-closed-convex-set"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "def-fenchel-conjugate-on-finite-dimensional-euclidean-space",
+        "kind": "definition",
+        "title": "Fenchel conjugate of an extended-real function",
+        "statement": "For a function f on a finite-dimensional Euclidean space define f*(s)=sup_x(<s,x>-f(x)) with the extended-real arithmetic convention and specify its effective domain.",
+        "strategy": "Define the supremum over all x, treating points where f=+infinity as contributing -infinity.",
+        "deps": [
+          "def-proper-closed-convex-function-on-rn",
+          "def-euclidean-inner-product"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "def-resolvent-of-a-monotone-relation",
+        "kind": "definition",
+        "title": "Resolvent of a monotone relation",
+        "statement": "For a relation A and rho>0 define J_{rho A}=(I+rho A)^{-1} as a relation; do not assume it is everywhere-defined or single-valued until proved.",
+        "strategy": "Define the inverse graph precisely and state its domain and value-set conventions.",
+        "deps": [
+          "def-maximal-monotone-relation-on-euclidean-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "lem-admm-exact-subproblem-optimality-relations",
+        "kind": "lemma",
+        "title": "Optimality relations for exact two-block ADMM subproblems",
+        "statement": "For an exact ADMM sweep, derive -K* y^{k+1}+rho K*L(z^{k+1}-z^k) in partial f(x^{k+1}) and -L* y^{k+1} in partial g(z^{k+1}).",
+        "strategy": "Apply the convex minimizer plus differentiable quadratic subgradient rule to each subproblem and substitute the dual update.",
+        "deps": [
+          "alg-two-block-admm-scaled",
+          "def-extended-real-epsilon-subdifferential",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "lem-fenchel-conjugate-is-proper-closed-convex",
+        "kind": "lemma",
+        "title": "The Fenchel conjugate of a proper closed convex function is proper closed convex",
+        "statement": "For proper closed convex f on a finite-dimensional Euclidean space, f* is proper, convex and lower-semicontinuous; identify the affine-minorant input needed for properness.",
+        "strategy": "Convexity and lower semicontinuity follow from a supremum of continuous affine functions; an affine minorant gives a finite conjugate value.",
+        "deps": [
+          "def-fenchel-conjugate-on-finite-dimensional-euclidean-space",
+          "lem-proper-closed-convex-function-affine-minorant",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-proper-closed-convex-function-on-rn"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "lem-fenchel-young-equality-characterizes-subgradients",
+        "kind": "lemma",
+        "title": "Fenchel–Young inequality and its equality case",
+        "statement": "For proper convex f, f(x)+f*(s)>=<s,x>, with equality iff s belongs to the subdifferential of f at x.",
+        "strategy": "Compare the defining supremum with its x-term and rewrite equality as the defining subgradient inequalities in both directions.",
+        "deps": [
+          "def-fenchel-conjugate-on-finite-dimensional-euclidean-space",
+          "def-extended-real-epsilon-subdifferential"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "thm-maximal-monotone-resolvent-is-firmly-nonexpansive",
+        "kind": "theorem",
+        "title": "A maximal-monotone resolvent is everywhere-defined and firmly nonexpansive",
+        "statement": "For maximal monotone A on finite-dimensional Euclidean space and rho>0, every y has a unique x with y-x in rho A(x), and J_{rho A} satisfies ||J y-J y'||^2 <= <J y-J y',y-y'>.",
+        "strategy": "Use a one-point nonexpansive extension of the graph transform to prove surjectivity; use monotonicity for uniqueness and firm nonexpansiveness.",
+        "deps": [
+          "def-maximal-monotone-relation-on-euclidean-space",
+          "def-resolvent-of-a-monotone-relation",
+          "lem-one-point-extension-for-finite-dimensional-nonexpansive-map",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "alg-douglas-rachford-splitting",
+        "kind": "algorithm",
+        "title": "Douglas–Rachford splitting for two maximal-monotone relations",
+        "statement": "Given maximal monotone A,B, rho>0 and w0, iterate p_k=J_{rho B}(w_k), q_k=J_{rho A}(2p_k-w_k), w_{k+1}=w_k+q_k-p_k; report the shadow p_k and make no termination claim.",
+        "strategy": "Specify the input relation domains, full-domain resolvent calls, state, shadow, and exact recurrence.",
+        "deps": [
+          "def-resolvent-of-a-monotone-relation",
+          "thm-maximal-monotone-resolvent-is-firmly-nonexpansive"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "alg-pdhg-primal-dual-hybrid-gradient",
+        "kind": "algorithm",
+        "title": "Chambolle–Pock primal-dual hybrid gradient",
+        "statement": "For min f(x)+g(Kx), proper closed convex f,g, finite Euclidean spaces and tau,sigma>0 with tau sigma ||K||_2^2<1, define y and x proximal updates and the extrapolation xbar^{k+1}=2x^{k+1}-x^k, plus explicit prox-budget failure status.",
+        "strategy": "State the saddle formulation, conjugate convention, adjoint, initialization xbar0=x0, exact recurrence, admissible step condition, and finite implementation failure branch.",
+        "deps": [
+          "def-proper-closed-convex-function-on-rn",
+          "def-fenchel-conjugate-on-finite-dimensional-euclidean-space",
+          "lem-fenchel-conjugate-is-proper-closed-convex",
+          "def-saddle-point-for-convex-concave-lagrangian",
+          "def-proximal-mapping",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "def-induced-matrix-p-norm",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "def-euclidean-inner-product"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "lem-two-block-admm-energy-and-objective-estimates",
+        "kind": "lemma",
+        "title": "Two-block ADMM energy descent and objective gap estimates",
+        "statement": "Relative to any saddle point, prove the exact Lyapunov descent, primal residual and mapped z-increment square summability, and the two one-sided objective estimates needed for objective convergence.",
+        "strategy": "Use the subproblem optimality relations, saddle inequalities and the sign from successive z-subproblem minimizations; expand squared norms exactly.",
+        "deps": [
+          "alg-two-block-admm-scaled",
+          "lem-admm-exact-subproblem-optimality-relations",
+          "def-saddle-point-for-convex-concave-lagrangian",
+          "def-extended-real-epsilon-subdifferential",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "lem-douglas-rachford-map-is-firmly-nonexpansive",
+        "kind": "lemma",
+        "title": "The Douglas–Rachford fixed-point map is firmly nonexpansive",
+        "statement": "For maximal monotone A,B, the map T=I-J_{rho B}+J_{rho A}(2J_{rho B}-I) is firmly nonexpansive.",
+        "strategy": "Expand the firm-nonexpansiveness deficit and apply firm nonexpansiveness of each resolvent to its two terms.",
+        "deps": [
+          "alg-douglas-rachford-splitting",
+          "thm-maximal-monotone-resolvent-is-firmly-nonexpansive"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "lem-pdhg-one-step-gap-telescope",
+        "kind": "lemma",
+        "title": "PDHG one-step primal-dual gap telescope",
+        "statement": "For exact theta=1 PDHG and every test pair, derive the prox subgradient inequalities, polarization expansion and the final nonnegative energy telescope under sqrt(tau sigma)||K||_2<1.",
+        "strategy": "Use the two proximal optimality conditions, the extrapolation identity, Cauchy-Schwarz for the cross-increment term, and the strict step condition to absorb it.",
+        "deps": [
+          "alg-pdhg-primal-dual-hybrid-gradient",
+          "def-extended-real-epsilon-subdifferential",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-induced-matrix-p-norm",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "def-euclidean-inner-product"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      },
+      {
+        "id": "thm-two-block-admm-residual-objective-and-dual-convergence",
+        "kind": "theorem",
+        "title": "Two-block ADMM residual, objective and dual sequence convergence",
+        "statement": "For proper closed convex f,g on finite-dimensional spaces, a saddle point, rho>0 and every exact attained subproblem sweep, the primal residual tends to zero, f(xk)+g(zk) tends to the primal optimum, and the unscaled dual sequence converges to a dual optimum; no primal iterate convergence is asserted.",
+        "strategy": "Sum the local energy telescope from k=1 for residual/objective convergence; identify every dual cluster point by the Fenchel subgradient inequalities, then use energy differences across the dual solution set to prove uniqueness of cluster points and convergence of the whole sequence.",
+        "deps": [
+          "alg-two-block-admm-scaled",
+          "def-saddle-point-for-convex-concave-lagrangian",
+          "lem-two-block-admm-energy-and-objective-estimates",
+          "def-fenchel-conjugate-on-finite-dimensional-euclidean-space",
+          "lem-fenchel-conjugate-is-proper-closed-convex",
+          "lem-fenchel-young-equality-characterizes-subgradients",
+          "lem-admm-exact-subproblem-optimality-relations",
+          "cor-bolzano-weierstrass-in-rn",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-euclidean-inner-product"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "axiom_base": "No additional axiom; the cited finite-dimensional Bolzano–Weierstrass result is choice-free."
+      },
+      {
+        "id": "thm-douglas-rachford-shadow-converges-to-zero-of-sum",
+        "kind": "theorem",
+        "title": "Douglas–Rachford shadows converge to a zero of the operator sum",
+        "statement": "If A,B are maximal monotone on finite-dimensional Euclidean space and 0 belongs to (A+B)(p) for some p, then the Douglas-Rachford state converges to a fixed point and its J_{rho B} shadow converges to a zero of A+B.",
+        "strategy": "Characterize fixed points by the two resolvent inclusions, then apply the finite-dimensional firmly nonexpansive Picard lemma and continuity of the shadow resolvent.",
+        "deps": [
+          "alg-douglas-rachford-splitting",
+          "lem-douglas-rachford-map-is-firmly-nonexpansive",
+          "lem-firmly-nonexpansive-picard-iteration-converges",
+          "thm-maximal-monotone-resolvent-is-firmly-nonexpansive"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "axiom_base": "No additional axiom; one stated zero witness, finite-dimensional Picard convergence, and exact resolvent algebra."
+      },
+      {
+        "id": "thm-pdhg-ergodic-saddle-gap-o1k",
+        "kind": "theorem",
+        "title": "PDHG has an O(1/k) ergodic saddle-gap bound",
+        "statement": "For a saddle point and tau sigma ||K||_2^2<1, the averages xbar_N=N^-1 sum_{k=0}^{N-1}x^{k+1}, ybar_N=N^-1 sum_{k=0}^{N-1}y^{k+1} satisfy the explicit saddle-gap inequality for every test pair; this gives O(1/N) on bounded test sets and does not imply a pointwise objective bound.",
+        "strategy": "Sum the proved one-step telescope, drop its nonnegative terminal energy, divide by N, and use convexity to pass from average iterates to the averaged saddle gap.",
+        "deps": [
+          "alg-pdhg-primal-dual-hybrid-gradient",
+          "lem-pdhg-one-step-gap-telescope",
+          "def-saddle-point-for-convex-concave-lagrangian"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "axiom_base": "No additional axiom; finite-dimensional real definitions and exact algebra only."
+      }
+    ]
+  },
+  {
+    "order": 2405,
+    "id": "operator-splitting-admm-and-primal-dual-methods-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Operator splitting admm and primal dual methods — Examples",
+    "companion": "operator-splitting-admm-and-primal-dual-methods",
+    "requires": [
+      "operator-splitting-admm-and-primal-dual-methods"
+    ],
+    "items": [
+      {
+        "id": "cex-naive-three-block-admm-divergence",
+        "kind": "counterexample",
+        "title": "The direct three-block ADMM extension can diverge",
+        "statement": "The unmodified sequential three-block ADMM diverges on a rational homogeneous feasibility problem with a unique primal-dual solution, despite every subproblem being attained.",
+        "strategy": "Derive the exact rational 5 by 5 iteration matrix, compute its characteristic polynomial, exclude unit-circle roots, and apply two exact Schur reductions to show an eigenvalue has modulus greater than one.",
+        "deps": [
+          "alg-naive-sequential-three-block-admm",
+          "lem-schur-reduction-for-polynomial-unit-disk-roots",
+          "thm-complex-polynomial-has-exactly-degree-many-roots-counted-with-multiplicity",
+          "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "axiom_base": "No additional axiom; exact rational arithmetic and finite-dimensional linear algebra."
+      },
+      {
+        "id": "ex-consensus-admm-least-squares",
+        "kind": "example",
+        "title": "Two-agent consensus least squares with exact ADMM iterates",
+        "statement": "For f(x)=1/2(x−1)^2, g(z)=1/2(z+1)^2, x−z=0, rho=1, z0=u0=0, verify the optimizer, saddle certificate, and first two scaled ADMM sweeps exactly.",
+        "strategy": "Solve the scalar KKT system, verify the saddle inequalities and dual optimum, then differentiate each quadratic subproblem and calculate the recurrence values without rounding.",
+        "deps": [
+          "alg-two-block-admm-scaled",
+          "def-saddle-point-for-convex-concave-lagrangian",
+          "def-convex-program-duality-and-slater-condition",
+          "thm-lagrangian-weak-duality"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "axiom_base": "No additional axiom; exact scalar real algebra."
+      },
+      {
+        "id": "ex-lanczos-ritz-value-is-not-a-norm-certificate",
+        "kind": "example",
+        "title": "A Lanczos Ritz value can miss the operator norm",
+        "statement": "For K=diag(1,2) and start vector e1, exact Lanczos returns only the invariant eigenvalue 1 although ||K||_2=2; a Ritz estimate from this start cannot certify the PDHG step-size upper bound.",
+        "strategy": "Compute the Krylov subspace, Ritz value and induced norm exactly; identify the absent top-eigenspace component and the precise degenerate hypothesis in the Lanczos supplier.",
+        "deps": [
+          "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+          "alg-pdhg-primal-dual-hybrid-gradient",
+          "def-induced-matrix-p-norm"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "axiom_base": "No additional axiom; exact finite-dimensional real arithmetic."
+      },
+      {
+        "id": "ex-two-pixel-pdhg-total-variation-step",
+        "kind": "example",
+        "title": "A two-pixel TV denoising PDHG step in CSR form",
+        "statement": "For K=[-1,1], f(x)=1/2||x-(1,0)||^2, g(v)=|v|, tau=sigma=1/2 and x0=y0=0, encode K in CSR and verify two exact PDHG sweeps and the strict step-size condition.",
+        "strategy": "Expand the scalar CSR product, use the interval indicator conjugate and proximal projection, and evaluate each rational update.",
+        "deps": [
+          "alg-pdhg-primal-dual-hybrid-gradient",
+          "thm-pdhg-ergodic-saddle-gap-o1k",
+          "def-csr-matrix-with-stored-entry-semantics",
+          "alg-csr-matrix-vector-product-with-validation",
+          "thm-csr-matvec-returns-the-represented-matrix-product",
+          "thm-csr-storage-and-exact-matvec-cost",
+          "def-induced-matrix-p-norm"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "axiom_base": "No additional axiom; exact finite-dimensional real arithmetic."
+      }
+    ]
+  }
+]

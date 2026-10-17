@@ -1,0 +1,434 @@
+--- current/research/numerical-optimization-dynamics-2026-10-16-batch-14.proof-contracts.json
++++ proposed/research/numerical-optimization-dynamics-2026-10-16-batch-14.proof-contracts.json
+@@ -733,7 +733,7 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "For $z=x+iy$ and $w=u+iv$, expansion gives\n$$\n|zw|^2=(xu-yv)^2+(xv+yu)^2=(x^2+y^2)(u^2+v^2)=|z|^2|w|^2.\n$$\nBoth moduli are nonnegative by [L2], so uniqueness of nonnegative square\nroots [L3] gives $|zw|=|z||w|$.",
++          "claim": "For $z=x+iy$ and $w=u+iv$, expansion gives\n$$\n|zw|^2=(xu-yv)^2+(xv+yu)^2=(x^2+y^2)(u^2+v^2)=|z|^2|w|^2.\n$$\nBoth moduli are nonnegative by [L2], so uniqueness of nonnegative square\nroots [L3] gives $|zw|=|z||w|$. Also, if $0\\le a\\le b$ and\n$r=\\sqrt a$, $s=\\sqrt b$, then $r,s\\ge0$. If $r>s$, then\n$a-b=r^2-s^2=(r-s)(r+s)>0$, a contradiction. Thus the square-root map is\nincreasing on nonnegative inputs.",
+           "step": "1.2",
+           "inputs": [
+             "given",
+@@ -744,7 +744,7 @@
+         },
+         {
+           "id": "step-1-3",
+-          "claim": "The identity\n$$\n(x^2+y^2)(u^2+v^2)-(xu+yv)^2=(xv-yu)^2\\ge0.\n$$\nThus $(xu+yv)^2\\le|z|^2|w|^2$. Taking nonnegative square roots gives\n$|xu+yv|\\le|z||w|$, hence $xu+yv\\le|z||w|$.\nThus $|z+w|^2=|z|^2+|w|^2+2(xu+yv)\\le(|z|+|w|)^2$; nonnegative square roots give\n$|z+w|\\le|z|+|w|$. By the reciprocal formula in [L2],\n$w(1/w)=(u+iv)(u-iv)/(u^2+v^2)=1$. Step 1.2 gives\n$|w||1/w|=|1|=1$. Here $|w|>0$: otherwise $x^2+y^2=0$ forces $x=y=0$\nbecause each square is nonnegative, contrary to $w\\ne0$. Hence\n$|1/w|=1/|w|$, and another application of step 1.2 yields\n$|z/w|=|z|/|w|$.",
++          "claim": "The identity\n$$\n(x^2+y^2)(u^2+v^2)-(xu+yv)^2=(xv-yu)^2\\ge0.\n$$\nThus $(xu+yv)^2\\le|z|^2|w|^2$. The increasing property proved in step 1.2 gives\n$|xu+yv|\\le|z||w|$, hence $xu+yv\\le|z||w|$.\nThus $|z+w|^2=|z|^2+|w|^2+2(xu+yv)\\le(|z|+|w|)^2$; applying the same\nincreasing property gives $|z+w|\\le|z|+|w|$. By the reciprocal formula in [L2],\n$w(1/w)=(u+iv)(u-iv)/(u^2+v^2)=1$. Step 1.2 gives\n$|w||1/w|=|1|=1$. Here $|w|>0$: otherwise $x^2+y^2=0$ forces $x=y=0$\nbecause each square is nonnegative, contrary to $w\\ne0$. Hence\n$|1/w|=1/|w|$, and another application of step 1.2 yields\n$|z/w|=|z|/|w|$.",
+           "step": "1.3",
+           "inputs": [
+             "step 1.2",
+@@ -806,7 +806,7 @@
+           "fact": "L1",
+           "source": "alg-dyadic-square-root-bisection",
+           "source_section": "Definition",
+-          "quote": "Input: a nonnegative exact dyadic rational $x$ and integer request $n\\ge1$.\nReturn exact dyadic bounds for $\\sqrt{x}$ as follows.\n\n1. If $x=0$, return $[0,0]$.\n2. Otherwise determine the unique integer $j$ with $2^j\\le x<2^{j+1}$ from the\n   exact dyadic representation, put $m=\\lfloor j/2\\rfloor$ and\n   $\\delta=2^{m-n}$.\n3. Set integer indices $L=0$ and $U=2^{n+1}$. While $U-L>1$, put\n   $Q=\\lfloor(L+U)/2\\rfloor$. If $(Q\\delta)^2\\le x$, replace $L$ by $Q$;\n   otherwise replace $U$ by $Q$.\n4. Return $[L\\delta,U\\delta]$. To store the endpoints in a selected finite\n   format, round the lower endpoint down and the upper endpoint up, reporting\n   `subnormal` or `overflow` as required.\n\nAll comparisons and multiplications in the loop are exact integer/dyadic\noperations. The loop has at most $n+1$ iterations.",
++          "quote": "Input: a nonnegative exact dyadic rational $x$ and integer request $n\\ge1$.\nOutput: an exact dyadic lower and upper bound for $\\sqrt{x}$; no finite\nstorage format is needed by this procedure.\n\n1. If $x=0$, return $[0,0]$.\n2. Otherwise determine the unique integer $j$ with $2^j\\le x<2^{j+1}$ from the\n   exact dyadic representation, put $m=\\lfloor j/2\\rfloor$ and\n   $\\delta=2^{m-n}$.\n3. Set integer indices $L=0$ and $U=2^{n+1}$. While $U-L>1$, put\n   $Q=\\lfloor(L+U)/2\\rfloor$. If $(Q\\delta)^2\\le x$, replace $L$ by $Q$;\n   otherwise replace $U$ by $Q$.\n4. Return the exact dyadic pair $[L\\delta,U\\delta]$. A caller that stores\n   these endpoints in a selected finite format must separately round the\n   lower endpoint down and the upper endpoint up, propagating the resulting\n   `subnormal` or `overflow` status.\n\nAll comparisons and multiplications in the loop are exact integer/dyadic\noperations. The loop has at most $n+1$ iterations.",
+           "uses": [
+             "1.1",
+             "1.4"
+@@ -851,13 +851,12 @@
+           "inputs": [
+             "step 1.1",
+             "algebra",
+-            "induction",
+-            "L3"
++            "induction"
+           ]
+         },
+         {
+           "id": "step-1-3",
+-          "claim": "For $x=0$ the returned point interval is exact. For $x>0$, outward storage\nrounding preserves both inequalities by [L2], so the stored result still\ncontains $\\sqrt{x}$.",
++          "claim": "For $x=0$ the returned point interval is exact. For $x>0$, the\nalgorithm returns the exact dyadic pair from step 1.2. If a caller stores\nthese endpoints in a finite format, outward rounding preserves both\ninequalities by [L2], so the stored result still contains $\\sqrt{x}$.",
+           "step": "1.3",
+           "inputs": [
+             "step 1.2",
+@@ -1396,8 +1395,7 @@
+           "step": "1.3",
+           "inputs": [
+             "step 1.2",
+-            "algebra",
+-            "step 1.1"
++            "algebra"
+           ]
+         }
+       ],
+@@ -1557,7 +1555,6 @@
+           "quote": "For finite $x$ with $|x|\\le N_{\\max}$, the directed roundings defined in\n[[def-dyadic-floating-point-format-and-directed-rounding]] satisfy\n$\\operatorname{rd}(x)\\le x\\le\\operatorname{ru}(x)$ and each endpoint error is\nat most the stated $\\epsilon_{\\rm abs}(x)$ (with zero error when $x$ is\nrepresentable). For $x>N_{\\max}$ the pair $(N_{\\max},+\\infty)$ encloses $x$;\nfor $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has\nerror bound $+\\infty$ and cannot be reported as a finite-error result.",
+           "uses": [
+             "1.1",
+-            "1.2",
+             "1.3"
+           ]
+         },
+@@ -1568,7 +1565,6 @@
+           "quote": "For every nonnegative exact dyadic input $x$ and $n\\ge1$, the exact dyadic\npair returned by [[alg-dyadic-square-root-bisection]] contains $\\sqrt{x}$ and\nhas width $2^{\\lfloor j/2\\rfloor-n}$ when $x>0$, where $j$ is the exponent\nselected by that algorithm. Storing the endpoints after outward rounding\npreserves enclosure, although storage rounding may increase the width.\nFor fixed $n$, both exact endpoint functions are nondecreasing in $x\\ge0$;\ndirected storage rounding preserves that monotonicity.",
+           "uses": [
+             "1.1",
+-            "1.2",
+             "1.3"
+           ]
+         },
+@@ -1587,7 +1583,26 @@
+           "source_section": "Definition",
+           "quote": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.\n\nA **complex rectangle** is $X+iY=\\{x+iy:x\\in X,\\ y\\in Y\\}$ for real intervals\n$X,Y$. Complex addition and multiplication use\n$(x+iy)+(u+iv)=(x+u)+i(y+v)$ and\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$. For $z=x+iy$, its complex modulus is\n$|z|=\\sqrt{x^2+y^2}$, and for $z\\ne0$ its reciprocal is\n$1/z=(x-iy)/(x^2+y^2)$. A\n**complex ball** $B(c,r)$ is\n$\\{z\\in\\mathbb C:|z-c|\\le r\\}$ with dyadic complex center $c$ and dyadic\n$r\\ge0$. For any two represented sets $S,T$, the inclusion order is\n$S\\sqsubseteq T$ iff $S\\subseteq T$.\n\nThe width of a complex rectangle with coordinate widths $w_X,w_Y$ is its\nEuclidean diameter $\\sqrt{w_X^2+w_Y^2}$; the width of a ball $B(c,r)$ is its\ndiameter $2r$. Width comparisons against a dyadic tolerance can be decided by\nexact rational comparisons after squaring the nonnegative quantities.\n\nThe **range** of a real or complex function $f$ on a set $S$ is\n$f(S)=\\{f(x):x\\in S\\cap\\operatorname{dom}(f)\\}$. A finite expression DAG is a\nfinite directed acyclic graph with input nodes, constant nodes, and operation\nnodes; constants are exact dyadics or are supplied with certified enclosing\nintervals. Sharing a node means the exact same intermediate value is reused.",
+           "uses": [
++            "1.2",
+             "2.1"
++          ]
++        },
++        {
++          "fact": "L6",
++          "source": "lem-nonnegative-square-root-exists-and-unique",
++          "source_section": "Statement",
++          "quote": "In a Dedekind-complete ordered field, every $x\\ge0$ has a unique $y\\ge0$ with\n$y^2=x$.",
++          "uses": [
++            "1.2"
++          ]
++        },
++        {
++          "fact": "L7",
++          "source": "def-complete-ordered-real-field",
++          "source_section": "Definition",
++          "quote": "A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with\nidentity $1>0$, a total order compatible with addition and multiplication, and\nthe least-upper-bound axiom: every nonempty subset of $\\mathbb R$ that is\nbounded above has a least upper bound in $\\mathbb R$. Throughout this batch,\nall real variables, intervals, limits, derivatives and integrals are taken in\nsuch a field. The integers and rationals are interpreted in their usual\nembedded copies. For $x\\in\\mathbb R$, define $|x|=x$ when $x\\ge0$ and\n$|x|=-x$ when $x<0$.",
++          "uses": [
++            "1.2"
+           ]
+         }
+       ],
+@@ -1606,15 +1621,16 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "For a ball $B(c,r)$, the coordinate projection intervals in [L1] contain\neach real and imaginary component. Since\n$(|\\Re z|+|\\Im z|)^2\\ge(\\Re z)^2+(\\Im z)^2$, [L3] gives\n$|z|\\le|\\Re z|+|\\Im z|\\le M_B$. Also\n$|z|\\ge|\\Re z|\\ge d(X_B)$ and $|z|\\ge|\\Im z|\\ge d(Y_B)$ by [L2]–[L3], so\n$|z|\\ge m_B$. For $z\\in B_1,w\\in B_2$, [L4] gives\n$|z\\pm w|\\le M_{B_1}+M_{B_2}$ and $|zw|\\le M_{B_1}M_{B_2}$. If\n$m_{B_2}>0$, then $|w|\\ge m_{B_2}$ and\n$|z/w|\\le M_{B_1}/m_{B_2}$. Upward radius rounding in [L1] preserves these\nbounds, proving soundness of all finite ball results.",
++          "claim": "For a ball $B(c,r)$, the coordinate projection intervals in [L1] contain\neach real and imaginary component. By [L5]–[L6], $|i\\Im z|=|\\Im z|$;\nthe complex triangle inequality [L4] therefore gives\n$|z|=|\\Re z+i\\Im z|\\le|\\Re z|+|\\Im z|\\le M_B$. Also\n$|z|^2=(\\Re z)^2+(\\Im z)^2\\ge(\\Re z)^2=|\\Re z|^2$ by [L7]. If\n$|z|<|\\Re z|$, nonnegativity would imply $|z|^2<|\\Re z|^2$, a\ncontradiction. Hence $|z|\\ge|\\Re z|$; the same argument gives\n$|z|\\ge|\\Im z|$. Every point of $X_B$ and $Y_B$ has absolute value at\nleast its corresponding $d$ value, so $|z|\\ge m_B$. For $z\\in B_1,w\\in B_2$,\n[L4] gives\n$|z\\pm w|\\le M_{B_1}+M_{B_2}$ and $|zw|\\le M_{B_1}M_{B_2}$. If\n$m_{B_2}>0$, then $|w|\\ge m_{B_2}$ and\n$|z/w|\\le M_{B_1}/m_{B_2}$. Upward radius rounding in [L1] preserves these\nbounds, proving soundness of all finite ball results.",
+           "step": "1.2",
+           "inputs": [
+             "given",
+             "L1",
+             "L4",
+-            "algebra",
+-            "L3",
+-            "L2"
++            "L5",
++            "L6",
++            "L7",
++            "algebra"
+           ]
+         },
+         {
+@@ -2767,7 +2783,8 @@
+           "uses": [
+             "1.1",
+             "1.2",
+-            "1.3"
++            "1.3",
++            "3.1"
+           ]
+         },
+         {
+@@ -2885,7 +2902,7 @@
+         },
+         {
+           "id": "step-1-3",
+-          "claim": "Write $A(t)=\\arctan t$, $S(t)=\\sin A(t)$ and $C(t)=\\cos A(t)$. From\n[L1], the difference quotient for $A$ is the average of the continuous\nintegrand $1/(1+u^2)$ over the interval from $t$ to $t+h$, so\n$A'(t)=1/(1+t^2)$. By the preceding sine and cosine identity and the chain\nand product rules [L4],\n$g(t)=S(t)-tC(t)$ satisfies $g'(t)=t g(t)/(1+t^2)$ and $g(0)=0$. The\nquotient rule [L4] gives $(g(t)^2/(1+t^2))'=0$. By [L3], this quotient is\nconstant on every interval between $0$ and $t$, hence zero; therefore\n$g(t)=0$. Now $C(t)^2=1/(1+t^2)$ by the preceding sine and cosine identity,\nand\n$C'(t)=-tC(t)/(1+t^2)$. The positive function $q(t)=\\sqrt{1+t^2}$ has\nderivative $q'(t)=t/q(t)$, since rationalizing its difference quotient gives\n$(2t+h)/(q(t+h)+q(t))$. The product rule [L4] gives $(q(t)C(t))'=0$ and\n[L3] gives $q(t)C(t)=1$; in particular $C(t)>0$. For $0<t\\le1$, the\nintegrand is at least $1/2$ on $[0,t]$, so $A(t)\\ge t/2>0$; positivity\nalso holds for $t>1$ by the same integral lower bound on $[0,t]$. For\n$t>1$, substitution $u=1/s$ gives\n$A(t)=2A(1)-A(1/t)<2A(1)$. Applying this identity to $1/t$ when $0<t<1$,\nand checking $t=1$, gives $A(t)=2A(1)-A(1/t)$ for every $t>0$. Oddness of\nthe oriented integral handles negative $t$. Since $\\pi/2=2A(1)$,\n$A(t)\\in(-\\pi/2,\\pi/2)$ and $\\tan A(t)=t$. At $t=1$, $S(1)=C(1)>0$ and\nstep 1.2 gives both equal $1/\\sqrt2$; the addition identities yield\n$\\sin(\\pi/2)=1$ and $\\cos(\\pi/2)=0$.",
++          "claim": "Write $A(t)=\\arctan t$, $S(t)=\\sin A(t)$ and $C(t)=\\cos A(t)$. From\n[L1], the difference quotient for $A$ is the average of the continuous\nintegrand $1/(1+u^2)$ over the interval from $t$ to $t+h$, so\n$A'(t)=1/(1+t^2)$. By the preceding sine and cosine identity and the chain\nand product rules [L4],\n$g(t)=S(t)-tC(t)$ satisfies $g'(t)=t g(t)/(1+t^2)$ and $g(0)=0$. The\nquotient rule [L4] gives $(g(t)^2/(1+t^2))'=0$. By [L3], this quotient is\nconstant on every interval between $0$ and $t$, hence zero; therefore\n$g(t)=0$. Now $C(t)^2=1/(1+t^2)$ by the preceding sine and cosine identity,\nand\n$C'(t)=-tC(t)/(1+t^2)$. Put $q(t)=\\sqrt{1+t^2}$. Since $q(t)\\ge0$ and\n$q(t)^2\\ge1$, it follows that $q(t)\\ge1$: otherwise\n$(1-q(t))(1+q(t))>0$ would imply $q(t)^2<1$. The same holds at $t+h$.\nFor $h$ near zero, rationalization gives\n$$\n|q(t+h)-q(t)|\n=\\frac{|h|\\,|2t+h|}{q(t+h)+q(t)}\n\\le\\frac{|h|(2|t|+|h|)}2\\longrightarrow0.\n$$\nThus $q$ is continuous, and the rationalized difference quotient\n$(q(t+h)-q(t))/h=(2t+h)/(q(t+h)+q(t))$ tends to $t/q(t)$; hence\n$q'(t)=t/q(t)$. The product rule [L4] gives $(q(t)C(t))'=0$, so [L3]\nimplies $q(t)C(t)$ is constant on every segment between $0$ and $t$. Its\nvalue at zero is $1$, hence $C(t)=1/q(t)>0.\n\nFor $t>0$ and $0\\le u\\le t$, the integrand satisfies\n$1/(1+u^2)\\ge1/(1+t^2)$. Constant comparison for the integral [L1] gives\n$A(t)\\ge t/(1+t^2)>0$. Also $A'(t)=1/(1+t^2)$, so\n$H(t)=A(t)+A(1/t)$ has derivative\n$$\nH'(t)=\\frac1{1+t^2}-\\frac1{t^2}\\frac1{1+1/t^2}=0.\n$$\nBy [L3], $H$ is constant on the positive segment between $1$ and $t$;\n$H(1)=2A(1)$. Therefore $A(t)=2A(1)-A(1/t)$ for every $t>0$, and the\npositivity just proved shows $0<A(t)<2A(1)$. Similarly, the derivative of\n$A(-t)+A(t)$ is zero and its value at zero is zero, so [L3] gives\n$A(-t)=-A(t)$ for every real $t$. Since $\\pi/2=2A(1)$, these bounds yield\n$A(t)\\in(-\\pi/2,\\pi/2)$ for all real $t$ and $\\tan A(t)=t$. At $t=1$,\n$S(1)=C(1)>0$ and step 1.2 gives both equal $1/\\sqrt2$; the addition\nidentities yield $\\sin(\\pi/2)=1$ and $\\cos(\\pi/2)=0$.",
+           "step": "1.3",
+           "inputs": [
+             "given",
+@@ -2921,9 +2938,10 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "Put $q=2x/\\pi$. By [L6], choose an integer $n>|q|+1$. Among the finite\nordered list $-n,-n+1,\\ldots,n$, take its greatest member $k_0\\le q$; then\n$k_0\\le q<k_0+1$. At least one of $k_0,k_0+1$ is within $1/2$ of $q$; call\nit $k$. Hence $r=x-k\\pi/2$ has $|r|\\le\\pi/4$. Repeated application of the\naddition identities in step 1.1 and the values proved in step 1.3 gives the\nquarter-period sign and swap formulas.",
++          "claim": "Put $q=2x/\\pi$. By [L6], choose an integer $n>|q|+1$. Among the finite\nordered list $-n,-n+1,\\ldots,n$, take its greatest member $k_0\\le q$; then\n$k_0\\le q<k_0+1$. At least one of $k_0,k_0+1$ is within $1/2$ of $q$; call\nit $k$. Since $0<1/(1+u^2)\\le1$ on $[0,1]$, integral comparison [L1] and\nstep 1.3 give $0<A(1)\\le1$, hence $\\pi/4=A(1)\\le1$. Therefore the residual\n$r=x-k\\pi/2$ satisfies $|r|\\le\\pi/4\\le1$. Repeated application of the\naddition identities in step 1.1 and the values proved in step 1.3 gives the\nquarter-period sign and swap formulas.",
+           "step": "3.1",
+           "inputs": [
++            "L1",
+             "L6",
+             "L7",
+             "step 1.1",
+@@ -3195,7 +3213,7 @@
+           "fact": "L1",
+           "source": "alg-certified-elementary-range-evaluation",
+           "source_section": "Definition",
+-          "quote": "Input: a finite expression DAG with real interval or complex rectangle input,\na finite dyadic format and an integer truncation index $N\\ge1$. All constants,\nincluding the Machin enclosure of $\\pi$, use the same fixed $N$ and format\nthroughout a call. Output: a finite interval/rectangle enclosure, or one of\n`empty`, `domain-error`, `split-domain`, `overflow`, or `inconclusive` with the\nunresolved domain piece. No value from a system `libm` routine is treated as a\ncertified endpoint.\n\n1. Evaluate arithmetic nodes by\n[[def-outward-rounded-interval-and-ball-operations]]. On an invalid divisor\nreturn its declared status. For $\\sqrt{X}$ require $X\\subseteq[0,\\infty)$; for\n$\\ln X$ require $X\\subseteq(0,\\infty)$. If an input is not wholly in the\nstated domain, return `domain-error` rather than silently discarding points.\n\n2. Set $s=\\max(0,e_{\\max}+2)$, using the exponent in\n[[def-dyadic-floating-point-format-and-directed-rounding]]. Since\n$N_{\\max}<2^{e_{\\max}+1}$, exact dyadic comparison gives\n$N_{\\max}/2^s<1/2$. For an\ninterval $X$, evaluate the truncated exponential polynomial on $U=X/2^s$ by\ninterval arithmetic, add the symmetric tail using $\\max_{u\\in U}|u|$, then\nsquare the resulting interval $s$ times. If its lower endpoint is not\npositive or an endpoint overflows, return `inconclusive` or `overflow`. For\n$\\ln$, split $X\\subset(0,\\infty)$ into its intersections with the fixed\ndyadic bins $[2^j,2^{j+1}]$. On each nonempty piece set\n$Y=2^{-j}X_j\\subseteq[1,2]$, $V=(Y-1)/(Y+1)$, evaluate the positive logarithm\nseries on $V$ with its tail determined by $\\max|V|$, and combine\n$j\\ln2+\\ln Y$ by outward arithmetic. Take the hull over all intersected\nbins.\n\n3. Partition $\\arctan$ input at the fixed real breakpoints\n$-3,-1/2,1/2,3$. On pieces within $[-1/2,1/2]$, use its alternating power\nseries interval evaluation. For $t\\in[1/2,1]$, use\n$\\arctan t=\\pi/4-\\arctan((1-t)/(1+t))$; for $t\\in[1,3]$, use\n$\\arctan t=\\pi/4+\\arctan((t-1)/(t+1))$; for $t>3$, use\n$\\arctan t=\\pi/2-\\arctan(1/t)$. Use odd symmetry on negative pieces.\nEnclose $\\pi$ by Machin's identity and the alternating series at $1/5$ and\n$1/239$, forming their rational partial sums and tail endpoints exactly\nbefore the final outward conversion. If any branch test is unresolved, return\n`inconclusive`.\n\n4. For sine and cosine, first compute one outward Machin interval $P_N$ for\n$\\pi$ using the same $N$ and format, with the rational series endpoints\ncombined exactly before final outward conversion. If $P_N$ is non-finite or\nits lower endpoint is not positive, return `inconclusive`. For finite input\n$X=[a,b]$, put $M_X=\\max(|a|,|b|)$, $p_-:=\\inf(P_N)>0$, and\n$K=\\lceil2M_X/p_-\\rceil+1$, with the ceiling computed by exact rational\ncomparisons. For $k>K$, the outward lower endpoint of cell $k$ is\n$(2k-1)p_-/4>M_X$; for $k<-K$, its outward upper endpoint is\n$-(2|k|-1)p_-/4<-M_X$. Thus every cell enclosure that can intersect $X$ is\nin the finite candidate list $-K,\\ldots,K$. Use the fixed canonical cells\n$[k\\pi/2-\\pi/4,k\\pi/2+\\pi/4]$, $k\\in\\mathbb Z$. Enclose each cell using\nexact rational expressions from $P_N$ and let $X_k$ be the interval hull of\nits intersection with $X$; do not round candidate-cell or residual endpoints.\nInclude every cell whose $P_N$ enclosure cannot be ruled out as intersecting\n$X$. Certify the residual enclosure $R=X_k-kP_N/2$ satisfies\n$R\\subseteq[-1,1]$, evaluate the corresponding power\npolynomial and add the explicit geometric tail by exact rational interval\narithmetic, then round the final endpoints outward. The tail comes from\n[[lem-trigonometric-identities-machin-and-range-reduction]], and map by the\nquarter-period identities. Intersect every finite sine/cosine enclosure\nwith $[-1,1]$, including after the sign and coordinate swaps; the exact\nvalues satisfy these bounds. If the input width is at least $2\\sup(P_N)$,\nreturn $[-1,1]$. If a cell cannot be certified in the reduced interval or the\nfinite candidate list cannot be resolved, return `inconclusive`. For tangent,\ndivide the sine enclosure by the cosine enclosure only on canonical pieces\nwhere the latter excludes zero; otherwise return `split-domain` or\n`inconclusive`.\n\n5. For complex exponential, evaluate real $\\exp(X)$, $\\cos(Y)$ and\n$\\sin(Y)$ and combine them by rectangle operations. For principal\n$\\operatorname{Log}$, require a rectangle excluding zero and every point of\nthe negative real branch cut; otherwise return `domain-error`. Subdivide into\nsign-stable quadrants and axis pieces; on the quadrants use\n$$\n\\operatorname{Arg}(x+iy)=\n\\begin{cases}\n\\arctan(y/x),&x>0,\\ y>0,\\\\\n-\\arctan((-y)/x),&x>0,\\ y<0,\\\\\n\\pi-\\arctan(y/(-x)),&x<0,\\ y>0,\\\\\n-\\pi+\\arctan((-y)/(-x)),&x<0,\\ y<0.\n\\end{cases}\n$$\nFor $x=0,y>0$ set $\\operatorname{Arg}(iy)=\\pi/2$, for $x=0,y<0$ set it to\n$-\\pi/2$, and on the positive real axis set it to zero. Enclose\n$\\ln\\sqrt{X^2+Y^2}$ by the real operations and elementary evaluators. If the\nbranch or sign cannot be certified, return `inconclusive`.\n\n6. Each displayed series uses indices $0,\\ldots,N$, hence at most $N+1$\nterms; $N$ is the truncation index. Branch breakpoints, dyadic scales and\n$P_N$ are fixed by the call parameters, independent of the input box; no\nadaptive subdivision or precision refinement is hidden inside this evaluator.",
++          "quote": "Input: a finite, well-formed, typed expression DAG with one or more designated\noutput nodes; finite real interval or complex rectangle assignments for its\ninput nodes; exact dyadic constants or constants supplied with certified\nenclosing intervals/rectangles; a finite dyadic format $(p,e_{\\min},e_{\\max})$\nwith $p\\ge2$ and $e_{\\min}\\le e_{\\max}$; and an integer truncation index\n$N\\ge1$. Input interval endpoints and supplied constant enclosures use this\nformat. All constants, including every Machin enclosure of $\\pi$, use the\nsame fixed $N$ and format throughout a call. Real nodes support input and\nconstant nodes and the operations $+,-,\\times,\\div,\\sqrt{\\phantom{x}},\n\\exp,\\ln,\\arctan,\\sin,\\cos,\\tan$. Complex nodes support input and constant\nnodes and $+,-,\\times,\\div,\\exp,\\operatorname{Log}$. Each operation has\nhomogeneous real or complex inputs of its stated type; no implicit conversion\nbetween real and complex nodes is performed. Unsupported node types, arities,\nor type combinations return `inconclusive` with the offending node.\n\nOutput: a finite interval/rectangle enclosure for every designated output\nnode, or one of `empty`, `entire`, `domain-error`, `split-domain`, `overflow`,\nor `inconclusive` with the node and unresolved domain piece. If any supplied\ninput is `empty`, return `empty`. No value from a system `libm` routine is\ntreated as a certified endpoint. Each DAG node is evaluated once; shared nodes\nreuse their interval/rectangle enclosure and do not preserve correlations\nbetween distinct paths.\n\n1. Check that node identifiers are unique, all references resolve, every\ndesignated output is a node, and the supported node types and arities above\nhold. Use each supplied input enclosure as its node value. For an exact real\ndyadic constant $c$, use $[\\operatorname{rd}(c),\\operatorname{ru}(c)]$ in the\nselected format. For an exact complex dyadic constant, do this to each\ncoordinate. A finite subnormal endpoint remains a valid endpoint; if a\ncoordinate conversion overflows, return `overflow` with that constant node.\nUse a supplied certified constant enclosure as given. Construct a topological\norder by repeatedly removing a node whose\npredecessors have already been removed, breaking ties by lexicographically\nsmallest node identifier. If no such node exists before all nodes are ordered,\nreturn `inconclusive` with a node in the cycle. Evaluate nodes in this order\nand store each finite enclosure for its successors. Arithmetic nodes use\n[[def-outward-rounded-interval-and-ball-operations]]; if an operation returns\na non-finite status, propagate it immediately with its node and unresolved\npiece. For $\\sqrt{X}$ require $X\\subseteq[0,\\infty)$ and for $\\ln X$ require\n$X\\subseteq(0,\\infty)$; otherwise return `domain-error` rather than silently\ndiscarding points.\n\n2. For a real exponential node, set $s=\\max(0,e_{\\max}+2)$ using the format\nin [[def-dyadic-floating-point-format-and-directed-rounding]]. Since\n$N_{\\max}<2^{e_{\\max}+1}$, exact comparison gives $N_{\\max}/2^s<1/2$. For\nits input interval $X$, evaluate the degree-$N$ exponential polynomial on\n$U=X/2^s$ by interval arithmetic and add the symmetric tail from\n[[lem-range-reduced-exp-log-and-arctan-series-enclosures]], using\n$\\max_{u\\in U}|u|$. Square the resulting interval $s$ times. If its lower\nendpoint is not positive or an endpoint overflows, return `inconclusive` or\n`overflow` with the node and input interval.\n\nFor a real logarithm node, first require $X\\subseteq(0,\\infty)$. List all\nintegers $j$ for which $X_j=X\\cap[2^j,2^{j+1}]$ is nonempty; exact endpoint\ncomparisons find this finite list because $X$ has positive finite endpoints.\nOn each piece set $Y=2^{-j}X_j\\subseteq[1,2]$ and $V=(Y-1)/(Y+1)$, evaluate\nthe positive logarithm series on $V$ with its tail determined by $\\max|V|$,\nand form $j\\ln2+\\ln Y$ by outward arithmetic. Compute the fixed enclosure for\n$\\ln2$ once by the same series and tail at $y=2$, hence $v=1/3$, and reuse it\nin every bin. If any piece cannot be evaluated finitely, propagate its status\nand that piece. Otherwise take the interval hull of all piece enclosures as\nthe node enclosure.\n\n3. Partition a real arctangent input at the fixed breakpoints\n$-3,-1/2,1/2,3$ into nonempty closed pieces, allowing shared endpoints.\nOn pieces in $[-1/2,1/2]$, evaluate its alternating power series. For positive\npieces in $[1/2,1]$, use\n$\\arctan t=\\pi/4-\\arctan((1-t)/(1+t))$; in $[1,3]$, use\n$\\arctan t=\\pi/4+\\arctan((t-1)/(t+1))$; for $t>3$, use\n$\\arctan t=\\pi/2-\\arctan(1/t)$. Evaluate negative pieces by odd symmetry.\nEnclose $\\pi$ using Machin's identity and the alternating series at $1/5$ and\n$1/239$, forming rational partial sums and tail endpoints exactly before\nfinal outward conversion. If every piece is finite, take the interval hull of\nall piece enclosures. If any branch test or piece is unresolved, return its\nnon-finite status with that piece and do not use a partial hull.\n\n4. For each sine or cosine node, first compute one outward Machin interval\n$P_N$ for $\\pi$ using the same $N$ and format, combining the rational series\nendpoints exactly before final outward conversion. If $P_N$ is non-finite or\nits lower endpoint is not positive, return `inconclusive`. For finite input\n$X=[a,b]$, put $M_X=\\max(|a|,|b|)$, $p_-:=\\inf(P_N)>0$, and\n$K=\\lceil2M_X/p_-\\rceil+1$, with the ceiling computed by exact rational\ncomparisons. If the width of $X$ is at least $2\\sup(P_N)$, return\n$[-1,1]$. Otherwise examine the finite candidate list $k=-K,\\ldots,K$ for\nthe canonical cells $[k\\pi/2-\\pi/4,k\\pi/2+\\pi/4]$. For each candidate form\nthe exact rational interval enclosure\n$C_k=kP_N/2+[-1/4,1/4]P_N$ of its canonical cell. For $k>K$, the exact\nleft endpoint $(2k-1)\\pi/4$ of cell $k$ is at least\n$(2k-1)p_-/4>M_X$; for $k<-K$, its exact right endpoint\n$-(2|k|-1)\\pi/4$ is at most $-(2|k|-1)p_-/4<-M_X$. Thus no omitted exact\ncell can intersect $X$. Include each candidate whose $C_k$ intersects $X$;\nexclude only candidates whose intersection is empty by exact comparison. Let\n$X_k$ be the exact interval hull of $X\\cap C_k$, without rounding these\nendpoints, and form the residual enclosure $R_k=X_k-kP_N/2$. Certify\n$R_k\\subseteq[-1,1]$, evaluate the sine polynomial through degree $2N+1$ or\nthe cosine polynomial through degree $2N$, and add the corresponding explicit\ngeometric tail from [[lem-trigonometric-identities-machin-and-range-reduction]]\nby exact rational interval arithmetic. Map each enclosure by the appropriate\nquarter-period sign or coordinate swap and intersect it with $[-1,1]$.\nRound the final endpoints outward and take the hull over every included cell.\nIf no candidate is included, a cell cannot be certified in the reduced\ninterval, or any candidate endpoint overflows, return `inconclusive` or\n`overflow` with the cell; never omit that piece from a finite hull.\n\nFor tangent, partition the input into the canonical pieces used for sine and\ncosine. Divide the sine enclosure by the cosine enclosure only when the latter\nexcludes zero. If a piece contains a certified cosine zero, return\n`split-domain` with that piece; if the enclosure includes zero but no pole is\ncertified, return `inconclusive`. Take the interval hull of tangent enclosures\nonly when every piece is finite.\n\n5. For complex exponential on $X+iY$, evaluate real $\\exp(X)$, $\\cos(Y)$,\nand $\\sin(Y)$ and combine their enclosures by rectangle operations. For\nprincipal $\\operatorname{Log}$, first require a rectangle excluding zero and\nevery point of the negative real branch cut; otherwise return `domain-error`.\nCompute an outward Machin interval $P_N$ for $\\pi$ using this call's $N$ and\nformat; if it is non-finite or its lower endpoint is not positive, return\n`inconclusive`.\nSplit each coordinate interval into its nonempty strictly negative and\nstrictly positive portions, plus the singleton $\\{0\\}$ when it contains zero.\nUse the closures of the strictly signed portions as interval enclosures; form\ntheir Cartesian products for the quadrant pieces, and handle products with an\naxis singleton separately. Omit empty pieces. These finitely many pieces\ncover the rectangle, with quadrant closures allowed to overlap their axis\npieces. On a quadrant where the denominator interval excludes zero, use\n$$\n\\operatorname{Arg}(x+iy)=\n\\begin{cases}\n\\arctan(y/x),&x>0,\\ y>0,\\\\\n-\\arctan((-y)/x),&x>0,\\ y<0,\\\\\n\\pi-\\arctan(y/(-x)),&x<0,\\ y>0,\\\\\n-\\pi+\\arctan((-y)/(-x)),&x<0,\\ y<0.\n\\end{cases}\n$$\nWrite this call's fixed interval as $P_N=[p_-,p_+]$ and form the exact\ndyadic sector intervals\n$$\nS_{\\rm I}=[0,p_+/2],\\qquad S_{\\rm II}=[p_-/2,p_+],\\qquad\nS_{\\rm III}=[-p_+,-p_-/2],\\qquad S_{\\rm IV}=[-p_+/2,0].\n$$\nFor every ratio-based quadrant piece, obtain its finite real arctangent\nenclosure by the real rules above; propagate any non-finite result. Form the\nfull argument interval $A$ in the displayed quadrant formula by exact\nrational endpoint arithmetic, using this same $P_N$ for each occurrence of\n$\\pi$. Before final outward conversion or hull formation, replace $A$ by\n$J=A\\cap S_q$, where $q$ is that piece's quadrant. Compute the intersection\nby exact endpoint maxima and minima. If it is empty, return `inconclusive`\nwith the piece and status `empty-argument-intersection`; do not omit the\npiece. If the denominator interval has a zero endpoint, use $J=S_q$\ninstead of a ratio formula.\n\nFor an interval $J=[a,b]$ produced by either branch, apply the same final\nconversion $H(J)=[\\operatorname{rd}(a),\\operatorname{ru}(b)]$ in the selected\nformat. Perform this conversion after intersection for a ratio branch and\nafter selecting $S_q$ for a coarse branch. Finite subnormal endpoints are\naccepted; an overflow returns `overflow` with the piece. On the positive\nimaginary axis use $H(P_N/2)$, on the negative imaginary axis use\n$H(-P_N/2)$, and on the positive real axis use $H([0,0])$. The initial domain\ncheck excludes the origin and negative real axis, so these are all remaining\naxis cases.\n\nOn each piece enclose $\\ln\\sqrt{X^2+Y^2}$ using the real operations and\nevaluator, and combine it with the converted argument interval into a\nrectangle. If every piece is finite, take the coordinatewise hull of all\npiece rectangles. If any piece, conversion or branch is unresolved, return\nits status and piece without forming a partial hull.\n\n6. Each displayed series uses indices $0,\\ldots,N$, hence at most $N+1$\nterms; the exponential step performs exactly $s$ interval squarings. The\nlogarithm bin list, arctangent partition, and sine/cosine candidate list are\nfinite and fixed by the input interval and call parameters. All successful\npiece enclosures at a node are combined by their interval or rectangle hull;\nfailure of any required piece returns its status rather than a hull of only\nthe remaining pieces. No adaptive subdivision or precision refinement is\nhidden inside this evaluator.",
+           "uses": [
+             "1.1",
+             "1.2",
+@@ -3242,18 +3260,28 @@
+           "uses": [
+             "1.2"
+           ]
++        },
++        {
++          "fact": "L6",
++          "source": "lem-absolutely-convergent-series-cauchy-product",
++          "source_section": "Statement",
++          "quote": "Let $\\sum_{n\\ge0}a_n=A$ and $\\sum_{n\\ge0}b_n=B$ be absolutely convergent\nreal series. Define\n$$\nc_n=\\sum_{j=0}^n a_jb_{n-j}.\n$$\nThen $\\sum_{n\\ge0}c_n$ converges absolutely and has sum $AB$. Thus the\nproduct of the two series can be grouped by total degree without changing\nits sum.",
++          "uses": [
++            "1.1"
++          ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "For an exponential input interval, the fixed scale puts every scaled point\nin $[-1/2,1/2]$. The point bound [L3] with $|u|$ replaced by the interval's\nlargest absolute endpoint gives a uniform tail enclosure. The truncated\npolynomial interval-evaluates every point by [L2]. The tail radius increases\nwith the largest absolute input, and each repeated interval square preserves\ninclusion by [L2]. The exact identity\n$\\exp(x)=(\\exp(x/2^s))^{2^s}$ follows by multiplying the absolutely\nconvergent series $2^s$ times: the multinomial theorem gives coefficient\n$(2^s)^k/k!$ at degree $k$; each squaring\npreserves the enclosure by [L2].",
++          "claim": "For an exponential input interval, the fixed scale puts every scaled point\nin $[-1/2,1/2]$. The point bound [L3] with $|u|$ replaced by the interval's\nlargest absolute endpoint gives a uniform tail enclosure. The truncated\npolynomial interval-evaluates every point by [L2]. The tail radius increases\nwith the largest absolute input, and each repeated interval square preserves\ninclusion by [L2]. To justify the scaling identity, put $d=2^s$. Repeated\napplications of [L6] to the absolutely convergent series for $\\exp u$ show\nthat the coefficient of $u^k$ in $(\\exp u)^d$ is\n$$\n\\sum_{n_1+\\cdots+n_d=k}\\frac1{n_1!\\cdots n_d!}\n=\\frac{d^k}{k!},\n$$\nwhere the equality is the multinomial theorem. Thus $(\\exp u)^d=\\exp(du)$;\nset $u=x/d$. Each interval squaring preserves the resulting enclosure by\n[L2].",
+           "step": "1.1",
+           "inputs": [
+             "given",
+             "L1",
+             "L2",
+             "L3",
++            "L6",
+             "algebra"
+           ]
+         },
+@@ -3295,7 +3323,7 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "Evaluate the finite expression DAG in topological order. Every primitive\nnode encloses its exact value by steps 1.1–2.2; induction over the finite\nnode order then encloses every exact intermediate and the root range. Each\nprimitive's canonical partition and fixed truncation are nested on common\nfinite branches, so the same induction preserves inclusion for nested inputs.",
++          "claim": "Evaluate the finite expression DAG in topological order. Every primitive\nnode encloses its exact value by steps 1.1–2.2; induction over the finite\nnode order then encloses every exact intermediate and every requested output\nrange. Each primitive's canonical partition and fixed truncation are nested\non common finite branches, so the same induction preserves inclusion for\nnested inputs evaluated with the same format and truncation index.",
+           "step": "3.1",
+           "inputs": [
+             "step 1.1",
+@@ -3361,18 +3389,19 @@
+           "quote": "Every integral below is the oriented Riemann integral constructed from upper\nand lower Darboux sums in\n[[lem-continuous-functions-riemann-integrable]]. It exists for each displayed\ncontinuous integrand on the finite interval between its endpoints, is additive\nin intervals, reverses sign when the endpoints are reversed, is monotone in\nthe integrand, and satisfies\n$|\\int_a^b g(t)\\,dt|\\le|b-a|\\max_{t\\text{ between }a\\text{ and }b}|g(t)|$.\nThese properties also\ngive constant comparison bounds and the average-value difference quotient\nused to differentiate the integral-defined functions.\n\nThe exponential is $\\exp(x)=\\sum_{k=0}^{\\infty}x^k/k!$ for $x\\in\\mathbb R$.\nThe sine and cosine are the everywhere-convergent power series\n$\\sin x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k+1}/(2k+1)!$ and\n$\\cos x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k}/(2k)!$. Define\n$\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$. The natural\nlogarithm $\\ln$ is defined on $(0,\\infty)$ by $\\ln x=\\int_1^x dt/t$.\n\nThe square root is the unique nonnegative real $y$ with $y^2=x$ for $x\\ge0$;\nexistence and uniqueness follow from\n[[lem-nonnegative-square-root-exists-and-unique]]. The tangent is\n$\\tan x=\\sin x/\\cos x$ on the set where $\\cos x\\ne0$.\n\nFor complex $z=x+iy$, the modulus $|z|=\\sqrt{x^2+y^2}$ is defined in\n[[def-intervals-rectangles-and-complex-balls]]. The complex exponential is\n$\\exp(x+iy)=\\exp(x)(\\cos y+i\\sin y)$. The principal complex logarithm is\n$\\operatorname{Log}(z)=\\ln|z|+i\\operatorname{Arg}(z)$ on\n$\\mathbb C\\setminus(-\\infty,0]$. For $z=x+iy$ in this domain, define\n$$\n\\operatorname{Arg}(x+iy)=\n\\begin{cases}\n\\arctan(y/x),&x>0,\\\\\n\\pi/2,&x=0,\\ y>0,\\\\\n-\\pi/2,&x=0,\\ y<0,\\\\\n\\pi-\\arctan(y/(-x)),&x<0,\\ y>0,\\\\\n-\\pi+\\arctan((-y)/(-x)),&x<0,\\ y<0.\n\\end{cases}\n$$\nThe excluded negative real axis is the remaining case $x<0,y=0$; zero is\nalso excluded.\n\nThese are point functions. An interval extension must separately enclose their\nexact ranges, test the stated domains, and return a non-finite status when its\nfinite budget cannot certify a reduction or endpoint.",
+           "uses": [
+             "1.1",
+-            "1.2"
++            "1.2",
++            "2.1"
+           ]
+         },
+         {
+           "fact": "L2",
+           "source": "thm-real-elementary-range-enclosures",
+           "source_section": "Statement",
+-          "quote": "Every finite enclosure returned by\n[[alg-certified-elementary-range-evaluation]] for a real interval in the\ndomain of $\\exp$, $\\ln$, $\\sqrt{\\phantom{x}}$, $\\arctan$, $\\sin$, $\\cos$, or\n$\\tan$ contains the exact range of that function on the represented domain.\nIf two input intervals are nested and both calls return finite enclosures,\nthe canonical branch-cell and fixed-term construction in the algorithm makes\nthe smaller interval's computed enclosure a subset of the larger one's.\nAn unresolved fixed branch, pole, invalid domain or overflow returns its\nstated non-finite status and carries no finite success claim.",
++          "quote": "Every finite interval returned for a requested real output node by\n[[alg-certified-elementary-range-evaluation]] on an input interval in the\ndomain of $\\exp$, $\\ln$, $\\sqrt{\\phantom{x}}$, $\\arctan$, $\\sin$, $\\cos$, or\n$\\tan$ contains the exact range of the corresponding function on that\ninterval. For the same typed DAG and designated real output node, if all\ninput intervals are nested coordinatewise, all constant enclosures are fixed,\nand both calls use the same finite dyadic format and truncation index $N$,\nthen, whenever both calls return finite enclosures, the canonical branch-cell\nand fixed-term construction makes the smaller domain's computed enclosure a\nsubset of the larger one's.\nAn unresolved fixed branch, pole, invalid domain or overflow returns its\nstated non-finite status and carries no finite success claim.",
+           "uses": [
+             "1.1",
+             "1.2",
+-            "1.3"
++            "2.1"
+           ]
+         },
+         {
+@@ -3383,7 +3412,7 @@
+           "uses": [
+             "1.1",
+             "1.2",
+-            "1.3"
++            "2.1"
+           ]
+         },
+         {
+@@ -3393,14 +3422,14 @@
+           "quote": "The power-series sine and cosine satisfy the addition identities and\n$\\sin^2x+\\cos^2x=1$. For $A(t)=\\arctan t$ from\n[[def-real-elementary-functions-and-domains]],\n$$\n\\sin(A(t))=t\\cos(A(t)),\\qquad \\cos(A(t))>0,\n$$\nso $A(t)$ is the inverse tangent with values in $(-\\pi/2,\\pi/2)$ when\n$\\pi=4A(1)$. It is odd; for $u,v\\ge0$ with $uv<1$,\n$A(u)+A(v)=A((u+v)/(1-uv))$; and for $t>0$,\n$A(t)=\\pi/2-A(1/t)$. In particular $\\sin(\\pi/2)=1$ and\n$\\cos(\\pi/2)=0$. Also,\n$$\n\\pi=16\\arctan(1/5)-4\\arctan(1/239).\n$$\nFor every real $x$ there is an integer $k$ and $r=x-k\\pi/2$ with\n$|r|\\le\\pi/4$; the sine and cosine of $x$ are obtained from those of $r$ by\nthe quarter-period identities. For every real $r$ with $|r|\\le1$ and every\n$N\\ge0$, truncating sine\nthrough degree $2N+1$ and cosine through degree $2N$ gives absolute tail bounds\n$$\nT_s=\\frac{|r|^{2N+3}}{(2N+3)!(1-|r|^2/((2N+4)(2N+5)))}\n$$\nand\n$$\nT_c=\\frac{|r|^{2N+2}}{(2N+2)!(1-|r|^2/((2N+3)(2N+4)))}.\n$$",
+           "uses": [
+             "1.2",
+-            "1.3"
++            "2.1"
+           ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "Let $Z=X+iY$ be a rectangle. By [L1], its exact exponential has real and\nimaginary parts $\\exp(X)\\cos(Y)$ and $\\exp(X)\\sin(Y)$. The real enclosures in\n[L2] contain these three ranges, and rectangle multiplication and addition\npreserve their exact component images by [L3]. Therefore the resulting\nrectangle contains $\\exp(Z)$.",
++          "claim": "Let $Z=X+iY$ be a rectangle. By [L1], its exact exponential has real and imaginary parts $\\exp(X)\\cos(Y)$ and $\\exp(X)\\sin(Y)$. The real enclosures in [L2] contain these three ranges, and rectangle multiplication and addition preserve their exact component images by [L3]. Therefore the resulting rectangle contains $\\exp(Z)$.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+@@ -3412,7 +3441,7 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "For a principal-log branch, subdivide $Z$ into rectangles of fixed signs\nof the real and imaginary coordinates, with separate pieces on the coordinate\naxes. In a nonzero quadrant, $|z|=\\sqrt{x^2+y^2}$ is enclosed by [L2]–[L3],\nhence $\\ln|z|$ is enclosed by [L2]. The quotient is enclosed by [L3] and\narctangent by [L2]. In quadrant I use $\\arctan(y/x)$; in quadrant IV use\n$-\\arctan((-y)/x)$; in quadrant II use $\\pi-\\arctan(y/(-x))$; and in\nquadrant III use $-\\pi+\\arctan((-y)/(-x))$. From [L4] and\n$\\sin^2(A(t))+\\cos^2(A(t))=1$, positivity of $\\cos(A(t))$ gives\n$\\cos(A(t))=1/\\sqrt{1+t^2}$ and\n$\\sin(A(t))=t/\\sqrt{1+t^2}$ for $t>0$. Substituting $t=y/x$ in quadrant I\ngives $(\\cos\\operatorname{Arg}z,\\sin\\operatorname{Arg}z)=(x/|z|,y/|z|)$.\nIn quadrant IV, evenness/oddness from [L1] gives the same coordinate\nidentity with $y<0$. The addition identities shift the angle in quadrant II\nby $\\pi-A(t)$, reversing only the cosine sign, and in quadrant III by\n$-\\pi+A(t)$, reversing both signs; substitution of the positive coordinate\nratios again gives $(x/|z|,y/|z|)$. The range of $A$ in [L4] places these\nangles in the respective subintervals of $(-\\pi,\\pi)$, so they are the\nprincipal arguments. On the\npositive real axis the argument is zero, while the imaginary axes use\n$\\pm\\pi/2$.",
++          "claim": "For a principal-log branch, subdivide $Z$ into rectangles of fixed signs of the real and imaginary coordinates, with separate pieces on the coordinate axes. In a nonzero quadrant, $|z|=\\sqrt{x^2+y^2}$ is enclosed by [L2]–[L3], hence $\\ln|z|$ is enclosed by [L2]. The quotient is enclosed by [L3] and arctangent by [L2]. In quadrant I use $\\arctan(y/x)$; in quadrant IV use $-\\arctan((-y)/x)$; in quadrant II use $\\pi-\\arctan(y/(-x))$; and in quadrant III use $-\\pi+\\arctan((-y)/(-x))$. From [L4] and $\\sin^2(A(t))+\\cos^2(A(t))=1$, positivity of $\\cos(A(t))$ gives $\\cos(A(t))=1/\\sqrt{1+t^2}$ and $\\sin(A(t))=t/\\sqrt{1+t^2}$ for $t>0$. Substituting $t=y/x$ in quadrant I gives $(\\cos\\operatorname{Arg}z,\\sin\\operatorname{Arg}z)=(x/|z|,y/|z|)$. In quadrant IV, evenness/oddness from [L1] gives the same coordinate identity with $y<0$. The addition identities shift the angle in quadrant II by $\\pi-A(t)$, reversing only the cosine sign, and in quadrant III by $-\\pi+A(t)$, reversing both signs; substitution of the positive coordinate ratios again gives $(x/|z|,y/|z|)$. The range of $A$ in [L4] places these angles in the respective subintervals of $(-\\pi,\\pi)$, so they are the principal arguments. On the admissible closure of quadrant I the argument lies in $[0,\\pi/2]$; on quadrants II, III and IV it lies respectively in $[\\pi/2,\\pi]$, $[-\\pi,-\\pi/2]$ and $[-\\pi/2,0]$. Since $p_-\\le\\pi\\le p_+$ and $p_->0$, these sets are contained respectively in the algorithm's fixed sectors $S_{\\rm I},S_{\\rm II},S_{\\rm III},S_{\\rm IV}$. A finite raw ratio-based argument interval contains each exact argument by [L2]–[L3], so intersecting it with its sector retains every exact argument. Each nonempty quadrant piece has an actual point and hence an argument in that intersection; an empty intersection cannot be used for a success claim and is explicitly rejected. When the denominator reaches zero, the sector alone is a sound enclosure. The common final outward conversion $H$ preserves these containments; an overflow gives no finite claim. On the positive real axis the exact argument is zero, and on the positive and negative imaginary axes it is respectively $\\pi/2$ and $-\\pi/2$. Thus $H([0,0])$, $H(P_N/2)$ and $H(-P_N/2)$ enclose the axis values. The initial domain test excludes the origin and negative real axis. The strict-sign pieces, their closures and these axis pieces therefore cover every admissible point. The radial enclosure established above and the converted argument enclosure jointly contain its principal logarithm; taking the coordinatewise hull over every finite piece contains the full image. Any failed piece prevents a finite hull return.",
+           "step": "1.2",
+           "inputs": [
+             "given",
+@@ -3420,20 +3449,23 @@
+             "L2",
+             "L3",
+             "L4",
+-            "construct"
+-          ]
+-        },
+-        {
+-          "id": "step-1-3",
+-          "claim": "Each canonical sign piece intersecting a smaller rectangle is contained\nin the corresponding piece for a larger rectangle, so [L2]–[L3] preserve\ninclusion on a common admissible branch. If a rectangle meets zero, the\nnegative real branch cut, or a fixed sign piece cannot be certified, the\nalgorithm returns a non-finite status; hence it does not assert an invalid\nfinite enclosure.",
+-          "step": "1.3",
++            "construct",
++            "algebra"
++          ]
++        },
++        {
++          "id": "derive-2.1",
++          "step": "2.1",
++          "claim": "Fix the DAG, designated output, constant enclosures, format and $N$ in the Statement, so both calls use the same $P_N$, sectors and conversion $H$. Every nonempty strict-sign piece of a smaller input rectangle, after closure, is contained in the corresponding piece of the larger rectangle. Every axis piece likewise has a corresponding containing axis piece, with the same argument interval. The radial expression $\\ln\\sqrt{X^2+Y^2}$ preserves inclusion on these nested pieces by [L2]–[L3]. For a quadrant whose denominator excludes zero in both calls, outward quotients and the fixed real arctangent evaluator give nested finite raw argument intervals $A\\subseteq A'$ by [L2]–[L3]. Exact translations by the same $P_N$ and sign changes in the quadrant formulas preserve this inclusion. Intersection with the same sector gives $A\\cap S_q\\subseteq A'\\cap S_q$. The greatest-lower and least-upper rounding definitions make $H$ inclusion-preserving, hence the converted argument intervals are nested as well. If enlargement changes a ratio branch to a zero-denominator coarse branch, the smaller preconversion interval is $A\\cap S_q\\subseteq S_q$, and therefore $H(A\\cap S_q)\\subseteq H(S_q)$. If both branches are coarse they use the same $H(S_q)$. The reverse change under enlargement is impossible: a containing denominator interval cannot exclude zero when the smaller one contains it. These cases exhaust quadrant branch transitions. Axis pieces remain present under enlargement and use the identical converted axis intervals, so their corresponding rectangles are nested too. Taking coordinatewise hulls preserves the inclusions for all corresponding pieces, including any additional pieces in the larger call. Complex exponential preserves inclusion through its fixed real component evaluations and rectangle operations in step 1.1. Together with [L2]–[L3], these primitive results give soundness and inclusion for the same finite typed DAG by induction in its prescribed topological order; fixed input-independent constants start the induction, and every designated output inherits it. A rectangle meeting zero or the negative real branch cut at a Log node returns `domain-error`; a failed piece, empty argument intersection or failed conversion returns its specified non-finite status. Such a branch gives no finite enclosure or nesting claim.",
+           "inputs": [
+             "step 1.1",
+             "step 1.2",
++            "L1",
+             "L2",
+             "L3",
+             "L4",
+-            "algebra"
++            "algebra",
++            "induction"
+           ]
+         }
+       ],
+@@ -3489,46 +3521,47 @@
+           "fact": "L1",
+           "source": "alg-budgeted-validated-range-evaluation",
+           "source_section": "Definition",
+-          "quote": "Input: a finite expression DAG, a closed interval/rectangle domain box $X$, a\ndyadic requested width $\\varepsilon>0$, finite-format parameters, series\ntruncation index $N\\ge1$, and integer total box-split budget $B\\ge0$. Set a shared counter\n$R:=B$ and a queue containing $X$. Process boxes in a fixed order. For each\nbox $Q$, evaluate the DAG by\n[[alg-certified-elementary-range-evaluation]] with the same format and $N$.\n\n- If evaluation returns a non-finite status, return that status and the exact\n  unresolved box $Q$; it is not a tolerance certificate.\n- If it returns a finite enclosure $I$ with width at most $\\varepsilon$, save\n  $I$ as a completed leaf enclosure.\n- If it returns a finite enclosure wider than $\\varepsilon$ and $R=0$, return\n  `inconclusive` with the completed-leaf hull, $Q$, and the unmet width test.\n- If it returns a finite enclosure wider than $\\varepsilon$ and $R>0$, select\n  a widest nondegenerate input coordinate (breaking ties by the first\n  coordinate in the input order), split it at its dyadic midpoint\n  into two closed halves, decrement the shared counter $R$ by one, and append\n  both halves to the queue. If no coordinate can be split, return\n  `inconclusive` with the unmet width test.\n\nWhen the queue is empty, take the hull $J$ of all completed leaf enclosures.\nReturn `certified(J,X)` only if $\\operatorname{width}(J)\\le\\varepsilon$;\notherwise return `inconclusive(J,X)` and state that the global width test\nfailed. Each split covers its parent because the two closed halves overlap at\nthe midpoint and their union is the parent coordinate interval. The shared\ncounter makes $B$ a total split limit across the full computation.",
++          "quote": "Input: a finite, well-formed, typed expression DAG with exactly one designated\noutput node, an interval/rectangle assignment box $X$ for its input nodes, a\ndyadic requested width $\\varepsilon>0$, finite-format parameters\n$(p,e_{\\min},e_{\\max})$ with $p\\ge2$ and $e_{\\min}\\le e_{\\max}$, series\ntruncation index $N\\ge1$, and integer total box-split budget $B\\ge0$.\nThe supported node types, input assignments, exact dyadic constants and\nsupplied certified constant enclosures satisfy the admissibility conditions\nof [[alg-certified-elementary-range-evaluation]]. In particular, every input\nendpoint and every endpoint of a supplied constant enclosure belongs to the\nselected finite representable set $\\mathbb F$. Truth of a supplied constant's\ncertified inclusion is a mathematical input promise, not something inferred\nfrom its endpoints. Exact dyadic constants need not themselves be\nrepresentable; their conversion and any overflow remain the evaluator's task.\n\nUse the following exact membership procedure for each supplied finite\nendpoint and for every proposed split midpoint. Put\n$\\eta=2^{e_{\\min}-p+1}$. Compare the value with zero, then enumerate both\nsigns of $k\\eta$ for $k=1,\\ldots,2^{p-1}-1$, and both signs of\n$k2^{e-p+1}$ for $e=e_{\\min},\\ldots,e_{\\max}$ and\n$k=2^{p-1},\\ldots,2^p-1$, stopping at a match. If the finite enumeration\nends without a match, report `not-in-format`. Every comparison is an exact\ndyadic equality test. This is the representable set of\n[[def-dyadic-floating-point-format-and-directed-rounding]], including zero\nand subnormals. Before initializing the queue, check the integer/format\nconditions and the finite input and supplied-constant endpoint memberships;\nmalformed data or a failed membership returns `inconclusive` with the\nidentifying input status, without an evaluator call. An empty input returns\n`empty` as in the elementary evaluator.\n\nKeep the DAG, designated output, constant enclosures, format and $N$ fixed.\nSet a shared counter $R:=B$ and a queue containing $X$. Process the queue in\nfirst-in, first-out order. For each box $Q$, evaluate the DAG by\n[[alg-certified-elementary-range-evaluation]] with the same format and $N$,\nrequesting only the designated output node's enclosure. The hull of no\ncompleted leaves is recorded as `empty`.\n\n- If evaluation returns a non-finite status, return that status and the exact\n  unresolved box $Q$; it is not a tolerance certificate.\n- If it returns a finite enclosure $I$ with width at most $\\varepsilon$, save\n  $I$ as a completed leaf enclosure.\n- If it returns a finite enclosure wider than $\\varepsilon$ and $R=0$, return\n  `inconclusive` with the completed-leaf hull, $Q$, and the unmet width test.\n- If it returns a finite enclosure wider than $\\varepsilon$ and $R>0$, select\n  a widest nondegenerate input coordinate (breaking ties by the first\n  coordinate in the input order). If there is no such coordinate, return\n  `inconclusive` with the completed-leaf hull, the unresolved parent $Q$,\n  the remaining queue, and status `no-splittable-coordinate` with the unmet\n  width test. Otherwise compute its midpoint $m$ by exact dyadic arithmetic\n  and apply the membership procedure above in the actual selected format.\n  If it reports `not-in-format`, return `inconclusive` with the completed-leaf\n  hull, the unresolved parent $Q$, the remaining queue, and status\n  `midpoint-not-in-format`, identifying the coordinate and exact midpoint.\n  Do not enqueue either child or call the evaluator on it in this case.\n  If $m\\in\\mathbb F$, split that coordinate into the two closed halves at\n  $m$, decrement $R$ by one, and append both children to the queue.\n\nWhen the queue is empty, take the hull $J$ of all completed leaf enclosures.\nReturn `certified(J,X)` only if $\\operatorname{width}(J)\\le\\varepsilon$;\notherwise return `inconclusive(J,X)` and state that the global width test\nfailed. Each split covers its parent because the two closed halves overlap at\nthe midpoint and their union is the parent coordinate interval. The shared\ncounter makes $B$ a total split limit across the full computation.",
+           "uses": [
+             "1.1",
+-            "1.2"
++            "2.1"
+           ]
+         },
+         {
+           "fact": "L2",
+           "source": "thm-real-elementary-range-enclosures",
+           "source_section": "Statement",
+-          "quote": "Every finite enclosure returned by\n[[alg-certified-elementary-range-evaluation]] for a real interval in the\ndomain of $\\exp$, $\\ln$, $\\sqrt{\\phantom{x}}$, $\\arctan$, $\\sin$, $\\cos$, or\n$\\tan$ contains the exact range of that function on the represented domain.\nIf two input intervals are nested and both calls return finite enclosures,\nthe canonical branch-cell and fixed-term construction in the algorithm makes\nthe smaller interval's computed enclosure a subset of the larger one's.\nAn unresolved fixed branch, pole, invalid domain or overflow returns its\nstated non-finite status and carries no finite success claim.",
+-          "uses": [
+-            "1.2"
++          "quote": "Every finite interval returned for a requested real output node by\n[[alg-certified-elementary-range-evaluation]] on an input interval in the\ndomain of $\\exp$, $\\ln$, $\\sqrt{\\phantom{x}}$, $\\arctan$, $\\sin$, $\\cos$, or\n$\\tan$ contains the exact range of the corresponding function on that\ninterval. For the same typed DAG and designated real output node, if all\ninput intervals are nested coordinatewise, all constant enclosures are fixed,\nand both calls use the same finite dyadic format and truncation index $N$,\nthen, whenever both calls return finite enclosures, the canonical branch-cell\nand fixed-term construction makes the smaller domain's computed enclosure a\nsubset of the larger one's.\nAn unresolved fixed branch, pole, invalid domain or overflow returns its\nstated non-finite status and carries no finite success claim.",
++          "uses": [
++            "2.1"
+           ]
+         },
+         {
+           "fact": "L3",
+           "source": "thm-complex-elementary-range-enclosures",
+           "source_section": "Statement",
+-          "quote": "For any finite complex rectangle on which the principal branch is defined,\nevery finite output of [[alg-certified-elementary-range-evaluation]] for\n$\\exp$ or $\\operatorname{Log}$ contains the exact image. For nested rectangles\nwithin the same admissible branch, the canonical quadrant subdivision and\noutward operations preserve inclusion. Rectangles meeting zero, the negative\nreal branch cut, or an unresolved quadrant return the declared domain or\ninconclusive status.",
+-          "uses": [
+-            "1.2"
++          "quote": "For any finite complex rectangle on which the principal branch is defined,\nevery finite output for a requested complex node of\n[[alg-certified-elementary-range-evaluation]] for $\\exp$ or\n$\\operatorname{Log}$ contains the exact image. For the same typed DAG and\ndesignated complex output node, nested input rectangles on the same admissible\nbranch, fixed constant enclosures, and the same finite dyadic format and\ntruncation index give nested finite enclosures whenever both calls return\nfinite results. Rectangles meeting zero, the negative real\nbranch cut, or an unresolved quadrant return the declared domain or\ninconclusive status.",
++          "uses": [
++            "2.1"
+           ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "There are at most $B$ splits. Each split adds one net box to the queue,\nso at most $2B+1$ boxes are processed. Each leaf evaluation has a finite DAG,\nuses at most $N+1$ terms per series, and has finitely many fixed domain bins or\nquadrant pieces. Thus each evaluation and the whole queue procedure terminate.",
++          "claim": "The initial admission checks terminate: the format's subnormal index range, exponent range and significand ranges are finite, and each equality comparison of exact dyadics is decided by clearing powers of two and comparing integers. Their enumeration is exactly the selected representable set, so a passing endpoint test establishes membership, including for zero and subnormals. Invalid initial data stop before an evaluator call. For admitted data, every endpoint of the initial box belongs to that format. Inductively, a split enqueues children only after the exact midpoint passes the same membership test; all other endpoints are inherited from the parent. The DAG, output, constants, format and $N$ are unchanged. Hence every queued box satisfies the elementary evaluator's input conditions. Each such call terminates through its finite DAG, finite series, finite bisection and finite bin/cell/quadrant lists, or returns a specified failure. The membership guard also terminates and can stop immediately with `inconclusive`. There are at most $B$ admitted splits and therefore at most $2B+1$ processed boxes. Thus the entire procedure terminates, including every guard-stop branch.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+             "L1",
+-            "algebra"
+-          ]
+-        },
+-        {
+-          "id": "step-1-2",
+-          "claim": "The two halves at every split cover their parent by [L1]. Every completed\nreal or complex leaf enclosure contains its exact range by [L2] or [L3].\nInduction upward through the finite split tree shows that the hull of all\ncompleted leaf enclosures contains the range on the union of their boxes,\nwhich is $X$.",
+-          "step": "1.2",
++            "algebra",
++            "induction"
++          ]
++        },
++        {
++          "id": "derive-2.1",
++          "step": "2.1",
++          "claim": "Before a box is processed, the completed leaf boxes together with the queued boxes cover $X$. Removing a current box preserves this cover when that box is counted as the current unresolved parent. Completing it transfers it to the completed leaves; an admitted split replaces it by two closed children whose union is the parent by [L1]. A failed midpoint test retains the parent as unresolved and therefore discards no part of the cover. This proves the coverage invariant by induction. By step 1.1, each completed leaf was evaluated on admissible input, so its finite enclosure contains its exact range by [L2] or [L3]. If the queue empties without an early return, all covering leaves are completed; their enclosure hull therefore contains the exact range on all of $X$. On an early return, the completed-leaf hull is not asserted to cover the unresolved parent or remaining queue.",
+           "inputs": [
+             "step 1.1",
+             "L1",
+@@ -3538,12 +3571,13 @@
+           ]
+         },
+         {
+-          "id": "step-1-3",
+-          "claim": "The algorithm returns `certified` only after the queue is empty, every box\nhas a finite completed leaf, and the final hull satisfies the width test.\nOtherwise it returns a non-finite status or `inconclusive`, retaining the\nunresolved box or failed global-width result. Hence no failed branch or wide\nhull is silently treated as tolerance success.",
+-          "step": "1.3",
+-          "inputs": [
+-            "given",
+-            "step 1.2",
++          "id": "derive-3.1",
++          "step": "3.1",
++          "claim": "A `certified` return occurs only after the queue is empty without an admission, evaluator, split-guard or budget stop, and after the completed-leaf hull passes the final global width test. Step 2.1 then proves enclosure of the whole range, and the exact width comparison proves the requested tolerance. A failed midpoint membership instead returns `inconclusive` with the completed-leaf hull, unresolved parent, remaining queue and actual guard status; that partial hull is not a full-domain certificate. The other non-finite, exhausted-budget, unsplittable-coordinate and failed global-width branches likewise make no tolerance-success claim. Thus the finite guard preserves the stated certified-range, coverage and failure conclusions.",
++          "inputs": [
++            "given",
++            "step 1.1",
++            "step 2.1",
+             "algebra"
+           ]
+         }
+@@ -3820,17 +3854,17 @@
+           "quote": "The power-series sine and cosine satisfy the addition identities and\n$\\sin^2x+\\cos^2x=1$. For $A(t)=\\arctan t$ from\n[[def-real-elementary-functions-and-domains]],\n$$\n\\sin(A(t))=t\\cos(A(t)),\\qquad \\cos(A(t))>0,\n$$\nso $A(t)$ is the inverse tangent with values in $(-\\pi/2,\\pi/2)$ when\n$\\pi=4A(1)$. It is odd; for $u,v\\ge0$ with $uv<1$,\n$A(u)+A(v)=A((u+v)/(1-uv))$; and for $t>0$,\n$A(t)=\\pi/2-A(1/t)$. In particular $\\sin(\\pi/2)=1$ and\n$\\cos(\\pi/2)=0$. Also,\n$$\n\\pi=16\\arctan(1/5)-4\\arctan(1/239).\n$$\nFor every real $x$ there is an integer $k$ and $r=x-k\\pi/2$ with\n$|r|\\le\\pi/4$; the sine and cosine of $x$ are obtained from those of $r$ by\nthe quarter-period identities. For every real $r$ with $|r|\\le1$ and every\n$N\\ge0$, truncating sine\nthrough degree $2N+1$ and cosine through degree $2N$ gives absolute tail bounds\n$$\nT_s=\\frac{|r|^{2N+3}}{(2N+3)!(1-|r|^2/((2N+4)(2N+5)))}\n$$\nand\n$$\nT_c=\\frac{|r|^{2N+2}}{(2N+2)!(1-|r|^2/((2N+3)(2N+4)))}.\n$$",
+           "uses": [
+             "1.1",
+-            "1.2",
+-            "2.1"
++            "2.1",
++            "3.1"
+           ]
+         },
+         {
+           "fact": "L3",
+           "source": "thm-budgeted-range-evaluation-terminates-and-is-sound",
+           "source_section": "Statement",
+-          "quote": "For every finite input DAG and finite total split budget $B$, the algorithm\n[[alg-budgeted-validated-range-evaluation]] terminates. If it returns\n`certified(I,X)`, then $I$ contains the exact function range on all of $X$ and\nhas width at most the requested $\\varepsilon$. If it returns `inconclusive`,\ndomain error, split-domain, or overflow, it makes no unconditional\ntolerance-success claim.",
+-          "uses": [
+-            "2.1"
++          "quote": "For every finite input DAG and finite total split budget $B$, the algorithm\n[[alg-budgeted-validated-range-evaluation]] terminates. If it returns\n`certified(I,X)`, then $I$ contains the exact function range on all of $X$ and\nhas width at most the requested $\\varepsilon$. If it returns `empty`,\n`entire`, `inconclusive`, domain error, split-domain, or overflow, it makes no\nunconditional tolerance-success claim.",
++          "uses": [
++            "3.1"
+           ]
+         },
+         {
+@@ -3846,7 +3880,7 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "Apply [L1] at $1/5$ and $1/239$ with $N=12$. The arctangent interval\nwidths are at most twice the displayed tails; multiplying by $16$ and $4$\ngives the two rational terms in the bound. By [L4], the integral gives\n$13/20\\le\\arctan1\\le9/10<1$: its integrand is at least $4/5$ on\n$[0,1/2]$ and at least $1/2$ on $[1/2,1]$, while it is at most $1$ on the\nfirst half and at most $4/5$ on the second. Thus\n$13/5\\le\\pi\\le18/5<4$. Before rounding, the Machin interval has width less\nthan $2\\cdot10^{-19}+10^{-30}$ by the tail estimates below, so its exact\nendpoints lie in $[5/2,37/10]$ using $13/5\\le\\pi\\le18/5$. The directed\nconversions stay in that interval and therefore each add at\nmost $2^{-126}$ to the width. For the first tail,\n$32(1/5)^{27}/(27(1-1/25))=800/(648\\cdot5^{27})<2\\cdot10^{-19}$, using\n$4000\\cdot10^{18}<648\\cdot5^{27}$. The second tail is less than\n$239^{-27}<16^{-27}=2^{-108}<10^{-30}$. Therefore exact rational comparison gives\n$W:=\\operatorname{width}(P)<10^{-18}$ and $\\pi\\in P$.",
++          "claim": "Apply [L1] at $1/5$ and $1/239$ with $N=12$. The arctangent interval widths are at most twice the displayed tails; multiplying by $16$ and $4$ gives the two rational terms in the bound. By [L4], the integral gives $13/20\\le\\arctan1\\le9/10<1$: its integrand is at least $4/5$ on $[0,1/2]$ and at least $1/2$ on $[1/2,1]$, while it is at most $1$ on the first half and at most $4/5$ on the second. Thus $13/5\\le\\pi\\le18/5<4$. Before rounding, the Machin interval has width less than $2\\cdot10^{-19}+10^{-30}$ by the tail estimates below, so its exact endpoints lie in $[5/2,37/10]$ using $13/5\\le\\pi\\le18/5$. The directed conversions stay in that interval and therefore each add at most $2^{-126}$ to the width. For the first tail, $32(1/5)^{27}/(27(1-1/25))=800/(648\\cdot5^{27})<2\\cdot10^{-19}$, using $4000\\cdot10^{18}<648\\cdot5^{27}$. The second tail is less than $239^{-27}<16^{-27}=2^{-108}<10^{-30}$. Therefore exact rational comparison gives $W:=\\operatorname{width}(P)<10^{-18}$ and $\\pi\\in P$.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+@@ -3857,9 +3891,9 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
+-          "claim": "Each $x\\in X$ has form $x=2p$ with $p\\in P$, so\n$|x-2\\pi|=2|p-\\pi|\\le2W<2\\cdot10^{-18}<\\inf(P)/4\\le\\pi/4$;\n$\\inf(P)\\ge5/2$ by step 1.1. Thus $X$ lies inside the canonical $k=4$ cell. If\n$P=[p_-,p_+]$, the neighboring cell enclosures end at $7p_+/4$ and begin at\n$9p_-/4$. Since $p_->2$ and $W<10^{-18}$, $p_->8W$ and $p_->7W$, so exact\ncomparison shows that $X=2P$ meets neither neighbor; the candidate list\ncontains only $k=4$; all farther cells are separated as well because their\nendpoints are monotone in the integer cell index. The interval residual computed by the evaluator is\n$R=X-4(P/2)=[-2W,2W]$, which contains each exact reduced argument and lies\ninside the certified Taylor range.",
+-          "step": "1.2",
++          "id": "step-2-1",
++          "claim": "Each $x\\in X$ has form $x=2p$ with $p\\in P$, so $|x-2\\pi|=2|p-\\pi|\\le2W<2\\cdot10^{-18}<\\inf(P)/4\\le\\pi/4$; $\\inf(P)\\ge5/2$ by step 1.1. Thus $X$ lies inside the canonical $k=4$ cell. If $P=[p_-,p_+]$, the actual cell formula $C_k=kP/2+[-1/4,1/4]P$ gives $\\sup C_3=7p_+/4$ and $\\inf C_5=5p_-/2-p_+/4=9p_-/4-W/4$. Since $p_->2$ and $W<10^{-18}$, both $p_->7W$ and $p_->9W$ hold. Consequently $2p_- -\\sup C_3=(p_--7W)/4>0$ and $\\inf C_5-2p_+=(p_--9W)/4>0$. Thus $X=2P$ meets neither neighboring enclosure. All farther cells are separated as well by monotonicity of their endpoints in the integer cell index, while $C_4$ contains $X$. Hence the only included candidate is $k=4$. The interval residual computed by the evaluator is $R=X-4(P/2)=[-2W,2W]$, which contains each exact reduced argument and lies inside the certified Taylor range.",
++          "step": "2.1",
+           "inputs": [
+             "step 1.1",
+             "L2",
+@@ -3867,11 +3901,11 @@
+           ]
+         },
+         {
+-          "id": "step-2-1",
+-          "claim": "Put $r_0=2W<2\\cdot10^{-18}$. Bound each odd Taylor term on\n$R=[-r_0,r_0]$ by the symmetric exact rational interval\n$[-r_0^{2k+1}/(2k+1)!,r_0^{2k+1}/(2k+1)!]$, sum these intervals exactly,\nand add the geometric tail before outward conversion. The polynomial interval\nhas total width at most\n$2\\sum_{k=0}^{12}r_0^{2k+1}/(2k+1)!\\le2r_0/(1-r_0^2)<6\\cdot10^{-18}$,\nsince $r_0^2<1/3$ gives $(1-r_0^2)^{-1}<3/2$.\nSince $r_0<1/2$, the displayed tail formula gives\n$T_s<2r_0^{27}/27!<2r_0^2<10^{-18}$, so the symmetric tail width is below\n$2\\cdot10^{-18}$. Only four directed endpoint conversions occur in this\nexact-rational path (two for $P$ and two for the sine enclosure); their total\nwidth increase is at most $4\\cdot2^{-126}$, below the conservative allowance\n$200\\cdot2^{-126}$. The total width is therefore below $1$. With $B=0$, the\nbudgeted evaluator checks this finite\nenclosure and returns `certified`; [L3] confirms the exact range and width\nclaim. No system sine routine is used.",
+-          "step": "2.1",
+-          "inputs": [
+-            "step 1.2",
++          "id": "derive-3.1",
++          "step": "3.1",
++          "claim": "Put $r_0=2W<2\\cdot10^{-18}$. Bound each odd Taylor term on $R=[-r_0,r_0]$ by the symmetric exact rational interval $[-r_0^{2k+1}/(2k+1)!,r_0^{2k+1}/(2k+1)!]$, sum these intervals exactly, and add the geometric tail before outward conversion. The polynomial interval has total width at most $2\\sum_{k=0}^{12}r_0^{2k+1}/(2k+1)!\\le2r_0/(1-r_0^2)<6\\cdot10^{-18}$, since $r_0^2<1/3$ gives $(1-r_0^2)^{-1}<3/2$. Since $r_0<1/2$, the displayed tail formula gives $T_s<2r_0^{27}/27!<2r_0^2<10^{-18}$, so the symmetric tail width is below $2\\cdot10^{-18}$. Only four directed endpoint conversions occur in this exact-rational path (two for $P$ and two for the sine enclosure); their total width increase is at most $4\\cdot2^{-126}$, below the conservative allowance $200\\cdot2^{-126}$. The total width is therefore below $1$. With $B=0$, the budgeted evaluator checks this finite enclosure and returns `certified`; [L3] confirms the exact range and width claim. No system sine routine is used.",
++          "inputs": [
++            "step 2.1",
+             "given",
+             "L2",
+             "L3",

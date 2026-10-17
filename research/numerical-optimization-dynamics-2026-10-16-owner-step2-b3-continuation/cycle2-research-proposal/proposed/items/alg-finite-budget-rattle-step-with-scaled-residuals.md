@@ -1,0 +1,48 @@
+---
+id: alg-finite-budget-rattle-step-with-scaled-residuals
+kind: algorithm
+title: Finite budget RATTLE solve with scaled constraint residuals
+status: draft
+origin: pipeline
+pipeline_run: numerical-optimization-dynamics-2026-10-16
+dependency_level: 3
+deps:
+  - def-regular-classical-rattle-step-map
+  - lem-rattle-scaled-position-and-momentum-branches
+  - lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold
+  - def-implicit-residual-and-algebraic-error-units
+  - alg-newton-chord-implicit-residual-with-factorization-reuse
+justified_by:
+  - thm-finite-budget-rattle-solver-returns-status
+forward_refs: []
+aliases: []
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: "Ernst Hairer, Christian Lubich, and Gerhard Wanner, Geometric Numerical Integration, 2nd ed., Chapter VII.1"
+      url: "https://ndl.ethernet.edu.et/bitstream/123456789/63242/1/131.pdf"
+    - title: "Robert I. McLachlan, Klas Modin, Olivier Verdier, and Matt Wilkins, Geometric Generalisations of SHAKE and RATTLE, Foundations of Computational Mathematics 14 (2014), 339–370"
+      url: "https://arxiv.org/pdf/1207.3367"
+verification:
+  precheck: n/a
+---
+
+## Definition
+
+The input state is consistent, $(q,p)\in\mathcal M$. For $h=0$, return $(q,p)$ with status `exact-identity`. For nonzero $h$, fix a compact phase subset $C\subset\mathcal M$ over a compact regular configuration chart with $(q,p)\in C$ and $0<|h|<h_0(C)$, using branch balls $U_q,U_p$ supplied by [[lem-rattle-scaled-position-and-momentum-branches]]. The admissible inputs also include initial guesses $\lambda_{\mathrm{init}}\in U_q$, $\mu_{\mathrm{init}}\in U_p$, tolerances $\varepsilon_q,\varepsilon_p\ge0$, and finite correction budgets $N_q,N_p\in\mathbb N_0$, and terminating exact factorization/solve backends $\mathcal B_q,\mathcal B_p$ satisfying the chord-mode contract of [[alg-newton-chord-implicit-residual-with-factorization-reuse]]. Use returning residual, derivative and domain-test primitives. The multiplier domains $U_q,U_p\subseteq\mathbb R^m$, $m\ge1$, are open balls within the regular branch neighborhoods. Choose the balls so that $F_q$ is $C^1$ on $U_q$ and, for every $\lambda\in U_q$, the corresponding $F_p$ is $C^1$ on $U_p$ and all evaluations in the updates are defined. Inconsistent input, missing branch balls, or maps not defined on these domains are outside the algorithm's admissible inputs. On success the routine returns the approximate state, both multipliers, and both scaled residual norms; on failure it returns the residual solver's status, last valid multiplier iterate, and actual scaled residual norm, together with any position-stage values already computed.
+
+1. Form
+$$F_q(\lambda)=h^{-2}c\!\left(q+hM^{-1}\left(p-\frac h2\nabla V(q)-hJ(q)^T\lambda\right)\right).$$
+Run [[alg-newton-chord-implicit-residual-with-factorization-reuse]] on $F_q$ in chord mode with refresh period $1$, domain $U_q$, initial value $\lambda_{\mathrm{init}}$, tolerance $\varepsilon_q$, budget $N_q$, and backend $\mathcal B_q$. If it returns anything other than `root`, return its exact status (`iteration-budget-exhausted`, `singular-jacobian`, or `invalid-trial`), last valid multiplier iterate, and actual scaled residual norm; do not continue.
+
+2. For its returned $\widetilde\lambda$, compute $\widetilde p_{1/2}=p-\frac h2\nabla V(q)-hJ(q)^T\widetilde\lambda$ and $\widetilde q_1=q+hM^{-1}\widetilde p_{1/2}$. Form
+$$F_p(\mu)=h^{-1}J(\widetilde q_1)M^{-1}\left(\widetilde p_{1/2}-\frac h2\nabla V(\widetilde q_1)-hJ(\widetilde q_1)^T\mu\right).$$
+Run the same supplier procedure on $F_p$ in chord mode with refresh period $1$, domain $U_p$, initial value $\mu_{\mathrm{init}}$, tolerance $\varepsilon_p$, budget $N_p$, and backend $\mathcal B_p$. If it returns anything other than `root`, return its exact status (`iteration-budget-exhausted`, `singular-jacobian`, or `invalid-trial`), last valid multiplier iterate, actual scaled tangency residual norm, and the successful position-stage values; do not continue.
+
+3. If both calls meet their residual tolerances, set
+$$\widetilde p_1=\widetilde p_{1/2}-\frac h2\nabla V(\widetilde q_1)-hJ(\widetilde q_1)^T\widetilde\mu$$
+and return $(\widetilde q_1,\widetilde p_1,\widetilde\lambda,\widetilde\mu)$, the norms $\|F_q(\widetilde\lambda)\|_2$, $\|F_p(\widetilde\mu)\|_2$, and status “residual tolerances met”.
+
+For nonzero $h$, leaving a branch ball returns `invalid-trial`, a singular factorization returns `singular-jacobian`, and exhausting either correction budget returns `iteration-budget-exhausted`; the supplier supplies the last valid iterate and its evaluated residual norm in each case. No undefined-evaluation status is needed because the admissible domains require all evaluations to be defined. A successful output with nonzero residuals need not lie in $\mathcal M$; applying the routine again requires a consistent input, for example one restored by [[lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold]]. The supplier status `root` means only that its stated residual tolerance was met; it does not certify an exact root or a forward-error bound. No finite budget is claimed to succeed on every admissible input.

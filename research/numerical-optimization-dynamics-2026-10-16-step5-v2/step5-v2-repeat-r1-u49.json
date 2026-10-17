@@ -1,0 +1,67 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "49",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "thm-low-rank-adi-conditional-convergence-bound",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "7701293efa2d3002f1d32ddd35f2c67215b190f05378f6d29ffd25f03fc09d6c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "[F3] falsely restates the cited Sylvester theorem for AX+XB: its condition is sigma(A) intersect (-sigma(B)) empty, not disjoint coefficient spectra. A=B=[-1] gives identical coefficient spectra but the invertible map x -> -2x; A=[1], B=[-1] gives disjoint coefficient spectra but the zero map. This is a false dependency assertion, even though step 1.2 already proves the correct signed spectral condition. Replaced only [F3] with the exact signed criterion and synchronized its owning contract explanation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-low-rank-adi-conditional-convergence-bound",
+      "disposition": "repaired",
+      "post_sha256": "ba514698752bfcd776d00f031f824d0f55c58965b4b5761b714c761b0cab5f5f",
+      "review_context_sha256": "057012f39bd700775219a9e56b5ab977116f5bb3fbcb5b788bcfb8c607001fb3",
+      "reason": "Checked the assigned proof, ten actual prerequisite interfaces, relevant residual and Lyapunov proofs, owning contract and home-page claims. The ADI recurrence gives R_j=rho_j(A)B. Determinant conjugation and transposition give sigma(A*)=conjugate(sigma(A)), so Hurwitz stability implies sigma(A) intersect (-sigma(A*)) empty and positive sep(A,-A*), now accurately cited by [F3]. Subtraction yields S(X-X_j)=-R_j R_j*. The column norm estimate and rectangular SVD identity R_j R_j*=U Sigma Sigma* U* give the stated eta_j squared error bound, including rank-deficient and zero B. The assumed rational norm bound remains essential. The Step-4 rectangular-SVD concern is already resolved in the assigned carrier. Statement bytes are unchanged; no new prerequisite or consumer-interface event occurs. This is a repair review, not independent review of my correction.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-low-rank-adi-conditional-convergence-bound",
+      "class": "accuracy",
+      "subclass": "citation-inaccurate",
+      "severity": "fatal",
+      "location": "facts-block",
+      "locus": "F3",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "reason": "The original F3 omitted the minus sign from the spectral disjointness condition for X -> AX+XB. The scalar maps with (A,B)=(-1,-1) and (1,-1) refute both directions of the erroneous restatement. Corrected F3 to sigma(A) intersect (-sigma(B)) empty, equivalently sep(A,-B)>0; step 1.2 already establishes this condition for B=A*. Only the assigned fact and its contract use_explanation changed.",
+      "before_sha256": "6ea5f5cbccfb9c8a2e0a0b6b577dc6e3007ad390f63c74dd7775221f2e6d5659",
+      "post_sha256": "ba514698752bfcd776d00f031f824d0f55c58965b4b5761b714c761b0cab5f5f",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "7701293efa2d3002f1d32ddd35f2c67215b190f05378f6d29ffd25f03fc09d6c",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Assigned item is draft and present in frozen frontier batch 49. Frozen repeat-1 assignment and exact rejected tuple were checked; no other item was edited.",
+    "Mathematical conventions checked: S_{A,B}(Y)=AY+YB and sep(A,-B) uses the conventional minus sign in its label; spectra of real matrices are over C; admissible ADI shifts have negative real parts and real-data nonreal shifts use conjugate pairs. The proof retains the conditional operator estimate ||rho_j(A)||_2 <= eta_j -> 0 and does not construct shifts or assert unconditional convergence.",
+    "Local source evidence: items/thm-sylvester-unique-solvability-spectral-separation.md, Statement and Proof steps 1.1-4.1; items/def-sylvester-operator-and-separation-number.md, Definition; items/alg-low-rank-alternating-direction-implicit-lyapunov.md, Definition; items/thm-low-rank-adi-exact-residual-factor-identity.md, Proof steps 1.1-3.1; items/thm-sylvester-residual-to-forward-error-bound.md, Statement and Proof; items/thm-continuous-lyapunov-integral-and-positivity.md, Statement and Proof. Norm, adjoint, determinant and conjugation interfaces were checked against their current Statement/Definition sections. No external source reading is claimed; these finite-dimensional identities and inequalities are familiar.",
+    "Changed metadata: research/numerical-optimization-dynamics-2026-10-16-batch-49.proof-contracts.json, only this item citation F3 use_explanation. Acquired the shared write lock, reread the current contract, replaced the exact old explanation, ran focused strict contract validation, and released the lock. The correct source quotation was preserved. No page or manifest change was needed.",
+    "Immediately after completing the repair review, ran node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items thm-low-rank-adi-conditional-convergence-bound; copied both native hashes into the review. No subsequent supplier or item edit occurred.",
+    "Validation: node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-49.proof-contracts.json --items thm-low-rank-adi-conditional-convergence-bound --strict --json exited 0, ok:true, no errors or warnings. node tools/tsx-run.mjs tools/precheck.mts items/thm-low-rank-adi-conditional-convergence-bound.md --json exited 0, one checked, zero failures. node tools/rendercheck.mjs items/thm-low-rank-adi-conditional-convergence-bound.md --json exited 0, one checked, no errors or warnings. After final item edit, node tools/proof-layout.mjs items/thm-low-rank-adi-conditional-convergence-bound.md exited 0: one item, four steps, zero defects.",
+    "Exact comparison: restoring only the original F3 reproduces the frozen before itemHashGuard 6ea5f5cbccfb9c8a2e0a0b6b577dc6e3007ad390f63c74dd7775221f2e6d5659. Original/current Statement sections compare byte-for-byte equal; native statement hash remains 17ff4886760326bdf12e3a4a07414ea920d49e0655b21231561037f15fd29067. Downstream is empty because this fact/citation-only repair creates no interface event.",
+    "Published-ledger proposed updates: none. No potentially defective published consumer was discovered; no maintenance route is required for an unchanged Statement. Shared ledgers, judgments, stamps, certificates and round state were not edited. No gate diagnostic was assigned. No unresolved mathematical obligations remain in this unit; the controller owns independent rejudgment, ledger merge and certification."
+  ]
+}

@@ -1,0 +1,11 @@
+--- before/owner-strict-boundary-stages.mts
++++ .autopilot/numerical-optimization-dynamics-2026-10-16/owner-strict-boundary-stages.mts
+@@ -66,6 +66,8 @@
+ export function stagesForRun(ctx: any) {
+   return native.stagesForRun(ctx).map((source: any) => {
+     const stage = { ...source }, progress = source.onProgress;
++    if (ctx.run === 'numerical-optimization-dynamics-2026-10-16' && stage.id === '1-scaffold')
++      stage.deferConstructionArtifactsUntilDrain = true;
+     stage.onProgress = async (args: any) => {
+       installBoundaryGuard(args.executor);
+       await progress?.(args);

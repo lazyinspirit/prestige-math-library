@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "85",
+  "round": 1,
+  "reviewed_items": [
+    "def-sqp-linearized-quadratic-subproblem",
+    "def-sqp-augmented-lagrangian-equality-and-inequality",
+    "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+    "def-sqp-l1-exact-penalty-merit",
+    "alg-sqp-augmented-lagrangian-multiplier-method",
+    "lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate",
+    "alg-sqp-exhaustive-active-set-qp-solve",
+    "alg-sqp-feasible-working-set-qp-solve",
+    "alg-sqp-second-order-correction",
+    "alg-sqp-exact-hessian-newton-step",
+    "alg-sqp-reduced-bfgs-kkt-step",
+    "alg-sqp-merit-globalization-with-finite-budgets",
+    "thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+    "thm-sqp-working-set-qp-terminates-under-nondegeneracy-anticycling",
+    "thm-sqp-second-order-correction-residual-order",
+    "thm-sqp-exact-hessian-local-quadratic-convergence",
+    "thm-sqp-reduced-bfgs-superlinear-under-dm",
+    "thm-sqp-augmented-lagrangian-local-convergence",
+    "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+    "thm-sqp-merit-globalization-finite-budget-status",
+    "thm-sqp-finite-precision-kkt-residual-certificate-sound",
+    "ex-sqp-engineering-design-active-inequality",
+    "ex-sqp-maratos-effect-and-second-order-correction",
+    "ex-sqp-augmented-lagrangian-penalty-conditioning"
+  ],
+  "reviewed_pages": [
+    "sqp-active-set-and-augmented-lagrangian-methods",
+    "sqp-active-set-and-augmented-lagrangian-methods-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The local findings are repaired, with their in-scope consumers checked. Escalation remains for the outside-batch transcription dispatcher: it repeats the globalization call but specifies no use or propagation of the returned QP multipliers.",
+  "findings": [
+    {
+      "id": "alg-sqp-merit-globalization-with-finite-budgets",
+      "type": "local",
+      "reason": "Resolved: the exact QP solver now returns the retained equality basis E, selected support J, and full multiplier vectors. Globalization passes c_A=(h_E,g_J), skips SOC unless x+p is in U, returns QP multipliers on acceptance, and distinguishes domain exit."
+    },
+    {
+      "id": "alg-sqp-merit-globalization-with-finite-budgets",
+      "type": "scope",
+      "reason": "Resolved: accepted records carry QP multipliers and domain exit is separate from nonpositive prediction and line-search budget exhaustion. The status theorem and page summary were updated."
+    },
+    {
+      "id": "alg-sqp-augmented-lagrangian-multiplier-method",
+      "type": "scope",
+      "reason": "Resolved: each inner call has finite cap M and reports success, residual-bearing exhaustion, or failure data. Outer exhaustion also returns the last inner and KKT residuals; the local theorem, example, and page summary were checked or updated."
+    },
+    {
+      "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "type": "outside-batch",
+      "reason": "Owner repair required in its Definition: it repeatedly invokes globalization but says only that an accepted step updates the iterate, with no multiplier state or propagation of (nu_QP, lambda_QP) to the next model-builder call."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-sqp-merit-globalization-with-finite-budgets",
+      "decision": "accept",
+      "reason": "Now consumes E, J, and expanded multipliers from the QP solver and supplies the specified SOC map and accepted-step data."
+    },
+    {
+      "id": "thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+      "decision": "accept",
+      "reason": "Updated to cover the solver's full multiplier vectors and retained support data."
+    },
+    {
+      "id": "ex-sqp-engineering-design-active-inequality",
+      "decision": "accept",
+      "reason": "Uses the returned primal step and KKT certificate; the added output fields do not alter its example."
+    },
+    {
+      "id": "thm-sqp-merit-globalization-finite-budget-status",
+      "decision": "accept",
+      "reason": "Updated to include domain-exit status and accepted records with QP multipliers."
+    },
+    {
+      "id": "ex-sqp-maratos-effect-and-second-order-correction",
+      "decision": "accept",
+      "reason": "Its equality-only case uses c_A=h on U=R^2, so the SOC domain precondition holds; its Armijo calculation remains valid."
+    },
+    {
+      "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "decision": "escalate",
+      "reason": "Outside write scope. Its repeated accepted-step transition does not specify carrying the QP multipliers into the next model build; owner must repair or clarify that interface."
+    },
+    {
+      "id": "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+      "decision": "accept",
+      "reason": "Uses the dispatcher only to state that finite termination may precede the separate local exact-Hessian branch."
+    },
+    {
+      "id": "direct-transcription-and-numerical-ode-optimal-control",
+      "decision": "accept",
+      "reason": "Its summary of explicit finite statuses remains valid."
+    },
+    {
+      "id": "thm-sqp-augmented-lagrangian-local-convergence",
+      "decision": "accept",
+      "reason": "Clarified that its limit result requires an infinite sequence of successful finite-capped inner calls."
+    },
+    {
+      "id": "ex-sqp-augmented-lagrangian-penalty-conditioning",
+      "decision": "accept",
+      "reason": "Now states that its exact inner solve returns within a finite cap."
+    },
+    {
+      "id": "sqp-active-set-and-augmented-lagrangian-methods",
+      "decision": "accept",
+      "reason": "Its procedure summaries now match the repaired status and multiplier interfaces."
+    },
+    {
+      "id": "sqp-active-set-and-augmented-lagrangian-methods-examples",
+      "decision": "accept",
+      "reason": "Its example claims remain compatible with the repaired procedures."
+    }
+  ]
+}

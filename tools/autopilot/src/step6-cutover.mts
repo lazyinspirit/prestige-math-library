@@ -6,6 +6,10 @@ import { createHash } from 'node:crypto';
 import { acquireControllerLock } from './controller-lock.mts';
 import { activeNativeWriters } from './workflow-prefix-migration.mts';
 import { sourceState, assertFreshStep6State } from '../../step6-prepared.mjs';
+import { preflightStep6 } from '../../step6-commit.mjs';
+import { treeEntries, indexEntries, git, textGit } from '../../run-commit-scope.mjs';
+import { decodeLedger, fragmentRecords, recordSignature } from '../../step6-ledger-fragment.mjs';
+import { decodePlan, planDocument } from '../../step6-plan-projection.mjs';
 const hash = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
 const body = (value: any) => JSON.stringify(value, null, 2) + '\n';
 const fail = (message: string): never => { throw Error('cutover-step6: ' + message); };
@@ -32,16 +36,13 @@ function stopped(o: Options, state: any, locked = false) {
   if (state.workflowRevision !== 'six-step-v1-construction-scope') fail('unsupported workflow revision');
   if (!o.refresh && Object.keys(state.stages ?? {}).some(id => current.includes(id))) fail('v3 execution already exists');
   if (o.refresh) {
-    if (state.stage !== '6-finalize-v3' || !state.step6Cutover
+    if (state.stage !== '6-finalize-v3'
       || !state.stages?.['6-final-validation-v3']?.gatesPassedAt) fail('refresh requires an unfinished native v3 finalization');
     assertFreshStep6State({ repo: o.repo, run: o.run, stateDir: o.stateDir });
-    const previous = JSON.parse(bytes(join(o.repo, state.step6Cutover.receipt)).toString());
-    const head = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: o.repo, encoding: 'utf8' }).trim();
-    if (head !== previous.guards.head) fail('HEAD moved since cutover; commit recovery must be handled separately');
     const final = join(o.dispatchDir, 'tool-step6-finalize-v3.result.json');
     if (existsSync(final)) {
       const result = JSON.parse(bytes(final).toString());
-      if (result.ok === true || result.transaction_pending || result.closeout_scope || result.commit)
+      if (result.ok === true || result.transaction_pending || result.closeout_scope || result.commit || result.commit_landed)
         fail('final transaction may have landed; inspect commit recovery separately');
     }
   }
@@ -77,6 +78,132 @@ function historical(o: Options, state: any) {
   }
   return Object.fromEntries([...files].sort().map(path => [path, hash(bytes(join(o.repo, path)))]));
 }
+// Read-only recovery proof for a failed current v3 transaction. It never resets
+// refs/index or adopts the old battery. Missing owned Git bases fail closed.
+function failedRefreshBasis(o: Options, state: any, events: Buffer) {
+  for (const name of readdirSync(o.dispatchDir).filter(name => /^tool-step6-finalize-v3(?:\.attempt-\d+)?\.result\.json$/.test(name))) {
+    const result = JSON.parse(bytes(join(o.dispatchDir, name)).toString());
+    if (result.ok === true || result.transaction_pending || result.closeout_scope || result.commit || result.commit_landed)
+      fail('terminal success/pending/commit evidence requires separate recovery');
+  }
+  const lane = state.dispatches?.['6-finalize-v3:step6-finalize-v3'];
+  const entered = state.stages?.['6-finalize-v3']?.enteredAt;
+  if (!lane?.startedAt || !lane.endedAt || lane.lastExitOk !== false || !entered
+    || !state.stages?.['6-final-validation-v3']?.doneAt)
+    fail('refresh requires a completed failed native finalizer, not an unknown transaction');
+  const rows = events.toString().split('\n').filter(Boolean).map(line => JSON.parse(line));
+  const predecessor = state.stages['6-final-validation-v3'];
+  if (predecessor.skipped || predecessor.routedTo || predecessor.routedOutcome === 'failed'
+    || [entered, lane.startedAt, lane.endedAt, predecessor.gatesPassedAt, predecessor.doneAt]
+      .some(value => !Number.isFinite(Date.parse(value)))) fail('invalid native finalization chronology');
+  const preparedBytes = bytes(join(o.stateDir, 'step6-prepared.json'));
+  const prepared = JSON.parse(preparedBytes.toString());
+  if (prepared.run !== o.run || prepared.kind !== 'actual-step6-format-metadata-preparation'
+    || prepared.validationStage !== '6-final-validation-v3' || !Array.isArray(prepared.gates)
+    || !prepared.gates.length || prepared.gates.some((gate: any) => gate.required !== true)
+    || prepared.gateInventorySha256 !== hash(JSON.stringify(prepared.gates))
+    || !Number.isFinite(Date.parse(prepared.completedAt))) fail('missing authentic preceding preparation inventory');
+  const gateMessage = `6-final-validation-v3: running ${prepared.gates.length} gate(s)`;
+  let battery = -1;
+  for (let i = 0; i < rows.length; i++) if (rows[i].type === 'gates' && rows[i].message === gateMessage
+    && Date.parse(rows[i].at) >= Date.parse(prepared.completedAt) && Date.parse(rows[i].at) < Date.parse(entered)) battery = i;
+  if (battery < 0) fail('missing actual preceding native battery');
+  const tail = rows.slice(battery + 1).filter(row => Date.parse(row.at) < Date.parse(entered));
+  const results = tail.filter(row => row.type === 'gate');
+  const green = tail.findIndex(row => row.type === 'gates-ok' && row.message === '6-final-validation-v3: all gates green');
+  const clear = tail.findIndex(row => row.type === 'stage-clear' && row.message?.startsWith('6-final-validation-v3 cleared —'));
+  if (green < 0 || clear <= green || results.length !== prepared.gates.length
+    || results.some((row, i) => row.id !== prepared.gates[i].id || row.ok !== true || row.skipped)
+    || tail.slice(0, green).filter(row => row.type === 'gate').length !== prepared.gates.length
+    || tail.some(row => row.type === 'gate-advisory' || row.type === 'blocked' && row.stage === '6-final-validation-v3')
+    || Date.parse(tail[green].at) > Date.parse(predecessor.gatesPassedAt)
+    || Date.parse(predecessor.doneAt) < Date.parse(predecessor.gatesPassedAt)
+    || Date.parse(predecessor.doneAt) > Date.parse(entered))
+    fail('preceding native battery is incomplete or inconsistent');
+  const attempts: any[] = []; let pending: any = null;
+  for (const row of rows.filter(row => Date.parse(row.at) >= Date.parse(entered))) {
+    if (row.type === 'dispatch' && row.stage === '6-finalize-v3' && row.role === 'tool' && row.label === 'step6-finalize-v3') {
+      if (pending) fail('unresolved finalizer event sequence');
+      pending = row;
+    }
+    if (row.key === '6-finalize-v3:step6-finalize-v3' && row.type === 'dispatch-failed') {
+      if (!pending || row.ok !== false || ![
+        'tool/step6-finalize-v3 exit=1 :: step6-finalize: Validated frontier/context changed before commit',
+        'tool/step6-finalize-v3 exit=1 :: step6-finalize: Step-6 prepared source or derived evidence changed',
+      ].includes(row.message)) fail('finalizer failure is not an authenticated pre-ref refusal');
+      attempts.push({ dispatch: pending, failure: row }); pending = null;
+    }
+  }
+  const last = attempts.at(-1);
+  if (pending || !last || Date.parse(last.dispatch.at) < Date.parse(lane.startedAt)
+    || Date.parse(last.dispatch.at) > Date.parse(lane.endedAt)
+    || Date.parse(last.failure.at) < Date.parse(lane.endedAt)) fail('failed native finalizer events do not match current lane');
+  // Authenticate policy, exact shared projections and all current owned inputs
+  // through the ordinary read-only native preflight. No whole-file shared grant.
+  const scope = preflightStep6(o.repo, o.run);
+  const head = textGit(scope.gitRoot, ['rev-parse', 'HEAD']);
+  const previous = state.step6Cutover
+    ? JSON.parse(bytes(join(o.repo, state.step6Cutover.receipt)).toString()) : null;
+  // A fresh-v3 run has no cutover receipt. Its already sealed plan authority is
+  // an actual immutable original-HEAD basis, not an owner-guessed current HEAD.
+  const plan = scope.planProjections.length === 1 ? scope.planProjections[0] : null;
+  const base = previous?.guards?.failed_refresh_basis?.original_head ?? previous?.guards?.head ?? plan?.spec?.original_head;
+  if (!/^[a-f0-9]{40,64}$/.test(base ?? '')) fail('no authenticated original HEAD for failed v3 refresh');
+  if (plan && plan.spec.original_head !== base) fail('refresh Git bases disagree');
+  git(scope.gitRoot, ['merge-base', '--is-ancestor', base, head]);
+  const commits = textGit(scope.gitRoot, ['rev-list', '--reverse', `${base}..${head}`]).split('\n').filter(Boolean);
+  const authorization = relative(o.repo, resolve(o.authorizationPath ?? join(o.repo, 'research', `${o.run}-step6-cutover-authorization.json`)));
+  const own = new Set<string>(scope.paths.filter(path => path !== authorization)), special = new Map<string, any>();
+  for (const row of scope.fragments) special.set(row.path, { kind: 'ledger', row, ids: new Set(row.ownedIds) });
+  for (const row of scope.planProjections) special.set(row.path, { kind: 'plan', row, ids: new Set(row.spec.page_ids) });
+  const project = (entries: any[], kind: 'head' | 'index') => {
+    const selected = entries.filter(row => own.has(row.path));
+    if (kind === 'index' && selected.some(row => row.stage !== 0 || row.flags !== '0'))
+      fail('owned index flags/stages require separate recovery');
+    const map = new Map<string, any>(selected.map(row => [row.path, row]));
+    const ordinary = selected.filter(row => !special.has(row.path)).map(({ path, mode, oid }) => ({ path, mode, oid }))
+      .sort((a, b) => a.path.localeCompare(b.path));
+    const shared = [...special].sort(([a], [b]) => a.localeCompare(b)).map(([path, value]) => {
+      const entry = map.get(path);
+      if (!entry || entry.mode !== '100644') fail('shared recovery base must be an existing ordinary file');
+      const blob = git(scope.gitRoot, ['cat-file', 'blob', entry.oid]);
+      const spec = value.row.spec;
+      const owned = value.kind === 'ledger'
+        ? fragmentRecords(decodeLedger(blob), o.run, value.ids).filter(row => row.owned).map(row => recordSignature(row.text))
+        : planDocument(decodePlan(blob)).rows.filter(row => value.ids.has(row.id)).map(({ id, raw }) => ({ id, raw }));
+      const expected = value.kind === 'ledger' ? spec.base_owned_records.map(recordSignature)
+        : spec[kind === 'head' ? 'base_head_owned_rows' : 'base_index_owned_rows'];
+      if (JSON.stringify(owned) !== JSON.stringify(expected)) fail('shared owned base already integrated or changed: ' + path);
+      return { path, kind: value.kind, owned };
+    });
+    return { ordinary, shared };
+  };
+  const baseTree = treeEntries(scope.gitRoot, base), baseline = project(baseTree, 'head');
+  if (baseline.ordinary.some(row => row.path === `research/${o.run}-dispatch/tool-step6-finalize-v3.result.json`))
+    fail('historical base already contains a final result');
+  // Check every intervening commit, not just endpoints: a landed/reverted run
+  // commit is still a landed transaction and cannot masquerade as foreign work.
+  for (const commit of commits)
+    if (JSON.stringify(project(treeEntries(scope.gitRoot, commit), 'head')) !== JSON.stringify(baseline))
+      fail('owned HEAD changed in intervening history; separate commit recovery required');
+  const index = indexEntries(scope.gitRoot), currentIndex = project(index, 'index');
+  if (JSON.stringify(currentIndex.ordinary) !== JSON.stringify(baseline.ordinary))
+    fail('owned staged rows differ from authenticated HEAD base; no historical index basis available');
+  // Shared staged bases have separately authenticated original rows; ordinary
+  // owned rows conservatively require equality to the immutable original HEAD.
+  const headAfter = textGit(scope.gitRoot, ['rev-parse', 'HEAD']);
+  if (headAfter !== head) fail('HEAD changed while inspecting failed refresh');
+  return { kind: 'failed-native-v3-pre-ref-refresh', original_head: base, current_head: head,
+    origin: previous ? { cutover: state.step6Cutover } : { plan_authority: plan.authority, sha256: plan.sha256 },
+    preceding_preparation_sha256: hash(preparedBytes), preceding_gate_results_sha256: hash(JSON.stringify(results)),
+    failed_attempts: attempts, owned_paths_sha256: hash(JSON.stringify([...own].sort())),
+    owned_head_projection_sha256: hash(JSON.stringify(baseline)),
+    owned_index_projection_sha256: hash(JSON.stringify(currentIndex)),
+    index_sha256: (index as any).indexSnapshot.sha256, checked_descendant_commits: commits,
+    scope_policy_sha256: scope.policy?.policySha256 ?? null,
+    scope_context_sha256: scope.policy?.contextSha256 ?? null, commit_landed: false, coverage_created: false };
+}
+
 export function inspectStep6Cutover(o: Options, locked = false) {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(o.run)) fail('unsafe run');
   if (!resolve(o.stateDir).startsWith(resolve(o.repo) + '/') || !resolve(o.dispatchDir).startsWith(resolve(o.repo) + '/')) fail('state/dispatch must remain in workspace');
@@ -84,6 +211,7 @@ export function inspectStep6Cutover(o: Options, locked = false) {
   stopped(o, state, locked);
   const events = bytes(join(o.stateDir, 'events.jsonl'));
   events.toString().split('\n').filter(Boolean).forEach(line => JSON.parse(line));
+  const recovery = o.refresh ? failedRefreshBasis(o, state, events) : null;
   const prefix = Object.fromEntries(Object.entries(state.stages).filter(([id]) => !old(id)));
   const source = sourceState(o.repo, o.run, { includeDerived: false }).tree;
   delete source[relative(o.repo, resolve(o.authorizationPath ?? join(o.repo, 'research', `${o.run}-step6-cutover-authorization.json`)))];
@@ -92,7 +220,8 @@ export function inspectStep6Cutover(o: Options, locked = false) {
     stage_table_sha256: hash(bytes(join(o.repo, 'tools/autopilot/stages/mathlib.mts'))),
     source_sha256: hash(JSON.stringify(source)),
     prefix_stages_sha256: hash(JSON.stringify(prefix)), historical_files: historical(o, state),
-    reset_stages: Object.keys(state.stages).filter(old), target_stages: current };
+    reset_stages: Object.keys(state.stages).filter(old), target_stages: current,
+    ...(recovery ? { failed_refresh_basis: recovery } : {}) };
   return { guards, state, stateBytes, events };
 }
 export function cutoverStep6(o: Options) {

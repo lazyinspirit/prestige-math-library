@@ -1,0 +1,342 @@
+{
+  "group": "n",
+  "batches": ["4"],
+  "pages_read": [
+    "polynomial-interpolation-and-remainder",
+    "polynomial-interpolation-and-remainder-examples"
+  ],
+  "items_read": [
+    "lem-finite-coefficient-vector-has-polynomial-representative",
+    "lem-finite-double-sum-interchange",
+    "lem-finite-product-of-nonzero-reals-is-nonzero",
+    "lem-polynomial-highest-derivative",
+    "lem-product-of-linear-factors-is-monic-polynomial",
+    "def-cardinal-polynomial-interpolation",
+    "lem-finite-product-of-quotients",
+    "lem-cardinal-basis-degree-and-values",
+    "prop-equispaced-interpolation-basis-growth",
+    "thm-cardinal-polynomial-interpolant-exists-uniquely",
+    "thm-barycentric-interpolation-identities",
+    "thm-lagrange-interpolation-remainder",
+    "alg-finite-barycentric-interpolation-evaluator",
+    "prop-finite-barycentric-interpolation-evaluator-returns-status",
+    "ex-equispaced-cardinal-basis-growth",
+    "ex-quadratic-interpolation-at-three-nodes",
+    "ex-cubic-interpolation-pointwise-remainder"
+  ],
+  "conventions": [
+    {
+      "convention": "The interpolation index n denotes n+1 strictly increasing real nodes x_0<⋯<x_n; n=0 is admissible. Products omitting index j follow the explicitly defined increasing omitted-node list. Empty products equal 1.",
+      "fixed_by": "def-cardinal-polynomial-interpolation",
+      "matters_for": [
+        "lem-cardinal-basis-degree-and-values",
+        "thm-cardinal-polynomial-interpolant-exists-uniquely",
+        "thm-barycentric-interpolation-identities",
+        "thm-lagrange-interpolation-remainder",
+        "alg-finite-barycentric-interpolation-evaluator"
+      ]
+    },
+    {
+      "convention": "Formal polynomials are canonical coefficient lists with nonzero final coefficient, together with a separate zero object. The zero polynomial has no degree. Zero padding describes evaluation vectors without changing formal objects.",
+      "fixed_by": "def-real-polynomial-degree-leading-coefficient-and-monic",
+      "matters_for": [
+        "lem-finite-coefficient-vector-has-polynomial-representative",
+        "lem-polynomial-highest-derivative",
+        "lem-product-of-linear-factors-is-monic-polynomial",
+        "lem-cardinal-basis-degree-and-values",
+        "thm-cardinal-polynomial-interpolant-exists-uniquely"
+      ]
+    },
+    {
+      "convention": "Natural numbers used as real scalars denote their canonical real images; the real factorial is the product of those images and agrees with the image of the natural factorial.",
+      "fixed_by": "lem-polynomial-highest-derivative",
+      "matters_for": [
+        "prop-equispaced-interpolation-basis-growth",
+        "thm-lagrange-interpolation-remainder",
+        "ex-cubic-interpolation-pointwise-remainder"
+      ]
+    },
+    {
+      "convention": "The remainder theorem assumes a<b and f∈C^{n+1}([a,b]), including continuous one-sided endpoint derivatives. At a node the error is zero; otherwise ξ lies strictly between the extreme points of the nodes together with the query.",
+      "fixed_by": "thm-lagrange-interpolation-remainder",
+      "matters_for": [
+        "ex-cubic-interpolation-pointwise-remainder"
+      ]
+    },
+    {
+      "convention": "Barycentric quotients are used only away from nodes. Exact node queries return the prescribed nodal value separately.",
+      "fixed_by": "thm-barycentric-interpolation-identities",
+      "matters_for": [
+        "alg-finite-barycentric-interpolation-evaluator",
+        "prop-finite-barycentric-interpolation-evaluator-returns-status"
+      ]
+    },
+    {
+      "convention": "Checked arithmetic rejects division by zero and nonzero exact results outside the normal range before rounding. Successful rounding returns an element of the supplied finite floating-point set. Success carries no accuracy or conditioning guarantee.",
+      "fixed_by": "alg-finite-barycentric-interpolation-evaluator",
+      "matters_for": [
+        "prop-finite-barycentric-interpolation-evaluator-returns-status"
+      ]
+    },
+    {
+      "convention": "The equispaced growth witness uses 2m+1 nodes and m≥6. Its unit-bounded nodal data vary with m; it makes no divergence assertion for a single fixed continuous function.",
+      "fixed_by": "ex-equispaced-cardinal-basis-growth",
+      "matters_for": [
+        "ex-equispaced-cardinal-basis-growth"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-cardinal-basis-degree-and-values",
+      "statement": "For n∈ℕ, increasing real nodes x_0<⋯<x_n, and real data, each cardinal function ℓ_j is the evaluation of a formal polynomial of degree n; ω_n is the evaluation of a monic formal polynomial of degree n+1 and is nonzero off the nodes; I_n y is the evaluation of a formal polynomial of degree at most n; ℓ_j(x_i) is 1 for i=j and 0 otherwise.",
+      "used_by": [
+        "thm-cardinal-polynomial-interpolant-exists-uniquely",
+        "thm-barycentric-interpolation-identities",
+        "thm-lagrange-interpolation-remainder"
+      ]
+    },
+    {
+      "id": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+      "statement": "For n∈ℕ, n≥0, distinct increasing real nodes x_0<⋯<x_n, and real data y_0,…,y_n, I_n y is the unique real polynomial of degree at most n satisfying p(x_i)=y_i for every i=0,…,n.",
+      "used_by": [
+        "thm-barycentric-interpolation-identities",
+        "thm-lagrange-interpolation-remainder",
+        "ex-quadratic-interpolation-at-three-nodes",
+        "ex-cubic-interpolation-pointwise-remainder"
+      ]
+    },
+    {
+      "id": "def-cardinal-polynomial-interpolation",
+      "statement": "For n+1 increasing distinct real nodes, define ω_n(X)=∏_{k=0}^n(X−x_k), w_j=(∏_{k≠j}(x_j−x_k))^{-1}, ℓ_j(X)=∏_{k≠j}(X−x_k)/(x_j−x_k), and I_n y(X)=∑_{j=0}^n y_jℓ_j(X).",
+      "used_by": [
+        "lem-cardinal-basis-degree-and-values",
+        "prop-equispaced-interpolation-basis-growth",
+        "thm-cardinal-polynomial-interpolant-exists-uniquely",
+        "thm-barycentric-interpolation-identities",
+        "thm-lagrange-interpolation-remainder",
+        "alg-finite-barycentric-interpolation-evaluator",
+        "ex-equispaced-cardinal-basis-growth",
+        "ex-quadratic-interpolation-at-three-nodes",
+        "ex-cubic-interpolation-pointwise-remainder"
+      ]
+    },
+    {
+      "id": "thm-lagrange-interpolation-remainder",
+      "statement": "For n≥0, a<b, increasing nodes in [a,b], f∈C^{n+1}([a,b],ℝ), and p=I_n f, node queries have zero error. For every non-node x∈[a,b], some ξ∈(min{x,x_0},max{x,x_n}) satisfies f(x)−p(x)=f^{(n+1)}(ξ)ω_n(x)/(n+1)!_ℝ.",
+      "used_by": [
+        "ex-cubic-interpolation-pointwise-remainder"
+      ]
+    },
+    {
+      "id": "thm-barycentric-interpolation-identities",
+      "statement": "For increasing distinct real nodes and real data, every non-node x satisfies ω_n(x)∑_j w_j/(x−x_j)=1 and ω_n(x)∑_j y_jw_j/(x−x_j)=I_n y(x). The denominator sum is nonzero, giving the barycentric quotient. At a node, I_n y(x_i)=y_i separately.",
+      "used_by": [
+        "alg-finite-barycentric-interpolation-evaluator"
+      ]
+    },
+    {
+      "id": "lem-polynomial-highest-derivative",
+      "statement": "For m≥1 and the evaluation p of a formal polynomial of degree at most m, or the zero polynomial, pad its coefficient vector through index m. Then p^{(m)}(x)=a_m m!_ℝ for every real x; this is zero below degree m and m!_ℝ for a monic polynomial of degree m.",
+      "used_by": [
+        "thm-lagrange-interpolation-remainder"
+      ]
+    },
+    {
+      "id": "prop-equispaced-interpolation-basis-growth",
+      "statement": "For m∈ℕ, m≥6, nodes x_k=−1+k/m for 0≤k≤2m, and x_*=−1+1/(2m), the cardinal function at x_m=0 satisfies |ℓ_m(x_*)|≥9m/1280.",
+      "used_by": [
+        "ex-equispaced-cardinal-basis-growth"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-real-polynomial-degree-leading-coefficient-and-monic",
+      "used_for": "Canonical formal coefficient lists, evaluation, degree, leading coefficient, and the separate zero polynomial.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Recursive finite sums and products, omitted-index list interpretations, and empty values.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Scaling, additivity, splitting, product identities, and finite-sum inequalities.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Finite coefficient, product, double-sum, and derivative inductions.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-field",
+      "used_for": "Real field arithmetic throughout the algebraic constructions.",
+      "opened": true
+    },
+    {
+      "id": "def-field",
+      "used_for": "Field operations, inverses, and the quotient convention.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-zero-mult",
+      "used_for": "Zero padding and vanishing cardinal factors.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-no-zero-divisors",
+      "used_for": "Nonvanishing finite products and scaled leading coefficients.",
+      "opened": true
+    },
+    {
+      "id": "def-higher-derivatives-and-smoothness",
+      "used_for": "Iterated derivatives, C^k regularity, and one-sided endpoint conventions.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-of-a-power",
+      "used_for": "Termwise polynomial differentiation and the explicit cubic derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-canonical-natural",
+      "used_for": "Interpretation of natural indices as real coefficients.",
+      "opened": true
+    },
+    {
+      "id": "def-factorial-and-falling-factorial",
+      "used_for": "Factorial products, falling products, and nonvanishing factorials.",
+      "opened": true
+    },
+    {
+      "id": "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+      "used_for": "Transport of natural arithmetic, order, factorials, and binomial counts into ℝ.",
+      "opened": true
+    },
+    {
+      "id": "lem-power-laws",
+      "used_for": "Polynomial product expansions and powers in the equispaced amplification estimate.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-inverse-unique",
+      "used_for": "Identification of the inverse of a product in the quotient-product lemma.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-ordered-field",
+      "used_for": "Nonzero ordered-node differences and amplification inequalities.",
+      "opened": true
+    },
+    {
+      "id": "def-binomial-coefficient",
+      "used_for": "Binomial coefficients as nonnegative natural counts.",
+      "opened": true
+    },
+    {
+      "id": "thm-binomial-closed-formula",
+      "used_for": "Exact factorial ratios and the fourth binomial coefficient in the growth proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-binomial-coefficients-symmetric-and-unimodal",
+      "used_for": "The central coefficient maximizes each even binomial row.",
+      "opened": true
+    },
+    {
+      "id": "thm-binomial-theorem-over-a-commutative-ring",
+      "used_for": "Binomial-row sums and the lower bound obtained from the fourth term of (1+3)^m.",
+      "opened": true
+    },
+    {
+      "id": "lem-field-is-a-commutative-ring",
+      "used_for": "Applying the ring binomial theorem in ℝ.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+      "used_for": "Uniqueness of formal interpolation polynomials from n+1 distinct node values.",
+      "opened": true
+    },
+    {
+      "id": "lem-higher-order-rolle",
+      "used_for": "Producing a zero of the auxiliary function's (n+1)st derivative between its extreme zeros.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Differentiating the auxiliary remainder function and the cubic example.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Polynomial continuity and continuity of the auxiliary remainder function.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-relative-floating-point-model-and-unit-roundoff",
+      "used_for": "The evaluator's rounding domain, finite representable set, normal range, and exact-zero rule.",
+      "opened": true
+    },
+    {
+      "id": "cor-weierstrass-approximation-on-a-closed-interval",
+      "used_for": "Distinguishing polynomial density from the changing-data amplification witness.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "deferred-correction-and-collocation-iterations",
+      "to": "polynomial-interpolation-and-remainder",
+      "faithful": true,
+      "note": "Checked tableau definitions, finite cardinal integrals, one-node specialization, scaled derivatives, local defect, and weighted Gauss defect uses. M nodes consistently invoke degree M−1 interpolation; vector uses are explicitly componentwise."
+    },
+    {
+      "from": "polynomial-approximation-and-chebyshev-interpolation",
+      "to": "polynomial-interpolation-and-remainder",
+      "faithful": true,
+      "note": "The Definition and cardinal/operator-norm lemma explicitly reverse decreasing cosine nodes into increasing order. Cardinal values, reproduction, uniqueness, and the n=0 case agree with the supplier."
+    },
+    {
+      "from": "composite-quadrature-rules",
+      "to": "polynomial-interpolation-and-remainder",
+      "faithful": true,
+      "note": "No direct item citation to the assigned interpolation items was found in the current page inventory. Its error arguments use panel kernels; the named page prerequisite introduces no stronger interpolation assertion."
+    },
+    {
+      "from": "clenshaw-curtis-and-extrapolation-quadrature",
+      "to": "polynomial-interpolation-and-remainder",
+      "faithful": true,
+      "note": "The Newton–Cotes proof uses nine-node degree-eight cardinal interpolation and derives degree-nine exactness separately by symmetry. The DCT-I interpolation proof explicitly reorders Lobatto nodes before invoking uniqueness."
+    },
+    {
+      "from": "gaussian-quadrature",
+      "to": "polynomial-interpolation-and-remainder",
+      "faithful": true,
+      "note": "Checked coefficient representatives, monic products, cardinal degree/value claims, polynomial reproduction, and highest derivatives. The Hermite remainder constructs double-node conditions and its own Rolle argument rather than attributing a double-node theorem to the Lagrange supplier."
+    },
+    {
+      "from": "numerical-differentiation-and-derivative-error-control",
+      "to": "polynomial-interpolation-and-remainder",
+      "faithful": true,
+      "note": "No direct item citation to the assigned interpolation items was found. Current finite-difference remainder arguments cite Taylor suppliers and do not differentiate a Lagrange remainder identity."
+    },
+    {
+      "from": "finite-element-meshes-and-interpolation",
+      "to": "polynomial-interpolation-and-remainder",
+      "faithful": true,
+      "note": "No direct item citation to the assigned interpolation items was found. Multivariate interpolation is established through separately assumed unisolvent degrees of freedom; the page does not promote the univariate uniqueness theorem to a multivariate claim."
+    },
+    {
+      "from": "spectral-collocation-and-galerkin-methods",
+      "to": "polynomial-interpolation-and-remainder",
+      "faithful": true,
+      "note": "Checked descending-grid reversal, differentiation-matrix indexing, polynomial reproduction and aliasing, and the pointwise remainder bound. The remainder consumer assumes C^{N+1} on [-1,1], handles nodes separately, and derives its node-product and weighted-norm bounds locally."
+    }
+  ]
+}

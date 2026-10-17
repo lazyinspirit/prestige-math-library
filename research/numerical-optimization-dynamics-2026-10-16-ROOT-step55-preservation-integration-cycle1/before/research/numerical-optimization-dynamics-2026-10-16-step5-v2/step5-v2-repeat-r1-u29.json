@@ -1,0 +1,129 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "29",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "79adc0b3754ff3bcd012c3763c35710a2d71d18cc055713fc2d4fbc7f1af1551",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original Definition admits the unit seed ball for F(x,lambda)=x+x^3 and initial section lambda=0: x=0 is a regular global branch and the augmented residual has exactly one zero. At its center DG=I, so every sound beta is at least 1; the derivative diag(1+3x^2,1) requires L at least 6 on the unit ball (difference quotients as x approaches 1), hence q=beta*L*R is at least 6. Step 1 returns this seed immediately when N_req=0, contradicting the promised contraction record for every output ball. The repair preserves that output promise by requiring the initial seed to carry all hypotheses, bounds and inequalities of the existing contraction theorem, plus whole-ball tube/chart inclusion and initial angle data. No external theorem or new prerequisite is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+      "disposition": "repaired",
+      "post_sha256": "b5d9d111d0d6d21f5c7bf021c210b1a87dbce3d78b42f839b9562f54a80b820a",
+      "review_context_sha256": "a034e1de75cc27af4fd31664cf322bacece3121732bed9483d0ae756ad925021",
+      "reason": "Checked the full procedure, contraction theorem and both called Newton definitions, plus the actual chart/section/fold/local-Newton supplier Statements and owning contract/page. The seed now has the same root/error certificate required for every returned ball, so N_req=0 and N_s=0 are sound without a new callback. Appends still require contraction and whole-ball V inclusion, which identify the unique forward chart intersection because 0<ha-r<=d<=ha+r<=kappa*r_plus. Entry-only initialization now retains counters and the step-6 orientation on loop-back; exact and bounded-error branches still allow at most N_c updates, and fold finalization retains its independent hypotheses. This is the repair author\u2019s mathematical self-check, not an independent judgment.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination",
+    "ex-local-trace-misses-disconnected-branch",
+    "ex-pseudo-arclength-crosses-x-squared-fold",
+    "alg-periodic-orbit-pseudoarclength-continuation"
+  ],
+  "downstream_uses": {
+    "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination": "Statement admits the generic algorithm inputs; proof steps 1.1\u20132.1 use the certified seed as the induction base, steps 3.1\u20134.1 use persistent accepted/attempt counters, and the Statement specifies seed-only returns for zero budgets. The stronger seed certificate supplies the base, and entry-only initialization makes the existing count and termination reasoning literal. Sound unchanged; frontier owner review route.",
+    "ex-local-trace-misses-disconnected-branch": "Verification step 1.2 already certifies the seed at (1,0) with inverse norm 1, Jacobian Lipschitz constant 2, zero residual/errors and q=2R_0<1. Its R_0<min(h/2,1/4) puts the whole seed ball in the displayed V; the section normal and straight chart tangent are both (0,1). Step 2.1 uses one append with N_req=N_s=1 and N_c=0. Sound unchanged; frontier owner review route.",
+    "ex-pseudo-arclength-crosses-x-squared-fold": "Verification step 1.2 already supplies the seed at (-alpha,alpha^2), R_0=alpha/4, exact data, inverse bound 2, Jacobian Lipschitz constant 2, zero residual/errors and q=alpha<1. The whole seed ball lies in |x|<1/4 and the positive graph tangent has dot product at least 2/sqrt(5) with (1,0). Steps 4.1\u20135.1 use the generic one-step trace. Sound unchanged; frontier owner review route.",
+    "alg-periodic-orbit-pseudoarclength-continuation": "Definition first paragraph supplies a valid certified Euclidean seed section-root ball with its chart/rank certificate explicitly as required by the generic algorithm. That reference now requires the full initial contraction package as well. Its Required Euclidean ball certificate paragraph already specifies physical derivative/error/inverse/Lipschitz data and the exact generic tests. The Step-4 Krawczyk adapter alert is repaired in the current Definition: a Krawczyk box alone is explicitly insufficient. Sound unchanged under the imported seed requirements; frontier batch-63 owner route, with no item edit here."
+  },
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "Definition: valid seed and Output; procedure step 1",
+      "finding": "Seed-only returns promised strict contraction data not required of valid seeds; G=(x+x^3,lambda) on the unit ball is an explicit counterexample.",
+      "correction": "Require positive seed radius and the complete existing augmented-residual contraction certificate, whole-ball tube/chart inclusion and initial angle record; preserve the output promise.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+      "severity": "nonfatal",
+      "defect_type": "logic",
+      "locus": "Definition: procedure steps 1 and 6",
+      "finding": "The step-6 loop-back targeted a step whose opening unqualified initialization could reset the trace, counts and supplied orientation on every visit, contrary to the explicit accepted-count and budget contract.",
+      "correction": "Make initialization entry-only and explicitly retain list, counts and current previous orientation on the step-6 loop-back.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "no-update",
+      "id": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+      "reason": "Every direct item consumer found in current deps and references is a draft in the frozen frontier; no published consumer or outside-frontier affected use was found. The owning draft page remains sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_files": [
+      "items/alg-pseudo-arclength-continuation-with-certified-local-corrector.md"
+    ],
+    "interface_change": "The original Definition changes by requiring initial seed contraction/whole-ball chart data and by making initialization entry-only. The Output record now identifies the initial seed or a subsequent forward point explicitly. No Statement exists in this algorithm. No deps, provenance, source references or proof claims change.",
+    "contract_and_page": "The owning contract has no citation quotes or proof steps for this algorithm; its zero/one/counter boundary claims remain true with the corrected seed and entry-only initialization. No contract or page edit is necessary. No stale verification.judge record was present.",
+    "consumer_inventory": {
+      "method": "Literal supplier-ID search across current items and library found four direct item consumers and one owning draft page; no aliases are declared. All four consumers are included in downstream with exact affected uses.",
+      "page": "library/numerical-differential-equations-and-stochastic-dynamics/pseudo-arclength-continuation-and-fold-certificates.md",
+      "page_disposition": "Sound unchanged: its explicit contraction acceptance, finite-budget termination, zero-request and certified-seed summary agrees with the corrected Definition.",
+      "frozen_frontier": "All four direct consumers occur in frontier.json; no outside-consumer maintenance is required by this change."
+    },
+    "external_source_reading": "No new external source was consulted. The elementary counterexample and repair were checked directly against the complete local contraction proof and algorithm definitions; familiar=true records that basis.",
+    "checks": [
+      {
+        "name": "precheck",
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-pseudo-arclength-continuation-with-certified-local-corrector.md --json",
+        "exit_code": 0,
+        "output": "{\n  \"summary\": {\n    \"files\": 1,\n    \"checked\": 0,\n    \"failed\": 0\n  },\n  \"results\": [\n    {\n      \"file\": \"items/alg-pseudo-arclength-continuation-with-certified-local-corrector.md\",\n      \"item_id\": \"alg-pseudo-arclength-continuation-with-certified-local-corrector\",\n      \"status\": \"not-applicable\"\n    }\n  ]\n}"
+      },
+      {
+        "name": "rendercheck",
+        "command": "node tools/rendercheck.mjs items/alg-pseudo-arclength-continuation-with-certified-local-corrector.md --json",
+        "exit_code": 0,
+        "output": "{\n  \"errors\": [],\n  \"warnings\": [],\n  \"checked\": 1\n}"
+      },
+      {
+        "name": "proof-contract",
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json --items alg-pseudo-arclength-continuation-with-certified-local-corrector --strict --json",
+        "exit_code": 0,
+        "output": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [],\n  \"scope\": [\n    \"alg-pseudo-arclength-continuation-with-certified-local-corrector\"\n  ],\n  \"checked\": [\n    \"alg-pseudo-arclength-continuation-with-certified-local-corrector\"\n  ]\n}"
+      },
+      {
+        "name": "proof-layout",
+        "command": "node tools/proof-layout.mjs items/alg-pseudo-arclength-continuation-with-certified-local-corrector.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 0 steps, 0 defects"
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Engine collection, direct frontier-consumer owner routing and independent exact-context rejudgment; no independent acceptance of this repair is claimed."
+  }
+}

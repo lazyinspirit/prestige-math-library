@@ -1,0 +1,162 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-48.proof-contracts.json
++++ proposed/numerical-optimization-dynamics-2026-10-16-batch-48.proof-contracts.json
+@@ -56,7 +56,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Definition: β=0 represents an infinite eigenvalue and β≠0 represents λ=α/β."
++          "evidence": "Definition: \u03b2=0 represents an infinite eigenvalue and \u03b2\u22600 represents \u03bb=\u03b1/\u03b2."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -117,7 +117,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The statement requires two diagonal blocks of positive sizes n1,n2≥1."
++          "reason": "The statement requires two diagonal blocks of positive sizes n1,n2\u22651."
+         },
+         {
+           "case": "zero",
+@@ -127,7 +127,7 @@
+         {
+           "case": "one",
+           "status": "not_applicable",
+-          "reason": "The positive two-block partition forces total order n≥2."
++          "reason": "The positive two-block partition forces total order n\u22652."
+         },
+         {
+           "case": "degenerate",
+@@ -191,7 +191,7 @@
+         {
+           "id": "derivation-1-1",
+           "step": "1.1",
+-          "claim": "Suppose $\\ker M=\\{0\\}$. By [F1], $\\operatorname{rank}(M)=n$; by [F2] the image of $M$ has dimension $n$ in the $n$-dimensional space $\\mathbb C^n$, so $M$ is surjective. It is also injective by the supposition, hence invertible.",
++          "claim": "Suppose $\\ker M=\\{0\\}$. By [F1], $\\operatorname{rank}(M)=n$; by [F2] the image of $M$ has dimension $n$ in the $n$-dimensional space $\\mathbb F^n$, so $M$ is surjective. It is also injective by the supposition, hence invertible.",
+           "inputs": [
+             "given",
+             "F1",
+@@ -223,7 +223,7 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Statement and cover M=0: since n≥1 its kernel contains nonzero vectors."
++          "evidence": "Statement and cover M=0: since n\u22651 its kernel contains nonzero vectors."
+         },
+         {
+           "case": "one",
+@@ -478,7 +478,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Statement and include c=0 in the homogeneity identity and separately restrict projective rescaling to c≠0."
++          "evidence": "Statement and include c=0 in the homogeneity identity and separately restrict projective rescaling to c\u22600."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -895,7 +895,7 @@
+           "fact": "F1",
+           "source": "alg-generalized-hessenberg-triangular-reduction",
+           "source_section": "Definition",
+-          "quote": "Input $A,B\\in\\mathbb F^{n\\times n}$, $n\\ge1$, with\n$\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. All transformations here are exact.\nLet $Q=Z=I_n$.\n\nUse a left Givens factor $L(a,b)$ that sends the column pair $(a,b)^T$ to\n$(\\gamma,0)^T$, with $|\\gamma|=(|a|^2+|b|^2)^{1/2}$; if $a=b=0$, use the\nidentity. Use a right Givens factor $R(a,b)$ that sends the row pair $(a,b)$ to\n$(0,\\eta)$, with $|\\eta|=(|a|^2+|b|^2)^{1/2}$; if $a=b=0$, use the identity.\nThese factors are obtained from\n[[def-real-and-complex-givens-transformations]] and are orthogonal over\n$\\mathbb R$ or unitary over $\\mathbb C$.\n\n1. Triangularise $B$ by left rotations. For $j=1,\\ldots,n$ and, in descending\norder, $i=n,n-1,\\ldots,j+1$, set\n$$L=L(B_{i-1,j},B_{i,j}),\\quad A\\leftarrow LA,\\quad B\\leftarrow LB, \\quad Q\\leftarrow QL^*.$$\n\n2. Reduce $A$ to upper Hessenberg form while restoring triangularity of $B$.\nFor $j=1,\\ldots,n-2$ and, in descending order, $i=n,n-1,\\ldots,j+2$, set\n$$L=L(A_{i-1,j},A_{i,j}),\\quad A\\leftarrow LA,\\quad B\\leftarrow LB, \\quad Q\\leftarrow QL^*,$$\nthen set\n$$R=R(B_{i,i-1},B_{i,i}),\\quad A\\leftarrow AR,\\quad B\\leftarrow BR, \\quad Z\\leftarrow ZR.$$\n\nReturn $Q,Z,H=A,T=B$, where $H$ is upper Hessenberg and $T$ is upper\ntriangular in the senses of\n[[def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices]] and\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]. The outputs are represented by the exact products of\nthe recorded Givens factors; no dense rounded factor is asserted unitary.",
++          "quote": "Input $A,B\\in\\mathbb F^{n\\times n}$, $n\\ge1$, with\n$\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. All transformations here are exact.\nLet $Q=Z=I_n$.\n\nFor a target pair $(a,b)$, define the left factor $L(a,b)$ deterministically. Use $I_2$ if $a=b=0$. Otherwise put $r=(|a|^2+|b|^2)^{1/2}$ and $L=\\begin{pmatrix}c&s\\\\-\\overline s&c\\end{pmatrix}$. Over $\\mathbb R$, take $c=a/r$, $s=b/r$. Over $\\mathbb C$, if $a=0$ take $c=0$, $s=\\overline b/|b|$; otherwise take $\\phi=a/|a|$, $c=|a|/r$, $s=\\phi\\overline b/r$. Thus $L(a,b)(a,b)^T=(\\gamma,0)^T$ with $|\\gamma|=r$. Set $J=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ and define the right factor\n$$R(a,b)=J L(\\overline b,\\overline a)^*J.$$\nThen $(a,b)R(a,b)=(0,\\eta)$ with $|\\eta|=r$; the zero pair again uses identity. These factors are real orthogonal over $\\mathbb R$ or unitary over $\\mathbb C$, as direct multiplication shows in [[thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries]]; the right identity follows by taking adjoints of the left annihilation of $(\\overline b,\\overline a)^T$ and reversing the coordinates. Use their identity embeddings on the two rows or columns specified by each step below.\n1. Triangularise $B$ by left rotations. For $j=1,\\ldots,n$ and, in descending\norder, $i=n,n-1,\\ldots,j+1$, set\n$$L=L(B_{i-1,j},B_{i,j}),\\quad A\\leftarrow LA,\\quad B\\leftarrow LB, \\quad Q\\leftarrow QL^*.$$\n\n2. Reduce $A$ to upper Hessenberg form while restoring triangularity of $B$.\nFor $j=1,\\ldots,n-2$ and, in descending order, $i=n,n-1,\\ldots,j+2$, set\n$$L=L(A_{i-1,j},A_{i,j}),\\quad A\\leftarrow LA,\\quad B\\leftarrow LB, \\quad Q\\leftarrow QL^*,$$\nthen set\n$$R=R(B_{i,i-1},B_{i,i}),\\quad A\\leftarrow AR,\\quad B\\leftarrow BR, \\quad Z\\leftarrow ZR.$$\n\nReturn $Q,Z,H=A,T=B$, where $H$ is upper Hessenberg and $T$ is upper\ntriangular in the senses of\n[[def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices]] and\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]. The outputs are represented by the exact products of\nthe recorded Givens factors; no dense rounded factor is asserted unitary.",
+           "uses": [
+             "1.1",
+             "2.1",
+@@ -1113,7 +1113,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Statement: cover finite roots and the β=0 root at infinity."
++          "evidence": "Statement: cover finite roots and the \u03b2=0 root at infinity."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1197,7 +1197,7 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Statement and allow r=0; the residual bound then forces μ to be an eigenvalue."
++          "evidence": "Statement and allow r=0; the residual bound then forces \u03bc to be an eigenvalue."
+         },
+         {
+           "case": "one",
+@@ -1261,7 +1261,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Definition: N=0 and τ=0 are admitted endpoints; the finite budget returns a declared status."
++          "evidence": "Definition: N=0 and \u03c4=0 are admitted endpoints; the finite budget returns a declared status."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1346,6 +1346,7 @@
+           "quote": "Let $T:V\\to V$ be a linear operator on a finite-dimensional vector space over\na field $F$. Then $T$ is invertible if and only if $\\det(T)\\neq0$.",
+           "uses": [
+             "2.2",
++            "3.1",
+             "4.1",
+             "6.1"
+           ]
+@@ -1443,11 +1444,12 @@
+         {
+           "id": "derivation-3-1",
+           "step": "3.1",
+-          "claim": "Apply [F5] to obtain orthonormal bases $z_1,z_2$ of $X$ and $q_1,q_2$ of $Y$, choosing $q_1,q_2$ by Gram–Schmidt on $Bz_1,Bz_2$. Since the two images are independent, the leading matrix $B_{11}=Q_1^TBZ_1$ is upper triangular with nonzero diagonal and hence invertible. Extend these bases by orthonormal bases of $Y^\\perp$ and $X^\\perp$ using [F6]. In these full bases, the first two columns of both transformed matrices are supported in the first two rows. Let $P$ be the invertible change-of-basis matrix from $(x,y)$ to $(z_1,z_2)$. The equations in step 2.2 give $A[z_1\\ z_2]=B[z_1\\ z_2]C$, where $C=P^{-1}\\begin{pmatrix}a&b\\\\-b&a\\end{pmatrix}P$. Thus the leading blocks satisfy $A_{11}=B_{11}C$, and $C$ is similar to $\\begin{pmatrix}a&b\\\\-b&a\\end{pmatrix}$. Consequently $\\det(A_{11}-\\mu B_{11}) =\\det(B_{11})\\det(C-\\mu I) =\\det(B_{11})\\bigl((a-\\mu)^2+b^2\\bigr)$ is a nonzero polynomial with roots $a\\pm ib$.",
++          "claim": "Apply [F5] to obtain orthonormal bases $z_1,z_2$ of $X$ and $q_1,q_2$ of $Y$, choosing $q_1,q_2$ by Gram\u2013Schmidt on $Bz_1,Bz_2$. The restriction $B|_X:X\\to Y$ sends a basis to the independent pair $Bz_1,Bz_2$ and is therefore an isomorphism. Its matrix in these bases is $B_{11}=Q_1^TBZ_1$, so $B_{11}$ is invertible and [F7] gives $\\det(B_{11})\\ne0$; the Gram\u2013Schmidt choice makes this matrix upper triangular. Extend these bases by orthonormal bases of $Y^\\perp$ and $X^\\perp$ using [F6]. In these full bases, the first two columns of both transformed matrices are supported in the first two rows. Let $P$ be the invertible change-of-basis matrix from $(x,y)$ to $(z_1,z_2)$. The equations in step 2.2 give $A[z_1\\ z_2]=B[z_1\\ z_2]C$, where $C=P^{-1}\\begin{pmatrix}a&b\\\\-b&a\\end{pmatrix}P$. Thus the leading blocks satisfy $A_{11}=B_{11}C$, and $C$ is similar to $\\begin{pmatrix}a&b\\\\-b&a\\end{pmatrix}$. Consequently $\\det(A_{11}-\\mu B_{11}) =\\det(B_{11})\\det(C-\\mu I) =\\det(B_{11})\\bigl((a-\\mu)^2+b^2\\bigr)$ is a nonzero polynomial with roots $a\\pm ib$.",
+           "inputs": [
+             "step 2.2",
+             "F5",
+             "F6",
++            "F7",
+             "F11",
+             "algebra",
+             "construct"
+@@ -1514,12 +1516,12 @@
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Statement: treats β=0 as the infinite-eigenvalue branch and regularity excludes a common kernel."
++          "evidence": "Statement: treats \u03b2=0 as the infinite-eigenvalue branch and regularity excludes a common kernel."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Statement: treat β=0 separately from β≠0."
++          "evidence": "Statement: treat \u03b2=0 separately from \u03b2\u22600."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1907,7 +1909,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Example: Verification checks the projective endpoint β=0."
++          "evidence": "Example: Verification checks the projective endpoint \u03b2=0."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1988,7 +1990,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Example: Verification checks the projective endpoint β=0."
++          "evidence": "Example: Verification checks the projective endpoint \u03b2=0."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -2229,7 +2231,7 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Statement and proof 1.1–1.2: source identity branches and exact zero targets; pure tolerance deflations are separate."
++          "evidence": "Statement and proof 1.1\u20131.2: source identity branches and exact zero targets; pure tolerance deflations are separate."
+         },
+         {
+           "case": "one",
+@@ -2264,4 +2266,4 @@
+       ]
+     }
+   }
+-}
++}

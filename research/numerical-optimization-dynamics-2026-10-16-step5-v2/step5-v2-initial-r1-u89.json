@@ -1,0 +1,395 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "89",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-one-dimensional-zero-boundary-poincare",
+      "model": "gpt-6-luna",
+      "context_sha256": "037d38d522af56408644d46b1c6c7a4822c20a878b261da8aa8d3a794cafd2f5",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Step 1.1 used the Darboux FTC directly inside Lebesgue Holder estimates. Added the continuous-integrability and Riemann–Lebesgue equality suppliers, extended the test function smoothly by zero to the endpoints, and explicitly transferred the derivative integral before applying Holder. Closure approximation controls both L2 components within epsilon and yields the stated norm bounds; the Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-geometry-lift-and-tensor-discrepancy",
+      "model": "gpt-6-luna",
+      "context_sha256": "4ec55d0cb05e54d0f7bae0368927705d4c3db2dacc4cda4da1f0303ae7568ef4",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "A C1 diffeomorphism need not make B_h bounded: Phi(y)=log(y), A=1 gives B_h=y. Already v(y)=log(1+y) has square-integrable gradient on (0,infinity) but infinite B_h-energy, since y/(1+y)^2 has divergent integral. Defined the lifted form on finite-energy pairs, with weighted Cauchy–Schwarz and Holder guaranteeing an integrable cross density; form defects require both cross densities integrable. Retained arbitrary diffeomorphisms and the tensor formula, and carried the existing change-of-variables Countable Choice assumption explicitly.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+      "model": "gpt-6-luna",
+      "context_sha256": "e49aabd45c803b63d81d9063dcaf770333cff4f013d2172f0e994ad832862665",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The discrete map was only required to satisfy a bound and diagonal coercivity. On R, a_h(v,w)=c(v)vw with c(v)=1 for |v|<=1 and 2 otherwise has bound 2 and coercivity 1, but F_h(w)=3w/2 has no solution. Added explicit sesquilinearity (real bilinearity) with matching slot conventions for both forms. Lax–Milgram now applies to the closed finite-dimensional subspace, and first-slot linearity licenses the residual identity; triangle inequality and the nonzero-error division give the unchanged estimate.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-second-strang-lemma-for-nonconforming-galerkin",
+      "model": "gpt-6-luna",
+      "context_sha256": "e34a3ed1178af7f776462c76ddb9a79ba96d342dabefafc19cee8053f06a1851",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The displayed supremum omitted V_h={0}, although A2 imports the zero convention from the framework. Made that convention explicit. Review also found that the extension definition only imposes agreement and a bound, not sesquilinearity: the nonlinear c(v)vw example from first Strang is permitted when V=V_h=R and defeats existence. Explicitly required exact and extended forms to be sesquilinear, with matching slot conventions. Their restriction now licenses discrete Lax–Milgram and the first-slot residual decomposition; division, triangle inequality, infimum, and uniform consequences then hold, including the zero space.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-nonconforming-residual-breaks-galerkin-orthogonality",
+      "model": "gpt-6-luna",
+      "context_sha256": "32fe62994e0f703150f20ce0a9cc6d4db24d6bcf79c4e05b9496b0bf07a894e8",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The two closed-cell formulas assigned different midpoint values, e.g. phi_L had values 1 and 0 at 1/2. Specified disjoint cells [0,1/2] and (1/2,1], using the left midpoint value. This nonfatal representative ambiguity affects neither integral nor cellwise slope after the convention is supplied. Verified the norm formulas 2(c_L^2+c_R^2) and (c_L^2+c_R^2)/6, common space X_h=L2, bilinear extension, bounded loads, Fubini identity F(h)=integral h(1-3t^2) on mean-zero V, and residual 1/2-3/4=-1/4 with norm sqrt(2). Countable Choice is now explicit in the Example as already required by its Given block.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-one-dimensional-zero-boundary-poincare",
+      "disposition": "repaired",
+      "post_sha256": "8427555a830afa9e9411e16b078d757357b68025c799a706705c9b13fcd19778",
+      "review_context_sha256": "af631a9d8164fac172cef9b559a8435ac18cf5035b21777d183abe7d013c5856",
+      "reason": "Step 1.1 used the Darboux FTC directly inside Lebesgue Holder estimates. Added the continuous-integrability and Riemann–Lebesgue equality suppliers, extended the test function smoothly by zero to the endpoints, and explicitly transferred the derivative integral before applying Holder. Closure approximation controls both L2 components within epsilon and yields the stated norm bounds; the Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-geometry-lift-and-tensor-discrepancy",
+      "disposition": "repaired",
+      "post_sha256": "7112d957c218cc8e2e4170ed53dab883b6f363d9a5a2cca82c26a18f409b4bd6",
+      "review_context_sha256": "a49271c7ceb8d22a1080469b7e426bd4e3773a7cbc071b960fbcac487f703976",
+      "reason": "A C1 diffeomorphism need not make B_h bounded: Phi(y)=log(y), A=1 gives B_h=y. Already v(y)=log(1+y) has square-integrable gradient on (0,infinity) but infinite B_h-energy, since y/(1+y)^2 has divergent integral. Defined the lifted form on finite-energy pairs, with weighted Cauchy–Schwarz and Holder guaranteeing an integrable cross density; form defects require both cross densities integrable. Retained arbitrary diffeomorphisms and the tensor formula, and carried the existing change-of-variables Countable Choice assumption explicitly.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+      "disposition": "repaired",
+      "post_sha256": "b162752eb436534ac4e57e8a52e908f093512c65289d51ee97f1c510c3896a5e",
+      "review_context_sha256": "7ac40289f60c92e83a0db19e60494f5a2c16d1ce5eee268f00c0f0b9621aefe5",
+      "reason": "The discrete map was only required to satisfy a bound and diagonal coercivity. On R, a_h(v,w)=c(v)vw with c(v)=1 for |v|<=1 and 2 otherwise has bound 2 and coercivity 1, but F_h(w)=3w/2 has no solution. Added explicit sesquilinearity (real bilinearity) with matching slot conventions for both forms. Lax–Milgram now applies to the closed finite-dimensional subspace, and first-slot linearity licenses the residual identity; triangle inequality and the nonzero-error division give the unchanged estimate.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-second-strang-lemma-for-nonconforming-galerkin",
+      "disposition": "repaired",
+      "post_sha256": "a780207a8e98e7dc903e68b20b35c4884f87368a1dba06782be7193974ca926c",
+      "review_context_sha256": "f1c69a8d36c6dbf87341da38b87f86cca0e16c9ec7abdca4dd68b920eaf3922e",
+      "reason": "The displayed supremum omitted V_h={0}, although A2 imports the zero convention from the framework. Made that convention explicit. Review also found that the extension definition only imposes agreement and a bound, not sesquilinearity: the nonlinear c(v)vw example from first Strang is permitted when V=V_h=R and defeats existence. Explicitly required exact and extended forms to be sesquilinear, with matching slot conventions. Their restriction now licenses discrete Lax–Milgram and the first-slot residual decomposition; division, triangle inequality, infimum, and uniform consequences then hold, including the zero space.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-nonconforming-residual-breaks-galerkin-orthogonality",
+      "disposition": "repaired",
+      "post_sha256": "5d47c1bd42d9f29e0847634b3a077d896b6d3829cd61cbdba89d39411c6849a8",
+      "review_context_sha256": "01930dd69dcc81c270176bc3bd850a143487ed097c8717d656abba7d92bda79c",
+      "reason": "The two closed-cell formulas assigned different midpoint values, e.g. phi_L had values 1 and 0 at 1/2. Specified disjoint cells [0,1/2] and (1/2,1], using the left midpoint value. This nonfatal representative ambiguity affects neither integral nor cellwise slope after the convention is supplied. Verified the norm formulas 2(c_L^2+c_R^2) and (c_L^2+c_R^2)/6, common space X_h=L2, bilinear extension, bounded loads, Fubini identity F(h)=integral h(1-3t^2) on mean-zero V, and residual 1/2-3/4=-1/4 with norm sqrt(2). Countable Choice is now explicit in the Example as already required by its Given block.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-geometry-tensor-gap-bounds-cellwise-form-defect",
+    "cor-midpoint-quadrature-strang-error-for-p1",
+    "cor-shape-regular-fe-strang-error-bound",
+    "ex-midpoint-underintegrated-p2-stiffness-loses-coercivity",
+    "lem-fem-control-gradient-residual-bound",
+    "thm-elliptic-fe-gradient-error-in-energy-norms",
+    "thm-p0-control-fem-o-h-error",
+    "thm-variational-fem-control-o-h2-error",
+    "ex-nonconforming-residual-breaks-galerkin-orthogonality"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-one-dimensional-zero-boundary-poincare",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "finding": "Step 1.1 used the Darboux FTC directly inside Lebesgue Holder estimates. Added the continuous-integrability and Riemann–Lebesgue equality suppliers, extended the test function smoothly by zero to the endpoints, and explicitly transferred the derivative integral before applying Holder. Closure approximation controls both L2 components within epsilon and yields the stated norm bounds; the Statement is unchanged.",
+      "resolution": "Completed the assigned local repair; current guard and context are recorded in reviews. Independent rejudgment remains controller-owned.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-geometry-lift-and-tensor-discrepancy",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "finding": "A C1 diffeomorphism need not make B_h bounded: Phi(y)=log(y), A=1 gives B_h=y. Already v(y)=log(1+y) has square-integrable gradient on (0,infinity) but infinite B_h-energy, since y/(1+y)^2 has divergent integral. Defined the lifted form on finite-energy pairs, with weighted Cauchy–Schwarz and Holder guaranteeing an integrable cross density; form defects require both cross densities integrable. Retained arbitrary diffeomorphisms and the tensor formula, and carried the existing change-of-variables Countable Choice assumption explicitly.",
+      "resolution": "Completed the assigned local repair; current guard and context are recorded in reviews. Independent rejudgment remains controller-owned.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "finding": "The discrete map was only required to satisfy a bound and diagonal coercivity. On R, a_h(v,w)=c(v)vw with c(v)=1 for |v|<=1 and 2 otherwise has bound 2 and coercivity 1, but F_h(w)=3w/2 has no solution. Added explicit sesquilinearity (real bilinearity) with matching slot conventions for both forms. Lax–Milgram now applies to the closed finite-dimensional subspace, and first-slot linearity licenses the residual identity; triangle inequality and the nonzero-error division give the unchanged estimate.",
+      "resolution": "Completed the assigned local repair; current guard and context are recorded in reviews. Independent rejudgment remains controller-owned.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-second-strang-lemma-for-nonconforming-galerkin",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "finding": "The displayed supremum omitted V_h={0}, although A2 imports the zero convention from the framework. Made that convention explicit. Review also found that the extension definition only imposes agreement and a bound, not sesquilinearity: the nonlinear c(v)vw example from first Strang is permitted when V=V_h=R and defeats existence. Explicitly required exact and extended forms to be sesquilinear, with matching slot conventions. Their restriction now licenses discrete Lax–Milgram and the first-slot residual decomposition; division, triangle inequality, infimum, and uniform consequences then hold, including the zero space.",
+      "resolution": "Completed the assigned local repair; current guard and context are recorded in reviews. Independent rejudgment remains controller-owned.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-nonconforming-residual-breaks-galerkin-orthogonality",
+      "severity": "nonfatal",
+      "finding": "The two closed-cell formulas assigned different midpoint values, e.g. phi_L had values 1 and 0 at 1/2. Specified disjoint cells [0,1/2] and (1/2,1], using the left midpoint value. This nonfatal representative ambiguity affects neither integral nor cellwise slope after the convention is supplied. Verified the norm formulas 2(c_L^2+c_R^2) and (c_L^2+c_R^2)/6, common space X_h=L2, bilinear extension, bounded loads, Fubini identity F(h)=integral h(1-3t^2) on mean-zero V, and residual 1/2-3/4=-1/4 with norm sqrt(2). Countable Choice is now explicit in the Example as already required by its Given block.",
+      "resolution": "Completed the assigned local repair; current guard and context are recorded in reviews. Independent rejudgment remains controller-owned.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed": [
+      {
+        "id": "lem-one-dimensional-zero-boundary-poincare",
+        "claim": "For real H1_0(0,1), ||v||2 <= ||v prime||2 and ||v||H1 <= sqrt(2)||v prime||2 under Countable Choice.",
+        "sources": [
+          "items/thm-ftc-second-part.md:Statement",
+          "items/thm-continuous-implies-integrable.md:Statement",
+          "items/thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral.md:Statement"
+        ],
+        "validation": "Required review-contexts command exited 0 immediately after review, before another supplier edit; final focused checks all passed.",
+        "next_action": "Controller collection and independent rejudgment; no assigned repair remains."
+      },
+      {
+        "id": "def-geometry-lift-and-tensor-discrepancy",
+        "claim": "Arbitrary C1 lift; finite weighted energies define the lifted form, and a form defect requires both integrable cross densities.",
+        "sources": [
+          "items/thm-holder-inequality-for-integrals.md:Statement",
+          "items/lem-geometry-tensor-gap-bounds-cellwise-form-defect.md:Statement and Proof 1.1–3.1"
+        ],
+        "consumers": [
+          {
+            "id": "lem-geometry-tensor-gap-bounds-cellwise-form-defect",
+            "path": "items/lem-geometry-tensor-gap-bounds-cellwise-form-defect.md",
+            "affected_use": "Statement imports the geometry setting; Proof 1.1 obtains finite pulled-back energies by change of variables for C1 physical functions with L2 gradients. Proof 2.1 obtains implemented cross integrability from finite tensor discrepancies. Proof 1.2 supplies an L-infinity tensor bound for every Z_h vector in the stability conclusion.",
+            "disposition": "unchanged_sound",
+            "reason": "These arguments establish the newly explicit finite-energy domain for all evaluated forms. Importing the geometry setting also supplies the already-required Countable Choice assumption noted by the Step-4 reader. No consumer edit or further propagation is necessary.",
+            "route": "frontier-owner"
+          }
+        ],
+        "validation": "Required review-contexts command exited 0 immediately after review, before another supplier edit; final focused checks all passed.",
+        "next_action": "Controller collection and independent rejudgment; no assigned repair remains."
+      },
+      {
+        "id": "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+        "claim": "Conforming first Strang with bounded coercive sesquilinear exact/discrete forms, matching loads, and Countable Choice.",
+        "sources": [
+          "items/thm-lax-milgram.md:Statement",
+          "items/def-bounded-coercive-and-symmetric-sesquilinear-forms.md:Definition",
+          "items/cor-finite-dimensional-subspaces-are-closed.md:Statement"
+        ],
+        "consumers": [
+          {
+            "id": "cor-midpoint-quadrature-strang-error-for-p1",
+            "path": "items/cor-midpoint-quadrature-strang-error-for-p1.md",
+            "affected_use": "Proof 2.1 applies first Strang to a(v,w)=integral A v prime w prime and the finite midpoint sum in Proof 1.2; both are real bilinear by construction.",
+            "disposition": "unchanged_sound",
+            "reason": "The specific bilinear construction or explicit all-hypotheses premise supplies the clarified form requirement; no consumer Statement/Definition change is necessary.",
+            "route": "frontier-owner"
+          },
+          {
+            "id": "cor-shape-regular-fe-strang-error-bound",
+            "path": "items/cor-shape-regular-fe-strang-error-bound.md",
+            "affected_use": "Statement explicitly requires the exact/discrete variational problems to satisfy first Strang hypotheses; Proof 3.1 applies that result at the interpolant. The imported hypotheses now explicitly include form linearity.",
+            "disposition": "unchanged_sound",
+            "reason": "The specific bilinear construction or explicit all-hypotheses premise supplies the clarified form requirement; no consumer Statement/Definition change is necessary.",
+            "route": "frontier-owner"
+          },
+          {
+            "id": "ex-midpoint-underintegrated-p2-stiffness-loses-coercivity",
+            "path": "items/ex-midpoint-underintegrated-p2-stiffness-loses-coercivity.md",
+            "affected_use": "Example and F2 use only the requirement alpha_h>0, and Verification 3.1 proves this fails for the bilinear one-panel midpoint form. Sesquilinearity clarification does not change this obstruction.",
+            "disposition": "unchanged_sound",
+            "reason": "The specific bilinear construction or explicit all-hypotheses premise supplies the clarified form requirement; no consumer Statement/Definition change is necessary.",
+            "route": "frontier-owner"
+          },
+          {
+            "id": "lem-fem-control-gradient-residual-bound",
+            "path": "items/lem-fem-control-gradient-residual-bound.md",
+            "affected_use": "Statement invokes first Strang for the primal and transposed variational problems; Proof 1.1 applies the estimate twice. These are bilinear forms in the linear elliptic-control setting; transposition preserves bilinearity.",
+            "disposition": "unchanged_sound",
+            "reason": "The specific bilinear construction or explicit all-hypotheses premise supplies the clarified form requirement; no consumer Statement/Definition change is necessary.",
+            "route": "frontier-owner"
+          },
+          {
+            "id": "thm-elliptic-fe-gradient-error-in-energy-norms",
+            "path": "items/thm-elliptic-fe-gradient-error-in-energy-norms.md",
+            "affected_use": "Statement offers first Strang as a supplier of E_u,E_p; A1 expressly assumes both problems satisfy all supplier hypotheses. Proof 1.1 uses the transposed form, whose bilinearity is inherited from the linear-operator variational setting.",
+            "disposition": "unchanged_sound",
+            "reason": "The specific bilinear construction or explicit all-hypotheses premise supplies the clarified form requirement; no consumer Statement/Definition change is necessary.",
+            "route": "frontier-owner"
+          },
+          {
+            "id": "thm-p0-control-fem-o-h-error",
+            "path": "items/thm-p0-control-fem-o-h-error.md",
+            "affected_use": "The only first-Strang reference is retained through the gradient-residual and approximation/defect premises; Proof 1.1 uses the separately assumed uniform gradient error. No use of nonlinear forms or existence from coercivity alone occurs.",
+            "disposition": "unchanged_sound",
+            "reason": "The specific bilinear construction or explicit all-hypotheses premise supplies the clarified form requirement; no consumer Statement/Definition change is necessary.",
+            "route": "frontier-owner"
+          },
+          {
+            "id": "thm-variational-fem-control-o-h2-error",
+            "path": "items/thm-variational-fem-control-o-h2-error.md",
+            "affected_use": "Remarks F4 cites first Strang to retain all form/load defects; Proof 1.1 uses an explicit uniform L2 error premise for exact conforming Galerkin state and adjoint spaces. The clarification does not invalidate this conditional use.",
+            "disposition": "unchanged_sound",
+            "reason": "The specific bilinear construction or explicit all-hypotheses premise supplies the clarified form requirement; no consumer Statement/Definition change is necessary.",
+            "route": "frontier-owner"
+          }
+        ],
+        "validation": "Required review-contexts command exited 0 immediately after review, before another supplier edit; final focused checks all passed.",
+        "next_action": "Controller collection and independent rejudgment; no assigned repair remains."
+      },
+      {
+        "id": "thm-second-strang-lemma-for-nonconforming-galerkin",
+        "claim": "Second Strang on a common comparison space with a bounded sesquilinear extension, discrete coercivity, matching loads and explicit zero residual for V_h={0}.",
+        "sources": [
+          "items/thm-lax-milgram.md:Statement",
+          "items/def-variational-crime-error-framework.md:Definition"
+        ],
+        "consumers": [
+          {
+            "id": "ex-nonconforming-residual-breaks-galerkin-orthogonality",
+            "path": "items/ex-nonconforming-residual-breaks-galerkin-orthogonality.md",
+            "affected_use": "F6 and Verification 1.2 use second Strang on X_h=L2, with extension integral g omega_h and a two-dimensional slope space. This integral pairing is real bilinear; V_h is nonzero, so the added zero-space branch never changes its residual.",
+            "disposition": "unchanged_sound_for_this_interface",
+            "reason": "All clarified supplier requirements hold directly for the integral pairing and bounded broken load. The assigned midpoint convention is a separate repair recorded in this same batch.",
+            "route": "frontier-owner"
+          }
+        ],
+        "validation": "Required review-contexts command exited 0 immediately after review, before another supplier edit; final focused checks all passed.",
+        "next_action": "Controller collection and independent rejudgment; no assigned repair remains."
+      },
+      {
+        "id": "ex-nonconforming-residual-breaks-galerkin-orthogonality",
+        "claim": "Mean-zero exact derivative solution g_u=1-3x^2; broken two-cell slope test has residual -1/4 and norm sqrt(2).",
+        "sources": [
+          "items/thm-tonelli-and-fubini-for-completed-product-measures.md:Statement",
+          "items/lem-l-two-with-the-integral-pairing-is-a-hilbert-space.md:Statement",
+          "items/thm-the-lebesgue-integral-respects-almost-everywhere-equality.md:Statement",
+          "items/thm-second-strang-lemma-for-nonconforming-galerkin.md:Statement and Proof"
+        ],
+        "validation": "Required review-contexts command exited 0 immediately after review, before another supplier edit; final focused checks all passed.",
+        "next_action": "Controller collection and independent rejudgment; no assigned repair remains."
+      }
+    ],
+    "remaining": [],
+    "repair_complete": true,
+    "unresolved_obligations": [],
+    "independent_review_claimed": false,
+    "published_consumer_ledger": {
+      "proposed_updates": [],
+      "reason": "All nine discovered direct item consumers belong to the frozen draft frontier. No published item was changed, and no potentially defective published consumer was identified in these interface examinations."
+    },
+    "page_examinations": [
+      {
+        "path": "library/numerical-pdes-and-spatial-discretization/variational-crimes-and-strang-lemmas.md",
+        "affected_use": "The page places both Strang theorems and the lift definition, describes bounded extensions, and says a lift alone supplies neither a geometry rate nor completeness.",
+        "disposition": "unchanged_sound",
+        "reason": "Explicit sesquilinearity and the finite-energy domain preserve these page claims; no page edit is needed."
+      },
+      {
+        "path": "library/numerical-pdes-and-spatial-discretization/variational-crimes-and-strang-lemmas-examples.md",
+        "affected_use": "The second-example summary reports the two-cell residual -1/4 and failure of the conforming Cea hypothesis.",
+        "disposition": "unchanged_sound",
+        "reason": "The single midpoint representative convention leaves the computed integrals and nonconforming slope field unchanged."
+      }
+    ],
+    "interface_changes": {
+      "changed": [
+        "def-geometry-lift-and-tensor-discrepancy:Definition",
+        "thm-first-strang-lemma-for-conforming-perturbed-galerkin:Statement",
+        "thm-second-strang-lemma-for-nonconforming-galerkin:Statement"
+      ],
+      "unchanged": [
+        "lem-one-dimensional-zero-boundary-poincare:Statement"
+      ],
+      "other": "The example has only Example and Verification sections; neither a Statement nor a Definition was changed. No new prerequisite was authored."
+    },
+    "metadata_repairs": [
+      "Added the two Riemann-integrability bridge dependencies to the Poincare manifest row, with F6 citation/derivation contract coverage. Corrected the contract risk text that incorrectly called the constant 1 sharp.",
+      "Added Holder to the geometry manifest dependencies and updated its finite-energy/Countable Choice summary.",
+      "Updated first/second Strang manifest summaries and regenerated only assigned proof-contract citations/derivations. The example contract now quotes the corrected second-Strang interface. Shared metadata edits were acquired, reread, checked and released using step5-shared-write-lock."
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-one-dimensional-zero-boundary-poincare.md items/def-geometry-lift-and-tensor-discrepancy.md items/thm-first-strang-lemma-for-conforming-perturbed-galerkin.md items/thm-second-strang-lemma-for-nonconforming-galerkin.md items/ex-nonconforming-residual-breaks-galerkin-orthogonality.md",
+        "exit_code": 0,
+        "result": "4 proof-bearing items checked, 0 failing; definition has no phase proof."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-one-dimensional-zero-boundary-poincare.md items/def-geometry-lift-and-tensor-discrepancy.md items/thm-first-strang-lemma-for-conforming-perturbed-galerkin.md items/thm-second-strang-lemma-for-nonconforming-galerkin.md items/ex-nonconforming-residual-breaks-galerkin-orthogonality.md",
+        "exit_code": 0,
+        "result": "5 files; all math and frontmatter parse with actual KaTeX and renderer YAML parser."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-89.proof-contracts.json --strict --items lem-one-dimensional-zero-boundary-poincare,thm-first-strang-lemma-for-conforming-perturbed-galerkin,thm-second-strang-lemma-for-nonconforming-galerkin,ex-nonconforming-residual-breaks-galerkin-orthogonality",
+        "exit_code": 0,
+        "result": "4/4 items checked; 0 errors, 0 warnings."
+      },
+      {
+        "command": "node tools/manifest-deps.mjs research/numerical-optimization-dynamics-2026-10-16-batch-89.pages.json",
+        "exit_code": 0,
+        "result": "15 items; 0 normalized; 0 errors."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-one-dimensional-zero-boundary-poincare.md items/def-geometry-lift-and-tensor-discrepancy.md items/thm-first-strang-lemma-for-conforming-perturbed-galerkin.md items/thm-second-strang-lemma-for-nonconforming-galerkin.md items/ex-nonconforming-residual-breaks-galerkin-orthogonality.md",
+        "exit_code": 0,
+        "result": "Final batched check after all item edits: 5 items, 17 steps, 0 defects."
+      }
+    ]
+  },
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-89.pages.json": "07262dec90b7ee2b22a034c91b429adab58eeb6c36b9a3220788185c559cf8d2",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-89.proof-contracts.json": "1cbbe1d407037f71991d4e559c6b335c401d760122da4d01b8780b24bd805b14"
+  }
+}

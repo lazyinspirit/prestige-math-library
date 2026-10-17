@@ -1,0 +1,213 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "23",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-rectangular-grid-and-dirichlet-flux-stencil",
+      "model": "gpt-6-luna",
+      "context_sha256": "34422404145bdce2d5dc9ac7d131f72a99213de3bfee706d022ea4230cca3478",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The unconditional positive-operator description is false: on the unit square with N_x=N_y=2, a=-1 and the sole interior value v_11=1 with zero boundary, the displayed stencil gives (A_h^a v)_11=-16 and <A_h^a v,v>_h=-4. The formula itself defines a valid real divergence-form operator for arbitrary face coefficients. Removed only the unsupported word positive, preserving the manifest contract and all mathematical formulas.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-rectangular-grid-and-dirichlet-flux-stencil",
+      "disposition": "repaired",
+      "post_sha256": "ca95a96292b21e670f63821c62de2af7ef22b47918351d9faf8d336bb3c7307b",
+      "review_context_sha256": "f5ce00dc83aaa0e0cc0dc7306efd81805d4ba34e7f0f42f903d48f9e849ecc71",
+      "reason": "Checked the complete definition, its empty prerequisite list, owning manifest, page and direct uses. Positive grid weights make the interior form an inner product; restriction to full grids is correctly only semidefinite. Edge ranges supply both adjacent faces at every interior node, the negative-divergence stencil and energy have matching coefficients and mesh weights, and the a=1 specialization is the five-point negative Laplacian. Removing the false blanket positivity descriptor leaves all formulas, boundary instructions and the arbitrary-coefficient interface intact. No AC or new prerequisite is required. This is review of my repair, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+    "lem-variable-coefficient-flux-stencil-second-order-consistency",
+    "ex-variable-coefficient-flux-and-expanded-stencils",
+    "ex-five-point-laplacian-is-exact-on-quadratics",
+    "def-parabolic-theta-finite-difference-scheme",
+    "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+    "thm-elliptic-finite-difference-l2-error-on-rectangles"
+  ],
+  "downstream_reviews": [
+    {
+      "id": "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+      "path": "items/lem-discrete-summation-by-parts-poincare-and-inverse-bound.md",
+      "affected_use": "Statement and F1; Proof 1.1, 1.2, 2.1, 4.1",
+      "reason": "The telescoping identity and Poincare bound use only the unchanged stencil, differences and grid norm; coercivity explicitly assumes every face is at least a_0>0. The Given paragraph still calls the arbitrary-coefficient stencil positive; its owner should delete that adjective in a proof-only correction.",
+      "disposition": "owner_proof_only_repair",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-variable-coefficient-flux-stencil-second-order-consistency",
+      "path": "items/lem-variable-coefficient-flux-stencil-second-order-consistency.md",
+      "affected_use": "Statement, F1; Proof 1.1 and 4.1",
+      "reason": "The exact midpoint formula and negative-divergence sign are unchanged; a>=a_0>0 is explicit, and the Taylor calculation does not infer positivity from the definition.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-variable-coefficient-flux-and-expanded-stencils",
+      "path": "items/ex-variable-coefficient-flux-and-expanded-stencils.md",
+      "affected_use": "Given, F1; Verification 1.1 and 2.1",
+      "reason": "The example uses the unchanged midpoint flux products with a=1+x^2; positive x-direction describes orientation, not a quadratic-form claim.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-five-point-laplacian-is-exact-on-quadratics",
+      "path": "items/ex-five-point-laplacian-is-exact-on-quadratics.md",
+      "affected_use": "Given, F1; Verification 1.1 and 3.1",
+      "reason": "Here a=1 explicitly. The unchanged formula gives the exact second differences; uniqueness comes from the separate positive-face inverse lemma F2.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-parabolic-theta-finite-difference-scheme",
+      "path": "items/def-parabolic-theta-finite-difference-scheme.md",
+      "affected_use": "Definition, two-dimensional Dirichlet paragraph",
+      "reason": "Only rectangular nodes and the weighted interior inner product are imported. Positive directional diffusivities and the anisotropic heat stencil are defined locally.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+      "path": "items/lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint.md",
+      "affected_use": "Statement, F1; Proof 1.1 through 3.1",
+      "reason": "The grid inner product and directional energy sums are unchanged. Positivity is derived from squares with explicit kappa_x,kappa_y>0, using the separate telescoping identities.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-elliptic-finite-difference-l2-error-on-rectangles",
+      "path": "items/thm-elliptic-finite-difference-l2-error-on-rectangles.md",
+      "affected_use": "Statement, F1; Proof 1.1 and 2.1",
+      "reason": "The stencil formula and norm are unchanged. The theorem explicitly assumes a>=a_0>0 and obtains invertibility and its bound from F2, rather than unconditional positivity in the definition.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-rectangular-grid-and-dirichlet-flux-stencil",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "reason": "The arbitrary-coefficient operator was incorrectly called positive; the exact one-node a=-1 witness has weighted quadratic form -4. Removed the unsupported adjective without changing the stencil or restricting coefficients.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+      "severity": "nonfatal",
+      "route": "frontier-owner",
+      "affected_use": "Facts & Assumptions, Given: the positive flux operator A_h^a; no face sign condition accompanies the general summation-by-parts identity.",
+      "invalidated_claim": "Only the generic positive descriptor is false; the identity, Poincare inequality and conditional inverse bound remain valid.",
+      "minimality": "Delete positive in the Given paragraph; the Statement and all proof calculations can remain unchanged. Do not propagate beyond this unchanged Statement.",
+      "reason": "The same N_x=N_y=2, a=-1 zero-boundary witness gives a negative quadratic form. The proof invokes positivity only at step 4.1 under its explicit face lower bound, so this is a proof-introduction correction outside the assigned item scope.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "definition_change": {
+      "before": "The positive divergence-form Dirichlet operator on interior nodes is",
+      "after": "The divergence-form Dirichlet operator on interior nodes is"
+    },
+    "contract": "Owning manifest requests a real divergence-form operator and positivity only for the weighted inner product, not for arbitrary face coefficients. No manifest or page wording needs correction. There is no proof contract for this definition.",
+    "contract_quote_updates": "Under shared-write lock step5-v2-initial-r1-u23, reread the owning batch-23 contract, replaced exactly five complete-Definition quotation clauses, checked strict contracts successfully, and released the lock. No other contract bytes changed.",
+    "published_ledger": "No direct published consumers were found; all seven direct consumers are draft frontier items. No published-consumer ledger update is proposed.",
+    "source_basis": "Familiar finite-difference algebra checked directly against the complete current definition and consumer arguments. No external source was consulted, and no historical source-reading claim is adopted.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-rectangular-grid-and-dirichlet-flux-stencil.md --json",
+        "exit_code": 0,
+        "result": "1 file, 0 phase proofs checked, 0 failures; definition not-applicable"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-rectangular-grid-and-dirichlet-flux-stencil.md --json",
+        "exit_code": 0,
+        "result": "1 file, 0 errors, 0 warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-rectangular-grid-and-dirichlet-flux-stencil.md",
+        "exit_code": 0,
+        "result": "1 item, 0 numbered steps, 0 defects; run after the final item edit"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-23.proof-contracts.json --strict --json",
+        "exit_code": 0,
+        "result": "7 proof-bearing contracts checked; ok=true, 0 errors, 0 warnings"
+      }
+    ],
+    "next_action": "Handoff to the engine for ordinary owner consumer routing, separate current independent rejudgment and certification; no workers, gates, judgments or round transitions were launched.",
+    "repair_complete": true,
+    "page_review": {
+      "path": "library/numerical-pdes-and-spatial-discretization/elliptic-finite-difference-methods.md",
+      "affected_use": "Page lists the definition and describes a scalar divergence-form stencil with midpoint coefficients; inverse stability is attributed to summation by parts and Poincare.",
+      "disposition": "unchanged_sound",
+      "reason": "The page makes no arbitrary-coefficient positivity assertion, and all displayed formulas and conditional stability claims are preserved."
+    },
+    "cross_owner_metadata": [
+      {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-37.proof-contracts.json",
+        "id": "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+        "affected_use": "Citation of def-rectangular-grid-and-dirichlet-flux-stencil, source_section Definition, retains the changed positive-operator introductory clause in its 2033-character quotation.",
+        "invalidated_claim": "The quote is no longer a verbatim current Definition excerpt; the parabolic mathematical claim remains sound.",
+        "minimality": "The batch-37 owner should synchronize only the quoted clause by removing positive; no item Statement or Definition repair is needed.",
+        "route": "frontier-owner",
+        "disposition": "owner_metadata_refresh"
+      }
+    ],
+    "unresolved_mathematics": [],
+    "handoff_validation": {
+      "canonical_input_hash_matches": true,
+      "item_guard_matches": true,
+      "before_guard_recovered_by_reinserting_removed_word": true,
+      "exact_current_owning_contract_quotes": 5,
+      "assigned_decisions": 1,
+      "assigned_reviews": 1,
+      "direct_consumers": 7,
+      "note": "The task input hash is the workflow digest of parsed JSON, not a raw-file digest; verified using the workflow convention after correcting the initial raw-byte comparison."
+    }
+  }
+}

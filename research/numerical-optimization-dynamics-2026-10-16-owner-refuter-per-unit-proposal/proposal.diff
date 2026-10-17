@@ -1,0 +1,153 @@
+--- tools/autopilot/stages/refuter-continuations.mts
++++ tools/autopilot/stages/refuter-continuations.mts
+@@ -2,10 +2,10 @@
+ import { join } from 'node:path';
+ import { createHash } from 'node:crypto';
+ 
+-/** One fresh native read for an owner-reviewed exact coverage-output defect.
++/** One fresh native read per unit for an owner-reviewed exact coverage-output defect.
+  * The immutable archive binds old observations; current guards run only before
+  * dispatch, because the new native report legitimately replaces the old one. */
+-export function refuterContinuations(ctx: any, original: any, beforeDispatch = false): any[] {
++export function refuterContinuations(ctx: any, original: any, beforeDispatch = false, dispatchUnits: string[] | null = null): any[] {
+   const path = join(ctx.repo, 'research', `${ctx.run}-step3-refuter-continuations.json`);
+   if (!existsSync(path)) return [];
+   const row = JSON.parse(readFileSync(path, 'utf8'));
+@@ -20,11 +20,13 @@
+   };
+   if (row.version !== 1 || row.run !== ctx.run || row.authorized_by !== 'owner'
+     || !String(row.authorization ?? '').trim() || !Array.isArray(row.continuations)
+-    || row.continuations.length !== 1) reject();
++    || !row.continuations.length) reject();
+   const units = original.units(ctx).map(String);
++  if (row.continuations.length > units.length
++    || new Set(row.continuations.map((entry: any) => String(entry.unit))).size !== row.continuations.length) reject();
+   for (const entry of row.continuations) {
+     const unit = String(entry.unit), label = `refute-${unit}-coverage-correction-1`;
+-    if (!units.includes(unit) || entry.label !== label || !String(entry.reason ?? '').trim()
++    if (!/^[1-9]\d*$/.test(unit) || !units.includes(unit) || entry.label !== label || !String(entry.reason ?? '').trim()
+       || !Number.isFinite(Date.parse(entry.writers_drained_at))
+       || entry.previous_result?.path !== `research/${ctx.run}-dispatch/refuter-refute-${unit}.result.json`
+       || entry.report_path !== `research/${ctx.run}-refute-${unit}.json`
+@@ -53,7 +55,7 @@
+         || !archive.toString().trimEnd().endsWith(tail)) reject();
+     }
+     bound(entry.task);
+-    if (beforeDispatch) {
++    if (beforeDispatch && (dispatchUnits === null || dispatchUnits.map(String).includes(unit))) {
+       // Any completed fresh attempt, including failure, holds rather than loops.
+       if (existsSync(join(ctx.repo, 'research', `${ctx.run}-dispatch`, `refuter-${label}.result.json`)))
+         throw Error('Step-3 refuter correction already attempted; owner review required');
+@@ -88,10 +90,11 @@
+   const pattern = typeof original.pattern === 'function' ? original.pattern(ctx) : original.pattern;
+   const entries = refuterContinuations(ctx, original);
+   if (!entries.length) return pattern;
+-  const unit = entries[0].unit;
++  const originals = entries.map(entry => `refuter-refute-${entry.unit}\\.result\\.json`).join('|');
++  const corrections = entries.map(entry => `refuter-${entry.label}\\.result\\.json`).join('|');
+   // Exact new stable filename only: attempts and other correction labels cannot
+   // supply coverage. Ordinary sibling-unit results retain their original route.
+-  return new RegExp(`^(?!refuter-refute-${unit}\\.result\\.json$)(?:${pattern.source}|refuter-${entries[0].label}\\.result\\.json)$`, pattern.flags);
++  return new RegExp(`^(?!(?:${originals})$)(?:${pattern.source}|${corrections})$`, pattern.flags);
+ }
+ 
+ /** Applied once by the ordinary Step-3 table; alternate wrappers inherit it. */
+@@ -105,8 +108,11 @@
+         return original.plan(ctx, pending);
+       // Doctor inspects command descriptors; only a real launch checks the
+       // one-attempt budget and the pre-repair current-source guards.
+-      if (!ctx.doctor) refuterContinuations(ctx, original, true);
+-      return original.plan(ctx, pending).map((plan: any) => {
++      const plans = original.plan(ctx, pending);
++      const dispatchUnits = plans.flatMap((plan: any) => plan.covers.map(String))
++        .filter((unit: string) => pending.map(String).includes(unit));
++      if (!ctx.doctor) refuterContinuations(ctx, original, true, dispatchUnits);
++      return plans.map((plan: any) => {
+         const entry = entries.find(e => plan.covers.length === 1 && String(e.unit) === String(plan.covers[0]));
+         return entry ? { ...plan, label: entry.label, task: entry.task.path } : plan;
+       });
+--- tools/autopilot/stages/mathlib.step3.mts
++++ tools/autopilot/stages/mathlib.step3.mts
+@@ -1,7 +1,11 @@
+ // Step 3: independent readers, read-only refuters, routed batch adjudication,
+ // mechanical closure.
+ 
+-import { withRefuterContinuation } from './refuter-continuations.mts';
++// Propagate the parent's reload version so live stage closures cannot retain
++// a cached continuation policy after an explicit native stage reload.
++const continuationURL = new URL('./refuter-continuations.mts', import.meta.url);
++continuationURL.search = new URL(import.meta.url).search;
++const { withRefuterContinuation } = await import(continuationURL.href);
+ import { MODEL_PROFILE_NAMES } from '../../models.mjs';
+ import { MAX_RUN_BATCHES } from '../src/capacity.mjs';
+ import { holdStep3 } from './step3-hold.mts';
+--- /dev/null
++++ tools/autopilot/stages/refuter-continuations.md
+@@ -0,0 +1,67 @@
++# One Step 3 refuter coverage correction per unit
++
++The root-owned version1 `RUN-step3-refuter-continuations.json` may register a
++nonempty set of distinct original refuter units, bounded by the original
++stage's unit count. Units must be valid positive batch IDs present in that
++stage. Each unit has exactly the existing label
++`refute-UNIT-coverage-correction-1`. A second entry for the same unit, another
++correction number, an unrelated unit or an oversized registry is invalid.
++
++Keep every original per-unit authority, successful result, immutable archived
++report, task, observation and attempt history intact. Adding another eligible
++unit does not renew a completed unit's budget. Root archives and authorizes
++registry extensions from genuine native evidence; this adapter creates no
++registry entry, source read, mathematical acceptance or execution receipt.
++Original report findings must not be trimmed, supplemented or relabeled.
++
++All entries' archived authority is always validated: exact original result,
++original raw report/full structured tail or supported clipped suffix, task and
++registration fields. Current pre-dispatch report/scope/subject guards and the
++one-attempt check apply only to the registered units actually selected in the
++current pending dispatch plans. Thus completed correction27 remains validated
++historically but does not block a pending correction83 because its new stable
++result already exists or its canonical report now contains the genuine corrected
++output. Conversely, attempting27 again still holds. Any completed fresh result,
++including a failure, spends that unit's one correction and requires owner
++resolution; adding another unit does not clear it.
++
++The exported `refuterContinuations` retains its original three-argument
++behavior: `beforeDispatch:true` without an explicit selection guards all entries.
++The ordinary stage adapter supplies the selected pending plan coverage as the
++fourth argument. Doctor descriptors do not spend or bypass a dispatch budget.
++Each real plan changes only its registered label and task; role, covers, model,
++output schema, required report, stage IDs and every other plan field remain
++unchanged.
++
++Coverage excludes every registered unit's old original stable result. Each
++exact new stable correction result is admitted separately; attempt filenames,
++other correction numbers and unrelated correction labels supply no coverage.
++Ordinary unregistered sibling units retain their original stable result route.
++A fresh result must still satisfy the native engine's successful result and
++actual artifact/collection requirements; regex membership grants no success.
++
++## Live dependency reload
++
++`mathlib.step3.mts` dynamically imports this adapter with the same search/query
++version it received from its parent import URL. Installing the adapter and this
++small stage import change together prevents a newly versioned Step3 module from
++retaining the old static child policy. The entire stage table and scheduling
++semantics remain otherwise unchanged.
++
++For an already-running strictly supervised run whose watched path is its own
++`.autopilot/RUN` wrapper, root performs its separately authorized wrapper refresh
++after installing/resealing the reviewed source changes. Root verifies the real
++`stages-reloaded` event before retrying the held collection. This document does
++not stop an engine, edit a runtime wrapper, reset counters, reload another run
++or authorize any such action. Future adapter-only edits also need an actual
++new parent Step3 module version; an event alone must not be mistaken for proof
++that an unchanged versioned child import was reevaluated.
++
++Root must recheck current bytes and genuine writer drain when registering a new
++unit. Preserve completed unit27 exactly and append only the genuine unit83
++entry, with original archives/task supplied by its evidence owner. This is one
++fresh exact-scope reread/corrected-attribution opportunity per affected unit,
++not an additional mathematical review stage or a waiver of native collection.
++Mandatory native validation/battery and policy resealing remain root-owned;
++optional tests are waived for this focused repair. No optional tests or gates
++were run while preparing this proposal.

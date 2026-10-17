@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "48",
+  "round": 0,
+  "reviewed_items": [
+    "def-regular-generalized-eigenvalue-pencil",
+    "lem-block-upper-triangular-pencil-determinant-factorizes",
+    "lem-zero-determinant-matrix-has-nonzero-kernel-vector",
+    "def-b-inner-product-and-dual-norm-for-definite-pencil",
+    "alg-generalized-hessenberg-triangular-reduction",
+    "def-generalized-schur-form",
+    "lem-projective-determinant-is-homogeneous-and-scale-invariant",
+    "lem-regular-pencil-has-no-common-kernel-vector",
+    "lem-two-sided-unitary-equivalence-errors-accumulate-for-pencil",
+    "thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis",
+    "prop-generalized-hessenberg-triangular-reduction-preserves-form-and-equivalence",
+    "lem-regular-pencil-has-projective-eigenvalue",
+    "thm-b-metric-residual-encloses-definite-pencil-eigenvalue",
+    "lem-qz-two-sided-local-computed-update-bound",
+    "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+    "thm-generalized-schur-form-exists-for-regular-pencil",
+    "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence",
+    "thm-computed-qz-pair-has-certified-backward-error",
+    "ex-singular-b-yields-an-infinite-generalized-eigenvalue",
+    "ex-regular-and-singular-pencil-determinant-witnesses",
+    "ex-mass-stiffness-pencil-has-two-b-orthogonal-modes"
+  ],
+  "reviewed_pages": [
+    "generalized-eigenvalue-pencils-and-qz-methods",
+    "generalized-eigenvalue-pencils-and-qz-methods-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The complete batch and its declared suppliers were reviewed against LIN-QZ. Owner resolution is needed for a published supplier proof gap and an approved-scope/page-requirement mismatch; the local proof and algorithm defects are also identified below.",
+  "findings": [
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "type": "prerequisite",
+      "reason": "The published proof infers L is invertible from det L≠0 in steps 1.1 and 3.1 without stating or proving that criterion. Add the smallest missing prerequisite, det L≠0 implies invertibility over a field (for example thm-operator-invertible-iff-determinant-nonzero), or prove triangular invertibility directly. This supplier is outside the assigned write scope."
+    },
+    {
+      "id": "lem-zero-determinant-matrix-has-nonzero-kernel-vector",
+      "type": "local",
+      "reason": "Proof 1.1 applies to both real and complex matrices but identifies the image with a subspace of C^n even when F=R. State the dimension argument over F^n; the statement need not change."
+    },
+    {
+      "id": "alg-generalized-hessenberg-triangular-reduction",
+      "type": "local",
+      "reason": "The algorithm names left and right Givens factors by their target action but does not specify a deterministic factor construction when the target pair is nonzero. Give exact selectors or call an earlier generator procedure, preserving the stated output interface."
+    },
+    {
+      "id": "thm-generalized-schur-form-exists-for-regular-pencil",
+      "type": "local",
+      "reason": "Proof 3.1 says B11 is upper triangular with nonzero diagonal and hence invertible, then uses det(B11)≠0, without justifying that inference or citing triangular invertibility. Locally show B restricted to X is an isomorphism because Bx,By are independent, identify B11 as its matrix, and use F7 before the determinant calculation."
+    },
+    {
+      "id": "generalized-eigenvalue-pencils-and-qz-methods",
+      "type": "scope",
+      "reason": "The A-page requires the complex-exponential-and-eulers-formula page, which is absent from the approved LIN-QZ prerequisite-interface list. The published Givens supplier proof uses e^{iθ} for a phase, but its declared item dependencies do not include that supplier. The owner should reconcile the page edge with the approved design and actual phase premise."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-b-inner-product-and-dual-norm-for-definite-pencil",
+      "decision": "escalate",
+      "reason": "Directly uses the published Cholesky existence and uniqueness claim whose proof has the invertibility gap."
+    },
+    {
+      "id": "thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis",
+      "decision": "escalate",
+      "reason": "Uses the same Cholesky supplier; its own proof establishes L invertibility but does not repair the supplier proof."
+    },
+    {
+      "id": "thm-b-metric-residual-encloses-definite-pencil-eigenvalue",
+      "decision": "escalate",
+      "reason": "Depends on the B-inner-product definition and Hermitian-definite theorem affected by the supplier gap."
+    },
+    {
+      "id": "ex-mass-stiffness-pencil-has-two-b-orthogonal-modes",
+      "decision": "escalate",
+      "reason": "Instantiates the affected Hermitian-definite and residual-enclosure claims."
+    },
+    {
+      "id": "thm-generalized-schur-form-exists-for-regular-pencil",
+      "decision": "repair",
+      "reason": "Uses the zero-determinant lemma over both fields; the field correction is local. This theorem also needs the separate local B11 justification recorded above."
+    },
+    {
+      "id": "def-generalized-schur-form",
+      "decision": "repair",
+      "reason": "Its justified_by existence result has the local proof gap in theorem step 3.1; no definition change is needed once that proof is completed."
+    },
+    {
+      "id": "prop-generalized-hessenberg-triangular-reduction-preserves-form-and-equivalence",
+      "decision": "accept",
+      "reason": "Its proof uses only the stated Givens action and unitary properties; an explicit selector with the same action preserves this consumer argument."
+    },
+    {
+      "id": "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+      "decision": "accept",
+      "reason": "Uses the Hessenberg procedure for its index schedule and uses its own canonical computed generator; the selector repair leaves this use unchanged."
+    },
+    {
+      "id": "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence",
+      "decision": "accept",
+      "reason": "Its QZ support and equivalence checks remain valid under the unchanged Hessenberg output interface."
+    },
+    {
+      "id": "thm-computed-qz-pair-has-certified-backward-error",
+      "decision": "accept",
+      "reason": "Its bound uses the finite-budget QZ outputs and local update certificates, not a particular exact Hessenberg Givens selector."
+    },
+    {
+      "id": "generalized-eigenvalue-pencils-and-qz-methods",
+      "decision": "escalate",
+      "reason": "The A-page requirement for the complex-exponential page needs reconciliation with the approved LIN-QZ interface list."
+    }
+  ]
+}

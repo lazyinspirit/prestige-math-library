@@ -1,0 +1,33 @@
+--- items/thm-validated-periodic-orbit-certificate-soundness.md
++++ items/thm-validated-periodic-orbit-certificate-soundness.md
+@@ -11,10 +11,11 @@
+   - thm-krawczyk-inclusion-exclusion-and-uniqueness
+   - prop-phase-bordered-bvp-root-equivalence
+   - thm-validated-euler-flow-and-monodromy-enclosure-soundness
++  - lem-rational-box-affine-chart-and-dyadic-enclosure
+ proof_strategy: direct
+ provenance:
+   statement: ai-altered
+-  proof: ai-generated
++  proof: ai-altered
+ verification:
+   precheck: pass
+ sources:
+@@ -39,13 +40,15 @@
+ 
+ [F2] Provided the exact flow exists uniquely on $[0,\theta]$, a zero of the phase-bordered residual with positive period and nonzero vector field is exactly a phase-fixed nonconstant periodic solution ([[prop-phase-bordered-bvp-root-equivalence]]).
+ 
+-[F3] The successful corrector returns a complete Krawczyk partition with one `unique-root` box and only `root-free` boxes otherwise; it also returns validated residual/Jacobian, trajectory, monodromy, and nonstationarity enclosures on the unique-root box ([[alg-validated-periodic-orbit-corrector]]).
++[F3] The successful corrector returns the exact chart $T(u)=a+Du$, a complete Krawczyk partition of $[0,1]^{d+1}$ and its mapped physical partition of $Z$, with one normalized `unique-root` box and root-free boxes otherwise; it also returns physical residual/Jacobian, trajectory, monodromy and nonstationarity enclosures on its unique-root image box $Y$ ([[alg-validated-periodic-orbit-corrector]]).
+ 
+ [F4] A successful validated Euler range-oracle run establishes existence and uniqueness through scaled time $1$ and encloses the exact trajectory and variational solution ([[thm-validated-euler-flow-and-monodromy-enclosure-soundness]]).
+ 
++[F5] The positive-side rational affine chart transfers zeros, root-free/existence/uniqueness conclusions and complete partitions bijectively; its normalized derivative is $DF(T(u))D$ ([[lem-rational-box-affine-chart-and-dyadic-enclosure]]).
++
+ ## Proof
+ 
+-1.1 By [F3], the Krawczyk run covers $Z$ with one `unique-root` box $Y$ and root-free boxes otherwise. The interval residual and Jacobian enclosures on $Y$ meet [F1], so strict inclusion gives a zero in $Y$ and the separate contraction bound gives at most one there. The root-free boxes contain no zero, hence this is exactly one zero in all of $Z$. [F1, F3, given]
++1.1 By [F3], the actual Krawczyk run applies to $\widehat F=F\circ T$ on the dyadic unit box, with normalized Jacobian enclosure for $DF(T(u))D$. Its unique normalized box $A_Y$ satisfies [F1], so strict inclusion gives a zero and the separate contraction bound gives at most one there. Every other normalized terminal box is root-free. By [F5], $T$ sends this complete partition onto $Z$ and bijects the zeros, so $Y=T(A_Y)$ contains exactly one zero of the physical residual and every other physical image box is root-free. This is exactly one zero in all of $Z$. [F1, F3, F5, given]
+ 
+ 2.1 Since $\Theta\subset(0,\infty)$, this root has positive period. The field range component excludes zero on its physical-state projection $X_Y$, so $f(x_*)\ne0$. The full-box jet returned by [F3] contains a successful Euler run on $Y$, so [F4] establishes existence and uniqueness of the exact flow through physical time $T_*$. With this hypothesis verified, apply [F2] to obtain the phase-fixed nonconstant periodic solution. [F2, F3, F4, step 1.1]
+ 

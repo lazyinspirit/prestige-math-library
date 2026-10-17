@@ -1,0 +1,304 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "103",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-coupled-simulation-finite-difference-estimator",
+      "model": "gpt-6-luna",
+      "context_sha256": "ec0164c6567970bdb886954e7103ab8da30e84572f0eb61babbbb15a45931366",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The payoff supplier requires L1, not L2. For X with P(X=n)=n^(-3)/sum_{m>=1}m^(-3), E[X]<infinity but E[X^2]=infinity; taking H(eta,omega)=X makes both payoffs identical and their covariance undefined in the finite-moment interface. The estimator itself remains a well-defined integrable difference. Qualified only the covariance sentence by square-integrability; no payoff-domain restriction was added.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-likelihood-ratio-gradient-identity-on-fixed-support",
+      "model": "gpt-6-luna",
+      "context_sha256": "8c9befb7a3677c57ce2b53bbc6de387f9f2f0234660ab24b5d1ecf7048973c4d",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The fixed-support theorem is sound, but its final universal necessity claim is false. Take q(u)=(15/16)(1-u^2)^2 for |u|<1 and zero elsewhere, p_theta(x)=q(x-theta), and H=1. Then integral q=1, q is C1, J=1, S=4u/(1-u^2) on the moving positive support, E[S]=-integral qprime=0, and E[S^2]=15 integral_{-1}^1 u^2 du=10. Thus the score formula holds with finite variance and no boundary contribution despite moving support. Replaced only the false necessity claim by sufficiency; all positive hypotheses/conclusions are retained. Proof 2.1 now explicitly uses the weighted supremum, with a measurable version set to zero on the common exceptional null set, to justify domination by 2G.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-spsa-gradient-bias-is-second-order",
+      "model": "gpt-6-luna",
+      "context_sha256": "61087f8c40104d7b58c976de45e7ae5c5a04d6a79cbb667f38883088d92955b1",
+      "outcome": "false_positive",
+      "reason": "The algorithm explicitly labels its tuple (Delta_1,...,Delta_d), and the theorem consistently uses those labels. With the standard relabelling x_i=x(i-1), sum_{i=1}^d a_i Delta_i equals the supplier inner product sum_{k<d} a(k)Delta(k); d=1 has exactly one coordinate and no off-diagonal term. No theorem depends on a coordinate label. Independently checked the C3 central-difference remainder M3 c^2||Delta||^3/6, q_i remainder integrability, independent first/reciprocal moments, symmetry cancellation, and the unbounded measurable reciprocal pull-out after weighted residual integrability. This is valid standard tuple notation, not a mathematical defect.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-spsa-gradient-has-inverse-step-variance-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "350c1c463061823af3009cb4d3d4fd6a5b86d25223c4e8d8d97a1a5cc4c2cfc1",
+      "outcome": "false_positive",
+      "reason": "The local conditional-expectation interface is explicitly restricted to L1 inputs: def-conditional-expectation-given-a-sigma-algebra requires integrable X, and def-conditional-expectation-as-an-ae-class defines its L1 version class. Thus the displayed premise E[W|F]<=B already assumes W=(|Y+|^2+|Y-|^2)sum_i|Delta_i|^(-2) is integrable; it does not invoke an extended nonnegative conditional expectation. F4 is consequently applicable and gives E W=E E[W|F]<=B. The pointwise norm inequality implies G is L2; conditional monotonicity and the scalar second-moment identities summed over coordinates give both bounds. There is no circularity under the actual imported interface.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-coupled-differences-reduce-variance",
+      "model": "gpt-6-luna",
+      "context_sha256": "70ad24c86aac368f3040bc17d85943b76bc2b0a1f2323d7f1ba5aea861382831",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The Example introduces the radius c without declaring its admissible domain, although both estimators divide by 2c and the imported Definition and variance identity require a positive radius. At c=0 the displayed claims are undefined. Added c>0 to Example and Given. Verified E Z=0 by symmetry and integrability from E Z^2=1, J(theta)=theta, cancellation of the shared Z giving estimate 1, and independent centered unit-variance noises giving (1+1)/(4c^2)=1/(2c^2). AC already supplies the required Countable Choice. No theorem Statement or Definition is changed by this example repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-coupled-simulation-finite-difference-estimator",
+      "disposition": "repaired",
+      "post_sha256": "cb75c1cc720d3e0a780f32c3827065d95b5fa4e0052cc930ec2d042be8967267",
+      "review_context_sha256": "f004405b32c34b2c68a46c8d3e9e18fd485d8c6b68a6780f31321831c06ac7c6",
+      "reason": "Qualified covariance existence by square-integrability while preserving the L1 payoff domain, shared-input quotient, and admissible steps. Both direct consumers already have the required second moments.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-likelihood-ratio-gradient-identity-on-fixed-support",
+      "disposition": "repaired",
+      "post_sha256": "959c8fc70987a4463c6b25cb43a9b0f8e494771610d784f8957166d6d284545e",
+      "review_context_sha256": "db28e7413b3668ccea4097c5cd01562905b8d05f2f3ae304b8a4b9386daea567",
+      "reason": "Retained every positive theorem hypothesis and conclusion; replaced the false necessity sentence with sufficiency. Clarified the measurable weighted supremum in Proof 2.1, bounded by 2G. FTC, DCT, signed density integration, and the weighted L2 variance argument remain valid.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-spsa-gradient-bias-is-second-order",
+      "disposition": "unaffected",
+      "post_sha256": "a77f187c1469bbcc511947619052c5a7e923fe8d40c81fb43e199da3bcd06825",
+      "review_context_sha256": "7e18feac73b4e84bcd726d08497e5e034b1451c2c136a0afaf2e9062f79144e6",
+      "reason": "Unchanged guard and item bytes. Tuple labels 1,...,d consistently reindex the supplier coordinates 0,...,d-1. Checked the central-difference remainder, reciprocal moments, symmetry, independence and integrable conditional-noise pull-out.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-spsa-gradient-has-inverse-step-variance-bound",
+      "disposition": "unaffected",
+      "post_sha256": "134025b47e7ccc61507de2e7e5d65785a51c0ec651cb68a33fcc97c39ed9409b",
+      "review_context_sha256": "d74f325e32d13fe59ac70f6110c22c80fd57946f007364e706d663c8193a9ad1",
+      "reason": "Unchanged guard and item bytes. The imported conditional-expectation premise already requires the weighted input in L1. Tower is therefore licensed; the pointwise norm bound gives L2 outputs and both conditional bounds follow.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-coupled-differences-reduce-variance",
+      "disposition": "repaired",
+      "post_sha256": "c568712913cac50dda21f78f9198b3e0b8a2921989036bdf885dd5ff289d024b",
+      "review_context_sha256": "ad38423010875ce46f7a6642a8684a210a99046d34794d20fa3ecd30b69b0278",
+      "reason": "Added the missing c>0 declaration to Example and Given. Gaussian second moments, reflection symmetry, shared-noise cancellation, and independent-noise covariance give exactly the claimed zero and 1/(2c^2) variances.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "prop-coupled-simulation-difference-variance-identity",
+    "ex-coupled-differences-reduce-variance",
+    "ex-gaussian-reparameterization-and-score-gradient"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "def-coupled-simulation-finite-difference-estimator",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "finding": "The payoff supplier requires L1, not L2. See the matching decision for the full mathematical evidence.",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u103.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "thm-likelihood-ratio-gradient-identity-on-fixed-support",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "finding": "The fixed-support theorem is sound, but its final universal necessity claim is false. See the matching decision for the full mathematical evidence.",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u103.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "thm-spsa-gradient-bias-is-second-order",
+      "outcome": "false_positive",
+      "status": "false-positive",
+      "finding": "The algorithm explicitly labels its tuple (Delta_1,...,Delta_d), and the theorem consistently uses those labels. See the matching decision for the full mathematical evidence.",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u103.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "thm-spsa-gradient-has-inverse-step-variance-bound",
+      "outcome": "false_positive",
+      "status": "false-positive",
+      "finding": "The local conditional-expectation interface is explicitly restricted to L1 inputs: def-conditional-expectation-given-a-sigma-algebra requires integrable X, and def-conditional-expectation-as-an-ae-class defines its L1 version class. See the matching decision for the full mathematical evidence.",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u103.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "ex-coupled-differences-reduce-variance",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "finding": "The Example introduces the radius c without declaring its admissible domain, although both estimators divide by 2c and the imported Definition and variance identity require a positive radius. See the matching decision for the full mathematical evidence.",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u103.json"
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "action": "record-no-published-consumer-effects",
+      "suppliers": [
+        "def-coupled-simulation-finite-difference-estimator",
+        "thm-likelihood-ratio-gradient-identity-on-fixed-support"
+      ],
+      "reason": "Literal dependency/reference searches in current items and library found only the three draft consumers inventoried in downstream and the owning draft A page. No published consumer uses either changed interface; no published item repair or Step 5 gate is proposed."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-owning-page-repair",
+      "page": "simulation-gradient-estimation-and-simultaneous-perturbation",
+      "locus": "Overview",
+      "status": "fixed",
+      "reason": "The Overview repeated the score-support necessity claim. It now describes the sufficient hypotheses actually used by the score theorem, and qualifies the covariance discussion by square-integrability. The page rendercheck passed."
+    }
+  ],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "independent_review_of_repairs": false,
+    "scope": "All five assigned items are draft members of the frozen frontier. Only three assigned item files changed. No judges, workers, certification, round-state changes, or published-item edits were performed.",
+    "interface_comparison": [
+      {
+        "id": "def-coupled-simulation-finite-difference-estimator",
+        "section": "Definition",
+        "before": "this fixes their joint law and hence their covariance.",
+        "after": "this fixes their joint law and, when both payoffs are square-integrable, their covariance.",
+        "unchanged": "The objective, h>0, admissible parameters, direction, and shared-input quotient are identical."
+      },
+      {
+        "id": "thm-likelihood-ratio-gradient-identity-on-fixed-support",
+        "section": "Statement",
+        "before": "Fixed support is essential to this formula without a boundary correction.",
+        "after": "The fixed-support hypothesis is a sufficient condition here.",
+        "unchanged": "Every hypothesis and the Frechet derivative, unbiasedness and finite-coordinate-variance conclusions are identical."
+      }
+    ],
+    "consumer_examinations": [
+      {
+        "supplier": "def-coupled-simulation-finite-difference-estimator",
+        "id": "prop-coupled-simulation-difference-variance-identity",
+        "path": "items/prop-coupled-simulation-difference-variance-identity.md",
+        "affected_use": "Statement applies the covariance identity to square-integrable outputs; F3 and Proof 1.1 use only the unchanged quotient and joint law.",
+        "disposition": "unchanged_sound"
+      },
+      {
+        "supplier": "def-coupled-simulation-finite-difference-estimator",
+        "id": "ex-coupled-differences-reduce-variance",
+        "path": "items/ex-coupled-differences-reduce-variance.md",
+        "affected_use": "F1 and Verification 1.1 use the unchanged common-noise quotient; Gaussian moments in F5 ensure both payoff outputs are square-integrable.",
+        "disposition": "unchanged_sound_as_to_supplier; own positive-radius omission repaired in assigned item"
+      },
+      {
+        "supplier": "thm-likelihood-ratio-gradient-identity-on-fixed-support",
+        "id": "ex-gaussian-reparameterization-and-score-gradient",
+        "path": "items/ex-gaussian-reparameterization-and-score-gradient.md",
+        "affected_use": "F6, Verification 1.3 and 2.1 invoke the sufficient fixed-support identity. Verification 1.2 has support R, 1.3 gives integrable Gaussian density-derivative envelope and weighted second moment theta^2+3. No use of support necessity occurs.",
+        "disposition": "unchanged_sound"
+      },
+      {
+        "supplier": "thm-likelihood-ratio-gradient-identity-on-fixed-support",
+        "page": "simulation-gradient-estimation-and-simultaneous-perturbation",
+        "affected_use": "Overview says a score estimator requires parameter-independent support or an explicit boundary correction; this repeats the false necessity claim and needs the same sufficiency qualification.",
+        "disposition": "owning_page_repaired_to_describe_sufficient_theorem_hypotheses",
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/simulation-gradient-estimation-and-simultaneous-perturbation.md"
+      }
+    ],
+    "downstream_method": "Direct literal dependency/reference search in current items and library. Neither changed supplier has a frozen alias. No transitive expansion through unchanged consumer statements; no outside or published consumer was found.",
+    "metadata_reconciliation": {
+      "lock_owner": "step5-v2-initial-r1-u103",
+      "protocol": "Acquired the shared write lock, reread current owning carriers, made targeted edits, checked them, and released the lock. Earlier busy acquisitions made no shared edits.",
+      "paths": [
+        "research/numerical-optimization-dynamics-2026-10-16-batch-103.pages.json",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-103.proof-contracts.json",
+        "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/simulation-gradient-estimation-and-simultaneous-perturbation.md"
+      ],
+      "changes": "Three manifest claim mirrors; the LR Proof 2.1 derivation mirror; exact def-coupled Definition citations in prop-coupled F3 and ex-coupled F1; exact LR Statement citation in ex-gaussian F6; owning Overview sufficiency and square-integrability qualifications. All preexisting independent risk_review records retained. No other item files edited."
+    },
+    "checks": [
+      {
+        "validation": "Precheck on all five assigned items",
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-coupled-simulation-finite-difference-estimator.md items/thm-likelihood-ratio-gradient-identity-on-fixed-support.md items/thm-spsa-gradient-bias-is-second-order.md items/thm-spsa-gradient-has-inverse-step-variance-bound.md items/ex-coupled-differences-reduce-variance.md --json",
+        "exit_code": 0,
+        "result": "5 files, 4 checked proofs, 0 failed; definition not applicable."
+      },
+      {
+        "validation": "Rendercheck on all five assigned items",
+        "command": "node tools/rendercheck.mjs items/def-coupled-simulation-finite-difference-estimator.md items/thm-likelihood-ratio-gradient-identity-on-fixed-support.md items/thm-spsa-gradient-bias-is-second-order.md items/thm-spsa-gradient-has-inverse-step-variance-bound.md items/ex-coupled-differences-reduce-variance.md --json",
+        "exit_code": 0,
+        "result": "5 checked, no errors or warnings."
+      },
+      {
+        "validation": "Required final batched proof-layout after all item edits",
+        "command": "node tools/proof-layout.mjs items/def-coupled-simulation-finite-difference-estimator.md items/thm-likelihood-ratio-gradient-identity-on-fixed-support.md items/ex-coupled-differences-reduce-variance.md",
+        "exit_code": 0,
+        "result": "3 items, 7 steps, 0 defects."
+      },
+      {
+        "validation": "Final strict contract check on the five assigned items and two other direct consumers",
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-103.proof-contracts.json --strict --items def-coupled-simulation-finite-difference-estimator,thm-likelihood-ratio-gradient-identity-on-fixed-support,thm-spsa-gradient-bias-is-second-order,thm-spsa-gradient-has-inverse-step-variance-bound,ex-coupled-differences-reduce-variance,prop-coupled-simulation-difference-variance-identity,ex-gaussian-reparameterization-and-score-gradient --json",
+        "exit_code": 0,
+        "result": "7 checked, ok:true, no errors or warnings. The previously observed citation-quote mismatch is resolved."
+      },
+      {
+        "validation": "Rendercheck of the changed owning A page",
+        "command": "node tools/rendercheck.mjs library/numerical-optimization-inverse-problems-and-uncertainty-quantification/simulation-gradient-estimation-and-simultaneous-perturbation.md --json",
+        "exit_code": 0,
+        "result": "1 checked, no errors or warnings."
+      }
+    ],
+    "resolved_check_failure": "The first focused contract check found the ex-coupled F1 citation stale after the supplier repair. Its quote and the other two affected consumer quotes were synchronized; the final seven-item strict contract check passed.",
+    "unassigned_owner_routes": [
+      {
+        "id": "alg-two-evaluation-spsa-gradient-estimator",
+        "route": "existing owning frontier lane/controller; no edits or assigned adjudication",
+        "affected_use": "Definition Step 2 calls a merely pointwise integrable unbiased oracle at random theta+cDelta and theta-cDelta without a joint-measurability or measurable-output condition.",
+        "evidence": "The current payoff-oracle Definition imposes no jointly measurable oracle realization. The digest counterexample Y(eta,Z)=1_A(eta)Z with nonmeasurable A in [1,2], centered independent Rademacher Z and Delta uniform on [-2,-1] union [1,2] has unbiased fixed-eta calls but nonmeasurable SPSA output. The assigned moment theorems separately impose conditional expectations of the outputs, so their measurable-output hypotheses exclude this counterexample.",
+        "minimality": "Require measurable random-parameter oracle outputs, or a measurable realization/kernel, in the algorithm. This is outside the five assigned item files."
+      },
+      {
+        "id": "thm-discrete-sde-adjoint-gradient-interchange",
+        "route": "existing owning frontier lane/controller; no edits or assigned adjudication",
+        "affected_use": "Proof 1.1 applies the chain rule to u_{k+1}=Psi_k(u_k,theta_0,xi_{k+1}) while retaining the direct D_theta Psi_k term.",
+        "evidence": "The quoted clause is present in the current proof. Its Statement and Proof 3.1 use the variable-parameter graph, so the identified clause is a local notation issue.",
+        "minimality": "Keep theta variable in the composition and evaluate at theta_0 only after differentiation. The unassigned item was not reviewed as a whole."
+      }
+    ],
+    "sources": "Mathematics checked directly against current local supplier Statements/Definitions and the complete assigned proofs. The polynomial moving-support counterexample was calculated directly. No external source reading is claimed; all assigned mathematics is familiar.",
+    "outstanding": "None in the assigned scope. The two unassigned digest concerns are reported to the controller/owner separately; no whole-item review of those unassigned items is claimed."
+  },
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-103.pages.json": "7bfb52f6be2b9f17d22d3c35514b5c1ce9944f5ce1d72c40fc4b040676c0c0b8",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-103.proof-contracts.json": "3b06bd704993b5013d447f142b7f3d0bd9f97974a85810f90515fe181171c1e7"
+  }
+}

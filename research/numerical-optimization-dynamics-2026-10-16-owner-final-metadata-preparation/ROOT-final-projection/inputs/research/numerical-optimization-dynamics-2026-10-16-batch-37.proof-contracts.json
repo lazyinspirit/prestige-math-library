@@ -1,0 +1,1242 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+    "lem-parabolic-theta-step-exists-uniquely",
+    "thm-parabolic-theta-l2-stability-for-half-theta",
+    "lem-periodic-heat-difference-amplification-symbol",
+    "thm-forward-euler-heat-cfl-and-nyquist-instability",
+    "thm-theta-scheme-discrete-maximum-principle",
+    "thm-parabolic-theta-scheme-local-truncation-error",
+    "thm-parabolic-theta-scheme-global-error-bound",
+    "ex-forward-euler-parabolic-cfl-threshold-and-nyquist-growth",
+    "ex-backward-euler-damps-high-frequencies",
+    "ex-crank-nicolson-preserves-high-frequency-amplitude",
+    "ex-continuous-and-discrete-heat-maximum-principles"
+  ],
+  "contracts": {
+    "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rectangular-grid-and-dirichlet-flux-stencil",
+          "source_section": "Definition",
+          "quote": "For grid functions $v,w$, define the weighted interior inner product and norm by",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+          "source_section": "Statement",
+          "quote": "if $w$ vanishes on the boundary, then $\\langle A_h^av,w\\rangle_h=E_h^a(v,w)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "At an interior node $(i,j)$ define",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "directional-energy",
+          "claim": "The rectangular telescoping identity separates into horizontal and vertical edge energies for zero boundary values.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "self-adjointness",
+          "claim": "Positive directional scalings of the symmetric edge bilinear forms give self-adjointness.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nonnegative-energy",
+          "claim": "Each directional edge energy is a sum of nonnegative squared differences with positive coefficients.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Nx,Ny≥2 and positive side lengths make the finite interior grid nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At v=0 every edge term and both sides of the asserted quadratic identity vanish. See step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "κx=κy=1 is included; the energy is the five-point Dirichlet edge energy. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Nx=Ny=2 the single interior value has four boundary edges, all included in the telescoping identity. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The imported summation-by-parts statement retains all boundary terms; zero Dirichlet values remove them exactly. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finite sums and pointwise positive coefficients are used; no choices are made. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "lem-parabolic-theta-step-exists-uniquely": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "The Dirichlet update, with the boundary values imposed at every time level, is",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+          "source_section": "Statement",
+          "quote": "$\\langle A_hv,v\\rangle_h\\ge0$ for every interior grid vector $v$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "explicit-identity",
+          "claim": "At θ=0 the implicit matrix is the identity and gives exactly one solution.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "positive-kernel",
+          "claim": "For θ>0, taking the inner product of a null-vector equation with the vector forces its norm to vanish.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-dimensional-onto",
+          "claim": "The zero kernel of a square finite-dimensional matrix implies surjectivity by rank-nullity.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Nx,Ny≥2 give a finite nonempty interior vector space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For zero right-hand side the identity case and the zero-kernel argument give U=0. See step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At θ=0 the matrix is I; at θ=1 the same positive-definiteness argument applies. See step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Rank-nullity applies to the one-interior-node matrix when Nx=Ny=2. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Known boundary contributions occur only on the right-hand side and do not change the implicit matrix. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses finite-dimensional rank-nullity and no choice principle. See step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "thm-parabolic-theta-l2-stability-for-half-theta": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "The Dirichlet update, with the boundary values imposed at every time level, is",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+          "source_section": "Statement",
+          "quote": "$A_h$ is self-adjoint and positive semidefinite",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-parabolic-theta-step-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "the θ step of [[def-parabolic-theta-finite-difference-scheme]] has a unique interior solution.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "theta-energy-identity",
+          "claim": "Expand Uθ=Un+θδU to obtain the polarization identity for the squared grid norms.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "forced-energy-inequality",
+          "claim": "Taking the inner product with Uθ and using θ≥1/2 and A_h≥0 bounds the norm difference by the source pairing.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "one-step-forced-bound",
+          "claim": "Split by whether the next norm is larger; in the growing case divide the squared-norm inequality to get the factor 2Δt.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Nx,Ny≥2 and a finite time grid are assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For q=0 the one-step bound reduces to contraction and covers U=0 without division. See step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At θ=1/2 the difference-square term vanishes; at θ=1 it is nonnegative. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The energy identity holds on the one-interior-node grid Nx=Ny=2. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The theorem explicitly uses homogeneous Dirichlet boundary rows; the source is interior. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses a finite-grid inner product and no selection principle. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "lem-periodic-heat-difference-amplification-symbol": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "For a finite periodic rectangular grid let",
+          "uses": [
+            "1.1",
+            "2.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "periodic-eigenvalue",
+          "claim": "Substitution of each coordinate phase into the centered stencil gives the sum of sine-square eigenvalues.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "theta-factor",
+          "claim": "Substitution of one eigenmode into the θ recurrence and solving the scalar equation gives the stated multiplier.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fourier-orthogonality",
+          "claim": "Finite geometric sums show that distinct modes are orthogonal and their count equals the grid dimension.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "full-grid-action",
+          "claim": "The orthogonal basis makes the mode multipliers describe the whole periodic update.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every periodic grid count Nj is at least two."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero Fourier mode has λ=0 and multiplier 1. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The formula includes d=1 and reduces to the one-dimensional centered heat symbol. See step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Nj=2 the geometric-sum basis still has Nj modes and the stencil counts both periodic neighbors. See step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The indices ℓj=0 and ℓj=Nj/2 when even are included in the finite basis. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof enumerates a finite Fourier basis and uses finite geometric sums. See step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "thm-forward-euler-heat-cfl-and-nyquist-instability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "Then $\\phi_\\ell$ is an eigenvector of $A_h^{\\rm per}$ with eigenvalue",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "spectral-upper-bound",
+          "claim": "The sine-square formula bounds every eigenvalue between zero and 4Σκj/hj².",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sufficient-cfl",
+          "claim": "The bound Δtλ≤2 places each forward-Euler factor in [−1,1], and orthogonality transfers this to the norm.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nyquist-sharpness",
+          "claim": "Even grid counts provide a joint Nyquist mode attaining the upper eigenvalue bound, so its multiplier is below −1 above the threshold.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The periodic grid has Nj≥2 and d≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At zero spatial frequency λ=0 and the forward-Euler factor is exactly 1. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=1 with even N the sufficient threshold μ≤1/2 is attained by the Nyquist mode. See step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Nj=2 is even and the joint Nyquist mode realizes λ=4Σκj/hj². See step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At ΔtS=1/2 the Nyquist factor is −1; above it the factor is below −1. See step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses the finite Fourier basis from the preceding lemma. See step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "thm-theta-scheme-discrete-maximum-principle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "The Dirichlet update, with the boundary values imposed at every time level, is",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-parabolic-theta-step-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "the θ step of [[def-parabolic-theta-finite-difference-scheme]] has a unique interior solution.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-parabolic-theta-l2-stability-for-half-theta",
+          "source_section": "Statement",
+          "quote": "In particular, when $q^n=0$ every step is contractive in weighted grid L2.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nonnegative-explicit-rows",
+          "claim": "Rearrangement shows all old-time and future-boundary coefficients are nonnegative under the stated restriction.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "implicit-minimum-principle",
+          "claim": "A strictly negative minimum contradicts the nonnegative right-hand side of the implicit M-matrix row.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "global-max-min",
+          "claim": "Induction preserves positivity, and comparison with constant grid solutions bounds both signs by the initial and boundary extrema.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "l2-versus-maximum-principle",
+          "claim": "At θ=1/2 the sufficient maximum-principle condition has a finite restriction on the weighted sum of mesh ratios, while the cited L2 theorem is unconditional.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Nx,Ny≥2 and finitely many rows are assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero initial and boundary rows remain zero under the homogeneous linear update. See step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "θ=1 gives an automatic condition; θ=0 gives the forward-Euler convex-combination restriction. See step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The negative-minimum argument includes the single interior node when Nx=Ny=2. See step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The extrema include all prescribed boundary rows and the initial row, including time zero. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finite extrema and induction over a finite set of time levels are used. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "thm-parabolic-theta-scheme-local-truncation-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "The Dirichlet update, with the boundary values imposed at every time level, is",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "complete-residual-decomposition",
+          "claim": "Substitution of exact samples and endpoint PDE values decomposes the residual into spatial stencil defects and a time quadrature defect.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "spatial-taylor-bound",
+          "claim": "A fourth-order Taylor remainder bounds each centered second-difference defect by h² times the fourth derivative over 12, including boundary-adjacent rows.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "temporal-quadrature-bound",
+          "claim": "The endpoint-weighted derivative defect is O(k) off the midpoint and the trapezoid error is bounded by k²Mttt/12 at θ=1/2.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "local-residual-bound",
+          "claim": "Adding the weighted spatial defects and temporal estimate gives both stated uniform residual bounds.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The positive rectangle and finite grid are assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If u and f vanish, every residual term and derivative bound vanishes. See step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The θ=1/2 and θ≠1/2 temporal cases are separately proved, including θ=0 and θ=1. See step 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Taylor estimates are pointwise and hold at the one interior node for Nx=Ny=2. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Exact boundary samples are used in the first and last interior stencils; derivative bounds hold on the closed cylinder. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses pointwise Taylor formulas and finite node maxima; no choice axiom is used. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "thm-parabolic-theta-scheme-global-error-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "The Dirichlet update, with the boundary values imposed at every time level, is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-parabolic-theta-l2-stability-for-half-theta",
+          "source_section": "Statement",
+          "quote": "It is uniquely solvable and satisfies",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-parabolic-theta-scheme-local-truncation-error",
+          "source_section": "Statement",
+          "quote": "the complete interior residual is bounded at every time step by",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "error-equation",
+          "claim": "Subtracting the numerical scheme from the exact sampled scheme gives a zero-boundary error update forced by its complete residual.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "residual-propagation",
+          "claim": "Apply the one-step forced energy bound and sum it over all steps from zero initial error.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weighted-grid-error",
+          "claim": "The total interior grid weight is below the rectangle area, so the maximum residual gives the stated explicit global bound.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is a positive rectangle and M≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Exact zero data give e0=0 and τ=0, so the bound is zero. See step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The θ=1/2 and θ≠1/2 rates are inherited from the two local residual branches. See step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The total interior weight bound holds for Nx=Ny=2 and is below the rectangle area. See step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Exact initial and every-time boundary samples make e0 and all boundary errors zero. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The estimate sums finitely many residual bounds and uses no choice axiom. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "ex-forward-euler-parabolic-cfl-threshold-and-nyquist-growth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "periodic update is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "Then $\\phi_\\ell$ is an eigenvector of $A_h^{\\rm per}$ with eigenvalue",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-forward-euler-heat-cfl-and-nyquist-instability",
+          "source_section": "Statement",
+          "quote": "The forward-Euler heat update is nonexpansive in the periodic weighted grid L2 norm whenever",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nyquist-factor",
+          "claim": "The alternating vector is the even-grid Nyquist mode and has multiplier 1−4μ.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "endpoint-and-growth",
+          "claim": "At μ=1/2 its factor is −1; above the threshold the power has magnitude greater than one.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N is an even integer at least two."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes nonzero alternating initial data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The exact endpoint μ=1/2 gives multiplier −1 and preserves mode magnitude. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "N=2 is the smallest even periodic grid and has the Nyquist mode. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both μ=1/2 and μ>1/2 are computed explicitly. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The verification is a direct finite-mode substitution. See step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "ex-backward-euler-damps-high-frequencies": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "The choices $\\theta=0,1/2,1$ are forward Euler, Crank–Nicolson, and backward Euler applied to the spatially semidiscrete heat equation",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "g_\\theta(\\ell)=",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "backward-euler-nyquist-factor",
+          "claim": "Substituting θ=1 and λ=4κ/h² gives the exact Nyquist multiplier.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "mesh-limit-damping",
+          "claim": "For fixed positive κ and step, the denominator tends to infinity as h tends to zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "all-mode-stability",
+          "claim": "Every backward-Euler factor 1/(1+Δtλ) lies in (0,1], so the orthogonal Fourier basis gives full periodic L2 nonexpansion.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N is even and at least two."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes κ>0 and Δt>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Nyquist eigenvalue is exactly 4κ/h² for every even N. See step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The multiplier formula also holds at N=2. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The limit h→0 is taken with κ and Δt fixed and positive. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example is a scalar formula and real limit. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "ex-crank-nicolson-preserves-high-frequency-amplitude": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "The choices $\\theta=0,1/2,1$ are forward Euler, Crank–Nicolson, and backward Euler applied to the spatially semidiscrete heat equation",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "g_\\theta(\\ell)=",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "crank-nicolson-factor",
+          "claim": "Substituting θ=1/2 and the Nyquist eigenvalue gives the exact multiplier.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "high-frequency-limit",
+          "claim": "The ratio of the leading terms tends to −1, so the modulus tends to one as the mesh is refined.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stability-without-damping",
+          "claim": "For every z≥0, |1−z/2|≤1+z/2; hence the factor is in the unit disk while the high-frequency damping vanishes in the limit.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N is even and at least two."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes κ>0 and Δt>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar inequality |1−z/2|≤1+z/2 holds at z=0 and all z≥0. See step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The multiplier formula includes the smallest even grid N=2. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The fixed-positive-Δt mesh limit gives g→−1 and |g|→1. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The verification uses scalar algebra only. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "ex-continuous-and-discrete-heat-maximum-principles": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "For a two-dimensional Dirichlet rectangle, use the nodes and weighted interior inner product of",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-theta-scheme-discrete-maximum-principle",
+          "source_section": "Statement",
+          "quote": "Then every numerical interior value at every time level lies between the minimum and maximum of all initial and prescribed boundary values.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-heat-solution",
+          "claim": "Differentiation verifies ut=Δu, while the side values vanish and the initial data lie in [0,1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "continuous-bound",
+          "claim": "The explicit sine and exponential factors give the continuous bound 0≤u≤1 on the closed cylinder.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "discrete-bound",
+          "claim": "The forward-Euler parameters meet the two-dimensional Dirichlet maximum-principle condition, so the sampled grid stays in [0,1].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Ω=(0,1)^2 is nonempty and bounded; N≥2 and M≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The boundary data are zero and the explicit solution is zero on all four sides. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The continuous initial maximum is 1 at an interior point; the discrete values remain in [0,1]. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For N=2 the single interior value is 1 initially and the stated CFL condition still applies. See step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The continuous parabolic boundary includes initial and lateral rows; the discrete extrema include every prescribed boundary row. See step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The solution is explicit and the two maximum-principle applications make no choices. See step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    }
+  }
+}

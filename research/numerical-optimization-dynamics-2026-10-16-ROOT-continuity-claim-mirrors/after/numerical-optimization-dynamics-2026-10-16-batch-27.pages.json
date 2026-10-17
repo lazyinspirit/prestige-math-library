@@ -1,0 +1,868 @@
+[
+  {
+    "order": 2338,
+    "id": "proximal-gradient-and-accelerated-composite-optimization",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Proximal gradient and accelerated composite optimization",
+    "companion": "proximal-gradient-and-accelerated-composite-optimization-examples",
+    "requires": [
+      "constrained-variational-problems-and-variational-inequalities",
+      "convex-and-semicontinuous-functions-on-rn",
+      "inequality-kkt-duality-and-optimality-certificates",
+      "sparse-high-dimensional-estimation-and-covariance"
+    ],
+    "items": [
+      {
+        "id": "def-indicator-function-of-closed-convex-set",
+        "kind": "definition",
+        "title": "Extended-real indicator of a set",
+        "statement": "For C⊆R^n define ι_C(x)=0 for x∈C and +∞ for x∉C.",
+        "deps": [
+          "def-extended-reals",
+          "def-convex-subset-of-euclidean-space"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §2.4.2",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-proper-closed-convex-function-on-rn",
+        "kind": "definition",
+        "title": "Proper closed convex extended-real functions on $\\mathbb R^n$",
+        "statement": "Define a proper closed convex extended-real function g on R^n by nonempty effective domain, convexity, and closed epigraph.",
+        "deps": [
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "def-proper-coercive-and-weakly-lower-semicontinuous-functional",
+          "def-extended-reals",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §1.1",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-l-smoothness-descent-inequality",
+        "kind": "lemma",
+        "title": "Descent inequality for a Lipschitz gradient",
+        "statement": "If f is differentiable with L-Lipschitz gradient, f(y)≤f(x)+⟨∇f(x),y−x⟩+L||y−x||_2^2/2.",
+        "deps": [
+          "def-lipschitz-holder-contraction",
+          "def-euclidean-inner-product",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "cor-mean-value-theorem",
+          "cor-archimedean-reciprocal",
+          "lem-finite-sum-laws",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §4.2",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-extended-real-epsilon-subdifferential",
+        "kind": "definition",
+        "title": "Subdifferentials of proper extended-real convex functions",
+        "statement": "For proper convex g and η≥0, define ∂_ηg(x) by g(z)≥g(x)+⟨p,z−x⟩−η for every z; ∂g=∂_0g.",
+        "deps": [
+          "def-proper-closed-convex-function-on-rn",
+          "def-subgradient-and-subdifferential",
+          "def-euclidean-inner-product",
+          "def-extended-reals"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Schmidt, Nicolas Le Roux, and Francis Bach, Convergence Rates of Inexact Proximal-Gradient Methods for Convex Optimization, §3 and Appendix Lemma 2",
+              "url": "https://arxiv.org/pdf/1109.2415"
+            },
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §2.3",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-proximal-mapping",
+        "kind": "definition",
+        "title": "Proximal mapping",
+        "statement": "For t>0 define prox_{tg}(v) as the set of global minimizers of g(u)+||u−v||_2^2/(2t) over u∈R^n.",
+        "deps": [
+          "def-proper-closed-convex-function-on-rn",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §1.1",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": [
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive"
+        ]
+      },
+      {
+        "id": "def-strong-convex-composite-objective",
+        "kind": "definition",
+        "title": "Strong convexity for an extended-real objective",
+        "statement": "Define μ-strong convexity of an extended-real convex F by the strong Jensen inequality on finite-domain pairs.",
+        "deps": [
+          "def-proper-closed-convex-function-on-rn",
+          "def-euclidean-inner-product",
+          "def-extended-reals"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Amir Beck, First-Order Methods in Optimization, SIAM, 2017, Chapter 5",
+              "url": "https://epubs.siam.org/doi/book/10.1137/1.9781611974997"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-proper-closed-convex-function-affine-minorant",
+        "kind": "lemma",
+        "title": "A proper closed convex function has an affine minorant",
+        "statement": "If g:R^n→(-∞,+∞] is proper, convex, and has closed epigraph, then some a∈R^n and b∈R satisfy g(x)≥⟨a,x⟩+b for all x.",
+        "deps": [
+          "def-proper-closed-convex-function-on-rn",
+          "def-euclidean-inner-product",
+          "thm-nearest-point-in-a-nonempty-closed-convex-set",
+          "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+          "cor-bolzano-weierstrass-in-rn"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §1.1",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            },
+            {
+              "title": "Amir Beck, First-Order Methods in Optimization, SIAM, 2017, Chapter 6",
+              "url": "https://epubs.siam.org/doi/book/10.1137/1.9781611974997"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-smooth-composite-sum-preserves-proper-closed-convexity",
+        "kind": "lemma",
+        "title": "A finite continuous convex summand preserves proper closed convexity",
+        "statement": "If f:R^n→R is continuous and convex and g is proper closed convex, then f+g is proper closed convex.",
+        "deps": [
+          "def-proper-closed-convex-function-on-rn",
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "def-metric-space",
+          "def-metric-topology",
+          "def-metric-ball"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §1.1",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-prox-indicator-is-euclidean-projection",
+        "kind": "lemma",
+        "title": "The proximal map of an indicator is Euclidean projection",
+        "statement": "For nonempty closed convex C⊆R^n, the indicator ι_C is proper closed convex and prox_{tι_C} is the Euclidean projection onto C for every t>0.",
+        "deps": [
+          "def-proper-closed-convex-function-on-rn",
+          "def-convex-subset-of-euclidean-space",
+          "def-proximal-mapping",
+          "def-indicator-function-of-closed-convex-set",
+          "def-euclidean-inner-product",
+          "thm-nearest-point-in-a-nonempty-closed-convex-set"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §4.2",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+        "kind": "theorem",
+        "title": "Existence, resolvent characterization, and firm nonexpansiveness of the proximal map",
+        "statement": "For every proper closed convex g, t>0, and v, prox_{tg}(v) is a singleton; u=prox_{tg}(v) iff (v−u)/t∈∂g(u); and ||prox_{tg}(v)−prox_{tg}(w)||^2≤⟨prox_{tg}(v)−prox_{tg}(w),v−w⟩.",
+        "deps": [
+          "def-proper-closed-convex-function-on-rn",
+          "lem-proper-closed-convex-function-affine-minorant",
+          "def-extended-real-epsilon-subdifferential",
+          "def-proximal-mapping",
+          "def-euclidean-inner-product",
+          "lem-smooth-composite-sum-preserves-proper-closed-convexity",
+          "thm-heine-borel-rn",
+          "thm-euclidean-semicontinuous-extreme-value-theorem",
+          "thm-euclidean-semicontinuity-level-set-characterisations",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §§1.1 and 2.3",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            },
+            {
+              "title": "Amir Beck, First-Order Methods in Optimization, SIAM, 2017, Chapter 6",
+              "url": "https://epubs.siam.org/doi/book/10.1137/1.9781611974997"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-proximal-gradient-mapping",
+        "kind": "definition",
+        "title": "Proximal-gradient mapping and projected-gradient mapping",
+        "statement": "For L>0 define T_L(x)=prox_{g/L}(x−∇f(x)/L) and G_L(x)=L(x−T_L(x)); for g=ι_C this specializes to L(x−P_C(x−∇f(x)/L)).",
+        "deps": [
+          "def-proper-closed-convex-function-on-rn",
+          "def-proximal-mapping",
+          "def-indicator-function-of-closed-convex-set",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "lem-prox-indicator-is-euclidean-projection",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §4.2",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-prox-l1-is-soft-thresholding",
+        "kind": "lemma",
+        "title": "The proximal map of the l1 norm is soft thresholding",
+        "statement": "For $n\\ge1$ and $\\lambda>0$, the function $g_\\lambda(u)=\\lambda\\|u\\|_1$ is proper, closed and convex in the convention of [[def-proper-closed-convex-function-on-rn]]. For every $t>0$ and $v\\in\\mathbb R^n$,\n$$\\operatorname{prox}_{t\\lambda\\|\\cdot\\|_1}(v)=\\big(S_{t\\lambda}(v_k)\\big)_{k<n},$$\nwhere $S_\\tau$ is the soft-thresholding map of [[def-soft-thresholding-function]].\n\n",
+        "deps": [
+          "def-proper-closed-convex-function-on-rn",
+          "def-proximal-mapping",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "def-soft-thresholding-function"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §6.5.2",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-proximal-three-point-inequality",
+        "kind": "lemma",
+        "title": "Three-point inequality for the proximal-gradient model",
+        "statement": "If x+=prox_{g/L}(x−∇f(x)/L), the linearized quadratic model at x exceeds its value at x+ by at least L||x+−z||_2^2/2 for every z.",
+        "deps": [
+          "def-proper-closed-convex-function-on-rn",
+          "def-proximal-mapping",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "def-extended-real-epsilon-subdifferential",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Amir Beck and Marc Teboulle, A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems, §2",
+              "url": "https://www.tau.ac.il/~becka/FISTA.pdf"
+            },
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §4.2",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-proximal-gradient-and-fista",
+        "kind": "algorithm",
+        "title": "Proximal-gradient, FISTA, and fixed-period restarted FISTA",
+        "statement": "With f convex C1 and L-smooth, g proper closed convex, and exact prox available, define proximal gradient and the Beck–Teboulle FISTA recurrence; optional fixed-period restart resets momentum after m updates.",
+        "deps": [
+          "def-proximal-gradient-mapping",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "lem-smooth-composite-sum-preserves-proper-closed-convexity"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Amir Beck and Marc Teboulle, A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems, §§3–4",
+              "url": "https://www.tau.ac.il/~becka/FISTA.pdf"
+            },
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §§4.2–4.3",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-proximal-gradient-one-step-estimate",
+        "kind": "lemma",
+        "title": "One-step proximal-gradient estimate",
+        "statement": "For x+=T_L(y) and every comparison point z, F(z)−F(x+)≥L||x+−y||_2^2/2+L⟨y−z,x+−y⟩.",
+        "deps": [
+          "def-proximal-gradient-mapping",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "lem-proximal-three-point-inequality",
+          "lem-l-smoothness-descent-inequality",
+          "lem-smooth-composite-sum-preserves-proper-closed-convexity",
+          "thm-differentiable-convex-functions-and-gradient-inequality"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Amir Beck and Marc Teboulle, A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems, Lemma 2.3",
+              "url": "https://www.tau.ac.il/~becka/FISTA.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-projected-gradient-fixed-point-kkt-certificate",
+        "kind": "theorem",
+        "title": "Projected-gradient fixed points are normal-cone certificates",
+        "statement": "For a convex differentiable objective on a nonempty polyhedron, the projected-gradient mapping vanishes iff −∇f(x) lies in the outward normal cone; a feasible KKT tuple therefore gives a projected-gradient fixed point and global minimum.",
+        "deps": [
+          "def-proximal-gradient-mapping",
+          "lem-prox-indicator-is-euclidean-projection",
+          "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+          "def-kkt-residual-and-normal-cone",
+          "thm-convex-kkt-sufficiency-and-normal-cone-certificate",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Amir Beck and Marc Teboulle, A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems, Remark 2.1",
+              "url": "https://www.tau.ac.il/~becka/FISTA.pdf"
+            },
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization, Chapter 5, §§5.1–5.2",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-certified-inexact-proximal-gradient-and-fista",
+        "kind": "algorithm",
+        "title": "Certified inexact proximal-gradient and FISTA updates",
+        "statement": "Use the exact proximal-gradient and FISTA recurrences with a reported η_k-subgradient certificate for each approximate prox call; an absent certificate returns an inconclusive status.",
+        "deps": [
+          "alg-proximal-gradient-and-fista",
+          "def-extended-real-epsilon-subdifferential",
+          "def-proximal-mapping",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Schmidt, Nicolas Le Roux, and Francis Bach, Convergence Rates of Inexact Proximal-Gradient Methods for Convex Optimization, §3 and Appendix Lemma 2",
+              "url": "https://arxiv.org/pdf/1109.2415"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-fista-energy-estimate-sequence",
+        "kind": "lemma",
+        "title": "FISTA energy estimate-sequence recurrence",
+        "statement": "The standard FISTA iterate and its scaled potential satisfy a telescoping energy inequality for every minimizer x*.",
+        "deps": [
+          "alg-proximal-gradient-and-fista",
+          "lem-proximal-gradient-one-step-estimate"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Amir Beck and Marc Teboulle, A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems, Lemma 4.1",
+              "url": "https://www.tau.ac.il/~becka/FISTA.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-proximal-gradient-o1k-objective-bound",
+        "kind": "theorem",
+        "title": "The proximal-gradient method has an O(1/k) objective bound",
+        "statement": "If F=f+g has a minimizer x*, then exact proximal gradient satisfies F(x_k)−F(x*)≤L||x_0−x*||_2^2/(2k) for every k≥1.",
+        "deps": [
+          "alg-proximal-gradient-and-fista",
+          "lem-proximal-gradient-one-step-estimate",
+          "lem-smooth-composite-sum-preserves-proper-closed-convexity"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Amir Beck and Marc Teboulle, A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems, Theorem 3.1",
+              "url": "https://www.tau.ac.il/~becka/FISTA.pdf"
+            },
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §4.2",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-inexact-proximal-gradient-one-step-estimate",
+        "kind": "lemma",
+        "title": "One-step estimate for a certified inexact proximal call",
+        "statement": "An η-subgradient-certified proximal-gradient step satisfies the exact one-step estimate with additive error η.",
+        "deps": [
+          "alg-certified-inexact-proximal-gradient-and-fista",
+          "def-extended-real-epsilon-subdifferential",
+          "lem-l-smoothness-descent-inequality",
+          "lem-smooth-composite-sum-preserves-proper-closed-convexity",
+          "thm-differentiable-convex-functions-and-gradient-inequality"
+        ],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Schmidt, Nicolas Le Roux, and Francis Bach, Convergence Rates of Inexact Proximal-Gradient Methods for Convex Optimization, Appendix §§6.1–6.2",
+              "url": "https://arxiv.org/pdf/1109.2415"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-fista-o1k2-objective-bound",
+        "kind": "theorem",
+        "title": "FISTA has an O(1/k^2) objective bound",
+        "statement": "For exact FISTA and any minimizer x*, F(x_k)−F(x*)≤2L||x_0−x*||_2^2/(k+1)^2 for k≥1.",
+        "deps": [
+          "alg-proximal-gradient-and-fista",
+          "lem-fista-energy-estimate-sequence"
+        ],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Amir Beck and Marc Teboulle, A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems, Theorem 4.4",
+              "url": "https://www.tau.ac.il/~becka/FISTA.pdf"
+            },
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §4.3",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-inexact-fista-energy-estimate",
+        "kind": "lemma",
+        "title": "FISTA energy recurrence with certified proximal errors",
+        "statement": "The FISTA potential increases by at most (2/L)t_k^2η_k per certified prox call.",
+        "deps": [
+          "alg-certified-inexact-proximal-gradient-and-fista",
+          "lem-inexact-proximal-gradient-one-step-estimate"
+        ],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Schmidt, Nicolas Le Roux, and Francis Bach, Convergence Rates of Inexact Proximal-Gradient Methods for Convex Optimization, §3 and Appendix §6.2",
+              "url": "https://arxiv.org/pdf/1109.2415"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-inexact-proximal-gradient-summable-error-bound",
+        "kind": "theorem",
+        "title": "Summable certified prox errors preserve an O(1/k) best-iterate bound",
+        "statement": "If Ση_k<∞, the smallest objective gap among the first k inexact proximal-gradient iterates is at most (L||x_0−x*||_2^2/2+Σ_{j≤k}η_j)/k and the gaps tend to zero.",
+        "deps": [
+          "alg-certified-inexact-proximal-gradient-and-fista",
+          "lem-inexact-proximal-gradient-one-step-estimate"
+        ],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Schmidt, Nicolas Le Roux, and Francis Bach, Convergence Rates of Inexact Proximal-Gradient Methods for Convex Optimization, Proposition 1 and Appendix §6.1",
+              "url": "https://arxiv.org/pdf/1109.2415"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-strong-convex-proximal-gradient-and-restarted-fista-rates",
+        "kind": "theorem",
+        "title": "Strong convexity gives linear proximal-gradient and restarted-FISTA rates",
+        "statement": "If F is μ-strongly convex and attained, proximal gradient contracts objective gaps by 1/(1+μ/(4L)); fixed-period restarted FISTA with m=ceil(sqrt(8L/μ)) contracts the gap by at least one half per restart block.",
+        "deps": [
+          "def-strong-convex-composite-objective",
+          "alg-proximal-gradient-and-fista",
+          "thm-fista-o1k2-objective-bound",
+          "lem-proximal-gradient-one-step-estimate",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "def-extended-real-epsilon-subdifferential",
+          "thm-differentiable-convex-functions-and-gradient-inequality",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Schmidt, Nicolas Le Roux, and Francis Bach, Convergence Rates of Inexact Proximal-Gradient Methods for Convex Optimization, Proposition 3 and Appendix §6.3",
+              "url": "https://arxiv.org/pdf/1109.2415"
+            },
+            {
+              "title": "Amir Beck, First-Order Methods in Optimization, SIAM, 2017, §§10.6–10.7",
+              "url": "https://epubs.siam.org/doi/book/10.1137/1.9781611974997"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-inexact-fista-weighted-error-bound",
+        "kind": "theorem",
+        "title": "Weighted prox-error summability preserves an O(1/k^2) FISTA bound",
+        "statement": "If Σ k^2η_k<∞ under the certified ε-subgradient prox model, then FISTA objective gaps are O(1/k^2) with an explicit constant involving Σ k^2η_k.",
+        "deps": [
+          "alg-certified-inexact-proximal-gradient-and-fista",
+          "lem-inexact-fista-energy-estimate"
+        ],
+        "dependency_level": 8,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mark Schmidt, Nicolas Le Roux, and Francis Bach, Convergence Rates of Inexact Proximal-Gradient Methods for Convex Optimization, §3 and Appendix §6.2",
+              "url": "https://arxiv.org/pdf/1109.2415"
+            }
+          ]
+        },
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2339,
+    "id": "proximal-gradient-and-accelerated-composite-optimization-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Proximal gradient and accelerated composite optimization — Examples",
+    "companion": "proximal-gradient-and-accelerated-composite-optimization",
+    "requires": [
+      "proximal-gradient-and-accelerated-composite-optimization"
+    ],
+    "items": [
+      {
+        "id": "ex-two-pixel-total-variation-proximal-map",
+        "kind": "example",
+        "title": "The two-pixel total-variation proximal map",
+        "statement": "For g(u)=λ|u_2−u_1|, the proximal map preserves the mean and soft-thresholds half the difference by tλ.",
+        "deps": [
+          "def-proximal-mapping",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "lem-prox-l1-is-soft-thresholding",
+          "def-euclidean-inner-product",
+          "def-proper-closed-convex-function-on-rn",
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §§2.3 and 6.5.2",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-fista-objective-increases-on-a-quadratic",
+        "kind": "example",
+        "title": "FISTA can increase the objective between consecutive iterates",
+        "statement": "A one-dimensional quadratic with a valid non-tight smoothness constant has FISTA iterates whose objective increases from x_4 to x_5.",
+        "deps": [
+          "alg-proximal-gradient-and-fista",
+          "def-euclidean-inner-product",
+          "def-proper-closed-convex-function-on-rn"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Amir Beck and Marc Teboulle, A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems, §4",
+              "url": "https://www.tau.ac.il/~becka/FISTA.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-nonorthogonal-lasso-proximal-gradient-step",
+        "kind": "example",
+        "title": "One proximal-gradient step for a nonorthogonal Lasso design",
+        "statement": "For a specified nonorthogonal two-column design and penalty, compute the exact first proximal-gradient iterate using the l1 soft-threshold formula.",
+        "deps": [
+          "def-lasso-estimator",
+          "alg-proximal-gradient-and-fista",
+          "lem-prox-l1-is-soft-thresholding"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §6.5.2",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-projected-gradient-on-nonnegative-orthant",
+        "kind": "example",
+        "title": "Projected gradient on the nonnegative orthant",
+        "statement": "A quadratic objective and orthant constraint give a hand-computable projected-gradient fixed point with its normal-cone KKT certificate.",
+        "deps": [
+          "alg-proximal-gradient-and-fista",
+          "thm-projected-gradient-fixed-point-kkt-certificate",
+          "lem-prox-indicator-is-euclidean-projection"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Neal Parikh and Stephen Boyd, Proximal Algorithms, §4.2",
+              "url": "https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf"
+            }
+          ]
+        },
+        "justified_by": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,1000 @@
+{
+  "version": 1,
+  "scope": [
+    "ex-left-preconditioned-residual-can-understate-physical-residual",
+    "thm-ilu0-factor-pattern-and-work-counts",
+    "ex-ilu0-tridiagonal-factorization",
+    "cex-ilu0-product-can-create-fill-outside-input-pattern",
+    "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span"
+  ],
+  "contracts": {
+    "ex-left-preconditioned-residual-can-understate-physical-residual": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+          "source_section": "Statement",
+          "quote": "Its residual is $\\tilde r=P^{-1}r$, where $r=b-Ax$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "every $x \\ne 0$ has a multiplicative inverse $x^{-1}$ with $x \\cdot x^{-1} = 1$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "We write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The assumed positive epsilon is nonzero, so its reciprocal exists; the physical residual is exactly 1.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The left residual map sends r to M^{-1}r=epsilon, whose absolute value is epsilon.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "The given inequality 0<epsilon<1 makes the preconditioned residual strictly smaller in absolute value.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a fixed scalar system and has no empty-set input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 show both residuals are nonzero because epsilon is positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 evaluate the one-dimensional system directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the preconditioner is invertible and the physical residual is 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the specified scalar and selects no element from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a direct computation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a direct computation, not a biconditional."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Its residual is $\\tilde r=P^{-1}r$, where $r=b-Ax$.",
+          "use": "The example substitutes its scalar M and physical residual into the exact left-residual map at step 2.1."
+        },
+        {
+          "supplier": "def-field",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "every $x \\ne 0$ has a multiplicative inverse $x^{-1}$ with $x \\cdot x^{-1} = 1$",
+          "use": "The nonzero epsilon has an inverse, and the displayed reciprocal preconditioner is invertible at step 1.1."
+        },
+        {
+          "supplier": "def-ordered-field",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "We write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by",
+          "use": "The assumed order hypotheses imply epsilon is nonzero and both epsilon and 1 are positive."
+        },
+        {
+          "supplier": "def-abs-value",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "use": "The positive residual scalars have absolute values equal to themselves at step 2.1."
+        }
+      ]
+    },
+    "thm-ilu0-factor-pattern-and-work-counts": {
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "every $x \\ne 0$ has a multiplicative inverse $x^{-1}$ with $x \\cdot x^{-1} = 1$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-ilu0-fixed-pattern-factorization",
+          "source_section": "Definition",
+          "quote": "For each $k<i$ with $(i,k)\\in P$, in increasing $k$ order, do the following: 1. If $W_{kk}=0$, return `zero-pivot(k)`. 2. Set $W_{ik}\\gets W_{ik}/W_{kk}$; this value is the stored factor $L_{ik}$. 3. Traverse the two increasing lists $\\{j>k:(i,j)\\in P\\}$ and $\\{j>k:(k,j)\\in P\\}$ by a two-pointer merge. For each matching index $j$, update $$W_{ij}\\gets W_{ij}-W_{ik}W_{kj}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-csr-matrix-with-stored-entry-semantics",
+          "source_section": "Definition",
+          "quote": "In that case every nonzero matrix entry is stored exactly once and $s=\\operatorname{nnz}(A)$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-forward-and-back-substitution-for-triangular-systems",
+          "source_section": "Definition",
+          "quote": "the **forward substitution solve** of $Lx=b$ is the recursive construction",
+          "uses": [
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-forward-and-back-substitution-for-triangular-systems",
+          "source_section": "Definition",
+          "quote": "the **backward substitution solve** of $Ux=b$ is the recursive construction",
+          "uses": [
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "produces the unique solution of $Lx=b$",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "produces the unique solution of $Ux=b$",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The finite validation, row, pattern, and merge loops terminate; every attempted division is guarded by a nonzero pivot test and is defined in the field.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "On success every pivot is nonzero and the output has unit-lower L and upper U with nonzero U diagonal.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "The initialization and every update write only input-pattern positions, so the strict-lower and upper stored positions are exactly the declared partitions.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "d7",
+          "step": "3.2",
+          "claim": "The prescribed triangular recurrences are defined and produce the unique successive solve outputs.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "The lower and upper position sets partition P, so their stored slot counts sum to s.",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d5",
+          "step": "4.2",
+          "claim": "Each lower position creates one division and each matching pattern intersection creates one multiplication and subtraction.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d6",
+          "step": "5.1",
+          "claim": "A two-pointer merge uses at most the sum of its two list lengths in comparisons; summing yields J.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 4.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d8",
+          "step": "6.1",
+          "claim": "Counting strict-lower and strict-upper slots gives the stated application multiplications, subtractions, and divisions.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=1 and does not admit an empty matrix input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 cover a missing diagonal and a zero computed pivot by immediate status returns."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, step 1.1 has no lower-pattern loop; steps 4.1, 4.2, and 6.1 give one U slot, zero off-diagonal updates, and one application division."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 distinguish absent diagonal and zero-pivot failure from successful factor output."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All loops use explicit finite ordered lists; no choice from a nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a procedure property and exact count, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a procedure property and exact count, not a biconditional."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-field",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "every $x \\ne 0$ has a multiplicative inverse $x^{-1}$ with $x \\cdot x^{-1} = 1$",
+          "use": "Every division in the recurrence is by a checked nonzero pivot."
+        },
+        {
+          "supplier": "alg-ilu0-fixed-pattern-factorization",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Traverse the two increasing lists $\\{j>k:(i,j)\\in P\\}$ and $\\{j>k:(k,j)\\in P\\}$ by a two-pointer merge. For each matching index $j$, update $$W_{ij}\\gets W_{ij}-W_{ik}W_{kj}.$$",
+          "use": "The exact pattern intersection and in-place update used in the pattern and operation counts."
+        },
+        {
+          "supplier": "def-csr-matrix-with-stored-entry-semantics",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "In that case every nonzero matrix entry is stored exactly once and $s=\\operatorname{nnz}(A)$",
+          "use": "Canonical CSR identifies stored-entry count with the input support size."
+        },
+        {
+          "supplier": "def-forward-and-back-substitution-for-triangular-systems",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "The **forward substitution solve** of $Lx=b$ is the recursive construction",
+          "use": "The forward application recurrence is the published lower-triangular solve."
+        },
+        {
+          "supplier": "def-forward-and-back-substitution-for-triangular-systems",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "The **backward substitution solve** of $Ux=b$ is the recursive construction",
+          "use": "The backward application recurrence is the published upper-triangular solve."
+        },
+        {
+          "supplier": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "produces the unique solution of $Lx=b$",
+          "use": "The forward substitution output is unique."
+        },
+        {
+          "supplier": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "produces the unique solution of $Ux=b$",
+          "use": "The backward substitution output is unique."
+        }
+      ]
+    },
+    "ex-ilu0-tridiagonal-factorization": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ilu0-fixed-pattern-factorization",
+          "source_section": "Definition",
+          "quote": "For each $k<i$ with $(i,k)\\in P$, in increasing $k$ order, do the following: 1. If $W_{kk}=0$, return `zero-pivot(k)`. 2. Set $W_{ik}\\gets W_{ik}/W_{kk}$; this value is the stored factor $L_{ik}$. 3. Traverse the two increasing lists $\\{j>k:(i,j)\\in P\\}$ and $\\{j>k:(k,j)\\in P\\}$ by a two-pointer merge. For each matching index $j$, update $$W_{ij}\\gets W_{ij}-W_{ik}W_{kj}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-csr-matrix-with-stored-entry-semantics",
+          "source_section": "Definition",
+          "quote": "A CSR record is **canonical** when no row repeats a column and no stored value is zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rat-field",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]] is a field",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The rational tridiagonal matrix has the stated canonical sorted pattern and nonzero diagonal.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The first row initializes U and the second-row multiplier and update give L21=-1/4 and U22=15/4.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "The third-row recurrence gives L32=-4/15 and U33=56/15 with no zero pivot.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "Entrywise multiplication of the displayed factors reproduces all rows of A.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a 3 by 3 matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 records the two zero corner entries; steps 2.1 and 1.3 show all pivots are nonzero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singleton parameter or one-dimensional case in the fixed example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.3 verify canonical input, present diagonals, and nonzero pivots."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example has fixed finite data and makes no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a fixed computation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a fixed computation, not a biconditional."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "alg-ilu0-fixed-pattern-factorization",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "For each $k<i$ with $(i,k)\\in P$, in increasing $k$ order, do the following: 1. If $W_{kk}=0$, return `zero-pivot(k)`. 2. Set $W_{ik}\\gets W_{ik}/W_{kk}$; this value is the stored factor $L_{ik}$. 3. Traverse the two increasing lists $\\{j>k:(i,j)\\in P\\}$ and $\\{j>k:(k,j)\\in P\\}$ by a two-pointer merge. For each matching index $j$, update $$W_{ij}\\gets W_{ij}-W_{ik}W_{kj}.$$",
+          "use": "The row-by-row factor calculations at steps 2.1 and 1.3."
+        },
+        {
+          "supplier": "def-csr-matrix-with-stored-entry-semantics",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "A CSR record is **canonical** when no row repeats a column and no stored value is zero.",
+          "use": "The displayed input is a canonical CSR instance with its zero entries omitted."
+        },
+        {
+          "supplier": "def-matrix-product-and-identity-matrix",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are",
+          "use": "The product check multiplies the displayed factor matrices entrywise."
+        },
+        {
+          "supplier": "thm-rat-field",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]] is a field",
+          "use": "All displayed integer and rational entries and divisions are interpreted in Q."
+        }
+      ]
+    },
+    "cex-ilu0-product-can-create-fill-outside-input-pattern": {
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-ilu0-fixed-pattern-factorization",
+          "source_section": "Definition",
+          "quote": "Traverse the two increasing lists $\\{j>k:(i,j)\\in P\\}$ and $\\{j>k:(k,j)\\in P\\}$ by a two-pointer merge. For each matching index $j$, update $$W_{ij}\\gets W_{ij}-W_{ik}W_{kj}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-csr-matrix-with-stored-entry-semantics",
+          "source_section": "Definition",
+          "quote": "The represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rat-field",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]] is a field",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The displayed rational matrix has the stated canonical pattern, all diagonal entries are 1, and no input branch fails.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The algorithm produces the stated unit-lower and upper factors with all pivots equal to 1.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "The matrix product has entry (3,2) equal to 1 while the input entry there is 0, refuting the product-pattern statement.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes a 3 by 3 matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 compares the input zero A32 with the product nonzero (LU)32=1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no singleton parameter or one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 verify all input and factorization pivots are nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample uses specified finite data and makes no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted claim is a universal inclusion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted claim is a universal inclusion, not a biconditional."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "alg-ilu0-fixed-pattern-factorization",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Traverse the two increasing lists $\\{j>k:(i,j)\\in P\\}$ and $\\{j>k:(k,j)\\in P\\}$ by a two-pointer merge. For each matching index $j$, update $$W_{ij}\\gets W_{ij}-W_{ik}W_{kj}.$$",
+          "use": "The exact fixed-pattern recurrence is applied to the stated matrix."
+        },
+        {
+          "supplier": "def-csr-matrix-with-stored-entry-semantics",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "The represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by",
+          "use": "The matrix's omitted coordinates are zero in its represented CSR matrix."
+        },
+        {
+          "supplier": "def-matrix-product-and-identity-matrix",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are",
+          "use": "The product entry (3,2) is computed from the finite matrix-product sum."
+        },
+        {
+          "supplier": "thm-rat-field",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]] is a field",
+          "use": "The integer matrix and ILU pivots are interpreted over Q."
+        }
+      ]
+    },
+    "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span": {
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-flexible-gmres-variable-right-preconditioning",
+          "source_section": "Definition",
+          "quote": "Set $r_0=b-Ax_0$ and $\\beta=\\|r_0\\|_2$. If $\\beta=0$, return",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "is a field containing the embedded copy of $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-standard-basis-of-f-n",
+          "source_section": "Statement",
+          "quote": "$$e_i(i) = 1_F, \\qquad e_i(j) = 0_F \\ \\text{ for } j < n \\text{ with } j \\ne i .$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-flexible-gmres-variable-right-preconditioning",
+          "source_section": "Definition",
+          "quote": "For $i=1,\\ldots,j$ in order, set $$h_{ij}:=\\langle w,v_i\\rangle,\\qquad w:=w-h_{ij}v_i.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-flexible-gmres-variable-right-preconditioning",
+          "source_section": "Definition",
+          "quote": "Put $Z_j=[z_1,\\ldots,z_j]$ and let $\\bar H_j$ be the $(j+1)$-by-$j$ matrix with entries $h_{ik}$ for $1\\le i\\le k+1$, $1\\le k\\le j$, and zero entries below that range. Choose any $$y_j\\in\\operatorname*{argmin}_{y\\in\\mathbb C^j}\\|\\beta e_0-\\bar H_jy\\|_2$$ and set $x_j:=x_0+Z_jy_j$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas $$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$ define inner products, linear in the first argument.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-inner-product-norm",
+          "source_section": "Definition",
+          "quote": "For a vector $v$ in a real or complex inner product space, define its **inner-product norm** by $$\\lVert v\\rVert:=\\sqrt{\\langle v,v\\rangle}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-least-squares-solutions-and-normal-equation",
+          "source_section": "Statement",
+          "quote": "Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-linear-combination-and-span",
+          "source_section": "Definition",
+          "quote": "That intersection is the **span of $S$**,",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-span-is-the-set-of-linear-combinations",
+          "source_section": "Statement",
+          "quote": "Then $$\\operatorname{span}(S) \\;=\\; L(S).$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The initial residual normalization is defined and modified Gram–Schmidt preserves orthonormality through the nonbreakdown basis vectors.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "d5",
+          "step": "1.2",
+          "claim": "The finite least-squares problem has a unique minimizer because its nonzero Hessenberg subdiagonal makes the coefficient map injective.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.3",
+          "claim": "Each column relation Az_j=sum_i h_ij v_i assembles to AZ_m=V_{m+1} Hbar_m.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "Substituting the assembled Arnoldi relation into r_0-AZ_my gives the true residual identity.",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F10",
+            "F11",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "3.1",
+          "claim": "Orthonormal columns preserve the Euclidean norm, giving equality between true and small least-squares residual norms.",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d6",
+          "step": "4.1",
+          "claim": "Finite combinations of the actual z_j are exactly the vectors Z_my, so the small minimizer is a true-residual minimizer over the claimed affine span.",
+          "inputs": [
+            "step 1.2",
+            "step 3.1",
+            "F3",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=1 and m>=1, so the empty-coordinate case is outside its statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the nonzero initial-residual branch; the algorithm returns the initial solution when the residual is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1, steps 1.2, 1.3, 2.1, 3.1, and 4.1 give the unique small minimizer and the one-column residual relation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 proves injectivity from the nonzero subdiagonal even when A itself is singular; no nonsingularity of A is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the least-squares minimizer is unique on every nonbreakdown run, so no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct residual-minimization theorem, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct residual-minimization theorem, not a biconditional."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "alg-flexible-gmres-variable-right-preconditioning",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "For $i=1,\\ldots,j$ in order, set $$h_{ij}:=\\langle w,v_i\\rangle,\\qquad w:=w-h_{ij}v_i.$$",
+          "use": "Provides the exact modified Gram–Schmidt column recurrence used to prove the Arnoldi relation."
+        },
+        {
+          "supplier": "thm-least-squares-solutions-and-normal-equation",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "use": "Supplies existence of the finite-dimensional least-squares minimizer; uniqueness follows from the locally proved zero kernel."
+        },
+        {
+          "supplier": "lem-standard-basis-of-f-n",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "$$e_i(i) = 1_F, \\qquad e_i(j) = 0_F \\ \\text{ for } j < n \\text{ with } j \\ne i .$$",
+          "use": "Identifies e_0 as the first coordinate vector in the residual relation."
+        }
+      ]
+    }
+  }
+}

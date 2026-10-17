@@ -1,0 +1,206 @@
+[
+  {
+    "defect_id": "numerical-optimization-dynamics-2026-10-16-3a-batch-58-D01",
+    "family": [
+      {
+        "group": "batch-58",
+        "decision_path": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-alpha-batch-58-3a-decisions.json",
+        "decision": {
+          "obligation": "refuter:58:1",
+          "id": "alg-bracketing-zoom-strong-wolfe-search",
+          "route": "flagged",
+          "verdict": "confirmed_nonfatal",
+          "evidence": "The Armijo baseline phi(0)=f(x) was named but neither evaluated nor supplied. Explicit initial objective/gradient evaluation and retention closes the nonfatal procedural omission; finite trial bounds exclude this initial data. Re-read the full procedure, Wolfe definition, its direct call sites and finite-budget lemmas. All direct consumer uses remain sound because the accepted-step and trial-point contracts are unchanged. Updated statement provenance to ai-altered and owned exact source quote mirrors. See research/numerical-optimization-dynamics-2026-10-16-alpha-batch-58-3a.md.",
+          "defect_ids": [
+            "numerical-optimization-dynamics-2026-10-16-3a-batch-58-D01"
+          ],
+          "repair_confidence": 1
+        },
+        "target": {
+          "obligation": "refuter:58:1",
+          "id": "alg-bracketing-zoom-strong-wolfe-search",
+          "location": "Definition, expansion and zoom Armijo tests",
+          "defect": "ill-formed",
+          "evidence": "Expansion says \u201cEvaluate $\\phi(t)$ and $\\phi'(t)$\u201d before comparing $\\phi(t)$ with $\\phi(0)+c_1t\\phi'(0)$; zoom likewise evaluates only $\\phi(m)$ and $\\phi'(m)$ before its comparison with $\\phi(0)$. Although $\\phi(0)=f(x)$ is defined, the procedure never states that this baseline is evaluated or supplied as initial data. The Armijo tests therefore lack a specified initial-value evaluation; adding that call or supplying $f(x)$ closes the omission. The current file hash matches the source recorded in batch 70\u2019s in-run finding.",
+          "severity": "nonfatal",
+          "observed_sha256": "a9bb99e0122ea405d2767874a29babf84889fafab07419fb151ec199004ed2cd",
+          "route": "flagged"
+        }
+      },
+      {
+        "group": "batch-70",
+        "decision_path": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-alpha-batch-70-3a-decisions.json",
+        "decision": {
+          "obligation": "reader:70:1",
+          "id": "alg-bracketing-zoom-strong-wolfe-search",
+          "consumer_id": "alg-nonlinear-conjugate-gradient-methods",
+          "observed_source": {
+            "snapshot": "current",
+            "item_sha256": "32f1660afa931dea153729a7a17f229b5b1b5a4b0d6797f17c1816cc57bfed29"
+          },
+          "producer_batch": "58",
+          "dependency_path": [
+            {
+              "id": "alg-nonlinear-conjugate-gradient-methods",
+              "item_sha256": "f4a516eb8a093cf65b5426ab86ee3782373455084671853032e084ce7f0a5768"
+            },
+            {
+              "id": "alg-bracketing-zoom-strong-wolfe-search",
+              "item_sha256": "c6d98934e2701fa99096731a418b05f68854206b33841567b103afda46de6d7b"
+            }
+          ],
+          "producer_carrier_at_split": {
+            "producer_batch": "58",
+            "item_sha256": "c6d98934e2701fa99096731a418b05f68854206b33841567b103afda46de6d7b",
+            "contract_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "manifest_sha256": "c2c4217a7933a801638f4a3cf3682ab5aa58afc3d5df65afb2a00f8d097b1d68"
+          },
+          "producer_pre_snapshot": {
+            "path": "research/numerical-optimization-dynamics-2026-10-16-step3-hash-58-pre.json",
+            "sha256": "ea7c879e9dc0d654554d113ca26e4182914f49c793418f56ed06da7ab2a537f1",
+            "carrier": {
+              "producer_batch": "58",
+              "item_sha256": "32f1660afa931dea153729a7a17f229b5b1b5a4b0d6797f17c1816cc57bfed29",
+              "contract_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+              "manifest_sha256": "c2c4217a7933a801638f4a3cf3682ab5aa58afc3d5df65afb2a00f8d097b1d68"
+            }
+          },
+          "owner_unbound_reader_observation": {
+            "record_sha256": "76e390a5b2fefb780f79e519e58049608290d6c3c707c2ba36e033715de39a19",
+            "original_source_unavailable": false,
+            "observed_source_archive": {
+              "path": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-reader70-observation-ROOT-sealed/original-observed-source.md",
+              "sha256": "32f1660afa931dea153729a7a17f229b5b1b5a4b0d6797f17c1816cc57bfed29"
+            }
+          },
+          "observation_basis": "unbound",
+          "observed_sha256": null,
+          "route": "reader",
+          "verdict": "confirmed_nonfatal",
+          "defect_ids": [
+            "numerical-optimization-dynamics-2026-10-16-3a-batch-58-D01"
+          ],
+          "repair_confidence": 1,
+          "historical_delta_unknown": true,
+          "owner_resolution": "ROOT explicitly authorized preservation and independent adjudication in owner-step3-reader70-observation-ROOT-sealed/root-registration.json. Its authenticated original source archive matches raw hash 32f1660afa931dea153729a7a17f229b5b1b5a4b0d6797f17c1816cc57bfed29 and confirms the omitted baseline evaluation. This source-only binding does not reconstruct the historical manifest/contract composite; that historical uncertainty remains. Current producer and actual consumer interface were independently reviewed.",
+          "evidence": "Original authenticated source omits evaluation of phi(0) despite Armijo tests. Current batch-58 algorithm explicitly evaluates/retains f(x), gradient, phi(0), phi-prime(0); independently checked all branches, Wolfe checks, finite budgets and positive feasible midpoint returns. Current manifest places the algorithm in batch 58; definition-like algorithm has null proof contract. Consumer still uses identical checked-step/failure and trial-count interface. Existing fixed ledger D01 closes this same defect; no duplicate row. Historical finding remains true and is not alleged against corrected current bytes. See alpha-batch-70-3a.md."
+        },
+        "target": {
+          "obligation": "reader:70:1",
+          "id": "alg-bracketing-zoom-strong-wolfe-search",
+          "location": "items/alg-bracketing-zoom-strong-wolfe-search.md, ## Definition: initial-point data and the expansion/zoom Armijo tests",
+          "defect": "ill-formed",
+          "evidence": "The inputs include f, x, p, c1, c2, E and Z, and the procedure explicitly evaluates only trial values phi(t), phi'(t). The direction check computes the initial directional derivative, but no instruction evaluates phi(0)=f(x) or supplies that baseline value, even though the expansion and zoom Armijo branches compare against phi(0). The finite-return lemma bounds trial evaluations and excludes initial-point data, but does not specify how this baseline objective value is obtained. Specify an initial evaluation of phi(0) or make it a supplied input. The assigned consumer depends on this procedure.",
+          "severity": "nonfatal",
+          "subject_type": "in-run-dependency",
+          "consumer_id": "alg-nonlinear-conjugate-gradient-methods",
+          "observed_source": {
+            "snapshot": "current",
+            "item_sha256": "32f1660afa931dea153729a7a17f229b5b1b5a4b0d6797f17c1816cc57bfed29"
+          },
+          "producer_batch": "58",
+          "dependency_path": [
+            {
+              "id": "alg-nonlinear-conjugate-gradient-methods",
+              "item_sha256": "f4a516eb8a093cf65b5426ab86ee3782373455084671853032e084ce7f0a5768"
+            },
+            {
+              "id": "alg-bracketing-zoom-strong-wolfe-search",
+              "item_sha256": "c6d98934e2701fa99096731a418b05f68854206b33841567b103afda46de6d7b"
+            }
+          ],
+          "producer_carrier_at_split": {
+            "producer_batch": "58",
+            "item_sha256": "c6d98934e2701fa99096731a418b05f68854206b33841567b103afda46de6d7b",
+            "contract_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "manifest_sha256": "c2c4217a7933a801638f4a3cf3682ab5aa58afc3d5df65afb2a00f8d097b1d68"
+          },
+          "producer_pre_snapshot": {
+            "path": "research/numerical-optimization-dynamics-2026-10-16-step3-hash-58-pre.json",
+            "sha256": "ea7c879e9dc0d654554d113ca26e4182914f49c793418f56ed06da7ab2a537f1",
+            "carrier": {
+              "producer_batch": "58",
+              "item_sha256": "32f1660afa931dea153729a7a17f229b5b1b5a4b0d6797f17c1816cc57bfed29",
+              "contract_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+              "manifest_sha256": "c2c4217a7933a801638f4a3cf3682ab5aa58afc3d5df65afb2a00f8d097b1d68"
+            }
+          },
+          "owner_unbound_reader_observation": {
+            "record_sha256": "76e390a5b2fefb780f79e519e58049608290d6c3c707c2ba36e033715de39a19",
+            "original_source_unavailable": false,
+            "observed_source_archive": {
+              "path": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-reader70-observation-ROOT-sealed/original-observed-source.md",
+              "sha256": "32f1660afa931dea153729a7a17f229b5b1b5a4b0d6797f17c1816cc57bfed29"
+            }
+          },
+          "observation_basis": "unbound",
+          "observed_sha256": null,
+          "route": "reader"
+        }
+      }
+    ],
+    "native_metadata_owner_batch": "70",
+    "immutable_result_path": "research/numerical-optimization-dynamics-2026-10-16-dispatch/alpha-3a-batch-70.attempt-1.result.json",
+    "session_id": "01a14511-2943-7b20-aca2-6de49dba2c72",
+    "session_home": null,
+    "persisted_uB_path": ".autopilot/numerical-optimization-dynamics-2026-10-16/owner-step3-current-sessions/u70",
+    "persisted_uB_exists": false,
+    "matching_session_filename_count": 0,
+    "result_completed": true,
+    "smallest_followup": {
+      "decision_obligation": "reader:70:1",
+      "candidate_same_defect_as": "refuter:58:1",
+      "direction": "Native owner should consult the existing actual report, both exact decisions and active shared row, and record an explanatory same_defect_as/same_defect_evidence only if it confirms they describe this one physical defect. Preserve every verdict, confidence, defect ID, original finding, source byte and completed mathematical review. No mathematical re-review or code expansion is requested. Root must dispatch; this is a task direction, not a root-authored native field.",
+      "preserve_before_native_followup": "Root should first archive and bind these actual current full report/decision/result files; immutable unsealed copies are listed under native_reviews[].archives. Native continuation may write only explanatory same_defect_as and same_defect_evidence for the specified decision and update its native report/result honestly. Preserve every other decision field, source/contract/manifest bytes and ledger identity; do not invent original-session continuity when unavailable."
+    },
+    "after_actual_native_link": "Explicit ownerShared binding still required: ordinary finding compatibility lacks matching source class/observed carrier and exact location.",
+    "native_reviews": [
+      {
+        "batch": "58",
+        "immutable_result_path": "research/numerical-optimization-dynamics-2026-10-16-dispatch/alpha-3a-batch-58.attempt-1.result.json",
+        "session_id": "01a144fd-e8a3-72a1-84a4-c31daac02f1f",
+        "session_home": null,
+        "persisted_uB_path": ".autopilot/numerical-optimization-dynamics-2026-10-16/owner-step3-current-sessions/u58",
+        "persisted_uB_exists": false,
+        "matching_session_filename_count": 0,
+        "result_ok": true,
+        "terminal_summary": {
+          "available": true,
+          "last_event": "task_complete",
+          "task_completed": true,
+          "task_aborted": false,
+          "final_response_present": true,
+          "error_events": 0
+        },
+        "archives": [
+          "research/numerical-optimization-dynamics-2026-10-16-owner-same-subject-sharing-intake-r3/captures/alpha-3a-batch-58.attempt-1.result.json",
+          "research/numerical-optimization-dynamics-2026-10-16-owner-same-subject-sharing-intake-r3/captures/numerical-optimization-dynamics-2026-10-16-alpha-batch-58-3a.md",
+          "research/numerical-optimization-dynamics-2026-10-16-owner-same-subject-sharing-intake-r3/captures/numerical-optimization-dynamics-2026-10-16-alpha-batch-58-3a-decisions.json"
+        ]
+      },
+      {
+        "batch": "70",
+        "immutable_result_path": "research/numerical-optimization-dynamics-2026-10-16-dispatch/alpha-3a-batch-70.attempt-1.result.json",
+        "session_id": "01a14511-2943-7b20-aca2-6de49dba2c72",
+        "session_home": null,
+        "persisted_uB_path": ".autopilot/numerical-optimization-dynamics-2026-10-16/owner-step3-current-sessions/u70",
+        "persisted_uB_exists": false,
+        "matching_session_filename_count": 0,
+        "result_ok": true,
+        "terminal_summary": {
+          "available": true,
+          "last_event": "task_complete",
+          "task_completed": true,
+          "task_aborted": false,
+          "final_response_present": true,
+          "error_events": 0
+        },
+        "archives": [
+          "research/numerical-optimization-dynamics-2026-10-16-owner-same-subject-sharing-intake-r3/captures/alpha-3a-batch-70.attempt-1.result.json",
+          "research/numerical-optimization-dynamics-2026-10-16-owner-same-subject-sharing-intake-r3/captures/numerical-optimization-dynamics-2026-10-16-alpha-batch-70-3a.md",
+          "research/numerical-optimization-dynamics-2026-10-16-owner-same-subject-sharing-intake-r3/captures/numerical-optimization-dynamics-2026-10-16-alpha-batch-70-3a-decisions.json"
+        ]
+      }
+    ]
+  }
+]

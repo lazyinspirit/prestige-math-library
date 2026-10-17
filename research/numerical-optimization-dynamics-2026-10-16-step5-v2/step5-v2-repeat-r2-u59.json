@@ -1,0 +1,97 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 2,
+  "unit": "59",
+  "input_sha256": "99e8fcdaaf4b8c60537fe6619d80cdd7d83ebe205fb35c77da897a78690496fc",
+  "decisions": [
+    {
+      "id": "ex-resource-allocation-barrier-central-path",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "c81008fcd1c11d1258c329d29a1a7aa7a2f726d446dd87df308796e5e963e8f0",
+      "outcome": "false_positive",
+      "reason": "The rejection identifies the smooth equality multiplier nu with the conic equality multiplier y, although the supplied def-conic-optimization-primal-dual-models explicitly uses L=f0+y^T(b-Ax)-lambda^T x. Here A=(1,1), b=1 and c=(1,2), so dual stationarity is 1-y-lambda1=0 and 2-y-lambda2=0. Step 1.1 gives lambda2-lambda1=1, and the stated y=1-lambda1=2-lambda2 satisfies both equations. Under the smooth convention the same dual pair has nu=-y=lambda1-1=lambda2-2. F1 supplies both smooth and conic cases, so it does not require identifying y with nu. The conic dual value is y and c^T x-y=x1*lambda1+x2*lambda2=2/t. Thus neither the stationarity assertion nor its gap consequence is defective.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-resource-allocation-barrier-central-path",
+      "disposition": "unaffected",
+      "post_sha256": "fb3a036a6aa7c20fd8540c8719860941bcffa441f93514b110bfbcbfa4ed52a3",
+      "review_context_sha256": "cb9dd706fc89a8d01033429c7e7353e63e050277ed4c4905abdea12f613d4bc3",
+      "reason": "Reviewed the complete example, its five direct suppliers, the short-step algorithm input interface, smooth KKT convention, owning proof contract and both page interfaces. For every t>0 the displayed quadratic has exactly one positive root, its complementary coordinate is positive, and the restricted barrier second derivative is positive. At t0=1 the supplied start is exact with decrement zero. The conic multiplier y satisfies c-A^T y-lambda=0 and yields gap 2/t; p*=1 follows directly from f=1+x2. For the short-step invocation choose K=R_+^2, h=0, G=-I, A=(1,1), b=1, c=(1,2), and barrier parameter 2. Strict feasibility, positive restricted Hessian, exact scalar solves, finite primal value and the stated caps satisfy the algorithm/theorem assumptions. R=3/epsilon>1 gives exactly the displayed K and at most two corrections per update. The contract and page claims agree. No item or metadata repair is necessary; the guard equals the frozen before guard.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "ex-resource-allocation-barrier-central-path",
+      "outcome": "false_positive",
+      "locus": "proof-step",
+      "location": "Verification 2.1",
+      "reason": "The conic convention is L=f0+y^T(b-Ax)-lambda^T x, so the displayed y satisfies c-A^T y-lambda=0. In the smooth convention nu=-y; the rejection incorrectly identifies these two equality multipliers. No confirmed defect or repair should be recorded.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "complete",
+    "claim_and_conventions": "Conic LP multiplier y uses b-Ax; smooth multiplier nu uses Ax-b, hence nu=-y. Positive central coordinates for t>0, gap 2/t, objective excess x2, and parameter-2 short-step ceiling are valid.",
+    "evidence_paths": [
+      "items/ex-resource-allocation-barrier-central-path.md",
+      "items/def-conic-optimization-primal-dual-models.md",
+      "items/def-barrier-central-path-and-newton-residuals.md",
+      "items/lem-nonnegative-orthant-log-barrier.md",
+      "items/thm-central-path-barrier-gap-and-dual-certificate.md",
+      "items/thm-short-step-complexity-and-primal-gap-bound.md",
+      "items/alg-short-step-self-concordant-path-following.md",
+      "items/def-inequality-constrained-program-and-kkt-geometry.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-59.proof-contracts.json",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/barrier-and-primal-dual-interior-point-methods.md",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/barrier-and-primal-dual-interior-point-methods-examples.md"
+    ],
+    "sources": "Elementary LP duality and explicit algebra are familiar; no external source consultation claimed.",
+    "interface_changes": false,
+    "unresolved_obligations": [],
+    "next_action": "Handoff to the engine for collection; no item repair, new prerequisite, downstream examination, or maintenance referral is needed.",
+    "published_ledger_updates": [],
+    "checks": [
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items ex-resource-allocation-barrier-central-path",
+        "exit_code": 0,
+        "result": "Captured both review hashes immediately after mathematical review; post guard equals the frozen assignment before guard."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-resource-allocation-barrier-central-path.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 proof checked, 0 failures; direct strategy pass."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-resource-allocation-barrier-central-path.md --json",
+        "exit_code": 0,
+        "result": "1 file checked, 0 errors, 0 warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-59.proof-contracts.json --items ex-resource-allocation-barrier-central-path --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; assigned item checked; 0 errors, 0 warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-resource-allocation-barrier-central-path.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects."
+      }
+    ]
+  }
+}

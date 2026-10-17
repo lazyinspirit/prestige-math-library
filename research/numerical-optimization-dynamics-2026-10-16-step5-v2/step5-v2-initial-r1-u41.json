@@ -1,0 +1,136 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "41",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-coordinatewise-minimum-implies-composite-stationarity",
+      "model": "gpt-6-luna",
+      "context_sha256": "c09b3013e59968851025261edc4f98b89c2b387ab1fa5246af64152b5c29949e",
+      "outcome": "false_positive",
+      "reason": "The cited Definition of def-proper-closed-convex-function-on-rn explicitly has codomain (-infinity,+infinity], excluding -infinity; g2 identically -infinity is inadmissible. Because f(x) is real and F(x)<+infinity, every g_i(x_Bi) is real. For finite g_i(z_i), convexity bounds the segment difference quotient, and differentiability gives the claimed block subgradient inequality; +infinity comparison values are automatic. Finite summation gives the full subgradient inequality, and adding the convex gradient inequality proves global minimality. No subdifferential sum rule, interior-domain hypothesis or choice principle is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-composite-strong-convexity-alone-does-not-give-coordinate-factor",
+      "model": "gpt-6-luna",
+      "context_sha256": "4de2350a6ba11a6f66836daaa7eaf623d724251788b68feaef2c68438bb9419b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F1 cites the algorithm as forcing a minimizing update without its exact-mode hypothesis, and A1 did not select that mode. For the stated first model q(u)=(u-1/2)^2+1/4, certified-inexact mode may accept u=1 with certificate delta=epsilon_0=1/4, giving objective gap 1 rather than 5/8. Thus the unconditional cited update is false, not merely an omitted algebra step. Repaired F1 to specify exact mode, f=0 and M_i=1, and A1 to choose exact mode. Then each selected coordinate becomes 1/2, the unselected coordinate stays 1, and the expected gap is exactly 5/8, exceeding the claimed bound 1/2. The composite has curvature 1 by the displayed quadratic identity while f has no positive curvature.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-coordinatewise-minimum-implies-composite-stationarity",
+      "disposition": "unaffected",
+      "post_sha256": "f9fc483860f179a164fe0d516bfd597bf74bb062d4108a421274e08f1ff9029d",
+      "review_context_sha256": "0716c0d81ffacf00f34aeb22b080028923a9dd7f51add5bd71cbcd9bdaf480f7",
+      "reason": "The cited Definition of def-proper-closed-convex-function-on-rn explicitly has codomain (-infinity,+infinity], excluding -infinity; g2 identically -infinity is inadmissible. Because f(x) is real and F(x)<+infinity, every g_i(x_Bi) is real. For finite g_i(z_i), convexity bounds the segment difference quotient, and differentiability gives the claimed block subgradient inequality; +infinity comparison values are automatic. Finite summation gives the full subgradient inequality, and adding the convex gradient inequality proves global minimality. No subdifferential sum rule, interior-domain hypothesis or choice principle is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-composite-strong-convexity-alone-does-not-give-coordinate-factor",
+      "disposition": "repaired",
+      "post_sha256": "996e2ab57d9ca211e4ff52516a1636abfa9c22382b531b41365b4de905981b01",
+      "review_context_sha256": "3f5cdd74882218df91489596e31eafcfee4d9e0b6ce58d8e428c9fa1e52e7414",
+      "reason": "F1 cites the algorithm as forcing a minimizing update without its exact-mode hypothesis, and A1 did not select that mode. For the stated first model q(u)=(u-1/2)^2+1/4, certified-inexact mode may accept u=1 with certificate delta=epsilon_0=1/4, giving objective gap 1 rather than 5/8. Thus the unconditional cited update is false, not merely an omitted algebra step. Repaired F1 to specify exact mode, f=0 and M_i=1, and A1 to choose exact mode. Then each selected coordinate becomes 1/2, the unselected coordinate stays 1, and the expected gap is exactly 5/8, exceeding the claimed bound 1/2. The composite has curvature 1 by the displayed quadratic identity while f has no positive curvature. This records adjudication and local repair, not independent review of the repair. The Statement refuted, Witness, numbered proof, dependency list, owning page and existing proof-contract derivations remain unchanged; the contract supplier quotation already includes exact mode.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "lem-coordinatewise-minimum-implies-composite-stationarity",
+      "reason": "The cited Definition of def-proper-closed-convex-function-on-rn explicitly has codomain (-infinity,+infinity], excluding -infinity; g2 identically -infinity is inadmissible. Because f(x) is real and F(x)<+infinity, every g_i(x_Bi) is real. For finite g_i(z_i), convexity bounds the segment difference quotient, and differentiability gives the claimed block subgradient inequality; +infinity comparison values are automatic. Finite summation gives the full subgradient inequality, and adding the convex gradient inequality proves global minimality. No subdifferential sum rule, interior-domain hypothesis or choice principle is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "cex-composite-strong-convexity-alone-does-not-give-coordinate-factor",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "location": "facts-block",
+      "affected_use": "F1 and A1, used by Proof step 1.1 to force the selected coordinate to the model minimizer.",
+      "disposition": "fixed",
+      "reason": "F1 cites the algorithm as forcing a minimizing update without its exact-mode hypothesis, and A1 did not select that mode. For the stated first model q(u)=(u-1/2)^2+1/4, certified-inexact mode may accept u=1 with certificate delta=epsilon_0=1/4, giving objective gap 1 rather than 5/8. Thus the unconditional cited update is false, not merely an omitted algebra step. Repaired F1 to specify exact mode, f=0 and M_i=1, and A1 to choose exact mode. Then each selected coordinate becomes 1/2, the unselected coordinate stays 1, and the expected gap is exactly 5/8, exceeding the claimed bound 1/2. The composite has curvature 1 by the displayed quadratic identity while f has no positive curvature.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "no-update",
+      "reason": "No Statement or Definition changed, no new prerequisite was created, and review discovered no potentially defective published consumer requiring maintenance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "reviewed_interfaces": [
+      "items/def-proper-closed-convex-function-on-rn.md: Definition",
+      "items/def-extended-real-epsilon-subdifferential.md: Definition",
+      "items/thm-gradient-represents-directional-derivatives-and-steepest-ascent.md: Statement",
+      "items/thm-differentiable-convex-functions-and-gradient-inequality.md: Statement",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-41.proof-contracts.json",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/coordinate-and-block-descent-methods.md"
+    ],
+    "source_reading": "Local definitions, dependency interfaces and proof contract consulted; no external source consulted or claimed.",
+    "next_action": "Controller collection and any required independent rejudgment; no judges, certificates, round state or shared ledgers written.",
+    "repair_complete": true,
+    "changed_items": [
+      "cex-composite-strong-convexity-alone-does-not-give-coordinate-factor"
+    ],
+    "unchanged_items": [
+      "lem-coordinatewise-minimum-implies-composite-stationarity"
+    ],
+    "exact_edits": [
+      "F1 now qualifies the supplier claim with exact mode and M_i=1.",
+      "A1 now selects exact mode."
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-coordinatewise-minimum-implies-composite-stationarity.md items/cex-composite-strong-convexity-alone-does-not-give-coordinate-factor.md",
+        "exit_code": 0,
+        "result": "2 checked, 0 failing; both direct proofs pass."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-coordinatewise-minimum-implies-composite-stationarity.md items/cex-composite-strong-convexity-alone-does-not-give-coordinate-factor.md",
+        "exit_code": 0,
+        "result": "2 files pass actual KaTeX and renderer YAML checks."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-41.proof-contracts.json --strict --items lem-coordinatewise-minimum-implies-composite-stationarity,cex-composite-strong-convexity-alone-does-not-give-coordinate-factor",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 2/2 items checked."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/cex-composite-strong-convexity-alone-does-not-give-coordinate-factor.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects; run once after final item edit."
+      }
+    ],
+    "interface_comparison": "Only F1 and A1 of the counterexample changed. The lemma is byte-unchanged; counterexample Statement refuted and Witness are unchanged. Exact Statement/Definition section hashes match the frozen initial pack for both assigned items. No downstream propagation is owed.",
+    "unresolved_obligations": []
+  }
+}

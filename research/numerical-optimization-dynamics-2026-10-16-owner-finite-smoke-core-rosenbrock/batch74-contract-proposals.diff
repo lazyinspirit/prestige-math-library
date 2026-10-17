@@ -1,0 +1,267 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json
++++ PROPOSED batch74 contracts
+@@ -34,7 +34,10 @@
+           "case": "scalar exact-J",
+           "input": "f(y)=2, J=0, h=1/2, gamma=1, y=3",
+           "calculation": "k=2 and y+=3+(1/2)2",
+-          "result": "y+=4; the stage is defined because I-hJ=1."
++          "result": "y+=4; the stage is defined because I-hJ=1.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "constant-stage-map",
++          "asserts": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, let $d\\ge1$, and let $f:D\\to\\mathbb R^d$ be a vector field ([[def-first-order-ode-initial-value-problem-and-solution]]). For $(t,y)\\in D$, a step size $h>0$, a parameter $\\gamma>0$, and a matrix $\\widetilde J\\in\\mathbb R^{d\\times d}$, put\n$$A_{\\gamma,h}(\\widetilde J):=I_d-\\gamma h\\widetilde J.$$\nWhen this matrix is invertible, the **one-stage Rosenbrock step** uses the stage slope $k$ and update\n$$A_{\\gamma,h}(\\widetilde J)k=f(t,y),\\qquad \\Phi_{\\gamma,h}^{\\widetilde J}(t,y):=y+hk.$$\nThe **exact-Jacobian branch** sets $\\widetilde J=D_yf(t,y)$, where $D_yf$ is the Jacobian in the state variables as in [[def-jacobian-matrix-and-gradient]]. An approximate-Jacobian branch may supply a different $\\widetilde J$; the equation requires the chosen shifted matrix to be invertible. The name **Rosenbrock–Euler** here refers to the case $\\gamma=1$. This definition specifies one linearized step and does not say that it solves the full backward-Euler nonlinear equation."
+         }
+       ],
+       "boundaries": [
+@@ -166,7 +169,10 @@
+           "case": "zero matrix",
+           "input": "B=0, q=0",
+           "calculation": "A=I and ||A^-1||_2=1",
+-          "result": "the bound (1-q)^-1 equals 1."
++          "result": "the bound (1-q)^-1 equals 1.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "shifted-inverse",
++          "asserts": "Let $d\\ge1$, $B\\in\\mathbb R^{d\\times d}$, $h>0$, $\\gamma>0$, and $0\\le q<1$ satisfy $\\|\\gamma hB\\|_2\\le q$, where $\\|\\cdot\\|_2$ is the matrix norm induced by the Euclidean vector $2$-norm, as in [[def-induced-matrix-p-norm]]. Then $A=I_d-\\gamma hB$ is invertible and\n$$\\|A^{-1}\\|_2\\le \\frac{1}{1-q}.$$\nIn particular, if $\\|\\gamma hB\\|_2\\le\\tfrac12$, then $\\|A^{-1}\\|_2\\le2$."
+         }
+       ],
+       "boundaries": [
+@@ -277,7 +283,10 @@
+           "case": "identical Jacobians",
+           "input": "J=Jtilde and both shifted matrices invertible",
+           "calculation": "the resolvent identity has a zero middle factor",
+-          "result": "Atilde^-1-A^-1=0."
++          "result": "Atilde^-1-A^-1=0.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "inverse-perturbation",
++          "asserts": "Let $d\\ge1$, $h,\\gamma>0$, and $J,\\widetilde J\\in\\mathbb R^{d\\times d}$. Set $A=I_d-\\gamma hJ$ and $\\widetilde A=I_d-\\gamma h\\widetilde J$. If both matrices are invertible, then\n$$\\widetilde A^{-1}-A^{-1}=\\gamma h\\,\\widetilde A^{-1}(\\widetilde J-J)A^{-1}.$$\nConsequently, if $\\|A^{-1}\\|_2\\le K$ and $\\|\\widetilde A^{-1}\\|_2\\le\\widetilde K$, then\n$$\\|\\widetilde A^{-1}-A^{-1}\\|_2\\le\\gamma hK\\widetilde K\\|\\widetilde J-J\\|_2.$$\nHere the induced matrix norm is the one defined in [[lem-rosenbrock-shifted-matrix-invertibility-bound]]."
+         }
+       ],
+       "boundaries": [
+@@ -439,7 +448,10 @@
+           "case": "one-dimensional exact data",
+           "input": "M=[1], x=[1], b=[1], all operations exact",
+           "calculation": "vhat=1, rhat=0, exact residual=0",
+-          "result": "the certificate returns a nonnegative upper bound W."
++          "result": "the certificate returns a nonnegative upper bound W.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "residual-certificate",
++          "asserts": "Let $d\\ge1$, $M\\in\\mathbb R^{d\\times d}$, and $x,b\\in\\mathbb R^d$ be stored real data. Use successful sequential left-to-right dot products and componentwise subtraction in the operationwise model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], with unit roundoff $u>0$ and $du<1$. Put\n$$\\widehat v_i:=\\operatorname{fl}\\Bigl(\\sum_{j<d}M_{ij}x_j\\Bigr),\\qquad \\widehat r:=\\operatorname{fl}(\\widehat v-b),\\qquad \\gamma_d:=\\frac{du}{1-du}.$$\nFor $\\|M\\|_F=(\\sum_{i,j<d}M_{ij}^2)^{1/2}$, define\n$$W:=\\gamma_d\\|M\\|_F\\|x\\|_2+u(\\|\\widehat v\\|_2+\\|b\\|_2).$$\nThen\n$$\\|\\widehat r-(Mx-b)\\|_2\\le W,\\qquad \\|Mx-b\\|_2\\le\\|\\widehat r\\|_2+W.$$\nIf a norm in these formulas is replaced by an exact or certified upper bound, the resulting value of $\\|\\widehat r\\|_2+W$ remains a certified upper bound for the exact residual."
+         }
+       ],
+       "boundaries": [
+@@ -501,7 +513,11 @@
+           "case": "one-dimensional nonsingular solve",
+           "input": "M=[2], b=[2], epsilon=0, exact representable arithmetic",
+           "calculation": "QR/back substitution returns x=1 and residual zero",
+-          "result": "success with rho=0; M=[0] instead takes singular-factor."
++          "result": "success with rho=0; M=[0] instead takes singular-factor.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "qr-solver-status",
++          "asserts": "**Input:** a stored real square matrix $M\\in\\mathbb R^{d\\times d}$ with $d\\ge1$; a unit roundoff $u>0$ with $du<1$; and a terminating certificate evaluator `evaluator`. For each requested Euclidean or Frobenius norm of stored data, `evaluator` returns a finite stored nonnegative upper bound for the exact norm or `unavailable`. For each requested nonnegative expression formed from such upper bounds, $u$, and $d$, it returns a finite stored nonnegative upper bound for the exact expression or `unavailable`. Every returned bound is sound. All reflector, substitution, dot-product, and residual operations below use [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]; certificate-evaluator calls return certified bounds rather than relying on ordinary rounded evaluation of a bound expression.\n\nDenote the top-level factor-only operation by `factor(M,u,evaluator)`. It returns either a reusable factor object or a factorization failure status.\n\n1. Set $R:=M$. For each column $j=0,\\ldots,d-1$, let $x$ be the active part of column $j$ of $R$ and $B$ the active trailing block to its right. Call [[alg-scaled-householder-reflector-formation-and-application]] on $(x,B)$. If it returns `range-failure`, return that status and no factor object. If it returns a marked `identity` or `reflector` result, replace the active block by its returned $C_+$, store its marker and (when present) $(v,\\widehat\\tau)$, and continue. For any other return, stop and return `factorization-failure` with no factor object. The resulting $R$ is upper triangular with its lower entries set to exact zeros by the called procedure; this is the full/reduced computational QR convention of [[def-full-reduced-and-column-pivoted-computational-qr-factorisations]].\n2. If any diagonal entry $R_{jj}$ is zero, return `singular-factor`. Otherwise return a factor object containing the original stored $M$, $R$, the ordered stored reflectors, $u$, and the certificate evaluator. The factor object's operation `solve(b,epsilon)`, whose input is any stored real $b\\in\\mathbb R^d$ and finite $\\epsilon\\ge0$, is:\n   1. Apply the stored reflector updates in the same order, each using the successful rounded dot, scaling, product, and subtraction operations specified by [[alg-scaled-householder-reflector-formation-and-application]], to obtain $c$. Return the first `range-failure` if an operation fails.\n   2. Compute $x$ by descending rounded back substitution for $Rx=c$. For $i=d-1,d-2,\\ldots,0$, initialize $s:=0$; for $j=i+1,i+2,\\ldots,d-1$ in increasing order, compute $p:=\\operatorname{fl}(R_{ij}x_j)$ and then $s:=\\operatorname{fl}(s+p)$; next compute $t:=\\operatorname{fl}(c_i-s)$ and $x_i:=\\operatorname{fl}(t/R_{ii})$. If any product, addition, subtraction, or division fails, return the first `range-failure`. This is the descending recurrence of [[def-forward-and-back-substitution-for-triangular-systems]] with its rounded operation order made explicit.\n   3. Compute $\\widehat v_i$ for $i=0,\\ldots,d-1$ as the rounded left-to-right dot product of row $i$ of the original $M$ with $x$: initialize the accumulator with $\\operatorname{fl}(M_{i0}x_0)$ and for $j=1,\\ldots,d-1$ compute $p:=\\operatorname{fl}(M_{ij}x_j)$ and then replace the accumulator $s$ by $\\operatorname{fl}(s+p)$. Set the resulting accumulator to $\\widehat v_i$. Then compute each $\\widehat r_i:=\\operatorname{fl}(\\widehat v_i-b_i)$. Return the first `range-failure` if any operation fails.\n   4. Request evaluator bounds $\\overline m\\ge\\|M\\|_F$, $\\overline x\\ge\\|x\\|_2$, $\\overline b\\ge\\|b\\|_2$, $\\overline v\\ge\\|\\widehat v\\|_2$, and $\\overline r\\ge\\|\\widehat r\\|_2$. If any request is unavailable, return `(residual-unverified, x, null)`. Request a certified upper bound $\\overline W$ for $\\gamma_d\\overline m\\,\\overline x+u(\\overline v+\\overline b)$, where $\\gamma_d:=du/(1-du)$. If this request is unavailable, return `(residual-unverified, x, null)`. Request a certified upper bound $\\rho$ for $\\overline r+\\overline W$; if unavailable, return `(residual-unverified, x, null)`. By [[lem-rosenbrock-stage-residual-certificate]], $\\rho\\ge\\|Mx-b\\|_2$. Return `(success, x, rho)` if $\\rho\\le\\epsilon$; otherwise return `(residual-not-certified, x, rho)`.\n\nThis is a factor-only operation followed by an independently callable solve operation: the factor object accepts each later stored right-hand side and tolerance without receiving a precomputed list. Each solve performs one triangular solve and one residual check using the same stored factorization. A returned residual bound is an equation-residual certificate, not a forward-error estimate; converting it to forward error requires a separate inverse bound. No rank-revealing guarantee, sparse cost bound, or success guarantee for an ill-conditioned matrix is part of this procedure.\n\nFactorization terminates with `singular-factor`, `range-failure`, `factorization-failure`, or a reusable factor object. Each call to the object's `solve` operation terminates with `success`, `range-failure`, `residual-unverified`, or `residual-not-certified`, together with any completed approximate solution and residual bound.",
++          "fixture_note": "Historical case/result retained verbatim as native evidence, not endorsed: epsilon=0 cannot return success with rho=0 under the actual positive-u certificate. Fixture evaluates residual-not-certified at epsilon0, finite-epsilon success, and singular-factor/unverified branches."
+         }
+       ],
+       "boundaries": [
+@@ -602,7 +618,10 @@
+           "case": "equal Jacobians",
+           "input": "J=Jtilde and both shifted matrices invertible",
+           "calculation": "the two one-stage maps have identical formulas",
+-          "result": "the approximation-defect upper bound is zero."
++          "result": "the approximation-defect upper bound is zero.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "jacobian-map-defect",
++          "asserts": "Use the one-stage map of [[def-rosenbrock-euler-step-map]] with the same $t,y,h,\\gamma,f$ but matrices $J$ and $\\widetilde J$. If $I_d-\\gamma hJ$ and $I_d-\\gamma h\\widetilde J$ are invertible, with inverse norms bounded by $K$ and $\\widetilde K$, then\n$$\\|\\Phi_{\\gamma,h}^{\\widetilde J}(t,y)-\\Phi_{\\gamma,h}^{J}(t,y)\\|_2\\le\\gamma h^2K\\widetilde K\\|\\widetilde J-J\\|_2\\,\\|f(t,y)\\|_2.$$\nThis is a one-step perturbation bound; it alone gives no uniform stability or convergence claim for a sequence of approximate Jacobians."
+         }
+       ],
+       "boundaries": [
+@@ -766,7 +785,10 @@
+           "case": "affine scalar residual",
+           "input": "f(y)=-100y, y=1, h=1",
+           "calculation": "BE residual G(z)=101z-1; the Newton correction from z=1 gives 1/101",
+-          "result": "the Rosenbrock–Euler update is 1/101, the exact BE root for this affine case."
++          "result": "the Rosenbrock–Euler update is 1/101, the exact BE root for this affine case.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "newton-backward-euler",
++          "asserts": "Let $f:U\\to\\mathbb R^d$ be autonomous and $C^1$ on an open $U\\subseteq\\mathbb R^d$, let $y\\in U$, and let $h>0$. Suppose $I_d-hD f(y)$ is invertible. Then the exact-arithmetic Rosenbrock–Euler step with $\\gamma=1$ is the first Newton correction of the backward-Euler residual at the initial guess $y$. This does not assert that the corrected point solves the full backward-Euler equation."
+         }
+       ],
+       "boundaries": [
+@@ -828,7 +850,11 @@
+           "case": "scalar shifted solve",
+           "input": "f(y)=2, y=3, h=1/2, gamma=1, Jtilde=0, epsilon=0",
+           "calculation": "M=1, k=2, residual zero",
+-          "result": "one factorization and one solve return success at y+=4."
++          "result": "one factorization and one solve return success at y+=4.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "one-stage-algorithm",
++          "asserts": "**Input:** an ODE field $f:D\\to\\mathbb R^d$ on the open domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$, $(t_n,y_n)\\in D$, $h>0$, $\\gamma>0$, a finite real Jacobian matrix $\\widetilde J_n\\in\\mathbb R^{d\\times d}$, a residual tolerance $\\varepsilon\\ge0$, a unit roundoff $u>0$ with $du<1$, the selected stored finite set $\\mathbb F$ of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], a terminating field-evaluation routine that returns either the exact value $f(t,y)$ or `evaluation-failure` for each requested $(t,y)\\in D$, a terminating partial exact-storage check `store`, and a terminating certificate evaluator `evaluator` meeting the input contract of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. For an exact real scalar, vector, or matrix $v$, `store(v)` returns $v$ if every entry belongs to $\\mathbb F$ and returns `unavailable` otherwise; it does not round. Apply it before each factorization call.\n\n1. Form $M=I_d-\\gamma h\\widetilde J_n$ by exact outer arithmetic and set $M_s:=\\operatorname{store}(M)$. If storage returns `unavailable`, return $(y_n,\\texttt{representation-unavailable})$. Call `factor(M_s,u,evaluator)` of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. If it returns a factorization failure status, return $(y_n,\\text{that status})$; otherwise retain the returned factor object.\n2. Request the field evaluation at $(t_n,y_n)$. If it returns `evaluation-failure`, return $(y_n,\\texttt{field-evaluation-failure})$. Otherwise set $b=f(t_n,y_n)$ to the returned exact value and set $b_s:=\\operatorname{store}(b)$. If storage returns `unavailable`, return $(y_n,\\texttt{representation-unavailable})$. Call the retained factor object's `solve(b_s,\\varepsilon)`. If the solve status is not `success`, return $(y_n,\\text{that status})$ and retain its residual bound for diagnosis.\n3. If the solve returns $k_n$ and a certified residual upper bound $\\rho_n\\le\\varepsilon$, return $(y_n+h k_n,\\texttt{success},\\rho_n)$.\n\nThe exact-arithmetic stage equation is $M k_n=f(t_n,y_n)$, exactly the map of [[def-rosenbrock-euler-step-map]]. Its residual $Mk_n-f(t_n,y_n)$ is the update residual of the linear stage equation in the sense of [[def-implicit-residual-and-algebraic-error-units]]. For this mixed-arithmetic specification, evaluations and outer affine combinations are exact real operations and every matrix/RHS passed to factorization or solve must pass `store`; only the factorization, triangular solve, and residual dot products use rounded operations, while residual-bound formation is delegated to the terminating certificate evaluator. A full hardware-rounding theorem for outer operations needs additional certified evaluation and update-error terms. This implementation has one shifted-matrix factorization and one stage solve. It does not turn a small residual into a forward-error claim without an inverse bound.",
++          "fixture_note": "Historical epsilon0 success wording is not endorsed; evaluated finite-u success uses epsilon0.01. Map y+=4 and operation counts preserved; exact-storage failure separately checked."
+         }
+       ],
+       "boundaries": [
+@@ -890,7 +916,10 @@
+           "case": "zero W Jacobian approximation",
+           "input": "f(y)=-4y, y=1, h=1, Jtilde=Ttilde=0",
+           "calculation": "k1=-4, F1=4, q2=8, k2=4",
+-          "result": "the prescribed update is 5."
++          "result": "the prescribed update is 5.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "zero-w-stage",
++          "asserts": "**Input:** an ODE field $f:D\\to\\mathbb R^d$ on the open domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$, $(t_n,y_n)\\in D$, $h>0$, a finite real state-Jacobian approximation $\\widetilde J_n$, a finite approximation $\\widetilde T_n$ to $\\partial_t f(t_n,y_n)$, stage residual tolerances $\\varepsilon_1,\\varepsilon_2\\ge0$, a unit roundoff $u>0$ with $du<1$, the selected stored finite set $\\mathbb F$ of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], a terminating field-evaluation routine `evaluate_f` that returns either the exact value $f(t,y)$ or `evaluation-failure` for each requested $(t,y)\\in D$, terminating `store` routine, and terminating certificate evaluator `evaluator` meeting the input contract of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. The exact-storage check returns $v$ if every entry is in $\\mathbb F$ and `unavailable` otherwise; it does not round. Put\n$$\\alpha:=\\frac{1}{2+\\sqrt2}=1-\\frac{1}{\\sqrt2},\\qquad W:=I_d-\\alpha h\\widetilde J_n.$$\nThe two-stage method is\n$$W k_1=f(t_n,y_n)+\\alpha h\\widetilde T_n,$$\n$$F_1=f\\!\\left(t_n+\\frac h2,y_n+\\frac h2k_1\\right),\\qquad W q_2=F_1-k_1,\\qquad k_2=q_2+k_1,$$\n$$y_{n+1}=y_n+h k_2.$$\n\nThe residuals $Wk_1-[f(t_n,y_n)+\\alpha h\\widetilde T_n]$ and $Wq_2-(F_1-k_1)$ are update residuals of their linear stage equations in the sense of [[def-implicit-residual-and-algebraic-error-units]]. The coefficient $\\alpha$ and the autonomous two-stage formula are the second-order Rosenbrock formula recorded for ode23s in WIAS Example 2.37. The first-stage $\\alpha h\\widetilde T_n$ term specifies the nonautonomous extension used here; its order is independently established under the stated boundedness hypotheses.\n\n1. Form $W$ by exact outer arithmetic and set $W_s:=\\operatorname{store}(W)$. If storage returns `unavailable`, return $(y_n,\\texttt{representation-unavailable})$. Call `factor(W_s,u,evaluator)` of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. If it returns a factorization failure status, return $(y_n,\\texttt{factorization-failure})$; otherwise retain its factor object.\n2. Call `evaluate_f(t_n,y_n)`. If it returns `evaluation-failure`, return $(y_n,\\texttt{input-or-representation-failure})$. Otherwise denote its returned exact value by $f_0$, form $b_1=f_0+\\alpha h\\widetilde T_n$ by exact outer arithmetic, and set $b_{1,s}:=\\operatorname{store}(b_1)$. If storage returns `unavailable`, return $(y_n,\\texttt{input-or-representation-failure})$. Call the retained factor object's `solve(b_{1,s},\\varepsilon_1)`. If it is not certified, return $(y_n,\\text{stage-1 status})$. Otherwise set $k_1$ to its returned vector.\n3. Check $(t_n+h/2,y_n+hk_1/2)\\in D$. If not, return $(y_n,\\texttt{invalid-stage-domain})$. Otherwise call `evaluate_f(t_n+h/2,y_n+hk_1/2)`. If it returns `evaluation-failure`, return $(y_n,\\texttt{stage-2-input-or-representation-failure})$. Otherwise set $F_1$ to the returned exact value, form $b_2=F_1-k_1$ exactly, and set $b_{2,s}:=\\operatorname{store}(b_2)$. If storage returns `unavailable`, return $(y_n,\\texttt{stage-2-input-or-representation-failure})$. Call the same factor object's `solve(b_{2,s},\\varepsilon_2)`. If this solve is not certified, return $(y_n,\\text{stage-2 status})$.\n4. Set $k_2=q_2+k_1$ and return $(y_n+h k_2,\\texttt{success},\\rho_1,\\rho_2)$ with the two certified update-residual bounds.\n\nThe exact-J branch takes $\\widetilde J_n=D_yf(t_n,y_n)$ and $\\widetilde T_n=\\partial_t f(t_n,y_n)$. The W-method branch permits any bounded matrix approximations satisfying the hypotheses of the local and global order results; it receives no scalar A/L-stability guarantee from the exact-J result. The factor matrix is the same in both stages, so the procedure performs one shifted-matrix factorization and two stage solves. For this mixed-arithmetic specification, field evaluations and outer affine combinations are exact real operations, and every matrix/RHS passed to factorization or solve must pass `store`; factorization, triangular solves, and residual dot products use the operationwise model, while residual-bound formation is delegated to the terminating certificate evaluator. A full hardware-rounding theorem for outer operations would need additional certified evaluation and update-error terms. A finite arithmetic residual is not a forward-error bound without an inverse estimate."
+         }
+       ],
+       "boundaries": [
+@@ -1125,7 +1154,10 @@
+           "case": "zero field",
+           "input": "f=0, J=Jtilde=0 and rho=0",
+           "calculation": "exact and computed one-step updates coincide",
+-          "result": "the local error bound has zero right-hand side."
++          "result": "the local error bound has zero right-hand side.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "zero-one-local-defect",
++          "asserts": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open and $f:D\\to\\mathbb R^d$ be $C^2$ (componentwise, as in [[def-ck-euclidean-maps-and-diffeomorphisms]]). Let $y(s)$ solve $y'=f(s,y)$ on $[t,t+h]$, $h>0$, and set $J=D_yf(t,y(t))$. Suppose the trajectory lies in a region where $\\|f\\|_2\\le F$, $\\|D_yf\\|_2\\le L$, and $\\|f_t+D_yf\\,f\\|_2\\le M_1$. Fix $\\gamma>0$ and a real matrix $\\widetilde J$. Suppose $A=I-\\gamma hJ$ and $\\widetilde A=I-\\gamma h\\widetilde J$ are invertible with $\\|A^{-1}\\|_2\\le\\kappa_0$ and $\\|\\widetilde A^{-1}\\|_2\\le\\kappa_1$. Write $\\delta=\\|\\widetilde J-J\\|_2$.\n\nFor the exact-arithmetic Rosenbrock stage map $\\Phi_{\\gamma,h}^{\\widetilde J}$, and a computed stage $\\widehat k$ whose update residual obeys $\\|\\widetilde A\\widehat k-f(t,y(t))\\|_2\\le\\rho$, the update $\\widehat y_+=y(t)+h\\widehat k$ satisfies\n$$\\|\\widehat y_+-y(t+h)\\|_2\\le C_Eh^2+\\kappa_1h\\rho, \\qquad C_E:=\\gamma\\kappa_0LF+\\frac{M_1}{2}+\\gamma\\kappa_0\\kappa_1\\delta F.$$\nThe last term is the separate Jacobian-approximation allowance. The residual is an equation residual in the units of [[def-implicit-residual-and-algebraic-error-units]], not a forward-error estimate by itself."
+         }
+       ],
+       "boundaries": [
+@@ -1416,7 +1448,10 @@
+           "case": "zero field and zero residuals",
+           "input": "f=0, Jtilde=Ttilde=0, rho1=rho2=0",
+           "calculation": "both stages and exact flow stay at y",
+-          "result": "the cubic local-defect inequality holds with zero error."
++          "result": "the cubic local-defect inequality holds with zero error.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "zero-two-local-defect",
++          "asserts": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, $f:D\\to\\mathbb R^d$ be $C^2$, and $y(s)$ solve $y'=f(s,y)$ on $[t,t+h]$. Assume a compact convex tube $Q\\subset D$ contains the trajectory, the stage midpoint segments, and all vectors used below. On $Q$, suppose\n$$\n\\|f\\|_2\\le F,\\quad \\|D_yf\\|_2\\le L,\\quad \\|f_t\\|_2\\le T_0,\\quad \\|D^2f\\|_{\\rm op}\\le H,\n$$\nwhere $D^2f$ is the second total derivative on the joint variable $(t,y)$, and $\\|D^2f\\|_{\\rm op}:=\\sup_{\\|u\\|=\\|v\\|=1}\\|D^2f[u,v]\\|_2$ for the Euclidean product norm. Fix $\\alpha=1-1/\\sqrt2$, and suppose $\\|\\widetilde J\\|_2\\le B_J$, $\\|\\widetilde T\\|_2\\le B_T$, and $\\|\\alpha h\\widetilde J\\|_2\\le q<1$. Put $\\kappa=(1-q)^{-1}$ and $M=T_0+LF$. The shifted inverse has norm at most $\\kappa$ by [[lem-rosenbrock-shifted-matrix-invertibility-bound]].\n\nFor exact-arithmetic stages $k_1,q_2,k_2$ of [[alg-two-stage-rosenbrock-w-method]] (with its exact-storage checks successful), define\n$$C_1=B_JF+B_T,\\quad K_1=F+\\alpha h\\kappa C_1,\\quad C_F=\\frac{\\alpha\\kappa L C_1}{2}+\\frac{H(1+K_1^2)}{8}.$$\n$$C_K=\\alpha^2\\kappa^2B_JC_1+\\frac{\\alpha\\kappa B_JM}{2}+\\kappa C_F, \\qquad M_2=H(1+F^2)+LT_0+L^2F.$$\nThen the exact one-step defect is at most\n$$\n\\|y(t)+hk_2-y(t+h)\\|_2\\le (C_K+M_2/6)h^3.\n$$\nIf the computed first and second shifted solves have certified update-residual bounds $\\rho_1$ and $\\rho_2$, then the computed update satisfies\n$$\\|\\widehat y_+-y(t+h)\\|_2\\le (C_K+M_2/6)h^3+C_rh^2\\rho_1+\\kappa h\\rho_2, \\qquad C_r:=\\kappa^2(L/2+\\alpha B_J).$$\nThus $\\rho_1=O(h)$ and $\\rho_2=O(h^2)$ preserve a cubic local defect. These are equation-residual conditions, not stage forward-error claims without the inverse bound.\n\nAt any base point in the tube, the same two-stage residual perturbation argument gives the solver-to-exact-map bound $\\|\\widehat\\Phi_h(t,y)-\\Phi_h(t,y)\\|_2\\le C_rh^2\\rho_1+\\kappa h\\rho_2$, whenever both midpoint evaluations lie in $Q$."
+         }
+       ],
+       "boundaries": [
+@@ -1530,7 +1565,10 @@
+           "case": "two-dimensional diagonal matrix",
+           "input": "J=diag(-1,-2), h=1",
+           "calculation": "W=diag(1+alpha,1+2alpha) is formed once",
+-          "result": "the same stored factor object serves both RHSs."
++          "result": "the same stored factor object serves both RHSs.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "factor-reuse",
++          "asserts": "On every successful call of [[alg-two-stage-rosenbrock-w-method]], the procedure forms one matrix $W=I-\\alpha h\\widetilde J$, factorizes it once, and uses that stored factor object for exactly two stage right-hand sides, one for $k_1$ and one for $q_2$. Thus it uses one shifted-matrix factorization and two triangular solves. This is an operation-count statement, not a claim that either solve succeeds."
+         }
+       ],
+       "boundaries": [
+@@ -1692,7 +1730,10 @@
+           "case": "dimension one",
+           "input": "d=1, one RHS",
+           "calculation": "one Householder column, one back-substitution coordinate, one residual row",
+-          "result": "the procedure returns after finitely many operations or its first failure."
++          "result": "the procedure returns after finitely many operations or its first failure.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "finite-work",
++          "asserts": "For every finite dimension $d\\ge1$, finite stored matrix, unit roundoff $u>0$ with $du<1$, and finite collection of stored right-hand sides and nonnegative residual tolerances in the input domains of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]], [[alg-rosenbrock-euler-step]], and [[alg-two-stage-rosenbrock-w-method]], assume each called field-evaluation, exact-storage, and certificate-evaluation routine returns in finite work. Then the factorization operation, every requested solve operation, and each step procedure terminate after finitely many elementary operations with one of their stated success or failure statuses. Termination does not imply that the factorization is nonsingular, a residual is certified, or a step succeeds. No asymptotic runtime bound is claimed."
+         }
+       ],
+       "boundaries": [
+@@ -1837,13 +1878,19 @@
+           "case": "A-stability endpoint",
+           "input": "gamma=1/2, z=-1",
+           "calculation": "R=1+(-1)/(1+1/2)=1/3",
+-          "result": "the endpoint parameter is included in the A-stable range."
++          "result": "the endpoint parameter is included in the A-stable range.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "one-stage-a-endpoint",
++          "asserts": "For scalar stability, consider the exact-arithmetic complexification of the exact-Jacobian one-stage equation. For $\\lambda,y,k\\in\\mathbb C$, $h>0$, $\\gamma>0$, and $z=h\\lambda$, use $(1-\\gamma z)k=\\lambda y$ and $y_+=y+hk$. Equivalently, identify $\\mathbb C$ with $\\mathbb R^2$ and multiplication by $\\lambda$ with the real matrix $C_\\lambda=\\begin{pmatrix}\\operatorname{Re}\\lambda&-\\operatorname{Im}\\lambda\\\\\\operatorname{Im}\\lambda&\\operatorname{Re}\\lambda\\end{pmatrix}$; the corresponding real exact Jacobian is $C_\\lambda$, and the equations become $(I_2-\\gamma h C_\\lambda)k=C_\\lambda y$ and $y_+=y+hk$. This is a scalar stability analysis of exact stage equations; it is not an execution of the finite-precision real algorithm [[alg-rosenbrock-euler-step]]. Use the scalar rational-function criteria in [[def-scalar-rk-a-and-l-stability]] for its amplification function. Its scalar stability function is\n$$R_\\gamma(z)=1+\\frac{z}{1-\\gamma z}=\\frac{1+(1-\\gamma)z}{1-\\gamma z}.$$\nIt has no pole in $\\operatorname{Re}z\\le0$ and satisfies $|R_\\gamma(z)|\\le1$ throughout that half-plane if and only if $\\gamma\\ge\\tfrac12$. Among these parameters, it is L-stable if and only if $\\gamma=1$. In particular, the named Rosenbrock–Euler case $\\gamma=1$ has the backward-Euler factor $R(z)=(1-z)^{-1}$."
+         },
+         {
+           "case": "L-stable case",
+           "input": "gamma=1",
+           "calculation": "R(z)=1/(1-z)",
+-          "result": "R(z) tends to zero for negative real z tending to minus infinity."
++          "result": "R(z) tends to zero for negative real z tending to minus infinity.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "one-stage-l-limit",
++          "asserts": "For scalar stability, consider the exact-arithmetic complexification of the exact-Jacobian one-stage equation. For $\\lambda,y,k\\in\\mathbb C$, $h>0$, $\\gamma>0$, and $z=h\\lambda$, use $(1-\\gamma z)k=\\lambda y$ and $y_+=y+hk$. Equivalently, identify $\\mathbb C$ with $\\mathbb R^2$ and multiplication by $\\lambda$ with the real matrix $C_\\lambda=\\begin{pmatrix}\\operatorname{Re}\\lambda&-\\operatorname{Im}\\lambda\\\\\\operatorname{Im}\\lambda&\\operatorname{Re}\\lambda\\end{pmatrix}$; the corresponding real exact Jacobian is $C_\\lambda$, and the equations become $(I_2-\\gamma h C_\\lambda)k=C_\\lambda y$ and $y_+=y+hk$. This is a scalar stability analysis of exact stage equations; it is not an execution of the finite-precision real algorithm [[alg-rosenbrock-euler-step]]. Use the scalar rational-function criteria in [[def-scalar-rk-a-and-l-stability]] for its amplification function. Its scalar stability function is\n$$R_\\gamma(z)=1+\\frac{z}{1-\\gamma z}=\\frac{1+(1-\\gamma)z}{1-\\gamma z}.$$\nIt has no pole in $\\operatorname{Re}z\\le0$ and satisfies $|R_\\gamma(z)|\\le1$ throughout that half-plane if and only if $\\gamma\\ge\\tfrac12$. Among these parameters, it is L-stable if and only if $\\gamma=1$. In particular, the named Rosenbrock–Euler case $\\gamma=1$ has the backward-Euler factor $R(z)=(1-z)^{-1}$."
+         }
+       ],
+       "boundaries": [
+@@ -1979,7 +2026,10 @@
+           "case": "stiff scalar test value",
+           "input": "z=-4, alpha=1-1/sqrt(2)",
+           "calculation": "R(-4)=(5-4sqrt(2))/(5-2sqrt(2))^2",
+-          "result": "its modulus is less than one and there is no left-half-plane pole."
++          "result": "its modulus is less than one and there is no left-half-plane pole.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "two-stage-stiff-stability",
++          "asserts": "For scalar stability, consider the exact-arithmetic complexification of the exact-Jacobian stage equations of [[alg-two-stage-rosenbrock-w-method]]. For $\\lambda,y,k_1,q_2,k_2\\in\\mathbb C$, $h>0$, $z=h\\lambda$, and $\\alpha=1-1/\\sqrt2$, use\n$$\n(1-\\alpha z)k_1=\\lambda y,\\qquad F_1=\\lambda(y+hk_1/2),\\qquad (1-\\alpha z)q_2=F_1-k_1,\\qquad k_2=q_2+k_1,\\qquad y_+=y+hk_2.\n$$\nEquivalently, identify $\\mathbb C$ with $\\mathbb R^2$ and multiplication by $\\lambda$ with $C_\\lambda=\\begin{pmatrix}\\operatorname{Re}\\lambda&-\\operatorname{Im}\\lambda\\\\\\operatorname{Im}\\lambda&\\operatorname{Re}\\lambda\\end{pmatrix}$ in the real stage equations, with exact-J data $\\widetilde J=C_\\lambda$ and $\\widetilde T=0$. This is a scalar stability analysis of exact stage equations; it is not an execution of the finite-precision real algorithm. Use the scalar rational-function criteria in [[def-scalar-rk-a-and-l-stability]] for its amplification function. Its scalar stability function is\n$$R(z)=\\frac{1+(1-2\\alpha)z}{(1-\\alpha z)^2}.$$\nThis function has no pole on $\\operatorname{Re}z\\le0$, has modulus at most one there, and tends to zero as $|z|\\to\\infty$ in that half-plane. Hence this exact-J scalar method is L-stable. This theorem makes no A/L-stability claim for an arbitrary approximate Jacobian."
+         }
+       ],
+       "boundaries": [
+@@ -2212,7 +2262,10 @@
+           "case": "zero field recurrence",
+           "input": "F=L=M1=delta=R=0 and e0=0",
+           "calculation": "CE=Cs=0 in the stated recurrence",
+-          "result": "every global error en is zero."
++          "result": "every global error en is zero.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "zero-one-global-recurrence",
++          "asserts": "Let $f:D\\to\\mathbb R^d$ be $C^2$ on an open time-state domain, and let $y(t)$ be an exact solution on $[t_0,t_0+T]$. Fix $\\gamma>0$ and a compact convex tube $Q\\subset D$ containing the solution, all numerical states, and all state segments used below. Assume the bounds of [[lem-rosenbrock-euler-local-defect-and-residual-error]] hold uniformly on $Q$: $F,L,M_1$, an exact-J inverse bound $\\kappa_0$, an approximate-J inverse bound $\\kappa_1$, and $\\|\\widetilde J-D_yf\\|_2\\le\\delta$. Assume $\\|\\widetilde J(t,u)-\\widetilde J(t,v)\\|_2\\le L_J\\|u-v\\|_2$ on each state slice of $Q$, and $\\|(I-\\gamma h\\widetilde J(t,y))^{-1}\\|_2\\le\\kappa_1$ for all $0<h\\le h_0$ and all relevant $(t,y)\\in Q$. Fix the step size used below with $0<h\\le h_0$.\n\nAt each step $t_n=t_0+nh$, use the one-stage algorithm of [[alg-rosenbrock-euler-step]] with a certified stage residual upper bound $\\rho_n\\le R h$, for a fixed $R\\ge0$, and assume each call returns `success`, including its field evaluation, factorization, residual certification, and exact-storage checks. Starting from $y_0=y(t_0)$, suppose the computed states and comparison segments remain in $Q$ and $Nh\\le T$. Then, with\n$$C_E=\\gamma\\kappa_0LF+\\frac{M_1}{2}+\\gamma\\kappa_0\\kappa_1\\delta F, \\qquad C_s=\\kappa_1L+\\gamma\\kappa_1^2L_JFh_0.$$\nthe global error obeys\n$$\n\\|y_n-y(t_n)\\|_2\\le (C_E+\\kappa_1R)T e^{C_sT}h\\qquad(0\\le n\\le N).\n$$\nThus the method is first order on this common tube when the linear solve residuals are $O(h)$. The theorem is conditional on the stated tube and inverse bounds; it does not prove that computed states stay in the tube."
+         }
+       ],
+       "boundaries": [
+@@ -2461,7 +2514,10 @@
+           "case": "zero field recurrence",
+           "input": "F=L=T0=H=R1=R2=0 and e0=0",
+           "calculation": "Cloc=Cr=L2=0",
+-          "result": "every global error en is zero."
++          "result": "every global error en is zero.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "zero-two-global-recurrence",
++          "asserts": "Let $f:D\\to\\mathbb R^d$ be $C^2$ on an open time-state domain and let $y(t)$ solve $y'=f(t,y)$ on $[t_0,t_0+T]$. Fix $\\alpha=1-1/\\sqrt2$, $h_0>0$, and a compact convex tube $Q\\subset D$ containing the exact and computed states, all stage midpoint segments, and the line segments between states compared below. Use a fixed step size satisfying $0<h\\le h_0$. Assume on $Q$ that\n$$\n\\|f\\|_2\\le F,\\quad\\|D_yf\\|_2\\le L,\\quad\\|f_t\\|_2\\le T_0,\\quad\\|D^2f\\|_{\\rm op}\\le H,\n$$\nand that $\\|\\widetilde J(t,y)\\|_2\\le B_J$, $\\|\\widetilde T(t,y)\\|_2\\le B_T$, with state-Lipschitz bounds $\\|\\widetilde J(t,u)-\\widetilde J(t,v)\\|_2\\le L_J\\|u-v\\|_2$ and $\\|\\widetilde T(t,u)-\\widetilde T(t,v)\\|_2\\le L_T\\|u-v\\|_2$. Suppose $\\|\\alpha h\\widetilde J(t,y)\\|_2\\le q<1$ for all $0<h\\le h_0$ and relevant $(t,y)$; put $\\kappa=(1-q)^{-1}$. Define the constants $C_1,K_1,C_F,C_K,M_2,C_r$ from [[lem-two-stage-rosenbrock-local-defect-and-residual-error]] using $h_0$ in $K_1=F+\\alpha h_0\\kappa C_1$, and put $C_{loc}=C_K+M_2/6$.\n\nUse the method of [[alg-two-stage-rosenbrock-w-method]] with stage residual upper bounds $\\rho_{1,n}\\le R_1h$ and $\\rho_{2,n}\\le R_2h^2$, where $R_1,R_2$ are fixed, and assume each call returns `success`, including both field evaluations, residual certifications, and exact-storage checks. Starting from $y_0=y(t_0)$ and assuming $Nh\\le T$ and all stated tube conditions hold, define\n$$\nG_1=F+\\alpha h_0B_T,\\quad K_s=\\kappa G_1,\n$$\n$$\nL_1=\\kappa(L+\\alpha h_0L_T)+\\alpha h_0\\kappa^2L_JG_1,\n$$\n$$\nV=F+\\alpha h_0B_JK_s,\n$$\n$$L_V=L(1+h_0L_1/2)+\\alpha h_0(L_JK_s+B_JL_1),\\qquad L_2=\\kappa L_V+\\alpha h_0\\kappa^2L_JV.$$\nThen the global error satisfies\n$$\n\\|y_n-y(t_n)\\|_2\\le(C_{loc}+C_rR_1+\\kappa R_2)T e^{L_2T}h^2\\qquad(0\\le n\\le N).\n$$\nThis is a conditional order-two theorem on the common tube. Its constants and assumptions permit both the exact-J branch and the bounded W-method branch; scalar A/L-stability is asserted separately only for the exact-J branch."
+         }
+       ],
+       "boundaries": [
+@@ -2627,7 +2683,10 @@
+           "case": "local Taylor coefficient",
+           "input": "f(y)=y, y0=1, alpha=1-1/sqrt(2)",
+           "calculation": "altered h^2 coefficient is 1/2+alpha",
+-          "result": "the leading local defect is alpha h^2, not a cubic bound."
++          "result": "the leading local defect is alpha h^2, not a cubic bound.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "omitted-stage-correction",
++          "asserts": "On $y'=y$ from $y=1$, with $J=1$, $\\widetilde T=0$, and $\\alpha=1-1/\\sqrt2$, consider the incorrect variant that retains $k_1=(1-\\alpha h)^{-1}y$ and the midpoint evaluation $F_1=f(y+hk_1/2)$ but replaces the corrected second stage by $(1-\\alpha h)\\ell_2=F_1$ and returns $y+h\\ell_2$. Its one-step expansion is\n$$y_+=y+hy+(\\alpha+\\tfrac12)h^2y+O(h^3),$$\nwhereas the exact flow is $\\exp(h)=1+h+\\tfrac12h^2+O(h^3)$. Since $\\alpha>0$, the altered method has a nonzero $O(h^2)$ local defect and fails the cubic local-error condition for order two. The altered formula does not satisfy the proper method's stage equations."
+         }
+       ],
+       "boundaries": [
+@@ -2794,7 +2853,11 @@
+           "case": "diagonal 2x2 stages",
+           "input": "J=diag(-1,-2), y=(1,2), h=1",
+           "calculation": "W=diag(1+alpha,1+2alpha); first RHS=(-1,-4)",
+-          "result": "one QR factorization is reused for the two stage solves."
++          "result": "one QR factorization is reused for the two stage solves.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "current-reuse-example",
++          "asserts": "Take $J=\\operatorname{diag}(-1,-2)$, $f(y)=Jy$, $y=(1,2)^T$, $h=1$, and the W-method approximation $\\widetilde J=0$, $\\widetilde T=0$. Choose a stored finite system containing zero and the normal values $\\pm\\frac12,\\pm1,\\pm2,\\pm4,\\pm8$, with unit roundoff $0<u\\le1/100$. Let a terminating certificate evaluator return norm upper bounds $2$ for $\\|W\\|_F$ and $5$ for each displayed vector norm, and return certified upper bounds at most $1/2$ for the residual-bound expressions in both solves. Take stage tolerances $\\varepsilon_1=\\varepsilon_2=1$. Then $W=I_2$ and both stage right-hand sides use its single factor object. The exact stages are $k_1=(-1,-4)^T$, midpoint state $(1/2,0)^T$, $F_1=(-1/2,0)^T$, and $q_2=F_1-k_1=(1/2,4)^T$. The prescribed QR factorization succeeds and is reused for both stage solves. No stability or rounding-cost claim is made.",
++          "fixture_note": "Historical exact-J diagonal case retained verbatim. Current example uses Jtilde=0,W=I2 and exactly stored half-valued stages; fixture verifies that branch. Irrational exact-J W checked only as exact-equation comparison, not a storage-success claim."
+         }
+       ],
+       "boundaries": [
+@@ -2925,7 +2988,10 @@
+           "case": "exact scalar calculation",
+           "input": "lambda=100, h=1, y0=1",
+           "calculation": "R(-100)=1/101",
+-          "result": "Rosenbrock–Euler and backward Euler both return 1/101."
++          "result": "Rosenbrock–Euler and backward Euler both return 1/101.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "stiff-backward-euler",
++          "asserts": "Consider $y'=-100y$ with $y_0=1$ and one step $h=1$. The named Rosenbrock–Euler method ($\\gamma=1$, exact Jacobian) returns $y_1=1/101$, exactly the backward-Euler value. Its scalar factor is $1/(1+100)$; it lies in $(0,1)$ and tends to zero as the decay parameter times the step tends to infinity. This is a scalar exact-arithmetic calculation and makes no finite-precision forward-error claim."
+         }
+       ],
+       "boundaries": [
+@@ -3049,7 +3115,10 @@
+           "case": "fixed stiff product",
+           "input": "lambda=4, h=1, Jtilde=Ttilde=0, y0=1",
+           "calculation": "the W step is explicit midpoint and its factor is 5",
+-          "result": "the exact-J factor has modulus less than one."
++          "result": "the exact-J factor has modulus less than one.",
++          "check": "numerical-rosenbrock-fixture",
++          "fixture": "approximate-jacobian-damping",
++          "asserts": "For the scalar family $y'=-\\lambda y$ with $\\lambda>0$ and $y_0=1$, take $h=4/\\lambda$, $\\widetilde J=0$, and $\\widetilde T=0$ in the exact-arithmetic stage equations of the two-stage method. Then $W=1$, its amplification factor is $5$, and this approximate-J method amplifies the mode even though the exact-J method at $z=-4$ has modulus less than one. The zero approximation is bounded. This calculation demonstrates loss of stiff damping and makes no order or uniform-convergence claim."
+         }
+       ],
+       "boundaries": [

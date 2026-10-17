@@ -1,0 +1,2032 @@
+A New Scaling and Squaring Algorithm for the
+Matrix Exponential
+
+Al-Mohy, Awad H. and Higham, Nicholas J.
+
+2009
+
+MIMS EPrint: 2009.9
+
+Manchester Institute for Mathematical Sciences
+
+School of Mathematics
+
+The University of Manchester
+
+Reports available from:
+http://eprints.maths.manchester.ac.uk/
+
+And by contacting:
+The MIMS Secretary
+
+School of Mathematics
+
+The University of Manchester
+
+Manchester, M13 9PL, UK
+
+ISSN 1749-9097
+
+
+A NEW SCALING AND SQUARING ALGORITHM FOR THE
+MATRIX EXPONENTIAL∗
+
+AWAD H. AL-MOHY† AND NICHOLAS J. HIGHAM†
+
+Abstract. The scaling and squaring method for the matrix exponential is based on the approx-
+imation eA ≈(rm(2−sA))2s, where rm(x) is the [m/m] Pad´e approximant to ex and the integers m
+and s are to be chosen. Several authors have identified a weakness of existing scaling and squaring
+algorithms termed overscaling, in which a value of s much larger than necessary is chosen, causing
+a loss of accuracy in floating point arithmetic. Building on the scaling and squaring algorithm of
+Higham [SIAM J. Matrix Anal. Appl., 26(4):1179–1193, 2005], which is used by MATLAB’s expm,
+we derive a new algorithm that alleviates the overscaling problem. Two key ideas are employed.
+The first, specific to triangular matrices, is to compute the diagonal elements in the squaring phase
+as exponentials instead of from powers of rm. The second idea is to base the backward error anal-
+ysis that underlies the algorithm on members of the sequence {∥Ak∥1/k} instead of ∥A∥, since for
+non-normal matrices it is possible that ∥Ak∥1/k is much smaller than ∥A∥, and indeed this is likely
+when overscaling occurs in existing algorithms.
+The terms ∥Ak∥1/k are estimated without com-
+puting powers of A by using a matrix 1-norm estimator in conjunction with a bound of the form
+∥Ak∥1/k ≤max
+�
+∥Ap∥1/p, ∥Aq∥1/q�
+that holds for certain fixed p and q less than k. The improve-
+ments to the truncation error bounds have to be balanced by the potential for a large ∥A∥to cause
+inaccurate evaluation of rm in floating point arithmetic. We employ rigorous error bounds along with
+some heuristics to ensure that rounding errors are kept under control. Our numerical experiments
+show that the new algorithm generally provides accuracy at least as good as the existing algorithm
+of Higham at no higher cost, while for matrices that are triangular or cause overscaling it usually
+yields significant improvements in accuracy, cost, or both.
+
+Key words. matrix exponential, matrix function, scaling and squaring method, Pad´e approxi-
+mation, backward error analysis, matrix norm estimation, overscaling, MATLAB, expm
+
+AMS subject classifications. 15A60, 65F30
+
+1. Introduction. The scaling and squaring method is the most popular method
+for computing the matrix exponential. It is used, for example, in Mathematica (func-
+tion MatrixExp), MATLAB (function expm), SLICOT (subroutine MB05OD) [17],
+and the Expokit package [16]. It is also used in more general contexts, such as for
+computing the group exponential of a diffeomorphism [2]. The method is based on
+the approximation
+
+(1.1)
+eA = (e2−sA)2s ≈rm(2−sA)2s,
+
+where rm is the [m/m] Pad´e approximant to ex and the nonnegative integers m and s
+are chosen in a prescribed way that aims to achieve full machine accuracy at minimal
+cost. In practice the method behaves reliably in floating point arithmetic across a
+wide range of matrices. The method does, however, have a weakness manifested in
+a subtle phenomenon known as overscaling, in which a large ∥A∥causes a larger
+than necessary s to be chosen, with a harmful effect on accuracy. We illustrate the
+phenomenon with the matrix
+
+(1.2)
+A =
+�
+1
+b
+0
+−1
+
+�
+,
+eA =
+�
+e
+b
+2(e −e−1)
+0
+e−1
+
+�
+.
+
+∗Version of January 19, 2009.
+†School
+of
+Mathematics,
+The
+University
+of
+Manchester,
+Manchester,
+M13
+9PL,
+UK
+(almohy@maths.manchester.ac.uk,
+http://www.maths.manchester.ac.uk/˜almohy,
+higham@ma.man.ac.uk, http://www.ma.man.ac.uk/˜higham).
+The work of the second author
+was supported by a Royal Society-Wolfson Research Merit Award and by Engineering and Physical
+Sciences Research Council grant EP/D079403.
+
+1
+
+
+Table 1.1
+Errors and condition numbers for A in (1.2) and B = Q∗AQ. The columns headed “s” show
+the values of s used by expm to produce the results in the previous column. The superscripts † and
+‡ denote that a particular choice of s was forced: s = 0 for † and the s ∈[0, 25] giving the most
+accurate result for ‡.
+
+b
+expm(A)
+s
+expm(A)†
+funm(A)
+expm(B)
+s
+expm(B)‡
+s
+funm(B)
+κexp(A)
+103
+1.7e-15
+8
+1.9e-16
+1.9e-16
+2.8e-12
+8
+2.6e-13
+4
+2.9e-14
+1.6e5
+104
+1.8e-13
+11
+7.6e-20
+3.8e-20
+4.0e-8
+12
+1.9e-10
+1
+4.1e-10
+1.6e7
+105
+7.5e-13
+15
+1.2e-16
+1.2e-16
+2.2e-5
+15
+5.0e-7
+4
+1.3e-8
+1.6e9
+106
+1.3e-11
+18
+2.0e-16
+2.0e-16
+8.3e-4
+18
+7.5e-6
+13
+7.5e-8
+1.6e11
+107
+7.2e-11
+21
+1.6e-16
+1.6e-16
+1.2e2
+22
+6.9e-1
+14
+6.2e-4
+1.6e13
+108
+3.0e-12
+25
+1.3e-16
+1.3e-16
+4.4e37
+25
+1.0e0
+3
+6.3e-2
+1.6e15
+
+Our computations are carried out in MATLAB 7.6 (R2008a), which uses IEEE double
+precision arithmetic with unit roundoff u = 2−53 ≈1.1 × 10−16. We computed the
+exponential of A using expm, which implements the algorithm of Higham [10], and
+funm, which is applicable to general matrix functions and implements the Schur–
+Parlett method of Davies and Higham [3], [11, Sec. 10.4.3]. For b ranging from 103
+
+to 108, the normwise relative errors in the Frobenius norm are shown in the columns
+of Table 1.1 headed “expm(A)” and “funm(A)”.
+We see that while funm provides
+full accuracy in every case, the accuracy for expm deteriorates with increasing b. As
+b increases so does the chosen s in (1.1), with m equal to 13 in each case, which
+is the maximum value that expm allows. For b = 108 the diagonal elements of eA
+
+are approximated by rm(x)225 ≈
+�
+(1 + x)/(1 −x)
+�225
+with x = ±2−25 ≈±10−8.
+Approximately half the digits of x are lost in forming 1±x and the repeated squarings
+can only amplify the loss. The essential problem is loss of significance due to too large
+a choice of s. If we force expm to take smaller values of s (still with m = 13) we find
+that the accuracy of the computed exponential increases as s decreases, until a result
+correct to full machine provision is obtained for s = 0, as shown in the column of
+the table headed “expm(A)†”. Note that s = 0 corresponds to disregarding the large
+values of a12 completely.
+To gain some more insight we note the following expression for the exponential
+of a block 2 × 2 block triangular matrix (see, e.g., [11, Problem 10.12], [18]):
+
+(1.3)
+exp
+��
+A11
+A12
+0
+A22
+
+��
+=
+
+
+
+eA11
+�1
+
+0
+eA11(1−s)A12eA22s ds
+
+0
+eA22
+
+
+
+.
+
+Note that A12 appears only in the (1,2) block of eA, where it enters linearly. This
+suggests that the approximation procedure for eA should be unaffected by ∥A12∥and
+should depend only on ∥A11∥and ∥A22∥. And if A11 and A22 are upper triangular
+this argument can be recurred to reason that only the diagonal elements of A should
+influence the parameters m and s. The need for exponentials of triangular matrices
+does arise in practice, for example in the solution of radioactive decay equations [15],
+[20].
+In practice A is most often full, rather than (block) triangular. Of course a full
+matrix A can be reduced by unitary similarities to a triangular matrix T via a Schur
+decomposition, but applying the scaling and squaring method to T is not numerically
+equivalent to applying it to A. To investigate possible overscaling for full matrices
+we repeated the experiment above using B = Q∗AQ, where A is as in (1.2) and Q
+
+2
+
+
+is a random orthogonal matrix, different for each b. The relative normwise errors
+are shown in the second group of columns of Table 1.1. We see that both expm and
+funm produce errors increasing with b, those from expm being somewhat larger. The
+column headed “ expm(B)‡” shows that by forcing an optimal choice of s, expm can
+be made significantly more accurate, so expm is again suffering from overscaling.
+To determine whether the computed results from expm are acceptable we need to
+know the condition number of the problem, which is
+
+(1.4)
+κexp(A) := lim
+ǫ→0
+sup
+∥E∥≤ǫ∥A∥
+
+∥eA+E −eA∥
+
+ǫ∥eA∥
+.
+
+We evaluated this condition number in the Frobenius norm (for which κexp(A) =
+κexp(B)) using a combination of [11, Alg. 3.17] and [1, Alg. 6.4], implemented in a
+modified version of expm cond from the Matrix Function Toolbox [8]. The results
+are shown in the final column of Table 1.1. For a stable method we expect an error
+bounded by a modest multiple of κexp(A)u. Thus funm is performing stably but expm
+is behaving unstably, especially for b = 107, 108.
+For the original A, the errors for expm are all substantially less than κexp(A)u, but
+of course this condition number allows arbitrary perturbations and so is not appro-
+priate for this triangular A. For structured condition numbers for (block) triangular
+matrices see Dieci and Papini [5].
+Our simple 2 × 2 example reveals two things. First, that for triangular matrices
+overscaling can happen because of large off-diagonal elements. Second, that for full
+matrices overscaling is also possible and may cause unstable behavior of the scaling
+and squaring method.
+The goal of this work is to modify the scaling and squaring method in order to
+overcome the overscaling problem. To this end we employ two novel ideas, one specific
+to triangular matrices and one applying to general matrices.
+Triangular matrices. For the triangular matrix (1.2) we noted that the diagonal
+elements are calculated inaccurately by expm for large |b|. A simple solution is to
+replace the diagonal elements of the computed exponential by eaii. To benefit the
+off-diagonal elements as well, we can replace the values rm(2−saii)2j in the squaring
+phase by e2j−saii, thereby attenuating the propagation of errors.
+Full matrices. For full matrices we introduce a new way of sharpening the trun-
+cation error bounds that are used in the derivation of the method. This allows the
+method to take a potentially smaller s, and hence evaluate the Pad´e approximant at a
+larger-normed matrix and require fewer squarings. We will argue that the sharpening
+is likely to have a particularly beneficial effect when overscaling is possible.
+Our key idea is to exploit the sequence {∥Ak∥1/k}. It is easy to see that
+
+(1.5)
+ρ(A) ≤∥Ak∥1/k ≤∥A∥,
+k = 1: ∞,
+
+where ρ is the spectral radius, and moreover ∥Ak∥1/k →ρ(A) as k →∞[13,
+Cor. 5.6.14]. Figure 1.1 plots the sequence {∥Ak∥1/k
+2
+}20
+k=1 for 54 nonnormal 16 × 16
+matrices A, normalized (without loss of generality) so that ∥A∥2 = 1, drawn from
+MATLAB’s gallery function, from the Matrix Computation Toolbox [7], and from
+the eA literature. We see that typically the sequence is decreasing, although very
+non-monotonic behavior is possible. It is this decrease that we will exploit.
+
+3
+
+
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+0.6
+
+0.7
+
+0.8
+
+0.9
+
+1
+
+Fig. 1.1. {∥Ak∥1/k
+2
+}20
+k=1 for 54 16 × 16 matrices A with ∥A∥2 = 1.
+
+In the derivation of the scaling and squaring algorithm of [10] a power series
+
+hℓ(x) =
+
+∞
+�
+
+k=ℓ
+ck xk
+
+has to be bounded at the matrix argument A (or, more precisely, 2−sA, but we drop
+the scale factor for now), where ℓ= 2m + 1. The bound used previously is [10], [11,
+Sec. 10.3]
+
+(1.6)
+∥hℓ(A)∥≤
+
+∞
+�
+
+k=ℓ
+|ck|∥A∥k.
+
+The following theorem provides a sharper bound.
+Theorem 1.1.
+Let hℓ(x) = �∞
+k=ℓck xk be a power series with radius of con-
+vergence ω, and let �hℓ(x) = �∞
+k=ℓ|ck|xk. For any A ∈Cn×n with ρ(A) < ω we
+have
+
+(1.7)
+∥hℓ(A)∥≤�hℓ(∥At∥1/t),
+
+where ∥At∥1/t = max{∥Ak∥1/k : k ≥ℓand ck ̸= 0}.
+Proof. The existence of t is guaranteed since the sequence {∥Ak∥1/k} is bounded
+above and convergent, as noted above. We have
+
+∥hℓ(A)∥≤
+
+∞
+�
+
+k=ℓ
+|ck|∥Ak∥=
+
+∞
+�
+
+k=ℓ
+|ck|
+�
+∥Ak∥1/k�k
+
+≤
+
+∞
+�
+
+k=ℓ
+|ck|
+�
+∥At∥1/t�k
+= �hℓ(∥At∥1/t).
+
+4
+
+
+0
+5
+10
+15
+20
+10
+0
+
+10
+2
+
+10
+4
+
+10
+6
+
+10
+8
+
+10
+10
+
+ 
+
+ 
+∥A∥k
+2
+∥Ak∥2
+(∥A5∥1/5
+2
+)k
+
+(∥A10∥1/10
+2
+)k
+
+∥Ak∥1/k
+2
+
+Fig. 1.2. For the 2 × 2 matrix A in (1.9), ∥Ak∥2 and various bounds for k = 1: 20.
+
+The bound (1.7) is clearly sharper than (1.6) since ∥At∥1/t ≤∥A∥, and it can be
+arbitrarily smaller. In particular, if A ̸= 0 is nilpotent and ℓ≥n then the bound (1.7)
+is zero while (1.6) is nonzero unless hℓ(x) ≡0. Note that as essentially a special case
+of Theorem 1.1, if the sequence {∥Ak∥}k≥i is nonincreasing then
+
+(1.8)
+∥Ak∥≤
+�
+∥Ai∥1/i�k,
+k ≥i.
+
+To see why (1.7) may help to avoid overscaling, consider the matrix
+
+(1.9)
+A =
+�
+0.9
+500
+0
+−0.5
+
+�
+,
+
+for which the 2-norms of the powers of A decay monotonically for k ≥5, despite the
+large (1,2) element. Figure 1.2 plots ∥Ak∥2, the crude bound ∥A∥k
+2, and the more
+refined bounds (∥A5∥1/5
+2
+)k valid for k ≥5 and (∥A10∥1/10
+2
+)k valid for k ≥10, by (1.8).
+The crude bound is an extreme overestimate and the refined bounds are a significant
+improvement. The reason for the improvement is that when A is powered the large
+(1,2) element multiplies the diagonal elements and there is both multiplicative and
+subtractive cancellation, resulting in little or no growth. The refined bounds take
+advantage of this. For the power series hℓ, such a reduction in the bound for ∥Ak∥
+translates into a reduction in the bound for hℓ(A), and this in turn can lead to a much
+smaller s being chosen in the scaling and squaring method.
+In essence, what we are doing is using the behavior of the first few powers of A
+to extract information about the non-normality of A. In the scaling and squaring
+method we will exploit the powers that must be computed anyway during the course
+of the algorithm, thereby gaining potentially improved accuracy and reduced cost.
+This idea has already been used in an ad hoc way by Hargreaves and Higham [6],
+who in the context of computing the matrix cosine express error bounds in terms of
+∥A2∥1/2 instead of ∥A∥, but here we are exploiting the idea more systematically.
+
+5
+
+
+This paper is organized as follows.
+We begin, in Section 2, by showing how
+to improve the squaring phase of the scaling and squaring method for triangular
+matrices. In Section 3 we summarize the scaling and squaring algorithm of Higham.
+Section 4 presents new bounds for norms of matrix powers that are then exploited
+in Section 5 to produce a new algorithm that is often more accurate, more efficient,
+or both. Numerical experiments that illustrate the benefits of the new algorithm are
+given in Section 6, and Section 7 presents conclusions.
+Finally, we make connections with earlier work. The overscaling phenomenon was
+first identified by Kenney and Laub [14]. It was later analyzed by Dieci and Papini
+[4] for the case of block 2 × 2 block upper triangular matrices (Aij)2
+i,j=1. The latter
+analysis suggests that if the scaling and squaring method is used with s determined
+so that 2−s∥A11∥and 2−s∥A22∥are appropriately bounded, without consideration
+of ∥A12∥, then an accurate approximation to eA will still be obtained. However, no
+algorithm for general A was proposed in [4].
+
+2. Squaring phase for triangular matrices. Our new approach for triangu-
+lar matrices was inspired by the practical observation that the scaling and squaring
+method seems to be immune to overscaling for nilpotent triangular matrices T—
+those with zero diagonal elements.
+Indeed, the diagonal entries of rm(2−sT) are
+correctly computed as ones and remain as ones through the squaring process. Now
+for a general upper triangular matrix T, the scaling and squaring method computes
+rm(2−sT) =: Ds + Fs, where Ds is diagonal and Fs is strictly upper triangular, and
+then forms
+
+Di−1 + Fi−1 = (Di + Fi)2,
+i = s : −1 : 1,
+
+after which D0 + F0 ≈eT . Hence we have the recurrence
+
+Di−1 = D2
+i
+Fi−1 = Di Fi + Fi Di + F 2
+i
+
+�
+i = s : −1 : 1.
+(2.1)
+
+Clearly, errors in the computation of the Di propagate into the off-diagonals contained
+in Fi−1. Indeed a single error ǫI (say) in Di transmits into Fi−1 as 2ǫFi and into
+Di−1 as 2ǫDi, so there is potential exponential error growth. We can virtually remove
+errors in the diagonal and thereby attenuate the overall error growth by computing
+Di = exp(2−idiag(T)) at each stage instead of computing Ds = rm(2−sdiag(T)) and
+then repeatedly squaring. Thus the final steps of the scaling and squaring method
+are rewritten as follows.
+Code Fragment 2.1.
+
+1
+Form X = rm(2−sT). % First phase of method (unchanged).
+2
+Replace diag(X) by exp(2−sdiag(T)).
+
+3
+for i = s −1: −1: 0
+4
+X ←X2
+
+5
+Replace diag(X) by exp(2−idiag(T)).
+6
+Replace (first) superdiagonal of X by explicit formula
+for superdiagonal of exp(2−iT) from [11, (10.42)].
+
+7
+end
+Note that we have gone further in line 6 by computing the correct superdiagonal as
+well, since it is available from an accurate formula at negligible cost.
+We give a numerical example to illustrate the benefits of this approach. We take
+the matrix formed by the MATLAB code, with n = 8,
+
+6
+
+
+0
+10
+20
+30
+40
+50
+
+10
+−18
+
+10
+−16
+
+10
+−14
+
+10
+−12
+
+10
+−10
+
+10
+−8
+
+10
+−6
+
+10
+−4
+
+10
+−2
+
+10
+0
+
+s
+
+ 
+
+ 
+expm_mod
+Code Fragment 2.1
+
+Fig. 2.1. Relative errors from Code Fragment 2.1 and expm mod for a single 8 × 8 matrix with
+s = 0: 53.
+
+T = gallery(’triw’,n,-1);
+T(1,n) = 1e4; T(1:n+1:n^2) = -(1:n).^2
+
+MATLAB’s expm chooses s = 11 and m = 13 for this matrix and produces a relative
+error 8.4 × 10−14. For s from 0 to 53 we compare Code Fragment 2.1, using m = 13,
+with a modified version expm mod of expm that accepts a user-specified choice of s. The
+normwise relative errors for both methods are plotted in Figure 2.1. The optimum
+value of s for expm mod is 4, for which a relative error 4.9 × 10−16 is achieved; as s
+increases the relative error deteriorates rapidly until it reaches 1 at s = 53. However,
+Code Fragment 2.1 remains fully accurate for all s ≥4, showing the effectiveness of
+the strategy of injecting the correct diagonal into the recurrence.
+
+This approach can be extended to quasi-triangular matrices T, which are block
+triangular matrices whose diagonal blocks Tii are 1 × 1 or 2 × 2. Such T arise in the
+real Schur decomposition of a real matrix, in which case the 2 × 2 blocks Tii have
+distinct eigenvalues that are nonreal complex conjugates. We need to compute the
+exponentials of the diagonal blocks
+
+A =
+�
+a
+b
+c
+d
+
+�
+,
+
+which we assume has distinct eigenvalues λ1, λ2. From the general formula f(A) =
+f(λ1)I + f[λ1, λ2](A −λ2I), where f[λ1, λ2] is a divided difference [11, Prob. 1.9], we
+obtain
+
+eA = eλ1 −eλ2
+
+λ1 −λ2
+A +
+�
+eλ1 −λ2
+eλ1 −eλ2
+
+λ1 −λ2
+
+�
+I.
+
+7
+
+
+The eigenvalues of A are (a + d ± µ)/2, where µ =
+�
+
+(a −d)2 + 4bc. After some
+manipulation we obtain
+(2.2)
+
+eA = e(a+d)/2
+�cosh(µ/2) + 1
+
+2(a −d) sinch(µ/2)
+b sinch(µ/2)
+
+c sinch(µ/2)
+cosh(µ/2) −1
+
+2(a −d) sinch(µ/2)
+
+�
+,
+
+where
+
+sinch(x) =
+�
+sinh(x)/x,
+x ̸= 0,
+1,
+x = 0.
+
+This formula is not always evaluated to high relative accuracy, so the use of extra
+precision in its evaluation might be justified.
+Combining this formula with an initial real Schur decomposition we have the
+following outline applicable to any A ∈Rn×n.
+Code Fragment 2.2.
+1
+Compute the real Schur decomposition, A = QTQ∗,
+with block q × q upper quasi-triangular T = (Tij).
+
+2
+Form X = rm(2−sT).
+3
+Replace diag(Xii) by exp(2−sdiag(Tii)), i = 1: q, using (2.2).
+4
+for i = s −1: −1: 0
+
+5
+X ←X2
+
+6
+Replace diag(Xii) by exp(2−idiag(Tii)), i = 1: q, using (2.2).
+7
+end
+
+8
+X ←QXQ∗
+
+Note that this approach has the advantage that it works entirely in real arith-
+metic, in contrast to the Schur–Parlett method specialized to the exponential, which
+necessarily uses the complex Schur form [3], [11, Sec. 10.4.3].
+Our main interest is in improving the scaling and squaring method for full matrices
+without using a Schur decomposition. In the next section we summarize the derivation
+of the existing algorithm on which we will work.
+
+3. The existing scaling and squaring algorithm. In this section we review
+the scaling and squaring algorithm of Higham [10]. Write the [m/m] Pad´e approxi-
+mant of ex as rm(x) = pm(x)/qm(x). We will later need the properties that pm has
+positive coefficients and qm(x) = pm(−x).
+Let νm = min{ |t| : qm(t) = 0 } and
+
+Ωm = { X ∈Cn×n : ρ(e−Xrm(X) −I) < 1 and ρ(X) < νm }.
+
+The functions
+
+(3.1)
+h2m+1(X) = log(e−X rm(X))
+
+are defined for X ∈Ωm, where log denotes the principal logarithm, and so for X ∈
+Ωm we have rm(X) = eX+h2m+1(X).
+Now choose s so that 2−sA ∈Ωm.
+Then
+rm(2−sA)2s = eA+2sh2m+1(2−sA) =: eA+∆A and the matrix ∆A = 2sh2m+1(2−sA)
+represents the backward error resulting from the approximation of eA by the scaling
+and squaring method. Over Ωm, the functions h2m+1 have a power series expansion
+
+h2m+1(X) =
+
+∞
+�
+
+k=2m+1
+ck Xk.
+
+8
+
+
+Table 3.1
+Parameters θm needed in Algorithm 3.1 and Algorithm 5.1 and upper bounds for κA(qm(A)).
+
+m
+θm
+κA(qm(A))
+3
+1.495585217958292e-2
+1.0e0
+5
+2.539398330063230e-1
+1.3e0
+7
+9.504178996162932e-1
+2.6e0
+9
+2.097847961257068e0
+8.2e0
+13 (Alg. 3.1)
+5.371920351148152e0
+2.2e2
+13 (Alg. 5.1)
+4.25
+7.1e1
+
+Higham [10] employs the bound1
+
+∥∆A∥
+
+∥A∥
+= ∥h2m+1(2−sA)∥
+
+∥2−sA∥
+≤
+�h2m+1(∥2−sA∥)
+
+∥2−sA∥
+,
+(3.2)
+
+where �h2m+1(x) = �∞
+k=2m+1 |ck|xk. For m = 1: 21, he uses high precision arithmetic
+to compute the values
+
+(3.3)
+θm = max{ θ : �h2m+1(θ)/θ ≤u },
+
+some of which are listed in Table 3.1. He finds that θm < νm. Thus in exact arith-
+metic, ∥∆A∥≤u∥A∥if s is chosen so that ∥2−sA∥≤θm and rm(2−sA)2s is used to
+approximate eA. Higham’s cost analysis eliminates even degrees of Pad´e approximants
+and reveals that m = 13 is the optimal degree to use when scaling is required. When
+∥A∥≤θ13, his algorithm chooses the first m ∈{3, 5, 7, 9, 13} such that ∥A∥≤θm.
+For m = 3, 5, 7, 9, Higham uses the evaluation scheme
+
+pm(A) = A
+
+(m−1)/2
+�
+
+k=0
+b2k+1A2k +
+
+(m−1)/2
+�
+
+k=0
+b2kA2k =: (um + vm)(A),
+(3.4)
+
+where A2k = A2k. For m = 13, he uses the scheme
+
+p13(A) = A
+�
+A6(b13A6 + b11A4 + b9A2) + b7A6 + b5A4 + b3A2 + b1I
+�
+(3.5)
++ A6(b12A6 + b10A4 + b8A2) + b6A6 + b4A4 + b2A2 + b0I
+
+=: (u13 + v13)(A),
+
+where A2 = A2, A4 = A2
+2, and A6 = A2A4.
+Since qm(A) = pm(−A), we have
+qm(A) = (−um + vm)(A) and rm(A) is obtained from the equation
+
+(3.6)
+(−um + vm)(A)rm(A) = (um + vm)(A).
+
+The algorithm of [10] can be summarized as follows.
+Algorithm 3.1 (scaling and squaring algorithm for the matrix exponential).
+This algorithm evaluates the matrix exponential X = eA of A ∈Cn×n by the scaling
+and squaring method. It uses the parameters θm given in Table 3.1. The algorithm is
+intended for IEEE double precision arithmetic.
+
+1In fact, (3.2) is a slightly sharper variant of the bound used by Higham [10], but it leads to the
+same parameters.
+
+9
+
+
+1
+for m = [3 5 7 9]
+2
+if ∥A∥1 ≤θm, evaluate X = rm(A) using (3.4) and (3.6), quit, end
+
+3
+end
+4
+A ←2−sA with s = ⌈log2(∥A∥1/θ13)⌉
+5
+Evaluate r13(A) using (3.5) and (3.6).
+
+6
+X = r13(A)2s
+by repeated squaring.
+Cost: (πm + s)M + D, where m is the degree of Pad´e approximant used and πm
+(tabulated in [10, Table 2.2]) is the cost of evaluating pm and qm.
+
+4. Practical bounds for norm of matrix power series. The bound for
+∥hℓ(A)∥in Theorem 1.1 is not readily usable in the form stated since it employs
+∥At∥1/t and we will rarely know the value of t. We now develop a more convenient
+form of bound that will be used in the next section to improve Algorithm 3.1. We
+denote by N the set of positive integers.
+Lemma 4.1. For any k such that k = pm1 + qm2 with p, q ∈N and m1, m2 ∈
+N ∪{0},
+
+∥Ak∥1/k ≤max
+�
+∥Ap∥1/p, ∥Aq∥1/q�
+.
+
+Proof. Let δ = max(∥Ap∥1/p, ∥Aq∥1/q). The bound follows from the inequality
+
+∥Ak∥≤∥Apm1∥∥Aqm2∥
+
+≤
+�
+∥Ap∥1/p�pm1 �
+∥Aq∥1/q�qm2
+
+≤δpm1δqm2 = δk.
+
+Theorem 4.2. Define hℓand �hℓas in Theorem 1.1 and suppose ρ(A) < ω and
+p ∈N. Then
+
+(a) ∥hℓ(A)∥≤�hℓ
+�
+max(∥Ap∥1/p, ∥Ap+1∥1/(p+1))
+�
+if ℓ≥p(p −1).
+(b) ∥hℓ(A)∥≤�hℓ
+�
+max(∥A2p∥1/(2p), ∥A2p+2∥1/(2p+2))
+�
+if ℓ≥2p(p−1) and hℓis even.
+
+Proof. For the first part, let Xp = { m ∈N : m ≥p(p −1) } and Yp = { (p +
+1)m1 + pm2 : m1, m2 ∈N ∪{0} }. We have Xp ⊂Yp since any element k ∈Xp can be
+written as k = pq +r with q ≥p−1 and 0 ≤r < p. Then k = (p+1)r+p(q −r) ∈Yp,
+since q −r ≥p −r −1 ≥0. Hence by Lemma 4.1 we have
+
+∥Ak∥1/k ≤max{ ∥Ap+1∥1/(p+1), ∥Ap∥1/p },
+k ≥p(p −1),
+
+and the result follows from Theorem 1.1. Part (b) follows similarly from the relations
+
+{ ℓ: ℓeven, ℓ≥2p(p −1) } = 2Xp ⊂2Yp
+= { (2p + 2)m1 + 2pm2 : m1, m2 ∈N ∪{0} }.
+
+To illustrate Theorem 4.2, suppose ℓ= 12. In view of the inequality ∥A2k∥1/(2k) ≤
+∥Ak∥1/k, the p that minimizes max(∥Ap∥1/p, ∥Ap+1∥1/(p+1)) subject to ℓ≥p(p −1)
+is either p = 3 or p = 4. So the first part of the theorem gives
+
+(4.1)
+∥h12(A)∥≤�h12
+�
+min
+�
+max(∥A3∥1/3, ∥A4∥1/4), max(∥A4∥1/4, ∥A5∥1/5)
+��
+.
+
+10
+
+
+If h12 is even we can apply the second part of the theorem, for which the optimal
+choice of p is 3, which gives
+
+(4.2)
+∥h12(A)∥≤�h12
+�
+max(∥A6∥1/6, ∥A8∥1/8)
+�
+.
+
+For a normal matrix and the 2-norm these upper bounds are both identical to the
+bound h12(∥A∥2), but for nonnormal matrices they can be significantly smaller. For A
+in (1.9), we have ∥h12(A)∥2 ≤�h12(∥A∥2) ≈�h12(500), but ∥h12(A)∥2 ≤�h12(3.82) from
+(4.1) and ∥h12(A)∥2 ≤�h12(2.39) from (4.2), demonstrating the benefit of exploiting
+the structure of h12 as an even function. Figure 1.1 suggests that it will typically be
+the case that (4.2) is sharper than (4.1).
+
+5. New algorithm. We now derive a new algorithm that builds on Algorithm 3.1.
+Our development focuses on increasing the sharpness of the inequality in (3.2) by using
+the bounds of the previous section.
+The function h2m+1 in (3.1) is odd, which follows from the fact that Pad´e ap-
+proximants to the exponential function satisfy rm(−x) = (rm(x))−1 [11, Sec. 10.3]:
+
+h2m+1(−x) = log(exrm(−x))
+= log((e−xrm(x))−1)
+
+= −log(e−xrm(x)) = −h2m+1(x).
+
+Therefore for X ∈Ωm we can write
+
+h2m+1(X) = X
+
+∞
+�
+
+k=2m
+ck+1 Xk =: Xφ2m(X),
+
+where the φ2m are even functions. Let �φ2m(x) = �∞
+k=2m |ck+1|xk. We can now refine
+the bound in (3.2) using Theorem 4.2(b):
+
+∥∆A∥
+
+∥A∥
+= ∥h2m+1(2−sA)∥
+
+∥2−sA∥
+= ∥2−sAφ2m(2−sA)∥
+
+∥2−sA∥
+(5.1a)
+
+≤∥φ2m(2−sA)∥≤�φ2m(αp),
+
+where
+
+αp = 2−s max
+�
+∥A2p∥1/(2p), ∥A2p+2∥1/(2p+2)�
+(5.1b)
+
+and we choose p to minimize αp subject to 2m ≥2p(p −1). As we have �φ2m(θ) =
+�h2m+1(θ)/θ, clearly this analysis does not affect the calculation of the values θm in
+(3.3), but it does affect the choice of scaling parameter s. Whereas before, the pair
+(s, m) could be used if 2−s∥A∥≤θm, now the requirement is only
+
+(5.2)
+2−s max
+�
+∥A2p∥1/(2p), ∥A2p+2∥1/(2p+2)�
+≤θm,
+
+and for a given m this is potentially satisfied with a much smaller s when A is non-
+normal. A significant computational saving could therefore accrue.
+At this point, we have an improved way to choose the parameters m and s, but
+we have not yet considered the effect of rounding errors. The analysis in [10] shows
+that Algorithm 3.1 is not unduly affected by rounding errors except, possibly, in the
+
+11
+
+
+squaring phase. But with our more liberal choice of parameters numerical stability
+needs further analysis. We will combine rigorous error bounds with some heuristics
+in order to arrive at our final algorithm.
+The main aim is to check that the evaluation of rm is accurate in floating point
+arithmetic. Let A ←2−sA, so that A denotes the scaled matrix, and consider the
+evaluation of pm(A) by the schemes described in the previous section. It is shown in
+[10] that the computed matrix �pm(A) satisfies
+
+(5.3)
+∥pm(A) −�pm(A)∥1 ≤�γmnpm(∥A∥1) <∼�γmn∥pm(A)∥1 e∥A∥1,
+
+where �γk = cku/(1−cku) with c a small integer constant. While this is a satisfactory
+bound for the values of ∥A∥allowed by Algorithm 3.1, it is not so for an algorithm
+based on (5.2), because ∥A∥can be arbitrarily large. Therefore we will use the sharper
+error bound [11, Thm. 4.5]
+
+(5.4)
+max(∥pm −�pm∥1, ∥qm −�qm∥1) ≤�γmn∥pm(|A|)∥1 = �γmn∥pm(|A|)T e∥∞,
+
+where e = [1, 1, . . . , 1]T and we have used the properties of pm and qm mentioned at
+the start of Section 3 together with the relations
+
+(5.5)
+∥B∥1 = ∥|B|∥1 = ∥|B|T e∥∞.
+
+The bound (5.4) can be computed in just O(n2) operations.
+The a priori bound (5.4) applies to several different evaluation schemes and does
+not exploit the particular properties of our scheme. In particular, it contains |A|m,
+which is clearly pessimistic since our schemes for pm and qm do not explicitly evaluate
+the mth power of A. However, it turns out that the bound is surprisingly sharp when
+used within our algorithm in practice. We have found that if the inequality
+
+(5.6)
+∥�pm(|A|)T e∥∞/ min(∥�pm∥1, ∥�qm∥1) ≤ceθm
+
+is satisfied for a suitable integer constant c then this is a reliable indicator that �pm
+and �qm have been computed to close to full precision (in other words, we can ignore
+the term �γmn in (5.4)). We have tried the alternative of computing a running error
+bound (an a posteriori bound that is the smallest possible) [9, Sec. 3.3], but found
+that it brings no benefits.
+Suppose that (5.6) is not satisfied, which suggests that the evaluation of pm or qm
+may have been insufficiently accurate. Since the weaker bound (5.3) is satisfactory for
+Algorithm 3.1, this means that s < smax, where smax is the scaling parameter selected
+by Algorithm 3.1. We could simply revert to smax and execute Algorithm 3.1, but
+instead we will use a strategy that in certain cases increases s based on the available
+information. One approach is to increase s so that (5.6) is satisfied. However, we
+have found a more heuristic approach to perform better in practice. Returning to the
+bound (5.1a), using |h2m+1(A)| ≤�h2m+1(|A|) we have
+
+∥∆A∥1
+
+∥A∥1
+= ∥h2m+1(2−sA)∥1
+
+∥2−sA∥1
+≤∥�h2m+1(2−s|A|)∥1
+
+∥2−sA∥1
+
+≤|c2m+1|∥|2−sA|2m+1 ∥1
+
+∥2−sA∥1
++
+
+∞
+�
+
+k=2m+2
+|ck|∥|2−sA|k ∥1
+
+∥2−sA∥1
+(5.7)
+
+≤�φ2m(∥2−sA∥1).
+
+12
+
+
+We select the smallest integer ℓm ≥0 so that |c2m+1|∥|2−s−ℓmA|2m+1∥1/∥2−s−ℓmA∥1 ≤
+u, that is,
+
+(5.8)
+ℓm = max
+��
+log2
+
+�
+|c2m+1|∥|2−sA|2m+1∥1
+
+u∥2−sA∥1
+
+�
+/(2m)
+�
+, 0
+�
+.
+
+If ℓm > 0 then we increase s to s + ℓm. The value s + ℓm cannot exceed smax as long
+as s ≤smax. To see why, write smax = s + t and note that by the definition of smax
+we have �φ2m(∥2−smaxA∥1) ≤u, which yields from (5.7) that
+
+|c2m+1|∥|2−s−tA|2m+1 ∥1
+
+∥2−s−tA∥1
+≤u.
+
+As ℓm is chosen to be the smallest nonnegative integer such that this relation holds,
+we have t ≥ℓm, that is, s + ℓm ≤smax. Note that we can evaluate ∥|2−sA|2m+1 ∥1
+in O(n2) operations by repeated matrix–vector products, as ∥|2−sA|2m+1e∥∞. Also,
+while ∥|2−sA|2m+1 ∥1 can be large, we have |c2m+1| ≪1, so ℓm should not typically
+be large. Experiments show that this heuristic choice of ℓm has the ability usually to
+increase s just when needed. If (5.6) is satisfied we proceed with this s; otherwise we
+revert to Algorithm 3.1, reusing as many of the computed quantities as possible.
+To obtain rm(A) (with A still denoting the scaled matrix 2−sA), we solve the
+multiple right-hand side linear system (3.6) with the coefficient matrix qm(A) = −U +
+V , where U = um(A), V = vm(A). Since ρ(A) ≤αp ≤θm < νm by (1.5) and (5.2),
+the matrix qm(A) is nonsingular and the series qm(A)−1 = �∞
+k=0 ak Ak converges
+absolutely. But in addition we want qm(A) to be well conditioned, so that the system
+(3.6) can be solved accurately in floating point arithmetic. For any ǫ > 0, there exists
+a consistent matrix norm ∥·∥A such that ∥A∥A ≤ρ(A)+ǫ ≤αp+ǫ. The corresponding
+condition number is
+
+κA(qm(A)) = ∥qm(A)∥A∥qm(A)−1∥A
+
+≤pm(αp + ǫ)
+
+∞
+�
+
+k=0
+|ak|(αp + ǫ)k ≤pm(θm + ǫ)
+
+∞
+�
+
+k=0
+|ak|(θm + ǫ)k,
+
+where we have used the properties of pm and qm mentioned at the start of this
+section. We choose ǫ = u and list these upper bounds for κA(qm(A)) in Table 3.1.
+Since the norm ∥· ∥A can be very badly scaled the practical value of these bounds for
+a particular A is difficult to judge. However, we can compute an a posteriori forward
+error bound for (3.6). This bound is, with X denoting rm and the residual matrix
+�R = fl(U + V −(−U + V ) �
+X) for the computed U and V ,
+
+(5.9)
+∥X −�
+X∥M
+∥�
+X∥M
+≤∥|(−U + V )−1|(| �R| + γn+1(|−U + V || �
+X| + |U + V |)∥M
+∥�
+X∥M
+,
+
+where ∥X∥M = maxi,j |xij| and γk = ku/(1 −ku). This bound is from [9, (7.31)] and
+is essentially the best possible forward error bound. Given that we already have an
+LU factorization of −U +V from solving the linear system, this bound can be cheaply
+estimated without computing (−U + V )−1, as described in [9, Sec. 15.1]. The cost
+of forming the bound (5.9) is therefore essentially one matrix multiplication—that
+needed for R.
+We are now in a position to design the new algorithm. Higham’s cost analysis
+and evaluation schemes stated above remain applicable. From (5.1b) it is easily seen
+
+13
+
+
+that α3 ≤α2 ≤α1. Thus, for m = 3, 5, 7, 9 the optimal values of p subject to the
+constraint 2m ≥2p(p −1) are p = 2, 2, 3, 3, respectively, and for m = 13 the optimal
+value of p is 3 or 4 (either of α3 and α4 can be the smaller). Thus, using the 1-norm,
+we need to compute the quantities
+
+αp = max
+�
+d2p, d2p+2
+�
+,
+p = 2: 4,
+d2j := ∥A2j∥1/(2j)
+1
+,
+j = 2: 5.
+
+However, computing the d2j requires computing powers of A that are not needed to
+evaluate rm, for which the highest explicitly computed power is, depending on A,
+the eighth or lower. We will use the powers of A that are evaluated in the schemes
+(3.4) and (3.5), and for other powers compute norm estimates using the block 1-norm
+estimation algorithm of Higham and Tisseur [12], which for an n × n matrix carries
+out a 1-norm power iteration whose iterates are n×t matrices, where t is a parameter
+that we take to be 2. This algorithm typically requires the evaluation of about 4t
+matrix–vector products and almost invariably produces a norm estimate (which is, in
+fact, a lower bound on the norm) correct to within a factor 3.
+Now we describe the details of how to choose m and s, with s minimal, so that
+the bound in (5.1a) is no larger than u.
+1. Compute A2 = A2 and set s = 0 and m = 3, so p = 2 is the optimal value
+such that 2m ≥2p(p −1), as explained above. We need η1 = max(d4, d6).
+Since A4 and A6 are not needed by r3, use estimates of d4 and d6 obtained
+by applying the norm estimator to A2
+2 and A3
+2 (a product A3
+2x required by
+the estimator is computed by three matrix–vector multiplications with A2,
+for example). If η1 ≤θ3 quit, otherwise continue to step 2.
+2. Compute A4 = A2
+2 and set m = 5, for which p = 2 is again the optimal value
+such that 2m ≥2p(p −1). Now we have d4 and can reuse the estimate of d6,
+setting η2 = max(d4, d6). If η2 ≤θ5 quit, otherwise continue to step 3.
+3. Compute A6 = A4A2. For m ∈{7, 9}, p = 3 is the optimal value such that
+2m ≥2p(p −1). We compute η3 = max(d6, d8), in which we estimate d8 by
+applying the norm estimator to A2
+4. If η3 ≤θ7 set m = 7, else if η3 ≤θ9 set
+m = 9, else continue to step 4.
+4. Set m = 13, for which either p = 3 or p = 4 is the optimal value such
+that 2m ≥2p(p −1). The highest power of A that we compute to evaluate
+r13 by (3.5) is A6, so we use the norm estimator to estimate d10 and set
+η4 = max(d8, d10). Choose the smallest s ≥0 such that 2−sη5 ≤θ13, where
+η5 = min(η3, η4).
+We introduce two more algorithmic refinements. First, we use θ13 = 4.25 in place
+of the value θ13 = 5.37 used in Algorithm 3.1 (see Table 3.1). The reason is that
+this produces a slightly better conditioned denominator polynomial q13 and our ex-
+periments show that in the context of our more liberal choice of s this is beneficial to
+the accuracy of the computed exponential. This refinement can lead to s exceeding
+smax, but only by 1, and in this case ℓm = 0 as can be seen from (5.7). The second
+refinement is that for each putative m we compute the correction (5.8) before evalu-
+ating pm and qm and checking the inequality (5.6) and, if the correction is nonzero,
+we proceed to the next larger choice of m. This is simply another means for trying to
+avoid an inaccurate evaluation (or, put another way, wasted computation).
+Algorithm 5.1 (new scaling and squaring algorithm for the matrix exponential).
+This algorithm evaluates the matrix exponential X = eA of A ∈Cn×n by the scaling
+and squaring method. It is intended for IEEE double precision arithmetic. It uses the
+parameters θm given in Table 3.1 and the functions
+
+14
+
+
+• normest, which when invoked as normest(A1, A2, . . . , Ak) produces an es-
+timate of ∥A1A2 . . . Ak∥1 and when invoked as normest(A, m) produces an
+estimate of ∥Am∥1;
+• ell(A, m), which returns the integer max(⌈(log2(α/u)/(2m)⌉), 0),
+where α = |c2m+1|normest(|A|, 2m + 1)/∥A∥1.
+
+1
+A2 = A2
+
+2
+d6 = normest(A2, 3)1/6, η1 = max
+�
+normest(A2, 2)1/4, d6
+�
+
+3
+if η1 ≤θ3 and ell(A, 3) = 0
+4
+Evaluate p3(A) and q3(A) using (3.4).
+
+5
+if ∥p3(|A|)T e∥∞/ min(∥p3∥1, ∥q3∥1) ≤10eθ3
+
+6
+Evaluate r3 using (3.6), quit.
+7
+end
+8
+end
+
+9
+A4 = A2
+2, d4 = ∥A4∥1/4
+1
+10
+η2 = max
+�
+d4, d6
+�
+
+11
+if η2 ≤θ5 and ell(A, 5) = 0
+12
+Evaluate p5(A) and q5(A) using (3.4).
+
+13
+if ∥p5(|A|)T e∥∞/ min(∥p5∥1, ∥q5∥1) ≤10eθ5
+
+14
+Evaluate r5 using (3.6), quit.
+15
+end
+
+16
+end
+
+17
+A6 = A2A4, d6 = ∥A6∥1/6
+1
+18
+d8 = normest(A4, 2)1/8, η3 = max(d6, d8)
+19
+for m = [7, 9]
+20
+if η3 ≤θm and ell(A, m) = 0
+
+21
+Evaluate pm(A) and qm(A) using (3.4).
+
+22
+if ∥pm(|A|)T e∥∞/ min(∥pm∥1, ∥qm∥1) ≤10eθm
+
+23
+Evaluate rm using (3.6), quit.
+
+24
+end
+25
+end
+26
+end
+
+27
+η4 = max
+�
+d8, normest(A4, A6)1/10�
+
+28
+η5 = min(η3, η4)
+
+29
+s = max
+�
+⌈log2(η5/θ13)⌉, 0
+�
+
+30
+s = s + ell(2−sA, 13)
+31
+A ←2−sA, A2 ←2−2sA2, A4 ←2−4sA4, A6 ←2−6sA6
+32
+Evaluate p13(A) and q13(A) using (3.5).
+
+33
+if ∥p13(|A|)T e∥∞/ min(∥p13∥1, ∥q13∥1) ≤(10 + smax)eθ13
+
+34
+Evaluate r13 using (3.6), quit.
+
+35
+else
+36
+s1 = smax −s, s = smax
+37
+A ←2−s1A, A2 ←2−2s1A2, A4 ←2−4s1A4, A6 ←2−6s1A6
+38
+Evaluate r13 using (3.5) and (3.6).
+39
+end
+40
+if A is triangular
+
+41
+Invoke Code Fragment 2.1.
+42
+else
+
+43
+X = r13(A)2s
+by repeated squaring.
+44
+end
+
+15
+
+
+Cost: (πm + s)M + D, where m is the degree of Pad´e approximant used and πm
+(tabulated in [10, Table 2.2]) is the cost of evaluating pm and qm.
+If line 36 is
+executed then the cost is (π13 + s + 3)M + D. If any of the tests at lines 5, 13, and
+22 fail then there is some wasted work in evaluating lower degree pm and qm that are
+not used.
+Note that we have not included the bound (5.9) because it would require an extra
+matrix multiplication and the algorithm performs well in practice without the use
+of it. It is easy to check that if line 33 is reached then Algorithm 3.1 would choose
+m = 13, so at line 36 the algorithm is reverting to Algorithm 3.1.
+
+6. Numerical experiments. We now compare Algorithm 3.1, as implemented
+in expm, and Algorithm 5.1 experimentally. We will use four sets of test matrices.
+Set 1 Matrices from the literature on developing methods for eA (including (1.2)
+with b = 107), mostly intended to be difficult for the scaling and squaring
+method. All are of dimension 10 or less.
+Set 2 10 × 10 matrices from MATLAB (in particular, from the gallery function),
+and from the Matrix Computation Toolbox [7].
+Set 3 The upper triangular Schur factors of the matrices from Set 2.
+Set 4 Test matrices provided with EigTool [19], which are mainly discretizations of
+operators. The matrices are of variable dimension, which we have taken to
+be as close as possible to n = 25.
+The tests in [10] and [11] used Sets 1 and 2 together.
+Our tests were done in MATLAB 7.6 (R2008a). We compute normwise relative
+errors ∥�
+X −eA∥F /∥eA∥F of the computed �
+X by approximating eA by the result
+computed at 100 digit precision using MATLAB’s Symbolic Math Toolbox. For Sets
+1 and 3, Algorithm 5.1 produces many errors of zero, but to facilitate the plots we
+replace a zero error for this algorithm by 10−18.
+For each set we present the results as four plots in a 2×2 grid; see Figures 6.1–6.4.
+The (1,1) plot shows the relative errors for the two algorithms, where the matrices are
+sorted by decreasing value of the condition number κexp(A) in (1.4), and κexp(A)u is
+shown as a solid line. The (1,2) plot shows the log10 of the ratio of relative errors,
+sorted in increasing order, and this same ordering is also used by the (2,1) and (2,2)
+plots. The (2,1) plot shows the values of s chosen by each method. The (2,2) plot
+shows the ratio of the costs of the algorithms, where cost is measured as described
+after the statement of each algorithm and we regard M and D as equal. Note that this
+measure of cost is appropriate only for n ≫10, but since the choice of s and m depends
+only on ∥A∥1 for Algorithm 3.1 and on ∥Ak∥1/k
+1
+for certain k for Algorithm 5.1, these
+results are indicative of the relative costs for much larger matrices. We note that the
+cost ratio cannot exceed 8/7 ≈1.14, and can be greater than 1 only because of the
+differing values for θ13 for the two algorithms (see Table 3.1).
+The main points to note are as follows.
+1. Algorithm 5.1 did not revert to Algorithm 3.1 (on line 36) for any of the test
+matrices. Moreover, the tests at lines 5, 13, and 22 never failed to be satisfied. The
+correction (5.8) was nonzero at line 30 on 6, 10, 0, and 2 occasions on the four test
+sets, respectively. If we remove line 30 then there are 6 reversions in Test 1, 1 in Test
+2, and none in Tests 3 and 4, The value of ell at lines 3, 11, and 20 was nonzero
+once for Test 1, 5 times for Test 2, and not at all for Tests 3 and 4.
+2. For Set 1, Algorithm 5.1 has a cost up to about 5 times smaller than Algo-
+rithm 3.1 while achieving error barely any larger and sometimes orders of magnitude
+smaller. This is due to Algorithm 5.1 frequently choosing a smaller s.
+
+16
+
+
+0
+10
+20
+30
+10
+−20
+
+10
+−10
+
+10
+0
+
+Relative error
+
+ 
+
+ 
+Alg. 3.1
+Alg. 5.1
+
+0
+10
+20
+30
+−20
+
+−15
+
+−10
+
+−5
+
+0
+
+5
+
+log10 of ratio of errors: Alg 5.1/Alg 3.1
+
+0
+10
+20
+30
+40
+0
+
+10
+
+20
+
+30
+
+40
+
+50
+
+Values of s
+
+ 
+
+ 
+Alg. 3.1
+Alg. 5.1
+
+0
+10
+20
+30
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+Ratio of cost: Alg 5.1/Alg 3.1
+
+Fig. 6.1. Results for test matrix Set 1.
+
+0
+10
+20
+30
+40
+50
+10
+−20
+
+10
+−10
+
+10
+0
+
+Relative error
+
+ 
+
+ 
+Alg. 3.1
+Alg. 5.1
+
+0
+10
+20
+30
+40
+50
+−1.5
+
+−1
+
+−0.5
+
+0
+
+0.5
+
+1
+
+log10 of ratio of errors: Alg 5.1/Alg 3.1
+
+0
+20
+40
+60
+0
+
+5
+
+10
+
+15
+
+20
+
+Values of s
+
+ 
+
+ 
+Alg. 3.1
+Alg. 5.1
+
+0
+10
+20
+30
+40
+50
+0.8
+
+0.9
+
+1
+
+1.1
+
+1.2
+
+Ratio of cost: Alg 5.1/Alg 3.1
+
+Fig. 6.2. Results for test matrix Set 2.
+
+17
+
+
+0
+10
+20
+30
+40
+50
+10
+−20
+
+10
+−10
+
+10
+0
+
+Relative error
+
+ 
+
+ 
+Alg. 3.1
+Alg. 5.1
+
+0
+10
+20
+30
+40
+50
+−6
+
+−5
+
+−4
+
+−3
+
+−2
+
+−1
+
+0
+
+1
+
+log10 of ratio of errors: Alg 5.1/Alg 3.1
+
+0
+20
+40
+60
+0
+
+5
+
+10
+
+15
+
+20
+
+Values of s
+
+ 
+
+ 
+Alg. 3.1
+Alg. 5.1
+
+0
+10
+20
+30
+40
+50
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+1.2
+
+Ratio of cost: Alg 5.1/Alg 3.1
+
+Fig. 6.3. Results for test matrix Set 3.
+
+0
+5
+10
+15
+10
+−20
+
+10
+−10
+
+10
+0
+
+Relative error
+
+ 
+
+ 
+Alg. 3.1
+Alg. 5.1
+
+0
+5
+10
+15
+−15
+
+−10
+
+−5
+
+0
+
+5
+
+log10 of ratio of errors: Alg 5.1/Alg 3.1
+
+0
+5
+10
+15
+0
+
+10
+
+20
+
+30
+
+40
+
+50
+
+Values of s
+
+ 
+
+ 
+Alg. 3.1
+Alg. 5.1
+
+0
+5
+10
+15
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+Ratio of cost: Alg 5.1/Alg 3.1
+
+Fig. 6.4. Results for test matrix Set 4.
+
+18
+
+
+0
+5
+10
+15
+20
+25
+30
+35
+10
+−18
+
+10
+0
+
+10
+15
+Set 1
+
+0
+10
+20
+30
+40
+50
+60
+10
+−17
+
+10
+−15
+
+10
+−12
+Set 2
+
+0
+10
+20
+30
+40
+50
+60
+10
+−20
+
+10
+−10
+
+10
+0
+Set 3
+
+0
+5
+10
+15
+10
+−20
+
+10
+0
+
+10
+20
+Set 4
+
+Fig. 6.5.
+Quantities associated with the computed �rm ≈rm(2−sA) for Algorithm 5.1: rel-
+ative error in �rm (“◦”), a posteriori forward error bound (5.9) (“×”), and nκ1(qm)u (“∗”)—an
+approximate a priori bound for the error.
+
+3. For Set 2 there is no significant difference in the accuracy of the two algo-
+rithms. But in 22% of the cases Algorithm 5.1 is less expensive than Algorithm 3.1,
+by up to 17%. while in just two cases it is more expensive, by 12%.
+4. For Set 3, Algorithm 5.1 is more accurate than Algorithm 3.1 in almost every
+case, often by orders of magnitude. This is mainly due to exploiting triangularity in
+the squaring phase.
+5. For Set 4, Algorithm 5.1 is superior to Algorithm 3.1 in speed and accuracy
+for four of the matrices and performs equivalently to it for the rest.
+6. Figure 6.5 provides information about the linear systems (3.6) that are solved
+to obtain rm(2−sA). It shows the relative error ∥rm −�rm∥1/∥rm∥1 along with the a
+posteriori bound (5.9) and the approximate a priori bound nκ1(qm)u for this error.
+The results show that (a) the relative error is reasonably small in every case, (b)
+the system is sometimes solved to much better accuracy than the condition number
+κ1(qm) would suggest (see Set 1), and (c) the a posteriori bound is a surprisingly good
+predictor of the actual error.
+These experiments and our additional investigations lead us to conclude that no
+benefit is gained from using the test (5.6) to gauge whether the evaluation of pm and
+qm has been sufficiently accurate. Therefore we recommend the following simplifica-
+tion of Algorithm 5.1, which we emphasize performs identically to Algorithm 5.1 on
+the tests reported here.
+Algorithm 6.1 (new scaling and squaring algorithm for the matrix exponential).
+This algorithm is identical to Algorithm 5.1 except that lines 5, 7, 13, 15, 22, 24, 33,
+35, and 36–39 are removed.
+
+19
+
+
+7. Conclusions. The propensity of the scaling and squaring method for over-
+scaling has been known for over a decade. The new algorithm developed here, Al-
+gorithm 6.1, remedies this weakness in two different ways. First, it exploits triangu-
+larity, when present, to ensure that the diagonal and first off-diagonal are computed
+accurately during the squaring phase, benefiting all elements of the computed ex-
+ponential. Second, it employs more refined truncation error bounds, based on the
+quantities ∥Ak∥1/k, which can be much smaller than the bounds based on ∥A∥that
+were used previously. These refined bounds enable the algorithm to produce a result
+that often has one or both of the advantages of being more accurate and having a
+lower computational cost than the original algorithm from [10] (Algorithm 3.1).
+
+A general conclusion of this work is that although matrix norms are sometimes
+described as a blunt instrument, they can extract much more information than might
+be thought about the behaviour of a matrix power series, through the use of (estimates
+of) the norms of a small number of matrix powers.
+
+We are currently adapting the ideas developed here to the algorithm derived in
+[1] for computing the Fr´echet derivative of the matrix exponential and to algorithms
+for computing other transcendental matrix functions.
+
+A remaining open question is to understand, and ideally improve, the numerical
+stability of the squaring phase of the scaling and squaring method. Our treatment of
+the triangular case is a first step in this direction.
+
+REFERENCES
+
+[1] Awad H. Al-Mohy and Nicholas J. Higham. Computing the Fr´echet derivative of the matrix
+exponential, with an application to condition number estimation. MIMS EPrint 2008.26,
+Manchester Institute for Mathematical Sciences, The University of Manchester, UK, Febru-
+ary 2008. 20 pp. Revised August 2008. To appear in SIAM J. Matrix Anal. Appl.
+[2] Ernesto Bossa, Matias amd Zacur and Salvador Olmos. Algorithms for computing the group
+exponential of diffeomorphisms: Performance evaluation. In Computer Vision and Pattern
+Recognition Workshops, 2008 (CVPRW ’08), pages 1–8. IEEE Computer Society, 2008.
+[3] Philip I. Davies and Nicholas J. Higham.
+A Schur–Parlett algorithm for computing matrix
+functions. SIAM J. Matrix Anal. Appl., 25(2):464–485, 2003.
+[4] Luca Dieci and Alessandra Papini. Pad´e approximation for the exponential of a block triangular
+matrix. Linear Algebra Appl., 308:183–202, 2000.
+[5] Luca Dieci and Alessandra Papini. Conditioning of the exponential of a block triangular matrix.
+Numer. Algorithms, 28:137–150, 2001.
+[6] Gareth I. Hargreaves and Nicholas J. Higham. Efficient algorithms for the matrix cosine and
+sine. Numer. Algorithms, 40(4):383–400, 2005.
+[7] Nicholas J. Higham. The Matrix Computation Toolbox. http://www.ma.man.ac.uk/~higham/
+mctoolbox.
+[8] Nicholas J. Higham.
+The Matrix Function Toolbox.
+http://www.ma.man.ac.uk/~higham/
+mftoolbox.
+[9] Nicholas J. Higham. Accuracy and Stability of Numerical Algorithms. Society for Industrial and
+Applied Mathematics, Philadelphia, PA, USA, second edition, 2002. ISBN 0-89871-521-0.
+xxx+680 pp.
+[10] Nicholas J. Higham. The scaling and squaring method for the matrix exponential revisited.
+SIAM J. Matrix Anal. Appl., 26(4):1179–1193, 2005.
+[11] Nicholas J. Higham. Functions of Matrices: Theory and Computation. Society for Industrial
+and Applied Mathematics, Philadelphia, PA, USA, 2008. ISBN 978-0-898716-46-7. xx+425
+pp.
+[12] Nicholas J. Higham and Fran¸coise Tisseur. A block algorithm for matrix 1-norm estimation,
+with an application to 1-norm pseudospectra. SIAM J. Matrix Anal. Appl., 21(4):1185–
+1201, 2000.
+[13] Roger A. Horn and Charles R. Johnson. Matrix Analysis. Cambridge University Press, 1985.
+ISBN 0-521-30586-1. xiii+561 pp.
+
+20
+
+
+[14] Charles S. Kenney and Alan J. Laub. A Schur–Fr´echet algorithm for computing the logarithm
+and exponential of a matrix. SIAM J. Matrix Anal. Appl., 19(3):640–663, 1998.
+[15] L. Morai and A. F. Pacheco. Algebraic approach to the radioactive decay equations. Am. J.
+Phys., 71(7):684–686, 2003.
+[16] Roger B. Sidje. Expokit: A software package for computing matrix exponentials. ACM Trans.
+Math. Software, 24(1):130–156, 1998.
+[17] The Control and Systems Library SLICOT. http://www.slicot.org/.
+[18] Charles F. Van Loan. Computing integrals involving the matrix exponential. IEEE Trans.
+Automat. Control, AC-23(3):395–404, 1978.
+[19] Thomas G. Wright. Eigtool. http://www.comlab.ox.ac.uk/pseudospectra/eigtool/.
+[20] Ding Yuan and Warnick Kernan. Explicit solutions for exit-only radioactive decay chains. J.
+Appl. Phys., 101:094907 1–12, 2007.
+
+21
+
+

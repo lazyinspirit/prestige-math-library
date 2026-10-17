@@ -1,0 +1,196 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "58",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-inexact-newton-error-recurrence-under-lipschitz-jacobian",
+      "model": "gpt-6-luna",
+      "context_sha256": "45d6aee93675a04d24f6df0c87b6996eb015cd7f4964daeb52e9b3cd0c3a9a19",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The cited inverse definition is explicitly restricted to n>=1. The singleton-space extension is mathematically immediate but was not stated: its unique linear map composes with itself to the identity. Added the two-sided-inverse convention to the Statement and verified it in step 1.1, preserving n=0 and every estimate. This is a nonfatal definitional scope omission, not a false recurrence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-inexact-newton-krylov-with-descent-safeguard",
+      "model": "gpt-6-luna",
+      "context_sha256": "b806e774cdb652a9df5aebbd254cdbc055885ed745617d1172f0f65f1fb01230",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "For f(x)=x^2/2 at x=1, take eta=0, sigma=1/2, J=1, M=1, lambda_0=lambda_max=1. An admissible deterministic scalar solver can return p=-1 for A=1 (accepted) and p=1 for A=2 (rejected: residual 3 and ascent). The original loop continued after acceptance, overwrote p, and skipped fallback because an earlier attempt was accepted. Added immediate exit retaining the accepted p; fallback now explicitly applies when no step-2 attempt was accepted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-inexact-newton-error-recurrence-under-lipschitz-jacobian",
+      "disposition": "repaired",
+      "post_sha256": "6a26b0f633f42069e7bd3afd90f8d43fa15dc779b0f6e46926d96dc49f846ec6",
+      "review_context_sha256": "3546a8c365cac728a209954d51d18320d11d1846f4eeb7b4b235b2445613a407",
+      "reason": "Checked the full recurrence proof and its actual suppliers. For n=0 the unique linear map is its own inverse and all errors vanish. For n>=1 the local uniform inverse bound applies; the vector remainder gives 3L/2 after changing reference Jacobian, the residual bounds p by M(1+eta-bar)C_F times the scaled error, and the displayed e-plus identity yields the stated C. No assertion that x+p lies in U is needed for this single estimate. Only the missing zero-dimensional convention and its verification changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-inexact-newton-krylov-with-descent-safeguard",
+      "disposition": "repaired",
+      "post_sha256": "4f45258cb0d0620db5e2c7ba5e4f7f94bfc94c57b53b6014d45bc53bfa18abfd",
+      "review_context_sha256": "55682bd8d8af0f3cca00e1f433948472e0a5ebe1b27d75a5c25dd55b3e4896c5",
+      "reason": "Checked all procedure inputs, Krylov membership and residual requirements, shifts and caps, outer stopping order, fallback, and line-search interface. Acceptance now exits immediately with the checked candidate. Rejected attempts alone advance shifts; exhaustion selects -g, whose strict angle test holds for nonzero g and 0<sigma<1. Thus the line search receives a checked descent direction. The repair preserves all budgets, outputs, failure causes, and the distinction between shifted globalization and local unshifted full-step rates. This is a repair self-check, not independent acceptance of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-inexact-newton-local-forcing-rates",
+    "lem-inexact-newton-krylov-finite-budget-checked-return",
+    "ex-rosenbrock-newton-step-satisfies-strong-wolfe",
+    "ex-rosenbrock-indefinite-hessian-requires-descent-safeguard",
+    "ex-inexact-newton-forcing-tolerance-cost-and-rate",
+    "ex-trust-region-newton-cauchy-truncated-cg"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-inexact-newton-error-recurrence-under-lipschitz-jacobian",
+      "outcome": "confirmed_nonfatal",
+      "locus": "statement and proof step 1.1",
+      "status": "fixed",
+      "reason": "The cited inverse definition is explicitly restricted to n>=1. The singleton-space extension is mathematically immediate but was not stated: its unique linear map composes with itself to the identity. Added the two-sided-inverse convention to the Statement and verified it in step 1.1, preserving n=0 and every estimate. This is a nonfatal definitional scope omission, not a false recurrence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-inexact-newton-krylov-with-descent-safeguard",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "locus": "definition steps 2–3",
+      "status": "fixed",
+      "reason": "For f(x)=x^2/2 at x=1, take eta=0, sigma=1/2, J=1, M=1, lambda_0=lambda_max=1. An admissible deterministic scalar solver can return p=-1 for A=1 (accepted) and p=1 for A=2 (rejected: residual 3 and ascent). The original loop continued after acceptance, overwrote p, and skipped fallback because an earlier attempt was accepted. Added immediate exit retaining the accepted p; fallback now explicitly applies when no step-2 attempt was accepted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "scope": "Only the two assigned draft frontier items and the lemma's owning proof-contract entry were edited. No published or outside-frontier consumer findings; no published-ledger update is proposed.",
+    "interface_changes": [
+      {
+        "id": "lem-inexact-newton-error-recurrence-under-lipschitz-jacobian",
+        "section": "Statement",
+        "before": "Let $n\\ge0$ be an integer",
+        "after": "For $n=0$, call a linear map invertible when it has a two-sided linear inverse,\nextending the positive-dimensional convention of [[def-invertible-euclidean-linear-map]].\nLet $n\\ge0$ be an integer",
+        "effect": "Adds the missing local convention; preserves all hypotheses, dimensional scope and estimates."
+      },
+      {
+        "id": "alg-inexact-newton-krylov-with-descent-safeguard",
+        "section": "Definition",
+        "before": "Acceptance had no loop-exit instruction; step 3 said 'If no regularized attempt was accepted'.",
+        "after": "If the attempt is accepted, retain this $p$ and immediately leave the regularization loop. Step 3 now says 'If no attempt in step 2 was accepted'.",
+        "effect": "Retains the first direction passing the actual residual and strict angle checks."
+      }
+    ],
+    "dependency_evidence": {
+      "lem-inexact-newton-error-recurrence-under-lipschitz-jacobian": "Read all six direct suppliers, including the complete uniform-inverse and vector-remainder arguments. The inverse definition starts at n>=1; the Euclidean zero space is a singleton. The positive-dimensional proof uses the suppliers within their hypotheses. For L=0, eta=0 and e=0 the displayed bounds remain valid. No AC is used.",
+      "alg-inexact-newton-krylov-with-descent-safeguard": "Read the line-search and Wolfe definitions, Krylov and matrix-free definitions, Hessian and matrix-product conventions, and C1/gradient/norm definitions. The arbitrary supplied solver's residual status is not trusted. Nonzero g and sigma<1 ensure fallback descent; budgets do not promise successful search or convergence."
+    },
+    "downstream_reviews": [
+      {
+        "supplier": "lem-inexact-newton-error-recurrence-under-lipschitz-jacobian",
+        "id": "thm-inexact-newton-local-forcing-rates",
+        "path": "items/thm-inexact-newton-local-forcing-rates.md",
+        "affected_use": "Statement imports the zero operator-norm convention; F1 and proof steps 1.2–3.2 use the residual-to-error recurrence, while step 1.1 handles n=0 separately.",
+        "disposition": "unaffected",
+        "reason": "The new inverse convention validates the singleton case without altering the imported estimates or the invariant-neighborhood/rate argument. No consumer edit or further hop is needed."
+      },
+      {
+        "supplier": "alg-inexact-newton-krylov-with-descent-safeguard",
+        "id": "lem-inexact-newton-krylov-finite-budget-checked-return",
+        "path": "items/lem-inexact-newton-krylov-finite-budget-checked-return.md",
+        "affected_use": "F1 and proof steps 1.1–2.1 rely on a checked strict descent direction reaching the line search; step 3.1 bounds calls by J+1 per update.",
+        "disposition": "unaffected",
+        "reason": "Immediate accepted-solve exit makes the chosen p precisely a checked direction; early exit can only reduce the stated upper counts. Failure statuses and feasibility remain sound."
+      },
+      {
+        "supplier": "alg-inexact-newton-krylov-with-descent-safeguard",
+        "id": "ex-rosenbrock-newton-step-satisfies-strong-wolfe",
+        "path": "items/ex-rosenbrock-newton-step-satisfies-strong-wolfe.md",
+        "affected_use": "F3 and verification step 1.2 use the exact unshifted residual and strict angle test to accept the displayed p with J=0.",
+        "disposition": "unaffected",
+        "reason": "The accepted unshifted candidate now leaves the loop explicitly; with J=0 the numerical direction and subsequent unit Wolfe trial are unchanged."
+      },
+      {
+        "supplier": "alg-inexact-newton-krylov-with-descent-safeguard",
+        "id": "ex-rosenbrock-indefinite-hessian-requires-descent-safeguard",
+        "path": "items/ex-rosenbrock-indefinite-hessian-requires-descent-safeguard.md",
+        "affected_use": "F3 and verification steps 2.1–2.2 reject p=(-1,-1/100) at lambda=0 and accept p=(2,-2/203) at lambda=3 for any J>=1.",
+        "disposition": "unaffected",
+        "reason": "The first ascent candidate is still rejected; the shifted residual-zero descent candidate now exits at acceptance, preserving the precise direction used for the feasible-ray argument."
+      },
+      {
+        "supplier": "alg-inexact-newton-krylov-with-descent-safeguard",
+        "id": "ex-inexact-newton-forcing-tolerance-cost-and-rate",
+        "path": "items/ex-inexact-newton-forcing-tolerance-cost-and-rate.md",
+        "affected_use": "F3 and verification steps 2.1–3.1 accept the scalar unshifted candidate and then its strong Wolfe unit step, with J=0 and horizon-dependent M_N.",
+        "disposition": "unaffected",
+        "reason": "Residual and descent inequalities, full-step acceptance and the finite-prefix budget qualification are unchanged; immediate exit retains their checked candidate."
+      },
+      {
+        "supplier": "alg-inexact-newton-krylov-with-descent-safeguard",
+        "id": "ex-trust-region-newton-cauchy-truncated-cg",
+        "path": "items/ex-trust-region-newton-cauchy-truncated-cg.md",
+        "affected_use": "F5 and proof step 1.1 accept p_N=(-1,3)/sqrt(2) with zero residual and g^T p_N=-4<-5/2, using J=0.",
+        "disposition": "unaffected",
+        "reason": "The unshifted accepted candidate exits with the same p_N; the full Wolfe step and trust-region comparison remain sound. This item is also in the frozen frontier."
+      }
+    ],
+    "page_review": {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/nonconvex-line-search-and-inexact-newton-methods.md",
+      "affected_use": "The page says the procedure recomputes each shifted-system residual, checks descent, and returns only verified Wolfe steps.",
+      "disposition": "unaffected",
+      "reason": "The accepted-solve exit restores the intended checked-direction flow; the local-rate qualification and item placement remain accurate."
+    },
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-inexact-newton-error-recurrence-under-lipschitz-jacobian.md items/alg-inexact-newton-krylov-with-descent-safeguard.md --json",
+        "exit_code": 0,
+        "result": "2 files; lemma proof pass; algorithm not-applicable; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-inexact-newton-error-recurrence-under-lipschitz-jacobian.md items/alg-inexact-newton-krylov-with-descent-safeguard.md --json",
+        "exit_code": 0,
+        "result": "2 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-58.proof-contracts.json --strict --items lem-inexact-newton-error-recurrence-under-lipschitz-jacobian --json",
+        "exit_code": 0,
+        "result": "Strict assigned-lemma contract pass; no errors or warnings. Initial repair diagnostics for F6 mapping and A0 token were corrected."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-inexact-newton-error-recurrence-under-lipschitz-jacobian.md items/alg-inexact-newton-krylov-with-descent-safeguard.md",
+        "exit_code": 0,
+        "result": "2 items, 5 steps, 0 defects; run once after final item edits."
+      }
+    ],
+    "metadata": "Owning contract step 1.1 claim/inputs, F6 use mapping and zero/empty boundary evidence synchronized under acquire/reread/edit/check/release lock. Review hashes were captured immediately after each completed item review; no later supplier-interface edit followed either capture.",
+    "source_reading": "Familiar elementary finite-dimensional analysis and procedure logic; only local item arguments were consulted. No external source reading or independent acceptance of these repairs is claimed.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection, ordinary downstream routing, and independent rejudgment remain controller-owned."
+  }
+}

@@ -1,0 +1,327 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "83",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-stiefel-grassmann-optimization-conventions",
+      "model": "gpt-6-luna",
+      "context_sha256": "b784bd083f208b32fe6553fdb6332a8fb4a0eae1a9c13c7cd05778ac34720a0d",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The unqualified matrix domain permits rectangular M, for which M+M^T is undefined. Restricted sym to square real matrices; the manifold and metric conventions and all square-product uses are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-trace-eigenspace-optimization-with-lanczos-start-angle",
+      "model": "gpt-6-luna",
+      "context_sha256": "bcec00f3db720a6d188f1001d4888097496f13963b85ca720129041c7eb632bf",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The Example incorrectly attributes a candidate-gap bound to a theorem about the maximal Ritz value. Proof 3.1 already has the correct inequality direction and explicit 4/9<=5/8 arithmetic. Clarified the Example to separate the theorem target from the independently computed candidate comparison, preserving every numerical claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-stiefel-qr-polar-retractions",
+      "model": "gpt-6-luna",
+      "context_sha256": "3e0420f7df1883c2adb6cdd97c7a3502ab0948371dda9f08e047b01c100c6260",
+      "outcome": "false_positive",
+      "reason": "The Definition defines exact QR/polar maps and proves their domains and orthonormal outputs; a definition need not duplicate its separate property theorem. thm-stiefel-retractions-are-first-order proves smoothness and R_X(0)=X in 1.1, the polar derivative in 1.2, and the QR derivative in 2.1 (upper-triangular skew derivative is zero), then descends to Grassmann in 3.1. No missing retraction proof exists.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-riemannian-trust-region",
+      "model": "gpt-6-luna",
+      "context_sha256": "07b11b36841ae9d28381ea979e20a82b42e0e244901d9535f90754d53892ad5f",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The Definition specifies M_B and constraints on B_x but supplies no operator family or evaluation rule, leaving the model in step 2 undetermined. Added an explicit input rule evaluating the intrinsic self-adjoint real-linear family x->B_x, represented consistently in Grassmann horizontal frames, with the original uniform bound. This is an incomplete algorithm-input defect, rather than a false numerical inequality or missing citation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-stiefel-grassmann-optimization-conventions",
+      "disposition": "repaired",
+      "post_sha256": "18496f83af338a323442a27e762ef83b8b9717fc2ff679bae7f822510e1d4299",
+      "review_context_sha256": "d2ce19dee4abef47f79afbb34829a7c790bff0af97cbe26adf2cb9e1a39a114a",
+      "reason": "Restricted sym to square real matrices. Checked the full metric verification: sum-of-squares positivity, smooth local frame/projector pairing, and trace invariance under orthogonal frame changes. All direct consumers either use the unchanged manifold/metric conventions or sym of an r-by-r product. Owning contract mirrors updated; strict focused contract check passed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-trace-eigenspace-optimization-with-lanczos-start-angle",
+      "disposition": "repaired",
+      "post_sha256": "c3df9a5790be7424262d413fd188cbfd5c809b24579ee35fa6dd40ce3d3ec0ee",
+      "review_context_sha256": "ba4889c484f0927bd561722925a710f5548b835642e8265d9b0074b24bcc75c5",
+      "reason": "Clarified the Example theorem target; the full proof correctly computes norm squared 3/8, quadratic form 41/24, quotient 41/9 and gap 4/9, and bounds 0<=5-theta_2<=4/9<=5/8. The local Lanczos supplier Statement and full argument were read, including its separated-interval filter and Ritz maximum comparison. No Statement or Definition section changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-stiefel-qr-polar-retractions",
+      "disposition": "unaffected",
+      "post_sha256": "cf6939ea5ebe1739e32f935663b3f9449b4cf9e809b113a49643b345dd0ee038",
+      "review_context_sha256": "91419ae6026519c91c733fd12cfcb941bb8d213f5b52256dc613eb9019f2fcbc",
+      "reason": "The Definition defines exact QR/polar maps and proves their domains and orthonormal outputs; a definition need not duplicate its separate property theorem. thm-stiefel-retractions-are-first-order proves smoothness and R_X(0)=X in 1.1, the polar derivative in 1.2, and the QR derivative in 2.1 (upper-triangular skew derivative is zero), then descends to Grassmann in 3.1. No missing retraction proof exists. Checked actual Gram-Schmidt, spectral, square-root and inversion supplier statements. The square-real sym clarification affects no retraction formula. Its contract F6 quote was refreshed only to mirror the repaired conventions supplier; the item carrier remains unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    },
+    {
+      "id": "alg-riemannian-trust-region",
+      "disposition": "repaired",
+      "post_sha256": "1024f31c7497d3e0200f5a913992ecd2954fc80af85406eab77455a55a982eef",
+      "review_context_sha256": "ffbdd86f716bbca155efd00913f47a6e854f53fa6de84d24b3080742e99e629f",
+      "reason": "Added the missing model-operator input rule, retaining the uniform bound and intrinsic real tangent-space interpretation. Checked Cauchy formula by minimizing -tau||g||^2+tau^2<g,Bg>/2 on [0,Delta/||g||], feasibility and fractional-decrease fallback, zero-gradient/target/cap ordering, positive radius updates and small-radius override including M_B=0. The three direct consumers use exactly these unchanged branches and bounds; the finite-basis example explicitly supplies B_x=0. Strict focused contract and render checks pass; algorithm has no phase proof.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "prop-stiefel-grassmann-are-compact",
+    "thm-stiefel-grassmann-tangent-projections",
+    "prop-stiefel-grassmann-riemannian-gradient-formulas",
+    "def-stiefel-qr-polar-retractions",
+    "def-stiefel-grassmann-projected-vector-transport",
+    "ex-riemannian-stiefel-nonconvex-saddle",
+    "ex-repeated-eigenspace-on-grassmann",
+    "ex-trace-eigenspace-optimization-with-lanczos-start-angle",
+    "ex-finite-basis-projector-optimization-on-grassmann",
+    "alg-riemannian-trust-region",
+    "alg-riemannian-armijo-backtracking",
+    "lem-riemannian-trust-region-ratio-accuracy-for-small-radii",
+    "thm-riemannian-trust-region-first-order-complexity"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-stiefel-grassmann-optimization-conventions",
+      "severity": "nonfatal",
+      "finding": "The unqualified matrix domain permits rectangular M, for which M+M^T is undefined. Restricted sym to square real matrices; the manifold and metric conventions and all square-product uses are preserved.",
+      "repair": "Definition: square real matrix domain for sym; all direct uses remain within that domain."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-trace-eigenspace-optimization-with-lanczos-start-angle",
+      "severity": "nonfatal",
+      "finding": "The Example incorrectly attributes a candidate-gap bound to a theorem about the maximal Ritz value. Proof 3.1 already has the correct inequality direction and explicit 4/9<=5/8 arithmetic. Clarified the Example to separate the theorem target from the independently computed candidate comparison, preserving every numerical claim.",
+      "repair": "Example distinguishes maximal Ritz gap from explicit candidate gap; every quantitative claim retained."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "def-stiefel-qr-polar-retractions",
+      "finding": "The Definition defines exact QR/polar maps and proves their domains and orthonormal outputs; a definition need not duplicate its separate property theorem. thm-stiefel-retractions-are-first-order proves smoothness and R_X(0)=X in 1.1, the polar derivative in 1.2, and the QR derivative in 2.1 (upper-triangular skew derivative is zero), then descends to Grassmann in 3.1. No missing retraction proof exists."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-riemannian-trust-region",
+      "severity": "fatal",
+      "defect_type": "other",
+      "finding": "The Definition specifies M_B and constraints on B_x but supplies no operator family or evaluation rule, leaving the model in step 2 undetermined. Added an explicit input rule evaluating the intrinsic self-adjoint real-linear family x->B_x, represented consistently in Grassmann horizontal frames, with the original uniform bound. This is an incomplete algorithm-input defect, rather than a false numerical inequality or missing citation.",
+      "repair": "Definition now explicitly requires an evaluation rule for the bounded intrinsic family B_x; all model, Cauchy and radius formulas are unchanged."
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "record-examination",
+      "suppliers": [
+        "def-stiefel-grassmann-optimization-conventions",
+        "alg-riemannian-trust-region"
+      ],
+      "finding": "Direct dependency/reference and page-use inventory contains no published consumer. All listed direct item consumers are draft frozen-frontier items, including the finite-basis example; no published repair or outside-frontier maintenance finding arose.",
+      "published_consumers": [],
+      "maintenance": []
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Conventions review complete; strict contract check passed (1/1, zero errors/warnings). Review hashes captured immediately after completion. Existing local supplier statements were read; no external source reading claimed. Direct-consumer and page examinations recorded. Next: repair the example theorem-target attribution.",
+    "Example repaired: p(A)b=(1,1/4,-1/4)/sqrt(3), norm squared 3/8, quadratic form 41/24, quotient 41/9. Supplier theorem Statement and complete Proof read: it bounds theta_2, with tau=sqrt(2), T_1(4)=4 and bound 5/8. No Statement/Definition section changed. Owning Example-anchor mirrors pending shared lock; capture review hashes next.",
+    "Example mathematical review completed and hashes captured before any later supplier edit. Precheck passed and rendercheck passed on all four assigned items at this state. Metadata-only Example-anchor mirror reconciliation remains pending the shared lock; no source or review-context hash depends on that contract JSON.",
+    "Retraction review complete without editing its carrier: both local arguments and actual prerequisite statements checked; hash equals assignment before guard. Captured review-context immediately. Next: explicit trust-region operator input; later reconcile Example and algorithm anchors under shared lock.",
+    "Trust-region repair made: supply the B_x rule as input; retain all Cauchy, subproblem, stopping and radius branches. Consumers read in full: small-radius ratio lemma only uses the operator bound at its fixed x; complexity theorem already quantifies the family; finite-basis example explicitly selects B_x=0. No necessary consumer item edits. Pending: contract mirrors/checks and immediate review-context capture.",
+    "All four mathematical reviews completed, with each review-context captured immediately before editing any later supplier. Familiar elementary matrix and trust-region arguments independently checked; no external source reading or independent review of own repairs claimed. Three item edits; QR/polar definition carrier unchanged. No created prerequisite or gate diagnostic. Focused strict contract: 4/4, zero errors/warnings. Rendering: all four passed before final algorithm edit and final algorithm passed again. Precheck: three proof-bearing files pass; algorithm returns zero checked proofs as expected. Pending only final contract-anchor mirror reconciliation and batched proof-layout result.",
+    "Completed: acquired/reread/edited/checked/released the shared lock for current batch contract mirrors (8 Example anchors and 9 algorithm anchors); focused strict contract check passed again with 4/4 items, zero errors/warnings. Final item edits preceded the single batched proof-layout run: 3 changed items, 6 steps, zero defects. All listed downstream items are in the frozen frontier and draft; no outside-frontier or published maintenance repair is required. No unresolved mathematical obligation remains in this unit; the fatal decision still requires the engine-owned later adjudication round.",
+    "The unchanged QR/polar item has metadata_repair_only:true solely because its F6 contract quotation mirrors the conventions supplier. This is not a repair of the rejected retraction-property concern. Final report written at the assigned path; engine retains ownership of later rounds, certification and gates."
+  ],
+  "consumer_examinations": [
+    {
+      "supplier": "def-stiefel-grassmann-optimization-conventions",
+      "id": "prop-stiefel-grassmann-are-compact",
+      "path": "items/prop-stiefel-grassmann-are-compact.md",
+      "affected_use": "Statement and Given use St(n,r)={X:X^T X=I_r} and its continuous Grassmann quotient; sym is unused.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-stiefel-grassmann-optimization-conventions",
+      "id": "thm-stiefel-grassmann-tangent-projections",
+      "path": "items/thm-stiefel-grassmann-tangent-projections.md",
+      "affected_use": "Statement and Proof 2.1 use sym(X^T G), where X and G are n-by-r and X^T G is r-by-r.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-stiefel-grassmann-optimization-conventions",
+      "id": "prop-stiefel-grassmann-riemannian-gradient-formulas",
+      "path": "items/prop-stiefel-grassmann-riemannian-gradient-formulas.md",
+      "affected_use": "Statement uses G-X sym(X^T G) with X,G n-by-r; sym acts on a square r-by-r matrix.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-stiefel-grassmann-optimization-conventions",
+      "id": "def-stiefel-qr-polar-retractions",
+      "path": "items/def-stiefel-qr-polar-retractions.md",
+      "affected_use": "Facts F6 and Proof 2.1 use horizontal representatives and simultaneous right-orthogonal frame changes; sym is unused.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-stiefel-grassmann-optimization-conventions",
+      "id": "def-stiefel-grassmann-projected-vector-transport",
+      "path": "items/def-stiefel-grassmann-projected-vector-transport.md",
+      "affected_use": "Definition uses Z-Y sym(Y^T Z) for n-by-r Y,Z; Y^T Z is r-by-r. Proof 2.1 also uses square X^T Z.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-stiefel-grassmann-optimization-conventions",
+      "id": "ex-riemannian-stiefel-nonconvex-saddle",
+      "path": "items/ex-riemannian-stiefel-nonconvex-saddle.md",
+      "affected_use": "Example uses St(3,1)=S^2; Proof 1.1 uses scalar e_2^T(2e_2) in the tangent projection.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-stiefel-grassmann-optimization-conventions",
+      "id": "ex-repeated-eigenspace-on-grassmann",
+      "path": "items/ex-repeated-eigenspace-on-grassmann.md",
+      "affected_use": "Example and Proof 1.1 identify unit vectors modulo O(1) as lines and use the unchanged rank-one quotient metric.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-stiefel-grassmann-optimization-conventions",
+      "id": "ex-trace-eigenspace-optimization-with-lanczos-start-angle",
+      "path": "items/ex-trace-eigenspace-optimization-with-lanczos-start-angle.md",
+      "affected_use": "Example uses St(3,1)=S^2; Proof 1.1 applies the rank-one Stiefel gradient projection, whose sym argument is scalar.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-stiefel-grassmann-optimization-conventions",
+      "id": "ex-finite-basis-projector-optimization-on-grassmann",
+      "path": "items/ex-finite-basis-projector-optimization-on-grassmann.md",
+      "affected_use": "The real-conventions dependency is present, but Example and Proof 1.1-3.1 use complex frames, horizontal projections and zero models; no sym use occurs.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-stiefel-grassmann-optimization-conventions",
+      "id": "alg-riemannian-trust-region",
+      "path": "items/alg-riemannian-trust-region.md",
+      "affected_use": "Definition selects real Stiefel/Grassmann Frobenius tangent spaces or the complex counterpart; its model uses a real inner product and no sym.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-stiefel-grassmann-optimization-conventions",
+      "id": "alg-riemannian-armijo-backtracking",
+      "path": "items/alg-riemannian-armijo-backtracking.md",
+      "affected_use": "Definition uses real Stiefel/Grassmann, grad f and retracted directions; it does not apply sym to a rectangular matrix.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-riemannian-trust-region",
+      "id": "lem-riemannian-trust-region-ratio-accuracy-for-small-radii",
+      "path": "items/lem-riemannian-trust-region-ratio-accuracy-for-small-radii.md",
+      "affected_use": "Facts F2 and Proof 2.1 use feasibility, fraction-of-Cauchy decrease and small-radius Cauchy selection. Its Statement explicitly supplies a self-adjoint B_x and ||B_x||<=M_B at fixed x; adding the algorithm input leaves the estimate intact.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-riemannian-trust-region",
+      "id": "thm-riemannian-trust-region-first-order-complexity",
+      "path": "items/thm-riemannian-trust-region-first-order-complexity.md",
+      "affected_use": "Statement already assumes each model B_x is self-adjoint real-linear and uniformly bounded. Facts F1 and Proof 1.2, 2.2-2.3 use the same Cauchy safeguard and radius branches; the supplied family is exactly the required input.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-riemannian-trust-region",
+      "id": "ex-finite-basis-projector-optimization-on-grassmann",
+      "path": "items/ex-finite-basis-projector-optimization-on-grassmann.md",
+      "affected_use": "Example says to choose the zero self-adjoint model operator, and Proof 3.1 explicitly chooses B_x=0 with M_B=0. This is a frame-consistent input rule and satisfies the clarified algorithm without changing the application.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    }
+  ],
+  "page_examinations": [
+    {
+      "supplier": "def-stiefel-grassmann-optimization-conventions",
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/riemannian-optimization-on-stiefel-and-grassmann-manifolds.md",
+      "affected_use": "Page summary fixes real Frobenius metrics and describes projected-gradient formulas; it never gives a rectangular sym domain.",
+      "disposition": "unchanged_sound"
+    },
+    {
+      "supplier": "alg-riemannian-trust-region",
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/riemannian-optimization-on-stiefel-and-grassmann-manifolds.md",
+      "affected_use": "Summary describes a finite-budget real or complex Grassmann trust-region method with conditional first-order outer-trial counts. Adding a supplied bounded model family preserves those statements.",
+      "disposition": "unchanged_sound"
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-stiefel-grassmann-optimization-conventions.md items/ex-trace-eigenspace-optimization-with-lanczos-start-angle.md items/def-stiefel-qr-polar-retractions.md items/alg-riemannian-trust-region.md",
+      "exit_code": 0,
+      "result": "3 proof-bearing items passed; zero failures."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-stiefel-grassmann-optimization-conventions.md items/ex-trace-eigenspace-optimization-with-lanczos-start-angle.md items/def-stiefel-qr-polar-retractions.md items/alg-riemannian-trust-region.md",
+      "exit_code": 0,
+      "result": "4 files passed; algorithm subsequently edited and rechecked separately."
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-riemannian-trust-region.md",
+      "exit_code": 0,
+      "result": "No phase proof; zero checked, zero failures."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-riemannian-trust-region.md",
+      "exit_code": 0,
+      "result": "Final algorithm carrier passed."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-83.proof-contracts.json --strict --items def-stiefel-grassmann-optimization-conventions,ex-trace-eigenspace-optimization-with-lanczos-start-angle,def-stiefel-qr-polar-retractions,alg-riemannian-trust-region",
+      "exit_code": 0,
+      "result": "Final contract mirrors: 4/4 items, zero errors/warnings."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/def-stiefel-grassmann-optimization-conventions.md items/ex-trace-eigenspace-optimization-with-lanczos-start-angle.md items/alg-riemannian-trust-region.md",
+      "exit_code": 0,
+      "result": "3 items, 6 steps, zero defects; run once after all item edits."
+    }
+  ],
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-83.proof-contracts.json": "37eb103894a5f4f4017e2aaf340f5728ecc0af0a9f89132d41cbb04061b1f9ce"
+  }
+}

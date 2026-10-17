@@ -1,0 +1,123 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-50-1",
+  "inventory": {
+    "pages": [
+      "preconditioner-algorithms-and-residual-metrics",
+      "preconditioner-algorithms-and-residual-metrics-examples"
+    ],
+    "items": [
+      "alg-ilu0-fixed-pattern-factorization",
+      "thm-ilu0-factor-pattern-and-work-counts",
+      "alg-flexible-gmres-variable-right-preconditioning",
+      "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+      "ex-left-preconditioned-residual-can-understate-physical-residual",
+      "ex-ilu0-tridiagonal-factorization",
+      "cex-ilu0-product-can-create-fill-outside-input-pattern"
+    ],
+    "pairs": [
+      "preconditioner-algorithms-and-residual-metrics"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/alg-ilu0-fixed-pattern-factorization.md",
+    "items/thm-ilu0-factor-pattern-and-work-counts.md",
+    "items/alg-flexible-gmres-variable-right-preconditioning.md",
+    "items/thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span.md",
+    "items/ex-left-preconditioned-residual-can-understate-physical-residual.md",
+    "items/ex-ilu0-tridiagonal-factorization.md",
+    "items/cex-ilu0-product-can-create-fill-outside-input-pattern.md",
+    "library/numerical-linear-algebra-and-approximation/preconditioner-algorithms-and-residual-metrics.md",
+    "library/numerical-linear-algebra-and-approximation/preconditioner-algorithms-and-residual-metrics-examples.md"
+  ],
+  "write_batches": [
+    "50"
+  ],
+  "consumer_scope": [
+    {
+      "id": "alg-flexible-gmres-variable-right-preconditioning",
+      "path": [
+        "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+        "alg-flexible-gmres-variable-right-preconditioning"
+      ],
+      "paths": [
+        [
+          "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+          "alg-flexible-gmres-variable-right-preconditioning"
+        ]
+      ]
+    },
+    {
+      "id": "cex-ilu0-product-can-create-fill-outside-input-pattern",
+      "path": [
+        "alg-ilu0-fixed-pattern-factorization",
+        "cex-ilu0-product-can-create-fill-outside-input-pattern"
+      ],
+      "paths": [
+        [
+          "alg-ilu0-fixed-pattern-factorization",
+          "cex-ilu0-product-can-create-fill-outside-input-pattern"
+        ]
+      ]
+    },
+    {
+      "id": "ex-ilu0-tridiagonal-factorization",
+      "path": [
+        "alg-ilu0-fixed-pattern-factorization",
+        "ex-ilu0-tridiagonal-factorization"
+      ],
+      "paths": [
+        [
+          "alg-ilu0-fixed-pattern-factorization",
+          "ex-ilu0-tridiagonal-factorization"
+        ]
+      ]
+    },
+    {
+      "id": "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+      "path": [
+        "alg-flexible-gmres-variable-right-preconditioning",
+        "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span"
+      ],
+      "paths": [
+        [
+          "alg-flexible-gmres-variable-right-preconditioning",
+          "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span"
+        ]
+      ]
+    },
+    {
+      "id": "thm-ilu0-factor-pattern-and-work-counts",
+      "path": [
+        "alg-ilu0-fixed-pattern-factorization",
+        "thm-ilu0-factor-pattern-and-work-counts"
+      ],
+      "paths": [
+        [
+          "alg-ilu0-fixed-pattern-factorization",
+          "thm-ilu0-factor-pattern-and-work-counts"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "alg-ilu0-fixed-pattern-factorization": [
+      "## Definition\n\nLet $F$ be a field, let $n\\ge1$, and let the input be a valid $n\\times n$ CSR\nrecord as in [[def-csr-matrix-with-stored-entry-semantics]], representing\n$A\\in M_n(F)$. Matrix positions in this definition use one-based notation:\n$(i,j)$ refers to CSR row $i-1$ and column index $j-1$. This row/column order\nis fixed before the procedure begins; the procedure performs no pivoting or\nreordering. All field operations below are exact.\n\nLet $P=\\{(i,j):a_{ij}\\ne0\\}$. Scan each row once to check the canonical and\nincreasing-index conditions and to record whether its diagonal position occurs.\nIf the input fails either pattern condition, return `invalid-pattern`. If a row\nhas no diagonal position, return `missing-diagonal(i)` for the least such $i$.\n\nCopy the value in each input slot to a work array $W$, and regard the unit\ndiagonal of $L$ as implicit. Process rows $i=1,\\ldots,n$ in increasing order.\nFor each $k<i$ with $(i,k)\\in P$, in increasing $k$ order, do the following:\n\n1. If $W_{kk}=0$, return `zero-pivot(k)`.\n2. Set $W_{ik}\\gets W_{ik}/W_{kk}$; this value is the stored factor $L_{ik}$.\n3. Traverse the two increasing lists\n   $\\{j>k:(i,j)\\in P\\}$ and $\\{j>k:(k,j)\\in P\\}$ by a two-pointer merge.\n   For each matching index $j$, update\n   $$W_{ij}\\gets W_{ij}-W_{ik}W_{kj}.$$\n\nAfter all such $k$ have been processed in row $i$, if $W_{ii}=0$, return\n`zero-pivot(i)`. Otherwise the upper row entries $U_{ij}$ are the current\n$W_{ij}$ for $(i,j)\\in P$ and $j\\ge i$. Continue to the next row.\n\nIf every row completes, return `ok` with the unit-lower factor $L$ (stored\nstrict-lower entries $L_{ik}=W_{ik}$ for $(i,k)\\in P$) and the upper factor\n$U$ (stored entries $U_{ij}=W_{ij}$ for $(i,j)\\in P$, $j\\ge i$). Both factors\nuse only positions in $P$; the diagonal of $L$ is implicit. The numeric values\nremain stored at their structural slots if an update makes a value zero.\n\nFor a successful factor pair and $r\\in F^n$, apply the preconditioner by\nforward substitution\n$$y_i=r_i-\\sum_{k<i}L_{ik}y_k\\qquad(i=1,\\ldots,n),$$\nfollowed by backward substitution\n$$x_i=\\frac{y_i-\\sum_{k>i}U_{ik}x_k}{U_{ii}}\\qquad(i=n,n-1,\\ldots,1).$$\nThe pivot checks ensure every denominator in this application is nonzero. This\nprocedure defines setup and application only; it asserts no factorization\nidentity $A=LU$, Krylov convergence, conditioning improvement, or accuracy\nguarantee."
+    ],
+    "thm-ilu0-factor-pattern-and-work-counts": [
+      "## Statement\n\nLet $F$ be a field, $n\\ge1$, and $A\\in M_n(F)$ have a valid canonical CSR\nrecord with strictly increasing column indices in each row. Let\n$P=\\{(i,j):a_{ij}\\ne0\\}$ and $s=\\operatorname{nnz}(A)$. Run\n[[alg-ilu0-fixed-pattern-factorization]]. The procedure terminates with a\n`missing-diagonal` or `zero-pivot` status, or returns `ok`.\n\nOn an `ok` return, define\n$$P_L=\\{(i,k)\\in P:i>k\\},\\qquad P_U=\\{(k,j)\\in P:k\\le j\\},$$\nand put $\\ell=|P_L|$, $q=|P_U|$, and $u=q-n$. The stored strict-lower\nslots of $L$ are exactly $P_L$, and the stored slots of $U$ are exactly $P_U$;\nthe unit diagonal of $L$ is implicit. Thus the factors use exactly\n$\\ell+q=s$ numeric slots. Here a factor's stored-slot count retains a slot\neven if an update makes its value zero.\n\nFor each $(i,k)\\in P_L$, let\n$$R_{ik}=\\{j>k:(i,j)\\in P\\},\\qquad C_k=\\{j>k:(k,j)\\in P\\},$$\nand set $I=\\sum_{(i,k)\\in P_L}|R_{ik}\\cap C_k|$ and\n$J=\\sum_{(i,k)\\in P_L}(|R_{ik}|+|C_k|)$. On a successful setup, the\nfactorization performs exactly $\\ell$ divisions, $I$ multiplications, and\n$I$ subtractions. The two-pointer merges perform at most $J$ column-index\ncomparisons, in addition to one validation visit for each of the $n$ row\nintervals and the $s$ stored entries.\n\nApplying a successful factor pair to one vector by the specified two\ntriangular solves performs exactly $\\ell+u=s-n$ multiplications, $s-n$\nsubtractions, and $n$ divisions, and returns the unique vector produced by\nforward and backward substitution. These counts concern setup and one\napplication separately. They assert no convergence, conditioning improvement,\nor accuracy guarantee. The stored-pattern conclusion is about $L$ and $U$;\nit does not assert that the product $LU$ has support contained in $P$."
+    ],
+    "alg-flexible-gmres-variable-right-preconditioning": [
+      "## Definition\n\nLet $n,m\\in\\mathbb N$ with $n,m\\ge1$ ([[def-natural-numbers]]), let\n$A\\in M_n(\\mathbb C)$ ([[def-matrix-space]]), and let $b,x_0\\in\\mathbb C^n$.\nThe complex scalars form a field ([[thm-complex-numbers-form-a-field]]).\nEquip $\\mathbb C^n$ with the standard Hermitian inner product\n$$\\langle z,w\\rangle=\\sum_{k<n}z_k\\overline{w_k}$$\nand its induced Euclidean norm $\\|z\\|_2=\\sqrt{\\langle z,z\\rangle}$\n([[prop-standard-coordinate-inner-products]], [[def-inner-product-norm]]).\nAll arithmetic and orthogonalization are exact. Iteration and auxiliary\nHessenberg labels below start at $1$; coordinates of $A$ and ambient vectors\nretain the library's zero-based convention.\n\nAt step $j$, a right-preconditioning action\n$\\mathcal P_j:\\mathbb C^n\\to\\mathbb C^n$ ([[def-function-space]]) supplies\n$z_j=\\mathcal P_j(v_j)$. The actions may vary with $j$; no linearity or\nfixedness is assumed. In the usual matrix case this is\n$z_j=M_j^{-1}v_j$ for an invertible $M_j$\n([[def-invertible-matrix-and-general-linear-group]]). The algorithm uses and\nstores each actual $z_j$ and makes no fixed-matrix assumption.\n\nSet $r_0=b-Ax_0$ and $\\beta=\\|r_0\\|_2$. If $\\beta=0$, return\n`initial-solution($x_0$)`. Otherwise set $v_1=r_0/\\beta$. For\n$j=1,\\ldots,m$, perform:\n\n1. Obtain $z_j=\\mathcal P_j(v_j)$ and set $w:=Az_j$.\n2. For $i=1,\\ldots,j$ in order, set\n   $$h_{ij}:=\\langle w,v_i\\rangle,\\qquad w:=w-h_{ij}v_i.$$\n3. Set $h_{j+1,j}:=\\|w\\|_2$. If $h_{j+1,j}=0$, return\n   `breakdown($j,x_{j-1}$)` with the last fully formed iterate (for $j=1$ it\n   is $x_0$); do not normalize or claim a new iterate at this step.\n4. If $h_{j+1,j}>0$, set $v_{j+1}:=w/h_{j+1,j}$. Let $e_0\\in\\mathbb C^{j+1}$\n   be the standard unit vector at coordinate $0$ (coordinate $0$ is $1$ and\n   all other coordinates are $0$; [[lem-standard-basis-of-f-n]]). Put\n   $Z_j=[z_1,\\ldots,z_j]$ and let $\\bar H_j$ be the $(j+1)$-by-$j$ matrix\n   with entries $h_{ik}$ for $1\\le i\\le k+1$, $1\\le k\\le j$, and zero\n   entries below that range. Choose any\n   $$y_j\\in\\operatorname*{argmin}_{y\\in\\mathbb C^j}\\|\\beta e_0-\\bar H_jy\\|_2$$\n   and set $x_j:=x_0+Z_jy_j$.\n\nIf all $m$ steps complete without breakdown, return\n`budget-complete($m,x_m,Z_m$)`. The finite-dimensional least-squares minimizer\nexists; the output relation permits any minimizer. The algorithm has no\nconvergence test: `budget-complete` and `breakdown` assert neither convergence\nnor that a breakdown iterate solves $Ax=b$. The residual-minimization property\nover the actual span of the $z_j$ is proved separately in\n[[thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span]].\nEvery division is by a positive real norm: the initial $\\beta=0$ case returns\nbefore normalizing $r_0$, and each later $h_{j+1,j}=0$ case returns before\nnormalizing $w$."
+    ],
+    "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span": [
+      "## Statement\n\nLet $A\\in M_n(\\mathbb C)$ and $b,x_0\\in\\mathbb C^n$, with the standard\nHermitian inner product and induced Euclidean norm. Suppose the algorithm\n[[alg-flexible-gmres-variable-right-preconditioning]] completes $m\\ge1$ steps\nwithout breakdown, producing $Z_m=[z_1,\\ldots,z_m]$, the matrix\n$V_{m+1}=[v_1,\\ldots,v_{m+1}]$, and $\\bar H_m$. Then\n$$AZ_m=V_{m+1}\\bar H_m,$$\nand every $y\\in\\mathbb C^m$ satisfies\n$$b-A(x_0+Z_my)=V_{m+1}(\\beta e_0-\\bar H_my),\\qquad \\|b-A(x_0+Z_my)\\|_2=\\|\\beta e_0-\\bar H_my\\|_2.$$\nConsequently every least-squares minimizer $y_m$ in the algorithm produces a\ntrue-residual minimizer $x_m=x_0+Z_my_m$ over\n$$x_0+\\operatorname{span}\\{z_1,\\ldots,z_m\\}.$$\nMoreover, $\\bar H_m$ has full column rank, so its least-squares minimizer is\nunique.\nThe result makes no fixed-preconditioner spectral or convergence claim."
+    ],
+    "ex-left-preconditioned-residual-can-understate-physical-residual": [],
+    "ex-ilu0-tridiagonal-factorization": [],
+    "cex-ilu0-product-can-create-fill-outside-input-pattern": []
+  }
+}

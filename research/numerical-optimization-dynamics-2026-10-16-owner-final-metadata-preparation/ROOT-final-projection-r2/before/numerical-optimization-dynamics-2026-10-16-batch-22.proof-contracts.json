@@ -1,0 +1,2369 @@
+{
+  "version": 1,
+  "scope": [
+    "def-nonlinear-two-point-bvp-and-boundary-residual",
+    "lem-c1-ode-flow-on-common-tube",
+    "def-certified-ivp-approximation-and-sensitivity-interface",
+    "def-linearized-two-point-bvp-operator-and-conditioning",
+    "def-midpoint-collocation-residual-for-bvps",
+    "prop-multiple-shooting-residual-zero-iff-bvp-solution",
+    "prop-shooting-residual-zero-iff-bvp-solution",
+    "alg-midpoint-collocation-for-nonlinear-bvps",
+    "lem-midpoint-bvp-discrete-linearized-inverse",
+    "prop-midpoint-residual-zero-is-collocation",
+    "prop-multiple-shooting-residual-block-jacobian",
+    "prop-shooting-residual-derivative",
+    "alg-multiple-shooting-for-nonlinear-bvps",
+    "alg-single-shooting-for-nonlinear-bvps",
+    "thm-midpoint-collocation-local-branch-and-error-budget",
+    "cor-local-newton-convergence-for-midpoint-bvp-collocation",
+    "cor-local-newton-convergence-for-shooting-bvp-residual",
+    "thm-shooting-residual-error-budget",
+    "ex-midpoint-collocation-has-two-branches",
+    "ex-unstable-single-shooting-amplifies-error",
+    "ex-newton-shooting-fails-from-singular-start"
+  ],
+  "contracts": {
+    "def-nonlinear-two-point-bvp-and-boundary-residual": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero residual or zero error is interpreted exactly as the displayed condition; no unproved existence follows."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the dimension-one case is admitted; the formula remains defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both endpoints are included in the interval and boundary map."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: no choice operation or existential branch selection is part of the interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Reviewed exact inputs, domains, dimensions, statuses, and direct dependencies. The item is an interface definition; its procedure makes no unproved convergence or accuracy claim."
+      }
+    },
+    "lem-c1-ode-flow-on-common-tube": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.\n\nFor an open $U\\subseteq\\mathbb R^n$ and $a\\in U$, a **local inverse of $f$ at\n$a$** is a function $g:W\\to V$ for open neighbourhoods $a\\in V\\subseteq U$\nand $f(a)\\in W\\subseteq\\mathbb R^n$ such that $f|_V:V\\to W$ is bijective and\n$g=(f|_V)^{-1}$. If both $f|_V$ and $g$ are $C^1$, this restriction is a\n**local diffeomorphism** at $a$.\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-mean-value-inequality",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a < b$,\nand let $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-vector-valued-functions-limits-and-continuity]],\n[[def-vector-valued-derivative-and-integral]], [[def-interval]]). Let\n$M \\in \\mathbb{R}$ with $M \\ge 0$ satisfy\n\n$$\\lVert f'(t)\\rVert_2 \\;\\le\\; M \\qquad \\text{for every } t \\in (a,b).$$\n\nThen\n\n$$\\lVert f(b) - f(a)\\rVert_2 \\;\\le\\; M\\,(b-a).$$\n\n**No integrability of $f'$ is assumed**, so the theorem applies to every\ndifferentiable $f$; that is why it is proved from the scalar mean value theorem\nrather than from\n[[thm-norm-inequality-for-the-vector-valued-integral]].\n[[cor-vector-valued-ftc-and-lipschitz-bound]] records the comparison between the\ntwo routes.\n\n**The equality form is not asserted, and for $m \\ge 2$ it is false.** There need\nbe **no** $\\xi \\in (a,b)$ with $f(b)-f(a) = f'(\\xi)(b-a)$; the companion page\ncarries a differentiable witness on $[0,1]$. The $\\xi$ produced in the proof\nbelow depends on the fixed vector $u = f(b)-f(a)$ and is a mean value point of\nthe **real** function $t \\mapsto \\langle u, f(t)\\rangle$, not of $f$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Every initial value problem satisfying the Picard-Lindelof hypotheses has a unique maximal solution. Its domain is an open interval containing the initial time, and every other solution through the same data is its restriction.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Compactness of $K$ and continuity of $D_yf$ give a finite constant $L$ bounding $\\|D_yf\\|_{\\rm op}$ and a modulus $\\omega(\\eta)\\to0$ such that $\\|D_yf(z)-D_yf(w)\\|_{\\rm op}\\le\\omega(\\|z-w\\|_2)$ for $z,w\\in K$; this uses [F1] and [F4]. For fixed $s\\in U$ and sufficiently small $h$ with $s+h\\in U$, set $\\Delta_h(t)=\\phi(t;s+h)-\\phi(t;s)$. The two Volterra equations, convexity of $K$, and [F7] applied to the line segment between the two state values give $\\|f(t,\\phi(t;s+h))-f(t,\\phi(t;s))\\|_2\\le L\\|\\Delta_h(t)\\|_2$. Applying [F3] to the norm inequality from the integral equations yields $\\sup_t\\|\\Delta_h(t)\\|_2\\le e^{L(b-a)}\\|h\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each fixed $s$, the matrix equation $S'=A(t)S$, $S(a)=I_d$, with $A(t)=D_yf(t,\\phi(t;s))$ has a unique solution on $[a,b]$. View matrices as vectors in $\\mathbb R^{d^2}$ with the Frobenius norm and extend $A$ continuously by its endpoint values to an open interval containing $[a,b]$. The extended linear vector field is locally Lipschitz in the matrix state, so the linear IVP has a unique maximal solution by [F8] and [F9]. Gronwall bounds $\\|S(t)\\|_F$ on every finite subinterval. If its maximal interval ended at a finite time before $b$, then $S'=AS$ would be bounded there, making $S(t)$ Cauchy with a finite limit; local existence from that limit extends the solution, a contradiction. Its integral equation is unique by [F3].",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F8",
+            "F9",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Uniform continuity of $D_yf$ on $K$ implies, with $z=(t,\\phi(t;s))$ and $v=\\Delta_h(t)$, that $\\|f(t,\\phi(t;s)+v)-f(t,\\phi(t;s))-D_yf(z)v\\|_2\\le\\omega(\\|v\\|_2)\\|v\\|_2$. The line segment remains in $K$ by convexity. For $g(\\theta)=f(t,\\phi(t;s)+\\theta v)-f(t,\\phi(t;s))-\\theta D_yf(z)v$, the chain rule [F6] gives $g\\prime(\\theta)=[D_yf(z+\\theta(0,v))-D_yf(z)]v$, whose norm is at most $\\omega(\\|v\\|_2)\\|v\\|_2$; applying [F7] on $[0,1]$ gives the claimed remainder bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $E_h(t)=\\Delta_h(t)-S(t;s)h$. Subtract the integral equations for $\\phi(t;s+h)$, $\\phi(t;s)$, and $S(t;s)h$. The result is $E_h(t)=\\int_a^t A(r)E_h(r)dr+\\int_a^t q_h(r)dr$, where $\\|q_h(r)\\|_2\\le\\omega(e^{L(b-a)}\\|h\\|_2)e^{L(b-a)}\\|h\\|_2$ by steps 1.1 and 2.1. Applying [F3] gives $\\sup_t\\|E_h(t)\\|_2/\\|h\\|_2\\le(b-a)e^{2L(b-a)}\\omega(e^{L(b-a)}\\|h\\|_2)\\to0$. Thus $D_s\\phi(t;s)=S(t;s)$ in the total-derivative definition [F1].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $s_n\\to s$ in $U$, step 1.1 gives uniform convergence $\\phi(\\cdot;s_n)\\to\\phi(\\cdot;s)$. Uniform continuity of $D_yf$ on $K$ then gives uniform convergence $A(\\cdot;s_n)\\to A(\\cdot;s)$. Subtract the two integral equations for $S(\\cdot;s_n)$ and $S(\\cdot;s)$; [F3], together with the uniform bound on $S$ obtained from its integral equation, implies $\\sup_t\\|S(t;s_n)-S(t;s)\\|_F\\to0$; equivalence of matrix norms gives the same convergence in operator norm. The derivative is continuous, so the flow is $C^1$ on $U$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 1.2: zero residual or zero tolerance is handled under the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the dimension-one or one-cell case is admitted and the formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both endpoint values and the boundary residual are explicitly included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1, 3.1, 4.1: only specified data, unique IVP solutions, and local estimates are used; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Read each numbered proof step against its labelled facts and the actual supplier bodies. Locality, residual scaling, branch conditions, and finite-budget limitations are explicit. No Axiom of Choice is invoked; this authoring record is not independent mathematical approval."
+      }
+    },
+    "def-certified-ivp-approximation-and-sensitivity-interface": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero residual or zero error is interpreted exactly as the displayed condition; no unproved existence follows."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the dimension-one case is admitted; the formula remains defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both endpoints are included in the interval and boundary map."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: no choice operation or existential branch selection is part of the interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Reviewed exact inputs, domains, dimensions, statuses, and direct dependencies. The item is an interface definition; its procedure makes no unproved convergence or accuracy claim."
+      }
+    },
+    "def-linearized-two-point-bvp-operator-and-conditioning": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero residual or zero error is interpreted exactly as the displayed condition; no unproved existence follows."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the dimension-one case is admitted; the formula remains defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both endpoints are included in the interval and boundary map."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: no choice operation or existential branch selection is part of the interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Reviewed exact inputs, domains, dimensions, statuses, and direct dependencies. The item is an interface definition; its procedure makes no unproved convergence or accuracy claim."
+      }
+    },
+    "def-midpoint-collocation-residual-for-bvps": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero residual or zero error is interpreted exactly as the displayed condition; no unproved existence follows."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the dimension-one case is admitted; the formula remains defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both endpoints are included in the interval and boundary map."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: no choice operation or existential branch selection is part of the interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Reviewed exact inputs, domains, dimensions, statuses, and direct dependencies. The item is an interface definition; its procedure makes no unproved convergence or accuracy claim."
+      }
+    },
+    "prop-multiple-shooting-residual-zero-iff-bvp-solution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "source_section": "Definition",
+          "quote": "Fix $a<b$, an integer $d\\ge1$, an open set $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d$ containing $[a,b]\\times$ the states under consideration, and a vector field $f:\\Omega\\to\\mathbb R^d$. Let $D_B\\subseteq\\mathbb R^d\\times\\mathbb R^d$ be open and let $B:D_B\\to\\mathbb R^d$. A **square nonlinear two-point boundary-value problem (BVP)** is\n\n$$y'(t)=f(t,y(t))\\quad(a\\le t\\le b),\\qquad B(y(a),y(b))=0,$$\n\nwhere $y$ is a continuously differentiable curve whose graph lies in $\\Omega$, whose endpoint pair lies in $D_B$, and where the $d$ scalar components of $B$ give exactly $d$ boundary equations. A **BVP solution** is such a curve satisfying both the differential equation and endpoint equation. No existence or uniqueness is part of this definition.\n\nIf the IVP from initial state $s\\in\\mathbb R^d$ has a unique solution $\\phi(\\cdot;s)$ on $[a,b]$, the **exact shooting residual** is $R(s):=B(s,\\phi(b;s))$ whenever $(s,\\phi(b;s))\\in D_B$. For a mesh $a=t_0<\\cdots<t_N=b$ and segment initial states $s_0,\\ldots,s_N$, the **exact multiple-shooting residual** has rows $\\phi_i(t_{i+1};s_i)-s_{i+1}$ for $0\\le i<N$ and final row $B(s_0,s_N)$, where $\\phi_i$ denotes the unique segment IVP solution when it exists. These residuals are defined only on their admissible IVP and boundary domains.\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If the residual vanishes, each row gives $\\phi_i(t_{i+1};s_i)=s_{i+1}$. Define $y$ on each interval by the corresponding segment solution. At every interior mesh point, the left endpoint value equals the next initial state, so the pieces are continuous; the last residual row supplies $B(y(a),y(b))=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At a mesh point $t_i$, both one-sided derivatives equal $f(t_i,y(t_i))$, since each segment solves the same ODE and the joined values agree. Thus the piecewise curve is $C^1$ and solves the ODE on all of $[a,b]$; with the boundary equation it is a BVP solution.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conversely, given a BVP solution $y$, put $s_i=y(t_i)$. On each mesh interval its restriction and the segment IVP solution have the same initial data, so uniqueness [F2] identifies them; all continuity rows vanish, and the BVP boundary condition makes the last row zero.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1: zero residual or zero tolerance is handled under the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the dimension-one or one-cell case is admitted and the formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both endpoint values and the boundary residual are explicitly included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1: only specified data, unique IVP solutions, and local estimates are used; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1: proves the forward residual-to-solution implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1: proves the reverse solution-to-residual implication."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Read each numbered proof step against its labelled facts and the actual supplier bodies. Locality, residual scaling, branch conditions, and finite-budget limitations are explicit. No Axiom of Choice is invoked; this authoring record is not independent mathematical approval."
+      }
+    },
+    "prop-shooting-residual-zero-iff-bvp-solution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "source_section": "Definition",
+          "quote": "Fix $a<b$, an integer $d\\ge1$, an open set $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d$ containing $[a,b]\\times$ the states under consideration, and a vector field $f:\\Omega\\to\\mathbb R^d$. Let $D_B\\subseteq\\mathbb R^d\\times\\mathbb R^d$ be open and let $B:D_B\\to\\mathbb R^d$. A **square nonlinear two-point boundary-value problem (BVP)** is\n\n$$y'(t)=f(t,y(t))\\quad(a\\le t\\le b),\\qquad B(y(a),y(b))=0,$$\n\nwhere $y$ is a continuously differentiable curve whose graph lies in $\\Omega$, whose endpoint pair lies in $D_B$, and where the $d$ scalar components of $B$ give exactly $d$ boundary equations. A **BVP solution** is such a curve satisfying both the differential equation and endpoint equation. No existence or uniqueness is part of this definition.\n\nIf the IVP from initial state $s\\in\\mathbb R^d$ has a unique solution $\\phi(\\cdot;s)$ on $[a,b]$, the **exact shooting residual** is $R(s):=B(s,\\phi(b;s))$ whenever $(s,\\phi(b;s))\\in D_B$. For a mesh $a=t_0<\\cdots<t_N=b$ and segment initial states $s_0,\\ldots,s_N$, the **exact multiple-shooting residual** has rows $\\phi_i(t_{i+1};s_i)-s_{i+1}$ for $0\\le i<N$ and final row $B(s_0,s_N)$, where $\\phi_i$ denotes the unique segment IVP solution when it exists. These residuals are defined only on their admissible IVP and boundary domains.\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $R(s)=0$, then $\\phi(\\cdot;s)$ already solves the IVP with initial state $s$ and satisfies $B(s,\\phi(b;s))=0$ by the definition of $R$. It is continuously differentiable and lies in the BVP domain, so [F1] makes it a BVP solution.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, let $y$ be any BVP solution with $y(a)=s$. It solves the same IVP as $\\phi(\\cdot;s)$; uniqueness in [F2] implies $y(t)=\\phi(t;s)$ throughout $[a,b]$. The boundary equation then gives $R(s)=B(s,\\phi(b;s))=B(y(a),y(b))=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The same uniqueness argument shows that any BVP solution with initial state $s$ is exactly this trajectory, proving both the equivalence and the asserted trajectory identity.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 1.2: zero residual or zero tolerance is handled under the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the dimension-one or one-cell case is admitted and the formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both endpoint values and the boundary residual are explicitly included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1: only specified data, unique IVP solutions, and local estimates are used; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1: proves the forward residual-to-solution implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2: proves the reverse solution-to-residual implication."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Read each numbered proof step against its labelled facts and the actual supplier bodies. Locality, residual scaling, branch conditions, and finite-budget limitations are explicit. No Axiom of Choice is invoked; this authoring record is not independent mathematical approval."
+      }
+    },
+    "alg-midpoint-collocation-for-nonlinear-bvps": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero residual or zero error is interpreted exactly as the displayed condition; no unproved existence follows."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the dimension-one case is admitted; the formula remains defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both endpoints are included in the interval and boundary map."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: no choice operation or existential branch selection is part of the interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Reviewed exact inputs, domains, dimensions, statuses, and direct dependencies. The item is an interface definition; its procedure makes no unproved convergence or accuracy claim."
+      }
+    },
+    "lem-midpoint-bvp-discrete-linearized-inverse": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-midpoint-collocation-residual-for-bvps",
+          "source_section": "Definition",
+          "quote": "For a $d$-dimensional BVP on $[a,b]$, an integer $N\\ge1$, uniform mesh width $h=(b-a)/N$, mesh nodes $t_i=a+ih$, and node vector $Y=(Y_0,\\ldots,Y_N)\\in(\\mathbb R^d)^{N+1}$, let $D_h$ be the open set of node vectors for which every midpoint pair $(t_i+h/2,(Y_i+Y_{i+1})/2)$ lies in the vector-field domain and $(Y_0,Y_N)$ lies in the boundary-map domain. Define $G_h:D_h\\to(\\mathbb R^d)^{N+1}$ by\n\n$$G_{h,i}(Y)=\\frac{Y_{i+1}-Y_i}{h}-f\\!\\left(t_i+\\frac h2,\\frac{Y_i+Y_{i+1}}2\\right)\\quad(0\\le i<N),\\qquad G_{h,N}(Y)=B(Y_0,Y_N).$$\n\nUse the maximum of the Euclidean block norms for both node and residual vectors. The interior rows are normalized by $h$; consequently an unscaled increment row has size $h$ times its normalized row.\n",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linearized-two-point-bvp-operator-and-conditioning",
+          "source_section": "Definition",
+          "quote": "Let $y^*\\in C^1([a,b],\\mathbb R^d)$ solve a square BVP, with $f$ and $B$ continuously differentiable on open neighborhoods of the trajectory and endpoint pair. Put $A(t)=D_yf(t,y^*(t))$, $B_1=D_1B(y^*(a),y^*(b))$, and $B_2=D_2B(y^*(a),y^*(b))$. Let\n\n$$X=C^1([a,b],\\mathbb R^d),\\quad \\|v\\|_X=\\|v\\|_\\infty+\\|v'\\|_\\infty,$$\n\nand\n\n$$Z=C([a,b],\\mathbb R^d)\\times\\mathbb R^d,\\quad \\|(g,q)\\|_Z=\\max\\{\\|g\\|_\\infty,\\|q\\|_2\\}.$$\n\nThe **continuous linearized BVP operator** is the bounded linear map $\\mathcal L:X\\to Z$ given by\n\n$$\\mathcal L v=(v'-A v,\\ B_1v(a)+B_2v(b)).$$\n\nIt is **boundedly invertible** when it is bijective and its inverse $\\mathcal L^{-1}:Z\\to X$ has finite operator norm. That norm is the conditioning constant for the linearized BVP used in the local discretization theorem.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Every initial value problem satisfying the Picard-Lindelof hypotheses has a unique maximal solution. Its domain is an open interval containing the initial time, and every other solution through the same data is its restriction.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $A(t)=D_yf(t,y^*(t))$ and let $X(t)$ solve $X'=A(t)X$, $X(a)=I_d$. Since $A$ is continuous and bounded on $[a,b]$, extend it continuously by its endpoint values to an open interval containing $[a,b]$. Local existence follows from [F3], and the maximal solution from [F7] is bounded by Gronwall; if it stopped before $b$, boundedness of $X'=AX$ would give a finite endpoint limit from which local existence extends it, a contradiction. Thus $X$ exists on $[a,b]$. Define $Q=B_1+B_2X(b)$. If $Qc=0$, then $v(t)=X(t)c$ satisfies $\\mathcal Lv=(0,0)$; [F2] forces $v=0$, and $v(a)=c$ then gives $c=0$. The square matrix $Q$ is therefore invertible.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each mesh let $C_i^h=D_yf(t_i+h/2,(Y_i^*+Y_{i+1}^*)/2)$. Uniform continuity of $y^*$ and $D_yf$ on a compact neighborhood implies $\\max_i\\|C_i^h-A(t_i+h/2)\\|_{\\rm op}\\to0$. Also $\\sup_{h,i}\\|C_i^h\\|_{\\rm op}<\\infty$. Applying the chain rule [F5] to the rows in [F1], the interior equation $J_h z=(r_0,\\ldots,r_{N-1},q)$ is $(I-hC_i^h/2)z_{i+1}=(I+hC_i^h/2)z_i+h r_i$. For small $h$, $I-hC_i^h/2$ is invertible by its convergent geometric series; its inverse norm is at most $2$, and the induced transition matrices $M_i^h=(I-hC_i^h/2)^{-1}(I+hC_i^h/2)$ satisfy $\\|M_i^h\\|\\le1+C_0h$ for a constant independent of $i,h$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $M_h=M_{N-1}^h\\cdots M_0^h$, the discrete homogeneous transfer from $z_0$ to $z_N$. The exact fundamental matrix $X$ satisfies $X(t_{i+1})-X(t_i)=\\int_{t_i}^{t_{i+1}}A(t)X(t)dt$. The integrand is uniformly continuous, so its average over each cell differs from its midpoint value by a quantity tending uniformly to zero as $h\\to0$. Since $C_i^h-A(t_i+h/2)\\to0$ uniformly and $X$ is uniformly continuous, the samples $X(t_i)$ satisfy the implicit-midpoint recurrence with a normalized defect $\\eta_i^h$ for which $\\max_i\\|\\eta_i^h\\|\\to0$. The transition bound in step 1.2 propagates the increment defects $h\\eta_i^h$ with total bound at most $C_1(b-a)\\max_i\\|\\eta_i^h\\|$; hence $M_h\\to X(b)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $Q_h=B_1+B_2M_h$. By step 2.1, $Q_h\\to Q$. Since $Q$ is invertible, determinant continuity makes $Q_h$ invertible for all sufficiently small $h$, and the adjugate formula gives a uniform bound on $\\|Q_h^{-1}\\|$. For arbitrary forcing blocks $r_i$, the recurrence in step 1.2 and its transition bound give $z_N=M_hz_0+w_h$ and $\\max_i\\|z_i\\|_2\\le C_2(\\|z_0\\|_2+\\max_i\\|r_i\\|_2)$, with $\\|w_h\\|_2\\le C_2\\max_i\\|r_i\\|_2$. The boundary row $B_1z_0+B_2z_N=q$ becomes $Q_hz_0=q-B_2w_h$, so $z_0$ and then every $z_i$ are bounded by $C_3\\max(\\max_i\\|r_i\\|_2,\\|q\\|_2)$ uniformly in $h$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For every right-hand side $(r_0,\\ldots,r_{N-1},q)$, step 3.1 constructs a unique solution of the square linear system $J_hz=(r_0,\\ldots,r_{N-1},q)$ and gives the asserted uniform operator bound. Therefore $J_h$ is onto and one-to-one, hence invertible, with the stated estimate.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 1.2: zero residual or zero tolerance is handled under the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the dimension-one or one-cell case is admitted and the formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both endpoint values and the boundary residual are explicitly included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1, 3.1, 4.1: only specified data, unique IVP solutions, and local estimates are used; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Read each numbered proof step against its labelled facts and the actual supplier bodies. Locality, residual scaling, branch conditions, and finite-budget limitations are explicit. No Axiom of Choice is invoked; this authoring record is not independent mathematical approval."
+      }
+    },
+    "prop-midpoint-residual-zero-is-collocation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-midpoint-collocation-residual-for-bvps",
+          "source_section": "Definition",
+          "quote": "For a $d$-dimensional BVP on $[a,b]$, an integer $N\\ge1$, uniform mesh width $h=(b-a)/N$, mesh nodes $t_i=a+ih$, and node vector $Y=(Y_0,\\ldots,Y_N)\\in(\\mathbb R^d)^{N+1}$, let $D_h$ be the open set of node vectors for which every midpoint pair $(t_i+h/2,(Y_i+Y_{i+1})/2)$ lies in the vector-field domain and $(Y_0,Y_N)$ lies in the boundary-map domain. Define $G_h:D_h\\to(\\mathbb R^d)^{N+1}$ by\n\n$$G_{h,i}(Y)=\\frac{Y_{i+1}-Y_i}{h}-f\\!\\left(t_i+\\frac h2,\\frac{Y_i+Y_{i+1}}2\\right)\\quad(0\\le i<N),\\qquad G_{h,N}(Y)=B(Y_0,Y_N).$$\n\nUse the maximum of the Euclidean block norms for both node and residual vectors. The interior rows are normalized by $h$; consequently an unscaled increment row has size $h$ times its normalized row.\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "source_section": "Definition",
+          "quote": "Fix $a<b$, an integer $d\\ge1$, an open set $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d$ containing $[a,b]\\times$ the states under consideration, and a vector field $f:\\Omega\\to\\mathbb R^d$. Let $D_B\\subseteq\\mathbb R^d\\times\\mathbb R^d$ be open and let $B:D_B\\to\\mathbb R^d$. A **square nonlinear two-point boundary-value problem (BVP)** is\n\n$$y'(t)=f(t,y(t))\\quad(a\\le t\\le b),\\qquad B(y(a),y(b))=0,$$\n\nwhere $y$ is a continuously differentiable curve whose graph lies in $\\Omega$, whose endpoint pair lies in $D_B$, and where the $d$ scalar components of $B$ give exactly $d$ boundary equations. A **BVP solution** is such a curve satisfying both the differential equation and endpoint equation. No existence or uniqueness is part of this definition.\n\nIf the IVP from initial state $s\\in\\mathbb R^d$ has a unique solution $\\phi(\\cdot;s)$ on $[a,b]$, the **exact shooting residual** is $R(s):=B(s,\\phi(b;s))$ whenever $(s,\\phi(b;s))\\in D_B$. For a mesh $a=t_0<\\cdots<t_N=b$ and segment initial states $s_0,\\ldots,s_N$, the **exact multiple-shooting residual** has rows $\\phi_i(t_{i+1};s_i)-s_{i+1}$ for $0\\le i<N$ and final row $B(s_0,s_N)$, where $\\phi_i$ denotes the unique segment IVP solution when it exists. These residuals are defined only on their admissible IVP and boundary domains.\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $G_h(Y)=0$, each block is zero. For $i<N$, multiply the normalized row by the positive scalar $h$ to get the stated increment equation; the last block gives $B(Y_0,Y_N)=0$, the BVP endpoint equation by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, if all displayed increment equations and the endpoint equation hold, dividing each increment equation by $h>0$ makes every interior block zero, and the endpoint equation makes the last block zero; by [F2] it is the BVP boundary condition. Thus $G_h(Y)=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The piecewise-linear interpolant changes by $Y_{i+1}-Y_i$ over an interval of width $h$, so its slope is the quotient on the left of each increment equation. This proves the equivalent slope wording without adding another condition.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 1.2: zero residual or zero tolerance is handled under the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the dimension-one or one-cell case is admitted and the formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both endpoint values and the boundary residual are explicitly included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1: only specified data, unique IVP solutions, and local estimates are used; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1: proves the forward residual-to-solution implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2: proves the reverse solution-to-residual implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-cell normalization",
+          "method": "exact algebraic calculation",
+          "input": {
+            "N": 1,
+            "h": "b-a"
+          },
+          "calculation": "G_h(Y)=0 has interior row (Y1-Y0)/h-f(mid)=0. Multiplying by h>0 gives exactly Y1-Y0=h f(mid); the endpoint row remains B(Y0,Y1)=0.",
+          "expected": {
+            "equivalence": "checked"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Read each numbered proof step against its labelled facts and the actual supplier bodies. Locality, residual scaling, branch conditions, and finite-budget limitations are explicit. No Axiom of Choice is invoked; this authoring record is not independent mathematical approval."
+      }
+    },
+    "prop-multiple-shooting-residual-block-jacobian": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-c1-ode-flow-on-common-tube",
+          "source_section": "Statement",
+          "quote": "Let $a<b$, let $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, and let $f:\\Omega\\to\\mathbb R^d$ be $C^1$. Let $K\\subseteq\\Omega$ be compact and convex, and let $U\\subseteq\\mathbb R^d$ be open. Assume that for every $s\\in U$ the unique IVP solution $\\phi(\\cdot;s)$ from $\\phi(a;s)=s$ exists on $[a,b]$ and $(t,\\phi(t;s))\\in K$ for every $t$. Then $s\\mapsto\\phi(t;s)$ is $C^1$ on $U$ for each $t\\in[a,b]$. Its derivative matrix $S(t;s):=D_s\\phi(t;s)$ is the unique solution of\n\n$$S(t;s)=I_d+\\int_a^t D_yf(r,\\phi(r;s))S(r;s)\\,dr,$$\n\nand hence satisfies $\\partial_tS=D_yf(t,\\phi(t;s))S$, $S(a;s)=I_d$. The claim is local to the stated common compact tube; it does not assert differentiability beyond it.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-certified-ivp-approximation-and-sensitivity-interface",
+          "source_section": "Definition",
+          "quote": "Fix an interval $[a,b]$ and an open set $U\\subseteq\\mathbb R^d$ on which each exact IVP flow $\\phi(t;s)$ exists for all $t\\in[a,b]$. A **certified differentiable IVP evaluator** on $U$ supplies, for each $s\\in U$, a continuous approximate trajectory $\\widetilde\\phi(\\cdot;s)$, a $C^1$ approximate endpoint map (here $C^1$ means total differentiability with continuous derivative entries) $\\widetilde\\Phi:U\\to\\mathbb R^d$ with its exact derivative $D\\widetilde\\Phi(s)$ for that numerical map, and a stated number $\\delta_{\\rm IVP}\\ge0$ such that\n\n$$\\sup_{s\\in U}\\sup_{t\\in[a,b]}\\|\\widetilde\\phi(t;s)-\\phi(t;s)\\|_2\\le\\delta_{\\rm IVP},\\qquad \\widetilde\\Phi(s)=\\widetilde\\phi(b;s).$$\n\nThe returned derivative is not asserted to equal the derivative of the exact flow. An evaluator failure is a status and supplies no approximation bound. This is an interface contract for a supplied method; it does not assert that any particular integrator satisfies the contract.\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "source_section": "Definition",
+          "quote": "Fix $a<b$, an integer $d\\ge1$, an open set $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d$ containing $[a,b]\\times$ the states under consideration, and a vector field $f:\\Omega\\to\\mathbb R^d$. Let $D_B\\subseteq\\mathbb R^d\\times\\mathbb R^d$ be open and let $B:D_B\\to\\mathbb R^d$. A **square nonlinear two-point boundary-value problem (BVP)** is\n\n$$y'(t)=f(t,y(t))\\quad(a\\le t\\le b),\\qquad B(y(a),y(b))=0,$$\n\nwhere $y$ is a continuously differentiable curve whose graph lies in $\\Omega$, whose endpoint pair lies in $D_B$, and where the $d$ scalar components of $B$ give exactly $d$ boundary equations. A **BVP solution** is such a curve satisfying both the differential equation and endpoint equation. No existence or uniqueness is part of this definition.\n\nIf the IVP from initial state $s\\in\\mathbb R^d$ has a unique solution $\\phi(\\cdot;s)$ on $[a,b]$, the **exact shooting residual** is $R(s):=B(s,\\phi(b;s))$ whenever $(s,\\phi(b;s))\\in D_B$. For a mesh $a=t_0<\\cdots<t_N=b$ and segment initial states $s_0,\\ldots,s_N$, the **exact multiple-shooting residual** has rows $\\phi_i(t_{i+1};s_i)-s_{i+1}$ for $0\\le i<N$ and final row $B(s_0,s_N)$, where $\\phi_i$ denotes the unique segment IVP solution when it exists. These residuals are defined only on their admissible IVP and boundary domains.\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For an interior row $F_i(s_0,\\ldots,s_N)=\\Psi_i(s_i)-s_{i+1}$, varying only block $s_i$ changes that row by $D\\Psi_i(s_i)$, varying only block $s_{i+1}$ changes it by $-I_d$, and varying any other block leaves it unchanged. These are precisely the stated nonzero and zero blocks.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the boundary row $F_N=B(s_0,s_N)$, the chain rule gives derivatives $D_1B$ and $D_2B$ with respect to the first and last blocks; all intermediate blocks are absent from its formula, so their derivatives are zero. The differentiability assertions for exact and approximate segment maps follow from [F2] and [F3].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The residual has $(N+1)d$ scalar rows and $(N+1)d$ scalar variables, so the displayed block matrix is square.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 1.2: zero residual or zero tolerance is handled under the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the dimension-one or one-cell case is admitted and the formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both endpoint values and the boundary residual are explicitly included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1: only specified data, unique IVP solutions, and local estimates are used; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-segment scalar block pattern",
+          "method": "symbolic finite-dimensional differentiation",
+          "input": {
+            "N": 2,
+            "d": 1
+          },
+          "calculation": "Rows are Psi0(s0)-s1, Psi1(s1)-s2, B(s0,s2). Differentiation gives [[Psi0 prime,-1,0],[0,Psi1 prime,-1],[B1,0,B2]].",
+          "expected": {
+            "pattern": "bordered block-bidiagonal"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Read each numbered proof step against its labelled facts and the actual supplier bodies. Locality, residual scaling, branch conditions, and finite-budget limitations are explicit. No Axiom of Choice is invoked; this authoring record is not independent mathematical approval."
+      }
+    },
+    "prop-shooting-residual-derivative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$\n\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-c1-ode-flow-on-common-tube",
+          "source_section": "Statement",
+          "quote": "Let $a<b$, let $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, and let $f:\\Omega\\to\\mathbb R^d$ be $C^1$. Let $K\\subseteq\\Omega$ be compact and convex, and let $U\\subseteq\\mathbb R^d$ be open. Assume that for every $s\\in U$ the unique IVP solution $\\phi(\\cdot;s)$ from $\\phi(a;s)=s$ exists on $[a,b]$ and $(t,\\phi(t;s))\\in K$ for every $t$. Then $s\\mapsto\\phi(t;s)$ is $C^1$ on $U$ for each $t\\in[a,b]$. Its derivative matrix $S(t;s):=D_s\\phi(t;s)$ is the unique solution of\n\n$$S(t;s)=I_d+\\int_a^t D_yf(r,\\phi(r;s))S(r;s)\\,dr,$$\n\nand hence satisfies $\\partial_tS=D_yf(t,\\phi(t;s))S$, $S(a;s)=I_d$. The claim is local to the stated common compact tube; it does not assert differentiability beyond it.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-certified-ivp-approximation-and-sensitivity-interface",
+          "source_section": "Definition",
+          "quote": "Fix an interval $[a,b]$ and an open set $U\\subseteq\\mathbb R^d$ on which each exact IVP flow $\\phi(t;s)$ exists for all $t\\in[a,b]$. A **certified differentiable IVP evaluator** on $U$ supplies, for each $s\\in U$, a continuous approximate trajectory $\\widetilde\\phi(\\cdot;s)$, a $C^1$ approximate endpoint map (here $C^1$ means total differentiability with continuous derivative entries) $\\widetilde\\Phi:U\\to\\mathbb R^d$ with its exact derivative $D\\widetilde\\Phi(s)$ for that numerical map, and a stated number $\\delta_{\\rm IVP}\\ge0$ such that\n\n$$\\sup_{s\\in U}\\sup_{t\\in[a,b]}\\|\\widetilde\\phi(t;s)-\\phi(t;s)\\|_2\\le\\delta_{\\rm IVP},\\qquad \\widetilde\\Phi(s)=\\widetilde\\phi(b;s).$$\n\nThe returned derivative is not asserted to equal the derivative of the exact flow. An evaluator failure is a status and supplies no approximation bound. This is an interface contract for a supplied method; it does not assert that any particular integrator satisfies the contract.\n",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $G:U\\to\\mathbb R^d\\times\\mathbb R^d$ by $G(s)=(s,\\Psi(s))$. The coordinate product map is totally differentiable and $DG(s)v=(v,D\\Psi(s)v)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The residual is the composition $R_\\Psi=B\\circ G$. Applying [F1] at each $s$ gives $DR_\\Psi(s)v=D_1B(s,\\Psi(s))v+D_2B(s,\\Psi(s))D\\Psi(s)v$ for every $v\\in\\mathbb R^d$, hence the displayed matrix identity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since both component maps and their derivatives are continuous, the derivative in step 2.1 varies continuously with $s$; therefore $R_\\Psi$ is $C^1$. Facts [F3] and [F4] verify the two stated choices of $\\Psi$ under their respective hypotheses.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1: zero residual or zero tolerance is handled under the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the dimension-one or one-cell case is admitted and the formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both endpoint values and the boundary residual are explicitly included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1: only specified data, unique IVP solutions, and local estimates are used; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Read each numbered proof step against its labelled facts and the actual supplier bodies. Locality, residual scaling, branch conditions, and finite-budget limitations are explicit. No Axiom of Choice is invoked; this authoring record is not independent mathematical approval."
+      }
+    },
+    "alg-multiple-shooting-for-nonlinear-bvps": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero residual or zero error is interpreted exactly as the displayed condition; no unproved existence follows."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the dimension-one case is admitted; the formula remains defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both endpoints are included in the interval and boundary map."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: no choice operation or existential branch selection is part of the interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Reviewed exact inputs, domains, dimensions, statuses, and direct dependencies. The item is an interface definition; its procedure makes no unproved convergence or accuracy claim."
+      }
+    },
+    "alg-single-shooting-for-nonlinear-bvps": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero residual or zero error is interpreted exactly as the displayed condition; no unproved existence follows."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the dimension-one case is admitted; the formula remains defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both endpoints are included in the interval and boundary map."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: no choice operation or existential branch selection is part of the interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Reviewed exact inputs, domains, dimensions, statuses, and direct dependencies. The item is an interface definition; its procedure makes no unproved convergence or accuracy claim."
+      }
+    },
+    "thm-midpoint-collocation-local-branch-and-error-budget": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-midpoint-collocation-residual-for-bvps",
+          "source_section": "Definition",
+          "quote": "For a $d$-dimensional BVP on $[a,b]$, an integer $N\\ge1$, uniform mesh width $h=(b-a)/N$, mesh nodes $t_i=a+ih$, and node vector $Y=(Y_0,\\ldots,Y_N)\\in(\\mathbb R^d)^{N+1}$, let $D_h$ be the open set of node vectors for which every midpoint pair $(t_i+h/2,(Y_i+Y_{i+1})/2)$ lies in the vector-field domain and $(Y_0,Y_N)$ lies in the boundary-map domain. Define $G_h:D_h\\to(\\mathbb R^d)^{N+1}$ by\n\n$$G_{h,i}(Y)=\\frac{Y_{i+1}-Y_i}{h}-f\\!\\left(t_i+\\frac h2,\\frac{Y_i+Y_{i+1}}2\\right)\\quad(0\\le i<N),\\qquad G_{h,N}(Y)=B(Y_0,Y_N).$$\n\nUse the maximum of the Euclidean block norms for both node and residual vectors. The interior rows are normalized by $h$; consequently an unscaled increment row has size $h$ times its normalized row.\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linearized-two-point-bvp-operator-and-conditioning",
+          "source_section": "Definition",
+          "quote": "Let $y^*\\in C^1([a,b],\\mathbb R^d)$ solve a square BVP, with $f$ and $B$ continuously differentiable on open neighborhoods of the trajectory and endpoint pair. Put $A(t)=D_yf(t,y^*(t))$, $B_1=D_1B(y^*(a),y^*(b))$, and $B_2=D_2B(y^*(a),y^*(b))$. Let\n\n$$X=C^1([a,b],\\mathbb R^d),\\quad \\|v\\|_X=\\|v\\|_\\infty+\\|v'\\|_\\infty,$$\n\nand\n\n$$Z=C([a,b],\\mathbb R^d)\\times\\mathbb R^d,\\quad \\|(g,q)\\|_Z=\\max\\{\\|g\\|_\\infty,\\|q\\|_2\\}.$$\n\nThe **continuous linearized BVP operator** is the bounded linear map $\\mathcal L:X\\to Z$ given by\n\n$$\\mathcal L v=(v'-A v,\\ B_1v(a)+B_2v(b)).$$\n\nIt is **boundedly invertible** when it is bijective and its inverse $\\mathcal L^{-1}:Z\\to X$ has finite operator norm. That norm is the conditioning constant for the linearized BVP used in the local discretization theorem.\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-midpoint-bvp-discrete-linearized-inverse",
+          "source_section": "Statement",
+          "quote": "Here $C^k$ means each coordinate has continuous total derivatives through order $k$. Let $f,B$ be $C^2$ near an exact solution $y^*\\in C^3([a,b],\\mathbb R^d)$ of a square BVP, and suppose the continuous linearized operator $\\mathcal L$ in [[def-linearized-two-point-bvp-operator-and-conditioning]] is boundedly invertible. For uniform meshes with $h=(b-a)/N$, let $Y_i^*=y^*(t_i)$ and let $J_h=DG_h(Y^*)$ be the Jacobian of the normalized midpoint residual. There are $h_0>0$ and $C<\\infty$ such that for every mesh width $0<h\\le h_0$, $J_h$ is invertible and\n\n$$\\|J_h^{-1}\\|_{\\infty\\to\\infty}\\le C,$$\n\nwhere both finite-dimensional norms are the maximum of the Euclidean block norms. The bound is independent of $h$; this is a local linear inverse result, not a nonlinear convergence theorem.\n\n",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty complete metric space ([[def-complete-metric-space]])\nand let $f : X \\to X$ be a contraction with constant $q$, so\n$d(f(u),f(v)) \\le q\\,d(u,v)$ for all $u,v \\in X$ and $0 \\le q < 1$\n([[def-lipschitz-holder-contraction]]). Then:\n\n1. There is exactly one $x^{*} \\in X$ with $f(x^{*}) = x^{*}$.\n2. For every $x_0 \\in X$ the sequence of **iterates**, defined by recursion\n   ([[thm-recursion]]) by $x_{n+1} := f(x_n)$, converges to $x^{*}$ in $(X,d)$\n   ([[def-metric-convergence]]). In particular the limit does not depend on\n   $x_0$.\n3. For all $m, n \\in \\mathbb{N}$ with $m \\ge n$,\n   $$d(x_m, x_n) \\;\\le\\; \\frac{q^{\\,n}\\, d(x_1,x_0)}{1-q},$$\n   with the integer power of [[def-integer-power]].\n\nClaim 3 is the quantitative form of the argument that proves claims 1 and 2, and\nit is recorded in the statement because the error estimates\n([[cor-banach-error-estimates]]) are read off from it.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $Y_i^*=y^*(t_i)$. On each cell, the centered Taylor expansion of the $C^3$ curve $y^*$ about $t_i+h/2$ gives $(Y_{i+1}^*-Y_i^*)/h=y^{*\\prime}(t_i+h/2)+O(h^2)$. Since $y^{*\\prime}=f(t,y^*(t))$ and $(Y_i^*+Y_{i+1}^*)/2=y^*(t_i+h/2)+O(h^2)$, bounded first derivatives of $f$ make each normalized interior residual $O(h^2)$ uniformly. The exact endpoint pair makes the boundary block zero; [F2] names the boundedly invertible continuous linearized operator assumed here, and thus $\\|G_h(Y^*)\\|_\\infty\\le C_0h^2$. The Taylor remainder bounds are uniform because the derivatives are bounded on a compact neighborhood of the trajectory.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On a fixed-radius ball about $Y^*$, all midpoint states and endpoint pairs stay in compact subsets of the domains for sufficiently small radius. Bounded second derivatives of $f$ and $B$ imply a constant $L_G$, independent of $h,N$, such that $\\|DG_h(Y)-DG_h(Z)\\|_{\\infty\\to\\infty}\\le L_G\\|Y-Z\\|_\\infty$ on this ball: every interior row depends on only two node blocks and its nonlinear part is $f$ evaluated at their average, while the linear increment term has constant derivative; the boundary row depends only on the two endpoint blocks. The bounds on each row therefore do not grow with the number of mesh cells.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose $r>0$ small enough that the closed ball $\\overline B_\\infty(Y^*,r)$ lies in the nodal domain and $K L_G r\\le1/2$. Define $T_h(Y)=Y-J_h^{-1}G_h(Y)$. The mean-value bound from step 1.2 gives $\\|T_h(Y)-T_h(Z)\\|_\\infty\\le K L_G r\\|Y-Z\\|_\\infty\\le\\frac12\\|Y-Z\\|_\\infty$ on the ball. Also $\\|T_h(Y^*)-Y^*\\|_\\infty\\le K C_0h^2$, so for small enough $h$ this is at most $r/2$; then $T_h$ maps the ball into itself. It is a contraction on a nonempty complete ball by [F4] and [F5].",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The contraction theorem gives a unique fixed point $Y_h$ in the ball. Since $J_h$ is invertible, $T_h(Y)=Y$ is equivalent to $G_h(Y)=0$, so this is the unique residual zero there. The fixed-point estimate gives $\\|Y_h-Y^*\\|_\\infty\\le2KC_0h^2$. Further, $\\|DG_h(Y_h)-J_h\\|\\le L_G\\|Y_h-Y^*\\|_\\infty=O(h^2)$. For small $h$, $\\|J_h^{-1}(DG_h(Y_h)-J_h)\\|<1/2$; the geometric-series inverse of $I+J_h^{-1}(DG_h(Y_h)-J_h)$ shows $DG_h(Y_h)$ invertible with inverse norm at most $2K$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For any candidate $Y$ in the ball, put $e=Y-Y_h$. Taylor's formula and the uniform Jacobian Lipschitz bound give $G_h(Y)=DG_h(Y_h)e+q$ with $\\|q\\|_\\infty\\le(L_G/2)\\|e\\|_\\infty^2$. Since both points lie in the radius-$r$ ball, $\\|e\\|_\\infty\\le2r$; reduce $r$ initially if needed so $(2K)(L_G/2)(2r)\\le1/2$. Using [step 3.1], $\\|e\\|_\\infty\\le2K\\|G_h(Y)\\|_\\infty+K L_G\\|e\\|_\\infty^2\\le2K\\varepsilon_{\\rm alg}+\\tfrac12\\|e\\|_\\infty$, so $\\|e\\|_\\infty\\le4K\\varepsilon_{\\rm alg}$. The piecewise-linear interpolant is a convex combination of adjacent nodes, hence $\\|P_h(Y-Y_h)\\|_\\infty\\le\\|e\\|_\\infty$. The linear interpolant of $Y^*$ differs from $y^*$ by at most $h^2\\|y^{*\\prime\\prime}\\|_\\infty/8$ on each cell, and $\\|P_h(Y_h-Y^*)\\|_\\infty\\le\\|Y_h-Y^*\\|_\\infty=O(h^2)$ by step 3.1. Adding these bounds proves the stated estimate.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 1.2: zero residual or zero tolerance is handled under the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the dimension-one or one-cell case is admitted and the formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both endpoint values and the boundary residual are explicitly included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1, 3.1, 4.1: only specified data, unique IVP solutions, and local estimates are used; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Read each numbered proof step against its labelled facts and the actual supplier bodies. Locality, residual scaling, branch conditions, and finite-budget limitations are explicit. No Axiom of Choice is invoked; this authoring record is not independent mathematical approval."
+      }
+    },
+    "cor-local-newton-convergence-for-midpoint-bvp-collocation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-midpoint-collocation-local-branch-and-error-budget",
+          "source_section": "Statement",
+          "quote": "Here $C^2$ means continuously differentiable with continuous second total derivatives, and $C^3$ means the same through third derivatives. Let $f,B$ be $C^2$ on open neighborhoods of an exact solution $y^*\\in C^3([a,b],\\mathbb R^d)$ of the square BVP, and suppose its continuous linearized BVP operator is boundedly invertible. For all sufficiently fine uniform meshes, the normalized midpoint residual $G_h$ has a unique zero $Y_h$ in a fixed-radius maximum-norm ball about the sampled vector $Y^*=(y^*(t_i))$. Its Jacobian at $Y_h$ is invertible with an inverse bound independent of $h$. For every candidate $Y$ in that ball with $\\|G_h(Y)\\|_\\infty\\le\\varepsilon_{\\rm alg}$, its piecewise-linear interpolant $P_hY$ satisfies\n\n$$\\|P_hY-y^*\\|_\\infty\\le C(h^2+\\varepsilon_{\\rm alg}),$$\n\nwhere $C$ is independent of $h$ and the candidate. This is a local branch result only; it asserts no branch selection outside the ball and no global Newton convergence.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-midpoint-collocation-residual-for-bvps",
+          "source_section": "Definition",
+          "quote": "For a $d$-dimensional BVP on $[a,b]$, an integer $N\\ge1$, uniform mesh width $h=(b-a)/N$, mesh nodes $t_i=a+ih$, and node vector $Y=(Y_0,\\ldots,Y_N)\\in(\\mathbb R^d)^{N+1}$, let $D_h$ be the open set of node vectors for which every midpoint pair $(t_i+h/2,(Y_i+Y_{i+1})/2)$ lies in the vector-field domain and $(Y_0,Y_N)$ lies in the boundary-map domain. Define $G_h:D_h\\to(\\mathbb R^d)^{N+1}$ by\n\n$$G_{h,i}(Y)=\\frac{Y_{i+1}-Y_i}{h}-f\\!\\left(t_i+\\frac h2,\\frac{Y_i+Y_{i+1}}2\\right)\\quad(0\\le i<N),\\qquad G_{h,N}(Y)=B(Y_0,Y_N).$$\n\nUse the maximum of the Euclidean block norms for both node and residual vectors. The interior rows are normalized by $h$; consequently an unscaled increment row has size $h$ times its normalized row.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-midpoint-collocation-for-nonlinear-bvps",
+          "source_section": "Definition",
+          "quote": "Fix a uniform mesh and the open nodal domain $D_h$ and normalized residual $G_h$ from [[def-midpoint-collocation-residual-for-bvps]]. If $f$ and $B$ are $C^1$ on the required domains (total differentiability with continuous derivative entries), then $G_h$ is a $C^1$ square map from the open subset $D_h\\subseteq\\mathbb R^{d(N+1)}$ into $\\mathbb R^{d(N+1)}$. Given an initial node vector $Y_0\\in D_h$, tolerance $\\tau\\ge0$, and correction budget $M\\in\\mathbb N_0$, apply [[alg-finite-budget-newton-for-vector-residuals]] to $G_h$ using its exact Jacobian. Return the last node vector and its root, singular-jacobian, invalid-trial, or iteration-budget-exhausted status as defined by that procedure. A root status means only that $\\|G_h(Y)\\|\\le\\tau$; it is not a branch, convergence, or error certificate.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-updated-jacobian-newton-local-quadratic-convergence",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$, meaning $F$ is $C^1$ and its first derivative\nis itself continuously differentiable. Write $J(x)=DF(x)$ as a matrix in the\nstandard basis. Let $x_*\\in U$ satisfy $F(x_*)=0$ and suppose $J(x_*)$ is\ninvertible. Suppose there are $R>0$ and $L\\ge0$ such that the closed Euclidean\nball\n$$\\overline B_2(x_*,R):=\\{x\\in\\mathbb R^n:\\|x-x_*\\|_2\\le R\\}$$\nlies in $U$ and\n$$\\|J(x)-J(y)\\|_{\\rm op}\\le L\\|x-y\\|_2\\qquad(x,y\\in\\overline B_2(x_*,R)),$$\nwhere $\\|A\\|_{\\rm op}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$. Then there are\n$r\\in(0,R]$ and $K>0$ such that every $J(x)$ on $\\overline B_2(x_*,r)$ is\ninvertible with $\\|J(x)^{-1}\\|_{\\rm op}\\le K$. Put $C:=KL/2$ and choose\n$\\rho\\in(0,r]$ with $C\\rho\\le1/2$ (if $L=0$, any $\\rho\\le r$ works).\n\nFor every $x_0\\in\\overline B_2(x_*,\\rho)$, each update attempted by\n[[alg-finite-budget-newton-for-vector-residuals]] is defined, remains in this\nball, and satisfies\n$$\\|x_{k+1}-x_*\\|_2\\le C\\|x_k-x_*\\|_2^2.$$\nIf the ordinary exact-Jacobian Newton recurrence is continued indefinitely,\nthese estimates imply $x_k\\to x_*$ with a quadratic error bound. A finite\nbudget may stop before the residual tolerance is met; `root` status records\nonly that tolerance, not an exact-zero certificate. This result gives no\narbitrary-start or global-convergence guarantee.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], the branch theorem’s $C^2$ convention means continuous second total derivatives. For this fixed mesh, $G_h$ maps the open nodal domain in $\\mathbb R^{d(N+1)}$ to the same-dimensional residual space. Since $f$ and $B$ are $C^2$, composition with the affine midpoint maps shows that $G_h$ is $C^2$; on a closed ball around $Y_h$ inside the domain its continuous second derivatives are bounded, so its Jacobian is Lipschitz there.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fact [F1] gives the zero and invertible derivative required by [F4]. Applying [F4] to this fixed finite-dimensional map yields a positive local radius and quadratic estimate. By [F3] the prescribed algorithm follows those exact Newton updates while the iterates remain in the ball; its finite budget can stop early and imposes no assertion for starts outside the basin.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1: zero residual or zero tolerance is handled under the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the dimension-one or one-cell case is admitted and the formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both endpoint values and the boundary residual are explicitly included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1: only specified data, unique IVP solutions, and local estimates are used; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Read each numbered proof step against its labelled facts and the actual supplier bodies. Locality, residual scaling, branch conditions, and finite-budget limitations are explicit. No Axiom of Choice is invoked; this authoring record is not independent mathematical approval."
+      }
+    },
+    "cor-local-newton-convergence-for-shooting-bvp-residual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-certified-ivp-approximation-and-sensitivity-interface",
+          "source_section": "Definition",
+          "quote": "Fix an interval $[a,b]$ and an open set $U\\subseteq\\mathbb R^d$ on which each exact IVP flow $\\phi(t;s)$ exists for all $t\\in[a,b]$. A **certified differentiable IVP evaluator** on $U$ supplies, for each $s\\in U$, a continuous approximate trajectory $\\widetilde\\phi(\\cdot;s)$, a $C^1$ approximate endpoint map (here $C^1$ means total differentiability with continuous derivative entries) $\\widetilde\\Phi:U\\to\\mathbb R^d$ with its exact derivative $D\\widetilde\\Phi(s)$ for that numerical map, and a stated number $\\delta_{\\rm IVP}\\ge0$ such that\n\n$$\\sup_{s\\in U}\\sup_{t\\in[a,b]}\\|\\widetilde\\phi(t;s)-\\phi(t;s)\\|_2\\le\\delta_{\\rm IVP},\\qquad \\widetilde\\Phi(s)=\\widetilde\\phi(b;s).$$\n\nThe returned derivative is not asserted to equal the derivative of the exact flow. An evaluator failure is a status and supplies no approximation bound. This is an interface contract for a supplied method; it does not assert that any particular integrator satisfies the contract.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-shooting-residual-derivative",
+          "source_section": "Statement",
+          "quote": "Let $\\Psi:U\\to\\mathbb R^d$ be a $C^1$ endpoint map (total differentiability with continuous derivative entries) on an open set $U\\subseteq\\mathbb R^d$, and let $B$ be $C^1$ on an open neighborhood of $\\{(s,\\Psi(s)):s\\in U\\}$. Define $R_\\Psi(s)=B(s,\\Psi(s))$. Then $R_\\Psi$ is $C^1$ and\n\n$$DR_\\Psi(s)=D_1B(s,\\Psi(s))+D_2B(s,\\Psi(s))D\\Psi(s).$$\n\nThis applies to the exact flow endpoint map under [[lem-c1-ode-flow-on-common-tube]] and to the approximate endpoint map in [[def-certified-ivp-approximation-and-sensitivity-interface]]; in the latter case the derivative is exact for the numerical map, not the exact flow.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-single-shooting-for-nonlinear-bvps",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be the open trial-initial-state set. Let $D_B\\subseteq\\mathbb R^d\\times\\mathbb R^d$ be the open domain of the $C^1$ boundary map $B$, where $C^1$ means total differentiability with continuous derivative entries. Inputs are a certified evaluator from [[def-certified-ivp-approximation-and-sensitivity-interface]], an initial trial $s_0\\in U$, residual tolerance $\\tau\\ge0$, and a correction budget $M\\in\\mathbb N_0$. The evaluator may return failure on a queried trial. Every successful response must supply the approximate trajectory, the endpoint $\\widetilde\\Phi(s)$ and the exact derivative $D\\widetilde\\Phi(s)$ of the declared $C^1$ numerical endpoint map, with the interface's stated uniform trajectory-error bound. Success on every queried trial is not an input assumption.\n\nFor $k=0,1,\\ldots,M$, in this order:\n\n1. Query the evaluator at $s_k$. If it fails, return the last accepted trial with status evaluator-failure and no residual certificate. Before evaluating $B$, check $(s_k,\\widetilde\\Phi(s_k))\\in D_B$; if this fails or cannot be established, return the last accepted trial with status invalid-endpoint-pair and no residual certificate. On success form $\\widetilde R(s_k)=B(s_k,\\widetilde\\Phi(s_k))$ and $D\\widetilde R(s_k)=D_1B(s_k,\\widetilde\\Phi(s_k))+D_2B(s_k,\\widetilde\\Phi(s_k))D\\widetilde\\Phi(s_k)$ using [[prop-shooting-residual-derivative]]. A failure to evaluate these quantities returns evaluator-failure without a residual certificate.\n2. If $\\|\\widetilde R(s_k)\\|_2\\le\\tau$, return $s_k$, its approximate trajectory, and status root-tolerance-met. This status asserts only the displayed residual tolerance.\n3. If $k=M$, return the last trial and status iteration-budget-exhausted.\n4. Call [[alg-newton-correction-for-vector-residuals]] with $A=D\\widetilde R(s_k)$ and $r=\\widetilde R(s_k)$. If it reports singular-jacobian, stop with that status.\n5. If the proposed trial $s_k+u_k$ is outside $U$ or its membership cannot be established, return the last accepted trial with status invalid-trial; otherwise accept $s_{k+1}=s_k+u_k$. Initially the last accepted trial is $s_0$; accepting a trial supplies no boundary residual certificate until step 1 succeeds there.\n\nOn a sequence of successful evaluations with endpoint pairs in $D_B$, this has the same residual, singularity, trial-domain and budget checks as [[alg-finite-budget-newton-for-vector-residuals]]. It makes no global-start, exact-root, or discretization-error claim. The numerical residual is $C^1$ on the open subset of $U$ where $(s,\\widetilde\\Phi(s))\\in D_B$; no boundary value is evaluated outside that subset.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-updated-jacobian-newton-local-quadratic-convergence",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$, meaning $F$ is $C^1$ and its first derivative\nis itself continuously differentiable. Write $J(x)=DF(x)$ as a matrix in the\nstandard basis. Let $x_*\\in U$ satisfy $F(x_*)=0$ and suppose $J(x_*)$ is\ninvertible. Suppose there are $R>0$ and $L\\ge0$ such that the closed Euclidean\nball\n$$\\overline B_2(x_*,R):=\\{x\\in\\mathbb R^n:\\|x-x_*\\|_2\\le R\\}$$\nlies in $U$ and\n$$\\|J(x)-J(y)\\|_{\\rm op}\\le L\\|x-y\\|_2\\qquad(x,y\\in\\overline B_2(x_*,R)),$$\nwhere $\\|A\\|_{\\rm op}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$. Then there are\n$r\\in(0,R]$ and $K>0$ such that every $J(x)$ on $\\overline B_2(x_*,r)$ is\ninvertible with $\\|J(x)^{-1}\\|_{\\rm op}\\le K$. Put $C:=KL/2$ and choose\n$\\rho\\in(0,r]$ with $C\\rho\\le1/2$ (if $L=0$, any $\\rho\\le r$ works).\n\nFor every $x_0\\in\\overline B_2(x_*,\\rho)$, each update attempted by\n[[alg-finite-budget-newton-for-vector-residuals]] is defined, remains in this\nball, and satisfies\n$$\\|x_{k+1}-x_*\\|_2\\le C\\|x_k-x_*\\|_2^2.$$\nIf the ordinary exact-Jacobian Newton recurrence is continued indefinitely,\nthese estimates imply $x_k\\to x_*$ with a quadratic error bound. A finite\nbudget may stop before the residual tolerance is met; `root` status records\nonly that tolerance, not an exact-zero certificate. This result gives no\narbitrary-start or global-convergence guarantee.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The residual is a square map from an open subset of $\\mathbb R^d$ to $\\mathbb R^d$. By assumption it is $C^2$, has zero at $s^*$, has invertible derivative there, and has Lipschitz derivative on the closed ball. These are exactly the map hypotheses of [F4].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The exact evaluator in [F1] makes the computed residual in [F3] equal to $R$, and [F2] supplies its exact Jacobian. Applying [F4] therefore gives a radius and constant for which every attempted update is defined, remains in the ball, and obeys the quadratic estimate. Procedure [F3] can stop earlier on residual tolerance or budget; neither stopping status changes the update conclusion, and [F4] supplies no global-start claim.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1: zero residual or zero tolerance is handled under the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the dimension-one or one-cell case is admitted and the formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both endpoint values and the boundary residual are explicitly included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1: only specified data, unique IVP solutions, and local estimates are used; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Read each numbered proof step against its labelled facts and the actual supplier bodies. Locality, residual scaling, branch conditions, and finite-budget limitations are explicit. No Axiom of Choice is invoked; this authoring record is not independent mathematical approval."
+      }
+    },
+    "thm-shooting-residual-error-budget": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "source_section": "Definition",
+          "quote": "Fix $a<b$, an integer $d\\ge1$, an open set $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d$ containing $[a,b]\\times$ the states under consideration, and a vector field $f:\\Omega\\to\\mathbb R^d$. Let $D_B\\subseteq\\mathbb R^d\\times\\mathbb R^d$ be open and let $B:D_B\\to\\mathbb R^d$. A **square nonlinear two-point boundary-value problem (BVP)** is\n\n$$y'(t)=f(t,y(t))\\quad(a\\le t\\le b),\\qquad B(y(a),y(b))=0,$$\n\nwhere $y$ is a continuously differentiable curve whose graph lies in $\\Omega$, whose endpoint pair lies in $D_B$, and where the $d$ scalar components of $B$ give exactly $d$ boundary equations. A **BVP solution** is such a curve satisfying both the differential equation and endpoint equation. No existence or uniqueness is part of this definition.\n\nIf the IVP from initial state $s\\in\\mathbb R^d$ has a unique solution $\\phi(\\cdot;s)$ on $[a,b]$, the **exact shooting residual** is $R(s):=B(s,\\phi(b;s))$ whenever $(s,\\phi(b;s))\\in D_B$. For a mesh $a=t_0<\\cdots<t_N=b$ and segment initial states $s_0,\\ldots,s_N$, the **exact multiple-shooting residual** has rows $\\phi_i(t_{i+1};s_i)-s_{i+1}$ for $0\\le i<N$ and final row $B(s_0,s_N)$, where $\\phi_i$ denotes the unique segment IVP solution when it exists. These residuals are defined only on their admissible IVP and boundary domains.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-certified-ivp-approximation-and-sensitivity-interface",
+          "source_section": "Definition",
+          "quote": "Fix an interval $[a,b]$ and an open set $U\\subseteq\\mathbb R^d$ on which each exact IVP flow $\\phi(t;s)$ exists for all $t\\in[a,b]$. A **certified differentiable IVP evaluator** on $U$ supplies, for each $s\\in U$, a continuous approximate trajectory $\\widetilde\\phi(\\cdot;s)$, a $C^1$ approximate endpoint map (here $C^1$ means total differentiability with continuous derivative entries) $\\widetilde\\Phi:U\\to\\mathbb R^d$ with its exact derivative $D\\widetilde\\Phi(s)$ for that numerical map, and a stated number $\\delta_{\\rm IVP}\\ge0$ such that\n\n$$\\sup_{s\\in U}\\sup_{t\\in[a,b]}\\|\\widetilde\\phi(t;s)-\\phi(t;s)\\|_2\\le\\delta_{\\rm IVP},\\qquad \\widetilde\\Phi(s)=\\widetilde\\phi(b;s).$$\n\nThe returned derivative is not asserted to equal the derivative of the exact flow. An evaluator failure is a status and supplies no approximation bound. This is an interface contract for a supplied method; it does not assert that any particular integrator satisfies the contract.\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-shooting-residual-zero-iff-bvp-solution",
+          "source_section": "Statement",
+          "quote": "On an open set of initial states for which the IVP from $s$ has a unique solution $\\phi(\\cdot;s)$ on $[a,b]$, the exact shooting residual is $R(s)=B(s,\\phi(b;s))$. Then $R(s)=0$ if and only if $\\phi(\\cdot;s)$ is a BVP solution. Any BVP solution with initial state $s$ equals this shot.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-single-shooting-for-nonlinear-bvps",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be the open trial-initial-state set. Let $D_B\\subseteq\\mathbb R^d\\times\\mathbb R^d$ be the open domain of the $C^1$ boundary map $B$, where $C^1$ means total differentiability with continuous derivative entries. Inputs are a certified evaluator from [[def-certified-ivp-approximation-and-sensitivity-interface]], an initial trial $s_0\\in U$, residual tolerance $\\tau\\ge0$, and a correction budget $M\\in\\mathbb N_0$. The evaluator may return failure on a queried trial. Every successful response must supply the approximate trajectory, the endpoint $\\widetilde\\Phi(s)$ and the exact derivative $D\\widetilde\\Phi(s)$ of the declared $C^1$ numerical endpoint map, with the interface's stated uniform trajectory-error bound. Success on every queried trial is not an input assumption.\n\nFor $k=0,1,\\ldots,M$, in this order:\n\n1. Query the evaluator at $s_k$. If it fails, return the last accepted trial with status evaluator-failure and no residual certificate. Before evaluating $B$, check $(s_k,\\widetilde\\Phi(s_k))\\in D_B$; if this fails or cannot be established, return the last accepted trial with status invalid-endpoint-pair and no residual certificate. On success form $\\widetilde R(s_k)=B(s_k,\\widetilde\\Phi(s_k))$ and $D\\widetilde R(s_k)=D_1B(s_k,\\widetilde\\Phi(s_k))+D_2B(s_k,\\widetilde\\Phi(s_k))D\\widetilde\\Phi(s_k)$ using [[prop-shooting-residual-derivative]]. A failure to evaluate these quantities returns evaluator-failure without a residual certificate.\n2. If $\\|\\widetilde R(s_k)\\|_2\\le\\tau$, return $s_k$, its approximate trajectory, and status root-tolerance-met. This status asserts only the displayed residual tolerance.\n3. If $k=M$, return the last trial and status iteration-budget-exhausted.\n4. Call [[alg-newton-correction-for-vector-residuals]] with $A=D\\widetilde R(s_k)$ and $r=\\widetilde R(s_k)$. If it reports singular-jacobian, stop with that status.\n5. If the proposed trial $s_k+u_k$ is outside $U$ or its membership cannot be established, return the last accepted trial with status invalid-trial; otherwise accept $s_{k+1}=s_k+u_k$. Initially the last accepted trial is $s_0$; accepting a trial supplies no boundary residual certificate until step 1 succeeds there.\n\nOn a sequence of successful evaluations with endpoint pairs in $D_B$, this has the same residual, singularity, trial-domain and budget checks as [[alg-finite-budget-newton-for-vector-residuals]]. It makes no global-start, exact-root, or discretization-error claim. The numerical residual is $C^1$ on the open subset of $U$ where $(s,\\widetilde\\Phi(s))\\in D_B$; no boundary value is evaluated outside that subset.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-c1-ode-flow-on-common-tube",
+          "source_section": "Statement",
+          "quote": "Let $a<b$, let $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, and let $f:\\Omega\\to\\mathbb R^d$ be $C^1$. Let $K\\subseteq\\Omega$ be compact and convex, and let $U\\subseteq\\mathbb R^d$ be open. Assume that for every $s\\in U$ the unique IVP solution $\\phi(\\cdot;s)$ from $\\phi(a;s)=s$ exists on $[a,b]$ and $(t,\\phi(t;s))\\in K$ for every $t$. Then $s\\mapsto\\phi(t;s)$ is $C^1$ on $U$ for each $t\\in[a,b]$. Its derivative matrix $S(t;s):=D_s\\phi(t;s)$ is the unique solution of\n\n$$S(t;s)=I_d+\\int_a^t D_yf(r,\\phi(r;s))S(r;s)\\,dr,$$\n\nand hence satisfies $\\partial_tS=D_yf(t,\\phi(t;s))S$, $S(a;s)=I_d$. The claim is local to the stated common compact tube; it does not assert differentiability beyond it.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $e=\\widehat s-s^*$. Taylor's formula [F5] and $R(s^*)=0$ give $R(\\widehat s)=DR(s^*)e+q$ with $\\|q\\|_2\\le(L_R/2)\\|e\\|_2^2$. Since $\\|e\\|_2\\le r$ and $\\|DR(s^*)e\\|_2\\ge\\sigma\\|e\\|_2$, the radius condition yields $\\|R(\\widehat s)\\|_2\\ge\\sigma\\|e\\|_2-(\\sigma/2)\\|e\\|_2=(\\sigma/2)\\|e\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The exact and computed residuals have the same first boundary argument. By the stated terminal-state Lipschitz bound and [F2], $\\|R(\\widehat s)-B(\\widehat s,\\widetilde\\Phi(\\widehat s))\\|_2\\le L_B\\delta_{\\rm IVP}$. The computed residual assumption therefore gives $\\|R(\\widehat s)\\|_2\\le\\tau_{\\rm root}+L_B\\delta_{\\rm IVP}$. Combining with step 1.1 proves the initial-state estimate. If the candidate is the algorithm's root-tolerance output, [F4] supplies exactly the needed residual premise; other statuses supply no such premise.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $u(t)=\\|\\phi(t;\\widehat s)-\\phi(t;s^*)\\|_2$. The Volterra equations from [F7] and the common-tube Lipschitz bound give $u(t)\\le\\|e\\|_2+L\\int_a^t u(r)dr$. Applying [F6] yields $u(t)\\le e^{L(b-a)}\\|e\\|_2$ for every $t\\in[a,b]$. The evaluator error [F2] and the triangle inequality add at most $\\delta_{\\rm IVP}$, giving the displayed trajectory estimate. By [F3], $\\phi(\\cdot;s^*)$ is the exact BVP trajectory.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1: zero residual or zero tolerance is handled under the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the dimension-one or one-cell case is admitted and the formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both endpoint values and the boundary residual are explicitly included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1: only specified data, unique IVP solutions, and local estimates are used; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Read each numbered proof step against its labelled facts and the actual supplier bodies. Locality, residual scaling, branch conditions, and finite-budget limitations are explicit. No Axiom of Choice is invoked; this authoring record is not independent mathematical approval."
+      }
+    },
+    "ex-midpoint-collocation-has-two-branches": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "source_section": "Definition",
+          "quote": "Fix $a<b$, an integer $d\\ge1$, an open set $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d$ containing $[a,b]\\times$ the states under consideration, and a vector field $f:\\Omega\\to\\mathbb R^d$. Let $D_B\\subseteq\\mathbb R^d\\times\\mathbb R^d$ be open and let $B:D_B\\to\\mathbb R^d$. A **square nonlinear two-point boundary-value problem (BVP)** is\n\n$$y'(t)=f(t,y(t))\\quad(a\\le t\\le b),\\qquad B(y(a),y(b))=0,$$\n\nwhere $y$ is a continuously differentiable curve whose graph lies in $\\Omega$, whose endpoint pair lies in $D_B$, and where the $d$ scalar components of $B$ give exactly $d$ boundary equations. A **BVP solution** is such a curve satisfying both the differential equation and endpoint equation. No existence or uniqueness is part of this definition.\n\nIf the IVP from initial state $s\\in\\mathbb R^d$ has a unique solution $\\phi(\\cdot;s)$ on $[a,b]$, the **exact shooting residual** is $R(s):=B(s,\\phi(b;s))$ whenever $(s,\\phi(b;s))\\in D_B$. For a mesh $a=t_0<\\cdots<t_N=b$ and segment initial states $s_0,\\ldots,s_N$, the **exact multiple-shooting residual** has rows $\\phi_i(t_{i+1};s_i)-s_{i+1}$ for $0\\le i<N$ and final row $B(s_0,s_N)$, where $\\phi_i$ denotes the unique segment IVP solution when it exists. These residuals are defined only on their admissible IVP and boundary domains.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-midpoint-collocation-residual-for-bvps",
+          "source_section": "Definition",
+          "quote": "For a $d$-dimensional BVP on $[a,b]$, an integer $N\\ge1$, uniform mesh width $h=(b-a)/N$, mesh nodes $t_i=a+ih$, and node vector $Y=(Y_0,\\ldots,Y_N)\\in(\\mathbb R^d)^{N+1}$, let $D_h$ be the open set of node vectors for which every midpoint pair $(t_i+h/2,(Y_i+Y_{i+1})/2)$ lies in the vector-field domain and $(Y_0,Y_N)$ lies in the boundary-map domain. Define $G_h:D_h\\to(\\mathbb R^d)^{N+1}$ by\n\n$$G_{h,i}(Y)=\\frac{Y_{i+1}-Y_i}{h}-f\\!\\left(t_i+\\frac h2,\\frac{Y_i+Y_{i+1}}2\\right)\\quad(0\\le i<N),\\qquad G_{h,N}(Y)=B(Y_0,Y_N).$$\n\nUse the maximum of the Euclidean block norms for both node and residual vectors. The interior rows are normalized by $h$; consequently an unscaled increment row has size $h$ times its normalized row.\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-midpoint-residual-zero-is-collocation",
+          "source_section": "Statement",
+          "quote": "For any $Y\\in D_h$, $G_h(Y)=0$ if and only if\n\n$$Y_{i+1}-Y_i=h f\\!\\left(t_i+\\frac h2,\\frac{Y_i+Y_{i+1}}2\\right)\\quad(0\\le i<N),\\qquad B(Y_0,Y_N)=0.$$\n\nEquivalently, the piecewise-linear interpolant has on each segment a constant slope equal to the vector field at the segment midpoint state and satisfies the endpoint residual.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-midpoint-collocation-for-nonlinear-bvps",
+          "source_section": "Definition",
+          "quote": "Fix a uniform mesh and the open nodal domain $D_h$ and normalized residual $G_h$ from [[def-midpoint-collocation-residual-for-bvps]]. If $f$ and $B$ are $C^1$ on the required domains (total differentiability with continuous derivative entries), then $G_h$ is a $C^1$ square map from the open subset $D_h\\subseteq\\mathbb R^{d(N+1)}$ into $\\mathbb R^{d(N+1)}$. Given an initial node vector $Y_0\\in D_h$, tolerance $\\tau\\ge0$, and correction budget $M\\in\\mathbb N_0$, apply [[alg-finite-budget-newton-for-vector-residuals]] to $G_h$ using its exact Jacobian. Return the last node vector and its root, singular-jacobian, invalid-trial, or iteration-budget-exhausted status as defined by that procedure. A root status means only that $\\|G_h(Y)\\|\\le\\tau$; it is not a branch, convergence, or error certificate.\n",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $y'=0$, every BVP solution is constant; the boundary equation is $y(0)^2-1=0$, whose real roots are $1$ and $-1$. Both constant curves satisfy the equation and endpoint condition.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At a residual zero, the interior rows from [F2] force $Y_{i+1}=Y_i$ for every $i$, so all nodes equal some $c$; the endpoint row then gives $c^2-1=0$. Thus the only residual zeros are the two constant node vectors $Y_i=1$ and $Y_i=-1$, in accord with [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At either root, a vector $z=(z_0,\\ldots,z_N)$ in the kernel of the residual Jacobian satisfies $z_{i+1}-z_i=0$ in every interior row, hence all $z_i=c$. The boundary row is $2Y_0z_0=0$; since $Y_0=\\pm1$, this forces $c=0$. The square Jacobian has trivial kernel, so it is invertible and each root is simple.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Fact [F4] defines a finite Newton procedure but makes no branch-selection or global-convergence claim. The existence of both roots shows directly that the BVP and its collocation residual have no unique global solution branch.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1: zero residual or zero tolerance is handled under the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the dimension-one or one-cell case is admitted and the formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both endpoint values and the boundary residual are explicitly included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1, 4.1: only specified data, unique IVP solutions, and local estimates are used; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1: proves the forward residual-to-solution implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1: proves the reverse solution-to-residual implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-cell midpoint residual and Jacobian kernels",
+          "method": "exact finite calculation",
+          "input": {
+            "N": 2,
+            "h": "1/2",
+            "f": "0",
+            "B": "Y0^2-1"
+          },
+          "calculation": "The rows are 2(Y1-Y0), 2(Y2-Y1), and Y0^2-1. Their zeros are (1,1,1) and (-1,-1,-1). At either root a Jacobian-kernel vector obeys z1=z0, z2=z1 and 2Y0 z0=0, hence z=0.",
+          "expected": {
+            "roots": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                -1,
+                -1,
+                -1
+              ]
+            ],
+            "jacobian_kernel": "{0}"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Read each numbered proof step against its labelled facts and the actual supplier bodies. Locality, residual scaling, branch conditions, and finite-budget limitations are explicit. No Axiom of Choice is invoked; this authoring record is not independent mathematical approval."
+      }
+    },
+    "ex-unstable-single-shooting-amplifies-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "source_section": "Definition",
+          "quote": "Fix $a<b$, an integer $d\\ge1$, an open set $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d$ containing $[a,b]\\times$ the states under consideration, and a vector field $f:\\Omega\\to\\mathbb R^d$. Let $D_B\\subseteq\\mathbb R^d\\times\\mathbb R^d$ be open and let $B:D_B\\to\\mathbb R^d$. A **square nonlinear two-point boundary-value problem (BVP)** is\n\n$$y'(t)=f(t,y(t))\\quad(a\\le t\\le b),\\qquad B(y(a),y(b))=0,$$\n\nwhere $y$ is a continuously differentiable curve whose graph lies in $\\Omega$, whose endpoint pair lies in $D_B$, and where the $d$ scalar components of $B$ give exactly $d$ boundary equations. A **BVP solution** is such a curve satisfying both the differential equation and endpoint equation. No existence or uniqueness is part of this definition.\n\nIf the IVP from initial state $s\\in\\mathbb R^d$ has a unique solution $\\phi(\\cdot;s)$ on $[a,b]$, the **exact shooting residual** is $R(s):=B(s,\\phi(b;s))$ whenever $(s,\\phi(b;s))\\in D_B$. For a mesh $a=t_0<\\cdots<t_N=b$ and segment initial states $s_0,\\ldots,s_N$, the **exact multiple-shooting residual** has rows $\\phi_i(t_{i+1};s_i)-s_{i+1}$ for $0\\le i<N$ and final row $B(s_0,s_N)$, where $\\phi_i$ denotes the unique segment IVP solution when it exists. These residuals are defined only on their admissible IVP and boundary domains.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-certified-ivp-approximation-and-sensitivity-interface",
+          "source_section": "Definition",
+          "quote": "Fix an interval $[a,b]$ and an open set $U\\subseteq\\mathbb R^d$ on which each exact IVP flow $\\phi(t;s)$ exists for all $t\\in[a,b]$. A **certified differentiable IVP evaluator** on $U$ supplies, for each $s\\in U$, a continuous approximate trajectory $\\widetilde\\phi(\\cdot;s)$, a $C^1$ approximate endpoint map (here $C^1$ means total differentiability with continuous derivative entries) $\\widetilde\\Phi:U\\to\\mathbb R^d$ with its exact derivative $D\\widetilde\\Phi(s)$ for that numerical map, and a stated number $\\delta_{\\rm IVP}\\ge0$ such that\n\n$$\\sup_{s\\in U}\\sup_{t\\in[a,b]}\\|\\widetilde\\phi(t;s)-\\phi(t;s)\\|_2\\le\\delta_{\\rm IVP},\\qquad \\widetilde\\Phi(s)=\\widetilde\\phi(b;s).$$\n\nThe returned derivative is not asserted to equal the derivative of the exact flow. An evaluator failure is a status and supplies no approximation bound. This is an interface contract for a supplied method; it does not assert that any particular integrator satisfies the contract.\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-single-shooting-for-nonlinear-bvps",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be the open trial-initial-state set. Let $D_B\\subseteq\\mathbb R^d\\times\\mathbb R^d$ be the open domain of the $C^1$ boundary map $B$, where $C^1$ means total differentiability with continuous derivative entries. Inputs are a certified evaluator from [[def-certified-ivp-approximation-and-sensitivity-interface]], an initial trial $s_0\\in U$, residual tolerance $\\tau\\ge0$, and a correction budget $M\\in\\mathbb N_0$. The evaluator may return failure on a queried trial. Every successful response must supply the approximate trajectory, the endpoint $\\widetilde\\Phi(s)$ and the exact derivative $D\\widetilde\\Phi(s)$ of the declared $C^1$ numerical endpoint map, with the interface's stated uniform trajectory-error bound. Success on every queried trial is not an input assumption.\n\nFor $k=0,1,\\ldots,M$, in this order:\n\n1. Query the evaluator at $s_k$. If it fails, return the last accepted trial with status evaluator-failure and no residual certificate. Before evaluating $B$, check $(s_k,\\widetilde\\Phi(s_k))\\in D_B$; if this fails or cannot be established, return the last accepted trial with status invalid-endpoint-pair and no residual certificate. On success form $\\widetilde R(s_k)=B(s_k,\\widetilde\\Phi(s_k))$ and $D\\widetilde R(s_k)=D_1B(s_k,\\widetilde\\Phi(s_k))+D_2B(s_k,\\widetilde\\Phi(s_k))D\\widetilde\\Phi(s_k)$ using [[prop-shooting-residual-derivative]]. A failure to evaluate these quantities returns evaluator-failure without a residual certificate.\n2. If $\\|\\widetilde R(s_k)\\|_2\\le\\tau$, return $s_k$, its approximate trajectory, and status root-tolerance-met. This status asserts only the displayed residual tolerance.\n3. If $k=M$, return the last trial and status iteration-budget-exhausted.\n4. Call [[alg-newton-correction-for-vector-residuals]] with $A=D\\widetilde R(s_k)$ and $r=\\widetilde R(s_k)$. If it reports singular-jacobian, stop with that status.\n5. If the proposed trial $s_k+u_k$ is outside $U$ or its membership cannot be established, return the last accepted trial with status invalid-trial; otherwise accept $s_{k+1}=s_k+u_k$. Initially the last accepted trial is $s_0$; accepting a trial supplies no boundary residual certificate until step 1 succeeds there.\n\nOn a sequence of successful evaluations with endpoint pairs in $D_B$, this has the same residual, singularity, trial-domain and budget checks as [[alg-finite-budget-newton-for-vector-residuals]]. It makes no global-start, exact-root, or discretization-error claim. The numerical residual is $C^1$ on the open subset of $U$ where $(s,\\widetilde\\Phi(s))\\in D_B$; no boundary value is evaluated outside that subset.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The substitution $w=u+1$ gives $w''=\\lambda^2w$ with $w(0)=0$ and $w(1)=1$. Solving this constant-coefficient equation gives $w(t)=\\sinh(\\lambda t)/\\sinh\\lambda$, so $u(t)=w(t)-1\\in[-1,0]$ because $\\sinh(\\lambda t)$ increases from $0$ to $\\sinh\\lambda$. Its initial slope is $s^*=w'(0)=\\lambda/\\sinh\\lambda$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If the initial slope is $s^*+\\delta$ while $u(0)=-1$ remains fixed, linearity of the equation for $w$ gives $w_\\delta(t)=(s^*+\\delta)\\sinh(\\lambda t)/\\lambda$. Subtracting the exact shot yields $w_\\delta(1)-w(1)=\\delta\\sinh\\lambda/\\lambda$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $\\sinh\\lambda-\\lambda$ has value zero at $0$ and derivative $\\cosh\\lambda-1>0$ for $\\lambda>0$, we have $\\sinh\\lambda/\\lambda>1$. Also the derivative of $q(\\lambda)=\\sinh\\lambda/\\lambda$ has numerator $g(\\lambda)=\\lambda\\cosh\\lambda-\\sinh\\lambda$, where $g(0)=0$ and $g\\prime(\\lambda)=\\lambda\\sinh\\lambda>0$; hence $q$ is increasing. For $\\lambda\\ge2$, $\\sinh\\lambda\\ge e^{\\lambda-1}/2$, so $q(\\lambda)\\ge e^{\\lambda-1}/(2\\lambda)\\to\\infty$. The perturbed terminal boundary residual vector changes by $(0,\\delta\\sinh\\lambda/\\lambda)$, while [F2]–[F3] identify this as the endpoint residual evaluated by exact single shooting.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1: zero residual or zero tolerance is handled under the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the dimension-one or one-cell case is admitted and the formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both endpoint values and the boundary residual are explicitly included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1: only specified data, unique IVP solutions, and local estimates are used; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact endpoint amplification at lambda one",
+          "method": "closed-form calculation",
+          "input": {
+            "lambda": "1",
+            "slope_error": "delta"
+          },
+          "calculation": "The exact slope is 1/sinh(1); perturbing it by delta changes the terminal value by delta*sinh(1). Since sinh(1)>1, the terminal error exceeds the slope error.",
+          "expected": {
+            "terminal_error": "delta*sinh(1)",
+            "amplification": "sinh(1)>1"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Read each numbered proof step against its labelled facts and the actual supplier bodies. Locality, residual scaling, branch conditions, and finite-budget limitations are explicit. No Axiom of Choice is invoked; this authoring record is not independent mathematical approval."
+      }
+    },
+    "ex-newton-shooting-fails-from-singular-start": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "source_section": "Definition",
+          "quote": "Fix $a<b$, an integer $d\\ge1$, an open set $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d$ containing $[a,b]\\times$ the states under consideration, and a vector field $f:\\Omega\\to\\mathbb R^d$. Let $D_B\\subseteq\\mathbb R^d\\times\\mathbb R^d$ be open and let $B:D_B\\to\\mathbb R^d$. A **square nonlinear two-point boundary-value problem (BVP)** is\n\n$$y'(t)=f(t,y(t))\\quad(a\\le t\\le b),\\qquad B(y(a),y(b))=0,$$\n\nwhere $y$ is a continuously differentiable curve whose graph lies in $\\Omega$, whose endpoint pair lies in $D_B$, and where the $d$ scalar components of $B$ give exactly $d$ boundary equations. A **BVP solution** is such a curve satisfying both the differential equation and endpoint equation. No existence or uniqueness is part of this definition.\n\nIf the IVP from initial state $s\\in\\mathbb R^d$ has a unique solution $\\phi(\\cdot;s)$ on $[a,b]$, the **exact shooting residual** is $R(s):=B(s,\\phi(b;s))$ whenever $(s,\\phi(b;s))\\in D_B$. For a mesh $a=t_0<\\cdots<t_N=b$ and segment initial states $s_0,\\ldots,s_N$, the **exact multiple-shooting residual** has rows $\\phi_i(t_{i+1};s_i)-s_{i+1}$ for $0\\le i<N$ and final row $B(s_0,s_N)$, where $\\phi_i$ denotes the unique segment IVP solution when it exists. These residuals are defined only on their admissible IVP and boundary domains.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-certified-ivp-approximation-and-sensitivity-interface",
+          "source_section": "Definition",
+          "quote": "Fix an interval $[a,b]$ and an open set $U\\subseteq\\mathbb R^d$ on which each exact IVP flow $\\phi(t;s)$ exists for all $t\\in[a,b]$. A **certified differentiable IVP evaluator** on $U$ supplies, for each $s\\in U$, a continuous approximate trajectory $\\widetilde\\phi(\\cdot;s)$, a $C^1$ approximate endpoint map (here $C^1$ means total differentiability with continuous derivative entries) $\\widetilde\\Phi:U\\to\\mathbb R^d$ with its exact derivative $D\\widetilde\\Phi(s)$ for that numerical map, and a stated number $\\delta_{\\rm IVP}\\ge0$ such that\n\n$$\\sup_{s\\in U}\\sup_{t\\in[a,b]}\\|\\widetilde\\phi(t;s)-\\phi(t;s)\\|_2\\le\\delta_{\\rm IVP},\\qquad \\widetilde\\Phi(s)=\\widetilde\\phi(b;s).$$\n\nThe returned derivative is not asserted to equal the derivative of the exact flow. An evaluator failure is a status and supplies no approximation bound. This is an interface contract for a supplied method; it does not assert that any particular integrator satisfies the contract.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-shooting-residual-derivative",
+          "source_section": "Statement",
+          "quote": "Let $\\Psi:U\\to\\mathbb R^d$ be a $C^1$ endpoint map (total differentiability with continuous derivative entries) on an open set $U\\subseteq\\mathbb R^d$, and let $B$ be $C^1$ on an open neighborhood of $\\{(s,\\Psi(s)):s\\in U\\}$. Define $R_\\Psi(s)=B(s,\\Psi(s))$. Then $R_\\Psi$ is $C^1$ and\n\n$$DR_\\Psi(s)=D_1B(s,\\Psi(s))+D_2B(s,\\Psi(s))D\\Psi(s).$$\n\nThis applies to the exact flow endpoint map under [[lem-c1-ode-flow-on-common-tube]] and to the approximate endpoint map in [[def-certified-ivp-approximation-and-sensitivity-interface]]; in the latter case the derivative is exact for the numerical map, not the exact flow.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-single-shooting-for-nonlinear-bvps",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be the open trial-initial-state set. Let $D_B\\subseteq\\mathbb R^d\\times\\mathbb R^d$ be the open domain of the $C^1$ boundary map $B$, where $C^1$ means total differentiability with continuous derivative entries. Inputs are a certified evaluator from [[def-certified-ivp-approximation-and-sensitivity-interface]], an initial trial $s_0\\in U$, residual tolerance $\\tau\\ge0$, and a correction budget $M\\in\\mathbb N_0$. The evaluator may return failure on a queried trial. Every successful response must supply the approximate trajectory, the endpoint $\\widetilde\\Phi(s)$ and the exact derivative $D\\widetilde\\Phi(s)$ of the declared $C^1$ numerical endpoint map, with the interface's stated uniform trajectory-error bound. Success on every queried trial is not an input assumption.\n\nFor $k=0,1,\\ldots,M$, in this order:\n\n1. Query the evaluator at $s_k$. If it fails, return the last accepted trial with status evaluator-failure and no residual certificate. Before evaluating $B$, check $(s_k,\\widetilde\\Phi(s_k))\\in D_B$; if this fails or cannot be established, return the last accepted trial with status invalid-endpoint-pair and no residual certificate. On success form $\\widetilde R(s_k)=B(s_k,\\widetilde\\Phi(s_k))$ and $D\\widetilde R(s_k)=D_1B(s_k,\\widetilde\\Phi(s_k))+D_2B(s_k,\\widetilde\\Phi(s_k))D\\widetilde\\Phi(s_k)$ using [[prop-shooting-residual-derivative]]. A failure to evaluate these quantities returns evaluator-failure without a residual certificate.\n2. If $\\|\\widetilde R(s_k)\\|_2\\le\\tau$, return $s_k$, its approximate trajectory, and status root-tolerance-met. This status asserts only the displayed residual tolerance.\n3. If $k=M$, return the last trial and status iteration-budget-exhausted.\n4. Call [[alg-newton-correction-for-vector-residuals]] with $A=D\\widetilde R(s_k)$ and $r=\\widetilde R(s_k)$. If it reports singular-jacobian, stop with that status.\n5. If the proposed trial $s_k+u_k$ is outside $U$ or its membership cannot be established, return the last accepted trial with status invalid-trial; otherwise accept $s_{k+1}=s_k+u_k$. Initially the last accepted trial is $s_0$; accepting a trial supplies no boundary residual certificate until step 1 succeeds there.\n\nOn a sequence of successful evaluations with endpoint pairs in $D_B$, this has the same residual, singularity, trial-domain and budget checks as [[alg-finite-budget-newton-for-vector-residuals]]. It makes no global-start, exact-root, or discretization-error claim. The numerical residual is $C^1$ on the open subset of $U$ where $(s,\\widetilde\\Phi(s))\\in D_B$; no boundary value is evaluated outside that subset.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-local-newton-convergence-for-shooting-bvp-residual",
+          "source_section": "Statement",
+          "quote": "Here $C^2$ means twice continuously differentiable. Let the exact shooting residual $R(s)=B(s,\\phi(b;s))$ be $C^2$ on an open neighborhood of a root $s^*$, with $R(s^*)=0$, $DR(s^*)$ invertible, and $DR$ Lipschitz on a closed ball around $s^*$. Use the exact evaluator $\\widetilde\\phi=\\phi$, $\\widetilde\\Phi=\\Phi$, $\\delta_{\\rm IVP}=0$ in [[alg-single-shooting-for-nonlinear-bvps]]. Then there is a positive-radius ball on which every attempted exact-Jacobian Newton update is defined, remains in the ball, and satisfies a quadratic error bound. A finite budget may stop before the residual tolerance is met. No arbitrary-start or global-convergence guarantee follows.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The exact ODE flow for $y'=0$ is $\\phi(t;s)=s$, so [F1] gives $R(s)=B(s,s)=s^2-1$, and [F2] certifies that the exact evaluator used by the algorithm has zero IVP error. Thus $R(1)=R(-1)=0$ and $R'(s)=2s$, making both roots simple.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At the initial guess $s_0=0$, the residual is $-1$, so a zero tolerance is not met; the Jacobian is the zero $1\\times1$ map because $R'(0)=0$. The linear correction therefore has no solution in the sense required by Newton and [F4] returns singular-jacobian before any update.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The roots at $\\pm1$ have nonzero derivative, so the simple-root condition can hold on a sufficiently small ball around either root, where the polynomial derivative is Lipschitz. Fact [F5] then gives a local Newton basin there, while step 2.1 exhibits a valid start outside both guaranteed basins for which the method stops.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: positive state dimension and a nondegenerate interval are required where applicable; an empty-dimensional BVP is outside the declared scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1: zero residual or zero tolerance is handled under the stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the dimension-one or one-cell case is admitted and the formulas remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition/Statement: a<b and/or N>=1 is required where an interval or mesh is used; degenerate intervals are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both endpoint values and the boundary residual are explicitly included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1: only specified data, unique IVP solutions, and local estimates are used; no arbitrary-family choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: no biconditional or two-direction equivalence is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Newton correction at singular start",
+          "method": "exact scalar calculation",
+          "input": {
+            "initial": "0",
+            "residual": "s^2-1",
+            "tolerance": 0,
+            "budget": 1
+          },
+          "calculation": "R(0)=-1 and R'(0)=0, so the residual test fails and the Newton correction matrix is singular.",
+          "expected": {
+            "status": "singular-jacobian"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-22",
+        "notes": "Read each numbered proof step against its labelled facts and the actual supplier bodies. Locality, residual scaling, branch conditions, and finite-budget limitations are explicit. No Axiom of Choice is invoked; this authoring record is not independent mathematical approval."
+      }
+    }
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "group": "r",
+  "batches": ["50"],
+  "pages_read": [
+    "preconditioner-algorithms-and-residual-metrics",
+    "preconditioner-algorithms-and-residual-metrics-examples"
+  ],
+  "items_read": [
+    "alg-ilu0-fixed-pattern-factorization",
+    "thm-ilu0-factor-pattern-and-work-counts",
+    "alg-flexible-gmres-variable-right-preconditioning",
+    "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+    "ex-left-preconditioned-residual-can-understate-physical-residual",
+    "ex-ilu0-tridiagonal-factorization",
+    "cex-ilu0-product-can-create-fill-outside-input-pattern"
+  ],
+  "conventions": [
+    {
+      "convention": "ILU uses exact field arithmetic, n ≥ 1, fixed ordering and no pivoting. Its one-based matrix and vector labels refer to zero-based CSR coordinates.",
+      "fixed_by": "alg-ilu0-fixed-pattern-factorization",
+      "matters_for": [
+        "thm-ilu0-factor-pattern-and-work-counts",
+        "ex-ilu0-tridiagonal-factorization",
+        "cex-ilu0-product-can-create-fill-outside-input-pattern"
+      ]
+    },
+    {
+      "convention": "Successful ILU input is canonical and sorted, with every diagonal position present. Factor slots remain stored after cancellation; L has an implicit unit diagonal. Pattern containment concerns the factors, not their product.",
+      "fixed_by": "alg-ilu0-fixed-pattern-factorization",
+      "matters_for": [
+        "thm-ilu0-factor-pattern-and-work-counts",
+        "ex-ilu0-tridiagonal-factorization",
+        "cex-ilu0-product-can-create-fill-outside-input-pattern"
+      ]
+    },
+    {
+      "convention": "FGMRES uses exact arithmetic and the Hermitian inner product linear in its first argument. Iteration labels start at one, while matrix and vector coordinates start at zero.",
+      "fixed_by": "alg-flexible-gmres-variable-right-preconditioning",
+      "matters_for": [
+        "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span"
+      ]
+    },
+    {
+      "convention": "Right-preconditioning maps may vary and need not be linear. A zero normalization norm returns breakdown with the previous iterate; the minimization theorem assumes all m steps complete without breakdown.",
+      "fixed_by": "alg-flexible-gmres-variable-right-preconditioning",
+      "matters_for": [
+        "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span"
+      ]
+    },
+    {
+      "convention": "The physical residual is b−Ax; the left-preconditioned residual is M⁻¹(b−Ax), without a general equality of their magnitudes.",
+      "fixed_by": "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+      "matters_for": [
+        "ex-left-preconditioned-residual-can-understate-physical-residual"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-ilu0-fixed-pattern-factorization",
+      "statement": "The fixed-order exact ILU(0) procedure validates its pattern, checks pivots, updates only matching input-pattern slots, retains zero-valued factor slots, and applies successful factors through stored-slot forward and backward substitution.",
+      "used_by": [
+        "thm-ilu0-factor-pattern-and-work-counts",
+        "ex-ilu0-tridiagonal-factorization",
+        "cex-ilu0-product-can-create-fill-outside-input-pattern"
+      ]
+    },
+    {
+      "id": "alg-flexible-gmres-variable-right-preconditioning",
+      "statement": "For A ∈ M_n(C), b,x₀ ∈ Cⁿ, n,m ≥ 1, and maps P_j:Cⁿ→Cⁿ, store each actual z_j=P_j(v_j), orthogonalize Az_j exactly, return before zero-norm normalization, and otherwise choose a least-squares minimizer and form x_j=x₀+Z_j y_j.",
+      "used_by": [
+        "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span"
+      ]
+    },
+    {
+      "id": "thm-ilu0-factor-pattern-and-work-counts",
+      "statement": "For canonical sorted square CSR input with n ≥ 1, ILU terminates with missing-diagonal, zero-pivot, or ok. On success it stores exactly s numeric factor slots; setup uses ℓ divisions and I multiplications and subtractions, with at most J merge comparisons. Application uses s−n multiplications, s−n subtractions, and n divisions.",
+      "used_by": [
+        "preconditioner-algorithms-and-residual-metrics"
+      ]
+    },
+    {
+      "id": "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+      "statement": "After m ≥ 1 completed steps without breakdown, AZ_m=V_{m+1}H̄_m and the true residual norm equals the reduced least-squares residual norm for every coefficient vector. The resulting iterate minimizes the true residual over x₀+span{z₁,…,z_m}; H̄_m has full column rank and its least-squares minimizer is unique.",
+      "used_by": [
+        "preconditioner-algorithms-and-residual-metrics"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-field",
+      "used_for": "Exact arithmetic and division by checked nonzero pivots.",
+      "opened": true
+    },
+    {
+      "id": "def-forward-and-back-substitution-for-triangular-systems",
+      "used_for": "The triangular recurrences used for ILU application.",
+      "opened": true
+    },
+    {
+      "id": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+      "used_for": "Existence and uniqueness of the successive triangular-solve outputs; sparse counts are derived locally.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Finite iteration budgets and zero-based coordinate indexing.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-numbers-and-arithmetic",
+      "used_for": "The complex scalar domain of FGMRES.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-numbers-form-a-field",
+      "used_for": "Field operations in the FGMRES construction and proof.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-space",
+      "used_for": "Matrix shapes and zero-based ambient coordinates.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Column identities, residual formulas, and explicit factor-product calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-invertible-matrix-and-general-linear-group",
+      "used_for": "The invertible-matrix special case of right preconditioning.",
+      "opened": true
+    },
+    {
+      "id": "def-function-space",
+      "used_for": "Coordinate vectors and pointwise linear operations.",
+      "opened": true
+    },
+    {
+      "id": "prop-standard-coordinate-inner-products",
+      "used_for": "The first-argument-linear complex inner product, orthogonalization, and norm preservation.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-norm",
+      "used_for": "Nonnegative normalization norms and residual norms.",
+      "opened": true
+    },
+    {
+      "id": "lem-standard-basis-of-f-n",
+      "used_for": "Finite dimensionality, standard unit vectors, and the range-of-Z coordinate argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-least-squares-solutions-and-normal-equation",
+      "used_for": "Existence of reduced least-squares minimizers and their uniqueness when the kernel vanishes.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-combination-and-span",
+      "used_for": "The actual preconditioned-vector span in the FGMRES conclusion.",
+      "opened": true
+    },
+    {
+      "id": "lem-span-is-the-set-of-linear-combinations",
+      "used_for": "Identification of range(Z_m) with span{z₁,…,z_m}.",
+      "opened": true
+    },
+    {
+      "id": "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+      "used_for": "The left-preconditioned residual formula M⁻¹r.",
+      "opened": true
+    },
+    {
+      "id": "def-ordered-field",
+      "used_for": "Positivity assumptions in the scalar residual example.",
+      "opened": true
+    },
+    {
+      "id": "def-abs-value",
+      "used_for": "Absolute values of the positive scalar residuals.",
+      "opened": true
+    },
+    {
+      "id": "thm-rat-field",
+      "used_for": "The exact rational domain of both explicit ILU computations.",
+      "opened": true
+    },
+    {
+      "id": "cex-a-preconditioner-can-worsen-the-preconditioned-condition-number",
+      "used_for": "The examples page's explicit reuse of the published conditioning counterexample.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "preconditioner-algorithms-and-residual-metrics",
+      "to": "sparse-matrix-models-and-kernel-costs",
+      "faithful": true,
+      "note": "The CSR supplier allows duplicates and stored zeros generally; ILU explicitly validates canonicality and sorted columns. Thus s=nnz(A) is used only on the restricted input domain. No general CSR runtime or fill theorem is imported."
+    },
+    {
+      "from": "preconditioner-algorithms-and-residual-metrics",
+      "to": "stationary-iterations-and-relaxation",
+      "faithful": true,
+      "note": "Page-context prerequisite only. No stationary convergence theorem or A=D−L−U splitting convention is transferred to the ILU factors."
+    },
+    {
+      "from": "preconditioner-algorithms-and-residual-metrics",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "Page-context prerequisite only. Exact complex variable-preconditioner minimization is proved locally; real finite-precision Arnoldi bounds, Lanczos estimates, and unrestarted-GMRES costs are not transferred."
+    },
+    {
+      "from": "restarted-and-block-eigensolvers",
+      "to": "preconditioner-algorithms-and-residual-metrics",
+      "faithful": true,
+      "note": "The manifest retains this page prerequisite. The downstream page and item-reference search show no citation of the batch-50 algorithms or theorems and no extrapolation of their minimization or work-count conclusions."
+    },
+    {
+      "from": "iterative-regularization-and-early-stopping",
+      "to": "preconditioner-algorithms-and-residual-metrics",
+      "faithful": true,
+      "note": "The manifest retains this contextual prerequisite. The downstream page distinguishes LSQR, Landweber, and anchored IRGNM claims; its items do not cite batch-50 results or infer regularization guarantees from FGMRES residual minimization."
+    }
+  ]
+}

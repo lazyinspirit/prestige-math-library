@@ -1,0 +1,573 @@
+[
+  {
+    "order": 2488,
+    "id": "numerical-identifiability-and-optimal-experiment-design",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Numerical identifiability and optimal experiment design",
+    "companion": "numerical-identifiability-and-optimal-experiment-design-examples",
+    "requires": [
+      "response-surfaces-and-optimal-design",
+      "inequality-kkt-duality-and-optimality-certificates",
+      "proximal-gradient-and-accelerated-composite-optimization",
+      "gauss-newton-and-levenberg-marquardt-methods",
+      "discrete-continuous-and-pde-adjoint-sensitivities"
+    ],
+    "items": [
+      {
+        "id": "def-nonlinear-experimental-design-and-local-identifiability",
+        "kind": "definition",
+        "title": "Finite nonlinear observation designs, local identifiability, and weighted information",
+        "deps": [
+          "def-approximate-linear-model-design-and-optimality-criteria",
+          "def-c-one-map-and-local-inverse",
+          "def-euclidean-inner-product",
+          "def-jacobian-matrix-and-gradient",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "statement": "For finitely many observation conditions x, a C1 parameter-to-observation map F_x, positive design weights, and symmetric positive-definite precision matrices W_x, define the joint observation map, its stacked sensitivity Jacobian, local/global identifiability, and M_theta(xi)=sum_x xi_x J_x(theta)^T W_x J_x(theta).",
+        "strategy": "Definition only; no phase proof is applicable.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization, §§7.5.1–7.5.2",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"
+            },
+            {
+              "title": "Leah R. McLean et al., Estimability Analysis and Optimal Design in Dynamic Multi-scale Models of Cardiac Electrophysiology, §§2.1–2.3",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4906545/"
+            },
+            {
+              "title": "Henrik Madsen, Optimal Experimental Design for Grey-box Models, §§1.2.3–1.2.4 and Ch. 3",
+              "url": "https://henrikmadsen.org/wp-content/uploads/2014/10/Ph.D._thesis_-_2008_-_Optimal_experimental_design_for_grey-box_models.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-computed-sensitivity-singular-value-perturbation",
+        "kind": "lemma",
+        "title": "Computed sensitivity errors perturb every singular value by at most their operator-norm error",
+        "deps": [
+          "def-inner-product-norm",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-eckart-young-best-rank-k-approximation"
+        ],
+        "statement": "For real matrices J and J_h of equal finite size, |sigma_i(J_h)-sigma_i(J)|<=||J_h-J||_2 for every singular-value index i.",
+        "strategy": "Use the best rank-at-most-(i-1) approximation characterization for a singular-value truncation, the operator-norm triangle inequality, and then exchange J and J_h.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sheldon Axler, Linear Algebra Done Right, fourth edition, §§7E–7F",
+              "url": "https://linear.axler.net/LADR4e.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-logdet-information-perturbation-bound",
+        "kind": "lemma",
+        "title": "A uniform positive eigenvalue floor controls log-determinant error",
+        "deps": [
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-trace-of-a-square-matrix",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-determinant-differential-and-jacobis-formula",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "def-determinant-of-a-square-matrix",
+          "thm-logarithm-derivative-and-integral",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "cor-mean-value-theorem"
+        ],
+        "statement": "For real symmetric positive-definite M and M_h with every matrix on their segment satisfying lambda_min>=alpha>0, |logdet M_h-logdet M|<=p||M_h-M||_2/alpha.",
+        "strategy": "Differentiate log det along the segment using Jacobi's formula, bound the trace in an orthonormal eigenbasis by p||M_h-M||/alpha, and apply the scalar mean-value theorem.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization, §3.1.5",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-finite-budget-multiplicative-d-optimal-design",
+        "kind": "algorithm",
+        "title": "Finite-budget multiplicative update for approximate D-optimal design",
+        "deps": [
+          "def-approximate-linear-model-design-and-optimality-criteria",
+          "def-nonlinear-experimental-design-and-local-identifiability",
+          "thm-d-optimality-equivalence-theorem"
+        ],
+        "statement": "Given a finite candidate feature set, a nonsingular initial approximate design, and a finite budget N, repeatedly set xi_x^+=xi_x(f_x^T M(xi)^{-1}f_x)/p while M is nonsingular; return either an equivalence-certified status at zero violation or the current design and max_x f_x^T M^{-1} f_x-p after budget exhaustion.",
+        "strategy": "Definition only; no phase proof is applicable. The finite loop and certificate interpretation are proved separately.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Holger Dette, Andrey Pepelyshev, and Anatoly Zhigljavsky, Improving Updating Rules in Multiplicative Algorithms for Computing D-optimal Designs, §§1–2",
+              "url": "https://eldorado.tu-dortmund.de/bitstreams/45748862-e3e2-4e73-b8a5-7528e8b409c0/download"
+            },
+            {
+              "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization, §7.5",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": [
+          "thm-multiplicative-design-update-well-defined-and-terminates"
+        ]
+      },
+      {
+        "id": "lem-information-matrix-perturbation-bound",
+        "kind": "lemma",
+        "title": "Computed Jacobian error controls the weighted information-matrix error",
+        "deps": [
+          "def-nonlinear-experimental-design-and-local-identifiability",
+          "def-induced-matrix-p-norm",
+          "def-matrix-product-and-identity-matrix",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "thm-singular-value-decomposition"
+        ],
+        "statement": "If ||J_x||<=K, ||J_{h,x}-J_x||<=eta, and ||W_x||<=w uniformly over a finite design, then ||M_h(xi)-M(xi)||<=w(2K eta+eta^2) for every approximate design xi; if M>=alpha I and this bound delta<alpha, then M_h>=(alpha-delta)I.",
+        "strategy": "Expand each weighted Gram-matrix difference into its two cross terms and its quadratic error term, bound by submultiplicativity, then use the unit-vector quadratic form to transfer an eigenvalue floor.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leah R. McLean et al., Estimability Analysis and Optimal Design in Dynamic Multi-scale Models of Cardiac Electrophysiology, §§2.1–2.3",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4906545/"
+            },
+            {
+              "title": "Jorge Nocedal and Stephen J. Wright, Numerical Optimization, second edition, Ch. 10",
+              "url": "https://www.math.kent.edu/~reichel/courses/optimization/Numerical_Optimization.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "rem-gauss-newton-information-is-not-full-hessian",
+        "kind": "remark",
+        "title": "The Gauss–Newton information term omits residual curvature from the full Hessian",
+        "deps": [
+          "def-nonlinear-experimental-design-and-local-identifiability",
+          "thm-nonlinear-least-squares-gradient-and-hessian"
+        ],
+        "statement": "For an unweighted residual objective, J^T J is the Gauss–Newton term of the Hessian, while the exact Hessian also has a residual-curvature term; these coincide at zero residual but need not coincide elsewhere.",
+        "strategy": "Definition and source theorem context only; no phase proof is applicable.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jorge Nocedal and Stephen J. Wright, Numerical Optimization, second edition, Ch. 10",
+              "url": "https://www.math.kent.edu/~reichel/courses/optimization/Numerical_Optimization.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-full-rank-sensitivity-implies-local-identifiability",
+        "kind": "theorem",
+        "title": "Full column rank of the sensitivity Jacobian implies local identifiability",
+        "deps": [
+          "def-nonlinear-experimental-design-and-local-identifiability",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "lem-matrix-rank-detected-by-nonzero-minors",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "thm-row-rank-equals-column-rank"
+        ],
+        "statement": "Let $\\Theta\\subseteq\\mathbb R^p$ be open with $p\\ge1$, let $F_\\xi:\\Theta\\to\\mathbb R^m$ be the joint observation map of [[def-nonlinear-experimental-design-and-local-identifiability]], and fix $\\theta_0\\in\\Theta$. If its Jacobian $J_\\xi(\\theta_0)$ has full column rank, then $F_\\xi$ is injective on an open neighborhood of $\\theta_0$; hence the model is locally identifiable at $\\theta_0$ for this design.\n\n",
+        "strategy": "Use the rank-minor theorem to select p observation coordinates with an invertible p-by-p Jacobian, apply the Euclidean inverse function theorem to that coordinate map, and pull its local injectivity back to the full observation map.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leah R. McLean et al., Estimability Analysis and Optimal Design in Dynamic Multi-scale Models of Cardiac Electrophysiology, §2.1",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4906545/"
+            },
+            {
+              "title": "J. Lebl, Basic Analysis II, Theorem 8.5.1",
+              "url": "https://www.jirka.org/ra/html/sec_svinvfuncthm.html"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-local-information-positive-definite-iff-full-column-rank",
+        "kind": "theorem",
+        "title": "The weighted information matrix is positive definite exactly at full sensitivity rank",
+        "deps": [
+          "def-nonlinear-experimental-design-and-local-identifiability",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "statement": "For the finite nonlinear observation design of [[def-nonlinear-experimental-design-and-local-identifiability]], fix $\\theta\\in\\Theta$ and an approximate design $\\xi$. The matrix $M_\\theta(\\xi)$ is positive definite, meaning symmetric with $v^TM_\\theta(\\xi)v>0$ for every nonzero $v\\in\\mathbb R^p$, if and only if the stacked support sensitivity Jacobian $J_\\xi(\\theta)$ has trivial kernel, equivalently full column rank.\n\n",
+        "strategy": "Expand the quadratic form of M as the sum of positive weighted observation quadratic forms, then characterize when that sum vanishes.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leah R. McLean et al., Estimability Analysis and Optimal Design in Dynamic Multi-scale Models of Cardiac Electrophysiology, §2.1",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4906545/"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-local-parameter-perturbation-bound",
+        "kind": "theorem",
+        "title": "A lower singular-value bound and Lipschitz Jacobian control local parameter error",
+        "deps": [
+          "def-nonlinear-experimental-design-and-local-identifiability",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "def-inner-product-norm",
+          "def-lipschitz-holder-contraction",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "statement": "If ||DF(theta_0)v||>=mu||v|| for all v, mu>0, and DF is L-Lipschitz on the closed radius-r_0 ball contained in the open domain, then every fit in the radius min(r_0,mu/(2L)) ball with residual at most epsilon to data F(theta_0)+e, ||e||<=delta, obeys ||theta_hat-theta_0||<=2(epsilon+delta)/mu; for L=0 use radius r_0. This is conditional on existence of the fit.",
+        "strategy": "Integrate the Jacobian difference along the segment to obtain a quadratic Taylor remainder, use the lower singular-value estimate to bound the forward map below, and apply the triangle inequality to the noisy fitted observation.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leah R. McLean et al., Estimability Analysis and Optimal Design in Dynamic Multi-scale Models of Cardiac Electrophysiology, §§2.1–2.2",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4906545/"
+            },
+            {
+              "title": "Henrik Madsen, Optimal Experimental Design for Grey-box Models, §§1.2.3–1.2.4",
+              "url": "https://henrikmadsen.org/wp-content/uploads/2014/10/Ph.D._thesis_-_2008_-_Optimal_experimental_design_for_grey-box_models.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-multiplicative-design-update-well-defined-and-terminates",
+        "kind": "theorem",
+        "title": "Finite-budget multiplicative design updates preserve the simplex and nonsingularity",
+        "deps": [
+          "alg-finite-budget-multiplicative-d-optimal-design",
+          "def-nonlinear-experimental-design-and-local-identifiability",
+          "def-approximate-linear-model-design-and-optimality-criteria",
+          "thm-local-information-positive-definite-iff-full-column-rank",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "def-trace-of-a-square-matrix"
+        ],
+        "statement": "For an initial nonsingular design on a finite candidate feature set and any finite budget N, each exact update produces another approximate design with a nonsingular information matrix, and the procedure terminates after at most N updates and N+1 sensitivity scans.",
+        "strategy": "Use trace(M^{-1}M)=p to show updated weights sum to one, positivity to retain the spanning support, and the finite budget to bound the loop count.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Holger Dette, Andrey Pepelyshev, and Anatoly Zhigljavsky, Improving Updating Rules in Multiplicative Algorithms for Computing D-optimal Designs, §2",
+              "url": "https://eldorado.tu-dortmund.de/bitstreams/45748862-e3e2-4e73-b8a5-7528e8b409c0/download"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-uniform-sensitivity-error-controls-design-gap",
+        "kind": "theorem",
+        "title": "Uniform information errors control approximate D-optimal design gaps",
+        "deps": [
+          "def-nonlinear-experimental-design-and-local-identifiability",
+          "lem-information-matrix-perturbation-bound",
+          "lem-logdet-information-perturbation-bound",
+          "thm-extreme-value-metric"
+        ],
+        "statement": "On a nonempty compact design set with continuous true and computed log-determinant criteria and a common eigenvalue floor alpha, if sup_xi ||M_h(xi)-M(xi)||<=delta, then a tau-approximate maximizer of the computed criterion has true log-determinant gap at most tau+2p delta/alpha from a true maximizer.",
+        "strategy": "First obtain a uniform log-determinant error from the matrix perturbation and eigenvalue-floor lemmas, then compare the true optimum, computed near-optimum, and their two uniform errors.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization, §7.5.1",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"
+            },
+            {
+              "title": "Leah R. McLean et al., Estimability Analysis and Optimal Design in Dynamic Multi-scale Models of Cardiac Electrophysiology, §2.3",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4906545/"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-equivalence-violation-bounds-d-optimal-design-gap",
+        "kind": "theorem",
+        "title": "The D-equivalence violation bounds the finite-budget design's log-determinant gap",
+        "deps": [
+          "alg-finite-budget-multiplicative-d-optimal-design",
+          "thm-multiplicative-design-update-well-defined-and-terminates",
+          "def-approximate-linear-model-design-and-optimality-criteria",
+          "def-matrix-product-and-identity-matrix",
+          "def-trace-of-a-square-matrix",
+          "lem-log-determinant-concavity-on-positive-definite-matrices",
+          "thm-determinant-differential-and-jacobis-formula",
+          "thm-logarithm-derivative-and-integral",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-d-optimality-equivalence-theorem"
+        ],
+        "statement": "For a returned nonsingular approximate design xi, v=max_x f_x^T M(xi)^{-1} f_x-p is nonnegative, bounds logdet M(eta)-logdet M(xi)<=v for every nonsingular competitor eta, and v=0 is equivalent to D-optimality.",
+        "strategy": "Apply the concave log-determinant tangent bound along the segment to an arbitrary competitor, compute its directional derivative by Jacobi's formula, bound the competitor-weighted sensitivity average by the maximum, and use the existing D-equivalence theorem for the zero-violation certificate.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization, §§3.1.5 and 7.5.2",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"
+            },
+            {
+              "title": "Holger Dette, Andrey Pepelyshev, and Anatoly Zhigljavsky, Improving Updating Rules in Multiplicative Algorithms for Computing D-optimal Designs, §§1–2",
+              "url": "https://eldorado.tu-dortmund.de/bitstreams/45748862-e3e2-4e73-b8a5-7528e8b409c0/download"
+            }
+          ]
+        },
+        "dependency_level": 3
+      }
+    ]
+  },
+  {
+    "order": 2489,
+    "id": "numerical-identifiability-and-optimal-experiment-design-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Numerical identifiability and optimal experiment design — Examples",
+    "companion": "numerical-identifiability-and-optimal-experiment-design",
+    "requires": [
+      "numerical-identifiability-and-optimal-experiment-design"
+    ],
+    "items": [
+      {
+        "id": "ex-cubic-observation-is-locally-identifiable-with-zero-jacobian",
+        "kind": "example",
+        "title": "A zero Jacobian does not prevent local identifiability of the cubic map",
+        "deps": [
+          "def-nonlinear-experimental-design-and-local-identifiability"
+        ],
+        "statement": "For F(theta)=theta^3, F'(0)=0, but F is injective on R and therefore locally identifiable at zero.",
+        "strategy": "Compute the derivative at zero and prove injectivity by factoring u^3-v^3.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leah R. McLean et al., Estimability Analysis and Optimal Design in Dynamic Multi-scale Models of Cardiac Electrophysiology, §2.1",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4906545/"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-first-order-kinetic-rates-are-confounded-by-total-decay",
+        "kind": "example",
+        "title": "Parallel first-order decay observations depend only on the sum of two rates",
+        "deps": [
+          "def-nonlinear-experimental-design-and-local-identifiability",
+          "thm-local-information-positive-definite-iff-full-column-rank",
+          "cor-mean-value-theorem"
+        ],
+        "statement": "For A disappearing through two parallel first-order routes, A(t)=A_0 exp(-(k_1+k_2)t), so observing only A(t) confounds the two positive rates and the stacked sensitivity Jacobian has rank at most one.",
+        "strategy": "Use equality of k_1+k_2 for exact output aliases, then compute the two identical Jacobian columns and apply the information-rank criterion.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Henrik Madsen, Optimal Experimental Design for Grey-box Models, Ch. 3",
+              "url": "https://henrikmadsen.org/wp-content/uploads/2014/10/Ph.D._thesis_-_2008_-_Optimal_experimental_design_for_grey-box_models.pdf"
+            },
+            {
+              "title": "Leah R. McLean et al., Estimability Analysis and Optimal Design in Dynamic Multi-scale Models of Cardiac Electrophysiology, §2.1",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4906545/"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-local-identifiability-does-not-imply-global-identifiability",
+        "kind": "example",
+        "title": "The observation theta squared is locally identifiable but globally aliased",
+        "deps": [
+          "def-nonlinear-experimental-design-and-local-identifiability",
+          "thm-full-rank-sensitivity-implies-local-identifiability"
+        ],
+        "statement": "The map F(theta)=theta^2 is locally injective near theta_0=1 because F'(1)=2, but it is not globally injective on R because F(1)=F(-1).",
+        "strategy": "Apply the full-rank local-identifiability result at theta_0=1 and exhibit the distinct global alias -1.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leah R. McLean et al., Estimability Analysis and Optimal Design in Dynamic Multi-scale Models of Cardiac Electrophysiology, §2.1",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4906545/"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-solver-tolerance-can-reverse-a-design-ranking",
+        "kind": "example",
+        "title": "A small sensitivity solve error can reverse a two-design ranking",
+        "deps": [
+          "def-nonlinear-experimental-design-and-local-identifiability",
+          "lem-computed-sensitivity-singular-value-perturbation",
+          "lem-information-matrix-perturbation-bound",
+          "lem-logdet-information-perturbation-bound",
+          "thm-uniform-sensitivity-error-controls-design-gap",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "statement": "Two scalar candidate designs have exact sensitivities 1.01 and 1.00, but approximations 0.99 and 1.02 with uniform error 0.02 reverse the D-optimal ranking while satisfying the conditional log-determinant error bound.",
+        "strategy": "Compute exact and approximate scalar information matrices, verify the uniform Jacobian error, compute the error constants, and compare the true and computed rankings.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leah R. McLean et al., Estimability Analysis and Optimal Design in Dynamic Multi-scale Models of Cardiac Electrophysiology, §2.3",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4906545/"
+            },
+            {
+              "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization, §3.1.5",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-endpoint-sensors-give-a-d-optimal-linear-time-design",
+        "kind": "example",
+        "title": "Endpoint sensor times are D-optimal for an intercept-slope model",
+        "deps": [
+          "alg-finite-budget-multiplicative-d-optimal-design",
+          "def-approximate-linear-model-design-and-optimality-criteria",
+          "def-nonlinear-experimental-design-and-local-identifiability",
+          "thm-equivalence-violation-bounds-d-optimal-design-gap",
+          "thm-multiplicative-design-update-well-defined-and-terminates",
+          "thm-logarithm-derivative-and-integral",
+          "cor-mean-value-theorem"
+        ],
+        "statement": "For the linear time-response model f(t)=(1,t) at candidate times 0,1,2, the equal-weight endpoint design has information determinant one, maximizes the D criterion, and a one-update finite budget reports the exact remaining equivalence violation.",
+        "strategy": "Compute the three-candidate information matrices and sensitivities exactly, verify the endpoint certificate, and evaluate the uniform design's first multiplicative update and violation.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization, §7.5",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"
+            },
+            {
+              "title": "Holger Dette, Andrey Pepelyshev, and Anatoly Zhigljavsky, Improving Updating Rules in Multiplicative Algorithms for Computing D-optimal Designs, §2",
+              "url": "https://eldorado.tu-dortmund.de/bitstreams/45748862-e3e2-4e73-b8a5-7528e8b409c0/download"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  }
+]

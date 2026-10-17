@@ -1,0 +1,23 @@
+[
+  {
+    "kind": "page",
+    "consumer": "revised-simplex-linear-programming-and-certificates",
+    "supplier": "finite-precision-direct-factorizations",
+    "status": "open",
+    "evidence": "The controlling OPT13 contract and batch-26 manifest require finite-precision direct-factorization support. I read the current batch-1 items `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma`, `alg-rounded-cholesky-with-failure-status`, `thm-scaled-householder-qr-backward-stability`, and `thm-computed-full-rank-least-squares-backward-stability`. The floating-point model specifies successful operation/range behavior; Cholesky applies only to Hermitian positive-definite matrices; the QR theorem is conditional on a local reflector premise explicitly still under escalation; and the computed least-squares theorem leaves the rounded triangular-solve residual estimate unresolved. None supplies an exact, general nonsingular simplex-basis solve/update for arbitrary evolving $A_B$, including $A_B^{-1}b$, $A_B^{-1}a_j$, $A_B^{-\\mathsf T}c_B$, and recomputed residual/range status. Current revised-simplex items claim exact pivots and an exact audit of finite stored dyadic candidates only; they do not claim a finite-precision pivot driver. The plan-level NA02 backend remains open. Proposed supplier/placement: a general square-basis LU/solve-update algorithm and residual/status theorem on `finite-precision-direct-factorizations`. Affected design claims: finite-precision revised-simplex basis updates and their computed primal/dual status; the current exact proofs are not evidence for those claims."
+  },
+  {
+    "kind": "page",
+    "consumer": "revised-simplex-linear-programming-and-certificates",
+    "supplier": "sparse-matrix-models-and-kernel-costs",
+    "status": "verified",
+    "evidence": "I read the actual batch-2 items `def-csr-matrix-with-stored-entry-semantics`, `alg-csr-matrix-vector-product-with-validation`, `thm-csr-matvec-returns-the-represented-matrix-product`, and `thm-csr-storage-and-exact-matvec-cost`, including the complete product and cost proofs. The definition permits duplicate columns and explicit stored zeros and reconstructs each matrix coordinate by summing the row interval. The exact product and cost theorems count the forward product $Ax$; they do not claim a transpose routine. The owned sparse-pricing proposition now directly depends on the actual CSR definition and proves the transpose stream $v_t y_{i(t)}$ and the $s$ multiply/add plus $n$ initialization/subtraction count locally, including duplicates, explicit zeros, and the empty stream. This matches the assigned representation and operation-count interface without importing a runtime, bandwidth, or factorization claim. The current `def-csr-matrix-with-stored-entry-semantics` and `thm-csr-storage-and-exact-matvec-cost` Step 1 records are `ready`; that is authoring readiness, not independent acceptance."
+  },
+  {
+    "kind": "page",
+    "consumer": "revised-simplex-linear-programming-and-certificates",
+    "supplier": "inequality-kkt-duality-and-optimality-certificates",
+    "status": "verified",
+    "evidence": "I read the actual batch-6 items `def-inequality-constrained-program-and-kkt-geometry`, `thm-convex-kkt-sufficiency-and-normal-cone-certificate`, `thm-farkas-alternative-for-finite-linear-systems`, and the formerly inspected published equality-only multiplier and HB-separation items. The KKT definition uses $g_i\\le0$, nonnegative multipliers, stationarity, and complementary slackness. The convex sufficiency theorem assumes an open convex domain, differentiable convex objective and inequalities, and a feasible KKT tuple; no Slater or constraint-qualification hypothesis is needed. The primal pivot theorem now applies it to $U=\\mathbb R^n$, $f(z)=c^Tz$, $g_j(z)=-z_j$, $h(z)=Az-b$, $\\nu=-y(B)$, and $\\lambda=c-A^Ty(B)$; basic reduced costs are zero and nonbasic variables are zero, so complementary slackness holds. The finite-system Farkas theorem has exactly the standard-form orientation $A^Tq\\ge0$, $b^Tq<0$ and no rank or HB hypothesis; the Phase I proof constructs that vector explicitly and invokes the alternative for infeasibility. The KKT, KKT-definition, and Farkas supplier Step 1 records are `ready`; this is authoring readiness only. The current page-level interface is therefore verified without relying on the old equality-only or HB-separation bodies."
+  }
+]

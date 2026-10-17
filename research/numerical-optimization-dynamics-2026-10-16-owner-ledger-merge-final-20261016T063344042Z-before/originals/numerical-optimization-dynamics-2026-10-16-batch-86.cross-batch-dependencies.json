@@ -1,0 +1,116 @@
+[
+  {
+    "kind": "page",
+    "consumer": "constrained-dynamics-shake-and-rattle",
+    "supplier": "geometric-numerical-integration",
+    "status": "verified",
+    "supplier_batch": "54",
+    "supplier_item_ids": [
+      "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians",
+      "prop-local-leapfrog-and-symplectic-euler-are-symplectic"
+    ],
+    "required_interface": "E7 is one-way: NA-22 supplies the canonical symplectic-form/pullback convention and unconstrained comparison only. Its local leapfrog statement concerns the unprojected shear composition; it does not establish constrained RATTLE symplecticity.",
+    "affected_claims": [
+      "thm-rattle-symplecticity-on-regular-constraint-phase-space"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+        "section": "Statement",
+        "excerpt": "every admitted local leapfrog step and every admitted kick-then-drift symplectic Euler step has a C1 Jacobian satisfying DΦ^TJDΦ=J"
+      }
+    ],
+    "evidence": "Inspected the current NA-22 shear lemma and full proof of the local leapfrog symplecticity proposition. These apply to the unconstrained local maps only. No constrained conclusion is imported; the RATTLE theorem proves the pullback through its own discrete-Lagrangian identity. The E7 direction is preserved and T07 supplies no theorem to NA-22."
+  },
+  {
+    "kind": "page",
+    "consumer": "constrained-dynamics-shake-and-rattle",
+    "supplier": "implicit-stiff-time-stepping-and-algebraic-error",
+    "status": "verified",
+    "supplier_batch": "65",
+    "supplier_item_ids": [
+      "def-implicit-residual-and-algebraic-error-units",
+      "alg-newton-chord-implicit-residual-with-factorization-reuse"
+    ],
+    "required_interface": "The residual definition distinguishes the scaled equation residual from the original update residual and explicitly says a residual is not a forward-error estimate without an inverse/stability bound. The finite Newton/chord algorithm returns the last valid iterate and residual status; it makes no convergence or forward-error claim.",
+    "affected_claims": [
+      "alg-finite-budget-rattle-step-with-scaled-residuals",
+      "thm-finite-budget-rattle-solver-returns-status",
+      "thm-rattle-scaled-solve-residual-error-budget"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-implicit-residual-and-algebraic-error-units",
+        "section": "Definition",
+        "excerpt": "A residual norm is not a forward-error bound unless a separate inverse or stability estimate converts it to the distance"
+      },
+      {
+        "item": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+        "section": "Definition",
+        "excerpt": "Both modes make no claim that a finite budget reaches an exact root or that a small residual is a forward-error bound."
+      }
+    ],
+    "evidence": "Read both current supplier bodies and the transitive finite-Newton and correction algorithm definitions. RATTLE uses chord mode with refresh period one on its scaled residual maps; its local inverse theorem, rather than the solver status, proves the forward-error bounds."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-finite-budget-rattle-step-with-scaled-residuals",
+    "supplier": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+    "status": "verified",
+    "supplier_batch": "65",
+    "required_interface": "For a C1 square residual on an open admissible domain, chord mode checks residual before each correction, makes at most N corrections and N+1 residual checks, refreshes and factors the Jacobian at the prescribed period, rejects invalid trials outside the domain, and returns an explicit status.",
+    "affected_claims": [
+      "alg-finite-budget-rattle-step-with-scaled-residuals",
+      "thm-finite-budget-rattle-solver-returns-status"
+    ],
+    "evidence": "The two RATTLE residual maps are C1 on their selected branch balls by the scaled-branch lemma. The algorithm sets refresh period one, uses the corresponding branch ball as the admissible domain, and propagates every non-success status without claiming an exact step."
+  },
+  {
+    "kind": "page",
+    "consumer": "constrained-dynamics-shake-and-rattle",
+    "supplier": "differential-algebraic-equations-and-consistent-initialization",
+    "status": "verified",
+    "supplier_batch": "75",
+    "supplier_item_ids": [
+      "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+      "thm-index-one-dae-implicit-function-reduction",
+      "lem-index-one-dae-algebraic-residual-to-state-error"
+    ],
+    "required_interface": "Batch 75 proves residual reduction only for semi-explicit index-one systems with an invertible algebraic Jacobian g_z on a selected chart. The unreduced holonomic position and differentiated tangency equations form an index-three constrained system, so the index-one theorem is not a supplier for T07's phase flow or multiplier branch.",
+    "affected_claims": [
+      "thm-local-holonomic-constrained-hamiltonian-flow",
+      "lem-rattle-scaled-position-and-momentum-branches",
+      "thm-rattle-scaled-solve-residual-error-budget"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+        "section": "Definition",
+        "excerpt": "Higher-index systems and points with singular g_z are outside this index-one interface."
+      }
+    ],
+    "evidence": "Inspected the batch-75 definition, complete index-one reduction proof, and residual-to-algebraic-state estimate. The stated invertible g_z interface is not applicable to holonomic position constraints with their differentiated tangency condition. T07 derives the reduced multiplier equation and its residual bounds locally; no DAE item is cited as a logical premise."
+  },
+  {
+    "kind": "page",
+    "consumer": "constrained-dynamics-shake-and-rattle",
+    "supplier": "hamiltonian-monte-carlo-and-leapfrog",
+    "status": "verified",
+    "supplier_item_ids": [
+      "def-leapfrog-step-map",
+      "thm-leapfrog-is-reversible-and-volume-preserving"
+    ],
+    "required_interface": "Use the published kick/drift formulas and unconstrained reversibility/volume scope only. The volume theorem assumes Countable Choice; T07 makes no phase-volume claim and carries no Choice assumption.",
+    "affected_claims": [
+      "def-regular-classical-rattle-step-map"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-leapfrog-step-map",
+        "section": "Definition",
+        "excerpt": "The one-step leapfrog map is Φε=Kε/2∘Dε∘Kε/2"
+      }
+    ],
+    "evidence": "Read the published kick/drift definition and the complete reversibility/volume proof. The RATTLE definition adds constraint impulses and exact residual equations; no ambient volume or AC claim is imported."
+  }
+]

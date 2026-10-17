@@ -1,0 +1,145 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "25",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+      "model": "gpt-6-luna",
+      "context_sha256": "f9d84d16647296d5182fa2e8781874409b6f2583584e8b1d834430860e41753b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed missing prerequisite of F1: its sequential-dot allowance uses g_k=(1+6u)/(1-(k-1)u)-1 and requires (max(m,n)-1)u<1. Successful operations impose no such dimension bound; zero-valued dots can succeed when its denominator is zero. The original instruction to obtain the certificate from F1 was therefore unsupported. Repair preserves the general coercivity bound for any independently certified residual pair and makes the concrete F1 method conditional on its precise evaluation and precision hypotheses, including doubled dimensions only when residuals are evaluated after realification.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+      "disposition": "repaired",
+      "post_sha256": "ae7e28ec7482994b874b0cff6f21dc49882253d7f0e75a37cbf00311bc9de1dc",
+      "review_context_sha256": "edd05f4afad9133cd96d144bf47ae765b3925095c3597b8c5f653014e345d4b1",
+      "reason": "Checked the complete five-step proof, all six direct prerequisite interfaces, the residual-certificate argument, and the real QR/triangular-solve hypotheses. Coercivity gives ||xhat-x_lambda||<=||r||/lambda, and the assumed certified residual pair supplies ||r||<=||rhat||+rho. The concrete certificate now explicitly requires positive g_k denominators, successful sequential evaluation and certified norms; realification uses the actual evaluation dimensions. The optional nearby-data claim explicitly retains backend real dimensions and precision/nonsingularity hypotheses. Square-root target allowance, isometric Hilbert lifting, coefficient-data perturbation and orthogonal-output allowances remain valid. This is an author repair assessment, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-tikhonov-error-chain-with-discretization-and-residual"
+  ],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+      "status": "fixed",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "locus": "Statement paragraph 2; Facts F1; Proof 1.2",
+      "reason": "Confirmed missing prerequisite of F1: its sequential-dot allowance uses g_k=(1+6u)/(1-(k-1)u)-1 and requires (max(m,n)-1)u<1. Successful operations impose no such dimension bound; zero-valued dots can succeed when its denominator is zero. The original instruction to obtain the certificate from F1 was therefore unsupported. Repair preserves the general coercivity bound for any independently certified residual pair and makes the concrete F1 method conditional on its precise evaluation and precision hypotheses, including doubled dimensions only when residuals are evaluated after realification.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "claim": "For any stored finite real/complex inputs and any independently certified residual pair, the output error is at most (||rhat||+rho)/lambda; the concrete sequential-dot certificate has its dimension/precision restrictions.",
+    "conventions": "lambda is the squared-penalty coefficient; complex backend dimensions are (2m+2n,2n), while direct complex residual evaluation uses original m,n. The nearby-data guarantee is conditional and separate from the coercivity certificate.",
+    "sources_consulted": [
+      {
+        "path": "items/lem-rounded-linear-and-normal-residual-certificates.md",
+        "sections": "complete Statement, Facts and Proof, especially g_k and step 2.1"
+      },
+      {
+        "path": "items/thm-computed-full-rank-least-squares-backward-stability.md",
+        "sections": "complete Statement, Facts and Proof"
+      },
+      {
+        "path": "items/def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma.md",
+        "sections": "complete Definition"
+      },
+      {
+        "path": "items/thm-tikhonov-regularised-least-squares-has-a-unique-minimiser.md",
+        "sections": "complete Statement and proof"
+      },
+      {
+        "path": "items/def-operator-norm-on-a-finite-dimensional-inner-product-space.md",
+        "sections": "complete Definition"
+      },
+      {
+        "path": "items/thm-cauchy-schwarz-in-an-inner-product-space.md",
+        "sections": "Statement"
+      },
+      {
+        "path": "items/thm-scaled-householder-qr-backward-stability.md",
+        "sections": "complete Statement, Facts and Proof"
+      },
+      {
+        "path": "items/lem-rounded-triangular-substitution-componentwise-backward-error.md",
+        "sections": "complete Statement, Facts and Proof"
+      }
+    ],
+    "consumer_examinations": [
+      {
+        "id": "thm-tikhonov-error-chain-with-discretization-and-residual",
+        "path": "items/thm-tikhonov-error-chain-with-discretization-and-residual.md",
+        "affected_use": "Statement final finite-matrix paragraph, Facts F10, Proof 4.1 and Remarks use the supplier to certify rho_h or rho_h,h and the exact-direct-solve output term.",
+        "invalidated_claim": "None: the consumer Statement expressly requires certified residual bounds and says any floating-point bound requires its own arithmetic hypotheses; F10 retains all arithmetic/representation hypotheses.",
+        "minimality": "No consumer edit is necessary. The analytic estimates need only the certified inequality retained for every dimension; the concrete evaluation method now lists exactly its missing hypotheses.",
+        "disposition": "unchanged_sound",
+        "route": "ordinary frontier owner; examination inventory only"
+      }
+    ],
+    "page_examinations": [
+      {
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/numerical-inverse-problems-and-regularization-error.md",
+        "affected_use": "Last paragraph invokes the concrete certificate and isometric embeddings; earlier paragraph requires separate certified arithmetic bounds.",
+        "disposition": "unchanged_sound",
+        "reason": "The page asserts conditional certified arithmetic bounds and gives no unrestricted dimension or precision guarantee."
+      }
+    ],
+    "published_consumer_findings": [],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-computed-augmented-tikhonov-solve-residual-and-output-error.md --json",
+        "exit_code": 0,
+        "result": "1 proof checked, 0 failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-computed-augmented-tikhonov-solve-residual-and-output-error.md --json",
+        "exit_code": 0,
+        "result": "1 file checked, 0 errors, 0 warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-computed-augmented-tikhonov-solve-residual-and-output-error.md",
+        "exit_code": 0,
+        "result": "1 item, 5 steps, 0 defects"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-25.proof-contracts.json --items lem-computed-augmented-tikhonov-solve-residual-and-output-error --strict --json",
+        "exit_code": 0,
+        "result": "1 assigned item checked, ok=true, 0 errors, 0 warnings"
+      }
+    ],
+    "unresolved_mathematics": [],
+    "next_action": "Controller collects the adjudication, routes the unchanged direct frontier consumer examination, and obtains independent current judgment; no judges or round transitions were launched by this unit.",
+    "concrete_failure_of_automatic_applicability": "At u=1/4, m=1 and n=5, a residual evaluation with A=0, xhat=0, y=0 and lambda=1 uses only exact zero results and succeeds in the stated model, while g_5=(1+6u)/(1-4u)-1 is undefined. Thus success of residual operations cannot supply the omitted hypothesis.",
+    "published_ledger_disposition": "No published-consumer ledger repair is proposed: the sole direct item consumer is draft and in the frozen frontier, and its conditional certificate use remains sound. Published suppliers were read as prerequisites and were not edited or adjudicated.",
+    "interface_change": "Compared the original Statement directly with the repaired section: the mandatory F1 certificate instruction is replaced by the general assumed residual-certificate inequality and the concrete F1 method with its positive-denominator hypothesis; optional QR precision hypotheses are made explicit. The output estimate and all Hilbert/output allowances are unchanged.",
+    "input_binding": "The canonical compact JSON SHA-256 of initial-1.json is 1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5, matching the generated task identity.",
+    "metadata_integration": "Updated only this assigned item in its exclusively owned batch-25 proof-contract and manifest: derivation 1.2, attributed repair note, and current Statement/Proof mirrors. Preserved source quotations and all other item entries. Shared registries and ledgers were not edited; the other dispatch shared lock was not modified."
+  },
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-25.proof-contracts.json": "0449101a080984f313c06bb302361f217b610486239e7b511aafc6bcfa41c920",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-25.pages.json": "2b0bfbd62710e0a9b8629b2bef08788967a857a864bbd247d7424beba3c26765"
+  }
+}

@@ -68,11 +68,11 @@ A: `finite-precision-direct-factorizations`. B: `finite-precision-direct-factori
 
 ### Scope
 
-Only missing finite-precision contracts: successful/failed-pivot rounded real/complex Cholesky with declared sqrt arithmetic; componentwise/normwise backward error; genuine reflector-formation/local-action error proving the current QR A1 premise; computed Q*b/triangular solve/full-rank least-squares backward theorem. A bounded failure-aware Cholesky execution wrapper is allowed because existing canonical definition only defines factorisation; reuse factorisation/Householder/QR methods and existing exact correctness/cost rather than reissue them.
+Only missing finite-precision contracts: successful/failed-pivot rounded real/complex Cholesky with declared sqrt arithmetic; componentwise/normwise backward error; genuine real reflector-formation/local-action error with the proved `κ_r` bound, target zero writes and direct QR aggregation, while retaining the published theorem’s distinct conditional A1; computed Q*b/triangular solve/full-rank least-squares backward theorem. A bounded failure-aware Cholesky execution wrapper is allowed because existing canonical definition only defines factorisation; reuse factorisation/Householder/QR methods and existing exact correctness/cost rather than reissue them.
 
 ### Proof construction
 
-Derive each Cholesky pivot from the positive-definite Schur complement; bound every rounded sum, square root, and division; assemble the Hermitian residual A+E=Lhat Lhat*. For Householder QR, prove stable scaling and reflector construction, then the rank-one update perturbation, including the zero-vector case; aggregate local errors by exact orthogonality. For computed least squares, add the Q*b and triangular-solve residuals before applying the least-squares condition bound. Derive flop costs only under an explicit operation convention.
+Derive each Cholesky pivot from the positive-definite Schur complement; bound every rounded sum, square root, and division; assemble the Hermitian residual A+E=Lhat Lhat*. For Householder QR, prove stable scaling and reflector construction, then the fixed-order rank-one update and exact target-column zero-write perturbation, including the zero-vector case; aggregate the actual `κ_r` bounds by exact orthogonality. For computed least squares, apply stored reflectors to b with the proved `β_Q` allowance and use the componentwise rounded triangular-solve bound before the nearby-data argument, retaining explicit nonsingularity/range checks. An explicit admissible-input orthonormal-Q dot route has its own allowance; complex augmented solves retain their stated realification and representation hypotheses. Derive flop costs only under an explicit operation convention.
 
 ### Examples
 
@@ -179,9 +179,12 @@ No same-frontier pair-key edge is declared in this record.
 Existing library page context recorded by `requires` (page placement is not itself a proof premise):
 - `matrix-norms-condition-numbers-and-numerical-stability` → `library/linear-algebra/matrix-norms-condition-numbers-and-numerical-stability.md`.
 - `direct-matrix-factorisations-lu-cholesky-and-qr` → `library/linear-algebra/direct-matrix-factorisations-lu-cholesky-and-qr.md`.
+- `krylov-subspaces-arnoldi-and-gmres` → `library/linear-algebra/krylov-subspaces-arnoldi-and-gmres.md` (exact imported definition below; required page binding for native Step-1 drift E1).
 
 Exact item bodies inspected for this pair are listed in `numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md`; those interfaces are not widened by the surrounding page title.
 Named items: `def-matrix-free-access-model-for-krylov-methods`, `thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost`.
+
+The published matrix-free definition permits applying `v↦Av`, vector additions/scalar multiples, and inner products/norms when orthogonalization or residual measurement needs them; it permits Arnoldi/GMRES implementation without assembling A. Reuse that definition from its owning Krylov page. It supplies no CSR representation, sparse operation count, finite-precision guarantee or convergence theorem: those claims keep their existing local/canonical owners. Add this one published page to NA-03’s `requires`; indirect consumers inherit the routing edge without new method definitions or changed mathematical claims.
 
 ### Local mathematical prerequisite ownership
 
@@ -455,6 +458,8 @@ A: `computed-singular-values-and-rank-revealing-factorizations`. B: `computed-si
 ### Proof construction
 
 Bidiagonal bulge chase identities, controlled rounding residual and finite singular-value variational argument; prove swap potential growth for strong RRQR, handling rank deficiency separately.
+
+The strong-RRQR contract uses the combined residual score, not an X-only success test. For full-column-rank real/complex A with m≥n, 0≤k<n and f≥1, initialize by canonical CPQR; k=0 succeeds without swaps. For k>0 form `X=R₁₁^{-1}R₁₂`, `ω_i=||e_i*R₁₁^{-1}||₂`, `γ_j=||R₂₂(:,j)||₂`, and `s_ij=√(|X_ij|²+(ω_i γ_j)²)`. Retain the coefficient-triggered branch: if max|X_ij|>f, swap its largest entry (lexicographic ties); otherwise swap a largest s_ij if it exceeds f. Success requires every s_ij≤f. Each swap restores triangular form by unitary transformations and multiplies selected-column k-volume by exactly s_ij>f≥1, so at most binomial(n,k)−1 swaps occur in exact arithmetic. A cap below the needed swaps returns budget exhaustion; rank-deficient input, singular selected block and nonfinite arithmetic retain explicit failure statuses. On success retain max|X_ij|≤f and both full strong bounds with `g=√(1+f²k(n−k))`: `σ_i(R₁₁)≥σ_i(A)/g` and `σ_j(R₂₂)≤gσ_{k+j}(A)`. Their proof uses the summed combined-score inequality, not coefficient control alone. Finite-precision statuses do not themselves certify these exact-factorization comparisons; rounded factor residuals/perturbations require their stated separate error analysis. This repairs the controlling interface to match the richer sound method without duplicating canonical CPQR or weakening any bound; rank-deficient least squares remains its separately stated SVD/threshold composition. Focused source and consumer evidence: `research/numerical-optimization-dynamics-2026-10-16-owner-rrqr-interface.json`.
 
 ### Examples
 
@@ -862,7 +867,7 @@ A: `computed-schur-decompositions-and-nonnormal-spectra`. B: `computed-schur-dec
 
 [
   "Define real/complex Hessenberg Francis single/double-shift QR bulge chasing, deflation tests, exceptional-shift/budget statuses; output Schur residual and orthogonality bounds, without unconditional convergence of every shift strategy.",
-  "Prove exact similarity preservation and normwise computed backward error under explicit reflector/twiddle/range assumptions.",
+  "Prove exact similarity preservation and normwise computed backward error using the actual NA-02 real and LIN-SVD complex local bounds, composed as alpha=a+b+ab with separate left overwrite/panel and right-panel coefficients; retain range, deflation, finite-budget and Schur-type-undecided statuses. Supply the finite exact integer discriminant-sign recipe for rational/dyadic stored real blocks and keep general-real undecided cases explicit.",
   "Define closed epsilon-pseudospectrum for epsilon>0 by eigenvalues of A+E with ||E||_2<=epsilon; prove resolvent/smallest-singular-value/perturbation equivalence with matching closed boundary convention, plus Bauer-Fike retaining eigenvector condition. Reuse existing simple-eigenvalue derivative and condition-number formulas verbatim."
 ]
 
@@ -1415,6 +1420,8 @@ See **LIN-HIER** in `numerical-analysis-four-category-scaffolds-2026-10-16/linea
 
 A: `generalized-eigenvalue-pencils-and-qz-methods`. B: `generalized-eigenvalue-pencils-and-qz-methods-examples`.
 
+The numerical pair reuses LIN-SVD’s canonical computed Givens generator and raw-action bounds through the direct `computed-singular-values-and-rank-revealing-factorizations` requirement. The local `lem-qz-two-sided-local-computed-update-bound` applies one stored rotation to both matrices, accounts for structural and separate tolerance zero writes, and certifies residuals by stored factor actions. NA-02 supplies the operationwise model and stored-input residual arithmetic; its Householder bound and the Schur similarity theorem do not supply a QZ pencil bound. Retain exact schedule/existence results separately, final nonzero homogeneous-pair checks, range and inconclusive statuses, and the rich regular-pencil scope. Current draft owner repair is recorded in `research/numerical-optimization-dynamics-2026-10-16-owner-qz-local-interface-escalation.json`; it grants no independent native acceptance.
+
 ### Scope
 
 [
@@ -1553,11 +1560,11 @@ A: `preconditioner-algorithms-and-residual-metrics`. B: `preconditioner-algorith
 
 ### Scope
 
-Only fixed-order/fixed-pattern ILU(0) bounded procedure with absent/zero pivot failure, pattern preservation and pattern-intersection setup versus stored-factor application/storage counts; variable-preconditioner/flexible-GMRES interface only if promised and not already covered. No duplicate residual-map/SPD-CG/preconditioner-worsening items.
+Only fixed-order/fixed-pattern ILU(0) bounded procedure with absent/zero pivot failure, preservation of the stored L/U factor slots and pattern-intersection setup versus stored-factor application/storage counts; the matrix product LU may have nonzeros outside the input pattern, and no general A=LU identity is asserted; variable-preconditioner/flexible-GMRES interface only if promised and not already covered. No duplicate residual-map/SPD-CG/preconditioner-worsening items.
 
 ### Proof construction
 
-Show algebraically that left and right preconditioning preserve the exact solution set but minimize different residuals. For the ILU procedure, specify the recurrence, stored positions, and failure branch, then count operations under the input graph. For variable right preconditioners, use the actual preconditioned-vector span in flexible GMRES; do not reuse fixed-preconditioner spectral claims.
+Show algebraically that left and right preconditioning preserve the exact solution set but minimize different residuals. For the ILU procedure, specify the recurrence, retained strict-lower/upper factor slots, and failure branch, then count setup intersections separately from the two sparse triangular solves. A factor slot remains allocated if its updated value becomes zero; the implicit unit diagonal of L is separate. Product support need not stay in the input pattern: with A=[[1,1,0],[0,1,0],[1,0,1]], the successful factors are L=I+E31 and U=I+E12, so LU=A+E32. Preserve this product-fill/factorization-defect caveat rather than a zero-fill claim for LU. The exact stored-slot and operation-count contract is in the NA-06 audit paragraph; focused evidence is research/numerical-optimization-dynamics-2026-10-16-owner-ilu0-interface.json. For variable right preconditioners, use the actual preconditioned-vector span in flexible GMRES; do not reuse fixed-preconditioner spectral claims.
 
 ### Examples
 
@@ -1861,6 +1868,8 @@ A: `matrix-functions-and-scaling-squaring`. B: `matrix-functions-and-scaling-squ
 
 ### Proof construction
 
+Current implementation route: the finite-budget floating candidate replays the same stored Householder reflectors on the right-hand sides and spells out complex pivot division through real primitives. Its final verification and Padé defect/controller loops use the declared exact real-RAM on original and stored values; a finite rational-codebook adapter is optional and never inferred from the abstract floating model. This separates the rounded-operation budget from exact controller cost and makes no arbitrary-real bit-computability claim. Conditional contour bounds retain their actual resolvent-cover and topological hypotheses. The current draft repair is recorded in `research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json`; it grants no independent native acceptance.
+
 Absolute power series/Cauchy integral plus local scalar Padé remainder; telescope squaring errors; solve commutator block equations; branch-specific existence is owned. Reuse existing bounded-operator exponential.
 
 ### Examples
@@ -1874,6 +1883,7 @@ Absolute power series/Cauchy integral plus local scalar Padé remainder; telesco
 ### Prerequisite interfaces (namespace-normalized)
 
 Same-frontier pair edges (pair key → A-page; edges follow the pair DAG):
+- `LIN-SVD` → `computed-singular-values-and-rank-revealing-factorizations` (current same-frontier separate-block stored-reflector kernel).
 - `LIN-SCHUR` → `computed-schur-decompositions-and-nonnormal-spectra` (numerical-analysis; proposed same-frontier supplier, not a current library item).
 - `LIN-SYL` → `sylvester-and-lyapunov-matrix-equations` (numerical-analysis; proposed same-frontier supplier, not a current library item).
 - `VAL-LINEAR` → `verified-linear-systems-and-spectral-enclosures` (numerical-analysis; proposed same-frontier supplier, not a current library item).
@@ -2000,10 +2010,10 @@ Same-frontier pair edges (pair key → A-page; edges follow the pair DAG):
 - `VAL-INTERVAL` → `outward-rounded-interval-and-ball-arithmetic` (numerical-analysis; proposed same-frontier supplier, not a current library item).
 - `VAL-LINEAR` → `verified-linear-systems-and-spectral-enclosures` (numerical-analysis; proposed same-frontier supplier, not a current library item).
 
-No external library page token is recorded in `requires`.
+The three same-frontier edges above are retained. The authored proof route also reuses published foundational suppliers at their canonical homes: `analyticity-liouville-and-morera` supplies the complex fundamental theorem of algebra for finite factorization, and `homology-axioms-degree-and-classical-applications` supplies Brouwer for the locally proved closed-box reduction. The FTA page route is already present in the canonical plan specification and current batch inventory; the actual direct algebraic, calculus and topology prerequisites must remain represented by their ordinary page closure.
 
 Exact item bodies inspected for this pair are listed in `numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md`; those interfaces are not widened by the surrounding page title.
-No external canonical item is consumed as a proof premise in this pair. The linked repaired contract defines the needed local interfaces and gives their proof design; any same-frontier supplier is listed explicitly above.
+Published canonical algebra and calculus results are reusable proof premises, with their exact types and hypotheses: polynomial division, monic gcd/Bezout and stability of gcd under field extension support the rational squarefree/Sturm route; the complex FTA supports finite factorization; the closed-ball Brouwer theorem supports only the local closed-box fixed-point reduction. Local squarefree multiplicity, Sturm root count, root separation, box reduction, interval Jacobian and finite-budget soundness obligations remain fully proved here. This reconciles the earlier planning inventory wording with the approved canonical-reuse rule and actual authored route; it neither drops a method nor replaces an owned proof by an external citation.
 
 ### Local mathematical prerequisite ownership
 

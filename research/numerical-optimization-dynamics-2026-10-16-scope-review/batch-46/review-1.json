@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "46",
+  "round": 1,
+  "reviewed_items": [
+    "lem-equi-lipschitz-curves-in-compact-euclidean-set-have-uniformly-convergent-subsequence",
+    "lem-projection-onto-closed-convex-set-is-nonexpansive",
+    "alg-one-dimensional-first-impact-with-restitution",
+    "thm-frictionless-sphere-binary-impact-impulse-laws",
+    "lem-projected-euler-projection-residual-certificate",
+    "thm-first-impact-step-complementarity-momentum-and-energy",
+    "lem-sphere-contact-guard-normal-and-reset-lipschitz-bounds",
+    "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+    "def-projected-contact-dynamics-and-euler-step",
+    "lem-naive-all-pairs-collision-search-has-quadratic-work",
+    "lem-normal-cone-maximal-monotone-and-projection-resolvent",
+    "alg-certified-projected-euler-method",
+    "lem-projected-contact-solutions-are-unique",
+    "thm-projected-euler-existence-uniqueness-and-convergence",
+    "thm-projected-euler-square-root-global-error",
+    "cex-nonconvex-set-can-have-nonunique-nearest-points",
+    "ex-frictionless-sphere-binary-impact-calculation",
+    "ex-one-dimensional-impact-restitution-boundaries",
+    "ex-penalty-stiffness-requires-time-step-control",
+    "ex-projected-overdamped-particle-euler-trajectory"
+  ],
+  "reviewed_pages": [
+    "nonsmooth-contact-time-stepping-and-projections",
+    "nonsmooth-contact-time-stepping-and-projections-examples"
+  ],
+  "decision": "escalate",
+  "reason": "All Round 0 findings were otherwise resolved, including the impact branches, page summary, compactness estimates, dimension-zero projection cases, density/common-null-set proof, compact-implies-closed justification, and projected-Euler input. The compactness lemma still has an index gap; its affected theorem chain and page summaries require owner reconciliation.",
+  "findings": [
+    {
+      "id": "lem-equi-lipschitz-curves-in-compact-euclidean-set-have-uniformly-convergent-subsequence",
+      "type": "local",
+      "reason": "Step 2.1 sets I_0=N and assigns patterns using u_j for every j in I_0, but the Statement defines the sequence only for j≥1. The published induction supplier fixes N=omega, which includes 0, so u_0 is undefined and the subsequence construction is not established. The smallest repair is to initialize I_0={j∈N:j≥1}. This leaves thm-projected-euler-existence-uniqueness-and-convergence step 2.1 unsupported, with downstream effects on thm-projected-euler-square-root-global-error and the A-page summary."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-certified-projected-euler-method",
+      "decision": "accept",
+      "reason": "The algorithm requires d≥1 and explicitly requires closedness; the residual lemma's added d=0 case does not impair this consumer."
+    },
+    {
+      "id": "ex-one-dimensional-impact-restitution-boundaries",
+      "decision": "accept",
+      "reason": "Its q=1 calculation is unaffected by the added zero-polynomial branch."
+    },
+    {
+      "id": "ex-projected-overdamped-particle-euler-trajectory",
+      "decision": "accept",
+      "reason": "The concrete solution, recurrence, and error bound are verified directly in the example; the cited general theorem is used only to note applicability and consistency."
+    },
+    {
+      "id": "lem-naive-all-pairs-collision-search-has-quadratic-work",
+      "decision": "accept",
+      "reason": "The event algorithm's pair-inspection loop remains one inspection per unordered pair."
+    },
+    {
+      "id": "thm-first-impact-step-complementarity-momentum-and-energy",
+      "decision": "accept",
+      "reason": "Its claims for resolved outputs remain valid with the new identically-zero-gap branch."
+    },
+    {
+      "id": "thm-projected-euler-existence-uniqueness-and-convergence",
+      "decision": "escalate",
+      "reason": "Step 2.1 relies on the compactness lemma's subsequence construction, which fails as written because I_0 includes the undefined index 0."
+    },
+    {
+      "id": "thm-projected-euler-square-root-global-error",
+      "decision": "escalate",
+      "reason": "Its statement and F1 rely on the existence theorem, whose compactness step remains unsupported."
+    },
+    {
+      "id": "nonsmooth-contact-time-stepping-and-projections",
+      "decision": "escalate",
+      "reason": "Its summary claims existence and uniform convergence from the affected theorem."
+    },
+    {
+      "id": "nonsmooth-contact-time-stepping-and-projections-examples",
+      "decision": "escalate",
+      "reason": "Its requires edge points to the A page, whose projected-existence claim is affected by the unresolved compactness proof."
+    }
+  ]
+}

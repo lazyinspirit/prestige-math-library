@@ -1,0 +1,262 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-75.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-75.proof-contracts.json (proposed)
+@@ -760,9 +760,9 @@
+       "citations": [
+         {
+           "fact": "F1",
+-          "source": "alg-finite-budget-newton-for-vector-residuals",
+-          "source_section": "Definition",
+-          "quote": "Let $U\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and let $F:U\\to\\mathbb R^n$ be\n$C^1$ ([[def-c-one-map-and-local-inverse]]) with Jacobian $J_F$ as in\n[[def-jacobian-matrix-and-gradient]]. **Inputs:** $x_0\\in U$, residual\ntolerance $\\varepsilon\\ge0$, and update budget $N\\in\\mathbb N_0$.\n**Output:** the last valid iterate and one of `root`, `singular-jacobian`,\n`invalid-trial`, or `iteration-budget-exhausted`.\n\nFor $k=0,1,\\ldots,N$, in this order:\n\n1. Compute $F(x_k)$. If $\\|F(x_k)\\|_2\\le\\varepsilon$, return\n   $(x_k,\\texttt{root})$. Here `root` means the residual tolerance was met; it\n   does not certify an exact zero when $\\varepsilon>0$.\n2. If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n3. Call [[alg-newton-correction-for-vector-residuals]] with\n   $A=J_F(x_k)$ and $r=F(x_k)$. If it returns `singular-jacobian`, return that\n   status.\n4. Let $s_k$ be its correction. If $x_k+s_k\\notin U$, return\n   $(x_k,\\texttt{invalid-trial})$. Otherwise set $x_{k+1}=x_k+s_k$.\n\nThe procedure performs at most $N$ corrections. It makes no arbitrary-start,\nglobal-convergence, or discretization-error claim.",
++          "source": "lem-finite-budget-newton-work-and-status",
++          "source_section": "Statement",
++          "quote": "For admissible inputs of [[alg-finite-budget-newton-for-vector-residuals]] with budget $N\\in\\mathbb N_0$, every entered iterate lies in $U$. The procedure makes at most $N$ correction calls, at most $N$ accepted updates, and at most $N+1$ explicit outer residual evaluations. It returns a stated residual, singular-Jacobian, invalid-trial or budget status. Termination is in the exact-arithmetic model where residual and Jacobian evaluations, domain decisions and correction calls return in finite time. No convergence, tolerance-attainment or backend complexity claim follows.",
+           "uses": [
+             "1.1",
+             "2.1",
+@@ -773,8 +773,9 @@
+           "fact": "F2",
+           "source": "alg-index-one-dae-consistent-initialization",
+           "source_section": "Definition",
+-          "quote": "Let $f,g$ define a regular index-one DAE and let $U\\times V$ be a selected local branch chart from [[thm-index-one-dae-implicit-function-reduction]], so $g(t,x,z)=0$ is equivalent to $z=\\psi(t,x)$ there. Input $t_0,x_0$, a seed $z_{\\mathrm{seed}}\\in V$, an algebraic residual tolerance $\\varepsilon_a\\ge0$, and a finite Newton-correction budget $N\\in\\mathbb N_0$. If $(t_0,x_0)\\notin U$, $g(t_0,x_0,\\cdot)$ is undefined at the seed, or dimensions do not match, return invalid-input.\n\nCall [[alg-finite-budget-newton-for-vector-residuals]] on the square residual $G(z)=g(t_0,x_0,z)$, with initial value $z_{\\mathrm{seed}}$, tolerance $\\varepsilon_a$, and budget $N$, restricting evaluations to the chart's open $z$-domain. If it reports root, reevaluate $G(z_0)$ once: if that residual is exactly zero, return $(x_0,z_0,\\texttt{exact-consistent})$; otherwise return $(x_0,z_0,\\texttt{approximate-consistent})$ and its norm. Map singular-jacobian, invalid-trial, and iteration-budget-exhausted to the corresponding initialization statuses and return the last valid iterate.\n\nThe procedure makes no arbitrary-start convergence claim. approximate-consistent records a residual bound; it is not relabeled as exact consistency. Under the index-one branch hypotheses an exact consistent value exists locally, by [[thm-index-one-dae-implicit-function-reduction]], but the finite Newton budget may fail to find it.\n\nThe solve has $m$ algebraic unknowns. With budget $N$, the Newton supplier performs at most $N$ corrections, each using one $m\\times m$ Jacobian solve, and at most $N+1$ residual evaluations. A root status adds one residual reevaluation for recording, so the procedure uses at most $N+2$ residual evaluations. Residual/Jacobian assembly and linear-solve costs depend on the chosen backend.",
+-          "uses": [
++          "quote": "Let $f,g$ define a regular index-one DAE and let $U\\times V$ be a selected local branch chart from [[thm-index-one-dae-implicit-function-reduction]], so $g(t,x,z)=0$ is equivalent to $z=\\psi(t,x)$ there. Input $t_0,x_0$, a seed $z_{\\mathrm{seed}}\\in V$, an algebraic residual tolerance $\\varepsilon_a\\ge0$, and a finite Newton-correction budget $N\\in\\mathbb N_0$. If $(t_0,x_0)\\notin U$, $g(t_0,x_0,\\cdot)$ is undefined at the seed, or dimensions do not match, return invalid-input.\n\nCall [[alg-finite-budget-newton-for-vector-residuals]] on the square residual $G(z)=g(t_0,x_0,z)$, with initial value $z_{\\mathrm{seed}}$, tolerance $\\varepsilon_a$, and budget $N$, restricting evaluations to the chart's open $z$-domain. If it reports root, reevaluate $G(z_0)$ once: if that residual is exactly zero, return $(x_0,z_0,\\texttt{exact-consistent})$; otherwise return $(x_0,z_0,\\texttt{approximate-consistent})$ and its norm. Map singular-jacobian, invalid-trial, and iteration-budget-exhausted to the corresponding initialization statuses and return the last valid iterate.\n\nThe procedure makes no arbitrary-start convergence claim. approximate-consistent records a residual bound; it is not relabeled as exact consistency. Under the index-one branch hypotheses an exact consistent value exists locally, by [[thm-index-one-dae-implicit-function-reduction]], but the finite Newton budget may fail to find it.\n\nThe solve has $m$ algebraic unknowns. Record residual queries, Jacobian assemblies and correction solves separately. Their costs depend on the chosen backend.",
++          "uses": [
++            "1.1",
+             "2.1"
+           ]
+         },
+@@ -782,30 +783,36 @@
+           "fact": "F3",
+           "source": "alg-index-one-dae-backward-euler-stepper",
+           "source_section": "Definition",
+-          "quote": "Input $f,g$, a constant grid $t_n=t_0+nh$ with $h>0$ and $N_t\\in\\mathbb N$, an initial pair $(X_0,Z_0)$, and a selected open tube inside the local branch chart of [[thm-index-one-dae-implicit-function-reduction]], where $g(t,x,z)=0$ is equivalent to $z=\\psi(t,x)$. Also input positive residual tolerances $\\eta_d,\\eta_a$, a finite Newton-correction budget $B\\in\\mathbb N_0$, and an initial algebraic-residual bound $\\eta_{a,0}\\ge0$. Return invalid-grid if $h\\le0$ or $N_t=0$, invalid-input for incompatible dimensions or data outside the function domains, and inconsistent-initial-data if $\\|g(t_0,X_0,Z_0)\\|_2>\\eta_{a,0}$.\n\nFor $n=1,\\ldots,N_t$, form the coupled update residual\n\n$$\nR_n(X,Z)=\\bigl(X-X_{n-1}-h f(t_n,X,Z),\\ g(t_n,X,Z)\\bigr)\n$$\n\nand the scaled square residual\n\n$$\n\\mathcal R_n(X,Z)=\\left(\\frac{X-X_{n-1}-h f(t_n,X,Z)}{h\\eta_d},\\ \\frac{g(t_n,X,Z)}{\\eta_a}\\right).\n$$\n\nUse $(X_{n-1},Z_{n-1})$ as the Newton seed, and call [[alg-finite-budget-newton-for-vector-residuals]] on $\\mathcal R_n$ with residual tolerance $1$, budget $B$, and the selected tube as its evaluation domain. If the returned status is root and the candidate lies in the selected tube, reevaluate $R_n$ once to retain both unscaled residuals, then append the candidate. Otherwise return the corresponding singular-Jacobian, invalid-trial, or iteration-budget-exhausted status and the already computed prefix. The input functions are defined on the selected tube, so no separate evaluation-failure branch is needed. If every step is accepted, return completed and the state sequence.\n\nAn accepted step satisfies $\\|r^d_n\\|_2\\le\\eta_d$ for the derivative residual $r^d_n=(X_n-X_{n-1})/h-f(t_n,X_n,Z_n)$, and $\\|r^a_n\\|_2\\le\\eta_a$ for the algebraic residual $r^a_n=g(t_n,X_n,Z_n)$. This follows because each block norm is at most the norm of their concatenation. root means only that the scaled residual tolerance was met; it does not assert an exact zero, uniqueness, Newton convergence from an arbitrary seed, or a discretization error bound.\n\nEach step solves a coupled block system with $d+m$ unknowns. At most $B$ Newton corrections and $B+1$ Newton residual evaluations are made per attempted step, plus at most one residual reevaluation to record the unscaled blocks after a root status. Each correction uses one solve with the current $(d+m)$-dimensional block Jacobian. Work per residual, Jacobian assembly, and linear solve depends on the backend.",
+-          "uses": [
+-            "2.2"
+-          ]
+-        },
+-        {
+-          "fact": "F3",
++          "quote": "Input $f,g$, a constant grid $t_n=t_0+nh$ with $h>0$ and $N_t\\in\\mathbb N$, an initial pair $(X_0,Z_0)$, and a selected open tube $\\mathcal T\\subset\\Omega$ inside the local branch chart of [[thm-index-one-dae-implicit-function-reduction]], where $g(t,x,z)=0$ is equivalent to $z=\\psi(t,x)$. For each time $t$, write $\\mathcal T_t=\\{(X,Z):(t,X,Z)\\in\\mathcal T\\}$ for the open state slice used as the Newton evaluation domain. Also input positive residual tolerances $\\eta_d,\\eta_a$, a finite Newton-correction budget $B\\in\\mathbb N_0$, and an initial algebraic-residual bound $\\eta_{a,0}\\ge0$. Return invalid-grid if $h\\le0$ or $N_t=0$, and invalid-input for incompatible dimensions, data outside the function domains, or $(X_0,Z_0)\\notin\\mathcal T_{t_0}$. Compute the starting algebraic residual once; return inconsistent-initial-data if $\\|g(t_0,X_0,Z_0)\\|_2>\\eta_{a,0}$.\n\nFor $n=1,\\ldots,N_t$, form the coupled update residual\n\n$$\nR_n(X,Z)=\\bigl(X-X_{n-1}-h f(t_n,X,Z),\\ g(t_n,X,Z)\\bigr)\n$$\n\nand the scaled square residual\n\n$$\n\\mathcal R_n(X,Z)=\\left(\\frac{X-X_{n-1}-h f(t_n,X,Z)}{h\\eta_d},\\ \\frac{g(t_n,X,Z)}{\\eta_a}\\right).\n$$\n\nUse $(X_{n-1},Z_{n-1})$ as the Newton seed. Before calling Newton, if $(X_{n-1},Z_{n-1})\\notin\\mathcal T_{t_n}$, return invalid-trial with the already computed prefix. Otherwise call [[alg-finite-budget-newton-for-vector-residuals]] on $\\mathcal R_n$ with residual tolerance $1$, budget $B$, and $\\mathcal T_{t_n}$ as its evaluation domain. If the returned status is root and the candidate lies in $\\mathcal T_{t_n}$, reevaluate $R_n$ once to retain both unscaled residuals, then append the candidate. Otherwise return the corresponding singular-Jacobian, invalid-trial, or iteration-budget-exhausted status and the already computed prefix. The input functions are defined on the selected tube, so no separate evaluation-failure branch is needed. If every step is accepted, return completed and the state sequence.\n\nFor recording, define the derivative residual $r^d_n=(X_n-X_{n-1})/h-f(t_n,X_n,Z_n)$ and the algebraic residual $r^a_n=g(t_n,X_n,Z_n)$. root means only that the scaled residual tolerance was met; it does not assert an exact zero, uniqueness, Newton convergence from an arbitrary seed, or a discretization error bound.\n\nUse the coupled $(d+m)$-dimensional residual and its current block Jacobian. Record residual queries, Jacobian assemblies and correction solves separately; backend costs are not specified.",
++          "uses": [
++            "1.1",
++            "2.2",
++            "4.1"
++          ]
++        },
++        {
++          "fact": "F4",
+           "source": "alg-index-one-dae-bdf2-stepper",
+           "source_section": "Definition",
+-          "quote": "Input $f,g$, a constant grid $t_n=t_0+nh$ with $h>0$ and $N_t\\ge2$, two starting pairs $(X_0,Z_0),(X_1,Z_1)$, and a selected open tube inside the local branch chart of [[thm-index-one-dae-implicit-function-reduction]], where $g(t,x,z)=0$ is equivalent to $z=\\psi(t,x)$. Also input positive residual tolerances $\\eta_d,\\eta_a$ and a finite Newton-correction budget $B\\in\\mathbb N_0$. Each starting algebraic residual must meet its supplied bound; otherwise return inconsistent-initial-data. Return invalid-grid for a nonpositive step or fewer than two starting states, and invalid-input for incompatible dimensions or data outside the function domains.\n\nFor $n=2,\\ldots,N_t$, form\n\n$$\nR_n(X,Z)=\\bigl(3X-4X_{n-1}+X_{n-2}-2h f(t_n,X,Z),\\ g(t_n,X,Z)\\bigr)\n$$\n\nand\n\n$$\n\\mathcal R_n(X,Z)=\\left(\\frac{3X-4X_{n-1}+X_{n-2}-2h f(t_n,X,Z)}{2h\\eta_d},\\ \\frac{g(t_n,X,Z)}{\\eta_a}\\right).\n$$\n\nUse $(2X_{n-1}-X_{n-2},Z_{n-1})$ as the Newton seed and call [[alg-finite-budget-newton-for-vector-residuals]] on $\\mathcal R_n$ with tolerance $1$, budget $B$, and the selected tube as the evaluation domain. Append a candidate only when Newton reports root and the candidate lies in the tube; reevaluate $R_n$ once to record its unscaled residual blocks. Otherwise return the corresponding singular-Jacobian, invalid-trial, or iteration-budget-exhausted status with the computed prefix. The input functions are defined on the selected tube, so no separate evaluation-failure branch is needed. If all steps are accepted, return completed.\n\nFor an accepted step, the constant-step BDF2 derivative residual is\n$$\nr^d_n=\\frac{3X_n-4X_{n-1}+X_{n-2}}{2h}-f(t_n,X_n,Z_n),\n$$\nand the algebraic residual is $r^a_n=g(t_n,X_n,Z_n)$. The scaling ensures $\\|r^d_n\\|_2\\le\\eta_d$ and $\\|r^a_n\\|_2\\le\\eta_a$. The procedure makes no claim that Newton finds a root or that an accepted state is the exact selected branch root.\n\nEach step solves a coupled block system with $d+m$ unknowns. At most $B$ Newton corrections and $B+1$ Newton residual evaluations are made per attempted step, plus at most one residual reevaluation to record the unscaled blocks after a root status. Each correction uses one solve with the current $(d+m)$-dimensional block Jacobian. Work per residual, Jacobian assembly, and linear solve depends on the backend.",
+-          "uses": [
+-            "2.2"
++          "quote": "Input $f,g$, a constant grid $t_n=t_0+nh$ with $h>0$ and $N_t\\ge2$, two starting pairs $(X_0,Z_0),(X_1,Z_1)$, and a selected open tube $\\mathcal T\\subset\\Omega$ inside the local branch chart of [[thm-index-one-dae-implicit-function-reduction]], where $g(t,x,z)=0$ is equivalent to $z=\\psi(t,x)$. For each time $t$, write $\\mathcal T_t=\\{(X,Z):(t,X,Z)\\in\\mathcal T\\}$ for the open state slice used as the Newton evaluation domain. Also input positive residual tolerances $\\eta_d,\\eta_a$, a finite Newton-correction budget $B\\in\\mathbb N_0$, and two starting algebraic-residual bounds $\\eta_{a,0},\\eta_{a,1}\\ge0$. Return invalid-grid for a nonpositive step or fewer than two starting states, and invalid-input for incompatible dimensions, data outside the function domains, or $(X_j,Z_j)\\notin\\mathcal T_{t_j}$ for either $j=0,1$. Compute $r^a_j=g(t_j,X_j,Z_j)$ for both $j=0,1$; if $\\|r^a_j\\|_2>\\eta_{a,j}$ for either start, return inconsistent-initial-data.\n\nFor $n=2,\\ldots,N_t$, form\n\n$$\nR_n(X,Z)=\\bigl(3X-4X_{n-1}+X_{n-2}-2h f(t_n,X,Z),\\ g(t_n,X,Z)\\bigr)\n$$\n\nand\n\n$$\n\\mathcal R_n(X,Z)=\\left(\\frac{3X-4X_{n-1}+X_{n-2}-2h f(t_n,X,Z)}{2h\\eta_d},\\ \\frac{g(t_n,X,Z)}{\\eta_a}\\right).\n$$\n\nUse $(2X_{n-1}-X_{n-2},Z_{n-1})$ as the Newton seed. Before calling Newton, if $(2X_{n-1}-X_{n-2},Z_{n-1})\\notin\\mathcal T_{t_n}$, return invalid-trial with the computed prefix. Otherwise call [[alg-finite-budget-newton-for-vector-residuals]] on $\\mathcal R_n$ with tolerance $1$, budget $B$, and $\\mathcal T_{t_n}$ as the evaluation domain. Append a candidate only when Newton reports root and the candidate lies in $\\mathcal T_{t_n}$; reevaluate $R_n$ once to record its unscaled residual blocks. Otherwise return the corresponding singular-Jacobian, invalid-trial, or iteration-budget-exhausted status with the computed prefix. The input functions are defined on the selected tube, so no separate evaluation-failure branch is needed. If all steps are accepted, return completed.\n\nFor an accepted step, the constant-step BDF2 derivative residual is\n$$\nr^d_n=\\frac{3X_n-4X_{n-1}+X_{n-2}}{2h}-f(t_n,X_n,Z_n),\n$$\nand the algebraic residual is $r^a_n=g(t_n,X_n,Z_n)$.  The procedure makes no claim that Newton finds a root or that an accepted state is the exact selected branch root.\n\nUse the coupled $(d+m)$-dimensional residual and its current block Jacobian. Record residual queries, Jacobian assemblies and correction solves separately; backend costs are not specified.",
++          "uses": [
++            "1.1",
++            "2.2",
++            "4.1"
+           ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "Number the Newton loop evaluations by $j=0,\\ldots,B$. At each entered index $j$, [F1] evaluates the residual and either returns a status or, if $j<B$, makes at most one correction before advancing to $j+1$; at $j=B$ the budget branch returns without advancing. Induction on $j$ shows the loop never passes $B$, so there are at most $B+1$ evaluations and $B$ corrections.",
++          "claim": "Apply the proved work bound [F1] to each admissible Newton call. It gives at most $B+1$ explicit residual evaluations and $B$ correction calls. The exact procedure [[alg-finite-budget-newton-for-vector-residuals]] passes its current Jacobian and residual to the correction routine; a successful correction solves that single square system. The input dimensions in [F2]–[F4] are $m$ and $d+m$, respectively, giving the asserted system dimensions. This does not bound assembly or solve costs.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+             "F1",
+-            "induction"
++            "F2",
++            "F3",
++            "F4"
+           ]
+         },
+         {
+@@ -820,23 +827,36 @@
+         },
+         {
+           "id": "step-2-2",
+-          "claim": "A stepper attempts a finite number $S$ of steps. By [F3], each attempted step makes at most one Newton call; on a root status it reevaluates the block residual once to record the unscaled blocks, and otherwise returns immediately. Summing at most $B+2$ evaluations per attempted step gives $S(B+2)$ residual evaluations; after the last accepted step it returns completed.",
++          "claim": "A backward-Euler call first evaluates its starting algebraic residual once, and a BDF2 call evaluates its two starting algebraic residuals, by [F3] and [F4]. Thus their preliminary checks use at most one and two evaluations, respectively, even when a bound fails. Each attempted step makes at most one Newton call; on a root status the wrapper reevaluates the block residual once to record the unscaled blocks, and otherwise returns immediately. Each attempted step therefore adds at most $B+2$ evaluations. Summing gives $1+S(B+2)$ for backward Euler and $2+S(B+2)$ for BDF2. The pre-call membership tests add no residual evaluation, and all loops and tests are finite.",
+           "step": "2.2",
+           "inputs": [
+             "F1",
+             "F3",
++            "F4",
+             "step 1.1",
+             "algebra"
+           ]
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "The argument uses only finite loops and the specified status branches, so it proves termination without any assumption that Newton converges or accepts a step.",
++          "claim": "All remaining tests, assignments and arithmetic are finite under the returning-primitive convention. The argument therefore proves termination without assuming that Newton converges or accepts a step.",
+           "step": "3.1",
+           "inputs": [
++            "given",
+             "step 1.1",
+             "step 2.1",
+             "step 2.2"
++          ]
++        },
++        {
++          "id": "step-4-1",
++          "step": "4.1",
++          "claim": "For each appended candidate, [F3] or [F4] gives a Newton root status with tolerance $1$. The procedure's residual test gives $\\|\\mathcal R_n\\|_2\\le1$. In both methods its blocks equal $r^d_n/\\eta_d$ and $r^a_n/\\eta_a$. Each block norm is at most the concatenated Euclidean norm, and both tolerances are positive; hence $\\|r^d_n\\|_2\\le\\eta_d$ and $\\|r^a_n\\|_2\\le\\eta_a$. No other solver status supplies this premise.",
++          "inputs": [
++            "given",
++            "F3",
++            "F4",
++            "algebra"
+           ]
+         }
+       ],
+--- research/numerical-optimization-dynamics-2026-10-16-batch-75.pages.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-75.pages.json (proposed)
+@@ -30,7 +30,8 @@
+         "deps": [
+           "def-semi-explicit-index-one-dae-and-consistent-initial-data"
+         ],
+-        "dependency_level": 1
++        "dependency_level": 1,
++        "justified_by": []
+       },
+       {
+         "id": "thm-index-one-dae-implicit-function-reduction",
+@@ -41,7 +42,8 @@
+           "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+           "thm-chain-rule-for-total-derivatives"
+         ],
+-        "dependency_level": 1
++        "dependency_level": 1,
++        "justified_by": []
+       },
+       {
+         "id": "lem-index-one-dae-algebraic-residual-to-state-error",
+@@ -53,7 +55,8 @@
+           "thm-multivariable-taylor-formula-with-lagrange-remainder",
+           "thm-cauchy-schwarz-and-the-euclidean-norm"
+         ],
+-        "dependency_level": 2
++        "dependency_level": 2,
++        "justified_by": []
+       },
+       {
+         "id": "alg-index-one-dae-consistent-initialization",
+@@ -64,7 +67,8 @@
+           "thm-index-one-dae-implicit-function-reduction",
+           "alg-finite-budget-newton-for-vector-residuals"
+         ],
+-        "dependency_level": 2
++        "dependency_level": 2,
++        "justified_by": []
+       },
+       {
+         "id": "alg-index-one-dae-backward-euler-stepper",
+@@ -78,7 +82,8 @@
+           "def-implicit-residual-and-algebraic-error-units",
+           "alg-finite-budget-newton-for-vector-residuals"
+         ],
+-        "dependency_level": 3
++        "dependency_level": 3,
++        "justified_by": []
+       },
+       {
+         "id": "alg-index-one-dae-bdf2-stepper",
+@@ -93,7 +98,8 @@
+           "def-implicit-residual-and-algebraic-error-units",
+           "alg-finite-budget-newton-for-vector-residuals"
+         ],
+-        "dependency_level": 3
++        "dependency_level": 3,
++        "justified_by": []
+       },
+       {
+         "id": "lem-index-one-dae-backward-euler-local-branch",
+@@ -104,7 +110,8 @@
+           "thm-index-one-dae-implicit-function-reduction",
+           "thm-parametrized-implicit-function-theorem-with-higher-regularity"
+         ],
+-        "dependency_level": 4
++        "dependency_level": 4,
++        "justified_by": []
+       },
+       {
+         "id": "lem-index-one-dae-bdf2-local-branch",
+@@ -115,19 +122,22 @@
+           "thm-index-one-dae-implicit-function-reduction",
+           "thm-parametrized-implicit-function-theorem-with-higher-regularity"
+         ],
+-        "dependency_level": 4
++        "dependency_level": 4,
++        "justified_by": []
+       },
+       {
+         "id": "thm-index-one-dae-finite-budget-solvers-terminate",
+         "kind": "theorem",
+         "title": "The finite-budget index-one DAE solvers return a status in finite work",
+         "deps": [
++          "lem-finite-budget-newton-work-and-status",
+           "alg-index-one-dae-consistent-initialization",
+           "alg-index-one-dae-backward-euler-stepper",
+           "alg-index-one-dae-bdf2-stepper",
+           "alg-finite-budget-newton-for-vector-residuals"
+         ],
+-        "dependency_level": 4
++        "dependency_level": 4,
++        "justified_by": []
+       },
+       {
+         "id": "thm-index-one-dae-backward-euler-first-order-with-residuals",
+@@ -143,7 +153,8 @@
+           "thm-multivariable-taylor-formula-with-lagrange-remainder",
+           "lem-discrete-one-step-error-recurrence-bound"
+         ],
+-        "dependency_level": 5
++        "dependency_level": 5,
++        "justified_by": []
+       },
+       {
+         "id": "thm-index-one-dae-bdf2-second-order-with-residuals",
+@@ -161,7 +172,8 @@
+           "thm-multivariable-taylor-formula-with-lagrange-remainder",
+           "lem-discrete-one-step-error-recurrence-bound"
+         ],
+-        "dependency_level": 5
++        "dependency_level": 5,
++        "justified_by": []
+       }
+     ]
+   },
+@@ -185,7 +197,8 @@
+           "def-backward-euler-step-equation",
+           "thm-index-one-dae-implicit-function-reduction"
+         ],
+-        "dependency_level": 2
++        "dependency_level": 2,
++        "justified_by": []
+       },
+       {
+         "id": "ex-index-two-dae-algebraic-residual-does-not-control-state",
+@@ -195,7 +208,8 @@
+           "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+           "def-regular-differentiation-index"
+         ],
+-        "dependency_level": 2
++        "dependency_level": 2,
++        "justified_by": []
+       },
+       {
+         "id": "ex-index-three-pendulum-by-differentiation",
+@@ -205,7 +219,8 @@
+           "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+           "def-regular-differentiation-index"
+         ],
+-        "dependency_level": 2
++        "dependency_level": 2,
++        "justified_by": []
+       }
+     ]
+   }

@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "36",
+  "round": 0,
+  "reviewed_items": [
+    "def-linear-multistep-method-consistency-order-and-root-condition",
+    "lem-variable-step-adams-lagrange-weights",
+    "alg-adams-pece-one-correction",
+    "lem-companion-powers-bounded-under-root-condition",
+    "lem-linear-multistep-order-conditions-from-taylor",
+    "lem-variable-step-bdf2-interpolation-and-local-defect",
+    "alg-variable-step-bdf2-with-selected-implicit-branch",
+    "thm-dahlquist-equivalence-for-linear-multistep-methods",
+    "lem-variable-step-bdf2-increment-ratio-recurrence",
+    "thm-variable-step-bdf2-order-two-under-ratio-bound",
+    "cex-repeated-unit-root-causes-linear-parasitic-growth",
+    "ex-one-pass-pece-differs-from-implicit-adams-stability",
+    "ex-repeated-interior-root-preserves-bounded-powers",
+    "ex-simple-unit-circle-roots-give-bounded-oscillation",
+    "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+    "cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error"
+  ],
+  "reviewed_pages": [
+    "linear-multistep-methods-and-dahlquist-equivalence",
+    "linear-multistep-methods-and-dahlquist-equivalence-examples"
+  ],
+  "decision": "repair",
+  "reason": "The batch matches the approved NA-16 topics, and most arguments check out. Repair is needed for a real-solution step in the companion-power proof, branch hypotheses narrower than the approved local-branch scope, an example that does not meet its theorem’s stated branch hypothesis, and algorithmic properties proved inline in procedure items.",
+  "findings": [
+    {
+      "id": "lem-companion-powers-bounded-under-root-condition",
+      "type": "local",
+      "reason": "Step 1.2 uses a complex mode for a root outside the unit disk, then Step 5.1 concludes failure of zero-stability for real recurrences. Add the real/imaginary-part argument: both parts solve the real recurrence and at least one is unbounded."
+    },
+    {
+      "id": "thm-dahlquist-equivalence-for-linear-multistep-methods",
+      "type": "scope",
+      "reason": "The approved contract calls for a locally unique implicit branch near the exact trajectory. The statement instead requires a unique root in K for every history in K, and the proof uses this global condition. Replace it with a uniform local branch condition and close the error-tube argument by bootstrap."
+    },
+    {
+      "id": "thm-variable-step-bdf2-order-two-under-ratio-bound",
+      "type": "scope",
+      "reason": "The approved variable-step scope requires a selected root in a compact state tube, but the theorem requires a unique root in B for every preceding pair in K. This global self-map condition is stronger than a local branch and can exclude ordinary BDF2 cases; state a local branch condition near the exact history and bootstrap the estimate."
+    },
+    {
+      "id": "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+      "type": "prerequisite",
+      "reason": "The proof applies the Dahlquist theorem without establishing its all-histories-in-K branch hypothesis or specifying K. For f(t,Y)=t^2 the update is explicit, but it does not map every pair in a compact K with interior back into K. Prove this example by its error recurrence, or verify the revised local-branch hypothesis."
+    },
+    {
+      "id": "alg-adams-pece-one-correction",
+      "type": "local",
+      "reason": "The Proof section establishes termination and status behavior inline. Algorithm instructions require correctness and termination results in separate proved result items that depend on the algorithm; keep the procedure definition separate from those properties."
+    },
+    {
+      "id": "alg-variable-step-bdf2-with-selected-implicit-branch",
+      "type": "local",
+      "reason": "The Proof section establishes procedure status and completion behavior inline. Put algorithmic correctness or termination properties in separate proved result items that depend on the algorithm, or omit those property arguments from the procedure item."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+      "decision": "repair",
+      "reason": "Its current proof does not establish the supplier theorem’s stated branch hypothesis; a direct recurrence proof is available locally."
+    },
+    {
+      "id": "cor-constant-step-bdf2-order-two-with-consistent-start",
+      "decision": "accept",
+      "reason": "Its statement retains the stronger all-histories branch condition, so it remains covered if the variable-step theorem is broadened to a local branch."
+    },
+    {
+      "id": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+      "decision": "accept",
+      "reason": "It defers its BDF2 accuracy guarantee to the linked theorem and does not independently assert a weaker branch condition."
+    },
+    {
+      "id": "linear-multistep-methods-and-dahlquist-equivalence",
+      "decision": "accept",
+      "reason": "Its page summary describes a selected implicit branch and tube; that remains accurate under the approved local-branch scope."
+    }
+  ]
+}

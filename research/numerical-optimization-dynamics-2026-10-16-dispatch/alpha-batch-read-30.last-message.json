@@ -1,0 +1,309 @@
+{
+  "group": "c",
+  "batches": ["30"],
+  "pages_read": [
+    "adaptive-stochastic-paths-and-brownian-bridge-coupling",
+    "adaptive-stochastic-paths-and-brownian-bridge-coupling-examples"
+  ],
+  "items_read": [
+    "alg-dyadic-brownian-bridge-increment-tree",
+    "thm-dyadic-brownian-bridge-tree-increment-laws",
+    "def-predictable-stopping-time-grid",
+    "lem-continuous-adapted-process-at-bounded-stopping-time",
+    "lem-stopping-time-ito-step-interval-sum",
+    "alg-adaptive-euler-maruyama-on-predictable-grid",
+    "lem-finite-budget-adaptive-em-status",
+    "lem-adaptive-em-predictable-grid-second-moment",
+    "thm-adaptive-em-predictable-grid-strong-error",
+    "def-scalar-brownian-bridge-from-x-to-y",
+    "lem-scalar-brownian-bridge-restriction-density",
+    "thm-scalar-brownian-bridge-barrier-crossing-probability",
+    "ex-redrawing-rejected-increment-biases-path",
+    "ex-coarse-fine-em-bridge-coupling",
+    "ex-brownian-bridge-barrier-missed-by-endpoints"
+  ],
+  "conventions": [
+    {
+      "convention": "AC is assumed through the Brownian, Gaussian, stochastic-integral and conditional-law interfaces.",
+      "fixed_by": "alg-dyadic-brownian-bridge-increment-tree",
+      "matters_for": [
+        "thm-dyadic-brownian-bridge-tree-increment-laws",
+        "alg-adaptive-euler-maruyama-on-predictable-grid",
+        "thm-adaptive-em-predictable-grid-strong-error",
+        "thm-scalar-brownian-bridge-barrier-crossing-probability"
+      ]
+    },
+    {
+      "convention": "A split retains its parent and uses children D/2+Z and D/2−Z with a fresh independent N_m(0,(ℓ/4)I_m) innovation. Independence of children is unconditional at fixed depth; their conditional cross-covariance given the parent is −(ℓ/4)I_m.",
+      "fixed_by": "alg-dyadic-brownian-bridge-increment-tree",
+      "matters_for": [
+        "thm-dyadic-brownian-bridge-tree-increment-laws",
+        "alg-adaptive-euler-maruyama-on-predictable-grid",
+        "ex-redrawing-rejected-increment-biases-path",
+        "ex-coarse-fine-em-bridge-coupling"
+      ]
+    },
+    {
+      "convention": "Grid indices start at zero. N is finite almost surely, active steps are strictly positive, τ_n=T for n≥N, and h_n=τ_{n+1}−τ_n is measurable at F_{τ_n}. Endpoint inspection before selecting the interval is excluded.",
+      "fixed_by": "def-predictable-stopping-time-grid",
+      "matters_for": [
+        "alg-adaptive-euler-maruyama-on-predictable-grid",
+        "lem-adaptive-em-predictable-grid-second-moment",
+        "thm-adaptive-em-predictable-grid-strong-error"
+      ]
+    },
+    {
+      "convention": "Stopping-interval integrands use (τ,σ], and their integral identity holds for continuous versions up to indistinguishability under the usual filtered-space hypotheses.",
+      "fixed_by": "lem-stopping-time-ito-step-interval-sum",
+      "matters_for": [
+        "lem-adaptive-em-predictable-grid-second-moment",
+        "thm-adaptive-em-predictable-grid-strong-error"
+      ]
+    },
+    {
+      "convention": "Every accepted or rejected trial costs one work unit. Completion is checked before budget exhaustion, so a final successful trial returns complete; B=0 returns inconclusive. Endpoint-refinement output is an endpoint record and retained tree, not a continuous interpolation.",
+      "fixed_by": "alg-adaptive-euler-maruyama-on-predictable-grid",
+      "matters_for": [
+        "lem-finite-budget-adaptive-em-status",
+        "lem-adaptive-em-predictable-grid-second-moment",
+        "thm-adaptive-em-predictable-grid-strong-error"
+      ]
+    },
+    {
+      "convention": "The bridge has duration h>0 and fixed endpoints x,y. The restriction-density formula applies only at 0≤t<h.",
+      "fixed_by": "lem-scalar-brownian-bridge-restriction-density",
+      "matters_for": [
+        "thm-scalar-brownian-bridge-barrier-crossing-probability"
+      ]
+    },
+    {
+      "convention": "Barrier crossing means infimum ≤c, including endpoint contact. Endpoints satisfy x,y≥c; equality at either endpoint gives probability one.",
+      "fixed_by": "thm-scalar-brownian-bridge-barrier-crossing-probability",
+      "matters_for": [
+        "ex-brownian-bridge-barrier-missed-by-endpoints"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-stopping-time-ito-step-interval-sum",
+      "statement": "Assume AC and the usual filtered-space hypotheses for the Itô integral. For scalar Brownian W, stopping times 0≤τ≤σ≤T and ξ∈L²(F_τ), H_s=ξ1_(τ,σ](s) is predictable with finite energy, and its continuous integral satisfies ∫₀ᵗH_s dW_s=ξ(W_{t∧σ}−W_{t∧τ}) up to indistinguishability. The statement applies coordinatewise to matrix coefficients and finite-dimensional Brownian motion.",
+      "used_by": [
+        "alg-adaptive-euler-maruyama-on-predictable-grid",
+        "lem-adaptive-em-predictable-grid-second-moment",
+        "thm-adaptive-em-predictable-grid-strong-error"
+      ]
+    },
+    {
+      "id": "lem-adaptive-em-predictable-grid-second-moment",
+      "statement": "Under the usual filtered-space conditions and the coefficient, Brownian and initial-value hypotheses of alg-euler-maruyama, the complete continuous Euler interpolation on a finite predictable grid with N<∞ almost surely and maximum step h_max≤T satisfies E sup_{0≤t≤T}|Y_t|²≤C(T,K,m,E|X₀|²), uniformly over the controller and the number and placement of steps. No deterministic bound on N is needed.",
+      "used_by": [
+        "thm-adaptive-em-predictable-grid-strong-error"
+      ]
+    },
+    {
+      "id": "lem-continuous-adapted-process-at-bounded-stopping-time",
+      "statement": "Assume AC and use the usual augmented Brownian filtration. Let X on [0,T] be an adapted finite-dimensional real process with continuous paths on a measurable probability-one event. If τ is a stopping time with 0≤τ≤T, then X_τ is F_τ-measurable.",
+      "used_by": [
+        "lem-stopping-time-ito-step-interval-sum",
+        "alg-adaptive-euler-maruyama-on-predictable-grid"
+      ]
+    },
+    {
+      "id": "thm-dyadic-brownian-bridge-tree-increment-laws",
+      "statement": "Assume AC. For m≥1, h>0 and finite depth r≥0, start with D_empty∼N_m(0,hI_m) and use fresh mutually independent node innovations Z_v∼N_m(0,(ℓ_v/4)I_m), independent of the root. The 2^r depth-r increments are mutually independent N_m(0,(h/2^r)I_m), and each parent equals its two children’s sum. Independence is unconditional; the conditional child cross-covariance given the parent is −(ℓ_v/4)I_m.",
+      "used_by": [
+        "alg-adaptive-euler-maruyama-on-predictable-grid",
+        "ex-redrawing-rejected-increment-biases-path",
+        "ex-coarse-fine-em-bridge-coupling"
+      ]
+    },
+    {
+      "id": "lem-scalar-brownian-bridge-restriction-density",
+      "statement": "Assume AC, h>0 and x,y∈R. For Brownian X=x+W and bridge law μ_{x,y}^h, P{X∈A,X_h∈D}=∫_D p_h(y−x)μ_{x,y}^h(A)dy for every Borel path event A and Borel endpoint set D. For every 0≤t<h, the restricted bridge law has density p_{h−t}(y−X_t)/p_h(y−x) relative to Brownian motion started at x.",
+      "used_by": [
+        "thm-scalar-brownian-bridge-barrier-crossing-probability"
+      ]
+    },
+    {
+      "id": "thm-adaptive-em-predictable-grid-strong-error",
+      "statement": "Assume AC, the coefficient hypotheses of alg-euler-maruyama, the usual filtered Brownian space, and the corresponding strong solution X. On a finite predictable grid with N<∞ almost surely and step lengths bounded by deterministic 0<h≤T, the complete continuous Euler interpolation satisfies sup_{0≤t≤T}E|X_t−Y_t|²≤Ch, with C depending only on T, the coefficient bounds, m and E|X₀|². Endpoint-dependent interval selection is excluded, and no finite expected step-count or asymptotic cost claim follows.",
+      "used_by": []
+    },
+    {
+      "id": "thm-scalar-brownian-bridge-barrier-crossing-probability",
+      "statement": "Assume AC. For h>0, c∈R and x,y≥c, the scalar bridge from x to y satisfies P{inf_{0≤s≤h}B_s≤c}=exp(−2(x−c)(y−c)/h). If either endpoint equals c, both sides are one.",
+      "used_by": [
+        "ex-brownian-bridge-barrier-missed-by-endpoints"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-d-dimensional-brownian-motion",
+      "used_for": "Finite-dimensional Brownian increment laws and coordinate conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian construction, covariance and singular-law conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Declared ambient choice assumption.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-function-of-a-multivariate-normal-law",
+      "used_for": "Gaussian transform factorization and uniqueness in tree and bridge arguments.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+      "used_for": "Gaussian affine transformations and independent sums.",
+      "opened": true
+    },
+    {
+      "id": "def-continuous-time-stopping-time",
+      "used_for": "Stopping-time tests and stopped sigma-algebras.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-and-usual-augmented-brownian-filtrations",
+      "used_for": "Completeness, ambient null subsets at time zero and right continuity.",
+      "opened": true
+    },
+    {
+      "id": "def-continuous-time-filtration-and-all-pairs-martingale",
+      "used_for": "Adaptedness and increasing-filtration conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-brownian-motion",
+      "used_for": "Scalar Brownian Gaussian laws and common continuity event.",
+      "opened": true
+    },
+    {
+      "id": "def-progressively-measurable-and-predictable-process",
+      "used_for": "Predictable generators, limits and stopping indicators.",
+      "opened": true
+    },
+    {
+      "id": "def-ito-integral-for-square-integrable-predictable-processes",
+      "used_for": "Predictable L² integral construction and deterministic-time truncation.",
+      "opened": true
+    },
+    {
+      "id": "def-elementary-predictable-brownian-integrand",
+      "used_for": "The standing filtration-relative Brownian independence hypothesis invoked by the integral suppliers.",
+      "opened": true
+    },
+    {
+      "id": "thm-ito-isometry-and-linearity-in-predictable-l2",
+      "used_for": "Integral approximation, coefficient-tail convergence and second-moment estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-ito-integral-process-has-a-continuous-martingale-version",
+      "used_for": "Continuous integral versions and common-full-event uniqueness.",
+      "opened": true
+    },
+    {
+      "id": "lem-square-integrable-predictable-step-ito-integral-is-finite-sum",
+      "used_for": "Deterministic-grid approximation in the stopping-interval identity.",
+      "opened": true
+    },
+    {
+      "id": "lem-rat-embeds-dense",
+      "used_for": "Countable dense-time tests for continuous versions and running suprema.",
+      "opened": true
+    },
+    {
+      "id": "alg-euler-maruyama",
+      "used_for": "Coefficient regularity, growth, initial-value assumptions and Euler update.",
+      "opened": true
+    },
+    {
+      "id": "thm-stopping-an-ito-integral",
+      "used_for": "Stopped integral representation in the localized moment proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-doob-maximal-bound-for-the-ito-integral",
+      "used_for": "Scalar-coordinate maximal estimates in moment and error proofs.",
+      "opened": true
+    },
+    {
+      "id": "thm-gronwall-integral-inequality",
+      "used_for": "Continuous nonnegative moment and error inequalities.",
+      "opened": true
+    },
+    {
+      "id": "thm-fatou-lemma",
+      "used_for": "Removing step-count and path-height localization.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Continuity of expected running suprema and continuity of endpoint crossing probabilities.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Summing interval energies and controlling coefficient tails.",
+      "opened": true
+    },
+    {
+      "id": "def-ito-sde-and-strong-solution",
+      "used_for": "Exact SDE, usual conditions and continuous solution conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+      "used_for": "Existence and path-supremum second moment of the exact solution.",
+      "opened": true
+    },
+    {
+      "id": "lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates",
+      "used_for": "Bridge path-law uniqueness and promotion from coordinate to path independence.",
+      "opened": true
+    },
+    {
+      "id": "thm-dynkin-pi-lambda",
+      "used_for": "Extending cylinder identities to Borel path events.",
+      "opened": true
+    },
+    {
+      "id": "lem-brownian-transition-semigroup-property",
+      "used_for": "Positive Gaussian endpoint densities and convolution identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-brownian-reflection-principle",
+      "used_for": "Joint maximum/endpoint identity and absence of positive maximum atoms.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Normal-law convention in the rejected-increment example.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-scalar-brownian-bridge-barrier-crossing-probability",
+      "concern": "Proof step 2.1 explicitly says “Dominated convergence proves continuity of q.” The declared deps omit thm-dominated-convergence, although that published supplier is available and its hypotheses hold here because the crossing indicators are bounded by one. This is a missing logical dependency declaration, not a failure of the continuity argument.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "adaptive-stochastic-paths-and-brownian-bridge-coupling",
+      "to": "milstein-stochastic-taylor-and-iterated-integrals",
+      "faithful": true,
+      "note": "Read both page summaries and the Milstein definition. This is a curriculum prerequisite: the assigned page and items import no Milstein order, area-sampling or weak-error proposition. The supplier uses deterministic-grid iterated integrals; the consumer separately develops Euler stopping-grid estimates and expressly excludes endpoint-selected refinement from its error certificate. Neither page asserts a reverse logical dependency."
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "pack": "pack-0001",
+  "lane": 1,
+  "input_sha256": "008870c20474dbe7ae7c2b223c1ccbbe42e85ef043c48214e80c661fa9c03d89",
+  "decisions": [
+    {
+      "id": "lem-rosenbrock-euler-local-defect",
+      "disposition": "sound",
+      "reason": "The revised definition still gives k=(I-hDf(y))^{-1}f(y) and Phi_h(y)=y+hk for gamma=1. The inverse identity bounds the difference from the forward-Euler increment by BLF h^2; the exact solution remainder is bounded by LF h^2. Their sum is the stated FL(B+1)h^2, without any execution-status assumption.",
+      "understanding": {
+        "basis": "familiarity",
+        "evidence": "Checked the complete frozen and current local-defect item, the current def-rosenbrock-euler-step-map, and the local ODE-solution, chain-rule and scalar mean-value suppliers. This is elementary resolvent algebra and calculus: g(s)=f(y(t+s)) has derivative Df(y(t+s))f(y(t+s)), bounded by LF, and q(s)=y(t+s)-y-sf(y) has derivative bounded by LFh on [0,h]. Scalar projection and the mean-value theorem give the stated remainder. No external source URL was read or needed. The current item equals its frozen assignment text, is outside the immutable frontier, and has no unresolved mathematical obligation.",
+        "uncertainty": false,
+        "sources": []
+      },
+      "event_uses": [
+        {
+          "event_key": "5fd633f11bdcb624dad3219a063ffbaa4fba0b2b5466b4f8d24f860e5cce0521",
+          "affected_use": "The Statement and [F1], used in proof step 1.1, specialize the supplier to an autonomous field, gamma=1, and the exact Jacobian Df(y).",
+          "reason": "The revised supplier admits precisely this specialization whenever I-hDf(y) is invertible, which the consumer assumes uniformly. The consumer only uses its exact stage equation and update, both present in the current Definition; step 1.2 is an independent exact-solution estimate."
+        }
+      ],
+      "affected_use": "The exact stage equation and update in [F1] supply k=M^{-1}f(y) in step 1.1 and h(k-f(y)) in step 2.1.",
+      "invalidated_claim": "No claim is invalidated: the local FL(B+1)h^2 estimate follows from the unchanged exact step equation and the stated trajectory and inverse bounds.",
+      "minimality": "No edit is necessary because all hypotheses needed for the current exact stage map are already stated, and the complete existing proof establishes the claimed bound.",
+      "edits": []
+    },
+    {
+      "id": "lem-rosenbrock-euler-step-map-lipschitz",
+      "disposition": "sound",
+      "reason": "The revised supplier still defines Phi_h(y)=y+h(I-hDf(y))^{-1}f(y) in the autonomous exact-Jacobian case with gamma=1. Convexity and the derivative bounds give Lipschitz constants L for f and H for Df. The inverse perturbation identity then bounds the stage difference by (BL+hB^2HF)||u-v||, yielding exactly the stated 1+hL_* factor.",
+      "understanding": {
+        "basis": "familiarity",
+        "evidence": "Checked the complete frozen and current stability item, the current exact stage-map Definition, the matrix-inverse-perturbation item, and the local chain-rule and scalar mean-value suppliers. On the segment in K, scalar projections of f and of Df applied to a unit vector give the L and H bounds. The identity M_u^{-1}-M_v^{-1}=M_u^{-1}(M_v-M_u)M_v^{-1} supplies B^2hH; adding and subtracting M_u^{-1}f(v) supplies BL+B^2hHF. This uses familiar finite-dimensional operator-norm algebra; no external URL was read. The item remains equal to its frozen text and outside the immutable frontier; no mathematical obligation remains unresolved.",
+        "uncertainty": false,
+        "sources": []
+      },
+      "event_uses": [
+        {
+          "event_key": "5fd633f11bdcb624dad3219a063ffbaa4fba0b2b5466b4f8d24f860e5cce0521",
+          "affected_use": "The Statement and [F1], invoked in proof steps 3.1 and 4.1, identify the exact stage map with y+hM_h(y)^{-1}f(y).",
+          "reason": "The current supplier has the same inverse-map formula after setting gamma=1 and choosing the exact Jacobian of the autonomous field. The consumer explicitly assumes invertibility and a uniform bound B, so the revised definition adds no unmet condition to the inverse-difference argument."
+        }
+      ],
+      "affected_use": "The exact map formula in [F1] converts the stage Lipschitz estimate in step 3.1 into the one-step stability estimate in step 4.1.",
+      "invalidated_claim": "No stability claim is invalidated: the current exact-map definition and the existing C^2, convexity, derivative and inverse hypotheses imply the same constant L_*=BL+h_0B^2HF.",
+      "minimality": "No edit is necessary because the proof already analyzes the exact formula retained by the supplier and makes no assumption about finite-precision execution or solve statuses.",
+      "edits": []
+    },
+    {
+      "id": "thm-rosenbrock-euler-global-first-order",
+      "disposition": "sound",
+      "reason": "The revised definition retains the autonomous exact-Jacobian map with gamma=1 used by Y_{j+1}=Phi_h(Y_j). Fact [F2] correctly obtains the sharper C_0=FL(B+1/2) from lem-rosenbrock-euler-local-defect-and-residual-error, rather than asserting that the coarser local-defect lemma has this constant. With delta=0, zero stage residual, M_1=LF and inverse bounds B, that supplier gives C_0h^2. Stability then gives e_{j+1}<=(1+L_*h)e_j+C_0h^2 and the stated geometric-sum bound.",
+      "understanding": {
+        "basis": "familiarity",
+        "evidence": "Checked the complete frozen global theorem and its unchanged current carrier, both assigned local estimates, the current step-map Definition, and the complete local-defect-and-residual-error supplier including its integral remainder proof. For the autonomous extension f_bar(t,y)=f(y), f_bar_t=0 and ||D_y f_bar f_bar||<=LF along the exact trajectory; C^2 regularity and uniform invertibility meet that supplier's hypotheses. Taking its computed stage to be the exact stage makes rho=0 without requiring a finite-precision execution. With equal exact and numerical initial values, the recurrence unrolls to C_0h^2 sum_{j=0}^{n-1}(1+hL_*)^j <= C_0nh^2 exp(L_*nh). This is familiar consistency-and-stability analysis; no external URL was read. The compact-tube condition remains explicit, the item is outside the immutable frontier and no mathematical obligation remains unresolved.",
+        "uncertainty": false,
+        "sources": []
+      },
+      "event_uses": [
+        {
+          "event_key": "5fd633f11bdcb624dad3219a063ffbaa4fba0b2b5466b4f8d24f860e5cce0521",
+          "affected_use": "The Statement and [F1] define the exact-method iterates through the autonomous gamma=1, exact-Jacobian map; [F2] compares that same map with the exact solution.",
+          "reason": "The revised supplier defines precisely the stage equation (I-hDf(y))k=f(y) and update y+hk used here. The theorem assumes uniform inverse bounds and both trajectories in the compact tube. Its residual-error and Lipschitz suppliers therefore still apply to this same exact map, and its global recurrence is unaffected."
+        }
+      ],
+      "affected_use": "The exact stage map in [F1] identifies Y_{j+1} and the comparison Phi_h(y(t_j)) in proof step 1.1 and the zero-residual specialization in [F2].",
+      "invalidated_claim": "No global-error claim is invalidated: the exact-map identity is retained, and [F2] legitimately supplies FL(B+1/2)h^2 under the stated C^2 and compact-tube hypotheses.",
+      "minimality": "No edit is necessary because the theorem already distinguishes exact-method iterates from an implementation, meets the revised map's invertibility condition, and proves its claimed constant by the sharper residual-error supplier.",
+      "edits": []
+    }
+  ]
+}

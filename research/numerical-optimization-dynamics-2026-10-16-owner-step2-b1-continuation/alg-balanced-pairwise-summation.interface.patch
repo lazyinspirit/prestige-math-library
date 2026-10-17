@@ -1,0 +1,9 @@
+--- retained native before_interfaces/alg-balanced-pairwise-summation
++++ actual current public interface/alg-balanced-pairwise-summation
+@@ -1,3 +1,5 @@
+ ## Definition
+ 
+-Input real floating-point x_1,...,x_n, n>=1. Set d=ceil(log_2 n), append 2^d-n exact zero leaves, and round the sum at each internal node of the balanced tree. An unmatched leaf may be copied. If a rounded node fails the operationwise range rule, return range-failure and its tree index; otherwise return the root s-hat. This finite tree terminates after 2^d-1 additions; accuracy is asserted only on success.
++Input real floating-point values $x_1,\ldots,x_n$, $n\ge1$. Set $d=\lceil\log_2 n\rceil$, place these values in leaves $1,\ldots,n$ from left to right, and append $2^d-n$ exact zero leaves. At level $\ell=1,\ldots,d$, replace each consecutive pair of current nodes $(a_{\ell-1,2j-1},a_{\ell-1,2j})$, in increasing $j=1,\ldots,2^{d-\ell}$, by
++$$a_{\ell,j}=\operatorname{fl}(a_{\ell-1,2j-1}+a_{\ell-1,2j}).$$
++If an operation fails, return `range-failure` with the first failing level $\ell$ and node $j$ in this level-by-level, left-to-right order. For $d=0$, return $x_1$ with no additions. Otherwise return the single node $a_{d,1}$. The tree is fully specified, terminates after $2^d-1$ additions, and its accuracy is asserted only on success.

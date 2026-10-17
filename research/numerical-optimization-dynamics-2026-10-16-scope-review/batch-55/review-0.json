@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "55",
+  "round": 0,
+  "reviewed_items": [
+    "def-uniform-grid-and-difference-operators",
+    "def-periodic-one-way-advection-schemes",
+    "def-centered-leapfrog-wave-scheme",
+    "lem-dirichlet-grid-summation-by-parts",
+    "lem-dirichlet-grid-poincare-inequality",
+    "thm-smooth-advection-stencils-consistent",
+    "thm-dirichlet-leapfrog-discrete-energy",
+    "lem-periodic-advection-amplification-symbols",
+    "thm-periodic-centered-wave-amplification-and-endpoint",
+    "thm-periodic-advection-power-stability",
+    "thm-nearest-neighbor-cfl-domain-condition",
+    "ex-wave-cfl-endpoint-and-energy-breakdown",
+    "ex-upwind-versus-downwind-advection",
+    "ex-centered-advection-consistent-but-unstable",
+    "ex-grid-fourier-stability-needs-a-common-space-lift"
+  ],
+  "reviewed_pages": [
+    "hyperbolic-finite-difference-methods",
+    "hyperbolic-finite-difference-methods-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch and its actual supplier uses were reviewed. Two defects can be repaired locally without changing any Statement or Definition.",
+  "findings": [
+    {
+      "id": "thm-nearest-neighbor-cfl-domain-condition",
+      "type": "prerequisite",
+      "reason": "Step 3.1 relies on thm-homogeneous-linear-transport-by-the-flow. Its proof infers constancy from a zero derivative without an MVT/FTC supplier; its transport lemma also applies the total chain rule to C¹ without grounding that convention in the library’s C¹-to-total-differentiability result. Add a local constant-speed solution and, if needed, uniqueness argument with these premises explicit; cor-mean-value-theorem is already in this item’s deps."
+    },
+    {
+      "id": "ex-wave-cfl-endpoint-and-energy-breakdown",
+      "type": "local",
+      "reason": "Steps 1.4–2.1 use X=Aφ to exhibit strict negative and positive energy values but never require A≠0. Specify a real nonzero amplitude, for example A=1."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-centered-advection-consistent-but-unstable",
+      "decision": "accept",
+      "reason": "It uses only the second, centered-family power-growth claim of thm-nearest-neighbor-cfl-domain-condition; the requested proof clarification does not affect that use."
+    }
+  ]
+}

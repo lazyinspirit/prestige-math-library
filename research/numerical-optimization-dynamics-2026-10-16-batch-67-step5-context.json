@@ -1,0 +1,244 @@
+{
+  "group": "s",
+  "batches": [
+    "67"
+  ],
+  "pages_read": [
+    "restarted-and-block-eigensolvers",
+    "restarted-and-block-eigensolvers-examples"
+  ],
+  "items_read": [
+    "alg-thick-and-implicitly-restarted-arnoldi-with-locking",
+    "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+    "alg-block-lobpcg-with-rank-loss-status",
+    "thm-finite-budget-restarted-and-block-procedures-return-a-status",
+    "lem-generalized-ritz-values-monotone-under-nested-subspaces",
+    "lem-block-principal-angle-squared-ritz-enclosure",
+    "thm-lobpcg-selected-ritz-values-do-not-increase",
+    "alg-shift-invert-and-harmonic-ritz-extraction",
+    "thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status",
+    "thm-shift-invert-map-and-inexact-solve-residual-transfer",
+    "ex-implicit-restart-shift-can-suppress-wanted-component",
+    "ex-clustered-vibration-modes-with-block-lobpcg",
+    "ex-interior-vibration-mode-shift-invert"
+  ],
+  "conventions": [
+    {
+      "convention": "Arnoldi restart uses exact arithmetic, 1 ≤ r < m ≤ n, normalized projected eigenvectors, independent residual-accepted locked directions, and a supplied finite-return projected eigensolver whose complete eigenvalue list is validated including algebraic multiplicities.",
+      "fixed_by": "alg-thick-and-implicitly-restarted-arnoldi-with-locking",
+      "matters_for": [
+        "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+        "thm-finite-budget-restarted-and-block-procedures-return-a-status",
+        "ex-implicit-restart-shift-can-suppress-wanted-component"
+      ]
+    },
+    {
+      "convention": "Implicit QR uses ordered top-down adjacent-row Givens eliminations, p = m − r shifts, Q = Q₁⋯Qₚ, and q(z) = ∏(z − μⱼ).",
+      "fixed_by": "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+      "matters_for": [
+        "ex-implicit-restart-shift-can-suppress-wanted-component"
+      ]
+    },
+    {
+      "convention": "LOBPCG assumes complex Hermitian A, Hermitian positive-definite B and fixed T, a B-orthonormal initial block, exact rank compression, and selection of the q smallest projected eigenvalues. Residual acceptance uses Euclidean column norms.",
+      "fixed_by": "alg-block-lobpcg-with-rank-loss-status",
+      "matters_for": [
+        "thm-finite-budget-restarted-and-block-procedures-return-a-status",
+        "thm-lobpcg-selected-ritz-values-do-not-increase",
+        "ex-clustered-vibration-modes-with-block-lobpcg"
+      ]
+    },
+    {
+      "convention": "Generalized eigenvalues and Ritz values are ordered increasingly, with multiplicity; trial bases are B-orthonormal.",
+      "fixed_by": "lem-generalized-ritz-values-monotone-under-nested-subspaces",
+      "matters_for": [
+        "lem-block-principal-angle-squared-ritz-enclosure",
+        "thm-lobpcg-selected-ritz-values-do-not-increase",
+        "ex-clustered-vibration-modes-with-block-lobpcg"
+      ]
+    },
+    {
+      "convention": "The angle enclosure assumes 1 ≤ q < n and λq < λq+1; sin ϑ is the supremum of the B-norm of the complementary spectral projection over B-unit trial vectors.",
+      "fixed_by": "lem-block-principal-angle-squared-ritz-enclosure",
+      "matters_for": [
+        "ex-clustered-vibration-modes-with-block-lobpcg"
+      ]
+    },
+    {
+      "convention": "Shift-invert requires M = A − σI invertible. Harmonic extraction instead checks the rank of MU and reports values of the computed perturbed projected pencil with its QZ ledger.",
+      "fixed_by": "alg-shift-invert-and-harmonic-ritz-extraction",
+      "matters_for": [
+        "thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status",
+        "thm-shift-invert-map-and-inexact-solve-residual-transfer",
+        "ex-interior-vibration-mode-shift-invert"
+      ]
+    },
+    {
+      "convention": "Solve residuals have sign s₀ = My − u, transformed residuals are rT = y − θu, and finite inverse mapping requires θ ≠ 0.",
+      "fixed_by": "thm-shift-invert-map-and-inexact-solve-residual-transfer",
+      "matters_for": [
+        "ex-interior-vibration-mode-shift-invert"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-generalized-ritz-values-monotone-under-nested-subspaces",
+      "statement": "For 1 ≤ j ≤ dim S, λj ≤ θj(S). If S ⊆ T and j ≤ dim S, then θj(T) ≤ θj(S), for Hermitian A and positive-definite Hermitian B with B-orthonormal trial bases.",
+      "used_by": [
+        "lem-block-principal-angle-squared-ritz-enclosure",
+        "thm-lobpcg-selected-ritz-values-do-not-increase",
+        "ex-clustered-vibration-modes-with-block-lobpcg"
+      ]
+    },
+    {
+      "id": "alg-thick-and-implicitly-restarted-arnoldi-with-locking",
+      "statement": "Defines finite-budget exact thick and implicit Arnoldi restarts, validated supplied projected eigensolves, independent residual-based locking, explicit failure statuses, and a thick fallback when implicit mode has locked pairs.",
+      "used_by": [
+        "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+        "thm-finite-budget-restarted-and-block-procedures-return-a-status",
+        "ex-implicit-restart-shift-can-suppress-wanted-component",
+        "alg-golub-welsch-certified-node-and-weight-enclosures"
+      ]
+    },
+    {
+      "id": "alg-block-lobpcg-with-rank-loss-status",
+      "statement": "Defines block LOBPCG for Hermitian A and positive-definite Hermitian B,T, retaining the old block in the exact rank-compressed trial span and selecting its q smallest Ritz values within a finite update budget.",
+      "used_by": [
+        "thm-finite-budget-restarted-and-block-procedures-return-a-status",
+        "thm-lobpcg-selected-ritz-values-do-not-increase",
+        "ex-clustered-vibration-modes-with-block-lobpcg"
+      ]
+    },
+    {
+      "id": "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+      "statement": "Under the stated no-breakdown, ordered-Givens, nonannihilation, filtered-dimension and nonzero-ρ hypotheses, range(Vm Q(:,1:r)) = Kr(A,q(A)v₁), and the retained basis satisfies AVr+ = Vr+ Hr+ + g er*, with g orthogonal to the retained columns.",
+      "used_by": [
+        "ex-implicit-restart-shift-can-suppress-wanted-component"
+      ]
+    },
+    {
+      "id": "alg-shift-invert-and-harmonic-ritz-extraction",
+      "statement": "Defines shift-invert candidate extraction with original residual checks and solve-error records, and harmonic extraction with rank checking, a finite-budget QZ call, and explicit status mappings.",
+      "used_by": [
+        "thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status",
+        "thm-shift-invert-map-and-inexact-solve-residual-transfer",
+        "ex-interior-vibration-mode-shift-invert"
+      ]
+    },
+    {
+      "id": "thm-shift-invert-map-and-inexact-solve-residual-transfer",
+      "statement": "For invertible M = A − σI, eigenvalues map by θ = (λ − σ)⁻¹. For nonzero u and θ, s₀ = My − u and rT = y − θu imply (A − λI)u = θ⁻¹(s₀ − MrT), where λ = σ + 1/θ.",
+      "used_by": [
+        "ex-interior-vibration-mode-shift-invert"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-arnoldi-process",
+      "used_for": "Exact Arnoldi orthogonalization, normalization, and breakdown convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+      "used_for": "Orthonormality, Krylov span, Hessenberg support, and the Arnoldi factorization.",
+      "opened": true
+    },
+    {
+      "id": "def-ritz-values-and-ritz-vectors-from-arnoldi",
+      "used_for": "Projected eigenpairs and lifting Ritz vectors.",
+      "opened": true
+    },
+    {
+      "id": "prop-ritz-residual-formula-for-an-arnoldi-ritz-pair",
+      "used_for": "Residual evaluation on standard no-breakdown Arnoldi cycles.",
+      "opened": true
+    },
+    {
+      "id": "def-real-and-complex-givens-transformations",
+      "used_for": "Real and complex adjacent-coordinate QR transformations.",
+      "opened": true
+    },
+    {
+      "id": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+      "used_for": "QR conventions and column-pivoted rank handling.",
+      "opened": true
+    },
+    {
+      "id": "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift",
+      "used_for": "Shifted QR factorization and similarity identity.",
+      "opened": true
+    },
+    {
+      "id": "prop-shifted-qr-preserves-upper-hessenberg-form",
+      "used_for": "Hessenberg support after ordered adjacent-Givens shifted QR steps.",
+      "opened": true
+    },
+    {
+      "id": "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices",
+      "used_for": "Support and bandwidth arguments in implicit restart.",
+      "opened": true
+    },
+    {
+      "id": "def-determinant-of-a-square-matrix",
+      "used_for": "Finite coefficient expansion validating the projected characteristic polynomial.",
+      "opened": true
+    },
+    {
+      "id": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+      "used_for": "Eigenpair definitions, inverse spectral mapping, and diagonal examples.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "used_for": "Orthonormal diagonalization of Hermitian LOBPCG compressions.",
+      "opened": true
+    },
+    {
+      "id": "prop-eigenvalue-iff-shift-is-not-invertible",
+      "used_for": "Equivalence of shifted invertibility and exclusion of σ from the spectrum.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+      "concern": "The Statement assumes “ρ ≠ 0 in the factorization q(H_m)=QR with R upper triangular” without defining ρ. Proof 2.1 supplies the intended meaning through “Re₁ = ρe₁”. Define ρ = R₁₁ in the Statement; the argument itself establishes the required interpretation.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "restarted-and-block-eigensolvers",
+      "to": "computed-schur-decompositions-and-nonnormal-spectra",
+      "faithful": true,
+      "note": "Contextual seam: no direct Schur-item invocation occurs in the assigned proofs. The page preserves the supplier's separation of residual/backward information from nonnormal forward accuracy and makes no unconditional shift-convergence claim."
+    },
+    {
+      "from": "restarted-and-block-eigensolvers",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "Contextual seam: the assigned restart analysis uses exact arithmetic and does not import finite-precision orthogonality bounds or a Lanczos convergence rate. Its bad-shift example is consistent with the supplier's dependence on spectral separation and starting components."
+    },
+    {
+      "from": "restarted-and-block-eigensolvers",
+      "to": "generalized-eigenvalue-pencils-and-qz-methods",
+      "faithful": true,
+      "note": "Opened the B-metric definition, Hermitian-definite spectral theorem, regular-pencil definition, QZ algorithm, and QZ termination/equivalence proposition. The consumers preserve positive definiteness, exclude rank-deficient harmonic pencils before QZ, map all QZ statuses, and identify reported harmonic values with the perturbed computed pencil."
+    },
+    {
+      "from": "restarted-and-block-eigensolvers",
+      "to": "preconditioner-algorithms-and-residual-metrics",
+      "faithful": true,
+      "note": "Contextual seam: LOBPCG explicitly assumes a fixed Hermitian positive-definite T and does not infer that property from ILU(0) or flexible GMRES. No unsupported preconditioner-quality or residual-metric claim crosses the seam."
+    },
+    {
+      "from": "gaussian-quadrature",
+      "to": "restarted-and-block-eigensolvers",
+      "faithful": true,
+      "note": "Opened the Gaussian-quadrature page and Golub–Welsch algorithm. Its m ≥ 2 proposal call uses full dimension m, target m−1, a finite restart budget, an explicit target rule, and the supplier's projected-solver contract. Failure statuses become inconclusive; Ritz data remain proposals subject to independent interval certification."
+    }
+  ]
+}

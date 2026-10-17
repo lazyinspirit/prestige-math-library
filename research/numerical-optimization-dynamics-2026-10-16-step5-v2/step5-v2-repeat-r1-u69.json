@@ -1,0 +1,190 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "69",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "alg-certified-spatial-branch-and-bound",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "2ca9eea05e5c81b2ad8b106ccb18745bfde9318107c941ab956b708d5ca9f64d",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The certificate definition permits an empty-box proof without a lower bound. For D0=[0,1], C=[3/4,1], f=0, epsilon=1/2, give the root ell=-1 and witness (3/4,0); after splitting, give [0,1/2] only an emptiness proof and [1/2,1] ell=-1 and the same witness. No gap certificate returns. The old least-bound instruction includes the unclosed empty leaf with undefined ell. This is an undefined procedural branch, not a citation defect. Repaired by excluding certified-empty leaves from comparisons, closure and selection while retaining their proofs, and explicitly requiring finite bounds only on evaluated leaves not certified empty.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-certified-spatial-branch-and-bound",
+      "disposition": "repaired",
+      "post_sha256": "d52ed1687be18f1f637cfde5fd133ed14b0c6ddfb1bc38f28967b1df51e66e5e",
+      "review_context_sha256": "6b0cae65254feb743289900ff4e8df57b7e419c5189a8f249b91380a90d94d96",
+      "reason": "Checked the full procedure against both defining prerequisites. Empty-only reports need no bound, all-empty ledgers return infeasible before a minimum, mixed ledgers compare only finite bounds, and missing required bounds return inconclusive. If no gap returns, a nonclosed candidate exists: finite U and all leaves closed would imply U-L<=epsilon, while U=+infinity closes no finite bound. Retained proofs preserve coverage; counted calls, midpoint witnesses, singleton refinement and deterministic tie rules remain intact. This is the repair author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-finite-budget-spatial-bnb-terminates",
+    "thm-spatial-bnb-gap-certificate-sound",
+    "thm-spatial-bnb-eventual-epsilon-termination",
+    "alg-bounded-mixed-integer-branch-and-bound",
+    "thm-bounded-mixed-integer-gap-certificate-sound",
+    "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+    "cex-invalid-spatial-lower-bound-can-prune-global-minimum"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-certified-spatial-branch-and-bound",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "locus": "Definition: lower-bound comparisons and split selection",
+      "reason": "An empty-box proof may omit ell, so the former minimum selection on all nonclosed leaves was undefined. Certified-empty leaves are now retained with proofs and excluded from all comparisons and selection; evaluated leaves not certified empty must supply finite bounds.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "no-update-required",
+      "id": "alg-certified-spatial-branch-and-bound",
+      "reason": "All seven direct item dependency/reference consumers are draft members of the frozen frontier. The only page reference is their draft owning page; no published or outside-frontier consumer was found.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_item_paths": [
+      "items/alg-certified-spatial-branch-and-bound.md"
+    ],
+    "changed_metadata_paths": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-69.proof-contracts.json"
+    ],
+    "definition_change": {
+      "before_sha256": "9b98d60cc1d80793c2b9795ef448cb222a5ef05a59564bf4c6bb3bac4c13f406",
+      "after_sha256": "f3d8e42c1b271da90e9c238d4de920c0d30a18e997e25cc30da9ad4e34d871e2",
+      "before_guard_sha256": "f81ddebca346a9523959e80086d9e25ce707c675b0c0ad348920ef517172f444",
+      "other_clarifications": "Initialize absent-incumbent U=+infinity explicitly and call the geometric children closed subboxes, preserving the certificate-only meaning of closed leaves."
+    },
+    "consumer_reviews": [
+      {
+        "id": "thm-finite-budget-spatial-bnb-terminates",
+        "path": "items/thm-finite-budget-spatial-bnb-terminates.md",
+        "affected_use": "Facts F1 and Proof 1.1–2.1 charge every report and require a declared next action.",
+        "disposition": "unaffected",
+        "reason": "The candidate set now contains only finite-bounded leaves not certified empty. If all remaining leaves closed with finite U, their minimum would already certify the gap; if U is infinite no finite bound closes. Thus selection is defined and each continuation consumes a counted call.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      },
+      {
+        "id": "thm-spatial-bnb-gap-certificate-sound",
+        "path": "items/thm-spatial-bnb-gap-certificate-sound.md",
+        "affected_use": "Facts F1 and Proof 1.1–3.1 use terminal-leaf coverage and bounds on leaves containing feasible points.",
+        "disposition": "unaffected",
+        "reason": "Empty leaves remain in the coverage ledger with proofs and contain no feasible point. Every feasible point is covered by a leaf contributing a valid lower bound, so L<=f(x) and the existing gap argument remains valid.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      },
+      {
+        "id": "thm-spatial-bnb-eventual-epsilon-termination",
+        "path": "items/thm-spatial-bnb-eventual-epsilon-termination.md",
+        "affected_use": "Facts F6 and Proof 2.1–5.1 use least-bound branching, closure thresholds, exact midpoint witnesses and shrinking unconstrained branches.",
+        "disposition": "unaffected",
+        "reason": "For C=D0 each geometric box is nonempty, so no sound empty-box proof occurs. Lower-bound, midpoint, tie and bisection instructions are unchanged; the infinite-branch contradiction is unaffected.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      },
+      {
+        "id": "alg-bounded-mixed-integer-branch-and-bound",
+        "path": "items/alg-bounded-mixed-integer-branch-and-bound.md",
+        "affected_use": "Definition final paragraph invokes the spatial algorithm separately on each fixed integer assignment and aggregates complete continuous ledgers.",
+        "disposition": "unaffected",
+        "reason": "The fallback already excludes certified-empty leaves from lower-bound requirements and the global minimum and returns infeasible before an empty minimum. Retaining emptiness proofs and skipping those leaves is exactly the required subcall interface.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      },
+      {
+        "id": "thm-bounded-mixed-integer-gap-certificate-sound",
+        "path": "items/thm-bounded-mixed-integer-gap-certificate-sound.md",
+        "affected_use": "Facts F3 and Proof 1.1–2.1 use coverage and retained empty-box proofs from fixed-assignment spatial ledgers.",
+        "disposition": "unaffected",
+        "reason": "Retaining empty leaves preserves box coverage; certified emptiness excludes feasible points. Every feasible pair still lies in a bounded fallback leaf and the minimum of their bounds is pointwise valid.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      },
+      {
+        "id": "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+        "path": "items/ex-multimodal-polynomial-spatial-bnb-gap-certificate.md",
+        "affected_use": "Given and Verification 1.2–3.1 execute the unconstrained quartic at the root and two midpoint children with N=3.",
+        "disposition": "unaffected",
+        "reason": "No leaf is empty. Root bound -2 and witness 0 require a split; child bounds -1 and midpoint values -3/16 give U-L=13/16<9/10 exactly as before.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      },
+      {
+        "id": "cex-invalid-spatial-lower-bound-can-prune-global-minimum",
+        "path": "items/cex-invalid-spatial-lower-bound-can-prune-global-minimum.md",
+        "affected_use": "Given and Verification 1.1–2.1 intentionally substitute an invalid root lower bound for f(x)=x.",
+        "disposition": "unaffected",
+        "reason": "The nonempty root still returns the deliberately spurious zero gap from ell=U=1/2. The procedure has no validity detector; it requires oracle certificates. The counterexample continues to violate that stated hypothesis.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      }
+    ],
+    "page_reviews": [
+      {
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/global-optimization-and-certified-branch-and-bound.md",
+        "affected_use": "The item inventory lists the algorithm and the first paragraph promises valid lower bounds, empty-box proofs, explicit statuses and certified gaps.",
+        "disposition": "unaffected",
+        "reason": "The repair defines the missing execution branch without changing those page promises."
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-69.proof-contracts.json --items alg-certified-spatial-branch-and-bound --strict",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-certified-spatial-branch-and-bound.md --json",
+        "exit_code": 0,
+        "result": "not-applicable; 0 checked proofs, 0 failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-certified-spatial-branch-and-bound.md --json",
+        "exit_code": 0,
+        "result": "1 checked, 0 errors, 0 warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-certified-spatial-branch-and-bound.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-69.proof-contracts.json --items alg-certified-spatial-branch-and-bound,thm-finite-budget-spatial-bnb-terminates,thm-spatial-bnb-eventual-epsilon-termination,thm-spatial-bnb-gap-certificate-sound,thm-bounded-mixed-integer-gap-certificate-sound --strict",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 5/5 checked after refreshing quotation mirrors"
+      }
+    ],
+    "unresolved_mathematics": [],
+    "next_action": "Controller collection, ordinary frontier-owner effect routing, and later independent rejudgment remain owed; this report grants no independent acceptance or certification.",
+    "metadata_repairs": "Under the shared acquire/reread/edit/check/release lock, updated only the assigned algorithm empty/nonempty-choice boundary evidence and four exact Definition quotation mirrors used by the examined unchanged consumers.",
+    "local_prerequisites": [
+      "items/def-spatial-global-optimization-problem.md: Definition (finite closed boxes, constrained feasible sets, real infimum)",
+      "items/def-spatial-box-bound-certificate.md: Definition (optional report fields, pointwise finite lower bounds, certificate-only closure)"
+    ]
+  }
+}

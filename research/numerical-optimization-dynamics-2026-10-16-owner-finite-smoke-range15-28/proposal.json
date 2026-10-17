@@ -1,0 +1,116 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "recorded_at": "2026-10-16T11:20:03.331600+00:00",
+  "canonical_applied": false,
+  "code_executed": false,
+  "fixture_checks_executed": false,
+  "selftest_executed": false,
+  "source_read": "All three complete current source claims/Facts/Verification read.",
+  "sharedcore": "../numerical-optimization-dynamics-2026-10-16-owner-finite-smoke-core-rosenbrock/numerical-core.mjs",
+  "export": "numericalSparseChecks",
+  "key": "numerical-sparse-fixture",
+  "enum": [
+    "three-leaf-star-ordering-fill",
+    "two-by-two-pivot-example",
+    "one-vertex-dirichlet-poisson-grid"
+  ],
+  "empty_parameters": "Runs bounded all3suite; no expected-only cannedpass.",
+  "invalid_parameters": "Unknownfixture, unknownkeys and unsupported exact boundedparams return ok:false.",
+  "operations": [
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-16.proof-contracts.json",
+      "item": "ex-star-orderings-produce-different-sparse-fill",
+      "field": "finite_smoke",
+      "before": [
+        {
+          "check": "three-leaf-star-ordering-fill",
+          "parameters": {
+            "m": 3,
+            "t": "1/(2 sqrt(3))"
+          },
+          "asserts": "Leaf-first ordering inserts 0 fill edges; center-first inserts binom(3,2)=3, and the center Schur complement has off-diagonal entries -t^2=-1/12 != 0.",
+          "claim": "Direct finite count for the smallest allowed star verifies the ordering-dependent symbolic fill and a nonzero numerical Schur pattern.",
+          "checked_in": "steps 1.2-2.1"
+        }
+      ],
+      "after": [
+        {
+          "check": "numerical-sparse-fixture",
+          "parameters": {
+            "m": 3,
+            "t": "1/(2 sqrt(3))",
+            "fixture": "three-leaf-star-ordering-fill"
+          },
+          "asserts": "In leaf-first order, elimination adds no fill. In center-first order, symbolic elimination adds every edge between leaves, and the actual Cholesky Schur complement has all those entries nonzero.",
+          "claim": "Direct finite count for the smallest allowed star verifies the ordering-dependent symbolic fill and a nonzero numerical Schur pattern.",
+          "checked_in": "steps 1.2-2.1"
+        }
+      ],
+      "source": "items/ex-star-orderings-produce-different-sparse-fill.md",
+      "exact_assertion_present": true
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-16.proof-contracts.json",
+      "item": "ex-nonsingular-indefinite-requires-two-by-two-pivot",
+      "field": "finite_smoke",
+      "before": [
+        {
+          "check": "two-by-two-pivot-example",
+          "parameters": {
+            "dimension": 2,
+            "theta": "any value in (0,1]"
+          },
+          "asserts": "det(A)=-1, A has eigenvalues 1 and -1, both scalar diagonal pivots are 0, and for D=A the inverse-block threshold left side is the zero vector.",
+          "claim": "Exact 2x2 arithmetic verifies nonsingularity, indefiniteness, rejection of both 1x1 pivots, and acceptance of the declared 2x2 pivot.",
+          "checked_in": "steps 1.1-2.1"
+        }
+      ],
+      "after": [
+        {
+          "check": "numerical-sparse-fixture",
+          "parameters": {
+            "dimension": 2,
+            "theta": "any value in (0,1]",
+            "fixture": "two-by-two-pivot-example"
+          },
+          "asserts": "Every one-by-one diagonal pivot test fails, while the declared two-by-two pivot passes and gives an exact block $LDL^*$ factorization.",
+          "claim": "Exact 2x2 arithmetic verifies nonsingularity, indefiniteness, rejection of both 1x1 pivots, and acceptance of the declared 2x2 pivot.",
+          "checked_in": "steps 1.1-2.1"
+        }
+      ],
+      "source": "items/ex-nonsingular-indefinite-requires-two-by-two-pivot.md",
+      "exact_assertion_present": true
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-16.proof-contracts.json",
+      "item": "ex-two-dimensional-poisson-nested-dissection-cost",
+      "field": "finite_smoke",
+      "before": [
+        {
+          "check": "one-vertex-dirichlet-poisson-grid",
+          "parameters": {
+            "k": 1
+          },
+          "asserts": "The grid has one vertex and no edges, so A_1=[4] and x^T A_1 x=4x^2; the ordering and Cholesky factor each have one entry.",
+          "claim": "The smallest grid checks the positive-definite energy identity and the separately stated one-pivot cost case.",
+          "checked_in": "steps 1.1-2.1"
+        }
+      ],
+      "after": [
+        {
+          "check": "numerical-sparse-fixture",
+          "parameters": {
+            "k": 1,
+            "fixture": "one-vertex-dirichlet-poisson-grid"
+          },
+          "asserts": "For $k=1$, the matrix and factor each have one entry.",
+          "claim": "The smallest grid checks the positive-definite energy identity and the separately stated one-pivot cost case.",
+          "checked_in": "steps 1.1-2.1"
+        }
+      ],
+      "source": "items/ex-two-dimensional-poisson-nested-dissection-cost.md",
+      "exact_assertion_present": true
+    }
+  ],
+  "preservation": "Only three finite_smoke fields proposed. Originalparameters/claims/checked_in retained, with fixtureselector added and exact sourceassertions. All boundaries/derivations/quotes/smokehistory preserved in fullbefore. Root owns registrymerge, execution and canonicalapply."
+}

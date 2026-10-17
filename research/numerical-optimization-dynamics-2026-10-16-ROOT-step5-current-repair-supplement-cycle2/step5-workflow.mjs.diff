@@ -1,0 +1,92 @@
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -13,6 +13,7 @@
+ import { MODELS } from './models.mjs';
+ import { supportingQuoteHistory } from './step5-quote-history.mjs';
+ import { loadInitialMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
++import { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';
+ import { verdictIsCurrent } from './judge-currency.mjs';
+ import { gateDiagnostics } from './step5-gate-diagnostics.mjs';
+ import { FATAL_TYPES } from './step5-adjudication-compat.mjs';
+@@ -1062,7 +1063,7 @@
+   return {pack_sha256:digest(pack),resolved,evidence,path,[supplierRepairSeal]:true};
+ }
+ 
+-export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,operationalSupplement=null,supplierRepairs=null}={}) {
++export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,currentRepairs=null,operationalSupplement=null,supplierRepairs=null}={}) {
+   const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
+   requireValue(!ownerSupplement||(root&&ownerSupplement[ownerSupplementSeal]===true
+     &&ownerSupplement.pack_sha256===digest(pack)),'owner supplement must pass native guarded loading');
+@@ -1070,8 +1071,15 @@
+     &&operationalSupplement.pack_sha256===digest(pack)),'unvalidated operational supplement');
+   requireValue(!supplierRepairs||(root&&supplierRepairs[supplierRepairSeal]===true
+     &&supplierRepairs.pack_sha256===digest(pack)),'unvalidated supplier repair supplement');
+-  const ownerReviews=new Map((ownerSupplement?.reviews??[]).map(row=>[row.id,row]));
+-  const ownerDecisions=new Map((ownerSupplement?.decisions??[]).map(row=>[key(row),row]));
++  requireValue(!currentRepairs||(root&&currentRepairs[ownerSupplementSeal]===true
++    &&currentRepairs.pack_sha256===digest(pack)),'unvalidated current-root repair supplement');
++  const ownerReviews=new Map(),ownerDecisions=new Map();
++  for(const row of [...(ownerSupplement?.reviews??[]),...(currentRepairs?.reviews??[])]){
++    requireValue(!ownerReviews.has(row.id)||digest(ownerReviews.get(row.id))===digest(row),'conflicting coexisting current root reviews');ownerReviews.set(row.id,row);
++  }
++  for(const row of [...(ownerSupplement?.decisions??[]),...(currentRepairs?.decisions??[])]){
++    requireValue(!ownerDecisions.has(key(row))||digest(ownerDecisions.get(key(row)))===digest(row),'conflicting coexisting original-classification decisions');ownerDecisions.set(key(row),row);
++  }
+   for(const unit of pack.units) {
+     const report=reports.find(r=>String(r.unit)===unit);
+     if(!report||report.run!==pack.run||report.phase!==pack.phase||report.round!==pack.round||report.input_sha256!==digest(pack)) { errors.push(`missing or mismatched report ${unit}`);continue; }
+@@ -1299,6 +1307,11 @@
+   // The collection's post snapshot below always describes actual current bytes.
+   if(metadataHistory)Object.assign(reported,metadataHistory.historicalGuards);
+   const ownerSupplement=loadOwnerSupplement(root,pack,reports,current,items);
++  const currentRepairPath=join(workflowDir(root,run),`${phase}-${round}-owner-current-repairs.json`);
++  const currentRepairs=existsSync(currentRepairPath)?{
++    ...loadOwnerCurrentRepairs(root,pack,reports,current,items,read(currentRepairPath),{matchesReview:review=>reviewContexts(items).matches(review,current)}),
++    [ownerSupplementSeal]:true,
++  }:null;
+   const operationalSupplement=loadOperationalSupplement(root,pack,reports,current);
+   const supplierRepairs=loadSupplierRepairs(root,pack,reports,current,items);
+   if(deferImpactClosure) {
+@@ -1308,10 +1321,10 @@
+     const assigned=new Set(Object.values(pack.assignments).flat());
+     for(const row of reports.flatMap(report=>report.reviews??[]))if(assigned.has(row.id)&&/^[a-f0-9]{64}$/.test(row.post_sha256??''))reported[row.id]=row.post_sha256;
+   }
+-  const result=validateReports(pack,reports,reported,{root,ownerSupplement,operationalSupplement,supplierRepairs});
++  const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs});
+   if(result.errors.length)throw Error(result.errors.join('\n'));
+   const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
+-  Object.assign(evidence,ownerSupplement?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{});
++  Object.assign(evidence,ownerSupplement?.evidence??{},currentRepairs?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{});
+   verifyEvidence(evidence);
+   const creationAuthors=new Map();
+   for(const unit of pack.units) {
+@@ -1396,6 +1409,17 @@
+       rejection:ownerSupplement.rejection,decision:ownerSupplement.decisions[0],completed_at:ownerSupplement.completed_at,
+       supplement:ownerSupplement.path,supplement_sha256:evidence[ownerSupplement.path],
+       reviewed_ids:[...ownerSupplement.ids],supporting_evidence:ownerSupplement.supporting_evidence};
++  }
++  if(currentRepairs){
++    receipt.owner_current_repairs=currentRepairs.path;
++    receipt.native_current_repair_reviews=reports.flatMap(report=>report.reviews).filter(review=>currentRepairs.ids.has(review.id));
++    receipt.native_current_repair_decisions=reports.flatMap(report=>report.decisions).filter(decision=>currentRepairs.rejections.some(rejected=>key(decision)===key(rejected)));
++    receipt.native_current_repair_origins=currentRepairs.origin_rows;
++    receipt.root_current_reviews=currentRepairs.reviews;
++    receipt.root_current_repair_resolution={reviewed_by:'root',ids:currentRepairs.entries.map(entry=>entry.id),
++      repairer_identity:currentRepairs.repairer_identity,repair_evidence:currentRepairs.repair_evidence,completed_at:currentRepairs.completed_at,
++      root_interface_changes:currentRepairs.root_interface_changes,examined_ids:[...currentRepairs.ids],
++      native_execution_coverage_adopted:false,native_finding_synthesized:false};
+   }
+   receipt.restated=restatedIds(pack,result.changed,statementHashes(root,run));
+   const afterStatements=statementHashes(root,run);
+@@ -1418,6 +1442,11 @@
+     receipt.downstream=[...new Set([...receipt.downstream,...receipt.owner_downstream])];
+     receipt.owner_resolution.examined_downstream=receipt.owner_downstream;
+     if(ownerSupplement.version===3)receipt.owner_resolution.extra_supplier=ownerSupplement.required_supplier;
++  }
++  if(currentRepairs){
++    const primary=new Set(currentRepairs.entries.map(entry=>entry.id));
++    receipt.root_current_downstream=[...currentRepairs.ids].filter(id=>!primary.has(id));
++    receipt.downstream=[...new Set([...receipt.downstream,...receipt.root_current_downstream])];
+   }
+   const discoveries=receipt.downstream.filter(id=>!frontier.has(id)&&!direct.some(row=>row.id===id)&&!receipt.restated.includes(id));
+   const uses=Object.assign({},...reports.map(row=>row.downstream_uses??{}));

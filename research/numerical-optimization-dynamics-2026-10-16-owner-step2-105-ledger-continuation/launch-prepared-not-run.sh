@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# PREPARED ONLY: root must authorize launch and recheck original session writer lock.
+cd /home/lazyinspirit/Projects/prestige-math-library
+node tools/dispatch.mjs --role scope-repairer --brief briefs/scope-repairer.md --task research/numerical-optimization-dynamics-2026-10-16-owner-step2-105-ledger-continuation/task.md --label owner-scope-105-ledger-followup --run numerical-optimization-dynamics-2026-10-16 --covers 105 --timeout 14400 --attempt 1 --output-schema briefs/schemas/batch-scope-review.json --result-artifact research/numerical-optimization-dynamics-2026-10-16-owner-step2-105-ledger-continuation/proposal-report.json --profile gpt-6-luna-max --session-home research/numerical-optimization-dynamics-2026-10-16-scope-review/batch-105/scope-repairer-session --resume-session 01a143f4-8644-70d0-9830-831380747220 --var run=numerical-optimization-dynamics-2026-10-16 --var i=105 --var output=research/numerical-optimization-dynamics-2026-10-16-owner-step2-105-ledger-continuation/acceptance-missing

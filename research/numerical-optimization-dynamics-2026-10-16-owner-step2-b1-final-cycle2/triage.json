@@ -1,0 +1,78 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": 1,
+  "at": "2026-10-16T09:12:20.048524+00:00",
+  "cycle": 2,
+  "original_session": "01a143c6-8ad3-7732-b18f-bd6f8c23abe8",
+  "original_home": "research/numerical-optimization-dynamics-2026-10-16-scope-review/batch-1/scope-repairer-session",
+  "prior_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-step2-b1-continuation/continuation-result.json",
+  "prior_findings": [
+    {
+      "id": "alg-finite-budget-francis-schur-reduction",
+      "type": "prerequisite",
+      "reason": "Definition's common right-update paragraph and steps 1/4 append P(v)=I-2vv*/(v*v) without excluding an identity formation. A zero real target returns the identity marker with v=0; the complex wrapper also permits a zero-column identity return. Example: Hessenberg initialization of a diagonal 3-by-3 matrix encounters a zero target. Proposed repair: before each real/complex formation, including external polynomial vectors, branch on zero target; copy the affected matrix panels, skip both updates, append I, and record zero arithmetic coefficient. Only a nonidentity successful formation may evaluate P(v). Preserve deflation bookkeeping. Qualify alg-complex-scaled-householder-reflector-step Proof 1.2's nonzero-vector argument as applying to its nonzero formation branch. Then recheck the concrete Francis certificate, delegated Schur callers and operation-count theorem listed below."
+    },
+    {
+      "id": "thm-computed-full-rank-least-squares-backward-stability",
+      "type": "local",
+      "reason": "Statement's final 20gamma clause remains ambiguous, and Proof 3.1 proves only the explicit matrix coefficient beta_Q+gamma_(n+3)(1+beta_Q). Replacing gamma by 20gamma proves beta_Q+20gamma_(n+3)(1+beta_Q), not a raw total bound 20gamma_(n+3). The controlling NA-02 design in plan-numerical-linear-track.md and linear-audit.md specifies the beta_Q route and does not require a raw total 20gamma bound. Proposed repair: retain all explicit perturbation, alternative RHS-evaluation and nonsingularity conclusions; replace the ambiguous sentence by the explicitly weaker matrix coefficient beta_Q+20gamma_(n+3)(1+beta_Q), leaving the RHS coefficient beta_b explicit. If the owner instead intends a raw total 20gamma promise, it needs an additional proved inequality under stated hypotheses. No counterexample to that stronger mathematical claim is asserted here."
+    },
+    {
+      "id": "alg-bounded-mixed-precision-iterative-refinement",
+      "type": "scope",
+      "reason": "The counter initialization occurs after the 'For each k=0,...,N' residual paragraph and before the status tests, so the literal loop resets the preceding residual to undefined on every iteration. The successful-stagnation branch cannot then be reached. Proposed repair: move initialization of c_stag and preceding-residual storage before the iteration loop, explicitly retain them across iterations, and define c_stag as the number of consecutive equalities between adjacent computed residual vectors. This preserves the approved finite stagnation status and its limited certificate. The error recurrence remains conditional on accepted residual/update certificates and does not require stagnation."
+    },
+    {
+      "id": "thm-kahan-and-neumaier-finite-error-identities",
+      "type": "local",
+      "reason": "The Neumaier identity and Proof 1.2 incorrectly retain epsilon_i^t. Substitution gives t_i+a_i=s_(i-1)+x_i+epsilon_i^q+epsilon_i^a: the leading-sum rounding error cancels. The assigned binary64 example (1,2^-53,-1) has epsilon_2^t=-2^-53 and all other displayed local errors zero, yet returns the exact sum, contradicting the stated identity. Proposed repair: remove epsilon_i^t from the Neumaier exact identity and its telescoping proof. Preserve the Kahan identity and the existing conservative u sum P_i plus final-rounding bound; the latter still follows by bounding the remaining errors and retaining its extra nonnegative allowance. Recheck ex-neumaier-recovers-low-order-term-after-cancellation and the A-page summary; its numerical calculation remains valid."
+    },
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "type": "local",
+      "reason": "The augmented matrix construction and Gauss-Newton call precede the attempt loop, while rejection changes lambda and continues. The instructions do not explicitly recompute the step for the new damping, although the large-damping lemma and stationarity theorem require that solve on every trial. Proposed repair: put construction of A_lambda, s_lambda and the solver call at the beginning of each attempt using the current lambda. Also perform the predicted-decrease test for every returned candidate, including p=0; the present 'For a nonzero trial' wording leaves pred undefined for a zero computed candidate without a zero-gradient certificate. Keep exact-solve convergence separate from computed-candidate statuses. Recheck the large-damping lemma, global stationarity theorem and one-trial rank-deficient example afterward."
+    },
+    {
+      "id": "lem-rosenbrock-euler-local-defect",
+      "type": "prerequisite",
+      "reason": "This lemma's F1/Proof 1.1, lem-rosenbrock-euler-step-map-lipschitz F1, thm-rosenbrock-euler-global-first-order F1/F2, thm-rosenbrock-euler-a-l-stable F1, thm-rosenbrock-euler-one-newton-step-for-backward-euler F1, and ex-rosenbrock-euler-stiff-linear-damping F1 treat the rounded algorithm as an exact stage solve whenever the shifted matrix is invertible. Its current contract returns residual-certified approximations or representation/failure statuses; invertibility supplies neither an exact returned solve nor success. The complex scalar use in the older stability theorem also exceeds the real backend's domain. Proposed repair: route these exact-method claims through def-rosenbrock-euler-step-map with gamma=1, explicitly use exact stage equations, and prove the scalar complex extension algebraically. For thm-rosenbrock-euler-global-first-order's sharper C0=FL(B+1/2), use the autonomous specialization of lem-rosenbrock-euler-local-defect-and-residual-error with zero residual, delta=0 and M1=LF, or author the integral remainder giving LFh^2/2; its presently cited older lemma supplies only FL(B+1). Do not attach these exact conclusions to general rounded outputs. thm-rosenbrock-euler-scalar-a-and-l-stability's core proof already uses the exact definition, but its F2 also needs this qualification."
+    },
+    {
+      "id": "ex-two-stage-rosenbrock-factorization-reuse",
+      "type": "local",
+      "reason": "The prior acceptance is superseded. Proof 1.1's assertion that every nonzero intermediate belongs to the listed values through magnitude 4 is false during RHS replay: v=2 and RHS component -4 produce dot -8, and the update also uses magnitude 8. The stated format need not include 8 in its normal range. Proposed repair: explicitly require the displayed dyadic values through +/-8 to be normal and update the finite-intermediate verification. A sufficiently precise binary format with maximum binade [4,8) satisfies the current listed-value and roundoff hypotheses but rejects the exact intermediate -8, so unconditional success under the present hypotheses is unjustified. Recheck both RHS replays and residual allowances; the operation-count proposition remains conditional on success."
+    },
+    {
+      "id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+      "type": "prerequisite",
+      "reason": "The input declares arbitrary real K,b, but the invoked Householder procedure and residual certificate require stored entries. The rounded triangular factors and transformed RHS meet the repaired substitution lemma's stored-entry premise; the missing premise is at entry to the factorization and residual evaluation. Proposed repair preserving the intended-data certificate: add an exact storage-admissibility check for K,b before QR, returning numerical-failure when unavailable, so accepted stored values equal the intended K,b. Alternatively, a rounded conversion requires explicit matrix/RHS conversion-defect allowances before claiming the original-system residual bound. Recheck the SQP soundness theorem and both FE active-set consumers after this source repair."
+    },
+    {
+      "id": "ex-nonzero-residual-gauss-newton-is-only-linear",
+      "type": "local",
+      "reason": "Verification 1.1 contains the false intermediate equality J(x)^Tr(x)=x+3x/2+x^3/2=3x/2+x^3/2. Replace the middle expression by x+x/2+x^3/2. The final gradient, update formula, contraction calculation and linear-rate conclusion are otherwise consistent with the exact Gauss-Newton supplier."
+    }
+  ],
+  "current_candidate_source_targets": [
+    "items/alg-bounded-mixed-precision-iterative-refinement.md",
+    "items/thm-kahan-and-neumaier-finite-error-identities.md",
+    "items/alg-finite-budget-francis-schur-reduction.md",
+    "items/alg-complex-scaled-householder-reflector-step.md",
+    "items/lem-rosenbrock-euler-local-defect.md",
+    "items/lem-rosenbrock-euler-step-map-lipschitz.md",
+    "items/thm-rosenbrock-euler-global-first-order.md",
+    "items/thm-rosenbrock-euler-a-l-stable.md",
+    "items/thm-rosenbrock-euler-one-newton-step-for-backward-euler.md",
+    "items/ex-rosenbrock-euler-stiff-linear-damping.md",
+    "items/thm-rosenbrock-euler-scalar-a-and-l-stability.md",
+    "items/ex-two-stage-rosenbrock-factorization-reuse.md",
+    "items/alg-sqp-finite-precision-kkt-qr-solve-and-residual-check.md"
+  ],
+  "check_only_already_root_repaired": [
+    "items/thm-computed-full-rank-least-squares-backward-stability.md",
+    "items/ex-nonzero-residual-gauss-newton-is-only-linear.md"
+  ],
+  "root_lane_note": "CanonicalwriteallowlistEMPTY. Returnreviewableexactreplacements/proofs forrootapproval; rootlaunchonly, no newmathreviewer. Preserveallnativeoriginalhistory andcurrentrootmetadata.",
+  "before_archive": "research/numerical-optimization-dynamics-2026-10-16-owner-step2-b1-final-cycle2/before-proposal",
+  "guard_semantics": "Archive containsactualCURRENTfullbytes. Sourcesdiffer fromcycle1becausehonestroot59/native74/root33repairs, not an allegedunchangedhistoricalsnapshot. Rebaseonactualcurrentifrootknownworklandsbeforelaunch."
+}

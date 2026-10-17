@@ -1,0 +1,1 @@
+Complete original batch99 supplier-consumer duty read-only for exact omissions in triage.json. Preserve all current source. Return structured new owner completion evidence; do not edit native reports or launch controls.

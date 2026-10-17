@@ -1,0 +1,90 @@
+--- v1/items/lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order.md
++++ v2/items/lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order.md
+@@ -15,6 +15,19 @@
+   - thm-chain-rule-for-total-derivatives
+   - thm-cauchy-schwarz-and-the-euclidean-norm
+ proof_strategy: direct
++provenance:
++  statement: ai-altered
++  proof: ai-generated
++verification:
++  precheck: pending
++sources:
++  references:
++    - title: "William W. Hager, Runge-Kutta methods in optimal control and the transformed adjoint system"
++      url: "https://people.clas.ufl.edu/hager/files/rk.pdf"
++      locator: "Method context for Runge-Kutta optimal-control derivatives; this local composition argument and its explicit constants are proved here, not quoted as an identical external theorem. No new source reading is claimed."
++    - title: "Michael B. Giles and Niles A. Pierce, An Introduction to the Adjoint Approach to Design"
++      url: "https://www.its.caltech.edu/~niles/refs/giles00.pdf"
++      locator: "Method context for adjoint derivative formulations; the stated local consistency composition and constants are proved here. This does not assert an identical theorem in the source or new source reading."
+ ---
+ 
+ ## Statement
+@@ -56,11 +69,13 @@
+ 
+ ## Facts & Assumptions
+ 
+-[F1] The common-tube flow result gives the actual parameter derivative and its variational equation. The chain rule gives derivatives of compositions of exact or numerical step maps.
++**Given:** The hypotheses and data in the Statement.
+ 
+-[F2] The continuous adjoint pairing identity integrates on each subinterval. The continuous gradient formula and the finite-graph reverse recursion use column gradients.
++[F1] [[lem-parameter-ode-flow-tangent-on-common-tube]], [[thm-chain-rule-for-total-derivatives]]: The common-tube flow result gives the actual parameter derivative and its variational equation. The chain rule gives derivatives of compositions of exact or numerical step maps.
+ 
+-[F3] A recurrence $e_{n+1}\le(1+Lh)e_n+Ch^{p+1}$ has a uniform order-$p$ bound. The looser bound $e^{LT}(C_0+TC)h^p$ is valid also when $L=0$. The same argument applies after reversing a finite index sequence.
++[F2] [[lem-ode-adjoint-pairing-integration-by-parts]], [[thm-continuous-ode-adjoint-gradient-formula]], [[thm-discrete-adjoint-gradient-recursion]]: The continuous adjoint pairing identity integrates on each subinterval. The continuous gradient formula and the finite-graph reverse recursion use column gradients.
++
++[F3] [[lem-discrete-one-step-error-recurrence-bound]]: A recurrence $e_{n+1}\le(1+Lh)e_n+Ch^{p+1}$ has a uniform order-$p$ bound. The looser bound $e^{LT}(C_0+TC)h^p$ is valid also when $L=0$. The same argument applies after reversing a finite index sequence.
+ 
+ [A1] All domains, differentiability, tube, local consistency, stability, Lipschitz, initial-data and terminal-derivative assumptions in the Statement hold uniformly.
+ 
+--- v1/items/lem-explicit-rk-differentiated-stages-give-local-c1-order.md
++++ v2/items/lem-explicit-rk-differentiated-stages-give-local-c1-order.md
+@@ -16,6 +16,19 @@
+   - thm-mean-value-inequality
+   - thm-gronwall-inequality
+ proof_strategy: direct
++provenance:
++  statement: ai-altered
++  proof: ai-generated
++verification:
++  precheck: pending
++sources:
++  references:
++    - title: "William W. Hager, Runge-Kutta methods in optimal control and the transformed adjoint system"
++      url: "https://people.clas.ufl.edu/hager/files/rk.pdf"
++      locator: "Method context for Runge-Kutta optimal-control derivatives; this local composition argument and its explicit constants are proved here, not quoted as an identical external theorem. No new source reading is claimed."
++    - title: "Michael B. Giles and Niles A. Pierce, An Introduction to the Adjoint Approach to Design"
++      url: "https://www.its.caltech.edu/~niles/refs/giles00.pdf"
++      locator: "Method context for adjoint derivative formulations; the stated local consistency composition and constants are proved here. This does not assert an identical theorem in the source or new source reading."
+ ---
+ 
+ ## Statement
+@@ -41,13 +54,15 @@
+ 
+ ## Facts & Assumptions
+ 
+-[F1] Explicit RK stages are finite successive compositions. The ordinary chain and product rules differentiate their actual maps.
++**Given:** The hypotheses and data in the Statement.
+ 
+-[F2] The common-tube flow derivative solves the variational equation. Grönwall bounds its solutions uniformly on a fixed finite time interval.
++[F1] [[def-explicit-runge-kutta-tableau-and-stage-map]], [[thm-chain-rule-for-total-derivatives]], [[thm-chain-sum-product-and-composition-rules-for-banach-derivatives]]: Explicit RK stages are finite successive compositions. The ordinary chain and product rules differentiate their actual maps.
+ 
+-[F3] The order-conditions supplier establishes local order through four for a $C^4$ autonomous augmented field on its stated compact convex tube. The time equation produces the actual stage times because $c_i=\sum_{j<i}a_{ij}$.
++[F2] [[lem-parameter-ode-flow-tangent-on-common-tube]], [[thm-gronwall-inequality]]: The common-tube flow derivative solves the variational equation. Grönwall bounds its solutions uniformly on a fixed finite time interval.
+ 
+-[F4] Uniform local defect and one-step Lipschitz stability imply global error for the same augmented method. The preceding local-C1 lemma independently derives the backward nodal-adjoint estimate and the graph-gradient estimate.
++[F3] [[prop-explicit-rk-order-conditions-through-four]]: The order-conditions supplier establishes local order through four for a $C^4$ autonomous augmented field on its stated compact convex tube. The time equation produces the actual stage times because $c_i=\sum_{j<i}a_{ij}$.
++
++[F4] [[thm-global-error-from-one-step-defect-and-stability]], [[lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order]]: Uniform local defect and one-step Lipschitz stability imply global error for the same augmented method. The preceding local-C1 lemma independently derives the backward nodal-adjoint estimate and the graph-gradient estimate.
+ 
+ [A1] The domain, local flow, derivative, tube, local augmented-defect, initial-data and terminal-data assumptions in the Statement hold. The augmented local tube includes the exact local augmented paths and actual augmented RK stages for all the specified seeds. No tube containment is inferred from a formal order condition alone.
+ 
+@@ -77,7 +92,7 @@
+ 
+ 4.2 There is also a direct augmented global-error interpretation. Along a full trajectory append $C'=\ell$ and the column $G'=S^T\ell_u^T+\ell_\theta^T$, with $C(0)=0,G(0)=0$ and $S'=f_uS+f_\theta$. Differentiating the actual stages shows that its numerical step is exactly
+ $$S^+=A_n^hS+B_n^h,\quad C^+=C+L_n,\quad G^+=G+S^Tc_n^h+d_n^h.$$
+-The analogous exact step uses the exact maps. On bounded $S$ sets, step 1.2 therefore supplies a uniform $O(h^{p+1})$ local defect for $(u,S,C,G)$. Exact $S$ is bounded by Grönwall; numerical $S$ is bounded by the $1+Lh,Mh$ recurrence from step 2.1. The sums defining $C,G$ then bound them uniformly as well. Their stage values are bounded by the same finite-stage induction.
++The analogous exact step uses the exact maps. On bounded $S$ sets, step 1.2 therefore supplies a uniform $O(h^{p+1})$ local defect for $(u,S,C,G)$. Exact $S$ is bounded by Grönwall; numerical $S$ is bounded by the $1+Lh,Mh$ recurrence from step 2.1. The sums defining $C,G$ then bound them uniformly as well. Their stage values are bounded by the same finite-stage induction. [F1, F2, A1, step 1.2, step 2.1]
+ 
+ 4.3 On a common compact convex augmented tube containing these values and joining stage segments, the $C^1$ augmented field has a derivative bound $K$. For two starting augmented states with difference $\delta$, explicit stage differences obey $\delta_i\le\delta+hK\sum_{j<i}|a_{ij}|\delta_j$. Induction gives $\delta_i\le D_i\delta$, where $D_1=1$ and $D_i=1+h_0K\sum_{j<i}|a_{ij}|D_j$. The output difference is at most $(1+hK\sum_i|b_i|D_i)\delta$. Thus the actual augmented method has one-step stability $1+\Lambda h$. The global-error supplier applies, giving order-$p$ error in the actual tangent and accumulated cost derivative as well. This independently exhibits the augmented local-to-global route; step 4.1 additionally supplies the nodal adjoint. [F4, A1, steps 2.1, 4.2]
+ 

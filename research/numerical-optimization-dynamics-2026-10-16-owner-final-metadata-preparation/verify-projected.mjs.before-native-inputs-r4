@@ -1,0 +1,94 @@
+// Independent read-only verification of a prepared packet; never imports/runs reconcile.mjs.
+import fs from 'node:fs';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
+const root=process.cwd(),run='numerical-optimization-dynamics-2026-10-16';
+const base=path.join(root,'research',`${run}-owner-final-metadata-preparation`);
+const {splitFrontmatter,numberedProofSteps,factParagraphs,sourceSectionText}=await import(pathToFileURL(path.join(root,'tools/facts-block.mjs')));
+const {frontmatterList}=await import(pathToFileURL(path.join(root,'tools/frontmatter-list.mjs')));
+const {yaml}=await import(pathToFileURL(path.join(root,'tools/pathway-lib.mjs')));
+const args=process.argv.slice(2),opt=k=>args.includes(k)?args[args.indexOf(k)+1]:null;
+const packetArg=opt('--packet');
+if(!packetArg)throw Error('Usage: node verify-projected.mjs --packet research/R-owner-final-metadata-preparation/NEWPACKET [--report NEWFILE]');
+function owned(p){const a=path.resolve(root,p);if(!a.startsWith(base+path.sep))throw Error('Packet/report must remain under own research preparation directory');return a;}
+const packet=owned(packetArg),read=p=>fs.readFileSync(path.resolve(root,p),'utf8');
+const journal=JSON.parse(read(path.join(packet,'journal.json'))),issues=[],checks=[],inputs=[];
+const eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const sets=(a,b)=>eq([...new Set(a)].sort(),[...new Set(b)].sort());
+function check(ok,detail){checks.push({...detail,ok});if(!ok)issues.push(detail);}
+const cache=new Map();
+function source(id){if(cache.has(id))return cache.get(id);const raw=read(`items/${id}.md`),s=splitFrontmatter(raw),meta=yaml().parse(s.fm),v={...s,meta,steps:numberedProofSteps(s.body),facts:factParagraphs(s.body)};cache.set(id,v);return v;}
+function files(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?files(path.join(dir,e.name)):[path.join(dir,e.name)]);}
+// All bound source/metadata inputs must still be exact current bytes before any apply.
+for(const file of files(path.join(packet,'inputs'))){const rel=path.relative(path.join(packet,'inputs'),file);const ok=fs.existsSync(path.join(root,rel))&&fs.readFileSync(file).equals(fs.readFileSync(path.join(root,rel)));inputs.push({path:rel,ok});if(!ok)issues.push({kind:'input-byte-drift',path:rel});}
+for(const row of journal.rows??[]){
+ if(row.disposition!=='proposed-only')continue;
+ const before=JSON.parse(read(row.before)),after=JSON.parse(read(row.proposed));
+ check(read(row.before)===read(row.target),{kind:'metadata-before-current-byte-guard',target:row.target});
+ if(row.target.endsWith('.pages.json')){
+  for(const page of after){
+   const pg=splitFrontmatter(read(`library/${page.category}/${page.id}.md`));
+   const listed=[...frontmatterList(pg.fm,'items'),...frontmatterList(pg.fm,'examples')];
+   for(const entry of [...(page.items??[]),...(page.examples??[])]){
+    const id=typeof entry==='string'?entry:entry.id,s=source(id);
+    check(listed.includes(id),{kind:'manifest-listed-on-actual-page',target:row.target,id});
+    if(typeof entry==='string'){check(false,{kind:'manifest-string-without-exact-fields',id});continue;}
+    check(eq(entry.deps??[],frontmatterList(s.fm,'deps')),{kind:'manifest-exact-source-deps',target:row.target,id});
+    check(eq(entry.justified_by??[],frontmatterList(s.fm,'justified_by')),{kind:'manifest-exact-source-justification',target:row.target,id});
+    check(entry.kind===s.meta.kind&&entry.title===s.meta.title,{kind:'manifest-kind-title',target:row.target,id});
+   }
+  }
+  continue;
+ }
+ if(!row.target.endsWith('.proof-contracts.json'))throw Error('Unexpected projected metadata target '+row.target);
+ for(const id of after.scope??[]){
+  const s=source(id);if(!s.steps.length)continue;
+  const c=after.contracts?.[id],old=before.contracts?.[id];
+  if(!c){check(false,{kind:'missing-scoped-contract',id});continue;}
+  const records=[...(c.derivations??[]),...(c.routine_steps??[])];
+  check(records.length===s.steps.length&&new Set(records.map(x=>x.step)).size===records.length,{kind:'exact-proof-step-set',id});
+  const routine=new Set((old?.routine_steps??[]).map(x=>x.step));
+  for(const st of s.steps){
+   const matches=records.filter(x=>x.step===st.id),d=matches[0];
+   check(matches.length===1&&d.claim===st.claim,{kind:'whole-source-proof-paragraph',id,step:st.id});
+   check(matches.length===1&&eq(d.inputs,[...new Set(st.inputs)]),{kind:'actual-terminal-input-tags',id,step:st.id});
+   const actualRoutine=(c.routine_steps??[]).some(x=>x.step===st.id);
+   check(actualRoutine===routine.has(st.id),{kind:'preserved-derivation-routine-classification',id,step:st.id});
+   const prior=(routine.has(st.id)?(old?.routine_steps??[]):(old?.derivations??[])).find(x=>x.step===st.id);
+   check(d?.id===(prior?.id??`step-${st.id.replace('.','-')}`),{kind:'preserved-or-mechanical-step-record-id',id,step:st.id});
+  }
+  const expected=[];
+  for(const [fact,f]of s.facts)for(const supplier of new Set(f.links)){
+   const uses=s.steps.filter(st=>explicitTokens(st.text,new Map(s.steps.map(x=>[x.id,x]))).has(fact)).map(st=>st.id);
+   check(uses.length>0,{kind:'labelled-supplier-has-native-explicit-use',id,fact,supplier});
+   expected.push(`${fact}\0${supplier}`);
+   const found=(c.citations??[]).filter(x=>x.fact===fact&&x.source===supplier),cite=found[0];
+   check(found.length===1,{kind:'exact-fact-supplier-link',id,fact,supplier});
+   if(!cite)continue;
+   const section=sourceSectionText(source(supplier).body,cite.source_section);
+   check(Boolean(section?.trim())&&cite.quote===section.trim(),{kind:'whole-current-supplier-section',id,fact,supplier,section:cite.source_section});
+   check(Array.isArray(cite.uses)&&sets(cite.uses,uses),{kind:'citation-uses-native-explicit-token-membership',id,fact,supplier});
+   const declared=[...frontmatterList(s.fm,'deps'),...frontmatterList(s.fm,'justified_by'),...frontmatterList(s.fm,'forward_refs')];
+   check(declared.includes(supplier),{kind:'supplier-declared-in-source',id,fact,supplier});
+  }
+  check(sets((c.citations??[]).map(x=>`${x.fact}\0${x.source}`),expected)&&(c.citations??[]).length===new Set(expected).size,{kind:'complete-no-stale-citation-pair-set',id});
+  for(const key of new Set([...Object.keys(old??{}),...Object.keys(c)]))if(!['derivations','routine_steps','citations'].includes(key))check(eq(old?.[key],c[key]),{kind:'preserved-unrelated-contract-field',id,field:key});
+ }
+}
+// Reject drift during verification as well as drift at entry.
+for(const guard of inputs){const file=path.join(packet,'inputs',guard.path);if(!fs.readFileSync(file).equals(fs.readFileSync(path.join(root,guard.path))))issues.push({kind:'input-changed-during-verification',path:guard.path});}
+const result={version:1,run,at:new Date().toISOString(),mode:'independent-repository-parser projected-metadata verification; no math audit',packet:packetArg,ok:issues.length===0,input_guards:inputs,checks,issues,canonical_writes:0,apply_utilities_executed:false};
+if(opt('--report'))fs.writeFileSync(owned(opt('--report')),JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({ok:result.ok,packet:packetArg,input_guards:inputs.length,checks:checks.length,issues:issues.length,report:opt('--report')??null}));
+process.exitCode=result.ok?0:1;
+
+// Exact native citation-use token grammar from tools/proof-contract.mjs;
+// inline fact mentions count, while derivation.inputs remain actual terminal tags.
+function explicitTokens(text, steps) {
+  const out = new Set();
+  for (const match of text.matchAll(/\b(?:[Ss]teps?\s+)?(\d+\.\d+)\b|\b([FAL]\d+)\b/g)) {
+    if (match[2]) out.add(match[2]);
+    else if (/^steps?\s/i.test(match[0]) || steps.has(match[1])) out.add(match[1]);
+  }
+  return out;
+}

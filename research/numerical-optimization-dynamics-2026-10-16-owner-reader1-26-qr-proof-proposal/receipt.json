@@ -1,0 +1,71 @@
+{
+  "status": "research-only proposed repair; unapplied and unchecked",
+  "confirmed_findings": [
+    {
+      "reader": 1,
+      "supplier": "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+      "locations": [
+        "Proof1.1",
+        "Proof2.1"
+      ],
+      "defects": [
+        "Completion of the arbitrary given orthonormal columns was not licensed.",
+        "Nonzero triangular diagonal was asserted without the kernel/triangular argument."
+      ],
+      "repair": "Name finite-dimensional basis extension and Gram\u2013Schmidt recursion; preserve the given initial columns exactly; prove kerR=kerA=0 and rule out a first zero diagonal by an explicit nonzero kernel vector."
+    },
+    {
+      "reader": 26,
+      "location": "Same reduced-QR Proof1.1",
+      "disposition": "Same confirmed completion gap; one supplier repair resolves both reports, not a second method or item."
+    },
+    {
+      "reader": 1,
+      "supplier": "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+      "location": "Proof1.1",
+      "defect": "Annihilator supplier assumes a nonzero active vector/pair.",
+      "repair": "Identity/skip for zero active column and zero Givens pair; explicit empty-column and full-to-reduced block conventions. Preserve standard dense arithmetic count using a fixed scheduled identity update, with skipped work an optimization."
+    }
+  ],
+  "smallest_missing_prerequisite": {
+    "existing_ids": [
+      "thm-dimension-of-a-linear-subspace",
+      "thm-gram-schmidt-orthonormalisation"
+    ],
+    "actual_interfaces": "First supplies extension of any given independent set in finite dimension without Choice; second gives the explicit recursion, which leaves each initial given orthonormal column unchanged.",
+    "new_items_required": false
+  },
+  "scope_preservation": {
+    "both_public_Statements": "byte-identical",
+    "Definitions": "unchanged",
+    "least_squares": "All real full-column-rank m>=n>=1 matrices, arbitrary given reduced QR, unique minimizer and unsquared spectral condition factor retained.",
+    "general_QR": "Real and complex, rank deficient and zero matrices, full and reduced factors retained; zero-width factors explicitly covered.",
+    "dense_count": "Same leading Householder/Givens counts retained for standard fixed dense triangularization storing Q as transformations. Explicitly forming dense fullQ is additional work; no consumer imports the count as its own rounded-operation budget."
+  },
+  "consumer_review": "13 actual full consumer bodies plus full prerequisite page inspected; exact dispositions in consumer-dispositions.json. Both Statements/Definitions unchanged, so no changed interface requires descendant source edits. Additional54 dependency descendants are listed honestly as metadata-only reachability, not a full-text review claim.",
+  "new_dependency_projection": {
+    "consumer": "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+    "add": [
+      "thm-dimension-of-a-linear-subspace",
+      "thm-gram-schmidt-orthonormalisation"
+    ],
+    "remove": []
+  },
+  "root_followup": [
+    "Review exact before/proposed/diffs, apply source-first if approved.",
+    "Mirror new deps and added L6/L7/changed proof clauses where actual current source contracts/registries cover them; public Statement citation quotes remain unchanged.",
+    "Root controls writer guards, levels, readiness, hashes, any required final explicit layout/precheck and native continuation; none executed here."
+  ],
+  "canonical_files_written": [],
+  "checks_executed": [],
+  "external_full_texts_newly_read": [],
+  "round2_correction": {
+    "confirmed_defect": "Round1 triangular kernel-vector recursion stopped at row1 and could leave row0 unsatisfied under current zero-based coordinates.",
+    "exact_fix": "Declare indices0,...,n-1; solve rows j-1,...,0, empty whenj=0.",
+    "index_check": "For i>j, upper triangularity and v_i=0 make row i zero; rowj is zero because Rjj=0 and later components0; for i<j the corrected recursion enforces every row including0 using nonzero Rii. The QR construction already uses k=0,...,n-1, active rows k,...,m-1 and an identity on firstk rows, so those added ranges are consistent. Completion uses firstn columns and firstn Gram\u2013Schmidt steps without a conflicting coordinate range.",
+    "initial_packet_preserved": "round1-preserved/",
+    "consumer_review_repeated": false,
+    "canonical_writes": false,
+    "checks_executed": []
+  }
+}

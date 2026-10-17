@@ -1,0 +1,241 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "77",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-parareal-propagator-pair",
+      "model": "gpt-6-luna",
+      "context_sha256": "7039c8ae34e86772d1e56b9faf97667a1f6e4fb0a1f0d7b6867532e832f9a335",
+      "outcome": "false_positive",
+      "reason": "False positive: the Definition first fixes deterministic partial maps, and the backward Euler selector supplies data defining each such map. It is required to select exactly one admissible root for each admitted start state; it is not an additional runtime state argument. With interval, ODE and selector fixed, G_n(x) is a single value. The actual backward Euler supplier supplies only a root equation, and the RK supplier only successful microstep maps, precisely as the Definition says. No choice or existence theorem is invoked.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-linear-all-at-once-time-operator",
+      "model": "gpt-6-luna",
+      "context_sha256": "135ac212aae54d8dd2ec00647173ca09e7f8f33a958c320cbea80192297d216b",
+      "outcome": "false_positive",
+      "reason": "False positive: the propagator-pair Definition is parameterized by an arbitrary macro grid, not bound to the fine grid of this separate definition. Set J=N/m and s_j=t_{jm}; on [s_{j-1},s_j] the fine map is the ordered composition of the m fine interval maps and the practical linear coarse map is x mapped to Psi_j x. This instantiates the same abstract definition on the C-point grid; it does not assert Psi_j=G_{jm} on a single fine interval or require composition of the old G maps. Psi_j is freely chosen, and the exact eliminated map is separately supplied by lem-mgrit-exact-coarse-elimination. The first-row absorption of u_0 and the C/F block dimensions are correct.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.mun.ca/smaclachlan/research/mgrit.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-parareal-inexact-sweep-error-ledger",
+      "model": "gpt-6-luna",
+      "context_sha256": "52eeec1c23fafde40f86ab7e0abbf5c4fa649a5a66df3c169664eb07e7616af5",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed fatal logic defect: the supplier constrains exact iterates U, while this Statement does not explicitly put computed V in the Lipschitz set D. Counterexample to the literal stated hypotheses: d=1, N=2, x_0=0, F_0=G_0=G_1=0 on R, F_1(x)=x, D={0}, a=b=0, M=1, eta=0. Fine and exact Parareal trajectories are identically zero, so all inherited hypotheses hold. Take V^0=(0,1,0) and V^1=(0,0,1); their correction defects vanish, but e_2^1=1 while P_2^1+R_2^1=0. A1 adds the missing condition only after the Statement. Repaired by requiring V_n^k in D in the Statement, matching the existing A1 and intended contract.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-mgrit-multilevel-recursive-cycle",
+      "model": "gpt-6-luna",
+      "context_sha256": "42f43c0ec863d58d172fa64cfbb0392d2aa09999326164e5aea63fafef1beba9",
+      "outcome": "false_positive",
+      "reason": "False positive: the input explicitly supplies systems A_ell u_ell=b_ell for every level ell=0,...,L, not merely A_0. Thus each practical coarse matrix A_(ell+1) is already specified. For j>=2 its propagator Psi_(ell,j) is minus its (j,j-1) block; the first-row initial correction is zero and needs no propagator value. Every actual recursive operation uses those supplied matrices: residuals r-Az, child solves, relaxations and transfers. If forward substitution is written with a Psi_(ell,1) symbol, that symbol multiplies z_0=0 and can be set to zero without changing any operation. The instruction to form A_(ell+1) describes its required bidiagonal representation, not a missing selection of the hierarchy. A matrix-input formulation needs no independent propagator-selection rule.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.mun.ca/smaclachlan/research/mgrit.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-parareal-propagator-pair",
+      "disposition": "unaffected",
+      "post_sha256": "c25f24f91d1d5dc7de867ea51a1f677af537809c42265d0a6a503a2fca5715ef",
+      "review_context_sha256": "d51bb1bc6ea74e4dec2f7da94b185e52e92d53e00145060cb9c54a445a7800be",
+      "reason": "False positive: the Definition first fixes deterministic partial maps, and the backward Euler selector supplies data defining each such map. It is required to select exactly one admissible root for each admitted start state; it is not an additional runtime state argument. With interval, ODE and selector fixed, G_n(x) is a single value. The actual backward Euler supplier supplies only a root equation, and the RK supplier only successful microstep maps, precisely as the Definition says. No choice or existence theorem is invoked.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-linear-all-at-once-time-operator",
+      "disposition": "unaffected",
+      "post_sha256": "3ab4778aceb5d36b483163184b0620872db402409d18bc58b221eba7534145f3",
+      "review_context_sha256": "18e682041e73570bfdcaee3c60d7f838cf90b9615ad21283b2f3c6438b7d5b3e",
+      "reason": "False positive: the propagator-pair Definition is parameterized by an arbitrary macro grid, not bound to the fine grid of this separate definition. Set J=N/m and s_j=t_{jm}; on [s_{j-1},s_j] the fine map is the ordered composition of the m fine interval maps and the practical linear coarse map is x mapped to Psi_j x. This instantiates the same abstract definition on the C-point grid; it does not assert Psi_j=G_{jm} on a single fine interval or require composition of the old G maps. Psi_j is freely chosen, and the exact eliminated map is separately supplied by lem-mgrit-exact-coarse-elimination. The first-row absorption of u_0 and the C/F block dimensions are correct.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.mun.ca/smaclachlan/research/mgrit.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-parareal-inexact-sweep-error-ledger",
+      "disposition": "repaired",
+      "post_sha256": "7e04924a6be4dd4f4970c78cfa632fa626776aad39f8de503a6d81da570a2d22",
+      "review_context_sha256": "20bb8dbf3f0e155bdf78841b3d2da7cd4c5d7abff25fa9fd30e025f937f51b8c",
+      "reason": "With V_n^k in D explicit, both differences in step 1.1 are within the stated Lipschitz domain. The triangle inequality yields e_(n+1)^(k+1)<=A e_n^(k+1)+b e_n^k+eta. The initial bounds and simultaneous induction on n give P+R using A>=1 and Pascal identity, including b=0, M=0, eta=0 and k>n with b^0=1. R is nonnegative by its recurrence. The proof is unchanged; this review checks the author repair and is not independent acceptance of it. No new prerequisite or AC is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-mgrit-multilevel-recursive-cycle",
+      "disposition": "unaffected",
+      "post_sha256": "b8901349c67d92b8ad6eebfc22dbea8c86e1ae3d75151624a5a4dd6193b574ab",
+      "review_context_sha256": "7c87b04a33597c2fe6d467f3a6dd5f350f90f183ef18f1cf8dff24c4dc7d1e10",
+      "reason": "False positive: the input explicitly supplies systems A_ell u_ell=b_ell for every level ell=0,...,L, not merely A_0. Thus each practical coarse matrix A_(ell+1) is already specified. For j>=2 its propagator Psi_(ell,j) is minus its (j,j-1) block; the first-row initial correction is zero and needs no propagator value. Every actual recursive operation uses those supplied matrices: residuals r-Az, child solves, relaxations and transfers. If forward substitution is written with a Psi_(ell,1) symbol, that symbol multiplies z_0=0 and can be set to zero without changing any operation. The instruction to form A_(ell+1) describes its required bidiagonal representation, not a missing selection of the hierarchy. A matrix-input formulation needs no independent propagator-selection rule. The full procedure recomputes each child right-hand side from the accumulated correction, starts the child correction at zero, and accumulates its return before the next visit. N_(ell+1)=N_ell/m_ell matches transfer dimensions. F/FCF relaxations and the finite coarsest forward solve are supplied locally; finite positive visit counts and finite levels match its justified_by termination lemma. Outer residual checks cover a zero cycle budget. No contraction follows without a separate bound.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.mun.ca/smaclachlan/research/mgrit.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "cor-parareal-continuous-target-error-decomposition"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-parareal-inexact-sweep-error-ledger",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "status": "fixed",
+      "reason": "Confirmed fatal logic defect: the supplier constrains exact iterates U, while this Statement does not explicitly put computed V in the Lipschitz set D. Counterexample to the literal stated hypotheses: d=1, N=2, x_0=0, F_0=G_0=G_1=0 on R, F_1(x)=x, D={0}, a=b=0, M=1, eta=0. Fine and exact Parareal trajectories are identically zero, so all inherited hypotheses hold. Take V^0=(0,1,0) and V^1=(0,0,1); their correction defects vanish, but e_2^1=1 while P_2^1+R_2^1=0. A1 adds the missing condition only after the Statement. Repaired by requiring V_n^k in D in the Statement, matching the existing A1 and intended contract.",
+      "correction": "Added explicit V_n^k in D membership to the Statement; no proof or prerequisite change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "def-parareal-propagator-pair",
+      "outcome": "false_positive",
+      "reason": "False positive: the Definition first fixes deterministic partial maps, and the backward Euler selector supplies data defining each such map. It is required to select exactly one admissible root for each admitted start state; it is not an additional runtime state argument. With interval, ODE and selector fixed, G_n(x) is a single value. The actual backward Euler supplier supplies only a root equation, and the RK supplier only successful microstep maps, precisely as the Definition says. No choice or existence theorem is invoked.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "def-linear-all-at-once-time-operator",
+      "outcome": "false_positive",
+      "reason": "False positive: the propagator-pair Definition is parameterized by an arbitrary macro grid, not bound to the fine grid of this separate definition. Set J=N/m and s_j=t_{jm}; on [s_{j-1},s_j] the fine map is the ordered composition of the m fine interval maps and the practical linear coarse map is x mapped to Psi_j x. This instantiates the same abstract definition on the C-point grid; it does not assert Psi_j=G_{jm} on a single fine interval or require composition of the old G maps. Psi_j is freely chosen, and the exact eliminated map is separately supplied by lem-mgrit-exact-coarse-elimination. The first-row absorption of u_0 and the C/F block dimensions are correct.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.mun.ca/smaclachlan/research/mgrit.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "alg-mgrit-multilevel-recursive-cycle",
+      "outcome": "false_positive",
+      "reason": "False positive: the input explicitly supplies systems A_ell u_ell=b_ell for every level ell=0,...,L, not merely A_0. Thus each practical coarse matrix A_(ell+1) is already specified. For j>=2 its propagator Psi_(ell,j) is minus its (j,j-1) block; the first-row initial correction is zero and needs no propagator value. Every actual recursive operation uses those supplied matrices: residuals r-Az, child solves, relaxations and transfers. If forward substitution is written with a Psi_(ell,1) symbol, that symbol multiplies z_0=0 and can be set to zero without changing any operation. The instruction to form A_(ell+1) describes its required bidiagonal representation, not a missing selection of the hierarchy. A matrix-input formulation needs no independent propagator-selection rule.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.mun.ca/smaclachlan/research/mgrit.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "no-update",
+      "reason": "The only changed Statement is the inexact Parareal ledger. Its sole direct item consumer is the draft frontier corollary cor-parareal-continuous-target-error-decomposition, whose conditional use remains sound. No published or outside-frontier mathematical use was found by the item/library reference search; no published repair or maintenance finding is proposed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "completed": [
+      "def-parareal-propagator-pair",
+      "def-linear-all-at-once-time-operator",
+      "thm-parareal-inexact-sweep-error-ledger",
+      "alg-mgrit-multilevel-recursive-cycle"
+    ],
+    "pending": [],
+    "evidence_paths": [
+      "items/def-parareal-propagator-pair.md",
+      "items/def-backward-euler-step-equation.md",
+      "items/def-explicit-runge-kutta-tableau-and-stage-map.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-77.proof-contracts.json"
+    ],
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-77.proof-contracts.json --strict --items def-parareal-propagator-pair,def-linear-all-at-once-time-operator,thm-parareal-inexact-sweep-error-ledger,alg-mgrit-multilevel-recursive-cycle --json",
+        "exit_code": 0,
+        "result": "All four assigned contracts pass; no errors or warnings (before repair). No contract edit required by the statement-only repair, since A1 already records comparison-set membership."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-parareal-inexact-sweep-error-ledger.md --json",
+        "exit_code": 0,
+        "result": "1 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-parareal-inexact-sweep-error-ledger.md --json",
+        "exit_code": 0,
+        "result": "1 proof checked; pass, 0 failures."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-77.proof-contracts.json --strict --items thm-parareal-inexact-sweep-error-ledger --json",
+        "exit_code": 0,
+        "result": "Post-repair contract passes with no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-parareal-inexact-sweep-error-ledger.md",
+        "exit_code": 0,
+        "result": "1 item, 3 steps, 0 defects; run after the final item edit."
+      }
+    ],
+    "source_reading": {
+      "url": "https://www.math.mun.ca/smaclachlan/research/mgrit.pdf",
+      "locator": "Sections 2.1-2.4, PDF pages 2-7",
+      "scope": "Read the linear-system construction, practical versus Schur coarse operator, ideal transfers, and the recursive algorithm. The source uses constant time-independent propagators; the varying-block definitions are checked locally by finite matrix algebra."
+    },
+    "statement_change": {
+      "id": "thm-parareal-inexact-sweep-error-ledger",
+      "before": "Let computed iterates $V_n^k$ satisfy",
+      "after": "Let computed iterates $V_n^k\\in D$ satisfy",
+      "scope": "Only the Statement changes; the facts, proof, dependencies, contract and page remain unchanged."
+    },
+    "downstream_examinations": [
+      {
+        "supplier": "thm-parareal-inexact-sweep-error-ledger",
+        "id": "cor-parareal-continuous-target-error-decomposition",
+        "path": "items/cor-parareal-continuous-target-error-decomposition.md",
+        "affected_use": "Statement: Suppose the inexact Parareal ledger gives $\\|V_n^K-x_n\\|\\le P_n^K+R_n^K$; F3 repeats precisely that inequality, and proof 2.1 substitutes it into the triangle inequality.",
+        "invalidated_claim": "None: the corollary assumes the ledger bound itself and does not infer it from weaker hypotheses. Any use of the theorem now includes V in D; the conditional triangle argument is unchanged.",
+        "minimality": "No consumer repair is necessary; its Statement and proof remain valid. No further propagation through this unchanged consumer.",
+        "disposition": "unchanged_sound",
+        "route": "frontier-owner"
+      }
+    ],
+    "page_examinations": [
+      {
+        "path": "library/numerical-differential-equations-and-stochastic-dynamics/parallel-in-time-parareal-and-mgrit.md",
+        "affected_use": "Summary: Under common-set Lipschitz bounds it has a binomial error estimate; any inexact propagation or correction contributes an explicit update defect.",
+        "disposition": "unchanged_sound",
+        "reason": "The summary states the conditional common-set estimate and distinguishes actual update defects; the explicit computed-domain hypothesis preserves that interface."
+      }
+    ],
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "unresolved_obligations": [],
+    "published_consumer_findings": [],
+    "next_action": "Engine collection, frontier-owner consumer routing and independent rejudgment; no judgments or certification were written by this worker."
+  }
+}

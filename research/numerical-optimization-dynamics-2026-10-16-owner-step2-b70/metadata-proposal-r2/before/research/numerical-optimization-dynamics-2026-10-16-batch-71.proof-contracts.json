@@ -1,0 +1,2514 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+    "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+    "lem-wolfe-steps-give-positive-bfgs-curvature",
+    "lem-powell-damping-gives-positive-curvature",
+    "lem-bfgs-trace-determinant-potential-identities",
+    "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+    "thm-full-memory-bfgs-global-linear-convergence",
+    "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+    "lem-full-memory-bfgs-dennis-more-condition",
+    "thm-lbfgs-fixed-memory-linear-convergence",
+    "thm-full-memory-bfgs-local-superlinear-convergence",
+    "ex-bfgs-secant-on-a-strongly-convex-quadratic",
+    "ex-bfgs-powell-damping-after-negative-curvature",
+    "ex-lbfgs-memory-dependent-cost"
+  ],
+  "contracts": {
+    "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "1. **Fundamental theorem, second part, in $\\mathbb{R}^{m}$.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be differentiable at every point of $[a,b]$ as\n   a function on $[a,b]$ ([[def-vector-valued-derivative-and-integral]]), and\n   suppose $f' : [a,b] \\to \\mathbb{R}^{m}$ is integrable. Then\n   $$\\int_a^b f' \\;=\\; f(b) - f(a).$$\n2. **A bounded derivative gives a Lipschitz function.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and differentiable at\n   every point of $(a,b)$, and let $M \\ge 0$ satisfy\n   $\\lVert f'(t)\\rVert_2 \\le M$ for every $t \\in (a,b)$. Then\n   $$\\lVert f(t) - f(s)\\rVert_2 \\;\\le\\; M\\,|t-s| \\qquad \\text{for all } s,t \\in [a,b],$$\n   that is, $f$ is Lipschitz with constant $M$ as a map\n   $([a,b], d_{\\mathbb{R}}) \\to (\\mathbb{R}^{m}, d_2)$\n   ([[def-lipschitz-holder-contraction]], [[lem-real-line-is-a-metric-space]],\n   [[lem-metrics-on-rn]]).",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with",
+          "uses": [
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Convexity gives $z(t)\\in K$. For each point of the compact segment, openness gives a neighborhood on which the path remains in $U$; a finite subcover supplies an open interval containing $[0,1]$ on which the composition is defined. By [F3] and [F4], $t\\mapsto g(z(t))$ is differentiable with derivative $G(z(t))d$, and $\\phi(t):=f(z(t))$ satisfies $\\phi'(t)=g(z(t))^Td$ and $\\phi''(t)=d^TG(z(t))d$. The symmetry of $G$ identifies the Jacobian of $g$ with this Hessian convention. [given, F1, F3, F4, construct]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The operator-norm bound gives $\\|G(z(t))d\\|_2\\le\\Lambda\\|d\\|_2$. Apply [F5] to the vector path $t\\mapsto g(z(t))$ on $[0,1]$ to get $\\|g(u)-g(v)\\|_2\\le\\Lambda\\|d\\|_2$. [given, F5, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Put $q(t):=g(z(t))^Td$. By step 1.1, $q'(t)=d^TG(z(t))d\\ge\\mu\\|d\\|_2^2$. Applying [F6] to $q$ on $[0,1]$ gives $q(1)-q(0)=q'(c)$ for some $c\\in(0,1)$, and hence $(g(u)-g(v))^Td\\ge\\mu\\|d\\|_2^2$. [given, F6, step 1.1, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Define $\\psi(t):=\\phi(t)-\\phi(0)-t\\phi'(0)-\\frac\\mu2t^2\\|d\\|_2^2$. Then $\\psi(0)=\\psi'(0)=0$ and $\\psi''(t)=d^TG(z(t))d-\\mu\\|d\\|_2^2\\ge0$. For each $t\\in(0,1]$, [F6] applied to $\\psi'$ on $[0,t]$ gives $\\psi'(t)-\\psi'(0)=t\\psi''(c_t)\\ge0$; continuity handles $t=0$. A second application of [F6], now to $\\psi$ on $[0,1]$, gives $\\psi(1)-\\psi(0)=\\psi'(c)\\ge0$. Thus $f(u)-f(v)-g(v)^Td\\ge\\frac\\mu2\\|d\\|_2^2$. [given, F6, step 1.1, algebra, choose]",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "F6",
+            "step 1.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $|d^TG(z(t))d|\\le\\|d\\|_2\\|G(z(t))d\\|_2\\le\\Lambda\\|d\\|_2^2$ by [F2], define $\\chi(t):=\\phi(0)+t\\phi'(0)+\\frac\\Lambda2t^2\\|d\\|_2^2-\\phi(t)$. Then $\\chi(0)=\\chi'(0)=0$ and $\\chi''(t)=\\Lambda\\|d\\|_2^2-d^TG(z(t))d\\ge0$. Applying [F6] first to $\\chi'$ on $[0,t]$ and then to $\\chi$ on $[0,1]$ as in step 2.3 gives $\\chi(1)\\ge0$, proving the upper Taylor bound. [given, F2, F6, step 1.1, step 2.3, algebra, choose]",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F6",
+            "step 1.1",
+            "step 2.3",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Under the additional hypotheses on $W$, the path $q(t):=g(v+td)-g(v)-tG(x_*)d$ has derivative $q'(t)=(G(v+td)-G(x_*))d$ by the chain rule. Convexity and the triangle inequality give $\\|v+td-x_*\\|_2\\le(1-t)\\|v-x_*\\|_2+t\\|u-x_*\\|_2\\le\\max\\{\\|u-x_*\\|_2,\\|v-x_*\\|_2\\}$. Therefore $\\|q'(t)\\|_2\\le L_G\\max\\{\\|u-x_*\\|_2,\\|v-x_*\\|_2\\}\\|d\\|_2$. Applying [F5] to $q$ proves the last estimate in the Statement. [given, F3, F4, F5, step 1.1, algebra] ∎",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n≥1 and a nonempty object or strict curvature data; the zero-dimensional case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1–2.2 apply to d=0, where all differences and remainders vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement assumes n≥1 and the steps 1.1, 1.2, 1.3, 2.1, 2.2, 3.1 use dimension-independent formulas; the determinant proof explicitly includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes undefined denominators through SPD and positive-curvature hypotheses, and steps 1.1, 1.2, 1.3, 2.1, 2.2, 3.1 verify the relevant nondegenerate branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 1.2, 1.3, 2.1, 2.2, 3.1 retain the accepted-step, initial, and finite-iteration endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 1.3, 2.1, 2.2, 3.1 use finite constructions and pointwise existence; no infinite family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-71",
+        "notes": "Contracts were derived from final proof steps and exact linked supplier sections. Cross-batch draft suppliers were inspected; their independent acceptance is not claimed."
+      }
+    },
+    "lem-bfgs-updates-preserve-secant-symmetry-and-spd": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bfgs-curvature-pair-and-update-formulas",
+          "source_section": "Definition",
+          "quote": "For **Powell damping**, first set $c:=s^TBs$. If $s^Ty\\ge0.2c$, set $\\widetilde y:=y$. If $s^Ty<0.2c$, set\n$$\n\\theta:=\\frac{0.8c}{c-s^Ty},\n\\qquad\n\\widetilde y:=\\theta y+(1-\\theta)Bs.\n$$\nThe damped BFGS update is the same formula with $y$ replaced by $\\widetilde y$ and $\\rho=(s^T\\widetilde y)^{-1}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $c:=s^TBs>0$. The matrix $B^+$ is symmetric. For any $z$, the first two terms of $z^TB^+z$ satisfy\n$$\nz^TBz-\\frac{(z^TBs)^2}{c}\n=\\min_{\\lambda\\in\\mathbb R}(z-\\lambda s)^TB(z-\\lambda s)\\ge0,\n$$\nbecause completing the square gives the minimum at $\\lambda=(s^TBz)/c$. Equality holds exactly when $z$ is a scalar multiple of $s$. If $z\\ne0$ is such a multiple, the last term $(z^Ty)^2/d$ is strictly positive; if it is not a multiple, the displayed minimum is strictly positive. Hence $B^+$ is SPD. [given, F1, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The matrix $H^+$ is symmetric. For any $z$, put $w:=z-(s^Tz)y/d$. Then\n$$\nz^TH^+z=w^THw+\\frac{(s^Tz)^2}{d}.\n$$\nIf $s^Tz\\ne0$, the second term is positive. If $s^Tz=0$ and $z\\ne0$, then $w=z$ and $z^THz>0$. Thus $H^+$ is SPD. [given, F1, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Substitution of $s$ into the Hessian update gives\n$B^+s=Bs-Bs(s^TBs)/c+y(y^Ts)/d=y$. In the inverse update, $(I-ys^T/d)y=0$, so $H^+y=ss^Ty/d=s$. [F1, algebra]",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $u:=Bs$ and $A:=B-uu^T/c=B^+-yy^T/d$. Since $u^TH=s^T$, we have $AH=I-us^T/c$. Using $B^+s=y$ from step 1.3,\n$$\nB^+H^+=(B^+-yy^T/d)H(I-ys^T/d)+(1/d)ys^T\n=(I-us^T/c)(I-ys^T/d)+(1/d)ys^T=I,\n$$\nbecause $s^Ty=d$. Thus $H^+=(B^+)^{-1}$, since $B^+$ is SPD by step 1.1. [F1, step 1.1, step 1.3, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n≥1 and a nonempty object or strict curvature data; the zero-dimensional case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 1.2, 2.1, 3.1 treat the zero-vector or stationary case where included; otherwise they explicitly assume nonzero curvature data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement assumes n≥1 and the steps 1.1, 1.2, 2.1, 3.1 use dimension-independent formulas; the determinant proof explicitly includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes undefined denominators through SPD and positive-curvature hypotheses, and steps 1.1, 1.2, 2.1, 3.1 verify the relevant nondegenerate branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 1.2, 2.1, 3.1 retain the accepted-step, initial, and finite-iteration endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1, 3.1 use finite constructions and pointwise existence; no infinite family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-71",
+        "notes": "Contracts were derived from final proof steps and exact linked supplier sections. Cross-batch draft suppliers were inspected; their independent acceptance is not claimed."
+      }
+    },
+    "lem-wolfe-steps-give-positive-bfgs-curvature": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "Assume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bfgs-curvature-pair-and-update-formulas",
+          "source_section": "Definition",
+          "quote": "The **secant equations** are $B^+s=y$ and $H^+y=s$ for an undamped pair; for a damped pair they use $\\widetilde y$. An inverse pair $(B,H)$ is **consistent** when $BH=HB=I$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [F2],\n$$\ns^Ty=\\alpha p^T(\\nabla f(x+\\alpha p)-g)\n\\ge\\alpha(c_2-1)g^Tp\n=(1-c_2)\\alpha |g^Tp|.\n$$\nThe last quantity is strictly positive because $\\alpha>0$, $c_2<1$, and $g^Tp<0$. [given, F1, F2, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus $s^Ty>0$, so the curvature denominator used in the BFGS updates is positive and the pair meets the positive-curvature condition of [[def-bfgs-curvature-pair-and-update-formulas]]. [step 1.1, F2] ∎",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n≥1 and a nonempty object or strict curvature data; the zero-dimensional case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 2.1 treat the zero-vector or stationary case where included; otherwise they explicitly assume nonzero curvature data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement assumes n≥1 and the steps 1.1, 2.1 use dimension-independent formulas; the determinant proof explicitly includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes undefined denominators through SPD and positive-curvature hypotheses, and steps 1.1, 2.1 verify the relevant nondegenerate branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 2.1 retain the accepted-step, initial, and finite-iteration endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1 use finite constructions and pointwise existence; no infinite family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-71",
+        "notes": "Contracts were derived from final proof steps and exact linked supplier sections. Cross-batch draft suppliers were inspected; their independent acceptance is not claimed."
+      }
+    },
+    "lem-powell-damping-gives-positive-curvature": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bfgs-curvature-pair-and-update-formulas",
+          "source_section": "Definition",
+          "quote": "For **Powell damping**, first set $c:=s^TBs$. If $s^Ty\\ge0.2c$, set $\\widetilde y:=y$. If $s^Ty<0.2c$, set\n$$\n\\theta:=\\frac{0.8c}{c-s^Ty},\n\\qquad\n\\widetilde y:=\\theta y+(1-\\theta)Bs.\n$$\nThe damped BFGS update is the same formula with $y$ replaced by $\\widetilde y$ and $\\rho=(s^T\\widetilde y)^{-1}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the damped branch, $q<0.2c$ gives $c-q>0.8c>0$. Therefore $\\theta>0$ and $\\theta<1$. [given, F1, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In that branch,\n$$\ns^T\\widetilde y=\\theta q+(1-\\theta)c\n=c-\\theta(c-q)=c-0.8c=0.2c>0.\n$$\nIn the other branch, $\\widetilde y=y$ and $q\\ge0.2c$, so $s^T\\widetilde y=q\\ge0.2c>0$. [given, F1, step 1.1, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n≥1 and a nonempty object or strict curvature data; the zero-dimensional case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 1.2 treat the zero-vector or stationary case where included; otherwise they explicitly assume nonzero curvature data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement assumes n≥1 and the steps 1.1, 1.2 use dimension-independent formulas; the determinant proof explicitly includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes undefined denominators through SPD and positive-curvature hypotheses, and steps 1.1, 1.2 verify the relevant nondegenerate branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 1.2 retain the accepted-step, initial, and finite-iteration endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2 use finite constructions and pointwise existence; no infinite family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-71",
+        "notes": "Contracts were derived from final proof steps and exact linked supplier sections. Cross-batch draft suppliers were inspected; their independent acceptance is not claimed."
+      }
+    },
+    "lem-bfgs-trace-determinant-potential-identities": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bfgs-curvature-pair-and-update-formulas",
+          "source_section": "Definition",
+          "quote": "For **Powell damping**, first set $c:=s^TBs$. If $s^Ty\\ge0.2c$, set $\\widetilde y:=y$. If $s^Ty<0.2c$, set\n$$\n\\theta:=\\frac{0.8c}{c-s^Ty},\n\\qquad\n\\widetilde y:=\\theta y+(1-\\theta)Bs.\n$$\nThe damped BFGS update is the same formula with $y$ replaced by $\\widetilde y$ and $\\rho=(s^T\\widetilde y)^{-1}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+          "source_section": "Statement",
+          "quote": "Let $B\\in\\mathbb R^{n\\times n}$ be SPD, let $H=B^{-1}$, and let $s,y\\in\\mathbb R^n$ satisfy $s\\ne0$ and $d:=s^Ty>0$. Define $B^+,H^+$ by [[def-bfgs-curvature-pair-and-update-formulas]]. Then $B^+$ and $H^+$ are SPD, $B^+s=y$, $H^+y=s$, and $B^+H^+=I$. In particular, the two updates remain consistent inverses and satisfy their secant equations.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-determinant-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$\nThe sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "Thus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The trace update follows by taking traces in [F1]: $\\operatorname{tr}(uv^T)=v^Tu$ gives $\\operatorname{tr}(Bss^TB)=\\|Bs\\|_2^2$ and $\\operatorname{tr}(yy^T)=\\|y\\|_2^2$. [F1, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the determinant identity, choose an invertible matrix $P$ whose first column is $s$; such a basis extension is finite-dimensional. Put $B'=P^TBP$ and $y'=P^Ty$. Direct substitution into [F1], using $s'=P^{-1}s=e_1$ and the unchanged scalars $s^TBs$ and $s^Ty$, gives $B'^+=P^TB^+P$. By [F5] and [F7], $\\det(B'^+)/\\det(B')=\\det(B^+)/\\det(B)$, since both numerator and denominator acquire the same factor $\\det(P)^2$. In these coordinates write\n$$\nB'=\\begin{pmatrix}a&b^T\\\\b&C\\end{pmatrix},\\qquad\ny'=\\begin{pmatrix}d\\\\z\\end{pmatrix},\n\\quad a=s^TBs,\\quad d=s^Ty.\n$$\nThe update becomes\n$$\nB'^+=\\begin{pmatrix}d&z^T\\\\z&C-bb^T/a+zz^T/d\\end{pmatrix}.\n$$\nThe Schur complement $S:=C-bb^T/a$ is SPD: for each nonzero $v$, substituting $(-b^Tv/a,v)$ into the quadratic form of $B'$ gives $v^TSv>0$. The factorizations\n$$\nB'=\\begin{pmatrix}1&0\\\\b/a&I\\end{pmatrix}\\begin{pmatrix}a&b^T\\\\0&S\\end{pmatrix},\n\\qquad\nB'^+=\\begin{pmatrix}1&0\\\\z/d&I\\end{pmatrix}\\begin{pmatrix}d&z^T\\\\0&S\\end{pmatrix}\n$$\nshow $\\det(B')=a\\det(S)$ and $\\det(B'^+)=d\\det(S)$: the lower factors have determinant $1$ by [F5], and the upper block factors have those determinants by expanding the Leibniz sum along their first columns. If $n=1$, take the empty Schur complement determinant to be $1$. Therefore $\\det(B^+)/\\det(B)=d/a=s^Ty/(s^TBs)$. [given, F1, F5, F7, algebra, construct]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F7",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By [F4], write $B=LL^T$ with positive diagonal entries $l_{ii}$. Then $\\operatorname{tr}(B)=\\sum_{i\\ge j}l_{ij}^2$ and $\\det(B)=\\prod_i l_{ii}^2>0$. Consequently\n$$\n\\psi(B)=\\sum_{i>j}l_{ij}^2+\\sum_i\\bigl(l_{ii}^2-2\\log l_{ii}\\bigr)\\ge n,\n$$\nbecause $u-1-\\log u\\ge0$ for $u>0$. This scalar inequality follows from the derivative $1-1/u$, whose sign changes from negative to positive at $u=1$. [F4, F6, algebra]",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For $h(t)=1-t+\\log t$, the derivative is $-1+1/t$, positive for $0<t<1$ and negative for $t>1$, so $h(t)\\le h(1)=0$. Also $s^TBs>0$ and $Bs\\ne0$, so $\\eta>0$; [F3] gives $\\eta\\le1$. [given, F2, F3, F6, algebra]",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $u:=q/\\eta^2$. From the definitions, $u=\\|Bs\\|_2^2/(s^TBs)$. Steps 1.1 and 1.2 therefore give\n$$\n\\psi(B^+)=\\psi(B)+M_s-u-\\log m_s+\\log q\n=\\psi(B)+(M_s-\\log m_s-1)+h(u)+\\log\\eta^2.\n$$\nThis is the asserted identity, hence the stated inequality by step 1.4. [F1, step 1.1, step 1.2, step 1.4, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n≥1 and a nonempty object or strict curvature data; the zero-dimensional case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement assumes s≠0 and sᵀy>0, and step 1.2 handles n=1 with the empty Schur complement convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly handles n=1 by setting the empty Schur-complement determinant to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement assumes B SPD and sᵀy>0, so all denominators are positive; steps 1.1–2.1 verify the identities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2–1.4 address the coordinate pivot, empty complement, and scalar h maximum; step 2.1 gives the update inequality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 extends one nonzero vector to a finite basis; no infinite family of choices is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-71",
+        "notes": "Contracts were derived from final proof steps and exact linked supplier sections. Cross-batch draft suppliers were inspected; their independent acceptance is not claimed."
+      }
+    },
+    "lem-lbfgs-two-loop-equals-stored-updates-and-cost": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-lbfgs-two-loop-with-curvature-filter",
+          "source_section": "Definition",
+          "quote": "1. Set $q:=g$. Traverse the stored pairs from newest to oldest, setting $\\alpha_i:=\\rho_i s_i^Tq$ and then $q:=q-\\alpha_i y_i$.\n2. Set $r:=\\gamma q$. Traverse the pairs from oldest to newest, setting $\\beta_i:=\\rho_i y_i^Tr$ and then $r:=r+s_i(\\alpha_i-\\beta_i)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bfgs-curvature-pair-and-update-formulas",
+          "source_section": "Definition",
+          "quote": "A real matrix $B\\in\\mathbb R^{n\\times n}$ is **symmetric positive definite (SPD)** when $B=B^T$ and $z^TBz>0$ for every nonzero $z\\in\\mathbb R^n$. For an SPD matrix $B$, write $H=B^{-1}$ for its inverse; $I$ denotes the identity matrix of [[def-matrix-product-and-identity-matrix]]. If $s\\ne0$ and $s^Ty>0$, set $\\rho:=(s^Ty)^{-1}$. The **BFGS Hessian update** and its inverse form are\n$$\nB^+:=B-\\frac{Bss^TB}{s^TBs}+\\frac{yy^T}{s^Ty},\n\\qquad\nH^+:=(I-\\rho sy^T)H(I-\\rho ys^T)+\\rho ss^T.\n$$\nThe denominators are positive under the stated hypotheses.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $q_r:=g$. In the reverse loop, when pair $i$ is processed, the current vector is $q_i$ and $\\alpha_i=\\rho_i s_i^Tq_i$. Its update is therefore $q_{i-1}=q_i-\\rho_i y_i(s_i^Tq_i)=V_iq_i$. [given, F1, F2, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $r_0:=H_0q_0$. In the forward loop, if $r_{i-1}$ is the current vector, then\n$$\nr_i=r_{i-1}+s_i(\\alpha_i-\\rho_i y_i^Tr_{i-1})\n=V_i^Tr_{i-1}+\\rho_i s_i(s_i^Tq_i),\n$$\nbecause $V_i^T=I-\\rho_i s_i y_i^T$ and $\\alpha_i=\\rho_i s_i^Tq_i$. [step 1.1, F1, F2, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By induction on $i$, $r_i=H_iq_i$. It holds at $i=0$ by definition. If it holds at $i-1$, then $q_{i-1}=V_iq_i$ from step 1.1, so\n$$\nH_iq_i=V_i^TH_{i-1}V_iq_i+\\rho_i s_i(s_i^Tq_i)\n=V_i^Tr_{i-1}+\\rho_i s_i(s_i^Tq_i)=r_i\n$$\nby [F2] and step 2.1. At $i=r$, $q_r=g$, hence the output is $r_r=H_rg$. [F2, step 1.1, step 2.1, induction]",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Each stored pair is read once in each loop. Each read uses a fixed number of length-$n$ dot products, scalar-vector products, and vector additions, so the operation count is at most a constant times $rn+n$. The stored pairs use $2rn$ coordinates; loop scalars use $O(r)$ entries and the working vectors use $O(n)$ entries. Therefore the counts are $O(rn+n)$, and are $O(mn)$ when $m\\ge1$ and $r\\le m$. [given, F1, algebra] ∎",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n≥1 and a nonempty object or strict curvature data; the zero-dimensional case is outside scope.",
+          "evidence": "The Statement allows r=0, and the empty two-loop recursion returns H0g by step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 2.1, 2.2, 3.1 treat the zero-vector or stationary case where included; otherwise they explicitly assume nonzero curvature data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement assumes n≥1 and the steps 1.1, 2.1, 2.2, 3.1 use dimension-independent formulas; the determinant proof explicitly includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes undefined denominators through SPD and positive-curvature hypotheses, and steps 1.1, 2.1, 2.2, 3.1 verify the relevant nondegenerate branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 2.1, 2.2, 3.1 retain the accepted-step, initial, and finite-iteration endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 2.2, 3.1 use finite constructions and pointwise existence; no infinite family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-71",
+        "notes": "Contracts were derived from final proof steps and exact linked supplier sections. Cross-batch draft suppliers were inspected; their independent acceptance is not claimed."
+      }
+    },
+    "thm-full-memory-bfgs-global-linear-convergence": {
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "source_section": "Definition",
+          "quote": "The mathematical exact direction mode and the BFGS matrix updates are interpreted over $\\mathbb R$. The rounded-Cholesky direction mode specifies a computed factor-and-solve direction only; this item supplies no backward-error or convergence theorem for that mode. Its returned direction is checked for descent before the strong Wolfe search. The line-search procedure can fail within its finite budgets even when an acceptable step exists.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+          "source_section": "Statement",
+          "quote": "Let $B\\in\\mathbb R^{n\\times n}$ be SPD, let $H=B^{-1}$, and let $s,y\\in\\mathbb R^n$ satisfy $s\\ne0$ and $d:=s^Ty>0$. Define $B^+,H^+$ by [[def-bfgs-curvature-pair-and-update-formulas]]. Then $B^+$ and $H^+$ are SPD, $B^+s=y$, $H^+y=s$, and $B^+H^+=I$. In particular, the two updates remain consistent inverses and satisfy their secant equations.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-wolfe-steps-give-positive-bfgs-curvature",
+          "source_section": "Statement",
+          "quote": "Let $f:D\\to\\mathbb R$ be $C^1$ on an open $D\\subseteq\\mathbb R^n$. At $x\\in D$, let $p\\ne0$ be a strict descent direction, so $g^Tp<0$ for $g:=\\nabla f(x)$. Suppose $\\alpha>0$, $x+\\alpha p\\in D$, and $\\alpha$ satisfies the Wolfe curvature condition of [[def-wolfe-and-strong-wolfe-conditions]]. With $s:=\\alpha p$ and $y:=\\nabla f(x+\\alpha p)-\\nabla f(x)$, one has\n$$\ns^Ty\\ge(1-c_2)\\alpha |g^Tp|>0.\n$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bfgs-trace-determinant-potential-identities",
+          "source_section": "Statement",
+          "quote": "Let $B$ be SPD, $s\\ne0$, and $y$ satisfy $d:=s^Ty>0$. Let $B^+$ be the Hessian update of [[def-bfgs-curvature-pair-and-update-formulas]]. Define\n$$\nm_s:=\\frac{s^Ty}{\\|s\\|_2^2},\\quad\nM_s:=\\frac{\\|y\\|_2^2}{s^Ty},\\quad\nq:=\\frac{s^TBs}{\\|s\\|_2^2},\\quad\n\\eta:=\\frac{s^TBs}{\\|s\\|_2\\|Bs\\|_2}.\n$$\nThen $\\eta>0$, $\\eta\\le1$, and\n$$\n\\operatorname{tr}(B^+)=\\operatorname{tr}(B)-\\frac{\\|Bs\\|_2^2}{s^TBs}\n+\\frac{\\|y\\|_2^2}{s^Ty},\n\\qquad\n\\det(B^+)=\\det(B)\\frac{s^Ty}{s^TBs}.\n$$\nThe potential $\\psi(B):=\\operatorname{tr}(B)-\\log\\det(B)$ is well-defined and satisfies $\\psi(B)\\ge n$. With $h(t):=1-t+\\log t$ for $t>0$, one has $h(t)\\le0$, with equality exactly at $t=1$; $h$ is strictly increasing on $(0,1)$ and strictly decreasing on $(1,\\infty)$, and\n$$\n\\psi(B^+)\\le\\psi(B)+(M_s-\\log m_s-1)\n+h\\!\\left(\\frac{q}{\\eta^2}\\right)+\\log\\eta^2.\n$$",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-zoutendijk-summability-for-wolfe-steps",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$ and\nlet $x_0\\in D$. Define its initial sublevel set\n$L_0:=\\{x\\in D:f(x)\\le f(x_0)\\}$, and suppose $f$ is bounded below on\n$L_0$. Let $N\\subseteq D$ contain every segment $x_k+[0,t_k]p_k$ in a\nsequence $(x_k)_{k\\ge0}\\subset D$. Suppose there is $L>0$ such that\n$$\n\\|\\nabla f(u)-\\nabla f(v)\\|_2\\le L\\|u-v\\|_2\\qquad(u,v\\in N).\n$$\nFor every $k\\ge0$, assume $x_{k+1}=x_k+t_kp_k$, $p_k\\ne0$ is a descent\ndirection at $x_k$, and $t_k>0$ is a Wolfe step for $f,x_k,p_k$ under\n[[def-wolfe-and-strong-wolfe-conditions]]. Define\n$$\\cos\\theta_k:=-\\frac{\\langle\\nabla f(x_k),p_k\\rangle}{\\|\\nabla f(x_k)\\|_2\\|p_k\\|_2}.$$\nThen\n$$\n\\sum_{k=0}^{\\infty}\\cos^2\\theta_k\\,\\|\\nabla f(x_k)\\|_2^2<\\infty.\n$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-wolfe-step-lower-bound-from-the-descent-angle",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, $f:D\\to\\mathbb R$ be $C^1$, and\n$x,p\\in\\mathbb R^n$ satisfy $x\\in D$, $p\\ne0$, and\n$g^Tp<0$, where $g:=\\nabla f(x)$. Let $t>0$ with $x+tp\\in D$, and suppose\nthere are a set $N\\subseteq D$ containing $x+[0,t]p$ and a constant $L>0$\nsuch that\n$$\n\\|\\nabla f(u)-\\nabla f(v)\\|_2\\le L\\|u-v\\|_2\\qquad(u,v\\in N).\n$$\nIf $t$ satisfies the Wolfe conditions of\n[[def-wolfe-and-strong-wolfe-conditions]] with $0<c_1<c_2<1/2$, then its\ndescent angle $\\theta$ satisfies\n$$\nt\\ge\\frac{1-c_2}{L}\\frac{\\cos\\theta\\,\\|g\\|_2}{\\|p\\|_2}.\n$$",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number",
+          "uses": [
+            "1.1",
+            "1.3",
+            "4.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:",
+          "uses": [
+            "1.1",
+            "1.3",
+            "4.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "Assume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.",
+          "uses": [
+            "1.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$ have continuous first and second partial derivatives. Put $g(x):=\\nabla f(x)$ and $G(x):=\\nabla^2 f(x)$, using the conventions of [[def-jacobian-matrix-and-gradient]] and [[def-hessian-and-euclidean-critical-point]]. Let $K\\subseteq U$ be convex. Suppose that for every $x\\in K$, $G(x)$ is symmetric and, for constants $0<\\mu\\le\\Lambda<\\infty$,\n$$ \\mu\\|w\\|_2^2\\le w^TG(x)w\\quad(w\\in\\mathbb R^n),\\qquad \\|G(x)\\|_2\\le\\Lambda, $$\nwhere $\\|A\\|_2:=\\sup_{\\|w\\|_2=1}\\|Aw\\|_2$. Then for all $u,v\\in K$, with $d:=u-v$,\n$$ \\|g(u)-g(v)\\|_2\\le\\Lambda\\|d\\|_2, \\qquad (g(u)-g(v))^Td\\ge\\mu\\|d\\|_2^2, $$\nand\n$$ \\frac\\mu2\\|d\\|_2^2\\le f(u)-f(v)-g(v)^Td\\le\\frac\\Lambda2\\|d\\|_2^2. $$\nSeparately, let $W\\subseteq U$ be convex, let $x_*\\in W$, and suppose $G$ is $L_G$-Lipschitz on $W$ in operator norm. Then for all $u,v\\in W$, with $d:=u-v$,\n$$ \\|g(u)-g(v)-G(x_*)d\\|_2 \\le L_G\\max\\{\\|u-x_*\\|_2,\\|v-x_*\\|_2\\}\\,\\|d\\|_2. $$\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "4.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $x_*$ is a global minimizer in the open domain $\\mathbb R^n$, the one-variable restriction $t\\mapsto f(x_*+te_j)$ has a minimum at $t=0$ for every standard basis vector $e_j$, so each partial derivative there is zero and $g_*:=\\nabla f(x_*)=0$. For $x\\in L_0$, [F10] gives the quadratic lower bound\n$$\nf(x)-f(x_*)\\ge g_*^T(x-x_*)+\\frac{\\mu}{2}\\|x-x_*\\|_2^2\n=\\frac{\\mu}{2}\\|x-x_*\\|_2^2.\n$$\nThus no other point of $L_0$ minimizes $f$, so $x_*$ is unique. [given, F7, F8, F10, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Initially $H_0$ is SPD. If $g_k\\ne0$ and $H_k$ is SPD, then $p_k=-H_kg_k$ is nonzero and $g_k^Tp_k=-g_k^TH_kg_k<0$. The strong Wolfe step in [F1] is a Wolfe step by [F9], and [F3] gives $s_k^Ty_k>0$; [F2] therefore preserves the SPD inverse pair. Its Armijo inequality gives $f(x_{k+1})\\le f(x_k)$, hence induction keeps every iterate in $L_0$. If $g_k=0$, then for any $x\\in L_0$ the segment from $x_k$ to $x$ lies in $L_0$ and [F10] gives $f(x)\\ge f(x_k)+g_k^T(x-x_k)+\\frac{\\mu}{2}\\|x-x_k\\|_2^2=f(x_k)+\\frac{\\mu}{2}\\|x-x_k\\|_2^2$. Thus $x_k$ is the unique minimizer on $L_0$. Every point outside $L_0$ has value greater than $f(x_0)\\ge f(x_k)$, so $x_k=x_*$. [given, F1, F2, F3, F9, F10, algebra, induction]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F9",
+            "F10",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The function is bounded below on $L_0$ by $f(x_*)$. Each accepted step segment lies in $L_0$ because its endpoints are in this convex set by step 1.2. Its gradient is $\\Lambda$-Lipschitz by [F10], so the segment and lower-bound hypotheses of [F5] hold for the accepted Wolfe steps. [given, F5, F7, F10, step 1.2, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F7",
+            "F10",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "At each nonstationary step define\n$$\n\\eta_k:=-\\frac{g_k^Tp_k}{\\|g_k\\|_2\\|p_k\\|_2}\\in(0,1],\n\\qquad B_k:=H_k^{-1}.\n$$\nSince $B_kp_k=-g_k$ and $s_k=\\alpha_kp_k$, one has $B_ks_k=-\\alpha_kg_k$ and therefore\n$$\n\\eta_k=\\frac{s_k^TB_ks_k}{\\|s_k\\|_2\\|B_ks_k\\|_2}.\n$$\nThe value is at most $1$ by [F8]. [given, F1, F2, F8, algebra]",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Apply [F10] to $u=x_{k+1}$ and $v=x_k$. Its strong-monotonicity bound gives $s_k^Ty_k\\ge\\mu\\|s_k\\|_2^2$, and its gradient-Lipschitz bound gives $\\|y_k\\|_2\\le\\Lambda\\|s_k\\|_2$. Hence $m_k\\ge\\mu$ and $M_k\\le\\Lambda^2/\\mu$. With $C_0$ as in the Statement, [F4] gives\n$$\n\\psi(B_{k+1})\\le\\psi(B_k)+C_0+\\log\\eta_k^2,\n$$\nafter dropping the nonpositive term $h(q_k/\\eta_k^2)$. [given, F4, F7, F10, step 1.2, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F4",
+            "F7",
+            "F10",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Summing step 2.2 for $k=0,\\ldots,N-1$ and using $\\psi(B_N)>0$ yields\n$$\n\\sum_{k=0}^{N-1}-\\log\\eta_k^2\\le\\psi(B_0)+C_0N.\n$$\nPut $c_k:=\\eta_k^2>0$ and $\\bar c_N:=N^{-1}\\sum_{k<N}c_k$. For $u>0$, [F4] gives $\\log u\\le u-1$ because $h(u)=1-u+\\log u\\le0$. Apply this to $u=c_k/\\bar c_N$ and sum to obtain $N^{-1}\\sum_{k<N}\\log c_k\\le\\log\\bar c_N$. Therefore\n$$\n\\bar c_N\\ge\\exp\\!\\left(-C_0-\\frac{\\psi(B_0)}N\\right)\\ge\\delta.\n$$\nIn particular, infinitely many indices satisfy $\\eta_k^2\\ge\\delta/2$; otherwise the prefix averages would eventually be less than $\\delta$. [F4, step 2.2, algebra, choose]",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.2",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F5], the nonnegative summands $\\eta_k^2\\|g_k\\|_2^2$ tend to zero. Along the infinite subsequence from step 3.1, $\\eta_k^2\\ge\\delta/2$, so $\\|g_k\\|_2\\to0$ on that subsequence. For any $x\\in L_0$, [F10] gives $(\\nabla f(x)-g_*)^T(x-x_*)\\ge\\mu\\|x-x_*\\|_2^2$. By [F8], $\\|x-x_*\\|_2\\le\\|\\nabla f(x)\\|_2/\\mu$. Thus the subsequence converges to $x_*$ and its function values converge to $f(x_*)$. The full sequence $f(x_k)$ is nonincreasing by step 1.2 and bounded below by $f(x_*)$, so it converges to $f(x_*)$. Step 1.1 then gives $x_k\\to x_*$. [given, F5, F7, F8, F10, step 1.1, step 1.2, step 3.1, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F7",
+            "F8",
+            "F10",
+            "step 1.1",
+            "step 1.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "By [F6] and the Armijo inequality,\n$$\nr_k-r_{k+1}\\ge c_1\\alpha_k(-g_k^Tp_k)\n\\ge\\frac{c_1(1-c_2)}{\\Lambda}\\eta_k^2\\|g_k\\|_2^2.\n$$\nFor $e_k:=x_k-x_*$, [F10] applied with $u=x_*$ and $v=x_k$ gives\n$$\nr_k\\le g_k^Te_k-\\frac{\\mu}{2}\\|e_k\\|_2^2\n\\le\\|g_k\\|_2\\|e_k\\|_2-\\frac{\\mu}{2}\\|e_k\\|_2^2\n\\le\\frac{\\|g_k\\|_2^2}{2\\mu},\n$$\nwhere the last inequality is completion of the square in $\\|e_k\\|_2$. Set $\\tau=2\\mu c_1(1-c_2)/\\Lambda$. Since $\\mu\\le\\Lambda$ and $0<c_1<c_2<1/2$, $0<\\tau<1$. The decrease inequality therefore yields $r_{k+1}\\le(1-\\tau\\eta_k^2)r_k$. [given, F1, F6, F7, F8, F9, F10, step 1.1, step 2.1, algebra]",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "For $u\\ge0$, $1-u\\le e^{-u}$ because the function $e^{-u}-(1-u)$ is zero at $u=0$ and, by [F11], has derivative $1-e^{-u}\\ge0$. Iterating step 3.2 and using $\\sum_{j<k}\\eta_j^2\\ge\\delta k$ from step 3.1 gives\n$$\nr_k\\le r_0\\prod_{j<k}(1-\\tau\\eta_j^2)\n\\le r_0\\exp\\!\\left(-\\tau\\sum_{j<k}\\eta_j^2\\right)\n\\le r_0e^{-\\tau\\delta k}.\n$$\nThis is the claimed objective-gap bound. [F11, step 3.1, step 3.2, algebra]",
+          "step": "4.2",
+          "inputs": [
+            "F11",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Finally, step 1.1 gives $\\|x_k-x_*\\|_2\\le\\sqrt{2r_k/\\mu}\\le\\sqrt{2r_0/\\mu}\\,e^{-\\tau\\delta k/2}$. Thus the iterates have an R-linear error bound. [step 1.1, step 4.2, algebra] ∎",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 4.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n≥1 and a nonempty object or strict curvature data; the zero-dimensional case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 treats gk=0 as stationary at x*; otherwise every accepted Wolfe step has positive curvature."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement assumes n≥1 and the steps 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 2.4, 3.1, 3.2, 3.3 use dimension-independent formulas; the determinant proof explicitly includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes undefined denominators through SPD and positive-curvature hypotheses, and steps 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 2.4, 3.1, 3.2, 3.3 verify the relevant nondegenerate branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 2.4, 3.1, 3.2, 3.3 retain the accepted-step, initial, and finite-iteration endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 2.4, 3.1, 3.2, 3.3 use finite constructions and pointwise existence; no infinite family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-71",
+        "notes": "Contracts were derived from final proof steps and exact linked supplier sections. Cross-batch draft suppliers were inspected; their independent acceptance is not claimed."
+      }
+    },
+    "lem-lbfgs-curvature-bounds-imply-uniform-spectrum": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+          "source_section": "Statement",
+          "quote": "Let $0\\le r\\le m$ stored pairs $(s_i,y_i)$, $i=1,\\ldots,r$, be ordered oldest to newest, with $s_i^Ty_i>0$, and let $\\rho_i=(s_i^Ty_i)^{-1}$. Start from $H_0=\\gamma I$ with $\\gamma>0$ and apply the inverse updates of [[def-bfgs-curvature-pair-and-update-formulas]] in that order, obtaining $H_r$. For every $g\\in\\mathbb R^n$, the two-loop recursion in [[alg-lbfgs-two-loop-with-curvature-filter]] returns $H_rg$ before changing its sign to form the search direction. The recursion uses $O(rn+n)$ scalar operations and stores $O(rn+n)$ real entries; when $m\\ge1$ and $r\\le m$, these are $O(mn)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+          "source_section": "Statement",
+          "quote": "Let $B\\in\\mathbb R^{n\\times n}$ be SPD, let $H=B^{-1}$, and let $s,y\\in\\mathbb R^n$ satisfy $s\\ne0$ and $d:=s^Ty>0$. Define $B^+,H^+$ by [[def-bfgs-curvature-pair-and-update-formulas]]. Then $B^+$ and $H^+$ are SPD, $B^+s=y$, $H^+y=s$, and $B^+H^+=I$. In particular, the two updates remain consistent inverses and satisfy their secant equations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bfgs-trace-determinant-potential-identities",
+          "source_section": "Statement",
+          "quote": "Let $B$ be SPD, $s\\ne0$, and $y$ satisfy $d:=s^Ty>0$. Let $B^+$ be the Hessian update of [[def-bfgs-curvature-pair-and-update-formulas]]. Define\n$$\nm_s:=\\frac{s^Ty}{\\|s\\|_2^2},\\quad\nM_s:=\\frac{\\|y\\|_2^2}{s^Ty},\\quad\nq:=\\frac{s^TBs}{\\|s\\|_2^2},\\quad\n\\eta:=\\frac{s^TBs}{\\|s\\|_2\\|Bs\\|_2}.\n$$\nThen $\\eta>0$, $\\eta\\le1$, and\n$$\n\\operatorname{tr}(B^+)=\\operatorname{tr}(B)-\\frac{\\|Bs\\|_2^2}{s^TBs}\n+\\frac{\\|y\\|_2^2}{s^Ty},\n\\qquad\n\\det(B^+)=\\det(B)\\frac{s^Ty}{s^TBs}.\n$$\nThe potential $\\psi(B):=\\operatorname{tr}(B)-\\log\\det(B)$ is well-defined and satisfies $\\psi(B)\\ge n$. With $h(t):=1-t+\\log t$ for $t>0$, one has $h(t)\\le0$, with equality exactly at $t=1$; $h$ is strictly increasing on $(0,1)$ and strictly decreasing on $(1,\\infty)$, and\n$$\n\\psi(B^+)\\le\\psi(B)+(M_s-\\log m_s-1)\n+h\\!\\left(\\frac{q}{\\eta^2}\\right)+\\log\\eta^2.\n$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-lbfgs-two-loop-with-curvature-filter",
+          "source_section": "Definition",
+          "quote": "With $m\\ge1$, each two-loop application uses $O(mn)$ scalar operations and stores $O(mn)$ pair entries plus $O(n)$ work vectors. These are operation/storage counts, not convergence guarantees.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $B_k:=H_k^{-1}$. By [F1] and [F2], this is an SPD matrix obtained from $B_0=\\gamma^{-1}I$ by at most $m$ direct BFGS updates. Its initial trace satisfies $\\operatorname{tr}(B_0)=n/\\gamma\\le n/\\gamma_{\\min}$. Each update adds at most $C$ to trace by [F3] and the pair bound. Hence $\\operatorname{tr}(B_k)\\le T$. [given, F1, F2, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4], the positive eigenvalues of $B_k$ sum to its trace, so each is at most $T$. In particular $s^TB_ks\\le T\\|s\\|_2^2$ for every $s$. The determinant ratio in [F3] and the lower pair bound therefore give\n$$\n\\frac{\\det(B_{k+1})}{\\det(B_k)}\n=\\frac{s^Ty}{s^TB_ks}\\ge\\frac aT\\ge r.\n$$\nSince $0<r\\le1$ and there are at most $m$ updates, while $\\det(B_0)=\\gamma^{-n}\\ge\\gamma_{\\max}^{-n}$, it follows that $\\det(B_k)\\ge D$. [given, F3, F4, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $\\lambda_{\\min}(B_k)$ be the smallest eigenvalue. By [F4], $\\det(B_k)$ is the product of the $n$ positive eigenvalues, and the other $n-1$ eigenvalues are at most $T$ by step 2.1. Thus $\\lambda_{\\min}(B_k)\\ge D/T^{n-1}$, while every eigenvalue is at most $T$. The eigenvalues of $H_k=B_k^{-1}$ are the reciprocals, so they lie in $[1/T,T^{n-1}/D]$. The spectral theorem translates these bounds into the asserted quadratic-form inequalities. [F4, step 2.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For the standard scale, [F5] and the upper curvature bound give\n$\\gamma=(s^Ty)/\\|y\\|_2^2\\le b\\|s\\|_2^2/\\|y\\|_2^2$. By Cauchy–Schwarz and the lower curvature bound,\n$\\|s\\|_2\\|y\\|_2\\ge s^Ty\\ge a\\|s\\|_2^2$, so $\\|y\\|_2\\ge a\\|s\\|_2$ and $\\gamma\\le b/a^2$. The other pair bound gives $\\|y\\|_2^2/(s^Ty)\\le C$, hence $\\gamma\\ge1/C$. [given, F5, algebra] ∎",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n≥1 and a nonempty object or strict curvature data; the zero-dimensional case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 1.2, 2.1, 2.2 treat the zero-vector or stationary case where included; otherwise they explicitly assume nonzero curvature data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement assumes n≥1 and the steps 1.1, 1.2, 2.1, 2.2 use dimension-independent formulas; the determinant proof explicitly includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes undefined denominators through SPD and positive-curvature hypotheses, and steps 1.1, 1.2, 2.1, 2.2 verify the relevant nondegenerate branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 1.2, 2.1, 2.2 retain the accepted-step, initial, and finite-iteration endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1, 2.2 use finite constructions and pointwise existence; no infinite family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-71",
+        "notes": "Contracts were derived from final proof steps and exact linked supplier sections. Cross-batch draft suppliers were inspected; their independent acceptance is not claimed."
+      }
+    },
+    "lem-full-memory-bfgs-dennis-more-condition": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-full-memory-bfgs-global-linear-convergence",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let $f:\\mathbb R^n\\to\\mathbb R$ have continuous second partial derivatives ($C^2$), let $x_0\\in\\mathbb R^n$, and set $L_0:=\\{x:f(x)\\le f(x_0)\\}$. Assume $L_0$ is convex, contains a global minimizer $x_*$, and for every $x\\in L_0$ the Hessian $G(x):=\\nabla^2 f(x)$ is symmetric and satisfies, for constants $0<\\mu\\le\\Lambda<\\infty$,\n$$\n\\mu\\|v\\|_2^2\\le v^TG(x)v,\\qquad \\|G(x)\\|_2\\le\\Lambda\n\\quad(v\\in\\mathbb R^n),\n$$\nwhere $\\|A\\|_2:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$ is the Euclidean operator norm. Fix $0<c_1<c_2<1/2$ for the line searches. Write $\\psi(B):=\\operatorname{tr}(B)-\\log\\det(B)$ as in [[lem-bfgs-trace-determinant-potential-identities]], with $\\operatorname{tr}(B)$ the sum of diagonal entries. Consider the exact, undamped branch of [[alg-full-memory-bfgs-with-curvature-safeguards]] with any SPD initial $H_0$, and suppose every nonstationary line search succeeds. For every generated iterate,\n$$\nf(x_k)-f(x_*)\\le \\exp(-\\tau\\delta k)\\,[f(x_0)-f(x_*)],\n$$\nwhere\n$$\nC_0:=\\max\\{1,\\Lambda^2/\\mu-\\log\\mu-1\\},\\qquad\n\\delta:=\\exp[-C_0-\\psi(B_0)],\\qquad\n\\tau:=\\frac{2\\mu c_1(1-c_2)}{\\Lambda},\n\\quad B_0:=H_0^{-1}.\n$$\nFor an infinite successful continuation, $x_k\\to x_*$ with an R-linear error bound, meaning $\\|x_k-x_*\\|_2\\le Cq^k$ for some $C>0$ and $0<q<1$. A stationary termination is at $x_*$. A finite iteration-budget stop or line-search failure gives only a finite prefix.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "source_section": "Definition",
+          "quote": "Call [[alg-bracketing-zoom-strong-wolfe-search]] with $(f,x_k,p_k,c_1,c_2,E,Z)$. If it returns a failure status, return that status and $x_k$. Otherwise take its positive strong Wolfe step $\\alpha_k$, and define\n$$\ns_k:=\\alpha_kp_k,\\qquad y_k:=\\nabla f(x_k+s_k)-g_k.\n$$\nIn undamped mode set $\\bar y_k:=y_k$. In Powell mode put $c_k:=s_k^TB_ks_k$ and use the damping rule of [[def-bfgs-curvature-pair-and-update-formulas]] to form $\\bar y_k$. If $s_k^T\\bar y_k\\le0$, skip the matrix update and return curvature-rejected. Otherwise update both matrices by\n$$\nB_{k+1}=B_k-\\frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k}\n+\\frac{\\bar y_k\\bar y_k^T}{s_k^T\\bar y_k},\n\\qquad\nH_{k+1}=(I-\\rho_ks_k\\bar y_k^T)H_k(I-\\rho_k\\bar y_ks_k^T)+\\rho_ks_ks_k^T,\n\\quad\n\\rho_k=(s_k^T\\bar y_k)^{-1}.\n$$\nReturn update-failure if any required scalar or matrix operation is undefined; otherwise continue until stationarity or budget exhaustion. The output is the last point and one of stationary, a line-search status, factorization/solve failure, curvature-rejected, update-failure, or iteration-budget-exhausted.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bfgs-curvature-pair-and-update-formulas",
+          "source_section": "Definition",
+          "quote": "For **Powell damping**, first set $c:=s^TBs$. If $s^Ty\\ge0.2c$, set $\\widetilde y:=y$. If $s^Ty<0.2c$, set\n$$\n\\theta:=\\frac{0.8c}{c-s^Ty},\n\\qquad\n\\widetilde y:=\\theta y+(1-\\theta)Bs.\n$$\nThe damped BFGS update is the same formula with $y$ replaced by $\\widetilde y$ and $\\rho=(s^T\\widetilde y)^{-1}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bfgs-trace-determinant-potential-identities",
+          "source_section": "Statement",
+          "quote": "Let $B$ be SPD, $s\\ne0$, and $y$ satisfy $d:=s^Ty>0$. Let $B^+$ be the Hessian update of [[def-bfgs-curvature-pair-and-update-formulas]]. Define\n$$\nm_s:=\\frac{s^Ty}{\\|s\\|_2^2},\\quad\nM_s:=\\frac{\\|y\\|_2^2}{s^Ty},\\quad\nq:=\\frac{s^TBs}{\\|s\\|_2^2},\\quad\n\\eta:=\\frac{s^TBs}{\\|s\\|_2\\|Bs\\|_2}.\n$$\nThen $\\eta>0$, $\\eta\\le1$, and\n$$\n\\operatorname{tr}(B^+)=\\operatorname{tr}(B)-\\frac{\\|Bs\\|_2^2}{s^TBs}\n+\\frac{\\|y\\|_2^2}{s^Ty},\n\\qquad\n\\det(B^+)=\\det(B)\\frac{s^Ty}{s^TBs}.\n$$\nThe potential $\\psi(B):=\\operatorname{tr}(B)-\\log\\det(B)$ is well-defined and satisfies $\\psi(B)\\ge n$. With $h(t):=1-t+\\log t$ for $t>0$, one has $h(t)\\le0$, with equality exactly at $t=1$; $h$ is strictly increasing on $(0,1)$ and strictly decreasing on $(1,\\infty)$, and\n$$\n\\psi(B^+)\\le\\psi(B)+(M_s-\\log m_s-1)\n+h\\!\\left(\\frac{q}{\\eta^2}\\right)+\\log\\eta^2.\n$$",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+          "source_section": "Statement",
+          "quote": "Let $B\\in\\mathbb R^{n\\times n}$ be SPD, let $H=B^{-1}$, and let $s,y\\in\\mathbb R^n$ satisfy $s\\ne0$ and $d:=s^Ty>0$. Define $B^+,H^+$ by [[def-bfgs-curvature-pair-and-update-formulas]]. Then $B^+$ and $H^+$ are SPD, $B^+s=y$, $H^+y=s$, and $B^+H^+=I$. In particular, the two updates remain consistent inverses and satisfy their secant equations.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "Assume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-wolfe-steps-give-positive-bfgs-curvature",
+          "source_section": "Statement",
+          "quote": "Let $f:D\\to\\mathbb R$ be $C^1$ on an open $D\\subseteq\\mathbb R^n$. At $x\\in D$, let $p\\ne0$ be a strict descent direction, so $g^Tp<0$ for $g:=\\nabla f(x)$. Suppose $\\alpha>0$, $x+\\alpha p\\in D$, and $\\alpha$ satisfies the Wolfe curvature condition of [[def-wolfe-and-strong-wolfe-conditions]]. With $s:=\\alpha p$ and $y:=\\nabla f(x+\\alpha p)-\\nabla f(x)$, one has\n$$\ns^Ty\\ge(1-c_2)\\alpha |g^Tp|>0.\n$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$ have continuous first and second partial derivatives. Put $g(x):=\\nabla f(x)$ and $G(x):=\\nabla^2 f(x)$, using the conventions of [[def-jacobian-matrix-and-gradient]] and [[def-hessian-and-euclidean-critical-point]]. Let $K\\subseteq U$ be convex. Suppose that for every $x\\in K$, $G(x)$ is symmetric and, for constants $0<\\mu\\le\\Lambda<\\infty$,\n$$ \\mu\\|w\\|_2^2\\le w^TG(x)w\\quad(w\\in\\mathbb R^n),\\qquad \\|G(x)\\|_2\\le\\Lambda, $$\nwhere $\\|A\\|_2:=\\sup_{\\|w\\|_2=1}\\|Aw\\|_2$. Then for all $u,v\\in K$, with $d:=u-v$,\n$$ \\|g(u)-g(v)\\|_2\\le\\Lambda\\|d\\|_2, \\qquad (g(u)-g(v))^Td\\ge\\mu\\|d\\|_2^2, $$\nand\n$$ \\frac\\mu2\\|d\\|_2^2\\le f(u)-f(v)-g(v)^Td\\le\\frac\\Lambda2\\|d\\|_2^2. $$\nSeparately, let $W\\subseteq U$ be convex, let $x_*\\in W$, and suppose $G$ is $L_G$-Lipschitz on $W$ in operator norm. Then for all $u,v\\in W$, with $d:=u-v$,\n$$ \\|g(u)-g(v)-G(x_*)d\\|_2 \\le L_G\\max\\{\\|u-x_*\\|_2,\\|v-x_*\\|_2\\}\\,\\|d\\|_2. $$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The global theorem gives $r_k:=f(x_k)-f(x_*)\\le r_0q^k$. Its strong-convexity lower bound gives $\\|e_k\\|_2\\le\\sqrt{2r_0/\\mu}\\,q^{k/2}$, so $\\sum_k\\|e_k\\|_2<\\infty$. Also $g_*:=\\nabla f(x_*)=0$ because each coordinate restriction has a minimum at $x_*$ in the open domain. [given, F1, F10, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The initial pair is SPD. At a nonstationary iterate, $p_k=-H_kg_k$ is a strict descent direction. The accepted strong Wolfe step is Wolfe by [F6], so [F7] gives $s_k^Ty_k>0$; [F5] preserves SPD and reciprocity. Induction proves every $B_k,H_k$ is SPD. [given, F1, F2, F5, F6, F7, algebra, induction]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose a closed ball $W$ about $x_*$ contained in the Hessian-Lipschitz neighborhood, and set $K:=L_0\\cap W$. Both sets are convex and $x_*\\in K$. By step 1.1, for all sufficiently large $k$, the accepted segment lies in $K$. Define $\\varepsilon_k:=\\max\\{\\|e_k\\|_2,\\|e_{k+1}\\|_2\\}$, $s_k:=x_{k+1}-x_k$, and $y_k:=g_{k+1}-g_k$. Applying [F12] on the segment gives\n$$\n\\|y_k-G_*s_k\\|_2\\le L_G\\varepsilon_k\\|s_k\\|_2,\n$$\nand $\\sum_k\\varepsilon_k<\\infty$. [given, F1, F2, F10, F12, step 1.1, step 1.2, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F10",
+            "F12",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F8], choose an orthonormal eigenbasis of $G_*$ with eigenvalues $\\lambda_i$. The lower Hessian bound and the operator-norm bound give $\\mu\\le\\lambda_i\\le\\Lambda$. Define $G_*^{1/2}$ and $G_*^{-1/2}$ in that basis using diagonal entries $\\sqrt{\\lambda_i}$ and $1/\\sqrt{\\lambda_i}$, respectively; [F9] supplies the positive roots. Then $(G_*^{1/2})^2=G_*$ and $G_*^{1/2}G_*^{-1/2}=I$. Set\n$$\n\\widetilde s_k:=G_*^{1/2}s_k,\\quad \\widetilde y_k:=G_*^{-1/2}y_k,\\quad \\widetilde B_k:=G_*^{-1/2}B_kG_*^{-1/2}.\n$$\nThe update for $\\widetilde B_k$ has the same BFGS form with pair $(\\widetilde s_k,\\widetilde y_k)$: $\\widetilde B_k\\widetilde s_k=G_*^{-1/2}B_ks_k$, $\\widetilde s_k^T\\widetilde B_k\\widetilde s_k=s_k^TB_ks_k$, and $\\widetilde s_k^T\\widetilde y_k=s_k^Ty_k$. Substitution in [F3] gives $\\widetilde B_{k+1}=G_*^{-1/2}B_{k+1}G_*^{-1/2}$. By step 2.1, $\\widetilde y_k-\\widetilde s_k=G_*^{-1/2}(y_k-G_*s_k)$. Since $\\|G_*^{-1/2}\\|_2=1/\\sqrt\\mu$ and $\\|\\widetilde s_k\\|_2\\ge\\sqrt\\mu\\|s_k\\|_2$,\n$$\n\\|\\widetilde y_k-\\widetilde s_k\\|_2\\le L_G\\|G_*^{-1/2}\\|_2^2\\varepsilon_k\\|\\widetilde s_k\\|_2.\n$$ Put $\\delta_k:=L_G\\|G_*^{-1/2}\\|_2^2\\varepsilon_k$; then $\\sum_k\\delta_k<\\infty$, so eventually $\\delta_k\\le1/2$. Congruence preserves SPD, so $\\widetilde B_k$ is SPD. [given, F1, F3, F8, F9, step 1.2, step 2.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F8",
+            "F9",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For all sufficiently large $k$, the triangle inequality and [F11] give\n$$\n(1-\\delta_k)\\|\\widetilde s_k\\|_2\\le\\|\\widetilde y_k\\|_2\\le(1+\\delta_k)\\|\\widetilde s_k\\|_2,\\qquad\n\\widetilde m_k:=\\frac{\\widetilde y_k^T\\widetilde s_k}{\\|\\widetilde s_k\\|_2^2}\\ge1-\\delta_k.\n$$\nPut $\\widetilde M_k:=\\|\\widetilde y_k\\|_2^2/(\\widetilde y_k^T\\widetilde s_k)$. Algebra gives $(1+\\delta_k)^2/(1-\\delta_k)\\le1+7\\delta_k$, since the difference after multiplication by $1-\\delta_k>0$ is $4\\delta_k(1-2\\delta_k)\\ge0$. Also, for $0\\le t\\le1/2$, $r(t):=\\log(1-t)+2t$ has $r(0)=0$ and $r'(t)=(1-2t)/(1-t)\\ge0$ by [F13]. Thus $\\widetilde M_k\\le1+7\\delta_k$ and $\\log\\widetilde m_k\\ge-2\\delta_k$. [given, F11, F13, step 3.1, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F11",
+            "F13",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Since $\\widetilde B_k$ is SPD and $\\widetilde s_k\\ne0$, [F4] gives $0<\\widetilde\\eta_k\\le1$ and $\\widetilde q_k>0$, where\n$$\n\\widetilde\\eta_k:=\\frac{\\widetilde s_k^T\\widetilde B_k\\widetilde s_k}{\\|\\widetilde s_k\\|_2\\|\\widetilde B_k\\widetilde s_k\\|_2},\\quad\n\\widetilde q_k:=\\frac{\\widetilde s_k^T\\widetilde B_k\\widetilde s_k}{\\|\\widetilde s_k\\|_2^2},\\quad\nv_k:=\\widetilde q_k/\\widetilde\\eta_k^2.\n$$\nApplying the potential inequality [F4] to the transformed update and using step 4.1 gives\n$$\n0<\\psi(\\widetilde B_{k+1})\\le\\psi(\\widetilde B_k)+9\\delta_k+h(v_k)+\\log\\widetilde\\eta_k^2,\n$$\nsince $\\widetilde M_k-\\log\\widetilde m_k-1\\le9\\delta_k$. [given, F4, step 3.1, step 4.1, algebra]",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Sum step 5.1 from a sufficiently large index $K$ to $N-1$ and rearrange:\n$$\n\\sum_{k=K}^{N-1}[-h(v_k)-\\log\\widetilde\\eta_k^2]\\le\\psi(\\widetilde B_K)-\\psi(\\widetilde B_N)+9\\sum_{k=K}^{N-1}\\delta_k\\le\\psi(\\widetilde B_K)+9\\sum_{k=K}^{\\infty}\\delta_k.\n$$\nThe right side is finite, and the summands are nonnegative by [F4], so both $h(v_k)\\to0$ and $\\widetilde\\eta_k\\to1$. For any $0<\\epsilon<1$, strict increase of $h$ on $(0,1)$ and strict decrease on $(1,\\infty)$, with equality only at $1$ by [F4], imply $h(v)\\le h(1-\\epsilon)<0$ when $v\\le1-\\epsilon$ and $h(v)\\le h(1+\\epsilon)<0$ when $v\\ge1+\\epsilon$. Therefore $v_k\\to1$. [given, F4, step 5.1, algebra]",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Let $w_k:=(\\widetilde B_k-I)\\widetilde s_k$. Expanding gives\n$$\n\\frac{\\|w_k\\|_2^2}{\\|\\widetilde s_k\\|_2^2}=\\frac{\\widetilde q_k^2}{\\widetilde\\eta_k^2}-2\\widetilde q_k+1=v_k\\widetilde q_k-2\\widetilde q_k+1.\n$$\nBy the definitions in step 5.1, $\\widetilde q_k=v_k\\widetilde\\eta_k^2$; step 6.1 therefore makes the right side tend to zero. The definitions give $w_k=G_*^{-1/2}(B_k-G_*)s_k$, so $\\|(B_k-G_*)s_k\\|_2\\le\\sqrt\\Lambda\\|w_k\\|_2$ and $\\|\\widetilde s_k\\|_2\\le\\sqrt\\Lambda\\|s_k\\|_2$. Hence\n$$\n\\frac{\\|(B_k-G_*)s_k\\|_2}{\\|s_k\\|_2}\\le\\Lambda\\frac{\\|w_k\\|_2}{\\|\\widetilde s_k\\|_2}\\longrightarrow0.\n$$\nBecause $s_k=\\alpha_kp_k$ with $\\alpha_k>0$, the same limit holds with $p_k$ in place of $s_k$. [given, F8, step 5.1, step 6.1, algebra] ∎",
+          "step": "7.1",
+          "inputs": [
+            "given",
+            "F8",
+            "step 5.1",
+            "step 6.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n≥1 and a nonempty object or strict curvature data; the zero-dimensional case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement assumes a nonstationary run, so accepted steps give nonzero p and s; steps 1.2 and 2.1 verify curvature."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement assumes n≥1 and the steps 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 2.4, 3.1 use dimension-independent formulas; the determinant proof explicitly includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes undefined denominators through SPD and positive-curvature hypotheses, and steps 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 2.4, 3.1 verify the relevant nondegenerate branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 2.4, 3.1 retain the accepted-step, initial, and finite-iteration endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 2.4, 3.1 use finite constructions and pointwise existence; no infinite family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-71",
+        "notes": "Contracts were derived from final proof steps and exact linked supplier sections. Cross-batch draft suppliers were inspected; their independent acceptance is not claimed."
+      }
+    },
+    "thm-lbfgs-fixed-memory-linear-convergence": {
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-lbfgs-two-loop-with-curvature-filter",
+          "source_section": "Definition",
+          "quote": "Repeat until $g=0$, the iteration budget is reached, or a failure status is returned. Output the last point and one of stationary, the line-search status, direction-failure, or iteration-budget-exhausted. Finite line-search budgets may fail even when a strong Wolfe step exists.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "Assume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+          "source_section": "Statement",
+          "quote": "Let $0\\le r\\le m$ stored pairs $(s_i,y_i)$, $i=1,\\ldots,r$, be ordered oldest to newest, with $s_i^Ty_i>0$, and let $\\rho_i=(s_i^Ty_i)^{-1}$. Start from $H_0=\\gamma I$ with $\\gamma>0$ and apply the inverse updates of [[def-bfgs-curvature-pair-and-update-formulas]] in that order, obtaining $H_r$. For every $g\\in\\mathbb R^n$, the two-loop recursion in [[alg-lbfgs-two-loop-with-curvature-filter]] returns $H_rg$ before changing its sign to form the search direction. The recursion uses $O(rn+n)$ scalar operations and stores $O(rn+n)$ real entries; when $m\\ge1$ and $r\\le m$, these are $O(mn)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+          "source_section": "Statement",
+          "quote": "Fix $n,m\\ge1$, constants $0<a\\le b<\\infty$, $C>0$, and $0<\\gamma_{\\min}\\le\\gamma_{\\max}<\\infty$. Suppose every stored pair in a limited-memory BFGS state satisfies\n$$\na\\|s_i\\|_2^2\\le s_i^Ty_i\\le b\\|s_i\\|_2^2,\n\\qquad\n\\frac{\\|y_i\\|_2^2}{s_i^Ty_i}\\le C,\n$$\nand each base scale satisfies $\\gamma_{\\min}\\le\\gamma\\le\\gamma_{\\max}$. Then the implicit SPD matrix $H_k$ represented by the two-loop recursion of [[alg-lbfgs-two-loop-with-curvature-filter]] has uniform bounds\n$$\n\\underline\\lambda I\\preceq H_k\\preceq\\overline\\lambda I,\n\\quad\nT:=\\frac n{\\gamma_{\\min}}+mC,\\quad\nr:=\\min\\{1,a/T\\},\\quad\nD:=\\gamma_{\\max}^{-n}r^m,\n\\quad\n\\underline\\lambda:=\\frac1T,\\quad\n\\overline\\lambda:=\\frac{T^{n-1}}{D}.\n$$\nHere $A\\preceq B$ means $z^TAz\\le z^TBz$ for all $z$. Under the pair bounds, the usual scale $(s_{\\rm last}^Ty_{\\rm last})/\\|y_{\\rm last}\\|_2^2$ lies in $[1/C,b/a^2]$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-wolfe-step-lower-bound-from-the-descent-angle",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, $f:D\\to\\mathbb R$ be $C^1$, and\n$x,p\\in\\mathbb R^n$ satisfy $x\\in D$, $p\\ne0$, and\n$g^Tp<0$, where $g:=\\nabla f(x)$. Let $t>0$ with $x+tp\\in D$, and suppose\nthere are a set $N\\subseteq D$ containing $x+[0,t]p$ and a constant $L>0$\nsuch that\n$$\n\\|\\nabla f(u)-\\nabla f(v)\\|_2\\le L\\|u-v\\|_2\\qquad(u,v\\in N).\n$$\nIf $t$ satisfies the Wolfe conditions of\n[[def-wolfe-and-strong-wolfe-conditions]] with $0<c_1<c_2<1/2$, then its\ndescent angle $\\theta$ satisfies\n$$\nt\\ge\\frac{1-c_2}{L}\\frac{\\cos\\theta\\,\\|g\\|_2}{\\|p\\|_2}.\n$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-uniform-descent-angle-implies-gradient-vanishing",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-zoutendijk-summability-for-wolfe-steps]], suppose\nthere is a constant $\\delta>0$ such that $\\cos\\theta_k\\ge\\delta$ for every\n$k$. Then $\\|\\nabla f(x_k)\\|_2\\to0$. This is convergence of gradient norms\nto zero; it does not assert convergence of $(x_k)$ or that a limit point is a\nminimizer.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$ have continuous first and second partial derivatives. Put $g(x):=\\nabla f(x)$ and $G(x):=\\nabla^2 f(x)$, using the conventions of [[def-jacobian-matrix-and-gradient]] and [[def-hessian-and-euclidean-critical-point]]. Let $K\\subseteq U$ be convex. Suppose that for every $x\\in K$, $G(x)$ is symmetric and, for constants $0<\\mu\\le\\Lambda<\\infty$,\n$$ \\mu\\|w\\|_2^2\\le w^TG(x)w\\quad(w\\in\\mathbb R^n),\\qquad \\|G(x)\\|_2\\le\\Lambda, $$\nwhere $\\|A\\|_2:=\\sup_{\\|w\\|_2=1}\\|Aw\\|_2$. Then for all $u,v\\in K$, with $d:=u-v$,\n$$ \\|g(u)-g(v)\\|_2\\le\\Lambda\\|d\\|_2, \\qquad (g(u)-g(v))^Td\\ge\\mu\\|d\\|_2^2, $$\nand\n$$ \\frac\\mu2\\|d\\|_2^2\\le f(u)-f(v)-g(v)^Td\\le\\frac\\Lambda2\\|d\\|_2^2. $$\nSeparately, let $W\\subseteq U$ be convex, let $x_*\\in W$, and suppose $G$ is $L_G$-Lipschitz on $W$ in operator norm. Then for all $u,v\\in W$, with $d:=u-v$,\n$$ \\|g(u)-g(v)-G(x_*)d\\|_2 \\le L_G\\max\\{\\|u-x_*\\|_2,\\|v-x_*\\|_2\\}\\,\\|d\\|_2. $$\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $x_*$ is a global minimizer in the open domain $\\mathbb R^n$, each coordinate restriction $t\\mapsto f(x_*+te_j)$ has a minimum at $0$, so its derivative there is zero and $\\nabla f(x_*)=0$. For every $x\\in L_0$, [F9] applied with $u=x$ and $v=x_*$ give $f(x)\\ge f(x_*)+\\frac{\\mu}{2}\\|x-x_*\\|_2^2$. Points outside $L_0$ have value greater than $f(x_0)\\ge f(x_*)$, so $x_*$ is the unique global minimizer. [given, F7, F9, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $x_k\\in L_0$. By [F3] and [F4], the matrix represented by the two-loop recursion is SPD and has eigenvalues in $[\\underline\\lambda,\\overline\\lambda]$. If $g_k\\ne0$, then\n$$\n-g_k^Tp_k=g_k^TH_kg_k\\ge\\underline\\lambda\\|g_k\\|_2^2>0,\n\\qquad\n\\|p_k\\|_2=\\|H_kg_k\\|_2\\le\\overline\\lambda\\|g_k\\|_2.\n$$\nThus $p_k$ is a strict descent direction. By the Euclidean inner-product convention in [F8], its descent-angle cosine satisfies\n$$\n\\cos\\theta_k=\\frac{-g_k^Tp_k}{\\|g_k\\|_2\\|p_k\\|_2}\n\\ge\\frac{\\underline\\lambda}{\\overline\\lambda}>0.\n$$\nIf $g_k=0$, then for every $x\\in L_0$ [F9] applied with $u=x$ and $v=x_k$ gives $f(x)\\ge f(x_k)+\\frac{\\mu}{2}\\|x-x_k\\|_2^2$, and points outside $L_0$ have value greater than $f(x_0)\\ge f(x_k)$; hence $x_k=x_*$. Otherwise the accepted Armijo step puts $x_{k+1}$ in $L_0$. [given, F1, F2, F3, F4, F7, F8, F9, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Armijo decrease keeps every iterate in $L_0$, and convexity keeps each accepted step segment there. For $u,v\\in L_0$, [F9] gives $\\|\\nabla f(u)-\\nabla f(v)\\|_2\\le\\Lambda\\|u-v\\|_2$. By [F2], every accepted strong Wolfe step is a Wolfe step, so the Wolfe hypothesis of [F6] holds. The uniform angle bound from step 1.2 then gives $\\|g_k\\|_2\\to0$. [given, F1, F2, F6, F7, F9, step 1.2, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "F9",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For a nonstationary step, [F5] and the bound $\\|p_k\\|_2\\le\\overline\\lambda\\|g_k\\|_2$ give\n$$\n\\alpha_k\\ge\\frac{1-c_2}{\\Lambda}\n\\frac{\\underline\\lambda}{\\overline\\lambda}\n\\frac{\\|g_k\\|_2}{\\|p_k\\|_2}\n\\ge\\frac{(1-c_2)\\underline\\lambda}{\\Lambda\\overline\\lambda^2}.\n$$\nAlso $-g_k^Tp_k\\ge\\underline\\lambda\\|g_k\\|_2^2$ by step 1.1. Using Armijo,\n$$\nr_k-r_{k+1}\\ge c_1\\alpha_k(-g_k^Tp_k)\n\\ge\\frac{c_1(1-c_2)\\underline\\lambda^2}\n{\\Lambda\\overline\\lambda^2}\\|g_k\\|_2^2.\n$$\n[F1, F2, F4, F5, step 1.1, step 1.2, step 2.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $e_k:=x_k-x_*$, [F9] applied with $u=x_*$ and $v=x_k$ gives\n$$\nr_k\\le g_k^Te_k-\\frac\\mu2\\|e_k\\|_2^2\n\\le\\|g_k\\|_2\\|e_k\\|_2-\\frac\\mu2\\|e_k\\|_2^2\n\\le\\frac{\\|g_k\\|_2^2}{2\\mu},\n$$\nwhere the last inequality is completion of the square. Combining with step 3.1 yields $r_{k+1}\\le(1-\\kappa)r_k$. The bounds $\\mu\\le\\Lambda$, $\\underline\\lambda\\le\\overline\\lambda$, and $2c_1(1-c_2)<1$ give $0<\\kappa<1$. [given, F8, F9, step 3.1, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F8",
+            "F9",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Iterating step 4.1 proves $r_k\\le(1-\\kappa)^kr_0$. The strong-convexity lower bound $r_k\\ge\\frac\\mu2\\|e_k\\|_2^2$ gives the stated iterate bound, so $x_k\\to x_*$. The gradient norms also tend to zero by step 1.2 (or by continuity of $\\nabla f$ at $x_*$). [F6, step 1.2, step 2.1, step 4.1, algebra] ∎",
+          "step": "5.1",
+          "inputs": [
+            "F6",
+            "step 1.2",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n≥1 and a nonempty object or strict curvature data; the zero-dimensional case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 identifies a zero gradient as stationary at x*; an infinite continuation has only nonstationary steps."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement assumes n≥1 and the steps 1.1, 1.2, 1.3, 2.1, 2.2, 3.1 use dimension-independent formulas; the determinant proof explicitly includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes undefined denominators through SPD and positive-curvature hypotheses, and steps 1.1, 1.2, 1.3, 2.1, 2.2, 3.1 verify the relevant nondegenerate branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 1.2, 1.3, 2.1, 2.2, 3.1 retain the accepted-step, initial, and finite-iteration endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 1.3, 2.1, 2.2, 3.1 use finite constructions and pointwise existence; no infinite family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-71",
+        "notes": "Contracts were derived from final proof steps and exact linked supplier sections. Cross-batch draft suppliers were inspected; their independent acceptance is not claimed."
+      }
+    },
+    "thm-full-memory-bfgs-local-superlinear-convergence": {
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-full-memory-bfgs-global-linear-convergence",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let $f:\\mathbb R^n\\to\\mathbb R$ have continuous second partial derivatives ($C^2$), let $x_0\\in\\mathbb R^n$, and set $L_0:=\\{x:f(x)\\le f(x_0)\\}$. Assume $L_0$ is convex, contains a global minimizer $x_*$, and for every $x\\in L_0$ the Hessian $G(x):=\\nabla^2 f(x)$ is symmetric and satisfies, for constants $0<\\mu\\le\\Lambda<\\infty$,\n$$\n\\mu\\|v\\|_2^2\\le v^TG(x)v,\\qquad \\|G(x)\\|_2\\le\\Lambda\n\\quad(v\\in\\mathbb R^n),\n$$\nwhere $\\|A\\|_2:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$ is the Euclidean operator norm. Fix $0<c_1<c_2<1/2$ for the line searches. Write $\\psi(B):=\\operatorname{tr}(B)-\\log\\det(B)$ as in [[lem-bfgs-trace-determinant-potential-identities]], with $\\operatorname{tr}(B)$ the sum of diagonal entries. Consider the exact, undamped branch of [[alg-full-memory-bfgs-with-curvature-safeguards]] with any SPD initial $H_0$, and suppose every nonstationary line search succeeds. For every generated iterate,\n$$\nf(x_k)-f(x_*)\\le \\exp(-\\tau\\delta k)\\,[f(x_0)-f(x_*)],\n$$\nwhere\n$$\nC_0:=\\max\\{1,\\Lambda^2/\\mu-\\log\\mu-1\\},\\qquad\n\\delta:=\\exp[-C_0-\\psi(B_0)],\\qquad\n\\tau:=\\frac{2\\mu c_1(1-c_2)}{\\Lambda},\n\\quad B_0:=H_0^{-1}.\n$$\nFor an infinite successful continuation, $x_k\\to x_*$ with an R-linear error bound, meaning $\\|x_k-x_*\\|_2\\le Cq^k$ for some $C>0$ and $0<q<1$. A stationary termination is at $x_*$. A finite iteration-budget stop or line-search failure gives only a finite prefix.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-full-memory-bfgs-dennis-more-condition",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of [[thm-full-memory-bfgs-global-linear-convergence]] and consider an infinite, nonstationary exact-undamped BFGS run with successful strong Wolfe searches. Suppose $G(x)=\\nabla^2 f(x)$ is $L_G$-Lipschitz in operator norm on a neighborhood of $x_*$. With $B_k:=H_k^{-1}$ and $s_k:=x_{k+1}-x_k$, the iterates satisfy\n$$ \\frac{\\|(B_k-G_*)s_k\\|_2}{\\|s_k\\|_2}\\longrightarrow0,\\qquad G_*:=G(x_*). $$\nSince $s_k=\\alpha_kp_k$ with $\\alpha_k>0$, the same limit holds with $p_k$ in place of $s_k$. This is the Dennis–Moré condition used by the local full-memory superlinear convergence result.\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "source_section": "Definition",
+          "quote": "Inputs are a $C^1$ objective $f:D\\to\\mathbb R$ on an open $D\\subseteq\\mathbb R^n$, $x_0\\in D$, consistent SPD matrices $B_0,H_0$ with $B_0H_0=H_0B_0=I$, a reset scale $\\gamma>0$, constants $0<c_1<c_2<1/2$, finite line-search budgets $E,Z$, a finite iteration budget $K$, a direction mode exact or rounded-Cholesky, and an update mode undamped or Powell.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$ have continuous first and second partial derivatives. Put $g(x):=\\nabla f(x)$ and $G(x):=\\nabla^2 f(x)$, using the conventions of [[def-jacobian-matrix-and-gradient]] and [[def-hessian-and-euclidean-critical-point]]. Let $K\\subseteq U$ be convex. Suppose that for every $x\\in K$, $G(x)$ is symmetric and, for constants $0<\\mu\\le\\Lambda<\\infty$,\n$$ \\mu\\|w\\|_2^2\\le w^TG(x)w\\quad(w\\in\\mathbb R^n),\\qquad \\|G(x)\\|_2\\le\\Lambda, $$\nwhere $\\|A\\|_2:=\\sup_{\\|w\\|_2=1}\\|Aw\\|_2$. Then for all $u,v\\in K$, with $d:=u-v$,\n$$ \\|g(u)-g(v)\\|_2\\le\\Lambda\\|d\\|_2, \\qquad (g(u)-g(v))^Td\\ge\\mu\\|d\\|_2^2, $$\nand\n$$ \\frac\\mu2\\|d\\|_2^2\\le f(u)-f(v)-g(v)^Td\\le\\frac\\Lambda2\\|d\\|_2^2. $$\nSeparately, let $W\\subseteq U$ be convex, let $x_*\\in W$, and suppose $G$ is $L_G$-Lipschitz on $W$ in operator norm. Then for all $u,v\\in W$, with $d:=u-v$,\n$$ \\|g(u)-g(v)-G(x_*)d\\|_2 \\le L_G\\max\\{\\|u-x_*\\|_2,\\|v-x_*\\|_2\\}\\,\\|d\\|_2. $$\n\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-second-order-taylor-expansion-with-the-hessian",
+          "source_section": "Statement",
+          "quote": "For a $C^2$ scalar field near $a$,",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-bracketing-zoom-strong-wolfe-search",
+          "source_section": "Definition",
+          "quote": "1. Set $m:=(a+b)/2$. If $x+mp\\notin D$, return `domain-exit` without\n   evaluating the trial.\n2. Evaluate $\\phi(m)$ and $\\phi'(m)$. If\n   $\\phi(m)>\\phi(0)+c_1m\\phi'(0)$ or $\\phi(m)\\ge\\phi(a)$, set $b:=m$.\n   Otherwise, if $|\\phi'(m)|\\le c_2|\\phi'(0)|$, return $m$ as a strong Wolfe\n   step. In the remaining branch, if $\\phi'(m)(b-a)\\ge0$, first set\n   $b:=a$; then set $a:=m$.\n3. If the zoom budget is exhausted, return `evaluation-budget-exhausted`.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "Assume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "### The algebra of the inner product",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The global minimizer $x_*$ is interior to $\\mathbb R^n$, so each coordinate restriction has a minimum at $x_*$ and $g_*:=\\nabla f(x_*)=0$. By [F1], $e_k\\to0$ and the eigenvalues of $G_*$ lie in $[\\mu,\\Lambda]$. [given, F1, F8, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The Dennis–Moré condition [F2] and $s_k=\\alpha_kp_k$, $\\alpha_k>0$, give $\\|(B_k-G_*)p_k\\|_2=o(\\|p_k\\|_2)$. [given, F2, F3, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For all sufficiently large $k$, [F4] gives $g_k=G_*e_k+r_k$ with $\\|r_k\\|_2\\le L_G\\|e_k\\|_2^2$. By [F3], $B_kp_k=-g_k$, so\n$$\nG_*p_k=-g_k+(G_*-B_k)p_k.\n$$\nThe smallest eigenvalue of $G_*$ is at least $\\mu$, hence $\\mu\\|p_k\\|_2\\le\\|G_*p_k\\|_2\\le\\Lambda\\|e_k\\|_2+o(\\|p_k\\|_2)$, using [F9]. For sufficiently large $k$, the $o(\\|p_k\\|_2)$ term is at most $\\mu\\|p_k\\|_2/2$, so $\\mu\\|p_k\\|_2/2\\le\\Lambda\\|e_k\\|_2$ and $\\|p_k\\|_2\\le2\\Lambda\\|e_k\\|_2/\\mu$. Substitution into $G_*(e_k+p_k)=(G_*-B_k)p_k-r_k$ gives $G_*(e_k+p_k)=o(\\|e_k\\|_2)$; the same eigenvalue lower bound yields $e_k+p_k=o(\\|e_k\\|_2)$. [given, F1, F2, F3, F4, F8, F9, step 1.2, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F8",
+            "F9",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For sufficiently large $k$, $e_k$ and $e_k+p_k$ lie in the local neighborhood. Apply [F4] and [F5] to $z=e_k$ and $z=e_k+p_k$. Since $e_k+p_k=o(\\|e_k\\|_2)$, these expansions give\n$$\ng_k^Tp_k=-e_k^TG_*e_k+o(\\|e_k\\|_2^2),\\quad\nf(x_k+p_k)-f(x_k)=-\\tfrac12e_k^TG_*e_k+o(\\|e_k\\|_2^2),\\quad\ng(x_k+p_k)=o(\\|e_k\\|_2).\n$$\nBecause $G_*\\succeq\\mu I$ and $c_1<1/2$,\n$$\nf(x_k+p_k)-f(x_k)-c_1g_k^Tp_k=-(1/2-c_1)e_k^TG_*e_k+o(\\|e_k\\|_2^2)<0\n$$\nfor all sufficiently large $k$, so Armijo holds. Also $p_k=O(\\|e_k\\|_2)$ by step 2.1; [F9] gives $|g(x_k+p_k)^Tp_k|=o(\\|e_k\\|_2^2)$, while $|g_k^Tp_k|\\ge(\\mu/2)\\|e_k\\|_2^2$ eventually. Thus the strong curvature condition holds. The search first tries $\\alpha=1$ by [F6], and the two checks are exactly [F7], so the unit step is accepted. [given, F1, F4, F5, F6, F7, F9, step 2.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Eventually $x_{k+1}=x_k+p_k$, so $e_{k+1}=e_k+p_k=o(\\|e_k\\|_2)$ by step 2.1. This is the claimed superlinear error ratio. [step 2.1, step 3.1] ∎",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n≥1 and a nonempty object or strict curvature data; the zero-dimensional case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement assumes an infinite nonstationary run; steps 1.1–2.2 establish the eventual local and unit-step regime."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement assumes n≥1 and the steps 1.1, 1.2, 1.3, 2.1, 2.2 use dimension-independent formulas; the determinant proof explicitly includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes undefined denominators through SPD and positive-curvature hypotheses, and steps 1.1, 1.2, 1.3, 2.1, 2.2 verify the relevant nondegenerate branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 1.2, 1.3, 2.1, 2.2 retain the accepted-step, initial, and finite-iteration endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 1.3, 2.1, 2.2 use finite constructions and pointwise existence; no infinite family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-71",
+        "notes": "Contracts were derived from final proof steps and exact linked supplier sections. Cross-batch draft suppliers were inspected; their independent acceptance is not claimed."
+      }
+    },
+    "ex-bfgs-secant-on-a-strongly-convex-quadratic": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bfgs-curvature-pair-and-update-formulas",
+          "source_section": "Definition",
+          "quote": "For **Powell damping**, first set $c:=s^TBs$. If $s^Ty\\ge0.2c$, set $\\widetilde y:=y$. If $s^Ty<0.2c$, set\n$$\n\\theta:=\\frac{0.8c}{c-s^Ty},\n\\qquad\n\\widetilde y:=\\theta y+(1-\\theta)Bs.\n$$\nThe damped BFGS update is the same formula with $y$ replaced by $\\widetilde y$ and $\\rho=(s^T\\widetilde y)^{-1}$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "source_section": "Definition",
+          "quote": "The mathematical exact direction mode and the BFGS matrix updates are interpreted over $\\mathbb R$. The rounded-Cholesky direction mode specifies a computed factor-and-solve direction only; this item supplies no backward-error or convergence theorem for that mode. Its returned direction is checked for descent before the strong Wolfe search. The line-search procedure can fail within its finite budgets even when an acceptable step exists.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+          "source_section": "Statement",
+          "quote": "Let $B\\in\\mathbb R^{n\\times n}$ be SPD, let $H=B^{-1}$, and let $s,y\\in\\mathbb R^n$ satisfy $s\\ne0$ and $d:=s^Ty>0$. Define $B^+,H^+$ by [[def-bfgs-curvature-pair-and-update-formulas]]. Then $B^+$ and $H^+$ are SPD, $B^+s=y$, $H^+y=s$, and $B^+H^+=I$. In particular, the two updates remain consistent inverses and satisfy their secant equations.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The gradient is $\\nabla f(x)=Ax$, so $g_0=(2,3)^T$ and the direction in [F2] is $p_0=-g_0=(-2,-3)^T$. Along this ray, $\\phi'(t)=g_0^Tp_0+t\\,p_0^TAp_0=-13+35t$, so the exact minimizer is $\\alpha_0=13/35$. [given, F1, F2, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At this step $\\phi'(\\alpha_0)=0$, which satisfies the strong curvature test for $c_2=2/5$. The quadratic identity $\\phi(\\alpha)=\\phi(0)+\\alpha\\phi'(0)+\\tfrac12\\alpha^2p_0^TAp_0$ gives $\\phi(\\alpha_0)-\\phi(0)=-169/70\\le -(10^{-4})(169/35)=10^{-4}\\alpha_0\\phi'(0)$, so the strong Wolfe Armijo test also holds. [given, F2, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The step and gradient change are $s_0=\\alpha_0p_0$ and $y_0=As_0=\\alpha_0(-4,-9)^T$. Hence $s_0^Ty_0=35\\alpha_0^2>0$ and $s_0^TB_0s_0=13\\alpha_0^2>0$. [given, F1, algebra]",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitution in [F1] gives\n$$\nB_1=I-\\frac1{13}\\begin{pmatrix}4&6\\\\6&9\\end{pmatrix}\n+\\frac1{35}\\begin{pmatrix}16&36\\\\36&81\\end{pmatrix}\n=\\frac1{455}\\begin{pmatrix}523&258\\\\258&1193\\end{pmatrix}.\n$$\nMultiplication yields $B_1s_0=\\alpha_0(-4,-9)^T=y_0$. The positive curvature from step 1.3 and [F3] also imply $B_1$ is SPD. [given, F1, F3, step 1.3, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n≥1 and a nonempty object or strict curvature data; the zero-dimensional case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The fixed data in the Example are nondegenerate and every calculation is shown in steps 1.1, 1.2, 2.1, 2.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement assumes n≥1 and the steps 1.1, 1.2, 2.1, 2.2 use dimension-independent formulas; the determinant proof explicitly includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes undefined denominators through SPD and positive-curvature hypotheses, and steps 1.1, 1.2, 2.1, 2.2 verify the relevant nondegenerate branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 1.2, 2.1, 2.2 retain the accepted-step, initial, and finite-iteration endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1, 2.2 use finite constructions and pointwise existence; no infinite family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "exact-2x2-bfgs-secant-update",
+          "asserts": "For A=diag(2,3), x0=(1,1), B0=I and alpha=13/35, the displayed B1 gives B1 s0=y0=(-52/35,-117/35)^T; s0^T y0=169/35>0.",
+          "claim": "One finite exact-arithmetic quadratic instance checks the secant update and curvature; it does not establish a general BFGS theorem.",
+          "checked_in": "Verification steps 1.3 and 2.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-71",
+        "notes": "Contracts were derived from final proof steps and exact linked supplier sections. Cross-batch draft suppliers were inspected; their independent acceptance is not claimed."
+      }
+    },
+    "ex-bfgs-powell-damping-after-negative-curvature": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bfgs-curvature-pair-and-update-formulas",
+          "source_section": "Definition",
+          "quote": "For **Powell damping**, first set $c:=s^TBs$. If $s^Ty\\ge0.2c$, set $\\widetilde y:=y$. If $s^Ty<0.2c$, set\n$$\n\\theta:=\\frac{0.8c}{c-s^Ty},\n\\qquad\n\\widetilde y:=\\theta y+(1-\\theta)Bs.\n$$\nThe damped BFGS update is the same formula with $y$ replaced by $\\widetilde y$ and $\\rho=(s^T\\widetilde y)^{-1}$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-powell-damping-gives-positive-curvature",
+          "source_section": "Statement",
+          "quote": "Let $B$ be SPD, let $s\\ne0$, and put $c:=s^TBs>0$ and $q:=s^Ty$ for an arbitrary $y$. Define $\\widetilde y$ by Powell damping in [[def-bfgs-curvature-pair-and-update-formulas]]. Then $s^T\\widetilde y\\ge0.2c>0$. In the damped branch, the coefficient $\\theta$ is strictly between $0$ and $1$ and $s^T\\widetilde y=0.2c$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+          "source_section": "Statement",
+          "quote": "Let $B\\in\\mathbb R^{n\\times n}$ be SPD, let $H=B^{-1}$, and let $s,y\\in\\mathbb R^n$ satisfy $s\\ne0$ and $d:=s^Ty>0$. Define $B^+,H^+$ by [[def-bfgs-curvature-pair-and-update-formulas]]. Then $B^+$ and $H^+$ are SPD, $B^+s=y$, $H^+y=s$, and $B^+H^+=I$. In particular, the two updates remain consistent inverses and satisfy their secant equations.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "source_section": "Definition",
+          "quote": "Call [[alg-bracketing-zoom-strong-wolfe-search]] with $(f,x_k,p_k,c_1,c_2,E,Z)$. If it returns a failure status, return that status and $x_k$. Otherwise take its positive strong Wolfe step $\\alpha_k$, and define\n$$\ns_k:=\\alpha_kp_k,\\qquad y_k:=\\nabla f(x_k+s_k)-g_k.\n$$\nIn undamped mode set $\\bar y_k:=y_k$. In Powell mode put $c_k:=s_k^TB_ks_k$ and use the damping rule of [[def-bfgs-curvature-pair-and-update-formulas]] to form $\\bar y_k$. If $s_k^T\\bar y_k\\le0$, skip the matrix update and return curvature-rejected. Otherwise update both matrices by\n$$\nB_{k+1}=B_k-\\frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k}\n+\\frac{\\bar y_k\\bar y_k^T}{s_k^T\\bar y_k},\n\\qquad\nH_{k+1}=(I-\\rho_ks_k\\bar y_k^T)H_k(I-\\rho_k\\bar y_ks_k^T)+\\rho_ks_ks_k^T,\n\\quad\n\\rho_k=(s_k^T\\bar y_k)^{-1}.\n$$\nReturn update-failure if any required scalar or matrix operation is undefined; otherwise continue until stationarity or budget exhaustion. The output is the last point and one of stationary, a line-search status, factorization/solve failure, curvature-rejected, update-failure, or iteration-budget-exhausted.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $g^Tp=-1<0$, and $f(x+p)-f(x)=-3/2$. The Armijo inequality holds for $c_1=10^{-4}$, but the directional derivatives are $\\phi'(0)=-1$ and $\\phi'(1)=-2$. For $c_2=2/5$, the Wolfe curvature test would require $-2\\ge-2/5$, which is false; the strong curvature test fails as well. Thus this is a nonconvex trial pair, not a step accepted by the strong-Wolfe search of [F4]. [given, F4, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The raw pair has $s^Ty=-1$, so its BFGS curvature denominator is negative. Direct substitution into the formal Hessian-update expression gives $I-ss^T+yy^T/(-1)=\\operatorname{diag}(-1,1)$, whose quadratic form at $e_1=(1,0)^T$ is $-1$; it is not SPD. [given, F1, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Here $c=s^TBs=1$ and $s^Ty=-1<0.2c$, so $\\theta=0.8/(1-(-1))=0.4$ and $\\widetilde y=0.4(-1,0)^T+0.6(1,0)^T=(0.2,0)^T$. Therefore $s^T\\widetilde y=0.2>0$, as also follows from [F2]. [given, F1, F2, algebra]",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The damped update is\n$$\nB^+=I-ss^T+\\frac{\\widetilde y\\widetilde y^T}{s^T\\widetilde y}\n=\\operatorname{diag}(0.2,1).\n$$\nIt is SPD and $B^+s=(0.2,0)^T=\\widetilde y$, in agreement with [F3]. The example shows the algebraic role of damping; because the trial fails Wolfe, the normal line-search algorithm rejects it rather than treating it as a successful BFGS iteration. [given, F1, F3, step 1.3, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n≥1 and a nonempty object or strict curvature data; the zero-dimensional case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The fixed data in the Example are nondegenerate and every calculation is shown in steps 1.1, 1.2, 2.1, 2.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement assumes n≥1 and the steps 1.1, 1.2, 2.1, 2.2 use dimension-independent formulas; the determinant proof explicitly includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes undefined denominators through SPD and positive-curvature hypotheses, and steps 1.1, 1.2, 2.1, 2.2 verify the relevant nondegenerate branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 1.2, 2.1, 2.2 retain the accepted-step, initial, and finite-iteration endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1, 2.2 use finite constructions and pointwise existence; no infinite family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "negative-curvature-powell-damping",
+          "asserts": "For s=(1,0), y=(-1,0), B=I, the raw matrix is diag(-1,1); theta=0.4, y_tilde=(0.2,0), and the damped matrix is diag(0.2,1), which is SPD and satisfies Bplus s=y_tilde.",
+          "claim": "One finite nonconvex trial checks rejection by Wolfe and the algebraic damping repair; the trial is not an accepted BFGS step.",
+          "checked_in": "Verification steps 1.1–2.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-71",
+        "notes": "Contracts were derived from final proof steps and exact linked supplier sections. Cross-batch draft suppliers were inspected; their independent acceptance is not claimed."
+      }
+    },
+    "ex-lbfgs-memory-dependent-cost": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+          "source_section": "Statement",
+          "quote": "Let $0\\le r\\le m$ stored pairs $(s_i,y_i)$, $i=1,\\ldots,r$, be ordered oldest to newest, with $s_i^Ty_i>0$, and let $\\rho_i=(s_i^Ty_i)^{-1}$. Start from $H_0=\\gamma I$ with $\\gamma>0$ and apply the inverse updates of [[def-bfgs-curvature-pair-and-update-formulas]] in that order, obtaining $H_r$. For every $g\\in\\mathbb R^n$, the two-loop recursion in [[alg-lbfgs-two-loop-with-curvature-filter]] returns $H_rg$ before changing its sign to form the search direction. The recursion uses $O(rn+n)$ scalar operations and stores $O(rn+n)$ real entries; when $m\\ge1$ and $r\\le m$, these are $O(mn)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-full-memory-bfgs-with-curvature-safeguards",
+          "source_section": "Definition",
+          "quote": "The baseline inverse-matrix implementation performs $O(n^2)$ matrix-vector and rank-two update work and stores $O(n^2)$ entries. The optional Cholesky direction path additionally factors a dense matrix and therefore has a cubic factorization cost.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-lbfgs-two-loop-with-curvature-filter",
+          "source_section": "Definition",
+          "quote": "Inputs are a $C^1$ objective $f:D\\to\\mathbb R$ on an open set $D\\subseteq\\mathbb R^n$, an initial point $x_0\\in D$, a positive integer memory length $m$, a fallback scale $\\gamma_0>0$, line-search constants $0<c_1<c_2<1/2$, finite expansion and zoom budgets $E,Z$, and an iteration budget $K$. At every iteration, store a list of at most $m$ pairs $(s_i,y_i)$ in chronological order, retaining only pairs with $s_i^Ty_i>0$. Let $\\rho_i=(s_i^Ty_i)^{-1}$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each dense matrix contains $n^2=1000^2=1{,}000{,}000$ real entries. The paired state in [F3] therefore stores $2n^2=2{,}000{,}000$ matrix entries; a one-matrix implementation stores $n^2=1{,}000{,}000$. [given, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The L-BFGS pair list contains at most $2mn=2\\cdot10\\cdot1000=20{,}000$ real coordinates, plus $O(n+m)$ temporary vectors and scalars. [given, F1, F2, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], the two-loop recursion uses $O(mn)$ scalar work, compared with $O(n^2)$ dense matrix-vector and rank-two update work for each BFGS matrix. Here $mn=10{,}000$ while $n^2=1{,}000{,}000$; the paired representation uses 100 times as many matrix entries as correction-pair coordinates, and a one-matrix representation uses 50 times as many. These are storage comparisons, not exact operation totals. [given, F1, F3, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n≥1 and a nonempty object or strict curvature data; the zero-dimensional case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The fixed data in the Example are nondegenerate and every calculation is shown in steps 1.1, 1.2, 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement assumes n≥1 and the steps 1.1, 1.2, 2.1 use dimension-independent formulas; the determinant proof explicitly includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes undefined denominators through SPD and positive-curvature hypotheses, and steps 1.1, 1.2, 2.1 verify the relevant nondegenerate branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1, 1.2, 2.1 retain the accepted-step, initial, and finite-iteration endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1 use finite constructions and pointwise existence; no infinite family of witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one-way and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "n1000-m10-storage-count",
+          "asserts": "At n=1000 and m=10, one dense matrix stores 1,000,000 entries, the paired B/H state stores 2,000,000, and 10 correction pairs store 20,000 vector coordinates, before O(n+m) temporary storage.",
+          "claim": "The concrete counts illustrate the asymptotic storage comparison and are not exact floating-point operation totals.",
+          "checked_in": "Verification steps 1.1–2.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-71",
+        "notes": "Contracts were derived from final proof steps and exact linked supplier sections. Cross-batch draft suppliers were inspected; their independent acceptance is not claimed."
+      }
+    }
+  }
+}

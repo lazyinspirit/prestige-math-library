@@ -1,0 +1,425 @@
+{
+  "group": "d",
+  "batches": ["35"],
+  "pages_read": [
+    "runge-kutta-methods-and-order",
+    "runge-kutta-methods-and-order-examples"
+  ],
+  "items_read": [
+    "lem-chebyshev-rkc-bounds-and-endpoint-derivatives",
+    "def-explicit-runge-kutta-tableau-and-stage-map",
+    "alg-rkc1-chebyshev",
+    "alg-rkc2-linear-chebyshev",
+    "alg-rkc2-nonlinear",
+    "def-euler-midpoint-rk4-tableaus",
+    "prop-explicit-rk-order-conditions-through-four",
+    "alg-ssprk33",
+    "prop-euler-midpoint-rk4-orders-and-stability-functions",
+    "prop-rkc-stability-intervals-and-stage-degree",
+    "lem-rkc-chebyshev-stage-perturbation-amplification",
+    "prop-ssprk33-third-order-and-convex-preservation",
+    "thm-nonlinear-rkc2-order-two-and-global-error",
+    "ex-midpoint-order-loss-at-continuous-time-kink",
+    "ex-euler-midpoint-rk4-fixed-time-error-slopes",
+    "ex-rkc-self-adjoint-heat-stability-work",
+    "ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth",
+    "ex-rkc-stage-roundoff-quadratic-amplification"
+  ],
+  "conventions": [
+    {
+      "convention": "Explicit tableaux have strictly lower-triangular A and row-sum abscissae c_i=sum_{j<i} a_ij; stages are queried in order, and domain or evaluation failure returns a status rather than a numerical value.",
+      "fixed_by": "def-explicit-runge-kutta-tableau-and-stage-map",
+      "matters_for": [
+        "def-euler-midpoint-rk4-tableaus",
+        "prop-explicit-rk-order-conditions-through-four",
+        "alg-ssprk33",
+        "prop-euler-midpoint-rk4-orders-and-stability-functions"
+      ]
+    },
+    {
+      "convention": "Local order p means a uniform exact-start method-minus-exact defect O(h^(p+1)); order assertions inherit the stated smoothness and compact-tube hypotheses.",
+      "fixed_by": "prop-explicit-rk-order-conditions-through-four",
+      "matters_for": [
+        "prop-euler-midpoint-rk4-orders-and-stability-functions",
+        "prop-ssprk33-third-order-and-convex-preservation",
+        "thm-nonlinear-rkc2-order-two-and-global-error",
+        "ex-midpoint-order-loss-at-continuous-time-kink"
+      ]
+    },
+    {
+      "convention": "RKC1 permits s≥1; both RKC2 algorithms require s≥2. Nonlinear RKC2 uses b_0=b_1=b_2=1/4, c_0=0, c_1=b_1 w_1, and c_j=b_j w_1 j² for j≥2.",
+      "fixed_by": "alg-rkc2-nonlinear",
+      "matters_for": [
+        "prop-rkc-stability-intervals-and-stage-degree",
+        "thm-nonlinear-rkc2-order-two-and-global-error"
+      ]
+    },
+    {
+      "convention": "The RKC1 real stability set is exactly [-2s²,0]; the displayed RKC2 interval is certified rather than claimed maximal. Euclidean nonexpansion requires a self-adjoint nonpositive operator.",
+      "fixed_by": "prop-rkc-stability-intervals-and-stage-degree",
+      "matters_for": [
+        "ex-rkc-self-adjoint-heat-stability-work",
+        "ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth",
+        "lem-rkc-chebyshev-stage-perturbation-amplification"
+      ]
+    },
+    {
+      "convention": "Stage perturbations are additive vectors inserted after recurrence updates, with the initial state unperturbed; their assumed norm bound is not a floating-point error estimate.",
+      "fixed_by": "lem-rkc-chebyshev-stage-perturbation-amplification",
+      "matters_for": [
+        "ex-rkc-stage-roundoff-quadratic-amplification"
+      ]
+    },
+    {
+      "convention": "Nonlinear RKC2 accuracy and one-step stability constants may depend on fixed s and the tube; global error additionally requires the numerical trajectory and stages to remain admitted in the common tube.",
+      "fixed_by": "thm-nonlinear-rkc2-order-two-and-global-error",
+      "matters_for": [
+        "thm-nonlinear-rkc2-order-two-and-global-error"
+      ]
+    },
+    {
+      "convention": "SSP preservation assumes forward-Euler preservation at the actual stage start times t, t+h, and t+h/2; the functional estimates bound every stage and output by the initial functional value.",
+      "fixed_by": "prop-ssprk33-third-order-and-convex-preservation",
+      "matters_for": [
+        "prop-ssprk33-third-order-and-convex-preservation"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-explicit-runge-kutta-tableau-and-stage-map",
+      "statement": "An explicit s-stage tableau has a_ij=0 whenever j≥i and c_i=sum_{j<i} a_ij. Its ordered stages are Y_i=y+h sum_{j<i} a_ij K_j, K_i=f(t+c_i h,Y_i), with candidate output y+h sum_i b_i K_i and explicit domain/evaluation failure statuses.",
+      "used_by": [
+        "alg-rkc1-chebyshev",
+        "alg-rkc2-linear-chebyshev",
+        "alg-rkc2-nonlinear",
+        "def-euler-midpoint-rk4-tableaus",
+        "prop-explicit-rk-order-conditions-through-four",
+        "alg-ssprk33",
+        "prop-euler-midpoint-rk4-orders-and-stability-functions",
+        "prop-ssprk33-third-order-and-convex-preservation",
+        "ex-midpoint-order-loss-at-continuous-time-kink"
+      ]
+    },
+    {
+      "id": "lem-chebyshev-rkc-bounds-and-endpoint-derivatives",
+      "statement": "For every natural n, |T_n(x)|≤1 and |U_n(x)|≤n+1 on [-1,1], with T_n(±1) and U_n(±1) as stated. For n≥1, |T_n(x)|>1 when |x|>1; T_n and U_n have degree n and leading coefficients 2^(n-1) and 2^n. T_n'(1)=n² and T_n''(1)=n²(n²-1)/3.",
+      "used_by": [
+        "prop-rkc-stability-intervals-and-stage-degree",
+        "lem-rkc-chebyshev-stage-perturbation-amplification",
+        "thm-nonlinear-rkc2-order-two-and-global-error"
+      ]
+    },
+    {
+      "id": "prop-explicit-rk-order-conditions-through-four",
+      "statement": "For an explicit row-sum tableau and a C^4 autonomous field on an open convex domain, with exact solution and exact-start stages in a common compact convex set and derivatives through order four bounded there, the displayed coefficient equations through each p≤4 suffice for uniform local order at least p.",
+      "used_by": [
+        "prop-euler-midpoint-rk4-orders-and-stability-functions",
+        "prop-ssprk33-third-order-and-convex-preservation"
+      ]
+    },
+    {
+      "id": "prop-rkc-stability-intervals-and-stage-degree",
+      "statement": "RKC1 has R_1,s(z)=T_s(1+z/s²) and exact real stability set [-2s²,0]. Both linear RKC2 and nonlinear RKC2 specialized to the scalar linear equation have R_2,s(z)=a_s+b_s T_s(1+w_1 z), normalized through the second derivative at zero and stable on [-2(s²-1)/3,0]. The corresponding spectral restrictions imply Euclidean nonexpansion for self-adjoint nonpositive matrices.",
+      "used_by": [
+        "thm-nonlinear-rkc2-order-two-and-global-error",
+        "ex-rkc-self-adjoint-heat-stability-work",
+        "ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth"
+      ]
+    },
+    {
+      "id": "prop-euler-midpoint-rk4-orders-and-stability-functions",
+      "statement": "Under the order-condition supplier's smoothness and compact-tube hypotheses, Euler, explicit midpoint, and classical RK4 have uniform local orders at least one, two, and four. Their scalar stability polynomials are the exponential truncations through degrees one, two, and four; Euler and midpoint have negative-real stability interval exactly [-2,0].",
+      "used_by": [
+        "ex-euler-midpoint-rk4-fixed-time-error-slopes",
+        "ex-rkc-self-adjoint-heat-stability-work"
+      ]
+    },
+    {
+      "id": "lem-rkc-chebyshev-stage-perturbation-amplification",
+      "statement": "For the stated self-adjoint nonpositive operator and certified RKC spectral interval, additive recurrence perturbations of norm at most ε give final stage error at most s(s+1)ε/2. Linear RKC2 multiplies that error by b_s; a separate output perturbation adds its norm.",
+      "used_by": [
+        "ex-rkc-stage-roundoff-quadratic-amplification"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-trigonometric-parity-and-pythagorean-identity",
+      "used_for": "Trigonometric absolute-value bounds in the Chebyshev lemma.",
+      "opened": true
+    },
+    {
+      "id": "def-canonical-natural",
+      "used_for": "Interpretation of natural indices in real formulas.",
+      "opened": true
+    },
+    {
+      "id": "def-chebyshev-polynomials-first-and-second-kind",
+      "used_for": "Initial values and recurrences for T_n and U_n.",
+      "opened": true
+    },
+    {
+      "id": "def-higher-derivatives-and-smoothness",
+      "used_for": "Iterated derivative and scalar smoothness conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-integer-power",
+      "used_for": "Natural powers, including exponent zero.",
+      "opened": true
+    },
+    {
+      "id": "def-polynomial-evaluation-and-root",
+      "used_for": "Chebyshev polynomial evaluation functions.",
+      "opened": true
+    },
+    {
+      "id": "lem-chebyshev-degree-leading-coefficients-and-extreme-values",
+      "used_for": "Degree and leading coefficients only; no extremum estimate is imported.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-of-a-power",
+      "used_for": "Differentiability of polynomial evaluation functions.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-triangle-inequality",
+      "used_for": "Sine multiple-angle bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Differentiating Chebyshev recurrences, polynomial stability functions, and ODE expansions.",
+      "opened": true
+    },
+    {
+      "id": "thm-chebyshev-multiple-angle-identities",
+      "used_for": "Trigonometric representations of T_n and U_n.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Chebyshev recurrence inductions.",
+      "opened": true
+    },
+    {
+      "id": "thm-quarter-turn-values-and-shift-formulas",
+      "used_for": "Endpoint trigonometric values and shifts.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-addition-formulas",
+      "used_for": "The bound |sin((m+1)θ)|≤(m+1)|sin θ|.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-cosine-signs-monotonicity-and-ranges",
+      "used_for": "Representing every x∈[-1,1] as cos θ.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-cosine-zero-sets-and-fundamental-period",
+      "used_for": "Handling sin θ=0 in the U_n interval bound.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "State norms and orthonormal-coordinate calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "Open-domain IVP and exact-solution interface.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-map",
+      "used_for": "Linear RKC operators.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-space-of-linear-maps",
+      "used_for": "Linear-map sums and scalar multiples in matrix recurrences.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-normed-spaces-are-banach",
+      "used_for": "Banach hypotheses for finite-dimensional chain rules.",
+      "opened": true
+    },
+    {
+      "id": "def-ck-and-multi-index-notation-in-several-variables",
+      "used_for": "Continuous ordered partial derivatives and Taylor regularity.",
+      "opened": true
+    },
+    {
+      "id": "lem-standard-basis-of-f-n",
+      "used_for": "Finite bases for the Euclidean spaces used in differentiation.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+      "used_for": "Exact-flow derivative expansions and nonlinear RKC2 consistency.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Euclidean norm axioms and triangle inequalities.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-partial-derivatives-imply-total-differentiability",
+      "used_for": "Passing from coordinate regularity to derivatives used by the chain rule.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "Uniform coordinatewise Taylor remainders on admitted segments.",
+      "opened": true
+    },
+    {
+      "id": "thm-symmetry-of-higher-mixed-partials",
+      "used_for": "Symmetry of the second- and third-order arrays in RK order expansions.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Orthonormal eigenbasis in RKC nonexpansion and perturbation estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+      "used_for": "Orthonormal-coordinate norm calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-polynomial-evaluation-at-an-endomorphism",
+      "used_for": "Chebyshev recurrences and perturbation kernels evaluated at matrices.",
+      "opened": true
+    },
+    {
+      "id": "def-real-and-complex-inner-product-space",
+      "used_for": "Real inner-product and induced-norm conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-self-adjoint-and-normal-endomorphism",
+      "used_for": "Matrix hypotheses for spectral estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Affine compositions of stability polynomials and exponential derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-subset-of-euclidean-space",
+      "used_for": "SSPRK invariant-set preservation.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Global error bounds and fixed-time scalar error constants.",
+      "opened": true
+    },
+    {
+      "id": "lem-exponential-dominates-one-plus-x",
+      "used_for": "Bounding powers in the fixed-time error-slope example.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Exact scalar solution and Taylor expansion of exp(-h).",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Factoring repeated-step errors at fixed final time.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "runge-kutta-methods-and-order",
+      "to": "one-step-ode-consistency-and-local-error",
+      "faithful": true,
+      "note": "The opened one-step definition supplies method-minus-exact defects, uniform O(h^(p+1)) local order, and 1+Lh stability. Owned definitions and proofs preserve these conventions."
+    },
+    {
+      "from": "runge-kutta-methods-and-order",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "Opened the global theorem and finite recurrence lemma. Nonlinear RKC2 supplies p=2, exact initialization, uniform defect and stability constants for fixed s, and the required conditional common-tube containment."
+    },
+    {
+      "from": "stability-regions-and-stiff-equations",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "The Euler stability-disk theorem uses precisely R_E(z)=1+z and derives its disk and negative-real restriction without importing a nonlinear or nonnormal matrix conclusion."
+    },
+    {
+      "from": "adaptive-ode-solvers-and-error-estimation",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "The embedded-pair definition preserves the shared explicit stage recursion and separates the computed pair difference from any reliability or global-error guarantee."
+    },
+    {
+      "from": "geometric-numerical-integration",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "No direct item citation to this batch was found in the page inventory. Its implicit-midpoint and kick/drift results use their own procedures and proofs; explicit midpoint's order or tableau is not substituted for implicit midpoint."
+    },
+    {
+      "from": "parallel-in-time-parareal-and-mgrit",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "Fine propagators compose successful explicit RK substeps and retain failure semantics. The opened scalar examples use the Euler tableau directly and distinguish the sequential fine trajectory from the exact ODE solution."
+    },
+    {
+      "from": "positive-conservative-production-destruction-integrators",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "The opened negative-concentration counterexample uses Euler's scalar multiplier and separately demonstrates that stability and local order do not imply positivity."
+    },
+    {
+      "from": "coagulation-fragmentation-and-sectional-population-balance-numerics",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "No direct item citation to this batch was found. The finite-sectional temporal estimate instead invokes the separate Euler consistency supplier with explicit tube and derivative bounds; it does not infer positivity from RK order."
+    },
+    {
+      "from": "deferred-correction-and-collocation-iterations",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "No direct item citation to this batch was found. Collocation stages use the implicit RK interface, while the SDC stage block is explicitly triangular; their order and iteration claims have separate proofs."
+    },
+    {
+      "from": "imex-and-operator-splitting-methods",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "The ARS222 definition uses the explicit supplier only for its explicit component tableau. Implicit stages and coupled additive order claims remain separate."
+    },
+    {
+      "from": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "The differentiated-stage lemma applies the order conditions to the actual augmented field, retaining augmented C^4 regularity and tube assumptions. The gradient theorem explicitly separates state order from adjoint and derivative consistency."
+    },
+    {
+      "from": "direct-transcription-and-numerical-ode-optimal-control",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "Opened the tableau interface, transcription algorithm, QP lemma, and dosing example. Explicit stages preserve row-sum times and ordered evaluation; implicit solves, sampling domains, derivatives, and quadrature assumptions are stated separately."
+    },
+    {
+      "from": "interacting-particle-mean-field-and-vortex-blob-error",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "The opened RK4 Lipschitz lemma uses the actual tableau. The particle global-error theorem retains joint C^4 regularity, a compact convex tube, paired exact/numerical-start stages, exact initialization, and the zero-stability-constant branch."
+    }
+  ]
+}

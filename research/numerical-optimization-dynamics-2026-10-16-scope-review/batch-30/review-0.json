@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "30",
+  "round": 0,
+  "reviewed_items": [
+    "alg-dyadic-brownian-bridge-increment-tree",
+    "thm-dyadic-brownian-bridge-tree-increment-laws",
+    "def-predictable-stopping-time-grid",
+    "lem-continuous-adapted-process-at-bounded-stopping-time",
+    "lem-stopping-time-ito-step-interval-sum",
+    "alg-adaptive-euler-maruyama-on-predictable-grid",
+    "lem-finite-budget-adaptive-em-status",
+    "lem-adaptive-em-predictable-grid-second-moment",
+    "thm-adaptive-em-predictable-grid-strong-error",
+    "def-scalar-brownian-bridge-from-x-to-y",
+    "lem-scalar-brownian-bridge-restriction-density",
+    "thm-scalar-brownian-bridge-barrier-crossing-probability",
+    "ex-redrawing-rejected-increment-biases-path",
+    "ex-coarse-fine-em-bridge-coupling",
+    "ex-brownian-bridge-barrier-missed-by-endpoints"
+  ],
+  "reviewed_pages": [
+    "adaptive-stochastic-paths-and-brownian-bridge-coupling",
+    "adaptive-stochastic-paths-and-brownian-bridge-coupling-examples"
+  ],
+  "decision": "repair",
+  "reason": "The assigned claims and actual supplier interfaces are covered; the page-only Milstein requirement is present and is not used as a logical premise. Two defects can be repaired locally on the A page, with the adaptive algorithm’s consumers checked below.",
+  "findings": [
+    {
+      "id": "thm-dyadic-brownian-bridge-tree-increment-laws",
+      "type": "local",
+      "reason": "Proof step 3.1 claims the child pair is independent conditional on its parent. That is false: conditional on the parent, the children sum to it and have cross-covariance −(ℓ/4)I. Step 2.1 establishes only unconditional independence. Use that unconditional pair law, then independence of the disjoint parent/innovation pairs; the theorem statement remains sound."
+    },
+    {
+      "id": "alg-adaptive-euler-maruyama-on-predictable-grid",
+      "type": "local",
+      "reason": "The Definition specifies an inconclusive return, but does not explicitly specify the outputs on completion or a common output contract for both statuses. State the returned interpolation/final state, status, current time, pending work, trial count, and mode while preserving the existing branch behavior."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-adaptive-euler-maruyama-on-predictable-grid",
+      "decision": "accept",
+      "reason": "Its use of the tree result remains valid as an unconditional fixed-depth law; the false conditional-independence assertion is not needed."
+    },
+    {
+      "id": "ex-redrawing-rejected-increment-biases-path",
+      "decision": "accept",
+      "reason": "Its path-preservation claim uses parent retention and the child-sum identity, which remain unchanged."
+    },
+    {
+      "id": "ex-coarse-fine-em-bridge-coupling",
+      "decision": "accept",
+      "reason": "Its variance calculation uses the innovation’s independence from the parent; it does not rely on conditional independence of the children."
+    },
+    {
+      "id": "lem-finite-budget-adaptive-em-status",
+      "decision": "accept",
+      "reason": "The status and operation-count claims remain valid under an explicit output contract preserving the stated complete/inconclusive behavior."
+    },
+    {
+      "id": "lem-adaptive-em-predictable-grid-second-moment",
+      "decision": "accept",
+      "reason": "The consumer uses the complete predictable-grid interpolation; clarifying returned outputs does not alter that interface."
+    },
+    {
+      "id": "thm-adaptive-em-predictable-grid-strong-error",
+      "decision": "accept",
+      "reason": "The consumer uses the complete predictable-grid interpolation and retains the same hypotheses and update."
+    },
+    {
+      "id": "adaptive-stochastic-paths-and-brownian-bridge-coupling",
+      "decision": "accept",
+      "reason": "Its summary remains consistent with the algorithm and theorem statements after the local repairs."
+    },
+    {
+      "id": "adaptive-stochastic-paths-and-brownian-bridge-coupling-examples",
+      "decision": "accept",
+      "reason": "Its examples remain consistent with the unchanged bridge-law claim and algorithm behavior."
+    }
+  ]
+}

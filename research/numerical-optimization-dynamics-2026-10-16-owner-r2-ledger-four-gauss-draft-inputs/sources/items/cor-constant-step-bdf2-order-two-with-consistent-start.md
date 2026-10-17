@@ -1,0 +1,73 @@
+---
+id: cor-constant-step-bdf2-order-two-with-consistent-start
+title: "Constant-step BDF2 is second-order convergent with a consistent start and selected roots"
+kind: corollary
+status: draft
+origin: pipeline
+pipeline_run: numerical-optimization-dynamics-2026-10-16
+dependency_level: 5
+deps:
+  - alg-variable-step-bdf2-with-selected-implicit-branch
+  - thm-variable-step-bdf2-order-two-under-ratio-bound
+  - def-first-order-ode-initial-value-problem-and-solution
+  - thm-multivariable-taylor-formula-with-lagrange-remainder
+  - def-backward-euler-step-equation
+  - def-implicit-runge-kutta-stage-equations
+  - lem-small-step-implicit-rk-branch-and-residual-error
+  - def-euclidean-inner-product
+  - lem-of-square-monotone
+justified_by: []
+aliases: []
+forward_refs: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+verification:
+  precheck: pass
+sources:
+  references:
+    - title: "Ernst Hairer, Syvert P. Nørsett, and Gerhard Wanner, Solving Ordinary Differential Equations I: Nonstiff Problems, 2nd ed., Chapter III.5"
+      url: "https://moodle.utc.fr/file.php/336/Hairer_Noersett_Wanner._Solving_ordinary_differential_equations_vol.1._Nonstiff_problems_2ed._revised_Springer_2008_ISBN_3540566708_593s_MNd_.pdf"
+      locator: "Chapter III.5, pp. 397–409: BDF2 zero stability, local defects, and convergence with consistent starts."
+    - title: "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §6.6 Multistep methods"
+      url: "https://fncbook.com/python/multistep/"
+      locator: "§6.6.2: BDF2 formula and local truncation error."
+---
+
+## Statement
+
+Let $T>0$ and consider the family of constant grids $t_n=nh$, $h=T/N\to0$, $N\ge2$. Let $y:[0,T]\to\mathbb R^d$ be a $C^3$ solution of $y'=f(t,y)$. Suppose $K\subset\mathbb R^d$ is compact, $y([0,T])\subset\operatorname{int}K$, and $f$ is defined on $[0,T]\times K$ and is Lipschitz in the state variable there in the max norm. Start the BDF2 branch algorithm of [[alg-variable-step-bdf2-with-selected-implicit-branch]] with states $Y_0,Y_1$ satisfying
+$$\|Y_0-y(0)\|_\infty+\|Y_1-y(h)\|_\infty=O(h^2).$$
+At each step prescribe a closed branch ball $B_{n+1}\subset K$ and suppose that for every pair of preceding states in $K$ the BDF2 equation has exactly one root in $B_{n+1}$; select that root. Then, for all sufficiently small $h$, the selected sequence satisfies $\max_{0\le n\le N}\|Y_n-y(t_n)\|_\infty=O(h^2)$. If $Y_0=y(0)$, an exact BE startup in a local one-stage branch ball $B_{\rm BE}\subset K$ also has $\|Y_1-y(h)\|_\infty=O(h^2)$, provided that $y(h)\in B_{\rm BE}$ and the BE stage map is invariant and contractive there with $q=hL_2\le1/2$ in the Euclidean norm. The local invariant-ball hypotheses mean that the field is bounded by some $M$ and $hM\le\operatorname{rad}(B_{\rm BE})$, and is $L_2$-Lipschitz on that ball. A finite-tolerance startup must separately meet the displayed $O(h^2)$ starter budget; a residual-tolerance status alone does not establish it. This statement makes no scalar stability claim.
+
+## Facts & Assumptions
+
+**Given:** A $C^3$ exact solution, compact tube and Lipschitz bound, a constant positive grid, prescribed BDF2 branch balls with a unique root per step, and starting values satisfying the stated $O(h^2)$ bound.
+
+[F1] [[alg-variable-step-bdf2-with-selected-implicit-branch]]: BDF2 selects the unique root in each prescribed closed branch ball and makes no convergence assertion by itself.
+
+[F2] [[thm-variable-step-bdf2-order-two-under-ratio-bound]]: if $0<r_{\min}\le r_n\le r_*<1+\sqrt2$, $y\in C^3$, the exact path lies in a compact tube, $f$ is Lipschitz there, the starting pair has error $O(H^2)$, and each prescribed branch ball contains the selected unique root, then BDF2 has maximum error $O(H^2)$ for sufficiently small $H$.
+
+[F3] [[def-first-order-ode-initial-value-problem-and-solution]]: the exact solution satisfies $y'=f(t,y)$ on its interval.
+
+[F4] [[thm-multivariable-taylor-formula-with-lagrange-remainder]]: a $C^3$ exact solution has $y(h)=y(0)+hy'(0)+O(h^2)$ and $y'(h)=y'(0)+O(h)$.
+
+[F5] [[def-backward-euler-step-equation]]: an admissible BE endpoint satisfies $z=y_0+h f(h,z)$ and its update residual is $z-y_0-hf(h,z)$.
+
+[F6] [[def-implicit-runge-kutta-stage-equations]]: for one stage with $A=b=c=(1)$, the stage equation is $Z=y_0+h f(h,Z)$ and the update is $Z$ when a stage is selected.
+
+[F7] [[lem-small-step-implicit-rk-branch-and-residual-error]]: on an invariant product ball, if $q=h\|A\|_\infty L<1$, there is a unique stage root there and every approximate stage vector in the ball has error at most its update residual divided by $1-q$.
+
+[F8] [[def-euclidean-inner-product]]: $\|v\|_2^2=\sum_{i=1}^d v_i^2$.
+
+[F9] [[lem-of-square-monotone]]: if $a,b\ge0$, then $a\le b$ whenever $a^2\le b^2$.
+
+[A1] The tube, Lipschitz, smoothness, $O(h^2)$ starting-pair, branch-ball, and unique-root hypotheses above hold uniformly as $h\to0$. For the BE startup, the one-stage ball is centered at $y(0)$, contains $y(h)$, satisfies $hM\le\operatorname{rad}(B_{\rm BE})$ and $hL_2\le1/2$, and the selected BE root lies in that ball.
+
+## Proof
+
+
+1.1 On a constant grid every adjacent ratio is $r_n=1$. Choose $r_{\min}=r_*=1$; then $0<r_{\min}\le r_n\le r_*<1+\sqrt2$. The branch-selection convention [F1] and the other hypotheses of [F2] are exactly the tube, smoothness, Lipschitz, starter, and unique-root assumptions in [A1] and the Statement. Hence [F2] gives the asserted $O(h^2)$ maximum error because $H=h$. [A1, F1, F2, algebra]
+
+2.1 For an exact-start BE startup, the solution identity [F3] gives $y'(0)=f(0,y(0))$ and $y'(h)=f(h,y(h))$. By [F4], $y(h)-y(0)-hy'(0)=O(h^2)$ and $y'(h)-y'(0)=O(h)$, so [F5] gives $G_{\rm BE}(y(h))=y(h)-y(0)-hf(h,y(h))=O(h^2)$. By [F6], this is the stage update residual for the one-stage tableau $A=b=c=(1)$. The point $y(h)$ and the selected root lie in the same invariant ball by [A1], so [F7] gives $\|Y_1-y(h)\|_2\le\|G_{\rm BE}(y(h))\|_2/(1-q)=O(h^2)$ because $q=hL_2\le1/2$. For each coordinate $i$, $|v_i|^2\le\sum_j v_j^2=\|v\|_2^2$ by [F8], and [F9] therefore gives $\|v\|_\infty\le\|v\|_2$. Applying this to $v=Y_1-y(h)$ proves the required max-norm starter bound. [A1, F3, F4, F5, F6, F7, F8, F9, algebra] ∎

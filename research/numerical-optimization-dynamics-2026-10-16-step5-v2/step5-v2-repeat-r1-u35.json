@@ -1,0 +1,94 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "35",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "ded4a6b42423c1a55321a58bc090343c41cdc9bf6d10afcb951f39a94fb4d8cb",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The cited def-euclidean-inner-product defines coordinates on {0,1} in R^2. F3 incorrectly uses x_2; its correct specialization is ||x||_2^2=x_0^2+x_1^2. This is a nonfatal coordinate-index typo: the explicit witness (0,1), update (2,1/2), and squared norm 17/4 are correct without any new mathematical argument. Corrected F3 and replaced the conflicting e_2 witness label by v.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth",
+      "disposition": "repaired",
+      "post_sha256": "77c348b03e3fb1b85911d7ff7071b8011634ad45dcc7ecb7984a090672b12ceb",
+      "review_context_sha256": "88aa0630e1e901122a8059943bbf4e1ff745e0488b9ac51a08e7d8e240e9038c",
+      "reason": "Checked all three cited suppliers and the owning page/contract. For s=1 the RKC1 recurrence is I+hA; hA has both eigenvalues -1/2 in [-2,0], with scalar factor 1/2. Direct multiplication gives unequal AA^T and A^TA as displayed, while (I+hA)v=(2,1/2) for v=(0,1), hence squared norm 17/4>1. F3 now matches the zero-based Euclidean definition. Updated only the assigned contract derivation and boundary witness labels. The Example and all Statement/Definition interfaces are unchanged; no new prerequisites, choice assumptions or downstream obligations arise. This records my repair review, not independent acceptance of it.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "locus": "facts-block",
+      "finding": "F3 uses x_1^2+x_2^2 although the cited definition indexes R^2 by {0,1}. The explicit matrix witness and its computed norm remain correct.",
+      "correction": "Changed F3 to x_0^2+x_1^2 and renamed the proof witness from e_2 to v; synchronized the assigned contract mirrors.",
+      "reason": "The supplier explicitly defines x_k only for k<n. At n=2 the valid indices are 0 and 1; the corrected sum gives 4+1/4=17/4 for the image vector.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "claim_and_conventions": "A=[[-1,4],[0,-1]], h=1/2, one-stage RKC1; Euclidean coordinates are indexed 0,1. v=(0,1) has norm 1 and its step image has norm sqrt(17)/2.",
+    "dependencies": [
+      "alg-rkc1-chebyshev",
+      "def-euclidean-inner-product",
+      "prop-rkc-stability-intervals-and-stage-degree"
+    ],
+    "evidence_paths": [
+      "items/ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth.md",
+      "items/def-euclidean-inner-product.md",
+      "items/alg-rkc1-chebyshev.md",
+      "items/prop-rkc-stability-intervals-and-stage-degree.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-35.proof-contracts.json",
+      "library/numerical-differential-equations-and-stochastic-dynamics/runge-kutta-methods-and-order-examples.md"
+    ],
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-35.proof-contracts.json --items ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; one item checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth.md --json",
+        "exit_code": 0,
+        "result": "one checked proof; pass; zero failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth.md --json",
+        "exit_code": 0,
+        "result": "one item checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth.md",
+        "exit_code": 0,
+        "result": "1 items, 2 steps, 0 defects"
+      }
+    ],
+    "interface_changes": false,
+    "published_ledger_update": "None: no published defect or affected published consumer discovered.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and any required independent current-context judgment; no judges or round transitions launched."
+  }
+}

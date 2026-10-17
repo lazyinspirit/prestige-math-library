@@ -1,0 +1,69 @@
+[
+  {
+    "kind": "page",
+    "consumer": "implicit-stiff-time-stepping-and-algebraic-error",
+    "supplier": "nonlinear-equations-and-newton-methods",
+    "status": "verified",
+    "supplier_batch": "3",
+    "supplier_item_ids": [
+      "alg-finite-budget-newton-for-vector-residuals",
+      "alg-newton-correction-for-vector-residuals"
+    ],
+    "required_interface": "The finite Newton procedure checks the current residual before the update budget, returns the last valid iterate with root, singular-Jacobian, invalid-trial, or budget-exhausted status, and gives no arbitrary-start convergence or discretization-error theorem. Its correction solves the current square linear system J s = -r when J is invertible.",
+    "affected_claims": [
+      "alg-newton-chord-implicit-residual-with-factorization-reuse",
+      "alg-implicit-stiff-time-stepper-with-consistent-starts",
+      "ex-newton-budget-exhaustion-with-a-unique-backward-euler-root",
+      "ex-robertson-reaction-system-newton-work"
+    ],
+    "evidence": "Read the current batch-3 carriers alg-finite-budget-newton-for-vector-residuals.md and alg-newton-correction-for-vector-residuals.md, including their exact status ordering and correction convention. The local algorithm preserves their finite-budget scope and adds scheduled chord reuse. This verifies the interfaces and records no independent supplier acceptance."
+  },
+  {
+    "kind": "page",
+    "consumer": "implicit-stiff-time-stepping-and-algebraic-error",
+    "supplier": "global-ode-and-density-error",
+    "status": "verified",
+    "supplier_batch": "28",
+    "supplier_item_ids": [
+      "thm-global-error-from-one-step-defect-and-stability",
+      "lem-discrete-one-step-error-recurrence-bound"
+    ],
+    "required_interface": "On a common compact tube, an exact one-step map with initial error O(h^p), local defect bounded by C h^(p+1), and fiberwise Lipschitz factor at most 1+L_0 h has global error O(h^p). The recurrence lemma also bounds e_(n+1) <= (1+L_0 h)e_n + C h^(p+1).",
+    "affected_claims": [
+      "thm-implicit-rk-global-order-with-stage-residual-control"
+    ],
+    "evidence": "Inspected the complete current batch-28 statement and proof of thm-global-error-from-one-step-defect-and-stability.md and the exact recurrence lemma. The local theorem verifies an exact-solve trajectory against the common tube; the stage-residual perturbation is proved separately before the recurrence lemma is applied. No supplier approval is asserted."
+  },
+  {
+    "kind": "page",
+    "consumer": "implicit-stiff-time-stepping-and-algebraic-error",
+    "supplier": "linear-multistep-methods-and-dahlquist-equivalence",
+    "status": "verified",
+    "supplier_batch": "36",
+    "supplier_item_ids": [
+      "alg-variable-step-bdf2-with-selected-implicit-branch",
+      "thm-variable-step-bdf2-order-two-under-ratio-bound"
+    ],
+    "required_interface": "The BDF2 algorithm selects the unique root in each prescribed branch ball and by itself makes no convergence claim. Its order theorem requires a C^3 exact solution, compact tube, Lipschitz field, adjacent ratios bounded below away from zero and above by r_* < 1+sqrt(2), O(H^2) starting pair, and a unique selected root in each prescribed ball.",
+    "affected_claims": [
+      "alg-implicit-stiff-time-stepper-with-consistent-starts",
+      "cor-constant-step-bdf2-order-two-with-consistent-start"
+    ],
+    "evidence": "Read the actual batch-36 BDF2 algorithm and convergence theorem, including their Facts & Assumptions and complete proofs. The constant-step corollary specializes r_min=r_*=1 and retains the branch and starter hypotheses; finite Newton status is not equated with exact-root selection."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-implicit-rk-global-order-with-stage-residual-control",
+    "supplier": "def-one-step-ode-method-local-defect-order-and-stability",
+    "status": "verified",
+    "supplier_batch": "7",
+    "supplier_item_ids": [
+      "def-one-step-ode-method-local-defect-order-and-stability"
+    ],
+    "required_interface": "Defines the exact-start one-step local defect, uniform O(h^(p+1)) local order, and one-step Lipschitz stability factor 1+Lh. Batch 28's global theorem uses this definition transitively; the new batch-65 theorem uses Batch 28's global result and does not cite this item as a direct dependency.",
+    "affected_claims": [
+      "thm-implicit-rk-global-order-with-stage-residual-control"
+    ],
+    "evidence": "Inspected the exact batch-7 definition and Batch 28's dependency and proof. The local SDIRK/Radau defect orders and the newly derived one-step stability estimate meet the interface; Batch 28's theorem is the direct cited supplier. This transitive edge explains the batch-7 prerequisite in the recomputed dependency closure and is not a direct batch-65 item dependency."
+  }
+]

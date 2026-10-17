@@ -1,0 +1,12 @@
+--- cycle1/step5-workflow.mjs
++++ cycle2/step5-workflow.mjs
+@@ -2015,7 +2015,8 @@
+   for(const entry of row.maintenance_certifications??[]){
+     const item=row.items.find(x=>x.id===entry.id);
+     requireValue(entry.basis==='native-consumer-maintenance'&&created.has(entry.id)&&!maintenanceSeen.has(entry.id)
+-      &&entry.after_sha256===item?.item_sha256&&entry.after_guard_sha256===item?.guard_sha256
++      &&entry.after_item_sha256===item?.item_sha256&&entry.after_guard_sha256===item?.guard_sha256
++      &&['before_sha256','after_sha256','after_item_sha256','before_guard_sha256','after_guard_sha256','statement_sha256'].every(k=>/^[a-f0-9]{64}$/.test(entry[k]??''))
+       &&['collection','report','dispatch','prompt'].every(k=>typeof entry[k]==='string'&&row.evidence[entry[k]])
+       &&typeof entry.reason==='string'&&entry.reason.trim().length>=40,'malformed created-helper maintenance basis');
+     maintenanceSeen.add(entry.id);

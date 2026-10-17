@@ -1,0 +1,307 @@
+[
+  {
+    "order": 2495.25,
+    "id": "nonsmooth-contact-time-stepping-and-projections",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Nonsmooth contact time stepping and projections",
+    "companion": "nonsmooth-contact-time-stepping-and-projections-examples",
+    "requires": [
+      "convex-and-semicontinuous-functions-on-rn",
+      "inequality-kkt-duality-and-optimality-certificates",
+      "proximal-gradient-and-accelerated-composite-optimization",
+      "event-location-and-hybrid-trajectory-error"
+    ],
+    "items": [
+      {
+        "id": "lem-equi-lipschitz-curves-in-compact-euclidean-set-have-uniformly-convergent-subsequence",
+        "kind": "lemma",
+        "title": "Compactness of equi-Lipschitz curves with values in a compact Euclidean set",
+        "deps": [
+          "thm-heine-borel-rn",
+          "thm-of-archimedean",
+          "thm-reals-cauchy-complete",
+          "thm-well-ordering-principle",
+          "thm-recursion",
+          "def-metric-topology",
+          "def-metric-ball",
+          "def-metric-convergence",
+          "lem-integer-part",
+          "def-integer-power",
+          "lem-geometric-sequence-null",
+          "thm-induction-principle",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-projection-onto-closed-convex-set-is-nonexpansive",
+        "kind": "lemma",
+        "title": "Projection onto a closed convex set is nonexpansive",
+        "deps": [
+          "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-one-dimensional-first-impact-with-restitution",
+        "kind": "algorithm",
+        "title": "First-impact step for a one-dimensional unilateral contact",
+        "deps": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-frictionless-sphere-binary-impact-impulse-laws",
+        "kind": "theorem",
+        "title": "Impulse, momentum, and kinetic-energy laws for an isolated frictionless sphere impact",
+        "deps": [
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-projected-euler-projection-residual-certificate",
+        "kind": "lemma",
+        "title": "A certified projection variational residual bounds the projection error",
+        "deps": [
+          "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-first-impact-step-complementarity-momentum-and-energy",
+        "kind": "theorem",
+        "title": "Complementarity, momentum balance, and energy loss at a scalar impact",
+        "deps": [
+          "alg-one-dimensional-first-impact-with-restitution"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-sphere-contact-guard-normal-and-reset-lipschitz-bounds",
+        "kind": "lemma",
+        "title": "Sphere-contact guards, normals and binary resets have explicit tube bounds",
+        "deps": [
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-frictionless-sphere-binary-impact-impulse-laws"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+        "kind": "algorithm",
+        "title": "Event-driven integration for isolated frictionless spherical impacts",
+        "deps": [
+          "thm-frictionless-sphere-binary-impact-impulse-laws",
+          "lem-sphere-contact-guard-normal-and-reset-lipschitz-bounds",
+          "def-hybrid-mode-guard-reset-system",
+          "lem-transverse-hybrid-event-time-error",
+          "lem-reset-error-after-a-mistimed-hybrid-event",
+          "lem-ode-flow-lipschitz-on-a-tube"
+        ],
+        "dependency_level": 10
+      },
+      {
+        "id": "def-projected-contact-dynamics-and-euler-step",
+        "kind": "definition",
+        "title": "Projected contact dynamics and explicit projection Euler step",
+        "deps": [
+          "def-kkt-residual-and-normal-cone",
+          "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+          "thm-nearest-point-in-a-nonempty-closed-convex-set",
+          "def-euclidean-inner-product",
+          "def-absolutely-continuous-function",
+          "def-derivative",
+          "def-measure-null-set-and-almost-everywhere",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $d\\ge1$, let $C\\subseteq\\mathbb R^d$ be nonempty, closed, and convex, and let $P_C(y)$ be the unique nearest point in $C$ to $y$, whose existence and uniqueness are [[thm-nearest-point-in-a-nonempty-closed-convex-set]]. For $x\\in C$, set\n$$N_C(x)=\\{n\\in\\mathbb R^d:\\langle n,z-x\\rangle\\le0\\text{ for every }z\\in C\\};$$\nfor $x\\notin C$, set $N_C(x)=\\varnothing$. On $C$ this is the outward normal cone of [[def-kkt-residual-and-normal-cone]]. The projection variational inequality of [[lem-projection-onto-a-closed-convex-set-has-the-variational-inequality]] says $P_C(y)=p$ exactly when $p\\in C$ and $y-p\\in N_C(p)$.\n\nFor $T>0$, a solution of the projected contact dynamics with forcing $f:[0,T]\\times C\\to\\mathbb R^d$ and initial state $x_0\\in C$ is an absolutely continuous map $x:[0,T]\\to C$ satisfying\n$$f(t,x(t))-\\dot x(t)\\in N_C(x(t))\\quad\\text{for almost every }t\\in[0,T].$$\nEquivalently, $\\dot x(t)+N_C(x(t))\\ni f(t,x(t))$. For an integer $N\\ge1$, put $h=T/N$, $t_k=kh$, and define the exact explicit projection Euler nodes by\n$$x_{k+1}=P_C\\bigl(x_k+h f(t_k,x_k)\\bigr),\\qquad k=0,\\ldots,N-1,$$\nstarting from $x_0$. Its affine interpolant joins consecutive nodes linearly on each interval $[t_k,t_{k+1}]$.\n\nFor a map $x:[0,T]\\to\\mathbb R^d$, **absolutely continuous** means that each coordinate is absolutely continuous in the scalar sense of [[def-absolutely-continuous-function]], and $\\dot x(t)$ is the vector of coordinate derivatives, from [[def-derivative]], wherever they all exist. The solution condition requires a Lebesgue-null set $N\\subseteq[0,T]$ such that for every $t\\notin N$ all coordinate derivatives exist and the displayed inclusion holds. Here **almost every $t$** is relative to Lebesgue measure $\\lambda$ from [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]], with the convention of [[def-measure-null-set-and-almost-everywhere]].\n"
+      },
+      {
+        "id": "lem-naive-all-pairs-collision-search-has-quadratic-work",
+        "kind": "lemma",
+        "title": "Naive all-pairs sphere-contact search has quadratic work",
+        "deps": [
+          "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+          "thm-induction-principle",
+          "lem-finite-sum-laws"
+        ],
+        "dependency_level": 11
+      },
+      {
+        "id": "lem-normal-cone-maximal-monotone-and-projection-resolvent",
+        "kind": "lemma",
+        "title": "The convex normal-cone operator is maximal monotone and its resolvent is projection",
+        "deps": [
+          "def-projected-contact-dynamics-and-euler-step",
+          "def-kkt-residual-and-normal-cone",
+          "def-indicator-function-of-closed-convex-set",
+          "def-extended-real-epsilon-subdifferential",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "lem-prox-indicator-is-euclidean-projection",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-certified-projected-euler-method",
+        "kind": "algorithm",
+        "title": "Projected Euler with certified inexact projection solves",
+        "deps": [
+          "def-projected-contact-dynamics-and-euler-step",
+          "lem-projected-euler-projection-residual-certificate"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-projected-contact-solutions-are-unique",
+        "kind": "lemma",
+        "title": "Solutions of projected contact dynamics are unique under the inherited choice assumptions",
+        "deps": [
+          "def-projected-contact-dynamics-and-euler-step",
+          "lem-normal-cone-maximal-monotone-and-projection-resolvent",
+          "thm-gronwall-integral-inequality",
+          "lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-projected-euler-existence-uniqueness-and-convergence",
+        "kind": "theorem",
+        "title": "Existence and uniqueness for projected dynamics and convergence of projection Euler under countable and dependent choice",
+        "deps": [
+          "def-projected-contact-dynamics-and-euler-step",
+          "lem-projection-onto-closed-convex-set-is-nonexpansive",
+          "lem-equi-lipschitz-curves-in-compact-euclidean-set-have-uniformly-convergent-subsequence",
+          "lem-projected-contact-solutions-are-unique",
+          "thm-heine-borel-rn",
+          "thm-c1-lipschitz-ac-bv-hierarchy",
+          "thm-bv-functions-are-differentiable-almost-everywhere",
+          "lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "def-locally-integrable-function-on-r-n",
+          "thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n",
+          "lem-rat-embeds-dense",
+          "thm-rationals-countable",
+          "thm-n-cross-n-countable",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-countable-union-of-null-is-null",
+          "thm-recursion",
+          "thm-induction-principle",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "cor-elementary-almost-everywhere-is-lebesgue-almost-everywhere"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-projected-euler-square-root-global-error",
+        "kind": "theorem",
+        "title": "A square-root global error bound for projected Euler with certified projection tolerances",
+        "deps": [
+          "thm-projected-euler-existence-uniqueness-and-convergence",
+          "def-projected-contact-dynamics-and-euler-step",
+          "alg-certified-projected-euler-method",
+          "lem-normal-cone-maximal-monotone-and-projection-resolvent",
+          "lem-projection-onto-closed-convex-set-is-nonexpansive",
+          "lem-projected-euler-projection-residual-certificate",
+          "thm-gronwall-integral-inequality",
+          "thm-c1-lipschitz-ac-bv-hierarchy",
+          "thm-bv-functions-are-differentiable-almost-everywhere",
+          "lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "lem-exponential-dominates-one-plus-x",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-heine-borel-rn"
+        ],
+        "dependency_level": 6,
+        "statement": "Assume the hypotheses of [[thm-projected-euler-existence-uniqueness-and-convergence]], including Countable Choice and Dependent Choice, and let $x$ be its unique solution. Let $D$ be any finite bound for the diameter of $C$, set\n$$M=\\|f(0,x_0)\\|_2+L(T+D),\\qquad C_0=8M^2+L^2(1+M)^2T,\\qquad K_{\\mathrm{err}}=\\sqrt{C_0T e^{(2L+1)T}}.$$\nFor $h=T/N$, let $X_h$ be the affine interpolant of the exact projection Euler recurrence. If a complete run of [[alg-certified-projected-euler-method]] returns nodes $\\widetilde x_k$ with certified residuals\n$$\\sup_{z\\in C}\\langle \\widetilde x_k+h f(t_k,\\widetilde x_k)-\\widetilde x_{k+1},z-\\widetilde x_{k+1}\\rangle\\le\\varepsilon_k^2,$$\nand $\\widetilde X_h$ is their affine interpolant, then\n$$\\sup_{0\\le t\\le T}\\|\\widetilde X_h(t)-x(t)\\|_2\\le K_{\\mathrm{err}}\\sqrt h+e^{LT}\\sum_{k=0}^{N-1}\\varepsilon_k.$$\nIn particular, the exact-projection branch has uniform error $O(\\sqrt h)$. Certified projection errors with $\\sum_k\\varepsilon_k=O(\\sqrt h)$ retain that rate; no rate follows from an uncertified solver tolerance alone.\n\n"
+      }
+    ]
+  },
+  {
+    "order": 2495.5,
+    "id": "nonsmooth-contact-time-stepping-and-projections-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Nonsmooth contact time stepping and projections — Examples",
+    "companion": "nonsmooth-contact-time-stepping-and-projections",
+    "requires": [
+      "nonsmooth-contact-time-stepping-and-projections"
+    ],
+    "items": [
+      {
+        "id": "cex-nonconvex-set-can-have-nonunique-nearest-points",
+        "kind": "counterexample",
+        "title": "A closed nonconvex set can have two nearest points",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-metric-topology",
+          "def-metric-ball",
+          "lem-of-triangle-inequality"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "ex-frictionless-sphere-binary-impact-calculation",
+        "kind": "example",
+        "title": "A two-sphere impact with unequal masses",
+        "deps": [
+          "thm-frictionless-sphere-binary-impact-impulse-laws"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-one-dimensional-impact-restitution-boundaries",
+        "kind": "example",
+        "title": "Inelastic and elastic endpoints of a scalar impact step",
+        "deps": [
+          "alg-one-dimensional-first-impact-with-restitution",
+          "thm-first-impact-step-complementarity-momentum-and-energy"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-penalty-stiffness-requires-time-step-control",
+        "kind": "example",
+        "title": "A stiff penalty equation defeats a fixed explicit step",
+        "deps": [
+          "def-projected-contact-dynamics-and-euler-step",
+          "def-real-exponential-function-and-e",
+          "thm-derivative-of-exponential",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-projected-overdamped-particle-euler-trajectory",
+        "kind": "example",
+        "title": "Projected Euler for a constrained overdamped particle",
+        "deps": [
+          "def-projected-contact-dynamics-and-euler-step",
+          "alg-certified-projected-euler-method",
+          "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+          "thm-projected-euler-square-root-global-error",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_level": 7
+      }
+    ]
+  }
+]

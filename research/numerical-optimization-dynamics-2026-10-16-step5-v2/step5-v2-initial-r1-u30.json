@@ -1,0 +1,210 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "30",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-predictable-stopping-time-grid",
+      "model": "gpt-6-luna",
+      "context_sha256": "cb19df1de27f274d88f046c86d4836c7bc3eb73488bf85b50aaff8fa39ae0f5f",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The unqualified endpoint-inspection exclusion is false on the allowed general filtrations. On a completed Brownian path space take F_t=F for all t, T=1, N=2, tau_1=1/2 if W_(1/2)>0 and 1/4 otherwise, tau_n=1 for n>=2, and h_max=1. Every time is a stopping time and every length is F_(tau_n)-measurable, although the choice inspects a future trial increment. The formal grid conditions are sound; the false universal assertion in its Definition is a logic defect. Replaced it with the exact filtration-relative measurability criterion and a qualified bridge-retention caveat, without changing the class of grids.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-scalar-brownian-bridge-from-x-to-y",
+      "model": "gpt-6-luna",
+      "context_sha256": "8f0c3247e0e1b6cd808c1e2fd22f6a29db4314fbe62c16182f212030ff8ea15a",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The cited coordinate-generation lemma is stated only for C([0,infinity)); the original Definition omitted the routine transfer to C([0,h]). The bridge formula, endpoint values, Gaussianity and law-independence claim are correct. Filled the presentation/citation-scope gap explicitly: constant extension E_h f(s)=f(s wedge h) is a homeomorphism onto the closed constant-tail subspace, its inverse is restriction, and trace coordinate generation plus continuity recovers every finite-interval coordinate from rational times. Dynkin then identifies the two path laws. This changes no bridge law or hypotheses and needs no new prerequisite.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-adaptive-euler-maruyama-on-predictable-grid",
+      "model": "gpt-6-luna",
+      "context_sha256": "e935f2adf342ec717ed2d9fde4369ea2abc5bc218bf73f1625a49f8f74a8b44a",
+      "outcome": "false_positive",
+      "reason": "The item invokes the supplier's upper-grid/null-completion ARGUMENT, not its narrower Statement as a black box. For each fixed t, round tau wedge t upward on a finite grid ending at t. Every approximation X_(tau_n,t) is F_t-measurable; its limit equals X_tau on {tau<=t} outside the continuity null event. Completeness places every subset of that ambient null event in F_0, so every stopped-sigma-algebra test holds. This needs neither right-continuity nor a natural Brownian filtration. The algorithm already assumes usual conditions. Watkins Definition 1.12, Exercise 1.14(3) and complete Proposition 1.17 proof corroborate this. The rejected assertion that completeness is insufficient is incorrect.",
+      "uncertain": false,
+      "source_urls": [
+        "https://public.econ.duke.edu/~get/browse/courses/883/Spr16/COURSE-MATERIALS/Z_Papers/notesc.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-predictable-stopping-time-grid",
+      "disposition": "repaired",
+      "post_sha256": "981a465aa054adb8a9a56dbacce47c13d028e100f5605067268c22a8e05e22bb",
+      "review_context_sha256": "ec0c6a40007e1eb2aa95f7e240a62db1068ca8d3eafb4cca3a23f09bbdca5dfc",
+      "reason": "Checked the stopped-sigma-algebra interface in items/def-continuous-time-stopping-time.md, all active and completed index conventions, N=1 and finite budgets. The mathematical grid conditions and its contract boundary rows are unchanged. The final paragraph now makes exclusion depend on actual F_(tau_n)-measurability and declares no Brownian independence premise. This is the repair author review, not independent acceptance. Direct consumers and the home page were inspected for this Definition event; detailed unchanged-use dispositions are recorded in downstream_reviews.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-scalar-brownian-bridge-from-x-to-y",
+      "disposition": "repaired",
+      "post_sha256": "c8118a4f9e0285047b7559c963bfea0b5f453827b0b06db7b2dc1ace77ea1d6f",
+      "review_context_sha256": "f0b4cdce9bf39b63601895c394c7b21dd1357ccbbfcc47b0242873e147efa059",
+      "reason": "Checked the complete published coordinate-generation proof, the Brownian Definition and the finite-interval transfer directly. Uniform convergence on [0,h] is equivalent to uoc convergence of constant extensions: choose an integer M>=h for the inverse estimate; extension is bounded by the uniform norm on every compact. Constant tails define a closed subspace by continuity of evaluations. Trace Borel sets are generated by restricted coordinates; rational limits recover h even for irrational h. Finite-dimensional Brownian laws and pi-lambda therefore give the claimed unique bridge law, with the same formula, endpoints and AC convention. Repair author review only.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-adaptive-euler-maruyama-on-predictable-grid",
+      "disposition": "unaffected",
+      "post_sha256": "7553374875b9f4076d0f99e7c2af0522174455834eff358241f36b603e14fadf",
+      "review_context_sha256": "42b26729bda6ed047a895c3195e65bd1c3764228e4e7720aa48bc744ae55f4ad",
+      "reason": "Reviewed the complete procedure, its contract, Euler supplier, bridge split procedure/law, stopping-time interface and both stopped-process arguments. Ambient-null completeness suffices for stopped Brownian measurability by the supplier proof; induction uses F_tau subset F_sigma when tau<=sigma, and restricted stopped values give adapted interpolation. Repaired grid commentary leaves all operative grid conditions unchanged. The endpoint-refinement branch retains each parent, processes the earliest leaf, uses fresh split innovations, and explicitly disclaims its rate certificate. Every trial consumes one unit and completion precedes exhaustion; B=0 and completion at B are specified correctly. No source or metadata edit is needed. Its guard equals the frozen before guard; source reading was corroborative, not independent acceptance of a new repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://public.econ.duke.edu/~get/browse/courses/883/Spr16/COURSE-MATERIALS/Z_Papers/notesc.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-adaptive-euler-maruyama-on-predictable-grid",
+    "lem-adaptive-em-predictable-grid-second-moment",
+    "thm-adaptive-em-predictable-grid-strong-error",
+    "lem-scalar-brownian-bridge-restriction-density",
+    "thm-scalar-brownian-bridge-barrier-crossing-probability"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-predictable-stopping-time-grid",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "Definition, final paragraph",
+      "reason": "The unqualified endpoint-inspection exclusion is false on the allowed general filtrations. On a completed Brownian path space take F_t=F for all t, T=1, N=2, tau_1=1/2 if W_(1/2)>0 and 1/4 otherwise, tau_n=1 for n>=2, and h_max=1. Every time is a stopping time and every length is F_(tau_n)-measurable, although the choice inspects a future trial increment. The formal grid conditions are sound; the false universal assertion in its Definition is a logic defect. Replaced it with the exact filtration-relative measurability criterion and a qualified bridge-retention caveat, without changing the class of grids.",
+      "resolution": "Qualified the assertion by the actual stopped-measurability test; retained every formal grid condition. All three direct item consumers and the home page remain mathematically compatible. Refreshed two owning-contract grid quotations.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-scalar-brownian-bridge-from-x-to-y",
+      "severity": "nonfatal",
+      "locus": "Definition, path-law independence justification",
+      "reason": "The cited coordinate-generation lemma is stated only for C([0,infinity)); the original Definition omitted the routine transfer to C([0,h]). The bridge formula, endpoint values, Gaussianity and law-independence claim are correct. Filled the presentation/citation-scope gap explicitly: constant extension E_h f(s)=f(s wedge h) is a homeomorphism onto the closed constant-tail subspace, its inverse is restriction, and trace coordinate generation plus continuity recovers every finite-interval coordinate from rational times. Dynkin then identifies the two path laws. This changes no bridge law or hypotheses and needs no new prerequisite.",
+      "resolution": "Added the constant-extension/closed-subspace argument and reconciled the owning manifest Definition mirror under the shared lock. Both direct consumers retain the identical bridge law. Refreshed the owning-contract barrier-theorem bridge quotation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "alg-adaptive-euler-maruyama-on-predictable-grid",
+      "reason": "The item invokes the supplier's upper-grid/null-completion ARGUMENT, not its narrower Statement as a black box. For each fixed t, round tau wedge t upward on a finite grid ending at t. Every approximation X_(tau_n,t) is F_t-measurable; its limit equals X_tau on {tau<=t} outside the continuity null event. Completeness places every subset of that ambient null event in F_0, so every stopped-sigma-algebra test holds. This needs neither right-continuity nor a natural Brownian filtration. The algorithm already assumes usual conditions. Watkins Definition 1.12, Exercise 1.14(3) and complete Proposition 1.17 proof corroborate this. The rejected assertion that completeness is insufficient is incorrect.",
+      "resolution": "No item or metadata edit; the invoked proof argument already works for complete filtrations.",
+      "uncertain": false,
+      "source_urls": [
+        "https://public.econ.duke.edu/~get/browse/courses/883/Spr16/COURSE-MATERIALS/Z_Papers/notesc.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "route-unassigned-finding",
+      "id": "thm-scalar-brownian-bridge-barrier-crossing-probability",
+      "severity": "nonfatal",
+      "locus": "Proof 2.1 / deps",
+      "owner_route": "Batch 30 frontier owner; separate assigned repair/admission, not this unit item authority.",
+      "reason": "Verified Step-4 digest concern against the full current theorem: proof 2.1 says Dominated convergence proves continuity of q, but deps lacks thm-dominated-convergence. Indicators are bounded by one and converge off the proved maximum-atom null set, so DCT applies and only the dependency declaration is missing.",
+      "affected_use": "Proof 2.1 passes almost-sure convergence of bridge-crossing indicators to their probabilities by dominated convergence.",
+      "minimality": "Add thm-dominated-convergence to the theorem deps and its owning manifest/contract mirrors as necessary; no Statement change or downstream mathematical repair is indicated. No edit was made here.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "action": "no-update",
+      "reason": "The direct dependency/reference and textual-use inventory for both changed Definitions contains five draft frozen-frontier consumers and their draft home page. No published or outside-frontier consumer was discovered, no published item was edited, and no published-consumer mathematical defect is alleged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Reviewed assigned items in task order: predictable grid, scalar bridge, adaptive algorithm. The two actual Definition changes trigger direct-consumer inventory even though the grid conditions and bridge law are unchanged. No new items, dependencies, choice assumptions or Foundations suppliers were introduced. No judgments, stamps, central certificates or round state were written; repairs are author reviews awaiting independent native rejudgment.",
+    "Grid exact changed clause: replaced the unconditional claim that inspecting W_(tau_(n+1))-W_(tau_n) makes a decision nonpredictable with the filtration-relative measurability test and a qualified bridge-retention caveat. Its formulae and formal grid class are identical. Bridge exact changed clause: expanded its path-law justification via E_h into the constant-tail closed subspace; formula, h>0 and x,y hypotheses, endpoints and AC remain identical. The algorithm has no source change and its post guard equals initial-1.before.",
+    "Owning page library/numerical-differential-equations-and-stochastic-dynamics/adaptive-stochastic-paths-and-brownian-bridge-coupling.md was read completely. Its promises of predictable-grid Euler estimates, path-tree retention, explicit finite-work status and a separate bridge barrier formula remain compatible. No page edit is necessary. The boundary/axiom content of the existing contracts remains accurate; three downstream full-Definition quotations were refreshed as metadata only.",
+    "Metadata integration: shared-write lock was busy on two attempts; on successful acquisition, reread research/numerical-optimization-dynamics-2026-10-16-batch-30.pages.json, changed only the assigned bridge statement mirror to the current Definition text, reread to verify JSON and exact source equality, checked all other parsed data unchanged, and released. Grid and algorithm manifest summaries remain accurate; no other metadata was changed. A subsequent locked reread reconciled exactly three full-Definition quotes: moment-lemma F1/grid, strong-error F2/grid, barrier-theorem F2/bridge. Current source equality and preservation of every other parsed contract field were checked, the focused strict five-consumer contract check passed, and the lock was released. No consumer source was changed.",
+    "Immediately after each completed mathematical review ran node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items ID, in the assigned order, copying both output hashes to that review before proceeding. Later manifest reconciliation changed no item supplier or review context. No review was refreshed after an unexamined supplier edit.",
+    "Authoritative corroboration actually read: Joseph C. Watkins, Stochastic Processes in Continuous Time, pp. 6-8, Definitions 1.12-1.15, Exercise 1.14(3), and the complete Proposition 1.17 proof, at https://public.econ.duke.edu/~get/browse/courses/883/Spr16/COURSE-MATERIALS/Z_Papers/notesc.pdf. The relevant local stopped-process proof and published coordinate-generation proof were read completely. No claim is made to have consulted the other bibliography sources.",
+    "Validation: node tools/tsx-run.mjs tools/precheck.mts items/def-predictable-stopping-time-grid.md items/def-scalar-brownian-bridge-from-x-to-y.md items/alg-adaptive-euler-maruyama-on-predictable-grid.md --json exited 0: 3 files, 0 checked proofs, 0 failed; all not-applicable.",
+    "Validation: node tools/rendercheck.mjs items/def-predictable-stopping-time-grid.md items/def-scalar-brownian-bridge-from-x-to-y.md items/alg-adaptive-euler-maruyama-on-predictable-grid.md --json exited 0: checked 3, errors [], warnings [].",
+    "Validation: node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-30.proof-contracts.json --strict --items def-predictable-stopping-time-grid,def-scalar-brownian-bridge-from-x-to-y,alg-adaptive-euler-maruyama-on-predictable-grid --json exited 0: ok true, checked all 3, errors [], warnings [].",
+    "Required final layout run, after every item edit: node tools/proof-layout.mjs items/def-predictable-stopping-time-grid.md items/def-scalar-brownian-bridge-from-x-to-y.md exited 0: 2 items, 0 steps, 0 defects. No numbered proof was edited.",
+    "Assigned mathematical obligations are complete with no unresolved uncertainty. One confirmed-fatal grid assertion was repaired, so this unit does not meet the zero-fatal round threshold; native engine rejudgment and subsequent closure remain owed. The separately routed existing barrier-theorem dependency finding requires owner handling outside this dispatch. There are no assigned gate diagnostics.",
+    "Quote-currency validation: node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-30.proof-contracts.json --strict --items alg-adaptive-euler-maruyama-on-predictable-grid,lem-adaptive-em-predictable-grid-second-moment,thm-adaptive-em-predictable-grid-strong-error,lem-scalar-brownian-bridge-restriction-density,thm-scalar-brownian-bridge-barrier-crossing-probability --json exited 0: ok true, checked 5, errors [], warnings []. This checks quotation currency and contracts; it does not independently certify mathematics or resolve the separately routed theorem dependency omission.",
+    "Final read-only identity check used native itemHashGuard and statementHash: all three post guards match disk; the two repaired Definition hashes differ from initial-1.before_statements; the unaffected algorithm Definition and guard equal the frozen values. Native JSON.stringify SHA-256 of initial-1 matches input_sha256 exactly, and all decision tuples match unit 30. No review hash was recomputed or refreshed."
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "def-predictable-stopping-time-grid",
+      "id": "alg-adaptive-euler-maruyama-on-predictable-grid",
+      "path": "items/alg-adaptive-euler-maruyama-on-predictable-grid.md",
+      "affected_use": "Definition, predictable-grid mode: Supply a finite predictable grid; its update uses actual increments, h_n<=h_max and coefficients measurable at F_(tau_n).",
+      "disposition": "unaffected",
+      "reason": "The changed supplier paragraph corrects a blanket exclusion, while every defining grid condition is identical. Usual filtered Brownian conditions and the operational branch restriction are supplied here independently. The assigned algorithm review records the current supplier context."
+    },
+    {
+      "supplier": "def-predictable-stopping-time-grid",
+      "id": "lem-adaptive-em-predictable-grid-second-moment",
+      "path": "items/lem-adaptive-em-predictable-grid-second-moment.md",
+      "affected_use": "Statement requires a finite predictable grid with N finite almost surely and h_max<=T; F1 and proof 1.1 use stopped-measurable left coefficients and stopping-time localization.",
+      "disposition": "unaffected",
+      "reason": "Neither stopped measurability, positivity, finiteness, length bounds nor the interval sum changed. The consumer independently assumes the usual Ito filtered-space conditions. Its localization and energy argument use the formal grid conditions, not the removed universal endpoint-inspection assertion. Refreshed only its contract citation quotation to the repaired supplier Definition; item bytes remain unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "supplier": "def-predictable-stopping-time-grid",
+      "id": "thm-adaptive-em-predictable-grid-strong-error",
+      "path": "items/thm-adaptive-em-predictable-grid-strong-error.md",
+      "affected_use": "Statement and F2 require a finite predictable grid bounded by deterministic h; proof 1.1 uses stopping-interval coefficients, and 1.2 sums h_n=T and bounds h_n<=h.",
+      "disposition": "unaffected",
+      "reason": "All these exact conditions are unchanged. The proof uses the usual filtered Brownian space and the unchanged Ito interval supplier, moment bound and mesh bounds. Its explicit restriction against endpoint-selection is a restriction of its own claimed scope; it does not assert validity for anticipative filtrations. Refreshed only its contract citation quotation to the repaired supplier Definition; item bytes remain unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "supplier": "def-scalar-brownian-bridge-from-x-to-y",
+      "id": "lem-scalar-brownian-bridge-restriction-density",
+      "path": "items/lem-scalar-brownian-bridge-restriction-density.md",
+      "affected_use": "Statement defines mu_(x,y)^h as the law on C([0,h]) of the bridge; Given and proof 1.1 use beta_s=W_s-(s/h)W_h; F4 explicitly transfers coordinate generation by constant extension.",
+      "disposition": "unaffected",
+      "reason": "The same formula and path law are retained. Its own F4 already gives exactly the constant-extension justification now added to the supplier; Gaussian residual independence and endpoint disintegration continue to refer to the same law."
+    },
+    {
+      "supplier": "def-scalar-brownian-bridge-from-x-to-y",
+      "id": "thm-scalar-brownian-bridge-barrier-crossing-probability",
+      "path": "items/thm-scalar-brownian-bridge-barrier-crossing-probability.md",
+      "affected_use": "Statement takes the scalar bridge defined by the supplier; F2 and proof 1.1 use the affine Brownian residual representation and the same bridge restriction density.",
+      "disposition": "unaffected",
+      "reason": "Neither the bridge representation, endpoint convention, law nor density premise changes, so the repaired path-space justification invalidates no clause here. A pre-existing missing dominated-convergence dependency from proof 2.1 is separately routed to its owner; it is not caused by this interface event. Refreshed only its contract citation quotation to the repaired supplier Definition; item bytes remain unchanged.",
+      "metadata_repair_only": true
+    }
+  ],
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-30.pages.json": "f59c3216cf3502fb0afddb99b796cb68d8042a6ad26f05058cd816ec3d85fbdd",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-30.proof-contracts.json": "ba95f2f54737f783b2a22c0e8ef2dc53ced394a243c962ca016be08d8039cb30"
+  }
+}

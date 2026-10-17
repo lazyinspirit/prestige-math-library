@@ -1,0 +1,276 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "107",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "thm-complete-chaos-tensor-expansions-give-sobol-coefficients",
+      "model": "gpt-6-luna",
+      "context_sha256": "01a366f83bc8874da69ae23b71aa74a1168f683e20d0c2235a7855dac6d28718",
+      "outcome": "false_positive",
+      "reason": "False positive: the cited Hoeffding theorem Statement explicitly says “With the components of [[def-product-hoeffding-anova-components]]”. That Definition is exactly f_u=sum_{v subset u}(-1)^(|u|-|v|)P_v f; the formula is therefore part of the imported interface, not an additional premise. Tensor integration gives support projection, finite Mobius cancellation isolates support u, and bounded finite sums of contractions pass the complete-family Parseval limit. CC supplies both real L2 completeness and Parseval; normalization is restricted to V>0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-pick-freeze-monte-carlo-sobol-estimators",
+      "model": "gpt-6-luna",
+      "context_sha256": "b138d06fff526003f48fae6761efd80cecdff2631cfc0a86728b0bbe79dd6813",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The L2 assumption does not imply finite second moments of Z: with d=1, P(X=k) proportional to k^-4 and f(k)=k, E[X^2] is finite but E[X^4] is infinite. N=X^2-UV therefore has infinite second moment (restrict UV to a bounded positive-probability event). Calling its sample covariance unbiased and its plug-in matrix an MCSE without qualification is invalid. Retained all L2 ratio inputs and outputs, explicitly defined the empirical n-1 covariance, and qualified the formal matrix: the existing separate CLT supplies the MCSE interpretation under AC, L4 and V>0. Its step 1.1 verifies finite row second moments, and step 3.2 proves plug-in convergence; no additional choice use is introduced.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-noisy-simulator-intrinsic-noise-and-input-sensitivity",
+      "model": "gpt-6-luna",
+      "context_sha256": "67c23463d320f2c448f7264c5e0a32d6dc5f724e97a8d48bf49c9ce9f94f1b1d",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal omitted boundary qualification in Verification 2.1: F6 already requires the selected normalization variance positive, but the subsequent division did not repeat that condition. For constant f and tau^2=0 the ratio is 0/0. Step 2.1 now explicitly permits the noisy ratio only when V_f+tau^2>0 and states it is undefined when both vanish. Independence kills all noise/input and distinct-noise cross covariances; the unchanged unnormalized identities Var(Y)=V_f+tau^2, first numerator V_{i}(f), and total numerator sum_{u containing i} V_u(f)+tau^2 hold also in the zero case. Conditional-mean indices continue to require V_f>0. No Statement or Definition changed, so this proof-only repair does not propagate.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-ratio-pick-freeze-index-estimator-is-biased",
+      "model": "gpt-6-luna",
+      "context_sha256": "796b8318139175472e29d385b799b3f397e9aa4d4b5f6b789b61772de8d5e54d",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal notation error in F1: D denotes one row, while the algorithm returns barN/barD iff the sample mean barD>0. The proof already uses the correct event K>0 with barD=K/4 for two rows. Corrected F1 only. For Bernoulli(1/2), E N_r=E D_r=1/4, K is Binomial(2,1/2) independent of numerator draws, and the conditional ratio mean is (2/3)*1+(1/3)*(1/2)=5/6 while S_1=1. The algorithm repair preserves this row law and return event; bounded f also meets the stronger moment condition if an MCSE interpretation is needed. No Statement or Definition changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-complete-chaos-tensor-expansions-give-sobol-coefficients",
+      "disposition": "unaffected",
+      "post_sha256": "18218680f7cf4105fed3002de9cd6d6dafe7532826f1f7111b10d3742bae791c",
+      "review_context_sha256": "85570f80196bc55f9651bbb47068e197410670a0defa6ab7069a125a89939a61",
+      "reason": "Unchanged: the Hoeffding Statement explicitly imports def-product-hoeffding-anova-components, whose Definition supplies the exact inclusion-exclusion formula. Verified tensor support projection, finite cancellation, contraction continuity and complete-family Parseval under CC; both variance and positive-variance Sobol formulas follow.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-pick-freeze-monte-carlo-sobol-estimators",
+      "disposition": "repaired",
+      "post_sha256": "e15c793e0aa45c19fd170c11f2e0d3b14a475bceb0c2f06192b94a3ff08d6259",
+      "review_context_sha256": "f33ba9e0a5ad28779a37058db05732fc56ddde4eb0e6e9e2b930bd9b973e80d7",
+      "reason": "Retained L2 ratio inputs, row law, zero-denominator status and raw ratios. Specified empirical sample covariance algebraically and qualified the formal plug-in matrix; the separate L4/positive-variance/AC CLT supplies its MCSE interpretation. Re-examined the final carrier after removing a redundant same-page forward_refs declaration; Definition and both consumer uses remain sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-noisy-simulator-intrinsic-noise-and-input-sensitivity",
+      "disposition": "repaired",
+      "post_sha256": "7c53773d481b6428fdc4336fed68df8ab6ba33217e7148e3811c4b2b57a174cf",
+      "review_context_sha256": "9307e78b12605e1d97e97a1189e49988ea9f87be3c9c90fc36b757be0421dacd",
+      "reason": "Added the positive noisy-output variance condition in step 2.1 and declared the zero/zero case undefined. Verified independent-noise factorization, direct conditional-expectation testing and the total-effect noise increment tau^2. All unnormalized identities and the Example remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-ratio-pick-freeze-index-estimator-is-biased",
+      "disposition": "repaired",
+      "post_sha256": "3d58a1bcbdf9d9978f085bde7d7f372131147ad418c571a78c224b7be6f910b1",
+      "review_context_sha256": "b4f976bbe97803a4cdc41f1f3307d04b7aef4007e6dbd101d34ab908cd4837ed",
+      "reason": "Corrected F1 to the sample-mean condition barD>0. Rechecked K>0 iff barD=K/4>0, independence of numerator and denominator draws and conditional expectation 5/6. The repaired algorithm preserves these operations; its stronger MCSE qualification causes no problem for bounded Bernoulli data.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-pick-freeze-sobol-ratio-joint-clt-and-mcse",
+    "ex-ratio-pick-freeze-index-estimator-is-biased"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "thm-complete-chaos-tensor-expansions-give-sobol-coefficients",
+      "outcome": "false_positive",
+      "reason": "False positive: the cited Hoeffding theorem Statement explicitly says “With the components of [[def-product-hoeffding-anova-components]]”. That Definition is exactly f_u=sum_{v subset u}(-1)^(|u|-|v|)P_v f; the formula is therefore part of the imported interface, not an additional premise. Tensor integration gives support projection, finite Mobius cancellation isolates support u, and bounded finite sums of contractions pass the complete-family Parseval limit. CC supplies both real L2 completeness and Parseval; normalization is restricted to V>0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-pick-freeze-monte-carlo-sobol-estimators",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The L2 assumption does not imply finite second moments of Z: with d=1, P(X=k) proportional to k^-4 and f(k)=k, E[X^2] is finite but E[X^4] is infinite. N=X^2-UV therefore has infinite second moment (restrict UV to a bounded positive-probability event). Calling its sample covariance unbiased and its plug-in matrix an MCSE without qualification is invalid. Retained all L2 ratio inputs and outputs, explicitly defined the empirical n-1 covariance, and qualified the formal matrix: the existing separate CLT supplies the MCSE interpretation under AC, L4 and V>0. Its step 1.1 verifies finite row second moments, and step 3.2 proves plug-in convergence; no additional choice use is introduced.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-noisy-simulator-intrinsic-noise-and-input-sensitivity",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal omitted boundary qualification in Verification 2.1: F6 already requires the selected normalization variance positive, but the subsequent division did not repeat that condition. For constant f and tau^2=0 the ratio is 0/0. Step 2.1 now explicitly permits the noisy ratio only when V_f+tau^2>0 and states it is undefined when both vanish. Independence kills all noise/input and distinct-noise cross covariances; the unchanged unnormalized identities Var(Y)=V_f+tau^2, first numerator V_{i}(f), and total numerator sum_{u containing i} V_u(f)+tau^2 hold also in the zero case. Conditional-mean indices continue to require V_f>0. No Statement or Definition changed, so this proof-only repair does not propagate.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-ratio-pick-freeze-index-estimator-is-biased",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal notation error in F1: D denotes one row, while the algorithm returns barN/barD iff the sample mean barD>0. The proof already uses the correct event K>0 with barD=K/4 for two rows. Corrected F1 only. For Bernoulli(1/2), E N_r=E D_r=1/4, K is Binomial(2,1/2) independent of numerator draws, and the conditional ratio mean is (2/3)*1+(1/3)*(1/2)=5/6 while S_1=1. The algorithm repair preserves this row law and return event; bounded f also meets the stronger moment condition if an MCSE interpretation is needed. No Statement or Definition changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "action": "no-update-required",
+      "id": "alg-pick-freeze-monte-carlo-sobol-estimators",
+      "reason": "The only changed Definition has two direct item consumers, both draft items in batch 107 and the frozen frontier. Its owning page is draft. No published or outside-frontier consumer was found in dependency, reference or actual page-use examination, so there is no separate published-maintenance finding.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "scope": "Four assigned draft frontier items reviewed; three item carriers repaired. No new items, published edits, judgments, stamps, certificates or round-state changes.",
+    "statement_changes": [
+      {
+        "id": "alg-pick-freeze-monte-carlo-sobol-estimators",
+        "section": "Definition",
+        "before_statement_sha256": "d70eaa60c34a374c428006026b93468478323e377e681fa4ba9c0fdebd716bab",
+        "after_statement_sha256": "548d3c804af8621c2e1da159c0531a0241b259b79e636686c019e353ffdc9bbb",
+        "before_clauses": [
+          "the unbiased sample covariance matrix $\\widehat\\Sigma$",
+          "Also return the first-order plug-in MCSE\ncovariance matrix"
+        ],
+        "after_clauses": [
+          "the empirical sample covariance matrix $\\widehat\\Sigma$",
+          "Also return the formal first-order plug-in\nmatrix",
+          "The $L^2$ input\nassumption alone does not guarantee a finite population covariance of $Z$\nor a valid MCSE interpretation of this matrix."
+        ],
+        "comparison": "Compared the original and final sections directly: only the algorithm Definition changed. The tensor theorem Statement is identical; both example repairs affect Facts or Verification only."
+      }
+    ],
+    "consumer_examinations": [
+      {
+        "supplier": "alg-pick-freeze-monte-carlo-sobol-estimators",
+        "id": "thm-pick-freeze-sobol-ratio-joint-clt-and-mcse",
+        "path": "items/thm-pick-freeze-sobol-ratio-joint-clt-and-mcse.md",
+        "affected_use": "Statement: “Assume AC. Let $d<\\infty$, let the product-law output satisfy $f\\in L^4(\\mu)$, and suppose $V=\\operatorname{Var}(f(X))>0$.” F1 imports the same row vector; Proof 1.1 proves its finite second moments, 3.2 proves plug-in convergence, and 4.1 counts the unchanged operations.",
+        "disposition": "unchanged_sound",
+        "invalidated_claim": "None: the theorem already imposes stronger moments, positive variance and AC.",
+        "minimality": "No item repair is necessary. Only its exact algorithm Definition quotation in the shared owning contract was refreshed."
+      },
+      {
+        "supplier": "alg-pick-freeze-monte-carlo-sobol-estimators",
+        "id": "ex-ratio-pick-freeze-index-estimator-is-biased",
+        "path": "items/ex-ratio-pick-freeze-index-estimator-is-biased.md",
+        "affected_use": "F1 imports $N=f(X)f(X)-f(U)f(V)$ and $D=\\frac12(f(W)-f(W'))^2$; Verification 1.2 and 2.1 use independent numerator/denominator bundles and return iff $K>0$, equivalently $\\bar D>0$.",
+        "disposition": "sound_after_assigned_nonfatal_F1_repair",
+        "invalidated_claim": "The algorithm change invalidates no row law or ratio calculation; the separately assigned row-D return-condition typo was corrected.",
+        "minimality": "Changed only the erroneous F1 condition to the sample mean; Example and Verification remain identical."
+      }
+    ],
+    "page_examinations": [
+      {
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/global-sensitivity-anova-and-sobol-estimation.md",
+        "affected_use": "Objective: the procedure has a joint CLT and plug-in MCSE under AC, finite fourth moment and positive output variance.",
+        "disposition": "unchanged_sound",
+        "reason": "Those exact hypotheses match the separate theorem and the repaired algorithm qualification."
+      },
+      {
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/global-sensitivity-anova-and-sobol-estimation-examples.md",
+        "affected_use": "The page links the noisy variance separation example and the Bernoulli ratio-bias witness.",
+        "disposition": "unchanged_sound",
+        "reason": "Both example interfaces and their stated conclusions remain unchanged."
+      }
+    ],
+    "contract_repairs": {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-107.proof-contracts.json",
+      "changes": [
+        "Refreshed algorithm Definition quotations in the assigned ratio example and direct CLT consumer contract.",
+        "Updated only noisy-example derivation 2.1 to mirror its corrected proof step."
+      ],
+      "integration": "Acquired shared-write lock, reread current contract, edited these entries, passed strict focused contract validation, and released the lock."
+    },
+    "sources_read": [
+      "items/def-product-hoeffding-anova-components.md:Definition",
+      "items/thm-product-hoeffding-anova-decomposition.md:Statement and Proof",
+      "items/lem-product-coordinate-projections-commute-and-contract.md",
+      "items/def-first-and-total-sobol-indices.md:Definition",
+      "items/thm-parseval-equivalences-for-a-complete-orthonormal-family.md",
+      "items/lem-l-two-with-the-integral-pairing-is-a-hilbert-space.md",
+      "items/def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis.md",
+      "items/thm-pick-freeze-sobol-covariance-identities.md",
+      "items/thm-pick-freeze-sobol-ratio-joint-clt-and-mcse.md",
+      "items/def-independent-random-elements.md:Definition",
+      "items/thm-independent-random-elements-have-product-joint-law.md:Statement",
+      "items/def-moments-variance-and-covariance.md:Definition",
+      "items/def-conditional-expectation-given-a-sigma-algebra.md:Definition",
+      "items/cor-cauchy-schwarz-inequality-for-l-two.md:Statement",
+      "items/cor-expectation-linearity-monotonicity-and-modulus-bound.md:Statement",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-107.proof-contracts.json:assigned entries and exact dependency quotations"
+    ],
+    "external_sources_consulted": [],
+    "validation": [
+      {
+        "command": "node tools/finite-smoke.mjs research/numerical-optimization-dynamics-2026-10-16-batch-107.proof-contracts.json --items ex-ratio-pick-freeze-index-estimator-is-biased",
+        "exit_code": 0,
+        "result": "PASS: 1024 bundles, 256 zero statuses, 768 returned ratios; exact conditional mean 5/6."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-complete-chaos-tensor-expansions-give-sobol-coefficients.md items/alg-pick-freeze-monte-carlo-sobol-estimators.md items/ex-noisy-simulator-intrinsic-noise-and-input-sensitivity.md items/ex-ratio-pick-freeze-index-estimator-is-biased.md",
+        "exit_code": 0,
+        "result": "3 proof-bearing items checked, zero failures; algorithm has no phase proof."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-complete-chaos-tensor-expansions-give-sobol-coefficients.md items/alg-pick-freeze-monte-carlo-sobol-estimators.md items/ex-noisy-simulator-intrinsic-noise-and-input-sensitivity.md items/ex-ratio-pick-freeze-index-estimator-is-biased.md library/numerical-optimization-inverse-problems-and-uncertainty-quantification/global-sensitivity-anova-and-sobol-estimation.md library/numerical-optimization-inverse-problems-and-uncertainty-quantification/global-sensitivity-anova-and-sobol-estimation-examples.md",
+        "exit_code": 0,
+        "result": "6 files passed real KaTeX and YAML checks. Final algorithm frontmatter was separately rendered again after the reference correction."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-107.proof-contracts.json --strict --items thm-complete-chaos-tensor-expansions-give-sobol-coefficients,alg-pick-freeze-monte-carlo-sobol-estimators,ex-noisy-simulator-intrinsic-noise-and-input-sensitivity,ex-ratio-pick-freeze-index-estimator-is-biased,thm-pick-freeze-sobol-ratio-joint-clt-and-mcse",
+        "exit_code": 0,
+        "result": "5/5 checked; zero errors and zero warnings. The fifth item was included to validate its refreshed supplier quotation."
+      },
+      {
+        "command": "node tools/fwdcheck.mjs --items-file <(printf '%s' '[\"alg-pick-freeze-monte-carlo-sobol-estimators\"]') --quiet",
+        "exit_code": 0,
+        "result": "Focused item/page and prerequisite dependency/forward cycle checks passed. An earlier run caught an incorrectly added same-page forward_refs entry; removed it, re-examined the unchanged procedure and consumers, then captured the final algorithm review hashes."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-pick-freeze-monte-carlo-sobol-estimators.md items/ex-noisy-simulator-intrinsic-noise-and-input-sensitivity.md items/ex-ratio-pick-freeze-index-estimator-is-biased.md",
+        "exit_code": 0,
+        "result": "Final post-edit run: 3 changed items, 6 numbered steps, zero defects."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-pick-freeze-monte-carlo-sobol-estimators.md",
+        "exit_code": 0,
+        "result": "Final algorithm carrier passed real KaTeX and YAML checks."
+      }
+    ],
+    "outside_frontier_consumers": [],
+    "published_consumer_findings": [],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection, current independent rejudgment for repaired carriers, and ordinary frontier consumer routing; this report does not supply independent acceptance of its own repairs.",
+    "report_integrity": "Passed exact input digest and rejected-tuple coverage, all four current itemHashGuard values, dispositions, and required evidence fields; no unresolved obligations."
+  }
+}

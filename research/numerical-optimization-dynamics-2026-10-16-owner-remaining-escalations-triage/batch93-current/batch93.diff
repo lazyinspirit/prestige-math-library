@@ -1,0 +1,538 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-93.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-93.proof-contracts.json (proposed)
+@@ -31,7 +31,7 @@
+           "supplier": "alg-composite-simpson-rule",
+           "status": "inspected-draft",
+           "source_section": "Definition",
+-          "excerpt": "Input real numbers $a<b$, an integer $n\\ge2$, and a real-valued function\n$f:[a,b]\\to\\mathbb R$ evaluable at every point of $[a,b]$. If $n$ is odd, the\nprocedure returns invalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. If $a\\ge b$ or\n$n<2$, the procedure returns invalid-grid. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
++          "excerpt": "Input real endpoints $a,b$, an integer $n$, and an evaluation function $f$.\nIf $a\\ge b$ or $n<2$, return invalid-grid without evaluating $f$. For the\nremaining inputs require $f:[a,b]\\to\\mathbb R$ to be evaluable at every\npoint of $[a,b]$. If $n$ is odd, the procedure returns\ninvalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
+           "use": "The level hierarchy explicitly sets Q_l=Q_S(.;0,1,2^(l+1)); matched inputs are a<b, an even panel count at least two, and the exact-real finite weighted-sum convention."
+         }
+       ],
+@@ -242,12 +242,15 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "Fix $\\varepsilon>0$. By [F2] and [F3], $f$ is uniformly continuous on $[0,1]^d$. Choose $\\delta>0$ such that $\\|x-y\\|_2<\\delta$ implies $|f(x)-f(y)|<\\varepsilon$. Choose $L$ with $\\sqrt d\\,H<\\delta$, where $H=2^{-L}$. Every cell of the uniform $d$-dimensional grid has diameter $\\sqrt d\\,H$.",
++          "claim": "Fix $\\varepsilon>0$. By [F2] and [F3], $f$ is uniformly continuous on $[0,1]^d$. Choose $\\delta>0$ such that $\\|x-y\\|_2<\\delta$ implies $|f(x)-f(y)|<\\varepsilon$. By [F12], $\\delta/\\sqrt d>0$; use [F11] to choose a positive rational $\\rho<\\delta/\\sqrt d$, then [F10] to choose $L$ with $H=2^{-L}<\\rho$. Thus $\\sqrt d\\,H<\\delta$, and every cell of the uniform $d$-dimensional grid has diameter $\\sqrt d\\,H$.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+             "F2",
+             "F3",
++            "F10",
++            "F11",
++            "F12",
+             "choose"
+           ]
+         },
+@@ -288,7 +291,7 @@
+           "supplier": "alg-composite-simpson-rule",
+           "status": "inspected-draft",
+           "source_section": "Definition",
+-          "excerpt": "Input real numbers $a<b$, an integer $n\\ge2$, and a real-valued function\n$f:[a,b]\\to\\mathbb R$ evaluable at every point of $[a,b]$. If $n$ is odd, the\nprocedure returns invalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. If $a\\ge b$ or\n$n<2$, the procedure returns invalid-grid. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
++          "excerpt": "Input real endpoints $a,b$, an integer $n$, and an evaluation function $f$.\nIf $a\\ge b$ or $n<2$, return invalid-grid without evaluating $f$. For the\nremaining inputs require $f:[a,b]\\to\\mathbb R$ to be evaluable at every\npoint of $[a,b]$. If $n$ is odd, the procedure returns\ninvalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
+           "use": "Step 1.2 regroups the batch-20 rule into two-panel blocks; its positive coefficients 1,4,1 and scale h/3 give block weights H(1,4,1)/6."
+         }
+       ],
+@@ -573,7 +576,7 @@
+           "supplier": "alg-composite-simpson-rule",
+           "status": "inspected-draft",
+           "source_section": "Definition",
+-          "excerpt": "Input real numbers $a<b$, an integer $n\\ge2$, and a real-valued function\n$f:[a,b]\\to\\mathbb R$ evaluable at every point of $[a,b]$. If $n$ is odd, the\nprocedure returns invalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. If $a\\ge b$ or\n$n<2$, the procedure returns invalid-grid. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
++          "excerpt": "Input real endpoints $a,b$, an integer $n$, and an evaluation function $f$.\nIf $a\\ge b$ or $n<2$, return invalid-grid without evaluating $f$. For the\nremaining inputs require $f:[a,b]\\to\\mathbb R$ to be evaluable at every\npoint of $[a,b]$. If $n$ is odd, the procedure returns\ninvalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
+           "use": "Fact F3 uses the level-zero two-panel rule on [0,1], whose weights are 1/6, 4/6, and 1/6; step 1.1 uses the Simpson error theorem, while the hierarchy panels are even and at least two."
+         }
+       ],
+@@ -845,7 +848,7 @@
+           "source_section": "Statement",
+           "quote": "Let $d\\ge1$ and let $f:[0,1]^d\\to\\mathbb R$ be continuous. For the dyadic\ncomposite-Simpson hierarchy of [[def-smolyak-univariate-level-hierarchy]],\nthe tensor product $Q_L^{\\otimes d}$ converges to the multiple Riemann\nintegral:\n$$\\lim_{L\\to\\infty} Q_L^{\\otimes d}(f)=I_d(f).$$",
+           "uses": [
+-            "2.1"
++            "3.1"
+           ]
+         },
+         {
+@@ -888,7 +891,7 @@
+           "fact": "F9",
+           "source": "lem-smolyak-mixed-simpson-detail-decay",
+           "source_section": "Statement",
+-          "quote": "Let $d\\ge1$. For $S=\\{j_1<\\cdots<j_k\\}\\subseteq\\{1,\\ldots,d\\}$, define\n$$D_Sf:=\\partial_{x_{j_k}}^4\\cdots\\partial_{x_{j_1}}^4f,$$\nso these derivatives are applied in increasing coordinate order; set\n$D_\\varnothing f=f$. Assume every $D_Sf$ is continuous on the closed cube,\nwith the one-sided endpoint convention of\n[[def-higher-derivatives-and-smoothness]], and choose finite bounds $M_S\\ge0$\nsuch that $|D_Sf(x)|\\le M_S$ on $[0,1]^d$. For\n$\\ell\\in\\mathbb N_0^d$, put $S(\\ell):=\\{j:\\ell_j\\ge1\\}$ and\n$$\\delta_\\ell(f):=(\\Delta_{\\ell_1}^{(1)}\\otimes\\cdots\\otimes\\Delta_{\\ell_d}^{(d)})(f).$$\nThen\n$$|\\delta_\\ell(f)|\\le M_{S(\\ell)}\\left(\\frac{17}{2880}\\right)^{|S(\\ell)|}16^{-\\sum_{j\\in S(\\ell)}\\ell_j}.$$\nMoreover, for every finite $F\\subseteq\\mathbb N_0^d$,\n$$\\sum_{\\ell\\in F}|\\delta_\\ell(f)|\\le\\sum_{S\\subseteq\\{1,\\ldots,d\\}}M_S\\left(\\frac{17}{43200}\\right)^{|S|}<\\infty.$$",
++          "quote": "Use the dyadic composite-Simpson hierarchy of\n[[def-smolyak-univariate-level-hierarchy]]. Let $d\\ge1$. For\n$S=\\{j_1<\\cdots<j_k\\}\\subseteq\\{1,\\ldots,d\\}$, define\n$$D_Sf:=\\partial_{x_{j_k}}^4\\cdots\\partial_{x_{j_1}}^4f,$$\nso these derivatives are applied in increasing coordinate order; set\n$D_\\varnothing f=f$. Assume every $D_Sf$ is continuous on the closed cube,\nwith the one-sided endpoint convention of\n[[def-higher-derivatives-and-smoothness]], and choose finite bounds $M_S\\ge0$\nsuch that $|D_Sf(x)|\\le M_S$ on $[0,1]^d$. For\n$\\ell\\in\\mathbb N_0^d$, put $S(\\ell):=\\{j:\\ell_j\\ge1\\}$ and\n$$\\delta_\\ell(f):=(\\Delta_{\\ell_1}^{(1)}\\otimes\\cdots\\otimes\\Delta_{\\ell_d}^{(d)})(f).$$\nThen\n$$|\\delta_\\ell(f)|\\le M_{S(\\ell)}\\left(\\frac{17}{2880}\\right)^{|S(\\ell)|}16^{-\\sum_{j\\in S(\\ell)}\\ell_j}.$$\nMoreover, for every finite $F\\subseteq\\mathbb N_0^d$,\n$$\\sum_{\\ell\\in F}|\\delta_\\ell(f)|\\le\\sum_{S\\subseteq\\{1,\\ldots,d\\}}M_S\\left(\\frac{17}{43200}\\right)^{|S|}<\\infty.$$",
+           "uses": [
+             "3.1"
+           ]
+@@ -909,26 +912,27 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "By [F5] and [F2], the absolute value of the right side in step 1.1 is at most the omitted-detail tail $T_\\Lambda:=\\sum_{\\ell\\notin\\Lambda}|\\delta_\\ell(f)|$. By [F4], its left side converges as $L\\to\\infty$ to $I_d(f)-Q_\\Lambda(f)$. If the absolute value of this limit exceeded $T_\\Lambda$, choose $\\varepsilon$ to be half the positive difference and use [F7] to take $L$ with the left side within $\\varepsilon$ of its limit; [F8] would then force the left-side absolute value to exceed $T_\\Lambda$, contradicting the preceding bound. Hence the displayed omitted-tail inequality holds.",
++          "claim": "By [F5] and [F2], the absolute value of the right side in step 1.1 is at most the omitted-detail tail $T_\\Lambda:=\\sum_{\\ell\\notin\\Lambda}|\\delta_\\ell(f)|$ for every sufficiently large $L$. Put $x_L:=Q_L^{\\otimes d}(f)-Q_\\Lambda(f)$ and $z:=I_d(f)-Q_\\Lambda(f)$; the convergence hypothesis in **Given** says $|x_L-z|=|Q_L^{\\otimes d}(f)-I_d(f)|$ is eventually below every positive rational tolerance. If $|z|>T_\\Lambda$, [F10] supplies a positive rational $\\varepsilon$ with $2\\varepsilon<|z|-T_\\Lambda$. For sufficiently large $L$, both $\\Lambda\\subseteq R_L$ and $|x_L-z|<\\varepsilon$ hold by finiteness of $\\Lambda$ and [F7]. The triangle inequality [F8] then gives $|x_L|\\ge |z|-|x_L-z|>|z|-\\varepsilon>T_\\Lambda$, contradicting the preceding tail bound. Hence the displayed omitted-tail inequality holds.",
+           "step": "2.1",
+           "inputs": [
+             "given",
+             "F2",
+-            "F4",
+             "F5",
+             "F7",
+             "F8",
++            "F10",
+             "step 1.1",
+             "algebra"
+           ]
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "If the mixed-derivative hypotheses of [F9] hold, its common bound makes the finite subsums of $\\sum_{\\ell\\in\\mathbb N_0^d}|\\delta_\\ell(f)|$ bounded above. By the definition [F2], the full absolute-detail sum is therefore defined and finite, so step 2.1 applies to this class and proves the stated particular error case.",
++          "claim": "For the dyadic composite-Simpson hierarchy, [F4] supplies the convergence hypothesis in **Given**. If the mixed-derivative hypotheses of [F9] hold, its common bound makes the finite subsums of $\\sum_{\\ell\\in\\mathbb N_0^d}|\\delta_\\ell(f)|$ bounded above. By the definition [F2], the full absolute-detail sum is therefore defined and finite, so step 2.1 applies and proves the stated particular error case.",
+           "step": "3.1",
+           "inputs": [
+             "given",
+             "F2",
++            "F4",
+             "F9",
+             "step 2.1",
+             "algebra"
+@@ -1091,7 +1095,7 @@
+         },
+         {
+           "id": "step-4-1",
+-          "claim": "For the hierarchy of [[def-smolyak-univariate-level-hierarchy]], each level has panel count $2^{\\ell+1}$, which is even and at least two. Thus [F7] makes every $Q_\\ell$ exact through degree three. Set $m_\\ell=3$ for all $\\ell$; for coordinate degrees $s_j\\le3$ the least levels are $q_j=0$, so $R_q=\\{0\\}\\subseteq\\Lambda$. Step 3.1 gives the stated exactness for these tensor polynomials.",
++          "claim": "For the hierarchy of [[def-smolyak-univariate-level-hierarchy]], each level has panel count $2^{\\ell+1}$, which is even and at least two. Thus [F7] makes every $Q_\\ell$ exact through degree three. Set $r_\\ell=3$ for all $\\ell$; for coordinate degrees $s_j\\le3$ the least levels are $q_j=0$, so $R_q=\\{0\\}\\subseteq\\Lambda$. Step 3.1 gives the stated exactness for these tensor polynomials.",
+           "step": "4.1",
+           "inputs": [
+             "given",
+@@ -1164,7 +1168,7 @@
+           "fact": "F1",
+           "source": "alg-dimension-adaptive-smolyak-surplus-selection",
+           "source_section": "Definition",
+-          "quote": "**Input:** dimension $d\\ge1$; a finite downward-closed cap\n$\\Gamma\\subseteq\\mathbb N_0^d$ containing $0$; a nested node-key hierarchy\nthrough every level in $\\Gamma$; a function $f$ evaluable at the nodes; and an\ninteger evaluation budget $B\\ge0$.\n\n**Output:** a current downward-closed index set $\\Lambda\\subseteq\\Gamma$, its\nSmolyak value when the initial rule fits the budget, the computed detail\nsurpluses, the distinct nodes actually sampled, and one status:\n`budget-too-small`, `budget-exhausted`, or `frontier-exhausted`.\n\n1. Form the baseline node set $X_0^d$. If its cardinality exceeds $B$, return\n   `budget-too-small`, an empty $\\Lambda$, no cubature value, and no sampled\n   nodes. Otherwise set $\\Lambda:=\\{0\\}$, evaluate $f$ once at every baseline\n   node, and set the current value to $Q_{\\{0\\}}(f)$.\n2. An index $\\ell\\in\\Gamma\\setminus\\Lambda$ is **admissible** when every\n   immediate predecessor $\\ell-e_j$ with $\\ell_j>0$ already belongs to\n   $\\Lambda$. Its **surplus** is the exact detail value $\\delta_\\ell(f)$ and\n   its selection indicator is $|\\delta_\\ell(f)|$.\n3. Visit newly admissible indices in lexicographic order, skipping any index\n   already recorded as active, accepted, or `uncomputed-budget`. To compute one\n   surplus, form its finite tensor-detail node set and the new keys not already\n   sampled. If adding them would exceed $B$, record this candidate as\n   `uncomputed-budget` without evaluating those nodes. Otherwise evaluate each\n   new key once, store the values, compute $\\delta_\\ell(f)$ from the finite\n   signed weights, and add the index to the active candidate set.\n4. If the active set is empty and an admissible `uncomputed-budget` candidate\n   remains, return `budget-exhausted`. If the active set and admissible\n   candidates are both empty, return `frontier-exhausted`.\n5. Otherwise select the active index with largest absolute surplus, breaking\n   ties lexicographically. Add it to $\\Lambda$, update the cubature value by\n   adding its signed surplus, and inspect its finite forward neighbors for new\n   admissible indices; process them by step 3. Repeat from step 4.\n\nThe evaluation budget counts the union of distinct keys sampled while computing\nboth accepted and candidate surpluses. The indicator $|\\delta_\\ell(f)|$ is a\nrefinement heuristic only. A threshold on this indicator, or exhaustion of the\nfinite candidate cap, is not an error certificate unless a separate omitted-tail\nbound applies.",
++          "quote": "**Input:** dimension $d\\ge1$; a finite downward-closed cap\n$\\Gamma\\subseteq\\mathbb N_0^d$ containing $0$; for each coordinate, the\none-dimensional quadrature rules from a hierarchy as in\n[[def-smolyak-univariate-level-hierarchy]] through every level used by\n$\\Gamma$, with canonical node keys that agree exactly if and only if the real\nnodes agree and are totally ordered; a function $f$ evaluable at the nodes; and\nan integer evaluation budget $B\\ge0$. Admissible inputs supply all these rules\nand keys at every level required by $\\Gamma$.\n\n**Output:** a current downward-closed index set $\\Lambda\\subseteq\\Gamma$, its\nSmolyak value when the initial rule fits the budget, the computed detail\nsurpluses, the distinct nodes actually sampled, and one status:\n`budget-too-small`, `budget-exhausted`, or `frontier-exhausted`.\n\n1. An index $\\ell\\in\\Gamma\\setminus\\Lambda$ is **admissible** when every\n   immediate predecessor $\\ell-e_j$ with $\\ell_j>0$ already belongs to\n   $\\Lambda$. Its **surplus** is the exact detail value $\\delta_\\ell(f)$ and\n   its selection indicator is $|\\delta_\\ell(f)|$.\n2. Form the baseline node set $X_0^d$. If its cardinality exceeds $B$, return\n   `budget-too-small`, an empty $\\Lambda$, no cubature value, and no sampled\n   nodes. Otherwise set $\\Lambda:=\\{0\\}$, initialize the active candidate set\n   as empty, evaluate $f$ once at every baseline node, and set the current\n   value to $Q_{\\{0\\}}(f)$. Then process every initially admissible index in\n   $\\Gamma\\setminus\\Lambda$ in lexicographic order using step 3.\n3. Visit newly admissible indices in lexicographic order, skipping any index\n   already recorded as active, accepted, or `uncomputed-budget`. To compute one\n   surplus, form its finite tensor-detail node set and the new keys not already\n   sampled. If adding them would exceed $B$, record this candidate as\n   `uncomputed-budget` without evaluating those nodes. Otherwise evaluate each\n   new key once, store the values, compute $\\delta_\\ell(f)$ from the finite\n   signed weights, and add the index to the active candidate set.\n4. If the active set is empty and an admissible `uncomputed-budget` candidate\n   remains, return `budget-exhausted`. Otherwise, if the active set is empty,\n   return `frontier-exhausted`.\n5. Otherwise select the active index with largest absolute surplus, breaking\n   ties lexicographically. Remove it from the active set, mark it accepted, add\n   it to $\\Lambda$, update the cubature value by adding its signed surplus, and\n   inspect its finite forward neighbors for newly admissible indices; process\n   them by step 3. Repeat from step 4.\n\nThe evaluation budget counts the union of distinct keys sampled while computing\nboth accepted and candidate surpluses. The indicator $|\\delta_\\ell(f)|$ is a\nrefinement heuristic only. A threshold on this indicator, or exhaustion of the\nfinite candidate cap, is not an error certificate unless a separate omitted-tail\nbound applies.",
+           "uses": [
+             "1.1",
+             "2.1"
+@@ -1277,7 +1281,7 @@
+           "fact": "F3",
+           "source": "lem-smolyak-mixed-simpson-detail-decay",
+           "source_section": "Statement",
+-          "quote": "Let $d\\ge1$. For $S=\\{j_1<\\cdots<j_k\\}\\subseteq\\{1,\\ldots,d\\}$, define\n$$D_Sf:=\\partial_{x_{j_k}}^4\\cdots\\partial_{x_{j_1}}^4f,$$\nso these derivatives are applied in increasing coordinate order; set\n$D_\\varnothing f=f$. Assume every $D_Sf$ is continuous on the closed cube,\nwith the one-sided endpoint convention of\n[[def-higher-derivatives-and-smoothness]], and choose finite bounds $M_S\\ge0$\nsuch that $|D_Sf(x)|\\le M_S$ on $[0,1]^d$. For\n$\\ell\\in\\mathbb N_0^d$, put $S(\\ell):=\\{j:\\ell_j\\ge1\\}$ and\n$$\\delta_\\ell(f):=(\\Delta_{\\ell_1}^{(1)}\\otimes\\cdots\\otimes\\Delta_{\\ell_d}^{(d)})(f).$$\nThen\n$$|\\delta_\\ell(f)|\\le M_{S(\\ell)}\\left(\\frac{17}{2880}\\right)^{|S(\\ell)|}16^{-\\sum_{j\\in S(\\ell)}\\ell_j}.$$\nMoreover, for every finite $F\\subseteq\\mathbb N_0^d$,\n$$\\sum_{\\ell\\in F}|\\delta_\\ell(f)|\\le\\sum_{S\\subseteq\\{1,\\ldots,d\\}}M_S\\left(\\frac{17}{43200}\\right)^{|S|}<\\infty.$$",
++          "quote": "Use the dyadic composite-Simpson hierarchy of\n[[def-smolyak-univariate-level-hierarchy]]. Let $d\\ge1$. For\n$S=\\{j_1<\\cdots<j_k\\}\\subseteq\\{1,\\ldots,d\\}$, define\n$$D_Sf:=\\partial_{x_{j_k}}^4\\cdots\\partial_{x_{j_1}}^4f,$$\nso these derivatives are applied in increasing coordinate order; set\n$D_\\varnothing f=f$. Assume every $D_Sf$ is continuous on the closed cube,\nwith the one-sided endpoint convention of\n[[def-higher-derivatives-and-smoothness]], and choose finite bounds $M_S\\ge0$\nsuch that $|D_Sf(x)|\\le M_S$ on $[0,1]^d$. For\n$\\ell\\in\\mathbb N_0^d$, put $S(\\ell):=\\{j:\\ell_j\\ge1\\}$ and\n$$\\delta_\\ell(f):=(\\Delta_{\\ell_1}^{(1)}\\otimes\\cdots\\otimes\\Delta_{\\ell_d}^{(d)})(f).$$\nThen\n$$|\\delta_\\ell(f)|\\le M_{S(\\ell)}\\left(\\frac{17}{2880}\\right)^{|S(\\ell)|}16^{-\\sum_{j\\in S(\\ell)}\\ell_j}.$$\nMoreover, for every finite $F\\subseteq\\mathbb N_0^d$,\n$$\\sum_{\\ell\\in F}|\\delta_\\ell(f)|\\le\\sum_{S\\subseteq\\{1,\\ldots,d\\}}M_S\\left(\\frac{17}{43200}\\right)^{|S|}<\\infty.$$",
+           "uses": [
+             "2.1"
+           ]
+@@ -1286,7 +1290,7 @@
+           "fact": "F4",
+           "source": "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+           "source_section": "Statement",
+-          "quote": "Let $d\\ge1$, let $f:[0,1]^d\\to\\mathbb R$ be continuous, and suppose its detail\nfamily is absolutely summable in the sense of\n[[def-smolyak-absolute-detail-summability]]. For every finite downward-closed\n$\\Lambda\\subseteq\\mathbb N_0^d$ containing $0$,\n$$|I_d(f)-Q_\\Lambda(f)|\\le\\sum_{\\ell\\in\\mathbb N_0^d\\setminus\\Lambda}|\\delta_\\ell(f)|.$$\nIn particular, the hypothesis holds for the mixed-derivative class of\n[[lem-smolyak-mixed-simpson-detail-decay]].",
++          "quote": "Let $d\\ge1$, let $f:[0,1]^d\\to\\mathbb R$ be continuous, and use a level\nhierarchy as in [[def-smolyak-univariate-level-hierarchy]]. Suppose its tensor\nrules satisfy $Q_L^{\\otimes d}(f)\\to I_d(f)$ and its detail family is absolutely\nsummable in the sense of [[def-smolyak-absolute-detail-summability]]. For every\nfinite downward-closed $\\Lambda\\subseteq\\mathbb N_0^d$ containing $0$,\n$$|I_d(f)-Q_\\Lambda(f)|\\le\\sum_{\\ell\\in\\mathbb N_0^d\\setminus\\Lambda}|\\delta_\\ell(f)|.$$\nIn particular, the dyadic composite-Simpson hierarchy satisfies the convergence\nhypothesis for continuous $f$ by\n[[lem-smolyak-dyadic-tensor-simpson-convergence]], and for the mixed-derivative\nclass of [[lem-smolyak-mixed-simpson-detail-decay]] the same hierarchy also\nsatisfies absolute summability.",
+           "uses": [
+             "2.1"
+           ]
+@@ -1364,8 +1368,7 @@
+           "quote": "For a finite set $A$ and $k \\in \\mathbb{N}$ put\n\n$$[A]^{k} := \\{\\, S \\subseteq A \\ :\\ \\lvert S\\rvert = k \\,\\},$$\n\nthe set of $k$-element subsets of $A$. Every $S \\subseteq A$ is finite\n([[thm-subset-of-a-finite-set]]), so the condition $\\lvert S\\rvert = k$ makes\nsense for every subset.\n\n**$[A]^{k}$ is finite.** It is a subset of $\\mathcal{P}(A)$, which is finite by\n[[cor-cardinality-of-the-power-set]], so [[thm-subset-of-a-finite-set]] applies.\n\n**$\\lvert [A]^{k}\\rvert$ depends only on $\\lvert A\\rvert$.** Let $h : A \\to A'$ be\na bijection of finite sets. The direct image map $S \\mapsto h[S]$ carries\n$[A]^{k}$ into $[A']^{k}$, because $h$ restricted to $S$ is a bijection of $S$\nonto $h[S]$ and so $\\lvert h[S]\\rvert = \\lvert S\\rvert = k$ by the transport\nclause of [[def-finite-cardinality]]; the map $T \\mapsto h^{-1}[T]$ is its\ntwo-sided inverse, since $h^{-1}[h[S]] = S$ and $h[h^{-1}[T]] = T$ for a\nbijection $h$. So $[A]^{k} \\approx [A']^{k}$ and the two have the same\ncardinality.\n\n**Definition.** For $n, k \\in \\mathbb{N}$ set\n\n$$\\binom{n}{k} := \\big\\lvert\\, [n]^{k} \\,\\big\\rvert \\in \\mathbb{N},$$\n\nthe **binomial coefficient**. By the previous paragraph and $\\lvert n\\rvert = n$,\n\n$$\\big\\lvert [A]^{k}\\big\\rvert = \\binom{\\lvert A\\rvert}{k} \\qquad \\text{for every finite } A .$$\n\n**$\\binom{n}{k}$ is a count, so it is a natural number by construction.** It is\n*not* defined as $n!/(k!\\,(n-k)!)$: that expression involves a division, hence\nlives in $\\mathbb{R}$, and the assertion that its value is a natural number is a\ntheorem, proved in [[thm-binomial-closed-formula]]. Defining the coefficient as a\ncount makes integrality free and leaves the closed formula something to prove.\n\n**Boundary values, read off the definition and not stipulated.**\n\n- $\\binom{n}{0} = 1$ **for every $n$, including $n = 0$**: the subsets of $n$ of\n  cardinality $0$ are exactly the subsets equal to $\\varnothing$\n  ([[def-finite-cardinality]], clause (b)), so $[n]^{0} = \\{\\varnothing\\}$, a\n  one-element set. No empty-product convention is involved.\n- $\\binom{n}{n} = 1$: if $S \\subseteq n$ has $\\lvert S\\rvert = n = \\lvert n\\rvert$\n  then $S = n$ by clause 3 of [[thm-subset-of-a-finite-set]], so\n  $[n]^{n} = \\{n\\}$.\n- $\\binom{n}{k} = 0$ for $k > n$: a subset $S \\subseteq n$ has\n  $\\lvert S\\rvert \\le n$ by clause 2 of [[thm-subset-of-a-finite-set]], so\n  $\\lvert S\\rvert = k > n$ is impossible and $[n]^{k} = \\varnothing$\n  ([[lem-nat-trichotomy]]).\n- $\\binom{n}{1} = n$: a subset of cardinality $1$ is $\\{x\\}$ for exactly one\n  $x \\in n$, since $\\lvert S\\rvert = 1$ means $S \\approx \\{0\\}$; so\n  $S \\mapsto$ its unique element is a bijection $[n]^{1} \\to n$.\n- $\\binom{0}{0} = 1$ and $\\binom{0}{k} = 0$ for $k \\ge 1$, both instances of the\n  above.",
+           "uses": [
+             "2.1",
+-            "2.2",
+-            "3.1"
++            "2.2"
+           ]
+         },
+         {
+@@ -1390,13 +1393,15 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "Set $b_r=r^{d-1}16^{-r}$. By [F11] and $r^{-j}\\le r^{-1}$ for $j\\ge1$, $b_{r+1}/b_r=(1+1/r)^{d-1}/16\\le(1+(2^{d-1}-1)/r)/16$. For all sufficiently large $r$, the right side is at most $3/32<1/2$. Thus the remaining terms are bounded by a geometric sequence with ratio $1/2$ using [F7]; adding the finite initial segment bounds every partial sum. The partial sums form a nonempty bounded set, so [F12] defines a finite supremum $T_d$.",
++          "claim": "Set $b_r=r^{d-1}16^{-r}$. By [F11] and [F13], for $r\\ge1$ and $j\\ge1$ we have $r^{-j}\\le r^{-1}$; hence $b_{r+1}/b_r=(1+1/r)^{d-1}/16\\le(1+(2^{d-1}-1)/r)/16$. Put $C:=2^{d-1}-1\\ge0$. If $C=0$, take $R=1$; if $C>0$, [F14] gives a natural $R\\ge1$ with $2C<R$. For every $r\\ge R$, the ratio is at most $(3/2)/16=3/32<1/2$. Induction then bounds the tail by a geometric sequence with ratio $1/2$, so [F7] bounds its partial sums; adding the finite initial segment bounds every partial sum. The partial sums form a nonempty bounded set, so [F12] defines a finite supremum $T_d$.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+             "F7",
+             "F11",
+             "F12",
++            "F13",
++            "F14",
+             "algebra"
+           ]
+         },
+@@ -1413,7 +1418,7 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "Fix a finite $F\\subseteq\\mathbb N_0^d\\setminus\\Lambda_n$ and group its indices by the nonempty active-coordinate subset $S$ of size $k$. If the positive coordinates sum to $m=n+r$, then $r\\ge1$; there are at most $\\binom{m-1}{k-1}\\le m^{k-1}$ such tuples by [F6] and [F10]. Since $m=n+r\\le(n+1)r$, each fixed-$S$ contribution is at most $M_S(17/2880)^k16^{-n}(n+1)^{d-1}r^{d-1}16^{-r}$. Summing over the finitely many $r$ present in $F$, enlarging to the partial sum through the largest such $r$, and then summing over $S$ gives $\\sum_{\\ell\\in F}|\\delta_\\ell(f)|\\le T_d\\|f\\|_{\\mathrm{mix},d}16^{-n}(n+1)^{d-1}$. Taking the supremum over finite $F$ bounds the omitted absolute-detail tail; [F4] gives the first error inequality.",
++          "claim": "Fix a finite $F\\subseteq\\mathbb N_0^d\\setminus\\Lambda_n$ and group its indices by the nonempty active-coordinate subset $S$ of size $k$. If the positive coordinates sum to $m=n+r$, then $r\\ge1$; there are at most $\\binom{m-1}{k-1}$ such tuples by [F6]. Since this coefficient counts $(k-1)$-element subsets, listing each subset in increasing order injects them into ordered $(k-1)$-tuples with entries from a set of $m$ elements; thus $\\binom{m-1}{k-1}\\le m^{k-1}$. Since $m=n+r\\le(n+1)r$, each fixed-$S$ contribution is at most $M_S(17/2880)^k16^{-n}(n+1)^{d-1}r^{d-1}16^{-r}$. Summing over the finitely many $r$ present in $F$, enlarging to the partial sum through the largest such $r$, and then summing over $S$ gives $\\sum_{\\ell\\in F}|\\delta_\\ell(f)|\\le T_d\\|f\\|_{\\mathrm{mix},d}16^{-n}(n+1)^{d-1}$. Taking the supremum over finite $F$ bounds the omitted absolute-detail tail; [F4] gives the first error inequality.",
+           "step": "2.1",
+           "inputs": [
+             "given",
+@@ -1421,14 +1426,14 @@
+             "F4",
+             "F6",
+             "F9",
++            "F10",
+             "step 1.1",
+-            "algebra",
+-            "F10"
++            "algebra"
+           ]
+         },
+         {
+           "id": "step-2-2",
+-          "claim": "By the node classification and exact formula in step 1.2, the number of level vectors with $|t|_1=m$ is $\\binom{m+d-1}{d-1}$ by [F5], and each has $\\prod_j a_{t_j}\\le3^d2^m$. By [F10], $\\binom{m+d-1}{d-1}\\le(m+d)^{d-1}$. Hence $W_{n,d}\\le3^d(n+d)^{d-1}\\sum_{m=0}^n2^m<2\\cdot3^d2^n(n+d)^{d-1}\\le D_d2^n(n+1)^{d-1}$, since $n+d\\le d(n+1)$. For a lower bound, restrict to vectors with all $t_j\\ge1$ and $|t|_1=n$. There are $\\binom{n-1}{d-1}$ by [F6], and each contributes $\\prod_ja_{t_j}=2^n$.",
++          "claim": "By the node classification and exact formula in step 1.2, the number of level vectors with $|t|_1=m$ is $\\binom{m+d-1}{d-1}$ by [F5], and each has $\\prod_j a_{t_j}\\le3^d2^m$. Since $\\binom{m+d-1}{d-1}$ counts $(d-1)$-element subsets, increasing enumeration injects them into ordered $(d-1)$-tuples from a set of $m+d$ elements, giving $\\binom{m+d-1}{d-1}\\le(m+d)^{d-1}$. The finite geometric sum is $\\sum_{m=0}^n2^m=\\sum_{m=0}^n(2^{m+1}-2^m)=2^{n+1}-1<2^{n+1}$: the term identity follows from [F15], telescoping from [F9], and $1>0$ from [F16]. Hence $W_{n,d}\\le3^d(n+d)^{d-1}\\sum_{m=0}^n2^m<2\\cdot3^d2^n(n+d)^{d-1}\\le D_d2^n(n+1)^{d-1}$, since $n+d\\le d(n+1)$. For a lower bound, restrict to vectors with all $t_j\\ge1$ and $|t|_1=n$. There are $\\binom{n-1}{d-1}$ by [F6], and each contributes $\\prod_ja_{t_j}=2^n$.",
+           "step": "2.2",
+           "inputs": [
+             "given",
+@@ -1436,18 +1441,20 @@
+             "F6",
+             "F9",
+             "F10",
++            "F15",
++            "F16",
+             "step 1.2",
+             "algebra"
+           ]
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "From step 2.2, $2^n\\ge W_{n,d}/(D_d(n+1)^{d-1})$, so $16^{-n}\\le D_d^4W_{n,d}^{-4}(n+1)^{4(d-1)}$. The lower work bound in step 2.2 and [F10] give $W_{n,d}\\ge2^n$, hence [F8] yields $\\log(2+W_{n,d})\\ge n\\log2$. As $n\\ge2d\\ge2$, $n+1\\le(3/2)n\\le3\\log(2+W_{n,d})/\\log2$. Substituting these inequalities into step 2.1's error estimate gives the second bound with the stated $C_d$.",
++          "claim": "From step 2.2, $2^n\\ge W_{n,d}/(D_d(n+1)^{d-1})$, so $16^{-n}\\le D_d^4W_{n,d}^{-4}(n+1)^{4(d-1)}$. The exact work formula in step 1.2 contains the contribution of the vector $t=(n-d+1,1,\\ldots,1)$, whose entries are positive because $n\\ge2d$; this contribution is $2^n$, so $W_{n,d}\\ge2^n$. Hence [F8] yields $\\log(2+W_{n,d})\\ge n\\log2$. As $n\\ge2d\\ge2$, $n+1\\le(3/2)n\\le3\\log(2+W_{n,d})/\\log2$. Substituting these inequalities into step 2.1's error estimate gives the second bound with the stated $C_d$.",
+           "step": "3.1",
+           "inputs": [
+             "given",
+             "F8",
+-            "F10",
++            "step 1.2",
+             "step 2.1",
+             "step 2.2",
+             "algebra"
+@@ -1519,7 +1526,7 @@
+           "fact": "F1",
+           "source": "lem-smolyak-mixed-simpson-detail-decay",
+           "source_section": "Statement",
+-          "quote": "Let $d\\ge1$. For $S=\\{j_1<\\cdots<j_k\\}\\subseteq\\{1,\\ldots,d\\}$, define\n$$D_Sf:=\\partial_{x_{j_k}}^4\\cdots\\partial_{x_{j_1}}^4f,$$\nso these derivatives are applied in increasing coordinate order; set\n$D_\\varnothing f=f$. Assume every $D_Sf$ is continuous on the closed cube,\nwith the one-sided endpoint convention of\n[[def-higher-derivatives-and-smoothness]], and choose finite bounds $M_S\\ge0$\nsuch that $|D_Sf(x)|\\le M_S$ on $[0,1]^d$. For\n$\\ell\\in\\mathbb N_0^d$, put $S(\\ell):=\\{j:\\ell_j\\ge1\\}$ and\n$$\\delta_\\ell(f):=(\\Delta_{\\ell_1}^{(1)}\\otimes\\cdots\\otimes\\Delta_{\\ell_d}^{(d)})(f).$$\nThen\n$$|\\delta_\\ell(f)|\\le M_{S(\\ell)}\\left(\\frac{17}{2880}\\right)^{|S(\\ell)|}16^{-\\sum_{j\\in S(\\ell)}\\ell_j}.$$\nMoreover, for every finite $F\\subseteq\\mathbb N_0^d$,\n$$\\sum_{\\ell\\in F}|\\delta_\\ell(f)|\\le\\sum_{S\\subseteq\\{1,\\ldots,d\\}}M_S\\left(\\frac{17}{43200}\\right)^{|S|}<\\infty.$$",
++          "quote": "Use the dyadic composite-Simpson hierarchy of\n[[def-smolyak-univariate-level-hierarchy]]. Let $d\\ge1$. For\n$S=\\{j_1<\\cdots<j_k\\}\\subseteq\\{1,\\ldots,d\\}$, define\n$$D_Sf:=\\partial_{x_{j_k}}^4\\cdots\\partial_{x_{j_1}}^4f,$$\nso these derivatives are applied in increasing coordinate order; set\n$D_\\varnothing f=f$. Assume every $D_Sf$ is continuous on the closed cube,\nwith the one-sided endpoint convention of\n[[def-higher-derivatives-and-smoothness]], and choose finite bounds $M_S\\ge0$\nsuch that $|D_Sf(x)|\\le M_S$ on $[0,1]^d$. For\n$\\ell\\in\\mathbb N_0^d$, put $S(\\ell):=\\{j:\\ell_j\\ge1\\}$ and\n$$\\delta_\\ell(f):=(\\Delta_{\\ell_1}^{(1)}\\otimes\\cdots\\otimes\\Delta_{\\ell_d}^{(d)})(f).$$\nThen\n$$|\\delta_\\ell(f)|\\le M_{S(\\ell)}\\left(\\frac{17}{2880}\\right)^{|S(\\ell)|}16^{-\\sum_{j\\in S(\\ell)}\\ell_j}.$$\nMoreover, for every finite $F\\subseteq\\mathbb N_0^d$,\n$$\\sum_{\\ell\\in F}|\\delta_\\ell(f)|\\le\\sum_{S\\subseteq\\{1,\\ldots,d\\}}M_S\\left(\\frac{17}{43200}\\right)^{|S|}<\\infty.$$",
+           "uses": [
+             "2.1"
+           ]
+@@ -1528,7 +1535,7 @@
+           "fact": "F2",
+           "source": "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+           "source_section": "Statement",
+-          "quote": "Let $d\\ge1$, $n\\ge2d$, and let $f:[0,1]^d\\to\\mathbb R$ satisfy the\ncontinuous mixed fourth-derivative hypotheses and bounds $M_S$ of\n[[lem-smolyak-mixed-simpson-detail-decay]]. Define the isotropic index set\n$$\\Lambda_n:=\\{\\ell\\in\\mathbb N_0^d:|\\ell|_1\\le n\\},$$\nand let $W_{n,d}:=|\\mathcal N_{\\Lambda_n}|$ be the distinct-node work count\nof [[def-smolyak-cubature]] and [[alg-smolyak-node-deduplication]]. For a\ndyadic node $x$, let $t(x)=0$ for $x=0,1,1/2$; if $x=p/2^{r+1}$ is interior\nand reduced with odd numerator $p$, let $t(x)=r\\ge1$. Put\n$$a_0:=3,\\qquad a_r:=2^r\\ (r\\ge1),$$\n$$\\|f\\|_{\\mathrm{mix},d}:=\\sum_{\\varnothing\\ne S\\subseteq\\{1,\\ldots,d\\}}\\left(\\frac{17}{2880}\\right)^{|S|}M_S,\\quad T_d:=\\sup_{N\\ge1}\\sum_{r=1}^{N}r^{d-1}16^{-r},$$\n$$D_d:=2\\cdot3^d d^{d-1},\\qquad C_d:=D_d^4T_d\\left(\\frac3{\\log 2}\\right)^{5(d-1)},$$\nwhere $\\log$ is the natural logarithm of [[def-natural-logarithm]]. Then\n$T_d<\\infty$, and the actual node-union count and error satisfy\n$$W_{n,d}=\\sum_{\\substack{t\\in\\mathbb N_0^d\\\\|t|_1\\le n}}\\prod_{j=1}^d a_{t_j},\\qquad 2^n\\binom{n-1}{d-1}\\le W_{n,d}\\le D_d2^n(n+1)^{d-1},$$\n$$|I_d(f)-Q_{\\Lambda_n}(f)|\\le T_d\\|f\\|_{\\mathrm{mix},d}16^{-n}(n+1)^{d-1}\\le C_d\\|f\\|_{\\mathrm{mix},d}W_{n,d}^{-4}\\bigl(\\log(2+W_{n,d})\\bigr)^{5(d-1)}.$$\nAll constants and the mixed-derivative quantity display their dimension\ndependence; no weighted-anisotropic tractability claim is made.",
++          "quote": "Use the dyadic composite-Simpson hierarchy of\n[[def-smolyak-univariate-level-hierarchy]]. Let $d\\ge1$, $n\\ge2d$, and let\n$f:[0,1]^d\\to\\mathbb R$ satisfy the\ncontinuous mixed fourth-derivative hypotheses and bounds $M_S$ of\n[[lem-smolyak-mixed-simpson-detail-decay]]. Define the isotropic index set\n$$\\Lambda_n:=\\{\\ell\\in\\mathbb N_0^d:|\\ell|_1\\le n\\},$$\nand let $W_{n,d}:=|\\mathcal N_{\\Lambda_n}|$ be the distinct-node work count\nof [[def-smolyak-cubature]] and [[alg-smolyak-node-deduplication]]. For a\ndyadic node $x$, let $t(x)=0$ for $x=0,1,1/2$; if $x=p/2^{r+1}$ is interior\nand reduced with odd numerator $p$, let $t(x)=r\\ge1$. Put\n$$a_0:=3,\\qquad a_r:=2^r\\ (r\\ge1),$$\n$$\\|f\\|_{\\mathrm{mix},d}:=\\sum_{\\varnothing\\ne S\\subseteq\\{1,\\ldots,d\\}}\\left(\\frac{17}{2880}\\right)^{|S|}M_S,\\quad T_d:=\\sup_{N\\ge1}\\sum_{r=1}^{N}r^{d-1}16^{-r},$$\n$$D_d:=2\\cdot3^d d^{d-1},\\qquad C_d:=D_d^4T_d\\left(\\frac3{\\log 2}\\right)^{5(d-1)},$$\nwhere $\\log$ is the natural logarithm of [[def-natural-logarithm]]. Then\n$T_d<\\infty$, and the actual node-union count and error satisfy\n$$W_{n,d}=\\sum_{\\substack{t\\in\\mathbb N_0^d\\\\|t|_1\\le n}}\\prod_{j=1}^d a_{t_j},\\qquad 2^n\\binom{n-1}{d-1}\\le W_{n,d}\\le D_d2^n(n+1)^{d-1},$$\n$$|I_d(f)-Q_{\\Lambda_n}(f)|\\le T_d\\|f\\|_{\\mathrm{mix},d}16^{-n}(n+1)^{d-1}\\le C_d\\|f\\|_{\\mathrm{mix},d}W_{n,d}^{-4}\\bigl(\\log(2+W_{n,d})\\bigr)^{5(d-1)}.$$\nAll constants and the mixed-derivative quantity display their dimension\ndependence; no weighted-anisotropic tractability claim is made.",
+           "uses": [
+             "2.1"
+           ]
+@@ -1732,7 +1739,7 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "By [F3]–[F5], the normalized level-zero nodes are $X_0=\\{0,1\\}$ and the level-one nodes are $X_1=\\{0,1/2,1\\}$. The rules are exact through degrees $1$ and $2$, respectively. Writing the level-zero weights as $w_0,w_1$, exactness on $1$ and $x$ gives $w_0+w_1=1$ and $w_1=1/2$, hence $Q_0(x)=Q_0(x^2)=1/2$. Also $Q_1(x)=1/2$ and $Q_1(x^2)=1/3$ by exactness and [F6]. Thus $\\Delta_1(x)=0$ and $\\Delta_1(x^2)=-1/6$.",
++          "claim": "The Given rules are the $n=1$ and $n=2$ rules. By [F3], their normalized nodes are $(1+\\cos(j\\pi/n))/2$; [F5] and [F8] give $X_0=\\{0,1\\}$ and $X_1=\\{0,1/2,1\\}$. By [F4], these rules are exact through degrees $1$ and $2$, respectively. Writing the level-zero weights as $w_0,w_1$, exactness on $1$ and $x$ gives $w_0+w_1=1$ and $w_1=1/2$, hence $Q_0(x)=Q_0(x^2)=1/2$. Also $Q_1(x)=1/2$ and $Q_1(x^2)=1/3$ by exactness and [F6]. Thus $\\Delta_1(x)=0$ and $\\Delta_1(x^2)=-1/6$.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+@@ -1740,6 +1747,7 @@
+             "F4",
+             "F5",
+             "F6",
++            "F8",
+             "algebra"
+           ]
+         },
+@@ -1953,6 +1961,8 @@
+           "source_section": "Definition",
+           "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).\n\nLet $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n([[thm-recursion]]). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with\n\n$$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$\n\nWrite $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates.\n\n**The first coordinate is the index itself, and that is a small induction, not an\nobservation** ([[thm-induction-principle]]). Indeed $\\pi_1(g(0)) = 0$; and if\n$\\pi_1(g(n)) = n$, then\n$g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$,\nso $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every\n$n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed\nclauses be read off, and doing so gives\n\n$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those\ntwo properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies\nthe two clauses defining $g$, hence equals $g$ by the uniqueness clause of\n[[thm-recursion]], so $\\Sigma' = \\Sigma$.\n\nWe write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting\nelement $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same\ninduction on the first coordinate and the same uniqueness argument, gives the\nunique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with\n\n$$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**Notation.** For $m, n \\in \\mathbb{N}$ we abbreviate\n\n$$\\sum_{k=0}^{n} a_k := \\sum_{k < n+1} a_k, \\qquad \\prod_{k=0}^{n} a_k := \\prod_{k < n+1} a_k,$$\n\nand, for a general lower index $m$ with $m \\le n + 1$, let $d$ be the\nunique natural number satisfying $m+d=n+1$. Existence is the definition of\nnatural order ([[def-nat-order]]); if $m+d=m+e$, commutativity\n([[lem-nat-add-commutative]]) gives $d+m=e+m$, so cancellation\n([[lem-nat-add-cancellative]]) gives $d=e$. On these admissible bounds only,\nwe may write this unique additive gap as $d=n+1-m$; no total natural subtraction\noperation is presupposed. With $d$ thus fixed, define\n\n$$\\sum_{k=m}^{n} a_k := \\sum_{j < d} a_{m+j}, \\qquad \\prod_{k=m}^{n} a_k := \\prod_{j < d} a_{m+j} .$$\n\nWhen $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while\nthe empty product has value $1$. In the same spirit $\\sum_{k=0}^{-1} a_k$ is\nnotation for the empty sum $\\Sigma_0 = 0$ and $\\prod_{k=0}^{-1} a_k$ for the\nempty product $\\Pi_0 = 1$; the index $-1$ never occurs as an element of\n$\\mathbb{N}$ and is only a way of writing \"no terms\".\n\nEquivalently, for naturals $m \\le r$, the half-open endpoint notation\n$\\sum_{k=m}^{r-1}a_k$ and $\\prod_{k=m}^{r-1}a_k$ means\n$\\sum_{j<d}a_{m+j}$ and $\\prod_{j<d}a_{m+j}$, respectively, where $d$ is the\nunique natural with $m+d=r$. Here $r-1$ is an endpoint label for the terms\nbefore $r$, so this notation needs no total subtraction operation. For $m=r$,\nthe unique gap is $0$ because $m+0=m$, giving the empty sum and product; the\ncase $m=r=0$ is the $-1$ endpoint convention just stipulated.\n\nOnly finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation\n$\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list\n$a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the\nlist to all of $\\mathbb{N}$: extend the list by $a_k = 0$ (respectively\n$a_k = 1$) for $k \\ge n$ and apply the definition above.",
+           "uses": [
++            "1.1",
++            "2.1",
+             "3.1",
+             "4.1"
+           ]
+@@ -1963,6 +1973,8 @@
+           "source_section": "Statement",
+           "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+           "uses": [
++            "1.1",
++            "2.1",
+             "3.1",
+             "4.1"
+           ]
+@@ -1971,7 +1983,7 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "The polynomial $\\phi$ is continuous by [F4] and satisfies $\\phi(0)=1$. Continuity at zero gives $\\eta>0$ such that $\\phi(x)>1/2$ for $0\\le x<\\eta$; choose $\\delta=\\min(\\eta/2,1/2)$, so $0<\\delta<\\eta$ and $\\delta<1$. By [F5]–[F6], $\\int_0^\\delta\\phi\\ge\\delta/2$ and $\\int_\\delta^1\\phi\\ge0$; [F7] then gives $\\int_0^1\\phi\\ge\\delta/2>0$. The product is integrable by continuity, and [F8] gives $c_{00}=(\\int_0^1\\phi)^2>0$.",
++          "claim": "Every real square is nonnegative by [F13], so each factor in $\\phi$ is nonnegative and [F12] gives $\\phi(x)\\ge0$ on $[0,1]$. The polynomial $\\phi$ is continuous by [F4] and satisfies $\\phi(0)=1$. Continuity at zero gives $\\eta>0$ such that $\\phi(x)>1/2$ for $0\\le x<\\eta$; choose $\\delta=\\min(\\eta/2,1/2)$, so $0<\\delta<\\eta$ and $\\delta<1$. By [F5]–[F6], $\\int_0^\\delta\\phi\\ge\\delta/2$ and $\\int_\\delta^1\\phi\\ge0$; [F7] then gives $\\int_0^1\\phi\\ge\\delta/2>0$. The product is integrable by continuity, and [F8] gives $c_{00}=(\\int_0^1\\phi)^2>0$.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+@@ -1980,17 +1992,21 @@
+             "F6",
+             "F7",
+             "F8",
++            "F12",
++            "F13",
+             "choose"
+           ]
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "For each $m=0,\\ldots,8$, $\\phi(m/8)=0$ when $m>0$, because the factor indexed by $k=m$ vanishes; $\\phi(0)=1$. The nested Simpson grids through level two are $X_0=\\{0,1/2,1\\}$, $X_1=\\{m/4:0\\le m\\le4\\}$, and $X_2=\\{m/8:0\\le m\\le8\\}$. Thus every sampled value of $u$ on any tensor rule in $\\Lambda_2$ vanishes except at $(0,0)$, where it is one.",
++          "claim": "For each $m=0,\\ldots,8$, $\\phi(m/8)=0$ when $m>0$, because the factor indexed by $k=m$ vanishes; $\\phi(0)=1$. The nested Simpson grids through level two are $X_0=\\{0,1/2,1\\}$, $X_1=\\{m/4:0\\le m\\le4\\}$, and $X_2=\\{m/8:0\\le m\\le8\\}$. Thus every sampled value of $u$ on any tensor rule in $\\Lambda_2$ vanishes except at $(0,0)$, where it is one; all sampled values are nonnegative by [F13] and [F12].",
+           "step": "2.1",
+           "inputs": [
+             "given",
+             "F1",
+             "F3",
++            "F12",
++            "F13",
+             "step 1.1",
+             "algebra"
+           ]
+@@ -2006,13 +2022,12 @@
+             "F3",
+             "F12",
+             "step 2.1",
+-            "algebra",
+-            "step 1.1"
++            "algebra"
+           ]
+         },
+         {
+           "id": "step-4-1",
+-          "claim": "For tensor products of Gaussian rules with valid positive-measure moment data, [F10] makes every coordinate weight positive and [F11] makes each tensor weight a product of positive numbers. Since all samples of $u$ are nonnegative, [F9] and [F12] make the resulting finite sum nonnegative. Together with the negative Simpson estimate in step 3.1, this is a sign comparison; it does not claim that such a Gaussian rule exactly integrates $u$.",
++          "claim": "For tensor products of Gaussian rules with valid positive-measure moment data, [F10] makes every coordinate weight positive and [F11] makes each tensor weight a product of positive numbers. Since all samples of $u$ are nonnegative by [F12]–[F13], [F9] and [F12] make the resulting finite sum nonnegative. Together with the negative Simpson estimate in step 3.1, this is a sign comparison; it does not claim that such a Gaussian rule exactly integrates $u$.",
+           "step": "4.1",
+           "inputs": [
+             "given",
+@@ -2020,6 +2035,7 @@
+             "F10",
+             "F11",
+             "F12",
++            "F13",
+             "step 3.1",
+             "algebra"
+           ]
+@@ -2052,7 +2068,7 @@
+           "supplier": "alg-composite-simpson-rule",
+           "status": "inspected-draft",
+           "source_section": "Definition",
+-          "excerpt": "Input real numbers $a<b$, an integer $n\\ge2$, and a real-valued function\n$f:[a,b]\\to\\mathbb R$ evaluable at every point of $[a,b]$. If $n$ is odd, the\nprocedure returns invalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. If $a\\ge b$ or\n$n<2$, the procedure returns invalid-grid. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
++          "excerpt": "Input real endpoints $a,b$, an integer $n$, and an evaluation function $f$.\nIf $a\\ge b$ or $n<2$, return invalid-grid without evaluating $f$. For the\nremaining inputs require $f:[a,b]\\to\\mathbb R$ to be evaluable at every\npoint of $[a,b]$. If $n$ is odd, the procedure returns\ninvalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
+           "use": "Fact F2 uses the exact endpoint weight h/3=1/(3*2^(ell+1)) on [0,1] for even panel counts 2^(ell+1), and the other weights are nonnegative."
+         }
+       ],
+--- research/numerical-optimization-dynamics-2026-10-16-batch-93.pages.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-93.pages.json (proposed)
+@@ -23,7 +23,8 @@
+           "def-finite-sum",
+           "def-multidimensional-darboux-integral"
+         ],
+-        "dependency_level": 1
++        "dependency_level": 1,
++        "justified_by": []
+       },
+       {
+         "id": "def-smolyak-cubature",
+@@ -35,7 +36,8 @@
+           "def-finite-sum",
+           "def-monoid-finite-product"
+         ],
+-        "dependency_level": 2
++        "dependency_level": 2,
++        "justified_by": []
+       },
+       {
+         "id": "lem-smolyak-dyadic-tensor-simpson-convergence",
+@@ -53,9 +55,18 @@
+           "thm-heine-borel-rn",
+           "thm-heine-cantor-metric",
+           "thm-extreme-value-metric",
+-          "lem-finite-sum-laws"
+-        ],
+-        "dependency_level": 2
++          "lem-finite-sum-laws",
++          "lem-geometric-sequence-null",
++          "lem-power-laws",
++          "def-real-limit",
++          "lem-rat-embeds-dense",
++          "thm-of-square-roots",
++          "lem-of-naturals-positive",
++          "lem-of-inverse-positive",
++          "lem-of-sign-rules"
++        ],
++        "dependency_level": 2,
++        "justified_by": []
+       },
+       {
+         "id": "alg-smolyak-node-deduplication",
+@@ -67,7 +78,8 @@
+           "def-smolyak-cubature",
+           "def-finite-sum"
+         ],
+-        "dependency_level": 3
++        "dependency_level": 3,
++        "justified_by": []
+       },
+       {
+         "id": "def-smolyak-absolute-detail-summability",
+@@ -79,7 +91,8 @@
+           "def-finite-sum",
+           "def-complete-ordered-field"
+         ],
+-        "dependency_level": 3
++        "dependency_level": 3,
++        "justified_by": []
+       },
+       {
+         "id": "lem-smolyak-mixed-simpson-detail-decay",
+@@ -93,9 +106,11 @@
+           "def-higher-derivatives-and-smoothness",
+           "lem-triangle-inequality-finite",
+           "lem-finite-sum-laws",
+-          "thm-geometric-series"
+-        ],
+-        "dependency_level": 3
++          "thm-geometric-series",
++          "lem-power-laws"
++        ],
++        "dependency_level": 3,
++        "justified_by": []
+       },
+       {
+         "id": "lem-smolyak-rectangular-telescope",
+@@ -108,7 +123,8 @@
+           "lem-finite-sum-laws",
+           "def-monoid-finite-product"
+         ],
+-        "dependency_level": 3
++        "dependency_level": 3,
++        "justified_by": []
+       },
+       {
+         "id": "alg-dimension-adaptive-smolyak-surplus-selection",
+@@ -116,11 +132,13 @@
+         "title": "Finite-budget dimension-adaptive Smolyak surplus selection",
+         "statement": "On a finite downward-closed candidate cap Gamma, add admissible indices by largest computed detail surplus with deterministic tie-breaking, count actual distinct sampled node keys against a finite budget, and return an explicit complete-frontier, indicator-threshold, or budget-exhausted status without treating surpluses as certified tails.",
+         "deps": [
++          "def-smolyak-univariate-level-hierarchy",
+           "def-smolyak-cubature",
+           "alg-smolyak-node-deduplication",
+           "def-finite-sum"
+         ],
+-        "dependency_level": 4
++        "dependency_level": 4,
++        "justified_by": []
+       },
+       {
+         "id": "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+@@ -136,9 +154,11 @@
+           "lem-triangle-inequality-finite",
+           "lem-finite-sum-laws",
+           "lem-of-triangle-inequality",
+-          "def-real-limit"
+-        ],
+-        "dependency_level": 4
++          "def-real-limit",
++          "lem-rat-embeds-dense"
++        ],
++        "dependency_level": 4,
++        "justified_by": []
+       },
+       {
+         "id": "thm-smolyak-polynomial-multi-degree-exactness",
+@@ -154,7 +174,8 @@
+           "lem-finite-sum-laws",
+           "thm-composite-simpson-exact-through-degree-three"
+         ],
+-        "dependency_level": 4
++        "dependency_level": 4,
++        "justified_by": []
+       },
+       {
+         "id": "lem-smolyak-adaptive-surplus-termination",
+@@ -165,7 +186,8 @@
+           "alg-dimension-adaptive-smolyak-surplus-selection",
+           "def-smolyak-cubature"
+         ],
+-        "dependency_level": 5
++        "dependency_level": 5,
++        "justified_by": []
+       },
+       {
+         "id": "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+@@ -173,9 +195,11 @@
+         "title": "Explicit work and error rate for dyadic Simpson Smolyak cubature",
+         "statement": "For fixed d and continuous mixed fourth partials, the isotropic level set has an exact node-union count comparable to 2^n(n+1)^{d-1} and error at most an explicit dimension-dependent constant times M_mix 16^{-n}(n+1)^{d-1}, hence O_d(M_mix W^{-4}(log W)^{5(d-1)}).",
+         "deps": [
++          "def-smolyak-univariate-level-hierarchy",
+           "def-smolyak-cubature",
+           "alg-smolyak-node-deduplication",
+           "lem-smolyak-mixed-simpson-detail-decay",
++          "lem-smolyak-dyadic-tensor-simpson-convergence",
+           "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+           "def-finite-sum",
+           "lem-finite-sum-laws",
+@@ -186,9 +210,15 @@
+           "thm-stars-and-bars",
+           "cor-compositions-with-k-parts-are-counted-by-binomial-coefficients",
+           "def-binomial-coefficient",
+-          "thm-binomial-theorem"
+-        ],
+-        "dependency_level": 5
++          "thm-binomial-theorem",
++          "lem-power-monotone",
++          "lem-of-inverse-positive",
++          "thm-of-archimedean",
++          "def-integer-power",
++          "cor-of-one-positive"
++        ],
++        "dependency_level": 5,
++        "justified_by": []
+       }
+     ]
+   },
+@@ -215,7 +245,8 @@
+           "lem-derivative-of-a-power",
+           "thm-algebra-of-derivatives"
+         ],
+-        "dependency_level": 6
++        "dependency_level": 6,
++        "justified_by": []
+       },
+       {
+         "id": "ex-smolyak-four-dimensional-product-integrand",
+@@ -228,11 +259,13 @@
+           "def-na-clenshaw-curtis-quadrature",
+           "thm-na-clenshaw-curtis-exactness-and-near-best-error",
+           "thm-quarter-turn-values-and-shift-formulas",
++          "thm-sine-and-cosine-derivatives",
+           "lem-derivative-of-a-power",
+           "thm-ftc-second-part",
+           "cor-riemann-integral-of-a-product-function"
+         ],
+-        "dependency_level": 8
++        "dependency_level": 8,
++        "justified_by": []
+       },
+       {
+         "id": "ex-smolyak-signed-weights-polynomial-chaos-coefficient",
+@@ -252,9 +285,13 @@
+           "thm-continuous-implies-integrable",
+           "thm-monotonicity-of-the-integral",
+           "thm-additivity-over-subintervals",
+-          "cor-riemann-integral-of-a-product-function"
+-        ],
+-        "dependency_level": 8
++          "cor-riemann-integral-of-a-product-function",
++          "lem-of-sign-rules",
++          "lem-of-mult-neg",
++          "lem-of-zero-mult"
++        ],
++        "dependency_level": 8,
++        "justified_by": []
+       }
+     ]
+   }

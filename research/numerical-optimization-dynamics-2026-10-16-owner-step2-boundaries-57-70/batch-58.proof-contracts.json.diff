@@ -1,0 +1,266 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-58.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-owner-step2-boundaries-57-70/proposed/batch-58.proof-contracts.json
+@@ -21,7 +21,7 @@
+           "fact": "F1",
+           "source": "def-wolfe-and-strong-wolfe-conditions",
+           "source_section": "Definition",
+-          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
++          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy\u2013Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+           "uses": [
+             "1.1",
+             "3.1",
+@@ -110,7 +110,7 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Steps 1.1–4.1 use a scalar ray parameter and remain valid in dimension one."
++          "evidence": "Steps 1.1\u20134.1 use a scalar ray parameter and remain valid in dimension one."
+         },
+         {
+           "case": "degenerate",
+@@ -120,12 +120,12 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Step 1.1 treats t=0; steps 2.1–4.1 place accepted parameters strictly inside (0,t_*)."
++          "evidence": "Step 1.1 treats t=0; steps 2.1\u20134.1 place accepted parameters strictly inside (0,t_*)."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Steps 1.1–4.1 use one real infimum and no choice principle."
++          "evidence": "Steps 1.1\u20134.1 use one real infimum and no choice principle."
+         },
+         {
+           "case": "iff-forward",
+@@ -152,7 +152,7 @@
+           "fact": "F1",
+           "source": "def-wolfe-and-strong-wolfe-conditions",
+           "source_section": "Definition",
+-          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
++          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy\u2013Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+           "uses": [
+             "1.1"
+           ]
+@@ -214,7 +214,7 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "The inner-product and norm inequalities in steps 1.1–3.1 include n=1."
++          "evidence": "The inner-product and norm inequalities in steps 1.1\u20133.1 include n=1."
+         },
+         {
+           "case": "degenerate",
+@@ -229,7 +229,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Steps 1.1–3.1 use fixed vectors and no choice principle."
++          "evidence": "Steps 1.1\u20133.1 use fixed vectors and no choice principle."
+         },
+         {
+           "case": "iff-forward",
+@@ -256,7 +256,7 @@
+           "fact": "F1",
+           "source": "def-wolfe-and-strong-wolfe-conditions",
+           "source_section": "Definition",
+-          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
++          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy\u2013Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+           "uses": [
+             "3.1"
+           ]
+@@ -319,13 +319,13 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement assumes a sequence of feasible iterates and steps."
++          "status": "checked",
++          "evidence": "The Statement fixes a sequence indexed by every k>=0 and an initial x_0. Step 3.1 sums k=0 through m and step 4.1 takes its nondecreasing partial sums; the indexed aggregate is an infinite natural sequence, with no empty-horizon input."
+         },
+         {
+           "case": "zero",
+-          "status": "not_applicable",
+-          "reason": "A strict descent direction has a nonzero gradient."
++          "status": "checked",
++          "evidence": "Step 1.1 proves g_k and p_k are nonzero from strict descent, so the angle denominator is positive. The Statement explicitly assumes L>0, and 0<c_1<c_2<1/2; thus the L denominator in steps 2.1 and 3.1 and the positive summability coefficient in step 4.1 cannot vanish."
+         },
+         {
+           "case": "one",
+@@ -345,7 +345,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Steps 1.1–4.1 telescope the given sequence and use no choice principle."
++          "evidence": "Steps 1.1\u20134.1 telescope the given sequence and use no choice principle."
+         },
+         {
+           "case": "iff-forward",
+@@ -548,7 +548,7 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "The linear residual equation and steps 1.2–2.1 imply $\\|p\\|_2\\le M\\|J(x)p\\|_2\\le M(1+\\eta)\\|F(x)\\|_2\\le M(1+\\bar\\eta)C_F\\|e\\|_*$.",
++          "claim": "The linear residual equation and steps 1.2\u20132.1 imply $\\|p\\|_2\\le M\\|J(x)p\\|_2\\le M(1+\\eta)\\|F(x)\\|_2\\le M(1+\\bar\\eta)C_F\\|e\\|_*$.",
+           "step": "3.1",
+           "inputs": [
+             "step 1.2",
+@@ -585,7 +585,7 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Steps 1.2–4.1 use finite-dimensional estimates valid for n=1."
++          "evidence": "Steps 1.2\u20134.1 use finite-dimensional estimates valid for n=1."
+         },
+         {
+           "case": "degenerate",
+@@ -775,7 +775,7 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Steps 1.2–4.1 and the weighted norm apply in dimension one."
++          "evidence": "Steps 1.2\u20134.1 and the weighted norm apply in dimension one."
+         },
+         {
+           "case": "degenerate",
+@@ -794,13 +794,13 @@
+         },
+         {
+           "case": "iff-forward",
+-          "status": "not_applicable",
+-          "reason": "These forcing-rate statements are sufficient implications, not equivalences."
++          "status": "checked",
++          "evidence": "Step 4.1 gives K_*^{-1}||e||_2<=||e||_*<=||J_*||op||e||_2 for n>=1, which transfers each rate in either direction by fixed positive comparison constants. Step 1.1 separately gives identically zero errors for n=0. This checks the Statement norm-rate equivalence; the forcing conditions themselves remain sufficient implications."
+         },
+         {
+           "case": "iff-reverse",
+-          "status": "not_applicable",
+-          "reason": "These forcing-rate statements are sufficient implications, not equivalences."
++          "status": "checked",
++          "evidence": "Step 4.1 gives K_*^{-1}||e||_2<=||e||_*<=||J_*||op||e||_2 for n>=1, which transfers each rate in either direction by fixed positive comparison constants. Step 1.1 separately gives identically zero errors for n=0. This checks the Statement norm-rate equivalence; the forcing conditions themselves remain sufficient implications."
+         }
+       ],
+       "finite_smoke": [],
+@@ -855,7 +855,7 @@
+           "fact": "F5",
+           "source": "def-wolfe-and-strong-wolfe-conditions",
+           "source_section": "Definition",
+-          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
++          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy\u2013Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+           "uses": [
+             "2.1",
+             "2.2"
+@@ -865,7 +865,7 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "Put $r:=y-x^2$. Direct differentiation using [F1]–[F2] gives $\\nabla f=(-400xr+2(x-1),200r)$ and $H_f=\\begin{bmatrix}1200x^2-400y+2&-400x\\\\-400x&200\\end{bmatrix}$. At $(-6/5,1)$, $r=-11/25$, $g=(-1078/5,-88)$, and $H=\\begin{bmatrix}1330&480\\\\480&200\\end{bmatrix}$.",
++          "claim": "Put $r:=y-x^2$. Direct differentiation using [F1]\u2013[F2] gives $\\nabla f=(-400xr+2(x-1),200r)$ and $H_f=\\begin{bmatrix}1200x^2-400y+2&-400x\\\\-400x&200\\end{bmatrix}$. At $(-6/5,1)$, $r=-11/25$, $g=(-1078/5,-88)$, and $H=\\begin{bmatrix}1330&480\\\\480&200\\end{bmatrix}$.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+@@ -949,7 +949,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Steps 1.1–3.1 use rational arithmetic and no choice principle."
++          "evidence": "Steps 1.1\u20133.1 use rational arithmetic and no choice principle."
+         },
+         {
+           "case": "iff-forward",
+@@ -1075,7 +1075,7 @@
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Steps 1.1–2.2 give an invertible shifted matrix and a nonzero descent direction."
++          "evidence": "Steps 1.1\u20132.2 give an invertible shifted matrix and a nonzero descent direction."
+         },
+         {
+           "case": "endpoints",
+@@ -1085,7 +1085,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Steps 1.1–3.1 are exact calculations and use no choice principle."
++          "evidence": "Steps 1.1\u20133.1 are exact calculations and use no choice principle."
+         },
+         {
+           "case": "iff-forward",
+@@ -1176,7 +1176,7 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "The exact scalar identities are $F(x)=x$, $J(x)=1$, and $g(x)=x$ by [F1]–[F2]. Induction on $j$ gives $p^{(j)}=-(1-\\omega^j)x$, so the linear residual is $r_j=J(x)p^{(j)}+F(x)=\\omega^j x$.",
++          "claim": "The exact scalar identities are $F(x)=x$, $J(x)=1$, and $g(x)=x$ by [F1]\u2013[F2]. Induction on $j$ gives $p^{(j)}=-(1-\\omega^j)x$, so the linear residual is $r_j=J(x)p^{(j)}+F(x)=\\omega^j x$.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+@@ -1304,7 +1304,7 @@
+           "fact": "F2",
+           "source": "def-wolfe-and-strong-wolfe-conditions",
+           "source_section": "Definition",
+-          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
++          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy\u2013Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+           "uses": [
+             "3.1"
+           ]
+@@ -1335,7 +1335,7 @@
+         {
+           "id": "step-3-1",
+           "step": "3.1",
+-          "claim": "Before any trial evaluation the domain check either returns failure or verifies feasibility. In expansion, a return of a step occurs only after the Armijo-failure branch was bypassed and the strong curvature test passed. In zoom the same two tests precede every step return. Therefore [F2] and steps 1.1–2.1 prove every returned step has the asserted properties.",
++          "claim": "Before any trial evaluation the domain check either returns failure or verifies feasibility. In expansion, a return of a step occurs only after the Armijo-failure branch was bypassed and the strong curvature test passed. In zoom the same two tests precede every step return. Therefore [F2] and steps 1.1\u20132.1 prove every returned step has the asserted properties.",
+           "inputs": [
+             "F1",
+             "F2",
+@@ -1370,17 +1370,17 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "The proof uses loop bounds and vector inner products, including dimension one."
++          "evidence": "Steps 1.1 and 2.1 prove positivity from scalar directional derivatives and midpoint arithmetic; step 4.1 counts E expansion and Z zoom trials. In dimension one those same scalar comparisons and counts apply."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Exact comparisons, finite evaluation return and solver return assumptions are explicit; a failed trial returns its stated failure."
++          "evidence": "Step 1.1 returns failure when strict descent fails. Step 3.1 checks feasibility before evaluating, and step 4.1 returns the specified failure after finite budget exhaustion; the Statement requires real terminating evaluations and exact comparisons."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Search positivity/domain endpoints are proved in the search lemma steps 1.1–3.1; loop exhaustion is a specified failure/terminal status."
++          "evidence": "Search positivity/domain endpoints are proved in the search lemma steps 1.1\u20133.1; loop exhaustion is a specified failure/terminal status."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1468,7 +1468,7 @@
+         {
+           "id": "step-4-1",
+           "step": "4.1",
+-          "claim": "Every inner call and search terminates and every loop has its finite stated bound. Hence the algorithm reaches a specified return no later than its $k=N$ check. Steps 1.1–3.1 prove the asserted statuses, feasibility and counts; they do not specify the internal Hessian-action count of the arbitrary solver or a convergence theorem.",
++          "claim": "Every inner call and search terminates and every loop has its finite stated bound. Hence the algorithm reaches a specified return no later than its $k=N$ check. Steps 1.1\u20133.1 prove the asserted statuses, feasibility and counts; they do not specify the internal Hessian-action count of the arbitrary solver or a convergence theorem.",
+           "inputs": [
+             "given",
+             "F1",
+@@ -1493,17 +1493,17 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "The proof uses loop bounds and vector inner products, including dimension one."
++          "evidence": "Step 1.1 proves candidate or negative-gradient fallback descent using Euclidean inner products, valid also in dimension one; steps 3.1 and 4.1 count the finite calls without an additional dimension restriction."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Exact comparisons, finite evaluation return and solver return assumptions are explicit; a failed trial returns its stated failure."
++          "evidence": "Step 1.1 shows the no-descent fallback failure is unreachable in exact arithmetic for a nonzero gradient and 0<sigma<1. Step 2.1 propagates the actual search failure cause, and step 4.1 terminates by the outer cap under the Statement terminating-call assumptions."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Search positivity/domain endpoints are proved in the search lemma steps 1.1–3.1; loop exhaustion is a specified failure/terminal status."
++          "evidence": "Search positivity/domain endpoints are proved in the search lemma steps 1.1\u20133.1; loop exhaustion is a specified failure/terminal status."
+         },
+         {
+           "case": "nonempty-choice",

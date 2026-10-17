@@ -1,0 +1,187 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": 36,
+  "rows": [
+    {
+      "item": "def-linear-multistep-method-consistency-order-and-root-condition",
+      "contract_pointer": "/contracts/def-linear-multistep-method-consistency-order-and-root-condition/finite_smoke/0",
+      "existing_case": "k=1",
+      "intended_assertion": "The one-step recurrence remains defined when alpha_1 != 0; rho and sigma are degree at most one.",
+      "actual_source_path": "items/def-linear-multistep-method-consistency-order-and-root-condition.md",
+      "source_section": "Definition",
+      "exact_source_section": "Let $k\\ge1$, $d\\ge1$, and let $f:U\\to\\mathbb R^d$ be the right-hand side of a first-order initial-value problem on an open set $U\\subseteq\\mathbb R\\times\\mathbb R^d$, using the convention of [[def-first-order-ode-initial-value-problem-and-solution]]. A **constant-step $k$-step linear multistep method** has real coefficients $\\alpha_0,\\ldots,\\alpha_k,\\beta_0,\\ldots,\\beta_k$ with $\\alpha_k\\ne0$ and advances values by\n\n$$\\sum_{j=0}^k\\alpha_jY_{n+j}=h\\sum_{j=0}^k\\beta_j f(t_{n+j},Y_{n+j}),\\qquad t_{n+j}=t_n+jh,\\quad h>0.$$\n\nMultiplying all coefficients by the same nonzero scalar leaves the method unchanged; one may normalize $\\alpha_k=1$. Its **characteristic polynomials** are\n\n$$\\rho(\\zeta)=\\sum_{j=0}^k\\alpha_j\\zeta^j,\\qquad \\sigma(\\zeta)=\\sum_{j=0}^k\\beta_j\\zeta^j.$$\n\nFor an exact solution $y$ with $p+1$ continuous derivatives, the **unscaled local residual** at $t_n$ is\n\n$$\\tau_n(h;y)=\\sum_{j=0}^k\\alpha_jy(t_n+jh)-h\\sum_{j=0}^k\\beta_jy'(t_n+jh).$$\n\nThe method has **order at least $p$**, where $p\\ge1$ is an integer, if this residual is $O(h^{p+1})$ uniformly for admitted starting times in every fixed compact interval on which the indicated derivatives are bounded. It is **consistent** if it has order at least one. Equivalently, with the above coefficient convention, consistency is $\\rho(1)=0$ and $\\rho'(1)=\\sigma(1)$.\n\nThe **root condition** is that every complex root of $\\rho$ has modulus at most one and every root of modulus one has algebraic multiplicity one. The method is **zero-stable** if for each $T>0$ there is a constant $M_T$ independent of $N$ such that every solution of the homogeneous recurrence $\\sum_j\\alpha_jY_{n+j}=0$ on the uniform grid $h=T/N$ satisfies\n\n$$\\max_{0\\le n\\le N}\\|Y_n\\|_\\infty\\le M_T\\max_{0\\le j<k}\\|Y_j\\|_\\infty.$$\n\nHere $\\|x\\|_\\infty=\\max_{1\\le i\\le d}|x_i|$ for $x\\in\\mathbb R^d$. The root-condition equivalence for zero-stability is established separately.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "lem-variable-step-adams-lagrange-weights",
+      "contract_pointer": "/contracts/lem-variable-step-adams-lagrange-weights/finite_smoke/0",
+      "existing_case": "k=1 uniform grid",
+      "intended_assertion": "Predictor weight is h; corrector weights on (t_n,t_{n+1}) are h/2 and h/2.",
+      "actual_source_path": "items/lem-variable-step-adams-lagrange-weights.md",
+      "source_section": "Statement",
+      "exact_source_section": "Let $k\\ge1$ and let $t_{n+1}>t_n>\\cdots>t_{n-k+1}$ be distinct time nodes. For $j=0,\\ldots,k-1$, let\n\n$$L_j^{P}(s)=\\prod_{\\substack{0\\le\\ell<k\\\\\\ell\\ne j}}\\frac{s-t_{n-\\ell}}{t_{n-j}-t_{n-\\ell}},\\qquad b_j^n=\\int_{t_n}^{t_{n+1}}L_j^P(s)\\,ds.$$\n\nThese coefficients give the explicit Adams predictor\n\n$$Y_{n+1}^P=Y_n+\\sum_{j=0}^{k-1}b_j^nf(t_{n-j},Y_{n-j})$$\n\nobtained by integrating the degree-$(k-1)$ interpolant through the known derivative values $f(t_{n-j},Y_{n-j})$.\n\nFor the corrector, let $\\widehat L_j(s)$, $j=0,\\ldots,k$, be the Lagrange basis on the $k+1$ distinct nodes $t_{n+1},t_n,\\ldots,t_{n+1-k}$ and define $\\widehat b_j^n=\\int_{t_n}^{t_{n+1}}\\widehat L_j(s)\\,ds$. These are the coefficients of the integrated degree-$k$ interpolant, with $j=0$ the endpoint derivative at $t_{n+1}$. The fully implicit corrector is\n\n$$Y_{n+1}=Y_n+\\sum_{j=0}^{k}\\widehat b_j^nf(t_{n+1-j},Y_{n+1-j}),$$\n\nwhere the $j=0$ term uses the unknown new endpoint value.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "alg-adams-pece-one-correction",
+      "contract_pointer": "/contracts/alg-adams-pece-one-correction/finite_smoke/0",
+      "existing_case": "k=1, z=-3",
+      "intended_assertion": "P=1+z=-2 and one trapezoidal correction gives 1+z+z^2/2=5/2.",
+      "actual_source_path": "items/alg-adams-pece-one-correction.md",
+      "source_section": "Definition",
+      "exact_source_section": "Input an integer $k\\ge1$, a finite grid $t_0,\\ldots,t_N$ with $N\\ge k$, starting states $Y_0,\\ldots,Y_{k-1}\\in\\mathbb R^d$, and a vector field $f:U\\to\\mathbb R^d$ on its evaluation domain $U$. Before evaluating $f$, if any starting state has dimension different from $d$, return `invalid-input`; otherwise, if the grid is not strictly increasing, return `invalid-grid`. Evaluate and store $F_j=f(t_j,Y_j)$ for $j=0,\\ldots,k-1$; an undefined evaluation outside $U$ returns `evaluation-failure` with the valid prefix.\n\nFor $n=k-1,\\ldots,N-1$, construct the predictor weights $b_j^n$ and corrector weights $\\widehat b_j^n$ from the actual nodes as in [[lem-variable-step-adams-lagrange-weights]], then do the following:\n\n1. Predict $Y_{n+1}^P=Y_n+\\sum_{j=0}^{k-1}b_j^nF_{n-j}$.\n2. Evaluate $F_{n+1}^P=f(t_{n+1},Y_{n+1}^P)$. If undefined, return `evaluation-failure` with phase `predictor`.\n3. Correct once by setting $Y_{n+1}=Y_n+\\widehat b_0^nF_{n+1}^P+\\sum_{j=1}^{k}\\widehat b_j^nF_{n+1-j}$.\n4. Evaluate and store $F_{n+1}=f(t_{n+1},Y_{n+1})$ for the next predictor. If undefined, return `evaluation-failure` with phase `post-corrector` and the computed $Y_{n+1}$.\n\nAfter all steps return `completed` with the states. This is one predictor and one corrector pass; it does not solve the fully implicit Adams corrector equation and asserts no convergence, stability, or error bound.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "lem-companion-powers-bounded-under-root-condition",
+      "contract_pointer": "/contracts/lem-companion-powers-bounded-under-root-condition/finite_smoke/0",
+      "existing_case": "scalar root lambda=0",
+      "intended_assertion": "The 1x1 companion C=[0] has C^0=[1] and C^n=[0] for n>=1.",
+      "actual_source_path": "items/lem-companion-powers-bounded-under-root-condition.md",
+      "source_section": "Statement",
+      "exact_source_section": "Let $C$ be the row-shift companion matrix for the monic polynomial $\\rho/\\alpha_k$, where $\\rho$ is the characteristic polynomial of a $k$-step method. For a complex vector $v$, set $\\|v\\|_\\infty=\\max_i|v_i|$ and for a matrix $A$ set $\\|A\\|_\\infty=\\max_i\\sum_j|A_{ij}|$. Then\n\n$$\\sup_{n\\ge0}\\|C^n\\|_\\infty<\\infty$$\n\nif and only if $\\rho$ satisfies the root condition from [[def-linear-multistep-method-consistency-order-and-root-condition]]. Consequently the homogeneous recurrence is zero-stable exactly under that root condition.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "lem-linear-multistep-order-conditions-from-taylor",
+      "contract_pointer": "/contracts/lem-linear-multistep-order-conditions-from-taylor/finite_smoke/0",
+      "existing_case": "backward Euler",
+      "intended_assertion": "alpha=(-1,1), beta=(0,1) gives mu_0=0 and mu_1=1-1=0.",
+      "actual_source_path": "items/lem-linear-multistep-order-conditions-from-taylor.md",
+      "source_section": "Statement",
+      "exact_source_section": "For the method in [[def-linear-multistep-method-consistency-order-and-root-condition]], define\n\n$$\\mu_0=\\sum_{j=0}^k\\alpha_j,\\qquad \\mu_m=\\sum_{j=0}^k\\alpha_jj^m-m\\sum_{j=0}^k\\beta_jj^{m-1}\\quad(m\\ge1).$$\n\nFor every integer $p\\ge1$, the method has order at least $p$ if and only if $\\mu_m=0$ for each $m=0,\\ldots,p$. In particular, consistency is equivalent to $\\rho(1)=0$ and $\\rho'(1)=\\sigma(1)$.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "lem-variable-step-bdf2-interpolation-and-local-defect",
+      "contract_pointer": "/contracts/lem-variable-step-bdf2-interpolation-and-local-defect/finite_smoke/0",
+      "existing_case": "r=1",
+      "intended_assertion": "The derivative weights reduce to (3,-4,1)/(2h).",
+      "actual_source_path": "items/lem-variable-step-bdf2-interpolation-and-local-defect.md",
+      "source_section": "Statement",
+      "exact_source_section": "Let $h_{n-1},h_n>0$, $r_n=h_n/h_{n-1}$, and let $y$ be an exact solution with three continuous derivatives near $t_{n-1},t_n,t_{n+1}$, where $h_j=t_{j+1}-t_j$. The derivative at $t_{n+1}$ of the quadratic interpolant through $(t_{n+1},y_{n+1})$, $(t_n,y_n)$, and $(t_{n-1},y_{n-1})$ is\n\n$$\\frac{(1+2r_n)y_{n+1}-(1+r_n)^2y_n+r_n^2y_{n-1}}{h_n(1+r_n)}.$$\n\nEquating this derivative to $f(t_{n+1},Y_{n+1})$ defines the variable-step BDF2 formula\n\n$$\\frac{(1+2r_n)Y_{n+1}-(1+r_n)^2Y_n+r_n^2Y_{n-1}}{h_n(1+r_n)}=f(t_{n+1},Y_{n+1}).$$\n\nFor an exact vector solution $y'=f(t,y)$ whose third derivative is bounded, the unscaled residual\n\n$$\\tau_n=(1+2r_n)y(t_{n+1})-(1+r_n)^2y(t_n)+r_n^2y(t_{n-1})-h_n(1+r_n)y'(t_{n+1})$$\n\nhas norm $\\|\\tau_n\\|_\\infty=O(h_n^3)$ uniformly whenever $r_n$ stays in a fixed compact subinterval of $(0,\\infty)$; the formula and remainder hold componentwise.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "alg-variable-step-bdf2-with-selected-implicit-branch",
+      "contract_pointer": "/contracts/alg-variable-step-bdf2-with-selected-implicit-branch/finite_smoke/0",
+      "existing_case": "r=1",
+      "intended_assertion": "The step equation reduces to 3Y_(n+1)-4Y_n+Y_(n-1)=2h f(t_(n+1),Y_(n+1)).",
+      "actual_source_path": "items/alg-variable-step-bdf2-with-selected-implicit-branch.md",
+      "source_section": "Definition",
+      "exact_source_section": "Input a vector field $f(t,y)$, a finite grid $t_0,\\ldots,t_N$, starting states $Y_0,Y_1\\in\\mathbb R^d$ (so $N\\ge1$), and for each later step a prescribed closed ball $B_{n+1}\\subset\\mathbb R^d$ that specifies the admissible implicit branch. Before any evaluation, if either starting state has dimension different from $d$, return `invalid-input`; otherwise, if any time increment is nonpositive, return `invalid-grid`. Set $h_n=t_{n+1}-t_n$ and $r_n=h_n/h_{n-1}$ for $1\\le n<N$.\n\nFor $n=1,\\ldots,N-1$, form the equation\n\n$$\\frac{(1+2r_n)Z-(1+r_n)^2Y_n+r_n^2Y_{n-1}}{h_n(1+r_n)}=f(t_{n+1},Z).$$\n\nIf this equation has exactly one root $Z$ in $B_{n+1}$, set $Y_{n+1}=Z$ and continue. If it has no root there, return `no-root` with the computed prefix; if it has more than one root there, return `ambiguous-branch` with the computed prefix. If an evaluation of $f$ is undefined, return `evaluation-failure` with the prefix. On reaching $N$, return `completed` and $(Y_0,\\ldots,Y_N)$. The procedure is defined for arbitrary positive adjacent step ratios; no convergence or accuracy property is part of this algorithm.\n\nThe coefficients are those obtained from the quadratic interpolation derivative in [[lem-variable-step-bdf2-interpolation-and-local-defect]]. A separate theorem gives the uniform ratio hypotheses needed for second-order convergence; they are not part of this algorithm.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "thm-dahlquist-equivalence-for-linear-multistep-methods",
+      "contract_pointer": "/contracts/thm-dahlquist-equivalence-for-linear-multistep-methods/finite_smoke/0",
+      "existing_case": "backward Euler",
+      "intended_assertion": "rho(zeta)=zeta-1 has one simple unit root; the method is consistent and order one.",
+      "actual_source_path": "items/thm-dahlquist-equivalence-for-linear-multistep-methods.md",
+      "source_section": "Statement",
+      "exact_source_section": "Fix a constant-step $k$-step method from [[def-linear-multistep-method-consistency-order-and-root-condition]] on $[0,T]$, with $N\\ge k$ and $h=T/N$. For exact solutions with two continuous derivatives, choose a compact state set $K\\subset\\mathbb R^d$ with the exact trajectory in its interior and suppose $f$ is Lipschitz in the state on $[0,T]\\times K$. Convergence means that for every IVP satisfying these conditions and every sequence of starting values whose errors at $t_0,\\ldots,t_{k-1}$ tend to zero as $h\\to0$, each selected run is defined through $t_N$ and its maximum grid error tends to zero. For the sufficiency assertion and order estimates of an implicit method, assume a uniformly local selected branch near the exact trajectory: there are $\\eta,\\varepsilon>0$, independent of $N$ and the step index, such that for all sufficiently small $h$ and each $n=0,\\ldots,N-k$, whenever the preceding history satisfies $\\max_{0\\le j<k}\\|Y_{n+j}-y(t_{n+j})\\|_\\infty\\le\\eta$, the step equation has exactly one root in $\\overline B(y(t_{n+k}),\\varepsilon)\\subset K$, and the method selects that root. Explicit methods need no branch hypothesis. The method converges for every such IVP if and only if it is consistent and satisfies the root condition. More precisely, if its order is at least $p\\ge1$, the exact solution has $p+1$ continuous derivatives, and the starting errors are $O(h^p)$, then its global error is $O(h^p)$.\n\nThe necessity tests $y'=0$ and $y'=1$ have a unique implicit root in all of $\\mathbb R^d$ at every step because $\\alpha_k\\ne0$ and their right-hand sides are independent of the new state. Those runs therefore remain defined even when an unstable mode leaves the sufficiency tube. The sufficiency estimate establishes existence along the selected local branch by keeping every computed history in its neighborhood; it does not assert an implicit root for arbitrary IVPs or step sizes.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "lem-variable-step-bdf2-increment-ratio-recurrence",
+      "contract_pointer": "/contracts/lem-variable-step-bdf2-increment-ratio-recurrence/finite_smoke/0",
+      "existing_case": "r=1",
+      "intended_assertion": "q(1)=1/3.",
+      "actual_source_path": "items/lem-variable-step-bdf2-increment-ratio-recurrence.md",
+      "source_section": "Statement",
+      "exact_source_section": "For the homogeneous vector-valued variable-step BDF2 recurrence obtained from [[alg-variable-step-bdf2-with-selected-implicit-branch]] by setting $f=0$, let $\\Delta_n=Y_n-Y_{n-1}\\in\\mathbb R^d$. For every $r_n=h_n/h_{n-1}>0$,\n\n$$\\Delta_{n+1}=q(r_n)\\Delta_n,\\qquad q(r)=\\frac{r^2}{1+2r}.$$\n\nThe multiplier satisfies $q(r)\\le1$ exactly when $0<r\\le1+\\sqrt2$. In particular, if $0<r_n\\le r_*<1+\\sqrt2$ for every step, then $q(r_n)\\le q_*:=r_*^2/(1+2r_*)<1$ uniformly.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "lem-variable-step-bdf2-increment-ratio-recurrence",
+      "contract_pointer": "/contracts/lem-variable-step-bdf2-increment-ratio-recurrence/finite_smoke/1",
+      "existing_case": "r=1+sqrt(2)",
+      "intended_assertion": "q(r)=1.",
+      "actual_source_path": "items/lem-variable-step-bdf2-increment-ratio-recurrence.md",
+      "source_section": "Statement",
+      "exact_source_section": "For the homogeneous vector-valued variable-step BDF2 recurrence obtained from [[alg-variable-step-bdf2-with-selected-implicit-branch]] by setting $f=0$, let $\\Delta_n=Y_n-Y_{n-1}\\in\\mathbb R^d$. For every $r_n=h_n/h_{n-1}>0$,\n\n$$\\Delta_{n+1}=q(r_n)\\Delta_n,\\qquad q(r)=\\frac{r^2}{1+2r}.$$\n\nThe multiplier satisfies $q(r)\\le1$ exactly when $0<r\\le1+\\sqrt2$. In particular, if $0<r_n\\le r_*<1+\\sqrt2$ for every step, then $q(r_n)\\le q_*:=r_*^2/(1+2r_*)<1$ uniformly.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "thm-variable-step-bdf2-order-two-under-ratio-bound",
+      "contract_pointer": "/contracts/thm-variable-step-bdf2-order-two-under-ratio-bound/finite_smoke/0",
+      "existing_case": "r=1, y(t)=t^3/3, f=t^2",
+      "intended_assertion": "At t_2=2h with exact Y_0,Y_1, one step gives Y_2=28h^3/9, an O(h^3) local error from 8h^3/3.",
+      "actual_source_path": "items/thm-variable-step-bdf2-order-two-under-ratio-bound.md",
+      "source_section": "Statement",
+      "exact_source_section": "Let $y'=f(t,y)$ on $[0,T]$, with $y:[0,T]\\to\\mathbb R^d$ having three continuous derivatives. Let $K\\subset\\mathbb R^d$ be compact with $y([0,T])\\subset\\operatorname{int}K$, and suppose $f$ is defined on $[0,T]\\times K$ and Lipschitz in its state variable there with constant $L$ in the max norm. Let $h_n=t_{n+1}-t_n>0$, $t_0=0$, $t_N=T$, $H=\\max_n h_n\\to0$, and suppose\n\n$$0<r_{\\min}\\le r_n:=\\frac{h_n}{h_{n-1}}\\le r_*<1+\\sqrt2\\qquad(1\\le n<N).$$\n\nAssume $\\|Y_0-y(t_0)\\|_\\infty+\\|Y_1-y(t_1)\\|_\\infty=O(H^2)$. For each step prescribe a closed branch ball $B_{n+1}\\subset K$ as in [[alg-variable-step-bdf2-with-selected-implicit-branch]]. Assume there are radii $\\eta,\\varepsilon>0$, independent of the grid and step index, such that for every sufficiently small $H$ and each $1\\le n<N$, whenever\n\n$$\\max\\{\\|Y_n-y(t_n)\\|_\\infty,\\|Y_{n-1}-y(t_{n-1})\\|_\\infty\\}\\le\\eta,$$\n\nthe step equation has exactly one root in $\\overline B(y(t_{n+1}),\\varepsilon)\\subset K$, and $B_{n+1}$ contains exactly one root, which is this same local root selected by the algorithm. Then for sufficiently small $H$ all computed states remain in $K$ and\n\n$$\\max_{0\\le n\\le N}\\|Y_n-y(t_n)\\|_\\infty=O(H^2).$$\n\nThe lower ratio bound controls the local residual constant; the upper bound controls the parasitic increment. This is a separate variable-grid theorem and does not follow from the constant-step root condition alone.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "cex-repeated-unit-root-causes-linear-parasitic-growth",
+      "contract_pointer": "/contracts/cex-repeated-unit-root-causes-linear-parasitic-growth/finite_smoke/0",
+      "existing_case": "h=1/N",
+      "intended_assertion": "Y_n=nh satisfies the second-difference recurrence; Y_N=T while Y_1=h.",
+      "actual_source_path": "items/cex-repeated-unit-root-causes-linear-parasitic-growth.md",
+      "source_section": "Counterexample",
+      "exact_source_section": "Take $\\rho(\\zeta)=(\\zeta-1)^2$ and $\\sigma(\\zeta)=0$, so the recurrence is $Y_{n+2}-2Y_{n+1}+Y_n=0$. This is a consistent first-order two-step method, but its double unit root is not zero-stable.\n\n1.1 Here $\\rho(1)=0$ and $\\rho'(1)=0=\\sigma(1)$, so [F1] proves consistency. [F1, algebra]\n\n1.2 The characteristic polynomial has a root $1$ of multiplicity two, so it violates the root condition in [[def-linear-multistep-method-consistency-order-and-root-condition]]. [given, algebra]\n\n1.3 Apply the recurrence to $y'=0$, whose exact solution is $y=0$, with $Y_0=0$ and $Y_1=h$. The sequence $Y_n=nh$ satisfies the recurrence because its second difference is zero. [given, construct]\n\n2.1 On the grid $h=T/N$, the starting error is $h\\to0$, but $|Y_N-y(T)|=Nh=T$. Thus convergence fails even for starting errors of order $h$, and the proposed claim is false. [step 1.3, algebra] \u220e",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "ex-one-pass-pece-differs-from-implicit-adams-stability",
+      "contract_pointer": "/contracts/ex-one-pass-pece-differs-from-implicit-adams-stability/finite_smoke/0",
+      "existing_case": "z=-3",
+      "intended_assertion": "R_PECE=5/2, R_AM=-1/5, so their moduli are 5/2 and 1/5.",
+      "actual_source_path": "items/ex-one-pass-pece-differs-from-implicit-adams-stability.md",
+      "source_section": "Example",
+      "exact_source_section": "For one known derivative sample, PECE uses the explicit Euler predictor and one trapezoidal Adams corrector evaluation. On the scalar test equation $y'=\\lambda y$, its one-step multiplier is $R_{\\mathrm{PECE}}(z)=1+z+z^2/2$, whereas the fully implicit trapezoidal Adams method has multiplier $R_{\\mathrm{AM}}(z)=(1+z/2)/(1-z/2)$, where $z=h\\lambda$. At $z=-3$, one pass is unstable ($|R_{\\mathrm{PECE}}|=5/2$) while the fully implicit method is stable ($|R_{\\mathrm{AM}}|=1/5$).",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "ex-repeated-interior-root-preserves-bounded-powers",
+      "contract_pointer": "/contracts/ex-repeated-interior-root-preserves-bounded-powers/finite_smoke/0",
+      "existing_case": "root factorization",
+      "intended_assertion": "(zeta-1)(zeta-1/2)^2 expands to zeta^3-2zeta^2+5zeta/4-1/4.",
+      "actual_source_path": "items/ex-repeated-interior-root-preserves-bounded-powers.md",
+      "source_section": "Example",
+      "exact_source_section": "Consider the three-step method with $\\rho(\\zeta)=(\\zeta-1)(\\zeta-\\tfrac12)^2$ and $\\sigma(\\zeta)=\\tfrac14$. It is consistent and satisfies the root condition even though the root $1/2$ is repeated; its homogeneous companion powers are bounded.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "ex-repeated-interior-root-preserves-bounded-powers",
+      "contract_pointer": "/contracts/ex-repeated-interior-root-preserves-bounded-powers/finite_smoke/1",
+      "existing_case": "repeated root mode",
+      "intended_assertion": "n/2^n is bounded and tends to zero.",
+      "actual_source_path": "items/ex-repeated-interior-root-preserves-bounded-powers.md",
+      "source_section": "Example",
+      "exact_source_section": "Consider the three-step method with $\\rho(\\zeta)=(\\zeta-1)(\\zeta-\\tfrac12)^2$ and $\\sigma(\\zeta)=\\tfrac14$. It is consistent and satisfies the root condition even though the root $1/2$ is repeated; its homogeneous companion powers are bounded.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "ex-simple-unit-circle-roots-give-bounded-oscillation",
+      "contract_pointer": "/contracts/ex-simple-unit-circle-roots-give-bounded-oscillation/finite_smoke/0",
+      "existing_case": "period four",
+      "intended_assertion": "i^n cycles 1,i,-1,-i and (-i)^n cycles 1,-i,-1,i.",
+      "actual_source_path": "items/ex-simple-unit-circle-roots-give-bounded-oscillation.md",
+      "source_section": "Example",
+      "exact_source_section": "The consistent three-step formula with $\\rho(\\zeta)=(\\zeta-1)(\\zeta^2+1)$ and $\\sigma(\\zeta)=2$ has simple roots $1,i,-i$ on the unit circle. Its homogeneous modes include $1,i^n,(-i)^n$; their real and imaginary parts are bounded periodic real solutions.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+      "contract_pointer": "/contracts/ex-uniform-step-bdf2-satisfies-dahlquist-conditions/finite_smoke/0",
+      "existing_case": "BDF2 moments",
+      "intended_assertion": "mu_0=0, mu_1=0, mu_2=0; rho=(3zeta-1)(zeta-1).",
+      "actual_source_path": "items/ex-uniform-step-bdf2-satisfies-dahlquist-conditions.md",
+      "source_section": "Example",
+      "exact_source_section": "The variable-step BDF2 formula reduces on a uniform grid to the consistent, zero-stable two-step method\n\n$$3Y_{n+1}-4Y_n+Y_{n-1}=2h f(t_{n+1},Y_{n+1}).$$\n\nOn $y'=t^2$, $y(0)=0$, with exact starting values $Y_0=0$, $Y_1=h^3/3$, the selected implicit branch is explicit and this method converges with global error $O(h^2)$ on each fixed interval.",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    },
+    {
+      "item": "cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error",
+      "contract_pointer": "/contracts/cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error/finite_smoke/0",
+      "existing_case": "m=10",
+      "intended_assertion": "r_1=10 and Delta_2=10/21, so Y_2=1/10+10/21=121/210, while t_2=11/100 and H=1/10.",
+      "actual_source_path": "items/cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error.md",
+      "source_section": "Counterexample",
+      "exact_source_section": "For each integer $m\\ge2$, take $T=1$ and grid increments\n\n$$h_0=m^{-2},\\qquad h_1=m^{-1},\\qquad h_2=\\cdots=h_{m-1}=m^{-1},\\qquad h_m=m^{-1}-m^{-2}.$$\n\nThey sum to one and have maximum $H_m=1/m\\to0$, but the first adjacent ratio is $r_1=m$. For the exact solution $y=0$, use starters $Y_0=0$, $Y_1=1/m$, whose error tends to zero.\n\nFor the branch input in [[alg-variable-step-bdf2-with-selected-implicit-branch]], prescribe every ball to be the closed radius-two ball centered at zero.\n\n1.1 Summing the increments gives $m^{-2}+m^{-1}+(m-2)m^{-1}+m^{-1}-m^{-2}=1$, and every increment is positive for $m\\ge2$. The maximum is $H_m=m^{-1}$. [given, algebra]\n\n1.2 The first ratio is $r_1=h_1/h_0=m$ and the starter increment is $\\Delta_1=1/m\\to0$. [given, algebra]\n\n2.1 For $n\\ge2$ the grid has $r_n\\le1$, so [L1] gives $0<q(r_n)=r_n^2/(1+2r_n)\\le r_n/2\\le1/2$. The increments from $\\Delta_2$ onward are positive and their total is at most $\\Delta_2\\sum_{j\\ge0}2^{-j}=2\\Delta_2<1$. Since $Y_1=1/m\\le1/2$, every computed value is less than $3/2$. For $f=0$ the step equation has exactly one root because its coefficient $1+2r_n$ is positive, so all roots lie in the prescribed balls and the algorithm completes. [L1, step 1.1, step 1.2, algebra]\n\n2.2 By [L1], $\\Delta_2=\\frac{m^2}{1+2m}\\frac1m=\\frac{m}{1+2m}\\to\\tfrac12$. Therefore $Y_2=Y_1+\\Delta_2\\to\\tfrac12$, while $t_2=h_0+h_1\\to0$ and the exact solution remains zero. [L1, step 1.2, algebra]\n\n3.1 Thus a vanishing starter perturbation produces an error bounded away from zero even though $H_m\\to0$. The claimed ratio-free uniform zero-stability fails. [step 1.1, step 2.1, step 2.2] \u220e",
+      "limits": "Executable finite witness only; do not claim finite tests prove an asymptotic limit/root-condition convergence theorem. Preserve existing intended assertion and register a genuine executable check rather than deleting it."
+    }
+  ],
+  "scope": "Invalid finite_smoke identifiers in assigned29-42 range; existing passing41 checks untouched."
+}

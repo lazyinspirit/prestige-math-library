@@ -1,0 +1,19 @@
+--- WORKFLOW.md
++++ WORKFLOW.md
+@@ -572,6 +572,16 @@
+ and current-judge closure gates remain mandatory. Legacy preflight and final
+ scope loading retain their existing strict closure requirements.
+ 
++Closeout ignore checks reuse the genuine parsed index for a bounded fast path:
++case-sensitive, nonsparse configuration, default ordinary index flags, safe
++literal subjects and no pathspec environment overrides. Exact indexed filenames
++and literal parent paths with indexed descendants retain native tracked-path
++exclusion; every remaining selected path receives actual Git ignore evaluation
++with `--no-index`. The parsed index's original raw snapshot and matching
++configuration must remain current around the check. Ambiguous states retain the
++original native command, including sparse/index-backed ignore handling. No path,
++ignore rule, scope/ref guard or present-carrier requirement is waived.
++
+ Readiness and closeout treat both `ENOENT` and `ENOTDIR` as an absent path:
+ a regular file cannot contain child evidence files. Readiness follows existing
+ local references; required owned carriers still fail when absent or nonregular,

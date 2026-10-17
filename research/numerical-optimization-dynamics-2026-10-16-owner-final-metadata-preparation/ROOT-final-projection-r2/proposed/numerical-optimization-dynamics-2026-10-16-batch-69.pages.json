@@ -1,0 +1,381 @@
+[
+  {
+    "order": 2422,
+    "id": "global-optimization-and-certified-branch-and-bound",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Global optimization and certified branch and bound",
+    "companion": "global-optimization-and-certified-branch-and-bound-examples",
+    "requires": [
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "nonlinear-equations-and-newton-methods",
+      "inequality-kkt-duality-and-optimality-certificates",
+      "outward-rounded-interval-and-ball-arithmetic",
+      "barrier-and-primal-dual-interior-point-methods",
+      "gaussian-process-priors-and-posterior-laws"
+    ],
+    "items": [
+      {
+        "id": "def-mccormick-bilinear-box-envelope",
+        "kind": "definition",
+        "title": "McCormick envelope for a bilinear term on a box",
+        "deps": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-spatial-global-optimization-problem",
+        "kind": "definition",
+        "title": "Compact-box global minimization problems",
+        "deps": [
+          "def-metric-continuity",
+          "def-infimum",
+          "thm-heine-borel-rn",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-infimum-property",
+          "lem-real-line-is-a-metric-space",
+          "def-metric-bounded-diameter"
+        ],
+        "dependency_level": 0,
+        "justified_by": [
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-infimum-property"
+        ]
+      },
+      {
+        "id": "lem-positive-noise-regularizes-observed-covariance",
+        "kind": "lemma",
+        "title": "Positive Gaussian observation noise makes the observed covariance positive definite",
+        "deps": [
+          "def-cholesky-factorisation-with-positive-diagonal"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-finite-candidate-gp-acquisition-search",
+        "kind": "algorithm",
+        "title": "Finite-candidate Gaussian-process acquisition search with explicit statuses",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "def-forward-and-back-substitution-for-triangular-systems",
+          "def-gaussian-process",
+          "def-independent-random-elements",
+          "lem-positive-noise-regularizes-observed-covariance",
+          "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+          "thm-finite-gaussian-process-posterior-and-predictive-laws",
+          "thm-of-square-roots"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-spatial-box-bound-certificate",
+        "kind": "definition",
+        "title": "Certified lower, upper, and emptiness bounds on a box",
+        "deps": [
+          "def-spatial-global-optimization-problem",
+          "def-infimum"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-mccormick-envelope-equals-graph-convex-hull",
+        "kind": "lemma",
+        "title": "The four McCormick inequalities give the convex hull of a bilinear graph over a box",
+        "deps": [
+          "def-convex-subset-of-euclidean-space",
+          "def-mccormick-bilinear-box-envelope"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-certified-spatial-branch-and-bound",
+        "kind": "algorithm",
+        "title": "Finite-budget certified spatial branch and bound",
+        "deps": [
+          "def-spatial-global-optimization-problem",
+          "def-spatial-box-bound-certificate"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-adaptive-finite-candidate-gp-search-posterior-correct",
+        "kind": "theorem",
+        "title": "Adaptive finite-candidate Gaussian-process search uses the correct sequential posterior",
+        "deps": [
+          "alg-finite-candidate-gp-acquisition-search",
+          "def-axiom-of-choice",
+          "def-gaussian-process",
+          "def-independent-random-elements",
+          "lem-positive-noise-regularizes-observed-covariance",
+          "thm-finite-gaussian-process-posterior-and-predictive-laws"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-finite-candidate-gp-search-terminates",
+        "kind": "theorem",
+        "title": "Finite-candidate Gaussian-process acquisition search terminates within its budget",
+        "deps": [
+          "alg-finite-candidate-gp-acquisition-search"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-finite-budget-spatial-bnb-terminates",
+        "kind": "theorem",
+        "title": "Finite-budget spatial branch and bound always returns a declared status",
+        "deps": [
+          "alg-certified-spatial-branch-and-bound",
+          "def-spatial-box-bound-certificate"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-spatial-bnb-eventual-epsilon-termination",
+        "kind": "theorem",
+        "title": "Consistent bounds and exhaustive longest-side branching give eventual epsilon termination",
+        "deps": [
+          "alg-certified-spatial-branch-and-bound",
+          "def-spatial-global-optimization-problem",
+          "thm-heine-borel-rn",
+          "thm-nested-interval-property",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-infimum-property",
+          "lem-inf-epsilon",
+          "thm-metric-closure-characterisation",
+          "lem-real-line-is-a-metric-space",
+          "def-metric-bounded-diameter"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-spatial-bnb-gap-certificate-sound",
+        "kind": "theorem",
+        "title": "A spatial branch-and-bound gap certificate proves global epsilon-optimality",
+        "deps": [
+          "alg-certified-spatial-branch-and-bound",
+          "def-spatial-box-bound-certificate"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-interval-dag-box-enclosure-and-bound",
+        "kind": "algorithm",
+        "title": "Outward-rounded interval enclosures for factorable expression DAGs on boxes",
+        "deps": [
+          "def-spatial-global-optimization-problem",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "lem-directed-dyadic-rounding-enclosure-and-error"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "def-factorable-box-convex-relaxation-interface",
+        "kind": "definition",
+        "title": "Certified factorable convex relaxations on a box",
+        "deps": [
+          "def-convex-program-duality-and-slater-condition",
+          "def-mccormick-bilinear-box-envelope",
+          "def-outward-rounded-interval-and-ball-operations",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-spatial-global-optimization-problem"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "alg-factorable-mccormick-box-relaxation",
+        "kind": "algorithm",
+        "title": "Finite McCormick convex relaxation construction for factorable box problems",
+        "deps": [
+          "alg-interval-dag-box-enclosure-and-bound",
+          "def-factorable-box-convex-relaxation-interface",
+          "def-mccormick-bilinear-box-envelope",
+          "def-outward-rounded-interval-and-ball-operations",
+          "lem-mccormick-envelope-equals-graph-convex-hull"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "alg-lipschitz-midpoint-box-lower-bound",
+        "kind": "algorithm",
+        "title": "Validated Lipschitz midpoint lower bounds on boxes",
+        "deps": [
+          "alg-interval-dag-box-enclosure-and-bound",
+          "def-spatial-box-bound-certificate"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-factorable-dual-certificate-is-valid-box-lower-bound",
+        "kind": "theorem",
+        "title": "A verified dual certificate for a McCormick relaxation is a valid global lower bound",
+        "deps": [
+          "alg-factorable-mccormick-box-relaxation",
+          "def-convex-program-duality-and-slater-condition",
+          "def-factorable-box-convex-relaxation-interface",
+          "lem-mccormick-envelope-equals-graph-convex-hull",
+          "thm-lagrangian-weak-duality",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-interval-lipschitz-bound-sound-consistent",
+        "kind": "theorem",
+        "title": "Outward interval and Lipschitz midpoint bounds are sound and consistent under refinement",
+        "deps": [
+          "alg-interval-dag-box-enclosure-and-bound",
+          "alg-lipschitz-midpoint-box-lower-bound",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-outward-rounded-interval-and-ball-operations",
+          "lem-directed-dyadic-rounding-enclosure-and-error",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "alg-certified-constraint-emptiness-search",
+        "kind": "algorithm",
+        "title": "Certified constraint-emptiness search with a finite query budget",
+        "deps": [
+          "def-spatial-global-optimization-problem",
+          "thm-interval-lipschitz-bound-sound-consistent"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "alg-bounded-mixed-integer-branch-and-bound",
+        "kind": "algorithm",
+        "title": "Bounded mixed-integer branch and bound with a finite enumeration fallback",
+        "deps": [
+          "alg-certified-spatial-branch-and-bound",
+          "alg-factorable-mccormick-box-relaxation",
+          "def-spatial-global-optimization-problem",
+          "thm-factorable-dual-certificate-is-valid-box-lower-bound"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-uniform-constraint-margin-enables-empty-box-detection",
+        "kind": "theorem",
+        "title": "A positive constraint-separation margin permits finite certified empty-box detection",
+        "deps": [
+          "alg-certified-constraint-emptiness-search",
+          "def-max-min",
+          "def-spatial-global-optimization-problem",
+          "thm-heine-borel-rn",
+          "thm-nested-interval-property",
+          "thm-interval-lipschitz-bound-sound-consistent",
+          "lem-finite-set-has-max",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-infimum-property",
+          "lem-inf-epsilon",
+          "thm-metric-closure-characterisation",
+          "lem-real-line-is-a-metric-space",
+          "def-metric-bounded-diameter"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-bounded-mixed-integer-finite-budget-terminates",
+        "kind": "theorem",
+        "title": "Finite-budget bounded mixed-integer branch and bound terminates",
+        "deps": [
+          "alg-bounded-mixed-integer-branch-and-bound",
+          "thm-finite-budget-spatial-bnb-terminates"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-bounded-mixed-integer-gap-certificate-sound",
+        "kind": "theorem",
+        "title": "A bounded mixed-integer gap certificate proves global epsilon-optimality",
+        "deps": [
+          "alg-bounded-mixed-integer-branch-and-bound",
+          "alg-certified-spatial-branch-and-bound",
+          "def-spatial-box-bound-certificate",
+          "thm-factorable-dual-certificate-is-valid-box-lower-bound"
+        ],
+        "dependency_level": 8
+      }
+    ]
+  },
+  {
+    "order": 2423,
+    "id": "global-optimization-and-certified-branch-and-bound-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Global optimization and certified branch and bound — Examples",
+    "companion": "global-optimization-and-certified-branch-and-bound",
+    "requires": [
+      "global-optimization-and-certified-branch-and-bound"
+    ],
+    "items": [
+      {
+        "id": "ex-noisy-biological-simulator-finite-candidate-gp-acquisition",
+        "kind": "example",
+        "title": "A noisy biological simulator search is conditional on its chosen Gaussian-process model",
+        "deps": [
+          "alg-finite-candidate-gp-acquisition-search",
+          "thm-adaptive-finite-candidate-gp-search-posterior-correct",
+          "thm-finite-gaussian-process-posterior-and-predictive-laws"
+        ],
+        "dependency_level": 3,
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-invalid-spatial-lower-bound-can-prune-global-minimum",
+        "kind": "counterexample",
+        "title": "An invalid lower bound can prune the true global minimizer",
+        "deps": [
+          "alg-certified-spatial-branch-and-bound",
+          "def-spatial-box-bound-certificate",
+          "thm-spatial-bnb-gap-certificate-sound"
+        ],
+        "dependency_level": 4,
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+        "kind": "example",
+        "title": "A multimodal quartic receives an exact spatial branch-and-bound gap certificate",
+        "deps": [
+          "alg-certified-spatial-branch-and-bound",
+          "alg-interval-dag-box-enclosure-and-bound",
+          "thm-interval-lipschitz-bound-sound-consistent",
+          "thm-of-square-roots",
+          "lem-of-square-monotone",
+          "thm-spatial-bnb-gap-certificate-sound"
+        ],
+        "dependency_level": 7,
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-bounded-engineering-design-mixed-integer-gap-certificate",
+        "kind": "example",
+        "title": "A bounded engineering design has an exact mixed-integer gap certificate",
+        "deps": [
+          "alg-bounded-mixed-integer-branch-and-bound",
+          "thm-bounded-mixed-integer-gap-certificate-sound"
+        ],
+        "dependency_level": 9,
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

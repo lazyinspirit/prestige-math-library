@@ -1,0 +1,176 @@
+[
+  {
+    "order": 2352,
+    "id": "krylov-methods-and-lanczos-convergence",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Krylov methods and Lanczos convergence",
+    "companion": "krylov-methods-and-lanczos-convergence-examples",
+    "requires": [
+      "conjugate-gradients-minres-and-preconditioning",
+      "eigenvalue-iterations-and-the-qr-algorithm",
+      "krylov-subspaces-arnoldi-and-gmres",
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "finite-precision-direct-factorizations",
+      "sparse-matrix-models-and-kernel-costs",
+      "stationary-iterations-and-relaxation",
+      "fundamental-trigonometric-identities"
+    ],
+    "items": [
+      {
+        "id": "lem-scaled-chebyshev-filter-bound-on-a-separated-interval",
+        "kind": "lemma",
+        "title": "A scaled Chebyshev polynomial suppresses a separated interval",
+        "statement": "For a>b>c and k\u22650, give an explicit degree-k polynomial p with p(a)=1 and sup_{x\u2208[c,b]}|p(x)|=1/T_k(1+2(a\u2212b)/(b\u2212c)).",
+        "deps": [
+          "def-chebyshev-polynomials-first-and-second-kind",
+          "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "thm-of-square-roots"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound",
+        "kind": "theorem",
+        "title": "Two-pass MGS Arnoldi has an explicit local relation and an a posteriori orthogonality bound",
+        "statement": "In the stated operationwise floating-point model, prove a local Arnoldi relation with explicit matvec, projection, normalization, and reorthogonalization error terms, then quantify the computed basis orthogonality loss under a full-rank/conditioning hypothesis and give a distinct breakdown or inconclusive branch.",
+        "deps": [
+          "def-arnoldi-process",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+          "lem-product-of-one-plus-deltas-gives-theta-n",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-cg-recursive-residual-gap-and-attainable-accuracy",
+        "kind": "theorem",
+        "title": "Finite-precision CG has a recursive-residual gap and an attainable-accuracy bound",
+        "statement": "For the stated rounded CG updates on an SPD system, prove a cumulative bound between the recursively updated residual and b\u2212Ax, and convert a recomputed true-residual bound to an A-norm error bound without claiming exact-grade termination or monotonicity of the true residual.",
+        "deps": [
+          "def-conjugate-gradient-recurrence",
+          "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+          "lem-product-of-one-plus-deltas-gives-theta-n",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-induced-matrix-p-norm"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+        "kind": "theorem",
+        "title": "Lanczos largest Ritz values obey a Chebyshev start-angle bound, including degenerate branches",
+        "statement": "Prove the extremal Ritz-value bound for a real symmetric matrix with a separated top eigenspace, retaining the start-angle factor and spectral gap; treat a collapsed unwanted interval, zero top component, repeated top eigenvalue, dimension-one case, and exact invariant-subspace breakdown separately. Exact top recovery in the collapsed unwanted interval requires a nonzero top-eigenspace start component.",
+        "deps": [
+          "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "def-arnoldi-process",
+          "def-lanczos-process-as-hermitian-arnoldi",
+          "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+          "def-ritz-values-and-ritz-vectors-from-arnoldi",
+          "prop-ritz-residual-formula-for-an-arnoldi-ritz-pair",
+          "thm-courant-fischer-min-max-principle",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "lem-scaled-chebyshev-filter-bound-on-a-separated-interval"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-gmres-true-residual-gap-from-computed-arnoldi-relation",
+        "kind": "theorem",
+        "title": "A computed GMRES correction has an explicit finite-precision residual gap",
+        "statement": "From the local finite-precision Arnoldi relation, prove an explicit gap bound for a computed GMRES coefficient vector and a recomputed true residual; retain the basis-orthogonality and least-squares residual terms separately.",
+        "deps": [
+          "thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "def-induced-matrix-p-norm",
+          "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+          "lem-product-of-one-plus-deltas-gives-theta-n",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "prop-sparse-unrestarted-gmres-work-and-storage",
+        "kind": "proposition",
+        "title": "Unrestarted GMRES has a sparse matvec plus orthogonalization work bound",
+        "statement": "For 1\u2264m\u2264n, canonical square CSR with a nonempty row pattern, and a specified one- or two-pass Arnoldi orthogonalization with incremental Givens least squares, prove O(m nnz(A)+m\u00b2n) arithmetic and O(mn) Krylov working storage, separating the least-squares solve and excluding convergence claims.",
+        "deps": [
+          "def-arnoldi-process",
+          "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+          "def-gmres-iterate",
+          "def-csr-matrix-with-stored-entry-semantics",
+          "alg-csr-matrix-vector-product-with-validation",
+          "thm-csr-storage-and-exact-matvec-cost"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  },
+  {
+    "order": 2353,
+    "id": "krylov-methods-and-lanczos-convergence-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Krylov methods and Lanczos convergence \u2014 Examples",
+    "companion": "krylov-methods-and-lanczos-convergence",
+    "requires": [
+      "krylov-methods-and-lanczos-convergence"
+    ],
+    "items": [
+      {
+        "id": "ex-unrestarted-and-restarted-gmres-on-a-diagonal-system",
+        "kind": "example",
+        "title": "Unrestarted GMRES solves a two-dimensional diagonal system before GMRES(1) restarts",
+        "statement": "Verify the two-step unrestarted and one-step restarted behavior for A=diag(1,2), b=(1,1), x0=0, including the nonzero first-cycle restarted residual.",
+        "deps": [
+          "def-gmres-iterate",
+          "def-restarted-gmres-m",
+          "def-krylov-subspace-of-a-matrix-and-start-vector"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "ex-cg-denominator-failure-and-minres-on-an-indefinite-system",
+        "kind": "example",
+        "title": "CG's positive-denominator hypothesis fails on an indefinite system while MINRES can start",
+        "statement": "Compute the zero first CG denominator for diag(1,\u22121), verify that the first MINRES least-squares problem is defined and that the exact solution lies in K\u2082, then contrast with an SPD CG denominator.",
+        "deps": [
+          "thm-cg-recursive-residual-gap-and-attainable-accuracy",
+          "def-conjugate-gradient-recurrence",
+          "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "def-minres-iterate-from-the-lanczos-tridiagonalization",
+          "def-krylov-subspace-of-a-matrix-and-start-vector"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-lanczos-poorly-aligned-start-vector-delays-the-largest-ritz-value",
+        "kind": "example",
+        "title": "A poorly aligned start delays the largest Ritz value and requires the start-angle factor",
+        "statement": "For A=diag(10,2,1) and b=(1/100,\u221a(9999/20000),\u221a(9999/20000)), verify the unit start, prove \u03b8\u2082<9/4, and show deleting the start-angle factor makes the stated Chebyshev bound false.",
+        "deps": [
+          "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-lanczos-repeated-top-zero-component-and-invariant-breakdown",
+        "kind": "example",
+        "title": "Lanczos handles repeated top eigenvalues, absent top components, and exact breakdown",
+        "statement": "Check the scalar-matrix branch, a repeated top eigenvalue with collapsed unwanted interval, a start vector with zero top projection, and a top-containing invariant-subspace breakdown.",
+        "deps": [
+          "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+          "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "def-arnoldi-process",
+          "def-lanczos-process-as-hermitian-arnoldi"
+        ],
+        "dependency_level": 2
+      }
+    ]
+  }
+]

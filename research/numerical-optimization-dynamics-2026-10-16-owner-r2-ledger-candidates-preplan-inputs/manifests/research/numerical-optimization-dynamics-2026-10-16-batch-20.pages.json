@@ -1,0 +1,379 @@
+[
+  {
+    "order": 2324,
+    "id": "composite-quadrature-rules",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Composite quadrature rules",
+    "companion": "composite-quadrature-rules-examples",
+    "requires": [
+      "properties-of-the-integral-and-the-working-ftc",
+      "the-riemann-integral-in-rn-and-jordan-content",
+      "polynomial-interpolation-and-remainder",
+      "laplace-approximation-and-marginal-integration"
+    ],
+    "items": [
+      {
+        "id": "alg-composite-midpoint-rule",
+        "kind": "algorithm",
+        "title": "Composite midpoint rule on a uniform grid",
+        "statement": "For a<b, integer n>=1, and f:[a,b]->R, return h times the sum of f at the n panel midpoints, where h=(b-a)/n.",
+        "strategy": "A finite exact-real weighted sum; invalid intervals or panel counts return an explicit status.",
+        "deps": [
+          "def-finite-sum"
+        ],
+        "dependency_level": 0,
+        "local_order": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.1",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-composite-simpson-rule",
+        "kind": "algorithm",
+        "title": "Composite Simpson rule on an even uniform grid",
+        "statement": "For a<b and even integer n>=2, return h/3 times the sum over n/2 two-panel blocks of the two endpoints plus four times the midpoint; expansion gives weights 1,4,2,...,4,1.",
+        "strategy": "A finite exact-real weighted sum over n/2 two-panel blocks.",
+        "deps": [
+          "def-finite-sum"
+        ],
+        "dependency_level": 0,
+        "local_order": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.2",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-composite-midpoint-panel-error-kernel",
+        "kind": "lemma",
+        "title": "Midpoint panel error kernel and second-derivative bound",
+        "statement": "For f in C^2[a,b], the panel midpoint error equals the integral of a nonnegative piecewise-quadratic kernel times f'' and is bounded by (b-a)^3 max|f''|/24.",
+        "strategy": "Apply integration by parts twice on the two half-panels, then use kernel positivity and its exact integral.",
+        "deps": [
+          "def-higher-derivatives-and-smoothness",
+          "thm-integration-by-parts",
+          "thm-additivity-over-subintervals",
+          "thm-linearity-of-the-integral",
+          "thm-monotonicity-of-the-integral",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-heine-borel-r",
+          "thm-extreme-value-r",
+          "thm-ftc-second-part",
+          "thm-algebra-of-continuous-functions",
+          "thm-chain-rule",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_level": 0,
+        "local_order": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.1",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-composite-midpoint-error-bound",
+        "kind": "theorem",
+        "title": "Composite midpoint error bound for a twice continuously differentiable function",
+        "statement": "For f in C^2[a,b], n>=1 and h=(b-a)/n, the composite midpoint error is at most (b-a)h^2 max|f''|/24.",
+        "strategy": "Apply the local midpoint kernel estimate to every panel, use additivity, and sum the panel bounds.",
+        "deps": [
+          "alg-composite-midpoint-rule",
+          "lem-composite-midpoint-panel-error-kernel",
+          "thm-additivity-over-subintervals",
+          "lem-triangle-inequality-finite"
+        ],
+        "dependency_level": 1,
+        "local_order": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, Theorem 7.1",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-simpson-panel-peano-kernel",
+        "kind": "lemma",
+        "title": "Peano kernel identity for one Simpson panel",
+        "statement": "On a panel [a,b] of width L, the Simpson error is the integral of K_{a,b} f^(4), where K is the scaled piecewise quartic kernel; it is nonpositive and has integral of its absolute value L^5/2880.",
+        "strategy": "Integrate by parts four times on each half, compute the jump contribution at the midpoint, and integrate the kernel.",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "def-higher-derivatives-and-smoothness",
+          "thm-integration-by-parts",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-ftc-second-part",
+          "thm-algebra-of-continuous-functions",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-additivity-over-subintervals"
+        ],
+        "dependency_level": 1,
+        "local_order": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.2",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-composite-simpson-exact-through-degree-three",
+        "kind": "theorem",
+        "title": "Composite Simpson rule is exact through cubic degree",
+        "statement": "For every p(x)=c0+c1*x+c2*x^2+c3*x^3 and every even n>=2, composite Simpson integrates p exactly on [a,b].",
+        "strategy": "The Peano kernel identity has zero remainder when the fourth derivative vanishes; sum over the two-panel blocks.",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "lem-simpson-panel-peano-kernel",
+          "thm-additivity-over-subintervals",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_level": 2,
+        "local_order": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.2",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-composite-simpson-error-bound",
+        "kind": "theorem",
+        "title": "Composite Simpson error bound for a four-times continuously differentiable function",
+        "statement": "For f in C^4[a,b], even n>=2 and h=(b-a)/n, the composite Simpson error is at most (b-a)h^4 max|f^(4)|/180.",
+        "strategy": "Scale the one-panel Peano kernel to every two-panel block, add the block errors, and use the triangle inequality.",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "lem-simpson-panel-peano-kernel",
+          "thm-additivity-over-subintervals",
+          "lem-triangle-inequality-finite",
+          "def-higher-derivatives-and-smoothness",
+          "thm-heine-borel-r",
+          "thm-extreme-value-r",
+          "thm-monotonicity-of-the-integral",
+          "thm-linearity-of-the-integral"
+        ],
+        "dependency_level": 2,
+        "local_order": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.2",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2325,
+    "id": "composite-quadrature-rules-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Composite quadrature rules — Examples",
+    "companion": "composite-quadrature-rules",
+    "requires": [
+      "composite-quadrature-rules",
+      "convexity"
+    ],
+    "items": [
+      {
+        "id": "ex-convex-composite-midpoint-and-trapezoid-bracketing",
+        "kind": "example",
+        "title": "Convex data bracket the integral between composite midpoint and trapezoid values",
+        "statement": "For convex f in C^2[a,b], the composite midpoint value is no larger than the integral, which is no larger than the published composite trapezoid value.",
+        "strategy": "Use the midpoint error kernel for the lower bound and integrate each convex endpoint chord for the upper bound.",
+        "deps": [
+          "alg-composite-midpoint-rule",
+          "lem-composite-midpoint-panel-error-kernel",
+          "def-composite-trapezoidal-rule",
+          "def-convex-concave-and-midpoint-convex-functions",
+          "cor-second-derivative-characterises-convexity",
+          "thm-monotonicity-of-the-integral",
+          "thm-ftc-second-part",
+          "thm-additivity-over-subintervals",
+          "def-higher-derivatives-and-smoothness",
+          "thm-algebra-of-continuous-functions",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_level": 1,
+        "local_order": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.1",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-quadratic-exact-for-composite-simpson",
+        "kind": "example",
+        "title": "Simpson rule integrates a quadratic exactly on one two-panel block",
+        "statement": "For f(x)=x^2 on [0,2] and n=2, both the exact integral and composite Simpson value are 8/3.",
+        "strategy": "Evaluate the antiderivative and the three Simpson node values.",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "thm-composite-simpson-exact-through-degree-three",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable"
+        ],
+        "dependency_level": 3,
+        "local_order": 2,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.2",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-cubic-exact-for-composite-simpson",
+        "kind": "example",
+        "title": "Simpson rule integrates a cubic exactly on one two-panel block",
+        "statement": "For f(x)=x^3 on [0,2] and n=2, both the exact integral and composite Simpson value are 4.",
+        "strategy": "Evaluate the antiderivative and the three Simpson node values.",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "thm-composite-simpson-exact-through-degree-three",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable"
+        ],
+        "dependency_level": 3,
+        "local_order": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 7, §7.2",
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+              "url": "https://fncbook.com/integration/"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

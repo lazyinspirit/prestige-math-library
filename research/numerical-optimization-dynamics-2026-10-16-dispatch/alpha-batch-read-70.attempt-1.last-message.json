@@ -1,0 +1,195 @@
+{
+  "group": "aa",
+  "batches": ["70"],
+  "pages_read": [
+    "nonlinear-conjugate-gradient-methods",
+    "nonlinear-conjugate-gradient-methods-examples"
+  ],
+  "items_read": [
+    "alg-nonlinear-conjugate-gradient-methods",
+    "lem-fr-descent-and-direction-growth-bound",
+    "lem-safeguarded-pr-plus-uniform-angle",
+    "thm-nonlinear-cg-finite-budget-terminates",
+    "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg",
+    "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe",
+    "thm-safeguarded-pr-plus-gradient-norms-converge",
+    "ex-rosenbrock-fr-prplus-trace",
+    "cex-raw-prplus-loses-descent-and-safeguard-restarts",
+    "ex-spd-quadratic-nonlinear-cg-matches-linear-cg"
+  ],
+  "conventions": [
+    {
+      "convention": "Work in real Euclidean space of dimension n≥1 with exact real evaluations and arithmetic. The algorithm has finite outer budget K and separate bounded-strong-Wolfe and exact-SPD-quadratic modes.",
+      "fixed_by": "alg-nonlinear-conjugate-gradient-methods",
+      "matters_for": [
+        "thm-nonlinear-cg-finite-budget-terminates",
+        "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg",
+        "ex-rosenbrock-fr-prplus-trace",
+        "ex-spd-quadratic-nonlinear-cg-matches-linear-cg"
+      ]
+    },
+    {
+      "convention": "Strong Wolfe uses 0<c1<c2<1/2, Armijo decrease, and |g_newᵀd|≤c2|g_oldᵀd|. The descent-angle cosine is −gᵀd/(‖g‖₂‖d‖₂).",
+      "fixed_by": "def-wolfe-and-strong-wolfe-conditions",
+      "matters_for": [
+        "lem-fr-descent-and-direction-growth-bound",
+        "lem-safeguarded-pr-plus-uniform-angle",
+        "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe",
+        "thm-safeguarded-pr-plus-gradient-norms-converge",
+        "ex-rosenbrock-fr-prplus-trace",
+        "cex-raw-prplus-loses-descent-and-safeguard-restarts"
+      ]
+    },
+    {
+      "convention": "PR+ truncates its coefficient at zero. A candidate is retained only when gᵀd≤−σ‖g‖₂² and ‖d‖₂≤C‖g‖₂, with fixed σ,C>0; otherwise the selected direction is −g.",
+      "fixed_by": "alg-nonlinear-conjugate-gradient-methods",
+      "matters_for": [
+        "lem-safeguarded-pr-plus-uniform-angle",
+        "thm-safeguarded-pr-plus-gradient-norms-converge",
+        "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg",
+        "ex-rosenbrock-fr-prplus-trace",
+        "cex-raw-prplus-loses-descent-and-safeguard-restarts"
+      ]
+    },
+    {
+      "convention": "Convergence concerns infinite recurrence sequences with nonzero gradients and successful strong Wolfe updates at every index, rather than infinite executions of the finite-budget algorithm. FR concludes only vanishing gradient liminf.",
+      "fixed_by": "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe",
+      "matters_for": [
+        "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe",
+        "thm-safeguarded-pr-plus-gradient-norms-converge",
+        "nonlinear-conjugate-gradient-methods"
+      ]
+    },
+    {
+      "convention": "The line-search trial bound excludes initial-point data; the outer gradient count separately counts the initial gradient and one gradient after each accepted update.",
+      "fixed_by": "thm-nonlinear-cg-finite-budget-terminates",
+      "matters_for": [
+        "thm-nonlinear-cg-finite-budget-terminates"
+      ]
+    },
+    {
+      "convention": "The Rosenbrock example traces the actual dyadic bracketing/zoom output t=1/1024. The additional t=1/1000 calculation is explicitly a hypothetical valid Wolfe step, not that search's output.",
+      "fixed_by": "ex-rosenbrock-fr-prplus-trace",
+      "matters_for": [
+        "ex-rosenbrock-fr-prplus-trace",
+        "nonlinear-conjugate-gradient-methods-examples"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-nonlinear-conjugate-gradient-methods",
+      "statement": "Defines finite-budget FR and safeguarded PR+ with zero-gradient exit, candidate formation, PR+ descent-and-norm restart tests, bounded strong Wolfe search or exact-SPD-quadratic line minimization, failure propagation, and stationary/search-failure/iteration-limit outputs.",
+      "used_by": [
+        "lem-fr-descent-and-direction-growth-bound",
+        "lem-safeguarded-pr-plus-uniform-angle",
+        "thm-nonlinear-cg-finite-budget-terminates",
+        "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg",
+        "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe",
+        "thm-safeguarded-pr-plus-gradient-norms-converge",
+        "ex-rosenbrock-fr-prplus-trace",
+        "cex-raw-prplus-loses-descent-and-safeguard-restarts"
+      ]
+    },
+    {
+      "id": "lem-fr-descent-and-direction-growth-bound",
+      "statement": "For nonzero gradients following the stated FR recurrence and strong Wolfe curvature with 0<c2<1/2, define q_k=−g_kᵀd_k/‖g_k‖₂², δ=(1−2c2)/(1−c2), C3=(1+c2)/(1−c2), and S_k=Σ_{j=0}^k‖g_j‖₂⁻². Then δ≤q_k≤1/(1−c2) and ‖d_k‖₂²≤C3‖g_k‖₂⁴S_k for every k.",
+      "used_by": [
+        "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe"
+      ]
+    },
+    {
+      "id": "lem-safeguarded-pr-plus-uniform-angle",
+      "statement": "For g≠0, the stated PR+ safeguard with σ,C>0 produces a strictly descending direction whose descent-angle cosine is at least min{1,σ/C}>0.",
+      "used_by": [
+        "thm-safeguarded-pr-plus-gradient-norms-converge"
+      ]
+    },
+    {
+      "id": "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg",
+      "statement": "On a real SPD quadratic in exact arithmetic, the FR recurrence with exact line minimization has the same iterates, residuals and directions as linear CG until the common zero-residual exit. Unrestarted raw PR+ has the same sequence; safeguarded PR+ has this equivalence only on runs where its safeguard does not restart.",
+      "used_by": [
+        "ex-spd-quadratic-nonlinear-cg-matches-linear-cg",
+        "nonlinear-conjugate-gradient-methods"
+      ]
+    },
+    {
+      "id": "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe",
+      "statement": "For the stated infinite FR recurrence with nonzero gradients, feasible strong Wolfe updates, an objective bounded below on its initial sublevel set, and one Lipschitz-gradient constant on an open neighborhood containing every trial segment, liminf ‖g_k‖₂=0.",
+      "used_by": [
+        "nonlinear-conjugate-gradient-methods"
+      ]
+    },
+    {
+      "id": "thm-safeguarded-pr-plus-gradient-norms-converge",
+      "statement": "Under the referenced lower-bound and smoothness hypotheses, an infinite successful PR+ recurrence with the stated fixed safeguard, nonzero gradients and strong Wolfe steps satisfies ‖∇f(x_k)‖₂→0.",
+      "used_by": [
+        "nonlinear-conjugate-gradient-methods"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "The C1 objective convention on open Euclidean domains.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "The scalar-field gradient and Jacobian conventions used throughout the recurrence and computations.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Real dot products, Euclidean norms, bilinearity and positive definiteness.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "The upper bound of one on the descent-angle cosine, including the impossibility of retaining a candidate when σ/C>1.",
+      "opened": true
+    },
+    {
+      "id": "def-conjugate-gradient-recurrence",
+      "used_for": "The exact linear-CG recurrence compared with FR/raw PR+ and evaluated in the SPD example.",
+      "opened": true
+    },
+    {
+      "id": "prop-conjugate-gradient-denominators-are-positive-before-convergence",
+      "used_for": "Nonzero linear-CG directions and positive quadratic denominators before zero residual.",
+      "opened": true
+    },
+    {
+      "id": "thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate",
+      "used_for": "Exact-CG residual orthogonality, making the raw PR+ coefficient equal the FR coefficient.",
+      "opened": true
+    },
+    {
+      "id": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+      "used_for": "The positive-definite quadratic-form convention underlying the exact-CG denominator arguments.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-nonlinear-conjugate-gradient-methods",
+      "concern": "Definition step 2 says “For k=0, use d_0 above,” whereas step 3 tests or assigns d_k^{cand}, which has only been explicitly formed for k≥1. The intended initialization d_0^{cand}=d_0=−g_0 is immediately recoverable, but should be explicit for the procedure's first iteration. A first-iteration restart also assigns β_{−1}, although no such coefficient is otherwise needed.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "nonlinear-conjugate-gradient-methods",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "The required page supplies Krylov context, not an imported finite-precision theorem. The nonlinear-CG equivalence instead cites the opened published exact-CG recurrence, residual-orthogonality and denominator-positivity items. Its SPD, exact-arithmetic, exact-line-minimization and no-restart qualifications preserve those interfaces; it does not transfer Lanczos or residual-gap conclusions."
+    },
+    {
+      "from": "nonlinear-conjugate-gradient-methods",
+      "to": "nonconvex-line-search-and-inexact-newton-methods",
+      "faithful": true,
+      "note": "Opened the Wolfe definition, bounded bracketing/zoom algorithm and finite-return lemma, Wolfe step lower bound, Zoutendijk theorem and uniform-angle corollary. The consumers preserve the constants, descent-angle sign, feasible successful-step assumptions, sublevel lower bound and segment-Lipschitz hypotheses. Search failures propagate, and the finite trial counts exclude initial data. The FR normalized harmonic contradiction is valid; the PR+ safeguard supplies the uniform angle required by the corollary."
+    }
+  ]
+}

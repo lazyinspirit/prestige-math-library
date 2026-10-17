@@ -1,0 +1,527 @@
+[
+  {
+    "order": 2464,
+    "id": "spectral-collocation-and-galerkin-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Spectral collocation and Galerkin methods",
+    "companion": "spectral-collocation-and-galerkin-methods-examples",
+    "requires": [
+      "fundamental-trigonometric-identities",
+      "polynomial-interpolation-and-remainder",
+      "polynomial-approximation-and-chebyshev-interpolation",
+      "composite-quadrature-rules",
+      "gaussian-quadrature"
+    ],
+    "items": [
+      {
+        "id": "def-periodic-fourier-collocation-grid",
+        "kind": "definition",
+        "title": "Periodic Fourier collocation grid and even-grid Nyquist convention",
+        "deps": [
+          "def-sine-and-cosine-by-power-series",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "thm-chain-rule"
+        ],
+        "dependency_level": 0,
+        "strategy": "Explicit finite definition and conventions."
+      },
+      {
+        "id": "lem-periodic-fourier-mode-aliasing-under-sampling",
+        "kind": "lemma",
+        "title": "Periodic Fourier modes alias modulo the grid size",
+        "deps": [
+          "def-periodic-fourier-collocation-grid",
+          "thm-finite-fourier-inversion",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-kernel-and-fibres-of-complex-exponential"
+        ],
+        "dependency_level": 1,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "alg-periodic-fourier-collocation-differentiation-matrix",
+        "kind": "algorithm",
+        "title": "Periodic Fourier collocation differentiation matrix",
+        "deps": [
+          "def-periodic-fourier-collocation-grid",
+          "thm-sine-and-cosine-derivatives",
+          "thm-chain-rule",
+          "thm-quarter-turn-values-and-shift-formulas"
+        ],
+        "dependency_level": 1,
+        "strategy": "Finite exact-arithmetic construction and failure boundary."
+      },
+      {
+        "id": "thm-periodic-fourier-collocation-differentiation-is-exact",
+        "kind": "theorem",
+        "title": "Periodic Fourier collocation differentiates its interpolant exactly",
+        "deps": [
+          "def-periodic-fourier-collocation-grid",
+          "alg-periodic-fourier-collocation-differentiation-matrix",
+          "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "thm-finite-fourier-inversion",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-sine-and-cosine-derivatives",
+          "thm-chain-rule",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-and-cosine-subtraction-formulas"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "def-chebyshev-gauss-lobatto-collocation-grid",
+        "kind": "definition",
+        "title": "Chebyshev–Gauss–Lobatto collocation grid",
+        "deps": [
+          "def-chebyshev-polynomials-first-and-second-kind",
+          "thm-chebyshev-multiple-angle-identities",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "def-cardinal-polynomial-interpolation",
+          "thm-cardinal-polynomial-interpolant-exists-uniquely"
+        ],
+        "dependency_level": 4,
+        "strategy": "Explicit finite definition and conventions."
+      },
+      {
+        "id": "lem-chebyshev-lobatto-mode-aliasing",
+        "kind": "lemma",
+        "title": "Chebyshev–Lobatto interpolation folds polynomial modes",
+        "deps": [
+          "def-chebyshev-gauss-lobatto-collocation-grid",
+          "def-cardinal-polynomial-interpolation",
+          "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "def-chebyshev-polynomials-first-and-second-kind",
+          "thm-chebyshev-multiple-angle-identities",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "lem-chebyshev-degree-leading-coefficients-and-extreme-values"
+        ],
+        "dependency_level": 5,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "alg-chebyshev-gauss-lobatto-differentiation-matrix",
+        "kind": "algorithm",
+        "title": "Chebyshev–Gauss–Lobatto polynomial differentiation matrix",
+        "deps": [
+          "def-chebyshev-gauss-lobatto-collocation-grid",
+          "def-cardinal-polynomial-interpolation",
+          "thm-cardinal-polynomial-interpolant-exists-uniquely"
+        ],
+        "dependency_level": 5,
+        "strategy": "Finite exact-arithmetic construction and failure boundary."
+      },
+      {
+        "id": "thm-chebyshev-gauss-lobatto-differentiation-is-exact",
+        "kind": "theorem",
+        "title": "Chebyshev–Gauss–Lobatto differentiation is exact on the interpolant",
+        "deps": [
+          "def-chebyshev-gauss-lobatto-collocation-grid",
+          "alg-chebyshev-gauss-lobatto-differentiation-matrix",
+          "thm-cardinal-polynomial-interpolant-exists-uniquely"
+        ],
+        "dependency_level": 6,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination",
+        "kind": "algorithm",
+        "title": "Boundary-eliminated Chebyshev collocation for a two-point Dirichlet BVP",
+        "deps": [
+          "def-chebyshev-gauss-lobatto-collocation-grid",
+          "alg-chebyshev-gauss-lobatto-differentiation-matrix",
+          "thm-chebyshev-gauss-lobatto-differentiation-is-exact"
+        ],
+        "dependency_level": 7,
+        "strategy": "Finite exact-arithmetic construction and failure boundary."
+      },
+      {
+        "id": "thm-chebyshev-dirichlet-collocation-status-and-system",
+        "kind": "theorem",
+        "title": "Boundary elimination returns exactly the finite Chebyshev collocation system",
+        "deps": [
+          "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination",
+          "thm-chebyshev-gauss-lobatto-differentiation-is-exact",
+          "thm-invertible-matrix-theorem"
+        ],
+        "dependency_level": 8,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "def-chebyshev-arcsine-weighted-l2-pairing",
+        "kind": "definition",
+        "title": "Arcsine-weighted inner product on the Chebyshev interval",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Explicit finite definition and conventions."
+      },
+      {
+        "id": "lem-chebyshev-polynomials-orthogonal-in-arcsine-weight",
+        "kind": "lemma",
+        "title": "Chebyshev polynomials are orthogonal for the arcsine weight",
+        "deps": [
+          "def-chebyshev-arcsine-weighted-l2-pairing",
+          "def-chebyshev-polynomials-first-and-second-kind",
+          "thm-chebyshev-multiple-angle-identities",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-ftc-second-part",
+          "cor-weierstrass-approximation-on-a-closed-interval",
+          "thm-heine-borel-r",
+          "thm-extreme-value-r",
+          "thm-monotonicity-of-the-integral"
+        ],
+        "dependency_level": 1,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "def-chebyshev-weighted-spectral-sobolev-scale",
+        "kind": "definition",
+        "title": "Chebyshev weighted spectral Sobolev scale and projection",
+        "deps": [
+          "def-chebyshev-arcsine-weighted-l2-pairing",
+          "lem-chebyshev-polynomials-orthogonal-in-arcsine-weight"
+        ],
+        "dependency_level": 2,
+        "strategy": "Explicit finite definition and conventions."
+      },
+      {
+        "id": "thm-chebyshev-weighted-orthogonal-projection-rate",
+        "kind": "theorem",
+        "title": "Weighted Chebyshev projection has its spectral Sobolev rate",
+        "deps": [
+          "def-chebyshev-weighted-spectral-sobolev-scale",
+          "lem-chebyshev-polynomials-orthogonal-in-arcsine-weight"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "thm-chebyshev-lobatto-interpolation-near-best-weighted-error",
+        "kind": "theorem",
+        "title": "Chebyshev–Lobatto interpolation inherits a weighted near-best bound",
+        "deps": [
+          "def-chebyshev-arcsine-weighted-l2-pairing",
+          "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+          "thm-chebyshev-interpolation-near-best-error-bound"
+        ],
+        "dependency_level": 6,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "thm-chebyshev-lobatto-interpolation-rate-under-spectral-sobolev-regularity",
+        "kind": "theorem",
+        "title": "Chebyshev–Lobatto interpolation has an algebraic weighted spectral-Sobolev rate",
+        "deps": [
+          "def-chebyshev-weighted-spectral-sobolev-scale",
+          "lem-chebyshev-lobatto-mode-aliasing",
+          "def-cardinal-polynomial-interpolation",
+          "lem-chebyshev-polynomials-orthogonal-in-arcsine-weight",
+          "thm-chebyshev-multiple-angle-identities",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "lem-ltwo-fourier-decay-implies-absolute-convergence-by-cauchy-schwarz",
+          "thm-cauchy-schwarz-finite"
+        ],
+        "dependency_level": 6,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "thm-chebyshev-lobatto-pointwise-remainder-bound",
+        "kind": "theorem",
+        "title": "Chebyshev–Lobatto interpolation remainder bound",
+        "deps": [
+          "def-chebyshev-gauss-lobatto-collocation-grid",
+          "def-cardinal-polynomial-interpolation",
+          "thm-lagrange-interpolation-remainder",
+          "def-chebyshev-polynomials-first-and-second-kind",
+          "thm-chebyshev-multiple-angle-identities",
+          "lem-chebyshev-degree-leading-coefficients-and-extreme-values",
+          "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "thm-chain-rule",
+          "thm-sine-and-cosine-derivatives",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-higher-derivatives-and-smoothness",
+          "thm-heine-borel-r",
+          "thm-extreme-value-r",
+          "def-chebyshev-arcsine-weighted-l2-pairing"
+        ],
+        "dependency_level": 5,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "thm-chebyshev-lobatto-interpolation-exponential-rate-for-analytic-data",
+        "kind": "theorem",
+        "title": "Analytic ellipse data give exponential Chebyshev–Lobatto interpolation error",
+        "deps": [
+          "def-chebyshev-gauss-lobatto-collocation-grid",
+          "lem-chebyshev-lobatto-mode-aliasing",
+          "def-chebyshev-arcsine-weighted-l2-pairing",
+          "lem-chebyshev-polynomials-orthogonal-in-arcsine-weight",
+          "thm-cauchy-theorem-one-exceptional-point-on-a-star-shaped-domain",
+          "thm-chebyshev-multiple-angle-identities",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-geometric-series"
+        ],
+        "dependency_level": 6,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "alg-chebyshev-composite-simpson-weighted-mass-matrix",
+        "kind": "algorithm",
+        "title": "Composite-Simpson assembly of the Chebyshev weighted mass matrix",
+        "deps": [
+          "def-chebyshev-arcsine-weighted-l2-pairing",
+          "alg-composite-simpson-rule",
+          "thm-chebyshev-multiple-angle-identities"
+        ],
+        "dependency_level": 1,
+        "strategy": "Finite exact-arithmetic construction and failure boundary."
+      },
+      {
+        "id": "thm-composite-simpson-error-for-chebyshev-weighted-mass-matrix",
+        "kind": "theorem",
+        "title": "Composite Simpson error bound for Chebyshev weighted mass entries",
+        "deps": [
+          "def-chebyshev-arcsine-weighted-l2-pairing",
+          "alg-chebyshev-composite-simpson-weighted-mass-matrix",
+          "thm-composite-simpson-error-bound",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-chebyshev-multiple-angle-identities",
+          "thm-sine-and-cosine-derivatives"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "def-weighted-orthogonal-polynomial-galerkin-space",
+        "kind": "definition",
+        "title": "Weighted orthogonal-polynomial Galerkin spaces and spectral scale",
+        "deps": [
+          "def-gauss-moment-data",
+          "def-gauss-polynomial-moment-inner-product",
+          "thm-gauss-polynomial-moment-pairing-is-an-inner-product",
+          "thm-monic-gauss-orthogonal-polynomials-exist-uniquely"
+        ],
+        "dependency_level": 4,
+        "strategy": "Explicit finite definition and conventions."
+      },
+      {
+        "id": "thm-weighted-orthogonal-polynomial-galerkin-projection-is-well-defined",
+        "kind": "theorem",
+        "title": "The weighted orthogonal-polynomial Galerkin projection is well-defined",
+        "deps": [
+          "def-weighted-orthogonal-polynomial-galerkin-space",
+          "thm-gauss-polynomial-moment-pairing-is-an-inner-product"
+        ],
+        "dependency_level": 5,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "alg-gaussian-orthogonal-polynomial-galerkin-mass-matrix",
+        "kind": "algorithm",
+        "title": "Assemble a weighted Galerkin mass matrix from Gaussian nodes",
+        "deps": [
+          "def-weighted-orthogonal-polynomial-galerkin-space",
+          "def-gauss-quadrature-rule"
+        ],
+        "dependency_level": 6,
+        "strategy": "Finite exact-arithmetic construction and failure boundary."
+      },
+      {
+        "id": "thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact",
+        "kind": "theorem",
+        "title": "Gaussian quadrature exactly assembles the orthogonal Galerkin mass matrix",
+        "deps": [
+          "def-weighted-orthogonal-polynomial-galerkin-space",
+          "alg-gaussian-orthogonal-polynomial-galerkin-mass-matrix",
+          "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights"
+        ],
+        "dependency_level": 8,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "def-legendre-polynomial-family-and-l2-pairing",
+        "kind": "definition",
+        "title": "Legendre polynomials by Rodrigues' formula and their unweighted pairing",
+        "deps": [
+          "def-factorial-and-falling-factorial",
+          "def-higher-derivatives-and-smoothness"
+        ],
+        "dependency_level": 0,
+        "strategy": "Explicit finite definition and conventions."
+      },
+      {
+        "id": "lem-legendre-weighted-derivative-orthogonality-and-norm",
+        "kind": "lemma",
+        "title": "Legendre polynomials have explicit norms and weighted derivative orthogonality",
+        "deps": [
+          "def-legendre-polynomial-family-and-l2-pairing",
+          "thm-integration-by-parts",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_level": 1,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "def-legendre-weighted-sobolev-scale",
+        "kind": "definition",
+        "title": "Legendre weighted spectral-Sobolev scale and projection",
+        "deps": [
+          "def-legendre-polynomial-family-and-l2-pairing",
+          "lem-legendre-weighted-derivative-orthogonality-and-norm"
+        ],
+        "dependency_level": 2,
+        "strategy": "Explicit finite definition and conventions."
+      },
+      {
+        "id": "thm-legendre-weighted-projection-error-rate",
+        "kind": "theorem",
+        "title": "Legendre weighted projection has its spectral-Sobolev rate",
+        "deps": [
+          "def-legendre-weighted-sobolev-scale",
+          "lem-legendre-weighted-derivative-orthogonality-and-norm"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct proof from the stated facts and exact supplier interfaces."
+      },
+      {
+        "id": "rem-chebyshev-collocation-conditioning-and-spectral-radius-scope",
+        "kind": "remark",
+        "title": "Chebyshev collocation spectral-radius growth is setup-specific conditioning context",
+        "deps": [
+          "alg-chebyshev-gauss-lobatto-differentiation-matrix",
+          "thm-chebyshev-gauss-lobatto-differentiation-is-exact",
+          "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination"
+        ],
+        "dependency_level": 8,
+        "strategy": "Setup-specific source context and explicit scope boundary."
+      }
+    ]
+  },
+  {
+    "order": 2465,
+    "id": "spectral-collocation-and-galerkin-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Spectral collocation and Galerkin methods — Examples",
+    "companion": "spectral-collocation-and-galerkin-methods",
+    "requires": [
+      "spectral-collocation-and-galerkin-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-periodic-fourier-collocation-exactness-and-nyquist-mode",
+        "kind": "example",
+        "title": "Four-point Fourier collocation differentiates the Nyquist cosine at its nodes",
+        "deps": [
+          "def-periodic-fourier-collocation-grid",
+          "alg-periodic-fourier-collocation-differentiation-matrix",
+          "thm-periodic-fourier-collocation-differentiation-is-exact",
+          "thm-sine-and-cosine-derivatives",
+          "thm-quarter-turn-values-and-shift-formulas"
+        ],
+        "dependency_level": 3,
+        "strategy": "Finite example computed from declared suppliers."
+      },
+      {
+        "id": "ex-chebyshev-lobatto-endpoint-clustering",
+        "kind": "example",
+        "title": "Chebyshev–Lobatto nodes cluster quadratically at the endpoints",
+        "deps": [
+          "def-chebyshev-gauss-lobatto-collocation-grid",
+          "lem-sine-chord-and-lipschitz-bounds",
+          "thm-sine-and-cosine-subtraction-formulas",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-quarter-turn-values-and-shift-formulas"
+        ],
+        "dependency_level": 5,
+        "strategy": "Finite example computed from declared suppliers."
+      },
+      {
+        "id": "ex-analytic-and-nonsmooth-chebyshev-coefficient-decay",
+        "kind": "example",
+        "title": "Analytic and nonsmooth data have geometric and algebraic Chebyshev coefficient decay",
+        "deps": [
+          "def-chebyshev-polynomials-first-and-second-kind",
+          "def-chebyshev-arcsine-weighted-l2-pairing",
+          "lem-chebyshev-polynomials-orthogonal-in-arcsine-weight",
+          "thm-chebyshev-multiple-angle-identities",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-subtraction-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "thm-ftc-second-part",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "lem-geometric-sequence-null",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-uniform-integral-error-bound",
+          "thm-continuous-implies-integrable",
+          "thm-linearity-of-the-integral",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-complex-differentiability-holomorphic-and-entire",
+          "thm-complex-numbers-form-a-field",
+          "def-derivative"
+        ],
+        "dependency_level": 2,
+        "strategy": "Finite example computed from declared suppliers."
+      },
+      {
+        "id": "ex-quadratic-product-aliases-on-even-fourier-grid",
+        "kind": "example",
+        "title": "A quadratic Fourier product aliases two high modes on an even grid",
+        "deps": [
+          "def-periodic-fourier-collocation-grid",
+          "lem-periodic-fourier-mode-aliasing-under-sampling",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-quarter-turn-values-and-shift-formulas"
+        ],
+        "dependency_level": 2,
+        "strategy": "Finite example computed from declared suppliers."
+      },
+      {
+        "id": "ex-gaussian-and-simpson-weighted-mass-matrix-check",
+        "kind": "example",
+        "title": "Gaussian and Simpson mass assembly give distinct exact and approximate checks",
+        "deps": [
+          "def-countable-choice",
+          "def-gauss-moment-data",
+          "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+          "def-gauss-quadrature-rule",
+          "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-continuous-implies-integrable",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-subspace-topology-top",
+          "def-metric-topology",
+          "thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact",
+          "alg-gaussian-orthogonal-polynomial-galerkin-mass-matrix",
+          "def-legendre-polynomial-family-and-l2-pairing",
+          "lem-legendre-weighted-derivative-orthogonality-and-norm",
+          "def-chebyshev-arcsine-weighted-l2-pairing",
+          "lem-chebyshev-polynomials-orthogonal-in-arcsine-weight",
+          "alg-chebyshev-composite-simpson-weighted-mass-matrix",
+          "thm-composite-simpson-error-for-chebyshev-weighted-mass-matrix",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-chebyshev-multiple-angle-identities"
+        ],
+        "dependency_level": 10,
+        "strategy": "Finite example computed from declared suppliers."
+      }
+    ]
+  }
+]

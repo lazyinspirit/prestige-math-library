@@ -1,0 +1,588 @@
+[
+  {
+    "order": 2416,
+    "id": "certified-stationary-distribution-and-hitting-statistic-numerics",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Certified stationary distribution and hitting statistic numerics",
+    "companion": "certified-stationary-distribution-and-hitting-statistic-numerics-examples",
+    "requires": [
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "stationary-markov-chains-and-ergodic-limits",
+      "finite-precision-direct-factorizations",
+      "sparse-matrix-models-and-kernel-costs",
+      "krylov-methods-and-lanczos-convergence",
+      "finite-generator-master-equations-and-uniformization"
+    ],
+    "items": [
+      {
+        "id": "def-finite-column-stochastic-matrix-and-law",
+        "kind": "definition",
+        "title": "Finite column-stochastic matrices and probability vectors",
+        "statement": "Define the column-stochastic convention for finite Markov matrices, column probability vectors, and the transpose relation to the published row-transition convention.",
+        "deps": [
+          "def-transition-matrix-and-n-step-transition-probabilities"
+        ],
+        "dependency_level": 0,
+        "sources": [
+          {
+            "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, Chapter 11",
+            "url": "https://math.dartmouth.edu/~prob/prob/OLD/prob.pdf",
+            "locator": "Chapter 11 §§11.2–11.5, printed pp. 415–470; canonical absorbing form, finite-step absorption, fundamental matrix, absorption probabilities, mean exit time, and ergodic/periodic examples."
+          },
+          {
+            "title": "Ilse C. F. Ipsen and Teresa M. Selee, Ergodicity Coefficients Defined by Vector Norms",
+            "url": "https://ipsen.math.ncsu.edu/ps/simax75294.pdf",
+            "locator": "§3, Theorem 3.7 and Corollary 3.9, printed pp. 164–165; exact zero-sum ℓ1 operator coefficient, pairwise row-distance and overlap formulas. Transpose the stated row convention to the column convention here."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-finite-transient-block-geometric-escape",
+        "kind": "lemma",
+        "title": "Finite-step escape from a transient substochastic block",
+        "statement": "For a finite row-substochastic block in which every state has a positive path to a row with positive escape probability, construct L≤n and ε>0 such that T^L 1≤(1−ε)1; conclude spectral radius strictly below one.",
+        "deps": [],
+        "dependency_level": 0,
+        "sources": [
+          {
+            "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, Chapter 11",
+            "url": "https://math.dartmouth.edu/~prob/prob/OLD/prob.pdf",
+            "locator": "Chapter 11 §§11.2–11.5, printed pp. 415–470; canonical absorbing form, finite-step absorption, fundamental matrix, absorption probabilities, mean exit time, and ergodic/periodic examples."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "alg-finite-markov-closed-class-decomposition",
+        "kind": "algorithm",
+        "title": "Finite Markov closed-class graph decomposition",
+        "statement": "Given an exact finite column-stochastic matrix, compute its communicating classes, closed classes, and transient states by transitive closure of the source-to-destination graph.",
+        "deps": [
+          "def-finite-column-stochastic-matrix-and-law"
+        ],
+        "dependency_level": 1,
+        "sources": [
+          {
+            "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, Chapter 11",
+            "url": "https://math.dartmouth.edu/~prob/prob/OLD/prob.pdf",
+            "locator": "Chapter 11 §§11.2–11.5, printed pp. 415–470; canonical absorbing form, finite-step absorption, fundamental matrix, absorption probabilities, mean exit time, and ergodic/periodic examples."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-column-stochastic-l1-nonexpansive",
+        "kind": "lemma",
+        "title": "Column-stochastic matrices preserve mass and contract ℓ1",
+        "statement": "A finite nonnegative column-stochastic matrix preserves coordinate sums and is nonexpansive in the vector ℓ1 norm.",
+        "deps": [
+          "def-finite-column-stochastic-matrix-and-law"
+        ],
+        "dependency_level": 1,
+        "sources": [
+          {
+            "title": "Ilse C. F. Ipsen and Teresa M. Selee, Ergodicity Coefficients Defined by Vector Norms",
+            "url": "https://ipsen.math.ncsu.edu/ps/simax75294.pdf",
+            "locator": "§3, Theorem 3.7 and Corollary 3.9, printed pp. 164–165; exact zero-sum ℓ1 operator coefficient, pairwise row-distance and overlap formulas. Transpose the stated row convention to the column convention here."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-finite-transient-hitting-and-mean-exit-residual-bound",
+        "kind": "theorem",
+        "title": "Transient hitting, mean exit, and residual bounds",
+        "statement": "For a finite row-substochastic transient block satisfying the finite-step escape hypothesis, prove (I−T)^{-1}=ΣT^k≥0, bound its induced infinity norm by L/ε, identify hitting and mean exit statistics, and bound solve error from the residual.",
+        "deps": [
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "lem-finite-transient-block-geometric-escape"
+        ],
+        "dependency_level": 1,
+        "sources": [
+          {
+            "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, Chapter 11",
+            "url": "https://math.dartmouth.edu/~prob/prob/OLD/prob.pdf",
+            "locator": "Chapter 11 §§11.2–11.5, printed pp. 415–470; canonical absorbing form, finite-step absorption, fundamental matrix, absorption probabilities, mean exit time, and ergodic/periodic examples."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-irreducible-finite-class-has-unique-invariant-vector",
+        "kind": "theorem",
+        "title": "An irreducible finite class has a unique invariant vector",
+        "statement": "For a finite irreducible row-stochastic matrix, prove existence of a positive invariant probability and show every real invariant row vector is its scalar multiple.",
+        "deps": [
+          "def-finite-column-stochastic-matrix-and-law",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "thm-every-finite-transition-matrix-has-a-stationary-distribution"
+        ],
+        "dependency_level": 1,
+        "sources": [
+          {
+            "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, Chapter 11",
+            "url": "https://math.dartmouth.edu/~prob/prob/OLD/prob.pdf",
+            "locator": "Chapter 11 §§11.2–11.5, printed pp. 415–470; canonical absorbing form, finite-step absorption, fundamental matrix, absorption probabilities, mean exit time, and ergodic/periodic examples."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "lem-dobrushin-zero-sum-l1-coefficient",
+        "kind": "lemma",
+        "title": "Column-overlap formula for the zero-sum ℓ1 coefficient",
+        "statement": "For a finite column-stochastic P, identify the induced ℓ1 norm of P on the zero-sum subspace with half the maximum pairwise column distance and with one minus the minimum column overlap.",
+        "deps": [
+          "def-finite-column-stochastic-matrix-and-law",
+          "lem-column-stochastic-l1-nonexpansive"
+        ],
+        "dependency_level": 2,
+        "sources": [
+          {
+            "title": "Ilse C. F. Ipsen and Teresa M. Selee, Ergodicity Coefficients Defined by Vector Norms",
+            "url": "https://ipsen.math.ncsu.edu/ps/simax75294.pdf",
+            "locator": "§3, Theorem 3.7 and Corollary 3.9, printed pp. 164–165; exact zero-sum ℓ1 operator coefficient, pairwise row-distance and overlap formulas. Transpose the stated row convention to the column convention here."
+          },
+          {
+            "title": "Yuanyuan Liu, Perturbation Bounds for the Stationary Distributions of Markov Chains",
+            "url": "https://arxiv.org/pdf/1208.4974",
+            "locator": "§1, equations (1.1)–(1.4), and §2.1, Lemma 2.1 with proof, PDF pp. 1–5; ergodicity-coefficient perturbation bound and periodic m-skeleton restriction."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-finite-markov-closed-class-decomposition-correctness",
+        "kind": "theorem",
+        "title": "Correctness of finite Markov closed-class decomposition",
+        "statement": "For an admissible exact finite column-stochastic matrix, the graph procedure terminates and returns exactly the strongly connected components and closed classes of its positive-transition graph. Every state outside the closed classes has a positive path to a closed class; its transient block therefore satisfies the finite-step escape hypothesis.",
+        "deps": [
+          "def-finite-column-stochastic-matrix-and-law",
+          "alg-finite-markov-closed-class-decomposition",
+          "lem-finite-transient-block-geometric-escape"
+        ],
+        "dependency_level": 2,
+        "sources": [
+          {
+            "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, Chapter 11",
+            "url": "https://math.dartmouth.edu/~prob/prob/OLD/prob.pdf",
+            "locator": "§11.2, Theorem 11.3 and canonical form, printed pp. 416–420; finite paths from nonabsorbing states to recurrent absorbing classes are used in the local graph classification proof."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-corrected-stationary-residual-certificate",
+        "kind": "algorithm",
+        "title": "Correct and certify a finite-chain stationary candidate",
+        "statement": "For exact rational P and a rational raw vector y, clip and normalize its positive part, compute the correction distance, residual, and column-overlap coefficient of P^m, and return a certified bound or certificate-unavailable.",
+        "deps": [
+          "def-finite-column-stochastic-matrix-and-law",
+          "lem-dobrushin-zero-sum-l1-coefficient"
+        ],
+        "dependency_level": 3,
+        "sources": [
+          {
+            "title": "Ilse C. F. Ipsen and Teresa M. Selee, Ergodicity Coefficients Defined by Vector Norms",
+            "url": "https://ipsen.math.ncsu.edu/ps/simax75294.pdf",
+            "locator": "§3, Theorem 3.7 and Corollary 3.9, printed pp. 164–165; exact zero-sum ℓ1 operator coefficient, pairwise row-distance and overlap formulas. Transpose the stated row convention to the column convention here."
+          },
+          {
+            "title": "Yuanyuan Liu, Perturbation Bounds for the Stationary Distributions of Markov Chains",
+            "url": "https://arxiv.org/pdf/1208.4974",
+            "locator": "§1, equations (1.1)–(1.4), and §2.1, Lemma 2.1 with proof, PDF pp. 1–5; ergodicity-coefficient perturbation bound and periodic m-skeleton restriction."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-finite-chain-closed-class-cesaro-weight-decomposition",
+        "kind": "theorem",
+        "title": "Closed-class stationary laws and initial-law-dependent Cesàro weights",
+        "statement": "For a finite chain, classify all stationary laws as convex combinations of the unique laws on closed classes and prove that the Cesàro averages from an initial law converge to the mixture whose weights are its class-hitting probabilities.",
+        "deps": [
+          "def-finite-column-stochastic-matrix-and-law",
+          "def-transition-matrix-and-n-step-transition-probabilities",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "alg-finite-markov-closed-class-decomposition",
+          "lem-finite-transient-block-geometric-escape",
+          "thm-finite-transient-hitting-and-mean-exit-residual-bound",
+          "thm-irreducible-finite-class-has-unique-invariant-vector",
+          "thm-bolzano-weierstrass"
+        ],
+        "dependency_level": 3,
+        "sources": [
+          {
+            "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, Chapter 11",
+            "url": "https://math.dartmouth.edu/~prob/prob/OLD/prob.pdf",
+            "locator": "Chapter 11 §§11.2–11.5, printed pp. 415–470; canonical absorbing form, finite-step absorption, fundamental matrix, absorption probabilities, mean exit time, and ergodic/periodic examples."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-m-step-dobrushin-stationary-residual-bound",
+        "kind": "theorem",
+        "title": "m-step Dobrushin certificate for a stationary probability",
+        "statement": "If P is column-stochastic and its zero-sum ℓ1 coefficient q=δ(P^m)<1, prove uniqueness of its stationary probability and the residual bound ||x−π||₁≤||P^m x−x||₁/(1−q)≤m||Px−x||₁/(1−q).",
+        "deps": [
+          "def-finite-column-stochastic-matrix-and-law",
+          "lem-column-stochastic-l1-nonexpansive",
+          "lem-dobrushin-zero-sum-l1-coefficient",
+          "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+          "thm-every-finite-transition-matrix-has-a-stationary-distribution"
+        ],
+        "dependency_level": 3,
+        "sources": [
+          {
+            "title": "Ilse C. F. Ipsen and Teresa M. Selee, Ergodicity Coefficients Defined by Vector Norms",
+            "url": "https://ipsen.math.ncsu.edu/ps/simax75294.pdf",
+            "locator": "§3, Theorem 3.7 and Corollary 3.9, printed pp. 164–165; exact zero-sum ℓ1 operator coefficient, pairwise row-distance and overlap formulas. Transpose the stated row convention to the column convention here."
+          },
+          {
+            "title": "Yuanyuan Liu, Perturbation Bounds for the Stationary Distributions of Markov Chains",
+            "url": "https://arxiv.org/pdf/1208.4974",
+            "locator": "§1, equations (1.1)–(1.4), and §2.1, Lemma 2.1 with proof, PDF pp. 1–5; ergodicity-coefficient perturbation bound and periodic m-skeleton restriction."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-one-closed-class-augmented-stationary-system-is-nonsingular",
+        "kind": "theorem",
+        "title": "One closed class makes the normalized stationary system nonsingular",
+        "statement": "If a finite column-stochastic matrix has exactly one closed class, prove its real fixed space is one-dimensional and that replacing any row of I−P by 1ᵀ yields a nonsingular augmented stationary system.",
+        "deps": [
+          "def-finite-column-stochastic-matrix-and-law",
+          "alg-finite-markov-closed-class-decomposition",
+          "lem-finite-transient-block-geometric-escape",
+          "thm-irreducible-finite-class-has-unique-invariant-vector"
+        ],
+        "dependency_level": 3,
+        "sources": [
+          {
+            "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, Chapter 11",
+            "url": "https://math.dartmouth.edu/~prob/prob/OLD/prob.pdf",
+            "locator": "Chapter 11 §§11.2–11.5, printed pp. 415–470; canonical absorbing form, finite-step absorption, fundamental matrix, absorption probabilities, mean exit time, and ergodic/periodic examples."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-corrected-stationary-residual-certificate-soundness",
+        "kind": "theorem",
+        "title": "Termination and soundness of the corrected stationary residual certificate",
+        "statement": "Every successful output of the correction-and-certificate algorithm bounds the ℓ1 distance from the raw vector to the unique stationary probability, including the explicit correction ledger.",
+        "deps": [
+          "alg-corrected-stationary-residual-certificate",
+          "thm-m-step-dobrushin-stationary-residual-bound"
+        ],
+        "dependency_level": 4,
+        "sources": [
+          {
+            "title": "Ilse C. F. Ipsen and Teresa M. Selee, Ergodicity Coefficients Defined by Vector Norms",
+            "url": "https://ipsen.math.ncsu.edu/ps/simax75294.pdf",
+            "locator": "§3, Theorem 3.7 and Corollary 3.9, printed pp. 164–165; exact zero-sum ℓ1 operator coefficient, pairwise row-distance and overlap formulas. Transpose the stated row convention to the column convention here."
+          },
+          {
+            "title": "Yuanyuan Liu, Perturbation Bounds for the Stationary Distributions of Markov Chains",
+            "url": "https://arxiv.org/pdf/1208.4974",
+            "locator": "§1, equations (1.1)–(1.4), and §2.1, Lemma 2.1 with proof, PDF pp. 1–5; ergodicity-coefficient perturbation bound and periodic m-skeleton restriction."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "cor-uniformized-generator-stationary-residual-certificate",
+        "kind": "corollary",
+        "title": "Uniformized finite-generator stationary residual certificate",
+        "statement": "For a finite column generator Q and an admissible uniformization rate ν>0, specialize the m-step residual certificate to P=I+Q/ν and residual Qx/ν; identify Q-stationary vectors with stationary solutions of the finite master equation.",
+        "deps": [
+          "alg-corrected-stationary-residual-certificate",
+          "thm-m-step-dobrushin-stationary-residual-bound",
+          "def-xd-finite-column-generator",
+          "lem-xd-uniformized-matrix-is-stochastic",
+          "thm-xd-finite-generator-master-equation-uniformization"
+        ],
+        "dependency_level": 5,
+        "sources": [
+          {
+            "title": "Ilse C. F. Ipsen and Teresa M. Selee, Ergodicity Coefficients Defined by Vector Norms",
+            "url": "https://ipsen.math.ncsu.edu/ps/simax75294.pdf",
+            "locator": "§3, Theorem 3.7 and Corollary 3.9, printed pp. 164–165; exact zero-sum ℓ1 operator coefficient, pairwise row-distance and overlap formulas. Transpose the stated row convention to the column convention here."
+          },
+          {
+            "title": "Yuanyuan Liu, Perturbation Bounds for the Stationary Distributions of Markov Chains",
+            "url": "https://arxiv.org/pdf/1208.4974",
+            "locator": "§1, equations (1.1)–(1.4), and §2.1, Lemma 2.1 with proof, PDF pp. 1–5; ergodicity-coefficient perturbation bound and periodic m-skeleton restriction."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-stationary-generator-solve-and-model-error-ledger",
+        "kind": "theorem",
+        "title": "Separate stationary solve residual from generator error",
+        "statement": "Under an m-step contraction certificate for the true uniformized generator, bound the error of a corrected candidate by the sum of its approximate-generator solve residual and the generator-model discrepancy, divided by ν(1−q) and multiplied by m.",
+        "deps": [
+          "alg-corrected-stationary-residual-certificate",
+          "cor-uniformized-generator-stationary-residual-certificate"
+        ],
+        "dependency_level": 6,
+        "sources": [
+          {
+            "title": "Ilse C. F. Ipsen and Teresa M. Selee, Ergodicity Coefficients Defined by Vector Norms",
+            "url": "https://ipsen.math.ncsu.edu/ps/simax75294.pdf",
+            "locator": "§3, Theorem 3.7 and Corollary 3.9, printed pp. 164–165; exact zero-sum ℓ1 operator coefficient, pairwise row-distance and overlap formulas. Transpose the stated row convention to the column convention here."
+          },
+          {
+            "title": "Yuanyuan Liu, Perturbation Bounds for the Stationary Distributions of Markov Chains",
+            "url": "https://arxiv.org/pdf/1208.4974",
+            "locator": "§1, equations (1.1)–(1.4), and §2.1, Lemma 2.1 with proof, PDF pp. 1–5; ergodicity-coefficient perturbation bound and periodic m-skeleton restriction."
+          }
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2417,
+    "id": "certified-stationary-distribution-and-hitting-statistic-numerics-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Certified stationary distribution and hitting statistic numerics — Examples",
+    "companion": "certified-stationary-distribution-and-hitting-statistic-numerics",
+    "requires": [
+      "certified-stationary-distribution-and-hitting-statistic-numerics"
+    ],
+    "items": [
+      {
+        "id": "ex-xd-finite-credit-absorption-hitting-statistics",
+        "kind": "example",
+        "title": "Finite credit reserve: certified absorption statistics",
+        "statement": "For a symmetric four-credit gambler’s-ruin chain, compute the probability of success and mean exit time from each transient credit level, with a finite-step escape and residual bound.",
+        "deps": [
+          "thm-finite-transient-hitting-and-mean-exit-residual-bound",
+          "thm-finite-chain-closed-class-cesaro-weight-decomposition"
+        ],
+        "dependency_level": 4,
+        "sources": [
+          {
+            "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, Chapter 11",
+            "url": "https://math.dartmouth.edu/~prob/prob/OLD/prob.pdf",
+            "locator": "Chapter 11 §§11.2–11.5, printed pp. 415–470; canonical absorbing form, finite-step absorption, fundamental matrix, absorption probabilities, mean exit time, and ergodic/periodic examples."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "ex-xd-nearly-reducible-chain-residual-and-ill-conditioning",
+        "kind": "example",
+        "title": "A small residual can hide a large stationary error",
+        "statement": "Compute an exact two-state nearly reducible chain, its stationary law, candidate residual, overlap coefficient, and sharp residual certificate.",
+        "deps": [
+          "lem-dobrushin-zero-sum-l1-coefficient",
+          "thm-m-step-dobrushin-stationary-residual-bound",
+          "alg-corrected-stationary-residual-certificate"
+        ],
+        "dependency_level": 4,
+        "sources": [
+          {
+            "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, Chapter 11",
+            "url": "https://math.dartmouth.edu/~prob/prob/OLD/prob.pdf",
+            "locator": "Chapter 11 §§11.2–11.5, printed pp. 415–470; canonical absorbing form, finite-step absorption, fundamental matrix, absorption probabilities, mean exit time, and ergodic/periodic examples."
+          },
+          {
+            "title": "Ilse C. F. Ipsen and Teresa M. Selee, Ergodicity Coefficients Defined by Vector Norms",
+            "url": "https://ipsen.math.ncsu.edu/ps/simax75294.pdf",
+            "locator": "§3, Theorem 3.7 and Corollary 3.9, printed pp. 164–165; exact zero-sum ℓ1 operator coefficient, pairwise row-distance and overlap formulas. Transpose the stated row convention to the column convention here."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "ex-xd-periodic-iteration-versus-stationarity",
+        "kind": "example",
+        "title": "Periodic iteration can fail while the stationary solve is well-defined",
+        "statement": "Show a two-state periodic chain has a unique stationary probability although ordinary power iteration oscillates, and verify that lazification yields a zero-overlap contraction certificate.",
+        "deps": [
+          "lem-dobrushin-zero-sum-l1-coefficient",
+          "thm-m-step-dobrushin-stationary-residual-bound",
+          "alg-corrected-stationary-residual-certificate",
+          "thm-irreducible-finite-class-has-unique-invariant-vector"
+        ],
+        "dependency_level": 4,
+        "sources": [
+          {
+            "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, Chapter 11",
+            "url": "https://math.dartmouth.edu/~prob/prob/OLD/prob.pdf",
+            "locator": "Chapter 11 §§11.2–11.5, printed pp. 415–470; canonical absorbing form, finite-step absorption, fundamental matrix, absorption probabilities, mean exit time, and ergodic/periodic examples."
+          },
+          {
+            "title": "Ilse C. F. Ipsen and Teresa M. Selee, Ergodicity Coefficients Defined by Vector Norms",
+            "url": "https://ipsen.math.ncsu.edu/ps/simax75294.pdf",
+            "locator": "§3, Theorem 3.7 and Corollary 3.9, printed pp. 164–165; exact zero-sum ℓ1 operator coefficient, pairwise row-distance and overlap formulas. Transpose the stated row convention to the column convention here."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "ex-xd-reducible-absorbing-class-weights",
+        "kind": "example",
+        "title": "Two absorbing classes retain initial-law-dependent weights",
+        "statement": "For the identity transition matrix, compute every stationary law, both closed classes, the Cesàro limit, and the failure of a unique global contraction certificate.",
+        "deps": [
+          "alg-finite-markov-closed-class-decomposition",
+          "thm-finite-chain-closed-class-cesaro-weight-decomposition",
+          "lem-dobrushin-zero-sum-l1-coefficient",
+          "alg-corrected-stationary-residual-certificate",
+          "thm-finite-markov-closed-class-decomposition-correctness"
+        ],
+        "dependency_level": 4,
+        "sources": [
+          {
+            "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, Chapter 11",
+            "url": "https://math.dartmouth.edu/~prob/prob/OLD/prob.pdf",
+            "locator": "Chapter 11 §§11.2–11.5, printed pp. 415–470; canonical absorbing form, finite-step absorption, fundamental matrix, absorption probabilities, mean exit time, and ergodic/periodic examples."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "ex-xd-birth-death-uniformization-detailed-balance",
+        "kind": "example",
+        "title": "A three-state birth–death generator and detailed balance",
+        "statement": "Uniformize an exact three-state birth–death generator, verify detailed balance for its transpose row kernel, and calculate the stationary probability vector.",
+        "deps": [
+          "def-xd-finite-column-generator",
+          "alg-corrected-stationary-residual-certificate",
+          "cor-uniformized-generator-stationary-residual-certificate",
+          "lem-detailed-balance-implies-invariance"
+        ],
+        "dependency_level": 6,
+        "sources": [
+          {
+            "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, Chapter 11",
+            "url": "https://math.dartmouth.edu/~prob/prob/OLD/prob.pdf",
+            "locator": "Chapter 11 §§11.2–11.5, printed pp. 415–470; canonical absorbing form, finite-step absorption, fundamental matrix, absorption probabilities, mean exit time, and ergodic/periodic examples."
+          }
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "justified_by": []
+      }
+    ]
+  }
+]

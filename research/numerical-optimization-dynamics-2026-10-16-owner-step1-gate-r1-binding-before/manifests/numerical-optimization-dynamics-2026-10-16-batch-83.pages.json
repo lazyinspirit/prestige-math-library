@@ -1,0 +1,398 @@
+[
+  {
+    "order": 2450,
+    "id": "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Riemannian optimization on stiefel and grassmann manifolds",
+    "companion": "riemannian-optimization-on-stiefel-and-grassmann-manifolds-examples",
+    "requires": [
+      "gradient-like-vector-fields-and-morse-trajectories",
+      "riemannian-metrics-length-distance-and-volume",
+      "finite-precision-direct-factorizations",
+      "krylov-methods-and-lanczos-convergence",
+      "nonconvex-line-search-and-inexact-newton-methods",
+      "trust-region-and-cubic-regularization-methods"
+    ],
+    "items": [
+      {
+        "id": "def-stiefel-grassmann-optimization-conventions",
+        "kind": "definition",
+        "title": "Real Stiefel and Grassmann optimization conventions",
+        "statement": "Fix the real Stiefel space St(n,r)={X in R^(n by r): X^T X=I_r}, the quotient Grassmannian Gr(r,n)=St(n,r)/O(r), and the Frobenius inner products used on their tangent and horizontal representatives.",
+        "deps": [
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "def-grassmannian-subspaces",
+          "def-riemannian-metric-and-riemannian-manifold",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-complex-stiefel-grassmann-optimization-conventions",
+        "kind": "definition",
+        "title": "Complex Stiefel and Grassmann optimization conventions",
+        "statement": "Define the complex Stiefel manifold St_C(n,r), its unitary quotient Gr_C(r,n), and the real Frobenius metric Re tr(U*V) on complex tangent spaces and horizontal representatives.",
+        "deps": [
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "def-riemannian-metric-and-riemannian-manifold",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-stiefel-grassmann-are-compact",
+        "kind": "proposition",
+        "title": "Finite-dimensional Stiefel and Grassmann manifolds are compact",
+        "statement": "For 1<=r<=n, St(n,r) is a nonempty closed bounded subset of R^(n by r), and Gr(r,n) is its continuous quotient image; hence both are compact.",
+        "strategy": "direct",
+        "deps": [
+          "def-stiefel-grassmann-optimization-conventions",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "thm-continuous-image-of-a-compact-space-is-compact"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "prop-complex-stiefel-grassmann-are-compact",
+        "kind": "proposition",
+        "title": "Finite-dimensional complex Stiefel and Grassmann manifolds are compact",
+        "statement": "For 1<=r<=n, St_C(n,r) is a nonempty closed bounded subset of R^(2nr), and Gr_C(r,n) is its continuous quotient image; hence both are compact.",
+        "strategy": "direct",
+        "deps": [
+          "def-complex-stiefel-grassmann-optimization-conventions",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "thm-continuous-image-of-a-compact-space-is-compact"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-stiefel-grassmann-tangent-projections",
+        "kind": "theorem",
+        "title": "Tangent spaces and Frobenius projections on Stiefel and Grassmann",
+        "statement": "For X in St(n,r), identify T_X St(n,r) with {Z:X^T Z+Z^T X=0} and its Frobenius projection with G-X sym(X^T G); identify T_[X]Gr(r,n) with horizontal representatives X^T Z=0 and project G horizontally as (I-XX^T)G.",
+        "strategy": "direct",
+        "deps": [
+          "def-stiefel-grassmann-optimization-conventions",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "prop-tangent-space-of-a-regular-level-set-is-the-kernel"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-complex-stiefel-grassmann-tangent-projections",
+        "kind": "theorem",
+        "title": "Complex Stiefel and Grassmann tangent projections",
+        "statement": "For complex orthonormal X, T_X St_C={Z:X*Z+Z*X=0} and the real-Frobenius Stiefel projection is G-X Herm(X*G); complex Grassmann tangent representatives are horizontal X*Z=0 with projection (I-XX*)G.",
+        "strategy": "direct",
+        "deps": [
+          "def-complex-stiefel-grassmann-optimization-conventions",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "prop-tangent-space-of-a-regular-level-set-is-the-kernel"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "prop-stiefel-grassmann-riemannian-gradient-formulas",
+        "kind": "proposition",
+        "title": "Projected Euclidean gradients are the Stiefel and Grassmann gradients",
+        "statement": "For a smooth ambient objective, the induced Frobenius Riemannian gradient on St(n,r) is G-X sym(X^T G); if the objective is invariant under X to XQ for Q in O(r), the descended Grassmann gradient is (I-XX^T)G, and its zeros are precisely critical points.",
+        "strategy": "direct",
+        "deps": [
+          "def-stiefel-grassmann-optimization-conventions",
+          "thm-stiefel-grassmann-tangent-projections",
+          "def-riemannian-gradient-of-a-smooth-function",
+          "lem-riemannian-gradient-vanishes-exactly-at-critical-points",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "def-stiefel-space-grassmannian-and-tautological-bundle"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "def-complex-grassmann-polar-retraction",
+        "kind": "definition",
+        "title": "Polar retraction on the complex Grassmannian",
+        "statement": "For horizontal eta at [X] in complex Grassmann, define R_[X](eta) as the column space of (X+eta)((X+eta)*(X+eta))^(-1/2); the horizontal condition makes this defined for every eta and unitary-equivariant.",
+        "deps": [
+          "def-complex-stiefel-grassmann-optimization-conventions",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "thm-complex-stiefel-grassmann-tangent-projections",
+          "lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-complex-grassmann-polar-retraction-is-first-order",
+        "kind": "theorem",
+        "title": "The complex Grassmann polar map is a first-order retraction",
+        "statement": "The complex polar map is smooth on the horizontal tangent bundle, fixes zero, has identity differential there, and is independent of the orthonormal frame representative.",
+        "strategy": "direct",
+        "deps": [
+          "def-complex-grassmann-polar-retraction",
+          "def-complex-stiefel-grassmann-optimization-conventions",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "thm-complex-stiefel-grassmann-tangent-projections",
+          "lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots",
+          "lem-matrix-inversion-preserves-ck-regularity"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "prop-complex-grassmann-projector-energy-gradient",
+        "kind": "proposition",
+        "title": "Gradient of a unitary-invariant Hermitian projector energy",
+        "statement": "If E is a real C1 function of Hermitian matrices with Hermitian Frobenius gradient K(P), then E(XX*) descends to complex Grassmann and has horizontal gradient 2(I-XX*)K(XX*)X.",
+        "strategy": "direct",
+        "deps": [
+          "def-complex-stiefel-grassmann-optimization-conventions",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "thm-complex-stiefel-grassmann-tangent-projections",
+          "thm-complex-grassmann-polar-retraction-is-first-order",
+          "def-riemannian-gradient-of-a-smooth-function"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "def-stiefel-qr-polar-retractions",
+        "kind": "definition",
+        "title": "QR and polar retractions on Stiefel and Grassmann",
+        "statement": "For tangent eta with X+eta full column rank, define the Stiefel QR retraction as the positive-diagonal reduced-QR Q factor and the polar retraction as (X+eta)((X+eta)^T(X+eta))^(-1/2); descend each to Grassmann by taking the column space.",
+        "deps": [
+          "def-stiefel-grassmann-optimization-conventions",
+          "thm-stiefel-grassmann-tangent-projections",
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "thm-gram-schmidt-orthonormalisation",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots",
+          "thm-scaled-householder-qr-backward-stability"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-stiefel-retractions-are-first-order",
+        "kind": "theorem",
+        "title": "The QR and polar maps are first-order Stiefel and Grassmann retractions",
+        "statement": "On their full-rank domains, the positive-diagonal QR and polar maps are smooth, map into St(n,r), fix eta=0, and have differential the identity there; both induced Grassmann maps are representative-independent and first-order.",
+        "strategy": "direct",
+        "deps": [
+          "def-stiefel-qr-polar-retractions",
+          "thm-stiefel-grassmann-tangent-projections",
+          "thm-gram-schmidt-orthonormalisation",
+          "lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots",
+          "lem-matrix-inversion-preserves-ck-regularity"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "alg-riemannian-armijo-backtracking",
+        "kind": "algorithm",
+        "title": "Finite-budget retraction Armijo backtracking",
+        "statement": "For a nonstationary Stiefel or invariant Grassmann objective, test t=1,beta,beta^2,... up to a finite cap, reject rank-invalid trial points, and return the first retracted point satisfying the Armijo sufficient-decrease inequality or an explicit failure status.",
+        "deps": [
+          "def-stiefel-grassmann-optimization-conventions",
+          "thm-stiefel-grassmann-tangent-projections",
+          "prop-stiefel-grassmann-riemannian-gradient-formulas",
+          "def-stiefel-qr-polar-retractions",
+          "thm-stiefel-retractions-are-first-order"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "alg-riemannian-trust-region",
+        "kind": "algorithm",
+        "title": "Finite-budget Riemannian trust-region method",
+        "statement": "Form the pullback quadratic model, use a Cauchy-decrease step or a finite-budget candidate satisfying the Cauchy fraction, apply the small-radius safeguard, and update the retracted actual-to-predicted ratio with the OPT3 eta and gamma branches.",
+        "deps": [
+          "def-stiefel-grassmann-optimization-conventions",
+          "def-complex-stiefel-grassmann-optimization-conventions",
+          "thm-stiefel-grassmann-tangent-projections",
+          "thm-complex-stiefel-grassmann-tangent-projections",
+          "prop-stiefel-grassmann-riemannian-gradient-formulas",
+          "prop-complex-grassmann-projector-energy-gradient",
+          "def-stiefel-qr-polar-retractions",
+          "thm-stiefel-retractions-are-first-order",
+          "def-complex-grassmann-polar-retraction",
+          "thm-complex-grassmann-polar-retraction-is-first-order",
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-trust-region-cauchy-step",
+          "lem-trust-region-cauchy-decrease",
+          "alg-trust-region-method"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "def-stiefel-grassmann-projected-vector-transport",
+        "kind": "definition",
+        "title": "Projected vector transport on Stiefel and Grassmann",
+        "statement": "Given a retraction endpoint Y, transport a Stiefel tangent Z by Z-Y sym(Y^T Z), and transport a Grassmann horizontal representative Z by (I-YY^T)Z.",
+        "deps": [
+          "def-stiefel-grassmann-optimization-conventions",
+          "thm-stiefel-grassmann-tangent-projections",
+          "def-stiefel-qr-polar-retractions",
+          "thm-stiefel-retractions-are-first-order"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-riemannian-trust-region-ratio-accuracy-for-small-radii",
+        "kind": "lemma",
+        "title": "Retraction trust-region ratios are accurate at small radii",
+        "statement": "For a first-order retraction with uniformly Lipschitz pullback gradients and a bounded self-adjoint model, the Cauchy-fraction safeguard makes the actual-to-predicted ratio at least eta_2 below an explicit radius proportional to the gradient norm.",
+        "strategy": "direct",
+        "deps": [
+          "alg-riemannian-trust-region",
+          "thm-stiefel-retractions-are-first-order",
+          "thm-complex-grassmann-polar-retraction-is-first-order",
+          "alg-trust-region-cauchy-step",
+          "lem-trust-region-cauchy-decrease",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "prop-stiefel-grassmann-vector-transport-is-tangent",
+        "kind": "proposition",
+        "title": "Projected vector transports return tangent representatives",
+        "statement": "The two projected transport formulas are linear maps into the tangent space at the retracted point and the Grassmann formula is invariant under orthogonal changes of representative.",
+        "strategy": "direct",
+        "deps": [
+          "def-stiefel-grassmann-projected-vector-transport",
+          "thm-stiefel-grassmann-tangent-projections",
+          "thm-stiefel-retractions-are-first-order"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-retraction-armijo-acceptance-and-step-lower-bound",
+        "kind": "theorem",
+        "title": "Uniform pullback smoothness guarantees an Armijo step",
+        "statement": "If pullback gradients are uniformly L_R-Lipschitz on unit tangent balls and the Riemannian gradient is uniformly bounded by G, the rank-guarded finite backtracking accepts a step whenever its cap reaches delta=min(1,1/(2G),2(1-a)/L_R), with accepted t at least beta delta.",
+        "strategy": "direct",
+        "deps": [
+          "alg-riemannian-armijo-backtracking",
+          "thm-stiefel-retractions-are-first-order",
+          "prop-stiefel-grassmann-riemannian-gradient-formulas",
+          "prop-stiefel-grassmann-are-compact",
+          "thm-extreme-value-metric",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-retraction-armijo-best-iterate-complexity",
+        "kind": "theorem",
+        "title": "Retraction Armijo reaches an epsilon-gradient iterate in finite budget",
+        "statement": "If f is bounded below and every Armijo call reaches the uniform accepted-step bound, then among N accepted updates the best gradient norm squared is at most (f(X_0)-f_inf)/(a beta delta N), giving O(epsilon^(-2)) accepted steps to gradient norm epsilon.",
+        "strategy": "direct",
+        "deps": [
+          "thm-retraction-armijo-acceptance-and-step-lower-bound",
+          "alg-riemannian-armijo-backtracking"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-riemannian-trust-region-first-order-complexity",
+        "kind": "theorem",
+        "title": "Riemannian trust regions reach an epsilon-gradient iterate",
+        "statement": "Under uniform pullback-gradient Lipschitzness, bounded model operators, the Cauchy-fraction and small-radius safeguards, and bounded objective below, the finite-budget Riemannian trust-region method reaches gradient norm epsilon in O(epsilon^(-2)) accepted and rejected outer trials.",
+        "strategy": "direct",
+        "deps": [
+          "alg-riemannian-trust-region",
+          "lem-riemannian-trust-region-ratio-accuracy-for-small-radii",
+          "lem-trust-region-cauchy-decrease",
+          "prop-stiefel-grassmann-are-compact",
+          "prop-complex-stiefel-grassmann-are-compact",
+          "thm-extreme-value-metric",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "lem-natural-logarithm-bounded-by-argument",
+          "thm-of-archimedean",
+          "lem-geometric-sequence-null"
+        ],
+        "dependency_level": 8
+      }
+    ]
+  },
+  {
+    "order": 2451,
+    "id": "riemannian-optimization-on-stiefel-and-grassmann-manifolds-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Riemannian optimization on stiefel and grassmann manifolds — Examples",
+    "companion": "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+    "requires": [
+      "riemannian-optimization-on-stiefel-and-grassmann-manifolds"
+    ],
+    "items": [
+      {
+        "id": "ex-repeated-eigenspace-on-grassmann",
+        "kind": "example",
+        "title": "A repeated eigenvalue gives a continuum of Grassmann minimizers",
+        "statement": "For A=diag(0,0,2), the rank-one trace objective on Gr(1,3) has every line in span(e_1,e_2) as a global minimizer.",
+        "deps": [
+          "def-stiefel-grassmann-optimization-conventions",
+          "thm-stiefel-grassmann-tangent-projections",
+          "prop-stiefel-grassmann-riemannian-gradient-formulas"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-riemannian-stiefel-nonconvex-saddle",
+        "kind": "example",
+        "title": "A strict saddle of a quadratic Stiefel objective",
+        "statement": "For A=diag(0,1,2), the objective x^T A x on St(3,1) has a critical point at e_2 with a descending tangent curve and an ascending tangent curve.",
+        "deps": [
+          "def-stiefel-grassmann-optimization-conventions",
+          "thm-stiefel-grassmann-tangent-projections",
+          "prop-stiefel-grassmann-riemannian-gradient-formulas"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-trace-eigenspace-optimization-with-lanczos-start-angle",
+        "kind": "example",
+        "title": "A trace eigenspace objective and a Lanczos start-angle bound",
+        "statement": "For A=diag(5,2,0), minimize -tr(X^T A X) on St(3,1); compute a two-dimensional Krylov candidate and check its objective gap and the source theorem's start-angle bound.",
+        "deps": [
+          "def-stiefel-grassmann-optimization-conventions",
+          "thm-stiefel-grassmann-tangent-projections",
+          "prop-stiefel-grassmann-riemannian-gradient-formulas",
+          "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-finite-basis-projector-optimization-on-grassmann",
+        "kind": "example",
+        "title": "Complex finite-basis PC-VAR optimization on Grassmann",
+        "statement": "The complex finite-basis PC-VAR model defines a real C2 energy E(P) and Hermitian gradient F(P) on rank-r orthogonal projectors. The parameterization P=XX* is unitary-invariant, has Grassmann gradient 2(I-P)F(P)X, and supports complex-polar trust-region optimization with the proved O(epsilon^-2) trial bound.",
+        "deps": [
+          "def-stiefel-grassmann-optimization-conventions",
+          "thm-stiefel-grassmann-tangent-projections",
+          "prop-stiefel-grassmann-riemannian-gradient-formulas",
+          "alg-riemannian-trust-region",
+          "thm-stiefel-retractions-are-first-order",
+          "thm-gram-schmidt-orthonormalisation",
+          "def-complex-stiefel-grassmann-optimization-conventions",
+          "thm-complex-stiefel-grassmann-tangent-projections",
+          "prop-complex-stiefel-grassmann-are-compact",
+          "prop-complex-grassmann-projector-energy-gradient",
+          "def-complex-grassmann-polar-retraction",
+          "thm-complex-grassmann-polar-retraction-is-first-order",
+          "thm-riemannian-trust-region-first-order-complexity",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-extreme-value-metric",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "forward_refs": [
+          "def-finite-basis-projector-energy-model",
+          "prop-finite-projector-energy-reality-and-gradient"
+        ],
+        "dependency_level": 9
+      }
+    ]
+  }
+]

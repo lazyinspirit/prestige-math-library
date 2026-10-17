@@ -1,0 +1,623 @@
+[
+  {
+    "kind": "page",
+    "consumer": "operator-splitting-admm-and-primal-dual-methods",
+    "supplier": "sparse-matrix-models-and-kernel-costs",
+    "status": "interface-matched",
+    "examined_supplier_items": [
+      "def-csr-matrix-with-stored-entry-semantics",
+      "alg-csr-matrix-vector-product-with-validation",
+      "thm-csr-matvec-returns-the-represented-matrix-product",
+      "thm-csr-storage-and-exact-matvec-cost"
+    ],
+    "required_hypotheses": "A valid CSR record has row_ptr endpoints and monotone row intervals, stored columns in range, and vector dimension matching n. Exact matrix-vector correctness applies to valid records; storage and operation counts are in stored-entry count s, not necessarily nnz unless canonical.",
+    "affected_claims": [
+      "ex-two-pixel-pdhg-total-variation-step: CSR record for K=[-1,1], exact product, and exact storage/operation count."
+    ],
+    "local_route": "Actual CSR row (0,2), columns (0,1), values (-1,1), m=1,s=2 pass valid-record/matching-dimension premises; 2s+m+1=6 slots, two multiplies/adds and one initialization. Exact arithmetic only.",
+    "supplier_excerpts": [
+      {
+        "item": "def-csr-matrix-with-stored-entry-semantics",
+        "section": "Definition",
+        "excerpt": "Let $F$ be a field, and let $m,n,s\\in\\mathbb N$, where $\\mathbb N$ includes\n$0$. A **compressed sparse row (CSR) record** for an $m$ by $n$ matrix over\n$F$ consists of integer arrays $r=(r_0,\\ldots,r_m)$ and\n$c=(c_0,\\ldots,c_{s-1})$, and a value array $v=(v_0,\\ldots,v_{s-1})\\in F^s$,\nsatisfying\n\n$$r_0=0,\\qquad 0=r_0\\le r_1\\le\\cdots\\le r_m=s,\\qquad 0\\le c_t<n\\quad(0\\le t<s).$$\n\nFor each row $i<m$, its **stored entries** are the indices\n$t$ with $r_i\\le t<r_{i+1}$. The row is empty exactly when\n$r"
+      },
+      {
+        "item": "thm-csr-matvec-returns-the-represented-matrix-product",
+        "section": "Statement",
+        "excerpt": "Let $F$ be a field, let $m,n\\in\\mathbb N$, let a valid CSR record represent\n$A\\in M_{m\\times n}(F)$, and let $x=(x_j)_{j<n}\\in F^n$. Define\n$(Ax)_i:=\\sum_{j<n}A_{ij}x_j$, the usual matrix-vector product from\n[[def-matrix-product-and-identity-matrix]]. Then the algorithm\n[[alg-csr-matrix-vector-product-with-validation]] returns `ok` with output\n$Ax$ in exact field arithmetic."
+      },
+      {
+        "item": "thm-csr-storage-and-exact-matvec-cost",
+        "section": "Statement",
+        "excerpt": "Let $F$ be a field, let $m,n\\in\\mathbb N$, and let a valid CSR record have\n$s$ stored entries. Its input arrays use exactly $s$ field-value slots, $s$\ninteger column-index slots, and $m+1$ integer row-pointer slots, for a total of\n$2s+m+1$ data slots. On valid input, the algorithm\n[[alg-csr-matrix-vector-product-with-validation]] performs exactly $s$ field\nmultiplications, $s$ field additions, and $m$ zero initializations. Its index\nvalidation and loop-control work is $O(m+s+1)$. Counting the CS"
+      }
+    ],
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 0,
+      "result": "matching-current-interface",
+      "details": "Actual CSR row (0,2), columns (0,1), values (-1,1), m=1,s=2 pass valid-record/matching-dimension premises; 2s+m+1=6 slots, two multiplies/adds and one initialization. Exact arithmetic only."
+    },
+    "author_handoff_evidence": "The controlling plan-spec row and batch-60 manifest declare this page prerequisite. The current supplier carriers were inspected and are draft; body completeness does not establish acceptance.",
+    "author_handoff_local_route": "The B example supplies row_ptr=(0,2), col_idx=(0,1), values=(-1,1), checks the record directly, expands Kx=-x_0+x_1, and records 6 input slots, two field multiplies, two additions, and one initialization. No general sparse-performance claim is made."
+  },
+  {
+    "kind": "page",
+    "consumer": "operator-splitting-admm-and-primal-dual-methods",
+    "supplier": "inequality-kkt-duality-and-optimality-certificates",
+    "status": "interface-matched",
+    "examined_supplier_items": [
+      "def-convex-program-duality-and-slater-condition",
+      "thm-lagrangian-weak-duality"
+    ],
+    "required_hypotheses": "The supplier definition uses a finite-dimensional convex program with a full-row-rank equality matrix after redundant rows are removed; weak duality requires a primal feasible point and dual-feasible multipliers. In the scalar example the equality row [1,-1] has rank one and there are no inequality multipliers.",
+    "affected_claims": [
+      "ex-consensus-admm-least-squares: exact dual function, weak-duality comparison, and y*=1 optimality."
+    ],
+    "local_route": "Actual consensus equality row (1,-1) has rank one and no inequalities; direct d(y)=1-(y-1)^2 and saddle algebra match weak-duality interface, with no Slater/strong-duality import.",
+    "supplier_excerpts": [
+      {
+        "item": "def-convex-program-duality-and-slater-condition",
+        "section": "Definition",
+        "excerpt": "A subset is convex when it contains the segment joining each pair of its\npoints ([[def-convex-subset-of-euclidean-space]]). A function\n$F:\\mathbb R^n\\to(-\\infty,+\\infty]$ is proper if it never equals\n$-\\infty$ and is finite at at least one point. Its domain is\n$\\operatorname{dom}F=\\{x:F(x)<+\\infty\\}$. Its epigraph is\n$\\operatorname{epi}F=\\{(x,t):F(x)\\le t\\}$. It is closed convex when its\nepigraph is a closed convex set. For a nonempty convex set $S$,\n$\\operatorname{aff}S$ is its smallest contain"
+      },
+      {
+        "item": "thm-lagrangian-weak-duality",
+        "section": "Statement",
+        "excerpt": "For the convex program and Lagrangian dual of\n[[def-convex-program-duality-and-slater-condition]], every primal feasible\n$x$ and every dual feasible $(\\lambda,\\nu)$ satisfy\n$$q(\\lambda,\\nu)\\le f_0(x).$$\nConsequently, when the primal feasible set is nonempty, $d^*\\le p^*$."
+      }
+    ],
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 1,
+      "result": "matching-current-interface",
+      "details": "Actual consensus equality row (1,-1) has rank one and no inequalities; direct d(y)=1-(y-1)^2 and saddle algebra match weak-duality interface, with no Slater/strong-duality import."
+    },
+    "author_handoff_evidence": "The controlling plan-spec row and batch-60 manifest declare this page prerequisite. The duality definition and weak-duality proof were inspected; both carriers remain draft and their acceptance is unresolved.",
+    "author_handoff_local_route": "The example also computes d(y)=1-(y-1)^2 directly and verifies the saddle inequalities, so its optimality certificate does not depend on a strong-duality theorem."
+  },
+  {
+    "kind": "page",
+    "consumer": "operator-splitting-admm-and-primal-dual-methods",
+    "supplier": "proximal-gradient-and-accelerated-composite-optimization",
+    "status": "interface-matched",
+    "examined_supplier_items": [
+      "def-proper-closed-convex-function-on-rn",
+      "def-extended-real-epsilon-subdifferential",
+      "lem-proper-closed-convex-function-affine-minorant",
+      "def-proximal-mapping",
+      "thm-proximal-operator-existence-resolvent-firm-nonexpansive"
+    ],
+    "required_hypotheses": "Proper epigraph-closed convex extended-real input on R^n with n>=0 and positive proximal parameter; exact unique minimizer/resolvent holds with explicit n0 proof. Affine minorant includes singleton affine-domain branch; extended subdifferential requires finite input point and compares against every z.",
+    "affected_claims": [
+      "def-fenchel-conjugate-on-finite-dimensional-euclidean-space and lem-fenchel-conjugate-is-proper-closed-convex: proper convex-analysis input and finite affine-minorant value.",
+      "alg-two-block-admm-scaled: proper closed convex subproblem objectives and exact-attainment guard.",
+      "lem-admm-exact-subproblem-optimality-relations and lem-two-block-admm-energy-and-objective-estimates: extended-real subgradient convention for f and g.",
+      "lem-fenchel-young-equality-characterizes-subgradients: equality criterion for the extended-real subdifferential.",
+      "alg-pdhg-primal-dual-hybrid-gradient and lem-pdhg-one-step-gap-telescope: exact prox existence/optimality in positive dimension; the assigned algorithm and telescope now prove the zero-dimensional branch directly.",
+      "thm-proximal-operator-existence-resolvent-firm-nonexpansive: its universal n\u2208N statement is not fully covered by its Proof for n=0; def-proximal-mapping also cites it as justified_by."
+    ],
+    "local_route": "Existing ADMM/PDHG/conjugate consumers preserve exact hypotheses and already supply local n0 updates where needed. Missing supplier n0 proof case is now repaired on its own A page; no consumer statement/procedure change required.",
+    "supplier_excerpts": [
+      {
+        "item": "def-proper-closed-convex-function-on-rn",
+        "section": "Definition",
+        "excerpt": "Let $n\\in\\mathbb N$ and let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$. Its effective domain is $\\operatorname{dom}g=\\{x:g(x)<+\\infty\\}$. The function is **proper** if $\\operatorname{dom}g\\ne\\varnothing$; it is **convex** if\n$$g((1-\\theta)x+\\theta y)\\le(1-\\theta)g(x)+\\theta g(y)\\qquad(x,y\\in\\mathbb R^n,\\ 0\\le\\theta\\le1),$$\nusing the endpoint convention $0\\cdot(+\\infty)=0$ of [[def-convex-and-strictly-convex-functionals-on-a-banach-space]]. It is **closed** (equivalently, lower semicontinuous in the ext"
+      },
+      {
+        "item": "def-proximal-mapping",
+        "section": "Definition",
+        "excerpt": "Let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$ be proper, closed and convex, and let $t>0$. For $v\\in\\mathbb R^n$, define the set-valued proximal mapping\n$$\\operatorname{prox}_{tg}(v)=\\left\\{u\\in\\mathbb R^n:g(u)+\\frac{\\|u-v\\|_2^2}{2t}\\le g(w)+\\frac{\\|w-v\\|_2^2}{2t}\\text{ for every }w\\in\\mathbb R^n\\right\\}.$$\nThe existence and uniqueness theorem on this page proves that this set is a singleton for every admissible $g,t,v$; its unique member is also denoted $\\operatorname{prox}_{tg}(v)$."
+      },
+      {
+        "item": "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+        "section": "Statement",
+        "excerpt": "Let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$ be proper, closed and convex in the epigraph convention of [[def-proper-closed-convex-function-on-rn]]. For every $t>0$ and $v\\in\\mathbb R^n$, the set $\\operatorname{prox}_{tg}(v)$ is a singleton. Its unique element $u$ satisfies the resolvent equivalence\n$$u=\\operatorname{prox}_{tg}(v)\\quad\\Longleftrightarrow\\quad (v-u)/t\\in\\partial g(u).$$\nFor any $v_1,v_2$ and $u_i=\\operatorname{prox}_{tg}(v_i)$,\n$$\\|u_1-u_2\\|_2^2\\le\\langle u_1-u_2,v_1-v_2\\rangle.$$\nIn "
+      },
+      {
+        "item": "lem-proper-closed-convex-function-affine-minorant",
+        "section": "Statement",
+        "excerpt": "Let $n\\in\\mathbb N$ and let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$ be proper, closed and convex in the epigraph convention of [[def-proper-closed-convex-function-on-rn]]. Then there are $a\\in\\mathbb R^n$ and $b\\in\\mathbb R$ such that\n$$g(x)\\ge\\langle a,x\\rangle+b\\qquad(x\\in\\mathbb R^n).$$"
+      },
+      {
+        "item": "def-extended-real-epsilon-subdifferential",
+        "section": "Definition",
+        "excerpt": "Let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$ be proper and convex in the convention of [[def-proper-closed-convex-function-on-rn]]. For $x\\in\\operatorname{dom}g$ and $\\eta\\ge0$, define"
+      }
+    ],
+    "owner_escalation": {
+      "supplier": "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+      "affected_claims": [
+        "The prox theorem full-dimensionality claim and def-proximal-mapping justified_by claim; any consumer that relies on the theorem when its proximal space has dimension zero."
+      ],
+      "status": "proof-case-repaired",
+      "resolution": "Direct n0 branch at supplier proof1.1, remaining proof n>=1. Statement unchanged; owner root binding still required.",
+      "author_handoff_gap": "The Statement quantifies over g:R^n with n\u2208N, which includes n=0. Proof step 2.1 invokes thm-heine-borel-rn and thm-euclidean-semicontinuous-extreme-value-theorem, both stated only for n>=1, and has no zero-dimensional branch. The proximal result is true on R^0 because properness makes g finite at its sole point, but the current proof does not establish that case.",
+      "author_handoff_proposed_repair": "Add a direct n=0 case to the Proof of thm-proximal-operator-existence-resolvent-firm-nonexpansive on the proximal-gradient A page: R^0={0}, prox is {0}, the subgradient condition is equality against the only competitor, and firm nonexpansiveness reads 0<=0. Keep the existing proof for n>=1.",
+      "current_gap": "None identified after direct singleton proof-case repair; mathematical acceptance and root binding remain separate."
+    },
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 2,
+      "result": "matching-current-interface",
+      "details": "Actual proper-function/conjugate/ADMM carrier spells out nonempty finite domain, epigraph closedness and convexity; ADMM advances only on certified attained exact subproblems. Definition and exact-argument use match; no universal solve success assumed."
+    },
+    "author_handoff_evidence": "The controlling plan-spec row and batch-60 manifest declare this page prerequisite. The proper-function definition, affine-minorant lemma, proximal definition, exact proximal theorem, and extended-real subdifferential definition were inspected in their actual bodies. The page and draft interfaces have no owner acceptance. Separately, the proximal theorem proof has an unresolved n=0 coverage gap: its Statement allows n=0, but proof step 2.1 invokes compactness and extreme-value suppliers whose Statements require n>=1.",
+    "evidence": "Owner added direct singleton proof branch to exact proximal theorem; its full original Statement/deps are unchanged. Existing actual60 local zero-dimensional cases remain valid. Interfaces are matched; no mathematical acceptance is asserted."
+  },
+  {
+    "kind": "page",
+    "consumer": "operator-splitting-admm-and-primal-dual-methods",
+    "supplier": "krylov-methods-and-lanczos-convergence",
+    "status": "interface-matched",
+    "examined_supplier_items": [
+      "def-krylov-subspace-of-a-matrix-and-start-vector",
+      "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases"
+    ],
+    "required_hypotheses": "The Lanczos theorem assumes a real symmetric matrix and states a separate branch when the start vector has zero projection onto the top eigenspace; in that branch it bounds the Ritz value by the next eigenvalue and asserts no convergence to the top.",
+    "affected_claims": [
+      "ex-lanczos-ritz-value-is-not-a-norm-certificate: the Ritz value 1 from start e1 is not an upper bound for ||diag(1,2)||_2=2."
+    ],
+    "local_route": "Actual diag(1,2), unit e1 give Pb=0; only degenerate bound theta<=lambda2 and exact invariant Krylov calculation are used, not generic Ritz-as-norm certification.",
+    "supplier_excerpts": [
+      {
+        "item": "def-krylov-subspace-of-a-matrix-and-start-vector",
+        "section": "Definition",
+        "excerpt": "Let $A$ be a square matrix over $\\mathbb R$ or $\\mathbb C$ and let $b$ be a\nvector of matching size. Define\n\n$$K_0(A,b):=\\{0\\},$$\n\nand for $m\\ge 1$ define the $m$th **Krylov subspace**\n\n$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$\n\nThus $K_m(A,b)\\subseteq K_{m+1}(A,b)$ for every $m\\ge 0$."
+      },
+      {
+        "item": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+        "section": "Statement",
+        "excerpt": "Let $A\\in\\mathbb R^{n\\times n}$ be symmetric with ordered eigenvalues\n$\\lambda_1\\ge\\cdots\\ge\\lambda_n$. Let $r$ be the multiplicity of $\\lambda_1$.\nIf $r<n$, assume $\\lambda_1>\\lambda_{r+1}$, and let $P$ be the orthogonal\nprojection onto the $\\lambda_1$-eigenspace. Let $b\\in\\mathbb R^n$ be a unit\nvector and, for $m\\ge1$, define\n\n$$K_m:=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\},\\qquad \\theta_m:=\\max_{0\\ne x\\in K_m}\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x}.$$\n\nThus $\\theta_m$ is the largest Rayleig"
+      }
+    ],
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 3,
+      "result": "matching-current-interface",
+      "details": "Actual diag(1,2), unit e1 give Pb=0; only degenerate bound theta<=lambda2 and exact invariant Krylov calculation are used, not generic Ritz-as-norm certification."
+    },
+    "author_handoff_evidence": "The controlling plan-spec row and batch-60 manifest declare this page prerequisite. The current Krylov-subspace definition is published and was inspected; the actual degenerate-branch Lanczos theorem is a draft with its proof body present, and has no owner acceptance. The companion page remains draft.",
+    "author_handoff_local_route": "The B example computes the invariant Krylov subspace, Ritz value, and induced norm directly. Its comparison with the supplier uses the exact Pb=0 degenerate case and claims no convergence to the top eigenvalue."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-two-pixel-pdhg-total-variation-step",
+    "supplier": "def-csr-matrix-with-stored-entry-semantics",
+    "status": "interface-matched",
+    "required_hypotheses": "Valid CSR dimensions, row-pointer endpoints and monotonicity, and column indices 0 and 1 in range.",
+    "affected_claims": [
+      "Exact representation of K=[-1,1]."
+    ],
+    "local_route": "Actual CSR row (0,2), columns (0,1), values (-1,1), m=1,s=2 pass valid-record/matching-dimension premises; 2s+m+1=6 slots, two multiplies/adds and one initialization. Exact arithmetic only.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 4,
+      "result": "matching-current-interface",
+      "details": "Actual CSR row (0,2), columns (0,1), values (-1,1), m=1,s=2 pass valid-record/matching-dimension premises; 2s+m+1=6 slots, two multiplies/adds and one initialization. Exact arithmetic only."
+    },
+    "author_handoff_local_route": "The record validity is checked directly in step 1.1; source-item acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-two-pixel-pdhg-total-variation-step",
+    "supplier": "alg-csr-matrix-vector-product-with-validation",
+    "status": "interface-matched",
+    "required_hypotheses": "Inputs pass the stated finite-array dimension and index validation.",
+    "affected_claims": [
+      "Validated exact row product Kx=-x_0+x_1."
+    ],
+    "local_route": "Actual CSR row (0,2), columns (0,1), values (-1,1), m=1,s=2 pass valid-record/matching-dimension premises; 2s+m+1=6 slots, two multiplies/adds and one initialization. Exact arithmetic only.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 5,
+      "result": "matching-current-interface",
+      "details": "Actual CSR row (0,2), columns (0,1), values (-1,1), m=1,s=2 pass valid-record/matching-dimension premises; 2s+m+1=6 slots, two multiplies/adds and one initialization. Exact arithmetic only."
+    },
+    "author_handoff_local_route": "The two-entry loop is expanded exactly in step 1.1; source-item acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-two-pixel-pdhg-total-variation-step",
+    "supplier": "thm-csr-matvec-returns-the-represented-matrix-product",
+    "status": "interface-matched",
+    "required_hypotheses": "Valid record and matching input-vector dimension.",
+    "affected_claims": [
+      "Equality between CSR routine output and represented matrix product."
+    ],
+    "local_route": "Actual CSR row (0,2), columns (0,1), values (-1,1), m=1,s=2 pass valid-record/matching-dimension premises; 2s+m+1=6 slots, two multiplies/adds and one initialization. Exact arithmetic only.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 6,
+      "result": "matching-current-interface",
+      "details": "Actual CSR row (0,2), columns (0,1), values (-1,1), m=1,s=2 pass valid-record/matching-dimension premises; 2s+m+1=6 slots, two multiplies/adds and one initialization. Exact arithmetic only."
+    },
+    "author_handoff_local_route": "The example gives the matching represented row and expanded product; acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-two-pixel-pdhg-total-variation-step",
+    "supplier": "thm-csr-storage-and-exact-matvec-cost",
+    "status": "interface-matched",
+    "required_hypotheses": "Stored-entry count s=2 and m=1; cost is counted in the supplier\u2019s exact field-operation model.",
+    "affected_claims": [
+      "Six input slots, two multiplications, two additions, one output initialization."
+    ],
+    "local_route": "Actual CSR row (0,2), columns (0,1), values (-1,1), m=1,s=2 pass valid-record/matching-dimension premises; 2s+m+1=6 slots, two multiplies/adds and one initialization. Exact arithmetic only.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 7,
+      "result": "matching-current-interface",
+      "details": "Actual CSR row (0,2), columns (0,1), values (-1,1), m=1,s=2 pass valid-record/matching-dimension premises; 2s+m+1=6 slots, two multiplies/adds and one initialization. Exact arithmetic only."
+    },
+    "author_handoff_local_route": "Counts are substituted directly into the supplier formula; acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-consensus-admm-least-squares",
+    "supplier": "def-convex-program-duality-and-slater-condition",
+    "status": "interface-matched",
+    "required_hypotheses": "One independent equality row, convex objective, and scalar dual variable.",
+    "affected_claims": [
+      "Definition of the Lagrangian dual function."
+    ],
+    "local_route": "Actual consensus equality row (1,-1) has rank one and no inequalities; direct d(y)=1-(y-1)^2 and saddle algebra match weak-duality interface, with no Slater/strong-duality import.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 8,
+      "result": "matching-current-interface",
+      "details": "Actual consensus equality row (1,-1) has rank one and no inequalities; direct d(y)=1-(y-1)^2 and saddle algebra match weak-duality interface, with no Slater/strong-duality import."
+    },
+    "author_handoff_local_route": "The dual function is also computed by completing squares in step 1.2; acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-consensus-admm-least-squares",
+    "supplier": "thm-lagrangian-weak-duality",
+    "status": "interface-matched",
+    "required_hypotheses": "Primal feasible point and dual-feasible scalar y.",
+    "affected_claims": [
+      "Weak-duality comparison at the computed primal and dual values."
+    ],
+    "local_route": "Actual consensus equality row (1,-1) has rank one and no inequalities; direct d(y)=1-(y-1)^2 and saddle algebra match weak-duality interface, with no Slater/strong-duality import.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 9,
+      "result": "matching-current-interface",
+      "details": "Actual consensus equality row (1,-1) has rank one and no inequalities; direct d(y)=1-(y-1)^2 and saddle algebra match weak-duality interface, with no Slater/strong-duality import."
+    },
+    "author_handoff_local_route": "The example proves the saddle inequalities and dual function explicitly; acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-two-block-admm-scaled",
+    "supplier": "def-proper-closed-convex-function-on-rn",
+    "status": "interface-matched",
+    "required_hypotheses": "Properness, convexity and epigraph closedness for f and g.",
+    "affected_claims": [
+      "ADMM subproblem objective class and exact-attainment guard."
+    ],
+    "local_route": "Actual proper-function/conjugate/ADMM carrier spells out nonempty finite domain, epigraph closedness and convexity; ADMM advances only on certified attained exact subproblems. Definition and exact-argument use match; no universal solve success assumed.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 10,
+      "result": "matching-current-interface",
+      "details": "Actual proper-function/conjugate/ADMM carrier spells out nonempty finite domain, epigraph closedness and convexity; ADMM advances only on certified attained exact subproblems. Definition and exact-argument use match; no universal solve success assumed."
+    },
+    "author_handoff_local_route": "Algorithm and theorem bodies preserve the exact supplier hypotheses; acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-fenchel-conjugate-on-finite-dimensional-euclidean-space",
+    "supplier": "def-proper-closed-convex-function-on-rn",
+    "status": "interface-matched",
+    "required_hypotheses": "Extended-real function on finite-dimensional Euclidean space with nonempty effective domain.",
+    "affected_claims": [
+      "Conjugate domain and the fact that a proper conjugate is never -infinity."
+    ],
+    "local_route": "Actual proper-function/conjugate/ADMM carrier spells out nonempty finite domain, epigraph closedness and convexity; ADMM advances only on certified attained exact subproblems. Definition and exact-argument use match; no universal solve success assumed.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 11,
+      "result": "matching-current-interface",
+      "details": "Actual proper-function/conjugate/ADMM carrier spells out nonempty finite domain, epigraph closedness and convexity; ADMM advances only on certified attained exact subproblems. Definition and exact-argument use match; no universal solve success assumed."
+    },
+    "author_handoff_local_route": "The local definition spells out the effective-domain convention; acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-fenchel-conjugate-is-proper-closed-convex",
+    "supplier": "lem-proper-closed-convex-function-affine-minorant",
+    "status": "interface-matched",
+    "required_hypotheses": "A proper closed convex finite-dimensional function has an affine minorant.",
+    "affected_claims": [
+      "Finiteness of the conjugate at at least one point."
+    ],
+    "local_route": "Affine-minorant proof already covers dimension of affine domain zero explicitly; conjugate uses it only for finite value at a. Singleton ambient dimension is included; no n0 compactness assumption borrowed.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 12,
+      "result": "matching-current-interface",
+      "details": "Affine-minorant proof already covers dimension of affine domain zero explicitly; conjugate uses it only for finite value at a. Singleton ambient dimension is included; no n0 compactness assumption borrowed."
+    },
+    "author_handoff_local_route": "Step 1.1 uses the supplier only for properness and displays the finite upper and lower bounds; acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-pdhg-primal-dual-hybrid-gradient",
+    "supplier": "def-proper-closed-convex-function-on-rn",
+    "status": "interface-matched",
+    "required_hypotheses": "Proper closed convex f and g.",
+    "affected_claims": [
+      "Primal and proximal objective hypotheses."
+    ],
+    "local_route": "Actual proper-function/conjugate/ADMM carrier spells out nonempty finite domain, epigraph closedness and convexity; ADMM advances only on certified attained exact subproblems. Definition and exact-argument use match; no universal solve success assumed.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 13,
+      "result": "matching-current-interface",
+      "details": "Actual proper-function/conjugate/ADMM carrier spells out nonempty finite domain, epigraph closedness and convexity; ADMM advances only on certified attained exact subproblems. Definition and exact-argument use match; no universal solve success assumed."
+    },
+    "author_handoff_local_route": "The algorithm states these hypotheses and the local conjugate lemma handles g*; acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-pdhg-primal-dual-hybrid-gradient",
+    "supplier": "def-proximal-mapping",
+    "status": "interface-matched",
+    "required_hypotheses": "Proper closed convex function, positive parameter, and Euclidean input.",
+    "affected_claims": [
+      "Meaning of both prox updates."
+    ],
+    "local_route": "Actual PDHG algorithm and telescope already prove zero-dimensional updates/inequalities locally; positive-dimensional calls use proper epigraph-closed convex inputs, positive tau/sigma and exact resolvent membership. Supplier singleton branch now also covers n0, with Statement unchanged.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 14,
+      "result": "matching-current-interface",
+      "details": "Actual PDHG algorithm and telescope already prove zero-dimensional updates/inequalities locally; positive-dimensional calls use proper epigraph-closed convex inputs, positive tau/sigma and exact resolvent membership. Supplier singleton branch now also covers n0, with Statement unchanged."
+    },
+    "author_handoff_local_route": "Algorithm body names the exact prox mapping and local theorem supplies existence; acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-pdhg-primal-dual-hybrid-gradient",
+    "supplier": "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+    "status": "interface-matched",
+    "required_hypotheses": "Proper closed convex prox objective and positive steps tau,sigma.",
+    "affected_claims": [
+      "Every exact prox call exists uniquely and has the subgradient characterization."
+    ],
+    "local_route": "Actual PDHG algorithm and telescope already prove zero-dimensional updates/inequalities locally; positive-dimensional calls use proper epigraph-closed convex inputs, positive tau/sigma and exact resolvent membership. Supplier singleton branch now also covers n0, with Statement unchanged.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 15,
+      "result": "matching-current-interface",
+      "details": "Actual PDHG algorithm and telescope already prove zero-dimensional updates/inequalities locally; positive-dimensional calls use proper epigraph-closed convex inputs, positive tau/sigma and exact resolvent membership. Supplier singleton branch now also covers n0, with Statement unchanged."
+    },
+    "author_handoff_local_route": "The theorem is cited in Facts and the telescope proof uses its exact optimality condition; acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-lanczos-ritz-value-is-not-a-norm-certificate",
+    "supplier": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+    "status": "interface-matched",
+    "required_hypotheses": "Symmetric matrix and zero projection of the start vector onto the top eigenspace.",
+    "affected_claims": [
+      "Interpretation of the missed top eigenspace branch."
+    ],
+    "local_route": "Actual diag(1,2), unit e1 give Pb=0; only degenerate bound theta<=lambda2 and exact invariant Krylov calculation are used, not generic Ritz-as-norm certification.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 16,
+      "result": "matching-current-interface",
+      "details": "Actual diag(1,2), unit e1 give Pb=0; only degenerate bound theta<=lambda2 and exact invariant Krylov calculation are used, not generic Ritz-as-norm certification."
+    },
+    "author_handoff_local_route": "The exact start has Pb=0, and the example makes no convergence claim; acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-naive-sequential-three-block-admm",
+    "supplier": "def-proper-closed-convex-function-on-rn",
+    "status": "interface-matched",
+    "required_hypotheses": "Each block objective is proper, closed and convex on its stated finite-dimensional domain.",
+    "affected_claims": [
+      "The three-block algorithm\u2019s objective class and the exact-solve interface."
+    ],
+    "local_route": "Actual proper-function/conjugate/ADMM carrier spells out nonempty finite domain, epigraph closedness and convexity; ADMM advances only on certified attained exact subproblems. Definition and exact-argument use match; no universal solve success assumed.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 17,
+      "result": "matching-current-interface",
+      "details": "Actual proper-function/conjugate/ADMM carrier spells out nonempty finite domain, epigraph closedness and convexity; ADMM advances only on certified attained exact subproblems. Definition and exact-argument use match; no universal solve success assumed."
+    },
+    "author_handoff_local_route": "The algorithm states the supplier hypotheses and makes no convergence claim; the supplier carrier remains draft and unaccepted."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-fenchel-conjugate-is-proper-closed-convex",
+    "supplier": "def-proper-closed-convex-function-on-rn",
+    "status": "interface-matched",
+    "required_hypotheses": "f has nonempty effective domain, is convex, and has a closed epigraph.",
+    "affected_claims": [
+      "Properness, closedness and convexity of the input function whose conjugate is analyzed."
+    ],
+    "local_route": "Actual proper-function/conjugate/ADMM carrier spells out nonempty finite domain, epigraph closedness and convexity; ADMM advances only on certified attained exact subproblems. Definition and exact-argument use match; no universal solve success assumed.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 18,
+      "result": "matching-current-interface",
+      "details": "Actual proper-function/conjugate/ADMM carrier spells out nonempty finite domain, epigraph closedness and convexity; ADMM advances only on certified attained exact subproblems. Definition and exact-argument use match; no universal solve success assumed."
+    },
+    "author_handoff_local_route": "The carrier states the exact convention in Facts & Assumptions and proves the conjugate result locally; supplier acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-pdhg-one-step-gap-telescope",
+    "supplier": "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+    "status": "interface-matched",
+    "required_hypotheses": "Both prox functions are proper closed convex and each proximal parameter is positive; the theorem supplies (v-u)/t in the subdifferential.",
+    "affected_claims": [
+      "The two proximal optimality inequalities at every exact PDHG step."
+    ],
+    "local_route": "Actual PDHG algorithm and telescope already prove zero-dimensional updates/inequalities locally; positive-dimensional calls use proper epigraph-closed convex inputs, positive tau/sigma and exact resolvent membership. Supplier singleton branch now also covers n0, with Statement unchanged.",
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 19,
+      "result": "matching-current-interface",
+      "details": "Actual PDHG algorithm and telescope already prove zero-dimensional updates/inequalities locally; positive-dimensional calls use proper epigraph-closed convex inputs, positive tau/sigma and exact resolvent membership. Supplier singleton branch now also covers n0, with Statement unchanged."
+    },
+    "author_handoff_local_route": "The local telescope writes both inequalities explicitly and uses the exact proximal recurrence; supplier acceptance remains unresolved."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-admm-exact-subproblem-optimality-relations",
+    "supplier": "def-extended-real-epsilon-subdifferential",
+    "status": "interface-matched",
+    "required_hypotheses": "Proper convex extended-real f and g; x^{k+1}, z^{k+1} are finite-valued exact minimizers. The supplier defines \u2202g=\u2202_0g on dom g and its inequality for every vector.",
+    "affected_claims": [
+      "Step 1.1 converts attained exact subproblem minimizers to extended-real subgradient inclusions."
+    ],
+    "local_route": "Actual proof keeps exact attained/finite-valued points and uses epsilon=0 subdifferential inequality against all competitors; off-domain comparisons are automatic. No finite-inner-solve success or approximate convergence imported.",
+    "supplier_excerpts": [
+      {
+        "item": "def-extended-real-epsilon-subdifferential",
+        "section": "Definition",
+        "excerpt": "Let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$ be proper and convex in the convention of [[def-proper-closed-convex-function-on-rn]]. For $x\\in\\operatorname{dom}g$ and $\\eta\\ge0$, define"
+      }
+    ],
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 20,
+      "result": "matching-current-interface",
+      "details": "Actual proof keeps exact attained/finite-valued points and uses epsilon=0 subdifferential inequality against all competitors; off-domain comparisons are automatic. No finite-inner-solve success or approximate convergence imported."
+    },
+    "author_handoff_evidence": "The actual supplier definition was inspected; it is a draft item on batch 27 with no owner acceptance. The assigned carrier now declares this exact dependency.",
+    "author_handoff_local_route": "The proof restricts to finite-valued competitors in its segment argument; outside the effective domain the subgradient inequality is automatic."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-fenchel-young-equality-characterizes-subgradients",
+    "supplier": "def-extended-real-epsilon-subdifferential",
+    "status": "interface-matched",
+    "required_hypotheses": "Proper convex extended-real f and x\u2208dom f. The supplier defines \u2202f as \u2202_0f, so equality in the conjugate supremum is equivalent to the extended-real subgradient inequality against every z.",
+    "affected_claims": [
+      "Step 1.2 rearranges the conjugate supremum inequality on dom f and notes that infinite-valued competitors satisfy it automatically."
+    ],
+    "local_route": "Actual proof keeps exact attained/finite-valued points and uses epsilon=0 subdifferential inequality against all competitors; off-domain comparisons are automatic. No finite-inner-solve success or approximate convergence imported.",
+    "supplier_excerpts": [
+      {
+        "item": "def-extended-real-epsilon-subdifferential",
+        "section": "Definition",
+        "excerpt": "Let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$ be proper and convex in the convention of [[def-proper-closed-convex-function-on-rn]]. For $x\\in\\operatorname{dom}g$ and $\\eta\\ge0$, define"
+      }
+    ],
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 21,
+      "result": "matching-current-interface",
+      "details": "Actual proof keeps exact attained/finite-valued points and uses epsilon=0 subdifferential inequality against all competitors; off-domain comparisons are automatic. No finite-inner-solve success or approximate convergence imported."
+    },
+    "author_handoff_evidence": "The actual supplier definition was inspected; it is a draft item on batch 27 with no owner acceptance. The assigned carrier now declares this exact dependency.",
+    "author_handoff_local_route": "The local proof keeps the finiteness conditions explicit and uses the supplier only for the exact subdifferential convention."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-two-block-admm-energy-and-objective-estimates",
+    "supplier": "def-extended-real-epsilon-subdifferential",
+    "status": "interface-matched",
+    "required_hypotheses": "Proper closed convex extended-real f,g and finite-valued saddle/iterate points. The supplier defines the exact subgradient inequality used for every finite-valued competitor.",
+    "affected_claims": [
+      "Facts and proof steps use the extended-real definition for the saddle and iterate subgradient inequalities in the energy and objective estimates."
+    ],
+    "local_route": "Actual proof keeps exact attained/finite-valued points and uses epsilon=0 subdifferential inequality against all competitors; off-domain comparisons are automatic. No finite-inner-solve success or approximate convergence imported.",
+    "supplier_excerpts": [
+      {
+        "item": "def-extended-real-epsilon-subdifferential",
+        "section": "Definition",
+        "excerpt": "Let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$ be proper and convex in the convention of [[def-proper-closed-convex-function-on-rn]]. For $x\\in\\operatorname{dom}g$ and $\\eta\\ge0$, define"
+      }
+    ],
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 22,
+      "result": "matching-current-interface",
+      "details": "Actual proof keeps exact attained/finite-valued points and uses epsilon=0 subdifferential inequality against all competitors; off-domain comparisons are automatic. No finite-inner-solve success or approximate convergence imported."
+    },
+    "author_handoff_evidence": "The actual supplier definition was inspected; it is a draft item on batch 27 with no owner acceptance. The assigned carrier now declares this exact dependency.",
+    "author_handoff_local_route": "The item now cites def-extended-real-epsilon-subdifferential directly; all displayed competitors are restricted to finite-valued domains."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-pdhg-one-step-gap-telescope",
+    "supplier": "def-extended-real-epsilon-subdifferential",
+    "status": "interface-matched",
+    "required_hypotheses": "Proper closed convex extended-real f and g*, with finite-valued proximal outputs and test points. The supplier defines \u2202f=\u2202_0f and the global competitor inequality.",
+    "affected_claims": [
+      "Step 1.1 adds the primal and dual proximal subgradient inequalities to derive the one-step gap telescope."
+    ],
+    "local_route": "Actual PDHG algorithm and telescope already prove zero-dimensional updates/inequalities locally; positive-dimensional calls use proper epigraph-closed convex inputs, positive tau/sigma and exact resolvent membership. Supplier singleton branch now also covers n0, with Statement unchanged.",
+    "supplier_excerpts": [
+      {
+        "item": "def-extended-real-epsilon-subdifferential",
+        "section": "Definition",
+        "excerpt": "Let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$ be proper and convex in the convention of [[def-proper-closed-convex-function-on-rn]]. For $x\\in\\operatorname{dom}g$ and $\\eta\\ge0$, define"
+      }
+    ],
+    "mathematical_acceptance": "not asserted; draft status and independent proof approval remain separate",
+    "owner_interface_disposition": {
+      "reviewer": "original optimization supplier owner",
+      "basis": "Actual named supplier interfaces and consumer source were inspected; required hypotheses match the concrete application, not inferred from acceptance or page proximity.",
+      "source_index": 23,
+      "result": "matching-current-interface",
+      "details": "Actual PDHG algorithm and telescope already prove zero-dimensional updates/inequalities locally; positive-dimensional calls use proper epigraph-closed convex inputs, positive tau/sigma and exact resolvent membership. Supplier singleton branch now also covers n0, with Statement unchanged."
+    },
+    "author_handoff_evidence": "The actual supplier definition was inspected; it is a draft item on batch 27 with no owner acceptance. The assigned carrier now declares this exact dependency.",
+    "author_handoff_local_route": "The zero-dimensional proximal case is handled directly in step 1.1; the supplier definition covers the finite-valued point in positive dimensions."
+  }
+]

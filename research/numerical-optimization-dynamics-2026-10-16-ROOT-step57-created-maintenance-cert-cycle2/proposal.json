@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "status": "research-only second/final quality-cycle successor; unexecuted; no hashes calculated",
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "install_boundary": "actual paused drained boundary; root only",
+  "operations": [
+    {
+      "path": "tools/step5-workflow.mjs",
+      "exact_preimage": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step57-created-maintenance-cert-cycle2/before/step5-workflow.mjs",
+      "proposed": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step57-created-maintenance-cert-cycle2/proposed/step5-workflow.mjs",
+      "replacements": [
+        {
+          "before": "import { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';",
+          "after": "import { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';\nimport { createdMaintenanceBasis } from './step5-created-maintenance-cert.mjs';"
+        },
+        {
+          "before": "  verifyEvidence(row.evidence,{root,run,certificate:row});\n  return row;",
+          "after": "  requireValue(Array.isArray(row.maintenance_certifications??[]),'malformed maintenance certification basis');\n  const maintenanceSeen=new Set();\n  for(const entry of row.maintenance_certifications??[]){\n    const item=row.items.find(x=>x.id===entry.id);\n    requireValue(entry.basis==='native-consumer-maintenance'&&created.has(entry.id)&&!maintenanceSeen.has(entry.id)\n      &&entry.after_item_sha256===item?.item_sha256&&entry.after_guard_sha256===item?.guard_sha256\n      &&['before_sha256','after_sha256','after_item_sha256','before_guard_sha256','after_guard_sha256','statement_sha256'].every(k=>/^[a-f0-9]{64}$/.test(entry[k]??''))\n      &&['collection','report','dispatch','prompt'].every(k=>typeof entry[k]==='string'&&row.evidence[entry[k]])\n      &&typeof entry.reason==='string'&&entry.reason.trim().length>=40,'malformed created-helper maintenance basis');\n    maintenanceSeen.add(entry.id);\n  }\n  verifyEvidence(row.evidence,{root,run,certificate:row});\n  return row;"
+        },
+        {
+          "before": "    const frontier=gateFrontier(root,run),scoped=saved.items.filter(row=>frontier.has(row.id));",
+          "after": "    const frontier=gateFrontier(root,run),maintained=new Set((saved.maintenance_certifications??[]).map(row=>row.id));\n    const scoped=saved.items.filter(row=>frontier.has(row.id)||maintained.has(row.id));"
+        },
+        {
+          "before": "  for(const id of changed) if(!reviewed.has(id)&&priorItems.get(id)?.guard_sha256!==current[id])throw Error(`uncertified change ${id}`);",
+          "after": "  // A completed native outside-maintenance repair is a separate typed basis,\n  // never a synthesized frontier review or a rewritten creation certificate.\n  const maintenance=createdMaintenanceBasis(root,run,phase,round,{prior,result,progress,eligible,items:library,current});\n  for(const id of changed) if(!reviewed.has(id)&&!maintenance.basis.has(id)&&priorItems.get(id)?.guard_sha256!==current[id])throw Error(`uncertified change ${id}`);"
+        },
+        {
+          "before": "  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence};",
+          "after": "  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence};"
+        },
+        {
+          "before": "  const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??priorItems.get(id)?.reason}));",
+          "after": "  const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??maintenance.basis.get(id)?.reason??priorItems.get(id)?.reason}));"
+        },
+        {
+          "before": "  const certificate={version:2,run,phase,round,at:new Date().toISOString(),items,creations,evidence,changed,",
+          "after": "  const certificate={version:2,run,phase,round,at:new Date().toISOString(),items,creations,evidence,changed,\n    ...(maintenance.records.length?{maintenance_certifications:maintenance.records}:{}),"
+        }
+      ]
+    },
+    {
+      "path": "WORKFLOW.md",
+      "exact_preimage": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step57-created-maintenance-cert-cycle2/before/WORKFLOW.md",
+      "proposed": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step57-created-maintenance-cert-cycle2/proposed/WORKFLOW.md",
+      "append": "\n\nA completed native consumer-maintenance proof repair of an already certified\nrun-created draft helper outside the immutable frontier may supply a separate\n`native-consumer-maintenance` certification basis. It is not a frontier review,\nnew creation, adjudication decision or judgment. Certification authenticates the\ncurrent closed wave's selected pack and collection, frozen assignments/tasks,\noriginal report, successful immutable native attempt and actual prompt, exact\nsurgical reconstruction whose guard and `itemHashJudge` match the prior certified\nhelper (raw maintenance hashes are distinct), unchanged metadata and\nStatement, current source bytes, and unchanged dependency/reference supplier\nsource snapshots since the maintenance pack. Missing or stale evidence fails;\nStatement/Definition changes and ordinary outside items do not use this bridge.\nThe certificate separately records this maintenance basis and centrally computes\nits actual current certification context. Original creation provenance, native\nreports, fatal counts, frozen frontier, consumer duties, Sol judgment scope and\nall ordinary gates remain unchanged. Still-current authenticated prior maintenance\nbases carry forward by helper ID on later waves; a genuine newer basis supersedes\nthem, while stale source/supplier evidence fails rather than disappearing.\nSaved certification reuse also checks the\ncurrent source and context of these maintained helpers. Install/reload changes\nonly at an actual paused, drained boundary.\n"
+    },
+    {
+      "path": "tools/step5-created-maintenance-cert.mjs",
+      "must_be_absent": true,
+      "proposed": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step57-created-maintenance-cert-cycle2/proposed/step5-created-maintenance-cert.mjs"
+    }
+  ],
+  "supersedes_proposal_only": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step57-created-maintenance-cert-cycle1/proposal.json"
+}

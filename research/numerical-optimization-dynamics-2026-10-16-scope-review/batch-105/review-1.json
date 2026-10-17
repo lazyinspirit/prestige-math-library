@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "105",
+  "round": 1,
+  "reviewed_items": [
+    "def-hybrid-mode-guard-reset-system",
+    "lem-hybrid-guard-derivative-along-mode",
+    "lem-ode-flow-lipschitz-on-a-tube",
+    "lem-reset-error-after-a-mistimed-hybrid-event",
+    "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+    "def-certified-hybrid-event-enclosure",
+    "lem-transverse-hybrid-event-time-error",
+    "alg-safeguarded-hybrid-event-location-and-restart",
+    "thm-finite-hybrid-trajectory-error-under-separated-events",
+    "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+    "cex-inelastic-bouncing-ball-has-zeno-accumulation",
+    "ex-simultaneous-guards-require-deterministic-priority",
+    "cex-grazing-event-time-error-is-not-linearly-bounded",
+    "ex-bouncing-ball-transverse-event-error-and-reset",
+    "ex-two-events-between-endpoints-defeat-sign-screening"
+  ],
+  "reviewed_pages": [
+    "event-location-and-hybrid-trajectory-error",
+    "event-location-and-hybrid-trajectory-error-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The round 0 findings are resolved. The final review found an unresolved prerequisite issue in the error-ledger update; under the review sequence, a second review that remains unsatisfied must be escalated to the owner.",
+  "findings": [
+    {
+      "id": "def-certified-hybrid-event-enclosure",
+      "type": "prerequisite",
+      "reason": "Definition item 3 presents both Δ_next and E_next as sufficient provider updates, but does not identify their proofs. Δ_next uses lem-transverse-hybrid-event-time-error and E_next uses lem-reset-error-after-a-mistimed-hybrid-event. Adding the former as a dependency would create a cycle because that lemma already depends on this definition. The owner must reconcile this by moving the recurrence to a separately proved result or making it an explicit provider proof obligation."
+    },
+    {
+      "id": "alg-safeguarded-hybrid-event-location-and-restart",
+      "type": "prerequisite",
+      "reason": "Procedure step 9 computes the reset-state error recurrence proved by lem-reset-error-after-a-mistimed-hybrid-event, but that supplier is absent from the algorithm's dependencies and from its transitive dependency path. The affected use is the E update after a selected event; the owner should reconcile its proof source and dependency declaration."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-certified-hybrid-event-enclosure",
+      "decision": "escalate",
+      "reason": "Its item 3 update rule needs the owner reconciliation described above."
+    },
+    {
+      "id": "alg-safeguarded-hybrid-event-location-and-restart",
+      "decision": "escalate",
+      "reason": "Step 9's reset-state ledger update lacks its declared mathematical supplier."
+    },
+    {
+      "id": "lem-transverse-hybrid-event-time-error",
+      "decision": "accept",
+      "reason": "The generalized provider premise and event-time inequality are sound; its proof uses only the supplied local error and guard Lipschitz bounds."
+    },
+    {
+      "id": "thm-finite-hybrid-trajectory-error-under-separated-events",
+      "decision": "accept",
+      "reason": "Its updated proof explicitly uses the local/total provider bounds, the transverse-time lemma, and the reset-error lemma to prove the recurrence."
+    },
+    {
+      "id": "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+      "decision": "escalate",
+      "reason": "It consumes the revised algorithm; the owner should confirm whether its per-trial valid-data premise suffices for the post-reset ledger path or whether the recurrence proof must be included."
+    },
+    {
+      "id": "ex-two-events-between-endpoints-defeat-sign-screening",
+      "decision": "accept",
+      "reason": "The non-dyadic roots avoid the isolator's bisection-boundary issue, and the complete-isolation claim is consistent with the supplied procedure for a sufficient finite budget."
+    },
+    {
+      "id": "cex-grazing-event-time-error-is-not-linearly-bounded",
+      "decision": "accept",
+      "reason": "It now distinguishes a grazing guard contact from an enabled event."
+    },
+    {
+      "id": "ex-bouncing-ball-transverse-event-error-and-reset",
+      "decision": "accept",
+      "reason": "Its explicit error, transversality, residual, reset, and field bounds support the stated estimates."
+    },
+    {
+      "id": "ex-simultaneous-guards-require-deterministic-priority",
+      "decision": "accept",
+      "reason": "It now identifies the incomplete priority specification and compares two valid completions."
+    },
+    {
+      "id": "event-location-and-hybrid-trajectory-error",
+      "decision": "accept",
+      "reason": "The page summary now matches the algorithm's handling of absent and oppositely oriented roots."
+    },
+    {
+      "id": "event-location-and-hybrid-trajectory-error-examples",
+      "decision": "accept",
+      "reason": "The examples page accurately summarizes the repaired examples."
+    },
+    {
+      "id": "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+      "decision": "accept",
+      "reason": "Its general provider use and event-time/reset bounds are explicit, and it directly declares the reset-error lemma."
+    },
+    {
+      "id": "lem-naive-all-pairs-collision-search-has-quadratic-work",
+      "decision": "accept",
+      "reason": "Its pair-count argument remains valid for the inspected sphere-search loop."
+    },
+    {
+      "id": "nonsmooth-contact-time-stepping-and-projections",
+      "decision": "accept",
+      "reason": "Its page summary accurately describes the sphere algorithm's general provider interface and lag-aware error accounting."
+    }
+  ]
+}

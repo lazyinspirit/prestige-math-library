@@ -1,0 +1,540 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "65",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-implicit-residual-and-algebraic-error-units",
+      "model": "gpt-6-luna",
+      "context_sha256": "9efc8b9796a97cafeb5091b9433d1b5f3861b54000db3a5204063bb6b1cbb448",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "For G(z)=z^2-a with a in squared state units, G has squared state units, so an arbitrary equation residual cannot be assigned the units of z. Added the necessary componentwise normalization condition before naming an update residual. The displayed BE and IRK residuals already have normalized state units; division by the positive step scale and the warning about forward error remain valid. No choice principle or new prerequisite is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-backward-euler-step-equation",
+      "model": "gpt-6-luna",
+      "context_sha256": "cc09db694a513fa34c4d670aa4ac99d072a04a4b461355655e77ca5660be360d",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The Definition already defines an endpoint relation and expressly permits no, one, or several roots, so its mathematics is sound. The title nevertheless promises a map without a selector. Replaced only \u201cstep map\u201d by \u201cstep equation\u201d in the item title and owning manifest; the Definition and residual scaling are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-implicit-runge-kutta-stage-equations",
+      "model": "gpt-6-luna",
+      "context_sha256": "58efdc035781917917dce040dced2e540fd79f6e19bddd8166bc0aec6e9c0718",
+      "outcome": "false_positive",
+      "reason": "The displayed update is explicitly introduced by \u201cWhen a solution Y is selected\u201d, and the final sentence expressly allows multiple solutions. The two roots in the rejection correctly yield different updates for different selections; that does not contradict a conditional update. Stiff accuracy follows by substituting the selected exact stage root. The normalized residual and admissible stage-domain conventions are sound. No edit is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-small-step-implicit-rk-branch-and-residual-error",
+      "model": "gpt-6-luna",
+      "context_sha256": "e6416bc706c2d449ab42f0666d6f1a02aab72b051eee41c61b7798d8c5f36f16",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The current metric definition lists exactly separation, symmetry, and the triangle inequality; nonnegativity is a consequence rather than an axiom. Removed only the extra word from step 1.1 and its contract mirror. Coordinatewise completeness, closure of the finite product ball, invariance, contraction with 0<=q<1, and the residual rearrangement all check directly, so the attribution defect is nonfatal. The Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-two-stage-sdirk-order-two-and-l-stability",
+      "model": "gpt-6-luna",
+      "context_sha256": "3574b3e6a91673cff734613c3fb9bd050741fc5133d688aa77e209e1b0ca0af7",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The existing Taylor argument proves local defect O(h^3), and its rational stability function and nonnegative half-plane polynomial prove scalar L-stability correctly. The title additionally claims exact order two without a sharpness witness. Added proof step 3.1: for y'=t^2 from (0,0), the method gives h^3/(2 sqrt(2)), while the exact endpoint is h^3/3. The nonzero cubic defect rules out order three or higher. This closes a nonfatal omitted sharpness argument without changing the Statement or any dependencies.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-newton-budget-exhaustion-with-a-unique-backward-euler-root",
+      "model": "gpt-6-luna",
+      "context_sha256": "de3370c6f021d9838763384009a3a54f02a7136873dc275b6f267c37d79fa30b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The cited resolvent theorem requires continuity on the full state space as well as dissipativity. Restored continuity in F1 and checked it in step 1.1 for the polynomial f(x)=-x^3. Dissipativity follows from -(x-y)^2((x+y/2)^2+3y^2/4)<=0. The residual G(z)=z-1+z^3 is C1 on R; G(0)=-1 misses tolerance 0.1, so the finite solver correctly returns budget exhaustion at zero corrections despite the unique root. The omitted restatement hypothesis is nonfatal because the given field satisfies it.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-stiff-scalar-decay-and-trapezoid-ringing",
+      "model": "gpt-6-luna",
+      "context_sha256": "b0664a1544d89f45d9de9f185c6b0728a4be44007facac2ed1587744141e81b3",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "At y_0=0 every trapezoidal iterate is zero, contradicting the original unqualified sign-alternation claim. Step 1.1 now states sign alternation for y_0!=0 and the zero orbit separately. The multiplier -49/51, magnitude ratio 49/51, BE factor 1/101, and SDIRK/Radau factors remain correct. This repairs the false universal orbit claim without excluding zero initial data or changing any Statement or Definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-implicit-residual-and-algebraic-error-units",
+      "disposition": "repaired",
+      "post_sha256": "02b53bcc4538d3d27f4e661bc8af005e65dcfee71fe26778cced45d3268c25d0",
+      "review_context_sha256": "46e81c2ad70aa2036b5579acfd3fb0fc21a63300c014eca4a1507e228ab6cd54",
+      "reason": "For G(z)=z^2-a with a in squared state units, G has squared state units, so an arbitrary equation residual cannot be assigned the units of z. Added the necessary componentwise normalization condition before naming an update residual. The displayed BE and IRK residuals already have normalized state units; division by the positive step scale and the warning about forward error remain valid. No choice principle or new prerequisite is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-backward-euler-step-equation",
+      "disposition": "repaired",
+      "post_sha256": "a4fdd9f00bcb4e9968bdb4e388684c4d160fa19b0b62b09915340a2c05538e29",
+      "review_context_sha256": "afc721f87265dadd02ebac15902fe0c53c950d445def677d922caaa60f05e8e0",
+      "reason": "The Definition already defines an endpoint relation and expressly permits no, one, or several roots, so its mathematics is sound. The title nevertheless promises a map without a selector. Replaced only \u201cstep map\u201d by \u201cstep equation\u201d in the item title and owning manifest; the Definition and residual scaling are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-implicit-runge-kutta-stage-equations",
+      "disposition": "unaffected",
+      "post_sha256": "651d01f7c5126de6cf466e7e68e7bde6f83125a5b597590142e8afefdeb95354",
+      "review_context_sha256": "7b9a9adc588b6e60d225e761d09e8bd50b025d620e2bd1ece2824c30d4f960fa",
+      "reason": "The displayed update is explicitly introduced by \u201cWhen a solution Y is selected\u201d, and the final sentence expressly allows multiple solutions. The two roots in the rejection correctly yield different updates for different selections; that does not contradict a conditional update. Stiff accuracy follows by substituting the selected exact stage root. The normalized residual and admissible stage-domain conventions are sound. No edit is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-small-step-implicit-rk-branch-and-residual-error",
+      "disposition": "repaired",
+      "post_sha256": "076d52186f94e6f47ee8f8ba55fc26cee3b470d7c95c87048496c8a60db81b01",
+      "review_context_sha256": "f568412b66e3a771d20b3c217ff5fbd65fc9e1c1001e0fbe7c467372eea1f7e8",
+      "reason": "The current metric definition lists exactly separation, symmetry, and the triangle inequality; nonnegativity is a consequence rather than an axiom. Removed only the extra word from step 1.1 and its contract mirror. Coordinatewise completeness, closure of the finite product ball, invariance, contraction with 0<=q<1, and the residual rearrangement all check directly, so the attribution defect is nonfatal. The Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-two-stage-sdirk-order-two-and-l-stability",
+      "disposition": "repaired",
+      "post_sha256": "7f5297e5f49484e6aeaf94f770e3ff15162c555603e83a82113e576782ea8bb1",
+      "review_context_sha256": "704b2a58a6e9df0cd47bbcbe1c55d7c7210033266646714b78f2068eef2c78c5",
+      "reason": "The existing Taylor argument proves local defect O(h^3), and its rational stability function and nonnegative half-plane polynomial prove scalar L-stability correctly. The title additionally claims exact order two without a sharpness witness. Added proof step 3.1: for y'=t^2 from (0,0), the method gives h^3/(2 sqrt(2)), while the exact endpoint is h^3/3. The nonzero cubic defect rules out order three or higher. This closes a nonfatal omitted sharpness argument without changing the Statement or any dependencies.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-newton-budget-exhaustion-with-a-unique-backward-euler-root",
+      "disposition": "repaired",
+      "post_sha256": "2c9e1062594424ac768a3c7a29967afef8f9cec0c4658db1e633fdac9fbd59f4",
+      "review_context_sha256": "7eaca7577a6c7c207d37e0f917194fbf097e0ea01ff3944a88bbaa63baa09a1a",
+      "reason": "The cited resolvent theorem requires continuity on the full state space as well as dissipativity. Restored continuity in F1 and checked it in step 1.1 for the polynomial f(x)=-x^3. Dissipativity follows from -(x-y)^2((x+y/2)^2+3y^2/4)<=0. The residual G(z)=z-1+z^3 is C1 on R; G(0)=-1 misses tolerance 0.1, so the finite solver correctly returns budget exhaustion at zero corrections despite the unique root. The omitted restatement hypothesis is nonfatal because the given field satisfies it.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-stiff-scalar-decay-and-trapezoid-ringing",
+      "disposition": "repaired",
+      "post_sha256": "9ab7aabf4a87afbf97ee503491877b73eaf6ef2976b5fff864d18aa444760066",
+      "review_context_sha256": "4f31a5519d1134ebe57f7acfa0a381c14400f169cd9a6962c6ff9578f3d1fa34",
+      "reason": "At y_0=0 every trapezoidal iterate is zero, contradicting the original unqualified sign-alternation claim. Step 1.1 now states sign alternation for y_0!=0 and the zero orbit separately. The multiplier -49/51, magnitude ratio 49/51, BE factor 1/101, and SDIRK/Radau factors remain correct. This repairs the false universal orbit claim without excluding zero initial data or changing any Statement or Definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-finite-budget-rattle-step-with-scaled-residuals",
+    "alg-imex-euler-step",
+    "alg-index-one-dae-backward-euler-stepper",
+    "alg-index-one-dae-bdf2-stepper",
+    "alg-newton-chord-implicit-residual-with-factorization-reuse",
+    "alg-rosenbrock-euler-step",
+    "alg-two-stage-rosenbrock-w-method",
+    "def-ars222-additive-tableau-and-stages",
+    "def-backward-euler-step-equation",
+    "def-implicit-runge-kutta-stage-equations",
+    "ex-rattle-residual-budget-and-global-trajectory-drift",
+    "ex-robertson-reaction-system-newton-work",
+    "lem-ars222-stage-branch-and-residual-control",
+    "lem-rosenbrock-euler-local-defect-and-residual-error",
+    "lem-small-step-implicit-rk-branch-and-residual-error",
+    "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+    "thm-ars222-additive-order-two-and-tolerance",
+    "thm-backward-euler-algebraic-update-residual-error-budget",
+    "thm-imex-euler-algebraic-residual-budget",
+    "thm-rattle-scaled-solve-residual-error-budget"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "status": "fixed",
+      "id": "def-implicit-residual-and-algebraic-error-units",
+      "model": "gpt-6-luna",
+      "context_sha256": "9efc8b9796a97cafeb5091b9433d1b5f3861b54000db3a5204063bb6b1cbb448",
+      "reason": "For G(z)=z^2-a with a in squared state units, G has squared state units, so an arbitrary equation residual cannot be assigned the units of z. Added the necessary componentwise normalization condition before naming an update residual. The displayed BE and IRK residuals already have normalized state units; division by the positive step scale and the warning about forward error remain valid. No choice principle or new prerequisite is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "severity": "fatal",
+      "defect_type": "logic"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "status": "fixed",
+      "id": "def-backward-euler-step-equation",
+      "model": "gpt-6-luna",
+      "context_sha256": "cc09db694a513fa34c4d670aa4ac99d072a04a4b461355655e77ca5660be360d",
+      "reason": "The Definition already defines an endpoint relation and expressly permits no, one, or several roots, so its mathematics is sound. The title nevertheless promises a map without a selector. Replaced only \u201cstep map\u201d by \u201cstep equation\u201d in the item title and owning manifest; the Definition and residual scaling are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "severity": "nonfatal"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "status": "false-positive",
+      "id": "def-implicit-runge-kutta-stage-equations",
+      "model": "gpt-6-luna",
+      "context_sha256": "58efdc035781917917dce040dced2e540fd79f6e19bddd8166bc0aec6e9c0718",
+      "reason": "The displayed update is explicitly introduced by \u201cWhen a solution Y is selected\u201d, and the final sentence expressly allows multiple solutions. The two roots in the rejection correctly yield different updates for different selections; that does not contradict a conditional update. Stiff accuracy follows by substituting the selected exact stage root. The normalized residual and admissible stage-domain conventions are sound. No edit is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "status": "fixed",
+      "id": "lem-small-step-implicit-rk-branch-and-residual-error",
+      "model": "gpt-6-luna",
+      "context_sha256": "e6416bc706c2d449ab42f0666d6f1a02aab72b051eee41c61b7798d8c5f36f16",
+      "reason": "The current metric definition lists exactly separation, symmetry, and the triangle inequality; nonnegativity is a consequence rather than an axiom. Removed only the extra word from step 1.1 and its contract mirror. Coordinatewise completeness, closure of the finite product ball, invariance, contraction with 0<=q<1, and the residual rearrangement all check directly, so the attribution defect is nonfatal. The Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "severity": "nonfatal"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "status": "fixed",
+      "id": "prop-two-stage-sdirk-order-two-and-l-stability",
+      "model": "gpt-6-luna",
+      "context_sha256": "3574b3e6a91673cff734613c3fb9bd050741fc5133d688aa77e209e1b0ca0af7",
+      "reason": "The existing Taylor argument proves local defect O(h^3), and its rational stability function and nonnegative half-plane polynomial prove scalar L-stability correctly. The title additionally claims exact order two without a sharpness witness. Added proof step 3.1: for y'=t^2 from (0,0), the method gives h^3/(2 sqrt(2)), while the exact endpoint is h^3/3. The nonzero cubic defect rules out order three or higher. This closes a nonfatal omitted sharpness argument without changing the Statement or any dependencies.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "severity": "nonfatal"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "status": "fixed",
+      "id": "ex-newton-budget-exhaustion-with-a-unique-backward-euler-root",
+      "model": "gpt-6-luna",
+      "context_sha256": "de3370c6f021d9838763384009a3a54f02a7136873dc275b6f267c37d79fa30b",
+      "reason": "The cited resolvent theorem requires continuity on the full state space as well as dissipativity. Restored continuity in F1 and checked it in step 1.1 for the polynomial f(x)=-x^3. Dissipativity follows from -(x-y)^2((x+y/2)^2+3y^2/4)<=0. The residual G(z)=z-1+z^3 is C1 on R; G(0)=-1 misses tolerance 0.1, so the finite solver correctly returns budget exhaustion at zero corrections despite the unique root. The omitted restatement hypothesis is nonfatal because the given field satisfies it.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "severity": "nonfatal"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "status": "fixed",
+      "id": "ex-stiff-scalar-decay-and-trapezoid-ringing",
+      "model": "gpt-6-luna",
+      "context_sha256": "b0664a1544d89f45d9de9f185c6b0728a4be44007facac2ed1587744141e81b3",
+      "reason": "At y_0=0 every trapezoidal iterate is zero, contradicting the original unqualified sign-alternation claim. Step 1.1 now states sign alternation for y_0!=0 and the zero orbit separately. The multiplier -49/51, magnitude ratio 49/51, BE factor 1/101, and SDIRK/Radau factors remain correct. This repairs the false universal orbit claim without excluding zero initial data or changing any Statement or Definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "severity": "fatal",
+      "defect_type": "logic"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "route-owner-finding",
+      "id": "alg-index-one-dae-backward-euler-stepper",
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "severity": "nonfatal",
+      "status": "owner-review-requested",
+      "affected_use": "For $n=1,\\ldots,N_t$, form the coupled update residual",
+      "invalidated_claim": "The algebraic block g need not have the units of the algebraic unknown Z, so interpreting the whole pair as a normalized update residual needs qualification.",
+      "minimality": "If the name invokes the normalized-unit convention for every block, replace coupled update residual by coupled equation residual; preserve formulas and tolerance scaling.",
+      "reason": "The differential block has state units, but the appended arbitrary constraint g(t,X,Z) need not have the units of the algebraic unknown Z. Calling the whole pair a coupled update residual is therefore imprecise without constraint normalization. The displayed separate derivative/algebraic residual definitions and tolerance scaling remain mathematically valid. Owner should change only the label to coupled equation residual unless additional normalization is intended; no solver instruction needs changing.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "cor-constant-step-bdf2-order-two-with-consistent-start",
+      "path": "items/cor-constant-step-bdf2-order-two-with-consistent-start.md",
+      "severity": "nonfatal",
+      "status": "open",
+      "route": "frontier_owner",
+      "affected_use": "A sufficient condition is that $B_{\\rm BE}$ is centered at $y(0)$, $\\|f(h,z)\\|_2\\le M$ on it, $hM\\le\\operatorname{rad}(B_{\\rm BE})$, and $f(h,\\cdot)$ is $L_2$-Lipschitz there.",
+      "invalidated_claim": "The endpoint-field bounds do not imply the preceding exact-endpoint inclusion y(h) in B_BE.",
+      "minimality": "Say these bounds suffice for invariance and contraction while retaining the separate exact-endpoint inclusion requirement.",
+      "reason": "Confirmed the Step-4 concern against the current Statement and proof. For y'=1-2t, y(0)=0 and 0<h<1/2, choose B_BE=[-h(1-2h),h(1-2h)]. The endpoint field has M=1-2h and L_2=0, so all listed sufficient bounds hold, but y(h)=h-h^2 exceeds radius h-2h^2. The actual proof A1 retains endpoint inclusion and its startup argument remains sound under that explicit hypothesis. This unassigned draft was not edited.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "scope": "Reviewed all seven assigned draft frontier items in dependency order: six changed carriers and one unchanged false positive. Only the residual-units Definition changed; all other Statement/Definition sections are unchanged. No items were created and no outside item was edited.",
+      "sources_and_prerequisites": "Checked familiar residual scaling, finite-dimensional Banach contraction, polynomial Taylor/order calculations, scalar rational stability, and dissipativity directly against the current local prerequisite statements/definitions. No external source reading is claimed; no extra choice principle is used.",
+      "shared_metadata": "Updated only assigned entries in the owning batch-65 proof contracts and the backward Euler title in its owning page manifest, using acquire/reread/edit/JSON-check/release for every shared edit.",
+      "format_repair": "The initial phase-format check requested renumbering only. Adopted phase 3.1 for SDIRK sharpness and 4.1 for L-stability and updated its contract references. Reexamined the unchanged mathematical argument and captured final hashes. The earlier SDIRK post guard 1074fe783e85373ff643f9d8f40d0163d6505ea3a693e52d0622f6966424ff71 was superseded. Reexamined ringing F2: it uses only the unchanged SDIRK rational function and is unaffected by the supplier proof numbering; its recaptured context remained identical.",
+      "consumer_inventory": "All 20 direct dependency/reference consumers of the residual definition are listed below with exact affected excerpts. Rosenbrock residuals have the units of their derivative-valued stage unknowns, so the normalization caveat does not change those results. The BE DAE composite residual name is referred to its frontier owner; its differential/algebraic formulas remain valid. The DAE BDF2 procedure already keeps the two residual types separate and needs no change. No published or outside-frontier direct consumers were found; no published-consumer-ledger update is proposed.",
+      "owner_route": "The unassigned BDF2 sufficient-condition wording is reported with an explicit counterexample. Its proof retains endpoint inclusion and remains valid under that hypothesis. It received no item edit or assigned Step-5 review here.",
+      "review_status": "The reviews record adjudication and author repair checks, not independent review of the repaired proofs. Rejudgment, frontier-owner consumer routing and certification remain engine duties."
+    }
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "alg-finite-budget-rattle-step-with-scaled-residuals",
+      "path": "items/alg-finite-budget-rattle-step-with-scaled-residuals.md",
+      "affected_use": "For nonzero $h$, leaving a branch ball returns `invalid-trial`, a singular factorization returns `singular-jacobian`, and exhausting either correction budget returns `iteration-budget-exhausted`; the supplier supplies the last valid iterate and its evaluated residual norm in each case. No undefined-evaluation status is needed because the admissible domains require all evaluations to be defined. A successful output with nonzero residuals need not lie in $\\mathcal M$; applying the routine again requires a consistent ",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "alg-imex-euler-step",
+      "path": "items/alg-imex-euler-step.md",
+      "affected_use": "ve routine on $z=c+h b(z)$.\n4. If it returns failure, return that failure status. If it returns $z\\notin\\overline B(c,R)$, return `out-of-branch-ball`.\n5. Compute the update residual $r:=z-c-hb(z)$ in the state units of [[def-implicit-residual-and-algebraic-error-units]]. If $\\|r\\|_2>\\tau$, return `residual-too-large` with $z$ and $r$; otherwise return `success` with $z$ and $r$.",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "alg-index-one-dae-backward-euler-stepper",
+      "path": "items/alg-index-one-dae-backward-euler-stepper.md",
+      "affected_use": "For $n=1,\\ldots,N_t$, form the coupled update residual",
+      "disposition": "route_to_frontier_owner",
+      "reason": "The differential block has state units, but the appended arbitrary constraint g(t,X,Z) need not have the units of the algebraic unknown Z. Calling the whole pair a coupled update residual is therefore imprecise without constraint normalization. The displayed separate derivative/algebraic residual definitions and tolerance scaling remain mathematically valid. Owner should change only the label to coupled equation residual unless additional normalization is intended; no solver instruction needs changing.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "alg-index-one-dae-bdf2-stepper",
+      "path": "items/alg-index-one-dae-bdf2-stepper.md",
+      "affected_use": "For an accepted step, the constant-step BDF2 derivative residual is\n$$\nr^d_n=\\frac{3X_n-4X_{n-1}+X_{n-2}}{2h}-f(t_n,X_n,Z_n),\n$$\nand the algebraic residual is $r^a_n=g(t_n,X_n,Z_n)$.  The procedure makes no claim that Newton finds a root or that an accepted state is the exact selected branch root.",
+      "disposition": "unaffected",
+      "reason": "The Definition forms the coupled equation R_n and explicitly distinguishes its derivative residual (3X-4X_prev+X_prevprev)/(2h)-f from its algebraic residual g. It does not assign the units of the algebraic unknown to g. Its distinct tolerance scalings remain valid under the revised residual convention.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+      "path": "items/alg-newton-chord-implicit-residual-with-factorization-reuse.md",
+      "affected_use": "Both modes make no claim that a finite budget reaches an exact root or that a small residual is a forward-error bound. Record the number of Jacobian assemblies, factorization attempts, and linear solves actually performed; a dense LU correction uses one forward and one backward triangular solve. Sparse cost depends on the actual stage matrix and factorization backend and is not bounded here.",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "alg-rosenbrock-euler-step",
+      "path": "items/alg-rosenbrock-euler-step.md",
+      "affected_use": "mma=1$. The exact-arithmetic stage equation is $M k_n=f(t_n,y_n)$, exactly the map of [[def-rosenbrock-euler-step-map]]. Its residual $Mk_n-f(t_n,y_n)$ is the update residual of the linear stage equation in the sense of [[def-implicit-residual-and-algebraic-error-units]]. For this mixed-arithmetic specification, evaluations and outer affine combinations are exact real operations and every matrix/RHS passed to factorization or solve must pass `store`; only ",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "alg-two-stage-rosenbrock-w-method",
+      "path": "items/alg-two-stage-rosenbrock-w-method.md",
+      "affected_use": "The residuals $Wk_1-[f(t_n,y_n)+\\alpha h\\widetilde T_n]$ and $Wq_2-(F_1-k_1)$ are update residuals of their linear stage equations in the sense of [[def-implicit-residual-and-algebraic-error-units]]. The coefficient $\\alpha$ and the autonomous two-stage formula are the second-order Rosenbrock formula recorded for ode23s in WIAS Example 2.37. The first-stage $\\alpha h\\widetilde T_n$ term specifies the nonautonomous extension used here; its order is independently established under the stated boundedness hypotheses.",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "def-ars222-additive-tableau-and-stages",
+      "path": "items/def-ars222-additive-tableau-and-stages.md",
+      "affected_use": "-\\gamma)b(Y_2)+\\gamma b(Y_3)\\bigr],\\qquad y^+=Y_3.$$\nThus there are two implicit solves per step, one for each nonzero diagonal implicit stage. The unscaled stage-equation residual uses the update-residual convention of [[def-implicit-residual-and-algebraic-error-units]]. The tableaus and stages alone assert neither branch existence nor stability.",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "def-backward-euler-step-equation",
+      "path": "items/def-backward-euler-step-equation.md",
+      "affected_use": "Its update residual at an approximate endpoint $z$ with $(t_n+h_n,z)\\in D$ is",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "def-implicit-runge-kutta-stage-equations",
+      "path": "items/def-implicit-runge-kutta-stage-equations.md",
+      "affected_use": "On the admissible stage set, the **stage update residual** is the vector with blocks",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "ex-rattle-residual-budget-and-global-trajectory-drift",
+      "path": "items/ex-rattle-residual-budget-and-global-trajectory-drift.md",
+      "affected_use": "[F4] [[def-implicit-residual-and-algebraic-error-units]]: a residual norm is not a forward-error estimate without a separate inverse or stability bound.",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "ex-robertson-reaction-system-newton-work",
+      "path": "items/ex-robertson-reaction-system-newton-work.md",
+      "affected_use": "[F1] [[def-implicit-residual-and-algebraic-error-units]]: an implicit update residual is the equation's left side minus its right side, in update units.",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "lem-ars222-stage-branch-and-residual-control",
+      "path": "items/lem-ars222-stage-branch-and-residual-control.md",
+      "affected_use": "Let $\\gamma=1-1/\\sqrt2$ as in [[def-ars222-additive-tableau-and-stages]]. For each of the two implicit stages, let $c_j$ be its center after the previous stages have been selected. Suppose $b$ is bounded by $M$ and $L$-Lipschitz on a closed ball $\\overline B(c_j,R_j)\\subset U$ with $R_j>0$, and $|\\gamma|hM\\le R_j$, $|\\gamma|hL<1$. Then stage $Y_j=c_j+\\gamma h b(Y_j)$ has a unique root in that ball. Every candidate $\\widetilde Y_j$ in the same ball with unscaled stage-equation residual $r_j$ satisfies\n$$\\|\\widetilde",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "lem-rosenbrock-euler-local-defect-and-residual-error",
+      "path": "items/lem-rosenbrock-euler-local-defect-and-residual-error.md",
+      "affected_use": "\\le C_Eh^2+\\kappa_1h\\rho, \\qquad C_E:=\\gamma\\kappa_0LF+\\frac{M_1}{2}+\\gamma\\kappa_0\\kappa_1\\delta F.$$\nThe last term is the separate Jacobian-approximation allowance. The residual is an equation residual in the units of [[def-implicit-residual-and-algebraic-error-units]], not a forward-error estimate by itself.",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "lem-small-step-implicit-rk-branch-and-residual-error",
+      "path": "items/lem-small-step-implicit-rk-branch-and-residual-error.md",
+      "affected_use": "**Given:** The finite-dimensional block space, $h,A,c,R,F,M,L$, the product ball $\\mathcal B$, and the inequalities in the Statement. The residual $G$ uses the update-residual scaling of [[def-implicit-residual-and-algebraic-error-units]]; for Runge\u2013Kutta stages it is the block residual defined by [[def-implicit-runge-kutta-stage-equations]].",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+      "path": "items/lem-two-stage-rosenbrock-local-defect-and-residual-error.md",
+      "affected_use": "[F6] [[def-implicit-residual-and-algebraic-error-units]]: each stage residual is the value of the defining linear residual map; it is distinct from forward error.",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "thm-ars222-additive-order-two-and-tolerance",
+      "path": "items/thm-ars222-additive-order-two-and-tolerance.md",
+      "affected_use": "[F3] [[def-implicit-residual-and-algebraic-error-units]]: the unscaled stage residual is measured in the units of the unknown stage; a derivative-scaled residual is divided by $h$.",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "thm-backward-euler-algebraic-update-residual-error-budget",
+      "path": "items/thm-backward-euler-algebraic-update-residual-error-budget.md",
+      "affected_use": "[F2] [[def-implicit-residual-and-algebraic-error-units]]: the BE update residual is endpoint minus input minus $hf$; the derivative residual is this vector divided by $h$.",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "thm-imex-euler-algebraic-residual-budget",
+      "path": "items/thm-imex-euler-algebraic-residual-budget.md",
+      "affected_use": "[F4] [[def-implicit-residual-and-algebraic-error-units]]: the update residual has the same units as the unknown; the derivative residual is the update residual divided by $h$.",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    },
+    {
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "id": "thm-rattle-scaled-solve-residual-error-budget",
+      "path": "items/thm-rattle-scaled-solve-residual-error-budget.md",
+      "affected_use": "[F4] [[def-implicit-residual-and-algebraic-error-units]]: a residual norm is not a forward-error bound without a separate inverse or stability estimate.",
+      "disposition": "unaffected",
+      "reason": "The normalization caveat leaves this use sound: its residual is expressly formed in the unknown units, or it uses only an explicit residual scaling or the separate forward-error warning. No numerical conclusion or consumer interface is invalidated.",
+      "route": "frontier_owner"
+    }
+  ],
+  "page_uses": [
+    {
+      "path": "library/numerical-differential-equations-and-stochastic-dynamics/implicit-stiff-time-stepping-and-algebraic-error.md",
+      "affected_use": "The page lists the residual definition and introduces backward Euler and implicit Runge\u2013Kutta residual conventions, while explicitly requiring a separate inverse or stability bound for forward error.",
+      "disposition": "unaffected",
+      "reason": "Both displayed time-stepping residual families are already normalized in state units; the page introduces no general arbitrary-residual unit claim."
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-implicit-residual-and-algebraic-error-units.md items/def-backward-euler-step-equation.md items/def-implicit-runge-kutta-stage-equations.md items/lem-small-step-implicit-rk-branch-and-residual-error.md items/prop-two-stage-sdirk-order-two-and-l-stability.md items/ex-newton-budget-exhaustion-with-a-unique-backward-euler-root.md items/ex-stiff-scalar-decay-and-trapezoid-ringing.md --json",
+      "exit_code": 1,
+      "result": "Initial pass: four proofs checked, three passed, SDIRK requested canonical phase renumbering only. Three definitions not applicable."
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/prop-two-stage-sdirk-order-two-and-l-stability.md --json",
+      "exit_code": 0,
+      "result": "Final renumbered SDIRK proof passed; zero failures. Other three proofs were unchanged since their successful checks."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-implicit-residual-and-algebraic-error-units.md items/def-backward-euler-step-equation.md items/def-implicit-runge-kutta-stage-equations.md items/lem-small-step-implicit-rk-branch-and-residual-error.md items/prop-two-stage-sdirk-order-two-and-l-stability.md items/ex-newton-budget-exhaustion-with-a-unique-backward-euler-root.md items/ex-stiff-scalar-decay-and-trapezoid-ringing.md --json",
+      "exit_code": 0,
+      "result": "Seven checked; zero errors and warnings. Subsequent item change was SDIRK phase labels only."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-65.proof-contracts.json --items def-implicit-residual-and-algebraic-error-units,def-backward-euler-step-equation,def-implicit-runge-kutta-stage-equations,lem-small-step-implicit-rk-branch-and-residual-error,prop-two-stage-sdirk-order-two-and-l-stability,ex-newton-budget-exhaustion-with-a-unique-backward-euler-root,ex-stiff-scalar-decay-and-trapezoid-ringing --strict --json",
+      "exit_code": 0,
+      "result": "All seven checked; zero errors and warnings."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-65.proof-contracts.json --items prop-two-stage-sdirk-order-two-and-l-stability --strict --json",
+      "exit_code": 0,
+      "result": "Final SDIRK contract after phase renumbering passed; zero errors and warnings."
+    },
+    {
+      "command": "node tools/finite-smoke.mjs research/numerical-optimization-dynamics-2026-10-16-batch-65.proof-contracts.json --items def-implicit-residual-and-algebraic-error-units,def-backward-euler-step-equation,def-implicit-runge-kutta-stage-equations,lem-small-step-implicit-rk-branch-and-residual-error,prop-two-stage-sdirk-order-two-and-l-stability,ex-newton-budget-exhaustion-with-a-unique-backward-euler-root,ex-stiff-scalar-decay-and-trapezoid-ringing --json",
+      "exit_code": 0,
+      "result": "Three fixtures passed: SDIRK two moments and 25 half-plane samples; Newton zero-budget exhaustion; stiff scalar amplification factors. These finite models do not prove general stability or convergence."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/def-implicit-residual-and-algebraic-error-units.md items/def-backward-euler-step-equation.md items/lem-small-step-implicit-rk-branch-and-residual-error.md items/prop-two-stage-sdirk-order-two-and-l-stability.md items/ex-newton-budget-exhaustion-with-a-unique-backward-euler-root.md items/ex-stiff-scalar-decay-and-trapezoid-ringing.md",
+      "exit_code": 0,
+      "result": "proof-layout: 6 items, 14 steps, 0 defects. Run once after the final item edit; no later item edits."
+    }
+  ]
+}

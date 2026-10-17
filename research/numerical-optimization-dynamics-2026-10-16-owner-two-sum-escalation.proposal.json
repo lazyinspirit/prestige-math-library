@@ -1,0 +1,420 @@
+{
+  "version": 1,
+  "kind": "owner-two-sum-shared-integration-proposal",
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "actual_owning_batch": 1,
+  "apply_policy": "Merge these records into current shared files only after the other batch-1 repair writer hands off; never replace the shared manifest or contracts wholesale.",
+  "new_manifest_items": [
+    {
+      "id": "lem-binary-rounding-grid-and-ordered-two-sum",
+      "kind": "lemma",
+      "title": "Binary rounding grids, exact subtraction, and ordered TwoSum",
+      "deps": [
+        "thm-of-archimedean"
+      ],
+      "dependency_level": 0
+    }
+  ],
+  "existing_manifest_updates": [
+    {
+      "id": "thm-two-sum-error-free-transform",
+      "deps": [
+        "alg-two-sum-error-free-transform",
+        "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+        "lem-binary-rounding-grid-and-ordered-two-sum"
+      ]
+    },
+    {
+      "id": "ex-two-sum-recovers-a-rounded-away-low-part",
+      "deps": [
+        "alg-two-sum-error-free-transform",
+        "thm-two-sum-error-free-transform",
+        "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+      ]
+    }
+  ],
+  "page_addition": {
+    "page": "finite-precision-direct-factorizations",
+    "insert_before": "thm-two-sum-error-free-transform",
+    "id": "lem-binary-rounding-grid-and-ordered-two-sum"
+  },
+  "page_prose_directions": {
+    "finite-precision-direct-factorizations": "Remove only the stale assertion that the full TwoSum case proof remains escalated; state that binary nearest-even exact-transform correctness is proved for precision p>=2 and successful calls. Preserve the separate Householder status as decided by its repair owner.",
+    "finite-precision-direct-factorizations-examples": "Remove only the stale unresolved TwoSum proof qualification; the example now checks all six rounded nodes and actual binary64 success."
+  },
+  "contracts": {
+    "lem-binary-rounding-grid-and-ordered-two-sum": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Integer induction gives $2^n\\ge n+1$ for $n\\ge0$: the initial equality is immediate and $2^{n+1}\\ge2(n+1)\\ge n+2$. For $t>0$, [F1] supplies a natural $N>\\max(t,1/t,1)$, so $2^{-N}<t<2^N$. The finite set of integers $j\\in[-N,N]$ with $2^j\\le t$ is nonempty and has a largest element $E$; it satisfies $2^E\\le t<2^{E+1}$. Strict increase of powers of two makes $E$ unique. Thus the stated $E(x)$ exists for every $x\\ne0$. In its binade, the finitely many points $m2^{E-p+1}$, $2^{p-1}\\le m\\le2^p$, bracket $t$; their adjacent neighbors determine its nearest point. Points outside that bracket cannot be nearer, and zero is farther than a positive grid point; negative arguments follow by reflection. On a binade $[2^j,2^{j+1}]$, the nonnegative grid has spacing $2^{j-p+1}$. Its consecutive midpoints partition the real line into nearest-point cells, proving monotonicity and exactness on the grid; reflection preserves the even-significand tie rule, proving oddness. Every nonzero real number has two bracketing grid points, so a nearest point exists and is nonzero for a nonzero argument. The gaps on either side of a grid point $c\\ne0$ are at most $q(c)$, including the half-sized lower gap at a power of two. Its rounding cell therefore gives $|R(t)-t|\\le q(R(t))/2$. Also, for any power of two $h$, every integer multiple $nh$ with $|n|\\le2^p$ is in $\\mathbb B_p$: the integer has at most $p$ significant bits, except $|n|=2^p$, which is a power of two.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Suppose $x,y\\ne0$ and $|x|\\ge|y|$, and put $h=q(y)$. Both operands and their exact sum $t=x+y$ are integer multiples of $h$. Whenever $|t|\\le|y|$, step 1.1 makes $t$ representable because $|y|<2^p h$. In particular, if $|R(t)|<|y|$, monotonicity and the fixed grid points $\\pm|y|$ imply $|t|<|y|$, so $R(t)=t$. Otherwise $|R(t)|\\ge|y|$, hence its binade spacing is an integer multiple of $h$, so $\\rho=R(t)-t$ is an integer multiple of $h$. Since $x$ and $y$ themselves are candidate nearest points, $|\\rho|\\le\\min(|t-x|,|t-y|)=|y|<2^p h$; step 1.1 makes $\\rho$ representable. The zero-operand cases have $\\rho=0$, and interchange handles the other magnitude order. This proves the second assertion, including the strict small-rounded-sum case.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.3",
+          "step": "1.3",
+          "claim": "For the subtraction assertion, change both signs and interchange operands so that $x\\ge y>0$ and $x\\le2y$. Then $0\\le x-y\\le y$, and the grid argument in step 1.2, applied to $x$ and $-y$, shows that $x-y$ is representable. Reversing the transformations proves all same-sign cases; zero gives only the trivial zero pair.",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For the ordered transform, if $A=0$ then $B=0$ and all outputs vanish. Otherwise oddness allows $A>0$. Since $0\\le A+B\\le2A$ and $2A$ is representable, monotonicity gives $0\\le S\\le2A$. If $B\\ge-A/2$, it also gives $S\\ge A/2$; step 1.3 then makes $S-A$ exact. If $B<-A/2$, the operands $A$ and $-B$ meet step 1.3, so $S=A+B$ exactly and $S-A=B$ is exact as well. Thus always $Z=S-A=B+\\rho$, where $\\rho=S-(A+B)$. Step 1.2 makes $-\\rho$ representable, so $T=R(B-Z)=-\\rho=A+B-S$ exactly.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns two real operands, not an empty indexed family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 separately prove zero-operand and A=B=0 cases."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no variable input count or dimension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 includes equal operands and exact cancellation; step 2.1 includes B=-A."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats power-of-two binade endpoints and their half-sized lower gaps; exponents are unbounded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice axiom is required; nearest-even rounding is explicitly determined."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-two-sum-error-free-transform": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-two-sum-error-free-transform",
+          "source_section": "Definition",
+          "quote": "For real floating-point a,b compute s=fl(a+b), z=fl(s-a), e=fl((a-(s-z))+(b-z)), with every operation separately rounded. Return the first range failure and operation index if an exact intermediate is nonzero subnormal, overflowed, or otherwise invalid; otherwise return (s,e). The fixed sequence terminates. Its general exact-transform claim is a separate theorem; this definition alone does not prove exact recovery.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-binary-rounding-grid-and-ordered-two-sum",
+          "source_section": "Statement",
+          "quote": "For an integer $p\\ge2$, let $\\mathbb B_p=\\{0\\}\\cup\\{\\pm m2^k: m,k\\in\\mathbb Z,\\ 2^{p-1}\\le m<2^p\\}$, with unbounded exponent. Let $R$ round a real number to its nearest member of $\\mathbb B_p$, breaking ties by the even normalized significand; set $R(0)=0$. For $x\\ne0$ put $E(x)$ be the unique integer with $2^{E(x)}\\le|x|<2^{E(x)+1}$, and set $q(x)=2^{E(x)-p+1}$. The following hold.\n\n- $R$ is monotone, odd, and fixes $\\mathbb B_p$. For $R(t)\\ne0$, $|R(t)-t|\\le q(R(t))/2$.\n- If $x,y\\in\\mathbb B_p$, then $\\rho=R(x+y)-(x+y)$ belongs to $\\mathbb B_p$ and $|\\rho|\\le\\min(|x|,|y|)$. If $|R(x+y)|<\\min(|x|,|y|)$, the sum is exact.\n- If $x,y\\in\\mathbb B_p$ have the same sign and $|x|/2\\le|y|\\le2|x|$, then $x-y\\in\\mathbb B_p$ (Sterbenz exact subtraction).\n- If $A,B\\in\\mathbb B_p$ and $|A|\\ge|B|$, then $S=R(A+B)$, $Z=R(S-A)$, $T=R(B-Z)$ satisfy $Z=S-A$ and $T=A+B-S$ exactly.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Let $R$ denote unbounded binary nearest-even rounding from [F3]. On the closed normal range, bounded-format rounding equals $R$: the normal grid is identical, its endpoints are representable, and a point beyond either endpoint cannot beat that endpoint for an exact argument inside the range. Additional subnormal values cannot alter a nearest choice there. At a boundary power of two the normalized even significand gives the same tie choice; zero is exact. All inputs belong to $\\mathbb B_p$. By [F2], induction over the six operations [F1] therefore identifies the actual successful computation with the same sequence using $R$. It suffices to prove its unbounded identity.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Put $\\rho=s-(a+b)$. If $|a|\\ge|b|$, the ordered transform [F3] gives $z=s-a$ and $R(b-z)=-\\rho$ exactly. Consequently $v=R(s-z)=a$, $w=0$, $t=-\\rho$, and $e=-\\rho$. This includes $a=b=0$.",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Suppose $|a|<|b|$. If $|s|<|a|$, the small-rounded-sum assertion [F3] makes $s=a+b$ exact. Then $z=b$, $v=a$, $w=t=e=0$ and $\\rho=0$. For the remaining case $|s|\\ge|a|$, apply the ordered transform to $(s,-a)$: it says $R(z-s)=z-s$ and $R(-a-(z-s))=(s-a)-z$. Oddness therefore gives $v=R(s-z)=s-z$ and $w=R(a-v)=z-(s-a)$ exactly. Writing $\\sigma=z-(s-a)$, we have $w=\\sigma$ and $z=b+\\rho+\\sigma$.",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "In this remaining case, oddness permits simultaneous sign reversal so that $b>0$. Since $|a|<b$, we have $0<a+b<2b$, and monotonicity gives $0<s\\le2b$. Thus $q(s)\\le q(2b)=2q(b)$ and the rounding bound yields $|\\rho|\\le q(b)\\le b/2$, since $p\\ge2$. Also $|\\rho|\\le|a|<b$ by the addition-error bound. Therefore $b/2\\le s-a=b+\\rho<2b$; monotonicity, fixing $b/2$ and $2b$, gives $b/2\\le z\\le2b$. Sterbenz [F3] makes $t=R(b-z)=b-z=-\\rho-\\sigma$ exact. Finally $w+t=-\\rho$ is representable by the addition-error assertion [F3], so $e=R(w+t)=-\\rho$ exactly. Oddness gives the same conclusion before sign reversal.",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The branches in steps 1.2, 2.1, and 2.2 cover every magnitude order and sign, and each gives $e=-\\rho=(a+b)-s$. Step 1.1 transfers this identity to every successful finite-range call, proving $s+e=a+b$. A nonzero subnormal exact intermediate or overflow returns failure under [F2] and is outside the success conclusion; no extra hidden range assumption is used in any successful boundary case.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns two real operands, not an empty indexed family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 includes a=b=0; step 2.1 with a=0 is covered by the ordered pair (s,-a)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no variable input count or dimension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Exact cancellation is in step 1.2 or the small-sum branch of step 2.1; both magnitude orders and all signs are exhausted in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 proves bounded/unbounded rounding agreement on the closed normal range. Step 2.2 uses p>=2, including equality at p=2. Step 3.1 retains the first range-failure exclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice axiom is required; nearest-even rounding is explicitly determined."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-two-sum-recovers-a-rounded-away-low-part": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-two-sum-error-free-transform",
+          "source_section": "Definition",
+          "quote": "For real floating-point a,b compute s=fl(a+b), z=fl(s-a), e=fl((a-(s-z))+(b-z)), with every operation separately rounded. Return the first range failure and operation index if an exact intermediate is nonzero subnormal, overflowed, or otherwise invalid; otherwise return (s,e). The fixed sequence terminates. Its general exact-transform claim is a separate theorem; this definition alone does not prove exact recovery.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-two-sum-error-free-transform",
+          "source_section": "Statement",
+          "quote": "Use a binary floating-point format of precision $p\\ge2$: its normal positive values are $m2^{j-p+1}$ for integers $2^{p-1}\\le m<2^p$ and $e_{\\min}\\le j\\le e_{\\max}$, with their negatives and zero. Any additional representable values below the normal range must belong to the unbounded binary set $\\mathbb B_p$ of [[lem-binary-rounding-grid-and-ordered-two-sum]] (as ordinary binary subnormals do). Round each operation to nearest, ties to even, with the no-underflow success rule of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]].\n\nFor any representable real inputs $a,b$ for which [[alg-two-sum-error-free-transform]] succeeds, its output satisfies\n$$s=\\operatorname{fl}(a+b),\\qquad e=(a+b)-s,\\qquad s+e=a+b$$\nexactly in real arithmetic. No ordering or sign condition on the inputs is required; zeros, exact cancellation, and all successful calls at either normal-range boundary are included.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The spacing above $1$ is $2^{-52}$, so $1+2^{-53}$ is the midpoint between $1$ and $1+2^{-52}$. The even-significand endpoint is $1$; hence $s=1$. The next exact operands give $z=1-1=0$, $v=1-0=1$, $w=1-1=0$, and $t=2^{-53}-0=2^{-53}$. Each is representable, so each subtraction is exact.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The final exact intermediate is $w+t=2^{-53}$, hence $e=2^{-53}$. The first exact sum $1+2^{-53}$ and every later nonzero exact intermediate ($1$ or $2^{-53}$) are normal and within range; the zero intermediates are allowed by [F3]. Thus the call succeeds, its format satisfies [F2], and $s+e=1+2^{-53}=a+b$ exactly, also directly verified by these outputs.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns two real operands, not an empty indexed family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes z=w=0 and step 2.1 checks the exact-zero success rule."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The fixed leading operand a=1 is processed in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The first sum is an exact tie; step 1.1 chooses the even-significand endpoint."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies every nonzero exact intermediate is normal in binary64 and within the declared exponent range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice axiom is required; nearest-even rounding is explicitly determined."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "binary64 six-node TwoSum calculation",
+          "method": "exact finite calculation",
+          "calculation": "RN(1+2^-53)=1; z=0; v=1; w=0; t=2^-53; e=2^-53; all exact nonzero intermediates are normal.",
+          "expected": {
+            "s": "1",
+            "e": "2^-53",
+            "exact_sum": "1+2^-53"
+          }
+        }
+      ],
+      "finite_smoke": []
+    }
+  },
+  "scope_addition": "lem-binary-rounding-grid-and-ordered-two-sum",
+  "coverage_additions": {
+    "source_url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf",
+    "title": "Shewchuk, Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates",
+    "actual_reading": "Downloaded the authoritative complete PDF. Actually inspected section 2.1 format conventions and sections 2.2–2.3, including Lemmas 1–5 and Theorems 6–7; visually read rendered printed pages 5–8 (PDF pages 9–12). No claim to reading the unrelated remainder.",
+    "local_source_archive": "research/numerical-optimization-dynamics-2026-10-16-owner-two-sum-escalation.before/shewchuk-robustr.pdf",
+    "source_scope": "Binary rounding grids, exact residual representability, Sterbenz, ordered transform, and all-order Knuth TwoSum. Our step 2.2 sharpens the p>=3 source proof to p>=2 by bounding s-a directly."
+  },
+  "root_owned_next_actions": [
+    "Reconcile dependency_level labels with the current batch-1 graph.",
+    "Merge scope, manifest, page, source coverage, and proof contract proposals.",
+    "Refresh readiness through native authorized owner routes for changed/additional carriers and invalidated consumers.",
+    "Recertify actual current frontier before native gates; no gate or readiness pass is claimed here."
+  ]
+}

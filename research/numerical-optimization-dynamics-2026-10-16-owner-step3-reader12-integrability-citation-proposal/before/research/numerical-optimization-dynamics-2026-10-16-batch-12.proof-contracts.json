@@ -1,0 +1,1734 @@
+{
+  "version": 1,
+  "level": "numerical-optimization-dynamics-2026-10-16-batch-12",
+  "scope": [
+    "lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative",
+    "thm-complex-step-derivative-has-second-order-error-under-holomorphy",
+    "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds",
+    "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds",
+    "thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring",
+    "thm-optimal-step-for-forward-and-central-difference-error-bounds",
+    "thm-richardson-extrapolation-has-fourth-order-error-bound",
+    "cex-colliding-column-colors-do-not-identify-a-jacobian",
+    "cex-complex-step-absolute-value-returns-the-wrong-derivative",
+    "ex-colored-jacobian-of-two-independent-reactions",
+    "ex-forward-difference-noise-bound-has-a-balanced-step"
+  ],
+  "contracts": {
+    "lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-difference-stencils-and-evaluation-error-model",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be open, $x\\in I$, and $h>0$. When $x+h\\in I$, the **forward difference** of $f:I\\to\\mathbb R$ is\n\n$$D_h^+f(x):=\\frac{f(x+h)-f(x)}{h}.$$\n\nWhen $x-h,x+h\\in I$, the **central difference** is\n\n$$D_h^0f(x):=\\frac{f(x+h)-f(x-h)}{2h}.$$\n\nAn evaluation with absolute error bound $\\delta\\ge0$ is a value $\\widehat f(y)=f(y)+e_y$ with $|e_y|\\le\\delta$ at each requested point $y$. The corresponding inexact quotients are obtained by replacing each $f(y)$ in the displayed stencil by $\\widehat f(y)$. The bound is absolute and applies separately to each call; no correlation or relative-error assumption is included.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-taylor-lagrange-and-cauchy-remainders",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-taylor-schlomilch-roche-remainder]], there are points $\\xi_L,\\xi_C$ between $a$ and $x$ such that\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_L)}{\\iota((n+1)!)}(x-a)^{n+1}$$\nand\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_C)}{\\iota(n!)}(x-\\xi_C)^n(x-a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-taylor-polynomial-and-remainder",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$, let $f$ have derivatives through order $n$ at $a$, and let $\\iota:\\mathbb N\\to\\mathbb R$ be the canonical embedding. The **Taylor polynomial of degree at most $n$ about $a$** is\n$$T_{n,a}f(x):=\\sum_{j=0}^{n}\\frac{f^{(j)}(a)}{\\iota(j!)}(x-a)^j.$$\nThe **Taylor remainder** is $R_{n,a}f(x):=f(x)-T_{n,a}f(x)$.\n\nThe factorials are natural numbers as in [[def-factorial-and-falling-factorial]] and enter real arithmetic only through $\\iota$ ([[def-canonical-natural]]); they are nonzero ([[lem-of-naturals-positive]]). The sum and powers are those of [[def-finite-sum]], [[lem-finite-sum-laws]], and [[def-integer-power]]. For $n=0$, $T_{0,a}f$ is the constant $f(a)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F2] at $x$ to $x+h$ and $x-h$. The degree-four Taylor polynomials subtract to $2hf'(x)+h^3f'''(x)/3$, because the constant, quadratic and fourth-degree terms agree at the two endpoints. Each remainder has magnitude at most $M_5h^5/120$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3]–[F4], the difference of the two remainders has magnitude at most $2M_5h^5/120$. Divide the subtracted expansion by $2h$ and use [F1]: the remainder in $D_h^0f(x)$ is bounded by $M_5h^4/120$, and the cubic term becomes $f'''(x)h^2/6$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative has no separate empty-family branch beyond its stated domains and hypotheses. The Statement has a real center and positive step with both symmetric stencil points in the open domain. The proof cancels even Taylor terms and divides only by positive 2h, retaining zero derivative/remainder constants. It constructs a remainder from two fixed evaluations, not arbitrary witness families or an iff."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 allow M5=0; both Lagrange remainders vanish and the central expansion still holds."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative has no separate one-element or value-one regime beyond the stated data. The Statement has a real center and positive step with both symmetric stencil points in the open domain. The proof cancels even Taylor terms and divides only by positive 2h, retaining zero derivative/remainder constants. It constructs a remainder from two fixed evaluations, not arbitrary witness families or an iff."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative has no additional collapsed regime beyond the explicit hypotheses and named boundary cases. The Statement has a real center and positive step with both symmetric stencil points in the open domain. The proof cancels even Taylor terms and divides only by positive 2h, retaining zero derivative/remainder constants. It constructs a remainder from two fixed evaluations, not arbitrary witness families or an iff."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1 use the closed segment [x-h,x+h]; the Taylor points are interior to the endpoint intervals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative uses only explicitly named finite data, arbitrary points, or theorem-provided intermediate values; it does not select an element from a merely nonempty family. The Statement has a real center and positive step with both symmetric stencil points in the open domain. The proof cancels even Taylor terms and divides only by positive 2h, retaining zero derivative/remainder constants. It constructs a remainder from two fixed evaluations, not arbitrary witness families or an iff."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-forward direction. The Statement has a real center and positive step with both symmetric stencil points in the open domain. The proof cancels even Taylor terms and divides only by positive 2h, retaining zero derivative/remainder constants. It constructs a remainder from two fixed evaluations, not arbitrary witness families or an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-reverse direction. The Statement has a real center and positive step with both symmetric stencil points in the open domain. The proof cancels even Taylor terms and divides only by positive 2h, retaining zero derivative/remainder constants. It constructs a remainder from two fixed evaluations, not arbitrary witness families or an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "fifth-power-attains-central-remainder-constant",
+          "claim": "For f(t)=t^5/120 at x=0, the central derivative error is h^4/120.",
+          "result": "f′(0)=f″(0)=0, f^(5)=1, and D_h^0 f(0)=h^4/120, so equality holds in the M5 h^4/120 remainder bound."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read both proof steps and all six direct suppliers, including the reflected Taylor remainder hypothesis in thm-taylor-schlomilch-roche-remainder. C5 on a neighborhood licenses degree-four expansions at both endpoints; subtraction cancels even powers, leaves f'''(x)h^2/6, and the two M5 h^5/120 remainders divided by 2h give M5 h^4/120. Positive h prevents zero division; M5=0 remains valid; the coefficient is fixed at x for all admissible steps. No infinite choice or iff obligation. Reader and refuter report no finding; independent review finds no defect."
+      }
+    },
+    "thm-complex-step-derivative-has-second-order-error-under-holomorphy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-step-derivative-estimator",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, $x\\in U\\cap\\mathbb R$, and $h>0$ with $x+ih\\in U$. For a holomorphic $f:U\\to\\mathbb C$ that is real-valued on some real interval $I\\subseteq U\\cap\\mathbb R$ containing $x$, the **complex-step estimate** is\n\n$$C_hf(x):=\\frac{\\operatorname{Im}f(x+ih)}{h}.$$\n\nFor an inexact complex evaluation $\\widehat f(x+ih)$, define its imaginary-component error by $\\delta_{\\rm im}:=|\\operatorname{Im}\\widehat f(x+ih)-\\operatorname{Im}f(x+ih)|$. The inexact estimate is $\\widehat C_hf(x):=\\operatorname{Im}\\widehat f(x+ih)/h$; its evaluation-error contribution is controlled by $\\delta_{\\rm im}/h$. No claim is made that arbitrary code representing a real function has a holomorphic extension.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-differentiability-holomorphic-and-entire",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, let $a\\in U$, and let $f:U\\to\\mathbb C$. The function $f$ is **complex differentiable at $a$** if the limit\n\n$$ \\lim_{\\substack{h\\to0\\\\ h\\ne0,\\ a+h\\in U}}\\frac{f(a+h)-f(a)}{h} $$\n\nexists in the metric of [[def-complex-metric-convergence-and-continuity]]. Its value is the **complex derivative** of $f$ at $a$, denoted $f'(a)$. The increments are nonzero and remain in the domain; because $U$ is open, all sufficiently small increments are allowed.\n\nThe function $f$ is **holomorphic on $U$** when it is complex differentiable at every point of $U$. A function holomorphic on all of $\\mathbb C$ is **entire**. The word analytic is reserved for the local power-series notion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, let $a\\in U$, and write $f=u+iv:U\\to\\mathbb C$. The following are equivalent:\n\n1. $f$ is complex differentiable at $a$.\n2. Under $\\mathbb C\\cong\\mathbb R^2$, the map $f$ is real totally differentiable at $a$ and $Df(a)$ is multiplication by a complex number.\n3. The map $f$ is real totally differentiable at $a$ and $\\partial_{\\bar z}f(a)=0$.\n4. The map $f$ is real totally differentiable at $a$ and satisfies the Cauchy–Riemann equations\n\n$$ u_x(a)=v_y(a),\\qquad u_y(a)=-v_x(a). $$\n\nWhen these conditions hold,\n\n$$ f'(a)=u_x(a)+iv_x(a)=v_y(a)-iu_y(a)=\\partial_zf(a). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-holomorphic-functions-are-real-analytic-and-smooth",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f=u+iv:U\\to\\mathbb C$ be holomorphic. Under the coordinate identification $\\mathbb C=\\mathbb R^2$, the map $(u,v):U\\to\\mathbb R^2$ is real analytic in the sense of [[def-real-analytic-map-on-the-plane]] and is of class $C^k$ for every natural $k$, hence smooth.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-integral-formula-higher-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f$ be holomorphic on $D(a,R)$, let $0<r<R$, and let $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$. Define $f^{(0)}=f$ and, whenever it exists, $f^{(n+1)}=(f^{(n)})'$. Then every $f^{(n)}$ exists on $D(a,r)$ and, for every $z\\in D(a,r)$ and $n\\in\\mathbb N$,\n\n$$f^{(n)}(z)=\\frac{n!}{2\\pi i}\\int_\\gamma\\frac{f(\\zeta)}{(\\zeta-z)^{n+1}}\\,d\\zeta.$$\n\nIn particular, every holomorphic function has complex derivatives of all orders locally.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-c2-holomorphic-function-has-holomorphic-derivative",
+          "source_section": "Statement",
+          "quote": "Let $f=u+iv$ be holomorphic on an open set $U\\subseteq\\mathbb C$, and suppose $u,v\\in C^2(U)$. Then the complex derivative $f':U\\to\\mathbb C$ is holomorphic.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-taylor-lagrange-and-cauchy-remainders",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-taylor-schlomilch-roche-remainder]], there are points $\\xi_L,\\xi_C$ between $a$ and $x$ such that\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_L)}{\\iota((n+1)!)}(x-a)^{n+1}$$\nand\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_C)}{\\iota(n!)}(x-\\xi_C)^n(x-a).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-taylor-polynomial-and-remainder",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$, let $f$ have derivatives through order $n$ at $a$, and let $\\iota:\\mathbb N\\to\\mathbb R$ be the canonical embedding. The **Taylor polynomial of degree at most $n$ about $a$** is\n$$T_{n,a}f(x):=\\sum_{j=0}^{n}\\frac{f^{(j)}(a)}{\\iota(j!)}(x-a)^j.$$\nThe **Taylor remainder** is $R_{n,a}f(x):=f(x)-T_{n,a}f(x)$.\n\nThe factorials are natural numbers as in [[def-factorial-and-falling-factorial]] and enter real arithmetic only through $\\iota$ ([[def-canonical-natural]]); they are nonzero ([[lem-of-naturals-positive]]). The sum and powers are those of [[def-finite-sum]], [[lem-finite-sum-laws]], and [[def-integer-power]]. For $n=0$, $T_{0,a}f$ is the constant $f(a)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $g(t):=\\operatorname{Im}f(x+it)$ for $0\\le t\\le h$. By [F4], its coordinate functions are smooth. By [F3], $g'(t)=v_y(x,t)=u_x(x,t)=\\operatorname{Re}f'(x+it)$. If $q=p+ir$ is holomorphic, [F3] gives $\\partial_y p=-\\partial_xr=-\\operatorname{Im}q'$ and $\\partial_y r=\\partial_xp=\\operatorname{Re}q'$. Applying [F5] to $f$ and then to $f'$ makes $f'$ and $f''$ holomorphic, so these identities give $g''(t)=-\\operatorname{Im}f''(x+it)$ and $g'''(t)=-\\operatorname{Re}f'''(x+it)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At real arguments near $x$, $f$ is real by hypothesis, so its real-direction difference quotients show that $f'$ is real there; applying the same argument to the holomorphic function $f'$ shows that $f''$ is real there. Thus $g(0)=0$, $g'(0)=f'(x)$, and $g''(0)=-\\operatorname{Im}f''(x)=0$. By step 1.1, $|g'''(t)|\\le M_3$ on $[0,h]$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F6] to $g$ from $0$ to $h$. For some $\\xi\\in(0,h)$, $g(h)=h f'(x)+g'''(\\xi)h^3/6$. Since $h>0$, [F8] gives $|g(h)/h-f'(x)|=|g'''(\\xi)|h^2/6\\le M_3h^2/6$. By [F1] and [F7], $g(h)/h=C_hf(x)$, proving the exact complex-step error bound.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F1] and [F8], $|\\widehat C_hf(x)-C_hf(x)|\\le\\delta_{\\rm im}/h$. [F9] and step 3.1 give the inexact bound.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F8",
+            "F9",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "thm-complex-step-derivative-has-second-order-error-under-holomorphy has no separate empty-family branch beyond its stated domains and hypotheses. The Statement requires holomorphy, real-axis reality and h>0 on a supplied vertical segment. The proof obtains zero initial imaginary value/second derivative and divides the Taylor expansion by positive h. Evaluation error is a separate allowed nonnegative term; no claim is made at zero step or without holomorphy, and no equivalence is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.1–4.1 show exactness when M3=0 and delta_im=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "thm-complex-step-derivative-has-second-order-error-under-holomorphy has no separate one-element or value-one regime beyond the stated data. The Statement requires holomorphy, real-axis reality and h>0 on a supplied vertical segment. The proof obtains zero initial imaginary value/second derivative and divides the Taylor expansion by positive h. Evaluation error is a separate allowed nonnegative term; no claim is made at zero step or without holomorphy, and no equivalence is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "thm-complex-step-derivative-has-second-order-error-under-holomorphy has no additional collapsed regime beyond the explicit hypotheses and named boundary cases. The Statement requires holomorphy, real-axis reality and h>0 on a supplied vertical segment. The proof obtains zero initial imaginary value/second derivative and divides the Taylor expansion by positive h. Evaluation error is a separate allowed nonnegative term; no claim is made at zero step or without holomorphy, and no equivalence is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain contains the closed vertical segment 0<=t<=h; steps 1.1 and 3.1 include both endpoints and use a Taylor point xi in (0,h)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "thm-complex-step-derivative-has-second-order-error-under-holomorphy uses only explicitly named finite data, arbitrary points, or theorem-provided intermediate values; it does not select an element from a merely nonempty family. The Statement requires holomorphy, real-axis reality and h>0 on a supplied vertical segment. The proof obtains zero initial imaginary value/second derivative and divides the Taylor expansion by positive h. Evaluation error is a separate allowed nonnegative term; no claim is made at zero step or without holomorphy, and no equivalence is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "thm-complex-step-derivative-has-second-order-error-under-holomorphy states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-forward direction. The Statement requires holomorphy, real-axis reality and h>0 on a supplied vertical segment. The proof obtains zero initial imaginary value/second derivative and divides the Taylor expansion by positive h. Evaluation error is a separate allowed nonnegative term; no claim is made at zero step or without holomorphy, and no equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "thm-complex-step-derivative-has-second-order-error-under-holomorphy states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-reverse direction. The Statement requires holomorphy, real-axis reality and h>0 on a supplied vertical segment. The proof obtains zero initial imaginary value/second derivative and divides the Taylor expansion by positive h. Evaluation error is a separate allowed nonnegative term; no claim is made at zero step or without holomorphy, and no equivalence is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "complex-step-cubic-sharpness",
+          "claim": "For f(z)=z^3 at x=0, the complex-step error is h^2 and the M3 h^2/6 bound is exact.",
+          "result": "C_h f(0)=Im((ih)^3)/h=-h^2, f′(0)=0, and Re f^(3)=6, so the error is h^2=6h^2/6."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all four steps and twelve direct suppliers; the Cauchy higher-derivative and C2 derivative theorems license repeated CR identities. For g(t)=Im f(x+it), g'=Re f', g''=-Im f'', g'''=-Re f'''; real-axis reality makes f',f'' real at x. Real degree-two Taylor on the positive vertical segment gives M3 h^2/6; imaginary-component error adds delta_im/h. Domain openness supplies smooth neighborhoods of both endpoints. M3=0 and delta_im=0 remain valid; no claim for a merely real differentiable extension or arbitrary evaluation code. Higham formula (*) and the following real-axis deduction agree. Reader/refuter have no finding; independent review finds no defect."
+      }
+    },
+    "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-difference-stencils-and-evaluation-error-model",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be open, $x\\in I$, and $h>0$. When $x+h\\in I$, the **forward difference** of $f:I\\to\\mathbb R$ is\n\n$$D_h^+f(x):=\\frac{f(x+h)-f(x)}{h}.$$\n\nWhen $x-h,x+h\\in I$, the **central difference** is\n\n$$D_h^0f(x):=\\frac{f(x+h)-f(x-h)}{2h}.$$\n\nAn evaluation with absolute error bound $\\delta\\ge0$ is a value $\\widehat f(y)=f(y)+e_y$ with $|e_y|\\le\\delta$ at each requested point $y$. The corresponding inexact quotients are obtained by replacing each $f(y)$ in the displayed stencil by $\\widehat f(y)$. The bound is absolute and applies separately to each call; no correlation or relative-error assumption is included.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-taylor-lagrange-and-cauchy-remainders",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-taylor-schlomilch-roche-remainder]], there are points $\\xi_L,\\xi_C$ between $a$ and $x$ such that\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_L)}{\\iota((n+1)!)}(x-a)^{n+1}$$\nand\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_C)}{\\iota(n!)}(x-\\xi_C)^n(x-a).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-taylor-polynomial-and-remainder",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$, let $f$ have derivatives through order $n$ at $a$, and let $\\iota:\\mathbb N\\to\\mathbb R$ be the canonical embedding. The **Taylor polynomial of degree at most $n$ about $a$** is\n$$T_{n,a}f(x):=\\sum_{j=0}^{n}\\frac{f^{(j)}(a)}{\\iota(j!)}(x-a)^j.$$\nThe **Taylor remainder** is $R_{n,a}f(x):=f(x)-T_{n,a}f(x)$.\n\nThe factorials are natural numbers as in [[def-factorial-and-falling-factorial]] and enter real arithmetic only through $\\iota$ ([[def-canonical-natural]]); they are nonzero ([[lem-of-naturals-positive]]). The sum and powers are those of [[def-finite-sum]], [[lem-finite-sum-laws]], and [[def-integer-power]]. For $n=0$, $T_{0,a}f$ is the constant $f(a)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F2] with $n=1$, $a=x$, and $y=x+h$. Then $f(x+h)=f(x)+hf'(x)+h^2f''(\\xi)/2$ for some $\\xi\\in(x,x+h)$. Substituting into [F1] gives $D_h^+f(x)-f'(x)=hf''(\\xi)/2$, so the forward truncation bound follows.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply [F2] with $n=2$ to $y=x+h$ and $y=x-h$. Subtracting the two expansions cancels the equal even-order terms and gives $D_h^0f(x)-f'(x)=h^2(f'''(\\xi_+)+f'''(\\xi_-))/12$ for intermediate points $\\xi_+\\in(x,x+h)$ and $\\xi_-\\in(x-h,x)$. The derivative bound and [F3]–[F4] give magnitude at most $M_3h^2/6$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write the forward evaluation errors as $e_+=e_{x+h}$ and $e_0=e_x$. By [F1], $\\widehat D_h^+-D_h^+=(e_+-e_0)/h$; [F3]–[F4] bound its magnitude by $2\\delta/h$. The triangle inequality with step 1.1 proves the forward inexact bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write the central errors as $e_+=e_{x+h}$ and $e_-=e_{x-h}$. Then $\\widehat D_h^0-D_h^0=(e_+-e_-)/(2h)$, whose magnitude is at most $\\delta/h$ by [F1], [F3] and [F4], hence at most $2\\delta/h$. Combining with step 1.2 proves the stated central inexact bound.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds has no separate empty-family branch beyond its stated domains and hypotheses. The Statement assumes positive step and the appropriate nonempty real stencil segment. The proof applies Taylor at fixed endpoints and bounds evaluation differences by the triangle inequality, allowing zero derivative/error bounds. It supplies sufficient inequalities, not exact-error equivalences, and no choice of independent random noise is silently made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–3.1 allow any derivative bound or evaluation bound to be zero; the corresponding truncation or evaluation contribution then vanishes."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds has no separate one-element or value-one regime beyond the stated data. The Statement assumes positive step and the appropriate nonempty real stencil segment. The proof applies Taylor at fixed endpoints and bounds evaluation differences by the triangle inequality, allowing zero derivative/error bounds. It supplies sufficient inequalities, not exact-error equivalences, and no choice of independent random noise is silently made."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds has no additional collapsed regime beyond the explicit hypotheses and named boundary cases. The Statement assumes positive step and the appropriate nonempty real stencil segment. The proof applies Taylor at fixed endpoints and bounds evaluation differences by the triangle inequality, allowing zero derivative/error bounds. It supplies sufficient inequalities, not exact-error equivalences, and no choice of independent random noise is silently made."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement uses closed stencil segments; steps 1.1–1.2 use Taylor remainders with intermediate points inside those segments."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds uses only explicitly named finite data, arbitrary points, or theorem-provided intermediate values; it does not select an element from a merely nonempty family. The Statement assumes positive step and the appropriate nonempty real stencil segment. The proof applies Taylor at fixed endpoints and bounds evaluation differences by the triangle inequality, allowing zero derivative/error bounds. It supplies sufficient inequalities, not exact-error equivalences, and no choice of independent random noise is silently made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-forward direction. The Statement assumes positive step and the appropriate nonempty real stencil segment. The proof applies Taylor at fixed endpoints and bounds evaluation differences by the triangle inequality, allowing zero derivative/error bounds. It supplies sufficient inequalities, not exact-error equivalences, and no choice of independent random noise is silently made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-reverse direction. The Statement assumes positive step and the appropriate nonempty real stencil segment. The proof applies Taylor at fixed endpoints and bounds evaluation differences by the triangle inequality, allowing zero derivative/error bounds. It supplies sufficient inequalities, not exact-error equivalences, and no choice of independent random noise is silently made."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-jacobian-and-hessian-vector-difference-products",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\ge1$, $U\\subseteq\\mathbb R^n$ be open, $x\\in U$, $F:U\\to\\mathbb R^m$, $f:U\\to\\mathbb R$, and let $v\\in\\mathbb R^n$. Use the Jacobian $JF(x)$ and gradient $\\nabla f(x)$ of [[def-jacobian-matrix-and-gradient]], the Hessian $H_f(x)$ of [[def-hessian-and-euclidean-critical-point]], and the published Euclidean vector norm $\\|\\cdot\\|_2$ of [[def-p-norms-on-rn]]. The Jacobian-vector products below require $JF(x)$ to exist, and the Hessian-vector products require $H_f(x)$ to exist. Each gradient-difference Hessian-vector estimate also requires $\\nabla f$ to exist at every point in its stencil. The exact products are $JF(x)v$ and $H_f(x)v$, respectively.\n\nFor $h>0$ with the required points in $U$, define the forward and central Jacobian-vector estimates\n\n$$J_h^+(F,x,v):=\\frac{F(x+hv)-F(x)}h,\\qquad J_h^0(F,x,v):=\\frac{F(x+hv)-F(x-hv)}{2h},$$\n\nand the gradient-difference Hessian-vector estimates\n\n$$H_h^+(f,x,v):=\\frac{\\nabla f(x+hv)-\\nabla f(x)}h,\\qquad H_h^0(f,x,v):=\\frac{\\nabla f(x+hv)-\\nabla f(x-hv)}{2h}.$$\n\nFor each requested vector value $z(y)$, write an inexact evaluation as $\\widehat z(y)=z(y)+e$. When an error bound is specified, it is per call: $\\|e\\|_2\\le\\delta$ for that call's $\\delta\\ge0$. Errors may be dependent or random; a stated bound on a random error is understood to hold almost surely. Define the inexact estimates by substitution:\n\n$$\\widehat J_h^+(F,x,v):=\\frac{\\widehat F(x+hv)-\\widehat F(x)}h,\\qquad \\widehat J_h^0(F,x,v):=\\frac{\\widehat F(x+hv)-\\widehat F(x-hv)}{2h},$$\n\n$$\\widehat H_h^+(f,x,v):=\\frac{\\widehat{\\nabla f}(x+hv)-\\widehat{\\nabla f}(x)}h,\\qquad \\widehat H_h^0(f,x,v):=\\frac{\\widehat{\\nabla f}(x+hv)-\\widehat{\\nabla f}(x-hv)}{2h}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-derivatives-along-a-line-have-the-multinomial-expansion",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open, $f\\in C^k(U)$, and let $I\\subseteq\\mathbb R$ be an open interval such that $a+th\\in U$ for every $t\\in I$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-canonical-natural]]. For $g(t)=f(a+th)$ and every $0\\le r\\le k$,\n\n$$g^{(r)}(t)=\\sum_{|\\alpha|=r}\\frac{\\iota(r!)}{\\iota(\\alpha!)}D^\\alpha f(a+th)h^\\alpha\\qquad(t\\in I).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-symmetry-of-higher-mixed-partials",
+          "source_section": "Statement",
+          "quote": "Let $k\\ge2$. If $f\\in C^k(U)$ for an open $U\\subseteq\\mathbb R^m$, then every iterated derivative of $f$ of order $k$ is unchanged by any permutation of its coordinate differentiations.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-taylor-lagrange-and-cauchy-remainders",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-taylor-schlomilch-roche-remainder]], there are points $\\xi_L,\\xi_C$ between $a$ and $x$ such that\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_L)}{\\iota((n+1)!)}(x-a)^{n+1}$$\nand\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_C)}{\\iota(n!)}(x-\\xi_C)^n(x-a).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-taylor-polynomial-and-remainder",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$, let $f$ have derivatives through order $n$ at $a$, and let $\\iota:\\mathbb N\\to\\mathbb R$ be the canonical embedding. The **Taylor polynomial of degree at most $n$ about $a$** is\n$$T_{n,a}f(x):=\\sum_{j=0}^{n}\\frac{f^{(j)}(a)}{\\iota(j!)}(x-a)^j.$$\nThe **Taylor remainder** is $R_{n,a}f(x):=f(x)-T_{n,a}f(x)$.\n\nThe factorials are natural numbers as in [[def-factorial-and-falling-factorial]] and enter real arithmetic only through $\\iota$ ([[def-canonical-natural]]); they are nonzero ([[lem-of-naturals-positive]]). The sum and powers are those of [[def-finite-sum]], [[lem-finite-sum-laws]], and [[def-integer-power]]. For $n=0$, $T_{0,a}f$ is the constant $f(a)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $p \\in \\mathbb{Q}$ with $p \\ge 1$, with the norms\nof [[def-p-norms-on-rn]]. Then:\n\n1. $\\lVert\\cdot\\rVert_p$ is a norm on $\\mathbb{R}^{n}$\n   ([[def-norm-and-normed-space]]).\n2. For $n \\ge 1$, $\\lVert\\cdot\\rVert_\\infty$ is a norm on $\\mathbb{R}^{n}$.\n3. **The dictionary.** For $n \\ge 1$ and all $x, y \\in \\mathbb{R}^{n}$,\n   $$\\lVert x-y\\rVert_1 = d_1(x,y), \\qquad \\lVert x-y\\rVert_2 = d_2(x,y), \\qquad \\lVert x-y\\rVert_\\infty = d_\\infty(x,y),$$\n   where $d_1$, $d_2$, $d_\\infty$ are the metrics of the published\n   [[lem-metrics-on-rn]]. So the metric induced by each of these three norms\n   ([[def-norm-and-normed-space]]) **is** the correspondingly named published\n   metric, not merely one equivalent to it.\n\n**Consequence, used repeatedly below and stated once here.** By clause 3 at\n$p = 2$, the metric space $(\\mathbb{R}^{n}, d_2)$ of the published metric-spaces\npage and the metric space underlying the normed space\n$(\\mathbb{R}^{n}, \\lVert\\cdot\\rVert_2)$ of this page are the same object. Hence\ncompleteness ([[thm-euclidean-space-complete]] clause 2), Heine-Borel\n([[thm-heine-borel-rn]] clause 2) and the compactness equivalences\n([[thm-metric-compactness-equivalences]]) are statements about this page's normed\nspace, **with their hypothesis $n \\ge 1$ inherited unchanged and not weakened**.\nNothing below cites any of those three theorems for $n = 0$.\n\n**Why this lemma exists.** Without it the library would hold a norm-induced\nmetric on $\\mathbb{R}^{n}$ and a separately published metric on the same set with\nno recorded relation, and every later citation would have to guess which was\nmeant. The proof of clause 3 is a comparison of two written expressions; the\nvalue is that the comparison is made and recorded.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Proof",
+          "quote": "Since the probability measure has total mass one, $2|X|\\le1+X^2$ makes $X$ integrable.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each component $i$, [F2] identifies $g_i'(0)=(JF(x)v)_i$. Apply [F4] through degree $1$ on $[0,h]$ to obtain $|(J_h^+)_i-(JF(x)v)_i|\\le b_{2,i}h/2$. By [F8], these absolute values and bounds are nonnegative; squaring preserves their order because $b^2-a^2=(b-a)(b+a)\\ge0$ when $0\\le a\\le b$. Sum over $i<m$ and use [F5] and the definition of $M_{2,F}$ to obtain the stated Euclidean vector bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For either the Jacobian-vector or gradient-difference Hessian-vector estimate, the forward evaluation perturbation is $(e_1-e_0)/h$. [F5] bounds its norm by $(\\|e_1\\|_2+\\|e_0\\|_2)/h\\le2\\delta/h$. For the central quotient the denominator is $2h$, giving $\\delta/h$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For centered square-integrable coordinate noises $E_1,E_0$, [F6] and the definitions of variance and covariance give $\\operatorname{Var}(E_1-E_0)=\\operatorname{Cov}(E_1-E_0,E_1-E_0)$. Bilinearity and symmetry then yield $\\sigma_1^2+\\sigma_0^2-2c$. Dividing by $h^2$ or $(2h)^2$ gives the forward and central formulas. If the noises are independent with common variance $\\sigma^2$, [F9] makes them integrable, so [F7] gives $\\mathbb E[E_1E_0]=\\mathbb E[E_1]\\mathbb E[E_0]=0$; their covariance is $0$ by [F6], yielding $2\\sigma^2/h^2$ and $\\sigma^2/(2h^2)$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each component $i$, apply [F4] through degree $2$ at both $h$ and $-h$ to $g_i$. The constant and quadratic terms cancel in the central quotient, leaving $|(J_h^0)_i-(JF(x)v)_i|\\le b_{3,i}h^2/6$. The same nonnegative-square comparison from step 1.1, [F8], and the sum defining $M_{3,F}$ give the central Jacobian-vector bound by [F5].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For $q_j(t)=\\partial_jf(x+tv)$, [F2] gives $q_j'(0)=\\sum_k\\partial_k\\partial_jf(x)v_k$. By [F3] and the Hessian convention in [F1], this equals $(H_f(x)v)_j$. Applying [F4] through degree $1$ to each $q_j$ yields the component forward bound $a_{2,j}h/2$; the nonnegative-square comparison from step 1.1 gives the sum bound, and [F5] then yields $\\|H_h^+-H_fv\\|_2\\le M_{2,H}h/2$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Applying [F4] through degree $2$ at $h$ and $-h$ to each $q_j$ cancels the even terms and yields component error at most $a_{3,j}h^2/6$. The same nonnegative-square comparison from step 1.1, together with [F5], gives the central Hessian-vector bound.",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Combining the two Jacobian-vector truncation bounds in steps 1.1 and 2.1, the two Hessian-vector truncation bounds in steps 2.2 and 2.3, and the corresponding evaluation bounds in step 1.2 by the Euclidean triangle inequality [F5] gives all four hatted-estimate bounds in the Statement. For random errors, the covariance identity in step 1.3 applies; absent centering/covariance hypotheses no root-sum-square conclusion follows.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "step 1.2",
+            "step 1.3",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes m,n>=1, so the zero-dimensional output/input cases are excluded; all finite coordinate sums used in the norm bounds are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits v=0 and zero derivative/evaluation bounds; the directional paths are then constant and steps 1.1–2.3 give zero deterministic error. Steps 1.2–1.3 give zero bounded evaluation contribution when delta=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=n=1 the component sums have one term and steps 1.1 and 2.2 reduce to the scalar Taylor bounds."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds has no additional collapsed regime beyond the explicit hypotheses and named boundary cases. The Statement requires positive input/output dimensions and step, but permits zero direction and zero evaluation errors. The proof combines fixed component Taylor bounds in Euclidean norm and separately derives variance from centered covariance data, reserving independence for its stated specialization. Degenerate covariance is not divided out, and no iff or arbitrary sample selection is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires the closed line segments used by the stencils to lie in U; steps 1.1, 1.2, 2.2 and 2.3 use Taylor expansions on those segments."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds uses only explicitly named finite data, arbitrary points, or theorem-provided intermediate values; it does not select an element from a merely nonempty family. The Statement requires positive input/output dimensions and step, but permits zero direction and zero evaluation errors. The proof combines fixed component Taylor bounds in Euclidean norm and separately derives variance from centered covariance data, reserving independence for its stated specialization. Degenerate covariance is not divided out, and no iff or arbitrary sample selection is claimed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-forward direction. The Statement requires positive input/output dimensions and step, but permits zero direction and zero evaluation errors. The proof combines fixed component Taylor bounds in Euclidean norm and separately derives variance from centered covariance data, reserving independence for its stated specialization. Degenerate covariance is not divided out, and no iff or arbitrary sample selection is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-reverse direction. The Statement requires positive input/output dimensions and step, but permits zero direction and zero evaluation errors. The proof combines fixed component Taylor bounds in Euclidean norm and separately derives variance from centered covariance data, reserving independence for its stated specialization. Degenerate covariance is not divided out, and no iff or arbitrary sample selection is claimed."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all seven proof steps and twelve direct suppliers, plus Jacobian/Hessian/Ck conventions from the defining estimator. Line restriction and symmetry identify both exact products; degree-one/two Taylor gives coordinate bounds, nonnegative squaring and Euclidean aggregation give the stated M constants. Positive h and dimensions prevent undefined denominators or norms; v=0, zero derivative constants and delta=0 remain valid, with per-call noises allowed to differ even at a repeated point. Covariance bilinearity gives the numerator and denominator 4h^2 centrally. The existing covariance supplier step 1.1 proves L2 implies L1 using mass one; identity Borel functions then meet the independence factorization hypotheses. Reader change merely makes this immediate integrability check explicit and is audit enrichment, with no mathematical defect. Refuter has no finding."
+      }
+    },
+    "thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-structural-column-coloring-for-sparse-jacobian-recovery",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\ge1$, $U\\subseteq\\mathbb R^n$ be open, $F:U\\to\\mathbb R^m$ be differentiable at $x\\in U$, and $J:=JF(x)$ be its Jacobian as defined in [[def-jacobian-matrix-and-gradient]]. A **structural row pattern** is a list of sets $S_i\\subseteq\\{0,\\ldots,n-1\\}$, one for each row $0\\le i<m$, such that $J_{ij}=0$ whenever $j\\notin S_i$. It is a safe pattern only when every actual nonzero lies in the declared support.\n\nThe **column-interference graph** has vertices $0,\\ldots,n-1$ and an edge between distinct columns $j,k$ exactly when some row support $S_i$ contains both. A **proper coloring** is a map $\\chi:\\{0,\\ldots,n-1\\}\\to C$ to a set of color labels such that adjacent columns have different labels. For a color $c\\in C$, its seed vector $s^c\\in\\mathbb R^n$ has coordinate $s^c_j=1$ when $\\chi(j)=c$ and $0$ otherwise. The compressed product is $Js^c$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-sum-in-a-commutative-monoid",
+          "source_section": "Definition",
+          "quote": "Let $(M,+,0)$ be a commutative monoid ([[def-semigroup-and-monoid]]), let $S$ be a finite set with $n:=|S|$ ([[def-finite-cardinality]]), and let $a:S\\to M$. Choose a bijection $\\phi:n\\to S$ and define\n\n$$\\sum_{s\\in S}a_s:=a_{\\phi(0)}+a_{\\phi(1)}+\\cdots+a_{\\phi(n-1)},$$\n\nwhere the right side is the finite monoid product of [[def-monoid-finite-product]] written additively. In particular, the sum over the empty set is $0$.\n\nThis value is independent of the enumeration. If $\\psi:n\\to S$ is another bijection, then $\\phi^{-1}\\circ\\psi$ is a permutation of $n$ ([[def-injection-surjection-bijection]]), and generalised commutativity gives\n\n$$\\sum_{k<n}a_{\\psi(k)}=\\sum_{k<n}a_{\\phi(k)}$$\n\n([[thm-generalised-associativity]]). Thus the displayed notation names one element of $M$ and does not select a preferred enumeration.\n\nWhen $M$ is the additive monoid of $\\mathbb R$ or of $\\mathbb N$, this definition agrees with [[def-sum-over-a-finite-index-set]]: both enumerate $S$, apply the same finite recursion with identity $0$, and are independent of the enumeration.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-semigroup-and-monoid",
+          "source_section": "Definition",
+          "quote": "A **semigroup** is a pair $(S,*)$ consisting of a set $S$ and an associative\nbinary operation $*$ on $S$ ([[def-binary-operation]]).\n\nA **monoid** is a triple $(M,*,e)$ in which $(M,*)$ is a semigroup and $e \\in M$\nis a two-sided identity for $*$ ([[def-identity-element]]), that is,\n\n$$e * x \\;=\\; x \\;=\\; x * e \\qquad \\text{for every } x \\in M .$$\n\nBy [[lem-identity-unique]] a binary operation has at most one two-sided identity,\nso $e$ is determined by $(M,*)$ and may be called **the identity of $M$**; it is\nwritten $e$, or $e_M$ when several monoids are in play, and $1$ or $0$ in\nmultiplicative or additive notation. For that reason a monoid is often written\nsimply as $(M,*)$, or as $M$.\n\nA semigroup or monoid is **commutative** (for monoids also called **abelian**)\nwhen its operation is commutative.\n\nA subset $N \\subseteq M$ is a **submonoid** when $e \\in N$ and $N$ is closed under\n$*$; the restricted operation then makes $(N,*,e)$ a monoid, associativity being\ninherited ([[def-binary-operation]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a fixed row $i$ and color $c$, [F3] gives $(Js^c)_i=\\sum_{j<n}J_{ij}s^c_j$. By [F1], a summand can be nonzero only when $j\\in S_i$ and $\\chi(j)=c$. [F4] makes this an order-independent finite sum with zero terms off that set.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If two distinct columns of $S_i$ had color $c$, the graph definition in [F1] would make them adjacent, contradicting proper coloring. Thus at most one summand in step 1.1 is nonzero. If the specified $j\\in S_i$ has color $c$, it is that sole summand and equals $J_{ij}$ because $s^c_j=1$; if no such column exists, every summand is zero and the row product is $0$ by [F4]. Entries outside the safe pattern are zero by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "To verify the collision caveat, let $F(z_0,z_1)=z_0+2z_1$ and $G(z_0,z_1)=3z_0$, and evaluate both Jacobians at $(0,0)$. By [F2], their one-row Jacobians are $(1,2)$ and $(3,0)$, both supported in $S_0=\\{0,1\\}$. Assign columns $0$ and $1$ the same color, whose seed is $(1,1)^T$ by [F1]. Both compressed products equal $3$ by [F3], so this color collision cannot determine the entries.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "A row support S_i may be empty; step 2.1 then makes every summand zero, so its compressed row is zero and there is no supported entry to recover."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When a row has no supported entry of color c, step 2.1 proves the compressed row is zero; the collision witness also includes a zero entry."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If n=1, there are no distinct columns in a row, so the one-vertex coloring is proper and step 2.1 recovers its sole supported entry."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The theorem permits rows with empty support and the all-zero Jacobian; steps 1.1–2.1 give zero compressed rows and no unsupported nonzero entry."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring has no separate interval-endpoint assertion beyond the domain conditions in its statement. The coloring and safe pattern are supplied. The proof has at most one supported term per row/color and explicitly gives zero if none, while the collision caveat constructs two different rows with the same compressed observation. There is no interval parameter, biconditional or existence/choice theorem for colorings."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring uses only explicitly named finite data, arbitrary points, or theorem-provided intermediate values; it does not select an element from a merely nonempty family. The coloring and safe pattern are supplied. The proof has at most one supported term per row/color and explicitly gives zero if none, while the collision caveat constructs two different rows with the same compressed observation. There is no interval parameter, biconditional or existence/choice theorem for colorings."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-forward direction. The coloring and safe pattern are supplied. The proof has at most one supported term per row/color and explicitly gives zero if none, while the collision caveat constructs two different rows with the same compressed observation. There is no interval parameter, biconditional or existence/choice theorem for colorings."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-reverse direction. The coloring and safe pattern are supplied. The proof has at most one supported term per row/color and explicitly gives zero if none, while the collision caveat constructs two different rows with the same compressed observation. There is no interval parameter, biconditional or existence/choice theorem for colorings."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "one-row-collision-witness",
+          "claim": "The two rows (1,2) and (3,0) have the same product with seed (1,1).",
+          "result": "Direct multiplication gives 1+2=3+0=3, while the rows differ and both lie in the declared support {0,1}."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all three steps and all five cited suppliers. Safe support zeroes every outside term; the interference graph makes a proper color occur at most once per row, so the seed product recovers that entry exactly. Empty row support and unused colors yield zero; a singleton support recovers directly even for a zero entry. The witness rows (1,2) and (3,0) both satisfy the safe (possibly overestimated) support and give seed sum 3. Only finitely many columns are involved; the provided coloring is data and no AC is used. Bell-Kristensen section 2.5, PDF printed page 8, corroborates column compression by coloring. UNT Coleman-More URL failed to open; the proof is checked independently from its local finite sum, not from inaccessible source. Reader and refuter have no finding."
+      }
+    },
+    "thm-optimal-step-for-forward-and-central-difference-error-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be open, $x\\in I$, and $h>0$. For the forward bound assume $[x,x+h]\\subset I$, $f\\in C^2$ on a neighborhood of that interval, and $|f''(y)|\\le M_2$ there. For the central bound assume $[x-h,x+h]\\subset I$, $f\\in C^3$ on a neighborhood of that interval, and $|f'''(y)|\\le M_3$ there. Then\n\n$$|D_h^+f(x)-f'(x)|\\le \\frac{M_2h}{2},\\qquad |D_h^0f(x)-f'(x)|\\le \\frac{M_3h^2}{6}.$$\n\nIf each function evaluation has absolute error at most $\\delta\\ge0$ as in [[def-finite-difference-stencils-and-evaluation-error-model]], then\n\n$$|\\widehat D_h^+f(x)-f'(x)|\\le \\frac{M_2h}{2}+\\frac{2\\delta}{h},\\qquad |\\widehat D_h^0f(x)-f'(x)|\\le \\frac{M_3h^2}{6}+\\frac{2\\delta}{h}.$$\n\nFor the central stencil the evaluation contribution is in fact at most $\\delta/h$; the displayed $2\\delta/h$ is a uniform conservative bound for both stencils.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nth-roots-exist",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{R}$ be a complete ordered field ([[def-complete-ordered-field]]).\nFor every $a \\in \\mathbb{R}$ with $a \\ge 0$ and every $n \\in \\mathbb{N}$ with\n$n \\ge 1$ there is a **unique** $s \\in \\mathbb{R}$ with $s \\ge 0$ and $s^n = a$\n([[def-integer-power]]); we write\n\n$$s = a^{1/n} = \\sqrt[n]{a}.$$\n\nMoreover $a^{1/n} > 0$ when $a > 0$, and $a^{1/1} = a$.\n\n**This generalises the published [[thm-of-square-roots]], and the case $n = 2$ is\nnot new.** That theorem already produces the unique $\\sqrt{a} \\ge 0$ with\n$(\\sqrt{a})^2 = a$, and it is cited as such throughout the library; the notation\n$a^{1/2}$ introduced here is the same number. What is new is the passage to\ngeneral $n$: the completed square that drives the $n = 2$ argument has no direct\nanalogue, and its place is taken by the factorisation of $b^n - a^n$ and the\nresulting Lipschitz estimate ([[lem-power-difference-factorisation]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $r:=h/h_+>0$. The identity $h_+^2=4\\delta/M_2$ gives $E_+(h)=\\frac{M_2h_+}{2}(r+r^{-1})$, while $E_+(h_+)=M_2h_+$. Since $r+r^{-1}-2=(r-1)^2/r\\ge0$, equality holds exactly at $r=1$. Thus $h_+$ is the unique unconstrained minimizer and its value is $2\\sqrt{M_2\\delta}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Set $r:=h/h_0$ and $a:=M_3h_0^2/6>0$. From $h_0^3=6\\delta/M_3$, $E_0(h)=a(r^2+2/r)$ and $E_0(h_0)=3a$. The difference is $a(r^2+2/r-3)=a(r-1)^2(r+2)/r\\ge0$, with equality only at $r=1$. Thus $h_0$ uniquely minimizes the unconstrained bound, and the minimum is $3a=M_3h_0^2/2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $0<r_1<r_2\\le1$, then $(r_1+r_1^{-1})-(r_2+r_2^{-1})=(r_2-r_1)(1/(r_1r_2)-1)>0$, since $r_1r_2<1$. Hence $E_+$ strictly decreases up to $h_+$; the global bound from step 1.1 gives the cap minimizer $\\min\\{h_+,H\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $0<r_1<r_2\\le1$, then $(r_1^2+2/r_1)-(r_2^2+2/r_2)=(r_2-r_1)(2/(r_1r_2)-(r_1+r_2))>0$, since $r_1r_2<1$ and $r_1+r_2<2$. Hence the central bound strictly decreases up to $h_0$, so the cap minimizer is $\\min\\{h_0,H\\}$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\delta=0$, the bounds in [F1] are positive multiples of $h$ or $h^2$ and have infimum $0$ as $h\\downarrow0$, not attained for $h>0$. If a truncation constant is $0$ and $\\delta>0$, the bound is a positive multiple of $h^{-1}$ and decreases to $0$ as $h\\to\\infty$, while on a permitted capped interval it is minimized at $H$. If both constants vanish the bound is identically zero.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "thm-optimal-step-for-forward-and-central-difference-error-bounds has no separate empty-family branch beyond its stated domains and hypotheses. The permitted step interval is nonempty because H>0. For positive constants the proof uses unique positive roots and equality only at ratio one; it separately handles zero noise, zero truncation and both zero, and caps the minimizer at H. It optimizes a supplied bound, not actual error, and asserts no biconditional about all algorithms."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 separately handles delta=0 with positive truncation constant, zero truncation constant with delta>0, and both zero, including nonattainment versus every-step optimality."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "thm-optimal-step-for-forward-and-central-difference-error-bounds has no separate one-element or value-one regime beyond the stated data. The permitted step interval is nonempty because H>0. For positive constants the proof uses unique positive roots and equality only at ratio one; it separately handles zero noise, zero truncation and both zero, and caps the minimizer at H. It optimizes a supplied bound, not actual error, and asserts no biconditional about all algorithms."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 proves that if the corresponding truncation constant is zero and delta>0, the capped minimum is at H; if both are zero, every permitted h minimizes the bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The permitted interval is (0,H]; steps 2.1–2.2 show strict decrease to the cap whenever H is below the unconstrained balancing step."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "thm-optimal-step-for-forward-and-central-difference-error-bounds uses only explicitly named finite data, arbitrary points, or theorem-provided intermediate values; it does not select an element from a merely nonempty family. The permitted step interval is nonempty because H>0. For positive constants the proof uses unique positive roots and equality only at ratio one; it separately handles zero noise, zero truncation and both zero, and caps the minimizer at H. It optimizes a supplied bound, not actual error, and asserts no biconditional about all algorithms."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "thm-optimal-step-for-forward-and-central-difference-error-bounds states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-forward direction. The permitted step interval is nonempty because H>0. For positive constants the proof uses unique positive roots and equality only at ratio one; it separately handles zero noise, zero truncation and both zero, and caps the minimizer at H. It optimizes a supplied bound, not actual error, and asserts no biconditional about all algorithms."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "thm-optimal-step-for-forward-and-central-difference-error-bounds states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-reverse direction. The permitted step interval is nonempty because H>0. For positive constants the proof uses unique positive roots and equality only at ratio one; it separately handles zero noise, zero truncation and both zero, and caps the minimizer at H. It optimizes a supplied bound, not actual error, and asserts no biconditional about all algorithms."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "forward-balancing-substitution",
+          "claim": "With M2=2 and delta=1/2, h+=1 and E+(h+)=2.",
+          "result": "Substitution gives h+=sqrt(4(1/2)/2)=1 and E+(1)=1+1=2=2sqrt(2(1/2))."
+        },
+        {
+          "id": "central-balancing-substitution",
+          "claim": "With M3=6 and delta=1, h0=1 and E0(h0)=3.",
+          "result": "Substitution gives h0=cuberoot(6/6)=1 and E0(1)=6/6+2=3=M3 h0^2/2."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all five steps, the complete finite-difference error supplier and its already reviewed Taylor/absolute-value dependencies, plus square-root and nth-root suppliers. For positive constants the normalized differences are (r-1)^2/r and (r-1)^2(r+2)/r, proving global minimality and uniqueness. Explicit two-point differences prove decrease for r<=1, so both cap branches and equality H=h_* are sound. Positive square/cube roots exist and are unique. Zero noise with positive truncation gives unattained infimum; zero truncation with positive noise gives capped endpoint H; both zero gives every step. H>0 ensures a nonempty permitted interval and all denominators are positive. The conservative central coefficient is deliberately 2delta/h, not its sharper delta/h. No claim optimizes the actual unknown error. Reader/refuter have no finding; no AC or substantive defect."
+      }
+    },
+    "thm-richardson-extrapolation-has-fourth-order-error-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-richardson-extrapolation-under-a-fourth-order-remainder",
+          "source_section": "Definition",
+          "quote": "For a function $f$ with the values required by the central stencils at $x\\pm h$ and $x\\pm h/2$, the **Richardson extrapolated central difference** is\n\n$$R_hf(x):=\\frac{4D_{h/2}^0f(x)-D_h^0f(x)}{3}.$$\n\nIts fourth-order error guarantee is conditional on a uniform expansion with a remainder bounded by a constant times $h^4$; that condition is stated and proved from a bounded fifth derivative in [[lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative]].",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be open, let $x\\in I$, and let $h>0$ with $[x-h,x+h]\\subset I$. Suppose $f\\in C^5$ on a neighborhood of this interval and $|f^{(5)}(y)|\\le M_5$ throughout it. Then for some real $r_h$,\n\n$$D_h^0f(x)=f'(x)+c_2h^2+r_h,\\qquad c_2:=\\frac{f'''(x)}6,\\qquad |r_h|\\le \\frac{M_5h^4}{120}.$$\n\nThe same coefficient $c_2$ works for every admissible $h$ at the fixed point $x$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-difference-stencils-and-evaluation-error-model",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be open, $x\\in I$, and $h>0$. When $x+h\\in I$, the **forward difference** of $f:I\\to\\mathbb R$ is\n\n$$D_h^+f(x):=\\frac{f(x+h)-f(x)}{h}.$$\n\nWhen $x-h,x+h\\in I$, the **central difference** is\n\n$$D_h^0f(x):=\\frac{f(x+h)-f(x-h)}{2h}.$$\n\nAn evaluation with absolute error bound $\\delta\\ge0$ is a value $\\widehat f(y)=f(y)+e_y$ with $|e_y|\\le\\delta$ at each requested point $y$. The corresponding inexact quotients are obtained by replacing each $f(y)$ in the displayed stencil by $\\widehat f(y)$. The bound is absolute and applies separately to each call; no correlation or relative-error assumption is included.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $r_h=D_h^0f(x)-f'(x)-c_2h^2$ and $r_{h/2}=D_{h/2}^0f(x)-f'(x)-c_2h^2/4$. Substitution into [F1] cancels both copies of $f'(x)$ correctly and gives $R_hf(x)-f'(x)=(4r_{h/2}-r_h)/3$, since $4(c_2h^2/4)-c_2h^2=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4]–[F5], $|R_hf(x)-f'(x)|\\le(4|r_{h/2}|+|r_h|)/3\\le(4M(h/2)^4+Mh^4)/3=5Mh^4/12$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the $C^5$ case, [F2] supplies the expansion at every $0<t\\le h$ with the same $c_2=f'''(x)/6$ and $M=M_5/120$. Substituting in step 2.1 gives $5(M_5/120)h^4/12=M_5h^4/288$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By the definition of $\\widehat R_h$ in the Statement, [F1] and the stencil formulas in [F3], the inexact perturbation is $\\widehat R_hf(x)-R_hf(x)=\\frac{4}{3h}(e_{+h/2}-e_{-h/2})-\\frac{1}{6h}(e_{+h}-e_{-h})$. Each difference has magnitude at most $2\\delta$ by [F4]–[F5]. The total perturbation is therefore at most $8\\delta/(3h)+\\delta/(3h)=3\\delta/h$. Combining with step 2.1 proves the inexact bound.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "thm-richardson-extrapolation-has-fourth-order-error-bound has no separate empty-family branch beyond its stated domains and hypotheses. The Statement uses positive outer step and actual uniform expansions for every smaller positive step. The proof cancels one common quadratic coefficient between the two fixed central stencils, then propagates four allowed evaluation errors. Zero remainder/noise gives zero upper allowance; no empty stencil, arbitrary sequence selection or iff is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 give zero deterministic and evaluation-error bounds when M=0 and delta=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "thm-richardson-extrapolation-has-fourth-order-error-bound has no separate one-element or value-one regime beyond the stated data. The Statement uses positive outer step and actual uniform expansions for every smaller positive step. The proof cancels one common quadratic coefficient between the two fixed central stencils, then propagates four allowed evaluation errors. Zero remainder/noise gives zero upper allowance; no empty stencil, arbitrary sequence selection or iff is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "thm-richardson-extrapolation-has-fourth-order-error-bound has no additional collapsed regime beyond the explicit hypotheses and named boundary cases. The Statement uses positive outer step and actual uniform expansions for every smaller positive step. The proof cancels one common quadratic coefficient between the two fixed central stencils, then propagates four allowed evaluation errors. Zero remainder/noise gives zero upper allowance; no empty stencil, arbitrary sequence selection or iff is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The hypothesis covers every 0<t<=h and the four stencil values at x±h and x±h/2; step 4.1 combines exactly those calls."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "thm-richardson-extrapolation-has-fourth-order-error-bound uses only explicitly named finite data, arbitrary points, or theorem-provided intermediate values; it does not select an element from a merely nonempty family. The Statement uses positive outer step and actual uniform expansions for every smaller positive step. The proof cancels one common quadratic coefficient between the two fixed central stencils, then propagates four allowed evaluation errors. Zero remainder/noise gives zero upper allowance; no empty stencil, arbitrary sequence selection or iff is claimed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "thm-richardson-extrapolation-has-fourth-order-error-bound states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-forward direction. The Statement uses positive outer step and actual uniform expansions for every smaller positive step. The proof cancels one common quadratic coefficient between the two fixed central stencils, then propagates four allowed evaluation errors. Zero remainder/noise gives zero upper allowance; no empty stencil, arbitrary sequence selection or iff is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "thm-richardson-extrapolation-has-fourth-order-error-bound states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-reverse direction. The Statement uses positive outer step and actual uniform expansions for every smaller positive step. The proof cancels one common quadratic coefficient between the two fixed central stencils, then propagates four allowed evaluation errors. Zero remainder/noise gives zero upper allowance; no empty stencil, arbitrary sequence selection or iff is claimed."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "richardson-fifth-power-substitution",
+          "claim": "For f(t)=t^5/120 at x=0, the Richardson error is -h^4/480 and satisfies the stated M5 h^4/288 bound.",
+          "result": "D_h=h^4/120, D_(h/2)=h^4/1920, and R=(4D_(h/2)-D_h)/3=-h^4/480; |1/480|<=1/288."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-colliding-column-colors-do-not-identify-a-jacobian": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-structural-column-coloring-for-sparse-jacobian-recovery",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\ge1$, $U\\subseteq\\mathbb R^n$ be open, $F:U\\to\\mathbb R^m$ be differentiable at $x\\in U$, and $J:=JF(x)$ be its Jacobian as defined in [[def-jacobian-matrix-and-gradient]]. A **structural row pattern** is a list of sets $S_i\\subseteq\\{0,\\ldots,n-1\\}$, one for each row $0\\le i<m$, such that $J_{ij}=0$ whenever $j\\notin S_i$. It is a safe pattern only when every actual nonzero lies in the declared support.\n\nThe **column-interference graph** has vertices $0,\\ldots,n-1$ and an edge between distinct columns $j,k$ exactly when some row support $S_i$ contains both. A **proper coloring** is a map $\\chi:\\{0,\\ldots,n-1\\}\\to C$ to a set of color labels such that adjacent columns have different labels. For a color $c\\in C$, its seed vector $s^c\\in\\mathbb R^n$ has coordinate $s^c_j=1$ when $\\chi(j)=c$ and $0$ otherwise. The compressed product is $Js^c$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring",
+          "source_section": "Statement",
+          "quote": "Let the objects and notation be those of [[def-structural-column-coloring-for-sparse-jacobian-recovery]], and suppose $\\chi$ is a proper coloring of the graph of a safe structural row pattern. For every row $0\\le i<m$, every color $c$, and every column $j\\in S_i$ with $\\chi(j)=c$,\n\n$$J_{ij}=(Js^c)_i.$$\n\nEntries with $j\\notin S_i$ are zero by the safe-pattern hypothesis. Thus all entries are recovered from one compressed product per color. A color collision in a row does not give a general recovery guarantee: two distinct Jacobians supported on that colliding row can have the same compressed product.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The distinct candidate Jacobian rows $J=(1,2)$ and $K=(3,0)$ are realized at $(0,0)$ by the linear maps $F(z_0,z_1)=z_0+2z_1$ and $G(z_0,z_1)=3z_0$. Both supports lie in $S_0$, but [F1] gives $Js=1+2=3$ and $Ks=3+0=3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since the same observation is compatible with different entries in columns $0$ and $1$, this colliding seed does not identify the row. The collision violates the proper-coloring hypothesis of [F2], so the unconditional statement is false.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "cex-colliding-column-colors-do-not-identify-a-jacobian has no separate empty-family branch beyond its stated domains and hypotheses. The counterexample fixes a two-column support and one colliding seed, then explicitly gives rows (1,2) and (3,0) with common product three. The zero entry is allowed by safe support, but the seed is not a proper coloring. This finite non-identifiability witness uses no empty/singleton input, continuous endpoint or arbitrary choice."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the candidate row (3,0), so a zero supported entry is allowed and does not restore identifiability."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "cex-colliding-column-colors-do-not-identify-a-jacobian has no separate one-element or value-one regime beyond the stated data. The counterexample fixes a two-column support and one colliding seed, then explicitly gives rows (1,2) and (3,0) with common product three. The zero entry is allowed by safe support, but the seed is not a proper coloring. This finite non-identifiability witness uses no empty/singleton input, continuous endpoint or arbitrary choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "cex-colliding-column-colors-do-not-identify-a-jacobian has no additional collapsed regime beyond the explicit hypotheses and named boundary cases. The counterexample fixes a two-column support and one colliding seed, then explicitly gives rows (1,2) and (3,0) with common product three. The zero entry is allowed by safe support, but the seed is not a proper coloring. This finite non-identifiability witness uses no empty/singleton input, continuous endpoint or arbitrary choice."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "cex-colliding-column-colors-do-not-identify-a-jacobian has no separate interval-endpoint assertion beyond the domain conditions in its statement. The counterexample fixes a two-column support and one colliding seed, then explicitly gives rows (1,2) and (3,0) with common product three. The zero entry is allowed by safe support, but the seed is not a proper coloring. This finite non-identifiability witness uses no empty/singleton input, continuous endpoint or arbitrary choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "cex-colliding-column-colors-do-not-identify-a-jacobian uses only explicitly named finite data, arbitrary points, or theorem-provided intermediate values; it does not select an element from a merely nonempty family. The counterexample fixes a two-column support and one colliding seed, then explicitly gives rows (1,2) and (3,0) with common product three. The zero entry is allowed by safe support, but the seed is not a proper coloring. This finite non-identifiability witness uses no empty/singleton input, continuous endpoint or arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "cex-colliding-column-colors-do-not-identify-a-jacobian states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-forward direction. The counterexample fixes a two-column support and one colliding seed, then explicitly gives rows (1,2) and (3,0) with common product three. The zero entry is allowed by safe support, but the seed is not a proper coloring. This finite non-identifiability witness uses no empty/singleton input, continuous endpoint or arbitrary choice."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "cex-colliding-column-colors-do-not-identify-a-jacobian states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-reverse direction. The counterexample fixes a two-column support and one colliding seed, then explicitly gives rows (1,2) and (3,0) with common product three. The zero entry is allowed by safe support, but the seed is not a proper coloring. This finite non-identifiability witness uses no empty/singleton input, continuous endpoint or arbitrary choice."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "colliding-seed-same-observation",
+          "claim": "Two distinct allowed Jacobian rows yield the same compressed observation.",
+          "result": "(1,2)(1,1)^T=3 and (3,0)(1,1)^T=3, although the rows differ."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-complex-step-absolute-value-returns-the-wrong-derivative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-step-derivative-estimator",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, $x\\in U\\cap\\mathbb R$, and $h>0$ with $x+ih\\in U$. For a holomorphic $f:U\\to\\mathbb C$ that is real-valued on some real interval $I\\subseteq U\\cap\\mathbb R$ containing $x$, the **complex-step estimate** is\n\n$$C_hf(x):=\\frac{\\operatorname{Im}f(x+ih)}{h}.$$\n\nFor an inexact complex evaluation $\\widehat f(x+ih)$, define its imaginary-component error by $\\delta_{\\rm im}:=|\\operatorname{Im}\\widehat f(x+ih)-\\operatorname{Im}f(x+ih)|$. The inexact estimate is $\\widehat C_hf(x):=\\operatorname{Im}\\widehat f(x+ih)/h$; its evaluation-error contribution is controlled by $\\delta_{\\rm im}/h$. No claim is made that arbitrary code representing a real function has a holomorphic extension.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-step-derivative-has-second-order-error-under-holomorphy",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, let $x\\in U\\cap\\mathbb R$, and suppose $f:U\\to\\mathbb C$ is holomorphic, real-valued on a real interval $I\\subseteq U\\cap\\mathbb R$ around $x$, and $\\{x+it:0\\le t\\le h\\}\\subset U$ for $h>0$. Suppose $|\\operatorname{Re}f'''(x+it)|\\le M_3$ for $0\\le t\\le h$, with $M_3\\ge0$. Then\n\n$$|C_hf(x)-f'(x)|\\le \\frac{M_3h^2}{6}.$$\n\nIf the evaluated imaginary component has error at most $\\delta_{\\rm im}$, then\n\n$$|\\widehat C_hf(x)-f'(x)|\\le \\frac{M_3h^2}{6}+\\frac{\\delta_{\\rm im}}h.$$\n\nHolomorphy and real-axis reality are essential to the formula: real differentiability of the restriction alone is insufficient.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On a real neighborhood of $1$, $f(t)=|t|=t$, so the ordinary derivative of the real restriction at $1$ is $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F1], $f(1+ih)=\\sqrt{1+h^2}$ is real. Thus the quotient in the Statement is $0$ for every $h>0$, which is not the real derivative $1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The complex difference quotient along real increments $s$ is $(|1+s|-1)/s=1$ for $|s|<1$ and $s\\ne0$. Along imaginary increments it is $(\\sqrt{1+s^2}-1)/(is)=-is/(\\sqrt{1+s^2}+1)\\to0$. The limits differ, so $f$ is not complex differentiable at $1$ and the formally defined estimator in [F2] and guarantee in [F3] do not apply; step 1.2 instead refutes the unqualified quotient claim.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes f(z)=|z| on U=C, x=1, I=(0,2), and h>0. It computes the derivative and unqualified quotient directly, then shows that f is not complex differentiable at x. The formal estimator domain and theorem guarantee therefore do not apply; there is no separate empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 computes the unqualified quotient as zero for every h>0, while step 1.1 gives the real derivative 1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes f(z)=|z| on U=C, x=1, I=(0,2), and h>0. It computes the derivative and unqualified quotient directly, then shows that f is not complex differentiable at x. The formal estimator domain and theorem guarantee therefore do not apply; there is no separate one branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes f(z)=|z| on U=C, x=1, I=(0,2), and h>0. It computes the derivative and unqualified quotient directly, then shows that f is not complex differentiable at x. The formal estimator domain and theorem guarantee therefore do not apply; there is no separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example fixes f(z)=|z| on U=C, x=1, I=(0,2), and h>0. It computes the derivative and unqualified quotient directly, then shows that f is not complex differentiable at x. The formal estimator domain and theorem guarantee therefore do not apply; there is no separate endpoints branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example fixes f(z)=|z| on U=C, x=1, I=(0,2), and h>0. It computes the derivative and unqualified quotient directly, then shows that f is not complex differentiable at x. The formal estimator domain and theorem guarantee therefore do not apply; there is no separate nonempty-choice branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example fixes f(z)=|z| on U=C, x=1, I=(0,2), and h>0. It computes the derivative and unqualified quotient directly, then shows that f is not complex differentiable at x. The formal estimator domain and theorem guarantee therefore do not apply; there is no separate iff-forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example fixes f(z)=|z| on U=C, x=1, I=(0,2), and h>0. It computes the derivative and unqualified quotient directly, then shows that f is not complex differentiable at x. The formal estimator domain and theorem guarantee therefore do not apply; there is no separate iff-reverse branch."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "absolute-value-complex-step-arithmetic",
+          "claim": "At x=1, the restriction of f(z)=|z| to I=(0,2) has derivative 1 while the unqualified complex-step quotient is 0.",
+          "result": "For h>0, |1+ih|=sqrt(1+h^2) is real, hence Im|1+ih|/h=0; this is the same quotient formula, not the formally defined estimator, because f is not holomorphic."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-colored-jacobian-of-two-independent-reactions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-structural-column-coloring-for-sparse-jacobian-recovery",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\ge1$, $U\\subseteq\\mathbb R^n$ be open, $F:U\\to\\mathbb R^m$ be differentiable at $x\\in U$, and $J:=JF(x)$ be its Jacobian as defined in [[def-jacobian-matrix-and-gradient]]. A **structural row pattern** is a list of sets $S_i\\subseteq\\{0,\\ldots,n-1\\}$, one for each row $0\\le i<m$, such that $J_{ij}=0$ whenever $j\\notin S_i$. It is a safe pattern only when every actual nonzero lies in the declared support.\n\nThe **column-interference graph** has vertices $0,\\ldots,n-1$ and an edge between distinct columns $j,k$ exactly when some row support $S_i$ contains both. A **proper coloring** is a map $\\chi:\\{0,\\ldots,n-1\\}\\to C$ to a set of color labels such that adjacent columns have different labels. For a color $c\\in C$, its seed vector $s^c\\in\\mathbb R^n$ has coordinate $s^c_j=1$ when $\\chi(j)=c$ and $0$ otherwise. The compressed product is $Js^c$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring",
+          "source_section": "Statement",
+          "quote": "Let the objects and notation be those of [[def-structural-column-coloring-for-sparse-jacobian-recovery]], and suppose $\\chi$ is a proper coloring of the graph of a safe structural row pattern. For every row $0\\le i<m$, every color $c$, and every column $j\\in S_i$ with $\\chi(j)=c$,\n\n$$J_{ij}=(Js^c)_i.$$\n\nEntries with $j\\notin S_i$ are zero by the safe-pattern hypothesis. Thus all entries are recovered from one compressed product per color. A color collision in a row does not give a general recovery guarantee: two distinct Jacobians supported on that colliding row can have the same compressed product.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiating the four components in coordinate order $(a,b,c,d)$, indexed $0,1,2,3$, gives $J=\\begin{pmatrix}-k_1&0&0&0\\\\ k_1&0&0&0\\\\0&0&-k_2&0\\\\0&0&k_2&0\\end{pmatrix}$. The row supports are $\\{0\\},\\{0\\},\\{2\\},\\{2\\}$, so no row contains two columns and the coloring that assigns all four columns one color is proper.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Its seed is $s=(1,1,1,1)^T$ and $Js=(-k_1,k_1,-k_2,k_2)^T$. Each row has at most one supported column of this color, so [F3] recovers the nonzero entries from these four values; the remaining entries are zero by the declared pattern.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "ex-colored-jacobian-of-two-independent-reactions has no separate empty-family branch beyond its stated domains and hypotheses. The example fixes four state coordinates and two positive reaction constants. Verification derives singleton row supports and explicitly supplies the all-one seed, whose entries recover the nonzero columns while safe-pattern zeros remain zero. No arbitrary coloring choice, endpoint parameter, or equivalence claim is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly identifies the zero off-support Jacobian entries; step 2.1 verifies the one-color product."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Set k1=k2=1; the four-dimensional seed is all ones and step 2.1 gives (-1,1,-1,1)^T."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "ex-colored-jacobian-of-two-independent-reactions has no additional collapsed regime beyond the explicit hypotheses and named boundary cases. The example fixes four state coordinates and two positive reaction constants. Verification derives singleton row supports and explicitly supplies the all-one seed, whose entries recover the nonzero columns while safe-pattern zeros remain zero. No arbitrary coloring choice, endpoint parameter, or equivalence claim is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "ex-colored-jacobian-of-two-independent-reactions has no separate interval-endpoint assertion beyond the domain conditions in its statement. The example fixes four state coordinates and two positive reaction constants. Verification derives singleton row supports and explicitly supplies the all-one seed, whose entries recover the nonzero columns while safe-pattern zeros remain zero. No arbitrary coloring choice, endpoint parameter, or equivalence claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "ex-colored-jacobian-of-two-independent-reactions uses only explicitly named finite data, arbitrary points, or theorem-provided intermediate values; it does not select an element from a merely nonempty family. The example fixes four state coordinates and two positive reaction constants. Verification derives singleton row supports and explicitly supplies the all-one seed, whose entries recover the nonzero columns while safe-pattern zeros remain zero. No arbitrary coloring choice, endpoint parameter, or equivalence claim is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "ex-colored-jacobian-of-two-independent-reactions states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-forward direction. The example fixes four state coordinates and two positive reaction constants. Verification derives singleton row supports and explicitly supplies the all-one seed, whose entries recover the nonzero columns while safe-pattern zeros remain zero. No arbitrary coloring choice, endpoint parameter, or equivalence claim is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "ex-colored-jacobian-of-two-independent-reactions states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-reverse direction. The example fixes four state coordinates and two positive reaction constants. Verification derives singleton row supports and explicitly supplies the all-one seed, whose entries recover the nonzero columns while safe-pattern zeros remain zero. No arbitrary coloring choice, endpoint parameter, or equivalence claim is made."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-reaction-colored-product",
+          "claim": "At k1=k2=1, the one-color seed product equals (-1,1,-1,1)^T.",
+          "result": "Multiplying the displayed Jacobian by (1,1,1,1)^T gives (-1,1,-1,1)^T; each nonzero row has one supported column."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-forward-difference-noise-bound-has-a-balanced-step": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-difference-stencils-and-evaluation-error-model",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be open, $x\\in I$, and $h>0$. When $x+h\\in I$, the **forward difference** of $f:I\\to\\mathbb R$ is\n\n$$D_h^+f(x):=\\frac{f(x+h)-f(x)}{h}.$$\n\nWhen $x-h,x+h\\in I$, the **central difference** is\n\n$$D_h^0f(x):=\\frac{f(x+h)-f(x-h)}{2h}.$$\n\nAn evaluation with absolute error bound $\\delta\\ge0$ is a value $\\widehat f(y)=f(y)+e_y$ with $|e_y|\\le\\delta$ at each requested point $y$. The corresponding inexact quotients are obtained by replacing each $f(y)$ in the displayed stencil by $\\widehat f(y)$. The bound is absolute and applies separately to each call; no correlation or relative-error assumption is included.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-optimal-step-for-forward-and-central-difference-error-bounds",
+          "source_section": "Statement",
+          "quote": "Let $H>0$. Consider the conservative error bounds from [[thm-forward-and-central-difference-truncation-and-evaluation-error-bounds]] on a permitted step interval $(0,H]$, where every stencil with $h\\le H$ stays inside the domain. If $M_2>0$ and $\\delta>0$, the forward bound\n\n$$E_+(h)=M_2h/2+2\\delta/h$$\n\nhas the unique unconstrained minimizer $h_+=\\sqrt{4\\delta/M_2}$ and minimum $2\\sqrt{M_2\\delta}$. On $(0,H]$ the minimizer is $\\min\\{h_+,H\\}$. If $M_3>0$ and $\\delta>0$, the central conservative bound\n\n$$E_0(h)=M_3h^2/6+2\\delta/h$$\n\nhas the unique unconstrained minimizer $h_0=\\sqrt[3]{6\\delta/M_3}$ and minimum $M_3h_0^2/2$; on $(0,H]$ the minimizer is $\\min\\{h_0,H\\}$. These optimize the displayed error bounds, not the unknown actual error.\n\nIf $\\delta=0$ and the corresponding truncation constant is positive, the bound has infimum $0$ as $h\\downarrow0$ and no minimizer for $h>0$. If the corresponding truncation constant is $0$ and $\\delta>0$, the bound decreases with $h$, so its capped minimum is at $H$. If $\\delta$ and the corresponding truncation constant are both zero, every permitted step is optimal.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substitution gives $D_h^+f(1)=((1+h)^2-1)/h=2+h$, while $f'(1)=2$; the truncation error is exactly $h=M_2h/2$ because $f''=2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With the stated errors, $\\widehat D_h^+f(1)=((1+h)^2+\\delta-(1-\\delta))/h=2+h+2\\delta/h$, so the error bound is attained exactly.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Set $\\delta=1/2$. Then [F2] gives $h=1$; the truncation and evaluation contributions are each $1$, so the total error is $2$, equal to the minimum $2\\sqrt{2\\delta}$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "ex-forward-difference-noise-bound-has-a-balanced-step has no separate empty-family branch beyond its stated domains and hypotheses. The example fixes a scalar quadratic at one and explicitly chooses opposing evaluation errors, attaining the supplied bound. Its final delta=one-half specialization gives step one with two equal error contributions. Positive noise and step are stated; this is a determined example, not an empty input, iff or arbitrary noise-family choice."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "ex-forward-difference-noise-bound-has-a-balanced-step has no additional zero-parameter regime beyond the explicit statement and proof hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At delta=1/2, step 3.1 uses the permitted step h=1 and verifies equality with the minimum."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "ex-forward-difference-noise-bound-has-a-balanced-step has no additional collapsed regime beyond the explicit hypotheses and named boundary cases. The example fixes a scalar quadratic at one and explicitly chooses opposing evaluation errors, attaining the supplied bound. Its final delta=one-half specialization gives step one with two equal error contributions. Positive noise and step are stated; this is a determined example, not an empty input, iff or arbitrary noise-family choice."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "ex-forward-difference-noise-bound-has-a-balanced-step has no separate interval-endpoint assertion beyond the domain conditions in its statement. The example fixes a scalar quadratic at one and explicitly chooses opposing evaluation errors, attaining the supplied bound. Its final delta=one-half specialization gives step one with two equal error contributions. Positive noise and step are stated; this is a determined example, not an empty input, iff or arbitrary noise-family choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "ex-forward-difference-noise-bound-has-a-balanced-step uses only explicitly named finite data, arbitrary points, or theorem-provided intermediate values; it does not select an element from a merely nonempty family. The example fixes a scalar quadratic at one and explicitly chooses opposing evaluation errors, attaining the supplied bound. Its final delta=one-half specialization gives step one with two equal error contributions. Positive noise and step are stated; this is a determined example, not an empty input, iff or arbitrary noise-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "ex-forward-difference-noise-bound-has-a-balanced-step states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-forward direction. The example fixes a scalar quadratic at one and explicitly chooses opposing evaluation errors, attaining the supplied bound. Its final delta=one-half specialization gives step one with two equal error contributions. Positive noise and step are stated; this is a determined example, not an empty input, iff or arbitrary noise-family choice."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "ex-forward-difference-noise-bound-has-a-balanced-step states a bound, one-way recovery rule, calculation, or counterexample; it is not an if-and-only-if claim, so there is no separate iff-reverse direction. The example fixes a scalar quadratic at one and explicitly chooses opposing evaluation errors, attaining the supplied bound. Its final delta=one-half specialization gives step one with two equal error contributions. Positive noise and step are stated; this is a determined example, not an empty input, iff or arbitrary noise-family choice."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "quadratic-noisy-forward-arithmetic",
+          "claim": "For f(t)=t^2, x=1, delta=1/2, h=1 and errors (+delta,-delta), the noisy forward error is 2.",
+          "result": "D_1 f(1)=3 and f′(1)=2; adding the call errors gives Dhat=2+1+2(1/2)=4, error 2, matching 2sqrt(2delta)=2."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

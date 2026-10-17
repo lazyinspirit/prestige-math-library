@@ -1,0 +1,85 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "12",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-jacobian-and-hessian-vector-difference-products",
+      "model": "gpt-6-luna",
+      "context_sha256": "ac7fd2df6d26677fd55ca3c66cde4e1544ba5af2dc23d165ff1907ab8d132c9b",
+      "outcome": "false_positive",
+      "reason": "The Definition specifies finite quotients and target matrix-vector products, with no assertion of convergence or an error bound. For the proposed F(s,t)=st/(s^2+t^2), F(0)=0, the coordinate partials at zero are zero and J_h^+(F,0,(1,1))=1/(2h); both defined quantities still exist. The counterexample refutes an unasserted consistency claim. The actual error theorem separately assumes F in C^2/C^3 and f in C^3/C^4, and uses this definition only for its formulas and per-call error convention.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-optimal-step-for-forward-and-central-difference-error-bounds",
+      "model": "gpt-6-luna",
+      "context_sha256": "f4e91f33fbecec8e83f163a706c412cf44d98d6b64becf98dca229957a0977a3",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 3.1 omits positive truncation in its first case: delta=M2=0 makes E_+(h)=0 for every h>0, contradicting its unqualified nonattainment sentence; likewise centrally with M3=0. The Statement already supplies the condition and the proof expressly handles both constants zero, so this is an immediately recoverable local case qualifier, classified nonfatal. Added the positive-truncation condition to step 3.1 and its exact contract mirror; all focused checks pass.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-jacobian-and-hessian-vector-difference-products",
+      "disposition": "unaffected",
+      "post_sha256": "306afe0d956e63792eb6a82edb80f61d094f2b9743332f5578ebb84cfa587927",
+      "review_context_sha256": "cfd5cb1988e0a053ea89dae617aefd03ae5d5e40a09fadc31a33ac970a6f72bd",
+      "reason": "Reviewed the complete Definition, all five direct supplier definitions/statements, owning manifest/page, and complete directional error-bound consumer. No proof contract is required for this proof-free definition. Jacobian/Hessian existence defines the targets; stencil-value existence and h>0 define the quotients. No consistency theorem is asserted. Consumer steps 1.1, 2.1, 2.2 and 2.3 obtain error bounds from separate smoothness and Taylor hypotheses. The rejected nonsmooth witness invalidates no actual assertion or use; the carrier is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-optimal-step-for-forward-and-central-difference-error-bounds",
+      "disposition": "repaired",
+      "post_sha256": "db8b18260f5af9e0fc15c6e445f873b445e9cc9d93ec176a94a255ef643a58ac",
+      "review_context_sha256": "e2ae0e6504d3f64fd05a9999a16cbc6e3b3b07fabb3471fc9562f386a3ad2984",
+      "reason": "Reviewed the Statement, Facts, all five steps, scalar error-bound supplier, root supplier statements, contract citations/boundaries and page interface. Positive-constant normalized gaps are (r-1)^2/r and (r-1)^2(r+2)/r, proving unique minima; the two-point identities prove decrease below each balancing step and the capped minima. After the step 3.1 repair, zero noise with positive truncation gives unattained infimum zero, zero truncation with positive noise gives endpoint H, and both zero gives every permitted step. The exact contract mirror is repaired, preserving historical review metadata. All four focused checks pass. The original Statement and dependencies are unchanged. This records my repair review, not independent acceptance of my edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "def-jacobian-and-hessian-vector-difference-products",
+      "location": "Definition",
+      "reason": "The rejected counterexample violates a convergence claim that is not asserted. The item defines quotients and target products; its direct error theorem imposes separate smoothness. No carrier or published-consumer defect is confirmed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-optimal-step-for-forward-and-central-difference-error-bounds",
+      "location": "Proof step 3.1 and its proof-contract derivation mirror",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "reason": "The proof first said delta=0 makes the bound a positive multiple of h or h^2 without requiring positive truncation. For delta=M2=0 or delta=M3=0 the bound is identically zero. Its Statement and final both-zero clause already give the right split. Added the missing positive-truncation qualifier to the first proof clause and exact contract mirror, resolving the local case omission without changing any Statement/Definition. All four focused checks pass.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed both assigned draft-frontier reviews in dependency order. Captured and checkpointed the first review before editing the second item. Ran the required review-contexts command immediately after each completed review; both exited 0 and their exact hashes are copied above without later refresh.",
+    "Changed only proof step 3.1 of thm-optimal-step-for-forward-and-central-difference-error-bounds and its derivation claim in research/numerical-optimization-dynamics-2026-10-16-batch-12.proof-contracts.json. Contract integration used sharedWriteLock acquire/reread/edit/check/release, owner step5-v2-initial-r1-u12. No judgment, verification stamp, shared ledger or workflow state was written.",
+    "Focused checks, all exit 0: node tools/tsx-run.mjs tools/precheck.mts items/thm-optimal-step-for-forward-and-central-difference-error-bounds.md --json (1 proof, 0 failures); node tools/rendercheck.mjs items/thm-optimal-step-for-forward-and-central-difference-error-bounds.md --json (1 file, 0 errors/warnings); node tools/proof-layout.mjs items/thm-optimal-step-for-forward-and-central-difference-error-bounds.md (1 item, 5 steps, 0 defects), run after the final item edit; node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-12.proof-contracts.json --strict --items thm-optimal-step-for-forward-and-central-difference-error-bounds --json (ok:true, no errors/warnings).",
+    "Final integrity check verified the exact input hash, one decision per rejected tuple, both current item guards and both unchanged interface hashes. Reversing only the edited proof clause reconstructs the frozen original guard, and direct comparison of the original/current Statement text shows equality. No Statement/Definition changed, so downstream is empty.",
+    "No new prerequisite, published-item finding, outside maintenance obligation or gate diagnostic was identified; no published-consumer-ledger amendment is proposed. No unresolved mathematics remains. Arguments are familiar elementary finite-quotient definitions and algebra, checked directly against local suppliers; no external source reading is claimed."
+  ]
+}

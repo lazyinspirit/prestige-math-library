@@ -1,0 +1,1190 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-fr-descent-and-direction-growth-bound",
+    "lem-safeguarded-pr-plus-uniform-angle",
+    "thm-nonlinear-cg-finite-budget-terminates",
+    "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe",
+    "thm-safeguarded-pr-plus-gradient-norms-converge",
+    "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg",
+    "ex-rosenbrock-fr-prplus-trace",
+    "cex-raw-prplus-loses-descent-and-safeguard-restarts",
+    "ex-spd-quadratic-nonlinear-cg-matches-linear-cg"
+  ],
+  "contracts": {
+    "lem-fr-descent-and-direction-growth-bound": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "Work in finite-dimensional real Euclidean space $\\mathbb R^n$, $n\\ge1$, with its standard inner product and norm ([[def-euclidean-inner-product]]). Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$ ([[def-c-one-map-and-local-inverse]]), and write $g(x)=\\nabla f(x)$ using the gradient convention of [[def-jacobian-matrix-and-gradient]].\n\nThe inputs are $x_0\\in D$, a method choice $\\mathrm{FR}$ or $\\mathrm{PR+}$, constants $0<c_1<c_2<1/2$, an outer iteration limit $K\\in\\mathbb N$, and a line-search mode. In bounded-strong-Wolfe mode, also supply finite expansion and zoom limits $E,Z\\in\\mathbb N$. In exact-SPD-quadratic mode, supply a real symmetric positive-definite matrix $A$ and vector $b$ such that $D=\\mathbb R^n$ and $f(x)=\\tfrac12x^TAx-b^Tx$. The $\\mathrm{PR+}$ choice also takes $\\sigma,C>0$. Evaluations and arithmetic are exact real operations; this definition makes no finite-precision error claim.\n\n1. Evaluate $g_0=g(x_0)$. If $g_0=0$, return status **stationary** with $x_0$. Otherwise set $d_0=-g_0$.\n\n2. For $k=0,\\ldots,K-1$, if $g_k=0$, return **stationary** with $x_k$. For $k\\ge1$, set\n   $$ \\beta_{k-1}^{\\rm FR}=\\frac{\\|g_k\\|_2^2}{\\|g_{k-1}\\|_2^2},\\qquad \\beta_{k-1}^{\\rm PR+}=\\max\\!\\left\\{0,\\frac{g_k^T(g_k-g_{k-1})}{\\|g_{k-1}\\|_2^2}\\right\\}. $$\n   Choose the selected coefficient and form $d_k^{\\rm cand}=-g_k+\\beta_{k-1}d_{k-1}$. For $k=0$, use $d_0$ above. Denominators are nonzero because the procedure has already returned at any zero gradient.\n\n3. In the $\\mathrm{PR+}$ method, test the candidate at the current point. If $g_k^Td_k^{\\rm cand}>-\\sigma\\|g_k\\|_2^2$ or $\\|d_k^{\\rm cand}\\|_2>C\\|g_k\\|_2$, restart by setting $\\beta_{k-1}=0$ and $d_k=-g_k$, and record that a restart occurred. Otherwise set $d_k=d_k^{\\rm cand}$. In the $\\mathrm{FR}$ method set $d_k=d_k^{\\rm cand}$ without this safeguard. If $g_k^Td_k\\ge0$, return **search-failure** with cause **invalid-direction**.\n\n4. In bounded-strong-Wolfe mode, call [[alg-bracketing-zoom-strong-wolfe-search]] at $(f,x_k,d_k,c_1,c_2)$ with budgets $E,Z$. That procedure returns a step only after checking both strong Wolfe inequalities. If it instead returns **invalid-direction**, **domain-exit**, or **evaluation-budget-exhausted**, return **search-failure** with that cause.\n\n5. In exact-SPD-quadratic mode, when $g_k^Td_k<0$, compute\n   $$ t_k=-\\frac{g_k^Td_k}{d_k^TAd_k}. $$\n   If the denominator is nonpositive or the computed step is not positive, return **search-failure** with cause **invalid-exact-model**. Otherwise verify the strong Wolfe inequalities and return **search-failure** if either fails. This mode records the exact-line-search specialization; it does not replace the finite-budget search mode.\n\n6. For an accepted step, set $x_{k+1}=x_k+t_kd_k$ and evaluate $g_{k+1}$. If $g_{k+1}=0$, return **stationary** with $x_{k+1}$. After the loop, return **iteration-limit** with the last iterate, the accepted trace, and all restart flags. A failure or stationary status returns immediately with the trace so far.\n\nThe FR and safeguarded PR+ convergence statements concern infinite sequences following the respective recurrences and direction rules above, with a successful strong Wolfe update at every index; they do not concern an infinite execution of this finite-$K$ procedure. Each finite execution can realize only a prefix of such a sequence. A finite search budget can return **search-failure**; it does not certify convergence.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "From the initial direction d_0=-g_0, q_0=1.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The FR recurrence and coefficient give q_k=1-(g_k^T d_{k-1})/||g_{k-1}||^2.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Strong Wolfe curvature yields 1-c_2 q_{k-1} <= q_k <= 1+c_2 q_{k-1}; induction gives q_k <= (1-c_2)^-1 and q_k >= (1-2c_2)/(1-c_2)>0.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Expanding the direction norm, bounding the cross term with strong Wolfe and q_{k-1} <= (1-c_2)^-1 gives ||d_k||^2 <= C_3 ||g_k||^2 + (||g_k||^4/||g_{k-1}||^4)||d_{k-1}||^2.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The base case and induction in the norm recurrence telescope to ||d_k||^2 <= C_3 ||g_k||^4 sum_{j=0}^k ||g_j||^-2.",
+          "inputs": [
+            "step 3.1",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family.",
+          "evidence": null
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement assumes every gradient is nonzero; the outer algorithm exits at a zero gradient before a denominator is formed.",
+          "evidence": null
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-step/base case is covered in step 1.1.",
+          "reason": null
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The strict c2<1/2 hypothesis makes delta positive in step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The curvature hypothesis is used at each accepted endpoint in step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses a fixed run and finite induction; no choice principle is required in steps 1.1 and 1.2.",
+          "reason": null
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "The induction and norm-growth recurrence were checked algebraically; no registered finite-smoke fixture applies. Author self-review only; this is not independent approval."
+      }
+    },
+    "lem-safeguarded-pr-plus-uniform-angle": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "Work in finite-dimensional real Euclidean space $\\mathbb R^n$, $n\\ge1$, with its standard inner product and norm ([[def-euclidean-inner-product]]). Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$ ([[def-c-one-map-and-local-inverse]]), and write $g(x)=\\nabla f(x)$ using the gradient convention of [[def-jacobian-matrix-and-gradient]].\n\nThe inputs are $x_0\\in D$, a method choice $\\mathrm{FR}$ or $\\mathrm{PR+}$, constants $0<c_1<c_2<1/2$, an outer iteration limit $K\\in\\mathbb N$, and a line-search mode. In bounded-strong-Wolfe mode, also supply finite expansion and zoom limits $E,Z\\in\\mathbb N$. In exact-SPD-quadratic mode, supply a real symmetric positive-definite matrix $A$ and vector $b$ such that $D=\\mathbb R^n$ and $f(x)=\\tfrac12x^TAx-b^Tx$. The $\\mathrm{PR+}$ choice also takes $\\sigma,C>0$. Evaluations and arithmetic are exact real operations; this definition makes no finite-precision error claim.\n\n1. Evaluate $g_0=g(x_0)$. If $g_0=0$, return status **stationary** with $x_0$. Otherwise set $d_0=-g_0$.\n\n2. For $k=0,\\ldots,K-1$, if $g_k=0$, return **stationary** with $x_k$. For $k\\ge1$, set\n   $$ \\beta_{k-1}^{\\rm FR}=\\frac{\\|g_k\\|_2^2}{\\|g_{k-1}\\|_2^2},\\qquad \\beta_{k-1}^{\\rm PR+}=\\max\\!\\left\\{0,\\frac{g_k^T(g_k-g_{k-1})}{\\|g_{k-1}\\|_2^2}\\right\\}. $$\n   Choose the selected coefficient and form $d_k^{\\rm cand}=-g_k+\\beta_{k-1}d_{k-1}$. For $k=0$, use $d_0$ above. Denominators are nonzero because the procedure has already returned at any zero gradient.\n\n3. In the $\\mathrm{PR+}$ method, test the candidate at the current point. If $g_k^Td_k^{\\rm cand}>-\\sigma\\|g_k\\|_2^2$ or $\\|d_k^{\\rm cand}\\|_2>C\\|g_k\\|_2$, restart by setting $\\beta_{k-1}=0$ and $d_k=-g_k$, and record that a restart occurred. Otherwise set $d_k=d_k^{\\rm cand}$. In the $\\mathrm{FR}$ method set $d_k=d_k^{\\rm cand}$ without this safeguard. If $g_k^Td_k\\ge0$, return **search-failure** with cause **invalid-direction**.\n\n4. In bounded-strong-Wolfe mode, call [[alg-bracketing-zoom-strong-wolfe-search]] at $(f,x_k,d_k,c_1,c_2)$ with budgets $E,Z$. That procedure returns a step only after checking both strong Wolfe inequalities. If it instead returns **invalid-direction**, **domain-exit**, or **evaluation-budget-exhausted**, return **search-failure** with that cause.\n\n5. In exact-SPD-quadratic mode, when $g_k^Td_k<0$, compute\n   $$ t_k=-\\frac{g_k^Td_k}{d_k^TAd_k}. $$\n   If the denominator is nonpositive or the computed step is not positive, return **search-failure** with cause **invalid-exact-model**. Otherwise verify the strong Wolfe inequalities and return **search-failure** if either fails. This mode records the exact-line-search specialization; it does not replace the finite-budget search mode.\n\n6. For an accepted step, set $x_{k+1}=x_k+t_kd_k$ and evaluate $g_{k+1}$. If $g_{k+1}=0$, return **stationary** with $x_{k+1}$. After the loop, return **iteration-limit** with the last iterate, the accepted trace, and all restart flags. A failure or stationary status returns immediately with the trace so far.\n\nThe FR and safeguarded PR+ convergence statements concern infinite sequences following the respective recurrences and direction rules above, with a successful strong Wolfe update at every index; they do not concern an infinite execution of this finite-$K$ procedure. Each finite execution can realize only a prefix of such a sequence. A finite search budget can return **search-failure**; it does not certify convergence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "**Cauchy-Schwarz.**",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If the candidate passes both tests, g^T d <= -sigma ||g||^2<0 and the angle definition plus ||d||<=C||g|| gives cos(theta)>=sigma/C.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Cauchy-Schwarz forces cos(theta)<=1, so a kept candidate can occur only when sigma/C<=1; a reset d=-g has cos(theta)=1. Both branches therefore give cos(theta)>=min(1,sigma/C)>0 and strict descent.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family.",
+          "evidence": null
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement assumes g is nonzero; the algorithm handles a zero gradient before constructing a direction.",
+          "evidence": null
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The reset branch has d=-g and angle one in step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When sigma/C>1 the kept branch is impossible by Cauchy-Schwarz, so step 2.1 gives the reset angle.",
+          "reason": null
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement concerns one direction at one point and has no interval endpoint condition.",
+          "evidence": null
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The kept and reset branches are checked directly in steps 1.1 and 2.1 without choice.",
+          "reason": null
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "Both keep and restart branches were checked, including arbitrary positive sigma and C; no registered finite-smoke fixture applies. Author self-review only; this is not independent approval."
+      }
+    },
+    "thm-nonlinear-cg-finite-budget-terminates": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "Work in finite-dimensional real Euclidean space $\\mathbb R^n$, $n\\ge1$, with its standard inner product and norm ([[def-euclidean-inner-product]]). Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$ ([[def-c-one-map-and-local-inverse]]), and write $g(x)=\\nabla f(x)$ using the gradient convention of [[def-jacobian-matrix-and-gradient]].\n\nThe inputs are $x_0\\in D$, a method choice $\\mathrm{FR}$ or $\\mathrm{PR+}$, constants $0<c_1<c_2<1/2$, an outer iteration limit $K\\in\\mathbb N$, and a line-search mode. In bounded-strong-Wolfe mode, also supply finite expansion and zoom limits $E,Z\\in\\mathbb N$. In exact-SPD-quadratic mode, supply a real symmetric positive-definite matrix $A$ and vector $b$ such that $D=\\mathbb R^n$ and $f(x)=\\tfrac12x^TAx-b^Tx$. The $\\mathrm{PR+}$ choice also takes $\\sigma,C>0$. Evaluations and arithmetic are exact real operations; this definition makes no finite-precision error claim.\n\n1. Evaluate $g_0=g(x_0)$. If $g_0=0$, return status **stationary** with $x_0$. Otherwise set $d_0=-g_0$.\n\n2. For $k=0,\\ldots,K-1$, if $g_k=0$, return **stationary** with $x_k$. For $k\\ge1$, set\n   $$ \\beta_{k-1}^{\\rm FR}=\\frac{\\|g_k\\|_2^2}{\\|g_{k-1}\\|_2^2},\\qquad \\beta_{k-1}^{\\rm PR+}=\\max\\!\\left\\{0,\\frac{g_k^T(g_k-g_{k-1})}{\\|g_{k-1}\\|_2^2}\\right\\}. $$\n   Choose the selected coefficient and form $d_k^{\\rm cand}=-g_k+\\beta_{k-1}d_{k-1}$. For $k=0$, use $d_0$ above. Denominators are nonzero because the procedure has already returned at any zero gradient.\n\n3. In the $\\mathrm{PR+}$ method, test the candidate at the current point. If $g_k^Td_k^{\\rm cand}>-\\sigma\\|g_k\\|_2^2$ or $\\|d_k^{\\rm cand}\\|_2>C\\|g_k\\|_2$, restart by setting $\\beta_{k-1}=0$ and $d_k=-g_k$, and record that a restart occurred. Otherwise set $d_k=d_k^{\\rm cand}$. In the $\\mathrm{FR}$ method set $d_k=d_k^{\\rm cand}$ without this safeguard. If $g_k^Td_k\\ge0$, return **search-failure** with cause **invalid-direction**.\n\n4. In bounded-strong-Wolfe mode, call [[alg-bracketing-zoom-strong-wolfe-search]] at $(f,x_k,d_k,c_1,c_2)$ with budgets $E,Z$. That procedure returns a step only after checking both strong Wolfe inequalities. If it instead returns **invalid-direction**, **domain-exit**, or **evaluation-budget-exhausted**, return **search-failure** with that cause.\n\n5. In exact-SPD-quadratic mode, when $g_k^Td_k<0$, compute\n   $$ t_k=-\\frac{g_k^Td_k}{d_k^TAd_k}. $$\n   If the denominator is nonpositive or the computed step is not positive, return **search-failure** with cause **invalid-exact-model**. Otherwise verify the strong Wolfe inequalities and return **search-failure** if either fails. This mode records the exact-line-search specialization; it does not replace the finite-budget search mode.\n\n6. For an accepted step, set $x_{k+1}=x_k+t_kd_k$ and evaluate $g_{k+1}$. If $g_{k+1}=0$, return **stationary** with $x_{k+1}$. After the loop, return **iteration-limit** with the last iterate, the accepted trace, and all restart flags. A failure or stationary status returns immediately with the trace so far.\n\nThe FR and safeguarded PR+ convergence statements concern infinite sequences following the respective recurrences and direction rules above, with a successful strong Wolfe update at every index; they do not concern an infinite execution of this finite-$K$ procedure. Each finite execution can realize only a prefix of such a sequence. A finite search budget can return **search-failure**; it does not certify convergence.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bracketing-zoom-finite-budget-checked-return",
+          "source_section": "Statement",
+          "quote": "Under the inputs of [[alg-bracketing-zoom-strong-wolfe-search]], assume all requested in-domain function and gradient evaluations terminate with real values and all prescribed comparisons are exact. The procedure terminates with its specified step or failure status. It makes at most $E$ expansion trial evaluations and at most one zoom call with at most $Z$ trial evaluations, hence at most $E+Z$ evaluated trial points. Each evaluates the objective and directional derivative at that point. Every returned step is positive, feasible, and satisfies both strong Wolfe inequalities. A domain-exit trial is not evaluated. The bound excludes the initial-point data and does not bound arithmetic work or guarantee success when a strong Wolfe step exists.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bracketing-zoom-finite-budget-checked-return",
+          "source_section": "Statement",
+          "quote": "Under the inputs of [[alg-bracketing-zoom-strong-wolfe-search]], assume all requested in-domain function and gradient evaluations terminate with real values and all prescribed comparisons are exact. The procedure terminates with its specified step or failure status. It makes at most $E$ expansion trial evaluations and at most one zoom call with at most $Z$ trial evaluations, hence at most $E+Z$ evaluated trial points. Each evaluates the objective and directional derivative at that point. Every returned step is positive, feasible, and satisfies both strong Wolfe inequalities. A domain-exit trial is not evaluated. The bound excludes the initial-point data and does not bound arithmetic work or guarantee success when a strong Wolfe step exists.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bracketing-zoom-finite-budget-checked-return",
+          "source_section": "Statement",
+          "quote": "Under the inputs of [[alg-bracketing-zoom-strong-wolfe-search]], assume all requested in-domain function and gradient evaluations terminate with real values and all prescribed comparisons are exact. The procedure terminates with its specified step or failure status. It makes at most $E$ expansion trial evaluations and at most one zoom call with at most $Z$ trial evaluations, hence at most $E+Z$ evaluated trial points. Each evaluates the objective and directional derivative at that point. Every returned step is positive, feasible, and satisfies both strong Wolfe inequalities. A domain-exit trial is not evaluated. The bound excludes the initial-point data and does not bound arithmetic work or guarantee success when a strong Wolfe step exists.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "Work in finite-dimensional real Euclidean space $\\mathbb R^n$, $n\\ge1$, with its standard inner product and norm ([[def-euclidean-inner-product]]). Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$ ([[def-c-one-map-and-local-inverse]]), and write $g(x)=\\nabla f(x)$ using the gradient convention of [[def-jacobian-matrix-and-gradient]].\n\nThe inputs are $x_0\\in D$, a method choice $\\mathrm{FR}$ or $\\mathrm{PR+}$, constants $0<c_1<c_2<1/2$, an outer iteration limit $K\\in\\mathbb N$, and a line-search mode. In bounded-strong-Wolfe mode, also supply finite expansion and zoom limits $E,Z\\in\\mathbb N$. In exact-SPD-quadratic mode, supply a real symmetric positive-definite matrix $A$ and vector $b$ such that $D=\\mathbb R^n$ and $f(x)=\\tfrac12x^TAx-b^Tx$. The $\\mathrm{PR+}$ choice also takes $\\sigma,C>0$. Evaluations and arithmetic are exact real operations; this definition makes no finite-precision error claim.\n\n1. Evaluate $g_0=g(x_0)$. If $g_0=0$, return status **stationary** with $x_0$. Otherwise set $d_0=-g_0$.\n\n2. For $k=0,\\ldots,K-1$, if $g_k=0$, return **stationary** with $x_k$. For $k\\ge1$, set\n   $$ \\beta_{k-1}^{\\rm FR}=\\frac{\\|g_k\\|_2^2}{\\|g_{k-1}\\|_2^2},\\qquad \\beta_{k-1}^{\\rm PR+}=\\max\\!\\left\\{0,\\frac{g_k^T(g_k-g_{k-1})}{\\|g_{k-1}\\|_2^2}\\right\\}. $$\n   Choose the selected coefficient and form $d_k^{\\rm cand}=-g_k+\\beta_{k-1}d_{k-1}$. For $k=0$, use $d_0$ above. Denominators are nonzero because the procedure has already returned at any zero gradient.\n\n3. In the $\\mathrm{PR+}$ method, test the candidate at the current point. If $g_k^Td_k^{\\rm cand}>-\\sigma\\|g_k\\|_2^2$ or $\\|d_k^{\\rm cand}\\|_2>C\\|g_k\\|_2$, restart by setting $\\beta_{k-1}=0$ and $d_k=-g_k$, and record that a restart occurred. Otherwise set $d_k=d_k^{\\rm cand}$. In the $\\mathrm{FR}$ method set $d_k=d_k^{\\rm cand}$ without this safeguard. If $g_k^Td_k\\ge0$, return **search-failure** with cause **invalid-direction**.\n\n4. In bounded-strong-Wolfe mode, call [[alg-bracketing-zoom-strong-wolfe-search]] at $(f,x_k,d_k,c_1,c_2)$ with budgets $E,Z$. That procedure returns a step only after checking both strong Wolfe inequalities. If it instead returns **invalid-direction**, **domain-exit**, or **evaluation-budget-exhausted**, return **search-failure** with that cause.\n\n5. In exact-SPD-quadratic mode, when $g_k^Td_k<0$, compute\n   $$ t_k=-\\frac{g_k^Td_k}{d_k^TAd_k}. $$\n   If the denominator is nonpositive or the computed step is not positive, return **search-failure** with cause **invalid-exact-model**. Otherwise verify the strong Wolfe inequalities and return **search-failure** if either fails. This mode records the exact-line-search specialization; it does not replace the finite-budget search mode.\n\n6. For an accepted step, set $x_{k+1}=x_k+t_kd_k$ and evaluate $g_{k+1}$. If $g_{k+1}=0$, return **stationary** with $x_{k+1}$. After the loop, return **iteration-limit** with the last iterate, the accepted trace, and all restart flags. A failure or stationary status returns immediately with the trace so far.\n\nThe FR and safeguarded PR+ convergence statements concern infinite sequences following the respective recurrences and direction rules above, with a successful strong Wolfe update at every index; they do not concern an infinite execution of this finite-$K$ procedure. Each finite execution can realize only a prefix of such a sequence. A finite search budget can return **search-failure**; it does not certify convergence.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "Work in finite-dimensional real Euclidean space $\\mathbb R^n$, $n\\ge1$, with its standard inner product and norm ([[def-euclidean-inner-product]]). Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$ ([[def-c-one-map-and-local-inverse]]), and write $g(x)=\\nabla f(x)$ using the gradient convention of [[def-jacobian-matrix-and-gradient]].\n\nThe inputs are $x_0\\in D$, a method choice $\\mathrm{FR}$ or $\\mathrm{PR+}$, constants $0<c_1<c_2<1/2$, an outer iteration limit $K\\in\\mathbb N$, and a line-search mode. In bounded-strong-Wolfe mode, also supply finite expansion and zoom limits $E,Z\\in\\mathbb N$. In exact-SPD-quadratic mode, supply a real symmetric positive-definite matrix $A$ and vector $b$ such that $D=\\mathbb R^n$ and $f(x)=\\tfrac12x^TAx-b^Tx$. The $\\mathrm{PR+}$ choice also takes $\\sigma,C>0$. Evaluations and arithmetic are exact real operations; this definition makes no finite-precision error claim.\n\n1. Evaluate $g_0=g(x_0)$. If $g_0=0$, return status **stationary** with $x_0$. Otherwise set $d_0=-g_0$.\n\n2. For $k=0,\\ldots,K-1$, if $g_k=0$, return **stationary** with $x_k$. For $k\\ge1$, set\n   $$ \\beta_{k-1}^{\\rm FR}=\\frac{\\|g_k\\|_2^2}{\\|g_{k-1}\\|_2^2},\\qquad \\beta_{k-1}^{\\rm PR+}=\\max\\!\\left\\{0,\\frac{g_k^T(g_k-g_{k-1})}{\\|g_{k-1}\\|_2^2}\\right\\}. $$\n   Choose the selected coefficient and form $d_k^{\\rm cand}=-g_k+\\beta_{k-1}d_{k-1}$. For $k=0$, use $d_0$ above. Denominators are nonzero because the procedure has already returned at any zero gradient.\n\n3. In the $\\mathrm{PR+}$ method, test the candidate at the current point. If $g_k^Td_k^{\\rm cand}>-\\sigma\\|g_k\\|_2^2$ or $\\|d_k^{\\rm cand}\\|_2>C\\|g_k\\|_2$, restart by setting $\\beta_{k-1}=0$ and $d_k=-g_k$, and record that a restart occurred. Otherwise set $d_k=d_k^{\\rm cand}$. In the $\\mathrm{FR}$ method set $d_k=d_k^{\\rm cand}$ without this safeguard. If $g_k^Td_k\\ge0$, return **search-failure** with cause **invalid-direction**.\n\n4. In bounded-strong-Wolfe mode, call [[alg-bracketing-zoom-strong-wolfe-search]] at $(f,x_k,d_k,c_1,c_2)$ with budgets $E,Z$. That procedure returns a step only after checking both strong Wolfe inequalities. If it instead returns **invalid-direction**, **domain-exit**, or **evaluation-budget-exhausted**, return **search-failure** with that cause.\n\n5. In exact-SPD-quadratic mode, when $g_k^Td_k<0$, compute\n   $$ t_k=-\\frac{g_k^Td_k}{d_k^TAd_k}. $$\n   If the denominator is nonpositive or the computed step is not positive, return **search-failure** with cause **invalid-exact-model**. Otherwise verify the strong Wolfe inequalities and return **search-failure** if either fails. This mode records the exact-line-search specialization; it does not replace the finite-budget search mode.\n\n6. For an accepted step, set $x_{k+1}=x_k+t_kd_k$ and evaluate $g_{k+1}$. If $g_{k+1}=0$, return **stationary** with $x_{k+1}$. After the loop, return **iteration-limit** with the last iterate, the accepted trace, and all restart flags. A failure or stationary status returns immediately with the trace so far.\n\nThe FR and safeguarded PR+ convergence statements concern infinite sequences following the respective recurrences and direction rules above, with a successful strong Wolfe update at every index; they do not concern an infinite execution of this finite-$K$ procedure. Each finite execution can realize only a prefix of such a sequence. A finite search budget can return **search-failure**; it does not certify convergence.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F2] and [F3], each bounded strong Wolfe call uses at most $E+Z$ trial evaluations; [F4] specifies that each trial evaluates $\\phi(t)$ and $\\phi'(t)$ and that the call returns a checked step or a failure. In exact-SPD-quadratic mode, the algorithm instead computes and checks its single formula step.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F1] and [F6], there are at most $K$ outer iterations; each either returns a terminal status or accepts one step, and after the loop any nonzero last gradient yields **iteration-limit**. Thus bounded mode makes at most $K$ line-search calls and $K(E+Z)$ trial evaluations. By [F5] and [F6], the outer algorithm evaluates the initial gradient once and one new iterate gradient per accepted update, hence at most $K+1$ outer-iterate gradient evaluations.",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "K=0 leaves no outer iteration; the initial check and iteration-limit return are covered by step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero expansion or zoom budget may fail immediately, but steps 1.1 and 2.1 still give a finite return.",
+          "reason": null
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For K=1 there is at most one bounded search; steps 1.1 and 2.1 give the stated count.",
+          "reason": null
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A domain-exit or exhausted search budget is terminal by step 1.1.",
+          "reason": null
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The initial and post-update iterate-gradient evaluations are counted in step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The outer, expansion, and zoom loops are finite and deterministic in steps 1.1 and 2.1.",
+          "reason": null
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "The stated bounds count only evaluations and calls, not arithmetic work; no registered finite-smoke fixture applies. Author self-review only; this is not independent approval."
+      }
+    },
+    "thm-fletcher-reeves-liminf-gradient-under-strong-wolfe": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fr-descent-and-direction-growth-bound",
+          "source_section": "Statement",
+          "quote": "Let $g_k=\\nabla f(x_k)\\ne0$ and let the Fletcher–Reeves directions be\n$$ d_0=-g_0,\\qquad d_k=-g_k+\\beta_{k-1}d_{k-1},\\qquad \\beta_{k-1}=\\frac{\\|g_k\\|_2^2}{\\|g_{k-1}\\|_2^2}\\quad(k\\ge1). $$\nSuppose every accepted step along $d_{k-1}$ satisfies the strong Wolfe curvature inequality with constant $0<c_2<1/2$. Define\n$$ q_k=-\\frac{g_k^Td_k}{\\|g_k\\|_2^2},\\qquad \\delta=\\frac{1-2c_2}{1-c_2},\\qquad C_3=\\frac{1+c_2}{1-c_2},\\qquad S_k=\\sum_{j=0}^k\\frac1{\\|g_j\\|_2^2}. $$\nThen, for every $k$,\n$$ \\delta\\le q_k\\le\\frac1{1-c_2},\\qquad \\|d_k\\|_2^2\\le C_3\\|g_k\\|_2^4S_k. $$\nIn particular every direction is strictly descending, and its normalized directional derivative has a uniform positive lower bound.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-zoutendijk-summability-for-wolfe-steps",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$ and\nlet $x_0\\in D$. Define its initial sublevel set\n$L_0:=\\{x\\in D:f(x)\\le f(x_0)\\}$, and suppose $f$ is bounded below on\n$L_0$. Let $N\\subseteq D$ contain every segment $x_k+[0,t_k]p_k$ in a\nsequence $(x_k)_{k\\ge0}\\subset D$. Suppose there is $L>0$ such that\n$$\n\\|\\nabla f(u)-\\nabla f(v)\\|_2\\le L\\|u-v\\|_2\\qquad(u,v\\in N).\n$$\nFor every $k\\ge0$, assume $x_{k+1}=x_k+t_kp_k$, $p_k\\ne0$ is a descent\ndirection at $x_k$, and $t_k>0$ is a Wolfe step for $f,x_k,p_k$ under\n[[def-wolfe-and-strong-wolfe-conditions]]. Define\n$$\\cos\\theta_k:=-\\frac{\\langle\\nabla f(x_k),p_k\\rangle}{\\|\\nabla f(x_k)\\|_2\\|p_k\\|_2}.$$\nThen\n$$\n\\sum_{k=0}^{\\infty}\\cos^2\\theta_k\\,\\|\\nabla f(x_k)\\|_2^2<\\infty.\n$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], every $d_k$ is a strict descent direction. By [F2], the accepted strong Wolfe steps are Wolfe steps. The hypotheses therefore match [F3], so $\\sum_{k=0}^\\infty\\cos^2\\theta_k\\|g_k\\|_2^2<\\infty.$",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Suppose instead that $\\liminf_k\\|g_k\\|_2>0$. Choose $\\gamma>0$ and an integer $K\\ge1$ such that $\\|g_j\\|_2\\ge\\gamma$ for every $j\\ge K$. Then for $k\\ge K$, $S_k:=\\sum_{j=0}^k\\frac1{\\|g_j\\|_2^2} \\le k\\left(\\sum_{j=0}^{K-1}\\frac1{\\|g_j\\|_2^2}+\\gamma^{-2}\\right)=:A_0k,$ where $A_0>0$.",
+          "inputs": [
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "From [F1], $\\|d_k\\|_2^2\\le C_3A_0k\\|g_k\\|_2^4$. Since $q_k=-g_k^Td_k/\\|g_k\\|_2^2$ and $\\cos\\theta_k=-g_k^Td_k/(\\|g_k\\|_2\\|d_k\\|_2)$, $\\cos^2\\theta_k\\|g_k\\|_2^2 =\\frac{(g_k^Td_k)^2}{\\|d_k\\|_2^2} =\\frac{q_k^2\\|g_k\\|_2^4}{\\|d_k\\|_2^2} \\ge\\frac{\\delta^2}{C_3A_0k}.$ The harmonic series diverges, contradicting step 1.1. Thus the supposition is false and $\\liminf_k\\|g_k\\|_2=0$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra",
+            "contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family.",
+          "evidence": null
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The infinite-run hypothesis assumes nonzero gradients at every iterate.",
+          "evidence": null
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The contradiction uses the initial term and all later iterates beginning in steps 1.1 and 2.1.",
+          "reason": null
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The strict c2<1/2 hypothesis makes the FR slope delta positive in step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement assumes every feasible trial segment lies in the common Lipschitz neighborhood used in step 1.1.",
+          "reason": null
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The contradiction uses a fixed sequence and the harmonic series in steps 1.2 and 2.1; no choice principle is used.",
+          "reason": null
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "The local slope and direction-growth estimates were checked against each other; source theorem hypotheses are stronger than the contract and are not imported. Author self-review only; this is not independent approval."
+      }
+    },
+    "thm-safeguarded-pr-plus-gradient-norms-converge": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-safeguarded-pr-plus-uniform-angle",
+          "source_section": "Statement",
+          "quote": "Let $g\\ne0$ and let $d^{\\rm cand}$ be the PR+ candidate direction from [[alg-nonlinear-conjugate-gradient-methods]]. The safeguarded procedure either keeps $d^{\\rm cand}$ when\n$$ g^Td^{\\rm cand}\\le-\\sigma\\|g\\|_2^2,\\qquad \\|d^{\\rm cand}\\|_2\\le C\\|g\\|_2, $$\nor restarts to $d=-g$, where $\\sigma,C>0$. The resulting direction is strictly descending and its angle $\\theta$ with $-g$ satisfies\n$$ \\cos\\theta\\ge\\delta_{\\rm PR}:=\\min\\{1,\\sigma/C\\}>0, $$\nusing the angle convention of [[def-wolfe-and-strong-wolfe-conditions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-uniform-descent-angle-implies-gradient-vanishing",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-zoutendijk-summability-for-wolfe-steps]], suppose\nthere is a constant $\\delta>0$ such that $\\cos\\theta_k\\ge\\delta$ for every\n$k$. Then $\\|\\nabla f(x_k)\\|_2\\to0$. This is convergence of gradient norms\nto zero; it does not assert convergence of $(x_k)$ or that a limit point is a\nminimizer.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Set $\\delta_{\\rm PR}=\\min\\{1,\\sigma/C\\}>0$. By [F1], every search direction has descent-angle cosine at least $\\delta_{\\rm PR}$, including a direction reset to $-g_k$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Strong Wolfe implies Wolfe by [[def-wolfe-and-strong-wolfe-conditions]]. All hypotheses of [F2] therefore hold with this $\\delta_{\\rm PR}$, and [F2] gives $\\|\\nabla f(x_k)\\|_2\\to0$.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family.",
+          "evidence": null
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement concerns an infinite successful run with nonzero gradients; zero returns stationary in the algorithm.",
+          "evidence": null
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The uniform positive angle is established for each direction in step 1.1.",
+          "reason": null
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant min{1,sigma/C} remains positive even when sigma/C exceeds one, as used in step 1.1.",
+          "reason": null
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Every successful step is a feasible Wolfe step under the carried hypotheses in step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof applies the deterministic safeguard and a fixed supplier theorem in steps 1.1 and 2.1.",
+          "reason": null
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "The angle hypothesis is verified directly for both algorithm branches; no registered finite-smoke fixture applies. Author self-review only; this is not independent approval."
+      }
+    },
+    "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "Work in finite-dimensional real Euclidean space $\\mathbb R^n$, $n\\ge1$, with its standard inner product and norm ([[def-euclidean-inner-product]]). Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$ ([[def-c-one-map-and-local-inverse]]), and write $g(x)=\\nabla f(x)$ using the gradient convention of [[def-jacobian-matrix-and-gradient]].\n\nThe inputs are $x_0\\in D$, a method choice $\\mathrm{FR}$ or $\\mathrm{PR+}$, constants $0<c_1<c_2<1/2$, an outer iteration limit $K\\in\\mathbb N$, and a line-search mode. In bounded-strong-Wolfe mode, also supply finite expansion and zoom limits $E,Z\\in\\mathbb N$. In exact-SPD-quadratic mode, supply a real symmetric positive-definite matrix $A$ and vector $b$ such that $D=\\mathbb R^n$ and $f(x)=\\tfrac12x^TAx-b^Tx$. The $\\mathrm{PR+}$ choice also takes $\\sigma,C>0$. Evaluations and arithmetic are exact real operations; this definition makes no finite-precision error claim.\n\n1. Evaluate $g_0=g(x_0)$. If $g_0=0$, return status **stationary** with $x_0$. Otherwise set $d_0=-g_0$.\n\n2. For $k=0,\\ldots,K-1$, if $g_k=0$, return **stationary** with $x_k$. For $k\\ge1$, set\n   $$ \\beta_{k-1}^{\\rm FR}=\\frac{\\|g_k\\|_2^2}{\\|g_{k-1}\\|_2^2},\\qquad \\beta_{k-1}^{\\rm PR+}=\\max\\!\\left\\{0,\\frac{g_k^T(g_k-g_{k-1})}{\\|g_{k-1}\\|_2^2}\\right\\}. $$\n   Choose the selected coefficient and form $d_k^{\\rm cand}=-g_k+\\beta_{k-1}d_{k-1}$. For $k=0$, use $d_0$ above. Denominators are nonzero because the procedure has already returned at any zero gradient.\n\n3. In the $\\mathrm{PR+}$ method, test the candidate at the current point. If $g_k^Td_k^{\\rm cand}>-\\sigma\\|g_k\\|_2^2$ or $\\|d_k^{\\rm cand}\\|_2>C\\|g_k\\|_2$, restart by setting $\\beta_{k-1}=0$ and $d_k=-g_k$, and record that a restart occurred. Otherwise set $d_k=d_k^{\\rm cand}$. In the $\\mathrm{FR}$ method set $d_k=d_k^{\\rm cand}$ without this safeguard. If $g_k^Td_k\\ge0$, return **search-failure** with cause **invalid-direction**.\n\n4. In bounded-strong-Wolfe mode, call [[alg-bracketing-zoom-strong-wolfe-search]] at $(f,x_k,d_k,c_1,c_2)$ with budgets $E,Z$. That procedure returns a step only after checking both strong Wolfe inequalities. If it instead returns **invalid-direction**, **domain-exit**, or **evaluation-budget-exhausted**, return **search-failure** with that cause.\n\n5. In exact-SPD-quadratic mode, when $g_k^Td_k<0$, compute\n   $$ t_k=-\\frac{g_k^Td_k}{d_k^TAd_k}. $$\n   If the denominator is nonpositive or the computed step is not positive, return **search-failure** with cause **invalid-exact-model**. Otherwise verify the strong Wolfe inequalities and return **search-failure** if either fails. This mode records the exact-line-search specialization; it does not replace the finite-budget search mode.\n\n6. For an accepted step, set $x_{k+1}=x_k+t_kd_k$ and evaluate $g_{k+1}$. If $g_{k+1}=0$, return **stationary** with $x_{k+1}$. After the loop, return **iteration-limit** with the last iterate, the accepted trace, and all restart flags. A failure or stationary status returns immediately with the trace so far.\n\nThe FR and safeguarded PR+ convergence statements concern infinite sequences following the respective recurrences and direction rules above, with a successful strong Wolfe update at every index; they do not concern an infinite execution of this finite-$K$ procedure. Each finite execution can realize only a prefix of such a sequence. A finite search budget can return **search-failure**; it does not certify convergence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "Work in finite-dimensional real Euclidean space $\\mathbb R^n$, $n\\ge1$, with its standard inner product and norm ([[def-euclidean-inner-product]]). Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$ ([[def-c-one-map-and-local-inverse]]), and write $g(x)=\\nabla f(x)$ using the gradient convention of [[def-jacobian-matrix-and-gradient]].\n\nThe inputs are $x_0\\in D$, a method choice $\\mathrm{FR}$ or $\\mathrm{PR+}$, constants $0<c_1<c_2<1/2$, an outer iteration limit $K\\in\\mathbb N$, and a line-search mode. In bounded-strong-Wolfe mode, also supply finite expansion and zoom limits $E,Z\\in\\mathbb N$. In exact-SPD-quadratic mode, supply a real symmetric positive-definite matrix $A$ and vector $b$ such that $D=\\mathbb R^n$ and $f(x)=\\tfrac12x^TAx-b^Tx$. The $\\mathrm{PR+}$ choice also takes $\\sigma,C>0$. Evaluations and arithmetic are exact real operations; this definition makes no finite-precision error claim.\n\n1. Evaluate $g_0=g(x_0)$. If $g_0=0$, return status **stationary** with $x_0$. Otherwise set $d_0=-g_0$.\n\n2. For $k=0,\\ldots,K-1$, if $g_k=0$, return **stationary** with $x_k$. For $k\\ge1$, set\n   $$ \\beta_{k-1}^{\\rm FR}=\\frac{\\|g_k\\|_2^2}{\\|g_{k-1}\\|_2^2},\\qquad \\beta_{k-1}^{\\rm PR+}=\\max\\!\\left\\{0,\\frac{g_k^T(g_k-g_{k-1})}{\\|g_{k-1}\\|_2^2}\\right\\}. $$\n   Choose the selected coefficient and form $d_k^{\\rm cand}=-g_k+\\beta_{k-1}d_{k-1}$. For $k=0$, use $d_0$ above. Denominators are nonzero because the procedure has already returned at any zero gradient.\n\n3. In the $\\mathrm{PR+}$ method, test the candidate at the current point. If $g_k^Td_k^{\\rm cand}>-\\sigma\\|g_k\\|_2^2$ or $\\|d_k^{\\rm cand}\\|_2>C\\|g_k\\|_2$, restart by setting $\\beta_{k-1}=0$ and $d_k=-g_k$, and record that a restart occurred. Otherwise set $d_k=d_k^{\\rm cand}$. In the $\\mathrm{FR}$ method set $d_k=d_k^{\\rm cand}$ without this safeguard. If $g_k^Td_k\\ge0$, return **search-failure** with cause **invalid-direction**.\n\n4. In bounded-strong-Wolfe mode, call [[alg-bracketing-zoom-strong-wolfe-search]] at $(f,x_k,d_k,c_1,c_2)$ with budgets $E,Z$. That procedure returns a step only after checking both strong Wolfe inequalities. If it instead returns **invalid-direction**, **domain-exit**, or **evaluation-budget-exhausted**, return **search-failure** with that cause.\n\n5. In exact-SPD-quadratic mode, when $g_k^Td_k<0$, compute\n   $$ t_k=-\\frac{g_k^Td_k}{d_k^TAd_k}. $$\n   If the denominator is nonpositive or the computed step is not positive, return **search-failure** with cause **invalid-exact-model**. Otherwise verify the strong Wolfe inequalities and return **search-failure** if either fails. This mode records the exact-line-search specialization; it does not replace the finite-budget search mode.\n\n6. For an accepted step, set $x_{k+1}=x_k+t_kd_k$ and evaluate $g_{k+1}$. If $g_{k+1}=0$, return **stationary** with $x_{k+1}$. After the loop, return **iteration-limit** with the last iterate, the accepted trace, and all restart flags. A failure or stationary status returns immediately with the trace so far.\n\nThe FR and safeguarded PR+ convergence statements concern infinite sequences following the respective recurrences and direction rules above, with a successful strong Wolfe update at every index; they do not concern an infinite execution of this finite-$K$ procedure. Each finite execution can realize only a prefix of such a sequence. A finite search budget can return **search-failure**; it does not certify convergence.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conjugate-gradient-recurrence",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian positive definite, let $Ax=b$, and fix an initial guess\n$x_0$. Set\n\n$$r_0:=b-Ax_0,\\qquad p_0:=r_0.$$\n\nFor every index $k$ with $r_k\\ne0$, define\n\n$$\\alpha_k:=\\frac{\\langle r_k,r_k\\rangle}{\\langle Ap_k,p_k\\rangle},\\qquad x_{k+1}:=x_k+\\alpha_kp_k,\\qquad r_{k+1}:=r_k-\\alpha_kAp_k,$$\n\nand then\n\n$$\\beta_k:=\\frac{\\langle r_{k+1},r_{k+1}\\rangle}{\\langle r_k,r_k\\rangle},\\qquad p_{k+1}:=r_{k+1}+\\beta_kp_k.$$\n\nThis is the **conjugate-gradient recurrence**.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate",
+          "source_section": "Statement",
+          "quote": "Let $A$ be Hermitian positive definite, and run the conjugate-gradient\nrecurrence in exact arithmetic. For all indices $i\\ne j$ for which the\nquantities are defined,\n\n$$\\langle r_i,r_j\\rangle=0,\\qquad p_i^*Ap_j=0.$$\n\nThus the residuals are mutually orthogonal and the search directions are\n$A$-conjugate.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-conjugate-gradient-denominators-are-positive-before-convergence",
+          "source_section": "Statement",
+          "quote": "Assume the conjugate-gradient recurrence of\n[[def-conjugate-gradient-recurrence]] is defined through step $k$ for a\nHermitian positive-definite matrix $A$. If $r_k\\ne0$, then $p_k\\ne0$ and\n\n$$p_k^*Ap_k=\\|p_k\\|_A^2>0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Differentiating the given quadratic gives $g_k=Ax_k-b=-r_k$. If $r_0=0$, both procedures are already at the common zero-residual exit. Otherwise, $d_0=-g_0=r_0=p_0\\ne0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Assume inductively that the directions agree through index $k-1$, where $k\\ge1$ and the run has not terminated. The preceding accepted step exactly minimizes the SPD quadratic along the common direction $d_{k-1}=p_{k-1}$. The derivative of its restricted quadratic vanishes at that positive minimizer, so $g_k^Td_{k-1}=0$ and therefore $r_k^Td_{k-1}=0$.",
+          "inputs": [
+            "given",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For the FR recurrence, $d_k=r_k+\\beta_{k-1}d_{k-1}$ and $\\beta_{k-1}=\\|r_k\\|_2^2/\\|r_{k-1}\\|_2^2$. For the raw PR+ recurrence, [F3] gives $r_k^Tr_{k-1}=0$, so $\\beta_{k-1}^{\\rm PR+} =\\max\\!\\left\\{0,\\frac{r_k^T(r_k-r_{k-1})}{\\|r_{k-1}\\|_2^2}\\right\\} =\\frac{\\|r_k\\|_2^2}{\\|r_{k-1}\\|_2^2} =\\beta_{k-1}^{\\rm FR}.$ Thus either unrestarted direction equals $r_k+\\beta_{k-1}p_{k-1}$, the linear-CG direction, closing the induction step. A safeguarded PR+ direction also agrees whenever its safeguard does not restart.",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For $k=0$, step 1.1 gives $d_k=p_k\\ne0$; for $k\\ge1$, step 2.1 gives the same equality. Then [F4] gives $p_k^TAp_k>0$. The restriction of $f$ to $x_k+td_k$ is $f(x_k+td_k)=f(x_k)+t\\,g_k^Td_k+\\tfrac12t^2d_k^TAd_k.$ Its unique minimizer is $t_k=-g_k^Td_k/(d_k^TAd_k)>0$. For $k=0$, $r_0^Td_0=\\|r_0\\|_2^2$ by step 1.1. For $k\\ge1$, step 1.2 and the recurrence give $r_k^Td_k=\\|r_k\\|_2^2$. Therefore this is $t_k=\\frac{r_k^Tr_k}{p_k^TAp_k}=\\alpha_k$ from [F2]. At this minimizer, $\\phi'(t_k)=g_k^Td_k+t_kd_k^TAd_k=0$, so the strong curvature test holds. Also\n$\\phi(t_k)=\\phi(0)+\\tfrac12t_k g_k^Td_k\\le\\phi(0)+c_1t_k g_k^Td_k$\nbecause $t_k g_k^Td_k<0$ and $c_1<1/2$. Thus [F6] and the exact-model branch accept this step; the same calculation applies at every preceding common minimizer invoked in step 1.2, starting with step 1.1, so the induction uses actual accepted steps. Hence the next iterates and residuals agree.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "After the common step, $r_{k+1}=b-Ax_{k+1}$ is the CG residual and $g_{k+1}=-r_{k+1}$ by step 1.1. If $r_{k+1}=0$, both methods stop at the common exit. Otherwise the FR coefficient equals $\\|r_{k+1}\\|_2^2/\\|r_k\\|_2^2$, and the raw PR+ coefficient again equals it by [F3] and [F5]. Thus the next direction also agrees; induction continues until zero residual.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 3.1",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family.",
+          "evidence": null
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The initial zero-residual exit is handled in step 1.1 and each later zero residual before the next coefficient is formed in step 4.1.",
+          "reason": null
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The initial direction is matched in step 1.1 and the generic induction step is completed in step 2.1.",
+          "reason": null
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a real SPD matrix; non-SPD and singular quadratic branches are expressly excluded.",
+          "evidence": null
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The line minimizer is positive and feasible on R^n by the descent and denominator argument in step 3.1.",
+          "reason": null
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The equivalence follows by deterministic induction on the exact recurrences in steps 1.2, 2.1, and 4.1.",
+          "reason": null
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence.",
+          "evidence": null
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "The equivalence induction was checked against the published CG recurrence, orthogonality theorem and positive-denominator proposition. Author self-review only; this is not independent approval."
+      }
+    },
+    "ex-rosenbrock-fr-prplus-trace": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "Work in finite-dimensional real Euclidean space $\\mathbb R^n$, $n\\ge1$, with its standard inner product and norm ([[def-euclidean-inner-product]]). Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$ ([[def-c-one-map-and-local-inverse]]), and write $g(x)=\\nabla f(x)$ using the gradient convention of [[def-jacobian-matrix-and-gradient]].\n\nThe inputs are $x_0\\in D$, a method choice $\\mathrm{FR}$ or $\\mathrm{PR+}$, constants $0<c_1<c_2<1/2$, an outer iteration limit $K\\in\\mathbb N$, and a line-search mode. In bounded-strong-Wolfe mode, also supply finite expansion and zoom limits $E,Z\\in\\mathbb N$. In exact-SPD-quadratic mode, supply a real symmetric positive-definite matrix $A$ and vector $b$ such that $D=\\mathbb R^n$ and $f(x)=\\tfrac12x^TAx-b^Tx$. The $\\mathrm{PR+}$ choice also takes $\\sigma,C>0$. Evaluations and arithmetic are exact real operations; this definition makes no finite-precision error claim.\n\n1. Evaluate $g_0=g(x_0)$. If $g_0=0$, return status **stationary** with $x_0$. Otherwise set $d_0=-g_0$.\n\n2. For $k=0,\\ldots,K-1$, if $g_k=0$, return **stationary** with $x_k$. For $k\\ge1$, set\n   $$ \\beta_{k-1}^{\\rm FR}=\\frac{\\|g_k\\|_2^2}{\\|g_{k-1}\\|_2^2},\\qquad \\beta_{k-1}^{\\rm PR+}=\\max\\!\\left\\{0,\\frac{g_k^T(g_k-g_{k-1})}{\\|g_{k-1}\\|_2^2}\\right\\}. $$\n   Choose the selected coefficient and form $d_k^{\\rm cand}=-g_k+\\beta_{k-1}d_{k-1}$. For $k=0$, use $d_0$ above. Denominators are nonzero because the procedure has already returned at any zero gradient.\n\n3. In the $\\mathrm{PR+}$ method, test the candidate at the current point. If $g_k^Td_k^{\\rm cand}>-\\sigma\\|g_k\\|_2^2$ or $\\|d_k^{\\rm cand}\\|_2>C\\|g_k\\|_2$, restart by setting $\\beta_{k-1}=0$ and $d_k=-g_k$, and record that a restart occurred. Otherwise set $d_k=d_k^{\\rm cand}$. In the $\\mathrm{FR}$ method set $d_k=d_k^{\\rm cand}$ without this safeguard. If $g_k^Td_k\\ge0$, return **search-failure** with cause **invalid-direction**.\n\n4. In bounded-strong-Wolfe mode, call [[alg-bracketing-zoom-strong-wolfe-search]] at $(f,x_k,d_k,c_1,c_2)$ with budgets $E,Z$. That procedure returns a step only after checking both strong Wolfe inequalities. If it instead returns **invalid-direction**, **domain-exit**, or **evaluation-budget-exhausted**, return **search-failure** with that cause.\n\n5. In exact-SPD-quadratic mode, when $g_k^Td_k<0$, compute\n   $$ t_k=-\\frac{g_k^Td_k}{d_k^TAd_k}. $$\n   If the denominator is nonpositive or the computed step is not positive, return **search-failure** with cause **invalid-exact-model**. Otherwise verify the strong Wolfe inequalities and return **search-failure** if either fails. This mode records the exact-line-search specialization; it does not replace the finite-budget search mode.\n\n6. For an accepted step, set $x_{k+1}=x_k+t_kd_k$ and evaluate $g_{k+1}$. If $g_{k+1}=0$, return **stationary** with $x_{k+1}$. After the loop, return **iteration-limit** with the last iterate, the accepted trace, and all restart flags. A failure or stationary status returns immediately with the trace so far.\n\nThe FR and safeguarded PR+ convergence statements concern infinite sequences following the respective recurrences and direction rules above, with a successful strong Wolfe update at every index; they do not concern an infinite execution of this finite-$K$ procedure. Each finite execution can realize only a prefix of such a sequence. A finite search budget can return **search-failure**; it does not certify convergence.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-bracketing-zoom-strong-wolfe-search",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$,\nlet $x\\in D$, and let $p\\in\\mathbb R^n$ be arbitrary. Fix $0<c_1<c_2<1/2$ and finite\nbudgets $E,Z\\in\\mathbb N$ for expansion and zoom trials. After the direction check passes, use the functions\n$\\phi(t)=f(x+tp)$ and $\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$ from\n[[def-wolfe-and-strong-wolfe-conditions]]. **Output:** either a positive\nstrong Wolfe step, or one of `invalid-direction`, `domain-exit`, and\n`evaluation-budget-exhausted`.\n\n1. If $\\langle\\nabla f(x),p\\rangle\\ge0$, return `invalid-direction`.\n   Set $a:=0$ and $t:=1$. For at most $E$ expansion trials, in order:\n   - If $x+tp\\notin D$, return `domain-exit` without evaluating the trial.\n   - Evaluate $\\phi(t)$ and $\\phi'(t)$. If\n     $\\phi(t)>\\phi(0)+c_1t\\phi'(0)$ or $\\phi(t)\\ge\\phi(a)$, call the zoom\n     procedure below with the ordered endpoint pair $(a,t)$ and return its\n     output.\n   - If $|\\phi'(t)|\\le c_2|\\phi'(0)|$, return $t$ as a strong Wolfe step.\n   - If $\\phi'(t)\\ge0$, call zoom with the reversed endpoint pair $(t,a)$ and\n     return its output.\n   - Otherwise set $a:=t$ and $t:=2t$.\n2. If the expansion budget is exhausted, return `evaluation-budget-exhausted`.\n\nFor `zoom(a,b)`, preserve the endpoint order even when $b<a$. For at most\n$Z$ zoom trials, in order:\n\n1. Set $m:=(a+b)/2$. If $x+mp\\notin D$, return `domain-exit` without\n   evaluating the trial.\n2. Evaluate $\\phi(m)$ and $\\phi'(m)$. If\n   $\\phi(m)>\\phi(0)+c_1m\\phi'(0)$ or $\\phi(m)\\ge\\phi(a)$, set $b:=m$.\n   Otherwise, if $|\\phi'(m)|\\le c_2|\\phi'(0)|$, return $m$ as a strong Wolfe\n   step. In the remaining branch, if $\\phi'(m)(b-a)\\ge0$, first set\n   $b:=a$; then set $a:=m$.\n3. If the zoom budget is exhausted, return `evaluation-budget-exhausted`.\n\nThe procedure returns a step only after both strong Wolfe inequalities have\nbeen checked. Finite budgets and domain exits may return failure even when a\nstrong Wolfe step exists; no convergence claim follows from the procedure\nalone.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Differentiation gives $g_0=(-1078/5,-88)$, $d_0=(1078/5,88)$, $f(x_0)=121/5$, and $\\phi'(0)=-G_0$ with $G_0=1{,}355{,}684/25=54{,}227.36$. At a parameter $t$, write $u=-6/5+(1078/5)t$, $v=1+88t$, and $r=v-u^2$. Then $\\phi(t)=(1-u)^2+100r^2$ and $\\phi'(t)=(-400ur+2(u-1))(1078/5)+200r(88)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Exact substitution into step 1.1 gives integer lower bounds for $\\phi(2^{-j})$, in order $j=0,\\ldots,9$: $210482437168$, $12810991198$, $758614013$, $42388850$, $2078788$, $72456$, $543$, $211$, $149$, and $35$. Each lower bound exceeds $121/5$, whereas every positive-trial Armijo right side is below $121/5$. Thus the initial trial fails Armijo and the first nine zoom trials fail it as well. By [F3], $a=0$ remains fixed and the tenth zoom trial is $t_0=2^{-10}=1/1024$.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "At this trial, $x_1=(-2533/2560,139/128)$ and $r=700711/6553600$. Exactly, $$f(x_1)=\\frac{438182241277}{85899345920}<\\frac{511}{100},\\qquad  g_1=\\left(\\frac{1608013539}{41943040},\\frac{700711}{32768}\\right),\\qquad  h:=g_1^Td_0=\\frac{1064039515121}{104857600}.$$ The Armijo right side is $121/5-G_0/(1000\\cdot1024)>24$, so Armijo holds. Also $0<h<10148<26571< (49/100)G_0=26571.4064$, so strong curvature holds. The search therefore returns this tenth midpoint.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Put $G_1=\\|g_1\\|_2^2=3390155233212910921/1759218604441600$. Because $g_0=-d_0$ and $h>0$, the coefficients are $\\beta_0^{\\rm FR}=G_1/G_0$ and $\\beta_0^{\\rm PR+}=(G_1+h)/G_0>\\beta_0^{\\rm FR}$. The FR direction is $-g_1+(G_1/G_0)d_0$; the PR+ candidate is $d_1^{\\rm cand}=-g_1+((G_1+h)/G_0)d_0$. Exact values in step 3.1 give $1927<G_1<1928$, $10147<h<10148$, and $54227<G_0<54228$. Hence $$g_1^Td_1^{\\rm cand}=-G_1+\\frac{(G_1+h)h}{G_0}>-1928+\\frac{(1927+10147)10147}{54228}>331>0.$$ It fails the descent safeguard for every $\\sigma>0$. Thus the actual selected PR+ direction is $d_1=-g_1$ and its restart flag is true; the ascending candidate is not the selected direction.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "For comparison, the originally displayed trial $\\widehat t=1/1000$ is also a mathematically valid strong Wolfe step, but is not an output of this dyadic search. It gives $\\widehat x=(-2461/2500,136/125)$, $\\widehat r=743479/6250000$, $f(\\widehat x)=5.35291158000896$, $\\widehat g=(42.8715665664,23.791328)$, and $\\widehat h=\\widehat g^Td_0=11336.74661571584$. Its Armijo bound is $24.14577264$ and $|\\widehat h|<11400<26571.4064$, verifying both inequalities directly. With $\\widehat G=\\|\\widehat g\\|_2^2$, its distinct coefficients are $\\widehat G/G_0$ and $(\\widehat G+\\widehat h)/G_0$; these describe the hypothetical accepted update at $\\widehat t$, rather than the actual bounded-search trace above.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives G0=54227.36>0; step 3.1 gives a nonzero g1, so all coefficient denominators in step 4.1 are defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the initial unit trial fails Armijo and the search enters zoom; step 3.1 proves its tenth midpoint 1/1024 passes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example chooses 0<c1=1/1000<c2=49/100<1/2, E>=1, Z>=10 and K>=2; steps 2.1–3.1 show these budgets reach the accepted first update."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 keeps a=0 and halves the positive endpoint through nine rejected midpoints; step 3.1 accepts the positive tenth midpoint, within the feasible whole-plane domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 specify the deterministic unit/dyadic trial sequence; step 4.1 proves the actual restart without a choice of an unspecified accepted step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "The rational and terminating-decimal arithmetic was recomputed; no registered finite-smoke fixture applies. Author self-review only; this is not independent approval."
+      }
+    },
+    "cex-raw-prplus-loses-descent-and-safeguard-restarts": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "Work in finite-dimensional real Euclidean space $\\mathbb R^n$, $n\\ge1$, with its standard inner product and norm ([[def-euclidean-inner-product]]). Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$ ([[def-c-one-map-and-local-inverse]]), and write $g(x)=\\nabla f(x)$ using the gradient convention of [[def-jacobian-matrix-and-gradient]].\n\nThe inputs are $x_0\\in D$, a method choice $\\mathrm{FR}$ or $\\mathrm{PR+}$, constants $0<c_1<c_2<1/2$, an outer iteration limit $K\\in\\mathbb N$, and a line-search mode. In bounded-strong-Wolfe mode, also supply finite expansion and zoom limits $E,Z\\in\\mathbb N$. In exact-SPD-quadratic mode, supply a real symmetric positive-definite matrix $A$ and vector $b$ such that $D=\\mathbb R^n$ and $f(x)=\\tfrac12x^TAx-b^Tx$. The $\\mathrm{PR+}$ choice also takes $\\sigma,C>0$. Evaluations and arithmetic are exact real operations; this definition makes no finite-precision error claim.\n\n1. Evaluate $g_0=g(x_0)$. If $g_0=0$, return status **stationary** with $x_0$. Otherwise set $d_0=-g_0$.\n\n2. For $k=0,\\ldots,K-1$, if $g_k=0$, return **stationary** with $x_k$. For $k\\ge1$, set\n   $$ \\beta_{k-1}^{\\rm FR}=\\frac{\\|g_k\\|_2^2}{\\|g_{k-1}\\|_2^2},\\qquad \\beta_{k-1}^{\\rm PR+}=\\max\\!\\left\\{0,\\frac{g_k^T(g_k-g_{k-1})}{\\|g_{k-1}\\|_2^2}\\right\\}. $$\n   Choose the selected coefficient and form $d_k^{\\rm cand}=-g_k+\\beta_{k-1}d_{k-1}$. For $k=0$, use $d_0$ above. Denominators are nonzero because the procedure has already returned at any zero gradient.\n\n3. In the $\\mathrm{PR+}$ method, test the candidate at the current point. If $g_k^Td_k^{\\rm cand}>-\\sigma\\|g_k\\|_2^2$ or $\\|d_k^{\\rm cand}\\|_2>C\\|g_k\\|_2$, restart by setting $\\beta_{k-1}=0$ and $d_k=-g_k$, and record that a restart occurred. Otherwise set $d_k=d_k^{\\rm cand}$. In the $\\mathrm{FR}$ method set $d_k=d_k^{\\rm cand}$ without this safeguard. If $g_k^Td_k\\ge0$, return **search-failure** with cause **invalid-direction**.\n\n4. In bounded-strong-Wolfe mode, call [[alg-bracketing-zoom-strong-wolfe-search]] at $(f,x_k,d_k,c_1,c_2)$ with budgets $E,Z$. That procedure returns a step only after checking both strong Wolfe inequalities. If it instead returns **invalid-direction**, **domain-exit**, or **evaluation-budget-exhausted**, return **search-failure** with that cause.\n\n5. In exact-SPD-quadratic mode, when $g_k^Td_k<0$, compute\n   $$ t_k=-\\frac{g_k^Td_k}{d_k^TAd_k}. $$\n   If the denominator is nonpositive or the computed step is not positive, return **search-failure** with cause **invalid-exact-model**. Otherwise verify the strong Wolfe inequalities and return **search-failure** if either fails. This mode records the exact-line-search specialization; it does not replace the finite-budget search mode.\n\n6. For an accepted step, set $x_{k+1}=x_k+t_kd_k$ and evaluate $g_{k+1}$. If $g_{k+1}=0$, return **stationary** with $x_{k+1}$. After the loop, return **iteration-limit** with the last iterate, the accepted trace, and all restart flags. A failure or stationary status returns immediately with the trace so far.\n\nThe FR and safeguarded PR+ convergence statements concern infinite sequences following the respective recurrences and direction rules above, with a successful strong Wolfe update at every index; they do not concern an infinite execution of this finite-$K$ procedure. Each finite execution can realize only a prefix of such a sequence. A finite search budget can return **search-failure**; it does not certify convergence.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wolfe-and-strong-wolfe-conditions",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-nonlinear-conjugate-gradient-methods",
+          "source_section": "Definition",
+          "quote": "Work in finite-dimensional real Euclidean space $\\mathbb R^n$, $n\\ge1$, with its standard inner product and norm ([[def-euclidean-inner-product]]). Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$ ([[def-c-one-map-and-local-inverse]]), and write $g(x)=\\nabla f(x)$ using the gradient convention of [[def-jacobian-matrix-and-gradient]].\n\nThe inputs are $x_0\\in D$, a method choice $\\mathrm{FR}$ or $\\mathrm{PR+}$, constants $0<c_1<c_2<1/2$, an outer iteration limit $K\\in\\mathbb N$, and a line-search mode. In bounded-strong-Wolfe mode, also supply finite expansion and zoom limits $E,Z\\in\\mathbb N$. In exact-SPD-quadratic mode, supply a real symmetric positive-definite matrix $A$ and vector $b$ such that $D=\\mathbb R^n$ and $f(x)=\\tfrac12x^TAx-b^Tx$. The $\\mathrm{PR+}$ choice also takes $\\sigma,C>0$. Evaluations and arithmetic are exact real operations; this definition makes no finite-precision error claim.\n\n1. Evaluate $g_0=g(x_0)$. If $g_0=0$, return status **stationary** with $x_0$. Otherwise set $d_0=-g_0$.\n\n2. For $k=0,\\ldots,K-1$, if $g_k=0$, return **stationary** with $x_k$. For $k\\ge1$, set\n   $$ \\beta_{k-1}^{\\rm FR}=\\frac{\\|g_k\\|_2^2}{\\|g_{k-1}\\|_2^2},\\qquad \\beta_{k-1}^{\\rm PR+}=\\max\\!\\left\\{0,\\frac{g_k^T(g_k-g_{k-1})}{\\|g_{k-1}\\|_2^2}\\right\\}. $$\n   Choose the selected coefficient and form $d_k^{\\rm cand}=-g_k+\\beta_{k-1}d_{k-1}$. For $k=0$, use $d_0$ above. Denominators are nonzero because the procedure has already returned at any zero gradient.\n\n3. In the $\\mathrm{PR+}$ method, test the candidate at the current point. If $g_k^Td_k^{\\rm cand}>-\\sigma\\|g_k\\|_2^2$ or $\\|d_k^{\\rm cand}\\|_2>C\\|g_k\\|_2$, restart by setting $\\beta_{k-1}=0$ and $d_k=-g_k$, and record that a restart occurred. Otherwise set $d_k=d_k^{\\rm cand}$. In the $\\mathrm{FR}$ method set $d_k=d_k^{\\rm cand}$ without this safeguard. If $g_k^Td_k\\ge0$, return **search-failure** with cause **invalid-direction**.\n\n4. In bounded-strong-Wolfe mode, call [[alg-bracketing-zoom-strong-wolfe-search]] at $(f,x_k,d_k,c_1,c_2)$ with budgets $E,Z$. That procedure returns a step only after checking both strong Wolfe inequalities. If it instead returns **invalid-direction**, **domain-exit**, or **evaluation-budget-exhausted**, return **search-failure** with that cause.\n\n5. In exact-SPD-quadratic mode, when $g_k^Td_k<0$, compute\n   $$ t_k=-\\frac{g_k^Td_k}{d_k^TAd_k}. $$\n   If the denominator is nonpositive or the computed step is not positive, return **search-failure** with cause **invalid-exact-model**. Otherwise verify the strong Wolfe inequalities and return **search-failure** if either fails. This mode records the exact-line-search specialization; it does not replace the finite-budget search mode.\n\n6. For an accepted step, set $x_{k+1}=x_k+t_kd_k$ and evaluate $g_{k+1}$. If $g_{k+1}=0$, return **stationary** with $x_{k+1}$. After the loop, return **iteration-limit** with the last iterate, the accepted trace, and all restart flags. A failure or stationary status returns immediately with the trace so far.\n\nThe FR and safeguarded PR+ convergence statements concern infinite sequences following the respective recurrences and direction rules above, with a successful strong Wolfe update at every index; they do not concern an infinite execution of this finite-$K$ procedure. Each finite execution can realize only a prefix of such a sequence. A finite search budget can return **search-failure**; it does not certify convergence.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Complete the square to show the specified Hessian is positive definite; compute f(x_0), g_0 and d_0.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "At t_0=1 compute x_1, f(x_1), g_1 and both directional derivatives; the exact inequalities verify a strong Wolfe step.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Substitute g_0 and g_1 into the PR+ formula; it gives beta=57/100, d_1^cand=(-17/100,-1/10), and g_1^T d_1^cand=29/500>0.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For sigma=1/2 and C=2 the descent test triggers and the norm test does not. Resetting to -g_1 gives a strict descent direction with cos(theta)=1.",
+          "inputs": [
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The displayed nonzero gradients are computed in steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The witness uses one strong-Wolfe step in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Hessian is SPD and both safeguard tests are evaluated in steps 1.1 and 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The trial at t=1 is feasible because the quadratic domain is R^2 in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The witness and restart are exact finite calculations in steps 1.1 through 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "The exact quadratic witness and restart arithmetic were recomputed; no registered finite-smoke fixture applies. Author self-review only; this is not independent approval."
+      }
+    },
+    "ex-spd-quadratic-nonlinear-cg-matches-linear-cg": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fr-and-raw-prplus-exact-line-search-match-linear-cg",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{n\\times n}$ be symmetric positive definite, $b\\in\\mathbb R^n$, and\n$$ f(x)=\\tfrac12x^TAx-b^Tx,\\qquad x\\in\\mathbb R^n. $$\nIn exact arithmetic, run the FR recurrence of [[alg-nonlinear-conjugate-gradient-methods]] with exact line minimization. Its iterates, residuals $r_k=b-Ax_k$, and directions coincide with the linear conjugate-gradient recurrence of [[def-conjugate-gradient-recurrence]] until the common zero-residual exit. The unrestarted raw PR+ recurrence has the same exact-line-search sequence; the safeguarded PR+ implementation has this equivalence only on runs where its safeguard does not restart. No such equivalence is asserted for non-SPD quadratics, inexact line searches, or finite-precision arithmetic.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conjugate-gradient-recurrence",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian positive definite, let $Ax=b$, and fix an initial guess\n$x_0$. Set\n\n$$r_0:=b-Ax_0,\\qquad p_0:=r_0.$$\n\nFor every index $k$ with $r_k\\ne0$, define\n\n$$\\alpha_k:=\\frac{\\langle r_k,r_k\\rangle}{\\langle Ap_k,p_k\\rangle},\\qquad x_{k+1}:=x_k+\\alpha_kp_k,\\qquad r_{k+1}:=r_k-\\alpha_kAp_k,$$\n\nand then\n\n$$\\beta_k:=\\frac{\\langle r_{k+1},r_{k+1}\\rangle}{\\langle r_k,r_k\\rangle},\\qquad p_{k+1}:=r_{k+1}+\\beta_kp_k.$$\n\nThis is the **conjugate-gradient recurrence**.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The initial residual and gradient are $r_0=(1,1)$ and $g_0=-r_0=(-1,-1)$, so $d_0=(1,1)$. By [F2], $\\alpha_0=(r_0^Tr_0)/(d_0^TAd_0)=2/3$, giving $x_1=(2/3,2/3)$ and $r_1=(1/3,-1/3)$.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The next coefficient is $\\beta_0=(r_1^Tr_1)/(r_0^Tr_0)=(2/9)/2=1/9$, hence $d_1=r_1+\\beta_0d_0=(4/9,-2/9)$. Also $d_1^TAd_1=8/27$, so $\\alpha_1=(2/9)/(8/27)=3/4$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Therefore $x_2=x_1+\\alpha_1d_1=(1,1/2)$ and $r_2=b-Ax_2=0$. By [F1], the exact-line-search FR run has these same directions, step lengths, and terminal point.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty finite-dimensional input and contains no empty input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The first residuals are nonzero and the common zero residual is checked in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The two exact recurrence updates are calculated in steps 1.1 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example uses a fixed positive-definite diagonal matrix and has no singular or indefinite branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both exact line minimizers are feasible on R^2 in steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The trace uses exact rational arithmetic and a fixed finite calculation in steps 1.1 through 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement does not assert an if-and-only-if equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-70",
+        "notes": "Every displayed vector and scalar is rational and was recomputed; no registered finite-smoke fixture applies. Author self-review only; this is not independent approval."
+      }
+    }
+  }
+}

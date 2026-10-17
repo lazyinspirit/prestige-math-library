@@ -1,0 +1,543 @@
+{
+  "operations": [
+    {
+      "consumer_batch": "37",
+      "id": "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-37.proof-contracts.json",
+      "path": [
+        "contracts",
+        "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+        "citations",
+        0
+      ],
+      "before": {
+        "fact": "F1",
+        "source": "def-rectangular-grid-and-dirichlet-flux-stencil",
+        "source_section": "Definition",
+        "quote": "Let $L_x,L_y>0$, let $N_x,N_y$ be integers at least $2$, and set $h_x=L_x/N_x$ and $h_y=L_y/N_y$. The rectangular grid nodes are $(x_i,y_j)=(ih_x,jh_y)$ for $0\\le i\\le N_x$ and $0\\le j\\le N_y$. The interior index set is $I_h=\\{(i,j):1\\le i<N_x,\\ 1\\le j<N_y\\}$, and its boundary is the set of grid nodes with $i\\in\\{0,N_x\\}$ or $j\\in\\{0,N_y\\}$. A grid function is a real-valued function on all grid nodes; $X_{h,0}$ is the vector space of grid functions that vanish on the boundary.\n\nFor grid functions $v,w$, define the weighted interior inner product and norm by\n$$\n\\langle v,w\\rangle_h=h_xh_y\\sum_{i=1}^{N_x-1}\\sum_{j=1}^{N_y-1}v_{ij}w_{ij},\\qquad \\|v\\|_h=\\langle v,v\\rangle_h^{1/2}.\n$$\nThe edge differences are $D_xv_{i+1/2,j}=(v_{i+1,j}-v_{ij})/h_x$ for $0\\le i<N_x$, $1\\le j<N_y$, and $D_yv_{i,j+1/2}=(v_{i,j+1}-v_{ij})/h_y$ for $1\\le i<N_x$, $0\\le j<N_y$. For a scalar coefficient $a$ sampled at face midpoints, write $a_{i+1/2,j}=a(x_i+h_x/2,y_j)$ and $a_{i,j+1/2}=a(x_i,y_j+h_y/2)$.\n\nThe positive divergence-form Dirichlet operator on interior nodes is\n$$\n(A_h^av)_{ij}=-\\frac{a_{i+1/2,j}D_xv_{i+1/2,j}-a_{i-1/2,j}D_xv_{i-1/2,j}}{h_x}-\\frac{a_{i,j+1/2}D_yv_{i,j+1/2}-a_{i,j-1/2}D_yv_{i,j-1/2}}{h_y}.\n$$\nFor $a\\equiv1$, this is the five-point Dirichlet Laplacian $-D_x^+D_x^- -D_y^+D_y^-$. The associated edge energy is\n$$\nE_h^a(v,w)=h_xh_y\\left(\\sum_{j=1}^{N_y-1}\\sum_{i=0}^{N_x-1}a_{i+1/2,j}D_xv_{i+1/2,j}D_xw_{i+1/2,j}+\\sum_{i=1}^{N_x-1}\\sum_{j=0}^{N_y-1}a_{i,j+1/2}D_yv_{i,j+1/2}D_yw_{i,j+1/2}\\right).\n$$\nThe homogeneous scheme solves $A_h^av=f_h$ in $I_h$ with $v=0$ on the boundary. For Dirichlet data $g$, it solves the same interior equations with $v=g$ at boundary nodes. This definition specifies the rectangular Dirichlet stencil; it does not specify a Neumann or nonrectangular boundary closure.",
+        "uses": [
+          "1.1",
+          "2.1",
+          "3.1"
+        ]
+      },
+      "after_candidate": {
+        "fact": "F1",
+        "source": "def-rectangular-grid-and-dirichlet-flux-stencil",
+        "source_section": "Definition",
+        "quote": "Let $L_x,L_y>0$, let $N_x,N_y$ be integers at least $2$, and set $h_x=L_x/N_x$ and $h_y=L_y/N_y$. The rectangular grid nodes are $(x_i,y_j)=(ih_x,jh_y)$ for $0\\le i\\le N_x$ and $0\\le j\\le N_y$. The interior index set is $I_h=\\{(i,j):1\\le i<N_x,\\ 1\\le j<N_y\\}$, and its boundary is the set of grid nodes with $i\\in\\{0,N_x\\}$ or $j\\in\\{0,N_y\\}$. A grid function is a real-valued function on all grid nodes; $X_{h,0}$ is the vector space of grid functions that vanish on the boundary.\n\nFor real vectors $v,w$ indexed by $I_h$, define the weighted interior inner product and norm by\n$$\n\\langle v,w\\rangle_h=h_xh_y\\sum_{i=1}^{N_x-1}\\sum_{j=1}^{N_y-1}v_{ij}w_{ij},\\qquad \\|v\\|_h=\\langle v,v\\rangle_h^{1/2}.\n$$\nFor full grid functions, the same notation applies to their restrictions to $I_h$; it gives a semidefinite bilinear form and a seminorm on all grid functions, and an inner product and norm on $X_{h,0}$.\n\nThe edge differences are $D_xv_{i+1/2,j}=(v_{i+1,j}-v_{ij})/h_x$ for $0\\le i<N_x$, $1\\le j<N_y$, and $D_yv_{i,j+1/2}=(v_{i,j+1}-v_{ij})/h_y$ for $1\\le i<N_x$, $0\\le j<N_y$. For a scalar coefficient $a$ sampled at face midpoints, write $a_{i+1/2,j}=a(x_i+h_x/2,y_j)$ and $a_{i,j+1/2}=a(x_i,y_j+h_y/2)$.\n\nThe positive divergence-form Dirichlet operator on interior nodes is\n$$\n(A_h^av)_{ij}=-\\frac{a_{i+1/2,j}D_xv_{i+1/2,j}-a_{i-1/2,j}D_xv_{i-1/2,j}}{h_x}-\\frac{a_{i,j+1/2}D_yv_{i,j+1/2}-a_{i,j-1/2}D_yv_{i,j-1/2}}{h_y}.\n$$\nFor $a\\equiv1$, this is the five-point Dirichlet Laplacian $-D_x^+D_x^- -D_y^+D_y^-$. The associated edge energy is\n$$\nE_h^a(v,w)=h_xh_y\\left(\\sum_{j=1}^{N_y-1}\\sum_{i=0}^{N_x-1}a_{i+1/2,j}D_xv_{i+1/2,j}D_xw_{i+1/2,j}+\\sum_{i=1}^{N_x-1}\\sum_{j=0}^{N_y-1}a_{i,j+1/2}D_yv_{i,j+1/2}D_yw_{i,j+1/2}\\right).\n$$\nThe homogeneous scheme solves $A_h^av=f_h$ in $I_h$ with $v=0$ on the boundary. For Dirichlet data $g$, it solves the same interior equations with $v=g$ at boundary nodes. This definition specifies the rectangular Dirichlet stencil; it does not specify a Neumann or nonrectangular boundary closure.",
+        "uses": [
+          "1.1",
+          "2.1",
+          "3.1"
+        ]
+      },
+      "supplier_id": "def-rectangular-grid-and-dirichlet-flux-stencil",
+      "supplier_section": "Definition",
+      "original_source_owner": "native Alpha23",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-23-3a.md",
+      "basis": "Genuine completed Alpha23 report explicitly checked both outside37 uses and left F1 quote refresh for owner; Reader37 later completed findings[] without refreshing it.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    },
+    {
+      "consumer_batch": "44",
+      "id": "thm-neutral-delay-euler-first-order-error",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-44.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-neutral-delay-euler-first-order-error",
+        "citations",
+        7
+      ],
+      "before": {
+        "fact": "L1",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "3.1"
+        ]
+      },
+      "after_candidate": {
+        "fact": "L1",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "3.1"
+        ]
+      },
+      "supplier_id": "lem-discrete-one-step-error-recurrence-bound",
+      "supplier_section": "Statement",
+      "original_source_owner": "native reader28 + Alpha28",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-28-3a.md",
+      "basis": "Genuine completed Alpha28 report names all15 direct consumer/reference applications and validates their actualpositiveorders/grids. Only14 foreign copied Statement quotes mismatch current supplier; owned28 quote is current.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    },
+    {
+      "consumer_batch": "65",
+      "id": "thm-implicit-rk-global-order-with-stage-residual-control",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-65.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-implicit-rk-global-order-with-stage-residual-control",
+        "citations",
+        5
+      ],
+      "before": {
+        "fact": "F6",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "3.1"
+        ]
+      },
+      "after_candidate": {
+        "fact": "F6",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "3.1"
+        ]
+      },
+      "supplier_id": "lem-discrete-one-step-error-recurrence-bound",
+      "supplier_section": "Statement",
+      "original_source_owner": "native reader28 + Alpha28",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-28-3a.md",
+      "basis": "Genuine completed Alpha28 report names all15 direct consumer/reference applications and validates their actualpositiveorders/grids. Only14 foreign copied Statement quotes mismatch current supplier; owned28 quote is current.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    },
+    {
+      "consumer_batch": "75",
+      "id": "thm-index-one-dae-backward-euler-first-order-with-residuals",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-index-one-dae-backward-euler-first-order-with-residuals",
+        "citations",
+        3
+      ],
+      "before": {
+        "fact": "F4",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "4.1"
+        ]
+      },
+      "after_candidate": {
+        "fact": "F4",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "4.1"
+        ]
+      },
+      "supplier_id": "lem-discrete-one-step-error-recurrence-bound",
+      "supplier_section": "Statement",
+      "original_source_owner": "native reader28 + Alpha28",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-28-3a.md",
+      "basis": "Genuine completed Alpha28 report names all15 direct consumer/reference applications and validates their actualpositiveorders/grids. Only14 foreign copied Statement quotes mismatch current supplier; owned28 quote is current.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    },
+    {
+      "consumer_batch": "75",
+      "id": "thm-index-one-dae-bdf2-second-order-with-residuals",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-index-one-dae-bdf2-second-order-with-residuals",
+        "citations",
+        4
+      ],
+      "before": {
+        "fact": "F5",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "4.1"
+        ]
+      },
+      "after_candidate": {
+        "fact": "F5",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "4.1"
+        ]
+      },
+      "supplier_id": "lem-discrete-one-step-error-recurrence-bound",
+      "supplier_section": "Statement",
+      "original_source_owner": "native reader28 + Alpha28",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-28-3a.md",
+      "basis": "Genuine completed Alpha28 report names all15 direct consumer/reference applications and validates their actualpositiveorders/grids. Only14 foreign copied Statement quotes mismatch current supplier; owned28 quote is current.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    },
+    {
+      "consumer_batch": "79",
+      "id": "thm-age-cohort-quadrature-weak-consistency",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-79.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-age-cohort-quadrature-weak-consistency",
+        "citations",
+        5
+      ],
+      "before": {
+        "fact": "L1",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "2.1"
+        ]
+      },
+      "after_candidate": {
+        "fact": "L1",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "2.1"
+        ]
+      },
+      "supplier_id": "lem-discrete-one-step-error-recurrence-bound",
+      "supplier_section": "Statement",
+      "original_source_owner": "native reader28 + Alpha28",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-28-3a.md",
+      "basis": "Genuine completed Alpha28 report names all15 direct consumer/reference applications and validates their actualpositiveorders/grids. Only14 foreign copied Statement quotes mismatch current supplier; owned28 quote is current.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    },
+    {
+      "consumer_batch": "79",
+      "id": "thm-age-structured-renewal-smooth-first-order-convergence",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-79.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-age-structured-renewal-smooth-first-order-convergence",
+        "citations",
+        5
+      ],
+      "before": {
+        "fact": "F6",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "4.1"
+        ]
+      },
+      "after_candidate": {
+        "fact": "F6",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "4.1"
+        ]
+      },
+      "supplier_id": "lem-discrete-one-step-error-recurrence-bound",
+      "supplier_section": "Statement",
+      "original_source_owner": "native reader28 + Alpha28",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-28-3a.md",
+      "basis": "Genuine completed Alpha28 report names all15 direct consumer/reference applications and validates their actualpositiveorders/grids. Only14 foreign copied Statement quotes mismatch current supplier; owned28 quote is current.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    },
+    {
+      "consumer_batch": "80",
+      "id": "thm-rk4-global-error-for-regularized-vortex-particles",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-80.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-rk4-global-error-for-regularized-vortex-particles",
+        "citations",
+        3
+      ],
+      "before": {
+        "fact": "F4",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "3.1"
+        ]
+      },
+      "after_candidate": {
+        "fact": "F4",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "3.1"
+        ]
+      },
+      "supplier_id": "lem-discrete-one-step-error-recurrence-bound",
+      "supplier_section": "Statement",
+      "original_source_owner": "native reader28 + Alpha28",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-28-3a.md",
+      "basis": "Genuine completed Alpha28 report names all15 direct consumer/reference applications and validates their actualpositiveorders/grids. Only14 foreign copied Statement quotes mismatch current supplier; owned28 quote is current.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    },
+    {
+      "consumer_batch": "95",
+      "id": "thm-sdc-finite-sweeps-raise-order",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-95.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-sdc-finite-sweeps-raise-order",
+        "citations",
+        4
+      ],
+      "before": {
+        "fact": "F5",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "3.1"
+        ]
+      },
+      "after_candidate": {
+        "fact": "F5",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "3.1"
+        ]
+      },
+      "supplier_id": "lem-discrete-one-step-error-recurrence-bound",
+      "supplier_section": "Statement",
+      "original_source_owner": "native reader28 + Alpha28",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-28-3a.md",
+      "basis": "Genuine completed Alpha28 report names all15 direct consumer/reference applications and validates their actualpositiveorders/grids. Only14 foreign copied Statement quotes mismatch current supplier; owned28 quote is current.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    },
+    {
+      "consumer_batch": "95",
+      "id": "thm-sdc-residual-tolerance-preserves-order",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-95.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-sdc-residual-tolerance-preserves-order",
+        "citations",
+        4
+      ],
+      "before": {
+        "fact": "L1",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "3.1"
+        ]
+      },
+      "after_candidate": {
+        "fact": "L1",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "3.1"
+        ]
+      },
+      "supplier_id": "lem-discrete-one-step-error-recurrence-bound",
+      "supplier_section": "Statement",
+      "original_source_owner": "native reader28 + Alpha28",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-28-3a.md",
+      "basis": "Genuine completed Alpha28 report names all15 direct consumer/reference applications and validates their actualpositiveorders/grids. Only14 foreign copied Statement quotes mismatch current supplier; owned28 quote is current.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    },
+    {
+      "consumer_batch": "96",
+      "id": "lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-96.proof-contracts.json",
+      "path": [
+        "contracts",
+        "lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order",
+        "citations",
+        6
+      ],
+      "before": {
+        "fact": "F3",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "1.2",
+          "2.1",
+          "3.1",
+          "3.2"
+        ]
+      },
+      "after_candidate": {
+        "fact": "F3",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "1.2",
+          "2.1",
+          "3.1",
+          "3.2"
+        ]
+      },
+      "supplier_id": "lem-discrete-one-step-error-recurrence-bound",
+      "supplier_section": "Statement",
+      "original_source_owner": "native reader28 + Alpha28",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-28-3a.md",
+      "basis": "Genuine completed Alpha28 report names all15 direct consumer/reference applications and validates their actualpositiveorders/grids. Only14 foreign copied Statement quotes mismatch current supplier; owned28 quote is current.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    },
+    {
+      "consumer_batch": "98",
+      "id": "thm-imex-euler-algebraic-residual-budget",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-98.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-imex-euler-algebraic-residual-budget",
+        "citations",
+        2
+      ],
+      "before": {
+        "fact": "F3",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "3.1"
+        ]
+      },
+      "after_candidate": {
+        "fact": "F3",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "3.1"
+        ]
+      },
+      "supplier_id": "lem-discrete-one-step-error-recurrence-bound",
+      "supplier_section": "Statement",
+      "original_source_owner": "native reader28 + Alpha28",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-28-3a.md",
+      "basis": "Genuine completed Alpha28 report names all15 direct consumer/reference applications and validates their actualpositiveorders/grids. Only14 foreign copied Statement quotes mismatch current supplier; owned28 quote is current.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    },
+    {
+      "consumer_batch": "98",
+      "id": "thm-ars222-additive-order-two-and-tolerance",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-98.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-ars222-additive-order-two-and-tolerance",
+        "citations",
+        7
+      ],
+      "before": {
+        "fact": "F7",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "5.1"
+        ]
+      },
+      "after_candidate": {
+        "fact": "F7",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "5.1"
+        ]
+      },
+      "supplier_id": "lem-discrete-one-step-error-recurrence-bound",
+      "supplier_section": "Statement",
+      "original_source_owner": "native reader28 + Alpha28",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-28-3a.md",
+      "basis": "Genuine completed Alpha28 report names all15 direct consumer/reference applications and validates their actualpositiveorders/grids. Only14 foreign copied Statement quotes mismatch current supplier; owned28 quote is current.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    },
+    {
+      "consumer_batch": "104",
+      "id": "cor-cubic-defect-gives-second-order-for-symmetric-multirate-composition",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-104.proof-contracts.json",
+      "path": [
+        "contracts",
+        "cor-cubic-defect-gives-second-order-for-symmetric-multirate-composition",
+        "citations",
+        0
+      ],
+      "before": {
+        "fact": "F1",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "2.1"
+        ]
+      },
+      "after_candidate": {
+        "fact": "F1",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "2.1"
+        ]
+      },
+      "supplier_id": "lem-discrete-one-step-error-recurrence-bound",
+      "supplier_section": "Statement",
+      "original_source_owner": "native reader28 + Alpha28",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-28-3a.md",
+      "basis": "Genuine completed Alpha28 report names all15 direct consumer/reference applications and validates their actualpositiveorders/grids. Only14 foreign copied Statement quotes mismatch current supplier; owned28 quote is current.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    },
+    {
+      "consumer_batch": "104",
+      "id": "thm-frozen-slow-euler-global-first-order-error",
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-104.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-frozen-slow-euler-global-first-order-error",
+        "citations",
+        2
+      ],
+      "before": {
+        "fact": "F3",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "2.1"
+        ]
+      },
+      "after_candidate": {
+        "fact": "F3",
+        "source": "lem-discrete-one-step-error-recurrence-bound",
+        "source_section": "Statement",
+        "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+        "uses": [
+          "2.1"
+        ]
+      },
+      "supplier_id": "lem-discrete-one-step-error-recurrence-bound",
+      "supplier_section": "Statement",
+      "original_source_owner": "native reader28 + Alpha28",
+      "owner_consumer_review_evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-28-3a.md",
+      "basis": "Genuine completed Alpha28 report names all15 direct consumer/reference applications and validates their actualpositiveorders/grids. Only14 foreign copied Statement quotes mismatch current supplier; owned28 quote is current.",
+      "scope": "UNAPPLIED_RESEARCH_ONLY exact quote refresh; no source/Statement/Definition/proof/uses/status changes. ROOT must coordinate actual owning reader/Alpha and baseline/current carrier before application."
+    }
+  ],
+  "count": 15,
+  "canonical_writes": false,
+  "hashes_computed": false,
+  "native_findings_fabricated": false
+}

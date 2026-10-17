@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [thm-continuous-image-of-a-compact-space-is-compact, thm-compact-subset-is-closed-and-bounded, lem-compactness-is-intrinsic, lem-real-line-is-a-metric-space, def-metric-continuity, def-metric-compactness, def-bounded-set, def-infimum, lem-sup-epsilon, lem-inf-epsilon, def-max-min, def-complete-ordered-field, thm-metric-closure-characterisation, def-metric-interior-closure-boundary, def-metric-topology, def-metric-ball, def-interval, def-metric-bounded-diameter, def-isometry-and-metric-embedding, def-metric-space]
+deps: [thm-infimum-property, thm-continuous-image-of-a-compact-space-is-compact, thm-compact-subset-is-closed-and-bounded, lem-compactness-is-intrinsic, lem-real-line-is-a-metric-space, def-metric-continuity, def-metric-compactness, def-bounded-set, def-infimum, lem-sup-epsilon, lem-inf-epsilon, def-max-min, def-complete-ordered-field, thm-metric-closure-characterisation, def-metric-interior-closure-boundary, def-metric-topology, def-metric-ball, def-interval, def-metric-bounded-diameter, def-isometry-and-metric-embedding, def-metric-space]
 justified_by: []
 forward_refs: [cex-evt-fails-without-compactness]
 aliases: [thm-evt-metric]
@@ -16,11 +16,7 @@ short: "extreme value theorem (metric)"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  repair: research/numerical-optimization-dynamics-2026-10-16-owner-step2-preclaimed-published-receipts-CONTINUED-ROOT-1035-v1/thm-extreme-value-metric.repair.json
 sources:
   scraped: []
   references:
@@ -62,7 +58,7 @@ used.
 
 [L3] In $(\mathbb{R}, d_{\mathbb{R}})$ the ball $B(x_0,\rho)$ is the interval $(x_0-\rho, x_0+\rho)$ ([[lem-real-line-is-a-metric-space]], [[def-metric-ball]], [[def-interval]]).
 
-[L4] A nonempty subset of $\mathbb{R}$ that is bounded above has a supremum, and one bounded below has an infimum ([[def-complete-ordered-field]], [[def-infimum]], [[def-bounded-set]]).
+[L4] A nonempty subset of $\mathbb{R}$ that is bounded above has a supremum, and one bounded below has an infimum ([[def-complete-ordered-field]], [[thm-infimum-property]], [[def-infimum]], [[def-bounded-set]]).
 
 [L5] For $S$ nonempty and bounded above with supremum $u$: for every real $\varepsilon > 0$ there is $s \in S$ with $u - \varepsilon < s \le u$; dually for the infimum ([[lem-sup-epsilon]], [[lem-inf-epsilon]]).
 

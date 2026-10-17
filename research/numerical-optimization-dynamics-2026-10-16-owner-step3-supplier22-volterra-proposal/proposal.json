@@ -1,0 +1,434 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "cycle": 1,
+  "status": "research-only-awaiting-root-and-native-Alpha22-followup",
+  "supplier_id": "lem-midpoint-bvp-discrete-linearized-inverse",
+  "defect": "Nonfatal missing explicit Volterra/FTC justification in current Proof2.1; uniform continuity explanation already exists and is retained. Add explicit normalized cell defect bound rather than rewrite proof.",
+  "native_finding_refs": [
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-reader-findings-63.json",
+      "pointer": "/findings/0"
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-refute-63.json",
+      "pointer": "/flagged/0"
+    }
+  ],
+  "guarded_operations": [
+    {
+      "file": "items/lem-midpoint-bvp-discrete-linearized-inverse.md",
+      "kind": "exact_text_replace",
+      "before": "  - thm-euclidean-space-complete\n",
+      "after": "  - thm-euclidean-space-complete\n  - prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation\n  - thm-norm-inequality-for-the-vector-valued-integral\n"
+    },
+    {
+      "file": "items/lem-midpoint-bvp-discrete-linearized-inverse.md",
+      "kind": "exact_text_replace",
+      "before": "## Proof\n",
+      "after": "[F8] [[prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation]]: a solution of a continuous finite-dimensional IVP on an interval satisfies its Volterra integral equation, including on closed subintervals. Apply this to each column of the fundamental matrix.\n\n[F9] [[thm-norm-inequality-for-the-vector-valued-integral]]: the Euclidean norm of a vector-valued integral over an increasing interval is at most the integral of its norm. Applying this to a continuous matrix integrand acting on each unit vector gives the corresponding operator-norm bound.\n\n## Proof\n"
+    },
+    {
+      "file": "items/lem-midpoint-bvp-discrete-linearized-inverse.md",
+      "kind": "exact_text_replace",
+      "before": "1.1 Write $A(t)=D_yf(t,y^*(t))$ and let $X(t)$ solve $X'=A(t)X$, $X(a)=I_d$. Since $A$ is continuous and bounded on $[a,b]$, extend it continuously by its endpoint values to an open interval containing $[a,b]$. Local existence follows from [F3], and the maximal solution from [F7] is bounded by Gronwall; if it stopped at or before $b$, boundedness of $X'=AX$ would give a finite endpoint limit from which local existence extends it, a contradiction. Thus $X$ exists on $[a,b]$. Define $Q=B_1+B_2X(b)$. If $Qc=0$, then $v(t)=X(t)c$ satisfies $\\mathcal Lv=(0,0)$; [F2] forces $v=0$, and $v(a)=c$ then gives $c=0$. The square matrix $Q$ is therefore invertible. [given, F2, F3, F4, F7]",
+      "after": "1.1 Write $A(t)=D_yf(t,y^*(t))$ and let $X(t)$ solve $X'=A(t)X$, $X(a)=I_d$. Since $A$ is continuous and bounded on $[a,b]$, extend it continuously by its endpoint values to an open interval containing $[a,b]$. Local existence follows from [F3], and the integral equation [F8] gives the Gronwall bound for the maximal solution from [F7]; if it stopped at or before $b$, boundedness of $X'=AX$ would give a finite endpoint limit from which local existence extends it, a contradiction. Thus $X$ exists on $[a,b]$. Define $Q=B_1+B_2X(b)$. If $Qc=0$, then $v(t)=X(t)c$ satisfies $\\mathcal Lv=(0,0)$; [F2] forces $v=0$, and $v(a)=c$ then gives $c=0$. The square matrix $Q$ is therefore invertible. [given, F2, F3, F4, F7, F8]"
+    },
+    {
+      "file": "items/lem-midpoint-bvp-discrete-linearized-inverse.md",
+      "kind": "exact_text_replace",
+      "before": "2.1 Let $M_h=M_{N-1}^h\\cdots M_0^h$, the discrete homogeneous transfer from $z_0$ to $z_N$. The exact fundamental matrix $X$ satisfies $X(t_{i+1})-X(t_i)=\\int_{t_i}^{t_{i+1}}A(t)X(t)dt$. The integrand is uniformly continuous, so its average over each cell differs from its midpoint value by a quantity tending uniformly to zero as $h\\to0$. Since $C_i^h-A(t_i+h/2)\\to0$ uniformly and $X$ is uniformly continuous, the samples $X(t_i)$ satisfy the implicit-midpoint recurrence with a normalized defect $\\eta_i^h$ for which $\\max_i\\|\\eta_i^h\\|\\to0$. The transition bound in step 1.2 propagates the increment defects $h\\eta_i^h$ with total bound at most $C_1(b-a)\\max_i\\|\\eta_i^h\\|$; hence $M_h\\to X(b)$. [F3, F4, F7, step 1.2, algebra]",
+      "after": "2.1 Let $M_h=M_{N-1}^h\\cdots M_0^h$, the discrete homogeneous transfer from $z_0$ to $z_N$. By [F8] on each column, the exact fundamental matrix $X$ satisfies $X(t_{i+1})-X(t_i)=\\int_{t_i}^{t_{i+1}}A(t)X(t)dt$. The integrand is uniformly continuous, so its average over each cell differs from its midpoint value by a quantity tending uniformly to zero as $h\\to0$. Explicitly, put $m_i=t_i+h/2$, $H(t)=A(t)X(t)$ and $\\omega_G(\\rho)=\\sup_{|s-t|\\le\\rho}\\|G(s)-G(t)\\|_{\\rm op}$ for $s,t\\in[a,b]$ and $G=H,X$. Write $S_X=\\sup_t\\|X(t)\\|_{\\rm op}$, $S_A=\\sup_t\\|A(t)\\|_{\\rm op}$, and $\\delta_h=\\max_i\\|C_i^h-A(m_i)\\|_{\\rm op}\\to0$ by step 1.2. By [F9], $\\|h^{-1}\\int_{t_i}^{t_{i+1}}H(t)dt-H(m_i)\\|_{\\rm op}\\le\\omega_H(h/2)$. Define the normalized midpoint defect by $\\eta_i^h=(X(t_{i+1})-X(t_i))/h-C_i^h(X(t_i)+X(t_{i+1}))/2$. Adding and subtracting $H(m_i)$ and $A(m_i)(X(t_i)+X(t_{i+1}))/2$ therefore gives $\\max_i\\|\\eta_i^h\\|_{\\rm op}\\le\\omega_H(h/2)+\\delta_h S_X+S_A\\omega_X(h/2)\\to0$, since $H$ and $X$ are uniformly continuous on $[a,b]$. The transition bound in step 1.2 propagates the increment defects $h\\eta_i^h$ with total bound at most $C_1(b-a)\\max_i\\|\\eta_i^h\\|$; hence $M_h\\to X(b)$. [F3, F4, F7, F8, F9, step 1.2, algebra]"
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-22.proof-contracts.json",
+      "pointer": [
+        "contracts",
+        "lem-midpoint-bvp-discrete-linearized-inverse",
+        "citations"
+      ],
+      "before": [
+        {
+          "fact": "F1",
+          "source": "def-midpoint-collocation-residual-for-bvps",
+          "source_section": "Definition",
+          "quote": "For a $d$-dimensional BVP on $[a,b]$, an integer $N\\ge1$, uniform mesh width $h=(b-a)/N$, mesh nodes $t_i=a+ih$, and node vector $Y=(Y_0,\\ldots,Y_N)\\in(\\mathbb R^d)^{N+1}$, let $D_h$ be the open set of node vectors for which every midpoint pair $(t_i+h/2,(Y_i+Y_{i+1})/2)$ lies in the vector-field domain and $(Y_0,Y_N)$ lies in the boundary-map domain. Define $G_h:D_h\\to(\\mathbb R^d)^{N+1}$ by\n\n$$G_{h,i}(Y)=\\frac{Y_{i+1}-Y_i}{h}-f\\!\\left(t_i+\\frac h2,\\frac{Y_i+Y_{i+1}}2\\right)\\quad(0\\le i<N),\\qquad G_{h,N}(Y)=B(Y_0,Y_N).$$\n\nUse the maximum of the Euclidean block norms for both node and residual vectors. The interior rows are normalized by $h$; consequently an unscaled increment row has size $h$ times its normalized row.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linearized-two-point-bvp-operator-and-conditioning",
+          "source_section": "Definition",
+          "quote": "Let $y^*\\in C^1([a,b],\\mathbb R^d)$ solve a square BVP, with $f$ and $B$ continuously differentiable on open neighborhoods of the trajectory and endpoint pair. Put $A(t)=D_yf(t,y^*(t))$, $B_1=D_1B(y^*(a),y^*(b))$, and $B_2=D_2B(y^*(a),y^*(b))$. Let\n\n$$X=C^1([a,b],\\mathbb R^d),\\quad \\|v\\|_X=\\|v\\|_\\infty+\\|v'\\|_\\infty,$$\n\nand\n\n$$Z=C([a,b],\\mathbb R^d)\\times\\mathbb R^d,\\quad \\|(g,q)\\|_Z=\\max\\{\\|g\\|_\\infty,\\|q\\|_2\\}.$$\n\nThe **continuous linearized BVP operator** is the bounded linear map $\\mathcal L:X\\to Z$ given by\n\n$$\\mathcal L v=(v'-A v,\\ B_1v(a)+B_2v(b)).$$\n\nIt is **boundedly invertible** when it is bijective and its inverse $\\mathcal L^{-1}:Z\\to X$ has finite operator norm. That norm is the conditioning constant for the linearized BVP used in the local discretization theorem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Every initial value problem satisfying the Picard-Lindelof hypotheses has a unique maximal solution. Its domain is an open interval containing the initial time, and every other solution through the same data is its restriction.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "after": [
+        {
+          "fact": "F1",
+          "source": "def-midpoint-collocation-residual-for-bvps",
+          "source_section": "Definition",
+          "quote": "For a $d$-dimensional BVP on $[a,b]$, an integer $N\\ge1$, uniform mesh width $h=(b-a)/N$, mesh nodes $t_i=a+ih$, and node vector $Y=(Y_0,\\ldots,Y_N)\\in(\\mathbb R^d)^{N+1}$, let $D_h$ be the open set of node vectors for which every midpoint pair $(t_i+h/2,(Y_i+Y_{i+1})/2)$ lies in the vector-field domain and $(Y_0,Y_N)$ lies in the boundary-map domain. Define $G_h:D_h\\to(\\mathbb R^d)^{N+1}$ by\n\n$$G_{h,i}(Y)=\\frac{Y_{i+1}-Y_i}{h}-f\\!\\left(t_i+\\frac h2,\\frac{Y_i+Y_{i+1}}2\\right)\\quad(0\\le i<N),\\qquad G_{h,N}(Y)=B(Y_0,Y_N).$$\n\nUse the maximum of the Euclidean block norms for both node and residual vectors. The interior rows are normalized by $h$; consequently an unscaled increment row has size $h$ times its normalized row.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linearized-two-point-bvp-operator-and-conditioning",
+          "source_section": "Definition",
+          "quote": "Let $y^*\\in C^1([a,b],\\mathbb R^d)$ solve a square BVP, with $f$ and $B$ continuously differentiable on open neighborhoods of the trajectory and endpoint pair. Put $A(t)=D_yf(t,y^*(t))$, $B_1=D_1B(y^*(a),y^*(b))$, and $B_2=D_2B(y^*(a),y^*(b))$. Let\n\n$$X=C^1([a,b],\\mathbb R^d),\\quad \\|v\\|_X=\\|v\\|_\\infty+\\|v'\\|_\\infty,$$\n\nand\n\n$$Z=C([a,b],\\mathbb R^d)\\times\\mathbb R^d,\\quad \\|(g,q)\\|_Z=\\max\\{\\|g\\|_\\infty,\\|q\\|_2\\}.$$\n\nThe **continuous linearized BVP operator** is the bounded linear map $\\mathcal L:X\\to Z$ given by\n\n$$\\mathcal L v=(v'-A v,\\ B_1v(a)+B_2v(b)).$$\n\nIt is **boundedly invertible** when it is bijective and its inverse $\\mathcal L^{-1}:Z\\to X$ has finite operator norm. That norm is the conditioning constant for the linearized BVP used in the local discretization theorem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Every initial value problem satisfying the Picard-Lindelof hypotheses has a unique maximal solution. Its domain is an open interval containing the initial time, and every other solution through the same data is its restriction.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-22.proof-contracts.json",
+      "pointer": [
+        "contracts",
+        "lem-midpoint-bvp-discrete-linearized-inverse",
+        "derivations"
+      ],
+      "before": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $A(t)=D_yf(t,y^*(t))$ and let $X(t)$ solve $X'=A(t)X$, $X(a)=I_d$. Since $A$ is continuous and bounded on $[a,b]$, extend it continuously by its endpoint values to an open interval containing $[a,b]$. Local existence follows from [F3], and the maximal solution from [F7] is bounded by Gronwall; if it stopped at or before $b$, boundedness of $X'=AX$ would give a finite endpoint limit from which local existence extends it, a contradiction. Thus $X$ exists on $[a,b]$. Define $Q=B_1+B_2X(b)$. If $Qc=0$, then $v(t)=X(t)c$ satisfies $\\mathcal Lv=(0,0)$; [F2] forces $v=0$, and $v(a)=c$ then gives $c=0$. The square matrix $Q$ is therefore invertible.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each mesh let $C_i^h=D_yf(t_i+h/2,(Y_i^*+Y_{i+1}^*)/2)$. Uniform continuity of $y^*$ and $D_yf$ on a compact neighborhood implies $\\max_i\\|C_i^h-A(t_i+h/2)\\|_{\\rm op}\\to0$. Also $\\sup_{h,i}\\|C_i^h\\|_{\\rm op}<\\infty$. Applying the chain rule [F5] to the rows in [F1], the interior equation $J_h z=(r_0,\\ldots,r_{N-1},q)$ is $(I-hC_i^h/2)z_{i+1}=(I+hC_i^h/2)z_i+h r_i$. For small $h$, $I-hC_i^h/2$ is invertible by its convergent geometric series; its inverse norm is at most $2$, and the induced transition matrices $M_i^h=(I-hC_i^h/2)^{-1}(I+hC_i^h/2)$ satisfy $\\|M_i^h\\|\\le1+C_0h$ for a constant independent of $i,h$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $M_h=M_{N-1}^h\\cdots M_0^h$, the discrete homogeneous transfer from $z_0$ to $z_N$. The exact fundamental matrix $X$ satisfies $X(t_{i+1})-X(t_i)=\\int_{t_i}^{t_{i+1}}A(t)X(t)dt$. The integrand is uniformly continuous, so its average over each cell differs from its midpoint value by a quantity tending uniformly to zero as $h\\to0$. Since $C_i^h-A(t_i+h/2)\\to0$ uniformly and $X$ is uniformly continuous, the samples $X(t_i)$ satisfy the implicit-midpoint recurrence with a normalized defect $\\eta_i^h$ for which $\\max_i\\|\\eta_i^h\\|\\to0$. The transition bound in step 1.2 propagates the increment defects $h\\eta_i^h$ with total bound at most $C_1(b-a)\\max_i\\|\\eta_i^h\\|$; hence $M_h\\to X(b)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $Q_h=B_1+B_2M_h$. By step 2.1, $Q_h\\to Q$. Since $Q$ is invertible, determinant continuity makes $Q_h$ invertible for all sufficiently small $h$, and the adjugate formula gives a uniform bound on $\\|Q_h^{-1}\\|$. For arbitrary forcing blocks $r_i$, the recurrence in step 1.2 and its transition bound give $z_N=M_hz_0+w_h$ and $\\max_i\\|z_i\\|_2\\le C_2(\\|z_0\\|_2+\\max_i\\|r_i\\|_2)$, with $\\|w_h\\|_2\\le C_2\\max_i\\|r_i\\|_2$. The boundary row $B_1z_0+B_2z_N=q$ becomes $Q_hz_0=q-B_2w_h$, so $z_0$ and then every $z_i$ are bounded by $C_3\\max(\\max_i\\|r_i\\|_2,\\|q\\|_2)$ uniformly in $h$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For every right-hand side $(r_0,\\ldots,r_{N-1},q)$, step 3.1 constructs a unique solution of the square linear system $J_hz=(r_0,\\ldots,r_{N-1},q)$ and gives the asserted uniform operator bound. Therefore $J_h$ is onto and one-to-one, hence invertible, with the stated estimate.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "after": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $A(t)=D_yf(t,y^*(t))$ and let $X(t)$ solve $X'=A(t)X$, $X(a)=I_d$. Since $A$ is continuous and bounded on $[a,b]$, extend it continuously by its endpoint values to an open interval containing $[a,b]$. Local existence follows from [F3], and the integral equation [F8] gives the Gronwall bound for the maximal solution from [F7]; if it stopped at or before $b$, boundedness of $X'=AX$ would give a finite endpoint limit from which local existence extends it, a contradiction. Thus $X$ exists on $[a,b]$. Define $Q=B_1+B_2X(b)$. If $Qc=0$, then $v(t)=X(t)c$ satisfies $\\mathcal Lv=(0,0)$; [F2] forces $v=0$, and $v(a)=c$ then gives $c=0$. The square matrix $Q$ is therefore invertible.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each mesh let $C_i^h=D_yf(t_i+h/2,(Y_i^*+Y_{i+1}^*)/2)$. Uniform continuity of $y^*$ and $D_yf$ on a compact neighborhood implies $\\max_i\\|C_i^h-A(t_i+h/2)\\|_{\\rm op}\\to0$. Also $\\sup_{h,i}\\|C_i^h\\|_{\\rm op}<\\infty$. Applying the chain rule [F5] to the rows in [F1], the interior equation $J_h z=(r_0,\\ldots,r_{N-1},q)$ is $(I-hC_i^h/2)z_{i+1}=(I+hC_i^h/2)z_i+h r_i$. For small $h$, $I-hC_i^h/2$ is invertible by its convergent geometric series; its inverse norm is at most $2$, and the induced transition matrices $M_i^h=(I-hC_i^h/2)^{-1}(I+hC_i^h/2)$ satisfy $\\|M_i^h\\|\\le1+C_0h$ for a constant independent of $i,h$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $M_h=M_{N-1}^h\\cdots M_0^h$, the discrete homogeneous transfer from $z_0$ to $z_N$. By [F8] on each column, the exact fundamental matrix $X$ satisfies $X(t_{i+1})-X(t_i)=\\int_{t_i}^{t_{i+1}}A(t)X(t)dt$. The integrand is uniformly continuous, so its average over each cell differs from its midpoint value by a quantity tending uniformly to zero as $h\\to0$. Explicitly, put $m_i=t_i+h/2$, $H(t)=A(t)X(t)$ and $\\omega_G(\\rho)=\\sup_{|s-t|\\le\\rho}\\|G(s)-G(t)\\|_{\\rm op}$ for $s,t\\in[a,b]$ and $G=H,X$. Write $S_X=\\sup_t\\|X(t)\\|_{\\rm op}$, $S_A=\\sup_t\\|A(t)\\|_{\\rm op}$, and $\\delta_h=\\max_i\\|C_i^h-A(m_i)\\|_{\\rm op}\\to0$ by step 1.2. By [F9], $\\|h^{-1}\\int_{t_i}^{t_{i+1}}H(t)dt-H(m_i)\\|_{\\rm op}\\le\\omega_H(h/2)$. Define the normalized midpoint defect by $\\eta_i^h=(X(t_{i+1})-X(t_i))/h-C_i^h(X(t_i)+X(t_{i+1}))/2$. Adding and subtracting $H(m_i)$ and $A(m_i)(X(t_i)+X(t_{i+1}))/2$ therefore gives $\\max_i\\|\\eta_i^h\\|_{\\rm op}\\le\\omega_H(h/2)+\\delta_h S_X+S_A\\omega_X(h/2)\\to0$, since $H$ and $X$ are uniformly continuous on $[a,b]$. The transition bound in step 1.2 propagates the increment defects $h\\eta_i^h$ with total bound at most $C_1(b-a)\\max_i\\|\\eta_i^h\\|$; hence $M_h\\to X(b)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $Q_h=B_1+B_2M_h$. By step 2.1, $Q_h\\to Q$. Since $Q$ is invertible, determinant continuity makes $Q_h$ invertible for all sufficiently small $h$, and the adjugate formula gives a uniform bound on $\\|Q_h^{-1}\\|$. For arbitrary forcing blocks $r_i$, the recurrence in step 1.2 and its transition bound give $z_N=M_hz_0+w_h$ and $\\max_i\\|z_i\\|_2\\le C_2(\\|z_0\\|_2+\\max_i\\|r_i\\|_2)$, with $\\|w_h\\|_2\\le C_2\\max_i\\|r_i\\|_2$. The boundary row $B_1z_0+B_2z_N=q$ becomes $Q_hz_0=q-B_2w_h$, so $z_0$ and then every $z_i$ are bounded by $C_3\\max(\\max_i\\|r_i\\|_2,\\|q\\|_2)$ uniformly in $h$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For every right-hand side $(r_0,\\ldots,r_{N-1},q)$, step 3.1 constructs a unique solution of the square linear system $J_hz=(r_0,\\ldots,r_{N-1},q)$ and gives the asserted uniform operator bound. Therefore $J_h$ is onto and one-to-one, hence invertible, with the stated estimate.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-22.pages.json",
+      "pointer": [
+        0,
+        "items",
+        8,
+        "deps"
+      ],
+      "before": [
+        "def-midpoint-collocation-residual-for-bvps",
+        "def-linearized-two-point-bvp-operator-and-conditioning",
+        "thm-picard-lindelof-local-existence-and-uniqueness",
+        "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+        "thm-gronwall-integral-inequality",
+        "thm-chain-rule-for-total-derivatives",
+        "thm-euclidean-space-complete"
+      ],
+      "after": [
+        "def-midpoint-collocation-residual-for-bvps",
+        "def-linearized-two-point-bvp-operator-and-conditioning",
+        "thm-picard-lindelof-local-existence-and-uniqueness",
+        "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+        "thm-gronwall-integral-inequality",
+        "thm-chain-rule-for-total-derivatives",
+        "thm-euclidean-space-complete",
+        "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+        "thm-norm-inequality-for-the-vector-valued-integral"
+      ]
+    }
+  ],
+  "source_interface_preservation": {
+    "Statement_unchanged": true,
+    "Definition_unchanged": true,
+    "scope": "All uniform inverse bound, norm, localness, fineness and regularity claims preserved. No supplier Statement/Definition change, so no new same-owner consumer closure is triggered."
+  },
+  "hypothesis_checks": {
+    "Volterra": "Extend A continuously to an open time interval as current1.1 already does; for each column use D=J×R^d and F(t,z)=A(t)z, continuous on open D. Restrict existing C1 solution to any cell with distinct endpoints h>0; closed cells are order-convex with at least2points. Apply proposition at cell initial value X(t_i)e_j. The same fact licenses the integral equation feeding the existing Gronwall argument in1.1.",
+    "integral_norm": "H is continuous and each vector H(t)v is continuous and integrable on compact increasing cells. Apply Euclidean vector integral inequality to unit v and take the operator supremum; this proves the matrix norm bound without treating scalar Taylor/FTC as a vector theorem.",
+    "defect_bound": "Delta_h→0 is current1.2. Both H=AX and X are continuous on compact[a,b], so their moduli tend0 and S_A,S_X finite. Endpoint average differs from X(m_i) by at most omega_X(h/2); its norm is at most S_X. This gives the exact3term bound and hence normalized eta→0; existing propagation then yields M_h→X(b).",
+    "choice": "No new choice principle; finite column identities, universal unit-vector estimates and explicit suprema suffice."
+  },
+  "existing_consumers_interface_dispositions": [
+    {
+      "consumer": "thm-midpoint-collocation-local-branch-and-error-budget",
+      "actual_use": "F3 and Proof2.1/3.1/4.1 use the same mesh-uniform sampled inverse bound. This proof repair adds no hypothesis and changes no bound.",
+      "disposition": "retain unchanged"
+    },
+    {
+      "consumer": "thm-periodic-midpoint-collocation-error-budget",
+      "actual_use": "F2 cites the general midpoint inverse context while its Statement independently assumes explicit K bounds; proofs2.1/3.1 use those supplied inverse bounds. No change of actual supplier interface.",
+      "disposition": "retain unchanged"
+    }
+  ],
+  "native_Alpha22_followup": [
+    {
+      "action": "Read/apply exact approved source candidate or guarded rebase if current source differs; preserve1.1 endpoint clarification and all rich Statement claims.",
+      "scope": "lem-midpoint-bvp-discrete-linearized-inverse"
+    },
+    {
+      "action": "Refresh the two new source Statement citations/actual uses and1.1/2.1 derivation mirrors; add the two source deps and manifest deps only.",
+      "scope": [
+        "research/numerical-optimization-dynamics-2026-10-16-batch-22.proof-contracts.json",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-22.pages.json"
+      ]
+    },
+    {
+      "action": "Record this NEW reader63/refuter63 omission and its disposition in native followup history; do not overwrite/erase previously completed endpoint repair D04 or retroactively claim the prior Alpha22 review contained F8/F9.",
+      "historical_pointer": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-22-3a-decisions.json /decisions/3"
+    },
+    {
+      "action": "Native Alpha22 must genuinely review the new source and actual citation hypotheses and update its own risk evidence/adjudication as required; no completed new review or defect-ledger closure is manufactured here."
+    },
+    {
+      "action": "After final source application, owner performs required explicit-path precheck/render/layout and safe engine binding; no such checks were executed by this proposal."
+    }
+  ],
+  "missing_prerequisites_after_proposed_repair": [],
+  "guards": "Full current before snapshots plus exact source text and per-field metadata guards. Root/native owner applies after safe writer handoff; never overwrite unrelated/current fields with full proposed carriers.",
+  "canonical_writes": false,
+  "hashes_generated": false,
+  "native_changes": false,
+  "checks_tests_gates_control_executed": false,
+  "batch8": "Untouched.",
+  "inspected_paths": [
+    "items/lem-midpoint-bvp-discrete-linearized-inverse.md",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-22.proof-contracts.json",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-22.pages.json",
+    "CLAUDE.md",
+    "tools/facts-block.mjs",
+    "tools/proof-contract.mjs",
+    "items/prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation.md",
+    "items/thm-norm-inequality-for-the-vector-valued-integral.md",
+    "items/def-linearized-two-point-bvp-operator-and-conditioning.md",
+    "items/thm-periodic-midpoint-collocation-error-budget.md",
+    "items/thm-midpoint-collocation-local-branch-and-error-budget.md",
+    "research/numerical-optimization-dynamics-2026-10-16-reader-findings-63.json",
+    "research/numerical-optimization-dynamics-2026-10-16-refute-63.json",
+    "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-22-3a.md",
+    "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-22-3a-decisions.json"
+  ]
+}

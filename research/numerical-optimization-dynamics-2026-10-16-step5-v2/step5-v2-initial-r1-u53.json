@@ -1,0 +1,69 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "53",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-bounded-adaptive-runge-kutta-controller",
+      "model": "gpt-6-luna",
+      "context_sha256": "0bc5acc22ff8d7dcccff2674b0480698512888a1b67eb2981393e987c7e803ed",
+      "outcome": "false_positive",
+      "reason": "A separate proved result already exists: items/thm-bounded-adaptive-runge-kutta-controller-terminates.md, listed on the owning page and manifest, depends on this algorithm. Its proof 1.1 checks finite per-attempt work with finite stages and dimension, and 2.1 proves the N-attempt bound from the indexed loop and terminal budget branch. The Definition refers to that theorem conditionally on finite per-attempt work; it does not substitute an instruction for its proof. The closing sentence concerns loss of an accuracy guarantee in rounded arithmetic, not an unsupported termination assertion. No defect is confirmed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-bounded-adaptive-runge-kutta-controller",
+      "disposition": "unaffected",
+      "post_sha256": "0975264388b6eab881863ff26fec1cebfa2edbb5b2b3af6aac2eedbb4ea20b25",
+      "review_context_sha256": "ccee2ccbcd062b096266a24413ebfc7b5b69c091dbc28645aadb2f006e3f6e9b",
+      "reason": "Checked the full procedure, all six direct supplier interfaces, the embedded finite-stage recursion, owning A/B pages, manifest, controller contract and separate termination argument. Exact scales satisfy s_i >= atol > 0; d >= 1 makes coordinate maxima nonempty; Q=0 avoids division and Q>0 has its unique positive root. Initialization handles t0=T; clipping permits a short final step; success and minimum-step rejection precede budget exhaustion. Each continuing attempt advances the finite attempt index. The finite-work primitive/evaluation model is explicit, and no global accuracy or stiffness conclusion follows from acceptance. No Choice assumption is needed. The current guard equals the frozen before guard; no item or metadata edits were made.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "review_complete_no_repair_required",
+    "evidence_paths": [
+      "items/alg-bounded-adaptive-runge-kutta-controller.md",
+      "items/thm-bounded-adaptive-runge-kutta-controller-terminates.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-53.proof-contracts.json",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-53.pages.json",
+      "library/numerical-differential-equations-and-stochastic-dynamics/adaptive-ode-solvers-and-error-estimation.md",
+      "library/numerical-differential-equations-and-stochastic-dynamics/adaptive-ode-solvers-and-error-estimation-examples.md"
+    ],
+    "checks": [
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items alg-bounded-adaptive-runge-kutta-controller",
+        "exit_code": 0,
+        "result": "Returned the recorded post and review-context hashes immediately after mathematical review."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-bounded-adaptive-runge-kutta-controller.md items/thm-bounded-adaptive-runge-kutta-controller-terminates.md --json",
+        "exit_code": 0,
+        "result": "2 files checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-bounded-adaptive-runge-kutta-controller.md items/thm-bounded-adaptive-runge-kutta-controller-terminates.md --json",
+        "exit_code": 0,
+        "result": "2 files selected; algorithm not-applicable, termination theorem pass; 1 proof checked, 0 failures."
+      }
+    ],
+    "propagation": "No Statement or Definition changed, so no downstream examination or maintenance event is triggered.",
+    "ledgers": "No confirmed defect or published-consumer finding; no canonical defect-ledger or published-ledger update proposed.",
+    "sources": "No external sources consulted; the finite-loop argument and elementary real operations are familiar and checked directly against local suppliers.",
+    "unresolved_obligations": [],
+    "next_action": "Engine collection of the completed false-positive adjudication; no repair, rehash, judge launch or round transition performed.",
+    "proof_layout": "No item paths changed and no formatter ran; the changed-item proof-layout obligation is inapplicable."
+  }
+}

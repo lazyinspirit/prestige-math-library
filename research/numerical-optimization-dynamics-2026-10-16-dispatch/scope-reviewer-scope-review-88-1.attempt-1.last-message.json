@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "88",
+  "round": 1,
+  "reviewed_items": [
+    "alg-landweber-iteration-with-discrepancy-stopping",
+    "alg-golub-kahan-lsqr-with-givens-and-status",
+    "lem-local-lipschitz-derivative-quadratic-remainder",
+    "alg-iteratively-regularized-gauss-newton-step",
+    "thm-lsqr-residual-minimizes-on-krylov-subspace",
+    "lem-landweber-filter-and-residual-identities",
+    "lem-irlgnm-one-step-error-recurrence",
+    "thm-landweber-source-and-noise-error-bounds",
+    "cor-landweber-discrepancy-stopped-convergence-rate",
+    "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "alg-anchored-irgnm-with-discrepancy-stopping",
+    "lem-anchored-irgnm-fixed-reference-error-and-residual",
+    "thm-irlgnm-local-source-condition-discrepancy-convergence",
+    "cex-full-lsqr-can-amplify-data-noise",
+    "ex-nonlinear-exponential-kinetics-one-step",
+    "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+    "ex-three-pixel-blur-landweber-reconstruction"
+  ],
+  "reviewed_pages": [
+    "iterative-regularization-and-early-stopping",
+    "iterative-regularization-and-early-stopping-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The five round-0 findings are resolved and the assigned consumers were checked. Two local defects remain in this final review; under the two-review limit they must be escalated to the owner.",
+  "findings": [
+    {
+      "id": "anchored-segment-continuity-support",
+      "type": "local",
+      "reason": "In lem-anchored-irgnm-fixed-reference-error-and-residual, proof step 1.1 says F' is Lipschitz on B to justify continuity of the segment derivative, but the statement assumes only continuous Fréchet differentiability. That stated hypothesis supplies continuity, not Lipschitz continuity; correct the local justification. The affected consumer is thm-irlgnm-local-source-condition-discrepancy-convergence."
+    },
+    {
+      "id": "kinetics-initial-discrepancy-wording",
+      "type": "local",
+      "reason": "ex-nonlinear-exponential-kinetics-one-step says the datum 'passes the initial discrepancy check,' while verification step 2.1 shows its residual is at least 2/5 and the threshold is at most 1/5, so the initial stopping condition is not met. Clarify that the procedure continues past the initial check."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "cor-landweber-discrepancy-stopped-convergence-rate",
+      "decision": "accept",
+      "reason": "The infinite-path interface and the w=0 branch are explicit; its uses of the Landweber filter and source/noise bounds are valid."
+    },
+    {
+      "id": "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+      "decision": "accept",
+      "reason": "It explicitly uses the infinite mathematical path; the residual and unbounded-subsequence calculations are valid."
+    },
+    {
+      "id": "ex-nonlinear-exponential-kinetics-one-step",
+      "decision": "escalate",
+      "reason": "The N=1 branch is now consistent, but the prose about the initial discrepancy check conflicts with the computed residual."
+    },
+    {
+      "id": "ex-three-pixel-blur-landweber-reconstruction",
+      "decision": "accept",
+      "reason": "It explicitly uses the infinite mathematical path, and the eigenvalue and iterate calculations are valid."
+    },
+    {
+      "id": "lem-anchored-irgnm-fixed-reference-error-and-residual",
+      "decision": "escalate",
+      "reason": "Its same-field derivative convention and bounded-linear factorization are explicit, but proof step 1.1 invokes unstated Lipschitz continuity of F'; its downstream theorem consumer depends on this supplier."
+    },
+    {
+      "id": "lem-irlgnm-one-step-error-recurrence",
+      "decision": "accept",
+      "reason": "Its uses of the unanchored step and local quadratic-remainder lemma are valid under the stated same-field derivative convention."
+    },
+    {
+      "id": "lem-landweber-filter-and-residual-identities",
+      "decision": "accept",
+      "reason": "Its filter identities now explicitly concern the associated infinite mathematical path and follow by recurrence."
+    },
+    {
+      "id": "thm-irlgnm-local-source-condition-discrepancy-convergence",
+      "decision": "escalate",
+      "reason": "Its updated field and factorization hypotheses match the anchored method, but it relies on the fixed-reference lemma whose proof has the unresolved continuity justification."
+    },
+    {
+      "id": "thm-landweber-source-and-noise-error-bounds",
+      "decision": "accept",
+      "reason": "The infinite-path scope is explicit, and step 1.2 now proves the scalar filter estimates with a valid binomial argument."
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "95",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "thm-sdc-finite-sweeps-raise-order",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "45e684dfffbbfa0e229254de5dbb6e8ba9e29e1a6ee368104bb792f92b0bd06f",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Original Proof 2.1 invokes F4 without its compact convex tube, collocation-polynomial containment, and unique-branch hypotheses. An arbitrary nonconvex compact tube does not supply those hypotheses. The repair proves a uniform compact smooth neighborhood, constructs local convex cylinders, bounds the polynomial by h Lambda_M B, and proves stage uniqueness there before applying F4.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-sdc-finite-sweeps-raise-order",
+      "disposition": "repaired",
+      "post_sha256": "e43f5e0ab9969fc3f14ff9f643518671849ef59277e7cd6fa2c094fe0cb0c7b9",
+      "review_context_sha256": "48a22c76f45e7538f5ef18c78514f6e2ab74b7913c038bcaac1e5629c7c2d393",
+      "reason": "Checked the actual tableau, sweep, contraction, local-defect, and discrete-recurrence arguments. New Proof steps 1.3 and 2.1 establish uniform compact convex cylinders inside the open smoothness domain, exact-path and collocation-polynomial containment, bounded derivatives, a state Lipschitz constant, and existence/uniqueness of the same collocation branch. Predictor error O(h), contraction q=O(h), endpoint error O(h^(k+2)), fixed-k input stability, and exact initialization then give p=min(M,k+1). This is the repair author review, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-sdc-finite-sweeps-raise-order",
+      "locus": "proof-step",
+      "location": "Original Proof 2.1; repaired Proof 1.3, 2.1, and 3.1",
+      "defect_type": "dependency_citation",
+      "severity": "fatal",
+      "status": "fixed",
+      "reason": "F4 previously lacked verified convex-tube, polynomial-containment, and branch-uniqueness hypotheses. The proof now constructs uniformly controlled local convex cylinders and verifies each hypothesis without strengthening the Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "action": "no-update",
+      "id": "thm-sdc-finite-sweeps-raise-order",
+      "reason": "The assigned carrier and its direct mathematical suppliers are draft; this proof-only repair changes no Statement or Definition and yields no published-consumer maintenance event.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "items": [
+      "thm-sdc-finite-sweeps-raise-order"
+    ],
+    "statement_change": false,
+    "claim": "For fixed M and k, constant-predictor SDC endpoints have exact-start defect O(h^(min(M,k+1)+1)) and global order min(M,k+1), with exact initialization and the existing uniform hypotheses.",
+    "conventions": "Stage norm is maximum Euclidean block norm; fixed nodes; no uniformity as M or k grows. Local cylinders may differ with exact start time but share a positive radius, derivative bounds, Lipschitz bound, and step cutoff.",
+    "source_reading": "Read the complete current assigned item and the complete tableau, SDC algorithm, contraction theorem, local-defect theorem, and discrete-recurrence lemma. No external literature consulted; the localization and fixed-k error argument are familiar.",
+    "source_paths": [
+      "items/thm-sdc-finite-sweeps-raise-order.md",
+      "items/def-collocation-quadrature-tableau.md",
+      "items/alg-explicit-left-euler-sdc-sweep.md",
+      "items/thm-sdc-sweep-contraction-and-error-bound.md",
+      "items/thm-collocation-local-defect-order-m.md",
+      "items/lem-discrete-one-step-error-recurrence-bound.md"
+    ],
+    "dependencies_unchanged": true,
+    "step4_concern": "The current Statement and A1 already require y_0=y(0), so the historical initialization concern needs no further edit.",
+    "unresolved_obligations": [],
+    "next_action": "Hand the report to the engine for ordinary collection, independent rejudgment, and the subsequent round required by the confirmed-fatal finding.",
+    "formatting": "Adopted the proof-format checker canonical numbering and ordering; all references remain backward and the mathematical argument is unchanged. Final precheck passes with one proof checked and zero failures.",
+    "repair_complete": true,
+    "statement_sha256": "8e2031cc60852f6b352fad9e6be86354723905f3bda74123ba978064ede5fcce",
+    "downstream_reason": "The complete original Statement section is unchanged against the frozen statement hash; all edits are to Facts and Proof. There is no new prerequisite interface, so downstream examination is not triggered.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-sdc-finite-sweeps-raise-order.md --json",
+        "exit_code": 0,
+        "result": "One file, one proof checked, zero failures; status pass after adopting the proposed canonical numbering and ordering."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-sdc-finite-sweeps-raise-order.md --json",
+        "exit_code": 0,
+        "result": "One file checked, zero errors and zero warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-sdc-finite-sweeps-raise-order.md",
+        "exit_code": 0,
+        "result": "One item, seven steps, zero defects; run after the final item edit and canonical formatter."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-95.proof-contracts.json --items thm-sdc-finite-sweeps-raise-order --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; the assigned item checked with zero errors and zero warnings."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items thm-sdc-finite-sweeps-raise-order",
+        "exit_code": 0,
+        "result": "Captured the final carrier guard and review context immediately after checking the final canonical proof; no supplier was edited by this assignment."
+      }
+    ],
+    "contract_update": "Regenerated only the assigned contract entry, reconciled its endpoint boundary and repair-risk explanation, and passed its focused strict check while holding the shared metadata lock; released the lock afterward."
+  },
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-95.proof-contracts.json": "293e98c57d09e9c6325eb32bbd5dc1a585b1b9638b1ebd20b6b7a59f8146a1f9"
+  }
+}

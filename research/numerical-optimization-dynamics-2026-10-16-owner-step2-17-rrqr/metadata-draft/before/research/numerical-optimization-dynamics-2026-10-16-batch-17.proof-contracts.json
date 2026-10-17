@@ -1,0 +1,2241 @@
+{
+  "version": 1,
+  "level": "numerical-optimization-dynamics-2026-10-16",
+  "batch": 17,
+  "note": "Proof contracts generated from the finished batch-17 arguments; citations quote the exact current supplier Statement or Definition section.",
+  "scope": [
+    "alg-householder-bidiagonalization",
+    "alg-strong-rank-revealing-qr-with-finite-swaps",
+    "lem-singular-value-product-bound",
+    "lem-singular-values-lipschitz-in-spectral-norm",
+    "prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex",
+    "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+    "lem-exact-householder-bidiagonal-reduction",
+    "lem-strong-rrqr-column-swap-volume-ratio",
+    "thm-bidiagonal-singular-values-relative-under-componentwise-perturbations",
+    "thm-strong-rrqr-singular-value-comparisons",
+    "alg-rank-thresholded-least-squares-by-svd",
+    "lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence",
+    "thm-strong-rrqr-swap-rule-terminates",
+    "thm-bidiagonal-svd-backward-error-under-local-stability",
+    "thm-svd-thresholded-least-squares-minimum-norm-model",
+    "cor-computed-singular-values-absolute-error-from-backward-stability",
+    "ex-nearly-rank-deficient-design-matrix",
+    "cex-classical-column-pivoted-qr-is-not-strong-with-factor-one",
+    "ex-absolute-versus-relative-singular-value-error",
+    "alg-scaled-complex-householder-and-givens-updates",
+    "lem-scaled-complex-householder-and-givens-local-backward-error"
+  ],
+  "contracts": {
+    "alg-householder-bidiagonalization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "alg-strong-rank-revealing-qr-with-finite-swaps": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition step 1: target k=0 returns the initial factorization with success and no score computation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton value changes the formula or proof route under the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: rank-deficient input and a singular selected block have explicit failure statuses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no unexamined endpoint beyond the inequalities explicitly recorded in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is an endpoint or rank case outside the stated hypotheses; the numbered proof and boundary worksheet identify it."
+      }
+    },
+    "lem-singular-value-product-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-eckart-young-best-rank-k-approximation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, let\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nbe a singular value decomposition with $s_1\\ge\\cdots\\ge s_r>0$, and fix an\ninteger $k$ with $0\\le k<\\dim V$. Define\n\n$$T_kv:=\\sum_{j=1}^{\\min(k,r)} s_j\\langle v,e_j\\rangle f_j.$$\n\nThen $\\operatorname{rank}T_k\\le k$, one has\n\n$$\\lVert T-T_k\\rVert=s_{k+1}$$\n\nwith the convention $s_{k+1}=0$ when $k\\ge r$, and every linear map\n$A:V\\to W$ with $\\operatorname{rank}A\\le k$ satisfies\n\n$$\\lVert T-A\\rVert\\ge s_{k+1}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $X_{i-1}$ be the rank-at-most-$(i-1)$ SVD truncation in [F1]. Then $X_{i-1}Y$ has rank at most $i-1$, and [F1] applied to $XY$ gives $\\sigma_i(XY)\\le\\|(X-X_{i-1})Y\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each unit vector $z$, [F2] gives $\\|(X-X_{i-1})Yz\\|_2\\le\\|X-X_{i-1}\\|_2\\|Yz\\|_2\\le\\|X-X_{i-1}\\|_2\\|Y\\|_2$. Taking the supremum over such $z$ and using [F1] yields $\\|(X-X_{i-1})Y\\|_2\\le\\sigma_i(X)\\|Y\\|_2$. Combining with step 1.1 proves the right-multiplication inequality.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $X_{j-1}$ be the rank-at-most-$(j-1)$ SVD truncation of $X$. Then $ZX_{j-1}$ has rank at most $j-1$, so [F1] gives $\\sigma_j(ZX)\\le\\|Z(X-X_{j-1})\\|_2$. For every unit vector $v$, [F2] gives $\\|Z(X-X_{j-1})v\\|_2\\le\\|Z\\|_2\\|(X-X_{j-1})v\\|_2$. Taking the supremum and using [F1] yields $\\|Z(X-X_{j-1})\\|_2\\le\\|Z\\|_2\\sigma_j(X)$, proving the left-multiplication inequality.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the best rank-(i-1) truncation and remains valid when sigma_i(X)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 include i=1 through a rank-zero truncation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate case is admitted beyond the rank and zero cases handled by the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no unexamined endpoint beyond the inequalities explicitly recorded in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is overclaiming a computed singular-value guarantee beyond the stated unitary, perturbation, or componentwise hypotheses."
+      }
+    },
+    "lem-singular-values-lipschitz-in-spectral-norm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-eckart-young-best-rank-k-approximation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, let\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nbe a singular value decomposition with $s_1\\ge\\cdots\\ge s_r>0$, and fix an\ninteger $k$ with $0\\le k<\\dim V$. Define\n\n$$T_kv:=\\sum_{j=1}^{\\min(k,r)} s_j\\langle v,e_j\\rangle f_j.$$\n\nThen $\\operatorname{rank}T_k\\le k$, one has\n\n$$\\lVert T-T_k\\rVert=s_{k+1}$$\n\nwith the convention $s_{k+1}=0$ when $k\\ge r$, and every linear map\n$A:V\\to W$ with $\\operatorname{rank}A\\le k$ satisfies\n\n$$\\lVert T-A\\rVert\\ge s_{k+1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a rank-at-most-$(i-1)$ SVD truncation $A_{i-1}$ of $A$. By [F1] and [F2], $\\sigma_i(A+E)\\le\\|A+E-A_{i-1}\\|_2\\le\\|A-A_{i-1}\\|_2+\\|E\\|_2=\\sigma_i(A)+\\|E\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply step 1.1 with $A+E$ in place of $A$ and $-E$ in place of $E$. This gives $\\sigma_i(A)\\le\\sigma_i(A+E)+\\|E\\|_2$. The two one-sided inequalities give the stated absolute-value bound.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No distinct zero-parameter branch changes this claim; any zero case allowed by the hypotheses is covered uniformly by the stated argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton value changes the formula or proof route under the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate case is admitted beyond the rank and zero cases handled by the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no unexamined endpoint beyond the inequalities explicitly recorded in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is overclaiming a computed singular-value guarantee beyond the stated unitary, perturbation, or componentwise hypotheses."
+      }
+    },
+    "prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-numerical-rank-relative-to-a-norm-scale-and-tolerance",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb{N}$, let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let\n$\\lVert\\cdot\\rVert$ be a declared norm on the matrix space\n$M_{m\\times n}(\\mathbb F)$, let $A\\in M_{m\\times n}(\\mathbb F)$, and let\n$\\tau\\ge 0$ be a declared tolerance. The **numerical rank of $A$ at\ntolerance $\\tau$** is\n\n$$\\operatorname{rank}_{\\tau}(A)\\;:=\\;\\min\\Bigl\\{\\,\\operatorname{rank}B\\;:\\;B\\in M_{m\\times n}(\\mathbb F),\\ \\lVert A-B\\rVert\\le\\tau\\,\\Bigr\\}.$$\n\nThe minimum exists: it is a minimum of a nonempty subset of the finite set\n$\\{0,1,\\dots,\\min(m,n)\\}$, the value $\\operatorname{rank}A$ being attained at\n$B=A$.\n\n**Scale.** The tolerance may be declared absolutely, as a real number\n$\\tau\\ge 0$, or relative to a scale, as $\\tau=\\tau_0\\lVert A\\rVert$ for a\ndeclared factor $\\tau_0\\ge 0$. Both enter the definition through the single\nthreshold $\\tau$; the scale only fixes which threshold is meant, and every\nstatement about $\\operatorname{rank}_{\\tau}$ is a statement about that one\nthreshold.\n\n**Why the exact-rank discontinuity forces the parameter.** Exact rank is\nlocally constant at the full-rank matrices but discontinuous at every\nnonmaximal-rank matrix\n([[thm-exact-rank-is-locally-constant-at-full-rank-and-discontinuous-at-nonmaximal-rank-matrices]]);\nan exact rank read from noisy data is therefore unstable. Numerical rank\nreplaces exact rank by the smallest exact rank attainable within the declared\nnorm tolerance $\\tau$: it is, by construction, constant on every open ball of\nradius below the relevant gaps, and it counts as rank exactly those directions\nthat perturbation of size at most $\\tau$ cannot erase.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-eckart-young-best-rank-k-approximation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, let\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nbe a singular value decomposition with $s_1\\ge\\cdots\\ge s_r>0$, and fix an\ninteger $k$ with $0\\le k<\\dim V$. Define\n\n$$T_kv:=\\sum_{j=1}^{\\min(k,r)} s_j\\langle v,e_j\\rangle f_j.$$\n\nThen $\\operatorname{rank}T_k\\le k$, one has\n\n$$\\lVert T-T_k\\rVert=s_{k+1}$$\n\nwith the convention $s_{k+1}=0$ when $k\\ge r$, and every linear map\n$A:V\\to W$ with $\\operatorname{rank}A\\le k$ satisfies\n\n$$\\lVert T-A\\rVert\\ge s_{k+1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-rank-equals-number-of-nonzero-singular-values",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. Then $\\operatorname{rank} T$ equals the number of positive\nsingular values of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $q=\\#\\{i\\le p:\\sigma_i(A)>\\tau\\}$. For every $k<q$, one has $k<p$ and $\\sigma_{k+1}(A)\\ge\\sigma_q(A)>\\tau$ (when $q>0$), so [F2] shows that no rank-at-most-$k$ matrix lies within distance $\\tau$. If $q<p$, then $\\sigma_{q+1}(A)\\le\\tau$ and the rank-$q$ truncation from [F2] is within distance $\\tau$. If $q=p$, [F3] gives $\\operatorname{rank}A\\le p=q$, so $A$ itself is an admissible matrix at distance zero. Thus the least admissible rank is $q$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], the least admissible rank is $\\operatorname{rank}_\\tau(A)$; step 1.1 identifies it with the number of singular values strictly greater than $\\tau$. This proves the formula, including $q=0$ and thresholds equal to a singular value.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 include q=0 by the rank-zero truncation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton value changes the formula or proof route under the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate case is admitted beyond the rank and zero cases handled by the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles thresholds equal to a singular value using the strict > count."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is overclaiming a computed singular-value guarantee beyond the stated unitary, perturbation, or componentwise hypotheses."
+      }
+    },
+    "alg-implicit-shifted-bidiagonal-qr-with-deflation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "lem-exact-householder-bidiagonal-reduction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-householder-bidiagonalization",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, where $\\mathbb F=\\mathbb R$ or $\\mathbb C$. Put $p=\\min(m,n)$ and $M=\\max(m,n)$. If $m\\ge n$, set $C=A$; if $m<n$, set $C=A^*$. Thus $C\\in\\mathbb F^{M\\times p}$.\n\nThe algorithm initializes $C_0=C$, $U=I_M$, and $V=I_p$. For $k=1,\\ldots,p$, in this order:\n\n1. Let $x=C_{k:M,k}$. If $x=0$, use the identity left transformation. Otherwise choose $\\phi=x_1/|x_1|$ when $x_1\\ne0$ and $\\phi=1$ when $x_1=0$, set $\\alpha=-\\phi\\|x\\|_2$, $v=x-\\alpha e_1$, and $h=v/\\|v\\|_2$. Use the Householder reflector $H=I-2hh^*$ on rows $k:M$. Update $C\\leftarrow H^*C$ on those rows and update $U\\leftarrow U\\operatorname{diag}(I_{k-1},H)$.\n2. If $k<p$, let $y=C_{k,k+1:p}^*$. If $y=0$, use the identity right transformation. Otherwise apply the same phase and normalization rule to $y$ to form the Householder reflector $G$, then apply $C\\leftarrow C\\operatorname{diag}(I_k,G)$ and $V\\leftarrow V\\operatorname{diag}(I_k,G)$.\n\nThe exact arithmetic output is the leading $p\\times p$ upper bidiagonal block $B$ of $C$, together with $U,V$. For $m\\ge n$ the output relation is $U^*AV=\\begin{bmatrix}B\\\\0\\end{bmatrix}$. For $m<n$ it is $U^*A^*V=\\begin{bmatrix}B\\\\0\\end{bmatrix}$; equivalently $A=V\\begin{bmatrix}B^*&0\\end{bmatrix}U^*$.\n\nIn finite precision, each left/right reflector uses [[alg-scaled-complex-householder-and-givens-updates]], including its real/complex scaled formation, range checks and exact target-column/row zero writes. This is the arithmetic realization of the exact steps above. A zero active vector takes the identity branch. Any nonfinite intermediate or overflow returns `range-failure` with the partial factors; otherwise return `success`, $B,U,V$, the reconstruction residual $\\|C-U\\begin{bmatrix}B\\\\0\\end{bmatrix}V^*\\|_F$, and the two orthogonality residuals $\\|U^*U-I\\|_F$ and $\\|V^*V-I\\|_F$. These reported residuals are computed quantities, not certified bounds by themselves. Matrix residuals use the Frobenius norm defined in [[def-frobenius-matrix-norm]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F=\\mathbb R$ or $\\mathbb C$.\n\n1. Every Householder reflector $H_v=I-2vv^*$ is orthogonal or unitary.\n2. For every nonzero $z\\in \\mathbb F^m$, there is a Householder reflector $H$\n   such that $Hz=\\alpha e_1$ with $|\\alpha|=\\|z\\|_2$.\n3. For every pair $(a,b)\\in \\mathbb F^2$ not both zero, there is a real or\n   complex Givens transformation $G$ such that\n   $$G\\binom{a}{b}=\\binom{\\alpha}{0}$$\n   with $|\\alpha|=(|a|^2+|b|^2)^{1/2}$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At step $k$, the left reflector acts only on rows $k:M$. It therefore leaves all rows $1,\\ldots,k-1$ unchanged and maps the active part of column $k$ to its first coordinate, making entries below $(k,k)$ zero. The right reflector acts only on columns $k+1:p$, so it preserves the zeros already made in column $k$ and maps the active part of row $k$ to its first coordinate, making entries beyond $(k,k+1)$ zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Subsequent left reflectors act on rows strictly below row $k$, so they do not change row $k$; subsequent right reflectors act on columns strictly beyond column $k+1$, so they do not change its retained first two entries. Induction on $k$ shows the final transformed matrix has no entries below the diagonal or beyond the first superdiagonal in its first $p$ rows.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The update rules in [F1] maintain the invariant $C=U^*C_0V$, where $C_0$ is the initial tall-oriented matrix. Every factor is unitary by [F2], so the accumulated $U,V$ are unitary. Combining this invariant with step 2.1 gives the asserted tall reduction. In the wide case it applies to $A^*$, and taking adjoints gives $A=V\\begin{bmatrix}B^*&0\\end{bmatrix}U^*$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and the algorithm definition allow zero active vectors, for which the identity reflector leaves the matrix unchanged."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The induction in steps 1.1-2.1 begins at the first active index and includes p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate case is admitted beyond the rank and zero cases handled by the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no unexamined endpoint beyond the inequalities explicitly recorded in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is overclaiming a computed singular-value guarantee beyond the stated unitary, perturbation, or componentwise hypotheses."
+      }
+    },
+    "lem-strong-rrqr-column-swap-volume-ratio": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-strong-rank-revealing-qr-with-finite-swaps",
+          "source_section": "Definition",
+          "quote": "Input a real or complex matrix $A\\in\\mathbb F^{m\\times n}$ with $m\\ge n$, a target $k$ with $0\\le k<n$, a factor $f\\ge1$, and a finite swap cap $S\\in\\mathbb N\\cup\\{0\\}$. The exact-arithmetic version is specified below. A finite-precision implementation uses the same branches, tests finiteness after each operation, and returns `range-failure` if a required quantity is nonfinite.\n\n1. If $A$ is not full column rank, return `rank-deficient-input`. Otherwise initialize a column permutation $\\Pi$ and a column-pivoted QR factorization $A\\Pi=Q\\begin{bmatrix}R_{11}&R_{12}\\\\0&R_{22}\\end{bmatrix}$ using the greedy residual-norm pivot convention. The selected first $k$ columns then have a nonsingular leading block. For $k=0$, return this factorization with `success`.\n2. For $k>0$, refactor the current fixed column order without further pivoting whenever needed, using unitary Householder or Givens transformations. If the selected leading block is singular, return `singular-selected-block`.\n3. Form $X=R_{11}^{-1}R_{12}$. For $1\\le i\\le k$ let $\\omega_i=\\|e_i^*R_{11}^{-1}\\|_2$; for $1\\le j\\le n-k$ let $\\gamma_j=\\|R_{22}(:,j)\\|_2$. Define the swap score $s_{ij}=\\bigl(|X_{ij}|^2+(\\omega_i\\gamma_j)^2\\bigr)^{1/2}$.\n4. If $\\max_{i,j}|X_{ij}|>f$, choose the lexicographically first pair attaining the largest $|X_{ij}|$. Otherwise, if $\\max_{i,j}s_{ij}>f$, choose the lexicographically first pair attaining the largest score. If neither inequality holds, return `success` and the factors, permutation, $X$, and maximum score. The first branch retains the usual coefficient-triggered swap; the second controls the trailing residual needed for the strong spectral comparison.\n5. When a violating pair was chosen, if the swap count is already $S$, return `swap-budget-exhausted` with the current partial factors. Otherwise interchange the chosen selected and trailing columns, restore triangular form with Givens rotations, increment the swap count, and return to step 2. Thus a cap $S\\ge\\binom nk-1$ is sufficient in exact arithmetic whenever the input is full column rank.\n\nThe statuses are `success`, `rank-deficient-input`, `singular-selected-block`, `swap-budget-exhausted`, and `range-failure`. In particular, ordinary column-pivoted QR is only the initialization: the procedure does not assert that its output alone satisfies the strong bounds.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply $Q^*$ to the selected columns and the candidate trailing column. The selected matrix becomes $C=R_{11}$ in the top $k$ rows. After replacing column $i$, the top block is $C'=R_{11}S$, where $S$ is the identity with column $i$ replaced by column $j$ of $X$; the lower block has only column $i$ nonzero, equal to $c=R_{22}(:,j)$. Hence the replaced Gram matrix is $(C')^*C'+\\|c\\|_2^2 e_ie_i^*$. If $X_{ij}\\ne0$, then $S$ is nonsingular, $\\det S=X_{ij}$, and row $i$ of $(C')^{-1}=S^{-1}R_{11}^{-1}$ is row $i$ of $R_{11}^{-1}$ divided by $X_{ij}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any nonsingular Gram matrix $G$ and vector $u$, factor $G+uu^*=G(I+G^{-1}uu^*)$. Multilinearity of the determinant gives $\\det(I+ab^*)=1+b^*a$: terms choosing two updated columns vanish because both are proportional to $a$. Hence $\\det(G+uu^*)=\\det(G)(1+u^*G^{-1}u)$. Apply this identity to the Gram matrix in step 1.1 with $G=(C')^*C'$ and $u=\\|c\\|_2e_i$. Since $(C')^{-1}$ has row $i$ equal to row $i$ of $R_{11}^{-1}$ divided by $X_{ij}$, $e_i^*G^{-1}e_i=\\omega_i^2/|X_{ij}|^2$. The determinant is therefore $|\\det R_{11}|^2|X_{ij}|^2\\left(1+\\|c\\|_2^2\\omega_i^2/|X_{ij}|^2\\right)=|\\det R_{11}|^2\\left(|X_{ij}|^2+(\\omega_i\\gamma_j)^2\\right)$. The original selected volume squared is $|\\det R_{11}|^2$, so taking the nonnegative square root gives the formula when $X_{ij}\\ne0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Both squared volumes and the right-hand side in step 2.1 are continuous in $X_{ij}$. Perturbing $X_{ij}$ to nonzero values and taking a limit proves the same identity when $X_{ij}=0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 handles X_ij=0 by continuity from the nonzero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton value changes the formula or proof route under the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The X_ij=0 limit in step 3.1 supplies the otherwise singular-top-block boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no unexamined endpoint beyond the inequalities explicitly recorded in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is confusing the coefficient-only test with the combined score required to control the trailing block; this batch records that interface conflict and escalates dependent items."
+      }
+    },
+    "thm-bidiagonal-singular-values-relative-under-componentwise-perturbations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-singular-value-product-bound",
+          "source_section": "Statement",
+          "quote": "Let $X\\in\\mathbb F^{m\\times n}$, $Y\\in\\mathbb F^{n\\times q}$, and $Z\\in\\mathbb F^{r\\times m}$ over $\\mathbb F=\\mathbb R$ or $\\mathbb C$. For every $1\\le i\\le\\min(m,n,q)$ and $1\\le j\\le\\min(r,m,n)$,\n$$\\sigma_i(XY)\\le\\sigma_i(X)\\|Y\\|_2,\\qquad \\sigma_j(ZX)\\le\\|Z\\|_2\\sigma_j(X).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-rank-equals-number-of-nonzero-singular-values",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. Then $\\operatorname{rank} T$ equals the number of positive\nsingular values of $T$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write the diagonal ratios as $s_i=\\widetilde d_i/d_i$ when $d_i\\ne0$, and put $s_i=1$ when $d_i=0$. Write the superdiagonal ratios as $t_i=\\widetilde e_i/e_i$ when $e_i\\ne0$, and put $t_i=1$ when $e_i=0$. Set $r_1=1$, $\\ell_i=s_i/r_i$, and, for $i<n$, set $r_{i+1}=r_i t_i/s_i$. Then $L=\\operatorname{diag}(\\ell_i)$ and $R=\\operatorname{diag}(r_i)$ are invertible and entrywise multiplication gives $\\widetilde B=LBR$, including at zero entries because both matrices preserve each zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $|s_i|,|t_i|\\in[1-\\epsilon,1+\\epsilon]$, each ratio $|t_i/s_i|$ lies in $[q^{-1},q]$. Induction gives $q^{-(i-1)}\\le|r_i|\\le q^{i-1}$. From $\\ell_i=s_i/r_i$ and $q(1-\\epsilon)=1+\\epsilon$, both $|\\ell_i|$ and $|\\ell_i|^{-1}$ are at most $q^n$; the same bound holds for $|r_i|$ and $|r_i|^{-1}$. By [F2], $\\|L\\|_2,\\|L^{-1}\\|_2,\\|R\\|_2,\\|R^{-1}\\|_2\\le q^n$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "First apply the right-multiplication inequality in [F1] to $(LB)R$, then the left-multiplication inequality to $LB$: $\\sigma_i(\\widetilde B)\\le\\|R\\|_2\\sigma_i(LB)\\le\\|R\\|_2\\|L\\|_2\\sigma_i(B)\\le q^{2n}\\sigma_i(B)$. Applying the same two inequalities to $B=L^{-1}\\widetilde B R^{-1}$ gives the reverse bound. Since $L,R$ are invertible, multiplication by them preserves rank; [F3] then shows the zero singular values agree.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 3.1 proves both inequalities and the zero-value assertion.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 and [F3] preserve rank, so the zero-singular-value case is included; if B=0, the positive-singular-value inequalities are vacuous."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 works for n=1 with r_1=1 and no superdiagonal ratios."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate case is admitted beyond the rank and zero cases handled by the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement with epsilon=0 gives q=1 and exact equality; epsilon=1 is excluded so every scaling ratio remains invertible."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is overclaiming a computed singular-value guarantee beyond the stated unitary, perturbation, or componentwise hypotheses."
+      }
+    },
+    "thm-strong-rrqr-singular-value-comparisons": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-strong-rank-revealing-qr-with-finite-swaps",
+          "source_section": "Definition",
+          "quote": "Input a real or complex matrix $A\\in\\mathbb F^{m\\times n}$ with $m\\ge n$, a target $k$ with $0\\le k<n$, a factor $f\\ge1$, and a finite swap cap $S\\in\\mathbb N\\cup\\{0\\}$. The exact-arithmetic version is specified below. A finite-precision implementation uses the same branches, tests finiteness after each operation, and returns `range-failure` if a required quantity is nonfinite.\n\n1. If $A$ is not full column rank, return `rank-deficient-input`. Otherwise initialize a column permutation $\\Pi$ and a column-pivoted QR factorization $A\\Pi=Q\\begin{bmatrix}R_{11}&R_{12}\\\\0&R_{22}\\end{bmatrix}$ using the greedy residual-norm pivot convention. The selected first $k$ columns then have a nonsingular leading block. For $k=0$, return this factorization with `success`.\n2. For $k>0$, refactor the current fixed column order without further pivoting whenever needed, using unitary Householder or Givens transformations. If the selected leading block is singular, return `singular-selected-block`.\n3. Form $X=R_{11}^{-1}R_{12}$. For $1\\le i\\le k$ let $\\omega_i=\\|e_i^*R_{11}^{-1}\\|_2$; for $1\\le j\\le n-k$ let $\\gamma_j=\\|R_{22}(:,j)\\|_2$. Define the swap score $s_{ij}=\\bigl(|X_{ij}|^2+(\\omega_i\\gamma_j)^2\\bigr)^{1/2}$.\n4. If $\\max_{i,j}|X_{ij}|>f$, choose the lexicographically first pair attaining the largest $|X_{ij}|$. Otherwise, if $\\max_{i,j}s_{ij}>f$, choose the lexicographically first pair attaining the largest score. If neither inequality holds, return `success` and the factors, permutation, $X$, and maximum score. The first branch retains the usual coefficient-triggered swap; the second controls the trailing residual needed for the strong spectral comparison.\n5. When a violating pair was chosen, if the swap count is already $S$, return `swap-budget-exhausted` with the current partial factors. Otherwise interchange the chosen selected and trailing columns, restore triangular form with Givens rotations, increment the swap count, and return to step 2. Thus a cap $S\\ge\\binom nk-1$ is sufficient in exact arithmetic whenever the input is full column rank.\n\nThe statuses are `success`, `rank-deficient-input`, `singular-selected-block`, `swap-budget-exhausted`, and `range-failure`. In particular, ordinary column-pivoted QR is only the initialization: the procedure does not assert that its output alone satisfies the strong bounds.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-singular-value-product-bound",
+          "source_section": "Statement",
+          "quote": "Let $X\\in\\mathbb F^{m\\times n}$, $Y\\in\\mathbb F^{n\\times q}$, and $Z\\in\\mathbb F^{r\\times m}$ over $\\mathbb F=\\mathbb R$ or $\\mathbb C$. For every $1\\le i\\le\\min(m,n,q)$ and $1\\le j\\le\\min(r,m,n)$,\n$$\\sigma_i(XY)\\le\\sigma_i(X)\\|Y\\|_2,\\qquad \\sigma_j(ZX)\\le\\|Z\\|_2\\sigma_j(X).$$",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $k=0$, then $R_{22}=Q^*A\\Pi$ and both $Q$ and $\\Pi$ are unitary, so they preserve singular values; the stated case follows. Assume henceforth $1\\le k<n$. Write $A_0=R_{11}$, $C=R_{22}$, and $X=A_0^{-1}R_{12}$. Summing the $k(n-k)$ inequalities in [F1] gives\n$$\\|X\\|_F^2+\\|A_0^{-1}\\|_F^2\\|C\\|_F^2\\le f^2k(n-k).$$\nIndeed, $\\sum_i\\omega_i^2=\\|A_0^{-1}\\|_F^2$ and $\\sum_j\\gamma_j^2=\\|C\\|_F^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $A$ has full column rank and $k<n$, $C$ has full column rank: if $Cz=0$ for nonzero $z$, then $R\\binom{-A_0^{-1}R_{12}z}{z}=0$, contradicting full column rank of $R=Q^*A\\Pi$, which has the same rank as $A$ by [F3]. Thus $\\alpha=\\|C\\|_2/\\sigma_k(A_0)>0$. Since $\\sigma_k(A_0)=1/\\|A_0^{-1}\\|_2$, one has $\\alpha^2=\\|C\\|_2^2\\|A_0^{-1}\\|_2^2\\le\\|C\\|_F^2\\|A_0^{-1}\\|_F^2$, so step 1.1 gives $\\|X\\|_F^2+\\alpha^2\\le f^2k(n-k)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3], $R=Q^*A\\Pi$ has the same singular values as $A$. Define $D_1=\\operatorname{diag}(A_0,C/\\alpha)$ and $W_1=\\begin{bmatrix}I_k&X\\\\0&\\alpha I_{n-k}\\end{bmatrix}$, so $R=D_1W_1$. For vectors $x,y$, $\\|W_1(x,y)\\|_2^2=\\|x+Xy\\|_2^2+\\alpha^2\\|y\\|_2^2$ is bounded by the quadratic form of $M_1=\\begin{bmatrix}1&\\|X\\|_2\\\\\\|X\\|_2&\\|X\\|_2^2+\\alpha^2\\end{bmatrix}$ at $(\\|x\\|_2,\\|y\\|_2)$. For scalars $u,v$ its quadratic form is $(u+\\|X\\|_2v)^2+\\alpha^2v^2\\ge0$, so it is positive semidefinite and its largest eigenvalue is at most its trace; thus $\\|W_1\\|_2^2\\le1+\\|X\\|_F^2+\\alpha^2\\le g^2$. Since $\\|C/\\alpha\\|_2=\\sigma_k(A_0)$, the ordered first $k$ singular values of $D_1$ are those of $A_0$. By [F2], $\\sigma_i(R)\\le\\sigma_i(D_1)\\|W_1\\|_2$, proving $\\sigma_i(A_0)\\ge\\sigma_i(A)/g$ for $i\\le k$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Define $D_2=\\operatorname{diag}(\\alpha A_0,C)$ and $W_2=\\begin{bmatrix}\\alpha I_k&-X\\\\0&I_{n-k}\\end{bmatrix}$, so $D_2=RW_2$. For vectors $x,y$, $\\|W_2(x,y)\\|_2^2=\\|\\alpha x-Xy\\|_2^2+\\|y\\|_2^2$ is bounded by the quadratic form of $M_2=\\begin{bmatrix}\\alpha^2&\\alpha\\|X\\|_2\\\\\\alpha\\|X\\|_2&\\|X\\|_2^2+1\\end{bmatrix}$ at $(\\|x\\|_2,\\|y\\|_2)$. Its determinant is $\\alpha^2>0$ and its diagonal entries are positive, so it is positive semidefinite; its largest eigenvalue is at most its trace. Thus $\\|W_2\\|_2^2\\le1+\\|X\\|_F^2+\\alpha^2\\le g^2$. The smallest singular value of $\\alpha A_0$ is $\\|C\\|_2$, so the first $k$ singular values of $D_2$ are those of $\\alpha A_0$ and its remaining $n-k$ singular values are those of $C$. Therefore $\\sigma_j(C)=\\sigma_{k+j}(D_2)\\le\\sigma_{k+j}(R)\\|W_2\\|_2\\le g\\sigma_{k+j}(A)$ by [F2] and [F3].",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 3.1 and 3.2 prove both block comparisons for $k\\ge1$, and step 1.1 proves the $k=0$ case.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "step 3.2",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the k=0 block comparison directly with g=1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton value changes the formula or proof route under the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The hypothesis full column rank ensures R_11 is nonsingular and step 2.1 proves R_22 has full column rank for 1<=k<n."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no unexamined endpoint beyond the inequalities explicitly recorded in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is confusing the coefficient-only test with the combined score required to control the trailing block; this batch records that interface conflict and escalates dependent items."
+      }
+    },
+    "alg-rank-thresholded-least-squares-by-svd": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: q=0 retains no singular directions; the truncated pseudoinverse is zero and the original residual is still reported."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton value changes the formula or proof route under the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate case is admitted beyond the rank and zero cases handled by the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: singular values equal to tau are discarded by the strict > test."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is confusing the truncated-model minimizer with an original-matrix least-squares minimizer after positive singular values are discarded."
+      }
+    },
+    "lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+          "source_section": "Definition",
+          "quote": "Input the original $A\\in\\mathbb F^{m\\times n}$, its bidiagonal reduction $U_B^*CV_B=\\begin{bmatrix}B\\\\0\\end{bmatrix}$ from [[alg-householder-bidiagonalization]] (where $C=A$ if $m\\ge n$ and $C=A^*$ otherwise), a deflation tolerance $\\tau\\ge0$, and a finite nonnegative integer sweep budget $N$. Initialize sweep accumulators $U_\\Sigma,V_\\Sigma$ to identities and $B$ to the supplied upper bidiagonal matrix. Write its diagonal as $d_i$ and superdiagonal as $e_i$, and set $e_0=0$.\n\nBefore each sweep, set $e_i$ to zero and record its old value whenever $|e_i|\\le\\tau(|d_i|+|d_{i+1}|)$. The zero entries split the active blocks. For each active block $[\\ell,r]$ of size at least two, form only the tridiagonal entries of $T=B^*B$: $T_{ii}=|d_i|^2+|e_{i-1}|^2$ and $T_{i,i+1}=\\overline{d_i}e_i$. Choose $\\mu$ to be the eigenvalue of the trailing Hermitian block $\\begin{bmatrix}T_{r-1,r-1}&T_{r-1,r}\\\\T_{r,r-1}&T_{rr}\\end{bmatrix}$ closest to $T_{rr}$, resolving a tie by the smaller eigenvalue. If the leading pivot $d_\\ell$ is zero or has magnitude at most $\\tau\\max(|e_{\\ell-1}|,|e_\\ell|)$, use the zero-shift branch $\\mu=0$; in that branch start with a right Givens rotation that maps the row pair $(d_\\ell,e_\\ell)$ to $(\\rho,0)$, avoiding division by the small or zero diagonal.\n\nIn the ordinary branch choose the first right Givens factor $G_\\ell$ so that $G_\\ell^*(T_{\\ell\\ell}-\\mu,T_{\\ell+1,\\ell})^T=(\\rho,0)^T$, where $T_{\\ell+1,\\ell}=\\overline{e_\\ell}d_\\ell$. Apply $B\\leftarrow BG_\\ell$ and update the right accumulator. For $j=\\ell,\\ldots,r-1$, choose a left Givens factor $H_j$ so that $H_j^*(B_{j,j},B_{j+1,j})^T=(\\rho,0)^T$; apply it to rows $j,j+1$ and update the left accumulator. If $j<r-1$, choose a right Givens factor $G_{j+1}$ so that $(B_{j,j+1},B_{j,j+2})G_{j+1}=(\\rho,0)$; apply it to columns $j+1,j+2$ and update the right accumulator. Continue until the bulge reaches the active block endpoint. A zero annihilation vector uses the identity rotation. In finite precision each Givens formation/update uses [[alg-scaled-complex-householder-and-givens-updates]], conjugate-transposed as needed for the stated left/right orientation. Its exact representative is canonical unitary; target zero writes are included in its error bound. The initial shift-vector rotation does not zero an unrelated entry of $B$. Each Givens factor is chosen using [[def-real-and-complex-givens-transformations]] and its annihilation guarantee in [[thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries]].\n\nCount one sweep for each processed active block. Stop successfully when every active block has size one. If the total budget is exhausted first, return `budget-exhausted` with the current diagonal candidates, accumulated factors, discarded-entry list, triplet residuals, and orthogonality residuals. Return `range-failure` if any nonzero exact intermediate is outside the normal range, or if an operation, norm or pivot is invalid or nonfinite. On success return `converged`, candidate singular values obtained by the scaled two-component modulus evaluation of each $d_i$ (real absolute value is exact), and the accumulated triplet vectors. For a nonconverged block, the candidates are estimates only and carry no accuracy claim.\n\nIn tall orientation set $\\widehat U=U_BU_\\Sigma$ and $\\widehat V=V_BV_\\Sigma$; in wide orientation swap these roles when mapping back from $A^*$. For each $d_i\\ne0$, multiply the corresponding left column by $d_i/|d_i|$ so the candidate singular value is nonnegative. For every candidate triplet $(\\widehat\\sigma_i,\\widehat u_i,\\widehat v_i)$, report $\\|A\\widehat v_i-\\widehat\\sigma_i\\widehat u_i\\|_2$ and $\\|A^*\\widehat u_i-\\widehat\\sigma_i\\widehat v_i\\|_2$. Also report $\\|\\widehat U^*\\widehat U-I\\|_F$ and $\\|\\widehat V^*\\widehat V-I\\|_F$. The reports expose finite-budget and rounding behavior; they do not certify convergence by themselves. Matrix residuals use the Frobenius norm defined in [[def-frobenius-matrix-norm]].\n\nThe theoretical factors in backward-error conclusions are exact products of the stored local unitary representatives. Rounded dense accumulators are reported with their own orthogonality residuals and are not asserted exactly unitary. Any additional sparsity cleanup is recorded as a separate discarded-entry perturbation.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F=\\mathbb R$ or $\\mathbb C$.\n\n1. Every Householder reflector $H_v=I-2vv^*$ is orthogonal or unitary.\n2. For every nonzero $z\\in \\mathbb F^m$, there is a Householder reflector $H$\n   such that $Hz=\\alpha e_1$ with $|\\alpha|=\\|z\\|_2$.\n3. For every pair $(a,b)\\in \\mathbb F^2$ not both zero, there is a real or\n   complex Givens transformation $G$ such that\n   $$G\\binom{a}{b}=\\binom{\\alpha}{0}$$\n   with $|\\alpha|=(|a|^2+|b|^2)^{1/2}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The first right rotation acts on the leading adjacent column pair of the active block and creates at most the first subdiagonal bulge. Each left rotation annihilates the current subdiagonal entry; because it mixes only two adjacent rows, it can create at most the next second-superdiagonal bulge. The following right rotation mixes only the adjacent columns supporting that bulge, annihilates it, and creates at most the next subdiagonal bulge. Induction along the block therefore keeps one bulge at a time and removes it at the next alternating rotation. The zero coupling at a deflated block endpoint prevents a bulge from leaving the block, so the final matrix is upper bidiagonal.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Every right operation multiplies on the right by a unitary Givens factor and every left operation multiplies on the left by the adjoint of a unitary Givens factor. Their products therefore give unitary $U_s,V_s$ and the final matrix is exactly $U_s^*BV_s$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Left and right unitary factors preserve singular values, since $(U_s^*(B+E_D)V_s)^*(U_s^*(B+E_D)V_s)=V_s^*(B+E_D)^*(B+E_D)V_s$ is unitarily similar to $(B+E_D)^*(B+E_D)$. Deflation occurs before the sweep rotations, and setting each listed superdiagonal entry to zero adds exactly its negative there; hence the matrix entering the unitary sweep is $B+E_D$. With no deflation $E_D=0$, so step 1.2 gives equal singular values for $B_+$ and $B$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No distinct zero-parameter branch changes this claim; any zero case allowed by the hypotheses is covered uniformly by the stated argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton value changes the formula or proof route under the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate case is admitted beyond the rank and zero cases handled by the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no unexamined endpoint beyond the inequalities explicitly recorded in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is overclaiming a computed singular-value guarantee beyond the stated unitary, perturbation, or componentwise hypotheses."
+      }
+    },
+    "thm-strong-rrqr-swap-rule-terminates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-strong-rank-revealing-qr-with-finite-swaps",
+          "source_section": "Definition",
+          "quote": "Input a real or complex matrix $A\\in\\mathbb F^{m\\times n}$ with $m\\ge n$, a target $k$ with $0\\le k<n$, a factor $f\\ge1$, and a finite swap cap $S\\in\\mathbb N\\cup\\{0\\}$. The exact-arithmetic version is specified below. A finite-precision implementation uses the same branches, tests finiteness after each operation, and returns `range-failure` if a required quantity is nonfinite.\n\n1. If $A$ is not full column rank, return `rank-deficient-input`. Otherwise initialize a column permutation $\\Pi$ and a column-pivoted QR factorization $A\\Pi=Q\\begin{bmatrix}R_{11}&R_{12}\\\\0&R_{22}\\end{bmatrix}$ using the greedy residual-norm pivot convention. The selected first $k$ columns then have a nonsingular leading block. For $k=0$, return this factorization with `success`.\n2. For $k>0$, refactor the current fixed column order without further pivoting whenever needed, using unitary Householder or Givens transformations. If the selected leading block is singular, return `singular-selected-block`.\n3. Form $X=R_{11}^{-1}R_{12}$. For $1\\le i\\le k$ let $\\omega_i=\\|e_i^*R_{11}^{-1}\\|_2$; for $1\\le j\\le n-k$ let $\\gamma_j=\\|R_{22}(:,j)\\|_2$. Define the swap score $s_{ij}=\\bigl(|X_{ij}|^2+(\\omega_i\\gamma_j)^2\\bigr)^{1/2}$.\n4. If $\\max_{i,j}|X_{ij}|>f$, choose the lexicographically first pair attaining the largest $|X_{ij}|$. Otherwise, if $\\max_{i,j}s_{ij}>f$, choose the lexicographically first pair attaining the largest score. If neither inequality holds, return `success` and the factors, permutation, $X$, and maximum score. The first branch retains the usual coefficient-triggered swap; the second controls the trailing residual needed for the strong spectral comparison.\n5. When a violating pair was chosen, if the swap count is already $S$, return `swap-budget-exhausted` with the current partial factors. Otherwise interchange the chosen selected and trailing columns, restore triangular form with Givens rotations, increment the swap count, and return to step 2. Thus a cap $S\\ge\\binom nk-1$ is sufficient in exact arithmetic whenever the input is full column rank.\n\nThe statuses are `success`, `rank-deficient-input`, `singular-selected-block`, `swap-budget-exhausted`, and `range-failure`. In particular, ordinary column-pivoted QR is only the initialization: the procedure does not assert that its output alone satisfies the strong bounds.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-strong-rrqr-column-swap-volume-ratio",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$ have full column rank, $m\\ge n$, and let $A\\Pi=Q\\begin{bmatrix}R_{11}&R_{12}\\\\0&R_{22}\\end{bmatrix}$ be a QR factorization with nonsingular $R_{11}\\in\\mathbb F^{k\\times k}$, $1\\le k<n$. Write $X=R_{11}^{-1}R_{12}$, $\\omega_i=\\|e_i^*R_{11}^{-1}\\|_2$, and $\\gamma_j=\\|R_{22}(:,j)\\|_2$. Let $J$ be the selected set of $k$ columns and define its volume by $\\operatorname{vol}(A(:,J))=\\det(A(:,J)^*A(:,J))^{1/2}$. Replacing selected column $i$ by trailing column $j$ changes this volume by the factor\n$$\\frac{\\operatorname{vol}(A(:,(J\\setminus\\{i\\})\\cup\\{j\\}))}{\\operatorname{vol}(A(:,J))}=\\bigl(|X_{ij}|^2+(\\omega_i\\gamma_j)^2\\bigr)^{1/2}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $k=0$, the algorithm's first branch returns `success` without a swap. Assume $1\\le k<n$. Every accepted swap has score strictly greater than $f\\ge1$. By [F2] it multiplies the selected volume by a factor strictly greater than one. Thus the selected volume strictly increases at each swap, so no selected subset can recur because its volume is determined by the fixed input matrix and subset.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $1\\le k<n$, there are exactly $\\binom nk$ possible selected $k$-column subsets. The initial subset has positive volume by full column rank, and by step 1.1 no subset can recur after a strict increase. If $\\binom nk-1$ swaps have occurred, all $\\binom nk$ subsets have therefore been visited; a remaining violation would prescribe another swap to an already visited subset, contradicting step 1.1. Thus a cap at least $\\binom nk-1$ cannot be reached with a violation remaining, and the algorithm returns success.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $k=0$ the coefficient assertion is vacuous. For $1\\le k<n$, success gives $s_{ij}\\le f$ for all pairs. Since $|X_{ij}|\\le s_{ij}$ by the score definition, $\\max_{i,j}|X_{ij}|\\le f$. If a smaller cap is reached while a violation remains, the algorithm returns `swap-budget-exhausted`; if no violation remains first, it returns success.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles k=0 as immediate success without swaps."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton value changes the formula or proof route under the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 use positive selected volume, guaranteed by full column rank, and do not apply to rank-deficient inputs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no unexamined endpoint beyond the inequalities explicitly recorded in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is confusing the coefficient-only test with the combined score required to control the trailing block; this batch records that interface conflict and escalates dependent items."
+      }
+    },
+    "thm-bidiagonal-svd-backward-error-under-local-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-householder-bidiagonalization",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, where $\\mathbb F=\\mathbb R$ or $\\mathbb C$. Put $p=\\min(m,n)$ and $M=\\max(m,n)$. If $m\\ge n$, set $C=A$; if $m<n$, set $C=A^*$. Thus $C\\in\\mathbb F^{M\\times p}$.\n\nThe algorithm initializes $C_0=C$, $U=I_M$, and $V=I_p$. For $k=1,\\ldots,p$, in this order:\n\n1. Let $x=C_{k:M,k}$. If $x=0$, use the identity left transformation. Otherwise choose $\\phi=x_1/|x_1|$ when $x_1\\ne0$ and $\\phi=1$ when $x_1=0$, set $\\alpha=-\\phi\\|x\\|_2$, $v=x-\\alpha e_1$, and $h=v/\\|v\\|_2$. Use the Householder reflector $H=I-2hh^*$ on rows $k:M$. Update $C\\leftarrow H^*C$ on those rows and update $U\\leftarrow U\\operatorname{diag}(I_{k-1},H)$.\n2. If $k<p$, let $y=C_{k,k+1:p}^*$. If $y=0$, use the identity right transformation. Otherwise apply the same phase and normalization rule to $y$ to form the Householder reflector $G$, then apply $C\\leftarrow C\\operatorname{diag}(I_k,G)$ and $V\\leftarrow V\\operatorname{diag}(I_k,G)$.\n\nThe exact arithmetic output is the leading $p\\times p$ upper bidiagonal block $B$ of $C$, together with $U,V$. For $m\\ge n$ the output relation is $U^*AV=\\begin{bmatrix}B\\\\0\\end{bmatrix}$. For $m<n$ it is $U^*A^*V=\\begin{bmatrix}B\\\\0\\end{bmatrix}$; equivalently $A=V\\begin{bmatrix}B^*&0\\end{bmatrix}U^*$.\n\nIn finite precision, each left/right reflector uses [[alg-scaled-complex-householder-and-givens-updates]], including its real/complex scaled formation, range checks and exact target-column/row zero writes. This is the arithmetic realization of the exact steps above. A zero active vector takes the identity branch. Any nonfinite intermediate or overflow returns `range-failure` with the partial factors; otherwise return `success`, $B,U,V$, the reconstruction residual $\\|C-U\\begin{bmatrix}B\\\\0\\end{bmatrix}V^*\\|_F$, and the two orthogonality residuals $\\|U^*U-I\\|_F$ and $\\|V^*V-I\\|_F$. These reported residuals are computed quantities, not certified bounds by themselves. Matrix residuals use the Frobenius norm defined in [[def-frobenius-matrix-norm]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+          "source_section": "Definition",
+          "quote": "Input the original $A\\in\\mathbb F^{m\\times n}$, its bidiagonal reduction $U_B^*CV_B=\\begin{bmatrix}B\\\\0\\end{bmatrix}$ from [[alg-householder-bidiagonalization]] (where $C=A$ if $m\\ge n$ and $C=A^*$ otherwise), a deflation tolerance $\\tau\\ge0$, and a finite nonnegative integer sweep budget $N$. Initialize sweep accumulators $U_\\Sigma,V_\\Sigma$ to identities and $B$ to the supplied upper bidiagonal matrix. Write its diagonal as $d_i$ and superdiagonal as $e_i$, and set $e_0=0$.\n\nBefore each sweep, set $e_i$ to zero and record its old value whenever $|e_i|\\le\\tau(|d_i|+|d_{i+1}|)$. The zero entries split the active blocks. For each active block $[\\ell,r]$ of size at least two, form only the tridiagonal entries of $T=B^*B$: $T_{ii}=|d_i|^2+|e_{i-1}|^2$ and $T_{i,i+1}=\\overline{d_i}e_i$. Choose $\\mu$ to be the eigenvalue of the trailing Hermitian block $\\begin{bmatrix}T_{r-1,r-1}&T_{r-1,r}\\\\T_{r,r-1}&T_{rr}\\end{bmatrix}$ closest to $T_{rr}$, resolving a tie by the smaller eigenvalue. If the leading pivot $d_\\ell$ is zero or has magnitude at most $\\tau\\max(|e_{\\ell-1}|,|e_\\ell|)$, use the zero-shift branch $\\mu=0$; in that branch start with a right Givens rotation that maps the row pair $(d_\\ell,e_\\ell)$ to $(\\rho,0)$, avoiding division by the small or zero diagonal.\n\nIn the ordinary branch choose the first right Givens factor $G_\\ell$ so that $G_\\ell^*(T_{\\ell\\ell}-\\mu,T_{\\ell+1,\\ell})^T=(\\rho,0)^T$, where $T_{\\ell+1,\\ell}=\\overline{e_\\ell}d_\\ell$. Apply $B\\leftarrow BG_\\ell$ and update the right accumulator. For $j=\\ell,\\ldots,r-1$, choose a left Givens factor $H_j$ so that $H_j^*(B_{j,j},B_{j+1,j})^T=(\\rho,0)^T$; apply it to rows $j,j+1$ and update the left accumulator. If $j<r-1$, choose a right Givens factor $G_{j+1}$ so that $(B_{j,j+1},B_{j,j+2})G_{j+1}=(\\rho,0)$; apply it to columns $j+1,j+2$ and update the right accumulator. Continue until the bulge reaches the active block endpoint. A zero annihilation vector uses the identity rotation. In finite precision each Givens formation/update uses [[alg-scaled-complex-householder-and-givens-updates]], conjugate-transposed as needed for the stated left/right orientation. Its exact representative is canonical unitary; target zero writes are included in its error bound. The initial shift-vector rotation does not zero an unrelated entry of $B$. Each Givens factor is chosen using [[def-real-and-complex-givens-transformations]] and its annihilation guarantee in [[thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries]].\n\nCount one sweep for each processed active block. Stop successfully when every active block has size one. If the total budget is exhausted first, return `budget-exhausted` with the current diagonal candidates, accumulated factors, discarded-entry list, triplet residuals, and orthogonality residuals. Return `range-failure` if any nonzero exact intermediate is outside the normal range, or if an operation, norm or pivot is invalid or nonfinite. On success return `converged`, candidate singular values obtained by the scaled two-component modulus evaluation of each $d_i$ (real absolute value is exact), and the accumulated triplet vectors. For a nonconverged block, the candidates are estimates only and carry no accuracy claim.\n\nIn tall orientation set $\\widehat U=U_BU_\\Sigma$ and $\\widehat V=V_BV_\\Sigma$; in wide orientation swap these roles when mapping back from $A^*$. For each $d_i\\ne0$, multiply the corresponding left column by $d_i/|d_i|$ so the candidate singular value is nonnegative. For every candidate triplet $(\\widehat\\sigma_i,\\widehat u_i,\\widehat v_i)$, report $\\|A\\widehat v_i-\\widehat\\sigma_i\\widehat u_i\\|_2$ and $\\|A^*\\widehat u_i-\\widehat\\sigma_i\\widehat v_i\\|_2$. Also report $\\|\\widehat U^*\\widehat U-I\\|_F$ and $\\|\\widehat V^*\\widehat V-I\\|_F$. The reports expose finite-budget and rounding behavior; they do not certify convergence by themselves. Matrix residuals use the Frobenius norm defined in [[def-frobenius-matrix-norm]].\n\nThe theoretical factors in backward-error conclusions are exact products of the stored local unitary representatives. Rounded dense accumulators are reported with their own orthogonality residuals and are not asserted exactly unitary. Any additional sparsity cleanup is recorded as a separate discarded-entry perturbation.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-exact-householder-bidiagonal-reduction",
+          "source_section": "Statement",
+          "quote": "For $A\\in\\mathbb F^{m\\times n}$ over $\\mathbb F=\\mathbb R$ or $\\mathbb C$, the exact-arithmetic algorithm [[alg-householder-bidiagonalization]] returns unitary $U,V$ and an upper bidiagonal $B\\in\\mathbb F^{p\\times p}$, $p=\\min(m,n)$, such that if $m\\ge n$ then $U^*AV=\\begin{bmatrix}B\\\\0\\end{bmatrix}$, and if $m<n$ then $U^*A^*V=\\begin{bmatrix}B\\\\0\\end{bmatrix}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence",
+          "source_section": "Statement",
+          "quote": "Consider one exact-arithmetic sweep of [[alg-implicit-shifted-bidiagonal-qr-with-deflation]] on an unreduced upper bidiagonal block, with no nonzero deflation. If its right rotations have product $V_s$ and its left rotations have product $U_s$, the restored bidiagonal block is $B_+=U_s^*BV_s$. Consequently $B_+$ and $B$ have the same singular values. If a set $D$ of superdiagonal entries is deflated, then the transformed output instead equals the corresponding unitary transform of $B+E_D$, where $E_D$ has those entries negated and all other entries zero.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-scaled-complex-householder-and-givens-local-backward-error",
+          "source_section": "Statement",
+          "quote": "Use [[alg-scaled-complex-householder-and-givens-updates]] successfully, with $0<u<1$ and $(r-1)u<1$ for every Householder dimension $r$. For a nonzero Householder column define\n$$e=(1+u)^{r+3}-1,\\quad a_\\phi=\\frac{1+u}{(1-u)^4}-1,\\quad a_\\alpha=(1+a_\\phi)(1+e)(1+u)-1,\\quad d_v=a_\\alpha+u(2+a_\\alpha),$$\n$$a_\\tau=\\frac{1+u}{(1-u)^{2r}}-1,\\quad g=\\frac{1+6u}{1-(r-1)u}-1,\\quad c_U=2\\bigl((1+a_\\tau)(1+u)(1+6u)(1+g)-1\\bigr),$$\n$$\\eta_H(r)=\\max\\{a_\\alpha+8d_v,(1+u)c_U+3u\\}.$$\nFor a Givens step define\n$$a_2=\\frac{1+u}{(1-u)^2}-1,\\quad q=\\max\\left\\{\\left(\\frac{1+u}{1-u}\\right)^3-1,\\frac{(1+a_2)(1+6u)(1+u)}{(1-u)^3}-1\\right\\},$$\n$$\\epsilon=\\sqrt2(7u+6u^2)(1+q),\\quad v=q+\\epsilon,\\quad \\eta_G=2v+u+2q.$$\nEach complete left update, including its target zero write, has an exact unitary representative $W$ and perturbation $E$ with\n$$W(C+E)=C_+,\\qquad \\|E\\|_F\\le\\eta\\|C\\|_F,$$\nwhere $\\eta=\\eta_H(r)$ or $\\eta_G$. Identity branches have $E=0$. The corresponding right relation follows by conjugate transposition. For a Givens application without an annihilation overwrite use the smaller coefficient $v$; for a Householder separate-block application use $(1+u)c_U+3u$. All coefficients are explicit and $O(ru)$ or $O(u)$ for fixed dimensions.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Iterating the norm inequality from [A1] gives $\\|C_j\\|_F\\le(1+\\eta_j)\\|C_{j-1}\\|_F+\\delta_j$. Induction from $C_0$ yields $\\|C_j\\|_F\\le\\left(\\prod_{r=1}^j(1+\\eta_r)\\right)\\|C_0\\|_F+\\sum_{r=1}^j\\delta_r\\prod_{s=r+1}^j(1+\\eta_s)$: the base case $j=0$ is equality, and the one-step inequality multiplies every prior term by $1+\\eta_j$ and adds $\\delta_j$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Unwind each update in the accumulated unitary coordinates supplied by [F1]–[F2]. The original-input perturbation is the sum of each $E_j$ and each $D_j$ transported by products of later unitary factors. Unitary left/right multiplication preserves Frobenius norm, so $\\|E\\|_F\\le\\sum_{j=1}^J\\eta_j\\|C_{j-1}\\|_F+\\sum_{j=1}^J\\delta_j$. Substitute step 1.1. For the $C_0$ terms, $\\sum_j\\eta_j\\prod_{r<j}(1+\\eta_r)=\\prod_r(1+\\eta_r)-1$. For a fixed $\\delta_i$, its contribution is $\\delta_i\\left(1+\\sum_{j>i}\\eta_j\\prod_{i<r<j}(1+\\eta_r)\\right)=\\delta_i\\prod_{r>i}(1+\\eta_r)$. These identities give the stated bound.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "The same coordinate unwinding gives $C_J= L^*(C_0+E)R$ for products $L,R$ of the unitary update factors, hence $C_0+E=L C_JR^*$. Step 2.1 gives its error bound; setting every $\\delta_j=0$ gives the no-deflation case.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "claim": "For the specified finite-precision algorithm, apply [F5] to each actual update, retaining its range and active-dimension hypotheses. It gives exactly [A1], including each target-zero write. Deflation and any additional discarded entries remain $D_j$, so steps 1.1–3.1 prove the displayed aggregate bound for the concrete implementation. Shift rounding affects which rotation is chosen, not the validity of its unitary backward-error certificate; no unconditional convergence is asserted.",
+          "step": "3.2",
+          "inputs": [
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "thm-svd-thresholded-least-squares-minimum-norm-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$ have singular value decomposition\n$A=U\\Sigma V^*$, and let $\\tau\\ge0$ be a declared threshold. The\n**truncated singular-value pseudoinverse at threshold $\\tau$** is\n\n$$ A_\\tau^+ := V\\Sigma_\\tau^+U^*, $$\n\nwhere $\\Sigma_\\tau^+\\in M_{n\\times m}(\\mathbb F)$ is the transposed-shape\ndiagonal matrix whose $i$th diagonal entry is $\\sigma_i^{-1}$ when\n$\\sigma_i>\\tau$ and is $0$ when $\\sigma_i\\le\\tau$; every off-diagonal entry is\n$0$.\n\nThe threshold is part of the definition, exactly as in\n[[def-numerical-rank-relative-to-a-norm-scale-and-tolerance]]: changing\n$\\tau$ changes which singular directions are retained.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$, and let $b\\in\\mathbb F^m$. Then $A^+b$ is\na least-squares solution of $Ax=b$, and among all least-squares solutions it\nis the unique one of minimum Euclidean norm.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-eckart-young-best-rank-k-approximation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, let\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nbe a singular value decomposition with $s_1\\ge\\cdots\\ge s_r>0$, and fix an\ninteger $k$ with $0\\le k<\\dim V$. Define\n\n$$T_kv:=\\sum_{j=1}^{\\min(k,r)} s_j\\langle v,e_j\\rangle f_j.$$\n\nThen $\\operatorname{rank}T_k\\le k$, one has\n\n$$\\lVert T-T_k\\rVert=s_{k+1}$$\n\nwith the convention $s_{k+1}=0$ when $k\\ge r$, and every linear map\n$A:V\\to W$ with $\\operatorname{rank}A\\le k$ satisfies\n\n$$\\lVert T-A\\rVert\\ge s_{k+1}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, $A\\in\\mathbb F^{m\\times n}$, $p=\\min(m,n)$, and $\\tau\\ge0$. For the spectral norm, the numerical rank defined by [[def-numerical-rank-relative-to-a-norm-scale-and-tolerance]] satisfies\n$$\\operatorname{rank}_\\tau(A)=\\#\\{i\\in\\{1,\\ldots,p\\}:\\sigma_i(A)>\\tau\\}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\n[[def-matrix-product-and-identity-matrix]] and\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\n[[def-moore-penrose-pseudoinverse]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $I=\\{i\\le p:\\sigma_i>\\tau\\}$. By [F1]–[F2], $A_\\tau=\\sum_{i\\in I}\\sigma_i u_i v_i^*$ and $A_\\tau^+=\\sum_{i\\in I}\\sigma_i^{-1}v_i u_i^*$. Orthonormality gives $A_\\tau A_\\tau^+=\\sum_{i\\in I}u_i u_i^*$ and $A_\\tau^+A_\\tau=\\sum_{i\\in I}v_i v_i^*$, which are self-adjoint. Using $u_i^*u_j=v_i^*v_j=\\delta_{ij}$ in those sums verifies the two Penrose product equations. Together with self-adjointness, these are the four equations; by [F6], $A_\\tau^+$ is the unique Moore--Penrose pseudoinverse of $A_\\tau$. The calculation includes $I=\\varnothing$, when both matrices and sums are zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F5], $q$ is the spectral numerical rank retained by the strict threshold. The SVD truncation and [F4] give $\\|A-A_\\tau\\|_2=\\sigma_{q+1}\\le\\tau$; when $q=p$, the tail is zero.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F3] to $M=A_\\tau$. Its unique minimum-norm least-squares solution is $A_\\tau^+b=x_\\tau$, proving the truncated-model claim.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F7], $\\|(A-A_\\tau)x_\\tau\\|_2\\le\\|A-A_\\tau\\|_2\\|x_\\tau\\|_2$; [F8] gives $\\|Ax_\\tau-b\\|_2\\le\\|A_\\tau x_\\tau-b\\|_2+\\|(A-A_\\tau)x_\\tau\\|_2$. Combining with step 1.2 proves the stated residual bound.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If every discarded singular value is zero, the SVD formula gives $A=A_\\tau$, so step 2.1 is the original-matrix solution. If any positive singular value is discarded, the proof has established optimality only for $A_\\tau$; it supplies no normal-equation or minimum-residual claim for $A$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1, 1.2, 2.1, 2.2, and 3.1 prove all stated claims and the limitation.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers I empty (q=0) with both truncated matrices zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton value changes the formula or proof route under the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate case is admitted beyond the rank and zero cases handled by the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 3.1 cover q=p, tau equality, and discarded positive singular values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is confusing the truncated-model minimizer with an original-matrix least-squares minimizer after positive singular values are discarded."
+      }
+    },
+    "cor-computed-singular-values-absolute-error-from-backward-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-bidiagonal-svd-backward-error-under-local-stability",
+          "source_section": "Statement",
+          "quote": "Let $C_0\\in\\mathbb F^{M\\times p}$, $M\\ge p$, be the tall orientation used by [[alg-householder-bidiagonalization]]. Suppose the computed bidiagonal reduction and QR sweeps perform $J$ elementary left/right unitary updates. At update $j$, assume the actual active matrix obeys\n$$C_j=L_j^*(C_{j-1}+E_j)R_j+D_j,$$\nwhere $L_j,R_j$ are unitary and $\\eta_j\\ge0$, $\\|E_j\\|_F\\le\\eta_j\\|C_{j-1}\\|_F$, and $D_j$ is the post-transform additive representation of entries discarded by deflation, with $\\delta_j=\\|D_j\\|_F$. Then the returned transformed matrix $C_J$ satisfies\n$$C_0+E=L C_J R^*$$\nfor unitary accumulated factors $L,R$ and some $E$ with\n$$\\|E\\|_F\\le\\left(\\prod_{j=1}^J(1+\\eta_j)-1\\right)\\|C_0\\|_F+\\sum_{j=1}^J\\delta_j\\prod_{\\ell=j+1}^J(1+\\eta_\\ell).$$\nIn the no-deflation case every $\\delta_j=0$. For the successful scaled arithmetic realization [[alg-scaled-complex-householder-and-givens-updates]], [[lem-scaled-complex-householder-and-givens-local-backward-error]] establishes these hypotheses: choose $\\eta_j=\\eta_H(r_j)$ for Householder updates, $\\eta_j=\\eta_G$ for Givens updates with an actual target zero write, and its smaller separate-block coefficient when no matrix entry is overwritten. This covers real/complex left and right updates. Every additional discarded entry is included in $D_j$. Rounded dense accumulators remain separate from these exact represented products.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-singular-values-lipschitz-in-spectral-norm",
+          "source_section": "Statement",
+          "quote": "Let $A,E\\in\\mathbb F^{m\\times n}$, where $\\mathbb F=\\mathbb R$ or $\\mathbb C$, and put $p=\\min(m,n)$. Then for every $1\\le i\\le p$,\n$$|\\sigma_i(A+E)-\\sigma_i(A)|\\le\\|E\\|_2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "By [F1], $C+E=\\widehat U\\widehat B\\widehat V^*$. By [F3], $\\widehat U\\widehat B\\widehat V^*$ has the same ordered singular values as $\\widehat B$, namely $s_i$; by [F4], $C$ and $A$ have the same $p$ singular values.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Apply [F2] to $C$ and $C+E$. It gives $|\\sigma_i(C+E)-\\sigma_i(C)|\\le\\|E\\|_2$; step 1.1 identifies these singular values with $s_i$ and $\\sigma_i(A)$, respectively, and [F3] gives $\\|E\\|_2\\le\\|E\\|_F$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "claim": "A scaled modulus of two real components has relative norm factors between $(1-u)^4$ and $(1+u)^4$, by expanding the two scaling operations, square products and sum, square root and rescaling. Hence each rounded magnitude differs from $|d_i|$ by at most $\\epsilon_{\\rm read}$. If two finite lists differ coordinatewise by at most $\\epsilon$, their ordered lists do too: otherwise at the violating rank the count of entries above or below the corresponding threshold contradicts the coordinatewise bounds. Apply this to the diagonal magnitudes and combine with step 2.1. For exact readout $\\widehat\\sigma_i=s_i$ the first bound follows already from step 2.1; for rounded readout the additional modulus allowance gives the stated extension. Real sign removal is exact.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "ex-nearly-rank-deficient-design-matrix": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, $A\\in\\mathbb F^{m\\times n}$, $p=\\min(m,n)$, and $\\tau\\ge0$. For the spectral norm, the numerical rank defined by [[def-numerical-rank-relative-to-a-norm-scale-and-tolerance]] satisfies\n$$\\operatorname{rank}_\\tau(A)=\\#\\{i\\in\\{1,\\ldots,p\\}:\\sigma_i(A)>\\tau\\}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The determinant of $A_\\epsilon$ is $\\epsilon\\ne0$, so its exact rank is two. By [F2], write $A_\\epsilon=U\\Sigma V^*$; taking determinants and using $|\\det U|=|\\det V|=1$ (from $U^*U=V^*V=I$) gives $\\sigma_1\\sigma_2=\\epsilon$. Its first column has norm one, hence [F4] gives $\\sigma_1=\\|A_\\epsilon\\|_2\\ge1$; by [F3], $\\sigma_1\\le\\|A_\\epsilon\\|_F=\\sqrt{2+\\epsilon^2}<2$. Therefore $\\epsilon/2<\\sigma_2\\le\\epsilon$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $\\tau=10^{-7}$, $\\sigma_2\\le10^{-8}<\\tau<1\\le\\sigma_1$, so exactly one singular value exceeds $\\tau$. At $\\tau=10^{-9}$, $\\sigma_2>5\\cdot10^{-9}>\\tau$ and $\\sigma_1\\ge1>\\tau$, so both exceed $\\tau$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying [F1] to the two counts in step 2.1 gives numerical ranks one and two, respectively, although the exact rank remains two.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No distinct zero-parameter branch changes this claim; any zero case allowed by the hypotheses is covered uniformly by the stated argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton value changes the formula or proof route under the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate case is admitted beyond the rank and zero cases handled by the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification steps 2.1-3.1 compare both declared tolerances strictly against sigma_2 and sigma_1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "two-by-two-nearly-dependent-design",
+          "asserts": "For epsilon=10^-8, det(A)=epsilon, 1<=sigma_1<2, and epsilon/2<sigma_2<=epsilon.",
+          "result": "At tau=10^-7 exactly one singular value is greater than tau; at tau=10^-9 both are greater, so the exact rank remains two while the numerical ranks are one and two.",
+          "checked_in": "Verification steps 1.1-3.1",
+          "field": "exact symbolic bounds"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is an endpoint or rank case outside the stated hypotheses; the numbered proof and boundary worksheet identify it."
+      }
+    },
+    "cex-classical-column-pivoted-qr-is-not-strong-with-factor-one": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb F)$ with $\\mathbb F=\\mathbb R$ or $\\mathbb C$\nand $m\\ge n$.\n\nA **full QR factorisation** of $A$ is a factorisation\n\n$$A=QR,$$where $Q\\in M_m(\\mathbb F)$ is orthogonal or unitary and $R\\in M_{m\\times n}(\\mathbb F)$ is upper trapezoidal. A **reduced QR factorisation** is a factorisation$$A=\\widehat Q\\widehat R,$$where $\\widehat Q\\in M_{m\\times n}(\\mathbb F)$ has orthonormal columns ($\\widehat Q^*\\widehat Q=I_n$) and $\\widehat R\\in M_n(\\mathbb F)$ is upper triangular. A **column-pivoted QR factorisation** is a factorisation$$A\\Pi=\\widehat Q R,$$\n\nwhere $\\Pi$ is a permutation matrix acting on columns, $\\widehat Q$ has\northonormal columns, and $R$ is upper trapezoidal or upper triangular according\nto whether the full or reduced form is used. Computationally, one obtains these\nfactorisations by successive Householder reflectors or Givens transformations\nthat zero entries below the diagonal, with the pivoted version choosing the next\ncolumn after a permutation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-strong-rank-revealing-qr-with-finite-swaps",
+          "source_section": "Definition",
+          "quote": "Input a real or complex matrix $A\\in\\mathbb F^{m\\times n}$ with $m\\ge n$, a target $k$ with $0\\le k<n$, a factor $f\\ge1$, and a finite swap cap $S\\in\\mathbb N\\cup\\{0\\}$. The exact-arithmetic version is specified below. A finite-precision implementation uses the same branches, tests finiteness after each operation, and returns `range-failure` if a required quantity is nonfinite.\n\n1. If $A$ is not full column rank, return `rank-deficient-input`. Otherwise initialize a column permutation $\\Pi$ and a column-pivoted QR factorization $A\\Pi=Q\\begin{bmatrix}R_{11}&R_{12}\\\\0&R_{22}\\end{bmatrix}$ using the greedy residual-norm pivot convention. The selected first $k$ columns then have a nonsingular leading block. For $k=0$, return this factorization with `success`.\n2. For $k>0$, refactor the current fixed column order without further pivoting whenever needed, using unitary Householder or Givens transformations. If the selected leading block is singular, return `singular-selected-block`.\n3. Form $X=R_{11}^{-1}R_{12}$. For $1\\le i\\le k$ let $\\omega_i=\\|e_i^*R_{11}^{-1}\\|_2$; for $1\\le j\\le n-k$ let $\\gamma_j=\\|R_{22}(:,j)\\|_2$. Define the swap score $s_{ij}=\\bigl(|X_{ij}|^2+(\\omega_i\\gamma_j)^2\\bigr)^{1/2}$.\n4. If $\\max_{i,j}|X_{ij}|>f$, choose the lexicographically first pair attaining the largest $|X_{ij}|$. Otherwise, if $\\max_{i,j}s_{ij}>f$, choose the lexicographically first pair attaining the largest score. If neither inequality holds, return `success` and the factors, permutation, $X$, and maximum score. The first branch retains the usual coefficient-triggered swap; the second controls the trailing residual needed for the strong spectral comparison.\n5. When a violating pair was chosen, if the swap count is already $S$, return `swap-budget-exhausted` with the current partial factors. Otherwise interchange the chosen selected and trailing columns, restore triangular form with Givens rotations, increment the swap count, and return to step 2. Thus a cap $S\\ge\\binom nk-1$ is sufficient in exact arithmetic whenever the input is full column rank.\n\nThe statuses are `success`, `rank-deficient-input`, `singular-selected-block`, `swap-budget-exhausted`, and `range-failure`. In particular, ordinary column-pivoted QR is only the initialization: the procedure does not assert that its output alone satisfies the strong bounds.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exact-column-pivoted-qr-of-a-rank-r-matrix-has-an-invertible-leading-block-and-zero-trailing-block",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F=\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$\nhave rank $r$, and let\n\n$$A\\Pi=QR$$\nbe an exact column-pivoted QR factorisation in which, at each step, the next\ncolumn is chosen with maximal residual $2$-norm among the remaining columns.\nThen\n$$R=\\begin{pmatrix}R_{11}&R_{12}\\\\0&0\\end{pmatrix},$$\n\nwhere $R_{11}\\in M_r(\\mathbb F)$ is upper triangular with nonzero diagonal and\nhence is invertible.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Column $j$ of $A$ has entries $-cs^{i-1}$ for $i<j$, $s^{j-1}$ for $i=j$, and zero below. Its squared norm is $c^2\\sum_{r=0}^{j-2}s^{2r}+s^{2(j-1)}=1$, using $c^2=1-s^2$. After the first $r$ columns have been selected, they span the first $r$ coordinate vectors because their leading triangular block has nonzero diagonal. The residual of each remaining column $j>r$ has squared norm $s^{2r}\\left(c^2\\sum_{t=0}^{j-r-2}s^{2t}+s^{2(j-r-1)}\\right)=s^{2r}$ (the sum is empty when $j=r+1$). Thus all remaining residuals tie at every step, and the declared tie rule makes CPQR select columns in their original order.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1] and step 1.1, the resulting permutation is the identity. The matrix $A$ is upper triangular with positive diagonal, so the QR factors can be taken as $Q=I$ and $R=A$. For $k=3$, solving $R_{11}x=R_{12}$ gives $x_3=-c$, $x_2=-c(1+c)$, and $x_1=-c(1+c)^2=-9/8$. Hence $\\max_i|x_i|\\ge9/8>1$, violating the coefficient condition in [F2].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "This CPQR output therefore fails the strong coefficient test with $f=1$. It does not contradict the strong RRQR procedure: that procedure performs additional swaps when its coefficient or combined residual score exceeds the threshold.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No distinct zero-parameter branch changes this claim; any zero case allowed by the hypotheses is covered uniformly by the stated argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton value changes the formula or proof route under the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Counterexample step 1.1 verifies the repeated residual-norm ties and the declared deterministic tie rule."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no unexamined endpoint beyond the inequalities explicitly recorded in its hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "four-column-cpqr-tie-and-coefficient-witness",
+          "asserts": "For c=1/2 and s=sqrt(3)/2, each column has norm 1 and each residual after r selected columns has norm s^r, so the specified pivot rule keeps original order.",
+          "result": "At k=3, R11^-1 R12 has first entry -9/8, violating the factor-one coefficient bound.",
+          "checked_in": "Counterexample steps 1.1-3.1",
+          "field": "exact symbolic calculation"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is confusing the coefficient-only test with the combined score required to control the trailing block; this batch records that interface conflict and escalates dependent items."
+      }
+    },
+    "ex-absolute-versus-relative-singular-value-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-singular-values-lipschitz-in-spectral-norm",
+          "source_section": "Statement",
+          "quote": "Let $A,E\\in\\mathbb F^{m\\times n}$, where $\\mathbb F=\\mathbb R$ or $\\mathbb C$, and put $p=\\min(m,n)$. Then for every $1\\le i\\le p$,\n$$|\\sigma_i(A+E)-\\sigma_i(A)|\\le\\|E\\|_2.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bidiagonal-singular-values-relative-under-componentwise-perturbations",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let $B,\\widetilde B\\in\\mathbb F^{n\\times n}$ be upper bidiagonal, $\\mathbb F=\\mathbb R$ or $\\mathbb C$, with $0\\le\\epsilon<1$. Suppose each corresponding nonzero diagonal or superdiagonal entry is multiplied by a scalar whose modulus lies in $[1-\\epsilon,1+\\epsilon]$, and every zero entry remains zero. Put $q=(1+\\epsilon)/(1-\\epsilon)$. Then $B$ and $\\widetilde B$ have the same number of zero singular values, and for each positive singular value in descending order,\n$$q^{-2n}\\sigma_i(B)\\le\\sigma_i(\\widetilde B)\\le q^{2n}\\sigma_i(B).$$\n\nThis is a relative perturbation theorem. A computed bidiagonal SVD inherits it only when a separate backward-error analysis verifies this componentwise relative assumption; an absolute normwise perturbation estimate by itself is not that verification.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The singular values of $B$ are $1$ and $\\epsilon$. Set $E_0=\\operatorname{diag}(0,-\\epsilon)$. Then $B+E_0=\\operatorname{diag}(1,0)$, $\\|E_0\\|_2=\\epsilon$, and the small singular value changes by absolute error $\\epsilon$ and relative error $\\epsilon/\\epsilon=1$. This attains the absolute bound in [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Set $E_1=\\eta B$. Each nonzero diagonal entry is multiplied by $1+\\eta$ and the zero superdiagonal remains zero, so [F2] applies. Directly, $B+E_1=(1+\\eta)B$, whose small singular value is $(1+\\eta)\\epsilon$ and whose relative error is exactly $\\eta$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\eta$ can be fixed while $\\epsilon$ tends to zero, step 1.2 gives a relative guarantee independent of the small singular value; step 1.1 shows that the absolute error scale alone permits complete loss of that value.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This item makes no separate empty-family assertion beyond its finite-dimensional hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No distinct zero-parameter branch changes this claim; any zero case allowed by the hypotheses is covered uniformly by the stated argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton value changes the formula or proof route under the stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional degenerate case is admitted beyond the rank and zero cases handled by the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification steps 1.1-1.2 realize both relative-error endpoints exactly: 1 for E_0 and eta for E_1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from an unspecified nonempty family is used; constructions are explicit, finite, or supplied by a named SVD result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional, so this direction worksheet does not apply."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "diagonal-absolute-and-relative-errors",
+          "asserts": "For B=diag(1,epsilon), E0=diag(0,-epsilon) has norm epsilon and changes epsilon to zero; E1=eta B changes epsilon to (1+eta)epsilon.",
+          "result": "The first perturbation has relative error 1; the second has relative error eta for every 0<epsilon<1.",
+          "checked_in": "Verification steps 1.1-2.1",
+          "field": "exact diagonal calculation"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-17 authoring",
+        "notes": "The main risk is overclaiming a computed singular-value guarantee beyond the stated unitary, perturbation, or componentwise hypotheses."
+      }
+    },
+    "alg-scaled-complex-householder-and-givens-updates": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "lem-scaled-complex-householder-and-givens-local-backward-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-scaled-complex-householder-and-givens-updates",
+          "source_section": "Definition",
+          "quote": "Use the operationwise real/complex arithmetic model, with six-real-operation complex products and componentwise division by positive real scalars. A scaled norm of a nonzero complex vector first chooses the largest absolute real or imaginary component $s>0$, rounds every real component divided by $s$, sums their rounded squares sequentially, rounds the positive square root, and rounds multiplication by $s$. A norm of already scaled components omits the last multiplication. Zero input has exact norm zero. Reject every nonzero exact intermediate outside the normal range, nonfinite/invalid operation, and nonpositive required norm; return the first range-failure. All sign changes and conjugations are exact.\n\nFor a Householder active block $C=[x\\;B]$, $x\\in\\mathbb C^r$, a zero $x$ copies the block with identity action. Otherwise compute $\\widehat N$ by the scaled norm. If $x_1=0$ put $\\widehat\\phi=1$; otherwise compute its modulus $\\widehat a$ by its own two-component scaled norm and divide its real and imaginary parts by $\\widehat a$. Set $\\widehat\\alpha=-\\operatorname{fl}(\\widehat\\phi\\widehat N)$ using real-scalar component multiplication, and $v=\\operatorname{fl}(x-\\widehat\\alpha e_1)$. Compute $w$ by sequential summation of all $2r$ rounded real component squares of $v$, and $\\widehat\\tau=\\operatorname{fl}(2/w)$. Compute $d=\\operatorname{fl}(v^*B)$, $p=\\operatorname{fl}(\\widehat\\tau v)$, $Z=\\operatorname{fl}(pd)$, and $\\widehat B=\\operatorname{fl}(B-Z)$. Return $C_+=[\\widehat\\alpha e_1\\;\\widehat B]$, writing exact zeros below the target diagonal, and store $v,\\widehat\\tau$. Its theoretical representative is $H(v)=I-2vv^*/(v^*v)$. For a separate block application omit the column overwrite. For a right step apply these instructions to the conjugate-transposed block and transpose back.\n\nFor a Givens target pair $(a,b)$, use the identity when $b=0$, including $(0,0)$. Otherwise choose $\\lambda$ as the largest absolute real/imaginary component of $(a,b)$, round $z=a/\\lambda$ and $w=b/\\lambda$ componentwise, and compute $h$ as the norm of their four already scaled components. If $z\\ne0$, compute $n_z$ as the norm of its two components, $\\widehat\\phi=\\operatorname{fl}(z/n_z)$, $c=\\operatorname{fl}(n_z/h)$ and $s=\\operatorname{fl}(\\operatorname{fl}(\\widehat\\phi\\overline w)/h)$. If $z=0$, set $c=0$ and $s=\\operatorname{fl}(\\overline w/h)$. Store $T=\\begin{pmatrix}c&s\\\\-\\overline s&c\\end{pmatrix}$ and apply it to the chosen two rows using two complex products and one rounded componentwise addition for each output entry. For an actual target column, set its intended annihilated entry to exact zero after the update. The initial shift-vector rotation is formed from the shift vector but applied to the matrix without zeroing an unrelated matrix entry. Right applications use the conjugate-transposed form. Its exact unitary representative is $Q=T/\\sqrt{c^2+|s|^2}$; this normalization defines a mathematical representative and is not an additional rounded operation.\n\nThese are arithmetic realizations of the canonical Householder and Givens methods. Returned dense transformation accumulators may be rounded; the exact unitary products used in backward-error statements are represented by the stored local data. Additional discarded matrix entries must be recorded separately, including their magnitudes. Their omission is never implicit in a sparsity convention.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, let $u\\ge 0$, let\n$\\delta_0,\\dots,\\delta_{n-1}\\in\\mathbb{R}$ satisfy $|\\delta_i|\\le u$ for every\n$i<n$, and suppose $n u<1$. Then\n\n$$\\prod_{i<n}(1+\\delta_i)=1+\\theta_n\\qquad\\text{with}\\qquad|\\theta_n|\\le\\gamma_n:=\\frac{n u}{1-n u}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "A complex product's real/imaginary error is at most $2(2u+u^2)|z||w|\\le6u|z||w|$: bound each of its four real products and then its two component additions. A sequential complex dot of length $r$ therefore has error at most $[6u+\\gamma_{r-1}(1+6u)]\\sum_i|z_i||w_i|=g\\sum_i|z_i||w_i|$. These expansions include exact zeros.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "step": "1.2",
+          "claim": "A scaled norm with $2r$ real components has its positive squared sum multiplied termwise by between $(1-u)^{2r+2}$ and $(1+u)^{2r+2}$, including two scaling factors. Square root and rescaling give relative norm error at most $e$. The independently scaled modulus of $x_1$ has lower/upper factors $(1-u)^4,(1+u)^4$, so the phase division error relative to $x_1/|x_1|$ is at most $a_\\phi$; when $x_1=0$ it is zero. Thus for $N=\\|x\\|$, $\\alpha_0=-\\operatorname{phase}(x_1)N$ and $v_0=x-\\alpha_0e_1$, one has $|\\widehat\\alpha-\\alpha_0|\\le a_\\alpha N$ and $\\|v-v_0\\|\\le d_vN$. For exponents at least one the lower deviation is bounded by the upper by convexity, justifying these two-sided estimates.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "The identity $H(v)^*H(v)=I$ follows by multiplying $I-2vv^*/(v^*v)$. The exact phase choice gives $H(v_0)x=\\alpha_0e_1$ and $\\|v_0\\|\\ge N$ by direct inner-product expansion. Normalization gives $\\|a/\\|a\\|-b/\\|b\\|\\|\\le2\\|a-b\\|/\\|b\\|$; expanding the difference of unit-vector projectors therefore gives $\\|H(v)-H(v_0)\\|\\le8d_v$. The target-column error is at most $(a_\\alpha+8d_v)N$.",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-2",
+          "step": "2.2",
+          "claim": "For Givens formation at stored $z,w$, the norm $h$ has relative factors between $(1-u)^3$ and $(1+u)^3$, since its unscaled four-component squared sum has at most four rounding factors per term. The norm $n_z$ has exponents two. Let $G_0$ be the exact canonical Givens annihilator for $(z,w)$, with coefficients $c_0=|z|/\\|(z,w)\\|$ and $s_0=(z/|z|)\\overline w/\\|(z,w)\\|$ when $z\\ne0$. The phase error is at most $a_2$; the coefficient numerator, denominator, six-operation complex product and division errors therefore give $|c-c_0|\\le q c_0$ and $|s-s_0|\\le q|s_0|$. If $z=0$, $c=0$ and $s_0=\\overline w/|w|$; the smaller bound $(1+u)/(1-u)^3-1\\le q$ applies. Hence $\\|(c,s)-(c_0,s_0)\\|\\le q$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "step": "3.1",
+          "claim": "The positive real sum defining $w$ has bounds $(1-u)^{2r}\\|v\\|^2\\le w\\le(1+u)^{2r}\\|v\\|^2$. The final division gives $|\\widehat\\tau\\|v\\|^2/2-1|\\le a_\\tau$. The dot-product error in step 1.1, the componentwise real multiplication by $\\widehat\\tau$ and the final complex multiplication bound the rank-one update error by $c_U\\|B\\|_F$. Final subtraction adds at most $u(3+c_U)\\|B\\|_F$. Combine this with step 2.1 over disjoint columns to get the Householder bound. For the zero column take the identity exactly.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-2",
+          "step": "3.2",
+          "claim": "Put $t=\\sqrt{c^2+|s|^2}>0$ and $Q=T/t$. Direct multiplication gives $T^*T=t^2I$, so $Q$ is canonical unitary, $\\|T-Q\\|=|t-1|\\le q$ and $\\|T\\|\\le1+q$. Normalization also gives $\\|Q-G_0\\|\\le2q$; differences of canonical blocks have norm equal to the Euclidean norm of their coefficient differences. Each computed output entry has error at most $(7u+6u^2)(|c||C_{1j}|+|s||C_{2j}|)$, by two products and their addition. The absolute coefficient block has norm at most $\\sqrt2t$. Thus the raw update differs from $QC$ by at most $v\\|C\\|_F$.",
+          "inputs": [
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "step": "4.1",
+          "claim": "Scaling introduced $\\|\\lambda(z,w)-(a,b)\\|\\le u\\|(a,b)\\|$. Because $G_0$ annihilates $(z,w)$, its exact target residual for $(a,b)$ is at most $u\\|(a,b)\\|$; under $Q$ it is at most $(u+2q)\\|(a,b)\\|$. Writing the rounded target to zero adds at most $(u+2q+v)\\|(a,b)\\|$ to the raw update discrepancy, so the total is at most $\\eta_G\\|C\\|_F$. No unrelated matrix entry is zeroed for a shift-vector rotation. Identity branches have zero discrepancy.",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5-1",
+          "step": "5.1",
+          "claim": "In every left case choose $E=W^*C_+-C$, with $W=H(v)$ or $Q$; unitarity gives the stated equation and equal error norm. Right updates follow by conjugate transposition and invariance of Frobenius norm. All coefficients are finite explicit functions under the stated conditions, vanish at $u=0$, and have first derivatives bounded by a fixed multiple of the active dimension, proving the asymptotics.",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "algebra",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    }
+  }
+}

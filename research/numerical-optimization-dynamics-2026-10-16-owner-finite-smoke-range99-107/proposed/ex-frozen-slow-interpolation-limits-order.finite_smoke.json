@@ -1,0 +1,19 @@
+[
+  {
+    "check": "numerical-multirate-fixture",
+    "parameters": {
+      "fixture": "frozen-versus-midpoint-macro-nodes"
+    },
+    "asserts": "Consider $x'=1$, $z'=x$, $(x_0,z_0)=(0,0)$ on $[0,T]$, with $T>0$ and $N\\ge1$ equal macro steps $H=T/N$. The exact solution is $x(t)=t$, $z(t)=t^2/2$. The frozen-slow method [[alg-frozen-slow-explicit-fast-euler]] has $x_n=nH$ and $z_N=T^2/2-TH/2$, so its terminal $z$ error is $TH/2$. For any integer $m\\ge1$, set $h=H/m$ and instead update each midpoint-sampled block by $z_{n,0}=z_n$ and $z_{n,j+1}=z_{n,j}+h(x_n+(j+\\tfrac12)h)$ for $0\\le j<m$. Then one macro update adds exactly $Hx_n+H^2/2$, and this alternative gives the exact solution at every macro node for this model. This is a model-specific diagnostic, not a claim about any unverified symmetric composition.",
+    "claim": "Exact rational T=1,N in {1,2,4},m in {1,2,5}: frozen z_N=1/2-1/(2N), error1/(2N); midpoint microblock sums give exact macro-node z=x²/2.",
+    "scope": "Bounded independent computations only; not a general proof or reading claim. Research implementation is unexecuted.",
+    "historical_declarative_entries": [
+      {
+        "case": "T=2, N=1",
+        "input": "H=2, x0=z0=0",
+        "calculation": "frozen z1=0 while exact z(2)=2; midpoint increment H^2/2=2",
+        "result": "the frozen error is TH/2=2 and the midpoint variant is exact"
+      }
+    ]
+  }
+]

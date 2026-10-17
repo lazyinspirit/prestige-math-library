@@ -1,0 +1,255 @@
+{
+  "group": "d",
+  "batches": [
+    "31"
+  ],
+  "pages_read": [
+    "tau-leaping-and-reaction-diffusion-model-error",
+    "tau-leaping-and-reaction-diffusion-model-error-examples"
+  ],
+  "items_read": [
+    "lem-shared-minimum-poisson-count-coupling",
+    "alg-explicit-poisson-tau-leaping",
+    "def-density-scaled-jump-and-chemical-langevin-generators",
+    "lem-poisson-tau-leap-moment-and-covariance-identities",
+    "thm-minimum-intensity-tau-leap-level-variance",
+    "alg-critical-reaction-binomial-guarded-tau-leaping",
+    "lem-bounded-rate-reaction-generator-dynkin-identity",
+    "lem-poisson-tau-leap-one-step-weak-defect",
+    "thm-density-scaled-chemical-langevin-model-error",
+    "thm-poisson-tau-leap-weak-order-one-with-exit-bound",
+    "cor-mlmc-complexity-for-poisson-tau-leaping",
+    "ex-minimum-intensity-coupling-reduces-one-step-variance",
+    "ex-chemical-langevin-near-empty-poisson-birth",
+    "ex-poisson-tau-leap-negative-population-pure-death",
+    "ex-binomial-guard-prevents-invalid-counts-but-changes-noise",
+    "ex-stiff-reversible-explicit-leap-mean-amplification"
+  ],
+  "conventions": [
+    {
+      "convention": "A Poisson leap freezes propensities at the starting state and uses conditionally independent channel counts. Its first endpoint outside E is held fixed through the horizon; an exhausted draw budget returns only an incomplete prefix.",
+      "fixed_by": "alg-explicit-poisson-tau-leaping",
+      "matters_for": [
+        "lem-poisson-tau-leap-moment-and-covariance-identities",
+        "lem-poisson-tau-leap-one-step-weak-defect",
+        "thm-minimum-intensity-tau-leap-level-variance",
+        "thm-poisson-tau-leap-weak-order-one-with-exit-bound",
+        "cor-mlmc-complexity-for-poisson-tau-leaping"
+      ]
+    },
+    {
+      "convention": "Adjacent levels have dyadic widths h_l=T·2^(-l). The coarse propensity remains frozen for both fine half intervals; shared and residual counts are refreshed on each half interval.",
+      "fixed_by": "thm-minimum-intensity-tau-leap-level-variance",
+      "matters_for": [
+        "thm-minimum-intensity-tau-leap-level-variance",
+        "cor-mlmc-complexity-for-poisson-tau-leaping"
+      ]
+    },
+    {
+      "convention": "The weak-order theorem assumes finite E, zero rates for forbidden single-event destinations, absorbing states outside E, and a bounded payoff on the entire integer lattice.",
+      "fixed_by": "thm-poisson-tau-leap-weak-order-one-with-exit-bound",
+      "matters_for": [
+        "thm-poisson-tau-leap-weak-order-one-with-exit-bound",
+        "cor-mlmc-complexity-for-poisson-tau-leaping"
+      ]
+    },
+    {
+      "convention": "Density scaling uses jump ν_j/V at rate V a_j(x); the CLE covariance rate is the sum of a_j(x)ν_jν_jᵀ divided by V.",
+      "fixed_by": "def-density-scaled-jump-and-chemical-langevin-generators",
+      "matters_for": [
+        "thm-density-scaled-chemical-langevin-model-error",
+        "ex-chemical-langevin-near-empty-poisson-birth"
+      ]
+    },
+    {
+      "convention": "The stopped CLE comparison assumes existence of both stopped processes and a C³ spatial, C¹ temporal backward extension with constant payoff values at every jump exit destination and diffusion boundary point. Its third-derivative bound applies along all jump segments.",
+      "fixed_by": "thm-density-scaled-chemical-langevin-model-error",
+      "matters_for": [
+        "thm-density-scaled-chemical-langevin-model-error"
+      ]
+    },
+    {
+      "convention": "Guarded firing capacity requires every intermediate repeated firing to stay in E. Noncritical channels are processed sequentially with recomputed capacities and propensities; infeasible steps return a prefix without resampling.",
+      "fixed_by": "alg-critical-reaction-binomial-guarded-tau-leaping",
+      "matters_for": [
+        "alg-critical-reaction-binomial-guarded-tau-leaping",
+        "ex-binomial-guard-prevents-invalid-counts-but-changes-noise"
+      ]
+    },
+    {
+      "convention": "Finite-state exact-chain arguments assume Countable Choice and Dependent Choice. The immigration/CLE example assumes the full Axiom of Choice for its normal-law and Brownian interfaces.",
+      "fixed_by": "lem-bounded-rate-reaction-generator-dynkin-identity",
+      "matters_for": [
+        "lem-poisson-tau-leap-one-step-weak-defect",
+        "thm-density-scaled-chemical-langevin-model-error",
+        "thm-poisson-tau-leap-weak-order-one-with-exit-bound",
+        "cor-mlmc-complexity-for-poisson-tau-leaping",
+        "ex-stiff-reversible-explicit-leap-mean-amplification"
+      ]
+    },
+    {
+      "convention": "The immigration example's cubic payoff is unbounded, so its exact moment discrepancy is not an application of the bounded-payoff stopped CLE theorem.",
+      "fixed_by": "ex-chemical-langevin-near-empty-poisson-birth",
+      "matters_for": [
+        "ex-chemical-langevin-near-empty-poisson-birth"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-shared-minimum-poisson-count-coupling",
+      "statement": "For independent C~Pois(h min(λ₁,λ₂)), R₁~Pois(h(λ₁−λ₂)⁺), R₂~Pois(h(λ₂−λ₁)⁺), the counts K_i=C+R_i have laws Pois(hλ_i), their difference has mean h(λ₁−λ₂) and variance h|λ₁−λ₂|, and their covariance is h min(λ₁,λ₂).",
+      "used_by": [
+        "thm-minimum-intensity-tau-leap-level-variance",
+        "ex-minimum-intensity-coupling-reduces-one-step-variance",
+        "cor-mlmc-complexity-for-poisson-tau-leaping"
+      ]
+    },
+    {
+      "id": "lem-poisson-tau-leap-one-step-weak-defect",
+      "statement": "Assuming Countable Choice and Dependent Choice, for finite E with forbidden single-event rates zero and absorbing extension outside E, the exact kernel Q_h and Poisson leap kernel K_h satisfy ‖K_h g−Q_h g‖∞≤4A²h²‖g‖∞ for every bounded g and h≥0.",
+      "used_by": [
+        "thm-poisson-tau-leap-weak-order-one-with-exit-bound"
+      ]
+    },
+    {
+      "id": "thm-minimum-intensity-tau-leap-level-variance",
+      "statement": "For the stated shared-minimum half-step coupling of adjacent dyadic Poisson tau-leap levels of a finite-state reaction system, with rates extended by zero outside E and a common fixed initial state, every bounded g satisfies Var(g(Y_h_l(T))−g(Y_h_(l−1)(T)))≤C h_l, uniformly in l≥1.",
+      "used_by": [
+        "cor-mlmc-complexity-for-poisson-tau-leaping"
+      ]
+    },
+    {
+      "id": "thm-poisson-tau-leap-weak-order-one-with-exit-bound",
+      "statement": "Under its finite-state hypotheses and Countable Choice and Dependent Choice, for T=Nh and bounded g the terminal weak error is at most 4A²Th‖g‖∞, and the probability of ever entering an invalid state by T is at most A²Th/2.",
+      "used_by": [
+        "cor-mlmc-complexity-for-poisson-tau-leaping"
+      ]
+    },
+    {
+      "id": "lem-bounded-rate-reaction-generator-dynkin-identity",
+      "statement": "Assuming Countable Choice and Dependent Choice, a finite reaction chain on disjoint finite interior and absorbing exit sets, with bounded total rate, satisfies E[v(t,X_t)]=E[v(0,X_0)]+E∫₀ᵗ(∂_s v(s,X_s)+Qv(s,·)(X_s))ds for the stated continuously time-differentiable v.",
+      "used_by": [
+        "thm-density-scaled-chemical-langevin-model-error",
+        "ex-stiff-reversible-explicit-leap-mean-amplification"
+      ]
+    },
+    {
+      "id": "lem-poisson-tau-leap-moment-and-covariance-identities",
+      "statement": "For ΔY=Σ_jν_jK_j with conditionally independent K_j~Pois(a_j(x)h), its conditional mean is hΣ_ja_j(x)ν_j, its covariance is hΣ_ja_j(x)ν_jν_jᵀ, and its second squared-norm moment is hΣ_ja_j(x)‖ν_j‖²+h²‖Σ_ja_j(x)ν_j‖².",
+      "used_by": [
+        "thm-minimum-intensity-tau-leap-level-variance",
+        "ex-stiff-reversible-explicit-leap-mean-amplification"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-scalar-poisson-count-law",
+      "used_for": "Poisson masses and the point-mass convention at zero parameter.",
+      "opened": true
+    },
+    {
+      "id": "lem-poisson-count-law-normalization-and-moments",
+      "used_for": "Poisson means, variances, factorial second moments, and generating functions.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Explicit choice assumptions inherited by exponential laws and exact-chain constructions.",
+      "opened": true
+    },
+    {
+      "id": "def-dependent-choice",
+      "used_for": "Explicit choice assumptions for countable random-input products.",
+      "opened": true
+    },
+    {
+      "id": "thm-countable-product-of-probability-spaces",
+      "used_for": "Existence of independent countable event-input streams under the declared choice principles.",
+      "opened": true
+    },
+    {
+      "id": "def-bernoulli-and-binomial-random-variables",
+      "used_for": "Guarded binomial draws as finite sums of independent Bernoulli trials, including zero capacity.",
+      "opened": true
+    },
+    {
+      "id": "def-mlmc-hierarchy-and-coupled-corrections",
+      "used_for": "Coupling marginals, telescoping corrections, and independence between level sample blocks.",
+      "opened": true
+    },
+    {
+      "id": "lem-mlmc-estimator-moments-and-mse",
+      "used_for": "The exact bias-plus-variance decomposition of the finite MLMC estimator.",
+      "opened": true
+    },
+    {
+      "id": "thm-mlmc-complexity-under-rate-assumptions",
+      "used_for": "The α=1, β=1, unit inverse-step-cost MLMC work bound.",
+      "opened": true
+    },
+    {
+      "id": "def-poisson-and-cox-point-process",
+      "used_for": "Independent Poisson counts on disjoint time intervals in the immigration example and reaction-process prerequisites.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-intensity-poisson-process-existence-and-mixed-binomial-law",
+      "used_for": "Existence and total-count law of the finite-horizon immigration point process.",
+      "opened": true
+    },
+    {
+      "id": "lem-homogeneous-poisson-ordered-event-time-density",
+      "used_for": "Finite-window event-time densities in the exact reaction-chain prerequisite.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Normal density, affine normal laws, and the immigration CLE moment and support calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The full choice assumption explicitly carried by the immigration/CLE example.",
+      "opened": true
+    },
+    {
+      "id": "def-brownian-motion",
+      "used_for": "Continuous paths and independent normal increments for the constant-coefficient CLE.",
+      "opened": true
+    },
+    {
+      "id": "thm-existence-of-continuous-brownian-motion",
+      "used_for": "Existence of the Brownian motion used in the immigration CLE construction.",
+      "opened": true
+    },
+    {
+      "id": "thm-brownian-future-path-markov-property",
+      "used_for": "The Markov property of the constant-coefficient Brownian CLE, with the stated filtration convention.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "cor-mlmc-complexity-for-poisson-tau-leaping",
+      "concern": "The Statement says a coupled correction uses the fine and coarse step counts 'with R draws per step', and proof step 1.1 repeats that count. The prescribed coupling instead draws shared and residual Poisson components on each fine half interval; it does not draw independent marginal fine and coarse counts. Thus the literal draw accounting is inaccurate. There are still only a constant number of scalar draws per channel per half interval, so the O(h_l^(-1)) cost and final complexity bound survive.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "thm-finite-state-gillespie-and-next-reaction-exactness",
+      "finding": "The Statement asserts: 'Then both algorithms have the law of this reference process on every finite horizon.' It does not restrict the event budgets in the cited algorithm definitions to infinity. Both alg-gillespie-direct-method-for-reaction-networks and alg-next-reaction-random-time-change-method allow B=0 and return a budget-exhausted prefix immediately at a positive-rate initial state. For E={0,1}, initial state 1, a death reaction 1→0 at rate 1, T=1, and B=0, that output contains no event and does not reach T, whereas the reference process has a death before T with probability 1−e^(-1). The full-horizon algorithm-law assertion therefore needs a budget qualification. The batch-31 uses of an unlimited exact reference chain do not themselves require a finite-budget full-horizon assertion.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "tau-leaping-and-reaction-diffusion-model-error",
+      "to": "stochastic-reaction-jump-simulation-and-coupling",
+      "faithful": true,
+      "note": "The consumer faithfully uses finite-channel propensity data, exponential event laws, and the finite-state reference-chain existence/nonexplosion result. In the reverse comparison, the supplier page describes minimum-intensity coupling as an exact event-time procedure and explicitly treats finite budgets as prefixes; batch 31 correctly distinguishes its frozen-rate Poisson count coupling. The supplier exactness theorem's omitted budget qualification is recorded separately in alerts."
+    }
+  ]
+}

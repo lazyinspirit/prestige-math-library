@@ -8,18 +8,14 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 deps: [def-linear-transport-equation-and-its-characteristic-flow,
-       thm-chain-rule-for-total-derivatives]
+       thm-chain-rule-for-total-derivatives, thm-continuous-partial-derivatives-imply-total-differentiability]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-05
+  repair: research/numerical-optimization-dynamics-2026-10-16-owner-step2-preclaimed-published-receipts-ROOT-1035/lem-transport-equation-along-a-characteristic.repair.json
 sources:
   scraped: []
   references:
@@ -45,10 +41,12 @@ $$\frac{d}{ds}u(X(s),s)+c(X(s),s)u(X(s),s)=f(X(s),s).$$
 
 [L2] The total-derivative chain rule differentiates a composite by the gradient of the outer function applied to the derivative of the inner function ([[thm-chain-rule-for-total-derivatives]]).
 
+[L3] [[thm-continuous-partial-derivatives-imply-total-differentiability]]: continuous first partial derivatives on an open set imply total differentiability, with the Jacobian as derivative. Thus the stated $C^1$ function $u$ is totally differentiable at each point of its domain.
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Apply [L2] to the map $s\mapsto u(X(s),s)$; since the space-time velocity of the characteristic is $(X'(s),1)$, this gives $\frac{d}{ds}u(X(s),s)=u_t(X(s),s)+\nabla_xu(X(s),s)\cdot X'(s)$. [L2]
+1.1 By [L3], $u$ is totally differentiable. The differentiable characteristic has the first-order expansion $X(s+h)=X(s)+hX'(s)+o(h)$ coordinatewise, so its space-time curve is totally differentiable with derivative $(X'(s),1)$. Apply [L2] to the map $s\mapsto u(X(s),s)$; since the space-time velocity of the characteristic is $(X'(s),1)$, this gives $\frac{d}{ds}u(X(s),s)=u_t(X(s),s)+\nabla_xu(X(s),s)\cdot X'(s)$. [L2, L3]
 
 2.1 By [L1], the characteristic ODE gives $X'(s)=a(X(s),s)$, so substituting into step 1.1 and then using the PDE yields $\frac{d}{ds}u(X(s),s)=f(X(s),s)-c(X(s),s)u(X(s),s)$, which is the claimed scalar linear ODE along the characteristic. [L1, step 1.1] ∎

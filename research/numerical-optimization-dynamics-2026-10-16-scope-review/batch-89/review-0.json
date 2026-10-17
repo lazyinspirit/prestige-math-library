@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "89",
+  "round": 0,
+  "reviewed_items": [
+    "def-variational-crime-error-framework",
+    "lem-one-dimensional-p1-interpolation-error",
+    "lem-one-dimensional-zero-boundary-poincare",
+    "def-geometry-lift-and-tensor-discrepancy",
+    "lem-discrete-form-perturbation-preserves-coercivity",
+    "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+    "thm-second-strang-lemma-for-nonconforming-galerkin",
+    "lem-geometry-tensor-gap-bounds-cellwise-form-defect",
+    "lem-midpoint-quadrature-defect-for-p1-stiffness",
+    "cor-midpoint-quadrature-strang-error-for-p1",
+    "cor-perturbed-conforming-galerkin-bound-from-cea",
+    "cor-shape-regular-fe-strang-error-bound",
+    "ex-midpoint-underintegrated-p2-stiffness-loses-coercivity",
+    "ex-nonconforming-residual-breaks-galerkin-orthogonality",
+    "ex-two-node-gauss-polynomial-exactness-and-x4-error"
+  ],
+  "reviewed_pages": [
+    "variational-crimes-and-strang-lemmas",
+    "variational-crimes-and-strang-lemmas-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The full batch and supplier uses were reviewed. A published completed-product Tonelli/Fubini proof has an unresolved prerequisite gap affecting assigned and published consumers; local repairs and one approved-scope addition are also needed.",
+  "findings": [
+    {
+      "id": "thm-tonelli-and-fubini-for-completed-product-measures",
+      "type": "prerequisite",
+      "reason": "In published proof steps 3.1 and 4.1, the proof uses thm-the-lebesgue-integral-respects-almost-everywhere-equality to transfer integrals for nonnegative functions that may have infinite integral, and to conclude g is in L1 before establishing that fact. That supplier only applies when both functions are already in L1. The smallest missing result is almost-everywhere invariance for extended nonnegative integrals, or an independent proof via simple approximations. The assigned consumer is ex-nonconforming-residual-breaks-galerkin-orthogonality, step 2.1; reviewed published consumers also include lem-square-integrable-kernels-define-bounded-compact-integral-operators, steps 1.1 and 5.1, and lem-conjugate-transpose-kernels-give-adjoints, steps 1.1 and 2.1."
+    },
+    {
+      "id": "lem-one-dimensional-p1-interpolation-error",
+      "type": "local",
+      "reason": "Proof step 3.1 uses the Riemann/Darboux additivity supplier to sum cell integrals for an L2 Lebesgue norm. Make the finite-cell Lebesgue integral decomposition explicit, or establish the required Riemann/Lebesgue identification for this piecewise-continuous integrand."
+    },
+    {
+      "id": "lem-geometry-tensor-gap-bounds-cellwise-form-defect",
+      "type": "local",
+      "reason": "Proof step 1.2 splits the exact Lebesgue form integral and global gradient L2 norms over the finite measurable partition without stating the finite-additivity step and the needed integrability. Make that partition argument explicit before applying the cellwise bounds."
+    },
+    {
+      "id": "thm-second-strang-lemma-for-nonconforming-galerkin",
+      "type": "scope",
+      "reason": "Approved NA-30 scope calls for family estimates under uniform discrete stability and controlled consistency and approximation terms. This theorem gives only a per-mesh bound, unlike the first-Strang theorem's explicit family consequence. Add the corresponding uniform-family consequence, stating uniform bounds on M_h, a positive lower bound on alpha_h, and control of the approximation and residual terms."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "cor-midpoint-quadrature-strang-error-for-p1",
+      "decision": "repair",
+      "reason": "Its interpolation contribution depends on lem-one-dimensional-p1-interpolation-error; repair that supplier's Lebesgue cell-sum justification before accepting this use."
+    },
+    {
+      "id": "ex-nonconforming-residual-breaks-galerkin-orthogonality",
+      "decision": "repair",
+      "reason": "The second-Strang bound itself is used consistently, but step 2.1 relies on the completed-product Fubini claim. Prove this real-valued case locally using a Borel representative and uncompleted L1 Fubini, or another complete local argument."
+    },
+    {
+      "id": "lem-square-integrable-kernels-define-bounded-compact-integral-operators",
+      "decision": "escalate",
+      "reason": "Its completed-product Tonelli and Fubini uses in steps 1.1 and 5.1 need owner reconciliation of the published supplier gap."
+    },
+    {
+      "id": "lem-conjugate-transpose-kernels-give-adjoints",
+      "decision": "escalate",
+      "reason": "Its completed-product Tonelli and complex Fubini uses in steps 1.1 and 2.1 need owner reconciliation of the published supplier gap."
+    },
+    {
+      "id": "ex-elliptic-diffusion-coefficient-sensitivity",
+      "decision": "accept",
+      "reason": "Its use of the unit-interval zero-boundary Poincare estimate matches the stated H1 norm and assumptions."
+    },
+    {
+      "id": "lem-fem-control-gradient-residual-bound",
+      "decision": "accept",
+      "reason": "Its primal and adjoint uses of first Strang retain their own coercivity and defect terms, including the state-induced adjoint load defect."
+    },
+    {
+      "id": "thm-elliptic-fe-gradient-error-in-energy-norms",
+      "decision": "accept",
+      "reason": "Its state and real transposed-adjoint uses preserve the required conforming hypotheses and retain derivative-data defects separately."
+    },
+    {
+      "id": "thm-p0-control-fem-o-h-error",
+      "decision": "accept",
+      "reason": "Its gradient residual is an explicit uniform premise and it does not infer a rate from the Strang estimate without uniform defect bounds."
+    },
+    {
+      "id": "thm-variational-fem-control-o-h2-error",
+      "decision": "accept",
+      "reason": "Its uniform L2 state and adjoint error is an explicit hypothesis; the proof does not infer it from energy error alone."
+    },
+    {
+      "id": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "decision": "accept",
+      "reason": "Its page summary restricts the finite-element gradient budget to conforming state and adjoint approximations and keeps derivative-data defects separate."
+    },
+    {
+      "id": "finite-element-pde-constrained-optimization",
+      "decision": "accept",
+      "reason": "Its page summary states the conditional O(h) and O(h2) assumptions and retains Strang defects."
+    }
+  ]
+}

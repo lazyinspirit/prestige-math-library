@@ -1,0 +1,40 @@
+--- before/items/lem-adaptive-cubic-unsuccessful-iteration-count.md
++++ proposed/items/lem-adaptive-cubic-unsuccessful-iteration-count.md
+@@ -94,34 +94,7 @@
+ 
+ **Given:** The hypotheses in the Statement.
+ 
+-1.1 Fix a trial point $x$ and a solver-success candidate $s$ that reaches
+-the ratio computation. By [F7], $B=\nabla^2f(x)$ is symmetric, so the
+-cubic model is defined. Put
+-$\phi(t):=f(x+ts)$ for $0\le t\le1$. The Hessian Lipschitz assumption gives
+-$$|\phi''(u)-\phi''(v)|
+-=|s^T(\nabla^2f(x+us)-\nabla^2f(x+vs))s|
+-\le L|u-v|\|s\|_2^3,$$
+-where the bound follows from [A1], [F3], and [F4].
+-Define $h(t):=\phi(t)-\phi(0)-t\phi'(0)-\tfrac12t^2\phi''(0)$.
+-For $t>0$, [F5] applied to $\phi'$ on $[0,t]$ gives
+-$\phi'(t)-\phi'(0)=t\phi''(u_t)$ for some $u_t\in(0,t)$. Hence
+-$|h'(t)|=t|\phi''(u_t)-\phi''(0)|\le Lt^2\|s\|_2^3$. Applying [F5] to
+-$h$ on $[0,1]$ yields
+-$$|f(x+s)-f(x)-\langle\nabla f(x),s\rangle
+--\tfrac12s^T\nabla^2f(x)s|\le L\|s\|_2^3.$$
+-By [F2], when $\sigma\ge3L$ the cubic term dominates this remainder, so
+-$f(x+s)\le m_\sigma(s)$. Since the trial reaches the ratio computation,
+-$g\ne0$ and the algorithm's first two model checks hold; the extended
+-[[lem-global-cubic-model-minimizer-decrease]] then gives
+-$m_\sigma(0)-m_\sigma(s)\ge\sigma\|s\|_2^3/6>0$. Hence $\rho\ge1>\eta_1$;
+-that trial cannot be rejected. [given, A1, A2, A4, F1, F2, F3, F4, F5, F7,
+-algebra]
++1.1 Fix a trial point $x$ and a solver-success candidate $s$ that reaches the ratio computation. By [F7], $B=\nabla^2f(x)$ is symmetric, so the cubic model is defined. Put $\phi(t):=f(x+ts)$ for $0\le t\le1$. The Hessian Lipschitz assumption gives $$|\phi''(u)-\phi''(v)| =|s^T(\nabla^2f(x+us)-\nabla^2f(x+vs))s| \le L|u-v|\|s\|_2^3,$$ where the bound follows from [A1], [F3], and [F4]. Define $h(t):=\phi(t)-\phi(0)-t\phi'(0)-\tfrac12t^2\phi''(0)$. For $t>0$, [F5] applied to $\phi'$ on $[0,t]$ gives $\phi'(t)-\phi'(0)=t\phi''(u_t)$ for some $u_t\in(0,t)$. Hence $|h'(t)|=t|\phi''(u_t)-\phi''(0)|\le Lt^2\|s\|_2^3$. Applying [F5] to $h$ on $[0,1]$ yields $$|f(x+s)-f(x)-\langle\nabla f(x),s\rangle -\tfrac12s^T\nabla^2f(x)s|\le L\|s\|_2^3.$$ By [F2], when $\sigma\ge3L$ the cubic term dominates this remainder, so $f(x+s)\le m_\sigma(s)$. Since the trial reaches the ratio computation, $g\ne0$ and the algorithm's first two model checks hold; the extended [[lem-global-cubic-model-minimizer-decrease]] then gives $m_\sigma(0)-m_\sigma(s)\ge\sigma\|s\|_2^3/6>0$. Hence $\rho\ge1>\eta_1$; that trial cannot be rejected. [given, A1, A2, A4, F1, F2, F3, F4, F5, F7, algebra]
+ 
+-1.2 If $3L\le\sigma_{min}$, all weights are at least $3L$ and there are
+-no rejections, so take $R=0$. Otherwise, by [F6] choose a finite $R$ with
+-$\gamma_{up}^R\sigma_{min}\ge3L$. At the start of any rejection block,
+-$\sigma\ge\sigma_{min}$. After at most $R$ consecutive rejections, repeated
+-use of [F1] gives
+-$\sigma\ge\min\{\gamma_{up}^R\sigma_{min},\sigma_{max}\}\ge3L$.
+-By step 1.1 the next trial cannot be rejected. Thus the block contains at
+-most $R$ rejections. [given, A3, F1, F6, step 1.1, algebra] ∎
++2.1 If $3L\le\sigma_{min}$, all weights are at least $3L$ and there are no rejections, so take $R=0$. Otherwise, by [F6] choose a finite $R$ with $\gamma_{up}^R\sigma_{min}\ge3L$. At the start of any rejection block, $\sigma\ge\sigma_{min}$. After at most $R$ consecutive rejections, repeated use of [F1] gives $\sigma\ge\min\{\gamma_{up}^R\sigma_{min},\sigma_{max}\}\ge3L$. By step 1.1 the next trial cannot be rejected. Thus the block contains at most $R$ rejections. [given, A3, F1, F6, step 1.1, algebra] ∎
++

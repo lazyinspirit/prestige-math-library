@@ -1,0 +1,1 @@
+Follow the full original-repairer owner continuation brief. Source access is read-only; supply every actual affected-consumer disposition and exact proposals for any genuine remaining gap. Preserve the current approved r_ell exactness notation.

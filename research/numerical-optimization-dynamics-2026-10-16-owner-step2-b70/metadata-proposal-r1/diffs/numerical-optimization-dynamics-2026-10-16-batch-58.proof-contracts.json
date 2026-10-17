@@ -1,0 +1,749 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-58.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-58.proof-contracts.json
+@@ -9,7 +9,9 @@
+     "thm-inexact-newton-local-forcing-rates",
+     "ex-rosenbrock-newton-step-satisfies-strong-wolfe",
+     "ex-rosenbrock-indefinite-hessian-requires-descent-safeguard",
+-    "ex-inexact-newton-forcing-tolerance-cost-and-rate"
++    "ex-inexact-newton-forcing-tolerance-cost-and-rate",
++    "lem-bracketing-zoom-finite-budget-checked-return",
++    "lem-inexact-newton-krylov-finite-budget-checked-return"
+   ],
+   "contracts": {
+     "lem-strong-wolfe-step-exists-on-a-bounded-below-ray": {
+@@ -19,7 +21,7 @@
+           "fact": "F1",
+           "source": "def-wolfe-and-strong-wolfe-conditions",
+           "source_section": "Definition",
+-          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the feasible ray\n$T_{x,p}:=\\{t\\ge0:x+tp\\in D\\}$ and, for $t\\in T_{x,p}$,\n$\\phi(t):=f(x+tp)$. Wherever $t$ is an interior point of $T_{x,p}$,\nthe chain rule gives\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality ensures $0<\\cos\\theta\\le1$.",
++          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+           "uses": [
+             "1.1",
+             "3.1",
+@@ -150,7 +152,7 @@
+           "fact": "F1",
+           "source": "def-wolfe-and-strong-wolfe-conditions",
+           "source_section": "Definition",
+-          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the feasible ray\n$T_{x,p}:=\\{t\\ge0:x+tp\\in D\\}$ and, for $t\\in T_{x,p}$,\n$\\phi(t):=f(x+tp)$. Wherever $t$ is an interior point of $T_{x,p}$,\nthe chain rule gives\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality ensures $0<\\cos\\theta\\le1$.",
++          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+           "uses": [
+             "1.1"
+           ]
+@@ -254,7 +256,7 @@
+           "fact": "F1",
+           "source": "def-wolfe-and-strong-wolfe-conditions",
+           "source_section": "Definition",
+-          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the feasible ray\n$T_{x,p}:=\\{t\\ge0:x+tp\\in D\\}$ and, for $t\\in T_{x,p}$,\n$\\phi(t):=f(x+tp)$. Wherever $t$ is an interior point of $T_{x,p}$,\nthe chain rule gives\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality ensures $0<\\cos\\theta\\le1$.",
++          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+           "uses": [
+             "3.1"
+           ]
+@@ -457,7 +459,7 @@
+           "source_section": "Definition",
+           "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.\n\nFor an open $U\\subseteq\\mathbb R^n$ and $a\\in U$, a **local inverse of $f$ at\n$a$** is a function $g:W\\to V$ for open neighbourhoods $a\\in V\\subseteq U$\nand $f(a)\\in W\\subseteq\\mathbb R^n$ such that $f|_V:V\\to W$ is bijective and\n$g=(f|_V)^{-1}$. If both $f|_V$ and $g$ are $C^1$, this restriction is a\n**local diffeomorphism** at $a$.",
+           "uses": [
+-            "1.1"
++            "1.2"
+           ]
+         },
+         {
+@@ -466,7 +468,7 @@
+           "source_section": "Definition",
+           "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+           "uses": [
+-            "1.1"
++            "1.2"
+           ]
+         },
+         {
+@@ -475,14 +477,14 @@
+           "source_section": "Statement",
+           "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  Suppose $A:=Df(a)$ is invertible and put\n$B:=A^{-1}$.  Then there are $R>0$, $0\\le q<1$, and $C>0$ such that\n$\\overline B(a,R)\\subseteq U$, $\\|Bv\\|_2\\le C\\|v\\|_2$, and, for every\n$y\\in\\mathbb R^n$, the Newton map\n\n$$T_y(x):=x+B(y-f(x))$$\n\nsatisfies\n\n$$\\|T_y(x)-T_y(z)\\|_2\\le q\\|x-z\\|_2\\qquad(x,z\\in\\overline B(a,R)).$$\n\nMoreover $Df(x)$ is invertible for every $x\\in\\overline B(a,R)$ and\n\n$$\\|Df(x)^{-1}v\\|_2\\le\\frac C{1-q}\\|v\\|_2.$$",
+           "uses": [
+-            "1.1"
++            "1.2"
+           ]
+         },
+         {
+           "fact": "F4",
+           "source": "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+           "source_section": "Statement",
+-          "quote": "Let $U\\subseteq\\mathbb R^n$ be open, let $F:U\\to\\mathbb R^n$ be $C^1$, and\nwrite $J(x)=DF(x)$ as a matrix in the standard basis. For a matrix $A$ let\n$\\|A\\|_{\\rm op}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$. Let $K\\subseteq U$ be convex,\nlet $x_*,x\\in K$, and suppose for some $L\\ge0$ that\n$$\\|J(y)-J(z)\\|_{\\rm op}\\le L\\|y-z\\|_2\\qquad(y,z\\in K).$$\nThen\n$$\\|F(x)-F(x_*)-J(x)(x-x_*)\\|_2\\le\\frac{L}{2}\\|x-x_*\\|_2^2.$$",
++          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $F:U\\to\\mathbb R^n$ be\n$C^1$, and write $J(x)=DF(x)$ as a matrix in the standard basis. The matrix\nof $DF(x)$ agrees with the Jacobian matrix by\n[[thm-total-derivative-computes-directional-and-partial-derivatives]]. For a\nmatrix $A$ let\n$\\|A\\|_{\\rm op}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$. Let $K\\subseteq U$ be convex,\nlet $x_*,x\\in K$, and suppose for some $L\\ge0$ that\n$$\\|J(y)-J(z)\\|_{\\rm op}\\le L\\|y-z\\|_2\\qquad(y,z\\in K).$$\nThen\n$$\\|F(x)-F(x_*)-J(x)(x-x_*)\\|_2\\le\\frac{L}{2}\\|x-x_*\\|_2^2.$$",
+           "uses": [
+             "2.1",
+             "4.1"
+@@ -494,7 +496,7 @@
+           "source_section": "Definition",
+           "quote": "Let $n\\ge1$.  A linear map $A:\\mathbb R^n\\to\\mathbb R^n$\n([[def-euclidean-linear-map]]) is **invertible** when there is a linear map\n$B:\\mathbb R^n\\to\\mathbb R^n$ such that\n\n$$B(Au)=u\\quad\\hbox{and}\\quad A(Bu)=u\\qquad(u\\in\\mathbb R^n).$$\n\nThe map $B$ is unique: if $C$ has the same two properties, then\n$C=C\\circ(A\\circ B)=(C\\circ A)\\circ B=B$.  It is denoted $A^{-1}$.",
+           "uses": [
+-            "1.1"
++            "1.2"
+           ]
+         },
+         {
+@@ -503,7 +505,7 @@
+           "source_section": "Definition",
+           "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+           "uses": [
+-            "1.1",
++            "1.2",
+             "2.1"
+           ]
+         }
+@@ -511,8 +513,17 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
++          "claim": "If $n=0$, the space $\\mathbb R^0$ is a singleton. Its unique linear map is invertible, and $x=x_*=p=r=F(x)=0$ in this space. Take $r_0=R$, $C_F=1$, and $C=0$. Every claimed estimate is $0\\le0$, so the assertion holds. For the remainder assume $n\\ge1$, so the imported positive-dimensional Newton lemmas and operator-norm comparisons apply.",
++          "step": "1.1",
++          "inputs": [
++            "given",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-1-2",
++          "step": "1.2",
+           "claim": "Put $K_*:=\\|J_*^{-1}\\|_{\\rm op}$. The inverse identity gives $\\|e\\|_2=\\|J_*^{-1}J_*e\\|_2\\le K_*\\|e\\|_*$, and the operator-norm definition gives $\\|e\\|_*\\le\\|J_*\\|_{\\rm op}\\|e\\|_2$. By [F3], choose a smaller radius $r_1\\le R$ and $M>0$ such that every $J(x)$ on $\\overline B_2(x_*,r_1)$ is invertible and $\\|J(x)^{-1}\\|_{\\rm op}\\le M$. Decrease $r_1$ if necessary so $r_1\\le1$, and set $r_0:=r_1$.",
+-          "step": "1.1",
+           "inputs": [
+             "given",
+             "F1",
+@@ -531,16 +542,16 @@
+             "given",
+             "F4",
+             "F6",
+-            "step 1.1",
++            "step 1.2",
+             "algebra"
+           ]
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "The linear residual equation and steps 1.1–2.1 imply $\\|p\\|_2\\le M\\|J(x)p\\|_2\\le M(1+\\eta)\\|F(x)\\|_2\\le M(1+\\bar\\eta)C_F\\|e\\|_*$.",
++          "claim": "The linear residual equation and steps 1.2–2.1 imply $\\|p\\|_2\\le M\\|J(x)p\\|_2\\le M(1+\\eta)\\|F(x)\\|_2\\le M(1+\\bar\\eta)C_F\\|e\\|_*$.",
+           "step": "3.1",
+           "inputs": [
+-            "step 1.1",
++            "step 1.2",
+             "step 2.1",
+             "given",
+             "algebra"
+@@ -548,12 +559,12 @@
+         },
+         {
+           "id": "step-4-1",
+-          "claim": "Put $e_+:=x+p-x_*$. From $J(x)p=-F(x)+r$, $J_*e_+=J_*e-F(x)+r+(J_*-J(x))p$. Step 1.1 and [F4] give $\\|F(x)-J_*e\\|_2\\le(3L/2)\\|e\\|_2^2\\le(3L/2)K_*^2\\|e\\|_*^2$, so $\\|r\\|_2\\le\\eta\\|F(x)\\|_2\\le\\eta\\|e\\|_*+(3\\eta L K_*^2/2)\\|e\\|_*^2$. Also $\\|J_*-J(x)\\|_{\\rm op}\\le LK_*\\|e\\|_*$ and step 3.1 bounds $\\|p\\|_2\\le M(1+\\bar\\eta)C_F\\|e\\|_*$. The triangle inequality and $\\eta\\le\\bar\\eta$ yield $\\|e_+\\|_*\\le\\eta\\|e\\|_*+\\left(\\frac{3(1+\\bar\\eta)LK_*^2}{2}+LK_*M(1+\\bar\\eta)C_F\\right)\\|e\\|_*^2$. Set $C$ equal to this nonnegative coefficient; this is the claimed recurrence, and step 1.1 supplies invertibility.",
++          "claim": "Put $e_+:=x+p-x_*$. From $J(x)p=-F(x)+r$, $J_*e_+=J_*e-F(x)+r+(J_*-J(x))p$. Step 1.2 and [F4] give $\\|F(x)-J_*e\\|_2\\le(3L/2)\\|e\\|_2^2\\le(3L/2)K_*^2\\|e\\|_*^2$, so $\\|r\\|_2\\le\\eta\\|F(x)\\|_2\\le\\eta\\|e\\|_*+(3\\eta L K_*^2/2)\\|e\\|_*^2$. Also $\\|J_*-J(x)\\|_{\\rm op}\\le LK_*\\|e\\|_*$ and step 3.1 bounds $\\|p\\|_2\\le M(1+\\bar\\eta)C_F\\|e\\|_*$. The triangle inequality and $\\eta\\le\\bar\\eta$ yield $\\|e_+\\|_*\\le\\eta\\|e\\|_*+\\left(\\frac{3(1+\\bar\\eta)LK_*^2}{2}+LK_*M(1+\\bar\\eta)C_F\\right)\\|e\\|_*^2$. Set $C$ equal to this nonnegative coefficient; this is the claimed recurrence, and step 1.2 supplies invertibility.",
+           "step": "4.1",
+           "inputs": [
+             "given",
+             "F4",
+-            "step 1.1",
++            "step 1.2",
+             "step 3.1",
+             "algebra"
+           ]
+@@ -563,18 +574,18 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement assumes n>=1, a root, and an invertible Jacobian at that root."
++          "status": "checked",
++          "evidence": "Step 1.1 treats n=0 explicitly: the singleton zero-space recurrence has identically zero error; positive-dimensional inverse estimates start at step 1.2."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Step 4.1 handles x=x_* and shows p=0."
++          "evidence": "Step 1.1 treats n=0 explicitly: the singleton zero-space recurrence has identically zero error; positive-dimensional inverse estimates start at step 1.2."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Steps 1.1–4.1 use finite-dimensional estimates valid for n=1."
++          "evidence": "Steps 1.2–4.1 use finite-dimensional estimates valid for n=1."
+         },
+         {
+           "case": "degenerate",
+@@ -589,7 +600,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Step 1.1 chooses one radius; all later estimates are deterministic and choice-free."
++          "evidence": "Step 1.2 chooses one radius; all later estimates are deterministic and choice-free."
+         },
+         {
+           "case": "iff-forward",
+@@ -616,9 +627,9 @@
+           "fact": "F1",
+           "source": "lem-inexact-newton-error-recurrence-under-lipschitz-jacobian",
+           "source_section": "Statement",
+-          "quote": "Let $U\\subseteq\\mathbb R^n$ be open, $F:U\\to\\mathbb R^n$ be $C^1$, and\n$x_*\\in U$ satisfy $F(x_*)=0$ with $J_*:=DF(x_*)$ invertible. Suppose a\nclosed Euclidean ball $K=\\overline B_2(x_*,R)\\subseteq U$ is convex and\n$$\n\\|J(u)-J(v)\\|_{\\rm op}\\le L\\|u-v\\|_2\\qquad(u,v\\in K),\n$$\nwhere $J(x):=DF(x)$ and\n$\\|A\\|_{\\rm op}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$. Let\n$\\|v\\|_*:=\\|J_*v\\|_2$ and fix $\\bar\\eta\\in[0,1)$. There are constants\n$r_0>0$, $C_F>0$, and $C\\ge0$ such that, whenever\n$\\|x-x_*\\|_2\\le r_0$, $0\\le\\eta\\le\\bar\\eta$, and $p,r\\in\\mathbb R^n$\nsatisfy\n$$\nJ(x)p+F(x)=r,\\qquad \\|r\\|_2\\le\\eta\\|F(x)\\|_2,\n$$\nthen $J(x)$ is invertible,\n$\\|F(x)\\|_2\\le C_F\\|x-x_*\\|_*$, and\n$$\n\\|x+p-x_*\\|_*\\le\\bigl(\\eta+C\\|x-x_*\\|_*\\bigr)\\|x-x_*\\|_*.\n$$",
+-          "uses": [
+-            "1.1",
++          "quote": "Let $n\\ge0$ be an integer, let $U\\subseteq\\mathbb R^n$ be open, $F:U\\to\\mathbb R^n$ be $C^1$, and\n$x_*\\in U$ satisfy $F(x_*)=0$ with $J_*:=DF(x_*)$ invertible. Suppose a\nclosed Euclidean ball $K=\\overline B_2(x_*,R)\\subseteq U$ with $R>0$ is convex and\n$$\n\\|J(u)-J(v)\\|_{\\rm op}\\le L\\|u-v\\|_2\\qquad(u,v\\in K),\n$$\nwhere $J(x):=DF(x)$ and\n$\\|A\\|_{\\rm op}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$ for $n\\ge1$;\nfor $n=0$ set the norm of the unique linear map to $0$. Let\n$\\|v\\|_*:=\\|J_*v\\|_2$ and fix $\\bar\\eta\\in[0,1)$. There are constants\n$r_0>0$, $C_F>0$, and $C\\ge0$ such that, whenever\n$\\|x-x_*\\|_2\\le r_0$, $0\\le\\eta\\le\\bar\\eta$, and $p,r\\in\\mathbb R^n$\nsatisfy\n$$\nJ(x)p+F(x)=r,\\qquad \\|r\\|_2\\le\\eta\\|F(x)\\|_2,\n$$\nthen $J(x)$ is invertible,\n$\\|F(x)\\|_2\\le C_F\\|x-x_*\\|_*$, and\n$$\n\\|x+p-x_*\\|_*\\le\\bigl(\\eta+C\\|x-x_*\\|_*\\bigr)\\|x-x_*\\|_*.\n$$",
++          "uses": [
++            "1.2",
+             "2.1",
+             "3.1",
+             "3.2"
+@@ -650,13 +661,49 @@
+           "uses": [
+             "4.1"
+           ]
++        },
++        {
++          "fact": "F4",
++          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
++          "source_section": "Statement",
++          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
++          "uses": [
++            "4.1"
++          ]
++        },
++        {
++          "fact": "F5",
++          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
++          "source_section": "Statement",
++          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
++          "uses": [
++            "4.1"
++          ]
++        },
++        {
++          "fact": "F6",
++          "source": "thm-symmetry-of-higher-mixed-partials",
++          "source_section": "Statement",
++          "quote": "Let $k\\ge2$. If $f\\in C^k(U)$ for an open $U\\subseteq\\mathbb R^m$, then every iterated derivative of $f$ of order $k$ is unchanged by any permutation of its coordinate differentiations.",
++          "uses": [
++            "4.1"
++          ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
++          "claim": "If $n=0$, every iterate, residual and correction is the unique zero vector and $x_k=x_*$ for all $k$. Choose any $\\rho>0$ and $q=(1+\\bar\\eta)/2<1$; all error bounds are $0\\le0$. The exact-root alternative applies from the start, including the quadratic zero-error bound. For the remainder assume $n\\ge1$.",
++          "step": "1.1",
++          "inputs": [
++            "given",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-1-2",
++          "step": "1.2",
+           "claim": "Let $C_F,C$ and a radius $r_0$ be supplied by [F1], and let $K_*:=\\|J_*^{-1}\\|_{\\rm op}$. Set $q:=(1+\\bar\\eta)/2<1$. Choose $\\rho>0$ with $K_*\\rho\\le r_0$ and, when $C>0$, $C\\rho\\le(1-\\bar\\eta)/2$.",
+-          "step": "1.1",
+           "inputs": [
+             "given",
+             "F1",
+@@ -671,7 +718,7 @@
+           "inputs": [
+             "given",
+             "F1",
+-            "step 1.1",
++            "step 1.2",
+             "induction"
+           ]
+         },
+@@ -700,11 +747,14 @@
+         },
+         {
+           "id": "step-4-1",
+-          "claim": "In the specialization $F=\\nabla f$, [F3] identifies $J(x)$ with the Hessian in the stated convention. Invertibility gives $K_*^{-1}\\|e\\|_2\\le\\|e\\|_*\\le\\|J_*\\|_{\\rm op}\\|e\\|_2$ for every $e$. These fixed comparison constants transfer the linear, superlinear, and quadratic bounds from the $*$ norm to the Euclidean norm. The fixed-$\\bar\\eta$ geometric estimate of step 2.1 is linear convergence.",
++          "claim": "In the specialization $F=\\nabla f$ with $f\\in C^2(U)$, each $F_i=\\partial_i f$ has continuous first partials. By [F5] it is totally differentiable, and by [F4] the matrix of $DF$ has entries $J_{ij}=\\partial_j(\\partial_i f)$. By [F6] these equal $\\partial_i(\\partial_j f)$, the entries of the Hessian in [F3]. Thus $J(x)=\\nabla^2f(x)$. Invertibility gives $K_*^{-1}\\|e\\|_2\\le\\|e\\|_*\\le\\|J_*\\|_{\\rm op}\\|e\\|_2$ for every $e$. These fixed comparison constants transfer the linear, superlinear, and quadratic bounds from the $*$ norm to the Euclidean norm. The fixed-$\\bar\\eta$ geometric estimate of step 2.1 is linear convergence.",
+           "step": "4.1",
+           "inputs": [
+             "given",
+             "F3",
++            "F4",
++            "F5",
++            "F6",
+             "step 2.1",
+             "algebra"
+           ]
+@@ -714,18 +764,18 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The theorem assumes an open domain, a root, and an invertible derivative."
++          "status": "checked",
++          "evidence": "Step 1.1 treats n=0 explicitly: the singleton zero-space recurrence has identically zero error; positive-dimensional inverse estimates start at step 1.2."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-        "evidence": "Step 3.1 shows an exact root forces p=0 and all later iterates remain there."
++          "evidence": "Step 1.1 treats n=0 explicitly: the singleton zero-space recurrence has identically zero error; positive-dimensional inverse estimates start at step 1.2."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Steps 1.1–4.1 and the weighted norm apply in dimension one."
++          "evidence": "Steps 1.2–4.1 and the weighted norm apply in dimension one."
+         },
+         {
+           "case": "degenerate",
+@@ -735,12 +785,12 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Step 1.1 chooses the invariant radius inside the supplier ball."
++          "evidence": "Step 1.2 chooses the invariant radius inside the supplier ball."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Step 1.1 chooses one radius from fixed constants; no choice principle is used."
++          "evidence": "Step 1.2 chooses one radius from fixed constants; no choice principle is used."
+         },
+         {
+           "case": "iff-forward",
+@@ -787,7 +837,7 @@
+           "fact": "F3",
+           "source": "alg-inexact-newton-krylov-with-descent-safeguard",
+           "source_section": "Definition",
+-          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$\nbe twice continuously differentiable, meaning that $f$ is $C^1$ and its\ngradient is $C^1$.\nWrite $g(x):=\\nabla f(x)$ and $H(x):=\\nabla^2f(x)$ using\n[[def-jacobian-matrix-and-gradient]] and\n[[def-hessian-and-euclidean-critical-point]]. The identity matrix $I_n$ and\nmatrix-vector products have the convention of\n[[def-matrix-product-and-identity-matrix]]. Use the matrix-free access\nmodel of [[def-matrix-free-access-model-for-krylov-methods]] for products\n$v\\mapsto(H(x)+\\lambda I_nv)$.\n\n**Linear-solver input:** a fixed deterministic Krylov procedure $K$ which accepts a\nmatrix-free linear operator $A$, a right-hand side $b$, a tolerance $\\tau\\ge0$,\nand a finite inner-iteration budget $M\\in\\mathbb N_0$. It returns either\n`no-candidate` or `candidate` with a vector $p$ and an iteration count\n$m\\in\\{0,1,\\ldots,M\\}$ satisfying $p\\in K_m(A,b)$, where $K_m$ is as defined\nby [[def-krylov-subspace-of-a-matrix-and-start-vector]]. A candidate's residual\nstatus is never trusted: this algorithm recomputes\nthe requested residual using the supplied operator. **Other inputs:** $x_0\\in U$, outer update budget\n$N\\in\\mathbb N_0$, forcing values $\\eta_k\\in[0,\\bar\\eta]$ for a fixed\n$\\bar\\eta<1$, descent parameter $\\sigma\\in(0,1)$, regularization factor\n$\\gamma>1$, initial shift $\\lambda_0>0$, shift cap $\\lambda_{\\max}\\ge\\lambda_0$,\nregularized-attempt budget $J\\in\\mathbb N_0$, inner budget $M$, and the\nparameters and finite expansion/zoom budgets of\n[[alg-bracketing-zoom-strong-wolfe-search]]. **Output:** the last valid\niterate and one of `stationary`, `iteration-budget-exhausted`,\n`no-descent-direction`, or `line-search-failure`.\n\nAt iteration $k=0,1,\\ldots,N$:\n\n1. Compute $g_k:=g(x_k)$. If $g_k=0$, return $(x_k,\\texttt{stationary})$.\n   If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n2. Set $\\lambda:=0$. For $j=0,1,\\ldots,J$, call $K$ on\n   $A_\\lambda v:=H(x_k)v+\\lambda I_nv$, right-hand side $-g_k$, tolerance\n   $\\eta_k\\|g_k\\|_2$, and budget $M$. A `no-candidate` result is a rejected\n   attempt. If it returns a candidate $p$, compute\n   $r:=(H(x_k)+\\lambda I_n)p+g_k$. Accept this linear solve only when\n   $\\|r\\|_2\\le\\eta_k\\|g_k\\|_2$ and\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$; otherwise reject it.\n   If the attempt is rejected and either $j=J$ or $\\lambda=\\lambda_{\\max}$, stop the\n   regularization loop. Otherwise set\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\lambda_0\\}$ when $\\lambda=0$, and\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\gamma\\lambda\\}$ when $\\lambda>0$;\n   then continue with the next $j$.\n3. If no regularized attempt was accepted, set $p:=-g_k$ and check\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$. If this check fails,\n   return `no-descent-direction`. For the stated $\\sigma$ and $g_k\\ne0$ it\n   passes, but the check remains part of the procedure.\n4. Call [[alg-bracketing-zoom-strong-wolfe-search]] at $x_k$ in direction $p$.\n   If it returns failure, return $(x_k,\\texttt{line-search-failure})$ with\n   that failure status. Otherwise, for its returned strong Wolfe step $t_k$,\n   set $x_{k+1}:=x_k+t_kp$ and continue.\n\nThe first unregularized system uses the forcing residual\n$\\|H(x_k)p+g_k\\|_2\\le\\eta_k\\|g_k\\|_2$. A regularized attempt checks the\nresidual for the shifted system instead. Finite inner, regularization, and\nline-search budgets can return failure; the procedure makes no global\nconvergence claim. The local rate theorem applies only to an unshifted\n$\\lambda=0$ sequence taking full steps $t_k=1$ and remaining in its stated\nlocal tube. This algorithm does not assert that every run enters that branch.",
++          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$\nbe twice continuously differentiable, meaning that $f$ is $C^1$ and its\ngradient is $C^1$.\nWrite $g(x):=\\nabla f(x)$ and $H(x):=\\nabla^2f(x)$ using\n[[def-jacobian-matrix-and-gradient]] and\n[[def-hessian-and-euclidean-critical-point]]. The identity matrix $I_n$ and\nmatrix-vector products have the convention of\n[[def-matrix-product-and-identity-matrix]]. Use the matrix-free access\nmodel of [[def-matrix-free-access-model-for-krylov-methods]] for products\n$v\\mapsto(H(x)+\\lambda I_n)v$.\n\n**Linear-solver input:** a fixed deterministic Krylov procedure $K$ which accepts a\nmatrix-free linear operator $A$, a right-hand side $b$, a tolerance $\\tau\\ge0$,\nand a finite inner-iteration budget $M\\in\\mathbb N_0$. It returns either\n`no-candidate` or `candidate` with a vector $p$ and an iteration count\n$m\\in\\{0,1,\\ldots,M\\}$ satisfying $p\\in K_m(A,b)$, where $K_m$ is as defined\nby [[def-krylov-subspace-of-a-matrix-and-start-vector]]. A candidate's residual\nstatus is never trusted: this algorithm recomputes\nthe requested residual using the supplied operator. **Other inputs:** $x_0\\in U$, outer update budget\n$N\\in\\mathbb N_0$, forcing values $\\eta_k\\in[0,\\bar\\eta]$ for a fixed\n$0\\le\\bar\\eta<1$, descent parameter $\\sigma\\in(0,1)$, regularization factor\n$\\gamma>1$, initial shift $\\lambda_0>0$, shift cap $\\lambda_{\\max}\\ge\\lambda_0$,\nregularized-attempt budget $J\\in\\mathbb N_0$, inner budget $M$, and the\nparameters and finite expansion/zoom budgets of\n[[alg-bracketing-zoom-strong-wolfe-search]]. **Output:** the last valid\niterate and one of `stationary`, `iteration-budget-exhausted`,\n`no-descent-direction`, or `line-search-failure`; in the last case also\nreturn the underlying line-search failure cause.\n\nAt iteration $k=0,1,\\ldots,N$:\n\n1. Compute $g_k:=g(x_k)$. If $g_k=0$, return $(x_k,\\texttt{stationary})$.\n   If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n2. Set $\\lambda:=0$. For $j=0,1,\\ldots,J$, call $K$ on\n   $A_\\lambda v:=H(x_k)v+\\lambda I_nv$, right-hand side $-g_k$, tolerance\n   $\\eta_k\\|g_k\\|_2$, and budget $M$. A `no-candidate` result is a rejected\n   attempt. If it returns a candidate $p$, compute\n   $r:=(H(x_k)+\\lambda I_n)p+g_k$. Accept this linear solve only when\n   $\\|r\\|_2\\le\\eta_k\\|g_k\\|_2$ and\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$; otherwise reject it.\n   If the attempt is rejected and either $j=J$ or $\\lambda=\\lambda_{\\max}$, stop the\n   regularization loop. Otherwise set\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\lambda_0\\}$ when $\\lambda=0$, and\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\gamma\\lambda\\}$ when $\\lambda>0$;\n   then continue with the next $j$.\n3. If no regularized attempt was accepted, set $p:=-g_k$ and check\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$. If this check fails,\n   return `no-descent-direction`. For the stated $\\sigma$ and $g_k\\ne0$ it\n   passes, but the check remains part of the procedure.\n4. Call [[alg-bracketing-zoom-strong-wolfe-search]] at $x_k$ in direction $p$.\n   If it returns failure, return $(x_k,\\texttt{line-search-failure},s)$, where $s$ is\n   the returned line-search failure cause. Otherwise, for its returned strong Wolfe step $t_k$,\n   set $x_{k+1}:=x_k+t_kp$ and continue.\n\nThe first unregularized system uses the forcing residual\n$\\|H(x_k)p+g_k\\|_2\\le\\eta_k\\|g_k\\|_2$. A regularized attempt checks the\nresidual for the shifted system instead. Finite inner, regularization, and\nline-search budgets can return failure; the procedure makes no global\nconvergence claim. The local rate theorem applies only to an unshifted\n$\\lambda=0$ sequence taking full steps $t_k=1$ and remaining in its stated\nlocal tube. This algorithm does not assert that every run enters that branch.",
+           "uses": [
+             "1.2"
+           ]
+@@ -796,7 +846,7 @@
+           "fact": "F4",
+           "source": "alg-bracketing-zoom-strong-wolfe-search",
+           "source_section": "Definition",
+-          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$,\nlet $x\\in D$, and let $p\\in\\mathbb R^n$ satisfy\n$\\langle\\nabla f(x),p\\rangle<0$. Fix $0<c_1<c_2<1/2$ and finite\nbudgets $E,Z\\in\\mathbb N$ for expansion and zoom trials. Use the functions\n$\\phi(t)=f(x+tp)$ and $\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$ from\n[[def-wolfe-and-strong-wolfe-conditions]]. **Output:** either a positive\nstrong Wolfe step, or one of `invalid-direction`, `domain-exit`, and\n`evaluation-budget-exhausted`.\n\n1. If $\\langle\\nabla f(x),p\\rangle\\ge0$, return `invalid-direction`.\n   Set $a:=0$ and $t:=1$. For at most $E$ expansion trials, in order:\n   - If $x+tp\\notin D$, return `domain-exit` without evaluating the trial.\n   - Evaluate $\\phi(t)$ and $\\phi'(t)$. If\n     $\\phi(t)>\\phi(0)+c_1t\\phi'(0)$ or $\\phi(t)\\ge\\phi(a)$, call the zoom\n     procedure below with the ordered endpoint pair $(a,t)$ and return its\n     output.\n   - If $|\\phi'(t)|\\le c_2|\\phi'(0)|$, return $t$ as a strong Wolfe step.\n   - If $\\phi'(t)\\ge0$, call zoom with the reversed endpoint pair $(t,a)$ and\n     return its output.\n   - Otherwise set $a:=t$ and $t:=2t$.\n2. If the expansion budget is exhausted, return `evaluation-budget-exhausted`.\n\nFor `zoom(a,b)`, preserve the endpoint order even when $b<a$. For at most\n$Z$ zoom trials, in order:\n\n1. Set $m:=(a+b)/2$. If $x+mp\\notin D$, return `domain-exit` without\n   evaluating the trial.\n2. Evaluate $\\phi(m)$ and $\\phi'(m)$. If\n   $\\phi(m)>\\phi(0)+c_1m\\phi'(0)$ or $\\phi(m)\\ge\\phi(a)$, set $b:=m$.\n   Otherwise, if $|\\phi'(m)|\\le c_2|\\phi'(0)|$, return $m$ as a strong Wolfe\n   step. In the remaining branch, if $\\phi'(m)(b-a)\\ge0$, first set\n   $b:=a$; then set $a:=m$.\n3. If the zoom budget is exhausted, return `evaluation-budget-exhausted`.\n\nThe procedure returns a step only after both strong Wolfe inequalities have\nbeen checked. Finite budgets and domain exits may return failure even when a\nstrong Wolfe step exists; no convergence claim follows from the procedure\nalone.",
++          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$,\nlet $x\\in D$, and let $p\\in\\mathbb R^n$ be arbitrary. Fix $0<c_1<c_2<1/2$ and finite\nbudgets $E,Z\\in\\mathbb N$ for expansion and zoom trials. After the direction check passes, use the functions\n$\\phi(t)=f(x+tp)$ and $\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$ from\n[[def-wolfe-and-strong-wolfe-conditions]]. **Output:** either a positive\nstrong Wolfe step, or one of `invalid-direction`, `domain-exit`, and\n`evaluation-budget-exhausted`.\n\n1. If $\\langle\\nabla f(x),p\\rangle\\ge0$, return `invalid-direction`.\n   Set $a:=0$ and $t:=1$. For at most $E$ expansion trials, in order:\n   - If $x+tp\\notin D$, return `domain-exit` without evaluating the trial.\n   - Evaluate $\\phi(t)$ and $\\phi'(t)$. If\n     $\\phi(t)>\\phi(0)+c_1t\\phi'(0)$ or $\\phi(t)\\ge\\phi(a)$, call the zoom\n     procedure below with the ordered endpoint pair $(a,t)$ and return its\n     output.\n   - If $|\\phi'(t)|\\le c_2|\\phi'(0)|$, return $t$ as a strong Wolfe step.\n   - If $\\phi'(t)\\ge0$, call zoom with the reversed endpoint pair $(t,a)$ and\n     return its output.\n   - Otherwise set $a:=t$ and $t:=2t$.\n2. If the expansion budget is exhausted, return `evaluation-budget-exhausted`.\n\nFor `zoom(a,b)`, preserve the endpoint order even when $b<a$. For at most\n$Z$ zoom trials, in order:\n\n1. Set $m:=(a+b)/2$. If $x+mp\\notin D$, return `domain-exit` without\n   evaluating the trial.\n2. Evaluate $\\phi(m)$ and $\\phi'(m)$. If\n   $\\phi(m)>\\phi(0)+c_1m\\phi'(0)$ or $\\phi(m)\\ge\\phi(a)$, set $b:=m$.\n   Otherwise, if $|\\phi'(m)|\\le c_2|\\phi'(0)|$, return $m$ as a strong Wolfe\n   step. In the remaining branch, if $\\phi'(m)(b-a)\\ge0$, first set\n   $b:=a$; then set $a:=m$.\n3. If the zoom budget is exhausted, return `evaluation-budget-exhausted`.\n\nThe procedure returns a step only after both strong Wolfe inequalities have\nbeen checked. Finite budgets and domain exits may return failure even when a\nstrong Wolfe step exists; no convergence claim follows from the procedure\nalone.",
+           "uses": [
+             "3.1"
+           ]
+@@ -805,7 +855,7 @@
+           "fact": "F5",
+           "source": "def-wolfe-and-strong-wolfe-conditions",
+           "source_section": "Definition",
+-          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the feasible ray\n$T_{x,p}:=\\{t\\ge0:x+tp\\in D\\}$ and, for $t\\in T_{x,p}$,\n$\\phi(t):=f(x+tp)$. Wherever $t$ is an interior point of $T_{x,p}$,\nthe chain rule gives\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality ensures $0<\\cos\\theta\\le1$.",
++          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+           "uses": [
+             "2.1",
+             "2.2"
+@@ -826,7 +876,7 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "Solving $Hp=-g$ gives $p=(11/445,847/2225)$; substitution into the matrix product verifies the equation exactly. Hence the recomputed unshifted residual is zero and $g^Tp=-86394/2225<-38$. Also $\\|g\\|_2<234$ and $\\|p\\|_2<41/100$, so $g^Tp<-38<-(1/10)(234)(41/100)<-\\sigma\\|g\\|_2\\|p\\|_2$. The descent safeguard accepts this direction.",
++          "claim": "With $b=-g$, direct calculation gives $\\det[b\\ Hb]=-14221856/5\\ne0$ and $\\det H=35600\\ne0$. Thus $V$ and $V^THV$ are invertible. The specified solver returns $p\\in K_2(H,b)$ with $V^T(Hp-b)=0$; since $V$ is invertible, $Hp=b$. Solving $Hp=-g$ gives $p=(11/445,847/2225)$; substitution into the matrix product verifies the equation exactly. Hence the recomputed unshifted residual is zero and $g^Tp=-86394/2225<-38$. Also $\\|g\\|_2<234$ and $\\|p\\|_2<41/100$, so $g^Tp<-38<-(1/10)(234)(41/100)<-\\sigma\\|g\\|_2\\|p\\|_2$. The descent safeguard accepts this direction.",
+           "step": "1.2",
+           "inputs": [
+             "given",
+@@ -855,8 +905,7 @@
+             "F1",
+             "F5",
+             "step 1.2",
+-            "algebra",
+-            "step 1.1"
++            "algebra"
+           ]
+         },
+         {
+@@ -895,12 +944,12 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-        "evidence": "Step 3.1 checks the initial t=1 trial and both Wolfe inequalities."
++          "evidence": "Step 3.1 checks the initial t=1 trial and both Wolfe inequalities."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-        "evidence": "Steps 1.1–3.1 use rational arithmetic and no choice principle."
++          "evidence": "Steps 1.1–3.1 use rational arithmetic and no choice principle."
+         },
+         {
+           "case": "iff-forward",
+@@ -945,7 +994,7 @@
+           "fact": "F3",
+           "source": "alg-inexact-newton-krylov-with-descent-safeguard",
+           "source_section": "Definition",
+-          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$\nbe twice continuously differentiable, meaning that $f$ is $C^1$ and its\ngradient is $C^1$.\nWrite $g(x):=\\nabla f(x)$ and $H(x):=\\nabla^2f(x)$ using\n[[def-jacobian-matrix-and-gradient]] and\n[[def-hessian-and-euclidean-critical-point]]. The identity matrix $I_n$ and\nmatrix-vector products have the convention of\n[[def-matrix-product-and-identity-matrix]]. Use the matrix-free access\nmodel of [[def-matrix-free-access-model-for-krylov-methods]] for products\n$v\\mapsto(H(x)+\\lambda I_nv)$.\n\n**Linear-solver input:** a fixed deterministic Krylov procedure $K$ which accepts a\nmatrix-free linear operator $A$, a right-hand side $b$, a tolerance $\\tau\\ge0$,\nand a finite inner-iteration budget $M\\in\\mathbb N_0$. It returns either\n`no-candidate` or `candidate` with a vector $p$ and an iteration count\n$m\\in\\{0,1,\\ldots,M\\}$ satisfying $p\\in K_m(A,b)$, where $K_m$ is as defined\nby [[def-krylov-subspace-of-a-matrix-and-start-vector]]. A candidate's residual\nstatus is never trusted: this algorithm recomputes\nthe requested residual using the supplied operator. **Other inputs:** $x_0\\in U$, outer update budget\n$N\\in\\mathbb N_0$, forcing values $\\eta_k\\in[0,\\bar\\eta]$ for a fixed\n$\\bar\\eta<1$, descent parameter $\\sigma\\in(0,1)$, regularization factor\n$\\gamma>1$, initial shift $\\lambda_0>0$, shift cap $\\lambda_{\\max}\\ge\\lambda_0$,\nregularized-attempt budget $J\\in\\mathbb N_0$, inner budget $M$, and the\nparameters and finite expansion/zoom budgets of\n[[alg-bracketing-zoom-strong-wolfe-search]]. **Output:** the last valid\niterate and one of `stationary`, `iteration-budget-exhausted`,\n`no-descent-direction`, or `line-search-failure`.\n\nAt iteration $k=0,1,\\ldots,N$:\n\n1. Compute $g_k:=g(x_k)$. If $g_k=0$, return $(x_k,\\texttt{stationary})$.\n   If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n2. Set $\\lambda:=0$. For $j=0,1,\\ldots,J$, call $K$ on\n   $A_\\lambda v:=H(x_k)v+\\lambda I_nv$, right-hand side $-g_k$, tolerance\n   $\\eta_k\\|g_k\\|_2$, and budget $M$. A `no-candidate` result is a rejected\n   attempt. If it returns a candidate $p$, compute\n   $r:=(H(x_k)+\\lambda I_n)p+g_k$. Accept this linear solve only when\n   $\\|r\\|_2\\le\\eta_k\\|g_k\\|_2$ and\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$; otherwise reject it.\n   If the attempt is rejected and either $j=J$ or $\\lambda=\\lambda_{\\max}$, stop the\n   regularization loop. Otherwise set\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\lambda_0\\}$ when $\\lambda=0$, and\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\gamma\\lambda\\}$ when $\\lambda>0$;\n   then continue with the next $j$.\n3. If no regularized attempt was accepted, set $p:=-g_k$ and check\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$. If this check fails,\n   return `no-descent-direction`. For the stated $\\sigma$ and $g_k\\ne0$ it\n   passes, but the check remains part of the procedure.\n4. Call [[alg-bracketing-zoom-strong-wolfe-search]] at $x_k$ in direction $p$.\n   If it returns failure, return $(x_k,\\texttt{line-search-failure})$ with\n   that failure status. Otherwise, for its returned strong Wolfe step $t_k$,\n   set $x_{k+1}:=x_k+t_kp$ and continue.\n\nThe first unregularized system uses the forcing residual\n$\\|H(x_k)p+g_k\\|_2\\le\\eta_k\\|g_k\\|_2$. A regularized attempt checks the\nresidual for the shifted system instead. Finite inner, regularization, and\nline-search budgets can return failure; the procedure makes no global\nconvergence claim. The local rate theorem applies only to an unshifted\n$\\lambda=0$ sequence taking full steps $t_k=1$ and remaining in its stated\nlocal tube. This algorithm does not assert that every run enters that branch.",
++          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$\nbe twice continuously differentiable, meaning that $f$ is $C^1$ and its\ngradient is $C^1$.\nWrite $g(x):=\\nabla f(x)$ and $H(x):=\\nabla^2f(x)$ using\n[[def-jacobian-matrix-and-gradient]] and\n[[def-hessian-and-euclidean-critical-point]]. The identity matrix $I_n$ and\nmatrix-vector products have the convention of\n[[def-matrix-product-and-identity-matrix]]. Use the matrix-free access\nmodel of [[def-matrix-free-access-model-for-krylov-methods]] for products\n$v\\mapsto(H(x)+\\lambda I_n)v$.\n\n**Linear-solver input:** a fixed deterministic Krylov procedure $K$ which accepts a\nmatrix-free linear operator $A$, a right-hand side $b$, a tolerance $\\tau\\ge0$,\nand a finite inner-iteration budget $M\\in\\mathbb N_0$. It returns either\n`no-candidate` or `candidate` with a vector $p$ and an iteration count\n$m\\in\\{0,1,\\ldots,M\\}$ satisfying $p\\in K_m(A,b)$, where $K_m$ is as defined\nby [[def-krylov-subspace-of-a-matrix-and-start-vector]]. A candidate's residual\nstatus is never trusted: this algorithm recomputes\nthe requested residual using the supplied operator. **Other inputs:** $x_0\\in U$, outer update budget\n$N\\in\\mathbb N_0$, forcing values $\\eta_k\\in[0,\\bar\\eta]$ for a fixed\n$0\\le\\bar\\eta<1$, descent parameter $\\sigma\\in(0,1)$, regularization factor\n$\\gamma>1$, initial shift $\\lambda_0>0$, shift cap $\\lambda_{\\max}\\ge\\lambda_0$,\nregularized-attempt budget $J\\in\\mathbb N_0$, inner budget $M$, and the\nparameters and finite expansion/zoom budgets of\n[[alg-bracketing-zoom-strong-wolfe-search]]. **Output:** the last valid\niterate and one of `stationary`, `iteration-budget-exhausted`,\n`no-descent-direction`, or `line-search-failure`; in the last case also\nreturn the underlying line-search failure cause.\n\nAt iteration $k=0,1,\\ldots,N$:\n\n1. Compute $g_k:=g(x_k)$. If $g_k=0$, return $(x_k,\\texttt{stationary})$.\n   If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n2. Set $\\lambda:=0$. For $j=0,1,\\ldots,J$, call $K$ on\n   $A_\\lambda v:=H(x_k)v+\\lambda I_nv$, right-hand side $-g_k$, tolerance\n   $\\eta_k\\|g_k\\|_2$, and budget $M$. A `no-candidate` result is a rejected\n   attempt. If it returns a candidate $p$, compute\n   $r:=(H(x_k)+\\lambda I_n)p+g_k$. Accept this linear solve only when\n   $\\|r\\|_2\\le\\eta_k\\|g_k\\|_2$ and\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$; otherwise reject it.\n   If the attempt is rejected and either $j=J$ or $\\lambda=\\lambda_{\\max}$, stop the\n   regularization loop. Otherwise set\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\lambda_0\\}$ when $\\lambda=0$, and\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\gamma\\lambda\\}$ when $\\lambda>0$;\n   then continue with the next $j$.\n3. If no regularized attempt was accepted, set $p:=-g_k$ and check\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$. If this check fails,\n   return `no-descent-direction`. For the stated $\\sigma$ and $g_k\\ne0$ it\n   passes, but the check remains part of the procedure.\n4. Call [[alg-bracketing-zoom-strong-wolfe-search]] at $x_k$ in direction $p$.\n   If it returns failure, return $(x_k,\\texttt{line-search-failure},s)$, where $s$ is\n   the returned line-search failure cause. Otherwise, for its returned strong Wolfe step $t_k$,\n   set $x_{k+1}:=x_k+t_kp$ and continue.\n\nThe first unregularized system uses the forcing residual\n$\\|H(x_k)p+g_k\\|_2\\le\\eta_k\\|g_k\\|_2$. A regularized attempt checks the\nresidual for the shifted system instead. Finite inner, regularization, and\nline-search budgets can return failure; the procedure makes no global\nconvergence claim. The local rate theorem applies only to an unshifted\n$\\lambda=0$ sequence taking full steps $t_k=1$ and remaining in its stated\nlocal tube. This algorithm does not assert that every run enters that branch.",
+           "uses": [
+             "2.1",
+             "2.2"
+@@ -975,7 +1024,7 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "The unshifted Newton solve $Hp=-g$ gives $p=(-1,-1/100)$ and $g^Tp=99/50>0$. It is therefore not a descent direction and fails the algorithm's descent check.",
++          "claim": "For $b=-g=(2,-2)$ and either $A=H$ or $A=H+3I_2$, $\\det[b\\ Ab]=-808\\ne0$, and both operators are invertible. Hence the specified projected solver returns the exact solution $Ap=b$ in $K_2(A,b)$, using $m=2\\le M$. The unshifted Newton solve $Hp=-g$ gives $p=(-1,-1/100)$ and $g^Tp=99/50>0$. It is therefore not a descent direction and fails the algorithm's descent check.",
+           "step": "2.1",
+           "inputs": [
+             "given",
+@@ -1026,7 +1075,7 @@
+         {
+           "case": "degenerate",
+           "status": "checked",
+-        "evidence": "Steps 1.1–2.2 give an invertible shifted matrix and a nonzero descent direction."
++          "evidence": "Steps 1.1–2.2 give an invertible shifted matrix and a nonzero descent direction."
+         },
+         {
+           "case": "endpoints",
+@@ -1081,7 +1130,7 @@
+           "fact": "F3",
+           "source": "alg-inexact-newton-krylov-with-descent-safeguard",
+           "source_section": "Definition",
+-          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$\nbe twice continuously differentiable, meaning that $f$ is $C^1$ and its\ngradient is $C^1$.\nWrite $g(x):=\\nabla f(x)$ and $H(x):=\\nabla^2f(x)$ using\n[[def-jacobian-matrix-and-gradient]] and\n[[def-hessian-and-euclidean-critical-point]]. The identity matrix $I_n$ and\nmatrix-vector products have the convention of\n[[def-matrix-product-and-identity-matrix]]. Use the matrix-free access\nmodel of [[def-matrix-free-access-model-for-krylov-methods]] for products\n$v\\mapsto(H(x)+\\lambda I_nv)$.\n\n**Linear-solver input:** a fixed deterministic Krylov procedure $K$ which accepts a\nmatrix-free linear operator $A$, a right-hand side $b$, a tolerance $\\tau\\ge0$,\nand a finite inner-iteration budget $M\\in\\mathbb N_0$. It returns either\n`no-candidate` or `candidate` with a vector $p$ and an iteration count\n$m\\in\\{0,1,\\ldots,M\\}$ satisfying $p\\in K_m(A,b)$, where $K_m$ is as defined\nby [[def-krylov-subspace-of-a-matrix-and-start-vector]]. A candidate's residual\nstatus is never trusted: this algorithm recomputes\nthe requested residual using the supplied operator. **Other inputs:** $x_0\\in U$, outer update budget\n$N\\in\\mathbb N_0$, forcing values $\\eta_k\\in[0,\\bar\\eta]$ for a fixed\n$\\bar\\eta<1$, descent parameter $\\sigma\\in(0,1)$, regularization factor\n$\\gamma>1$, initial shift $\\lambda_0>0$, shift cap $\\lambda_{\\max}\\ge\\lambda_0$,\nregularized-attempt budget $J\\in\\mathbb N_0$, inner budget $M$, and the\nparameters and finite expansion/zoom budgets of\n[[alg-bracketing-zoom-strong-wolfe-search]]. **Output:** the last valid\niterate and one of `stationary`, `iteration-budget-exhausted`,\n`no-descent-direction`, or `line-search-failure`.\n\nAt iteration $k=0,1,\\ldots,N$:\n\n1. Compute $g_k:=g(x_k)$. If $g_k=0$, return $(x_k,\\texttt{stationary})$.\n   If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n2. Set $\\lambda:=0$. For $j=0,1,\\ldots,J$, call $K$ on\n   $A_\\lambda v:=H(x_k)v+\\lambda I_nv$, right-hand side $-g_k$, tolerance\n   $\\eta_k\\|g_k\\|_2$, and budget $M$. A `no-candidate` result is a rejected\n   attempt. If it returns a candidate $p$, compute\n   $r:=(H(x_k)+\\lambda I_n)p+g_k$. Accept this linear solve only when\n   $\\|r\\|_2\\le\\eta_k\\|g_k\\|_2$ and\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$; otherwise reject it.\n   If the attempt is rejected and either $j=J$ or $\\lambda=\\lambda_{\\max}$, stop the\n   regularization loop. Otherwise set\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\lambda_0\\}$ when $\\lambda=0$, and\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\gamma\\lambda\\}$ when $\\lambda>0$;\n   then continue with the next $j$.\n3. If no regularized attempt was accepted, set $p:=-g_k$ and check\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$. If this check fails,\n   return `no-descent-direction`. For the stated $\\sigma$ and $g_k\\ne0$ it\n   passes, but the check remains part of the procedure.\n4. Call [[alg-bracketing-zoom-strong-wolfe-search]] at $x_k$ in direction $p$.\n   If it returns failure, return $(x_k,\\texttt{line-search-failure})$ with\n   that failure status. Otherwise, for its returned strong Wolfe step $t_k$,\n   set $x_{k+1}:=x_k+t_kp$ and continue.\n\nThe first unregularized system uses the forcing residual\n$\\|H(x_k)p+g_k\\|_2\\le\\eta_k\\|g_k\\|_2$. A regularized attempt checks the\nresidual for the shifted system instead. Finite inner, regularization, and\nline-search budgets can return failure; the procedure makes no global\nconvergence claim. The local rate theorem applies only to an unshifted\n$\\lambda=0$ sequence taking full steps $t_k=1$ and remaining in its stated\nlocal tube. This algorithm does not assert that every run enters that branch.",
++          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$\nbe twice continuously differentiable, meaning that $f$ is $C^1$ and its\ngradient is $C^1$.\nWrite $g(x):=\\nabla f(x)$ and $H(x):=\\nabla^2f(x)$ using\n[[def-jacobian-matrix-and-gradient]] and\n[[def-hessian-and-euclidean-critical-point]]. The identity matrix $I_n$ and\nmatrix-vector products have the convention of\n[[def-matrix-product-and-identity-matrix]]. Use the matrix-free access\nmodel of [[def-matrix-free-access-model-for-krylov-methods]] for products\n$v\\mapsto(H(x)+\\lambda I_n)v$.\n\n**Linear-solver input:** a fixed deterministic Krylov procedure $K$ which accepts a\nmatrix-free linear operator $A$, a right-hand side $b$, a tolerance $\\tau\\ge0$,\nand a finite inner-iteration budget $M\\in\\mathbb N_0$. It returns either\n`no-candidate` or `candidate` with a vector $p$ and an iteration count\n$m\\in\\{0,1,\\ldots,M\\}$ satisfying $p\\in K_m(A,b)$, where $K_m$ is as defined\nby [[def-krylov-subspace-of-a-matrix-and-start-vector]]. A candidate's residual\nstatus is never trusted: this algorithm recomputes\nthe requested residual using the supplied operator. **Other inputs:** $x_0\\in U$, outer update budget\n$N\\in\\mathbb N_0$, forcing values $\\eta_k\\in[0,\\bar\\eta]$ for a fixed\n$0\\le\\bar\\eta<1$, descent parameter $\\sigma\\in(0,1)$, regularization factor\n$\\gamma>1$, initial shift $\\lambda_0>0$, shift cap $\\lambda_{\\max}\\ge\\lambda_0$,\nregularized-attempt budget $J\\in\\mathbb N_0$, inner budget $M$, and the\nparameters and finite expansion/zoom budgets of\n[[alg-bracketing-zoom-strong-wolfe-search]]. **Output:** the last valid\niterate and one of `stationary`, `iteration-budget-exhausted`,\n`no-descent-direction`, or `line-search-failure`; in the last case also\nreturn the underlying line-search failure cause.\n\nAt iteration $k=0,1,\\ldots,N$:\n\n1. Compute $g_k:=g(x_k)$. If $g_k=0$, return $(x_k,\\texttt{stationary})$.\n   If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n2. Set $\\lambda:=0$. For $j=0,1,\\ldots,J$, call $K$ on\n   $A_\\lambda v:=H(x_k)v+\\lambda I_nv$, right-hand side $-g_k$, tolerance\n   $\\eta_k\\|g_k\\|_2$, and budget $M$. A `no-candidate` result is a rejected\n   attempt. If it returns a candidate $p$, compute\n   $r:=(H(x_k)+\\lambda I_n)p+g_k$. Accept this linear solve only when\n   $\\|r\\|_2\\le\\eta_k\\|g_k\\|_2$ and\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$; otherwise reject it.\n   If the attempt is rejected and either $j=J$ or $\\lambda=\\lambda_{\\max}$, stop the\n   regularization loop. Otherwise set\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\lambda_0\\}$ when $\\lambda=0$, and\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\gamma\\lambda\\}$ when $\\lambda>0$;\n   then continue with the next $j$.\n3. If no regularized attempt was accepted, set $p:=-g_k$ and check\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$. If this check fails,\n   return `no-descent-direction`. For the stated $\\sigma$ and $g_k\\ne0$ it\n   passes, but the check remains part of the procedure.\n4. Call [[alg-bracketing-zoom-strong-wolfe-search]] at $x_k$ in direction $p$.\n   If it returns failure, return $(x_k,\\texttt{line-search-failure},s)$, where $s$ is\n   the returned line-search failure cause. Otherwise, for its returned strong Wolfe step $t_k$,\n   set $x_{k+1}:=x_k+t_kp$ and continue.\n\nThe first unregularized system uses the forcing residual\n$\\|H(x_k)p+g_k\\|_2\\le\\eta_k\\|g_k\\|_2$. A regularized attempt checks the\nresidual for the shifted system instead. Finite inner, regularization, and\nline-search budgets can return failure; the procedure makes no global\nconvergence claim. The local rate theorem applies only to an unshifted\n$\\lambda=0$ sequence taking full steps $t_k=1$ and remaining in its stated\nlocal tube. This algorithm does not assert that every run enters that branch.",
+           "uses": [
+             "2.1",
+             "3.1"
+@@ -1091,7 +1140,7 @@
+           "fact": "F4",
+           "source": "alg-bracketing-zoom-strong-wolfe-search",
+           "source_section": "Definition",
+-          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$,\nlet $x\\in D$, and let $p\\in\\mathbb R^n$ satisfy\n$\\langle\\nabla f(x),p\\rangle<0$. Fix $0<c_1<c_2<1/2$ and finite\nbudgets $E,Z\\in\\mathbb N$ for expansion and zoom trials. Use the functions\n$\\phi(t)=f(x+tp)$ and $\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$ from\n[[def-wolfe-and-strong-wolfe-conditions]]. **Output:** either a positive\nstrong Wolfe step, or one of `invalid-direction`, `domain-exit`, and\n`evaluation-budget-exhausted`.\n\n1. If $\\langle\\nabla f(x),p\\rangle\\ge0$, return `invalid-direction`.\n   Set $a:=0$ and $t:=1$. For at most $E$ expansion trials, in order:\n   - If $x+tp\\notin D$, return `domain-exit` without evaluating the trial.\n   - Evaluate $\\phi(t)$ and $\\phi'(t)$. If\n     $\\phi(t)>\\phi(0)+c_1t\\phi'(0)$ or $\\phi(t)\\ge\\phi(a)$, call the zoom\n     procedure below with the ordered endpoint pair $(a,t)$ and return its\n     output.\n   - If $|\\phi'(t)|\\le c_2|\\phi'(0)|$, return $t$ as a strong Wolfe step.\n   - If $\\phi'(t)\\ge0$, call zoom with the reversed endpoint pair $(t,a)$ and\n     return its output.\n   - Otherwise set $a:=t$ and $t:=2t$.\n2. If the expansion budget is exhausted, return `evaluation-budget-exhausted`.\n\nFor `zoom(a,b)`, preserve the endpoint order even when $b<a$. For at most\n$Z$ zoom trials, in order:\n\n1. Set $m:=(a+b)/2$. If $x+mp\\notin D$, return `domain-exit` without\n   evaluating the trial.\n2. Evaluate $\\phi(m)$ and $\\phi'(m)$. If\n   $\\phi(m)>\\phi(0)+c_1m\\phi'(0)$ or $\\phi(m)\\ge\\phi(a)$, set $b:=m$.\n   Otherwise, if $|\\phi'(m)|\\le c_2|\\phi'(0)|$, return $m$ as a strong Wolfe\n   step. In the remaining branch, if $\\phi'(m)(b-a)\\ge0$, first set\n   $b:=a$; then set $a:=m$.\n3. If the zoom budget is exhausted, return `evaluation-budget-exhausted`.\n\nThe procedure returns a step only after both strong Wolfe inequalities have\nbeen checked. Finite budgets and domain exits may return failure even when a\nstrong Wolfe step exists; no convergence claim follows from the procedure\nalone.",
++          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$,\nlet $x\\in D$, and let $p\\in\\mathbb R^n$ be arbitrary. Fix $0<c_1<c_2<1/2$ and finite\nbudgets $E,Z\\in\\mathbb N$ for expansion and zoom trials. After the direction check passes, use the functions\n$\\phi(t)=f(x+tp)$ and $\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$ from\n[[def-wolfe-and-strong-wolfe-conditions]]. **Output:** either a positive\nstrong Wolfe step, or one of `invalid-direction`, `domain-exit`, and\n`evaluation-budget-exhausted`.\n\n1. If $\\langle\\nabla f(x),p\\rangle\\ge0$, return `invalid-direction`.\n   Set $a:=0$ and $t:=1$. For at most $E$ expansion trials, in order:\n   - If $x+tp\\notin D$, return `domain-exit` without evaluating the trial.\n   - Evaluate $\\phi(t)$ and $\\phi'(t)$. If\n     $\\phi(t)>\\phi(0)+c_1t\\phi'(0)$ or $\\phi(t)\\ge\\phi(a)$, call the zoom\n     procedure below with the ordered endpoint pair $(a,t)$ and return its\n     output.\n   - If $|\\phi'(t)|\\le c_2|\\phi'(0)|$, return $t$ as a strong Wolfe step.\n   - If $\\phi'(t)\\ge0$, call zoom with the reversed endpoint pair $(t,a)$ and\n     return its output.\n   - Otherwise set $a:=t$ and $t:=2t$.\n2. If the expansion budget is exhausted, return `evaluation-budget-exhausted`.\n\nFor `zoom(a,b)`, preserve the endpoint order even when $b<a$. For at most\n$Z$ zoom trials, in order:\n\n1. Set $m:=(a+b)/2$. If $x+mp\\notin D$, return `domain-exit` without\n   evaluating the trial.\n2. Evaluate $\\phi(m)$ and $\\phi'(m)$. If\n   $\\phi(m)>\\phi(0)+c_1m\\phi'(0)$ or $\\phi(m)\\ge\\phi(a)$, set $b:=m$.\n   Otherwise, if $|\\phi'(m)|\\le c_2|\\phi'(0)|$, return $m$ as a strong Wolfe\n   step. In the remaining branch, if $\\phi'(m)(b-a)\\ge0$, first set\n   $b:=a$; then set $a:=m$.\n3. If the zoom budget is exhausted, return `evaluation-budget-exhausted`.\n\nThe procedure returns a step only after both strong Wolfe inequalities have\nbeen checked. Finite budgets and domain exits may return failure even when a\nstrong Wolfe step exists; no convergence claim follows from the procedure\nalone.",
+           "uses": [
+             "3.1"
+           ]
+@@ -1100,7 +1149,7 @@
+           "fact": "F5",
+           "source": "thm-inexact-newton-local-forcing-rates",
+           "source_section": "Statement",
+-          "quote": "Let $U\\subseteq\\mathbb R^n$ be open, let $F:U\\to\\mathbb R^n$ be $C^1$, and\nlet $x_*\\in U$ satisfy $F(x_*)=0$ with $J_*:=DF(x_*)$ invertible. Suppose\n$J=DF$ is $L$-Lipschitz on a closed ball about $x_*$ contained in $U$. Fix\n$\\bar\\eta\\in[0,1)$. Consider any sequence\n$$x_{k+1}=x_k+p_k,\\qquad J(x_k)p_k+F(x_k)=r_k,\\qquad \\|r_k\\|_2\\le\\eta_k\\|F(x_k)\\|_2,$$\nwith $0\\le\\eta_k\\le\\bar\\eta$. Define\n$\\|v\\|_*:=\\|J_*v\\|_2$. There is $\\rho>0$ such that, if\n$\\|x_0-x_*\\|_*\\le\\rho$, every iterate remains in the ball and\n$\\|x_k-x_*\\|_*\\le q^k\\|x_0-x_*\\|_*$ for some $q<1$. Consequently:\n\n1. If $\\eta_k\\to0$, the iterates converge superlinearly (unless an exact root\n   is reached, in which case the exact recurrence remains there).\n2. If $\\eta_k\\le C_\\eta\\|F(x_k)\\|_2$ for a constant $C_\\eta$, the iterates\n   converge quadratically.\n\nThe fixed bound $\\bar\\eta<1$ gives linear convergence. Since $J_*$ is\ninvertible, these rates in $\\|\\cdot\\|_*$ are equivalent to the same local\nrates in the Euclidean norm. For $F=\\nabla f$, $J(x)=\\nabla^2 f(x)$, so the\nresidual is the inexact Newton residual\n$\\nabla^2 f(x_k)p_k+\\nabla f(x_k)$, using the Hessian convention of\n[[def-hessian-and-euclidean-critical-point]]. This theorem concerns the\nunshifted full-step recurrence; it does not assert that a safeguarded\nline-search algorithm eventually selects that branch.",
++          "quote": "Let $n\\ge0$ be an integer, let $U\\subseteq\\mathbb R^n$ be open, let $F:U\\to\\mathbb R^n$ be $C^1$, and\nlet $x_*\\in U$ satisfy $F(x_*)=0$ with $J_*:=DF(x_*)$ invertible. Suppose\n$J=DF$ is $L$-Lipschitz on a closed ball of positive radius about $x_*$ contained in $U$. Fix\n$\\bar\\eta\\in[0,1)$. For $n=0$ use the zero operator-norm convention\nof [[lem-inexact-newton-error-recurrence-under-lipschitz-jacobian]]. Consider any sequence\n$$x_{k+1}=x_k+p_k,\\qquad J(x_k)p_k+F(x_k)=r_k,\\qquad \\|r_k\\|_2\\le\\eta_k\\|F(x_k)\\|_2,$$\nwith $0\\le\\eta_k\\le\\bar\\eta$. Define\n$\\|v\\|_*:=\\|J_*v\\|_2$. There is $\\rho>0$ such that, if\n$\\|x_0-x_*\\|_*\\le\\rho$, every iterate remains in the ball and\n$\\|x_k-x_*\\|_*\\le q^k\\|x_0-x_*\\|_*$ for some $q<1$. Consequently:\n\n1. If $\\eta_k\\to0$, the iterates converge superlinearly (unless an exact root\n   is reached, in which case the exact recurrence remains there).\n2. If $\\eta_k\\le C_\\eta\\|F(x_k)\\|_2$ for a constant $C_\\eta$, the iterates\n   converge quadratically.\n\nThe fixed bound $\\bar\\eta<1$ gives linear convergence. Since $J_*$ is\ninvertible, these rates in $\\|\\cdot\\|_*$ are equivalent to the same local\nrates in the Euclidean norm. For $F=\\nabla f$ with $f\\in C^2(U)$ (all ordered partial derivatives\nthrough order two exist and are continuous), $J(x)=\\nabla^2 f(x)$, so the\nresidual is the inexact Newton residual\n$\\nabla^2 f(x_k)p_k+\\nabla f(x_k)$, using the Hessian convention of\n[[def-hessian-and-euclidean-critical-point]]. This theorem concerns the\nunshifted full-step recurrence; it does not assert that a safeguarded\nline-search algorithm eventually selects that branch.",
+           "uses": [
+             "4.1"
+           ]
+@@ -1113,12 +1162,21 @@
+           "uses": [
+             "1.2"
+           ]
++        },
++        {
++          "fact": "F7",
++          "source": "def-krylov-subspace-of-a-matrix-and-start-vector",
++          "source_section": "Definition",
++          "quote": "Let $A$ be a square matrix over $\\mathbb R$ or $\\mathbb C$ and let $b$ be a\nvector of matching size. Define\n\n$$K_0(A,b):=\\{0\\},$$\n\nand for $m\\ge 1$ define the $m$th **Krylov subspace**\n\n$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$\n\nThus $K_m(A,b)\\subseteq K_{m+1}(A,b)$ for every $m\\ge 0$.",
++          "uses": [
++            "1.2"
++          ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "The exact scalar identities are $F(x)=x$, $J(x)=1$, and $g(x)=x$ by [F1]–[F2]. Induction on $j$ gives $p^{(j)}=-(1-\\tau^j)x$, so the linear residual is $r_j=J(x)p^{(j)}+F(x)=\\tau^j x$.",
++          "claim": "The exact scalar identities are $F(x)=x$, $J(x)=1$, and $g(x)=x$ by [F1]–[F2]. Induction on $j$ gives $p^{(j)}=-(1-\\omega^j)x$, so the linear residual is $r_j=J(x)p^{(j)}+F(x)=\\omega^j x$.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+@@ -1130,18 +1188,19 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "Since $0<\\tau<1$, [F6] gives $\\tau^j\\to0$, so a least $j$ with $\\tau^j\\le\\eta$ exists. As $\\eta<1$, $j\\ge1$ and minimality gives $\\tau^j\\le\\eta<\\tau^{j-1}$. If the requested tolerance is reduced, the set of eligible $j$ can only shrink, so the required inner iteration count cannot decrease.",
++          "claim": "Since $0<\\omega<1$, [F6] gives $\\omega^j\\to0$, so a least $j$ with $\\omega^j\\le\\eta$ exists. As $\\eta<1$, $j\\ge1$ and minimality gives $\\omega^j\\le\\eta<\\omega^{j-1}$. If the requested tolerance is reduced, the set of eligible $j$ can only shrink, so the required inner iteration count cannot decrease. For any finite $N$, all $j_k$ on its first $N$ nonzero iterates are finite, so their finite maximum defines $M_N$. The specified solver therefore reaches its requested residual tolerance before its budget on that prefix, and [F7] verifies its scalar Krylov membership.",
+           "step": "1.2",
+           "inputs": [
+             "given",
+             "F6",
++            "F7",
+             "choose",
+             "algebra"
+           ]
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "At this $j$, $|r_j|=\\tau^j|x|\\le\\eta|x|$, while $g(x)p^{(j)}=-(1-\\tau^j)x^2$ and $|g(x)|\\,|p^{(j)}|=(1-\\tau^j)x^2$. Because $0<\\sigma<1$, the descent safeguard passes.",
++          "claim": "At this $j$, $|r_j|=\\omega^j|x|\\le\\eta|x|$, while $g(x)p^{(j)}=-(1-\\omega^j)x^2$ and $|g(x)|\\,|p^{(j)}|=(1-\\omega^j)x^2$. Because $0<\\sigma<1$, the descent safeguard passes.",
+           "step": "2.1",
+           "inputs": [
+             "given",
+@@ -1153,7 +1212,7 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "Let $q:=\\tau^j\\le\\eta\\le c_2$. The unit step gives $x_+=x+p^{(j)}=qx$. Its objective satisfies $f(x_+)=q^2x^2/2\\le x^2(1-2c_1(1-q))/2=f(x)+c_1g(x)p^{(j)}$, because $1+q\\ge1>2c_1$. Also $|\\phi'(1)|=q(1-q)x^2\\le c_2(1-q)x^2=c_2|\\phi'(0)|$. Thus both strong Wolfe conditions hold, and [F4] accepts $t=1$.",
++          "claim": "Let $q:=\\omega^j\\le\\eta\\le c_2$. The unit step gives $x_+=x+p^{(j)}=qx$. Its objective satisfies $f(x_+)=q^2x^2/2\\le x^2(1-2c_1(1-q))/2=f(x)+c_1g(x)p^{(j)}$, because $1+q\\ge1>2c_1$. Also $|\\phi'(1)|=q(1-q)x^2\\le c_2(1-q)x^2=c_2|\\phi'(0)|$. Thus both strong Wolfe conditions hold, and [F4] accepts $t=1$.",
+           "step": "3.1",
+           "inputs": [
+             "given",
+@@ -1165,7 +1224,7 @@
+         },
+         {
+           "id": "step-4-1",
+-          "claim": "For fixed $\\eta$, $q=\\tau^j$ is a constant in $(0,1)$ and $x_{k+1}=qx_k$, so the outer sequence is linearly convergent. If $0<|x_0|\\le c_2$ and $\\eta_k=|x_k|$, then $\\eta_k\\le c_2$ at every step and $|x_{k+1}|=\\tau^{j_k}|x_k|\\le|x_k|^2$. Here $\\eta_k=|F(x_k)|$; the local tube in [F5] may contain $[-c_2,c_2]$ because $F(x)=x$ and $J(x)=1$ everywhere. Thus [F5] supplies the same local quadratic-rate conclusion.",
++          "claim": "For fixed $\\eta$, $q=\\omega^j$ is a constant in $(0,1)$ and $x_{k+1}=qx_k$, so the outer sequence is linearly convergent. If $0<|x_0|\\le c_2$ and $\\eta_k=|x_k|$, then $\\eta_k\\le c_2$ at every step and $|x_{k+1}|=\\omega^{j_k}|x_k|\\le|x_k|^2$. Here $\\eta_k=|F(x_k)|$; the local tube in [F5] may contain $[-c_2,c_2]$ because $F(x)=x$ and $J(x)=1$ everywhere. Thus [F5] supplies the same local quadratic-rate conclusion.",
+           "step": "4.1",
+           "inputs": [
+             "given",
+@@ -1201,12 +1260,12 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-        "evidence": "Step 3.1 checks the full unit segment from x to qx."
++          "evidence": "Step 3.1 checks the full unit segment from x to qx."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-        "evidence": "Step 1.2 selects the least eligible natural-number iteration count, not an arbitrary family."
++          "evidence": "Step 1.2 selects the least eligible natural-number iteration count, not an arbitrary family."
+         },
+         {
+           "case": "iff-forward",
+@@ -1225,6 +1284,249 @@
+         "reviewer": "beta-batch-58",
+         "notes": "For eta<=c2 the unit step passes strong Wolfe. Tighter tolerance cannot reduce the inner count; no finite-precision residual reliability claim is made."
+       }
++    },
++    "lem-bracketing-zoom-finite-budget-checked-return": {
++      "risk": "medium",
++      "citations": [
++        {
++          "fact": "F1",
++          "source": "alg-bracketing-zoom-strong-wolfe-search",
++          "source_section": "Definition",
++          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$,\nlet $x\\in D$, and let $p\\in\\mathbb R^n$ be arbitrary. Fix $0<c_1<c_2<1/2$ and finite\nbudgets $E,Z\\in\\mathbb N$ for expansion and zoom trials. After the direction check passes, use the functions\n$\\phi(t)=f(x+tp)$ and $\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$ from\n[[def-wolfe-and-strong-wolfe-conditions]]. **Output:** either a positive\nstrong Wolfe step, or one of `invalid-direction`, `domain-exit`, and\n`evaluation-budget-exhausted`.\n\n1. If $\\langle\\nabla f(x),p\\rangle\\ge0$, return `invalid-direction`.\n   Set $a:=0$ and $t:=1$. For at most $E$ expansion trials, in order:\n   - If $x+tp\\notin D$, return `domain-exit` without evaluating the trial.\n   - Evaluate $\\phi(t)$ and $\\phi'(t)$. If\n     $\\phi(t)>\\phi(0)+c_1t\\phi'(0)$ or $\\phi(t)\\ge\\phi(a)$, call the zoom\n     procedure below with the ordered endpoint pair $(a,t)$ and return its\n     output.\n   - If $|\\phi'(t)|\\le c_2|\\phi'(0)|$, return $t$ as a strong Wolfe step.\n   - If $\\phi'(t)\\ge0$, call zoom with the reversed endpoint pair $(t,a)$ and\n     return its output.\n   - Otherwise set $a:=t$ and $t:=2t$.\n2. If the expansion budget is exhausted, return `evaluation-budget-exhausted`.\n\nFor `zoom(a,b)`, preserve the endpoint order even when $b<a$. For at most\n$Z$ zoom trials, in order:\n\n1. Set $m:=(a+b)/2$. If $x+mp\\notin D$, return `domain-exit` without\n   evaluating the trial.\n2. Evaluate $\\phi(m)$ and $\\phi'(m)$. If\n   $\\phi(m)>\\phi(0)+c_1m\\phi'(0)$ or $\\phi(m)\\ge\\phi(a)$, set $b:=m$.\n   Otherwise, if $|\\phi'(m)|\\le c_2|\\phi'(0)|$, return $m$ as a strong Wolfe\n   step. In the remaining branch, if $\\phi'(m)(b-a)\\ge0$, first set\n   $b:=a$; then set $a:=m$.\n3. If the zoom budget is exhausted, return `evaluation-budget-exhausted`.\n\nThe procedure returns a step only after both strong Wolfe inequalities have\nbeen checked. Finite budgets and domain exits may return failure even when a\nstrong Wolfe step exists; no convergence claim follows from the procedure\nalone.",
++          "uses": [
++            "1.1",
++            "2.1",
++            "3.1",
++            "4.1"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "def-wolfe-and-strong-wolfe-conditions",
++          "source_section": "Definition",
++          "quote": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
++          "uses": [
++            "3.1"
++          ]
++        }
++      ],
++      "derivations": [
++        {
++          "id": "step-1-1",
++          "step": "1.1",
++          "claim": "The initial direction check either returns failure or establishes $\\phi'(0)<0$. Expansion trial parameters are positive: initially $t=1$, and later they are positive doubles. Before each doubling, $0\\le a<t$; hence both possible endpoint orders passed to zoom have distinct nonnegative endpoints, at least one positive.",
++          "inputs": [
++            "given",
++            "F1",
++            "induction"
++          ]
++        },
++        {
++          "id": "step-2-1",
++          "step": "2.1",
++          "claim": "A midpoint of distinct nonnegative endpoints, at least one positive, is positive and strictly between them. Replacing $b$ by that midpoint preserves distinct nonnegative endpoints. In the other update, replacing $a$ by the midpoint, either retaining $b$ or first replacing $b$ by the old $a$, also preserves those properties. Thus every zoom trial is positive, even with reversed endpoint order.",
++          "inputs": [
++            "F1",
++            "step 1.1",
++            "induction",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-3-1",
++          "step": "3.1",
++          "claim": "Before any trial evaluation the domain check either returns failure or verifies feasibility. In expansion, a return of a step occurs only after the Armijo-failure branch was bypassed and the strong curvature test passed. In zoom the same two tests precede every step return. Therefore [F2] and steps 1.1–2.1 prove every returned step has the asserted properties.",
++          "inputs": [
++            "F1",
++            "F2",
++            "step 1.1",
++            "step 2.1"
++          ]
++        },
++        {
++          "id": "step-4-1",
++          "step": "4.1",
++          "claim": "Each expansion pass either returns, calls zoom and returns its output, or consumes one of at most $E$ passes. Thus at most one zoom is called. Each zoom pass either returns or consumes one of at most $Z$ passes. All evaluations terminate by hypothesis; after exhaustion the specified failure is returned. There are at most $E+Z$ evaluated trial points, with the objective and directional derivative evaluated at each; domain exits consume no trial evaluation. These finite counts prove termination but imply neither an arithmetic-work bound nor successful discovery of an existing step.",
++          "inputs": [
++            "given",
++            "F1",
++            "step 3.1",
++            "algebra"
++          ]
++        }
++      ],
++      "routine_steps": [],
++      "boundaries": [
++        {
++          "case": "empty",
++          "status": "not_applicable",
++          "reason": "The procedure input includes an initial point in its open domain."
++        },
++        {
++          "case": "zero",
++          "status": "checked",
++          "evidence": "An arbitrary zero direction fails the initial strict-descent check at step 1.1."
++        },
++        {
++          "case": "one",
++          "status": "checked",
++          "evidence": "The proof uses loop bounds and vector inner products, including dimension one."
++        },
++        {
++          "case": "degenerate",
++          "status": "checked",
++          "evidence": "Exact comparisons, finite evaluation return and solver return assumptions are explicit; a failed trial returns its stated failure."
++        },
++        {
++          "case": "endpoints",
++          "status": "checked",
++          "evidence": "Search positivity/domain endpoints are proved in the search lemma steps 1.1–3.1; loop exhaustion is a specified failure/terminal status."
++        },
++        {
++          "case": "nonempty-choice",
++          "status": "not_applicable",
++          "reason": "All choices are the deterministic input procedure and explicit finite loops."
++        },
++        {
++          "case": "iff-forward",
++          "status": "not_applicable",
++          "reason": "The assertion is a one-way checked-return/count implication."
++        },
++        {
++          "case": "iff-reverse",
++          "status": "not_applicable",
++          "reason": "The assertion is a one-way checked-return/count implication."
++        }
++      ],
++      "finite_smoke": [],
++      "risk_review": {
++        "status": "complete",
++        "reviewer": "owner-b58-b70",
++        "notes": "Root independently reviewed the full source proposal and locally composed proof; this is no native acceptance or source-identical theorem claim."
++      }
++    },
++    "lem-inexact-newton-krylov-finite-budget-checked-return": {
++      "risk": "medium",
++      "citations": [
++        {
++          "fact": "F1",
++          "source": "alg-inexact-newton-krylov-with-descent-safeguard",
++          "source_section": "Definition",
++          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$\nbe twice continuously differentiable, meaning that $f$ is $C^1$ and its\ngradient is $C^1$.\nWrite $g(x):=\\nabla f(x)$ and $H(x):=\\nabla^2f(x)$ using\n[[def-jacobian-matrix-and-gradient]] and\n[[def-hessian-and-euclidean-critical-point]]. The identity matrix $I_n$ and\nmatrix-vector products have the convention of\n[[def-matrix-product-and-identity-matrix]]. Use the matrix-free access\nmodel of [[def-matrix-free-access-model-for-krylov-methods]] for products\n$v\\mapsto(H(x)+\\lambda I_n)v$.\n\n**Linear-solver input:** a fixed deterministic Krylov procedure $K$ which accepts a\nmatrix-free linear operator $A$, a right-hand side $b$, a tolerance $\\tau\\ge0$,\nand a finite inner-iteration budget $M\\in\\mathbb N_0$. It returns either\n`no-candidate` or `candidate` with a vector $p$ and an iteration count\n$m\\in\\{0,1,\\ldots,M\\}$ satisfying $p\\in K_m(A,b)$, where $K_m$ is as defined\nby [[def-krylov-subspace-of-a-matrix-and-start-vector]]. A candidate's residual\nstatus is never trusted: this algorithm recomputes\nthe requested residual using the supplied operator. **Other inputs:** $x_0\\in U$, outer update budget\n$N\\in\\mathbb N_0$, forcing values $\\eta_k\\in[0,\\bar\\eta]$ for a fixed\n$0\\le\\bar\\eta<1$, descent parameter $\\sigma\\in(0,1)$, regularization factor\n$\\gamma>1$, initial shift $\\lambda_0>0$, shift cap $\\lambda_{\\max}\\ge\\lambda_0$,\nregularized-attempt budget $J\\in\\mathbb N_0$, inner budget $M$, and the\nparameters and finite expansion/zoom budgets of\n[[alg-bracketing-zoom-strong-wolfe-search]]. **Output:** the last valid\niterate and one of `stationary`, `iteration-budget-exhausted`,\n`no-descent-direction`, or `line-search-failure`; in the last case also\nreturn the underlying line-search failure cause.\n\nAt iteration $k=0,1,\\ldots,N$:\n\n1. Compute $g_k:=g(x_k)$. If $g_k=0$, return $(x_k,\\texttt{stationary})$.\n   If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n2. Set $\\lambda:=0$. For $j=0,1,\\ldots,J$, call $K$ on\n   $A_\\lambda v:=H(x_k)v+\\lambda I_nv$, right-hand side $-g_k$, tolerance\n   $\\eta_k\\|g_k\\|_2$, and budget $M$. A `no-candidate` result is a rejected\n   attempt. If it returns a candidate $p$, compute\n   $r:=(H(x_k)+\\lambda I_n)p+g_k$. Accept this linear solve only when\n   $\\|r\\|_2\\le\\eta_k\\|g_k\\|_2$ and\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$; otherwise reject it.\n   If the attempt is rejected and either $j=J$ or $\\lambda=\\lambda_{\\max}$, stop the\n   regularization loop. Otherwise set\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\lambda_0\\}$ when $\\lambda=0$, and\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\gamma\\lambda\\}$ when $\\lambda>0$;\n   then continue with the next $j$.\n3. If no regularized attempt was accepted, set $p:=-g_k$ and check\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$. If this check fails,\n   return `no-descent-direction`. For the stated $\\sigma$ and $g_k\\ne0$ it\n   passes, but the check remains part of the procedure.\n4. Call [[alg-bracketing-zoom-strong-wolfe-search]] at $x_k$ in direction $p$.\n   If it returns failure, return $(x_k,\\texttt{line-search-failure},s)$, where $s$ is\n   the returned line-search failure cause. Otherwise, for its returned strong Wolfe step $t_k$,\n   set $x_{k+1}:=x_k+t_kp$ and continue.\n\nThe first unregularized system uses the forcing residual\n$\\|H(x_k)p+g_k\\|_2\\le\\eta_k\\|g_k\\|_2$. A regularized attempt checks the\nresidual for the shifted system instead. Finite inner, regularization, and\nline-search budgets can return failure; the procedure makes no global\nconvergence claim. The local rate theorem applies only to an unshifted\n$\\lambda=0$ sequence taking full steps $t_k=1$ and remaining in its stated\nlocal tube. This algorithm does not assert that every run enters that branch.",
++          "uses": [
++            "1.1",
++            "2.1",
++            "3.1",
++            "4.1"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "lem-bracketing-zoom-finite-budget-checked-return",
++          "source_section": "Statement",
++          "quote": "Under the inputs of [[alg-bracketing-zoom-strong-wolfe-search]], assume all requested in-domain function and gradient evaluations terminate with real values and all prescribed comparisons are exact. The procedure terminates with its specified step or failure status. It makes at most $E$ expansion trial evaluations and at most one zoom call with at most $Z$ trial evaluations, hence at most $E+Z$ evaluated trial points. Each evaluates the objective and directional derivative at that point. Every returned step is positive, feasible, and satisfies both strong Wolfe inequalities. A domain-exit trial is not evaluated. The bound excludes the initial-point data and does not bound arithmetic work or guarantee success when a strong Wolfe step exists.",
++          "uses": [
++            "2.1",
++            "3.1"
++          ]
++        }
++      ],
++      "derivations": [
++        {
++          "id": "step-1-1",
++          "step": "1.1",
++          "claim": "Initially $x_0\\in U$. At any nonstationary iteration the supplied solver calls and candidate residual evaluations terminate by assumption; the loop has at most $J+1$ attempts. Every accepted candidate satisfies $g_k^Tp<-\\sigma\\|g_k\\|_2\\|p\\|_2<0$, since a candidate with $p=0$ cannot pass. If none passes, $p=-g_k$ gives $g_k^Tp=-\\|g_k\\|_2^2<-\\sigma\\|g_k\\|_2^2$ because $g_k\\ne0$ and $0<\\sigma<1$. Thus a strict descent direction is always available and the fallback failure cannot occur in exact arithmetic.",
++          "inputs": [
++            "given",
++            "F1",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-2-1",
++          "step": "2.1",
++          "claim": "By [F2] the ensuing search terminates. On failure the algorithm returns its last valid iterate, its line-search-failure status and the search cause. On success feasibility of the checked step gives $x_{k+1}\\in U$. Induction proves feasibility of every iterate.",
++          "inputs": [
++            "F1",
++            "F2",
++            "step 1.1",
++            "induction"
++          ]
++        },
++        {
++          "id": "step-3-1",
++          "step": "3.1",
++          "claim": "A solve or update can occur only for $k<N$. Thus at most $N$ updates and searches and $N(J+1)$ solver calls occur; each uses at most $M$ inner iterations. At most one candidate residual is recomputed per call, each by one Hessian action plus the displayed shift and vector arithmetic. By [F2] there are at most $N(E+Z)$ evaluated search trials. The outer loop computes its gradient once per visited index, at most $N+1$ times, separately from line-search gradient evaluations.",
++          "inputs": [
++            "given",
++            "F1",
++            "F2",
++            "step 2.1",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-4-1",
++          "step": "4.1",
++          "claim": "Every inner call and search terminates and every loop has its finite stated bound. Hence the algorithm reaches a specified return no later than its $k=N$ check. Steps 1.1–3.1 prove the asserted statuses, feasibility and counts; they do not specify the internal Hessian-action count of the arbitrary solver or a convergence theorem.",
++          "inputs": [
++            "given",
++            "F1",
++            "step 1.1",
++            "step 2.1",
++            "step 3.1"
++          ]
++        }
++      ],
++      "routine_steps": [],
++      "boundaries": [
++        {
++          "case": "empty",
++          "status": "not_applicable",
++          "reason": "The procedure input includes an initial point in its open domain."
++        },
++        {
++          "case": "zero",
++          "status": "checked",
++          "evidence": "The Newton outer budget N may be zero; step 3.1 bounds zero solver/search calls and step 4.1 returns at the initial budget/stationary check."
++        },
++        {
++          "case": "one",
++          "status": "checked",
++          "evidence": "The proof uses loop bounds and vector inner products, including dimension one."
++        },
++        {
++          "case": "degenerate",
++          "status": "checked",
++          "evidence": "Exact comparisons, finite evaluation return and solver return assumptions are explicit; a failed trial returns its stated failure."
++        },
++        {
++          "case": "endpoints",
++          "status": "checked",
++          "evidence": "Search positivity/domain endpoints are proved in the search lemma steps 1.1–3.1; loop exhaustion is a specified failure/terminal status."
++        },
++        {
++          "case": "nonempty-choice",
++          "status": "not_applicable",
++          "reason": "All choices are the deterministic input procedure and explicit finite loops."
++        },
++        {
++          "case": "iff-forward",
++          "status": "not_applicable",
++          "reason": "The assertion is a one-way checked-return/count implication."
++        },
++        {
++          "case": "iff-reverse",
++          "status": "not_applicable",
++          "reason": "The assertion is a one-way checked-return/count implication."
++        }
++      ],
++      "finite_smoke": [],
++      "risk_review": {
++        "status": "complete",
++        "reviewer": "owner-b58-b70",
++        "notes": "Root independently reviewed the full source proposal and locally composed proof; this is no native acceptance or source-identical theorem claim."
++      }
+     }
+   }
+ }

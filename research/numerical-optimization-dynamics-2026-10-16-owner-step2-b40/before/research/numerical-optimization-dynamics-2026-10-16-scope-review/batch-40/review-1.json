@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "40",
+  "round": 1,
+  "reviewed_items": [
+    "alg-nelder-mead-finite-budget",
+    "alg-projected-subgradient-method",
+    "alg-proximal-bundle-serious-null-method",
+    "def-positive-spanning-poll-set-and-angle",
+    "lem-compact-set-in-open-neighborhood-has-uniform-radius",
+    "lem-direct-search-local-descent-inequality",
+    "alg-deterministic-direct-search",
+    "lem-nelder-mead-finite-budget-returns-status",
+    "lem-positive-spanning-poll-set-has-uniform-angle",
+    "lem-projected-subgradient-finite-budget-returns-status",
+    "lem-projected-subgradient-one-step-estimate",
+    "lem-proximal-bundle-subproblem-has-unique-minimizer",
+    "lem-proximal-objective-has-quadratic-growth-from-minimizer",
+    "lem-direct-search-finite-budget-returns-status",
+    "lem-proximal-bundle-finite-budget-returns-status",
+    "thm-direct-search-unsuccessful-poll-accumulations-are-stationary",
+    "thm-projected-subgradient-best-and-average-bound",
+    "cor-projected-subgradient-fixed-step-square-root-rate",
+    "lem-aggregate-model-error-controls-proximal-candidate",
+    "thm-proximal-bundle-accumulation-under-accurate-aggregate-model",
+    "ex-nelder-mead-flat-plateau-stagnation",
+    "ex-black-box-simulator-direct-search-fit",
+    "ex-max-affine-bundle-null-and-serious-steps"
+  ],
+  "reviewed_pages": [
+    "subgradient-bundle-and-derivative-free-optimization",
+    "subgradient-bundle-and-derivative-free-optimization-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The round-zero findings are resolved, including the L/2 descent estimate and bundle initialization failure branch. This final review found unresolved prerequisite gaps in the poll-angle proof and vector-sum definitions, plus a proof gap in the published finite-Jensen supplier; owner reconciliation is required.",
+  "findings": [
+    {
+      "id": "lem-positive-spanning-poll-set-has-uniform-angle",
+      "type": "prerequisite",
+      "reason": "F3 and proof step 1.1 need each product λ_i⟨u,d_i⟩ to be nonnegative when both factors are nonnegative. The declared suppliers establish finite-sum positivity, but not this product-sign step. Add the nonnegative-product premise (for example, the positive-product and zero-product rules with the field convention) or prove it locally. The affected consumer is thm-direct-search-unsuccessful-poll-accumulations-are-stationary, which uses κ_D in F1 and step 2.1."
+    },
+    {
+      "id": "alg-nelder-mead-finite-budget",
+      "type": "prerequisite",
+      "reason": "Its Definition computes the centroid c=n⁻¹∑x_i, a finite vector sum. The declared def-finite-sum supplier defines real sums; the canonical finite vector-sum definition is def-linear-combination-and-span. Add that supplier or state the coordinatewise convention. The affected consumers are lem-nelder-mead-finite-budget-returns-status and ex-nelder-mead-flat-plateau-stagnation."
+    },
+    {
+      "id": "alg-projected-subgradient-method",
+      "type": "prerequisite",
+      "reason": "Its Definition returns the weighted average ∑α_kx_k/∑α_k, which also uses a finite vector sum; def-finite-sum only supplies real sums. Add def-linear-combination-and-span or state the coordinatewise convention. This affects the average-feasibility and objective-bound consumers."
+    },
+    {
+      "id": "thm-finite-jensen-inequality-in-euclidean-space",
+      "type": "outside-batch",
+      "reason": "This published supplier is used by the projected-subgradient items. Its dependencies define scalar finite sums, while its Statement and proof use finite vector sums; def-linear-combination-and-span is the canonical vector-sum definition. Also, proof step 3.1 applies the induction hypothesis to z=∑μ_jx_j∈C without establishing that this finite convex combination lies in C. The affected batch consumers include alg-projected-subgradient-method, lem-projected-subgradient-finite-budget-returns-status step 2.1, thm-projected-subgradient-best-and-average-bound step 2.1, and cor-projected-subgradient-fixed-step-square-root-rate indirectly. Current source search also found other direct users outside this batch: ex-finite-maximum-of-affine-functions-and-its-subdifferential, lem-convex-function-bound-on-an-interior-cube, and the real-analysis convexity page; owner reconciliation should include them."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-deterministic-direct-search",
+      "decision": "accept",
+      "reason": "Its positive-spanning input retains the coordinatewise finite-vector-sum meaning."
+    },
+    {
+      "id": "ex-black-box-simulator-direct-search-fit",
+      "decision": "accept",
+      "reason": "The one-dimensional list (+1,-1) is positive spanning under the updated definition, and the poll calculations remain correct."
+    },
+    {
+      "id": "lem-direct-search-finite-budget-returns-status",
+      "decision": "accept",
+      "reason": "Its finite-poll termination and feasibility argument is unaffected."
+    },
+    {
+      "id": "lem-positive-spanning-poll-set-has-uniform-angle",
+      "decision": "escalate",
+      "reason": "The proof uses an undeclared nonnegative-product fact in F3 and step 1.1."
+    },
+    {
+      "id": "thm-direct-search-unsuccessful-poll-accumulations-are-stationary",
+      "decision": "escalate",
+      "reason": "The L/2 descent repair is correct, but F1 and step 2.1 rely on the unresolved uniform-angle proof."
+    },
+    {
+      "id": "alg-nelder-mead-finite-budget",
+      "decision": "escalate",
+      "reason": "Its centroid uses an undeclared finite-vector-sum convention."
+    },
+    {
+      "id": "lem-nelder-mead-finite-budget-returns-status",
+      "decision": "escalate",
+      "reason": "Its termination argument relies on the Nelder–Mead procedure having a defined centroid."
+    },
+    {
+      "id": "ex-nelder-mead-flat-plateau-stagnation",
+      "decision": "escalate",
+      "reason": "Its simplex updates use the centroid in the procedure whose vector-sum convention is unresolved."
+    },
+    {
+      "id": "alg-projected-subgradient-method",
+      "decision": "escalate",
+      "reason": "Its returned average uses an undeclared finite-vector-sum convention and it depends on the unresolved finite-Jensen supplier."
+    },
+    {
+      "id": "lem-projected-subgradient-finite-budget-returns-status",
+      "decision": "escalate",
+      "reason": "Step 2.1 uses finite Jensen to establish average feasibility and relies on the algorithm’s vector-average output."
+    },
+    {
+      "id": "lem-projected-subgradient-one-step-estimate",
+      "decision": "accept",
+      "reason": "Its proof uses only the projected update and does not use the average or finite-Jensen result."
+    },
+    {
+      "id": "thm-projected-subgradient-best-and-average-bound",
+      "decision": "escalate",
+      "reason": "Step 2.1 applies the unresolved finite-Jensen supplier to the weighted average."
+    },
+    {
+      "id": "cor-projected-subgradient-fixed-step-square-root-rate",
+      "decision": "escalate",
+      "reason": "It inherits the unresolved weighted-average result from thm-projected-subgradient-best-and-average-bound."
+    },
+    {
+      "id": "subgradient-bundle-and-derivative-free-optimization",
+      "decision": "escalate",
+      "reason": "Its summary includes the projected average guarantee and direct-search stationarity result, whose prerequisites remain unresolved."
+    },
+    {
+      "id": "subgradient-bundle-and-derivative-free-optimization-examples",
+      "decision": "escalate",
+      "reason": "Its Nelder–Mead example depends on the unresolved centroid definition; the page also requires the escalated A page."
+    },
+    {
+      "id": "lem-proximal-bundle-subproblem-has-unique-minimizer",
+      "decision": "accept",
+      "reason": "The bundle initialization-failure branch does not affect the model-subproblem result."
+    },
+    {
+      "id": "lem-proximal-bundle-finite-budget-returns-status",
+      "decision": "accept",
+      "reason": "Its initialization-failure proof step now matches the algorithm’s explicit return."
+    },
+    {
+      "id": "lem-aggregate-model-error-controls-proximal-candidate",
+      "decision": "accept",
+      "reason": "It applies to valid underestimating models and successful candidate minimizers; the new failure branch does not alter its use."
+    },
+    {
+      "id": "thm-proximal-bundle-accumulation-under-accurate-aggregate-model",
+      "decision": "accept",
+      "reason": "Its assumptions concern an infinite exact continuation with valid models and candidates, unaffected by initialization failure handling."
+    },
+    {
+      "id": "ex-max-affine-bundle-null-and-serious-steps",
+      "decision": "accept",
+      "reason": "All oracle calls in the example succeed, so the initialization-failure branch leaves its calculations unchanged."
+    }
+  ]
+}

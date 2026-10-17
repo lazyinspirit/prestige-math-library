@@ -1,0 +1,34 @@
+# Batch 37 Step 3a adjudication
+
+Run: `numerical-optimization-dynamics-2026-10-16`; group: `batch-37`.
+
+## Scope and review order
+
+The scope routes exactly `touched:37:thm-theta-scheme-discrete-maximum-principle`; reader findings and refuter flags are empty. No page decision is owed. Review order follows the generated task: level-3 solvability risk review, then level-5 maximum-principle carrier and risk review. Published content remains read-only.
+
+## Completed lower-level review
+
+`lem-parabolic-theta-step-exists-uniquely`: reviewed the complete current Statement and proof, the scheme Definition, positive-selfadjoint supplier proof, rectangular-grid Definition and summation-by-parts supplier proof. The space is finite dimensional with positive hxhy weight. At theta=0 the matrix is I. For theta>0, its kernel identity is a sum of nonnegative terms, forcing v=0; square-matrix rank-nullity then gives unique solvability for every RHS, including known boundary/source terms. Zero data, theta=1 and the one-interior-node grid are covered. No AC or CFL restriction is needed. A complete risk_review is recorded in the owning proof contract; no decision is owed for this untouched unflagged item.
+
+Sources inspected locally: `items/def-parabolic-theta-finite-difference-scheme.md` (Definition), `items/lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint.md` (Statement and Proof 1.1–3.1), `items/def-rectangular-grid-and-dirichlet-flux-stencil.md` (Definition), and `items/lem-discrete-summation-by-parts-poincare-and-inverse-bound.md` (Statement and Proof 1.1–6.1). Bibliography URLs were not independently reopened; elementary finite-dimensional calculations suffice here.
+
+
+## Maximum-principle decision and historical evidence
+
+`touched:37:thm-theta-scheme-discrete-maximum-principle`: **accepted_repair**, repair_confidence 1. The exact archived pre-reader carrier is `research/numerical-optimization-dynamics-2026-10-16-root-step2-current-page-requires-proposal-data/inputs/00763-thm-theta-scheme-discrete-maximum-principle.md`, SHA256 `e80a0a71ef3a98b41d7108d24453026f00021441b4fb06663cd05a4e776de939`, matching the immutable pre snapshot. The current raw carrier matches the immutable post snapshot: `a207e249bfe8629cc78c5c4de1e37b8989d1243a19d624ec632fa00973accf28`. The complete diff changes only Proof 1.1. Historical source bytes are available; no unknown-delta disposition is needed.
+
+The former displayed RHS contained unknown future interior neighbors but called it known/nonnegative. This is a nonfatal rearrangement gap: move these terms to the left. The reader did exactly that and explicitly distinguished full-grid values V from interior U. The corrected old-center weight is 1−2(1−theta)(mu_x+mu_y), nonnegative under the hypothesis, and all old-neighbor weights are nonnegative. Future boundary contributions occur on the implicit full-grid side, or equivalently enter the interior RHS positively when moved there. At an assumed negative minimum, all neighboring interior and prescribed future boundary values are at least the center, so the implicit full stencil is at most the negative center; it cannot equal the nonnegative old-value RHS.
+
+Constant grids with their own constant boundary data solve the zero-source scheme. Subtracting from the finite maximum, or subtracting the finite minimum, gives nonnegative initial and boundary data; induction supplies both bounds, including n=0. Checked theta=0 (explicit), theta=1 (automatic restriction), theta=1/2, CFL equality with zero old-center coefficient, zero data, arbitrary signed data via constant shifts, and Nx=Ny=2. The set of data is finite and nonempty by the grid/time conventions. No AC or iff direction is involved.
+
+The additional cited supplier `items/thm-parabolic-theta-l2-stability-for-half-theta.md`, Statement and full Proof 1.1–3.1, was independently read. Its energy identity has nonnegative dissipation for theta>=1/2 and yields the stated forced estimate and source-free contraction for every positive dt. Thus at theta=1/2, the maximum-principle sufficient restriction s<=1 is genuinely more restrictive than the absence of an L2 time-step restriction; no necessity is claimed. All local citations and corresponding contract derivations match current text. The maximum-principle risk_review is complete.
+
+Closed defect row: `numerical-optimization-dynamics-2026-10-16-b37-3a-known-rhs`, owned at 3a-adjudicate and referenced by the sole decision. No further carrier repair, material rewrite, judge invalidation, provenance change or manifest change was needed. No Statement/Definition changed, so no changed-interface consumer repair or further hop is required.
+
+## Dependency and publication disposition
+
+Reviewed batch-23 rectangular-grid and directional summation-by-parts interfaces against their actual batch-37 uses; no unmet hypothesis or defective supplier was found. The owned cross-batch input and stable IDs are retained. Page-only obligations are absent; existing page-edge reviews are preserved without claiming a new page adjudication. No published item defect or proposed withdrawal was found, and no published ledger edit is needed. External bibliography URLs were not reopened in this adjudication; they supply provenance, while every mathematical inference reviewed here closes from local suppliers and elementary finite calculations.
+
+## Checks and handoff
+
+Initial risk-report completed with zero errors and routed exactly two HIGH items (solvability and maximum principle). The initial strict contract check found one stale F1 quotation in the positivity prerequisite contract: the current grid Definition distinguishes the definite interior norm from the seminorm on full grid functions. Its use in the zero-boundary proof was independently checked and is sound. Synchronized this exact quotation in the owned contract as audit metadata; this mechanical mismatch creates no mathematical defect row or additional routed decision. Final focused checks passed: `node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-37.proof-contracts.json --strict` (12/12, zero errors/warnings); `node tools/risk-report.mjs research/numerical-optimization-dynamics-2026-10-16-batch-37.proof-contracts.json --require-reviewed` (zero errors, both required reviews complete); `node tools/tsx-run.mjs tools/precheck.mts items/lem-parabolic-theta-step-exists-uniquely.md items/thm-theta-scheme-discrete-maximum-principle.md --json` (2 checked, zero failures); and final `node tools/proof-layout.mjs items/thm-theta-scheme-discrete-maximum-principle.md` (1 item, 4 steps, zero defects). No item was edited in this adjudication. A local JSON consistency check confirmed exactly one owed/recorded decision, its unique closed defect row, and unchanged current post-reader raw item hash. No mathematical blocker remains. Engine retains decision stamping, gates, judging and stage transitions.

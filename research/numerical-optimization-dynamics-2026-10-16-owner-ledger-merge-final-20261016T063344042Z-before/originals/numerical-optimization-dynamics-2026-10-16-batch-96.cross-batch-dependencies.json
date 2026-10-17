@@ -1,0 +1,130 @@
+[
+  {
+    "kind": "page",
+    "consumer": "discrete-continuous-and-pde-adjoint-sensitivities",
+    "supplier": "data-assimilation-variational-and-ensemble-methods",
+    "status": "inspected",
+    "examined_supplier_items": ["alg-four-dimensional-variational-assimilation"],
+    "required_hypotheses": "The published 4DVAR procedure assumes C1 finite-dimensional model/observation maps and positive-definite covariance matrices, and returns the last point of a finite gradient run without a minimizer or sensitivity guarantee.",
+    "affected_claims": ["ex-4dvar-discrete-adjoint-gradient"],
+    "supplier_excerpts": [
+      {"item":"alg-four-dimensional-variational-assimilation","section":"Definition","excerpt":"Both objectives are continuously differentiable on their stated open decision domains."},
+      {"item":"alg-four-dimensional-variational-assimilation","section":"Definition","excerpt":"This is a finite numerical procedure, not a guarantee that a global or local minimizer is reached."}
+    ],
+    "local_route": "The example uses the published objective with identity scalar observation maps and zero observations. It derives the finite graph reverse gradient locally; it does not infer convergence of the 4DVAR optimizer. The supplier is published and its actual body was inspected."
+  },
+  {
+    "kind": "page",
+    "consumer": "discrete-continuous-and-pde-adjoint-sensitivities",
+    "supplier": "automatic-differentiation-and-computational-graphs",
+    "status": "inspected",
+    "examined_supplier_items": ["alg-reverse-mode-automatic-differentiation", "thm-reverse-mode-computes-gradient", "thm-implicit-differentiation-forward-and-adjoint-formulas"],
+    "required_hypotheses": "Reverse mode is exact on a finite C1 real-arithmetic graph on a fixed strict branch; implicit differentiation applies at a C1 residual zero with an invertible state-block Jacobian and gives the derivative of the exact local branch, not a stopped solver iteration.",
+    "affected_claims": ["thm-discrete-adjoint-gradient-recursion", "thm-implicit-rk-stage-parameter-sensitivity", "ex-4dvar-discrete-adjoint-gradient", "ex-implicit-stiff-decay-parameter-fit", "ex-multiple-shooting-sensitivity-jacobian", "ex-tent-map-finite-time-sensitivity-growth", "ex-discrete-terminal-condition-mismatch"],
+    "supplier_excerpts": [
+      {"item":"alg-reverse-mode-automatic-differentiation","section":"Definition","excerpt":"If the same parent node occurs in multiple slots, add every slot contribution."},
+      {"item":"thm-reverse-mode-computes-gradient","section":"Statement","excerpt":"For a finite $C^1$ program with one scalar output $f$, on a fixed strict branch and at every admissible $x$, the reverse-mode algorithm returns $Df(x)^T1$, the gradient of $f$."},
+      {"item":"thm-implicit-differentiation-forward-and-adjoint-formulas","section":"Statement","excerpt":"Suppose $R(\\theta_0,z_0)=0$ and the state Jacobian $R_z(\\theta_0,z_0)$ is invertible."}
+    ],
+    "local_route": "The A-page recursion also proves its tangent and cotangent telescoping identity. The implicit RK items separately prove residual-Jacobian nonsingularity from the actual contraction bound before applying the generic implicit-function result. These supplier bodies are draft items from batch 13; their current proofs and hypotheses were read, and no acceptance is claimed."
+  },
+  {
+    "kind": "page",
+    "consumer": "discrete-continuous-and-pde-adjoint-sensitivities",
+    "supplier": "nonlinear-boundary-value-solvers",
+    "status": "open",
+    "examined_supplier_items": ["lem-c1-ode-flow-on-common-tube", "prop-multiple-shooting-residual-block-jacobian", "prop-shooting-residual-derivative"],
+    "required_hypotheses": "The exact shooting Jacobian suppliers require a C1 endpoint flow on a common compact convex tube. The current `lem-c1-ode-flow-on-common-tube` body has an unjustified line claiming its integral equation is unique by Gronwall without displaying the difference inequality; it should cite IVP/integral-equation uniqueness or prove that inequality.",
+    "affected_claims": ["prop-multiple-shooting-residual-block-jacobian (batch-22 supplier claim)", "prop-shooting-residual-derivative (batch-22 supplier claim)", "batch-22 consumers of its tangent uniqueness claim"],
+    "supplier_excerpts": [
+      {"item":"lem-c1-ode-flow-on-common-tube","section":"Proof","excerpt":"Its integral equation is unique by [F3]."},
+      {"item":"lem-c1-ode-flow-on-common-tube","section":"Facts & Assumptions","excerpt":"[F3] [[thm-gronwall-integral-inequality]]: if $u(t)\\le A+L\\int_a^t u(r)dr$ for nonnegative continuous $u$ and constants $A,L\\ge0$, then $u(t)\\le A e^{L(t-a)}$."},
+      {"item":"prop-multiple-shooting-residual-block-jacobian","section":"Facts & Assumptions","excerpt":"[[lem-c1-ode-flow-on-common-tube]]: an exact segment endpoint map is $C^1$ when its solutions remain in a common compact convex tube."}
+    ],
+    "local_route": "DIF3's `lem-parameter-ode-flow-tangent-on-common-tube` independently proves parameter differentiability by a common-tube difference quotient and Gronwall estimate, and `ex-multiple-shooting-sensitivity-jacobian` derives its two scalar flow derivatives directly. Neither assigned item depends on the defective batch-22 uniqueness sentence. The declared BVP page edge and the batch-22 proof gap are left open for owner reconciliation; no foreign file was edited."
+  },
+  {
+    "kind": "page",
+    "consumer": "discrete-continuous-and-pde-adjoint-sensitivities",
+    "supplier": "global-ode-and-density-error",
+    "status": "inspected",
+    "examined_supplier_items": ["thm-global-error-from-one-step-defect-and-stability", "lem-discrete-one-step-error-recurrence-bound"],
+    "required_hypotheses": "A uniform state-error bound requires a common compact tube with margin, initial error $C_0h^p$, exact-start one-step defect $Ch^{p+1}$, and one-step Lipschitz stability factor $1+Lh$; it says nothing by itself about tangent or adjoint error.",
+    "affected_claims": ["thm-discrete-continuous-gradient-error-order-p"],
+    "supplier_excerpts": [
+      {"item":"thm-global-error-from-one-step-defect-and-stability","section":"Statement","excerpt":"If constants $C,C_0,L\\ge0$, independent of $N$ and $n$, satisfy"},
+      {"item":"thm-global-error-from-one-step-defect-and-stability","section":"Statement","excerpt":"and $\\|\\Psi_{h,n}(u)-\\Psi_{h,n}(v)\\|_2\\le(1+Lh)\\|u-v\\|_2$"}
+    ],
+    "local_route": "The DIF3 gradient estimate invokes this supplier only for its state component. It independently assumes the adjoint error, derivative-data consistency, endpoint consistency, and quadrature error and states that the state theorem supplies none of those. The actual batch-28 theorem body was inspected."
+  },
+  {
+    "kind": "page",
+    "consumer": "discrete-continuous-and-pde-adjoint-sensitivities",
+    "supplier": "runge-kutta-methods-and-order",
+    "status": "inspected",
+    "examined_supplier_items": ["prop-explicit-rk-order-conditions-through-four", "def-explicit-runge-kutta-tableau-and-stage-map"],
+    "required_hypotheses": "The exact-start local defect conclusion is sufficient order $p\\le4$ for an explicit tableau satisfying the displayed rooted-tree coefficient equations, with a C4 vector field, bounded derivatives, and exact-start stages in the common compact tube.",
+    "affected_claims": ["thm-discrete-continuous-gradient-error-order-p"],
+    "supplier_excerpts": [
+      {"item":"prop-explicit-rk-order-conditions-through-four","section":"Statement","excerpt":"Let $f:U\\to\\mathbb R^d$ be autonomous and of class $C^4$ on an open convex set $U\\subseteq\\mathbb R^d$."},
+      {"item":"prop-explicit-rk-order-conditions-through-four","section":"Statement","excerpt":"The following coefficient equations are sufficient for the indicated uniform local orders on $K$:"}
+    ],
+    "local_route": "The local ODE-gradient theorem uses this source only as one sufficient way to obtain the state local-defect premise for p at most four. It preserves the separate stability hypothesis and never infers an adjoint or tangent error from RK state order."
+  },
+  {
+    "kind": "page",
+    "consumer": "discrete-continuous-and-pde-adjoint-sensitivities",
+    "supplier": "ceas-lemma-and-aubin-nitsche-error-estimates",
+    "status": "inspected",
+    "examined_supplier_items": ["thm-cea-quasi-optimality-for-conforming-galerkin-approximations", "cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation", "thm-adjoint-problem-for-bounded-coercive-variational-forms"],
+    "required_hypotheses": "Céa requires Countable Choice, a bounded coercive form, bounded data, and a conforming finite-dimensional subspace. The Aubin–Nitsche corollary additionally requires a primal approximation rate and separate dual regularity and dual approximation bounds; it does not assert full dual regularity on arbitrary Lipschitz domains.",
+    "affected_claims": ["thm-elliptic-fe-gradient-error-in-energy-norms", "cor-elliptic-l2-gradient-rate-under-dual-regularity", "thm-elliptic-adjoint-reduced-gradient"],
+    "supplier_excerpts": [
+      {"item":"thm-cea-quasi-optimality-for-conforming-galerkin-approximations","section":"Statement","excerpt":"Assume Countable Choice. Let $V$ be a real or complex Hilbert space"},
+      {"item":"cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation","section":"Statement","excerpt":"Suppose there are $s\\in(0,1]$, a normed regularity space $R_s\\subseteq V$ for $z_e$"}
+    ],
+    "local_route": "A13 is explicitly conforming and supplies all state/adjoint energy errors as hypotheses or Cea/first-Strang estimates. A14 applies Aubin–Nitsche separately to state and adjoint and adds L2-bounded derivative-map/consistency assumptions. The actual batch-38 statements and proofs were inspected."
+  },
+  {
+    "kind": "page",
+    "consumer": "discrete-continuous-and-pde-adjoint-sensitivities",
+    "supplier": "parabolic-finite-element-methods",
+    "status": "inspected",
+    "examined_supplier_items": ["thm-parabolic-semidiscrete-ritz-error-splitting-and-energy-bound", "lem-parabolic-projection-time-product-rule", "lem-parabolic-energy-pairing-and-trace"],
+    "required_hypotheses": "The Ritz energy estimate assumes the stated semidiscrete parabolic solutions, additional $u\\in H^1(0,T;V)$ regularity, a bounded comparison map, and its full residual. For operator-norm C1 time-dependent projections, the derivative is $P_h'u+P_hu'$; reverse-time adjoint use requires the same estimate for the transposed equation.",
+    "affected_claims": ["thm-parabolic-adjoint-gradient-sensitivity", "thm-parabolic-fe-gradient-error-with-time-dependent-ritz"],
+    "supplier_excerpts": [
+      {"item":"thm-parabolic-semidiscrete-ritz-error-splitting-and-energy-bound","section":"Statement","excerpt":"For this error identity, assume the additional regularity $u\\in H^1(0,T;V)$"},
+      {"item":"lem-parabolic-projection-time-product-rule","section":"Statement","excerpt":"$$\\frac{d}{dt}(P(t)u(t))=P'(t)u(t)+P(t)u'(t)\\quad\\text{a.e.}$$"}
+    ],
+    "local_route": "A15 assumes a differentiable state and existing adjoint and proves the sensitivity pairing formula; it does not import the page's existence theorem. A16 applies the Ritz error theorem to the forward and time-reversed transposed problems and retains both projection derivatives in the respective residuals. The current batch-56 bodies were inspected."
+  },
+  {
+    "kind": "page",
+    "consumer": "discrete-continuous-and-pde-adjoint-sensitivities",
+    "supplier": "implicit-stiff-time-stepping-and-algebraic-error",
+    "status": "inspected",
+    "examined_supplier_items": ["def-implicit-runge-kutta-stage-equations", "lem-small-step-implicit-rk-branch-and-residual-error"],
+    "required_hypotheses": "The selected stage root and residual estimate require an invariant closed product ball, a fixed-point map with contraction factor $q=h\\|A\\|_\\infty L<1$, and the stated invariant-ball bound. Parameter differentiability additionally requires a C1 residual and an invertible stage Jacobian.",
+    "affected_claims": ["lem-implicit-rk-stage-jacobian-nonsingular-on-branch", "thm-implicit-rk-stage-parameter-sensitivity", "ex-implicit-stiff-decay-parameter-fit"],
+    "supplier_excerpts": [
+      {"item":"lem-small-step-implicit-rk-branch-and-residual-error","section":"Statement","excerpt":"$q:=h\\|A\\|_\\infty L<1$."},
+      {"item":"lem-small-step-implicit-rk-branch-and-residual-error","section":"Statement","excerpt":"Every approximate stage vector $\\widetilde Y\\in\\mathcal B$ satisfies"}
+    ],
+    "local_route": "DIF3 proves nonsingularity from q<1 using the derivative bound and finite-dimensional rank-nullity, then applies the implicit-function supplier to the exact selected branch. The example separately states an invariant interval and small-step parameter range. It does not differentiate a finite solver iteration. The actual batch-65 branch theorem was inspected."
+  },
+  {
+    "kind": "page",
+    "consumer": "discrete-continuous-and-pde-adjoint-sensitivities",
+    "supplier": "variational-crimes-and-strang-lemmas",
+    "status": "inspected",
+    "examined_supplier_items": ["def-variational-crime-error-framework", "thm-first-strang-lemma-for-conforming-perturbed-galerkin"],
+    "required_hypotheses": "The first Strang estimate requires conforming $V_h\\subseteq V$, bounded exact/discrete forms and loads, positive coercivity constants, and explicit form/load defects. Geometry, data, and quadrature errors remain part of those defects.",
+    "affected_claims": ["thm-elliptic-fe-gradient-error-in-energy-norms"],
+    "supplier_excerpts": [
+      {"item":"thm-first-strang-lemma-for-conforming-perturbed-galerkin","section":"Statement","excerpt":"Let $V_h\\subseteq V$ be finite-dimensional"},
+      {"item":"def-variational-crime-error-framework","section":"Definition","excerpt":"For a **conforming perturbed Galerkin problem**, $V_h\\subseteq V$ is a finite-dimensional subspace"}
+    ],
+    "local_route": "The finite-element gradient theorem is restricted to conforming approximations, uses Céa or first Strang separately for state and transposed adjoint, and adds independent derivative-data defect terms. It makes no nonconforming second-Strang claim. The current batch-89 bodies were inspected."
+  }
+]

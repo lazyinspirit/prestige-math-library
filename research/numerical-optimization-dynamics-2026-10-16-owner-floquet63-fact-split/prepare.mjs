@@ -1,0 +1,21 @@
+import fs from 'node:fs';import path from 'node:path';
+import {splitFrontmatter,factParagraphs,numberedProofSteps,sourceSectionText} from '../../tools/facts-block.mjs';
+const run='numerical-optimization-dynamics-2026-10-16',base=`research/${run}-owner-floquet63-fact-split`,id='thm-floquet-multiplier-cluster-certificate-soundness',src=`items/${id}.md`,meta=`research/${run}-batch-63.proof-contracts.json`;
+const before=fs.readFileSync(src,'utf8'),oldBody=splitFrontmatter(before).body;
+if(!before.includes('submultiplicative]]).\n[F8]'))throw Error('Exact adjacent F7/F8 guard failed');
+const proposed=before.replace('submultiplicative]]).\n[F8]','submultiplicative]]).\n\n[F8]'),body=splitFrontmatter(proposed).body;
+const oldFacts=factParagraphs(oldBody),facts=factParagraphs(body),steps=numberedProofSteps(body);
+if(oldFacts.has('F8')||!facts.has('F8')||facts.get('F7').links.length!==1||facts.get('F8').links.length!==1)throw Error('Fact split mismatch');
+const raw=fs.readFileSync(meta,'utf8'),doc=JSON.parse(raw),next=structuredClone(doc),c=next.contracts[id],changes=[];
+for(const fact of ['F7','F8'])for(const supplier of facts.get(fact).links){
+const prior=c.citations.find(x=>x.source===supplier&&(x.fact==='F7'||x.fact==='F8'));if(!prior)throw Error('Missing prior citation '+supplier);
+const supplierRaw=fs.readFileSync(`items/${supplier}.md`,'utf8'),section=sourceSectionText(splitFrontmatter(supplierRaw).body,prior.source_section)?.trim();if(section!==prior.quote)throw Error('Current supplier quote guard changed');
+const uses=steps.filter(x=>new RegExp('\\b'+fact+'\\b').test(x.text)).map(x=>x.id);prior.fact=fact;prior.uses=uses;
+if(Object.hasOwn(c,'supplier_interfaces')){const pair=c.supplier_interfaces.find(x=>(x.supplier??x.source)===supplier&&(x.fact==='F7'||x.fact==='F8'));if(!pair)throw Error('Missing prior interface');pair.fact=fact;pair.required_hypotheses=facts.get(fact).text.trim();}
+const dest=`${base}/context/items/${supplier}.md`;fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,supplierRaw,{flag:'wx'});
+changes.push({fact,supplier,uses,required_hypotheses:facts.get(fact).text.trim()});}
+for(const [target,a,z]of [[src,before,proposed],[meta,raw,JSON.stringify(next,null,2)+'\n']])for(const [sub,text]of [['before',a],['proposed',z]]){const dest=`${base}/${sub}/${target}`;fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,text,{flag:'wx'});}
+// Hash-free availability diagnostic of exact current native merged scope; canonical sources/metadata untouched.
+const mergedPath=`research/${run}-proof-contracts.json`,mergedRaw=fs.readFileSync(mergedPath,'utf8'),merged=JSON.parse(mergedRaw),scan=(projected)=>{let checked=0,inputCount=0;const issues=[];for(const item of merged.scope){const sourceRaw=item===id&&projected?proposed:fs.readFileSync(`items/${item}.md`,'utf8'),f=factParagraphs(splitFrontmatter(sourceRaw).body),contract=item===id&&projected?next.contracts[id]:merged.contracts[item];checked++;for(const field of ['derivations','routine_steps'])for(const record of contract?.[field]??[])for(const input of record.inputs??[]){inputCount++;const token=typeof input==='string'?input.replace(/^fact\s+/,''):'';if(/^[FAL]\d+$/.test(token)&&!f.has(token))issues.push({item,field,record:record.id,step:record.step,input:token});}}return{checked_items:checked,input_count:inputCount,issues};};
+const report={run,source_target:src,metadata_target:meta,canonical_writes:0,source_change:'Exactly one blank line before F8; all proof/Statement bytes unchanged',metadata_change:'Only actual F7/F8 citation fact/uses; supplier_interfaces projected only if field exists',supplier_interfaces_present:Object.hasOwn(c,'supplier_interfaces'),changes,scope:mergedPath,before:scan(false),projected:scan(true),prior_verifier_limitation:'Previous 64741-check PASS checked native input coverage but omitted availability of each named F/A/L fact. It did not establish native proof-contract acceptance; preserved as historical limited result.'};
+fs.writeFileSync(`${base}/projection-report.json`,JSON.stringify(report,null,2)+'\n',{flag:'wx'});fs.writeFileSync(`${base}/merged-scope-before.json`,mergedRaw,{flag:'wx'});console.log(JSON.stringify(report));

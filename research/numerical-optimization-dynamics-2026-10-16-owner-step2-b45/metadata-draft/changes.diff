@@ -1,0 +1,849 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-45.pages.json
++++ proposed/numerical-optimization-dynamics-2026-10-16-batch-45.pages.json
+@@ -33,6 +33,7 @@
+           "def-absolutely-continuous-function",
+           "def-l-one-of-a-measure",
+           "def-indefinite-lebesgue-integral-on-a-compact-interval",
++          "def-countable-choice",
+           "thm-absolutely-continuous-functions-have-integrable-derivatives",
+           "thm-real-gamma-functional-equation",
+           "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+@@ -43,7 +44,7 @@
+       {
+         "id": "lem-continuous-fractional-integral-is-holder",
+         "kind": "lemma",
+-        "title": "Fractional integrals of continuous data are Hölder continuous",
++        "title": "Fractional integrals of continuous data are H\u00f6lder continuous",
+         "deps": [
+           "def-caputo-derivative-and-fractional-integral",
+           "thm-real-gamma-functional-equation",
+@@ -157,7 +158,7 @@
+       {
+         "id": "lem-weakly-singular-fractional-gronwall",
+         "kind": "lemma",
+-        "title": "Weakly singular fractional Grönwall inequality",
++        "title": "Weakly singular fractional Gr\u00f6nwall inequality",
+         "deps": [
+           "def-caputo-derivative-and-fractional-integral",
+           "def-real-gamma-function-by-the-euler-integral",
+@@ -272,7 +273,14 @@
+         "title": "Scalar resolvent stability for backward-Euler convolution quadrature",
+         "deps": [
+           "alg-backward-euler-convolution-quadrature",
+-          "lem-backward-euler-cq-weights-and-partial-sums"
++          "lem-backward-euler-cq-weights-and-partial-sums",
++          "def-real-power",
++          "cor-exponential-reciprocal-and-positivity",
++          "thm-real-power-laws",
++          "thm-real-power-continuity-and-derivatives",
++          "cor-mean-value-theorem",
++          "def-finite-sum",
++          "lem-finite-sum-reindexing-and-fubini"
+         ],
+         "dependency_level": 5
+       },
+@@ -305,7 +313,7 @@
+     "id": "fractional-evolution-and-convolution-quadrature-examples",
+     "kind": "B",
+     "category": "numerical-differential-equations-and-stochastic-dynamics",
+-    "title": "Fractional evolution and convolution quadrature — Examples",
++    "title": "Fractional evolution and convolution quadrature \u2014 Examples",
+     "companion": "fractional-evolution-and-convolution-quadrature",
+     "requires": [
+       "fractional-evolution-and-convolution-quadrature"
+@@ -318,6 +326,8 @@
+         "deps": [
+           "alg-uniform-and-graded-grid-l1",
+           "alg-backward-euler-convolution-quadrature",
++          "lem-l1-positive-weights-and-discrete-comparison",
++          "thm-backward-euler-cq-scalar-resolvent-stability",
+           "def-caputo-derivative-and-fractional-integral",
+           "def-real-gamma-function-by-the-euler-integral"
+         ],
+@@ -346,6 +356,7 @@
+         "title": "A Caputo startup singularity and a graded-grid calculation",
+         "deps": [
+           "alg-uniform-and-graded-grid-l1",
++          "lem-l1-positive-weights-and-discrete-comparison",
+           "thm-l1-stability-and-smooth-data-error",
+           "def-caputo-derivative-and-fractional-integral",
+           "def-absolutely-continuous-function",
+--- research/numerical-optimization-dynamics-2026-10-16-batch-45.proof-contracts.json
++++ proposed/numerical-optimization-dynamics-2026-10-16-batch-45.proof-contracts.json
+@@ -205,7 +205,7 @@
+           "fact": "F1",
+           "source": "def-caputo-derivative-and-fractional-integral",
+           "source_section": "Definition",
+-          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]], so $u'\\in L^1(0,T)$ almost\neverywhere by [[thm-absolutely-continuous-functions-have-integrable-derivatives]].\nThe Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].\n",
++          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$ whose almost-everywhere derivative belongs to\n$L^1(0,T)$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]]. Under Countable Choice\n([[def-countable-choice]]), every such absolutely continuous $u$ has\n$u'\\in L^1(0,T)$ by\n[[thm-absolutely-continuous-functions-have-integrable-derivatives]], so the\nCaputo derivative is defined on the whole absolutely continuous class under\nthat assumption. Without Countable Choice, the same formula is defined for\neach absolutely continuous $u$ whose derivative is separately known to be in\n$L^1(0,T)$. The Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].",
+           "uses": [
+             "1.1",
+             "1.2"
+@@ -265,7 +265,7 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "Suppose $0\\le s\\le t\\le T$ and put $\\delta=t-s$. Since $\\beta-1<0$, the kernel $(t-r)^{\\beta-1}$ is no larger than $(s-r)^{\\beta-1}$ for $0\\le r<s$. Thus [F1] gives $$\\Gamma(\\beta)|I^\\beta g(t)-I^\\beta g(s)|\\le\\|g\\|_\\infty\\left(\\int_0^s\\big((s-r)^{\\beta-1}-(t-r)^{\\beta-1}\\big)dr+\\int_s^t(t-r)^{\\beta-1}dr\\right).$$ The first integral is $(s^\\beta-t^\\beta+\\delta^\\beta)/\\beta$. If $\\delta=0$ it is zero. If $\\delta>0$, put $q(x)=(x+\\delta)^\\beta-x^\\beta$. It is positive, and for $x>0$ its derivative is $\\beta((x+\\delta)^{\\beta-1}-x^{\\beta-1})<0$ by [F3]; hence $0\\le t^\\beta-s^\\beta=q(s)\\le\\lim_{x\\downarrow0}q(x)=\\delta^\\beta$. Thus the first integral lies between $0$ and $\\delta^\\beta/\\beta$. The second integral is $\\delta^\\beta/\\beta$. Therefore the right side is at most $2\\|g\\|_\\infty\\delta^\\beta/\\beta$.",
++          "claim": "Suppose $0\\le s\\le t\\le T$ and put $\\delta=t-s$. Since $\\beta-1<0$, the kernel $(t-r)^{\\beta-1}$ is no larger than $(s-r)^{\\beta-1}$ for $0\\le r<s$. Thus [F1] gives $$\\Gamma(\\beta)|I^\\beta g(t)-I^\\beta g(s)|\\le\\|g\\|_\\infty\\left(\\int_0^s\\big((s-r)^{\\beta-1}-(t-r)^{\\beta-1}\\big)dr+\\int_s^t(t-r)^{\\beta-1}dr\\right).$$ The first integral is $(s^\\beta-t^\\beta+\\delta^\\beta)/\\beta$. Its integrand is nonnegative, so the integral is nonnegative; and $t^\\beta-s^\\beta\\ge0$ by monotonicity of positive powers in [F3], so the same formula bounds it above by $\\delta^\\beta/\\beta$. The second integral is $\\delta^\\beta/\\beta$. Therefore the right side is at most $2\\|g\\|_\\infty\\delta^\\beta/\\beta$.",
+           "step": "1.2",
+           "inputs": [
+             "given",
+@@ -277,7 +277,7 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "Divide step 1.2 by $\\Gamma(\\beta)>0$ and use [F2]. This gives the stated Hölder bound when $s\\le t$; interchanging $s,t$ gives it for every pair. The bound tends to zero with $|t-s|$, so $I^\\beta g$ is continuous.",
++          "claim": "Divide step 1.2 by $\\Gamma(\\beta)>0$ and use [F2]. This gives the stated H\u00f6lder bound when $s\\le t$; interchanging $s,t$ gives it for every pair. The bound tends to zero with $|t-s|$, so $I^\\beta g$ is continuous.",
+           "step": "2.1",
+           "inputs": [
+             "step 1.2",
+@@ -296,7 +296,7 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Steps 1.1–2.1 yield zero integral and zero Holder difference when g=0."
++          "evidence": "Steps 1.1\u20132.1 yield zero integral and zero Holder difference when g=0."
+         },
+         {
+           "case": "one",
+@@ -337,7 +337,7 @@
+           "fact": "F1",
+           "source": "def-caputo-derivative-and-fractional-integral",
+           "source_section": "Definition",
+-          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]], so $u'\\in L^1(0,T)$ almost\neverywhere by [[thm-absolutely-continuous-functions-have-integrable-derivatives]].\nThe Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].\n",
++          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$ whose almost-everywhere derivative belongs to\n$L^1(0,T)$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]]. Under Countable Choice\n([[def-countable-choice]]), every such absolutely continuous $u$ has\n$u'\\in L^1(0,T)$ by\n[[thm-absolutely-continuous-functions-have-integrable-derivatives]], so the\nCaputo derivative is defined on the whole absolutely continuous class under\nthat assumption. Without Countable Choice, the same formula is defined for\neach absolutely continuous $u$ whose derivative is separately known to be in\n$L^1(0,T)$. The Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].",
+           "uses": [
+             "1.1",
+             "3.1",
+@@ -416,7 +416,7 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "The integrands are measurable. Applying Tonelli [F5] to their absolute values on $0\\le r\\le s\\le t\\le T$, for each fixed $r$ set $x=t-s$ and $y=s-r$; the region lies in $[0,T]^2$, so the kernel integral is at most $\\int_0^T x^{a-1}dx\\int_0^T y^{b-1}dy=T^{a+b}/(ab)$ by [F6]. Hence $\\int_0^T\\int_0^t\\int_0^s(t-s)^{a-1}(s-r)^{b-1}|g(r)|\\,dr\\,ds\\,dt\\le T^{a+b}\\|g\\|_1/(ab)<\\infty$, so the double integral is absolutely integrable for almost every fixed $t$ and Tonelli permits swapping $r,s$. The same theorem gives $\\|I^ag\\|_1\\le\\Gamma(a)^{-1}\\int_0^T|g(r)|\\int_r^T(t-r)^{a-1}dt\\,dr\\le T^a\\|g\\|_1/\\Gamma(a+1)$ using [F4]–[F6] and positivity [F7].",
++          "claim": "The integrands are measurable. Applying Tonelli [F5] to their absolute values on $0\\le r\\le s\\le t\\le T$, for each fixed $r$ set $x=t-s$ and $y=s-r$; the region lies in $[0,T]^2$, so the kernel integral is at most $\\int_0^T x^{a-1}dx\\int_0^T y^{b-1}dy=T^{a+b}/(ab)$ by [F6]. Hence $\\int_0^T\\int_0^t\\int_0^s(t-s)^{a-1}(s-r)^{b-1}|g(r)|\\,dr\\,ds\\,dt\\le T^{a+b}\\|g\\|_1/(ab)<\\infty$, so the double integral is absolutely integrable for almost every fixed $t$ and Tonelli permits swapping $r,s$. The same theorem gives $\\|I^ag\\|_1\\le\\Gamma(a)^{-1}\\int_0^T|g(r)|\\int_r^T(t-r)^{a-1}dt\\,dr\\le T^a\\|g\\|_1/\\Gamma(a+1)$ using [F4]\u2013[F6] and positivity [F7].",
+           "step": "1.1",
+           "inputs": [
+             "given",
+@@ -430,7 +430,7 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "After swapping the order, the inner kernel integral is $\\int_r^t(t-s)^{a-1}(s-r)^{b-1}ds=(t-r)^{a+b-1}\\int_0^1(1-y)^{a-1}y^{b-1}dy=(t-r)^{a+b-1}B(b,a)$ by the substitution $y=(s-r)/(t-r)$ using [F8] and the definition [F2]. This applies for almost every $t$ by step 1.1; if $g$ is continuous, Tonelli and this formula bound the nonnegative double integral for each fixed $t$ by $\\|g\\|_\\infty B(b,a)\\int_0^t(t-r)^{a+b-1}dr<\\infty$ using [F5]–[F6], so Fubini applies for every $t$.",
++          "claim": "After swapping the order, the inner kernel integral is $\\int_r^t(t-s)^{a-1}(s-r)^{b-1}ds=(t-r)^{a+b-1}\\int_0^1(1-y)^{a-1}y^{b-1}dy=(t-r)^{a+b-1}B(b,a)$ by the substitution $y=(s-r)/(t-r)$ using [F8] and the definition [F2]. This applies for almost every $t$ by step 1.1; if $g$ is continuous, Tonelli and this formula bound the nonnegative double integral for each fixed $t$ by $\\|g\\|_\\infty B(b,a)\\int_0^t(t-r)^{a+b-1}dr<\\infty$ using [F5]\u2013[F6], so Fubini applies for every $t$.",
+           "step": "2.1",
+           "inputs": [
+             "step 1.1",
+@@ -492,12 +492,12 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Steps 3.1–4.1 establish the identities for every t in [0,T] in the continuous case, including t=0."
++          "evidence": "Steps 3.1\u20134.1 establish the identities for every t in [0,T] in the continuous case, including t=0."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Steps 1.1–4.1 use explicit Tonelli/Fubini integrals and substitutions; no arbitrary family is selected."
++          "evidence": "Steps 1.1\u20134.1 use explicit Tonelli/Fubini integrals and substitutions; no arbitrary family is selected."
+         },
+         {
+           "case": "iff-forward",
+@@ -656,7 +656,7 @@
+           "fact": "F1",
+           "source": "alg-backward-euler-convolution-quadrature",
+           "source_section": "Definition",
+-          "quote": "Input $0<\\alpha<1$, a step size $h>0$, an integer $N\\ge1$, $\\lambda\\ge0$,\nan initial value $u_0$, and forcing values $F^1,\\ldots,F^N$. Define\n$\\omega_0=1$ and, for $j\\ge1$,\n\n$$\\omega_j:=\\frac{j-1-\\alpha}{j}\\,\\omega_{j-1}.$$\n\nPut $V^0=0$. For $n=1,\\ldots,N$, compute\n\n$$V^n:=\\frac{F^n-\\lambda u_0-h^{-\\alpha}\\sum_{j=1}^n\\omega_jV^{n-j}}{h^{-\\alpha}+\\lambda},\\qquad U^n:=u_0+V^n.$$\n\nEquivalently, the discrete Caputo derivative is\n\n$$\\bar\\partial_h^\\alpha V^n:=h^{-\\alpha}\\sum_{j=0}^n\\omega_jV^{n-j},$$\n\nand the recurrence solves $\\bar\\partial_h^\\alpha V^n+\\lambda V^n=F^n-\\lambda u_0$.\nSince $h^{-\\alpha}+\\lambda>0$,\nthe exact-real scalar solve is nonsingular. Invalid parameters return\n`invalid-input`; a finite-precision implementation that cannot certify the\nsolve returns `solve-failed` without reporting a value. The direct full-history\nimplementation uses $N(N+1)/2$ convolution terms and stores $N+1$ values; no\nFFT or truncated-memory error claim is included.",
++          "quote": "Input $0<\\alpha<1$, a step size $h>0$, an integer $N\\ge1$, $\\lambda\\ge0$,\nan initial value $u_0$, and forcing values $F^1,\\ldots,F^N$. If any\nadmissibility condition fails, return `invalid-input`. Set $\\omega_0=1$ and\ncompute $\\omega_1,\\ldots,\\omega_N$ in increasing order by\n\n$$\\omega_j:=\\frac{j-1-\\alpha}{j}\\,\\omega_{j-1}.$$\n\nSet $V^0=0$ and $U^0=u_0$. For $n=1,\\ldots,N$ in increasing order, compute\n\n$$V^n:=\\frac{F^n-\\lambda u_0-h^{-\\alpha}\\sum_{j=1}^n\\omega_jV^{n-j}}{h^{-\\alpha}+\\lambda},\\qquad U^n:=u_0+V^n.$$\n\nFor any sequence $V^0,\\ldots,V^N$ with $V^0=0$, use the notation\n\n$$\\bar\\partial_h^\\alpha V^n:=h^{-\\alpha}\\sum_{j=0}^n\\omega_jV^{n-j}.$$\n\nReturn $U^0,\\ldots,U^N$. A finite-precision implementation that cannot\ncertify a scalar solve returns `solve-failed` without reporting a value. No\nFFT or truncated-memory error claim is included.",
+           "uses": [
+             "1.1",
+             "1.2"
+@@ -738,7 +738,7 @@
+           "fact": "F5",
+           "source": "thm-chain-rule",
+           "source_section": "Statement",
+-          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
++          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carath\u00e9odory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+           "uses": [
+             "1.2"
+           ]
+@@ -952,7 +952,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Steps 1.1–4.1 use explicit coefficient recurrences and the identity theorem; no choice principle is invoked."
++          "evidence": "Steps 1.1\u20134.1 use explicit coefficient recurrences and the identity theorem; no choice principle is invoked."
+         },
+         {
+           "case": "iff-forward",
+@@ -994,7 +994,7 @@
+           "fact": "A2",
+           "source": "def-dependent-choice",
+           "source_section": "Definition",
+-          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.\n\n",
++          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ \u2014 for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ \u2014 is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.\n\n",
+           "uses": [
+             "1.1"
+           ]
+@@ -1003,7 +1003,7 @@
+           "fact": "F1",
+           "source": "def-caputo-derivative-and-fractional-integral",
+           "source_section": "Definition",
+-          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]], so $u'\\in L^1(0,T)$ almost\neverywhere by [[thm-absolutely-continuous-functions-have-integrable-derivatives]].\nThe Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].\n",
++          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$ whose almost-everywhere derivative belongs to\n$L^1(0,T)$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]]. Under Countable Choice\n([[def-countable-choice]]), every such absolutely continuous $u$ has\n$u'\\in L^1(0,T)$ by\n[[thm-absolutely-continuous-functions-have-integrable-derivatives]], so the\nCaputo derivative is defined on the whole absolutely continuous class under\nthat assumption. Without Countable Choice, the same formula is defined for\neach absolutely continuous $u$ whose derivative is separately known to be in\n$L^1(0,T)$. The Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].",
+           "uses": [
+             "1.1",
+             "2.1"
+@@ -1109,7 +1109,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "The Statement assumes Countable Choice and Dependent Choice, Facts A1–A2 name them, and the proof uses them only through the cited AC fundamental theorem."
++          "evidence": "The Statement assumes Countable Choice and Dependent Choice, Facts A1\u2013A2 name them, and the proof uses them only through the cited AC fundamental theorem."
+         },
+         {
+           "case": "iff-forward",
+@@ -1130,17 +1130,18 @@
+           "fact": "F1",
+           "source": "alg-uniform-and-graded-grid-l1",
+           "source_section": "Definition",
+-          "quote": "Input $0<\\alpha<1$, $T>0$, an integer $N\\ge1$, $\\lambda\\ge0$, an initial\nvalue $U^0=u_0$, and forcing values $F^1,\\ldots,F^N$. Choose either the\nuniform grid $t_k=kh$ with $h=T/N$, or a strictly increasing grid\n$0=t_0<t_1<\\cdots<t_N=T$. A power-graded choice is\n$t_k=T(k/N)^r$ with a specified $r\\ge1$. Write $h_k=t_k-t_{k-1}$ and, for\n$1\\le k\\le n\\le N$, define the exact kernel weight\n\n$$b_{n,k}:=\\frac{(t_n-t_{k-1})^{1-\\alpha}-(t_n-t_k)^{1-\\alpha}}{\\Gamma(2-\\alpha)h_k}.$$\n\nFor a grid sequence $V^0,\\ldots,V^N$, the L1 approximation to the Caputo\nderivative at $t_n$ is\n\n$$\\delta_{\\mathcal T}^\\alpha V^n:=\\sum_{k=1}^n b_{n,k}(V^k-V^{k-1}).$$\n\nFor each $n=1,\\ldots,N$, return the value given by the scalar recurrence\n\n$$U^n:=\\frac{F^n+b_{n,1}U^0+\\sum_{k=1}^{n-1}(b_{n,k+1}-b_{n,k})U^k}{b_{n,n}+\\lambda}.$$\n\nThis solves $\\delta_{\\mathcal T}^\\alpha U^n+\\lambda U^n=F^n$. Every weight\n$b_{n,k}$ is positive and $b_{n,n}=h_n^{-\\alpha}/\\Gamma(2-\\alpha)>0$, so\nthe exact-real denominator is strictly positive. On a uniform grid, writing\n$a_j=(j+1)^{1-\\alpha}-j^{1-\\alpha}$ gives\n\n$$\\delta_h^\\alpha U^n=\\frac{h^{-\\alpha}}{\\Gamma(2-\\alpha)}\\sum_{k=1}^n a_{n-k}(U^k-U^{k-1}).$$\n\nThe direct method uses every earlier increment at each step, hence uses\n$N(N+1)/2$ history terms and stores $N+1$ solution values. An input outside\nthe stated parameter or grid domain returns `invalid-input`. A real-arithmetic\nexecution has no singular branch under these hypotheses; a finite-precision\nimplementation that cannot certify a scalar solve returns `solve-failed`\nwithout reporting a value. The graded-grid procedure is an implementation\ndefinition only; no optimal graded-mesh rate is part of this item.\n",
+-          "uses": [
+-            "1.1",
+-            "2.1"
++          "quote": "Input $0<\\alpha<1$, $T>0$, an integer $N\\ge1$, $\\lambda\\ge0$, an initial\nvalue $U^0=u_0$, and forcing values $F^1,\\ldots,F^N$. Choose either the\nuniform grid $t_k=kh$ with $h=T/N$, or a strictly increasing grid\n$0=t_0<t_1<\\cdots<t_N=T$. A power-graded choice is\n$t_k=T(k/N)^r$ with a specified $r\\ge1$. Write $h_k=t_k-t_{k-1}$ and, for\n$1\\le k\\le n\\le N$, define the exact kernel weight\n\n$$b_{n,k}:=\\frac{(t_n-t_{k-1})^{1-\\alpha}-(t_n-t_k)^{1-\\alpha}}{\\Gamma(2-\\alpha)h_k}.$$\n\nFor a grid sequence $V^0,\\ldots,V^N$, the L1 approximation to the Caputo\nderivative at $t_n$ is\n\n$$\\delta_{\\mathcal T}^\\alpha V^n:=\\sum_{k=1}^n b_{n,k}(V^k-V^{k-1}).$$\n\nFor $n=1,\\ldots,N$ in increasing order, compute the value given by the\nscalar recurrence\n\n$$U^n:=\\frac{F^n+b_{n,1}U^0+\\sum_{k=1}^{n-1}(b_{n,k+1}-b_{n,k})U^k}{b_{n,n}+\\lambda}.$$\n\nReturn $U^0,\\ldots,U^N$. On a uniform grid, writing\n$a_j=(j+1)^{1-\\alpha}-j^{1-\\alpha}$ gives\n\n$$\\delta_h^\\alpha U^n=\\frac{h^{-\\alpha}}{\\Gamma(2-\\alpha)}\\sum_{k=1}^n a_{n-k}(U^k-U^{k-1}).$$\n\nAn input outside the stated parameter or grid domain returns `invalid-input`.\nA finite-precision implementation that cannot certify a scalar solve returns\n`solve-failed` without reporting a value. The graded-grid procedure is an\nimplementation definition only; no optimal graded-mesh rate is part of this\nitem.",
++          "uses": [
++            "1.1",
++            "2.1",
++            "4.1"
+           ]
+         },
+         {
+           "fact": "F2",
+           "source": "def-caputo-derivative-and-fractional-integral",
+           "source_section": "Definition",
+-          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]], so $u'\\in L^1(0,T)$ almost\neverywhere by [[thm-absolutely-continuous-functions-have-integrable-derivatives]].\nThe Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].\n",
++          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$ whose almost-everywhere derivative belongs to\n$L^1(0,T)$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]]. Under Countable Choice\n([[def-countable-choice]]), every such absolutely continuous $u$ has\n$u'\\in L^1(0,T)$ by\n[[thm-absolutely-continuous-functions-have-integrable-derivatives]], so the\nCaputo derivative is defined on the whole absolutely continuous class under\nthat assumption. Without Countable Choice, the same formula is defined for\neach absolutely continuous $u$ whose derivative is separately known to be in\n$L^1(0,T)$. The Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].",
+           "uses": [
+             "1.2"
+           ]
+@@ -1244,7 +1245,7 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "Put $\\phi(t)=t^\\alpha$. By [F5], $\\phi'(s)=\\alpha s^{\\alpha-1}$ for $s>0$, and this derivative is decreasing because its derivative is $\\alpha(\\alpha-1)s^{\\alpha-2}<0$ and [F8] applies. It is in $L^1(0,T)$ by [F9], with integral $T^\\alpha$. Its indefinite integral is $\\phi(t)-\\phi(0)=t^\\alpha$, so $\\phi$ is absolutely continuous by [F6] and its Caputo derivative is defined. On an interval $[a,b]=[t_{k-1},t_k]$ its secant slope $\\bar\\phi'_k$ is the average of $\\phi'$, hence $e_k(s):=\\bar\\phi'_k-\\phi'(s)$ is increasing and $\\int_a^b e_k(s)ds=0$. Since $w(s)=(t_n-s)^{-\\alpha}$ is also increasing, their pairwise differences have the same sign. Expanding the double integral and using $\\int_a^b e_k=0$ gives $$\\int_a^b e_k(s)w(s)ds=\\frac1{2(b-a)}\\int_a^b\\int_a^b (e_k(s)-e_k(r))(w(s)-w(r))dr\\,ds\\ge0.$$ These integrals are finite: $e_k,w\\in L^1(a,b)$, and the only possible singular product $\\phi'(s)w(s)$ occurs when $n=k=1$; there it is the integrable Beta kernel $\\alpha s^{\\alpha-1}(t_1-s)^{-\\alpha}$ from [F3]. Expanding the absolute value of the double-integral integrand bounds it by the sum of products of the finite integrals $\\int|e_k|$, $\\int w$, and $\\int|e_k|w$, which justifies the expansion. Summing over intervals and using [F2] yields $\\delta_{\\mathcal T}^\\alpha\\phi(t_n)\\ge D_C^\\alpha\\phi(t_n)$. Direct substitution $s=t_n y$ and [F3]–[F4] give $$D_C^\\alpha(t^\\alpha)(t_n)=\\frac{\\alpha}{\\Gamma(1-\\alpha)}t_n^0B(\\alpha,1-\\alpha)=\\Gamma(1+\\alpha).$$ Thus, using $\\Gamma(1+\\alpha)>0$ from [F7], $q^n:=t_n^\\alpha/\\Gamma(1+\\alpha)$ satisfies $q^0=0$ and $\\delta_{\\mathcal T}^\\alpha q^n\\ge1$.",
++          "claim": "Put $\\phi(t)=t^\\alpha$. By [F5], $\\phi'(s)=\\alpha s^{\\alpha-1}$ for $s>0$, and this derivative is decreasing because its derivative is $\\alpha(\\alpha-1)s^{\\alpha-2}<0$ and [F8] applies. It is in $L^1(0,T)$ by [F9], with integral $T^\\alpha$. Its indefinite integral is $\\phi(t)-\\phi(0)=t^\\alpha$, so $\\phi$ is absolutely continuous by [F6] and its Caputo derivative is defined. In this proof, $D_C^\\alpha\\phi(t_n)$ denotes the pointwise integral representative in [F2]; the displayed Beta-kernel calculation below proves that this value is finite at every grid node. On an interval $[a,b]=[t_{k-1},t_k]$ its secant slope $\\bar\\phi'_k$ is the average of $\\phi'$, hence $e_k(s):=\\bar\\phi'_k-\\phi'(s)$ is increasing and $\\int_a^b e_k(s)ds=0$. Since $w(s)=(t_n-s)^{-\\alpha}$ is also increasing, their pairwise differences have the same sign. Expanding the double integral and using $\\int_a^b e_k=0$ gives $$\\int_a^b e_k(s)w(s)ds=\\frac1{2(b-a)}\\int_a^b\\int_a^b (e_k(s)-e_k(r))(w(s)-w(r))dr\\,ds\\ge0.$$ These integrals are finite: $e_k,w\\in L^1(a,b)$, and the only possible singular product $\\phi'(s)w(s)$ occurs when $n=k=1$; there it is the integrable Beta kernel $\\alpha s^{\\alpha-1}(t_1-s)^{-\\alpha}$ from [F3]. Expanding the absolute value of the double-integral integrand bounds it by the sum of products of the finite integrals $\\int|e_k|$, $\\int w$, and $\\int|e_k|w$, which justifies the expansion. Summing over intervals and using [F2] yields $\\delta_{\\mathcal T}^\\alpha\\phi(t_n)\\ge D_C^\\alpha\\phi(t_n)$. Direct substitution $s=t_n y$ and [F3]\u2013[F4] give $$D_C^\\alpha(t^\\alpha)(t_n)=\\frac{\\alpha}{\\Gamma(1-\\alpha)}t_n^0B(\\alpha,1-\\alpha)=\\Gamma(1+\\alpha).$$ Thus, using $\\Gamma(1+\\alpha)>0$ from [F7], $q^n:=t_n^\\alpha/\\Gamma(1+\\alpha)$ satisfies $q^0=0$ and $\\delta_{\\mathcal T}^\\alpha q^n\\ge1$.",
+           "step": "1.2",
+           "inputs": [
+             "given",
+@@ -1280,6 +1281,18 @@
+             "step 1.2",
+             "algebra"
+           ]
++        },
++        {
++          "id": "step-4-1",
++          "step": "4.1",
++          "claim": "For each $n$, expanding the operator from [F1] gives $$\\delta_{\\mathcal T}^\\alpha U^n=b_{n,n}U^n+\\sum_{k=1}^{n-1}(b_{n,k}-b_{n,k+1})U^k-b_{n,1}U^0.$$ By step 1.1, $b_{n,n}>0$, so with $\\lambda\\ge0$ the coefficient $b_{n,n}+\\lambda$ is positive. Rearranging $\\delta_{\\mathcal T}^\\alpha U^n+\\lambda U^n=F^n$ therefore gives exactly the recurrence in [F1], with a unique value at step $n$ once the earlier values are fixed. Induction over $n=1,\\ldots,N$ proves well-definedness and uniqueness of the full sequence and the stated equation.",
++          "inputs": [
++            "given",
++            "F1",
++            "step 1.1",
++            "algebra",
++            "induction"
++          ]
+         }
+       ],
+       "routine_steps": [],
+@@ -1333,7 +1346,7 @@
+           "fact": "F1",
+           "source": "def-caputo-derivative-and-fractional-integral",
+           "source_section": "Definition",
+-          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]], so $u'\\in L^1(0,T)$ almost\neverywhere by [[thm-absolutely-continuous-functions-have-integrable-derivatives]].\nThe Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].",
++          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$ whose almost-everywhere derivative belongs to\n$L^1(0,T)$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]]. Under Countable Choice\n([[def-countable-choice]]), every such absolutely continuous $u$ has\n$u'\\in L^1(0,T)$ by\n[[thm-absolutely-continuous-functions-have-integrable-derivatives]], so the\nCaputo derivative is defined on the whole absolutely continuous class under\nthat assumption. Without Countable Choice, the same formula is defined for\neach absolutely continuous $u$ whose derivative is separately known to be in\n$L^1(0,T)$. The Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].",
+           "uses": [
+             "1.2",
+             "2.1"
+@@ -1467,7 +1480,7 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "By [F1]–[F2], $0\\le L^mI^{m\\alpha}y(t)\\le\\|y\\|_\\infty L^mT^{m\\alpha}/\\Gamma(m\\alpha+1)$. The last factor tends to zero as the $m$th term of the convergent series in step 1.1. Letting $m\\to\\infty$ in step 1.2 proves the claimed bound; if $A=0$, then $0\\le y(t)\\le0$ for every $t$, so $y\\equiv0$.",
++          "claim": "By [F1]\u2013[F2], $0\\le L^mI^{m\\alpha}y(t)\\le\\|y\\|_\\infty L^mT^{m\\alpha}/\\Gamma(m\\alpha+1)$. The last factor tends to zero as the $m$th term of the convergent series in step 1.1. Letting $m\\to\\infty$ in step 1.2 proves the claimed bound; if $A=0$, then $0\\le y(t)\\le0$ for every $t$, so $y\\equiv0$.",
+           "step": "2.1",
+           "inputs": [
+             "step 1.1",
+@@ -1543,7 +1556,7 @@
+           "fact": "F1",
+           "source": "alg-backward-euler-convolution-quadrature",
+           "source_section": "Definition",
+-          "quote": "Input $0<\\alpha<1$, a step size $h>0$, an integer $N\\ge1$, $\\lambda\\ge0$,\nan initial value $u_0$, and forcing values $F^1,\\ldots,F^N$. Define\n$\\omega_0=1$ and, for $j\\ge1$,\n\n$$\\omega_j:=\\frac{j-1-\\alpha}{j}\\,\\omega_{j-1}.$$\n\nPut $V^0=0$. For $n=1,\\ldots,N$, compute\n\n$$V^n:=\\frac{F^n-\\lambda u_0-h^{-\\alpha}\\sum_{j=1}^n\\omega_jV^{n-j}}{h^{-\\alpha}+\\lambda},\\qquad U^n:=u_0+V^n.$$\n\nEquivalently, the discrete Caputo derivative is\n\n$$\\bar\\partial_h^\\alpha V^n:=h^{-\\alpha}\\sum_{j=0}^n\\omega_jV^{n-j},$$\n\nand the recurrence solves $\\bar\\partial_h^\\alpha V^n+\\lambda V^n=F^n-\\lambda u_0$.\nSince $h^{-\\alpha}+\\lambda>0$,\nthe exact-real scalar solve is nonsingular. Invalid parameters return\n`invalid-input`; a finite-precision implementation that cannot certify the\nsolve returns `solve-failed` without reporting a value. The direct full-history\nimplementation uses $N(N+1)/2$ convolution terms and stores $N+1$ values; no\nFFT or truncated-memory error claim is included.",
++          "quote": "Input $0<\\alpha<1$, a step size $h>0$, an integer $N\\ge1$, $\\lambda\\ge0$,\nan initial value $u_0$, and forcing values $F^1,\\ldots,F^N$. If any\nadmissibility condition fails, return `invalid-input`. Set $\\omega_0=1$ and\ncompute $\\omega_1,\\ldots,\\omega_N$ in increasing order by\n\n$$\\omega_j:=\\frac{j-1-\\alpha}{j}\\,\\omega_{j-1}.$$\n\nSet $V^0=0$ and $U^0=u_0$. For $n=1,\\ldots,N$ in increasing order, compute\n\n$$V^n:=\\frac{F^n-\\lambda u_0-h^{-\\alpha}\\sum_{j=1}^n\\omega_jV^{n-j}}{h^{-\\alpha}+\\lambda},\\qquad U^n:=u_0+V^n.$$\n\nFor any sequence $V^0,\\ldots,V^N$ with $V^0=0$, use the notation\n\n$$\\bar\\partial_h^\\alpha V^n:=h^{-\\alpha}\\sum_{j=0}^n\\omega_jV^{n-j}.$$\n\nReturn $U^0,\\ldots,U^N$. A finite-precision implementation that cannot\ncertify a scalar solve returns `solve-failed` without reporting a value. No\nFFT or truncated-memory error claim is included.",
+           "uses": [
+             "1.1"
+           ]
+@@ -1636,7 +1649,7 @@
+           "fact": "F7",
+           "source": "thm-chain-rule",
+           "source_section": "Statement",
+-          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
++          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carath\u00e9odory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+           "uses": [
+             "3.1"
+           ]
+@@ -1812,7 +1825,7 @@
+           "fact": "F1",
+           "source": "def-caputo-derivative-and-fractional-integral",
+           "source_section": "Definition",
+-          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]], so $u'\\in L^1(0,T)$ almost\neverywhere by [[thm-absolutely-continuous-functions-have-integrable-derivatives]].\nThe Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].\n",
++          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$ whose almost-everywhere derivative belongs to\n$L^1(0,T)$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]]. Under Countable Choice\n([[def-countable-choice]]), every such absolutely continuous $u$ has\n$u'\\in L^1(0,T)$ by\n[[thm-absolutely-continuous-functions-have-integrable-derivatives]], so the\nCaputo derivative is defined on the whole absolutely continuous class under\nthat assumption. Without Countable Choice, the same formula is defined for\neach absolutely continuous $u$ whose derivative is separately known to be in\n$L^1(0,T)$. The Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].",
+           "uses": [
+             "2.1",
+             "4.1",
+@@ -1916,7 +1929,7 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "By [F6]–[F7], $MT^\\alpha/\\Gamma(\\alpha+1)\\to0$ as $T\\downarrow0$; since $T_0>0$ and $r>0$, choose $T\\in(0,T_0]$ for which the displayed bound holds.",
++          "claim": "By [F6]\u2013[F7], $MT^\\alpha/\\Gamma(\\alpha+1)\\to0$ as $T\\downarrow0$; since $T_0>0$ and $r>0$, choose $T\\in(0,T_0]$ for which the displayed bound holds.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+@@ -1927,7 +1940,7 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "Let $B=\\{u\\in C([0,T]):\\|u-u_0\\|_\\infty\\le r\\}$ and define $\\Phi u=u_0+I^\\alpha(f(\\cdot,u(\\cdot)))$. For $u\\in B$, $s\\mapsto(s,u(s))$ and then $s\\mapsto f(s,u(s))$ are continuous, with $|f(s,u(s))|\\le M$; [F1]–[F2] therefore make $\\Phi u$ continuous and give $\\|\\Phi u-u_0\\|_\\infty\\le MT^\\alpha/\\Gamma(\\alpha+1)\\le r$. Thus $\\Phi$ maps $B$ into itself.",
++          "claim": "Let $B=\\{u\\in C([0,T]):\\|u-u_0\\|_\\infty\\le r\\}$ and define $\\Phi u=u_0+I^\\alpha(f(\\cdot,u(\\cdot)))$. For $u\\in B$, $s\\mapsto(s,u(s))$ and then $s\\mapsto f(s,u(s))$ are continuous, with $|f(s,u(s))|\\le M$; [F1]\u2013[F2] therefore make $\\Phi u$ continuous and give $\\|\\Phi u-u_0\\|_\\infty\\le MT^\\alpha/\\Gamma(\\alpha+1)\\le r$. Thus $\\Phi$ maps $B$ into itself.",
+           "step": "2.1",
+           "inputs": [
+             "given",
+@@ -1950,7 +1963,7 @@
+         },
+         {
+           "id": "step-4-1",
+-          "claim": "For $n\\ge1$, Lipschitz continuity and the positive kernel [F1] give $d_{n+1}\\le L I^\\alpha d_n$. Starting with step 3.1, induction and the pointwise semigroup identity [F3] yield $d_n(t)\\le M L^{n-1}I^{n\\alpha}\\mathbf1(t)=M L^{n-1}t^{n\\alpha}/\\Gamma(n\\alpha+1)$ for every $n\\ge1$.",
++          "claim": "For $n\\ge1$, Lipschitz continuity and the positive kernel [F1] give $d_{n+1}\\le L I^\\alpha d_n$. Starting with step 3.1, induction and the pointwise semigroup identity [F3] yield $d_n(t)\\le M L^{n-1}I^{n\\alpha}\\mathbf1(t)=M L^{n-1}t^{n\\alpha}/\\Gamma(n\\alpha+1)$ for every $n\\ge1$, with the coefficient $L^0$ at $n=1$ defined to be $1$.",
+           "step": "4.1",
+           "inputs": [
+             "step 3.1",
+@@ -2004,7 +2017,7 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Steps 3.1–4.1 include M=0 and L=0; the successive-difference bounds remain valid in those cases."
++          "evidence": "Steps 3.1\u20134.1 include M=0 and L=0; the successive-difference bounds remain valid in those cases."
+         },
+         {
+           "case": "one",
+@@ -2070,13 +2083,23 @@
+           "fact": "F1",
+           "source": "alg-uniform-and-graded-grid-l1",
+           "source_section": "Definition",
+-          "quote": "Input $0<\\alpha<1$, $T>0$, an integer $N\\ge1$, $\\lambda\\ge0$, an initial\nvalue $U^0=u_0$, and forcing values $F^1,\\ldots,F^N$. Choose either the\nuniform grid $t_k=kh$ with $h=T/N$, or a strictly increasing grid\n$0=t_0<t_1<\\cdots<t_N=T$. A power-graded choice is\n$t_k=T(k/N)^r$ with a specified $r\\ge1$. Write $h_k=t_k-t_{k-1}$ and, for\n$1\\le k\\le n\\le N$, define the exact kernel weight\n\n$$b_{n,k}:=\\frac{(t_n-t_{k-1})^{1-\\alpha}-(t_n-t_k)^{1-\\alpha}}{\\Gamma(2-\\alpha)h_k}.$$\n\nFor a grid sequence $V^0,\\ldots,V^N$, the L1 approximation to the Caputo\nderivative at $t_n$ is\n\n$$\\delta_{\\mathcal T}^\\alpha V^n:=\\sum_{k=1}^n b_{n,k}(V^k-V^{k-1}).$$\n\nFor each $n=1,\\ldots,N$, return the value given by the scalar recurrence\n\n$$U^n:=\\frac{F^n+b_{n,1}U^0+\\sum_{k=1}^{n-1}(b_{n,k+1}-b_{n,k})U^k}{b_{n,n}+\\lambda}.$$\n\nThis solves $\\delta_{\\mathcal T}^\\alpha U^n+\\lambda U^n=F^n$. Every weight\n$b_{n,k}$ is positive and $b_{n,n}=h_n^{-\\alpha}/\\Gamma(2-\\alpha)>0$, so\nthe exact-real denominator is strictly positive. On a uniform grid, writing\n$a_j=(j+1)^{1-\\alpha}-j^{1-\\alpha}$ gives\n\n$$\\delta_h^\\alpha U^n=\\frac{h^{-\\alpha}}{\\Gamma(2-\\alpha)}\\sum_{k=1}^n a_{n-k}(U^k-U^{k-1}).$$\n\nThe direct method uses every earlier increment at each step, hence uses\n$N(N+1)/2$ history terms and stores $N+1$ solution values. An input outside\nthe stated parameter or grid domain returns `invalid-input`. A real-arithmetic\nexecution has no singular branch under these hypotheses; a finite-precision\nimplementation that cannot certify a scalar solve returns `solve-failed`\nwithout reporting a value. The graded-grid procedure is an implementation\ndefinition only; no optimal graded-mesh rate is part of this item.\n",
++          "quote": "Input $0<\\alpha<1$, $T>0$, an integer $N\\ge1$, $\\lambda\\ge0$, an initial\nvalue $U^0=u_0$, and forcing values $F^1,\\ldots,F^N$. Choose either the\nuniform grid $t_k=kh$ with $h=T/N$, or a strictly increasing grid\n$0=t_0<t_1<\\cdots<t_N=T$. A power-graded choice is\n$t_k=T(k/N)^r$ with a specified $r\\ge1$. Write $h_k=t_k-t_{k-1}$ and, for\n$1\\le k\\le n\\le N$, define the exact kernel weight\n\n$$b_{n,k}:=\\frac{(t_n-t_{k-1})^{1-\\alpha}-(t_n-t_k)^{1-\\alpha}}{\\Gamma(2-\\alpha)h_k}.$$\n\nFor a grid sequence $V^0,\\ldots,V^N$, the L1 approximation to the Caputo\nderivative at $t_n$ is\n\n$$\\delta_{\\mathcal T}^\\alpha V^n:=\\sum_{k=1}^n b_{n,k}(V^k-V^{k-1}).$$\n\nFor $n=1,\\ldots,N$ in increasing order, compute the value given by the\nscalar recurrence\n\n$$U^n:=\\frac{F^n+b_{n,1}U^0+\\sum_{k=1}^{n-1}(b_{n,k+1}-b_{n,k})U^k}{b_{n,n}+\\lambda}.$$\n\nReturn $U^0,\\ldots,U^N$. On a uniform grid, writing\n$a_j=(j+1)^{1-\\alpha}-j^{1-\\alpha}$ gives\n\n$$\\delta_h^\\alpha U^n=\\frac{h^{-\\alpha}}{\\Gamma(2-\\alpha)}\\sum_{k=1}^n a_{n-k}(U^k-U^{k-1}).$$\n\nAn input outside the stated parameter or grid domain returns `invalid-input`.\nA finite-precision implementation that cannot certify a scalar solve returns\n`solve-failed` without reporting a value. The graded-grid procedure is an\nimplementation definition only; no optimal graded-mesh rate is part of this\nitem.",
+           "uses": [
+             "3.1",
+             "4.2"
+           ]
+         },
+         {
++          "fact": "F1",
++          "source": "lem-l1-positive-weights-and-discrete-comparison",
++          "source_section": "Statement",
++          "quote": "Let $0<\\alpha<1$, $\\lambda\\ge0$, and let\n$0=t_0<t_1<\\cdots<t_N=T$ be any finite grid with $T>0$. Use the weights\n$b_{n,k}$ and operator $\\delta_{\\mathcal T}^\\alpha$ from\n[[alg-uniform-and-graded-grid-l1]]. Then:\n\n1. For every $n$, $0<b_{n,1}\\le b_{n,2}\\le\\cdots\\le b_{n,n}$.\n2. If $z^0\\ge0$ and $\\delta_{\\mathcal T}^\\alpha z^n+\\lambda z^n\\ge0$ for\n   $1\\le n\\le N$, then $z^n\\ge0$ for every $n$.\n3. If $R\\ge0$, $e^0=0$, and\n   $\\delta_{\\mathcal T}^\\alpha e^n+\\lambda e^n=r^n$ with\n   $|r^n|\\le R$, then\n   $$\\max_{0\\le n\\le N}|e^n|\\le\\frac{T^\\alpha}{\\Gamma(1+\\alpha)}R.$$\n4. For any initial value $U^0$ and forcing values $F^1,\\ldots,F^N$, the\n   recurrence in [[alg-uniform-and-graded-grid-l1]] is well-defined at every\n   step and gives the unique $U^n$ satisfying\n   $\\delta_{\\mathcal T}^\\alpha U^n+\\lambda U^n=F^n$.",
++          "uses": [
++            "3.1",
++            "4.2"
++          ]
++        },
++        {
+           "fact": "F2",
+           "source": "lem-l1-positive-weights-and-discrete-comparison",
+           "source_section": "Statement",
+@@ -2089,7 +2112,7 @@
+           "fact": "F3",
+           "source": "def-caputo-derivative-and-fractional-integral",
+           "source_section": "Definition",
+-          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]], so $u'\\in L^1(0,T)$ almost\neverywhere by [[thm-absolutely-continuous-functions-have-integrable-derivatives]].\nThe Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].\n",
++          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$ whose almost-everywhere derivative belongs to\n$L^1(0,T)$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]]. Under Countable Choice\n([[def-countable-choice]]), every such absolutely continuous $u$ has\n$u'\\in L^1(0,T)$ by\n[[thm-absolutely-continuous-functions-have-integrable-derivatives]], so the\nCaputo derivative is defined on the whole absolutely continuous class under\nthat assumption. Without Countable Choice, the same formula is defined for\neach absolutely continuous $u$ whose derivative is separately known to be in\n$L^1(0,T)$. The Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].",
+           "uses": [
+             "3.1"
+           ]
+@@ -2168,7 +2191,7 @@
+           "fact": "F9",
+           "source": "thm-ftc-second-part",
+           "source_section": "Statement",
+-          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.\n\n",
++          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable \u2014 then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) \u2014 and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.\n\n",
+           "uses": [
+             "2.1"
+           ]
+@@ -2301,7 +2324,7 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Steps 4.1–5.1 give zero error bound when ||u″||=0 and include the initial error E^0=0."
++          "evidence": "Steps 4.1\u20135.1 give zero error bound when ||u\u2033||=0 and include the initial error E^0=0."
+         },
+         {
+           "case": "one",
+@@ -2342,7 +2365,7 @@
+           "fact": "F1",
+           "source": "alg-backward-euler-convolution-quadrature",
+           "source_section": "Definition",
+-          "quote": "Input $0<\\alpha<1$, a step size $h>0$, an integer $N\\ge1$, $\\lambda\\ge0$,\nan initial value $u_0$, and forcing values $F^1,\\ldots,F^N$. Define\n$\\omega_0=1$ and, for $j\\ge1$,\n\n$$\\omega_j:=\\frac{j-1-\\alpha}{j}\\,\\omega_{j-1}.$$\n\nPut $V^0=0$. For $n=1,\\ldots,N$, compute\n\n$$V^n:=\\frac{F^n-\\lambda u_0-h^{-\\alpha}\\sum_{j=1}^n\\omega_jV^{n-j}}{h^{-\\alpha}+\\lambda},\\qquad U^n:=u_0+V^n.$$\n\nEquivalently, the discrete Caputo derivative is\n\n$$\\bar\\partial_h^\\alpha V^n:=h^{-\\alpha}\\sum_{j=0}^n\\omega_jV^{n-j},$$\n\nand the recurrence solves $\\bar\\partial_h^\\alpha V^n+\\lambda V^n=F^n-\\lambda u_0$.\nSince $h^{-\\alpha}+\\lambda>0$,\nthe exact-real scalar solve is nonsingular. Invalid parameters return\n`invalid-input`; a finite-precision implementation that cannot certify the\nsolve returns `solve-failed` without reporting a value. The direct full-history\nimplementation uses $N(N+1)/2$ convolution terms and stores $N+1$ values; no\nFFT or truncated-memory error claim is included.",
++          "quote": "Input $0<\\alpha<1$, a step size $h>0$, an integer $N\\ge1$, $\\lambda\\ge0$,\nan initial value $u_0$, and forcing values $F^1,\\ldots,F^N$. If any\nadmissibility condition fails, return `invalid-input`. Set $\\omega_0=1$ and\ncompute $\\omega_1,\\ldots,\\omega_N$ in increasing order by\n\n$$\\omega_j:=\\frac{j-1-\\alpha}{j}\\,\\omega_{j-1}.$$\n\nSet $V^0=0$ and $U^0=u_0$. For $n=1,\\ldots,N$ in increasing order, compute\n\n$$V^n:=\\frac{F^n-\\lambda u_0-h^{-\\alpha}\\sum_{j=1}^n\\omega_jV^{n-j}}{h^{-\\alpha}+\\lambda},\\qquad U^n:=u_0+V^n.$$\n\nFor any sequence $V^0,\\ldots,V^N$ with $V^0=0$, use the notation\n\n$$\\bar\\partial_h^\\alpha V^n:=h^{-\\alpha}\\sum_{j=0}^n\\omega_jV^{n-j}.$$\n\nReturn $U^0,\\ldots,U^N$. A finite-precision implementation that cannot\ncertify a scalar solve returns `solve-failed` without reporting a value. No\nFFT or truncated-memory error claim is included.",
+           "uses": [
+             "2.1"
+           ]
+@@ -2450,7 +2473,7 @@
+           "fact": "F8",
+           "source": "thm-chain-rule",
+           "source_section": "Statement",
+-          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
++          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carath\u00e9odory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+           "uses": [
+             "1.1",
+             "2.1",
+@@ -2634,9 +2657,11 @@
+           "fact": "F1",
+           "source": "alg-backward-euler-convolution-quadrature",
+           "source_section": "Definition",
+-          "quote": "Input $0<\\alpha<1$, a step size $h>0$, an integer $N\\ge1$, $\\lambda\\ge0$,\nan initial value $u_0$, and forcing values $F^1,\\ldots,F^N$. Define\n$\\omega_0=1$ and, for $j\\ge1$,\n\n$$\\omega_j:=\\frac{j-1-\\alpha}{j}\\,\\omega_{j-1}.$$\n\nPut $V^0=0$. For $n=1,\\ldots,N$, compute\n\n$$V^n:=\\frac{F^n-\\lambda u_0-h^{-\\alpha}\\sum_{j=1}^n\\omega_jV^{n-j}}{h^{-\\alpha}+\\lambda},\\qquad U^n:=u_0+V^n.$$\n\nEquivalently, the discrete Caputo derivative is\n\n$$\\bar\\partial_h^\\alpha V^n:=h^{-\\alpha}\\sum_{j=0}^n\\omega_jV^{n-j},$$\n\nand the recurrence solves $\\bar\\partial_h^\\alpha V^n+\\lambda V^n=F^n-\\lambda u_0$.\nSince $h^{-\\alpha}+\\lambda>0$,\nthe exact-real scalar solve is nonsingular. Invalid parameters return\n`invalid-input`; a finite-precision implementation that cannot certify the\nsolve returns `solve-failed` without reporting a value. The direct full-history\nimplementation uses $N(N+1)/2$ convolution terms and stores $N+1$ values; no\nFFT or truncated-memory error claim is included.",
+-          "uses": [
+-            "1.1"
++          "quote": "Input $0<\\alpha<1$, a step size $h>0$, an integer $N\\ge1$, $\\lambda\\ge0$,\nan initial value $u_0$, and forcing values $F^1,\\ldots,F^N$. If any\nadmissibility condition fails, return `invalid-input`. Set $\\omega_0=1$ and\ncompute $\\omega_1,\\ldots,\\omega_N$ in increasing order by\n\n$$\\omega_j:=\\frac{j-1-\\alpha}{j}\\,\\omega_{j-1}.$$\n\nSet $V^0=0$ and $U^0=u_0$. For $n=1,\\ldots,N$ in increasing order, compute\n\n$$V^n:=\\frac{F^n-\\lambda u_0-h^{-\\alpha}\\sum_{j=1}^n\\omega_jV^{n-j}}{h^{-\\alpha}+\\lambda},\\qquad U^n:=u_0+V^n.$$\n\nFor any sequence $V^0,\\ldots,V^N$ with $V^0=0$, use the notation\n\n$$\\bar\\partial_h^\\alpha V^n:=h^{-\\alpha}\\sum_{j=0}^n\\omega_jV^{n-j}.$$\n\nReturn $U^0,\\ldots,U^N$. A finite-precision implementation that cannot\ncertify a scalar solve returns `solve-failed` without reporting a value. No\nFFT or truncated-memory error claim is included.",
++          "uses": [
++            "1.1",
++            "2.1",
++            "3.1"
+           ]
+         },
+         {
+@@ -2645,7 +2670,72 @@
+           "source_section": "Statement",
+           "quote": "Let $0<\\alpha<1$ and let $(\\omega_j)$ be the weights from\n[[alg-backward-euler-convolution-quadrature]]. Then $\\omega_0=1$,\n$\\omega_j<0$ for every $j\\ge1$, and for every complex $z$ with $|z|<1$,\n$$\\sum_{j=0}^{\\infty}\\omega_jz^j=(1-z)^\\alpha_{\\operatorname{Log}}.$$\nFor $n\\ge0$ define\n$$p_n:=\\sum_{j=0}^n\\omega_j.$$\nThen\n$$p_n=\\prod_{k=1}^n\\left(1-\\frac{\\alpha}{k}\\right) =\\frac{\\Gamma(n+1-\\alpha)}{\\Gamma(1-\\alpha)\\Gamma(n+1)}>0,$$\nwhere the empty product for $n=0$ is $1$. For every $n\\ge1$,\n$$p_n\\ge\\frac{(n+1)^{-\\alpha}}{\\Gamma(1-\\alpha)}.$$",
+           "uses": [
+-            "1.1",
++            "3.1",
++            "4.1"
++          ]
++        },
++        {
++          "fact": "F3",
++          "source": "def-real-power",
++          "source_section": "Definition",
++          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
++          "uses": [
++            "1.1",
++            "4.1"
++          ]
++        },
++        {
++          "fact": "F3",
++          "source": "cor-exponential-reciprocal-and-positivity",
++          "source_section": "Statement",
++          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
++          "uses": [
++            "1.1",
++            "4.1"
++          ]
++        },
++        {
++          "fact": "F4",
++          "source": "thm-real-power-laws",
++          "source_section": "Statement",
++          "quote": "For $a,b>0$ and $r,s\\in\\mathbb R$,\n$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
++          "uses": [
++            "4.1"
++          ]
++        },
++        {
++          "fact": "F4",
++          "source": "thm-real-power-continuity-and-derivatives",
++          "source_section": "Statement",
++          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
++          "uses": [
++            "4.1"
++          ]
++        },
++        {
++          "fact": "F4",
++          "source": "cor-mean-value-theorem",
++          "source_section": "Statement",
++          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
++          "uses": [
++            "4.1"
++          ]
++        },
++        {
++          "fact": "F5",
++          "source": "def-finite-sum",
++          "source_section": "Definition",
++          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).\n\nLet $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n([[thm-recursion]]). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with\n\n$$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$\n\nWrite $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates.\n\n**The first coordinate is the index itself, and that is a small induction, not an\nobservation** ([[thm-induction-principle]]). Indeed $\\pi_1(g(0)) = 0$; and if\n$\\pi_1(g(n)) = n$, then\n$g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$,\nso $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every\n$n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed\nclauses be read off, and doing so gives\n\n$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those\ntwo properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies\nthe two clauses defining $g$, hence equals $g$ by the uniqueness clause of\n[[thm-recursion]], so $\\Sigma' = \\Sigma$.\n\nWe write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting\nelement $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same\ninduction on the first coordinate and the same uniqueness argument, gives the\nunique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with\n\n$$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**Notation.** For $m, n \\in \\mathbb{N}$ we abbreviate\n\n$$\\sum_{k=0}^{n} a_k := \\sum_{k < n+1} a_k, \\qquad \\prod_{k=0}^{n} a_k := \\prod_{k < n+1} a_k,$$\n\nand, for a general lower index $m$ with $m \\le n + 1$, let $d$ be the\nunique natural number satisfying $m+d=n+1$. Existence is the definition of\nnatural order ([[def-nat-order]]); if $m+d=m+e$, commutativity\n([[lem-nat-add-commutative]]) gives $d+m=e+m$, so cancellation\n([[lem-nat-add-cancellative]]) gives $d=e$. On these admissible bounds only,\nwe may write this unique additive gap as $d=n+1-m$; no total natural subtraction\noperation is presupposed. With $d$ thus fixed, define\n\n$$\\sum_{k=m}^{n} a_k := \\sum_{j < d} a_{m+j}, \\qquad \\prod_{k=m}^{n} a_k := \\prod_{j < d} a_{m+j} .$$\n\nWhen $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while\nthe empty product has value $1$. In the same spirit $\\sum_{k=0}^{-1} a_k$ is\nnotation for the empty sum $\\Sigma_0 = 0$ and $\\prod_{k=0}^{-1} a_k$ for the\nempty product $\\Pi_0 = 1$; the index $-1$ never occurs as an element of\n$\\mathbb{N}$ and is only a way of writing \"no terms\".\n\nEquivalently, for naturals $m \\le r$, the half-open endpoint notation\n$\\sum_{k=m}^{r-1}a_k$ and $\\prod_{k=m}^{r-1}a_k$ means\n$\\sum_{j<d}a_{m+j}$ and $\\prod_{j<d}a_{m+j}$, respectively, where $d$ is the\nunique natural with $m+d=r$. Here $r-1$ is an endpoint label for the terms\nbefore $r$, so this notation needs no total subtraction operation. For $m=r$,\nthe unique gap is $0$ because $m+0=m$, giving the empty sum and product; the\ncase $m=r=0$ is the $-1$ endpoint convention just stipulated.\n\nOnly finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation\n$\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list\n$a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the\nlist to all of $\\mathbb{N}$: extend the list by $a_k = 0$ (respectively\n$a_k = 1$) for $k \\ge n$ and apply the definition above.",
++          "uses": [
++            "2.1"
++          ]
++        },
++        {
++          "fact": "F5",
++          "source": "lem-finite-sum-reindexing-and-fubini",
++          "source_section": "Statement",
++          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.\n\n1. If $h:T\\to S$ is a bijection and $a:S\\to M$, then $\\sum_{t\\in T}a_{h(t)}=\\sum_{s\\in S}a_s$.\n2. If $S$ and $T$ are disjoint and $a:S\\cup T\\to M$, then $\\sum_{u\\in S\\cup T}a_u=\\sum_{s\\in S}a_s+\\sum_{t\\in T}a_t$.\n3. If $a:S\\times T\\to M$, then\n   $$\\sum_{(s,t)\\in S\\times T}a_{s,t}=\\sum_{s\\in S}\\left(\\sum_{t\\in T}a_{s,t}\\right)=\\sum_{t\\in T}\\left(\\sum_{s\\in S}a_{s,t}\\right).$$",
++          "uses": [
+             "2.1"
+           ]
+         }
+@@ -2653,8 +2743,31 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
++          "claim": "For a general valid input $(u_0,F^1,\\ldots,F^N)$, [F3] and $\\lambda\\ge0$ give $h^{-\\alpha}+\\lambda>0$. Inductively, once $V^0,\\ldots,V^{n-1}$ are defined, the update divides a specified real numerator by this positive denominator, so it gives a unique real $V^n$. Rearranging the update gives $\\bar\\partial_h^\\alpha V^n+\\lambda V^n=F^n-\\lambda u_0$ by the operator definition in the algorithm. Induction proves the stated well-definedness and equation for the whole sequence.",
++          "step": "1.1",
++          "inputs": [
++            "given",
++            "F1",
++            "F3",
++            "algebra",
++            "induction"
++          ]
++        },
++        {
++          "id": "step-2-1",
++          "claim": "At update $n$, [F1] includes exactly $n$ terms in the history sum. Thus the total count is $S=\\sum_{n=1}^N n$. Reindexing by the bijection $n\\mapsto N+1-n$ using [F5] also gives $S=\\sum_{n=1}^N(N+1-n)$. Adding termwise yields $2S=\\sum_{n=1}^N(N+1)=N(N+1)$, so the total number is $N(N+1)/2$. The sequence $V^0,\\ldots,V^N$ has exactly $N+1$ solution values.",
++          "step": "2.1",
++          "inputs": [
++            "given",
++            "F1",
++            "F5",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-3-1",
++          "step": "3.1",
+           "claim": "Write $G=\\max_{1\\le n\\le N}|g^n|$ and $M=\\max_{0\\le n\\le N}|V^n|$. If $M=0$ the claim is immediate. Otherwise choose the least index $n\\ge1$ with $|V^n|=M$. Taking absolute values in [F1] and using $-\\omega_j>0$ gives $$\\bigl(h^{-\\alpha}+\\lambda\\bigr)M\\le G+h^{-\\alpha}M\\sum_{j=1}^n(-\\omega_j).$$ The sum on the right is $1-p_n$ by [F2], so rearranging yields $(\\lambda+h^{-\\alpha}p_n)M\\le G$.",
+-          "step": "1.1",
+           "inputs": [
+             "given",
+             "F1",
+@@ -2664,12 +2777,14 @@
+           ]
+         },
+         {
+-          "id": "step-2-1",
+-          "claim": "Since $n\\le N$, $h(n+1)\\le h(N+1)=T+h\\le2T$. By [F2], $h^{-\\alpha}p_n\\ge(2T)^{-\\alpha}/\\Gamma(1-\\alpha)$. As $\\lambda\\ge0$, step 1.1 gives $M\\le G/(h^{-\\alpha}p_n)\\le\\Gamma(1-\\alpha)(2T)^\\alpha G$. Since $V^0=0$, this is the stated estimate.",
+-          "step": "2.1",
+-          "inputs": [
+-            "step 1.1",
++          "id": "step-4-1",
++          "step": "4.1",
++          "claim": "Since $n\\le N$, $h(n+1)\\le h(N+1)=T+h\\le2T$. By [F2], [F4], and [F3], $$h^{-\\alpha}p_n\\ge \\frac{h^{-\\alpha}(n+1)^{-\\alpha}}{\\Gamma(1-\\alpha)}=\\frac{(h(n+1))^{-\\alpha}}{\\Gamma(1-\\alpha)}\\ge\\frac{(2T)^{-\\alpha}}{\\Gamma(1-\\alpha)}.$$ As $\\lambda\\ge0$, step 3.1 gives $M\\le G/(h^{-\\alpha}p_n)\\le\\Gamma(1-\\alpha)(2T)^\\alpha G$. Since $V^0=0$, this is the stated estimate.",
++          "inputs": [
++            "step 3.1",
+             "F2",
++            "F3",
++            "F4",
+             "algebra"
+           ]
+         }
+@@ -2725,8 +2840,9 @@
+           "fact": "F1",
+           "source": "def-caputo-derivative-and-fractional-integral",
+           "source_section": "Definition",
+-          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]], so $u'\\in L^1(0,T)$ almost\neverywhere by [[thm-absolutely-continuous-functions-have-integrable-derivatives]].\nThe Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].",
+-          "uses": [
++          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$ whose almost-everywhere derivative belongs to\n$L^1(0,T)$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]]. Under Countable Choice\n([[def-countable-choice]]), every such absolutely continuous $u$ has\n$u'\\in L^1(0,T)$ by\n[[thm-absolutely-continuous-functions-have-integrable-derivatives]], so the\nCaputo derivative is defined on the whole absolutely continuous class under\nthat assumption. Without Countable Choice, the same formula is defined for\neach absolutely continuous $u$ whose derivative is separately known to be in\n$L^1(0,T)$. The Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].",
++          "uses": [
++            "1.1",
+             "2.1"
+           ]
+         },
+@@ -2734,10 +2850,10 @@
+           "fact": "F2",
+           "source": "alg-backward-euler-convolution-quadrature",
+           "source_section": "Definition",
+-          "quote": "Input $0<\\alpha<1$, a step size $h>0$, an integer $N\\ge1$, $\\lambda\\ge0$,\nan initial value $u_0$, and forcing values $F^1,\\ldots,F^N$. Define\n$\\omega_0=1$ and, for $j\\ge1$,\n\n$$\\omega_j:=\\frac{j-1-\\alpha}{j}\\,\\omega_{j-1}.$$\n\nPut $V^0=0$. For $n=1,\\ldots,N$, compute\n\n$$V^n:=\\frac{F^n-\\lambda u_0-h^{-\\alpha}\\sum_{j=1}^n\\omega_jV^{n-j}}{h^{-\\alpha}+\\lambda},\\qquad U^n:=u_0+V^n.$$\n\nEquivalently, the discrete Caputo derivative is\n\n$$\\bar\\partial_h^\\alpha V^n:=h^{-\\alpha}\\sum_{j=0}^n\\omega_jV^{n-j},$$\n\nand the recurrence solves $\\bar\\partial_h^\\alpha V^n+\\lambda V^n=F^n-\\lambda u_0$.\nSince $h^{-\\alpha}+\\lambda>0$,\nthe exact-real scalar solve is nonsingular. Invalid parameters return\n`invalid-input`; a finite-precision implementation that cannot certify the\nsolve returns `solve-failed` without reporting a value. The direct full-history\nimplementation uses $N(N+1)/2$ convolution terms and stores $N+1$ values; no\nFFT or truncated-memory error claim is included.",
+-          "uses": [
+-            "2.2",
+-            "4.1"
++          "quote": "Input $0<\\alpha<1$, a step size $h>0$, an integer $N\\ge1$, $\\lambda\\ge0$,\nan initial value $u_0$, and forcing values $F^1,\\ldots,F^N$. If any\nadmissibility condition fails, return `invalid-input`. Set $\\omega_0=1$ and\ncompute $\\omega_1,\\ldots,\\omega_N$ in increasing order by\n\n$$\\omega_j:=\\frac{j-1-\\alpha}{j}\\,\\omega_{j-1}.$$\n\nSet $V^0=0$ and $U^0=u_0$. For $n=1,\\ldots,N$ in increasing order, compute\n\n$$V^n:=\\frac{F^n-\\lambda u_0-h^{-\\alpha}\\sum_{j=1}^n\\omega_jV^{n-j}}{h^{-\\alpha}+\\lambda},\\qquad U^n:=u_0+V^n.$$\n\nFor any sequence $V^0,\\ldots,V^N$ with $V^0=0$, use the notation\n\n$$\\bar\\partial_h^\\alpha V^n:=h^{-\\alpha}\\sum_{j=0}^n\\omega_jV^{n-j}.$$\n\nReturn $U^0,\\ldots,U^N$. A finite-precision implementation that cannot\ncertify a scalar solve returns `solve-failed` without reporting a value. No\nFFT or truncated-memory error claim is included.",
++          "uses": [
++            "3.1",
++            "5.1"
+           ]
+         },
+         {
+@@ -2764,17 +2880,17 @@
+           "source_section": "Statement",
+           "quote": "Let $0<\\alpha<1$, put $\\beta=2-\\alpha$, and define\n$$c_m:=\\frac{\\Gamma(m+\\beta+1)}{\\Gamma(\\beta+1)\\Gamma(m+1)}\\quad(m\\ge0),$$\n$$s_1:=1,\\qquad s_n:=c_{n-1}+c_{n-2}\\quad(n\\ge2).$$\nThere is a constant $C_\\alpha<\\infty$ such that for every $n\\ge1$,\n$$\\left|s_n-\\frac{2n^\\beta}{\\Gamma(\\beta+1)}\\right| \\le C_\\alpha n^{\\beta-1}.$$\nFor $n\\ge1$, $s_n$ is the coefficient of $z^n$ in the real Taylor series\nabout $0$ of $z(1+z)(1-z)^{\\alpha-3}$ on $(-1,1)$.",
+           "uses": [
+-            "2.2",
+-            "3.1"
++            "3.1",
++            "4.1"
+           ]
+         },
+         {
+           "fact": "F6",
+           "source": "thm-backward-euler-cq-scalar-resolvent-stability",
+           "source_section": "Statement",
+-          "quote": "Let $0<\\alpha<1$, $\\lambda\\ge0$, $T>0$, and $h=T/N$ with integer $N\\ge1$.\nFor $g^1,\\ldots,g^N\\in\\mathbb R$, let $V^0=0$ and let $V^n$ solve the\nbackward-Euler CQ recurrence\n\n$$\\bar\\partial_h^\\alpha V^n+\\lambda V^n=g^n,$$\n\nwhere $\\bar\\partial_h^\\alpha$ is defined in\n[[alg-backward-euler-convolution-quadrature]]. Then\n\n$$\\max_{0\\le n\\le N}|V^n| \\le \\Gamma(1-\\alpha)(2T)^\\alpha\\max_{1\\le n\\le N}|g^n|.$$",
+-          "uses": [
+-            "4.1"
++          "quote": "Let $0<\\alpha<1$, $\\lambda\\ge0$, $T>0$, and $h=T/N$ with integer $N\\ge1$.\nFor any valid input $(u_0,F^1,\\ldots,F^N)$ to\n[[alg-backward-euler-convolution-quadrature]], its updates define a unique\nsequence $V^0=0,V^1,\\ldots,V^N$ satisfying\n\n$$\\bar\\partial_h^\\alpha V^n+\\lambda V^n=F^n-\\lambda u_0\\qquad(1\\le n\\le N).$$\n\nIn particular, for $g^1,\\ldots,g^N\\in\\mathbb R$, use the algorithm with\n$u_0=0$ and $F^n=g^n$. Its output sequence $V$ satisfies\n\n$$\\bar\\partial_h^\\alpha V^n+\\lambda V^n=g^n,$$\n\nwhere $\\bar\\partial_h^\\alpha$ is defined in\n[[alg-backward-euler-convolution-quadrature]]. Then\n\n$$\\max_{0\\le n\\le N}|V^n| \\le \\Gamma(1-\\alpha)(2T)^\\alpha\\max_{1\\le n\\le N}|g^n|.$$\n\nThe direct full-history implementation uses exactly $N(N+1)/2$ terms in its\nconvolution history sums. Retaining the solution sequence $V^0,\\ldots,V^N$\nrequires $N+1$ solution values; this count excludes input and weight storage.",
++          "uses": [
++            "5.1"
+           ]
+         },
+         {
+@@ -2792,6 +2908,7 @@
+           "source_section": "Definition",
+           "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+           "uses": [
++            "1.1",
+             "2.1"
+           ]
+         },
+@@ -2801,6 +2918,7 @@
+           "source_section": "Statement",
+           "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+           "uses": [
++            "1.1",
+             "2.1"
+           ]
+         },
+@@ -2819,7 +2937,7 @@
+           "source_section": "Statement",
+           "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+           "uses": [
+-            "2.2"
++            "3.1"
+           ]
+         },
+         {
+@@ -2828,7 +2946,7 @@
+           "source_section": "Statement",
+           "quote": "Let\n\n$$f(x)=\\sum_{n=0}^{\\infty}a_n(x-c)^n$$\n\nhave radius $R$. For every $x$ with $|x-c|<R$, the function $f$ is differentiable at $x$ ([[def-derivative]]) and\n\n$$f'(x)=\\sum_{n=0}^{\\infty}\\iota(n+1)a_{n+1}(x-c)^n.$$\n\nThe differentiated series has the same radius $R$.",
+           "uses": [
+-            "2.2"
++            "3.1"
+           ]
+         },
+         {
+@@ -2837,25 +2955,27 @@
+           "source_section": "Statement",
+           "quote": "Suppose $f(x)=\\sum_{n\\ge0}a_n(x-c)^n$ and $g(x)=\\sum_{n\\ge0}b_n(x-c)^n$ have radii $R_f,R_g$. For $|x-c|<\\min(R_f,R_g)$,\n\n$$f(x)g(x)=\\sum_{n=0}^{\\infty}\\left(\\sum_{k=0}^{n}a_kb_{n-k}\\right)(x-c)^n,$$\n\nand the displayed product series converges absolutely.",
+           "uses": [
+-            "2.2"
++            "3.1"
+           ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "For any finite disjoint interval family $[a_j,b_j]\\subseteq[0,T]$, $$\\sum_j|u(b_j)-u(a_j)|=\\sum_j(b_j-a_j)(a_j+b_j) \\le 2T\\sum_j(b_j-a_j).$$ Given $\\varepsilon>0$, choosing $\\delta=\\varepsilon/(2T+1)$ verifies absolute continuity by [F7]; hence the Caputo derivative is defined.",
++          "claim": "For any finite disjoint interval family $[a_j,b_j]\\subseteq[0,T]$, $$\\sum_j|u(b_j)-u(a_j)|=\\sum_j(b_j-a_j)(a_j+b_j) \\le 2T\\sum_j(b_j-a_j).$$ Given $\\varepsilon>0$, choosing $\\delta=\\varepsilon/(2T+1)$ verifies absolute continuity by [F7]. For almost every $t\\in(0,T)$, $u'(t)=2t$ by [F8], so $u'\\in L^1(0,T)$; therefore the Caputo derivative is defined by [F1].",
+           "step": "1.1",
+           "inputs": [
+             "given",
++            "F1",
+             "F7",
++            "F8",
+             "algebra",
+             "construct"
+           ]
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "By [F8], $u'(s)=2s$ for $s>0$; at $s=0$ the one-sided difference quotient is $s^2/s=s\\to0$, so $u'(0)=0$. Thus [F1] gives $$D_C^\\alpha u(t)=\\frac{2}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}s\\,ds =\\frac{2t^{2-\\alpha}}{\\Gamma(1-\\alpha)}B(2,1-\\alpha) =\\frac{2t^{2-\\alpha}}{\\Gamma(3-\\alpha)},$$ where the substitution $s=ty$ and [F3]–[F4] give the last two equalities. Thus the stated $f$ makes $u$ an exact solution, and $u'(0)=0$.",
++          "claim": "By [F8], $u'(s)=2s$ for $s>0$; at $s=0$ the one-sided difference quotient is $s^2/s=s\\to0$, so $u'(0)=0$. Thus [F1] gives $$D_C^\\alpha u(t)=\\frac{2}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}s\\,ds =\\frac{2t^{2-\\alpha}}{\\Gamma(1-\\alpha)}B(2,1-\\alpha) =\\frac{2t^{2-\\alpha}}{\\Gamma(3-\\alpha)},$$ where the substitution $s=ty$ and [F3]\u2013[F4] give the last two equalities. Thus the stated $f$ makes $u$ an exact solution, and $u'(0)=0$.",
+           "step": "2.1",
+           "inputs": [
+             "given",
+@@ -2869,11 +2989,11 @@
+           ]
+         },
+         {
+-          "id": "step-2-2",
+-          "claim": "Put $v(t)=t^2$, so $v(nh)=h^2n^2$. Starting from the geometric series [F10] and differentiating termwise by [F11] gives $\\sum_{n\\ge0}n^2z^n=z(1+z)/(1-z)^3$. Multiplying this generating series by $h^{-\\alpha}(1-z)^\\alpha$ and using [F12] shows that the discrete Caputo derivative of the exact nodal values is $h^{2-\\alpha}s_n$, with $s_n$ from [F5]. The exact derivative from step 1.1 is $2h^{2-\\alpha}n^{2-\\alpha}/\\Gamma(3-\\alpha)$.",
+-          "step": "2.2",
+-          "inputs": [
+-            "step 1.1",
++          "id": "step-3-1",
++          "claim": "Put $v(t)=t^2$, so $v(nh)=h^2n^2$. Starting from the geometric series [F10] and differentiating termwise by [F11] gives $\\sum_{n\\ge0}n^2z^n=z(1+z)/(1-z)^3$. Multiplying this generating series by $h^{-\\alpha}(1-z)^\\alpha$ and using [F12] shows that the discrete Caputo derivative of the exact nodal values is $h^{2-\\alpha}s_n$, with $s_n$ from [F5]. The exact derivative from step 2.1 is $2h^{2-\\alpha}n^{2-\\alpha}/\\Gamma(3-\\alpha)$.",
++          "step": "3.1",
++          "inputs": [
++            "step 2.1",
+             "F2",
+             "F5",
+             "F10",
+@@ -2883,21 +3003,21 @@
+           ]
+         },
+         {
+-          "id": "step-3-1",
++          "id": "step-4-1",
+           "claim": "Therefore the residual $\\tau_n:=\\bar\\partial_h^\\alpha v(nh)-D_C^\\alpha v(nh)$ satisfies $|\\tau_n|\\le C_\\alpha h^{2-\\alpha}n^{1-\\alpha} =C_\\alpha h(nh)^{1-\\alpha}\\le C_\\alpha T^{1-\\alpha}h$ by [F5].",
+-          "step": "3.1",
+-          "inputs": [
+-            "step 2.2",
++          "step": "4.1",
++          "inputs": [
++            "step 3.1",
+             "F5",
+             "algebra"
+           ]
+         },
+         {
+-          "id": "step-4-1",
+-          "claim": "Subtracting the exact equation from the CQ recurrence, the error $E^n:=U^n-u(nh)$ has $E^0=0$ and satisfies $\\bar\\partial_h^\\alpha E^n+\\lambda E^n=-\\tau_n$. Apply [F6] and step 3.1 to obtain $$\\max_n|E^n|\\le\\Gamma(1-\\alpha)(2T)^\\alpha C_\\alpha T^{1-\\alpha}h.$$ The coefficient of $h$ depends only on $\\alpha$ and $T$, proving the result.",
+-          "step": "4.1",
+-          "inputs": [
+-            "step 3.1",
++          "id": "step-5-1",
++          "step": "5.1",
++          "claim": "Subtracting the exact equation from the CQ recurrence, the error $E^n:=U^n-u(nh)$ has $E^0=0$ and satisfies $\\bar\\partial_h^\\alpha E^n+\\lambda E^n=-\\tau_n$. Apply [F6] and step 4.1 to obtain $$\\max_n|E^n|\\le\\Gamma(1-\\alpha)(2T)^\\alpha C_\\alpha T^{1-\\alpha}h.$$ The coefficient of $h$ depends only on $\\alpha$ and $T$, proving the result.",
++          "inputs": [
++            "step 4.1",
+             "F2",
+             "F6",
+             "algebra"
+@@ -2955,7 +3075,16 @@
+           "fact": "F1",
+           "source": "alg-uniform-and-graded-grid-l1",
+           "source_section": "Definition",
+-          "quote": "Input $0<\\alpha<1$, $T>0$, an integer $N\\ge1$, $\\lambda\\ge0$, an initial\nvalue $U^0=u_0$, and forcing values $F^1,\\ldots,F^N$. Choose either the\nuniform grid $t_k=kh$ with $h=T/N$, or a strictly increasing grid\n$0=t_0<t_1<\\cdots<t_N=T$. A power-graded choice is\n$t_k=T(k/N)^r$ with a specified $r\\ge1$. Write $h_k=t_k-t_{k-1}$ and, for\n$1\\le k\\le n\\le N$, define the exact kernel weight\n\n$$b_{n,k}:=\\frac{(t_n-t_{k-1})^{1-\\alpha}-(t_n-t_k)^{1-\\alpha}}{\\Gamma(2-\\alpha)h_k}.$$\n\nFor a grid sequence $V^0,\\ldots,V^N$, the L1 approximation to the Caputo\nderivative at $t_n$ is\n\n$$\\delta_{\\mathcal T}^\\alpha V^n:=\\sum_{k=1}^n b_{n,k}(V^k-V^{k-1}).$$\n\nFor each $n=1,\\ldots,N$, return the value given by the scalar recurrence\n\n$$U^n:=\\frac{F^n+b_{n,1}U^0+\\sum_{k=1}^{n-1}(b_{n,k+1}-b_{n,k})U^k}{b_{n,n}+\\lambda}.$$\n\nThis solves $\\delta_{\\mathcal T}^\\alpha U^n+\\lambda U^n=F^n$. Every weight\n$b_{n,k}$ is positive and $b_{n,n}=h_n^{-\\alpha}/\\Gamma(2-\\alpha)>0$, so\nthe exact-real denominator is strictly positive. On a uniform grid, writing\n$a_j=(j+1)^{1-\\alpha}-j^{1-\\alpha}$ gives\n\n$$\\delta_h^\\alpha U^n=\\frac{h^{-\\alpha}}{\\Gamma(2-\\alpha)}\\sum_{k=1}^n a_{n-k}(U^k-U^{k-1}).$$\n\nThe direct method uses every earlier increment at each step, hence uses\n$N(N+1)/2$ history terms and stores $N+1$ solution values. An input outside\nthe stated parameter or grid domain returns `invalid-input`. A real-arithmetic\nexecution has no singular branch under these hypotheses; a finite-precision\nimplementation that cannot certify a scalar solve returns `solve-failed`\nwithout reporting a value. The graded-grid procedure is an implementation\ndefinition only; no optimal graded-mesh rate is part of this item.",
++          "quote": "Input $0<\\alpha<1$, $T>0$, an integer $N\\ge1$, $\\lambda\\ge0$, an initial\nvalue $U^0=u_0$, and forcing values $F^1,\\ldots,F^N$. Choose either the\nuniform grid $t_k=kh$ with $h=T/N$, or a strictly increasing grid\n$0=t_0<t_1<\\cdots<t_N=T$. A power-graded choice is\n$t_k=T(k/N)^r$ with a specified $r\\ge1$. Write $h_k=t_k-t_{k-1}$ and, for\n$1\\le k\\le n\\le N$, define the exact kernel weight\n\n$$b_{n,k}:=\\frac{(t_n-t_{k-1})^{1-\\alpha}-(t_n-t_k)^{1-\\alpha}}{\\Gamma(2-\\alpha)h_k}.$$\n\nFor a grid sequence $V^0,\\ldots,V^N$, the L1 approximation to the Caputo\nderivative at $t_n$ is\n\n$$\\delta_{\\mathcal T}^\\alpha V^n:=\\sum_{k=1}^n b_{n,k}(V^k-V^{k-1}).$$\n\nFor $n=1,\\ldots,N$ in increasing order, compute the value given by the\nscalar recurrence\n\n$$U^n:=\\frac{F^n+b_{n,1}U^0+\\sum_{k=1}^{n-1}(b_{n,k+1}-b_{n,k})U^k}{b_{n,n}+\\lambda}.$$\n\nReturn $U^0,\\ldots,U^N$. On a uniform grid, writing\n$a_j=(j+1)^{1-\\alpha}-j^{1-\\alpha}$ gives\n\n$$\\delta_h^\\alpha U^n=\\frac{h^{-\\alpha}}{\\Gamma(2-\\alpha)}\\sum_{k=1}^n a_{n-k}(U^k-U^{k-1}).$$\n\nAn input outside the stated parameter or grid domain returns `invalid-input`.\nA finite-precision implementation that cannot certify a scalar solve returns\n`solve-failed` without reporting a value. The graded-grid procedure is an\nimplementation definition only; no optimal graded-mesh rate is part of this\nitem.",
++          "uses": [
++            "1.1"
++          ]
++        },
++        {
++          "fact": "F1",
++          "source": "lem-l1-positive-weights-and-discrete-comparison",
++          "source_section": "Statement",
++          "quote": "Let $0<\\alpha<1$, $\\lambda\\ge0$, and let\n$0=t_0<t_1<\\cdots<t_N=T$ be any finite grid with $T>0$. Use the weights\n$b_{n,k}$ and operator $\\delta_{\\mathcal T}^\\alpha$ from\n[[alg-uniform-and-graded-grid-l1]]. Then:\n\n1. For every $n$, $0<b_{n,1}\\le b_{n,2}\\le\\cdots\\le b_{n,n}$.\n2. If $z^0\\ge0$ and $\\delta_{\\mathcal T}^\\alpha z^n+\\lambda z^n\\ge0$ for\n   $1\\le n\\le N$, then $z^n\\ge0$ for every $n$.\n3. If $R\\ge0$, $e^0=0$, and\n   $\\delta_{\\mathcal T}^\\alpha e^n+\\lambda e^n=r^n$ with\n   $|r^n|\\le R$, then\n   $$\\max_{0\\le n\\le N}|e^n|\\le\\frac{T^\\alpha}{\\Gamma(1+\\alpha)}R.$$\n4. For any initial value $U^0$ and forcing values $F^1,\\ldots,F^N$, the\n   recurrence in [[alg-uniform-and-graded-grid-l1]] is well-defined at every\n   step and gives the unique $U^n$ satisfying\n   $\\delta_{\\mathcal T}^\\alpha U^n+\\lambda U^n=F^n$.",
+           "uses": [
+             "1.1"
+           ]
+@@ -2964,7 +3093,16 @@
+           "fact": "F2",
+           "source": "alg-backward-euler-convolution-quadrature",
+           "source_section": "Definition",
+-          "quote": "Input $0<\\alpha<1$, a step size $h>0$, an integer $N\\ge1$, $\\lambda\\ge0$,\nan initial value $u_0$, and forcing values $F^1,\\ldots,F^N$. Define\n$\\omega_0=1$ and, for $j\\ge1$,\n\n$$\\omega_j:=\\frac{j-1-\\alpha}{j}\\,\\omega_{j-1}.$$\n\nPut $V^0=0$. For $n=1,\\ldots,N$, compute\n\n$$V^n:=\\frac{F^n-\\lambda u_0-h^{-\\alpha}\\sum_{j=1}^n\\omega_jV^{n-j}}{h^{-\\alpha}+\\lambda},\\qquad U^n:=u_0+V^n.$$\n\nEquivalently, the discrete Caputo derivative is\n\n$$\\bar\\partial_h^\\alpha V^n:=h^{-\\alpha}\\sum_{j=0}^n\\omega_jV^{n-j},$$\n\nand the recurrence solves $\\bar\\partial_h^\\alpha V^n+\\lambda V^n=F^n-\\lambda u_0$.\nSince $h^{-\\alpha}+\\lambda>0$,\nthe exact-real scalar solve is nonsingular. Invalid parameters return\n`invalid-input`; a finite-precision implementation that cannot certify the\nsolve returns `solve-failed` without reporting a value. The direct full-history\nimplementation uses $N(N+1)/2$ convolution terms and stores $N+1$ values; no\nFFT or truncated-memory error claim is included.",
++          "quote": "Input $0<\\alpha<1$, a step size $h>0$, an integer $N\\ge1$, $\\lambda\\ge0$,\nan initial value $u_0$, and forcing values $F^1,\\ldots,F^N$. If any\nadmissibility condition fails, return `invalid-input`. Set $\\omega_0=1$ and\ncompute $\\omega_1,\\ldots,\\omega_N$ in increasing order by\n\n$$\\omega_j:=\\frac{j-1-\\alpha}{j}\\,\\omega_{j-1}.$$\n\nSet $V^0=0$ and $U^0=u_0$. For $n=1,\\ldots,N$ in increasing order, compute\n\n$$V^n:=\\frac{F^n-\\lambda u_0-h^{-\\alpha}\\sum_{j=1}^n\\omega_jV^{n-j}}{h^{-\\alpha}+\\lambda},\\qquad U^n:=u_0+V^n.$$\n\nFor any sequence $V^0,\\ldots,V^N$ with $V^0=0$, use the notation\n\n$$\\bar\\partial_h^\\alpha V^n:=h^{-\\alpha}\\sum_{j=0}^n\\omega_jV^{n-j}.$$\n\nReturn $U^0,\\ldots,U^N$. A finite-precision implementation that cannot\ncertify a scalar solve returns `solve-failed` without reporting a value. No\nFFT or truncated-memory error claim is included.",
++          "uses": [
++            "2.1"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "thm-backward-euler-cq-scalar-resolvent-stability",
++          "source_section": "Statement",
++          "quote": "Let $0<\\alpha<1$, $\\lambda\\ge0$, $T>0$, and $h=T/N$ with integer $N\\ge1$.\nFor any valid input $(u_0,F^1,\\ldots,F^N)$ to\n[[alg-backward-euler-convolution-quadrature]], its updates define a unique\nsequence $V^0=0,V^1,\\ldots,V^N$ satisfying\n\n$$\\bar\\partial_h^\\alpha V^n+\\lambda V^n=F^n-\\lambda u_0\\qquad(1\\le n\\le N).$$\n\nIn particular, for $g^1,\\ldots,g^N\\in\\mathbb R$, use the algorithm with\n$u_0=0$ and $F^n=g^n$. Its output sequence $V$ satisfies\n\n$$\\bar\\partial_h^\\alpha V^n+\\lambda V^n=g^n,$$\n\nwhere $\\bar\\partial_h^\\alpha$ is defined in\n[[alg-backward-euler-convolution-quadrature]]. Then\n\n$$\\max_{0\\le n\\le N}|V^n| \\le \\Gamma(1-\\alpha)(2T)^\\alpha\\max_{1\\le n\\le N}|g^n|.$$\n\nThe direct full-history implementation uses exactly $N(N+1)/2$ terms in its\nconvolution history sums. Retaining the solution sequence $V^0,\\ldots,V^N$\nrequires $N+1$ solution values; this count excludes input and weight storage.",
+           "uses": [
+             "2.1"
+           ]
+@@ -3076,7 +3214,7 @@
+           "fact": "F2",
+           "source": "def-caputo-derivative-and-fractional-integral",
+           "source_section": "Definition",
+-          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]], so $u'\\in L^1(0,T)$ almost\neverywhere by [[thm-absolutely-continuous-functions-have-integrable-derivatives]].\nThe Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].\n",
++          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$ whose almost-everywhere derivative belongs to\n$L^1(0,T)$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]]. Under Countable Choice\n([[def-countable-choice]]), every such absolutely continuous $u$ has\n$u'\\in L^1(0,T)$ by\n[[thm-absolutely-continuous-functions-have-integrable-derivatives]], so the\nCaputo derivative is defined on the whole absolutely continuous class under\nthat assumption. Without Countable Choice, the same formula is defined for\neach absolutely continuous $u$ whose derivative is separately known to be in\n$L^1(0,T)$. The Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].",
+           "uses": [
+             "1.2"
+           ]
+@@ -3085,7 +3223,7 @@
+           "fact": "F3",
+           "source": "alg-uniform-and-graded-grid-l1",
+           "source_section": "Definition",
+-          "quote": "Input $0<\\alpha<1$, $T>0$, an integer $N\\ge1$, $\\lambda\\ge0$, an initial\nvalue $U^0=u_0$, and forcing values $F^1,\\ldots,F^N$. Choose either the\nuniform grid $t_k=kh$ with $h=T/N$, or a strictly increasing grid\n$0=t_0<t_1<\\cdots<t_N=T$. A power-graded choice is\n$t_k=T(k/N)^r$ with a specified $r\\ge1$. Write $h_k=t_k-t_{k-1}$ and, for\n$1\\le k\\le n\\le N$, define the exact kernel weight\n\n$$b_{n,k}:=\\frac{(t_n-t_{k-1})^{1-\\alpha}-(t_n-t_k)^{1-\\alpha}}{\\Gamma(2-\\alpha)h_k}.$$\n\nFor a grid sequence $V^0,\\ldots,V^N$, the L1 approximation to the Caputo\nderivative at $t_n$ is\n\n$$\\delta_{\\mathcal T}^\\alpha V^n:=\\sum_{k=1}^n b_{n,k}(V^k-V^{k-1}).$$\n\nFor each $n=1,\\ldots,N$, return the value given by the scalar recurrence\n\n$$U^n:=\\frac{F^n+b_{n,1}U^0+\\sum_{k=1}^{n-1}(b_{n,k+1}-b_{n,k})U^k}{b_{n,n}+\\lambda}.$$\n\nThis solves $\\delta_{\\mathcal T}^\\alpha U^n+\\lambda U^n=F^n$. Every weight\n$b_{n,k}$ is positive and $b_{n,n}=h_n^{-\\alpha}/\\Gamma(2-\\alpha)>0$, so\nthe exact-real denominator is strictly positive. On a uniform grid, writing\n$a_j=(j+1)^{1-\\alpha}-j^{1-\\alpha}$ gives\n\n$$\\delta_h^\\alpha U^n=\\frac{h^{-\\alpha}}{\\Gamma(2-\\alpha)}\\sum_{k=1}^n a_{n-k}(U^k-U^{k-1}).$$\n\nThe direct method uses every earlier increment at each step, hence uses\n$N(N+1)/2$ history terms and stores $N+1$ solution values. An input outside\nthe stated parameter or grid domain returns `invalid-input`. A real-arithmetic\nexecution has no singular branch under these hypotheses; a finite-precision\nimplementation that cannot certify a scalar solve returns `solve-failed`\nwithout reporting a value. The graded-grid procedure is an implementation\ndefinition only; no optimal graded-mesh rate is part of this item.\n",
++          "quote": "Input $0<\\alpha<1$, $T>0$, an integer $N\\ge1$, $\\lambda\\ge0$, an initial\nvalue $U^0=u_0$, and forcing values $F^1,\\ldots,F^N$. Choose either the\nuniform grid $t_k=kh$ with $h=T/N$, or a strictly increasing grid\n$0=t_0<t_1<\\cdots<t_N=T$. A power-graded choice is\n$t_k=T(k/N)^r$ with a specified $r\\ge1$. Write $h_k=t_k-t_{k-1}$ and, for\n$1\\le k\\le n\\le N$, define the exact kernel weight\n\n$$b_{n,k}:=\\frac{(t_n-t_{k-1})^{1-\\alpha}-(t_n-t_k)^{1-\\alpha}}{\\Gamma(2-\\alpha)h_k}.$$\n\nFor a grid sequence $V^0,\\ldots,V^N$, the L1 approximation to the Caputo\nderivative at $t_n$ is\n\n$$\\delta_{\\mathcal T}^\\alpha V^n:=\\sum_{k=1}^n b_{n,k}(V^k-V^{k-1}).$$\n\nFor $n=1,\\ldots,N$ in increasing order, compute the value given by the\nscalar recurrence\n\n$$U^n:=\\frac{F^n+b_{n,1}U^0+\\sum_{k=1}^{n-1}(b_{n,k+1}-b_{n,k})U^k}{b_{n,n}+\\lambda}.$$\n\nReturn $U^0,\\ldots,U^N$. On a uniform grid, writing\n$a_j=(j+1)^{1-\\alpha}-j^{1-\\alpha}$ gives\n\n$$\\delta_h^\\alpha U^n=\\frac{h^{-\\alpha}}{\\Gamma(2-\\alpha)}\\sum_{k=1}^n a_{n-k}(U^k-U^{k-1}).$$\n\nAn input outside the stated parameter or grid domain returns `invalid-input`.\nA finite-precision implementation that cannot certify a scalar solve returns\n`solve-failed` without reporting a value. The graded-grid procedure is an\nimplementation definition only; no optimal graded-mesh rate is part of this\nitem.",
+           "uses": [
+             "2.1"
+           ]
+@@ -3159,7 +3297,7 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "By [F5], $u'=1$ on $(0,T)$. The Caputo formula [F2] and kernel integral [F6] give $$D_C^\\alpha u(t)=\\frac1{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}ds =\\frac{t^{1-\\alpha}}{(1-\\alpha)\\Gamma(1-\\alpha)} =\\frac{t^{1-\\alpha}}{\\Gamma(2-\\alpha)},$$ using [F4].",
++          "claim": "By [F5], $u'=1$ on $(0,T)$, so $u'\\in L^1(0,T)$. Using the pointwise representative from [F2], the kernel integral [F6] gives $$D_C^\\alpha u(t)=\\frac1{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}ds =\\frac{t^{1-\\alpha}}{(1-\\alpha)\\Gamma(1-\\alpha)} =\\frac{t^{1-\\alpha}}{\\Gamma(2-\\alpha)},$$ using [F4]. This integral is finite at each $t\\in[0,T]$.",
+           "step": "1.2",
+           "inputs": [
+             "given",
+@@ -3283,7 +3421,7 @@
+           "fact": "F2",
+           "source": "def-caputo-derivative-and-fractional-integral",
+           "source_section": "Definition",
+-          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]], so $u'\\in L^1(0,T)$ almost\neverywhere by [[thm-absolutely-continuous-functions-have-integrable-derivatives]].\nThe Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].",
++          "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$ whose almost-everywhere derivative belongs to\n$L^1(0,T)$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]]. Under Countable Choice\n([[def-countable-choice]]), every such absolutely continuous $u$ has\n$u'\\in L^1(0,T)$ by\n[[thm-absolutely-continuous-functions-have-integrable-derivatives]], so the\nCaputo derivative is defined on the whole absolutely continuous class under\nthat assumption. Without Countable Choice, the same formula is defined for\neach absolutely continuous $u$ whose derivative is separately known to be in\n$L^1(0,T)$. The Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]].",
+           "uses": [
+             "1.2",
+             "2.1"
+@@ -3332,7 +3470,7 @@
+           "fact": "F6",
+           "source": "alg-uniform-and-graded-grid-l1",
+           "source_section": "Definition",
+-          "quote": "Input $0<\\alpha<1$, $T>0$, an integer $N\\ge1$, $\\lambda\\ge0$, an initial\nvalue $U^0=u_0$, and forcing values $F^1,\\ldots,F^N$. Choose either the\nuniform grid $t_k=kh$ with $h=T/N$, or a strictly increasing grid\n$0=t_0<t_1<\\cdots<t_N=T$. A power-graded choice is\n$t_k=T(k/N)^r$ with a specified $r\\ge1$. Write $h_k=t_k-t_{k-1}$ and, for\n$1\\le k\\le n\\le N$, define the exact kernel weight\n\n$$b_{n,k}:=\\frac{(t_n-t_{k-1})^{1-\\alpha}-(t_n-t_k)^{1-\\alpha}}{\\Gamma(2-\\alpha)h_k}.$$\n\nFor a grid sequence $V^0,\\ldots,V^N$, the L1 approximation to the Caputo\nderivative at $t_n$ is\n\n$$\\delta_{\\mathcal T}^\\alpha V^n:=\\sum_{k=1}^n b_{n,k}(V^k-V^{k-1}).$$\n\nFor each $n=1,\\ldots,N$, return the value given by the scalar recurrence\n\n$$U^n:=\\frac{F^n+b_{n,1}U^0+\\sum_{k=1}^{n-1}(b_{n,k+1}-b_{n,k})U^k}{b_{n,n}+\\lambda}.$$\n\nThis solves $\\delta_{\\mathcal T}^\\alpha U^n+\\lambda U^n=F^n$. Every weight\n$b_{n,k}$ is positive and $b_{n,n}=h_n^{-\\alpha}/\\Gamma(2-\\alpha)>0$, so\nthe exact-real denominator is strictly positive. On a uniform grid, writing\n$a_j=(j+1)^{1-\\alpha}-j^{1-\\alpha}$ gives\n\n$$\\delta_h^\\alpha U^n=\\frac{h^{-\\alpha}}{\\Gamma(2-\\alpha)}\\sum_{k=1}^n a_{n-k}(U^k-U^{k-1}).$$\n\nThe direct method uses every earlier increment at each step, hence uses\n$N(N+1)/2$ history terms and stores $N+1$ solution values. An input outside\nthe stated parameter or grid domain returns `invalid-input`. A real-arithmetic\nexecution has no singular branch under these hypotheses; a finite-precision\nimplementation that cannot certify a scalar solve returns `solve-failed`\nwithout reporting a value. The graded-grid procedure is an implementation\ndefinition only; no optimal graded-mesh rate is part of this item.",
++          "quote": "Input $0<\\alpha<1$, $T>0$, an integer $N\\ge1$, $\\lambda\\ge0$, an initial\nvalue $U^0=u_0$, and forcing values $F^1,\\ldots,F^N$. Choose either the\nuniform grid $t_k=kh$ with $h=T/N$, or a strictly increasing grid\n$0=t_0<t_1<\\cdots<t_N=T$. A power-graded choice is\n$t_k=T(k/N)^r$ with a specified $r\\ge1$. Write $h_k=t_k-t_{k-1}$ and, for\n$1\\le k\\le n\\le N$, define the exact kernel weight\n\n$$b_{n,k}:=\\frac{(t_n-t_{k-1})^{1-\\alpha}-(t_n-t_k)^{1-\\alpha}}{\\Gamma(2-\\alpha)h_k}.$$\n\nFor a grid sequence $V^0,\\ldots,V^N$, the L1 approximation to the Caputo\nderivative at $t_n$ is\n\n$$\\delta_{\\mathcal T}^\\alpha V^n:=\\sum_{k=1}^n b_{n,k}(V^k-V^{k-1}).$$\n\nFor $n=1,\\ldots,N$ in increasing order, compute the value given by the\nscalar recurrence\n\n$$U^n:=\\frac{F^n+b_{n,1}U^0+\\sum_{k=1}^{n-1}(b_{n,k+1}-b_{n,k})U^k}{b_{n,n}+\\lambda}.$$\n\nReturn $U^0,\\ldots,U^N$. On a uniform grid, writing\n$a_j=(j+1)^{1-\\alpha}-j^{1-\\alpha}$ gives\n\n$$\\delta_h^\\alpha U^n=\\frac{h^{-\\alpha}}{\\Gamma(2-\\alpha)}\\sum_{k=1}^n a_{n-k}(U^k-U^{k-1}).$$\n\nAn input outside the stated parameter or grid domain returns `invalid-input`.\nA finite-precision implementation that cannot certify a scalar solve returns\n`solve-failed` without reporting a value. The graded-grid procedure is an\nimplementation definition only; no optimal graded-mesh rate is part of this\nitem.",
+           "uses": [
+             "3.1",
+             "4.1"
+@@ -3438,6 +3576,16 @@
+           "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+           "uses": [
+             "1.1"
++          ]
++        },
++        {
++          "fact": "F15",
++          "source": "lem-l1-positive-weights-and-discrete-comparison",
++          "source_section": "Statement",
++          "quote": "Let $0<\\alpha<1$, $\\lambda\\ge0$, and let\n$0=t_0<t_1<\\cdots<t_N=T$ be any finite grid with $T>0$. Use the weights\n$b_{n,k}$ and operator $\\delta_{\\mathcal T}^\\alpha$ from\n[[alg-uniform-and-graded-grid-l1]]. Then:\n\n1. For every $n$, $0<b_{n,1}\\le b_{n,2}\\le\\cdots\\le b_{n,n}$.\n2. If $z^0\\ge0$ and $\\delta_{\\mathcal T}^\\alpha z^n+\\lambda z^n\\ge0$ for\n   $1\\le n\\le N$, then $z^n\\ge0$ for every $n$.\n3. If $R\\ge0$, $e^0=0$, and\n   $\\delta_{\\mathcal T}^\\alpha e^n+\\lambda e^n=r^n$ with\n   $|r^n|\\le R$, then\n   $$\\max_{0\\le n\\le N}|e^n|\\le\\frac{T^\\alpha}{\\Gamma(1+\\alpha)}R.$$\n4. For any initial value $U^0$ and forcing values $F^1,\\ldots,F^N$, the\n   recurrence in [[alg-uniform-and-graded-grid-l1]] is well-defined at every\n   step and gives the unique $U^n$ satisfying\n   $\\delta_{\\mathcal T}^\\alpha U^n+\\lambda U^n=F^n$.",
++          "uses": [
++            "3.1",
++            "4.1"
+           ]
+         }
+       ],
+@@ -3470,7 +3618,7 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "Apply [F13] to the integrable kernel in step 1.2 with $S(y)=ty$. This is a $C^1$ diffeomorphism with $S'(y)=t$, and the Jacobian cancels the factor $t^{-1}$ in $(ty)^{-1/2}(t-ty)^{-1/2}$. Therefore [F2] gives $$D_C^{1/2}u(t)=\\frac1{2\\Gamma(1/2)}\\int_0^1(1-y)^{-1/2}y^{-1/2}\\,dy=\\frac{B(1/2,1/2)}{2\\Gamma(1/2)}=\\frac12\\Gamma(1/2)=\\Gamma(3/2),$$ using the Beta–Gamma identity [F4] and $\\Gamma(1)=1$ plus the functional equation [F5]. This holds for every $t>0$.",
++          "claim": "For the pointwise representative in [F2], apply [F13] to the integrable kernel in step 1.2 with $S(y)=ty$. This is a $C^1$ diffeomorphism with $S'(y)=t$, and the Jacobian cancels the factor $t^{-1}$ in $(ty)^{-1/2}(t-ty)^{-1/2}$. Therefore $$D_C^{1/2}u(t)=\\frac1{2\\Gamma(1/2)}\\int_0^1(1-y)^{-1/2}y^{-1/2}\\,dy=\\frac{B(1/2,1/2)}{2\\Gamma(1/2)}=\\frac12\\Gamma(1/2)=\\Gamma(3/2),$$ using the Beta\u2013Gamma identity [F4] and $\\Gamma(1)=1$ plus the functional equation [F5]. This holds for every $t>0$.",
+           "step": "2.1",
+           "inputs": [
+             "given",
+@@ -3485,7 +3633,7 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "For the uniform grid, [F6] and the equation $\\delta_h^{1/2}U^1=f(h)$ give $U^1=\\Gamma(3/2)^2\\sqrt h$. Also $$\\Gamma(3/2)=\\int_0^\\infty\\sqrt s\\,e^{-s}ds <\\frac12\\int_0^\\infty(s+1)e^{-s}ds=1,$$ because $(\\sqrt s-1)^2\\ge0$ with strict inequality except at $s=1$, and [F3]–[F5] evaluate the last integrals. Hence the stated error is positive. Its ratio to $h^{3/2}$ is $(1-\\Gamma(3/2)^2)/h$, which is unbounded as $h\\downarrow0$; the smooth-data theorem [F7] cannot be extended to this example.",
++          "claim": "For the uniform grid, [F6] and [F15] give the equation $\\delta_h^{1/2}U^1=f(h)$, hence $U^1=\\Gamma(3/2)^2\\sqrt h$. Also $$\\Gamma(3/2)=\\int_0^\\infty\\sqrt s\\,e^{-s}ds <\\frac12\\int_0^\\infty(s+1)e^{-s}ds=1,$$ because $(\\sqrt s-1)^2\\ge0$ with strict inequality except at $s=1$, and [F3]\u2013[F5] evaluate the last integrals. Hence the stated error is positive. Its ratio to $h^{3/2}$ is $(1-\\Gamma(3/2)^2)/h$, which is unbounded as $h\\downarrow0$; the smooth-data theorem [F7] cannot be extended to this example.",
+           "step": "3.1",
+           "inputs": [
+             "given",
+@@ -3494,17 +3642,19 @@
+             "F5",
+             "F6",
+             "F7",
++            "F15",
+             "step 2.1",
+             "algebra"
+           ]
+         },
+         {
+           "id": "step-4-1",
+-          "claim": "On the power-graded grid, $t_1=T/N^2$, so [F6] gives $b_{1,1}=N/(\\Gamma(3/2)\\sqrt T)$. The first discrete equation again yields $U^1=\\Gamma(3/2)^2\\sqrt T/N$, and subtracting it from $u(t_1)=\\sqrt T/N$ gives the displayed graded first-step error. For $N=4$ the nodes follow by substituting $k=0,1,2,3,4$ into $t_k=T(k/4)^2$.",
++          "claim": "On the power-graded grid, $t_1=T/N^2$, so [F6] gives $b_{1,1}=N/(\\Gamma(3/2)\\sqrt T)$. The first discrete equation, justified by [F15], yields $U^1=\\Gamma(3/2)^2\\sqrt T/N$, and subtracting it from $u(t_1)=\\sqrt T/N$ gives the displayed graded first-step error. For $N=4$ the nodes follow by substituting $k=0,1,2,3,4$ into $t_k=T(k/4)^2$.",
+           "step": "4.1",
+           "inputs": [
+             "given",
+             "F6",
++            "F15",
+             "algebra"
+           ]
+         }

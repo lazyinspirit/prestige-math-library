@@ -1,0 +1,15 @@
+--- items/thm-eckart-young-best-rank-k-approximation.md
++++ research/numerical-optimization-dynamics-2026-10-16-owner-reader102-eckart-young-proof-proposal/proposed/items/thm-eckart-young-best-rank-k-approximation.md
+@@ -58,8 +58,10 @@
+ 
+ **Proof technique:** direct.
+ 
+-1.1 The image of $T_k$ is contained in $\operatorname{span}(f_1,\dots,f_k)$, so $\operatorname{rank}T_k\le k$. When $k=0$, the defining sum for $T_k$ is empty and $T_k=0$; in general $(T-T_k)v=\sum_{j>k} s_j\langle v,e_j\rangle f_j$, which is again an SVD, so [L2] gives $\lVert T-T_k\rVert=s_{k+1}$, with value $0$ when $k\ge r$. [L1, L2, algebra]
++1.1 Put $q=\min(k,r)$. The image of $T_k$ is contained in $\operatorname{span}(f_1,\dots,f_q)$, with the empty span interpreted as $0$, so $\operatorname{rank}T_k\le q\le k$. In particular, $T_0=0$. If $k\ge r$, the truncation retains every term of the given SVD, so $T_k=T$ and $\lVert T-T_k\rVert=0=s_{k+1}$ by the stated convention. For every $A$ of rank at most $k$, nonnegativity of the operator norm gives $\lVert T-A\rVert\ge0=s_{k+1}$, proving all conclusions in this case, including $r=0$. If $k<r$, then
++$$(T-T_k)v=\sum_{j=k+1}^r s_j\langle v,e_j\rangle f_j.$$
++Reorder the full orthonormal input and output bases from [L1] so that these $r-k$ positive terms come first. This is an SVD of $T-T_k$, with largest singular value $s_{k+1}$; [L2] therefore gives $\lVert T-T_k\rVert=s_{k+1}$. Every displayed $f_j$ has $j\le r\le\dim W$. [given, L1, L2, algebra]
+ 
+-1.2 Let $A:V\to W$ have rank at most $k$, and put $E:=\operatorname{span}(e_1,\dots,e_{k+1})$. If $A|_E$ were injective, then [L3] applied to $A|_E:E\to W$ would force $\dim \operatorname{im}(A|_E)=k+1$, but $\operatorname{im}(A|_E)\subseteq \operatorname{im}A$ and [L4] gives $\dim \operatorname{im}A\le k$, contradiction. Hence some unit vector $v\in E$ satisfies $Av=0$. [L3, L4, algebra]
++1.2 For the remaining case $k<r$, let $A:V\to W$ have rank at most $k$, and put $E:=\operatorname{span}(e_1,\dots,e_{k+1})$. These $k+1$ vectors exist and are orthonormal by [L1], so $\dim E=k+1$. If $A|_E$ were injective, then [L3] applied to $A|_E:E\to W$ would force $\dim \operatorname{im}(A|_E)=k+1$, but $\operatorname{im}(A|_E)\subseteq \operatorname{im}A$ and [L4] gives $\dim \operatorname{im}A\le k$, contradiction. Hence some unit vector $v\in E$ satisfies $Av=0$. [L1, L3, L4, algebra]
+ 
+ 2.1 Write that unit vector as $v=\sum_{j=1}^{k+1} c_je_j$. Then $\lVert Tv\rVert^2=\sum_{j=1}^{k+1}s_j^2|c_j|^2\ge s_{k+1}^2\sum_{j=1}^{k+1}|c_j|^2=s_{k+1}^2$. Because $Av=0$, one has $\lVert T-A\rVert\ge \lVert (T-A)v\rVert=\lVert Tv\rVert\ge s_{k+1}$. Combined with step 1.1, this proves that $T_k$ is a best rank-at-most-$k$ approximation in operator norm. [step 1.2, algebra] ∎

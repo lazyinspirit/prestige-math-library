@@ -1,0 +1,43 @@
+{
+  "batch": "20",
+  "opened": [
+    "alg-age-cohort-characteristic-quadrature",
+    "composite-quadrature-rules",
+    "composite-quadrature-rules-examples",
+    "ex-convex-composite-midpoint-and-trapezoid-bracketing",
+    "ex-cubic-exact-for-composite-simpson",
+    "ex-midpoint-underintegrated-p2-stiffness-loses-coercivity",
+    "ex-quadratic-exact-for-composite-simpson",
+    "lem-composite-midpoint-panel-error-kernel",
+    "lem-midpoint-quadrature-defect-for-p1-stiffness",
+    "lem-simpson-panel-peano-kernel",
+    "thm-composite-midpoint-error-bound",
+    "thm-composite-simpson-error-bound",
+    "thm-composite-simpson-exact-through-degree-three"
+  ],
+  "not_opened": [],
+  "flagged": [
+    {
+      "id": "alg-age-cohort-characteristic-quadrature",
+      "location": "Definition, optional midpoint initialization on a partition of [0,A]",
+      "defect": "missing-hypothesis",
+      "evidence": "The Definition says to apply the composite midpoint rule \"on a partition of [0,A]\" and set each mass to Δa n₀(aᵢ), without requiring equal cell widths. The current supplier alg-composite-midpoint-rule sets h=(b−a)/n and uses nodes a+(j+1/2)h, so it requires a uniform grid. On a nonuniform partition there is no single Δa for these weights, and the called procedure does not apply as written.",
+      "severity": "fatal"
+    },
+    {
+      "id": "lem-midpoint-quadrature-defect-for-p1-stiffness",
+      "location": "research/numerical-optimization-dynamics-2026-10-16-batch-89.proof-contracts.json: contracts.lem-midpoint-quadrature-defect-for-p1-stiffness.citations[F1].quote",
+      "defect": "citation-inaccurate",
+      "evidence": "The current contract quote says the inputs already satisfy a<b and n≥1, then describes an invalid-grid return. The current alg-composite-midpoint-rule instead takes raw endpoints and n, returns invalid-grid before evaluating f when a≥b or n<1, and only then requires f for valid grids. Thus the quoted F1 is not the current Definition. The item proof uses valid positive-width cells with n=1, so this quote defect does not invalidate its estimate.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "ex-midpoint-underintegrated-p2-stiffness-loses-coercivity",
+      "location": "research/numerical-optimization-dynamics-2026-10-16-batch-89.proof-contracts.json: contracts.ex-midpoint-underintegrated-p2-stiffness-loses-coercivity.citations[F1].quote",
+      "defect": "citation-inaccurate",
+      "evidence": "The current contract quote says the inputs already satisfy a<b and n≥1, then describes an invalid-grid return. The current alg-composite-midpoint-rule instead takes raw endpoints and n, returns invalid-grid before evaluating f when a≥b or n<1, and only then requires f for valid grids. Thus the quoted F1 is not the current Definition. The example's one-panel call on [0,1] is valid, so the stale quote does not change its calculation.",
+      "severity": "nonfatal"
+    }
+  ],
+  "coverage_note": "Opened all 13 scoped item and page carriers once. Checked the current midpoint and Simpson procedures, the age-model context, and the relevant convexity, trapezoid, finite-sum, Hilbert-space, and Strang statements; recomputed the kernel constants and worked quadrature values. The two batch-89 contract quotes remain stale, although their current item proofs use valid midpoint inputs. The full Owen PDF fetch timed out; its Chapter 7/§7.2 location was confirmed in indexed results, and the local proofs were checked directly. Transitive supplier proofs were not re-audited."
+}

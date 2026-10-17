@@ -1,0 +1,475 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "13",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-finite-straight-line-computational-program",
+      "model": "gpt-6-luna",
+      "context_sha256": "9191a8c7ec77237fd13646de8545554f51b6e8c05dce618b716a60733dc50dc0",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The input value space was specified as R, but the symbols E_p and z_p used for input parents had no explicit input-label definition. Added distinct in_i labels with E_in_i=R and z_in_i=x_i. The original phrase input or an operation with index less than j already restricts the inequality to operation indices; no ordering of input coordinate numbers is needed. This is a nonfatal notation/interface defect, not a change to the graph class, derivatives, strict-branch rules or choice requirements.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-forward-mode-automatic-differentiation",
+      "model": "gpt-6-luna",
+      "context_sha256": "efabf96f2019aea5a13a38c696093fbd9569af238a8827be620fe6c4641381cc",
+      "outcome": "false_positive",
+      "reason": "The separate proved result thm-forward-mode-computes-directional-derivative depends on this algorithm and proves Df(x)v. Its Proof 1.1 initializes coordinate derivatives, 2.1 proves the tangent identity at every node by topological induction and the chain rule, and 3.1 covers both operation and input-coordinate outputs. The algorithm specifies DOMAIN_ERROR and NONDIFFERENTIABLE, including ambiguous branches. The asserted absence of a correctness theorem is false; no circular deps or new well-definedness supplier is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-finite-straight-line-program-defines-c1-map",
+      "model": "gpt-6-luna",
+      "context_sha256": "2bef3373f2ed889723a1b1e3fcda51b33e468b80c1d6df4d4c50cf19d5d30a99",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The Statement already restricts its open-domain and C1 conclusions to each fixed strict branch, and Proof 1.1 constructs open preimages, 2.1 propagates continuous derivatives by the chain rule, and 3.1 excludes boundary derivatives. Those claims are sound, including empty parents, zero-dimensional spaces and input-coordinate outputs. The former display title could suggest a C1 conclusion on the whole piecewise primal domain; changed only the title to state the existing strict-branch qualification. This is a nonfatal title defect, with unchanged Statement and proof.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-forward-over-reverse-hessian-vector-product",
+      "model": "gpt-6-luna",
+      "context_sha256": "f3b0230d067a911ce656d453f5c211eea59bf860eb48fbae546fcd5de9c7020b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "A piecewise C2 primitive may have overlapping open branch regions, so ambiguous selection can occur without a boundary. The graph and forward procedure reject that case, but the Hessian-vector procedure only explicitly named boundaries. Made the existing forward invocation explicit, retained its tape and all tangents, and propagated both DOMAIN_ERROR and NONDIFFERENTIABLE immediately before reverse evaluation. Its successful recurrence, zero/one output seed and repeated-slot additions are unchanged. This is a nonfatal omitted status clause; the initial forward recurrence already used the stricter supplier convention.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-finite-iteration-sensitivity-bound-and-residual-limitation",
+      "model": "gpt-6-luna",
+      "context_sha256": "8817a7d6923fa3ad9cb48e1a6b81276426e96b2450db2bb6c3f03a413fdd4495",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The title asserted that finite and implicit sensitivities differ, although equality is possible when delta_0=d_0=0. Changed only that title to describe the proved error bounds and residual limitation. The Statement and proof are sound: contraction gives delta_k<=q^k delta_0; subtracting e_(k+1)=A_k e_k+B_k and s_*=A_*s_*+B_* yields D_(k+1)<=qD_k+C delta_0 q^k and the finite convolution K q^(K-1). The q=0,K=1 convention and zero block dimensions are handled explicitly. The qz+(1-q)theta example proves possible discrepancy at zero residual, not universal inequality. This is a nonfatal title defect.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-forward-over-reverse-computes-hessian-vector-product",
+      "model": "gpt-6-luna",
+      "context_sha256": "b66f160b31b2025494441cebbf0592abb45f0880157c453242ab33fe43a5a2ed",
+      "outcome": "false_positive",
+      "reason": "The cited forward-mode theorem explicitly proves the internal-node identity in its Proof 2.1: finite topological induction proves the tangent equals the directional derivative at every node. F3 uses that proved intermediate conclusion, even though the supplier Statement highlights only the scalar output. It therefore does not assume an unproved stronger fact. Differentiating each reverse contribution A^T bar_z by the product rule gives A^T dot_bar_z+(DA[dot_z_pa])^T bar_z; reverse induction yields D(grad f)(x)v. C2 regularity, repeated slots, zero directions, empty parents and the input-output zero Hessian case are covered. The supplier status clarification changes no successful strict-branch execution.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-implicit-linear-solve-adjoint",
+      "model": "gpt-6-luna",
+      "context_sha256": "4468bb91fad394faa09f7eec6ed798cc0c087400e049cd676170f5835ba4b882",
+      "outcome": "false_positive",
+      "reason": "The actual operationwise model named by F2 explicitly requires binary round-to-nearest, ties-to-even, on zero or normal exact results; it is stronger than the published relative-error-only model. A representable normal result is its own unique nearest value. At A(0)=I, triangular primal/basis solves involve only 0,1,2; c=(1,1)^T gives dot products 1+0 and 0+1, and the outer product has entries 1 or 2 before exact sign changes. Thus every in-range operation is exact and the A_theta=(e_1 e_2^T) contraction returns -1. The positive gamma_2 allowance is an upper bound, not a claim of nonzero error. Steps 1.1-3.1 also directly give J(theta)=3-theta and its adjoint derivative. The asserted missing exact-rounding interface is false.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "rem-real-arithmetic-graph-versus-rounded-execution",
+      "model": "gpt-6-luna",
+      "context_sha256": "29bc674fbcfe8eff055b35982ac4e864d3328abcf4bdf212b637e204a7051821",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The final sentence gave A(0), B and xhat but omitted the parameterized A, objective and incoming cotangent, so those data alone could not determine -1. Added the full triangular A(theta), b, J=(1,1)x, c=(1,1)^T and the direct nearest-rounding supplier. Triangular solves at zero, identity transpose dots and the outer product use only 0,+/-1,+/-2; normal representable exact results round to themselves. The matrix cotangent is -[[2,1],[2,1]], whose Frobenius pairing with A_prime(0)=[[0,1],[0,0]] is -1. Kept the caveat that d=rho=0 only removes fixed-map errors, not general rounding allowances. This is a nonfatal missing local specification/citation; the example was true for the intended concrete objective.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-finite-straight-line-computational-program",
+      "disposition": "repaired",
+      "post_sha256": "2ffe0c4043a6d762fc440ea2494ebee9f877a69e50e7c59bcbbd7e0531086b15",
+      "review_context_sha256": "1b3ba96c514c87367a067a9f38416aff9846572749ac10f80b276f55c816df16",
+      "reason": "Added typed input labels without changing scalar input spaces, operation order, branch conventions or choice requirements. Checked both derivative-definition suppliers and all sixteen direct consumers; their uses remain sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-forward-mode-automatic-differentiation",
+      "disposition": "unaffected",
+      "post_sha256": "3b493214efa7288bb188255b23c95bbec8f46a1800e19d3cc6bb8a6d18f6d99e",
+      "review_context_sha256": "9f3d5c093c53a22daae53de34145408328501c6f2f8b915270c76d318580265d",
+      "reason": "Unchanged procedure. The separate forward correctness theorem proves the tangent identity at every node by topological induction and covers both possible scalar-output kinds. Its existing error statuses include ambiguous branches.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-finite-straight-line-program-defines-c1-map",
+      "disposition": "repaired",
+      "post_sha256": "1e920f8e0675a4b24c83fb61ef8334e1dbeaf406ba2be72039027cc1b69567e1",
+      "review_context_sha256": "2fa8f1431417051f01e8eeac48249fc421653d63c2d710dea4776dd717aae8f0",
+      "reason": "Changed only the misleading title. The unchanged Statement already restricts the conclusion to fixed strict branches; open-preimage induction and continuous chain-rule products prove it, including empty parents and zero dimensions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-forward-over-reverse-hessian-vector-product",
+      "disposition": "repaired",
+      "post_sha256": "33b1411424f4cb05e2e271b5d907d8cb0ec61a3f39f03a708e03a800a129a2ef",
+      "review_context_sha256": "7b916f40e4d2f35e0bd2ac47f7fe9afa5dcc0a116f951df563101ac913612249",
+      "reason": "Explicitly propagates the initial forward call error status before reverse evaluation and retains its tape and tangents. Checked the unchanged product-rule recurrence, repeated parent slots and input-output seed; its sole direct theorem consumer remains sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-finite-iteration-sensitivity-bound-and-residual-limitation",
+      "disposition": "repaired",
+      "post_sha256": "8f81d25b54701132f46877353ea9ca2f314ca4ac0bc7c2a7e79ec3fc3193ac75",
+      "review_context_sha256": "30652bd50f78a090cd48f0d79327ad15dfe154dbe179f652d817bf67a49f08f9",
+      "reason": "Changed only the title. Verified contraction, derivative-error recurrence, finite convolution, q=0 convention, zero block dimensions and the zero-residual scalar example. The unchanged Statement permits equality of sensitivities.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-forward-over-reverse-computes-hessian-vector-product",
+      "disposition": "unaffected",
+      "post_sha256": "571d4d3a2ebb9af6506a581609f26f8fe56b01a01bf42274c7d8d9dbd87c7495",
+      "review_context_sha256": "3cae8a61dba15c58f12c33e9b68c6ea94c330f14802bb1b598febe76f337bc46",
+      "reason": "Unchanged item: the forward theorem Proof 2.1 supplies every internal tangent. Differentiating the reverse matrix-vector products proves the claimed Hessian-vector identity. Refreshed only contract Definition quotes for its corrected suppliers.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    },
+    {
+      "id": "ex-implicit-linear-solve-adjoint",
+      "disposition": "unaffected",
+      "post_sha256": "9d8a990ebe46bb9732a5f141e9595eb6234227661dd3a2ae47e487d16a52b0da",
+      "review_context_sha256": "c9706feca1eba84c69f4b22e2ff8fbaf0157d7c118177f41b94faa7c0871984c",
+      "reason": "Unchanged item. The operationwise supplier explicitly specifies nearest rounding, so the in-range representable identity-solve, dot and outer-product results are exact. Direct differentiation and the adjoint both give -1; a positive error allowance does not preclude zero actual error.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "rem-real-arithmetic-graph-versus-rounded-execution",
+      "disposition": "repaired",
+      "post_sha256": "00a7750f8d95624dea5eb2bd216686cde520fcd547a0e062b397faafaeadf63f",
+      "review_context_sha256": "9012506c2e4b9f3ffe4abac57f3db36b8edb019bcb377b00a4acb174a80be053",
+      "reason": "Specified the triangular parameterized solve, objective, cotangent and nearest-rounding dependency. Computed the exact matrix cotangent and its pairing with A_prime(0), obtaining -1. Preserved the distinction between zero fixed-map error and rounded-pullback allowances.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-forward-mode-automatic-differentiation",
+    "alg-reverse-mode-automatic-differentiation",
+    "lem-finite-straight-line-program-defines-c1-map",
+    "lem-finite-straight-line-program-defines-c2-map",
+    "alg-checkpointed-reverse-schedules",
+    "alg-differentiate-finite-fixed-point-iteration",
+    "alg-forward-over-reverse-hessian-vector-product",
+    "thm-forward-mode-computes-directional-derivative",
+    "thm-reverse-mode-computes-gradient",
+    "thm-reverse-mode-work-and-tape-storage-bound",
+    "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+    "thm-forward-over-reverse-computes-hessian-vector-product",
+    "thm-graph-gradient-error-from-local-jacobian-perturbations",
+    "rem-real-arithmetic-graph-versus-rounded-execution",
+    "ex-branchwise-ad-at-the-absolute-value-switch",
+    "ex-shared-expression-forward-and-reverse-graph"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-finite-straight-line-computational-program",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "definition",
+      "finding": "Input-parent E_p and z_p symbols now have explicit distinct input labels; input spaces remain R.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u13.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-finite-straight-line-program-defines-c1-map",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "title",
+      "finding": "Title now states the same fixed-strict-branch scope already present in the sound Statement and proof.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u13.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-forward-over-reverse-hessian-vector-product",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "definition",
+      "finding": "The initial forward call now explicitly propagates ambiguous-branch NONDIFFERENTIABLE before any reverse updates.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u13.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-finite-iteration-sensitivity-bound-and-residual-limitation",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "title",
+      "finding": "Title now describes error bounds and residual limitations without asserting that sensitivities always differ.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u13.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "rem-real-arithmetic-graph-versus-rounded-execution",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "remarks",
+      "finding": "The numerical derivative claim now includes A(theta), objective, cotangent, operations and nearest-rounding justification.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u13.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-implicit-differentiation-forward-and-adjoint-formulas",
+      "severity": "nonfatal",
+      "status": "owner-route-required",
+      "route": "unassigned frontier owner; not outside-consumer maintenance",
+      "affected_use": "Proof 1.1: Apply [F1] to R with parameter block theta and state block z; it claims the cited theorem provides the branch under exactly the nonsingularity hypothesis in the Statement.",
+      "invalidated_claim": "The citation application is incomplete when p=0 or m=0: thm-euclidean-implicit-function-theorem explicitly requires both block dimensions at least one, while this consumer imposes no positivity restriction. The branch formulas themselves remain true.",
+      "minimality": "Add separate zero-dimension arguments. For m=0 there is one state and zero state derivatives. For p=0 the parameter space is a singleton; nonsingularity and the first-order remainder lower bound isolate the root, and the branch has zero derivative. No Statement change or published repair is needed. This concern is also in the unchanged rejection-blind batch-13 digest.",
+      "evidence_paths": [
+        "items/thm-implicit-differentiation-forward-and-adjoint-formulas.md",
+        "items/thm-euclidean-implicit-function-theorem.md",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-13-step5-context.json"
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "complete_assigned_unit",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-13.proof-contracts.json --strict --items def-finite-straight-line-computational-program,alg-forward-mode-automatic-differentiation,lem-finite-straight-line-program-defines-c1-map,alg-forward-over-reverse-hessian-vector-product,thm-finite-iteration-sensitivity-bound-and-residual-limitation,thm-forward-over-reverse-computes-hessian-vector-product,ex-implicit-linear-solve-adjoint,rem-real-arithmetic-graph-versus-rounded-execution --json",
+        "exit_code": 1,
+        "result": "Three expected stale quote errors: C1 F1, Hessian-vector theorem F1 and F5. Exact source mirror refresh pending shared lock."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-finite-straight-line-computational-program.md items/alg-forward-mode-automatic-differentiation.md items/lem-finite-straight-line-program-defines-c1-map.md items/alg-forward-over-reverse-hessian-vector-product.md items/thm-finite-iteration-sensitivity-bound-and-residual-limitation.md items/thm-forward-over-reverse-computes-hessian-vector-product.md items/ex-implicit-linear-solve-adjoint.md items/rem-real-arithmetic-graph-versus-rounded-execution.md --json",
+        "exit_code": 0,
+        "result": "8 files; 4 proof-bearing items passed; 4 not applicable; zero failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-finite-straight-line-computational-program.md items/alg-forward-mode-automatic-differentiation.md items/lem-finite-straight-line-program-defines-c1-map.md items/alg-forward-over-reverse-hessian-vector-product.md items/thm-finite-iteration-sensitivity-bound-and-residual-limitation.md items/thm-forward-over-reverse-computes-hessian-vector-product.md items/ex-implicit-linear-solve-adjoint.md items/rem-real-arithmetic-graph-versus-rounded-execution.md library/numerical-optimization-inverse-problems-and-uncertainty-quantification/automatic-differentiation-and-computational-graphs.md library/numerical-optimization-inverse-problems-and-uncertainty-quantification/automatic-differentiation-and-computational-graphs-examples.md --json",
+        "exit_code": 0,
+        "result": "10 files checked; zero errors and warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-finite-straight-line-computational-program.md items/lem-finite-straight-line-program-defines-c1-map.md items/alg-forward-over-reverse-hessian-vector-product.md items/thm-finite-iteration-sensitivity-bound-and-residual-limitation.md items/rem-real-arithmetic-graph-versus-rounded-execution.md",
+        "exit_code": 0,
+        "result": "5 changed items, 8 numbered steps, 0 defects; run after the final item edits, with no formatter or later item edits."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-13.proof-contracts.json --strict --json",
+        "exit_code": 0,
+        "result": "All 23 batch contracts checked; zero errors and warnings after refreshing 11 exact source quotation mirrors."
+      },
+      {
+        "command": "node tools/depcheck.mjs --items-file /tmp/step5-u13-items.json --json",
+        "exit_code": 0,
+        "result": "Focused on the eight assigned items, two owning pages and their dependency closure; zero errors and warnings."
+      },
+      {
+        "command": "node tools/fwdcheck.mjs --items-file /tmp/step5-u13-items.json --json",
+        "exit_code": 0,
+        "result": "Focused item/page and prerequisite-cycle checks; zero errors and warnings."
+      },
+      {
+        "command": "node tools/content-policy.mjs research/numerical-optimization-dynamics-2026-10-16-batch-13.pages.json --json",
+        "exit_code": 0,
+        "result": "23 batch items; zero errors and warnings."
+      },
+      {
+        "command": "node --input-type=module (read-only frozen-pack digest and itemHashGuard comparison)",
+        "exit_code": 0,
+        "result": "Frozen input digest and all eight current item guards match the stored report. Review-context hashes were preserved without recomputation."
+      }
+    ],
+    "next_action": "Controller to collect this report, route the unassigned frontier finding, and conduct any renewed independent judgments and certification. No judges, stamps, certificates or round state were written by this adjudicator.",
+    "page_effects": [
+      {
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/automatic-differentiation-and-computational-graphs.md",
+        "affected_use": "A computational graph here is a finite, topologically ordered real-arithmetic program with differentiable primitive maps and a scalar output.",
+        "disposition": "sound_unchanged",
+        "reason": "Distinct input labels only make the original input-versus-operation parent distinction explicit. The strict-active-branch wording already excludes ambiguous Hessian-vector executions."
+      }
+    ],
+    "interface_comparison": {
+      "def-finite-straight-line-computational-program": "changed",
+      "alg-forward-mode-automatic-differentiation": "unchanged",
+      "lem-finite-straight-line-program-defines-c1-map": "unchanged",
+      "alg-forward-over-reverse-hessian-vector-product": "changed",
+      "thm-finite-iteration-sensitivity-bound-and-residual-limitation": "unchanged",
+      "thm-forward-over-reverse-computes-hessian-vector-product": "unchanged"
+    },
+    "published_ledger_updates": [],
+    "published_effects": "No changed interface has a direct published or outside-frontier consumer. All sixteen direct graph consumers and the Hessian-vector procedure consumer are in the frozen frontier; their exact uses are inventoried above. The weaker published relative floating-point model is sound and is not being repaired.",
+    "metadata_changes": {
+      "research/numerical-optimization-dynamics-2026-10-16-batch-13.proof-contracts.json": "Under shared write lock, refreshed 11 Definition quotes to the current graph/procedure text. Preserved derivations, risk reviews and independent historical evidence.",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-13.pages.json": "Under the same lock, synchronized changed titles, the two changed Definition/strategy mirrors and the remark arithmetic dependency; preserved all item inventories and contracts."
+    },
+    "metadata_lock": "Acquired step5-shared-write-lock as step5-v2-initial-r1-u13, reread both shared files, edited current bytes, passed strict batch contract check and released. Earlier busy acquisitions made no metadata changes.",
+    "independence": "The repairs are authored and locally checked here. This report does not claim independent review of those repairs.",
+    "downstream_reasoning": "All inventoried consumers are in the frozen frontier. The graph edit only supplies explicit names for the scalar input values and Euclidean spaces already declared; it changes no parent slots, topological order, primitive domains, branch rules, path products, tape costs or deterministic replay. Hence every exact quoted use remains sound. The Hessian-vector theorem assumes a fixed strict C2 branch, so the added failure propagation leaves its successful recurrence unchanged. No consumer Statement or Definition needs a consequent repair; metadata quote mirrors were synchronized."
+  },
+  "downstream_evidence": [
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "alg-forward-mode-automatic-differentiation",
+      "path": "items/alg-forward-mode-automatic-differentiation.md",
+      "affected_use": "Input a graph from [[def-finite-straight-line-computational-program]], an admissible point $x$, and a direction $v\\in\\mathbb R^n$.",
+      "disposition": "sound_unchanged"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "alg-reverse-mode-automatic-differentiation",
+      "path": "items/alg-reverse-mode-automatic-differentiation.md",
+      "affected_use": "Input a graph from [[def-finite-straight-line-computational-program]] and an admissible point $x$.",
+      "disposition": "sound_unchanged"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "lem-finite-straight-line-program-defines-c1-map",
+      "path": "items/lem-finite-straight-line-program-defines-c1-map.md",
+      "affected_use": "The parent tuple $g_j(x)=(z_{p_{j,1}}(x),\\ldots,z_{p_{j,r_j}}(x))$ is continuous there.",
+      "disposition": "sound_unchanged"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "lem-finite-straight-line-program-defines-c2-map",
+      "path": "items/lem-finite-straight-line-program-defines-c2-map.md",
+      "affected_use": "The tuple $g_j$ of parent values is $C^2$, since it is a finite product of their coordinate maps;",
+      "disposition": "sound_unchanged"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "alg-checkpointed-reverse-schedules",
+      "path": "items/alg-checkpointed-reverse-schedules.md",
+      "affected_use": "A deterministic replay applies the same transition maps, in the same order, to the identical checkpoint state and therefore reproduces the same values and local derivative inputs.",
+      "disposition": "sound_unchanged"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "alg-differentiate-finite-fixed-point-iteration",
+      "path": "items/alg-differentiate-finite-fixed-point-iteration.md",
+      "affected_use": "Use the specified maps $z_0$ and $G$, with their exact derivative evaluations, as primitive maps on their declared open domains.",
+      "disposition": "sound_unchanged"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "alg-forward-over-reverse-hessian-vector-product",
+      "path": "items/alg-forward-over-reverse-hessian-vector-product.md",
+      "affected_use": "Run [[alg-forward-mode-automatic-differentiation]] and retain its primal tape and all input and operation tangents.",
+      "disposition": "sound_after_separate_assigned_repair"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "thm-forward-mode-computes-directional-derivative",
+      "path": "items/thm-forward-mode-computes-directional-derivative.md",
+      "affected_use": "each operation node is a primitive applied to its earlier parent values; the scalar output is either an input coordinate or an operation value.",
+      "disposition": "sound_unchanged"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "thm-reverse-mode-computes-gradient",
+      "path": "items/thm-reverse-mode-computes-gradient.md",
+      "affected_use": "the output is obtained from finitely many primitive nodes in topological order, and repeated parent slots are distinct edges.",
+      "disposition": "sound_unchanged"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "thm-reverse-mode-work-and-tape-storage-bound",
+      "path": "items/thm-reverse-mode-work-and-tape-storage-bound.md",
+      "affected_use": "there are finitely many topologically ordered nodes and the primal tape stores their values and parent slots.",
+      "disposition": "sound_unchanged"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+      "path": "items/thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds.md",
+      "affected_use": "replay is deterministic and a graph node's local reverse rule uses the primitive inputs on its tape.",
+      "disposition": "sound_unchanged"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "thm-forward-over-reverse-computes-hessian-vector-product",
+      "path": "items/thm-forward-over-reverse-computes-hessian-vector-product.md",
+      "affected_use": "the program uses finite $C^2$ real primitive maps on a fixed strict branch.",
+      "disposition": "sound_unchanged"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "thm-graph-gradient-error-from-local-jacobian-perturbations",
+      "path": "items/thm-graph-gradient-error-from-local-jacobian-perturbations.md",
+      "affected_use": "a graph is finite and acyclic, and each parent slot defines a separate edge with a local derivative map.",
+      "disposition": "sound_unchanged"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "rem-real-arithmetic-graph-versus-rounded-execution",
+      "path": "items/rem-real-arithmetic-graph-versus-rounded-execution.md",
+      "affected_use": "The exact AD identities refer to the real-arithmetic graph and its exact primitive derivatives.",
+      "disposition": "sound_after_separate_assigned_repair"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "ex-branchwise-ad-at-the-absolute-value-switch",
+      "path": "items/ex-branchwise-ad-at-the-absolute-value-switch.md",
+      "affected_use": "a piecewise primitive uses the derivative of its unique strict active branch and returns NONDIFFERENTIABLE at a branch boundary.",
+      "disposition": "sound_unchanged"
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program",
+      "id": "ex-shared-expression-forward-and-reverse-graph",
+      "path": "items/ex-shared-expression-forward-and-reverse-graph.md",
+      "affected_use": "repeated parent slots count as separate edges in the finite real-arithmetic graph.",
+      "disposition": "sound_unchanged"
+    },
+    {
+      "supplier": "alg-forward-over-reverse-hessian-vector-product",
+      "id": "thm-forward-over-reverse-computes-hessian-vector-product",
+      "path": "items/thm-forward-over-reverse-computes-hessian-vector-product.md",
+      "affected_use": "The product rule [F6] gives $A^T\\dot{\\bar z}_j+(DA[\\dot z_{pa}])^T\\bar z_j$, exactly the second recurrence in [F5].",
+      "disposition": "sound_unchanged"
+    }
+  ]
+}

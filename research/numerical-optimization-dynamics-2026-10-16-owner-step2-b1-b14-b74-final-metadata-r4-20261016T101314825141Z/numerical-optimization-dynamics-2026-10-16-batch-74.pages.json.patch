@@ -1,0 +1,190 @@
+--- current/research/numerical-optimization-dynamics-2026-10-16-batch-74.pages.json
++++ proposed/research/numerical-optimization-dynamics-2026-10-16-batch-74.pages.json
+@@ -141,7 +141,12 @@
+           "def-jacobian-matrix-and-gradient",
+           "def-ck-euclidean-maps-and-diffeomorphisms",
+           "thm-chain-rule-for-total-derivatives",
++          "thm-continuous-partial-derivatives-imply-total-differentiability",
++          "thm-total-derivative-computes-directional-and-partial-derivatives",
+           "cor-vector-valued-ftc-and-lipschitz-bound",
++          "def-vector-valued-derivative-and-integral",
++          "thm-continuous-implies-integrable",
++          "thm-norm-inequality-for-the-vector-valued-integral",
+           "def-induced-matrix-p-norm",
+           "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized"
+         ],
+@@ -160,7 +165,13 @@
+           "def-jacobian-matrix-and-gradient",
+           "def-ck-euclidean-maps-and-diffeomorphisms",
+           "thm-chain-rule-for-total-derivatives",
++          "thm-continuous-partial-derivatives-imply-total-differentiability",
++          "thm-total-derivative-computes-directional-and-partial-derivatives",
++          "thm-algebra-of-derivatives",
+           "cor-vector-valued-ftc-and-lipschitz-bound",
++          "def-vector-valued-derivative-and-integral",
++          "thm-continuous-implies-integrable",
++          "thm-norm-inequality-for-the-vector-valued-integral",
+           "def-induced-matrix-p-norm",
+           "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized"
+         ],
+@@ -229,6 +240,9 @@
+           "def-jacobian-matrix-and-gradient",
+           "def-induced-matrix-p-norm",
+           "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
++          "thm-chain-rule-for-total-derivatives",
++          "thm-continuous-partial-derivatives-imply-total-differentiability",
++          "thm-total-derivative-computes-directional-and-partial-derivatives",
+           "cor-vector-valued-ftc-and-lipschitz-bound",
+           "lem-exponential-dominates-one-plus-x"
+         ],
+@@ -247,10 +261,122 @@
+           "def-ck-euclidean-maps-and-diffeomorphisms",
+           "def-induced-matrix-p-norm",
+           "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
++          "thm-chain-rule-for-total-derivatives",
++          "thm-continuous-partial-derivatives-imply-total-differentiability",
++          "thm-total-derivative-computes-directional-and-partial-derivatives",
+           "cor-vector-valued-ftc-and-lipschitz-bound",
+           "lem-exponential-dominates-one-plus-x"
+         ],
+         "dependency_level": 5
++      },
++      {
++        "id": "lem-rosenbrock-matrix-inverse-perturbation",
++        "kind": "lemma",
++        "title": "Matrix inverse perturbation identity",
++        "deps": [],
++        "dependency_level": 0
++      },
++      {
++        "id": "lem-rosenbrock-euler-local-defect",
++        "kind": "lemma",
++        "title": "Rosenbrock-Euler local defect bound",
++        "deps": [
++          "def-rosenbrock-euler-step-map",
++          "cor-mean-value-theorem",
++          "def-first-order-ode-initial-value-problem-and-solution",
++          "thm-chain-rule-for-total-derivatives"
++        ],
++        "dependency_level": 1
++      },
++      {
++        "id": "lem-rosenbrock-euler-step-map-lipschitz",
++        "kind": "lemma",
++        "title": "Rosenbrock-Euler step stability on a compact convex set",
++        "deps": [
++          "def-rosenbrock-euler-step-map",
++          "cor-mean-value-theorem",
++          "lem-rosenbrock-matrix-inverse-perturbation",
++          "thm-chain-rule-for-total-derivatives"
++        ],
++        "dependency_level": 1
++      },
++      {
++        "id": "thm-rosenbrock-euler-global-first-order",
++        "kind": "theorem",
++        "title": "First-order global error for Rosenbrock-Euler",
++        "deps": [
++          "def-rosenbrock-euler-step-map",
++          "lem-rosenbrock-euler-local-defect",
++          "lem-rosenbrock-euler-step-map-lipschitz",
++          "lem-rosenbrock-euler-local-defect-and-residual-error"
++        ],
++        "dependency_level": 2
++      },
++      {
++        "id": "thm-rosenbrock-euler-a-l-stable",
++        "kind": "theorem",
++        "title": "Rosenbrock-Euler is A-stable and L-stable on the scalar test equation",
++        "deps": [
++          "def-rosenbrock-euler-step-map",
++          "thm-rosenbrock-euler-scalar-a-and-l-stability"
++        ],
++        "dependency_level": 1
++      },
++      {
++        "id": "thm-rosenbrock-euler-one-newton-step-for-backward-euler",
++        "kind": "theorem",
++        "title": "Rosenbrock-Euler is one Newton correction for backward Euler",
++        "deps": [
++          "def-rosenbrock-euler-step-map"
++        ],
++        "dependency_level": 1
++      },
++      {
++        "id": "alg-rosenbrock-ros2-step",
++        "kind": "algorithm",
++        "title": "Two-stage ROS2 linearly implicit step",
++        "deps": [],
++        "dependency_level": 0
++      },
++      {
++        "id": "lem-ros2-w-method-order-two-expansion",
++        "kind": "lemma",
++        "title": "ROS2 order-two expansion and Jacobian-defect cancellation",
++        "deps": [
++          "alg-rosenbrock-ros2-step",
++          "thm-multivariable-taylor-formula-with-lagrange-remainder"
++        ],
++        "dependency_level": 1
++      },
++      {
++        "id": "lem-ros2-step-map-lipschitz",
++        "kind": "lemma",
++        "title": "ROS2 step-map stability for a Lipschitz approximate Jacobian",
++        "deps": [
++          "alg-rosenbrock-ros2-step",
++          "lem-rosenbrock-matrix-inverse-perturbation"
++        ],
++        "dependency_level": 1
++      },
++      {
++        "id": "thm-ros2-a-l-stable-exact-jacobian",
++        "kind": "theorem",
++        "title": "The exact-J ROS2 tableau is A-stable and L-stable",
++        "deps": [
++          "alg-rosenbrock-ros2-step"
++        ],
++        "dependency_level": 1
++      },
++      {
++        "id": "thm-ros2-global-second-order",
++        "kind": "theorem",
++        "title": "Global second-order convergence of the ROS2 W-method",
++        "deps": [
++          "alg-rosenbrock-ros2-step",
++          "lem-ros2-w-method-order-two-expansion",
++          "lem-ros2-step-map-lipschitz"
++        ],
++        "dependency_level": 2
+       }
+     ]
+   },
+@@ -312,6 +438,27 @@
+           "thm-two-stage-rosenbrock-scalar-l-stability"
+         ],
+         "dependency_level": 5
++      },
++      {
++        "id": "ex-rosenbrock-euler-stiff-linear-damping",
++        "kind": "example",
++        "title": "Rosenbrock-Euler damps a stiff scalar mode",
++        "deps": [
++          "def-rosenbrock-euler-step-map",
++          "thm-rosenbrock-euler-a-l-stable"
++        ],
++        "dependency_level": 2
++      },
++      {
++        "id": "ex-ros2-approximate-jacobian-stability-and-order-boundary",
++        "kind": "example",
++        "title": "Approximate Jacobians can remove ROS2 stiff damping",
++        "deps": [
++          "alg-rosenbrock-ros2-step",
++          "thm-ros2-global-second-order",
++          "thm-ros2-a-l-stable-exact-jacobian"
++        ],
++        "dependency_level": 3
+       }
+     ]
+   }

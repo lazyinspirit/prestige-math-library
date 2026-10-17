@@ -1,0 +1,457 @@
+{
+  "group": "ab",
+  "batches": ["73"],
+  "pages_read": [
+    "variance-reduced-finite-sum-and-adaptive-gradient-optimization",
+    "variance-reduced-finite-sum-and-adaptive-gradient-optimization-examples"
+  ],
+  "items_read": [
+    "alg-adam-update",
+    "alg-amsgrad-update",
+    "lem-finite-sum-gradient-is-average",
+    "lem-positive-diagonal-map-preserves-closed-convexity",
+    "alg-saga-finite-sum-method",
+    "alg-svrg-finite-sum-method",
+    "cex-adam-periodic-linear-losses-force-divergence",
+    "lem-convex-smooth-component-gradient-cocoercivity",
+    "thm-independent-minibatch-conditional-variance",
+    "alg-diagonal-adagrad-online-regret",
+    "cex-saga-linear-factor-fails-under-standard-initialization",
+    "lem-saga-estimator-and-table-recurrence",
+    "lem-svrg-unbiasedness-and-variance-bound",
+    "lem-diagonal-adagrad-subproblem-well-defined",
+    "thm-saga-expected-linear-contraction",
+    "thm-svrg-epoch-expected-linear-contraction",
+    "lem-diagonal-adagrad-one-step-regret-bound",
+    "thm-diagonal-adagrad-regret-bound",
+    "thm-saga-constant-step-memory-capped-linear-contraction",
+    "ex-regularized-logistic-finite-sum",
+    "ex-svrg-saga-gradient-work-storage-comparison",
+    "ex-adam-adaptive-step-divergence"
+  ],
+  "conventions": [
+    {
+      "convention": "Adam starts at t=1 with m_0=v_0=0, uses bias correction for both moments, and adds epsilon>0 outside the square root in the denominator.",
+      "fixed_by": "alg-adam-update",
+      "matters_for": [
+        "cex-adam-periodic-linear-losses-force-divergence",
+        "ex-adam-adaptive-step-divergence"
+      ]
+    },
+    {
+      "convention": "This AMSGrad variant takes the coordinatewise running maximum of bias-corrected second moments. It is explicitly distinguished from Reddi–Kale–Kumar Algorithm 2, and no convergence theorem is claimed.",
+      "fixed_by": "alg-amsgrad-update",
+      "matters_for": [
+        "alg-amsgrad-update",
+        "variance-reduced-finite-sum-and-adaptive-gradient-optimization"
+      ]
+    },
+    {
+      "convention": "SAGA initializes every table entry at the deterministic initial point, forms its estimator from the old table, and replaces the sampled entry using the pre-update iterate. Component indices are uniform and independent of the current history.",
+      "fixed_by": "alg-saga-finite-sum-method",
+      "matters_for": [
+        "cex-saga-linear-factor-fails-under-standard-initialization",
+        "lem-saga-estimator-and-table-recurrence",
+        "thm-saga-expected-linear-contraction",
+        "thm-saga-constant-step-memory-capped-linear-contraction",
+        "ex-svrg-saga-gradient-work-storage-comparison"
+      ]
+    },
+    {
+      "convention": "SVRG starts each epoch at its snapshot, recomputes the snapshot component gradient at each inner update, and returns x_J for an independent uniform J in {0,...,m-1}, excluding x_m.",
+      "fixed_by": "alg-svrg-finite-sum-method",
+      "matters_for": [
+        "lem-svrg-unbiasedness-and-variance-bound",
+        "thm-svrg-epoch-expected-linear-contraction",
+        "ex-regularized-logistic-finite-sum",
+        "ex-svrg-saga-gradient-work-storage-comparison"
+      ]
+    },
+    {
+      "convention": "Conditional expectations are coordinatewise almost-sure classes, with AC assumed for the supplied existence interface. The minibatch theorem requires square-integrable component gradients and independence of the whole sampled index vector from the current sigma-algebra.",
+      "fixed_by": "thm-independent-minibatch-conditional-variance",
+      "matters_for": [
+        "thm-independent-minibatch-conditional-variance",
+        "lem-saga-estimator-and-table-recurrence",
+        "lem-svrg-unbiasedness-and-variance-bound",
+        "thm-saga-expected-linear-contraction",
+        "thm-saga-constant-step-memory-capped-linear-contraction",
+        "thm-svrg-epoch-expected-linear-contraction"
+      ]
+    },
+    {
+      "convention": "Diagonal AdaGrad uses s_{t,j}=sqrt(epsilon²+sum_{k=1}^t g_{k,j}²), including the current gradient, and minimizes a quadratic with metric A_t=diag(s_{t,j}) over a nonempty closed convex set.",
+      "fixed_by": "alg-diagonal-adagrad-online-regret",
+      "matters_for": [
+        "lem-diagonal-adagrad-subproblem-well-defined",
+        "lem-diagonal-adagrad-one-step-regret-bound",
+        "thm-diagonal-adagrad-regret-bound"
+      ]
+    },
+    {
+      "convention": "For the potential V_k+7 eta² n S_k, the constant-step SAGA factor is 1-min{mu eta,1/(7n)} for 0<eta≤1/(10L). The faster factor 1-mu eta is asserted only when mu eta≤1/(7n).",
+      "fixed_by": "thm-saga-constant-step-memory-capped-linear-contraction",
+      "matters_for": [
+        "thm-saga-constant-step-memory-capped-linear-contraction",
+        "variance-reduced-finite-sum-and-adaptive-gradient-optimization"
+      ]
+    },
+    {
+      "convention": "Gradient-evaluation counts exclude arithmetic inside a component-gradient evaluation; vector arithmetic and working storage are accounted for separately.",
+      "fixed_by": "ex-svrg-saga-gradient-work-storage-comparison",
+      "matters_for": [
+        "ex-svrg-saga-gradient-work-storage-comparison"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-convex-smooth-component-gradient-cocoercivity",
+      "statement": "Let n,d≥1, L>0, and let f_i:R^d→R be continuously differentiable, convex, with L-Lipschitz gradients. Put F=n^{-1}sum_i f_i. For all x,y in R^d, n^{-1}sum_i ||∇f_i(x)-∇f_i(y)||² ≤ 2L(F(x)-F(y)-⟨∇F(y),x-y⟩).",
+      "used_by": [
+        "lem-saga-estimator-and-table-recurrence",
+        "lem-svrg-unbiasedness-and-variance-bound"
+      ]
+    },
+    {
+      "id": "lem-saga-estimator-and-table-recurrence",
+      "statement": "For convex continuously differentiable components with L-Lipschitz gradients and ∇F(x*)=0, an independent uniform index and finite second moments give E[v_k|F_k]=∇F(x_k), E[||v_k||²|F_k]≤6L(F(x_k)-F(x*))+6S_k, and E[S_{k+1}|F_k]≤(1-1/n)S_k+(2L/n)(F(x_k)-F(x*)).",
+      "used_by": [
+        "thm-saga-expected-linear-contraction",
+        "thm-saga-constant-step-memory-capped-linear-contraction"
+      ]
+    },
+    {
+      "id": "lem-svrg-unbiasedness-and-variance-bound",
+      "statement": "For convex continuously differentiable components with L-Lipschitz gradients and ∇F(x*)=0, measurable current iterate and snapshot, an independent uniform index, and finite relevant second moments, E[v_t|F_t]=∇F(x_t) and E[||v_t||²|F_t]≤4L(F(x_t)-F(x*))+4L(F(snapshot)-F(x*)).",
+      "used_by": [
+        "thm-svrg-epoch-expected-linear-contraction"
+      ]
+    },
+    {
+      "id": "lem-finite-sum-gradient-is-average",
+      "statement": "Let U be open in R^d, let x in U, let n≥1, and let f_1,...,f_n:U→R be totally differentiable at x. Put F=n^{-1}sum_{i=1}^n f_i. Then F is totally differentiable at x and ∇F(x)=n^{-1}sum_{i=1}^n ∇f_i(x).",
+      "used_by": [
+        "alg-saga-finite-sum-method",
+        "alg-svrg-finite-sum-method",
+        "lem-convex-smooth-component-gradient-cocoercivity",
+        "thm-independent-minibatch-conditional-variance",
+        "lem-saga-estimator-and-table-recurrence",
+        "lem-svrg-unbiasedness-and-variance-bound",
+        "thm-saga-expected-linear-contraction",
+        "thm-saga-constant-step-memory-capped-linear-contraction",
+        "thm-svrg-epoch-expected-linear-contraction",
+        "ex-regularized-logistic-finite-sum"
+      ]
+    },
+    {
+      "id": "lem-diagonal-adagrad-subproblem-well-defined",
+      "statement": "Let C be a nonempty closed convex subset of R^d, let A=diag(a_1,...,a_d) with every a_j>0, and let eta>0 and x,g in R^d. Then argmin_{z in C}{eta⟨g,z⟩+||z-x||_A²/2} contains exactly one point.",
+      "used_by": [
+        "alg-diagonal-adagrad-online-regret",
+        "lem-diagonal-adagrad-one-step-regret-bound"
+      ]
+    },
+    {
+      "id": "lem-diagonal-adagrad-one-step-regret-bound",
+      "statement": "For a positive diagonal A, nonempty closed convex C, eta>0, g in R^d, x,u in C, and x+ minimizing eta⟨g,z⟩+||z-x||_A²/2 over C, ⟨g,x-u⟩≤(||x-u||_A²-||x+-u||_A²)/(2eta)+(eta/2)||g||_{A^{-1}}².",
+      "used_by": [
+        "thm-diagonal-adagrad-regret-bound"
+      ]
+    },
+    {
+      "id": "thm-svrg-epoch-expected-linear-contraction",
+      "statement": "For convex L-smooth components, a mu-strongly convex average with stationary x*, deterministic snapshot, eta=1/(10L), m=2n, n≥10L/mu, independent uniform inner indices and independent uniform J in {0,...,m-1}, E[F(x_J)-F(x*)]≤q(F(snapshot)-F(x*)), where q=1/[mu eta(1-2L eta)m]+2L eta/(1-2L eta)≤7/8.",
+      "used_by": [
+        "ex-regularized-logistic-finite-sum",
+        "variance-reduced-finite-sum-and-adaptive-gradient-optimization"
+      ]
+    },
+    {
+      "id": "cex-adam-periodic-linear-losses-force-divergence",
+      "statement": "Bounded gradients alone do not keep every bias-corrected Adam iterate bounded, even in one dimension with beta_1=0, beta_2=1/2, eta=1, and epsilon=1/100.",
+      "used_by": [
+        "ex-adam-adaptive-step-divergence"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Natural time, cycle, dimension and component indices.",
+      "opened": true
+    },
+    {
+      "id": "def-integer-power",
+      "used_for": "Bias-correction powers and inverse-square diagonal coefficients.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Moment denominators, diagonal scalings and AdaGrad accumulators.",
+      "opened": true
+    },
+    {
+      "id": "def-ordered-field",
+      "used_for": "Positivity and order operations in finite recurrences and inequalities.",
+      "opened": true
+    },
+    {
+      "id": "lem-power-monotone",
+      "used_for": "Positivity of Adam and AMSGrad bias-correction denominators.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-square-positive",
+      "used_for": "Nonnegativity of squared gradients and quadratic forms.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-sign-rules",
+      "used_for": "Order-preserving multiplication and update-bound comparisons.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-zero-mult",
+      "used_for": "Zero cases in nonnegative moment recurrences.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-inverse-positive",
+      "used_for": "Positivity of reciprocal diagonal entries and denominators.",
+      "opened": true
+    },
+    {
+      "id": "def-max-min",
+      "used_for": "Coordinatewise AMSGrad running maxima.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-set-has-max",
+      "used_for": "Existence of each two-entry coordinatewise maximum.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Finite objectives, table averages, accumulators and work counts.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-naturals-positive",
+      "used_for": "Existence of the reciprocal component count in the gradient-average lemma.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "The differentiability hypothesis and zero-function base case for finite sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-total-derivatives",
+      "used_for": "Differentiating finite sums, scalar multiples and logistic expressions.",
+      "opened": true
+    },
+    {
+      "id": "thm-total-derivative-computes-directional-and-partial-derivatives",
+      "used_for": "Converting the finite-sum derivative identity into a gradient identity.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Coordinate definition of the scalar gradient.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Bilinear expansions, Euclidean norms and weighted coordinate calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Finite-sum differentiation, moment recurrences and cycle drift.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-subset-of-euclidean-space",
+      "used_for": "Diagonal images of convex sets and feasible segments in the AdaGrad argument.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-topology",
+      "used_for": "Closedness of feasible sets and their positive diagonal images.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-space",
+      "used_for": "The metric framework underlying closed feasible sets.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-ball",
+      "used_for": "The complement-ball proof of closedness under positive diagonal maps.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Finite averaging, monotonicity, splitting and telescoping throughout the batch.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-square-monotone",
+      "used_for": "Square-root comparisons in Adam drift and monotonicity of AdaGrad accumulators.",
+      "opened": true
+    },
+    {
+      "id": "def-control-variate-estimator",
+      "used_for": "Naming the conditional finite-sum correction form; its fixed-integral unbiasedness is not substituted for the local estimator proofs.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicitly inherited conditional-expectation existence assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-complete-ordered-field",
+      "used_for": "Real arithmetic, finite coordinate diameters and supremum existence.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+      "used_for": "Component convexity, affine-loss witnesses and logistic convexity.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Turning positive cycle drift into unboundedness and divergence to positive infinity.",
+      "opened": true
+    },
+    {
+      "id": "def-lipschitz-holder-contraction",
+      "used_for": "The common component-gradient Lipschitz hypothesis.",
+      "opened": true
+    },
+    {
+      "id": "thm-differentiable-convex-functions-and-gradient-inequality",
+      "used_for": "Global minimality of the shifted component and the SVRG distance recurrence.",
+      "opened": true
+    },
+    {
+      "id": "def-filtration-and-filtered-probability-space",
+      "used_for": "The current sigma-algebra in minibatch conditioning; no completeness or trivial initial sigma-algebra is assumed.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-as-an-ae-class",
+      "used_for": "Almost-sure interpretation and existence convention for conditional moments.",
+      "opened": true
+    },
+    {
+      "id": "lem-conditioning-a-known-variable-and-an-independent-variable",
+      "used_for": "Conditional means of independent uniform-index indicators.",
+      "opened": true
+    },
+    {
+      "id": "thm-taking-out-what-is-known",
+      "used_for": "Taking measurable component-gradient factors outside conditional expectations; the stated finite second moments ensure the needed product integrability.",
+      "opened": true
+    },
+    {
+      "id": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+      "used_for": "Conditional linearity, positivity and passage to unconditional expectations.",
+      "opened": true
+    },
+    {
+      "id": "def-subgradient-and-subdifferential",
+      "used_for": "AdaGrad loss linearization; this definition explicitly permits an empty subdifferential.",
+      "opened": true
+    },
+    {
+      "id": "lem-metrics-on-rn",
+      "used_for": "The standard positive-dimensional Euclidean metric on the AdaGrad feasible set.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Estimator second-moment bounds and Lipschitz continuity of the averaged gradient.",
+      "opened": true
+    },
+    {
+      "id": "cor-of-one-positive",
+      "used_for": "A positive denominator in the elementary AdaGrad variational-inequality argument.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "The logistic component and its exact objective gap.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "The natural logarithm convention in the logistic example.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positive logistic denominators and exp(-w)=1/exp(w).",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Combining the balanced logistic terms into the exact logarithmic gap.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "First and second derivatives of the logistic losses.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Differentiation of the logarithmic logistic term.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Composition derivatives in the logistic calculation.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Converting the logistic second-derivative bound into a gradient Lipschitz bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "The logistic lower quadratic bound and strong-Jensen verification.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-diagonal-adagrad-online-regret",
+      "concern": "The Definition allows a convex loss ell_t:C→R on an arbitrary nonempty closed convex C, instructs 'choose a subgradient g_t in partial ell_t(x_t)', and concludes 'the procedure is defined at each finite round.' Convexity on such a domain does not ensure that this choice exists. For C=[0,1], x_1=0 and ell_1(x)=-sqrt(x), the loss is finite and convex, but any subgradient g at zero would have to satisfy g≤-1/sqrt(y) for every y in (0,1], which no finite real g satisfies. The cited subdifferential definition explicitly permits an empty set. The quadratic minimizer lemma establishes well-definedness only after a finite g is supplied. The algorithm needs an explicit admissibility assumption that a subgradient is available at every queried iterate. The regret theorem already assumes g_t∈partial ell_t(x_t), so its conditional bound is not refuted by this example.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "ex-svrg-saga-gradient-work-storage-comparison",
+      "concern": "The Statement claims 'O(d) working storage' for SVRG, and F1 attributes a fixed number of temporary vectors to alg-svrg-finite-sum-method. That procedure draws J only after completing all inner updates and then returns x_J. The storage proof does not explain how the selected past iterate is retained without storing the trajectory or replaying updates. Presampling the independent uniform output index and saving its iterate gives the same output law with O(d) storage and the stated gradient count, but this implementation equivalence should be stated to justify the ledger for the specified random-iterate output.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "variance-reduced-finite-sum-and-adaptive-gradient-optimization",
+      "to": "proximal-gradient-and-accelerated-composite-optimization",
+      "faithful": true,
+      "note": "Checked the prerequisite page and the actual descent, strong-convexity, proximal-map, indicator, projection and proximal-existence interfaces. The batch applies descent to globally continuously differentiable L-Lipschitz component gradients, uses the strong-Jensen convention, and transforms the positive-diagonal AdaGrad quadratic into Euclidean projection onto a nonempty closed convex image. The relevant hypotheses and citation directions agree."
+    },
+    {
+      "from": "variance-reduced-finite-sum-and-adaptive-gradient-optimization",
+      "to": "stochastic-approximation-and-stochastic-gradient-methods",
+      "faithful": true,
+      "note": "Checked the prerequisite page, stochastic-gradient oracle definition and strong-convexity gradient lemma. The batch preserves coordinatewise conditional expectations, AC and finite-moment requirements, and states independent sampling separately rather than inheriting independence from the oracle definition. Strong-convexity lower support and strong monotonicity are used on the full open convex domain R^d, within the supplier's stated domain."
+    }
+  ]
+}

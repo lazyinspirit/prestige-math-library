@@ -1,0 +1,1 @@
+ROOT review only: single Remarks qualification for real matrices. Exact full before/proposed and diff; all mathematical Definition content and existing claims preserved. No unpublished-draft supplier link, no metadata, published claim, source application, hashes or checks. Separate preexisting q0 proof-wording observation in assessment.json awaits root scope decision.

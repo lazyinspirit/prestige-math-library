@@ -1,0 +1,394 @@
+{
+  "group": "b",
+  "batches": ["11"],
+  "pages_read": [
+    "finite-bit-random-streams-and-variate-generation",
+    "finite-bit-random-streams-and-variate-generation-examples"
+  ],
+  "items_read": [
+    "alg-linear-congruential-generator-mod-power-of-two",
+    "alg-counter-based-keyed-permutation-stream",
+    "thm-finite-state-streams-eventually-periodic",
+    "thm-independent-fair-bit-streams-produce-uniforms",
+    "lem-generalized-inverse-sublevel-identity",
+    "lem-box-muller-product-density-and-radius-moment",
+    "thm-midpoint-bit-stream-coupling-and-error",
+    "thm-lcg-full-period-and-adjacent-dependence",
+    "lem-counter-based-keyed-stream-no-reuse",
+    "alg-rational-bernoulli-rejection-from-fair-bits",
+    "alg-finite-categorical-inverse-cdf",
+    "alg-certified-bracketed-cdf-inversion",
+    "cor-box-muller-from-independent-bits-gives-standard-normals",
+    "thm-rational-bernoulli-rejection-law-and-cost",
+    "thm-finite-categorical-midpoint-count-bound",
+    "thm-certified-bracketed-inverse-error",
+    "alg-box-muller-finite-bit-transform",
+    "thm-box-muller-finite-bit-coupling-error",
+    "ex-lcg-low-bit-alternation",
+    "ex-box-muller-finite-midpoint-tail",
+    "ex-box-muller-zero-endpoint",
+    "ex-inverse-cdf-near-zero-density"
+  ],
+  "conventions": [
+    {
+      "convention": "Ideal randomness is the countable product of independent fair bits, assuming Countable Choice and Dependent Choice; coordinate subsequences are injective and pairwise disjoint.",
+      "fixed_by": "thm-independent-fair-bit-streams-produce-uniforms",
+      "matters_for": [
+        "thm-midpoint-bit-stream-coupling-and-error",
+        "alg-rational-bernoulli-rejection-from-fair-bits",
+        "cor-box-muller-from-independent-bits-gives-standard-normals",
+        "alg-box-muller-finite-bit-transform",
+        "thm-box-muller-finite-bit-coupling-error"
+      ]
+    },
+    {
+      "convention": "The midpoint conversion is (K+1/2)2^(-b), with coupling error δ_b=2^(-b-1); total variation is the supremum of absolute event-probability differences.",
+      "fixed_by": "thm-midpoint-bit-stream-coupling-and-error",
+      "matters_for": [
+        "thm-finite-categorical-midpoint-count-bound",
+        "thm-certified-bracketed-inverse-error",
+        "alg-box-muller-finite-bit-transform",
+        "thm-box-muller-finite-bit-coupling-error",
+        "ex-box-muller-finite-midpoint-tail",
+        "ex-box-muller-zero-endpoint"
+      ]
+    },
+    {
+      "convention": "For u∈(0,1), Q(u)=inf{y:F(y)≥u}, and Q(u)≤x if and only if u≤F(x).",
+      "fixed_by": "lem-generalized-inverse-sublevel-identity",
+      "matters_for": [
+        "alg-finite-categorical-inverse-cdf",
+        "thm-certified-bracketed-inverse-error"
+      ]
+    },
+    {
+      "convention": "Categorical inversion returns the least index satisfying v≤C_i on positive inputs; v=0 explicitly returns outcome 1.",
+      "fixed_by": "alg-finite-categorical-inverse-cdf",
+      "matters_for": ["thm-finite-categorical-midpoint-count-bound"]
+    },
+    {
+      "convention": "Certified CDF inversion uses exact comparisons, a supplied modulus certificate, two endpoint evaluations and N midpoint evaluations; unresolved tails and failed evaluations return explicit statuses.",
+      "fixed_by": "alg-certified-bracketed-cdf-inversion",
+      "matters_for": [
+        "thm-certified-bracketed-inverse-error",
+        "ex-inverse-cdf-near-zero-density"
+      ]
+    },
+    {
+      "convention": "Finite-bit Box–Muller propagates failed evaluator calls as inconclusive and performs final vector multiplication by exact dyadic arithmetic.",
+      "fixed_by": "alg-box-muller-finite-bit-transform",
+      "matters_for": ["thm-box-muller-finite-bit-coupling-error"]
+    },
+    {
+      "convention": "The finite-bit distribution bounds require one fixed deterministic configuration to succeed on all 2^(2b) midpoint pairs, with uniform certificate bounds; conditioning on sampled success is insufficient.",
+      "fixed_by": "thm-box-muller-finite-bit-coupling-error",
+      "matters_for": ["thm-box-muller-finite-bit-coupling-error"]
+    },
+    {
+      "convention": "Canonical N(0,1) identification assumes full Choice; the corollary assigns Z=(0,0) when its radial uniform is outside (0,1).",
+      "fixed_by": "cor-box-muller-from-independent-bits-gives-standard-normals",
+      "matters_for": ["cor-box-muller-from-independent-bits-gives-standard-normals"]
+    },
+    {
+      "convention": "The keyed permutation stream never wraps its counter and makes no independence or cryptographic guarantee.",
+      "fixed_by": "alg-counter-based-keyed-permutation-stream",
+      "matters_for": ["lem-counter-based-keyed-stream-no-reuse"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-independent-fair-bit-streams-produce-uniforms",
+      "statement": "Assume Countable Choice and Dependent Choice. On the countable fair-bit product space, any finite family of injective coordinate sequences with pairwise disjoint ranges produces independent uniforms on [0,1] by binary summation. No other choice principle is used.",
+      "used_by": [
+        "thm-midpoint-bit-stream-coupling-and-error",
+        "alg-rational-bernoulli-rejection-from-fair-bits",
+        "alg-finite-categorical-inverse-cdf",
+        "cor-box-muller-from-independent-bits-gives-standard-normals",
+        "thm-rational-bernoulli-rejection-law-and-cost",
+        "alg-box-muller-finite-bit-transform",
+        "ex-box-muller-zero-endpoint"
+      ]
+    },
+    {
+      "id": "thm-midpoint-bit-stream-coupling-and-error",
+      "statement": "Under Countable Choice and Dependent Choice, K_b is uniform on {0,…,2^b−1}, |U−U_b|≤δ_b pointwise, the 1-Wasserstein and Kolmogorov distances between their laws are at most δ_b, and their total-variation distance is exactly 1, where U_b=(K_b+1/2)2^(-b) and δ_b=2^(-b-1).",
+      "used_by": [
+        "alg-finite-categorical-inverse-cdf",
+        "thm-finite-categorical-midpoint-count-bound",
+        "thm-certified-bracketed-inverse-error",
+        "alg-box-muller-finite-bit-transform",
+        "thm-box-muller-finite-bit-coupling-error",
+        "ex-box-muller-finite-midpoint-tail",
+        "ex-box-muller-zero-endpoint"
+      ]
+    },
+    {
+      "id": "lem-box-muller-product-density-and-radius-moment",
+      "statement": "Assume Countable Choice. For product-uniform (U,V) on (0,1)^2, R=√(−2 log U), Θ=2πV and Z=(R cos Θ,R sin Θ), Z has density (2π)^(-1)exp(−(x²+y²)/2)=φ(x)φ(y), its coordinates are independent with density φ, P(R>r)=exp(−r²/2) for r≥0, and E R²=2.",
+      "used_by": [
+        "cor-box-muller-from-independent-bits-gives-standard-normals",
+        "alg-box-muller-finite-bit-transform",
+        "thm-box-muller-finite-bit-coupling-error",
+        "ex-box-muller-finite-midpoint-tail",
+        "ex-box-muller-zero-endpoint"
+      ]
+    },
+    {
+      "id": "lem-generalized-inverse-sublevel-identity",
+      "statement": "Assume Countable Choice. For a real random variable's CDF F and u∈(0,1), {y:F(y)≥u} is nonempty and bounded below, its infimum Q(u) is finite, and Q(u)≤x if and only if u≤F(x), for every real x.",
+      "used_by": [
+        "alg-finite-categorical-inverse-cdf",
+        "thm-certified-bracketed-inverse-error"
+      ]
+    },
+    {
+      "id": "alg-box-muller-finite-bit-transform",
+      "statement": "For integer b≥1 and two disjoint ideal fair-bit subsequences, form midpoint inputs, certify logarithm and square-root enclosures with fixed finite parameters, certify the unit-circle phase at rational input 2u_2, and return the exact dyadic product with evaluator certificates; failed supplier calls return inconclusive.",
+      "used_by": ["thm-box-muller-finite-bit-coupling-error"]
+    },
+    {
+      "id": "thm-lcg-full-period-and-adjacent-dependence",
+      "statement": "For the specified LCG with w≥2, a≡1 modulo 4 and c odd, every seed has exact period 2^w. A uniform seed gives uniform state marginals, but adjacent states are not an independent uniform pair.",
+      "used_by": ["ex-lcg-low-bit-alternation"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-rectangle-criterion-for-independent-random-elements",
+      "used_for": "Converting Borel-rectangle probability factorization into independence of random elements.",
+      "opened": true
+    },
+    {
+      "id": "thm-rational-box-generators-of-the-borel-sigma-algebra-on-rn",
+      "used_for": "Identifying the joint bit-stream law from a generating family of rectangles.",
+      "opened": true
+    },
+    {
+      "id": "thm-countable-product-of-probability-spaces",
+      "used_for": "Existence, uniqueness and finite marginals of the ideal fair-bit product under Countable Choice and Dependent Choice.",
+      "opened": true
+    },
+    {
+      "id": "cor-coordinate-random-elements-on-a-countable-product-are-independent",
+      "used_for": "Independence of distinct fair-bit coordinates.",
+      "opened": true
+    },
+    {
+      "id": "def-coordinate-maps-and-cylinder-sigma-algebra",
+      "used_for": "Measurable coordinate maps on the bit product.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "The sigma-algebra definition of independence.",
+      "opened": true
+    },
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Measurability requirements for bit-stream uniforms.",
+      "opened": true
+    },
+    {
+      "id": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+      "used_for": "Measurability of finite-prefix sums and their increasing limits.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuity-from-above-for-measures",
+      "used_for": "Zero probability of constant binary tails.",
+      "opened": true
+    },
+    {
+      "id": "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+      "used_for": "Identifying the joint uniform Borel law from its rectangle probabilities.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Tracking the choice assumption of probability, CDF, Lebesgue-measure and substitution suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-dependent-choice",
+      "used_for": "Tracking the additional choice assumption of the countable fair-bit product.",
+      "opened": true
+    },
+    {
+      "id": "thm-probability-law-and-distribution-function-correspondence",
+      "used_for": "CDF monotonicity, right continuity and limits at infinity in the generalized-inverse proof.",
+      "opened": true
+    },
+    {
+      "id": "def-complete-ordered-field",
+      "used_for": "Existence and approximation properties of the generalized-inverse infimum.",
+      "opened": true
+    },
+    {
+      "id": "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+      "used_for": "Borel change of variables on the open slit plane in the Box–Muller density proof.",
+      "opened": true
+    },
+    {
+      "id": "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+      "used_for": "The omitted Box–Muller ray is Lebesgue null.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Factoring the Gaussian density integral and deriving the radial second moment.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Total mass one in the Box–Muller normalization argument.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "The exponential appearing in the density and inverse transform.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Exponential monotonicity in radial inversion.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "The Box–Muller inverse Jacobian calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Scalar derivative compositions in the inverse Jacobian calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Logarithm monotonicity, inverse-transform domains and the eight-bit radial cutoff.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Radial definitions, square-root perturbation bounds and example computations.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-preimages-of-borel-sets-are-borel",
+      "used_for": "Borel measurability in the Box–Muller substitution.",
+      "opened": true
+    },
+    {
+      "id": "def-pi-via-first-positive-cosine-zero",
+      "used_for": "The canonical positive circle constant in angular coordinates.",
+      "opened": true
+    },
+    {
+      "id": "def-total-variation-distance-for-probability-laws",
+      "used_for": "The supremum-over-events convention and finite-support witnesses giving distance 1.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Uniform interval probabilities and null endpoints and midpoint grids.",
+      "opened": true
+    },
+    {
+      "id": "def-uniform-finite-probability-space",
+      "used_for": "Uniform seeds and finite-state marginal probabilities.",
+      "opened": true
+    },
+    {
+      "id": "thm-fundamental-theorem-of-arithmetic",
+      "used_for": "A return time dividing 2^w must be a power of two.",
+      "opened": true
+    },
+    {
+      "id": "def-prime",
+      "used_for": "The prime convention and primality of 2 in the LCG period proof.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Identifying the density-φ marginals with canonical N(0,1), including its full-Choice assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The standard-normal corollary's full-Choice hypothesis and its implication of Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-geometric-series",
+      "used_for": "Expected rejection-attempt count, with the series beginning at zero.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Passing from truncated rejection-attempt counts to expected total cost.",
+      "opened": true
+    },
+    {
+      "id": "lem-geometric-sequence-null",
+      "used_for": "Existence of a finite bisection depth meeting a positive modulus tolerance.",
+      "opened": true
+    },
+    {
+      "id": "cor-compact-domain-maps-are-uniformly-continuous",
+      "used_for": "Uniform continuity of a continuous CDF on its compact bracket.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Matching the evaluator's integral logarithm and bounding logarithmic coupling error by the mean-value theorem.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Bounding logarithm increments away from zero.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-schwarz-for-random-variables",
+      "used_for": "Bounding the ideal radial contribution on the exceptional coupling event.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-square-monotone",
+      "used_for": "Monotonicity of the radius and the eight-bit cutoff computation.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-linear-congruential-generator-mod-power-of-two",
+      "concern": "The Definition begins 'Let w≥2, M=2^w, integers a,c' without explicitly declaring w an integer. The finite residue set, modular operation and subsequent period proof require integer w. The intended domain is apparent from the word-width context, but should be stated in the input contract.",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-counter-based-keyed-permutation-stream",
+      "concern": "The Definition explicitly makes w an integer but specifies counter endpoints only by '0≤c_0≤c_1≤2^w'. State that c_0 and c_1 are integers: otherwise the first call π_k(c_0) need not belong to the supplied permutation's domain. Integer endpoints are implicit in the intended counter interface.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-inverse-cdf-near-zero-density",
+      "concern": "Fact F2 says 'A spatial inverse bound from CDF residual requires a density lower bound f≥m>0' and cites thm-certified-bracketed-inverse-error, which supplies a sufficient hypothesis. The example disproves a uniform linear bound |x̂−Q|≤Cε; it still admits the uniform nonlinear bound √ε. Specify 'uniform linear' in the broad wording and avoid presenting the cited sufficient condition as an unrestricted necessity.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "finite-bit-random-streams-and-variate-generation",
+      "to": "outward-rounded-interval-and-ball-arithmetic",
+      "faithful": true,
+      "note": "Checked the budgeted evaluator Definition and soundness proof, with the elementary evaluator interface. The Box–Muller consumer supplies finite parameters and directed input enclosures, rejects inadmissible logarithm inputs, accepts only certified full-range enclosures, and propagates failures. It does not infer guaranteed success from finite budgets."
+    },
+    {
+      "from": "finite-bit-random-streams-and-variate-generation",
+      "to": "computed-fast-transforms-and-convolution",
+      "faithful": true,
+      "note": "Checked the phase routine, its enclosure proof and canonical-π bridge. The consumer passes exact rational q=2u_2 and admissible fixed phase parameters, transfers complex-modulus error to Euclidean angular-vector error, and preserves inconclusive returns. Neither page nor consumer imports an FFT stability or independence guarantee from this routine."
+    }
+  ]
+}

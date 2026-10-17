@@ -1,0 +1,1 @@
+Follow the full same-supplier-changing-owner continuation brief. Read-only canonical source access; complete exact omitted consumer evidence and independently derive full-source minimal proposals for the actual remaining SDC work-property gap. No canonical application before root review.

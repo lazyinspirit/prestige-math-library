@@ -1,0 +1,13 @@
+--- verify-projected.mjs.before
++++ verify-projected.mjs
+@@ -54,6 +54,10 @@
+    const matches=records.filter(x=>x.step===st.id),d=matches[0];
+    check(matches.length===1&&d.claim===st.claim,{kind:'whole-source-proof-paragraph',id,step:st.id});
+    const declaredInputs=new Set(d?.inputs??[]),nativeTokens=explicitTokens(st.text,new Map(s.steps.map(x=>[x.id,x])));
++   for(const input of d?.inputs??[]){
++    const fact=typeof input==='string'?input.replace(/^fact\s+/,''):'';
++    if(/^[FAL]\d+$/.test(fact))check(s.facts.has(fact),{kind:'native-step-input-fact-actually-defined',id,step:st.id,input:fact});
++   }
+    check(matches.length===1&&Array.isArray(d.inputs)&&st.inputs.every(token=>declaredInputs.has(token)),{kind:'source-terminal-input-tags-retained',id,step:st.id});
+    check(matches.length===1&&[...nativeTokens].every(token=>declaredInputs.has(token)||declaredInputs.has(`step ${token}`)),{kind:'native-explicit-fact-and-known-step-inputs-covered',id,step:st.id});
+    const match=identities.get(st.id),actualRoutine=(c.routine_steps??[]).some(x=>x.step===st.id);

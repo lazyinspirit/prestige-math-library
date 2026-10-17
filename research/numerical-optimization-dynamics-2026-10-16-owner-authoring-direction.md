@@ -1,6 +1,6 @@
 # Current owner directions: combined numerical optimization and dynamics
 
-All four category prose audits are complete and drained; their exact final bytes are bound in `research/numerical-analysis-four-category-scaffolds-2026-10-16/audit-completion.json`. The owner now releases this fresh combined run for native planning and all six build steps. Historical prose-only operational holds in the design reports are superseded; every mathematical/proof/source obligation remains mandatory. The latest user authorizes a fresh combined build of ALL pairs in Numerical Optimization, Inverse Problems and Uncertainty Quantification and Numerical Differential Equations and Stochastic Dynamics, with every unmet prerequisite pair in this SAME frontier. The previous single numerical-analysis run is aborted and contributes no execution/review/gate coverage. This new run is `numerical-optimization-dynamics-2026-10-16`.
+All four category prose audits completed and drained before native authoring; their original completion bytes are bound in `research/numerical-analysis-four-category-scaffolds-2026-10-16/audit-completion.json`. Those historical hashes remain unchanged. Subsequent focused native-owner repairs are recorded in this run’s exact repair receipts and current controlling plans/audits; original prose completion confers no acceptance of later item proofs. The owner now releases this fresh combined run for native planning and all six build steps. Historical prose-only operational holds in the design reports are superseded; every mathematical/proof/source obligation remains mandatory. The latest user authorizes a fresh combined build of ALL pairs in Numerical Optimization, Inverse Problems and Uncertainty Quantification and Numerical Differential Equations and Stochastic Dynamics, with every unmet prerequisite pair in this SAME frontier. The previous single numerical-analysis run is aborted and contributes no execution/review/gate coverage. This new run is `numerical-optimization-dynamics-2026-10-16`.
 
 ## Scope and controlling designs
 
@@ -32,3 +32,70 @@ All new content remains draft. No publication or push is authorized. Do not cont
 ## Explicit retained local proof work
 
 RARE1 must complete its stopped-level kernel/event-normalizer identity; DIF2 must complete the promised binomial/Revolve schedule and cost proof (a fallback schedule does not fulfill that promise); STO2 must supply the explicit Adam divergence example. Dynamics authors must complete the monodromy/count, normal-form, invariant-law, fractional, jump, contact and population proofs assigned in their controlling contracts. These are same-frontier authoring obligations, not accepted theorem suppliers. Do not omit them or claim a weaker representative fulfills the richer promised scope. Escalate concrete uncertainty promptly while continuing independent work.
+
+## Accepted native drift repairs
+
+The owner accepts the focused planning repairs in `research/numerical-optimization-dynamics-2026-10-16-owner-drift-repair/{linear/repair.json,dynamics/resolution.json,optimization/repair.json}`. These preserve the richest approved scope and confer no proof/source-reading acceptance. The original native drift report and verdicts remain unchanged. Controlling plans/audits now take precedence over their earlier copied inventory prose wherever these exact repairs apply.
+
+E1 imports the existing matrix-free definition via its Krylov page, without deriving CSR costs or convergence from that definition. E2 imports canonical objective optimization via its published statistics page at NA-09/OPT0; arbitrary vector roots and indefinite gradient-root Hessians retain their independent Newton proof. Published decrement stops and conditional attempted-update convergence remain literal. E3 imports exact Chebyshev definitions/identities; normal/self-adjoint interval stability gives no general nonnormal/nonlinear theorem. E4 imports the existing HMC leapfrog/flow items with their exact choice, regularity, completeness and local/global hypotheses. E5 carries AC, adaptedness and integrability; Doob applies to -Z and the compensated -W, proving the finite decrement sum. STO2 expectation bounds and STO3 almost-sure applications keep their distinct hypotheses. E6 states the actual GP/independent Gaussian observation model and AC, allows every observed-SPD case including zero noise, proves positive noise suffices, and requires the sequential conditioning proof for adaptive sites. Singular/unavailable observed solves return the explicit status.
+
+E7 fixes the one-way geometry interface: NA-22 supplies T07; NA-22 does not consume later T04/T07. Direct shears, midpoint contraction and local finite-order modified-energy obligations supply NA-22; T07 locally proves the scaled regular RATTLE branch, constrained symplecticity/reversibility and error. Later splitting/constrained methods remain comparisons where no logical input is used. All promised backward-error and constrained scope remains required. OPT13's objective identity is theta*cbar_j<=0, strict only for positive theta; degenerate pivots remain supported.
+
+The following native-held pages have their declared supplier routing and controlling hypotheses repaired or checked through these changes; their companions inherit only the stated, actually proved A-page interface:
+
+- `adaptive-ode-solvers-and-error-estimation`: E3.
+- `barrier-and-primal-dual-interior-point-methods`: E2.
+- `bfgs-and-limited-memory-quasi-newton-methods`: E2.
+- `coagulation-fragmentation-and-sectional-population-balance-numerics`: E4.
+- `constrained-dynamics-shake-and-rattle`: E7.
+- `deferred-correction-and-collocation-iterations`: E2.
+- `differential-algebraic-equations-and-consistent-initialization`: E2.
+- `finite-basis-projector-energies-and-variational-electronic-structure`: E2.
+- `finite-generator-master-equations-and-uniformization`: E1.
+- `gauss-newton-and-levenberg-marquardt-methods`: E2.
+- `geometric-numerical-integration`: E4, E7.
+- `global-optimization-and-certified-branch-and-bound`: E2, E6.
+- `imex-and-operator-splitting-methods`: E2.
+- `implicit-stiff-time-stepping-and-algebraic-error`: E2.
+- `interacting-particle-mean-field-and-vortex-blob-error`: E4.
+- `interval-newton-krawczyk-and-polynomial-root-isolation`: E1, E2.
+- `iterative-regularization-and-early-stopping`: E2.
+- `local-bifurcation-normal-forms-and-numerical-certificates`: E2.
+- `matrix-functions-and-scaling-squaring`: E1.
+- `minimum-energy-paths-string-neb-and-saddle-certificates`: E2.
+- `multirate-and-partitioned-time-integration`: E2.
+- `nonconvex-line-search-and-inexact-newton-methods`: E2.
+- `nonlinear-boundary-value-solvers`: E2.
+- `nonlinear-conjugate-gradient-methods`: E2.
+- `nonlinear-equations-and-newton-methods`: E2.
+- `numerical-differentiation-and-derivative-error-control`: E2.
+- `numerical-optimization-globalization-and-inexact-certificates`: E2.
+- `parallel-in-time-parareal-and-mgrit`: E2.
+- `periodic-orbit-shooting-collocation-and-floquet-error`: E1, E2.
+- `pseudo-arclength-continuation-and-fold-certificates`: E2.
+- `revised-simplex-linear-programming-and-certificates`: E1.
+- `riemannian-optimization-on-stiefel-and-grassmann-manifolds`: E2.
+- `rosenbrock-and-linearly-implicit-methods`: E2.
+- `runge-kutta-methods-and-order`: E3.
+- `self-consistent-projector-iterations-and-certified-mixing`: E2.
+- `sparse-direct-elimination-and-ordering`: E1.
+- `sparse-matrix-models-and-kernel-costs`: E1.
+- `sqp-active-set-and-augmented-lagrangian-methods`: E2.
+- `stable-sde-schemes-for-superlinear-drift`: E2.
+- `stochastic-approximation-and-stochastic-gradient-methods`: E2.
+- `trust-region-and-cubic-regularization-methods`: E2.
+- `variance-reduced-finite-sum-and-adaptive-gradient-optimization`: E2.
+- `verified-linear-systems-and-spectral-enclosures`: E1.
+
+## Native batch40 carrier continuation
+
+The original successful native batch40 author produced its23 item carriers, contracts and readiness but omitted BOTH assigned library page carriers. Continue the same assignment through the native Step1 refresh, preserving all current sound items and exact historical reports/results. Complete `library/numerical-optimization-inverse-problems-and-uncertainty-quantification/subgradient-bundle-and-derivative-free-optimization.md` and its `-examples.md` companion from the actual current manifest/inventory and approved rich prose contract, with accurate summaries/placement. Reconcile current metadata/readiness as required by the original assignment. This does not request redundant mathematical rewriting or a new review; report any actual newly found blocker honestly.
+
+## Native batch44 carrier continuation
+
+The original successful batch44 author omitted both assigned library page carriers after completing19item carriers/records. Continue this same assignment through native Step1refresh, preserving completed sound items, exact original native evidence and current rich prose scope. Complete these actual declared page carriers from current batch44 manifest and approved category plan:
+
+- `library/numerical-differential-equations-and-stochastic-dynamics/delay-differential-equations-and-history-discretization.md`
+- `library/numerical-differential-equations-and-stochastic-dynamics/delay-differential-equations-and-history-discretization-examples.md`
+
+Reconcile current placement/metadata/readiness without redundant proof rewriting. Report any actual newly discovered blocker; no new independent review or publication is claimed.

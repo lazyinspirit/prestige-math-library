@@ -1,0 +1,737 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-golub-welsch-certified-node-and-weight-enclosures",
+    "supplier": "alg-near-orthonormal-hermitian-eigenvalue-certifier",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/alg-near-orthonormal-hermitian-eigenvalue-certifier.md",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nInput $n\\ge1$, a nonempty family of Hermitian $n\\times n$ matrices enclosed by complex rectangles, a point matrix $V\\in\\mathbb C^{n\\times n}$, a real diagonal matrix $\\Theta\\in\\mathbb R^{n\\times n}$, and proposed nonnegative bounds $\\delta,\\rho,M_A,M_\\Theta,\\tau$. Treat point data as exact dyadics and the family as any subset of its enclosure.\n\n1. With outward interval evaluation, enclose $V^*V-I$ and every $AV-V\\Theta$ for the full family. Form Frobenius upper bounds $d,r$ for these two matrices. Also form Frobenius upper bounds $m_A$ for every $A$ in the family and $m_\\Theta$ for $\\Theta$. If any enclosure or square-root operation is non-finite, return `inconclusive`.\n\n2. Verify by outward scalar comparisons that $d\\le\\delta<1$, $r\\le\\rho$, $m_A\\le M_A$, $m_\\Theta\\le M_\\Theta$, and that $1-\\sqrt{1-\\delta}\\le\\tau$. If any comparison is undecided or false, return `inconclusive` with the failed check. Otherwise set $\\eta=\\rho+(M_A+M_\\Theta)\\tau$ by outward arithmetic and return `certified` with the intervals $[\\theta_{(k)}-\\eta,\\theta_{(k)}+\\eta]$, sorted increasingly by the diagonal entries of $\\Theta$.\n\nThe checks use the Frobenius norm as an upper bound for the operator 2-norm. An inconclusive check makes no statement about the true spectrum.\n",
+    "consumer_use_anchors": "5. By outward interval operations, calculate a Frobenius upper bound $d$ for\n$V^*V-I$, a Frobenius upper bound $\\rho$ for $JV-V\\Theta$ over the entire\nfamily $\\mathcal J$, and Frobenius upper bounds $M_J,M_\\Theta$ for $J$ and\n$\\Theta$. If $d\\ge1$, return `inconclusive`. Compute an outward upper bound\n$\\tau$ for $1-\\sqrt{1-d}$. Call\n[[alg-near-orthonormal-hermitian-eigenvalue-certifier]] for the Hermitian\nfamily of Jacobi matrices represented by $\\mathcal J$, using $(V,\\Theta)$ and\nthe proposed bounds $(d,\\rho,M_J,M_\\Theta,\\tau)$. Continue only on\n`certified`. Let $N_i$ be the returned node intervals in increasing order.\nRequire that they are pairwise disjoint, each lies in $(a,b)$, and each width\nis at most $\\varepsilon_x$; otherwise return `inconclusive`.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/26"
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-golub-welsch-certified-node-and-weight-enclosures",
+    "supplier": "alg-thick-and-implicitly-restarted-arnoldi-with-locking",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "ROOT released actualAlpha82 drain in ROOT-Arnoldi67-consumer82-release/release.json. Same supplier reviewer Alpha67 applied the guarded S input/forwarding/failure-status surgery. For m>=2 the exact finite-return provider is passed to each Arnoldi projected solve; unavailable/invalid exits map to inconclusive. m=1 requires no provider. All returned proposal shape/residual/order and independent full-family node/weight certification checks remain intact. Actual conditional soundness consumer checked and unchanged. Earlier source excerpts/hold evidence are preserved below as history; nativeAlpha82 findings are not adjudicated by this maintenance.",
+    "inspected_paths": [
+      "items/alg-thick-and-implicitly-restarted-arnoldi-with-locking.md",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nLet $A\\in\\mathbb C^{n\\times n}$, let $v\\ne0$, and choose integers\n$1\\le r<m\\le n$, a residual tolerance $\\tau\\ge0$, a restart budget\n$N_{\\max}\\ge1$, and a restart mode `thick` or `implicit`. All operations\nbelow use the exact arithmetic model and projected-solver input specified next. The number $k$ of locked pairs is the number\nof linearly independent locked vectors; it starts at zero. If a restart is\nneeded, a target rule may be supplied for thick mode and is required for an\nimplicit-mode restart after one or more pairs are locked. When invoked, it\nmust return $r-k$ current Ritz vectors independent modulo the span of all\nlocked vectors, or report `unavailable`; no rule, an unavailable selection,\nor a wrong-size or dependent selection gives status `rank-loss`. For an implicit-mode\nrestart with no locked pairs, a shift rule supplies exactly $p=m-r$ complex\nshifts for the current cycle or reports `unavailable`; an unavailable list or\na list of any other length gives status `shift-count-unavailable`. The shifts\nmay be chosen from unwanted Ritz values, but the procedure allows any\nsupplied list and asserts no convergence for an arbitrary schedule.\n\n**Projected-solver input and exact operations.** Supply a projected eigensolver $S$. For every requested exact square matrix $H\\in\\mathbb C^{d\\times d}$ with $1\\le d\\le m$, it must return in finite work either `unavailable` or `success` with an ordered list of exactly $d$ pairs $(\\theta_j,y_j)$, $0\\le j<d$, with $\\theta_j\\in\\mathbb C$, $0\\ne y_j\\in\\mathbb C^d$, $Hy_j=\\theta_jy_j$, and\n$$\\det(zI_d-H)=\\prod_{j=0}^{d-1}(z-\\theta_j).$$\nThus eigenvalues are represented with their algebraic multiplicities; projected eigenvectors need not be independent when $H$ is defective. The procedure does not assert existence of an always-successful exact eigensolver in any fixed arithmetic or encoding. A provider may report `unavailable`; absent provider data give the same result without invoking a solver. Every original successful exact projected-eigensolve instance is retained by supplying its provider.\n\nOutside $S$, use exact complex field operations, conjugation, nonnegative real square roots, and exact equality/order comparisons on the real quantities compared. Complex operations use their real and imaginary component formulas. The finite-return target and shift rules have the output contracts already stated. Exact rank tests can be performed by Gaussian elimination, scanning columns and choosing the first remaining row with nonzero pivot; normalization divides only by a checked positive Euclidean norm. This is an exact-operation model, not a bit-cost or machine floating-point claim.\n\nAt every projected solve, invoke $S$ on the current $H_d$. An absent provider or `unavailable` return gives status `projected-eigensolve-unavailable`. A provider status other than `success` or `unavailable`, wrong list/vector shape, zero vector, nonzero exact residual $H_dy_j-\\theta_jy_j$, or failed characteristic-polynomial identity gives status `projected-eigensolve-invalid`. Check that identity by exact coefficient arithmetic: expand $\\det(zI_d-H_d)$ by the finite permutation formula of [[def-determinant-of-a-square-matrix]], in lexicographic permutation order, multiplying each term's $d$ affine-or-constant entries in increasing column order and using the inversion parity for its sign; form the right side by successive multiplication of its $d$ linear factors in returned list order. Polynomial addition and multiplication mean finite coefficient-array sums and convolutions, and compare all coefficients through degree $d$ exactly. This finite check extracts no roots. All these failures preserve the locked outputs and the most recently completed valid unlocked Ritz list (initially empty), with the failing cycle and projected dimension. Only after the entire successful list passes these checks normalize the vectors, lift them and replace the current Ritz list. The supplied finite-return promise applies to $S$ itself; no timeout or generic eigensolver implementation is silently provided.\n\nInitialize the restart counter $c=0$ before the first cycle. The initial cycle\nis an $m$-step fully reorthogonalized Arnoldi run from $v_1=v/\\|v\\|_2$: each\nstep computes a matrix-vector product, performs two complete orthogonalization\npasses against the current basis, and accumulates the coefficients in the\nprojected matrix. If a residual vanishes at step $j$, use the $j$-column basis\nand mark its span invariant. If the residual after step $m$ is nonzero, retain\nits normalized direction and coefficient as the Arnoldi residual data, but use\nonly the first $m$ columns in the projected eigensolve. Every later cycle uses\nthe restarted basis and projected matrix constructed in step 3 or 4. The output\nis the locked Ritz pairs, the most recently computed unlocked Ritz pairs, and\none of `converged`, `budget-exhausted`,\n`invariant-subspace-breakdown`, `rank-loss`, `shift-count-unavailable`, or\n`filtered-breakdown`, `projected-eigensolve-unavailable`, or\n`projected-eigensolve-invalid`.\n\n1. For the initial cycle, start with $v_1=v/\\|v\\|_2$, no locked pairs, and run\n   the $m$-step Arnoldi procedure described above. Let $d$ be the projected\n   basis dimension, so $d=m$ unless exact breakdown occurs earlier; on a\n   nonbreakdown cycle also retain the residual direction and coefficient from\n   step $m$. For every cycle, invoke and validate the supplied projected\n   eigensolver as specified above, returning its failure status before\n   processing any pair if it fails. For each returned projected eigenvector\n   $y$, normalize it so $\\|y\\|_2=1$ and lift it to $u=V_dy$. Process\n   the Ritz pairs in the order returned by the projected eigensolve. For each\n   pair $(\\theta,u)$, compute the original residual $r_u=Au-\\theta u$\n   directly (on a standard Arnoldi cycle without breakdown it may be\n   evaluated by [[prop-ritz-residual-formula-for-an-arnoldi-ritz-pair]]).\n   If $\\|r_u\\|_2\\le\\tau$ and adding $u$ increases the exact rank of the\n   locked-vector matrix, append $(\\theta,u)$ to the locked outputs and\n   increment $k$. A\n   residual-accepted vector in the span of the locked vectors is not counted\n   or appended again. Locked vectors are retained as a subspace at every\n   later restart. If $k\\ge r$, return `converged`.\n\n2. If the current projected subspace is marked invariant and fewer than $r$\n   pairs are locked, return `invariant-subspace-breakdown`. If the restart\n   counter satisfies $c=N_{\\max}$, return `budget-exhausted`.\n\n3. For a thick restart, or for an implicit-mode restart when $k>0$, invoke\n   the target rule. Form a target block from every locked vector and the\n   selected $r-k$ wanted Ritz vectors. For either block to be rank-revealing,\n   use the following exact column-pivoted orthogonalization: start with an\n   empty orthonormal block $Q$ and all input columns remaining. For each\n   remaining column $y_j$, compute $c_j=y_j-Q(Q^*y_j)$. Choose a column with\n   largest $\\|c_j\\|_2$, breaking ties by original column order. If the largest\n   norm is zero, stop; otherwise append $c_j/\\|c_j\\|_2$ to $Q$ and remove that\n   pivot column. The columns appended to $Q$ form an ordered orthonormal basis\n   of the input range. Apply this procedure first to the target block; if it\n   fails to retain all locked and selected directions, return `rank-loss`.\n   With its resulting orthonormal basis $U$, compute the residual block\n   $R_U=(I-UU^*)AU$. Apply the same orthogonalization to $R_U$ to obtain an\n   ordered orthonormal basis $F$ of its range. If $U$ has $s$ columns, retain\n   only the first $\\min(\\dim\\operatorname{range}(R_U),m-s)$ columns of $F$,\n   so $[U,F]$ has at most $m$ columns. Set the ordered basis to $[U,F]$ and a\n   queue to its columns in order. While the basis has fewer than $m$ columns\n   and the queue is nonempty, remove the first queued column $q$, compute\n   $w=Aq$, and orthogonalize $w$ against every current basis column in two\n   complete passes. If the residual is nonzero, normalize it, append it to\n   the basis, and append the new column to the queue; if it is zero, continue\n   with the remaining queue. Set $V_d$ to the resulting basis and compute the\n   projected matrix $H_d=V_d^*AV_d$ exactly. If the queue empties before the\n   basis has dimension $m$, or if $d=n$, mark this subspace invariant; first\n   process its Ritz pairs in step 5, then return `invariant-subspace-breakdown` at step 2\n   if fewer than $r$ pairs have been locked. This projection is required\n   because a thick restart can begin from several retained and residual\n   directions rather than from a single Arnoldi starting vector.\n\n4. For an implicit restart with no locked pairs, set $p=m-r$ and request a\n   shift list $\\mu_1,\\ldots,\\mu_p$ from the shift rule. If it reports\n   `unavailable` or returns a list of the wrong length, return\n   `shift-count-unavailable`.\n   Starting from the no-breakdown $m$-step Arnoldi relation\n   $AV_m=V_mH_m+\\beta_m v_{m+1}e_m^*$, apply exact shifted QR steps to $H_m$\n   using the transformations of [[def-real-and-complex-givens-transformations]].\n   Set $H_0=H_m$ and\n   $q(z)=\\prod_{j=1}^{p}(z-\\mu_j)$.\n   For $j=1,\\ldots,p$, initialize $R=H_{j-1}-\\mu_jI$ and $Q_j=I_m$. For\n   $\\ell=1,\\ldots,m-1$, generate a left factor from\n   $(a,b)=(R_{\\ell,\\ell},R_{\\ell+1,\\ell})$ and apply it to rows $\\ell,\\ell+1$\n   by setting $R\\gets LR$, and update $Q_j\\gets Q_jL^*$. Use the identity if\n   $b=0$; if $b\\ne0$,\n   put $s_0=\\sqrt{|a|^2+|b|^2}$ and choose the exact coefficients\n   $(c,s)=(a/s_0,b/s_0)$ over $\\mathbb R$, while over $\\mathbb C$ choose\n   $(c,s)=(0,\\overline b/|b|)$ if $a=0$ and\n   $(c,s)=(|a|/s_0,(a/|a|)\\overline b/s_0)$ otherwise. Use\n   $L=\\begin{pmatrix}c&s\\\\-\\overline s&c\\end{pmatrix}$. At the end set\n   $R_j=R$ and $H_j=R_jQ_j+\\mu_jI=Q_j^*H_{j-1}Q_j$. Let\n   $H^+=H_p$ and put $Q=Q_1\\cdots Q_p$. Test the filtered Krylov dimension exactly by\n   forming $w=q(A)v_1$ and the columns $w,Aw,\\ldots,A^{r-1}w$. If their rank is\n   below $r$, return `filtered-breakdown`. Otherwise retain\n   $V_r^+=V_mQ(:,1:r)$ and set $H_r^+=H^+(1:r,1:r)$. Compute\n   $g=A(V_r^+)_{:r}-V_r^+H_r^+e_r$, the residual of the last retained column;\n   the first $r-1$ retained columns have zero residual by the upper-Hessenberg\n   relation and shift count $p=m-r$. If $g=0$, use $V_r^+$ as the current\n   invariant basis with dimension $r$. If $g\\ne0$, set\n   $v_{r+1}^+=g/\\|g\\|_2$ and $\\beta_r^+=\\|g\\|_2$, initialize the continued\n   Arnoldi relation with $(V_r^+,H_r^+,v_{r+1}^+,\\beta_r^+)$, and continue\n   Arnoldi with two complete orthogonalization passes until dimension $m$ or\n   exact breakdown. On a nonbreakdown continuation, also compute the residual\n   direction and coefficient after its $m$th Arnoldi step for the next\n   implicit restart. Mark the current subspace invariant when this continuation\n   breaks down.\n\n5. Increment the restart counter by setting $c\\gets c+1$, invoke and validate\n   $S$ on the new projected matrix as in step 1, and return the stated\n   projected-solve failure status if it fails. On success, recompute the lifted\n   Ritz pairs and their original residuals, apply the acceptance rule in step 1,\n   and return to step 2 unless a return status applies.\n   No convergence is asserted for an arbitrary shift schedule. The residual\n   acceptance test certifies only the computed residual size; it does not by\n   itself give a forward eigenvalue bound for a nonnormal matrix.\n",
+    "consumer_use_anchors": "4. If $m\\ge2$, take the interval midpoint matrix $J_c$ and run\n[[alg-thick-and-implicitly-restarted-arnoldi-with-locking]] in exact arithmetic\non $J_c$ from the first coordinate vector, with full dimension $m$, target\ncount $m-1$, restart budget $N_{\\max}=1$, thick restart mode, and zero\nRitz residual tolerance, passing the supplied $S$ to every projected solve.\nBoth projected-solve failure statuses, like every other nonconverged Arnoldi\nstatus, return `inconclusive` here. Supply the following target rule if a restart is\nreached: scan the current Ritz vectors in the projected eigensolve's returned\norder, retain the first vectors that increase the span modulo all locked\nvectors, and stop after selecting the required $r-k=m-1-k$ vectors. If the\nlist supplies too few independent vectors, return `unavailable`. No shift rule\nis needed in thick mode. The full-dimension initial cycle is attempted before\nany restart; the finite restart budget is a fallback, not a success promise.\nOn any status other than `converged`, or unless the returned locked and current\nRitz data together contain $m$ pairs, return `inconclusive`. Verify that every\nreturned pair has a real Ritz value and exactly zero original residual;\notherwise return `inconclusive`. For each normalized Ritz vector $y$, if it has\ncomplex coordinates replace it by the normalization of the nonzero one of\n$\\operatorname{Re}y$ and $\\operatorname{Im}y$ having larger Euclidean norm.\nThis is still an eigenvector of the real matrix $J_c$ for the same real Ritz\nvalue. Round each resulting real Ritz-vector coordinate downward to a finite\ndyadic and each real Ritz value downward. If the rounded Ritz values are not\nstrictly increasing, return `inconclusive`; otherwise call the resulting real\nmatrix $V$ and diagonal matrix $\\Theta$.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/23",
+    "alpha_3a_review": {
+      "group": "batch-82",
+      "status": "verified",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-82-3a.md: independent current supplier S and consumer forwarding/failure/conditional soundness review complete. Original reader:82:1 and refuter:82:1 confirmed_fatal on the existing supplier defect; both prior escalations retained as history. ROOT release and actual same-reviewer consumer surgery close the scientific prerequisite; ROOT still owns typed historical bindings and gates."
+    },
+    "alpha67_consumer_maintenance_history": [
+      {
+        "status": "open",
+        "evidence": "Step 3a: open supplier-first consumer interface resolution for reader:82:1 and refuter:82:1. Current Arnoldi accepts finite-return provider S; the current Golub-Welsch consumer does not forward S. Owner integration leaves batch82_applied=false and the proposal retains an explicit writer hold. Earlier verified evidence and quoted supplier bytes below are historical and do not establish current closure.",
+        "supplier_statement_or_definition": "\n## Definition\n\nLet $A\\in\\mathbb C^{n\\times n}$, let $v\\ne0$, and choose integers\n$1\\le r<m\\le n$, a residual tolerance $\\tau\\ge0$, a restart budget\n$N_{\\max}\\ge1$, a target rule, and a restart mode `thick` or `implicit`.\nAll operations below are in exact arithmetic. In thick mode, the target rule\nselects $r-k$ linearly independent current Ritz vectors, where $k$ denotes\nthe number of already locked pairs; if it cannot do so, the procedure returns\n`rank-loss`. In implicit\nmode, a shift rule supplies exactly $p=m-r$ complex shifts for the current\ncycle, or reports that the shift list is unavailable. The shifts may be chosen\nfrom unwanted Ritz values, but the procedure allows any supplied list and\nasserts no convergence for an arbitrary schedule. Initialize the restart\ncounter $c=0$ before the first Arnoldi cycle. A cycle consists of expanding\nthe current Arnoldi basis to dimension $m$ or exact breakdown, then computing\nRitz pairs and testing their original residuals. After the initial cycle in\nstep 1, each restart in step 3 or 4 constructs the next cycle. The output is\nthe locked Ritz pairs, the current unlocked Ritz pairs, and one of `converged`,\n`budget-exhausted`, `invariant-subspace-breakdown`, `rank-loss`,\n`shift-count-unavailable`, or `filtered-breakdown`.\n\n1. Start with $v_1=v/\\|v\\|_2$, no locked pairs, and run fully reorthogonalized\n   Arnoldi to dimension $m$, stopping earlier if the next Arnoldi residual is\n   zero. Normalize every nonzero projected eigenvector $y$ so $\\|y\\|_2=1$ and\n   lift it to $u=V_my$. For each Ritz pair $(\\theta,u)$, compute the original\n   residual $r_u=Au-\\theta u$ (on a standard Arnoldi cycle it may be evaluated\n   by [[prop-ritz-residual-formula-for-an-arnoldi-ritz-pair]]) and accept the\n   pair when $\\|r_u\\|_2\\le\\tau$. Accepted pairs are recorded as locked outputs\n   and their vectors must be retained at every later restart. If at least $r$\n   pairs have been accepted, return `converged`.\n\n2. If the projected Arnoldi space is exactly invariant and fewer than $r$ pairs\n   have been accepted, return `invariant-subspace-breakdown`. If the restart\n   counter satisfies $c=N_{\\max}$, return `budget-exhausted`.\n\n3. For a thick restart, form a target block from every locked vector and the\n   additional wanted Ritz vectors selected by the target rule. Apply exact\n   exact column-pivoted QR as in\n   [[def-full-reduced-and-column-pivoted-computational-qr-factorisations]] to\n   this block; if its rank is too small to retain all\n   locked and selected directions, return `rank-loss`. With the resulting\n   orthonormal basis $U$, compute the residual block\n   $R_U=(I-UU^*)AU$. Apply exact column-pivoted QR as in\n   [[def-full-reduced-and-column-pivoted-computational-qr-factorisations]] to\n   $R_U$, breaking pivot\n   ties by original column order, to obtain an ordered orthonormal basis $F$ of\n   its range. If $U$ has $q$ columns, retain only the first\n   $\\min(\\dim\\operatorname{range}(R_U),m-q)$ columns of $F$, so $[U,F]$ has at\n   most $m$ columns. Restart from $[U,F]$ and extend by block Arnoldi, fully\n   reorthogonalizing each new $Aq$ against all current columns, until the basis\n   has dimension $m$ or the exact residual vanishes. If the retained subspace\n   is invariant before dimension $m$ and fewer than $r$ pairs are accepted,\n   return `invariant-subspace-breakdown`.\n\n4. For an implicit restart, use this branch only when no pair is locked. Set\n   $p=m-r$ and request a shift list $\\mu_1,\\ldots,\\mu_p$ from the shift rule;\n   if it reports a list of the wrong length, return `shift-count-unavailable`.\n   Starting from $AV_m=V_mH_m+\\beta_m v_{m+1}e_m^*$, apply exact shifted QR\n   steps to $H_m$ using the Givens transformations of\n   [[def-real-and-complex-givens-transformations]] in top-down adjacent-row\n   eliminations on pairs\n   $(1,2),(2,3),\\ldots,(m-1,m)$:\n   $H_{j-1}-\\mu_jI=Q_jR_j$ and $H_j=Q_j^*H_{j-1}Q_j=R_jQ_j+\\mu_jI$.\n   Put $Q=Q_1\\cdots Q_p$, rotate $V_m$ by $Q$, retain its first $r$ columns,\n   and continue Arnoldi to dimension $m$. If the polynomial\n   $q(z)=\\prod_{j=1}^p(z-\\mu_j)$ annihilates the starting vector or the\n   filtered Krylov space has dimension below $r$, return `filtered-breakdown`.\n\n5. Increment the restart counter by setting $c\\gets c+1$, recompute Ritz\n   pairs and their original residuals, apply the acceptance rule in step 1,\n   and return to step 2 unless a return status applies.\n   No convergence is asserted for an arbitrary shift schedule. The residual\n   acceptance test certifies only the computed residual size; it does not by\n   itself give a forward eigenvalue bound for a nonnormal matrix.\n",
+        "consumer_use_anchors": "4. If $m\\ge2$, take the interval midpoint matrix $J_c$ and run\n[[alg-thick-and-implicitly-restarted-arnoldi-with-locking]] in exact arithmetic\non $J_c$ from the first coordinate vector, with full dimension $m$, target\ncount $m-1$, one cycle, thick restart mode, and zero Ritz residual tolerance.\nOn any status other than `converged`, or unless the returned locked and current\nRitz data together contain $m$ pairs, return `inconclusive`. Verify that every\nreturned pair has a real Ritz value and exactly zero original residual;\notherwise return `inconclusive`. For each normalized Ritz vector $y$, if it has\ncomplex coordinates replace it by the normalization of the nonzero one of\n$\\operatorname{Re}y$ and $\\operatorname{Im}y$ having larger Euclidean norm.\nThis is still an eigenvector of the real matrix $J_c$ for the same real Ritz\nvalue. Round each resulting real Ritz-vector coordinate downward to a finite\ndyadic and each real Ritz value downward. If the rounded Ritz values are not\nstrictly increasing, return `inconclusive`; otherwise call the resulting real\nmatrix $V$ and diagonal matrix $\\Theta$.",
+        "alpha_3a_review": {
+          "group": "batch-82",
+          "status": "escalated",
+          "evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-82-3a.md: routed missing projected-solver finding is true; owner-integrated S contract locally reviewed, but current consumer forwarding and owner-held same-reviewer closure remain pending; preserve original supplier excerpt as historical evidence."
+        }
+      }
+    ],
+    "alpha67_consumer_maintenance": {
+      "reviewer": "alpha-batch-67",
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "release": "research/numerical-optimization-dynamics-2026-10-16-ROOT-Arnoldi67-consumer82-release/release.json",
+      "defect_family": "nod-b67-3a-projected-eigensolver-contract",
+      "original_native82_obligations": [
+        "reader:82:1",
+        "refuter:82:1"
+      ],
+      "native82_independent_adjudication": "complete in current Alpha82 continuation; both historical findings confirmed_fatal, current repair accepted; ROOT binding pending",
+      "owner_review_receipt_scope": "Existing owner_review_receipt and alpha_3a_review are historical; ROOT owns current mechanical rebinding."
+    },
+    "alpha82_adjudication_history": [
+      {
+        "group": "batch-82",
+        "status": "escalated",
+        "evidence": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-82-3a.md: routed missing projected-solver finding is true; owner-integrated S contract locally reviewed, but current consumer forwarding and owner-held same-reviewer closure remain pending; preserve original supplier excerpt as historical evidence."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-golub-welsch-certified-node-and-weight-enclosures",
+    "supplier": "alg-uniform-interval-linear-residual-certifier",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/alg-uniform-interval-linear-residual-certifier.md",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nInput $n\\ge1$, nonempty families $\\mathcal A\\subseteq\\mathbb C^{n\\times n}$ and $\\mathcal b\\subseteq\\mathbb C^n$, each enclosed entrywise by finite complex rectangles, together with stored point proposals $R$ and $\\widehat x$. The represented family need only be a subset of the supplied product of rectangles; correlations between entries may be discarded. All stored point data are exact dyadics.\n\n1. Use outward rectangle operations to evaluate the expression DAGs\n$$\nE(A)=I-RA,\\qquad c(A,b)=R(b-A\\widehat x)\n$$\nover the full input rectangles. If an operation has no finite enclosure or returns a domain or range status, return `inconclusive`.\n\n2. For each complex rectangle entry $X+iY$, outward-enclose its modulus by computing $\\sqrt{X^2+Y^2}$ and taking the upper endpoint. Combine those bounds by outward sums of squares and square roots to obtain $q\\ge\\sup_{A\\in\\mathcal A}\\|E(A)\\|_F$ and $r\\ge\\sup_{A\\in\\mathcal A,b\\in\\mathcal b}\\|c(A,b)\\|_2$. If any modulus, sum, square root or final division has no finite outward result, return `inconclusive`. The Frobenius upper bound also bounds the operator 2-norm. If $q\\ge1$, return `inconclusive` with $q,r$. Otherwise return `certified` with the uniform residual data $(R,\\widehat x,q,r)$ and radius $r/(1-q)$, rounded outward if represented as a ball.\n\nThe interval DAG encloses every value for every admitted pair, including dependencies between repeated inputs because natural interval evaluation may enlarge the range. `inconclusive` makes no assertion that a member is singular.\n",
+    "consumer_use_anchors": "1. Set $p_0=1$. For each $k=1,\\ldots,m-1$, enclose the Hankel matrix and\nright-hand side\n$$ (H_k)_{ij}=\\mu_{i+j},\\qquad (b_k)_i=-\\mu_{i+k} \\quad(0\\le i,j<k) $$\nby the corresponding moment intervals. Take the exact rational midpoints of\nthese interval data and use exact Gaussian elimination with row swaps to the\nfirst available nonzero pivot to produce point proposals for $H_k^{-1}$ and\n$-H_k^{-1}b_k$. If a pivot is zero, return `inconclusive`. Round every\nproposal down to a finite dyadic in the selected format; on overflow, return\n`inconclusive`. Call\n[[alg-uniform-interval-linear-residual-certifier]] on the full rectangle\nfamilies with these proposals. Continue only on `certified`, and enclose each\ncoefficient of the unique solution by its reported center plus or minus the\noutward-rounded uniform error radius. These intervals enclose the coefficients\nof $p_k(X)=X^k+\\sum_{j<k}c_{kj}X^j$ whenever the moment promise holds.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/24"
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-golub-welsch-certified-node-and-weight-enclosures",
+    "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/def-dyadic-floating-point-format-and-directed-rounding.md",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nAn exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.\n\nFor a real $x$ with $|x|\\le N_{\\max}$, define $\\operatorname{rd}(x)$ as the\ngreatest member of $\\mathbb F$ not exceeding $x$, and $\\operatorname{ru}(x)$ as\nthe least member of $\\mathbb F$ not less than $x$. Define\n$\\rho(x)=\\operatorname{ru}(x)-\\operatorname{rd}(x)$. For nonzero $x$ in the\nsubnormal range, define the absolute-error bound $\\epsilon_{\\rm abs}(x)=\\eta$;\nfor $2^e\\le |x|<2^{e+1}$ in the normal range, define\n$\\epsilon_{\\rm abs}(x)=2^{e-p+2}$. At finite overflow, a directed result is\nthe corresponding infinite sentinel and its error bound is $+\\infty$; the\nstatus is `overflow`. The rounding procedure reports `finite`, `subnormal`, or\n`overflow`, so no relative-error assumption is implicit.\n\nAn exact rational intermediate may be converted by comparing integer\nnumerators and denominators after clearing powers of two. A directed interval\nendpoint is the resulting greatest lower or least upper member of $\\mathbb F$.\n\n",
+    "consumer_use_anchors": "No direct Facts/Proof invocation: declared supplier is redundant/contextual; actual claim is established by the other explicit local facts. No theorem transfer is inferred.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/21"
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-golub-welsch-certified-node-and-weight-enclosures",
+    "supplier": "def-intervals-rectangles-and-complex-balls",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/def-intervals-rectangles-and-complex-balls.md",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nA **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.\n\nA **complex rectangle** is $X+iY=\\{x+iy:x\\in X,\\ y\\in Y\\}$ for real intervals\n$X,Y$. Complex addition and multiplication use\n$(x+iy)+(u+iv)=(x+u)+i(y+v)$ and\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$. For $z=x+iy$, its complex modulus is\n$|z|=\\sqrt{x^2+y^2}$, and for $z\\ne0$ its reciprocal is\n$1/z=(x-iy)/(x^2+y^2)$. A\n**complex ball** $B(c,r)$ is\n$\\{z\\in\\mathbb C:|z-c|\\le r\\}$ with dyadic complex center $c$ and dyadic\n$r\\ge0$. For any two represented sets $S,T$, the inclusion order is\n$S\\sqsubseteq T$ iff $S\\subseteq T$.\n\nThe width of a complex rectangle with coordinate widths $w_X,w_Y$ is its\nEuclidean diameter $\\sqrt{w_X^2+w_Y^2}$; the width of a ball $B(c,r)$ is its\ndiameter $2r$. Width comparisons against a dyadic tolerance can be decided by\nexact rational comparisons after squaring the nonnegative quantities.\n\nThe **range** of a real or complex function $f$ on a set $S$ is\n$f(S)=\\{f(x):x\\in S\\cap\\operatorname{dom}(f)\\}$. A finite expression DAG is a\nfinite directed acyclic graph with input nodes, constant nodes, and operation\nnodes; constants are exact dyadics or are supplied with certified enclosing\nintervals. Sharing a node means the exact same intermediate value is reused.\n\n",
+    "consumer_use_anchors": "No direct Facts/Proof invocation: declared supplier is redundant/contextual; actual claim is established by the other explicit local facts. No theorem transfer is inferred.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/19"
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-golub-welsch-certified-node-and-weight-enclosures",
+    "supplier": "def-outward-rounded-interval-and-ball-operations",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/def-outward-rounded-interval-and-ball-operations.md",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nFor real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.\n\nIf $0\\in Y$ for division, return `split-domain` with the two subdomains\n$Y\\cap(-\\infty,0)$ and $Y\\cap(0,\\infty)$, or `entire` when the caller does not\nrequest subdivision. No finite quotient interval is returned in this case.\nAn invalid square-root domain returns `domain-error` or an explicitly\nrestricted nonnegative subdomain.\n\nComplex-rectangle addition, subtraction and multiplication use\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$, applying the real interval operations to\neach component. For a rectangle $X+iY$ excluding $0$, define its reciprocal by\n$(X-iY)/(X^2+Y^2)$; the denominator interval is strictly positive because at\nleast one coordinate interval excludes zero. Division multiplies by this\nreciprocal.\n\nFor a ball $B(c,r)$, let $X_B=[\\Re c-r,\\Re c+r]$ and\n$Y_B=[\\Im c-r,\\Im c+r]$ be its coordinate projection intervals. For a real\ninterval $J$, let $M(J)=\\max(|\\inf J|,|\\sup J|)$ and let $d(J)=0$ if\n$0\\in J$, otherwise $d(J)=\\min(|\\inf J|,|\\sup J|)$. Put\n$M_B=M(X_B)+M(Y_B)$ and $m_B=\\max(d(X_B),d(Y_B))$. Then\n$|z|\\le M_B$ for every $z\\in B(c,r)$ and $|z|\\ge m_B$ for every such $z$.\nDefine ball addition and subtraction as\n$B(0,\\operatorname{ru}(M_{B_1}+M_{B_2}))$, multiplication as\n$B(0,\\operatorname{ru}(M_{B_1}M_{B_2}))$, and division as\n$B(0,\\operatorname{ru}(M_{B_1}/m_{B_2}))$ only when $m_{B_2}>0$. These\norigin-centered output balls are conservative but inclusion-isotone. If\n$m_{B_2}=0$, return `split-domain`, `entire`, or `inconclusive`; if a radius\noverlows, return `overflow`.\n",
+    "consumer_use_anchors": "Input an integer $m\\ge1$, admissible moment data $(a,b,m,r,\\mu)$ from\n[[def-gauss-moment-data]] with $r\\ge2m-1$, finite dyadic intervals\n$I_0,\\ldots,I_{2m-1}$ promised to contain the respective moments\n$\\mu_j=\\int x^j\\,d\\mu(x)$, a finite dyadic format, and positive dyadic\nwidth tolerances $\\varepsilon_x,\\varepsilon_w$. The measure and the truth of\nthe moment-enclosure promise are mathematical input promises; this procedure\ndoes not verify them. For the $m\\ge2$ proposal branch also supply a\nfinite-return exact projected eigensolver $S$ satisfying the explicit input\nand output contract of [[alg-thick-and-implicitly-restarted-arnoldi-with-locking]].\nThe $m=1$ branch needs no such provider. Missing or unavailable projected-solver\ndata return `inconclusive` when that proposal branch is reached; no universal\nexact eigensolver is constructed here. All interval operations use\n[[def-outward-rounded-interval-and-ball-operations]]. Any overflow, invalid\ndomain, nonpositive divisor, failed solve, undecidable comparison, or failed\ncertification returns `inconclusive`.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/20",
+    "alpha67_consumer_anchor_history": {
+      "consumer_use_anchors": "Input an integer $m\\ge1$, admissible moment data $(a,b,m,r,\\mu)$ from\n[[def-gauss-moment-data]] with $r\\ge2m-1$, finite dyadic intervals\n$I_0,\\ldots,I_{2m-1}$ promised to contain the respective moments\n$\\mu_j=\\int x^j\\,d\\mu(x)$, a finite dyadic format, and positive dyadic\nwidth tolerances $\\varepsilon_x,\\varepsilon_w$. The measure and the truth of\nthe moment-enclosure promise are mathematical input promises; this procedure\ndoes not verify them. All interval operations use\n[[def-outward-rounded-interval-and-ball-operations]]. Any overflow, invalid\ndomain, nonpositive divisor, failed solve, undecidable comparison, or failed\ncertification returns `inconclusive`."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-golub-welsch-certified-node-and-weight-enclosures",
+    "supplier": "thm-near-orthonormal-hermitian-eigenvalue-certifier-soundness",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/thm-near-orthonormal-hermitian-eigenvalue-certifier-soundness.md",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nIf [[alg-near-orthonormal-hermitian-eigenvalue-certifier]] returns `certified` with radius $\\eta$, then for every admitted Hermitian $A$ its increasing eigenvalues lie in the returned intervals centered at the increasing rearrangement of the diagonal entries of $\\Theta$. Inconclusive output makes no spectral claim.\n",
+    "consumer_use_anchors": "No direct Facts/Proof invocation: declared supplier is redundant/contextual; actual claim is established by the other explicit local facts. No theorem transfer is inferred.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/27"
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-golub-welsch-certified-node-and-weight-enclosures",
+    "supplier": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/thm-outward-rounded-operations-are-isotone-and-dag-sound.md",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nFor real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosure is asserted.\n",
+    "consumer_use_anchors": "No direct Facts/Proof invocation: declared supplier is redundant/contextual; actual claim is established by the other explicit local facts. No theorem transfer is inferred.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/22"
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-golub-welsch-certified-node-and-weight-enclosures",
+    "supplier": "thm-uniform-interval-linear-residual-certifier-soundness",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/thm-uniform-interval-linear-residual-certifier-soundness.md",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/alg-golub-welsch-certified-node-and-weight-enclosures.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nIf [[alg-uniform-interval-linear-residual-certifier]] returns `certified` with $(R,\\widehat x,q,r)$, then every $(A,b)$ in the admitted families has a unique solution and its distance from $\\widehat x$ is at most $r/(1-q)$. Inconclusive output asserts no such conclusion.\n",
+    "consumer_use_anchors": "No direct Facts/Proof invocation: declared supplier is redundant/contextual; actual claim is established by the other explicit local facts. No theorem transfer is inferred.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/25"
+  },
+  {
+    "kind": "item",
+    "consumer": "def-gauss-quadrature-rule",
+    "supplier": "def-cardinal-polynomial-interpolation",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/def-cardinal-polynomial-interpolation.md",
+      "items/def-gauss-quadrature-rule.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/def-gauss-quadrature-rule.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nLet $n\\in\\mathbb N$ with $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\left(\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}(x_j-x_k)\\right)^{-1}\\quad(0\\le j\\le n).$$\nAn empty product is $1$, so $w_0=1$ when $n=0$.\n\nIn these formulas, $X$ is a real argument, and for real $a$ and nonzero real $b$, $a/b$ denotes $ab^{-1}$ in the field $\\mathbb R$ ([[def-field]]).\n\nFor each $j$, the cardinal function is\n$$\\ell_j(X)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{X-x_k}{x_j-x_k}.$$\nThe interpolation function for the data $y=(y_0,\\ldots,y_n)$ is\n$$I_n y(X)=\\sum_{j=0}^{n}y_j\\ell_j(X).$$\nFor a real function $f$ defined at the nodes, write $I_n f:=I_n(f(x_0),\\ldots,f(x_n))$.\n\nFor products indexed by $k\\ne j$, use the length-$n$ list $\\widehat x_{j,k}$ ($0\\le k<n$), where $\\widehat x_{j,k}=x_k$ for $k<j$ and $\\widehat x_{j,k}=x_{k+1}$ for $k\\ge j$; the product is in this order and is empty when $n=0$. Strict ordering gives $x_j-\\widehat x_{j,k}\\ne0$ for every factor, so [[lem-finite-product-of-nonzero-reals-is-nonzero]] and the field inverse law make each $w_j$ well defined.\n",
+    "consumer_use_anchors": "Let $(a,b,m,2m-1,\\mu)$ be moment data as in\n[[def-gauss-moment-data]]. Let $p_m$ be its monic degree-$m$ orthogonal\npolynomial and write its ordered roots as\n$a<x_1<\\cdots<x_m<b$, as established in\n[[thm-gauss-orthogonal-polynomial-has-simple-interior-zeros]]. For\n$i=1,\\ldots,m$, define the Lagrange cardinal polynomial\n$$ \\ell_i(X):=\\prod_{\\substack{1\\le j\\le m\\\\j\\ne i}}\\frac{X-x_j}{x_i-x_j} $$\nusing the convention of [[def-cardinal-polynomial-interpolation]]. Define\nthe **Gaussian quadrature weights** and the **m-node Gaussian rule** by\n$$ w_i:=\\int_{[a,b]}\\ell_i(x)\\,d\\mu(x),\\qquad Q_m(f):=\\sum_{i=1}^{m}w_i f(x_i) $$\nfor any real-valued function $f$ defined at the nodes. This definition\nasserts no accuracy; well-definedness of the nodes, cardinal polynomials,\nweights, and finite sum is proved in\n[[lem-gauss-quadrature-rule-data-well-defined]].\n",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/10"
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-two-node-gauss-weights-from-cardinal-squares",
+    "supplier": "def-cardinal-polynomial-interpolation",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/def-cardinal-polynomial-interpolation.md",
+      "items/ex-two-node-gauss-weights-from-cardinal-squares.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/ex-two-node-gauss-weights-from-cardinal-squares.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nLet $n\\in\\mathbb N$ with $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\left(\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}(x_j-x_k)\\right)^{-1}\\quad(0\\le j\\le n).$$\nAn empty product is $1$, so $w_0=1$ when $n=0$.\n\nIn these formulas, $X$ is a real argument, and for real $a$ and nonzero real $b$, $a/b$ denotes $ab^{-1}$ in the field $\\mathbb R$ ([[def-field]]).\n\nFor each $j$, the cardinal function is\n$$\\ell_j(X)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{X-x_k}{x_j-x_k}.$$\nThe interpolation function for the data $y=(y_0,\\ldots,y_n)$ is\n$$I_n y(X)=\\sum_{j=0}^{n}y_j\\ell_j(X).$$\nFor a real function $f$ defined at the nodes, write $I_n f:=I_n(f(x_0),\\ldots,f(x_n))$.\n\nFor products indexed by $k\\ne j$, use the length-$n$ list $\\widehat x_{j,k}$ ($0\\le k<n$), where $\\widehat x_{j,k}=x_k$ for $k<j$ and $\\widehat x_{j,k}=x_{k+1}$ for $k\\ge j$; the product is in this order and is empty when $n=0$. Strict ordering gives $x_j-\\widehat x_{j,k}\\ne0$ for every factor, so [[lem-finite-product-of-nonzero-reals-is-nonzero]] and the field inverse law make each $w_j$ well defined.\n",
+    "consumer_use_anchors": "[F3] [[def-cardinal-polynomial-interpolation]] and\n[[lem-cardinal-basis-degree-and-values]]: the displayed $\\ell_i$ are degree\none and satisfy $\\ell_i(x_k)=1$ for $k=i$ and $0$ otherwise.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/32"
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-two-node-gauss-weights-from-cardinal-squares",
+    "supplier": "lem-cardinal-basis-degree-and-values",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/lem-cardinal-basis-degree-and-values.md",
+      "items/ex-two-node-gauss-weights-from-cardinal-squares.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/ex-two-node-gauss-weights-from-cardinal-squares.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nLet $n\\in\\mathbb N$, let $x_0<\\cdots<x_n$ be real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Each cardinal function $\\ell_j$ of [[def-cardinal-polynomial-interpolation]] is the evaluation of a formal polynomial of degree $n$. The node function $\\omega_n$ is the evaluation of a monic formal polynomial of degree $n+1$, and $\\omega_n(x)\\ne0$ whenever $x$ differs from every node. The function $I_n y$ is the evaluation of a formal polynomial of degree at most $n$. At every pair $i,j\\in\\{0,\\ldots,n\\}$, $\\ell_j(x_i)=1$ if $i=j$ and $0$ otherwise.\n",
+    "consumer_use_anchors": "[F3] [[def-cardinal-polynomial-interpolation]] and\n[[lem-cardinal-basis-degree-and-values]]: the displayed $\\ell_i$ are degree\none and satisfy $\\ell_i(x_k)=1$ for $k=i$ and $0$ otherwise.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/33"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-gauss-quadrature-rule-data-well-defined",
+    "supplier": "def-cardinal-polynomial-interpolation",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/def-cardinal-polynomial-interpolation.md",
+      "items/lem-gauss-quadrature-rule-data-well-defined.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/lem-gauss-quadrature-rule-data-well-defined.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nLet $n\\in\\mathbb N$ with $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\left(\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}(x_j-x_k)\\right)^{-1}\\quad(0\\le j\\le n).$$\nAn empty product is $1$, so $w_0=1$ when $n=0$.\n\nIn these formulas, $X$ is a real argument, and for real $a$ and nonzero real $b$, $a/b$ denotes $ab^{-1}$ in the field $\\mathbb R$ ([[def-field]]).\n\nFor each $j$, the cardinal function is\n$$\\ell_j(X)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{X-x_k}{x_j-x_k}.$$\nThe interpolation function for the data $y=(y_0,\\ldots,y_n)$ is\n$$I_n y(X)=\\sum_{j=0}^{n}y_j\\ell_j(X).$$\nFor a real function $f$ defined at the nodes, write $I_n f:=I_n(f(x_0),\\ldots,f(x_n))$.\n\nFor products indexed by $k\\ne j$, use the length-$n$ list $\\widehat x_{j,k}$ ($0\\le k<n$), where $\\widehat x_{j,k}=x_k$ for $k<j$ and $\\widehat x_{j,k}=x_{k+1}$ for $k\\ge j$; the product is in this order and is empty when $n=0$. Strict ordering gives $x_j-\\widehat x_{j,k}\\ne0$ for every factor, so [[lem-finite-product-of-nonzero-reals-is-nonzero]] and the field inverse law make each $w_j$ well defined.\n",
+    "consumer_use_anchors": "[F3] [[def-cardinal-polynomial-interpolation]]: for distinct nodes, $\\ell_i(X)=\\prod_{j\\ne i}(X-x_j)/(x_i-x_j)$; every denominator is a nonzero node difference.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/12"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-gauss-quadrature-rule-data-well-defined",
+    "supplier": "lem-cardinal-basis-degree-and-values",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/lem-cardinal-basis-degree-and-values.md",
+      "items/lem-gauss-quadrature-rule-data-well-defined.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/lem-gauss-quadrature-rule-data-well-defined.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nLet $n\\in\\mathbb N$, let $x_0<\\cdots<x_n$ be real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Each cardinal function $\\ell_j$ of [[def-cardinal-polynomial-interpolation]] is the evaluation of a formal polynomial of degree $n$. The node function $\\omega_n$ is the evaluation of a monic formal polynomial of degree $n+1$, and $\\omega_n(x)\\ne0$ whenever $x$ differs from every node. The function $I_n y$ is the evaluation of a formal polynomial of degree at most $n$. At every pair $i,j\\in\\{0,\\ldots,n\\}$, $\\ell_j(x_i)=1$ if $i=j$ and $0$ otherwise.\n",
+    "consumer_use_anchors": "[F4] [[lem-cardinal-basis-degree-and-values]]: each $\\ell_i$ is a polynomial of degree at most $m-1$ and has the cardinal values at the nodes.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/13"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-gauss-quadrature-rule-data-well-defined",
+    "supplier": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/thm-cardinal-polynomial-interpolant-exists-uniquely.md",
+      "items/lem-gauss-quadrature-rule-data-well-defined.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/lem-gauss-quadrature-rule-data-well-defined.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nLet $n\\in\\mathbb N$, $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Then $I_n y$ from [[def-cardinal-polynomial-interpolation]] is the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.\n",
+    "consumer_use_anchors": "No direct Facts/Proof invocation: declared supplier is redundant/contextual; actual claim is established by the other explicit local facts. No theorem transfer is inferred.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/14"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-gauss-orthogonal-polynomial-has-simple-interior-zeros",
+    "supplier": "lem-product-of-linear-factors-is-monic-polynomial",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/lem-product-of-linear-factors-is-monic-polynomial.md",
+      "items/thm-gauss-orthogonal-polynomial-has-simple-interior-zeros.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-gauss-orthogonal-polynomial-has-simple-interior-zeros.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nFor every $n\\in\\mathbb N$ and reals $r_0,\\ldots,r_{n-1}$, the function\n$$P_n(X)=\\prod_{k<n}(X-r_k)$$\nis the evaluation of a formal real polynomial of degree exactly $n$ with leading coefficient $1$. For $n=0$ the product is empty and equals $1$.\n",
+    "consumer_use_anchors": "[F6] [[lem-product-of-linear-factors-is-monic-polynomial]] and [[def-real-polynomial-degree-leading-coefficient-and-monic]]: the product of the linear factors at $m$ distinct real numbers is monic of degree $m$.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/4"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+    "supplier": "def-cardinal-polynomial-interpolation",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/def-cardinal-polynomial-interpolation.md",
+      "items/thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nLet $n\\in\\mathbb N$ with $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\left(\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}(x_j-x_k)\\right)^{-1}\\quad(0\\le j\\le n).$$\nAn empty product is $1$, so $w_0=1$ when $n=0$.\n\nIn these formulas, $X$ is a real argument, and for real $a$ and nonzero real $b$, $a/b$ denotes $ab^{-1}$ in the field $\\mathbb R$ ([[def-field]]).\n\nFor each $j$, the cardinal function is\n$$\\ell_j(X)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{X-x_k}{x_j-x_k}.$$\nThe interpolation function for the data $y=(y_0,\\ldots,y_n)$ is\n$$I_n y(X)=\\sum_{j=0}^{n}y_j\\ell_j(X).$$\nFor a real function $f$ defined at the nodes, write $I_n f:=I_n(f(x_0),\\ldots,f(x_n))$.\n\nFor products indexed by $k\\ne j$, use the length-$n$ list $\\widehat x_{j,k}$ ($0\\le k<n$), where $\\widehat x_{j,k}=x_k$ for $k<j$ and $\\widehat x_{j,k}=x_{k+1}$ for $k\\ge j$; the product is in this order and is empty when $n=0$. Strict ordering gives $x_j-\\widehat x_{j,k}\\ne0$ for every factor, so [[lem-finite-product-of-nonzero-reals-is-nonzero]] and the field inverse law make each $w_j$ well defined.\n",
+    "consumer_use_anchors": "[F6] [[def-cardinal-polynomial-interpolation]], [[lem-cardinal-basis-degree-and-values]], and [[thm-cardinal-polynomial-interpolant-exists-uniquely]]: every polynomial $t$ of degree at most $m-1$ satisfies $t(x)=\\sum_i t(x_i)\\ell_i(x)$.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/15"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+    "supplier": "lem-cardinal-basis-degree-and-values",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/lem-cardinal-basis-degree-and-values.md",
+      "items/thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nLet $n\\in\\mathbb N$, let $x_0<\\cdots<x_n$ be real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Each cardinal function $\\ell_j$ of [[def-cardinal-polynomial-interpolation]] is the evaluation of a formal polynomial of degree $n$. The node function $\\omega_n$ is the evaluation of a monic formal polynomial of degree $n+1$, and $\\omega_n(x)\\ne0$ whenever $x$ differs from every node. The function $I_n y$ is the evaluation of a formal polynomial of degree at most $n$. At every pair $i,j\\in\\{0,\\ldots,n\\}$, $\\ell_j(x_i)=1$ if $i=j$ and $0$ otherwise.\n",
+    "consumer_use_anchors": "[F6] [[def-cardinal-polynomial-interpolation]], [[lem-cardinal-basis-degree-and-values]], and [[thm-cardinal-polynomial-interpolant-exists-uniquely]]: every polynomial $t$ of degree at most $m-1$ satisfies $t(x)=\\sum_i t(x_i)\\ell_i(x)$.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/16"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+    "supplier": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/thm-cardinal-polynomial-interpolant-exists-uniquely.md",
+      "items/thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nLet $n\\in\\mathbb N$, $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Then $I_n y$ from [[def-cardinal-polynomial-interpolation]] is the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.\n",
+    "consumer_use_anchors": "[F6] [[def-cardinal-polynomial-interpolation]], [[lem-cardinal-basis-degree-and-values]], and [[thm-cardinal-polynomial-interpolant-exists-uniquely]]: every polynomial $t$ of degree at most $m-1$ satisfies $t(x)=\\sum_i t(x_i)\\ell_i(x)$.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/17"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-gauss-weights-equal-mu0-times-first-eigenvector-coordinate-squared",
+    "supplier": "lem-cardinal-basis-degree-and-values",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/lem-cardinal-basis-degree-and-values.md",
+      "items/thm-gauss-weights-equal-mu0-times-first-eigenvector-coordinate-squared.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-gauss-weights-equal-mu0-times-first-eigenvector-coordinate-squared.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nLet $n\\in\\mathbb N$, let $x_0<\\cdots<x_n$ be real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Each cardinal function $\\ell_j$ of [[def-cardinal-polynomial-interpolation]] is the evaluation of a formal polynomial of degree $n$. The node function $\\omega_n$ is the evaluation of a monic formal polynomial of degree $n+1$, and $\\omega_n(x)\\ne0$ whenever $x$ differs from every node. The function $I_n y$ is the evaluation of a formal polynomial of degree at most $n$. At every pair $i,j\\in\\{0,\\ldots,n\\}$, $\\ell_j(x_i)=1$ if $i=j$ and $0$ otherwise.\n",
+    "consumer_use_anchors": "[F6] [[lem-cardinal-basis-degree-and-values]]: $\\ell_i$ has degree at most $m-1$ and $\\ell_i(x_k)=\\delta_{ik}$.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/18"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-golub-welsch-certified-enclosures-are-sound",
+    "supplier": "alg-near-orthonormal-hermitian-eigenvalue-certifier",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/alg-near-orthonormal-hermitian-eigenvalue-certifier.md",
+      "items/thm-golub-welsch-certified-enclosures-are-sound.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-golub-welsch-certified-enclosures-are-sound.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nInput $n\\ge1$, a nonempty family of Hermitian $n\\times n$ matrices enclosed by complex rectangles, a point matrix $V\\in\\mathbb C^{n\\times n}$, a real diagonal matrix $\\Theta\\in\\mathbb R^{n\\times n}$, and proposed nonnegative bounds $\\delta,\\rho,M_A,M_\\Theta,\\tau$. Treat point data as exact dyadics and the family as any subset of its enclosure.\n\n1. With outward interval evaluation, enclose $V^*V-I$ and every $AV-V\\Theta$ for the full family. Form Frobenius upper bounds $d,r$ for these two matrices. Also form Frobenius upper bounds $m_A$ for every $A$ in the family and $m_\\Theta$ for $\\Theta$. If any enclosure or square-root operation is non-finite, return `inconclusive`.\n\n2. Verify by outward scalar comparisons that $d\\le\\delta<1$, $r\\le\\rho$, $m_A\\le M_A$, $m_\\Theta\\le M_\\Theta$, and that $1-\\sqrt{1-\\delta}\\le\\tau$. If any comparison is undecided or false, return `inconclusive` with the failed check. Otherwise set $\\eta=\\rho+(M_A+M_\\Theta)\\tau$ by outward arithmetic and return `certified` with the intervals $[\\theta_{(k)}-\\eta,\\theta_{(k)}+\\eta]$, sorted increasingly by the diagonal entries of $\\Theta$.\n\nThe checks use the Frobenius norm as an upper bound for the operator 2-norm. An inconclusive check makes no statement about the true spectrum.\n",
+    "consumer_use_anchors": "[F4] [[alg-near-orthonormal-hermitian-eigenvalue-certifier]] and\n[[thm-near-orthonormal-hermitian-eigenvalue-certifier-soundness]]: success\nrequires validated residual, Gram and norm bounds, and every increasingly\nordered eigenvalue in the admitted Hermitian matrix family lies in its\nreturned node interval.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/28"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-golub-welsch-certified-enclosures-are-sound",
+    "supplier": "thm-near-orthonormal-hermitian-eigenvalue-certifier-soundness",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/thm-near-orthonormal-hermitian-eigenvalue-certifier-soundness.md",
+      "items/thm-golub-welsch-certified-enclosures-are-sound.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-golub-welsch-certified-enclosures-are-sound.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nIf [[alg-near-orthonormal-hermitian-eigenvalue-certifier]] returns `certified` with radius $\\eta$, then for every admitted Hermitian $A$ its increasing eigenvalues lie in the returned intervals centered at the increasing rearrangement of the diagonal entries of $\\Theta$. Inconclusive output makes no spectral claim.\n",
+    "consumer_use_anchors": "[F4] [[alg-near-orthonormal-hermitian-eigenvalue-certifier]] and\n[[thm-near-orthonormal-hermitian-eigenvalue-certifier-soundness]]: success\nrequires validated residual, Gram and norm bounds, and every increasingly\nordered eigenvalue in the admitted Hermitian matrix family lies in its\nreturned node interval.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/31"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-golub-welsch-certified-enclosures-are-sound",
+    "supplier": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/thm-outward-rounded-operations-are-isotone-and-dag-sound.md",
+      "items/thm-golub-welsch-certified-enclosures-are-sound.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-golub-welsch-certified-enclosures-are-sound.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nFor real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosure is asserted.\n",
+    "consumer_use_anchors": "[F2] [[thm-outward-rounded-operations-are-isotone-and-dag-sound]]: all finite\noutward interval expression DAGs contain the corresponding exact values.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/29"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-golub-welsch-certified-enclosures-are-sound",
+    "supplier": "thm-uniform-interval-linear-residual-certifier-soundness",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/thm-uniform-interval-linear-residual-certifier-soundness.md",
+      "items/thm-golub-welsch-certified-enclosures-are-sound.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-golub-welsch-certified-enclosures-are-sound.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nIf [[alg-uniform-interval-linear-residual-certifier]] returns `certified` with $(R,\\widehat x,q,r)$, then every $(A,b)$ in the admitted families has a unique solution and its distance from $\\widehat x$ is at most $r/(1-q)$. Inconclusive output asserts no such conclusion.\n",
+    "consumer_use_anchors": "[F1] [[thm-uniform-interval-linear-residual-certifier-soundness]]: on\ncertified output, each supplied Hankel family has a unique solution and its\ncoefficients lie in the reported error balls.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/30"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-hermite-interpolant-double-node-remainder",
+    "supplier": "def-cardinal-polynomial-interpolation",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/def-cardinal-polynomial-interpolation.md",
+      "items/thm-hermite-interpolant-double-node-remainder.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-hermite-interpolant-double-node-remainder.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nLet $n\\in\\mathbb N$ with $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\left(\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}(x_j-x_k)\\right)^{-1}\\quad(0\\le j\\le n).$$\nAn empty product is $1$, so $w_0=1$ when $n=0$.\n\nIn these formulas, $X$ is a real argument, and for real $a$ and nonzero real $b$, $a/b$ denotes $ab^{-1}$ in the field $\\mathbb R$ ([[def-field]]).\n\nFor each $j$, the cardinal function is\n$$\\ell_j(X)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{X-x_k}{x_j-x_k}.$$\nThe interpolation function for the data $y=(y_0,\\ldots,y_n)$ is\n$$I_n y(X)=\\sum_{j=0}^{n}y_j\\ell_j(X).$$\nFor a real function $f$ defined at the nodes, write $I_n f:=I_n(f(x_0),\\ldots,f(x_n))$.\n\nFor products indexed by $k\\ne j$, use the length-$n$ list $\\widehat x_{j,k}$ ($0\\le k<n$), where $\\widehat x_{j,k}=x_k$ for $k<j$ and $\\widehat x_{j,k}=x_{k+1}$ for $k\\ge j$; the product is in this order and is empty when $n=0$. Strict ordering gives $x_j-\\widehat x_{j,k}\\ne0$ for every factor, so [[lem-finite-product-of-nonzero-reals-is-nonzero]] and the field inverse law make each $w_j$ well defined.\n",
+    "consumer_use_anchors": "Let $m\\ge1$, let $a<b$, let $x_1<\\cdots<x_m$ lie in $(a,b)$, and let\n$f\\in C^{2m}([a,b],\\mathbb R)$. Let $\\ell_i$ be the Lagrange cardinal\npolynomials for these nodes as in\n[[def-cardinal-polynomial-interpolation]]. Define\n$$ H(t):=\\sum_{i=1}^{m}\\left[f(x_i)\\bigl(1-2\\ell_i'(x_i)(t-x_i)\\bigr)+f'(x_i)(t-x_i)\\right]\\ell_i(t)^2. $$\nThen $H$ has degree at most $2m-1$, and $H(x_i)=f(x_i)$ and\n$H'(x_i)=f'(x_i)$ for every $i$. If $x\\in[a,b]$ is not a node, there is\n$\\xi_x\\in(a,b)$ such that\n$$ f(x)-H(x)=\\frac{f^{(2m)}(\\xi_x)}{(2m)!_{\\mathbb R}}\\prod_{i=1}^{m}(x-x_i)^2, $$\nwhere $(2m)!_{\\mathbb R}:=\\prod_{j=1}^{2m}j$.\nAt a node the interpolation error and the displayed node product are both\nzero.\n\n[F1] [[def-cardinal-polynomial-interpolation]] and [[lem-cardinal-basis-degree-and-values]]: $\\ell_i$ is a polynomial of degree at most $m-1$, $\\ell_i(x_j)=1$ when $i=j$ and $0$ otherwise, and the node product $\\omega(t)=\\prod_i(t-x_i)$ is nonzero off the nodes.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/5"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-hermite-interpolant-double-node-remainder",
+    "supplier": "lem-cardinal-basis-degree-and-values",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/lem-cardinal-basis-degree-and-values.md",
+      "items/thm-hermite-interpolant-double-node-remainder.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-hermite-interpolant-double-node-remainder.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nLet $n\\in\\mathbb N$, let $x_0<\\cdots<x_n$ be real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Each cardinal function $\\ell_j$ of [[def-cardinal-polynomial-interpolation]] is the evaluation of a formal polynomial of degree $n$. The node function $\\omega_n$ is the evaluation of a monic formal polynomial of degree $n+1$, and $\\omega_n(x)\\ne0$ whenever $x$ differs from every node. The function $I_n y$ is the evaluation of a formal polynomial of degree at most $n$. At every pair $i,j\\in\\{0,\\ldots,n\\}$, $\\ell_j(x_i)=1$ if $i=j$ and $0$ otherwise.\n",
+    "consumer_use_anchors": "[F1] [[def-cardinal-polynomial-interpolation]] and [[lem-cardinal-basis-degree-and-values]]: $\\ell_i$ is a polynomial of degree at most $m-1$, $\\ell_i(x_j)=1$ when $i=j$ and $0$ otherwise, and the node product $\\omega(t)=\\prod_i(t-x_i)$ is nonzero off the nodes.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/6"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-hermite-interpolant-double-node-remainder",
+    "supplier": "lem-polynomial-highest-derivative",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/lem-polynomial-highest-derivative.md",
+      "items/thm-hermite-interpolant-double-node-remainder.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-hermite-interpolant-double-node-remainder.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nLet $m\\in\\mathbb N$, $m\\ge1$, and let $p:\\mathbb R\\to\\mathbb R$ be the evaluation function of a formal real polynomial of degree at most $m$, or the zero polynomial. Write its actual coefficient list through its degree and extend that list by zeros to $a_0,\\ldots,a_m$ (all zero for the zero polynomial); this is an evaluation vector, not a change to the formal polynomial object. Define iterated derivatives as in [[def-higher-derivatives-and-smoothness]] and write $m!_{\\mathbb R}:=\\prod_{j<m}(j+1)$, with each natural factor read as its canonical real image under [[def-canonical-natural]]. Then\n$$p^{(m)}(x)=a_m m!_{\\mathbb R}$$\nfor every $x\\in\\mathbb R$. In particular, this derivative is zero if $\\deg p<m$, and it is $m!_{\\mathbb R}$ if $p$ is monic of degree $m$.\n",
+    "consumer_use_anchors": "[F7] [[lem-polynomial-highest-derivative]]: a polynomial of degree at most $2m$ has constant $2m$th derivative equal to $(2m)!_{\\mathbb R}$ times its coefficient of $X^{2m}$.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/8"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-hermite-interpolant-double-node-remainder",
+    "supplier": "lem-product-of-linear-factors-is-monic-polynomial",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/lem-product-of-linear-factors-is-monic-polynomial.md",
+      "items/thm-hermite-interpolant-double-node-remainder.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-hermite-interpolant-double-node-remainder.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nFor every $n\\in\\mathbb N$ and reals $r_0,\\ldots,r_{n-1}$, the function\n$$P_n(X)=\\prod_{k<n}(X-r_k)$$\nis the evaluation of a formal real polynomial of degree exactly $n$ with leading coefficient $1$. For $n=0$ the product is empty and equals $1$.\n",
+    "consumer_use_anchors": "[F6] [[lem-product-of-linear-factors-is-monic-polynomial]]: the product of $2m$ monic linear factors is monic of degree $2m$.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/9"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-hermite-interpolant-double-node-remainder",
+    "supplier": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/thm-cardinal-polynomial-interpolant-exists-uniquely.md",
+      "items/thm-hermite-interpolant-double-node-remainder.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-hermite-interpolant-double-node-remainder.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nLet $n\\in\\mathbb N$, $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Then $I_n y$ from [[def-cardinal-polynomial-interpolation]] is the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.\n",
+    "consumer_use_anchors": "No direct Facts/Proof invocation: declared supplier is redundant/contextual; actual claim is established by the other explicit local facts. No theorem transfer is inferred.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/7"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-jacobi-matrix-spectrum-equals-gauss-nodes",
+    "supplier": "lem-nonnegative-square-root-exists-and-unique",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/lem-nonnegative-square-root-exists-and-unique.md",
+      "items/thm-jacobi-matrix-spectrum-equals-gauss-nodes.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-jacobi-matrix-spectrum-equals-gauss-nodes.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nIn a Dedekind-complete ordered field, every $x\\ge0$ has a unique $y\\ge0$ with\n$y^2=x$.\n",
+    "consumer_use_anchors": "[F5] [[lem-nonnegative-square-root-exists-and-unique]]: every positive real $\\beta_j$ has a unique positive square root.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/11"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+    "supplier": "lem-finite-coefficient-vector-has-polynomial-representative",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Checked the actual ordered distinct real-node/degree hypotheses against the quoted consumer use. Moment hypotheses supply finite integrals; cardinal input length m is supplier n=m−1. For certified computation, every dyadic/domain/status/full-family bound is retained and candidate Arnoldi is not certification. Ordinary uniqueness listed in Hermite/well-definedness deps is redundant context; the explicit local construction, not uniqueness, proves derivative conditions. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/lem-finite-coefficient-vector-has-polynomial-representative.md",
+      "items/thm-monic-gauss-orthogonal-polynomials-exist-uniquely.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#deps",
+      "items/thm-monic-gauss-orthogonal-polynomials-exist-uniquely.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nFor every $n\\in\\mathbb N$ and reals $c_0,\\ldots,c_n$, the function\n$$q(x)=\\sum_{k=0}^{n}c_kx^k$$\nis the evaluation of a formal real polynomial of degree at most $n$. The representative can be chosen so that it is the zero polynomial exactly when every $c_k=0$; if $c_n\\ne0$, it has degree $n$ and leading coefficient $c_n$. Here the coefficient vector may be padded by zeros for the displayed sum; padding describes the evaluation, not a change to the formal polynomial object.\n",
+    "consumer_use_anchors": "[F7] [[def-real-polynomial-degree-leading-coefficient-and-monic]] and [[lem-finite-coefficient-vector-has-polynomial-representative]]: a coefficient vector represents a formal polynomial; a nonzero highest coefficient determines its degree and leading coefficient.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/3"
+  },
+  {
+    "kind": "page",
+    "consumer": "gaussian-quadrature",
+    "supplier": "polynomial-interpolation-and-remainder",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Actual Gaussian proofs use formal real coefficient representatives, ordered distinct nodes (ordinary interpolation n=m−1), cardinal degree/values, monic products and terminal polynomial derivatives. These item uses were inspected; no simplex or derivative-interpolation theorem is transferred.",
+    "inspected_paths": [
+      "library/numerical-linear-algebra-and-approximation/gaussian-quadrature.md",
+      "library/numerical-linear-algebra-and-approximation/polynomial-interpolation-and-remainder.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#requires",
+      "library/numerical-linear-algebra-and-approximation/gaussian-quadrature.md#requires"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/0"
+  },
+  {
+    "kind": "page",
+    "consumer": "gaussian-quadrature",
+    "supplier": "restarted-and-block-eigensolvers",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Golub-Welsch step4 uses exact Arnoldi full dimension m>=2, target m−1, one cycle and zero residual for candidates only. It demands m pairs and subsequently certifies the full Hermitian family; no arbitrary-shift convergence or forward bound follows from raw residuals.",
+    "inspected_paths": [
+      "library/numerical-linear-algebra-and-approximation/gaussian-quadrature.md",
+      "library/numerical-linear-algebra-and-approximation/restarted-and-block-eigensolvers.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#requires",
+      "library/numerical-linear-algebra-and-approximation/gaussian-quadrature.md#requires"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/2"
+  },
+  {
+    "kind": "page",
+    "consumer": "gaussian-quadrature",
+    "supplier": "verified-linear-systems-and-spectral-enclosures",
+    "consumer_batch": "82",
+    "status": "verified",
+    "evidence": "Golub-Welsch steps1/5 and soundness Facts F1/F4 validate entire moment/Jacobi families with exact dyadic proposals, positive divisors, Gram d<1 and actual residual/norm comparisons. Only certified enclosures are imported; inconclusive makes no claim.",
+    "inspected_paths": [
+      "library/numerical-linear-algebra-and-approximation/gaussian-quadrature.md",
+      "library/numerical-linear-algebra-and-approximation/verified-linear-systems-and-spectral-enclosures.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-82.pages.json#requires",
+      "library/numerical-linear-algebra-and-approximation/gaussian-quadrature.md#requires"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/1"
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-two-node-gauss-legendre-exact-through-degree-three",
+    "supplier": "lem-nonnegative-square-root-exists-and-unique",
+    "status": "verified",
+    "evidence": "B82 completion records the applied local premise/proof repair establishing the positive square root while retaining all two-node moment/node/weight/exactness assertions. This is the positive-square-root justification for the displayed real Legendre nodes, rather than an assumption imported from a numerical solver.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-root-step2-ledger-registry.json",
+    "receipt_refs": [
+      {
+        "file": "research/numerical-optimization-dynamics-2026-10-16-owner-step2-b82/completion.json",
+        "pointer": "/consumer_dispositions/ex-two-node-gauss-legendre-exact-through-degree-three"
+      },
+      {
+        "file": "research/numerical-optimization-dynamics-2026-10-16-owner-step2-b82/completion.json",
+        "pointer": "/status"
+      }
+    ]
+  }
+]

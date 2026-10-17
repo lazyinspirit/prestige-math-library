@@ -1,0 +1,235 @@
+[
+  {
+    "id": "alg-reverse-mode-automatic-differentiation",
+    "decision": "accept",
+    "reason": "Entire Definition checked. All input and operation cotangents start at zero; the scalar operation or input output receives seed 1. Every repeated slot contributes separately using the supplied Euclidean transpose. Domain and strict-branch conditions match the graph definition. T=0 with input output returns (x_i,e_i); n=0 with operation output returns an empty gradient. n=T=0 cannot supply the required output and is not an admissible graph. Operations after an earlier output have zero cotangents. This supplies the missing explicit native disposition."
+  },
+  {
+    "id": "alg-forward-mode-automatic-differentiation",
+    "decision": "accept",
+    "reason": "The ordered parent-tangent tuple preserves repeated slots. Both operation outputs and input outputs have explicit returns; an input output returns v_i. Domain and strict-branch statuses match the supplier."
+  },
+  {
+    "id": "alg-checkpointed-reverse-schedules",
+    "decision": "accept",
+    "reason": "The procedure composes exact Euclidean transition pullbacks with identical replay inputs. N=0 returns the terminal-state/cotangent pair. Integer capacities, recursive calls, release order and strict-branch requirements are explicit."
+  },
+  {
+    "id": "alg-forward-over-reverse-hessian-vector-product",
+    "decision": "accept",
+    "reason": "Input and operation accumulator pairs are initialized, the actual output receives (1,0), and both product-rule contributions are accumulated per slot. Input-coordinate outputs produce zero Hessian action."
+  },
+  {
+    "id": "alg-differentiate-finite-fixed-point-iteration",
+    "decision": "accept",
+    "reason": "Current Definition supplies a scalar coordinate-output graph for every state coordinate and a standard basis direction for every parameter coordinate; each returned tangent fills one Jacobian entry. K=0, empty matrix shapes, primal admissibility and strict-branch failures are explicit. Its calls meet the actual forward-mode supplier."
+  },
+  {
+    "id": "lem-finite-straight-line-program-defines-c1-map",
+    "decision": "accept",
+    "reason": "Proof 1.1 obtains open admissible domains by continuous preimages; 2.1 applies the Euclidean chain rule. The output-projection case covers input outputs and empty operation lists."
+  },
+  {
+    "id": "lem-finite-straight-line-program-defines-c2-map",
+    "decision": "accept",
+    "reason": "The derivative matrix product is C1 by the supplied chain and bounded-bilinear product rules. Coordinate inputs have constant derivatives, and the proof explicitly includes input outputs."
+  },
+  {
+    "id": "thm-forward-mode-computes-directional-derivative",
+    "decision": "accept",
+    "reason": "Topological induction identifies every tangent with its directional derivative. Proof 3.1 separately checks an operation output and an input-coordinate output."
+  },
+  {
+    "id": "thm-reverse-mode-computes-gradient",
+    "decision": "accept",
+    "reason": "The path recurrence counts repeated slots separately, includes the identity path at either output type and assigns zero to nodes without an output path. Current initialization implements that recurrence."
+  },
+  {
+    "id": "thm-reverse-mode-work-and-tape-storage-bound",
+    "decision": "accept",
+    "reason": "The arithmetic count charges primal work, pullbacks and slot additions. A2 explicitly excludes zero-fill from arithmetic work, while S includes input-gradient dimensions; the T=0 case respects these conventions."
+  },
+  {
+    "id": "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+    "decision": "accept",
+    "reason": "The proof checks both returned values for N=0 and N=1, proves recursive capacity and termination, and preserves the binomial formula, d-snapshot count, t-replay bound, work bound and stated G+(d+1)R_s storage convention. Uniform-block counts are also justified."
+  },
+  {
+    "id": "thm-finite-iteration-sensitivity-bound-and-residual-limitation",
+    "decision": "accept",
+    "reason": "Proof 3.1 now consumes the explicitly defined coordinate/basis calls entrywise to obtain e_(k+1)=A_k e_k+B_k. The contraction comparison, q=0 convention, K q^(K-1) bound and zero-residual counterexample remain valid; no consumer text repair is required."
+  },
+  {
+    "id": "thm-forward-over-reverse-computes-hessian-vector-product",
+    "decision": "accept",
+    "reason": "The C2 hypotheses make the reverse recurrence differentiable. Differentiating each contribution gives precisely the algorithm's two terms, including zero tangent-cotangent seeds for input outputs; no Hessian-symmetry premise is used."
+  },
+  {
+    "id": "thm-graph-gradient-error-from-local-jacobian-perturbations",
+    "decision": "accept",
+    "reason": "The slot-distinct path expansion includes the unchanged length-zero seed. The telescoping product has the displayed factor order and norm bound. Reverse accumulation remains exact and its rounding is explicitly excluded."
+  },
+  {
+    "id": "rem-real-arithmetic-graph-versus-rounded-execution",
+    "decision": "accept",
+    "reason": "The solve use retains certified exact residuals, fixed B and xhat, conditioning, successful rounded pullbacks and replay identity. It distinguishes mathematical derivatives from rounded-program derivatives and excludes reverse-addition rounding."
+  },
+  {
+    "id": "ex-branchwise-ad-at-the-absolute-value-switch",
+    "decision": "accept",
+    "reason": "The two open affine branches give derivatives 1 and -1. Incompatible one-sided quotients at zero justify the supplier's NONDIFFERENTIABLE status."
+  },
+  {
+    "id": "ex-shared-expression-forward-and-reverse-graph",
+    "decision": "accept",
+    "reason": "Both uses of z_1 in its square are accumulated separately. Direct evaluation gives 11, forward propagation gives 8u+7v, and reverse accumulation gives (8,7)."
+  },
+  {
+    "id": "ex-reverse-euler-trajectory-tape",
+    "decision": "accept",
+    "reason": "The scalar terminal seed and both parameter contributions follow the current reverse rule. The contributions 3/4+3/4 agree with the direct derivative 3/2."
+  },
+  {
+    "id": "ex-implicit-linear-solve-adjoint",
+    "decision": "accept",
+    "reason": "At theta=0 the residual Jacobian is I and the adjoint derivative is -1. Verification 4.2 establishes exact stored solves, zero defects and exact in-range operations separately; it does not infer zero rounding error merely from zero fixed-map discrepancy."
+  },
+  {
+    "id": "thm-discrete-adjoint-gradient-recursion",
+    "decision": "accept",
+    "reason": "The state-step supplier provides C1 maps on open Euclidean domains. Terminal, running-cost and repeated parameter edges give the stated recursion; the independent telescoping proof yields the column initial contribution S_0^T p_0."
+  },
+  {
+    "id": "thm-discrete-continuous-gradient-error-order-p",
+    "decision": "accept",
+    "reason": "The current Statement explicitly supplies column endpoint vectors and grad J_h=b_h+sum w_n qhat_n with the SAME weights used in Q_h. Proof 2.1 invokes that premise; the Lipschitz node bound, nonnegative-weight sum and endpoint/quadrature allowances prove the original quantitative constant. Its continuous supplier now has the compatible column initial term."
+  },
+  {
+    "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+    "decision": "accept",
+    "reason": "The current single-shooting comparison clause explicitly requires the weighted discrete-gradient representation and the separate error estimates. The exact finite-gradient use still meets the C1 state-step supplier. Shooting/collocation construction, sampled constraints and domain/failure statuses remain as approved."
+  },
+  {
+    "id": "ex-4dvar-discrete-adjoint-gradient",
+    "decision": "accept",
+    "reason": "The terminal and running observation contributions give p_2=6theta, p_1=20theta and p_0=41theta. The initial-map contribution agrees with direct differentiation."
+  },
+  {
+    "id": "ex-discrete-terminal-condition-mismatch",
+    "decision": "accept",
+    "reason": "The terminal state seed is the objective derivative. At theta=0 the correct gradient is zero; substituting the incorrect seed 1 returns 1, as claimed."
+  },
+  {
+    "id": "ex-multiple-shooting-sensitivity-jacobian",
+    "decision": "accept",
+    "reason": "The smooth exact interval map gives the stated bidiagonal residual Jacobian. Summing its two parameter-edge contributions returns 2 tau E^2 a, matching direct differentiation."
+  },
+  {
+    "id": "ex-tent-map-finite-time-sensitivity-growth",
+    "decision": "accept",
+    "reason": "The proof supplies an open neighborhood with one strict finite itinerary. Its derivatives 2,-2,...,-2 give magnitude 2^N under the finite smooth adjoint rule."
+  },
+  {
+    "id": "thm-discrete-sde-adjoint-gradient-interchange",
+    "decision": "accept",
+    "reason": "The proof freezes noise outside one null set and applies the deterministic rule for N>=1. N=0 is proved directly. Measurability and the common integrable envelope support derivative interchange; L1 gradient convergence is separately assumed."
+  },
+  {
+    "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+    "decision": "accept",
+    "reason": "Its affected use is a finite transcription NLP and its convex-QP branch. It does not obtain solver certification from continuous-gradient accuracy; the proposed upstream premise clarification requires no dispatcher repair."
+  },
+  {
+    "id": "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+    "decision": "accept",
+    "reason": "Affine stage recursions or constraints, nonnegative quadrature weights and positive-semidefinite costs establish the QP claim algebraically. The conditional AD comparison is unused."
+  },
+  {
+    "id": "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent",
+    "decision": "accept",
+    "reason": "Successful deterministic interval maps uniquely determine shooting states. Eliminating them preserves shared constraints and costs; no sensitivity-accuracy premise enters."
+  },
+  {
+    "id": "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+    "decision": "accept",
+    "reason": "The fixed transcription has independently assumed C3 regularity, LICQ, strict complementarity and SOSC. Its local SQP conclusion does not consume a discrete-to-continuous gradient estimate."
+  },
+  {
+    "id": "thm-ctrl1-mesh-consistent-lqr-minimizers-converge",
+    "decision": "accept",
+    "reason": "The transcription supplies J_N; uniform objective consistency, recovery and global discrete minimality are independent hypotheses. No sensitivity consistency is inferred from AD."
+  },
+  {
+    "id": "thm-ctrl1-objective-and-control-error-from-consistency-bounds",
+    "decision": "accept",
+    "reason": "The proof combines objective consistency and comparison inequalities, then uses strong convexity. It makes no use of continuous-gradient accuracy."
+  },
+  {
+    "id": "ex-ctrl1-chemical-dosing-linear-model",
+    "decision": "accept",
+    "reason": "The affected use is the finite explicit-midpoint map, giving stage and endpoint 1/2. The exact ODE endpoint is independently 1-e^-1; no gradient estimate is consumed."
+  },
+  {
+    "id": "ex-ctrl1-single-versus-multiple-shooting-two-intervals",
+    "decision": "accept",
+    "reason": "Constant slopes and weights summing to one give identical interval updates and reduced objectives. The example uses deterministic shooting equivalence, not gradient-error estimates."
+  },
+  {
+    "id": "cex-state-error-alone-does-not-control-gradient",
+    "decision": "accept",
+    "reason": "The explicit maps still have uniform state error at most h^2 and derivative error h^-1 at zero. Its F1 reminder of independent gradient-error assumptions remains true with the now explicit representation premise; the counterexample needs no repair."
+  },
+  {
+    "id": "automatic-differentiation-and-computational-graphs",
+    "decision": "accept",
+    "reason": "Complete current A page and all 19 items checked. The now explicit finite-iteration Jacobian procedure meets its scalar directional supplier. The page retains graph/transpose conventions, HVP, both checkpoint schedules, implicit-versus-stopped derivatives and certified solve allowances; no page edit is required."
+  },
+  {
+    "id": "automatic-differentiation-and-computational-graphs-examples",
+    "decision": "accept",
+    "reason": "The complete B page and four examples agree with current repeated-slot, strict-branch, reverse-seed and certified-solve conventions."
+  },
+  {
+    "id": "direct-transcription-and-numerical-ode-optimal-control",
+    "decision": "accept",
+    "reason": "Current page placements and mathematical prose remain compatible with the repaired transcription. The exact discrete gradient and conditional comparison retain their separate prerequisites; QP, algebraic equivalence, local SQP and objective-consistency conclusions do not infer continuous-gradient accuracy. No mathematical page repair is required."
+  },
+  {
+    "id": "direct-transcription-and-numerical-ode-optimal-control-examples",
+    "decision": "accept",
+    "reason": "This additional page consumer places the chemical-dosing and two-interval shooting examples. Its overview uses finite primal maps and algebraic equivalence; no page repair is required."
+  },
+  {
+    "id": "discrete-continuous-and-pde-adjoint-sensitivities",
+    "decision": "accept",
+    "reason": "Current page contains the exact discrete rule, the column-correct continuous formula and the same-weight conditional comparison. Its overview asserts conditional accuracy and separately requires adjoint bounds; no further mathematical page edit is required."
+  },
+  {
+    "id": "discrete-continuous-and-pde-adjoint-sensitivities-examples",
+    "decision": "accept",
+    "reason": "Affected finite-model calculations and counterexamples remain valid. None derives unconditional order-p accuracy. The implicit stiff example follows the separately checked unchanged implicit-formula path."
+  },
+  {
+    "id": "simulation-gradient-estimation-and-simultaneous-perturbation",
+    "decision": "accept",
+    "reason": "Its finite-SDE item and overview preserve the pathwise interchange hypotheses and distinguish gradient convergence from weak payoff convergence. The explicit N=0 argument remains valid."
+  },
+  {
+    "id": "numerical-identifiability-and-optimal-experiment-design",
+    "decision": "accept",
+    "relationship": "contextual-page-reference",
+    "reason": "Its page-level requires field names the adjoint-sensitivity page. All twelve actual item bodies were inspected: they use abstract C1 observation Jacobians and independently assumed matrix perturbation bounds, not a changed AD/ODE supplier. No additional mathematical consumer or repair is introduced."
+  },
+  {
+    "id": "thm-linear-elliptic-reduced-control-gradient-and-hessian",
+    "decision": "accept",
+    "relationship": "contextual-page-reference",
+    "reason": "The DIF3 page name occurs in a historical handoff remark. The actual proof derives its Hilbert-space gradient and Hessian locally from its elliptic state/adjoint supplier and Riesz representation; it uses no changed continuous-ODE or graph interface."
+  },
+  {
+    "id": "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+    "decision": "accept",
+    "relationship": "contextual-page-reference",
+    "reason": "The page path occurs in placement context. Its actual mathematical prerequisite is the unchanged common-tube flow lemma, with identity initial map and time reversal explicitly assumed. It does not consume the changed continuous-adjoint or gradient-comparison formulas."
+  }
+]

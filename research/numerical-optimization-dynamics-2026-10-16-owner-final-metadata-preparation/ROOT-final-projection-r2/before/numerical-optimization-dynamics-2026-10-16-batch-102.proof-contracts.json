@@ -1,0 +1,2125 @@
+{
+  "version": 1,
+  "scope": [
+    "def-nonlinear-experimental-design-and-local-identifiability",
+    "lem-computed-sensitivity-singular-value-perturbation",
+    "lem-logdet-information-perturbation-bound",
+    "alg-finite-budget-multiplicative-d-optimal-design",
+    "lem-information-matrix-perturbation-bound",
+    "rem-gauss-newton-information-is-not-full-hessian",
+    "thm-full-rank-sensitivity-implies-local-identifiability",
+    "thm-local-information-positive-definite-iff-full-column-rank",
+    "thm-local-parameter-perturbation-bound",
+    "thm-multiplicative-design-update-well-defined-and-terminates",
+    "thm-uniform-sensitivity-error-controls-design-gap",
+    "thm-equivalence-violation-bounds-d-optimal-design-gap",
+    "ex-cubic-observation-is-locally-identifiable-with-zero-jacobian",
+    "ex-first-order-kinetic-rates-are-confounded-by-total-decay",
+    "ex-local-identifiability-does-not-imply-global-identifiability",
+    "ex-solver-tolerance-can-reverse-a-design-ranking",
+    "ex-endpoint-sensors-give-a-d-optimal-linear-time-design"
+  ],
+  "contracts": {
+    "def-nonlinear-experimental-design-and-local-identifiability": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement explicitly includes the zero branch in its definition or return convention."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or index parameter has a distinct least-positive case in this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement explicitly identifies the singular or degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition or procedure states the endpoint convention explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit formulas or finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-computed-sensitivity-singular-value-perturbation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-eckart-young-best-rank-k-approximation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, let\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nbe a singular value decomposition with $s_1\\ge\\cdots\\ge s_r>0$, and fix an\ninteger $k$ with $0\\le k<\\dim V$. Define\n\n$$T_kv:=\\sum_{j=1}^{\\min(k,r)} s_j\\langle v,e_j\\rangle f_j.$$\n\nThen $\\operatorname{rank}T_k\\le k$, one has\n\n$$\\lVert T-T_k\\rVert=s_{k+1}$$\n\nwith the convention $s_{k+1}=0$ when $k\\ge r$, and every linear map\n$A:V\\to W$ with $\\operatorname{rank}A\\le k$ satisfies\n\n$$\\lVert T-A\\rVert\\ge s_{k+1}.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-inner-product-norm",
+          "source_section": "Definition",
+          "quote": "For a vector $v$ in a real or complex inner product space, define its **inner-product norm** by\n\n$$\\lVert v\\rVert:=\\sqrt{\\langle v,v\\rangle}.$$\n\nPositive definiteness in [[def-inner-product-space]] makes the radicand a nonnegative real, and [[thm-nth-roots-exist]] supplies its unique nonnegative square root. The notation therefore defines one real number $\\lVert v\\rVert\\ge0$. Its norm axioms are established in [[cor-triangle-inequality-for-inner-product-norm]].\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $J_{i-1}$ be the rank-at-most-$(i-1)$ SVD truncation of $J$. By [F1], $\\|J-J_{i-1}\\|_2=\\sigma_i(J)$, while the minimal-error characterization in [F1] for $J_h$ gives $\\sigma_i(J_h)\\le\\|J_h-J_{i-1}\\|_2$. For every unit vector $v$, the vector triangle inequality gives $\\|(J_h-J_{i-1})v\\|_2\\le\\|(J-J_{i-1})v\\|_2+\\|(J_h-J)v\\|_2\\le\\|J-J_{i-1}\\|_2+\\|J_h-J\\|_2$; taking the maximum over unit $v$ proves $\\sigma_i(J_h)\\le\\sigma_i(J)+\\|J_h-J\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply step 1.1 with $J_h$ in place of $J$ and $J-J_h$ in place of $J_h-J$. This gives $\\sigma_i(J)\\le\\sigma_i(J_h)+\\|J-J_h\\|_2$. The two one-sided inequalities imply the asserted absolute-value bound.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero, rank-deficient, zero-curvature, or zero-residual branch is handled in 1.1, 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or index parameter has a distinct least-positive case in this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singular or degenerate branch is addressed in 1.1, 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite selection is explicit in 1.1, 2.1; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-logdet-information-perturbation-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.\n\n",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-determinant-differential-and-jacobis-formula",
+          "source_section": "Statement",
+          "quote": "Let $A$ be an $n\\times n$ matrix and let $H$ be a direction matrix. Then\n\n$$D\\det(A)[H]=\\operatorname{tr}(\\operatorname{adj}(A)H).$$\n\nIf $A$ is invertible, then\n\n$$D\\det(A)[H]=\\det(A)\\operatorname{tr}(A^{-1}H).$$\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.\n\n",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.\n",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.\n",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.\n\n",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-determinant-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$\nThe sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.\n\nWhen $A$ is real, $|\\det A|$ means the ordinary real absolute value of its real determinant. It is not alternate notation for the determinant itself.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $t\\in[0,1]$. The matrix $A_t$ is symmetric. By [F1], it has an orthonormal eigenbasis; if $q$ is a unit eigenvector with eigenvalue $\\lambda$, the assumed quadratic-form inequality gives $\\lambda=q^TA_tq\\ge\\alpha>0$. Thus $A_t$ is invertible, and if $A_t=Q\\Lambda Q^T$ then [F7] gives $\\det A_t=\\det(Q)\\det(\\Lambda)\\det(Q^T)=\\det(QQ^T)\\prod_i\\lambda_i=\\prod_i\\lambda_i>0$. Therefore $g(t)=\\log\\det A_t$ is real-valued and continuous on $[0,1]$, and differentiable on $(0,1)$ by [F2], [F3], and [F8].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $A_t=A+tE$ and is invertible, [F2], [F3], and the chain rule [F8] give $g'(t)=\\operatorname{tr}(A_t^{-1}E)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Diagonalize $A_t=Q\\Lambda Q^T$ as in step 1.1. By [F4], $\\operatorname{tr}(A_t^{-1}E)=\\operatorname{tr}(\\Lambda^{-1}Q^TEQ)=\\sum_{i=1}^p\\lambda_i^{-1}q_i^TEq_i$. Each $q_i$ is unit, so [F5] gives $|q_i^TEq_i|\\le\\|Eq_i\\|_2\\le\\|E\\|_2$, while $\\lambda_i\\ge\\alpha$; hence $|g'(t)|\\le p\\|E\\|_2/\\alpha$ for every $t$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F6] to $g$ on $[0,1]$. For some $c\\in(0,1)$, $\\log\\det B-\\log\\det A=g(1)-g(0)=g'(c)$, whose absolute value is bounded by step 2.2.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no independent zero-size or zero-parameter branch; positive dimensions are fixed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or index parameter has a distinct least-positive case in this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted; the hypotheses exclude it."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval endpoint cases are included in 1.1, 2.1, 2.2, 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit formulas or finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "alg-finite-budget-multiplicative-d-optimal-design": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement explicitly includes the zero branch in its definition or return convention."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or index parameter has a distinct least-positive case in this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted; the hypotheses exclude it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit formulas or finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-information-matrix-perturbation-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-experimental-design-and-local-identifiability",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ be open, and let $\\mathcal X$ be a finite nonempty set of experimental conditions. For each $x\\in\\mathcal X$, let $q_x\\ge1$, let $F_x:\\Theta\\to\\mathbb R^{q_x}$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]], and let $W_x\\in\\mathbb R^{q_x\\times q_x}$ be a symmetric positive-definite weight matrix, meaning $z^T W_x z>0$ for every nonzero $z\\in\\mathbb R^{q_x}$.\n\nAn **approximate design** is a function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$, as in [[def-approximate-linear-model-design-and-optimality-criteria]]. Its support is $\\operatorname{supp}(\\xi)=\\{x\\in\\mathcal X:\\xi_x>0\\}$. Define the joint observation map by\n$$F_\\xi(\\theta)=(F_x(\\theta))_{x\\in\\operatorname{supp}(\\xi)},$$\nwhere the finite product is ordered by any fixed listing of $\\operatorname{supp}(\\xi)$. Its **stacked sensitivity Jacobian** at $\\theta$ is the vertical concatenation $J_\\xi(\\theta)$ of the matrices $J_x(\\theta)=DF_x(\\theta)$ for $x\\in\\operatorname{supp}(\\xi)$. The associated **weighted information matrix** is\n$$M_\\theta(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x J_x(\\theta)^T W_x J_x(\\theta).$$\nThe matrix is symmetric positive semidefinite because each summand has nonnegative quadratic form.\n\nFor a fixed design $\\xi$, the observation map is **locally identifiable at $\\theta_0\\in\\Theta$** if it is injective on some open neighborhood of $\\theta_0$ in $\\Theta$. It is **globally identifiable on $\\Theta$** if it is injective on all of $\\Theta$. A matrix $J:\\mathbb R^p\\to\\mathbb R^m$ has full column rank when $Jv=0$ implies $v=0$. Its smallest singular value is $\\sigma_{\\min}(J)=\\inf_{\\|v\\|_2=1}\\|Jv\\|_2$; thus $\\sigma_{\\min}(J)\\ge\\mu$ means $\\|Jv\\|_2\\ge\\mu\\|v\\|_2$ for every $v$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-induced-matrix-p-norm",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is\n\n$$\\lVert A\\rVert_{p}\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_{p}\\;:\\;x\\in\\mathbb{R}^{n},\\ \\lVert x\\rVert_{p}\\le 1\\,\\Bigr\\}.$$\n\nWhen $n\\ge1$, the following three displayed quantities are the same number:\n\n$$\\lVert A\\rVert_p=\\sup_{\\lVert x\\rVert_p\\le 1}\\lVert Ax\\rVert_p=\\sup_{\\lVert x\\rVert_p=1}\\lVert Ax\\rVert_p=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_p}{\\lVert x\\rVert_p},$$\n\nthe equalities following from positive homogeneity of $\\lVert\\cdot\\rVert_p$\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]], axiom (N2)) and\nthe equality $\\lVert 0\\rVert_p=0$.\n\n**The value is a finite nonnegative real.** For $n\\ge 1$ the norms\n$\\lVert\\cdot\\rVert_p$ and $\\lVert\\cdot\\rVert_2$ are equivalent by\n[[thm-all-norms-on-rn-are-equivalent]], so there is $C>0$ with\n$\\lVert x\\rVert_\\infty\\le C\\lVert x\\rVert_p$ for every $x$. For every $i<m$,\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty\\le C\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_p$,\nso $\\lVert Ax\\rVert_p\\le \\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C\\lVert x\\rVert_p$;\nhence the supremum over the unit ball is at most the finite constant\n$\\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C$.\n\n**The induced infinity norm is a separate named case.** When $m,n\\ge1$, define\n\n$$\\lVert A\\rVert_\\infty\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_\\infty\\;:\\;x\\in\\mathbb R^n,\\ \\lVert x\\rVert_\\infty\\le 1\\,\\Bigr\\}.$$\n\nAs in the rational-$p$ case, positive homogeneity gives\n\n$$\\lVert A\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty\\le 1}\\lVert Ax\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty=1}\\lVert Ax\\rVert_\\infty=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_\\infty}{\\lVert x\\rVert_\\infty}.$$\n\nThe supremum is finite because for every $i<m$ one has\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty$,\nso\n\n$$\\lVert Ax\\rVert_\\infty\\le\\max_{i<m}\\sum_{j<n}|a_{ij}|\\,\\lVert x\\rVert_\\infty.$$\n\n**At $n=0$ the convention is explicit.** The only element of $\\mathbb{R}^{0}$\nis the zero vector, the only matrix $A\\in M_{m\\times 0}(\\mathbb{R})$ is the\nempty matrix, and the unit-ball definition gives $\\lVert A\\rVert_{p}=0$.\nThe unit sphere and the set of nonzero vectors are empty, so the two ratio\nformulas above are not asserted in this case.\n\nThe induced quantity is a norm on the matrix space $M_{m\\times n}(\\mathbb{R})$:\nfor each rational $p\\ge1$, and likewise for the separately named\n$\\infty$-case when $m,n\\ge1$, separation, absolute homogeneity and the triangle\ninequality follow from the same three axioms of the underlying vector norm\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]]) through the\ndefining supremum. The compatibility with matrix-vector multiplication, the\nsubmultiplicativity and the value on identity matrices are\n[[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]];\nthe explicit value at $p=1$ and the separate $\\infty$-formula are\n[[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]].\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb{Q}$ with $p\\ge 1$ and let $m,n,q\\in\\mathbb{N}$, with the\ninduced $p$-norms of [[def-induced-matrix-p-norm]].\n\n1. **Compatibility.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and every\n   $x\\in\\mathbb{R}^{n}$,\n   $$\\lVert Ax\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert x\\rVert_p.$$\n2. **Submultiplicativity.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and\n   $B\\in M_{n\\times q}(\\mathbb{R})$,\n   $$\\lVert AB\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert B\\rVert_p.$$\n3. **Normalisation.** For every $n\\ge 1$,\n   $$\\lVert I_n\\rVert_p=1,$$\n   where $I_n$ is the identity matrix of [[def-matrix-product-and-identity-matrix]];\n   at $n=0$ the unique empty matrix $I_0\\in M_0(\\mathbb{R})$ has\n   $\\lVert I_0\\rVert_p=0$, the convention of [[def-induced-matrix-p-norm]].\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-operator-norm-is-the-largest-singular-value",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces.\n\nIf $V=0$, then\n\n$$\\lVert T\\rVert=0.$$\n\nIf $V\\ne0$ and $s_1$ is the largest singular value of $T$, then\n\n$$\\lVert T\\rVert=s_1.$$\n\nIn the nonzero case, the maximum in\n[[def-operator-norm-on-a-finite-dimensional-inner-product-space]] is attained at\na right-singular vector for $s_1$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $E_x=J_{h,x}-J_x$. By [F4], $J_{h,x}^TW_xJ_{h,x}-J_x^TW_xJ_x=J_x^TW_xE_x+E_x^TW_xJ_x+E_x^TW_xE_x$. By [F2] and [F3], the Euclidean operator norm of the right side is at most $\\|J_x\\|_2\\|W_x\\|_2\\|E_x\\|_2+\\|E_x\\|_2\\|W_x\\|_2\\|J_x\\|_2+\\|E_x\\|_2\\|W_x\\|_2\\|E_x\\|_2\\le w(2K\\eta+\\eta^2)=\\delta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Taking the design-weighted sum and using the triangle inequality gives $\\|M_h(\\xi)-M(\\xi)\\|_2\\le\\sum_x\\xi_x\\delta=\\delta$, since the weights are nonnegative and sum to one.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $v\\in\\mathbb R^p$. By step 2.1, the operator norm bound and Cauchy–Schwarz [F5], $|v^T(M_h-M)v|\\le\\|v\\|_2\\|(M_h-M)v\\|_2\\le\\delta\\|v\\|_2^2$. Therefore $v^TM_hv\\ge v^TMv-|v^T(M_h-M)v|\\ge(\\alpha-\\delta)\\|v\\|_2^2$. Since $\\alpha>\\delta$, this is positive for every nonzero $v$, proving positive definiteness.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F1",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero, rank-deficient, zero-curvature, or zero-residual branch is handled in 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or index parameter has a distinct least-positive case in this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted; the hypotheses exclude it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit formulas or finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "rem-gauss-newton-information-is-not-full-hessian": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement explicitly includes the zero branch in its definition or return convention."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or index parameter has a distinct least-positive case in this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted; the hypotheses exclude it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit formulas or finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-full-rank-sensitivity-implies-local-identifiability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-experimental-design-and-local-identifiability",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ be open, and let $\\mathcal X$ be a finite nonempty set of experimental conditions. For each $x\\in\\mathcal X$, let $q_x\\ge1$, let $F_x:\\Theta\\to\\mathbb R^{q_x}$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]], and let $W_x\\in\\mathbb R^{q_x\\times q_x}$ be a symmetric positive-definite weight matrix, meaning $z^T W_x z>0$ for every nonzero $z\\in\\mathbb R^{q_x}$.\n\nAn **approximate design** is a function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$, as in [[def-approximate-linear-model-design-and-optimality-criteria]]. Its support is $\\operatorname{supp}(\\xi)=\\{x\\in\\mathcal X:\\xi_x>0\\}$. Define the joint observation map by\n$$F_\\xi(\\theta)=(F_x(\\theta))_{x\\in\\operatorname{supp}(\\xi)},$$\nwhere the finite product is ordered by any fixed listing of $\\operatorname{supp}(\\xi)$. Its **stacked sensitivity Jacobian** at $\\theta$ is the vertical concatenation $J_\\xi(\\theta)$ of the matrices $J_x(\\theta)=DF_x(\\theta)$ for $x\\in\\operatorname{supp}(\\xi)$. The associated **weighted information matrix** is\n$$M_\\theta(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x J_x(\\theta)^T W_x J_x(\\theta).$$\nThe matrix is symmetric positive semidefinite because each summand has nonnegative quadratic form.\n\nFor a fixed design $\\xi$, the observation map is **locally identifiable at $\\theta_0\\in\\Theta$** if it is injective on some open neighborhood of $\\theta_0$ in $\\Theta$. It is **globally identifiable on $\\Theta$** if it is injective on all of $\\Theta$. A matrix $J:\\mathbb R^p\\to\\mathbb R^m$ has full column rank when $Jv=0$ implies $v=0$. Its smallest singular value is $\\sigma_{\\min}(J)=\\inf_{\\|v\\|_2=1}\\|Jv\\|_2$; thus $\\sigma_{\\min}(J)\\ge\\mu$ means $\\|Jv\\|_2\\ge\\mu\\|v\\|_2$ for every $v$.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_{m\\times n}(F)$. Its **row space** $\\operatorname{Row}(A)\\subseteq F^n$ is the span of its rows, its **column space** $\\operatorname{Col}(A)\\subseteq F^m$ is the span of its columns, and its **nullspace** is\n$$N(A):=\\{x\\in F^n:Ax=0\\}.$$\n\nThe **row rank** and **column rank** are\n$$\\operatorname{rrank}(A):=\\dim_F\\operatorname{Row}(A),\\qquad \\operatorname{crank}(A):=\\dim_F\\operatorname{Col}(A).$$\nThese dimensions are defined because each space is spanned by a finite list.\nStarting with the empty list, inspect the spanning vectors in order and retain a\nvector exactly when it is not in the span of those already retained. Induction\nshows that the retained list is independent and has the same span as the\noriginal finite list, so it is a finite basis. The **rank** of $A$ is its row\nrank; [[thm-row-rank-equals-column-rank]] proves that it also equals the column\nrank.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-row-rank-equals-column-rank",
+          "source_section": "Statement",
+          "quote": "For every finite matrix over a field,\n$$\\operatorname{rrank}(A)=\\operatorname{crank}(A).$$\nBoth dimensions equal the number of pivots in any echelon form of $A$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then\n\n1. $U$ is finite-dimensional over $F$ and $\\dim_F U \\le n$;\n2. $\\dim_F U = n$ **if and only if** $U = V$;\n3. **Extension, with no choice principle.** Every linearly independent\n   $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$\n   with $A_0 \\subseteq B \\subseteq U$. Claim 1 is the case $A_0 = \\varnothing$.\n   Since $V$ is itself a linear subspace of $V$ ([[def-linear-subspace]]), claim 3\n   applies with $V$ in place of $U$, and hence to **any** finite-dimensional\n   vector space over $F$ in place of the pair $(V, U)$.\n\n**Nothing above uses a choice principle**, and claim 3 in particular is the\nfinite-dimensional substitute for the Zorn-based extension theorem stated earlier\non this page. In finite dimension the extension terminates on its own, because\n[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] bounds the size\nof an independent set and [[thm-well-ordering-principle]] then supplies a largest\none; no selection is made anywhere.\n\n**Finiteness is essential in claim 2.** Without it the equality case fails: the\ncompanion page exhibits a\nproper linear subspace of an infinite-dimensional space whose basis is\nequinumerous with a basis of the whole space.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-matrix-rank-detected-by-nonzero-minors",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb R)$ and let $1\\le r\\le\\min\\{m,n\\}$. Then $\\operatorname{rank}A\\ge r$ if and only if some $r$-rowed minor of $A$ is nonzero ([[def-submatrix-minors-of-a-rectangular-matrix]]). Equivalently, the rank of $A$ is the largest positive size of a nonzero minor when $A\\ne0$, and it is $0$ when every entry is zero ([[cor-matrix-rank-equals-the-rank-of-its-linear-map]]).\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$ and every real matrix $A\\in M_n(\\mathbb R)$,\n$$A\\text{ is invertible}\\quad\\Longleftrightarrow\\quad\\det(A)\\ne0.$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Full column rank means the $p$ columns of $J_\\xi(\\theta_0)$ are independent. They lie in $\\mathbb R^m$, so [F3] gives $p\\le m$. By [F2] the matrix rank is $p$, and [F4] supplies a set $I$ of $p$ rows whose square submatrix $B=J_\\xi(\\theta_0)[I,:]$ has nonzero determinant.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F5], $B$ is invertible. Let $P_I:\\mathbb R^m\\to\\mathbb R^p$ be the coordinate projection onto the rows in $I$, and set $G=P_I\\circ F_\\xi$. The map $P_I$ is linear, so [F6] gives $DG(\\theta_0)=P_IJ_\\xi(\\theta_0)=B$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F5",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F7] to $G$: there is an open neighborhood $V\\subseteq\\Theta$ of $\\theta_0$ on which $G$ is injective. If $\\theta,\\theta'\\in V$ satisfy $F_\\xi(\\theta)=F_\\xi(\\theta')$, then applying $P_I$ gives $G(\\theta)=G(\\theta')$, hence $\\theta=\\theta'$. Thus $F_\\xi$ is injective on $V$, which is local identifiability by [F1]. The argument selects one of finitely many row minors and uses no choice axiom.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero, rank-deficient, zero-curvature, or zero-residual branch is handled in 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or index parameter has a distinct least-positive case in this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted; the hypotheses exclude it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite selection is explicit in 1.1, 2.1, 3.1; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-local-information-positive-definite-iff-full-column-rank": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-experimental-design-and-local-identifiability",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ be open, and let $\\mathcal X$ be a finite nonempty set of experimental conditions. For each $x\\in\\mathcal X$, let $q_x\\ge1$, let $F_x:\\Theta\\to\\mathbb R^{q_x}$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]], and let $W_x\\in\\mathbb R^{q_x\\times q_x}$ be a symmetric positive-definite weight matrix, meaning $z^T W_x z>0$ for every nonzero $z\\in\\mathbb R^{q_x}$.\n\nAn **approximate design** is a function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$, as in [[def-approximate-linear-model-design-and-optimality-criteria]]. Its support is $\\operatorname{supp}(\\xi)=\\{x\\in\\mathcal X:\\xi_x>0\\}$. Define the joint observation map by\n$$F_\\xi(\\theta)=(F_x(\\theta))_{x\\in\\operatorname{supp}(\\xi)},$$\nwhere the finite product is ordered by any fixed listing of $\\operatorname{supp}(\\xi)$. Its **stacked sensitivity Jacobian** at $\\theta$ is the vertical concatenation $J_\\xi(\\theta)$ of the matrices $J_x(\\theta)=DF_x(\\theta)$ for $x\\in\\operatorname{supp}(\\xi)$. The associated **weighted information matrix** is\n$$M_\\theta(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x J_x(\\theta)^T W_x J_x(\\theta).$$\nThe matrix is symmetric positive semidefinite because each summand has nonnegative quadratic form.\n\nFor a fixed design $\\xi$, the observation map is **locally identifiable at $\\theta_0\\in\\Theta$** if it is injective on some open neighborhood of $\\theta_0$ in $\\Theta$. It is **globally identifiable on $\\Theta$** if it is injective on all of $\\Theta$. A matrix $J:\\mathbb R^p\\to\\mathbb R^m$ has full column rank when $Jv=0$ implies $v=0$. Its smallest singular value is $\\sigma_{\\min}(J)=\\inf_{\\|v\\|_2=1}\\|Jv\\|_2$; thus $\\sigma_{\\min}(J)\\ge\\mu$ means $\\|Jv\\|_2\\ge\\mu\\|v\\|_2$ for every $v$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any $v\\in\\mathbb R^p$, [F1] and [F2] give $v^TM_\\theta(\\xi)v=\\sum_{x\\in\\operatorname{supp}(\\xi)}\\xi_x(J_x(\\theta)v)^TW_x(J_x(\\theta)v)$. Every term is nonnegative by [F3], and a term is strictly positive exactly when $J_x(\\theta)v\\ne0$, since $\\xi_x>0$ on the support and $W_x$ is positive definite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $J_\\xi(\\theta)v=0$, every support component $J_x(\\theta)v$ is zero, so step 1.1 gives $v^TM_\\theta(\\xi)v=0$. Conversely, if $v^TM_\\theta(\\xi)v=0$, the finite sum of nonnegative terms in step 1.1 can vanish only if every support component $J_x(\\theta)v=0$, hence $J_\\xi(\\theta)v=0$. Thus the quadratic form is positive on every nonzero $v$ exactly when $\\ker J_\\xi(\\theta)=\\{0\\}$, as claimed.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero, rank-deficient, zero-curvature, or zero-residual branch is handled in 1.1, 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or index parameter has a distinct least-positive case in this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted; the hypotheses exclude it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit formulas or finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward implication is proved in 1.1, 2.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse implication is proved in 1.1, 2.1."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-local-parameter-perturbation-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-experimental-design-and-local-identifiability",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ be open, and let $\\mathcal X$ be a finite nonempty set of experimental conditions. For each $x\\in\\mathcal X$, let $q_x\\ge1$, let $F_x:\\Theta\\to\\mathbb R^{q_x}$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]], and let $W_x\\in\\mathbb R^{q_x\\times q_x}$ be a symmetric positive-definite weight matrix, meaning $z^T W_x z>0$ for every nonzero $z\\in\\mathbb R^{q_x}$.\n\nAn **approximate design** is a function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$, as in [[def-approximate-linear-model-design-and-optimality-criteria]]. Its support is $\\operatorname{supp}(\\xi)=\\{x\\in\\mathcal X:\\xi_x>0\\}$. Define the joint observation map by\n$$F_\\xi(\\theta)=(F_x(\\theta))_{x\\in\\operatorname{supp}(\\xi)},$$\nwhere the finite product is ordered by any fixed listing of $\\operatorname{supp}(\\xi)$. Its **stacked sensitivity Jacobian** at $\\theta$ is the vertical concatenation $J_\\xi(\\theta)$ of the matrices $J_x(\\theta)=DF_x(\\theta)$ for $x\\in\\operatorname{supp}(\\xi)$. The associated **weighted information matrix** is\n$$M_\\theta(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x J_x(\\theta)^T W_x J_x(\\theta).$$\nThe matrix is symmetric positive semidefinite because each summand has nonnegative quadratic form.\n\nFor a fixed design $\\xi$, the observation map is **locally identifiable at $\\theta_0\\in\\Theta$** if it is injective on some open neighborhood of $\\theta_0$ in $\\Theta$. It is **globally identifiable on $\\Theta$** if it is injective on all of $\\Theta$. A matrix $J:\\mathbb R^p\\to\\mathbb R^m$ has full column rank when $Jv=0$ implies $v=0$. Its smallest singular value is $\\sigma_{\\min}(J)=\\inf_{\\|v\\|_2=1}\\|Jv\\|_2$; thus $\\sigma_{\\min}(J)\\ge\\mu$ means $\\|Jv\\|_2\\ge\\mu\\|v\\|_2$ for every $v$.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-lipschitz-holder-contraction",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be a function. Recall that a metric takes nonnegative real values\n([[lem-metric-nonnegativity]]).\n\n- $f$ is **Lipschitz** with **constant** $L$, where $L \\in \\mathbb{R}$ and\n  $L \\ge 0$, if\n  $$d_Y\\big(f(x), f(x')\\big) \\;\\le\\; L \\, d_X(x,x') \\qquad \\text{for all } x, x' \\in X .$$\n  $f$ is *Lipschitz* if it is Lipschitz with some such constant.\n- Let $\\alpha \\in \\mathbb{Q}$ with $0 < \\alpha \\le 1$ ([[def-rat-order]]). $f$ is\n  **$\\alpha$-Hölder** with **constant** $C$, where $C \\in \\mathbb{R}$ and\n  $C \\ge 0$, if\n  $$d_Y\\big(f(x), f(x')\\big) \\;\\le\\; C \\, d_X(x,x')^{\\alpha} \\qquad \\text{for all } x, x' \\in X ,$$\n  the power being the rational power of a nonnegative base\n  ([[def-rational-power]]). $f$ is *$\\alpha$-Hölder* if it is so with some such\n  constant, and *Hölder* if it is $\\alpha$-Hölder for some rational\n  $\\alpha \\in (0,1]$.\n- $f$ is a **contraction** with constant $q$ if it is Lipschitz with constant $q$\n  and $0 \\le q < 1$. The number $q$ is then called a **contraction constant** for\n  $f$.\n\n**The power $d_X(x,x')^{\\alpha}$ is defined at every pair, including $x = x'$.**\nThe base $d_X(x,x')$ is a nonnegative real, and [[def-rational-power]] defines\n$a^{\\alpha}$ for every $a > 0$ and, by its supplementary clause, sets\n$0^{\\alpha} = 0$ for every rational $\\alpha > 0$. Since $\\alpha > 0$ is required\nhere, the displayed inequality at $x = x'$ reads $0 \\le C \\cdot 0$, which holds;\nso no separate clause and no restriction to $x \\ne x'$ is needed. Note that this\ndoes not by itself explain the strict inequality $\\alpha>0$: if one extended the\nformula to $\\alpha=0$ using the convention $0^0=1$ of [[def-integer-power]], the\nequal-point inequality would still be the automatic $0\\le C$. Globally, however,\nthat extension would reduce to the bounded-diameter condition\n$d_Y(f(x),f(x'))\\le C$, outside the standard Hölder range adopted here.\n\n**Why the exponent is rational on this page and why it is at most $1$.** At this\npoint in the reading order only rational powers are available\n([[def-rational-power]]), so $\\alpha$ ranges over the rationals. The upper\nbound $\\alpha \\le 1$ is the standard convention, and it is where the notion is\nuseful: the classical theory reserves the name for $\\alpha \\in (0,1]$, and\nnothing in this library uses an exponent outside that range. No claim is made\nhere about what an exponent $\\alpha > 1$ would do.\n\n**Constants are not unique and are not part of the data.** If $f$ is Lipschitz\nwith constant $L$ it is Lipschitz with every constant $L' \\ge L$, and likewise\nfor Hölder constants; the adjectives above are existential statements. A\n*contraction*, by contrast, requires a constant strictly below $1$, and that is a\nreal restriction: exhibiting the constant is part of exhibiting a contraction, and\na map that shrinks every distance without admitting one uniform constant is not a\ncontraction here.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$ and let $a, b \\in \\mathbb{R}$ with $a < b$.\n\n1. **Fundamental theorem, second part, in $\\mathbb{R}^{m}$.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be differentiable at every point of $[a,b]$ as\n   a function on $[a,b]$ ([[def-vector-valued-derivative-and-integral]]), and\n   suppose $f' : [a,b] \\to \\mathbb{R}^{m}$ is integrable. Then\n   $$\\int_a^b f' \\;=\\; f(b) - f(a).$$\n2. **A bounded derivative gives a Lipschitz function.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and differentiable at\n   every point of $(a,b)$, and let $M \\ge 0$ satisfy\n   $\\lVert f'(t)\\rVert_2 \\le M$ for every $t \\in (a,b)$. Then\n   $$\\lVert f(t) - f(s)\\rVert_2 \\;\\le\\; M\\,|t-s| \\qquad \\text{for all } s,t \\in [a,b],$$\n   that is, $f$ is Lipschitz with constant $M$ as a map\n   $([a,b], d_{\\mathbb{R}}) \\to (\\mathbb{R}^{m}, d_2)$\n   ([[def-lipschitz-holder-contraction]], [[lem-real-line-is-a-metric-space]],\n   [[lem-metrics-on-rn]]).\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.\n\n",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $h=\\widehat\\theta-\\theta_0$ and define $R(t)=F(\\theta_0+th)-F(\\theta_0)-tDF(\\theta_0)h$ for $0\\le t\\le1$. The segment stays in the convex ball. By [F2], $R'(t)=(DF(\\theta_0+th)-DF(\\theta_0))h$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4] and [F3], $\\|R'(t)\\|_2\\le Lt\\|h\\|_2^2\\le L\\|h\\|_2^2$ for $0<t<1$. Since $R$ is continuous on $[0,1]$ and differentiable on $(0,1)$, [F5] gives $\\|R(1)-R(0)\\|_2\\le L\\|h\\|_2^2$. As $R(0)=0$, this is the first-order remainder bound $\\|F(\\theta_0+h)-F(\\theta_0)-DF(\\theta_0)h\\|_2\\le L\\|h\\|_2^2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $L>0$, then $\\|h\\|_2\\le r\\le\\mu/(2L)$, so [F1], step 2.1, and the reverse-triangle inequality [F6] yield $\\|F(\\widehat\\theta)-F(\\theta_0)\\|_2\\ge\\mu\\|h\\|_2-L\\|h\\|_2^2\\ge(\\mu/2)\\|h\\|_2$. If $L=0$, step 2.1 gives zero remainder, and the same lower bound follows from [F1].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The fit condition and $y=F(\\theta_0)+e$ give $\\|F(\\widehat\\theta)-F(\\theta_0)\\|_2\\le\\|F(\\widehat\\theta)-y\\|_2+\\|e\\|_2\\le\\varepsilon+\\delta$. Combining with step 3.1 gives $(\\mu/2)\\|h\\|_2\\le\\varepsilon+\\delta$, and division by $\\mu/2>0$ proves the asserted bound.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero, rank-deficient, zero-curvature, or zero-residual branch is handled in 1.1, 2.1, 3.1, 4.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or index parameter has a distinct least-positive case in this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singular or degenerate branch is addressed in 1.1, 2.1, 3.1, 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval endpoint cases are included in 1.1, 2.1, 3.1, 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit formulas or finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-multiplicative-design-update-well-defined-and-terminates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-budget-multiplicative-d-optimal-design",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\mathcal X$ be a finite nonempty candidate set, and let $f_x\\in\\mathbb R^p$ be the feature vector for each $x\\in\\mathcal X$. An approximate design $\\xi$ and information matrix $M(\\xi)=\\sum_x\\xi_xf_xf_x^T$ use the convention of [[def-approximate-linear-model-design-and-optimality-criteria]]. The same vectors may be scalar-observation sensitivities at a fixed parameter, as in [[def-nonlinear-experimental-design-and-local-identifiability]], with a scalar precision absorbed into $f_x$. The procedure uses exact arithmetic.\n\n**Input:** A finite nonempty $\\mathcal X$, $p\\ge1$, its feature vectors $(f_x)_{x\\in\\mathcal X}$, an approximate initial design $\\xi^{(0)}$, and a finite nonnegative integer budget $N$ counting weight updates.\n\n**Procedure:** Form $M_0=M(\\xi^{(0)})$. If $M_0$ is not positive definite, return $(\\xi^{(0)},\\text{undefined violation},\\text{invalid initial design})$. Otherwise, for $k=0,1,\\ldots,N$, with current $\\xi^{(k)}$ and $M_k=M(\\xi^{(k)})$, compute\n$$s_x^{(k)}=f_x^TM_k^{-1}f_x\\quad(x\\in\\mathcal X),\\qquad v_k=\\max_{x\\in\\mathcal X}s_x^{(k)}-p.$$\nIf $v_k=0$, return $(\\xi^{(k)},v_k,\\text{equivalence-certified})$. If $k=N$, return $(\\xi^{(k)},v_k,\\text{budget-exhausted})$. Otherwise set\n$$\\xi_x^{(k+1)}=\\xi_x^{(k)}\\frac{s_x^{(k)}}p\\quad(x\\in\\mathcal X),$$\nform $M_{k+1}=\\sum_x\\xi_x^{(k+1)}f_xf_x^T$, and continue. The proved update invariant keeps every later $M_k$ positive definite.\n\nThe budget guarantees at most $N$ updates and $N+1$ sensitivity scans. A nonzero returned violation is reported as-is; it is not an exact D-optimality certificate. The exact integer allocation problem remains separate from this approximate-weight procedure.\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nonlinear-experimental-design-and-local-identifiability",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ be open, and let $\\mathcal X$ be a finite nonempty set of experimental conditions. For each $x\\in\\mathcal X$, let $q_x\\ge1$, let $F_x:\\Theta\\to\\mathbb R^{q_x}$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]], and let $W_x\\in\\mathbb R^{q_x\\times q_x}$ be a symmetric positive-definite weight matrix, meaning $z^T W_x z>0$ for every nonzero $z\\in\\mathbb R^{q_x}$.\n\nAn **approximate design** is a function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$, as in [[def-approximate-linear-model-design-and-optimality-criteria]]. Its support is $\\operatorname{supp}(\\xi)=\\{x\\in\\mathcal X:\\xi_x>0\\}$. Define the joint observation map by\n$$F_\\xi(\\theta)=(F_x(\\theta))_{x\\in\\operatorname{supp}(\\xi)},$$\nwhere the finite product is ordered by any fixed listing of $\\operatorname{supp}(\\xi)$. Its **stacked sensitivity Jacobian** at $\\theta$ is the vertical concatenation $J_\\xi(\\theta)$ of the matrices $J_x(\\theta)=DF_x(\\theta)$ for $x\\in\\operatorname{supp}(\\xi)$. The associated **weighted information matrix** is\n$$M_\\theta(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x J_x(\\theta)^T W_x J_x(\\theta).$$\nThe matrix is symmetric positive semidefinite because each summand has nonnegative quadratic form.\n\nFor a fixed design $\\xi$, the observation map is **locally identifiable at $\\theta_0\\in\\Theta$** if it is injective on some open neighborhood of $\\theta_0$ in $\\Theta$. It is **globally identifiable on $\\Theta$** if it is injective on all of $\\Theta$. A matrix $J:\\mathbb R^p\\to\\mathbb R^m$ has full column rank when $Jv=0$ implies $v=0$. Its smallest singular value is $\\sigma_{\\min}(J)=\\inf_{\\|v\\|_2=1}\\|Jv\\|_2$; thus $\\sigma_{\\min}(J)\\ge\\mu$ means $\\|Jv\\|_2\\ge\\mu\\|v\\|_2$ for every $v$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-local-information-positive-definite-iff-full-column-rank",
+          "source_section": "Statement",
+          "quote": "For the finite nonlinear observation design of [[def-nonlinear-experimental-design-and-local-identifiability]], fix $\\theta\\in\\Theta$ and an approximate design $\\xi$. The matrix $M_\\theta(\\xi)$ is positive definite, meaning symmetric with $v^TM_\\theta(\\xi)v>0$ for every nonzero $v\\in\\mathbb R^p$, if and only if the stacked support sensitivity Jacobian $J_\\xi(\\theta)$ has trivial kernel, equivalently full column rank.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-approximate-linear-model-design-and-optimality-criteria",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty candidate set, let $p\\ge1$, and let $f:\\mathcal X\\to\\mathbb R^p$ be the declared regression-vector map. Work under the stated linear mean model $Y=f(x)^{\\mathsf T}\\beta+\\epsilon$, with mean-zero independent run errors of common variance $\\sigma^2>0$. These are modeling assumptions, not claims about an experiment's empirical adequacy.\n\nAn **approximate design** is a weight function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$. Its support is $\\operatorname{supp}(\\xi)=\\{x:\\xi_x>0\\}$ and its information matrix is\n$$M(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x f(x)f(x)^{\\mathsf T}.$$\nThis matrix is symmetric and positive semidefinite. A design is **nonsingular** when $M(\\xi)$ is positive definite. For a singular design, the page's estimability convention is that a specified coefficient contrast $c^{\\mathsf T}\\beta$ is estimable exactly when $c\\in\\operatorname{span}\\{f(x):x\\in\\operatorname{supp}(\\xi)\\}$; the inverse-matrix criteria below are defined only for nonsingular designs.\n\nFor nonsingular designs on this fixed $f$ and $\\mathcal X$, **D-optimality** maximizes $\\log\\det M(\\xi)$, **A-optimality** minimizes $\\operatorname{tr}(M(\\xi)^{-1})$, **E-optimality** maximizes $\\lambda_{\\min}(M(\\xi))$, and **$c$-optimality** for a fixed $c\\in\\mathbb R^p$ minimizes $c^{\\mathsf T}M(\\xi)^{-1}c$; $c=0$ gives a trivial tie. The smallest eigenvalue is real because $M(\\xi)$ is real symmetric ([[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]]). These are different model- and candidate-dependent objectives; none is a universal design ranking.\n\nAn **exact $n$-run design**, for an integer $n\\ge1$, has weights $\\xi_x=n_x/n$ with nonnegative integer counts $n_x$ summing to $n$; optimizing over those integer allocations is a separate finite problem.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix an update at a current approximate design with positive-definite $M=\\sum_x\\xi_xf_xf_x^T$. For each $x$, put $s_x=f_x^TM^{-1}f_x$. Since $M$ is symmetric positive definite, $s_x\\ge0$, and $s_x>0$ whenever $f_x\\ne0$: writing $u=M^{-1}f_x$, one has $f_x^TM^{-1}f_x=u^TMu>0$ for $f_x\\ne0$. By [F4] and [F5], $\\sum_x\\xi_xs_x=\\sum_x\\xi_x\\operatorname{tr}(M^{-1}f_xf_x^T)=\\operatorname{tr}(M^{-1}M)=\\operatorname{tr}(I_p)=p$. Therefore $\\xi_x^+=\\xi_xs_x/p$ is nonnegative and $\\sum_x\\xi_x^+=1$, so it is again an approximate design.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every feature $f_x$, a positive old weight remains positive after the update exactly when $f_x\\ne0$: step 1.1 gives $s_x>0$ for nonzero $f_x$, and $s_x=0$ for $f_x=0$; zero weights remain zero. Thus the stacked scalar sensitivity matrix loses at most zero rows, so its kernel is unchanged. The current matrix is positive definite, so [F2] gives this kernel is trivial; applying [F2] to the new weights gives positive definiteness of the updated matrix. Induction applies this argument at every update, so no later inverse is undefined.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The loop checks one finite candidate set at each index $k=0,\\ldots,N$, returns immediately on zero violation, and otherwise makes an update only when $k<N$. Thus it makes at most $N$ updates and at most $N+1$ sensitivity scans, and at $k=N$ returns the current design and its finite violation. The invariant argument above ensures every scan and update is well-defined.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "given",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero, rank-deficient, zero-curvature, or zero-residual branch is handled in 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or index parameter has a distinct least-positive case in this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted; the hypotheses exclude it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit formulas or finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-uniform-sensitivity-error-controls-design-gap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-experimental-design-and-local-identifiability",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ be open, and let $\\mathcal X$ be a finite nonempty set of experimental conditions. For each $x\\in\\mathcal X$, let $q_x\\ge1$, let $F_x:\\Theta\\to\\mathbb R^{q_x}$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]], and let $W_x\\in\\mathbb R^{q_x\\times q_x}$ be a symmetric positive-definite weight matrix, meaning $z^T W_x z>0$ for every nonzero $z\\in\\mathbb R^{q_x}$.\n\nAn **approximate design** is a function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$, as in [[def-approximate-linear-model-design-and-optimality-criteria]]. Its support is $\\operatorname{supp}(\\xi)=\\{x\\in\\mathcal X:\\xi_x>0\\}$. Define the joint observation map by\n$$F_\\xi(\\theta)=(F_x(\\theta))_{x\\in\\operatorname{supp}(\\xi)},$$\nwhere the finite product is ordered by any fixed listing of $\\operatorname{supp}(\\xi)$. Its **stacked sensitivity Jacobian** at $\\theta$ is the vertical concatenation $J_\\xi(\\theta)$ of the matrices $J_x(\\theta)=DF_x(\\theta)$ for $x\\in\\operatorname{supp}(\\xi)$. The associated **weighted information matrix** is\n$$M_\\theta(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x J_x(\\theta)^T W_x J_x(\\theta).$$\nThe matrix is symmetric positive semidefinite because each summand has nonnegative quadratic form.\n\nFor a fixed design $\\xi$, the observation map is **locally identifiable at $\\theta_0\\in\\Theta$** if it is injective on some open neighborhood of $\\theta_0$ in $\\Theta$. It is **globally identifiable on $\\Theta$** if it is injective on all of $\\Theta$. A matrix $J:\\mathbb R^p\\to\\mathbb R^m$ has full column rank when $Jv=0$ implies $v=0$. Its smallest singular value is $\\sigma_{\\min}(J)=\\inf_{\\|v\\|_2=1}\\|Jv\\|_2$; thus $\\sigma_{\\min}(J)\\ge\\mu$ means $\\|Jv\\|_2\\ge\\mu\\|v\\|_2$ for every $v$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-information-matrix-perturbation-bound",
+          "source_section": "Statement",
+          "quote": "Use the finite observation designs of [[def-nonlinear-experimental-design-and-local-identifiability]]. Suppose uniformly over $x\\in\\mathcal X$ that $\\|J_x\\|_2\\le K$, $\\|J_{h,x}-J_x\\|_2\\le\\eta$, and $\\|W_x\\|_2\\le w$, where $K,\\eta,w\\ge0$. For every approximate design $\\xi$,\n$$\\|M_h(\\xi)-M(\\xi)\\|_2\\le\\delta:=w(2K\\eta+\\eta^2),$$\nwhere $M_h(\\xi)=\\sum_x\\xi_xJ_{h,x}^TW_xJ_{h,x}$. If $M(\\xi)$ satisfies $v^TM(\\xi)v\\ge\\alpha\\|v\\|_2^2$ for every $v$ with some $\\alpha>\\delta$, then\n$$v^TM_h(\\xi)v\\ge(\\alpha-\\delta)\\|v\\|_2^2$$\nfor every $v$, so the computed information matrix remains positive definite.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-logdet-information-perturbation-bound",
+          "source_section": "Statement",
+          "quote": "Let $p\\ge1$ and let $A,B\\in\\mathbb R^{p\\times p}$ be symmetric. Put $E=B-A$ and $A_t=(1-t)A+tB$ for $0\\le t\\le1$. Suppose there is $\\alpha>0$ such that $v^T A_t v\\ge\\alpha\\|v\\|_2^2$ for every $v\\in\\mathbb R^p$ and every $t\\in[0,1]$. Then $A_t$ is positive definite and\n$$|\\log\\det B-\\log\\det A|\\le\\frac{p\\|E\\|_2}{\\alpha}.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $\\xi\\in\\Xi$, [F1] defines the two information matrices and [F2] gives $\\|M_h(\\xi)-M(\\xi)\\|_2\\le\\delta$. Applying [F3] on their segment gives the uniform bound $|\\Phi_h(\\xi)-\\Phi(\\xi)|\\le e:=p\\delta/\\alpha$. By [F4], both maxima are attained; write $\\xi_h$ for a computed maximizer.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The $\\tau$-approximate maximality of $\\widehat\\xi$ gives $\\Phi_h(\\xi_h)-\\Phi_h(\\widehat\\xi)\\le\\tau$. Write $\\Phi(\\xi^*)-\\Phi(\\widehat\\xi)=[\\Phi(\\xi^*)-\\Phi_h(\\xi^*)]+[\\Phi_h(\\xi^*)-\\Phi_h(\\widehat\\xi)]+[\\Phi_h(\\widehat\\xi)-\\Phi(\\widehat\\xi)]$. The middle term is at most $\\tau$ because $\\xi_h$ maximizes $\\Phi_h$, and the first and last terms are at most $e$ by step 1.1. Thus the gap is at most $e+\\tau+e=\\tau+2p\\delta/\\alpha$, proving the bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no independent zero-size or zero-parameter branch; positive dimensions are fixed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or index parameter has a distinct least-positive case in this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted; the hypotheses exclude it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit formulas or finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-equivalence-violation-bounds-d-optimal-design-gap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-budget-multiplicative-d-optimal-design",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\mathcal X$ be a finite nonempty candidate set, and let $f_x\\in\\mathbb R^p$ be the feature vector for each $x\\in\\mathcal X$. An approximate design $\\xi$ and information matrix $M(\\xi)=\\sum_x\\xi_xf_xf_x^T$ use the convention of [[def-approximate-linear-model-design-and-optimality-criteria]]. The same vectors may be scalar-observation sensitivities at a fixed parameter, as in [[def-nonlinear-experimental-design-and-local-identifiability]], with a scalar precision absorbed into $f_x$. The procedure uses exact arithmetic.\n\n**Input:** A finite nonempty $\\mathcal X$, $p\\ge1$, its feature vectors $(f_x)_{x\\in\\mathcal X}$, an approximate initial design $\\xi^{(0)}$, and a finite nonnegative integer budget $N$ counting weight updates.\n\n**Procedure:** Form $M_0=M(\\xi^{(0)})$. If $M_0$ is not positive definite, return $(\\xi^{(0)},\\text{undefined violation},\\text{invalid initial design})$. Otherwise, for $k=0,1,\\ldots,N$, with current $\\xi^{(k)}$ and $M_k=M(\\xi^{(k)})$, compute\n$$s_x^{(k)}=f_x^TM_k^{-1}f_x\\quad(x\\in\\mathcal X),\\qquad v_k=\\max_{x\\in\\mathcal X}s_x^{(k)}-p.$$\nIf $v_k=0$, return $(\\xi^{(k)},v_k,\\text{equivalence-certified})$. If $k=N$, return $(\\xi^{(k)},v_k,\\text{budget-exhausted})$. Otherwise set\n$$\\xi_x^{(k+1)}=\\xi_x^{(k)}\\frac{s_x^{(k)}}p\\quad(x\\in\\mathcal X),$$\nform $M_{k+1}=\\sum_x\\xi_x^{(k+1)}f_xf_x^T$, and continue. The proved update invariant keeps every later $M_k$ positive definite.\n\nThe budget guarantees at most $N$ updates and $N+1$ sensitivity scans. A nonzero returned violation is reported as-is; it is not an exact D-optimality certificate. The exact integer allocation problem remains separate from this approximate-weight procedure.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-approximate-linear-model-design-and-optimality-criteria",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty candidate set, let $p\\ge1$, and let $f:\\mathcal X\\to\\mathbb R^p$ be the declared regression-vector map. Work under the stated linear mean model $Y=f(x)^{\\mathsf T}\\beta+\\epsilon$, with mean-zero independent run errors of common variance $\\sigma^2>0$. These are modeling assumptions, not claims about an experiment's empirical adequacy.\n\nAn **approximate design** is a weight function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$. Its support is $\\operatorname{supp}(\\xi)=\\{x:\\xi_x>0\\}$ and its information matrix is\n$$M(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x f(x)f(x)^{\\mathsf T}.$$\nThis matrix is symmetric and positive semidefinite. A design is **nonsingular** when $M(\\xi)$ is positive definite. For a singular design, the page's estimability convention is that a specified coefficient contrast $c^{\\mathsf T}\\beta$ is estimable exactly when $c\\in\\operatorname{span}\\{f(x):x\\in\\operatorname{supp}(\\xi)\\}$; the inverse-matrix criteria below are defined only for nonsingular designs.\n\nFor nonsingular designs on this fixed $f$ and $\\mathcal X$, **D-optimality** maximizes $\\log\\det M(\\xi)$, **A-optimality** minimizes $\\operatorname{tr}(M(\\xi)^{-1})$, **E-optimality** maximizes $\\lambda_{\\min}(M(\\xi))$, and **$c$-optimality** for a fixed $c\\in\\mathbb R^p$ minimizes $c^{\\mathsf T}M(\\xi)^{-1}c$; $c=0$ gives a trivial tie. The smallest eigenvalue is real because $M(\\xi)$ is real symmetric ([[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]]). These are different model- and candidate-dependent objectives; none is a universal design ranking.\n\nAn **exact $n$-run design**, for an integer $n\\ge1$, has weights $\\xi_x=n_x/n$ with nonnegative integer counts $n_x$ summing to $n$; optimizing over those integer allocations is a separate finite problem.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-log-determinant-concavity-on-positive-definite-matrices",
+          "source_section": "Statement",
+          "quote": "For $p\\ge1$, if $A_0,A_1\\in\\mathbb R^{p\\times p}$ are symmetric and $v^{\\mathsf T}A_i v>0$ for every nonzero $v\\in\\mathbb R^p$ and $i\\in\\{0,1\\}$, then for every $t\\in[0,1]$,\n$$\\log\\det((1-t)A_0+tA_1)\\ge(1-t)\\log\\det A_0+t\\log\\det A_1.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-determinant-differential-and-jacobis-formula",
+          "source_section": "Statement",
+          "quote": "Let $A$ be an $n\\times n$ matrix and let $H$ be a direction matrix. Then\n\n$$D\\det(A)[H]=\\operatorname{tr}(\\operatorname{adj}(A)H).$$\n\nIf $A$ is invertible, then\n\n$$D\\det(A)[H]=\\det(A)\\operatorname{tr}(A^{-1}H).$$\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-d-optimality-equivalence-theorem",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal X$ be a finite nonempty candidate set, $f:\\mathcal X\\to\\mathbb R^p$, and let $\\xi^*$ be a nonsingular approximate design as in [[def-approximate-linear-model-design-and-optimality-criteria]]. Write $M^*=M(\\xi^*)$ and $u^*(x)=f(x)^{\\mathsf T}(M^*)^{-1}f(x)$. Then $\\xi^*$ is D-optimal among nonsingular approximate designs if and only if $u^*(x)\\le p$ for every $x\\in\\mathcal X$. Whenever this holds, $u^*(x)=p$ for every $x\\in\\operatorname{supp}(\\xi^*)$. No existence of a nonsingular optimum is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [F5],\n$$\\sum_x\\xi_xs_x=\\sum_x\\xi_x\\operatorname{tr}(M^{-1}f_xf_x^T)=\\operatorname{tr}\\!\\left(M^{-1}\\sum_x\\xi_xf_xf_x^T\\right)=\\operatorname{tr}(M^{-1}M)=\\operatorname{tr}(I_p)=p.$$\nThe first rank-one trace identity follows by expanding the diagonal sum: $\\operatorname{tr}(M^{-1}f_xf_x^T)=\\sum_{i,j}(M^{-1})_{ij}(f_x)_j(f_x)_i=f_x^TM^{-1}f_x$. Since the $\\xi_x$ are nonnegative and sum to one, their weighted average of the $s_x$ is at most their maximum. The displayed equality therefore gives $\\max_xs_x\\ge p$ and $v\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $\\eta$ be any nonsingular approximate competitor and put $N=M(\\eta)$ and $M_t=(1-t)M+tN$. The segment is positive definite because for each nonzero $u$, $u^TM_tu=(1-t)u^TMu+t u^TNu>0$. Define $g(t)=\\log\\det M_t$. By [F3], $g$ is concave, and [F4] gives $g'(0)=\\operatorname{tr}(M^{-1}(N-M))$. For $0<s<1$, concavity gives $g(s)\\ge(1-s)g(0)+sg(1)$, hence $g(1)-g(0)\\le(g(s)-g(0))/s$. Letting $s\\downarrow0$ and using the right derivative $g'(0)$ proves $\\log\\det N-\\log\\det M\\le\\operatorname{tr}(M^{-1}(N-M))$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Expand $N=\\sum_x\\eta_x f_xf_x^T$ and $M=\\sum_x\\xi_xf_xf_x^T$. By the rank-one trace identity proved in step 1.1, $\\operatorname{tr}(M^{-1}N)=\\sum_x\\eta_xs_x$ and $\\operatorname{tr}(M^{-1}M)=p$. Since $\\eta$ is an approximate design, $\\sum_x\\eta_xs_x\\le\\max_xs_x=p+v$. Thus step 1.2 yields $\\log\\det M(\\eta)-\\log\\det M(\\xi)\\le v$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $v=0$, then $s_x\\le p$ for every $x$, so [F6] makes $\\xi$ D-optimal. Conversely, if $\\xi$ is D-optimal, [F6] gives $s_x\\le p$ for every $x$; step 1.1 says their $\\xi$-weighted average equals $p$, so their maximum is exactly $p$ and $v=0$. This proves both directions.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero, rank-deficient, zero-curvature, or zero-residual branch is handled in 1.1, 1.2, 2.1, 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or index parameter has a distinct least-positive case in this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singular or degenerate branch is addressed in 1.1, 1.2, 2.1, 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit formulas or finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward implication is proved in 1.1, 1.2, 2.1, 3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse implication is proved in 1.1, 1.2, 2.1, 3.1."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-cubic-observation-is-locally-identifiable-with-zero-jacobian": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-experimental-design-and-local-identifiability",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ be open, and let $\\mathcal X$ be a finite nonempty set of experimental conditions. For each $x\\in\\mathcal X$, let $q_x\\ge1$, let $F_x:\\Theta\\to\\mathbb R^{q_x}$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]], and let $W_x\\in\\mathbb R^{q_x\\times q_x}$ be a symmetric positive-definite weight matrix, meaning $z^T W_x z>0$ for every nonzero $z\\in\\mathbb R^{q_x}$.\n\nAn **approximate design** is a function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$, as in [[def-approximate-linear-model-design-and-optimality-criteria]]. Its support is $\\operatorname{supp}(\\xi)=\\{x\\in\\mathcal X:\\xi_x>0\\}$. Define the joint observation map by\n$$F_\\xi(\\theta)=(F_x(\\theta))_{x\\in\\operatorname{supp}(\\xi)},$$\nwhere the finite product is ordered by any fixed listing of $\\operatorname{supp}(\\xi)$. Its **stacked sensitivity Jacobian** at $\\theta$ is the vertical concatenation $J_\\xi(\\theta)$ of the matrices $J_x(\\theta)=DF_x(\\theta)$ for $x\\in\\operatorname{supp}(\\xi)$. The associated **weighted information matrix** is\n$$M_\\theta(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x J_x(\\theta)^T W_x J_x(\\theta).$$\nThe matrix is symmetric positive semidefinite because each summand has nonnegative quadratic form.\n\nFor a fixed design $\\xi$, the observation map is **locally identifiable at $\\theta_0\\in\\Theta$** if it is injective on some open neighborhood of $\\theta_0$ in $\\Theta$. It is **globally identifiable on $\\Theta$** if it is injective on all of $\\Theta$. A matrix $J:\\mathbb R^p\\to\\mathbb R^m$ has full column rank when $Jv=0$ implies $v=0$. Its smallest singular value is $\\sigma_{\\min}(J)=\\inf_{\\|v\\|_2=1}\\|Jv\\|_2$; thus $\\sigma_{\\min}(J)\\ge\\mu$ means $\\|Jv\\|_2\\ge\\mu\\|v\\|_2$ for every $v$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiation gives $F'(\\theta)=3\\theta^2$, so $F'(0)=0$ and the Jacobian has rank $0<1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $u^3=v^3$, then $(u-v)(u^2+uv+v^2)=0$. The second factor is $(u+v/2)^2+3v^2/4$, which is nonnegative and vanishes only when $u=v=0$. Hence either $u=v$ directly or the second factor vanishes and again $u=v=0$. Thus $F$ is injective on $\\mathbb R$, in particular on a neighborhood of $0$, so local identifiability holds despite the rank-deficient Jacobian.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero, rank-deficient, zero-curvature, or zero-residual branch is handled in 1.1, 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or index parameter has a distinct least-positive case in this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singular or degenerate branch is addressed in 1.1, 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit formulas or finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "cubic derivative at the alias point",
+          "method": "exact differentiation",
+          "input": {
+            "theta": "0"
+          },
+          "calculation": "F(theta)=theta^3, so F'(0)=3(0)^2=0.",
+          "expected": "Jacobian rank 0 although F is injective."
+        }
+      ]
+    },
+    "ex-first-order-kinetic-rates-are-confounded-by-total-decay": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-experimental-design-and-local-identifiability",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ be open, and let $\\mathcal X$ be a finite nonempty set of experimental conditions. For each $x\\in\\mathcal X$, let $q_x\\ge1$, let $F_x:\\Theta\\to\\mathbb R^{q_x}$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]], and let $W_x\\in\\mathbb R^{q_x\\times q_x}$ be a symmetric positive-definite weight matrix, meaning $z^T W_x z>0$ for every nonzero $z\\in\\mathbb R^{q_x}$.\n\nAn **approximate design** is a function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$, as in [[def-approximate-linear-model-design-and-optimality-criteria]]. Its support is $\\operatorname{supp}(\\xi)=\\{x\\in\\mathcal X:\\xi_x>0\\}$. Define the joint observation map by\n$$F_\\xi(\\theta)=(F_x(\\theta))_{x\\in\\operatorname{supp}(\\xi)},$$\nwhere the finite product is ordered by any fixed listing of $\\operatorname{supp}(\\xi)$. Its **stacked sensitivity Jacobian** at $\\theta$ is the vertical concatenation $J_\\xi(\\theta)$ of the matrices $J_x(\\theta)=DF_x(\\theta)$ for $x\\in\\operatorname{supp}(\\xi)$. The associated **weighted information matrix** is\n$$M_\\theta(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x J_x(\\theta)^T W_x J_x(\\theta).$$\nThe matrix is symmetric positive semidefinite because each summand has nonnegative quadratic form.\n\nFor a fixed design $\\xi$, the observation map is **locally identifiable at $\\theta_0\\in\\Theta$** if it is injective on some open neighborhood of $\\theta_0$ in $\\Theta$. It is **globally identifiable on $\\Theta$** if it is injective on all of $\\Theta$. A matrix $J:\\mathbb R^p\\to\\mathbb R^m$ has full column rank when $Jv=0$ implies $v=0$. Its smallest singular value is $\\sigma_{\\min}(J)=\\inf_{\\|v\\|_2=1}\\|Jv\\|_2$; thus $\\sigma_{\\min}(J)\\ge\\mu$ means $\\|Jv\\|_2\\ge\\mu\\|v\\|_2$ for every $v$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-local-information-positive-definite-iff-full-column-rank",
+          "source_section": "Statement",
+          "quote": "For the finite nonlinear observation design of [[def-nonlinear-experimental-design-and-local-identifiability]], fix $\\theta\\in\\Theta$ and an approximate design $\\xi$. The matrix $M_\\theta(\\xi)$ is positive definite, meaning symmetric with $v^TM_\\theta(\\xi)v>0$ for every nonzero $v\\in\\mathbb R^p$, if and only if the stacked support sensitivity Jacobian $J_\\xi(\\theta)$ has trivial kernel, equivalently full column rank.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\lambda=k_1+k_2$. The function $A(t)=A_0e^{-\\lambda t}$ satisfies the rate equation and initial value. If $\\widetilde A$ is any other differentiable solution, then $(e^{\\lambda t}\\widetilde A(t))'=0$; applying [F3] on every compact time interval shows this product is constant, and its value at $0$ is $A_0$. Thus the observation map is $F(k_1,k_2)=(A_0e^{-(k_1+k_2)t})_{t\\in\\mathcal T}$. Now fix any neighborhood $U$ of $(k_1,k_2)$ inside $(0,\\infty)^2$. Since $U$ is open, it contains a ball of some radius $r>0$. Choose $0<\\varepsilon<\\min\\{k_2,r/2\\}$. Then $(k_1+\\varepsilon,k_2-\\varepsilon)$ is positive, distinct from $(k_1,k_2)$, and lies in that ball. The sums of the rates agree, so these two parameters have identical observations. Every neighborhood therefore contains a distinct parameter with identical observations; the model is not locally identifiable by [F1], and hence is not globally identifiable.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $t\\in\\mathcal T$, differentiating the observation gives the row $-A_0t e^{-(k_1+k_2)t}(1,1)$. Every row is a scalar multiple of $(1,1)$, so the stacked Jacobian has rank at most one and has the nonzero kernel vector $(1,-1)$. By [F2], every supported design's information matrix is singular. This rank failure agrees with, but is weaker than, the exact aliases proved in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero, rank-deficient, zero-curvature, or zero-residual branch is handled in 1.1, 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No count or index parameter has a distinct least-positive case in this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singular or degenerate branch is addressed in 1.1, 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite selection is explicit in 1.1, 2.1; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two positive rate pairs with the same total decay",
+          "method": "exact substitution",
+          "input": {
+            "A0": "1",
+            "t": "1",
+            "pair_1": [
+              "1",
+              "2"
+            ],
+            "pair_2": [
+              "5/4",
+              "7/4"
+            ]
+          },
+          "calculation": "Both rate sums equal 3, so both outputs are exp(-3).",
+          "expected": "Distinct positive parameters give identical observations."
+        }
+      ]
+    },
+    "ex-local-identifiability-does-not-imply-global-identifiability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-experimental-design-and-local-identifiability",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ be open, and let $\\mathcal X$ be a finite nonempty set of experimental conditions. For each $x\\in\\mathcal X$, let $q_x\\ge1$, let $F_x:\\Theta\\to\\mathbb R^{q_x}$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]], and let $W_x\\in\\mathbb R^{q_x\\times q_x}$ be a symmetric positive-definite weight matrix, meaning $z^T W_x z>0$ for every nonzero $z\\in\\mathbb R^{q_x}$.\n\nAn **approximate design** is a function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$, as in [[def-approximate-linear-model-design-and-optimality-criteria]]. Its support is $\\operatorname{supp}(\\xi)=\\{x\\in\\mathcal X:\\xi_x>0\\}$. Define the joint observation map by\n$$F_\\xi(\\theta)=(F_x(\\theta))_{x\\in\\operatorname{supp}(\\xi)},$$\nwhere the finite product is ordered by any fixed listing of $\\operatorname{supp}(\\xi)$. Its **stacked sensitivity Jacobian** at $\\theta$ is the vertical concatenation $J_\\xi(\\theta)$ of the matrices $J_x(\\theta)=DF_x(\\theta)$ for $x\\in\\operatorname{supp}(\\xi)$. The associated **weighted information matrix** is\n$$M_\\theta(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x J_x(\\theta)^T W_x J_x(\\theta).$$\nThe matrix is symmetric positive semidefinite because each summand has nonnegative quadratic form.\n\nFor a fixed design $\\xi$, the observation map is **locally identifiable at $\\theta_0\\in\\Theta$** if it is injective on some open neighborhood of $\\theta_0$ in $\\Theta$. It is **globally identifiable on $\\Theta$** if it is injective on all of $\\Theta$. A matrix $J:\\mathbb R^p\\to\\mathbb R^m$ has full column rank when $Jv=0$ implies $v=0$. Its smallest singular value is $\\sigma_{\\min}(J)=\\inf_{\\|v\\|_2=1}\\|Jv\\|_2$; thus $\\sigma_{\\min}(J)\\ge\\mu$ means $\\|Jv\\|_2\\ge\\mu\\|v\\|_2$ for every $v$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-full-rank-sensitivity-implies-local-identifiability",
+          "source_section": "Statement",
+          "quote": "Let $\\Theta\\subseteq\\mathbb R^p$ be open with $p\\ge1$, let $F_\\xi:\\Theta\\to\\mathbb R^m$ be the joint observation map of [[def-nonlinear-experimental-design-and-local-identifiability]], and fix $\\theta_0\\in\\Theta$. If its Jacobian $J_\\xi(\\theta_0)$ has full column rank, then $F_\\xi$ is injective on an open neighborhood of $\\theta_0$; hence the model is locally identifiable at $\\theta_0$ for this design.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map is C1 and $F'(1)=2\\ne0$, so its one-dimensional Jacobian has full column rank. By [F2], $F$ is injective on some open neighborhood of $1$, proving local identifiability.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The distinct parameters $1$ and $-1$ both lie in $\\Theta$ and satisfy $F(1)=1=F(-1)$. Hence $F$ is not injective on all of $\\Theta$, so it is not globally identifiable by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero, rank-deficient, zero-curvature, or zero-residual branch is handled in 1.1, 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The least-size, one-dimensional, or one-step case is included in 1.1, 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate branch is asserted; the hypotheses exclude it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit formulas or finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "local derivative and global alias",
+          "method": "exact substitution",
+          "input": {
+            "theta_local": "1",
+            "theta_alias": "-1"
+          },
+          "calculation": "F'(1)=2, while F(1)=1=F(-1).",
+          "expected": "Full rank locally and a distinct global alias."
+        }
+      ]
+    },
+    "ex-solver-tolerance-can-reverse-a-design-ranking": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonlinear-experimental-design-and-local-identifiability",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ be open, and let $\\mathcal X$ be a finite nonempty set of experimental conditions. For each $x\\in\\mathcal X$, let $q_x\\ge1$, let $F_x:\\Theta\\to\\mathbb R^{q_x}$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]], and let $W_x\\in\\mathbb R^{q_x\\times q_x}$ be a symmetric positive-definite weight matrix, meaning $z^T W_x z>0$ for every nonzero $z\\in\\mathbb R^{q_x}$.\n\nAn **approximate design** is a function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$, as in [[def-approximate-linear-model-design-and-optimality-criteria]]. Its support is $\\operatorname{supp}(\\xi)=\\{x\\in\\mathcal X:\\xi_x>0\\}$. Define the joint observation map by\n$$F_\\xi(\\theta)=(F_x(\\theta))_{x\\in\\operatorname{supp}(\\xi)},$$\nwhere the finite product is ordered by any fixed listing of $\\operatorname{supp}(\\xi)$. Its **stacked sensitivity Jacobian** at $\\theta$ is the vertical concatenation $J_\\xi(\\theta)$ of the matrices $J_x(\\theta)=DF_x(\\theta)$ for $x\\in\\operatorname{supp}(\\xi)$. The associated **weighted information matrix** is\n$$M_\\theta(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x J_x(\\theta)^T W_x J_x(\\theta).$$\nThe matrix is symmetric positive semidefinite because each summand has nonnegative quadratic form.\n\nFor a fixed design $\\xi$, the observation map is **locally identifiable at $\\theta_0\\in\\Theta$** if it is injective on some open neighborhood of $\\theta_0$ in $\\Theta$. It is **globally identifiable on $\\Theta$** if it is injective on all of $\\Theta$. A matrix $J:\\mathbb R^p\\to\\mathbb R^m$ has full column rank when $Jv=0$ implies $v=0$. Its smallest singular value is $\\sigma_{\\min}(J)=\\inf_{\\|v\\|_2=1}\\|Jv\\|_2$; thus $\\sigma_{\\min}(J)\\ge\\mu$ means $\\|Jv\\|_2\\ge\\mu\\|v\\|_2$ for every $v$.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-computed-sensitivity-singular-value-perturbation",
+          "source_section": "Statement",
+          "quote": "Let $J,J_h\\in\\mathbb R^{m\\times n}$, let $r=\\min\\{m,n\\}$, and let $\\sigma_1(A)\\ge\\cdots\\ge\\sigma_r(A)\\ge0$ denote the singular values of a real matrix $A$. Then for every $1\\le i\\le r$,\n$$|\\sigma_i(J_h)-\\sigma_i(J)|\\le\\|J_h-J\\|_2,$$\nwhere $\\|\\cdot\\|_2$ is the Euclidean operator norm.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-information-matrix-perturbation-bound",
+          "source_section": "Statement",
+          "quote": "Use the finite observation designs of [[def-nonlinear-experimental-design-and-local-identifiability]]. Suppose uniformly over $x\\in\\mathcal X$ that $\\|J_x\\|_2\\le K$, $\\|J_{h,x}-J_x\\|_2\\le\\eta$, and $\\|W_x\\|_2\\le w$, where $K,\\eta,w\\ge0$. For every approximate design $\\xi$,\n$$\\|M_h(\\xi)-M(\\xi)\\|_2\\le\\delta:=w(2K\\eta+\\eta^2),$$\nwhere $M_h(\\xi)=\\sum_x\\xi_xJ_{h,x}^TW_xJ_{h,x}$. If $M(\\xi)$ satisfies $v^TM(\\xi)v\\ge\\alpha\\|v\\|_2^2$ for every $v$ with some $\\alpha>\\delta$, then\n$$v^TM_h(\\xi)v\\ge(\\alpha-\\delta)\\|v\\|_2^2$$\nfor every $v$, so the computed information matrix remains positive definite.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-logdet-information-perturbation-bound",
+          "source_section": "Statement",
+          "quote": "Let $p\\ge1$ and let $A,B\\in\\mathbb R^{p\\times p}$ be symmetric. Put $E=B-A$ and $A_t=(1-t)A+tB$ for $0\\le t\\le1$. Suppose there is $\\alpha>0$ such that $v^T A_t v\\ge\\alpha\\|v\\|_2^2$ for every $v\\in\\mathbb R^p$ and every $t\\in[0,1]$. Then $A_t$ is positive definite and\n$$|\\log\\det B-\\log\\det A|\\le\\frac{p\\|E\\|_2}{\\alpha}.$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-uniform-sensitivity-error-controls-design-gap",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal X$ be a finite candidate set and let $\\Xi$ be a nonempty compact metric space of approximate designs on $\\mathcal X$. For each $x$, let $J_x$ and $J_{h,x}$ be exact and computed sensitivities and let $W_x$ be symmetric positive definite. Suppose uniformly over $x\\in\\mathcal X$ that $\\|J_x\\|_2\\le K$, $\\|J_{h,x}-J_x\\|_2\\le\\eta$, and $\\|W_x\\|_2\\le w$, where $K,\\eta,w\\ge0$. Put $\\delta=w(2K\\eta+\\eta^2)$. Suppose the criteria $\\Phi(\\xi)=\\log\\det M(\\xi)$ and $\\Phi_h(\\xi)=\\log\\det M_h(\\xi)$ are continuous on $\\Xi$, and for some $\\alpha>0$ every matrix on every segment between $M(\\xi)$ and $M_h(\\xi)$ satisfies $v^TAv\\ge\\alpha\\|v\\|_2^2$. If $\\xi^*$ maximizes $\\Phi$ and $\\widehat\\xi$ is a $\\tau$-approximate maximizer of $\\Phi_h$, meaning $\\Phi_h(\\widehat\\xi)\\ge\\max_{\\xi\\in\\Xi}\\Phi_h(\\xi)-\\tau$ with $\\tau\\ge0$, then\n$$\\Phi(\\xi^*)-\\Phi(\\widehat\\xi)\\le\\tau+\\frac{2p\\delta}{\\alpha}.$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The exact information values are $M(d_1)=(101/100)^2=10201/10000$ and $M(d_2)=1$, so the true log-determinant criterion ranks $d_1$ above $d_2$. The computed values are $M_h(d_1)=(99/100)^2=9801/10000$ and $M_h(d_2)=(51/50)^2=10404/10000$, so the computed criterion ranks $d_2$ above $d_1$ by strict monotonicity of $\\log$ from [F6].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The two Jacobian errors have absolute value $1/50$, and for one-dimensional matrices this is the singular-value error, consistent with [F2]. Here $K=101/100$, $\\eta=1/50$, and $w=1$, so [F3] gives the uniform bound $\\delta=2(101/100)(1/50)+(1/50)^2=51/1250$. For any approximate design $\\xi=(\\lambda,1-\\lambda)$ with $0\\le\\lambda\\le1$, $M(\\xi)$ is a convex combination of $10201/10000$ and $1$, hence is at least $1$; $M_h(\\xi)$ is a convex combination of $9801/10000$ and $10404/10000$, hence is at least $\\alpha=9801/10000$. Their segment also has this lower bound.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4] each criterion error is at most $\\delta/\\alpha=(51/1250)/(9801/10000)=408/9801$. The computed maximizer is $d_2$, so [F5] bounds its true log-determinant gap from the true maximizer $d_1$ by $816/9801$. Directly, that gap is $\\log(10201/10000)\\le201/10000$ by the integral in [F6], and $201/10000<816/9801$ by cross-multiplication. Thus the ranking flip is consistent with the stated uniform error guarantee.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero, rank-deficient, zero-curvature, or zero-residual branch is handled in 1.1, 1.2, 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The least-size, one-dimensional, or one-step case is included in 1.1, 1.2, 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singular or degenerate branch is addressed in 1.1, 1.2, 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit formulas or finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact and computed scalar design values",
+          "method": "exact rational arithmetic",
+          "input": {
+            "J": [
+              "101/100",
+              "1"
+            ],
+            "J_h": [
+              "99/100",
+              "51/50"
+            ],
+            "eta": "1/50",
+            "alpha": "9801/10000"
+          },
+          "calculation": "True information is [10201/10000,1]; computed information is [9801/10000,10404/10000]; delta=51/1250.",
+          "expected": "The ranking reverses and every approximate design has eigenvalue floor 9801/10000."
+        }
+      ]
+    },
+    "ex-endpoint-sensors-give-a-d-optimal-linear-time-design": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-approximate-linear-model-design-and-optimality-criteria",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty candidate set, let $p\\ge1$, and let $f:\\mathcal X\\to\\mathbb R^p$ be the declared regression-vector map. Work under the stated linear mean model $Y=f(x)^{\\mathsf T}\\beta+\\epsilon$, with mean-zero independent run errors of common variance $\\sigma^2>0$. These are modeling assumptions, not claims about an experiment's empirical adequacy.\n\nAn **approximate design** is a weight function $\\xi:\\mathcal X\\to[0,1]$ with $\\sum_{x\\in\\mathcal X}\\xi_x=1$. Its support is $\\operatorname{supp}(\\xi)=\\{x:\\xi_x>0\\}$ and its information matrix is\n$$M(\\xi)=\\sum_{x\\in\\mathcal X}\\xi_x f(x)f(x)^{\\mathsf T}.$$\nThis matrix is symmetric and positive semidefinite. A design is **nonsingular** when $M(\\xi)$ is positive definite. For a singular design, the page's estimability convention is that a specified coefficient contrast $c^{\\mathsf T}\\beta$ is estimable exactly when $c\\in\\operatorname{span}\\{f(x):x\\in\\operatorname{supp}(\\xi)\\}$; the inverse-matrix criteria below are defined only for nonsingular designs.\n\nFor nonsingular designs on this fixed $f$ and $\\mathcal X$, **D-optimality** maximizes $\\log\\det M(\\xi)$, **A-optimality** minimizes $\\operatorname{tr}(M(\\xi)^{-1})$, **E-optimality** maximizes $\\lambda_{\\min}(M(\\xi))$, and **$c$-optimality** for a fixed $c\\in\\mathbb R^p$ minimizes $c^{\\mathsf T}M(\\xi)^{-1}c$; $c=0$ gives a trivial tie. The smallest eigenvalue is real because $M(\\xi)$ is real symmetric ([[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]]). These are different model- and candidate-dependent objectives; none is a universal design ranking.\n\nAn **exact $n$-run design**, for an integer $n\\ge1$, has weights $\\xi_x=n_x/n$ with nonnegative integer counts $n_x$ summing to $n$; optimizing over those integer allocations is a separate finite problem.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-budget-multiplicative-d-optimal-design",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge1$, let $\\mathcal X$ be a finite nonempty candidate set, and let $f_x\\in\\mathbb R^p$ be the feature vector for each $x\\in\\mathcal X$. An approximate design $\\xi$ and information matrix $M(\\xi)=\\sum_x\\xi_xf_xf_x^T$ use the convention of [[def-approximate-linear-model-design-and-optimality-criteria]]. The same vectors may be scalar-observation sensitivities at a fixed parameter, as in [[def-nonlinear-experimental-design-and-local-identifiability]], with a scalar precision absorbed into $f_x$. The procedure uses exact arithmetic.\n\n**Input:** A finite nonempty $\\mathcal X$, $p\\ge1$, its feature vectors $(f_x)_{x\\in\\mathcal X}$, an approximate initial design $\\xi^{(0)}$, and a finite nonnegative integer budget $N$ counting weight updates.\n\n**Procedure:** Form $M_0=M(\\xi^{(0)})$. If $M_0$ is not positive definite, return $(\\xi^{(0)},\\text{undefined violation},\\text{invalid initial design})$. Otherwise, for $k=0,1,\\ldots,N$, with current $\\xi^{(k)}$ and $M_k=M(\\xi^{(k)})$, compute\n$$s_x^{(k)}=f_x^TM_k^{-1}f_x\\quad(x\\in\\mathcal X),\\qquad v_k=\\max_{x\\in\\mathcal X}s_x^{(k)}-p.$$\nIf $v_k=0$, return $(\\xi^{(k)},v_k,\\text{equivalence-certified})$. If $k=N$, return $(\\xi^{(k)},v_k,\\text{budget-exhausted})$. Otherwise set\n$$\\xi_x^{(k+1)}=\\xi_x^{(k)}\\frac{s_x^{(k)}}p\\quad(x\\in\\mathcal X),$$\nform $M_{k+1}=\\sum_x\\xi_x^{(k+1)}f_xf_x^T$, and continue. The proved update invariant keeps every later $M_k$ positive definite.\n\nThe budget guarantees at most $N$ updates and $N+1$ sensitivity scans. A nonzero returned violation is reported as-is; it is not an exact D-optimality certificate. The exact integer allocation problem remains separate from this approximate-weight procedure.\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-multiplicative-design-update-well-defined-and-terminates",
+          "source_section": "Statement",
+          "quote": "For the algorithm [[alg-finite-budget-multiplicative-d-optimal-design]], suppose the initial weights form an approximate design and its information matrix is positive definite. Then every update preserves nonnegative weights summing to one and positive definiteness of the information matrix. For every finite budget $N$, the procedure returns after at most $N$ updates and at most $N+1$ sensitivity scans.\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-equivalence-violation-bounds-d-optimal-design-gap",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal X$ be a finite nonempty candidate set, let $p\\ge1$, and let $\\xi$ be any returned nonsingular approximate design from [[alg-finite-budget-multiplicative-d-optimal-design]]. Put $M=M(\\xi)$ and\n$$s_x=f_x^TM^{-1}f_x,\\qquad v=\\max_{x\\in\\mathcal X}s_x-p.$$\nThen $v\\ge0$, every nonsingular approximate competitor $\\eta$ satisfies\n$$\\log\\det M(\\eta)-\\log\\det M(\\xi)\\le v,$$\nand $v=0$ if and only if $\\xi$ is D-optimal among nonsingular approximate designs.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For an arbitrary approximate design $\\xi$, write $\\mu=\\sum_t\\xi_tt$ and $\\nu=\\sum_t\\xi_tt^2$. Direct multiplication gives $M(\\xi)=\\begin{bmatrix}1&\\mu\\\\\\mu&\\nu\\end{bmatrix}$ and $\\det M(\\xi)=\\nu-\\mu^2$. Since $0\\le t\\le2$, $(t-1)^2\\le1$, so $\\nu-\\mu^2=\\sum_t\\xi_t(t-1)^2-(\\mu-1)^2\\le1$. The equal endpoint design $\\xi^*=(1/2,0,1/2)$ has $M(\\xi^*)=\\begin{bmatrix}1&1\\\\1&2\\end{bmatrix}$ and determinant $1$, so it maximizes the determinant and hence $\\log\\det M$ among nonsingular designs because $\\log$ is strictly increasing by [F5].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $\\xi^{(0)}$, $M_0=\\begin{bmatrix}1&1\\\\1&5/3\\end{bmatrix}$ and $M_0^{-1}=\\begin{bmatrix}5/2&-3/2\\\\-3/2&3/2\\end{bmatrix}$. Thus $(s_0,s_1,s_2)=(5/2,1,5/2)$ and $v_0=1/2$. One update gives $\\xi^{(1)}=(5/12,1/6,5/12)$; the update is defined by [F2] and remains nonsingular by [F3].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The updated matrix is $M_1=\\begin{bmatrix}1&1\\\\1&11/6\\end{bmatrix}$, with inverse $M_1^{-1}=\\begin{bmatrix}11/5&-6/5\\\\-6/5&6/5\\end{bmatrix}$. Therefore $(s_0,s_1,s_2)=(11/5,1,11/5)$ and $v_1=11/5-2=1/5$. With budget $N=1$, the procedure returns the updated design with status budget-exhausted and violation $1/5$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the endpoint design $\\xi^*$, $M(\\xi^*)^{-1}=\\begin{bmatrix}2&-1\\\\-1&1\\end{bmatrix}$, so its sensitivities at $0,1,2$ are $2,1,2$ and its violation is zero. By [F4] this is an exact D-optimality certificate; [F4] also bounds the log-determinant gap of the one-update output by $1/5$. The weights are approximate-design weights; integer run counts are a separate problem by [F1].",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes a nonempty design, a positive-dimensional matrix, or a nonempty domain and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero, rank-deficient, zero-curvature, or zero-residual branch is handled in 1.1, 1.2, 2.1, 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The least-size, one-dimensional, or one-step case is included in 1.1, 1.2, 2.1, 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singular or degenerate branch is addressed in 1.1, 1.2, 2.1, 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval endpoint cases are included in 1.1, 1.2, 2.1, 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses explicit formulas or finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way or definitional and contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "three-candidate intercept-slope design",
+          "method": "exact rational matrix calculation",
+          "input": {
+            "feature_vectors": [
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "initial_weights": [
+              "1/3",
+              "1/3",
+              "1/3"
+            ],
+            "budget": "1"
+          },
+          "calculation": "Uniform M0=[[1,1],[1,5/3]], s=(5/2,1,5/2), xi1=(5/12,1/6,5/12), v1=1/5; endpoints have determinant 1 and zero equivalence violation.",
+          "expected": "The endpoint design is D-optimal and the one-update run reports budget-exhausted with violation 1/5."
+        }
+      ]
+    }
+  }
+}

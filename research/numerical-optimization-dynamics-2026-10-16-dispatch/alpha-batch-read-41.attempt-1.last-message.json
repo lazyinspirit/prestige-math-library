@@ -1,0 +1,361 @@
+{
+  "group": "y",
+  "batches": ["41"],
+  "pages_read": [
+    "coordinate-and-block-descent-methods",
+    "coordinate-and-block-descent-methods-examples"
+  ],
+  "items_read": [
+    "alg-randomized-coordinate-gradient-descent",
+    "lem-coordinate-block-smoothness-descent-model",
+    "lem-na-coordinate-soft-threshold-minimizer",
+    "alg-cyclic-exact-block-minimization",
+    "thm-randomized-coordinate-gradient-descent-rates",
+    "lem-cyclic-block-minimizer-value-continuity",
+    "cex-cyclic-block-descent-may-cycle-outside-hypotheses",
+    "lem-coordinate-lasso-soft-threshold-update",
+    "lem-coordinate-separable-penalty-is-proper-closed-convex",
+    "alg-randomized-coordinate-proximal-descent",
+    "lem-coordinatewise-minimum-implies-composite-stationarity",
+    "lem-randomized-coordinate-prox-subproblem-well-defined",
+    "cex-composite-coordinate-proximal-rate-needs-penalty-error",
+    "cex-composite-strong-convexity-alone-does-not-give-coordinate-factor",
+    "thm-cyclic-block-descent-stationarity-and-convergence",
+    "thm-randomized-coordinate-proximal-strongly-convex-contraction",
+    "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction",
+    "ex-nonunique-lasso-coefficients-unique-fitted-value",
+    "ex-randomized-versus-cyclic-rank-one-quadratic",
+    "ex-two-block-simulation-calibration",
+    "ex-correlated-design-lasso-coordinate-cycle",
+    "ex-zero-feature-column-lasso-coordinate"
+  ],
+  "conventions": [
+    {
+      "convention": "Blocks partition labels 1 through d into nonempty sets; label j denotes standard coordinate j−1. Block gradient entries are ordered increasingly.",
+      "fixed_by": "alg-randomized-coordinate-gradient-descent",
+      "matters_for": [
+        "thm-randomized-coordinate-gradient-descent-rates",
+        "alg-randomized-coordinate-proximal-descent",
+        "lem-coordinatewise-minimum-implies-composite-stationarity"
+      ]
+    },
+    {
+      "convention": "L_i > 0 bounds variation of the block gradient when only that block changes; model majorizers satisfy M_i ≥ L_i.",
+      "fixed_by": "alg-randomized-coordinate-gradient-descent",
+      "matters_for": [
+        "lem-coordinate-block-smoothness-descent-model",
+        "thm-randomized-coordinate-gradient-descent-rates",
+        "lem-randomized-coordinate-prox-subproblem-well-defined",
+        "thm-randomized-coordinate-proximal-strongly-convex-contraction",
+        "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction"
+      ]
+    },
+    {
+      "convention": "Finite-horizon expectations are finite weighted sums over independent block-index histories. Rate statements require the claimed updates to execute without early stopping; the composite-curvature theorem explicitly requires accepted certificates at every history, without conditioning on success.",
+      "fixed_by": "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction",
+      "matters_for": [
+        "thm-randomized-coordinate-gradient-descent-rates",
+        "thm-randomized-coordinate-proximal-strongly-convex-contraction",
+        "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction"
+      ]
+    },
+    {
+      "convention": "Closed convex penalties use closed epigraphs; finite separable sums are proved closed by neighborhood arguments rather than an unstated sequential-closure equivalence.",
+      "fixed_by": "lem-coordinate-separable-penalty-is-proper-closed-convex",
+      "matters_for": [
+        "lem-cyclic-block-minimizer-value-continuity",
+        "thm-cyclic-block-descent-stationarity-and-convergence",
+        "thm-randomized-coordinate-proximal-strongly-convex-contraction",
+        "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction"
+      ]
+    },
+    {
+      "convention": "Certified inexact updates require a valid nonnegative model-value gap bounded by the prescribed tolerance; an unavailable or invalid certificate returns inner-solve-failure.",
+      "fixed_by": "alg-randomized-coordinate-proximal-descent",
+      "matters_for": [
+        "lem-randomized-coordinate-prox-subproblem-well-defined",
+        "thm-randomized-coordinate-proximal-strongly-convex-contraction",
+        "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction"
+      ]
+    },
+    {
+      "convention": "The sharper factor 1−μ/(nL_max) assumes strong convexity of f itself. Strong convexity of F alone gives the separately proved factor 1−μ/[n(L_max+μ)], without requiring μ ≤ L_max.",
+      "fixed_by": "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction",
+      "matters_for": [
+        "thm-randomized-coordinate-proximal-strongly-convex-contraction",
+        "cex-composite-strong-convexity-alone-does-not-give-coordinate-factor",
+        "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction"
+      ]
+    },
+    {
+      "convention": "Cyclic minimization permits arbitrary minimizing selections, but the convergence theorem assumes unique continuous block-minimizer maps, a convex separable composite, and a compact initial sublevel.",
+      "fixed_by": "thm-cyclic-block-descent-stationarity-and-convergence",
+      "matters_for": [
+        "cex-cyclic-block-descent-may-cycle-outside-hypotheses",
+        "thm-cyclic-block-descent-stationarity-and-convergence"
+      ]
+    },
+    {
+      "convention": "The Lasso objective is n⁻¹‖y−Xθ‖²+2τ‖θ‖₁ with τ > 0. Nonzero-column updates threshold at nτ; zero columns have the separate unique update zero.",
+      "fixed_by": "lem-coordinate-lasso-soft-threshold-update",
+      "matters_for": [
+        "ex-nonunique-lasso-coefficients-unique-fitted-value",
+        "ex-correlated-design-lasso-coordinate-cycle",
+        "ex-zero-feature-column-lasso-coordinate"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-coordinate-block-smoothness-descent-model",
+      "statement": "Let f: R^d → R be continuously differentiable, let B_i be one block of a finite coordinate partition, and let U_i be its coordinate insertion map. Suppose L_i > 0 satisfies ‖∇_i f(x+U_i h)−∇_i f(x)‖₂ ≤ L_i‖h‖₂ for every x,h. Then f(x+U_i h) ≤ f(x)+⟨∇_i f(x),h⟩+(L_i/2)‖h‖₂².",
+      "used_by": [
+        "thm-randomized-coordinate-gradient-descent-rates",
+        "alg-randomized-coordinate-proximal-descent",
+        "lem-randomized-coordinate-prox-subproblem-well-defined",
+        "thm-randomized-coordinate-proximal-strongly-convex-contraction",
+        "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction"
+      ]
+    },
+    {
+      "id": "lem-randomized-coordinate-prox-subproblem-well-defined",
+      "statement": "For the model and inputs of alg-randomized-coordinate-proximal-descent, every selected exact block subproblem has a unique minimizer. If the update is exact, the objective does not increase. If its accepted inner point has certified model gap at most ε_k, then the new objective is at most the old objective plus ε_k.",
+      "used_by": [
+        "alg-randomized-coordinate-proximal-descent",
+        "thm-randomized-coordinate-proximal-strongly-convex-contraction",
+        "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction"
+      ]
+    },
+    {
+      "id": "lem-coordinate-separable-penalty-is-proper-closed-convex",
+      "statement": "Let n ≥ 1 be finite, let d_i ≥ 1, and let each g_i: R^{d_i} → (−∞,+∞] be proper, closed, and convex in the epigraph convention. On the product define g(x)=Σ_i g_i(x_i). Then g is proper, closed, and convex.",
+      "used_by": [
+        "thm-randomized-coordinate-proximal-strongly-convex-contraction",
+        "thm-randomized-coordinate-proximal-composite-strong-convexity-contraction"
+      ]
+    },
+    {
+      "id": "lem-coordinatewise-minimum-implies-composite-stationarity",
+      "statement": "For differentiable convex f and a proper closed convex separable g=Σ_i g_i with proper closed convex block terms, if F(x)<+∞ and x globally minimizes every block slice of F=f+g, then −∇_i f(x) ∈ ∂g_i(x_{B_i}) for every i, −∇f(x) ∈ ∂g(x), and x is a global minimizer of F.",
+      "used_by": [
+        "thm-cyclic-block-descent-stationarity-and-convergence"
+      ]
+    },
+    {
+      "id": "lem-cyclic-block-minimizer-value-continuity",
+      "statement": "Fix a block i and define m_i(a)=min_u{f(a,u)+g_i(u)}, where f is finite and continuous and g_i is proper closed convex. Suppose the minimizer map T_i(a) exists, is unique, and is continuous on the parameter set in question. Then m_i is continuous there.",
+      "used_by": [
+        "thm-cyclic-block-descent-stationarity-and-convergence"
+      ]
+    },
+    {
+      "id": "lem-na-coordinate-soft-threshold-minimizer",
+      "statement": "Let a > 0, b ∈ R, and τ > 0. The scalar convex function q(u)=(a/2)u²−bu+τ|u| has the unique global minimizer u*=S_τ(b)/a. At b=τ and b=−τ, the unique minimizer is 0.",
+      "used_by": [
+        "lem-coordinate-lasso-soft-threshold-update",
+        "cex-composite-coordinate-proximal-rate-needs-penalty-error",
+        "ex-nonunique-lasso-coefficients-unique-fitted-value"
+      ]
+    },
+    {
+      "id": "lem-coordinate-lasso-soft-threshold-update",
+      "statement": "For the stated positive-penalty Lasso objective, fixing the other coefficients and r_j=y−Σ_{ℓ≠j}X_ℓθ_ℓ, a nonzero column has unique minimizing coordinate S_{nτ}(X_j^T r_j)/‖X_j‖₂². A zero column has unique minimizing coordinate zero.",
+      "used_by": [
+        "ex-correlated-design-lasso-coordinate-cycle",
+        "ex-zero-feature-column-lasso-coordinate"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Euclidean block norms, inner products, coordinate indexing, quadratic expansions, and norm splitting.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "The C¹ convention supplies total differentiability and continuous derivative entries.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Gradient entries and their standard-coordinate indexing.",
+      "opened": true
+    },
+    {
+      "id": "thm-total-derivative-computes-directional-and-partial-derivatives",
+      "used_for": "Existence and identification of partial derivatives from total differentiability.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Finite summation and zero/successor conventions in the descent-model proof.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Mean-value witnesses on each subinterval in the block descent-model proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiating f along a block line.",
+      "opened": true
+    },
+    {
+      "id": "thm-gradient-represents-directional-derivatives-and-steepest-ascent",
+      "used_for": "Representing line derivatives by gradient inner products, including the coordinatewise-optimality argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+      "used_for": "Continuity of the smooth term and of its restriction to block lines.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Gradient-gap estimates, norm inequalities, positive definiteness, and continuity of distances.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Finite constructions, triangular sums, and iteration of scalar rate recurrences.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Block splitting, telescoping, weighted averaging, and finite-history expectation algebra.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-choice",
+      "used_for": "Selecting the finite list of mean-value witnesses without arbitrary choice.",
+      "opened": true
+    },
+    {
+      "id": "cor-archimedean-reciprocal",
+      "used_for": "Removing the 1/N error in the block descent-model proof.",
+      "opened": true
+    },
+    {
+      "id": "def-soft-thresholding-function",
+      "used_for": "The scalar soft-threshold formula, including equality at both threshold endpoints.",
+      "opened": true
+    },
+    {
+      "id": "def-abs-value",
+      "used_for": "Absolute-value penalties and their scalar cases.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-abs-value",
+      "used_for": "Absolute-value positivity, homogeneity, and the unique zero.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-triangle-inequality",
+      "used_for": "Convexity of absolute-value penalties and the nonunique-Lasso witness.",
+      "opened": true
+    },
+    {
+      "id": "def-extended-reals",
+      "used_for": "Extended-real objective values and finite-domain indicator witnesses.",
+      "opened": true
+    },
+    {
+      "id": "thm-differentiable-convex-functions-and-gradient-inequality",
+      "used_for": "Supporting gradient inequalities in the smooth rate, coordinatewise optimality, and composite-curvature rate proofs.",
+      "opened": true
+    },
+    {
+      "id": "thm-fermat-for-euclidean-local-extrema",
+      "used_for": "Zero gradient at unconstrained minimizers, including the zero-radius and zero-gap rate cases.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-set-has-max",
+      "used_for": "A positive minimum among the finite distances used to prove the cycling domain closed.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-topology",
+      "used_for": "Closedness through open complements in the cycling witness.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-ball",
+      "used_for": "Positive-radius neighborhoods in the cycling witness.",
+      "opened": true
+    },
+    {
+      "id": "def-lasso-estimator",
+      "used_for": "The exact objective normalization, positive penalty, and absence of a full-rank requirement.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "Differentiability convention underlying the coordinatewise-minimum proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-semicontinuous-extreme-value-theorem",
+      "used_for": "Attainment and lower boundedness of real-valued lower-semicontinuous restrictions to nonempty compact sublevels.",
+      "opened": true
+    },
+    {
+      "id": "thm-compact-implies-the-other-compactness-forms",
+      "used_for": "Choice-free extraction of convergent subsequences in the cyclic convergence proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-infimum-property",
+      "used_for": "Existence of the finite lower limit of decreasing cyclic objective values.",
+      "opened": true
+    },
+    {
+      "id": "lem-inf-epsilon",
+      "used_for": "Approximating the infimum to prove convergence of cyclic objective values.",
+      "opened": true
+    },
+    {
+      "id": "thm-compact-subset-is-closed-and-bounded",
+      "used_for": "Keeping ambient accumulation points inside the compact initial sublevel.",
+      "opened": true
+    },
+    {
+      "id": "thm-recursion",
+      "used_for": "Constructing least-index subsequences in the cyclic convergence argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-well-ordering-principle",
+      "used_for": "Canonical least admissible indices without countable choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of closed bounded positive-dimensional sublevels in the contraction proofs.",
+      "opened": true
+    },
+    {
+      "id": "lem-lasso-objective-has-minimizer",
+      "used_for": "Nonemptiness of positive-penalty Lasso minimization problems without rank assumptions.",
+      "opened": true
+    },
+    {
+      "id": "ex-orthogonal-design-lasso-is-soft-thresholding",
+      "used_for": "The published example reused on the assigned examples page; its normalization agrees with the local coordinate formula.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "coordinate-and-block-descent-methods",
+      "to": "proximal-gradient-and-accelerated-composite-optimization",
+      "faithful": true,
+      "note": "Checked the supplier page and the actual closed-epigraph, epsilon-subdifferential, proximal-map, proximal existence/resolvent, affine-minorant, and continuous-summand suppliers. The coordinate consumers preserve their hypotheses and proximal scaling. Their model-value-gap certificates are used in locally proved coordinate recurrences; they do not claim the supplier page's eta-subgradient-based inexact FISTA results from value gaps alone. The supplier page makes no reciprocal assertion that strengthens the coordinate results."
+    }
+  ]
+}

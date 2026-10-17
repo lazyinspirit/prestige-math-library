@@ -1,0 +1,129 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "50",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+      "model": "gpt-6-luna",
+      "context_sha256": "a31112ae8f105c045c9773eba5c97b8978471da57142fc44b81a4033941b3a68",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F11 incorrectly supplies a coordinate-0 unit vector for q=0, whereas the supplier Statement explicitly gives the empty basis of C^0. This does not invalidate the theorem: step 1.2 uses finite dimensionality in dimensions m and m+1, step 2.1 uses e_0 in dimension m+1, and step 4.1 uses e_{j_a-1} in dimension m, all with m>=1. Added q>=1 to the unit-vector clause and indexed the basis by i<q; repaired its contract mirror.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-ilu0-tridiagonal-factorization",
+      "model": "gpt-6-luna",
+      "context_sha256": "fbc9d12e4cb9063295e4435f506c7e16792a1c2a331f2fb11afb7a9b61f51ec7",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 falsely says row pointers and column indices alone determine numerical entries. For example, canonical 1-by-1 records r=(0,1), c=(0), with values (1) or (2) represent different matrices. Corrected F2 to distinguish stored positions from their values and to specify that column uniqueness is within each row. Nonfatal because step 1.1 only needs the valid canonical pattern, and steps 2.1-4.1 use the displayed numerical entries correctly. Updated the contract mirror and corrected its stale references to nonexistent step 1.3 to actual step 3.1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+      "disposition": "repaired",
+      "post_sha256": "da544917cf15110f4e7cd1a0b4d0c3ef480803c8d6a79b0249c545056cc7a0a8",
+      "review_context_sha256": "2cff99dd90a6e3a96a9690414fc19a4677fe8b7f8a9ead87a947ebec0f3a9473",
+      "reason": "Reviewed the exact algorithm, all nine supplier interfaces, contract and owning page. Linear-first complex Gram-Schmidt preserves orthonormality; positive subdiagonal entries give a zero Hessenberg kernel by descending rows, including m=1. Column assembly and isometry yield the physical residual identity, and finite coordinate-vector accumulation identifies range(Z_m) with the stated span without arbitrary choice. The corrected F11 supplies every actual unit vector used. The Statement, proof steps and page interface are unchanged; this is the repair author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-ilu0-tridiagonal-factorization",
+      "disposition": "repaired",
+      "post_sha256": "7c77c69dd8e9fcba27d692911260473eeda4ff3aa10c33ef48068caddefc512f",
+      "review_context_sha256": "de8f4af66ae195b5d5eac62c047b553ec426a55e69113ed207f1ffab337d1d9e",
+      "reason": "Reviewed the full fixed-pattern algorithm, CSR definition, matrix-product and rational-field interfaces, owning page and contract. The seven nonzero input slots are canonical and sorted with all diagonals present. Natural-order elimination yields L_21=-1/4, L_32=-4/15 and pivots 4,15/4,56/15, all nonzero. Direct multiplication gives rows (4,-1,0), (-1,4,-1), (0,-1,4), so the claimed LU=A holds for this example. The corrected F2 accurately describes both positions and values; proof steps and Example are unchanged. This is the repair author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "status": "fixed",
+      "reason": "F11 incorrectly supplies a coordinate-0 unit vector for q=0, whereas the supplier Statement explicitly gives the empty basis of C^0. This does not invalidate the theorem: step 1.2 uses finite dimensionality in dimensions m and m+1, step 2.1 uses e_0 in dimension m+1, and step 4.1 uses e_{j_a-1} in dimension m, all with m>=1. Added q>=1 to the unit-vector clause and indexed the basis by i<q; repaired its contract mirror."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-ilu0-tridiagonal-factorization",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "status": "fixed",
+      "reason": "F2 falsely says row pointers and column indices alone determine numerical entries. For example, canonical 1-by-1 records r=(0,1), c=(0), with values (1) or (2) represent different matrices. Corrected F2 to distinguish stored positions from their values and to specify that column uniqueness is within each row. Nonfatal because step 1.1 only needs the valid canonical pattern, and steps 2.1-4.1 use the displayed numerical entries correctly. Updated the contract mirror and corrected its stale references to nonexistent step 1.3 to actual step 3.1."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "completed": [
+      "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+      "ex-ilu0-tridiagonal-factorization"
+    ],
+    "pending": [],
+    "evidence": [
+      "items/lem-standard-basis-of-f-n.md: Statement clauses 2, 4 and 5; e_i is defined only for i<n.",
+      "items/alg-flexible-gmres-variable-right-preconditioning.md: Definition requires n,m>=1 and returns before zero-norm normalization.",
+      "items/def-csr-matrix-with-stored-entry-semantics.md: Definition gives A_ij as the row sum of indicator(c_t=j) times v_t; canonical means no row repeats a column and no stored value is zero.",
+      "items/alg-ilu0-fixed-pattern-factorization.md: Definition copies input values to W, divides only by checked pivots, and updates only matching pattern slots."
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span.md",
+        "exit_code": 0,
+        "result": "1 file, no errors"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-50.proof-contracts.json --strict --items thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-ilu0-tridiagonal-factorization.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-ilu0-tridiagonal-factorization.md",
+        "exit_code": 0,
+        "result": "1 file, no errors"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-50.proof-contracts.json --strict --items ex-ilu0-tridiagonal-factorization",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 checked"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span.md items/ex-ilu0-tridiagonal-factorization.md",
+        "exit_code": 0,
+        "result": "2 items, 10 steps, 0 defects"
+      }
+    ],
+    "published_findings": [],
+    "interface_changes": "Only Facts & Assumptions paragraphs changed in the assigned items. The original Statement of the theorem and Example of the example, and both proof sections, are unchanged. No new prerequisites or interfaces were introduced, so downstream is empty.",
+    "metadata_repairs": "Updated only the assigned F11 and F2 required_hypotheses mirrors and three stale ILU contract step-reference fields under the shared-write lock. Retained prior review records without claiming new independent acceptance.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this report; no judges, stamps, certification, or round transitions were launched."
+  }
+}

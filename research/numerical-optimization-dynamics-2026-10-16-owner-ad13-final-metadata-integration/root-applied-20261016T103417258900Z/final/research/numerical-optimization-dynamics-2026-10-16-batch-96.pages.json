@@ -1,0 +1,366 @@
+[
+  {
+    "order": 2476,
+    "id": "discrete-continuous-and-pde-adjoint-sensitivities",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Discrete continuous and pde adjoint sensitivities",
+    "companion": "discrete-continuous-and-pde-adjoint-sensitivities-examples",
+    "requires": [
+      "data-assimilation-variational-and-ensemble-methods",
+      "automatic-differentiation-and-computational-graphs",
+      "nonlinear-boundary-value-solvers",
+      "global-ode-and-density-error",
+      "runge-kutta-methods-and-order",
+      "ceas-lemma-and-aubin-nitsche-error-estimates",
+      "parabolic-finite-element-methods",
+      "implicit-stiff-time-stepping-and-algebraic-error",
+      "variational-crimes-and-strang-lemmas"
+    ],
+    "items": [
+      {
+        "id": "def-parameterized-finite-state-step-objective",
+        "kind": "definition",
+        "title": "Finite parameterized state-step graphs and objectives",
+        "deps": [
+          "def-c-one-map-and-local-inverse",
+          "def-total-derivative-in-euclidean-space"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-parameterized-elliptic-variational-problem",
+        "kind": "definition",
+        "title": "Parameter-dependent coercive elliptic variational states and objectives",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-hilbert-space"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-parameterized-parabolic-variational-problem",
+        "kind": "definition",
+        "title": "Parameter-dependent parabolic variational states and objectives",
+        "deps": [
+          "def-parabolic-evolution-triple-and-energy-space"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-parameter-ode-flow-tangent-on-common-tube",
+        "kind": "lemma",
+        "title": "Parameter-dependent ODE flows have the variational tangent on a common tube",
+        "deps": [
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "thm-mean-value-inequality-for-total-derivatives",
+          "thm-gronwall-integral-inequality",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-ode-adjoint-pairing-integration-by-parts",
+        "kind": "lemma",
+        "title": "A tangent and adjoint pairing gives the ODE gradient boundary identity",
+        "deps": [
+          "def-euclidean-inner-product",
+          "thm-algebra-of-derivatives",
+          "thm-ftc-second-part"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-discrete-adjoint-gradient-recursion",
+        "kind": "theorem",
+        "title": "The reverse recursion is the exact gradient of a finite state-step objective",
+        "deps": [
+          "def-parameterized-finite-state-step-objective",
+          "alg-reverse-mode-automatic-differentiation",
+          "thm-reverse-mode-computes-gradient",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-continuous-ode-adjoint-gradient-formula",
+        "kind": "theorem",
+        "title": "The continuous ODE adjoint gives the parameter gradient with endpoint terms",
+        "deps": [
+          "lem-parameter-ode-flow-tangent-on-common-tube",
+          "lem-ode-adjoint-pairing-integration-by-parts",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order",
+        "kind": "lemma",
+        "title": "Local C1 step consistency gives tangent, adjoint and gradient order",
+        "deps": [
+          "def-parameterized-finite-state-step-objective",
+          "lem-parameter-ode-flow-tangent-on-common-tube",
+          "lem-ode-adjoint-pairing-integration-by-parts",
+          "thm-continuous-ode-adjoint-gradient-formula",
+          "thm-discrete-adjoint-gradient-recursion",
+          "lem-discrete-one-step-error-recurrence-bound",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-mean-value-inequality",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-explicit-rk-differentiated-stages-give-local-c1-order",
+        "kind": "lemma",
+        "title": "Differentiated explicit RK stages give local C1 order",
+        "deps": [
+          "def-explicit-runge-kutta-tableau-and-stage-map",
+          "lem-parameter-ode-flow-tangent-on-common-tube",
+          "lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order",
+          "prop-explicit-rk-order-conditions-through-four",
+          "thm-global-error-from-one-step-defect-and-stability",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "thm-mean-value-inequality",
+          "thm-gronwall-integral-inequality"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-discrete-continuous-gradient-error-order-p",
+        "kind": "theorem",
+        "title": "Discrete and continuous ODE gradients agree to order p under augmented error bounds",
+        "deps": [
+          "thm-discrete-adjoint-gradient-recursion",
+          "thm-continuous-ode-adjoint-gradient-formula",
+          "thm-global-error-from-one-step-defect-and-stability",
+          "prop-explicit-rk-order-conditions-through-four",
+          "lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order",
+          "lem-explicit-rk-differentiated-stages-give-local-c1-order"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-implicit-rk-stage-jacobian-nonsingular-on-branch",
+        "kind": "lemma",
+        "title": "A contractive implicit Runge-Kutta stage branch has a nonsingular residual Jacobian",
+        "deps": [
+          "def-implicit-runge-kutta-stage-equations",
+          "lem-small-step-implicit-rk-branch-and-residual-error",
+          "thm-mean-value-inequality",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-rank-nullity"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-implicit-rk-stage-parameter-sensitivity",
+        "kind": "theorem",
+        "title": "An implicit Runge-Kutta stage has the stated parameter sensitivity on its selected branch",
+        "deps": [
+          "def-implicit-runge-kutta-stage-equations",
+          "lem-implicit-rk-stage-jacobian-nonsingular-on-branch",
+          "lem-small-step-implicit-rk-branch-and-residual-error",
+          "thm-implicit-differentiation-forward-and-adjoint-formulas",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-elliptic-state-map-c1-under-uniform-coercivity",
+        "kind": "lemma",
+        "title": "A uniformly coercive elliptic variational state is C1 in its parameter",
+        "deps": [
+          "def-parameterized-elliptic-variational-problem",
+          "thm-lax-milgram",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-elliptic-adjoint-reduced-gradient",
+        "kind": "theorem",
+        "title": "The elliptic adjoint gives the reduced parameter gradient",
+        "deps": [
+          "def-parameterized-elliptic-variational-problem",
+          "lem-elliptic-state-map-c1-under-uniform-coercivity",
+          "thm-adjoint-problem-for-bounded-coercive-variational-forms",
+          "def-countable-choice",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-elliptic-fe-gradient-error-in-energy-norms",
+        "kind": "theorem",
+        "title": "Conforming elliptic finite-element reduced gradients have an energy-norm error budget",
+        "deps": [
+          "thm-elliptic-adjoint-reduced-gradient",
+          "def-variational-crime-error-framework",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "def-countable-choice",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-elliptic-l2-gradient-rate-under-dual-regularity",
+        "kind": "corollary",
+        "title": "An elliptic reduced-gradient L2 rate follows under dual approximation",
+        "deps": [
+          "thm-elliptic-adjoint-reduced-gradient",
+          "thm-elliptic-fe-gradient-error-in-energy-norms",
+          "cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-parabolic-adjoint-gradient-sensitivity",
+        "kind": "theorem",
+        "title": "A parabolic adjoint gives the gradient when the state map is differentiable",
+        "deps": [
+          "def-parameterized-parabolic-variational-problem",
+          "lem-parabolic-energy-pairing-and-trace",
+          "def-countable-choice",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-parabolic-fe-gradient-error-with-time-dependent-ritz",
+        "kind": "theorem",
+        "title": "Parabolic finite-element gradient errors include the time-dependent Ritz residual",
+        "deps": [
+          "thm-parabolic-adjoint-gradient-sensitivity",
+          "thm-parabolic-semidiscrete-ritz-error-splitting-and-energy-bound",
+          "lem-parabolic-projection-time-product-rule",
+          "lem-parabolic-energy-pairing-and-trace",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-finite-time-tangent-volume-growth-from-qr",
+        "kind": "theorem",
+        "title": "Positive-diagonal QR factors give the exact finite-time tangent-volume change",
+        "deps": [
+          "thm-qr-factorisation-over-r-or-c",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "dependency_level": 0
+      }
+    ]
+  },
+  {
+    "order": 2477,
+    "id": "discrete-continuous-and-pde-adjoint-sensitivities-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Discrete continuous and pde adjoint sensitivities — Examples",
+    "companion": "discrete-continuous-and-pde-adjoint-sensitivities",
+    "requires": [
+      "discrete-continuous-and-pde-adjoint-sensitivities"
+    ],
+    "items": [
+      {
+        "id": "ex-4dvar-discrete-adjoint-gradient",
+        "kind": "example",
+        "title": "A two-observation 4DVAR objective has an exact reverse gradient",
+        "deps": [
+          "thm-discrete-adjoint-gradient-recursion",
+          "alg-four-dimensional-variational-assimilation"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-implicit-stiff-decay-parameter-fit",
+        "kind": "example",
+        "title": "Backward Euler differentiates a stiff scalar decay fit on its exact branch",
+        "deps": [
+          "thm-implicit-rk-stage-parameter-sensitivity",
+          "def-backward-euler-step-equation",
+          "lem-small-step-implicit-rk-branch-and-residual-error"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-elliptic-diffusion-coefficient-sensitivity",
+        "kind": "example",
+        "title": "A one-dimensional elliptic diffusion coefficient has the adjoint gradient",
+        "deps": [
+          "thm-elliptic-adjoint-reduced-gradient",
+          "def-parameterized-elliptic-variational-problem",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-two-cell-hat-and-quadratic-functions-lie-in-h10",
+          "lem-one-dimensional-zero-boundary-poincare",
+          "thm-ftc-second-part",
+          "thm-algebra-of-derivatives",
+          "thm-holder-inequality-for-integrals",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-multiple-shooting-sensitivity-jacobian",
+        "kind": "example",
+        "title": "A two-interval shooting residual has a block-bidiagonal sensitivity Jacobian",
+        "deps": [
+          "lem-parameter-ode-flow-tangent-on-common-tube",
+          "thm-discrete-adjoint-gradient-recursion",
+          "thm-derivative-of-exponential",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "cor-zero-derivative-implies-constant"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-qr-finite-time-volume-growth",
+        "kind": "example",
+        "title": "A finite QR record recovers the tangent-volume change",
+        "deps": [
+          "thm-finite-time-tangent-volume-growth-from-qr"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-tent-map-finite-time-sensitivity-growth",
+        "kind": "example",
+        "title": "A strict tent-map itinerary has exponential finite-time sensitivity growth",
+        "deps": [
+          "thm-discrete-adjoint-gradient-recursion"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-discrete-terminal-condition-mismatch",
+        "kind": "example",
+        "title": "A mismatched terminal adjoint condition changes the discrete gradient",
+        "deps": [
+          "thm-discrete-adjoint-gradient-recursion"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-state-error-alone-does-not-control-gradient",
+        "kind": "counterexample",
+        "title": "Uniform state accuracy alone does not bound parameter-gradient error",
+        "deps": [
+          "thm-discrete-continuous-gradient-error-order-p"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  }
+]

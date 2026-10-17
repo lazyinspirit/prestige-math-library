@@ -1,0 +1,73 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "research_only": true,
+  "cycle": 2,
+  "final_focused_cycle_for_implicit_start_issue": true,
+  "classification": "confirmed-unnecessary-supplied-history-BDF2-scope-narrowing",
+  "native_report_observed": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-repeat-r1-u65.json",
+  "native_report_archive": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol55-implicitstepper-bdf2-scope-cycle2/before/step5-v2-repeat-r1-u65.json",
+  "actual_native_changes_read": [
+    "Inputs added unconditional (t0,Y0)\u2208D across all four method selectors.",
+    "The BE/SDIRK/Radau loop additionally tests current (t_n,Y_n)\u2208D before each residual and returns evaluation-failure with prefix/log on a failed test.",
+    "BE startup currently relies on the unconditional Inputs premise rather than an explicit startup guard.",
+    "The native u65 decision, repair review, source evidence and contract notes correctly identify the original BE/RK interface defect, but do not establish a need for initial-domain membership on externally supplied BDF2 history."
+  ],
+  "supplier_analysis": [
+    {
+      "source": "items/def-backward-euler-step-equation.md",
+      "result": "Every actual BE call requires its current base pair in D, including BE startup. Preserve all current per-call tests and add an explicit startup test before removing the global prerequisite."
+    },
+    {
+      "source": "items/def-implicit-runge-kutta-stage-equations.md",
+      "result": "Every actual RK call requires its current base pair in D. Existing native loop tests cover n=0 and later calls, including after a finite-tolerance update; preserve them verbatim."
+    },
+    {
+      "source": "items/alg-variable-step-bdf2-with-selected-implicit-branch.md",
+      "result": "Starting histories need correct dimension and the grid needs positive increments. The procedure queries the exact oracle only at t_(n+1), and the oracle requires f at that new time throughout the branch ball. It never queries f(t0,Y0) or requires (t0,Y0)\u2208D for an external starter pair. This direct operational Definition has no accuracy claim."
+    },
+    {
+      "source": "items/alg-newton-chord-implicit-residual-with-factorization-reuse.md",
+      "result": "Finite BDF2 solves require G:U\u2192R^d to be C1 and z0\u2208U, plus the stated finite settings/backends. The histories enter G algebraically; its field query remains at t_(n+1), so an external historical pair need not belong to D merely to form/evaluate that residual."
+    },
+    {
+      "source": "items/lem-variable-step-bdf2-interpolation-and-local-defect.md",
+      "result": "The formula is derived algebraically from interpolation. Its exact-solution local-defect bound has separate solution/smoothness premises; that bound is not an unconditional requirement to execute the supplied-history algorithm."
+    },
+    {
+      "source": "items/def-linear-multistep-method-consistency-order-and-root-condition.md and items/def-first-order-ode-initial-value-problem-and-solution.md",
+      "result": "The general ODE/IVP definition requires actual IVP initial data in D, and exact-solution order statements retain that convention. However the actual BDF2 operational supplier explicitly defines an oracle-relative algebraic update from arbitrary dimension-correct histories and does not assert a solution of an IVP at t0. Its displayed step equation evaluates only the new-time f; there is no evaluation of undefined historical f multiplied by zero."
+    },
+    {
+      "source": "items/thm-variable-step-bdf2-order-two-under-ratio-bound.md and items/cor-constant-step-bdf2-order-two-with-consistent-start.md",
+      "result": "Convergence and BE-starter error estimates require their stated exact-solution/tube/consistency/branch hypotheses. The wrapper already explicitly conditions those claims. Restoring algebraically valid external histories does not extend those accuracy claims to this witness."
+    }
+  ],
+  "exact_original_valid_witness": {
+    "dimension": 1,
+    "grid": [
+      0,
+      1,
+      2
+    ],
+    "method": "variable-step BDF2, externally supplied starter pair, no BE startup",
+    "open_domain": "D=(1/2,5/2)\u00d7R",
+    "vector_field": "f:D\u2192R, f(t,z)=0",
+    "initial_history": "Y0=Y1=0; (0,0)\u2209D while (1,0)\u2208D",
+    "steps": "h0=h1=1, r1=1, N=2",
+    "branch_ball": "B2=[-1,1]",
+    "equation": "(3Z-4Y1+Y0)/2=f(2,Z), so 3Z=0",
+    "oracle": "At the reached call, f(2,\u00b7) is defined throughout B2 and the equation has exactly one root Z=0 in B2. A returning oracle can solve the positive-coefficient scalar affine equation and compare its exact root with the interval endpoints.",
+    "original_exact_root_execution": "The sole oracle call returns (unique-root,0), the original wrapper returns completed and prefix (0,0,0), and no time0 field query occurs.",
+    "finite_solve_variant": "Use U1=(-1,1)\u2282B2, G1(Z)=3Z, z_(1,0)=0, epsilon1=0, M1=0, chord mode, q1=1, exact scalar factor/solve backend and returning evaluations/domain tests. The initial residual is zero, so root is returned at correction count zero; the wrapper returns completed-with-residual-tolerances. No derivative assembly/factorization/linear solve is needed on this branch.",
+    "excluded_by_current_repair": "The unconditional Inputs requirement rejects this history solely because (t0,Y0)\u2209D, though every actual BDF2 supplier premise and attempted field query is satisfied.",
+    "accuracy_limit": "This example demonstrates a valid original algebraic BDF2 execution, not an IVP solution on [0,2] or an order/forward-error guarantee. No extension of f or D is assumed."
+  },
+  "minimal_current_based_correction": [
+    "Delete only the global Inputs suffix with (t0,Y0)\u2208D.",
+    "Before the BE-startup residual, add the same membership test and native evaluation-failure/prefix/log behavior.",
+    "Keep the native BE/SDIRK/Radau loop test verbatim: it already protects the first and every later actual invocation.",
+    "Leave every BDF2 equation, branch/oracle domain requirement, finite residual-domain contract, method, budget, work count, source and conditional accuracy claim unchanged."
+  ],
+  "no_new_result_needed": "This is a precise admission-condition correction; the concrete affine example and exact supplier preconditions settle it without a new theorem or external source.",
+  "review_limit": "Research-only focused assessment; no canonical application, adjudication decision, current mathematical acceptance, native coverage or hash verification is supplied."
+}

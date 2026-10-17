@@ -1,0 +1,418 @@
+
+===== PDF PAGE 1 =====
+LECTURE 10: DETERMINANTS BY LAPLACE EXPANSION AND
+INVERSES BY ADJOINT MATRICES
+MA1111: LINEAR ALGEBRA I, MICHAELMAS 2016
+1. Laplace expansions
+By using the cofactors from the last lecture, we can ﬁnd a very convenient way to
+compute determinants. We ﬁrst give the method, then try several examples, and then
+discuss its proof.
+Algorithm (Laplace expansion). To compute the determinant of a square matrix, do
+the following.
+(1) Choose any row or column of A.
+(2) For each element Aij of this row or column, compute the associated cofactor Cij.
+(3) Multiply each cofactor by the associated matrix entry Aij.
+(4) The sum of these products is det A.
+Example. We ﬁnd the determinant of
+A =
+
+
+2
+1
+3
+−1
+2
+1
+−2
+2
+3
+
+.
+We make the arbitrary choice to expand along the ﬁrst row. We compute the minors as
+M 11 = det
+
+2
+1
+2
+3
+
+,
+M 12 = det
+
+−1
+1
+−2
+3
+
+,
+M 13 = det
+
+−1
+2
+−2
+2
+
+.
+Computing these 2 × 2 determinants, we have
+M 11 = 4,
+M 12 = −1,
+M 13 = 2.
+By inserting signs, we ﬁnd that the cofactors are
+C11 = M 11 = 4,
+C12 = −M 12 = 1,
+C13 = M 13 = 2.
+Thus,
+det A = A11C11 + A12C12 + A13C13 = 2(4) + (1) + 3(2) = 15.
+Date: October 19, 2016.
+1
+
+
+===== PDF PAGE 2 =====
+2
+MA1111: LINEAR ALGEBRA I, MICHAELMAS 2016
+With this method, much larger determinants are also feasible, especially when there
+are lots of zeros in a row or column. Generally speaking, it is a good idea when computing
+an example to try to expand along a row or column with as many zeros as possible, or
+at least with the smallest entries possible.
+Example. We ﬁnd the determinant of
+A =
+
+
+
+
+2
+5
+−3
+−2
+−2
+−3
+2
+−5
+1
+3
+−2
+0
+−1
+6
+4
+0
+
+
+
+.
+We expand along the last column to ﬁnd
+det A = 2 det
+
+
+−2
+−3
+2
+1
+3
+−2
+−1
+6
+4
+
+−5 det
+
+
+2
+5
+−3
+1
+3
+−2
+−1
+6
+4
+
+
+We can ﬁnd these two determinants by expanding them as well. For example, expanding
+along the ﬁrst column on the ﬁrst one, we ﬁnd that
+det
+
+
+−2
+−3
+2
+1
+3
+−2
+−1
+6
+4
+
+= −2 det
+
+3
+−2
+6
+4
+
+−det
+
+−3
+2
+6
+4
+
+−det
+
+−3
+2
+3
+−2
+
+= −2(24) −(−24) −0 = −48 + 24 + 0 = −24.
+Similarly, by expanding the second 3 × 3 matrix along the ﬁrst column, we ﬁnd that
+
+
+2
+5
+−3
+1
+3
+−2
+−1
+6
+4
+
+= 2 det
+
+3
+−2
+6
+4
+
+−det
+
+5
+−3
+6
+4
+
+−det
+
+5
+−3
+3
+−2
+
+= 2(24) −(38) −(−1) = 11.
+Thus, we ﬁnd that
+det A = 2(−24) −5(11) = −103.
+Discussion of the proof of the algorithm. Since we know that switching two rows negates
+determinants (and negates the sings in the cofactors as well), and since transposes pre-
+serve determinants (meaning that we can switch the roles of rows and columns in de-
+terminant calculations), it is enough to show this when we pick the ﬁrst row in the
+algorithm. By our deﬁnition, it is enough to show that this satisﬁes the 3 properties
+uniquely characterizing determinants. That is, if we deﬁne f(A) = A11C11+. . .+A1nC1n,
+then we just have to show that f is multilinear in the rows of A, that it is alternating in
+the rows, and that f(In) = 1. The proof of multilinearity, and of the alternating prop-
+erty, follow from careful writing down of the objects involved, but you can also try an
+example and are encouraged to think through why you should believe this! For example,
+
+
+===== PDF PAGE 3 =====
+LECTURE 10: DETERMINANTS BY LAPLACE EXPANSION AND INVERSES BY ADJOINT MATRICES3
+you are strongly encouraged to just try out these two properties on an arbitrary, say
+3 × 3, matrix.
+□
+2. Adjugate matrices and inverses
+In addition to ﬁnding determinants quickly, we can use cofactors to quickly compute
+inverses of matrices. If we stick all the cofactors into a matrix, then we obtain the
+cofactor matrix. That is, the cofactor matrix is the matrix C such that
+Cij = Cij.
+The adjugate matrix (sometimes called the adjoint matrix), denoted adj(A), is simply
+the transpose of the cofactor matrix:
+(adjA)ij = Cji.
+The reason this matrix is interesting is that the following result holds.
+Theorem. For any n × n matrix A, we have
+A · adj(A) = det(A)In.
+In particular, if A is invertible, then A−1 = (det A)−1adj(A).
+Proof. This is essentially a restatement of the Laplace expansion algorithm above. To
+check it, compute the i, j-th entry of the left hand side:
+(A · adjA)ij =
+n
+X
+k=1
+Aik(adjA)kj =
+n
+X
+k=1
+aikCjk.
+If i = j, then by Laplace expansion, we get det A. If i ̸= j, then by Laplace expansion
+again, we are really computing the determinant of the matrix where we replace the j-th
+row of A by its i-th row. But such a matrix has two rows which are the same, and hence
+has determinant zero.
+□
+Example. We continue working with the matrix
+A =
+
+
+2
+1
+3
+−1
+2
+1
+−2
+2
+3
+
+
+from above. We already found the ﬁrst few cofactors to be
+C11 = M 11 = 4,
+C12 = −M 12 = 1,
+C13 = M 13 = 2.
+Continuing in the same manner as above, we ﬁnd that the matrix of cofactors is
+
+
+4
+1
+2
+3
+12
+−6
+−5
+−5
+5
+
+.
+
+
+===== PDF PAGE 4 =====
+4
+MA1111: LINEAR ALGEBRA I, MICHAELMAS 2016
+Taking the transpose of this matrix yields that
+adj(A) =
+
+
+4
+3
+−5
+1
+12
+−5
+2
+−6
+5
+
+.
+Since we saw above that det A = 15, we ﬁnd that
+A−1 =
+
+
+4
+15
+1
+5
+−1
+3
+1
+15
+4
+5
+−1
+3
+2
+15
+−2
+5
+1
+3
+
+.
+3. Cramer’s Rule
+Suppose that A is invertible. Then we already know that Ax = b has only one solution
+for any b. Of course, this solution is the vector x = A−1b. Plugging in the adjugate
+yields that
+xj = (det A)−1(adjA)b = (det A)−1
+n
+X
+k=1
+Ckjbk.
+But the sum is just a j-th column expansion of the matrix Aj obtained by replacing the
+j-th column with b. This gives Cramer’s fomula.
+Theorem (Cramer’s rule). Assume the notation above.
+If A is invertible, then the
+solution to Ax = b is given by
+xj = det(Aj)
+det A .
+Example. We saw above that
+A =
+
+
+2
+1
+3
+−1
+2
+1
+−2
+2
+3
+
+
+is invertible, with det A = 15. Thus, by Cramer’s rule, the solution to Ax =
+
+
+1
+−2
+0
+
+is
+given by
+x1 = 1
+15 det
+
+
+1
+1
+3
+−2
+2
+1
+0
+2
+3
+
+= −2
+15,
+x2 = 1
+15 det
+
+
+2
+1
+3
+−1
+−2
+1
+−2
+0
+3
+
+= −23
+15,
+
+
+===== PDF PAGE 5 =====
+LECTURE 10: DETERMINANTS BY LAPLACE EXPANSION AND INVERSES BY ADJOINT MATRICES5
+x3 = 1
+15 det
+
+
+2
+1
+1
+−1
+2
+−2
+−2
+2
+0
+
+= 14
+15.

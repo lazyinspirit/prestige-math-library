@@ -1,0 +1,25 @@
+--- current/items/lem-forward-difference-jacobian-error-bound.md
++++ proposed/items/lem-forward-difference-jacobian-error-bound.md
+@@ -7,6 +7,7 @@
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+ dependency_level: 1
+ deps:
++  - thm-continuous-partial-derivatives-imply-total-differentiability
+   - alg-forward-difference-jacobian
+   - def-c-one-map-and-local-inverse
+   - def-jacobian-matrix-and-gradient
+@@ -61,11 +62,13 @@
+ 
+ [F6] [[thm-cauchy-schwarz-and-the-euclidean-norm]]: $|\sum_i a_i b_i|\le(\sum_i a_i^2)^{1/2}(\sum_i b_i^2)^{1/2}$.
+ 
++[F7] [[thm-continuous-partial-derivatives-imply-total-differentiability]]: continuous first partial derivatives give a total derivative with the coordinate Jacobian matrix. Applied to each $F_j$ and each first partial of $F_j$, the componentwise $C^2$ hypotheses give the total differentiability needed below; continuity of the derivative entries makes $F$ a $C^1$ map admissible for [F1].
++
+ ## Proof
+ 
+ **Given:** The data in the Statement.
+ 
+-1.1 For each input coordinate $i<n$ and output component $j<n$, put $g_{ij}(t):=F_j(x+t h_i e_i)$ on $I_i$. The chain rule [F4] and Jacobian identification [F3] give $g_{ij}'(t)=h_i\partial_iF_j(x+t h_i e_i)$ and $g_{ij}''(t)=h_i^2\partial_{ii}F_j(x+t h_i e_i)$. Taylor's theorem [F5] between $0$ and $1$ supplies $\theta_{ij}\in(0,1)$ with $F_j(x+h_i e_i)-F_j(x)=h_i\partial_iF_j(x)+\frac{h_i^2}{2}\partial_{ii}F_j(x+\theta_{ij}h_i e_i)$. The points $\theta_{ij}$ may differ between components. [given, F3, F4, F5, choose]
++1.1 By [F7], the $C^2$ components and their first partials have the total derivatives needed for the chain rule, and $F$ is admissible for [F1]. For each input coordinate $i<n$ and output component $j<n$, put $g_{ij}(t):=F_j(x+t h_i e_i)$ on $I_i$. The chain rule [F4] and Jacobian identification [F3] give $g_{ij}'(t)=h_i\partial_iF_j(x+t h_i e_i)$ and $g_{ij}''(t)=h_i^2\partial_{ii}F_j(x+t h_i e_i)$. Taylor's theorem [F5] between $0$ and $1$ supplies $\theta_{ij}\in(0,1)$ with $F_j(x+h_i e_i)-F_j(x)=h_i\partial_iF_j(x)+\frac{h_i^2}{2}\partial_{ii}F_j(x+\theta_{ij}h_i e_i)$. The points $\theta_{ij}$ may differ between components. [given, F3, F4, F5, F7, choose]
+ 
+ 2.1 Divide by the nonzero $h_i$. In column $i$, output coordinate $j$ has error at most $M_{ij}|h_i|/2$; hence the Euclidean column error is at most $M_i|h_i|/2$, even though the remainder points $\theta_{ij}$ may differ. [step 1.1, F1, F2, given, algebra]
+ 

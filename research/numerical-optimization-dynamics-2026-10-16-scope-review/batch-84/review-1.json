@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "84",
+  "round": 1,
+  "reviewed_items": [
+    "thm-nonlinear-least-squares-gradient-and-hessian",
+    "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian",
+    "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+    "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+    "alg-safeguarded-levenberg-marquardt",
+    "thm-gauss-newton-local-linear-contraction",
+    "thm-gauss-newton-zero-residual-quadratic-convergence",
+    "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+    "thm-safeguarded-levenberg-marquardt-global-stationarity",
+    "ex-exponential-kinetics-gauss-newton-fit",
+    "ex-rank-deficient-identifiability-and-lm-step",
+    "ex-nonzero-residual-gauss-newton-is-only-linear"
+  ],
+  "reviewed_pages": [
+    "gauss-newton-and-levenberg-marquardt-methods",
+    "gauss-newton-and-levenberg-marquardt-methods-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The two prior findings are resolved: exact and computed QR paths are separated, and LM handles computed rank statuses and zero steps. The computed high-ratio boundary branch still leaves an unhandled range failure when evaluating λ/γ; this second review remains unsatisfied, so the remaining local defect is escalated to the owner.",
+  "findings": [
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "type": "local",
+      "reason": "In computed mode, the accepted high-ratio boundary branch evaluates λ/γ inside max{λ_min, λ/γ} but defines no output if that division is unrepresentable. The rejection update γλ has an explicit damping-range-failure branch, but this update does not. Add a range-failure disposition or specify a comparison-first procedure that avoids the division when the floor applies."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "decision": "escalate",
+      "reason": "The repaired QR interface and computed status handling are clear; the computed damping-decrease branch still lacks a range-failure disposition."
+    },
+    {
+      "id": "ex-exponential-kinetics-gauss-newton-fit",
+      "decision": "accept",
+      "reason": "Its exact full-rank GN use is valid under the clarified exact-factorization route."
+    },
+    {
+      "id": "ex-nonzero-residual-gauss-newton-is-only-linear",
+      "decision": "accept",
+      "reason": "Its exact full-rank GN use and computed example arguments are valid; it does not use the computed solver route."
+    },
+    {
+      "id": "ex-rank-deficient-identifiability-and-lm-step",
+      "decision": "accept",
+      "reason": "Its exact GN rank status and exact LM trial remain valid; the computed damping branch is not used."
+    },
+    {
+      "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+      "decision": "accept",
+      "reason": "Its exact-solve assumptions and damping-rejection argument remain valid."
+    },
+    {
+      "id": "thm-gauss-newton-local-linear-contraction",
+      "decision": "accept",
+      "reason": "Uses the exact full-rank GN minimizer; the clarified factorization route supports this use."
+    },
+    {
+      "id": "thm-gauss-newton-zero-residual-quadratic-convergence",
+      "decision": "accept",
+      "reason": "Uses the exact full-rank GN minimizer; the clarified factorization route supports this use."
+    },
+    {
+      "id": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "decision": "accept",
+      "reason": "Its exact-arithmetic assumptions exclude the computed range-failure branch; the stationarity proof remains valid."
+    },
+    {
+      "id": "gauss-newton-and-levenberg-marquardt-methods",
+      "decision": "accept",
+      "reason": "The A-page summary remains accurate under the clarified exact/computed routes."
+    },
+    {
+      "id": "gauss-newton-and-levenberg-marquardt-methods-examples",
+      "decision": "accept",
+      "reason": "The B-page examples use exact calculations and remain consistent with the repaired procedures."
+    }
+  ]
+}

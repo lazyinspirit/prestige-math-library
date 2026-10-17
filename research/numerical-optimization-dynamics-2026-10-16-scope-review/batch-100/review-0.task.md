@@ -1,0 +1,13 @@
+# Batch 100: review 0
+
+Run: numerical-optimization-dynamics-2026-10-16
+Batch: 100
+Round: 0
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: direct-transcription-and-numerical-ode-optimal-control, direct-transcription-and-numerical-ode-optimal-control-examples
+Items: def-ctrl1-linear-lqr-control-problem, def-ctrl1-smooth-transcription-data, lem-ctrl1-measurable-linear-ode-state-map, lem-ctrl1-control-box-is-weakly-closed, def-ctrl1-control-mesh-and-piecewise-constant-parameterization, lem-ctrl1-weak-control-convergence-implies-uniform-state-convergence, lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence, def-ctrl1-runge-kutta-tableau-and-stage-collocation, def-ctrl1-lqr-adjoint-equation, lem-ctrl1-lqr-cost-is-weakly-lower-semicontinuous, lem-ctrl1-lqr-adjoint-exists-uniquely, thm-ctrl1-lqr-existence-and-unique-optimal-control, alg-ctrl1-indirect-shooting-for-the-ode-optimality-system, lem-ctrl1-lqr-adjoint-identity-and-gradient, thm-ctrl1-lqr-variational-inequality-and-pointwise-control-branch, cex-ctrl1-terminal-constraints-break-pointwise-control-vi, alg-ctrl1-runge-kutta-shooting-and-collocation-transcription, lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent, lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program, thm-ctrl1-mesh-consistent-lqr-minimizers-converge, thm-ctrl1-objective-and-control-error-from-consistency-bounds, alg-ctrl1-finite-budget-transcription-solver-dispatch, thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription, ex-ctrl1-bounded-actuator-lqr, ex-ctrl1-chemical-dosing-linear-model, ex-ctrl1-single-versus-multiple-shooting-two-intervals
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

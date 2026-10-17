@@ -1,0 +1,140 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "87",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "lem-rooted-tree-generating-function-series",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "b9ae5a7b4119d09360ab09103da5fcd0d95c34aed51dbca8d47fd627ad32d772",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F5 removes the real-argument restriction of its supplier, so the original proof does not establish the claimed complex derivatives. The repair states that restriction and proves the complex extension using uniform difference-quotient tails; absolute exponential majorization justifies the formal-to-analytic identities.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-finite-sectional-forward-euler-global-first-order-error",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "ebb45aaa068e2a2de1619b7111598de7be5b20f9bc46c6c6daa607f74daedd28",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F1 attributes exact mass-simplex invariance to a Statement that supplies only nonnegativity and coordinate/moment bounds. The proof relied on that stronger attribution to bound the exact path. The repair states the actual coordinate bounds and uses their compact box; F3 puts the numerical mass simplex in that same box.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-rooted-tree-generating-function-series",
+      "disposition": "repaired",
+      "post_sha256": "791f519dd80ee4590c42b99bd0da032207b33e60398c42a599df448fe254bc11",
+      "review_context_sha256": "71507308fca25a8be55b8b42945ff8914f6bf099f02d7ab48fd4e462f7067f01",
+      "reason": "Checked Lagrange inversion over Q, admissible formal differentiation, geometric convergence of both series and derivatives, the complex difference-quotient tail bound, absolutely regrouped exponential composition, nonvanishing of 1-T, and the increasing real inverse branch. The Statement is unchanged. This is repair-author reasoning, not an independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-finite-sectional-forward-euler-global-first-order-error",
+      "disposition": "repaired",
+      "post_sha256": "2a823a390a465abff22905cd92c6cc9b63ce433201b12ff8de2f1b068f4bca7e",
+      "review_context_sha256": "47f5e4129132934a3d7f24f6a8a33a4179cedd194629c52e8682309999e2596c",
+      "reason": "Checked the exact global ODE bounds, the CFL algorithm and positivity/conservation proof, the local Euler defect theorem, and the global error recurrence theorem. The compact coordinate box contains exact and numerical paths; h<=T bounds exact-start outputs in one larger tube. The polynomial extension and its bounded derivatives give uniform defect and stability constants, with zero initial error. Statement unchanged; this is repair-author reasoning, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-rooted-tree-generating-function-series",
+      "class": "accuracy",
+      "subclass": "citation-inflated",
+      "severity": "fatal",
+      "location": "facts-block",
+      "disposition": "fixed",
+      "finding": "F5 removes the real-argument restriction of its supplier, so the original proof does not establish the claimed complex derivatives. The repair states that restriction and proves the complex extension using uniform difference-quotient tails; absolute exponential majorization justifies the formal-to-analytic identities.",
+      "adjudication_ref": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-repeat-r1-u87.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-finite-sectional-forward-euler-global-first-order-error",
+      "class": "accuracy",
+      "subclass": "citation-inflated",
+      "severity": "fatal",
+      "location": "facts-block",
+      "disposition": "fixed",
+      "finding": "F1 attributes exact mass-simplex invariance to a Statement that supplies only nonnegativity and coordinate/moment bounds. The proof relied on that stronger attribution to bound the exact path. The repair states the actual coordinate bounds and uses their compact box; F3 puts the numerical mass simplex in that same box.",
+      "adjudication_ref": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-repeat-r1-u87.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "independent_review": false,
+    "rooted_tree": "F5 now retains the real-argument restriction. Step 4.1 proves complex differentiation by a uniform tail bound for complex difference quotients, justifies exponential regrouping by exp(sum a_k |z|^k), and excludes T=1 using (1-T)zT'=T. The current formal U-coefficient calculation already precedes convergence, so the historical Step-4 ordering concern is resolved. No source reading outside the local supplied arguments is claimed.",
+    "euler": "F1 now states the actual exact coordinate bounds. Their compact box contains the exact path, and F3 plus shared initialization puts every numerical state in that box. Polynomial extension supplies the common tube, bounded derivatives and uniform defect/stability constants. The fixed-grid global estimate and both L>0 and L=0 cases are retained.",
+    "contracts": "Only the two assigned rows in the owning batch proof contract were updated, using acquire/reread/edit/check/release under tools/step5-shared-write-lock.mjs. Citation uses, derivations and affected boundary evidence match the repaired proofs. No manifest/page interface changed.",
+    "statement_comparison": {
+      "lem-rooted-tree-generating-function-series": {
+        "before_sha256": "b20bb9ad54893c8b63327d846b4419a1140081a9ca847895bff4540a114dc635",
+        "after_sha256": "b20bb9ad54893c8b63327d846b4419a1140081a9ca847895bff4540a114dc635"
+      },
+      "thm-finite-sectional-forward-euler-global-first-order-error": {
+        "before_sha256": "6ab9538cb154e221936a6976031322edc732a13c3e011a868c4ee91a0a5c4c5b",
+        "after_sha256": "6ab9538cb154e221936a6976031322edc732a13c3e011a868c4ee91a0a5c4c5b"
+      }
+    },
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-rooted-tree-generating-function-series.md items/thm-finite-sectional-forward-euler-global-first-order-error.md --json",
+        "exit_code": 0,
+        "result": "2 checked, 0 failing."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-rooted-tree-generating-function-series.md items/thm-finite-sectional-forward-euler-global-first-order-error.md --json",
+        "exit_code": 0,
+        "result": "2 checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-87.proof-contracts.json --items lem-rooted-tree-generating-function-series --strict --json",
+        "exit_code": 0,
+        "result": "Passed with no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-87.proof-contracts.json --items thm-finite-sectional-forward-euler-global-first-order-error --strict --json",
+        "exit_code": 0,
+        "result": "Passed with no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-rooted-tree-generating-function-series.md items/thm-finite-sectional-forward-euler-global-first-order-error.md",
+        "exit_code": 0,
+        "result": "2 items, 7 steps, 0 defects."
+      }
+    ],
+    "review_contexts": "Ran review-contexts immediately after each mathematical review and after the corresponding contract review, before proceeding to the next supplier. The repeated own-contract checks produced identical hashes. No earlier review was refreshed after a supplier content change.",
+    "downstream_rationale": "Both original Statements are unchanged, as checked against the frozen round statement hashes. No new prerequisite or Definition was introduced, so no downstream examination event is triggered.",
+    "published_consumer_findings": [],
+    "unresolved_obligations": []
+  },
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-87.proof-contracts.json": "1f8aa238609314e649b29895d8ad7a8e1bd8f72682e3825e4322fd1ef3520a99"
+  }
+}

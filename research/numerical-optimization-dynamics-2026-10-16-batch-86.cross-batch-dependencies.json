@@ -1,0 +1,196 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-finite-budget-rattle-step-with-scaled-residuals",
+    "supplier": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+    "status": "verified",
+    "supplier_batch": "65",
+    "required_interface": "For a C1 square residual on an open admissible domain, chord mode checks residual before each correction, makes at most N corrections and N+1 residual checks, refreshes and factors the Jacobian at the prescribed period, rejects invalid trials outside the domain, and returns an explicit status.",
+    "affected_claims": [
+      "alg-finite-budget-rattle-step-with-scaled-residuals",
+      "thm-finite-budget-rattle-solver-returns-status"
+    ],
+    "evidence": "The two RATTLE residual maps are C1 on their selected branch balls by the scaled-branch lemma. The algorithm sets refresh period one, uses the corresponding branch ball as the admissible domain, and propagates every non-success status without claiming an exact step."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-finite-budget-rattle-step-with-scaled-residuals",
+    "supplier": "def-implicit-residual-and-algebraic-error-units",
+    "consumer_batch": "86",
+    "status": "verified",
+    "evidence": "Checked actual scaled residual and finite chord-call interfaces. RATTLE uses h^-2*c and h^-1*tangency on its supplied branch neighborhoods, refresh period1 and finite budgets; root means residual tolerance only. Uniform local inverse/retraction proofs, not raw residual status, give state/global error. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/def-implicit-residual-and-algebraic-error-units.md",
+      "items/alg-finite-budget-rattle-step-with-scaled-residuals.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-86.pages.json#deps",
+      "items/alg-finite-budget-rattle-step-with-scaled-residuals.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nLet $G:U\\to\\mathbb R^m$ be the residual map of an implicit equation, where $U\\subseteq\\mathbb R^m$ is the admissible set for the unknown vector. An exact solution is a point $z^*\\in U$ with $G(z^*)=0$.\n\nThe **update residual** at an approximate solution $\\widetilde z\\in U$ is the vector $G(\\widetilde z)$, measured in the same units as $z$. If the original equation was divided by a positive step scale $\\sigma$, then the **derivative residual** is $G(\\widetilde z)/\\sigma$, and the corresponding update residual is $\\sigma$ times that derivative residual. A residual norm is not a forward-error bound unless a separate inverse or stability estimate converts it to $\\|\\widetilde z-z^*\\|$.\n\nFor a first-order vector field $f:D\\to\\mathbb R^d$ on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$ ([[def-first-order-ode-initial-value-problem-and-solution]]), take a time $t$, input $y\\in\\mathbb R^d$, and step $h>0$ with $(t,y)\\in D$. For backward Euler, an endpoint $z$ is admissible only when $(t+h,z)\\in D$, and its update residual is\n\n$$G_{\\rm BE}(z)=z-y-hf(t+h,z),$$\n\nso the derivative residual is $G_{\\rm BE}(z)/h$.\n\nFor an $s$-stage implicit Runge–Kutta tableau $(A,b,c)$, a stage vector $Y=(Y_1,\\ldots,Y_s)$ is admissible only when $(t+c_jh,Y_j)\\in D$ for every $j$. On that admissible set, its stage update residual has blocks\n\n$$G_i(Y)=Y_i-y-h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j),\\qquad i=1,\\ldots,s.$$\n\nThe stage derivative residual is $G(Y)/h$. These conventions distinguish an equation residual from the distance to its exact root.\n",
+    "consumer_use_anchors": "No direct Facts/Proof invocation: declared supplier is redundant/contextual; actual claim is established by the other explicit local facts. No theorem transfer is inferred.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/44"
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-rattle-residual-budget-and-global-trajectory-drift",
+    "supplier": "def-implicit-residual-and-algebraic-error-units",
+    "consumer_batch": "86",
+    "status": "verified",
+    "evidence": "Checked actual scaled residual and finite chord-call interfaces. RATTLE uses h^-2*c and h^-1*tangency on its supplied branch neighborhoods, refresh period1 and finite budgets; root means residual tolerance only. Uniform local inverse/retraction proofs, not raw residual status, give state/global error. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/def-implicit-residual-and-algebraic-error-units.md",
+      "items/ex-rattle-residual-budget-and-global-trajectory-drift.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-86.pages.json#deps",
+      "items/ex-rattle-residual-budget-and-global-trajectory-drift.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nLet $G:U\\to\\mathbb R^m$ be the residual map of an implicit equation, where $U\\subseteq\\mathbb R^m$ is the admissible set for the unknown vector. An exact solution is a point $z^*\\in U$ with $G(z^*)=0$.\n\nThe **update residual** at an approximate solution $\\widetilde z\\in U$ is the vector $G(\\widetilde z)$, measured in the same units as $z$. If the original equation was divided by a positive step scale $\\sigma$, then the **derivative residual** is $G(\\widetilde z)/\\sigma$, and the corresponding update residual is $\\sigma$ times that derivative residual. A residual norm is not a forward-error bound unless a separate inverse or stability estimate converts it to $\\|\\widetilde z-z^*\\|$.\n\nFor a first-order vector field $f:D\\to\\mathbb R^d$ on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$ ([[def-first-order-ode-initial-value-problem-and-solution]]), take a time $t$, input $y\\in\\mathbb R^d$, and step $h>0$ with $(t,y)\\in D$. For backward Euler, an endpoint $z$ is admissible only when $(t+h,z)\\in D$, and its update residual is\n\n$$G_{\\rm BE}(z)=z-y-hf(t+h,z),$$\n\nso the derivative residual is $G_{\\rm BE}(z)/h$.\n\nFor an $s$-stage implicit Runge–Kutta tableau $(A,b,c)$, a stage vector $Y=(Y_1,\\ldots,Y_s)$ is admissible only when $(t+c_jh,Y_j)\\in D$ for every $j$. On that admissible set, its stage update residual has blocks\n\n$$G_i(Y)=Y_i-y-h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j),\\qquad i=1,\\ldots,s.$$\n\nThe stage derivative residual is $G(Y)/h$. These conventions distinguish an equation residual from the distance to its exact root.\n",
+    "consumer_use_anchors": "[F4] [[def-implicit-residual-and-algebraic-error-units]]: a residual norm is not a forward-error estimate without a separate inverse or stability bound.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/47"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-finite-budget-rattle-solver-returns-status",
+    "supplier": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+    "consumer_batch": "86",
+    "status": "verified",
+    "evidence": "Checked actual scaled residual and finite chord-call interfaces. RATTLE uses h^-2*c and h^-1*tangency on its supplied branch neighborhoods, refresh period1 and finite budgets; root means residual tolerance only. Uniform local inverse/retraction proofs, not raw residual status, give state/global error. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/alg-newton-chord-implicit-residual-with-factorization-reuse.md",
+      "items/thm-finite-budget-rattle-solver-returns-status.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-86.pages.json#deps",
+      "items/thm-finite-budget-rattle-solver-returns-status.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nLet $U\\subseteq\\mathbb R^m$ be open, $G:U\\to\\mathbb R^m$ be $C^1$, $z_0\\in U$, residual tolerance $\\varepsilon\\ge0$, correction budget $N\\in\\mathbb N_0$, and refresh period $q\\in\\mathbb N$, $q\\ge1$. Use the Jacobian convention $J(z)=DG(z)$ of [[def-jacobian-matrix-and-gradient]]. The output is a last valid iterate $z\\in U$, a status, and the actual residual norm $\\|G(z)\\|_2$.\n\nIn **updated-Newton mode**, invoke [[alg-finite-budget-newton-for-vector-residuals]] with $G,z_0,\\varepsilon,N$. It recomputes the Jacobian at every correction and returns its stated residual/budget/failure status. Re-evaluate $G$ at the returned iterate to provide the output residual norm. Count each Jacobian assembly, factorization attempt, and linear solve actually performed.\n\nIn **chord mode**, for $k=0,1,\\ldots,N$, first evaluate $G(z_k)$ and put $r_k=\\|G(z_k)\\|_2$. If $r_k\\le\\varepsilon$, return $(z_k,\\texttt{root},r_k)$; this status means only that the residual tolerance was met. If $k=N$, return $(z_k,\\texttt{iteration-budget-exhausted},r_k)$. Otherwise, at $k=0,q,2q,\\ldots$, refresh by forming $J_k=DG(z_k)$, attempting to factor it, and retaining the factorization until the next scheduled refresh. The factorization backend must either report singularity or return a factor object whose solve operation gives the exact unique solution of $J_k s=-G(z_k)$. If it reports singularity, return $(z_k,\\texttt{singular-jacobian},r_k)$. At each correction call [[alg-newton-correction-for-vector-residuals]] with the retained $J_k$ and current residual. If that procedure reports a singular Jacobian, return $(z_k,\\texttt{singular-jacobian},r_k)$. If its correction $s_k$ has $z_k+s_k\\notin U$, return $(z_k,\\texttt{invalid-trial},r_k)$; otherwise set $z_{k+1}=z_k+s_k$ and continue. A refresh period $q=1$ updates the Jacobian every correction; $q>1$ is a chord iteration.\n\nBoth modes make no claim that a finite budget reaches an exact root or that a small residual is a forward-error bound. Record the number of Jacobian assemblies, factorization attempts, and linear solves actually performed; a dense LU correction uses one forward and one backward triangular solve. Sparse cost depends on the actual stage matrix and factorization backend and is not bounded here.\n",
+    "consumer_use_anchors": "[F2] [[alg-newton-chord-implicit-residual-with-factorization-reuse]]: in chord mode with budget $N$, the residual solver checks at most $N+1$ iterates, makes at most $N$ corrections, and returns a residual or failure status at each terminating branch.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/45"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-rattle-scaled-solve-residual-error-budget",
+    "supplier": "def-implicit-residual-and-algebraic-error-units",
+    "consumer_batch": "86",
+    "status": "verified",
+    "evidence": "Checked actual scaled residual and finite chord-call interfaces. RATTLE uses h^-2*c and h^-1*tangency on its supplied branch neighborhoods, refresh period1 and finite budgets; root means residual tolerance only. Uniform local inverse/retraction proofs, not raw residual status, give state/global error. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/def-implicit-residual-and-algebraic-error-units.md",
+      "items/thm-rattle-scaled-solve-residual-error-budget.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-86.pages.json#deps",
+      "items/thm-rattle-scaled-solve-residual-error-budget.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nLet $G:U\\to\\mathbb R^m$ be the residual map of an implicit equation, where $U\\subseteq\\mathbb R^m$ is the admissible set for the unknown vector. An exact solution is a point $z^*\\in U$ with $G(z^*)=0$.\n\nThe **update residual** at an approximate solution $\\widetilde z\\in U$ is the vector $G(\\widetilde z)$, measured in the same units as $z$. If the original equation was divided by a positive step scale $\\sigma$, then the **derivative residual** is $G(\\widetilde z)/\\sigma$, and the corresponding update residual is $\\sigma$ times that derivative residual. A residual norm is not a forward-error bound unless a separate inverse or stability estimate converts it to $\\|\\widetilde z-z^*\\|$.\n\nFor a first-order vector field $f:D\\to\\mathbb R^d$ on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$ ([[def-first-order-ode-initial-value-problem-and-solution]]), take a time $t$, input $y\\in\\mathbb R^d$, and step $h>0$ with $(t,y)\\in D$. For backward Euler, an endpoint $z$ is admissible only when $(t+h,z)\\in D$, and its update residual is\n\n$$G_{\\rm BE}(z)=z-y-hf(t+h,z),$$\n\nso the derivative residual is $G_{\\rm BE}(z)/h$.\n\nFor an $s$-stage implicit Runge–Kutta tableau $(A,b,c)$, a stage vector $Y=(Y_1,\\ldots,Y_s)$ is admissible only when $(t+c_jh,Y_j)\\in D$ for every $j$. On that admissible set, its stage update residual has blocks\n\n$$G_i(Y)=Y_i-y-h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j),\\qquad i=1,\\ldots,s.$$\n\nThe stage derivative residual is $G(Y)/h$. These conventions distinguish an equation residual from the distance to its exact root.\n",
+    "consumer_use_anchors": "[F4] [[def-implicit-residual-and-algebraic-error-units]]: a residual norm is not a forward-error bound without a separate inverse or stability estimate.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/46"
+  },
+  {
+    "kind": "page",
+    "consumer": "constrained-dynamics-shake-and-rattle",
+    "supplier": "differential-algebraic-equations-and-consistent-initialization",
+    "status": "verified",
+    "supplier_batch": "75",
+    "supplier_item_ids": [
+      "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+      "thm-index-one-dae-implicit-function-reduction",
+      "lem-index-one-dae-algebraic-residual-to-state-error"
+    ],
+    "required_interface": "Batch 75 proves residual reduction only for semi-explicit index-one systems with an invertible algebraic Jacobian g_z on a selected chart. The unreduced holonomic position and differentiated tangency equations form an index-three constrained system, so the index-one theorem is not a supplier for T07's phase flow or multiplier branch.",
+    "affected_claims": [
+      "thm-local-holonomic-constrained-hamiltonian-flow",
+      "lem-rattle-scaled-position-and-momentum-branches",
+      "thm-rattle-scaled-solve-residual-error-budget"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+        "section": "Definition",
+        "excerpt": "Higher-index systems and points with singular g_z are outside this index-one interface."
+      }
+    ],
+    "evidence": "Inspected the batch-75 definition, complete index-one reduction proof, and residual-to-algebraic-state estimate. The stated invertible g_z interface is not applicable to holonomic position constraints with their differentiated tangency condition. T07 derives the reduced multiplier equation and its residual bounds locally; no DAE item is cited as a logical premise."
+  },
+  {
+    "kind": "page",
+    "consumer": "constrained-dynamics-shake-and-rattle",
+    "supplier": "geometric-numerical-integration",
+    "status": "verified",
+    "supplier_batch": "54",
+    "supplier_item_ids": [
+      "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians",
+      "prop-local-leapfrog-and-symplectic-euler-are-symplectic"
+    ],
+    "required_interface": "E7 is one-way: NA-22 supplies the canonical symplectic-form/pullback convention and unconstrained comparison only. Its local leapfrog statement concerns the unprojected shear composition; it does not establish constrained RATTLE symplecticity.",
+    "affected_claims": [
+      "thm-rattle-symplecticity-on-regular-constraint-phase-space"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+        "section": "Statement",
+        "excerpt": "every admitted local leapfrog step and every admitted kick-then-drift symplectic Euler step has a C1 Jacobian satisfying DΦ^TJDΦ=J"
+      }
+    ],
+    "evidence": "Inspected the current NA-22 shear lemma and full proof of the local leapfrog symplecticity proposition. These apply to the unconstrained local maps only. No constrained conclusion is imported; the RATTLE theorem proves the pullback through its own discrete-Lagrangian identity. The E7 direction is preserved and T07 supplies no theorem to NA-22."
+  },
+  {
+    "kind": "page",
+    "consumer": "constrained-dynamics-shake-and-rattle",
+    "supplier": "hamiltonian-monte-carlo-and-leapfrog",
+    "status": "verified",
+    "supplier_item_ids": [
+      "def-leapfrog-step-map",
+      "thm-leapfrog-is-reversible-and-volume-preserving"
+    ],
+    "required_interface": "Use the published kick/drift formulas and unconstrained reversibility/volume scope only. The volume theorem assumes Countable Choice; T07 makes no phase-volume claim and carries no Choice assumption.",
+    "affected_claims": [
+      "def-regular-classical-rattle-step-map"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-leapfrog-step-map",
+        "section": "Definition",
+        "excerpt": "The one-step leapfrog map is Φε=Kε/2∘Dε∘Kε/2"
+      }
+    ],
+    "evidence": "Read the published kick/drift definition and the complete reversibility/volume proof. The RATTLE definition adds constraint impulses and exact residual equations; no ambient volume or AC claim is imported."
+  },
+  {
+    "kind": "page",
+    "consumer": "constrained-dynamics-shake-and-rattle",
+    "supplier": "implicit-stiff-time-stepping-and-algebraic-error",
+    "status": "verified",
+    "supplier_batch": "65",
+    "supplier_item_ids": [
+      "def-implicit-residual-and-algebraic-error-units",
+      "alg-newton-chord-implicit-residual-with-factorization-reuse"
+    ],
+    "required_interface": "The residual definition distinguishes the scaled equation residual from the original update residual and explicitly says a residual is not a forward-error estimate without an inverse/stability bound. The finite Newton/chord algorithm returns the last valid iterate and residual status; it makes no convergence or forward-error claim.",
+    "affected_claims": [
+      "alg-finite-budget-rattle-step-with-scaled-residuals",
+      "thm-finite-budget-rattle-solver-returns-status",
+      "thm-rattle-scaled-solve-residual-error-budget"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-implicit-residual-and-algebraic-error-units",
+        "section": "Definition",
+        "excerpt": "A residual norm is not a forward-error bound unless a separate inverse or stability estimate converts it to the distance"
+      },
+      {
+        "item": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+        "section": "Definition",
+        "excerpt": "Both modes make no claim that a finite budget reaches an exact root or that a small residual is a forward-error bound."
+      }
+    ],
+    "evidence": "Read both current supplier bodies and the transitive finite-Newton and correction algorithm definitions. RATTLE uses chord mode with refresh period one on its scaled residual maps; its local inverse theorem, rather than the solver status, proves the forward-error bounds."
+  }
+]

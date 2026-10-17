@@ -1,0 +1,184 @@
+{
+  "group": "i",
+  "batches": ["75"],
+  "pages_read": [
+    "differential-algebraic-equations-and-consistent-initialization",
+    "differential-algebraic-equations-and-consistent-initialization-examples"
+  ],
+  "items_read": [
+    "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+    "def-regular-differentiation-index",
+    "thm-index-one-dae-implicit-function-reduction",
+    "lem-index-one-dae-algebraic-residual-to-state-error",
+    "alg-index-one-dae-consistent-initialization",
+    "alg-index-one-dae-backward-euler-stepper",
+    "alg-index-one-dae-bdf2-stepper",
+    "lem-index-one-dae-backward-euler-local-branch",
+    "lem-index-one-dae-bdf2-local-branch",
+    "thm-index-one-dae-finite-budget-solvers-terminate",
+    "thm-index-one-dae-backward-euler-first-order-with-residuals",
+    "thm-index-one-dae-bdf2-second-order-with-residuals",
+    "ex-index-one-circuit-consistent-initialization-and-be-step",
+    "ex-index-two-dae-algebraic-residual-does-not-control-state",
+    "ex-index-three-pendulum-by-differentiation"
+  ],
+  "conventions": [
+    {
+      "convention": "Algebraic consistency means g(t0,x0,z0)=0. It need not imply consistency with a higher-index solution. Regular index one requires C1 data and invertible square g_z at a constraint zero.",
+      "fixed_by": "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+      "matters_for": [
+        "thm-index-one-dae-implicit-function-reduction",
+        "alg-index-one-dae-consistent-initialization",
+        "ex-index-two-dae-algebraic-residual-does-not-control-state",
+        "ex-index-three-pendulum-by-differentiation"
+      ]
+    },
+    {
+      "convention": "The local differentiation index counts through the first derivative of the algebraic variable: the least positive differentiation count that regularly determines z and z'.",
+      "fixed_by": "def-regular-differentiation-index",
+      "matters_for": [
+        "ex-index-two-dae-algebraic-residual-does-not-control-state",
+        "ex-index-three-pendulum-by-differentiation"
+      ]
+    },
+    {
+      "convention": "Residual-to-state control applies only inside the specified selected-branch balls, with uniform gamma, Lambda and rho; when Lambda>0, rho≤gamma/(sqrt(m) Lambda).",
+      "fixed_by": "lem-index-one-dae-algebraic-residual-to-state-error",
+      "matters_for": [
+        "thm-index-one-dae-backward-euler-first-order-with-residuals",
+        "thm-index-one-dae-bdf2-second-order-with-residuals"
+      ]
+    },
+    {
+      "convention": "Backward-Euler derivative residual divides the differential update residual by h; constant-step BDF2 divides it by 2h. Algebraic residuals remain g(t,X,Z). Newton acceptance tests the concatenated scaled residual at tolerance 1.",
+      "fixed_by": "alg-index-one-dae-backward-euler-stepper",
+      "matters_for": [
+        "alg-index-one-dae-bdf2-stepper",
+        "thm-index-one-dae-finite-budget-solvers-terminate",
+        "thm-index-one-dae-backward-euler-first-order-with-residuals",
+        "thm-index-one-dae-bdf2-second-order-with-residuals"
+      ]
+    },
+    {
+      "convention": "Termination assumes returning exact-arithmetic primitives and counts explicit outer residual queries separately from Jacobian assembly and backend work. A root status certifies a residual tolerance, not an exact zero or discretization accuracy.",
+      "fixed_by": "thm-index-one-dae-finite-budget-solvers-terminate",
+      "matters_for": [
+        "thm-index-one-dae-backward-euler-first-order-with-residuals",
+        "thm-index-one-dae-bdf2-second-order-with-residuals"
+      ]
+    },
+    {
+      "convention": "BDF2 accuracy uses a constant grid, N≥2, a C3 exact reduced solution, O(h²) starting errors and algebraic residuals, and O(h²) derivative and algebraic step residuals, all within the common tube.",
+      "fixed_by": "thm-index-one-dae-bdf2-second-order-with-residuals",
+      "matters_for": [
+        "thm-index-one-dae-bdf2-second-order-with-residuals"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-index-one-dae-implicit-function-reduction",
+      "statement": "For Ck f,g on an open domain, k≥1, a constraint zero with invertible g_z has a unique local Ck branch z=ψ(t,x), with g=0 iff z=ψ, ψ_t=−g_z⁻¹g_t and ψ_x=−g_z⁻¹g_x. The reduced field F(t,x)=f(t,x,ψ(t,x)) is Ck, and solutions in the chart correspond exactly.",
+      "used_by": [
+        "lem-index-one-dae-algebraic-residual-to-state-error",
+        "alg-index-one-dae-consistent-initialization",
+        "alg-index-one-dae-backward-euler-stepper",
+        "alg-index-one-dae-bdf2-stepper",
+        "lem-index-one-dae-backward-euler-local-branch",
+        "lem-index-one-dae-bdf2-local-branch",
+        "thm-index-one-dae-backward-euler-first-order-with-residuals",
+        "thm-index-one-dae-bdf2-second-order-with-residuals",
+        "ex-index-one-circuit-consistent-initialization-and-be-step"
+      ]
+    },
+    {
+      "id": "lem-index-one-dae-algebraic-residual-to-state-error",
+      "statement": "Under the stated common branch-ball, lower singular-value and anchored Jacobian bounds, with rho≤gamma/(sqrt(m) Lambda) when Lambda>0, every candidate in the specified ball satisfies ||z−ψ(t,x)||₂≤(2/gamma)||g(t,x,z)||₂ uniformly over the compact base set.",
+      "used_by": [
+        "thm-index-one-dae-backward-euler-first-order-with-residuals",
+        "thm-index-one-dae-bdf2-second-order-with-residuals"
+      ]
+    },
+    {
+      "id": "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+      "statement": "A semi-explicit DAE is x'=f(t,x,z), g(t,x,z)=0; algebraic consistency means g(t0,x0,z0)=0, and regular index one requires C1 data and invertible g_z at a constraint zero.",
+      "used_by": [
+        "def-regular-differentiation-index",
+        "thm-index-one-dae-implicit-function-reduction",
+        "alg-index-one-dae-consistent-initialization",
+        "alg-index-one-dae-backward-euler-stepper",
+        "alg-index-one-dae-bdf2-stepper",
+        "ex-index-two-dae-algebraic-residual-does-not-control-state",
+        "ex-index-three-pendulum-by-differentiation"
+      ]
+    },
+    {
+      "id": "def-regular-differentiation-index",
+      "statement": "The index is the least positive integer k for which the original constraint and its first k differentiated equations locally determine z and z', with an invertible square Jacobian for the highest algebraic derivative.",
+      "used_by": [
+        "ex-index-two-dae-algebraic-residual-does-not-control-state",
+        "ex-index-three-pendulum-by-differentiation"
+      ]
+    },
+    {
+      "id": "thm-index-one-dae-finite-budget-solvers-terminate",
+      "statement": "With finite grids and Newton budget B and returning primitives, initialization and both steppers terminate. Initialization uses at most B+2 residual evaluations; S attempted steps use at most 1+S(B+2) for backward Euler and 2+S(B+2) for BDF2. Appended candidates satisfy their stated derivative and algebraic residual tolerances.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "First-order ODE and solution conventions, including endpoint derivatives, underlying the DAE formulation and reduced solution.",
+      "opened": true
+    },
+    {
+      "id": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+      "used_for": "Selected Ck algebraic branch, derivative formula, and local coupled backward-Euler and BDF2 root branches.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiation of the implicit constraint and composition defining the reduced vector field.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "Componentwise local residual estimates, backward-Euler truncation error, and constant-step BDF2 defect.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Euclidean triangle inequality in the local residual-to-state estimate.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-index-one-dae-algebraic-residual-to-state-error",
+      "concern": "Proof 1.1 asserts from componentwise Lagrange Taylor expansion that 'Each component remainder is at most (Lambda/2)||delta||₂².' The hypothesis bounds ||g_z(z)−G_*|| by Lambda||z−z_*|| only relative to the branch center; it does not directly bound Hessians at the Lagrange intermediate points. The claimed remainder estimate follows immediately by integrating (g_z(z_*+s delta)−G_*)delta over 0≤s≤1, but that justification is absent.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "differential-algebraic-equations-and-consistent-initialization",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "Opened the correction algorithm, finite-budget Newton algorithm and work lemma. The wrappers preserve residual-first stopping, budget bounds, domain guards and failure statuses, without importing convergence or tolerance attainment."
+    },
+    {
+      "from": "differential-algebraic-equations-and-consistent-initialization",
+      "to": "implicit-stiff-time-stepping-and-algebraic-error",
+      "faithful": true,
+      "note": "Opened the backward-Euler endpoint and residual-unit definitions. Differential update and derivative units agree; the DAE claims separately impose algebraic constraints and local residual-to-state hypotheses."
+    },
+    {
+      "from": "constrained-dynamics-shake-and-rattle",
+      "to": "differential-algebraic-equations-and-consistent-initialization",
+      "faithful": true,
+      "note": "Read the downstream page and inspected its listed items for uses of this batch. No direct citation imports an index-one guarantee. Its phase-space definition imposes both position and tangency consistency; its pendulum multiplier agrees with this batch after converting momentum to velocity and accounting for mass."
+    }
+  ]
+}

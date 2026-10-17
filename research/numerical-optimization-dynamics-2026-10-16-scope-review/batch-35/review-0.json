@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "35",
+  "round": 0,
+  "reviewed_items": [
+    "lem-chebyshev-rkc-bounds-and-endpoint-derivatives",
+    "def-explicit-runge-kutta-tableau-and-stage-map",
+    "alg-rkc1-chebyshev",
+    "alg-rkc2-linear-chebyshev",
+    "alg-rkc2-nonlinear",
+    "def-euler-midpoint-rk4-tableaus",
+    "prop-explicit-rk-order-conditions-through-four",
+    "alg-ssprk33",
+    "prop-euler-midpoint-rk4-orders-and-stability-functions",
+    "prop-rkc-stability-intervals-and-stage-degree",
+    "lem-rkc-chebyshev-stage-perturbation-amplification",
+    "prop-ssprk33-third-order-and-convex-preservation",
+    "thm-nonlinear-rkc2-order-two-and-global-error",
+    "ex-midpoint-order-loss-at-continuous-time-kink",
+    "ex-euler-midpoint-rk4-fixed-time-error-slopes",
+    "ex-rkc-self-adjoint-heat-stability-work",
+    "ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth",
+    "ex-rkc-stage-roundoff-quadratic-amplification"
+  ],
+  "reviewed_pages": [
+    "runge-kutta-methods-and-order",
+    "runge-kutta-methods-and-order-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch matches the approved scope. Request one local repair covering the procedure-interface ambiguities, the two missing positive-dimension hypotheses, the Chebyshev degree proof base case, and the midpoint error-sign slip. No unresolved outside prerequisite gap remains.",
+  "findings": [
+    {
+      "id": "alg-rkc1-chebyshev",
+      "type": "local",
+      "reason": "The input omits a start time although success is reported at t+h; the evaluation-failure branch also uses an evaluator not listed as an input. Add t or remove the timestamp, and specify the evaluator/status contract."
+    },
+    {
+      "id": "alg-rkc2-linear-chebyshev",
+      "type": "local",
+      "reason": "A is declared as a total endomorphism, but a later branch says its numerical application may fail. Specify an application oracle and its failure result, or remove the implementation-failure branch from the exact procedure."
+    },
+    {
+      "id": "alg-rkc2-nonlinear",
+      "type": "local",
+      "reason": "The input declares f but not an evaluation oracle, while the procedure branches on evaluator failure. Specify the oracle and status contract consistently with the explicit-tableau interface."
+    },
+    {
+      "id": "prop-rkc-stability-intervals-and-stage-degree",
+      "type": "local",
+      "reason": "The matrix clause defines ρ as a maximum over eigenvalues of R^d without requiring d≥1; the library permits dimension zero, where this maximum is undefined. State d≥1 or define the empty-spectrum case."
+    },
+    {
+      "id": "lem-rkc-chebyshev-stage-perturbation-amplification",
+      "type": "local",
+      "reason": "The statement likewise uses ρ=max_i(-λ_i(A)) without d≥1. State the positive-dimension condition or define the empty-spectrum case."
+    },
+    {
+      "id": "lem-chebyshev-rkc-bounds-and-endpoint-derivatives",
+      "type": "prerequisite",
+      "reason": "Its degree claim relies on lem-chebyshev-degree-leading-coefficients-and-extreme-values, whose displayed induction starts at n=1 but uses the n=0 degree and leading coefficient in the first successor step. Close this base locally from T₀=U₀=1 before invoking the recurrence."
+    },
+    {
+      "id": "ex-euler-midpoint-rk4-fixed-time-error-slopes",
+      "type": "local",
+      "reason": "With d_h=R−exp(−h), explicit midpoint has leading defect +h³/6, but Step 1.1 gives −h³/6. Correct the sign; the absolute error constant in the table remains unchanged."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "prop-rkc-stability-intervals-and-stage-degree",
+      "decision": "accept",
+      "reason": "The consumers use the stated recurrences and polynomial coefficients; the interface clarifications leave them unchanged, and d≥1 makes the spectral-radius definition well-formed."
+    },
+    {
+      "id": "lem-rkc-chebyshev-stage-perturbation-amplification",
+      "decision": "accept",
+      "reason": "Its recurrence and amplification bound are unchanged by the interface clarifications; d≥1 makes its spectral-radius definition well-formed."
+    },
+    {
+      "id": "thm-nonlinear-rkc2-order-two-and-global-error",
+      "decision": "accept",
+      "reason": "The theorem uses the nonlinear recurrence, assumes evaluation failures absent, and inherits d≥1 from its IVP supplier; the proposed interface clarification leaves its argument intact."
+    },
+    {
+      "id": "ex-rkc-self-adjoint-heat-stability-work",
+      "decision": "accept",
+      "reason": "Its matrix is two-dimensional and its stability and work comparisons use unchanged RKC1 recurrences."
+    },
+    {
+      "id": "ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth",
+      "decision": "accept",
+      "reason": "Its two-dimensional matrix update is unchanged by the interface clarifications."
+    },
+    {
+      "id": "ex-rkc-stage-roundoff-quadratic-amplification",
+      "decision": "accept",
+      "reason": "Its recurrence is unchanged, and the chosen unit vector already requires positive dimension."
+    },
+    {
+      "id": "runge-kutta-methods-and-order",
+      "decision": "accept",
+      "reason": "The page summary remains accurate after clarifying procedure inputs and the positive-dimension assumptions."
+    },
+    {
+      "id": "runge-kutta-methods-and-order-examples",
+      "decision": "accept",
+      "reason": "The examples retain their stated hypotheses and conclusions after the proposed local repairs."
+    }
+  ]
+}

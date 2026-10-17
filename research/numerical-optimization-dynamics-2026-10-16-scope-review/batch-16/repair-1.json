@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "16",
+  "round": 1,
+  "reviewed_items": [
+    "alg-threshold-partial-pivot-sparse-lu",
+    "def-hermitian-structural-graph-adapter",
+    "alg-nested-dissection-ordering-on-regular-grids",
+    "lem-filled-edge-path-characterisation",
+    "thm-threshold-sparse-lu-residual-with-growth",
+    "def-elimination-tree-and-column-reach",
+    "lem-nested-dissection-fronts-are-boundary-limited",
+    "lem-hermitian-schur-support-is-contained-in-structural-fill",
+    "alg-symmetric-indefinite-block-ldl-star",
+    "lem-elimination-tree-reach-contains-each-filled-neighbor",
+    "alg-sparse-cholesky-with-invalid-pivot-status",
+    "thm-block-ldl-star-residual-with-actual-growth",
+    "thm-sparse-cholesky-structural-pattern-without-cancellation",
+    "alg-multifrontal-cholesky-and-sparse-triangular-solves",
+    "thm-multifrontal-elimination-equivalence-and-sparse-costs",
+    "thm-nested-dissection-grid-work-and-storage-bounds",
+    "alg-certified-hermitian-one-and-two-by-two-ldl-kernel",
+    "lem-hermitian-block-ldl-kernel-roundoff-and-reconstruction-residual",
+    "ex-star-orderings-produce-different-sparse-fill",
+    "ex-nonsingular-indefinite-requires-two-by-two-pivot",
+    "ex-two-dimensional-poisson-nested-dissection-cost"
+  ],
+  "reviewed_pages": [
+    "sparse-direct-elimination-and-ordering",
+    "sparse-direct-elimination-and-ordering-examples"
+  ],
+  "decision": "accept",
+  "reason": "All local findings are resolved, and affected consumer uses were checked. This prepared repair returns to the final whole-batch review; it is not an independent batch acceptance.",
+  "findings": [
+    {
+      "id": "alg-threshold-partial-pivot-sparse-lu",
+      "type": "local",
+      "reason": "Initialized Q, L, and U; specified pivot-row storage, left-composed row swaps, sparse updates, n≥1, and status-only failure outputs."
+    },
+    {
+      "id": "alg-symmetric-indefinite-block-ldl-star",
+      "type": "local",
+      "reason": "Specified factor initialization and storage, entrywise inverse-modulus tests, empty input behavior, and status-only failures that discard unfinished block data."
+    },
+    {
+      "id": "alg-certified-hermitian-one-and-two-by-two-ldl-kernel",
+      "type": "prerequisite",
+      "reason": "Defined complex modulus explicitly while retaining the rounded scaled-norm procedure as the kernel’s only computed modulus enclosure."
+    },
+    {
+      "id": "lem-hermitian-block-ldl-kernel-roundoff-and-reconstruction-residual",
+      "type": "prerequisite",
+      "reason": "Defined the Frobenius norm locally and stated the rowwise length-one/two dot-product condition used from its supplier."
+    },
+    {
+      "id": "thm-block-ldl-star-residual-with-actual-growth",
+      "type": "local",
+      "reason": "Set empty-run amplification maxima and stage sums to zero, consistent with the zero-dimensional operator norm."
+    },
+    {
+      "id": "thm-nested-dissection-grid-work-and-storage-bounds",
+      "type": "local",
+      "reason": "Added the path-characterization dependency and proved subgraph fill is contained in full-grid fill before applying the full-grid front bounds."
+    },
+    {
+      "id": "alg-multifrontal-cholesky-and-sparse-triangular-solves",
+      "type": "local",
+      "reason": "Specified ordered front assembly and solve operations, factor indexing, range statuses, and allocation of all symbolic slots including zeros."
+    },
+    {
+      "id": "thm-multifrontal-elimination-equivalence-and-sparse-costs",
+      "type": "local",
+      "reason": "Clarified the subtree Schur-contribution invariant, excluded unassigned interface entries, ruled out cross-branch coupling, and cited the Cholesky result used for child-block nonsingularity."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-threshold-sparse-lu-residual-with-growth",
+      "decision": "accept",
+      "reason": "Its invariant now matches the explicit pivot-row storage and row-permutation composition."
+    },
+    {
+      "id": "alg-symmetric-indefinite-block-ldl-star",
+      "decision": "accept",
+      "reason": "Its kernel modulus convention, accepted-block storage, and failure outputs are explicit."
+    },
+    {
+      "id": "lem-hermitian-block-ldl-kernel-roundoff-and-reconstruction-residual",
+      "decision": "accept",
+      "reason": "The modulus and Frobenius conventions, plus the length-two dot-product premise, support its existing bounds."
+    },
+    {
+      "id": "thm-block-ldl-star-residual-with-actual-growth",
+      "decision": "accept",
+      "reason": "The exact and rounded factor identities use the clarified factor storage; empty runs have defined growth values."
+    },
+    {
+      "id": "ex-nonsingular-indefinite-requires-two-by-two-pivot",
+      "decision": "accept",
+      "reason": "Its successful exact two-by-two pivot and returned factors are unchanged."
+    },
+    {
+      "id": "alg-interval-hermitian-ldl-inertia-certifier",
+      "decision": "accept",
+      "reason": "It uses the exact branch’s pivot-failure status and does not depend on failure factor arrays."
+    },
+    {
+      "id": "thm-interval-hermitian-ldl-inertia-certifier-soundness",
+      "decision": "accept",
+      "reason": "Its success and inconclusive-status claims remain unchanged."
+    },
+    {
+      "id": "alg-ordered-hermitian-eigenvalue-bisection",
+      "decision": "accept",
+      "reason": "It consumes the unchanged interval-certifier statuses."
+    },
+    {
+      "id": "thm-ordered-hermitian-eigenvalue-bisection-soundness",
+      "decision": "accept",
+      "reason": "Its bracket proof uses successful inertia results and the unchanged inconclusive branch."
+    },
+    {
+      "id": "ex-hermitian-eigenvalue-bisection-by-verified-inertia",
+      "decision": "accept",
+      "reason": "Its diagonal pivot plan and successful query outcomes are unchanged."
+    },
+    {
+      "id": "thm-multifrontal-elimination-equivalence-and-sparse-costs",
+      "decision": "accept",
+      "reason": "The proof now matches the explicit front assembly, symbolic storage, and solve procedures."
+    },
+    {
+      "id": "thm-nested-dissection-grid-work-and-storage-bounds",
+      "decision": "accept",
+      "reason": "Its repaired subgraph fill inclusion supports the unchanged work and storage claims."
+    },
+    {
+      "id": "ex-two-dimensional-poisson-nested-dissection-cost",
+      "decision": "accept",
+      "reason": "The full-grid example remains within the proved grid-bound hypotheses."
+    },
+    {
+      "id": "sparse-direct-elimination-and-ordering",
+      "decision": "accept",
+      "reason": "Its overview claims remain supported by the reviewed procedures and results."
+    },
+    {
+      "id": "sparse-direct-elimination-and-ordering-examples",
+      "decision": "accept",
+      "reason": "Its examples remain valid under the clarified pivot and factor-output conventions."
+    },
+    {
+      "id": "verified-linear-systems-and-spectral-enclosures",
+      "decision": "accept",
+      "reason": "Its interval inertia and bisection uses rely on unchanged success and inconclusive semantics."
+    }
+  ]
+}

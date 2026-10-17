@@ -1,0 +1,34 @@
+--- a/tools/step3-owner-downstream-consumer-routes.mjs
++++ b/tools/step3-owner-downstream-consumer-routes.mjs
+@@ -156,8 +156,9 @@
+   }
+   return route;
+ }
+-export function downstreamConsumerClosureEvidence(root,run,manifestPolicy=null) {
++export function downstreamConsumerClosureEvidence(root,run,manifestPolicy=null,{frozenArtifacts=null}={}) {
+   assert(manifestPolicy===null||manifestPolicy===PRECLOSURE_MANIFEST_POLICY,'unknown manifest evidence policy');
++  assert(frozenArtifacts===null||manifestPolicy===PRECLOSURE_MANIFEST_POLICY,'frozen manifest verification requires the original marked policy');
+   assert(safe(run),'invalid run');const p=`research/${run}-step3-owner-downstream-consumer-routes.json`;
+   if(!existsSync(resolve(root,p)))return {};
+   const raw=bytes(root,p),doc=JSON.parse(raw);
+@@ -169,7 +170,7 @@
+     if(['manifest','consumer_manifest'].includes(key)){
+       const batch=key==='manifest'?e.batch:e.consumer_batch,item=key==='manifest'?e.supplier_id:e.consumer_id;
+       const manifest=historicalStep3Manifest(root,run,batch,r,{kind:'downstream-consumer',registry:p,index,field:key},
+-        {preclosure:manifestPolicy===PRECLOSURE_MANIFEST_POLICY});
++        {preclosure:manifestPolicy===PRECLOSURE_MANIFEST_POLICY,frozenArtifacts});
+       for(const value of [manifest.historical,manifest.current])assert(inventory(JSON.parse(value)).filter(id=>id===item).length===1,
+         'subject absent or duplicated in historical/current assigned manifest');
+       if(manifest.archived)currentOwnership(root,run,e);
+@@ -177,7 +178,10 @@
+         for(const [path,digest] of Object.entries(manifest.evidence)){
+           assert(out[path]===undefined||out[path]===digest,'ambiguous current/historical evidence');out[path]=digest;
+         }
+-        continue; // Live path binds CURRENT bytes; the historical SHA binds its archive.
++        // Close binds live bytes. Verify reconstructs that exact original slot
++        // from the already sealed closureCapture; actual live ownership is
++        // checked independently above, without adopting current review coverage.
++        continue;
+       }
+     }else ref(root,r);
+     assert(out[r.path]===undefined || out[r.path]===r.sha256,'ambiguous historical reference');out[r.path]=r.sha256;

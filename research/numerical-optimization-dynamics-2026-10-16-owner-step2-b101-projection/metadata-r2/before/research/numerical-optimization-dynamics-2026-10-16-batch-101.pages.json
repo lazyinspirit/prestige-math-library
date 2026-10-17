@@ -1,0 +1,357 @@
+[
+  {
+    "order": 2486,
+    "id": "finite-element-pde-constrained-optimization",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Finite element pde constrained optimization",
+    "companion": "finite-element-pde-constrained-optimization-examples",
+    "requires": [
+      "inequality-kkt-duality-and-optimality-certificates",
+      "finite-element-meshes-and-interpolation",
+      "proximal-gradient-and-accelerated-composite-optimization",
+      "ceas-lemma-and-aubin-nitsche-error-estimates",
+      "parabolic-finite-element-methods",
+      "variational-crimes-and-strang-lemmas",
+      "discrete-continuous-and-pde-adjoint-sensitivities",
+      "sqp-active-set-and-augmented-lagrangian-methods"
+    ],
+    "items": [
+      {
+        "id": "def-pde-box-control-set",
+        "kind": "definition",
+        "title": "Closed pointwise box of L2 controls",
+        "deps": [
+          "def-countable-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-pde-box-control-set-basic-properties",
+        "kind": "lemma",
+        "title": "A pointwise L2 box is nonempty, bounded, closed, and convex",
+        "deps": [
+          "def-pde-box-control-set"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-pde-l2-control-space-separable",
+        "kind": "lemma",
+        "title": "L2 controls on a bounded spatial region form a separable Hilbert space",
+        "deps": [
+          "def-countable-choice",
+          "def-pde-box-control-set",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-linear-elliptic-pde-constrained-control-problem",
+        "kind": "definition",
+        "title": "Linear coercive elliptic PDE control problem and reduced objective",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-bounded-linear-operator",
+          "def-countable-choice",
+          "def-dual-space-of-a-normed-space",
+          "def-hilbert-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-pde-box-control-set",
+          "def-wkp-zero-as-a-sobolev-closure"
+        ],
+        "justified_by": [
+          "thm-linear-elliptic-control-state-and-adjoint-wellposedness"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-separable-hilbert-bounded-sequence-weak-subsequence",
+        "kind": "lemma",
+        "title": "A bounded sequence in a separable Hilbert space has a weakly convergent subsequence",
+        "deps": [
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-separable-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-nested-interval-property",
+          "thm-riesz-representation-for-hilbert-space"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-pde-box-control-set-weakly-sequentially-closed",
+        "kind": "lemma",
+        "title": "A pointwise L2 box is weakly sequentially closed",
+        "deps": [
+          "def-pde-box-control-set"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-linear-elliptic-control-state-and-adjoint-wellposedness",
+        "kind": "theorem",
+        "title": "Well-posedness of elliptic control state and adjoint equations",
+        "deps": [
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-countable-choice",
+          "def-linear-elliptic-pde-constrained-control-problem",
+          "thm-lax-milgram"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-linear-elliptic-reduced-control-gradient-and-hessian",
+        "kind": "theorem",
+        "title": "Reduced gradient and coercive Hessian for linear elliptic tracking control",
+        "deps": [
+          "def-bounded-linear-operator",
+          "def-countable-choice",
+          "def-linear-elliptic-pde-constrained-control-problem",
+          "thm-linear-elliptic-control-state-and-adjoint-wellposedness",
+          "thm-riesz-representation-for-hilbert-space"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-linear-elliptic-control-existence-and-variational-inequality",
+        "kind": "theorem",
+        "title": "Existence, uniqueness, and variational inequality for elliptic PDE control",
+        "deps": [
+          "def-countable-choice",
+          "def-linear-elliptic-pde-constrained-control-problem",
+          "lem-pde-box-control-set-basic-properties",
+          "lem-pde-box-control-set-weakly-sequentially-closed",
+          "lem-pde-l2-control-space-separable",
+          "lem-separable-hilbert-bounded-sequence-weak-subsequence",
+          "thm-linear-elliptic-control-state-and-adjoint-wellposedness",
+          "thm-linear-elliptic-reduced-control-gradient-and-hessian"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-box-control-projection-is-pointwise-clipping",
+        "kind": "lemma",
+        "title": "The L2 projection onto a pointwise box is clipping",
+        "deps": [
+          "def-pde-box-control-set"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "cor-linear-elliptic-control-projection-formula",
+        "kind": "corollary",
+        "title": "The optimal elliptic control is the clipped negative adjoint",
+        "deps": [
+          "def-linear-elliptic-pde-constrained-control-problem",
+          "lem-box-control-projection-is-pointwise-clipping",
+          "thm-linear-elliptic-control-existence-and-variational-inequality",
+          "thm-linear-elliptic-reduced-control-gradient-and-hessian"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-piecewise-constant-control-h1-projection-error",
+        "kind": "lemma",
+        "title": "Cell averaging preserves constant box bounds and has an H1 error bound",
+        "deps": [
+          "def-countable-choice",
+          "def-matching-affine-simplicial-meshes",
+          "lem-affine-pullback-weak-derivatives-and-scaling",
+          "thm-reference-simplex-poincare-wirtinger"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-fem-control-gradient-residual-bound",
+        "kind": "lemma",
+        "title": "State and adjoint Strang bounds give a reduced-gradient error certificate",
+        "deps": [
+          "def-countable-choice",
+          "def-linear-elliptic-pde-constrained-control-problem",
+          "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "thm-linear-elliptic-reduced-control-gradient-and-hessian",
+          "thm-linear-elliptic-control-state-and-adjoint-wellposedness"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-p0-control-fem-o-h-error",
+        "kind": "theorem",
+        "title": "Piecewise-constant control with shape-regular finite elements has O(h) error",
+        "deps": [
+          "cor-shape-regular-affine-fe-primal-energy-approximation",
+          "def-countable-choice",
+          "def-linear-elliptic-pde-constrained-control-problem",
+          "def-matching-affine-simplicial-meshes",
+          "lem-fem-control-gradient-residual-bound",
+          "lem-piecewise-constant-control-h1-projection-error",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "thm-linear-elliptic-control-existence-and-variational-inequality",
+          "thm-linear-elliptic-reduced-control-gradient-and-hessian"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-variational-fem-control-o-h2-error",
+        "kind": "theorem",
+        "title": "Variational control discretization has O(h2) error under primal and adjoint H2 regularity",
+        "deps": [
+          "cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation",
+          "cor-shape-regular-affine-fe-primal-energy-approximation",
+          "def-countable-choice",
+          "def-linear-elliptic-pde-constrained-control-problem",
+          "def-matching-affine-simplicial-meshes",
+          "thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "thm-linear-elliptic-control-existence-and-variational-inequality",
+          "thm-linear-elliptic-reduced-control-gradient-and-hessian"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-parabolic-control-adjoint-gradient-extension",
+        "kind": "theorem",
+        "title": "Parabolic linear-quadratic control has an energy adjoint and reduced gradient",
+        "deps": [
+          "def-countable-choice",
+          "def-parabolic-evolution-triple-and-energy-space",
+          "def-pde-box-control-set",
+          "lem-parabolic-energy-pairing-and-trace",
+          "lem-parabolic-projection-time-product-rule",
+          "thm-parabolic-semidiscrete-ritz-error-splitting-and-energy-bound",
+          "thm-parabolic-variational-wellposedness-and-energy-stability",
+          "thm-riesz-representation-for-hilbert-space"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "alg-fem-control-proximal-gradient-certified-residual",
+        "kind": "algorithm",
+        "title": "Finite-budget projected-gradient loop with state-adjoint residual certificates",
+        "deps": [
+          "alg-proximal-gradient-and-fista",
+          "def-linear-elliptic-pde-constrained-control-problem",
+          "lem-fem-control-gradient-residual-bound",
+          "lem-p0-box-projection-is-clipped-cell-average",
+          "thm-linear-elliptic-reduced-control-gradient-and-hessian"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-fem-control-proximal-gradient-residual-distance-bound",
+        "kind": "theorem",
+        "title": "A certified projected-gradient residual bounds distance to the control-mesh optimum",
+        "deps": [
+          "alg-fem-control-proximal-gradient-certified-residual",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-countable-choice",
+          "def-linear-elliptic-pde-constrained-control-problem",
+          "lem-fem-control-gradient-residual-bound",
+          "lem-p0-box-projection-is-clipped-cell-average",
+          "thm-euclidean-semicontinuous-extreme-value-theorem",
+          "thm-linear-elliptic-reduced-control-gradient-and-hessian"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "alg-fem-control-active-set-box-quadratic-solve",
+        "kind": "algorithm",
+        "title": "Finite exhaustive active-set solve for a box-constrained positive quadratic",
+        "deps": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-fem-control-active-set-box-quadratic-solve-sound-finite",
+        "kind": "theorem",
+        "title": "The exhaustive box quadratic solve returns the unique minimizer in finite time",
+        "deps": [
+          "alg-fem-control-active-set-box-quadratic-solve",
+          "thm-euclidean-semicontinuous-extreme-value-theorem"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+        "kind": "algorithm",
+        "title": "Finite-budget active-set SQP with a certified KKT-system residual status",
+        "deps": [
+          "alg-sqp-exact-hessian-newton-step",
+          "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+          "def-linear-elliptic-pde-constrained-control-problem",
+          "thm-sqp-finite-precision-kkt-residual-certificate-sound"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-fem-control-active-set-sqp-finite-budget-certificate",
+        "kind": "theorem",
+        "title": "Finite SQP status is sound and the exact local branch inherits OPT6 conditions",
+        "deps": [
+          "alg-fem-control-active-set-sqp-with-finite-residual-status",
+          "thm-sqp-exact-hessian-local-quadratic-convergence",
+          "thm-sqp-finite-precision-kkt-residual-certificate-sound"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-p0-box-projection-is-clipped-cell-average",
+        "kind": "lemma",
+        "title": "The L2 projection onto a cellwise constant box clips cell averages",
+        "deps": [
+          "def-matching-affine-simplicial-meshes",
+          "def-pde-box-control-set"
+        ],
+        "dependency_level": 1
+      }
+    ]
+  },
+  {
+    "order": 2487,
+    "id": "finite-element-pde-constrained-optimization-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Finite element pde constrained optimization — Examples",
+    "companion": "finite-element-pde-constrained-optimization",
+    "requires": [
+      "finite-element-pde-constrained-optimization"
+    ],
+    "items": [
+      {
+        "id": "ex-distributed-heat-source-control-with-an-exact-box-optimum",
+        "kind": "example",
+        "title": "A distributed heat source has an exact box-constrained optimum",
+        "deps": [
+          "cor-linear-elliptic-control-projection-formula",
+          "def-linear-elliptic-pde-constrained-control-problem",
+          "thm-linear-elliptic-control-state-and-adjoint-wellposedness"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-boundary-control-needs-a-trace-space",
+        "kind": "example",
+        "title": "A boundary flux control uses the H1 trace and a different control operator",
+        "deps": [
+          "def-pde-box-control-set"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-bang-bang-control-is-the-alpha-zero-box-limit",
+        "kind": "example",
+        "title": "The alpha-zero linear box problem has a bang-bang active set",
+        "deps": [
+          "def-pde-box-control-set",
+          "lem-box-control-projection-is-pointwise-clipping"
+        ],
+        "dependency_level": 2
+      }
+    ]
+  }
+]

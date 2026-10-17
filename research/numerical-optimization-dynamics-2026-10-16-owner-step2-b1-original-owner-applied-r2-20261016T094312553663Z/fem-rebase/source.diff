@@ -1,0 +1,15 @@
+--- actual-current/items/alg-fem-control-active-set-sqp-with-finite-residual-status.md
++++ research-proposed/items/alg-fem-control-active-set-sqp-with-finite-residual-status.md
+@@ -25,10 +25,10 @@
+ 
+ ## Definition
+ 
+-Let $F_A(z)=0$ be the active KKT system of a finite-dimensional reduced FE control problem, where $z=(x,\mu)$ stacks the control and active multipliers. Given $z_0$, an ordered finite list of proposed active sets $A_0,\ldots,A_{m-1}$, maximum budget $N\ge1$, residual tolerance $\tau\ge0$, and the floating-point hypotheses of [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]], process at most $\min(m,N)$ candidates:
++Let $F_A(z)=0$ be the active KKT system of a finite-dimensional reduced FE control problem, where $z=(x,\mu)$ stacks the control and active multipliers. Given $z_0$, an ordered finite list of proposed active sets $A_0,\ldots,A_{m-1}$, maximum budget $N\ge1$, residual tolerance $\tau\ge0$, a terminating exact-storage routine satisfying the input contract of [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]], and the floating-point hypotheses of [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]], process at most $\min(m,N)$ candidates:
+ 
+ 1. For candidate $A_j$, form $F_{A_j}(z_j)$ and its exact-Hessian active KKT Jacobian $K_j=DF_{A_j}(z_j)$.
+-2. Use the active KKT-map/Jacobian convention and rank/reduced-curvature applicability conditions of [[alg-sqp-exact-hessian-newton-step]]. Do not invoke its exact linear solve. Set $b_j=-F_{A_j}(z_j)$ and run the finite-precision QR algorithm of [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]] exactly once on $K_js=b_j$. A failed applicability check or QR solve records `numerical-failure`, sets $z_{j+1}=z_j$, and proceeds.
++2. Use the active KKT-map/Jacobian convention and rank/reduced-curvature applicability conditions of [[alg-sqp-exact-hessian-newton-step]]. Do not invoke its exact linear solve. Set $b_j=-F_{A_j}(z_j)$ and call [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]] exactly once on the intended system $K_js=b_j$, supplying the terminating exact-storage routine. Before numerical factorization or residual evaluation, that call must verify stored entries equal to the intended $K_j,b_j$; unavailable or unverified admission is a failed QR solve with no residual certificate. A failed applicability check or QR solve records `numerical-failure`, sets $z_{j+1}=z_j$, and proceeds.
+ 3. On a successful QR return, let $(\widehat s_j,\eta_j)$ be its step vector and residual bound. Set $z_j^+=z_j+\widehat s_j$ and $z_{j+1}=z_j^+$. The QR vector $\widehat s_j$ is the only step used by this wrapper. If $\eta_j\le\tau$, return $(z_j^+,A_j,\texttt{active-kkt-residual-certified},\eta_j)$; otherwise proceed.
+ 
+ If the finite list or budget is exhausted, return `budget-exhausted` with the smallest successfully computed residual bound, or `inconclusive` if no solve succeeded. This status concerns the active KKT equation residual only. Box feasibility, multiplier signs, global optimality, and forward accuracy require separate validated checks; none follows from a small linear-system residual alone.

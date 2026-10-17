@@ -1,0 +1,1084 @@
+[
+  {
+    "order": 2444,
+    "id": "interacting-particle-mean-field-and-vortex-blob-error",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Interacting particle mean field and vortex blob error",
+    "companion": "interacting-particle-mean-field-and-vortex-blob-error-examples",
+    "requires": [
+      "picard-lindelof-and-first-order-odes",
+      "one-step-ode-consistency-and-local-error",
+      "composite-quadrature-rules",
+      "global-ode-and-density-error",
+      "runge-kutta-methods-and-order",
+      "geometric-numerical-integration"
+    ],
+    "items": [
+      {
+        "id": "def-bounded-lipschitz-dual-norm-for-signed-measures",
+        "kind": "definition",
+        "title": "Bounded-Lipschitz dual discrepancy for finite signed measures",
+        "statement": "Let $\\omega,\\nu$ be finite signed Borel measures on $\\mathbb R^d$ such that $|\\omega-\\nu|(\\mathbb R^d)<\\infty$. For each bounded Lipschitz test function, integration against $\\omega-\\nu$ is defined by [[def-integration-against-a-signed-or-complex-measure]]; boundedness and finite total variation make every test in the following set integrable. Set $\\|\\phi\\|_\\infty:=\\sup_x|\\phi(x)|$ and $\\operatorname{Lip}(\\phi):=\\sup_{x\\ne y}|\\phi(x)-\\phi(y)|/|x-y|$, using the Euclidean norm from [[def-euclidean-inner-product]]. Define the bounded-Lipschitz dual discrepancy $$d_{BL}(\\omega,\\nu):=\\sup\\left\\{\\left|\\int\\phi\\,d(\\omega-\\nu)\\right|:\\|\\phi\\|_\\infty\\le1,\\ \\operatorname{Lip}(\\phi)\\le1\\right\\}.$$ The integral bound by total variation shows this supremum is finite. This page uses only the displayed dual quantity and makes no separate metric-separation claim. No Jordan decomposition, positivity, or probability normalization is needed.",
+        "strategy": "direct",
+        "deps": [
+          "def-signed-measure",
+          "def-total-variation-of-a-signed-or-complex-measure",
+          "def-euclidean-inner-product",
+          "def-integration-against-a-signed-or-complex-measure",
+          "thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "The bounded-Lipschitz dual discrepancy is choice-free; the integral is the published signed-measure integral on its L1 domain.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-globally-lipschitz-mean-field-kernel",
+        "kind": "definition",
+        "title": "Globally Lipschitz mean-field interaction kernel",
+        "statement": "Let $d\\ge1$, with the Euclidean norm from [[def-euclidean-inner-product]]. An interaction kernel is a continuous map $K:\\mathbb R^d\\times\\mathbb R^d\\to\\mathbb R^d$. It is globally Lipschitz with constant $L\\ge0$ in the convention used on this page if $$|K(x,y)-K(x',y')|\\le L(|x-x'|+|y-y'|)$$ for all $x,y,x',y'\\in\\mathbb R^d$. This implies the linear-growth estimate $$|K(x,y)|\\le |K(0,0)|+L(|x|+|y|).$$ The notation $L$ always refers to this two-variable convention; the stability factor below is therefore $2L$.",
+        "strategy": "direct",
+        "deps": [
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice principle is used in the definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            },
+            {
+              "title": "Simon Mayer, The Vlasov Equation and Mean Field Limit of a Particle System",
+              "url": "https://mathphys.pages.ist.ac.at/wp-content/uploads/sites/193/2023/10/Handout_Mayer.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-mollified-biot-savart-vortex-kernel",
+        "kind": "definition",
+        "title": "Smooth mollified Biot-Savart kernel",
+        "statement": "In two dimensions let $z^\\perp=(-z_2,z_1)$ and $$G(z)=\\frac1{2\\pi}\\log|z|,\\qquad K(z)=\\nabla^\\perp G(z)=\\frac{z^\\perp}{2\\pi|z|^2}\\quad(z\\ne0).$$ The locally integrable value assigned to $K(0)$ is immaterial. Fix a radial, nonnegative smooth bump $\\rho$ supported in the unit ball with $\\int\\rho=1$; its scaled family is the mollifier family of [[def-mollifier-family-generated-by-a-unit-mass-smooth-bump]]. Put $\\rho_\\varepsilon(z)=\\varepsilon^{-2}\\rho(z/\\varepsilon)$, $G_\\varepsilon=G*\\rho_\\varepsilon$, and $$K_\\varepsilon=K*\\rho_\\varepsilon.$$ The kernel is a regularized interaction; its smoothness and global Lipschitz property are proved in a separate lemma. It does not define the singular physical interaction at a collision.",
+        "strategy": "direct",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice principle is used in the definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. Liu and X. Xin, Convergence of Vortex Methods for Weak Solutions to the 2-D Euler Equations with Vortex Sheet Data",
+              "url": "https://sites.math.duke.edu/~jliu/pdf/Liu_Xin_CPAM_1995.pdf"
+            },
+            {
+              "title": "Gregory R. Baker and Lan D. Pham, A Comparison of Blob Methods for Vortex Sheet Roll Up",
+              "url": "https://people.math.osu.edu/baker.27/blobs.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-p-one-wasserstein-one",
+        "kind": "definition",
+        "title": "The coupling definition of the 1-Wasserstein distance",
+        "statement": "Let $d\\ge1$. For Borel probability measures $\\mu,\\nu$ on $\\mathbb R^d$ with finite first moments $\\int |x|\\,d\\mu(x)<\\infty$ and $\\int |y|\\,d\\nu(y)<\\infty$, let $\\Pi(\\mu,\\nu)$ be the set of Borel probability measures on $\\mathbb R^d\\times\\mathbb R^d$ whose first and second marginals are $\\mu$ and $\\nu$. Define $$W_1(\\mu,\\nu):=\\inf_{\\pi\\in\\Pi(\\mu,\\nu)}\\int_{\\mathbb R^d\\times\\mathbb R^d}|x-y|\\,d\\pi(x,y).$$ This definition makes no assertion that the infimum is attained. It applies only to probability measures with finite first moment; it is not a distance assigned here to a general signed measure.  Here $|\\cdot|$ is the Euclidean norm from [[def-euclidean-inner-product]], and probability measure has the meaning of [[def-probability-measure]].",
+        "strategy": "direct",
+        "deps": [
+          "def-probability-measure",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice principle is used in the definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-signed-split-transport-cost",
+        "kind": "definition",
+        "title": "Sign-preserving transport cost for finite signed measures",
+        "statement": "Assume the Axiom of Choice when invoking [[thm-jordan-decomposition-for-signed-measures]]. Let $\\omega,\\nu$ be finite signed Borel measures on $\\mathbb R^d$ whose total variations have finite first moments. Write their Jordan parts as $\\omega^+,\\omega^-$ and $\\nu^+,\\nu^-$. If the positive-part masses agree and the negative-part masses agree, define $$C_{\\pm}(\\omega,\\nu):=\\inf_{\\pi^+,\\pi^-}\\left(\\int|x-y|d\\pi^+(x,y)+\\int|x-y|d\\pi^-(x,y)\\right),$$ where $\\pi^+$ ranges over finite nonnegative couplings of $\\omega^+$ and $\\nu^+$, and $\\pi^-$ over finite nonnegative couplings of $\\omega^-$ and $\\nu^-$. The infimum is over both sign couplings independently. This cost is not the probability $W_1$.",
+        "strategy": "direct",
+        "deps": [
+          "def-signed-measure",
+          "def-total-variation-of-a-signed-or-complex-measure",
+          "thm-jordan-decomposition-for-signed-measures",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "The canonical Jordan parts used here are supplied by a theorem whose general existence branch assumes the Axiom of Choice.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            },
+            {
+              "title": "J. Liu and X. Xin, Convergence of Vortex Methods for Weak Solutions to the 2-D Euler Equations with Vortex Sheet Data",
+              "url": "https://sites.math.duke.edu/~jliu/pdf/Liu_Xin_CPAM_1995.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-weighted-continuous-path-space-is-complete",
+        "kind": "lemma",
+        "title": "Completeness of the weighted continuous trajectory space",
+        "statement": "Let $(E,\\mathcal A,\\mu)$ be a probability space, $T>0$, and $d\\ge1$. Use the Euclidean norm of [[def-euclidean-inner-product]]. Let $\\mathcal X$ be the space, modulo equality $\\mu$-almost everywhere, of jointly measurable maps $X:[0,T]\\times E\\to\\mathbb R^d$ whose paths are continuous for almost every label and whose time-supremum function is measurable, and for which $$\\|X\\|_{\\mathcal X}:=\\int_E\\sup_{0\\le t\\le T}|X_t(z)|d\\mu(z)<\\infty.$$ The seminorm identifies maps equal almost everywhere, and the induced distance $d_{\\mathcal X}(X,Y)=\\|X-Y\\|_{\\mathcal X}$ is a metric on the quotient; it is complete.",
+        "strategy": "direct",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-complete-metric-space",
+          "def-countable-choice",
+          "thm-euclidean-space-complete",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "Countable Choice selects measurable representatives of the countable sequence of equivalence classes; least-index subsequence selection is choice-free.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-tensor-simpson-force-evaluator",
+        "kind": "algorithm",
+        "title": "Tensor composite Simpson force evaluator on a rectangle",
+        "statement": "Input a rectangle $R=[a,b]\\times[c,d]$ with $a<b$, $c<d$, even integers $n_x,n_y\\ge2$, and an exact evaluation oracle for $F:R\\to\\mathbb R^2$. Return status invalid-domain if either interval is degenerate or reversed, and status invalid-panel-count if either panel count is not an even integer at least two. Otherwise set $h_x=(b-a)/n_x$, $h_y=(d-c)/n_y$, apply [[alg-composite-simpson-rule]] componentwise in the $x$ direction and then the $y$ direction, and return the resulting tensor sum $Q_yQ_xF$. If an evaluation oracle reports an unavailable value, stop at the first such grid point and return evaluation-failure with that point. The exact-real procedure makes finitely many evaluations and sums. This definition makes no floating-point roundoff or force-accuracy claim; error control is a separate result.",
+        "strategy": "direct",
+        "deps": [
+          "alg-composite-simpson-rule"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice principle is used; the procedure is a finite exact-arithmetic sum.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin Driscoll and Richard Braun, Fundamentals of Numerical Computation, Section 5.6",
+              "url": "https://fncbook.com/integration/"
+            },
+            {
+              "title": "MIT OpenCourseWare 18.330, Introduction to Numerical Analysis, Chapter 5",
+              "url": "https://ocw.mit.edu/courses/18-330-introduction-to-numerical-analysis-spring-2012/a9d2bd9be098f0ada172af40379a17cc_MIT18_330S12_Chapter5.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-characteristic-mean-field-solution",
+        "kind": "definition",
+        "title": "Characteristic solution of a probability mean-field equation",
+        "statement": "Fix $T>0$, a globally Lipschitz kernel $K$ as in [[def-globally-lipschitz-mean-field-kernel]], and a Borel probability measure $\\mu_0$ on $\\mathbb R^d$ with finite first moment as in [[def-p-one-wasserstein-one]]. A characteristic solution on $[0,T]$ consists of a jointly Borel map $X:[0,T]\\times\\mathbb R^d\\to\\mathbb R^d$, defined up to a $\\mu_0$-null set of labels, such that $t\\mapsto X_t(x)$ is absolutely continuous for $\\mu_0$-almost every $x$, $X_0(x)=x$, and $$X_t(x)=x+\\int_0^t\\int_{\\mathbb R^d}K(X_s(x),X_s(y))\\,d\\mu_0(y)\\,ds$$ for $\\mu_0$-almost every $x$. It transports $\\mu_0$ to $\\mu_t=(X_t)_\\#\\mu_0$, where $(X_t)_\\#\\mu_0(A):=\\mu_0(X_t^{-1}(A))$. The weighted path integrability convention is $\\int_{\\mathbb R^d}\\sup_{0\\le t\\le T}|X_t(x)|d\\mu_0(x)<\\infty$; in particular every time slice has finite first moment.",
+        "strategy": "direct",
+        "deps": [
+          "def-p-one-wasserstein-one",
+          "def-globally-lipschitz-mean-field-kernel"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice principle is used in the definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-mean-field-and-weighted-vortex-particle-systems",
+        "kind": "definition",
+        "title": "Equal-probability mean-field and weighted signed vortex particle systems",
+        "statement": "For a globally Lipschitz interaction kernel $K$ and $N\\ge1$, the equal-probability mean-field particle system is $$\\dot x_i(t)=\\frac1N\\sum_{j=1}^N K(x_i(t),x_j(t)),\\qquad i=1,\\ldots,N.$$ Its empirical probability measure is $\\mu_N(t)=N^{-1}\\sum_i\\delta_{x_i(t)}$.  For a mollified two-dimensional Biot-Savart kernel $K_\\varepsilon$ from [[def-mollified-biot-savart-vortex-kernel]] and real weights $\\Gamma_1,\\ldots,\\Gamma_N$, the weighted signed vortex particle system is $$\\dot x_i(t)=\\sum_{j=1}^N\\Gamma_jK_\\varepsilon(x_i(t)-x_j(t)),\\qquad i=1,\\ldots,N,$$ with vorticity measure $\\omega_N(t)=\\sum_i\\Gamma_i\\delta_{x_i(t)}$. If $\\Gamma_i=1/N$ and $K(x,y)=K_\\varepsilon(x-y)$, the first system is the probability special case. The weighted signed system is a first-order Biot-Savart model.",
+        "strategy": "direct",
+        "deps": [
+          "def-globally-lipschitz-mean-field-kernel",
+          "def-mollified-biot-savart-vortex-kernel"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice principle is used in these finite systems.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            },
+            {
+              "title": "J. Liu and X. Xin, Convergence of Vortex Methods for Weak Solutions to the 2-D Euler Equations with Vortex Sheet Data",
+              "url": "https://sites.math.duke.edu/~jliu/pdf/Liu_Xin_CPAM_1995.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-signed-vorticity-characteristic-solution",
+        "kind": "definition",
+        "title": "Characteristic solution for a finite signed regularized vorticity",
+        "statement": "Assume AC. Let $\\omega_0$ be a finite signed Borel measure on $\\mathbb R^2$, set $M=|\\omega_0|(\\mathbb R^2)$, and let $\\omega_0=\\omega_0^+-\\omega_0^-$ be its Jordan decomposition. If $M=0$, its characteristic solution is the constant zero measure curve. If $M>0$, set $E=\\mathbb R^2\\times\\{+1,-1\\}$ and define the probability measure $\\lambda_0$ by $\\lambda_0(A\\times\\{s\\})=\\omega_0^s(A)/M$ for Borel $A$ and $s\\in\\{+1,-1\\}$. A signed characteristic solution for the regularized kernel $K_\\varepsilon$ on $[0,T]$ is a jointly measurable path map $Z:[0,T]\\times E\\to\\mathbb R^2$, modulo $\\lambda_0$-almost everywhere equality, with absolutely continuous paths for almost every label, $Z_0(x,s)=x$, and  $$Z_t(x,s)=x+M\\int_0^t\\int_E rK_\\varepsilon(Z_u(x,s)-Z_u(y,r))\\,d\\lambda_0(y,r)\\,du,$$  such that its time-supremum function is measurable and $\\int_E\\sup_{0\\le t\\le T}|Z_t(x,s)|\\,d\\lambda_0(x,s)<\\infty$. It represents the signed measure curve  $$\\omega_t=M\\int_E s\\,\\delta_{Z_t(x,s)}\\,d\\lambda_0(x,s).$$  Here $\\omega_0^s$ denotes $\\omega_0^+$ when $s=+1$ and $\\omega_0^-$ when $s=-1$. The total variation mass is $M$ at time zero, and the sign coordinate records each Jordan part separately.",
+        "strategy": "direct",
+        "deps": [
+          "def-signed-measure",
+          "def-total-variation-of-a-signed-or-complex-measure",
+          "thm-jordan-decomposition-for-signed-measures",
+          "def-axiom-of-choice",
+          "def-mollified-biot-savart-vortex-kernel"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "The definition uses canonical Jordan parts, whose general existence supplier assumes AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            },
+            {
+              "title": "J. Liu and X. Xin, Convergence of Vortex Methods for Weak Solutions to the 2-D Euler Equations with Vortex Sheet Data",
+              "url": "https://sites.math.duke.edu/~jliu/pdf/Liu_Xin_CPAM_1995.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-mollified-biot-savart-kernel-is-smooth-globally-lipschitz",
+        "kind": "lemma",
+        "title": "The mollified Biot-Savart kernel is smooth and globally Lipschitz",
+        "statement": "Assume Countable Choice and the mollifier of [[def-mollified-biot-savart-vortex-kernel]]. For every $\\varepsilon>0$, $G_\\varepsilon$ and $K_\\varepsilon$ are $C^\\infty$ on $\\mathbb R^2$, and there is $C_\\rho<\\infty$ independent of $\\varepsilon$ such that $$\\sup_{x\\in\\mathbb R^2}\\|DK_\\varepsilon(x)\\|_{\\mathrm{op}}\\le C_\\rho\\varepsilon^{-2}.$$ Consequently $K_\\varepsilon$ is globally Lipschitz with constant at most $C_\\rho\\varepsilon^{-2}$.",
+        "strategy": "direct",
+        "deps": [
+          "def-mollified-biot-savart-vortex-kernel",
+          "def-countable-choice",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-mean-value-inequality-for-total-derivatives"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "Countable Choice is required by the smooth-convolution and polar-coordinate suppliers; no full Axiom of Choice is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. Liu and X. Xin, Convergence of Vortex Methods for Weak Solutions to the 2-D Euler Equations with Vortex Sheet Data",
+              "url": "https://sites.math.duke.edu/~jliu/pdf/Liu_Xin_CPAM_1995.pdf"
+            },
+            {
+              "title": "Gregory R. Baker and Lan D. Pham, A Comparison of Blob Methods for Vortex Sheet Roll Up",
+              "url": "https://people.math.osu.edu/baker.27/blobs.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-signed-bl-norm-dominated-by-split-coupling-cost",
+        "kind": "lemma",
+        "title": "The bounded-Lipschitz dual discrepancy is bounded by split transport cost",
+        "statement": "Assume AC for the Jordan decompositions in [[def-signed-split-transport-cost]]. If finite signed measures $\\omega,\\nu$ have the same positive-part mass and the same negative-part mass, and their total variations have finite first moments, then the couplings in $C_{\\pm}(\\omega,\\nu)$ exist, $C_{\\pm}(\\omega,\\nu)<\\infty$, and $$d_{BL}(\\omega,\\nu)\\le C_{\\pm}(\\omega,\\nu).$$",
+        "strategy": "direct",
+        "deps": [
+          "def-bounded-lipschitz-dual-norm-for-signed-measures",
+          "def-signed-split-transport-cost",
+          "def-axiom-of-choice",
+          "thm-jordan-decomposition-for-signed-measures",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "The Jordan parts use the Axiom of Choice; the coupling inequality after the parts are supplied is choice-free.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. Liu and X. Xin, Convergence of Vortex Methods for Weak Solutions to the 2-D Euler Equations with Vortex Sheet Data",
+              "url": "https://sites.math.duke.edu/~jliu/pdf/Liu_Xin_CPAM_1995.pdf"
+            },
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-w1-is-finite-on-probability-measures-with-finite-first-moment",
+        "kind": "lemma",
+        "title": "The coupling infimum is finite for finite-first-moment probabilities",
+        "statement": "If $\\mu,\\nu$ are Borel probability measures on $\\mathbb R^d$ with finite first moments, then $\\Pi(\\mu,\\nu)$ is nonempty and $W_1(\\mu,\\nu)<\\infty$ for the definition in [[def-p-one-wasserstein-one]].",
+        "strategy": "direct",
+        "deps": [
+          "def-p-one-wasserstein-one",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-separable-regularized-vortex-interaction-hamiltonian",
+        "kind": "definition",
+        "title": "Separable regularized vortex-inspired Hamiltonian comparison system",
+        "statement": "For $N\\ge2$, real weights $\\Gamma_i$, and $\\varepsilon>0$, define the open collision-free configuration set $Q_{cf}:=\\{q=(q_1,\\ldots,q_N)\\in(\\mathbb R^2)^N:q_i\\ne q_j\\text{ for }i\\ne j\\}$. Let $q\\in Q_{cf}$ and $p=(p_1,\\ldots,p_N)\\in(\\mathbb R^2)^N$. Let $$H_\\varepsilon(q,p)=\\frac12\\sum_{i=1}^N|p_i|^2+V_\\varepsilon(q),\\qquad V_\\varepsilon(q)=\\sum_{i<j}\\Gamma_i\\Gamma_jG_\\varepsilon(q_i-q_j),$$ where $G_\\varepsilon$ is from [[def-mollified-biot-savart-vortex-kernel]]. This is a separable canonical Hamiltonian on $Q_{cf}$; its local leapfrog map is the partial composition [[def-leapfrog-step-map]] restricted as in [[def-local-leapfrog-domain-on-an-open-configuration-set]]. It is a distinct second-order canonical comparison model, not the first-order Biot-Savart vortex system of [[def-mean-field-and-weighted-vortex-particle-systems]].",
+        "strategy": "direct",
+        "deps": [
+          "def-mollified-biot-savart-vortex-kernel",
+          "lem-mollified-biot-savart-kernel-is-smooth-globally-lipschitz",
+          "def-leapfrog-step-map",
+          "def-local-leapfrog-domain-on-an-open-configuration-set",
+          "def-mean-field-and-weighted-vortex-particle-systems"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice principle is used in the definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ernst Hairer, Geometric Numerical Integration, TU München Lecture 2: Symplectic integrators",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week2.pdf"
+            },
+            {
+              "title": "Nikolaj Nordkvist and Poul G. Hjorth, Classical Mechanics and Symplectic Integration",
+              "url": "https://backend.orbit.dtu.dk/ws/files/2512495/lecture_notes-1.pdf"
+            },
+            {
+              "title": "J. Liu and X. Xin, Convergence of Vortex Methods for Weak Solutions to the 2-D Euler Equations with Vortex Sheet Data",
+              "url": "https://sites.math.duke.edu/~jliu/pdf/Liu_Xin_CPAM_1995.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-dobrushin-w1-stability-for-characteristic-flows",
+        "kind": "theorem",
+        "title": "Dobrushin stability in 1-Wasserstein distance for mean-field flows",
+        "statement": "Let $K$ have two-variable Lipschitz constant $L$ as in [[def-globally-lipschitz-mean-field-kernel]], and let $\\mu_t,\\nu_t$ be characteristic solutions from probability measures with finite first moments. For every $t\\in[0,T]$, $$W_1(\\mu_t,\\nu_t)\\le e^{2Lt}W_1(\\mu_0,\\nu_0).$$ The estimate is proved for every prescribed initial coupling before taking the infimum; existence of an optimal coupling is not assumed.",
+        "strategy": "direct",
+        "deps": [
+          "def-p-one-wasserstein-one",
+          "def-globally-lipschitz-mean-field-kernel",
+          "def-characteristic-mean-field-solution",
+          "lem-w1-is-finite-on-probability-measures-with-finite-first-moment",
+          "thm-gronwall-integral-inequality",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-dominated-convergence"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used; no optimal coupling is selected.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            },
+            {
+              "title": "Simon Mayer, The Vlasov Equation and Mean Field Limit of a Particle System",
+              "url": "https://mathphys.pages.ist.ac.at/wp-content/uploads/sites/193/2023/10/Handout_Mayer.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-empirical-measures-solve-mean-field-equation-exactly",
+        "kind": "theorem",
+        "title": "Exact weak mean-field identity for empirical particle measures",
+        "statement": "Let $x_1,\\ldots,x_N$ solve the equal-probability system of [[def-mean-field-and-weighted-vortex-particle-systems]] on $[0,T]$, and put $\\mu_N(t)=N^{-1}\\sum_i\\delta_{x_i(t)}$. Then for every $\\varphi\\in C_c^1(\\mathbb R^d)$, $$\\int\\varphi d\\mu_N(t)-\\int\\varphi d\\mu_N(0) =\\int_0^t\\int\\nabla\\varphi(x)\\cdot\\left(\\int K(x,y)d\\mu_N(s)(y)\\right)d\\mu_N(s)(x)ds.$$ Thus the empirical measure satisfies the same weak transport equation exactly, with no particle quadrature error in this identity.",
+        "strategy": "direct",
+        "deps": [
+          "def-mean-field-and-weighted-vortex-particle-systems",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used; only a finite sum and the chain rule occur.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-mean-field-characteristic-flow-exists-uniquely",
+        "kind": "theorem",
+        "title": "Global characteristic flow for a globally Lipschitz mean-field kernel",
+        "statement": "Let $K$ be globally Lipschitz with constant $L$ in the convention of [[def-globally-lipschitz-mean-field-kernel]], and let $\\mu_0$ be a Borel probability measure on $\\mathbb R^d$ with finite first moment. For every finite $T>0$ there exists a characteristic solution on $[0,T]$ in the sense of [[def-characteristic-mean-field-solution]]. It is unique up to equality of trajectories for $\\mu_0$-almost every label. No compact support assumption is needed.",
+        "strategy": "direct",
+        "deps": [
+          "def-p-one-wasserstein-one",
+          "def-globally-lipschitz-mean-field-kernel",
+          "def-characteristic-mean-field-solution",
+          "lem-weighted-continuous-path-space-is-complete",
+          "thm-banach-fixed-point",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "def-countable-choice",
+          "thm-of-archimedean"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "Countable Choice enters through weighted path-space completeness; the fixed-point iteration itself uses no further choice.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            },
+            {
+              "title": "Simon Mayer, The Vlasov Equation and Mean Field Limit of a Particle System",
+              "url": "https://mathphys.pages.ist.ac.at/wp-content/uploads/sites/193/2023/10/Handout_Mayer.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-mean-field-characteristics-satisfy-weak-transport-identity",
+        "kind": "theorem",
+        "title": "Weak transport identity for characteristic mean-field solutions",
+        "statement": "Let $\\mu_t=(X_t)_\\#\\mu_0$ be the characteristic solution for a globally Lipschitz kernel on $[0,T]$. For every $\\varphi\\in C_c^1(\\mathbb R^d)$ and $t\\in[0,T]$, $$\\int\\varphi\\,d\\mu_t-\\int\\varphi\\,d\\mu_0 =\\int_0^t\\int_{\\mathbb R^d}\\nabla\\varphi(x)\\cdot\\left(\\int_{\\mathbb R^d}K(x,y)d\\mu_s(y)\\right)d\\mu_s(x)ds.$$",
+        "strategy": "direct",
+        "deps": [
+          "def-characteristic-mean-field-solution",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-dominated-convergence"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used in this conditional weak-identity proof.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-mollified-biot-savart-kernel-has-l1-consistency",
+        "kind": "theorem",
+        "title": "L1 consistency of the mollified Biot-Savart kernel",
+        "statement": "Assume Countable Choice and the radial compactly supported mollifier of [[def-mollified-biot-savart-vortex-kernel]]. Write $\\|F\\|_{L^1}:=\\int_{\\mathbb R^2}|F(x)|dx$ and let $\\|g\\|_{L^\\infty}$ be the essential supremum of $|g|$. There is a constant $C_\\rho<\\infty$, independent of $\\varepsilon>0$, such that $$\\|K_\\varepsilon-K\\|_{L^1(\\mathbb R^2)}\\le C_\\rho\\varepsilon.$$ Consequently, for every bounded measurable vorticity density $\\omega$, $$\\|(K_\\varepsilon-K)*\\omega\\|_{L^\\infty}\\le C_\\rho\\varepsilon\\|\\omega\\|_{L^\\infty}.$$ This is an error estimate at fixed $\\varepsilon$; it does not prove a singular-limit theorem for the particle dynamics.",
+        "strategy": "direct",
+        "deps": [
+          "def-mollified-biot-savart-vortex-kernel",
+          "lem-mollified-biot-savart-kernel-is-smooth-globally-lipschitz",
+          "def-countable-choice",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "Countable Choice is required by the cited polar-coordinate measure formula; no full Axiom of Choice is used in this estimate.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. Liu and X. Xin, Convergence of Vortex Methods for Weak Solutions to the 2-D Euler Equations with Vortex Sheet Data",
+              "url": "https://sites.math.duke.edu/~jliu/pdf/Liu_Xin_CPAM_1995.pdf"
+            },
+            {
+              "title": "Gregory R. Baker and Lan D. Pham, A Comparison of Blob Methods for Vortex Sheet Roll Up",
+              "url": "https://people.math.osu.edu/baker.27/blobs.pdf"
+            },
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-signed-dobrushin-stability-with-force-defect",
+        "kind": "theorem",
+        "title": "Signed Dobrushin stability with bounded force defects",
+        "statement": "Assume AC and Countable Choice. Let $K_\\varepsilon$ have one-variable Lipschitz constant $L_\\varepsilon$; then $(x,y)\\mapsto K_\\varepsilon(x-y)$ has two-variable constant $L_\\varepsilon$. Let $\\omega_0,\\nu_0$ have separately matching positive and negative Jordan masses and total variation mass $M$. For $M>0$, use the Jordan-label probability spaces of [[def-signed-vorticity-characteristic-solution]] and suppose their path maps $X^\\omega_t(x,s)$ and $X^\\nu_t(y,s)$ have integrable time suprema, satisfy $X^\\omega_0(x,s)=x$ and $X^\\nu_0(y,s)=y$, and represent $\\omega_t,\\nu_t$ by the signed pushforward formula there. Assume at each time the positive and negative label pushforwards are the Jordan parts. Write $$u^\\omega_t(x)=\\int K_\\varepsilon(x-z)d\\omega_t(z),\\qquad u^\\nu_t(y)=\\int K_\\varepsilon(y-z)d\\nu_t(z).$$ Suppose their absolutely continuous sign-labelled trajectories satisfy $$\\dot X^\\omega_t(x,s)=u^\\omega_t(X^\\omega_t(x,s))+r_\\omega(t,x,s),\\qquad \\dot X^\\nu_t(y,s)=u^\\nu_t(X^\\nu_t(y,s))+r_\\nu(t,y,s)$$ for almost every time and almost every label of sign $s\\in\\{+,-\\}$, with $|r_\\omega|\\le\\eta_\\omega$ and $|r_\\nu|\\le\\eta_\\nu$ on $[0,T]$. For every prescribed initial pair of sign-preserving couplings of total cost $D_0$, $$d_{BL}(\\omega_t,\\nu_t)\\le C_{\\pm}(\\omega_t,\\nu_t)\\le e^{2L_\\varepsilon Mt}\\bigl(D_0+M(\\eta_\\omega+\\eta_\\nu)t\\bigr).$$ If $M=0$, both curves are zero and the inequalities hold with zero right side. Taking the infimum over initial couplings in the $M>0$ case gives the same bound with $D_0=C_{\\pm}(\\omega_0,\\nu_0)$, without assuming attainment.",
+        "strategy": "direct",
+        "deps": [
+          "def-bounded-lipschitz-dual-norm-for-signed-measures",
+          "def-signed-split-transport-cost",
+          "def-axiom-of-choice",
+          "thm-jordan-decomposition-for-signed-measures",
+          "def-signed-vorticity-characteristic-solution",
+          "def-countable-choice",
+          "lem-signed-bl-norm-dominated-by-split-coupling-cost",
+          "def-mollified-biot-savart-vortex-kernel",
+          "lem-mollified-biot-savart-kernel-is-smooth-globally-lipschitz",
+          "thm-gronwall-integral-inequality",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "AC supplies the Jordan parts. Countable Choice is used for the cited mollified-kernel regularity supplier; the stability estimate is conditional on the stated paths and uses no optimal split coupling.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            },
+            {
+              "title": "Simon Mayer, The Vlasov Equation and Mean Field Limit of a Particle System",
+              "url": "https://mathphys.pages.ist.ac.at/wp-content/uploads/sites/193/2023/10/Handout_Mayer.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-signed-regularized-vorticity-characteristics-preserve-total-variation",
+        "kind": "theorem",
+        "title": "Characteristic existence and total-variation preservation for regularized signed vorticity",
+        "statement": "Assume AC and Countable Choice. Let $\\omega_0$ be a finite signed Borel measure on $\\mathbb R^2$ whose total variation has finite first moment, and let $K_\\varepsilon$ be the smooth mollified Biot-Savart kernel of [[def-mollified-biot-savart-vortex-kernel]]. There is a unique signed characteristic solution in the sense of [[def-signed-vorticity-characteristic-solution]] on every finite interval $[0,T]$, and it represents the measure curve with velocity $$u_t(x)=\\int K_\\varepsilon(x-y)d\\omega_t(y),\\qquad \\omega_t=(X_t)_\\#\\omega_0.$$ The flow is a homeomorphism of $\\mathbb R^2$ at each time and $$|\\omega_t|(\\mathbb R^2)=|\\omega_0|(\\mathbb R^2).$$ If $\\omega_0=0$, the only transported measure curve is identically zero.",
+        "strategy": "direct",
+        "deps": [
+          "def-mollified-biot-savart-vortex-kernel",
+          "def-signed-vorticity-characteristic-solution",
+          "lem-mollified-biot-savart-kernel-is-smooth-globally-lipschitz",
+          "def-signed-measure",
+          "def-total-variation-of-a-signed-or-complex-measure",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-weighted-continuous-path-space-is-complete",
+          "thm-banach-fixed-point",
+          "thm-jordan-decomposition-for-signed-measures",
+          "prop-jordan-parts-and-total-variation-formulas-for-signed-measures",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "thm-gronwall-integral-inequality",
+          "thm-dominated-convergence"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "The general Jordan decomposition invokes AC; weighted path-space completeness invokes Countable Choice. The local ODE and transport estimates add no choice principle.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. Liu and X. Xin, Convergence of Vortex Methods for Weak Solutions to the 2-D Euler Equations with Vortex Sheet Data",
+              "url": "https://sites.math.duke.edu/~jliu/pdf/Liu_Xin_CPAM_1995.pdf"
+            },
+            {
+              "title": "Gregory R. Baker and Lan D. Pham, A Comparison of Blob Methods for Vortex Sheet Roll Up",
+              "url": "https://people.math.osu.edu/baker.27/blobs.pdf"
+            },
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-w1-dobrushin-stability-with-force-defect",
+        "kind": "theorem",
+        "title": "Probability W1 stability under bounded force defects",
+        "statement": "Let $K$ have two-variable global Lipschitz constant $L$ as in [[def-globally-lipschitz-mean-field-kernel]]. Let $\\mu_t=(X_t)_\\#\\mu_0$ and $\\nu_t=(Y_t)_\\#\\nu_0$ be probability curves from finite-first-moment initial laws, with absolutely continuous characteristic paths satisfying $$\\dot X_t(x)=\\int K(X_t(x),X_t(z))d\\mu_0(z)+r_\\mu(t,x),\\qquad \\dot Y_t(y)=\\int K(Y_t(y),Y_t(w))d\\nu_0(w)+r_\\nu(t,y)$$ for almost every time and almost every label, with $X_0(x)=x$ and $Y_0(y)=y$. Assume additionally the weighted path integrability conditions $\\int\\sup_{s\\le T}|X_s|d\\mu_0<\\infty$ and $\\int\\sup_{s\\le T}|Y_s|d\\nu_0<\\infty$. Assume the measurable label defects satisfy $|r_\\mu|\\le\\eta_\\mu$ and $|r_\\nu|\\le\\eta_\\nu$ on $[0,T]$. For every prescribed initial coupling $\\pi_0$ of cost $D_0$, its transport by the two characteristic paths has cost at time $t$ at most $$e^{2Lt}\\bigl(D_0+(\\eta_\\mu+\\eta_\\nu)t\\bigr).$$ Consequently $W_1(\\mu_t,\\nu_t)\\le e^{2Lt}\\bigl(W_1(\\mu_0,\\nu_0)+(\\eta_\\mu+\\eta_\\nu)t\\bigr)$. The estimate is first proved for each coupling; no optimal plan is assumed.",
+        "strategy": "direct",
+        "deps": [
+          "def-p-one-wasserstein-one",
+          "def-globally-lipschitz-mean-field-kernel",
+          "def-characteristic-mean-field-solution",
+          "lem-w1-is-finite-on-probability-measures-with-finite-first-moment",
+          "thm-gronwall-integral-inequality",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-dominated-convergence"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice is used in the coupling estimate; an optimal coupling is not assumed.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            },
+            {
+              "title": "Simon Mayer, The Vlasov Equation and Mean Field Limit of a Particle System",
+              "url": "https://mathphys.pages.ist.ac.at/wp-content/uploads/sites/193/2023/10/Handout_Mayer.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-weighted-signed-vortex-particles-satisfy-weak-transport-identity",
+        "kind": "theorem",
+        "title": "Exact weak transport identity for weighted signed vortex particles",
+        "statement": "Let $x_i:[0,T]\\to\\mathbb R^2$ be $C^1$ trajectories with fixed real weights $\\Gamma_i$, and let $g:[0,T]\\times\\mathbb R^2\\to\\mathbb R^2$ be a common continuous force correction. Suppose $$\\dot x_i(t)=\\sum_{j=1}^N\\Gamma_jK_\\varepsilon(x_i(t)-x_j(t))+g(t,x_i(t)),$$ where $K_\\varepsilon$ is the mollified kernel in [[def-mean-field-and-weighted-vortex-particle-systems]]. For $\\omega_N(t)=\\sum_i\\Gamma_i\\delta_{x_i(t)}$ and every $\\varphi\\in C_c^1(\\mathbb R^2)$, $$\\int\\varphi d\\omega_N(t)-\\int\\varphi d\\omega_N(0) =\\int_0^t\\int\\nabla\\varphi(x)\\cdot\\left(\\int K_\\varepsilon(x-y)d\\omega_N(s)(y)+g(s,x)\\right)d\\omega_N(s)(x)ds.$$ In particular, the uncorrected regularized particle system satisfies the same weak identity with $g=0$.",
+        "strategy": "direct",
+        "deps": [
+          "def-mean-field-and-weighted-vortex-particle-systems",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used; the proof is a finite signed sum.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. Liu and X. Xin, Convergence of Vortex Methods for Weak Solutions to the 2-D Euler Equations with Vortex Sheet Data",
+              "url": "https://sites.math.duke.edu/~jliu/pdf/Liu_Xin_CPAM_1995.pdf"
+            },
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-classical-rk4-map-is-lipschitz-on-a-controlled-tube",
+        "kind": "lemma",
+        "title": "One-step Lipschitz bound for classical RK4 on an admitted tube",
+        "statement": "Let $f:[0,T]\\times U\\to\\mathbb R^m$ be uniformly $L$-Lipschitz in its state variable on a set containing every stage generated by the classical RK4 step of [[def-euler-midpoint-rk4-tableaus]] from any two admitted starting states $u,v$ at the same base time $t$. Assume all these stage evaluations are defined, and let $\\Psi_h(t,\\cdot)$ be the resulting one-step map for $0<h\\le h_0$. Then $$|\\Psi_h(t,u)-\\Psi_h(t,v)|\\le(1+L_*h)|u-v|,\\qquad L_*=Le^{Lh_0}.$$",
+        "strategy": "direct",
+        "deps": [
+          "def-explicit-runge-kutta-tableau-and-stage-map",
+          "def-euler-midpoint-rk4-tableaus",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tobias Embree, Lecture Notes on Numerical Analysis, Sections 5.2.3-5.3",
+              "url": "https://personal.math.vt.edu/embree/math5466/nanotes.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 18.330, Introduction to Numerical Analysis, Chapter 5",
+              "url": "https://ocw.mit.edu/courses/18-330-introduction-to-numerical-analysis-spring-2012/a9d2bd9be098f0ada172af40379a17cc_MIT18_330S12_Chapter5.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-separable-vortex-inspired-leapfrog-is-reversible-symplectic-volume-preserving-order-two",
+        "kind": "theorem",
+        "title": "Local geometric properties and second-order error of the separable regularized vortex-inspired leapfrog",
+        "statement": "Assume Countable Choice. Let $H_\\varepsilon(q,p)=\\frac12|p|^2+V_\\varepsilon(q)$ be the separable Hamiltonian of [[def-separable-regularized-vortex-interaction-hamiltonian]]. On an open collision-free configuration set, restrict the leapfrog step to states whose kick and drift stages remain in that set, as in [[def-local-leapfrog-domain-on-an-open-configuration-set]]. Then every admitted step has the following properties:  1. it is reversible: its inverse on its image is the admitted step with signed step size $-h$; 2. it is symplectic on its open admitted domain; 3. it preserves local phase volume, meaning Lebesgue measure of every measurable set and its image agree; and 4. for a fixed $T>0$ and integer $N\\ge1$, with $h=T/N>0$ sufficiently small, if $V_\\varepsilon\\in C^3$ and the exact path, numerical states, and every kick/drift stage lie in a common compact convex tube $K\\Subset Q_{cf}\\times(\\mathbb R^2)^N$ with derivatives of the Hamiltonian vector field through order two bounded there, the global trajectory error is $O(h^2)$ on $[0,T]$.  Claims 1–3 concern every signed admitted step; claim 4 has the stated positive-step tube hypotheses. The symplecticity and order-two conclusions use the exact hypotheses of the suppliers [[prop-local-leapfrog-and-symplectic-euler-are-symplectic]] and [[thm-local-symplectic-euler-and-leapfrog-trajectory-errors]]. This canonical second-order Hamiltonian is a comparison model; it is not the first-order Biot-Savart particle system.",
+        "strategy": "direct",
+        "deps": [
+          "def-separable-regularized-vortex-interaction-hamiltonian",
+          "def-leapfrog-step-map",
+          "def-local-leapfrog-domain-on-an-open-configuration-set",
+          "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+          "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-determinant-multiplicative",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "Countable Choice is required by the cited measurable change-of-variables theorem for volume preservation. Reversibility, symplecticity, and the local error estimate add no choice principle.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ernst Hairer, Geometric Numerical Integration, TU München Lecture 2: Symplectic integrators",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week2.pdf"
+            },
+            {
+              "title": "Nikolaj Nordkvist and Poul G. Hjorth, Classical Mechanics and Symplectic Integration",
+              "url": "https://backend.orbit.dtu.dk/ws/files/2512495/lecture_notes-1.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-tensor-simpson-force-error",
+        "kind": "theorem",
+        "title": "Tensor composite Simpson error for a two-dimensional force integral",
+        "statement": "Let $a<b$, $c<d$, let $n_x,n_y\\ge2$ be even integers, and set $R=[a,b]\\times[c,d]$, $h_x=(b-a)/n_x$, $h_y=(d-c)/n_y$. If $F\\in C^4(R,\\mathbb R^2)$ and $$M_{40}=\\max_R|\\partial_x^4F|,\\qquad M_{04}=\\max_R|\\partial_y^4F|,$$ then the tensor evaluator of [[alg-tensor-simpson-force-evaluator]] satisfies $$\\left|\\int_R F-Q_yQ_xF\\right|\\le\\frac{\\sqrt2\\,|R|}{180}\\bigl(h_x^4M_{40}+h_y^4M_{04}\\bigr),\\qquad |R|=(b-a)(d-c).$$ This is an exact-arithmetic quadrature bound, not a roundoff estimate.",
+        "strategy": "direct",
+        "deps": [
+          "alg-tensor-simpson-force-evaluator",
+          "alg-composite-simpson-rule",
+          "thm-composite-simpson-error-bound",
+          "thm-extreme-value-r",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-heine-borel-r",
+          "def-higher-derivatives-and-smoothness"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used; all rules are finite exact-arithmetic sums.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin Driscoll and Richard Braun, Fundamentals of Numerical Computation, Section 5.6",
+              "url": "https://fncbook.com/integration/"
+            },
+            {
+              "title": "MIT OpenCourseWare 18.330, Introduction to Numerical Analysis, Chapter 5",
+              "url": "https://ocw.mit.edu/courses/18-330-introduction-to-numerical-analysis-spring-2012/a9d2bd9be098f0ada172af40379a17cc_MIT18_330S12_Chapter5.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-rk4-global-error-for-regularized-vortex-particles",
+        "kind": "theorem",
+        "title": "Fourth-order global error for RK4 on a regularized vortex particle tube",
+        "statement": "Fix $\\varepsilon>0$, finitely many vortex weights, $T>0$, and the regularized finite-particle vector field of [[def-mean-field-and-weighted-vortex-particle-systems]], possibly with an added common smooth force correction $g_q(t,X,x_i)$ for spatial force quadrature. Suppose the resulting nonautonomous state field $f(t,X)$ is jointly $C^4$ on an open time-state domain, with derivatives through order four bounded on a common compact convex tube $\\mathcal T$ compactly contained in that domain. Assume the exact path, RK4 grid states, and every RK4 stage lie in that tube for $h=T/N\\le h_0$, and the common force correction is included in these bounds. Let $C_4$ be a uniform exact-start defect constant, so the local defect is at most $C_4h^5$ as in [[def-one-step-ode-method-local-defect-order-and-stability]]. Let $L_*h$ be the stability coefficient from [[lem-classical-rk4-map-is-lipschitz-on-a-controlled-tube]]. For exact initialization, the state errors $E_k$ satisfy $$\\max_{0\\le k\\le N}E_k\\le \\begin{cases} C_4\\dfrac{e^{L_*T}-1}{L_*}h^4,&L_*>0,\\\\ C_4Th^4,&L_*=0. \\end{cases}$$ The tube and stage-admissibility assumptions are conditional; no invariance or global numerical-domain claim is made. The constant $C_4$ may depend on $\\varepsilon$, particle count, the quadrature field, and the tube.",
+        "strategy": "direct",
+        "deps": [
+          "def-mean-field-and-weighted-vortex-particle-systems",
+          "def-one-step-ode-method-local-defect-order-and-stability",
+          "def-euler-midpoint-rk4-tableaus",
+          "prop-euler-midpoint-rk4-orders-and-stability-functions",
+          "lem-classical-rk4-map-is-lipschitz-on-a-controlled-tube",
+          "thm-global-error-from-one-step-defect-and-stability",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tobias Embree, Lecture Notes on Numerical Analysis, Sections 5.2.3-5.3",
+              "url": "https://personal.math.vt.edu/embree/math5466/nanotes.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 18.330, Introduction to Numerical Analysis, Chapter 5",
+              "url": "https://ocw.mit.edu/courses/18-330-introduction-to-numerical-analysis-spring-2012/a9d2bd9be098f0ada172af40379a17cc_MIT18_330S12_Chapter5.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-mean-field-vortex-blob-error-budget",
+        "kind": "theorem",
+        "title": "Mean-field vortex blob error budget with signed particles, force quadrature, and RK4",
+        "statement": "Assume AC and Countable Choice. Let $\\omega_t$ be a smooth finite signed vorticity density on $[0,T]\\times\\mathbb R^2$ with finite first moment, transported by a sign-preserving characteristic flow $X_t$ satisfying $\\omega_t=(X_t)_\\#\\omega_0$ and $\\dot X_t(x)=(K*\\omega_t)(X_t(x))$, where $K$ is the singular kernel in [[def-mollified-biot-savart-vortex-kernel]]. Assume $\\sup_{t\\le T}\\|\\omega_t\\|_\\infty\\le W$, $\\int\\sup_{t\\le T}|X_t(x)|d|\\omega_0|(x)<\\infty$, and the flow transports each Jordan part to the corresponding Jordan part. Put $M=|\\omega_0|(\\mathbb R^2)$. Let $$\\omega_N^0=\\sum_{i=1}^N\\Gamma_i\\delta_{x_i^0}$$ be a finite signed particle measure whose positive and negative Jordan masses respectively equal those of $\\omega_0$, with finite first moment, and with consolidated atoms whose positive and negative supports are disjoint; thus $\\sum_i|\\Gamma_i|=M$. Let $E_0=C_{\\pm}(\\omega_0,\\omega_N^0)<\\infty$.  Fix $\\varepsilon>0$. For every time and force location $(t,x)$, suppose the force integrand $F_{t,x}:R\\to\\mathbb R^2$ lies in $C^4(R,\\mathbb R^2)$ and its fourth partial derivatives satisfy the uniform bounds $M_{40},M_{04}$. Let the tensor Simpson evaluator use the even panel counts and widths in [[thm-tensor-simpson-force-error]], and define its residual by $r_q(t,x)=Q_yQ_xF_{t,x}-\\int_R F_{t,x}$. Thus $$\\eta_q=\\frac{\\sqrt2|R|}{180}(h_x^4M_{40}+h_y^4M_{04}).$$ Assume this residual is the same correction function for every particle, $\\sup_{t,x}|r_q(t,x)|\\le\\eta_q$, and the corrected regularized particle flow preserves the two Jordan parts. Write $x_i^{\\varepsilon,q}$ for the exact solution from $x_i^0$ of $$\\dot x_i^{\\varepsilon,q}(t)=\\sum_{j=1}^N\\Gamma_jK_\\varepsilon(x_i^{\\varepsilon,q}(t)-x_j^{\\varepsilon,q}(t))+r_q(t,x_i^{\\varepsilon,q}(t)),$$ and set $\\omega_N^{\\varepsilon,q}(t)=\\sum_i\\Gamma_i\\delta_{x_i^{\\varepsilon,q}(t)}$. Assume $r_q$ and the resulting finite-dimensional particle field are jointly $C^4$ in time and state with derivatives through order four bounded on a compact tube containing all exact paths and RK4 stages. Let $x_i^h(T)$ be the RK4 states from the same initial data for this ODE, and define $\\omega_{N,h}^{\\varepsilon,q}(T)=\\sum_i\\Gamma_i\\delta_{x_i^h(T)}$. Let $h=T/n\\le h_0$ for an integer $n\\ge1$ and define $C_{RK}:=C_4(e^{L_*T}-1)/L_*$ if $L_*>0$, and $C_{RK}:=C_4T$ if $L_*=0$, where $C_4,L_*,h_0$ are the constants in [[thm-rk4-global-error-for-regularized-vortex-particles]]. Then $$d_{BL}(\\omega_T,\\omega_{N,h}^{\\varepsilon,q}(T)) \\le e^{2L_\\varepsilon MT}\\left(E_0+MT\\left(C_\\rho\\varepsilon W+\\eta_q\\right)\\right)+MC_{RK}h^4,$$ where $L_\\varepsilon$ is a one-variable global Lipschitz constant for $K_\\varepsilon$; the induced two-variable constant for $K_\\varepsilon(x-y)$ is also $L_\\varepsilon$. The terms are initial signed particle approximation, blob regularization, force quadrature, and RK4 time error. The constants may depend on $\\varepsilon$, particle count, and the tube; no uniform singular limit as $\\varepsilon\\to0$ is claimed.",
+        "strategy": "direct",
+        "deps": [
+          "def-bounded-lipschitz-dual-norm-for-signed-measures",
+          "def-signed-split-transport-cost",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-mollified-biot-savart-vortex-kernel",
+          "lem-mollified-biot-savart-kernel-is-smooth-globally-lipschitz",
+          "def-mean-field-and-weighted-vortex-particle-systems",
+          "thm-signed-dobrushin-stability-with-force-defect",
+          "thm-mollified-biot-savart-kernel-has-l1-consistency",
+          "thm-tensor-simpson-force-error",
+          "thm-rk4-global-error-for-regularized-vortex-particles"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "The signed branch uses AC for Jordan decompositions and Countable Choice through the polar-coordinate consistency estimate. These are not needed by the separate probability W1 theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. Liu and X. Xin, Convergence of Vortex Methods for Weak Solutions to the 2-D Euler Equations with Vortex Sheet Data",
+              "url": "https://sites.math.duke.edu/~jliu/pdf/Liu_Xin_CPAM_1995.pdf"
+            },
+            {
+              "title": "Gregory R. Baker and Lan D. Pham, A Comparison of Blob Methods for Vortex Sheet Roll Up",
+              "url": "https://people.math.osu.edu/baker.27/blobs.pdf"
+            },
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2445,
+    "id": "interacting-particle-mean-field-and-vortex-blob-error-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Interacting particle mean field and vortex blob error — Examples",
+    "companion": "interacting-particle-mean-field-and-vortex-blob-error",
+    "requires": [
+      "interacting-particle-mean-field-and-vortex-blob-error"
+    ],
+    "items": [
+      {
+        "id": "ex-softened-newtonian-particles-not-collision-model",
+        "kind": "example",
+        "title": "Softened Newtonian particles do not specify the physical collision force",
+        "statement": "For two Newtonian point masses in $\\mathbb R^3$ with positive constants absorbed into $c>0$, the unsoftened relative acceleration is $F(r)=-c\\,r/|r|^3$ for $r\\ne0$, where $|\\cdot|$ is Euclidean. A softened model uses $$F_\\varepsilon(r)=-\\frac{c r}{(|r|^2+\\varepsilon^2)^{3/2}},\\qquad \\varepsilon>0.$$ The softened field is smooth at a collision, but it defines a different dynamical model.",
+        "strategy": "direct",
+        "deps": [
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {},
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-dimension-dependent-empirical-w1-error",
+        "kind": "example",
+        "title": "A dimension-dependent lower bound for empirical W1 error",
+        "statement": "Let $V_M=\\{0,1\\}^M\\subset\\mathbb R^M$ and let $\\mu_M$ be uniform on its $2^M$ vertices. For any empirical measure $\\nu_N=N^{-1}\\sum_{j=1}^N\\delta_{Y_j}$ obtained from $N$ samples $Y_j\\in V_M$, the 1-Wasserstein error has the deterministic lower bound $$W_1(\\mu_M,\\nu_N)\\ge1-\\frac{N}{2^M}.$$ Thus no dimension-free bound $W_1(\\mu,\\mu_N)\\le C N^{-1/2}$ can hold uniformly over all dimensions and all empirical samples.",
+        "strategy": "direct",
+        "deps": [
+          "def-p-one-wasserstein-one"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-mixed-sign-vorticity-needs-signed-distance",
+        "kind": "example",
+        "title": "A mixed-sign vorticity is not a probability for W1",
+        "statement": "On $\\mathbb R^2$, let $\\omega=\\delta_0-\\delta_{(1,0)}$. It is a nonzero finite signed measure of total mass zero and total variation two. The probability $W_1$ in [[def-p-one-wasserstein-one]] cannot be applied to $\\omega$.",
+        "strategy": "direct",
+        "deps": [
+          "def-signed-measure",
+          "def-total-variation-of-a-signed-or-complex-measure",
+          "def-bounded-lipschitz-dual-norm-for-signed-measures",
+          "def-p-one-wasserstein-one",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used.",
+        "sources": {},
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-globally-lipschitz-alignment-model",
+        "kind": "example",
+        "title": "A globally Lipschitz alignment model with exact mean trajectory",
+        "statement": "For $a\\ge0$ on $\\mathbb R^d$, take $K(x,y)=a(y-x)$. This is an alignment interaction: each particle is pulled toward the current mean position. It is globally Lipschitz, and its particle trajectories are explicit.",
+        "strategy": "direct",
+        "deps": [
+          "def-globally-lipschitz-mean-field-kernel",
+          "def-mean-field-and-weighted-vortex-particle-systems",
+          "thm-dobrushin-w1-stability-for-characteristic-flows",
+          "thm-empirical-measures-solve-mean-field-equation-exactly"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice principle is used; the particle calculation is explicit and the cited stability estimate is conditional on its supplied characteristic flows.",
+        "sources": {
+          "references": [
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-same-sign-smooth-vortex-blob-approximation",
+        "kind": "example",
+        "title": "Same-sign smooth vortex density and probability blob error budget",
+        "statement": "Assume Countable Choice. Let $\\omega_0\\in C_c^\\infty(\\mathbb R^2)$ be nonnegative with mass one, and suppose the smooth Euler flow satisfies $\\omega_t=(X_t)_\\#\\omega_0$, $\\dot X_t=(K*\\omega_t)(X_t)$, and $\\sup_{t\\le T}\\|\\omega_t\\|_\\infty\\le W$, with $\\int\\sup_{t\\le T}|X_t(x)|d\\omega_0(x)<\\infty$. Approximate it by $N\\ge1$ distinct initial positions $x_1^0,\\ldots,x_N^0$ with equal weights $1/N$, define $\\mu_N^0=N^{-1}\\sum_i\\delta_{x_i^0}$, and let $E_0=W_1(\\omega_0,\\mu_N^0)$. Let $r_q(t,x)$ be a common smooth force correction whose tensor Simpson residual is bounded by $\\eta_q$, and let the exact particles solve $\\dot x_i=\\frac1N\\sum_jK_\\varepsilon(x_i-x_j)+r_q(t,x_i)$. Assume the resulting finite-particle field is jointly $C^4$ in time and state with derivatives through order four bounded on a compact tube containing the exact paths and RK4 stages. For an integer $n\\ge1$ with $h=T/n\\le h_0$, let $x_i^h(T)$ be their RK4 approximations from the same initial nodes, with all paths and stages in that tube. Define $\\omega_{N,h}^{\\varepsilon,q}(T)=N^{-1}\\sum_i\\delta_{x_i^h(T)}$. If $C_{RK}$ is the coefficient from [[thm-rk4-global-error-for-regularized-vortex-particles]] for this $h_0$, then  $$W_1(\\omega_T,\\omega_{N,h}^{\\varepsilon,q}(T))\\le e^{2L_\\varepsilon T}\\left(E_0+T(C_\\rho\\varepsilon W+\\eta_q)\\right)+C_{RK}h^4.$$",
+        "strategy": "direct",
+        "deps": [
+          "def-p-one-wasserstein-one",
+          "lem-w1-is-finite-on-probability-measures-with-finite-first-moment",
+          "def-mollified-biot-savart-vortex-kernel",
+          "def-countable-choice",
+          "lem-mollified-biot-savart-kernel-is-smooth-globally-lipschitz",
+          "thm-mollified-biot-savart-kernel-has-l1-consistency",
+          "thm-tensor-simpson-force-error",
+          "thm-w1-dobrushin-stability-with-force-defect",
+          "thm-rk4-global-error-for-regularized-vortex-particles"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "Countable Choice is used by the cited polar-coordinate kernel estimate; the probability coupling and particle-label arguments use no Axiom of Choice.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. Liu and X. Xin, Convergence of Vortex Methods for Weak Solutions to the 2-D Euler Equations with Vortex Sheet Data",
+              "url": "https://sites.math.duke.edu/~jliu/pdf/Liu_Xin_CPAM_1995.pdf"
+            },
+            {
+              "title": "Gregory R. Baker and Lan D. Pham, A Comparison of Blob Methods for Vortex Sheet Roll Up",
+              "url": "https://people.math.osu.edu/baker.27/blobs.pdf"
+            },
+            {
+              "title": "François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1",
+              "url": "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,10813 @@
+MATRIX FUNCTIONS
+
+Jan Zur
+
+October 13, 2025
+
+
+Preface
+
+Computing functions of matrices - one of the main problems in numerical linear algebra
+- occurs in a wide variety of applications in science and engineering. The authoritative
+textbook in this field is undoubtedly
+
+N. J. Higham, Functions of Matrices, SIAM, 2008.
+
+The following quote, which outlines the importance of the topic also comes from there.
+
+“From their origin in pure mathematics, matrix functions have broadened
+into a subject of study in applied mathematics, with widespread applications
+in science and engineering. Research on matrix functions involves matrix
+theory, numerical analysis, approximation theory, and the development of
+algorithms and software, so it employs a wide range of theory and methods
+and promotes an appreciation of all these important topics.”
+
+This lecture notes complement the 10 ECTS advanced course Matrix Functions at
+Technische Universit¨at Berlin, which I first taught in summer 2024.
+I would like to
+emphasize that this script is not a textbook, but it is intended as a supplementary
+resource for following the lectures and should not replace attending them. Students who
+plan to attend this course need a solid background in (numerical) linear algebra. In
+addition, basic knowledge of complex analysis is helpful.
+
+The very first version of this lecture notes were typed by Anna Barkova, Lennart
+Helmst¨adter, and Andreas Hygrell in 2024.
+They have not only made their work
+available to me and their fellow students, but also pointed out several inaccuracies and
+inconsistencies, which led to an improvement of this text. I would like to thank them
+for this. I also wish to thank Errol Bucy, Emrik Erikson, and Adrian Stoof for reading
+previous versions of this script and for providing comments and corrections. However,
+it is very likely that the present version also contains inaccuracies or errors and leaves
+room for improvements of the presentation. Therefore, please send any errors you find
+or comments you have to me by email at
+
+zur@math.tu-berlin.de.
+
+Unauthorized reproduction or distribution of the entire lecture notes or parts thereof
+is not permitted. This applies in particular to distribution in any electronic form.
+
+Jan Zur, October 2025
+
+2
+
+
+Contents
+
+1
+Introduction
+5
+1.1
+The Intuitive Definition of a Matrix Function . . . . . . . . . . . . . . . .
+5
+1.2
+Applications of Matrix Functions . . . . . . . . . . . . . . . . . . . . . . .
+7
+1.2.1
+Linear Ordinary Differential Equations . . . . . . . . . . . . . . . .
+7
+1.2.2
+Network analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+1.2.3
+Multivariate Sampling in Statistics . . . . . . . . . . . . . . . . . .
+10
+1.2.4
+Markov Transition Matrices . . . . . . . . . . . . . . . . . . . . . .
+11
+
+2
+Definitions of f(A)
+12
+2.1
+Jordan Form Definition
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+12
+2.2
+Definition via Polynomial Interpolation
+. . . . . . . . . . . . . . . . . . .
+16
+2.3
+Taylor Series Definiton . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+19
+2.4
+Cauchy Integral Definition . . . . . . . . . . . . . . . . . . . . . . . . . . .
+20
+2.5
+Equivalence of the Definitions of f(A) . . . . . . . . . . . . . . . . . . . .
+21
+2.6
+Primary and Non-Primary Matrix Functions
+. . . . . . . . . . . . . . . .
+25
+
+3
+Properties of Matrix Functions
+27
+3.1
+Properties for General f . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+27
+3.2
+Properties for Special f
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+34
+3.2.1
+Visualizing Analytic Functions, Complex Square Root & Logarithm 34
+3.2.2
+Matrix Square Root . . . . . . . . . . . . . . . . . . . . . . . . . .
+38
+3.2.3
+Matrix Exponential and Matrix Logarithm
+. . . . . . . . . . . . .
+39
+3.2.4
+Matrix Sign Function
+. . . . . . . . . . . . . . . . . . . . . . . . .
+43
+
+4
+Conditioning of Matrix Functions
+51
+4.1
+Condition Number and Fr´echet Derivative . . . . . . . . . . . . . . . . . .
+51
+4.1.1
+Connection of Matrix Functions and Fr´echet Derivatives . . . . . .
+55
+4.1.2
+Kronecker Form of the Fr´echet Derivative . . . . . . . . . . . . . .
+56
+4.2
+Bounding the Condition Number . . . . . . . . . . . . . . . . . . . . . . .
+56
+
+5
+Computation of f(A)
+63
+5.1
+Techniques to Compute f(A) . . . . . . . . . . . . . . . . . . . . . . . . .
+63
+5.2
+Schur-Parlett Algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+64
+5.2.1
+Parlett Recurrence . . . . . . . . . . . . . . . . . . . . . . . . . . .
+65
+5.2.2
+Evaluating Atomic Blocks . . . . . . . . . . . . . . . . . . . . . . .
+68
+5.2.3
+Ordering of the Schur Form . . . . . . . . . . . . . . . . . . . . . .
+70
+5.2.4
+Algorithm and Remarks . . . . . . . . . . . . . . . . . . . . . . . .
+71
+5.3
+Newton-like Methods for Computing sign(A) and A
+1
+2 . . . . . . . . . . . .
+72
+5.3.1
+Newton Sign Iteration . . . . . . . . . . . . . . . . . . . . . . . . .
+73
+5.3.2
+Adaptions of the Newton Sign Iteration . . . . . . . . . . . . . . .
+75
+5.3.3
+Newton Square Root Iteration
+. . . . . . . . . . . . . . . . . . . .
+77
+
+3
+
+
+5.3.4
+(In-)Stability of the Newton Square Root Iteration . . . . . . . . .
+79
+5.4
+Scaling and Squaring Algorithm . . . . . . . . . . . . . . . . . . . . . . . .
+85
+5.4.1
+Pad´e Approximation . . . . . . . . . . . . . . . . . . . . . . . . . .
+86
+5.4.2
+Scaling and Squaring . . . . . . . . . . . . . . . . . . . . . . . . . .
+89
+5.4.3
+Inverse Scaling and Squaring Algorithm . . . . . . . . . . . . . . .
+92
+
+6
+Computation of f(A)b
+93
+6.1
+Krylov Subspace Methods . . . . . . . . . . . . . . . . . . . . . . . . . . .
+93
+6.2
+Quadrature Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+97
+
+4
+
+
+1
+Introduction
+
+The aim of this course is to formally define matrix functions and study their properties.
+Moreover, we will discuss the numerical computation of matrix functions f(A) as well as
+the computation of f(A)b. The course roughly follows the book Functions of Matrices
+by Nicholas J. Higham [12].
+
+1.1
+The Intuitive Definition of a Matrix Function
+
+Matrix functions answer the question of whether there exists a canonical extension of a
+given (scalar) function
+f : Ω→C
+(1.1)
+
+with Ω⊆to (a subset of) square matrices, i.e., to
+
+f : U →Cn×n
+(1.2)
+
+with U ⊆Cn×n. For some types of functions, we already know this canonical extension.
+
+(1)
+If f is a polynomial, i.e., f(z) = �m
+k=0 αkzk, then f(A) is defined via additions,
+scalar multiplications and powers of A
+
+f : Cn×n →Cn×n,
+f(A) :=
+
+m
+�
+
+k=0
+αkAk,
+(1.3)
+
+where A0 := In and Ak := Ak−1A.
+
+Example 1.1. Let f(z) = z2 −1 and A =
+�−1
+2
+0
+2
+
+�
+. Then
+
+f(A) =
+�−1
+2
+0
+2
+
+�2
+−
+�1
+0
+0
+1
+
+�
+=
+�1
+2
+0
+4
+
+�
+−
+�1
+0
+0
+1
+
+�
+=
+�0
+2
+0
+3
+
+�
+.
+
+(2)
+If f is a rational function, i.e., f(z) = p(z)
+
+q(z) with (coprime) polynomials p and q, we
+additionally require inverses of square matrices and define
+
+f(A) := p(A)q(A)−1 = q(A)−1p(A),
+(1.4)
+
+if q(A) is nonsingular, i.e., if no eigenvalue of A is a zero of q, or equivalently, a pole
+of f. Note that the equality in (1.4) holds by the following lemma.
+
+Lemma 1.2. Let A ∈Cn×n and let B ∈Cn×n be nonsingular such that AB = BA
+holds. Then AB−1 = B−1A.
+
+Proof. We have AB−1 = B−1BAB−1 = B−1ABB−1 = B−1A.
+
+5
+
+
+Alternative proof. We have B−1 = p(B) for some polynomial p of degree at most n −1
+by the Cayley-Hamilton theorem. Then
+
+AB−1 = Ap(B) = p(B)A = B−1A,
+
+where we used again that A and B commute.
+
+Since p(A) and q(A) commute, we conclude equation (1.4) from the above lemma.
+Later, we will see that, if AB = BA, then f(A)B = Bf(A) holds for any function f (for
+which f(A) is well-defined).
+
+Example 1.3. Let f(z) = z −2
+
+z
+and A =
+�−1
+2
+0
+2
+
+�
+. Then
+
+f(A) =
+��−1
+2
+0
+2
+
+�
+−2
+�1
+0
+0
+1
+
+���−1
+2
+0
+2
+
+�−1
+=
+�−3
+2
+0
+0
+
+��−1
+1
+0
+1
+2
+
+�
+=
+�3
+−2
+0
+0
+
+�
+.
+
+(3)
+If f has a power series representation, i.e., with radius of convergence r > 0
+
+f(z) =
+
+∞
+�
+
+k=0
+αkzk,
+|z| < r,
+(1.5)
+
+and the spectral radius
+ρ(A) := max{|λ| | λ ∈Λ(A)}
+(1.6)
+
+of A ∈Cn×n fulfills ρ(A) < r, then the matrix series
+
+f(A) :=
+
+∞
+�
+
+k=0
+αkAk
+(1.7)
+
+converges; see Section 2 below.
+
+Example 1.4. Let f(z) = exp(z) =
+
+∞
+�
+
+k=0
+
+zk
+
+k! (here r = ∞) and A =
+
+
+
+
+0
+1
+0
+0
+0
+1
+0
+0
+0
+
+
+
+. Then
+
+A2 =
+
+
+
+
+0
+0
+1
+0
+0
+0
+0
+0
+0
+
+
+
+and Ak = 0 for k ≥3. Therefore
+
+f(A) =
+
+∞
+�
+
+k=0
+
+1
+k!Ak = 1
+
+0!
+
+
+
+
+1
+0
+0
+0
+1
+0
+0
+0
+1
+
+
+
++ 1
+
+1!
+
+
+
+
+0
+1
+0
+0
+0
+1
+0
+0
+0
+
+
+
++ 1
+
+2!
+
+
+
+
+0
+0
+1
+0
+0
+0
+0
+0
+0
+
+
+
+=
+
+
+
+
+1
+1
+1
+2
+0
+1
+1
+0
+0
+1
+
+
+
+.
+
+In all three examples, A was an upper triangular matrix and we have received an upper
+triangular matrix f(A) as well. Later, we will see that a matrix function of an upper
+(lower) triangular matrix is indeed always upper (lower) triangular again.
+
+6
+
+
+Note that we do not refer to other types of functions involving matrices as matrix
+functions, e.g.,
+
+• element-wise operations: f : Cn×n →Cn×n, [aij] �→[f(aij)].
+
+Example: f : C2×2 →C2×2,
+�a
+b
+c
+d
+
+�
+�→
+�a2
+b2
+
+c2
+d2
+
+�
+.
+
+• maps f : Cn×n →Cm×m with n ̸= m.
+
+Example: The trace tr : Cn×n →C, [aij] �→
+
+n
+�
+
+k=1
+akk.
+
+Example: The resolvent RA : C \ Λ(A) →Cn×n, z �→(zIn −A)−1.
+
+1.2
+Applications of Matrix Functions
+
+We consider four applications of matrix functions.
+
+1.2.1
+Linear Ordinary Differential Equations
+
+In an initial value problem (IVP) we search for a function y : [0, 1] →Cn which satisfies
+�
+y′(t) = Ay(t) + g(t, y(t)),
+t ∈[0, 1],
+y(0) = y0.
+(1.8)
+
+for given A ∈Cn×n, g : [0, 1] × Cn →Cn and y0 ∈Cn.
+
+Theorem 1.5. The unique solution of (1.8) is given by Duhamel’s formula
+
+y(t) = exp(tA)y0 + exp(tA)
+�t
+
+0
+exp(−sA)g(s, y0) ds.
+(1.9)
+
+In particular, for g = 0 (homogeneous case) we have
+
+y(t) = exp(tA)y0.
+(1.10)
+
+1.2.2
+Network analysis
+
+We consider an undirected graph G = (V, E) with vertices V = {v1, . . . , vn} and edges
+E ⊆V × V . The adjacency matrix A = [aij] ∈Rn×n of G is defined by
+
+aij =
+
+�
+1,
+(vi, vj) ∈E,
+0,
+otherwise.
+(1.11)
+
+Note, that A is symmetric since G is undirected. Moreover, (Ak)ij is the number of
+distinct walks from vi to vj of exact length k (neither vertices nor edges have to be
+distinct).
+In network analysis, we are interested in certain properties of the graph, e.g.,
+
+7
+
+
+• the centrality of a vertex vi, i.e., how important is vi for the whole network. To
+measure this, we can count the number of walks from the vertex to itself (weighted
+by the number of edges used):
+�
+In + A + 1
+
+2!A2 + 1
+
+3!A3 + 1
+
+4!A4 + · · ·
+�
+
+ii = exp(A)ii.
+
+• the communicability between vi and vj. Similar to centrality, we ask how well vi
+and vj can communicate with each other. This can be measure by the number of
+walks from vi to vj (weighted by the number of edges used), e.g.,
+�
+In + A + 1
+
+2!A2 + 1
+
+3!A3 + 1
+
+4!A4 + · · ·
+�
+
+ij = exp(A)ij.
+
+• the closeness of the network to being bipartite.
+
+Recall that a graph is bipartite if V can be divided into two disjoint sets V1, V2
+such that any edge connects a vertex in V1 and in V2. An undirected graph G
+is bipartite, if and only if it does not contain a closed walk (start = end) of odd
+length.
+
+Consequently, G is close to being bipartite, if most of the closed walks have an
+even number of edges, i.e., if
+
+0 ≤
+
+n�
+
+i=1
+
+�
+In + 1
+
+2!A2 + 1
+
+4!A4 + . . .
+�
+
+ii
+
+n�
+
+i=1
+
+�
+In + A + 1
+
+2!A2 + 1
+
+3!A3 + . . .
+�
+
+ii
+
+= tr(cosh(A))
+
+tr(exp(A)) ≤1
+(1.12)
+
+is close to 1.
+
+For an introduction on network analysis with matrix functions, we refer to [11].
+
+Example 1.6. We consider the undirected graph G(V, E) with adjacency matrix
+
+A =
+
+
+
+
+
+0
+1
+1
+1
+0
+1
+0
+1
+1
+0
+1
+1
+0
+0
+0
+1
+1
+0
+0
+1
+0
+0
+0
+1
+0
+
+
+
+
+;
+
+see Figure 1. The first powers of the adjacency matrix are
+
+A2 =
+
+
+
+
+
+3
+2
+1
+1
+1
+2
+3
+1
+1
+1
+1
+1
+2
+2
+0
+1
+1
+2
+3
+0
+1
+1
+0
+0
+1
+
+
+
+
+,
+A3 =
+
+
+
+
+
+4
+5
+5
+6
+1
+5
+4
+5
+6
+1
+5
+5
+2
+2
+2
+6
+6
+2
+2
+3
+1
+1
+2
+3
+0
+
+
+
+
+,
+A4 =
+
+
+
+
+
+16
+15
+9
+10
+6
+15
+16
+9
+10
+6
+9
+9
+10
+12
+2
+10
+10
+12
+15
+2
+6
+6
+2
+2
+3
+
+
+
+
+
+8
+
+
+1
+
+2
+3
+4
+5
+
+Figure 1: Graph from Example 1.6.
+
+and the matrix exponential of the adjacency matrix is1
+
+exp(A) = In + A + 1
+
+2!A2 + 1
+
+3!A3 + . . . =
+
+
+
+
+
+4.3333
+3.9654
+3.1207
+3.4031
+1.0752
+3.9654
+4.3333
+3.1207
+3.4031
+1.0752
+3.1207
+3.1207
+3.0274
+2.1505
+0.5648
+3.4031
+3.4031
+2.1505
+3.8203
+1.7631
+1.0752
+1.0752
+0.5648
+1.7631
+1.6698
+
+
+
+
+.
+
+We see that the most central vertices are v1 and v2. The communication is best between
+v1 and v2 and worst between v1 and v4, and between v2 and v4.
+The hyperbolic cosine of A is
+
+cosh(A) = In + 1
+
+2!A2 + 1
+
+4!A4 + . . . =
+
+
+
+
+
+3.3284
+1.7854
+0.9843
+1.0420
+0.8079
+1.7854
+3.3284
+0.9843
+1.0420
+0.8079
+0.9843
+0.9843
+2.5138
+1.6157
+0.1154
+1.0420
+1.0420
+1.6157
+3.2639
+0.1187
+0.8079
+0.8079
+0.1154
+0.1187
+1.6482
+
+
+
+
+.
+
+and the above mentioned measure for the bipartiteness is
+
+tr(cosh(A))
+
+tr(exp(A)) ≈0.8195.
+
+Note that other weightings may modeled by other matrix functions, e.g., if the
+adjacency matrix A ∈Rn×n fulfills ρ(A) < 1, then we have
+
+f(A) = (In −A)−1 = In + A + A2 + A3 + . . . .
+(1.13)
+
+for f(z) =
+1
+1−z.
+In this case, the graph G must of course be directed, as otherwise
+ρ(A) ≥1 holds potentially. As above, the entries of f(A) give us informations about
+centrality and communicability, but for a uniform weighting, i.e., all walks count the
+same despite of there length. This was originally done in [17]. Recall the geometric
+series, i.e.,
+∞
+�
+
+k=0
+qk =
+1
+1 −q
+for
+|q| < 1,
+(1.14)
+
+which we used in (1.13).
+
+1The computation in Example 1.6 were performed using the expm routine in MATLAB. Results are
+rounded to four decimal places.
+
+9
+
+
+1.2.3
+Multivariate Sampling in Statistics
+
+We continue with an application of the matrix square root A
+1
+2 .
+Suppose, we want
+to generate a random vector y ∼N(µ, C) where N(µ, C) is the multivariate normal
+distribution with mean µ ∈Rn and a symmetric positive definite (SPD) covariance
+matrix C ∈Rn×n. For this, we usually generate x ∈N(0, In) and set y = µ + Lx where
+C = LLT is a Cholesky decomposition of C. Indeed,
+
+E[y] = E[µ + Lx] = E[µ] + E[Lx] = E[µ] + LE[x] = µ
+
+and
+
+V[y] = E
+�
+(y −E[y])(y −E[y])T �
+= E
+�
+(µ + Lx −µ)(µ + Lx −µ)T �
+
+= E
+�
+LxxT LT �
+= LE
+�
+xxT �
+LT = LE
+�
+(x −0)(x −0)T �
+LT
+
+= LE
+�
+(x −E[x])(x −E[x])T �
+LT = LV[x]LT = L · In · LT = LLT = C.
+
+Here, we have not used that L is lower triangular, but only LLT = C. If it is not suitable
+to compute a Cholesky decomposition of C, e.g., if n is too large, we can generate y by
+setting y = µ+C
+1
+2 x where C
+1
+2 is the (principal) square root of C. Since C
+1
+2 is symmetric,
+we also have C
+1
+2 (C
+1
+2 )T = C and thus the above calculations hold for y = µ + C
+1
+2 x as
+well. Note, that this approach does not require the full matrix C
+1
+2 but only the ability
+to evalaute C
+1
+2 x, which allow to use Krylov subspace approaches (evaluation of f(A)b).
+We refer to [5, Sect. 5.1] for more information.
+
+Lemma 1.7. Let A ∈Cn×n be Hermitian positive definite (HPD). Then there exists a
+unique HPD matrix A
+1
+2 ∈Rn×n with A
+1
+2 A
+1
+2 = A.
+
+Proof. Let A = U diag(d1, . . . , dn)UH be a unitary diagonalization of the Hermitian
+matrix A, i.e., U ∈Cn×n with UHU = In. Moreover, we have dj > 0 since A is HPD.
+Define
+A
+1
+2 := U diag(
+�
+
+d1, . . . ,
+�
+
+dn)UH.
+
+Then A
+1
+2 is Hermitian and also positive definite since √di > 0. Moreover,
+
+(A
+1
+2 )2 = U diag(
+�
+
+d1, . . . ,
+�
+
+dn)UHU diag(
+�
+
+d1, . . . ,
+�
+
+dn)UH
+
+= U diag(
+�
+
+d1, . . . ,
+�
+
+dn) diag(
+�
+
+d1, . . . ,
+�
+
+dn)UH = U diag(d1, . . . , dn)UH = A.
+
+The proof of the uniqueness of A
+1
+2 is somewhat more involved and requires the simultaneous
+diagonalization of commuting normal matrices; see [16, Thm. 7.2.6] for details.
+
+10
+
+
+1.2.4
+Markov Transition Matrices
+
+Markov transition matrices model the transition between a set of discrete states, e.g.,
+
+• state 1: full employment,
+• state 2: part-time employment,
+• state 3: unemployed,
+by a transition matrix T = [tij] ∈Rn×n where tij ∈[0, 1] is the probability of a
+transition from state i to state j.
+Since we are working with probabilities, we need
+to have �n
+j=1 tij = 1 for i = 1, . . . , n. Such a matrix is called row-stochastic.
+
+In the example above, the transition matrix for changes within one year might be
+
+TA =
+
+
+
+
+0.8
+0.1
+0.1
+0.25
+0.6
+0.15
+0.25
+0.25
+0.5
+
+
+
+.
+
+Given this annual transition matrix, we may want to know the monthly transition
+matrix TM which contains the transition probabilities for changes within one month.
+This matrix needs to fulfill
+TA = T 12
+M ,
+
+i.e., we are looking for a p-th root T
+
+1
+12
+A
+of A. In order to model transition probabilities,
+
+the matrix T
+
+1
+12
+A
+has to be row-stochastic as well. Conditions under which the p-th roots
+of stochastic matrices are (almost) stochastic themselves has been studied in [13] or the
+more recent article [10].
+
+11
+
+
+2
+Definitions of f(A)
+
+In this section, we consider the definition of matrix functions via the
+
+(1) Jordan decomposition,
+(2) Hermite interpolation polynomial,
+(3) Taylor series,
+(4) Cauchy integral formula.
+The latter two definitions require the analyticity of f.
+
+2.1
+Jordan Form Definition
+
+Recall that for any A ∈Cn×n there exists a Jordan decomposition of the form
+
+A = XJX−1,
+(2.1)
+
+where X ∈Cn×n is nonsingular and
+
+J = diag
+�
+Jd1(λ1), . . . , Jdk(λk)
+�
+∈Cn×n
+(2.2)
+
+is a Jordan form of A with Jordan blocks
+
+Jdi(λi) =
+
+
+
+
+
+λi
+1
+...
+...
+...
+1
+λi
+
+
+
+
+∈Cdi×di,
+i = 1, . . . , k.
+(2.3)
+
+Some properties of the Jordan decomposition and related definitions are:
+
+• d1 + · · · + dk = n
+
+• J is unique up to permutations of the Jordan blocks.
+
+• Let ˜λ1, . . . , ˜λm be the distinct eigenvalues of A and let ˜di be the maximum size of
+the Jordan blocks corresponding to the eigenvalue ˜λi. Then ˜di is called the index
+of ˜λi.
+
+• Recall that the minimal polynomial MA of A is the unique monic polynomial of
+minimal degree that annihilates A, i.e., MA(A) = 0. It is given by
+
+MA(z) =
+
+m
+�
+
+i=1
+(z −˜λi)
+˜di.
+(2.4)
+
+• Any other polynomial which annihilates A is divided by MA. In particular, MA
+divides the characteristic polynomial PA of A.
+
+12
+
+
+• If d1 = · · · = dk = 1, then A is diagonalizable and the Jordan decomposition
+reduces to an eigendecomposition, i.e.,
+
+A = XDX−1
+with
+D = diag(λ1, . . . , λn).
+(2.5)
+
+In particular, the j-th column of X is an eigenvector of A corresponding to the
+eigenvalue λj.
+
+For further details on the Jordan decomposition, we refer to the textbook [20, Ch. 16].
+
+Remark 2.1. In numerical computations, we have to avoid the Jordan form since it
+does not depend continuously on A, i.e., small perturbations in the entries of A, e.g.,
+caused by rounding errors, can completely change its Jordan form. For example, the
+Jordan form of
+
+Aε =
+�1 + ε
+1
+0
+1
+
+�
+∈C2×2
+
+is given by
+
+Jε =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+�
+1 + ε
+0
+0
+1
+
+�
+
+,
+ε ̸= 0,
+
+�
+1 + ε
+1
+0
+1
+
+�
+
+,
+ε = 0,
+
+but we have lim
+ε→0 Aε = A0, and
+
+lim
+ε→0 Jε =
+�1
+0
+0
+1
+
+�
+̸=
+�1
+1
+0
+1
+
+�
+= J0.
+
+Instead, we should use a Schur decomposition A = URUH, i.e., with R ∈Cn×n upper
+triangular and U ∈Cn×n unitary, whenever it is possible.
+
+Definition 2.2. Let A ∈Cn×n have the Jordan form
+
+diag
+�
+Jd1(λ1), . . . , Jdk(λk)
+�
+.
+
+Then a function f : Ω→C with Ω⊆C is defined on the spectrum of A, if the values
+
+f(j)(λi),
+j = 0, . . . , di −1,
+i = 1, . . . , k
+
+exist. Here, f(j)(λi) denotes the j-th derivative of f at λi.
+
+For any f that is defined on the spectrum of A, we now can define f(A) via the
+Jordan form of A.
+
+Definition 2.3. Let f : Ω→C be defined on the spectrum of A ∈Cn×n and let
+
+A = XJX−1 = X diag
+�
+Jd1(λ1), . . . , Jdk(λk)
+�
+X−1
+(2.6)
+
+13
+
+
+be a Jordan decomposition of A. Then the (primary) matrix function f(A) is defined as
+
+f(A) := Xf(J)X−1
+where
+f(J) := diag
+�
+f(Jd1(λ1)), . . . , f(Jdk(λk))
+�
+,
+(2.7)
+
+where
+
+f(Jdi(λi)) :=
+
+
+
+
+
+f(λi)
+f′(λi)
+f′′(λi)
+
+2!
+· · ·
+f(di−1)(λi)
+
+(di−1)!
+
+f(λi)
+f′(λi)
+...
+...
+...
+...
+f′′(λi)
+
+2!
+...
+f′(λi)
+f(λi)
+
+
+
+
+
+∈Cdi×di,
+i = 1, . . . , k.
+(2.8)
+
+Remark 2.4.
+(1) In order to motivate the first definition in (2.7), note that for any
+polynomial p, we have p(XAX−1) = Xp(A)X−1, since
+
+(XAX−1)k = XA X−1X
+����
+=In
+AX−1 · . . . · XAX−1 = XAkX−1.
+
+(2) To justify (2.8), consider Jdi(λi) = λiIdi + N where
+
+N =
+
+
+
+
+
+0
+1
+...
+...
+...
+1
+0
+
+
+
+
+∈Cdi×di.
+
+Then
+
+N2 =
+
+
+
+
+
+0
+0
+1
+
+0
+0
+...
+...
+...
+1
+...
+0
+0
+
+
+
+
+
+,
+. . .
+Ndi−1 =
+
+
+
+
+
+0
+· · ·
+1
+...
+...
+0
+
+
+
+,
+and
+Nk = 0
+
+for k ≥di. Next let f be a function with a Taylor series around λi, i.e.,
+
+f(z) =
+
+∞
+�
+
+k=0
+
+f(k)(λi)
+
+k!
+(z −λi)k,
+|z −λi| < r.
+
+14
+
+
+Inserting Jdi(λi) in the series yields
+
+f(Jdi(λi)) =
+
+∞
+�
+
+k=0
+
+f(k)(λi)
+
+k!
+(λiIdi + N −λiIdi)k
+
+=
+
+∞
+�
+
+k=0
+
+f(k)(λi)
+
+k!
+Nk =
+
+di−1
+�
+
+k=0
+
+f(k)(λi)
+
+k!
+Nk
+
+= f(λi)Idi +
+
+
+
+
+
+0
+f′(λi)
+...
+...
+...
+f′(λi)
+0
+
+
+
+
++ . . . +
+
+
+
+
+
+0
+· · ·
+f(di−1)(λi)
+
+(di−1)!
+...
+...
+0
+
+
+
+,
+
+which is the same as in (2.8).
+
+(3) If A is diagonalizable, i.e.,
+
+A = X
+
+
+
+
+
+λ1
+...
+λn
+
+
+
+X−1,
+then
+f(A) = X
+
+
+
+
+
+f(λ1)
+...
+f(λn)
+
+
+
+X−1.
+
+In particular, f(A) is also diagonalizable with eigenvalues f(λ1), . . . , f(λn). Moreover,
+the eigenvectors of A and f(A) coincide.
+
+Note, that this not an equivalence. Even though A is not diagonalizable, f(A) can
+still be diagonal, e.g., for
+
+f(z) = cos(z)
+and
+A =
+�π
+1
+0
+π
+
+�
+,
+
+the function f is defined on the spectrum of A and
+
+f(A) =
+�f(π)
+f′(π)
+0
+f(π)
+
+�
+=
+�cos(π)
+−sin(π)
+0
+cos(π)
+
+�
+=
+�−1
+0
+0
+−1
+
+�
+
+is diagonal.
+
+Next, we will discuss that f(A) in Definition 2.3 is well-defined, i.e., it is independent
+of the particular Jordan decomposition that is used.
+
+Theorem 2.5. Let A ∈Cn×n with Jordan decompositions
+
+A = XJ1X−1
+and
+A = Y J2Y −1.
+(2.9)
+
+Moreover, let f be defined on the spectrum of A and define
+
+f1(A) := Xf(J1)X−1
+and
+f2(A) := Y f(J2)Y −1.
+(2.10)
+
+Then f1(A) = f2(A).
+
+15
+
+
+Proof. By (2.9), we have J1 = ZJ2Z−1 with Z = X−1Y . In particular, J1 is a Jordan
+form of ZJ2Z−1. Hence,
+
+f1(A) = Xf(J1)X−1 = Xf(ZJ2Z−1)X−1
+
+= XZf(J2)Z−1X−1 = Y f(J2)Y −1 = f2(A).
+(2.11)
+
+Note, that strictly speaking we can not use f(ZJ2Z−1) = Zf(J2)Z−1 at this point. However,
+the well-definedness of Definition 2.3 will later follow from the equivalence of the Jordan form
+definition with the Hermite interpolation definition (see Theorem 2.17) because the latter is
+invariant under similarity transformations.
+
+Remark 2.6. The definition of f(A) does not require a globally defined (smooth)
+function f, but only the discrete data points
+
+f(j)(λi),
+j = 0, . . . , di −1,
+i = 1, . . . , k.
+
+The assumptions on f depend on the eigenstructure of A, e.g., if A is diagonalizable,
+then f does not have to be differentiable.
+
+2.2
+Definition via Polynomial Interpolation
+
+Consider the Hermite interpolation problem. Given
+
+(i) λ1, . . . , λk ∈C mutually distinct,
+(ii) d1, . . . , dk ∈N with d1 + . . . + dk = n + 1,
+(iii) fij ∈C for j = 0, . . . , di −1 and i = 1, . . . , k,
+we search for a polynomial p with
+
+p(j)(λi) = fij,
+j = 0, . . . , di −1,
+i = 1, . . . , k.
+(2.12)
+
+Lemma 2.7. For any choice of parameters, there exists a unique polynomial of degree
+at most n that solves the Hermite interpolation problem (2.12).
+
+Proof. Write p(z) = α0 + α1z + α2
+
+2! z2 + . . . + αn
+
+n! zn. Then
+
+p(j)(z) = αj + αj+1z + αj+2
+
+2! z2 + . . . +
+αn−1
+(n −1 −j)!zn−1−j +
+αn
+(n −j)!zn−j.
+
+Thus, (2.12) can be written as
+
+αj + αj+1λi + αj+2
+
+2! λ2
+i + . . . +
+αn−1
+(n −1 −j)!λn−1−j
+i
++
+αn
+(n −j)!λn−j
+i
+= fij,
+
+which yields n + 1 linear equations in the unknown α = [α0, . . . , αn]T ∈Cn+1.
+Next, we prove that this linear system is nonsingular by showing that the zero-
+polynomial is the unique solution of the homogeneous system, i.e., with fij ≡0. Let the
+polynomial q ̸= 0 with deg(q) ≤n be a solution of (2.12) for fij ≡0. Since
+
+0 = q(λi) = q′(λi) = · · · = q(di−1)(λi),
+
+16
+
+
+the polynomial q has a zero of order (at least) di at λi for i = 1, . . . , k. Hence deg(q) ≥
+d1 + · · · + dk = n + 1, which is a contradiction. Therefore, the homogeneous linear
+system is uniquely solved by the zero-polynomial. Thus, the linear algebraic system is
+nonsingular and there exists a unique solution for (2.12).
+
+Remark 2.8. The unique polynomial in Lemma 2.7 of degree at most n can be given
+explicitly.
+
+(1) Lagrange-Hermite formula
+
+p(z) =
+
+k
+�
+
+i=1
+
+�di−1
+�
+
+j=0
+
+ϕ(j)
+i (λi)
+
+j!
+(z −λi)j�
+k
+�
+
+j=1
+j̸=i
+
+(z −λj)dj,
+where
+ϕi(z) =
+f(z)
+
+k
+�
+
+j=1
+j̸=i
+
+(z −λj)dj
+,
+
+which reduces to the Lagrange interpolation polynomial for a matrix with distinct
+eigenvalues (di ≡1).
+
+(2) Newton divided difference form
+Recall that the divided differences are defined by
+
+f[µ1, . . . , µk+1] :=
+
+�f[µ2,...,µk+1]−f[µ1,...,µk]
+
+µk+1−µ1
+,
+µ1 ̸= µk+1,
+
+f(k)(µk+1)
+
+k!
+,
+µ1 = µk+1.
+
+The (unique) Hermite interpolation polynomial has the form
+
+p(z) =f(�λ1) + f[�λ1, �λ2](z −�λ1) + . . . + f[�λ1, . . . , �λn+1](z −�λ1) · . . . · (z −�λn),
+
+where in �λ1, . . . , �λn+1 the interpolation node λi occurs di times, i = 1, . . . , k.
+
+Definition 2.9. Let A ∈Cn×n have the distinct eigenvalues ˜λ1, . . . , ˜λm with corres-
+ponding indices ˜d1, . . . , ˜dm. Furthermore, let f be defined on the spectrum of A and
+let p be a polynomial with
+
+p(j)(˜λi) = f(j)(˜λi),
+j = 0, . . . , ˜di −1,
+i = 1, . . . , m.
+
+Then we define f(A) := p(A).
+
+Example 2.10. Let f(z) = √z, i.e., f′(z) =
+1
+2√z, and
+
+A =
+
+
+
+
+1
+1
+1
+0
+4
+0
+0
+−3
+1
+
+
+
+=
+
+X
+�
+��
+�
+
+
+
+1
+0
+0
+0
+0
+−1
+0
+1
+1
+
+
+
+
+
+J
+�
+��
+�
+
+
+
+1
+1
+0
+0
+1
+0
+0
+0
+4
+
+
+
+
+
+X−1
+�
+��
+�
+
+
+
+1
+0
+0
+0
+1
+1
+0
+−1
+0
+
+
+
+.
+
+17
+
+
+(1) Jordan form definition:
+
+f(A) = Xf(J)X−1 =
+
+
+
+
+1
+0
+0
+0
+0
+−1
+0
+1
+1
+
+
+
+
+
+
+
+
+1
+1
+2
+0
+0
+1
+0
+0
+0
+2
+
+
+
+
+
+
+
+
+1
+0
+0
+0
+1
+1
+0
+−1
+0
+
+
+
+=
+
+
+
+
+1
+1
+2
+1
+2
+0
+2
+0
+0
+−1
+1
+
+
+
+.
+
+(2) Hermite interpolation definition:
+We need to find a polynomial p with p(1) = 1, p′(1) =
+1
+2
+√
+
+1 = 1
+
+2 and p(4) = 2. This
+
+problem is solved by p(z) = −1
+
+18z2 + 11
+
+18z + 4
+
+9. Then
+
+f(A) = p(A) = −1
+
+18A2 + 11
+
+18A + 4
+
+9I3 = . . . =
+
+
+
+
+1
+1
+2
+1
+2
+0
+2
+0
+0
+−1
+1
+
+
+
+.
+
+Remark 2.11. By Definition 2.9, the matrix f(A) is always a polynomial in A, that
+depends on f and A.
+
+Theorem 2.12. Let A ∈Cn×n and p, q be polynomials. Then the following are equivalent:
+
+(1) p and q have the same values on the spectrum of A, i.e.,
+
+[p(j)(˜λi) = q(j)(˜λi),
+j = 0, . . . , ˜di −1,
+i = 1, . . . , m.
+
+(2) p(A) = q(A)
+
+Proof. “(1)⇒(2)”: Let p and q have the same values on the spectrum of A.
+Then
+r := p −q vanishes on the spectrum of A, i.e.,
+
+r(j)(˜λi) = p(j)(˜λi) −q(j)(˜λi) = 0,
+j = 0, . . . , ˜di −1,
+i = 1, . . . , m.
+
+Then
+
+r(z) =
+�m
+�
+
+i=1
+(z −˜λi)
+˜di
+
+�
+��
+�
+MA(z)
+
+�
+˜r(z)
+
+for some polynomial ˜r. Thus, MA divides r and therefore
+
+p(A) −q(A) = r(A) = MA(A)˜r(A) = 0,
+
+i.e., p(A) = q(A).
+“(2)⇒(1)”: Let p(A) = q(A). Then for r := p −q we find r(A) = 0 and therefore
+MA divides r i.e., r(z) = MA(z)˜r(z) for some polynomial ˜r. Thus, by the Leibniz rule
+(generalized product rule) we have
+
+r(j)(˜λi) = (MA · ˜r)(j)(˜λi) =
+
+j
+�
+
+k=0
+
+�j
+k
+
+�
+M(k)
+A (˜λi)˜r(j−k)(˜λi) = 0
+
+for j = 0, . . . , ˜di −1 and i = 1, . . . , m. Hence, r vanishes on the spectrum of A, and
+therefore, p and q coincide on the spectrum of A.
+
+18
+
+
+2.3
+Taylor Series Definiton
+
+The next two definitions require some notation from complex analysis. In this course,
+we will recall the main results related to our matrix functions, mostly without proofs or
+additional background. For more details we refer to the classical textbooks by Ahlfors [1]
+and Conway [6], and to the more modern textbook by Wegert [26].
+
+Complex Analysis Sidenote
+
+Analytic functions:
+Let Ω⊆C be open and simply connected. A function f : Ω→C is called analytic
+in z0 ∈Ω, if f has a power series representation at z0, i.e., there exists r > 0 with
+
+f(z) =
+
+∞
+�
+
+k=0
+ak(z −z0)k,
+|z −z0| < r.
+(2.13)
+
+The function f is called analytic in Ωif f is analytic at z0 for all z0 ∈Ω. Some
+interesting properties of analytic functions f are:
+
+• f is infinitely often differentiable.
+
+• ak = f(k)(z0)
+
+k!
+, i.e., the power series representation is the Taylor series.
+
+• If the zero set of f has a limit point in Ω, then f is the zero function.
+
+Definition 2.13. Let f be analytic in Ω⊆C with Taylor series around z0
+
+f(z) =
+
+∞
+�
+
+k=0
+
+f(k)(z0)
+
+k!
+(z −z0)k,
+z ∈Ω.
+(2.14)
+
+Then for any A ∈Cn×n with Λ(A) ⊂Ω, we define
+
+f(A) =
+
+∞
+�
+
+k=0
+
+f(k)(z0)
+
+k!
+(A −z0In)k.
+(2.15)
+
+Next, we prove that the matrix series (2.15) is indeed converging.
+
+Theorem 2.14. Let f be analytic in Dr(z0) := {z ∈C | |z −z0| < r} and let A ∈Cn×n
+
+with q := ρ(A−z0In)
+
+r
+< 1. Then for any consistent norm on Cn×n
+
+lim
+m→∞
+
+���f(A) −
+
+m
+�
+
+k=0
+
+f(k)(z0)
+
+k!
+(A −z0In)k���= 0,
+(2.16)
+
+where f(A) is defined according to (2.15).
+
+Proof. From complex analysis, we know that analyticity implies that the derivatives of
+an analytic function can not grow arbitrarily fast. More precisely, for any function that
+
+19
+
+
+is analytic in Dr(z0) there exists a constant C such that |f(k)(z0)| ≤C k!
+
+rk . (This is an
+immediate consequence of the Cauchy integral formula for the k-th derivative below.)
+Moreover, for any A ∈Cn×n and any ε > 0 there exist a consistent norm ∥· ∥∗with
+ρ(A) ≤∥A∥∗≤ρ(A) + ε; see reference [16, Lem. 5.6.10]. In particular, there exist a
+consistent norm ∥· ∥∗with
+
+ρ(A −z0In)
+
+r
+≤∥A −z0In∥∗
+
+r
+≤ρ(A −z0In)
+
+r
++ 1 −q
+
+2
+=: ˜q < 1.
+
+Using the triangle inequality, the consistency of the norm ∥· ∥∗, and the geometric
+series, we find
+
+���f(A) −
+
+m
+�
+
+k=0
+
+f(k)(z0)
+
+k!
+(A −z0In)k���
+∗=
+���
+
+∞
+�
+
+k=m+1
+
+f(k)(z0)
+
+k!
+(A −z0In)k���
+∗
+
+≤
+
+∞
+�
+
+k=m+1
+
+|f(k)(z0)|
+
+k!
+∥A −z0In∥k
+∗≤
+
+∞
+�
+
+k=m+1
+C ∥A −z0In∥k
+∗
+rk
+≤
+
+∞
+�
+
+k=m+1
+C
+�∥A −z0In∥∗
+
+r
+
+�k
+
+≤C
+
+∞
+�
+
+k=m+1
+
+�ρ(A −z0In)
+
+r
++ 1 −q
+
+2
+
+�k
+≤C
+
+∞
+�
+
+k=m+1
+˜qk = C · ˜qm+1
+
+1 −˜q
+
+m→∞
+−→0.
+
+Since all norms on a finite-dimensional vector space are equivalent, the assertion follows.
+
+2.4
+Cauchy Integral Definition
+
+The next definition of a matrix function is based on the Cauchy integral formula.
+
+Complex Analysis Sidenote
+
+Cauchy integral formula:
+A Jordan curve Γ : [0, 1] →C is a simple (i.e., non-intersecting), closed curve
+(Γ(0) = Γ(1)) that is oriented counterclockwise; see, e.g., [26, p. 56]. By int(Γ), we
+denote the interior of Γ, i.e., the bounded component of C \ Γ. Note that int(Γ) is
+always left to Γ according to its counterclockwise orientation.
+
+Theorem 2.15 (Cauchy integral formula). Let Γ be a rectifiable1. Jordan curve
+and let f be analytic in int(Γ) and continuous on Γ. Then for any z0 ∈int(Γ), we
+have
+
+f(z0) =
+1
+2πi
+
+�
+
+Γ
+
+f(z)
+z −z0
+dz.
+(2.17)
+
+Moreover, for the k-th derivative of f, we have
+
+f(k)(z0) = k!
+
+2πi
+
+�
+
+Γ
+
+f(z)
+(z −z0)k+1 dz.
+(2.18)
+
+20
+
+
+We refer to [26, Sect. 4.3] for a proof and more details.
+
+Definition 2.16. Let Γ be a Jordan curve and let f be analytic in int(Γ) and continuous
+on Γ. Then for any A ∈Cn×n with Λ(A) ⊆int(Γ), we define
+
+f(A) :=
+1
+2πi
+
+�
+
+Γ
+f(z)(zIn −A)−1 dz.
+(2.19)
+
+The Integration in (2.19) is meant entry-wise here, i.e.,
+�
+
+Γ
+A(z) dz :=
+��
+
+Γ
+aij(z) dz
+�
+.
+(2.20)
+
+Note that the resolvent (zIn −A)−1 is always defined in (2.19) since Λ(A) ∩Γ = ∅.
+It can be shown that the value of the integral in this definition does not depend on the
+particular choice of the Jordan curve.
+
+2.5
+Equivalence of the Definitions of f(A)
+
+In this section, we prove that our definitions for f(A) are equivalent (modulo analyticity
+in Definitions 2.13 and 2.16). The four definitions have different strengths, e.g.,
+
+• Jordan form definition: Solving matrix equations, e.g., X2 = A.
+
+• Hermite interpolation definition: Deriving basic properties of matrix functions,
+e.g., Af(A) = f(A)A.
+
+• Taylor series definition: Evaluate f(A) for A with a single eigenvalue cluster.
+
+• Cauchy integral definition: Numerical Computation of f(A)b, e.g., with quadrature
+rules
+
+f(A)b =
+1
+2πi
+
+�
+
+Γ
+f(z)(zIn −A)−1b dz ≈
+1
+2πi
+
+m
+�
+
+k=0
+f(zk)(zkIn −A)−1blength(Γ)
+
+m + 1
+.
+
+Theorem 2.17. Let f be defined on the spectrum of A ∈Cn×n. Then the definitions
+for f(A) in Definition 2.3 and Definition 2.9 are equivalent.
+
+Proof. Let A have the Jordan decomposition
+
+A = XJX−1
+with
+J = diag
+�
+Jd1(λ1), . . . , Jdk(λk)
+�
+
+and let p be a polynomial with
+
+p(j)(λi) = f(j)(λi)
+for
+j = 0, . . . , di −1,
+i = 1, . . . , k.
+
+1A curve is rectifiable, if it has finite length
+
+21
+
+
+We will now prove p(A) = Xf(J)X−1. Indeed,
+
+p(A) = p(XJX−1)
+
+Rem.
+2.4 (1)
+=
+Xp(J)X−1 = X diag
+�
+p(Jd1(λ1)), . . . , p(Jdk(λk))
+�
+X−1.
+
+So, it is sufficient to show that p(Jdi(λi)) = f(Jdi(λi)) for i = 1, . . . , k. We know that p
+has a finite Taylor series at λi, i.e., we have
+
+p(z) = p(λi) + p′(λi)(z −λi) + . . . + p(di−1)(λi)
+
+(di −1)! (z −λi)di−1 +
+
+m
+�
+
+k=di
+
+p(k)(λi)
+
+k!
+(z −λi)k
+
+= f(λi) + f′(λi)(z −λi) + . . . + f(di−1)(λi)
+
+(di −1)! (z −λi)di−1 +
+
+m
+�
+
+k=di
+
+p(k)(λi)
+
+k!
+(z −λi)k
+
+for some m ∈N and all z ∈C. Similar to Remark 2.4.2.), we use Jdi(λi) = λiIdi + N
+where
+
+N =
+
+
+
+
+
+0
+1
+...
+...
+...
+1
+0
+
+
+
+
+∈Cdi×di.
+
+Inserting this in the above equation, we receive
+
+p(Jdi(λi)) =
+
+di−1
+�
+
+k=0
+
+f(k)(λi)
+
+k!
+(λiIdi + N −λiIdi)k +
+
+m
+�
+
+k=di
+
+p(k)(λi)
+
+k!
+(λiIdi + N −λiIdi)k
+
+= f(λi)Idi + f′(λi)N + . . . + f(di−1)(λi)
+
+(di −1)! Ndi−1 +
+
+m
+�
+
+k=di
+
+p(k)(λi)
+
+k!
+Nk
+����
+=0
+= f(Jdi(λi)).
+
+Next, we prove the equivalence of Definition 2.3 and Definition 2.13. For this, we
+use that the radius of convergence of a power series and its derivative coincide.
+
+Lemma 2.18. Consider the power series
+
+f(z) =
+
+∞
+�
+
+k=0
+ak(z −z0)k
+
+with radius of convergence rf > 0. Then its derivative
+
+f′(z) =
+
+∞
+�
+
+k=1
+kak(z −z0)k−1
+
+has the same radius of convergence, i.e., rf′ = rf.
+
+22
+
+
+Proof. Using lim
+k→∞
+
+k√
+
+k = 1, we find
+
+rf = lim sup
+k→∞
+
+1
+
+k�
+
+|ak|
+= lim sup
+k→∞
+
+1
+
+k√
+
+k k�
+
+|ak|
+= lim sup
+k→∞
+
+1
+
+k�
+
+k|ak|
+= rf′.
+
+Theorem 2.19. Let f : Ω→C have a Taylor series representation around z0 ∈Ω⊆C
+with radius of convergence r > 0, i.e.,
+
+f(z) =
+
+∞
+�
+
+k=0
+
+f(k)(z0)
+
+k!
+(z −z0)k,
+|z −z0| < r
+
+For all A ∈Cn×n with Λ(A) ⊆{z ∈C | |z −z0| < r}, we have
+
+f(A) =
+
+∞
+�
+
+k=0
+
+f(k)(z0)
+
+k!
+(A −z0In)k.
+
+Proof. Let A have the Jordan decomposition
+
+A = XJX−1 = X diag(Jd1(λ1), . . . , Jdk(λk))X−1.
+
+Moreover, denote by
+
+fm(z) :=
+
+m
+�
+
+k=0
+
+f(k)(z0)
+
+k!
+(z −z0)k.
+(2.21)
+
+the Taylor polynomial of f of order m. Its j-th derivative is given by
+
+f(j)
+m (z) =
+
+m
+�
+
+k=j
+
+f(k)(z0)
+
+k!
+k(k −1) · . . . · (k −j + 1)(z −z0)k−j =
+
+m
+�
+
+k=j
+
+f(k)(z0)
+(k −j)!(z −z0)k−j.
+
+Since fm is a polynomial, we have
+
+lim
+m→∞fm(A) = lim
+m→∞fm(XJX−1) = lim
+m→∞Xfm(diag(Jd1(λ1), . . . , Jdk(λk)))X−1
+
+= X
+�
+lim
+m→∞fm(diag(Jd1(λ1), . . . , Jdk(λk)))
+�
+X−1.
+
+Thus, we can restrict to the case of a Jordan block Jd(λ) with λ ∈Λ(A) ⊂Dr(z0). We
+have Jd(λ) = λId + N with
+
+N =
+
+
+
+
+
+0
+1
+...
+...
+...
+1
+0
+
+
+
+
+.
+
+23
+
+
+Hence,
+
+fm (Jd(λ)) =
+
+m
+�
+
+k=0
+
+f(k)(z0)
+
+k!
+�
+Jd(λ) −z0Id
+�k =
+
+m
+�
+
+k=0
+
+f(k)(z0)
+
+k!
+�
+(λ −z0)In + N
+�k
+
+=
+
+m
+�
+
+k=0
+
+f(k)(z0)
+
+k!
+
+k
+�
+
+j=0
+
+�k
+j
+
+�
+(λ −z0)k−jNj
+
+=
+
+m
+�
+
+k=0
+
+k
+�
+
+j=0
+
+1
+j!
+f(k)(z0)
+(k −j)!(λ −z0)k−jNj =
+
+m
+�
+
+j=0
+
+1
+j!Nj
+m
+�
+
+k=j
+
+f(k)(z0)
+(k −j)!(λ −z0)k−j
+
+=
+
+m
+�
+
+j=0
+
+f(j)
+m (λ)
+
+j!
+Nj =
+
+min{m,d−1}
+�
+
+j=0
+
+f(j)
+m (λ)
+
+j!
+Nj,
+
+where we used that
+m
+�
+
+k=0
+
+k�
+
+j=0
+akj =
+m
+�
+
+j=0
+
+m
+�
+
+k=j
+akj holds for all m ∈N and akj ∈C.
+
+By Lemma 2.18, we have lim
+m→∞f(j)
+m (λ) = f(j)(λ) for all j ∈N. Therefore,
+
+lim
+m→∞fm(Jd(λ)) = lim
+m→∞
+
+min{m,d−1}
+�
+
+j=0
+
+f(j)
+m (λ)
+
+j!
+Nj =
+
+d−1
+�
+
+j=0
+
+f(j)(λ)
+
+j!
+Nj
+cf. Rem.
+
+2.4 (2)
+=
+f(Jd(λ)).
+
+Finally, we prove the equivalence of Definition 2.3 and Definition 2.16.
+
+Theorem 2.20. Let Γ be a Jordan curve, and let f be analytic in int(Γ) and continuous
+on Γ. Then for all A ∈Cn×n with Λ(A) ⊆int(Γ) the definitions for f(A) in Definitions 2.3
+and 2.16 are equivalent.
+
+Proof. Let A ∈Cn×n with Λ(A) ⊆int(Γ) have the Jordan decomposition
+
+A = XJX−1 = X diag(Jd1(λ1), . . . , Jdk(λk))X−1.
+
+Then
+
+1
+2πi
+
+�
+
+Γ
+f(z)(zIn −A)−1 dz
+
+=
+1
+2πi
+
+�
+
+Γ
+f(z)(X(zIn −J)X−1)−1 dz
+
+= X · 1
+
+2πi
+
+�
+
+Γ
+f(z)(zIn −J)−1 dz · X−1
+
+= X · 1
+
+2πi
+
+�
+
+Γ
+f(z)(zIn −diag(Jd1(λ1), . . . , Jdk(λk))−1 dz · X−1
+
+= X diag
+�1
+
+2πi
+
+�
+
+Γ
+f(z)(zId1 −Jd1(λ1))−1, . . . , 1
+
+2πi
+
+�
+
+Γ
+f(z)(zIdk −Jdk(λk))−1
+�
+X−1,
+
+24
+
+
+where we used Γ ∩Λ(A) = ∅. Hence, it is enough to prove the result for a Jordan block
+Jd(λ) = λId + N. The inverse of Jd(λ) is explicitly given by
+
+(zId −Jd(λd))−1 =
+
+
+
+
+
+1
+z−λd
+1
+(z−λd)2
+. . .
+1
+(z−λd)d
+
+1
+z−λd
+...
+...
+...
+1
+(z−λd)2
+1
+z−λd
+
+
+
+
+.
+(2.22)
+
+Moreover, the entry (i, j) of
+
+F :=
+1
+2πi
+
+�
+
+Γ
+f(z)(zId −Jd(λ))−1 dz ∈Cd×d
+
+is
+
+fij =
+1
+2πi
+
+�
+
+Γ
+
+f(z)
+(z −λ)(j−i+1) dz = f(j−i)(λ)
+
+(j −i)! = f(Jd(λ))ij,
+
+and therefore F = f(Jd(λ)).
+
+2.6
+Primary and Non-Primary Matrix Functions
+
+One application of matrix functions is solving matrix equations, e.g., for A ∈Cn×n we
+search for a matrix X ∈Cn×n s.t.
+
+X2 = A
+or
+exp(X) = A.
+
+The above equations lead to the matrix square root and the matrix logarithm. While
+primary matrix functions can be written as polynomials in A, this is not the case for
+all solutions of the above equations, since z �→√z or z �→log(z) are roughly speaking
+“multi-valued”. Such solutions are called non-primary matrix functions. For example,
+we can find them by choosing different branches of the function for different Jordan
+blocks corresponding to the same eigenvalue in the Jordan form definition.
+
+Example 2.21. Consider
+
+A =
+�1
+0
+0
+1
+
+�
+and
+f(z) = √z,
+
+i.e., we search for solutions for X2 = A. By using the two branches of the square root,
+we find the solutions
+
+X1 =
+�1
+0
+0
+1
+
+�
+and
+X2 =
+�−1
+0
+0
+−1
+
+�
+(primary).
+
+By choosing different branches for the two diagonal entries, we find
+
+X3 =
+�1
+0
+0
+−1
+
+�
+and
+X4 =
+�−1
+0
+0
+1
+
+�
+(non-primary).
+
+25
+
+
+Furthermore, there is a whole family of solutions that are not derived from the Jordan
+form of A given by Householder reflections:
+
+Xφ =
+�sin(φ)
+cos(φ)
+cos(φ)
+−sin(φ)
+
+�
+(non-primary).
+
+Even more generally, any involutory matrix, i.e., X = X−1 is a solution of X2 = A.
+Note, that all involutory (2 × 2)-matrices have the form
+
+Xa,b,c =
+�a
+b
+c
+−a
+
+�
+
+with a2 + bc = 1 or the form X =
+�±1
+0
+0
+±1
+
+�
+.
+
+In the following, we will always consider primary matrix functions, if not stated
+otherwise.
+
+26
+
+
+3
+Properties of Matrix Functions
+
+In this section, we study properties of general matrix functions (Section 3.1) and introduce
+important matrix function, namely the matrix exponential, the matrix logarithm, the
+matrix square root and the matrix sign function (Section 3.2).
+
+3.1
+Properties for General f
+
+First, we consider sums, products and compositions of matrix functions.
+
+Theorem 3.1. Let f, g : Ω→C be defined on the spectrum of A ∈Cn×n. Then
+
+(f + g)(A) = f(A) + g(A)
+and
+(f · g)(A) = f(A)g(A),
+
+where f + g and f · g is the pointwise sum and product.
+
+Proof. Let p interpolate f and q interpolate g on the spectrum of A, i.e.,
+
+f(j)(λi) = p(j)(λi)
+and
+g(j)(λi) = q(j)(λi),
+j = 0, . . . , di −1,
+i = 1, . . . , k.
+
+We then have
+
+(f + g)(j)(λi) = f(j)(λi) + g(j)(λi) = p(j)(λi) + q(j)(λi) = (p + q)(j)(λi),
+
+(f · g)(j)(λi) =
+
+j
+�
+
+k=0
+
+�j
+k
+
+�
+f(k)(λi)g(j−k)(λi) =
+
+j
+�
+
+k=0
+
+�j
+k
+
+�
+p(k)(λi)q(j−k)(λi) = (p · q)(j)(λi).
+
+Thus, p + q interpolates f + g and p · q interpolates f · g on the spectrum of A. Hence,
+
+(f + g)(A) = (p + q)(A) = p(A) + q(A) = f(A) + g(A),
+
+(f · g)(A) = (p · q)(A) = p(A)q(A) = f(A)g(A),
+
+where the second equality in each equation line is valid because we are considering
+polynomials in a matrix A.
+
+Theorem 3.2. Let g : Ω→C be defined on the spectrum of A ∈Cn×n. Moreover let
+˜λ1, . . . , ˜λm be the distinct eigenvalues A with indices ˜d1, . . . , ˜dm and let
+
+f(j)(g(˜λi))
+exist
+for
+j = 0, . . . , ˜di −1,
+i = 1, . . . , m.
+
+Then (f ◦g)(A) = f(g(A)).
+
+Proof. Let B := g(A) and ˜µi := g(˜λi) for i = 1, . . . , m. Then the index ˜δi of ˜µi fulfills
+˜δi ≤˜di. Furthermore, let p be a polynomial with
+
+p(j)(˜µi) = f(j)(˜µi) = f(j)(g(˜λi)),
+j = 0, . . . , ˜di −1,
+i = 1, . . . , m.
+
+Then in particular, p interpolates f on the spectrum of B, so f(B) = p(B). We show that
+f ◦g and p◦g coincide on the spectrum of A. For this, we use a generalization of the chain
+
+27
+
+
+rule to higher derivatives called Fa`a di Bruno’s formula. In this, formula Bj,k denote
+the so-called Bell polynomials. The details do not matter here. It is only important that
+(f ◦g)(j)(˜λi) only depends on f(g(˜λi)), . . . , f(j)(g(˜λi)) and g′(˜λi), . . . , g(j)(˜λi). We have
+
+(f ◦g)(j)(˜λi) =
+
+j
+�
+
+k=1
+f(k)(g(˜λi)) · Bj,k
+�
+g′(˜λi), . . . , g(n−k+1)(˜λi)
+�
+
+=
+
+j
+�
+
+k=1
+p(k)(g(˜λi)) · Bj,k
+�
+g′(˜λi), . . . , g(n−k+1)(˜λi)
+�
+= (p ◦g)(j)(˜λi)
+
+for j = 0, . . . , ˜di −1 and i = 1, . . . , m. Therefore, (f ◦g)(A) = (p ◦g)(A). The function
+p ◦g only consists of the evaluation of g and then multiplications and additions. Thus,
+by applying Theorem 3.1 multiple times, we receive
+
+(f ◦g)(A) = (p ◦g)(A)
+
+Thm.
+
+3.1
+=
+p(g(A)) = p(B) = f(B) = f(g(A)).
+
+To extend well-known results from the scalar case, e.g., trigonometric identities,
+to matrix functions, we often use the “matrix function induction”, which works as
+follows. We start by proving the desired result for (i) diagonal matrices, then for (ii)
+diagonalizable matrices and finally for (iii) general matrices. This principle is based on
+the following theorem.
+
+Theorem 3.3. Let Ω⊆C be open in C (or Ω⊆R be open in R) and define
+
+Cn×n(Ω) := {A ∈Cn×n | Λ(A) ⊆Ω},
+
+D(Ω) := {A ∈Cn×n(Ω) | A is diagonalizable}.
+
+(1) The set D(Ω) is dense in Cn×n(Ω), i.e., for any A ∈Cn×n(Ω) there exists a
+sequence (An)n∈N ⊆D(Ω) with A = lim
+n→∞An.
+
+(2) If f : Ω→C is (n−1)-times (real) continuously differentiable, then the corresponding
+matrix function f : Cn×n(Ω) →Cn×n (according to Section 2) is continuous .
+
+(3) If a map f : Cn×n(Ω) →Cn×n (does not need to be a matrix function) is continuous
+and f(D) = 0 for all D ∈D(Ω), then f(A) = 0 for all A ∈Cn×n(Ω).
+
+(4) If the maps f, g : Cn×n(Ω) →Cn×n are continuous with f(D) = g(D) for all
+D ∈D(Ω), then f(A) = g(A) for all A ∈Cn×n(Ω).
+
+Proof.
+(1) Exercise.
+
+(2) See [15, Lem. 6.1.28].
+
+(3) Let A ∈Cn×n(Ω). By 1.), there exists a sequence (An)n∈N ⊆D(Ω) with A =
+lim
+n→∞An. Then
+
+f(A) = f
+�
+lim
+n→∞An
+�
+= lim
+n→∞f(An) = 0.
+
+28
+
+
+(4) Similarly, f(A) = lim
+n→∞f(An) = lim
+n→∞g(An) = g(A).
+
+The next corollary is an example of a “matrix function induction”.
+
+Corollary 3.4. Let A ∈Cn×n. Then
+
+(1) sin(A)2 + cos(A)2 = In
+
+(2) sin(2A) = 2 sin(A) cos(A)
+
+(3) exp(iA) = cos(A) + i sin(A).
+
+Proof.
+(1) First, recall that sin(z)2 + cos(z)2 = 1 holds for all z ∈C. Then for any
+diagonal matrix D = diag(λ1, . . . , λn) ∈Cn×n, we have
+
+sin(D)2 + cos(D)2 = sin(diag(λ1, . . . , λn))2 + cos(diag(λ1, . . . , λn))2
+
+= diag(sin(λ1)2, . . . , sin(λn)2) + diag(cos(λ1)2, . . . , cos(λn)2)
+
+= diag(sin(λ1)2 + cos(λ1)2, . . . , sin(λn)2 + cos(λn)2) = In.
+
+Next, let A ∈Cn×n be diagonalizable, i.e., A = XDX−1. Then
+
+sin(A)2 + cos(A)2 = sin(XDX−1)2 + cos(XDX−1)2
+
+Thm.
+3.5 (3)
+= X sin(D)2X−1 + X cos(D)2X−1 = X(sin(D)2 + cos(D)2)X−1 = XX−1 = In.
+
+Finally, let A ∈Cn×n. Since the diagonalizable matrices are dense in Cn×n by
+Theorem 3.3 (1), we find a sequence of diagonalizable matrices An with An
+n→∞
+−→A.
+Moreover, since any analytic f yields a continuous matrix function from Cn×n to
+Cn×n by Theorem 3.3 (2), we have for f(z) = sin(z)2 + cos(z)2
+
+f(A) = f
+�
+lim
+n→∞An
+�
+= lim
+n→∞f(An) = lim
+n→∞In = In.
+
+The proof of (2) and (3) is analogous.
+
+Theorem 3.5. Let f be defined on the spectrum of A ∈Cn×n. Then
+
+(1) Af(A) = f(A)A
+
+(2) f(AT ) = f(A)T
+
+(3) For all nonsingular X ∈Cn×n we have f(XAX−1) = Xf(A)X−1.
+
+(4) Λ(f(A)) = f(Λ(A)).
+
+(5) For all X ∈Cn×n with XA = AX we have Xf(A) = f(A)X.
+
+29
+
+
+(6) If A is block-triangular, i.e.,
+
+A =
+
+
+
+
+
+A11
+. . .
+A1m
+...
+...
+Amm
+
+
+
+,
+
+then f(A) is block-triangular as well, has the same block structure, and it holds
+(f(A))ii = f(Aii).
+
+(7) If A = diag(A11, . . . , Amm), i.e., A is block-diagonal, then f(A) is also block-
+diagonal with f(A) = diag(f(A11), . . . , f(Amm)).
+
+(8) f(Im ⊗A) = Im ⊗f(A)
+
+(9) f(A ⊗Im) = f(A) ⊗Im
+
+Recall that the Kronecker product is given by
+
+⊗: Cn×m × Ck×ℓ→Cmk×nℓ,
+[aij] ⊗B :=
+
+
+
+
+
+a11B
+· · ·
+a1mB
+...
+...
+an1B
+· · ·
+anmB
+
+
+
+.
+
+Proof. (1), (2), (3), and (5) follow because f(A) is a polynomial in A. For (2), note that
+A and AT have the same eigenvalues and eigenvectors.
+
+(4) Follows directly from Definition 2.3
+
+(6) Let p be a polynomial that interpolates f on the spectrum of A.
+Then from
+f(A) = p(A), we conclude that f(A) is block-triangular with the same block
+structure and has diagonal blocks p(A11), . . . , p(Amm). Since the spectrum of Aii
+is a subset on the spectrum of A, the polynomial p also interpolates f on the
+spectrum of Aii. Hence p(Aii) = f(Aii) for i = 1, . . . , m.
+
+(7) Same reasoning as in (6).
+
+(8) Using Im ⊗A = diag(A, . . . , A), we find
+
+f(Im ⊗A) = f
+�
+diag(A, . . . , A)
+�(7)
+= diag
+�
+f(A), . . . , f(A)
+�
+= Im ⊗f(A).
+
+(9) Using A ⊗B = P(B ⊗A)P T for a permutation matrix P that does not depend on
+A and B, we find
+
+f(A⊗Im) = f(P(Im ⊗A)P T )
+(3)
+= Pf(Im ⊗A)P T (8)
+= P(Im ⊗f(A))P T = f(A)⊗Im.
+
+30
+
+
+The permutation matrix P in the proof of (9) is also called a commutation matrix.
+It has a rather simple structure, e.g., for n = m = 3, it is given by
+
+P =
+
+
+
+
+
+1
+
+1
+
+1
+1
+
+1
+
+1
+1
+
+1
+
+1
+
+
+
+
+
+∈R9×9.
+
+Remark 3.6.
+(1) Note, that other reasonable looking identities may not hold, e.g.,
+in general, we have f(AH) ̸= f(A)H. To see this, let A = In and f(z) = iz. Then
+
+f(AH) = iIH
+n = iIn ̸= −iIn = f(A)H.
+
+(2) Properties involving two matrices A, B ∈Cn×n, e.g., exp(A+B) = exp(A) exp(B),
+usually only hold, if A and B commute.
+
+The following theorem answers the question under which condition the identity
+f(AH) = f(A)H holds, and, in particular, when do real matrices A result in real matrices
+f(A). Recall that for any Ω⊆C, we denote
+
+Cn×n(Ω) := {A ∈Cn×n | Λ(A) ⊆Ω}
+and
+Rn×n(Ω) := {A ∈Rn×n | Λ(A) ⊆Ω}.
+
+Theorem 3.7 ([14, Thm. 3.2]). Let Ω⊆C be open and such that each connected
+component is closed under complex conjugation. Moreover, let f be analytic on Ω. Then
+the following are equivalent.
+
+(1) f(AH) = f(A)H for all A ∈Cn×n(Ω);
+
+(2) f(A)=f(A) for all A ∈Cn×n(Ω);
+
+(3) f(Rn×n(Ω)) ⊆Rn×n;
+
+(4) f(R ∩Ω) ⊆R.
+
+Proof. “(1)⇔(2)”: We have
+
+f(AH) = f(A)H
+⇔
+f(A) = f((AH)T )
+
+Thm.
+3.5 (2)
+=
+f(AH)T =
+�
+f(A)H�T = f(A).
+
+“(2)⇒(3)”: Let A ∈Rn×n(Ω). Then we have f(A) = f(A)
+(ii)
+= f(A), and hence,
+f(A) ∈Rn×n.
+“(3)⇒(4)”: Let a ∈R ∩Ω. Then aIn ∈Rn×n(Ω), and therefore, we have f(aIn) =
+
+diag(f(a), . . . , f(a))
+(3)
+∈Rn×n by assumption. In particular, f(a) ∈R.
+
+31
+
+
+�Ω
+
+Re
+
+Im
+
+λ
+a
+b
+
+Figure 2: Construction in the proof of Theorem 3.7
+
+Complex Analysis Sidenote
+
+Identity theorem ([26, Thm. 3.4.1]): Let Ω⊆C be a domain (open & connected)
+and f, g : Ω→C be analytic such that {z ∈Ω| f(z) = g(z)} contains a limit point.
+Then f ≡g on Ω.
+
+Schwarz reflection principle ([26, Thm. 6.6.1]): Let Ω⊆C be a domain and let
+Ω:= {z | z ∈Ω}. If f : Ω→C is analytic, then g : Ω→C, g(z) = f(z) is also
+analytic.
+
+“(4)⇒(2)”: Let �Ωbe a connected component of Ω. Since �Ωis path connected and
+closed under conjugation, it contains some λ ∈R. Since �Ωis open, it moreover, contains
+a real interval ]a, b[ with λ ∈]a, b[; see Figure 2.
+We define g(z) := f(z) for all z ∈�Ω. Then g is analytic by the Schwarz reflection
+principle.
+By (4), we have f (]a, b[) ⊆R, i.e., f(z) = f(z) = g(z) for all z ∈]a, b[. Since ]a, b[ has a
+limit point, we find f(z) = g(z) = f(z) for all z ∈�Ωby the identity theorem.
+The same holds for all connected components of Ω, i.e., f(z) = f(z) for all z ∈Ωwhich
+implies f(z) = f(z). Thus, f(D) = f(D) holds for all complex diagonal matrices. For
+diagonalizable A ∈Cn×n(Ω) we find
+
+f
+�
+
+A
+�
+= f
+�
+
+XDX−1�
+= f
+�
+
+X · D · X
+−1�
+= X · f
+�
+
+D
+�
+· X
+−1
+
+= X · f(D) · X−1 = Xf(D)X−1 = f(A).
+
+By the matrix function induction principle (see Theorem 3.3), we deduce f(A) = f(A)
+for all A ∈Cn×n(Ω).
+
+Next, we study matrix functions of upper triangular matrices. This is of particular
+interest for the numerical computation of matrix function since every matrix A ∈Cn×n
+
+has a Schur decomposition A = QRQH and we can therefore reduce the computation of
+f(A) to the computation of f(R) via
+
+f(A) = f(QRQH) = Qf(R)QH.
+
+32
+
+
+Proposition 3.8. Let T ∈C2×2 be upper triangular and f defined on the spectrum of T.
+Then
+
+f(T) = f
+��λ1
+t12
+0
+λ2
+
+��
+=
+�f(λ1)
+t12f[λ1, λ2]
+0
+f(λ2)
+
+�
+.
+(3.1)
+
+Recall that the divided difference of the first order is defined by
+
+f[λ1, λ2] =
+
+
+
+
+
+
+f(λ2) −f(λ1)
+
+λ2 −λ1
+,
+λ1 ̸= λ2,
+
+f′(λ1),
+λ1 = λ2.
+
+Proof. By Theorem 3.5, we know that f(T) is upper triangular and has the diagonal
+elements f(λ1) and f(λ2), so we only need to find the entry (1, 2) of f(T). We use the
+identity Tf(T) = f(T)T, i.e.,
+�λ1
+t12
+0
+λ2
+
+��f(λ1)
+x
+0
+f(λ2)
+
+�
+=
+�f(λ1)
+x
+0
+f(λ2)
+
+��λ1
+t12
+0
+λ2
+
+�
+.
+(3.2)
+
+For λ1 ̸= λ2, considering the entry (1, 2) in (3.2) yields
+
+0 = λ1x + t12f(λ2) −f(λ1)t12 −xλ2 = t12 (f(λ2) −f(λ1)) + x(λ1 −λ2),
+
+and therefore,
+
+x = t12
+f(λ2) −f(λ1)
+
+λ2 −λ1
+= t12f[λ1, λ2].
+
+For λ1 = λ2, we use that the matrix function is continuous for sufficiently smooth f by
+Theorem 3.3 2.) and consider the limit for λ2 →λ1. We find
+
+f(T) = f
+�
+lim
+λ2→λ1
+
+�λ1
+t12
+0
+λ2
+
+��
+=
+lim
+λ2→λ1 f
+��λ1
+t12
+0
+λ2
+
+��
+
+=
+lim
+λ2→λ1
+
+��f(λ1)
+t12f[λ1, λ2]
+0
+f(λ2)
+
+��
+=
+�f(λ1)
+t12f′(λ1)
+0
+f(λ1)
+
+�
+.
+
+Note that Proposition 3.8 can als be proven without using the continuity of the
+matrix function. Next, we generalize Proposition 3.8 from (2 × 2) matrices to (n × n)
+matrices.
+
+Theorem 3.9 ([12, Thm. 4.11]). Let f be defined on the spectrum of an upper triangular
+matrix T = [tij] ∈Cn×n. Then [fij] := f(T) is upper triangular as well with fii = f(tii)
+for i = 1, . . . , n and
+
+fij =
+�
+
+(s0,...,sk)∈Sij
+ts0,s1ts1,s2 · . . . · tsk−1,skf[ts0,s0, . . . , tsk,sk],
+for 1 ≤i < j ≤n.
+
+Here, Sij denotes the set of strictly increasing integer sequences of any length from i
+to j, e.g., S03 = {(0, 1, 2, 3), (0, 1, 3), (0, 2, 3), (0, 3)}.
+
+33
+
+
+Remark 3.10.
+(1) We verify Theorem 3.9 for T := [tij] := Jn(λ). We have
+
+tij =
+
+
+
+
+
+
+
+
+λ,
+i = j,
+1,
+j = i + 1,
+0,
+otherwise.
+
+The only non-zero entries of T in the strict upper triangular part are tℓ,ℓ+1. For
+1 ≤i < j ≤n, we have
+
+fij =
+�
+
+(s0,...,sk)∈Sij
+ts0s1 · . . . · tsk−1sk · . . . · f[ts0s0, . . . , tsksk]
+
+= ti,i+1 · . . . · tj−1,j · f[λ, . . . , λ
+����
+(j −i + 1) times
+
+]
+
+= 1 · . . . · 1 · f(j−i)(λ)
+
+(j −i)! = f(j−i)(λ)
+
+(j −i)! ,
+
+which indeed coincides with the entry (i, j) of f(Jn(λ)).
+
+(2) To compute f(T) as proposed in Theorem 3.9, we require O(2n) floating point
+operations (flops), which is too expensive for practical computations. Instead, we
+can, just like in the (2 × 2) case, use the identity Tf(T) = f(T)T and
+�
+f(T)
+�
+
+ii =
+f(tii) to deduce the off-diagonal elements.
+This leads to the so-called Parlett
+recurrence, block Parlett recurrence and the Schur-Parlett Algorithm; see Section 5.
+
+3.2
+Properties for Special f
+
+In this section, we study basic properties of the matrix square root, the matrix exponential,
+the matrix logarithm, and the matrix sign function.
+
+3.2.1
+Visualizing Analytic Functions, Complex Square Root & Logarithm
+
+We start with an overview on the visualization of analytic functions; see the textbook [26]
+or the survey [27] for a comprehensive presentation.
+
+Complex Analysis Sidenote
+
+Phase plots - visualizing complex functions: Real functions f : D →R, D ⊆R, are
+usually visualized via their graph
+
+Γf = {(x, f(x)) | x ∈D} ⊆R × R.
+
+For f : Ω→C, Ω⊆C, the graph Γf is a subset of C × C which is a 4-dimensional
+space over R. Hence, f can not be visualized in the same manner. Instead, we
+consider a phase plot of f, where the complex plane is colored according to the
+
+34
+
+
+Figure 3: The order of zeros and poles of analytic functions in phase plots.
+
+phase of f
+
+z �→f(z)
+
+|f(z)|.
+(3.3)
+
+In particular, phase plots do not depend on the absolute value, but only on the
+argument of f(z). Note that the phase determines an analytic function up to a
+multiplicative constant. Many characteristics of analytic functions can be read off
+from a phase plot, e.g.,
+
+• zeros - points z0 where on a small circle (counter-clockwise oriented) around z0
+all colors appear in the order red, yellow, green. The number of runs through
+the color wheel determines the order of the zero.
+
+In a small neighborhood around a zero z0 of f of order k, the phase plot of f
+looks like the phase plot of (z −z0)k.
+
+• poles - points z0 where on a small circle (counter-clockwise oriented) around z0
+all colors appear in the order green, yellow, red. The number of runs through
+the color wheel determines the order of the pole.
+
+In a small neighborhood around a pole z0 of f of order k, the phase plot of f
+looks like the phase plot of (z −z0)−k.
+
+• critical points (f′(z0) = f′′(z0) = . . . = fk(z0) = 0) - intersection points of
+k + 1 isochromatic lines.
+
+Example 3.11. In Figure 3, we see the functions
+
+f1(z) = z,
+f2(z) = z3,
+f3(z) = 1
+
+z ,
+f4(z) = 1
+
+z3 .
+
+On a small circle about 0 the color wheel is traveled around +1, +3, −1, −2 times,
+respectively. Thus, f1 has a a zero of order 1 at z0, f2 has a a zero of order 3 at z0, f3
+has a a pole of order 1 at z0, f4 has a a zero of order 2 at z0, respectively.
+
+35
+
+
+Figure 4: Phase plots for several analytic functions.
+
+Complex Analysis Sidenote
+
+Complex square root and complex logarithm: Recall that any z ∈C \ {0} has a
+unique polar form
+z = reiφ
+
+where r > 0 and φ ∈]−π, π[.
+
+• Complex square root: Any w ∈C with w2 = z is called a square root of z.
+For z = reiφ ∈C \ {0}, there are the two square roots
+√rei φ
+
+2
+and
+√rei( φ
+
+2 +π).
+(3.4)
+
+The first branch, i.e., the map
+√· : C \ R≤0 →C,
+reiφ �→√rei φ
+
+2
+(3.5)
+
+is called principal square root.
+
+Both branches can not be continuously extended to the branch cut R≤0.
+However, glueing them together at the branch cut yields a Riemann surface on
+which f is continuous; see Figure 5. More details and illuminating illustrations
+can be found in [26, Ch. 7]
+
+• Complex logarithm: Any w ∈C with ew = z is called a logarithm of z.
+Assuming that the well-known logarithm identities also apply to complex
+
+36
+
+
+Figure 5: Left: the two branches of the complex square root (top principal branch);
+right: the Riemann surface of the square root [26, Fig. 7.2].
+
+numbers, we receive the infinite family of solutions of ew = z
+
+log(z) = log(reiφ) = ln(r) + log(eiφ) = ln(r) + iφ + 2πki,
+k ∈Z
+
+where we write ln to distinguish the logarithm for real numbers from the
+logarithm for complex numbers. Every k ∈Z gives a branch of the complex
+logarithm. Glueing them together at the branch cut R≤0 yields a Riemann
+surface as above; see Figure 6. The branch with k = 0, i.e.,
+
+log : C \ R≤0 →{z ∈C | Im(z) ∈]−π, π[},
+reiφ �→ln(r) + iφ
+(3.6)
+
+is the principal logarithm. For all z = reiφ ∈C \ R≤0, we indeed have
+
+elog(z) = eln(r)+iφ = eln(r)eiφ = reiφ = z.
+
+Also, for any z = x + iy ∈{z ∈C | Im(z) ∈]−π, π[}, we receive
+
+log(ez) = log(ex+iy) = log(exeiy)
+y∈]−π,π[
+=
+ln(ex) + iy = x + iy = z.
+
+As for the real logarithm, we have log′(z) = 1
+
+z. However, many well-known
+identities for the real logarithm only hold modulo 2πi in the complex case.
+
+Example 3.12. We consider the phase plots in Figure 4.
+
+(1) The first plot shows f(z) = z2−1
+
+z
+with zeros at −1 and 1, and a pole at 0.
+
+(2) The next plot shows f(z) = ez = ex+iy = exeiy, which has no zeros and a 2πi-
+periodic phase.
+
+(3) In the third phase plot, we see the principlal branch of the square root, particularily
+the branch cut C \ R≤0, where z �→√z is not continuous. Also √z ∈{z ∈C |
+Re(z) > 0}, i.e., arg(√z) = φ
+
+2 ∈]π
+
+2 , π
+
+2 [ is apparent in the plot.
+
+(4) Also f(z) = log(z) has the branch cut C\R≤0, where f is not continuous. Moreover,
+we see the only zero of f at z0 = 1.
+
+37
+
+
+Figure 6: Left: three branches of the complex logarithm root including the principal
+branch (mid); right: Riemann surface of the logarithm with three sheets.
+The dots
+indicate the infinite number of branches and sheets [26, Fig. 7.6].
+
+(5) The function f(z) = e
+1
+z has a rather wild behavior near the point z0 = 0. In fact
+this point is an essential singularity and the behavior of f near such a point is
+described in the Great Picard’s Theorem; see [6, Sect. XII §4].
+
+If an analytic function f has an essential singularity at a point z0, then in each
+neighborhood of z0, f(z) assumes each complex number, with at most a single
+exception, infinitely often.
+
+(6) We see that log(ez) = z only holds on the strip {z ∈C | Im(z) ∈]−π, π[} and that
+f(z) = log(ez) has a 2πi-periodic phase.
+
+(7) Phase plot 7 shows the sine function including its zeros {πk | k ∈Z} and critical
+points (zeros of the cosine) that appear as color saddles at {π
+
+2 + πk | k ∈Z}.
+
+(8) The tangent with zeros at {πk | k ∈Z} and poles at {π
+
+2 + πk | k ∈Z} is displayed.
+
+3.2.2
+Matrix Square Root
+
+First, we define the unique principal square root of a matrix with eigenvalues in C\R≤0.
+
+Theorem 3.13. Let A ∈Cn×n with Λ(A) ⊆C \ R≤0.
+
+(1) There exists a unique matrix X ∈Cn×n with X2 = A and
+
+Λ(X) ⊆{z ∈C | Re(z) > 0},
+(3.7)
+
+which we call the principal square root of A and we write A
+1
+2 := X.
+
+(2) If A ∈Rn×n, then A
+1
+2 ∈Rn×n.
+
+38
+
+
+Proof.
+(1) Let X2 = A, i.e., X is a square root of A. If X is a non-primary square
+root, then X has eigenvalues µ1, µ2 ∈C with µ1 ̸= µ2 and µ2
+1 = µ2
+2. Thus, either
+Re(µ1) ≤0 or Re(µ2) ≤0, i.e., (3.7) is violated. Since A has no eigenvalues in
+R≤0, according to Definition 2.3, there exists only one (primary) square root with
+eigenvalues in {z ∈C | Re(z) > 0}.
+
+(2) Follows by Theorem 3.7 since √· is analytic on C \ R≤0 = C \ R≤0 and f(a) ∈R
+holds for all a ∈(C \ R≤0) ∩R = R>0.
+
+Corollary 3.14. If A ∈Cn×n is Hermitian positive definite (HPD), then A
+1
+2 is also
+HPD.
+
+Proof. Since Λ(A) ⊆R>0 ⊆C \ R≤0, the principal square root A
+1
+2 is defined.
+By
+Theorem 3.7,
+(A
+1
+2 )H = (AH)
+1
+2 = A
+1
+2 .
+
+Hence, A is Hermitian. Moreover,
+
+Λ(A
+1
+2 ) =
+�√
+
+λ | λ ∈Λ(A)
+�
+⊆R>0
+
+by the spectral mapping theorem (Theorem 3.5 (4)).
+
+3.2.3
+Matrix Exponential and Matrix Logarithm
+
+The matrix exponential is not only the most studied matrix function, but it has motivated
+the field of matrix functions in the first place.
+We start with the matrix function pendent of the functional equation of the exponential.
+
+Theorem 3.15. Let A, B ∈Cn×n. The following are equivalent.
+
+(1) exp ((A + B)t) = exp(At) exp(Bt) holds for all t ∈C.
+
+(2) AB = BA
+
+Proof. The proof requires theory about commuting matrices which is beyond the scope
+of this course. We refer to the lecture “Matrix Theory”.
+
+The next result can be interpreted as the matrix exponential version of (i) |z| = 1 ⇔
+z = eiφ, φ ∈R, and (ii) e0 = 1.
+
+Theorem 3.16.
+(1) The matrix A ∈Cn×n is unitary if and only if there exists a
+Hermitian matrix B ∈Cn×n with A = exp(iB).
+
+(2) The matrix A ∈Cn×n is real and orthogonal with det(A) = 1 if and only if there
+exists a skew-symmetric matrix B ∈Rn×n with A = exp(B).
+
+39
+
+
+Proof.
+(1) “⇒”: Let A be unitary and denote its eigenvalues by λ1, . . . , λn. We then
+have |λ1| = . . . = |λn| = 1, i.e., all eigenvalues of A have the form
+
+λj = eiφj,
+φj ∈R,
+j = 1, . . . , n.
+
+Since A is normal, we find a unitary matrix U ∈Cn×n such that
+
+A = U diag(λ1, . . . , λn) UH,
+
+and therefore
+
+A = U diag(λ1, . . . , λn) UH = U diag
+�
+eiφ1, . . . , eiφn�
+UH
+
+= U exp(diag(iφ1, · · · , iφn)) UH = U exp(i diag(φ1, . . . , φn)) UH
+
+Thm.3.3.
+=
+exp(i U diag(φ1, . . . , φn) UH
+�
+��
+�
+=:B
+
+).
+
+Moreover, B is Hermitian since φj ∈R for j = 1, . . . , n.
+
+“⇐”: Let B ∈Cn×n be Hermitian and A = exp(iB). Then
+
+AAH = exp(iB) exp(iB)H
+Thm.
+
+3.7
+=
+exp(iB) exp
+�
+(iB)H�
+= exp(iB) exp(−iB)
+
+Thm.
+
+3.15
+= exp(iB −iB) = exp(0) = In.
+
+Hence, A is unitary.
+
+(2) “⇒”: Let A be orthogonal with det(A) = 1.
+Then there exists a real block
+eigendecomposition
+A = QDQT ,
+
+with orthogonal Q ∈Rn×n and block-diagonal D = diag (D11, . . . , Dkk), where
+
+Djj = [1],
+Djj = [−1],
+or
+Djj =
+�cos(φj)
+sin(φj)
+−sin(φj)
+cos(φj)
+
+�
+, φj ∈R
+
+for j = 1, . . . , k.
+
+Note that in the last case, we have det(Djj) = cos(φj)2 + sin(φj)2 = 1.
+We
+conclude from det(A) = 1, that the second type (Djj = [−1]) occurs an even
+number of times on the diagonal. W.l.o.g. we assume that these blocks occur in
+pairs and can therefore be interpreted as (2 × 2) blocks of the third type with
+φj = π.
+
+Define ∆:= diag (∆11, . . . , ∆kk) with
+
+∆jj :=
+
+
+
+
+
+
+
+
+
+
+[0],
+if Djj = [1],
+�
+0
+φj
+−φj
+0
+
+�
+
+,
+if Djj =
+
+�
+cos(φj)
+sin(φj)
+−sin(φ)
+cos(φj)
+
+�
+
+,
+
+40
+
+
+for j = 1, . . . , k. Then ∆is skew-symmetric and a somewhat lengthy computation
+gives exp(∆jj) = Djj for j = 1, . . . , n. We receive
+
+A = QDQT = Q exp(∆)QT = exp(Q∆QT
+����
+=:B
+).
+
+“⇐”: Let B ∈Rn×n be skew-symmetric and A = exp(B). Then by Theorem 3.7,
+A ∈Rn×n. Furthermore,
+
+AAT = exp(B) exp(B)T = exp(B) exp(BT ) = exp(B + BT )
+
+= exp(B −B) = exp(0) = In.
+
+Hence, A is orthogonal. Let λ1, . . . , λn be the eigenvalues of B. Since Re(λj) = 0
+for j = 1, . . . , n and eigenvalues of real matrices occur in complex conjugate pairs,
+we have �n
+j=1 λj = 0. Thus,
+
+det(A) = det(exp(B)) =
+
+n
+�
+
+j=1
+eλj = e
+�n
+j=1 λj = e0 = 1.
+
+The following well-known result is a consequence of the scalar functional equation.
+
+Theorem 3.17 (Jacobi’s formula). Let A ∈Cn×n. Then det(exp(A)) = etr(A).
+
+Proof. Let λ1, . . . , λn be the eigenvalues of A. Then eλ
+1, . . . , eλ
+n are the eigenvalues of
+exp(A) by the spectral mapping theorem (Theorem 3.5 (4)), and therefore
+
+det(exp(A)) =
+
+n
+�
+
+j=1
+eλj = e
+�n
+j=1 λj = etr(A).
+
+Theorem 3.18. Let A ∈Cn×n with Λ(A) ⊆C \ R≤0.
+
+(1) There exists a unique matrix X ∈Cn×n with exp(X) = A and
+
+Λ(X) ⊆{z ∈C | Im(z) ∈]−π, π[},
+(3.8)
+
+which we call the principal logarithm of A and we write log(A) := X.
+
+(2) If A ∈Rn×n, then log(A) ∈Rn×n.
+
+Proof. Similar to the proof of Theorem 3.13. We omit the details.
+
+Theorem 3.19. Let A ∈Cn×n.
+
+(1) If Λ(A) ⊆C \ R≤0 then exp(log(A)) = A.
+
+(2) If Λ(A) ⊆{z ∈C | Im(z) ∈]−π, π[} then log(exp(A)) = A.
+
+41
+
+
+Proof. The statements follow from
+
+elog(z) = z
+for all z ∈C \ R≤0,
+
+log(ez) = z
+for all z ∈C with Im(z) ∈]−π, π[
+
+by the matrix function induction principle; see Theorem 3.3.
+
+We close this section with Richter’s integral formula for the matrix logarithm, that
+allows us to compute log(A)b via quadrature rules; see Section 6.2. For the proof of the
+integral formula, we need the following lemma.
+
+Lemma 3.20. Let be [a, b] ⊆R with a ̸= b, U ⊆Cn×n open and f : [a, b] × U →Cn×n
+
+continuous. Then the map
+
+Φ : U →Cn×n,
+A �→
+�b
+
+a
+f(t, A) dt,
+
+is continuous.
+
+Proof. Let A ∈U and ε > 0. Since U is open, there exists δ1 > 0 with
+
+S := {B ∈Cn×n | ∥A −B∥≤δ1} ⊆U,
+
+where ∥· ∥is an arbitrary norm on Cn×n. Note that the set [a, b] × S is compact. By
+the Heine-Cantor theorem, the restricted map f|[a,b]×S is uniformly continuous. Thus,
+there exists δ2 > 0 such that
+
+∥f(t1, B1) −f(t2, B2)∥<
+ε
+b −a
+
+holds for all (t1, B1), (t2, B2) ∈[a, b] × S with max{|t1 −t2|, ∥B1 −B2∥} < δ2.
+Finally, for all B ∈U with ∥A −B∥< min{δ1, δ2}, we have
+
+∥Φ(A) −Φ(B)∥=
+����
+
+�b
+
+a
+f(t, A) dt −
+�b
+
+a
+f(t, B) dt
+����=
+����
+
+�b
+
+a
+
+�
+f(t, A) −f(t, B)
+�
+dt
+����
+
+≤
+�b
+
+a
+∥f(t, A) −f(t, B)∥dt ≤
+�b
+
+a
+
+ε
+b −a dt = ε.
+
+Theorem 3.21 ([12, Thm. 11.1]). Let A ∈Cn×n with Λ(A) ⊆C \ R≤0. Then
+
+log(A) =
+�1
+
+0
+(A −In)
+�
+t(A −In) + In
+�−1 dt.
+(3.9)
+
+Proof. For z ∈C \ R≤0, we have
+
+�1
+
+0
+
+z −1
+t(z −1) + 1 dt = log
+�
+t(z −1) + 1
+����
+1
+
+t=0 = log(z) −log(1) = log(z).
+
+42
+
+
+Thus, (3.9) holds for diagonal matrices. Let A be diagonalizable, i.e., A = XDX−1 with
+a diagonal matrix D ∈Cn×n and Λ(D) ⊆C \ R≤0. Then the assertion holds for A since
+
+log(A) = log(XDX−1) = X log(D)X−1 = X
+��1
+
+0
+(D −In)
+�
+t(D −In) + In
+�−1 dt
+�
+X−1
+
+=
+�1
+
+0
+(XDX−1 −XX−1)
+�
+t(XDX−1 −XX−1) + XX−1�−1 dt
+
+=
+�1
+
+0
+(A −In)
+�
+t(A −In) + In
+�−1 dt.
+
+Now, recall that log(z) is analytic. Hence, by Theorem 3.3 (2), the matrix logarithm
+is continuous.
+Moreover, the right-hand side of (3.9) is continuous by Lemma 3.20.
+Thus, by the density of diagonalizable matrices (Theorem 3.3 (1)), the assertion follows
+for all A ∈Cn×n with Λ(A) ⊆C \ R≤0.
+
+3.2.4
+Matrix Sign Function
+
+Finally, we study the matrix sign function, which has surprising applications in solving
+matrix equations, for example.
+
+Definition 3.22. The sign function is defined as
+
+sign : C \ iR →C,
+sign(z) :=
+
+�
+1,
+Re(z) > 0,
+−1,
+Re(z) < 0,
+
+where we write iR := {z ∈C | Re(z) = 0}.
+
+The sign function is analytic and we have sign(k)(z) = 0 for all z ∈C \ iR and k ≥1.
+Hence, for all A ∈Cn×n with Λ(A) ⊆C\iR, the matrix sign function sign(A) is defined.
+
+Remark 3.23.
+(1) Let A ∈Cn×n with Λ(A) ⊆C\iR and let A = XJX−1 be a Jordan
+decomposition of A where J = diag(J+, J−) is ordered such that any eigenvalue λ
+of J+ ∈Cm×m fulfills Re(λ) > 0 and any eigenvalue λ of J−∈C(n−m)×(n−m)
+
+fulfills Re(λ) < 0. Then
+
+sign(A) = X sign(J)X−1 = X diag
+�
+sign(J+), sign(J−)
+�
+X−1
+
+= X diag(Im, −In−m)X−1 = X
+�Im
+0
+0
+−In−m
+
+�
+X−1.
+
+In particular, sign(A) is diagonalizable with eigenvalues ±1.
+
+(2) For z ∈C with Re(z) > 0, we have
+
+z
+√
+
+z2 = z
+
+z = 1 = sign(z),
+
+43
+
+
+and for z ∈C with Re(z) < 0, we have
+
+z
+√
+
+z2 = z
+
+−z = −1 = sign(z).
+
+Thus, the identity sign(z) =
+z
+√
+
+z2 holds for all z ∈C \ iR. By the matrix function
+
+induction principle (Theorem 3.3), we can extend this identity to the matrix sign
+function and receive
+sign(A) = A(A2)−1
+
+2
+(3.10)
+
+for all A ∈Cn×n with Λ(A) ⊆C \ iR.
+
+Theorem 3.24. Let A ∈Cn×n with Λ(A) ⊆C \ iR.
+
+(1) sign(A)2 = In, i.e., sign(A) is self-inverse.
+
+(2) If A ∈Rn×n, then sign(A) ∈Rn×n.
+
+(3) The matrices P := 1
+
+2(In + sign(A)) and Q := 1
+
+2(In −sign(A)) are projections onto
+the A-invariant subspaces corresponding to the eigenvalues in the right and left
+half-plane, respectively.
+
+Proof.
+(1) Using the same notation as in Remark 3.23 (1), we have
+
+sign(A)2 = X
+�Im
+0
+0
+−In−m
+
+�
+X−1X
+�Im
+0
+0
+−In−m
+
+�
+X−1 = In.
+
+(2) This follows from Theorem 3.7 since sign(z) is analytic, the connected components
+of C \ iR are closed under complex conjugation, and sign(z) ∈R for all z ∈C.
+
+(3) We have
+
+P 2 = 1
+
+2
+�
+In + sign(A)
+�
+· 1
+
+2
+�
+In + sign(A)
+�
+= 1
+
+4
+�
+In + 2 sign(A) + sign(A)2
+�
+��
+�
+=In
+
+�
+= P.
+
+Hence, P is a projection. Furthermore, using the notation from Remark 3.23 (1)
+again, we receive
+
+P = 1
+
+2
+�
+In + sign(A)
+�
+= 1
+
+2
+
+�
+In + X
+�Im
+0
+0
+−In−m
+
+�
+X−1�
+
+= 1
+
+2X
+�2Im
+0
+0
+0
+
+�
+X−1 = X
+�Im
+0
+0
+0
+
+�
+X−1.
+
+The proof for Q is analogous.
+
+44
+
+
+Figure 7: Left: contructions of the Riemann sphere �C. Right: a curve Γ surrounding
+the point ∞∈�C.
+
+Next, we prove an integral formula for sign(A) that, similar to Theorem 3.21, allows
+us to compute sign(A)b via quadrature formulas. For this, we use the Cauchy integral
+formula but on the Riemann sphere �C := C ∪{0} instead of C.
+We briefly recall the stereographic projection. Let S2 be the sphere with radius 1
+centered at the origin (in C).
+The stereographic image z ∈C of a point z∗is the
+intersection point of the line from the north pole N of S2 to z; see Fig 7 (left). Moreover,
+we define the stereographic image of N as ∞. In this construction, the point ∞is just
+a usual point that close to very large numbers, as the point 0 is close to very small
+numbers. Together, �C can be identified with the whole sphere S2. We refer to [26, pp.
+20–22] for further information.
+
+Theorem 3.25. Let A ∈Cn×n with Λ(A) ⊆C \ iR. Then
+
+sign(A) = 2
+
+πA
+�∞
+
+0
+(t2In + A2)−1 dt.
+(3.11)
+
+Sketch of the proof. We use the Cauchy integral formula (Theorem 2.15), but for a
+Hankel contour instead of a Jordan curve, which is a rectifiable (in �C), simple and
+closed curve through ∞about the origin. One example for a Hankel contour is the
+oriented elliptic triangle
+Γ :=
+�
+∞, ε + εi , ε −εi , ∞
+�
+
+on �C, which we will use in this proof. The key idea is to integrate f(z) = z−1
+
+2 along this
+contour and then consider the limit as ε goes to 0.
+By the Cauchy integral definition of matrix functions, we have
+
+(A2)−1
+
+2 = f(A2) =
+1
+2πi
+
+�
+
+Γ
+z−1
+
+2 (zIn −A2)−1 dz
+
+= 1
+
+2πi
+
+�ε+εi
+
+∞
+z−1
+
+2 (zIn −A2)−1 dz + 1
+
+2πi
+
+�ε−εi
+
+ε+εi
+z−1
+
+2 (zIn −A2)−1 dz
+�
+��
+�
+
+ε→0
+−−−→0
+
++ 1
+
+2πi
+
+�∞
+
+ε−εi
+z−1
+
+2 (zIn −A2)−1 dz.
+
+45
+
+
+In both integrals, we use the substitution t = iz
+1
+2 , i.e., dt = 1
+
+2iz−1
+
+2 dz and z = −t2. Then,
+the part of Γ, that is slightly above the negative real axis, stays there (first integral),
+and the part, that is slightly below the negative real axis, is mapped to a curve that is
+slightly above the positive real axis (second integral). We find for the first integral
+
+1
+2πi
+
+�ε+εi
+
+∞
+z−1
+
+2 (zIn −A2)−1 dz = 1
+
+π
+
+�ε+εi
+
+∞
+(−zIn + A2)−1 · 1
+
+2iz−1
+
+2 dz
+
+subst.
+= 1
+
+π
+
+�O(|ε|
+1
+2 )
+
+∞
+(t2In + A2)−1 dt ε→0
+−−−→1
+
+π
+
+�0
+
+−∞
+(t2In + A2)−1 dt = 1
+
+π
+
+�+∞
+
+0
+(t2In + A2)−1 dt,
+
+where the contour integral on �C converges to an improper real integral on ]−∞, 0] for
+ε →0. Similarly, for the second integral, we find
+
+1
+2πi
+
+�∞
+
+ε−εi
+z−1
+
+2 (zIn −A2)−1 dz subst.
+=
+1
+π
+
+�∞
+
+O(|ε|
+1
+2 )
+(t2In + A2)−1 dt
+
+ε→0
+−−−→1
+
+π
+
+�+∞
+
+0
+(t2In + A2)−1 dt,
+
+where the contour integral on �C now converges to an improper real integral on [0, ∞[.
+We denoted complex infinity by ∞and the real infinities with +∞and −∞, repectively.
+Together, we find
+
+(A2)−1
+
+2 = 2
+
+π
+
+�∞
+
+0
+(t2In + A2)−1 dt.
+
+Finally, using sign(A) = A(A2)−1
+
+2 , we recieve the claimed formula.
+
+Theorem 3.26. Let A, B ∈Cn×n with Λ(AB) ⊆C \ R≤0 and define C := A(BA)−1
+
+2 .
+Then
+
+sign
+��0
+A
+B
+0
+
+��
+=
+�0
+C
+C−1
+0
+
+�
+.
+(3.12)
+
+Proof. Define P :=
+�0
+A
+B
+0
+
+�
+. Then P 2 =
+�AB
+0
+0
+BA
+
+�
+. Note that Λ(AB) = Λ(BA) from
+
+which we receive Λ(P 2) = Λ(AB) = Λ(BA) ⊆C \ R≤0. This implies Λ(P) ⊆C \ iR, i.e.,
+sign is defined on the spectrum of P. Moreover,
+
+sign(P)
+
+Rem.
+3.23 (2)
+=
+P(P 2)−1
+
+2 =
+�0
+A
+B
+0
+
+��AB
+0
+0
+BA
+
+�−1
+
+2
+=
+�0
+A
+B
+0
+
+��
+(AB)−1
+
+2
+0
+0
+(BA)−1
+
+2
+
+�
+
+=
+
+�
+0
+A(BA)−1
+
+2
+
+B(AB)−1
+
+2
+0
+
+�
+
+=:
+�0
+C
+D
+0
+
+�
+.
+
+Theorem 3.24 (1) yields
+
+I2n =
+�In
+0
+0
+In
+
+�
+= sign(P)2 =
+�0
+C
+D
+0
+
+�2
+=
+�CD
+0
+0
+DC
+
+�
+,
+
+i.e., D = C−1.
+
+46
+
+
+Remark 3.27. An important special case of Theorem 3.26 is that
+
+sign
+��0
+A
+In
+0
+
+��
+=
+
+�
+0
+A
+1
+2
+
+A−1
+
+2
+0
+
+�
+
+(3.13)
+
+holds for all A ∈Cn×n with Λ(A) ⊆C \ R≤0. Consequently, any (numerical) method for
+computing sign(A) yields a method for computing A
+1
+2 .
+
+Another application of the special case in Remark 3.27 leads to an integral formula
+for the matrix square root, that relies on Theorem 3.25.
+
+Theorem 3.28. Let A ∈Cn×n with Λ(A) ⊆C \ R≤0. Then
+
+A
+1
+2 = 2
+
+πA
+�∞
+
+0
+(t2In + A)−1 dt.
+(3.14)
+
+Proof. We apply Theorem 3.25 to ˜A :=
+�0
+A
+In
+0
+
+�
+∈C(2n)×(2n). Then ˜A2 =
+�A
+0
+0
+A
+
+�
+and
+
+we receive
+�
+0
+A
+1
+2
+
+A−1
+
+2
+0
+
+�
+Rem.
+
+3.27
+= sign( ˜A)
+
+Thm.
+
+3.25
+=
+2
+π
+˜A
+�∞
+
+0
+(t2I2n + ˜A2)−1 dt
+
+= 2
+
+π
+
+�0
+A
+In
+0
+
+��∞
+
+0
+
+�t2In + A
+0
+0
+t2In + A
+
+�−1
+dt
+
+= 2
+
+π
+
+�0
+A
+In
+0
+
+��∞
+
+0
+
+�(t2In + A)−1
+0
+0
+(t2In + A)−1
+
+�
+dt
+
+= 2
+
+π
+
+�0
+A
+In
+0
+
+���∞
+0 (t2In + A)−1 dt
+0
+0
+�∞
+0 (t2In + A)−1 dt
+
+�
+
+=
+�
+0
+2
+πA
+�∞
+0 (t2In + A)−1 dt
+2
+π
+�∞
+0 (t2In + A)−1 dt
+0
+
+�
+.
+
+Comparing the top right block entries finishes the proof.
+
+Applications of the Matrix Sign Function for Solving Matrix Equations
+
+Matrix equations are everywhere systems and control and systems in which time-dependent
+models used to predict, simulate and control real-world phenomena can often be represented
+as linear (or nonlinear) dynamical systems. We refer to the lecture “Control Theory”
+for further information.
+
+(1) Sylvester equation.
+Given A ∈Cn×n, B ∈Cm×m and C ∈Cn×m, we search for
+a matrix X ∈Cn×m with
+AX −XB = C.
+(3.15)
+
+47
+
+
+Theorem 3.29. Let A ∈Cn×n and B ∈Cm×m. Then the following are equivalent.
+
+(1) The Sylvester equation AX −XB = C is uniquely solvable for all C ∈Cn×m.
+
+(2) Λ(A) ∩Λ(B) = ∅
+
+Proof. Note that (3.15) can be rewritten as a linear system with n · m equations and
+n · m unknowns. Thus, (3.15) is uniquely solvable for all C ∈Cn×m if and only if the
+homogeneous equation AX −XB = 0 has only the trivial solution X = 0.
+“(1)⇒(2)”: We prove this by contraposition. Let λ ∈C be a common eigenvalue of
+A and of B. Moreover let v ∈Cn \ {0} be a (right-)eigenvector of A corresponding to
+λ and u ∈Cm \ {0} be a left-eigenvector of B corresponding to λ, i.e., uHB = λuH.
+Define X := vuH ∈Cn×m \ {0}. Then
+
+AX −XB = Av
+����
+=λv
+uH −v uHB
+����
+=λuH
+= λvuH −λvuH = 0,
+
+i.e., AX −XB = 0 has a non-zero solution.
+“(2)⇒(1)”: Let Λ(A) ∩Λ(B) = ∅. Moreover, let X ∈Cn×m satisfy AX −XB = 0.
+We inductively receive AkX = XBk for k ∈N.
+Thus, p(A)X = Xp(B) for any
+polynomial p. Using the Cayley-Hamilton theorem, we receive
+
+0 = PA(A)X = XPA(B),
+
+where PA denotes the characteristic polynomial of A.
+By Λ(PA(B)) = PA(Λ(B))
+(Theorem 3.5 (4)) and since no eigenvalue of B is a zero of PA, we know 0 /∈Λ(PA(B)),
+i.e., PA(B) is nonsingular. Thus, we conclude X = 0.
+
+Next, we discuss how the matrix sign function can be used to solve a Sylvester
+equation. Assume
+
+Λ(A) ⊆{z ∈C | Re(z) > 0}
+and
+Λ(B) ⊆{z ∈C | Re(z) < 0}.
+(3.16)
+
+Then by the above theorem, there exists a unique solution of (3.15). Note, that AX −
+XB = C is equivalent to
+
+�A
+C
+0
+B
+
+�
+=
+�In
+−X
+0
+Im
+
+��A
+0
+0
+B
+
+��In
+−X
+0
+Im
+
+�−1
+,
+(3.17)
+
+which can easily be seen from
+
+�In
+−X
+0
+Im
+
+��A
+0
+0
+B
+
+��In
+−X
+0
+Im
+
+�−1
+=
+�A
+−XB
+0
+B
+
+��In
+X
+0
+Im
+
+�
+=
+�A
+AX −XB
+0
+B
+
+�
+.
+
+48
+
+
+Now let X ∈Cn×m be a solution of (3.15). From (3.16), we receive sign(A) = In and
+sign(B) = −Im. Therefore,
+
+sign
+��A
+C
+0
+B
+
+��
+= sign
+��In
+−X
+0
+Im
+
+��A
+0
+0
+B
+
+��In
+−X
+0
+Im
+
+�−1 �
+
+=
+�In
+−X
+0
+Im
+
+��sign(A)
+0
+0
+sign(B)
+
+��In
+−X
+0
+Im
+
+�−1
+
+=
+�In
+−X
+0
+Im
+
+��In
+0
+0
+−Im
+
+��In
+X
+0
+Im
+
+�
+=
+�In
+2X
+0
+−Im
+
+�
+,
+
+i.e., the solution X can be read off from the top right block.
+Note that there exist specialized and more sophisticated methods to solve (3.15),
+especially the Bartels-Stewart algorithm. We refer to the survey [24, Sect. 4] for further
+informations and references.
+
+(2) Lyapunov equation.
+We consider the special case of the Sylvester equation where
+B = −AH, i.e., given A, C ∈Cn×n, we search for a matrix X ∈Cn×n with
+
+AX + XAH = C.
+(3.18)
+
+Since this is a special case of the Sylvester equation, we can apply the above strategy of
+using the matrix sign function.
+
+(3) Algebraic Riccati equation.
+Given A ∈Cn×n and Hermitian matrices F, G ∈
+Cn×n, we search for X ∈Cn×n with
+
+XFX −AHX −XA = G.
+(3.19)
+
+Under somewhat involved conditions, see e.g. [4, Sect. 2.1], we find that this equation
+has a unique Hermitian solution X ∈Cn×n with
+
+Λ(A −FX) ⊆{z ∈C | Re(z) < 0}.
+(3.20)
+
+Equation (3.19) is equivalent to
+�AH
+G
+F
+−A
+
+�
+=
+�X
+−In
+In
+0
+
+��−(A −FX)
+−F
+0
+(A −FX)H
+
+��X
+−In
+In
+0
+
+�−1
+,
+
+which can be seen from
+�X
+−In
+In
+0
+
+��−(A −FX)
+−F
+0
+(A −FX)H
+
+��X
+−In
+In
+0
+
+�−1
+
+=
+�−XA + XFX
+−XF −AH + XF
+−A + FX
+−F
+
+��0
+In
+−In
+X
+
+�
+
+=
+�AH
+XFX −AHX −XA
+F
+−A
+
+�
+.
+
+49
+
+
+We receive
+
+S :=
+�S11
+S12
+S21
+S22
+
+�
+:= sign
+��AH
+G
+F
+−A
+
+��
+
+Thm.
+3.5 (3)
+=
+�X
+−In
+In
+0
+
+�
+sign
+��−(A −FX)
+−F
+0
+(A −FX)H
+
+���X
+−In
+In
+0
+
+�−1
+
+(3.20)
+=
+�X
+−In
+In
+0
+
+��In
+Z
+0
+−In
+
+��X
+−In
+In
+0
+
+�−1
+
+=
+�X
+XZ + In
+In
+Z
+
+��0
+In
+−In
+IX
+
+�
+
+=
+�−XZ −In
+XZX + 2X
+−Z
+ZX + In
+
+�
+
+for some matrix Z ∈Cn×n. We obtain
+
+S11 = −XZ −In
+=⇒(S11 −In)X = −XZX −2X = −S12,
+
+S22 = ZX −In
+=⇒−S22 + In = −ZX = S21X.
+
+Which yields the overdetermined linear system
+�
+(S11 −In)X = −S12,
+S21X = −S22 + In.
+(3.21)
+
+The system matrix
+�S11 −In
+S21
+
+�
+of (3.21) has full rank since
+
+�
+In
+−X
+��S11 −In
+S21
+
+�
+= S11 −In −XS21 = −XZ −In −In + XZ = −2In
+����
+rank n
+.
+
+Overall, we have to compute the sign function of a 2n × 2n matrix and we have solve a
+linear system with 2n2 equations and n2 unknowns, e.g., with a QR decomposition to
+get the (unique) solution of (3.19).
+
+50
+
+
+4
+Conditioning of Matrix Functions
+
+Let f : X →Y be a map between two (finite-dimensional) normed spaces (X, ∥·∥X ) and
+(Y, ∥·∥Y) with f(x) = y and f(x + ∆x)�y. We define the (relative) forward error and the
+(relative) backward error of f at x by
+
+∥∆x∥X ,
+∥∆x∥X
+
+∥x∥X
+,
+∥�y −y∥Y,
+∥�y −y∥Y
+
+∥y∥Y
+,
+
+respectively; see Figure 8.
+Although y is the exact output for the input x, due to
+perturbations, measurements, or inexact computations, we may get only the inexact
+output �y, which itself is the exact output for a perturbed input x + ∆x. The size of this
+perturbation in x is referred as the backward error. In general, we are interested in the
+forward error, but it is usually not accessible since we do not know the exact solution.
+Therefore, we try to estimate or bound via forward error by the backward error.
+In the framework of matrix functions, we have X = Y = Cn×n usually equipped with
+the same norm.
+
+4.1
+Condition Number and Fr´echet Derivative
+
+Forward and backward error are related via the condition number.
+
+Definition 4.1. Let U ⊆Cn×n, ∥· ∥a norm on Cn×n and f : U →Cn×n. We define
+
+(1) the absolute condition number of f at A as
+
+κabs
+f (A) := lim
+ε→0
+sup
+∥∆A∥≤ε
+
+∥f(A + ∆A) −f(A)∥
+
+∥∆A∥
+,
+(4.1)
+
+(2) the relative condition number of f at A as
+
+κrel
+f (A) := lim
+ε→0
+sup
+∥∆A∥≤ε
+
+∥f(A + ∆A) −f(A)∥
+
+∥f(A)∥
+· ∥A∥
+
+∥∆A∥.
+(4.2)
+
+If the condition number is small, then small changes in the input data only lead
+to small changes in the output data. In this case, we call f well-conditioned and ill-
+conditioned otherwise.
+
+Remark 4.2. Definition 4.1 gives rise to the rule of thumb.
+
+(relative) forward error ≲(relative) condition number · (relative) backward error
+
+Consequently, if we know the condition number and can approximate or bound the
+backward error, we receive a (approximate) bound for the forward error.
+
+The condition number of f at A can be expressed using the Fr´echet derivative of f
+at A.
+
+51
+
+
+x
+
+x + ∆x
+
+y = f(x)
+
+�y = f(x + ∆x)
+
+f
+
+f
+
+inexact computations
+backward error ∥∆x∥X
+forward error ∥�y −y∥Y
+
+Figure 8: Forward and backward errors.
+
+Definition 4.3. Let U ⊆Cn×n be open. A map f : U →Cn×n is Fr´echet differentiable
+at A ∈U, if there exists a linear map
+
+Lf(A) : Cn×n →Cn×n,
+X �→Lf(A, X)
+(4.3)
+
+with
+f(A + X) −f(A) −Lf(A, X) ∈o(∥X∥),
+(4.4)
+
+i.e.,
+
+lim
+ε→0 sup
+∥X∥≤ε
+
+∥f(A + X) −f(A) −Lf(A, X)∥
+
+∥X∥
+= 0,
+(4.5)
+
+where ∥· ∥is an arbitrary norm on Cn×n. We call Lf(A) the Fr´echet derivative of f
+at A.
+
+The Fr´echet derivative is unique if it exists.
+
+Theorem 4.4. Let f : U →Cn×n be Fr´echet differentiable at A ∈U, and let Lf(A) and
+˜Lf(A) be two linear maps fulfilling (4.4). Then Lf(A) = ˜Lf(A).
+
+Proof. We define the remainders
+
+R(X) := f(A + X) −f(A) −Lf(A, X),
+˜R(X) := f(A + X) −f(A) −˜Lf(A, X).
+
+Then R, ˜R ∈o(∥X∥) by assumption, and
+
+Lf(A, X) −˜Lf(A, X) = ˜R(X) −R(X)
+for all X ∈Cn×n.
+
+Now fix X ∈Cn×n and define Xt := tX for t > 0. Using the linearity of Lf(A) and
+˜Lf(A), we receive
+
+Lf(A, X) −˜Lf(A, X) =1
+
+t
+
+�
+Lf(A, Xt) −˜Lf(A, Xt)
+�
+= ∥X∥· Lf(A, Xt) −˜Lf(A, Xt)
+
+∥Xt∥
+
+=∥X∥
+�˜R(Xt)
+
+∥Xt∥−R(Xt)
+
+∥Xt∥
+
+�
+t→0
+−−→0.
+
+Since the left-hand side is independent of t, we conclude Lf(A, X) = ˜Lf(A, X).
+
+52
+
+
+Theorem 4.5.
+(1) Let f, g : U →Cn×n be Fr´echet differentiable at A ∈U. Then
+f + g and f · g are also Fr´echet differentiable at A with
+
+Lf+g(A, X) = Lf(A, X) + Lg(A, X),
+“sum rule”
+
+and
+
+Lf·g(A, X) = Lf(A, X)g(A) + f(A)Lg(A, X).
+“product rule”
+
+(2) Let g and f be Fr´echet differentiable at A ∈Cn×n and g(A) ∈Cn×n, respectively.
+Then f ◦g is Fr´echet differentiable at A with
+
+Lf◦g(A, X) = Lf(g(A), Lg(A, X)).
+“chain rule”
+
+(3) Let f : U →f(U) be bijective and Fr´echet differentiable, and let A ∈U. If Lf(A)
+is nonsingular, then Lf−1(f(A)) exists with
+
+Lf−1(f(A), X) = L−1
+f (A, X).
+“derivative of the inverse”
+
+In particular, we have for all X ∈Cn×n
+
+Lf(A, Lf−1(f(A), X)) = X.
+
+Proof. Exercise, or see [12, Thms. 3.2–3.5].
+
+We continue with some examples that will be of particular interest in what follows.
+
+Example 4.6.
+(1) Let f(A) = A, i.e., f = id. Then
+
+f(A + X) −f(A) = A + X −A = X,
+
+and therefore, Lf(A, X) = X.
+
+(2) Let f(A) = A2. Then
+
+f(A + X) −f(A) = (A + X)2 −A2 = AX + XA + X2
+����
+∈o(∥X∥)
+,
+
+i.e., Lf(A, X) = AX + XA.
+
+(3) Let A ∈Cn×n be nonsingular and let f(A) = A−1. Then (id ·f)(A) = A·A−1 = In.
+Hence, by the product rule for the Fr´echet derivative (Theorem 4.5 (1)), we find
+
+0 = Lid ·f(A, X) = Lid(A, X)f(A) + id(A)Lf(A, X)
+(1)
+= XA−1 + ALf(A, X).
+
+Reordering yields Lf(A, X) = −A−1XA−1.
+
+53
+
+
+(4) Let f(A) =
+
+m
+�
+
+k=0
+αkAk. Then
+
+f(A + X) −f(A) =
+
+m
+�
+
+k=0
+αk(A + X)k −
+
+m
+�
+
+k=0
+αkAk
+
+=
+
+m
+�
+
+k=1
+αk
+
+k
+�
+
+j=1
+Aj−1XAk−j + o(∥X∥),
+
+where all terms with more than one X in the second sum is incorporated in o(∥X∥).
+Hence, we find
+
+Lf(A, X) =
+
+m
+�
+
+k=1
+αk
+
+k
+�
+
+j=1
+Aj−1XAk−j.
+
+Next, we prove that the condition number is just the operator norm of the Fr´echet
+derivative, which is given by
+
+∥Lf(A)∥= sup
+X̸=0
+
+∥Lf(A, X)∥
+
+∥X∥
+= sup
+∥X∥=1
+∥Lf(A, X)∥= sup
+∥X∥≤1
+∥Lf(A, X)∥.
+
+Theorem 4.7. Let U ⊆Cn×n, ∥· ∥a norm on Cn×n and f : U →Cn×n Fr´echet
+differentiable at A ∈U. Then
+
+κabs
+f (A) = ∥Lf(A)∥
+and
+κrel
+f (A) = ∥Lf(A)∥∥A∥
+
+∥f(A)∥
+
+where the norm in ∥Lf(A)∥is the induced norm of the norm ∥· ∥.
+
+Proof. Using the linearity of the Fr´echet derivative, we recieve
+
+κabs
+f (A) = lim
+ε→0
+sup
+∥∆A∥≤ε
+
+∥f(A + ∆A) −f(A)∥
+
+∥∆A∥
+= lim
+ε→0
+sup
+∥∆A∥≤ε
+
+∥Lf(A, ∆A) + o(∥∆A∥)∥
+
+∥∆A∥
+
+= lim
+ε→0
+sup
+∥∆A∥≤ε
+
+����Lf
+�
+A,
+∆A
+∥∆A∥
+�
++ o(∥∆A∥)
+
+∥∆A∥
+�
+��
+�
+
+ε→0
+−−−→0
+
+����= sup
+∥�
+A∥=1
+∥Lf(A, �A)∥= ∥Lf(A)∥.
+
+The other assertion follows from
+
+κrel
+f (A) = κabs
+f (A) ∥A∥
+
+∥f(A)∥.
+
+In Theorem 3.3 (2), we saw that any sufficiently smooth f induces a continuous matrix
+function. The next result is the analog for a Fr´echet differentiable matrix function.
+
+Theorem 4.8. Let Ω⊆C and f : Ω→C be 2n −1 times (real) continuously
+differentiable. Then the corresponding primary matrix function f : Cn×n(Ω) →Cn×n is
+Fr´echet differentiable at every A ∈Cn×n(Ω). Moreover, the Fr´echet derivative Lf(A, X)
+is continuous both in A ∈Cn×n(Ω) and in X ∈Cn×n.
+
+Proof. The proof relies on Gateaux derivatives (pendent of directional derivatives in
+general spaces). We omit the details here and refer to [12, Thm. 3.8].
+
+54
+
+
+4.1.1
+Connection of Matrix Functions and Fr´echet Derivatives
+
+The Fr´echet derivative can be computed using matrix functions.
+
+Theorem 4.9. Let Ω⊆C, f : Ω→C be 2n −1 times (real) continuously differentiable,
+A ∈Cn×n(Ω), and X ∈Cn×n. Then
+
+f
+��A
+X
+0
+A
+
+��
+=
+�f(A)
+Lf(A, X)
+0
+f(A)
+
+�
+.
+(4.6)
+
+Proof. See [12, Thm. 3.8].
+
+Remark 4.10.
+(1) By Theorem 4.9 we can compute Lf(A, X) by computing f( ˜A) for
+
+˜A =
+�A
+X
+0
+A
+
+�
+.
+
+Note that one should exploit the special structure of ˜A when computing f( ˜A).
+
+(2) For n = 1, equation (4.6) coincides with the expression for (2×2) upper triangular
+matrices in (3.1).
+
+Using the Hadamard product, which is the entry-wise matrix product, i.e., the map
+
+⊙: Cn×m × Cn×m →Cn×m,
+[aij] ⊙[bij] := [aij · bij],
+(4.7)
+
+we give an explicit expression for the Fr´echet derivative of f at A, i.e., Lf(A, X).
+
+Theorem 4.11. Let Ω⊆C, f : Ω→C be 2n−1 times (real) continuously differentiable,
+and let D = diag(λ1, . . . , λn) ∈Cn×n(Ω). Then
+
+Lf(D, X) =
+�
+f[λi, λj] · xij
+�
+
+ij =
+�
+f[λi, λj]
+�
+
+ij ⊙X
+
+holds for all X = [xij] ∈Cn×n.
+
+Sketch of the proof. First, let D have distinct eigenvalues. By Theorem 4.9,
+
+f
+��D
+X
+0
+D
+
+��
+=
+�f(D)
+Lf(D, X)
+0
+f(D)
+
+�
+.
+
+Using Theorem 3.5 (1), i.e., Af(A) = f(A)A, yields
+�D
+X
+0
+D
+
+��f(D)
+Lf(D, X)
+0
+f(D)
+
+�
+=
+�f(D)
+Lf(D, X)
+0
+f(D)
+
+��D
+X
+0
+D
+
+�
+.
+
+The top right block entry of this equation is equivalent to
+
+Xf(D) −f(D)X = Lf(D, X)D −D Lf(D, X).
+
+55
+
+
+Since D is diagonal, the entry (i, j), i ̸= j, reads
+
+f(λj)xij −f(λi)xij = (λj −λi)
+�
+Lf(D, X)
+�
+
+ij
+
+λi̸=λj
+=⇒
+�
+Lf(D, X)
+�
+
+ij = f(λj) −f(λi)
+
+λj −λi
+xij = f[λi, λj] · xij.
+
+Since matrices with distinct eigenvalues are dense in Cn×n(Ω) and Lf(D, X) is continuous,
+we obtain the result for general D.
+
+Note that the case i = j is not covered in above sketch of the proof.
+
+4.1.2
+Kronecker Form of the Fr´echet Derivative
+
+Using the vectorization operator
+
+vec : Cn×m →Cnm,
+vec([x1, . . . , xm]) =
+
+
+
+
+
+x1
+...
+xm
+
+
+
+,
+(4.8)
+
+we represent the linear map Lf(A) by a matrix, which will be very convenient in what
+follows. The unique matrix Kf(A) ∈Cn2×n2, that fulfills
+
+vec(Lf(A, X)) = Kf(A)vec(X).
+(4.9)
+
+is called the Kronecker form of Lf(A).
+In particular, X is an eigenvector of Lf(A)
+corresponding to λ if and only if vec(X) is an eigenvector of Kf(A) corresponding to λ.
+Next, we prove that the operator Frobenius norm of the Fr´echet derivative and the
+spectral norm of its Kronecker form coincide.
+
+Theorem 4.12. Let f be Fr´echet differentiable on U ⊆Cn×n and A ∈U. Then
+
+∥Lf(A)∥F = ∥Kf(A)∥2.
+(4.10)
+
+Proof. Using the obvious identity ∥X∥F = ∥vec(X)∥2 twice, we find
+
+∥Lf(A)∥F =
+sup
+∥X∥F =1
+∥Lf(A, X)∥F =
+sup
+∥vec(X)∥2=1
+∥vec
+�
+Lf(A, X)
+�
+∥2
+
+=
+sup
+∥vec(X)∥2=1
+∥Kf(A)vec(X)∥2 =
+sup
+y∈Cn2,∥y∥2=1
+∥Kf(A)y∥2 = ∥Kf(A)∥2.
+
+4.2
+Bounding the Condition Number
+
+The main goal of this subsection is to derive bounds for κabs
+f (A) and κrel
+f (A) by bounding
+the spectral radius of Kf(A), i.e.,
+
+ρ(Kf(A)) = max{λ | λ ∈Λ(Kf(A))}.
+(4.11)
+
+We start with basic identities involving the Kronecker product and the Theorem of
+Stephanos, which can be interpreted as a spectral mapping theorem for bivariate polynomials.
+
+56
+
+
+Lemma 4.13.
+(1) Let A, C ∈Cn×n and B, D ∈Cm×m. Then
+
+(A ⊗B)(C ⊗D) = (AC) ⊗(BD).
+(4.12)
+
+(2) Let A ∈Cn×n, B ∈Cm×m and C ∈Cn×m. Then
+
+vec(ACB) = (BT ⊗A)vec(C).
+(4.13)
+
+Proof.
+(1) First, let F = [Fij] := (A × B)(C ⊗D). Then the block entry Fij of F is
+
+Fij =
+
+n
+�
+
+k=1
+(aikB)(ckjD) =
+
+�n
+�
+
+k=1
+aikckj
+
+�
+
+BD.
+
+Moreover, let H := AC. The block entry (i, j) of G = [Gij] = (AC) ⊗(BD) is
+
+Gij = hijBD =
+
+�n
+�
+
+k=1
+aikckj
+
+�
+
+BD.
+
+(2) Let j ∈{1, . . . , m}. The jth column of ACB is
+
+(ACB)ej = (AC)(Bej) = (AC)bj =
+
+n
+�
+
+k=1
+(AC)ekbkj =
+
+n
+�
+
+k=1
+bkjACek
+
+=
+�
+b1jA
+b2jA
+. . .
+bmjA
+�
+vec(C).
+
+Thus, vec(ACB) = (BT ⊗A)vec(C).
+
+A bivariate polynomial is a polynomial in commuting variables t1 and t2, i.e., it is of
+the form
+
+p(t1, t2) =
+
+k
+�
+
+i,j=0
+αijti
+1tj
+2 ∈C[t1, t2].
+(4.14)
+
+If such a polynomial p ∈C[t1, t2] is given, we define for A ∈Cn×n and B ∈Cm×m
+
+p(A, B) =
+
+k
+�
+
+i,j=0
+αijAi ⊗Bj.
+(4.15)
+
+Note that we have Ai ⊗Bj ̸= Bj ⊗Ai in general.
+
+Theorem 4.14 (Theorem of Stephanos). Let A ∈Cn×n and B ∈Cm×m. Moreover, let
+p ∈C[t1, t2] be a bivariate polynomial. Then
+
+Λ(p(A, B)) = {p(λ, µ) | λ ∈Λ(A), µ ∈Λ(B)}.
+(4.16)
+
+57
+
+
+Proof. Let
+A = XJAX−1,
+B = Y JBY −1
+
+be Jordan decompositions of A and B. Then by Lemma 4.13 (1), we have
+
+p(A, B) =
+
+k
+�
+
+i,j=0
+αijAi ⊗Bj =
+
+k
+�
+
+i,j=0
+αij(XJAX−1)i ⊗(Y JBY −1)j
+
+=
+
+k
+�
+
+i,j=0
+αij(XJi
+AX−1) ⊗(Y Jj
+BY −1)
+
+=
+
+k
+�
+
+i,j=0
+αij((XJi
+A) ⊗(Y Jj
+B)(X−1 ⊗Y −1)
+
+=
+
+k
+�
+
+i,j=0
+αij(X ⊗Y )(Ji
+A ⊗Jj
+B)(X−1 ⊗Y −1)
+
+= (X ⊗Y )
+
+
+
+
+k
+�
+
+i,j=0
+αijJi
+A ⊗Jj
+B
+
+
+
+(X−1 ⊗Y −1)
+
+= (X ⊗Y )p(JA, JB)(X−1 ⊗Y −1) = (X ⊗Y )p(JA, JB)(X ⊗Y )−1.
+
+In particular, we used (A ⊗B)−1 = A−1 ⊗B−1, which is an immediate consequence of
+Lemma 4.13 (1).
+Since Ji
+A, Jj
+B and Ji
+A ⊗Jj
+B are upper triangular matrices, the eigenvalues of p(JA, JB)
+are on the diagonal, where we find p(λ, µ) for λ ∈Λ(A) and µ ∈Λ(B).
+
+The next result characterizes the spectrum of Lf(A) and therefore also for Kf(A).
+Recall, that for any eigenvalue λ of Kf(A) and any consistent norm ∥· ∥on Cn×n, we
+have
+|λ| ≤ρ(Kf(A)) ≤∥Kf(A)∥,
+(4.17)
+
+where ρ(Kf(A)) denotes the spectral radius of Kf(A) (see Equation (1.6)).
+
+Theorem 4.15. Let Ω⊆C, f : Ω→C be 2n−1 times (real) continuously differentiable,
+and let A ∈Cn×n(Ω). Then
+
+Λ(Lf(A)) = Λ(Kf(A)) = {f[λ, µ] | λ, µ ∈Λ(A)}.
+(4.18)
+
+Sketch of the proof. We only prove the result for f being a polynomial. Let
+
+f(z) =
+
+m
+�
+
+k=0
+αkzk.
+
+Then by Example 4.6 (4), we get
+
+Lf(A, X) =
+
+m
+�
+
+k=1
+ak
+
+k
+�
+
+j=1
+Aj−1XAk−j.
+
+58
+
+
+Using the identity vec(ABC) = (CT ⊗A) vec(B) (Lemma 4.13 (2)), we find that the
+Kronecker form of Lf(A) is given by
+
+Kf(A) =
+
+m
+�
+
+k=1
+ak
+
+k
+�
+
+j=1
+(Ak−j)T ⊗Aj−1.
+
+By the Theorem of Stephanos (Theorem 4.14), the eigenvalues of Kf(A) are
+
+m
+�
+
+k=1
+ak
+
+k
+�
+
+j=1
+λk−jµj−1,
+λ, µ ∈Λ(A).
+
+For λ = µ, we find
+
+m
+�
+
+k=1
+ak
+
+k
+�
+
+j=1
+λk−jλj−1 =
+
+m
+�
+
+k=1
+akkλk−1 = f′(λ) = f[λ, µ].
+
+For λ ̸= µ, we have for all k ∈N
+
+
+
+k
+�
+
+j=1
+λk−jµj−1
+
+
+
+(λ −µ) =
+
+k
+�
+
+j=1
+λk−j+1µj−1 −
+
+k
+�
+
+j=1
+λk−jµj
+
+=
+
+k−1
+�
+
+j=0
+λk−jµj −
+
+k
+�
+
+j=1
+λk−jµj = λk −µk,
+
+and therefore
+k
+�
+
+j=1
+λk−jµj−1 = λk −µk
+
+λ −µ .
+
+This yields
+
+m
+�
+
+k=1
+ak
+
+k
+�
+
+j=1
+λk−jµj−1 =
+
+m
+�
+
+k=1
+ak
+λk −µk
+
+λ −µ
+=
+1
+λ −µ
+
+�m
+�
+
+k=1
+akλk −
+
+m
+�
+
+k=1
+akµk
+�
+
+= f(λ) −f(µ)
+
+λ −µ
+= f[λ, µ].
+
+For a diagonal matrix D, the Frobenius norm of Lf(D) coincides with the spectral
+radius of Lf(D).
+
+Theorem 4.16. Let Ω⊆C, f : Ω→C be 2n−1 times (real) continuously differentiable,
+and let D = diag(λ1, . . . , λn) ∈Cn×n(Ω). Then
+
+∥Lf(D)∥F =
+max
+σ∈Λ(Lf(D)) |σ| = max
+1≤i,j≤n |f[λi, λj]|.
+(4.19)
+
+59
+
+
+Proof. We write
+
+diagij(f[λi, λj]) = diag
+
+
+
+
+
+
+
+
+
+
+f[λ1, λ1]
+...
+f[λn, λ1]
+
+
+
+, . . . ,
+
+
+
+
+
+f[λ1, λn]
+...
+f[λn, λn]
+
+
+
+
+
+
+
+
+.
+
+Then
+
+∥Lf(D)∥F = sup
+X̸=0
+
+∥Lf(D, X)∥F
+
+∥X∥F
+
+Thm.
+
+4.11
+=
+sup
+X̸=0
+
+∥
+�
+f[λi, λj]
+�
+
+ij ⊙X∥F
+∥X∥F
+
+= sup
+X̸=0
+
+∥vec
+��
+f[λi, λj]
+�
+
+ij ⊙X
+�
+∥2
+∥vec(X)∥2
+=
+sup
+vec(X)̸=0
+
+∥diagij(f[λi, λj]) vec(X)∥2
+
+∥vec(X)∥2
+
+= sup
+y̸=0
+
+∥diagij(f[λi, λj])y∥2
+
+∥y∥2
+= ∥diagij(f[λi, λj])∥2 = max
+1≤i,j≤n |f[λi, λj]|.
+
+The last theorem in this chapter requires two additional lemmas.
+
+Lemma 4.17. Let A ∈Cn×m and B ∈Cm×k. Then
+
+(1) ∥AB∥F ≤∥A∥2∥B∥F ,
+
+(2) ∥AB∥F ≤∥A∥F ∥B∥2.
+
+Proof.
+(1) We have
+
+∥AB∥2
+F =∥A[b1, . . . , bk]∥2
+F = ∥[Ab1, . . . , Abk]∥2
+F =
+
+k
+�
+
+j=1
+∥Abj∥2
+2
+
+≤
+
+k
+�
+
+j=1
+∥A∥2
+2∥bj∥2
+2 = ∥A∥2
+2
+
+k
+�
+
+j=1
+∥bj∥2
+2 = ∥A∥2
+2∥B∥2
+F .
+
+(2) The statement follows from (1) by applying the transpose:
+
+∥AB∥F = ∥(AB)T ∥F = ∥BT AT ∥F ≤∥BT ∥2∥AT ∥F = ∥A∥F ∥B∥2.
+
+Lemma 4.18. Let Ω⊆C, f : Ω→C be 2n −1 times (real) continuously differentiable.
+Moreover, let A ∈Cn×n(Ω) be diagonalizable, i.e., A = ZDZ−1 for some diagonal matrix
+D ∈Cn×n, and let X ∈Cn×n. Define �
+X := Z−1XZ. Then
+
+Lf(A, X) = ZLf(D, �
+X)Z−1.
+(4.20)
+
+Proof. We have
+
+ZLf(D, �
+X)Z−1 =Z
+�
+f(D + �
+X) −f(D) −o(∥�
+X∥)
+�
+Z−1
+
+=Zf(D + ˜X)Z−1 −Zf(D)Z−1 −Z o(∥˜X∥) Z−1
+
+Thm.
+
+3.5
+= f
+�
+ZDZ−1 + ZZ−1XZZ−1�
+−f(ZDZ−1) −Z o(∥�
+X∥) Z−1
+
+=f(A + X) −f(A) −o(∥X∥∼)
+
+60
+
+
+with ∥Y ∥∼:= ∥Z−1Y Z∥. Since ∥·∥and ∥·∥∼are equivalent, we have o(∥X∥∼) = o(∥X∥).
+It follows that
+
+ZLf(D, �
+X)Z−1 = f(A + X) −f(A) −o(∥X∥) = Lf(A, X).
+
+Finally, we combine the previous results in this chapter to obtain bounds for the
+absolute condition number κabs
+f (A), wich of course, also yield similar bounds on the
+relative condition number κrel
+f (A).
+
+Theorem 4.19. Let Ω⊆C, f : Ω→C be 2n−1 times (real) continuously differentiable,
+and let A ∈Cn×n(Ω).
+
+(1) Then we have the lower bound
+
+max
+λ,µ∈Λ(A)
+
+��f[λ, µ]
+��≤κabs
+f (A),
+(4.21)
+
+where κabs
+f (A) is be defined with respect to an arbitrary norm on Cn×n.
+
+(2) If A is diagonalizable, i.e., A = ZDZ−1 for a diagonal matrix D ∈Cn×n, then we
+have the upper bound
+
+κabs
+f (A) ≤κ2(Z)2
+max
+λ,µ∈Λ(A)
+
+��f[λ, µ]
+��,
+(4.22)
+
+where κabs
+f (A) is meant with respect to ∥· ∥F .
+
+(3) If A is normal, then
+κabs
+f (A) =
+max
+λ,µ∈Λ(A)
+
+��f[λ, µ]
+��,
+(4.23)
+
+where κabs
+f (A) is meant with respect to ∥· ∥F .
+
+Proof.
+(1) We have
+
+κabs
+f (A)
+
+Thm.
+
+4.7
+=
+∥Lf(A)∥
+
+induced
+norm
+≥
+ρ(Lf(A))
+
+Thm.
+
+4.15
+=
+max
+λ,µ∈Λ(A)
+
+��f[λ, µ]
+��.
+
+(2) It holds
+
+κabs
+f (A) =∥Lf(A)∥F
+
+Lem.
+
+4.18
+=
+max
+∥X∥F =1∥ZLf(D, Z−1XZ)Z−1∥F
+
+Lem.
+
+4.17
+≤
+sup
+∥X∥F =1
+∥Z∥2∥Z−1∥2∥Lf(D, Z−1XZ)∥F
+
+≤κ2(Z)
+sup
+∥X∥F =1
+∥Lf(D)∥F ∥Z−1XZ∥F
+
+Lem.
+
+4.17
+≤κ2(Z)∥Lf(D)∥F
+sup
+∥X∥F =1
+∥Z−1∥2∥Z∥2∥X∥F
+
+=κ2(Z)2∥Lf(D)∥F
+
+Thm.
+
+4.16
+=
+κ2(Z)2
+max
+λ,µ∈Λ(A)
+
+��f[λ, µ]
+��.
+
+61
+
+
+(3) We have A = UDUH for a unitary matrix U ∈Cn×n. Since κ2(U) = 1, we receive
+
+max
+λ,µ∈Λ(A)
+
+��f[λ, µ]
+��
+(1)
+≤κabs
+f (A)
+(2)
+≤
+max
+λ,µ∈Λ(A)
+
+��f[λ, µ]
+��.
+
+Remark 4.20. For a diagonalizable matrix A, the condition number κabs
+f (A) depends
+on the first order divided differences f[λ, µ] for λ, µ ∈Λ(A) and the condition number
+of the eigenvector matrix Z.
+
+Example 4.21.
+(1) For f(z) = z2 and λ ̸= µ, we have
+
+f[λ, µ] = f(λ) −f(µ)
+
+λ −µ
+= λ2 −µ2
+
+λ −µ
+= λ + µ,
+
+which will only be large for large λ or µ, i.e., f is well-conditioned at A if the
+eigenvalues of A are not to large.
+
+(2) For f(z) = √z and λ ̸= µ, we have
+
+f[λ, µ] = f(λ) −f(µ)
+
+λ −µ
+=
+
+√
+
+λ −√µ
+λ −µ
+=
+1
+√
+
+λ + √µ
+,
+
+which will be very large for small λ and µ, i.e., f is ill-conditioned at A if A is
+close to singular.
+
+62
+
+
+5
+Computation of f(A)
+
+This chapter is devoted to study popular methods for the numerical computation of
+f(A). To choose the right method (also in a more general setting), we should always ask
+ourselves the following questions.
+
+• Which operations can be performed?
+
+(E.g., multiplication with A, multiplication with AH, solving a linear system with
+system matrix A, matrix factorizations.)
+
+• What is the size of the matrix?
+
+• What is the desired accuracy?
+
+In what follows, we assume that A is small/medium sized, i.e., we can use matrix
+decompositions and direct methods for solving linear systems.
+
+5.1
+Techniques to Compute f(A)
+
+We consider three approaches to compute f(A).
+
+(1) Decomposition approach
+
+• For normal A, we compute an eigendecomposition A = UDUH and can then
+compute f(A) = Uf(D)UH.
+
+• For a non-normal matrix A, we use the Schur decomposition A = UTUH and
+then calculate f(A) = Uf(T)UH. For this, we need a method to compute
+matrix functions of upper triangular matrices. This leads to the Schur-Parlett
+algorithm that is discussed in Section 5.2.
+
+(2) Iteration approach
+
+We construct a map g : Cn×n →Cn×n and build a matrix sequence by setting
+
+Xk+1 := g(Xk),
+k ≥0,
+(5.1)
+
+for some X0 ∈Cn×n, such that
+
+lim
+k→∞Xk = f(A)
+(5.2)
+
+holds. Important examples of this approach are “Newton-like methods” which we
+study in Section 5.3.
+
+(3) Approximation approach
+
+We approximate f by a polynomial p or a rational function r, e.g., by Taylor
+approximation or Pad´e approximation, and then compute p(A) or r(A) as an
+approximation for f(A), respectively.
+This leads, for example, to the “Scaling
+and Squaring methods” that we will see in Section 5.4.
+
+63
+
+
+Note, that the first approach leads to a general purpose method, while the latter
+approaches are usually used for specific f.
+One may wonder why the above approaches differ so much from the definitions in
+Chapter 2, where we defined f(A) using the Jordan form, the Hermite interpolation
+polynomial, the Taylor series, and the Cauchy integral formula. In fact, the first three
+definitons do not immediately lead to well-suited methods for computing f(A), while
+the last one can be used for the computation of f(A)b.
+
+(1) Jordan form definition
+
+As discussed in Remark 2.1, computing a Jordan form of A is not stable, and, in
+particular, not continuous in the entries of A.
+
+(2) Hermite interpolation definition
+
+We are interested in methods for computing f(A) that use O(n3) flops. Since the
+multiplication of two (full) (n × n) matrices requires 2n3 flops, the evaluation of
+a polynomial of degree n in A requires O(n4) flops, which is too expensive. Note
+that for any non-derogatory matrix, the Hermite interpolation polynomial is of
+degree n.
+
+(3) Taylor series definition
+
+Inserting A in a truncated Taylor series, i.e., in a Taylor polynomial, has the
+same performance problems as the Hermite interplation approach, since a good
+approximation of f typically requires a Taylor polynomial of degree O(n), even if
+all eigenvalues of A are located in a tight cluster.
+
+(4) Cauchy integral definition
+
+The Cauchy integral formula can be used in combination with quadrature formulas
+for calculating f(A)b; see Chapter 6.
+
+5.2
+Schur-Parlett Algorithm
+
+The Schur-Parlett algorithm, which was introduced by Davies and Higham in 2003 [7],
+is considered to be the “state of the art” approach for the computation of f(A) for
+general f. It consists of three main steps.
+
+(1) Compute a (block) Schur decomposition A = UTUH; see Subsection 5.2.3.
+
+(2) Evaluate f(T); see Subsections 5.2.1 and 5.2.2.
+
+(3) Return Uf(T)UH.
+
+64
+
+
+f11
+f12
+f13
+f14
+f15
+
+0
+f22
+f23
+f24
+f25
+
+0
+0
+f33
+f34
+f35
+
+0
+0
+0
+f44
+f44
+
+0
+0
+0
+0
+f55
+
+
+
+
+
+
+
+
+
+Figure 9: Traversing of the entries fij of F = f(T) in the Parlett recurrence.
+
+5.2.1
+Parlett Recurrence
+
+In Proposition 3.8, we proved the following formula for f(T) if T = [tij] ∈C2×2 is upper
+triangular
+
+f
+��t11
+t12
+0
+t22
+
+��
+=
+�f(t11)
+t12f[t11, t22]
+0
+f(t22)
+
+�
+,
+
+by using Tf(T) = f(T)T. For an upper triangular T = [tij] ∈Cn×n, we can do the
+same. Denote f(T) = [fij]. Then
+
+
+
+
+t11 t12 · · · t1n
+t22 · · · t2n
+...
+...
+tnn
+
+
+
+
+
+�
+��
+�
+T
+
+
+
+
+
+f11 f12 · · · f1n
+f22 · · · f2n
+...
+...
+fnn
+
+
+
+
+
+�
+��
+�
+f(T)
+
+=
+
+
+
+
+
+f11 f12 · · · f1n
+f22 · · · f2n
+...
+...
+fnn
+
+
+
+
+
+�
+��
+�
+f(T)
+
+
+
+
+
+t11 t12 · · · t1n
+t22 · · · t2n
+...
+...
+tnn
+
+
+
+
+
+�
+��
+�
+T
+
+.
+
+Note, that the diagonal entries of f(T) can be easily computed because fii = f(tii) for
+i = 1, . . . , n by Theorem 3.5 (6). Let 1 ≤i < j ≤n and assume tii ̸= tjj. Considering
+the entry (i, j) in the above equation yields
+
+tiifij + tijfjj +
+
+j−1
+�
+
+k=i+1
+tikfkj = fiitij + fijtjj +
+
+j−1
+�
+
+k=i+1
+fiktkj
+
+⇔
+fij(tii −tjj) = tij(fii −fjj) +
+
+j−1
+�
+
+k=i+1
+fiktkj −
+
+j−1
+�
+
+k=i+1
+tikfkj.
+
+For tii ̸= tjj, the above equation is equivalent to
+
+fij = tij · fii −fjj
+
+tii −tjj
++
+
+j−1
+�
+
+k=i+1
+
+fiktkj −tikfkj
+
+tii −tjj
+.
+(5.3)
+
+65
+
+
+Algorithm 1 Parlett recurrence
+Input: T = [tij] ∈Cn×n upper triangular with simple eigenvalues, f defined on the
+spectrum of T
+Output: F = [fij] = f(T)
+
+for i = 1, . . . , n do
+
+fii = f(tii)
+end for
+for j = 2, . . . , n do
+
+for i = j −1, . . . , 1 do
+
+fij = tij · fii −fjj
+
+tii −tjj
++
+
+j−1
+�
+
+k=i+1
+
+fiktkj −tikfkj
+
+tii −tjj
+end for
+end for
+
+This formula for fij only depends on the diagonal entries of f(T), the entries fik with
+i < k, and the entries fkj with j > k. Thus, we can calculate f(T) by traversing its
+entries in an appropriate order; see Figure 9. This gives rise to the Parlett recurrence.
+
+Remark 5.1.
+(1) Algorithm 1 requires 2
+
+3n3+O(n2) floating points operations (flops).
+
+(2) Computing a Schur decomposition with the QR algorithm and applying Algorithm 1
+
+was the first implementation of the MATLAB routine funm and was in use until 2003.
+However, this method has two major drawbacks.
+
+• Eigenvalues of A have to be distinct.
+
+• Clustered eigenvalues may lead to a significant loss of accuracy due to the
+phenomenon of cancellation; see Example 5.2 or [12, pp. 87-89].
+
+Example 5.2. Consider the matrix
+
+A =
+
+
+
+
+
+1
+−1
+. . .
+−1
+
+0
+1
+...
+...
+...
+...
+...
+−1
+0
+. . .
+0
+1
+
+
+
+
+∈R10×10,
+
+which only has the eigenvalue 1. Thus, the method proposed in Remark 5.1 (2) will
+break down since tii = tjj. To avoid this, we consider two perturbations of A.
+
+(1) A1,k = A + ∆A1,k, where ∆A1,k ∈C10×10 is diagonal with normally distributed
+entries with mean 0 and variance 10−k.
+
+(2) A2,k = A + ∆A2,k, where ∆A2,k ∈C10×10 is upper triangular with normally
+distributed entries with mean 0 and variance 10−k.
+
+66
+
+
+k
+1
+2
+3
+4
+5
+6
+sqrtm for A1,k
+1.0e–15
+1.6e–15
+3.3e–15
+1.9e–15
+3.0e–15
+2.6e–15
+Parlett recurrence for A1,k
+9.9e–16
+1.6e–15
+4.5e–15
+6.5e–14
+3.2e–13
+8.1e–13
+sqrtm for A2,k
+1.6e–16
+1.6e–16
+2.2e–16
+1.8e–16
+1.5e–16
+2.2e–16
+Parlett recurrence for A2,k
+1.3e–09
+2.0e-01
+1.8e+08
+1.8e+17
+7.8e+26
+1.4e+36
+
+Table 1: Relative residuals in Example 5.2.
+
+Computing A
+
+1
+2
+j,k with the MATLAB built-in routine sqrtm and the method proposed in
+Remark 5.1 (2) yields computed outputs Xj,k. The corresponding residuals
+
+∥X2
+j,k −Aj,k∥F
+∥A2
+j,k −Aj,k∥F
+
+are displayed in Table 1.
+For a diagonal perturbation (A1,k), the Parlett recurrence
+yields reasonable results, although the eigenvalues become more and more clustered.
+For a triangular perturbation (A2,k), the Parlett recurrence performs already for k = 2
+extremely poor, despite the fact that A has very small size. Thus, eigenvalue cluster
+can lead to numerical difficulties. However, we also observe that the residual of sqrtm
+is always in the order of the machine precision, i.e. these difficulties can be resolved.
+
+To overcome a breakdown of Algorithm 1 if tii = tjj, i.e., if T has a non-simple
+eigenvalue, we replace T by a block triangular matrix
+
+T =
+
+
+
+
+
+T11
+· · ·
+T1m
+...
+...
+Tmm
+
+
+
+,
+
+where Tii are square matrices for i = 1, . . . , m, such that Λ(Tii) ∩Λ(Tjj) = ∅for i ̸= j.
+This requires an appropriate reordering of the Schur form. We denote the blocks of
+F = f(T) according to the blocks Tij of T by Fij. Then the analog of (5.3) is
+
+TiiFij −FijTjj = FiiTij −TijFjj +
+
+j−1
+�
+
+k=i+1
+
+�
+FikTkj −TikFkj
+�
+,
+(5.4)
+
+which is a Sylvester equation in the unknown Fij for 1 ≤i < j ≤n. In particular, there
+exists a unique solution Fij if and only if Λ(Tii) ∩Λ(Tjj) = ∅by Theorem 3.29.
+The Sylvester equations (5.4) in Algorithm 2 can be solved with the Bartels-Stewart
+algorithm. However, there are still two remaining problems.
+
+(1) How can we evaluate f(Tii), i = 1, . . . , m, accurately and efficiently? Is this as
+complicated as computing f(T)? →Subsection 5.2.2
+
+(2) How can we find a Schur form with adequate blocking? →Subsection 5.2.3
+
+Here, the key idea is to find a block structure, such that the spectrum of each
+diagonal block is a “cluster”, and such that the spectra of different diagonal blocks
+are well separated. Such blocks are called atomic blocks.
+
+67
+
+
+Algorithm 2 Block Parlett recurrence
+Input: T = [Tij] ∈Cn×n block upper triangular with Λ(Tii) ∩Λ(Tjj) = ∅, f defined on
+the spectrum of T
+Output: F = [Fij] = f(T)
+
+for i = 1, . . . , m do
+
+Fii = f(Tii)
+end for
+for j = 2, . . . , m do
+
+for i = j −1, . . . , 1 do
+
+solve TiiFij −FijTjj = FiiTij −TijFjj +
+
+j−1
+�
+
+k=i+1
+
+�
+FikTkj −TikFkj
+�
+for Fij
+
+end for
+end for
+
+5.2.2
+Evaluating Atomic Blocks
+
+As mentioned in Chapter 2, a primary matrix function f(A) can be defined by the Taylor
+series of f. The truncated Taylor series around z0, i.e., the Taylor polynomial of order m
+
+fm(z) =
+
+m
+�
+
+k=0
+
+f(k)(z0)
+
+k!
+(z −z0)k
+(5.5)
+
+can be used to compute f(A) approximately provided that the truncation error ∥f(A)−
+fm(A)∥is small enough. Recall, that approximating f(A) by the Taylor series is not
+competitive with other numerical methods, since it is too expensive (O(mn3)) and the
+convergence is too slow. However, if A is triangular with a clustered spectrum and of
+small size, e.g., for atomic blocks, the Taylor series approach can be used.
+Assume that T ∈Cn×n is upper triangular and its eigenvalues form a single cluster.
+Define
+σ := 1
+
+n
+
+�
+
+λ∈Λ(T)
+λ
+and
+M := T −σIn.
+(5.6)
+
+Then σ is the mean of the eigenvalues of T.
+Furthermore, we define the following
+decomposition of T
+T = σIn + M.
+(5.7)
+
+If f has a Taylor series around σ, i.e., there exists r > 0 with
+
+f(σ + z) =
+
+∞
+�
+
+k=0
+
+f(k)(σ)
+
+k!
+zk ,
+|z −σ| < r,
+(5.8)
+
+and Λ(T) ⊆{z ∈C | |z −σ| < r}, then by Theorem 2.19 we have
+
+f(T) =
+
+∞
+�
+
+k=0
+
+f(k)(σ)
+
+k!
+Mk.
+(5.9)
+
+68
+
+
+Next, we decompose M into its diagonal part D and its strictly upper triangular part N
+(which is nilponent), i.e.,
+M = D + N.
+(5.10)
+
+If the entries dii of D are sufficiently small, i.e., all the diagonal entries of T are close to σ,
+then Mk becomes small enough to obtain a good approximation for f(T) by computing
+fm(T) if m ≈n.
+
+Theorem 5.3. Let D = diag(d11, . . . , dnn) ∈Cn×n with |dii| ≤r for i = 1, . . . , n, and
+let N ∈Cn×n be strictly upper triangular. Then for any induced matrix norm with an
+underlying absolute vector norm (i.e., a norm ∥· ∥with ∥|x| ∥= ∥x∥, where |x| is the
+vector with the entry-wise absolute values of x), we have
+
+��(D + N)k��≤
+
+min{k,n−1}
+�
+
+j=0
+
+�k
+j
+
+�
+rk−j∥N∥j.
+(5.11)
+
+Proof. Using the binomial identity for matrices, we find
+
+��(D + N)k��=
+
+������
+
+�
+
+x∈{0,1}k
+
+k
+�
+
+i=1
+NxiD1−xi
+
+������
+≤
+�
+
+x∈{0,1}k
+∥x∥1≤n−1
+
+�����
+
+k
+�
+
+i=1
+NxiD1−xi
+�����
+
+≤
+�
+
+x∈{0,1}k
+∥x∥1≤n−1
+
+k
+�
+
+i=1
+∥N∥xi∥D∥1−xi ≤
+
+min{k,n−1}
+�
+
+j=0
+
+�k
+j
+
+�
+rk−j∥N∥j,
+
+where the second inequality uses that the product of m upper triangular matrices is
+equal to zero if n factors are strictly upper triangular. The last inequality follows from
+
+∥D∥= max
+1≤i≤n |dii| ≤r,
+
+which is true since ∥· ∥is induced by an absolute vector norm.
+
+Remark 5.4. If r is sufficiently small, then (5.9) will converge rapidly since ∥Mk∥
+decays fast. More precisely, for r ≪∥N∥and r < 1, Theorem 5.3 yields
+��Mk��∈O(rk+1−n∥N∥n−1).
+(5.12)
+
+If the Taylor coefficients f(k)(σ)
+
+k!
+of f are not too large (e.g., for analytic f, see [26,
+Eq. (4.59)]), we can truncate (5.9) to approximately n summands.
+
+A detailed derivation of a reliable criterion for truncating (5.9) is presented in [12,
+p. 223] and is based on the following bound for the truncation error
+�����f(σIn + M) −
+
+m−1
+�
+
+k=0
+
+f(k)(σ)
+
+k!
+Mk
+�����≤1
+
+m! max
+t∈[0,1]∥Mmf(m)(σIn + tM)∥.
+(5.13)
+
+69
+
+
+Λ(T11)
+
+Λ(T22)
+
+Λ(T33)
+
+Λ(T44)
+
+Λ(T55)
+
+Figure 10: Spectrum Λ(A) =
+5�
+
+i=1
+Λ(Tii) interpreted as an (undirected) graph.
+
+5.2.3
+Ordering of the Schur Form
+
+We want to compute (or reorder) a block Schur decomposition A = UTUH with a block
+triangular
+
+T =
+
+
+
+
+
+T11
+· · ·
+T1m
+...
+...
+Tmm
+
+
+
+∈Cn×n,
+(5.14)
+
+such that the eigenvalues of each diagonal block Tii are close to each other, and such
+that the eigenvalues of different diagonal blocks Tii and Tjj are far away from each other.
+More precisely, for a given blocking parameter δ > 0, we want the following to hold for
+1 ≤i < j ≤m:
+
+(1) min{|λ −µ| | λ ∈Λ(Tii), µ ∈Λ(Tjj)} > δ
+
+(2) If |Λ(Tii)| ≥2, then for all λ ∈Λ(Tii) there exists µ ∈Λ(Tii)\{λ} with |λ−µ| ≤δ.
+
+Note that (2) implies
+max
+λ,µ∈Λ(Tii) |λ −µ| ≤(mi −1)δ,
+(5.15)
+
+where mi is the size of the matrix block Tii. This bound is sharp, e.g., for a Tii with
+Λ(Tii) = {δ, 2δ, 3δ, . . . , miδ}.
+
+Graph theoretic interpretation
+The above construction has the following interpretation
+in graph theory. Consider the (undirected) graph G = (V, E) with
+
+V = {λ1, . . . , λn},
+E = {(λi, λj) | |λi −λj| ≤δ}.
+
+Then each connected component of G corresponds to the eigenvalues a diagonal block
+Tii in the block Schur form (5.14). An illustration can be found in Figure 10.
+
+A blocking with the above properties can always be computed in a backward stable
+way. In particular, there exist an algorithm in LAPACK written in Fortran in the 1970s
+We omit the details and refer to [12, Sect. 9.3] and references therein. However, note
+that the above graph is explicitly built in the algorithm.
+
+70
+
+
+5.2.4
+Algorithm and Remarks
+
+Combining the above parts yields the Schur-Parlett algorithm of Davies and Higham.
+
+Algorithm 3 Schur-Parlett algorithm [7]
+Input: f : Ω→C, A ∈Cn×n(Ω) analytic, blocking parameter δ > 0
+Output: f(A)
+
+1: compute a Schur decomposition A = UTUH (with the QR algorithm)
+
+2: if T is diagonal then
+▷A is normal
+
+3:
+return U diag(f(t11), . . . , f(tmm)) UH
+
+4: end if
+
+5: find ˜U ∈Cn×n unitary such that
+
+˜UHA ˜U =
+
+
+
+
+
+T11
+. . .
+T1m
+...
+...
+Tmm
+
+
+
+
+
+fulfills (1) and (2) in Sect. 5.2.3
+
+6: evaluate the atomic blocks Fii = f(Tii) (using truncated a Taylor series)
+
+7: determine Fij for 1 ≤i < j ≤m with Algorithm 2 (using for example the Bartels-
+Stewart algorithm to solve Sylvester equations)
+
+8: return ˜UF ˜UH
+
+Remark 5.5.
+(1) MATLAB’s funm is an implementation of Algorithm 3.
+
+(2) Algorithm 3 requires derivatives of f for computing f(Tii), although they may not
+be necessary to define f(A), e.g., for simple eigenvalues.
+
+(3) A common choice for the blocking parameter is δ = 0.1 (heuristic).
+
+(4) The cost of Algorithm 3 is “roughly between 28n3 and n4
+
+3 ” [12, p. 228]. The worst
+case applies when the blocks Tii are of size O(n). Note that the cost for computing
+the Schur decomposition is already approximately 25n3. Hence, almost all effort
+to perform the algorithm goes into this initial step.
+
+(5) The QR algorithm tends to order the diagonal by the modulus, which is good for
+the blocking procedure.
+
+(6) For a sum of functions
+
+f(z) =
+
+k
+�
+
+i=0
+fi(z),
+
+the Schur form only needs to be computed once. Similar, for a composition f = g◦h
+the matrix h(T) is a Schur form of h(A).
+
+71
+
+
+(7) In practice, Algorithm 3 behaves mostly forward stable, i.e.,
+
+∥f(A + ∆A) −f(A)∥
+
+∥f(A)∥
+∈O(κrel
+f (A)up(n)),
+
+where u is the unit roundoff and p(n) a low degree polynomial that depends on the
+considered matrix norm. In case of instabilities, one should increase the blocking
+parameter δ.
+
+(8) Unfortunately, the Schur-Parlett algorithm does not easily extend to real arithmetic,
+even though there exists a real Schur decomposition A = URUT with the real Schur
+form
+
+R =
+
+
+
+
+
+R11
+· · ·
+R1k
+...
+...
+Rkk
+
+
+
+∈Rn×n,
+
+where
+
+Rii = [λ] ∈R1×1
+or
+Rii =
+�a
+b
+−b
+a
+
+�
+∈R2×2
+
+for i = 1, . . . , n. The eigenvalues of Rii are λ or a ± bi. The problem in the latter
+case is that complex-conjugate eigenvalues may not belong to the same eigenvalue
+cluster with respect to the blocking parameter δ. Hence, we cannot find real atomic
+blocks.
+
+5.3
+Newton-like Methods for Computing sign(A) and A
+1
+2
+
+This section is devoted to present iterative methods to compute sign(A) and A
+1
+2 based
+on Newton’s method. Note that there exist several other competitive approaches for the
+computation of sign(A) and A
+1
+2 .
+Recall that Newton’s method is an iterative method to compute a zero of a (Fr´echet)
+differentiable function f. Given a “good” initial guess x0, the method converges (at
+least) quadratically.
+
+Newton’s method (scalar version) Given a differentiable function f : Ω→C and
+an iterate zk ∈Ω, we have
+
+f(z) = f(zk) + f′(zk)(z −zk) + o(|z −zk|).
+(5.16)
+
+Hence, we can approximate f around zk by the affine linear function
+
+z �→f(zk) + f′(zk)(z −zk).
+(5.17)
+
+If f′(zk) ̸= 0, then the next iterate zk+1 is the zero of the above affine linear
+function. This leads to the scalar Newton iteration
+
+zk+1 = zk −f(zk)
+
+f′(zk),
+k ≥0.
+(5.18)
+
+72
+
+
+Newton’s method (matrix-valued version) Given a Fr´echet differentiable function
+f : U →Cn×n and the iterate Xk ∈U, we have
+
+f(X) = f(Xk) + Lf(Xk, X −Xk) + o (∥X −Xk∥) .
+(5.19)
+
+Similar, to the scalar case, the next iterate Xk+1 has to fulfill
+
+0 = f(Xk) + Lf(Xk, Xk+1 −Xk).
+(5.20)
+
+If Lf(Xk) is bijective, then (5.20) is equivalent to
+
+0 = L−1
+f (Xk, f(Xk)) + Xk+1 −Xk,
+(5.21)
+
+where L−1
+f (Xk) denotes the inverse of the linear map Lf(Xk). Now we obtain the
+matrix-valued Newton iteration
+
+Xk+1 = Xk −L−1
+f
+�
+Xk, f(Xk)
+�
+,
+k ≥0.
+(5.22)
+
+5.3.1
+Newton Sign Iteration
+
+Let A ∈Cn×n with Λ(A) ⊂C \ iR. The key idea of the Newton sign iteration is rather
+simple. We apply Newton’s method to the function
+
+f(X) = X2 −In.
+(5.23)
+
+Recall that sign(A)2 = In (Theorem 3.24 (1)), i.e., sign(A) is a zero of f, although it is
+not the only one. Using (5.20) under the assumption that the iterates commute, i.e.,
+XkXk+1 = Xk+1Xk, yields
+
+0 = f(Xk) + Lf(Xk, Xk+1 −Xk)
+
+= X2
+k −In + Xk(Xk+1 −Xk) + (Xk+1 −Xk)Xk
+= X2
+k −In + 2Xk(Xk+1 −Xk) = −X2
+k −In + 2XkXk+1
+
+⇔
+Xk+1 = 1
+
+2X−1
+k (X2
+k + In) = 1
+
+2(Xk + X−1
+k ),
+
+where we used that Xk is nonsingular. Hence, for A ∈Cn×n with Λ(A) ⊂C \ iR, we
+define the Newton sign iteration by
+
+
+
+
+
+X0 = A,
+
+Xk+1 = 1
+
+2
+�
+Xk + X−1
+k
+�
+,
+k ≥0.
+(5.24)
+
+Remark 5.6. For any λ ∈C in the open right/left half-plane, the value 1
+
+2(λ + λ−1) is
+also in the right/left half-plane, respectively. Thus, (5.24) is indeed well-defined since for
+every eigenvalue λ of Xk the corresponding eigenvalue on Xk+1 is given by 1
+
+2(λ + λ−1).
+In particular, we have sign(A) = sign(Xk) for all k ≥0.
+
+Next, we study the convergence of the Newton-sign iteration.
+
+73
+
+
+Theorem 5.7. Let A ∈Cn×n with Λ(A) ⊆C \ iR. Then the sequence (Xk)k∈N0 defined
+in (5.24) converges to S := sign(A) with
+
+∥Xk+1 −S∥≤1
+
+2∥X−1
+k ∥∥Xk −S∥2
+(5.25)
+
+for any consistent norm ∥· ∥.
+
+Proof. Since the matrices Xk are rational functions in A for any k ≥0, they commute
+mutually. Moreover, they commute with S = sign(A) (see Theorem 3.5). Hence, we
+receive
+
+Xk+1 ± S = 1
+
+2(Xk + X−1
+k
+± 2S) = 1
+
+2X−1
+k (X2
+k + In ± 2XkS)
+
+= 1
+
+2X−1
+k (X2
+k ± XkS ± SXk + S2) = 1
+
+2X−1
+k (Xk ± S)2,
+(5.26)
+
+and in particular,
+
+∥Xk+1 −S∥≤1
+
+2∥X−1
+k ∥∥Xk −S∥2,
+
+which establishes the inequality.
+It remains to show that (Xk)k∈N0 actually converges. We define
+
+Gk := (Xk −S)(Xk + S)−1.
+
+Then
+Xk = (In −Gk)−1(In + Gk)S,
+(5.27)
+
+and
+
+Gk+1 =(Xk+1 −S)(Xk+1 + S)−1 (5.26)
+=
+1
+2X−1
+k (Xk −S)2�1
+
+2X−1
+k (Xk + S)2�−1
+
+=
+�
+(Xk −S)(Xk + S)−1�2 = G2
+k.
+
+Thus, we receive Gk+1 = G2
+k = . . . = G2k+1
+0
+. Furthermore, from
+
+Λ(G0) = Λ
+�
+(A −S)(A + S)−1�
+=
+�λ −sign(λ)
+
+λ + sign(λ)
+
+���λ ∈Λ(A)
+�
+
+we conclude that ρ(G0) < 1, i.e., lim
+k→∞Gk = lim
+k→∞G2k
+0 = 0. Hence,
+
+lim
+k→∞Xk
+(5.27)
+=
+lim
+k→∞(In −Gk
+����
+→0
+)−1(In + Gk
+����
+→0
+)S = S.
+
+Remark 5.8.
+(1) In the above proof, we saw that the sequence (Xk)k∈N0 converges
+slowly if the sequence (Gk)k∈N0 converges slowly. This is the case if A has very
+small or very large eigenvalues since in both cases
+
+ρ(G0) = max
+λ∈Λ(A)
+
+����
+λ −sign(λ)
+λ + sign(λ)
+
+����≈1.
+(5.28)
+
+74
+
+
+(2) In (5.24), we have to invert Xk in every iteration. Usually, we try to avoid this in
+practical computations and use inverse-free iterations; see, e.g., the Newton-Schulz
+sign iteration below.
+
+(3) The Newton sign iteration is locally quadratically convergent. However, depending
+on A, the initial convergence might be very slow. One way to overcome this problem
+are scaled iterations.
+
+5.3.2
+Adaptions of the Newton Sign Iteration
+
+Newton-Schulz sign iteration
+The key idea is to replace X−1
+k
+with one step of
+Newton’s method for an appropriate function f. For B ∈Cn×n nonsingular, we define
+
+f(Y ) = Y −1 −B.
+(5.29)
+
+Then f(Y ) = 0 is equivalent to Y = B−1, and we have Lf(Y, Z) = −Y −1ZY −1; see
+Example 4.6 (3). Furthermore, we have
+
+L−1
+f (Y, Z) = Lf−1(f(Y ), Z) = −(f(Y ) + B)−1Z(f(Y ) + B)−1
+
+= −(Y −1 −B + B)−1Z(Y −1 −B + B)−1 = −Y ZY,
+
+where we used f−1(Y ) = (Y + B)−1, Lf−1(Y, Z) = −(Y + B)−1Z(Y + B)−1, and
+Theorem 4.5 (3). Thus, the matrix-valued Newton iteration for f is
+
+Yk+1 = Yk −L−1
+f (Yk, f(Yk)) = Yk + Ykf(Yk)Yk = Yk + Yk(Y −1
+k
+−B)Yk
+
+= 2Yk −YkBYk = Yk(2In −BYk).
+
+Hence, one step of Newton’s method for f with initial matrix B yields the approximation
+B(2In −B2) for B−1.
+By replacing X−1
+k
+in the Newton sign iteration (5.24) with Xk(2In −X2
+k) we obtain
+the Newton-Schulz sign iteration
+�
+X0 = A,
+Xk+1 = 1
+
+2(Xk + Xk(2In −X2
+k)) = 1
+
+2Xk(3In −X2
+k),
+k ≥0.
+(5.30)
+
+This iteration converges locally quadratic as well, but this requires somewhat stronger
+assumptions on the spectrum of A.
+
+Theorem 5.9. Let A ∈Cn×n with Λ(A) ⊆C\iR and ρ(In−A2) < 1. Then the sequence
+(Xk)k∈N0 defined in (5.30) converges to S := sign(A) with
+
+∥Xk+1 −S∥≤1
+
+2∥Xk + 2S∥∥Xk −S∥2
+(5.31)
+
+for any consistent norm ∥· ∥.
+
+Proof. Exercise (similar to the proof of Theorem 5.7).
+
+75
+
+
+Scaled Newton sign iteration
+Let a ∈C \ iR and consider the scalar Newton sign
+iteration (i.e., for n = 1)
+�
+z0 = a,
+zk+1 = 1
+
+2(zk + 1
+
+zk ),
+k ≥0.
+
+For |a| ≫1 we have zk+1 ≈1
+
+2zk in the first steps (linear convergence). For |a| ≪1, we
+have |z1| ≈| 1
+
+2a| = | 1
+
+2z0 | ≫1 and again zk+1 ≈1
+
+2zk, in the next couple of steps.
+To avoid this, consider a scaled Newton sign iteration
+�
+X0 = A,
+Xk+1 = 1
+
+2(µkXk + 1
+
+µk X−1
+k ),
+k ≥0.
+(5.32)
+
+Typical choices for µk are
+
+• determinantal scaling: µk = | det(Xk)|−1
+
+n ,
+
+• spectral scaling: µk =
+
+�
+
+ρ(X−1
+k )
+ρ(Xk) ,
+
+• norm scaling: µk =
+
+�
+
+∥X−1
+k ∥
+∥Xk∥.
+
+Example 5.10. We illustrate the effect of a scaling by considering the following random
+matrices.
+
+(1) A1 ∈C200×200 normal with Λ(A1) uniformly distributed (Re(λ), Im(λ) ∈[0, 1])
+
+(2) A2 ∈C200×200 normal with Λ(A2) uniformly distributed (Re(λ), Im(λ) ∈[0, 30])
+
+(3) A3 ∈C200×200 normal with Λ(A3) normally distributed (µ = 0, σ =
+√
+
+2)
+
+(4) A4 ∈C200×200 normal with Λ(A4) normally distributed (µ = 0, σ = 20)
+
+(5) A5 ∈C200×200 normal with Λ(A5) normally distributed (µ = 5, σ =
+√
+
+2)
+
+(6) A6 ∈C200×200normal with Λ(A6) normally distributed (µ = 20, σ =
+√
+
+2)
+
+The relative residuals
+∥X2
+k −In∥F
+∥A2 −In∥F
+of the scaled Newton sign iterations are displayed in Figure 11. First, we observe that
+the required number of iterations is fairly small compared to the matrix size (n = 200).
+Depending on the matrix, different scaling techniques are better than others, e.g., in
+the case of a normal matrix (diagonalizable with perfectly conditioned eigenvectors),
+determinantal scaling seems to be most beneficial. Moreover, the larger the eigenvalues
+the larger is the effect of the scaling.
+
+76
+
+
+Figure 11: Relative residuals for the Newton sign iteration applied to the matrices
+A1, . . . , A6 in Example 5.10.
+
+5.3.3
+Newton Square Root Iteration
+
+Let A ∈Cn×n with Λ(A) ⊆C \ R≤0. Similar, to the Newton sign iteration, we use
+Newton’s method for the map
+f(X) = X2 −A.
+(5.33)
+
+Then A
+1
+2 is a zero of f. Moreover, we have Lf(X, Y ) = XY + Y X; Example 4.6 (2).
+Again, we assume that all the iterates commute with each other.
+(Note that this
+assumption lead to numerical issues discussed below.) Then (5.20) becomes
+
+0 = f(Xk) + Lf(Xk, Xk+1 −Xk)
+
+= X2
+k −A + Xk(Xk+1 −Xk) + (Xk+1 −Xk)Xk
+= −X2
+k −A + 2XkXk+1
+
+⇔
+Xk+1 = 1
+
+2X−1
+k (X2
+k + A) = 1
+
+2(Xk + X−1
+k A),
+
+and we define the Newton square root iteration by
+�
+X0 = A,
+Xk+1 = 1
+
+2(Xk + X−1
+k A),
+k ≥0.
+(5.34)
+
+The iteration (5.34) is equivalent to the Newton sign iteration applied to A
+1
+2 , which
+leads to a simple convergence proof.
+
+77
+
+
+Theorem 5.11. Let A ∈Cn×n with Λ(A) ⊆C \ R≤0. Then the sequence (Xk)k∈N0
+defined in (5.34) converges to A
+1
+2 . In particular,
+
+∥Xk+1 −A
+1
+2 ∥≤1
+
+2∥X−1
+k ∥∥Xk −A
+1
+2 ∥2
+(5.35)
+
+for any consistent norm ∥· ∥.
+
+Proof. Since all eigenvalues of A
+1
+2 lie in the right half-plane, we have sign(A
+1
+2 ) = In.
+Define the iteration
+�
+S0 = A
+1
+2 ,
+Sk+1 = 1
+
+2(Sk + S−1
+k ),
+k ≥0,
+(5.36)
+
+which is the Newton sign iteration applied to A
+1
+2 . By Theorem 5.7, we have
+
+lim
+k→∞Sk = sign(A
+1
+2 ) = In.
+
+Moreover, X0 = A = A
+1
+2 S0, and inductively
+
+Xk+1 = 1
+
+2(Xk + X−1
+k A) = 1
+
+2(A
+1
+2 Sk + S−1
+k A−1
+
+2 A)
+
+= 1
+
+2(A
+1
+2 Sk + S−1
+k A
+1
+2 ) = 1
+
+2A
+1
+2 (Sk + S−1
+k ) = A
+1
+2 Sk+1.
+
+Note that we have used that A
+1
+2 and S−1
+k
+commute, since Sk is a function in A; see
+Theorem 3.5 (1). We obtain
+
+lim
+k→∞Xk = lim
+k→∞A
+1
+2 Sk = A
+1
+2 lim
+k→∞Sk = A
+1
+2 .
+
+Moreover,
+
+Xk+1 −A
+1
+2 = 1
+
+2(Xk + X−1
+k A) −A
+1
+2 = 1
+
+2X−1
+k (X2
+k + A −2XkA
+1
+2 ) = 1
+
+2X−1
+k (Xk −A
+1
+2 )2,
+
+where we used that A
+1
+2 and Xk commute since both are functions in A. Therefore,
+
+��Xk+1 −A
+1
+2 ��= ∥1
+
+2X−1
+k
+�
+Xk −A
+1
+2 �2∥≤1
+
+2∥X−1
+k ∥
+��Xk −A
+1
+2 ��2.
+
+Similar to the Newton sign iteration, there exist many adaptions, e.g., scaled Newton
+square root iterations
+�
+X0 = A,
+Xk+1 = 1
+
+2(µkXk + 1
+
+µk X−1
+k A),
+k ≥0.
+(5.37)
+
+A common choice for the scaling parameter is µk =
+
+�����
+det(Xk)
+
+det(A
+1
+2 )
+
+�����
+
+1
+n
+.
+
+78
+
+
+Figure 12: Relative residuals for the Newton square root iteration applied to the matrices
+A1, . . . , A4 in Example 5.12 with tolerances 10−16 (left), 10−15 (mid), and 10−14 (right).
+
+5.3.4
+(In-)Stability of the Newton Square Root Iteration
+
+If we implement this method numerically in finite precision arithmetic, we observe
+that even for well-conditioned Hermitian matrices A ∈Cn×n, the Newton square root
+iteration oftentimes does not converge. This was already stated by Laasonen in 1958
+[18, p. 113]:
+
+“... algorithm (1), if carried out indefinitely, is not stable whenever the ratio
+of the largest to the smallest eigenvalue of A exceeds the value 9.”
+
+We investigate why this occurs, and in particular, how Newton’s method fails because
+of finite precision. Let us start with an example.
+
+Example 5.12. We illustrate the above observation of Laasonen with a numerical
+example. We consider the matrices
+
+(1) A1 ∈C201×201 Hermitian with equispaced eigenvalues in [1, 4],
+
+(2) A2 ∈C201×201 Hermitian with equispaced eigenvalues in [1, 16],
+
+(3) A3 ∈C201×201 Hermitian with equispaced eigenvalues in [1, 64],
+
+(4) A4 ∈C201×201 Hermitian with equispaced eigenvalues in [1, 256],
+
+and apply the Newton square root iteration (5.34). The method is stopped in step k if
+the relative residual fulfills
+∥X2
+k −Aj∥F
+∥A2
+j −Aj∥F
+≤εi
+
+with prescribed tolerances ε1 = 10−16, ε2 = 10−15, and ε3 = 10−14, or if kmax = 25 steps
+were performed. We observe that the method converges quickly within a few iterations.
+However, depending on the tolerance, the residual again starts to increase at some point.
+This happens if the condition number κ(A) = λmax
+
+λmin is to large, of the desired tolerance
+is to small.
+
+Note, that above observations are particularly surprising, since Newton’s method
+
+is locally converging, i.e., if Xk is very close to A
+
+1
+2
+j , the convergence is guaranteed by
+theory. However, this holds not in finite precision as we will elaborate in this section.
+
+79
+
+
+Dynamical systems
+The field of dynamical systems studies iterations of the form
+
+Xk+1 = g(Xk),
+k ≥0,
+(5.38)
+
+with some initial point X0. We then have
+
+Xk = g(Xk−1) = . . . = gk(X0)
+for all k ≥0.
+
+Definition 5.13. Let (X, ∥· ∥) be a finite-dimensional Banach space, U ⊆X, and
+g : U →X be continuously Fr´echet differentiable. A fixed point X∗∈U of g, i.e., a
+point with g(X∗) = X∗, is called attracting, if
+
+ρ(Lg(X∗)) < 1.
+
+Moreover, for an attracting fixed point X∗, we define the basin of attraction as
+
+Ag(X∗) = {X ∈U | lim
+k→∞gk(X) = X∗}.
+(5.39)
+
+Since g is continuously differentiable, the basin of attraction of an attracting fixed
+point X∗always contains a neighborhood of X∗.
+Newton’s method applied to a continuously differentiable function f : U →Cn×n
+
+can also be written in the form of (5.38) using the Newton map
+
+Nf(X) = X −L−1
+f (X, f(X)).
+(5.40)
+
+We then have Xk+1 = Nf(Xk) = . . . = Nk+1
+f
+(X0). Moreover, it can be shown that
+
+f(X∗) = 0
+⇔
+X∗is an attracting fixed point of Nf.
+
+Since Newton’s method is locally convergent, we have
+
+lim
+k→∞Xk = lim
+k→∞Nk
+f (X0) = X∗,
+
+whenever X0 is sufficient close to X∗.
+
+Example 5.14. Consider the function f(z) = z2 −1, which has the zeros ±1. Then
+
+Nf(z) = z −f(z)
+
+f′(z) = z −z2 −1
+
+2z
+= z −1
+
+2z + 1
+
+2z = 1
+
+2
+
+�
+z + 1
+
+z
+
+�
+
+and this map has the attracting fixed points ±1 with basins of attraction
+
+ANf (1) = {z ∈C | Re(z) > 0} ,
+
+ANf (−1) = {z ∈C | Re(z) < 0} .
+
+We call the union of the basins of attraction the Fatou set. Moreover, we observe a cyclic
+behavior for z ∈iR (Julia set). Together, the global behavior of Newton’s method for f
+is fully described.
+In contrast, for a slightly more complicated function, e.g., f(z) = z3 −1, the global
+behavior is much more chaotic and not well understood. In particular, the Julia set has
+a fractal character.
+
+80
+
+
+Figure 13: Zeros of f (black dots) and the dynamics of Newton’s method for f(z) = z2−1
+(top left), f(z) = z3 −1 (top right), f(z) = z5 −z, and f(z) = z6 −z3 + 2 (bottom
+right).
+
+We illustrate the dynamics for four polynomials in Figure 13, where the domain is
+colored according to which zero of f the Newton method converges with the respective
+point as initial guess z0. The black dots indicate the zeros of f. The darker the color, the
+more iterations were required. Black regions indicate initial points for which Newton’s
+method does not converge (numerically) within prescribed number of iterations. We
+stop the computation after a maximum of 20 steps or if the residual |f(zk)| is smaller
+than 10−14. Note, that any neighborhood around a zero is colored the same, which, once
+again, illustrates the local convergence of Newton’s method.
+
+81
+
+
+Instability of the Newton square root iteration
+
+Definition 5.15. Let (X, ∥· ∥) be a finite-dimensional Banach space, U ⊆X, and
+g : U →X be continuously Fr´echet differentiable. An iteration
+
+Xk+1 = g(Xk),
+k ≥0,
+
+with some X0 ∈U is called stable in a neighborhood of a fixed point X∗of g, if there
+exists a constant c > 0 with
+��Lk
+g(X∗)
+��≤c
+(5.41)
+
+for all k ≥1.
+
+The inequality (5.41) is fulfilled, if ρ(Lg(X∗)) < 1, i.e., if X∗is an attracting fixed
+point of g.
+In particular, Newton’s method is stable since it is locally convergent.
+However, the Newton square root iteration (5.34) is not stable in practice as we observed
+in Example 5.12. Next, we will investigate how this is possible.
+The iteration map of the matrix square root iteration is given by
+
+g : GLn(C) →Cn×n,
+X �→1
+
+2(X + X−1A).
+
+Its Fr´echet derivative is given by
+
+Lg(X, Y ) = 1
+
+2(Y −X−1Y X−1A).
+
+In particular,
+
+Lg(A
+1
+2 , X) = 1
+
+2(X −A−1
+
+2 XA−1
+
+2 A) = 1
+
+2(X −A−1
+
+2 XA
+1
+2 ).
+
+Using Lemma 4.13 (2), we receive that the Kronecker form of Lg(A
+1
+2 )
+
+Kg(A
+1
+2 ) = 1
+
+2
+�
+In2 −
+�
+A
+1
+2 �T ⊗A−1
+
+2 �
+,
+
+which has the spectrum
+
+Λ(Kg(A
+1
+2 )) =
+
+�
+1
+2
+
+�
+1 −
+
+√
+
+λ
+√µ
+
+�
+| λ, µ ∈Λ(A)
+
+�
+
+by the Theorem of Stephanos (Theorem 4.14). If A is HPD, then κ2(A) = λmax(A)
+
+λmin(A) and
+
+ρ(Kg(A
+1
+2 )) = 1
+
+2
+�
+κ2(A
+1
+2 ) −1
+�
+= 1
+
+2
+��
+
+κ2(A) −1
+�
+
+Thus,
+
+ρ(Kg(A
+1
+2 )) = ρ(Lg(A
+1
+2 )) < 1
+⇔
+1
+2
+��
+
+κ2(A) −1
+�
+< 1
+⇔
+κ2(A) < 9,
+
+which explains the previously mentioned observation by Laasonen [18].
+
+82
+
+
+The crucial issue is that the iteration map g, although it is derived from Newton’s
+method, does not coincide with the Newton map Nf. More precisely, it only coincides
+with the Newton map Nf on the centralizer of A
+
+CA = {B ∈Cn×n | AB = BA}.
+(5.42)
+
+Let us illustrate our findings by considering the error propagation. Suppose that A
+is diagonalizable, i.e., A = ZDZ−1 with D = diag(λ1, . . . , λn). Let
+
+X∗:= A
+1
+2 = ZD
+1
+2 Z−1,
+
+and consider the rank-1 perturbation
+
+E0 := εZejeT
+i Z−1
+
+for some ε ̸= 0 and distinct i, j ∈{1, . . . , n}. Using the Sherman-Morrison-Woodburry
+formula, we find
+(X∗+ E0)−1 = X−1
+∗
+−X−1
+∗E0X−1
+∗,
+(5.43)
+
+and receive
+
+E1 = g(X∗+ E0) −X∗= 1
+
+2(X∗+ E0 + (X∗+ E0)−1A) −X∗
+
+= 1
+
+2(X∗+ E0 + (X−1
+∗
+−X−1
+∗E0X−1
+∗)A) −X∗
+
+= 1
+
+2(A
+1
+2 + E0 + A
+1
+2 −A−1
+
+2 E0A
+1
+2 ) −A
+1
+2 = 1
+
+2(E0 −A−1
+
+2 E0A
+1
+2 )
+
+= 1
+
+2(E0 −εA−1
+
+2 ZejeT
+i Z−1A
+1
+2 ) = 1
+
+2(E0 −εZD−1
+
+2 ejeT
+i D
+1
+2 Z−1)
+
+= 1
+
+2(E0 −λ
+
+1
+2
+i λ
+−1
+
+2
+j
+εZejeT
+i Z−1) = 1
+
+2
+
+�
+1 −
+√λi
+�
+
+λj
+
+�
+E0.
+
+Inductively,
+
+Ek := g(X∗+ Ek−1) −g(X0) =
+
+�
+1
+2
+
+�
+1 −
+√λi
+�
+
+λj
+
+��k
+E0,
+k ≥0.
+
+Hence, the Newton square root iteration may diverge, even though we start arbitrarily
+close to A
+1
+2 , if
+
+max
+1≤i,j≤n
+
+�����
+1
+2
+
+�
+1 −
+√λi
+�
+
+λj
+
+������≥1.
+(5.44)
+
+Stabilizing the Newton square root iteration
+As the above explained phenomenon
+is rather unfortunate, we want to improve/stabilize the Newton square root iteration.
+
+83
+
+
+One idea is to use a coupled iteration, e.g., the DB iteration which is named after
+Denman and Beavers [9]:
+�
+Xk+1 = 1
+
+2(Xk + Y −1
+k
+), k ≥0,
+X0 = A,
+Yk+1 = 1
+
+2(Yk + X−1
+k ), k ≥0,
+Y0 = In.
+(5.45)
+
+Indeed, the DB iteration converges for any A ∈Cn×n with Λ(A) ⊆C \ R≤0 and the
+iterates fulfill
+lim
+k→∞Xk = A
+1
+2
+and
+lim
+k→∞Yk = A−1
+
+2 ,
+
+which can be proven similar to Theorem 5.11.
+The DB iteration can also be written as
+�Xk+1
+Yk+1
+
+�
+= g
+��Xk
+Yk
+
+��
+, k ≥0,
+�X0
+Y0
+
+�
+=
+�A
+In
+
+�
+,
+(5.46)
+
+with the map
+
+g : GLn(C) × GLn(C) →Cn×n × Cn×n,
+�X
+Y
+
+�
+�→
+�1
+
+2(X + Y −1)
+1
+2(Y + X−1)
+
+�
+.
+(5.47)
+
+Note that for any B ∈GLn(C), the point
+�B
+B−1
+
+�
+is a fixed point of g. In particular,
+�
+A
+1
+2
+
+A−1
+
+2
+
+�
+
+is a fixed point of g. Next, we show that
+
+�
+A
+1
+2
+
+A−1
+
+2
+
+�
+
+is a stable fixed point of g. We
+
+have
+
+Lg
+
+��
+A
+1
+2
+
+A−1
+
+2
+
+�
+
+,
+�X
+Y
+
+��
+
+= 1
+
+2
+
+�
+X −A
+1
+2 Y A
+1
+2
+
+Y −A−1
+
+2 XA−1
+
+2
+
+�
+
+.
+(5.48)
+
+Moreover,
+
+L2
+g
+
+��
+A
+1
+2
+
+A−1
+
+2
+
+�
+
+,
+�X
+Y
+
+��
+
+= Lg
+
+��
+A
+1
+2
+
+A−1
+
+2
+
+�
+
+, Lg
+
+��
+A
+1
+2
+
+A−1
+
+2
+
+�
+
+,
+�X
+Y
+
+���
+
+= Lg
+
+��
+A
+1
+2
+
+A−1
+
+2
+
+�
+
+, 1
+
+2
+
+�
+X −A
+1
+2 Y A
+1
+2
+
+Y −A−1
+
+2 XA−1
+
+2
+
+��
+
+= 1
+
+4
+
+�
+X −A
+1
+2 Y A
+1
+2 −A
+1
+2 (Y −A−1
+
+2 XA−1
+
+2 )A
+1
+2
+
+Y −A−1
+
+2 XA−1
+
+2 −A−1
+
+2 (X −A
+1
+2 Y A
+1
+2 )A−1
+
+2
+
+�
+
+= 1
+
+2
+
+�
+X −A
+1
+2 Y A
+1
+2
+
+Y −A−1
+
+2 XA−1
+
+2
+
+�
+
+= Lg
+
+��
+A
+1
+2
+
+A−1
+
+2
+
+�
+
+,
+�X
+Y
+
+��
+
+,
+
+84
+
+
+Figure 14: Relative residuals for the Newton square root iteration (solid) and the DB
+iteration (dotted) applied to the matrices A2, A3, and A4 in Example 5.12 with tolerances
+10−16 (left), and 10−15 (right).
+
+i.e., Lg
+
+��
+A
+1
+2
+
+A−1
+
+2
+
+��
+
+is idempotent. Therefore, all powers of Lg
+
+��
+A
+1
+2
+
+A−1
+
+2
+
+��
+
+are bounded,
+
+and thus, g is stable in a neighborhood of
+
+�
+A
+1
+2
+
+A−1
+
+2
+
+�
+
+.
+
+Example 5.16. We compare the Newton square root iteration and the DB iteration for
+the matrices A1, A3, and A4 from Example 5.12. Figure 14 shows the relative residuals
+are. We observe that the DB iteration is stable in finite precision in contrast to the
+Newton square root iteration.
+
+5.4
+Scaling and Squaring Algorithm
+
+Finally, we study exemplarily an approximation approach, where we approximate a given
+function f by a simpler function g and evaluate g(A) instead of f(A). We already faced
+this idea twice when considering the Hermite interpolation definition (Definition 2.9) and
+the Taylor series definition (Definition 2.13) of matrix functions. Recall the downsides
+of these approaches.
+
+• The Hermite interpolation polynomial is hard to compute (e.g., we need to know
+derivatives of f), unstable, and thus, badly suited for numerical computation.
+Moreover, the evaluation is expensive.
+
+• In Theorem 5.3, we saw that the m-th Taylor polynomial fm yields a fairly good
+approximation, if all eigenvalues of A are in a small disk and if m ≈n. Of course,
+this assumption is rather strong.
+
+Another issue of polynomial approximation, that applies to both approaches above, is
+that polynomials have a pole at infinity, i.e., they “explode” for |z| ≫1.
+We overcome all these issues when computing the matrix exponential exp(A) and
+the matrix logarithm log(A), using the following ideas.
+
+85
+
+
+(1) Pad´e approximation: Approximate the function f by a rational function, i.e.,
+we want to find low-degree polynomials p and q with
+
+f(z) ≈p(z)
+
+q(z).
+
+Note that this approximation problem is nonlinear, but can easily be linearized via
+f(z)q(z) ≈p(z) (→Section 5.4.1).
+
+(2) Scaling & Squaring: Find an appropriate matrix �A (all eigenvalues of �A are in
+a small disk), such that computing f( �A) yields also f(A) (→Section 5.4.2).
+
+This idea was already mentioned as “. . . one of the most effective we [algorithms]
+know” by Moler and Van Loan in their seminal article “Nineteen dubious ways to
+compute the exponential of a matrix” [22]; see also its update [23].
+
+5.4.1
+Pad´e Approximation
+
+The idea of Taylor approximation is to find a polynomial p with deg(p) ≤m such that
+f(z) −p(z) ∈O(|z|m+1) for z →0, i.e., f(j)(0) = p(j)(0) holds for j = 0, . . . , m.
+Similarly, for Pad´e approximation we want to find a rational function
+
+rkm(z) = pkm(z)
+
+qkm(z),
+(5.49)
+
+with deg(pkm) ≤k, deg(qkm) ≤m, and q(0) = 1, such that f(z)−rkm(z) ∈O(|z|k+m+1),
+i.e., f(j)(0) = r(j)
+km(0) holds for j = 0, . . . , k+m. In particular, the [k/0]-Pad´e approximant
+coincides with the Taylor polynomial of order k.
+
+Definition 5.17. Let f be analytic in a neighborhood of 0. We call a rational function as
+in equation (5.49) with coprime polynomials pkm and qkm, deg(pkm) ≤k, deg(qkm) ≤m
+and qkm(0) = 1 a [k/m]-Pad´e approximant of f, if
+
+f(z) −rkm(z) ∈O(|z|k+m+1)
+(5.50)
+
+for z →0. If k = m, we call rm := rmm a diagonal Pad´e approximant.
+
+Pad´e approximants have some significant upsides.
+
+(1) Often Pad´e approximants produce the desired accuracy with less computational
+costs than Taylor polynomials. We must compute A2, . . . , Am (and one matrix
+inversion) for the [m/m]-Pad´e approximant instead of A2, . . . , A2m for the Taylor
+polynomial of order 2m, which has the same asymptotic approximation quality.
+
+(2) Just like for the Taylor approximation, for many “important” functions Pad´e
+approximants are known explicitly, e.g., for exp(z) we have
+
+pkm(z) =
+
+k
+�
+
+j=0
+
+(k + m −j)!k!
+(k + m)!(k −j)! · zj
+
+j! ,
+qkm(z) =
+
+m
+�
+
+j=0
+
+(k + m −j)!m!
+(k + m)!(m −j)! · (−z)j
+
+j!
+.
+
+Note that pkm(z) = qmk(−z) which reflects the identity exp(−z) =
+1
+exp(z).
+
+86
+
+
+Figure 15: The function f(z) = e−z and its Taylor polynomials fm (left) and Pad´e
+approximants rkm (right).
+
+Let us consider one example, that demonstrates in particular, how we linearize the
+nonlinear rational approximation problem.
+
+Example 5.18. We want to calculate the [1/1]-Pad´e approximant of
+
+f(z) = exp(−z) =
+
+∞
+�
+
+k=0
+
+(−z)k
+
+k!
+= 1 −z + z2
+
+2 + O(|z|3),
+
+which has the form
+r1(z) = a0 + a1z
+
+1 + b1z ,
+
+if it exists. The linearized approximation problem is
+
+f(z)q(z) −p(z) = (1 −z + z2
+
+2 + O(|z|3))(1 + b1z) −(a0 + a1z)
+
+= 1 −z + z2
+
+2 + b1z −b1z2 + O(|z|3) −a0 −a1z
+!∈O(|z|3),
+
+where we used q(0) = 1. Comparing coefficients yields the linear system
+
+
+
+
+
+
+
+z0 :
+1 −a0 = 0
+⇒a0 = 1
+z1 :
+−1 + b1 −a1 = 0
+z2 :
+1
+2 −b1 = 0
+⇒b1 = 1
+
+2
+
+Hence, a1 = −1
+
+2, and therefore,
+
+r1(z) = 1 −1
+
+2z
+1 + 1
+
+2z .
+
+Remark 5.19.
+(1) The existence of a [k/m]-Pad´e approximant is not guaranteed,
+e.g., f(z) = z2 has no [1/1]-Pad´e approximant since
+
+z2(1 + b1z) −(a0 + a1z) = z2 + b1z3 −a0 −a1z /∈O(|z|3)
+
+has no solution for a0, a1, b1 ∈C.
+
+87
+
+
+(2) Although Pad´e approximants are preferable in practice, they are not guaranteed
+to approximate better than Taylor polynomials and vice versa.
+
+• For f(z) = z2 + z, we obviously have f2(z) = f(z), but r11(z) =
+z
+1 −z which
+
+follows immediately from
+
+(z + z2)(1 + b1z) −(a0 + a1z) = (1 + b1)z2 + (1 −a1)z −a0 + b1z3 !∈O(|z|3).
+
+• For f(z) =
+z
+1 −z , we have r11(z) = f(z), but f2(z) = z + z2.
+
+Theorem 5.20. Let f be analytic in a neighborhood of 0 and k, m ∈N. If a [k/m]-Pad´e
+approximant of f exists, then it is unique.
+
+Proof. Let rkm(z) = pkm(z)
+
+qkm(z) and �rkm(z) = �pkm(z)
+
+�qkm(z) be two [k/m]-Pad´e approximants of f,
+i.e.,
+
+f(z) −rkm(z) ∈O(|z|k+m+1)
+and
+f(z) −�rkm(z) ∈O(|z|k+m+1).
+
+Therefore,
+
+rkm(z) −˜rkm(z) = pkm(z)
+
+qkm(z) −�pkm(z)
+
+�qkm(z) ∈O(|z|k+m+1)
+
+1=qkm(0)=�qkm(0)
+⇔
+pkm(z)�qkm(z) −�pkm(z)qkm(z)
+
+qkm(z)�qkm(z)
+∈O(|z|k+m+1).
+
+Thus, the first m + k derivatives of the numerator pkm(z)�qkm(z) −�pkm(z)qkm(z) must
+vanish at z = 0. Since the degree of the numerator is at most k + m, we conclude that
+pkm(z)�qkm(z) −�pkm(z)qkm(z) is the zero-polynomial. Hence,
+
+pkm(z)�qkm(z) = �pkm(z)qkm(z),
+
+and therefore rkm(z) = �rkm(z).
+
+Remark 5.21. Pad´e approximants appear also in other methods for computing matrix
+functions, e.g., in the family of Pad´e iterations for computing the matrix sign function.
+Recall from Remark 3.23 that
+
+sign(z) = z(z2)−1
+
+2 = z(1 −(1 −z2))−1
+
+2 = z(1 −ζ)−1
+
+2 ,
+
+where ζ = 1 −z2. Thus, approximating sign(z) reduces to the approximation of the
+function h(ζ) = (1 −ζ)−1
+
+2 . Using the [ℓ/m]-Pad´e approximant for this purpose, yields
+the matrix iteration
+�
+X0 = A,
+Xk+1 = Xkpℓm(In −X2
+k)qℓm(In −X2
+k)−1,
+k ≥0.
+(5.51)
+
+Note that we already faced one instance of the above family, namely the Newton-Schulz
+iterations which results from the [1/0]-Pad´e approximation. For more information, we
+refer to [12, Sect. 5.4].
+
+88
+
+
+5.4.2
+Scaling and Squaring
+
+In this section, we present a method to compute exp(A) by exploiting the identity
+
+exp(A) = exp
+�1
+
+σA
+�σ
+,
+(5.52)
+
+for A ∈Cn×n and σ ̸= 0. It can be easily proven using the matrix function induction
+principle. In particular, we use a special version of (5.52), namely
+
+exp(A) = exp
+�1
+
+2s A
+�2s
+.
+(5.53)
+
+There are two reasons for using the above identity, although this requires additional
+costs for squaring the matrix exp( 1
+
+2s A).
+
+(1) The spectrum of
+1
+2s A is more clustered than the spectrum of A.
+Thus, Pad´e
+approximants of smaller degrees can be used to approximate exp( 1
+
+2s A) accurately.
+
+(2) The scaling of the eigenvalues, in particular the ones with negative real part, avoids
+the “hump effect” when evaluating the exponential at the spectrum.
+
+To illustrate the second upside, let us briefly recall basics of finite precision arithmetic
+that are known from numerical linear algebra.
+
+Finite precision arithmetic
+A (normalized) machine (or floating point) number in
+F(β, t, emin, emax) is of the form
+
+±(0.d1d2 . . . dt) · βe,
+(5.54)
+
+where d1, . . . , dt ∈{0, 1, . . . , β −1}, d1 ̸= 0, and emin ≤e ≤emax. In particular, the
+floats in the intervall [βj, βj+1] are equispaced with distance δ = β1−t+j. Thus, their
+relative distance is
+εM = β1−t,
+(5.55)
+
+which we call the machine precision.
+Since only finitely man real numbers can be
+represented as floats, we introduce the rounding function
+
+fl(x) := arg min
+z∈F
+|x −z|,
+(5.56)
+
+for x ∈R. If x is exactly between two floats, there exist sophisticated tiebreak rules.
+The relative rounding error is bounded by
+
+|x −fl(x)|
+
+|x|
+< 1
+
+2εM =: u,
+(5.57)
+
+which is called unit roundoff. For x, y ∈F, any floating point operation ⃝∗∈{⊕, ⊖, ⊙, ⊘}
+fulfills
+x ⃝∗y = fl(x ∗y) = (x ∗y)(1 + δ),
+(5.58)
+
+where δ ∈R with |δ| ≤u.
+There are three major problems when working with floats. We will illustrate them
+with examples in F := F(10, 3, −∞, ∞).
+
+89
+
+
+(1) Not any real numbers is a float.
+
+Example:
+
+4321 ̸= fl(4321) = 4320 = +0.432 · 104.
+
+(2) Floating point operations are not associative.
+
+Example:
+
+(5.04 + 5.06) + 5.06 = 10.1 + 5.06 = 15.2
+
+5.04 + (5.06 + 5.06) = 5.04 + 10.1 = 15.1
+
+(3) Subtraction of nearby floats brings earlier errors into prominence.
+
+If x, y ∈R have k leading significant digits in common, then fl(fl(x) ⊖fl(y)) only
+has t −k (correct) significant digits. This effect is called cancellation.
+
+Example:
+
+Let x = 101.234 and y = 100 which have two leading digits in common. Then
+fl(x) = 101 = +0.101 · 103 and fl(y) = 100 = 0.100 · 103. We have
+
+• x −y = 1.234,
+
+• fl(fl(x) ⊖fl(y)) = fl(101 ⊖100) = 1.
+
+Indeed, only the first 3 −2 = 1 significant digits are incorrect.
+
+Note, however, that for floats x, y ∈F with 0 ≤y ≤x ≤2y, the subtraction is
+exact by Sterbenz’s lemma ([25, p. 138]), i.e., x ⊖y = x −y. Thus, the issue is not
+the subtraction, but earlier errors that now become crucial.
+
+As an example for cancellation, or finite precision issues in a broader sense, we
+consider the hump effect that occurs when computing of the (scalar) exponential function.
+Similar effects may observed whenever we work with alternating sums.
+
+Example 5.22. For s ∈{0, 1, 2, 3, 4}, we set x = −2s and compute exp(x). We compare
+two methods.
+
+(1) Evaluate exp(x) =
+
+m
+�
+
+k=0
+
+xk
+
+k! where m is chosen such that the relative change of the
+
+partial sum is smaller than the machine precision, i.e.,
+�����
+
+xm+1
+
+m!
+�m
+k=0
+xk
+
+k!
+
+�����≤εM.
+
+(2) Compute exp(−1) with method (1) and then subsequently square the result to
+obtain exp(−2s) = exp(−1)2s.
+
+The results are presented in Table 2. We observe the following.
+
+90
+
+
+s
+0
+1
+2
+3
+4
+
+relative error
+3.0e–16
+4.1e–16
+1.7e–14
+6.6e–12
+5.9e–05
+
+(1)
+max
+1≤k≤m
+|xk
+
+k! |
+exp(x)
+2.7e–00
+1.5e+01
+5.8e+02
+1.2e+06
+7.8e+12
+
+m
+19
+24
+34
+50
+81
+
+relative error
+3.0e–16
+6.1e–16
+1.5e–15
+2.7e–15
+5.5e–15
+
+(2)
+max
+1≤k≤m
+| 1
+
+k!|2s
+
+exp(−1)
+2.7e–00
+2.7e–00
+2.7e–00
+2.7e–00
+2.7e–00
+
+m
+19
+19
+19
+19
+19
+
+Table 2: Computations in Example 5.22
+
+• Method (2) is more accurate than method (1).
+
+• For method (1), the larger s the larger m. Hence, we have a significant increase of
+the computational costs.
+
+• In method (1), we have approximately
+
+rel. err. ≤10−16 · max
+1≤k≤m
+|xk
+
+k! |
+exp(x),
+
+i.e., the absolute value of the largest summand in the exponential series is significant
+for the number of correct digits.
+See also Figure 16, where the “humps” are
+apparent.
+
+The problem with method (1) in the previous example is that the summation of a large
+summand xk
+
+k! leads to a loss of accuracy since the last digits of xk
+
+k! , which become relevant
+later, are affected by earlier roundings. Large summands “absorb” accuracy!
+
+Combining Pad´e approximants and the identity (5.53) yields the Scaling and Squaring
+Algorithm (Algorithm 4). Note that there are no authors who are solely credited for this
+method.
+
+Algorithm 4 Scaling and squaring algorithm
+Input: A ∈Cn×n
+
+Output: F = exp(A)
+
+Find s ∈N with ∥1
+
+2s A∥1 ≲5.4
+Evaluate [13/13]-Pad´e approximant r13,13 of exp(z) and set F = r13,13( 1
+
+2s A)
+for k = 1, . . . , s do
+
+F := F 2
+
+end for
+
+91
+
+
+Figure 16: Hump effect. Summands in the exponential series of e−24 (left) and summands
+in the exponential series of e−2s for s = 0, . . . , 4 (right)
+
+Remark 5.23.
+(1) Obviously, the upper bound of 5.4 for the 1-norm and the degree 13
+for the Pad´e approximation can be changed to different values. The given numbers
+have proven to be useful in practical computation with double precision arithmetic.
+
+(2) The scaling parameter s can also chosen dynamically which leads to a significant
+reduction of the computational costs; see the article of Al-Mohy and Higham [2].
+Since 2024, their algorithm is used in the built-in routine expm in MATLAB and
+replaced the method proposed in Algorithm 4.
+
+5.4.3
+Inverse Scaling and Squaring Algorithm
+
+Similar to matrix exponential, the matrix logarithm can be computed using the identity
+
+log(A) = 2s log(A
+1
+2s ),
+s ∈N,
+(5.59)
+
+which leads to the inverse scaling and squaring algorithm (Algorithm 5). Note, that
+here we have to compute the matrix square root of a matrix subsequently. This can be
+done with the DB iteration for example.
+
+Algorithm 5 Inverse scaling and squaring algorithm
+Input: A ∈Cn×n with Λ(A) ⊆C \ R≤0
+Output: F = log(A)
+
+Set A0 := A and s := 0
+while ∥As −In∥1 ≲0.246 do
+
+s := s + 1
+As := A
+
+1
+2
+s−1
+end while
+Evaluate the [7/7]-Pad´e approximant r7,7 of log(1 + z) and set F = r7,7(As −In)
+F := 2sF
+
+92
+
+
+6
+Computation of f(A)b
+
+In this chapter, we compute f(A)b for a given large and sparse matrix A ∈Cn×n and
+a given vector b ∈Cn, without explicitly computing f(A). Here, sparse means that
+matrix-vector multiplications can be performed more efficiently.
+
+Example 6.1. Note, that the sparsity of A does not imply the sparsity of f(A). Let
+A = Jn(0) and f(z) = exp(z). Then
+
+A =
+
+
+
+
+
+0
+1
+...
+...
+...
+1
+0
+
+
+
+
+and
+f(A) =
+
+
+
+
+
+1
+1
+· · ·
+1
+(n−1)!
+...
+...
+...
+...
+1
+1
+
+
+
+
+.
+
+In A we have O(n) non-zero entries, while in f(A), we have O(n2) non-zero entries.
+
+We consider two approaches for the computation of f(A)b.
+
+(1) Krylov subspace methods: Similar to the related approaches for solving linear
+systems or computing eigenpairs, we reduce the problem of computing f(A)b to a
+smaller subspace, i.e., we evaluate f on a smaller matrix to find an approximation
+for f(A)b.
+
+(2) Quadrature rules: We use numerical integration for the Cauchy integral formula
+for matrix functions
+
+f(A)b =
+1
+2πi
+
+�
+
+Γ
+f(z)(zIn −A)−1b dz.
+
+6.1
+Krylov Subspace Methods
+
+We briefly recall the basics on Krylov subspace methods from the course Numerical
+Linear Algebra; see [19]. A comprehensive treatment can be found in [21].
+Recall that for A ∈Cn×n and b ∈Cn, the k-th Krylov subspace is given by
+
+Kk(A, b) := span{b, Ab, . . . , Ak−1b} = {p(A)b | p ∈C[z], deg(p) ≤k −1}.
+(6.1)
+
+Furthermore, we call d(A, b) := d the grade of b with respect to A, if the vectors
+b, Ab, . . . , Ad−1b are linearly independent and the vectors b, Ab, . . . , Adb are linearly
+dependent.
+In particular, d is the degree of the minimal polynomial MA of A and
+b. The Krylov subspace Kk(A, b) is a natural choice for searching approximations to
+f(A)b since f(A)b = p(A)b ∈Kd(A,b)(A, b) holds for some polynomial p of degree d −1
+since d is the grade of b. Thus, we need an orthonormal basis of Kk(A, b), which can be
+computed using the Arnoldi algorithm. The Arnoldi algorithm is basically the Gram-
+Schmidt method applied to {b, Ab, . . . , Ak−1b} and its matrix formulation is
+
+AVk = Vk+1Hk+1,k = VkHk + hk+1,kvk+1eT
+k ,
+(6.2)
+
+93
+
+
+where Vj = [v1, . . . , vj] ∈Cn×k is isometric, i.e., with orthonormal columns, and Hk+1,k =
+[hij] ∈C(k+1)×k is a matrix of the form
+
+Hk+1,k =
+
+
+
+
+
+∗· · · · · · ∗
+
+∗...
+...
+...
+... ...
+... ∗
+∗
+
+
+
+
+∈C(k+1)×k.
+(6.3)
+
+Since Vk is isometric, we find
+V H
+k AVk = Hk,
+(6.4)
+
+where Hk ∈Ck×k is an unreduced upper Hessenberg matrix, i.e., hj+1,j ̸= 0 for j =
+1, . . . , k, which consists of the first k rows of Hk+1,k.
+
+Algorithm 6 Arnoldi algorithm
+Input: A ∈Cn×n, b ∈Cn
+
+Output: Orthonormal basis {v1, . . . , vd} of Kd(A, b)
+
+v1 =
+b
+∥b∥2
+for j = 1, . . . , k ≤d(A, b) −1 do
+
+˜vk+1 = Avk −
+
+k
+�
+
+j=0
+hjkvj
+with
+hjk = ⟨Avk, vj⟩
+
+vk+1 = ˜vk+1
+
+hk+1,k
+with hk+1,k = ∥˜vk+1∥2
+
+end for
+
+Definition 6.2. Let A ∈Cn×n, b ∈Cn, k ≤d = d(A, b), and let AVk = Vk+1Hk+1,k be
+an Arnoldi decomposition. Moreover, let f be defined on the spectrum of A and on the
+spectrum of Hk. Then we define the k-th Arnoldi approximation for f(A)b by
+
+fk := Vkf(Hk)V H
+k b = ∥b∥2Vkf(Hk)e1,
+(6.5)
+
+where we used Vke1 =
+b
+∥b∥2 .
+
+Note, if n = k = d(A, b), the Arnoldi approximation coincides with f(A)b, because
+in that case Vn is unitary and we find
+
+f(A)b = f(VnHnV H
+n )b = Vnf(Hn)V H
+n b = ∥b∥2Vnf(Hn)e1.
+(6.6)
+
+Theorem 6.3. Let A ∈Cn×n, b ∈Cn and d = d(A, b). Moreover, let f be defined on
+the spectrum of A. Then fd = f(A)b, i.e., the d-th Arnoldi approximation is exact.
+
+94
+
+
+Proof. Since d is the grade of b with respect to A, we have
+
+AVd = VdHd
+
+with Vde1 =
+b
+∥b∥2 . Next, let V ∈Cn×(n−d), such that [Vd, V ] is unitary. Note, that
+because of the orthonormality of the columns in [Vd, V ], we have V HVd = 0. Thus,
+
+[Vd, V ]HA[Vd, V ] =
+�V H
+d AVd
+V H
+d AV
+V HAVd
+V HAV
+
+�
+=
+�V H
+d VdHd
+V H
+d AV
+V HVdHd
+V HAV
+
+�
+=
+�Hd
+∗
+0
+V HAV
+
+�
+,
+
+and therefore,
+
+f(A)b = [Vd, V ]f
+��Hd
+∗
+0
+V HAV
+
+��
+[Vd, V ]Hb = [Vd, V ]
+�f(Hd)
+∗
+0
+f(V HAV )
+
+�
+[Vd, V ]Hb
+
+= [Vd, V ]
+�f(Hd)
+∗
+0
+f(V HAV )
+
+�
+∥b∥2e1 = ∥b∥2[Vd, V ]
+�f(Hd)e1
+0
+
+�
+
+= ∥b∥2Vdf(Hd)e1.
+
+Next, we prove that the k-th Arnoldi approximation is exact for polynomials of degree
+at most k −1.
+
+Theorem 6.4. Let A ∈Cn×n, b ∈Cn and let AVk = Vk+1Hk+1,k be an Arnoldi
+decomposition with Vke1 =
+b
+∥b∥2 . Then
+
+f(A)b = ∥b∥2Vkf(Hk)e1
+(6.7)
+
+for all polynomials f with deg(f) < k.
+
+Proof. First, we prove the result for f(z) = zj, i.e., we prove
+
+Ajb = ∥b∥2VkHj
+ke1
+
+by induction. Let j = 0, then
+
+A0b = b =
+b
+∥b∥2
+∥b∥2 = ∥b∥2Vke1 = ∥b∥2VkH0
+ke1.
+
+Next, using the induction hypothesis, we have
+
+Ajb = A(Aj−1)b = ∥b∥2AVkHj−1
+k
+e1 = ∥b∥2
+�
+VkHk + hk+1,kvk+1eT
+k
+�
+Hj−1
+k
+e1
+
+= ∥b∥2VkHj
+ke1 + ∥b∥2hk+1,kvk+1
+�
+eT
+k Hj−1
+k
+e1
+�
+.
+
+Note, that the last term in parentheses is the entry (k, 1) entry of Hj−1
+k
+. Considering the
+powers of Hessenberg matrices, it can easily be seen that this entry is zero if k ≥j + 1.
+Hence,
+Ajb = ∥b∥2VkHj
+ke1.
+
+Since any polynomial is a linear combination of monomials, the assertion follows for
+polynomials of degree at most k −1.
+
+95
+
+
+To prove the next theorem, we need the following lemma.
+
+Lemma 6.5. Let H ∈Cn×n be an unreduced upper Hessenberg matrix.
+Then H is
+non-derogatory, i.e., the geometric multiplicity of all eigenvalues of H is 1.
+
+Proof. Let λ ∈Λ(H). Removing the first row and last column of the matrix H −λIn
+yields an upper triangular matrix of size (n−1)×(n−1) with non-zero diagonal entries,
+and hence, a matrix with rank n −1. Therefore, rank(H −λIn) ≥n −1. Thus,
+
+1 ≤g(λ, H) = dim (ker (H −λIn)) = n −rank (H −λIn) ≤n −(n −1) = 1.
+
+By the next theorem, the k-th Arnoldi approximation fk is the Hermite interpolation
+polynomial of f on the spectrum of Hk evaluated at A and multiplied with b.
+
+Theorem 6.6. Let A ∈Cn×n, b ∈Cn and let AVk = Vk+1Hk+1,k be an Arnoldi
+decomposition with Vke1 =
+b
+∥b∥2 . Moreover, let f be defined on the spectrum of A and on
+the spectrum of Hk. Then there exists a unique polynomial p with deg(p) ≤k −1 that
+interpolates f on the spectrum of Hk, i.e., with
+
+p(j)(λ) = f(j)(λ),
+j = 0, . . . , a(λ, Hk) −1
+
+for all λ ∈Λ(Hk). Furthermore, the k-th Arnoldi approximation is given by fk = p(A)b.
+
+Proof. Since Hk is an unreduced upper Hessenberg matrix, it is non-derogatory by
+Lemma 6.5. Thus, there exists no eigenvalue with more than one Jordan block and
+by Lemma 2.7, p is unique. Moreover,
+
+fk = ∥b∥2Vkf(Hk)e1 = ∥b∥2Vkp(Hk)e1
+
+Thm.
+
+6.4
+=
+p(A)b.
+
+The next theorem yields an upper bound for the error of the Arnoldi approximation.
+Here we denote the set of polynomials with a degree less than or equal to m by
+
+Pm := {p ∈C[z] | deg(p) ≤m}.
+(6.8)
+
+Theorem 6.7 ([3, Prop. 3.1]). Let A ∈Cn×n, b ∈Cn and Ω⊆C be convex and compact
+with Λ(A) ⊆Ω. Moreover, let f be continuous on Ωand analytic on int(Ω). Then
+
+∥f(A)b −fk∥2 ≤23∥b∥2 min
+p∈Pk−1 max
+z∈Ω|f(z) −p(z)|.
+(6.9)
+
+Remark 6.8.
+(1) The bound in (6.9) reminds us of to the similar bounds for the
+relative error in the A-norm in the CG method, or the bound for the relative
+2-norm residual in the GMRES method.
+
+(2) We receive a good approximation to f(A)b if f can be approximated well by a low-
+degree polynomial on Ω. This is in particular the case if Λ(A) is a single cluster,
+i.e., Ωcan be chosen to be small.
+
+96
+
+
+(3) Considering a particular polynomial in (6.9) yields special cases of the bound.
+
+Example: Suppose that Ω= {z ∈C | |z| ≤ρ} and consider the Taylor polynomial
+
+p(z) =
+
+k−1
+�
+
+j=0
+
+f(j)(0)
+
+j!
+zj.
+
+of order k −1. Then
+
+max
+z∈Ω|f(z) −p(z)| ≲ρk
+
+k!
+
+k→∞
+−−−→0,
+
+which shows lim
+k→∞fk = f(A)b in that case.
+
+Remark 6.9. The Arnoldi approach for computing f(A)b has the classical “GMRES
+issues”.
+
+(1) Computational costs and required storage increase with every iteration.
+
+A solution to this is to use restarted Arnoldi, i.e., to restart the method after
+a prescribed number of iterations with a new Krylov subspace and a new initial
+vector that somehow preserves the previously computed information.
+
+(2) We have to solve the “reduced” problem f(Hk)e1.
+
+For this, we can use any method for computing f(A), e.g., the ones from Chapter 5.
+
+6.2
+Quadrature Methods
+
+Recall that in numerical integration, we want to approximate an integral
+�b
+
+a
+f(x) dx
+(6.10)
+
+with only finitely many evaluations of f. For quadrature nodes a ≤t0 < · · · < tm ≤b,
+and weights ω0, . . . , ωm ∈C, we use the approximation
+
+�b
+
+a
+f(x) dx ≈
+
+n
+�
+
+j=0
+ωjf(tj),
+(6.11)
+
+e.g., by the trapezoidal rule
+
+�b
+
+a
+f(x) dx ≈b −a
+
+m
+
+�f(a)
+
+2
++
+
+m−1
+�
+
+j=1
+f(a + j · b−a
+
+m ) + f(b)
+
+2
+
+�
+=: Tm(f),
+(6.12)
+
+where
+
+tj = a + j · b −a
+
+m
+and
+ωj =
+
+�
+1
+2,
+j = 0, or j = m,
+1,
+1 ≤j ≤m −1.
+
+97
+
+
+The approximation quality can be estimated by
+����
+
+�b
+
+a
+f(x) dx −Tm(f)
+����≤b −a
+
+m2
+max
+x∈]a,b[ |f′′(x)|.
+(6.13)
+
+We use this idea for the Cauchy integral formula for matrix functions
+
+f(A)b =
+1
+2πi
+
+�
+
+Γ
+f(z)(zIn −A)−1b dz.
+(6.14)
+
+Applying a quadrature rule to this integral reduces to solving the shifted linear system
+
+(zjIn −A)x = b
+(6.15)
+
+for several nodes zj ∈Γ. Recall that the above linear systems are uniquely solvable since
+Λ(A) ⊆int(Γ).
+For simplicity, we consider a circle with center c ∈C and radius ρ > 0 with
+parametrization
+Γ : [0, 2π[→C,
+t �→c + ρeit.
+
+as the Jordan curve in (6.14). Then Γ′(t) = iρeit = i(Γ(t) −c), and we receive
+
+f(A)b =
+1
+2πi
+
+�
+
+Γ
+f(z)(zIn −A)−1b dz =
+1
+2πi
+
+�2π
+
+0
+Γ′(t)f
+�
+Γ(t)
+��
+Γ(t)In −A
+�−1b dt
+
+= 1
+
+2π
+
+�2π
+
+0
+
+�
+Γ(t) −c
+�
+f
+�
+Γ(t)
+��
+Γ(t)In −A
+�−1b
+�
+��
+�
+=:G(t)
+
+dt = 1
+
+2π
+
+�2π
+
+0
+G(t) dt.
+
+Applying the trapezoidal rule yields
+
+1
+2π
+
+�2π
+
+0
+G(t) dt ≈1
+
+2πTm(G) = 1
+
+2π · 2π
+
+m
+
+�G(0)
+
+2
++
+
+m−1
+�
+
+j=1
+G(j 2π
+
+m ) + G(2π)
+
+2
+
+�
+
+= 1
+
+m
+
+m−1
+�
+
+j=0
+G(j 2π
+
+m ),
+
+(6.16)
+
+where we used G(0) = G(2π).
+
+Theorem 6.10 ([8, p. 138]). Let k ∈N be odd and let f ∈Ck(R) be 2π-periodic with
+|f(k)(x)| ≤M for some M ≥0 and all x ∈R. Then
+����
+
+�2π
+
+0
+f(x) dx −Tm(f)
+����≤M · 4πζ(k)
+
+mk
+.
+(6.17)
+
+Here, ζ denotes the Riemann zeta function for which we have |ζ(k)| ≤2 for k ≥2,
+
+and ζ(k)
+k→∞
+−−−→0. Thus, we can bound ζ by a constant as well. Taken all together,
+the term 4πζ(k)
+
+mk
+approaches zero quickly with large m and k, but the constant M is
+potentially very large.
+
+98
+
+
+Remark 6.11. To apply Theorem 6.10 to (6.16), we have to bound
+
+G(k)(t) = ik
+
+2π
+
+k
+�
+
+j=0
+
+�
+Γ(t) −c
+�j+1
+�
+��
+�
+(a)
+
+j
+�
+
+i=0
+cijk
+����
+(d)
+
+f(j−i)�
+Γ(t)
+�
+
+�
+��
+�
+(c)
+
+�
+Γ(t)In −A
+�−(i+1)
+�
+��
+�
+(b)
+
+b.
+(6.18)
+
+Several terms may lead to a large error bound in Theorem 6.10:
+
+(a) For a very large radius ρ, this term results in |G(k)(t)| ≲ρ ·
+�ρ
+
+m
+�k. Thus, widely
+spread eigenvalues are bad for convergence.
+
+(b) The quantity ∥
+�
+Γ(t)In −A
+�−(i+1)∥is large, if the eigenvalues of A are close to Γ.
+
+(c) The derivative f(k) may become very large, e.g., for f(z) = √z near z = 0.
+
+(d) The constants cijk grow quickly with k.
+
+In summary, a rapid decay of the bound in Theorem 6.10 for the trapezoidal rule
+applied to the Cauchy integral formula for matrix functions is not guaranteed. However,
+this method can be efficient for matrices that have a spectrum in a small disk which is
+not too close to Γ. If these conditions are not fulfilled, conformal maps can be used to
+map the spectrum to a more suitable configuration, but this could be the beginning of
+a new story. . .
+
+99
+
+
+References
+
+[1] L. V. Ahlfors, Complex analysis, International Series in Pure and Applied
+Mathematics, McGraw-Hill Book Co., New York, third ed., 1978. An introduction
+to the theory of analytic functions of one complex variable.
+
+[2] A. H. Al-Mohy and N. J. Higham, A new scaling and squaring algorithm for
+the matrix exponential, SIAM J. Matrix Anal. Appl., 31 (2009), pp. 970–989.
+
+[3] B. Beckermann and L. Reichel, Error estimates and evaluation of matrix
+functions via the Faber transform, SIAM Journal on Numerical Analysis, 47 (2009),
+pp. 3849–3883.
+
+[4] D. A. Bini, B. Iannazzo, and B. Meini, Numerical solution of algebraic Riccati
+equations, vol. 9 of Fundamentals of Algorithms, Society for Industrial and Applied
+Mathematics (SIAM), Philadelphia, PA, 2012.
+
+[5] J. Chen, M. Anitescu, and Y. Saad, Computing f(A)b via least squares
+polynomial approximations, SIAM J. Sci. Comput., 33 (2011), pp. 195–222.
+
+[6] J. B. Conway, Functions of one complex variable, vol. 11 of Graduate Texts in
+Mathematics, Springer-Verlag, New York-Berlin, second ed., 1978.
+
+[7] P. I. Davies and N. J. Higham, A Schur-Parlett algorithm for computing matrix
+functions, SIAM J. Matrix Anal. Appl., 25 (2003), pp. 464–485.
+
+[8] P. J. Davis and P. Rabinowitz, Methods of numerical integration, Computer
+Science and Applied Mathematics, Academic Press [Harcourt Brace Jovanovich,
+Publishers], New York-London, 1975.
+
+[9] E. D. Denman and A. N. Beavers, The matrix sign function and computations
+in systems, Applied Mathematics and Computation, 2 (1976), pp. 63–94.
+
+[10] F. Durastante and B. Meini, Stochastic pth root approximation of a stochastic
+matrix: a Riemannian optimization approach, SIAM J. Matrix Anal. Appl., 45
+(2024), pp. 875–904.
+
+[11] E. Estrada and D. J. Higham, Network properties revealed through matrix
+functions, SIAM Rev., 52 (2010), pp. 696–714.
+
+[12] N. J. Higham,
+Functions of Matrices,
+Society for Industrial and Applied
+Mathematics, 2008.
+
+[13] N. J. Higham and L. Lin, On pth roots of stochastic matrices, Linear Algebra
+Appl., 435 (2011), pp. 448–463.
+
+[14] N. J. Higham, D. S. Mackey, N. Mackey, and F. c. Tisseur, Functions
+preserving matrix groups and iterations for the matrix square root, SIAM J. Matrix
+Anal. Appl., 26 (2005), pp. 849–877.
+
+100
+
+
+[15] R. A. Horn and C. R. Johnson, Topics in matrix analysis, Cambridge University
+Press, Cambridge, 1991.
+
+[16] R. A. Horn and C. R. Johnson, Matrix analysis, Cambridge University Press,
+Cambridge, second ed., 2013.
+
+[17] L. Katz, A new status index derived from sociometric analysis, Psychometrika, 18
+(1953), pp. 39–43.
+
+[18] P. Laasonen, On the iterative solution of the matrix equation AX2 −I = 0, Math.
+Tables Aids Comput., 12 (1958), pp. 109–116.
+
+[19] J. Liesen, Numerical linear algebra, 2024. Lecture notes.
+
+[20] J. Liesen and V. Mehrmann, Linear Algebra, Springer International Publishing,
+Cham, 2015.
+
+[21] J. Liesen and Z. Strakos, Krylov subspace methods, Numerical Mathematics
+and Scientific Computation, Oxford University Press, Oxford, 2013. Principles and
+analysis.
+
+[22] C. Moler and C. Van Loan, Nineteen dubious ways to compute the exponential
+of a matrix, SIAM Rev., 20 (1978), pp. 801–836.
+
+[23] C. Moler and C. Van Loan, Nineteen dubious ways to compute the exponential
+of a matrix, twenty-five years later, SIAM Rev., 45 (2003), pp. 3–49.
+
+[24] V. Simoncini, Computational methods for linear matrix equations, SIAM Rev., 58
+(2016), pp. 377–441.
+
+[25] P. H. Sterbenz, Floating-point computation, Prentice-Hall Series in Automatic
+Computation, Prentice-Hall, Inc., Englewood Cliffs, NJ, 1974.
+
+[26] E. Wegert, Visual complex functions. An introduction with phase portraits,
+Birkh¨auser/Springer Basel AG, Basel, 2012.
+
+[27] E. Wegert and G. Semmler, Phase plots of complex functions: a journey in
+illustration, Notices Amer. Math. Soc., 58 (2011), pp. 768–780.
+
+101
+
+

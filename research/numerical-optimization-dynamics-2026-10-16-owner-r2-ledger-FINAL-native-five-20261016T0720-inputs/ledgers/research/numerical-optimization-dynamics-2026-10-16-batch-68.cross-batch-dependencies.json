@@ -1,0 +1,1064 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-newton-matrix-sign-iteration",
+    "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "status": "verified",
+    "evidence": "Supplier definition excerpt: “Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-newton-polar-factor-iteration",
+    "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "status": "verified",
+    "evidence": "Supplier definition excerpt: “Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-pade-denominator-solve-by-householder-qr",
+    "supplier": "alg-complex-scaled-householder-reflector-step",
+    "consumer_batch": "68",
+    "supplier_batch": "33",
+    "status": "verified",
+    "evidence": "The denominator candidate forms each column using the actual complex scaled target/trailing-panel wrapper, retains its zero branch/overwrite and stored factor, and propagates breakdown/range/budget failures. Its final exact audit, rather than the candidate QR approximation, establishes verified-solution.",
+    "inspected_paths": [
+      "items/alg-complex-scaled-householder-reflector-step.md#Definition",
+      "items/alg-pade-denominator-solve-by-householder-qr.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "For a stored complex column $x\\in\\mathbb C^m$, $m\\ge1$, and block $B\\in\\mathbb C^{m\\times q}$, $q\\ge0$, call the Householder branch of [[alg-scaled-complex-householder-and-givens-updates]] on $[x\\;B]$. This is the canonical scaled real-component norm and separately scaled phase-modulus realization, with fixed sequential dots, real-coefficient multiplication, complex product and subtraction order. It includes the exact target-column overwrite. Return its $(v,\\widehat\\tau,\\widehat\\alpha,\\widehat x,\\widehat B)$ on success; a zero column returns identity, zero column and copied $B$. Report an invalid/nonpositive stored-vector norm as `breakdown`; every other invalid/out-of-range operation returns `range-failure` with its operation index and partial values.\n\nThe exact representative is $P(v)=I-2vv^*/(v^*v)$ for nonzero stored $v$. Store this product representation rather than identifying the rounded rank-one action with an exactly unitary dense matrix. For polynomial-vector initialization, form the reflector from that external vector and use its separate-block application on the entire active row panel; do not overwrite an unrelated matrix column. The proof-backed target and separate-block coefficients are supplied by [[lem-scaled-complex-householder-and-givens-local-backward-error]].",
+    "consumer_use_excerpts": [
+      "1. Round each real/imaginary component of $M,C$ to form stored candidates $R,D$. A failed conversion returns `range-failure` (or `budget-exhausted` before an unaffordable conversion).\n2. For $k=1,\\ldots,n$, call\n[[alg-complex-scaled-householder-reflector-step]] with target $R_{k:n,k}$ and trailing block $R_{k:n,k+1:n}$. Retain its target overwrite and trailing update, and store $v,\\widehat\\tau$ and the represented factor. Propagate `breakdown`, `range-failure` and budget exhaustion. A zero-column identity branch copies the blocks. Replay this SAME stored reflector on the active RHS panel $D_{k:n,:}$ in formation order, without any target overwrite, using the separate-block kernel of\n[[alg-scaled-complex-householder-and-givens-updates]]: for each RHS column $j$ compute\n$$d_j=\\operatorname{fl}\\!\\left(\\sum_{i=k}^n\\overline v_iD_{ij}\\right),\\quad p_i=\\operatorname{fl}(\\widehat\\tau v_i),\\quad z_{ij}=\\operatorname{fl}(p_id_j),\\quad D_{ij}\\leftarrow\\operatorname{fl}(D_{ij}-z_{ij}).$$\nUse increasing indices, sequential dots, componentwise real-coefficient multiplication and the declared complex products; reuse $p_i$ if already stored. Identity reflectors copy $D$. Do not feed nonstored normalized reflector entries to floating operations. After the column step, if $R_{kk}=0$, return `zero-pivot`.\n3. For each RHS $j$ in increasing order and each row $i=n,\\ldots,1$, start $s=D_{ij}$ and for $\\ell=i+1,\\ldots,n$ set $s\\leftarrow\\operatorname{fl}(s-\\operatorname{fl}(R_{i\\ell}\\widehat X_{\\ell j}))$. This is the rounded backward recurrence of\n[[def-forward-and-back-substitution-for-triangular-systems]]. To divide $s=a+ib$ by the nonzero stored pivot $R_{ii}=c+id$, use ONLY the following rounded real primitives in the displayed order:\n$$t=\\operatorname{fl}(\\operatorname{fl}(c c)+\\operatorname{fl}(d d)),\\quad p=\\operatorname{fl}(\\operatorname{fl}(a c)+\\operatorname{fl}(b d)),\\quad q=\\operatorname{fl}(\\operatorname{fl}(b c)-\\operatorname{fl}(a d)),$$\n$$\\widehat X_{ij}=\\operatorname{fl}(p/t)+i\\operatorname{fl}(q/t).$$\nReject $t\\le0$ as `range-failure`; every other nonzero excluded intermediate also fails under the scalar model. This deliberately conservative routine can fail on range even for a nonzero pivot; it is not a new complex-division primitive. Other invalid candidate data return `candidate-failure`.\n4. Compute $M\\widehat X-C$ in the declared exact controller on the original inputs and exact stored values. If it is exactly zero, return `verified-solution` with $\\widehat X$; otherwise return `candidate-unverified` with $\\widehat X$ and the exact nonzero residual. Use the rational adapter only when its actual encoded-data preconditions hold."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[10]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/alg-pade-denominator-solve-by-householder-qr.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/56",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "alg-pade-denominator-solve-by-householder-qr",
+      "supplier": "alg-complex-scaled-householder-reflector-step",
+      "status": "open",
+      "evidence": "Supplier definition excerpt: “For a stored complex column $x\\in\\mathbb C^m$, $m\\ge1$, and block $B\\in\\mathbb C^{m\\times q}$, $q\\ge0$, call the Householder branch of [[alg-scaled-complex-householder-and-givens-updates]] on $[x\\;B]$. This is the canonical scaled real-component norm and separately scaled phase-modulus realization, with fixed sequential dots, real-coefficient multiplication, complex product and subtraction order. It includes the exact target-column overwrite. Return its $(v,\\widehat\\tau,\\widehat\\alpha,\\widehat x,\\widehat B)$ on success; a zero column returns identity, zero column and copied $B$. Report an invalid/nonpositive stored-vector norm as `breakdown`; every other invalid/out-of-range operation returns `range-failure` with its operation index and partial values.” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-pade-denominator-solve-by-householder-qr",
+    "supplier": "alg-scaled-complex-householder-and-givens-updates",
+    "consumer_batch": "68",
+    "supplier_batch": "17",
+    "status": "verified",
+    "evidence": "The repaired denominator Definition2 replays the SAME stored v,tau on D using the source separate-block sequential dot/product/subtraction kernel, in formation order, without target overwrite or nonstored normalized operands. Candidate budget/range failures propagate; correctness still comes only from exact MX-C verification.",
+    "inspected_paths": [
+      "items/alg-scaled-complex-householder-and-givens-updates.md#Definition",
+      "items/alg-pade-denominator-solve-by-householder-qr.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Use the operationwise real/complex arithmetic model, with six-real-operation complex products and componentwise division by positive real scalars. A scaled norm of a nonzero complex vector first chooses the largest absolute real or imaginary component $s>0$, rounds every real component divided by $s$, sums their rounded squares sequentially, rounds the positive square root, and rounds multiplication by $s$. A norm of already scaled components omits the last multiplication. Zero input has exact norm zero. Reject every nonzero exact intermediate outside the normal range, nonfinite/invalid operation, and nonpositive required norm; return the first range-failure. All sign changes and conjugations are exact.\n\nFor a Householder active block $C=[x\\;B]$, $x\\in\\mathbb C^r$, a zero $x$ copies the block with identity action. Otherwise compute $\\widehat N$ by the scaled norm. If $x_1=0$ put $\\widehat\\phi=1$; otherwise compute its modulus $\\widehat a$ by its own two-component scaled norm and divide its real and imaginary parts by $\\widehat a$. Set $\\widehat\\alpha=-\\operatorname{fl}(\\widehat\\phi\\widehat N)$ using real-scalar component multiplication, and $v=\\operatorname{fl}(x-\\widehat\\alpha e_1)$. Compute $w$ by sequential summation of all $2r$ rounded real component squares of $v$, and $\\widehat\\tau=\\operatorname{fl}(2/w)$. Compute $d=\\operatorname{fl}(v^*B)$, $p=\\operatorname{fl}(\\widehat\\tau v)$, $Z=\\operatorname{fl}(pd)$, and $\\widehat B=\\operatorname{fl}(B-Z)$. Return $C_+=[\\widehat\\alpha e_1\\;\\widehat B]$, writing exact zeros below the target diagonal, and store $v,\\widehat\\tau$. Its theoretical representative is $H(v)=I-2vv^*/(v^*v)$. For a separate block application omit the column overwrite. For a right step apply these instructions to the conjugate-transposed block and transpose back.\n\nFor a Givens target pair $(a,b)$, use the identity when $b=0$, including $(0,0)$. Otherwise choose $\\lambda$ as the largest absolute real/imaginary component of $(a,b)$, round $z=a/\\lambda$ and $w=b/\\lambda$ componentwise, and compute $h$ as the norm of their four already scaled components. If $z\\ne0$, compute $n_z$ as the norm of its two components, $\\widehat\\phi=\\operatorname{fl}(z/n_z)$, $c=\\operatorname{fl}(n_z/h)$ and $s=\\operatorname{fl}(\\operatorname{fl}(\\widehat\\phi\\overline w)/h)$. If $z=0$, set $c=0$ and $s=\\operatorname{fl}(\\overline w/h)$. Store $T=\\begin{pmatrix}c&s\\\\-\\overline s&c\\end{pmatrix}$ and apply it to the chosen two rows using two complex products and one rounded componentwise addition for each output entry. For an actual target column, set its intended annihilated entry to exact zero after the update. The initial shift-vector rotation is formed from the shift vector but applied to the matrix without zeroing an unrelated matrix entry. Right applications use the conjugate-transposed form. Its exact unitary representative is $Q=T/\\sqrt{c^2+|s|^2}$; this normalization defines a mathematical representative and is not an additional rounded operation.\n\nThese are arithmetic realizations of the canonical Householder and Givens methods. Returned dense transformation accumulators may be rounded; the exact unitary products used in backward-error statements are represented by the stored local data. Additional discarded matrix entries must be recorded separately, including their magnitudes. Their omission is never implicit in a sparsity convention.",
+    "consumer_use_excerpts": [
+      "1. Round each real/imaginary component of $M,C$ to form stored candidates $R,D$. A failed conversion returns `range-failure` (or `budget-exhausted` before an unaffordable conversion).\n2. For $k=1,\\ldots,n$, call\n[[alg-complex-scaled-householder-reflector-step]] with target $R_{k:n,k}$ and trailing block $R_{k:n,k+1:n}$. Retain its target overwrite and trailing update, and store $v,\\widehat\\tau$ and the represented factor. Propagate `breakdown`, `range-failure` and budget exhaustion. A zero-column identity branch copies the blocks. Replay this SAME stored reflector on the active RHS panel $D_{k:n,:}$ in formation order, without any target overwrite, using the separate-block kernel of\n[[alg-scaled-complex-householder-and-givens-updates]]: for each RHS column $j$ compute\n$$d_j=\\operatorname{fl}\\!\\left(\\sum_{i=k}^n\\overline v_iD_{ij}\\right),\\quad p_i=\\operatorname{fl}(\\widehat\\tau v_i),\\quad z_{ij}=\\operatorname{fl}(p_id_j),\\quad D_{ij}\\leftarrow\\operatorname{fl}(D_{ij}-z_{ij}).$$\nUse increasing indices, sequential dots, componentwise real-coefficient multiplication and the declared complex products; reuse $p_i$ if already stored. Identity reflectors copy $D$. Do not feed nonstored normalized reflector entries to floating operations. After the column step, if $R_{kk}=0$, return `zero-pivot`.\n3. For each RHS $j$ in increasing order and each row $i=n,\\ldots,1$, start $s=D_{ij}$ and for $\\ell=i+1,\\ldots,n$ set $s\\leftarrow\\operatorname{fl}(s-\\operatorname{fl}(R_{i\\ell}\\widehat X_{\\ell j}))$. This is the rounded backward recurrence of\n[[def-forward-and-back-substitution-for-triangular-systems]]. To divide $s=a+ib$ by the nonzero stored pivot $R_{ii}=c+id$, use ONLY the following rounded real primitives in the displayed order:\n$$t=\\operatorname{fl}(\\operatorname{fl}(c c)+\\operatorname{fl}(d d)),\\quad p=\\operatorname{fl}(\\operatorname{fl}(a c)+\\operatorname{fl}(b d)),\\quad q=\\operatorname{fl}(\\operatorname{fl}(b c)-\\operatorname{fl}(a d)),$$\n$$\\widehat X_{ij}=\\operatorname{fl}(p/t)+i\\operatorname{fl}(q/t).$$\nReject $t\\le0$ as `range-failure`; every other nonzero excluded intermediate also fails under the scalar model. This deliberately conservative routine can fail on range even for a nonzero pivot; it is not a new complex-division primitive. Other invalid candidate data return `candidate-failure`.\n4. Compute $M\\widehat X-C$ in the declared exact controller on the original inputs and exact stored values. If it is exactly zero, return `verified-solution` with $\\widehat X$; otherwise return `candidate-unverified` with $\\widehat X$ and the exact nonzero residual. Use the rational adapter only when its actual encoded-data preconditions hold."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[305]",
+      "bad[20].currentDeclaredOwnedEdges[11]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/alg-pade-denominator-solve-by-householder-qr.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/17"
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-pade-denominator-solve-by-householder-qr",
+    "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "status": "verified",
+    "evidence": "Supplier definition excerpt: “Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-pade-scaling-and-squaring-exponential",
+    "supplier": "alg-complex-resolvent-cover-validator",
+    "consumer_batch": "68",
+    "supplier_batch": "61",
+    "status": "verified",
+    "evidence": "The contour/error route supplies a finite dyadic segment-to-disk cover and uses q=e+s(r+deltaA)<1 and the resulting uniform resolvent bound only on covered segments/family. Topology, admissible Cauchy cycle, index and spectral containment remain separate caller hypotheses; failed cover/range checks are inconclusive and no eigenvalue count is imported.",
+    "inspected_paths": [
+      "items/alg-complex-resolvent-cover-validator.md#Definition",
+      "items/alg-pade-scaling-and-squaring-exponential.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Input $n\\ge1$ and a nonempty finite union of complex line segments $\\Gamma$, with each segment assigned to a proposed disk $D_j=B(z_j,r_j)$; a nonempty matrix family $\\mathcal A\\subseteq\\mathbb C^{n\\times n}$ enclosed by complex rectangles; a point center matrix $A_0\\in\\mathbb C^{n\\times n}$; and proposed point preconditioners $R_j\\in\\mathbb C^{n\\times n}$. All centers, radii and point matrices are exact dyadics.\n\n1. For each assigned segment verify that both endpoints lie in its disk by exact rational comparison of squared distances with $r_j^2$. Evaluate outward bounds\n$$e_j\\ge\\|I-R_j(z_jI-A_0)\\|_{\\infty,\\mathbb C},\\quad \\delta_A\\ge\\sup_{A\\in\\mathcal A}\\|A-A_0\\|_{\\infty,\\mathbb C},\\quad s_j\\ge\\|R_j\\|_{\\infty,\\mathbb C}$$\nusing the complex rectangle operations and row sums of outward modulus bounds. If any check or operation cannot be completed, return `inconclusive`.\n\n2. Outward-compute $q_j=e_j+s_j(r_j+\\delta_A)$. Require $q_j<1$ for every disk and compute an outward upper bound $m\\ge\\max_j s_j/(1-q_j)$. If a strict inequality or division cannot be certified, return `inconclusive`; otherwise return `certified-resolvent-cover` with the disk assignments and $m$.\n\nThe validated endpoint cover covers each whole segment because disks are convex. Success certifies a resolvent bound on this supplied contour cover, but this procedure does not count enclosed eigenvalues or validate contour topology.",
+    "consumer_use_excerpts": [
+      "1. Interpret the stored entries of $A$ as their exact real/imaginary values and\n   form $B=2^{-s}A$ exactly. Evaluate $P=p_m(B)$ and $Q=q_m(B)$ by exact\n   controller matrix arithmetic: increasing-index sums/products and finite\n   polynomial powers with their rational coefficients. Use the exact real-RAM\n   controller declared in [[alg-pade-denominator-solve-by-householder-qr]];\n   the optional rational adapter is used only when all required actual\n   encodings are supplied. No dyadic representation is assumed for the\n   abstract floating model.\n2. Call [[alg-pade-denominator-solve-by-householder-qr]] on $QX=P$. If it\n   returns a candidate, retain that candidate. If it returns a failure without\n   a candidate, propagate its status. If the solve is not verified, continue\n   only in candidate-only mode; certification mode returns\n   denominator-unverified.\n3. For $j=0,\\ldots,s-1$, compute the next matrix square in the operationwise\n   model. A range failure returns range-failure with the last candidate.\n   Retain their exact stored real values and form\n   $D_j=\\widehat X_{j+1}-\\widehat X_j^2$ by the exact controller's finite\n   matrix loops. Set\n   $\\delta_j=\\max_i\\sum_k(|\\operatorname{Re}(D_j)_{ik}|\n   +|\\operatorname{Im}(D_j)_{ik}|)$; this exact nonnegative real number bounds\n   $\\|D_j\\|_{\\infty,\\mathbb C}$.\n4. In candidate-only mode, return the final candidate with status\n   unevaluated-error-bound. Certification mode has these caller preconditions,\n   which the procedure does not itself verify: (a) a supplied polygonal Cauchy\n   cycle $\\Gamma$ with dyadic vertices, trace in a disk $|z|\\le\\rho$ for\n   dyadic $\\rho>0$, $\\sigma(B)\\subset\\{|z|<\\rho\\}$, disjointness from\n   $\\sigma(B)$, index one on $\\sigma(B)$, and null-homology in that disk;\n   (b) $d_m(\\rho)>0$; (c) a supplied finite dyadic resolvent-cover input for\n   the singleton family $\\{B\\}$; and (d) a finite term budget $K$.\n   The contour-validator call\n   [[alg-complex-resolvent-cover-validator]] must return\n   certified-resolvent-cover with bound $M$, or the procedure returns\n   inconclusive-resolvent. The validator checks resolvent inequalities and\n   segment coverage only; it does not validate the caller's topological\n   preconditions or count enclosed eigenvalues. Here $\\sigma(B)$ denotes the\n   eigenvalue set of $B$ from\n   [[def-eigenvalue-eigenvector-eigenspace-and-spectrum]].\n5. For $x=\\rho$ and for\n   $\\alpha=\\max_i\\sum_j(|\\operatorname{Re}A_{ij}|+\n   |\\operatorname{Im}A_{ij}|)$, compute an upper bound $U(x)$ for $e^x$ as\n   follows. If $x=0$, set $U(x)=1$. Otherwise, if $x\\ge K+2$, return\n   inconclusive-scalar-tail. If $x<K+2$, put\n   $r=x/(K+2)$,\n   $U(x)=\\sum_{k=0}^Kx^k/k!+\n   [x^{K+1}/(K+1)!]/(1-r)$.\n   The geometric tail bound makes $U(x)\\ge e^x$.\n6. Let $\\ell$ be the sum, over the polygon segments, of\n   $|\\Delta\\operatorname{Re}z|+|\\Delta\\operatorname{Im}z|$; then\n   $\\ell$ is an exact rational upper bound for the contour length (the supplied vertices have rational/dyadic encodings). Put\n   $\\epsilon=\\rho^{2m+1}U(\\rho)(m!)^2/\n   ((2m)!(2m+1)!d_m(\\rho))$. Since\n   $\\pi/4=\\int_0^1(1+x^2)^{-1}\\,dx$, the finite identity\n   $1/(1+x^2)=\\sum_{k=0}^7(-1)^kx^{2k}+x^{16}/(1+x^2)$ on $[0,1]$ gives\n   $\\pi/4>33976/45045>3/4$, hence $1/(2\\pi)<1/6$. Set\n   $E_0=\\ell\\epsilon M/6$.\n7. For each squaring use\n   $E_{j+1}=(2U(\\alpha)+E_j)E_j+\\delta_j$.\n   If every computed certification check succeeded, the denominator solve\n   returned verified-solution, and the caller preconditions hold, return the\n   final candidate with status conditional-error-bound and bound $E_s$.\n   Otherwise retain the candidate and return\n   the corresponding inconclusive status."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[12]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/alg-pade-scaling-and-squaring-exponential.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/57",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "alg-pade-scaling-and-squaring-exponential",
+      "supplier": "alg-complex-resolvent-cover-validator",
+      "status": "open",
+      "evidence": "Supplier definition excerpt: “Input $n\\ge1$ and a nonempty finite union of complex line segments $\\Gamma$, with each segment assigned to a proposed disk $D_j=B(z_j,r_j)$; a nonempty matrix family $\\mathcal A\\subseteq\\mathbb C^{n\\times n}$ enclosed by complex rectangles; a point center matrix $A_0\\in\\mathbb C^{n\\times n}$; and proposed point preconditioners $R_j\\in\\mathbb C^{n\\times n}$. All centers, radii and point matrices are exact dyadics.” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Required interface: validate the finite dyadic segment-to-disk cover for singleton family {B}; return certified-resolvent-cover with a uniform bound or fail inconclusively. A Step 1 record exists with decision ready, but the current hash check is stale: item or dependency changed; record current readiness. The previous Step 1 ready record is hash-stale; this consumer remains escalated pending refresh. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-pade-scaling-and-squaring-exponential",
+    "supplier": "def-complex-infinity-matrix-norm",
+    "consumer_batch": "68",
+    "supplier_batch": "61",
+    "status": "verified",
+    "evidence": "The consumer uses the maximum complex-modulus row-sum norm on positive finite matrix dimensions, its compatible product/vector bounds and scalar homogeneity. Component absolute sums are conservative upper bounds; no real-only induced-norm convention or spectral-norm substitution is made.",
+    "inspected_paths": [
+      "items/def-complex-infinity-matrix-norm.md#Definition",
+      "items/alg-pade-scaling-and-squaring-exponential.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "For $A=(a_{ij})\\in\\mathbb C^{m\\times n}$ with $m,n\\ge1$, define\n$$\n\\|A\\|_{\\infty,\\mathbb C}:=\\max_{1\\le i\\le m}\\sum_{j=1}^n |a_{ij}|.\n$$\nFor a vector $x\\in\\mathbb C^n$, define $\\|x\\|_\\infty:=\\max_j|x_j|$. The absolute value is the complex modulus $|u+iv|=\\sqrt{u^2+v^2}$. The subscript on the matrix norm emphasizes that entries and vectors are complex; this definition is not an appeal to the real-only induced matrix p-norm convention. For square matrices the identity has norm $1$.",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[14]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/alg-pade-scaling-and-squaring-exponential.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/59",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "alg-pade-scaling-and-squaring-exponential",
+      "supplier": "def-complex-infinity-matrix-norm",
+      "status": "open",
+      "evidence": "Supplier definition excerpt: “For $A=(a_{ij})\\in\\mathbb C^{m\\times n}$ with $m,n\\ge1$, define\n$$\n\\|A\\|_{\\infty,\\mathbb C}:=\\max_{1\\le i\\le m}\\sum_{j=1}^n |a_{ij}|.\n$$\nFor a vector $x\\in\\mathbb C^n$, define $\\|x\\|_\\infty:=\\max_j|x_j|$. The absolute value is the complex modulus $|u+iv|=\\sqrt{u^2+v^2}$. The subscript on the matrix norm emphasizes that entries and vectors are complex; this definition is not an appeal to the real-only induced matrix p-norm convention. For square matrices the identity has norm $1$.” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-pade-scaling-and-squaring-exponential",
+    "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "status": "verified",
+    "evidence": "Supplier definition excerpt: “A procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-pade-scaling-and-squaring-exponential",
+    "supplier": "thm-complex-resolvent-cover-validator-soundness",
+    "consumer_batch": "68",
+    "supplier_batch": "61",
+    "status": "verified",
+    "evidence": "The contour/error route supplies a finite dyadic segment-to-disk cover and uses q=e+s(r+deltaA)<1 and the resulting uniform resolvent bound only on covered segments/family. Topology, admissible Cauchy cycle, index and spectral containment remain separate caller hypotheses; failed cover/range checks are inconclusive and no eigenvalue count is imported.",
+    "inspected_paths": [
+      "items/thm-complex-resolvent-cover-validator-soundness.md#Statement",
+      "items/alg-pade-scaling-and-squaring-exponential.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "If the validator's input has $n\\ge1$ and [[alg-complex-resolvent-cover-validator]] returns `certified-resolvent-cover` with bound $m$, then every $A$ in the input family and every $z$ on the supplied contour segments satisfy that $zI-A$ is invertible and $\\|(zI-A)^{-1}\\|_{\\infty,\\mathbb C}\\le m$. The result does not count eigenvalues inside the contour.",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[13]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/alg-pade-scaling-and-squaring-exponential.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/58",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "alg-pade-scaling-and-squaring-exponential",
+      "supplier": "thm-complex-resolvent-cover-validator-soundness",
+      "status": "open",
+      "evidence": "Supplier statement excerpt: “If the validator's input has $n\\ge1$ and [[alg-complex-resolvent-cover-validator]] returns `certified-resolvent-cover` with bound $m$, then every $A$ in the input family and every $z$ on the supplied contour segments satisfy that $zI-A$ is invertible and $\\|(zI-A)^{-1}\\|_{\\infty,\\mathbb C}\\le m$. The result does not count eigenvalues inside the contour.” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Required hypothesis: a successful validator return for the supplied finite dyadic cover; then the bound holds on every covered contour segment. No contour topology or eigenvalue count follows. A Step 1 record exists with decision ready, but the current hash check is stale: item or dependency changed; record current readiness. The previous Step 1 ready record is hash-stale; this consumer remains escalated pending refresh. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-principal-matrix-logarithm-and-square-root",
+    "supplier": "alg-finite-budget-francis-schur-reduction",
+    "consumer_batch": "68",
+    "supplier_batch": "33",
+    "status": "verified",
+    "evidence": "The consumer complex Schur call propagates every non-Schur status and treats returned Q,T only as candidates. Exact unitarity/reconstruction/triangularity are checked before use, so rounded backward residual diagnostics and finite budgets never imply the exact analytic identity.",
+    "inspected_paths": [
+      "items/alg-finite-budget-francis-schur-reduction.md#Definition",
+      "items/alg-principal-matrix-logarithm-and-square-root.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Input a real or complex square matrix $A\\in\\mathbb F^{n\\times n}$ with $n\\ge1$, a finite nonnegative deflation tolerance $\\tau$, a nonnegative integer sweep budget $N$, a positive integer stagnation period $h$, finite tables of finite exceptional shifts, optional exact rational/dyadic encodings of its stored real values, and optionally a terminating exact evaluator of [[def-exact-real-2x2-discriminant-sign-predicate]]. A formation `breakdown` is propagated with the operation index and partial factors. Every scalar operation is evaluated in the operationwise model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. Any invalid, overflow, or underflow operation returns range-failure with the operation index and partial factors.\n\nFor each stored reflector with active indices $S=(s_1,\\ldots,s_m)$, vector $v\\in\\mathbb F^m$, and real computed coefficient $\\widehat\\tau$, the real or complex formation routine first performs the stated finite left application. Then perform the right application in this fixed order: for each matrix row $i=1,\\ldots,n$, compute $d_i=\\operatorname{fl}(\\sum_{a=1}^m H^L_{i,s_a}v_a)$ by left-to-right rounded products and additions; for $a=1,\\ldots,m$, compute $c_a=\\operatorname{fl}(\\widehat\\tau\\overline{v_a})$, $g_{ia}=\\operatorname{fl}(d_ic_a)$, and $H^R_{i,s_a}=\\operatorname{fl}(H^L_{i,s_a}-g_{ia})$. Each complex product uses the six real operations of the arithmetic model. The exact factor appended to $Q$ is $P(v)=I-2vv^*/(v^*v)$; the computed right update uses $\\widehat\\tau$ as displayed and is not asserted equal to multiplication by $P(v)$. For a matrix-target column, the formation routine's explicit zero writes are retained. In the initial polynomial-vector step there is no matrix-target column: use the entire active row panel for the left update and then apply the right update to the active columns. Record deflation writes separately, including a pure deflation with no following reflector as an identity-transform stage; a local error certificate must account for all other rounding and target-column writes.\n\n1. Reduce $A$ to upper Hessenberg form with Householder similarities. For $k=1,\\ldots,\\max(n-2,0)$ in increasing order, use active indices $S=\\{k+1,\\ldots,n\\}$, target $x=H_{S,k}$, and trailing left panel $B=H_{S,\\{k+1,\\ldots,n\\}}$ with columns in increasing order. In the real branch use [[alg-scaled-householder-reflector-formation-and-application]] for the finite left application and overwrite; in the complex branch use [[alg-complex-scaled-householder-reflector-step]]. Complete each similarity by the right application above on columns $S$. If the resulting matrix fails the exact upper-Hessenberg zero-pattern check, return bulge-chase-invariant-failure with the partial factors. Store the exact unitary reflector factors as a product representation $Q_0$.\n2. At each sweep, test every active first-subdiagonal entry by\n   $$|h_{i,i-1}|\\le\\tau\\bigl(|h_{i-1,i-1}|+|h_{i,i}|\\bigr).$$\n   For a complex entry $z=a+ib$, evaluate $|z|$ by $s=\\max(|a|,|b|)$ and $s\\sqrt{(a/s)^2+(b/s)^2}$ when $z\\ne0$, with divisions, squares, sum, square root and final scaling rounded in the stated order; use $|0|=0$. Return range-failure if this evaluation fails. Compute the diagonal-magnitude sum first, then multiply by $\\tau$ in the operationwise model; compare the resulting finite values exactly. When the test holds, set that entry to zero, record its original value as a deflation perturbation, and split the active block. The equality case deflates. Do not use the Hermitian-tridiagonal Wilkinson shift rule for a general Hessenberg matrix.\n3. Check for the target Schur block structure after initialization and after each sweep. A complex active block of size at least two uses a single shift, normally its bottom-right entry. A real active block of size at least two uses the real quadratic $p(z)=z^2-sz+t$ with trailing block $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$; compute $s=\\operatorname{fl}(a+d)$ and $t=\\operatorname{fl}(\\operatorname{fl}(ad)-\\operatorname{fl}(bc))$ in that order, returning range-failure if an operation fails. Maintain a counter for each active block, reset it after any deflation in that block, and after $h$ consecutive sweeps without deflation consume that block's next declared exceptional shift or real quadratic. If the required table entry is absent, return stagnation-exhausted.\n4. Apply the corresponding implicit bulge chase from [[alg-exact-francis-hessenberg-qr-step]]. For the initial single-shift vector compute $x_1=\\operatorname{fl}(h_{11}-\\mu)$ and $x_i=h_{i1}$ for $i>1$. For the initial real double-shift vector, compute $u=He_1$, then $w=Hu$ by left-to-right rounded matrix-vector products, then $x=\\operatorname{fl}(\\operatorname{fl}(w-su)+te_1)$ componentwise. Compute only the first $r+1$ components from the Hessenberg support pattern; on range failure return the operation index and partial factors. For a chase at column $j$, use active indices $S=I_j$, target $x=H_{S,j}$, and trailing left panel $B=H_{S,\\{j+1,\\ldots,n\\}}$ with columns in increasing order. Call the real or complex formation routine, write the target tail zeros exactly, complete the two-sided update by the right-kernel order above on columns $S$, and append the exact reflector representation to $Q$. In the initial polynomial-vector step there is no matrix-target column; use the full active row panel for the left update and then apply the right update to its active columns. If the exact routine or its finite-precision realization returns bulge-chase-invariant-failure, return that status with the partial matrix and factors. Use [[lem-two-sided-scaled-householder-similarity-error]] to store the proved two-sided coefficient $\\alpha_{m_j}=a_{m_j}+b_{m_j}+a_{m_j}b_{m_j}$, with $a$ the target-overwrite coefficient or separate-block coefficient as actually used and $b$ the right separate-block coefficient. This gives $\\|E_j\\|_F\\le\\alpha_{m_j}\\|\\widehat H_{j-1}\\|_F$ when its $m_ju<1$ and range hypotheses hold. Apply the same certificate to every Hessenberg-initialization similarity. If any step lacks that certificate, retain the residual diagnostic and set the backward-error-certificate status to inconclusive.\n5. Stop with Schur-computed when every complex block has size one, or every real block has size one or is a $2\\times2$ block with negative characteristic-polynomial discriminant. Use the supplied evaluator, or the finite integer recipe in [[lem-exact-rational-two-by-two-discriminant-sign]] when exact rational/dyadic encodings are available, for each real block's $\\operatorname{discSign}$ as defined in [[def-exact-real-2x2-discriminant-sign-predicate]]. If no exact sign is available, return schur-type-undecided and do not claim Schur-computed. If the target check fails when the sweep count reaches $N$, return budget-exhausted; in particular, with $N=0$ return Schur-computed only when the initialized matrix already has the target block structure. Return the partial matrix and factors on every failure or nonconvergence status.\n\nLet $\\widehat T$ be the final returned matrix. The output includes the product representation $Q$, residual matrix $R=Q^*AQ-\\widehat T$ and its Frobenius norm as diagnostics, the exact orthogonality bound $0$ for that reflector product, the recorded deflation entries, and either the accumulated backward-error bound when all local certificates exist or certificate status inconclusive. Bound expressions and any claimed upper bounds are evaluated exactly or with rigorous outward allowances; uncorrected rounded residual norms are diagnostics only. A rounded dense matrix formed from $Q$ has its own orthogonality residual and is not asserted exactly unitary. The residual diagnostic does not itself give a forward eigenvalue bound. The procedure asserts no unconditional convergence of any shift schedule.",
+    "consumer_use_excerpts": [
+      "1. Run [[alg-finite-budget-francis-schur-reduction]] in its complex branch.\n   Propagate any non-Schur status. Treat its returned $Q,T$ as candidates and\n   verify exactly that $Q^*Q=I$, $A=QTQ^*$, and $T$ is upper triangular. If a\n   check fails, return schur-certificate-failure.\n2. The diagonal entries of this exact upper-triangular $T$ are the eigenvalues\n   of $A$. Test each $\\lambda$. If $\\lambda\\in(-\\infty,0]$, return\n   branch-domain-failure; if an exact sign comparison is unavailable, return\n   branch-domain-undecided. This test occurs before any holomorphic matrix\n   evaluation.\n3. For the logarithm request, evaluate the scalar branch\n   $f(z)=\\operatorname{Log}z$. For the square-root request, use\n   $f(z)=z^{1/2}_{\\operatorname{Log}}$. Then call\n   [[alg-schur-parlett-matrix-function]] with $A$, $f$, its controls, and the\n   supplied Jordan data. Propagate any Schur, Jordan-data, Sylvester, range,\n   or budget status. On parlett-success, return its factored primary value\n   with status branch-aware-candidate."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[29]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/alg-principal-matrix-logarithm-and-square-root.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/74",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "alg-principal-matrix-logarithm-and-square-root",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "status": "open",
+      "evidence": "Supplier definition excerpt: “1. Reduce $A$ to upper Hessenberg form with Householder similarities. For $k=1,\\ldots,\\max(n-2,0)$ in increasing order, use active indices $S=\\{k+1,\\ldots,n\\}$, target $x=H_{S,k}$, and trailing left panel $B=H_{S,\\{k+1,\\ldots,n\\}}$ with columns in increasing order. In the real branch use [[alg-scaled-householder-reflector-formation-and-application]] for the finite left application and overwrite; in the complex branch use [[alg-complex-scaled-householder-reflector-step]]. Complete each similarity by the right application above on columns $S$. If the resulting matrix fails the exact upper-Hessenberg zero-pattern check, return bulge-chase-invariant-failure with the partial factors. Store the exact unitary reflector factors as a product representation $Q_0$.\n2. At each sweep, test every active first-subdiagonal entry by\n   $$|h_{i,i-1}|\\le\\tau\\bigl(|h_{i-1,i-1}|+|h_{i,i}|\\bigr).$$\n   For a complex entry $z=a+ib$, evaluate $|z|$ by $s=\\max(|a|,|b|)$ and $s\\sqrt{(a/s)^2+(b/s)^2}$ when $z\\ne0$, with divisions, squares, sum, square root and final scaling rounded in the stated order; use $|0|=0$. Return range-failure if this evaluation fails. Compute the diagonal-magnitude sum first, then multiply by $\\tau$ in the operationwise model; compare the resulting finite values exactly. When the test holds, set that entry to zero, record its original value as a deflation perturbation, and split the active block. The equality case deflates. Do not use the Hermitian-tridiagonal Wilkinson shift rule for a general Hessenberg matrix.\n3. Check for the target Schur block structure after initialization and after each sweep. A complex active block of size at least two uses a single shift, normally its bottom-right entry. A real active block of size at least two uses the real quadratic $p(z)=z^2-sz+t$ with trailing block $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$; compute $s=\\operatorname{fl}(a+d)$ and $t=\\operatorname{fl}(\\operatorname{fl}(ad)-\\operatorname{fl}(bc))$ in that order, returning range-failure if an operation fails. Maintain a counter for each active block, reset it after any deflation in that block, and after $h$ consecutive sweeps without deflation consume that block's next declared exceptional shift or real quadratic. If the required table entry is absent, return stagnation-exhausted.\n4. Apply the corresponding implicit bulge chase from [[alg-exact-francis-hessenberg-qr-step]]. For the initial single-shift vector compute $x_1=\\operatorname{fl}(h_{11}-\\mu)$ and $x_i=h_{i1}$ for $i>1$. For the initial real double-shift vector, compute $u=He_1$, then $w=Hu$ by left-to-right rounded matrix-vector products, then $x=\\operatorname{fl}(\\operatorname{fl}(w-su)+te_1)$ componentwise. Compute only the first $r+1$ components from the Hessenberg support pattern; on range failure return the operation index and partial factors. For a chase at column $j$, use active indices $S=I_j$, target $x=H_{S,j}$, and trailing left panel $B=H_{S,\\{j+1,\\ldots,n\\}}$ with columns in increasing order. Call the real or complex formation routine, write the target tail zeros exactly, complete the two-sided update by the right-kernel order above on columns $S$, and append the exact reflector representation to $Q$. In the initial polynomial-vector step there is no matrix-target column; use the full active row panel for the left update and then apply the right update to its active columns. If the exact routine or its finite-precision realization returns bulge-chase-invariant-failure, return that status with the partial matrix and factors. Use [[lem-two-sided-scaled-householder-similarity-error]] to store the proved two-sided coefficient $\\alpha_{m_j}=a_{m_j}+b_{m_j}+a_{m_j}b_{m_j}$, with $a$ the target-overwrite coefficient or separate-block coefficient as actually used and $b$ the right separate-block coefficient. This gives $\\|E_j\\|_F\\le\\alpha_{m_j}\\|\\widehat H_{j-1}\\|_F$ when its $m_ju<1$ and range hypotheses hold. Apply the same certificate to every Hessenberg-initialization similarity. If any step lacks that certificate, retain the residual diagnostic and set the backward-error-certificate status to inconclusive.\n5. Stop with Schur-computed when every complex block has size one, or every real block has size one or is a $2\\times2$ block with negative characteristic-polynomial discriminant. Use the supplied evaluator, or the finite integer recipe in [[lem-exact-rational-two-by-two-discriminant-sign]] when exact rational/dyadic encodings are available, for each real block's $\\operatorname{discSign}$ as defined in [[def-exact-real-2x2-discriminant-sign-predicate]]. If no exact sign is available, return schur-type-undecided and do not claim Schur-computed. If the target check fails when the sweep count reaches $N$, return budget-exhausted; in particular, with $N=0$ return Schur-computed only when the initialized matrix already has the target block structure. Return the partial matrix and factors on every failure or nonconvergence status.” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-principal-matrix-logarithm-and-square-root",
+    "supplier": "def-real-and-complex-schur-forms",
+    "consumer_batch": "68",
+    "supplier_batch": "33",
+    "status": "verified",
+    "evidence": "The complex branch independently checks Q*Q=I, A=QTQ* and upper triangular T, matching the exact source Schur-pair convention before analytic/Jordan or branch evaluation. A computed triangular candidate alone is insufficient.",
+    "inspected_paths": [
+      "items/def-real-and-complex-schur-forms.md#Definition",
+      "items/alg-principal-matrix-logarithm-and-square-root.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $n\\ge0$ and $A\\in\\mathbb F^{n\\times n}$, and let $Q^*$ denote transpose over $\\mathbb R$ and conjugate transpose over $\\mathbb C$. A **complex Schur pair** for $A$ is a pair $(Q,T)$ with $Q^*Q=I$ and $A=QTQ^*$, where $T$ is upper triangular.\n\nFor real $A$, a **real Schur pair** is a pair $(Q,T)$ with $Q^TQ=I$ and $A=QTQ^T$, where $T$ is block upper triangular and every diagonal block is either a real $1\\times1$ block or a real $2\\times2$ block with negative characteristic-polynomial discriminant. Such a $2\\times2$ block has one nonreal conjugate eigenvalue pair. The definition does not assert that a finite shift strategy reaches such a pair.\n\nFor $B=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}\\in\\mathbb R^{2\\times2}$, its characteristic-polynomial discriminant means the exact real number $\\Delta(B)=(a+d)^2-4(ad-bc)$. “Negative discriminant” means the exact comparison $\\Delta(B)<0$.",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[30]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/alg-principal-matrix-logarithm-and-square-root.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/75",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "alg-principal-matrix-logarithm-and-square-root",
+      "supplier": "def-real-and-complex-schur-forms",
+      "status": "open",
+      "evidence": "Supplier definition excerpt: “For real $A$, a **real Schur pair** is a pair $(Q,T)$ with $Q^TQ=I$ and $A=QTQ^T$, where $T$ is block upper triangular and every diagonal block is either a real $1\\times1$ block or a real $2\\times2$ block with negative characteristic-polynomial discriminant. Such a $2\\times2$ block has one nonreal conjugate eigenvalue pair. The definition does not assert that a finite shift strategy reaches such a pair.” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-schur-parlett-matrix-function",
+    "supplier": "alg-bartels-stewart-sylvester-equation",
+    "consumer_batch": "68",
+    "supplier_batch": "49",
+    "status": "verified",
+    "evidence": "The consumer invokes the finite exact-certificate Bartels-Stewart route on its local Parlett equation and accepts only exact unique success. Pivot/separation failures trigger a finite contiguous merge; other Schur/range/budget failures are inconclusive. The source success equation is used as an exact identity, never as a rounded Schur or stability guarantee.",
+    "inspected_paths": [
+      "items/alg-bartels-stewart-sylvester-equation.md#Definition",
+      "items/alg-schur-parlett-matrix-function.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Let $F\\in\\{\\mathbb R,\\mathbb C\\}$, $m,n\\ge1$, $A\\in F^{m\\times m}$, $B\\in F^{n\\times n}$ and $C\\in F^{m\\times n}$. Inputs also include a pivot threshold $\\tau\\ge0$, Schur controls for each matrix, a fixed constant $c_0>0$, and finite sweep budgets $N_A\\le c_0m$, $N_B\\le c_0n$. The local transforms, certificate checks and block substitution use exact scalar arithmetic and comparisons. The delegated Schur calls retain their specified rounded arithmetic, admissible input representations, range conditions and statuses; their returned factors remain candidates until the exact checks below succeed.\n\nThe default real-block sign controller is the fixed exact real-arithmetic expression tree $s=(a-d)^2+4bc$, followed by its sign comparisons, for [[def-exact-real-2x2-discriminant-sign-predicate]]. This uses five exact arithmetic operations and at most two sign comparisons in the declared exact local arithmetic model. For rational/dyadic encoded stored values, [[lem-exact-rational-two-by-two-discriminant-sign]] gives the finite exact integer realization; a fixed-format decoder, when used, is included in the control cost. These exact controller operations are separate from the rounded Schur matrix updates. No bit-complexity bound for integer/rational arithmetic is claimed.\n\nChoose either bounded-controller mode, the default, or arbitrary-terminating-controller mode. In bounded mode supply a nonnegative integer per-call budget $K$. Custom sign or decoding routines are finite instruction programs over exact scalar real/integer arithmetic, comparisons, register operations and branches; no opaque callback is a unit instruction. The interpreter charges one unit per executed instruction, including decoding, the built-in tree and any custom-result verification within the same per-call $K$ budget; it checks instruction/operation validity when encountered and returns undecided on exhaustion or invalid execution. An undecided sign is propagated as the Schur type-undecided status and then outer `schur-failure`. The fixed built-in sign tree or integer recipe has a fixed finite instruction count independent of matrix dimension. Any custom reported sign must agree with the built-in exact discriminant tree before acceptance. In arbitrary-terminating mode custom programs must terminate on every supplied input; record their total executed controller work as $C_{\\rm aux}$. This richer mode retains finite termination but has the additional work in its cost bound. In the cubic-cost branch $K$ and representation-control instruction costs are fixed independently of matrix dimension. Programs are executed by instruction lookup without an up-front scan of unused code.\n\n1. Run [[alg-finite-budget-francis-schur-reduction]] on $A$ and $B$ with their supplied controls and budgets. If either call does not return `Schur-computed`, return `schur-failure` with the underlying status.\n\n2. Treat the returned factors as candidates and verify the exact certificates. In the complex branch check $U^*U=I$, $A=UTU^*$, and upper triangularity of $T$; in the real branch check $U^TU=I$, $A=UTU^T$, and the real block upper-triangular form of [[def-real-and-complex-schur-forms]]. Perform the corresponding checks for $B=VSV^*$. If any check fails, return `schur-certificate-failure`.\n\n3. Set $D=U^*CV$. Use the column-vectorization and Kronecker convention of [[lem-sylvester-vectorization-isometry-and-kronecker-identity]]. Partition $T$ into diagonal blocks $T_{ii}$ and $S$ into diagonal blocks $S_{jj}$ as in the exact real or complex Schur form. Traverse $j$ from left to right and, for each $j$, traverse $i$ from bottom to top. Form\n\n$$\nF_{ij}=D_{ij}-\\sum_{k>i}T_{ik}Y_{kj}-\\sum_{\\ell<j}Y_{i\\ell}S_{\\ell j}.\n$$\n\nThe terms on the right have already been computed in this traversal order. Define $\\Phi_{ij}(Z)=T_{ii}Z+ZS_{jj}$ and its matrix representation $M_{ij}=I_{s_j}\\otimes T_{ii}+S_{jj}^T\\otimes I_{r_i}$ on column-vectorized blocks, where $r_i,s_j\\in\\{1,2\\}$ are the block sizes. Let $q=r_is_j\\le4$ and compute $\\delta(M_{ij})$ from [[lem-small-block-determinant-separation-lower-bound]]. If $\\det(M_{ij})=0$, return `singular-pivot`; if $\\det(M_{ij})\\ne0$ and $\\delta(M_{ij})\\le\\tau$, return `pivot-separation-failure` because the requested pivot bound is not certified. Otherwise use the cofactor adjugate formula of [[lem-adjugate-inverse-formula-over-a-field]] to set $\\operatorname{vec}(Y_{ij})=\\operatorname{adj}(M_{ij})\\operatorname{vec}(F_{ij})/\\det(M_{ij})$ and store $Y_{ij}$. The local dimension is at most four in the real block case and one in the complex triangular case.\n\n4. After all blocks are solved, return `success` and $X=UYV^*$, together with the exact residual $C-(AX+XB)$. No computed Schur candidate is accepted as an exact factorization unless step 2 verifies its defining equalities.",
+    "consumer_use_excerpts": [
+      "1. Call [[alg-finite-budget-francis-schur-reduction]] in its complex branch.\n   Propagate any non-Schur status. Treat its returned $Q,T$ as candidates.\n2. Verify by exact arithmetic that $Q^*Q=I$, $A=QTQ^*$, and $T$ is upper\n   triangular. If any identity fails, return schur-certificate-failure. The\n   computed Schur routine's residual diagnostic alone does not pass this test.\n3. Start from the supplied contiguous block partition of $T$. For each block\n   $T_{ii}$ call [[alg-exact-jordan-block-analytic-evaluation]] with its exact\n   Jordan certificate and return value $F_{ii}$. If a certificate or required\n   derivative is missing, return missing-jordan-data.\n4. Visit block pairs by increasing distance $j-i$. Form\n   $$C_{ij}=F_{ii}T_{ij}-T_{ij}F_{jj} +\\sum_{i<k<j}(F_{ik}T_{kj}-T_{ik}F_{kj}).$$\n   Call [[alg-bartels-stewart-sylvester-equation]] on\n   $T_{ii}F_{ij}+F_{ij}(-T_{jj})=C_{ij}$ with threshold $\\tau$. On an exact unique solve, store\n   $F_{ij}$. If the solve reports a separation or pivot failure and the\n   partition has multiple blocks, merge the contiguous blocks from $i$ through\n   $j$, discard their old diagonal data, and restart step 3. Each merge reduces\n   the block count, so there are at most $n-1$ merges. A different solve,\n   range, or budget failure is returned as inconclusive-sylvester.\n5. Return the factored value $QFQ^*$ with status parlett-success."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[25]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/alg-schur-parlett-matrix-function.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/70",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "alg-schur-parlett-matrix-function",
+      "supplier": "alg-bartels-stewart-sylvester-equation",
+      "status": "open",
+      "evidence": "Supplier definition excerpt: “Let $F\\in\\{\\mathbb R,\\mathbb C\\}$, $m,n\\ge1$, $A\\in F^{m\\times m}$, $B\\in F^{n\\times n}$ and $C\\in F^{m\\times n}$. Inputs also include a pivot threshold $\\tau\\ge0$, Schur controls for each matrix, a fixed constant $c_0>0$, and finite sweep budgets $N_A\\le c_0m$, $N_B\\le c_0n$. The local transforms, certificate checks and block substitution use exact scalar arithmetic and comparisons. The delegated Schur calls retain their specified rounded arithmetic, admissible input representations, range conditions and statuses; their returned factors remain candidates until the exact checks below succeed.” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-schur-parlett-matrix-function",
+    "supplier": "alg-finite-budget-francis-schur-reduction",
+    "consumer_batch": "68",
+    "supplier_batch": "33",
+    "status": "verified",
+    "evidence": "The consumer complex Schur call propagates every non-Schur status and treats returned Q,T only as candidates. Exact unitarity/reconstruction/triangularity are checked before use, so rounded backward residual diagnostics and finite budgets never imply the exact analytic identity.",
+    "inspected_paths": [
+      "items/alg-finite-budget-francis-schur-reduction.md#Definition",
+      "items/alg-schur-parlett-matrix-function.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Input a real or complex square matrix $A\\in\\mathbb F^{n\\times n}$ with $n\\ge1$, a finite nonnegative deflation tolerance $\\tau$, a nonnegative integer sweep budget $N$, a positive integer stagnation period $h$, finite tables of finite exceptional shifts, optional exact rational/dyadic encodings of its stored real values, and optionally a terminating exact evaluator of [[def-exact-real-2x2-discriminant-sign-predicate]]. A formation `breakdown` is propagated with the operation index and partial factors. Every scalar operation is evaluated in the operationwise model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. Any invalid, overflow, or underflow operation returns range-failure with the operation index and partial factors.\n\nFor each stored reflector with active indices $S=(s_1,\\ldots,s_m)$, vector $v\\in\\mathbb F^m$, and real computed coefficient $\\widehat\\tau$, the real or complex formation routine first performs the stated finite left application. Then perform the right application in this fixed order: for each matrix row $i=1,\\ldots,n$, compute $d_i=\\operatorname{fl}(\\sum_{a=1}^m H^L_{i,s_a}v_a)$ by left-to-right rounded products and additions; for $a=1,\\ldots,m$, compute $c_a=\\operatorname{fl}(\\widehat\\tau\\overline{v_a})$, $g_{ia}=\\operatorname{fl}(d_ic_a)$, and $H^R_{i,s_a}=\\operatorname{fl}(H^L_{i,s_a}-g_{ia})$. Each complex product uses the six real operations of the arithmetic model. The exact factor appended to $Q$ is $P(v)=I-2vv^*/(v^*v)$; the computed right update uses $\\widehat\\tau$ as displayed and is not asserted equal to multiplication by $P(v)$. For a matrix-target column, the formation routine's explicit zero writes are retained. In the initial polynomial-vector step there is no matrix-target column: use the entire active row panel for the left update and then apply the right update to the active columns. Record deflation writes separately, including a pure deflation with no following reflector as an identity-transform stage; a local error certificate must account for all other rounding and target-column writes.\n\n1. Reduce $A$ to upper Hessenberg form with Householder similarities. For $k=1,\\ldots,\\max(n-2,0)$ in increasing order, use active indices $S=\\{k+1,\\ldots,n\\}$, target $x=H_{S,k}$, and trailing left panel $B=H_{S,\\{k+1,\\ldots,n\\}}$ with columns in increasing order. In the real branch use [[alg-scaled-householder-reflector-formation-and-application]] for the finite left application and overwrite; in the complex branch use [[alg-complex-scaled-householder-reflector-step]]. Complete each similarity by the right application above on columns $S$. If the resulting matrix fails the exact upper-Hessenberg zero-pattern check, return bulge-chase-invariant-failure with the partial factors. Store the exact unitary reflector factors as a product representation $Q_0$.\n2. At each sweep, test every active first-subdiagonal entry by\n   $$|h_{i,i-1}|\\le\\tau\\bigl(|h_{i-1,i-1}|+|h_{i,i}|\\bigr).$$\n   For a complex entry $z=a+ib$, evaluate $|z|$ by $s=\\max(|a|,|b|)$ and $s\\sqrt{(a/s)^2+(b/s)^2}$ when $z\\ne0$, with divisions, squares, sum, square root and final scaling rounded in the stated order; use $|0|=0$. Return range-failure if this evaluation fails. Compute the diagonal-magnitude sum first, then multiply by $\\tau$ in the operationwise model; compare the resulting finite values exactly. When the test holds, set that entry to zero, record its original value as a deflation perturbation, and split the active block. The equality case deflates. Do not use the Hermitian-tridiagonal Wilkinson shift rule for a general Hessenberg matrix.\n3. Check for the target Schur block structure after initialization and after each sweep. A complex active block of size at least two uses a single shift, normally its bottom-right entry. A real active block of size at least two uses the real quadratic $p(z)=z^2-sz+t$ with trailing block $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$; compute $s=\\operatorname{fl}(a+d)$ and $t=\\operatorname{fl}(\\operatorname{fl}(ad)-\\operatorname{fl}(bc))$ in that order, returning range-failure if an operation fails. Maintain a counter for each active block, reset it after any deflation in that block, and after $h$ consecutive sweeps without deflation consume that block's next declared exceptional shift or real quadratic. If the required table entry is absent, return stagnation-exhausted.\n4. Apply the corresponding implicit bulge chase from [[alg-exact-francis-hessenberg-qr-step]]. For the initial single-shift vector compute $x_1=\\operatorname{fl}(h_{11}-\\mu)$ and $x_i=h_{i1}$ for $i>1$. For the initial real double-shift vector, compute $u=He_1$, then $w=Hu$ by left-to-right rounded matrix-vector products, then $x=\\operatorname{fl}(\\operatorname{fl}(w-su)+te_1)$ componentwise. Compute only the first $r+1$ components from the Hessenberg support pattern; on range failure return the operation index and partial factors. For a chase at column $j$, use active indices $S=I_j$, target $x=H_{S,j}$, and trailing left panel $B=H_{S,\\{j+1,\\ldots,n\\}}$ with columns in increasing order. Call the real or complex formation routine, write the target tail zeros exactly, complete the two-sided update by the right-kernel order above on columns $S$, and append the exact reflector representation to $Q$. In the initial polynomial-vector step there is no matrix-target column; use the full active row panel for the left update and then apply the right update to its active columns. If the exact routine or its finite-precision realization returns bulge-chase-invariant-failure, return that status with the partial matrix and factors. Use [[lem-two-sided-scaled-householder-similarity-error]] to store the proved two-sided coefficient $\\alpha_{m_j}=a_{m_j}+b_{m_j}+a_{m_j}b_{m_j}$, with $a$ the target-overwrite coefficient or separate-block coefficient as actually used and $b$ the right separate-block coefficient. This gives $\\|E_j\\|_F\\le\\alpha_{m_j}\\|\\widehat H_{j-1}\\|_F$ when its $m_ju<1$ and range hypotheses hold. Apply the same certificate to every Hessenberg-initialization similarity. If any step lacks that certificate, retain the residual diagnostic and set the backward-error-certificate status to inconclusive.\n5. Stop with Schur-computed when every complex block has size one, or every real block has size one or is a $2\\times2$ block with negative characteristic-polynomial discriminant. Use the supplied evaluator, or the finite integer recipe in [[lem-exact-rational-two-by-two-discriminant-sign]] when exact rational/dyadic encodings are available, for each real block's $\\operatorname{discSign}$ as defined in [[def-exact-real-2x2-discriminant-sign-predicate]]. If no exact sign is available, return schur-type-undecided and do not claim Schur-computed. If the target check fails when the sweep count reaches $N$, return budget-exhausted; in particular, with $N=0$ return Schur-computed only when the initialized matrix already has the target block structure. Return the partial matrix and factors on every failure or nonconvergence status.\n\nLet $\\widehat T$ be the final returned matrix. The output includes the product representation $Q$, residual matrix $R=Q^*AQ-\\widehat T$ and its Frobenius norm as diagnostics, the exact orthogonality bound $0$ for that reflector product, the recorded deflation entries, and either the accumulated backward-error bound when all local certificates exist or certificate status inconclusive. Bound expressions and any claimed upper bounds are evaluated exactly or with rigorous outward allowances; uncorrected rounded residual norms are diagnostics only. A rounded dense matrix formed from $Q$ has its own orthogonality residual and is not asserted exactly unitary. The residual diagnostic does not itself give a forward eigenvalue bound. The procedure asserts no unconditional convergence of any shift schedule.",
+    "consumer_use_excerpts": [
+      "1. Call [[alg-finite-budget-francis-schur-reduction]] in its complex branch.\n   Propagate any non-Schur status. Treat its returned $Q,T$ as candidates.\n2. Verify by exact arithmetic that $Q^*Q=I$, $A=QTQ^*$, and $T$ is upper\n   triangular. If any identity fails, return schur-certificate-failure. The\n   computed Schur routine's residual diagnostic alone does not pass this test.\n3. Start from the supplied contiguous block partition of $T$. For each block\n   $T_{ii}$ call [[alg-exact-jordan-block-analytic-evaluation]] with its exact\n   Jordan certificate and return value $F_{ii}$. If a certificate or required\n   derivative is missing, return missing-jordan-data.\n4. Visit block pairs by increasing distance $j-i$. Form\n   $$C_{ij}=F_{ii}T_{ij}-T_{ij}F_{jj} +\\sum_{i<k<j}(F_{ik}T_{kj}-T_{ik}F_{kj}).$$\n   Call [[alg-bartels-stewart-sylvester-equation]] on\n   $T_{ii}F_{ij}+F_{ij}(-T_{jj})=C_{ij}$ with threshold $\\tau$. On an exact unique solve, store\n   $F_{ij}$. If the solve reports a separation or pivot failure and the\n   partition has multiple blocks, merge the contiguous blocks from $i$ through\n   $j$, discard their old diagonal data, and restart step 3. Each merge reduces\n   the block count, so there are at most $n-1$ merges. A different solve,\n   range, or budget failure is returned as inconclusive-sylvester.\n5. Return the factored value $QFQ^*$ with status parlett-success."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[22]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/alg-schur-parlett-matrix-function.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/67",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "alg-schur-parlett-matrix-function",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "status": "open",
+      "evidence": "Supplier definition excerpt: “1. Reduce $A$ to upper Hessenberg form with Householder similarities. For $k=1,\\ldots,\\max(n-2,0)$ in increasing order, use active indices $S=\\{k+1,\\ldots,n\\}$, target $x=H_{S,k}$, and trailing left panel $B=H_{S,\\{k+1,\\ldots,n\\}}$ with columns in increasing order. In the real branch use [[alg-scaled-householder-reflector-formation-and-application]] for the finite left application and overwrite; in the complex branch use [[alg-complex-scaled-householder-reflector-step]]. Complete each similarity by the right application above on columns $S$. If the resulting matrix fails the exact upper-Hessenberg zero-pattern check, return bulge-chase-invariant-failure with the partial factors. Store the exact unitary reflector factors as a product representation $Q_0$.\n2. At each sweep, test every active first-subdiagonal entry by\n   $$|h_{i,i-1}|\\le\\tau\\bigl(|h_{i-1,i-1}|+|h_{i,i}|\\bigr).$$\n   For a complex entry $z=a+ib$, evaluate $|z|$ by $s=\\max(|a|,|b|)$ and $s\\sqrt{(a/s)^2+(b/s)^2}$ when $z\\ne0$, with divisions, squares, sum, square root and final scaling rounded in the stated order; use $|0|=0$. Return range-failure if this evaluation fails. Compute the diagonal-magnitude sum first, then multiply by $\\tau$ in the operationwise model; compare the resulting finite values exactly. When the test holds, set that entry to zero, record its original value as a deflation perturbation, and split the active block. The equality case deflates. Do not use the Hermitian-tridiagonal Wilkinson shift rule for a general Hessenberg matrix.\n3. Check for the target Schur block structure after initialization and after each sweep. A complex active block of size at least two uses a single shift, normally its bottom-right entry. A real active block of size at least two uses the real quadratic $p(z)=z^2-sz+t$ with trailing block $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$; compute $s=\\operatorname{fl}(a+d)$ and $t=\\operatorname{fl}(\\operatorname{fl}(ad)-\\operatorname{fl}(bc))$ in that order, returning range-failure if an operation fails. Maintain a counter for each active block, reset it after any deflation in that block, and after $h$ consecutive sweeps without deflation consume that block's next declared exceptional shift or real quadratic. If the required table entry is absent, return stagnation-exhausted.\n4. Apply the corresponding implicit bulge chase from [[alg-exact-francis-hessenberg-qr-step]]. For the initial single-shift vector compute $x_1=\\operatorname{fl}(h_{11}-\\mu)$ and $x_i=h_{i1}$ for $i>1$. For the initial real double-shift vector, compute $u=He_1$, then $w=Hu$ by left-to-right rounded matrix-vector products, then $x=\\operatorname{fl}(\\operatorname{fl}(w-su)+te_1)$ componentwise. Compute only the first $r+1$ components from the Hessenberg support pattern; on range failure return the operation index and partial factors. For a chase at column $j$, use active indices $S=I_j$, target $x=H_{S,j}$, and trailing left panel $B=H_{S,\\{j+1,\\ldots,n\\}}$ with columns in increasing order. Call the real or complex formation routine, write the target tail zeros exactly, complete the two-sided update by the right-kernel order above on columns $S$, and append the exact reflector representation to $Q$. In the initial polynomial-vector step there is no matrix-target column; use the full active row panel for the left update and then apply the right update to its active columns. If the exact routine or its finite-precision realization returns bulge-chase-invariant-failure, return that status with the partial matrix and factors. Use [[lem-two-sided-scaled-householder-similarity-error]] to store the proved two-sided coefficient $\\alpha_{m_j}=a_{m_j}+b_{m_j}+a_{m_j}b_{m_j}$, with $a$ the target-overwrite coefficient or separate-block coefficient as actually used and $b$ the right separate-block coefficient. This gives $\\|E_j\\|_F\\le\\alpha_{m_j}\\|\\widehat H_{j-1}\\|_F$ when its $m_ju<1$ and range hypotheses hold. Apply the same certificate to every Hessenberg-initialization similarity. If any step lacks that certificate, retain the residual diagnostic and set the backward-error-certificate status to inconclusive.\n5. Stop with Schur-computed when every complex block has size one, or every real block has size one or is a $2\\times2$ block with negative characteristic-polynomial discriminant. Use the supplied evaluator, or the finite integer recipe in [[lem-exact-rational-two-by-two-discriminant-sign]] when exact rational/dyadic encodings are available, for each real block's $\\operatorname{discSign}$ as defined in [[def-exact-real-2x2-discriminant-sign-predicate]]. If no exact sign is available, return schur-type-undecided and do not claim Schur-computed. If the target check fails when the sweep count reaches $N$, return budget-exhausted; in particular, with $N=0$ return Schur-computed only when the initialized matrix already has the target block structure. Return the partial matrix and factors on every failure or nonconvergence status.” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-schur-parlett-matrix-function",
+    "supplier": "def-real-and-complex-schur-forms",
+    "consumer_batch": "68",
+    "supplier_batch": "33",
+    "status": "verified",
+    "evidence": "The complex branch independently checks Q*Q=I, A=QTQ* and upper triangular T, matching the exact source Schur-pair convention before analytic/Jordan or branch evaluation. A computed triangular candidate alone is insufficient.",
+    "inspected_paths": [
+      "items/def-real-and-complex-schur-forms.md#Definition",
+      "items/alg-schur-parlett-matrix-function.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $n\\ge0$ and $A\\in\\mathbb F^{n\\times n}$, and let $Q^*$ denote transpose over $\\mathbb R$ and conjugate transpose over $\\mathbb C$. A **complex Schur pair** for $A$ is a pair $(Q,T)$ with $Q^*Q=I$ and $A=QTQ^*$, where $T$ is upper triangular.\n\nFor real $A$, a **real Schur pair** is a pair $(Q,T)$ with $Q^TQ=I$ and $A=QTQ^T$, where $T$ is block upper triangular and every diagonal block is either a real $1\\times1$ block or a real $2\\times2$ block with negative characteristic-polynomial discriminant. Such a $2\\times2$ block has one nonreal conjugate eigenvalue pair. The definition does not assert that a finite shift strategy reaches such a pair.\n\nFor $B=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}\\in\\mathbb R^{2\\times2}$, its characteristic-polynomial discriminant means the exact real number $\\Delta(B)=(a+d)^2-4(ad-bc)$. “Negative discriminant” means the exact comparison $\\Delta(B)<0$.",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[21]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/alg-schur-parlett-matrix-function.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/66",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "alg-schur-parlett-matrix-function",
+      "supplier": "def-real-and-complex-schur-forms",
+      "status": "open",
+      "evidence": "Supplier definition excerpt: “For real $A$, a **real Schur pair** is a pair $(Q,T)$ with $Q^TQ=I$ and $A=QTQ^T$, where $T$ is block upper triangular and every diagonal block is either a real $1\\times1$ block or a real $2\\times2$ block with negative characteristic-polynomial discriminant. Such a $2\\times2$ block has one nonreal conjugate eigenvalue pair. The definition does not assert that a finite shift strategy reaches such a pair.” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-schur-parlett-matrix-function",
+    "supplier": "def-sylvester-operator-and-separation-number",
+    "consumer_batch": "68",
+    "supplier_batch": "49",
+    "status": "verified",
+    "evidence": "The Parlett equation is explicitly Tii X+X(-Tjj)=C, consistent with the source AX+XB and sep(A,-B) convention; threshold/failure does not assert separation from a diagnostic estimate.",
+    "inspected_paths": [
+      "items/def-sylvester-operator-and-separation-number.md#Definition",
+      "items/alg-schur-parlett-matrix-function.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "For $F\\in\\{\\mathbb R,\\mathbb C\\}$, $A\\in F^{m\\times m}$, $B\\in F^{n\\times n}$ with $m,n\\ge1$, define the Sylvester operator $\\mathcal S_{A,B}:F^{m\\times n}\\to F^{m\\times n}$ by\n\n$$\\mathcal S_{A,B}(X)=AX+XB.$$\n\nEquip $F^{m\\times n}$ with the Frobenius norm of [[def-frobenius-matrix-norm]]. The column-vectorization isometry of [[lem-sylvester-vectorization-isometry-and-kronecker-identity]] identifies this norm with the Euclidean norm on $F^{mn}$. Define\n\n$$\\operatorname{sep}(A,-B):=\\sigma_{\\min}(\\mathcal S_{A,B})=\\min_{\\|X\\|_F=1}\\|AX+XB\\|_F.$$\n\nHere $\\sigma_{\\min}$ denotes the smallest singular value of the finite-dimensional linear map under these inner products. The finite-dimensional singular value decomposition [[thm-singular-value-decomposition]] ensures this minimum is well-defined. The argument $-B$ is part of the conventional label: the operator being measured is $X\\mapsto AX+XB$.",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[23]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/alg-schur-parlett-matrix-function.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/68",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "alg-schur-parlett-matrix-function",
+      "supplier": "def-sylvester-operator-and-separation-number",
+      "status": "open",
+      "evidence": "Supplier definition excerpt: “Equip $F^{m\\times n}$ with the Frobenius norm of [[def-frobenius-matrix-norm]]. The column-vectorization isometry of [[lem-sylvester-vectorization-isometry-and-kronecker-identity]] identifies this norm with the Euclidean norm on $F^{mn}$. Define” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-schur-parlett-matrix-function",
+    "supplier": "thm-bartels-stewart-sylvester-exact-correctness",
+    "consumer_batch": "68",
+    "supplier_batch": "49",
+    "status": "verified",
+    "evidence": "The consumer invokes the finite exact-certificate Bartels-Stewart route on its local Parlett equation and accepts only exact unique success. Pivot/separation failures trigger a finite contiguous merge; other Schur/range/budget failures are inconclusive. The source success equation is used as an exact identity, never as a rounded Schur or stability guarantee.",
+    "inspected_paths": [
+      "items/thm-bartels-stewart-sylvester-exact-correctness.md#Statement",
+      "items/alg-schur-parlett-matrix-function.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Suppose [[alg-bartels-stewart-sylvester-equation]] returns `success` for $A,B,C$. Then its returned $X$ satisfies $AX+XB=C$. If $\\sigma(A)\\cap(-\\sigma(B))=\\varnothing$, this $X$ is the unique solution.",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[26]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/alg-schur-parlett-matrix-function.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/71",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "alg-schur-parlett-matrix-function",
+      "supplier": "thm-bartels-stewart-sylvester-exact-correctness",
+      "status": "open",
+      "evidence": "Supplier statement excerpt: “Suppose [[alg-bartels-stewart-sylvester-equation]] returns `success` for $A,B,C$. Then its returned $X$ satisfies $AX+XB=C$. If $\\sigma(A)\\cap(-\\sigma(B))=\\varnothing$, this $X$ is the unique solution.” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Checked the consumer's stated domain and use against the supplier's current statement; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-schur-parlett-matrix-function",
+    "supplier": "thm-sylvester-unique-solvability-spectral-separation",
+    "consumer_batch": "68",
+    "supplier_batch": "49",
+    "status": "verified",
+    "evidence": "For the Parlett off-diagonal equation Tii X-X Tjj=C, the source is used with coefficients A=Tii and B=-Tjj. Distinct block spectra give the required sigma(A)∩(-sigma(B))=empty condition; successful exact local solves/merge failures are explicit. The correctness proof uses uniqueness only for those solved separated block equations.",
+    "inspected_paths": [
+      "items/thm-sylvester-unique-solvability-spectral-separation.md#Statement",
+      "items/alg-schur-parlett-matrix-function.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Let $F\\in\\{\\mathbb R,\\mathbb C\\}$, $m,n\\ge1$, $A\\in F^{m\\times m}$ and $B\\in F^{n\\times n}$. Spectra of real matrices are taken over $\\mathbb C$. The map $\\mathcal S_{A,B}$ of [[def-sylvester-operator-and-separation-number]] is invertible if and only if\n\n$$\n\\sigma(A)\\cap(-\\sigma(B))=\\varnothing.\n$$\n\nEquivalently, for every $C\\in F^{m\\times n}$, the equation $AX+XB=C$ has a unique solution if and only if this spectral condition holds. The same condition is equivalent to $\\operatorname{sep}(A,-B)>0$.",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[24]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/alg-schur-parlett-matrix-function.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/69",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "alg-schur-parlett-matrix-function",
+      "supplier": "thm-sylvester-unique-solvability-spectral-separation",
+      "status": "open",
+      "evidence": "Supplier statement excerpt: “Let $F\\in\\{\\mathbb R,\\mathbb C\\}$, $m,n\\ge1$, $A\\in F^{m\\times m}$ and $B\\in F^{n\\times n}$. Spectra of real matrices are taken over $\\mathbb C$. The map $\\mathcal S_{A,B}$ of [[def-sylvester-operator-and-separation-number]] is invertible if and only if” Directly called or stated in the consumer Definition/Statement; the finite input and status convention were compared with the excerpt. Checked the consumer's stated domain and use against the supplier's current statement; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-rotation-logarithm-branch-cut",
+    "supplier": "alg-finite-budget-francis-schur-reduction",
+    "consumer_batch": "68",
+    "supplier_batch": "33",
+    "status": "verified",
+    "evidence": "The example uses A=-I2, already upper triangular in the complex source branch, so the initialized target check can return Schur-computed without a sweep under valid controls. It still uses the branch algorithm exact certificates; the negative real diagonal triggers branch-domain failure, not a generic finite-budget convergence claim.",
+    "inspected_paths": [
+      "items/alg-finite-budget-francis-schur-reduction.md#Definition",
+      "items/ex-rotation-logarithm-branch-cut.md#Facts/Proof"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Input a real or complex square matrix $A\\in\\mathbb F^{n\\times n}$ with $n\\ge1$, a finite nonnegative deflation tolerance $\\tau$, a nonnegative integer sweep budget $N$, a positive integer stagnation period $h$, finite tables of finite exceptional shifts, optional exact rational/dyadic encodings of its stored real values, and optionally a terminating exact evaluator of [[def-exact-real-2x2-discriminant-sign-predicate]]. A formation `breakdown` is propagated with the operation index and partial factors. Every scalar operation is evaluated in the operationwise model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. Any invalid, overflow, or underflow operation returns range-failure with the operation index and partial factors.\n\nFor each stored reflector with active indices $S=(s_1,\\ldots,s_m)$, vector $v\\in\\mathbb F^m$, and real computed coefficient $\\widehat\\tau$, the real or complex formation routine first performs the stated finite left application. Then perform the right application in this fixed order: for each matrix row $i=1,\\ldots,n$, compute $d_i=\\operatorname{fl}(\\sum_{a=1}^m H^L_{i,s_a}v_a)$ by left-to-right rounded products and additions; for $a=1,\\ldots,m$, compute $c_a=\\operatorname{fl}(\\widehat\\tau\\overline{v_a})$, $g_{ia}=\\operatorname{fl}(d_ic_a)$, and $H^R_{i,s_a}=\\operatorname{fl}(H^L_{i,s_a}-g_{ia})$. Each complex product uses the six real operations of the arithmetic model. The exact factor appended to $Q$ is $P(v)=I-2vv^*/(v^*v)$; the computed right update uses $\\widehat\\tau$ as displayed and is not asserted equal to multiplication by $P(v)$. For a matrix-target column, the formation routine's explicit zero writes are retained. In the initial polynomial-vector step there is no matrix-target column: use the entire active row panel for the left update and then apply the right update to the active columns. Record deflation writes separately, including a pure deflation with no following reflector as an identity-transform stage; a local error certificate must account for all other rounding and target-column writes.\n\n1. Reduce $A$ to upper Hessenberg form with Householder similarities. For $k=1,\\ldots,\\max(n-2,0)$ in increasing order, use active indices $S=\\{k+1,\\ldots,n\\}$, target $x=H_{S,k}$, and trailing left panel $B=H_{S,\\{k+1,\\ldots,n\\}}$ with columns in increasing order. In the real branch use [[alg-scaled-householder-reflector-formation-and-application]] for the finite left application and overwrite; in the complex branch use [[alg-complex-scaled-householder-reflector-step]]. Complete each similarity by the right application above on columns $S$. If the resulting matrix fails the exact upper-Hessenberg zero-pattern check, return bulge-chase-invariant-failure with the partial factors. Store the exact unitary reflector factors as a product representation $Q_0$.\n2. At each sweep, test every active first-subdiagonal entry by\n   $$|h_{i,i-1}|\\le\\tau\\bigl(|h_{i-1,i-1}|+|h_{i,i}|\\bigr).$$\n   For a complex entry $z=a+ib$, evaluate $|z|$ by $s=\\max(|a|,|b|)$ and $s\\sqrt{(a/s)^2+(b/s)^2}$ when $z\\ne0$, with divisions, squares, sum, square root and final scaling rounded in the stated order; use $|0|=0$. Return range-failure if this evaluation fails. Compute the diagonal-magnitude sum first, then multiply by $\\tau$ in the operationwise model; compare the resulting finite values exactly. When the test holds, set that entry to zero, record its original value as a deflation perturbation, and split the active block. The equality case deflates. Do not use the Hermitian-tridiagonal Wilkinson shift rule for a general Hessenberg matrix.\n3. Check for the target Schur block structure after initialization and after each sweep. A complex active block of size at least two uses a single shift, normally its bottom-right entry. A real active block of size at least two uses the real quadratic $p(z)=z^2-sz+t$ with trailing block $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$; compute $s=\\operatorname{fl}(a+d)$ and $t=\\operatorname{fl}(\\operatorname{fl}(ad)-\\operatorname{fl}(bc))$ in that order, returning range-failure if an operation fails. Maintain a counter for each active block, reset it after any deflation in that block, and after $h$ consecutive sweeps without deflation consume that block's next declared exceptional shift or real quadratic. If the required table entry is absent, return stagnation-exhausted.\n4. Apply the corresponding implicit bulge chase from [[alg-exact-francis-hessenberg-qr-step]]. For the initial single-shift vector compute $x_1=\\operatorname{fl}(h_{11}-\\mu)$ and $x_i=h_{i1}$ for $i>1$. For the initial real double-shift vector, compute $u=He_1$, then $w=Hu$ by left-to-right rounded matrix-vector products, then $x=\\operatorname{fl}(\\operatorname{fl}(w-su)+te_1)$ componentwise. Compute only the first $r+1$ components from the Hessenberg support pattern; on range failure return the operation index and partial factors. For a chase at column $j$, use active indices $S=I_j$, target $x=H_{S,j}$, and trailing left panel $B=H_{S,\\{j+1,\\ldots,n\\}}$ with columns in increasing order. Call the real or complex formation routine, write the target tail zeros exactly, complete the two-sided update by the right-kernel order above on columns $S$, and append the exact reflector representation to $Q$. In the initial polynomial-vector step there is no matrix-target column; use the full active row panel for the left update and then apply the right update to its active columns. If the exact routine or its finite-precision realization returns bulge-chase-invariant-failure, return that status with the partial matrix and factors. Use [[lem-two-sided-scaled-householder-similarity-error]] to store the proved two-sided coefficient $\\alpha_{m_j}=a_{m_j}+b_{m_j}+a_{m_j}b_{m_j}$, with $a$ the target-overwrite coefficient or separate-block coefficient as actually used and $b$ the right separate-block coefficient. This gives $\\|E_j\\|_F\\le\\alpha_{m_j}\\|\\widehat H_{j-1}\\|_F$ when its $m_ju<1$ and range hypotheses hold. Apply the same certificate to every Hessenberg-initialization similarity. If any step lacks that certificate, retain the residual diagnostic and set the backward-error-certificate status to inconclusive.\n5. Stop with Schur-computed when every complex block has size one, or every real block has size one or is a $2\\times2$ block with negative characteristic-polynomial discriminant. Use the supplied evaluator, or the finite integer recipe in [[lem-exact-rational-two-by-two-discriminant-sign]] when exact rational/dyadic encodings are available, for each real block's $\\operatorname{discSign}$ as defined in [[def-exact-real-2x2-discriminant-sign-predicate]]. If no exact sign is available, return schur-type-undecided and do not claim Schur-computed. If the target check fails when the sweep count reaches $N$, return budget-exhausted; in particular, with $N=0$ return Schur-computed only when the initialized matrix already has the target block structure. Return the partial matrix and factors on every failure or nonconvergence status.\n\nLet $\\widehat T$ be the final returned matrix. The output includes the product representation $Q$, residual matrix $R=Q^*AQ-\\widehat T$ and its Frobenius norm as diagnostics, the exact orthogonality bound $0$ for that reflector product, the recorded deflation entries, and either the accumulated backward-error bound when all local certificates exist or certificate status inconclusive. Bound expressions and any claimed upper bounds are evaluated exactly or with rigorous outward allowances; uncorrected rounded residual norms are diagnostics only. A rounded dense matrix formed from $Q$ has its own orthogonality residual and is not asserted exactly unitary. The residual diagnostic does not itself give a forward eigenvalue bound. The procedure asserts no unconditional convergence of any shift schedule.",
+    "consumer_use_excerpts": [
+      "[F3] A complex Francis reduction with zero sweeps returns Schur-computed when\nthe initialized matrix already has upper-triangular Schur form; its Hessenberg\ninitialization has no reflector columns when $n=2$\n([[alg-finite-budget-francis-schur-reduction]])."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[31]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/ex-rotation-logarithm-branch-cut.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/76",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "ex-rotation-logarithm-branch-cut",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "status": "open",
+      "evidence": "Supplier definition excerpt: “1. Reduce $A$ to upper Hessenberg form with Householder similarities. For $k=1,\\ldots,\\max(n-2,0)$ in increasing order, use active indices $S=\\{k+1,\\ldots,n\\}$, target $x=H_{S,k}$, and trailing left panel $B=H_{S,\\{k+1,\\ldots,n\\}}$ with columns in increasing order. In the real branch use [[alg-scaled-householder-reflector-formation-and-application]] for the finite left application and overwrite; in the complex branch use [[alg-complex-scaled-householder-reflector-step]]. Complete each similarity by the right application above on columns $S$. If the resulting matrix fails the exact upper-Hessenberg zero-pattern check, return bulge-chase-invariant-failure with the partial factors. Store the exact unitary reflector factors as a product representation $Q_0$.\n2. At each sweep, test every active first-subdiagonal entry by\n   $$|h_{i,i-1}|\\le\\tau\\bigl(|h_{i-1,i-1}|+|h_{i,i}|\\bigr).$$\n   For a complex entry $z=a+ib$, evaluate $|z|$ by $s=\\max(|a|,|b|)$ and $s\\sqrt{(a/s)^2+(b/s)^2}$ when $z\\ne0$, with divisions, squares, sum, square root and final scaling rounded in the stated order; use $|0|=0$. Return range-failure if this evaluation fails. Compute the diagonal-magnitude sum first, then multiply by $\\tau$ in the operationwise model; compare the resulting finite values exactly. When the test holds, set that entry to zero, record its original value as a deflation perturbation, and split the active block. The equality case deflates. Do not use the Hermitian-tridiagonal Wilkinson shift rule for a general Hessenberg matrix.\n3. Check for the target Schur block structure after initialization and after each sweep. A complex active block of size at least two uses a single shift, normally its bottom-right entry. A real active block of size at least two uses the real quadratic $p(z)=z^2-sz+t$ with trailing block $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$; compute $s=\\operatorname{fl}(a+d)$ and $t=\\operatorname{fl}(\\operatorname{fl}(ad)-\\operatorname{fl}(bc))$ in that order, returning range-failure if an operation fails. Maintain a counter for each active block, reset it after any deflation in that block, and after $h$ consecutive sweeps without deflation consume that block's next declared exceptional shift or real quadratic. If the required table entry is absent, return stagnation-exhausted.\n4. Apply the corresponding implicit bulge chase from [[alg-exact-francis-hessenberg-qr-step]]. For the initial single-shift vector compute $x_1=\\operatorname{fl}(h_{11}-\\mu)$ and $x_i=h_{i1}$ for $i>1$. For the initial real double-shift vector, compute $u=He_1$, then $w=Hu$ by left-to-right rounded matrix-vector products, then $x=\\operatorname{fl}(\\operatorname{fl}(w-su)+te_1)$ componentwise. Compute only the first $r+1$ components from the Hessenberg support pattern; on range failure return the operation index and partial factors. For a chase at column $j$, use active indices $S=I_j$, target $x=H_{S,j}$, and trailing left panel $B=H_{S,\\{j+1,\\ldots,n\\}}$ with columns in increasing order. Call the real or complex formation routine, write the target tail zeros exactly, complete the two-sided update by the right-kernel order above on columns $S$, and append the exact reflector representation to $Q$. In the initial polynomial-vector step there is no matrix-target column; use the full active row panel for the left update and then apply the right update to its active columns. If the exact routine or its finite-precision realization returns bulge-chase-invariant-failure, return that status with the partial matrix and factors. Use [[lem-two-sided-scaled-householder-similarity-error]] to store the proved two-sided coefficient $\\alpha_{m_j}=a_{m_j}+b_{m_j}+a_{m_j}b_{m_j}$, with $a$ the target-overwrite coefficient or separate-block coefficient as actually used and $b$ the right separate-block coefficient. This gives $\\|E_j\\|_F\\le\\alpha_{m_j}\\|\\widehat H_{j-1}\\|_F$ when its $m_ju<1$ and range hypotheses hold. Apply the same certificate to every Hessenberg-initialization similarity. If any step lacks that certificate, retain the residual diagnostic and set the backward-error-certificate status to inconclusive.\n5. Stop with Schur-computed when every complex block has size one, or every real block has size one or is a $2\\times2$ block with negative characteristic-polynomial discriminant. Use the supplied evaluator, or the finite integer recipe in [[lem-exact-rational-two-by-two-discriminant-sign]] when exact rational/dyadic encodings are available, for each real block's $\\operatorname{discSign}$ as defined in [[def-exact-real-2x2-discriminant-sign-predicate]]. If no exact sign is available, return schur-type-undecided and do not claim Schur-computed. If the target check fails when the sweep count reaches $N$, return budget-exhausted; in particular, with $N=0$ return Schur-computed only when the initialized matrix already has the target block structure. Return the partial matrix and factors on every failure or nonconvergence status.” Used by fact F3 in proof step 2.1. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-matrix-function-rational-contour-error-bound",
+    "supplier": "def-complex-infinity-matrix-norm",
+    "consumer_batch": "68",
+    "supplier_batch": "61",
+    "status": "verified",
+    "evidence": "The consumer uses the maximum complex-modulus row-sum norm on positive finite matrix dimensions, its compatible product/vector bounds and scalar homogeneity. Component absolute sums are conservative upper bounds; no real-only induced-norm convention or spectral-norm substitution is made.",
+    "inspected_paths": [
+      "items/def-complex-infinity-matrix-norm.md#Definition",
+      "items/thm-matrix-function-rational-contour-error-bound.md#Facts/Proof"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "For $A=(a_{ij})\\in\\mathbb C^{m\\times n}$ with $m,n\\ge1$, define\n$$\n\\|A\\|_{\\infty,\\mathbb C}:=\\max_{1\\le i\\le m}\\sum_{j=1}^n |a_{ij}|.\n$$\nFor a vector $x\\in\\mathbb C^n$, define $\\|x\\|_\\infty:=\\max_j|x_j|$. The absolute value is the complex modulus $|u+iv|=\\sqrt{u^2+v^2}$. The subscript on the matrix norm emphasizes that entries and vectors are complex; this definition is not an appeal to the real-only induced matrix p-norm convention. For square matrices the identity has norm $1$.",
+    "consumer_use_excerpts": [
+      "[F2] The complex infinity matrix norm is the maximum absolute row sum\n([[def-complex-infinity-matrix-norm]]) and is submultiplicative\n([[lem-complex-infinity-matrix-norm-submultiplicative]])."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[7]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/thm-matrix-function-rational-contour-error-bound.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/53",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "thm-matrix-function-rational-contour-error-bound",
+      "supplier": "def-complex-infinity-matrix-norm",
+      "status": "open",
+      "evidence": "Supplier definition excerpt: “For $A=(a_{ij})\\in\\mathbb C^{m\\times n}$ with $m,n\\ge1$, define\n$$\n\\|A\\|_{\\infty,\\mathbb C}:=\\max_{1\\le i\\le m}\\sum_{j=1}^n |a_{ij}|.\n$$\nFor a vector $x\\in\\mathbb C^n$, define $\\|x\\|_\\infty:=\\max_j|x_j|$. The absolute value is the complex modulus $|u+iv|=\\sqrt{u^2+v^2}$. The subscript on the matrix norm emphasizes that entries and vectors are complex; this definition is not an appeal to the real-only induced matrix p-norm convention. For square matrices the identity has norm $1$.” Used by fact F2 in proof step 1.2. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-matrix-function-rational-contour-error-bound",
+    "supplier": "lem-complex-infinity-matrix-norm-submultiplicative",
+    "consumer_batch": "68",
+    "supplier_batch": "61",
+    "status": "verified",
+    "evidence": "The consumer uses the maximum complex-modulus row-sum norm on positive finite matrix dimensions, its compatible product/vector bounds and scalar homogeneity. Component absolute sums are conservative upper bounds; no real-only induced-norm convention or spectral-norm substitution is made.",
+    "inspected_paths": [
+      "items/lem-complex-infinity-matrix-norm-submultiplicative.md#Statement",
+      "items/thm-matrix-function-rational-contour-error-bound.md#Facts/Proof"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Use $\\|A\\|_{\\infty,\\mathbb C}$ and $\\|x\\|_\\infty$ from [[def-complex-infinity-matrix-norm]]. For compatible complex matrices and vectors with every row and column dimension positive,\n$$\\|Ax\\|_\\infty\\le\\|A\\|_{\\infty,\\mathbb C}\\|x\\|_\\infty,\\qquad \\|AB\\|_{\\infty,\\mathbb C}\\le\\|A\\|_{\\infty,\\mathbb C}\\|B\\|_{\\infty,\\mathbb C}.$$",
+    "consumer_use_excerpts": [
+      "[F2] The complex infinity matrix norm is the maximum absolute row sum\n([[def-complex-infinity-matrix-norm]]) and is submultiplicative\n([[lem-complex-infinity-matrix-norm-submultiplicative]])."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[8]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/thm-matrix-function-rational-contour-error-bound.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/54",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "thm-matrix-function-rational-contour-error-bound",
+      "supplier": "lem-complex-infinity-matrix-norm-submultiplicative",
+      "status": "open",
+      "evidence": "Supplier statement excerpt: “Use $\\|A\\|_{\\infty,\\mathbb C}$ and $\\|x\\|_\\infty$ from [[def-complex-infinity-matrix-norm]]. For compatible complex matrices and vectors with every row and column dimension positive,\n$$\\|Ax\\|_\\infty\\le\\|A\\|_{\\infty,\\mathbb C}\\|x\\|_\\infty,\\qquad \\|AB\\|_{\\infty,\\mathbb C}\\le\\|A\\|_{\\infty,\\mathbb C}\\|B\\|_{\\infty,\\mathbb C}.$$” Used by fact F2 in proof step 1.2. Required interface: for compatible complex matrices, the complex infinity row-sum norm is submultiplicative; the contour integral and propagated Padé estimate use this product bound. A Step 1 record exists with decision ready, but the current hash check is stale: item or dependency changed; record current readiness. The previous Step 1 ready record is hash-stale; this consumer remains escalated pending refresh. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-matrix-function-rational-contour-error-bound",
+    "supplier": "thm-complex-resolvent-cover-certificate-soundness",
+    "consumer_batch": "68",
+    "supplier_batch": "61",
+    "status": "verified",
+    "evidence": "The contour/error route supplies a finite dyadic segment-to-disk cover and uses q=e+s(r+deltaA)<1 and the resulting uniform resolvent bound only on covered segments/family. Topology, admissible Cauchy cycle, index and spectral containment remain separate caller hypotheses; failed cover/range checks are inconclusive and no eigenvalue count is imported.",
+    "inspected_paths": [
+      "items/thm-complex-resolvent-cover-certificate-soundness.md#Statement",
+      "items/thm-matrix-function-rational-contour-error-bound.md#Facts/Proof"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Let $n\\ge1$, let $\\Gamma$ be a nonempty finite union of closed line segments in $\\mathbb C$, let $\\mathcal A\\subseteq\\mathbb C^{n\\times n}$ be nonempty, and let $A_0\\in\\mathbb C^{n\\times n}$. Each segment of $\\Gamma$ is assigned to one of finitely many disks $D_j=\\{z:|z-z_j|\\le r_j\\}$ whose radius is $r_j\\ge0$ and whose disk contains both endpoints of that segment. For each disk there are $R_j\\in\\mathbb C^{n\\times n}$ and nonnegative bounds $e_j,\\delta_A,s_j$ satisfying\n$$e_j\\ge\\|I-R_j(z_jI-A_0)\\|_{\\infty,\\mathbb C},\\quad \\delta_A\\ge\\sup_{A\\in\\mathcal A}\\|A-A_0\\|_{\\infty,\\mathbb C},\\quad s_j\\ge\\|R_j\\|_{\\infty,\\mathbb C}.$$\nIf $q_j=e_j+s_j(r_j+\\delta_A)<1$ for each $j$, then every $z\\in\\Gamma$ and $A\\in\\mathcal A$ make $zI-A$ invertible, and\n$$\\|(zI-A)^{-1}\\|_{\\infty,\\mathbb C}\\le \\max_j\\frac{s_j}{1-q_j}.$$\nThe theorem bounds the resolvent on the supplied contour cover; it does not count enclosed eigenvalues or certify a nonnormal eigenvalue disk from a residual.",
+    "consumer_use_excerpts": [
+      "Let $A\\in\\mathbb C^{n\\times n}$, let $f$ be holomorphic on an open\n$\\Omega\\subseteq\\mathbb C$ containing $\\sigma(A)$, and let $r$ be rational\nwith no pole on $\\Omega$. Let $\\Gamma$ be an admissible Cauchy cycle for $A$\ncontained in $\\Omega$, with total contour length $L_\\Gamma$. Suppose\n$$\\sup_{z\\in\\Gamma}|f(z)-r(z)|\\le\\varepsilon,\\qquad \\sup_{z\\in\\Gamma}\\|(zI-A)^{-1}\\|_{\\infty,\\mathbb C}\\le M.$$\nThen\n$$\\|f(A)-r(A)\\|_{\\infty,\\mathbb C} \\le \\frac{L_\\Gamma}{2\\pi}\\,\\varepsilon M.$$\nThe resolvent hypothesis may be supplied by the diskwise certificate of\n[[thm-complex-resolvent-cover-certificate-soundness]]. A scalar disk error\nalone does not give this matrix bound for a nonnormal matrix.",
+      "[F3] The resolvent certificate gives the stated uniform bound on the supplied\ncontour when its disk inequalities hold\n([[thm-complex-resolvent-cover-certificate-soundness]])."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[6]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/thm-matrix-function-rational-contour-error-bound.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/52",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "thm-matrix-function-rational-contour-error-bound",
+      "supplier": "thm-complex-resolvent-cover-certificate-soundness",
+      "status": "open",
+      "evidence": "Supplier statement excerpt: “Let $n\\ge1$, let $\\Gamma$ be a nonempty finite union of closed line segments in $\\mathbb C$, let $\\mathcal A\\subseteq\\mathbb C^{n\\times n}$ be nonempty, and let $A_0\\in\\mathbb C^{n\\times n}$. Each segment of $\\Gamma$ is assigned to one of finitely many disks $D_j=\\{z:|z-z_j|\\le r_j\\}$ whose radius is $r_j\\ge0$ and whose disk contains both endpoints of that segment. For each disk there are $R_j\\in\\mathbb C^{n\\times n}$ and nonnegative bounds $e_j,\\delta_A,s_j$ satisfying\n$$e_j\\ge\\|I-R_j(z_jI-A_0)\\|_{\\infty,\\mathbb C},\\quad \\delta_A\\ge\\sup_{A\\in\\mathcal A}\\|A-A_0\\|_{\\infty,\\mathbb C},\\quad s_j\\ge\\|R_j\\|_{\\infty,\\mathbb C}.$$\nIf $q_j=e_j+s_j(r_j+\\delta_A)<1$ for each $j$, then every $z\\in\\Gamma$ and $A\\in\\mathcal A$ make $zI-A$ invertible, and\n$$\\|(zI-A)^{-1}\\|_{\\infty,\\mathbb C}\\le \\max_j\\frac{s_j}{1-q_j}.$$\nThe theorem bounds the resolvent on the supplied contour cover; it does not count enclosed eigenvalues or certify a nonnormal eigenvalue disk from a residual.” Used by fact F3 in proof step 1.2. Checked the consumer's stated domain and use against the supplier's current statement; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-pade-scaling-and-squaring-error-bound",
+    "supplier": "def-complex-infinity-matrix-norm",
+    "consumer_batch": "68",
+    "supplier_batch": "61",
+    "status": "verified",
+    "evidence": "The consumer uses the maximum complex-modulus row-sum norm on positive finite matrix dimensions, its compatible product/vector bounds and scalar homogeneity. Component absolute sums are conservative upper bounds; no real-only induced-norm convention or spectral-norm substitution is made.",
+    "inspected_paths": [
+      "items/def-complex-infinity-matrix-norm.md#Definition",
+      "items/thm-pade-scaling-and-squaring-error-bound.md#Facts/Proof"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "For $A=(a_{ij})\\in\\mathbb C^{m\\times n}$ with $m,n\\ge1$, define\n$$\n\\|A\\|_{\\infty,\\mathbb C}:=\\max_{1\\le i\\le m}\\sum_{j=1}^n |a_{ij}|.\n$$\nFor a vector $x\\in\\mathbb C^n$, define $\\|x\\|_\\infty:=\\max_j|x_j|$. The absolute value is the complex modulus $|u+iv|=\\sqrt{u^2+v^2}$. The subscript on the matrix norm emphasizes that entries and vectors are complex; this definition is not an appeal to the real-only induced matrix p-norm convention. For square matrices the identity has norm $1$.",
+    "consumer_use_excerpts": [
+      "[F7] The complex infinity norm is the maximum absolute row sum\n([[def-complex-infinity-matrix-norm]]) and is submultiplicative\n([[lem-complex-infinity-matrix-norm-submultiplicative]])."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[19]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/thm-pade-scaling-and-squaring-error-bound.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/64",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "thm-pade-scaling-and-squaring-error-bound",
+      "supplier": "def-complex-infinity-matrix-norm",
+      "status": "open",
+      "evidence": "Supplier definition excerpt: “For $A=(a_{ij})\\in\\mathbb C^{m\\times n}$ with $m,n\\ge1$, define\n$$\n\\|A\\|_{\\infty,\\mathbb C}:=\\max_{1\\le i\\le m}\\sum_{j=1}^n |a_{ij}|.\n$$\nFor a vector $x\\in\\mathbb C^n$, define $\\|x\\|_\\infty:=\\max_j|x_j|$. The absolute value is the complex modulus $|u+iv|=\\sqrt{u^2+v^2}$. The subscript on the matrix norm emphasizes that entries and vectors are complex; this definition is not an appeal to the real-only induced matrix p-norm convention. For square matrices the identity has norm $1$.” Used by fact F7 in proof steps 1.3, 3.1. Checked the consumer's stated domain and use against the supplier's current definition; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-pade-scaling-and-squaring-error-bound",
+    "supplier": "lem-complex-infinity-matrix-norm-submultiplicative",
+    "consumer_batch": "68",
+    "supplier_batch": "61",
+    "status": "verified",
+    "evidence": "The consumer uses the maximum complex-modulus row-sum norm on positive finite matrix dimensions, its compatible product/vector bounds and scalar homogeneity. Component absolute sums are conservative upper bounds; no real-only induced-norm convention or spectral-norm substitution is made.",
+    "inspected_paths": [
+      "items/lem-complex-infinity-matrix-norm-submultiplicative.md#Statement",
+      "items/thm-pade-scaling-and-squaring-error-bound.md#Facts/Proof"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Use $\\|A\\|_{\\infty,\\mathbb C}$ and $\\|x\\|_\\infty$ from [[def-complex-infinity-matrix-norm]]. For compatible complex matrices and vectors with every row and column dimension positive,\n$$\\|Ax\\|_\\infty\\le\\|A\\|_{\\infty,\\mathbb C}\\|x\\|_\\infty,\\qquad \\|AB\\|_{\\infty,\\mathbb C}\\le\\|A\\|_{\\infty,\\mathbb C}\\|B\\|_{\\infty,\\mathbb C}.$$",
+    "consumer_use_excerpts": [
+      "[F7] The complex infinity norm is the maximum absolute row sum\n([[def-complex-infinity-matrix-norm]]) and is submultiplicative\n([[lem-complex-infinity-matrix-norm-submultiplicative]])."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[20]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/thm-pade-scaling-and-squaring-error-bound.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/65",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "thm-pade-scaling-and-squaring-error-bound",
+      "supplier": "lem-complex-infinity-matrix-norm-submultiplicative",
+      "status": "open",
+      "evidence": "Supplier statement excerpt: “Use $\\|A\\|_{\\infty,\\mathbb C}$ and $\\|x\\|_\\infty$ from [[def-complex-infinity-matrix-norm]]. For compatible complex matrices and vectors with every row and column dimension positive,\n$$\\|Ax\\|_\\infty\\le\\|A\\|_{\\infty,\\mathbb C}\\|x\\|_\\infty,\\qquad \\|AB\\|_{\\infty,\\mathbb C}\\le\\|A\\|_{\\infty,\\mathbb C}\\|B\\|_{\\infty,\\mathbb C}.$$” Used by fact F7 in proof steps 1.3, 3.1. Required interface: for compatible complex matrices, the complex infinity row-sum norm is submultiplicative; the contour integral and propagated Padé estimate use this product bound. A Step 1 record exists with decision ready, but the current hash check is stale: item or dependency changed; record current readiness. The previous Step 1 ready record is hash-stale; this consumer remains escalated pending refresh. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-pade-scaling-and-squaring-error-bound",
+    "supplier": "thm-complex-resolvent-cover-validator-soundness",
+    "consumer_batch": "68",
+    "supplier_batch": "61",
+    "status": "verified",
+    "evidence": "The contour/error route supplies a finite dyadic segment-to-disk cover and uses q=e+s(r+deltaA)<1 and the resulting uniform resolvent bound only on covered segments/family. Topology, admissible Cauchy cycle, index and spectral containment remain separate caller hypotheses; failed cover/range checks are inconclusive and no eigenvalue count is imported.",
+    "inspected_paths": [
+      "items/thm-complex-resolvent-cover-validator-soundness.md#Statement",
+      "items/thm-pade-scaling-and-squaring-error-bound.md#Facts/Proof"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "If the validator's input has $n\\ge1$ and [[alg-complex-resolvent-cover-validator]] returns `certified-resolvent-cover` with bound $m$, then every $A$ in the input family and every $z$ on the supplied contour segments satisfy that $zI-A$ is invertible and $\\|(zI-A)^{-1}\\|_{\\infty,\\mathbb C}\\le m$. The result does not count eigenvalues inside the contour.",
+    "consumer_use_excerpts": [
+      "[F5] The validator's successful return supplies the stated uniform resolvent\nbound on every supplied contour segment\n([[thm-complex-resolvent-cover-validator-soundness]])."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[18]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/thm-pade-scaling-and-squaring-error-bound.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/63",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "thm-pade-scaling-and-squaring-error-bound",
+      "supplier": "thm-complex-resolvent-cover-validator-soundness",
+      "status": "open",
+      "evidence": "Supplier statement excerpt: “If the validator's input has $n\\ge1$ and [[alg-complex-resolvent-cover-validator]] returns `certified-resolvent-cover` with bound $m$, then every $A$ in the input family and every $z$ on the supplied contour segments satisfy that $zI-A$ is invertible and $\\|(zI-A)^{-1}\\|_{\\infty,\\mathbb C}\\le m$. The result does not count eigenvalues inside the contour.” Used by fact F5 in proof step 2.1. Required hypothesis: a successful validator return for the supplied finite dyadic cover; then the bound holds on every covered contour segment. No contour topology or eigenvalue count follows. A Step 1 record exists with decision ready, but the current hash check is stale: item or dependency changed; record current readiness. The previous Step 1 ready record is hash-stale; this consumer remains escalated pending refresh. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-principal-matrix-logarithm-and-square-root-exist",
+    "supplier": "thm-sylvester-unique-solvability-spectral-separation",
+    "consumer_batch": "68",
+    "supplier_batch": "49",
+    "status": "verified",
+    "evidence": "FactF4/proof3.1 put D=Q-R(A), obtaining QD+DR(A)=0. Both coefficient spectra lie in the open right half-plane, hence sigma(Q) and -sigma(R(A)) are disjoint; the source unique homogeneous Sylvester solution therefore gives D=0, exactly the claimed restricted square-root uniqueness.",
+    "inspected_paths": [
+      "items/thm-sylvester-unique-solvability-spectral-separation.md#Statement",
+      "items/thm-principal-matrix-logarithm-and-square-root-exist.md#Facts/Proof"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Let $F\\in\\{\\mathbb R,\\mathbb C\\}$, $m,n\\ge1$, $A\\in F^{m\\times m}$ and $B\\in F^{n\\times n}$. Spectra of real matrices are taken over $\\mathbb C$. The map $\\mathcal S_{A,B}$ of [[def-sylvester-operator-and-separation-number]] is invertible if and only if\n\n$$\n\\sigma(A)\\cap(-\\sigma(B))=\\varnothing.\n$$\n\nEquivalently, for every $C\\in F^{m\\times n}$, the equation $AX+XB=C$ has a unique solution if and only if this spectral condition holds. The same condition is equivalent to $\\operatorname{sep}(A,-B)>0$.",
+    "consumer_use_excerpts": [
+      "[F4] The Sylvester map $X\\mapsto BX+XC$ is uniquely solvable for every\nright-hand side when $\\sigma(B)\\cap(-\\sigma(C))=\\varnothing$\n([[thm-sylvester-unique-solvability-spectral-separation]])."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[5]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/thm-principal-matrix-logarithm-and-square-root-exist.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/51",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "thm-principal-matrix-logarithm-and-square-root-exist",
+      "supplier": "thm-sylvester-unique-solvability-spectral-separation",
+      "status": "open",
+      "evidence": "Supplier statement excerpt: “Equivalently, for every $C\\in F^{m\\times n}$, the equation $AX+XB=C$ has a unique solution if and only if this spectral condition holds. The same condition is equivalent to $\\operatorname{sep}(A,-B)>0$.” Used by fact F4 in proof step 3.1. Checked the consumer's stated domain and use against the supplier's current statement; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-schur-parlett-recurrence-correctness",
+    "supplier": "thm-bartels-stewart-sylvester-exact-correctness",
+    "consumer_batch": "68",
+    "supplier_batch": "49",
+    "status": "verified",
+    "evidence": "The consumer invokes the finite exact-certificate Bartels-Stewart route on its local Parlett equation and accepts only exact unique success. Pivot/separation failures trigger a finite contiguous merge; other Schur/range/budget failures are inconclusive. The source success equation is used as an exact identity, never as a rounded Schur or stability guarantee.",
+    "inspected_paths": [
+      "items/thm-bartels-stewart-sylvester-exact-correctness.md#Statement",
+      "items/thm-schur-parlett-recurrence-correctness.md#Facts/Proof"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Suppose [[alg-bartels-stewart-sylvester-equation]] returns `success` for $A,B,C$. Then its returned $X$ satisfies $AX+XB=C$. If $\\sigma(A)\\cap(-\\sigma(B))=\\varnothing$, this $X$ is the unique solution.",
+    "consumer_use_excerpts": [
+      "[F4] A successful Bartels–Stewart substitution returns the exact local\nSylvester solution ([[thm-bartels-stewart-sylvester-exact-correctness]])."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[28]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/thm-schur-parlett-recurrence-correctness.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/73",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "thm-schur-parlett-recurrence-correctness",
+      "supplier": "thm-bartels-stewart-sylvester-exact-correctness",
+      "status": "open",
+      "evidence": "Supplier statement excerpt: “Suppose [[alg-bartels-stewart-sylvester-equation]] returns `success` for $A,B,C$. Then its returned $X$ satisfies $AX+XB=C$. If $\\sigma(A)\\cap(-\\sigma(B))=\\varnothing$, this $X$ is the unique solution.” Used by fact F4 in proof step 2.1. Checked the consumer's stated domain and use against the supplier's current statement; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-schur-parlett-recurrence-correctness",
+    "supplier": "thm-sylvester-unique-solvability-spectral-separation",
+    "consumer_batch": "68",
+    "supplier_batch": "49",
+    "status": "verified",
+    "evidence": "For the Parlett off-diagonal equation Tii X-X Tjj=C, the source is used with coefficients A=Tii and B=-Tjj. Distinct block spectra give the required sigma(A)∩(-sigma(B))=empty condition; successful exact local solves/merge failures are explicit. The correctness proof uses uniqueness only for those solved separated block equations.",
+    "inspected_paths": [
+      "items/thm-sylvester-unique-solvability-spectral-separation.md#Statement",
+      "items/thm-schur-parlett-recurrence-correctness.md#Facts/Proof"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Let $F\\in\\{\\mathbb R,\\mathbb C\\}$, $m,n\\ge1$, $A\\in F^{m\\times m}$ and $B\\in F^{n\\times n}$. Spectra of real matrices are taken over $\\mathbb C$. The map $\\mathcal S_{A,B}$ of [[def-sylvester-operator-and-separation-number]] is invertible if and only if\n\n$$\n\\sigma(A)\\cap(-\\sigma(B))=\\varnothing.\n$$\n\nEquivalently, for every $C\\in F^{m\\times n}$, the equation $AX+XB=C$ has a unique solution if and only if this spectral condition holds. The same condition is equivalent to $\\operatorname{sep}(A,-B)>0$.",
+    "consumer_use_excerpts": [
+      "[F3] A Sylvester equation has a unique solution when the two coefficient\nspectra are disjoint\n([[thm-sylvester-unique-solvability-spectral-separation]])."
+    ],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[27]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#deps",
+      "items/thm-schur-parlett-recurrence-correctness.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/72",
+    "retained_original_review": {
+      "kind": "item",
+      "consumer": "thm-schur-parlett-recurrence-correctness",
+      "supplier": "thm-sylvester-unique-solvability-spectral-separation",
+      "status": "open",
+      "evidence": "Supplier statement excerpt: “Equivalently, for every $C\\in F^{m\\times n}$, the equation $AX+XB=C$ has a unique solution if and only if this spectral condition holds. The same condition is equivalent to $\\operatorname{sep}(A,-B)>0$.” Used by fact F3 in proof step 2.1. Checked the consumer's stated domain and use against the supplier's current statement; this records only an interface review. This is not independent supplier approval. Its prior Step 1 ready record is hash-stale; the decision tool reports “Item or dependency changed; record current readiness.”"
+    }
+  },
+  {
+    "kind": "page",
+    "consumer": "matrix-functions-and-scaling-squaring",
+    "supplier": "computed-schur-decompositions-and-nonnormal-spectra",
+    "consumer_batch": "68",
+    "supplier_batch": "33",
+    "status": "verified",
+    "evidence": "Finite computed Schur outputs are candidates: Schur-Parlett and branch-aware evaluation independently check exact unitarity, reconstruction and triangular shape. All non-Schur failures propagate; the page edge transfers no unconditional convergence or floating error guarantee.",
+    "inspected_paths": [
+      "library/numerical-linear-algebra-and-approximation/computed-schur-decompositions-and-nonnormal-spectra.md#body",
+      "library/numerical-linear-algebra-and-approximation/matrix-functions-and-scaling-squaring.md#body",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#requires"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[1]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#requires",
+      "library/numerical-linear-algebra-and-approximation/matrix-functions-and-scaling-squaring.md#requires"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/48",
+    "retained_original_review": {
+      "kind": "page",
+      "consumer": "matrix-functions-and-scaling-squaring",
+      "supplier": "computed-schur-decompositions-and-nonnormal-spectra",
+      "status": "open",
+      "evidence": "The required supplier page exists and its current body was inspected: “This page defines real and complex Schur forms and a finite-budget Hessenberg QR procedure. An exact real-block discriminant predicate fixes the Schur stop condition. A finite integer recipe evaluates it for exact rational or dyadic encodings; general stored reals without an available exact evaluator retain `schur-type-undecided`. The exact QR routine uses a complex single shift or a real Francis double shift, applies finite Householder bulge chases, records deflations, consumes declared exceptional shifts after stagnation, and returns explicit budget, range, and invariant-failure statuses. A local support invariant proves that each length-2/3 chase restores the Hessenberg pattern and preserves the initial vector direction. Its exact updates are unitary similarities. The real double-shift chase agrees with two explicit shifted QR steps under the stated unreduced and nonsingular hypotheses. No shift schedule is claimed to converge unconditionally.” The page-level requirement is retained and item-level uses are listed separately. This verifies the declared interface only; it does not accept the supplier draft. Exact stale suppliers: def-real-and-complex-schur-forms, alg-finite-budget-francis-schur-reduction. Their current record status is ready but stale because an item or dependency changed."
+    }
+  },
+  {
+    "kind": "page",
+    "consumer": "matrix-functions-and-scaling-squaring",
+    "supplier": "computed-singular-values-and-rank-revealing-factorizations",
+    "consumer_batch": "68",
+    "supplier_batch": "17",
+    "status": "verified",
+    "evidence": "The current denominator candidate explicitly calls canonical17 stored reflector arithmetic on the RHS. This page edge supplies that arithmetic context only; no SVD, RRQR or convergence conclusion is transferred.",
+    "inspected_paths": [
+      "library/numerical-linear-algebra-and-approximation/computed-singular-values-and-rank-revealing-factorizations.md#body",
+      "library/numerical-linear-algebra-and-approximation/matrix-functions-and-scaling-squaring.md#body",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#requires"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[304]",
+      "bad[20].currentDeclaredOwnedEdges[4]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#requires",
+      "library/numerical-linear-algebra-and-approximation/matrix-functions-and-scaling-squaring.md#requires"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/16"
+  },
+  {
+    "kind": "page",
+    "consumer": "matrix-functions-and-scaling-squaring",
+    "supplier": "finite-precision-direct-factorizations",
+    "consumer_batch": "68",
+    "supplier_batch": "1",
+    "status": "verified",
+    "evidence": "Operationwise successful-normal/range semantics are the imported page context. Actual complex reflector formation is named separately from pages33/17; source1 factorization error claims are not silently used to certify the independently exact-audited denominator candidate.",
+    "inspected_paths": [
+      "library/numerical-linear-algebra-and-approximation/finite-precision-direct-factorizations.md#body",
+      "library/numerical-linear-algebra-and-approximation/matrix-functions-and-scaling-squaring.md#body",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#requires"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[0]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#requires",
+      "library/numerical-linear-algebra-and-approximation/matrix-functions-and-scaling-squaring.md#requires"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/47",
+    "retained_original_review": {
+      "kind": "page",
+      "consumer": "matrix-functions-and-scaling-squaring",
+      "supplier": "finite-precision-direct-factorizations",
+      "status": "open",
+      "evidence": "The required supplier page exists and its current body was inspected: “This page gives operationwise finite-precision contracts for pairwise and\ncompensated summation, error-free product transforms, failure-aware rounded\nCholesky, scaled Householder QR, mixed-precision refinement, and computed\nfull-rank least squares. It reuses canonical exact factorization and least\nsquares conventions. The Cholesky backward bound and refinement recurrence\nare proved here. The scaled Householder formation/update/column-zeroing bound, its QR aggregation, rounded triangular substitution, and computed least-squares theorem are proved locally with explicit constants. Certified linear and normal-equation residual allowances support concrete solver consumers. The full TwoSum exact-transform theorem is proved for binary nearest-even formats of precision p>=2 and every successful call, using local binary-grid and exact-subtraction lemmas. No numerical SVD\nalgorithm or unconditional range-success claim is introduced.” The page-level requirement is retained and item-level uses are listed separately. This verifies the declared interface only; it does not accept the supplier draft. Exact stale suppliers: alg-complex-scaled-householder-reflector-step. Their current record status is ready but stale because an item or dependency changed."
+    }
+  },
+  {
+    "kind": "page",
+    "consumer": "matrix-functions-and-scaling-squaring",
+    "supplier": "sylvester-and-lyapunov-matrix-equations",
+    "consumer_batch": "68",
+    "supplier_batch": "49",
+    "status": "verified",
+    "evidence": "The consumer uses the AX+XB sign convention, exact separated local solves and their correctness, under explicitly checked/caller conditions. The page edge does not convert a rounded Schur candidate or empirical separation estimate into an exact solve.",
+    "inspected_paths": [
+      "library/numerical-linear-algebra-and-approximation/sylvester-and-lyapunov-matrix-equations.md#body",
+      "library/numerical-linear-algebra-and-approximation/matrix-functions-and-scaling-squaring.md#body",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#requires"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[2]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#requires",
+      "library/numerical-linear-algebra-and-approximation/matrix-functions-and-scaling-squaring.md#requires"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/49",
+    "retained_original_review": {
+      "kind": "page",
+      "consumer": "matrix-functions-and-scaling-squaring",
+      "supplier": "sylvester-and-lyapunov-matrix-equations",
+      "status": "open",
+      "evidence": "The required supplier page exists and its current body was inspected: “This page develops the equation $AX+XB=C$ over the real and complex fields, its Kronecker representation, the spectral criterion for unique solvability, and the Frobenius separation that controls solution error. The finite-budget Bartels-Stewart procedure applies Schur reduction and block back substitution, reports pivot or Schur-certificate failures explicitly, and has a cubic dense arithmetic bound when its sweep budgets grow at most linearly with dimension and per-call sign/representation-controller work is bounded independently of dimension. Arbitrary terminating custom controls retain their actual additional work term.” The page-level requirement is retained and item-level uses are listed separately. This verifies the declared interface only; it does not accept the supplier draft. Exact stale suppliers: def-sylvester-operator-and-separation-number, thm-sylvester-unique-solvability-spectral-separation, alg-bartels-stewart-sylvester-equation, thm-bartels-stewart-sylvester-exact-correctness. Their current record status is ready but stale because an item or dependency changed."
+    }
+  },
+  {
+    "kind": "page",
+    "consumer": "matrix-functions-and-scaling-squaring",
+    "supplier": "verified-linear-systems-and-spectral-enclosures",
+    "consumer_batch": "68",
+    "supplier_batch": "61",
+    "status": "verified",
+    "evidence": "The declared contour-cover context supplies uniform resolvent certificates only on the finite covered segments. Consumer topology/index/eigenvalue-enclosure conditions remain caller hypotheses; no eigenvalue count follows from this page edge.",
+    "inspected_paths": [
+      "library/numerical-linear-algebra-and-approximation/verified-linear-systems-and-spectral-enclosures.md#body",
+      "library/numerical-linear-algebra-and-approximation/matrix-functions-and-scaling-squaring.md#body",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#requires"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "bad[20].currentDeclaredOwnedEdges[3]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-68.pages.json#requires",
+      "library/numerical-linear-algebra-and-approximation/matrix-functions-and-scaling-squaring.md#requires"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-implementation-repair.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-matrix-function-supplier-triage.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/50",
+    "retained_original_review": {
+      "kind": "page",
+      "consumer": "matrix-functions-and-scaling-squaring",
+      "supplier": "verified-linear-systems-and-spectral-enclosures",
+      "status": "open",
+      "evidence": "The required supplier page exists and its current body was inspected: “This page develops verified point and family linear solves, Krawczyk inclusion,\nreal determinant sign checks, Hermitian eigenvalue enclosures, inertia based\neigenvalue bisection, and a complex resolvent cover validator. Point residual\ncertificates use rounded operations with explicit error allowances; family\ncertificates use outward interval enclosures. Every validator reports an\ninconclusive or range status when its numerical checks do not establish the\nrequired inequalities. Failed determinant, interval pivot, or inertia checks\nare not treated as evidence of singularity.” The page requirement is retained. The batch-61 item suppliers needed by this pair—lem-complex-infinity-matrix-norm-submultiplicative, alg-complex-resolvent-cover-validator, thm-complex-resolvent-cover-validator-soundness—have draft bodies, but their prior ready records are hash-stale. Reconcile the current item and transitive dependency hashes, then recheck those hypotheses before marking dependent items ready; this is not supplier acceptance. Exact stale suppliers: def-complex-infinity-matrix-norm, thm-complex-resolvent-cover-certificate-soundness, lem-complex-infinity-matrix-norm-submultiplicative, alg-complex-resolvent-cover-validator, thm-complex-resolvent-cover-validator-soundness. Their current record status is ready but stale because an item or dependency changed."
+    }
+  }
+]

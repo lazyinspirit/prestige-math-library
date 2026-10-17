@@ -1,0 +1,112 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "65",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "77b650b261177b8dd8f5bea682be8e0710c956d5be7b14a00527c71f6992d43a",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed a dependency-interface defect: both cited BE/RK definitions require the base pair in D, while the original wrapper required only defined field evaluations. With D=(0,2) x R, t_0=0, t_1=1, f=0 and Y_0=0 the residual G(z)=z is defined on R but the first cited call is inadmissible. Added (t_0,Y_0) in D and a test before later BE/RK calls; a finite-tolerance RK update need not remain in its next base-time slice.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+      "disposition": "repaired",
+      "post_sha256": "94498a85608b081675ed2a4fcd7a81a3292d368624c39be81c06f34a8dea871c",
+      "review_context_sha256": "754c84ecda79b83201011d348e280d6d59489f3832d680015746fc73bffb8958",
+      "reason": "The repaired initial-pair hypothesis licenses the first BE/RK call and BE startup; the loop checks later base pairs before forming residuals and returns evaluation-failure on domain exit. Existing open C1 residual domains, admissible initial iterates, positive steps, tableaus, finite budgets, returning primitives and exact chord backend match the called procedures. BDF2 coefficients match the supplied branch equation, with exact and finite-tolerance completion still distinguished. Order and forward-error references remain subject to their separate supplier hypotheses; no accuracy, global Newton convergence, sparse complexity or choice claim is added. The direct Robertson consumer uses only unchanged work logging on a polynomial field defined on all states. This is a focused repair review, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "ex-robertson-reaction-system-newton-work"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "locus": "definition",
+      "status": "fixed",
+      "reason": "Confirmed a dependency-interface defect: both cited BE/RK definitions require the base pair in D, while the original wrapper required only defined field evaluations. With D=(0,2) x R, t_0=0, t_1=1, f=0 and Y_0=0 the residual G(z)=z is defined on R but the first cited call is inadmissible. Added (t_0,Y_0) in D and a test before later BE/RK calls; a finite-tolerance RK update need not remain in its next base-time slice.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "exact_change": "Definition Inputs now require (t_0,Y_0) in D; the BE/RK loop tests each later base pair before forming a residual, returning evaluation-failure with the existing prefix/log on failure.",
+    "source_evidence": [
+      "items/def-backward-euler-step-equation.md, Definition: (t_n,y_n) in D",
+      "items/def-implicit-runge-kutta-stage-equations.md, Definition: (t,y) in D",
+      "items/alg-newton-chord-implicit-residual-with-factorization-reuse.md, Definition: open C1 residual domain and finite exact-backend calls",
+      "items/alg-variable-step-bdf2-with-selected-implicit-branch.md, Definition: exact branch oracle and variable-step coefficients"
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-implicit-stiff-time-stepper-with-consistent-starts.md --json",
+        "exit_code": 0,
+        "result": "1 file; 0 checked proofs; 0 failures; not-applicable for algorithm"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-implicit-stiff-time-stepper-with-consistent-starts.md --json",
+        "exit_code": 0,
+        "result": "1 file; 0 errors; 0 warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-implicit-stiff-time-stepper-with-consistent-starts.md",
+        "exit_code": 0,
+        "result": "1 item; 0 proof steps; 0 defects"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-65.proof-contracts.json --items alg-implicit-stiff-time-stepper-with-consistent-starts --strict --json",
+        "exit_code": 0,
+        "result": "Assigned contract checked; ok=true; 0 errors; 0 warnings"
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items alg-implicit-stiff-time-stepper-with-consistent-starts",
+        "exit_code": 0,
+        "result": "Both hashes copied directly into the review immediately after mathematical review; no supplier was edited and no later hash refresh was performed."
+      }
+    ],
+    "consumer_examination": [
+      {
+        "id": "ex-robertson-reaction-system-newton-work",
+        "path": "items/ex-robertson-reaction-system-newton-work.md",
+        "affected_use": "[F3]: record Jacobian refreshes, factorizations, solves, residuals, and finite solver status; Verification steps 2.1 and 3.1 use these work counts.",
+        "disposition": "unaffected",
+        "reason": "Work logging is unchanged. The autonomous polynomial field is defined on R x R^3, so the new initial/base-domain condition excludes none of this example. Its binary64 trace already disclaims exact-backend execution."
+      }
+    ],
+    "page_examination": [
+      {
+        "path": "library/numerical-differential-equations-and-stochastic-dynamics/implicit-stiff-time-stepping-and-algebraic-error.md",
+        "affected_use": "Page inventory places the algorithm; summary describes finite Newton/chord work and conditional accuracy statements.",
+        "disposition": "unaffected",
+        "reason": "The page promises neither arbitrary-domain initial states nor automatic base-domain preservation."
+      }
+    ],
+    "digest_concern": "The sole Step-4 concern targets the unassigned BDF2 corollary. Its current Statement already says that y(h) in B_BE remains a separate requirement; the wrapper retains the corollary conditions. No additional finding or outside repair is needed.",
+    "published_consumer_findings": [],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection, ordinary direct-consumer routing and independent rejudgment; no judgment or certification was written by this repairer.",
+    "contract_repair": "Under acquire/reread/edit/check/release of tools/step5-shared-write-lock.mjs, updated only this item’s endpoints boundary and risk-review entry in research/numerical-optimization-dynamics-2026-10-16-batch-65.proof-contracts.json. No manifest, dependency, page or other item change was necessary."
+  }
+}

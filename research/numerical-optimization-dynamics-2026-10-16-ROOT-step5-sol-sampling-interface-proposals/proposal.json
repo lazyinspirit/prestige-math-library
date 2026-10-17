@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "recorded_at": "2026-10-17T04:52:00Z",
+  "research_only": true,
+  "reviewer": "ROOT/kept_low_stochastic",
+  "original_judge_observations": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-sampling-interface-proposals/original-judge-observations.json",
+  "status": "Research proposals only; actual native5.5 adjudication/adoption remains owed. No current review/acceptance credit claimed.",
+  "entries": [
+    {
+      "id": "alg-pick-freeze-monte-carlo-sobol-estimators",
+      "distinct_issue_cycle": 1,
+      "original_judgments": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+          "line": 2083,
+          "row": {
+            "id": "alg-pick-freeze-monte-carlo-sobol-estimators",
+            "model": "gpt-6.1-sol",
+            "keep": false,
+            "reason": "The covariance formula has a dimension error: Z_r are explicitly row vectors, so (Z_r−Z̄)(Z_r−Z̄)^T is scalar, not a covariance matrix. Reverse the factors or declare Z_r column vectors; the plug-in matrix otherwise is incorrect.",
+            "context_sha256": "05469691026197015915d7332525c3854a19a41717a813e70ee6c66c53d72fbf",
+            "item_sha256": "0887da186e26d2a8deef8b8341d9cea2686c88e345596ac372d0bcdff24a12a1",
+            "at": "2026-10-17T04:30:22.620Z"
+          }
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+          "line": 2028,
+          "row": {
+            "id": "alg-pick-freeze-monte-carlo-sobol-estimators",
+            "model": "gpt-6-luna",
+            "keep": false,
+            "reason": "f∈L² does not ensure Z has finite second moments. For d=1, let P(X=k)∝k⁻⁴ and f(k)=k; then f∈L² but E[f⁴]=∞, and N₁=f(X)²−f(U)f(V) has infinite variance. Thus the stated covariance and MCSE covariance are undefined for allowed inputs.",
+            "context_sha256": "b138d06fff526003f48fae6761efd80cecdff2631cfc0a86728b0bbe79dd6813",
+            "item_sha256": "886ab0af2f1cacbae7c7993fa4915263ac933f8638a3702d656b9bed1b4aaaf2",
+            "at": "2026-10-17T02:00:26.486Z"
+          }
+        }
+      ],
+      "canonical_path": "items/alg-pick-freeze-monte-carlo-sobol-estimators.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-sampling-interface-proposals/before/alg-pick-freeze-monte-carlo-sobol-estimators.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-sampling-interface-proposals/proposed/alg-pick-freeze-monte-carlo-sobol-estimators.md",
+      "guard": {
+        "kind": "exact-byte-equality",
+        "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-sampling-interface-proposals/before/alg-pick-freeze-monte-carlo-sobol-estimators.md",
+        "action": "Refuse application unless canonical current bytes equal archived full preimage; historical judge hashes are not current source binding."
+      },
+      "verdict": "Confirmed focused defect; minimal source proposal only",
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-107.proof-contracts.json",
+          "pointer": "/contracts/thm-pick-freeze-sobol-ratio-joint-clt-and-mcse/citations/1/quote",
+          "action": "After legitimate native repair, mirror exact repaired algorithm Definition; original judgments/contexts remain historical. No consumer proof changes required."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-107.proof-contracts.json",
+          "pointer": "/contracts/ex-ratio-pick-freeze-index-estimator-is-biased/citations/0/quote",
+          "action": "After legitimate native repair, mirror exact repaired algorithm Definition; original judgments/contexts remain historical. No consumer proof changes required."
+        }
+      ],
+      "finding_identity": {
+        "model": "gpt-6.1-sol",
+        "keep": false,
+        "at": "2026-10-17T04:30:22.620Z",
+        "issue": "empirical-covariance row-vector factor order"
+      },
+      "edit_summary": "Reverse the two factors in the single empirical covariance formula: sum (Zr-Zbar)^T(Zr-Zbar)/(n-1). Keep Zr explicitly row vectors and every other source byte unchanged.",
+      "original_definition_changed": true,
+      "independent_reasoning": "Put p=2d+1. Each row difference is 1-by-p, so the old row times transposed-row product is1-by1 and cannot be the advertised covariance matrix. Reversing factors gives p-by-p with entry(a,b)=sum_r(Z_ra-Zbar_a)(Z_rb-Zbar_b)/(n-1), exactly the empirical joint covariance. It is symmetric and nonnegative semidefinite since v^T Sigmahat v=sum_r((Zr-Zbar)v)^2/(n-1)>=0. The ratio derivative Jhat has shape2d-by-p, so Jhat Sigmahat Jhat^T/n is the intended2d-by2d finite joint plug-in matrix. No diagonal-only approximation is introduced. All shared-draw covariances and the full index-delta framework remain intact; this changes no numerator, denominator, zero-denominator status, raw negative ratio, sample-size condition or evaluation count. L2 still suffices for the admitted finite computations, while L4/AC/V>0 remain the separate theorem hypotheses for MCSE interpretation.",
+      "inspected_suppliers": [
+        "items/thm-pick-freeze-sobol-covariance-identities.md",
+        "items/def-moments-variance-and-covariance.md"
+      ],
+      "consumer_discovery": {
+        "method": "All current item YAML deps/justified_by inventoried and reverse closure expanded, supplemented by direct text search. This is focused discovery, not a native check.",
+        "exact_consumer_ids": [
+          "thm-pick-freeze-sobol-ratio-joint-clt-and-mcse",
+          "ex-ratio-pick-freeze-index-estimator-is-biased"
+        ],
+        "consumer_count": 2,
+        "indirect_consumers": []
+      },
+      "consumer_reviews": [
+        {
+          "id": "thm-pick-freeze-sobol-ratio-joint-clt-and-mcse",
+          "source_before": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-sampling-interface-proposals/before/thm-pick-freeze-sobol-ratio-joint-clt-and-mcse.md",
+          "verdict": "compatible; no source repair needed",
+          "evidence": "Full actual source read. The theorem already calls Z an iid row vector and uses its coordinatewise covariance Sigma. Proof3.2 expands each empirical coordinate product and sample mean to prove Sigmahat->Sigma; that expansion is now precisely the repaired outer-product formula. J Sigma J^T and nM_n convergence, singular-covariance CLT, fixed zero-status extensions, finite fourth-moment bounds, finite evaluation count n(2d+5), and O(nd^2+d^3) work are unchanged. No narrowing of its full joint covariance conclusion is proposed."
+        },
+        {
+          "id": "ex-ratio-pick-freeze-index-estimator-is-biased",
+          "source_before": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-sampling-interface-proposals/before/ex-ratio-pick-freeze-index-estimator-is-biased.md",
+          "verdict": "compatible; no source repair needed",
+          "evidence": "Full actual source read. It uses only the unchanged one-factor numerator and independent-pair denominator, two rows and positive-denominator return event. Its K~Binomial(2,1/2) computation, conditional ratio expectation5/6 and true index1 are unaffected. The estimator still returns the same raw ratios and zero-variance status; covariance factor order is unused."
+        }
+      ],
+      "page_review": {
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/global-sensitivity-anova-and-sobol-estimation.md",
+        "verdict": "Full page read; original unbiased-numerator, biased-ratio, joint-CLT/MCSE scope remains compatible, no page edit."
+      }
+    },
+    {
+      "id": "ex-box-muller-finite-midpoint-tail",
+      "distinct_issue_cycle": 1,
+      "original_judgments": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+          "line": 2179,
+          "row": {
+            "id": "ex-box-muller-finite-midpoint-tail",
+            "model": "gpt-6.1-sol",
+            "keep": false,
+            "reason": "The Example says the grid never reaches the cutoff, but K=0 gives U=1/512 and R=√(18 log 2) exactly. The proof establishes only that no grid radius exceeds the cutoff.",
+            "context_sha256": "7edd0cbdb6b59a7262ae4244fc7c15dd32bfa4657f1e96274e857ab5de69cbbe",
+            "item_sha256": "a52f0661803ead16d08d7b9acba335b1e35e455c063c01e3dde8cd9b9dd9cf8b",
+            "at": "2026-10-17T04:48:38.434Z"
+          }
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+          "line": 170,
+          "row": {
+            "id": "ex-box-muller-finite-midpoint-tail",
+            "model": "gpt-6-luna",
+            "keep": false,
+            "reason": "The cited midpoint theorem requires both Countable Choice and Dependent Choice, but the example records only Countable Choice in A1. Its use of that theorem to establish F1 is therefore missing a required hypothesis.",
+            "context_sha256": "504c07aab85626b3d79baec61da3aa42efff1779e32898b2f261f35bda9a7ab9",
+            "item_sha256": "2aaa4bba232b0b6fb55c6aa35518f14e37765ef472b945adff6198920825bfa7",
+            "at": "2026-10-16T17:48:47.506Z"
+          }
+        }
+      ],
+      "canonical_path": "items/ex-box-muller-finite-midpoint-tail.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-sampling-interface-proposals/before/ex-box-muller-finite-midpoint-tail.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-sampling-interface-proposals/proposed/ex-box-muller-finite-midpoint-tail.md",
+      "guard": {
+        "kind": "exact-byte-equality",
+        "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-sampling-interface-proposals/before/ex-box-muller-finite-midpoint-tail.md",
+        "action": "Refuse application unless canonical current bytes equal archived full preimage; historical judge hashes are not current source binding."
+      },
+      "verdict": "Confirmed focused defect; minimal source proposal only",
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-11.proof-contracts.json",
+          "pointer": "/contracts/ex-box-muller-finite-midpoint-tail",
+          "action": "After actual native repair, update any advertised Example/cutoff-boundary mirror to attained but never exceeded; numbered Verification and historical level guards are unchanged."
+        }
+      ],
+      "finding_identity": {
+        "model": "gpt-6.1-sol",
+        "keep": false,
+        "at": "2026-10-17T04:48:38.434Z",
+        "issue": "attainable exact finite midpoint radial cutoff"
+      },
+      "edit_summary": "Replace only Example phrase never reaches it with attains but never exceeds it. Verification and all metadata stay byte-identical.",
+      "original_example_changed": true,
+      "independent_reasoning": "At b=8, K=0 gives first midpoint U=(1/2)2^-8=2^-9=1/512. The exact reference transform has radius R=sqrt(-2log U)=sqrt(18log2), so the maximum is attained. Every other midpoint is at least this U and r(u) is nonincreasing, so no finite midpoint radius exceeds the maximum. The ideal continuous target still assigns P(R>sqrt(18log2))=2^-9=1/512 beyond it. Both tight cutoff and strictly-beyond mass quantification are preserved. Existing Verification1.1–2.1 already proves these facts and is not rewritten.",
+      "inspected_suppliers": [
+        "items/lem-box-muller-product-density-and-radius-moment.md"
+      ],
+      "consumer_discovery": {
+        "method": "Direct item/library text-reference search found no item references to this example other than itself. It declares no aliases.",
+        "exact_consumer_ids": [],
+        "consumer_count": 0
+      },
+      "consumer_reviews": [],
+      "page_review": {
+        "path": "library/numerical-differential-equations-and-stochastic-dynamics/finite-bit-random-streams-and-variate-generation-examples.md",
+        "verdict": "Full page read; finite radial cutoff wording is already accurate. No page or historical-level-guard edit."
+      }
+    }
+  ],
+  "execution_limits": {
+    "canonical_source_or_metadata_edits": false,
+    "hashes_computed": false,
+    "checks_tests_gates_run": false,
+    "native_controls_or_dispatch_or_admission_used": false,
+    "current_review_credit_or_acceptance_claimed": false,
+    "commits_created": false
+  },
+  "preservation": "Prior filtration, chaos and other packets unchanged. Original Sol/Luna judge rows and all history are retained unchanged; this packet records two distinct first-cycle findings only. No historical level guards or proof contracts are edited.",
+  "future_native_work": "Native5.5 must genuinely adjudicate and adopt or escalate these findings. Root owns current guard binding/hashes, source policy and actual supplier-before-consumer recertification; this research packet grants no native coverage."
+}

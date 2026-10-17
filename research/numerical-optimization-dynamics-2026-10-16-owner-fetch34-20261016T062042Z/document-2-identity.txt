@@ -1,0 +1,177 @@
+Bindel, Fall 2012
+Matrix Computations (CS 6210)
+
+Week 13: Wednesday, Nov 14
+
+Some minimization problems
+
+Last time, we sketched the following two-step strategy for approximating the
+solution to linear systems via Krylov subspaces:
+
+1. Build a sequence of Krylov subspaces, either the obvious Km(A, b) or a
+“preconditioned” space Km(M −1A, M −1b), possibly derived from look-
+ing at iterates of a promising stationary method.
+
+2. Choose a criterion to extract an approximate solution from each space.
+
+Let us now turn to the problem of choosing a good solution from a subspace
+Vm in the case when A is symmetric and positive definite. The following four
+equivalent criteria seem rather natural, and are the basis for the conjugate
+gradient method:
+
+1. Define a function
+φ(z) = 1
+
+2zTAz −zTb.
+
+This function is convex (the Hessian A is positive definite), and has a
+unique global minimum at x = A−1b:
+
+∇φ(x) = Ax −b = 0.
+
+One way to choose the solution xm ∈Vm is therefore to minimize φ
+over the subspace Vm.
+
+2. If xm minimized φ over the subspace Vm, that means that the direc-
+tional derivative vT∇φ(xm) = vT(Axm−b) must be zero for all v ∈Vm.
+Put differently, the residual Axm −b must be orthogonal to Vm. This
+is a Galerkin condition.
+
+3. Given xm ∈Vm, write the error em = xm −x. Note that A defines an
+inner product and an associated norm ∥z∥2
+A = zTAz. Measuring em in
+this norm gives
+
+∥em∥2
+A = (xm−x)TA(xm−x) = xT
+mAxm−2xT
+mb+xTAx = 2φ(xm)+∥x∥2
+A.
+
+Therefore, minimizing ∥em∥2
+A is equivalent to minimizing φ(xm).
+
+
+Bindel, Fall 2012
+Matrix Computations (CS 6210)
+
+4. Just as A denotes an inner product, so does A−1; and if we write
+rm = Axm −b = Aem, we have
+
+∥em∥2
+A = eT
+mAem = (Aem)TA−1(Aem) = rT
+mA−1rm = ∥rm∥2
+A−1.
+
+Therefore, minimizing ∥rm∥2
+A is equivalent to minimizing φ(xm).
+
+The Lanczos connection
+
+When we introduced Krylov subspaces, we described them in terms of the
+power basis:
+Kk(A, b) = span{b, Ab, A2b, . . . , Ak−1b}.
+
+Unfortunately, as k grows larger, the vectors in the power basis all start
+looking like the dominant eigenvector of A! While the power basis is fine for
+analysis, it is too ill-conditioned to be of much practical computational use.
+There is a simple alternative procedure to get orthonormal bases for the
+Krylov subspaces: interleave multiplication by A with Gram-Schmidt orthog-
+onalization. That is, start with
+
+v0 =
+b
+∥b∥
+
+and then generate successive vectors by
+
+˜vk+1 = Avk −
+
+k
+�
+
+j=0
+vjvT
+j Avk
+
+vk+1 = ˜vk+1/∥˜vk+1∥.
+
+It is not hard to see that v0, . . . , vk−1 are an orthonormal basis for the kth
+Krylov subspace. What may be less obvious is that most of the coefficients
+vT
+j Avk in the Gram-Schmidt process turn out to be zero! We know that vk
+is orthogonal to everything in the Kk(A, b) Krylov subspace, and Avj lives
+in Kj+1(A, b); so if j ≤k −1, then vT
+j Avk = 0. Thus, the Lanczos process
+turns out to be a very simple three-term recurrence:
+
+βk+1vk+1 = Avk −αkvk −βkvk−1,
+
+where the αk and βk coefficients come out of the Gram-Schmidt process. In
+code, we have:
+
+
+Bindel, Fall 2012
+Matrix Computations (CS 6210)
+
+function [alpha, beta] = lec35lanczos(A,q1,btol,kmax);
+%
+% Run a basic Lanczos iteration until either beta_k < btol
+% or k == kmax.
+
+k
+= 0;
+qk = 0;
+r
+= q1;
+b
+= 1;
+while (b > btol) & (k < kmax)
+k
+= k+1;
+qkm1
+= qk;
+qk
+= r/b;
+Aqk
+= A*qk;
+alpha(k) = qk’*Aqk;
+r
+= Aqk-qk*alpha(k)-qkm1*b;
+b
+= norm(r);
+beta(k)
+= b;
+end
+
+Note that the Gram-Schmidt procedure is numerically unstable, and thus
+the Lanczos procedure in floating point does not behave quite like it does in
+exact arithmetic. However, the numerical instability manifests when βk+1 is
+relatively small, a point which we will bring up again when we talk about
+using Lanczos for solving eigenvalue problems.
+Suppose now that the columns of Vm form an orthonormal basis for the
+Krylov subspace Km(A, b) produced via the Lanczos process. If we choose
+xm = Vmym so that the residual is orthogonal to every vector in Km(A, b)
+(point 2 above), then we have
+
+V T
+m(Axm −b) = V T
+mAVmym −V T
+mb = Tmym −βe1 = 0,
+
+where Tm is the tridiagonal matrix produced by the Lanczos process, and
+V T
+mb = βe1 because the first column of Vm is proportional to b. We can solve
+for ym by writing an unpivoted LU factorization of Tm, which gives us
+
+xm = VmU −1
+m L−1
+m ym,
+
+and then note that if Pm = VmU −1
+m and zm = L−1
+m ym, we can extend to Pm+1
+by appending a column to Pm via a simple recurrence, and we can extend to
+
+

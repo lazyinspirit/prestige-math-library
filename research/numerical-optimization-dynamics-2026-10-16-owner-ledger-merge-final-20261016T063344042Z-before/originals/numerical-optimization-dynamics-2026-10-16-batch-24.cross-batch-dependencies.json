@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "24",
+  "batch_dependency_level": 1,
+  "prerequisite_batches": [
+    "4"
+  ],
+  "scheduling_input_sha256": "ca41fcdd6d4a40fbd61e4921a8bfdd410bd704a05c937a5f709843ed28d2e97d",
+  "suppliers": [
+    {
+      "supplier_batch": "4",
+      "supplier_pair": "NA-10",
+      "supplier_page": "polynomial-interpolation-and-remainder",
+      "status": "inspected-at-handoff",
+      "required_interface": {
+        "construction": "distinct real nodes, barycentric weights and the unique degree-at-most-n interpolating polynomial",
+        "uniqueness": "cardinal-value verification and the n+1 distinct-root bound",
+        "remainder": "f in C^(n+1) on an interval containing the distinct nodes and evaluation point; repeated-Rolle remainder with exact node factors",
+        "finite_evaluator": "sorted distinct nodes and finite data; duplicate-node and invalid arithmetic-range inputs return explicit failure statuses"
+      },
+      "actual_supplier_item_ids": [
+        "def-cardinal-polynomial-interpolation",
+        "lem-cardinal-basis-degree-and-values",
+        "thm-cardinal-polynomial-interpolant-exists-uniquely",
+        "thm-barycentric-interpolation-identities",
+        "thm-lagrange-interpolation-remainder",
+        "alg-finite-barycentric-interpolation-evaluator",
+        "prop-finite-barycentric-interpolation-evaluator-returns-status"
+      ],
+      "source_excerpt": "def-cardinal-polynomial-interpolation, Definition: “Let $n\\in\\mathbb N$ with $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$.”\n\nthm-cardinal-polynomial-interpolant-exists-uniquely, Statement: “Then $I_n y$ from [[def-cardinal-polynomial-interpolation]] is the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.”\n\nthm-barycentric-interpolation-identities, Statement: “At a node $x_i$, the interpolant is defined by the separate value $I_n y(x_i)=y_i$; the quotient is not used there.”\n\nthm-lagrange-interpolation-remainder, Statement: “If $x=x_j$ for a node, then $f(x)-p(x)=0$.” and “If $x\\in[a,b]$ is not a node, there is $$\\xi\\in\\bigl(\\min\\{x,x_0\\},\\max\\{x,x_n\\}\\bigr)$$ such that $$f(x)-p(x)=\\frac{f^{(n+1)}(\\xi)}{(n+1)!_{\\mathbb R}}\\,\\omega_n(x).$$”\n\nalg-finite-barycentric-interpolation-evaluator, Definition: “The output is either a record with status *success* and a value in $\\mathbb F$, or one of the statuses *invalid_nodes*, *invalid_data*, and *range_failure*.”\n\nprop-finite-barycentric-interpolation-evaluator-returns-status, Statement: “For every input tuple of [[alg-finite-barycentric-interpolation-evaluator]], the procedure terminates and returns one of its declared statuses.”",
+      "readiness_claim": "The current supplier page manifest contains the listed item IDs and the complete item bodies/proofs were inspected at handoff. Batch 4 item-dependency-level validation passed; its strict proof-contract check passed for all seven directly relevant construction, uniqueness, remainder, and finite-evaluator items. This records author-side interface verification only; no independent approval or producer Step 1 readiness is claimed. The supplier results use distinct real nodes on an interval. The local simplex interpolation theorem remains conditional on the stated generic unisolvent, bounded reference element and does not infer a multidimensional nodal basis from the interval result.",
+      "affected_claims": [
+        "thm-local-finite-element-interpolation-estimates: the generic conditional proof is complete; the batch-4 interface is 1D and supplies no specific d-simplex nodal unisolvence, so the item does not claim a concrete simplex Lagrange node set.",
+        "thm-lagrange-point-evaluation-threshold-on-reference-simplex: point-value boundedness follows from the simplex extension and Sobolev embedding only; no polynomial interpolant construction or nodal unisolvence is claimed."
+      ],
+      "authoring_disposition": "The required batch-4 page and actual bodies are present and the planned 1D construction, cardinal-value uniqueness, repeated-Rolle remainder, and finite status interface were checked against their current statements and proofs. No item-level dependency was fabricated: the assigned simplex estimates are conditional on general reference-element hypotheses, and the point-evaluation theorem is independent. Preserve the page-level requirement; any later concrete simplex Lagrange element must supply its own unisolvence and bounded-DOF hypotheses. Recheck actual supplier bodies before any later readiness transition.",
+      "initial_status": "unresolved-at-authoring-start",
+      "supporting_prerequisite_item_ids": [
+        "lem-higher-order-rolle",
+        "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots"
+      ]
+    }
+  ],
+  "outgoing_interfaces": [
+    {
+      "supplier_pair": "NA-28",
+      "consumer_pairs": [
+        "PE08",
+        "PE09",
+        "PE10"
+      ],
+      "interface": "oriented affine-simplex incidence and boundary cancellation; H(div)/H(curl) Piola differential, trace and moment transformations; conditional transfer of reference commuting interpolation diagrams",
+      "readiness_claim": "none"
+    }
+  ]
+}

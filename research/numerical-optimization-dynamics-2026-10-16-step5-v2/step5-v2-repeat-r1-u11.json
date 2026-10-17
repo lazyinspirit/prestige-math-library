@@ -1,0 +1,57 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "11",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "ex-box-muller-finite-midpoint-tail",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "7edd0cbdb6b59a7262ae4244fc7c15dd32bfa4657f1e96274e857ab5de69cbbe",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The Example falsely excludes attainment of its radial cutoff: K=0 gives u=(0+1/2)/256=2^{-9} and sqrt(-2 log u)=sqrt(18 log 2). Step 2.1 already proves that this maximum is attained and that only strictly larger radii are excluded. Corrected the Example to state attainment at K=0 and no exceedance; the ideal strict tail remains exactly 1/512.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-box-muller-finite-midpoint-tail",
+      "disposition": "repaired",
+      "post_sha256": "cbf9f9eb2bc0c872cab0b54b24e52a76d768fd67374620d14e981451c4463863",
+      "review_context_sha256": "595ed07ffc03363b5f7c94d411ec6f00a50a3e9740ea674ad900a0b4314566e4",
+      "reason": "Checked the entire item, its owning proof contract, home examples page and actual prerequisite Statement/Definition sections. Finite arithmetic gives u_min=2^{-9}; log monotonicity and square-root order give the attained maximum sqrt(18 log 2). The radial-law supplier states P(R>r)=exp(-r^2/2) for r>=0 under Countable Choice, giving 1/512 at this cutoff. Existing steps and contract already establish precisely these claims. Only the contradictory Example clause was repaired. No Statement or Definition section changed, so no downstream propagation is triggered. This is the repair author check, not independent review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-box-muller-finite-midpoint-tail",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "location": "statement",
+      "status": "fixed",
+      "source_context_sha256": "7edd0cbdb6b59a7262ae4244fc7c15dd32bfa4657f1e96274e857ab5de69cbbe",
+      "before_sha256": "24fa7e025a581b04462edd9e8cc51e82e5e0e81e6766a5114359d3f565898978",
+      "post_sha256": "cbf9f9eb2bc0c872cab0b54b24e52a76d768fd67374620d14e981451c4463863",
+      "reason": "The Example claimed the midpoint grid never reaches the cutoff although K=0 attains sqrt(18 log 2). Replaced that false endpoint assertion with explicit attainment at K=0 and no exceedance; verification and ideal strict-tail probability remain valid.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Only items/ex-box-muller-finite-midpoint-tail.md was changed; proof, dependencies, Countable Choice boundary, contract and home page remain sound without edits. No new prerequisite, published finding or unresolved mathematical obligation was identified. No external source consultation was needed for this familiar elementary calculation.",
+    "Immediately after mathematical review, review-contexts succeeded and supplied the recorded current hashes. All focused checks exited 0: node tools/tsx-run.mjs tools/precheck.mts items/ex-box-muller-finite-midpoint-tail.md --json (1 checked, 0 failures); node tools/rendercheck.mjs items/ex-box-muller-finite-midpoint-tail.md --json (1 checked, no errors or warnings); node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-11.proof-contracts.json --items ex-box-muller-finite-midpoint-tail --strict --json (ok, no errors or warnings); final node tools/proof-layout.mjs items/ex-box-muller-finite-midpoint-tail.md (1 item, 2 steps, 0 defects). No remaining local repair or validation obligation."
+  ]
+}

@@ -1,0 +1,1377 @@
+{
+  "version": 1,
+  "level": "numerical-optimization-dynamics-2026-10-16-batch-104",
+  "scope": [
+    "lem-frozen-slow-euler-variation-bounds",
+    "lem-frozen-slow-euler-one-step-stability",
+    "cor-cubic-defect-gives-second-order-for-symmetric-multirate-composition",
+    "thm-waveform-relaxation-contraction-and-error-bound",
+    "lem-frozen-slow-euler-local-defect-bound",
+    "thm-frozen-slow-euler-global-first-order-error",
+    "ex-coupled-fast-mode-destabilizes-frozen-slow-euler",
+    "ex-frozen-slow-interpolation-limits-order",
+    "ex-linear-electromechanical-multirate-block-cost"
+  ],
+  "contracts": {
+    "lem-frozen-slow-euler-variation-bounds": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-frozen-slow-explicit-fast-euler",
+          "source_section": "Definition",
+          "quote": "Let $r,s\\ge1$, let $D\\subseteq\\mathbb R^{r+s}$ be open, and let $f:D\\to\\mathbb R^r$ and $g:D\\to\\mathbb R^s$ be the designated slow and fast vector fields. The labels “slow” and “fast” are input partition labels; this definition does not assert that either field actually varies at a specified rate. The routine receives proposed state vectors $x,z$, a real macro step $H$, and a microstep count $m$.\n\n**Procedure.**\n\n1. Before any division or field evaluation, check that $x\\in\\mathbb R^r$, $z\\in\\mathbb R^s$, $H>0$, $m$ is an integer with $m\\ge1$, and $(x,z)\\in D$. If any check fails, return `invalid-input`.\n2. Set $h:=H/m$ and evaluate $f(x,z)$ to set $x^+:=x+Hf(x,z)$.\n3. Set $z_0:=z$.\n4. For $j=0,1,\\ldots,m-1$, first check whether $(x,z_j)\\in D$. If not, return `domain-exit` without a macro-step output. Otherwise evaluate $g(x,z_j)$ and set $z_{j+1}:=z_j+h g(x,z_j)$.\n5. If $(x^+,z_m)\\notin D$, return `domain-exit` without a macro-step output. Otherwise return `success` and the output state $(x^+,z_m)$.\n\nFor inputs on which the procedure succeeds, write its output map as $\\Psi_{H,m}(x,z):=(x^+,z_m)$.\n\nOn a successful step the procedure uses exactly one evaluation of $f$ and $m$ evaluations of $g$; an invalid-input return uses no field evaluations, and a domain-exit return uses no more than these counts. The slow state is held at its initial value during every fast microstep. In a separated implementation, the slow update needs the starting fast value $z_0$, while the fast loop needs the starting slow value $x$; $x$ can be sent to the fast worker once and cached for all $m$ microsteps, with no fast-to-slow refresh during the block. The actual communication cost depends on the implementation. The evaluation counts alone give no wall-clock saving claim, especially when the fast block accounts for nearly all right-hand-side work.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "Fix $0\\le a\\le b\\le H$. Apply [F1] to the restriction of $U$ with initial time $a$, then [F2] and [A1]: $$\\|U(b)-U(a)\\|_2=\\left\\|\\int_a^b F(U(t))\\,dt\\right\\|_2\\le\\int_a^b\\|F(U(t))\\|_2\\,dt\\le M(b-a).$$ For $a=b$ the oriented integral is zero, so the same bound holds.",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "By [F3] and [A1], $\\|z_{j+1}-z_j\\|_2=h\\|g(x_0,z_j)\\|_2\\le h\\|F(x_0,z_j)\\|_2\\le hM$, since a block projection has norm at most the product norm. Starting with $z_0-z_0=0$ and summing these $j$ increments gives $\\|z_j-z_0\\|_2\\le jhM$ for every $0\\le j\\le m$.",
+          "inputs": [
+            "F3",
+            "A1",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires positive block dimensions r,s and a positive integer m."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 remain valid when M=0; both variation bounds become zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows r=s=1 and m=1; step 2.1 then has one increment."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles a=b, and step 2.1 includes j=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes a=0,b=H; step 2.1 includes j=0 and j=m."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use one exact integral and a finite sum; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves inequalities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves inequalities, not a biconditional."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No nonconstructive choice axiom is used. Finite-dimensional estimates use explicit finite inductions; the waveform proof uses the cited choice-free closed-subspace result and constructive Banach fixed-point theorem.",
+      "risk_review": {
+        "status": "complete",
+        "notes": "Author self-check: verified stated domains, zero and endpoint cases, proof inputs, and that symmetry is not used to infer the cubic defect. This is not independent approval."
+      }
+    },
+    "lem-frozen-slow-euler-one-step-stability": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-frozen-slow-explicit-fast-euler",
+          "source_section": "Definition",
+          "quote": "Let $r,s\\ge1$, let $D\\subseteq\\mathbb R^{r+s}$ be open, and let $f:D\\to\\mathbb R^r$ and $g:D\\to\\mathbb R^s$ be the designated slow and fast vector fields. The labels “slow” and “fast” are input partition labels; this definition does not assert that either field actually varies at a specified rate. The routine receives proposed state vectors $x,z$, a real macro step $H$, and a microstep count $m$.\n\n**Procedure.**\n\n1. Before any division or field evaluation, check that $x\\in\\mathbb R^r$, $z\\in\\mathbb R^s$, $H>0$, $m$ is an integer with $m\\ge1$, and $(x,z)\\in D$. If any check fails, return `invalid-input`.\n2. Set $h:=H/m$ and evaluate $f(x,z)$ to set $x^+:=x+Hf(x,z)$.\n3. Set $z_0:=z$.\n4. For $j=0,1,\\ldots,m-1$, first check whether $(x,z_j)\\in D$. If not, return `domain-exit` without a macro-step output. Otherwise evaluate $g(x,z_j)$ and set $z_{j+1}:=z_j+h g(x,z_j)$.\n5. If $(x^+,z_m)\\notin D$, return `domain-exit` without a macro-step output. Otherwise return `success` and the output state $(x^+,z_m)$.\n\nFor inputs on which the procedure succeeds, write its output map as $\\Psi_{H,m}(x,z):=(x^+,z_m)$.\n\nOn a successful step the procedure uses exactly one evaluation of $f$ and $m$ evaluations of $g$; an invalid-input return uses no field evaluations, and a domain-exit return uses no more than these counts. The slow state is held at its initial value during every fast microstep. In a separated implementation, the slow update needs the starting fast value $z_0$, while the fast loop needs the starting slow value $x$; $x$ can be sent to the fast worker once and cached for all $m$ microsteps, with no fast-to-slow refresh during the block. The actual communication cost depends on the implementation. The evaluation counts alone give no wall-clock saving claim, especially when the fast block accounts for nearly all right-hand-side work.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$1+x\\le\\exp(x).$$\nConsequently, if $0\\le p\\le1$ and $m\\in\\mathbb N$, then\n$$ (1-p)^m\\le\\exp(-mp). $$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-power-monotone",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{R}$ be an ordered field ([[def-ordered-field]]), let\n$a, b \\in \\mathbb{R}$ and let $n \\in \\mathbb{N}$, with powers as in\n[[def-integer-power]].\n\n1. **Signs.** If $a \\ge 0$ then $a^n \\ge 0$, and if $a > 0$ then $a^n > 0$.\n2. **Strict monotonicity in the base.** If $0 \\le a < b$ and $n \\ge 1$ then $a^n < b^n$. Consequently, for $a, b \\ge 0$ and $n \\ge 1$: $a < b \\iff a^n < b^n$ and $a \\le b \\iff a^n \\le b^n$, and $x \\mapsto x^n$ is injective on $\\{x \\in \\mathbb{R} : x \\ge 0\\}$.\n3. **Comparison with the base.** If $a \\ge 1$ and $n \\ge 1$ then $a^n \\ge a \\ge 1$; if $a > 1$ and $n \\ge 1$ then $a^n \\ge a > 1$; and if $0 \\le a \\le 1$ then $a^n \\le 1$.\n4. **Monotonicity in the exponent.** If $a > 1$ then $a^m < a^n$ whenever $m < n$ in $\\mathbb{N}$; if $a = 1$ then $a^n = 1$ for all $n$; and if $0 < a < 1$ then $a^m > a^n$ whenever $m < n$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$, where $\\mathbb{R}$ is the ambient ordered field\n([[def-ordered-field]], [[def-field]]).\n\n**Natural exponents.** By the recursion theorem ([[thm-recursion]]) applied to\nthe set $\\mathbb{R}$, the starting element $1$ and the function\n$f(x) = x \\cdot a$, there is a unique function $\\mathbb{N} \\to \\mathbb{R}$,\nwritten $n \\mapsto a^n$, with\n\n$$a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).$$\n\nThus $a^1 = a$, $a^2 = a \\cdot a$, and so on. Note that this is defined for\n**every** $a$, including $a = 0$.\n\n**Negative exponents.** If $a \\ne 0$ and $n \\in \\mathbb{N}$ with $n \\ge 1$, set\n\n$$a^{-n} := (a^n)^{-1}.$$\n\n**Why that is legitimate.** The right-hand side presupposes that $a^n$ is\ninvertible, that is, that $a^n \\ne 0$. This is a proof obligation and not an\nobservation, and it is discharged by claim 2 of [[lem-power-laws]]: for $a \\ne 0$\nin a field, $a^n \\ne 0$ for every $n \\in \\mathbb{N}$, proved there by induction on\n$n$ from the fact that a field has no zero divisors ([[lem-of-no-zero-divisors]]).\nThat lemma is a statement *about* the operation introduced here, so it depends on\nthis definition and is recorded in this item's `justified_by` rather than in its\n`deps` (SCHEMA §3). Given $a^n \\ne 0$, the value $(a^n)^{-1}$ is a single\nwell-determined element, because multiplicative inverses in a field are unique\n([[lem-of-inverse-unique]]).\n\n**Integer exponents.** Every integer $m$ ([[def-integers]]) is either\n$n$ or $-n$ for a unique natural $n$, where $n$ in these integer expressions denotes its image under the\nembedding $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ ([[lem-nat-embeds-int]],\n[[def-int-operations]]). This too is a citation and not a slogan: the order on\n$\\mathbb{Z}$ is total ([[thm-int-ordered-ring]]), so $m \\ge 0$ or $m < 0$; the\nimage of $\\iota$ is exactly the set of nonnegative integers, and each of them is\n$n$ for a unique natural $n$ ([[lem-nat-embeds-int]]); and if $m < 0$ then\n$-m > 0$, by compatibility of the order with addition ([[thm-int-ordered-ring]]),\nso $-m = n$ and $m = -n$, with $n$ unique because $\\iota$ is\ninjective. The two clauses above therefore define $a^m$ for every\n$m \\in \\mathbb{Z}$ whenever $a \\ne 0$, and for every $m \\in \\mathbb{N}$ for\narbitrary $a$. The two exponent domains are disjoint: the natural clause\nhandles $m \\ge 0$, including $m = 0$, while the negative clause requires\n$n \\ge 1$ and therefore handles only $m < 0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "Put $d_x=\\|x-\\bar x\\|_2$ and $d_j=\\|z_j-\\bar z_j\\|_2$. By [F1] and the joint Lipschitz inequality [A1], $\\|x^+-\\bar x^+\\|_2\\le(1+KH)d_x+KHd_0$, and $d_{j+1}\\le(1+hK)d_j+hK d_x$. The second inequality uses $\\|(x,z_j)-(\\bar x,\\bar z_j)\\|_2\\le d_x+d_j$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "Iterating the fast recurrence in step 1.1 gives $d_m\\le(1+hK)^m d_0+((1+hK)^m-1)d_x$ when $K>0$. For $K=0$ it gives $d_m\\le d_0$, the same formula at $K=0$. By [F2], $1+hK\\le\\exp(hK)$; raising nonnegative terms to the integer power $m$ and using repeated exponential addition yields $(1+hK)^m\\le\\exp(KH)$. Hence $d_m\\le\\exp(KH)d_0+(\\exp(KH)-1)d_x$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "step": "3.1",
+          "claim": "If $K>0$, [F3] applied to $\\exp$ on $[0,KH]$ gives $0\\le\\eta_H:=(\\exp(KH)-1)/H\\le K\\exp(KT)$, since its intermediate point $c$ satisfies $0<c<KH\\le KT$ and $\\exp(c)\\le\\exp(KT)$. If $K=0$, set $\\eta_H=0$, and the same bound holds. Put $d=(d_x,d_0)^T$ and $d^+:=(\\|x^+-\\bar x^+\\|_2,\\|z_m-\\bar z_m\\|_2)^T$. Steps 1.1–2.1 give $d^+\\le(I+HB_H)d$ componentwise, where $$B_H:=\\begin{pmatrix}K&K\\\\\\eta_H&\\eta_H\\end{pmatrix},\\qquad \\|B_H\\|_F\\le\\sqrt{2K^2+2K^2\\exp(2KT)}=L_T.$$",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "step": "4.1",
+          "claim": "All entries of $I+HB_H$ are nonnegative, so componentwise domination implies $\\|d^+\\|_2\\le\\|(I+HB_H)d\\|_2$. By [F4], $\\|(I+HB_H)d\\|_2\\le\\|d\\|_2+H\\|B_H\\|_F\\|d\\|_2\\le(1+L_T H)\\|d\\|_2$. Under the product norm, $\\|d\\|_2=\\|(x,z)-(\\bar x,\\bar z)\\|_2$ and $\\|d^+\\|_2$ is the output difference, proving the claim.",
+          "inputs": [
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires r,s≥1 and two admitted states."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly treats K=0, giving η_H=0 and L_T=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes r=s=1 and m=1; the recurrence proof does not require m>1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When the two inputs coincide, all d_x,d_j vanish and steps 1.1–4.1 give zero output difference."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The allowed macro endpoint H=T is included in steps 3.1–4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use finite recurrences and step 3.1 a finite matrix bound; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way Lipschitz bound."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way Lipschitz bound."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No nonconstructive choice axiom is used. Finite-dimensional estimates use explicit finite inductions; the waveform proof uses the cited choice-free closed-subspace result and constructive Banach fixed-point theorem.",
+      "risk_review": {
+        "status": "complete",
+        "notes": "Author self-check: verified stated domains, zero and endpoint cases, proof inputs, and that symmetry is not used to infer the cubic defect. This is not independent approval."
+      }
+    },
+    "cor-cubic-defect-gives-second-order-for-symmetric-multirate-composition": {
+      "kind": "corollary",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-discrete-one-step-error-recurrence-bound",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "Set $e_n:=\\|Y_n-Y(t_n)\\|_2$ for the exact solution [F3]. The Euclidean triangle inequality [F2], the local-defect premise, and the stability premise in [A1] give $$e_{n+1}\\le\\|\\Psi_H(Y_n)-\\Psi_H(Y(t_n))\\|_2+\\|\\Psi_H(Y(t_n))-Y(t_{n+1})\\|_2\\le(1+LH)e_n+CH^3.$$",
+          "inputs": [
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "Apply [F1] with order $p=2$, step $H$, and the stated $C_0,C,L$. The initial error and recurrence from step 1.1 are exactly its hypotheses, so the $L>0$ and $L=0$ cases give the claimed bounds.",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a positive horizon and N≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes C=0 and the L=0 branch, for which the defect contribution vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "N=1 is allowed, and the recurrence in steps 1.1–2.1 has one step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 separately proves the L=0 limiting case without division by L."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 applies for every 0≤n<N, including the first and last macro steps."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use a finite error sequence; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is an implication, not an equivalence."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No nonconstructive choice axiom is used. Finite-dimensional estimates use explicit finite inductions; the waveform proof uses the cited choice-free closed-subspace result and constructive Banach fixed-point theorem.",
+      "risk_review": {
+        "status": "complete",
+        "notes": "Author self-check: verified stated domains, zero and endpoint cases, proof inputs, and that symmetry is not used to infer the cubic defect. This is not independent approval."
+      }
+    },
+    "thm-waveform-relaxation-contraction-and-error-bound": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-synchronous-waveform-relaxation-finite-window",
+          "source_section": "Definition",
+          "quote": "Let $r,s\\ge1$, $d=r+s$, $D\\subseteq\\mathbb R^d$ be open, $F=(f,g):D\\to\\mathbb R^d$ be continuous, and $u_0=(x_0,z_0)\\in D$. Choose a window length $\\Delta>0$, radius $R\\ge0$, bounds $M,K\\ge0$, tolerance $\\varepsilon\\ge0$, and integer sweep budget $B\\ge0$. The admissibility conditions are that the closed Euclidean ball $\\overline B_R(u_0)$ lies in $D$, $\\|F(u)\\|_2\\le M$ on that ball, $\\|F(u)-F(v)\\|_2\\le K\\|u-v\\|_2$ there, $M\\Delta\\le R$, and $q:=K\\Delta<1$. If an input condition fails, return `not-admissible`.\n\nLet $C_\\Delta=C([0,\\Delta],\\mathbb R^d)$ with $d_\\infty(U,V):=\\sup_{0\\le t\\le\\Delta}\\|U(t)-V(t)\\|_2$, and let $X_R:=\\{U\\in C_\\Delta: U(0)=u_0,\\ \\sup_t\\|U(t)-u_0\\|_2\\le R\\}$. The synchronous Picard waveform map is\n$$\\Phi(U)(t):=u_0+\\int_0^t F(U(s))\\,ds,$$\nwhere the vector integral is componentwise. This updates both state waveforms from the same preceding pair.\n\n**Procedure.** If $B=0$, return the constant waveform $U^0(t):=u_0$ with status `budget-exhausted` and no error certificate. Otherwise set $U^0(t):=u_0$ and, for $k=1,\\ldots,B$, compute $U^k:=\\Phi(U^{k-1})$. After the first sweep set $\\delta_0:=d_\\infty(U^1,U^0)$. After sweep $k$, compute $E_k:=q^k\\delta_0/(1-q)$. If $E_k\\le\\varepsilon$, return $(U^k,\\texttt{tolerance-certified},E_k,k)$; if the budget is exhausted first, return $(U^B,\\texttt{budget-exhausted},E_B,B)$. Integrals and waveform updates are exact mathematical operations here; quadrature and inexact subsolves require separate error terms.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-vector-valued-continuous-curve-space-is-complete",
+          "source_section": "Statement",
+          "quote": "Let $J$ be a nonempty compact interval and $n\\ge1$. Continuous $\\mathbb R^n$-valued curves on $J$ are complete in the supremum metric\n\n$$d_\\infty(x,y):=\\sup_{t\\in J}\\|x(t)-y(t)\\|_2.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complete-subspace-iff-closed",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $A \\subseteq X$\ncarry the subspace metric $d_A$ ([[def-isometry-and-metric-embedding]]). Then:\n\n1. **Under countable choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]),\n   if $(A,d_A)$ is complete ([[def-complete-metric-space]]), then $A$ is closed\n   in $(X,d)$ ([[def-metric-topology]]). No completeness hypothesis on $X$ is needed.\n2. **In ZF, without a choice axiom**, if $(X,d)$ is complete and $A$ is closed\n   in $(X,d)$, then $(A,d_A)$ is complete.\n\nConsequently, under countable choice, a subspace of a complete metric space is\ncomplete if and only if it is closed.\n\nThe following form of the first direction is also choice-free: a complete\nsubspace contains the ambient limit of every convergent sequence of its\npoints. Hence it is closed whenever every point of its ambient closure is\nalready known to be the limit of a sequence from that subspace. This last\ncondition is pointwise existence, not a chosen family of sequences.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their\ncomponents and their limits are as in\n[[def-vector-valued-functions-limits-and-continuity]].\n\n### The derivative\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}^{m}$ and let $c \\in A$ be\na **limit point of $A$** ([[def-limit-point-r]]). The **difference quotient of\n$f$ at $c$** is the vector-valued function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}^{m}, \\qquad q_{f,c}(x) \\;:=\\; \\frac{1}{x - c}\\,\\bigl(f(x) - f(c)\\bigr),$$\n\nthe scalar multiple being that of the vector space $\\mathbb{R}^{m}$\n([[def-function-space]]); the division is legitimate because $x \\ne c$ gives\n$x - c \\ne 0$. As in [[def-derivative]], $c$ is a limit point of\n$A \\setminus \\{c\\}$ as well, since a punctured neighbourhood of $c$ omits $c$.\n\n$f$ is **differentiable at $c$** when $\\lim_{x \\to c} q_{f,c}(x)$ exists in\n$\\mathbb{R}^{m}$, and then the **derivative** is\n\n$$f'(c) \\;:=\\; \\lim_{x\\to c} q_{f,c}(x) \\;\\in\\; \\mathbb{R}^{m}.$$\n\n**The notation denotes a single vector.** At most one $L \\in \\mathbb{R}^{m}$\nsatisfies the limit condition, as proved in\n[[def-vector-valued-functions-limits-and-continuity]]; this is the vector-valued\nform of the obligation [[lem-function-limit-unique]] discharges for real-valued\nfunctions and [[lem-metric-limits-unique]] for sequences.\n\n**The intrinsic form is the definition; the componentwise form is a theorem.**\nFor $i < m$ the $i$-th component of $q_{f,c}(x)$ is\n$\\bigl(f_i(x)-f_i(c)\\bigr)/(x-c)$, which is the real difference quotient of\n$f_i$ at $c$ ([[def-derivative]]). So by\n[[thm-componentwise-limits-and-continuity]] clause 2:\n\n> $f$ is differentiable at $c$ **if and only if** every $f_i$ is differentiable\n> at $c$, and then $f'(c)_i = f_i'(c)$ for every $i<m$.\n\nNothing below reverses this order of presentation: the intrinsic limit is what is\ndefined, and the coordinates are read off it.\n\n**Algebra of derivatives.** If $f, g : A \\to \\mathbb{R}^{m}$ are differentiable at\n$c$ and $\\lambda \\in \\mathbb{R}$, then $f + g$ and $\\lambda f$ are differentiable\nat $c$ with $(f+g)'(c) = f'(c)+g'(c)$ and $(\\lambda f)'(c) = \\lambda f'(c)$: read\ncomponentwise through the displayed equivalence, these are clauses 1 and 2 of the\npublished [[thm-algebra-of-derivatives]].\n\n### The integral\n\nLet $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}^{m}$\n([[def-interval]]). $f$ is **integrable on $[a,b]$** when every component\n$f_i : [a,b] \\to \\mathbb{R}$ is bounded ([[def-bounded-set]]) and Darboux\nintegrable in the sense of [[def-darboux-integral]], and then\n\n$$\\int_a^b f \\;:=\\; \\text{the function } m \\to \\mathbb{R} \\text{ sending } i \\mapsto \\int_a^b f_i .$$\n\n**That really is an element of $\\mathbb{R}^{m}$.** In this library\n$\\mathbb{R}^{m}$ is the set of functions $m \\to \\mathbb{R}$\n([[def-function-space]]), not a set of tuples, so the displayed assignment is\nliterally an element of it; each value $\\int_a^b f_i$ is a single real by\n[[def-darboux-integral]]. In the standard basis\n([[lem-standard-basis-of-f-n]]) the same object is\n$\\int_a^b f = \\sum_{i<m}\\bigl(\\int_a^b f_i\\bigr)e_i$.\n\n**Oriented limits.** Following [[def-oriented-integral]] componentwise, set\n\n$$\\int_a^a f \\;:=\\; 0 \\in \\mathbb{R}^{m}, \\qquad \\int_b^a f \\;:=\\; -\\int_a^b f \\quad (a < b),$$\n\nso that $\\int_u^v f = -\\int_v^u f$ for all $u,v$ in an interval on which $f$ is\nintegrable. The clauses do not overlap with the case $a<b$, so nothing has to be\nchecked for consistency, exactly as in [[def-oriented-integral]].\n\n**Linearity.** If $f, g : [a,b] \\to \\mathbb{R}^{m}$ are integrable and\n$\\lambda,\\mu \\in \\mathbb{R}$ then $\\lambda f + \\mu g$ is integrable with\n\n$$\\int_a^b (\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f + \\mu\\int_a^b g ,$$\n\nsince each side has $i$-th coordinate $\\int_a^b(\\lambda f_i + \\mu g_i)$ and\n$\\lambda\\int_a^b f_i + \\mu\\int_a^b g_i$ respectively, and those agree by\n[[thm-linearity-of-the-integral]].\n\n**Restriction and splitting.** If $f$ is integrable on $[a,b]$ then it is\nintegrable on every nondegenerate closed subinterval $[c,d]$ with\n$a\\le c<d\\le b$, and for $a<c<b$,\n$\\int_a^b f = \\int_a^c f + \\int_c^b f$; both are the componentwise readings of\n[[lem-integrability-on-a-subinterval]] and\n[[thm-additivity-over-subintervals]], applied to each $f_i$ and reassembled\ncoordinate by coordinate.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty complete metric space ([[def-complete-metric-space]])\nand let $f : X \\to X$ be a contraction with constant $q$, so\n$d(f(u),f(v)) \\le q\\,d(u,v)$ for all $u,v \\in X$ and $0 \\le q < 1$\n([[def-lipschitz-holder-contraction]]). Then:\n\n1. There is exactly one $x^{*} \\in X$ with $f(x^{*}) = x^{*}$.\n2. For every $x_0 \\in X$ the sequence of **iterates**, defined by recursion\n   ([[thm-recursion]]) by $x_{n+1} := f(x_n)$, converges to $x^{*}$ in $(X,d)$\n   ([[def-metric-convergence]]). In particular the limit does not depend on\n   $x_0$.\n3. For all $m, n \\in \\mathbb{N}$ with $m \\ge n$,\n   $$d(x_m, x_n) \\;\\le\\; \\frac{q^{\\,n}\\, d(x_1,x_0)}{1-q},$$\n   with the integer power of [[def-integer-power]].\n\nClaim 3 is the quantitative form of the argument that proves claims 1 and 2, and\nit is recorded in the statement because the error estimates\n([[cor-banach-error-estimates]]) are read off from it.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "The constant waveform $U(t)=u_0$ belongs to $X_R$, so $X_R$ is nonempty. By [F2] the ambient continuous-curve space is complete. If $U_n\\in X_R$ and $U_n\\to U$ uniformly, then $U(0)=u_0$ and, for every $t$, $\\|U(t)-u_0\\|_2\\le\\|U-U_n\\|_\\infty+R$; letting $n\\to\\infty$ gives $\\|U(t)-u_0\\|_2\\le R$. Hence $X_R$ is closed and complete by the choice-free direction [F3].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "step": "1.2",
+          "claim": "For $U\\in X_R$, continuity of $U$ and the field Lipschitz bound imply $\\|F(U(t))-F(U(t_0))\\|_2\\le K\\|U(t)-U(t_0)\\|_2\\to0$ as $t\\to t_0$; this holds with one-sided limits at endpoints. Thus $F\\circ U$ is continuous and componentwise integrable by [F5]. For $0\\le s\\le t\\le\\Delta$, additivity and [F4] give $\\|\\Phi(U)(t)-\\Phi(U)(s)\\|_2\\le M(t-s)$; also $\\Phi(U)(0)=u_0$ and $\\|\\Phi(U)(t)-u_0\\|_2\\le Mt\\le M\\Delta\\le R$. Thus $\\Phi(U)\\in X_R$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-3",
+          "step": "1.3",
+          "claim": "For $U,V\\in X_R$ and $t\\in[0,\\Delta]$, [F4] and the field Lipschitz bound yield $\\|\\Phi(U)(t)-\\Phi(V)(t)\\|_2\\le\\int_0^tK\\|U(s)-V(s)\\|_2\\,ds\\le K\\Delta\\|U-V\\|_\\infty=q\\|U-V\\|_\\infty$. Taking the supremum proves that $\\Phi$ is a contraction with $q<1$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "By [F1], [F2]–[F3], and step 1.3, [F6] applies to the nonempty complete space $X_R$ and the map $\\Phi:X_R\\to X_R$. It gives a unique fixed point $U^*$ and convergence of the iterates from every $U^0\\in X_R$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "step": "3.1",
+          "claim": "The fixed-point identity is $U^*(t)=u_0+\\int_0^tF(U^*(s))\\,ds$. By [F7], this is equivalent to the IVP $U'=F(U)$, $U(0)=u_0$.",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "step": "4.1",
+          "claim": "Fix $k\\ge1$. By [F6], for every $m\\ge k$, $\\|U^m-U^k\\|_\\infty\\le q^k\\delta_0/(1-q)$. Since $U^m\\to U^*$ in $X_R$, the triangle inequality gives $\\bigl|\\|U^*-U^k\\|_\\infty-\\|U^m-U^k\\|_\\infty\\bigr|\\le\\|U^*-U^m\\|_\\infty\\to0$; passing to the limit proves the stated bound. The algorithm reports `tolerance-certified` only when this bound is at most $\\varepsilon$; when the finite budget ends first, it reports `budget-exhausted` without claiming the requested tolerance.",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 exhibits the constant curve, so X_R is nonempty even when R=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When K=0, q=0; steps 1.3 and 2.1 show the first sweep reaches the fixed point."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes r=s=1, and step 1.1 uses finite-dimensional curve completeness."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: for R=0, MΔ≤R forces M=0; the singleton waveform set is invariant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 treats t=0 and t=Δ; the supremum and integral estimates include both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use the choice-free closed-subspace direction and the constructive Banach theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem identifies a fixed point as an IVP solution, but makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem identifies a fixed point as an IVP solution, but makes no iff claim."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No nonconstructive choice axiom is used. Finite-dimensional estimates use explicit finite inductions; the waveform proof uses the cited choice-free closed-subspace result and constructive Banach fixed-point theorem.",
+      "risk_review": {
+        "status": "complete",
+        "notes": "Author self-check: verified stated domains, zero and endpoint cases, proof inputs, and that symmetry is not used to infer the cubic defect. This is not independent approval."
+      }
+    },
+    "lem-frozen-slow-euler-local-defect-bound": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their\ncomponents and their limits are as in\n[[def-vector-valued-functions-limits-and-continuity]].\n\n### The derivative\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}^{m}$ and let $c \\in A$ be\na **limit point of $A$** ([[def-limit-point-r]]). The **difference quotient of\n$f$ at $c$** is the vector-valued function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}^{m}, \\qquad q_{f,c}(x) \\;:=\\; \\frac{1}{x - c}\\,\\bigl(f(x) - f(c)\\bigr),$$\n\nthe scalar multiple being that of the vector space $\\mathbb{R}^{m}$\n([[def-function-space]]); the division is legitimate because $x \\ne c$ gives\n$x - c \\ne 0$. As in [[def-derivative]], $c$ is a limit point of\n$A \\setminus \\{c\\}$ as well, since a punctured neighbourhood of $c$ omits $c$.\n\n$f$ is **differentiable at $c$** when $\\lim_{x \\to c} q_{f,c}(x)$ exists in\n$\\mathbb{R}^{m}$, and then the **derivative** is\n\n$$f'(c) \\;:=\\; \\lim_{x\\to c} q_{f,c}(x) \\;\\in\\; \\mathbb{R}^{m}.$$\n\n**The notation denotes a single vector.** At most one $L \\in \\mathbb{R}^{m}$\nsatisfies the limit condition, as proved in\n[[def-vector-valued-functions-limits-and-continuity]]; this is the vector-valued\nform of the obligation [[lem-function-limit-unique]] discharges for real-valued\nfunctions and [[lem-metric-limits-unique]] for sequences.\n\n**The intrinsic form is the definition; the componentwise form is a theorem.**\nFor $i < m$ the $i$-th component of $q_{f,c}(x)$ is\n$\\bigl(f_i(x)-f_i(c)\\bigr)/(x-c)$, which is the real difference quotient of\n$f_i$ at $c$ ([[def-derivative]]). So by\n[[thm-componentwise-limits-and-continuity]] clause 2:\n\n> $f$ is differentiable at $c$ **if and only if** every $f_i$ is differentiable\n> at $c$, and then $f'(c)_i = f_i'(c)$ for every $i<m$.\n\nNothing below reverses this order of presentation: the intrinsic limit is what is\ndefined, and the coordinates are read off it.\n\n**Algebra of derivatives.** If $f, g : A \\to \\mathbb{R}^{m}$ are differentiable at\n$c$ and $\\lambda \\in \\mathbb{R}$, then $f + g$ and $\\lambda f$ are differentiable\nat $c$ with $(f+g)'(c) = f'(c)+g'(c)$ and $(\\lambda f)'(c) = \\lambda f'(c)$: read\ncomponentwise through the displayed equivalence, these are clauses 1 and 2 of the\npublished [[thm-algebra-of-derivatives]].\n\n### The integral\n\nLet $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}^{m}$\n([[def-interval]]). $f$ is **integrable on $[a,b]$** when every component\n$f_i : [a,b] \\to \\mathbb{R}$ is bounded ([[def-bounded-set]]) and Darboux\nintegrable in the sense of [[def-darboux-integral]], and then\n\n$$\\int_a^b f \\;:=\\; \\text{the function } m \\to \\mathbb{R} \\text{ sending } i \\mapsto \\int_a^b f_i .$$\n\n**That really is an element of $\\mathbb{R}^{m}$.** In this library\n$\\mathbb{R}^{m}$ is the set of functions $m \\to \\mathbb{R}$\n([[def-function-space]]), not a set of tuples, so the displayed assignment is\nliterally an element of it; each value $\\int_a^b f_i$ is a single real by\n[[def-darboux-integral]]. In the standard basis\n([[lem-standard-basis-of-f-n]]) the same object is\n$\\int_a^b f = \\sum_{i<m}\\bigl(\\int_a^b f_i\\bigr)e_i$.\n\n**Oriented limits.** Following [[def-oriented-integral]] componentwise, set\n\n$$\\int_a^a f \\;:=\\; 0 \\in \\mathbb{R}^{m}, \\qquad \\int_b^a f \\;:=\\; -\\int_a^b f \\quad (a < b),$$\n\nso that $\\int_u^v f = -\\int_v^u f$ for all $u,v$ in an interval on which $f$ is\nintegrable. The clauses do not overlap with the case $a<b$, so nothing has to be\nchecked for consistency, exactly as in [[def-oriented-integral]].\n\n**Linearity.** If $f, g : [a,b] \\to \\mathbb{R}^{m}$ are integrable and\n$\\lambda,\\mu \\in \\mathbb{R}$ then $\\lambda f + \\mu g$ is integrable with\n\n$$\\int_a^b (\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f + \\mu\\int_a^b g ,$$\n\nsince each side has $i$-th coordinate $\\int_a^b(\\lambda f_i + \\mu g_i)$ and\n$\\lambda\\int_a^b f_i + \\mu\\int_a^b g_i$ respectively, and those agree by\n[[thm-linearity-of-the-integral]].\n\n**Restriction and splitting.** If $f$ is integrable on $[a,b]$ then it is\nintegrable on every nondegenerate closed subinterval $[c,d]$ with\n$a\\le c<d\\le b$, and for $a<c<b$,\n$\\int_a^b f = \\int_a^c f + \\int_c^b f$; both are the componentwise readings of\n[[lem-integrability-on-a-subinterval]] and\n[[thm-additivity-over-subintervals]], applied to each $f_i$ and reassembled\ncoordinate by coordinate.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-frozen-slow-explicit-fast-euler",
+          "source_section": "Definition",
+          "quote": "Let $r,s\\ge1$, let $D\\subseteq\\mathbb R^{r+s}$ be open, and let $f:D\\to\\mathbb R^r$ and $g:D\\to\\mathbb R^s$ be the designated slow and fast vector fields. The labels “slow” and “fast” are input partition labels; this definition does not assert that either field actually varies at a specified rate. The routine receives proposed state vectors $x,z$, a real macro step $H$, and a microstep count $m$.\n\n**Procedure.**\n\n1. Before any division or field evaluation, check that $x\\in\\mathbb R^r$, $z\\in\\mathbb R^s$, $H>0$, $m$ is an integer with $m\\ge1$, and $(x,z)\\in D$. If any check fails, return `invalid-input`.\n2. Set $h:=H/m$ and evaluate $f(x,z)$ to set $x^+:=x+Hf(x,z)$.\n3. Set $z_0:=z$.\n4. For $j=0,1,\\ldots,m-1$, first check whether $(x,z_j)\\in D$. If not, return `domain-exit` without a macro-step output. Otherwise evaluate $g(x,z_j)$ and set $z_{j+1}:=z_j+h g(x,z_j)$.\n5. If $(x^+,z_m)\\notin D$, return `domain-exit` without a macro-step output. Otherwise return `success` and the output state $(x^+,z_m)$.\n\nFor inputs on which the procedure succeeds, write its output map as $\\Psi_{H,m}(x,z):=(x^+,z_m)$.\n\nOn a successful step the procedure uses exactly one evaluation of $f$ and $m$ evaluations of $g$; an invalid-input return uses no field evaluations, and a domain-exit return uses no more than these counts. The slow state is held at its initial value during every fast microstep. In a separated implementation, the slow update needs the starting fast value $z_0$, while the fast loop needs the starting slow value $x$; $x$ can be sent to the fast worker once and cached for all $m$ microsteps, with no fast-to-slow refresh during the block. The actual communication cost depends on the implementation. The evaluation counts alone give no wall-clock saving claim, especially when the fast block accounts for nearly all right-hand-side work.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-frozen-slow-euler-variation-bounds",
+          "source_section": "Statement",
+          "quote": "Let $r,s,m\\ge1$, $H>0$, $h=H/m$, $\\Omega\\subseteq\\mathbb R^{r+s}$ open, and let $F=(f,g):\\Omega\\to\\mathbb R^r\\times\\mathbb R^s$ be continuous. Use the product Euclidean norm $\\|(x,z)\\|_2^2=\\|x\\|_2^2+\\|z\\|_2^2$. Let $S\\subseteq\\Omega$, and suppose $\\|F(u)\\|_2\\le M$ for all $u\\in S$, where $M\\ge0$. Let $U:[0,H]\\to\\Omega$ be an exact solution of $U'=F(U)$, and run [[alg-frozen-slow-explicit-fast-euler]] from $U(0)=(x_0,z_0)$ with $U([0,H])\\subseteq S$ and every frozen state $(x_0,z_j)\\in S$. Then\n$$\\|U(b)-U(a)\\|_2\\le M(b-a)\\quad(0\\le a\\le b\\le H),\\qquad \\|z_j-z_0\\|_2\\le jhM\\quad(0\\le j\\le m).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "By [F1] and [F3], the slow coordinate defect is $x^+-x(H)=\\int_0^H(f(x_0,z_0)-f(x(s),z(s)))\\,ds$. The projection bound [F5], Lipschitz condition [A1], [F2], and [F4] give $\\|x^+-x(H)\\|_2\\le\\int_0^H K\\|U(s)-U(0)\\|_2\\,ds\\le KM\\int_0^H s\\,ds=KMH^2/2$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "step": "1.2",
+          "claim": "By [F1] and [F3], the fast-coordinate defect is the sum over $j$ of the integrals of $g(x_0,z_j)-g(x(s),z(s))$ on $[jh,(j+1)h]$. For such an $s$, [F4] gives $\\|x(s)-x_0\\|_2\\le Ms\\le MH$ and $\\|z(s)-z_j\\|_2\\le\\|z(s)-z_0\\|_2+\\|z_j-z_0\\|_2\\le Ms+jhM\\le2MH$. By [F5], the product-state distance is at most the sum of these coordinate distances, hence at most $3MH$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "The projection bound [F5] and [A1] therefore bound each fast integrand norm by $3KMH$. Applying [F2] on each interval and summing its $m$ lengths gives $\\|z_m-z(H)\\|_2\\le m h(3KMH)=3KMH^2$.",
+          "inputs": [
+            "F2",
+            "F5",
+            "A1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "step": "3.1",
+          "claim": "By [F5], the product output error is at most the sum of the coordinate errors from steps 1.1 and 2.1. Thus it is at most $(1/2+3)KMH^2\\le4KMH^2$, as claimed.",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires positive block dimensions and a positive integer m."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If K=0 or M=0, steps 1.1–3.1 give zero coordinate defects."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement permits r=s=1 and m=1; step 1.2 then covers one fast interval."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 allows a zero slow defect, while steps 1.2–2.1 cover j=0 and the fast interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 integrate over the complete interval [0,H], including its endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use finite interval sums and pointwise estimates only; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way defect estimate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way defect estimate."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No nonconstructive choice axiom is used. Finite-dimensional estimates use explicit finite inductions; the waveform proof uses the cited choice-free closed-subspace result and constructive Banach fixed-point theorem.",
+      "risk_review": {
+        "status": "complete",
+        "notes": "Author self-check: verified stated domains, zero and endpoint cases, proof inputs, and that symmetry is not used to infer the cubic defect. This is not independent approval."
+      }
+    },
+    "thm-frozen-slow-euler-global-first-order-error": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-frozen-slow-euler-one-step-stability",
+          "source_section": "Statement",
+          "quote": "Let $r,s\\ge1$, let $\\Omega\\subseteq\\mathbb R^{r+s}$ be open, and let $F=(f,g):\\Omega\\to\\mathbb R^r\\times\\mathbb R^s$. Suppose $K\\ge0$ and $F$ is jointly $K$-Lipschitz in the product Euclidean norm on a set $S\\subseteq\\Omega$. Fix $T>0$ and $0<H\\le T$, and let $m\\ge1$, $h=H/m$. For any two input states $(x,z)$ and $(\\bar x,\\bar z)$ for which both algorithm runs return success and all inputs and fast microstates lie in $S$, the outputs of [[alg-frozen-slow-explicit-fast-euler]] satisfy\n$$\\|\\Psi_{H,m}(x,z)-\\Psi_{H,m}(\\bar x,\\bar z)\\|_2\\le(1+L_T H)\\|(x,z)-(\\bar x,\\bar z)\\|_2,\\qquad L_T:=K\\sqrt{2(1+\\exp(2KT))}.$$\nThe constant is independent of $m$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-frozen-slow-euler-local-defect-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^{r+s}$ be open, let $r,s\\ge1$, and let $F=(f,g):\\Omega\\to\\mathbb R^r\\times\\mathbb R^s$ be continuous. Assume $K,M\\ge0$, and that $F$ is jointly $K$-Lipschitz and bounded by $M$ on a common set containing the exact solution $U(t)=(x(t),z(t))$, $0\\le t\\le H$, and every microstate $(x_0,z_j)$ of [[alg-frozen-slow-explicit-fast-euler]] started at $U(0)=(x_0,z_0)$. Assume the exact path and those microstates lie in the domain where these bounds hold, $H>0$, $m\\ge1$, and $h=H/m$. Then the successful macro output $(x^+,z_m)$ satisfies\n$$\\|(x^+,z_m)-U(H)\\|_2\\le4KMH^2.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-discrete-one-step-error-recurrence-bound",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-frozen-slow-euler-variation-bounds",
+          "source_section": "Statement",
+          "quote": "Let $r,s,m\\ge1$, $H>0$, $h=H/m$, $\\Omega\\subseteq\\mathbb R^{r+s}$ open, and let $F=(f,g):\\Omega\\to\\mathbb R^r\\times\\mathbb R^s$ be continuous. Use the product Euclidean norm $\\|(x,z)\\|_2^2=\\|x\\|_2^2+\\|z\\|_2^2$. Let $S\\subseteq\\Omega$, and suppose $\\|F(u)\\|_2\\le M$ for all $u\\in S$, where $M\\ge0$. Let $U:[0,H]\\to\\Omega$ be an exact solution of $U'=F(U)$, and run [[alg-frozen-slow-explicit-fast-euler]] from $U(0)=(x_0,z_0)$ with $U([0,H])\\subseteq S$ and every frozen state $(x_0,z_j)\\in S$. Then\n$$\\|U(b)-U(a)\\|_2\\le M(b-a)\\quad(0\\le a\\le b\\le H),\\qquad \\|z_j-z_0\\|_2\\le jhM\\quad(0\\le j\\le m).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-frozen-slow-explicit-fast-euler",
+          "source_section": "Definition",
+          "quote": "Let $r,s\\ge1$, let $D\\subseteq\\mathbb R^{r+s}$ be open, and let $f:D\\to\\mathbb R^r$ and $g:D\\to\\mathbb R^s$ be the designated slow and fast vector fields. The labels “slow” and “fast” are input partition labels; this definition does not assert that either field actually varies at a specified rate. The routine receives proposed state vectors $x,z$, a real macro step $H$, and a microstep count $m$.\n\n**Procedure.**\n\n1. Before any division or field evaluation, check that $x\\in\\mathbb R^r$, $z\\in\\mathbb R^s$, $H>0$, $m$ is an integer with $m\\ge1$, and $(x,z)\\in D$. If any check fails, return `invalid-input`.\n2. Set $h:=H/m$ and evaluate $f(x,z)$ to set $x^+:=x+Hf(x,z)$.\n3. Set $z_0:=z$.\n4. For $j=0,1,\\ldots,m-1$, first check whether $(x,z_j)\\in D$. If not, return `domain-exit` without a macro-step output. Otherwise evaluate $g(x,z_j)$ and set $z_{j+1}:=z_j+h g(x,z_j)$.\n5. If $(x^+,z_m)\\notin D$, return `domain-exit` without a macro-step output. Otherwise return `success` and the output state $(x^+,z_m)$.\n\nFor inputs on which the procedure succeeds, write its output map as $\\Psi_{H,m}(x,z):=(x^+,z_m)$.\n\nOn a successful step the procedure uses exactly one evaluation of $f$ and $m$ evaluations of $g$; an invalid-input return uses no field evaluations, and a domain-exit return uses no more than these counts. The slow state is held at its initial value during every fast microstep. In a separated implementation, the slow update needs the starting fast value $z_0$, while the fast loop needs the starting slow value $x$; $x$ can be sent to the fast worker once and cached for all $m$ microsteps, with no fast-to-slow refresh during the block. The actual communication cost depends on the implementation. The evaluation counts alone give no wall-clock saving claim, especially when the fast block accounts for nearly all right-hand-side work.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-frozen-slow-euler-variation-bounds",
+          "source_section": "Statement",
+          "quote": "Let $r,s,m\\ge1$, $H>0$, $h=H/m$, $\\Omega\\subseteq\\mathbb R^{r+s}$ open, and let $F=(f,g):\\Omega\\to\\mathbb R^r\\times\\mathbb R^s$ be continuous. Use the product Euclidean norm $\\|(x,z)\\|_2^2=\\|x\\|_2^2+\\|z\\|_2^2$. Let $S\\subseteq\\Omega$, and suppose $\\|F(u)\\|_2\\le M$ for all $u\\in S$, where $M\\ge0$. Let $U:[0,H]\\to\\Omega$ be an exact solution of $U'=F(U)$, and run [[alg-frozen-slow-explicit-fast-euler]] from $U(0)=(x_0,z_0)$ with $U([0,H])\\subseteq S$ and every frozen state $(x_0,z_j)\\in S$. Then\n$$\\|U(b)-U(a)\\|_2\\le M(b-a)\\quad(0\\le a\\le b\\le H),\\qquad \\|z_j-z_0\\|_2\\le jhM\\quad(0\\le j\\le m).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "Put $e_n:=\\|U_n-U(t_n)\\|_2$ for the exact solution [F6]. The triangle inequality [F4], stability [F1], and exact-start defect [F2] imply $e_{n+1}\\le(1+L_TH)e_n+4KMH^2$ for $0\\le n<N$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "Apply [F3] with $p=1$, $C_0=0$, $C=4KM$, $L=L_T$, and $h=H$. Exact initial data gives $e_0=0$, and step 1.1 is the required recurrence. The $L_T>0$ case gives $e_n\\le4KM(\\exp(L_TT)-1)H/L_T$; the $L_T=0$ case gives $e_n\\le4KMT H$. Taking the maximum over macro nodes proves the claimed node bound.",
+          "inputs": [
+            "F3",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "step": "3.1",
+          "claim": "Fix a macro block and micro-index $j$. By [F7] and [F8], each fast increment satisfies $\\|z_{n,i+1}-z_{n,i}\\|_2=h_n\\|g(x_n,z_{n,i})\\|_2\\le h_n\\|F(x_n,z_{n,i})\\|_2\\le h_nM$, since $(x_n,z_{n,i})\\in S$. Summing from $i=0$ to $j-1$ gives $\\|z_{n,j}-z_{n,0}\\|_2\\le jh_nM\\le HM$; because $x_n$ is frozen, this is also $\\|(x_n,z_{n,j})-U_n\\|_2$. By [F5], the exact path is at most $Mjh_n\\le MH$ from $U(t_n)$. The triangle inequality [F4] and step 2.1 therefore give $\\|(x_n,z_{n,j})-U(t_n+jh_n)\\|_2\\le e_n+2MH\\le(C_T+2M)H$. The bound is independent of the block's microstep count, proving the stage claim.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires r,s≥1 and N≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If K=0 or M=0, then L_T=0 and step 2.1 gives zero macro error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "N=1 and m_n=1 are permitted; steps 1.1–3.1 do not require larger grids."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The exact-start condition gives e_0=0 in step 2.1, and the L_T=0 case is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 bounds t_0 and t_N, and step 3.1 includes j=0 and j=m_n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 iterate over a finite macro grid and finite microstep lists; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves a one-way error estimate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves a one-way error estimate."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No nonconstructive choice axiom is used. Finite-dimensional estimates use explicit finite inductions; the waveform proof uses the cited choice-free closed-subspace result and constructive Banach fixed-point theorem.",
+      "risk_review": {
+        "status": "complete",
+        "notes": "Author self-check: verified stated domains, zero and endpoint cases, proof inputs, and that symmetry is not used to infer the cubic defect. This is not independent approval."
+      }
+    },
+    "ex-coupled-fast-mode-destabilizes-frozen-slow-euler": {
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-frozen-slow-explicit-fast-euler",
+          "source_section": "Definition",
+          "quote": "Let $r,s\\ge1$, let $D\\subseteq\\mathbb R^{r+s}$ be open, and let $f:D\\to\\mathbb R^r$ and $g:D\\to\\mathbb R^s$ be the designated slow and fast vector fields. The labels “slow” and “fast” are input partition labels; this definition does not assert that either field actually varies at a specified rate. The routine receives proposed state vectors $x,z$, a real macro step $H$, and a microstep count $m$.\n\n**Procedure.**\n\n1. Before any division or field evaluation, check that $x\\in\\mathbb R^r$, $z\\in\\mathbb R^s$, $H>0$, $m$ is an integer with $m\\ge1$, and $(x,z)\\in D$. If any check fails, return `invalid-input`.\n2. Set $h:=H/m$ and evaluate $f(x,z)$ to set $x^+:=x+Hf(x,z)$.\n3. Set $z_0:=z$.\n4. For $j=0,1,\\ldots,m-1$, first check whether $(x,z_j)\\in D$. If not, return `domain-exit` without a macro-step output. Otherwise evaluate $g(x,z_j)$ and set $z_{j+1}:=z_j+h g(x,z_j)$.\n5. If $(x^+,z_m)\\notin D$, return `domain-exit` without a macro-step output. Otherwise return `success` and the output state $(x^+,z_m)$.\n\nFor inputs on which the procedure succeeds, write its output map as $\\Psi_{H,m}(x,z):=(x^+,z_m)$.\n\nOn a successful step the procedure uses exactly one evaluation of $f$ and $m$ evaluations of $g$; an invalid-input return uses no field evaluations, and a domain-exit return uses no more than these counts. The slow state is held at its initial value during every fast microstep. In a separated implementation, the slow update needs the starting fast value $z_0$, while the fast loop needs the starting slow value $x$; $x$ can be sent to the fast worker once and cached for all $m$ microsteps, with no fast-to-slow refresh during the block. The actual communication cost depends on the implementation. The evaluation counts alone give no wall-clock saving claim, especially when the fast block accounts for nearly all right-hand-side work.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$1+x\\le\\exp(x).$$\nConsequently, if $0\\le p\\le1$ and $m\\in\\mathbb N$, then\n$$ (1-p)^m\\le\\exp(-mp). $$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "Differentiating the displayed formula with [F2] gives $x'=-x$ and $z'=x-8z$, and at $t=0$ it gives the arbitrary initial pair $(x_0,z_0)$. Thus it is the exact solution. For $t\\ge0$, [F2] gives $e^t\\ge1+t>0$ and $e^{8t}\\ge1+8t>0$, while the addition formula gives $e^{-t}=1/e^t$ and $e^{-8t}=1/e^{8t}$. Therefore $0<e^{-t}\\le1/(1+t)$ and $0<e^{-8t}\\le1/(1+8t)$. Given $\\varepsilon>0$, both bounds are below $\\varepsilon$ whenever $t>\\max\\{1/\\varepsilon,1/(8\\varepsilon)\\}$, so both exponentials and then both solution components tend to zero.",
+          "inputs": [
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "step": "1.2",
+          "claim": "By [F1] and [A1], $x^+=1+(3/5)(-1)=2/5$. The fast updates use frozen $x=1$, so $z_1=1+(3/10)(1-8)=-11/10$ and $z_2=-11/10+(3/10)(1-8(-11/10))=46/25$. Subtracting two fast recurrences with the same frozen $x$ gives $\\delta z_{j+1}=(1-8h)\\delta z_j=-7/5\\,\\delta z_j$. The exact homogeneous fast equation $w'=-8w$ has solution $w(t)=e^{-8t}w(0)$ by [F2]. Since $e^{8h}\\ge1+8h>1$, its reciprocal $e^{-8h}$ lies in $(0,1)$, so the exact homogeneous multiplier decays.",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "Step 1.1 directly shows every exact solution tends to zero, whereas step 1.2 gives an expanding fast perturbation in each explicit microstep. The successful step costs one $f$ and two $g$ evaluations, which by itself makes no wall-clock speedup claim.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "H=0.6, m=2",
+          "input": "x=z=1, h=0.3",
+          "calculation": "x+=0.4; z1=-1.1; z2=1.84; 1-8h=-1.4",
+          "result": "the method step is as stated and the fast perturbation expands by magnitude 1.4"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty two-coordinate scalar system."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 gives the perturbation multiplier; a zero perturbation remains zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The worked example fixes m=2; a single microstep is outside its stated numerical instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes its coefficients and nonzero initial state; it makes no degenerate-parameter claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the initial value at t=0 and the formula for all t≥0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 give explicit formulas and finite arithmetic; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of ex-coupled-fast-mode-destabilizes-frozen-slow-euler: Example fixes scalar slow/fast coordinates, H=3/5,m=2,h=3/10 and initial x=z=1. Verification computes xplus=2/5,z_1=-11/10,z_2=46/25 and the homogeneous fast perturbation multiplier -7/5, whose modulus exceeds one. Thus the concrete recurrence is nonempty and has two rather than zero/one microsteps; zero perturbation stays zero but nonzero perturbations amplify. Its continuous decaying solution and discrete finite update have distinct assertions. No endpoint-limit, selection or biconditional conclusion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of ex-coupled-fast-mode-destabilizes-frozen-slow-euler: Example fixes scalar slow/fast coordinates, H=3/5,m=2,h=3/10 and initial x=z=1. Verification computes xplus=2/5,z_1=-11/10,z_2=46/25 and the homogeneous fast perturbation multiplier -7/5, whose modulus exceeds one. Thus the concrete recurrence is nonempty and has two rather than zero/one microsteps; zero perturbation stays zero but nonzero perturbations amplify. Its continuous decaying solution and discrete finite update have distinct assertions. No endpoint-limit, selection or biconditional conclusion is made."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No nonconstructive choice axiom is used. Finite-dimensional estimates use explicit finite inductions; the waveform proof uses the cited choice-free closed-subspace result and constructive Banach fixed-point theorem.",
+      "risk_review": {
+        "status": "complete",
+        "notes": "Author self-check: verified stated domains, zero and endpoint cases, proof inputs, and that symmetry is not used to infer the cubic defect. This is not independent approval."
+      }
+    },
+    "ex-frozen-slow-interpolation-limits-order": {
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-frozen-slow-explicit-fast-euler",
+          "source_section": "Definition",
+          "quote": "Let $r,s\\ge1$, let $D\\subseteq\\mathbb R^{r+s}$ be open, and let $f:D\\to\\mathbb R^r$ and $g:D\\to\\mathbb R^s$ be the designated slow and fast vector fields. The labels “slow” and “fast” are input partition labels; this definition does not assert that either field actually varies at a specified rate. The routine receives proposed state vectors $x,z$, a real macro step $H$, and a microstep count $m$.\n\n**Procedure.**\n\n1. Before any division or field evaluation, check that $x\\in\\mathbb R^r$, $z\\in\\mathbb R^s$, $H>0$, $m$ is an integer with $m\\ge1$, and $(x,z)\\in D$. If any check fails, return `invalid-input`.\n2. Set $h:=H/m$ and evaluate $f(x,z)$ to set $x^+:=x+Hf(x,z)$.\n3. Set $z_0:=z$.\n4. For $j=0,1,\\ldots,m-1$, first check whether $(x,z_j)\\in D$. If not, return `domain-exit` without a macro-step output. Otherwise evaluate $g(x,z_j)$ and set $z_{j+1}:=z_j+h g(x,z_j)$.\n5. If $(x^+,z_m)\\notin D$, return `domain-exit` without a macro-step output. Otherwise return `success` and the output state $(x^+,z_m)$.\n\nFor inputs on which the procedure succeeds, write its output map as $\\Psi_{H,m}(x,z):=(x^+,z_m)$.\n\nOn a successful step the procedure uses exactly one evaluation of $f$ and $m$ evaluations of $g$; an invalid-input return uses no field evaluations, and a domain-exit return uses no more than these counts. The slow state is held at its initial value during every fast microstep. In a separated implementation, the slow update needs the starting fast value $z_0$, while the fast loop needs the starting slow value $x$; $x$ can be sent to the fast worker once and cached for all $m$ microsteps, with no fast-to-slow refresh during the block. The actual communication cost depends on the implementation. The evaluation counts alone give no wall-clock saving claim, especially when the fast block accounts for nearly all right-hand-side work.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "Direct integration gives $x(t)=t$ and $z(t)=t^2/2$. By [F1] and [A1], induction on $n$ gives $x_n=nH$; because $g(x_n,z)=x_n$ is constant across a frozen block, $z_{n+1}=z_n+Hx_n$. Starting with $z_0=0$, summation gives $z_N=H^2\\sum_{n=0}^{N-1}n=H^2N(N-1)/2=T^2/2-TH/2$, so the terminal error is $TH/2>0$.",
+          "inputs": [
+            "F1",
+            "A1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "Under midpoint sampling, the fast block increment is $\\sum_{j=0}^{m-1}h(x_n+(j+\\tfrac12)h)=H x_n+h^2\\sum_{j=0}^{m-1}(j+\\tfrac12)=Hx_n+H^2/2$, since $mh=H$ and $\\sum_{j=0}^{m-1}(j+\\tfrac12)=m^2/2$. If $z_n=(nH)^2/2$, this increment gives $z_{n+1}=((n+1)H)^2/2$; with $z_0=0$, induction proves exactness at every macro node.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "T=2, N=1",
+          "input": "H=2, x0=z0=0",
+          "calculation": "frozen z1=0 while exact z(2)=2; midpoint increment H^2/2=2",
+          "result": "the frozen error is TH/2=2 and the midpoint variant is exact"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires T>0 and N≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The initial state is the zero pair, and steps 1.1–2.1 include it directly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "N=1 is admitted; step 1.1 computes the terminal formula in that case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes T>0; the excluded T=0 limit is not part of the claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 compares the initial value at t=0 with the terminal value at t=T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use explicit finite sums and induction; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of ex-frozen-slow-interpolation-limits-order: Example assumes T>0,N>=1,m>=1 and starts x_0=z_0=0. Verification sums frozen macro inputs to z_N=T²/2-TH/2 and computes the midpoint micro sum H x_n+H²/2. At N=1 the frozen z_N is zero and its error is T²/2; at m=1 the midpoint sum still gives the exact macro increment. Both initial and terminal nodes and the initially empty accumulated sum are included. There is no zero T/m division admitted, arbitrary selection or equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of ex-frozen-slow-interpolation-limits-order: Example assumes T>0,N>=1,m>=1 and starts x_0=z_0=0. Verification sums frozen macro inputs to z_N=T²/2-TH/2 and computes the midpoint micro sum H x_n+H²/2. At N=1 the frozen z_N is zero and its error is T²/2; at m=1 the midpoint sum still gives the exact macro increment. Both initial and terminal nodes and the initially empty accumulated sum are included. There is no zero T/m division admitted, arbitrary selection or equivalence claim."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No nonconstructive choice axiom is used. Finite-dimensional estimates use explicit finite inductions; the waveform proof uses the cited choice-free closed-subspace result and constructive Banach fixed-point theorem.",
+      "risk_review": {
+        "status": "complete",
+        "notes": "Author self-check: verified stated domains, zero and endpoint cases, proof inputs, and that symmetry is not used to infer the cubic defect. This is not independent approval."
+      }
+    },
+    "ex-linear-electromechanical-multirate-block-cost": {
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-frozen-slow-explicit-fast-euler",
+          "source_section": "Definition",
+          "quote": "Let $r,s\\ge1$, let $D\\subseteq\\mathbb R^{r+s}$ be open, and let $f:D\\to\\mathbb R^r$ and $g:D\\to\\mathbb R^s$ be the designated slow and fast vector fields. The labels “slow” and “fast” are input partition labels; this definition does not assert that either field actually varies at a specified rate. The routine receives proposed state vectors $x,z$, a real macro step $H$, and a microstep count $m$.\n\n**Procedure.**\n\n1. Before any division or field evaluation, check that $x\\in\\mathbb R^r$, $z\\in\\mathbb R^s$, $H>0$, $m$ is an integer with $m\\ge1$, and $(x,z)\\in D$. If any check fails, return `invalid-input`.\n2. Set $h:=H/m$ and evaluate $f(x,z)$ to set $x^+:=x+Hf(x,z)$.\n3. Set $z_0:=z$.\n4. For $j=0,1,\\ldots,m-1$, first check whether $(x,z_j)\\in D$. If not, return `domain-exit` without a macro-step output. Otherwise evaluate $g(x,z_j)$ and set $z_{j+1}:=z_j+h g(x,z_j)$.\n5. If $(x^+,z_m)\\notin D$, return `domain-exit` without a macro-step output. Otherwise return `success` and the output state $(x^+,z_m)$.\n\nFor inputs on which the procedure succeeds, write its output map as $\\Psi_{H,m}(x,z):=(x^+,z_m)$.\n\nOn a successful step the procedure uses exactly one evaluation of $f$ and $m$ evaluations of $g$; an invalid-input return uses no field evaluations, and a domain-exit return uses no more than these counts. The slow state is held at its initial value during every fast microstep. In a separated implementation, the slow update needs the starting fast value $z_0$, while the fast loop needs the starting slow value $x$; $x$ can be sent to the fast worker once and cached for all $m$ microsteps, with no fast-to-slow refresh during the block. The actual communication cost depends on the implementation. The evaluation counts alone give no wall-clock saving claim, especially when the fast block accounts for nearly all right-hand-side work.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "Differentiating $E=\\tfrac12(q^2+v^2+i^2)$ along [A1] gives $E'=qv+v(-q-v+i)+i(v-8i)=-v^2+2vi-8i^2=-(v-i)^2-7i^2\\le0$. On any solution interval and any $t_1<t_2$, [F2] gives $E(t_2)-E(t_1)=E'(c)(t_2-t_1)\\le0$, so the energy is nonincreasing.",
+          "inputs": [
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "step": "1.2",
+          "claim": "By [F1] and [A1], the mechanical update uses the initial state $(q,v,i)=(0,1,0)$: $q^+=0+(1/10)1=1/10$ and $v^+=1+(1/10)(-0-1+0)=9/10$.",
+          "inputs": [
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-3",
+          "step": "1.3",
+          "claim": "The fast recurrence uses frozen $v=1$, so $i_{j+1}=i_j+(1/40)(1-8i_j)$. Starting with $i_0=0$, successive substitution gives $i_1=1/40$, $i_2=9/200$, $i_3=61/1000$, and $i_4=369/5000$. Thus the stated macro output follows.",
+          "inputs": [
+            "F1",
+            "A1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "By [F1], the method evaluates the two-component mechanical field once and the electrical field four times. Its fast loop reads the initial slow value $v=1$ at each stage, so an implementation may transmit that frozen value once at the block boundary and cache it; no fast-to-slow refresh occurs inside this macro block. This count describes the procedure and does not claim a wall-clock saving.",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "H=1/10, m=4",
+          "input": "q=0, v=1, i=0; h=1/40",
+          "calculation": "q+=1/10; v+=9/10; i1=1/40; i2=9/200; i3=61/1000; i4=369/5000",
+          "result": "macro output is (1/10,9/10,369/5000)"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty three-state mechanical/electrical model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 include the zero initial current and evaluate the energy and fast recurrence from i0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The electrical block is one-dimensional and step 1.3 computes its four finite updates."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes its positive coefficients and makes no zero-parameter or singular-system claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 covers arbitrary t1<t2 in a solution interval; steps 1.2 and 1.3 compute the complete macro block."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use direct differentiation and a finite recurrence, with no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of ex-linear-electromechanical-multirate-block-cost: Example fixes (q,v,i)=(0,1,0), H=1/10,m=4,h=1/40. Verification follows one slow evaluation and four fast current updates to (1/10,9/10,369/5000), and its energy calculation gives a nonpositive derivative with zero at equilibria. The initial zero coordinates are valid; an empty computation or different microstep count is not this fixed witness. The macro endpoint is its reported state. All fields and calls are prescribed finite operations, with no choice or iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of ex-linear-electromechanical-multirate-block-cost: Example fixes (q,v,i)=(0,1,0), H=1/10,m=4,h=1/40. Verification follows one slow evaluation and four fast current updates to (1/10,9/10,369/5000), and its energy calculation gives a nonpositive derivative with zero at equilibria. The initial zero coordinates are valid; an empty computation or different microstep count is not this fixed witness. The macro endpoint is its reported state. All fields and calls are prescribed finite operations, with no choice or iff theorem."
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No nonconstructive choice axiom is used; only direct differentiation, the scalar mean-value theorem, and four explicit recurrence steps are applied.",
+      "risk_review": {
+        "status": "complete",
+        "notes": "Author self-check: verified the energy derivative, slow and fast arithmetic, stated block partition, and separation of evaluation counts from any wall-clock claim. This is not independent approval."
+      }
+    }
+  }
+}

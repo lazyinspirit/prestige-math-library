@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "53",
+  "round": 0,
+  "reviewed_items": [
+    "lem-maximal-ode-solution-extends-from-compact-tube",
+    "thm-ode-residual-a-posteriori-error-bound",
+    "thm-piecewise-c1-ode-residual-a-posteriori-error-bound",
+    "def-embedded-runge-kutta-pair-and-error-estimator",
+    "alg-bounded-adaptive-runge-kutta-controller",
+    "def-heun-euler-embedded-runge-kutta-pair",
+    "prop-embedded-pair-estimator-asymptotics",
+    "def-heun-quadratic-dense-output",
+    "def-validated-residual-tube-certificate",
+    "rem-fixed-mesh-global-error-does-not-certify-adaptivity",
+    "thm-bounded-adaptive-runge-kutta-controller-terminates",
+    "thm-heun-euler-pair-local-orders-and-estimator",
+    "lem-rational-expression-derivative-recursion-correct",
+    "thm-heun-dense-output-local-order-two",
+    "alg-validated-residual-tube-certificate-checker",
+    "thm-validated-residual-tube-certificate-sound",
+    "thm-validated-residual-tube-checker-terminates",
+    "ex-below-roundoff-tolerance-breaks-embedded-estimate",
+    "ex-fast-decay-problem-rejects-at-minimum-step",
+    "ex-heun-euler-estimator-leading-term-vanishes"
+  ],
+  "reviewed_pages": [
+    "adaptive-ode-solvers-and-error-estimation",
+    "adaptive-ode-solvers-and-error-estimation-examples"
+  ],
+  "decision": "repair",
+  "reason": "Reviewed both complete pages, all 20 items, the approved NA-18 scope, and actual supplier claims and proofs, including cross-batch inputs from 7, 14, 28, and 35. Two local repairs and alignment of one same-page consumer proof suffice; no unresolved scope or prerequisite gap remains. The official [SIAM Estep record](https://epubs.siam.org/doi/abs/10.1137/0732001) was bibliography context only; the reviewed residual claims rely on the local proofs.",
+  "findings": [
+    {
+      "id": "lem-maximal-ode-solution-extends-from-compact-tube",
+      "type": "local",
+      "reason": "The statement assumes a maximal solution but concludes it has a proper extension, incompatible with maximality. The proof actually establishes that no maximal solution can have this finite endpoint while remaining in the compact tube. State that obstruction as the conclusion; it preserves the useful continuation result."
+    },
+    {
+      "id": "alg-bounded-adaptive-runge-kutta-controller",
+      "type": "local",
+      "reason": "The procedure names terminal statuses but does not specify the returned approximation or accepted trajectory. It also refers to an Nth attempt without defining an outer loop, attempt counter, or increment. Specify outputs and an explicit at-most-N loop, including final-success and budget branch order."
+    },
+    {
+      "id": "thm-bounded-adaptive-runge-kutta-controller-terminates",
+      "type": "local",
+      "reason": "Fact F1 assumes each nonterminal attempt increments an attempt counter, which the current algorithm never defines. Align F1 with the explicit finite loop and counter in the requested algorithm repair; then the at-most-N induction is supported."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-validated-residual-tube-certificate-sound",
+      "decision": "accept",
+      "reason": "After the lemma is corrected to state that a maximal solution cannot end at a finite endpoint while staying in the compact tube, F5 matches it. The first-exit and compact-union argument uses that result correctly; no consumer text change is needed."
+    },
+    {
+      "id": "adaptive-ode-solvers-and-error-estimation",
+      "decision": "accept",
+      "reason": "Its summary preserves the distinction between heuristic acceptance and residual certification; the requested algorithm clarification does not alter that scope."
+    },
+    {
+      "id": "adaptive-ode-solvers-and-error-estimation-examples",
+      "decision": "accept",
+      "reason": "The examples' estimator and terminal-branch calculations remain unchanged by an explicit output and attempt-loop contract."
+    },
+    {
+      "id": "rem-fixed-mesh-global-error-does-not-certify-adaptivity",
+      "decision": "accept",
+      "reason": "It relies on variable, state-dependent steps and the distinct exact-defect hypothesis, not on an unspecified returned trajectory."
+    },
+    {
+      "id": "thm-bounded-adaptive-runge-kutta-controller-terminates",
+      "decision": "repair",
+      "reason": "Its F1 counter claim needs to be grounded in the algorithm's explicit loop and attempt-counter instructions."
+    },
+    {
+      "id": "ex-below-roundoff-tolerance-breaks-embedded-estimate",
+      "decision": "accept",
+      "reason": "The rounded endpoint and zero-difference acceptance calculation remain valid; the explicit output contract will include the accepted stored endpoint."
+    },
+    {
+      "id": "ex-fast-decay-problem-rejects-at-minimum-step",
+      "decision": "accept",
+      "reason": "Its two trial computations, proposal update, and minimum-step rejection remain valid under an explicit attempt counter."
+    },
+    {
+      "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "decision": "accept",
+      "reason": "Its optional trajectory-estimate use is compatible with returning accepted states; its fixed NLP map and no-global-certificate qualification are unchanged."
+    },
+    {
+      "id": "ex-ctrl1-chemical-dosing-linear-model",
+      "decision": "accept",
+      "reason": "It uses only the local pair-difference and termination limitations; its midpoint calculation does not depend on controller output semantics."
+    },
+    {
+      "id": "thm-ctrl1-mesh-consistent-lqr-minimizers-converge",
+      "decision": "accept",
+      "reason": "Its limitation on using an embedded difference as an objective-consistency bound is unchanged."
+    },
+    {
+      "id": "direct-transcription-and-numerical-ode-optimal-control",
+      "decision": "accept",
+      "reason": "Its page summary's no-global-error-certificate qualification remains valid."
+    },
+    {
+      "id": "direct-transcription-and-numerical-ode-optimal-control-examples",
+      "decision": "accept",
+      "reason": "Its examples-page summary is unaffected; the chemical-dosing consumer was checked separately."
+    },
+    {
+      "id": "picard-lindelof-and-first-order-odes",
+      "decision": "accept",
+      "reason": "The published page's compact-escape summary is supported by its distinct published continuation items, not by the repaired draft lemma."
+    }
+  ]
+}

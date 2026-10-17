@@ -1,0 +1,91 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "67",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+      "model": "gpt-6-luna",
+      "context_sha256": "f5e11d13d4d47e711199b2b6b92060cf82945266e704c9b747d26c357c6e3eec",
+      "outcome": "false_positive",
+      "reason": "The hypothesis is an actual no-breakdown Arnoldi run, not merely the displayed matrix identity. The cited Arnoldi theorem proof 1.1 explicitly proves w_j orthogonal to v_1,...,v_j and v_(j+1)=w_j/||w_j||. Taking j=m gives V_m^*v_(m+1)=0 without requiring step m+1 to run. Equivalently, its defining residual is w_m=(I-V_m V_m^*)Av_m. Together with unitarity of Q, this proves both summands of g orthogonal to the retained columns. The supplier Statement lists only m-vector orthonormality, but its complete argument and actual process hypothesis supply precisely the property used in step 4.1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+      "disposition": "unaffected",
+      "post_sha256": "267be0603a7e863efaf17ea43fd35271de8d80b49860bde1ab38e9b06b1f3992",
+      "review_context_sha256": "6fab7a461e167867ed195fb9d925c0081d3cc92baab3d40ee3b49475b5fce847",
+      "reason": "Checked the complete proof, actual Arnoldi construction, QR/Hessenberg suppliers, owning contract and page interfaces. Polynomial exactness through degree m-1 covers p+j<=m-1; cumulative similarities telescope to q(H_m)=Q(R_p...R_1), whose first column gives rho=R_11. The ordered Givens factors each have lower bandwidth one, so e_m^*Qe_j=0 for j<r. Truncation therefore leaves exactly the stated g e_r^* term. Arnoldi residual orthogonality and unitarity justify normalization when g is nonzero, and g=0 gives invariance. No item edit or independent review of an own repair is claimed. Corrected only the owning proof-contract boundary case one: r=1 is permitted, and its filtered line and zero/nonzero residual branches follow from steps 2.1, 3.2 and 4.1. Re-examined that metadata state and ran review-contexts immediately afterward; both hashes remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+      "severity": "nonfatal",
+      "locus": "proof-contract",
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-67.proof-contracts.json",
+      "finding": "The boundary case one said one-dimensional restart was excluded, although the theorem allows retained dimension r=1. This was incorrect boundary accounting, not a defect in the theorem or in its proof.",
+      "resolution": "Replaced only that boundary row by checked evidence: p=m-1, q(A)v_1=rho V_m Qe_1 nonzero gives the retained line, and steps 3.2 and 4.1 cover both residual branches. Strict focused contract validation passed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "complete",
+    "item_changed": false,
+    "metadata_finding": "Repaired the single inaccurate case-one boundary row in the assigned contract; all other contract rows and the theorem carrier were preserved.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-implicit-restart-polynomial-subspace-and-residual-identity.md --json",
+        "exit_code": 0,
+        "result": "1 proof checked; 0 failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-implicit-restart-polynomial-subspace-and-residual-identity.md --json",
+        "exit_code": 0,
+        "result": "1 file checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-implicit-restart-polynomial-subspace-and-residual-identity.md",
+        "exit_code": 0,
+        "result": "1 item, 5 steps, 0 defects"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-67.proof-contracts.json --items thm-implicit-restart-polynomial-subspace-and-residual-identity --strict --json",
+        "exit_code": 0,
+        "result": "Post-repair: ok true; assigned item checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items thm-implicit-restart-polynomial-subspace-and-residual-identity",
+        "exit_code": 0,
+        "result": "Completed immediately after the initial review and again after examining the contract-only repair; both hashes unchanged."
+      }
+    ],
+    "source_consultation": "Read local supplier arguments directly; no external source reading is claimed.",
+    "step4_rho_concern": "Step 2.1 determines rho by Re_1=rho e_1, necessarily rho=R_11. Moreover q(A)v_1 nonzero already forces R_11 nonzero since V_m Qe_1 is unit. The missing early declaration is an editorial suggestion without a mathematical gap; no cosmetic item edit.",
+    "next_action": "Engine collection; no judgment, stamp, certificate, round state or worker was launched.",
+    "shared_write": "Acquired step5 shared lock, reread the current boundary row, changed only that row, passed focused strict contract validation, then released the lock.",
+    "propagation": "No Statement or Definition, proof, dependency, page or item metadata changed; downstream is empty. No published defect or published-ledger update was identified.",
+    "unresolved_obligations": []
+  },
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-67.proof-contracts.json": "a7ed9d90bbc4821b2c977c1152919adbf02dc3610d239d627ddab16a6bca1d49"
+  }
+}

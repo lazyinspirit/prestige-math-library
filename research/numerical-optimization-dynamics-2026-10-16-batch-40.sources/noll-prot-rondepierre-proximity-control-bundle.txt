@@ -1,0 +1,2706 @@
+A proximity control algorithm to minimize nonsmooth and
+nonconvex functions
+
+Dominikus Noll ∗
+Olivier Prot∗
+Aude Rondepierre∗
+
+Abstract
+
+We present a new proximity control bundle algorithm to minimize nonsmooth and non-
+convex locally Lipschitz functions. In contrast with the traditional oracle-based methods
+in nonsmooth programming, our method is model-based and can accommodate cases where
+several Clarke subgradients can be computed at reasonable cost. We propose a new way to
+manage the proximity control parameter, which allows us to handle nonconvex objectives.
+We prove global convergence of our method in the sense that every accumulation point of
+the sequence of serious steps is critical. Our method is tested on a variety of examples in
+H∞-controller synthesis.
+
+Keywords: Nonsmooth programming, nonconvex programming, bundle methods,
+proximity control, global convergence, H∞-synthesis.
+
+AMS classification: 49J52, 90C26, 90C22, 93B36.
+
+1
+Introduction
+
+It is a long standing objective of nonsmooth optimization to develop methods for the unconstrained
+minimization program
+
+min
+x∈Rn f(x)
+(1)
+
+where f : Rn →R is locally Lipschitz and neither smooth nor convex. The goal is to compute
+local solutions ¯x of (1) in the sense that the first order necessary optimality condition
+
+0 ∈∂f(¯x)
+(2)
+
+is satisfied, where ∂f(x) is the Clarke subdifferential of f at x [8]. In this paper we propose a
+bundle algorithm based on proximity control for (1), which solves this problem in the sense that
+for an arbitrary starting point, every accumulation point of the sequence of serious iterates is a
+critical point of f, i.e. satisfies (2).
+Bundling is one of the principal techniques in nonsmooth optimization. It is well suited for
+convex problems, but falls somewhat short without convexity. The reason for this is that cutting
+planes, the driving mechanism behind bundling, is basically a convexity tool and becomes artificial
+
+∗Universit´e Paul Sabatier, Institut de Math´ematiques, 118 route de Narbonne, 31062 Toulouse, France.
+
+1
+
+
+and delicate to handle without this prerequisite. In response, Fuduli and al. [12,13] propose a new
+type of bundle methods, where tangent planes at trial points are classified in two groups to create
+an upper and a lower model of f, and to use this information to build a trust region around the
+current iterate. The authors obtain a global convergence result, but do not completely solve the
+principal problem in bundling, the overflow of memory caused by accumulating information. This
+is usually addressed by Kiwiel’s idea of aggregation [16–18].
+Older approaches which combine bundling and proximity control such as Schramm [28] or
+Schramm and Zowe [29] are essentially based on the convex case. For nonconvex f the authors
+propose to downshift tangent planes at trial points if they are no longer cutting planes, and they
+prove that at least one of the accumulation points ¯x of the sequence of serious steps is critical. The
+idea to downshift tangent planes seems to work well as a rule, as witnessed by the BT-codes [33]
+or Lemar´echal’s M2FC1, but a rigorous justification seems lacking.
+Our present approach is based on a new idea, motivated by practical experience gained from
+the study of nonsmooth programs in eigenvalue optimization and automatic control [1–4,24,25].
+We start with the concept of a local model Φ(·, x) of f in the neighborhood of the current iterate
+x, which may be understood as a nonsmooth generalization of the Taylor expansion. The interplay
+between f and its local model is used to create descent steps for f away from x by a proximity
+control mechanism. Our investigation shows that a local model should have the form
+
+Φ(y, x) = φ(y, x) + 1
+
+2(y −x)⊤Q(x)(y −x),
+
+where φ(·, x) is the first order model of f at x and 1
+
+2(y −x)⊤Q(x)(y −x) the second order part. It
+turns out that the first order part φ(·, x) is convex, but can be nonsmooth. It has to be contingent
+with the objective at the current x, which is to say ∂1φ(x, x) ⊂∂f(x). In contrast, the second
+order term is smooth, even quadratic, but need not be convex. The fundamental insight of this is
+that on the first order level local optimization is completely based on convexity.
+Notice that the idea of a local model Φ has also been used in [9] or [27]. What is new in our
+approach is that we do not use Φ(·, x) directly to generate search steps, because this may be too
+costly. Instead we build a so-called working model Φk(·, x), which has the form
+
+Φk(y, x) = φk(y, x) + 1
+
+2(y −x)⊤Q(x)(y −x),
+
+and can be thought of as a crude approximation of the ideal model Φ(·, x). The first order part
+φk(y, x) is improved iteratively using cutting planes and aggregation.
+The second order part
+1
+2(y −x)⊤Q(x)(y −x) is kept fixed during the inner loop and only updated between serious steps.
+Let us highlight an important aspect of using the models Φ(y, x) and Φk(y, x). Applications in
+eigenvalue optimization and automatic control differ in many respects from the traditional use of
+nonsmooth optimization in Lagrangian relaxation [22]. In that class the objectives f are convex,
+but one only disposes of the function value f(y) and one particular subgradient g(y) ∈∂f(y) at
+every trial step y, a situation referred to as calling an oracle. In contrast, applications in control
+allow to know many subgradients, and it may then be a good idea to build a more sophisticated
+working model Φk. This is what makes the concepts of the models Φ and Φk attractive, because
+it leaves their choice to the user, who may have special knowledge in a given application.
+Let us look more closely at the bundling mechanism. At the current iterate x of the outer loop,
+the inner loop with counter k turns until a new serious step x+ is found. At inner loop counter k
+we produce a trial step yk+1 by solving the tangent program with proximity control
+
+min
+y∈Rn Φk(y, x) + τk
+
+2 ∥y −x∥2,
+(3)
+
+2
+
+
+where τk > 0 is the proximity control parameter. If the solution yk+1 of (3) gives sufficient decrease
+in f, it becomes the new iterate x+ = yk+1. According to the standard terminology in nonsmooth
+optimization, this is called a serious step. Otherwise if yk+1 is not satisfactory, it is called a null
+step. In this case we keep x, but use the information transmitted by yk+1 to improve the first
+order part of the working model φk+1(·, x). We then update the proximity control parameter τk+1
+and rerun the tangent program (3) to obtain a better trial step yk+2. This updating procedure is
+crucial and uses cutting planes and aggregation, but based on information from the ideal model
+Φ(·, x) and not directly from f. While we keep improving the first-order part of Φk(·, x) in the
+inner loop, the second order term is kept invariant. It changes only between serious steps in the
+outer loop. Its rationale is to give our method an option to converge superlinearly if f(x) has
+hidden smoothness properties, as is often the case in applications [5,25].
+
+Notation. Our terminology follows [8] or [15], where an introduction to bundle methods in the
+convex case can be found. For a function φ(y, x) of two arguments ∂1φ(y, x) denotes the Clarke
+subdifferential of φ(·, x) at y, and similarly for ∂2φ(y, x).
+Concerning the foundations of nonsmooth optimization we point the reader to the pioneer-
+ing work by Wolfe [32], Lemar´echal [21], and Kiwiel [18]. An overview can be obtained from
+Lemar´echal [21], Kiwiel [17] or Polak [26], Ruszczy´nski [27], Shor [30].
+
+2
+First order model
+
+What makes convex bundling so successful is that affine support functions of the objective f at
+unsuccessful trial steps (null steps) yk+1, also known as cutting planes, are used to improve the
+working model. Without convexity it is less obvious in which way first-order affine approximations
+of f at the null steps yk+1 should be used to improve the working model, because these planes are
+no longer support functions of f. The principal idea of this paper is to generate cutting planes by
+means of a local model Φ(·, x) of f in a neighborhood of x. The model has slightly more structure
+than f itself, and is thereby amenable to bundling techniques, which were applied directly to f as
+long as the latter was convex. What we call a model of f in a neighborhood of x could be thought
+of as a nonsmooth analogue of the Taylor expansion.
+
+Definition 1. A function φ : Rn × Ω→R is called a first-order model of f on the set Ω⊂Rn if
+for every x ∈Ωthe function φ(·, x) : Rn →R is convex and the following conditions are satisfied:
+
+(M1) φ(x, x) = f(x) and ∂1φ(x, x) ⊂∂f(x).
+
+(M2) For every x ∈Ωand every ϵ > 0 there exists δ > 0 such that f(y) −φ(y, x) ≤ϵ∥y −x∥for
+every y ∈Rn with ∥y −x∥≤δ.
+
+(M3) φ is jointly upper semicontinuous on Rn × Ω, i.e., (yj, xj) →(y, x) in Rn × Ωimplies
+lim sup
+j→∞
+φ(yj, xj) ≤φ(y, x).
+
+If Ω= Rn, then we simply say that φ is a first-order model of f.
+□
+
+Remark 1. Axiom (M2) could be written more suggestively as f(y)−φ(y, x) ≤o(∥y−x∥), y →x.
+
+Remark 2. Every locally Lipschitz function has a first order model, which we call the standard
+model:
+φ♯(y, x) := f(x) + f 0(x; y −x),
+
+3
+
+
+where f 0(x; d) is the Clarke directional derivative at x in direction d. Indeed, axiom (M1) is
+satisfied because ∂2f 0(x; 0) = ∂f(x). Axiom (M2) is immediate from the definition of f 0, and
+axiom (M3) follows from the upper semicontinuity of the Clarke subdifferential.
+
+Remark 3. As soon as f is Clarke regular at x, we have equality ∂f(x) = ∂1φ(x, x) in (M1). In-
+deed, for a regular point x we have f 0(x; h) = f ′(x; h). But f ′(x; h) ≤φ′(·, x)(x; h) = φ0(·, x)(x; h),
+because φ(·, x) is convex. That implies ∂f(x) ⊂∂1φ(x, x).
+
+Definition 2. A first-order model φ(·, ·) of f on Ωis called strong if axioms (M1), (M3) and the
+following strong version of (M2) are satisfied:
+
+(�
+M2) For every bounded set B ⊂Rn there exists a constant L > 0 such that:
+
+∀x ∈B ∩Ω, ∀y ∈B, f(y) −φ(y, x) ≤L∥y −x∥2
+(4)
+
+Remark 4. Axiom (�
+M2) could be written more suggestively as f(y) −φ(y, x) ≤O(∥y −x∥2) for
+y →x uniformly on bounded sets.
+
+Remark 5. Consider the case of a differentiable function f : Rn →R. It seems natural to consider
+the first order Taylor expansion φ(y, x) = f(x) + ∇f(x)⊤(y −x). Is this a model in the sense of
+Definition 1? The answer is no. While axioms (M1) and (M2) are satisfied, (M3) is only satisfied
+when ∇f(x) is continuous.
+
+Remark 6. Suppose f is of class C1, then the standard model is the first-order Taylor expansion
+φ♯(y, x) = f(x)+f 0(x; y −x) = f(x)+∇f(x)⊤d. Is this model strong? The answer is no, because
+strongness would require an estimate of the form f(y) −f(x) −∇f(x)⊤(y −x) ≤O (∥y −x∥2) .
+A sufficient condition for this to hold is f ∈C1,1, but strongness may fail for f ∈C1 \ C1,1.
+
+Remark 7. Consider the case of a composite function f = g ◦F, where g : Rm →R is convex
+and F : Rn →Rm is a mapping of class C2. Then a first order model may be defined as
+
+φ(y, x) = g (F(x) + F ′(x)(y −x)) .
+
+By Taylor’s theorem F(y)−[F(x) + F ′(x)(y −x)] = O (∥y −x∥2) and by the fact that g is locally
+Lipschitz, we obtain an estimate of the form
+
+|f(y) −φ(y, x)| ≤L∥y −x∥2,
+
+which is even stronger than estimate (4), and implies all items in Definition 2. So f = g ◦F has
+a strong first-order model, where in addition ∂1φ(x, x) = ∂f(x) = F ′(x)∗∂g(F(x)).
+
+Remark 8. The above example of a non-standard model is instructive, because we see that the
+first order model is far from unique. It may even happen that one of the models is strong, while
+another fails to be so. Consider for instance composite functions f = λ1◦F, where F : Rn →Sm is
+class C2 with values in the space Sm of m × m symmetric matrices, and where λ1 : Sm →R is the
+maximum eigenvalue function. Then the nonstandard model φ(y, x) = λ1 (F(x) + F ′(x)(y −x))
+is strong by Remark 7, but the standard model φ♯(y, x) is only strong at those x where λ1 (F(x))
+has eigenvalue multiplicity 1.
+
+4
+
+
+Remark 9. A convex function f has the trivial strong model φ♯(y, x) = f(y). For short, f is
+its own (strong) model. How about concave functions? Consider −f, where f is convex. Let
+g ∈∂f(x), then the subgradient inequality gives g⊤(y −x) ≤f(y) −f(x) or what is the same
+
+−f(y) ≤−f(x) + g⊤(x −y) ≤−f(x) + f 0(x, x −y) = −f(x) + (−f)0(x; y −x) = φ♯(y, x).
+
+That means that the standard model is strong for concave functions. More generally, we have
+
+Proposition 1. Let f be locally Lipschitz. Suppose −f is prox-regular at ¯x. Then the standard
+model of f is strong on a neighborhood of ¯x.
+
+Proof:
+If −f is prox regular at ¯x with respect to ¯g ∈∂(−f)(¯x), then there exist ϵ > 0 and r > 0
+such that for all x, x′ ∈B(¯x, ϵ) and all g(x) ∈∂(−f)(x) with ∥g(x) −¯g∥≤ϵ one has
+
+|f(x) −f(¯x)| < ϵ ⇒−f(x′) ≥−f(x) + g(x)⊤(x′ −x) −r
+
+2∥x′ −x∥2.
+
+That is the same as
+
+f(x′)
+≤
+f(x) −g(x)⊤(x′ −x) + r
+
+2∥x′ −x∥2
+
+≤
+f(x) +
+sup
+−g∈∂f(x)
+(−g)⊤(x′ −x) + r
+
+2∥x′ −x∥2 = f(x) + f 0(x, x′ −x) + r
+
+2∥x′ −x∥2,
+
+which proves estimate (4) for f with constant L = r
+
+2 on the ball B(¯x, ϵ).
+□
+
+Remark 10. Now let f = f1 −f2 where f1 is convex and f2 is prox-regular. Let φ♯
+2(·, ·) be the
+standard model of −f2, then in view of the previous remark
+
+φ(y, x) = f1(y) + φ♯
+2(y, x) = f1(y) −f2(x) + (−f2)0(x; y −x)
+
+is a natural candidate for a strong model of f. And it is indeed a strong model as soon as we can
+verify that it is a model. Axioms (�
+M2) and (M3) being clear, what about axiom (M1)? We have
+∂1φ(x, x) = ∂f1(x) + ∂(−f2)(x), which needs to be contained in ∂f(x). Unfortunately, its is just
+the opposite inclusion which is always true, while ∂f1(x) + ∂(−f2)(x) ⊂∂f(x) needs additional
+hypotheses, see e.g. [8]. Nonetheless, this shows that a natural candidate for a strong model for
+f = f1 −f2 is φ(y, x) = f1 + φ♯
+2(·, x) where φ♯
+2 is the standard model of −f2.
+
+Remark 11. Since f(x) = |x|3/2 is convex, it is its own strong model f = φ(·, x).
+But the
+standard model φ♯(y, x) = |x|3/2 + 3
+
+2sgn(x)|x|1/2(y −x) is not strong at x = 0. Indeed, at the
+origin we would have to find L > 0 such that |y|3/2 ≤φ(y, 0) + L|y −0|2 = Ly2, but this fails for
+small y, no matter how large we choose L.
+Now consider f(x) = −|x|3/2, which is concave. The standard model is φ♯(y, x) = −|x|3/2 −
+3
+2sgn(x)|x|1/2(y −x), which is strong by proposition 1. Notice that the differentiability properties
+of f and −f are the same, and also is the standard model of −|x|3/2 the negative of the standard
+model of |x|3/2. Nonetheless, the second one is strong, the first one fails to be so.
+
+Remark 12. Consider f(x) = x2 sin(1/x) with f(0) = 0.
+At x ̸= 0 the standard model is
+φ♯(y, x) = f(x) + f ′(x)(y −x). This formula is no longer correct at x = 0, where φ♯(y, 0) =
+f 0(0, y) = |y|. This highlights the fact that f is not semismooth at x = 0, i.e. {f ′(0)} ̸= ∂f(0).
+Clearly estimate (4) holds at every x ̸= 0 with some constant Lx, because f is of class C2
+
+around x. And at the origin we have f(y) = y2 sin(1/y) ≤y2 ≤f(0) + |y| = |y| for all y ∈[−1, 1].
+In other words, estimate (4) holds again, even with L0 = 0. Does this mean that the standard
+model is strong? The answer is no, and the reason is that the constants Lx explode as x →0.
+This is easily understood when we observe that f ′′(x) is unbounded as x →0.
+
+5
+
+
+3
+Working model and tangent program
+
+Let us now complete our local model by including second order information.
+
+Definition 3. Let φ(·, x) be a first order model of f at x. For a (not necessarily positive semidef-
+inite) matrix Q(x) = Q(x)⊤which is bounded on bounded sets of x, the function Φ(y, x) =
+φ(y, x) + 1
+
+2(y −x)⊤Q(x)(y −x) is called a (second order) model of f at x.
+
+Remark 13. We call 1
+
+2(y −x)⊤Q(x)(y −x) the second order part of Φ(y, x). Why not allow
+more general second order expressions, say Ψ(y, x) with ∂1Ψ(x, x) = 0? Our choice is motivated
+by practical considerations, and will become clear as we go. Most of the theory would allow more
+general terms Ψ. However, solving the tangent program might then become impractical.
+
+In our algorithm we do not work directly with φ(·, x), but with an approximation φk(·, x),
+which we update at each iteration k, and which is easier to manage than φ(·, x).
+
+Definition 4. We call φk(·, x) a first-order working model of f at x if it is a convex function
+satisfying φk(x, x) = φ(x, x) = f(x), ∂1φk(x, x) ⊂∂1φ(x, x), and φk(·, x) ≤φ(·, x). If Φ(y, x) =
+φ(y, x) + 1
+
+2(y −x)⊤Q(x)(y −x) is a model, then Φk(y, x) = φk(y, x) + 1
+
+2(y −x)⊤Q(x)(y −x) is
+called the corresponding working model.
+
+Let x ∈Rn be the current iterate. Suppose a working model Φk(y, x) = φk(y, x) + 1
+
+2(y −
+x)⊤Q(x)(y−x) at counter k has been decided on. Fixing the so-called proximity control parameter
+τk > 0, we now solve the tangent program
+
+min
+y∈Rn Φk(y, x) + τk
+
+2 ∥y −x∥2.
+(5)
+
+Let yk+1 be a local solution of (5) in the sense that
+
+0 ∈∂1φk(yk+1, x) + (Q(x) + τkI)(yk+1 −x).
+(6)
+
+Notice that by monotonicity of the convex subdifferential yk+1 is unique as soon as Q(x)+τkI ≻0.
+We call yk+1 the trial step generated by the tangent program. The idea is that after some updates
+k →k + 1 the trial step yk+1 will improve over the current x and become the new iterate x+.
+
+Remark 14. In the convex case it is well-known that trust regions and proximity control can be
+seen as equivalent, cf. [15]. It turns out that the situation is the same even without convexity.
+Consider the trust region tangent program
+
+minimize
+Φk(y, x) = φk(y, x) + 1
+
+2(y −x)⊤Q(x)(y −x)
+subject to
+∥y −x∥≤tk
+(7)
+
+where tk is the trust region radius. Then solutions of (5) and (7) are in one-to-one correspondence
+in the sense that if yk+1 solves (5), then it is the global minimum of (7) for tk = ∥x −yk+1∥.
+Conversely, if yk+1 is the global minimum of (7), and if the Lagrange multiplier for the trust
+region constraint associated with yk+1 is τk, then yk+1 solves (5) for that specific value of τk.
+Notice here that the usual argument to show that the Newton trust region program has no duality
+gap [31] carries over to our present case and explains why only τ-parameters with Q(x) + τkI ⪰0
+are useful. The case Q(x) + τkI ≻0 is when the solution yk+1 of both programs is unique.
+
+6
+
+
+Let us get back to (5). The first question is what happens if the solution of (5) is yk+1 = x?
+
+Lemma 1. Suppose yk+1 = x. Then x is a critical point of f.
+
+Proof:
+By local optimality 0 ∈∂1φk(yk+1, x) + (Q(x) + τkI)(yk+1 −x). Therefore yk+1 = x
+implies 0 ∈∂1φk(x, x). By hypothesis ∂1φk(x, x) ⊂∂f(x), hence 0 ∈∂f(x) as claimed.
+□
+
+In other words, unless x is already a solution of (1) in the sense of (2), the trial step yk+1 will
+always offer something new. Let us therefore assume that 0 ̸∈∂f(x). In particular, in that case
+we have Φ(yk+1, x) < Φ(x, x) = f(x).
+We call yk+1 a serious step if it is accepted as the new iterate, x+, and a null step if it is rejected.
+In order to decide whether yk+1 is accepted or not, we introduce two constants 0 < γ < Γ < 1
+and compute the quotient
+
+(8)
+ρk =
+f(x) −f(yk+1)
+f(x) −Φk(yk+1, x),
+
+which reflects the agreement between f and Φk(·, x) at yk+1. If the working model Φk is close to
+the true f, we expect ρk ≈1. We say that agreement between f and Φk(·, x) is good (at yk+1)
+if ρk > Γ, where the reader might for instance imagine Γ = 3
+
+4. On the other hand we say that
+agreement between Φk and f is bad if ρk < γ, where the reader might imagine γ = 1
+
+4. Our strategy
+is now as follows. If ρk ≥γ, meaning that the trial step is not bad, we accept the trial step, and
+x+ = yk+1 becomes the new iterate. Otherwise yk+1 is rejected and φk has to be replaced by a
+better first order working model φk+1 in order to obtain a better trial step yk+2 at the next sweep.
+Notice that the bad case includes those trial steps where ρk < 0. Now since 0 ̸∈∂1Φk(x, x), it
+is always possible to decrease the value of Φk(yk+1, x) below Φk(x, x) = f(x). In other words, the
+denominator in (8) is always > 0. Therefore, if ρk < 0, the numerator is < 0. This happens if the
+trial step yk+1 is not even a descent step of f.
+Suppose the trial step yk+1 is a null step. Then working model Φk was not entirely useful, and
+we need to improve it to do better at step k + 1. Since the quadratic term 1
+
+2(y −x)⊤Q(x)(y −x)
+remains unchanged during the inner loop k →k + 1, we have to improve φk(y, x), which is done
+through cutting planes and aggregation. But will this be sufficient, or will we have to increase τk?
+In order to decide we introduce another control parameter:
+
+�ρk = f(x) −Φ(yk+1, x)
+
+f(x) −Φk(yk+1, x),
+
+which reflects the agreement between Φ(·, x) and Φk(·, x) at yk+1. Suppose ρk < γ, but �ρk > �γ i.e.
+Φk(·, x) is far from f, but at the same time is already close to Φ(·, x). Then driving Φk(·, x) even
+closer to Φ(·, x) via cutting planes and aggregation will not suffice, because Φ(·, x) itself is too far
+from the true f. To bring Φ closer to f, we have to reduce the trust region radius, or dually, to
+tighten proximity control, which means increasing τk. This is step 6 of the algorithm.
+How to build the new φk+1? The first element is to guarantee: φk+1(x, x) = φ(x, x) = f(x)
+and ∂1φk+1(x, x) ⊂∂f(x). To do this pick an element g(x) ∈∂1φ(x, x) ⊂∂f(x). We define the
+affine function m(y) = f(x) + g(x)⊤(y −x) and assure that φk+1(y, x) ≥m(y) for every y, while
+φk+1 ≤φ. Then ∂1φk+1(x, x) ⊂∂f(x) is assured. As the reader will notice, m does not depend
+on the iteration counter k, and we can keep m(·) ≤φk(·, x) ≤φ(·, x) at all k.
+
+7
+
+
+To make φk+1 better than φk we use two more elements, referred to as cutting planes, and
+aggregation, and these are constructed iteratively. We start by explaining cutting planes.
+Assume yk+1 is a null step. Let gk+1 ∈∂1φ(yk+1, x), then by convexity of φ(·, x)
+
+g⊤
+k+1(y −yk+1) ≤φ(y, x) −φ(yk+1, x),
+
+or what is the same, mk+1(y) = φ(yk+1, x)+g⊤
+k+1(y−yk+1) is an affine support function to φ(·, x) at
+yk+1. Putting ak+1 = φ(yk+1, x)+g⊤
+k+1(x−yk+1), we obviously have mk+1(y) = ak+1 +g⊤
+k+1(y −x).
+The affine function mk+1(y) is called the cutting plane.
+
+Lemma 2. Suppose the convex working model φk+1(·, x) is such that φk+1(y, x) ≥mk+1(y) for
+every y ∈Rn, i.e., the cutting plane mk+1 is an affine minorant of φk+1(·, x). Then we have
+φk+1(yk+1, x) = φ(yk+1, x), and gk+1 ∈∂1φk+1(yk+1, x).
+
+Proof:
+A convex working model φk+1 must satisfy φk+1(·, x) ≤φ(·, x), so the best value φk+1
+can possibly attain at yk+1 is φ(yk+1, x). Since mk+1(yk+1) = φ(yk+1, x) and mk+1 ≤φk(·, x), this
+value is indeed attained at yk+1. Knowing that φk+1(yk+1, x) = φ(yk+1, x), it is now clear that a
+subgradient of φ(·, x) at yk+1 is also a subgradient of φk+1(·, x) at yk+1.
+□
+
+The effect of making the cutting plane mk+1 an affine support function to the next convex
+model φk+1 at yk+1 is that the unsuccessful trial step yk+1 is cut away at the next trial k + 1,
+paving the way for a better yk+2 to come.
+Aggregation, which we explain next, is used to recycle some of the information stored in φk
+for the new working model φk+1. To be more precise, the optimality condition for program (5)
+implies 0 ∈∂1φk(yk+1, x) + (Q(x) + τkI)(yk+1 −x). In other words,
+
+g∗
+k+1 := (Q(x) + τkI)(x −yk+1) ∈∂1φk(yk+1, x).
+(9)
+
+That means m∗
+k+1(y) = φk(yk+1, x) + g∗⊤
+k+1(y −yk+1) is an affine support function to φk(·, x) at
+yk+1. We can also write it in the more convenient form m∗
+k+1(y) = a∗
+k+1 + g∗⊤
+k+1(y −x), where
+a∗
+k+1 = φk(yk+1, x) + g∗⊤
+k+1(x −yk+1). We call m∗
+k+1 the aggregate plane.
+
+Lemma 3. Let m∗
+k+1 be the affine support function to φk(·, x) at the trial step yk+1 selected by
+the optimality condition (9). If the new convex working model φk+1(·, x) has m∗
+k+1 as an affine
+minorant, i.e., satisfies φk+1(y, x) ≥m∗
+k+1(y) for all y, then we have φk(yk+1, x) ≤φk+1(yk+1, x).
+
+Aggregation is a clever substitute for storing a full sequence of models φk ≤φk+1 →φ of
+increasing complexity. Naturally, the latter would turn out too expensive. Altogether we have
+identified the following list of conditions the convex working model has to satisfy
+
+• Exactness. m(·) ≤φk+1(·, x) ≤φ(·, x).
+
+• Cutting plane. mk+1(·) ≤φk+1(·, x).
+
+• Aggregation. m∗
+k+1(·) ≤φk+1(·, x).
+
+We will see that these conditions are sufficient to ensure convergence of our bundle method. The
+formal statement of our algorithm is given by the algorithm 1.
+
+Remark 15. Notice that the most basic choice to assure these three conditions is φk+1(y, x) =
+max{m(y), mk+1(y), m∗
+k+1(y)}. These three affine functions are support functions to φ(·, x), so
+φk+1 ≤φ is guaranteed.
+
+8
+
+
+Algorithm 1. Proximity control algorithm for (1).
+
+Parameters: 0 < γ < �γ < Γ < 1, and 0 < q < ∞.
+1: Initialize outer loop. Choose initial guess x1 and an initial matrix Q1 = Q⊤
+1 with −qI ⪯
+Q1 ⪯qI. Then fix memory control parameter τ ♯
+1 such that Q1 + τ ♯
+1I ≻0. Put j = 1.
+2: Stopping test. At outer loop counter j, stop if 0 ∈∂f(xj). Otherwise goto inner loop.
+3: Initialize inner loop.
+Put inner loop counter k = 1 and initialize τ-parameter using
+the memory element, i.e., τ1 = τ ♯
+j. Choose initial convex working model φ1(·, xj), and let
+Φ1(y, xj) = φ1(y, xj) + 1
+
+2(y −xj)⊤Qj(y −xj).
+4: Trial step generation. At inner loop counter k solve tangent program
+
+min
+y∈Rn Φk(y, xj) + τk
+
+2 ∥y −xj∥2.
+
+Solution is the new trial step yk+1.
+5: Acceptance test. Check whether
+
+ρk =
+f(xj) −f(yk+1)
+f(xj) −Φk(yk+1, xj) ≥γ.
+
+If this is the case put xj+1 = yk+1 (serious step), quit inner loop and goto step 8. On the other
+hand, if this is not the case (null step) continue inner loop with step 6.
+6: Update proximity parameter. Compute second control parameter
+
+�ρk = f(xj) −Φ(yk+1, xj)
+
+f(xj) −Φk(yk+1, xj).
+
+Then put τk+1 =
+
+
+
+
+
+
+τk,
+if �ρk < �γ
+(bad)
+2τk,
+if �ρk ≥�γ
+
+7: Update working model. Build new convex working model φk+1(·, xj) by respecting the
+three rules (exactness, cutting plane, aggregation) based on null step yk+1. Then increase
+inner loop counter k and continue inner loop with step 4.
+8: Update Qj and memory element. Update matrix Qj →Qj+1 respecting Qj+1 = Q⊤
+j+1 and
+−qI ⪯Qj+1 ⪯qI. Then store new memory element
+
+τ ♯
+j+1 =
+
+
+
+
+
+
+
+
+τk+1,
+if γ ≤ρk < Γ
+(not bad)
+
+τk+1
+
+2 ,
+if ρk ≥Γ
+(good)
+
+Increase τ ♯
+j+1 if necessary to ensure Qj+1 + τ ♯
+j+1I ≻0. Increase outer loop counter j by 1 and
+loop back to step 2.
+
+9
+
+
+It is instructive to specialize to the convex case f = φ(·, x). If the second order term is put
+to zero, Q(x) ≡0, and if φk(·, x) is the standard polyhedral working model of remark 16, then
+we recover the classical bundle method. Since Φ(·, x) = φ(·, x) = f, we then have �ρk = ρk, which
+means that ρk < γ in step 5 of the algorithm immediately gives �ρk = ρk < γ < �γ in step 6. In
+consequence τk is never increased. In particular, we recover the traditional approach in convex
+bundling, where τ can be frozen once and for all.
+
+4
+Analysis of the inner loop
+
+In this section we prove that the inner loop terminates with a serious step after a finite number
+of updates k →k + 1. The current iterate x is fixed, and so is Q := Q(x). We assume that φ(·, x)
+is a model of f at x which satisfies axioms (M1) and (M2). Neither axiom (M3) nor the strong
+version (�
+M2) will be needed in this section.
+
+Lemma 4. Let x be the current iterate. Suppose the inner loop produces an infinite sequence of
+null steps yk+1. Then there exists k0 ∈N such that �ρk < �γ for all k ≥k0.
+
+Proof:
+i) By assumption none of the trial steps is accepted, so that: ρk < γ for all k ∈N.
+Suppose contrary to the statement that there are infinitely many inner loop instances k where
+�ρk ≥�γ. According to step 6 of the algorithm this means that the doubling rule is applied infinitely
+often. Since the proximity parameter τk is never decreased in the inner loop, this implies τk →∞.
+ii) Let us prove that under these circumstances, yk+1 →x. Recall that g∗
+k+1 = (Q + τkI)(x −
+yk+1) ∈∂1φk(yk+1, x). By the subgradient inequality this gives
+
+g∗⊤
+k+1(x −yk+1) ≤φk(x, x) −φk(yk+1, x).
+(10)
+
+Now use φk(x, x) = f(x) and observe that m(yk+1) ≤φk(yk+1, x), where m(·) is the exactness
+plane. Since m(y) = f(x) + g(x)⊤(y −x) for some g(x) ∈∂f(x), expanding the term on the left
+of (10) gives the estimate
+
+(x −yk+1)⊤(Q + τkI)(x −yk+1) ≤g(x)⊤(x −yk+1) ≤∥g(x)∥∥x −yk+1∥.
+(11)
+
+Since τk →∞, the term on the left hand side of (11) behaves asymptotically like τk∥x −yk+1∥2.
+Dividing (11) by ∥x −yk+1∥therefore shows that τk∥x −yk+1∥is bounded by ∥g(x)∥. As τk →∞,
+this could only mean yk+1 →x.
+iii) Let us use yk+1 →x and go back to formula (10). It is now clear from the passage to (11)
+that φk(x, x) −φk(yk+1, x) = f(x) −φk(yk+1, x) is sandwiched in between two terms with limit 0.
+This implies φk(yk+1, x) →f(x).
+Keeping this in mind, let us use the subgradient inequality (11) again and subtract a term
+1
+2(x −yk+1)⊤Q(x −yk+1) from both sides. That gives the estimate
+
+1
+2(x −yk+1)⊤Q(x −yk+1) + τk∥x −yk+1∥2 ≤f(x) −Φk(yk+1, x).
+
+For those k where τk > ∥Q∥, we clearly have
+
+∥g∗
+k+1∥≤∥Q∥∥x −yk+1∥+ τk∥x −yk+1∥≤2τk∥x −yk+1∥.
+
+10
+
+
+Hence, for k with τk > ∥Q∥we have
+
+1
+2(x −yk+1)⊤Q(x −yk+1) + τk∥x −yk+1∥2
+≥
+τk∥x −yk+1∥2 −1
+
+2∥Q∥∥x −yk+1∥2
+
+≥
+1
+2τk∥x −yk+1∥2 ≥1
+
+4∥g∗
+k+1∥∥x −yk+1∥.
+
+Altogether, this gives
+
+f(x) −Φk(yk+1, x) ≥1
+
+4∥g∗
+k+1∥∥x −yk+1∥.
+(12)
+
+iv) Now let ϵk := dist
+�
+g∗
+k+1, ∂1φ(x, x)
+�
+. We argue that ϵk →0. Indeed, using the subgradient
+inequality at yk+1 in tandem with φ(·, x) ≥φk(·, x), we have for all y ∈Rn:
+
+φ(y, x) ≥φk(yk+1, x) + g∗
+k+1
+⊤(y −yk+1)
+
+Since the subgradients g∗
+k+1 are bounded by part ii), there exists an infinite subsequence N ⊂N
+such that g∗
+k+1 →g∗, k ∈N, for some g∗. Passing to the limit k ∈N and using yk+1 →x and
+φk(yk+1, x) →f(x) = φ(x, x), we have φ(y, x) ≥φ(x, x)+g∗⊤(y−x) for all y. Hence g∗∈∂1φ(x, x),
+which means ϵk = dist(g∗
+k+1, ∂1φ(x, x)) ≤∥g∗
+k+1 −g∗∥→0, k ∈N, proving the claim.
+v) Using the definition of ϵk, choose ˜gk+1 ∈∂1φ(x, x) such that ∥g∗
+k+1−˜gk+1∥= ϵk. Now observe
+that we enter the inner loop because 0 ̸∈∂f(x), which by axiom (M1) gives 0 ̸∈∂1φ(x, x). That
+means dist(0, ∂1φ(x, x)) = η > 0, so that ∥˜gk+1∥≥η > 0 for all k ∈N. Hence ∥g∗
+k+1∥≥η−ϵk > η
+
+2
+for k ∈N large enough, given that ϵk →0. Going back with this to (12) we deduce
+
+f(x) −Φk(yk+1, x) ≥η
+
+8∥x −yk+1∥
+(13)
+
+for k ∈N large enough. Since yk+1 →x, axiom (M2) gives a sequence ωk →0+ such that
+f(yk+1) −φ(yk+1, x) ≤ωk∥x −yk+1∥. Putting �ωk := ωk + ∥Q∥∥x −yk+1∥→0 implies
+
+f(yk+1) −Φ(yk+1, x)
+≤
+ωk∥x −yk+1∥+ ∥Q∥∥x −yk+1∥2
+(14)
+≤
+�ωk∥x −yk+1∥.
+
+Now to conclude let us expand the test parameters as follows
+
+�ρk
+=
+ρk + f(yk+1) −Φ(yk+1, x)
+
+f(x) −Φk(yk+1, x)
+
+≤
+ρk + �ωk∥x −yk+1∥
+
+η/8∥x −yk+1∥= ρk + 8�ωk/η
+(estimates (14) and (13))
+
+Since �ωk →0, we have lim supk→∞�ρk ≤lim supk→∞ρk ≤γ, contradicting the fact that �ρk ≥�γ > γ
+for infinitely many k. That proves the result.
+□
+
+The technique of proof of the following result is essentially known, and in the case Q = 0 the
+results could be obtained from [10, Proposition 4.3], [15, Chapter XV] or Part II of [6]. For a
+recent extension to prox-regular f, see [14].
+
+Lemma 5. Let 0 ̸∈∂f(x). Then the inner loop finds a serious iterate after a finite number of
+trial steps yk+1.
+
+11
+
+
+Proof:
+i) We proceed by contradiction and show that if the inner loop turns forever, we must
+have 0 ∈∂f(x).
+From Lemma 4 we see that if the inner loop turns forever, there exists k0 ∈N such that ρk < γ
+and �ρk < �γ for all k ≥k0. According to the update rule in step 8 of algorithm 1, this means the
+proximity control parameter is frozen from inner loop counter k0 onwards: τ := τk for k ≥k0.
+ii) We prove that the sequence of trial steps yk+1 is bounded. Using inequality (11) based on
+the subgradient inequality and on the support property of the exactness plane, we get the estimate
+
+(x −yk+1)⊤(Q + τI)(x −yk+1) ≤∥g(x)∥∥x −yk+1∥.
+
+Since the τ-parameter is frozen and Q + τI ≻0, the expression on the left is the square ∥x −
+yk+1∥2
+Q+τI of the Euclidean norm derived from Q+τI. Since both norms are equivalent, we deduce
+after dividing by ∥x −yk+1∥that ∥x −yk+1∥Q+τI ≤C∥g(x)∥for some constant and all k. This
+proves the claim.
+Notice an important difference with Lemma 4. Since the τ-parameter is frozen, we cannot
+conclude at this stage that yk+1 →x. Proving this will turn out considerably more complicated.
+iii) Let us introduce the objective function of program (5) for k ≥k0:
+
+ψk(y, x) = φk(y, x) + 1
+
+2(y −x)⊤(Q + τI)(y −x).
+
+Let m∗
+k+1 be the aggregate plane, then as we know φk(yk+1, x) = m∗
+k+1(yk+1), and therefore also
+
+ψk(yk+1, x) = m∗
+k+1(yk+1) + 1
+
+2(yk+1 −x)⊤(Q + τI)(yk+1 −x).
+
+We introduce the quadratic function: ψ∗
+k(y, x) = m∗
+k+1(y) + 1
+
+2(y −x)⊤(Q + τI)(y −x). Then
+
+ψk(yk+1, x) = ψ∗
+k(yk+1, x)
+(15)
+
+by what we have just seen. By the aggregate condition we have m∗
+k+1(y) ≤φk+1(y, x), so that
+
+ψ∗
+k(y, x) ≤ψk+1(y, x).
+(16)
+
+Notice that ∇ψ∗
+k(y, x) = ∇m∗
+k+1(y)+(Q+τI)(y−x) = g∗
+k+1+(Q+τI)(y−x), so that ∇ψ∗
+k(yk+1, x) =
+0 by (9). We therefore have the relation
+
+ψ∗
+k(y, x) = ψ∗
+k(yk+1, x) + 1
+
+2(y −yk+1)⊤(Q + τI)(y −yk+1),
+(17)
+
+which is obtained by Taylor expansion of ψ∗
+k(·, x) at yk+1. Notice here again that step 8 of the
+algorithm assures Q+τI ≻0, so that the quadratic expression defines the Euclidean norm ∥·∥Q+τI.
+iv) From the previous point iii) we now have
+
+(18)
+
+ψk(yk+1, x)
+≤
+ψ∗
+k(yk+1, x) + 1
+
+2∥yk+2 −yk+1∥2
+Q+τI
+(using (15))
+=
+ψ∗
+k(yk+2, x)
+(using (17))
+≤
+ψk+1(yk+2, x)
+(using (16))
+≤
+ψk+1(x, x)
+(yk+2 minimizer of ψk+1)
+=
+φk+1(x, x) = f(x).
+
+We deduce that the sequence ψk(yk+1, x) is monotonically increasing and bounded above by f(x).
+It therefore converges to some value ψ∗≤f(x).
+
+12
+
+
+Going back to (18) with this information shows that the term 1
+
+2∥yk+2 −yk+1∥2
+Q+τI is squeezed
+in between two convergent terms with the same limit, ψ∗, which implies 1
+
+2∥yk+1 −yk+2∥2
+Q+τI →0.
+Consequently, ∥yk+1 −x∥2
+Q+τI −∥yk+2 −x∥2
+Q+τI also tends to 0, because the sequence of trial steps
+yk+1 is bounded by part ii).
+Recalling φk(y, x) = ψk(y, x) −1
+
+2∥y −x∥2
+Q+τI, we deduce, using both convergence results, that
+
+φk+1(yk+2, x) −φk(yk+1, x) =
+ψk+1(yk+2, x) −ψk(yk+1, x) −1
+
+2∥yk+2 −x∥2
+Q+τI + 1
+
+2∥yk+1 −x∥2
+Q+τI →0.
+(19)
+
+v) Recall that according to our algorithm the cutting plane mk+1 is an affine support function
+of φk+1(·, x) at yk+1 (cf. Lemma 2). By the subgradient inequality this implies
+
+g⊤
+k+1(y −yk+1) ≤φk+1(y, x) −φk+1(yk+1, x).
+
+Since φk+1(yk+1, x) = φ(yk+1, x), we have
+
+φ(yk+1, x) + g⊤
+k+1(y −yk+1) ≤φk+1(y, x).
+(20)
+
+Now we estimate
+
+0
+≤
+φ(yk+1, x) −φk(yk+1, x)
+=
+φ(yk+1, x) + g⊤
+k+1(yk+2 −yk+1) −φk(yk+1, x) −g⊤
+k+1(yk+2 −yk+1)
+≤
+φk+1(yk+2, x) −φk(yk+1, x) + ∥gk+1∥∥yk+2 −yk+1∥
+(using (20))
+
+and this term converges to 0, because of (19), because the gk+1 are bounded, and because yk+2 −
+yk+1 →0 according to part iv) above. Boundedness of the gk+1 follows from boundedness of the
+trial steps yk+1 shown in part ii). Indeed, gk+1 ∈∂1φ(yk+1, x), and the subdifferential of φ(·, x) is
+uniformly bounded on the bounded set {yk+1 : k ∈N}. We deduce that φ(yk+1, x)−φk(yk+1, x) →
+0. Obviously, that also gives Φ(yk+1, x) −Φk(yk+1, x) →0.
+vi) We now proceed to prove Φk(yk+1, x) →f(x), and then of course also Φ(yk+1, x) →f(x).
+Assume this is not the case, then lim supk→∞f(x)−Φk(yk+1, x) =: η > 0. Choose δ > 0 such that
+δ < (1 −�γ)η. It follows from v) above that there exists k1 ≥k0 such that
+
+Φ(yk+1, x) −δ ≤Φk(yk+1, x)
+
+for all k ≥k1. Using �ρk ≤�γ for all k ≥k0 then gives
+
+�γ
+�
+Φk(yk+1, x) −f(x)
+�
+≤
+Φ(yk+1, x) −f(x) ≤Φk(yk+1, x) + δ −f(x).
+
+Passing to the limit implies −�γη ≤−η + δ, contradicting the choice of δ. This proves η = 0.
+vii) Having shown Φk(yk+1, x) →f(x), and therefore also Φ(yk+1, x) →f(x), we now argue
+that yk+1 →x. This follows indeed from the definition of ψk, because
+
+Φk(yk+1, x) ≤ψk(yk+1, x) = Φk(yk+1, x) + τ
+
+2∥yk+1 −x∥2 ≤ψ∗≤f(x).
+
+Since Φk(yk+1, x) →f(x) by 6), we have indeed τ
+
+2∥yk+1 −x∥2 →0 by a sandwich argument, which
+also proves en passant that ψ∗= f(x) and φk(yk+1, x) →f(x).
+
+13
+
+
+To finish the proof, let us now show 0 ∈∂f(x). Remember that by the necessary optimality
+condition for (5) we have (Q + τI)(x −yk+1) ∈∂1φk(yk+1, x). By the subgradient inequality,
+
+(x −yk+1)⊤(Q + τI)(y −yk+1)
+≤
+φk(y, x) −φk(yk+1, x)
+≤
+φ(y, x) −φk(yk+1, x)
+(using φk ≤φ)
+
+Passing to the limit, observing ∥x −yk+1∥2
+Q+τI →0 and φk(yk+1, x) →f(x) = φ(x, x), we obtain:
+
+∀y, 0 ≤φ(y, x) −φ(x, x).
+
+This proves 0 ∈∂φ1(x, x). Since ∂1φ(x, x) ⊂∂f(x) by axiom (M1), we have shown 0 ∈∂f(x). □
+
+5
+Convergence of the outer loop
+
+All we have to do now is piece things together and show subsequence convergence of the sequence
+of serious steps xj retained in the outer loop. Notice that the ideal model used at the serious
+iterates xj is now
+Φ(y, xj) = φ(y, xj) + 1
+
+2(y −xj)⊤Qj(y −xj),
+
+where Qj = Q(xj) is updated in the outer loop (step 8 of the algorithm) and remains unchanged
+during the inner loop. That means, we allow the quadratic term to be updated only between
+serious steps. We assume that Qj + τkjI ≻0, which is guaranteed by starting the inner loop with
+a τ parameter having this property (step 8). Since the τ-parameter is never decreased in the inner
+loop, this property remains valid at all instances k of the inner loop. We now have the following
+
+Theorem 1. Let f be a locally Lipschitz function, and x1 ∈Rn be such that the level set Ω=
+{x ∈Rn : f(x) ≤f(x1)} is bounded. Suppose f has a strong model φ(·, x) on x ∈Ω. Then every
+accumulation point of the sequence of serious steps xj generated by the algorithm is a critical point
+of f.
+
+Proof:
+i) From the analysis in section 4 we know that the inner loop always ends after a finite
+number of steps k with a new x+ satisfying the acceptance test, unless we have finite termination
+due to 0 ∈∂f(x). Let us exclude this case for the following. Let xj denote the infinite sequence of
+serious steps, satisfying the acceptance test in step 5 of the algorithm, and let ¯x be an accumulation
+point of (xj)j∈N. We assume that at outer loop counter j the inner loop finds a serious step at
+inner counter k = kj. In other words, ykj+1 = xj+1 passes the acceptance test in step 5 of the
+algorithm and becomes a serious step, while the yk+1 with k < kj are null steps. That means
+
+f(xj) −f(xj+1) ≥γ
+�
+f(xj) −Φkj(xj+1, xj)
+�
+.
+(21)
+
+Now recall from construction that τkj (xj −xj+1) ∈∂Φkj(xj+1, xj), or what is the same, (Qj +
+τkjI)(xj −xj+1) ∈∂1φkj(xj+1, xj). The subgradient inequality for φkj(·, xj) at xj+1 therefore gives
+
+�
+xj −xj+1�⊤(Qj + τkjI)(xj −xj+1)
+≤
+φkj(xj, xj) −φkj(xj+1, xj) = f(xj) −φkj(xj+1, xj),
+
+using φkj(xj, xj) = f(xj). With Φk(y, xj) = φk(y, xj) + 1
+
+2(y −xj)⊤Qj(y −xj) we therefore have
+
+1
+2∥xj+1 −xj∥2
+Qj+τkj I ≤f(xj) −Φkj(xj+1, xj) ≤γ−1 (f(xj) −f(xj+1)) ,
+
+14
+
+
+using (21). Now, recall that f(xj) ≥f(xj+1) because our method is of descent type in the serious
+steps. Since ¯x is an accumulation point of the sequence xj, f(¯x) is an accumulation point of
+(f(xj))j, and by monotonicity, we deduce f(xj) →f(¯x),
+(j →∞). Hence f(xj) −f(xj+1) →0
+and then also ∥xj+1 −xj∥2
+Qj+τkj I →0 as j →∞.
+
+ii) Let us now prove that this implies gj := (Qj + τkjI) (xj −xj+1) →0, (j →∞). Assume
+on the contrary that there exists an infinite subset N of N and some µ > 0 such that ∥gj∥=
+∥(Qj + τkjI)(xj −xj+1)∥≥µ > 0 for every j ∈N.
+We first notice that under this assumption the τkj must be unbounded, j ∈N. Indeed, assume
+on the contrary that the τkj, j ∈N, are bounded. By boundedness of Qj, and boundedness
+of the serious steps, there exists then an infinite subsequence N ′ of N such that Qj, τkj and
+xj −xj+1 (j ∈N) converge respectively to ¯Q, ¯τ and δ¯x as j ∈N ′.
+This implies that the
+corresponding subsequence of gj converges to ( ¯Q+ ¯τI)δ¯x, where ∥( ¯Q+ ¯τI)δ¯x∥≥µ > 0. Similarly,
+(xj−xj+1)⊤(Qj+τkjI)(xj−xj+1) →δ¯x⊤( ¯Q+¯τI)δ¯x. By part 1) of the proof we have g⊤
+j (xj+1−xj) =
+∥xj+1−xj∥2
+Qj+τkj I →0, which means δ¯x⊤( ¯Q+¯τI)δ¯x = 0. Since ¯Q+¯τI is symmetric and ¯Q+¯τI ⪰0,
+
+we deduce ( ¯Q + ¯τI)δ¯x = 0, contradicting ∥( ¯Q + ¯τI)δ¯x∥≥µ > 0. This argument proves that the
+τkj are unbounded, j ∈N.
+iii) We now argue that there exists yet another infinite subsequence N ′ of N with τkj →∞,
+(j ∈N ′), such that in addition for each j ∈N ′, the doubling rule in step 6 of the algorithm was
+applied at least once before the step xj+1 = ykj+1 was accepted. Indeed, to construct N ′ we let,
+for every j ∈N, j′ ≤j be that outer-loop instant where the τ-parameter was increased for the
+last time before j, and we put N ′ := {j′ : j ∈N}. It is possible that j′ = j, but in general we
+may have j′ < j, and we only know that
+
+2τkj′−1 ≤τk′
+j and τkj′ ≥τkj′+1 ≥· · · ≥τkj.
+
+Since τkj →∞, j ∈N, this assures τkj′ →∞, j′ ∈N ′. Since the doubling rule was applied at
+least once at the outer-loop counter j′, the set N ′ is as claimed.
+Let us say that for j ∈N ′ the doubling rule was applied for the last time at stage τkj−νj for
+some νj ≥1. That means, τkj−νj+1 = 2τkj−νj, while the τ-parameter remained unchanged during
+the following inner steps before acceptance:
+
+τkj = τkj−1 = · · · = τkj−νj+1 = 2τkj−νj.
+(22)
+
+Now recall that in step 6 of the algorithm we have ρk < γ and �ρk ≥�γ for those k where the trial
+step was not accepted and the doubling rule was applied. Since this is the case at stage kj −νj
+we have
+
+ρkj−νj =
+f(xj) −f(ykj−νj+1)
+f(xj) −Φkj−νj(ykj−νj+1, xj) < γ
+and
+�ρkj−νj =
+f(xj) −Φ(ykj−νj+1, xj)
+f(xj) −Φkj−νj(ykj−νj+1, xj) ≥�γ
+
+By (22) we now have (Qj + 1
+
+2τkjI)
+�
+xj −ykj−νj+1�
+∈∂1φkj−νj(ykj−νj+1, xj). Using the subgradient
+inequality for φkj−νj(·, xj) at ykj−νj+1 and φkj−νj(xj, xj) = f(xj), we obtain
+�
+xj −ykj−νj+1�⊤(Qj + 1
+
+2τkjI)
+�
+xj −ykj−νj+1�
+≤
+φkj−νj(xj, xj) −φkj−νj(ykj−νj+1, xj)
+
+=
+f(xj) −φkj−νj(ykj−νj+1, xj),
+
+which on subtracting 1
+
+2(xj −ykj−νj+1)⊤Qj(xj −ykj−νj+1) from both sides becomes
+
+1
+2(xj −ykj−νj+1)⊤(Qj + τkjI)(xj −ykj−νj+1) ≤f(xj) −Φkj−νj(ykj−νj+1, xj).
+
+15
+
+
+Using ∥xj −ykj−νj+1∥2
+Qj+τkj I ≥(τkj −∥Qj∥)∥xj −ykj−νj+1∥2, this could also be written as
+
+(τkj −∥Qj∥)∥xj −ykj−νj+1∥2
+
+f(xj) −Φkj−νj(ykj−νj+1, xj) ≤2.
+(23)
+
+Now, substituting (23) into the expression for �ρkj−νj and expanding gives
+
+�ρkj−νj
+=
+ρkj−νj + f(ykj−νj+1) −Φ(ykj−νj+1, xj)
+
+f(xj) −Φkj−νj(ykj−νj+1, xj)
+
+≤
+ρkj−νj + (L + ∥Qj∥)∥xj −ykj−νj+1∥2
+
+f(xj) −Φkj−νj(ykj−νj+1, xj)
+(using (4))
+
+≤
+ρkj−νj + 2 L + ∥Qj∥
+
+τkj −∥Qj∥
+(using (23)).
+
+Here estimate (4) is applied to the set B = {xj, ykj−νj+1 : j ∈N ′}, which as we now argue is
+bounded. Indeed, to see this observe that τkj−νj = 1
+
+2τkj →∞as j ∈N ′. Applying the subgradient
+inequality to �gj = (Qj + τkj−νjI)(xj −ykj−νj+1) ∈∂1φkj−νj(ykj−νj+1, xj) gives
+
+(xj −ykj−νj+1)⊤(Qj + τkj−νj+1I)(xj −ykj−νj+1)
+≤
+φkj−νj(xj, xj) −φkj−νj(ykj−νj+1, xj)
+
+≤
+f(xj) −mj(ykj−νj+1) = g(xj)⊤(xj −ykj−νj+1)
+≤
+∥g(xj)∥∥xj −ykj−νj+1∥.
+
+Here mj(·) is the exactness plane at xj. By (22) we have τkj−νj+1 →∞, so using boundedness of
+the xj and boundedness of the Qj, we deduce (via the argument already employed in the proof of
+Lemma 4 that the ykj−νj+1 are bounded.
+Going back to the above estimate involving �ρkj−νj and ρkj−νj, notice that ρkj−νj < γ and
+(L+∥Qj∥)/(τkj −∥Qj∥) →0 imply lim supj→∞�ρkj−νj ≤γ in that estimate, contradicting �ρkj−νj ≥
+�γ > γ for the infinitely many j ∈N ′. That proves gj →0, j →∞.
+iv) Having shown that gj := (Qj + τkjI)(xj −xj+1) →0, (j →∞), let us argue that every
+accumulation point ¯x of the sequence xj of serious steps must be critical. Notice again that since
+{x ∈Rn : f(x) ≤f(x1)} is bounded by hypothesis, and since our algorithm is of descent type in
+the serious steps, the sequence xj is bounded.
+Since gj is a subgradient of φkj(·, xj) at xj+1 = ykj+1, we have for every test vector h:
+
+g⊤
+j h
+≤
+φkj(xj+1 + h, xj) −φkj(xj+1, xj)
+
+≤
+φ(xj+1 + h, xj) −φkj(xj+1, xj)
+(using φkj ≤φ)
+
+Now we use the fact that ykj+1 = xj+1 was accepted in step 5 of the algorithm, which means
+
+γ−1 �
+f(xj) −f(xj+1)
+�
+≥f(xj) −Φkj(xj+1, xj).
+
+Combining these two estimates for a fixed test vector h gives:
+
+g⊤
+j h
+≤
+φ(xj+1 + h, xj) −f(xj) + f(xj) −φkj(xj+1, xj)
+
+=
+φ(xj+1 + h, xj) −f(xj) + f(xj) −Φkj(xj+1, xj) + 1
+
+2(xj −xj+1)⊤Qj(xj −xj+1)
+≤
+φ(xj+1 + h, xj) −f(xj) + γ−1 �
+f(xj) −f(xj+1)
+�
++ 1
+
+2(xj −xj+1)⊤Qj(xj −xj+1)
+=
+φ(xj+1 + h, xj) −f(xj) + γ−1 �
+f(xj) −f(xj+1)
+�
++
+
++1
+
+2(xj −xj+1)⊤(Qj + τkjI)(xj −xj+1) −
+τkj
+
+2 ∥xj −xj+1∥2
+
+≤
+φ(xj+1 + h, xj) −f(xj) + γ−1 �
+f(xj) −f(xj+1)
+�
++ 1
+
+2(xj −xj+1)⊤(Qj + τkjI)(xj −xj+1).
+
+16
+
+
+Now fix h′ ∈Rn. Plugging h = xj −xj+1 + h′ in the above estimate gives
+
+1
+2∥xj −xj+1∥2
+Qj+τkj I + g⊤
+j h′ ≤φ(xj + h′, xj) −f(xj) + γ−1 (f(xj) −f(xj+1)) .
+
+Passing to the limit j ∈N and using, in the order named, ∥xj −xj+1∥2
+Qj+τkj I →0, gj →0, xj →¯x,
+
+f(xj) →f(¯x) = φ(¯x, ¯x) and f(xj) −f(xj+1) →0, we obtain:
+
+0 ≤φ(¯x + h′, ¯x) −φ(¯x, ¯x).
+(24)
+
+Here the rightmost term f(xj) −f(xj+1) →0 converges by monotonicity, while convergence of
+the leftmost term was shown in part ii). Notice that estimate (24) is the only place in the whole
+demonstration where axiom (M3) is used, because we need lim supj∈N φ(xj +h′, xj) ≤φ(¯x+h′, ¯x).
+Now the test vector h′ in (24) is arbitrary, which shows 0 ∈∂1φ(¯x, ¯x). By axiom (M1) of a
+first order model we have 0 ∈∂f(¯x). This completes the proof.
+□
+
+Remark 16. The now standard way to prove convergence of bundle methods in the convex case
+is the ancer technique of Kiwiel [16], see also [27]. The complicated argument above becomes
+necessary due to the absence of convexity.
+
+6
+Convergence without strongness
+
+We now examine whether the hypothesis of strongness used in the proof of Th. 1 may be relaxed.
+
+Definition 5. A first order model φ(·, x) of f at x is strict if axioms (M1) and (M3) are satisfied
+and if axiom (M2) is replaced by the following axiom:
+
+(�
+M2) For every bounded set B and every ϵ > 0 there exists δ > 0 such that for all x, y ∈B,
+∥x −y∥≤δ implies f(y) −φ(y, x) ≤ϵ∥y −x∥.
+
+Remark 17. This condition could also be written more suggestively as f(y)−φ(y, x) ≤o(∥y−x∥),
+y →x uniformly over x, y ∈B. This shows that every strong model is strict, and every strict
+model is a model.
+
+We show by way of an example that a model need not be strict.
+
+Example 6.1. We take f(x) = x2 sin(1/x) on the real line, where f(0) = 0. Notice that f is
+differentiable everywhere, but ∂f(0) = [−1, 1], even though f ′(0) = 0. We already know that the
+standard model of f is not strong, and we now show that neither is it strict.
+Observe that at x ̸= 0 we have
+
+φ♯(y, x) = x2 sin(1/x) + (2x sin(1/x) + cos(1/x)) (y −x).
+
+Therefore writing f(y) = φ♯(y, x) + θ(y, x)(y −x) we find that the o-term is
+
+θ(y, x) = y2 sin(1/y) −x2 sin(1/x)
+
+y −x
+−2x sin(1/x) + cos(1/x).
+
+If the standard model was to be strict on a bounded interval B containing 0, we would have to
+have θ(y, x) →0 as x, y →0. But this is not the case. Take xk = 1/kπ →0 as k →∞and
+yl = (ℓπ + π/2)−1 →0 as ℓ→∞. Then sin(1/yl) = ±1 and sin(1/xk) = 0, while cos(1/xk) = ±1.
+
+Then θ(yl, xk) = (±y2
+l /(yl −xk)) ± 1 = ±(1/π)
+k+π(kl−l2−l+ k
+
+2 −1
+
+4)
+
+kℓ+ k
+
+2 −ℓ2−ℓ−1
+
+4
+.
+Letting k = ℓ→∞gives
+
+θ(yk, xk) →∓(2 −π)/π ̸= 0.
+□
+
+17
+
+
+As we shall see, strictness allows a finer analysis of the mechanism in the proof of Theorem 1.
+In order to study this, let us introduce the following terminology. A subsequence xj, j ∈N of
+the sequence of serious iterates is called of type I if τj is bounded. It is called of type II if τj is
+not bounded. We say that j ∈N is of type IIa if τj →∞as j ∈N, but for every j ∈N the
+τ-parameter was not increased during the jth run of the inner loop. The sequence is called of type
+IIb if τj →∞, j ∈N, and there exists an infinite subset N ′ of N such that for every j′ ∈N ′, the
+τ-parameter was increased at least once during the inner loop j′.
+With these preparations we are ready for
+
+Theorem 2. Suppose f has a strict model on {x ∈Rn : f(x) ≤f(x1)} and assume axiom (�
+M2).
+Suppose ¯x is the accumulation point of a sequence either of type I, or of type IIb. Then 0 ∈∂f(¯x).
+
+Proof:
+The case of a sequence of type I where τkj is bounded poses no problem, so suppose the
+sequence j ∈J is of type IIb and has τkj →∞, and xj →¯x. We have to show that ¯x is critical.
+Since the sequence is of type IIb, we are now in the situation of part iii) of the proof of Theorem
+1, but have to manage without estimate (4). We consider ρkj−νj < γ and �ρkj−νj ≥�γ as in that
+proof. In particular, the null step ykj−νj+1 will again play a decisive role.
+Notice first that as τkj →∞and τkj = 2τkj−νj, boundedness of the subgradients �gj :=
+(Qj + 1
+
+2τkjI)(xj −ykj−νj+1) ∈∂1φkj−νj(ykj−νj+1, xj) shows ykj−νj+1 →¯x. Suppose there exists
+a subsequence J′ of J such that ∥�gj′∥→0, j′ ∈J′. Then for a test vector h and j ∈J′:
+
+�g⊤
+j h
+≤
+φkj−νj(ykj+νj+1 + h, xj) −φkj−νj(ykj−νj+1, xj)
+(25)
+
+≤
+φ(ykj+νj+1 + h, xj) −φkj−νj(ykj−νj+1, xj).
+
+Now we use the fact that �ρkj−νj ≥�γ, then
+
+f(xj) −Φkj−νj(ykj−νj+1, xj) ≤�γ−1 �
+f(xj) −Φ(ykj−νj+1, xj)
+�
+.
+
+Adding 1
+
+2(ykj−νj+1 −xj)⊤Qj(ykj−νj+1 −xj) on both sides gives
+
+f(xj) −φkj−νj(ykj−νj+1, xj) ≤�γ−1 �
+f(xj) −Φ(ykj−νj+1, xj)
+�
++ 1
+
+2(ykj−νj+1 −xj)⊤Qj(ykj−νj+1 −xj).
+
+Combining this and estimate (25) gives
+
+�g⊤
+j h ≤φ(ykj−νj+1 + h, xj) −f(xj) + �γ−1 �
+f(xj) −Φ(ykj−νj+1, xj)
+�
+
++1
+
+2(ykj−νj+1 −xj)⊤Qj(ykj−νj+1 −xj).
+
+As we have seen ykj−νj+1 −xj →0, hence the rightmost term converges to 0 by boundedness
+of Qj. Moreover, we claim that lim f(xj) −Φ(ykj−νj+1, xj) = 0, so the term �γ−1(. . . ) on the
+right hand side converges to 0. Indeed since ykj−νj+1 −xj →0 and xj →¯x, axiom (M3) gives:
+lim sup φ(ykj−νj+1, xj) ≤φ(¯x, ¯x) = f(¯x). Next observe that by axiom (�
+M2) there exist ϵj →0 such
+that
+
+(26)
+f(ykj−νj+1) −φ(ykj−νj+1, xj) ≤ϵj∥ykj−νj+1 −xj∥.
+
+Passing to the limit in (26) then gives lim inf φ(ykj−νj+1, xj) ≥f(¯x), so the two estimates together
+show f(xj) −φ(ykj−νj+1, xj) →0. Since the quadratic term converges to 0, we deduce f(xj) −
+
+18
+
+
+Φ(ykj−νj+1, xj) →0. Going back with this information to the above subgradient inequality and
+passing to the limit shows
+
+0 ≤φ(¯x + h, ¯x) −f(¯x) = φ(¯x + h, ¯x) −φ(¯x, ¯x),
+
+where we use axiom (M3) for the first term on the right hand side. This proves 0 ∈∂1φ(¯x, ¯x),
+because h was arbitrary.
+As a consequence of this argument, we now see that the case of a
+subsequence j ∈J′ where �gj →0 was in fact the easier one to deal with. To settle the difficult
+case, let us now assume that ∥�gj∥≥η for some η > 0 and all j ∈J.
+We argue that with ∥�gj∥≥η there exists θ > 0 such that
+
+f(xj) −Φkj−νj(ykj−νj+1, xj) ≥θ∥ykj−νj+1 −xj∥
+(27)
+
+for all j ∈J sufficiently large. Indeed, by the subgradient inequality we have
+
+�g⊤
+j (xj −ykj−νj+1)
+≤
+φkj−νj(xj, xj) −φkj−νj(ykj−νj+1, xj) = f(xj) −φkj−νj(ykj−νj+1, xj).
+
+Subtracting 1
+
+2(ykj−νj+1 −xj)⊤Qj(ykj−νj+1 −xj) from both sides gives
+
+1
+2(ykj−νj+1 −xj)⊤(Qj + τkjI)(ykj−νj+1 −xj) ≤f(xj) −Φkj−νj(ykj−νj+1, xj).
+
+Now as τkj →∞, we have 1
+
+4∥�gj∥∥ykj−νj+1 −xj∥≤1
+
+2(ykj−νj+1 −xj)⊤(Qj + τkjI)(ykj−νj+1 −xj) for
+j large enough, which proves formula (27) with θ = 1
+
+4η.
+Next using (26) and subtracting the usual 1
+
+2(ykj−νj+1 −xj)⊤Qj(ykj−νj+1 −xj) from both sides
+gives
+
+f(xj) −Φ(ykj−νj+1, xj) ≤�ϵj∥ykj−νj+1 −xj∥,
+(28)
+
+where �ϵj := ϵj + 1
+
+2∥Qj∥∥ykj−νj+1 −xj∥→0. Combining (27) and (28) gives the estimate
+
+�ρkj−νj ≤ρkj−νj + �ϵj∥ykj−νj+1 −xj∥
+
+θ∥ykj−νj+1 −xj∥
+
+which as in the proof of Theorem 1 shows lim sup �ρkj−νj ≤lim sup ρkj−νj ≤γ, contradicting
+�ρkj−νj ≥�γ for the infinitely many j ∈J′. That completes the proof.
+□
+
+Remark 18. It is unfortunately not possible to know a priori to which of the three types of
+sequences I, IIa, IIb the serious iterates xj belong, because we do not know whether τj stays
+bounded or not. Indeed, suppose we knew that the sequence (τj)j∈N was bounded. Then the
+entire τj would be of type I, and we would be done. In this case the result is the same as in
+Theorem 1. Suppose on the other hand we knew for sure that there exists an infinite subset N
+of N with τj →∞, j ∈N (even though we do not know which one). Then we could proceed as
+follows. We call xj a very serious iterate if the τ-parameter was increased at least once during the
+jth run of the inner loop. Then the entire sequence of very serious iterates is of type IIb, so we
+know that every accumulation point of the sequence of very serious steps is critical. Moreover, as
+we have seen, there are only finitely many steps which are not very serious, before another very
+serious step occurs, so all the inner loops are finite.
+As we do not know whether τj stays bounded, why not just mark the sequence of very serious
+iterates, and do as if the τ-parameter was unbounded? If the sequence so generated is infinite, this
+works. The problem with this process is that if τj is bounded, there might be only finitely many
+very serious iterates. Indeed, if convergence is good near the minimum, steps might be accepted
+without needing to increase τ. In that case our strategy would fail because eventually no new
+very serious step would be found. Theorem 2 is therefore weaker than Theorem 1.
+
+19
+
+
+7
+Applications
+
+In order to illustrate our method, which is fairly abstract, let us discuss some applications.
+
+Example 7.1. Steepest descent. We start by considering the case where f is differentiable.
+Then φ(y, x) = f(x) + ∇f(x)⊤(y −x) is a candidate for a convex model of f at x, and we know
+that φ(y, x) is indeed a model of f when it is of class C1, while φ♯is strong only when f is of class
+C1,1. Notice that φ♯is strict if f is strictly differentiable.
+We now let φk = φ, so that the only parameter changing during the inner loop is τk. The
+tangent program is
+min
+y∈Rn f(x) + ∇f(x)⊤(y −x) + τk
+
+2 ∥y −x∥2
+
+so the trial step is yk+1 = x −τ −1
+k ∇f(x), which we accept as soon as
+
+f(x) −f(yk+1)
+≥
+γ
+�
+f(x) −[f(x) + ∇f(x)⊤(yk+1 −x)]
+�
+
+=
+−γ∇f(x)⊤(yk+1 −x) = γτ −1
+k ∇f(x)⊤∇f(x).
+
+This is just a steepest descent step of size τ −1
+k , where the step has to satisfy the Armijo condition
+with 0 < γ < 1. Our discovery is not surprising. We find that for the steepest descent method to
+converge, a C1,1-function is needed (Theorem 1). Class C1 alone is not sufficient even though for
+f ∈C1 we can at least say that the inner loop ends after a finite number of steps, i.e. the Armijo
+line-search ends successfully. Under strict differentiability Theorem 2, the sequence of serious
+steps has at least one accumulation point which is critical (a result which is probably new).
+□
+
+Example 7.2. Newton’s method. Let us continue the previous example, but assume now that
+f is of class C2. Let x be the serious iterate. We choose Q(x) = ∇2f(x). Taking again φk = φ,
+the tangent program is
+
+min
+y∈Rn f(x) + ∇f(x)⊤(y −x) + 1
+
+2(y −x)⊤(∇2f(x) + τkI)(y −x)
+
+so we have
+yk+1 = x −(∇2f(x) + τkI)−1∇f(x).
+
+This is a damped Newton step. For large τk we are essentially doing a steepest descent step, and
+multiplying τk by 2 corresponds to backtracking. On the other hand, small τk brings us close to
+doing the Newton step.
+However we now see a weakness of the dual approach since τk, the Lagrange multiplier of the
+trust region program, is non-zero. But in the case of quadratic convergence of Newton’s method,
+we expect the trust region constraint to be inactive in the end, a case excluded by choosing τk > 0.
+For all that, can this method still converge superlinearly? The answer is yes. Assume we
+are in the neighborhood of a minimum where the sufficient second order optimality condition
+is satisfied: Qj = ∇2f(xj) ⪰ϵI ≻0 for all j. According to the update rule in step 8 of the
+algorithm, the memory parameter τ ♯
+j+1 need not to be adjusted to force Qj+1 + τ ♯
+j+1I ≻0. That
+means, the halving rule is applied as soon as ρk ≥Γ. But we know that ρkj will be close to 1 in
+the convergence zone of Newton’s method, so we get ρkj ≥Γ in the neighborhood of the qualified
+minimum. From some counter j0 onwards, we therefore have τj = 2−(j−j0)τj0. The remaining
+question is whether the method xj+1 = xj −(∇2f(xj) + 2−jτ0I)
+−1 ∇f(xj) converges superlinearly.
+This is indeed the case by the Broyden-Mor´e theorem [11, Thm. 8.2.4], so our method converges
+locally superlinearly if f is of class C2.
+□
+
+20
+
+
+Example 7.3. Piecewise quadratic model. In some applications it may be interesting to use
+a piecewise quadratic model φ(y, x). This is for instance the case if f itself is piecewise of class C2,
+when the domains of smoothness are explicitly known, and gradient and Hessians are available.
+Lukˇsan and Vlˇcek [23] use such an approach, but in contrast with our method they use a line
+search scheme. Approximations of the Hessian are computed by a finite difference process. Their
+convergence proof uses a hypothesis, which in our case amounts to boundedness of Qj + τkI, and
+which in our case would be artificial.
+
+8
+Solving the tangent program
+
+A crucial point which we have not touched upon yet is whether our approach is practical. For
+this to be true we have at least to assure that solving the tangent program (5) is considerably
+easier than solving the original problem. Naturally, this point can only be clarified by looking at
+important classes of examples.
+
+8.1
+Polyhedral models
+
+Let us start by looking at polyhedral working models, the most common case. In fact, all tra-
+ditional bundle approaches are based on polyhedral models, because if nothing specific is known
+about f or φ, all we can do is generate finitely many cutting planes and aggregate planes. At a
+fixed instant k of the inner loop, the tangent program has then the form
+
+min
+y∈Rn max
+i=1,...,p ai + g⊤
+i (y −x) + 1
+
+2(y −x)⊤(Q + τI)(y −x).
+
+This can easily be transformed into a quadratic program, which is even convex because Q+τI ≻0.
+It takes the form
+
+minimize
+t + 1
+
+2(y −x)⊤(Q + τI)(y −x)
+subject to
+ai + g⊤
+i (y −x) ≤t, i = 1, . . . , p
+
+with decision variable (t, y) ∈Rn+1. This may be solved efficiently with standard software tools
+for convex quadratic programming.
+If the solution yk+1 of the tangent QP is a null step, the current working model is improved
+using cutting planes and aggregation. For a polyhedral model the aggregate plane is of the form
+
+m∗
+k+1(y) = a⋆
+k+1 + g⋆
+k+1
+⊤(y −x) =
+�
+
+i∈I
+λi
+�
+ai + g⊤
+i (y −x)
+�
+,
+
+where I = {i ∈{1, . . . , p} : ai +g⊤
+i (yk+1 −x) = max
+i=1,...,p ai +g⊤
+i (yk+1 −x)} is the set of active indices,
+
+and λi ≥0, �
+
+i∈I λi = 1.
+
+8.2
+Eigenvalue optimization
+
+Let us next examine eigenvalue optimization, a case of practical interest.
+Here f = λ1 ◦F.
+Assuming that the strong model φ(y, x) = λ1 (F(x) + F ′(x)(y −x)) is used, the working model
+may include non-polyhedral parts.
+
+21
+
+
+Since f and φ are both composite functions of the maximum eigenvalue function, subgradients
+of f and φ(·, x) are obtained by a chain rule
+
+∂f(x) = F ′(x)⋆∂λ1 (F(x)) ,
+
+∂1φ(y, x) = F ′(x)⋆∂λ1 (F(x) + F ′(x)(y −x)) .
+
+Now as is well-known, for X ∈Sm,
+
+∂λ1(X) = {QY Q⊤∈Sm : Y ⪰0, Tr(Y ) = 1, Y ∈Sr},
+
+where r is the eigenvalue multiplicity of λ1(X), and where the r columns of the orthogonal matrix
+Q form a basis of the associated eigenspace. Therefore exactness and cutting planes lead to pairs
+(a, g), where the subgradients are of the form
+
+g = F ′(x)⋆G, G = QY Q⊤, Y ⪰0, Tr(Y ) = 1
+
+with
+G • [F(x) + F ′(x)(y −x)] = λ1(F(x) + F ′(x)(y −x)),
+
+and where
+a = G • F(x) = Y • [Q⊤F(x)Q].
+
+Assume we have a family (ai(Yi), gi(Yi)), i = 1, . . . , p of such pairs, stemming from certain yi,
+indexed by the finitely many yi and the infinite set of constraints Yi ⪰0, Tr(Yi) = 1. Assume that
+the aggregate plane is (a0, g0), which we add to the list. Let G be the set of these pairs, then the
+tangent program is
+
+min
+y∈Rn
+max
+(a,g)∈co(G) a + g⊤(y −x) + 1
+
+2(y −x)⊤(Q + τI)(y −x).
+
+Using Fenchel duality, we may switch the min and the max operator. The then inner minimum
+may be computed explicitly and yields y −x = −(Q + τI)−1g. Substituting this back gives the
+dual form of the tangent program
+
+max{a −1
+
+2g⊤(Q + τI)−1g : (a, g) ∈co(G)}.
+
+Going back to the way the elements of G are constructed, we have to solve the program
+
+maximize
+
+p
+�
+
+i=0
+µi
+�
+ai(Yi) −1
+
+2gi(Yi)⊤(Q + τI)−1gi(Yi)
+�
+
+subject to
+µi ≥0,
+
+p
+�
+
+i=0
+µi = 1
+
+Yi ⪰0, Tr(Yi) = 1
+
+Introducing the variable s, we can replace g⊤(Q + τI)−1g ≤s by the LMI:
+�Q + τI
+g
+g⊤
+s
+
+�
+⪰0.
+
+Introducing Zi = µiYi, we finally get the semidefinite program
+
+maximize
+
+p
+�
+
+i=0
+ai(Zi) −si
+
+subject to
+�Q + τI
+gi(Zi)
+gi(Zi)⊤
+si
+
+�
+⪰0, Zi ⪰0, i = 0, . . . , p
+
+ai(Zi) = Zi • [Q⊤
+i F(x)Qi], gi(Zi) = F ′(x)⋆[QiZiQ⊤
+i ],
+p
+�
+
+i=0
+Tr(Zi) = 1
+
+22
+
+
+with decision variable (s, Z). The trial step yk+1 is then obtained by the return formula yk+1 =
+
+x−(Q+τI)−1
+p
+�
+
+i=0
+gi(Zi) where (s0, . . . , sp, Z0, . . . , Zp) is the dual optimal solution and
+
+p
+�
+
+i=0
+gi(Zi) =
+
+g⋆
+k+1 the aggregate subgradient. Notice that these tangent SDPs are usually of small size, and
+could be solved by existing SDP solvers.
+
+9
+Numerical tests
+
+We now test our method on several examples in eigenvalue optimization and automatic control.
+
+Example 9.1. Max-quad-function. Let us start with an academic example, the minimization
+of the maximum of a finite number of quadratic functions:
+
+min
+x∈Rn f(x),
+f(x) := max {qi(x) : i = 1, . . . , r} with qi(x) = 1
+
+2x⊤Aix + b⊤
+i x,
+
+where Ai ∈Sn and bi ∈Rn, i = 1, . . . , r. Our goal in this example is to get some hints on how to
+build the second order part of our model, i.e., how to choose the symmetric matrix Q(x). To do
+this we assume φ = φk.
+We introduce a polyhedral convex model φ of f at a given point x ∈Rn defined by:
+
+φ(y, x) = max
+�
+qi(x) + ∇qi(x)⊤(y −x) : i = 1, . . . , r
+�
+.
+(29)
+
+We can easily check that φ is a strong first order model in the sense of definition 2 and that
+∂1φ(x, x) = ∂f(x). We replace program min
+x∈Rn f(x) by the constrained program
+
+minimize
+t
+subject to
+qi(x) ≤t, i = 1, . . . , r
+(30)
+
+so that it makes perfect sense to apply SQP. The tangent QP for (30) in the SQP formalism is
+
+minimize
+δt + 1
+
+2δx⊤∇2
+xxL(x, t, λ)δx
+subject to
+qi(x) + ∇qi(x)⊤δx ≤t + δt, i = 1, . . . , r.
+(31)
+
+Here the matrix ∇2
+xxL(x, t, λ) is the (x, x)-block of the Hessian of the Lagrangian L(x, t; λ) =
+
+t + �r
+i=1 λi (qi(x) −t) of (30). In other words: ∇2
+xxL(x, t; λ) =
+r�
+
+i=1
+λi∇2qi(x) =
+r�
+
+i=1
+λiAi.
+
+Let us see whether we can get back from (31) to the tangent program (5).
+Writing the
+constraints in (31) as maxi=1,...,r qi(x) + ∇qi(x)⊤δx ≤t + δt, we can eliminate δt from the tangent
+program and write it as
+
+min
+δx∈Rn max
+i=1,...,r
+�
+qi(x) + ∇qi(x)⊤δx
+�
+−t + 1
+
+2δx⊤∇2
+xxL(x, t, λ)δx.
+
+Since t = maxi=1,...,r qi(x) is constant, this is equivalent to (5) (with φ = φk) if we use the
+strong model (29), and if Q(x) = ∇2
+xxL(x, t, λ). The latter does not depend on t, but on λ,
+so that Lagrange multiplier estimates λ are required. Can λ be related to the nonsmooth con-
+text? Yes it can, namely, if yk+1 = x+ is a serious step, then the last aggregate subgradient
+is g∗
+k+1 = (Q(x) + τkI) (x −x+), so g∗
+k+1 = �r
+i=1 λ+
+i ∇qi(x), where λ+
+i are a convex combination
+
+23
+
+
+involving only indices i where the maximum φ(x+, x) is attained. In other words, the coefficients
+. . . , λ−
+i , λi, λ+
+i , . . . are in principle available if the latest aggregate subgradients before each serious
+step are stored.
+Our goal is to get some information as to what to do in the case of a genuinely nonsmooth
+function, where we cannot use ∇2
+xxL = Q(x) directly. What we propose to do is let Q(x) be
+an approximation for ∇2
+xxL, maintained e.g. by an SR1 update. For this we have to find an
+appropriate secant equation for ∇2
+xxL.
+Taylor expansion at x+ gives ∇xL(x, t; λ+) ≈∇xL(x+, t; λ+) + ∇2
+xxL(x+, t; λ+)(x −x+), so
+that we get the secant equation
+
+Q(x)δx =
+
+r
+�
+
+i=1
+λ+
+i
+�
+∇qi(x+) −∇qi(x)
+�
+.
+
+Here the term �r
+i=1 λ+
+i ∇qi(x) is the aggregate subgradient in our proximity control algorithm,
+which is available. The question is how to get hold of �r
+i=1 λ+
+i ∇qi(x+), which is not an aggregate
+subgradient. This may in principle be done in the following way.
+Let yk+1 and λ(k+1) respectively be the solution and the corresponding Lagrange multiplier
+given by the tangent program after k iterations of the inner loop. In other words, trial steps
+y1, y2, . . . , yk have been rejected (null steps), while yk+1 = x+ is the serious step.
+Then the
+aggregate subgradient approximating �r
+i=1 λ+
+i ∇qi(x) is given by:
+
+(32)
+g∗
+k+1 = (Q(x) + τkI)(x −x+) ∈∂1φk(x+, x).
+
+Now introducing the multiplier λ(k+1), it can also be expressed as g∗
+k+1 = �
+
+i λ(k+1)
+i
+gi, where
+the subgradients gi may have three different origins: the exactness rule, the cutting plane and
+aggregation. We denote E and CP the (finite) sets of indices of subgradients chosen during the
+exactness and the cutting planes stages. Then
+
+g∗
+k+1 =
+�
+
+i∈E
+λ(k+1)
+i
+∇qi(x) + λ(k+1)
+icp
+∇qicp(x) + λ(k+1)
+iAgg g⋆
+k,
+
+where g⋆
+k = (Q(x) + τk−1I)(x −yk) is the second to last aggregate subgradient computed in the
+inner loop. Our idea to estimate �
+
+i λ+
+i ∇qi(x+) is to re-evaluate this expression at x+. The main
+difficulty is clearly how to re-evaluate the aggregate subgradient g⋆
+k at x+. This could be done
+recursively in the inner loop counter k by proving that g∗
+k+1 is of the form:
+
+g∗
+k+1 =
+�
+
+i∈E
+�λ(k+1)
+i
+∇qi(x) +
+�
+
+i∈CP
+�λ(k+1)
+i
+∇qi(x)
+
+where the new multiplier �λ(k+1)
+i
+is given by:
+
+(33)
+�λ(1) = λ(1),
+�λ(k+1) =
+
+
+
+
+Inexact
+0
+�λ(k)
+0
+0
+0
+1
+0
+
+
+
+λ(k+1).
+
+Consequently the term �
+
+i λ+
+i ∇qi(x+) could now be estimated by:
+
+(34)
+g+ =
+�
+
+i∈E
+�λ(k+1)
+i
+∇qi(x+) +
+�
+
+i∈CP
+�λ(k+1)
+i
+∇qi(x+).
+
+24
+
+
+Altogether the information stored at each iteration of the inner loop is the set of indices selected
+both by the exactness and the cutting plane processes and the modified Lagrange multiplier (see
+relation (33)). Then the SR1 update is performed the following way:
+
+s
+=
+x+ −x
+y
+=
+G+�λ+ −(Q(x) + τkI)(x −x+)
+where the columns of G+ are given by the subgradients computed by the
+exactness rule and those defining the successive cutting planes
+
+Q(x+)
+=
+Q(x) + (y −Q(x)s)(y −Q(x)s)⊤
+
+(y −Q(x)s)⊤s
+
+Numerical results.
+The following numerical stopping criteria have been used. Let ε > 0 be a
+tolerance parameter. We first check criticality 0 ∈∂f(x) by computing:
+
+(35)
+inf{||h|| : h ∈∂f(x)} < ε.
+
+Two additional tests are implemented to avoid pointless computational efforts during the final
+phase, where iterates make minor progress. We compare the progress of the local model around
+the current iterate, and we evaluate the relative step length to the optimization variable gains:
+
+(36)
+f(x) −f(x+) < ε(|f(x)| + 1), and
+��x −x+��< ε(∥x∥+ 1).
+
+The algorithm is stopped if either (35) or both criteria in (36) are satisfied.
+We performed experiments with a max-quad-function where the first order and several second
+order approaches are compared, including the approximation outlined above. Fig. 1 presents the
+results of our trust region algorithm 1 for the four different models of the objective f of the form:
+
+Φ(y, x) = φ(y, x) + 1
+
+2(y −x)⊤Q(x)(y −x)
+
+where:
+
+• (in black dash-dotted line) Q(x) = 0: we use the first order model φ without any second
+order information.
+
+• (in green dashed line) Q(x) is the true Hessian of the Lagrangian of SQP, computed as the
+convex combination of the matrices Ai and whose coefficients λ+
+i are given by the aggregation
+process: Q(x) = �r
+i=1 λ+
+i Ai.
+
+• (in red dash-crossed line) Q(x) is an approximation of the Hessian of the Lagrangian involved
+in a SQP approach, computed using the Symmetric Rank One (SR1) update.
+
+• (in blue dashed line) Q(x) is the approximation of the Hessian of the Lagrangian involved in
+a SQP approach, computed using formula (32), (33) and (34) to perform the SR1 update.
+Only this approximation would be available in a truly nonsmooth application.
+
+25
+
+
+−0.5
+0
+0.5
+1
+−0.4
+
+−0.2
+
+0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+0
+
+0
+
+1
+1
+
+1
+
+2
+
+−1
+−0.8
+−0.6
+−0.4
+−0.2
+0
+0.2
+0.4
+0.6
+0.8
+1
+−1.5
+
+−1
+
+−0.5
+
+0
+
+0.5
+
+1
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+1
+
+1
+1
+
+2
+
+Convex ex. (left fig.)
+Nonconvex ex. (right fig.)
+f(x⋆)
+Iter
+f(x⋆)
+Iter
+TR without 2nd order term Q
+-0.03527
+50
+-0.031478
+10
+TR & SR1 update
+-0.03527
+10
+-0.104917
+9
+TR & SR1 approx
+-0.03527
+10
+-0.104917
+11
+TR & Q=Hessian of Lagrangian
+-0.03527
+27
+-0.104917
+9
+
+Figure 1: Performance of the proximity control algorithm for the quadratic min-max problem.
+We compare four different models of Q(x) on two randomly generated examples in dimension 2
+with r = 10 quadratics. The case on the left is convex, the case on the right non-convex.
+
+0
+10
+20
+30
+40
+50
+60
+0
+
+0.5
+
+1
+
+1.5
+
+0
+2
+4
+6
+8
+10
+12
+0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+Figure 2: Behavior of the proximity control parameter τk along serious iterations for the two
+examples presented on Fig. 1.
+
+As expected, in the convex case (see Fig. 1 left), we observe an acceleration of the convergence
+with second order information Q, compared to the case where Q = 0. Using a second order model
+in the sense of definition 2 improves the approximation of the objective function f by the model
+Φ and reduces zigzagging.
+Table 1 suggests that this might be particularly significant in high dimension and for nonconvex
+problems. In addition, in the nonconvex case, as illustrated by Fig. 1 right, we observe that, unlike
+the first order method, the three second order methods converge towards the global minimum of
+the nonconvex problem.
+Our last remark concerns the behavior of the proximity control parameter τk along serious
+iterations. Recall that a decreasing proximity parameter τk means a good agreement between the
+
+26
+
+
+n = 2, m = 0
+n = 2, m = 557
+n = 10, m = 0
+f(x⋆)
+Iter.
+f(x⋆)
+Iter.
+f(x⋆)
+Iter.
+Matlab fminimax
+-2.78939e-04
+-
+-8.42395e-06
+-
+Time out
+-
+TR & Q = 0
+-2.78971e-04
+185
+-1.03922e-05
+48
+-1.29756e-02
+30
+TR & SR1 update
+-2.78971e-04
+13
+-1.05374e-05
+7
+-1.29756e-02
+17
+TR & SR1 approx
+-2.78971e-04
+10
+-1.05374e-05
+7
+-1.29756e-02
+17
+TR & Q Hessian
+-2.78971e-04
+20
+-1.05395e-05
+11
+-1.29756e-02
+15
+
+Table 1: Proximity control algorithm 1 applied to n-dimensional quadratic min-max examples
+with r = 1000 quadratics and m negative semidefinite matrices Ai. The numerical data (Ai, bi,
+x0) are randomly generated.
+
+objective f and the current working model Φk(·, x). In particular, in the convex case (Figure 2
+left), introducing second order terms via a SR1 update improves approximations and reduces the
+number of steps computed by our algorithm.
+
+Example 9.2. H∞-controller synthesis was one of the motivating examples to develop our model
+based bundling approach. Here the objective function is of the form
+
+(37)
+f(x) = max
+ω∈[0,∞] σ1 (T(x, jω)) ,
+
+where the unknown variable x = vec(K) represents the gains of the feedback controller K ∈Rny×nu
+to be designed (ny the number of measured outputs of the system, nu the number of controlled
+inputs), and s �→T(x, s) is a stable closed loop transfer operator, depending rationally on x,
+mapping into a space Cnz×nw of matrices. The objective f is the H∞norm of the transfer operator
+T(x, ·) as a function of x = vec(K) and as such is subject to two sources of nonsmoothness, the
+infinite max-operator, and the maximum singular value function σ1, which is convex but generally
+nonsmooth. Non-convexity of f springs from the nonlinearity of T.
+Most H∞synthesis techniques in the literature are based on the Kalman-Yakubovitch-Popov
+Lemma and amount to solving bilinear matrix inequalities (BMIs).
+Here numerical problems
+arise from the strong disparity between controller gains and Lyapunov variables. Our proximity
+control algorithm allows to perform H∞synthesis from the frequency domain point of view, i.e.,
+by minimizing (37) directly.
+Since (37) depends only on controller variables K, (that is, on
+x = vec(K)), we do not have to identify Lyapunov variables, which is a great advantage when
+large plants are considered.
+In exchange, a difficult semi-infinite nonsmooth and non-convex
+optimization program (37) has to be solved.
+In our experiments we evaluate the proximity control algorithm on a variety of H∞case studies
+and compare with older experiments obtained with the line-search based method of [1,4].
+
+Local model.
+The objective function to be minimized is f(x) = supω∈[0,∞] σ1(T(x, jω)) =
+∥T(x, ·)∥∞. The strong first-order local model we use is:
+
+φ(y, x)
+:=
+sup
+ω∈[0,∞]
+σ1 (T(x, jω) + T ′(x, jω)(y −x))
+
+=
+∥T(x, ·) + T ′(x, ·)(y −x)∥∞,
+(38)
+
+27
+
+
+where T ′(x, ·) is the derivative of T(x, ·) with respect to x, and where ∥G(·)∥∞stands for the H∞
+norm of a transfer matrix operator G(s). Expressions of T ′(x, ·) in terms of the plant state space
+data can be found in [4]. Strongness of this model follows from remark 7. In these tests, no second
+order term Q(x) was used.
+
+Computing subgradients.
+The following result explains how to compute subgradients of σ1.
+
+Lemma 6. Let A ∈Cm×n and suppose σ1(A) has multiplicity r ≥1 (with r ≤min{m, n}). Let
+U1 ∈Cm×r and V1 ∈Cn×r be such that
+
+(39)
+U H
+1 AV1 = σ1(A)Ir.
+
+Then
+
+(40)
+∂σ1(A) =
+�
+V1Y U H
+1
+: Y ∈Sr
+�
+,
+
+where Sr = {A ∈Cr×r
+:
+A = AH, 0 ⪯A ⪯Ir, Tr(A) = 1}. We have the following useful
+equivalent formulations
+
+∂σ1(A) =
+�AHU1Y U H
+1
+σ1(A)
+: Y ∈Sr
+
+�
+=?
+�V1Y V H
+1 AH
+
+σ1(A)
+: Y ∈Sr
+
+�
+.
+
+The first-order model φ has a convenient structure, because (38) shows that φ(y, x) is the H∞
+norm of the transfer function s �→T(x, s) + T ′(x, s)(y −x). In consequence, the function value of
+φ and its subgradients can be computed using the same H∞norm algorithm of [7] used already
+to compute objective value f(x) and subgradients at x. This requires computing the adjoint of
+the operator T ′(x, jω), which is somewhat technical, so we point the reader to [4] for details.
+Notice however that computing φ(y, x) is more expensive than computing f(y). Indeed, since
+s �→T(x, s) + T ′(x, s)(y −x) is built from a parallel connection between the transfer functions
+T(x, ·) and T ′(x, ·)(y −x), it has as many states as both transfer functions taken together. While
+T(x, ·) has nx states, T ′(x, ·)(y −x) has even 2×nx states, being itself a serial connection between
+two transfer function with nx states.
+Hence, T(x, ·) + T ′(x, ·)(y −x) has 3 × nx states, and
+computing φ(y, x) is therefore more expensive than computing f(x). As a consequence, the inner
+loop may significantly slowdown the algorithm. For small to medium size problems, this is not
+really felt, but for very large system the cost of φ(y, x) becomes dominant. This is the price to be
+paid for its better performance of the trust region method compared to line-search based method.
+
+Implementation and stopping criteria.
+The method has been implemented in Matlab, and
+all numerical experiments have been performed on a 2Ghz Linux computer.
+As in the previous example, we stop the algorithm if either (35) or the two conditions in (36)
+are satisfied. In the line-search method [4] a different stopping criterion based on a measure of
+criticality θ was used. The algorithm was stopped if |θ| < εθ. For comparison, the optimality
+function θ is also computed here, but a posteriori to measure criticality of the controller obtained
+by the proximity control method. We have chosen εθ = 1e −5 for all numerical tests.
+In a practical implementation it is necessary to add yet another stopping tests to (35) and (36)
+used in the outer loop. We need a mechanism to detect convergence in the inner loop, because
+even though theoretically we only enter the inner loop when 0 ̸∈∂f(xj), it may happen that xj
+
+28
+
+
+is near optimal. This will typically lead to a lengthy inner loop having a hard time to find xj+1,
+which when found will give only marginal progress over xj. The inner loop is therefore stopped if
+the descent of the working model is too small, i.e.
+
+f(x) −φk(yk+1, x) < ε2,
+
+where the parameter ε2 is chosen very small in order to stop only when the algorithm gets stuck
+in doing null steps. We have set ε2 = 0.01 × ε for our tests.
+
+Results.
+H∞synthesis was performed on four models from the COMPLeIB library [19] : aircraft
+AC2, helicopter HE4, aircraft AC14, and distillation column BDT2. More details about these
+models can be found in [20]. Table 2 shows the sizes ranging from small to large. For their
+numerical experiments, static feedback controllers were synthesized to compare with proximity
+control and line-search based methods.
+
+Model
+nx
+nz
+nw
+ny
+nu
+AC2
+5
+5
+3
+3
+3
+HE4
+8
+12
+8
+6
+4
+AC14
+40
+11
+4
+4
+3
+BDT2
+82
+4
+2
+4
+4
+
+Table 2: Sizes of the models treated in numerical experiments
+
+Table 3 presents results for the four models with both linesearch (LS) and proximity control
+(PC). For each experiments, the value of the H∞norm γ∞, the number of outer and inner it-
+erations, the mean CPU time for outer and inner iterations, the total CPU, and the criticality
+measure |θ| are reported. We can see that our proximity control method achieves better gains,
+except for AC2, where both methods find the same local minimum. In exchange, PC needs gen-
+erally more iterations and takes more time than the LS approach. To compare the speed of the
+methods, we have reported the CPU times of LS and PC needed to reach the maximum value of
+the two γ∞values obtained by each algorithm.
+
+• PC is faster on the HE4 model: it reaches the value 34.07 in 1.34 seconds within 16 serious
+step, whereas LS needs 1.5 seconds and 51 iterations. Our algorithm being a first order
+approach, minimization sometimes stalls when approaching the local minimum. Indeed, PC
+needs 19.85 seconds to perform 90% of the whole optimization, whereas 85.4% of CPU time
+are used for the last 10%.
+
+• LS is faster for AC14, where it reaches the optimal value 104.43 in 4.3 seconds after 62
+iterations, whereas PC needs 10 seconds and 37 serious steps to reach the same value.
+
+• For BDT2, PC reaches the same value as LS in 22 seconds and 22 serious steps, which is
+faster than LS.
+
+It can be observed in Table 3 that the LS optimization stops earlier than PC, often with a quite
+large value of |θ|. This strange behavior can be explained by the following fact: linesearch is not
+suited to handle situations, where the two first singular values of the transfer function coalesce.
+This is explained in [4], where for numerical simplification the authors make the assumption that
+
+29
+
+
+the maximal singular value is simple. Figure 9.2 shows clearly that this is not the case for last step
+of the linesearch method on the AC14 example. This explain why LS stops prematurely. Moreover,
+it should be highlighted that the criticality measure θ has no meaning when the hypotheses are not
+satisfied. The same phenomenon was observed for the HE4 model. Again LS stops prematurely
+when the maximal singular value becomes non-simple at some frequencies. On both HE4 and
+AC14 example, PC continued to optimize even when a multiple singular-value was encountered.
+
+Method
+γ∞
+it
+itin
+CPU
+CPUin
+Time
+|θ|
+HE4 - LS
+34.07450
+51
+-
+2.85213e-02
+-
+1.5
+9.0
+HE4 - PC
+23.73891
+641
+2697
+1.72951e-02
+4.62476e-02
+136
+4.8e-3
+AC2 - LS
+0.11149
+43
+-
+3.32525e-02
+-
+1.5
+4.1e-6
+AC2 - PC
+0.11149
+31
+265
+1.22026e-02
+3.27288e-02
+9
+1.4e-6
+AC14 - LS
+104.43078
+62
+-
+6.92522e-02
+-
+4.3
+1.0
+AC14 - PC
+103.43986
+134
+494
+3.47064e-02
+2.32865e-01
+120
+1.6e+2
+BDT2 - LS
+0.82873
+71
+-
+3.87617e-01
+-
+27.5
+3.1e-4
+BDT2 - PC
+0.67687
+854
+1533
+1.35960e-01
+1.54915e+00
+2490
+1.2e-4
+
+Table 3: Results of H∞synthesis on four models from [19], using linesearch (LS) and proximity
+control (PC) algorithms. For each experiment, the optimal value of the H∞norm γ∞, the number
+of outer and inner iterations, the mean CPU times for serious steps and null steps, and the total
+CPU and criticality measure |θ| are given.
+
+10
+−6
+10
+−4
+10
+−2
+10
+0
+10
+2
+10
+4
+
+10
+
+20
+
+30
+
+40
+
+50
+
+60
+
+70
+
+80
+
+90
+
+100
+
+Figure 3: Frequency plot ω �→σi (T(x, jω)) of the first two singular values i = 1, 2 at the last
+step x before acceptance of the LS method on AC14 shows coalescence σ1 ≈σ2 on a relatively
+large low frequency band.
+
+30
+
+
+Acknowledgement
+
+This research was supported by grants from Agence Nationale de la Recherche (ANR) under
+contract Guidage, by Fondation d’entreprise EADS under contract Solving challenging problems
+in feedback control, and by Agence Nationale de la Recherche (ANR) under contract Controvert.
+
+References
+
+[1] P. Apkarian, D. Noll, Nonsmooth optimization for multidisk H∞synthesis. European J.
+Control, vol. 12, no. 3, 2006, p. 229 - 244.
+
+[2] P. Apkarian, D. Noll, Controller design via nonsmooth multi-directional search. SIAM J.
+Control and Optim., vol. 44, 2006, p. 1923 - 1949.
+
+[3] P. Apkarian, D. Noll, IQC analysis and synthesis via nonsmooth optimization. Systems
+and Control Letters, vol. 55, no. 12, p. 971 - 981.
+
+[4] P. Apkarian, D. Noll, Nonsmooth H∞synthesis. IEEE Trans. Autom. Control, vol. 51,
+2006, p. 71 - 86.
+
+[5] V. Bompart, D. Noll and P. Apkarian, Second-order nonsmooth optimization of the
+H∞norm. Numerische Mathematik, vol. 107, no. 3, 2007, p. 433 - 454.
+
+[6] F. Bonnans, J.-C. Gilbert, C. lemar´echal, C. Sagastiz´abal, Numerical Optimiza-
+tion. Theoretic and Practical Aspects. Springer Verlag 2006.
+
+[7] S. Boyd, V. Balakrishnan, A regularity result for the singular values of a transfer matrix
+and a quadratically convergent algorithm for computing its L∞-norm. Systems and Control
+Letters, vol. 15, 1990, p. 1 - 7.
+
+[8] F. Clarke, Optimization and nonsmooth analysis. Canadian Math. Society Series, John
+Wiley & Sons, New York, 1983.
+
+[9] A.R. Conn, N.I.M. Gould and P.L. Toint, Trust-Region methods. MPS/SIAM Series
+On Optimization, Philadelphia, PA, USA, 2000.
+
+[10] R. Correa, and C. Lemar´echal, Convergence of some algorithms for convex minimiza-
+tion. Math. Programming, 62(2):261–275, 1993.
+
+[11] J. E. Dennis jr., R. B. Schnabel, Numerical Methods for Unconstrained Optimization
+and Nonlinear Equations. Prentice Hall Series in Computational Mathematics, 1983.
+
+[12] A. Fuduli, M. Gaudioso and G. Giallombardo, A DC piecewise affine model and a
+bundling technique in nonconvex nonsmooth optimization. Optimization Method and Soft-
+ware, vol. 19, 2004, p. 89 - 102.
+
+[13] A. Fuduli, M. Gaudioso and G. Giallombardo, Minimizing nonconvex nonsmooth
+functions via cutting planes and proximity control. SIAM J. Optim. vol. 14, 2004, p. 743 -
+756.
+
+[14] W. L. Hare, C. Sagastizabal, Computing proximal points of nonconvex functions. Math.
+Programming series B. Published electronically may 2007.
+
+[15] J.-B. Hiriart-Urruty, C. Lemar´echal , Convex analysis and minimization algorithms,
+vol I: and vol II: Advanced theory and bundle methods, vol. 306 of Grundlehren der mathe-
+matischen Wissenschaften, Springer Verlag, New York, Heidelberg, Berlin, 1993.
+
+31
+
+
+[16] K.C. Kiwiel, Proximity control in bundle methods for convex nondifferentiable optimization.
+Math. Programming, vol. 46, 1990, p. 105 - 122.
+
+[17] K.C. Kiwiel, Methods of descent for nondifferentiable optimization, vol. 1133 of Springer
+Lect. Notes in Math., Springer Verlag, 1985.
+
+[18] K.C. Kiwiel, An aggregate subgradient method for nonsmooth convex minimization. Math.
+Programming, vol. 27, 1983, p. 320 - 341.
+
+[19] F. Leibfritz. COMPLeIB, COnstraint Matrix-optimization Problem LIbrary - a collec-
+tion of test examples for nonlinear semidefinite programs, control system design and related
+problems. Technical report, Universit¨at Trier, 2003.
+
+[20] F. Leibfritz, W. Lipinski. Description of the benchmark examples in COMPLeIB Tech-
+nical report, Universit¨at Trier, 2003.
+
+[21] C. Lemar´echal, Nondifferentiable optimization. Chapter VII in: Handbooks in Operations
+Research and Management Sciences, vol. 1, 1989.
+
+[22] C. Lemar´echal, Lagrangian relaxation. In: Computational and Combinatorial Optimiza-
+tion, M. Junger, D. Naddef (eds.), 2001, p. 115 - 169.
+
+[23] L. Lukˇsan, J. Vlˇcek, A bundle-Newton method for nonsmooth unconstrained minimization.
+Math. Programming, vol. 83, 1998, p. 373 - 391.
+
+[24] D. Noll, P. Apkarian, Spectral bundle method for nonconvex maximum eigenvalue func-
+tions: first-order methods. Math. Programming, Series B, vol. 104, 2005, p. 701 - 727.
+
+[25] D. Noll, P. Apkarian, Spectral bundle method for nonconvex maximum eigenvalue func-
+tions: second-order methods. Math. Programming, Series B, vol. 104, 2005, p. 729 - 747.
+
+[26] E. Polak, On the mathematical foundations of nondifferentiable optimization in engineering
+design. SIAM Review, vol. 29, 1987, p. 21 - 89.
+
+[27] A. Ruszczy´nski. Nonlinear optimization. Princeton University Press, 2006.
+
+[28] H. Schramm. Eine Kombination von Bundle- und Trust-Region-Verfahren zur L¨osung
+nicht-differenzierbarer Optimierungsprobleme. Bayreuther Mathematische Schriften, Heft 30,
+Bayreuth 1989.
+
+[29] H. Schramm, J. Zowe. A version of the bundle idea for minimizing a nonsmooth function:
+conceptual idea, convergence analysis, numerical results. SIAM J. Optim. vol. 2, 1992, p. 121
+- 152.
+
+[30] N. Shor. Minimization Methods for Nondifferentiable Functions. Springer Verlag, 1985.
+
+[31] R.J. Stern, H. Wolkowicz, Indefinite trust region programs and nonsymmetric eigenvalue
+perturbations. SIAM J. Optim., vol. 5, no. 2, 1995, p. 286 - 313.
+
+[32] P. Wolfe, A method of conjugate subgradients for minimizing nondifferentiable functions.
+Math. Programming Studies, vol. 3. Nondifferentiable Optimization, M.L. Balinski, P. Wolfe
+(eds.), North-Holland, 1975, p. 145 - 173.
+
+[33] J. Zowe, The BT-Algorithm for minimizing a nonsmooth functional subject to linear con-
+straints, in Nonsmooth Optimization and Related Topics , F. H. Clarke, V. F. Demyanov, F.
+Gianessi (eds.), Plenum Press, 1989.
+
+32
+
+

@@ -1,0 +1,13 @@
+--- before/items/ex-lbfgs-memory-dependent-cost.md
++++ proposed/items/ex-lbfgs-memory-dependent-cost.md
+@@ -52,9 +52,7 @@
+ 
+ 1.2 The L-BFGS pair list contains at most $2mn=2\cdot10\cdot1000=20{,}000$ real coordinates, plus $O(n+m)$ temporary vectors and scalars. [given, F1, F2, algebra]
+ 
+-2.1 In exact inverse-matrix mode, computing $p=-Hg$ uses one dense matrix-vector product and costs $O(n^2)$ scalar operations. For the direct update, first compute $u:=Bs$ with one dense matrix-vector product; since $B$ is symmetric, $Bss^TB=uu^T$. Then form $B^+=B-uu^T/(s^Tu)+yy^T/(s^Ty)$ using two outer products and an entrywise matrix update, which costs $O(n^2)$. For the inverse update, first compute $v:=Hy$ with one dense matrix-vector product and expand [F4] using symmetry of $H$ to obtain
+-$$H^+=H-\rho(sv^T+vs^T)+(\rho+\rho^2y^Tv)ss^T.$$
+-This uses a constant number of outer-product updates and also costs $O(n^2)$. Thus the dense direction and the paired BFGS updates use $O(n^2)$ work per iteration. By [F1], the two-loop recursion uses $O(mn)$ scalar work. Here $mn=10{,}000$ while $n^2=1{,}000{,}000$; the paired representation uses 100 times as many matrix entries as correction-pair coordinates, and a one-matrix representation uses 50 times as many. These are storage comparisons, not exact operation totals. [given, F1, F3, F4, algebra] ∎
++2.1 In exact inverse-matrix mode, computing $p=-Hg$ uses one dense matrix-vector product and costs $O(n^2)$ scalar operations. For the direct update, first compute $u:=Bs$ with one dense matrix-vector product; since $B$ is symmetric, $Bss^TB=uu^T$. Then form $B^+=B-uu^T/(s^Tu)+yy^T/(s^Ty)$ using two outer products and an entrywise matrix update, which costs $O(n^2)$. For the inverse update, first compute $v:=Hy$ with one dense matrix-vector product and expand [F4] using symmetry of $H$ to obtain $$H^+=H-\rho(sv^T+vs^T)+(\rho+\rho^2y^Tv)ss^T.$$ This uses a constant number of outer-product updates and also costs $O(n^2)$. Thus the dense direction and the paired BFGS updates use $O(n^2)$ work per iteration. By [F1], the two-loop recursion uses $O(mn)$ scalar work. Here $mn=10{,}000$ while $n^2=1{,}000{,}000$; the paired representation uses 100 times as many matrix entries as correction-pair coordinates, and a one-matrix representation uses 50 times as many. These are storage comparisons, not exact operation totals. [given, F1, F3, F4, algebra] ∎
+ 
+ ## Remarks
+ 

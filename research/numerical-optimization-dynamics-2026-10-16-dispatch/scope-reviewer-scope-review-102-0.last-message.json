@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "102",
+  "round": 0,
+  "reviewed_items": [
+    "def-nonlinear-experimental-design-and-local-identifiability",
+    "lem-computed-sensitivity-singular-value-perturbation",
+    "lem-logdet-information-perturbation-bound",
+    "alg-finite-budget-multiplicative-d-optimal-design",
+    "lem-information-matrix-perturbation-bound",
+    "rem-gauss-newton-information-is-not-full-hessian",
+    "thm-full-rank-sensitivity-implies-local-identifiability",
+    "thm-local-information-positive-definite-iff-full-column-rank",
+    "thm-local-parameter-perturbation-bound",
+    "thm-multiplicative-design-update-well-defined-and-terminates",
+    "thm-uniform-sensitivity-error-controls-design-gap",
+    "thm-equivalence-violation-bounds-d-optimal-design-gap",
+    "ex-cubic-observation-is-locally-identifiable-with-zero-jacobian",
+    "ex-first-order-kinetic-rates-are-confounded-by-total-decay",
+    "ex-local-identifiability-does-not-imply-global-identifiability",
+    "ex-solver-tolerance-can-reverse-a-design-ranking",
+    "ex-endpoint-sensors-give-a-d-optimal-linear-time-design"
+  ],
+  "reviewed_pages": [
+    "numerical-identifiability-and-optimal-experiment-design",
+    "numerical-identifiability-and-optimal-experiment-design-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The batch and approved INV3 design were reviewed. Published log-determinant and D-optimality supplier proofs omit required calculus premises; assigned certification and gap claims depend on them. These supplier sources are outside this batch, so the prerequisite gap cannot be closed locally.",
+  "findings": [
+    {
+      "id": "lem-log-determinant-concavity-on-positive-definite-matrices",
+      "type": "prerequisite",
+      "reason": "Proof step 3.1 differentiates log det along a matrix path using Jacobi's formula, and step 4.1 differentiates along the path, but the direct and transitive dependencies omit thm-logarithm-derivative-and-integral and thm-chain-rule-for-total-derivatives. These are the smallest missing premises. This blocks thm-equivalence-violation-bounds-d-optimal-design-gap step 1.2; the outside-batch lem-psd-cone-self-dual-logdet-barrier also cites this result at step 3.1."
+    },
+    {
+      "id": "thm-d-optimality-equivalence-theorem",
+      "type": "prerequisite",
+      "reason": "Proof steps 1.2 and 2.1 differentiate log det along a matrix path using only the determinant differential; the supplier dependency closure lacks thm-chain-rule-for-total-derivatives and thm-logarithm-derivative-and-integral. Step 2.2 also asserts the supporting-line inequality for differentiable concave functions without deriving it. This affects alg-finite-budget-multiplicative-d-optimal-design's zero-violation certification branch, thm-equivalence-violation-bounds-d-optimal-design-gap step 3.1, ex-endpoint-sensors-give-a-d-optimal-linear-time-design step 3.1, and the outside-batch ex-approximate-vs-exact-d-optimal-design step 1.1."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-finite-budget-multiplicative-d-optimal-design",
+      "decision": "escalate",
+      "reason": "Its zero-violation branch returns equivalence-certified using the unresolved D-optimality equivalence supplier."
+    },
+    {
+      "id": "thm-equivalence-violation-bounds-d-optimal-design-gap",
+      "decision": "escalate",
+      "reason": "Its gap proof imports the unresolved log-determinant concavity result, and its converse imports the unresolved D-optimality equivalence result."
+    },
+    {
+      "id": "ex-endpoint-sensors-give-a-d-optimal-linear-time-design",
+      "decision": "escalate",
+      "reason": "Step 3.1 uses the assigned gap theorem; its direct endpoint determinant calculation is sound, but the imported gap bound remains unresolved."
+    },
+    {
+      "id": "ex-approximate-vs-exact-d-optimal-design",
+      "decision": "escalate",
+      "reason": "This published, outside-batch consumer uses the D-optimality equivalence result to certify its computed design at step 1.1."
+    },
+    {
+      "id": "lem-psd-cone-self-dual-logdet-barrier",
+      "decision": "accept",
+      "reason": "Its step 3.1 cites log-determinant concavity, but the item's own positive-Hessian calculation supplies convexity; that citation appears redundant."
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -12,6 +12,7 @@
+ import { currentHashesMany } from './step5-terminal-resolution.mjs';
+ import { MODELS } from './models.mjs';
+ import { supportingQuoteHistory } from './step5-quote-history.mjs';
++import { loadInitialMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
+ import { verdictIsCurrent } from './judge-currency.mjs';
+ import { gateDiagnostics } from './step5-gate-diagnostics.mjs';
+ import { FATAL_TYPES } from './step5-adjudication-compat.mjs';
+@@ -194,6 +195,8 @@
+ function supportingMetadataHistory(history,path,expected) {
+   const quotes = supportingQuoteHistory(history,path,expected);
+   if (quotes) return quotes;
++  const metadata = initialMetadataSupportingHistory(history,path,expected);
++  if (metadata) return metadata;
+   if(!history||history.run!=='frontier-44-special-representation-examples-28-six-step')return null;
+   const {root,run}=history,base=join(root,'research',`${run}-owner-escalation-repairs`,
+     'resume-20261011','step5-evidence-handoff');
+@@ -1289,6 +1292,10 @@
+   const pack=readPack(root,run,phase,round);
+   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
+   const current=hashes(root,run),reported={...current},items=readLibraryItems(root,{run});
++  const metadataHistory=phase==='initial'&&round===1?loadInitialMetadataHistory(root,run,{current:true}):null;
++  // Validate original reviews against exact historical source bytes only.
++  // The collection's post snapshot below always describes actual current bytes.
++  if(metadataHistory)Object.assign(reported,metadataHistory.historicalGuards);
+   const ownerSupplement=loadOwnerSupplement(root,pack,reports,current,items);
+   const operationalSupplement=loadOperationalSupplement(root,pack,reports,current);
+   const supplierRepairs=loadSupplierRepairs(root,pack,reports,current,items);
+@@ -1302,7 +1309,7 @@
+   const result=validateReports(pack,reports,reported,{root,ownerSupplement,operationalSupplement,supplierRepairs});
+   if(result.errors.length)throw Error(result.errors.join('\n'));
+   const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
+-  Object.assign(evidence,ownerSupplement?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{});
++  Object.assign(evidence,ownerSupplement?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{});
+   verifyEvidence(evidence);
+   const creationAuthors=new Map();
+   for(const unit of pack.units) {
+@@ -1353,6 +1360,15 @@
+   // joining them records routing, never an additional mathematical review.
+   const downstream=[...new Set([...reports.flatMap(row=>row.downstream),...result.created_items.flatMap(row=>row.consumers)])];
+   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root,run),downstream,ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
++  if(metadataHistory){
++    const historical=new Set(metadataHistory.sourceIds);
++    receipt.metadata_history={path:metadataHistory.path,historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false};
++    receipt.metadata_history_current_review_targets=[...historical];
++    receipt.historical_metadata_reviews=receipt.reviews.filter(row=>historical.has(row.id));
++    receipt.reviews=receipt.reviews.filter(row=>!historical.has(row.id));
++    // Preserve original rows and hashes separately; none is certified current.
++    requireValue(JSON.stringify(receipt.historical_metadata_reviews)===JSON.stringify(metadataHistory.historicalReviews),'historical metadata review inventory mismatch');
++  }
+   if(operationalSupplement){
+     receipt.operational_resolution={path:operationalSupplement.path,subjects:[...operationalSupplement.ids],
+       reason:operationalSupplement.reason,mathematical_review:false,native_coverage_adopted:false};
+@@ -1770,7 +1786,7 @@
+   const {seeds,impacts}=scope;
+   const concerns=phase==='impact-initial'&&round===1?loadReaderConcerns(root,run):null;
+   const scopeFindings=phase==='impact-initial'&&round===1?loadInitialScopeFindings(root,run):null;
+-  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id),...(scopeFindings?.entries??[]).map(row=>row.id)])];
++  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id),...(scopeFindings?.entries??[]).map(row=>row.id),...(result.metadata_history_current_review_targets??[])])];
+   // Deterministic disjoint lanes run concurrently; shared metadata edits lock.
+   // Closure requeues reviews invalidated by a concurrent supplier repair.
+   const assignments={'1':[],'2':[],'3':[]};
+@@ -1779,6 +1795,16 @@
+   order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
+   const identity=libraryIdentity(root,run);
+   const pack={version:2,run,phase,round,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,units:['1','2','3'],assignments,before:hashes(root,run),before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),impacts,seeds,failures:null,gateAssignments:{},cycles:[...new Set(cycles)],ledger_updates:result.ledger_updates??[]};
++  if(result.metadata_history){
++    pack.metadata_history_current_review_targets=[...result.metadata_history_current_review_targets];
++    pack.input_evidence??={};
++    const collection=join(workflowDir(root,run),'initial-1-collected.json');
++    pack.input_evidence[collection]=digest(readFileSync(collection,'utf8'));
++    for(const [file,hash]of Object.entries(result.evidence)){
++      requireValue(!Object.hasOwn(pack.input_evidence,file)||pack.input_evidence[file]===hash,'conflicting initial metadata history evidence');
++      pack.input_evidence[file]=hash;
++    }
++  }
+   if(concerns){
+     pack.reader_concerns=concerns.entries;
+     pack.reader_concern_owners=Object.fromEntries(concerns.entries.map(row=>[row.id,pack.units.find(unit=>assignments[unit].includes(row.id))]));
+@@ -1872,6 +1898,10 @@
+   const certifiedScope=id=>eligible.has(id)||createdIds.has(id);
+   const reviewed=new Map(allReviews.filter(row=>certifiedScope(row.id)).map(row=>[row.id,row]));
+   const current=hashes(root,run), rawBefore=rawHashes(root,run), baseline=read(join(dir,'baseline.json'));
++  // A changed source label is still a changed guard. Only actual subsequent
++  // native owner review can supply current certification for this target.
++  for(const id of sourceResult?.metadata_history_current_review_targets??[])
++    requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing current native metadata-target review: ${id}`);
+   const changed=diff(baseline,current).filter(certifiedScope);
+   const priorItems=new Map((prior?.items??[]).filter(row=>certifiedScope(row.id)).map(row=>[row.id,row]));
+   const progress=read(impactProgressPath(root,run,phase,round));

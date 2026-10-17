@@ -1,0 +1,509 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "84",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "thm-nonlinear-least-squares-gradient-and-hessian",
+      "model": "gpt-6-luna",
+      "context_sha256": "f064ef3b317bcd33a1440914d06623d2e57f3079249de1b534eada24c94e49cc",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F7 explicitly concerns domains A subset R, so the old step 2.1 did not license continuity on U subset R^n. Added step 3.1 proves product continuity by a local boundedness inequality and finite-sum continuity directly, including phi itself; derivative formulas and the Statement are unchanged. No choice principle is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "model": "gpt-6-luna",
+      "context_sha256": "7b627d6ed8fc9760ede40243ad041f0e60110f03ac888fc06ac782e50199ad9a",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The computed SVD Definition already tests any u_i<=tau before looking for straddling intervals. Corrected proof 3.1 to preserve that precedence; exact QR and SVD both may return an exact step. Also corrected 1.1 to at most n computed QR calls, with early failure and no computed loop in exact QR. The procedure itself and its exact/conditional computed guarantees are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "model": "gpt-6-luna",
+      "context_sha256": "e7447e485795687a36f390b0fcbbfb3a9c888deb68626a63f9ec9703708cc2d3",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "Step 1 assigned s_lambda both the vector [r(x);0] and a positive scalar lower bound for the stored augmented matrix. Renamed only the vector to b_lambda, including the solver call and exact identity A_lambda^T b_lambda=J^T r. The scalar certificate remains s_lambda>0 and still certifies the actual stored matrix; exact and computed branches retain their original conditions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-gauss-newton-local-linear-contraction",
+      "model": "gpt-6-luna",
+      "context_sha256": "b1f9a13a523673c8afc2f55ccc67e23ac3a95eb88c0976cb3aa90a5702e71273",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The old Statement allowed n=0 in the library convention, leaving its smallest singular value undefined and calling the positive-dimensional Hessian and QR interfaces outside their scope. Added m,n>=1. On this domain the SVD inverse bound, gradient path integral, 2ML(1-t)||e|| bound, and integrated (kappa+ML||e||)/sigma^2 estimate prove the stated q-contraction and invariant-ball convergence without changing the quantitative claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-gauss-newton-zero-residual-quadratic-convergence",
+      "model": "gpt-6-luna",
+      "context_sha256": "f7d922f3b3a5b933be441a5277943d7b5f28fd164e655f141885fee9391bddbc",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The uniform lower bound alone permits the zero-dimensional case, but the residual remainder and exact QR suppliers explicitly require m,n>=1. Added those dimensions. The existing remainder E, normal orthogonality, Pythagorean bound ||Jh||<=||E||, and ||Jh||>=sigma||h|| establish C=L/(2sigma); the C=0 branch avoids division by C and the stated starting radius closes the invariant-ball induction.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+      "model": "gpt-6-luna",
+      "context_sha256": "fabf6ee484e29cf5c85e840764971d8012e1492ea6c328f32e75549e9dff5e72",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The actual algorithm Definition step 5 does accept a feasible positive-prediction exact trial with rho>=eta1, after determining its next damping. F1 omitted that necessary branch while step 4.1 cited F1 for acceptance. Restored this clause in F1. The step-size, model-error, positive-prediction and geometric rejection-count calculations already prove the large-damping bound and the Nth-trial conclusion under the stated exact-solve/evaluation hypotheses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-nonzero-residual-gauss-newton-is-only-linear",
+      "model": "gpt-6-luna",
+      "context_sha256": "0990f0d261a246c1616b0a773266989f6b04cc3034e4a43034eb9f483b905225",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 overstated the local theorem by listing only curvature control and full rank. Replaced it by the positive-dimensional C2, stationary-point, ball, norm, Lipschitz, curvature and q<1 hypotheses with exact QR inputs. Verification 2.2 now explicitly identifies the polynomial C2 residual and n=1,m=2; 1.1 supplies stationarity and 2.1 supplies QR. The existing constants yield q=123/200, and the rational update has limiting error ratio 1/2 and unbounded quadratic ratio.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-nonlinear-least-squares-gradient-and-hessian",
+      "disposition": "repaired",
+      "post_sha256": "0bb59bfc7f61067eb1bed5935a24638b2e6fa7205f92651e6d4894ff62df6fa2",
+      "review_context_sha256": "46686ad107b3be9c8bdd4437246d3a38cd074ac49f949ebacfd8d13eb194b1c9",
+      "reason": "F7 explicitly concerns domains A subset R, so the old step 2.1 did not license continuity on U subset R^n. Added step 3.1 proves product continuity by a local boundedness inequality and finite-sum continuity directly, including phi itself; derivative formulas and the Statement are unchanged. No choice principle is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "disposition": "repaired",
+      "post_sha256": "ea25f54bac60c4473c1afe192d7c28237bda2fe7e1179ce4c5c25ef73597d57a",
+      "review_context_sha256": "4c7b053fe2921dfc02f4a91f392237eb466e7e2bfad40e241fff5d967dda65b2",
+      "reason": "The computed SVD Definition already tests any u_i<=tau before looking for straddling intervals. Corrected proof 3.1 to preserve that precedence; exact QR and SVD both may return an exact step. Also corrected 1.1 to at most n computed QR calls, with early failure and no computed loop in exact QR. The procedure itself and its exact/conditional computed guarantees are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "disposition": "repaired",
+      "post_sha256": "662b93eef8bc41546802451a9010505f6065210df3920a666c63dd0af4b8e8e3",
+      "review_context_sha256": "ee7635fdf8d485ecc8b41ba4cbbea96ab7c263821cd06ae6f8fe52b64c146d93",
+      "reason": "Step 1 assigned s_lambda both the vector [r(x);0] and a positive scalar lower bound for the stored augmented matrix. Renamed only the vector to b_lambda, including the solver call and exact identity A_lambda^T b_lambda=J^T r. The scalar certificate remains s_lambda>0 and still certifies the actual stored matrix; exact and computed branches retain their original conditions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-gauss-newton-local-linear-contraction",
+      "disposition": "repaired",
+      "post_sha256": "e7f9ef8da926441f4cf1d2e88c95b75a67f05fc7276e65c9db08b02f36ab3658",
+      "review_context_sha256": "e0e35620b006ac5e0ac18b27a6aeae874e09231f758ddafb44db5d0c43aa1d82",
+      "reason": "The old Statement allowed n=0 in the library convention, leaving its smallest singular value undefined and calling the positive-dimensional Hessian and QR interfaces outside their scope. Added m,n>=1. On this domain the SVD inverse bound, gradient path integral, 2ML(1-t)||e|| bound, and integrated (kappa+ML||e||)/sigma^2 estimate prove the stated q-contraction and invariant-ball convergence without changing the quantitative claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-gauss-newton-zero-residual-quadratic-convergence",
+      "disposition": "repaired",
+      "post_sha256": "f5f510ac8d4d550a536f4eb266528e230ef15a0e4e682deb37753c2afcb15d1e",
+      "review_context_sha256": "08de14203beb8820311b06d5d66f45f9ae3310e1bf23deb0cc322904f51fb103",
+      "reason": "The uniform lower bound alone permits the zero-dimensional case, but the residual remainder and exact QR suppliers explicitly require m,n>=1. Added those dimensions. The existing remainder E, normal orthogonality, Pythagorean bound ||Jh||<=||E||, and ||Jh||>=sigma||h|| establish C=L/(2sigma); the C=0 branch avoids division by C and the stated starting radius closes the invariant-ball induction.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+      "disposition": "repaired",
+      "post_sha256": "285e6e7cf264d15eadb092597a014fa61535ba6b46e00b9c8a1de42ffb2b5014",
+      "review_context_sha256": "45e72f0ab86293ce0fbde17d068dfd515fc7af7e90d09836c78a9b3e4850c343",
+      "reason": "The actual algorithm Definition step 5 does accept a feasible positive-prediction exact trial with rho>=eta1, after determining its next damping. F1 omitted that necessary branch while step 4.1 cited F1 for acceptance. Restored this clause in F1. The step-size, model-error, positive-prediction and geometric rejection-count calculations already prove the large-damping bound and the Nth-trial conclusion under the stated exact-solve/evaluation hypotheses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-nonzero-residual-gauss-newton-is-only-linear",
+      "disposition": "repaired",
+      "post_sha256": "f5b0e93aa6586db36eb3d146f69d094185575926a233126be45725f9b2044398",
+      "review_context_sha256": "cecf3046395c4d725d11a82ceed4773001944f6399d107e181b656a4cdbf3589",
+      "reason": "F3 overstated the local theorem by listing only curvature control and full rank. Replaced it by the positive-dimensional C2, stationary-point, ball, norm, Lipschitz, curvature and q<1 hypotheses with exact QR inputs. Verification 2.2 now explicitly identifies the polynomial C2 residual and n=1,m=2; 1.1 supplies stationarity and 2.1 supplies QR. The existing constants yield q=123/200, and the rational update has limiting error ratio 1/2 and unbounded quadratic ratio.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+    "thm-safeguarded-levenberg-marquardt-global-stationarity",
+    "ex-rank-deficient-identifiability-and-lm-step",
+    "ex-nonzero-residual-gauss-newton-is-only-linear"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-nonlinear-least-squares-gradient-and-hessian",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F7 explicitly concerns domains A subset R, so the old step 2.1 did not license continuity on U subset R^n. Added step 3.1 proves product continuity by a local boundedness inequality and finite-sum continuity directly, including phi itself; derivative formulas and the Statement are unchanged. No choice principle is used.",
+      "post_sha256": "0bb59bfc7f61067eb1bed5935a24638b2e6fa7205f92651e6d4894ff62df6fa2",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "severity": "nonfatal",
+      "reason": "The computed SVD Definition already tests any u_i<=tau before looking for straddling intervals. Corrected proof 3.1 to preserve that precedence; exact QR and SVD both may return an exact step. Also corrected 1.1 to at most n computed QR calls, with early failure and no computed loop in exact QR. The procedure itself and its exact/conditional computed guarantees are unchanged.",
+      "post_sha256": "ea25f54bac60c4473c1afe192d7c28237bda2fe7e1179ce4c5c25ef73597d57a",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "severity": "fatal",
+      "defect_type": "other",
+      "reason": "Step 1 assigned s_lambda both the vector [r(x);0] and a positive scalar lower bound for the stored augmented matrix. Renamed only the vector to b_lambda, including the solver call and exact identity A_lambda^T b_lambda=J^T r. The scalar certificate remains s_lambda>0 and still certifies the actual stored matrix; exact and computed branches retain their original conditions.",
+      "post_sha256": "662b93eef8bc41546802451a9010505f6065210df3920a666c63dd0af4b8e8e3",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-gauss-newton-local-linear-contraction",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The old Statement allowed n=0 in the library convention, leaving its smallest singular value undefined and calling the positive-dimensional Hessian and QR interfaces outside their scope. Added m,n>=1. On this domain the SVD inverse bound, gradient path integral, 2ML(1-t)||e|| bound, and integrated (kappa+ML||e||)/sigma^2 estimate prove the stated q-contraction and invariant-ball convergence without changing the quantitative claim.",
+      "post_sha256": "e7f9ef8da926441f4cf1d2e88c95b75a67f05fc7276e65c9db08b02f36ab3658",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-gauss-newton-zero-residual-quadratic-convergence",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The uniform lower bound alone permits the zero-dimensional case, but the residual remainder and exact QR suppliers explicitly require m,n>=1. Added those dimensions. The existing remainder E, normal orthogonality, Pythagorean bound ||Jh||<=||E||, and ||Jh||>=sigma||h|| establish C=L/(2sigma); the C=0 branch avoids division by C and the stated starting radius closes the invariant-ball induction.",
+      "post_sha256": "f5f510ac8d4d550a536f4eb266528e230ef15a0e4e682deb37753c2afcb15d1e",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+      "severity": "nonfatal",
+      "reason": "The actual algorithm Definition step 5 does accept a feasible positive-prediction exact trial with rho>=eta1, after determining its next damping. F1 omitted that necessary branch while step 4.1 cited F1 for acceptance. Restored this clause in F1. The step-size, model-error, positive-prediction and geometric rejection-count calculations already prove the large-damping bound and the Nth-trial conclusion under the stated exact-solve/evaluation hypotheses.",
+      "post_sha256": "285e6e7cf264d15eadb092597a014fa61535ba6b46e00b9c8a1de42ffb2b5014",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-nonzero-residual-gauss-newton-is-only-linear",
+      "severity": "nonfatal",
+      "reason": "F3 overstated the local theorem by listing only curvature control and full rank. Replaced it by the positive-dimensional C2, stationary-point, ball, norm, Lipschitz, curvature and q<1 hypotheses with exact QR inputs. Verification 2.2 now explicitly identifies the polynomial C2 residual and n=1,m=2; 1.1 supplies stationarity and 2.1 supplies QR. The existing constants yield q=123/200, and the rational update has limiting error ratio 1/2 and unbounded quadratic ratio.",
+      "post_sha256": "f5b0e93aa6586db36eb3d146f69d094185575926a233126be45725f9b2044398",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "rem-gauss-newton-information-is-not-full-hessian",
+      "route": "frontier-owner batch 102; do not edit in unit 84",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "affected_use": "Remark asserts the full Hessian identity by thm-nonlinear-least-squares-gradient-and-hessian without its C2 residual hypothesis. def-nonlinear-experimental-design-and-local-identifiability supplies only C1 maps.",
+      "invalidated_claim": "For r(t)=1+|t|^(3/2), r is C1 but phi=1/2+|t|^(3/2)+|t|^3/2 has no finite second derivative at 0. Thus the claimed Hessian need not exist.",
+      "minimality": "Qualify the Hessian identity and zero-residual comparison by C2 residual regularity; keep the C1 information-matrix definition unchanged.",
+      "reason": "Current remark is draft, in frozen frontier and owned by batch 102. Confirmed the missing hypothesis against both actual supplier interfaces; routed without editing or adjudicating that carrier.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "route": "batch 84 ordinary frontier owner lane; not assigned to this tuple adjudication",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "affected_use": "F9 attributes multivariable finite sum/product continuity to thm-algebra-of-continuous-functions, whose Statement restricts domains to subsets of R; proof 4.1 uses F9 for continuity of J^T r.",
+      "invalidated_claim": "The cited one-dimensional continuity interface does not license this inference on U subset R^n for n>1; the stationarity conclusion itself remains mathematically true with a direct continuity estimate.",
+      "minimality": "In F9/proof 4.1 supply the product-difference estimate and finite-sum bound on U, or cite an actual multivariable supplier; the Statement need not change.",
+      "reason": "Found the same domain mismatch while examining the direct consumer of the renamed LM residual. It is independent of the symbol rename and outside the assigned seven-item write scope.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-ledger",
+      "action": "no-update",
+      "reason": "No published item was edited or newly found defective in this lane. The Hessian remark alert was checked on its current carrier and is a draft frontier item owned by batch 102; the additional continuity citation finding is a draft batch-84 theorem outside this seven-item assignment.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_tuple_repairs_complete",
+    "completed": [
+      {
+        "id": "thm-nonlinear-least-squares-gradient-and-hessian",
+        "claim": "C2 gradient/Hessian formula with n,m>=1; unchanged Statement",
+        "dependencies": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-continuous-functions"
+        ],
+        "validation": "review-contexts exited 0; scoped precheck, rendercheck, proof-contract and final batched proof-layout all passed"
+      },
+      {
+        "id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+        "claim": "Positive-dimensional QR/SVD rank safeguards; unchanged Definition",
+        "validation": "review-contexts exited 0 after reviewing final three proof description corrections; scoped precheck, rendercheck, proof-contract and final batched proof-layout all passed",
+        "source_paths": [
+          "items/thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number.md",
+          "items/thm-computed-full-rank-least-squares-backward-stability.md",
+          "items/thm-singular-value-decomposition.md"
+        ]
+      },
+      {
+        "id": "alg-safeguarded-levenberg-marquardt",
+        "claim": "Unchanged LM operations; augmented residual b_lambda distinct from scalar s_lambda",
+        "validation": "review-contexts exited 0; three direct item consumers and page inspected; no consumer uses the conflicted scalar/vector notation",
+        "source_paths": [
+          "items/alg-gauss-newton-qr-svd-step-with-rank-safeguard.md",
+          "items/lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer.md",
+          "items/def-trust-region-quadratic-model-and-ratio.md"
+        ]
+      },
+      {
+        "id": "thm-gauss-newton-local-linear-contraction",
+        "claim": "q=(kappa+MLR)/sigma²<1; positive m,n added to match actual suppliers",
+        "validation": "review-contexts exited 0; direct example consumer has n=1,m=2 and satisfies all hypotheses; owning page summary corrected under the shared lock",
+        "source_paths": [
+          "items/thm-nonlinear-least-squares-gradient-and-hessian.md",
+          "items/cor-vector-valued-ftc-and-lipschitz-bound.md",
+          "items/thm-singular-value-decomposition.md"
+        ]
+      },
+      {
+        "id": "thm-gauss-newton-zero-residual-quadratic-convergence",
+        "claim": "C=L/(2sigma), exact zero-residual quadratic estimate with m,n>=1",
+        "validation": "review-contexts exited 0; graph/text search finds no direct item consumer; owning page uses the zero-residual and Lipschitz qualifications correctly",
+        "source_paths": [
+          "items/lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian.md",
+          "items/alg-gauss-newton-qr-svd-step-with-rank-safeguard.md",
+          "items/def-euclidean-inner-product.md"
+        ]
+      },
+      {
+        "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+        "claim": "lambda>=Lambda forces rho>=eta2 and radius<=Delta/2; N counts the final acceptable trial",
+        "validation": "review-contexts exited 0; no Statement change, so no new downstream event",
+        "source_paths": [
+          "items/alg-safeguarded-levenberg-marquardt.md",
+          "items/lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer.md",
+          "items/lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian.md"
+        ]
+      },
+      {
+        "id": "ex-nonzero-residual-gauss-newton-is-only-linear",
+        "claim": "Nonzero residual at x*=0 and asymptotic error ratio 1/2, Example unchanged",
+        "validation": "review-contexts exited 0 after checking the revised supplier with m=2,n=1 and all q hypotheses",
+        "source_paths": [
+          "items/thm-gauss-newton-local-linear-contraction.md",
+          "items/thm-nonlinear-least-squares-gradient-and-hessian.md",
+          "items/alg-gauss-newton-qr-svd-step-with-rank-safeguard.md"
+        ]
+      }
+    ],
+    "pending": [],
+    "conventions": "phi=||r||²/2; Jacobian rows are residual gradients; all estimates use Euclidean operator norms",
+    "source_reading": "Local dependency interfaces inspected; no external source reading claimed.",
+    "downstream_examinations": [
+      {
+        "supplier": "alg-safeguarded-levenberg-marquardt",
+        "consumer": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+        "path": "items/lem-levenberg-marquardt-large-damping-forces-sufficient-decrease.md",
+        "affected_use": "F1 and proof 1.1 use the exact damped equation; proof 4.1 uses rejection/acceptance branches.",
+        "disposition": "sound_after_symbol_rename; assigned review follows",
+        "invalidated_claim": "none; the augmented residual variable name is not used",
+        "minimality": "No consumer statement change or additional hop is necessary."
+      },
+      {
+        "supplier": "alg-safeguarded-levenberg-marquardt",
+        "consumer": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+        "path": "items/thm-safeguarded-levenberg-marquardt-global-stationarity.md",
+        "affected_use": "Statement invokes exact augmented QR solves; F1 and steps 1.1-3.1 use acceptance, damping updates, and the exact damped system.",
+        "disposition": "sound_for_this_interface_change; separate F9 finding routed to owner",
+        "invalidated_claim": "none from renaming augmented residual",
+        "minimality": "The proof does not name the augmented residual or computed rank bound."
+      },
+      {
+        "supplier": "alg-safeguarded-levenberg-marquardt",
+        "consumer": "ex-rank-deficient-identifiability-and-lm-step",
+        "path": "items/ex-rank-deficient-identifiability-and-lm-step.md",
+        "affected_use": "F2 and verification 2.1 accept the exact augmented solve for A_1=[J;I] and locally named s_1=[r;0].",
+        "disposition": "sound_unchanged",
+        "invalidated_claim": "none; the example defines its own residual symbol and uses exact arithmetic",
+        "minimality": "Local s_1 has no competing scalar certificate; renaming it is unnecessary."
+      },
+      {
+        "supplier": "alg-safeguarded-levenberg-marquardt",
+        "page": "gauss-newton-and-levenberg-marquardt-methods",
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/gauss-newton-and-levenberg-marquardt-methods.md",
+        "affected_use": "Page summarizes augmented regularized solves and trust-ratio/failure behavior without naming the certificate or residual.",
+        "disposition": "sound_for_symbol_rename",
+        "invalidated_claim": "none",
+        "minimality": "No page edit needed for this interface event."
+      },
+      {
+        "supplier": "thm-gauss-newton-local-linear-contraction",
+        "consumer": "ex-nonzero-residual-gauss-newton-is-only-linear",
+        "path": "items/ex-nonzero-residual-gauss-newton-is-only-linear.md",
+        "affected_use": "F3 and verification 2.2 invoke contraction for the polynomial residual r(x)=(x,1/2+x²/2) with scalar parameter.",
+        "disposition": "sound_with_dimensions_n1_m2; assigned F3 summary repair follows",
+        "invalidated_claim": "none due to positive-dimensional hypothesis",
+        "minimality": "Retain Example and quantitative bounds; only F3 needs accurate existing hypotheses."
+      },
+      {
+        "supplier": "thm-gauss-newton-local-linear-contraction",
+        "page": "gauss-newton-and-levenberg-marquardt-methods",
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/gauss-newton-and-levenberg-marquardt-methods.md",
+        "affected_use": "Summary says a uniform residual-curvature bound smaller than sigma² gives contraction, omitting MLR in q.",
+        "disposition": "repaired_owning_page_summary_under_shared_lock",
+        "invalidated_claim": "For the prescribed ball, kappa<sigma² alone does not imply q<1.",
+        "minimality": "Replace that clause with the actual q=(kappa+MLR)/sigma²<1 hypothesis; no item claim change."
+      },
+      {
+        "supplier": "thm-gauss-newton-zero-residual-quadratic-convergence",
+        "page": "gauss-newton-and-levenberg-marquardt-methods",
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/gauss-newton-and-levenberg-marquardt-methods.md",
+        "affected_use": "Page says a zero-residual root gives a quadratic error bound under a Lipschitz Jacobian; earlier prose restricts to the full-rank exact Gauss-Newton step.",
+        "disposition": "sound_unchanged_for_this_supplier",
+        "invalidated_claim": "none; no zero-dimensional example or invocation is asserted",
+        "minimality": "No item consumers found, and no additional page change needed for this theorem."
+      }
+    ],
+    "validation": [
+      {
+        "check": "precheck",
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-nonlinear-least-squares-gradient-and-hessian.md items/alg-gauss-newton-qr-svd-step-with-rank-safeguard.md items/alg-safeguarded-levenberg-marquardt.md items/thm-gauss-newton-local-linear-contraction.md items/thm-gauss-newton-zero-residual-quadratic-convergence.md items/lem-levenberg-marquardt-large-damping-forces-sufficient-decrease.md items/ex-nonzero-residual-gauss-newton-is-only-linear.md --json",
+        "exit_code": 0,
+        "result": "7 checked, 0 failed; initial line-layout failure corrected and the proposed direct-strategy phase numbering adopted"
+      },
+      {
+        "check": "proof-layout",
+        "command": "node tools/proof-layout.mjs items/thm-nonlinear-least-squares-gradient-and-hessian.md items/alg-gauss-newton-qr-svd-step-with-rank-safeguard.md items/alg-safeguarded-levenberg-marquardt.md items/thm-gauss-newton-local-linear-contraction.md items/thm-gauss-newton-zero-residual-quadratic-convergence.md items/lem-levenberg-marquardt-large-damping-forces-sufficient-decrease.md items/ex-nonzero-residual-gauss-newton-is-only-linear.md",
+        "exit_code": 0,
+        "result": "7 items, 26 steps, 0 defects after final item edits"
+      },
+      {
+        "check": "rendercheck",
+        "command": "node tools/rendercheck.mjs items/thm-nonlinear-least-squares-gradient-and-hessian.md items/alg-gauss-newton-qr-svd-step-with-rank-safeguard.md items/alg-safeguarded-levenberg-marquardt.md items/thm-gauss-newton-local-linear-contraction.md items/thm-gauss-newton-zero-residual-quadratic-convergence.md items/lem-levenberg-marquardt-large-damping-forces-sufficient-decrease.md items/ex-nonzero-residual-gauss-newton-is-only-linear.md library/numerical-optimization-inverse-problems-and-uncertainty-quantification/gauss-newton-and-levenberg-marquardt-methods.md --json",
+        "exit_code": 0,
+        "result": "8 checked, 0 errors, 0 warnings on final items and corrected owning page"
+      },
+      {
+        "check": "proof-contract",
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-84.proof-contracts.json --items thm-nonlinear-least-squares-gradient-and-hessian,alg-gauss-newton-qr-svd-step-with-rank-safeguard,alg-safeguarded-levenberg-marquardt,thm-gauss-newton-local-linear-contraction,thm-gauss-newton-zero-residual-quadratic-convergence,lem-levenberg-marquardt-large-damping-forces-sufficient-decrease,ex-nonzero-residual-gauss-newton-is-only-linear --strict --json",
+        "exit_code": 0,
+        "result": "7 selected contracts checked, ok:true, no errors or warnings"
+      },
+      {
+        "check": "report-identity-and-currency",
+        "exit_code": 0,
+        "result": "Read-only comparison verified exact frozen-pack digest, all seven exact rejected tuples, all seven reviews, and all current item/context hashes; no hashes were refreshed."
+      }
+    ],
+    "review_context_followup": "After the precheck-only line join and phase 3.1 renumbering in the gradient/Hessian supplier, re-examined the unchanged derivative identities used by local contraction and the scalar example; all conclusions and hypotheses are preserved. Batched review-contexts on this final stable state; other review hashes remained identical.",
+    "reader_presentation_routes": [
+      {
+        "ids": [
+          "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "alg-safeguarded-levenberg-marquardt"
+        ],
+        "finding": "The existing algorithm carriers retain their ancillary numbered proofs. The Step-4 digest requests relocation of properties to separate proved result items under the current algorithm convention.",
+        "disposition": "Retained for owner structural routing; this dispatch licenses new items only for genuinely unsatisfied mathematical prerequisites, and the existing exact QR and damped-model suppliers already establish the required mathematics. No unrelated helper was authored merely to relocate these arguments.",
+        "mathematical_uncertainty": false
+      }
+    ],
+    "published_consumer_ledger": "No newly confirmed published-carrier finding in this lane: the digest Hessian alert is an assigned-to-another-batch draft frontier item, so its route is the ordinary owner lane, not published maintenance.",
+    "metadata_integration": {
+      "lock_owner": "step5-v2-initial-r1-u84",
+      "lock_released": true,
+      "paths": [
+        "research/numerical-optimization-dynamics-2026-10-16-batch-84.proof-contracts.json",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-84.pages.json",
+        "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/gauss-newton-and-levenberg-marquardt-methods.md"
+      ],
+      "changes": "Under acquire/reread/edit/check/release, regenerated only the seven assigned contract step/fact projections, updated exact LM Definition mirrors in the owning contract, recorded current repair rationale without claiming independent review, corrected positive-dimension boundary explanations, synchronized the two changed theorem Statement projections, and corrected the page contraction summary to q=(kappa+MLR)/sigma²<1."
+    },
+    "remaining_owner_work": "Two out-of-assignment mathematical findings and the retained Step-4 algorithm proof-placement concern are routed in this report. No unresolved mathematics remains in the seven assigned tuple repairs; this report does not claim whole-run closure or independent acceptance of these repairs.",
+    "statement_section_comparisons": [
+      {
+        "id": "alg-safeguarded-levenberg-marquardt",
+        "before_sha256": "853b924cc517e354bd43495bfede10fffd6f734942ad4a83d9dd5009cd610b38",
+        "after_sha256": "1ade410f0c8d3cdaef36c0e3930023afff5c5def3425a64acf5c75c92f9d70a6",
+        "exact_change": "Augmented residual s_lambda=[r(x);0] renamed b_lambda=[r(x);0] and the solver call uses b_lambda; scalar certificate s_lambda>0 unchanged."
+      },
+      {
+        "id": "thm-gauss-newton-local-linear-contraction",
+        "before_sha256": "c23f1e4c39ba05dc7ea78724b8a681227705600f053dda24037fd5d41ae874bd",
+        "after_sha256": "0c2108b9c95da2ce8776e7ff8460f695e939eb486e6e13158169fcfbe78e49ad",
+        "exact_change": "Added Let m,n>=1 before the original residual hypothesis; every other Statement clause is unchanged."
+      },
+      {
+        "id": "thm-gauss-newton-zero-residual-quadratic-convergence",
+        "before_sha256": "5cf44c28877007a6fa863dfded3722d961f634638926862b9e94145869be7038",
+        "after_sha256": "d0a0feff3528dfdcd4a3d2c1d8e01cf066ec7d0c3ae63fe05c2c201e68154b45",
+        "exact_change": "Added Let m,n>=1 before the original residual hypothesis; every other Statement clause is unchanged."
+      }
+    ],
+    "graph_inventory": "Read-only current deps/reference/body-link scan confirms precisely the four downstream item IDs listed, with zero direct item consumers of the quadratic theorem. All other assigned Statement/Definition section hashes match the frozen pack. No absent-graph mathematical use or outside-frontier interface consumer was found."
+  },
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-84.proof-contracts.json": "3633a86ad47ac8abbfdaf55ea06993845ebbccf3ebd2975d1d90e64c3fb17669",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-84.pages.json": "cf2eb6686637df3a9ac5f79a39663cfb31cfc720769dd74b89dc30f52ea5300d"
+  }
+}

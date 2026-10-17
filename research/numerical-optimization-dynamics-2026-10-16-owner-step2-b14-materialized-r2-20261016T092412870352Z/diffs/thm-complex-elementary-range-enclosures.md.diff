@@ -1,0 +1,89 @@
+--- before/items/thm-complex-elementary-range-enclosures.md
++++ proposed/items/thm-complex-elementary-range-enclosures.md
+@@ -85,24 +85,67 @@
+ identity with $y<0$. The addition identities shift the angle in quadrant II
+ by $\pi-A(t)$, reversing only the cosine sign, and in quadrant III by
+ $-\pi+A(t)$, reversing both signs; substitution of the positive coordinate
+-ratios again gives $(x/|z|,y/|z|)$. The range of $A$ in [L4] places these
+-angles in the respective subintervals of $(-\pi,\pi)$, so they are the
+-principal arguments. If a quadrant piece touches an axis and its denominator
+-interval contains zero, [L4] places every argument in the corresponding
+-coarse quadrant interval used by the algorithm; the listed axis values are
+-handled separately. The initial domain test excludes the origin and negative
+-real axis, so these pieces cover every admissible point. On the positive real
+-axis the argument is zero, while the imaginary axes use $\pm\pi/2$.
+-[given, L1, L2, L3, L4, construct]
++ratios again gives $(x/|z|,y/|z|)$. The range of $A$ in [L4] places these angles in the respective
++subintervals of $(-\pi,\pi)$, so they are the principal arguments. On the
++admissible closure of quadrant I the argument lies in $[0,\pi/2]$; on
++quadrants II, III and IV it lies respectively in $[\pi/2,\pi]$,
++$[-\pi,-\pi/2]$ and $[-\pi/2,0]$. Since $p_-\le\pi\le p_+$ and
++$p_->0$, these sets are contained respectively in the algorithm's fixed
++sectors $S_{\rm I},S_{\rm II},S_{\rm III},S_{\rm IV}$. A finite raw
++ratio-based argument interval contains each exact argument by [L2]–[L3],
++so intersecting it with its sector retains every exact argument. Each
++nonempty quadrant piece has an actual point and hence an argument in that
++intersection; an empty intersection cannot be used for a success claim and
++is explicitly rejected. When the denominator reaches zero, the sector alone
++is a sound enclosure. The common final outward conversion $H$ preserves
++these containments; an overflow gives no finite claim.
+ 
+-1.3 The fixed strict-sign and axis pieces of a smaller rectangle are contained
+-in the corresponding pieces of a larger rectangle. Where the denominator
+-excludes zero, [L2]–[L3] preserve inclusion through the arctangent formulas.
+-If enlargement makes a quadrant denominator reach zero, its coarse sector
+-interval from step 1.2 contains both the narrower argument interval and the
+-axis value; the resulting coordinatewise hull therefore preserves inclusion.
+-If a rectangle meets zero or the negative real branch cut, the algorithm
+-returns `domain-error`; an unresolved piece returns a non-finite status, so no
+-invalid finite enclosure is asserted. [step 1.1, step 1.2, L2, L3, L4,
+-algebra] ∎
++On the positive real axis the exact argument is zero, and on the positive
++and negative imaginary axes it is respectively $\pi/2$ and $-\pi/2$.
++Thus $H([0,0])$, $H(P_N/2)$ and $H(-P_N/2)$ enclose the axis values.
++The initial domain test excludes the origin and negative real axis. The
++strict-sign pieces, their closures and these axis pieces therefore cover
++every admissible point. The radial enclosure established above and the
++converted argument enclosure jointly contain its principal logarithm;
++taking the coordinatewise hull over every finite piece contains the full
++image. Any failed piece prevents a finite hull return.
++[given, L1, L2, L3, L4, construct, algebra]
+ 
++1.3 Fix the DAG, designated output, constant enclosures, format and $N$ in
++the Statement, so both calls use the same $P_N$, sectors and conversion $H$.
++Every nonempty strict-sign piece of a smaller input rectangle, after closure,
++is contained in the corresponding piece of the larger rectangle. Every axis
++piece likewise has a corresponding containing axis piece, with the same
++argument interval. The radial expression $\ln\sqrt{X^2+Y^2}$ preserves
++inclusion on these nested pieces by [L2]–[L3].
++
++For a quadrant whose denominator excludes zero in both calls, outward
++quotients and the fixed real arctangent evaluator give nested finite raw
++argument intervals $A\subseteq A'$ by [L2]–[L3]. Exact translations by the
++same $P_N$ and sign changes in the quadrant formulas preserve this inclusion.
++Intersection with the same sector gives
++$A\cap S_q\subseteq A'\cap S_q$. The greatest-lower and least-upper
++rounding definitions make $H$ inclusion-preserving, hence the converted
++argument intervals are nested as well. If enlargement changes a ratio branch
++to a zero-denominator coarse branch, the smaller preconversion interval is
++$A\cap S_q\subseteq S_q$, and therefore
++$H(A\cap S_q)\subseteq H(S_q)$. If both branches are coarse they use the
++same $H(S_q)$. The reverse change under enlargement is impossible: a
++containing denominator interval cannot exclude zero when the smaller one
++contains it. These cases exhaust quadrant branch transitions. Axis pieces
++remain present under enlargement and use the identical converted axis
++intervals, so their corresponding rectangles are nested too.
++
++Taking coordinatewise hulls preserves the inclusions for all corresponding
++pieces, including any additional pieces in the larger call. Complex
++exponential preserves inclusion through its fixed real component evaluations
++and rectangle operations in step 1.1. Together with [L2]–[L3], these primitive
++results give soundness and inclusion for the same finite typed DAG by
++induction in its prescribed topological order; fixed input-independent
++constants start the induction, and every designated output inherits it.
++A rectangle meeting zero or the negative real branch cut at a Log node
++returns `domain-error`; a failed piece, empty argument intersection or failed
++conversion returns its specified non-finite status. Such a branch gives no
++finite enclosure or nesting claim.
++[step 1.1, step 1.2, L1, L2, L3, L4, algebra, induction] ∎
++

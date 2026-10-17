@@ -1,0 +1,11 @@
+Research-only proposed six finite witnesses. No module/fixture, syntax check, self-test or gate has been executed.
+
+checks.mjs exports numericalPolynomialQuadratureChecks (numerical-polynomial-quadrature-fixture, three explicit variants) and numericalQuasiNewtonChecks (numerical-quasi-newton-fixture, three explicit variants). Both use the proposed shared exact rational core. Importing declares pure functions; it runs no cases. An omitted fixture intentionally selects the fixed bounded all-case suite for existing registry self-test API compatibility. Unknown selector or unsupported numerical parameter rejects.
+
+Quadrature independently computes polynomial node samples/quadrature sums and monomial antiderivative increments: x² on[0,1] midpoint1/4/integral1/3/trapezoid1/2, and x²/x³ Simpson on[0,2] at n2. These are finite cases, not proofs of convex bracketing or degree-three exactness generally.
+
+BFGS recomputes the actual quadratic gradient/direction/exact line minimizer, step and curvature, rank-two Hessian matrix, secant/SPD and concrete Wolfe conditions. It does not claim the finite bracketing search returns exactly13/35. The negative-curvature trial recomputes the indefinite raw formal update, Powell mixing, damped SPD/secant, and rejection by both curvature tests; it does not relabel that rejected trial a successful iteration. The storage case counts declared finite row and correction-pair lengths, not operation totals or measured backend memory.
+
+contract-patches.json provides exact six old/new finite_smoke arrays and current source raw guards. Full before/proposed batch20/71 JSON and diffs are review context. Only those six arrays differ semantically. All proposed asserts are literal excerpts of actual current complete proof paragraphs; all six complete actual source carriers were read. No source or Statement/Definition change is proposed.
+
+Root integration must apply array-level guards to current contracts, preserving concurrent boundary changes elsewhere, then install reviewed code under tools/ with the shared-core import path adjusted. Root owns the main registry, actual scoped fixture execution, full native preparation/battery and all acceptance. No numerical outcomes are claimed here.

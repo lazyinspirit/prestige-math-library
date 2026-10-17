@@ -1,0 +1,87 @@
+---
+id: def-ultrafilter
+kind: definition
+title: "Ultrafilter"
+status: published
+origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+deps: [def-filter, def-maximal-element, def-partial-order]
+justified_by: []
+aliases: [def-maximal-filter]
+landmark: true
+short: "maximal filter"
+verification:
+  verified:
+    model: "gpt-6-sol"
+    verdict: "locally-reviewed"
+    date: 2026-09-26
+    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
+    delegated_by: "owner"
+sources:
+  scraped: []
+  references:
+    - title: "Ultrafilter (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter"
+    - title: "Ultrafilter (set theory) (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Ultrafilter_(set_theory)"
+pipeline_run: null
+---
+
+## Definition
+
+Let $X$ be a set and let $\mathrm{Filt}(X)$ be the set of all filters on $X$
+([[def-filter]]). Since every filter is a subset of $\mathcal{P}(X)$, the family
+$\mathrm{Filt}(X)$ is a subset of $\mathcal{P}(\mathcal{P}(X))$ and is therefore a
+set, carved out by Separation. Inclusion is a partial order on it
+([[def-partial-order]]): $\subseteq$ is reflexive, antisymmetric by
+extensionality, and transitive.
+
+An **ultrafilter on $X$** is a filter on $X$ that is a **maximal element** of
+$(\mathrm{Filt}(X), \subseteq)$ ([[def-maximal-element]]): a filter $\mathcal{U}$
+on $X$ such that no filter on $X$ strictly contains $\mathcal{U}$, equivalently
+such that every filter $\mathcal{G}$ on $X$ with $\mathcal{U} \subseteq
+\mathcal{G}$ satisfies $\mathcal{G} = \mathcal{U}$.
+
+An ultrafilter is **principal** if it is of the form
+$\{\, A \subseteq X : x \in A \,\}$ for some $x \in X$, and **free**, or
+**non-principal**, otherwise.
+
+## Remarks
+
+- **Maximal is not greatest, and here the distinction is not academic.** A
+  greatest element of $(\mathrm{Filt}(X), \subseteq)$ would be a filter containing
+  every filter, and as soon as $X$ has two distinct points $x \neq y$ no such
+  filter exists: it would contain the principal filters at $x$ and at $y$, hence
+  both $\{x\}$ and $\{y\}$, hence their intersection $\emptyset$, which
+  properness forbids ([[def-filter]]). So on such an $X$ there is no **greatest**
+  filter, and reading "maximal" as "greatest" is the error recorded in
+  [[fs-maximal-is-greatest]]. Note what that argument does and does not deliver.
+  It says nothing whatever about which filters are **maximal**, nor that any is:
+  the absence of a greatest element is compatible with there being no maximal
+  element at all. What does follow, from maximality itself and not from the
+  argument above, is that two distinct ultrafilters are never comparable, since
+  $\mathcal{U} \subseteq \mathcal{V}$ with $\mathcal{U}$ maximal forces
+  $\mathcal{V} = \mathcal{U}$. How many ultrafilters there are is a separate
+  question again, which the argument above does not touch and which this library
+  does not answer at all: the ultrafilter lemma gives EXISTENCE (every filter
+  extends to an ultrafilter), never a count, and [[thm-ultrafilter-lemma]] says so
+  in its own remarks. See the existence bullet below.
+- **Maximality is a negative condition**, which is what makes it usable: it says
+  nothing can be added, not that everything is already there. The positive
+  reformulation, that $\mathcal{U}$ decides every subset by containing either $A$
+  or its complement, is [[thm-ultrafilter-characterisation]], and it is the form
+  used in practice.
+- **Existence is free; the published extension theorem uses choice.** On every
+  nonempty set, the principal filter at any point is an ultrafilter, as the next
+  bullet verifies directly. [[thm-ultrafilter-lemma]] proves from Zorn's lemma
+  that every filter extends to an ultrafilter. Applied to the filter of tails
+  on $\mathbb{N}$, it produces a free ultrafilter under its stated hypotheses,
+  as [[fs-every-ultrafilter-principal]] verifies.
+- Principal ultrafilters really are ultrafilters: $\{A \subseteq X : x \in A\}$
+  is a filter, and if a filter $\mathcal{G}$ contains it then any $B \in
+  \mathcal{G}$ must meet $\{x\}$, since otherwise $B \cap \{x\} = \emptyset$ lies
+  in $\mathcal{G}$, so $x \in B$ and $\mathcal{G}$ is contained in the principal
+  filter at $x$. This is the one family of examples available without any choice
+  principle.

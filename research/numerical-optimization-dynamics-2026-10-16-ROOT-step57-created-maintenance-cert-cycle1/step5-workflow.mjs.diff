@@ -1,0 +1,67 @@
+--- step5-workflow.mjs
++++ step5-workflow.mjs
+@@ -14,6 +14,7 @@
+ import { supportingQuoteHistory } from './step5-quote-history.mjs';
+ import { loadInitialMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
+ import { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';
++import { createdMaintenanceBasis } from './step5-created-maintenance-cert.mjs';
+ import { verdictIsCurrent } from './judge-currency.mjs';
+ import { gateDiagnostics } from './step5-gate-diagnostics.mjs';
+ import { FATAL_TYPES } from './step5-adjudication-compat.mjs';
+@@ -2009,6 +2010,16 @@
+   requireValue(sha256===digest(payload),'Step 5 certification payload changed');
+   const seen=new Set();for(const item of row.items){requireValue(!seen.has(item.id)&&['item_sha256','context_sha256','guard_sha256'].every(k=>/^[a-f0-9]{64}$/.test(item[k]??'')),`malformed Step 5 certificate item ${item.id}`);seen.add(item.id);}
+   const created=new Set();for(const item of row.creations??[]){requireValue(!created.has(item.id)&&seen.has(item.id)&&typeof item.author_result==='string',`malformed Step 5 creation ${item.id}`);created.add(item.id);creationRegistration(root,run,item);}
++  requireValue(Array.isArray(row.maintenance_certifications??[]),'malformed maintenance certification basis');
++  const maintenanceSeen=new Set();
++  for(const entry of row.maintenance_certifications??[]){
++    const item=row.items.find(x=>x.id===entry.id);
++    requireValue(entry.basis==='native-consumer-maintenance'&&created.has(entry.id)&&!maintenanceSeen.has(entry.id)
++      &&entry.after_sha256===item?.item_sha256&&entry.after_guard_sha256===item?.guard_sha256
++      &&['collection','report','dispatch','prompt'].every(k=>typeof entry[k]==='string'&&row.evidence[entry[k]])
++      &&typeof entry.reason==='string'&&entry.reason.trim().length>=40,'malformed created-helper maintenance basis');
++    maintenanceSeen.add(entry.id);
++  }
+   verifyEvidence(row.evidence,{root,run,certificate:row});
+   return row;
+ }
+@@ -2017,7 +2028,8 @@
+   const savedPath=effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`certification-${phase}-${round}.json`));
+   if(existsSync(savedPath)) {
+     const saved=read(savedPath),{sha256,...payload}=saved;requireValue(sha256===digest(payload),'completed certification payload changed');verifyEvidence(saved.evidence,{root,run});
+-    const frontier=gateFrontier(root,run),scoped=saved.items.filter(row=>frontier.has(row.id));
++    const frontier=gateFrontier(root,run),maintained=new Set((saved.maintenance_certifications??[]).map(row=>row.id));
++    const scoped=saved.items.filter(row=>frontier.has(row.id)||maintained.has(row.id));
+     const current=hashes(root,run);for(const row of scoped)requireValue(row.guard_sha256===current[row.id],`stale completed certification ${row.id}`);
+     const contexts=contextHasher(root,scoped.map(row=>row.id));
+     for(const row of scoped){const now=contexts.get(row.id);requireValue(now?.item_sha256===row.item_sha256&&now?.context_sha256===row.context_sha256,`stale completed certification context ${row.id}`);}
+@@ -2055,7 +2067,10 @@
+   const allowed=gateFrontier(root,run);
+   for(const id of currentImpacts)if((!allowed||allowed.has(id))&&!reviewed.has(id))throw Error(`new downstream consumer requires owner review: ${id}`);
+   for(const row of allReviews)if(row.post_sha256!==current[row.id]&&reviewed.get(row.id)===row)throw Error(`review changed before certification: ${row.id}`);
+-  for(const id of changed) if(!reviewed.has(id)&&priorItems.get(id)?.guard_sha256!==current[id])throw Error(`uncertified change ${id}`);
++  // A completed native outside-maintenance repair is a separate typed basis,
++  // never a synthesized frontier review or a rewritten creation certificate.
++  const maintenance=createdMaintenanceBasis(root,run,phase,round,{prior,result,progress,eligible,items:library,current});
++  for(const id of changed) if(!reviewed.has(id)&&!maintenance.basis.has(id)&&priorItems.get(id)?.guard_sha256!==current[id])throw Error(`uncertified change ${id}`);
+   const ids=[...new Set([...changed,...reviewed.keys(),...priorItems.keys()])].sort();
+   const contexts=contextHasher(root,ids); // One corpus read, after every writer drains.
+   for(const id of ids)requireValue(contexts.has(id),`missing certification context: ${id}`);
+@@ -2066,14 +2081,15 @@
+       `stale root owner review context before certification: ${id}`);
+   }
+   if(diff(rawBefore,rawHashes(root,run)).some(id=>stable.has(id)))throw Error('relevant item writer overlapped certification');
+-  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence};
++  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence};
+   for(const name of ['frontier.json','baseline.json','step4-verdicts.json',`${phase}-${round}-closed.json`,`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
+-  const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??priorItems.get(id)?.reason}));
++  const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??maintenance.basis.get(id)?.reason??priorItems.get(id)?.reason}));
+   const creationRows=[...(prior?.creations??[]),...(sourceResult?.created_items??[]),...(result.created_items??[])],creationById=new Map();
+   for(const row of creationRows){const old=creationById.get(row.id);if(old&&JSON.stringify(old)!==JSON.stringify(row))throw Error(`conflicting creation provenance: ${row.id}`);creationById.set(row.id,row);}
+   const creations=[...creationById.values()].sort((a,b)=>a.id.localeCompare(b.id));
+   for(const row of creations){creationRegistration(root,run,row);requireValue(current[row.id],`created item missing at certification: ${row.id}`);}
+   const certificate={version:2,run,phase,round,at:new Date().toISOString(),items,creations,evidence,changed,
++    ...(maintenance.records.length?{maintenance_certifications:maintenance.records}:{}),
+     latest_adjudication_round:phase==='impact-repeat'?round:(prior?.latest_adjudication_round??null)};
+   if(phase==='impact-repeat') {
+     const frontier=read(join(dir,'frontier.json'));

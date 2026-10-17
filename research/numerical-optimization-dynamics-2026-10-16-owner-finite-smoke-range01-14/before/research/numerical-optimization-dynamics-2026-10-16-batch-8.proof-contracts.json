@@ -1,0 +1,2919 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "8",
+  "scope": [
+    "def-rare-event-efficiency-criteria",
+    "lem-standard-normal-mills-ratio",
+    "alg-cross-entropy-pilot-production",
+    "def-nested-rare-event-levels",
+    "def-finite-budget-stopped-event-kernel",
+    "lem-sir-bounded-potential-unnormalized-update-variance",
+    "thm-zero-variance-importance-sampling-proposal",
+    "thm-gaussian-tail-exponential-tilting",
+    "thm-cross-entropy-production-unbiased-given-pilot",
+    "lem-nested-level-probability-factorization",
+    "alg-independent-fixed-level-splitting",
+    "alg-fixed-level-sir-splitting",
+    "lem-finite-budget-stopped-normalizer",
+    "lem-stopped-kernel-discretization-bias",
+    "thm-independent-splitting-product-moments-and-work",
+    "thm-fixed-level-sir-estimator-unbiased",
+    "thm-fixed-level-sir-absolute-mse-bound",
+    "cex-sir-l2-bound-from-conditional-means-is-false",
+    "rem-sir-finite-particle-error-bound-scope",
+    "ex-gaussian-barrier-exponential-tilting",
+    "ex-queue-overflow-and-redundant-splitting-work",
+    "ex-cross-entropy-pilot-misses-event-support",
+    "cex-dependent-level-samples-bias-product-estimator",
+    "ex-sir-zero-particle-prefix-positive-event",
+    "ex-finite-budget-crossing-misses-between-grid-times",
+    "ex-importance-sampling-finite-mean-infinite-second-moment",
+    "thm-fixed-level-sir-relative-mse-under-conditional-event-second-moment-bounds"
+  ],
+  "contracts": {
+    "def-rare-event-efficiency-criteria": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "lem-standard-normal-mills-ratio": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Since $\\phi'(t)=-t\\phi(t)$, for $t\\ge x>0$ we have $\\phi(t)\\le t\\phi(t)/x$. Integrating and using $\\int_x^\\infty t\\phi(t)\\,dt=\\phi(x)$, obtained by integrating $-\\phi'$, gives $\\bar\\Phi(x)\\le\\phi(x)/x$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Integration by parts on $[x,R]$, followed by $R\\to\\infty$, gives $ \\bar\\Phi(x)=\\frac{\\phi(x)}x-\\int_x^\\infty\\frac{\\phi(t)}{t^2}\\,dt. $ The remainder is at most $\\bar\\Phi(x)/x^2$, hence $\\bar\\Phi(x)(1+x^{-2})\\ge\\phi(x)/x$, which is the stated lower bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "Dividing the two bounds by $\\phi(x)/x>0$ traps the ratio $\\bar\\Phi(x)/(\\phi(x)/x)$ between $x^2/(x^2+1)$ and $1$, so it tends to $1$. Taking logarithms gives $\\log\\bar\\Phi(x)=-x^2/2-\\log x-\\tfrac12\\log(2\\pi)+o(1)$; division by $-x^2/2$ yields the asserted logarithmic limit.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the stated positive-domain hypothesis; the excluded zero case is not claimed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "AC is inherited through the definition of the standard-normal law; the tail inequalities and integration by parts add no choice."
+        }
+      ],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "alg-cross-entropy-pilot-production": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "def-nested-rare-event-levels": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "def-finite-budget-stopped-event-kernel": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition specifies the zero-budget branch explicitly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "lem-sir-bounded-potential-unnormalized-update-variance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-iid-monte-carlo-mean-moments",
+          "source_section": "Statement",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be a real IID sequence. If $\\mathbb E|Y_1|<\\infty$ and $\\mu=\\mathbb E[Y_1]$, then $\\mathbb E[\\bar Y_n]=\\mu$ for every $n\\ge1$. If also $\\mathbb E[Y_1^2]<\\infty$ and $\\sigma^2=\\operatorname{Var}(Y_1)$, then $\\operatorname{Var}(\\bar Y_n)=\\sigma^2/n$ for every $n\\ge1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "If $a>0$, then $za\\,\\eta^N(f)=\\frac zN\\sum_{i=1}^NG(Y_i)f(Y_i)$ by the definition of $\\eta^N$. If $a=0$, each nonnegative $G(Y_i)=0$, so both sides equal zero for any fallback $\\eta^N$. Thus the identity holds on every proposal outcome.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The variables $H_i=G(Y_i)f(Y_i)$ are IID and lie in $[0,1]$. For $H=H_1$, $H^2\\le H$, so [F3] gives $\\operatorname{Var}(H)\\le\\mathbb EH-(\\mathbb EH)^2\\le1/4$, since $u(1-u)\\le1/4$ for $u\\in[0,1]$. By [F2], the average $N^{-1}\\sum_iH_i$ has mean $\\nu M(Gf)$ and variance at most $1/(4N)$. Multiplication by $z$ and step 1.1 give both claims.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "one-proposal-bernoulli-update",
+          "asserts": "With z=1, N=1, and G(Y)f(Y) Bernoulli(1/2), the update has mean 1/2 and variance 1/4, equal to the bound z^2/(4N).",
+          "claim": "The one-step mean and variance formulas at a finite endpoint case.",
+          "checked_in": "Step 2.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; its finite or positive hypotheses govern the domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the zero empirical-potential average and proves that the fallback contributes zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no additional unit-parameter branch beyond the value-one cases stated in its hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats a=0 and the zero-weight fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes z=0, z=1, G=0, G=1, f=0, and f=1 in the closed unit intervals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the finite constructions and declared suppliers; it makes no new choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "thm-zero-variance-importance-sampling-proposal": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rare-event-efficiency-criteria",
+          "source_section": "Definition",
+          "quote": "Let $(P_\\lambda,A_\\lambda)_{\\lambda\\in\\Lambda}$ be a family of probability measures and measurable events with $p_\\lambda=P_\\lambda(A_\\lambda)>0$ and $p_\\lambda\\to0$ along the stated rare-event limit. An estimator $\\widehat p_\\lambda$ is **unbiased with finite variance** when $\\mathbb E[\\widehat p_\\lambda]=p_\\lambda$ and $\\operatorname{Var}(\\widehat p_\\lambda)<\\infty$. Its **relative error** is\n$\n\\operatorname{RE}(\\widehat p_\\lambda)=\\frac{\\sqrt{\\operatorname{Var}(\\widehat p_\\lambda)}}{p_\\lambda}.\n$\nIt has **bounded relative error** if these relative errors remain bounded for all sufficiently rare indices. It is **logarithmically efficient** if $\\widehat p_\\lambda\\ge0$, its second moment is finite and positive, and\n$\n\\lim_{\\lambda}\\frac{\\log\\mathbb E[\\widehat p_\\lambda^2]}{\\log(p_\\lambda^2)}=1.\n$\nLogarithmic efficiency is a weaker asymptotic property than bounded relative error; the definitions impose no implication between an algorithm's efficiency and its proposal-fitting success.\n\nFor a specified cost model, let $W_\\lambda$ be the expected work of one estimator replication. Record both its variance and its **variance-work product** $W_\\lambda\\operatorname{Var}(\\widehat p_\\lambda)$; for relative precision, record $W_\\lambda\\operatorname{Var}(\\widehat p_\\lambda)/p_\\lambda^2$. These quantities depend on the cost model. Comparing algorithms requires the same declared work convention.\n\nFor a single event $A$ under a probability measure $P$, put $p=P(A)>0$. If $P$ has density $f$ with respect to $\\mu$, the **zero-variance event proposal** is the probability density\n$\nq^*(x)=\\frac{\\mathbf 1_A(x)f(x)}{p}.\n$\nIt is a formal benchmark because its normalizing constant is the unknown event probability $p$. Ordinary importance-sampling estimators and their weighted-second-moment condition are defined in [[alg-importance-sampling]] and [[thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-importance-sampling",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. An **unnormalized target density** is a measurable function $\\tilde p:\\mathsf X\\to[0,\\infty)$ with\n$$Z_p:=\\int_{\\mathsf X}\\tilde p\\,d\\mu\\in(0,\\infty).$$\nThe target probability measure is $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. A **proposal density** is a measurable $q:\\mathsf X\\to[0,\\infty)$ with $\\int q\\,d\\mu=1$; write $Q(dx)=q(x)\\mu(dx)$. The input integrand $f:\\mathsf X\\to\\mathbb R$ is measurable, and the input sample $X_1,\\ldots,X_n$ is IID with law $Q$, in the sense of [[def-identically-distributed-and-iid-random-variables]]. The normalizing constant $Z_p$ is known for this algorithm.\n\n**Admissible conditions for an unbiased estimate:** $n\\ge1$, $q>0$ $\\mu$-almost everywhere on $\\{x:f(x)\\tilde p(x)\\ne0\\}$, and the random variable\n$$Y:=\\begin{cases}f(X_1)\\tilde p(X_1)/(Z_pq(X_1)),&q(X_1)>0,\\\\0,&q(X_1)=0\\end{cases}$$\nis integrable under $Q$. The support condition makes the value on $q=0$ immaterial to the target integral.\n\n**Well-defined weights:** The reciprocal map $r(s)=1/s$ for $s>0$ and $r(s)=0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by the measurable inputs, makes the piecewise weight and weighted integrand measurable ([[thm-composition-with-borel-functions-preserves-measurability]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\n**Procedure and output:** For each supplied draw $X_i$, set $Y_i=f(X_i)\\tilde p(X_i)/(Z_pq(X_i))$ when $q(X_i)>0$ and set $Y_i=0$ otherwise. Return\n$$\\hat\\mu_{\\mathrm{IS}}:=\\frac1n\\sum_{i=1}^nY_i.$$\nSeparate variance and central limit claims require the corresponding weighted second-moment hypothesis.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The density $q^*$ is nonnegative and $\\int q^*\\,d\\mu=P(A)/p=1$, so it defines a proposal probability measure $Q^*$ supported on $\\{x\\in A:f(x)>0\\}$ up to a $Q^*$-null set.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "For $Q^*$-almost every $X$, we have $X\\in A$ and $f(X)>0$. Substitution of $q^*(X)=f(X)/p$ into [F2] gives $Z=p$ almost surely. Every term in the IID sample average is therefore the same constant $p$; its expectation is $p$ and its variance is zero.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the unit-probability case in the stated formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "thm-gaussian-tail-exponential-tilting": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-standard-normal-mills-ratio",
+          "source_section": "Statement",
+          "quote": "Let $\\phi(x)=(2\\pi)^{-1/2}e^{-x^2/2}$ be the standard-normal density and $\\bar\\Phi(x)=\\int_x^\\infty\\phi(t)\\,dt$. For every $x>0$,\n$\n\\frac{x}{x^2+1}\\phi(x)\\le \\bar\\Phi(x)\\le\\frac{\\phi(x)}{x}.\n$\nConsequently $\\bar\\Phi(x)\\sim\\phi(x)/x$ and $\\log\\bar\\Phi(x)\\sim -x^2/2$ as $x\\to\\infty$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-rare-event-efficiency-criteria",
+          "source_section": "Definition",
+          "quote": "Let $(P_\\lambda,A_\\lambda)_{\\lambda\\in\\Lambda}$ be a family of probability measures and measurable events with $p_\\lambda=P_\\lambda(A_\\lambda)>0$ and $p_\\lambda\\to0$ along the stated rare-event limit. An estimator $\\widehat p_\\lambda$ is **unbiased with finite variance** when $\\mathbb E[\\widehat p_\\lambda]=p_\\lambda$ and $\\operatorname{Var}(\\widehat p_\\lambda)<\\infty$. Its **relative error** is\n$\n\\operatorname{RE}(\\widehat p_\\lambda)=\\frac{\\sqrt{\\operatorname{Var}(\\widehat p_\\lambda)}}{p_\\lambda}.\n$\nIt has **bounded relative error** if these relative errors remain bounded for all sufficiently rare indices. It is **logarithmically efficient** if $\\widehat p_\\lambda\\ge0$, its second moment is finite and positive, and\n$\n\\lim_{\\lambda}\\frac{\\log\\mathbb E[\\widehat p_\\lambda^2]}{\\log(p_\\lambda^2)}=1.\n$\nLogarithmic efficiency is a weaker asymptotic property than bounded relative error; the definitions impose no implication between an algorithm's efficiency and its proposal-fitting success.\n\nFor a specified cost model, let $W_\\lambda$ be the expected work of one estimator replication. Record both its variance and its **variance-work product** $W_\\lambda\\operatorname{Var}(\\widehat p_\\lambda)$; for relative precision, record $W_\\lambda\\operatorname{Var}(\\widehat p_\\lambda)/p_\\lambda^2$. These quantities depend on the cost model. Comparing algorithms requires the same declared work convention.\n\nFor a single event $A$ under a probability measure $P$, put $p=P(A)>0$. If $P$ has density $f$ with respect to $\\mu$, the **zero-variance event proposal** is the probability density\n$\nq^*(x)=\\frac{\\mathbf 1_A(x)f(x)}{p}.\n$\nIt is a formal benchmark because its normalizing constant is the unknown event probability $p$. Ordinary importance-sampling estimators and their weighted-second-moment condition are defined in [[alg-importance-sampling]] and [[thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ordinary-importance-sampling-is-unbiased",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space, let $\\tilde p\\ge0$ and $q\\ge0$ be measurable densities with $Z_p=\\int\\tilde p\\,d\\mu\\in(0,\\infty)$ and $\\int q\\,d\\mu=1$, and set $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$ and $Q(dx)=q(x)\\mu(dx)$. Let $f:\\mathsf X\\to\\mathbb R$ be measurable with $\\int|f|\\tilde p\\,d\\mu<\\infty$. Suppose $q>0$ $\\mu$-almost everywhere on $\\{f\\tilde p\\ne0\\}$ and $X_1,\\ldots,X_n$ are IID with law $Q$. For the ordinary importance sampling estimator in [[alg-importance-sampling]],\n$$\\mathbb E_Q[\\hat\\mu_{\\mathrm{IS}}]=\\int f\\,d\\pi.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+          "source_section": "Statement",
+          "quote": "Use the hypotheses and notation of [[thm-ordinary-importance-sampling-is-unbiased]]. Define\n$$Y_i:=\\begin{cases}f(X_i)\\tilde p(X_i)/(Z_pq(X_i)),&q(X_i)>0,\\\\0,&q(X_i)=0\\end{cases},\\qquad \\theta:=\\int f\\,d\\pi,\\qquad \\sigma^2:=\\operatorname{Var}_Q(Y_1).$$\nIf $\\mathbb E_Q[Y_1^2]<\\infty$, then $\\hat\\mu_{\\mathrm{IS}}$ has finite variance and\n$$\\operatorname{Var}_Q(\\hat\\mu_{\\mathrm{IS}})=\\frac{\\sigma^2}{n}=\\frac1n\\left(\\frac1{Z_p^2}\\int_{\\{q>0\\}}\\frac{f(x)^2\\tilde p(x)^2}{q(x)}\\,d\\mu(x)-\\theta^2\\right).$$\nThis finite-sample conclusion is choice-free. For the central limit conclusion, let $(X_i)_{i\\ge1}$ be an IID sequence with law $Q$, and apply the estimator to its first $n$ draws for each $n\\ge1$. If, in addition, AC holds, then\n$$\\sqrt n\\bigl(\\hat\\mu_{\\mathrm{IS}}-\\theta\\bigr)\\Rightarrow N(0,\\sigma^2).$$\nNo finite variance or normal-limit claim is made when the weighted second moment is infinite.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-iid-monte-carlo-mean-moments",
+          "source_section": "Statement",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be a real IID sequence. If $\\mathbb E|Y_1|<\\infty$ and $\\mu=\\mathbb E[Y_1]$, then $\\mathbb E[\\bar Y_n]=\\mu$ for every $n\\ge1$. If also $\\mathbb E[Y_1^2]<\\infty$ and $\\sigma^2=\\operatorname{Var}(Y_1)$, then $\\operatorname{Var}(\\bar Y_n)=\\sigma^2/n$ for every $n\\ge1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "For every $x\\in\\mathbb R$, the density ratio is $\\phi(x)/\\phi(x-a)=\\exp(-ax+a^2/2)$. The proposal has positive density on $A_a$, and $0\\le Z_a\\le e^{-a^2/2}$ on $A_a$, so the event-support and integrability hypotheses of [F4] hold. Hence $\\mathbb E_{Q_a}Z_a=p_a$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "Direct integration gives $ \\mathbb E_{Q_a}Z_a^2=\\int_a^\\infty e^{-2ax+a^2}\\phi(x-a)\\,dx. $ With $y=x-a$, the integrand becomes $e^{-2ay-a^2}\\phi(y)=e^{a^2}\\phi(y+2a)$; the integral is $e^{a^2}\\bar\\Phi(2a)$, which is finite for every $a>0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "For the average of $n\\ge1$ IID contributions, [F6] gives\n$$\n\\mathbb E[\\widehat p_{a,n}^2]=p_a^2+\\frac{\\mathbb E[Z_a^2]-p_a^2}{n},\\qquad\np_a^2\\le\\mathbb E[\\widehat p_{a,n}^2]\\le p_a^2+\\mathbb E[Z_a^2].\n$$\nBy [F2], $\\log p_a^2=-a^2+o(a^2)$ and $\\log\\mathbb E[Z_a^2]=a^2+\\log\\bar\\Phi(2a)=-a^2+o(a^2)$. Therefore also $\\log(p_a^2+\\mathbb E[Z_a^2])=-a^2+o(a^2)$. The two bounds squeeze $\\log\\mathbb E[\\widehat p_{a,n}^2]=-a^2+o(a^2)$, while $2\\log p_a=-a^2+o(a^2)$. By [F3], the logarithmic-efficiency ratio tends to $1$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "Mills' equivalent in [F2] yields $ \\frac{\\mathbb E Z_a^2}{p_a^2}\\sim \\frac{e^{a^2}\\phi(2a)/(2a)}{(\\phi(a)/a)^2} =\\sqrt{\\pi/2}\\,a. $ Using [F4] and [F5], $\\operatorname{RE}(\\widehat p_{a,1})^2=\\mathbb E Z_a^2/p_a^2-1\\sim\\sqrt{\\pi/2}\\,a$; taking square roots gives the stated divergence.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the stated positive-domain hypothesis; the excluded zero case is not claimed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "AC is inherited through the published standard-normal definition; the likelihood-ratio and moment calculations add no choice."
+        }
+      ],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "thm-cross-entropy-production-unbiased-given-pilot": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-cross-entropy-pilot-production",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space, let $A\\in\\mathcal X$, and let the target probability measure $P$ have a pointwise finite measurable density $f:\\mathsf X\\to[0,\\infty)$ with respect to $\\mu$, so $P(B)=\\int_B f\\,d\\mu$. Let $\\{q_\\theta:\\theta\\in\\Theta\\}$ be pointwise finite probability densities with respect to $\\mu$, and write $Q_\\theta(dx)=q_\\theta(x)\\mu(dx)$, where $\\Theta\\subset\\mathbb R^d$ is a finite nonempty set equipped with lexicographic order. For each $\\theta\\in\\Theta$, supply an exact admissibility checker $\\mathcal C(A,f,q_\\theta)$ that returns `admissible` if and only if $P|_A\\ll Q_\\theta$ and the contribution\n$$\nw_\\theta(x)=\\begin{cases}\\mathbf1_A(x)f(x)/q_\\theta(x),&q_\\theta(x)>0,\\\\0,&q_\\theta(x)=0\\end{cases}\n$$\nis integrable under $Q_\\theta$, where $P|_A(B):=P(B\\cap A)$ for measurable $B$. Supply an initial parameter $\\theta_0\\in\\Theta$, a pilot size $m\\ge1$, and a production size $n\\ge1$.\n\n1. Draw an IID pilot $Y_1,\\ldots,Y_m\\sim q_{\\theta_0}$.\n2. If no $Y_j$ lies in $A$, return `pilot-no-hit`.\n3. For every $\\theta\\in\\Theta$, compute\n$\ns_\\theta(y)=\\begin{cases}\\log q_\\theta(y),&y\\in A,\\\\0,&y\\notin A,\\end{cases}\n\\qquad S(\\theta)=\\sum_{j=1}^m s_\\theta(Y_j),\n$\nwith $\\log 0=-\\infty$. Pointwise finiteness rules out $+\\infty$, and the piecewise score avoids the undefined product $0\\cdot(-\\infty)$. If all scores equal $-\\infty$, return `no-finite-maximizer`. Otherwise choose the lexicographically least maximizer $\\widehat\\theta$ among the finite scores and freeze it.\n4. Evaluate $\\mathcal C(A,f,q_{\\widehat\\theta})$. If it returns inadmissible, return `inadmissible-production-proposal`. Otherwise draw an IID production sample $X_1,\\ldots,X_n\\sim q_{\\widehat\\theta}$, independent of the pilot conditional on $\\widehat\\theta$, and return the ordinary importance-sampling estimate\n$\n\\widehat p_{\\rm CE}=\\frac1n\\sum_{i=1}^n w_{\\widehat\\theta}(X_i)\n$\nusing the piecewise-defined contribution $w_{\\widehat\\theta}$ above.\n\nThe finite candidate set makes the score comparisons and tie rule deterministic. The supplied exact checker is an input oracle; the procedure does not infer support or integrability from a pilot fit. If its check fails, no production estimate or unbiasedness or finite-variance claim is returned.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ordinary-importance-sampling-is-unbiased",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space, let $\\tilde p\\ge0$ and $q\\ge0$ be measurable densities with $Z_p=\\int\\tilde p\\,d\\mu\\in(0,\\infty)$ and $\\int q\\,d\\mu=1$, and set $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$ and $Q(dx)=q(x)\\mu(dx)$. Let $f:\\mathsf X\\to\\mathbb R$ be measurable with $\\int|f|\\tilde p\\,d\\mu<\\infty$. Suppose $q>0$ $\\mu$-almost everywhere on $\\{f\\tilde p\\ne0\\}$ and $X_1,\\ldots,X_n$ are IID with law $Q$. For the ordinary importance sampling estimator in [[alg-importance-sampling]],\n$$\\mathbb E_Q[\\hat\\mu_{\\mathrm{IS}}]=\\int f\\,d\\pi.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The pilot outcome space need not be finite. For each $\\theta\\in\\Theta$, the score $S(\\theta)$ is $\\mathcal G$-measurable, and $\\Theta$ is finite. Therefore the success event, the exact-checker acceptance event, and the lexicographically least maximizing selector $\\widehat\\theta$ on success are $\\mathcal G$-measurable. Partition $H$ into the finitely many events $H_\\theta=H\\cap\\{\\widehat\\theta=\\theta\\}$. Conditional independence of the production sample from the pilot given $\\widehat\\theta$, as specified in [F1], means that on each $H_\\theta$ its conditional law given $\\mathcal G$ is IID $Q_\\theta$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "On each $H_\\theta$, the checker gives the support and integrability hypotheses for [F2]. That theorem gives conditional expectation $P(A)$ for each production contribution given $\\mathcal G$, and linearity gives the same conditional expectation for their average. Since the finitely many $H_\\theta$ partition $H$ and $\\widetilde p_{\\rm CE}=0$ off $H$, this proves $\\mathbb E[\\widetilde p_{\\rm CE}\\mid\\mathcal G]=\\mathbf1_H P(A)$ almost surely.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "lem-nested-level-probability-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nested-rare-event-levels",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space as in [[def-probability-measure]]. A finite nested event sequence of length $L\\ge1$ is a sequence of measurable sets\n$\n\\Omega=A_0\\supseteq A_1\\supseteq\\cdots\\supseteq A_L=A\n$\nsuch that $P(A_\\ell)>0$ for $0\\le\\ell\\le L$. Its **conditional level probabilities** and **level laws** are\n$\np_\\ell=\\frac{P(A_\\ell)}{P(A_{\\ell-1})}\\in(0,1],\\qquad\n\\pi_\\ell(B)=\\frac{P(B\\cap A_\\ell)}{P(A_\\ell)}\n\\quad (B\\in\\mathcal F).\n$\nThe target probability is $p=P(A_L)$. Independence across levels means that the complete sample arrays used at distinct levels are mutually independent; correct marginal laws alone do not imply this condition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The definition gives $P(A_\\ell)=p_\\ell P(A_{\\ell-1})$ for every $1\\le\\ell\\le L$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Applying these identities successively from $\\ell=1$ to $L$ yields $P(A_L)=P(A_0)\\prod_{\\ell=1}^Lp_\\ell=\\prod_{\\ell=1}^Lp_\\ell$, since $P(A_0)=1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "alg-independent-fixed-level-splitting": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "alg-fixed-level-sir-splitting": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [],
+          "reason": "AC is inherited through the finite Feynman–Kac path-law and SIR suppliers. The finite event sequence and kernel conditions add no further selection."
+        }
+      ],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "lem-finite-budget-stopped-normalizer": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-budget-stopped-event-kernel",
+          "source_section": "Definition",
+          "quote": "Let $(E,\\mathcal E)$ be a standard Borel space, $M$ a probability kernel on it, and $T,R\\in\\mathcal E$ disjoint target and return sets. Write $S=E\\setminus(T\\cup R)$ and let $C=\\{\\mathtt{hit},\\mathtt{return},\\partial\\}$ have the discrete sigma-algebra; $\\partial$ is the cemetery outcome meaning the budget expired before either set was reached.\n\nFor budget $m=0$, define\n$\n\\kappa_0(x,\\cdot)=\n\\begin{cases}\n\\delta_{\\mathtt{hit}},&x\\in T,\\\\\n\\delta_{\\mathtt{return}},&x\\in R,\\\\\n\\delta_{\\partial},&x\\in S.\n\\end{cases}\n$\nFor $m\\ge0$, define the finite-budget stopped-status kernel recursively by\n$\n\\kappa_{m+1}(x,\\cdot)=\n\\begin{cases}\n\\delta_{\\mathtt{hit}},&x\\in T,\\\\\n\\delta_{\\mathtt{return}},&x\\in R,\\\\\n\\displaystyle\\int_E\\kappa_m(y,\\cdot)\\,M(x,dy),&x\\in S.\n\\end{cases}\n$\nThus a target hit at the initial state counts at budget zero; each additional budget unit permits one more transition. The **exact-hitting status kernel**, when used, is the limit law of these statuses and treats nontermination as $\\partial$; it is an exact sampler for $P_x(\\tau_T<\\tau_R)$ only when the requested event is the finite first hit represented by that limit. The budgeted kernel is distinct from an exact-hitting oracle.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $(E_n,\\mathcal E_n)_{n\\ge0}$ be measurable spaces, let\n$\\mu_0$ be a probability measure on $E_0$, and, for each $n\\ge0$, let $K_n$ be\na probability kernel from $E_0\\times\\cdots\\times E_n$ to $E_{n+1}$. There is a\nunique probability measure $P$ on\n$$ \\left(\\prod_{n\\ge0}E_n,\\ \\bigotimes_{n\\ge0}\\mathcal E_n\\right) $$ whose finite-prefix laws are the prescribed iterated integrals $$ \\mu_0(dx_0)K_0(x_0,dx_1)K_1(x_0,x_1,dx_2)\\cdots K_{r-1}(x_0,\\ldots,x_{r-1},dx_r). $$\nIn particular, if every $E_n=E$ and\n$K_n(x_0,\\ldots,x_n,A)=K(x_n,A)$, the coordinate process is a homogeneous\n$K$-chain with initial law $\\mu_0$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-feynman-kac-path-targets-and-normalizers",
+          "source_section": "Definition",
+          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu–Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman–Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman–Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman–Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "For $m=0$, the three status probabilities are the indicators of the disjoint partition $T,R,S$; they are measurable and sum to one. Thus $\\kappa_0$ is a probability kernel.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "At $m=0$ the hit status occurs exactly when $X_0\\in T$. For $m+1$, points in $T$ or $R$ stop immediately, while from $S$ the first $M$-transition is followed by the budget-$m$ rule. The finite-prefix law [F3] and induction therefore identify $\\kappa_m(x,\\{\\mathtt{hit}\\})$ with $P_x(\\tau_T<\\tau_R,\\tau_T\\le m)$; integrating against $\\mu$ gives $p_m$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "induction"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Suppose $\\kappa_m$ is a probability kernel. For each $c\\in C$, the function $y\\mapsto\\kappa_m(y,\\{c\\})$ is measurable. By [F2], its $M(x,\\cdot)$-integral is measurable in $x$. On $T$ and $R$ the next status is the corresponding point mass; on $S$ the three integrals sum to $\\int 1\\,M(x,dy)=1$. Hence $\\kappa_{m+1}$ is a probability kernel, and induction proves the first claim.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "In the one-step Feynman–Kac model, the product of potentials is $\\mathbf1_{\\{\\mathtt{hit}\\}}$; [F4] therefore gives normalizer $\\int\\mathbf1_{\\{\\mathtt{hit}\\}}\\,d(\\mu\\kappa_m)=p_m$. The success events by budgets $m$ increase to $\\{\\tau_T<\\tau_R\\}$; countable additivity gives the limit identity.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the zero-budget branch explicitly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "3.1"
+          ],
+          "reason": "AC is inherited only through the finite Markov path-law and Feynman–Kac suppliers; the measurable finite-status recursion uses no additional choice."
+        }
+      ],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "lem-stopped-kernel-discretization-bias": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-budget-stopped-event-kernel",
+          "source_section": "Definition",
+          "quote": "Let $(E,\\mathcal E)$ be a standard Borel space, $M$ a probability kernel on it, and $T,R\\in\\mathcal E$ disjoint target and return sets. Write $S=E\\setminus(T\\cup R)$ and let $C=\\{\\mathtt{hit},\\mathtt{return},\\partial\\}$ have the discrete sigma-algebra; $\\partial$ is the cemetery outcome meaning the budget expired before either set was reached.\n\nFor budget $m=0$, define\n$\n\\kappa_0(x,\\cdot)=\n\\begin{cases}\n\\delta_{\\mathtt{hit}},&x\\in T,\\\\\n\\delta_{\\mathtt{return}},&x\\in R,\\\\\n\\delta_{\\partial},&x\\in S.\n\\end{cases}\n$\nFor $m\\ge0$, define the finite-budget stopped-status kernel recursively by\n$\n\\kappa_{m+1}(x,\\cdot)=\n\\begin{cases}\n\\delta_{\\mathtt{hit}},&x\\in T,\\\\\n\\delta_{\\mathtt{return}},&x\\in R,\\\\\n\\displaystyle\\int_E\\kappa_m(y,\\cdot)\\,M(x,dy),&x\\in S.\n\\end{cases}\n$\nThus a target hit at the initial state counts at budget zero; each additional budget unit permits one more transition. The **exact-hitting status kernel**, when used, is the limit law of these statuses and treats nontermination as $\\partial$; it is an exact sampler for $P_x(\\tau_T<\\tau_R)$ only when the requested event is the finite first hit represented by that limit. The budgeted kernel is distinct from an exact-hitting oracle.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-budget-stopped-normalizer",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[def-finite-budget-stopped-event-kernel]], every $\\kappa_m$ is a measurable probability kernel from $E$ to $C$. For an initial probability law $\\mu$, let\n$\np_m=\\int_E\\kappa_m(x,\\{\\mathtt{hit}\\})\\,\\mu(dx).\n$\nThen $p_m=P_\\mu(\\tau_T<\\tau_R,\\ \\tau_T\\le m)$. In the one-step Feynman–Kac model with initial law $\\mu$, transition $\\kappa_m$, initial potential $1$, and terminal potential $\\mathbf1_{\\{\\mathtt{hit}\\}}$, the normalizer is exactly $p_m$. The limit $\\lim_{m\\to\\infty}p_m=P_\\mu(\\tau_T<\\tau_R)$ is the exact-hitting normalizer; an exact simulator with finite expected work requires a separate termination-cost bound.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-feynman-kac-path-targets-and-normalizers",
+          "source_section": "Definition",
+          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu–Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman–Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman–Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman–Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "By [F4], $p_m=P_\\mu(\\tau_T<\\tau_R,\\tau_T\\le m)$. The events increase to $\\{\\tau_T<\\tau_R\\}$, and the omitted part at budget $m$ is $\\{\\tau_T<\\tau_R,\\tau_T>m\\}\\subseteq\\{\\tau_T\\wedge\\tau_R>m\\}$. Countable additivity [F3] gives the displayed difference and tail bound.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "Replace the transition kernels one at a time and telescope the difference of the two normalizers. For the term replacing $M_j$, the earlier kernels and potentials define a finite measure of mass at most one, because the initial law is a probability and every potential lies in $[0,1]$. The remaining kernel-potential composition is a measurable function $g_j$ with $0\\le g_j\\le1$, measurable by [F5] and kernel composition. By the layer-cake identity $g_j(y)=\\int_0^1\\mathbf1_{\\{g_j(y)>t\\}}\\,dt$, the total-variation definition bounds $|M_jg_j(x)-\\widetilde M_jg_j(x)|\\le\\epsilon_j$ for every $x$. Integrating against that finite measure bounds the telescoping term by $\\epsilon_j$; summing yields $\\sum_j\\epsilon_j$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "If $A_h\\subseteq A$, then $P(A)-P(A_h)=P(A\\setminus A_h)$ by finite additivity on disjoint measurable sets. A bound on this value requires an additional estimate for the missed-crossing event; continuity of a path alone does not supply a uniform grid-rate without quantitative regularity.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "thm-independent-splitting-product-moments-and-work": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nested-rare-event-levels",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space as in [[def-probability-measure]]. A finite nested event sequence of length $L\\ge1$ is a sequence of measurable sets\n$\n\\Omega=A_0\\supseteq A_1\\supseteq\\cdots\\supseteq A_L=A\n$\nsuch that $P(A_\\ell)>0$ for $0\\le\\ell\\le L$. Its **conditional level probabilities** and **level laws** are\n$\np_\\ell=\\frac{P(A_\\ell)}{P(A_{\\ell-1})}\\in(0,1],\\qquad\n\\pi_\\ell(B)=\\frac{P(B\\cap A_\\ell)}{P(A_\\ell)}\n\\quad (B\\in\\mathcal F).\n$\nThe target probability is $p=P(A_L)$. Independence across levels means that the complete sample arrays used at distinct levels are mutually independent; correct marginal laws alone do not imply this condition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nested-level-probability-factorization",
+          "source_section": "Statement",
+          "quote": "For the nested event levels of [[def-nested-rare-event-levels]],\n$\nP(A_L)=\\prod_{\\ell=1}^L p_\\ell.\n$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-independent-fixed-level-splitting",
+          "source_section": "Definition",
+          "quote": "Input the nested levels and exact conditional samplers for $\\pi_{\\ell-1}$ from [[def-nested-rare-event-levels]], a particle count $N\\ge1$, and a declared per-draw work cost $c_\\ell>0$ for each level. If any conditional sampler is unavailable, return conditional-sampler-unavailable.\n\nFor each level $\\ell=1,\\ldots,L$, independently of every other level, draw $X_{\\ell,1},\\ldots,X_{\\ell,N}$ IID from $\\pi_{\\ell-1}$. Set\n$\n\\widehat p_\\ell=N^{-1}\\sum_{i=1}^N\\mathbf1_{A_\\ell}(X_{\\ell,i}),\n\\qquad\n\\widehat p=\\prod_{\\ell=1}^L\\widehat p_\\ell.\n$\nReturn $\\widehat p$, the level counts, total draw work $W=N\\sum_{\\ell=1}^Lc_\\ell$, and status success if all level counts are positive or zero-level-estimate otherwise. The zero estimate is not a proof that $P(A_L)=0$.\n\nThe procedure is an ideal independent-level baseline. It does not assert that a branching or Markov mutation method produces independent exact conditional draws.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-iid-monte-carlo-mean-moments",
+          "source_section": "Statement",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be a real IID sequence. If $\\mathbb E|Y_1|<\\infty$ and $\\mu=\\mathbb E[Y_1]$, then $\\mathbb E[\\bar Y_n]=\\mu$ for every $n\\ge1$. If also $\\mathbb E[Y_1^2]<\\infty$ and $\\sigma^2=\\operatorname{Var}(Y_1)$, then $\\operatorname{Var}(\\bar Y_n)=\\sigma^2/n$ for every $n\\ge1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Under $\\pi_{\\ell-1}$, the indicator $\\mathbf1_{A_\\ell}$ is Bernoulli with success probability $P(A_\\ell)/P(A_{\\ell-1})=p_\\ell$. Thus [F4] gives $\\mathbb E\\widehat p_\\ell=p_\\ell$ and $\\mathbb E\\widehat p_\\ell^2=p_\\ell^2+p_\\ell(1-p_\\ell)/N$ at each level.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The level arrays are independent by [F3], so $\\mathbb E\\widehat p=\\prod_\\ell p_\\ell=p$ by [F2], and $\\mathbb E\\widehat p^2=\\prod_\\ell[p_\\ell^2+p_\\ell(1-p_\\ell)/N]$. Subtracting $p^2=\\prod_\\ell p_\\ell^2$ gives the displayed variance and, after division by $p^2>0$, the relative-variance formula. The work equality is the $LN$ declared draws weighted by their level costs in [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "Put $a_\\ell=p_\\ell^2$ and $v_\\ell=p_\\ell(1-p_\\ell)/N$. Then $0\\le a_\\ell\\le1$ and $0\\le v_\\ell\\le1/(4N)$. By step 2.1 and finite product expansion,\n$$\n\\operatorname{Var}(\\widehat p)=\\prod_{\\ell=1}^L(a_\\ell+v_\\ell)-\\prod_{\\ell=1}^La_\\ell\n=\\sum_{\\varnothing\\ne S\\subseteq\\{1,\\ldots,L\\}}\\left(\\prod_{\\ell\\in S}v_\\ell\\right)\\left(\\prod_{j\\notin S}a_j\\right)\n\\le\\sum_{\\varnothing\\ne S\\subseteq\\{1,\\ldots,L\\}}\\left(\\frac1{4N}\\right)^{|S|}\n=\\left(1+\\frac1{4N}\\right)^L-1.\n$$",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "claim": "For fixed $L$, expansion of the finite binomial gives $(1+1/(4N))^L-1\\le \\frac{L}{4N}(1+1/(4N))^{L-1}=O(L/N)$. The relative formula in step 2.1 still contains $(1-p_\\ell)/(Np_\\ell)$, so this absolute bound does not give a rarity-uniform relative bound.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "thm-fixed-level-sir-estimator-unbiased": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nested-rare-event-levels",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space as in [[def-probability-measure]]. A finite nested event sequence of length $L\\ge1$ is a sequence of measurable sets\n$\n\\Omega=A_0\\supseteq A_1\\supseteq\\cdots\\supseteq A_L=A\n$\nsuch that $P(A_\\ell)>0$ for $0\\le\\ell\\le L$. Its **conditional level probabilities** and **level laws** are\n$\np_\\ell=\\frac{P(A_\\ell)}{P(A_{\\ell-1})}\\in(0,1],\\qquad\n\\pi_\\ell(B)=\\frac{P(B\\cap A_\\ell)}{P(A_\\ell)}\n\\quad (B\\in\\mathcal F).\n$\nThe target probability is $p=P(A_L)$. Independence across levels means that the complete sample arrays used at distinct levels are mutually independent; correct marginal laws alone do not imply this condition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-fixed-level-sir-splitting",
+          "source_section": "Definition",
+          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman–Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon–Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-feynman-kac-path-measures-satisfy-forward-recursion",
+          "source_section": "Statement",
+          "quote": "Assume AC and the finite-horizon setup of [[def-feynman-kac-path-targets-and-normalizers]]. For $1\\le k\\le T$ and every nonnegative product-measurable $\\varphi:\\mathsf X_{0:k}\\to[0,\\infty]$,\n$$\\gamma_k(\\varphi)=\\int_{\\mathsf X_{0:k-1}}\\gamma_{k-1}(dx_{0:k-1})\\int_{\\mathsf X_k}G_k(x_k)\\varphi(x_{0:k})M_k(x_{k-1},dx_k),$$\nwith equality in $[0,\\infty]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sequential-particle-estimator-is-unbiased",
+          "source_section": "Statement",
+          "quote": "Assume AC and the finite-horizon setup of [[def-feynman-kac-path-targets-and-normalizers]] and [[alg-sequential-importance-resampling]]. Fix $N\\in\\mathbb N$ with $N\\ge1$ and $0\\le t\\le T$. Suppose every prefix normalizer satisfies $0<Z_k<\\infty$ for $0\\le k\\le t$. For any nonnegative measurable $\\varphi:\\mathsf X_{0:t}\\to[0,\\infty]$ with $\\gamma_t(\\varphi)<\\infty$, define $\\widehat\\gamma_t^N(\\varphi)=\\int\\varphi\\,d(\\widehat Z_t\\widehat\\pi_t^N)$. Then\n$$\\mathbb E[\\widehat\\gamma_t^N(\\varphi)]=\\gamma_t(\\varphi).$$\nIn particular, with $\\varphi=1$, the product-of-average-incremental-weights estimator in the algorithm satisfies $\\mathbb E[\\widehat Z_t]=Z_t$. At each time either multinomial or residual offspring resampling may be used. The theorem asserts no unbiasedness for the normalized empirical measure $\\widehat\\pi_t^N$ by itself.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The initial law is $P$, $G_0\\equiv1$, and $M_1$ is the identity. Therefore the first weighted normalizer is $Z_1=P(A_1)$, and the normalized state law after the event potential is $\\pi_1$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Suppose the normalized law after level $\\ell$ is $\\pi_\\ell$ and $Z_\\ell=P(A_\\ell)$. The mutation $K_\\ell$ preserves $\\pi_\\ell$, so [F3] gives $ Z_{\\ell+1}=Z_\\ell\\int\\mathbf1_{A_{\\ell+1}}\\,d\\pi_\\ell =P(A_\\ell)p_{\\ell+1}=P(A_{\\ell+1}). $ The normalized next law is $P(\\,\\cdot\\mid A_{\\ell+1})=\\pi_{\\ell+1}$; induction proves all prefix normalizers are finite and positive.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "given",
+            "induction"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "Apply [F4] to the SIR model with all prefix normalizers from step 2.1 and the nonnegative terminal test $1$. It yields $\\mathbb E[\\widehat p]=Z_L=P(A_L)$. The conclusion is only unbiasedness; no second moment was estimated.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "reason": "AC is inherited through the Feynman–Kac finite path laws and the canonical particle-unbiasedness theorem. The finite level-recursion calculation adds no choice."
+        }
+      ],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "thm-fixed-level-sir-absolute-mse-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nested-rare-event-levels",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space as in [[def-probability-measure]]. A finite nested event sequence of length $L\\ge1$ is a sequence of measurable sets\n$\n\\Omega=A_0\\supseteq A_1\\supseteq\\cdots\\supseteq A_L=A\n$\nsuch that $P(A_\\ell)>0$ for $0\\le\\ell\\le L$. Its **conditional level probabilities** and **level laws** are\n$\np_\\ell=\\frac{P(A_\\ell)}{P(A_{\\ell-1})}\\in(0,1],\\qquad\n\\pi_\\ell(B)=\\frac{P(B\\cap A_\\ell)}{P(A_\\ell)}\n\\quad (B\\in\\mathcal F).\n$\nThe target probability is $p=P(A_L)$. Independence across levels means that the complete sample arrays used at distinct levels are mutually independent; correct marginal laws alone do not imply this condition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-fixed-level-sir-splitting",
+          "source_section": "Definition",
+          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman–Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon–Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-sir-bounded-potential-unnormalized-update-variance",
+          "source_section": "Statement",
+          "quote": "Let $\\nu$ be a probability measure on $(E,\\mathcal E)$, $M$ a probability kernel on $E$, $G,f:E\\to[0,1]$ measurable, $z\\in[0,1]$, and $N\\ge1$. Draw $Y_1,\\ldots,Y_N$ IID from the probability law $\\nu M$. Put $a=N^{-1}\\sum_{i=1}^NG(Y_i)$. If $a>0$, set\n$\n\\eta^N=\\frac{\\sum_{i=1}^NG(Y_i)\\delta_{Y_i}}{Na};\n$\nif $a=0$, let $\\eta^N$ be any probability measure. Define the one-step unnormalized estimate $\\Gamma^N(f)=za\\,\\eta^N(f)$. Then\n$\n\\mathbb E[\\Gamma^N(f)]=z\\,\\nu M(Gf),\n\\qquad\n\\operatorname{Var}(\\Gamma^N(f))\\le\\frac{z^2}{4N}.\n$\nThe estimate is the normalizer update $za$ multiplied by the weighted empirical mean of $f$. The zero-weight fallback does not affect $\\Gamma^N$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fixed-level-sir-estimator-unbiased",
+          "source_section": "Statement",
+          "quote": "Use the full-resampling SIR model in [[alg-fixed-level-sir-splitting]] with $N\\ge1$, positive level probabilities, and each $K_\\ell$ supported on $A_\\ell$ and invariant for $\\pi_\\ell=P(\\,\\cdot\\mid A_\\ell)$. Then every prefix Feynman–Kac normalizer is $Z_\\ell=P(A_\\ell)$, and the product normalizer estimate $\\widehat p$ is unbiased:\n$\n\\mathbb E[\\widehat p]=P(A_L).\n$\nThis conclusion asserts no finite-$N$ variance bound, accuracy guarantee, or uniform-in-rarity efficiency.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-feynman-kac-path-targets-and-normalizers",
+          "source_section": "Definition",
+          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu–Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman–Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman–Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman–Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-iid-monte-carlo-mean-moments",
+          "source_section": "Statement",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be a real IID sequence. If $\\mathbb E|Y_1|<\\infty$ and $\\mu=\\mathbb E[Y_1]$, then $\\mathbb E[\\bar Y_n]=\\mu$ for every $n\\ge1$. If also $\\mathbb E[Y_1^2]<\\infty$ and $\\sigma^2=\\operatorname{Var}(Y_1)$, then $\\operatorname{Var}(\\bar Y_n)=\\sigma^2/n$ for every $n\\ge1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-conditional-variance-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume AC. For real $X\\in L^2(P)$, $\\operatorname{Var}(X)=E[\\operatorname{Var}(X\\mid\\mathcal G)]+\\operatorname{Var}(E[X\\mid\\mathcal G])$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "By [F4], the estimate is unbiased for $Z_L=P(A_L)$, so its mean-square error equals its variance.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "Set $Q_L\\equiv1$, and recursively $Q_{p-1}=M_p(G_pQ_p)$ for $p=L,\\ldots,1$. Since $M_p$ is a probability kernel and $0\\le G_p\\le1$, backward induction gives $0\\le Q_p\\le1$. By [F5], $Z_L=P(A_L)=\\int Q_0\\,dP$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "induction"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Let $\\Gamma_p^N=\\widehat Z_p\\eta_p^N$ be the unnormalized weighted empirical measure after level $p$, and put $U_p=\\Gamma_p^N(Q_p)$. Conditional on the particle history through level $p-1$, [F2] gives IID proposals from $\\eta_{p-1}^NM_p$; applying [F3] with $z=\\widehat Z_{p-1}$, $\\nu=\\eta_{p-1}^N$, and $f=Q_p$ yields $ \\mathbb E[U_p\\mid\\mathcal F_{p-1}] =\\widehat Z_{p-1}\\eta_{p-1}^N(M_p(G_pQ_p)) =U_{p-1}, \\quad \\operatorname{Var}(U_p\\mid\\mathcal F_{p-1}) \\le\\frac{\\widehat Z_{p-1}^{\\,2}}{4N} \\le\\frac1{4N}. $ Here the final inequality holds because $\\widehat Z_{p-1}$ is a product of averages of potentials in $[0,1]$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "The initial particles are IID from $P$, so $U_0=N^{-1}\\sum_{i=1}^NQ_0(X_0^i)$. Since $Q_0^2\\le Q_0$, [F8] gives $\\operatorname{Var}(Q_0(X_0))\\le\\mathbb E Q_0-(\\mathbb E Q_0)^2\\le1/4$; [F6] then gives $\\operatorname{Var}(U_0)\\le1/(4N)$. Iterating [F7] with the conditional mean identity from step 2.1 gives $ \\operatorname{Var}(U_L) =\\operatorname{Var}(U_0)+\\sum_{p=1}^L \\mathbb E[\\operatorname{Var}(U_p\\mid\\mathcal F_{p-1})] \\le\\frac{L+1}{4N}. $",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1",
+            "given",
+            "induction"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "claim": "Since $Q_L\\equiv1$, $U_L=\\Gamma_L^N(1)=\\widehat Z_L=\\widehat p$. Step 1.1 and step 3.1 prove both assertions. The constant does not involve $P(A_L)$, so no lower bound on the event probability is needed for this absolute error bound.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "one-level-one-particle-event-model",
+          "asserts": "For L=1, N=1, P uniform on {0,1}, and A1={0}, the estimate is Bernoulli(1/2), with exact MSE 1/4 below the bound (L+1)/(4N)=1/2.",
+          "claim": "The absolute SIR MSE bound in a one-level finite model.",
+          "checked_in": "Steps 1.1 and 2.2"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; its finite or positive hypotheses govern the domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 allows a zero particle normalizer; its update variance bound then has z=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits level probabilities equal to one because it assumes only positive prefixes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 retains the zero-normalizer fallback and the proof remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 use potentials at both endpoints of [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the finite constructions and declared suppliers; it makes no new choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "reason": "AC is inherited through the Feynman–Kac, canonical SIR unbiasedness, and conditional-variance suppliers. The bounded-potential recursion adds no further choice."
+        }
+      ],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "cex-sir-l2-bound-from-conditional-means-is-false": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nested-rare-event-levels",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space as in [[def-probability-measure]]. A finite nested event sequence of length $L\\ge1$ is a sequence of measurable sets\n$\n\\Omega=A_0\\supseteq A_1\\supseteq\\cdots\\supseteq A_L=A\n$\nsuch that $P(A_\\ell)>0$ for $0\\le\\ell\\le L$. Its **conditional level probabilities** and **level laws** are\n$\np_\\ell=\\frac{P(A_\\ell)}{P(A_{\\ell-1})}\\in(0,1],\\qquad\n\\pi_\\ell(B)=\\frac{P(B\\cap A_\\ell)}{P(A_\\ell)}\n\\quad (B\\in\\mathcal F).\n$\nThe target probability is $p=P(A_L)$. Independence across levels means that the complete sample arrays used at distinct levels are mutually independent; correct marginal laws alone do not imply this condition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-fixed-level-sir-splitting",
+          "source_section": "Definition",
+          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman–Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon–Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-sequential-importance-resampling",
+          "source_section": "Definition",
+          "quote": "Use the finite-horizon target and proposal setting of [[def-feynman-kac-path-targets-and-normalizers]]. For admissible inputs require $\\mu_0\\ll\\nu_0$ and, for each $k\\ge1$, $M_k(x,\\cdot)\\ll R_k(x,\\cdot)$ for almost every $x$ under the last-coordinate marginal of the proposal path law $Q_{k-1}$. Select the joint measurable versions $\\rho_0=d\\mu_0/d\\nu_0$ and $r_k(x,\\cdot)=dM_k(x,\\cdot)/dR_k(x,\\cdot)$ supplied by [[thm-feynman-kac-path-radon-nikodym-weight]]. Fix $N\\ge1$ and select either multinomial or residual resampling at each time. The algorithm returns a weighted empirical path measure and a normalizer estimate.\n\n1. Draw $X_0^1,\\ldots,X_0^N$ independently from $\\nu_0$. Set $a_0^i=G_0(X_0^i)\\rho_0(X_0^i)$ and $\\widehat Z_0=N^{-1}\\sum_{i=1}^Na_0^i$. If $\\sum_i a_0^i>0$, put $\\bar w_0^i=a_0^i/\\sum_j a_0^j$; otherwise put $\\bar w_0^i=1/N$. Each initial path is $X_{0:0}^i=X_0^i$.\n2. For $k=1,\\ldots,t$, do the following:\n   1. Apply [[alg-multinomial-and-residual-offspring-resampling]] to the previous normalized weights $(\\bar w_{k-1}^1,\\ldots,\\bar w_{k-1}^N)$, obtaining ancestor indices $A_k^1,\\ldots,A_k^N$.\n   2. Given the previous paths and these indices, draw $(X_k^1,\\ldots,X_k^N)$ with joint conditional law $\\bigotimes_{i=1}^N R_k(X_{k-1}^{A_k^i},\\cdot)$ and set $X_{0:k}^i=(X_{0:k-1}^{A_k^i},X_k^i)$.\n   3. Set $a_k^i=G_k(X_k^i)r_k(X_{k-1}^{A_k^i},X_k^i)$ and $\\widehat Z_k=\\widehat Z_{k-1}(N^{-1}\\sum_{i=1}^Na_k^i)$. If $\\sum_i a_k^i>0$, put $\\bar w_k^i=a_k^i/\\sum_j a_k^j$; otherwise put $\\bar w_k^i=1/N$.\n3. Return $\\widehat Z_t$ and the weighted empirical path probability measure $\\widehat\\pi_t^N=\\sum_{i=1}^N\\bar w_t^i\\delta_{X_{0:t}^i}$. Its last-coordinate marginal is the corresponding empirical filtering approximation.\n\nThe all-zero fallback only defines a probability measure for reporting and future sampling. Once a zero average weight occurs, $\\widehat Z$ remains zero. The procedure makes no finite-particle accuracy, consistency, or long-time stability claim.\n\nThe input convention is that $t\\in\\{0,\\ldots,T\\}$ is the requested horizon, $\\nu_0$ is a proposal probability on $\\mathsf X_0$, $R_k$ are proposal probability kernels for $1\\le k\\le t$, and $N\\in\\mathbb N$ with $N\\ge1$. Thus the opening support condition ranges over $1\\le k\\le t$, and a resampling scheme is selected for each such $k$. Choose the finite-valued joint measurable versions $\\rho_0$ and $r_k$ constructed in the proof of [[thm-feynman-kac-path-radon-nikodym-weight]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Here $p_1=1$, $p_2=1/2$, $Z_0=Z_1=1$, $Z_2=1/2$, and $\\eta_0=\\eta_1=P$. Use $M_1$ equal to the identity and choose the level-one mutation $K_1(x,\\cdot)=P(\\cdot)$. This refresh kernel is supported on $A_1=\\Omega$ and leaves $\\pi_1=P$ invariant, so it satisfies the contract's mutation hypotheses.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "For $p=0$, the future event probability $Q_{0,2}1(x_0)$ is $1/2$ for every state because the refresh is independent of $x_0$; for $p=1$, $Q_{1,2}1(x_1)=K_1\\mathbf1_{A_2}(x_1)=1/2$ for every state. Both normalizers $Z_2/Z_p$ equal $1/2$. Thus $h_{0,2}=h_{1,2}=1$, each $\\eta_p$-second moment is $1$, and $B=1$ satisfies the stated condition.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Since $G_1\\equiv1$, the first resampling weights are equal. The refresh mutation ignores the resampled ancestors, so $X_2^1,\\ldots,X_2^N$ are IID with law $P$. By [F3], $\\widehat Z_2=N^{-1}\\sum_{i=1}^N\\mathbf1_{\\{X_2^i=0\\}}$, hence $\\mathbb E[(\\widehat Z_2-Z_2)^2]=\\operatorname{Var}(\\widehat Z_2)=1/(4N)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "With $B=1$, the proposed right-hand side is $Z_2^2[(1+(B-1)/N)^2-1]=0$, contradicting the strictly positive error $1/(4N)$ in step 2.1. Therefore the proposed implication is false.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the unit-probability case in the stated formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "The cited general SIR procedure is stated under AC; the finite two-state counterexample itself is choice-free."
+        }
+      ],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "rem-sir-finite-particle-error-bound-scope": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [],
+          "reason": "The remark cites canonical SIR and conditional-variance results under their stated AC assumptions; it adds no theorem."
+        }
+      ],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "ex-gaussian-barrier-exponential-tilting": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-tail-exponential-tilting",
+          "source_section": "Statement",
+          "quote": "Let $P=N(0,1)$, $A_a=[a,\\infty)$, $p_a=P(A_a)=\\bar\\Phi(a)$, and $Q_a=N(a,1)$, for $a>0$. Let $Z_a=\\mathbf1_{A_a}(X)\\,dP/dQ_a(X)$ for $X\\sim Q_a$, and let $\\widehat p_{a,n}$ be the average of $n$ IID copies. Then\n$\n\\mathbb E_{Q_a}[Z_a]=p_a,\\qquad\n\\mathbb E_{Q_a}[Z_a^2]=e^{a^2}\\bar\\Phi(2a).\n$\nAs $a\\to\\infty$, $\\widehat p_{a,n}$ is logarithmically efficient, while its one-sample relative error grows asymptotically as $(\\pi/2)^{1/4}\\sqrt a$. In particular this tilt is not bounded-relative-error.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Set $a=2$ in [F1]. Then $A_a=[2,\\infty)$, $Q_a=N(2,1)$, and the density ratio on the event is $\\exp(-2X+2)$, giving the displayed contribution and moments.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Since $\\bar\\Phi(2)>0$ and $\\bar\\Phi(4)<\\infty$, the mean is positive and finite and the second moment is finite. Thus the example has finite variance, while the asymptotic divergence in relative error concerns the family $a\\to\\infty$, not this single barrier.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "barrier-two-moment-substitution",
+          "asserts": "At a=2 the proposal is N(2,1), the event contribution is 1_{X>=2} exp(-2X+2), its mean is barPhi(2), and its second moment is e^4 barPhi(4).",
+          "claim": "The stated Gaussian contribution and moments at the fixed barrier.",
+          "checked_in": "Steps 1.1 and 1.2"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the stated positive-domain hypothesis; the excluded zero case is not claimed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "ex-queue-overflow-and-redundant-splitting-work": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-independent-fixed-level-splitting",
+          "source_section": "Definition",
+          "quote": "Input the nested levels and exact conditional samplers for $\\pi_{\\ell-1}$ from [[def-nested-rare-event-levels]], a particle count $N\\ge1$, and a declared per-draw work cost $c_\\ell>0$ for each level. If any conditional sampler is unavailable, return conditional-sampler-unavailable.\n\nFor each level $\\ell=1,\\ldots,L$, independently of every other level, draw $X_{\\ell,1},\\ldots,X_{\\ell,N}$ IID from $\\pi_{\\ell-1}$. Set\n$\n\\widehat p_\\ell=N^{-1}\\sum_{i=1}^N\\mathbf1_{A_\\ell}(X_{\\ell,i}),\n\\qquad\n\\widehat p=\\prod_{\\ell=1}^L\\widehat p_\\ell.\n$\nReturn $\\widehat p$, the level counts, total draw work $W=N\\sum_{\\ell=1}^Lc_\\ell$, and status success if all level counts are positive or zero-level-estimate otherwise. The zero estimate is not a proof that $P(A_L)=0$.\n\nThe procedure is an ideal independent-level baseline. It does not assert that a branching or Markov mutation method produces independent exact conditional draws.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-splitting-product-moments-and-work",
+          "source_section": "Statement",
+          "quote": "Run [[alg-independent-fixed-level-splitting]] on the nested levels of [[def-nested-rare-event-levels]] with $N\\ge1$ draws per level. Then\n$\n\\mathbb E[\\widehat p]=p,\\qquad\n\\frac{\\operatorname{Var}(\\widehat p)}{p^2}\n=\\prod_{\\ell=1}^L\\left(1+\\frac{1-p_\\ell}{Np_\\ell}\\right)-1,\n\\qquad\nW=N\\sum_{\\ell=1}^L c_\\ell.\n$\nIn absolute error,\n$\n\\operatorname{Var}(\\widehat p)\\le\\left(1+\\frac1{4N}\\right)^L-1.\n$\nFor fixed $L$, the right side is $O(L/N)$, uniformly in the rarity of $p$; the relative-variance formula has factors $1/p_\\ell$ and gives no uniform relative-efficiency claim.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The four arrival outcomes are equiprobable. Exactly three have at least one arrival and exactly one has two arrivals; hence $P(A_1)=3/4$, $P(A_2)=1/4$, and $p_2=(1/4)/(3/4)=1/3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The two designs use the product estimator specified in [F1]. With two levels and $N=2$, [F2] gives relative variance $ \\left(1+\\frac{1/4}{2(3/4)}\\right)\\left(1+\\frac{2/3}{2(1/3)}\\right)-1 =\\frac76\\cdot2-1=\\frac43. $ The work is $2\\cdot2=4$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-2",
+          "claim": "In the augmented chain, the conditional probabilities are $3/4,1,1,1/3$, and $N=1,L=4$. The two unit-probability factors in [F2] equal one, while the other factors are $4/3$ and $3$; the relative variance is $4-1=3$, with work $1\\cdot4=4$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "Since $3>4/3$, equal work does not make the redundant-level design equally precise. Its unit-probability stages add cost without reducing the one-draw randomness left in the two nontrivial levels.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "equal-work-two-versus-four-levels",
+          "asserts": "The four queue outcomes give p1=3/4 and p2=1/3; N=2,L=2 has work 4 and relative variance 4/3, while the augmented N=1,L=4 design has work 4 and relative variance 3.",
+          "claim": "The redundant equal-work allocation has larger relative variance.",
+          "checked_in": "Steps 1.1, 1.2, 2.1, and 2.2"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the unit-probability case in the stated formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "ex-cross-entropy-pilot-misses-event-support": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-cross-entropy-pilot-production",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space, let $A\\in\\mathcal X$, and let the target probability measure $P$ have a pointwise finite measurable density $f:\\mathsf X\\to[0,\\infty)$ with respect to $\\mu$, so $P(B)=\\int_B f\\,d\\mu$. Let $\\{q_\\theta:\\theta\\in\\Theta\\}$ be pointwise finite probability densities with respect to $\\mu$, and write $Q_\\theta(dx)=q_\\theta(x)\\mu(dx)$, where $\\Theta\\subset\\mathbb R^d$ is a finite nonempty set equipped with lexicographic order. For each $\\theta\\in\\Theta$, supply an exact admissibility checker $\\mathcal C(A,f,q_\\theta)$ that returns `admissible` if and only if $P|_A\\ll Q_\\theta$ and the contribution\n$$\nw_\\theta(x)=\\begin{cases}\\mathbf1_A(x)f(x)/q_\\theta(x),&q_\\theta(x)>0,\\\\0,&q_\\theta(x)=0\\end{cases}\n$$\nis integrable under $Q_\\theta$, where $P|_A(B):=P(B\\cap A)$ for measurable $B$. Supply an initial parameter $\\theta_0\\in\\Theta$, a pilot size $m\\ge1$, and a production size $n\\ge1$.\n\n1. Draw an IID pilot $Y_1,\\ldots,Y_m\\sim q_{\\theta_0}$.\n2. If no $Y_j$ lies in $A$, return `pilot-no-hit`.\n3. For every $\\theta\\in\\Theta$, compute\n$\ns_\\theta(y)=\\begin{cases}\\log q_\\theta(y),&y\\in A,\\\\0,&y\\notin A,\\end{cases}\n\\qquad S(\\theta)=\\sum_{j=1}^m s_\\theta(Y_j),\n$\nwith $\\log 0=-\\infty$. Pointwise finiteness rules out $+\\infty$, and the piecewise score avoids the undefined product $0\\cdot(-\\infty)$. If all scores equal $-\\infty$, return `no-finite-maximizer`. Otherwise choose the lexicographically least maximizer $\\widehat\\theta$ among the finite scores and freeze it.\n4. Evaluate $\\mathcal C(A,f,q_{\\widehat\\theta})$. If it returns inadmissible, return `inadmissible-production-proposal`. Otherwise draw an IID production sample $X_1,\\ldots,X_n\\sim q_{\\widehat\\theta}$, independent of the pilot conditional on $\\widehat\\theta$, and return the ordinary importance-sampling estimate\n$\n\\widehat p_{\\rm CE}=\\frac1n\\sum_{i=1}^n w_{\\widehat\\theta}(X_i)\n$\nusing the piecewise-defined contribution $w_{\\widehat\\theta}$ above.\n\nThe finite candidate set makes the score comparisons and tie rule deterministic. The supplied exact checker is an input oracle; the procedure does not infer support or integrability from a pilot fit. If its check fails, no production estimate or unbiasedness or finite-variance claim is returned.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cross-entropy-production-unbiased-given-pilot",
+          "source_section": "Statement",
+          "quote": "Use [[alg-cross-entropy-pilot-production]]. Let $\\mathcal G=\\sigma(Y_1,\\ldots,Y_m)$ and let $H\\in\\mathcal G$ be the event that the pilot succeeds and the algorithm's exact admissibility checker accepts the selected parameter $\\widehat\\theta$. On $H$, the checker guarantees $P|_A\\ll Q_{\\widehat\\theta}$ and integrability under $Q_{\\widehat\\theta}$ of the piecewise contribution $w_{\\widehat\\theta}$ defined in the algorithm. Define $\\widetilde p_{\\rm CE}$ to equal the returned production estimate on $H$ and zero off $H$. Then\n$$\n\\mathbb E[\\widetilde p_{\\rm CE}\\mid\\mathcal G]=\\mathbf1_H P(A)\\quad\\text{almost surely}.\n$$\nIn particular, the production estimate is conditionally unbiased almost surely on the successful, admissible pilot event. This gives no probability-of-success, proposal-optimization, finite-variance, logarithmic-efficiency, or total-work guarantee.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "By the IID assumption, $ P(Y_1\\notin A,\\ldots,Y_m\\notin A)=\\prod_{j=1}^mP(Y_j=0)=(9/10)^m>0. $ Also $P(A)=1/10>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "On this positive-probability pilot event, [F1] returns pilot-no-hit, so no fitted proposal or production estimate is returned. The positive target probability therefore does not imply pilot success; [F2] makes no production-unbiasedness assertion on this failure branch.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "cex-dependent-level-samples-bias-product-estimator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nested-rare-event-levels",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space as in [[def-probability-measure]]. A finite nested event sequence of length $L\\ge1$ is a sequence of measurable sets\n$\n\\Omega=A_0\\supseteq A_1\\supseteq\\cdots\\supseteq A_L=A\n$\nsuch that $P(A_\\ell)>0$ for $0\\le\\ell\\le L$. Its **conditional level probabilities** and **level laws** are\n$\np_\\ell=\\frac{P(A_\\ell)}{P(A_{\\ell-1})}\\in(0,1],\\qquad\n\\pi_\\ell(B)=\\frac{P(B\\cap A_\\ell)}{P(A_\\ell)}\n\\quad (B\\in\\mathcal F).\n$\nThe target probability is $p=P(A_L)$. Independence across levels means that the complete sample arrays used at distinct levels are mutually independent; correct marginal laws alone do not imply this condition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-independent-fixed-level-splitting",
+          "source_section": "Definition",
+          "quote": "Input the nested levels and exact conditional samplers for $\\pi_{\\ell-1}$ from [[def-nested-rare-event-levels]], a particle count $N\\ge1$, and a declared per-draw work cost $c_\\ell>0$ for each level. If any conditional sampler is unavailable, return conditional-sampler-unavailable.\n\nFor each level $\\ell=1,\\ldots,L$, independently of every other level, draw $X_{\\ell,1},\\ldots,X_{\\ell,N}$ IID from $\\pi_{\\ell-1}$. Set\n$\n\\widehat p_\\ell=N^{-1}\\sum_{i=1}^N\\mathbf1_{A_\\ell}(X_{\\ell,i}),\n\\qquad\n\\widehat p=\\prod_{\\ell=1}^L\\widehat p_\\ell.\n$\nReturn $\\widehat p$, the level counts, total draw work $W=N\\sum_{\\ell=1}^Lc_\\ell$, and status success if all level counts are positive or zero-level-estimate otherwise. The zero estimate is not a proof that $P(A_L)=0$.\n\nThe procedure is an ideal independent-level baseline. It does not assert that a branching or Markov mutation method produces independent exact conditional draws.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-independent-splitting-product-moments-and-work",
+          "source_section": "Statement",
+          "quote": "Run [[alg-independent-fixed-level-splitting]] on the nested levels of [[def-nested-rare-event-levels]] with $N\\ge1$ draws per level. Then\n$\n\\mathbb E[\\widehat p]=p,\\qquad\n\\frac{\\operatorname{Var}(\\widehat p)}{p^2}\n=\\prod_{\\ell=1}^L\\left(1+\\frac{1-p_\\ell}{Np_\\ell}\\right)-1,\n\\qquad\nW=N\\sum_{\\ell=1}^L c_\\ell.\n$\nIn absolute error,\n$\n\\operatorname{Var}(\\widehat p)\\le\\left(1+\\frac1{4N}\\right)^L-1.\n$\nFor fixed $L$, the right side is $O(L/N)$, uniformly in the rarity of $p$; the relative-variance formula has factors $1/p_\\ell$ and gives no uniform relative-efficiency claim.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Let $U,V$ be independent Bernoulli$(1/2)$. Construct the level-one sample by $X_1=1+V$ if $U=1$, and $X_1=3+V$ if $U=0$; then $X_1\\sim P$. Construct $X_2=1$ if $U=1$, and $X_2=2$ if $U=0$; then $X_2\\sim P(\\cdot\\mid A_1)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The correct marginal success probabilities are $P(X_1\\in A_1)=1/2$ and $P(X_2\\in A_2)=1/2$. But the two indicators both equal $U$, so their product has expectation $1/2$, while $P(A_2)=1/4$. Thus dependence biases the product despite both correct marginals, and it violates the independence condition in [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "The unbiasedness conclusion in [F3] has the stated independence hypothesis; it cannot be applied to this coupling. The target counterexample refutes the proposed implication.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "four-point-dependent-level-coupling",
+          "asserts": "For uniform Omega={1,2,3,4}, the constructed level indicators are both U, so E[H1 H2]=1/2 while P(A2)=1/4.",
+          "claim": "Correct level marginals under dependent sampling do not imply an unbiased product.",
+          "checked_in": "Steps 1.1 and 1.2"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "ex-sir-zero-particle-prefix-positive-event": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nested-rare-event-levels",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space as in [[def-probability-measure]]. A finite nested event sequence of length $L\\ge1$ is a sequence of measurable sets\n$\n\\Omega=A_0\\supseteq A_1\\supseteq\\cdots\\supseteq A_L=A\n$\nsuch that $P(A_\\ell)>0$ for $0\\le\\ell\\le L$. Its **conditional level probabilities** and **level laws** are\n$\np_\\ell=\\frac{P(A_\\ell)}{P(A_{\\ell-1})}\\in(0,1],\\qquad\n\\pi_\\ell(B)=\\frac{P(B\\cap A_\\ell)}{P(A_\\ell)}\n\\quad (B\\in\\mathcal F).\n$\nThe target probability is $p=P(A_L)$. Independence across levels means that the complete sample arrays used at distinct levels are mutually independent; correct marginal laws alone do not imply this condition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-fixed-level-sir-splitting",
+          "source_section": "Definition",
+          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman–Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon–Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fixed-level-sir-estimator-unbiased",
+          "source_section": "Statement",
+          "quote": "Use the full-resampling SIR model in [[alg-fixed-level-sir-splitting]] with $N\\ge1$, positive level probabilities, and each $K_\\ell$ supported on $A_\\ell$ and invariant for $\\pi_\\ell=P(\\,\\cdot\\mid A_\\ell)$. Then every prefix Feynman–Kac normalizer is $Z_\\ell=P(A_\\ell)$, and the product normalizer estimate $\\widehat p$ is unbiased:\n$\n\\mathbb E[\\widehat p]=P(A_L).\n$\nThis conclusion asserts no finite-$N$ variance bound, accuracy guarantee, or uniform-in-rarity efficiency.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "$P(A_1)=1/2>0$. The two initial particles are IID from $P$, so the probability that both equal $1$ and therefore both have zero $A_1$-weight is $(1/2)^2=1/4$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "On this branch the first average event weight is zero, so [F2] returns estimate zero despite $P(A_1)>0$. This does not contradict [F3]: unbiasedness is an expectation over all branches and does not imply that each realization is positive.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "two-particle-zero-prefix-branch",
+          "asserts": "For two IID uniform particles and A1={0}, P(both miss A1)=1/4 while P(A1)=1/2.",
+          "claim": "A zero SIR prefix has positive probability even for a positive event.",
+          "checked_in": "Step 1.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "ex-finite-budget-crossing-misses-between-grid-times": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-budget-stopped-event-kernel",
+          "source_section": "Definition",
+          "quote": "Let $(E,\\mathcal E)$ be a standard Borel space, $M$ a probability kernel on it, and $T,R\\in\\mathcal E$ disjoint target and return sets. Write $S=E\\setminus(T\\cup R)$ and let $C=\\{\\mathtt{hit},\\mathtt{return},\\partial\\}$ have the discrete sigma-algebra; $\\partial$ is the cemetery outcome meaning the budget expired before either set was reached.\n\nFor budget $m=0$, define\n$\n\\kappa_0(x,\\cdot)=\n\\begin{cases}\n\\delta_{\\mathtt{hit}},&x\\in T,\\\\\n\\delta_{\\mathtt{return}},&x\\in R,\\\\\n\\delta_{\\partial},&x\\in S.\n\\end{cases}\n$\nFor $m\\ge0$, define the finite-budget stopped-status kernel recursively by\n$\n\\kappa_{m+1}(x,\\cdot)=\n\\begin{cases}\n\\delta_{\\mathtt{hit}},&x\\in T,\\\\\n\\delta_{\\mathtt{return}},&x\\in R,\\\\\n\\displaystyle\\int_E\\kappa_m(y,\\cdot)\\,M(x,dy),&x\\in S.\n\\end{cases}\n$\nThus a target hit at the initial state counts at budget zero; each additional budget unit permits one more transition. The **exact-hitting status kernel**, when used, is the limit law of these statuses and treats nontermination as $\\partial$; it is an exact sampler for $P_x(\\tau_T<\\tau_R)$ only when the requested event is the finite first hit represented by that limit. The budgeted kernel is distinct from an exact-hitting oracle.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-budget-stopped-normalizer",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[def-finite-budget-stopped-event-kernel]], every $\\kappa_m$ is a measurable probability kernel from $E$ to $C$. For an initial probability law $\\mu$, let\n$\np_m=\\int_E\\kappa_m(x,\\{\\mathtt{hit}\\})\\,\\mu(dx).\n$\nThen $p_m=P_\\mu(\\tau_T<\\tau_R,\\ \\tau_T\\le m)$. In the one-step Feynman–Kac model with initial law $\\mu$, transition $\\kappa_m$, initial potential $1$, and terminal potential $\\mathbf1_{\\{\\mathtt{hit}\\}}$, the normalizer is exactly $p_m$. The limit $\\lim_{m\\to\\infty}p_m=P_\\mu(\\tau_T<\\tau_R)$ is the exact-hitting normalizer; an exact simulator with finite expected work requires a separate termination-cost bound.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-stopped-kernel-discretization-bias",
+          "source_section": "Statement",
+          "quote": "Assume AC. In the stopped-event setup of [[def-finite-budget-stopped-event-kernel]], with $(E,\\mathcal E)$ standard Borel and initial probability law $\\mu$, let $p=P_\\mu(\\tau_T<\\tau_R)$ and let $p_m$ be the finite-budget normalizer of [[lem-finite-budget-stopped-normalizer]]. Then\n$\n0\\le p-p_m=P_\\mu(\\tau_T<\\tau_R,\\tau_T>m)\\le P_\\mu(\\tau_T\\wedge\\tau_R>m).\n$\nThus the finite-budget stopped normalizer estimates the truncated event; a rate for its bias requires a tail bound for the stopping time. Separately, assume AC and let both finite-horizon Feynman–Kac models have the same finite horizon $H\\in\\mathbb N_0$, the same standard Borel state spaces $(\\mathsf X_j,\\mathcal X_j)$ for $0\\le j\\le H$, the same initial law $\\mu_0$, and the same potentials $G_j:\\mathsf X_j\\to[0,1]$ for $0\\le j\\le H$. Let their transition kernels be $M_j,\\widetilde M_j:\\mathsf X_{j-1}\\rightsquigarrow\\mathsf X_j$ for $1\\le j\\le H$, and suppose\n$$\n\\sup_x\\|M_j(x,\\cdot)-\\widetilde M_j(x,\\cdot)\\|_{\\rm TV}\\le\\epsilon_j,\\qquad \\epsilon_j\\ge0,\n$$\nwhere $\\|\\nu-\\nu'\\|_{\\rm TV}=\\sup_B|\\nu(B)-\\nu'(B)|$. If $Z_H^M$ and $Z_H^{\\widetilde M}$ are the normalizers in the common Feynman–Kac setup of [[def-feynman-kac-path-targets-and-normalizers]], then $|Z_H^M-Z_H^{\\widetilde M}|\\le\\sum_{j=1}^H\\epsilon_j$. If a grid-detected crossing event $A_h$ is contained in a continuous-time target event $A$, its probability bias is exactly $P(A\\setminus A_h)$; no grid-error rate follows without a separate path regularity or crossing-probability bound.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The path satisfies $x(0)=x(1)=0<3/4$, while $x(1/2)=1\\ge3/4$. Thus the continuous crossing event occurs and endpoint-grid detection fails.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The model is deterministic, so its continuous crossing probability is $1$ and the grid-detected probability is $0$; their absolute bias is $1$. This is exactly the missed-crossing event in [F3], and no error rate in grid spacing can be inferred from this single example.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "deterministic-endpoint-grid-miss",
+          "asserts": "For x(t)=1-2|t-1/2|, the continuous target probability is 1 and the endpoint-grid target probability is 0 at threshold 3/4.",
+          "claim": "Finite grid detection can miss a continuous-time crossing.",
+          "checked_in": "Steps 1.1 and 1.2"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "ex-importance-sampling-finite-mean-infinite-second-moment": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-importance-sampling",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space. An **unnormalized target density** is a measurable function $\\tilde p:\\mathsf X\\to[0,\\infty)$ with\n$$Z_p:=\\int_{\\mathsf X}\\tilde p\\,d\\mu\\in(0,\\infty).$$\nThe target probability measure is $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$. A **proposal density** is a measurable $q:\\mathsf X\\to[0,\\infty)$ with $\\int q\\,d\\mu=1$; write $Q(dx)=q(x)\\mu(dx)$. The input integrand $f:\\mathsf X\\to\\mathbb R$ is measurable, and the input sample $X_1,\\ldots,X_n$ is IID with law $Q$, in the sense of [[def-identically-distributed-and-iid-random-variables]]. The normalizing constant $Z_p$ is known for this algorithm.\n\n**Admissible conditions for an unbiased estimate:** $n\\ge1$, $q>0$ $\\mu$-almost everywhere on $\\{x:f(x)\\tilde p(x)\\ne0\\}$, and the random variable\n$$Y:=\\begin{cases}f(X_1)\\tilde p(X_1)/(Z_pq(X_1)),&q(X_1)>0,\\\\0,&q(X_1)=0\\end{cases}$$\nis integrable under $Q$. The support condition makes the value on $q=0$ immaterial to the target integral.\n\n**Well-defined weights:** The reciprocal map $r(s)=1/s$ for $s>0$ and $r(s)=0$ for $s\\le0$ is Borel. Its composition with $q$, multiplied by the measurable inputs, makes the piecewise weight and weighted integrand measurable ([[thm-composition-with-borel-functions-preserves-measurability]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]]).\n\n**Procedure and output:** For each supplied draw $X_i$, set $Y_i=f(X_i)\\tilde p(X_i)/(Z_pq(X_i))$ when $q(X_i)>0$ and set $Y_i=0$ otherwise. Return\n$$\\hat\\mu_{\\mathrm{IS}}:=\\frac1n\\sum_{i=1}^nY_i.$$\nSeparate variance and central limit claims require the corresponding weighted second-moment hypothesis.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ordinary-importance-sampling-is-unbiased",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\mathcal X,\\mu)$ be a measure space, let $\\tilde p\\ge0$ and $q\\ge0$ be measurable densities with $Z_p=\\int\\tilde p\\,d\\mu\\in(0,\\infty)$ and $\\int q\\,d\\mu=1$, and set $\\pi(dx)=\\tilde p(x)\\mu(dx)/Z_p$ and $Q(dx)=q(x)\\mu(dx)$. Let $f:\\mathsf X\\to\\mathbb R$ be measurable with $\\int|f|\\tilde p\\,d\\mu<\\infty$. Suppose $q>0$ $\\mu$-almost everywhere on $\\{f\\tilde p\\ne0\\}$ and $X_1,\\ldots,X_n$ are IID with law $Q$. For the ordinary importance sampling estimator in [[alg-importance-sampling]],\n$$\\mathbb E_Q[\\hat\\mu_{\\mathrm{IS}}]=\\int f\\,d\\pi.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment",
+          "source_section": "Statement",
+          "quote": "Use the hypotheses and notation of [[thm-ordinary-importance-sampling-is-unbiased]]. Define\n$$Y_i:=\\begin{cases}f(X_i)\\tilde p(X_i)/(Z_pq(X_i)),&q(X_i)>0,\\\\0,&q(X_i)=0\\end{cases},\\qquad \\theta:=\\int f\\,d\\pi,\\qquad \\sigma^2:=\\operatorname{Var}_Q(Y_1).$$\nIf $\\mathbb E_Q[Y_1^2]<\\infty$, then $\\hat\\mu_{\\mathrm{IS}}$ has finite variance and\n$$\\operatorname{Var}_Q(\\hat\\mu_{\\mathrm{IS}})=\\frac{\\sigma^2}{n}=\\frac1n\\left(\\frac1{Z_p^2}\\int_{\\{q>0\\}}\\frac{f(x)^2\\tilde p(x)^2}{q(x)}\\,d\\mu(x)-\\theta^2\\right).$$\nThis finite-sample conclusion is choice-free. For the central limit conclusion, let $(X_i)_{i\\ge1}$ be an IID sequence with law $Q$, and apply the estimator to its first $n$ draws for each $n\\ge1$. If, in addition, AC holds, then\n$$\\sqrt n\\bigl(\\hat\\mu_{\\mathrm{IS}}-\\theta\\bigr)\\Rightarrow N(0,\\sigma^2).$$\nNo finite variance or normal-limit claim is made when the weighted second moment is infinite.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-rare-event-efficiency-criteria",
+          "source_section": "Definition",
+          "quote": "Let $(P_\\lambda,A_\\lambda)_{\\lambda\\in\\Lambda}$ be a family of probability measures and measurable events with $p_\\lambda=P_\\lambda(A_\\lambda)>0$ and $p_\\lambda\\to0$ along the stated rare-event limit. An estimator $\\widehat p_\\lambda$ is **unbiased with finite variance** when $\\mathbb E[\\widehat p_\\lambda]=p_\\lambda$ and $\\operatorname{Var}(\\widehat p_\\lambda)<\\infty$. Its **relative error** is\n$\n\\operatorname{RE}(\\widehat p_\\lambda)=\\frac{\\sqrt{\\operatorname{Var}(\\widehat p_\\lambda)}}{p_\\lambda}.\n$\nIt has **bounded relative error** if these relative errors remain bounded for all sufficiently rare indices. It is **logarithmically efficient** if $\\widehat p_\\lambda\\ge0$, its second moment is finite and positive, and\n$\n\\lim_{\\lambda}\\frac{\\log\\mathbb E[\\widehat p_\\lambda^2]}{\\log(p_\\lambda^2)}=1.\n$\nLogarithmic efficiency is a weaker asymptotic property than bounded relative error; the definitions impose no implication between an algorithm's efficiency and its proposal-fitting success.\n\nFor a specified cost model, let $W_\\lambda$ be the expected work of one estimator replication. Record both its variance and its **variance-work product** $W_\\lambda\\operatorname{Var}(\\widehat p_\\lambda)$; for relative precision, record $W_\\lambda\\operatorname{Var}(\\widehat p_\\lambda)/p_\\lambda^2$. These quantities depend on the cost model. Comparing algorithms requires the same declared work convention.\n\nFor a single event $A$ under a probability measure $P$, put $p=P(A)>0$. If $P$ has density $f$ with respect to $\\mu$, the **zero-variance event proposal** is the probability density\n$\nq^*(x)=\\frac{\\mathbf 1_A(x)f(x)}{p}.\n$\nIt is a formal benchmark because its normalizing constant is the unknown event probability $p$. Ordinary importance-sampling estimators and their weighted-second-moment condition are defined in [[alg-importance-sampling]] and [[thm-ordinary-importance-sampling-finite-variance-under-weighted-second-moment]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Both constants are finite and positive because the defining series converge for exponents $2$ and $3$, and $Q(k)>0$ for every $k$; hence $P\\ll Q$. The likelihood ratio is $P(k)/Q(k)=(c_2/c_3)k$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "By [F1], $ \\mathbb E_Q Z=\\sum_{k=m}^{\\infty}\\frac{c_3}{k^3}\\frac{c_2}{c_3}k =c_2\\sum_{k=m}^{\\infty}k^{-2}=P(A_m)\\in(0,\\infty), $ so [F2] confirms unbiasedness.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "The second moment is $ \\mathbb E_Q Z^2=\\sum_{k=m}^{\\infty}\\frac{c_3}{k^3}\\left(\\frac{c_2}{c_3}k\\right)^2 =\\frac{c_2^2}{c_3}\\sum_{k=m}^{\\infty}\\frac1k=\\infty $ by divergence of the harmonic tail. Thus the weighted second-moment hypothesis in [F3] is absent and this unbiased estimator has infinite variance; [F4] therefore rules out describing its second-moment efficiency as finite.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-indexed family or empty construction is an input to this item; the stated finite or positive hypotheses govern its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no separate zero parameter branch beyond the zero-probability or zero-estimate cases stated in its own hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no separate unit-parameter branch beyond the value-one cases stated in its own hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No additional collapsed or degenerate configuration is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint convention beyond the domain and limits stated in the item changes its conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the stated finite constructions and imported suppliers; no new choice from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+    },
+    "thm-fixed-level-sir-relative-mse-under-conditional-event-second-moment-bounds": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-fixed-level-sir-splitting",
+          "source_section": "Definition",
+          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman–Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon–Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-sir-bounded-potential-unnormalized-update-variance",
+          "source_section": "Statement",
+          "quote": "Let $\\nu$ be a probability measure on $(E,\\mathcal E)$, $M$ a probability kernel on $E$, $G,f:E\\to[0,1]$ measurable, $z\\in[0,1]$, and $N\\ge1$. Draw $Y_1,\\ldots,Y_N$ IID from the probability law $\\nu M$. Put $a=N^{-1}\\sum_{i=1}^NG(Y_i)$. If $a>0$, set\n$\n\\eta^N=\\frac{\\sum_{i=1}^NG(Y_i)\\delta_{Y_i}}{Na};\n$\nif $a=0$, let $\\eta^N$ be any probability measure. Define the one-step unnormalized estimate $\\Gamma^N(f)=za\\,\\eta^N(f)$. Then\n$\n\\mathbb E[\\Gamma^N(f)]=z\\,\\nu M(Gf),\n\\qquad\n\\operatorname{Var}(\\Gamma^N(f))\\le\\frac{z^2}{4N}.\n$\nThe estimate is the normalizer update $za$ multiplied by the weighted empirical mean of $f$. The zero-weight fallback does not affect $\\Gamma^N$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fixed-level-sir-absolute-mse-bound",
+          "source_section": "Statement",
+          "quote": "Use the full-resampling fixed-level SIR model of [[alg-fixed-level-sir-splitting]] on nested levels $A_0\\supseteq\\cdots\\supseteq A_L$, with $N\\ge1$ particles and positive finite prefixes $Z_p=P(A_p)>0$. Its event potentials satisfy $0\\le G_p\\le1$. Then\n$\n\\mathbb E[\\widehat p]=P(A_L),\\qquad\n\\mathbb E[(\\widehat p-P(A_L))^2]\n=\\operatorname{Var}(\\widehat p)\n\\le\\frac{L+1}{4N}.\n$\nThe bound is an absolute mean-square error bound for fixed $L$; it is not a relative-efficiency claim.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-iid-monte-carlo-mean-moments",
+          "source_section": "Statement",
+          "quote": "Let $(Y_i)_{i\\ge1}$ be a real IID sequence. If $\\mathbb E|Y_1|<\\infty$ and $\\mu=\\mathbb E[Y_1]$, then $\\mathbb E[\\bar Y_n]=\\mu$ for every $n\\ge1$. If also $\\mathbb E[Y_1^2]<\\infty$ and $\\sigma^2=\\operatorname{Var}(Y_1)$, then $\\operatorname{Var}(\\bar Y_n)=\\sigma^2/n$ for every $n\\ge1$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-conditional-variance-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume AC. For real $X\\in L^2(P)$, $\\operatorname{Var}(X)=E[\\operatorname{Var}(X\\mid\\mathcal G)]+\\operatorname{Var}(E[X\\mid\\mathcal G])$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fixed-level-sir-estimator-unbiased",
+          "source_section": "Statement",
+          "quote": "Use the full-resampling SIR model in [[alg-fixed-level-sir-splitting]] with $N\\ge1$, positive level probabilities, and each $K_\\ell$ supported on $A_\\ell$ and invariant for $\\pi_\\ell=P(\\,\\cdot\\mid A_\\ell)$. Then every prefix Feynman–Kac normalizer is $Z_\\ell=P(A_\\ell)$, and the product normalizer estimate $\\widehat p$ is unbiased:\n$\n\\mathbb E[\\widehat p]=P(A_L).\n$\nThis conclusion asserts no finite-$N$ variance bound, accuracy guarantee, or uniform-in-rarity efficiency.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "Write $\\alpha_p=1+(B_p-1)/N$. The initial particles are IID from $P$, $\\widehat Z_0=1$ and $G_0=1$, so $U_0=N^{-1}\\sum_iq_0(X_0^i)$ has mean $Z$ and second moment $Z^2+[P(q_0^2)-Z^2]/N\\le\\alpha_0Z^2$. All $U_p$ lie in $[0,1]$ by [F2], so all following conditional second moments exist.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "step": "1.2",
+          "claim": "Conditional on the particle history $\\mathcal F_{p-1}$, put $z=\\widehat Z_{p-1}$, $a=\\eta_{p-1}^NM_p(G_pq_p)$ and $b=\\eta_{p-1}^NM_p[(G_pq_p)^2]$. By [F1] and [F3], $\\mathbb E[U_p^2\\mid\\mathcal F_{p-1}]=z^2[a^2+(b-a^2)/N]$. On $z>0$, the hypothesis $b\\le B_pa^2$ bounds this by $\\alpha_p z^2a^2=\\alpha_pU_{p-1}^2$, using $q_{p-1}=M_p(G_pq_p)$. If $a=0$ this same calculation gives zero, without division by $a$. If $z=0$, the zero-normalizer branch makes $U_p=U_{p-1}=0$, so the inequality also holds without a hypothesis on the fallback empirical law.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "Taking expectations in step 1.2 and iterating over $p=1,\\ldots,L$ yields $\\mathbb EU_L^2\\le\\prod_{p=1}^L\\alpha_p\\,\\mathbb EU_0^2\\le Z^2\\prod_{p=0}^L\\alpha_p$. Since $q_L=1$, $U_L=\\widehat Z_L$. Its mean is $Z$ by [F4], so subtracting $Z^2$ proves the claimed MSE bound. If $B_0=1$ then $\\alpha_0=1$; if every remaining $B_p\\le B$, each remaining factor is at most $1+(B-1)/N$, giving the specialization.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F3",
+            "F4",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires L>=1 and N>=1; no empty particle sample is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 treats zero stored normalizer z and zero conditional mean a without division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is valid for N=1, and step 2.1 treats B0=1 and Bp=1 factors."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 permits extinct particle prefixes and arbitrary reporting fallback laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement allows event potentials at zero or one; step 1.2 does not divide by the conditional event mean."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Declared AC is inherited through canonical suppliers; the finite scalar second-moment recursion makes no further selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is an implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no reverse implication from its variance conclusion to conditional bounds."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "Inherited through canonical SIR/Feynman–Kac and conditional-variance suppliers as declared in A1 and source axiom_use; no additional choice in the finite recursion."
+        }
+      ],
+      "supplier_observations": "Local-composition review only. Exact valid Statement/Definition quotes retained above. F2 cites the absolute-MSE theorem: its Statement supplies the bounded event model and its actual Proof 1.2/2.1 supplies the backward functions and conditional martingale identity used here; these helper facts are not quoted as though they occur in its Statement. The proof-section dependency was actually inspected. No new external reading, whole-supplier audit, native acceptance or historical review coverage claimed."
+    }
+  }
+}

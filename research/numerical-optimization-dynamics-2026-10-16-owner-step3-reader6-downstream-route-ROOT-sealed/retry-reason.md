@@ -1,0 +1,1 @@
+The supported downstream consumer route is now genuinely registered and validated. Native split6 exhausted three mechanical routing attempts before registration; preserve every failure and successful reader6. Request only native unit6 retry after this actual route repair. No historical success, attempt, finding or observation is fabricated.

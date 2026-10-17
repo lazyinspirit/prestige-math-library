@@ -1,0 +1,364 @@
+--- items/alg-box-muller-finite-bit-transform.md
++++ items/alg-box-muller-finite-bit-transform.md
+@@ -31,11 +31,14 @@
+ 
+ ## Definition
+ 
+-Input a bit budget $b\ge1$, two disjoint ideal fair-bit subsequences as in
++Input an integer bit budget $b\ge1$, two disjoint ideal fair-bit subsequences as in
+ [[thm-independent-fair-bit-streams-produce-uniforms]], and a fixed deterministic
+-configuration consisting of finite dyadic format parameters, series and total
+-split budgets, positive dyadic log/root width targets, and phase parameters
+-$0<\tau\le1/4$, $2\le p_0\le p_{\max}$ and finite series cap. Every call uses
++configuration consisting of finite dyadic format parameters, positive integer
++series truncation indices $N\ge1$ and nonnegative integer total split budgets
++$B\ge0$ for the log/root interval evaluators, positive dyadic log/root width
++targets, and phase parameters $0<\tau\le1/4$, integer exponent limits
++$e_{\min}\le e_{\max}$, integer precisions $2\le p_0\le p_{\max}$,
++and a positive integer elementary-series cap $J\ge1$. Every call uses
+ these fixed parameters; a failed call returns `inconclusive` with its supplier
+ status. No success at a requested width is promised for arbitrary fixed budgets.
+ The midpoint convention is [[thm-midpoint-bit-stream-coupling-and-error]], and
+@@ -79,11 +82,5 @@
+    Final vector multiplication is exact dyadic multiplication; rounding it
+    further requires a separate added error certificate.
+ 
+-The associated mathematical radius-error bound is
+-$\eta_r:=\sqrt{2\eta_\ell}+\eta_s$, since
+-$|\sqrt x-\sqrt y|\le\sqrt{|x-y|}$ for nonnegative $x,y$. It is an exact
+-bound defined from the reported certificates, not an uncertified floating
+-square-root computation. The procedure consumes $2b$ random bits and three
+-conceptual evaluator calls when successful (log, root, and the phase routine,
+-which internally evaluates both coordinates and has a finite precision loop).
++The output is the dyadic vector together with the reported evaluator certificates.
+ Its arithmetic suppliers provide neither an IID source nor exact normal output.
+--- items/alg-certified-bracketed-cdf-inversion.md
++++ items/alg-certified-bracketed-cdf-inversion.md
+@@ -25,12 +25,12 @@
+ 
+ Input a continuous nondecreasing CDF $F$ on a finite interval $[a,b]$ with $a<b$, a target $u$, tolerance $\varepsilon>0$, a nonnegative integer $N$, and a verified modulus certificate
+ $$|x-y|\le (b-a)2^{-N}\ \Longrightarrow\ |F(x)-F(y)|\le\varepsilon\quad(x,y\in[a,b]).$$
+-An exact real-comparison oracle for $F$ and a budget of at least $N$ evaluations are also inputs. If $u\notin[F(a),F(b)]$, return status tail-unresolved. Otherwise set $\ell=a$ and $r=b$. Repeat $N$ times: set $m=(\ell+r)/2$; if $F(m)\le u$, replace $\ell$ by $m$, and otherwise replace $r$ by $m$. If an evaluation or the budget fails, return inconclusive. Return
++An exact real-comparison oracle for $F$ and a budget of at least $N+2$ evaluations are also inputs. First evaluate and store $F(a)$ and $F(b)$, counting both against the budget; an evaluation failure returns inconclusive. If $u\notin[F(a),F(b)]$, return status tail-unresolved. Otherwise set $\ell=a$ and $r=b$. Repeat $N$ times: set $m=(\ell+r)/2$; if $F(m)\le u$, replace $\ell$ by $m$, and otherwise replace $r$ by $m$. If an evaluation or the budget fails, return inconclusive. Return
+ $$\widehat x=(\ell+r)/2$$
+ and the certificate $F(\ell)\le u\le F(r)$ and $|F(\widehat x)-u|\le\varepsilon$.
+ 
+-For a CDF continuous on a compact bracket, some $N$ satisfying the modulus condition exists by uniform continuity. A caller that cannot supply a certified $N$ or exact comparison returns inconclusive. The procedure resolves the central bracket only; any tails outside $[a,b]$ require a separately specified branch or sampler.
++A caller that cannot supply a certified $N$, the required budget, or exact comparison returns inconclusive. The procedure resolves the central bracket only; any tails outside $[a,b]$ require a separately specified branch or sampler.
+ 
+ ## Remarks
+ 
+-This is a real-arithmetic reference procedure. Its cost is $N$ midpoint updates and at most $N$ new CDF comparisons, with tail and precision failures explicit. It does not identify CDF residual with spatial error unless an additional positive lower density bound is supplied.
++This is a real-arithmetic reference procedure. Endpoint queries and each midpoint query are counted against the input evaluation budget, with tail and precision failures explicit. It does not identify CDF residual with spatial error unless an additional positive lower density bound is supplied.
+--- items/alg-finite-categorical-inverse-cdf.md
++++ items/alg-finite-categorical-inverse-cdf.md
+@@ -26,7 +26,13 @@
+ 
+ ## Definition
+ 
+-Input a nonempty finite list of outcomes $1,\ldots,r$ ($r\ge1$) with probabilities $p_i\ge0$ and $\sum_{i=1}^r p_i=1$, and either an ideal uniform $U\in(0,1)$ as in [[thm-independent-fair-bit-streams-produce-uniforms]] or a $b$-bit midpoint $U_b\in(0,1)$ as in [[thm-midpoint-bit-stream-coupling-and-error]]. Let $C_0=0$ and $C_i=\sum_{j=1}^i p_j$. Return the least $i$ with $U\le C_i$ (or $U_b\le C_i$). For ideal $U$, this is the generalized inverse of the step CDF $F(i)=C_i$ by [[lem-generalized-inverse-sublevel-identity]]. Find this index by binary search in the sorted cumulative array $C_1,\ldots,C_r$, using at most $\lceil\log_2 r\rceil$ comparisons. The procedure returns one outcome even when some $p_i=0$; such an outcome has no interval of positive length.
++Input a nonempty finite list of outcomes $1,\ldots,r$ ($r\ge1$) with probabilities $p_i\ge0$ and $\sum_{i=1}^r p_i=1$, and either an ideal bit-stream uniform $U\in[0,1]$ as in [[thm-independent-fair-bit-streams-produce-uniforms]] or a $b$-bit midpoint $U_b\in(0,1)$ as in [[thm-midpoint-bit-stream-coupling-and-error]]. Write $v$ for the supplied input. Let $C_0=0$ and $C_i=\sum_{j=1}^i p_j$.
++
++1. If $v=0$, return outcome $1$. This assigns the ideal uniform's null zero-endpoint event an explicit value.
++2. Otherwise initialize integer bounds $L=1$, $H=r$. While $L<H$, set $j=\lfloor(L+H)/2\rfloor$. If $v\le C_j$, set $H=j$; otherwise set $L=j+1$.
++3. When $L=H$, return outcome $L$.
++
++Thus on positive inputs the intended output is the least index with $v\le C_i$, including equality at a cumulative threshold. For ideal positive $U$, this is the generalized inverse of the step CDF $F(i)=C_i$ by [[lem-generalized-inverse-sublevel-identity]]. The midpoint and ideal-input law and binary-search properties are proved separately.
+ 
+ ## Remarks
+ 
+--- items/ex-box-muller-finite-midpoint-tail.md
++++ items/ex-box-muller-finite-midpoint-tail.md
+@@ -7,6 +7,9 @@
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+ dependency_level: 2
+ deps:
++  - thm-natural-logarithm-laws
++  - thm-of-square-roots
++  - lem-of-square-monotone
+   - thm-midpoint-bit-stream-coupling-and-error
+   - lem-box-muller-product-density-and-radius-moment
+   - def-countable-choice
+@@ -38,10 +41,14 @@
+ 
+ [F2] Under the ideal Box–Muller transform, $\mathbb P(R>r)=e^{-r^2/2}$. [[lem-box-muller-product-density-and-radius-moment]]
+ 
++[F3] The natural logarithm is increasing on positive reals. [[thm-natural-logarithm-laws]]
++
++[F4] A square root is nonnegative and squares to its argument; squaring is order-preserving on nonnegatives. [[thm-of-square-roots]], [[lem-of-square-monotone]]
++
+ [A1] The exact Box–Muller change-of-variables supplier assumes Countable Choice. [[def-countable-choice]]
+ 
+ ## Verification
+ 
+ 1.1 For $b=8$, $2^b=256$ and the smallest midpoint is $(0+1/2)/256=1/512=2^{-9}$ by [F1]. [given, F1, algebra]
+ 
+-2.1 Since $r(u)=\sqrt{-2\log u}$ decreases as $u$ increases, the largest radius occurs at $u=2^{-9}$ and equals $\sqrt{18\log2}$. By [F2], the ideal radial tail beyond it is $e^{-18\log2/2}=2^{-9}=1/512$, while no finite midpoint input has a larger radius. [F1, F2, A1, step 1.1, algebra] ∎
++2.1 For $0<u\le v\le1$, [F3] gives $0\le-2\log v\le-2\log u$. Their nonnegative square roots satisfy $\sqrt{-2\log v}\le\sqrt{-2\log u}$ by [F4]; thus $r(u)=\sqrt{-2\log u}$ is nonincreasing, and the largest radius occurs at $u=2^{-9}$ and equals $\sqrt{18\log2}$. By [F2], the ideal radial tail beyond it is $e^{-18\log2/2}=2^{-9}=1/512$, while no finite midpoint input has a larger radius. [F1, F2, F3, F4, A1, step 1.1, algebra] ∎
+--- items/ex-box-muller-zero-endpoint.md
++++ items/ex-box-muller-zero-endpoint.md
+@@ -7,6 +7,7 @@
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+ dependency_level: 2
+ deps:
++  - lem-box-muller-product-density-and-radius-moment
+   - thm-independent-fair-bit-streams-produce-uniforms
+   - thm-midpoint-bit-stream-coupling-and-error
+   - def-countable-choice
+@@ -39,10 +40,12 @@
+ 
+ [F2] An ideal bit-stream uniform has CDF $t$ on $[0,1]$ and hence assigns probability zero to $\{0\}$. [[thm-independent-fair-bit-streams-produce-uniforms]]
+ 
++[F3] For $0<u<1$, the exact Box–Muller reference radius is $r(u)=\sqrt{-2\log u}$. [[lem-box-muller-product-density-and-radius-moment]]
++
+ [A1] The countable fair-bit product supplying [F2] assumes Countable Choice and Dependent Choice. [[def-countable-choice]], [[def-dependent-choice]]
+ 
+ ## Verification
+ 
+-1.1 The raw endpoint event is exactly $K=0$, which has probability $2^{-b}$; at that input $\log0$ is undefined. [given, algebra]
++1.1 The raw endpoint event is exactly $K=0$, which has probability $2^{-b}$; the radius expression [F3] has an undefined logarithm at that input. [given, F3, algebra]
+ 
+-2.1 By [F1], the midpoint input is at least $2^{-b-1}>0$ and is less than $1$, so its logarithm is finite. By [F2], the ideal stream hits $0$ with probability zero; a software interface still needs an explicit endpoint convention if it accepts closed-interval inputs. [F1, F2, A1, algebra] ∎
++2.1 By [F1], the midpoint input is at least $2^{-b-1}>0$ and is less than $1$, so its logarithm is finite. By [F2], the ideal stream hits $0$ with probability zero; a software interface still needs an explicit endpoint convention if it accepts closed-interval inputs. [F1, F2, F3, A1, algebra] ∎
+--- items/ex-inverse-cdf-near-zero-density.md
++++ items/ex-inverse-cdf-near-zero-density.md
+@@ -7,6 +7,7 @@
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+ dependency_level: 3
+ deps:
++  - thm-of-square-roots
+   - alg-certified-bracketed-cdf-inversion
+   - thm-certified-bracketed-inverse-error
+ proof_strategy: direct
+@@ -33,10 +34,12 @@
+ 
+ **Given:** The CDF and points in the Example.
+ 
++[F1] A nonnegative real $\varepsilon$ has a unique nonnegative square root whose square equals $\varepsilon$. [[thm-of-square-roots]]
++
+ [F2] A spatial inverse bound from CDF residual requires a density lower bound $f\ge m>0$ on the bracket. [[thm-certified-bracketed-inverse-error]]
+ 
+ ## Verification
+ 
+-1.1 For $0<\varepsilon\le1$, $\widehat x=\sqrt\varepsilon$ lies in $[0,1]$ and $F(\widehat x)=\widehat x^2=\varepsilon$. Under the stated endpoint convention, the target is $0$, so the residual is $\varepsilon$ while the spatial error is $\sqrt\varepsilon$. [given, algebra]
++1.1 For $0<\varepsilon\le1$, [F1] gives $\widehat x=\sqrt\varepsilon\ge0$ and $\widehat x^2=\varepsilon>0$, so $\widehat x>0$. If $\widehat x>1$, then $\widehat x^2>1$, contradicting $\varepsilon\le1$; hence $\widehat x\in[0,1]$ and $F(\widehat x)=\widehat x^2=\varepsilon$. Under the stated endpoint convention, the target is $0$, so the residual is $\varepsilon$ while the spatial error is $\sqrt\varepsilon$. [given, F1, algebra]
+ 
+-2.1 The ratio $\sqrt\varepsilon/\varepsilon=1/\sqrt\varepsilon$ is unbounded as $\varepsilon\downarrow0$, and $f(x)=2x$ has infimum $0$ on every bracket touching zero. Thus no uniform constant converts CDF residual to spatial error here; the lower-density hypothesis in [F2] is necessary. [F2, step 1.1, algebra] ∎
++2.1 The ratio $\sqrt\varepsilon/\varepsilon=1/\sqrt\varepsilon$ is unbounded as $\varepsilon\downarrow0$: for any $M>0$, take $0<\varepsilon<\min(1,1/(M+1)^2)$, so [F1] gives $\sqrt\varepsilon<1/(M+1)$ by comparing nonnegative squares, and the ratio exceeds $M$. Also $f(x)=2x$ has infimum $0$ on every bracket touching zero. Thus no uniform constant converts CDF residual to spatial error here; the lower-density hypothesis in [F2] is necessary. [F1, F2, step 1.1, algebra] ∎
+--- items/lem-box-muller-product-density-and-radius-moment.md
++++ items/lem-box-muller-product-density-and-radius-moment.md
+@@ -7,6 +7,7 @@
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+ dependency_level: 0
+ deps:
++  - thm-rectangle-criterion-for-independent-random-elements
+   - lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness
+   - prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null
+   - thm-tonelli-theorem-for-sigma-finite-product-spaces
+@@ -54,7 +55,7 @@
+ 
+ [F3] Tonelli's theorem factors nonnegative integrals on sigma-finite product spaces and allows order exchange. [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]
+ 
+-[F4] Independence of real random variables means factorization of their joint law as the product of their marginal laws. [[def-independent-random-elements]]
++[F4] Independence means independence of the generated sigma-algebras; factorization of probabilities on every finite Borel rectangle is an equivalent criterion. [[def-independent-random-elements]], [[thm-rectangle-criterion-for-independent-random-elements]]
+ 
+ [F5] A probability measure has total mass one, and its pushforward law is again a probability measure. [[def-probability-measure]]
+ 
+@@ -72,6 +73,6 @@
+ 
+ 1.1 The chosen angle branch is smooth on $D$, and its inverse is the polar map with radius $\sqrt{-2\log u}$ and angle $2\pi v$; both maps are $C^1$. Direct differentiation gives $|\det DG(x,y)|=e^{-(x^2+y^2)/2}/(2\pi)$; [F7] supplies the scalar derivative identities and [F6] ensures the Borel integrand remains Borel after composition. Apply [F1] to $G:D\to(0,1)^2$ with the nonnegative Borel integrand $h\circ G^{-1}$. It follows that for every nonnegative Borel $h$ on $D$, $\mathbb E[h(Z)]=\int_D h(x,y)g(x,y)\,dx\,dy$. The omitted nonnegative $x$-axis is null by [F2], so this is the density on all of $\mathbb R^2$. [given, F1, F2, F6, F7, A1, algebra]
+ 
+-2.1 By [F5], the pushforward law has total mass one, so its density integrates to $1$. By [F3], writing $A=\int_{\mathbb R}e^{-t^2/2}\,dt\in(0,\infty]$, we have $1=(2\pi)^{-1}A^2$. Positivity of the integrand gives $A>0$, and the equality forces $A<\infty$ and $A=\sqrt{2\pi}$. Therefore $g(x,y)=\phi(x)\phi(y)$ with each factor integrating to $1$. The joint law is the product of its marginals, so [F4] gives independence and the stated marginal densities. [F3, F4, F5, step 1.1, algebra]
++2.1 By [F5], the pushforward law has total mass one, so its density integrates to $1$. By [F3], writing $A=\int_{\mathbb R}e^{-t^2/2}\,dt\in(0,\infty]$, we have $1=(2\pi)^{-1}A^2$. Positivity of the integrand gives $A>0$, and the equality forces $A<\infty$ and $A=\sqrt{2\pi}$. Therefore $g(x,y)=\phi(x)\phi(y)$ with each factor integrating to $1$. For arbitrary Borel sets $A,B\subseteq\mathbb R$, [F3] applied to $\mathbf1_A(x)\mathbf1_B(y)\phi(x)\phi(y)$ gives $\mathbb P(Z_1\in A,Z_2\in B)=(\int_A\phi)(\int_B\phi)$. Taking $B=\mathbb R$ or $A=\mathbb R$ identifies the marginal probabilities. Thus the Borel-rectangle factorization criterion [F4] proves independence, with the stated marginal densities. [F3, F4, F5, step 1.1, algebra]
+ 
+ 3.1 For $r\ge0$, strict monotonicity of the logarithm and the relation $R=\sqrt{-2\log U}$ give $\{R>r\}=\{U<e^{-r^2/2}\}$ up to the null boundary; uniformity gives probability $e^{-r^2/2}$. Pointwise, $R^2=\int_0^\infty 2t\mathbf1_{\{t<R\}}\,dt$. By [F3], $\mathbb E R^2=\int_0^\infty 2t e^{-t^2/2}\,dt=2$, using the substitution $s=t^2/2$. [given, F3, F7, algebra] ∎
+--- items/thm-box-muller-finite-bit-coupling-error.md
++++ items/thm-box-muller-finite-bit-coupling-error.md
+@@ -7,6 +7,9 @@
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+ dependency_level: 14
+ deps:
++  - thm-logarithm-derivative-and-integral
++  - cor-mean-value-theorem
++  - thm-of-square-roots
+   - alg-box-muller-finite-bit-transform
+   - thm-midpoint-bit-stream-coupling-and-error
+   - lem-box-muller-product-density-and-radius-moment
+@@ -37,7 +40,7 @@
+ \bigl(\sqrt{2\eta_\ell}+\eta_s\bigr)(1+\eta_t)+R_\delta\eta_t.$$
+ For the exact ideal Box–Muller vector $Z$ and the computed midpoint output $\widehat Z$, the bounded-Lipschitz distance, defined by the supremum over functions with supremum norm and Lipschitz constant at most $1$, is at most $e+2p$. The 1-Wasserstein distance, defined as the infimum of $\mathbb E\|X-Y\|_2$ over couplings, is at most
+ $$e+\sqrt{2p}+(R_b+\eta_r)(1+\eta_t),\qquad \eta_r=\sqrt{2\eta_\ell}+\eta_s.$$
+-The finite-bit output has finite support and bounded radius, so its total-variation distance from the continuous law with density $(2\pi)^{-1}e^{-(x^2+y^2)/2}$ is $1$, where total variation is $\sup_A|\mu(A)-\nu(A)|$. These bounds do not assert exact Gaussian output.
++The finite-bit output has finite support and bounded radius, so its total-variation distance from the continuous law with density $(2\pi)^{-1}e^{-(x^2+y^2)/2}$ is $1$, where total variation is $\sup_A|\mu(A)-\nu(A)|$. A successful finite transform consumes exactly $2b$ random bits and makes three top-level evaluator calls (log, root, and phase); the phase call may perform multiple internal evaluations. These bounds do not assert exact Gaussian output.
+ 
+ ## Facts & Assumptions
+ 
+@@ -53,18 +56,22 @@
+ 
+ [F5] Total variation between probability laws is the supremum of event-probability differences. [[def-total-variation-distance-for-probability-laws]]
+ 
++[F6] On positive reals, $\log'(u)=1/u$; the real mean-value theorem bounds a differentiable function's increment by its derivative on an interval. [[thm-logarithm-derivative-and-integral]], [[cor-mean-value-theorem]]
++
++[F7] Every nonnegative real has a unique nonnegative square root. [[thm-of-square-roots]]
++
+ [A1] The fair-bit product probability model requires Countable Choice and Dependent Choice. [[def-countable-choice]], [[def-dependent-choice]]
+ 
+ [A2] The exact Box–Muller law uses Countable Choice for Borel change of variables and the null-axis calculation. [[def-countable-choice]]
+ 
+ ## Proof
+ 
+-1.1 The all-input-success hypothesis makes the computed output a deterministic function of the two finite bit blocks on the original probability space; no conditioning changes their law. Couple each ideal uniform input $U_j$ to its midpoint $U_{j,b}$ using the same bits. On the event $G=\{U_1\ge\delta+\delta_b\}$, both $U_1$ and $U_{1,b}$ are at least $\delta$. The mean-value theorem for $\log$ gives $|\log U_1-\log U_{1,b}|\le\delta_b/\delta$. Since $|\sqrt x-\sqrt y|\le\sqrt{|x-y|}$ for $x,y\ge0$, the radial change before evaluator error is at most $\sqrt{2\delta_b/\delta}$. The angular unit vector changes by at most $2\pi|U_2-U_{2,b}|\le2\pi\delta_b$, and the midpoint radius is at most $R_\delta$. Thus the exact transform difference on $G$ is at most $\sqrt{2\delta_b/\delta}+2\pi R_\delta\delta_b$. [given, F1, A1, A2, algebra]
++1.1 The all-input-success hypothesis makes the computed output a deterministic function of the two finite bit blocks on the original probability space; no conditioning changes their law. Couple each ideal uniform input $U_j$ to its midpoint $U_{j,b}$ using the same bits. On the event $G=\{U_1\ge\delta+\delta_b\}$, both $U_1$ and $U_{1,b}$ are at least $\delta$. The mean-value theorem and logarithm derivative [F6] give $|\log U_1-\log U_{1,b}|\le\delta_b/\delta$. For $x\ge y\ge0$, [F7] and $(\sqrt x-\sqrt y)(\sqrt x+\sqrt y)=x-y$ give $(\sqrt x-\sqrt y)^2\le x-y$; interchanging $x,y$ proves $|\sqrt x-\sqrt y|\le\sqrt{|x-y|}$. Thus the radial change before evaluator error is at most $\sqrt{2\delta_b/\delta}$. The angular unit vector changes by at most $2\pi|U_2-U_{2,b}|\le2\pi\delta_b$, and the midpoint radius is at most $R_\delta$. Thus the exact transform difference on $G$ is at most $\sqrt{2\delta_b/\delta}+2\pi R_\delta\delta_b$. [given, F1, F6, F7, A1, A2, algebra]
+ 
+-2.1 The evaluator perturbation satisfies $\|\widehat r\,\widehat t-r_b t_b\|_2\le|\widehat r-r_b|\|\widehat t\|_2+r_b\|\widehat t-t_b\|_2\le\eta_r(1+\eta_t)+R_\delta\eta_t$, using [F4] and $\|t_b\|_2=1$. Combining with step 1.1 gives $\|Z-\widehat Z\|_2\le e$ on $G$. [F4, step 1.1, algebra]
++2.1 Put $r_b=\sqrt{-2\log U_{1,b}}$ and $t_b=(\cos(2\pi U_{2,b}),\sin(2\pi U_{2,b}))$. The certified log interval $[L_-,L_+]$ contains $\log U_{1,b}$, so $q=-2L_-\ge0$ and $|q-r_b^2|=2|L_--\log U_{1,b}|\le2\eta_\ell$. The certified root interval contains $\sqrt q$ and has width at most $\eta_s$, hence $|\widehat r-\sqrt q|\le\eta_s$. The square-root inequality from step 1.1 yields $|\widehat r-r_b|\le\eta_s+\sqrt{2\eta_\ell}=\eta_r$. The phase certificate gives $\|\widehat t-t_b\|_2\le\eta_t$, so $\|\widehat t\|_2\le1+\eta_t$. Therefore the evaluator perturbation satisfies $\|\widehat r\,\widehat t-r_b t_b\|_2\le|\widehat r-r_b|\|\widehat t\|_2+r_b\|\widehat t-t_b\|_2\le\eta_r(1+\eta_t)+R_\delta\eta_t$, using [F4] and $\|t_b\|_2=1$. Combining with step 1.1 gives $\|Z-\widehat Z\|_2\le e$ on $G$. [F4, step 1.1, algebra]
+ 
+ 3.1 Since $U_1$ is uniform by [F1], $\mathbb P(G^c)=p$. For every bounded-Lipschitz test function the difference on $G$ is at most $e$, and on $G^c$ it is at most $2$. Taking expectations and then the supremum gives $d_{\rm BL}(\mathcal L(Z),\mathcal L(\widehat Z))\le e+2p$. [F1, A1, step 2.1, algebra]
+ 
+ 3.2 By [F2], $\mathbb E\|Z\|_2^2=2$, so [F3] gives $\mathbb E[\|Z\|_2\mathbf1_{G^c}]\le\sqrt{2p}$. The smallest midpoint is $2^{-b-1}$, hence every exact midpoint radius is at most $R_b$; [F4] gives $\|\widehat Z\|_2\le(R_b+\eta_r)(1+\eta_t)$. Therefore the expected coupled error is at most $e+\sqrt{2p}+(R_b+\eta_r)(1+\eta_t)$, which bounds $W_1$. [F2, F3, F4, A1, A2, step 2.1]
+ 
+-4.1 There are only $2^{2b}$ possible pairs of bit blocks, so $\widehat Z$ is supported on a finite set. The exact Gaussian law has a density and assigns that set probability zero; by [F5], the distance is $1$. The radius bound in step 3.2 proves bounded support. [F2, F4, F5, A1, A2, step 3.2] ∎
++4.1 The instructions take exactly $b$ bits from each of two subsequences and, on success, call the log evaluator, root evaluator, and phase evaluator once each; hence the stated bit count and three top-level calls. There are only $2^{2b}$ possible pairs of bit blocks, so $\widehat Z$ is supported on a finite set. The exact Gaussian law has a density and assigns that set probability zero; by [F5], the distance is $1$. The radius bound in step 3.2 proves bounded support. [F2, F4, F5, A1, A2, step 3.2] ∎
+--- items/thm-certified-bracketed-inverse-error.md
++++ items/thm-certified-bracketed-inverse-error.md
+@@ -7,6 +7,7 @@
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+ dependency_level: 2
+ deps:
++  - lem-geometric-sequence-null
+   - alg-certified-bracketed-cdf-inversion
+   - lem-generalized-inverse-sublevel-identity
+   - thm-midpoint-bit-stream-coupling-and-error
+@@ -30,7 +31,7 @@
+ 
+ ## Statement
+ 
+-For the fixed-depth procedure of [[alg-certified-bracketed-cdf-inversion]], the bracket invariant holds and its returned point satisfies $|F(\widehat x)-u|\le\varepsilon$. For $u\in(0,1)$, if the exact quantile $Q(u)$ lies in $[a,b]$ and a density $f$ satisfies $F(y)-F(x)=\int_x^y f(t)\,dt$ and $f\ge m>0$ almost everywhere on the bracket, then $|\widehat x-Q(u)|\le\varepsilon/m$.
++For the fixed-depth procedure of [[alg-certified-bracketed-cdf-inversion]], a successful call uses two endpoint evaluations and $N$ midpoint evaluations, at most $N+2$ CDF evaluations in total. For every continuous CDF on its compact bracket, some finite depth meets each positive modulus tolerance. The bracket invariant holds and its returned point satisfies $|F(\widehat x)-u|\le\varepsilon$. For $u\in(0,1)$, if the exact quantile $Q(u)$ lies in $[a,b]$ and a density $f$ satisfies $F(y)-F(x)=\int_x^y f(t)\,dt$ and $f\ge m>0$ almost everywhere on the bracket, then $|\widehat x-Q(u)|\le\varepsilon/m$.
+ 
+ For the distribution bound, assume the procedure is run with one fixed depth and bracket on every $u\in[0,1]$, with $\widetilde F(a)=0$, $\widetilde F(b)=1$, and residual at most $\varepsilon$ for a continuous CDF $\widetilde F$. Let $g(u)$ be its returned point. Then $g$ is nondecreasing. If $\sup_x|F(x)-\widetilde F(x)|\le\eta$ for another CDF $F$, then
+ $$d_K\bigl(\mathcal L(g(U_q)),F\bigr)\le\delta_q+\varepsilon+\eta,$$
+@@ -46,6 +47,8 @@
+ 
+ [F3] A continuous real-valued function on a compact interval is uniformly continuous. [[cor-compact-domain-maps-are-uniformly-continuous]]
+ 
++[F4] The geometric sequence $2^{-N}$ tends to zero. [[lem-geometric-sequence-null]]
++
+ [A4] For the spatial claim, the density identity and lower bound in the Statement imply $F(y)-F(x)\ge m(y-x)$ on the bracket by integrating $f\ge m$.
+ 
+ [A1] The bisection depth, bracket, tolerance, modulus, and evaluation budget satisfy the algorithm's Definition; the distribution claim additionally has a single fixed depth and full-support bracket.
+@@ -60,9 +63,9 @@
+ 
+ ## Proof
+ 
+-1.1 Initially $F(\ell)\le u\le F(r)$ by the algorithm's bracket test. If $F(m)\le u$, replacing $\ell$ by $m$ preserves both inequalities by monotonicity; if $F(m)>u$, replacing $r$ by $m$ preserves them. After $N$ steps, $r-\ell=(b-a)2^{-N}$, so the modulus certificate gives $F(r)-F(\ell)\le\varepsilon$. Since $\widehat x\in[\ell,r]$, monotonicity puts both $F(\widehat x)$ and $u$ in this range, proving $|F(\widehat x)-u|\le\varepsilon$. The modulus input exists for continuous $F$ on $[a,b]$ by [F3]. [given, F3, algebra]
++1.1 Initially $F(\ell)\le u\le F(r)$ by the algorithm's bracket test. If $F(m)\le u$, replacing $\ell$ by $m$ preserves both inequalities by monotonicity; if $F(m)>u$, replacing $r$ by $m$ preserves them. After $N$ steps, $r-\ell=(b-a)2^{-N}$, so the modulus certificate gives $F(r)-F(\ell)\le\varepsilon$. Since $\widehat x\in[\ell,r]$, monotonicity puts both $F(\widehat x)$ and $u$ in this range, proving $|F(\widehat x)-u|\le\varepsilon$. For a continuous $F$, uniform continuity [F3] supplies a positive distance tolerance; since $(b-a)2^{-N}\to0$ by [F4], some finite $N$ meets it. A successful run evaluates the two endpoints once and one midpoint per update, hence uses $N+2$ CDF evaluations; the budget explicitly includes these endpoints. [given, F3, F4, algebra]
+ 
+-1.2 For fixed depth $N$, the grid consists of the $2^N$ cells in the partition of $[a,b]$; their left endpoints are $a+j(b-a)2^{-N}$ for $0\le j<2^N$. At each bisection, the tested midpoint separates the remaining candidate left endpoints into lower and upper halves, and the rule keeps the lower half exactly when $\widetilde F(m)\le u$. Induction on the $N$ updates shows that the final $\ell$ is the greatest such left endpoint and $r$ is the next grid point. As $u$ increases, the predicate set can only grow, so the selected cell midpoint $g(u)$ is nondecreasing. [given, A1, algebra, induction]
++1.2 For fixed depth $N$, the grid consists of the $2^N$ cells in the partition of $[a,b]$; their left endpoints are $a+j(b-a)2^{-N}$ for $0\le j<2^N$. At each bisection, the tested midpoint separates the remaining candidate left endpoints into lower and upper halves, and the rule keeps the upper half exactly when $\widetilde F(m)\le u$. Induction on the $N$ updates shows that the final $\ell$ is the greatest such left endpoint and $r$ is the next grid point. As $u$ increases, the predicate set can only grow, so the selected cell midpoint $g(u)$ is nondecreasing. [given, A1, algebra, induction]
+ 
+ 2.1 Since $Q(u)\in[a,b]$, [A4] implies $|F(\widehat x)-F(Q(u))|\ge m|\widehat x-Q(u)|$. By [F1], $Q(u)\le Q(u)$ implies $u\le F(Q(u))$. For every $y<Q(u)$, the reverse implication in [F1] gives $F(y)<u$; taking $y\uparrow Q(u)$ and using [A3] gives $F(Q(u))\le u$. Thus $F(Q(u))=u$, and step 1.1 yields $m|\widehat x-Q(u)|\le\varepsilon$. [given, F1, A3, A4, A5, step 1.1, algebra]
+ 
+--- items/thm-finite-categorical-midpoint-count-bound.md
++++ items/thm-finite-categorical-midpoint-count-bound.md
+@@ -28,7 +28,7 @@
+ 
+ ## Statement
+ 
+-For the finite categorical procedure of [[alg-finite-categorical-inverse-cdf]], ideal uniform input gives exact probability $p_i$ to outcome $i$. For $b$-bit midpoint input, each cumulative threshold frequency differs from its target $C_i$ by at most $2^{-b-1}$, and each individual outcome frequency differs from $p_i$ by at most $2^{-b}$.
++For the finite categorical procedure of [[alg-finite-categorical-inverse-cdf]], ideal uniform input gives exact probability $p_i$ to outcome $i$. For $b$-bit midpoint input, each cumulative threshold frequency differs from its target $C_i$ by at most $2^{-b-1}$, and each individual outcome frequency differs from $p_i$ by at most $2^{-b}$. The ordered binary search terminates at the stated least index, using at most $\lceil\log_2 r\rceil$ cumulative-array comparisons on a positive input; its explicit zero-input branch returns outcome $1$.
+ 
+ ## Facts & Assumptions
+ 
+@@ -36,14 +36,16 @@
+ 
+ [F1] The midpoint input is uniform on $\{(k+1/2)/N:0\le k<N\}$. [[thm-midpoint-bit-stream-coupling-and-error]]
+ 
+-[F2] The categorical procedure returns the least index whose cumulative probability exceeds the input threshold. [[alg-finite-categorical-inverse-cdf]]
++[F2] On positive input the categorical procedure uses the non-strict test $v\le C_j$ and returns the least index with $v\le C_i$; at zero it returns $1$. [[alg-finite-categorical-inverse-cdf]]
+ 
+ [A1] When the midpoint law is realized by the countable fair-bit product in [F1], that source assumes Countable Choice and Dependent Choice; the finite counting argument is conditional on the stated grid law. [[def-countable-choice]], [[def-dependent-choice]]
+ 
+ ## Proof
+ 
+-1.1 With ideal $U$, outcome $i$ is returned exactly when $C_{i-1}<U\le C_i$, an interval of length $C_i-C_{i-1}=p_i$. Its uniform probability is the interval length $C_i-C_{i-1}=p_i$, so the ideal law is exactly the specified categorical law. [given, F2, algebra]
++1.1 Apart from the null event $U=0$, outcome $i$ is returned exactly when $C_{i-1}<U\le C_i$, an interval of length $C_i-C_{i-1}=p_i$. Its uniform probability is the interval length $C_i-C_{i-1}=p_i$, so the ideal law is exactly the specified categorical law. [given, F2, algebra]
+ 
+ 1.2 Put $N=2^b$. For any threshold $C\in[0,1]$, the number of midpoints $(k+1/2)/N\le C$ is $\min(N,\max(0,\lfloor NC+1/2\rfloor))$. Thus its normalized count differs from $C$ by at most $1/(2N)$. Applying this to $C_i$ and $C_{i-1}$, the frequency of outcome $i$ is the difference of their cumulative frequencies, so its error from $p_i$ is at most $1/N=2^{-b}$. [F1, F2, A1, algebra]
+ 
+-2.1 The cumulative and individual bounds in step 1.2 give the stated finite-grid error, while step 1.1 proves the ideal-input clause. [step 1.1, step 1.2] ∎
++2.1 The cumulative and individual bounds in step 1.2 give the stated finite-grid error, while step 1.1 proves the ideal-input clause. [step 1.1, step 1.2]
++
++3.1 For positive $v\le1=C_r$, the least admissible index exists. Initially it lies in $[L,H]=[1,r]$. If $v\le C_j$, monotonicity of the cumulative sums puts that index in $[L,j]$; otherwise it lies in $[j+1,H]$. Thus both updates preserve the invariant, and at $L=H$ the returned index is the least admissible one. When the interval contains $n>1$ indices, $j=\lfloor(L+H)/2\rfloor$ leaves at most $\lceil n/2\rceil$ indices and uses one cumulative-array comparison. After $k$ updates at most $\lceil r/2^k\rceil$ remain, by induction; at $k=\lceil\log_2r\rceil$ this is one. When $r=1$ the loop has zero updates. The zero-input branch returns immediately as specified. [given, F2, algebra, induction] ∎
+--- items/thm-independent-fair-bit-streams-produce-uniforms.md
++++ items/thm-independent-fair-bit-streams-produce-uniforms.md
+@@ -7,6 +7,8 @@
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+ dependency_level: 0
+ deps:
++  - thm-rectangle-criterion-for-independent-random-elements
++  - thm-rational-box-generators-of-the-borel-sigma-algebra-on-rn
+   - thm-countable-product-of-probability-spaces
+   - cor-coordinate-random-elements-on-a-countable-product-are-independent
+   - def-coordinate-maps-and-cylinder-sigma-algebra
+@@ -46,13 +48,15 @@
+ 
+ [F2] The coordinate maps of that product probability space are independent. [[cor-coordinate-random-elements-on-a-countable-product-are-independent]]
+ 
+-[F3] Independence of random elements is factorization of probabilities over every finite family of measurable coordinate events. [[def-independent-random-elements]]
++[F3] Independence means independence of the generated sigma-algebras. The finite Borel-rectangle factorization criterion is equivalent to this definition. [[def-independent-random-elements]], [[thm-rectangle-criterion-for-independent-random-elements]]
+ 
+ [F4] For decreasing measurable sets with finite first-set measure, probability is continuous from above. [[thm-continuity-from-above-for-measures]]
+ 
+ [F5] Measures agreeing on a generating pi-system and on a finite-measure exhaustion agree on the generated sigma-algebra. [[thm-measure-uniqueness-on-a-sigma-finite-pi-system]]
+ 
+ [F6] Finite-prefix sums of measurable coordinates are measurable, as are their pointwise increasing limits. [[def-coordinate-maps-and-cylinder-sigma-algebra]], [[prop-closure-properties-of-measurable-functions-used-by-the-integral]]
++
++[F7] Rational half-open boxes generate the Borel sigma-algebra of finite-dimensional real space. [[thm-rational-box-generators-of-the-borel-sigma-algebra-on-rn]]
+ 
+ [A1] Countable Choice and Dependent Choice are the exact assumptions of [F1]; the construction below uses no arbitrary family of choices. [[def-countable-choice]], [[def-dependent-choice]]
+ 
+@@ -66,4 +70,4 @@
+ 
+ 2.2 For finitely many streams and dyadic thresholds $t_s=k_s2^{-n}$, the joint event $\bigcap_s\{U_s\le t_s\}$ differs by a null set from the event that every prefix integer $K_{s,n}<k_s$. Pairwise disjointness makes all prefix coordinates distinct. By [F2] these coordinate bits are independent and by [F1] each is fair, so the probability that each stream's prefix integer is below $k_s$ is the product $\prod_s(k_s2^{-n})$. [F1, F2, F4, step 1.1]
+ 
+-3.1 For arbitrary thresholds $t_s\in[0,1]$, dyadic lower and upper approximations squeeze the joint probability between products converging to $\prod_s t_s$. Thus the joint CDF equals the product-uniform CDF. The lower rectangles, including the whole cube, form a pi-system generating the Borel sets of the cube; both laws have total mass one there, a finite-measure exhaustion. Hence [F5] identifies the joint law with the product of the uniform marginal laws, and [F3] gives independence. [F3, F5, step 2.2] ∎
++3.1 For arbitrary thresholds $t_s\in[0,1]$, dyadic lower and upper approximations squeeze the joint probability between products converging to $\prod_s t_s$. Thus the joint CDF equals the product-uniform CDF. The lower rectangles $\prod_s[0,t_s]$, including the whole cube, are closed under intersections. They generate each coordinate slab $\{x:x_s\le t\}$ by taking the other thresholds to be $1$; complements and finite intersections then give the intersections of the cube with all rational half-open boxes (thresholds outside $[0,1]$ give empty or full slabs). By [F7] these generate the relative Borel sigma-algebra of the cube. Both laws have total mass one there, a finite-measure exhaustion. Thus [F5] identifies the joint law with the product-uniform law. In particular every Borel rectangle has the product of its marginal probabilities, so the rectangle criterion [F3] gives independence of the generated sigma-algebras. [F3, F5, F7, step 2.2] ∎
+--- items/thm-of-square-roots.md
++++ items/thm-of-square-roots.md
+@@ -61,8 +61,8 @@
+ 
+ 3.1 Assume, for contradiction, that $s^2 \neq a$; by trichotomy either $s^2 < a$ or $s^2 > a$. [assume-contra, step 2.1]
+ 
+-4.1 (Case $s^2 < a$.) Choose $h$ with $0 < h < 1$ and $h < \dfrac{a - s^2}{2s + 1}$, possible since $a - s^2 > 0$ and $2s + 1 \ge 1 > 0$; then $h^2 = h \cdot h < h \cdot 1 = h$ and $h(2s+1) < a - s^2$, so $(s+h)^2 = s^2 + 2sh + h^2 < s^2 + 2sh + h = s^2 + h(2s+1) < a$, whence $s + h \in S$ with $s + h > s$, contradicting that $s$ is an upper bound of $S$. [assume-case low, step 3.1, step 2.1, L2, L5, choose]
++4.1 (Case $s^2 < a$.) Put $c=(a-s^2)/(2s+1)>0$ and let $h=c/2$ if $c\le1$, and $h=1/2$ if $c>1$. Ordered-field sign rules [L2] give $0<h<1$ and $h<c$ in either branch; then $h^2 = h \cdot h < h \cdot 1 = h$ and $h(2s+1) < a - s^2$, so $(s+h)^2 = s^2 + 2sh + h^2 < s^2 + 2sh + h = s^2 + h(2s+1) < a$, whence $s + h \in S$ with $s + h > s$, contradicting that $s$ is an upper bound of $S$. [assume-case low, step 3.1, step 2.1, L2, L5, choose]
+ 
+-4.2 (Case $s^2 > a$.) Here $s > 0$ since $s^2 > a \ge 0$; choose $h$ with $0 < h < s$ and $h < \dfrac{s^2 - a}{2s}$, so $2sh < s^2 - a$ and $(s-h)^2 = s^2 - 2sh + h^2 \ge s^2 - 2sh > a$, hence every $t \in S$ has $t^2 \le a < (s-h)^2$ with $t \ge 0$ and $s - h > 0$, so $t < s - h$ by [L3]; thus $s - h$ is an upper bound of $S$ with $s - h < s$, contradicting that $s$ is the least upper bound. [assume-case high, step 3.1, step 2.1, L3, choose]
++4.2 (Case $s^2 > a$.) Here $s > 0$ since $s^2 > a \ge 0$; put $c=(s^2-a)/(2s)>0$ and let $h=c/2$ if $c\le s$, and $h=s/2$ if $c>s$. Ordered-field sign rules [L2] give $0<h<s$ and $h<c$, so $2sh < s^2 - a$ and $(s-h)^2 = s^2 - 2sh + h^2 \ge s^2 - 2sh > a$, hence every $t \in S$ has $t^2 \le a < (s-h)^2$ with $t \ge 0$ and $s - h > 0$, so $t < s - h$ by [L3]; thus $s - h$ is an upper bound of $S$ with $s - h < s$, contradicting that $s$ is the least upper bound. [assume-case high, step 3.1, step 2.1, L2, L3, choose]
+ 
+ 5.1 Both cases of the disjunction in step 3.1 give a contradiction, so the assumption fails and $s^2 = a$: a unique (by step 1.2) $s = \sqrt{a} \ge 0$ with $s^2 = a$ exists, and applying this to any $x > 0$ writes $x = (\sqrt{x})^2$ with $\sqrt{x} \neq 0$ while conversely any nonzero square is positive by [L4], so the positive elements of $F$ are exactly the nonzero squares. [step 4.1, step 4.2, step 3.1, step 1.2, L4, cases, discharge-contradiction] ∎
+--- items/thm-rational-bernoulli-rejection-law-and-cost.md
++++ items/thm-rational-bernoulli-rejection-law-and-cost.md
+@@ -7,6 +7,7 @@
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+ dependency_level: 2
+ deps:
++  - thm-geometric-series
+   - alg-rational-bernoulli-rejection-from-fair-bits
+   - thm-independent-fair-bit-streams-produce-uniforms
+   - thm-monotone-convergence-for-the-integral
+@@ -41,6 +42,8 @@
+ 
+ [F3] For nonnegative measurable $X_M\uparrow X$, monotone convergence gives $\mathbb E X=\lim_M\mathbb E X_M$. [[thm-monotone-convergence-for-the-integral]]
+ 
++[F4] For real $|r|<1$, $\sum_{j=0}^\infty r^j=1/(1-r)$. [[thm-geometric-series]]
++
+ [A1] The countable fair-bit product supplying [F1] assumes Countable Choice and Dependent Choice; the rejection calculation is conditional on that source. [[def-countable-choice]], [[def-dependent-choice]]
+ 
+ ## Proof
+@@ -49,4 +52,4 @@
+ 
+ 2.1 By independence of attempts, the probability that the first accepted block occurs at attempt $j$ and returns $1$ is $r^{j-1}m/N$, while the probability that it occurs at attempt $j$ is $r^{j-1}n/N$. Summing over $1\le j\le M_{\max}$ gives success probability $1-r^{M_{\max}}$ and returned-one probability $(m/n)(1-r^{M_{\max}})$; dividing yields conditional success probability $m/n$. The no-acceptance event has probability $r^{M_{\max}}<2^{-M_{\max}}$. [F1, A1, step 1.1, algebra]
+ 
+-3.1 With no cap, $r^M\to0$, so the probability of never accepting is zero. Let $J$ be the first accepted attempt, setting $J=\infty$ on the null nontermination event. For each $M$, $J\wedge M=\sum_{j=0}^{M-1}\mathbf1_{\{J>j\}}$; these truncations increase to $J$, and independence gives $\mathbb P(J>j)=r^j$. By [F3], $\mathbb E J=\sum_{j\ge0}r^j=(1-r)^{-1}=N/n<2$. Taking $M\to\infty$ in step 2.1 gives output-one probability $m/n$ and hence the exact Bernoulli$(m/n)$ law. Each attempt consumes $k$ bits, so the expected bit cost is $kN/n<2k$. The cases $m=0$ and $m=n$ use the explicit zero-bit branches in the algorithm. [F1, F2, F3, A1, step 1.1, step 2.1, algebra] ∎
++3.1 With no cap, $r^M\to0$, so the probability of never accepting is zero. Let $J$ be the first accepted attempt, setting $J=\infty$ on the null nontermination event. For each $M$, $J\wedge M=\sum_{j=0}^{M-1}\mathbf1_{\{J>j\}}$; these truncations increase to $J$, and independence gives $\mathbb P(J>j)=r^j$. By [F3] and the geometric identity [F4] with $0\le r<1/2$, $\mathbb E J=\sum_{j\ge0}r^j=(1-r)^{-1}=N/n<2$. Taking $M\to\infty$ in step 2.1 gives output-one probability $m/n$ and hence the exact Bernoulli$(m/n)$ law. Each attempt consumes $k$ bits, so the expected bit cost is $kN/n<2k$. The cases $m=0$ and $m=n$ use the explicit zero-bit branches in the algorithm. [F1, F2, F3, F4, A1, step 1.1, step 2.1, algebra] ∎

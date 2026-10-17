@@ -1,0 +1,335 @@
+[
+  {
+    "order": 2432,
+    "id": "rosenbrock-and-linearly-implicit-methods",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Rosenbrock and linearly implicit methods",
+    "companion": "rosenbrock-and-linearly-implicit-methods-examples",
+    "requires": [
+      "finite-precision-direct-factorizations",
+      "nonlinear-equations-and-newton-methods",
+      "implicit-stiff-time-stepping-and-algebraic-error"
+    ],
+    "items": [
+      {
+        "id": "def-rosenbrock-euler-step-map",
+        "kind": "definition",
+        "title": "The Rosenbrock–Euler step map with an exact or approximate Jacobian",
+        "deps": [
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-jacobian-matrix-and-gradient",
+          "def-invertible-euclidean-linear-map"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-rosenbrock-shifted-matrix-invertibility-bound",
+        "kind": "lemma",
+        "title": "A small shifted Jacobian has an explicit inverse bound",
+        "deps": [
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-rank-nullity",
+          "def-invertible-euclidean-linear-map",
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-rosenbrock-shifted-inverse-perturbation",
+        "kind": "lemma",
+        "title": "Perturbing a shifted Jacobian perturbs its inverse explicitly",
+        "deps": [
+          "lem-rosenbrock-shifted-matrix-invertibility-bound",
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-rosenbrock-stage-residual-certificate",
+        "kind": "lemma",
+        "title": "A computed shifted-system residual has a certified upper bound",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+          "thm-cauchy-schwarz-finite",
+          "def-abs-value",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "lem-of-abs-value",
+          "lem-of-triangle-inequality"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+        "kind": "algorithm",
+        "title": "Reusable Householder QR solve for a shifted matrix with residual status",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "alg-scaled-householder-reflector-formation-and-application",
+          "lem-rosenbrock-stage-residual-certificate",
+          "def-forward-and-back-substitution-for-triangular-systems",
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "def-householder-reflector"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-rosenbrock-euler-jacobian-approximation-defect",
+        "kind": "lemma",
+        "title": "The one-stage update has an explicit Jacobian-approximation defect",
+        "deps": [
+          "def-rosenbrock-euler-step-map",
+          "lem-rosenbrock-shifted-inverse-perturbation"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+        "kind": "proposition",
+        "title": "Autonomous Rosenbrock–Euler is one Newton correction of backward Euler",
+        "deps": [
+          "def-rosenbrock-euler-step-map",
+          "def-backward-euler-step-equation",
+          "alg-newton-correction-for-vector-residuals",
+          "def-jacobian-matrix-and-gradient",
+          "def-c-one-map-and-local-inverse",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-rosenbrock-euler-step",
+        "kind": "algorithm",
+        "title": "Finite-precision Rosenbrock–Euler step with residual status",
+        "deps": [
+          "def-rosenbrock-euler-step-map",
+          "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+          "def-implicit-residual-and-algebraic-error-units",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-two-stage-rosenbrock-w-method",
+        "kind": "algorithm",
+        "title": "Two-stage second-order Rosenbrock W-method with shared factorization",
+        "deps": [
+          "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+          "def-implicit-residual-and-algebraic-error-units",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-jacobian-matrix-and-gradient",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-rosenbrock-euler-local-defect-and-residual-error",
+        "kind": "lemma",
+        "title": "Rosenbrock–Euler has an explicit one-step defect and solve-residual allowance",
+        "deps": [
+          "def-rosenbrock-euler-step-map",
+          "alg-rosenbrock-euler-step",
+          "lem-rosenbrock-euler-jacobian-approximation-defect",
+          "lem-rosenbrock-stage-residual-certificate",
+          "def-implicit-residual-and-algebraic-error-units",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-jacobian-matrix-and-gradient",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "def-vector-valued-derivative-and-integral",
+          "thm-continuous-implies-integrable",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+        "kind": "lemma",
+        "title": "The two-stage Rosenbrock W-method has a cubic local defect and explicit stage-residual allowance",
+        "deps": [
+          "alg-two-stage-rosenbrock-w-method",
+          "lem-rosenbrock-shifted-matrix-invertibility-bound",
+          "lem-rosenbrock-stage-residual-certificate",
+          "def-implicit-residual-and-algebraic-error-units",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-jacobian-matrix-and-gradient",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-algebra-of-derivatives",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "def-vector-valued-derivative-and-integral",
+          "thm-continuous-implies-integrable",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves",
+        "kind": "proposition",
+        "title": "The two-stage Rosenbrock update reuses one shifted factorization for two solves",
+        "deps": [
+          "alg-two-stage-rosenbrock-w-method",
+          "alg-rosenbrock-shifted-qr-solver-with-residual-certificate"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+        "kind": "theorem",
+        "title": "The Rosenbrock factorization and stage procedures terminate with finite work",
+        "deps": [
+          "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+          "alg-rosenbrock-euler-step",
+          "alg-two-stage-rosenbrock-w-method",
+          "alg-scaled-householder-reflector-formation-and-application",
+          "def-forward-and-back-substitution-for-triangular-systems",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-rosenbrock-euler-scalar-a-and-l-stability",
+        "kind": "theorem",
+        "title": "The Rosenbrock–Euler scalar stability function is A-stable exactly for gamma at least one half",
+        "deps": [
+          "def-rosenbrock-euler-step-map",
+          "alg-rosenbrock-euler-step",
+          "def-scalar-rk-a-and-l-stability",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-two-stage-rosenbrock-scalar-l-stability",
+        "kind": "theorem",
+        "title": "The selected exact-J two-stage Rosenbrock method is scalar L-stable",
+        "deps": [
+          "alg-two-stage-rosenbrock-w-method",
+          "def-scalar-rk-a-and-l-stability",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-rosenbrock-euler-global-first-order-error",
+        "kind": "theorem",
+        "title": "Rosenbrock–Euler has a first-order global error bound on a common tube",
+        "deps": [
+          "alg-rosenbrock-euler-step",
+          "lem-rosenbrock-euler-local-defect-and-residual-error",
+          "lem-rosenbrock-shifted-inverse-perturbation",
+          "lem-rosenbrock-stage-residual-certificate",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-jacobian-matrix-and-gradient",
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "lem-exponential-dominates-one-plus-x"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-two-stage-rosenbrock-global-order-two",
+        "kind": "theorem",
+        "title": "The selected two-stage Rosenbrock W-method has a second-order global error bound",
+        "deps": [
+          "alg-two-stage-rosenbrock-w-method",
+          "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+          "lem-rosenbrock-shifted-inverse-perturbation",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-jacobian-matrix-and-gradient",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "lem-exponential-dominates-one-plus-x"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 2433,
+    "id": "rosenbrock-and-linearly-implicit-methods-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Rosenbrock and linearly implicit methods — Examples",
+    "companion": "rosenbrock-and-linearly-implicit-methods",
+    "requires": [
+      "rosenbrock-and-linearly-implicit-methods"
+    ],
+    "items": [
+      {
+        "id": "cex-omitting-rosenbrock-stage-correction-loses-order-two",
+        "kind": "counterexample",
+        "title": "Omitting the second-stage correction destroys cubic local accuracy",
+        "deps": [
+          "alg-two-stage-rosenbrock-w-method",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-exponential-ivp-uniqueness",
+          "thm-derivative-of-exponential",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-two-stage-rosenbrock-factorization-reuse",
+        "kind": "example",
+        "title": "Two stage right-hand sides reuse one shifted-Jacobian factorization",
+        "deps": [
+          "alg-two-stage-rosenbrock-w-method",
+          "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+          "alg-scaled-householder-reflector-formation-and-application",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "lem-rosenbrock-stage-residual-certificate"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-rosenbrock-euler-stiff-decay-and-backward-euler",
+        "kind": "example",
+        "title": "Rosenbrock–Euler damps a stiff scalar decay with the backward-Euler factor",
+        "deps": [
+          "def-rosenbrock-euler-step-map",
+          "thm-rosenbrock-euler-scalar-a-and-l-stability",
+          "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+          "def-backward-euler-step-equation"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-approximate-jacobian-breaks-stiff-damping",
+        "kind": "counterexample",
+        "title": "A bounded approximate Jacobian can destroy Rosenbrock stiff damping",
+        "deps": [
+          "alg-two-stage-rosenbrock-w-method",
+          "thm-two-stage-rosenbrock-scalar-l-stability"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  }
+]

@@ -1,0 +1,96 @@
+{
+  "research_only": true,
+  "cycle": 1,
+  "reviewer": "resume_gp69 owner research worker",
+  "roots": [
+    "alg-certified-spatial-branch-and-bound"
+  ],
+  "direct_consumer_definition_changed": "alg-bounded-mixed-integer-branch-and-bound",
+  "scope_rule": "Inspect direct consumers of changed S/D; recurse only after an actual consumer S/D change. No aliases on either changed algorithm. Identity references were searched through current items/library; page placement is not an extra item dependency.",
+  "items": [
+    {
+      "id": "thm-finite-budget-spatial-bnb-terminates",
+      "supplier": "alg-certified-spatial-branch-and-bound",
+      "use": "F1 and Proof1.1\u20132.1 charge the root/child/refinement calls and require a declared return or finite next work.",
+      "checked": "Full Statement/Facts/Proof. Empty terminal leaves now require no calls, all-empty returns first, and a nonterminal selection always has a finite bound. Existing pre-call budget guard still applies.",
+      "source_repair": "none; Statement and Definition unchanged"
+    },
+    {
+      "id": "thm-spatial-bnb-gap-certificate-sound",
+      "supplier": "alg-certified-spatial-branch-and-bound",
+      "use": "F1, Proof1.1\u20133.1: terminal leaves cover D0; empty proofs remove no feasible point; L bounds every feasible point.",
+      "checked": "Full body. Retaining certified-empty leaves with proofs preserves coverage. The minimum excludes empty leaves and keeps valid bounds on gap-closed leaves. Feasible incumbent and epsilon implication unchanged.",
+      "source_repair": "none; Statement and Definition unchanged"
+    },
+    {
+      "id": "thm-spatial-bnb-eventual-epsilon-termination",
+      "supplier": "alg-certified-spatial-branch-and-bound",
+      "use": "Statement and F6/Proof2.1\u20135.1 use unconstrained exact midpoint witnesses, nonclosed branch bounds, longest-side shrinking and consistency.",
+      "checked": "Full body. C=D0 makes every nonempty box feasible; no sound empty proof can occur. Pending children remain evaluated before checkpoints, and the same selected finite-bound, nonclosed branch satisfies F6. Singleton exact-report case preserved.",
+      "source_repair": "none; Statement and Definition unchanged"
+    },
+    {
+      "id": "alg-bounded-mixed-integer-branch-and-bound",
+      "supplier": "alg-certified-spatial-branch-and-bound",
+      "use": "Enumeration invokes spatial subcalls; main tree independently repeats the empty-node least-bound selection convention.",
+      "checked": "Full Definition including zero-dimensional dummy coordinate, queue/init, main branching, empty/gap tests, fallback eligibility and integer allocation. Fallback already excludes certified-empty continuous leaves. Propose the same surgical explicit exclusion in main tree and missing-bound routing.",
+      "source_repair": "proposed; Definition changes, so its direct consumers below were checked"
+    },
+    {
+      "id": "thm-bounded-mixed-integer-gap-certificate-sound",
+      "suppliers": [
+        "alg-certified-spatial-branch-and-bound",
+        "alg-bounded-mixed-integer-branch-and-bound"
+      ],
+      "use": "F1/F3, Proof1.1\u20133.1: integer/continuous coverage, empty-node removal only with proof, complete fallback ledgers and global minimum over feasible-covering nodes.",
+      "checked": "Full body. Empty nodes remain recorded with proofs and excluded from minima; nonempty terminal bounds, closed-bound retention and feasible upper bounds retain the same inequalities. No statement weakening.",
+      "source_repair": "none; Statement and Definition unchanged"
+    },
+    {
+      "id": "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+      "supplier": "alg-certified-spatial-branch-and-bound",
+      "use": "Given and Verification1.2\u20133.1 invoke three spatial calls with exact root/child midpoint reports.",
+      "checked": "Full body. All boxes are unconstrained and not empty. Root lower -2, two child lowers -1, U=-3/16, L=-1 and gap13/16<9/10 remain unchanged; child order and call budget unchanged.",
+      "source_repair": "none; Statement and Definition unchanged"
+    },
+    {
+      "id": "cex-invalid-spatial-lower-bound-can-prune-global-minimum",
+      "supplier": "alg-certified-spatial-branch-and-bound",
+      "use": "Construction/Verification1.1\u20132.1 deliberately use invalid root lower1/2 with midpoint witness1/2 on f(x)=x.",
+      "checked": "Full body. The leaf is not empty and has a finite purported bound; the deliberate validity violation remains the counterexample premise, producing the same false zero gap. This does not become an admissible oracle.",
+      "source_repair": "none; Statement and Definition unchanged"
+    },
+    {
+      "id": "thm-bounded-mixed-integer-finite-budget-terminates",
+      "supplier": "alg-bounded-mixed-integer-branch-and-bound",
+      "use": "F1/F2 and Proof1.1\u20132.1 count main evaluations and finitely many positive-budget spatial subcalls.",
+      "checked": "Full body. Empty nodes are terminal, missing bounds follow the existing fallback/inconclusive branch, no extra call is added, allocation q/h sums to R, dummy singleton domain remains allowed.",
+      "source_repair": "none; Statement and Definition unchanged"
+    },
+    {
+      "id": "ex-bounded-engineering-design-mixed-integer-gap-certificate",
+      "supplier": "alg-bounded-mixed-integer-branch-and-bound",
+      "use": "Given and Verification1.1\u20133.1 use one unavailable root call and three constrained exact fallback root reports.",
+      "checked": "Full body. Fallback still receives one call for each z=0,1,2; no report is empty; exact minima2/5,1/10,0 and attaining witness(2,1) yield unchanged L=U=0.",
+      "source_repair": "none; Statement and Definition unchanged"
+    }
+  ],
+  "pages": [
+    {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/global-optimization-and-certified-branch-and-bound.md",
+      "disposition": "Complete current summary read; certified empty/bound/budget/global-gap descriptions remain valid; no prose or inventory repair."
+    },
+    {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/global-optimization-and-certified-branch-and-bound-examples.md",
+      "disposition": "Complete current summary read; three affected examples retain their original conclusions; no repair."
+    }
+  ],
+  "interfaces_read": [
+    "def-spatial-global-optimization-problem",
+    "def-spatial-box-bound-certificate",
+    "alg-certified-constraint-emptiness-search",
+    "thm-factorable-dual-certificate-is-valid-box-lower-bound"
+  ],
+  "propagation_stop": "Every other checked consumer retains its Statement/Definition; no further recursion or unrelated audit.",
+  "native_status": "Research dispositions only. No current review acceptance; native5.5 must genuinely adjudicate and adopt/review current inputs."
+}

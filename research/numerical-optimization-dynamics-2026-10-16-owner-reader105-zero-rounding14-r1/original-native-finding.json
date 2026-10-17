@@ -1,0 +1,32 @@
+{
+  "batch": "105",
+  "findings": [
+    {
+      "id": "lem-parameter-ode-flow-tangent-on-common-tube",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "c8f903aaee09897e3560a67ddb0a6f118e8a6d7cf70e54fd3eca54ac0a28acbc"
+      },
+      "location": "Statement (permits T=0) and Proof 1.1 (zero-horizon case)",
+      "defect": "ill-formed",
+      "evidence": "The Statement permits T=0 but still asserts that the tangent S solves an ODE on [0,T]. Under def-vector-valued-derivative-and-integral and def-first-order-ode-initial-value-problem-and-solution, differentiability requires the time to be a limit point of the interval; {0} has none. Proof 1.1 nevertheless identifies the flow with u_0 and treats its tangent as solving the ODE. Require T>0 or state a separate zero-horizon result that concludes only the derivative of the evaluation map.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "lem-directed-dyadic-rounding-enclosure-and-error",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "def-certified-hybrid-event-enclosure",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "8509c770acf6af0923384b576dbd9a452039426174401c09b4644c22e9b828b5"
+      },
+      "location": "Statement, finite x with |x| ≤ N_max",
+      "defect": "ill-formed",
+      "evidence": "The Statement includes x=0 in its quantifier and bounds endpoint error by epsilon_abs(x), but def-dyadic-floating-point-format-and-directed-rounding defines epsilon_abs only for nonzero finite x; thus epsilon_abs(0) is undefined. Although rd(0)=ru(0)=0 gives zero actual error, epsilon_abs(0) is not defined in the stated bound. Define epsilon_abs(0)=0 or exempt zero from that clause.",
+      "severity": "nonfatal"
+    }
+  ],
+  "coverage_note": "The task-named Markdown report was written. I opened both assigned pages and all 15 assigned items, plus the direct suppliers and math-specific residual-tube, sensitivity, and root-isolation suppliers listed in the report. I did not audit unrelated foundational ancestors in the larger metadata dependency closure. The two in-run findings are bound to source hashes current at split."
+}

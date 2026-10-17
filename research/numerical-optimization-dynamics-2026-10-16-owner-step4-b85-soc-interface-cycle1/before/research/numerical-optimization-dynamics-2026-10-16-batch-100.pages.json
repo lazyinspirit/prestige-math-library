@@ -1,0 +1,465 @@
+[
+  {
+    "order": 2484,
+    "id": "direct-transcription-and-numerical-ode-optimal-control",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Direct transcription and numerical ode optimal control",
+    "companion": "direct-transcription-and-numerical-ode-optimal-control-examples",
+    "requires": [
+      "inequality-kkt-duality-and-optimality-certificates",
+      "nonlinear-boundary-value-solvers",
+      "runge-kutta-methods-and-order",
+      "adaptive-ode-solvers-and-error-estimation",
+      "barrier-and-primal-dual-interior-point-methods",
+      "sqp-active-set-and-augmented-lagrangian-methods",
+      "discrete-continuous-and-pde-adjoint-sensitivities"
+    ],
+    "items": [
+      {
+        "id": "def-ctrl1-linear-lqr-control-problem",
+        "kind": "definition",
+        "title": "Finite-horizon bounded-control linear-quadratic ODE problem",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-weak-convergence-of-nets-and-sequences",
+          "def-euclidean-inner-product"
+        ],
+        "justified_by": [
+          "lem-ctrl1-measurable-linear-ode-state-map"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-ctrl1-smooth-transcription-data",
+        "kind": "definition",
+        "title": "Smooth finite-horizon ODE optimal-control transcription data",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-ctrl1-measurable-linear-ode-state-map",
+        "kind": "lemma",
+        "title": "The bounded measurable linear ODE has a unique affine state map",
+        "deps": [
+          "def-ctrl1-linear-lqr-control-problem",
+          "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+          "thm-first-fundamental-theorem-of-calculus-for-l-one",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-c-k-complete-in-the-sup-metric",
+          "thm-gronwall-integral-inequality",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-countable-choice",
+          "thm-geometric-series"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-ctrl1-control-box-is-weakly-closed",
+        "kind": "lemma",
+        "title": "Under Countable Choice, pointwise compact convex control constraints are weakly closed in L2",
+        "deps": [
+          "def-countable-choice",
+          "def-ctrl1-linear-lqr-control-problem",
+          "def-weak-convergence-of-nets-and-sequences",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-extreme-value-metric",
+          "thm-rational-points-and-boxes-in-rn",
+          "lem-product-topology-on-rn",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-finite-and-countable-subadditivity-of-measures"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-ctrl1-control-mesh-and-piecewise-constant-parameterization",
+        "kind": "definition",
+        "title": "Time meshes and piecewise-constant control parameterization",
+        "deps": [
+          "def-ctrl1-linear-lqr-control-problem"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-ctrl1-weak-control-convergence-implies-uniform-state-convergence",
+        "kind": "lemma",
+        "title": "Weakly convergent bounded controls have uniformly convergent states",
+        "deps": [
+          "def-ctrl1-linear-lqr-control-problem",
+          "lem-ctrl1-measurable-linear-ode-state-map",
+          "def-weak-convergence-of-nets-and-sequences",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-integral-triangle-inequality",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence",
+        "kind": "lemma",
+        "title": "Cell averages give a strong recovery sequence for compact convex controls",
+        "deps": [
+          "def-ctrl1-linear-lqr-control-problem",
+          "def-ctrl1-control-mesh-and-piecewise-constant-parameterization",
+          "thm-box-step-functions-are-dense-in-l-p-of-rn",
+          "def-countable-choice",
+          "thm-extreme-value-metric",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-integral-triangle-inequality",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-minkowski-inequality-for-integrals"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+        "kind": "definition",
+        "title": "Runge\u2013Kutta tableaux and stage collocation equations",
+        "deps": [
+          "def-ctrl1-smooth-transcription-data",
+          "def-ctrl1-control-mesh-and-piecewise-constant-parameterization",
+          "def-explicit-runge-kutta-tableau-and-stage-map"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "def-ctrl1-lqr-adjoint-equation",
+        "kind": "definition",
+        "title": "Continuous adjoint equation for the linear-quadratic ODE",
+        "deps": [
+          "def-ctrl1-linear-lqr-control-problem",
+          "lem-ctrl1-measurable-linear-ode-state-map",
+          "def-vector-valued-derivative-and-integral",
+          "def-absolutely-continuous-function",
+          "def-countable-choice"
+        ],
+        "justified_by": [
+          "lem-ctrl1-lqr-adjoint-exists-uniquely"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-ctrl1-lqr-cost-is-weakly-lower-semicontinuous",
+        "kind": "lemma",
+        "title": "Under Countable Choice, the LQR objective is weakly lower semicontinuous",
+        "deps": [
+          "def-ctrl1-linear-lqr-control-problem",
+          "lem-ctrl1-weak-control-convergence-implies-uniform-state-convergence",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "lem-ctrl1-control-box-is-weakly-closed",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume the Axiom of Countable Choice.\n\nFor the data of [[def-ctrl1-linear-lqr-control-problem]], if $u_k\\in\\mathcal U_c$ and $u_k\\rightharpoonup u$ weakly in $L^2(0,T;\\mathbb R^m)$, then $J(u)\\le\\liminf_{k\\to\\infty}J(u_k)$.\n\n"
+      },
+      {
+        "id": "lem-ac-zero-derivative-and-integral-reconstruction-under-countable-choice",
+        "kind": "lemma",
+        "title": "AC zero-derivative constancy and integrable-derivative reconstruction under Countable Choice",
+        "deps": [
+          "def-countable-choice",
+          "def-absolutely-continuous-function",
+          "def-derivative",
+          "def-gauge-and-fine-tagged-partition",
+          "thm-cousins-lemma-for-gauges",
+          "thm-lebesgue-outer-regularity-for-arbitrary-subsets",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume",
+          "thm-well-ordering-principle",
+          "lem-geometric-sequence-null",
+          "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+          "thm-first-fundamental-theorem-of-calculus-for-l-one",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-ctrl1-lqr-adjoint-exists-uniquely",
+        "kind": "lemma",
+        "title": "The backward LQR adjoint equation has a unique solution",
+        "deps": [
+          "def-ctrl1-lqr-adjoint-equation",
+          "lem-ctrl1-measurable-linear-ode-state-map",
+          "def-ctrl1-linear-lqr-control-problem",
+          "def-countable-choice",
+          "lem-ac-zero-derivative-and-integral-reconstruction-under-countable-choice",
+          "thm-c1-lipschitz-ac-bv-hierarchy",
+          "cor-boundedness-theorem-r",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "cor-c-one-change-of-variables-for-l-one-functions"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-ctrl1-lqr-existence-and-unique-optimal-control",
+        "kind": "theorem",
+        "title": "A bounded-control linear-quadratic ODE has a unique minimizer",
+        "deps": [
+          "def-ctrl1-linear-lqr-control-problem",
+          "lem-ctrl1-measurable-linear-ode-state-map",
+          "lem-ctrl1-control-box-is-weakly-closed",
+          "lem-ctrl1-lqr-cost-is-weakly-lower-semicontinuous",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "cor-hilbert-spaces-are-reflexive",
+          "lem-dependent-choice-implies-countable-choice",
+          "thm-direct-method-in-a-reflexive-banach-space",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "def-hahn-banach-extension-principle-relative"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "alg-ctrl1-indirect-shooting-for-the-ode-optimality-system",
+        "kind": "algorithm",
+        "title": "Finite-budget indirect shooting for an interior-control ODE optimality system",
+        "deps": [
+          "def-ctrl1-smooth-transcription-data",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "def-certified-ivp-approximation-and-sensitivity-interface",
+          "prop-shooting-residual-derivative",
+          "alg-single-shooting-for-nonlinear-bvps"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-ctrl1-lqr-adjoint-identity-and-gradient",
+        "kind": "lemma",
+        "title": "The LQR adjoint identity gives the reduced gradient",
+        "deps": [
+          "def-ctrl1-linear-lqr-control-problem",
+          "lem-ctrl1-measurable-linear-ode-state-map",
+          "def-ctrl1-lqr-adjoint-equation",
+          "lem-ctrl1-lqr-adjoint-exists-uniquely",
+          "thm-integration-by-parts-for-absolutely-continuous-functions",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-ctrl1-lqr-variational-inequality-and-pointwise-control-branch",
+        "kind": "theorem",
+        "title": "LQR minimizers satisfy a feasible-set variational inequality",
+        "deps": [
+          "def-ctrl1-linear-lqr-control-problem",
+          "lem-ctrl1-measurable-linear-ode-state-map",
+          "lem-ctrl1-lqr-adjoint-identity-and-gradient",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "lem-dependent-choice-implies-countable-choice",
+          "def-ctrl1-lqr-adjoint-equation",
+          "thm-rational-points-and-boxes-in-rn",
+          "lem-product-topology-on-rn",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-ctrl1-terminal-constraints-break-pointwise-control-vi",
+        "kind": "counterexample",
+        "title": "An active terminal constraint invalidates the pointwise control-only variational inequality",
+        "deps": [
+          "def-ctrl1-linear-lqr-control-problem",
+          "lem-ctrl1-control-box-is-weakly-closed",
+          "def-ctrl1-lqr-adjoint-equation",
+          "lem-ctrl1-lqr-adjoint-identity-and-gradient",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "kind": "algorithm",
+        "title": "Finite-horizon shooting and Runge\u2013Kutta collocation transcription",
+        "deps": [
+          "def-ctrl1-smooth-transcription-data",
+          "def-ctrl1-control-mesh-and-piecewise-constant-parameterization",
+          "def-explicit-runge-kutta-tableau-and-stage-map",
+          "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+          "alg-finite-budget-newton-for-vector-residuals",
+          "thm-implicit-differentiation-forward-and-adjoint-formulas",
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "thm-bounded-adaptive-runge-kutta-controller-terminates",
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "def-parameterized-finite-state-step-objective",
+          "thm-discrete-adjoint-gradient-recursion",
+          "thm-discrete-continuous-gradient-error-order-p"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent",
+        "kind": "lemma",
+        "title": "Exact single and multiple shooting have the same reduced feasible controls",
+        "deps": [
+          "def-ctrl1-control-mesh-and-piecewise-constant-parameterization",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "def-ctrl1-smooth-transcription-data"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+        "kind": "lemma",
+        "title": "A linear-quadratic transcription with affine constraints is a convex QP",
+        "deps": [
+          "def-ctrl1-linear-lqr-control-problem",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "def-explicit-runge-kutta-tableau-and-stage-map",
+          "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+          "def-conic-optimization-primal-dual-models",
+          "def-inequality-constrained-program-and-kkt-geometry"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-ctrl1-mesh-consistent-lqr-minimizers-converge",
+        "kind": "theorem",
+        "title": "Mesh-consistent LQR minimizers converge to the unique continuous minimizer",
+        "deps": [
+          "def-ctrl1-linear-lqr-control-problem",
+          "lem-ctrl1-measurable-linear-ode-state-map",
+          "lem-ctrl1-weak-control-convergence-implies-uniform-state-convergence",
+          "lem-ctrl1-lqr-cost-is-weakly-lower-semicontinuous",
+          "thm-ctrl1-lqr-existence-and-unique-optimal-control",
+          "def-ctrl1-control-mesh-and-piecewise-constant-parameterization",
+          "lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence",
+          "def-weak-convergence-of-nets-and-sequences",
+          "lem-ctrl1-control-box-is-weakly-closed",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "cor-hilbert-spaces-are-reflexive",
+          "def-ultrafilter-extension-principle",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "def-hahn-banach-extension-principle-relative"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-ctrl1-objective-and-control-error-from-consistency-bounds",
+        "kind": "theorem",
+        "title": "Strong convexity converts transcription objective error into a control bound",
+        "deps": [
+          "def-ctrl1-linear-lqr-control-problem",
+          "lem-ctrl1-measurable-linear-ode-state-map",
+          "lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence",
+          "def-countable-choice",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+        "kind": "algorithm",
+        "title": "Finite-budget barrier or SQP solve for a transcription NLP",
+        "deps": [
+          "def-ctrl1-smooth-transcription-data",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+          "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-fraction-to-boundary-and-primal-dual-gap-certificates",
+          "alg-sqp-merit-globalization-with-finite-budgets",
+          "alg-sqp-exact-hessian-newton-step",
+          "thm-sqp-exact-hessian-local-quadratic-convergence"
+        ],
+        "dependency_level": 9
+      },
+      {
+        "id": "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+        "kind": "theorem",
+        "title": "Exact-Hessian SQP converges locally to a regular transcription KKT point",
+        "deps": [
+          "def-ctrl1-smooth-transcription-data",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "thm-second-order-sufficient-condition-on-the-critical-cone",
+          "alg-sqp-exact-hessian-newton-step",
+          "thm-sqp-exact-hessian-local-quadratic-convergence",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "thm-banach-fixed-point"
+        ],
+        "dependency_level": 10
+      }
+    ]
+  },
+  {
+    "order": 2485,
+    "id": "direct-transcription-and-numerical-ode-optimal-control-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Direct transcription and numerical ode optimal control \u2014 Examples",
+    "companion": "direct-transcription-and-numerical-ode-optimal-control",
+    "requires": [
+      "direct-transcription-and-numerical-ode-optimal-control"
+    ],
+    "items": [
+      {
+        "id": "ex-ctrl1-bounded-actuator-lqr",
+        "kind": "example",
+        "title": "A bounded-actuator LQR control and its exact objective",
+        "deps": [
+          "def-ctrl1-linear-lqr-control-problem",
+          "def-ctrl1-lqr-adjoint-equation",
+          "lem-ctrl1-lqr-adjoint-exists-uniquely",
+          "lem-ctrl1-lqr-adjoint-identity-and-gradient",
+          "def-countable-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-ctrl1-chemical-dosing-linear-model",
+        "kind": "example",
+        "title": "A chemical-dosing model under a constant admissible dose",
+        "deps": [
+          "def-ctrl1-smooth-transcription-data",
+          "lem-ctrl1-measurable-linear-ode-state-map",
+          "def-ctrl1-control-mesh-and-piecewise-constant-parameterization",
+          "def-explicit-runge-kutta-tableau-and-stage-map",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "thm-bounded-adaptive-runge-kutta-controller-terminates"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-ctrl1-single-versus-multiple-shooting-two-intervals",
+        "kind": "example",
+        "title": "Two-interval single and multiple shooting for x-prime equals u",
+        "deps": [
+          "def-ctrl1-control-mesh-and-piecewise-constant-parameterization",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent"
+        ],
+        "dependency_level": 9
+      }
+    ]
+  }
+]

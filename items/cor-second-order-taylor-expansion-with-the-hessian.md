@@ -7,13 +7,13 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-multivariable-taylor-formula-with-peano-remainder, def-hessian-and-euclidean-critical-point, def-euclidean-inner-product]
+deps: [thm-clairaut-schwarz-mixed-partials, cor-multivariable-taylor-formula-with-peano-remainder, def-hessian-and-euclidean-critical-point, def-euclidean-inner-product]
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-02
+  repair: research/numerical-optimization-dynamics-2026-10-16-owner-step2-preclaimed-published-receipts-CONTINUED-ROOT-1035-v1/cor-second-order-taylor-expansion-with-the-hessian.repair.json
 sources:
   scraped: []
   references:
@@ -36,10 +36,12 @@ $$f(a+h)=f(a)+\nabla f(a)\cdot h+\frac12\langle H_f(a)h,h\rangle+o(\|h\|^2).$$
 
 [L2] Gradient, Hessian, and Euclidean inner-product notation are defined in [[def-hessian-and-euclidean-critical-point]] and [[def-euclidean-inner-product]].
 
+[L3] A $C^2$ scalar field on an open neighborhood has equal mixed second partial derivatives: $\partial_i\partial_j f=\partial_j\partial_i f$ ([[thm-clairaut-schwarz-mixed-partials]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 Expand the degree-one and degree-two multi-index sums in [L1]. [L1, algebra]
 
-2.1 The degree-one sum is $\nabla f(a)\cdot h$, while symmetry of the repeated second derivatives identifies the degree-two sum with $\tfrac12\langle H_f(a)h,h\rangle$. [step 1.1, L2, algebra] ∎
+2.1 The degree-one sum is $\nabla f(a)\cdot h$, while symmetry of the repeated second derivatives identifies the degree-two sum with $\tfrac12\langle H_f(a)h,h\rangle$. [step 1.1, L2, L3, algebra] ∎

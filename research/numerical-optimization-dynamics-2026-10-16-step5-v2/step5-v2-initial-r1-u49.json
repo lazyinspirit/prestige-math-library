@@ -1,0 +1,217 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "49",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-sylvester-vectorization-isometry-and-kronecker-identity",
+      "model": "gpt-6-luna",
+      "context_sha256": "ac759c49e28e68277053317c19bd62a8d39aa4405b24504d2802258592e43944",
+      "outcome": "false_positive",
+      "reason": "The published Frobenius definition sums all entries with zero-based labels; setting x_{ij}=a_{i-1,j-1} reindexes that finite sum as i=1..m, j=1..n. F1 and step 1.1 therefore give the same entrywise Euclidean norm. Steps 1.2 and 1.3 correctly identify each column block, including B transpose rather than adjoint over C, and step 2.1 adds the identities. This is a coordinate convention, not a missing dependency or inference.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-bartels-stewart-sylvester-equation",
+      "model": "gpt-6-luna",
+      "context_sha256": "fe86f19a4897c571d93600cc4378bc465e7f4b1f65dc4e4394a7b72ef0d2b2f5",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The Definition gave only finite upper bounds N_A<=c_0*m and N_B<=c_0*n. For example -1 or 1/2 satisfies an appropriate upper bound but violates the nonnegative-integer N input of alg-finite-budget-francis-schur-reduction. Thus step 1 was not a defined delegated call on all expressly admitted inputs. Requiring nonnegative integer N_A,N_B repairs this logical input-domain defect while preserving both size caps, zero-budget cases, controller modes, exact certificates, pivot tests and all successful solves.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-sylvester-vectorization-isometry-and-kronecker-identity",
+      "disposition": "unaffected",
+      "post_sha256": "220d0219428330604a8e24230c319ba8e953b00c3bd27848017f93a6eff2124a",
+      "review_context_sha256": "a9b4236fbf55e4ff98dc90434efa2b25acd9c3044c723e0d59d3fe7d4f8e8b29",
+      "reason": "Read the complete lemma, Frobenius Definition, owning contract and A/B pages. Reindexing a_{ij} as x_{i+1,j+1} preserves the entry sum, so step 1.1 is valid. Each block calculation in 1.2-1.3 is correct, and 2.1 adds them; B transpose is correct over both fields. The guard equals the assignment before guard; no edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-bartels-stewart-sylvester-equation",
+      "disposition": "repaired",
+      "post_sha256": "0f43419152717f48ce2c67139538560e692a6c4f2ace3136f3e5b0bbe600bd9e",
+      "review_context_sha256": "877a4f7d1286bf2ebe2e959b1b86f6e0c13d26561af2974f7f3f772d377acace",
+      "reason": "Added the missing nonnegative integer budget condition while preserving both original caps. Checked all nine actual supplier interfaces, the owning contract/page, exact discriminant identity and controller branches. Schur certificates precede block substitution; its traversal uses only stored blocks. Nonzero determinants justify each adjugate solve, and delta>tau>=0 certifies the accepted pivot separation, including scalar and zero-forcing cases. Review context was captured immediately after repair. This is a repair review, not independent approval.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-bartels-stewart-sylvester-exact-correctness",
+    "thm-bartels-stewart-dense-operation-count",
+    "thm-bartels-stewart-finite-status-and-local-pivot-uniqueness",
+    "alg-schur-parlett-matrix-function"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "lem-sylvester-vectorization-isometry-and-kronecker-identity",
+      "location": "facts-block",
+      "disposition": "false-positive",
+      "reason": "The published Frobenius definition sums all entries with zero-based labels; setting x_{ij}=a_{i-1,j-1} reindexes that finite sum as i=1..m, j=1..n. F1 and step 1.1 therefore give the same entrywise Euclidean norm. Steps 1.2 and 1.3 correctly identify each column block, including B transpose rather than adjoint over C, and step 2.1 adds the identities. This is a coordinate convention, not a missing dependency or inference.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-bartels-stewart-sylvester-equation",
+      "class": "accuracy",
+      "subclass": "missing-hypothesis",
+      "severity": "fatal",
+      "location": "definition",
+      "defect_type": "logic",
+      "disposition": "fixed",
+      "caught_at_stage": "4-judge",
+      "caught_by_role": "unknown",
+      "reason": "The Definition gave only finite upper bounds N_A<=c_0*m and N_B<=c_0*n. For example -1 or 1/2 satisfies an appropriate upper bound but violates the nonnegative-integer N input of alg-finite-budget-francis-schur-reduction. Thus step 1 was not a defined delegated call on all expressly admitted inputs. Requiring nonnegative integer N_A,N_B repairs this logical input-domain defect while preserving both size caps, zero-budget cases, controller modes, exact certificates, pivot tests and all successful solves.",
+      "repair": "Opening Definition paragraph now requires nonnegative integer N_A,N_B in addition to the original caps.",
+      "adjudication_evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u49.json",
+      "repair_review_is_independent": false,
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "detector_model": "gpt-6-luna"
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "action": "no-update-required",
+      "reason": "All four direct item consumers of the changed Definition are draft members of the frozen frontier. No published item or outside-frontier consumer was found in the dependency/reference search, and no published supplier interface was changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "mathematical_review": [
+      "Vectorization review: zero-based a_{ij} and one-based x_{ij}=a_{i-1,j-1} give the same finite entry sum. Checked the complete lemma, exact Frobenius Definition, F1 quotation and all four derivations in its owning contract, and both owning pages. The current guard equals the assignment before guard. The rejection is false positive and no item edit was made. Review contexts were captured immediately after this review and before editing the next supplier.",
+      "Algorithm repair: replaced only finite sweep budgets by nonnegative integer sweep budgets N_A,N_B satisfying the original upper bounds in its Definition. Checked the actual Francis nonnegative-integer-N requirement, exact Schur forms, vectorization, separation definition/criterion, determinant separation bound, adjugate inverse, exact discriminant predicate and rational sign recipe. Zero budgets remain admitted; no claim of unconditional Schur convergence or bit complexity is added. Captured its hashes immediately after completing the repair review; this is not independent approval of the repair.",
+      "Direct section comparison: the vectorization Statement is unchanged; the algorithm Definition changes only its budget-domain clause. Exact-ID dependency/reference search over current items and pages yields the four inventoried draft frontier consumers and the owning A page. All four mathematical uses remain sound as explained in downstream_examination. No consumer Statement or Definition was edited, so no second hop is opened."
+    ],
+    "downstream_examination": [
+      {
+        "id": "thm-bartels-stewart-sylvester-exact-correctness",
+        "path": "items/thm-bartels-stewart-sylvester-exact-correctness.md",
+        "affected_use": "Statement: Suppose [[alg-bartels-stewart-sylvester-equation]] returns `success` for A,B,C. F1 and proof 1.1-2.1 use the exact Schur certificates and local block equations.",
+        "invalidated_claim": "None. The success-conditional conclusion uses the unchanged exact-certificate and substitution interface; adding the missing budget type changes neither algebraic identity.",
+        "minimality": "Leave the item Statement and Proof unchanged; refresh only its exact supplier-Definition quotation through its owning metadata lane.",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "supplier": "alg-bartels-stewart-sylvester-equation",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "thm-bartels-stewart-dense-operation-count",
+        "path": "items/thm-bartels-stewart-dense-operation-count.md",
+        "affected_use": "Statement: use N_A,N_B<=c_0*n in the named algorithm. Proof 1.2 counts O(n) Francis sweeps; 1.4 counts O(n^2) controller calls.",
+        "invalidated_claim": "None. Using the algorithm entails its admitted budgets. Nonnegative integer caps are precisely finite loop counts, and zero sweeps are already covered. The linear upper bounds and every cost estimate remain unchanged.",
+        "minimality": "No mathematical item edit is needed; its full Definition quote must mirror the added budget type in the owning contract.",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "supplier": "alg-bartels-stewart-sylvester-equation",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "thm-bartels-stewart-finite-status-and-local-pivot-uniqueness",
+        "path": "items/thm-bartels-stewart-finite-status-and-local-pivot-uniqueness.md",
+        "affected_use": "Statement begins For admitted inputs of the algorithm; proof 1.1 applies Francis finite termination, proof 2.1 uses nonzero local determinants, and 3.1-4.1 prove uniqueness by homogeneous block substitution.",
+        "invalidated_claim": "None after repair. The admitted-input premise now explicitly supplies the nonnegative integer budget required for the existing termination argument. All local-pivot and homogeneous-kernel reasoning is unchanged.",
+        "minimality": "Keep its Statement and Proof unchanged; refresh its exact supplier-Definition citation in the owning contract only.",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "supplier": "alg-bartels-stewart-sylvester-equation",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "alg-schur-parlett-matrix-function",
+        "path": "items/alg-schur-parlett-matrix-function.md",
+        "affected_use": "Definition step 4 calls Bartels-Stewart on T_ii F_ij+F_ij(-T_jj)=C_ij with threshold tau; successful solves are stored, pivot failures merge blocks, and other failures return inconclusive-sylvester.",
+        "invalidated_claim": "None. The input Schur controls and named delegated call inherit the called algorithm input domain; this consumer does not explicitly license negative or fractional sweep counts. Its exact success, merge and inconclusive branches do not depend on relaxing that domain.",
+        "minimality": "No procedure edit is required for this budget-type clarification. Per-call controls must satisfy the supplier domain, including caps for the actual block dimensions; the supplier already required such dimension-dependent caps before repair.",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "supplier": "alg-bartels-stewart-sylvester-equation",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    ],
+    "page_examination": [
+      {
+        "path": "library/numerical-linear-algebra-and-approximation/sylvester-and-lyapunov-matrix-equations.md",
+        "affected_use": "The page lists the algorithm and describes finite-budget Schur reduction, explicit failures and cubic work under linearly growing sweep budgets.",
+        "disposition": "unaffected",
+        "reason": "The new nonnegative integer type makes the stated finite-budget interface explicit; none of the page claims changes. The B page has no call to the algorithm.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    ],
+    "metadata_followup": [
+      {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-49.proof-contracts.json",
+        "consumer_ids": [
+          "thm-bartels-stewart-sylvester-exact-correctness",
+          "thm-bartels-stewart-dense-operation-count",
+          "thm-bartels-stewart-finite-status-and-local-pivot-uniqueness"
+        ],
+        "affected_use": "Each named consumer contracts[ID].citations[0] quotes the entire algorithm Definition and therefore retains the old finite sweep budgets wording.",
+        "minimality": "During the ordinary frontier consumer-owner pass, replace only those supplier Definition quotation mirrors with the exact current Definition. No historical_contract_before_owner_repair record should be rewritten.",
+        "route": "frontier-owner",
+        "reason": "The assigned algorithm has no active citations or derivations and its own contract remains current. Other consumers are read-only in this dispatch; preserve their ownership and original round evidence.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-sylvester-vectorization-isometry-and-kronecker-identity.md items/alg-bartels-stewart-sylvester-equation.md --json",
+        "exit_code": 0,
+        "result": "2 files; 1 proof checked and passed; algorithm not-applicable; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-sylvester-vectorization-isometry-and-kronecker-identity.md items/alg-bartels-stewart-sylvester-equation.md --json",
+        "exit_code": 0,
+        "result": "2 files checked; errors=[]; warnings=[]."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-49.proof-contracts.json --items lem-sylvester-vectorization-isometry-and-kronecker-identity,alg-bartels-stewart-sylvester-equation --strict --json",
+        "exit_code": 0,
+        "result": "Both assigned contracts checked; ok=true; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-bartels-stewart-sylvester-equation.md",
+        "exit_code": 0,
+        "result": "proof-layout: 1 items, 0 steps, 0 defects"
+      }
+    ],
+    "report_integrity_check": "Verified the structured input SHA-256, exact rejected-tuple coverage and both current itemHashGuards. Reversing only the budget-clause replacement reproduces the assigned algorithm before guard; the lemma guard is unchanged.",
+    "remaining_work": "No unresolved assigned mathematical obligation. The engine owns the recorded frontier consumer quote refresh, current independent rejudgment, round convergence and certification. The repaired fatal finding still counts as one confirmed-fatal item in this round. No published/outside consumer was discovered; no prerequisite was created."
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "group": "ag",
+  "batches": ["23"],
+  "pages_read": [
+    "elliptic-finite-difference-methods",
+    "elliptic-finite-difference-methods-examples"
+  ],
+  "items_read": [
+    "def-rectangular-grid-and-dirichlet-flux-stencil",
+    "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+    "lem-variable-coefficient-flux-stencil-second-order-consistency",
+    "thm-elliptic-finite-difference-l2-error-on-rectangles",
+    "ex-first-order-neumann-closure-causes-first-order-error",
+    "ex-dirichlet-laplacian-has-uniform-infinity-inverse-bound",
+    "ex-variable-coefficient-flux-and-expanded-stencils",
+    "ex-five-point-laplacian-is-exact-on-quadratics"
+  ],
+  "conventions": [
+    {
+      "convention": "The grid is real, rectangular and uniform in each coordinate, with L_x,L_y>0 and integers N_x,N_y≥2. The weighted grid norm sums interior nodes only; on full grid functions it is a seminorm.",
+      "fixed_by": "def-rectangular-grid-and-dirichlet-flux-stencil",
+      "matters_for": [
+        "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+        "thm-elliptic-finite-difference-l2-error-on-rectangles",
+        "ex-five-point-laplacian-is-exact-on-quadratics"
+      ]
+    },
+    {
+      "convention": "A_h^a is negative discrete flux divergence, with coefficients sampled at exact face midpoints. X_{h,0} vanishes on every boundary node.",
+      "fixed_by": "def-rectangular-grid-and-dirichlet-flux-stencil",
+      "matters_for": [
+        "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+        "lem-variable-coefficient-flux-stencil-second-order-consistency",
+        "thm-elliptic-finite-difference-l2-error-on-rectangles",
+        "ex-variable-coefficient-flux-and-expanded-stencils",
+        "ex-five-point-laplacian-is-exact-on-quadratics"
+      ]
+    },
+    {
+      "convention": "Consistency assumes a∈C³ of the closed rectangle, a≥a₀>0, and u∈C⁴ of the closed rectangle. Boundary samples are imposed exactly, and the residual estimate includes boundary-adjacent interior nodes.",
+      "fixed_by": "lem-variable-coefficient-flux-stencil-second-order-consistency",
+      "matters_for": [
+        "thm-elliptic-finite-difference-l2-error-on-rectangles"
+      ]
+    },
+    {
+      "convention": "The flux-versus-expanded example compares positive x-direction divergence approximations, rather than the negative-divergence elliptic operator.",
+      "fixed_by": "ex-variable-coefficient-flux-and-expanded-stencils",
+      "matters_for": [
+        "ex-variable-coefficient-flux-and-expanded-stencils"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+      "statement": "For zero-boundary test functions, ⟨A_h^a v,w⟩_h=E_h^a(v,w). Every v∈X_{h,0} satisfies the stated discrete Poincaré bound with constant L_x². If all face values are at least a₀>0, the homogeneous Dirichlet matrix is invertible with weighted grid L² inverse norm at most L_x²/a₀, independently of N_x,N_y.",
+      "used_by": [
+        "thm-elliptic-finite-difference-l2-error-on-rectangles",
+        "ex-five-point-laplacian-is-exact-on-quadratics",
+        "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint"
+      ]
+    },
+    {
+      "id": "def-rectangular-grid-and-dirichlet-flux-stencil",
+      "statement": "Defines the rectangular grid, weighted interior inner product, zero-boundary space, edge differences, exact-midpoint scalar flux stencil A_h^a, edge energy, and Dirichlet equations.",
+      "used_by": [
+        "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+        "lem-variable-coefficient-flux-stencil-second-order-consistency",
+        "thm-elliptic-finite-difference-l2-error-on-rectangles",
+        "ex-variable-coefficient-flux-and-expanded-stencils",
+        "ex-five-point-laplacian-is-exact-on-quadratics",
+        "def-parabolic-theta-finite-difference-scheme",
+        "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint"
+      ]
+    },
+    {
+      "id": "lem-variable-coefficient-flux-stencil-second-order-consistency",
+      "statement": "For a∈C³ of the closed rectangle with a≥a₀>0 and u∈C⁴ of the closed rectangle, set f=−∂x(a∂xu)−∂y(a∂yu). The exact-midpoint stencil satisfies |(A_h^a u*)_ij−f_h,ij|≤2C_x h_x²+2C_y h_y² at every interior node, with the explicitly stated derivative constants.",
+      "used_by": [
+        "thm-elliptic-finite-difference-l2-error-on-rectangles"
+      ]
+    }
+  ],
+  "published_dependencies": [],
+  "concerns": [
+    {
+      "id": "ex-dirichlet-laplacian-has-uniform-infinity-inverse-bound",
+      "concern": "Verification step 1.1 introduces φ_i=x_i(1−x_i)/2, but this standalone item never defines x_i. The intended x_i=ih is immediate and makes the barrier calculation correct; explicitly defining it would close the notation omission.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "elliptic-finite-difference-methods",
+      "to": "linear-scheme-stability-and-lax-equivalence",
+      "faithful": true,
+      "note": "Checked the common-space interface and Lax theorem against the elliptic page and proof chain. This is a contextual navigation prerequisite: the stationary error theorem uses its locally proved inverse and residual estimates, with no application or overstatement of evolution Lax equivalence."
+    },
+    {
+      "from": "parabolic-finite-difference-methods",
+      "to": "elliptic-finite-difference-methods",
+      "faithful": true,
+      "note": "The parabolic definition preserves the rectangular nodes and weighted interior inner product. Its Dirichlet positivity lemma faithfully cites zero-boundary summation by parts and explicitly applies the supplier's separate directional identities with κ_x and κ_y; it does not silently replace the scalar-coefficient statement by an anisotropic one."
+    }
+  ]
+}

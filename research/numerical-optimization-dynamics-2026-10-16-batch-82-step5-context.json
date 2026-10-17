@@ -1,0 +1,548 @@
+{
+  "group": "t",
+  "batches": [
+    "82"
+  ],
+  "pages_read": [
+    "gaussian-quadrature",
+    "gaussian-quadrature-examples"
+  ],
+  "items_read": [
+    "def-gauss-moment-data",
+    "def-coordinatewise-product-moment-functional",
+    "def-gauss-polynomial-moment-inner-product",
+    "thm-gauss-polynomial-moment-pairing-is-an-inner-product",
+    "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+    "lem-gauss-monic-three-term-recurrence",
+    "thm-gauss-orthogonal-polynomial-has-simple-interior-zeros",
+    "thm-hermite-interpolant-double-node-remainder",
+    "def-gauss-quadrature-rule",
+    "thm-jacobi-matrix-spectrum-equals-gauss-nodes",
+    "lem-gauss-quadrature-rule-data-well-defined",
+    "def-tensor-product-gauss-rule",
+    "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+    "thm-gauss-hermite-mean-value-remainder",
+    "thm-gauss-weights-equal-mu0-times-first-eigenvector-coordinate-squared",
+    "thm-tensor-product-gauss-exactness-and-exponential-node-count",
+    "lem-gauss-weight-residual-gap-bound",
+    "alg-golub-welsch-certified-node-and-weight-enclosures",
+    "thm-golub-welsch-certified-enclosures-are-sound",
+    "lem-tensor-product-moment-functional-equals-product-measure-integral",
+    "thm-consecutive-gauss-orthogonal-polynomials-strictly-interlace",
+    "ex-two-node-gauss-weights-from-cardinal-squares",
+    "ex-four-dimensional-gauss-product-has-sixteen-nodes",
+    "ex-two-node-gauss-legendre-exact-through-degree-three"
+  ],
+  "conventions": [
+    {
+      "convention": "Moment data have a<b, integer m≥1, r∈{2m−1,2m}, a finite positive measure on the relative Borel sigma-algebra of [a,b], positive total mass, and relative support containing at least m+1 distinct points.",
+      "fixed_by": "def-gauss-moment-data",
+      "matters_for": [
+        "thm-gauss-polynomial-moment-pairing-is-an-inner-product",
+        "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+        "thm-gauss-orthogonal-polynomial-has-simple-interior-zeros",
+        "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+        "thm-gauss-hermite-mean-value-remainder"
+      ]
+    },
+    {
+      "convention": "The moment pairing is defined on coefficient vectors for degrees k≤m with 2k≤r. The exactness branch constructs p_m without assuming its squared norm; the remainder branch uses r=2m.",
+      "fixed_by": "def-gauss-polynomial-moment-inner-product",
+      "matters_for": [
+        "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+        "lem-gauss-monic-three-term-recurrence",
+        "thm-gauss-hermite-mean-value-remainder"
+      ]
+    },
+    {
+      "convention": "Orthogonal polynomials are monic, p_0=1, and p_j is orthogonal to every polynomial of degree less than j; the j=0 condition is vacuous.",
+      "fixed_by": "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+      "matters_for": [
+        "lem-gauss-monic-three-term-recurrence",
+        "thm-jacobi-matrix-spectrum-equals-gauss-nodes",
+        "thm-consecutive-gauss-orthogonal-polynomials-strictly-interlace"
+      ]
+    },
+    {
+      "convention": "Gaussian nodes are increasingly ordered interior roots; weights are integrals of cardinal polynomials, and the rule accepts any real-valued function defined at those nodes.",
+      "fixed_by": "def-gauss-quadrature-rule",
+      "matters_for": [
+        "lem-gauss-quadrature-rule-data-well-defined",
+        "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+        "thm-gauss-weights-equal-mu0-times-first-eigenvector-coordinate-squared"
+      ]
+    },
+    {
+      "convention": "Tensor polynomials include their real coefficient families as formal data. Multi-indices are summed in increasing lexicographic order, and coordinate products use increasing coordinate order; d≥1.",
+      "fixed_by": "def-coordinatewise-product-moment-functional",
+      "matters_for": [
+        "thm-tensor-product-gauss-exactness-and-exponential-node-count",
+        "lem-tensor-product-moment-functional-equals-product-measure-integral",
+        "ex-four-dimensional-gauss-product-has-sixteen-nodes"
+      ]
+    },
+    {
+      "convention": "The finite product measure is formed by binary products iterated from left to right on the relative Borel interval spaces; probability normalization is unnecessary.",
+      "fixed_by": "lem-tensor-product-moment-functional-equals-product-measure-integral",
+      "matters_for": [
+        "lem-tensor-product-moment-functional-equals-product-measure-integral"
+      ]
+    },
+    {
+      "convention": "Certified Golub–Welsch assumes truthful moment intervals. Its eigensolver supplies proposals only; failed checks return inconclusive. The m=1 branch requires no projected eigensolver, and successful enclosure is not promised for every requested tolerance.",
+      "fixed_by": "alg-golub-welsch-certified-node-and-weight-enclosures",
+      "matters_for": [
+        "thm-golub-welsch-certified-enclosures-are-sound"
+      ]
+    },
+    {
+      "convention": "The Gauss–Legendre example explicitly assumes Countable Choice for the library's Lebesgue-measure construction and Riemann–Lebesgue comparison.",
+      "fixed_by": "ex-two-node-gauss-legendre-exact-through-degree-three",
+      "matters_for": [
+        "ex-two-node-gauss-legendre-exact-through-degree-three"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-gauss-moment-data",
+      "statement": "For a<b, m≥1 and r∈{2m−1,2m}, a Gaussian moment datum is a finite positive relative Borel measure of positive mass, with relative support containing at least m+1 points and finite absolute moments through r.",
+      "used_by": [
+        "thm-gauss-polynomial-moment-pairing-is-an-inner-product",
+        "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+        "thm-gauss-orthogonal-polynomial-has-simple-interior-zeros",
+        "alg-golub-welsch-certified-node-and-weight-enclosures"
+      ]
+    },
+    {
+      "id": "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+      "statement": "For moment data with r≥2m−1, each j=0,…,m has a unique monic real polynomial p_j of degree j orthogonal to every real polynomial of degree less than j. For j=0, p_0=1 and orthogonality is vacuous.",
+      "used_by": [
+        "lem-gauss-monic-three-term-recurrence",
+        "thm-gauss-orthogonal-polynomial-has-simple-interior-zeros",
+        "def-gauss-quadrature-rule",
+        "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights"
+      ]
+    },
+    {
+      "id": "thm-gauss-polynomial-moment-pairing-is-an-inner-product",
+      "statement": "For moment data and 0≤k≤m with 2k≤r, the polynomial moment pairing is a well-defined real inner product on R^(k+1).",
+      "used_by": [
+        "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+        "lem-gauss-monic-three-term-recurrence",
+        "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+        "thm-gauss-hermite-mean-value-remainder"
+      ]
+    },
+    {
+      "id": "thm-gauss-orthogonal-polynomial-has-simple-interior-zeros",
+      "statement": "For moment data with r≥2m−1, p_m has exactly m distinct simple roots a<x_1<⋯<x_m<b, and p_m(X)=∏(X−x_i).",
+      "used_by": [
+        "def-gauss-quadrature-rule",
+        "thm-jacobi-matrix-spectrum-equals-gauss-nodes",
+        "thm-consecutive-gauss-orthogonal-polynomials-strictly-interlace",
+        "thm-tensor-product-gauss-exactness-and-exponential-node-count"
+      ]
+    },
+    {
+      "id": "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+      "statement": "For order-(2m−1) moment data, the Gaussian rule equals the integral for every real polynomial of degree at most 2m−1; every weight is strictly positive and their sum is μ([a,b]).",
+      "used_by": [
+        "thm-gauss-hermite-mean-value-remainder",
+        "thm-gauss-weights-equal-mu0-times-first-eigenvector-coordinate-squared",
+        "thm-tensor-product-gauss-exactness-and-exponential-node-count",
+        "ex-two-node-gauss-weights-from-cardinal-squares",
+        "ex-two-node-gauss-legendre-exact-through-degree-three"
+      ]
+    },
+    {
+      "id": "lem-gauss-monic-three-term-recurrence",
+      "statement": "For 0≤j<m, h_j=∫p_j²dμ>0 and α_j=∫xp_j²dμ/h_j are defined; β_j=h_j/h_(j−1)>0 for 1≤j<m. The recurrence is xp_0=p_1+α_0p_0 and xp_j=p_(j+1)+α_jp_j+β_jp_(j−1).",
+      "used_by": [
+        "thm-jacobi-matrix-spectrum-equals-gauss-nodes",
+        "thm-consecutive-gauss-orthogonal-polynomials-strictly-interlace",
+        "thm-gauss-weights-equal-mu0-times-first-eigenvector-coordinate-squared",
+        "alg-golub-welsch-certified-node-and-weight-enclosures"
+      ]
+    },
+    {
+      "id": "thm-jacobi-matrix-spectrum-equals-gauss-nodes",
+      "statement": "The real symmetric Jacobi matrix has precisely the Gaussian nodes as eigenvalues, all simple; evaluation vectors of the normalized polynomials are nonzero eigenvectors at those nodes.",
+      "used_by": [
+        "thm-gauss-weights-equal-mu0-times-first-eigenvector-coordinate-squared",
+        "lem-gauss-weight-residual-gap-bound",
+        "alg-golub-welsch-certified-node-and-weight-enclosures",
+        "thm-golub-welsch-certified-enclosures-are-sound"
+      ]
+    },
+    {
+      "id": "thm-hermite-interpolant-double-node-remainder",
+      "statement": "For m distinct interior nodes and real f∈C^(2m)([a,b]), the displayed Hermite polynomial has degree at most 2m−1 and matches f and f′ at each node. At every non-node x∈[a,b], its error is f^(2m)(ξ_x)∏(x−x_i)²/(2m)! for some ξ_x∈(a,b).",
+      "used_by": [
+        "thm-gauss-hermite-mean-value-remainder"
+      ]
+    },
+    {
+      "id": "thm-gauss-weights-equal-mu0-times-first-eigenvector-coordinate-squared",
+      "statement": "For any unit Jacobi eigenvector v_i belonging to Gaussian node x_i, w_i=μ([a,b])|v_(i,1)|².",
+      "used_by": [
+        "lem-gauss-weight-residual-gap-bound",
+        "alg-golub-welsch-certified-node-and-weight-enclosures",
+        "thm-golub-welsch-certified-enclosures-are-sound",
+        "ex-two-node-gauss-legendre-exact-through-degree-three"
+      ]
+    },
+    {
+      "id": "lem-tensor-product-moment-functional-equals-product-measure-integral",
+      "statement": "For Gaussian coordinate data, every real coordinatewise tensor polynomial is integrable under the finite product measure and its integral equals I_⊗(P); the conclusion also applies to probability marginals.",
+      "used_by": [
+        "cor-tensor-gauss-exact-chaos-coefficients"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-integer-power",
+      "used_for": "Natural powers, including x^0=1 at x=0.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Relative Borel moment data and measurability arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-space",
+      "used_for": "The underlying moment measure space.",
+      "opened": true
+    },
+    {
+      "id": "def-measure",
+      "used_for": "Positive measures and inherited countable additivity in the Legendre example.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sigma-finite-and-semifinite-measures",
+      "used_for": "Finite moment measures and their sigma-finiteness.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Absolute moments and finite signed polynomial integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-space",
+      "used_for": "The real inner-product axioms for the moment pairing.",
+      "opened": true
+    },
+    {
+      "id": "def-real-polynomial-degree-leading-coefficient-and-monic",
+      "used_for": "Formal polynomial objects, degree and monicity; the zero polynomial has no degree.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-lebesgue-integral",
+      "used_for": "Nonnegative integrals underlying positivity and remainder bounds.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Integral lower bounds on positive-measure neighborhoods and integrated remainder inequalities.",
+      "opened": true
+    },
+    {
+      "id": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+      "used_for": "Indicator integrals and total-mass identities.",
+      "opened": true
+    },
+    {
+      "id": "def-integral-of-a-nonnegative-simple-function",
+      "used_for": "Integrals of indicators and the constant function one.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Integrating finite polynomial expansions, orthogonality and tensor sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+      "used_for": "Positive definiteness, root counting and monic factorization uniqueness.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of polynomial products and neighborhood positivity.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Finite polynomial, quadrature and tensor sums.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Finite linearity, distributivity and product calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-polynomial-ring-over-a-commutative-ring",
+      "used_for": "Coefficientwise polynomial arithmetic and convolution products.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-field",
+      "used_for": "Coefficient arithmetic and division by nonzero real quantities.",
+      "opened": true
+    },
+    {
+      "id": "def-monoid-finite-product",
+      "used_for": "Ordered finite coordinate products and empty-product conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-gram-schmidt-orthonormalisation",
+      "used_for": "Orthogonal polynomial construction below degree m.",
+      "opened": true
+    },
+    {
+      "id": "thm-rank-nullity",
+      "used_for": "Invertibility of the positive moment Gram matrix.",
+      "opened": true
+    },
+    {
+      "id": "lem-standard-basis-of-f-n",
+      "used_for": "Finite coefficient-space bases and dimensions.",
+      "opened": true
+    },
+    {
+      "id": "prop-standard-coordinate-inner-products",
+      "used_for": "Euclidean coefficient and Jacobi matrix inner products.",
+      "opened": true
+    },
+    {
+      "id": "prop-polynomial-degree-laws-over-a-commutative-ring",
+      "used_for": "Recurrence expansions and Hermite degree bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-continuous-image-of-an-interval-is-an-interval",
+      "used_for": "Sign constancy, interlacing and intermediate derivative values.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-ordered-field",
+      "used_for": "Sign arguments, positivity and ordered-field inequalities.",
+      "opened": true
+    },
+    {
+      "id": "def-higher-derivatives-and-smoothness",
+      "used_for": "C^(2m) regularity with one-sided endpoint derivatives.",
+      "opened": true
+    },
+    {
+      "id": "lem-higher-order-rolle",
+      "used_for": "The repeated-zero argument in the Hermite remainder.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Hermite value/derivative matching and differentiated remainder identities.",
+      "opened": true
+    },
+    {
+      "id": "def-factorial-and-falling-factorial",
+      "used_for": "Factorials and their nonzero natural-product representation.",
+      "opened": true
+    },
+    {
+      "id": "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+      "used_for": "Identification of natural factorials with real products.",
+      "opened": true
+    },
+    {
+      "id": "thm-monic-polynomial-division",
+      "used_for": "Division by p_m in the exactness proof.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Jacobi eigenbases, simplicity and residual-gap estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Coordinate norm identities in spectral and weight-error arguments.",
+      "opened": true
+    },
+    {
+      "id": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+      "used_for": "Self-adjointness of the real symmetric Jacobi matrix.",
+      "opened": true
+    },
+    {
+      "id": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+      "used_for": "The spectrum-as-eigenvalue-set convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-r",
+      "used_for": "Bounded continuous integrands and extrema of f^(2m).",
+      "opened": true
+    },
+    {
+      "id": "def-continuity-real",
+      "used_for": "Relative neighborhood bounds and Borel measurability.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Existence, finite mass and rectangle formulas for iterated product measures.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Absolute integrability of coordinate monomials.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Factorization of signed monomial integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+      "used_for": "Product measurability of restricted coordinate polynomials.",
+      "opened": true
+    },
+    {
+      "id": "thm-borel-sigma-algebra-of-a-subspace-is-the-trace",
+      "used_for": "Relative Borel interval spaces and restriction of Lebesgue measure.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-preimages-of-borel-sets-are-borel",
+      "used_for": "Measurability of continuous coordinate polynomial functions.",
+      "opened": true
+    },
+    {
+      "id": "lem-real-line-is-a-metric-space",
+      "used_for": "Positive-length neighborhoods in the Legendre support verification.",
+      "opened": true
+    },
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "used_for": "The measure used in the Gauss–Legendre example.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-is-a-complete-measure",
+      "used_for": "Existence of Lebesgue measure under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-borel-sets-are-lebesgue-measurable",
+      "used_for": "Restricting Lebesgue measure to relative Borel sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Interval mass and full relative support in the Legendre example.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Riemann integrability of the four Legendre moment integrands.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Evaluation of moments using polynomial primitives.",
+      "opened": true
+    },
+    {
+      "id": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+      "used_for": "Transferring the computed Riemann moments to Lebesgue moments under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-of-a-power",
+      "used_for": "The polynomial primitives used to compute Legendre moments.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit choice assumption in the Legendre example.",
+      "opened": true
+    },
+    {
+      "id": "def-subspace-topology-top",
+      "used_for": "Relative open neighborhoods of interval endpoints.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-topology",
+      "used_for": "Metric-ball neighborhoods in the support verification.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+      "concern": "F4 and Proof 1.1 write f=p_m s+t with “deg s<m”, allowing t=0 explicitly but omitting the analogous s=0 case. For example, f=1 gives s=0 for every m≥1, and def-real-polynomial-degree-leading-coefficient-and-monic explicitly gives the zero polynomial no degree. State “s=0 or deg s<m” and treat its orthogonality integral as zero. This is an immediate zero-case clarification; the exactness conclusion remains sound.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "gaussian-quadrature",
+      "to": "polynomial-interpolation-and-remainder",
+      "faithful": true,
+      "note": "Cardinal values, degree bounds, interpolation uniqueness, linear-factor products and highest derivatives are used within their stated domains. The Hermite proof creates distinct zeros of g′ before applying the distinct-zero higher-order Rolle theorem."
+    },
+    {
+      "from": "gaussian-quadrature",
+      "to": "verified-linear-systems-and-spectral-enclosures",
+      "faithful": true,
+      "note": "Golub–Welsch supplies full interval families to the uniform linear certifier and a Hermitian family to the ordered eigenvalue certifier. Its soundness proof uses their conditional certified-output guarantees, including ordered eigenvalue containment, without asserting eventual certification."
+    },
+    {
+      "from": "gaussian-quadrature",
+      "to": "restarted-and-block-eigensolvers",
+      "faithful": true,
+      "note": "The proposal call uses full dimension m, target count m−1, a finite-return projected eigensolver provider, a finite restart budget and an explicit thick-restart target rule. Unavailable, invalid and nonconverged outputs become inconclusive; exact Ritz data are independently checked before interval certification."
+    },
+    {
+      "from": "deferred-correction-and-collocation-iterations",
+      "to": "gaussian-quadrature",
+      "faithful": true,
+      "note": "The unit-interval supplier establishes order-2M data under Countable Choice. The midpoint and weighted-defect consumers explicitly pass to the lower moment branch, identify the same polynomial by uniqueness, and identify Riemann tableau weights with Lebesgue Gaussian weights. The remainder is applied componentwise to C^(2M) scalar functions."
+    },
+    {
+      "from": "sparse-grid-cubature-and-mixed-regularity",
+      "to": "gaussian-quadrature",
+      "faithful": true,
+      "note": "The current page lists Gaussian quadrature as a prerequisite, but its actual hierarchy uses composite Simpson rules. Its listed item carriers contain no Gaussian supplier citation or implicit Gaussian exactness claim requiring a stronger interface."
+    },
+    {
+      "from": "polynomial-chaos-stochastic-collocation-and-galerkin-uq",
+      "to": "gaussian-quadrature",
+      "faithful": true,
+      "note": "cor-tensor-gauss-exact-chaos-coefficients assumes matching marginal Gaussian data and m_j≥p_j+1, checks product degrees ≤2p_j≤2m_j−1, and uses the separate product-measure lemma to identify algebraic moments with the required integrals."
+    },
+    {
+      "from": "variational-crimes-and-strang-lemmas",
+      "to": "gaussian-quadrature",
+      "faithful": true,
+      "note": "The task names this edge, but the current page has no requires field and its listed items contain no Gaussian supplier citation. Its prose explicitly avoids inferring mesh-uniform stability from quadrature exactness; no stronger Gaussian proposition is asserted."
+    },
+    {
+      "from": "spectral-collocation-and-galerkin-methods",
+      "to": "gaussian-quadrature",
+      "faithful": true,
+      "note": "Infinite relative support supplies each finite-order moment datum for the weighted polynomial spaces. Gaussian mass assembly uses the same measure and N+1 nodes, with product degree i+j≤2N<2N+1, within the exactness theorem's range."
+    }
+  ]
+}

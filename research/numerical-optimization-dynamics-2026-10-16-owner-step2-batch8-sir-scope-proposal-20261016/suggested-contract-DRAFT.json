@@ -1,0 +1,151 @@
+{
+  "status": "DRAFT for root review only; not integrated or validated",
+  "id": "thm-fixed-level-sir-relative-mse-under-conditional-event-second-moment-bounds",
+  "citations": [
+    {
+      "fact": "A1",
+      "source": "def-axiom-of-choice",
+      "source_section": "Definition",
+      "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+      "uses": [
+        "1.1"
+      ]
+    },
+    {
+      "fact": "F1",
+      "source": "alg-fixed-level-sir-splitting",
+      "source_section": "Definition",
+      "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman\u2013Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon\u2013Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
+      "uses": [
+        "1.1",
+        "1.2"
+      ]
+    },
+    {
+      "fact": "F1",
+      "source": "lem-sir-bounded-potential-unnormalized-update-variance",
+      "source_section": "Statement",
+      "quote": "Let $\\nu$ be a probability measure on $(E,\\mathcal E)$, $M$ a probability kernel on $E$, $G,f:E\\to[0,1]$ measurable, $z\\in[0,1]$, and $N\\ge1$. Draw $Y_1,\\ldots,Y_N$ IID from the probability law $\\nu M$. Put $a=N^{-1}\\sum_{i=1}^NG(Y_i)$. If $a>0$, set\n$\n\\eta^N=\\frac{\\sum_{i=1}^NG(Y_i)\\delta_{Y_i}}{Na};\n$\nif $a=0$, let $\\eta^N$ be any probability measure. Define the one-step unnormalized estimate $\\Gamma^N(f)=za\\,\\eta^N(f)$. Then\n$\n\\mathbb E[\\Gamma^N(f)]=z\\,\\nu M(Gf),\n\\qquad\n\\operatorname{Var}(\\Gamma^N(f))\\le\\frac{z^2}{4N}.\n$\nThe estimate is the normalizer update $za$ multiplied by the weighted empirical mean of $f$. The zero-weight fallback does not affect $\\Gamma^N$.",
+      "uses": [
+        "1.1",
+        "1.2"
+      ]
+    },
+    {
+      "fact": "F2",
+      "source": "thm-fixed-level-sir-absolute-mse-bound",
+      "source_section": "Proof",
+      "quote": "1.1 By [F4], the estimate is unbiased for $Z_L=P(A_L)$, so its mean-square error equals its variance. [A1, F1, F4, given]\n\n1.2 Set $Q_L\\equiv1$, and recursively $Q_{p-1}=M_p(G_pQ_p)$ for $p=L,\\ldots,1$. Since $M_p$ is a probability kernel and $0\\le G_p\\le1$, backward induction gives $0\\le Q_p\\le1$. By [F5], $Z_L=P(A_L)=\\int Q_0\\,dP$. [F1, F2, F5, given, induction]\n\n2.1 Let $\\Gamma_p^N=\\widehat Z_p\\eta_p^N$ be the unnormalized weighted empirical measure after level $p$, and put $U_p=\\Gamma_p^N(Q_p)$. Conditional on the particle history through level $p-1$, [F2] gives IID proposals from $\\eta_{p-1}^NM_p$; applying [F3] with $z=\\widehat Z_{p-1}$, $\\nu=\\eta_{p-1}^N$, and $f=Q_p$ yields $ \\mathbb E[U_p\\mid\\mathcal F_{p-1}] =\\widehat Z_{p-1}\\eta_{p-1}^N(M_p(G_pQ_p)) =U_{p-1}, \\quad \\operatorname{Var}(U_p\\mid\\mathcal F_{p-1}) \\le\\frac{\\widehat Z_{p-1}^{\\,2}}{4N} \\le\\frac1{4N}. $ Here the final inequality holds because $\\widehat Z_{p-1}$ is a product of averages of potentials in $[0,1]$. [A1, F2, F3, step 1.2, given, algebra]\n\n3.1 The initial particles are IID from $P$, so $U_0=N^{-1}\\sum_{i=1}^NQ_0(X_0^i)$. Since $Q_0^2\\le Q_0$, [F8] gives $\\operatorname{Var}(Q_0(X_0))\\le\\mathbb E Q_0-(\\mathbb E Q_0)^2\\le1/4$; [F6] then gives $\\operatorname{Var}(U_0)\\le1/(4N)$. Iterating [F7] with the conditional mean identity from step 2.1 gives $ \\operatorname{Var}(U_L) =\\operatorname{Var}(U_0)+\\sum_{p=1}^L \\mathbb E[\\operatorname{Var}(U_p\\mid\\mathcal F_{p-1})] \\le\\frac{L+1}{4N}. $ [A1, F2, F6, F7, F8, step 2.1, given, induction]\n\n4.1 Since $Q_L\\equiv1$, $U_L=\\Gamma_L^N(1)=\\widehat Z_L=\\widehat p$. Step 1.1 and step 3.1 prove both assertions. The constant does not involve $P(A_L)$, so no lower bound on the event probability is needed for this absolute error bound. [F4, step 1.1, step 3.1, algebra] \u220e",
+      "uses": [
+        "1.1",
+        "1.2"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "thm-iid-monte-carlo-mean-moments",
+      "source_section": "Statement",
+      "quote": "Let $(Y_i)_{i\\ge1}$ be a real IID sequence. If $\\mathbb E|Y_1|<\\infty$ and $\\mu=\\mathbb E[Y_1]$, then $\\mathbb E[\\bar Y_n]=\\mu$ for every $n\\ge1$. If also $\\mathbb E[Y_1^2]<\\infty$ and $\\sigma^2=\\operatorname{Var}(Y_1)$, then $\\operatorname{Var}(\\bar Y_n)=\\sigma^2/n$ for every $n\\ge1$.",
+      "uses": [
+        "1.1",
+        "1.2",
+        "2.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "def-moments-variance-and-covariance",
+      "source_section": "Definition",
+      "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+      "uses": [
+        "1.1",
+        "1.2",
+        "2.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "cor-conditional-variance-decomposition",
+      "source_section": "Statement",
+      "quote": "Assume AC. For real $X\\in L^2(P)$, $\\operatorname{Var}(X)=E[\\operatorname{Var}(X\\mid\\mathcal G)]+\\operatorname{Var}(E[X\\mid\\mathcal G])$.",
+      "uses": [
+        "1.1",
+        "1.2",
+        "2.1"
+      ]
+    },
+    {
+      "fact": "F4",
+      "source": "thm-fixed-level-sir-estimator-unbiased",
+      "source_section": "Statement",
+      "quote": "Use the full-resampling SIR model in [[alg-fixed-level-sir-splitting]] with $N\\ge1$, positive level probabilities, and each $K_\\ell$ supported on $A_\\ell$ and invariant for $\\pi_\\ell=P(\\,\\cdot\\mid A_\\ell)$. Then every prefix Feynman\u2013Kac normalizer is $Z_\\ell=P(A_\\ell)$, and the product normalizer estimate $\\widehat p$ is unbiased:\n$\n\\mathbb E[\\widehat p]=P(A_L).\n$\nThis conclusion asserts no finite-$N$ variance bound, accuracy guarantee, or uniform-in-rarity efficiency.",
+      "uses": [
+        "2.1"
+      ]
+    }
+  ],
+  "derivations": [
+    {
+      "id": "derivation-1-1",
+      "step": "1.1",
+      "claim": "Write $\\alpha_p=1+(B_p-1)/N$. The initial particles are IID from $P$, $\\widehat Z_0=1$ and $G_0=1$, so $U_0=N^{-1}\\sum_iq_0(X_0^i)$ has mean $Z$ and second moment $Z^2+[P(q_0^2)-Z^2]/N\\le\\alpha_0Z^2$. All $U_p$ lie in $[0,1]$ by [F2], so all following conditional second moments exist.",
+      "inputs": [
+        "given",
+        "A1",
+        "F1",
+        "F2",
+        "F3",
+        "algebra"
+      ]
+    },
+    {
+      "id": "derivation-1-2",
+      "step": "1.2",
+      "claim": "Conditional on the particle history $\\mathcal F_{p-1}$, put $z=\\widehat Z_{p-1}$, $a=\\eta_{p-1}^NM_p(G_pq_p)$ and $b=\\eta_{p-1}^NM_p[(G_pq_p)^2]$. By [F1] and [F3], $\\mathbb E[U_p^2\\mid\\mathcal F_{p-1}]=z^2[a^2+(b-a^2)/N]$. On $z>0$, the hypothesis $b\\le B_pa^2$ bounds this by $\\alpha_p z^2a^2=\\alpha_pU_{p-1}^2$, using $q_{p-1}=M_p(G_pq_p)$. If $a=0$ this same calculation gives zero, without division by $a$. If $z=0$, the zero-normalizer branch makes $U_p=U_{p-1}=0$, so the inequality also holds without a hypothesis on the fallback empirical law.",
+      "inputs": [
+        "given",
+        "F1",
+        "F2",
+        "F3",
+        "algebra"
+      ]
+    },
+    {
+      "id": "derivation-2-1",
+      "step": "2.1",
+      "claim": "Taking expectations in step 1.2 and iterating over $p=1,\\ldots,L$ yields $\\mathbb EU_L^2\\le\\prod_{p=1}^L\\alpha_p\\,\\mathbb EU_0^2\\le Z^2\\prod_{p=0}^L\\alpha_p$. Since $q_L=1$, $U_L=\\widehat Z_L$. Its mean is $Z$ by [F4], so subtracting $Z^2$ proves the claimed MSE bound. If $B_0=1$ then $\\alpha_0=1$; if every remaining $B_p\\le B$, each remaining factor is at most $1+(B-1)/N$, giving the specialization.",
+      "inputs": [
+        "step 1.1",
+        "step 1.2",
+        "F3",
+        "F4",
+        "algebra",
+        "induction"
+      ]
+    }
+  ],
+  "routine_steps": [],
+  "finite_smoke": [],
+  "boundaries": [
+    {
+      "case": "zero-prefix",
+      "status": "covered",
+      "reason": "Proof 1.2 makes U_p=U_{p-1}=0 when stored normalizer is zero; no moment hypothesis is imposed on fallback law."
+    },
+    {
+      "case": "zero-conditional-mean",
+      "status": "covered",
+      "reason": "b<=B a^2 forces b=0 when a=0; no division by a."
+    },
+    {
+      "case": "initial-factor",
+      "status": "covered",
+      "reason": "Proof 1.1 includes initial IID cloud; B0=1 removes exactly its factor."
+    },
+    {
+      "case": "one-particle",
+      "status": "covered",
+      "reason": "All variance identities valid at N=1; no asymptotic approximation."
+    }
+  ]
+}

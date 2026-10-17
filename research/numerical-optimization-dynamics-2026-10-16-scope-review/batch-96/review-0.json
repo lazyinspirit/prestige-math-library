@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "96",
+  "round": 0,
+  "reviewed_items": [
+    "def-parameterized-finite-state-step-objective",
+    "def-parameterized-elliptic-variational-problem",
+    "def-parameterized-parabolic-variational-problem",
+    "lem-parameter-ode-flow-tangent-on-common-tube",
+    "lem-ode-adjoint-pairing-integration-by-parts",
+    "thm-discrete-adjoint-gradient-recursion",
+    "thm-continuous-ode-adjoint-gradient-formula",
+    "thm-discrete-continuous-gradient-error-order-p",
+    "lem-implicit-rk-stage-jacobian-nonsingular-on-branch",
+    "thm-implicit-rk-stage-parameter-sensitivity",
+    "lem-elliptic-state-map-c1-under-uniform-coercivity",
+    "thm-elliptic-adjoint-reduced-gradient",
+    "thm-elliptic-fe-gradient-error-in-energy-norms",
+    "cor-elliptic-l2-gradient-rate-under-dual-regularity",
+    "thm-parabolic-adjoint-gradient-sensitivity",
+    "thm-parabolic-fe-gradient-error-with-time-dependent-ritz",
+    "thm-finite-time-tangent-volume-growth-from-qr",
+    "ex-4dvar-discrete-adjoint-gradient",
+    "ex-implicit-stiff-decay-parameter-fit",
+    "ex-elliptic-diffusion-coefficient-sensitivity",
+    "ex-multiple-shooting-sensitivity-jacobian",
+    "ex-qr-finite-time-volume-growth",
+    "ex-tent-map-finite-time-sensitivity-growth",
+    "ex-discrete-terminal-condition-mismatch",
+    "cex-state-error-alone-does-not-control-gradient"
+  ],
+  "reviewed_pages": [
+    "discrete-continuous-and-pde-adjoint-sensitivities",
+    "discrete-continuous-and-pde-adjoint-sensitivities-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The order-p gradient item has a material approved-scope gap: it assumes the joint state/adjoint error bound, while the preserved design calls for an order-p approximation result under augmented-method hypotheses. The missing discrete-adjoint estimate needs owner reconciliation; local proof repairs are also recorded.",
+  "findings": [
+    {
+      "id": "thm-discrete-continuous-gradient-error-order-p",
+      "type": "scope",
+      "reason": "The preserved DIF3/T12 design promises tangent/gradient approximation under augmented smoothness and a stable order-p method. This item proves a conditional perturbation bound but assumes the joint state/adjoint error estimate. Hager §§3–5 derives a transformed adjoint scheme and method-specific order conditions, illustrating why state RK order alone does not supply that estimate ([full paper](https://people.clas.ufl.edu/hager/files/rk.pdf)). Owner reconciliation is needed on whether this conditional result meets the approved scope."
+    },
+    {
+      "id": "thm-discrete-continuous-gradient-error-order-p",
+      "type": "prerequisite",
+      "reason": "The smallest missing prerequisite is an order-p error estimate for the discrete adjoint of the selected scheme, and for the tangent if that promise is retained, under explicit smoothness and stability conditions. The joint-error premise in the Statement and Proof 1.1 leave the adjoint part independent; Proofs 2.1–3.1 consume the full bound. The explicit RK supplier establishes only the state defect. Downstream consumer: cex-state-error-alone-does-not-control-gradient."
+    },
+    {
+      "id": "lem-implicit-rk-stage-jacobian-nonsingular-on-branch",
+      "type": "local",
+      "reason": "Proof A1 adds a derivative bound on a convex open set, but the Statement bounds D_YF only on the invariant ball. Remove the extra assumption by proving Lipschitz continuity directly along segments in the ball, where F is C1 on the surrounding open neighborhood, or include the stronger bound in the Statement."
+    },
+    {
+      "id": "ex-multiple-shooting-sensitivity-jacobian",
+      "type": "local",
+      "reason": "Verification 1.1 identifies the exact flow using uniqueness but only verifies a candidate solution; it also does not instantiate the common compact tube required by the cited tangent lemma. Add an integrating-factor uniqueness argument and a bounded parameter neighborhood containing the finite-horizon trajectories."
+    },
+    {
+      "id": "ex-4dvar-discrete-adjoint-gradient",
+      "type": "local",
+      "reason": "To establish that the displayed objective is the published 4DVAR objective, explicitly specify the identity observation maps and scalar covariance/precision choices; the algorithm supplier allows general observation maps."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "cex-state-error-alone-does-not-control-gradient",
+      "decision": "accept",
+      "reason": "The counterexample remains valid under the current conditional gradient bound and does not rely on the missing method-specific adjoint estimate."
+    }
+  ]
+}

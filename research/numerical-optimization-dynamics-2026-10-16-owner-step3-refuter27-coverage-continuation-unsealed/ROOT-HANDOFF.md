@@ -1,0 +1,7 @@
+# Unsealed one-shot continuation
+
+Read registry.UNSEALED.json and task. Exact API fields come from refuter-continuations.mts; subjects include all30 actual current scope IDs and native item/page paths, with null hashes. ROOT must authorize, confirm drained writers, fill writers_drained_at, report_sha256, scope_sha256, ref.sha256 and every subject.sha256 from actual bytes, then write canonical registry (not performed here). Keep original alias receipt untouched; API requires its exact path. Original full JSON report, result alias, attempt1 result, prompt, scope and page manifest are preserved as raw copies. Native tail equals original report structurally and alias equals attempt1 byte-for-byte. No native evidence was edited.
+
+API requires continuations length exactly1; registry was absent at inspection. Fresh label must be refute-27-coverage-correction-1 and uses the ordinary refuter stage. The module permits this strict superset (missing0/extra1), authenticates the archived old report and current scope/source guards, and allows only one completed new attempt. The replacement must be a genuine fresh read, not trimming the old report.
+
+Reader27/refuter27 completed; Alpha27 has no dispatch record at inspection. ROOT owns actual liveness confirmation and retry. Outside finding retains exact evidence and remains producer14 maintenance (reader15 already reports it); no additional proof verdict is made here. No hashes, tests, gates, native launch or canonical writes were performed.

@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "94",
+  "round": 1,
+  "reviewed_items": [
+    "lem-finite-matrix-semilinear-variation-of-constants",
+    "lem-skew-hermitian-matrix-exponential-is-unitary",
+    "lem-exponential-phi-integral-representations",
+    "def-exponential-euler-and-etd2-step-maps",
+    "lem-exponential-integrator-interaction-picture-stability",
+    "lem-exponential-euler-local-defect",
+    "lem-etd2-local-defect",
+    "alg-certified-exponential-euler-etd2-step",
+    "lem-certified-exponential-step-action-error",
+    "thm-exponential-euler-etd2-global-error-and-action",
+    "ex-diagonal-stiff-diffusion-with-reaction-etd",
+    "ex-nonnormal-transient-growth-exponential-step",
+    "ex-phi-functions-at-zero-no-division",
+    "ex-skew-hermitian-imaginary-time-unitary-step"
+  ],
+  "reviewed_pages": [
+    "exponential-and-integrating-factor-integrators",
+    "exponential-and-integrating-factor-integrators-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The complete final review found three remaining local proof obligations. The earlier realification, scaled-Taylor certificate, algorithm branch and work-specification, and imaginary-time scope findings were otherwise addressed.",
+  "findings": [
+    {
+      "id": "lem-exponential-integrator-interaction-picture-stability",
+      "type": "local",
+      "reason": "F6 uses ||e^{±rA}|| ≤ e^{r||A||} to assert the uniform bound e^{T||A||}, but does not justify the scalar comparison for r ≤ T. The same gap occurs in lem-exponential-euler-local-defect F6/proof 1.1 and lem-etd2-local-defect F6/proof 3.1. The completeness supplier gives a supremum only after boundedness is established. Add the scalar monotonicity or termwise series argument; these constants feed the global theorem."
+    },
+    {
+      "id": "thm-norm-inequality-for-the-vector-valued-integral",
+      "type": "local",
+      "reason": "The algorithm’s B_h paragraph and lem-certified-exponential-step-action-error F5 assert ||φ₁(hA)|| ≤ B_h and ||φ₂(hA)|| ≤ B_h/2 from the integral-representation lemma, whose statement supplies only the integral identities. Explicitly derive the bounds using the vector-integral norm inequality on the norm-preserving realification, the semigroup bound, and scalar exponential monotonicity. Affected uses are the algorithm’s B_h Definition clause and the action-error proof steps 1.2, 2.1, and 3.1."
+    },
+    {
+      "id": "alg-certified-exponential-euler-etd2-step",
+      "type": "local",
+      "reason": "The Definition specifies finite service calls, pre-call caps, and returned work counters, but no separate proved result establishes termination or the advertised call/work accounting under those conditions. The algorithm instructions require these properties in separate proved results."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-diagonal-stiff-diffusion-with-reaction-etd",
+      "decision": "accept",
+      "reason": "Its exact-step formulas and certificate note remain sound under the revised algorithm contract."
+    },
+    {
+      "id": "ex-skew-hermitian-imaginary-time-unitary-step",
+      "decision": "escalate",
+      "reason": "The real-time unitary and imaginary-time decay claims are sound, but its certified-error bound uses the global theorem, whose action-error dependency still has the unresolved φ-norm derivation."
+    },
+    {
+      "id": "lem-certified-exponential-step-action-error",
+      "decision": "escalate",
+      "reason": "F5’s φ-operator norm bounds are not established by the cited representation statement; the missing derivation affects this lemma’s certification claim."
+    },
+    {
+      "id": "thm-exponential-euler-etd2-global-error-and-action",
+      "decision": "escalate",
+      "reason": "Its proof consumes the local-defect and interaction-stability constants with the unresolved uniform-bound argument and propagates the unresolved action-error lemma."
+    },
+    {
+      "id": "exponential-and-integrating-factor-integrators",
+      "decision": "accept",
+      "reason": "The page summary matches the stated finite-matrix scope and formulas; the outstanding proof obligations are reported on their source items."
+    },
+    {
+      "id": "exponential-and-integrating-factor-integrators-examples",
+      "decision": "accept",
+      "reason": "The page now accurately distinguishes imaginary-time decay from real-time unitary evolution."
+    }
+  ]
+}

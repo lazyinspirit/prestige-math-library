@@ -1,0 +1,273 @@
+[
+  {
+    "order": 2446,
+    "id": "matrix-exponential-and-phi-function-actions",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Matrix exponential and phi function actions",
+    "companion": "matrix-exponential-and-phi-function-actions-examples",
+    "requires": [
+      "krylov-subspaces-arnoldi-and-gmres",
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "strongly-continuous-semigroups-and-hille-yosida",
+      "krylov-methods-and-lanczos-convergence",
+      "matrix-functions-and-scaling-squaring"
+    ],
+    "items": [
+      {
+        "id": "def-phi-functions-by-everywhere-convergent-series",
+        "kind": "definition",
+        "title": "The phi-function family by everywhere-convergent series",
+        "statement": "For every nonnegative integer k, define scalar and finite-matrix phi_k by the series sum of z^j/(j+k)! and X^j/(j+k)!, with phi_0 equal to the scalar or matrix exponential and phi_k(0)=1/k!.",
+        "deps": [
+          "def-complex-exponential",
+          "def-inner-product-norm",
+          "def-matrix-product-and-identity-matrix",
+          "def-matrix-space",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "prop-standard-coordinate-inner-products",
+          "lem-exponential-series-of-a-bounded-operator"
+        ],
+        "dependency_level": 0,
+        "justified_by": [
+          "lem-phi-series-converges-absolutely"
+        ]
+      },
+      {
+        "id": "def-logarithmic-norm-for-complex-matrices",
+        "kind": "definition",
+        "title": "The Euclidean logarithmic norm of a complex matrix",
+        "statement": "For A in C^(n x n), n>=1, define mu_2(A)=lambda_max((A+A*)/2), where A* is the conjugate transpose and lambda_max is the largest real eigenvalue of the Hermitian part.",
+        "deps": [
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-matrix-product-and-identity-matrix",
+          "def-matrix-space",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-self-adjoint-and-normal-endomorphism",
+          "prop-standard-coordinate-inner-products",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose"
+        ],
+        "dependency_level": 0,
+        "justified_by": [
+          "lem-logarithmic-norm-is-real-and-variational"
+        ]
+      },
+      {
+        "id": "def-certified-matvec-and-vector-arithmetic",
+        "kind": "definition",
+        "title": "Normwise certified matrix-vector and vector-step arithmetic",
+        "statement": "A certified Taylor arithmetic provider returns each scaled matrix-vector term and vector sum together with a verified nonnegative rational upper bound for its Euclidean-norm local error; a missing bound is an inconclusive result.",
+        "deps": [
+          "def-inner-product-norm",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-matrix-action-defect-variation-of-constants",
+        "kind": "lemma",
+        "title": "Variation of constants for a finite-matrix action defect",
+        "statement": "If u is a continuously differentiable approximate trajectory for x'=Ax and r(t)=Au(t)-u'(t), then exp(tA)v-u(t)=exp(tA)(v-u(0))+the oriented integral from 0 to t of exp((t-s)A)r(s) ds for positive or negative time.",
+        "deps": [
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "def-matrix-product-and-identity-matrix",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-vector-valued-derivative-and-integral",
+          "lem-exponential-series-of-a-bounded-operator",
+          "prop-standard-coordinate-inner-products",
+          "thm-complex-numbers-are-the-real-coordinate-plane"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-phi-series-converges-absolutely",
+        "kind": "lemma",
+        "title": "The scalar and matrix phi series converge absolutely",
+        "statement": "For every k>=0 and every scalar z or finite square matrix X over C, the defining phi_k series converges absolutely; its values at zero are 1/k! and I/k!.",
+        "deps": [
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-phi-functions-by-everywhere-convergent-series",
+          "def-real-exponential-function-and-e",
+          "lem-exponential-series-has-infinite-radius"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-logarithmic-norm-is-real-and-variational",
+        "kind": "lemma",
+        "title": "The Euclidean logarithmic norm is a real Rayleigh-quotient maximum",
+        "statement": "For A in C^(n x n), n>=1, the Hermitian part has real eigenvalues and mu_2(A)=max_{||x||_2=1} Re<x,Ax>.",
+        "deps": [
+          "def-logarithmic-norm-for-complex-matrices",
+          "def-self-adjoint-and-normal-endomorphism",
+          "prop-standard-coordinate-inner-products",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-scaled-taylor-exponential-action",
+        "kind": "algorithm",
+        "title": "Finite scaled Taylor action for the matrix exponential",
+        "statement": "Given rational certified upper bounds rho_A>=||A||_2, rho_t>=|t| and rho_v>=||v||_2, positive tolerance and finite scaling/order budgets, select s,p with rational R=rho_t rho_A/s<=1, evaluate s degree-p Taylor actions using certified local matvec and vector-step errors, and return a normwise truncation-plus-roundoff bound or an inconclusive status.",
+        "deps": [
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "def-certified-matvec-and-vector-arithmetic",
+          "def-inner-product-norm",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-phi-functions-by-everywhere-convergent-series"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-phi-recurrence-and-augmented-matrix-actions",
+        "kind": "theorem",
+        "title": "Phi recurrence and augmented-matrix action identities",
+        "statement": "For every k>=0, z and square matrix X, phi_k(z)=1/k!+z phi_(k+1)(z) and phi_k(X)=I/k!+X phi_(k+1)(X); a single augmented exponential has top-right block phi_k(X)w for every vector w, including k=1 without division at zero.",
+        "deps": [
+          "def-phi-functions-by-everywhere-convergent-series",
+          "lem-phi-series-converges-absolutely"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-logarithmic-norm-bounds-the-matrix-exponential",
+        "kind": "lemma",
+        "title": "The logarithmic norm bounds forward and reverse matrix exponentials",
+        "statement": "For every A in C^(n x n) and tau>=0, ||exp(tau A)||_2<=exp(tau mu_2(A)); applying the same result to -A bounds negative time.",
+        "deps": [
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "cor-exponential-is-a-bijection-onto-positive-reals",
+          "cor-mean-value-theorem",
+          "def-logarithmic-norm-for-complex-matrices",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "lem-exponential-series-of-a-bounded-operator",
+          "lem-logarithmic-norm-is-real-and-variational",
+          "thm-derivative-of-exponential"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-scaled-taylor-exponential-action-error-and-work",
+        "kind": "theorem",
+        "title": "Scaled Taylor action has a finite normwise truncation and roundoff certificate",
+        "statement": "For R<=1 and degree p, the Taylor tail is bounded by q_p(R)=R^(p+1)/((p+1)!(1-R/(p+2))); s steps yield a total truncation bound s*3^(s-1)q_p(R)||v|| and certified local roundoff adds sum_l 3^(s-l) epsilon_l, with exactly s*p calls to A.",
+        "deps": [
+          "alg-scaled-taylor-exponential-action",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+          "def-phi-functions-by-everywhere-convergent-series",
+          "lem-exponential-series-of-a-bounded-operator",
+          "lem-phi-series-converges-absolutely"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-arnoldi-exponential-and-phi-actions",
+        "kind": "algorithm",
+        "title": "Arnoldi projection for exponential and phi-function actions",
+        "statement": "Run Arnoldi for at most m steps and return beta V_j phi_k(tH_j)e_1, evaluating the reduced action by the augmented identity and finite Taylor action. Report Arnoldi breakdown, relation certification, reduced-action certification, and final-projection certification separately; happy-breakdown requires exact invariance, while an uncertified small computed subdiagonal is numerical-breakdown.",
+        "deps": [
+          "alg-scaled-taylor-exponential-action",
+          "def-arnoldi-process",
+          "def-certified-matvec-and-vector-arithmetic",
+          "def-phi-functions-by-everywhere-convergent-series",
+          "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+          "thm-phi-recurrence-and-augmented-matrix-actions"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-arnoldi-exponential-action-error-bound",
+        "kind": "theorem",
+        "title": "Arnoldi action error is the semigroup-weighted residual integral",
+        "statement": "The exponential-action error equals the variation-of-constants integral of the Arnoldi defect; logarithmic-norm control bounds it, and certified matvec, orthogonalization, initial-vector, reduced-exponential, and final-projection errors enter additively. Exact invariant-subspace data give exact phi actions.",
+        "deps": [
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "def-arnoldi-process",
+          "def-logarithmic-norm-for-complex-matrices",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-phi-functions-by-everywhere-convergent-series",
+          "lem-phi-series-converges-absolutely",
+          "lem-exponential-series-of-a-bounded-operator",
+          "lem-logarithmic-norm-bounds-the-matrix-exponential",
+          "lem-matrix-action-defect-variation-of-constants",
+          "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  },
+  {
+    "order": 2447,
+    "id": "matrix-exponential-and-phi-function-actions-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Matrix exponential and phi function actions — Examples",
+    "companion": "matrix-exponential-and-phi-function-actions",
+    "requires": [
+      "matrix-exponential-and-phi-function-actions"
+    ],
+    "items": [
+      {
+        "id": "ex-phi-one-at-zero-without-division",
+        "kind": "example",
+        "title": "The value phi_1(0) is obtained directly from its series",
+        "statement": "For the zero 1-by-1 matrix, verify phi_1(0)=1 and the augmented exponential returns the same value without evaluating (exp(z)-1)/z.",
+        "deps": [
+          "def-phi-functions-by-everywhere-convergent-series",
+          "thm-phi-recurrence-and-augmented-matrix-actions"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-stiff-diagonal-arnoldi-action",
+        "kind": "example",
+        "title": "A one-dimensional Arnoldi projection misses a slow mode of a stiff diagonal matrix",
+        "statement": "For A=diag(-100,-1), v=(1,1), t=0.1 and m=1, compute the projected exponential action and compare it exactly with exp(tA)v.",
+        "deps": [
+          "alg-arnoldi-exponential-and-phi-actions",
+          "def-arnoldi-process",
+          "def-logarithmic-norm-for-complex-matrices",
+          "def-phi-functions-by-everywhere-convergent-series",
+          "cor-exponential-is-a-bijection-onto-positive-reals",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-arnoldi-exponential-action-error-bound",
+          "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-nonnormal-transient-action-certificate",
+        "kind": "example",
+        "title": "A nonnormal action grows transiently while its Arnoldi residual certificate remains valid",
+        "statement": "For A=[[-1,3],[0,-1]], v=e_2 and t=1, compute the one-step Arnoldi residual, exact action, logarithmic-norm bound and the resulting action-error certificate.",
+        "deps": [
+          "alg-arnoldi-exponential-and-phi-actions",
+          "def-arnoldi-process",
+          "def-logarithmic-norm-for-complex-matrices",
+          "def-phi-functions-by-everywhere-convergent-series",
+          "def-real-exponential-function-and-e",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "lem-exponential-series-has-infinite-radius",
+          "lem-phi-series-converges-absolutely",
+          "lem-logarithmic-norm-bounds-the-matrix-exponential",
+          "thm-arnoldi-exponential-action-error-bound",
+          "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  }
+]

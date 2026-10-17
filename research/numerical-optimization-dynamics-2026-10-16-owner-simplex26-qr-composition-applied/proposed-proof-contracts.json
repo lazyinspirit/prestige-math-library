@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-revised-simplex-qr-basis-recompute-and-audit",
+    "thm-revised-simplex-qr-basis-residual-status-sound"
+  ],
+  "contracts": {
+    "alg-revised-simplex-qr-basis-recompute-and-audit": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition empty-basis m=0 branch; theorem step1.1 handles zero-dimensional residuals directly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition budgetK=0 returns budget-exhausted before factorization; zero RHS/solution and exact-zero audit follow the source zero conventions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits m=1 and sourcegamma_(m+3) bounds; theorem steps1.1–3.1 apply with a1by1exact orthogonal representative."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition never treats unresolved zero signs/ratio ties as valid floating pivots; exact existing driver transitions remain admissible, with pivot-inconclusive otherwise."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or biconditional claim is made in the Statement/Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition finite basis indices/RHS requests, rational certificate computation and bounded attempts; no infinite choice or unbounded norm oracle. Theorem step5.1 proves finite termination."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or biconditional claim is made in the Statement/Definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or biconditional claim is made in the Statement/Definition."
+        }
+      ]
+    },
+    "thm-revised-simplex-qr-basis-residual-status-sound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-revised-simplex-qr-basis-recompute-and-audit",
+          "source_section": "Definition",
+          "quote": "Input finite stored binary data for the standard-form LP of [[def-revised-simplex-basis-dictionary]], with full-row-rank $A\\in\\mathbb R^{m\\times n}$, a valid ordered basis $B$, and a nonnegative integer budget $K$ of basis evaluations. Stored values represent their exact dyadic rationals. Invalid dimensions, nonfinite inputs or repeated/out-of-range basis indices return `invalid-input`. Nonsingularity of $C=A_B$ must be established as part of an admitted basis input; a numerical rank threshold is not such an establishment. A basis whose validity is unavailable returns `basis-validity-inconclusive`.\n\nA caller may request a primal or dual simplex transition after an audit, or only an audit. It may supply a finite sequence of valid transitions from the existing exact OPT13 methods. A transition record identifies the leaving position and entering nonbasic index and establishes the exact primal or dual sign/ratio hypotheses for that transition and nonsingularity of its new basis. Exact OPT13 pivot checks suffice. Certified enclosures with a justified conditioning bound may also suffice, but this procedure does not manufacture such a bound or infer a sign from a small residual. A floating proposal lacking an established transition returns `pivot-inconclusive`, without changing the basis. Thus this interface composes both exact primal/dual drivers and guarded numerical proposals; it does not redefine their pivot rules.\n\nFor $m\\ge1$, use the operationwise arithmetic of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], with $0<u<1$, $mu<1$, $(m+3)u<1$, and $\\gamma_{m+3}<1/8$. All nonzero exact intermediates must be normal. Norms and certificate expressions below are evaluated exactly or by certified upward bounds; failure to obtain a finite valid bound is a numerical failure. Process the following loop:\n\n1. If $K$ basis evaluations have been attempted, return `budget-exhausted` with the last completed audit, if any. Count this attempt before starting a factorization.\n2. Recompute QR of $C=A_B$ and of $C^{\\mathsf T}$ from their current original stored entries, by the canonical successive calls to [[alg-scaled-householder-reflector-formation-and-application]] used in [[thm-computed-full-rank-least-squares-backward-stability]]. Apply stored reflectors to right-hand sides by the analyzed rounded rank-one updates and use successful rounded triangular substitution. Compute $\\widehat x_B$ from $Cz=b$, $\\widehat y$ from $C^{\\mathsf T}z=c_B$, and $\\widehat d_j$ from $Cz=a_j$ for the finitely many requested nonbasic columns. Reuse the current $C$ factorization for its separate right-hand sides. Never substitute a rounded dense orthogonal product for the exact orthogonal representative in the proof. After every admitted basis replacement discard both factorizations and recompute; no rank-one factorization-update implementation is claimed.\n3. Independently certify each returned solve for its actual current matrix $D=C$ or $C^{\\mathsf T}$ and right-hand side $r$. Compute $\\widehat v=\\operatorname{fl}(D\\widehat z)$ and $\\widehat w=\\operatorname{fl}(\\widehat v-r)$ by the sequential products/subtraction of [[lem-rounded-linear-and-normal-residual-certificates]]. Put\n$$g_m=\\frac{1+6u}{1-(m-1)u}-1,\\qquad W=g_m\\|D\\|_F\\|\\widehat z\\|_2+u(\\|\\widehat v\\|_2+\\|r\\|_2).$$\nWith the local coefficient $\\kappa_m$ of [[lem-scaled-householder-step-meets-local-backward-error-premise]], put\n$$\\beta=(1+\\kappa_m)^m-1,\\qquad \\beta_D=\\beta+\\gamma_{m+3}(1+\\beta),$$\nand report the valid upper bound\n$$\\eta(D,r,\\widehat z)=\\min\\{\\|\\widehat w\\|_2+W,\\ \\beta_D\\|D\\|_F\\|\\widehat z\\|_2+\\beta\\|r\\|_2\\}.$$\nA finite concrete certificate option uses exact rational arithmetic on the stored dyadic entries and a rational upper bound for $u$ satisfying all displayed admissibility inequalities. Use $\\|v\\|_2\\le\\sum_i|v_i|$ and $\\|D\\|_F\\le\\sum_{i,j}|D_{ij}|$ as rational upper bounds for every norm in the two nonnegative expressions. For the local coefficient, substitute $\\bar e_m=(1+u)^{m+3}-1$ for $e_m=(1+u)^{m/2+3}-1$ in the source formula: put $\\bar d_m=\\bar e_m+u(2+\\bar e_m)$, $a_m=(1+u)/(1-u)^m-1$, $g_m^{\\rm QR}=mu/(1-mu)$, $c_m=2((1+a_m)(1+u)^2(1+g_m^{\\rm QR})-1)$, and $\\bar\\kappa_m=\\max\\{\\bar e_m+8\\bar d_m,(1+u)c_m+3u\\}$. These are rational upper bounds because $m+3\\ge m/2+3$ and all constituent nonnegative formulas increase in their arguments. Then $\\bar\\beta=(1+\\bar\\kappa_m)^m-1$ and $\\bar\\beta_D=\\bar\\beta+\\gamma_{m+3}(1+\\bar\\beta)$ are rational upper bounds for the QR coefficients. Compute both candidate bounds by finite exact rational sums/products/powers and take their minimum as the returned $\\eta$. This implements the certificate without a norm oracle; other finite certified upper-bound procedures are allowed. Any factorization, substitution, dot, subtraction, range or certificate failure returns `numerical-failure`, with its stage and the last completed audit; it returns no certificate for the failed solve.\n4. Embed $\\widehat x_B$ in $\\widehat x\\in\\mathbb R^n$ with zero nonbasic entries, and call [[alg-revised-simplex-residual-audit]] on these actual stored $\\widehat x,\\widehat y$. Retain its exact $r_p=A\\widehat x-b$, $r_d=c-A^{\\mathsf T}\\widehat y$, objective difference $g$, and audit status together with all solve residual bounds. `basis-solves-residual-certified` means only that the returned bounds certify those linear equations; any requested thresholds must also be checked before declaring them met. `verified-optimal-for-stored-data` is issued only by the exact audit's primal/sign/zero-gap checks. Other completed candidates remain `candidate-only`; small residuals or a failed/ambiguous pivot never certify infeasibility.\n5. Return if audit-only mode or the caller has no further transition. Otherwise accept only an established transition of the declared type. An unresolved sign, leaving-ratio comparison, tie or basis validity returns `pivot-inconclusive` or `basis-validity-inconclusive`, retaining the last completed audit and current basis. After an admitted replacement, continue at step1 with the new basis. Exact driver invariants remain those of the existing driver, not consequences of successful floating solves.\n\nFor $m=0$, skip QR and substitution: the basis, multiplier and direction arrays are empty and their basis-equation residuals are zero. Evaluate the existing exact audit with $\\widehat x=0$; no basis replacement is possible. The budget and invalid-input branches remain in force.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-computed-full-rank-least-squares-backward-stability",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{m\\times n}$, $m\\ge n\\ge1$, have full column rank. Successful scaled Householder QR gives the exactly orthonormal reduced representative $\\widehat Q$ and computed triangular $\\widehat R$ with\n$$A+\\Delta_Q=\\widehat Q\\widehat R,\\qquad \\|\\Delta_Q\\|_F\\le\\beta_Q\\|A\\|_F,\\qquad \\beta_Q=(1+\\kappa_m)^n-1,$$\nwhere $\\kappa_m$ is the proved local-step coefficient. Apply the stored reflectors to $b$ by rounded rank-one updates and let $\\widehat y$ be the first $n$ coordinates. Set $\\beta_b=\\beta_Q$. Alternatively, if an explicitly supplied exactly orthonormal $\\widehat Q$ has entries admissible as arithmetic inputs and $\\widehat y=\\operatorname{fl}(\\widehat Q^Tb)$ uses sequential rounded dots, set $\\beta_b=\\sqrt n\\,\\gamma_m$. Solve $\\widehat R\\widehat x=\\widehat y$ by successful rounded back substitution. Suppose $mu<1$ and $\\gamma_{n+3}<1/8$. There exist $\\delta b$ and upper triangular $\\Delta R$ with\n$$(\\widehat R+\\Delta R)\\widehat x=\\widehat Q^T(b+\\delta b),\\qquad \\|\\delta b\\|_2\\le\\beta_b\\|b\\|_2,\\qquad \\|\\Delta R\\|_F\\le\\gamma_{n+3}\\|\\widehat R\\|_F.$$\nIf $\\widehat R+\\Delta R$ is nonsingular, $\\widehat x$ is the unique least-squares solution for $\\widetilde A=\\widehat Q(\\widehat R+\\Delta R)$ and $\\widetilde b=b+\\delta b$. The relative matrix perturbation is at most $\\beta_Q+\\gamma_{n+3}(1+\\beta_Q)$; the right-hand perturbation is at most $\\beta_b$. Consequently the formerly stated weaker factor $20\\gamma_{n+3}$ bound also holds. Success and nonsingularity are explicit hypotheses.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-rounded-linear-and-normal-residual-certificates",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, $x\\in\\mathbb F^n$, $y\\in\\mathbb F^m$ have stored real or complex entries, with $m,n\\ge1$. Use the operationwise arithmetic model, successful sequential dot products, and $0<u<1$ with $(\\max(m,n)-1)u<1$. Define\n$$g_k=\\frac{1+6u}{1-(k-1)u}-1,\\qquad F=\\|A\\|_F,\\quad X=\\|x\\|_2,\\quad Y=\\|y\\|_2.$$\nFor $\\widehat v=\\operatorname{fl}(Ax)$ and $\\widehat w=\\operatorname{fl}(\\widehat v-y)$, put $V=g_nFX$ and $W=V+u(\\|\\widehat v\\|_2+Y)$. Then\n$$\\|\\widehat w-(Ax-y)\\|_2\\le W.$$\nFor a stored real $\\lambda>0$, also compute $\\widehat z=\\operatorname{fl}(A^*\\widehat w)$, $\\widehat l=\\operatorname{fl}(\\lambda x)$ and $\\widehat r=\\operatorname{fl}(\\widehat z+\\widehat l)$, rounding scalar multiplication componentwise. The exact intended normal residual $r=A^*(Ax-y)+\\lambda x$ satisfies\n$$\\|\\widehat r-r\\|_2\\le\\rho:=FW+g_mF\\|\\widehat w\\|_2+u\\lambda X+u(\\|\\widehat z\\|_2+\\|\\widehat l\\|_2).$$\nNorms in these certificates mean exact norms or certified upper bounds. Uncontrolled rounding of the certificate itself is not authorized. The linear bound applies columnwise to certify $\\|I-AB\\|_2\\le\\|I-AB\\|_F$ from stored basis-solve columns $B$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-revised-simplex-primal-dual-residual-gap",
+          "source_section": "Statement",
+          "quote": "For a standard-form problem and finite candidate vectors $x,y$, let $r_p=Ax-b$, $r_d=c-A^{\\mathsf T}y$, and $g=c^{\\mathsf T}x-b^{\\mathsf T}y$, as computed exactly by [[alg-revised-simplex-residual-audit]]. Then\n$$g=x^{\\mathsf T}r_d+y^{\\mathsf T}r_p,$$\nand consequently\n$$|g|\\le \\|x\\|_1\\|r_d\\|_\\infty+\\|y\\|_1\\|r_p\\|_\\infty.$$\nHere $\\|z\\|_1=\\sum_i|z_i|$ and $\\|z\\|_\\infty=\\max_i|z_i|$, with both norms equal to zero on the empty vector. This bounds the primal-dual objective difference for the stored data; when either vector is infeasible it does not bound distance to an optimal value. If $Ax=b$, $x\\ge0$, $c-A^{\\mathsf T}y\\ge0$, and $g=0$, then $x$ is optimal.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "If $m=0$, the empty solve residuals are zero and only the finite audit and budget branches remain. If $m\\ge1$, nonsingularity makes each square $D$ full column rank. Apply",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Orthogonality and",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The triangle inequality and",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "By",
+          "inputs": [
+            "F4",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Each canonical factorization, vector application, substitution and residual loop has finite dimensions; each elementary call either completes or returns its first failure by",
+          "inputs": [
+            "step 1.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition empty-basis m=0 branch; theorem step1.1 handles zero-dimensional residuals directly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition budgetK=0 returns budget-exhausted before factorization; zero RHS/solution and exact-zero audit follow the source zero conventions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits m=1 and sourcegamma_(m+3) bounds; theorem steps1.1–3.1 apply with a1by1exact orthogonal representative."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition never treats unresolved zero signs/ratio ties as valid floating pivots; exact existing driver transitions remain admissible, with pivot-inconclusive otherwise."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or biconditional claim is made in the Statement/Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition finite basis indices/RHS requests, rational certificate computation and bounded attempts; no infinite choice or unbounded norm oracle. Theorem step5.1 proves finite termination."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or biconditional claim is made in the Statement/Definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or biconditional claim is made in the Statement/Definition."
+        }
+      ]
+    }
+  }
+}

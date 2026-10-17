@@ -1,0 +1,1349 @@
+{
+  "version": 1,
+  "level": "numerical-optimization-dynamics-2026-10-16-batch-67",
+  "scope": [
+    "alg-thick-and-implicitly-restarted-arnoldi-with-locking",
+    "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+    "alg-block-lobpcg-with-rank-loss-status",
+    "thm-finite-budget-restarted-and-block-procedures-return-a-status",
+    "lem-generalized-ritz-values-monotone-under-nested-subspaces",
+    "lem-block-principal-angle-squared-ritz-enclosure",
+    "thm-lobpcg-selected-ritz-values-do-not-increase",
+    "alg-shift-invert-and-harmonic-ritz-extraction",
+    "thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status",
+    "thm-shift-invert-map-and-inexact-solve-residual-transfer",
+    "ex-implicit-restart-shift-can-suppress-wanted-component",
+    "ex-clustered-vibration-modes-with-block-lobpcg",
+    "ex-interior-vibration-mode-shift-invert"
+  ],
+  "contracts": {
+    "alg-thick-and-implicitly-restarted-arnoldi-with-locking": {
+      "risk": "medium",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition fixes nonzero v and 1<=r<m<=n, so Arnoldi and retained target dimensions are positive and p=m-r>=1 shifts are required in implicit no-lock restart. It explicitly initializes no locked pairs and an empty orthonormal Q in step 3; these are valid empty accumulators. A zero residual-block range yields no F columns, while the queue/refill or invariant-subspace-breakdown branch determines continuation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the starting vector is nonzero; exact zero Arnoldi residuals have explicit invariant-subspace or filtered-breakdown statuses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The condition 1≤r<m≤n forces n≥2, so an order-one matrix is outside this algorithm input."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: locked-pair, rank-loss, exact-breakdown, unavailable-shift and filtered-breakdown branches are explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Its Definition retains the actual endpoints ||r_u||<=tau and c=Nmax and separates invariant-subspace-breakdown from unavailable shift/rank outputs. Zero tolerance and empty initial locked block are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The target rule is supplied and must return r-k independent current vectors or unavailable. Definition step3 uses finite pivot orthogonalization with original-index tie breaks; shift selection is a required finite-list input, not an unrestricted successful-choice assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The restarted-Arnoldi Definition prescribes rank-increasing lock tests, target-rule size/independence checks and exact QR restarts; it supplies no iff convergence theorem for arbitrary shifts."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The restarted-Arnoldi Definition prescribes rank-increasing lock tests, target-rule size/independence checks and exact QR restarts; it supplies no iff convergence theorem for arbitrary shifts."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-implicit-restart-polynomial-subspace-and-residual-identity": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+          "source_section": "Statement",
+          "quote": "Let $A$ be an $n\\times n$ matrix over $\\mathbb R$ or $\\mathbb C$, let $b$ be a\nnonzero vector of matching size, and let $m\\ge1$. Assume the Arnoldi process\nfor $(A,b)$ runs through step $m$ without breakdown. Let\n\n$$Q_m=[v_1\\,\\dots\\,v_m], \\qquad Q_{m+1}=[v_1\\,\\dots\\,v_{m+1}],$$\n\nand let $\\bar H_m=(h_{ij})_{1\\le i\\le m+1,\\,1\\le j\\le m}$, where the Arnoldi\ncoefficients occupy the positions $i\\le j+1$ and $h_{ij}:=0$ for $i>j+1$.\nThen:\n\n1. $v_1,\\dots,v_m$ are orthonormal;\n2. $\\operatorname{span}\\{v_1,\\dots,v_m\\}=K_m(A,b)$;\n3. $\\bar H_m$ has the rectangular upper-Hessenberg zero pattern\n   $h_{ij}=0$ for $i>j+1$;\n4. $AQ_m=Q_{m+1}\\bar H_m$.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$ and let $A_0\\in M_n(\\mathbb F)$.\n\n1. The **unshifted QR iteration** factors\n   $$A_k=Q_kR_k$$\n   with $Q_k$ unitary and $R_k$ upper triangular, then sets\n   $$A_{k+1}:=R_kQ_k.$$\n2. Given shifts $\\mu_k\\in\\mathbb F$, the **shifted QR iteration** factors\n   $$A_k-\\mu_k I=Q_kR_k$$\n   and sets\n   $$A_{k+1}:=R_kQ_k+\\mu_k I.$$\n3. Given a declared tolerance $\\tau_k\\ge0$, **numerical deflation** at index\n   $j$ occurs when $|(A_k)_{j+1,j}|\\le\\tau_k$: that entry is then replaced by\n   $0$, splitting the matrix into the two diagonal blocks separated at index\n   $j$. **Exact deflation** is the special case $\\tau_k=0$.\n4. For a real symmetric tridiagonal matrix, the **Wilkinson shift** is the\n   eigenvalue of the trailing $2\\times2$ principal block that is nearer to the\n   bottom-right entry; away from a tie, this eigenvalue is unique.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-shifted-qr-preserves-upper-hessenberg-form",
+          "source_section": "Statement",
+          "quote": "If $H$ is upper Hessenberg and a shifted QR step factors\n$H-\\mu I=QR$ using the standard adjacent-row Givens eliminations, then\n\n$$ H_+:=RQ+\\mu I $$\n\nis again upper Hessenberg.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices",
+          "source_section": "Definition",
+          "quote": "A square matrix $H=(h_{ij})$ is **upper Hessenberg** when\n$h_{ij}=0$ for every $i>j+1$, so entries below the first subdiagonal vanish.\n\nA real symmetric matrix $T=(t_{ij})$ is **tridiagonal** when\n$t_{ij}=0$ for every $|i-j|>1$. Thus a real symmetric tridiagonal matrix is\nexactly a symmetric upper Hessenberg matrix.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-and-complex-givens-transformations",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 2$ and let $0\\le i<j\\le n-1$.\n\nA **real Givens rotation** in the $(i,j)$-plane is the identity matrix except on\nrows and columns $i,j$, where it has the $2\\times 2$ block\n\n$$\\begin{pmatrix}c&s\\\\-s&c\\end{pmatrix}\\qquad(c,s\\in\\mathbb R,\\ c^2+s^2=1).$$A **complex Givens transformation** in the $(i,j)$-plane is the identity except on rows and columns $i,j$, where it has block$$\\begin{pmatrix}c&s\\\\-\\overline s&c\\end{pmatrix},$$\n\nwith $c\\in\\mathbb R_{\\ge 0}$, $s\\in\\mathbb C$, and $c^2+|s|^2=1$. The modulus\n$|s|$ is the one from [[def-complex-conjugate-real-imaginary-part-and-modulus]].\n\nSuch transformations act only on the two chosen coordinates and are designed to\nzero one targeted entry while preserving the Euclidean norm from\n[[def-inner-product-norm]].",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb F)$ with $\\mathbb F=\\mathbb R$ or $\\mathbb C$\nand $m\\ge n$.\n\nA **full QR factorisation** of $A$ is a factorisation\n\n$$A=QR,$$where $Q\\in M_m(\\mathbb F)$ is orthogonal or unitary and $R\\in M_{m\\times n}(\\mathbb F)$ is upper trapezoidal. A **reduced QR factorisation** is a factorisation$$A=\\widehat Q\\widehat R,$$where $\\widehat Q\\in M_{m\\times n}(\\mathbb F)$ has orthonormal columns ($\\widehat Q^*\\widehat Q=I_n$) and $\\widehat R\\in M_n(\\mathbb F)$ is upper triangular. A **column-pivoted QR factorisation** is a factorisation$$A\\Pi=\\widehat Q R,$$\n\nwhere $\\Pi$ is a permutation matrix acting on columns, $\\widehat Q$ has\northonormal columns, and $R$ is upper trapezoidal or upper triangular according\nto whether the full or reduced form is used. Computationally, one obtains these\nfactorisations by successive Householder reflectors or Givens transformations\nthat zero entries below the diagonal, with the pivoted version choosing the next\ncolumn after a permutation.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $0\\le j\\le m-1$, $A^jv_1=V_mH_m^je_1$: the claim holds at $j=0$, and if it holds at $j<m-1$, [F1] gives $A^{j+1}v_1=V_mH_m^{j+1}e_1+\\beta_m v_{m+1}e_m^*H_m^je_1$. By [F4], $H_m^je_1$ is supported in rows $1$ through $j+1$, so $e_m^*H_m^je_1=0$ when $j<m-1$; induction proves the identity through degree $m-1$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $\\deg q=p<m$, step 1.1 gives $q(A)v_1=V_mq(H_m)e_1$. Put $P_j=Q_1\\cdots Q_j$ and $P_0=I$; the cumulative similarities give $H_{j-1}=P_{j-1}^*H_mP_{j-1}$. Thus $H_m-\\mu_jI=P_{j-1}(H_{j-1}-\\mu_jI)P_{j-1}^*=P_{j-1}Q_jR_jP_{j-1}^*=P_jR_jP_{j-1}^*$. Because scalar factors commute, order the product as $q(H_m)=(H_m-\\mu_pI)\\cdots(H_m-\\mu_1I)$; substituting these factorizations cancels every adjacent $P_{j-1}^*P_{j-1}$ and gives $q(H_m)=P_p(R_p\\cdots R_1)=QR$. The product $R_p\\cdots R_1$ is upper triangular, and $Re_1=\\rho e_1$, so $q(A)v_1=\\rho V_mQe_1$.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For $0\\le j<r$, $p+j\\le m-1$, so applying step 1.1 to each monomial of $z^jq(z)$ gives $A^jq(A)v_1=V_mH_m^jq(H_m)e_1=\\rho V_mQ(H^+)^je_1$. By [F3], $H^+$ is upper Hessenberg, so $(H^+)^je_1$ is supported in its first $j+1$ coordinates and the resulting vector lies in $\\operatorname{range}(V_mQ(:,1:r))$. Thus $K_r(A,q(A)v_1)$ is contained in the retained range; both have dimension $r$, the former by hypothesis and the latter because $V_mQ$ has orthonormal columns, so they are equal.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "In each shifted QR step the top-down left eliminations use row pairs $(1,2),(2,3),\\ldots,(m-1,m)$; by [F5] the unitary factor is the ordered product of their adjoints. In $Q_i e_j$, rotations with index greater than $j$ act first and fix $e_j$, rotation $j$ adds at most row $j+1$, and rotations with smaller indices add only rows less than $j$; by [F4], each $Q_i$ is upper Hessenberg. If $C$ has lower bandwidth $a$ and $D$ lower bandwidth $b$, a nonzero term in $(CD)_{ij}=\\sum_k C_{ik}D_{kj}$ requires $k\\ge i-a$ and $k\\le j+b$, so $CD$ has lower bandwidth at most $a+b$. Hence $Q=Q_1\\cdots Q_p$ has lower bandwidth $p$ and $e_m^*Qe_j=0$ for $j<m-p=r$. Multiplying the Arnoldi factorization in [F1] by $Q$ yields $AV_mQ=V_mQH^++\\beta_m v_{m+1}e_m^*Q$; since $H^+$ is upper Hessenberg, restricting to columns 1 through $r$ gives $AV_mQ(:,1:r)=V_mQ(:,1:r)H_r^++(h^+V_mQe_{r+1}+\\beta_m(e_m^*Qe_r)v_{m+1})e_r^*$, the stated identity with residual vector $g$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The vector $V_mQe_{r+1}$ is orthogonal to the first $r$ columns of $V_mQ$, and [F1] makes $v_{m+1}$ orthogonal to the range of $V_m$; hence $g$ is orthogonal to the retained columns. If $g\\ne0$, normalization gives the next Arnoldi residual direction with coefficient $\\|g\\|_2$; if $g=0$, step 3.2 says $A$ maps the retained range into itself.",
+          "inputs": [
+            "F1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes 1<=r<m, so p=m-r>=1 and q has a nonempty shift product; no-breakdown Arnoldi supplies its positive basis dimension. Step 2.1 explicitly initializes P_0=I for the empty cumulative rotation product. The requested retained Krylov space has dimension r by hypothesis, rather than an empty filtered space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: q(A)v_1≠0 is an explicit hypothesis; the g=0 case is included and yields an invariant retained subspace."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem assumes 1≤r<m, so m≥2 and the one-dimensional restart case is excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: rho≠0 and filtered Krylov dimension r are required; g=0 is separately covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement fixes1<=r<m,p=m-r>=1, no Arnoldi breakdown and nonzero q(A)v_1 and rho. step 4.1 treats g=0 as exact invariance and otherwise normalizes g; neither zero branch is silently divided."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The exact shifts and Givens elimination order are supplied in the Statement. step 2.1 fixes cumulative products and3.2 their bandwidth, requiring no spectral-selection rule or arbitrary orthogonalization choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states a subspace identity and residual identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states a subspace identity and residual identity, not an equivalence."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "alg-block-lobpcg-with-rank-loss-status": {
+      "risk": "medium",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition has1<=q<=n and an initial full-rank B-orthonormal block. Its D_0 is explicitly empty, and step3 omits that block while keeping X; rank compression retains at least q directions before any successful projected solve."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a zero residual block satisfies the stated residual test and returns converged; rank-loss and invalid-initial-block are explicit statuses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: q=1 is permitted when n≥1 and all finite projected operations are defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: an empty previous search block is used at k=0 and exact rank compression is recorded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition tests residual<=tau before k=Nmax, including tau=0 and zero update budget. Step3 discards dependent columns and returns rank-loss before a deficient projected solve; empty D_0 is omitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition finite column-pivot procedure breaks norm ties by original order. Its Hermitian compression supplies a finite eigenbasis and chooses its q smallest values; arbitrary-basis ambiguity inside a cluster does not create a claimed canonical eigenvector."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The LOBPCG Definition specifies its projected solve and status branches, not an iff characterization of accurate eigenpairs or convergence. It explicitly withholds accuracy on budget/rank-loss returns."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The LOBPCG Definition specifies its projected solve and status branches, not an iff characterization of accurate eigenpairs or convergence. It explicitly withholds accuracy on budget/rank-loss returns."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "lem-generalized-ritz-values-monotone-under-nested-subspaces": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-b-inner-product-and-dual-norm-for-definite-pencil",
+          "source_section": "Definition",
+          "quote": "Let $B\\in\\mathbb F^{n\\times n}$, $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$,\nbe Hermitian positive definite, with Cholesky factor $B=LL^*$ and $L$ lower\ntriangular with positive diagonal. This factor exists and is unique by\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nDefine the linear-first **B-inner product** by\n$$\\langle x,y\\rangle_B:=y^*Bx,$$\nthe **B-norm** by\n$$\\|x\\|_B:=\\|L^*x\\|_2=\\sqrt{x^*Bx},$$\nand the **B-dual residual norm** by\n$$\\|r\\|_{B^{-1}}:=\\|L^{-1}r\\|_2 =\\sqrt{r^*B^{-1}r}.$$\nThe B-orthogonality condition is $x^*By=0$; since $B=B^*$ it is equivalent\nto $\\langle x,y\\rangle_B=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis",
+          "source_section": "Statement",
+          "quote": "Let $A=A^*$ and let $B=B^*$ be positive definite in\n$\\mathbb F^{n\\times n}$, where $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$.\nIf $B=LL^*$ is its Cholesky factorisation, then\n$$C=L^{-1}AL^{-*}$$\nis self-adjoint and has an orthonormal eigenbasis with real eigenvalues\n$\\lambda_1,\\ldots,\\lambda_n$. The vectors\n$$x_i=L^{-*}y_i\\quad (i=1,\\ldots,n)$$\nform a basis satisfying $Ax_i=\\lambda_iBx_i$ and\n$x_i^*Bx_j=\\delta_{ij}$. The generalized eigenvalues of $(A,B)$ are exactly\n$[\\lambda_i:1]$; none is infinite.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $Q_S$, the compression $H_S=Q_S^*AQ_S$ is Hermitian. Diagonalize it with an orthonormal eigenbasis $z_1,\\ldots,z_s$ and ordered eigenvalues $\\theta_1(S)\\le\\cdots\\le\\theta_s(S)$; the vectors $Q_Sz_i$ are B-orthonormal and every Rayleigh quotient on $S$ is their weighted average. Any j-dimensional $W\\subseteq S$ intersects $\\operatorname{span}(Q_Sz_j,\\ldots,Q_Sz_s)$ nontrivially by dimension count, so its maximum quotient is at least $\\theta_j(S)$; equality is attained on $\\operatorname{span}(Q_Sz_1,\\ldots,Q_Sz_j)$. This proves the min-max formula, and a unitary change between B-orthonormal bases conjugates the compression, proving basis invariance.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Let $u_1,\\ldots,u_n$ be the ambient B-orthonormal generalized eigenbasis from [F2], ordered by $\\lambda_i$. Any j-dimensional $W\\subseteq S$ intersects $\\operatorname{span}(u_j,\\ldots,u_n)$ nontrivially, again by dimension count. The quotient of a nonzero vector in that span is a weighted average of $\\lambda_j,\\ldots,\\lambda_n$ and is at least $\\lambda_j$; the min-max formula from step 1.1 gives $\\theta_j(S)\\ge\\lambda_j$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $S\\subseteq T$, every j-dimensional subspace considered for $\\theta_j(S)$ is also available for $\\theta_j(T)$. The minimum over the larger family therefore cannot be greater, so $\\theta_j(T)\\le\\theta_j(S)$.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement estimates only1<=j<=dim S. If S is zero-dimensional there is no j in that range, hence no minimum over a nonexisting j-dimensional family is requested; step1.1 applies when a positive indexed value is named."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero generalized eigenvalues are allowed; B-positive definiteness keeps every Rayleigh quotient denominator positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: j=1 and a one-dimensional trial subspace are included by the range 1≤j≤dim S."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: repeated generalized eigenvalues are allowed because only non-strict ordering is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement only names theta_j when1<=j<=dim S. Thus S={0} gives no indexed inequality; positive j ensures a nonempty j-dimensional comparison family. Equal spaces are permitted and give equal spectra by step1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step1.1 chooses a finite Hermitian compression eigenbasis, with the final spectrum independent of that choice by unitary conjugation. Step2.1 uses finite dimension intersection; it does not assume a consistent eigenvector choice across a refinement family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Ritz monotonicity lemma gives lower ambient bounds and one-way nonincrease on nested spaces. Step1.1 proves the minimax formula;2.1–3.1 compare available subspaces. It does not assert monotone Ritz values imply subspace inclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Ritz monotonicity lemma gives lower ambient bounds and one-way nonincrease on nested spaces. Step1.1 proves the minimax formula;2.1–3.1 compare available subspaces. It does not assert monotone Ritz values imply subspace inclusion."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "lem-block-principal-angle-squared-ritz-enclosure": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-b-inner-product-and-dual-norm-for-definite-pencil",
+          "source_section": "Definition",
+          "quote": "Let $B\\in\\mathbb F^{n\\times n}$, $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$,\nbe Hermitian positive definite, with Cholesky factor $B=LL^*$ and $L$ lower\ntriangular with positive diagonal. This factor exists and is unique by\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nDefine the linear-first **B-inner product** by\n$$\\langle x,y\\rangle_B:=y^*Bx,$$\nthe **B-norm** by\n$$\\|x\\|_B:=\\|L^*x\\|_2=\\sqrt{x^*Bx},$$\nand the **B-dual residual norm** by\n$$\\|r\\|_{B^{-1}}:=\\|L^{-1}r\\|_2 =\\sqrt{r^*B^{-1}r}.$$\nThe B-orthogonality condition is $x^*By=0$; since $B=B^*$ it is equivalent\nto $\\langle x,y\\rangle_B=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis",
+          "source_section": "Statement",
+          "quote": "Let $A=A^*$ and let $B=B^*$ be positive definite in\n$\\mathbb F^{n\\times n}$, where $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$.\nIf $B=LL^*$ is its Cholesky factorisation, then\n$$C=L^{-1}AL^{-*}$$\nis self-adjoint and has an orthonormal eigenbasis with real eigenvalues\n$\\lambda_1,\\ldots,\\lambda_n$. The vectors\n$$x_i=L^{-*}y_i\\quad (i=1,\\ldots,n)$$\nform a basis satisfying $Ax_i=\\lambda_iBx_i$ and\n$x_i^*Bx_j=\\delta_{ij}$. The generalized eigenvalues of $(A,B)$ are exactly\n$[\\lambda_i:1]$; none is infinite.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-generalized-ritz-values-monotone-under-nested-subspaces",
+          "source_section": "Statement",
+          "quote": "Let $A=A^*\\in\\mathbb C^{n\\times n}$ and $B=B^*>0$. Write the generalized\neigenvalues of $(A,B)$ in increasing order\n$\\lambda_1\\le\\cdots\\le\\lambda_n$. For a subspace $S$ with a full-column-rank\n$B$-orthonormal basis matrix $Q_S$, let\n$\\theta_1(S)\\le\\cdots\\le\\theta_{\\dim S}(S)$ be the eigenvalues of\n$Q_S^*AQ_S$. These values are independent of the chosen $B$-orthonormal basis.\nThen, for $1\\le j\\le\\dim S$,\n$$\\lambda_j\\le\\theta_j(S).$$\nIf $S\\subseteq T$ and $j\\le\\dim S$, then\n$$\\theta_j(T)\\le\\theta_j(S).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F2], write a B-unit vector $x\\in S$ as $x=u+e$ with $u=P_Ux\\in U$ and $e=(I-P_U)x\\in U^{\\perp_B}$. In the B-orthonormal generalized eigenbasis, if $x=\\sum_i a_i u_i$, then $x^*Bx=\\sum_i|a_i|^2$ and $x^*Ax=\\sum_i\\lambda_i|a_i|^2$. Thus $u^*Au\\le\\lambda_q u^*Bu$ and $e^*Ae\\le\\lambda_n e^*Be$; the cross terms vanish since $u_i^*Au_j=\\lambda_j u_i^*Bu_j=0$ for $i\\le q<j$. Therefore $x^*Ax/x^*Bx\\le\\lambda_q\\|u\\|_B^2+\\lambda_n\\|e\\|_B^2=\\lambda_q+(\\lambda_n-\\lambda_q)\\|e\\|_B^2$, which is at most the stated angle bound.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Diagonalizing the finite Hermitian compression shows that $\\theta_q(S)$ is the maximum Rayleigh quotient on $S$, so step 1.1 gives its upper bound. The lower bounds $\\lambda_j\\le\\theta_j(S)$ are [L1]. The strict gap isolates the first q eigenspaces, so their sum is unique; no step asserts an iteration rate.",
+          "inputs": [
+            "given",
+            "F2",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement fixes 1<=q<n and a q-dimensional trial space with B-orthonormal basis. Thus the eigenvector sum i=1,...,q and the trial B-unit sphere are nonempty; q<n also leaves an ambient complementary block. Step 1.1 allows the complementary component e=0, and the resulting angle contribution vanishes without requiring a nonempty set of nonzero error coefficients."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: sin(theta)=0 is allowed and the displayed upper bound then reduces to lambda_q."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: q=1 is permitted when n>1; the same Rayleigh quotient argument applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the strict gap lambda_q<lambda_{q+1} is explicit; without it no uniqueness claim is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement requires1<=q<n and lambda_q<lambda_(q+1), excluding a missing complement or closed gap. Step1.1 permits sin(theta)=0, giving the limiting upper bound lambda_q; no division by the angle occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Its finite B-orthonormal eigenbasis and supplied trial basis define P_U; the strict gap identifies the whole q-dimensional invariant sum uniquely. Step1.1 decomposes x in that sum and complement, without choosing a preferred vector in a repeated eigenspace."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The block-angle lemma derives an upper Ritz enclosure from the B-principal angle and strict spectral gap, without asserting a converse angle estimate or iteration rate. Step1.1 bounds unit-vector quotients and2.1 takes their maximum."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The block-angle lemma derives an upper Ritz enclosure from the B-principal angle and strict spectral gap, without asserting a converse angle estimate or iteration rate. Step1.1 bounds unit-vector quotients and2.1 takes their maximum."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-lobpcg-selected-ritz-values-do-not-increase": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-block-lobpcg-with-rank-loss-status",
+          "source_section": "Definition",
+          "quote": "Let $A=A^*\\in\\mathbb C^{n\\times n}$, let $B=B^*>0$, and let\n$T=T^*>0$ be a fixed preconditioning operator. Here $B>0$ and $T>0$ mean\n$x^*Bx>0$ and $x^*Tx>0$ for every nonzero $x$. The $B$-inner product and\nnorm are those of [[def-b-inner-product-and-dual-norm-for-definite-pencil]].\nChoose a block width $1\\le q\\le n$, a residual tolerance $\\tau\\ge0$, a finite\niteration budget $N_{\\max}\\ge0$, and an initial matrix $X_0$ with\n$X_0^*BX_0=I_q$. The output is a block of Ritz pairs and one of\n`converged`, `budget-exhausted`, `rank-loss`, or `invalid-initial-block`.\n\n1. If $X_0$ does not have full column rank or does not satisfy\n   $X_0^*BX_0=I_q$, return `invalid-initial-block`. Compute the Rayleigh-Ritz eigenpairs in\n   $\\operatorname{range}(X_0)$, sorted increasingly, and let $\\Theta_0$ be the\n   diagonal matrix of the $q$ Ritz values. Set the previous search block\n   $D_0$ empty and initialize the iteration counter $k=0$.\n\n2. At iteration $k$, form the original residual block\n   $R_k=AX_k-BX_k\\Theta_k$. If every column has Euclidean norm at most\n   $\\tau$, return `converged`. If $k=N_{\\max}$, return\n   `budget-exhausted` with $(\\Theta_k,X_k)$.\n\n3. Compute the preconditioned residual block $W_k=TR_k$ and set\n   $Y_k=[X_k,W_k,D_k]$, omitting the empty block at $k=0$. Compute an exact\n   rank-revealing $B$-QR with column pivoting as follows. Starting with no\n   columns in $Q_k$, for each remaining column $y_j$ of $Y_k$ compute its\n   residual $c_j=y_j-Q_k(Q_k^*By_j)$ and choose a column with largest\n   $B$-norm $\\|c_j\\|_B$ (break ties by original column order). If the largest\n   residual norm is zero, stop; otherwise append the normalized residual to\n   $Q_k$ and remove that pivot column. Let $s_k$ be the number of columns\n   appended and let $\\Pi_k$ record the pivot order followed by the unused\n   columns. If $s_k<q$, return `rank-loss` with the current Ritz pairs; no\n   projected solve is attempted on that branch. Otherwise set\n   $$S_k=Q_k^*BY_k\\Pi_k(:,1:s_k).$$\n   The pivot construction gives\n   $$Y_k\\Pi_k(:,1:s_k)=Q_kS_k,\\qquad Q_k^*BQ_k=I_{s_k},$$\n   and $S_k$ is invertible because its selected columns are independent.\n   Dependent trial columns are discarded and their count is recorded as a\n   rank-compression diagnostic.\n\n4. The projected matrix $Q_k^*AQ_k$ is Hermitian, hence normal, so its\n   orthonormal eigenbasis and real eigenvalues are supplied by\n   [[thm-complex-spectral-theorem-for-normal-endomorphisms]]. Solve\n   $Q_k^*AQ_kZ_k=Z_k\\Theta_{k+1}$ and choose its $q$ smallest eigenvalues. Set\n   $C_k=\\Pi_k(:,1:s_k)S_k^{-1}Z_k$; then $Y_kC_k=Q_kZ_k$. Partition\n   $C_k=\\begin{bmatrix}C_X\\\\C_W\\\\C_D\\end{bmatrix}$, omitting the $C_D$\n   block when $D_k$ is empty. The projected metric is positive definite\n   because for nonzero $z$, $(Q_kz)^*B(Q_kz)=\\|z\\|_2^2>0$. Set\n   $$X_{k+1}=X_kC_X+W_kC_W+D_kC_D,\\qquad D_{k+1}=W_kC_W+D_kC_D,$$\n   again omitting the empty-block term. Let $\\Theta_{k+1}$ be the selected\n   diagonal Ritz-value matrix and increment $k$.\n\n5. Repeat from step 2. No convergence, rate, or accuracy is asserted when the\n   budget or rank-loss branch is returned. The exact SPD conditions on $B$ and\n   $T$ define the permitted metric and preconditioner; no particular\n   incomplete-factorization procedure is assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-block-lobpcg-with-rank-loss-status",
+          "source_section": "Definition",
+          "quote": "Let $A=A^*\\in\\mathbb C^{n\\times n}$, let $B=B^*>0$, and let\n$T=T^*>0$ be a fixed preconditioning operator. Here $B>0$ and $T>0$ mean\n$x^*Bx>0$ and $x^*Tx>0$ for every nonzero $x$. The $B$-inner product and\nnorm are those of [[def-b-inner-product-and-dual-norm-for-definite-pencil]].\nChoose a block width $1\\le q\\le n$, a residual tolerance $\\tau\\ge0$, a finite\niteration budget $N_{\\max}\\ge0$, and an initial matrix $X_0$ with\n$X_0^*BX_0=I_q$. The output is a block of Ritz pairs and one of\n`converged`, `budget-exhausted`, `rank-loss`, or `invalid-initial-block`.\n\n1. If $X_0$ does not have full column rank or does not satisfy\n   $X_0^*BX_0=I_q$, return `invalid-initial-block`. Compute the Rayleigh-Ritz eigenpairs in\n   $\\operatorname{range}(X_0)$, sorted increasingly, and let $\\Theta_0$ be the\n   diagonal matrix of the $q$ Ritz values. Set the previous search block\n   $D_0$ empty and initialize the iteration counter $k=0$.\n\n2. At iteration $k$, form the original residual block\n   $R_k=AX_k-BX_k\\Theta_k$. If every column has Euclidean norm at most\n   $\\tau$, return `converged`. If $k=N_{\\max}$, return\n   `budget-exhausted` with $(\\Theta_k,X_k)$.\n\n3. Compute the preconditioned residual block $W_k=TR_k$ and set\n   $Y_k=[X_k,W_k,D_k]$, omitting the empty block at $k=0$. Compute an exact\n   rank-revealing $B$-QR with column pivoting as follows. Starting with no\n   columns in $Q_k$, for each remaining column $y_j$ of $Y_k$ compute its\n   residual $c_j=y_j-Q_k(Q_k^*By_j)$ and choose a column with largest\n   $B$-norm $\\|c_j\\|_B$ (break ties by original column order). If the largest\n   residual norm is zero, stop; otherwise append the normalized residual to\n   $Q_k$ and remove that pivot column. Let $s_k$ be the number of columns\n   appended and let $\\Pi_k$ record the pivot order followed by the unused\n   columns. If $s_k<q$, return `rank-loss` with the current Ritz pairs; no\n   projected solve is attempted on that branch. Otherwise set\n   $$S_k=Q_k^*BY_k\\Pi_k(:,1:s_k).$$\n   The pivot construction gives\n   $$Y_k\\Pi_k(:,1:s_k)=Q_kS_k,\\qquad Q_k^*BQ_k=I_{s_k},$$\n   and $S_k$ is invertible because its selected columns are independent.\n   Dependent trial columns are discarded and their count is recorded as a\n   rank-compression diagnostic.\n\n4. The projected matrix $Q_k^*AQ_k$ is Hermitian, hence normal, so its\n   orthonormal eigenbasis and real eigenvalues are supplied by\n   [[thm-complex-spectral-theorem-for-normal-endomorphisms]]. Solve\n   $Q_k^*AQ_kZ_k=Z_k\\Theta_{k+1}$ and choose its $q$ smallest eigenvalues. Set\n   $C_k=\\Pi_k(:,1:s_k)S_k^{-1}Z_k$; then $Y_kC_k=Q_kZ_k$. Partition\n   $C_k=\\begin{bmatrix}C_X\\\\C_W\\\\C_D\\end{bmatrix}$, omitting the $C_D$\n   block when $D_k$ is empty. The projected metric is positive definite\n   because for nonzero $z$, $(Q_kz)^*B(Q_kz)=\\|z\\|_2^2>0$. Set\n   $$X_{k+1}=X_kC_X+W_kC_W+D_kC_D,\\qquad D_{k+1}=W_kC_W+D_kC_D,$$\n   again omitting the empty-block term. Let $\\Theta_{k+1}$ be the selected\n   diagonal Ritz-value matrix and increment $k$.\n\n5. Repeat from step 2. No convergence, rate, or accuracy is asserted when the\n   budget or rank-loss branch is returned. The exact SPD conditions on $B$ and\n   $T$ define the permitted metric and preconditioner; no particular\n   incomplete-factorization procedure is assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-generalized-ritz-values-monotone-under-nested-subspaces",
+          "source_section": "Statement",
+          "quote": "Let $A=A^*\\in\\mathbb C^{n\\times n}$ and $B=B^*>0$. Write the generalized\neigenvalues of $(A,B)$ in increasing order\n$\\lambda_1\\le\\cdots\\le\\lambda_n$. For a subspace $S$ with a full-column-rank\n$B$-orthonormal basis matrix $Q_S$, let\n$\\theta_1(S)\\le\\cdots\\le\\theta_{\\dim S}(S)$ be the eigenvalues of\n$Q_S^*AQ_S$. These values are independent of the chosen $B$-orthonormal basis.\nThen, for $1\\le j\\le\\dim S$,\n$$\\lambda_j\\le\\theta_j(S).$$\nIf $S\\subseteq T$ and $j\\le\\dim S$, then\n$$\\theta_j(T)\\le\\theta_j(S).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "On the successful branch, [F1] constructs $S_k$ with $\\operatorname{range}(X_k)\\subseteq S_k$, and [F2] sets the new block to the q smallest Ritz vectors on $S_k$. Hence $\\theta_j(X_{k+1})=\\theta_j(S_k)$ and $\\theta_j(X_k)=\\theta_j(\\operatorname{range}(X_k))$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Apply [L1] to $\\operatorname{range}(X_k)\\subseteq S_k$. It gives $\\theta_j(S_k)\\le\\theta_j(\\operatorname{range}(X_k))$ for every $j\\le q$; substituting the equalities from step 1.1 proves the claim.",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement successful update starts from the q-dimensional old block with q>=1 supplied by LOBPCG. step 1.1 includes that block in S_k, so the trial space is nonempty even when W or previous D has no independent directions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the successful branch includes zero residuals and the inequality remains non-strict."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: q=1 is allowed and the nested-subspace lemma covers j=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: rank-loss and budget-exhausted exits are explicitly excluded from the successful-update claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement is restricted to a successful projected update with positive q from its algorithm. step 1.1 retains range X in the trial space; rank-loss or exhausted-budget outputs explicitly make no update assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "step 1.1 identifies the selected q smallest Ritz values and step 2.1 compares their invariant spectra by nested-subspace minimax. Particular eigenvectors inside equal eigenvalues need not be chosen canonically."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts a one-way inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts a one-way inequality, not an equivalence."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "alg-shift-invert-and-harmonic-ritz-extraction": {
+      "risk": "high",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition requires n>=1, nonzero start and1<=m<=n for shift-invert, and full-column-rank U with k>=1 for harmonic extraction. Empty candidate ledgers may accompany early solve failures; they are not finite approximate eigenvalue claims."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: theta=0 and rank-deficient W have explicit zero-map or unresolved-pencil branches."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the shift-invert branch permits m=1 and the harmonic branch permits k=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: exact singular pencils, QZ budget exhaustion, range failure and unavailable certificates have explicit statuses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition gives separate theta=0, beta=0 and alpha=beta=0 statuses, preserves Arnoldi breakdown and unavailable solves, and retains the finite QZ budget/tolerance endpoints. No infinite harmonic value is divided into a finite one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Shift, trial basis and solve routine are input data. Rank-deficient W produces an explicitly chosen finite null vector and returns unresolved; full-rank W admits a finite projected solve. No arbitrary backend is assumed to find an exact desired mode."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Definition imports the characterization that M=A-sigma I is invertible exactly when sigma is not an eigenvalue, with its explicit supplier link. Its candidate-acceptance rule is defined in both directions by ||r_A||<=tau. The harmonic branch separately defines regularity from full rank of W and treats rank loss as unresolved; no generalized exact-root/convergence claim is inferred from these predicates."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Definition imports the characterization that M=A-sigma I is invertible exactly when sigma is not an eigenvalue, with its explicit supplier link. Its candidate-acceptance rule is defined in both directions by ||r_A||<=tau. The harmonic branch separately defines regularity from full rank of W and treats rank loss as unresolved; no generalized exact-root/convergence claim is inferred from these predicates."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-shift-invert-map-and-inexact-solve-residual-transfer": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ and let $T:V\\to V$ be linear. A scalar $\\lambda\\in F$ is an **eigenvalue** of $T$ when there is a nonzero vector $v\\in V$ such that\n\n$$T(v)=\\lambda v.$$\n\nSuch a vector is an **eigenvector belonging to $\\lambda$**. The **eigenspace** belonging to $\\lambda$ is\n\n$$E_\\lambda(T):=\\ker(T-\\lambda I_V)=\\{v\\in V:T(v)=\\lambda v\\}.$$\n\nThus $E_\\lambda(T)$ is a linear subspace and always contains $0_V$, while $\\lambda$ is an eigenvalue exactly when $E_\\lambda(T)\\ne\\{0_V\\}$. The **spectrum of $T$ over $F$** is\n\n$$\\sigma_F(T):=\\{\\lambda\\in F:\\lambda\\text{ is an eigenvalue of }T\\}.$$\n\nIn particular, the unique endomorphism of the zero space has empty spectrum.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-shift-invert-and-harmonic-ritz-extraction",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$, $n\\ge1$, choose a shift\n$\\sigma\\in\\mathbb C$, and put $M=A-\\sigma I$. This procedure returns candidate\nvalues and their residual data; it asserts no convergence or forward-error\nbound. Its branch statuses are `available`, `arnoldi-breakdown`,\n`linear-solve-unavailable`, `zero-transformed-Ritz-value`,\n`infinite-harmonic-value`, `projected-pencil-unresolved`,\n`qz-budget-exhausted`, and `qz-certificate-inconclusive`.\n\n**Shift-invert branch.** This branch requires $M$ to be invertible, equivalently\nthat $\\sigma$ is not an eigenvalue of $A$ by\n[[prop-eigenvalue-iff-shift-is-not-invertible]]. Its inputs also include a\nnonzero starting vector $v$, an integer Arnoldi dimension $1\\le m\\le n$, a\nresidual tolerance $\\tau\\ge0$, and a solve routine. Normalize\n$v_1=v/\\|v\\|_2$. For $j=1,\\ldots,m$, request either the exact solution\n$y_j=M^{-1}v_j$ or a computed vector $y_j$ together with its actual equation\nresidual $s_j=My_j-v_j$. If a requested solve is unavailable, return\n`linear-solve-unavailable` with the residuals already recorded. Set $w=y_j$.\nFor $i=1,\\ldots,j$, compute $h_{ij}=\\langle w,v_i\\rangle$ and replace\n$w\\gets w-h_{ij}v_i$. Repeat this pass once, adding each second-pass\ncoefficient to the corresponding $h_{ij}$. Set $h_{j+1,j}=\\|w\\|_2$. If this\nnorm is zero, set the current dimension to $k=j$ and stop with status\n`arnoldi-breakdown`; otherwise set $v_{j+1}=w/h_{j+1,j}$. After $m$ columns,\nset $k=m$ and stop with status `available`.\nWhen every solve is exact, this is Arnoldi applied to $M^{-1}$. When any solve\nis inexact, the projected matrix is only the one produced from the computed\nvectors; the procedure makes no exact-Arnoldi or convergence claim for that\nbranch.\n\nCompute the Ritz pairs $(\\theta,z)$ of the current $k\\times k$ matrix $H$ as\nin [[def-ritz-values-and-ritz-vectors-from-arnoldi]], normalize $z$ to unit\nnorm, and lift $u=V_kz$. For each $\\theta\\ne0$, report the transformed candidate\n$\\lambda=\\sigma+1/\\theta$, the lifted vector $u$, and the directly computed\noriginal residual $r_A=Au-\\lambda u$. Mark this candidate accepted exactly\nwhen $\\|r_A\\|_2\\le\\tau$. If $\\theta=0$, assign no finite inverse map and mark\nthat candidate `zero-transformed-Ritz-value`. To record the solve-error\ntransfer for a candidate with $\\theta\\ne0$, request one additional solve\n$My=u$; if it is available, store $s_0=My-u$ and $r_T=y-\\theta u$ alongside\nthe directly computed residual $r_A$.\nIf this additional solve is unavailable, return\n`linear-solve-unavailable` with the candidate and accumulated ledger.\n\n**Harmonic Ritz branch.** This branch takes a full-column-rank trial basis\n$U\\in\\mathbb C^{n\\times k}$, $k\\ge1$; it does not require $M$ to be\ninvertible. Form $W=MU$ and\n$$G=W^*W=U^*M^*MU,\\qquad C=W^*U=U^*M^*U.$$\nCompute an exact column-pivoted QR of $W$ as in\n[[def-full-reduced-and-column-pivoted-computational-qr-factorisations]] and let\n$r_W$ be its exact rank. If $r_W<k$, choose $z\\ne0$ with $Wz=0$. Then\n$z^*G=(Wz)^*W=0$ and $z^*C=(Wz)^*U=0$. Thus the nonzero row\n$z^*$ annihilates $G-\\eta C$ for every $\\eta$; if this matrix were invertible,\nright multiplication by its inverse would force $z^*=0$, a contradiction.\nHence $G-\\eta C$ is singular for every $\\eta$; return\n`projected-pencil-unresolved`. If $W$ has full column rank, then\n$z^*Gz=\\|Wz\\|_2^2>0$ for every $z\\ne0$. Thus $G$ is positive definite and\nthe pencil $G-\\eta C$ is regular in the convention of\n[[def-regular-generalized-eigenvalue-pencil]], since\n$\\det(G-0C)=\\det G\\ne0$.\n\nSupply a finite QZ sweep budget $N\\ge0$ and tolerance $\\tau_{QZ}\\ge0$, and run\n[[alg-finite-budget-qz-iteration-with-deflation-and-residual]] on $(G,C)$.\nCompute $G,C$ exactly in the mathematical procedure; a finite implementation\nmust include their formation errors in the perturbation ledger or return\n`qz-certificate-inconclusive`. On `qz-computed`, require its exact-factor and\nlocal-update certificates;\n[[prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence]]\nthen records equivalence to a perturbed projected pencil. For each diagonal\nindex $i$, set $\\alpha_i=S_{ii}$ and $\\beta_i=T_{ii}$. If\n$(\\alpha_i,\\beta_i)=(0,0)$, return `projected-pencil-unresolved`; if\n$\\beta_i\\ne0$, report the computed harmonic Ritz value\n$\\lambda_i=\\sigma+\\alpha_i/\\beta_i$; if $\\beta_i=0$, mark that candidate\n`infinite-harmonic-value`. These are values of the computed perturbed\npencil, with the QZ residual and perturbation ledger retained; no exact-root,\neigenvector, or forward-error claim is made. Map a QZ `budget-exhausted` status\nto `qz-budget-exhausted`; map a QZ `certificate-inconclusive` or `range-failure`\nto `qz-certificate-inconclusive`; map `singular-pencil-suspected` to\n`projected-pencil-unresolved`.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If $Au=\\lambda u$, then $Mu=(\\lambda-\\sigma)u$. Invertibility of $M$ and $u\\ne0$ imply $\\lambda\\ne\\sigma$, so applying $M^{-1}$ gives $M^{-1}u=(\\lambda-\\sigma)^{-1}u$. Conversely, if $M^{-1}u=\\theta u$ with $u\\ne0$, multiplying by $M$ gives $Mu=\\theta^{-1}u$; hence $Au=(\\sigma+\\theta^{-1})u$. Thus the eigenvalue map is exact and the inverse Ritz value cannot be zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "From [F2], $Mr_T=My-\\theta Mu=u+s_0-\\theta Mu$. Rearranging yields $Mu-\\theta^{-1}u=\\theta^{-1}(s_0-Mr_T)$. Since $M=A-\\sigma I$ and $\\lambda=\\sigma+1/\\theta$, the left side is $(A-\\lambda I)u$, proving the residual identity.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Taking Euclidean norms in step 1.2 and applying the triangle inequality gives the stated residual bound, which keeps the solve residual $s_0$ and the transformed residual after multiplication by $M$ as separate terms.",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement explicitly supplies a nonzero u for both eigenpair and candidate clauses, so its vector domain cannot be the zero space. Its step 1.1 preserves that nonzero vector through the invertible map; no empty spectrum is asserted to contain an eigenvalue."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: theta=0 is explicitly excluded because the reciprocal map is not finite; zero solve or transformed residuals remain allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the identities apply in every positive finite dimension, including n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: invertibility excludes lambda=sigma, and no eigenvalue-separation hypothesis is added."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement requires u!=0,theta!=0 and invertible M. step 1.1 excludes lambda=sigma before inversion, and1.2 retains s_0 and M*r_T independently; exact residual zeros are allowed without dividing by either residual."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The residual-transfer theorem takes the candidate u,y and nonzero theta as supplied data. step 1.1 proves both eigenpair-map directions by inverse multiplication, and1.2 is deterministic algebra, with no existence assertion for an arbitrary solve backend."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: step 1.1 proves the eigenvector implication from A to M^{-1}."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: step 1.1 proves the eigenvector implication from M^{-1} back to A."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "ex-implicit-restart-shift-can-suppress-wanted-component": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-implicit-restart-polynomial-subspace-and-residual-identity",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$, and suppose an exact $m$-step Arnoldi\nfactorization without breakdown is\n$$AV_m=V_mH_m+\\beta_m v_{m+1}e_m^*,\\qquad V_m^*V_m=I_m,$$\nwhere $H_m$ is upper Hessenberg and $\\beta_m>0$. Let $1\\le r<m$,\n$p=m-r$, and let $H_{j-1}-\\mu_jI=Q_jR_j$ be exact shifted QR factorizations\nusing the ordered top-down adjacent-row Givens eliminations on pairs\n$(1,2),(2,3),\\ldots,(m-1,m)$, with $R_j$ upper triangular. Put\n$$Q=Q_1\\cdots Q_p,\\qquad H^+=Q^*H_mQ,\\qquad q(z)=\\prod_{j=1}^p(z-\\mu_j).$$\nAssume $q(A)v_1\\ne0$, the exact filtered Krylov space\n$K_r(A,q(A)v_1)$ has dimension $r$, and $\\rho\\ne0$ in the factorization\n$q(H_m)=QR$ with $R$ upper triangular. Then\n$$\\operatorname{range}(V_mQ(:,1:r))=K_r(A,q(A)v_1).$$\nWriting $H_r^+=H^+(1:r,1:r)$, $h^+=H^+_{r+1,r}$, and\n$$g=h^+V_mQe_{r+1}+\\beta_m(e_m^*Qe_r)v_{m+1},$$\nthe truncated restart has the exact residual identity\n$$AV_mQ(:,1:r)=V_mQ(:,1:r)H_r^++g e_r^*.$$\nIf $g\\ne0$, then $v_{r+1}^+=g/\\|g\\|_2$ is orthogonal to the retained\ncolumns and the new Arnoldi residual coefficient is $\\beta_r^+=\\|g\\|_2$;\nif $g=0$, the retained subspace is exactly invariant.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ and let $T:V\\to V$ be linear. A scalar $\\lambda\\in F$ is an **eigenvalue** of $T$ when there is a nonzero vector $v\\in V$ such that\n\n$$T(v)=\\lambda v.$$\n\nSuch a vector is an **eigenvector belonging to $\\lambda$**. The **eigenspace** belonging to $\\lambda$ is\n\n$$E_\\lambda(T):=\\ker(T-\\lambda I_V)=\\{v\\in V:T(v)=\\lambda v\\}.$$\n\nThus $E_\\lambda(T)$ is a linear subspace and always contains $0_V$, while $\\lambda$ is an eigenvalue exactly when $E_\\lambda(T)\\ne\\{0_V\\}$. The **spectrum of $T$ over $F$** is\n\n$$\\sigma_F(T):=\\{\\lambda\\in F:\\lambda\\text{ is an eigenvalue of }T\\}.$$\n\nIn particular, the unique endomorphism of the zero space has empty spectrum.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], $q(A)v=(-19e_1-9e_2+e_3)/(10\\sqrt3)$. The squared component weights are proportional to $361,81,1$, so the Rayleigh quotient of the restarted vector is $(1\\cdot361+2\\cdot81+3\\cdot1)/(361+81+1)=526/443<2$, whereas the initial quotient is $(1+2+3)/3=2$. The wanted component-to-$e_1$ component ratio falls from 1 to 1/19.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Repeating the same exact restart multiplies the $e_3$ component by $q(3)=1/10$ and the $e_1$ component by $q(1)=-19/10$ at every cycle. Hence after $t$ cycles their magnitude ratio is $(1/19)^t$, which tends to zero. This shift choice suppresses the wanted eigendirection and gives no general convergence claim.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For each finite $t$, the restart vector is proportional to $q(A)^tv$, with all coordinates nonzero because none of $q(1),q(2),q(3)$ vanishes. If a Ritz residual were zero, its lifted vector would satisfy $Au=\\theta u$; the diagonal equations $(\\lambda_i-\\theta)u_i=0$ and distinct $\\lambda_i$ force $u$ to be proportional to some $e_i$. No $e_i$ lies in $K_2(A,q(A)^tv)$: representing one would require $c+d\\lambda_j=0$ for the other two distinct eigenvalues, hence $c=d=0$. Also $q(A)^tv,Aq(A)^tv,A^2q(A)^tv$ are independent because their coordinate determinant is the product of the three nonzero coordinates and the Vandermonde determinant for $1,2,3$. Thus no pair is accepted at tolerance zero and the space is not invariant before each scheduled restart.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "In a separate boundary run with shift $\\mu=3$, the filter has $q(3)=0$ and $q(A)v=(-2e_1-e_2)/\\sqrt3$, so the wanted $e_3$ component is removed exactly in one filtering step. The filtered vector is still nonzero, so this is not filtered breakdown; it is a shift-selection failure.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example fixes a3-component nonzero start and a single shift per restart. step 3.1 proves all filtered coordinates stay nonzero for every finite t under29/10; even t=0 is the supplied initial vector, not an empty Krylov input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: the separate boundary shift makes q(3)=0 while q(A)v remains nonzero, as computed in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: the retained dimension is r=1, and the one-dimensional filtered subspace is explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: step 3.1 explicitly treats a shift equal to the wanted eigenvalue and the resulting filter failure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example fixes n=3,m=2,r=1 and budget at least the considered finite t. step 4.1 explicitly distinguishes q(3)=0 from filtered breakdown because the remaining vector is nonzero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The fixed shift29/10 and the separate shift3 are supplied exact numbers. The retained one-dimensional filtered space follows from its proved restart supplier; no arbitrary shift rule is asserted to preserve the wanted component."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This restart Example computes one unfavorable shift schedule. step 1.1–3.1 shows suppression and no accepted exact Ritz pair, and4.1 gives a separate exact-annihilation witness; no iff criterion for a good shift schedule is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This restart Example computes one unfavorable shift schedule. step 1.1–3.1 shows suppression and no accepted exact Ritz pair, and4.1 gives a separate exact-annihilation witness; no iff criterion for a good shift schedule is claimed."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "ex-clustered-vibration-modes-with-block-lobpcg": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-block-lobpcg-with-rank-loss-status",
+          "source_section": "Definition",
+          "quote": "Let $A=A^*\\in\\mathbb C^{n\\times n}$, let $B=B^*>0$, and let\n$T=T^*>0$ be a fixed preconditioning operator. Here $B>0$ and $T>0$ mean\n$x^*Bx>0$ and $x^*Tx>0$ for every nonzero $x$. The $B$-inner product and\nnorm are those of [[def-b-inner-product-and-dual-norm-for-definite-pencil]].\nChoose a block width $1\\le q\\le n$, a residual tolerance $\\tau\\ge0$, a finite\niteration budget $N_{\\max}\\ge0$, and an initial matrix $X_0$ with\n$X_0^*BX_0=I_q$. The output is a block of Ritz pairs and one of\n`converged`, `budget-exhausted`, `rank-loss`, or `invalid-initial-block`.\n\n1. If $X_0$ does not have full column rank or does not satisfy\n   $X_0^*BX_0=I_q$, return `invalid-initial-block`. Compute the Rayleigh-Ritz eigenpairs in\n   $\\operatorname{range}(X_0)$, sorted increasingly, and let $\\Theta_0$ be the\n   diagonal matrix of the $q$ Ritz values. Set the previous search block\n   $D_0$ empty and initialize the iteration counter $k=0$.\n\n2. At iteration $k$, form the original residual block\n   $R_k=AX_k-BX_k\\Theta_k$. If every column has Euclidean norm at most\n   $\\tau$, return `converged`. If $k=N_{\\max}$, return\n   `budget-exhausted` with $(\\Theta_k,X_k)$.\n\n3. Compute the preconditioned residual block $W_k=TR_k$ and set\n   $Y_k=[X_k,W_k,D_k]$, omitting the empty block at $k=0$. Compute an exact\n   rank-revealing $B$-QR with column pivoting as follows. Starting with no\n   columns in $Q_k$, for each remaining column $y_j$ of $Y_k$ compute its\n   residual $c_j=y_j-Q_k(Q_k^*By_j)$ and choose a column with largest\n   $B$-norm $\\|c_j\\|_B$ (break ties by original column order). If the largest\n   residual norm is zero, stop; otherwise append the normalized residual to\n   $Q_k$ and remove that pivot column. Let $s_k$ be the number of columns\n   appended and let $\\Pi_k$ record the pivot order followed by the unused\n   columns. If $s_k<q$, return `rank-loss` with the current Ritz pairs; no\n   projected solve is attempted on that branch. Otherwise set\n   $$S_k=Q_k^*BY_k\\Pi_k(:,1:s_k).$$\n   The pivot construction gives\n   $$Y_k\\Pi_k(:,1:s_k)=Q_kS_k,\\qquad Q_k^*BQ_k=I_{s_k},$$\n   and $S_k$ is invertible because its selected columns are independent.\n   Dependent trial columns are discarded and their count is recorded as a\n   rank-compression diagnostic.\n\n4. The projected matrix $Q_k^*AQ_k$ is Hermitian, hence normal, so its\n   orthonormal eigenbasis and real eigenvalues are supplied by\n   [[thm-complex-spectral-theorem-for-normal-endomorphisms]]. Solve\n   $Q_k^*AQ_kZ_k=Z_k\\Theta_{k+1}$ and choose its $q$ smallest eigenvalues. Set\n   $C_k=\\Pi_k(:,1:s_k)S_k^{-1}Z_k$; then $Y_kC_k=Q_kZ_k$. Partition\n   $C_k=\\begin{bmatrix}C_X\\\\C_W\\\\C_D\\end{bmatrix}$, omitting the $C_D$\n   block when $D_k$ is empty. The projected metric is positive definite\n   because for nonzero $z$, $(Q_kz)^*B(Q_kz)=\\|z\\|_2^2>0$. Set\n   $$X_{k+1}=X_kC_X+W_kC_W+D_kC_D,\\qquad D_{k+1}=W_kC_W+D_kC_D,$$\n   again omitting the empty-block term. Let $\\Theta_{k+1}$ be the selected\n   diagonal Ritz-value matrix and increment $k$.\n\n5. Repeat from step 2. No convergence, rate, or accuracy is asserted when the\n   budget or rank-loss branch is returned. The exact SPD conditions on $B$ and\n   $T$ define the permitted metric and preconditioner; no particular\n   incomplete-factorization procedure is assumed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lobpcg-selected-ritz-values-do-not-increase",
+          "source_section": "Statement",
+          "quote": "Let $A=A^*$ and $B=B^*>0$. Suppose one successful update of\n[[alg-block-lobpcg-with-rank-loss-status]] starts from a $q$-dimensional\n$B$-orthonormal block $X_k$ with selected Ritz values\n$\\theta_1(X_k)\\le\\cdots\\le\\theta_q(X_k)$. The update forms a trial space\n$S_k=\\operatorname{span}(X_k,W_k,D_k)$, retains the old block, and selects the\n$q$ smallest generalized Ritz values on $S_k$. Then\n$$\\theta_j(X_{k+1})\\le\\theta_j(X_k)\\qquad(1\\le j\\le q).$$\nThis assertion applies only to an update that reaches the Rayleigh-Ritz step;\nthe algorithm's `rank-loss` and `budget-exhausted` exits make no update claim.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-block-principal-angle-squared-ritz-enclosure",
+          "source_section": "Statement",
+          "quote": "Let $A=A^*\\in\\mathbb C^{n\\times n}$, $B=B^*>0$, and\n$\\lambda_1\\le\\cdots\\le\\lambda_n$ be the generalized eigenvalues of $(A,B)$.\nFix $1\\le q<n$ with the strict gap $\\lambda_q<\\lambda_{q+1}$ and let\n$U=\\operatorname{span}\\{u_1,\\ldots,u_q\\}$ be the corresponding sum of the\nfirst $q$ eigenspaces, with $(u_i)$ $B$-orthonormal. For a $q$-dimensional\ntrial subspace $S$ with $B$-orthonormal basis $Q$, define\n$$P_Ux=\\sum_{i=1}^q u_i(u_i^*Bx),\\qquad \\sin\\vartheta=\\sup_{\\substack{x\\in S\\\\\\|x\\|_B=1}}\\|(I-P_U)x\\|_B.$$\nLet $\\theta_1(S)\\le\\cdots\\le\\theta_q(S)$ be the generalized Ritz values\nfrom [[lem-generalized-ritz-values-monotone-under-nested-subspaces]]. Then\n$$\\lambda_j\\le\\theta_j(S)\\quad(1\\le j\\le q),\\qquad \\theta_q(S)\\le\\lambda_q+(\\lambda_n-\\lambda_q)\\sin^2\\vartheta.$$\nThe strict gap identifies $U$ uniquely; the estimate is a subspace enclosure,\nnot an iteration convergence rate.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The vectors are orthonormal and have disjoint coordinate supports. Their initial Rayleigh quotients are $\\theta_1=(99+5)/100=26/25$ and $\\theta_2=((101/100)99+9)/100=10899/10000$. Each $x_i$ has two nonzero coordinates associated with distinct diagonal entries of $A$, so $r_i=(A-\\theta_iI)x_i\\ne0$; also $x_i^*r_i=x_i^*Ax_i-\\theta_i x_i^*x_i=0$, and $r_i$ lies in the same two-coordinate plane as $x_i$. Thus $x_i,r_i$ are independent in that plane, and the disjoint planes make $[X,R]$ rank four.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $T=I$, $W=R$ and the first trial space is all of $\\mathbb C^4$. Its Rayleigh-Ritz values are exactly $1,101/100,5,9$, and the selected block is $\\operatorname{span}(e_1,e_2)$. The update is successful because the trial rank is four; the returned residuals are zero, so the algorithm returns converged. In particular, $1\\le26/25$ and $101/100\\le10899/10000$, as required by [F2].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For $U=\\operatorname{span}(e_1,e_2)$, every unit vector in $S=\\operatorname{span}(x_1,x_2)$ has squared norm $1/100$ in $U^\\perp$, so $\\sin^2\\vartheta=1/100$. The strict gap $101/100<5$ holds, and [F3] gives $\\theta_2(S)\\le101/100+(9-101/100)/100=10899/10000$, attained by the computed $\\theta_2$. The block captures both clustered modes; a one-dimensional trial space cannot contain this two-dimensional invariant subspace.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example uses two explicit independent starting vectors in C^4. step 1.1 proves a4-dimensional first trial space, so its four Ritz values and selected2-mode block are not aggregates over an empty basis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: step 2.1 computes exact zero residuals after the Rayleigh–Ritz update."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: step 3.1 contrasts the two-dimensional trial block with the insufficient one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: the clustered wanted pair has a strict gap from the next eigenvalue, and this is checked in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example fixes q=2,Nmax=1,tau=0. step 1.1 proves rank[X,R]=4;2.1 reaches zero residual and converged after the one allowed update. Its strict cluster gap101/100<5 is verified in3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two initial vectors are explicit, and the successful trial space is all C^4. step 2.1 selects the first two diagonal modes as a subspace, without a unique ordering of arbitrary vectors inside a repeated eigenspace."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The clustered-vibration Example exhibits one successful LOBPCG update and attained angle bound. step 2.1 computes the selected invariant subspace and3.1 its exact bound; it gives no converse characterization of all good initial blocks."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The clustered-vibration Example exhibits one successful LOBPCG update and attained angle bound. step 2.1 computes the selected invariant subspace and3.1 its exact bound; it gives no converse characterization of all good initial blocks."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "ex-interior-vibration-mode-shift-invert": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-shift-invert-and-harmonic-ritz-extraction",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$, $n\\ge1$, choose a shift\n$\\sigma\\in\\mathbb C$, and put $M=A-\\sigma I$. This procedure returns candidate\nvalues and their residual data; it asserts no convergence or forward-error\nbound. Its branch statuses are `available`, `arnoldi-breakdown`,\n`linear-solve-unavailable`, `zero-transformed-Ritz-value`,\n`infinite-harmonic-value`, `projected-pencil-unresolved`,\n`qz-budget-exhausted`, and `qz-certificate-inconclusive`.\n\n**Shift-invert branch.** This branch requires $M$ to be invertible, equivalently\nthat $\\sigma$ is not an eigenvalue of $A$ by\n[[prop-eigenvalue-iff-shift-is-not-invertible]]. Its inputs also include a\nnonzero starting vector $v$, an integer Arnoldi dimension $1\\le m\\le n$, a\nresidual tolerance $\\tau\\ge0$, and a solve routine. Normalize\n$v_1=v/\\|v\\|_2$. For $j=1,\\ldots,m$, request either the exact solution\n$y_j=M^{-1}v_j$ or a computed vector $y_j$ together with its actual equation\nresidual $s_j=My_j-v_j$. If a requested solve is unavailable, return\n`linear-solve-unavailable` with the residuals already recorded. Set $w=y_j$.\nFor $i=1,\\ldots,j$, compute $h_{ij}=\\langle w,v_i\\rangle$ and replace\n$w\\gets w-h_{ij}v_i$. Repeat this pass once, adding each second-pass\ncoefficient to the corresponding $h_{ij}$. Set $h_{j+1,j}=\\|w\\|_2$. If this\nnorm is zero, set the current dimension to $k=j$ and stop with status\n`arnoldi-breakdown`; otherwise set $v_{j+1}=w/h_{j+1,j}$. After $m$ columns,\nset $k=m$ and stop with status `available`.\nWhen every solve is exact, this is Arnoldi applied to $M^{-1}$. When any solve\nis inexact, the projected matrix is only the one produced from the computed\nvectors; the procedure makes no exact-Arnoldi or convergence claim for that\nbranch.\n\nCompute the Ritz pairs $(\\theta,z)$ of the current $k\\times k$ matrix $H$ as\nin [[def-ritz-values-and-ritz-vectors-from-arnoldi]], normalize $z$ to unit\nnorm, and lift $u=V_kz$. For each $\\theta\\ne0$, report the transformed candidate\n$\\lambda=\\sigma+1/\\theta$, the lifted vector $u$, and the directly computed\noriginal residual $r_A=Au-\\lambda u$. Mark this candidate accepted exactly\nwhen $\\|r_A\\|_2\\le\\tau$. If $\\theta=0$, assign no finite inverse map and mark\nthat candidate `zero-transformed-Ritz-value`. To record the solve-error\ntransfer for a candidate with $\\theta\\ne0$, request one additional solve\n$My=u$; if it is available, store $s_0=My-u$ and $r_T=y-\\theta u$ alongside\nthe directly computed residual $r_A$.\nIf this additional solve is unavailable, return\n`linear-solve-unavailable` with the candidate and accumulated ledger.\n\n**Harmonic Ritz branch.** This branch takes a full-column-rank trial basis\n$U\\in\\mathbb C^{n\\times k}$, $k\\ge1$; it does not require $M$ to be\ninvertible. Form $W=MU$ and\n$$G=W^*W=U^*M^*MU,\\qquad C=W^*U=U^*M^*U.$$\nCompute an exact column-pivoted QR of $W$ as in\n[[def-full-reduced-and-column-pivoted-computational-qr-factorisations]] and let\n$r_W$ be its exact rank. If $r_W<k$, choose $z\\ne0$ with $Wz=0$. Then\n$z^*G=(Wz)^*W=0$ and $z^*C=(Wz)^*U=0$. Thus the nonzero row\n$z^*$ annihilates $G-\\eta C$ for every $\\eta$; if this matrix were invertible,\nright multiplication by its inverse would force $z^*=0$, a contradiction.\nHence $G-\\eta C$ is singular for every $\\eta$; return\n`projected-pencil-unresolved`. If $W$ has full column rank, then\n$z^*Gz=\\|Wz\\|_2^2>0$ for every $z\\ne0$. Thus $G$ is positive definite and\nthe pencil $G-\\eta C$ is regular in the convention of\n[[def-regular-generalized-eigenvalue-pencil]], since\n$\\det(G-0C)=\\det G\\ne0$.\n\nSupply a finite QZ sweep budget $N\\ge0$ and tolerance $\\tau_{QZ}\\ge0$, and run\n[[alg-finite-budget-qz-iteration-with-deflation-and-residual]] on $(G,C)$.\nCompute $G,C$ exactly in the mathematical procedure; a finite implementation\nmust include their formation errors in the perturbation ledger or return\n`qz-certificate-inconclusive`. On `qz-computed`, require its exact-factor and\nlocal-update certificates;\n[[prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence]]\nthen records equivalence to a perturbed projected pencil. For each diagonal\nindex $i$, set $\\alpha_i=S_{ii}$ and $\\beta_i=T_{ii}$. If\n$(\\alpha_i,\\beta_i)=(0,0)$, return `projected-pencil-unresolved`; if\n$\\beta_i\\ne0$, report the computed harmonic Ritz value\n$\\lambda_i=\\sigma+\\alpha_i/\\beta_i$; if $\\beta_i=0$, mark that candidate\n`infinite-harmonic-value`. These are values of the computed perturbed\npencil, with the QZ residual and perturbation ledger retained; no exact-root,\neigenvector, or forward-error claim is made. Map a QZ `budget-exhausted` status\nto `qz-budget-exhausted`; map a QZ `certificate-inconclusive` or `range-failure`\nto `qz-certificate-inconclusive`; map `singular-pencil-suspected` to\n`projected-pencil-unresolved`.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-shift-invert-and-harmonic-ritz-extraction",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$, $n\\ge1$, choose a shift\n$\\sigma\\in\\mathbb C$, and put $M=A-\\sigma I$. This procedure returns candidate\nvalues and their residual data; it asserts no convergence or forward-error\nbound. Its branch statuses are `available`, `arnoldi-breakdown`,\n`linear-solve-unavailable`, `zero-transformed-Ritz-value`,\n`infinite-harmonic-value`, `projected-pencil-unresolved`,\n`qz-budget-exhausted`, and `qz-certificate-inconclusive`.\n\n**Shift-invert branch.** This branch requires $M$ to be invertible, equivalently\nthat $\\sigma$ is not an eigenvalue of $A$ by\n[[prop-eigenvalue-iff-shift-is-not-invertible]]. Its inputs also include a\nnonzero starting vector $v$, an integer Arnoldi dimension $1\\le m\\le n$, a\nresidual tolerance $\\tau\\ge0$, and a solve routine. Normalize\n$v_1=v/\\|v\\|_2$. For $j=1,\\ldots,m$, request either the exact solution\n$y_j=M^{-1}v_j$ or a computed vector $y_j$ together with its actual equation\nresidual $s_j=My_j-v_j$. If a requested solve is unavailable, return\n`linear-solve-unavailable` with the residuals already recorded. Set $w=y_j$.\nFor $i=1,\\ldots,j$, compute $h_{ij}=\\langle w,v_i\\rangle$ and replace\n$w\\gets w-h_{ij}v_i$. Repeat this pass once, adding each second-pass\ncoefficient to the corresponding $h_{ij}$. Set $h_{j+1,j}=\\|w\\|_2$. If this\nnorm is zero, set the current dimension to $k=j$ and stop with status\n`arnoldi-breakdown`; otherwise set $v_{j+1}=w/h_{j+1,j}$. After $m$ columns,\nset $k=m$ and stop with status `available`.\nWhen every solve is exact, this is Arnoldi applied to $M^{-1}$. When any solve\nis inexact, the projected matrix is only the one produced from the computed\nvectors; the procedure makes no exact-Arnoldi or convergence claim for that\nbranch.\n\nCompute the Ritz pairs $(\\theta,z)$ of the current $k\\times k$ matrix $H$ as\nin [[def-ritz-values-and-ritz-vectors-from-arnoldi]], normalize $z$ to unit\nnorm, and lift $u=V_kz$. For each $\\theta\\ne0$, report the transformed candidate\n$\\lambda=\\sigma+1/\\theta$, the lifted vector $u$, and the directly computed\noriginal residual $r_A=Au-\\lambda u$. Mark this candidate accepted exactly\nwhen $\\|r_A\\|_2\\le\\tau$. If $\\theta=0$, assign no finite inverse map and mark\nthat candidate `zero-transformed-Ritz-value`. To record the solve-error\ntransfer for a candidate with $\\theta\\ne0$, request one additional solve\n$My=u$; if it is available, store $s_0=My-u$ and $r_T=y-\\theta u$ alongside\nthe directly computed residual $r_A$.\nIf this additional solve is unavailable, return\n`linear-solve-unavailable` with the candidate and accumulated ledger.\n\n**Harmonic Ritz branch.** This branch takes a full-column-rank trial basis\n$U\\in\\mathbb C^{n\\times k}$, $k\\ge1$; it does not require $M$ to be\ninvertible. Form $W=MU$ and\n$$G=W^*W=U^*M^*MU,\\qquad C=W^*U=U^*M^*U.$$\nCompute an exact column-pivoted QR of $W$ as in\n[[def-full-reduced-and-column-pivoted-computational-qr-factorisations]] and let\n$r_W$ be its exact rank. If $r_W<k$, choose $z\\ne0$ with $Wz=0$. Then\n$z^*G=(Wz)^*W=0$ and $z^*C=(Wz)^*U=0$. Thus the nonzero row\n$z^*$ annihilates $G-\\eta C$ for every $\\eta$; if this matrix were invertible,\nright multiplication by its inverse would force $z^*=0$, a contradiction.\nHence $G-\\eta C$ is singular for every $\\eta$; return\n`projected-pencil-unresolved`. If $W$ has full column rank, then\n$z^*Gz=\\|Wz\\|_2^2>0$ for every $z\\ne0$. Thus $G$ is positive definite and\nthe pencil $G-\\eta C$ is regular in the convention of\n[[def-regular-generalized-eigenvalue-pencil]], since\n$\\det(G-0C)=\\det G\\ne0$.\n\nSupply a finite QZ sweep budget $N\\ge0$ and tolerance $\\tau_{QZ}\\ge0$, and run\n[[alg-finite-budget-qz-iteration-with-deflation-and-residual]] on $(G,C)$.\nCompute $G,C$ exactly in the mathematical procedure; a finite implementation\nmust include their formation errors in the perturbation ledger or return\n`qz-certificate-inconclusive`. On `qz-computed`, require its exact-factor and\nlocal-update certificates;\n[[prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence]]\nthen records equivalence to a perturbed projected pencil. For each diagonal\nindex $i$, set $\\alpha_i=S_{ii}$ and $\\beta_i=T_{ii}$. If\n$(\\alpha_i,\\beta_i)=(0,0)$, return `projected-pencil-unresolved`; if\n$\\beta_i\\ne0$, report the computed harmonic Ritz value\n$\\lambda_i=\\sigma+\\alpha_i/\\beta_i$; if $\\beta_i=0$, mark that candidate\n`infinite-harmonic-value`. These are values of the computed perturbed\npencil, with the QZ residual and perturbation ledger retained; no exact-root,\neigenvector, or forward-error claim is made. Map a QZ `budget-exhausted` status\nto `qz-budget-exhausted`; map a QZ `certificate-inconclusive` or `range-failure`\nto `qz-certificate-inconclusive`; map `singular-pencil-suspected` to\n`projected-pencil-unresolved`.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-shift-invert-and-harmonic-ritz-extraction",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$, $n\\ge1$, choose a shift\n$\\sigma\\in\\mathbb C$, and put $M=A-\\sigma I$. This procedure returns candidate\nvalues and their residual data; it asserts no convergence or forward-error\nbound. Its branch statuses are `available`, `arnoldi-breakdown`,\n`linear-solve-unavailable`, `zero-transformed-Ritz-value`,\n`infinite-harmonic-value`, `projected-pencil-unresolved`,\n`qz-budget-exhausted`, and `qz-certificate-inconclusive`.\n\n**Shift-invert branch.** This branch requires $M$ to be invertible, equivalently\nthat $\\sigma$ is not an eigenvalue of $A$ by\n[[prop-eigenvalue-iff-shift-is-not-invertible]]. Its inputs also include a\nnonzero starting vector $v$, an integer Arnoldi dimension $1\\le m\\le n$, a\nresidual tolerance $\\tau\\ge0$, and a solve routine. Normalize\n$v_1=v/\\|v\\|_2$. For $j=1,\\ldots,m$, request either the exact solution\n$y_j=M^{-1}v_j$ or a computed vector $y_j$ together with its actual equation\nresidual $s_j=My_j-v_j$. If a requested solve is unavailable, return\n`linear-solve-unavailable` with the residuals already recorded. Set $w=y_j$.\nFor $i=1,\\ldots,j$, compute $h_{ij}=\\langle w,v_i\\rangle$ and replace\n$w\\gets w-h_{ij}v_i$. Repeat this pass once, adding each second-pass\ncoefficient to the corresponding $h_{ij}$. Set $h_{j+1,j}=\\|w\\|_2$. If this\nnorm is zero, set the current dimension to $k=j$ and stop with status\n`arnoldi-breakdown`; otherwise set $v_{j+1}=w/h_{j+1,j}$. After $m$ columns,\nset $k=m$ and stop with status `available`.\nWhen every solve is exact, this is Arnoldi applied to $M^{-1}$. When any solve\nis inexact, the projected matrix is only the one produced from the computed\nvectors; the procedure makes no exact-Arnoldi or convergence claim for that\nbranch.\n\nCompute the Ritz pairs $(\\theta,z)$ of the current $k\\times k$ matrix $H$ as\nin [[def-ritz-values-and-ritz-vectors-from-arnoldi]], normalize $z$ to unit\nnorm, and lift $u=V_kz$. For each $\\theta\\ne0$, report the transformed candidate\n$\\lambda=\\sigma+1/\\theta$, the lifted vector $u$, and the directly computed\noriginal residual $r_A=Au-\\lambda u$. Mark this candidate accepted exactly\nwhen $\\|r_A\\|_2\\le\\tau$. If $\\theta=0$, assign no finite inverse map and mark\nthat candidate `zero-transformed-Ritz-value`. To record the solve-error\ntransfer for a candidate with $\\theta\\ne0$, request one additional solve\n$My=u$; if it is available, store $s_0=My-u$ and $r_T=y-\\theta u$ alongside\nthe directly computed residual $r_A$.\nIf this additional solve is unavailable, return\n`linear-solve-unavailable` with the candidate and accumulated ledger.\n\n**Harmonic Ritz branch.** This branch takes a full-column-rank trial basis\n$U\\in\\mathbb C^{n\\times k}$, $k\\ge1$; it does not require $M$ to be\ninvertible. Form $W=MU$ and\n$$G=W^*W=U^*M^*MU,\\qquad C=W^*U=U^*M^*U.$$\nCompute an exact column-pivoted QR of $W$ as in\n[[def-full-reduced-and-column-pivoted-computational-qr-factorisations]] and let\n$r_W$ be its exact rank. If $r_W<k$, choose $z\\ne0$ with $Wz=0$. Then\n$z^*G=(Wz)^*W=0$ and $z^*C=(Wz)^*U=0$. Thus the nonzero row\n$z^*$ annihilates $G-\\eta C$ for every $\\eta$; if this matrix were invertible,\nright multiplication by its inverse would force $z^*=0$, a contradiction.\nHence $G-\\eta C$ is singular for every $\\eta$; return\n`projected-pencil-unresolved`. If $W$ has full column rank, then\n$z^*Gz=\\|Wz\\|_2^2>0$ for every $z\\ne0$. Thus $G$ is positive definite and\nthe pencil $G-\\eta C$ is regular in the convention of\n[[def-regular-generalized-eigenvalue-pencil]], since\n$\\det(G-0C)=\\det G\\ne0$.\n\nSupply a finite QZ sweep budget $N\\ge0$ and tolerance $\\tau_{QZ}\\ge0$, and run\n[[alg-finite-budget-qz-iteration-with-deflation-and-residual]] on $(G,C)$.\nCompute $G,C$ exactly in the mathematical procedure; a finite implementation\nmust include their formation errors in the perturbation ledger or return\n`qz-certificate-inconclusive`. On `qz-computed`, require its exact-factor and\nlocal-update certificates;\n[[prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence]]\nthen records equivalence to a perturbed projected pencil. For each diagonal\nindex $i$, set $\\alpha_i=S_{ii}$ and $\\beta_i=T_{ii}$. If\n$(\\alpha_i,\\beta_i)=(0,0)$, return `projected-pencil-unresolved`; if\n$\\beta_i\\ne0$, report the computed harmonic Ritz value\n$\\lambda_i=\\sigma+\\alpha_i/\\beta_i$; if $\\beta_i=0$, mark that candidate\n`infinite-harmonic-value`. These are values of the computed perturbed\npencil, with the QZ residual and perturbation ledger retained; no exact-root,\neigenvector, or forward-error claim is made. Map a QZ `budget-exhausted` status\nto `qz-budget-exhausted`; map a QZ `certificate-inconclusive` or `range-failure`\nto `qz-certificate-inconclusive`; map `singular-pencil-suspected` to\n`projected-pencil-unresolved`.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-shift-invert-map-and-inexact-solve-residual-transfer",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$, $\\sigma\\in\\mathbb C$, and\n$M=A-\\sigma I$ be invertible. Then a nonzero vector $u$ is an eigenvector of\n$A$ with eigenvalue $\\lambda$ if and only if it is an eigenvector of\n$M^{-1}$ with eigenvalue $\\theta=(\\lambda-\\sigma)^{-1}$. In particular,\n$\\lambda=\\sigma+1/\\theta$ and $\\theta\\ne0$.\n\nFor any nonzero candidate $u$, any $\\theta\\ne0$, and any computed vector $y$\nwith solve residual $s_0=My-u$, define the transformed residual\n$r_T=y-\\theta u$ and $\\lambda=\\sigma+1/\\theta$. Then\n$$ (A-\\lambda I)u=\\theta^{-1}(s_0-Mr_T), $$\nand consequently\n$$\\|(A-\\lambda I)u\\|_2\\le\\frac{\\|s_0\\|_2+\\|Mr_T\\|_2}{|\\theta|}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Here $M=\\operatorname{diag}(-14/5,1/5,26/5)$ and $M^{-1}=\\operatorname{diag}(-5/14,5,5/26)$. Thus the interior mode 4 maps to $\\theta=5$, whose modulus exceeds the other transformed eigenvalue moduli $5/14$ and $5/26$; $19/5+1/5=4$. In the separate harmonic invocation, $W=MU=e_2/5$, so $G=W^*W=1/25$ and $C=W^*U=1/5$. The QZ input is this regular one-by-one pencil, already upper triangular with a nonzero diagonal pair, so the QZ procedure's computed condition holds and its status is `qz-computed`; $(\\alpha,\\beta)=(1/25,1/5)$. The scalar equation $G-\\eta C=0$ gives $\\eta=1/5$ and the same value $\\sigma+\\eta=4$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For an inexact solve take $y=(49/10)e_2$ and $\\theta=49/10$. Then $s_0=My-u=-e_2/50$ and $r_T=0$, while the mapped value is $\\lambda=19/5+10/49=981/245$. Its original residual is $(A-\\lambda I)u=-e_2/245$, which equals $\\theta^{-1}(s_0-Mr_T)=-e_2/245$ by [F4].",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Both Example calls supply nonzero e_2 in a3-mode problem, with m=1 or a one-column harmonic basis. step 1.1 forms a1-by-1 regular projected pencil; no empty harmonic trial space is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: the exact candidate in step 1.1 has zero original residual; the perturbed candidate residual is computed in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: the harmonic trial basis has width one, so the projected pencil is scalar and computed exactly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: the shift differs from each eigenvalue, so M is invertible as required by the shift-invert branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Its shift19/5 differs from1,4,9; transformed theta=5 and harmonic beta=1/5 are nonzero. The separate one-by-one QZ call has budget1/tolerance0 and is already triangular, as checked in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Start v=e_2 and harmonic U=e_2 are explicit input vectors, with separately supplied computed y=(49/10)e_2 in step 2.1. No random mode selection or hidden exact-solve oracle is inferred."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The interior-vibration Example computes particular exact and inexact inverse maps, with a separate harmonic call. step 1.1 and2.1 give those values and residual transfer; they are not an iff convergence criterion for general interior eigenvalue searches."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The interior-vibration Example computes particular exact and inexact inverse maps, with a separate harmonic call. step 1.1 and2.1 give those values and residual transfer; they are not an iff convergence criterion for general interior eigenvalue searches."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-finite-budget-restarted-and-block-procedures-return-a-status": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-thick-and-implicitly-restarted-arnoldi-with-locking",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$, let $v\\ne0$, and choose integers\n$1\\le r<m\\le n$, a residual tolerance $\\tau\\ge0$, a restart budget\n$N_{\\max}\\ge1$, and a restart mode `thick` or `implicit`. All operations\nbelow are in exact arithmetic. The number $k$ of locked pairs is the number\nof linearly independent locked vectors; it starts at zero. If a restart is\nneeded, a target rule may be supplied for thick mode and is required for an\nimplicit-mode restart after one or more pairs are locked. When invoked, it\nmust return $r-k$ current Ritz vectors independent modulo the span of all\nlocked vectors, or report `unavailable`; no rule, an unavailable selection,\nor a wrong-size or dependent selection gives status `rank-loss`. For an implicit-mode\nrestart with no locked pairs, a shift rule supplies exactly $p=m-r$ complex\nshifts for the current cycle or reports `unavailable`; an unavailable list or\na list of any other length gives status `shift-count-unavailable`. The shifts\nmay be chosen from unwanted Ritz values, but the procedure allows any\nsupplied list and asserts no convergence for an arbitrary schedule.\n\nInitialize the restart counter $c=0$ before the first Arnoldi cycle. A cycle\nconsists of expanding the current Arnoldi basis to dimension $m$ or exact\nbreakdown, then computing Ritz pairs and testing their original residuals.\nAfter the initial cycle in step 1, each restart in step 3 or 4 constructs the\nnext cycle. The output is the locked Ritz pairs, the current unlocked Ritz\npairs, and one of `converged`, `budget-exhausted`,\n`invariant-subspace-breakdown`, `rank-loss`, `shift-count-unavailable`, or\n`filtered-breakdown`.\n\n1. Start with $v_1=v/\\|v\\|_2$, no locked pairs, and run fully reorthogonalized\n   Arnoldi to dimension $m$, stopping earlier if the next Arnoldi residual is\n   zero. Let $d$ be the number of basis columns actually constructed, so\n   $d=m$ unless exact breakdown occurs earlier, and let $V_d,H_d$ be the\n   resulting basis and projected matrix. Normalize every nonzero projected\n   eigenvector $y$ of $H_d$ so $\\|y\\|_2=1$ and lift it to $u=V_dy$. Process\n   the Ritz pairs in the order returned by the projected eigensolve. For each\n   pair $(\\theta,u)$, compute the original residual $r_u=Au-\\theta u$\n   directly (on a standard Arnoldi cycle without breakdown it may be\n   evaluated by [[prop-ritz-residual-formula-for-an-arnoldi-ritz-pair]]).\n   If $\\|r_u\\|_2\\le\\tau$ and adding $u$ increases the exact rank of the\n   locked-vector matrix, append $(\\theta,u)$ to the locked outputs and\n   increment $k$. A\n   residual-accepted vector in the span of the locked vectors is not counted\n   or appended again. Locked vectors are retained as a subspace at every\n   later restart. If $k\\ge r$, return `converged`.\n\n2. If the projected Arnoldi space is exactly invariant and fewer than $r$\n   pairs are locked, return `invariant-subspace-breakdown`. If the restart\n   counter satisfies $c=N_{\\max}$, return `budget-exhausted`.\n\n3. For a thick restart, or for an implicit-mode restart when $k>0$, invoke\n   the target rule. Form a target block from every locked vector and the\n   selected $r-k$ wanted Ritz vectors. For either block to be rank-revealing,\n   use the following exact column-pivoted orthogonalization: start with an\n   empty orthonormal block $Q$ and all input columns remaining. For each\n   remaining column $y_j$, compute $c_j=y_j-Q(Q^*y_j)$. Choose a column with\n   largest $\\|c_j\\|_2$, breaking ties by original column order. If the largest\n   norm is zero, stop; otherwise append $c_j/\\|c_j\\|_2$ to $Q$ and remove that\n   pivot column. The columns appended to $Q$ form an ordered orthonormal basis\n   of the input range. Apply this procedure first to the target block; if it\n   fails to retain all locked and selected directions, return `rank-loss`.\n   With its resulting orthonormal basis $U$, compute the residual block\n   $R_U=(I-UU^*)AU$. Apply the same orthogonalization to $R_U$ to obtain an\n   ordered orthonormal basis $F$ of its range. If $U$ has $s$ columns, retain\n   only the first $\\min(\\dim\\operatorname{range}(R_U),m-s)$ columns of $F$,\n   so $[U,F]$ has at most $m$ columns. Set the ordered basis to $[U,F]$ and a\n   queue to its columns in order. While the basis has fewer than $m$ columns\n   and the queue is nonempty, remove the first queued column $q$, compute\n   $w=Aq$, and orthogonalize $w$ against every current basis column in two\n   complete passes. If the residual is nonzero, normalize it, append it to\n   the basis, and append the new column to the queue; if it is zero, continue\n   with the remaining queue. If the queue empties before the basis has\n   dimension $m$, the retained subspace is invariant; when fewer than $r$\n   pairs are locked, return `invariant-subspace-breakdown`.\n\n4. For an implicit restart with no locked pairs, set $p=m-r$ and request a\n   shift list $\\mu_1,\\ldots,\\mu_p$ from the shift rule. If it reports\n   `unavailable` or returns a list of the wrong length, return\n   `shift-count-unavailable`.\n   Starting from $AV_m=V_mH_m+\\beta_m v_{m+1}e_m^*$, apply exact shifted QR\n   steps to $H_m$ using the Givens transformations of\n   [[def-real-and-complex-givens-transformations]] in top-down adjacent-row\n   eliminations on pairs\n   $(1,2),(2,3),\\ldots,(m-1,m)$:\n   $H_{j-1}-\\mu_jI=Q_jR_j$ and $H_j=Q_j^*H_{j-1}Q_j=R_jQ_j+\\mu_jI$.\n   Put $Q=Q_1\\cdots Q_p$, rotate $V_m$ by $Q$, retain its first $r$ columns,\n   and continue Arnoldi to dimension $m$. If the polynomial\n   $q(z)=\\prod_{j=1}^p(z-\\mu_j)$ annihilates the starting vector or the\n   filtered Krylov space has dimension below $r$, return `filtered-breakdown`.\n\n5. Increment the restart counter by setting $c\\gets c+1$, recompute Ritz\n   pairs and their original residuals, apply the acceptance rule in step 1,\n   and return to step 2 unless a return status applies.\n   No convergence is asserted for an arbitrary shift schedule. The residual\n   acceptance test certifies only the computed residual size; it does not by\n   itself give a forward eigenvalue bound for a nonnormal matrix.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-block-lobpcg-with-rank-loss-status",
+          "source_section": "Definition",
+          "quote": "Let $A=A^*\\in\\mathbb C^{n\\times n}$, let $B=B^*>0$, and let\n$T=T^*>0$ be a fixed preconditioning operator. Here $B>0$ and $T>0$ mean\n$x^*Bx>0$ and $x^*Tx>0$ for every nonzero $x$. The $B$-inner product and\nnorm are those of [[def-b-inner-product-and-dual-norm-for-definite-pencil]].\nChoose a block width $1\\le q\\le n$, a residual tolerance $\\tau\\ge0$, a finite\niteration budget $N_{\\max}\\ge0$, and an initial matrix $X_0$ with\n$X_0^*BX_0=I_q$. The output is a block of Ritz pairs and one of\n`converged`, `budget-exhausted`, `rank-loss`, or `invalid-initial-block`.\n\n1. If $X_0$ does not have full column rank or does not satisfy\n   $X_0^*BX_0=I_q$, return `invalid-initial-block`. Compute the Rayleigh-Ritz eigenpairs in\n   $\\operatorname{range}(X_0)$, sorted increasingly, and let $\\Theta_0$ be the\n   diagonal matrix of the $q$ Ritz values. Set the previous search block\n   $D_0$ empty and initialize the iteration counter $k=0$.\n\n2. At iteration $k$, form the original residual block\n   $R_k=AX_k-BX_k\\Theta_k$. If every column has Euclidean norm at most\n   $\\tau$, return `converged`. If $k=N_{\\max}$, return\n   `budget-exhausted` with $(\\Theta_k,X_k)$.\n\n3. Compute the preconditioned residual block $W_k=TR_k$ and set\n   $Y_k=[X_k,W_k,D_k]$, omitting the empty block at $k=0$. Compute an exact\n   rank-revealing $B$-QR with column pivoting as follows. Starting with no\n   columns in $Q_k$, for each remaining column $y_j$ of $Y_k$ compute its\n   residual $c_j=y_j-Q_k(Q_k^*By_j)$ and choose a column with largest\n   $B$-norm $\\|c_j\\|_B$ (break ties by original column order). If the largest\n   residual norm is zero, stop; otherwise append the normalized residual to\n   $Q_k$ and remove that pivot column. Let $s_k$ be the number of columns\n   appended and let $\\Pi_k$ record the pivot order followed by the unused\n   columns. If $s_k<q$, return `rank-loss` with the current Ritz pairs; no\n   projected solve is attempted on that branch. Otherwise set\n   $$S_k=Q_k^*BY_k\\Pi_k(:,1:s_k).$$\n   The pivot construction gives\n   $$Y_k\\Pi_k(:,1:s_k)=Q_kS_k,\\qquad Q_k^*BQ_k=I_{s_k},$$\n   and $S_k$ is invertible because its selected columns are independent.\n   Dependent trial columns are discarded and their count is recorded as a\n   rank-compression diagnostic.\n\n4. The projected matrix $Q_k^*AQ_k$ is Hermitian, hence normal, so its\n   orthonormal eigenbasis and real eigenvalues are supplied by\n   [[thm-complex-spectral-theorem-for-normal-endomorphisms]]. Solve\n   $Q_k^*AQ_kZ_k=Z_k\\Theta_{k+1}$ and choose its $q$ smallest eigenvalues. Set\n   $C_k=\\Pi_k(:,1:s_k)S_k^{-1}Z_k$; then $Y_kC_k=Q_kZ_k$. Partition\n   $C_k=\\begin{bmatrix}C_X\\\\C_W\\\\C_D\\end{bmatrix}$, omitting the $C_D$\n   block when $D_k$ is empty. The projected metric is positive definite\n   because for nonzero $z$, $(Q_kz)^*B(Q_kz)=\\|z\\|_2^2>0$. Set\n   $$X_{k+1}=X_kC_X+W_kC_W+D_kC_D,\\qquad D_{k+1}=W_kC_W+D_kC_D,$$\n   again omitting the empty-block term. Let $\\Theta_{k+1}$ be the selected\n   diagonal Ritz-value matrix and increment $k$.\n\n5. Repeat from step 2. No convergence, rate, or accuracy is asserted when the\n   budget or rank-loss branch is returned. The exact SPD conditions on $B$ and\n   $T$ define the permitted metric and preconditioner; no particular\n   incomplete-factorization procedure is assumed.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-block-lobpcg-with-rank-loss-status",
+          "source_section": "Definition",
+          "quote": "Let $A=A^*\\in\\mathbb C^{n\\times n}$, let $B=B^*>0$, and let\n$T=T^*>0$ be a fixed preconditioning operator. Here $B>0$ and $T>0$ mean\n$x^*Bx>0$ and $x^*Tx>0$ for every nonzero $x$. The $B$-inner product and\nnorm are those of [[def-b-inner-product-and-dual-norm-for-definite-pencil]].\nChoose a block width $1\\le q\\le n$, a residual tolerance $\\tau\\ge0$, a finite\niteration budget $N_{\\max}\\ge0$, and an initial matrix $X_0$ with\n$X_0^*BX_0=I_q$. The output is a block of Ritz pairs and one of\n`converged`, `budget-exhausted`, `rank-loss`, or `invalid-initial-block`.\n\n1. If $X_0$ does not have full column rank or does not satisfy\n   $X_0^*BX_0=I_q$, return `invalid-initial-block`. Compute the Rayleigh-Ritz eigenpairs in\n   $\\operatorname{range}(X_0)$, sorted increasingly, and let $\\Theta_0$ be the\n   diagonal matrix of the $q$ Ritz values. Set the previous search block\n   $D_0$ empty and initialize the iteration counter $k=0$.\n\n2. At iteration $k$, form the original residual block\n   $R_k=AX_k-BX_k\\Theta_k$. If every column has Euclidean norm at most\n   $\\tau$, return `converged`. If $k=N_{\\max}$, return\n   `budget-exhausted` with $(\\Theta_k,X_k)$.\n\n3. Compute the preconditioned residual block $W_k=TR_k$ and set\n   $Y_k=[X_k,W_k,D_k]$, omitting the empty block at $k=0$. Compute an exact\n   rank-revealing $B$-QR with column pivoting as follows. Starting with no\n   columns in $Q_k$, for each remaining column $y_j$ of $Y_k$ compute its\n   residual $c_j=y_j-Q_k(Q_k^*By_j)$ and choose a column with largest\n   $B$-norm $\\|c_j\\|_B$ (break ties by original column order). If the largest\n   residual norm is zero, stop; otherwise append the normalized residual to\n   $Q_k$ and remove that pivot column. Let $s_k$ be the number of columns\n   appended and let $\\Pi_k$ record the pivot order followed by the unused\n   columns. If $s_k<q$, return `rank-loss` with the current Ritz pairs; no\n   projected solve is attempted on that branch. Otherwise set\n   $$S_k=Q_k^*BY_k\\Pi_k(:,1:s_k).$$\n   The pivot construction gives\n   $$Y_k\\Pi_k(:,1:s_k)=Q_kS_k,\\qquad Q_k^*BQ_k=I_{s_k},$$\n   and $S_k$ is invertible because its selected columns are independent.\n   Dependent trial columns are discarded and their count is recorded as a\n   rank-compression diagnostic.\n\n4. The projected matrix $Q_k^*AQ_k$ is Hermitian, hence normal, so its\n   orthonormal eigenbasis and real eigenvalues are supplied by\n   [[thm-complex-spectral-theorem-for-normal-endomorphisms]]. Solve\n   $Q_k^*AQ_kZ_k=Z_k\\Theta_{k+1}$ and choose its $q$ smallest eigenvalues. Set\n   $C_k=\\Pi_k(:,1:s_k)S_k^{-1}Z_k$; then $Y_kC_k=Q_kZ_k$. Partition\n   $C_k=\\begin{bmatrix}C_X\\\\C_W\\\\C_D\\end{bmatrix}$, omitting the $C_D$\n   block when $D_k$ is empty. The projected metric is positive definite\n   because for nonzero $z$, $(Q_kz)^*B(Q_kz)=\\|z\\|_2^2>0$. Set\n   $$X_{k+1}=X_kC_X+W_kC_W+D_kC_D,\\qquad D_{k+1}=W_kC_W+D_kC_D,$$\n   again omitting the empty-block term. Let $\\Theta_{k+1}$ be the selected\n   diagonal Ritz-value matrix and increment $k$.\n\n5. Repeat from step 2. No convergence, rate, or accuracy is asserted when the\n   budget or rank-loss branch is returned. The exact SPD conditions on $B$ and\n   $T$ define the permitted metric and preconditioner; no particular\n   incomplete-factorization procedure is assumed.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For thick or implicit restarted Arnoldi, one cycle has at most $m$\nArnoldi steps. The thick restart processes finite matrices and blocks using\nfinite exact rank-revealing orthogonalization loops, and its block-Arnoldi\nqueue processes at most $m$ basis columns once each; an unavailable target\nselection, a missing target rule, or a wrong-size or dependent target block\nreturns `rank-loss`. An implicit restart\nwith no locked pairs uses\nexactly $p=m-r$ shifts and finite QR steps; an unavailable or wrong-length\nshift list returns `shift-count-unavailable`. The implicit-mode thick fallback\nwith locked pairs uses the same finite target and orthogonalization steps.\nAssumption [A1] makes all other invoked rules and projected eigensolves\nfinite-return. Thus each cycle either returns a listed status or reaches its\nsingle restart-counter update.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For block LOBPCG, every pass through steps 1--4 is finite: its trial block has finitely many columns, its $B$-orthogonalization processes at most those columns, and the projected eigensolve and finite-dimensional operations return in finite work by [A1]. A pass either returns a status or completes one update and increments $k$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The counter begins at $0$ and increases by one before each further cycle. After at most $N_{\\max}$ such increments, the next completed cycle reaches the test $c=N_{\\max}$ and returns `budget-exhausted` unless an earlier acceptance or breakdown status has already returned. The number of cycles is therefore at most $N_{\\max}+1$, so the Arnoldi execution terminates.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Starting from $k=0$, no more than $N_{\\max}$ updates can occur. After those updates the next pass tests $k=N_{\\max}$ and returns `budget-exhausted`, unless convergence or rank loss already returned. Hence the block LOBPCG execution terminates after finitely many operations.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "Both procedures require positive finite-dimensional input; no zero-dimensional matrix is in either domain.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 1.2, 2.1, and 2.2 cover exact breakdown, zero residual, rank-loss, convergence, and budget exits as declared finite statuses.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement permits block width q=1 including n=1; restarted Arnoldi requires 1≤r<m, and steps 1.1–2.2 do not require larger block width.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.2 explicitly cover rank loss, invariant-subspace breakdown, unavailable shifts, zero residual acceptance, and exhausted budgets.",
+          "case": "degenerate"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in the theorem.",
+          "case": "endpoints"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The proof uses finite loop counters and makes no arbitrary-family choice.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The theorem asserts termination, not an equivalence.",
+          "case": "iff-forward"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The theorem asserts termination, not an equivalence.",
+          "case": "iff-reverse"
+        }
+      ],
+      "risk": "medium",
+      "kind": "theorem",
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-shift-invert-and-harmonic-ritz-extraction",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$, $n\\ge1$, choose a shift\n$\\sigma\\in\\mathbb C$, and put $M=A-\\sigma I$. This procedure returns candidate\nvalues and their residual data; it asserts no convergence or forward-error\nbound. Its branch statuses are `available`, `arnoldi-breakdown`,\n`linear-solve-unavailable`, `zero-transformed-Ritz-value`,\n`infinite-harmonic-value`, `projected-pencil-unresolved`,\n`qz-budget-exhausted`, and `qz-certificate-inconclusive`.\n\n**Shift-invert branch.** This branch requires $M$ to be invertible, equivalently\nthat $\\sigma$ is not an eigenvalue of $A$ by\n[[prop-eigenvalue-iff-shift-is-not-invertible]]. Its inputs also include a\nnonzero starting vector $v$, an integer Arnoldi dimension $1\\le m\\le n$, a\nresidual tolerance $\\tau\\ge0$, and a solve routine. Normalize\n$v_1=v/\\|v\\|_2$. For $j=1,\\ldots,m$, request either the exact solution\n$y_j=M^{-1}v_j$ or a computed vector $y_j$ together with its actual equation\nresidual $s_j=My_j-v_j$. If a requested solve is unavailable, return\n`linear-solve-unavailable` with the residuals already recorded. Set $w=y_j$.\nFor $i=1,\\ldots,j$, compute $h_{ij}=\\langle w,v_i\\rangle$ and replace\n$w\\gets w-h_{ij}v_i$. Repeat this pass once, adding each second-pass\ncoefficient to the corresponding $h_{ij}$. Set $h_{j+1,j}=\\|w\\|_2$. If this\nnorm is zero, set the current dimension to $k=j$ and stop with status\n`arnoldi-breakdown`; otherwise set $v_{j+1}=w/h_{j+1,j}$. After $m$ columns,\nset $k=m$ and stop with status `available`.\nWhen every solve is exact, this is Arnoldi applied to $M^{-1}$. When any solve\nis inexact, the projected matrix is only the one produced from the computed\nvectors; the procedure makes no exact-Arnoldi or convergence claim for that\nbranch.\n\nCompute the Ritz pairs $(\\theta,z)$ of the current $k\\times k$ matrix $H$ as\nin [[def-ritz-values-and-ritz-vectors-from-arnoldi]], normalize $z$ to unit\nnorm, and lift $u=V_kz$. For each $\\theta\\ne0$, report the transformed candidate\n$\\lambda=\\sigma+1/\\theta$, the lifted vector $u$, and the directly computed\noriginal residual $r_A=Au-\\lambda u$. Mark this candidate accepted exactly\nwhen $\\|r_A\\|_2\\le\\tau$. If $\\theta=0$, assign no finite inverse map and mark\nthat candidate `zero-transformed-Ritz-value`. To record the solve-error\ntransfer for a candidate with $\\theta\\ne0$, request one additional solve\n$My=u$; if it is available, store $s_0=My-u$ and $r_T=y-\\theta u$ alongside\nthe directly computed residual $r_A$.\nIf this additional solve is unavailable, return\n`linear-solve-unavailable` with the candidate and accumulated ledger.\n\n**Harmonic Ritz branch.** This branch takes a full-column-rank trial basis\n$U\\in\\mathbb C^{n\\times k}$, $k\\ge1$; it does not require $M$ to be\ninvertible. Form $W=MU$ and\n$$G=W^*W=U^*M^*MU,\\qquad C=W^*U=U^*M^*U.$$\nCompute an exact column-pivoted QR of $W$ as in\n[[def-full-reduced-and-column-pivoted-computational-qr-factorisations]] and let\n$r_W$ be its exact rank. If $r_W<k$, choose $z\\ne0$ with $Wz=0$. Then\n$z^*G=(Wz)^*W=0$ and $z^*C=(Wz)^*U=0$. Thus the nonzero row\n$z^*$ annihilates $G-\\eta C$ for every $\\eta$; if this matrix were invertible,\nright multiplication by its inverse would force $z^*=0$, a contradiction.\nHence $G-\\eta C$ is singular for every $\\eta$; return\n`projected-pencil-unresolved`. If $W$ has full column rank, then\n$z^*Gz=\\|Wz\\|_2^2>0$ for every $z\\ne0$. Thus $G$ is positive definite and\nthe pencil $G-\\eta C$ is regular in the convention of\n[[def-regular-generalized-eigenvalue-pencil]], since\n$\\det(G-0C)=\\det G\\ne0$.\n\nSupply a finite QZ sweep budget $N\\ge0$ and tolerance $\\tau_{QZ}\\ge0$, and run\n[[alg-finite-budget-qz-iteration-with-deflation-and-residual]] on $(G,C)$.\nCompute $G,C$ exactly in the mathematical procedure; a finite implementation\nmust include their formation errors in the perturbation ledger or return\n`qz-certificate-inconclusive`. On `qz-computed`, require its exact-factor and\nlocal-update certificates;\n[[prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence]]\nthen records equivalence to a perturbed projected pencil. For each diagonal\nindex $i$, set $\\alpha_i=S_{ii}$ and $\\beta_i=T_{ii}$. If\n$(\\alpha_i,\\beta_i)=(0,0)$, return `projected-pencil-unresolved`; if\n$\\beta_i\\ne0$, report the computed harmonic Ritz value\n$\\lambda_i=\\sigma+\\alpha_i/\\beta_i$; if $\\beta_i=0$, mark that candidate\n`infinite-harmonic-value`. These are values of the computed perturbed\npencil, with the QZ residual and perturbation ledger retained; no exact-root,\neigenvector, or forward-error claim is made. Map a QZ `budget-exhausted` status\nto `qz-budget-exhausted`; map a QZ `certificate-inconclusive` or `range-failure`\nto `qz-certificate-inconclusive`; map `singular-pencil-suspected` to\n`projected-pencil-unresolved`.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-shift-invert-and-harmonic-ritz-extraction",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$, $n\\ge1$, choose a shift\n$\\sigma\\in\\mathbb C$, and put $M=A-\\sigma I$. This procedure returns candidate\nvalues and their residual data; it asserts no convergence or forward-error\nbound. Its branch statuses are `available`, `arnoldi-breakdown`,\n`linear-solve-unavailable`, `zero-transformed-Ritz-value`,\n`infinite-harmonic-value`, `projected-pencil-unresolved`,\n`qz-budget-exhausted`, and `qz-certificate-inconclusive`.\n\n**Shift-invert branch.** This branch requires $M$ to be invertible, equivalently\nthat $\\sigma$ is not an eigenvalue of $A$ by\n[[prop-eigenvalue-iff-shift-is-not-invertible]]. Its inputs also include a\nnonzero starting vector $v$, an integer Arnoldi dimension $1\\le m\\le n$, a\nresidual tolerance $\\tau\\ge0$, and a solve routine. Normalize\n$v_1=v/\\|v\\|_2$. For $j=1,\\ldots,m$, request either the exact solution\n$y_j=M^{-1}v_j$ or a computed vector $y_j$ together with its actual equation\nresidual $s_j=My_j-v_j$. If a requested solve is unavailable, return\n`linear-solve-unavailable` with the residuals already recorded. Set $w=y_j$.\nFor $i=1,\\ldots,j$, compute $h_{ij}=\\langle w,v_i\\rangle$ and replace\n$w\\gets w-h_{ij}v_i$. Repeat this pass once, adding each second-pass\ncoefficient to the corresponding $h_{ij}$. Set $h_{j+1,j}=\\|w\\|_2$. If this\nnorm is zero, set the current dimension to $k=j$ and stop with status\n`arnoldi-breakdown`; otherwise set $v_{j+1}=w/h_{j+1,j}$. After $m$ columns,\nset $k=m$ and stop with status `available`.\nWhen every solve is exact, this is Arnoldi applied to $M^{-1}$. When any solve\nis inexact, the projected matrix is only the one produced from the computed\nvectors; the procedure makes no exact-Arnoldi or convergence claim for that\nbranch.\n\nCompute the Ritz pairs $(\\theta,z)$ of the current $k\\times k$ matrix $H$ as\nin [[def-ritz-values-and-ritz-vectors-from-arnoldi]], normalize $z$ to unit\nnorm, and lift $u=V_kz$. For each $\\theta\\ne0$, report the transformed candidate\n$\\lambda=\\sigma+1/\\theta$, the lifted vector $u$, and the directly computed\noriginal residual $r_A=Au-\\lambda u$. Mark this candidate accepted exactly\nwhen $\\|r_A\\|_2\\le\\tau$. If $\\theta=0$, assign no finite inverse map and mark\nthat candidate `zero-transformed-Ritz-value`. To record the solve-error\ntransfer for a candidate with $\\theta\\ne0$, request one additional solve\n$My=u$; if it is available, store $s_0=My-u$ and $r_T=y-\\theta u$ alongside\nthe directly computed residual $r_A$.\nIf this additional solve is unavailable, return\n`linear-solve-unavailable` with the candidate and accumulated ledger.\n\n**Harmonic Ritz branch.** This branch takes a full-column-rank trial basis\n$U\\in\\mathbb C^{n\\times k}$, $k\\ge1$; it does not require $M$ to be\ninvertible. Form $W=MU$ and\n$$G=W^*W=U^*M^*MU,\\qquad C=W^*U=U^*M^*U.$$\nCompute an exact column-pivoted QR of $W$ as in\n[[def-full-reduced-and-column-pivoted-computational-qr-factorisations]] and let\n$r_W$ be its exact rank. If $r_W<k$, choose $z\\ne0$ with $Wz=0$. Then\n$z^*G=(Wz)^*W=0$ and $z^*C=(Wz)^*U=0$. Thus the nonzero row\n$z^*$ annihilates $G-\\eta C$ for every $\\eta$; if this matrix were invertible,\nright multiplication by its inverse would force $z^*=0$, a contradiction.\nHence $G-\\eta C$ is singular for every $\\eta$; return\n`projected-pencil-unresolved`. If $W$ has full column rank, then\n$z^*Gz=\\|Wz\\|_2^2>0$ for every $z\\ne0$. Thus $G$ is positive definite and\nthe pencil $G-\\eta C$ is regular in the convention of\n[[def-regular-generalized-eigenvalue-pencil]], since\n$\\det(G-0C)=\\det G\\ne0$.\n\nSupply a finite QZ sweep budget $N\\ge0$ and tolerance $\\tau_{QZ}\\ge0$, and run\n[[alg-finite-budget-qz-iteration-with-deflation-and-residual]] on $(G,C)$.\nCompute $G,C$ exactly in the mathematical procedure; a finite implementation\nmust include their formation errors in the perturbation ledger or return\n`qz-certificate-inconclusive`. On `qz-computed`, require its exact-factor and\nlocal-update certificates;\n[[prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence]]\nthen records equivalence to a perturbed projected pencil. For each diagonal\nindex $i$, set $\\alpha_i=S_{ii}$ and $\\beta_i=T_{ii}$. If\n$(\\alpha_i,\\beta_i)=(0,0)$, return `projected-pencil-unresolved`; if\n$\\beta_i\\ne0$, report the computed harmonic Ritz value\n$\\lambda_i=\\sigma+\\alpha_i/\\beta_i$; if $\\beta_i=0$, mark that candidate\n`infinite-harmonic-value`. These are values of the computed perturbed\npencil, with the QZ residual and perturbation ledger retained; no exact-root,\neigenvector, or forward-error claim is made. Map a QZ `budget-exhausted` status\nto `qz-budget-exhausted`; map a QZ `certificate-inconclusive` or `range-failure`\nto `qz-certificate-inconclusive`; map `singular-pencil-suspected` to\n`projected-pencil-unresolved`.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+          "source_section": "Definition",
+          "quote": "Input a regular pencil $(A,B)$ with $A,B\\in\\mathbb C^{n\\times n}$,\n$n\\ge1$, a nonnegative integer sweep budget $N$, and a finite stored real tolerance\n$\\tau\\ge0$. Real input data are embedded in $\\mathbb C$. Scalar updates of the\nstored matrices use the operationwise model of\n[[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]].\nUse the canonical stored Givens generator and application order of\n[[alg-scaled-complex-householder-and-givens-updates]], with the common-pair\norientations and explicit coefficients $v,h,\\eta$ of\n[[lem-qz-two-sided-local-computed-update-bound]]. Generate each rotation ONCE\nand apply its same stored coefficients to BOTH matrices. Retain the exact\nnormalized unitary representatives as product records, never as purported\nstored dense unitary matrices. Left rotations annihilate a column's second\nentry; right rotations annihilating a row's first entry use the coordinate\nreversal/adjoint construction of that lemma. After each genuine matrix target\napplication write only its intended target to exact zero and include that\nwrite in the local coefficient $\\eta$. An external-vector application has\ncoefficient $v$ and no matrix-target overwrite. Local roundoff certification\nrequires $0<u<1$; otherwise retain diagnostics with `certificate-inconclusive`. Record each elementary\nrotation separately. If the source cannot produce its admissible factor,\nreturn `range-failure` or `certificate-inconclusive` with diagnostics.\n\n1. Execute the finite index loops of\n[[alg-generalized-hessenberg-triangular-reduction]] with these COMPUTED common\nrotations: triangularize $B$ with left targets $B_{i,j}$; then reduce $A$ with\nleft targets $A_{i,j}$ followed by right targets $B_{i,i-1}$. Every application\nupdates both whole arrays. The exact initializer and\n[[prop-generalized-hessenberg-triangular-reduction-preserves-form-and-equivalence]]\nsupply the index schedule and support induction, not exact rounded\nreconstruction. Retain each local factor and residual defined against its\nexact representative. Include structural target writes in that local\narithmetic residual. Record all OTHER explicit zero writes separately: their\npost-action perturbations are pulled back by the local factor adjoints before\nentering the pre-action $D_j^A,D_j^B$ ledger. A pure tolerance write is an\nidentity-factor stage. Never count a structural write twice.\n\nInitialize the sweep counter to zero. Process active blocks in increasing first\nindex, splitting them at exact zero subdiagonals of $H$. In each deflation\npass execute step 2, then repeat step 3 for the smallest available non-isolated\nzero diagonal of $T$ until none remains or a status exits. Test step 5 before\nstarting a sweep: if the target is absent and the counter equals $N$, return\n`budget-exhausted`. Otherwise increment the counter, execute step 4 on all\nremaining active blocks, and repeat the deflation pass. In particular $N=0$\npermits initialization/deflation but no step-4 sweep.\n\n2. On each active block $H_{a:b,a:b},T_{a:b,a:b}$, apply the following deflation\ntests before a sweep. For $i=a,\\ldots,b-1$, set $H_{i+1,i}$ to zero when\n$$|H_{i+1,i}|\\le\\tau\\bigl(|H_{i,i}|+|H_{i+1,i+1}|\\bigr),$$\nand record its old value in $D^A$. For $k=a,\\ldots,b$, set $T_{k,k}$ to zero when\n$$|T_{k,k}|\\le\\tau\\bigl(|T_{k-1,k}|+|T_{k,k+1}|\\bigr),$$\nusing zero for a missing boundary term, and record the old value in $D^B$.\nEvaluate each displayed modulus by the canonical rounded scaled two-component\nnorm; evaluate its additions and tolerance product with the declared rounded\nreal operations, then compare the stored finite values exactly. Excluded\noperations return `range-failure`. The tests mean these rounded comparisons,\nnot an assertion about exact moduli at the threshold. Save the actual old\nentries, so their deflation perturbations remain exact regardless of the test.\nA one-by-one diagonal pair at $k$ is isolated when $H_{k,k-1}=0$ and\n$H_{k+1,k}=0$, omitting a boundary entry when $k=a$ or $k=b$. If it has\n$T_{k,k}=0$ and $H_{k,k}\\ne0$, report an infinite candidate for the computed pencil and deflate it\nfrom the active block. If the isolated diagonal pair is $(0,0)$, return\n`singular-pencil-suspected` without assigning an eigenvalue.\n\n3. To move a non-isolated zero $T_{k,k}$ to the top of its active block, for\n$j=k-1,k-2,\\ldots,a$ apply a right Givens factor on columns $j,j+1$ that\nzeros $T_{j,j}$, then, when $j+2\\le b$, a left Givens factor on rows\n$j+1,j+2$ that zeros the resulting bulge $H_{j+2,j}$. Finally, when $a<b$,\napply a left Givens factor on rows $a,a+1$ to zero $H_{a+1,a}$. Record all rounded update residuals and target writes. If this isolates $(H_{a,a},T_{a,a})=(h,0)$ with $h\\ne0$, report\nthe infinite candidate and remove the first row/column from the active block.\nIf the isolated pair is $(0,0)$, return `singular-pencil-suspected`; if isolation\nfails, return `certificate-inconclusive`. Each successful isolation removes\none index, so at most $n$ such removals occur.\n\n4. For each remaining active block with more than one row in the current\nsweep, choose the homogeneous shift $[\\alpha:\\beta]=[H_{b,b}:T_{b,b}]$ if this pair is nonzero and\n$T_{b,b}\\ne0$; if $T_{b,b}=0$, use $[0:1]$. Form\n$$x=(\\beta H_{a:b,a:b}-\\alpha T_{a:b,a:b})e_1.$$\nCompute the first two components of $x$ using the declared rounded complex\nproducts/subtractions and generate a left Givens factor from that stored\nexternal vector. Apply it to both matrices without a matrix-target overwrite.\nIts rounding changes the selected factor, not its application certificate. Apply a right Givens factor to columns $1,2$ to restore triangularity\nof $T$. For $j=2,\\ldots,b-a$, alternate a left Givens factor on rows $j,j+1$\nto zero the current Hessenberg bulge and a right Givens factor on columns\n$j,j+1$ to zero the resulting subdiagonal entry of $T$. Update and retain the\nproducts $Q,Z$; record every local residual including its structural target\nwrite. Indices $1,2,j,j+1$ here are relative to the active block; apply the\nembedded transformations to the entire pair, retaining the transformed off-block data. All divisions by a generalized eigenvalue ratio are avoided.\n\n5. After each infinite isolation and before every successful return, scan all\nisolated diagonal pairs. Any $(0,0)$ pair returns `singular-pencil-suspected`\nwithout an eigenvalue. Stop with `qz-computed` only when $H$ is upper triangular\nand every diagonal pair is nonzero. Otherwise stop after $N$ sweeps with\n`budget-exhausted`. Range failures return `range-failure` with partial factors;\nunavailable local certificates return `certificate-inconclusive`. Neither a\nrounded diagnostic nor a tolerance-induced infinite candidate asserts an exact\ninfinite eigenvalue of the original pencil.\n\nFor local-accumulation bounds use $\\ell_j=\\eta$ for matrix-target actions and\n$\\ell_j=v$ for external-vector/raw actions, plus the separately saved actual\ntolerance perturbations. For an independent residual certificate execute the\nfactor-action/column procedure of\n[[lem-qz-two-sided-local-computed-update-bound]]: use stored raw kernels without\nzero overwrites, propagate their $v$ allowances, use\n[[lem-rounded-linear-and-normal-residual-certificates]] only on STORED matvec\ninputs, and include the final subtraction allowance. Exact normalized factor\nentries are not silently treated as stored inputs. Evaluate each certificate\nusing the finite exact real-controller expression trees/loops in the local\nlemma and component absolute sums as norm upper bounds. Controller operations\nare separate from rounded update arithmetic; for rational/binary stored data\nand rational $u$ this is exact rational computation. No opaque certification\noracle is used. Failure of this residual route's dimension/range hypotheses\nmakes that route inconclusive and does not invalidate a valid independent\nlocal-accumulation bound. Always retain available diagnostics.\n\nThe output is $(Q,S,T,Z,\\text{status})$, the exact factor products when\navailable, the raw residuals $R_A=Q^*AZ-S$ and $R_B=Q^*BZ-T$, and the recorded\nlocal arithmetic and deflation perturbations. The procedure asserts no\nunconditional convergence or small-roundoff bound.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence",
+          "source_section": "Statement",
+          "quote": "Every run of [[alg-finite-budget-qz-iteration-with-deflation-and-residual]]\nterminates with a declared status. After each successful initialization or\nQZ/infinite-deflation sweep, the stored pair is Hessenberg-triangular, except\nat explicitly isolated blocks. For any run with a certified exact-unitary\nfactor record and local update residuals, the returned pair $(S,T)$ satisfies\n$$S=Q^*(A+\\Delta_A)Z,\\qquad T=Q^*(B+\\Delta_B)Z,$$\nwhere $(\\Delta_A,\\Delta_B)$ is the accumulated arithmetic and explicit\ndeflation perturbation pair. This proposition gives no bound on its size.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the shift-invert branch, the Arnoldi loop has exactly $m$ requested solves unless an earlier solve reports `unavailable` or exact breakdown returns. The Ritz extraction has finitely many candidates (at most $m$); each candidate invokes at most one additional solve. By [A1], the remaining operations return their values in finite work, while each unavailable solve explicitly returns `linear-solve-unavailable`. Therefore this branch terminates.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the harmonic branch, forming $W,G,C$ and computing the rank of $W$ use finite-dimensional operations by [A1]. If the rank is below $k$, the algorithm returns `projected-pencil-unresolved` before QZ. If the rank is $k$, its statement gives a regular projected pencil and calls QZ with the finite budget $N$; [F3, F4] then give a QZ status after finitely many operations under the assumed QZ hypotheses.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "A1",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "After a QZ return, the algorithm maps each possible QZ status to one of its own listed statuses. On `qz-computed`, it inspects only the finitely many diagonal pairs of the finite projected pencil and either returns on an unresolved pair or completes the candidate list. Thus the harmonic branch also terminates, proving the assertion for both branches.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The procedure requires n≥1, and each branch uses a positive Arnoldi dimension or trial-basis width.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1, and 2.2 cover zero solve residuals, zero transformed Ritz values, rank-deficient W, singular homogeneous pairs, and QZ failure statuses.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement permits m=1 and k=1; steps 1.1–2.2 use finite loops and remain valid in those dimensions.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.2 cover solve-unavailable, Arnoldi-breakdown, rank-deficient pencil, infinite value, and QZ failure statuses.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement permits QZ sweep budget N=0; step 2.1 uses the finite-budget QZ return status at that endpoint.",
+          "case": "endpoints"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "All candidate and diagonal scans are finite deterministic operations; the proof invokes no arbitrary-family choice.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The theorem asserts termination, not an equivalence.",
+          "case": "iff-forward"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The theorem asserts termination, not an equivalence.",
+          "case": "iff-reverse"
+        }
+      ],
+      "risk": "medium",
+      "kind": "theorem",
+      "axioms": [],
+      "finite_smoke": []
+    }
+  }
+}

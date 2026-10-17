@@ -1,0 +1,45 @@
+{
+  "batch": "72",
+  "opened": [
+    "alg-adaptive-cubic-regularization",
+    "alg-dogleg-trust-region-step",
+    "alg-truncated-cg-trust-region-step",
+    "alg-trust-region-cauchy-step",
+    "alg-trust-region-method",
+    "def-adaptive-cubic-regularization-model",
+    "def-trust-region-quadratic-model-and-ratio",
+    "ex-indefinite-trust-region-boundary-minimizer",
+    "ex-trust-region-newton-cauchy-truncated-cg",
+    "lem-adaptive-cubic-unsuccessful-iteration-count",
+    "lem-global-cubic-model-minimizer-decrease",
+    "lem-natural-logarithm-bounded-by-argument",
+    "lem-positive-definite-model-has-unique-newton-step",
+    "lem-truncated-cg-iterates-are-krylov-vectors",
+    "lem-trust-region-cauchy-decrease",
+    "lem-trust-region-ratio-accuracy-for-small-radii",
+    "lem-trust-region-subproblem-optimality-and-hard-case",
+    "thm-adaptive-cubic-regularization-epsilon-complexity",
+    "thm-trust-region-epsilon-iteration-complexity",
+    "thm-trust-region-global-liminf-gradient",
+    "trust-region-and-cubic-regularization-methods",
+    "trust-region-and-cubic-regularization-methods-examples"
+  ],
+  "not_opened": [],
+  "flagged": [
+    {
+      "id": "trust-region-and-cubic-regularization-methods",
+      "location": "Paragraph beginning “[[alg-trust-region-method]] accepts only feasible steps”; sentence “Its small-radius branch makes the ratio accurate and ensures boundary expansion.”",
+      "defect": "false-claim",
+      "evidence": "The algorithm forces the Cauchy step when Δ ≤ ||g||/(2M_B), with the M_B=0 threshold interpreted as +∞. The ratio-accuracy lemma also requires Δ ≤ θ(1−η₂)||g||/[2(L+M_B)] to guarantee ρ ≥ η₂. For f(x)=x+50x² at x=0, choose g=1, B=0, M_B=0, and Δ=1. The branch triggers and selects p_C=−1; the predicted reduction is 1, while the actual reduction is f(0)−f(−1)=−49, so ρ=−49. The branch alone does not make the ratio accurate.",
+      "severity": "fatal"
+    },
+    {
+      "id": "trust-region-and-cubic-regularization-methods",
+      "location": "Final ARC paragraph; sentence beginning “Under a Lipschitz Hessian and a lower-bounded objective”",
+      "defect": "missing-hypothesis",
+      "evidence": "The current thm-adaptive-cubic-regularization-epsilon-complexity Statement also requires σ_max ≥ 3L. Without that condition, take f(x)=sin(πx)/π, which is bounded below and has an L-Lipschitz Hessian with L=π². At x₀=0, the exact Hessian is B=0 and g=1. With σ_min=σ₀=σ_max=1, the cubic model is m(s)=s+|s|³/3; its global minimizer is s=−1, with predicted reduction 2/3. But f(−1)=f(0)=0, so ρ=0; at σ=σ_max the algorithm returns regularization-cap-exhausted on this rejected trial, before reaching any target ε<1. Thus the stated assumptions do not suffice for the claimed bound including unsuccessful trials.",
+      "severity": "fatal"
+    }
+  ],
+  "coverage_note": "Reviewed all 20 scoped item carriers and both page carriers, plus the direct dependency statements and definitions needed to check their claims, including the Newton and Wolfe interfaces. I did not re-audit transitive published-supplier proofs or independently reread the cited literature PDFs."
+}

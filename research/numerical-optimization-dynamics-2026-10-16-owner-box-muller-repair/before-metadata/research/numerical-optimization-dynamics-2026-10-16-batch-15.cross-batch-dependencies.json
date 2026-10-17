@@ -1,0 +1,205 @@
+[
+  {
+    "kind": "page",
+    "consumer": "computed-fast-transforms-and-convolution",
+    "supplier": "finite-fourier-analysis-and-the-fast-fourier-transform",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Published Fourier conventions and exact finite-transform, radix-two, inversion, Parseval and cyclic-convolution results used by the assigned formulae.",
+    "supplier_item_ids": [
+      "def-unitary-discrete-fourier-transform-on-z-mod-n",
+      "thm-radix-two-fft-correctness",
+      "thm-radix-two-fft-arithmetic-complexity",
+      "thm-finite-fourier-inversion",
+      "thm-finite-parseval-and-plancherel",
+      "lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product"
+    ],
+    "affected_claims": [
+      "Exact transform conventions and identities used in mixed-radix/Bluestein formulae, unitary FFT bounds, and convolution bounds."
+    ],
+    "evidence": "Read the published page and the listed supplier statements/proofs. Their signs, normalizations, domains, and exact hypotheses were checked against the assigned definitions. This records page context and existing published sources, not new approval."
+  },
+  {
+    "kind": "page",
+    "consumer": "computed-fast-transforms-and-convolution",
+    "supplier": "matrix-norms-condition-numbers-and-numerical-stability",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Page-level context retained by the current plan-spec; no matrix condition-number theorem is used as a local proof premise.",
+    "supplier_item_ids": [],
+    "affected_claims": [
+      "Page context only; the local error proofs use explicitly cited counting norms, Parseval, Cauchy–Schwarz, and the operationwise model."
+    ],
+    "evidence": "Read the published page inventory and prose and checked the local item dependency lists. No unstated matrix-norm or conditioning claim is imported."
+  },
+  {
+    "kind": "page",
+    "consumer": "computed-fast-transforms-and-convolution",
+    "supplier": "finite-precision-direct-factorizations",
+    "status": "owner-escalation",
+    "batch": "1",
+    "required_interface": "The page-level requirement remains for owner reconciliation. The assigned complex-product estimate specifically requires the successful-operation, round-to-nearest, normal-range model and its six-real-operation complex multiplication convention.",
+    "supplier_item_ids": [
+      "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+    ],
+    "affected_claims": [
+      "Page-level NA-02 requirement; the direct complex-product estimate depends on def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma."
+    ],
+    "evidence": "The assigned model body was inspected. Its direct item currently has a Step 1 readiness record with decision ready and owner true; this supports the direct item edge below. I did not verify readiness of the entire required page, so its page edge remains open."
+  },
+  {
+    "kind": "page",
+    "consumer": "computed-fast-transforms-and-convolution",
+    "supplier": "outward-rounded-interval-and-ball-arithmetic",
+    "status": "owner-escalation",
+    "batch": "14",
+    "required_interface": "Sound finite elementary-function enclosures, directed interval operations, fixed-budget failure statuses, and the exact pi convention needed by certified unit-circle phase evaluation.",
+    "supplier_item_ids": [
+      "def-dyadic-floating-point-format-and-directed-rounding",
+      "def-intervals-rectangles-and-complex-balls",
+      "def-outward-rounded-interval-and-ball-operations",
+      "def-real-elementary-functions-and-domains",
+      "alg-certified-elementary-range-evaluation",
+      "thm-real-elementary-range-enclosures",
+      "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+    ],
+    "affected_claims": [
+      "Certified phase algorithm and phase enclosure; all downstream computed radix-two, convolution, arbitrary-length, and Bluestein-phase claims that call the certified phase procedure."
+    ],
+    "evidence": "The exact direct supplier bodies listed in item edges below were inspected. Their Step 1 readiness records are absent, and the required A page has no verified completion record in this handoff; no readiness or acceptance is inferred."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-na-complex-product-six-operation-roundoff-bound",
+    "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "status": "verified",
+    "batch": "1",
+    "required_interface": "Successful real operations use round-to-nearest, ties-to-even with zero/normal intermediate conditions; a complex product is the stated four products, subtraction, and addition (six operations).",
+    "supplier_item_ids": [
+      "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+        "section": "Definition",
+        "quote": "Complex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations."
+      }
+    ],
+    "affected_claims": [
+      "The bound |fl_C(zw)-zw| <= 3u|z||w| in lem-na-complex-product-six-operation-roundoff-bound, used by the butterfly, convolution and chirp-phase estimates."
+    ],
+    "evidence": "Read the actual Definition and its model prerequisites. The current Step 1 record for this supplier is ready, owner true, with a current hash. No independent approval is claimed."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-na-interval-pi-matches-canonical-fourier-pi",
+    "supplier": "def-real-elementary-functions-and-domains",
+    "status": "owner-escalation",
+    "batch": "14",
+    "required_interface": "The supplier defines arctan x as the integral from 0 to x of 1/(1+t^2) and states pi=4 arctan(1). The new local proof identifies that value with the canonical pi used by the published finite Fourier transform.",
+    "supplier_item_ids": [
+      "def-real-elementary-functions-and-domains"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-real-elementary-functions-and-domains",
+        "section": "Definition",
+        "quote": "Define $\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$."
+      }
+    ],
+    "affected_claims": [
+      "The canonical-constant bridge required by alg-na-certified-unit-circle-phase and thm-na-certified-unit-circle-phase-enclosure."
+    ],
+    "evidence": "Read the actual Definition and the full local arctangent/pi bridge proof. The supplier Step 1 readiness record is absent. The local proof is drafted with the exact dependency, but readiness remains escalated until the supplied definition receives a current Step 1 record."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-na-certified-unit-circle-phase",
+    "supplier": "batch-14-elementary-range-suppliers",
+    "status": "owner-escalation",
+    "batch": "14",
+    "required_interface": "For the exact rational phase input q, finite range evaluation must enclose cos(pi q) and sin(pi q), use outward-rounded arithmetic and Machin pi enclosures, and return a non-finite status instead of an uncertified finite value when a domain, width, or budget check fails.",
+    "supplier_item_ids": [
+      "def-dyadic-floating-point-format-and-directed-rounding",
+      "def-intervals-rectangles-and-complex-balls",
+      "def-outward-rounded-interval-and-ball-operations",
+      "def-real-elementary-functions-and-domains",
+      "alg-certified-elementary-range-evaluation",
+      "thm-real-elementary-range-enclosures",
+      "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-dyadic-floating-point-format-and-directed-rounding",
+        "section": "Definition",
+        "quote": "For a real $x$ with $|x|\\le N_{\\max}$, define $\\operatorname{rd}(x)$ as the greatest member of $\\mathbb F$ not exceeding $x$, and $\\operatorname{ru}(x)$ as the least member of $\\mathbb F$ not less than $x$."
+      },
+      {
+        "item": "def-intervals-rectangles-and-complex-balls",
+        "section": "Definition",
+        "quote": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic endpoints $a\\le b$."
+      },
+      {
+        "item": "def-outward-rounded-interval-and-ball-operations",
+        "section": "Definition",
+        "quote": "For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact endpoint formulas and round the lower endpoint down and the upper endpoint up in the format of [[def-dyadic-floating-point-format-and-directed-rounding]]."
+      },
+      {
+        "item": "def-real-elementary-functions-and-domains",
+        "section": "Definition",
+        "quote": "Define $\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$."
+      },
+      {
+        "item": "alg-certified-elementary-range-evaluation",
+        "section": "Definition",
+        "quote": "Input: a finite expression DAG with real interval or complex rectangle input, a finite dyadic format and an integer truncation index $N\\ge1$. All constants, including the Machin enclosure of $\\pi$, use the same fixed $N$ and format throughout a call."
+      },
+      {
+        "item": "thm-real-elementary-range-enclosures",
+        "section": "Statement",
+        "quote": "Every finite enclosure returned by [[alg-certified-elementary-range-evaluation]] for a real interval in the domain of $\\exp$, $\\ln$, $\\sqrt{\\phantom{x}}$, $\\arctan$, $\\sin$, $\\cos$, or $\\tan$ contains the exact range of that function on the represented domain."
+      },
+      {
+        "item": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+        "section": "Statement",
+        "quote": "For a finite expression DAG whose operation nodes all return finite enclosures, every exact node value from every admissible input assignment belongs to its computed node enclosure; in particular, the root enclosure contains the exact range."
+      }
+    ],
+    "affected_claims": [],
+    "evidence": "Read the actual definitions and full theorem proofs. The supplier bodies exist and their hypotheses are recorded above, but Step 1 readiness records for all seven supplier IDs are absent. The exact phase claims are therefore drafted but escalated; no supplier completion or acceptance is inferred."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-na-certified-unit-circle-phase-enclosure",
+    "supplier": "batch-14-range-and-rectangle-soundness",
+    "status": "owner-escalation",
+    "batch": "14",
+    "required_interface": "A finite real range enclosure contains the exact sine/cosine values; the complex rectangle representation and outward width arithmetic preserve those component enclosures.",
+    "supplier_item_ids": [
+      "def-intervals-rectangles-and-complex-balls",
+      "thm-real-elementary-range-enclosures",
+      "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-intervals-rectangles-and-complex-balls",
+        "section": "Definition",
+        "quote": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic endpoints $a\\le b$."
+      },
+      {
+        "item": "thm-real-elementary-range-enclosures",
+        "section": "Statement",
+        "quote": "Every finite enclosure returned by [[alg-certified-elementary-range-evaluation]] for a real interval in the domain of $\\exp$, $\\ln$, $\\sqrt{\\phantom{x}}$, $\\arctan$, $\\sin$, $\\cos$, or $\\tan$ contains the exact range of that function on the represented domain."
+      },
+      {
+        "item": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+        "section": "Statement",
+        "quote": "For a finite expression DAG whose operation nodes all return finite enclosures, every exact node value from every admissible input assignment belongs to its computed node enclosure; in particular, the root enclosure contains the exact range."
+      }
+    ],
+    "affected_claims": [
+      "The theorem that a certified complex phase output is within epsilon<=tau of the canonical Fourier phase, and every downstream phase-dependent error claim."
+    ],
+    "evidence": "The current item bodies and full proofs were inspected. Step 1 records for these three batch-14 suppliers are absent, so this exact direct edge remains owner-escalated."
+  }
+]

@@ -1,0 +1,73 @@
+---
+id: alg-bartels-stewart-sylvester-equation
+kind: algorithm
+title: "Finite-budget Bartels-Stewart solve for a Sylvester equation"
+status: draft
+origin: pipeline
+pipeline_run: numerical-optimization-dynamics-2026-10-16
+dependency_level: 5
+deps:
+  - def-sylvester-operator-and-separation-number
+  - thm-sylvester-unique-solvability-spectral-separation
+  - alg-finite-budget-francis-schur-reduction
+  - def-real-and-complex-schur-forms
+  - lem-sylvester-vectorization-isometry-and-kronecker-identity
+  - lem-small-block-determinant-separation-lower-bound
+  - lem-adjugate-inverse-formula-over-a-field
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  precheck: pending
+sources:
+  references:
+    - title: "Valeria Simoncini, Computational Methods for Linear Matrix Equations, SIAM Review 58(3), 2016"
+      url: https://www.dm.unibo.it/~simoncin/matrixeq.pdf
+    - title: "Elias Jarlebring, Numerical Methods for Lyapunov Equations, lecture notes in numerical linear algebra, 2017"
+      url: https://people.kth.se/~eliasj/NLA/matrixeqs.pdf
+---
+
+## Definition
+
+Let $F\in\{\mathbb R,\mathbb C\}$, $m,n\ge1$, $A\in F^{m\times m}$, $B\in F^{n\times n}$ and $C\in F^{m\times n}$. Inputs also include a pivot threshold $\tau\ge0$, Schur controls for each matrix, a fixed constant $c_0>0$, and finite sweep budgets $N_A\le c_0m$, $N_B\le c_0n$. All operations and equality tests in this specification are exact.
+
+1. Run [[alg-finite-budget-francis-schur-reduction]] on $A$ and $B$ with their supplied controls and budgets. If either call does not return `Schur-computed`, return `schur-failure` with the underlying status.
+
+2. Treat the returned factors as candidates and verify the exact certificates. In the complex branch check $U^*U=I$, $A=UTU^*$, and upper triangularity of $T$; in the real branch check $U^TU=I$, $A=UTU^T$, and the real block upper-triangular form of [[def-real-and-complex-schur-forms]]. Perform the corresponding checks for $B=VSV^*$. If any check fails, return `schur-certificate-failure`.
+
+3. Set $D=U^*CV$. Use the column-vectorization and Kronecker convention of [[lem-sylvester-vectorization-isometry-and-kronecker-identity]]. Partition $T$ into diagonal blocks $T_{ii}$ and $S$ into diagonal blocks $S_{jj}$ as in the exact real or complex Schur form. Traverse $j$ from left to right and, for each $j$, traverse $i$ from bottom to top. Form
+
+$$
+F_{ij}=D_{ij}-\sum_{k>i}T_{ik}Y_{kj}-\sum_{\ell<j}Y_{i\ell}S_{\ell j}.
+$$
+
+The terms on the right have already been computed in this traversal order. Define $\Phi_{ij}(Z)=T_{ii}Z+ZS_{jj}$ and its matrix representation $M_{ij}=I_{s_j}\otimes T_{ii}+S_{jj}^T\otimes I_{r_i}$ on column-vectorized blocks, where $r_i,s_j\in\{1,2\}$ are the block sizes. Let $q=r_is_j\le4$ and compute $\delta(M_{ij})$ from [[lem-small-block-determinant-separation-lower-bound]]. If $\det(M_{ij})=0$, return `singular-pivot`; if $\det(M_{ij})\ne0$ and $\delta(M_{ij})\le\tau$, return `pivot-separation-failure` because the requested pivot bound is not certified. Otherwise use the cofactor adjugate formula of [[lem-adjugate-inverse-formula-over-a-field]] to set $\operatorname{vec}(Y_{ij})=\operatorname{adj}(M_{ij})\operatorname{vec}(F_{ij})/\det(M_{ij})$ and store $Y_{ij}$. The local dimension is at most four in the real block case and one in the complex triangular case.
+
+4. After all blocks are solved, return `success` and $X=UYV^*$, together with the exact residual $C-(AX+XB)$. No computed Schur candidate is accepted as an exact factorization unless step 2 verifies its defining equalities.
+
+## Facts & Assumptions
+
+**Given:** The matrices, finite Schur controls and budgets, threshold $\tau$, and exact-arithmetic semantics stated above.
+
+[F1] [[alg-finite-budget-francis-schur-reduction]]: The finite computed reduction returns a product representation, a candidate factor, residual diagnostic and explicit success, budget or failure status; it asserts no unconditional convergence of its shift schedule.
+
+[F2] [[def-real-and-complex-schur-forms]]: A complex Schur pair has a unitary factor and upper triangular factor; a real Schur pair has an orthogonal factor and block upper-triangular factor with the specified real diagonal blocks.
+
+[F3] [[def-sylvester-operator-and-separation-number]]: The Sylvester operator is $\mathcal S_{A,B}(X)=AX+XB$ and its separation is its smallest singular value under the Frobenius inner product.
+
+[F4] [[lem-small-block-determinant-separation-lower-bound]]: For the local matrix $M_{ij}$, the computed $\delta(M_{ij})$ is a lower bound for $\sigma_{\min}(M_{ij})$.
+
+[F5] [[lem-adjugate-inverse-formula-over-a-field]]: If $\det(M_{ij})\ne0$, then $M_{ij}^{-1}=\operatorname{adj}(M_{ij})/\det(M_{ij})$.
+
+## Proof
+
+
+1.1 Each Schur call in step 1 has a finite sweep budget and finite control tables, so by [F1] it terminates with one of its explicit statuses. The procedure immediately returns if either status is not `Schur-computed`. [given, F1]
+
+1.2 Each test in step 2 consists of finitely many exact matrix-entry equalities and triangular or block-pattern checks. It therefore either returns `schur-certificate-failure` or proceeds with factors satisfying the stated exact Schur identities. [given, F2]
+
+1.3 The block traversal in step 3 has finitely many pairs $(i,j)$. For each pair, the sums have finitely many terms and the local matrix has dimension at most four. If the procedure continues to the inverse formula, [F4] implies $\sigma_{\min}(M_{ij})\ge\delta(M_{ij})>\tau\ge0$, so the block map is invertible; the explicit determinant check and [F5] then justify the stated adjugate solve. Otherwise a declared status is returned. [given, F3, F4, F5, algebra]
+
+2.1 Thus the full procedure terminates after a finite number of block operations with one declared failure status or the `success` output of step 4. [step 1.1, step 1.2, step 1.3] ∎

@@ -1,0 +1,200 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "source": "alg-composite-simpson-rule",
+  "checks": [
+    {
+      "id": "alg-tensor-simpson-force-evaluator",
+      "path": "items/alg-tensor-simpson-force-evaluator.md",
+      "current_interface": "## Definition\n\nInput real endpoints $a,b,c,d$, integer panel counts $n_x,n_y$, and an exact evaluation oracle that, when queried at a point, returns either a value in $\\mathbb R^2$ or evaluation-failure. First, if $a\\ge b$ or $c\\ge d$, return invalid-domain without querying the oracle. Next, if either panel count is odd or is less than two, return invalid-panel-count without querying the oracle. For the remaining inputs set $R=[a,b]\\times[c,d]$, $h_x=(b-a)/n_x$, $h_y=(d-c)/n_y$, $x_i=a+ih_x$ for $0\\le i\\le n_x$, and $y_j=c+jh_y$ for $0\\le j\\le n_y$. Query the oracle at every grid point in lexicographic order with $i$ first and $j$ second, storing the returned values. If a query fails, stop at the first such point and return evaluation-failure with that point. Otherwise, for each $j$ form the continuous piecewise-linear interpolant through the stored values $F(x_i,y_j)$ and apply [[alg-composite-simpson-rule]] componentwise in $x$ to this interpolant, obtaining $G_j=Q_xF(\\cdot,y_j)$. Form the continuous piecewise-linear interpolant through the stored $G_j$ and apply the same valid Simpson procedure componentwise in $y$ to obtain $Q_yG=Q_yQ_xF$. Each interpolant is queried only at its stored grid nodes, so no new oracle call is needed. Both calls to the supplier use strictly ordered endpoints and even panel counts at least two. This exact-real procedure makes finitely many evaluations and sums; it makes no floating-point roundoff or force-accuracy claim, and error control is a separate result.\n",
+      "actual_use_excerpts": [
+        "Input real endpoints $a,b,c,d$, integer panel counts $n_x,n_y$, and an exact evaluation oracle that, when queried at a point, returns either a value in $\\mathbb R^2$ or evaluation-failure. First, if $a\\ge b$ or $c\\ge d$, return invalid-domain without querying the oracle. Next, if either panel count is odd or is less than two, return invalid-panel-count without querying the oracle. For the remaining inputs set $R=[a,b]\\times[c,d]$, $h_x=(b-a)/n_x$, $h_y=(d-c)/n_y$, $x_i=a+ih_x$ for $0\\le i\\le n_x$, and $y_j=c+jh_y$ for $0\\le j\\le n_y$. Query the oracle at every grid point in lexicographic order with $i$ first and $j$ second, storing the returned values. If a query fails, stop at the first such point and return evaluation-failure with that point. Otherwise, for each $j$ form the continuous piecewise-linear interpolant through the stored values $F(x_i,y_j)$ and apply [[alg-composite-simpson-rule]] componentwise in $x$ to this interpolant, obtaining $G_j=Q_xF(\\cdot,y_j)$. Form the continuous piecewise-linear interpolant through the stored $G_j$ and apply the same valid Simpson procedure componentwise in $y$ to obtain $Q_yG=Q_yQ_xF$. Each interpolant is queried only at its stored grid nodes, so no new oracle call is needed. Both calls to the supplier use strictly ordered endpoints and even panel counts at least two. This exact-real procedure makes finitely many evaluations and sums; it makes no floating-point roundoff or force-accuracy claim, and error control is a separate result.\n"
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "def-smolyak-univariate-level-hierarchy",
+      "path": "items/def-smolyak-univariate-level-hierarchy.md",
+      "current_interface": "## Definition\n\nLet $Q:[0,1]\\to\\mathbb R$ be a finite quadrature functional of the form\n$$Q(g)=\\sum_{i=1}^{m}w_i g(x_i),$$\nwhere $m\\ge1$, the nodes $x_i\\in[0,1]$ are distinct, and $w_i\\in\\mathbb R$.\nA one-dimensional **nested level hierarchy** is a sequence\n$(Q_\\ell)_{\\ell\\in\\mathbb N_0}$ of such functionals, with node sets\n$X_\\ell=\\{x_{\\ell,i}:1\\le i\\le m_\\ell\\}$ satisfying\n$X_{\\ell-1}\\subseteq X_\\ell$ for every $\\ell\\ge1$.\nSet $Q_{-1}:=0$, the zero functional, and define the **detail functional**\n$$\\Delta_0:=Q_0,\\qquad \\Delta_\\ell:=Q_\\ell-Q_{\\ell-1}\\quad(\\ell\\ge1).$$\nFinite sums are as in [[def-finite-sum]]. For each $d\\ge1$, the integration\nfunctional used below is $I_d(f):=\\int_{[0,1]^d}f$, with the multiple Riemann\nintegral convention of [[def-multidimensional-darboux-integral]].\n\nThe convergence and rate results in this pair use the **dyadic composite-\nSimpson hierarchy**\n$$Q_\\ell(g):=Q_S(g;0,1,2^{\\ell+1}),\\qquad X_\\ell=\\{k/2^{\\ell+1}:0\\le k\\le2^{\\ell+1}\\},$$\nwhere $Q_S$ is the even-panel rule of [[alg-composite-simpson-rule]]. The\nnumber of panels is even and at least two. The sets are nested because\n$k/2^{\\ell}=2k/2^{\\ell+1}$, and their weights are nonnegative with total\nweight one: each two-panel block has nonnegative weights $H(1,4,1)/6$\nsumming to its length $H$, and the blocks partition an interval of length one.\nLevel zero has nodes $0,1/2,1$ and weights $1/6,4/6,1/6$.\n\nFor a multi-index $\\ell=(\\ell_1,\\ldots,\\ell_d)\\in\\mathbb N_0^d$, any tensor\nproduct $R_{\\ell_1}^{(1)}\\otimes\\cdots\\otimes R_{\\ell_d}^{(d)}$ of these\nfinite functionals means the finite weighted functional obtained by multiplying\nthe coordinate weights and evaluating on the corresponding node tuples. In\nparticular, $\\Delta_\\ell:=\\Delta_{\\ell_1}^{(1)}\\otimes\\cdots\\otimes\n\\Delta_{\\ell_d}^{(d)}$. No exactness or error property is implied by the\nnotation alone.\n",
+      "actual_use_excerpts": [
+        "The convergence and rate results in this pair use the **dyadic composite-\nSimpson hierarchy**\n$$Q_\\ell(g):=Q_S(g;0,1,2^{\\ell+1}),\\qquad X_\\ell=\\{k/2^{\\ell+1}:0\\le k\\le2^{\\ell+1}\\},$$\nwhere $Q_S$ is the even-panel rule of [[alg-composite-simpson-rule]]. The\nnumber of panels is even and at least two. The sets are nested because\n$k/2^{\\ell}=2k/2^{\\ell+1}$, and their weights are nonnegative with total\nweight one: each two-panel block has nonnegative weights $H(1,4,1)/6$\nsumming to its length $H$, and the blocks partition an interval of length one.\nLevel zero has nodes $0,1/2,1$ and weights $1/6,4/6,1/6$."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "lem-smolyak-mixed-simpson-detail-decay",
+      "path": "items/lem-smolyak-mixed-simpson-detail-decay.md",
+      "current_interface": "## Statement\n\nUse the dyadic composite-Simpson hierarchy of\n[[def-smolyak-univariate-level-hierarchy]]. Let $d\\ge1$. For\n$S=\\{j_1<\\cdots<j_k\\}\\subseteq\\{1,\\ldots,d\\}$, define\n$$D_Sf:=\\partial_{x_{j_k}}^4\\cdots\\partial_{x_{j_1}}^4f,$$\nso these derivatives are applied in increasing coordinate order; set\n$D_\\varnothing f=f$. Assume every $D_Sf$ is continuous on the closed cube,\nwith the one-sided endpoint convention of\n[[def-higher-derivatives-and-smoothness]], and choose finite bounds $M_S\\ge0$\nsuch that $|D_Sf(x)|\\le M_S$ on $[0,1]^d$. For\n$\\ell\\in\\mathbb N_0^d$, put $S(\\ell):=\\{j:\\ell_j\\ge1\\}$ and\n$$\\delta_\\ell(f):=(\\Delta_{\\ell_1}^{(1)}\\otimes\\cdots\\otimes\\Delta_{\\ell_d}^{(d)})(f).$$\nThen\n$$|\\delta_\\ell(f)|\\le M_{S(\\ell)}\\left(\\frac{17}{2880}\\right)^{|S(\\ell)|}16^{-\\sum_{j\\in S(\\ell)}\\ell_j}.$$\nMoreover, for every finite $F\\subseteq\\mathbb N_0^d$,\n$$\\sum_{\\ell\\in F}|\\delta_\\ell(f)|\\le\\sum_{S\\subseteq\\{1,\\ldots,d\\}}M_S\\left(\\frac{17}{43200}\\right)^{|S|}<\\infty.$$\n\n",
+      "actual_use_excerpts": [
+        "[F3] [[alg-composite-simpson-rule]]: the two-panel level-zero rule has nonnegative weights $1/6,4/6,1/6$, which sum to one."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "ex-smolyak-signed-weights-polynomial-chaos-coefficient",
+      "path": "items/ex-smolyak-signed-weights-polynomial-chaos-coefficient.md",
+      "current_interface": "## Example\n\nFor $k=1,\\ldots,8$, put $\\phi(x)=\\prod_{k=1}^8(1-8x/k)^2$ on $[0,1]$ and\n$u(x,y)=\\phi(x)\\phi(y)$. This is a nonnegative polynomial. Under the uniform\nlaw on $[0,1]^2$, the constant polynomial-chaos coefficient is\n$c_{00}=\\int_{[0,1]^2}u>0$. Yet the level-two composite-Simpson Smolyak rule\non $\\Lambda_2=\\{(i,j):i+j\\le2\\}$ returns $-1/144$. This shows why signed\nSmolyak weights matter when integrating chaos coefficients. Any tensor\nproduct of Gaussian rules with positive coordinate weights returns a\nnonnegative value on $u$; no Gaussian exactness for this high-degree\npolynomial is asserted.\n\n",
+      "actual_use_excerpts": [
+        "[F2] [[alg-composite-simpson-rule]]: the endpoint weight at level $\\ell$ is $1/(3\\cdot2^{\\ell+1})$, and the other weights are nonnegative."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "ex-cubic-exact-for-composite-simpson",
+      "path": "items/ex-cubic-exact-for-composite-simpson.md",
+      "current_interface": "## Example\n\nOn $[0,2]$, let $f(x)=x^3$. With $n=2$ and $h=1$, the Simpson value is\n\n$$Q_S(f;0,2,2)=\\frac13\\bigl(f(0)+4f(1)+f(2)\\bigr)=4,$$\n\nwhich equals the exact integral $\\int_0^2x^3\\,dx=4$. The full two-panel block\nis exact because the rule annihilates the Peano remainder of every cubic.\n\n",
+      "actual_use_excerpts": [
+        "[F1] [[alg-composite-simpson-rule]]: for $n=2$, the returned value is\n$\\frac h3(f(x_0)+4f(x_1)+f(x_2))$."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "thm-certified-adaptive-simpson-enclosure",
+      "path": "items/thm-certified-adaptive-simpson-enclosure.md",
+      "current_interface": "## Statement\n\nAssume the input hypotheses and the two sound enclosure-oracle contracts in\n[[alg-certified-adaptive-simpson]]. Whenever the algorithm returns `certified`\nor `inconclusive` with a finite enclosure $C=[L,U]$, the exact Riemann\nintegral $I=\\int_a^b f(x)\\,dx$ belongs to $C$. Its reported center\n$q=(L+U)/2$ and half-width $r=(U-L)/2$ satisfy $|I-q|\\le r$. A `certified`\nstatus additionally means $r\\le\\tau$. The algorithm terminates after at\nmost $P$ recursive panel calls. If an oracle reports failure or returns a\nmalformed or non-finite interval, or an interval operation is non-finite, the\nalgorithm returns `failure` and asserts no finite enclosure. An `inconclusive` result\ndoes not assert that the requested tolerance was met.\n\n",
+      "actual_use_excerpts": [
+        "[F1] [[alg-composite-simpson-rule]]: for $n=2$ the exact panel value is\n$L(f)=\\frac{v-u}{6}(f(u)+4f((u+v)/2)+f(v))$."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "lem-simpson-panel-peano-kernel",
+      "path": "items/lem-simpson-panel-peano-kernel.md",
+      "current_interface": "## Statement\n\nLet $a<b$, put $L=b-a$ and $m=(a+b)/2$, and let $f\\in C^4([a,b])$. Define\nthe one-block Simpson value and its kernel by\n\n$$S(f;a,b):=\\frac{L}{6}\\bigl(f(a)+4f(m)+f(b)\\bigr),\\qquad K_{a,b}(x):=\\begin{cases}\\frac{(x-a)^3(3(x-a)-2L)}{72},&a\\le x\\le m,\\\\\\frac{(b-x)^3(3(b-x)-2L)}{72},&m\\le x\\le b.\\end{cases}$$\n\nThen\n\n$$\\int_a^b f(x)\\,dx-S(f;a,b)=\\int_a^bK_{a,b}(x)f^{(4)}(x)\\,dx,$$\n\nand $K_{a,b}\\le0$ with\n$\\int_a^b|K_{a,b}(x)|\\,dx=L^5/2880$. The value $S(f;a,b)$ is the one-block\nspecialization of [[alg-composite-simpson-rule]].\n\n",
+      "actual_use_excerpts": [
+        "and $K_{a,b}\\le0$ with\n$\\int_a^b|K_{a,b}(x)|\\,dx=L^5/2880$. The value $S(f;a,b)$ is the one-block\nspecialization of [[alg-composite-simpson-rule]].",
+        "[F1] [[alg-composite-simpson-rule]]: on two subintervals of equal width\n$L/2$, the Simpson output is $\\frac L6(f(a)+4f(m)+f(b))$."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "ex-adaptive-simpson-leading-error-cancellation",
+      "path": "items/ex-adaptive-simpson-leading-error-cancellation.md",
+      "current_interface": "## Example\n\nFor $f(x)=x^6-5x^4$ on $[0,1]$, the leading coefficient\n$-(1/180)\\int_0^1 f^{(4)}$ in\n[[thm-simpson-richardson-error-estimator-asymptotic]] vanishes, but the\none-level indicator and the refined Simpson error are nonzero. In fact, the\nindicator is $21/5$ times the true refined error in this exact example.\n\n",
+      "actual_use_excerpts": [
+        "[F1] [[alg-composite-simpson-rule]]: on an even uniform grid,\n$Q_S=(h/3)\\sum_{j<n/2}(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2}))$."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+      "path": "items/alg-adaptive-simpson-with-finite-depth-and-panel-cap.md",
+      "current_interface": "## Definition\n\nInput $a<b$, an absolute indicator tolerance $\\tau>0$, a remaining depth\n$D\\in\\mathbb N$ and a positive panel-call budget $P\\in\\mathbb N$, and a\ndeterministic evaluation routine $\\operatorname{Eval}$ that returns a finite\nreal value at a requested node or reports failure. It reports failure when a\nrequired node cannot be evaluated, including when its midpoint is\nunrepresentable in the evaluator's arithmetic. Apply the exact-real Simpson\nformulas of [[alg-composite-simpson-rule]] to the returned values;\nfloating-point rounding accuracy is not asserted.\n\nDefine the recursive call $A(u,v,d,p,t)$ for $u<v$, $d\\ge0$, $p\\ge1$ and\n$t>0$ as follows.\n\n1. Compute $m=(u+v)/2$ and the five values of $\\operatorname{Eval}$ at\n   $u,(3u+v)/4,m,(u+3v)/4,v$. On failure, return `failure` with no estimate.\n2. Compute $S_0=Q_S(f;u,v,2)$ and $S_1=Q_S(f;u,v,4)$ from the two nested\n   grids of [[def-adaptive-simpson-refinement-indicator]], and put\n   $\\eta=\\eta_2(f;u,v)=|S_1-S_0|/15$.\n3. If $\\eta\\le t$, return (`accepted`, estimate $S_1$, indicator $\\eta$).\n4. If $\\eta>t$ and either $d=0$ or $p<3$, return (`cap-reached`, estimate\n   $S_1$, indicator $\\eta$).\n5. Otherwise put $p_L=\\lfloor(p-1)/2\\rfloor$ and\n   $p_R=\\lceil(p-1)/2\\rceil$. Recursively call\n   $A(u,m,d-1,p_L,t/2)$ and $A(m,v,d-1,p_R,t/2)$. If either returns failure,\n   return failure. Otherwise return the sum of their estimates and indicators,\n   with status `cap-reached` if either child has that status and `accepted`\n   otherwise.\n\nThe public call is $A(a,b,D,P,\\tau)$. The budget counts recursive panel calls;\neach call uses at most five point evaluations. `accepted` means that the\nreturned leaf indicators sum to at most $\\tau$. Neither that status nor the\nindicator is a certified true-error statement. A cap result is an estimate\nwith explicit `cap-reached` status, not a successful tolerance claim.\n",
+      "actual_use_excerpts": [
+        "Input $a<b$, an absolute indicator tolerance $\\tau>0$, a remaining depth\n$D\\in\\mathbb N$ and a positive panel-call budget $P\\in\\mathbb N$, and a\ndeterministic evaluation routine $\\operatorname{Eval}$ that returns a finite\nreal value at a requested node or reports failure. It reports failure when a\nrequired node cannot be evaluated, including when its midpoint is\nunrepresentable in the evaluator's arithmetic. Apply the exact-real Simpson\nformulas of [[alg-composite-simpson-rule]] to the returned values;\nfloating-point rounding accuracy is not asserted."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "def-adaptive-simpson-refinement-indicator",
+      "path": "items/def-adaptive-simpson-refinement-indicator.md",
+      "current_interface": "## Definition\n\nLet $a<b$, let $n\\ge2$ be even, and let $f$ be real-valued at the nodes of\nthe uniform grids with $n$ and $2n$ subintervals. The **coarse Simpson value**\nis $S_0=Q_S(f;a,b,n)$ and the **refined value** is\n$S_1=Q_S(f;a,b,2n)$, using [[alg-composite-simpson-rule]]. The signed\n**refinement indicator** is $(S_1-S_0)/15$ and its magnitude is\n$$\\eta_n(f;a,b):=\\frac{|S_1-S_0|}{15}.$$\n\nFor the local two-panel case $n=2$, $S_1$ is also the sum of the two\none-block Simpson values on the halves of $[a,b]$.\n\nThis definition alone is not a bound on the true error.\n\n",
+      "actual_use_excerpts": [
+        "Let $a<b$, let $n\\ge2$ be even, and let $f$ be real-valued at the nodes of\nthe uniform grids with $n$ and $2n$ subintervals. The **coarse Simpson value**\nis $S_0=Q_S(f;a,b,n)$ and the **refined value** is\n$S_1=Q_S(f;a,b,2n)$, using [[alg-composite-simpson-rule]]. The signed\n**refinement indicator** is $(S_1-S_0)/15$ and its magnitude is\n$$\\eta_n(f;a,b):=\\frac{|S_1-S_0|}{15}.$$"
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "ex-quadratic-exact-for-composite-simpson",
+      "path": "items/ex-quadratic-exact-for-composite-simpson.md",
+      "current_interface": "## Example\n\nOn $[0,2]$, the function $f(x)=x^2$ has exact integral $8/3$. With $n=2$,\n$h=1$, and the composite Simpson rule,\n\n$$Q_S(f;0,2,2)=\\frac13\\bigl(f(0)+4f(1)+f(2)\\bigr)=\\frac83.$$\n\nThis is the quadratic case of exactness through degree three.\n\n",
+      "actual_use_excerpts": [
+        "[F1] [[alg-composite-simpson-rule]]: for $n=2$, the returned value is\n$\\frac h3(f(x_0)+4f(x_1)+f(x_2))$."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "lem-composite-simpson-asymptotic-error-expansion",
+      "path": "items/lem-composite-simpson-asymptotic-error-expansion.md",
+      "current_interface": "## Statement\n\nLet $a<b$, let $k\\ge1$ be an integer, set $n_k=2^k$ and\n$h_k=(b-a)/n_k$, and let $Q_k=Q_S(f;a,b,n_k)$ for $f\\in C^4([a,b])$. With\n$I=\\int_a^b f(x)\\,dx$, one has\n$$I-Q_k=-\\frac{h_k^4}{180}\\int_a^b f^{(4)}(x)\\,dx+o(h_k^4)\\qquad(k\\to\\infty).$$\nHere $r_k=o(h_k^4)$ means $r_k/h_k^4\\to0$ along this sequence. The\nintegral is the Riemann integral.\n\n",
+      "actual_use_excerpts": [
+        "[F10] [[alg-composite-simpson-rule]]: for even $n\\ge2$, $Q_S$ is the sum of\nthe one-block Simpson values on the adjacent panels\n$[x_{2j},x_{2j+2}]$, $0\\le j<n/2$."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "ex-adaptive-simpson-misses-narrow-feature",
+      "path": "items/ex-adaptive-simpson-misses-narrow-feature.md",
+      "current_interface": "## Example\n\nOn $[0,1]$, let\n$$f(x)=\\prod_{r=0}^{4}(x-r/4)^2.$$\nThe root indicator is zero, so for every $\\tau>0$ the call to\n[[alg-adaptive-simpson-with-finite-depth-and-panel-cap]] with $D=0$ and\n$P=1$ accepts its root panel and returns estimate $0$. Choose\n$\\tau=C/32$; for this tolerance the true error is strictly greater than\n$\\tau$.\n\n",
+      "actual_use_excerpts": [
+        "[F6] [[alg-composite-simpson-rule]]: for an even grid, the Simpson value is\nthe stated weighted sum of its endpoint, midpoint and quarter-grid values."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "thm-composite-simpson-exact-through-degree-three",
+      "path": "items/thm-composite-simpson-exact-through-degree-three.md",
+      "current_interface": "## Statement\n\nLet $a<b$, let $n\\ge2$ be an even integer, and let\n$p(x)=c_0+c_1x+c_2x^2+c_3x^3$ with real coefficients. Then\n\n$$\\int_a^b p(x)\\,dx=Q_S(p;a,b,n),$$\n\nwhere $Q_S$ is the composite Simpson value of\n[[alg-composite-simpson-rule]].\n\n",
+      "actual_use_excerpts": [
+        "where $Q_S$ is the composite Simpson value of\n[[alg-composite-simpson-rule]].",
+        "[F1] [[alg-composite-simpson-rule]]: the composite value is\n$\\frac h3\\sum_{j<n/2}(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2}))$."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "lem-smolyak-dyadic-tensor-simpson-convergence",
+      "path": "items/lem-smolyak-dyadic-tensor-simpson-convergence.md",
+      "current_interface": "## Statement\n\nLet $d\\ge1$ and let $f:[0,1]^d\\to\\mathbb R$ be continuous. For the dyadic\ncomposite-Simpson hierarchy of [[def-smolyak-univariate-level-hierarchy]],\nthe tensor product $Q_L^{\\otimes d}$ converges to the multiple Riemann\nintegral:\n$$\\lim_{L\\to\\infty} Q_L^{\\otimes d}(f)=I_d(f).$$\n\n",
+      "actual_use_excerpts": [
+        "[F7] [[alg-composite-simpson-rule]]: every two-panel Simpson block has coefficients proportional to $1,4,1$, which are nonnegative and sum to $6$."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "alg-chebyshev-composite-simpson-weighted-mass-matrix",
+      "path": "items/alg-chebyshev-composite-simpson-weighted-mass-matrix.md",
+      "current_interface": "## Definition\n\nInput a polynomial degree $N\\ge0$ and an even integer $M\\ge2$ specifying the number of uniform subintervals of $[0,\\pi]$. For $0\\le i,j\\le N$, form\n$$\ng_{ij}(\\theta)=T_i(\\cos\\theta)T_j(\\cos\\theta)\n$$\nand return\n$$\nM^{S}_{ij}:=Q_S(g_{ij};0,\\pi,M),\n$$\nwhere $Q_S$ is the composite Simpson procedure from [[alg-composite-simpson-rule]]. By the Chebyshev multiple-angle identity, $g_{ij}(\\theta)=\\cos(i\\theta)\\cos(j\\theta)$, so this is the composite-Simpson approximation of the corresponding arcsine-weighted mass entry. The procedure uses exact real arithmetic and asserts no quadrature or floating-point accuracy beyond a separately proved bound.\n\n",
+      "actual_use_excerpts": [
+        "Input a polynomial degree $N\\ge0$ and an even integer $M\\ge2$ specifying the number of uniform subintervals of $[0,\\pi]$. For $0\\le i,j\\le N$, form\n$$\ng_{ij}(\\theta)=T_i(\\cos\\theta)T_j(\\cos\\theta)\n$$\nand return\n$$\nM^{S}_{ij}:=Q_S(g_{ij};0,\\pi,M),\n$$\nwhere $Q_S$ is the composite Simpson procedure from [[alg-composite-simpson-rule]]. By the Chebyshev multiple-angle identity, $g_{ij}(\\theta)=\\cos(i\\theta)\\cos(j\\theta)$, so this is the composite-Simpson approximation of the corresponding arcsine-weighted mass entry. The procedure uses exact real arithmetic and asserts no quadrature or floating-point accuracy beyond a separately proved bound."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "thm-composite-simpson-error-bound",
+      "path": "items/thm-composite-simpson-error-bound.md",
+      "current_interface": "## Statement\n\nLet $a<b$, let $n\\ge2$ be an even integer, and put $h=(b-a)/n$. If\n$f\\in C^4([a,b])$, set $M_4=\\max_{x\\in[a,b]}|f^{(4)}(x)|$. Then the value\n$Q_S(f;a,b,n)$ of [[alg-composite-simpson-rule]] satisfies\n\n$$\\left|\\int_a^b f(x)\\,dx-Q_S(f;a,b,n)\\right|\\le\\frac{(b-a)h^4}{180}M_4.$$\n\nThe integral is the Riemann integral. This is an exact-arithmetic quadrature\nbound; evaluation and summation roundoff are not included.\n\n",
+      "actual_use_excerpts": [
+        "Let $a<b$, let $n\\ge2$ be an even integer, and put $h=(b-a)/n$. If\n$f\\in C^4([a,b])$, set $M_4=\\max_{x\\in[a,b]}|f^{(4)}(x)|$. Then the value\n$Q_S(f;a,b,n)$ of [[alg-composite-simpson-rule]] satisfies",
+        "[F4] [[alg-composite-simpson-rule]]: the composite value is the sum, over\n$j<n/2$, of $\\frac h3(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2}))$."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "ex-adaptive-simpson-cap-reached",
+      "path": "items/ex-adaptive-simpson-cap-reached.md",
+      "current_interface": "## Example\n\nLet $f(x)=1/(1+10000(x-1/2)^2)$ on $[0,1]$. With tolerance\n$\\tau=1/1000$, depth cap $D=0$, and panel-call budget $P=1$,\n[[alg-adaptive-simpson-with-finite-depth-and-panel-cap]] returns the refined\nestimate with `cap-reached` status.\n\n",
+      "actual_use_excerpts": [
+        "[F3] [[alg-composite-simpson-rule]]: on an even uniform grid, the composite\nSimpson value is the weighted sum of the sampled endpoint, midpoint and\nquarter-grid values."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    },
+    {
+      "id": "thm-tensor-simpson-force-error",
+      "path": "items/thm-tensor-simpson-force-error.md",
+      "current_interface": "## Statement\n\nLet $a<b$, $c<d$, let $n_x,n_y\\ge2$ be even integers, and set $R=[a,b]\\times[c,d]$, $h_x=(b-a)/n_x$, $h_y=(d-c)/n_y$. If $F\\in C^4(R,\\mathbb R^2)$ and\n$$M_{40}=\\max_R|\\partial_x^4F|,\\qquad M_{04}=\\max_R|\\partial_y^4F|,$$\nthen the tensor evaluator of [[alg-tensor-simpson-force-evaluator]] satisfies\n$$\\left|\\int_R F-Q_yQ_xF\\right|\\le\\frac{\\sqrt2\\,|R|}{180}\\bigl(h_x^4M_{40}+h_y^4M_{04}\\bigr),\\qquad |R|=(b-a)(d-c).$$\nThis is an exact-arithmetic quadrature bound, not a roundoff estimate.\n\n",
+      "actual_use_excerpts": [
+        "[F3] The composite Simpson weights are nonnegative and sum to the interval length ([[alg-composite-simpson-rule]])."
+      ],
+      "decision": "accept-unchanged-valid-branch",
+      "reason": "Actual use takes ordered endpoints and even panel count >=2 or specializes the same exact Simpson weighted sum. Moving invalid-grid to a pre-evaluation guard changes no valid node/weight/value, regularity premise, error or budget guarantee."
+    }
+  ],
+  "focused_scope": "Actual direct-use interfaces/passages, with full tensor evaluator/error proof read. No unrelated consumer mathematical reaudit claimed."
+}

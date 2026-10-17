@@ -1,0 +1,1199 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "25",
+  "note": "Contracts reflect the final authored proof steps; finite-precision application remains explicitly conditional on the unresolved batch-1 supplier recorded in batch notes.",
+  "scope": [
+    "lem-hilbert-tikhonov-normal-operator-invertible",
+    "lem-truncated-svd-bias-and-data-noise-decomposition",
+    "lem-hilbert-tikhonov-noise-amplification-bound",
+    "thm-tikhonov-error-chain-with-discretization-and-residual",
+    "cor-l2-inverse-error-budget-and-cross-term-condition",
+    "ex-tikhonov-normal-equation-residual-bound",
+    "ex-diagonal-inverse-noise-amplification",
+    "ex-tikhonov-bias-noise-tradeoff",
+    "ex-quadrature-discretization-residual-before-inversion"
+  ],
+  "contracts": {
+    "lem-hilbert-tikhonov-normal-operator-invertible": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "$$\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "A $\\mathbb K$-linear map $T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a real constant $C \\ge 0$ such that $$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space, $$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $M$ be a closed linear subspace of a real or complex Hilbert space $H$. Then every $x\\in H$ has a unique decomposition $$x=m+n,\\qquad m\\in M,\\quad n\\in M^\\perp ,$$ so that $H=M\\oplus M^\\perp$ as a direct sum of the subspace $M$ and its orthogonal complement.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "$\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "The **operator norm** of $T$ is $$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-orthogonality-and-orthogonal-complement",
+          "source_section": "Definition",
+          "quote": "For a subset $S\\subseteq V$ the **orthogonal complement** of $S$ is $$S^\\perp:=\\{\\,v\\in V : \\langle v,s\\rangle=0 \\text{ for every } s\\in S\\,\\}.$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The bounded adjoint makes $B_lambda$ linear and bounded; its adjoint identity gives the coercive quadratic form $langle B_lambda x,x\rangle=|Ax|^2+lambda|x|^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Cauchy–Schwarz and $lambda>0$ give $|B_lambda x|gelambda|x|$; this proves injectivity and, by completeness, closed range.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A vector orthogonal to the range is in the kernel by symmetry, hence is zero by injectivity.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Countable-Choice orthogonal decomposition makes the closed dense range all of $X$, and the coercive inequality bounds the inverse.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F7",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns operators on Hilbert spaces; the zero-space case is covered under degenerate."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly covers $x=0$; when $A=0$, $B_lambda=lambda I$ and steps 3.1–2.2 still give the inverse bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and steps 1.1–2.2 hold for one-dimensional Hilbert spaces without a dimension restriction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For the zero Hilbert space, the unique endomorphism is bijective; step 2.1 and step 4.1 remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The endpoint $\\lambda=0$ is excluded by the stated hypothesis $\\lambda>0$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 invokes the orthogonal-decomposition theorem under exactly Countable Choice [A1,F5]; no full Choice is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ]
+    },
+    "lem-hilbert-tikhonov-noise-amplification-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hilbert-tikhonov-normal-operator-invertible",
+          "source_section": "Statement",
+          "quote": "Then $B_\\lambda:X\\to X$ is bijective and $$\\|B_\\lambda^{-1}\\|\\le\\frac1\\lambda.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "$$\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "$\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space, $$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "The **operator norm** of $T$ is $$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The normal equation for $x=R_lambda g$ converts its energy into the inner product $langle g,Ax\rangle$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Cauchy–Schwarz and completion of a scalar square give $lambda|x|^2le|g|^2/4$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Taking the unit-ball supremum gives the operator norm bound.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is pointwise for a vector $g$; zero data is handled in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "With $g=0$, step 1.1 forces $x=0$ and the estimate in step 2.1 is equality at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The energy proof is dimension-free and therefore includes one-dimensional Hilbert spaces (Statement)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For $A=0$, $R_lambda=0$ and the claimed bound holds (Statement)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The case $\\lambda=0$ is excluded; invertibility is asserted only for $\\lambda>0$. "
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The adjoint definition is used under the stated Countable Choice assumption [A1]; no full Choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-sided operator norm bound and contains no biconditional implication to split."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-sided operator norm bound and contains no biconditional implication to split."
+        }
+      ]
+    },
+    "thm-tikhonov-error-chain-with-discretization-and-residual": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-hilbert-tikhonov-normal-operator-invertible",
+          "source_section": "Statement",
+          "quote": "Then $B_\\lambda:X\\to X$ is bijective and $$\\|B_\\lambda^{-1}\\|\\le\\frac1\\lambda.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hilbert-tikhonov-noise-amplification-bound",
+          "source_section": "Statement",
+          "quote": "Then for every $g\\in Y$, $$\\|R_\\lambda g\\|\\le\\frac{\\|g\\|}{2\\sqrt\\lambda},\\qquad \\|R_\\lambda\\|\\le\\frac1{2\\sqrt\\lambda}.$$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "$$\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H .$$",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "The **operator norm** of $T$ is $$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-tikhonov-regularised-least-squares",
+          "source_section": "Definition",
+          "quote": "The **Tikhonov regularised least-squares objective** is the map $$ J_\\lambda(x):=\\|Ax-b\\|_2^2+\\lambda\\|x\\|_2^2 \\qquad(x\\in\\mathbb F^n), $$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+          "source_section": "Statement",
+          "quote": "Then the Tikhonov objective $$J_\\lambda(x)=\\|Ax-b\\|_2^2+\\lambda\\|x\\|_2^2$$ is strictly convex and has the unique minimiser $$x_\\lambda=(A^*A+\\lambda I)^{-1}A^*b.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-compact-linear-operator",
+          "source_section": "Definition",
+          "quote": "**A compact operator is bounded.**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "$\\|u+v\\|\\le\\|u\\|+\\|v\\|$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Countable Choice supplies the Hilbert adjoints, and the positive-shifted normal operators define both regularized inverse maps.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Adding and subtracting the three intermediate outputs proves the exact four-term chain; the data-noise difference is $-R_lambda e$ and is bounded by the local noise lemma.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The exact normal-equation residual is the shifted normal operator applied to the error from the discrete regularized solution, so the inverse bound controls it.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F9",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The operator-norm hypothesis and residual-evaluation hypothesis separately bound their respective terms; neither bound is unconditional.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F9",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Adding and subtracting the specified exact-arithmetic iterate isolates its stopping residual from the returned-output roundoff term.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "The discretized datum differs from the exact datum by $d_h=(A-A_h)x^dagger$, so inserting the regularized images yields the refined five-term chain.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The local noise estimate bounds the forward residual after applying $R_lambda$, and the normal-operator inverse bound controls the refined solve residual.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F9",
+            "F2",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "In finite dimensions the canonical minimizer is exactly $R_lambda b$, so the general chain reduces to the finite bias/noise identity.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses a finite nonempty error chain; zero increments are covered by the zero boundary case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If $e=0$, step 1.2 makes the data-noise term zero; zero solve residual is handled in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite-matrix specialization includes a one-dimensional scalar operator (step 4.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When $A_h=A$, the forward residual $d_h$ and operator-difference term vanish in the refined chain (step 1.4)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The regularization parameter is assumed $\\lambda>0$ throughout; no $\\lambda=0$ result is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Hilbert adjoints use exactly Countable Choice as stated in [A1]; no full Choice is used (step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a decomposition and bounds, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a decomposition and bounds, not a biconditional."
+        }
+      ]
+    },
+    "lem-truncated-svd-bias-and-data-noise-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "such that $$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$ for every $v\\in V$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+          "source_section": "Definition",
+          "quote": "$\\Sigma_\\tau^+\\in M_{n\\times m}(\\mathbb F)$ is the transposed-shape diagonal matrix whose $i$th diagonal entry is $\\sigma_i^{-1}$ when $\\sigma_i>\\tau$ and is $0$ when $\\sigma_i\\le\\tau$;",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "$\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substituting $b=Ax^dagger+e$ and distributing the linear filter gives the exact bias/data-noise identity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The SVD shows that $A_\tau^+A$ retains precisely the singular directions above threshold; its complement is the discarded-direction bias, including the kernel.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The retained orthonormal singular vectors give the noise norm sum; Bessel/Parseval bounds it by the reciprocal of the smallest retained singular value, with the empty retained set handled separately.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty retained set $I_\tau=\u000barnothing$ is handled explicitly in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When $e=0$, step 1.1 leaves only the truncation-bias term."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a single positive singular value, the sums in the Statement reduce to one retained or discarded coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For $A=0$, $I_\tau=\u000barnothing$, $A_\tau^+=0$, and the entire target is bias (step 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At $sigma_i=\tau$, the strict rule $sigma_i>\tau$ discards that direction (F2, step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite-dimensional SVD supplier uses finite orthonormal bases; this proof requires no arbitrary-family choice (Statement)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a decomposition and bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a decomposition and bound, not a biconditional."
+        }
+      ]
+    },
+    "cor-l2-inverse-error-budget-and-cross-term-condition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-tikhonov-error-chain-with-discretization-and-residual",
+          "source_section": "Statement",
+          "quote": "Then the following chain is exact: $$x^\\dagger-\\widetilde x=(x^\\dagger-R_\\lambda y) +(R_\\lambda y-R_\\lambda y_\\delta) +(R_\\lambda y_\\delta-R_{\\lambda,h}y_\\delta) +(R_{\\lambda,h}y_\\delta-\\widetilde x).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-calligraphic-l-p-on-a-measure-space",
+          "source_section": "Definition",
+          "quote": "The class $$\\mathcal L^p(\\mu):=\\{f\\in\\mathcal M(X,\\mu): \\|f\\|_p<\\infty\\}$$ is the measurable-function space used on this page before passing to almost-everywhere equivalence classes.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-minkowski-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "If $1\\le p<\\infty$ and $f,g\\in\\mathcal L^p(\\mu)$, then $$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space, $$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "The function is **integrable** when both integrals are finite, equivalently when $\\int|f|\\,d\\mu<+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is complex-linear on it:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Define $$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "$\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The inverse-problem error is the sum of the chain increments; scalar Minkowski by finite induction and pointwise norm monotonicity give the $L^2$ bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Expanding the squared Hilbert norm gives pairwise real cross terms; Cauchy–Schwarz and $2able a^2+b^2$ ensure integrability, and linearity of the integral yields the exact identity.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes $Nge1$; an empty chain is not asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If all increments vanish, step 2.1 gives both sides zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For $N=1$ the Minkowski inequality is equality and the cross sum in step 2.1 is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "On a measure-zero space the displayed $L^2$ norms and cross integrals vanish (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or parameter endpoint is part of this measure-space statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses finite induction on $N$ in step 1.1 and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result states inequalities and an identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result states inequalities and an identity, not a biconditional."
+        }
+      ]
+    },
+    "ex-diagonal-inverse-noise-amplification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hilbert-tikhonov-noise-amplification-bound",
+          "source_section": "Statement",
+          "quote": "Then for every $g\\in Y$, $$\\|R_\\lambda g\\|\\le\\frac{\\|g\\|}{2\\sqrt\\lambda},\\qquad \\|R_\\lambda\\|\\le\\frac1{2\\sqrt\\lambda}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The diagonal normal matrix and right-hand side give $R_lambda e=(0,5cdot10^{-4})$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The general bound equals the computed output norm, so the constant is sharp in this example.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty two-dimensional space and nonempty diagonal matrix."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes nonzero noise; zero noise would be a different input."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes two diagonal coordinates rather than a one-dimensional problem."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both diagonal entries are positive, so a rank-degenerate matrix is not this example."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The displayed parameter is the fixed positive value $10^{-6}$; no endpoint choice is studied."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All objects are explicit finite vectors and matrices; no choice is used (Statement)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies an equality case, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies an equality case, not a biconditional."
+        }
+      ]
+    },
+    "ex-tikhonov-bias-noise-tradeoff": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-tikhonov-error-chain-with-discretization-and-residual",
+          "source_section": "Statement",
+          "quote": "When $X,Y$ are finite-dimensional and $b=Ax^\\dagger+e$, the same identity is the canonical Tikhonov bias/noise formula",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $A=1$, the inverse factor is $1/(1+lambda)$, giving bias magnitude $lambda/(1+lambda)$ and noise magnitude $0.1/(1+lambda)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitution of the two parameter values gives the four stated fractions and shows the example-specific tradeoff.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has one scalar unknown and two explicit nonempty parameter choices."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes nonzero noise $e=0.1$; the zero-noise case is not compared."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is explicitly the one-dimensional scalar operator $A=1$ (Statement)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed scalar operator is $A=1$, not a degenerate zero operator."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both displayed parameter values satisfy $lambda>0$ as required (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All computations are scalar and no choice is used (Statement)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives two computations, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives two computations, not a biconditional."
+        }
+      ]
+    },
+    "ex-quadrature-discretization-residual-before-inversion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-tikhonov-error-chain-with-discretization-and-residual",
+          "source_section": "Statement",
+          "quote": "For a discretized datum $y_{h,\\delta}=A_hx^\\dagger+e$ formed before inversion, put $d_h=(A-A_h)x^\\dagger=y_\\delta-y_{h,\\delta}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The exact and discrete scalar regularized maps and pre-inversion residual are computed from the stated coefficients.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitution gives each of the five telescoping terms and their sum equals the exact total error.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses nonempty scalar spaces and a specified discrete operator."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The chosen forward residual and noise are nonzero; zero-error inputs are not the example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is a one-dimensional scalar forward model (Statement)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The exact and discrete scalar operators are both nonzero and distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The fixed parameter is $lambda=1>0$, within the theorem hypotheses (Statement)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All coefficients and operations are explicitly scalar; no choice is used (Statement)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies an exact decomposition, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies an exact decomposition, not a biconditional."
+        }
+      ]
+    },
+    "ex-tikhonov-normal-equation-residual-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hilbert-tikhonov-normal-operator-invertible",
+          "source_section": "Statement",
+          "quote": "Then $B_\\lambda:X\\to X$ is bijective and $$\\|B_\\lambda^{-1}\\|\\le\\frac1\\lambda.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The shifted normal coefficient is $9/2$, its exact solution is $4/9$, and the chosen approximate output is $1/100$ away.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The exact residual is $9/200$; the inverse bound gives $9/100$, which exceeds the actual error $1/100$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a scalar unknown and a nonempty residual calculation."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The chosen approximation has nonzero residual; the exact-solve case is not this example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is a one-dimensional normal equation (Statement)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The scalar forward coefficient $A=2$ is nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The fixed parameter $lambda=1/2$ is positive as required (Statement)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example uses a scalar equation and no choice (Statement)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a one-sided residual bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a one-sided residual bound, not a biconditional."
+        }
+      ]
+    }
+  }
+}

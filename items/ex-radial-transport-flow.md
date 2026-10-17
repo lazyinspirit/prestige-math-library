@@ -7,14 +7,14 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [lem-transport-equation-along-a-characteristic]
+deps: [lem-transport-equation-along-a-characteristic, thm-first-order-linear-ode-integrating-factor]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
   precheck: pass
+  repair: research/numerical-optimization-dynamics-2026-10-16-owner-step2-preclaimed-published-receipts-ROOT-1035/ex-radial-transport-flow.repair.json
 sources:
   scraped: []
   references:
@@ -40,10 +40,12 @@ with arbitrary $C^1$ data $g$ on the unit sphere.
 
 [L1] Along a characteristic, a transport equation reduces to the scalar ODE from the transport lemma ([[lem-transport-equation-along-a-characteristic]]).
 
+[L2] [[thm-first-order-linear-ode-integrating-factor]]: on an interval, the equation $v'-v=0$ with prescribed value at $0$ has the unique solution $v(s)=e^s v(0)$.
+
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 Regard the equation as transport with characteristic ODE $X'(s)=X(s)$; its solutions are the rays $X(s)=e^s x_0$, and by [L1] the restricted function $v(s)=u(X(s))$ satisfies $v'(s)=v(s)$, hence $v(s)=e^s v(0)$. [L1]
+1.1 Extend $u$ independently of a time variable: $\widetilde u(x,s)=u(x)$ on $(\mathbb R^n\setminus\{0\})\times\mathbb R$. It satisfies $\widetilde u_s+x\cdot\nabla_x\widetilde u-\widetilde u=0$. Regard this as transport with characteristic ODE $X'(s)=X(s)$; its solutions are the rays $X(s)=e^s x_0$ by [L2] applied componentwise, and by [L1] the restricted function $v(s)=u(X(s))$ satisfies $v'(s)=v(s)$. [L2] then gives $v(s)=e^s v(0)$, since the constant coefficients are continuous on the whole real characteristic interval. [L1, L2]
 
 2.1 Writing $x=r\omega$ with $r=e^s$ and $\omega\in S^{n-1}$ gives $u(r\omega)=r\,u(\omega)$, so every solution has the claimed form with $g(\omega)=u(\omega)$; conversely, for $u(r\omega)=r\,g(\omega)$ the radial derivative is $u/r$, hence $x\cdot\nabla u=u$. [step 1.1] ∎

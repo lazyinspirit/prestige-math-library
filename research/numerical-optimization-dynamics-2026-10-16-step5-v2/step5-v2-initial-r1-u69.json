@@ -1,0 +1,700 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "69",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-finite-candidate-gp-acquisition-search",
+      "model": "gpt-6-luna",
+      "context_sha256": "0437d6512b9a16ee37ae8ab6f7fc7891757a72cf5fd39c14f5c872740a83352a",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original X=(x_1,...,x_M) and X_t=(x_1,...,x_t) identify candidate prefixes with observation histories: with X=(a,b), no initial data, and a first selection b, K_1 could use a instead. Candidate sites are now c_j and trace sites x_i, and the selected site and single returned value are appended together. Positive-definite observed covariance, repeated sites, zero-noise failure, t=0 and N=s branches, Cholesky solves, final update, least-index selection, and inherited AC are preserved. The true-posterior caveat now also excludes informative availability; otherwise only a surrogate kernel is asserted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-certified-spatial-branch-and-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "ac2957c90cca87d36091a2b9c90b468037d8d3d98d32f6391d47c659d5d5f733",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The two children had no specified creation/evaluation order. With N=2, the root and only one child are evaluated, so different permitted orders produce different recorded fields and incumbents. The procedure now evaluates the root first and, after each split, creates/evaluates the lower-half child before the upper-half child, finishing pending children before closure or another split. Coverage, call counting, retained bounds, midpoint witnesses, missing-field returns and singleton refinement are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-spatial-bnb-eventual-epsilon-termination",
+      "model": "gpt-6-luna",
+      "context_sha256": "9ca45fe3d92f42a5f0e552e1b5c4fd7fcad92322c339afa350316b1a2477a40a",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F6 incorrectly describes all processed open leaves while a child is pending; a new witness can lower U before the next closure sweep. The expanded box, however, is selected only after that sweep, so the proof needs F6 only at split checkpoints. F6 and step 4.1 now use that exact checkpoint. At expansion, ell(B_k)<U_k-epsilon<=f(midpoint(B_k))-epsilon; both endpoints converge to f(x), an immediate contradiction. Compact-image attainment, deterministic infinite-branch extraction without AC, longest-side shrinkage, and singleton-root exception remain sound. Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-invalid-spatial-lower-bound-can-prune-global-minimum",
+      "model": "gpt-6-luna",
+      "context_sha256": "cd1f43be4db5047205a469d4f51aaa63654497dde586c55fe200e30b1ee195f0",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original unconstrained root witness x=1 violated the midpoint instruction. With its original epsilon=1/2 the required midpoint is already epsilon-optimal, so that construction proves no failure. The repaired construction uses the mandated midpoint x=1/2, exact U=1/2, epsilon=1/4, N=1 and invalid ell=1/2. The single root call reports U-ell=0 although the true error is 1/2>1/4. It now follows every algorithm instruction except the deliberately invalid lower bound. Statement refuted is preserved; only Construction and Verification changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-interval-lipschitz-bound-sound-consistent",
+      "model": "gpt-6-luna",
+      "context_sha256": "d5472bafc655104439191234771465490cb7547310e0d4dd5d733660a339cac8",
+      "outcome": "false_positive",
+      "reason": "False positive: the Statement expressly assumes all operation results are finite, and the operation definition classifies split-domain as a status, not a finite interval. The proposed DAG gives x*x=[-4,4], then [-3,5], so its division returns split-domain and violates that hypothesis. The theorem does not promise a finite result merely from separation of exact denominators. For successful finite evaluations, outward input rounding and DAG induction enclose every exact value. For shrinking boxes with increasing precision and no overflow, input and constant widths vanish, arithmetic endpoint maps converge, and denominator enclosures eventually exclude zero. The fixed-L Lipschitz estimate q_- - L r^+ is valid and converges as the radius and rounding error vanish. No carrier or contract edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-bounded-mixed-integer-branch-and-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "53efe3561871f8a7b69583568850c634fa764b9c7df83a9992c52d45f304234d",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "A zero-dimensional continuous box was admissible but its spatial fallback requires n>=1. The repair preserves purely integer inputs by replacing the singleton empty continuous tuple by a dummy [0,0] coordinate before all supplier calls, ignoring it in objective/constraint DAGs and projecting it away on return. This bijection preserves feasible points, bounds and ledgers. Also initialized root queue/ledger, integer residual budget and incumbent, specified witness updates and child order, and made fallback integer allocation explicit: R=Mq+h, first h budgets q+1 and remaining budgets q, q>=1. Median partitions, continuous coverage, verified dual-bound prerequisites, empty-node handling and total budget remain intact. Its fallback now also rejects pending/missing bounds, returns all-infeasible before taking a minimum, and preserves the no-incumbent sentinel when there are no witnesses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-certified-constraint-emptiness-search",
+      "model": "gpt-6-luna",
+      "context_sha256": "23cd335401c75fc73b8806809585704c056bd67ddae0462900ba9263755738e7",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The oracle explicitly permits non-finite statuses, but the old response branch handled only unavailable. Such a status has no lower-bound value and cannot enter the positivity or splitting tests. The procedure now returns inconclusive with the current queue/ledger before those tests for every unavailable or non-finite vector entry. It explicitly processes and removes the oldest entry only after a finite vector report, then certifies or replaces it by ordered children or its singleton refinement. One budget unit is a box query for the finite ordered constraint vector; every query, including refinements, is counted. Valid finite bounds and strict-positive pruning are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+      "model": "gpt-6-luna",
+      "context_sha256": "f50c81415a5abc2236727df0d455362284c7b9ac6e5ecaa56a5acb8c19e8b9ef",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The numerical certificate is correct but the old example omitted the algorithm-required node budget. It now specifies N=3, with one root call and lower- then upper-child calls. Ordinary multiplication gives root t,u=[-1,1] and root f=[-2,2], so U=0 cannot certify epsilon=9/10. Both children give lower -1 and midpoint objective -3/16. After three calls L=-1, U=-3/16, gap=13/16<9/10. Square completion gives minimum -1/4 at the two displayed interior points, so the witness error is 1/16. Contract finite-check text also needs its old root lower -1 corrected to -2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-bounded-mixed-integer-finite-budget-terminates",
+      "model": "gpt-6-luna",
+      "context_sha256": "d3cb92719d4cd4bf831c256d64103bca850e4d7888132c107fd3f9f565b182c9",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The old F1 and step 2.1 omitted the integrality prerequisite needed by the spatial termination theorem, although allocation of a counted residual call budget has an elementary integer interpretation. They now explicitly use R=Mq+h with M=|Z|>=1, q=floor(R/M)>=1 and 0<=h<M, giving positive integer budgets q or q+1 with sum R. The proof also checks that dummy-singleton preprocessing makes every spatial subcall positive dimensional. Each subcall meets the finite-call spatial theorem, and its budget plus already charged main-tree calls totals at most N. Statement is unchanged; the missing prerequisite is now explicit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-bounded-mixed-integer-gap-certificate-sound",
+      "model": "gpt-6-luna",
+      "context_sha256": "6db32de54dfc62605c1f5cb3fed578d3249c2b1a757c7b6d98a328333e9be581",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 was an overbroad paraphrase: a factorable relaxation alone does not certify a lower bound. F2 now states the supplier hypotheses: nonempty real-hull feasible set, certified convex relaxation and coefficient/domain enclosures, a dual-feasible pair, and verified ell<=q. Step 2.1 checks nonemptiness using the feasible pair being bounded, then applies that certificate at its integer-feasible point; empty nodes need no infimum. Coverage and retained bounds are unchanged, and the dummy singleton maps bijectively back to zero continuous dimensions. The feasible incumbent and valid node bounds already in the Statement suffice for the gap argument, so this citation qualification repairs a nonfatal fact overstatement without changing the claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-finite-candidate-gp-acquisition-search",
+      "disposition": "repaired",
+      "post_sha256": "3a055fbe7725dc846ed50af44121a6ab676ec12bb0c81b92ce7461d19775f3f1",
+      "review_context_sha256": "e2fb7e6dc54d259ae869eacf0fee3f531e334f158f7607f2b6dcb07b0ce48cec",
+      "reason": "The original X=(x_1,...,x_M) and X_t=(x_1,...,x_t) identify candidate prefixes with observation histories: with X=(a,b), no initial data, and a first selection b, K_1 could use a instead. Candidate sites are now c_j and trace sites x_i, and the selected site and single returned value are appended together. Positive-definite observed covariance, repeated sites, zero-noise failure, t=0 and N=s branches, Cholesky solves, final update, least-index selection, and inherited AC are preserved. The true-posterior caveat now also excludes informative availability; otherwise only a surrogate kernel is asserted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-certified-spatial-branch-and-bound",
+      "disposition": "repaired",
+      "post_sha256": "f81ddebca346a9523959e80086d9e25ce707c675b0c0ad348920ef517172f444",
+      "review_context_sha256": "21a16159d052aa84ab715dc7964f6e77a54fd7a605d487a4f0fc96301caa10d1",
+      "reason": "The two children had no specified creation/evaluation order. With N=2, the root and only one child are evaluated, so different permitted orders produce different recorded fields and incumbents. The procedure now evaluates the root first and, after each split, creates/evaluates the lower-half child before the upper-half child, finishing pending children before closure or another split. Coverage, call counting, retained bounds, midpoint witnesses, missing-field returns and singleton refinement are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-spatial-bnb-eventual-epsilon-termination",
+      "disposition": "repaired",
+      "post_sha256": "b302f187742333f5657c0ae411dc7b073e23e21d906d69c1506cc427146f6357",
+      "review_context_sha256": "e746a22b86e3f669db23221babc4ebabc7a37a8f38151c3f95ef2571dc0da72e",
+      "reason": "F6 incorrectly describes all processed open leaves while a child is pending; a new witness can lower U before the next closure sweep. The expanded box, however, is selected only after that sweep, so the proof needs F6 only at split checkpoints. F6 and step 4.1 now use that exact checkpoint. At expansion, ell(B_k)<U_k-epsilon<=f(midpoint(B_k))-epsilon; both endpoints converge to f(x), an immediate contradiction. Compact-image attainment, deterministic infinite-branch extraction without AC, longest-side shrinkage, and singleton-root exception remain sound. Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-invalid-spatial-lower-bound-can-prune-global-minimum",
+      "disposition": "repaired",
+      "post_sha256": "3a13a5628a494b9e7e3939247de48309f35ce29d9f0e59d5c31f9d1618205f1a",
+      "review_context_sha256": "c56176f821c994d0988e7dfdc46cb49d2a275866807db01dc3badf57339cb0e4",
+      "reason": "The original unconstrained root witness x=1 violated the midpoint instruction. With its original epsilon=1/2 the required midpoint is already epsilon-optimal, so that construction proves no failure. The repaired construction uses the mandated midpoint x=1/2, exact U=1/2, epsilon=1/4, N=1 and invalid ell=1/2. The single root call reports U-ell=0 although the true error is 1/2>1/4. It now follows every algorithm instruction except the deliberately invalid lower bound. Statement refuted is preserved; only Construction and Verification changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-interval-lipschitz-bound-sound-consistent",
+      "disposition": "unaffected",
+      "post_sha256": "ced7ab34cdc3946de0051fef65174984f97eabb8c9c416544bd5f985f12f535b",
+      "review_context_sha256": "76172dc08d5fc67dbacf6032cd6f68c89a01100e6c58b1c1e89f044d798cf0b8",
+      "reason": "False positive: the Statement expressly assumes all operation results are finite, and the operation definition classifies split-domain as a status, not a finite interval. The proposed DAG gives x*x=[-4,4], then [-3,5], so its division returns split-domain and violates that hypothesis. The theorem does not promise a finite result merely from separation of exact denominators. For successful finite evaluations, outward input rounding and DAG induction enclose every exact value. For shrinking boxes with increasing precision and no overflow, input and constant widths vanish, arithmetic endpoint maps converge, and denominator enclosures eventually exclude zero. The fixed-L Lipschitz estimate q_- - L r^+ is valid and converges as the radius and rounding error vanish. No carrier or contract edit is needed. Item guard is unchanged; only its F2 contract quotation of the dyadic format was synchronized to the current explicit integer index declarations, preserving the same finite rounding grid.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    },
+    {
+      "id": "alg-bounded-mixed-integer-branch-and-bound",
+      "disposition": "repaired",
+      "post_sha256": "5b7d2f69691b58cf020b6393dfc22f58286398bb9b665137c371fb4338ecd558",
+      "review_context_sha256": "eeee113a762650b78175b8555392a2b70ee641bf9a1621666e4b3f456a91ccdf",
+      "reason": "A zero-dimensional continuous box was admissible but its spatial fallback requires n>=1. The repair preserves purely integer inputs by replacing the singleton empty continuous tuple by a dummy [0,0] coordinate before all supplier calls, ignoring it in objective/constraint DAGs and projecting it away on return. This bijection preserves feasible points, bounds and ledgers. Also initialized root queue/ledger, integer residual budget and incumbent, specified witness updates and child order, and made fallback integer allocation explicit: R=Mq+h, first h budgets q+1 and remaining budgets q, q>=1. Median partitions, continuous coverage, verified dual-bound prerequisites, empty-node handling and total budget remain intact. Final branch review also requires a valid finite bound on every leaf not certified empty, rejects pending/missing reports, handles all-infeasible fallback before taking minima, and uses the no-incumbent sentinel instead of a minimum over an empty set of witnesses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-certified-constraint-emptiness-search",
+      "disposition": "repaired",
+      "post_sha256": "efd7c2379c2dc4df75089b9b1b8f6e9b47decba80c455be00dcad6374b309b20",
+      "review_context_sha256": "ba1f53c6251db09ff563a28dda80f2bd86e1eaf784ab0e3aacf56940c536c1e7",
+      "reason": "The oracle explicitly permits non-finite statuses, but the old response branch handled only unavailable. Such a status has no lower-bound value and cannot enter the positivity or splitting tests. The procedure now returns inconclusive with the current queue/ledger before those tests for every unavailable or non-finite vector entry. It explicitly processes and removes the oldest entry only after a finite vector report, then certifies or replaces it by ordered children or its singleton refinement. One budget unit is a box query for the finite ordered constraint vector; every query, including refinements, is counted. Valid finite bounds and strict-positive pruning are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+      "disposition": "repaired",
+      "post_sha256": "62696200e4873b78a103e1c59a0879918c8ebd993c960fc793dfab1982d160ca",
+      "review_context_sha256": "bd0237989bfd8091fa5a8a11bdb64f1fbfbe88b401e28647e13fd1094c5e15cf",
+      "reason": "The numerical certificate is correct but the old example omitted the algorithm-required node budget. It now specifies N=3, with one root call and lower- then upper-child calls. Ordinary multiplication gives root t,u=[-1,1] and root f=[-2,2], so U=0 cannot certify epsilon=9/10. Both children give lower -1 and midpoint objective -3/16. After three calls L=-1, U=-3/16, gap=13/16<9/10. Square completion gives minimum -1/4 at the two displayed interior points, so the witness error is 1/16. Contract finite-check text also needs its old root lower -1 corrected to -2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-bounded-mixed-integer-finite-budget-terminates",
+      "disposition": "repaired",
+      "post_sha256": "7b4f53aeb204355341306a7dac53bbefcf7e9e1f0c03922e7c828fb77eafeb00",
+      "review_context_sha256": "1fdefc2d665501279ac59564c072991a353eda2a596a102a063388b57777660d",
+      "reason": "The old F1 and step 2.1 omitted the integrality prerequisite needed by the spatial termination theorem, although allocation of a counted residual call budget has an elementary integer interpretation. They now explicitly use R=Mq+h with M=|Z|>=1, q=floor(R/M)>=1 and 0<=h<M, giving positive integer budgets q or q+1 with sum R. The proof also checks that dummy-singleton preprocessing makes every spatial subcall positive dimensional. Each subcall meets the finite-call spatial theorem, and its budget plus already charged main-tree calls totals at most N. Statement is unchanged; the missing prerequisite is now explicit. Re-examined after the supplier aggregation edit: its new early-return branches add no calls and preserve the same integer allocation argument.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-bounded-mixed-integer-gap-certificate-sound",
+      "disposition": "repaired",
+      "post_sha256": "26796cfa6b2a1730c9233b79b0be9559eef43def86765059f0d2ee1c74357b9d",
+      "review_context_sha256": "79c1c5a5d3d4cc65248ab3ae6c73f65fa9e1cf1851dbc48c0a64ea0f1430009a",
+      "reason": "F2 was an overbroad paraphrase: a factorable relaxation alone does not certify a lower bound. F2 now states the supplier hypotheses: nonempty real-hull feasible set, certified convex relaxation and coefficient/domain enclosures, a dual-feasible pair, and verified ell<=q. Step 2.1 checks nonemptiness using the feasible pair being bounded, then applies that certificate at its integer-feasible point; empty nodes need no infimum. Coverage and retained bounds are unchanged, and the dummy singleton maps bijectively back to zero continuous dimensions. The feasible incumbent and valid node bounds already in the Statement suffice for the gap argument, so this citation qualification repairs a nonfatal fact overstatement without changing the claim. Re-examined after final supplier aggregation repair: complete per-leaf bounds and the all-empty branch now enforce its existing hypotheses. The dummy-coordinate observation is justified by the mixed procedure in Proof 1.1; F3 cites only spatial coverage.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-adaptive-finite-candidate-gp-search-posterior-correct",
+    "thm-finite-candidate-gp-search-terminates",
+    "ex-noisy-biological-simulator-finite-candidate-gp-acquisition",
+    "thm-finite-budget-spatial-bnb-terminates",
+    "thm-spatial-bnb-gap-certificate-sound",
+    "thm-spatial-bnb-eventual-epsilon-termination",
+    "cex-invalid-spatial-lower-bound-can-prune-global-minimum",
+    "alg-bounded-mixed-integer-branch-and-bound",
+    "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+    "thm-bounded-mixed-integer-gap-certificate-sound",
+    "thm-bounded-mixed-integer-finite-budget-terminates",
+    "ex-bounded-engineering-design-mixed-integer-gap-certificate",
+    "thm-uniform-constraint-margin-enables-empty-box-detection"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-finite-candidate-gp-acquisition-search",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "finding": "The original X=(x_1,...,x_M) and X_t=(x_1,...,x_t) identify candidate prefixes with observation histories: with X=(a,b), no initial data, and a first selection b, K_1 could use a instead. Candidate sites are now c_j and trace sites x_i, and the selected site and single returned value are appended together. Positive-definite observed covariance, repeated sites, zero-noise failure, t=0 and N=s branches, Cholesky solves, final update, least-index selection, and inherited AC are preserved. The true-posterior caveat now also excludes informative availability; otherwise only a surrogate kernel is asserted."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-adaptive-finite-candidate-gp-search-posterior-correct",
+      "route": "frontier-owner",
+      "finding": "With one site, f and noise independent N(0,1), return f+noise only when f>0. Success reveals f>0 but N(y/2,1/2) assigns positive mass below 0. Add the algorithm true-posterior availability hypothesis to the theorem and its induction; notation correction itself agrees with actually selected sites.",
+      "minimal_repair": "Carry history-measurable availability into Statement/Given and successful-observation conditioning proof; no edit in this assignment.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "source_excerpt": "Thus the new noisy observation is a Gaussian coordinate of this conditional vector plus independent Gaussian noise.",
+      "affected_use": "Proof 2.1 conditions on the history and selected site but ignores the information carried by observation availability.",
+      "invalidated_claim": "The conditional law after any successful history is Gaussian with the computed all-data posterior even if observing a value reveals f>0.",
+      "minimality": "Carry the corrected supplier availability qualification into the consumer hypotheses and induction, preserving its Gaussian posterior conclusion for admissible histories."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-certified-spatial-branch-and-bound",
+      "severity": "nonfatal",
+      "finding": "The two children had no specified creation/evaluation order. With N=2, the root and only one child are evaluated, so different permitted orders produce different recorded fields and incumbents. The procedure now evaluates the root first and, after each split, creates/evaluates the lower-half child before the upper-half child, finishing pending children before closure or another split. Coverage, call counting, retained bounds, midpoint witnesses, missing-field returns and singleton refinement are unchanged."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-spatial-bnb-eventual-epsilon-termination",
+      "severity": "nonfatal",
+      "finding": "F6 incorrectly describes all processed open leaves while a child is pending; a new witness can lower U before the next closure sweep. The expanded box, however, is selected only after that sweep, so the proof needs F6 only at split checkpoints. F6 and step 4.1 now use that exact checkpoint. At expansion, ell(B_k)<U_k-epsilon<=f(midpoint(B_k))-epsilon; both endpoints converge to f(x), an immediate contradiction. Compact-image attainment, deterministic infinite-branch extraction without AC, longest-side shrinkage, and singleton-root exception remain sound. Statement is unchanged."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "cex-invalid-spatial-lower-bound-can-prune-global-minimum",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "finding": "The original unconstrained root witness x=1 violated the midpoint instruction. With its original epsilon=1/2 the required midpoint is already epsilon-optimal, so that construction proves no failure. The repaired construction uses the mandated midpoint x=1/2, exact U=1/2, epsilon=1/4, N=1 and invalid ell=1/2. The single root call reports U-ell=0 although the true error is 1/2>1/4. It now follows every algorithm instruction except the deliberately invalid lower bound. Statement refuted is preserved; only Construction and Verification changed."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "thm-interval-lipschitz-bound-sound-consistent",
+      "finding": "False positive: the Statement expressly assumes all operation results are finite, and the operation definition classifies split-domain as a status, not a finite interval. The proposed DAG gives x*x=[-4,4], then [-3,5], so its division returns split-domain and violates that hypothesis. The theorem does not promise a finite result merely from separation of exact denominators. For successful finite evaluations, outward input rounding and DAG induction enclose every exact value. For shrinking boxes with increasing precision and no overflow, input and constant widths vanish, arithmetic endpoint maps converge, and denominator enclosures eventually exclude zero. The fixed-L Lipschitz estimate q_- - L r^+ is valid and converges as the radius and rounding error vanish. No carrier or contract edit is needed."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-bounded-mixed-integer-branch-and-bound",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "finding": "A zero-dimensional continuous box was admissible but its spatial fallback requires n>=1. The repair preserves purely integer inputs by replacing the singleton empty continuous tuple by a dummy [0,0] coordinate before all supplier calls, ignoring it in objective/constraint DAGs and projecting it away on return. This bijection preserves feasible points, bounds and ledgers. Also initialized root queue/ledger, integer residual budget and incumbent, specified witness updates and child order, and made fallback integer allocation explicit: R=Mq+h, first h budgets q+1 and remaining budgets q, q>=1. Median partitions, continuous coverage, verified dual-bound prerequisites, empty-node handling and total budget remain intact. Further repaired aggregation branches: require a finite bound on every leaf not certified empty, check all-infeasible before minima, and use the no-incumbent sentinel rather than an empty witness minimum."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "ex-bounded-engineering-design-mixed-integer-gap-certificate",
+      "route": "frontier-owner",
+      "finding": "For unconstrained X=[0,1], spatial root witness must be x=1/2. The three exact midpoint uppers are 13/20,1/10,1/4, so aggregate U=1/10 rather than 0, and the advertised witness (2,1) is not returned. With stated exact lower bounds the aggregate gap 1/10 does still certify epsilon=1/10; the zero-gap execution needs a licensed constrained-mode formulation permitting endpoint witnesses or sufficient budget and compatible instructions. Do not weaken its zero-gap claim solely to pass. Owner must repair the unassigned frontier example.",
+      "minimal_repair": "Retain zero-gap scope; supply an explicitly admissible constrained-mode encoding of [0,1] with endpoint oracle witnesses, or other exact licensed execution, then recheck its proof and contract.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "source_excerpt": "For $z=0,1,2$, the exact continuous root report gives the lower bound $2/5,1/10,0$, respectively, and the feasible point $x=z/2$ attains it.",
+      "affected_use": "Given and Verification 2.1 replace the mandated unconstrained midpoint witness by an endpoint for z=0 and z=2 in a one-call subrun.",
+      "invalidated_claim": "The N=4 fallback returns (z,x)=(2,1) with U=0 and a zero-gap certificate under the specified spatial instructions.",
+      "minimality": "The objective minima are correct; repair the licensed oracle mode or exact execution, preserving the zero-gap example scope rather than altering the objective or weakening its claim."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-certified-constraint-emptiness-search",
+      "severity": "fatal",
+      "defect_type": "other",
+      "finding": "The oracle explicitly permits non-finite statuses, but the old response branch handled only unavailable. Such a status has no lower-bound value and cannot enter the positivity or splitting tests. The procedure now returns inconclusive with the current queue/ledger before those tests for every unavailable or non-finite vector entry. It explicitly processes and removes the oldest entry only after a finite vector report, then certifies or replaces it by ordered children or its singleton refinement. One budget unit is a box query for the finite ordered constraint vector; every query, including refinements, is counted. Valid finite bounds and strict-positive pruning are preserved."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+      "severity": "nonfatal",
+      "finding": "The numerical certificate is correct but the old example omitted the algorithm-required node budget. It now specifies N=3, with one root call and lower- then upper-child calls. Ordinary multiplication gives root t,u=[-1,1] and root f=[-2,2], so U=0 cannot certify epsilon=9/10. Both children give lower -1 and midpoint objective -3/16. After three calls L=-1, U=-3/16, gap=13/16<9/10. Square completion gives minimum -1/4 at the two displayed interior points, so the witness error is 1/16. Contract finite-check text also needs its old root lower -1 corrected to -2."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-bounded-mixed-integer-finite-budget-terminates",
+      "severity": "nonfatal",
+      "finding": "The old F1 and step 2.1 omitted the integrality prerequisite needed by the spatial termination theorem, although allocation of a counted residual call budget has an elementary integer interpretation. They now explicitly use R=Mq+h with M=|Z|>=1, q=floor(R/M)>=1 and 0<=h<M, giving positive integer budgets q or q+1 with sum R. The proof also checks that dummy-singleton preprocessing makes every spatial subcall positive dimensional. Each subcall meets the finite-call spatial theorem, and its budget plus already charged main-tree calls totals at most N. Statement is unchanged; the missing prerequisite is now explicit."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-bounded-mixed-integer-gap-certificate-sound",
+      "severity": "nonfatal",
+      "finding": "F2 was an overbroad paraphrase: a factorable relaxation alone does not certify a lower bound. F2 now states the supplier hypotheses: nonempty real-hull feasible set, certified convex relaxation and coefficient/domain enclosures, a dual-feasible pair, and verified ell<=q. Step 2.1 checks nonemptiness using the feasible pair being bounded, then applies that certificate at its integer-feasible point; empty nodes need no infimum. Coverage and retained bounds are unchanged, and the dummy singleton maps bijectively back to zero continuous dimensions. The feasible incumbent and valid node bounds already in the Statement suffice for the gap argument, so this citation qualification repairs a nonfatal fact overstatement without changing the claim."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "items": {
+      "alg-finite-candidate-gp-acquisition-search": {
+        "claim": "All matrices use accumulated observation sites, never candidate prefixes; true posterior requires history-measurable availability.",
+        "evidence": [
+          "items/thm-finite-gaussian-process-posterior-and-predictive-laws.md: Statement and Proof 1.1\u20135.1",
+          "items/lem-positive-noise-regularizes-observed-covariance.md: Proof 1.1\u20132.1",
+          "research/numerical-optimization-dynamics-2026-10-16-batch-69.proof-contracts.json: algorithm boundaries",
+          "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/global-optimization-and-certified-branch-and-bound.md: GP paragraph"
+        ],
+        "next_action": "Assigned mathematical work complete; current focused checks passed. Controller owns consumer routing, independent rejudgment and certification."
+      },
+      "alg-certified-spatial-branch-and-bound": {
+        "claim": "Root first, then lower-half child before upper-half child; pending children precede all-leaves checks.",
+        "evidence": [
+          "items/def-spatial-global-optimization-problem.md: n>=1, compact continuous objective, real infimum",
+          "items/def-spatial-box-bound-certificate.md: pointwise bounds, valid witnesses, empty and unavailable statuses",
+          "research/numerical-optimization-dynamics-2026-10-16-batch-69.proof-contracts.json: procedure boundaries"
+        ],
+        "next_action": "Assigned mathematical work complete; current focused checks passed. Controller owns consumer routing, independent rejudgment and certification."
+      },
+      "thm-spatial-bnb-eventual-epsilon-termination": {
+        "claim": "Strict open-leaf inequality only at post-closure split checkpoints; use own midpoint bound at that time.",
+        "evidence": [
+          "items/thm-nested-interval-property.md: unique point for shrinking nested closed intervals",
+          "items/thm-heine-borel-rn.md: nonempty finite closed box compact without AC",
+          "items/thm-infimum-property.md and items/lem-inf-epsilon.md: attained-infimum argument with closed compact real image"
+        ],
+        "next_action": "Assigned mathematical work complete; current focused checks passed. Controller owns consumer routing, independent rejudgment and certification."
+      },
+      "cex-invalid-spatial-lower-bound-can-prune-global-minimum": {
+        "claim": "Required midpoint yields actual error 1/2 exceeding epsilon=1/4 despite invalid zero-gap ledger.",
+        "evidence": [
+          "items/alg-certified-spatial-branch-and-bound.md: root midpoint and post-evaluation certificate test",
+          "items/def-spatial-box-bound-certificate.md: ell<=f at every feasible point",
+          "items/thm-spatial-bnb-gap-certificate-sound.md: valid lower bounds required"
+        ],
+        "next_action": "Assigned mathematical work complete; current focused checks passed. Controller owns consumer routing, independent rejudgment and certification."
+      },
+      "thm-interval-lipschitz-bound-sound-consistent": {
+        "claim": "Soundness is conditional on finite interval results, not guaranteed success from exact denominator separation alone.",
+        "evidence": [
+          "items/def-intervals-rectangles-and-complex-balls.md: split-domain is not a finite interval",
+          "items/def-outward-rounded-interval-and-ball-operations.md: division requires computed divisor excluding zero",
+          "items/thm-outward-rounded-operations-are-isotone-and-dag-sound.md: finite-result DAG induction",
+          "items/lem-directed-dyadic-rounding-enclosure-and-error.md and items/def-dyadic-floating-point-format-and-directed-rounding.md: error including subnormal quantum tends to zero",
+          "items/alg-lipschitz-midpoint-box-lower-bound.md: fixed certified L and directed radius correction"
+        ],
+        "next_action": "Assigned mathematical work complete; current focused checks passed. Controller owns consumer routing, independent rejudgment and certification."
+      },
+      "alg-bounded-mixed-integer-branch-and-bound": {
+        "claim": "Keep n=0 inputs via dummy singleton; all spatial calls have positive dimension; fallback budgets positive integers. Aggregation checks every required leaf bound, returns all-infeasible before minima, and uses U=+infinity when no witness exists.",
+        "evidence": [
+          "items/alg-certified-spatial-branch-and-bound.md: positive-dimensional compact-box instance and positive integer node budget",
+          "items/alg-factorable-mccormick-box-relaxation.md: finite rule table, certified outer graph and objective underestimator",
+          "items/def-factorable-box-convex-relaxation-interface.md: exact-value feasible embedding and verified dual-value lower bound",
+          "items/thm-factorable-dual-certificate-is-valid-box-lower-bound.md: proof 1.1\u20133.1 weak-duality pointwise bound"
+        ],
+        "next_action": "Assigned mathematical work complete; current focused checks passed. Controller owns consumer routing, independent rejudgment and certification.",
+        "additional_defects": [
+          "A coverage-complete spatial ledger can still contain a pending child without a bound; aggregate certification must reject it.",
+          "All-infeasible fallback previously tried to minimize an empty set of lower bounds before its infeasible branch.",
+          "A complete bound ledger without feasible witnesses must preserve the no-incumbent status, not form a minimum of an empty set."
+        ]
+      },
+      "alg-certified-constraint-emptiness-search": {
+        "claim": "Every allowed oracle status has an explicit branch; finite vector responses replace oldest pending box by empty certificate or covering children/refinement.",
+        "evidence": [
+          "items/thm-interval-lipschitz-bound-sound-consistent.md: finite-result condition, no finite enclosure from split-domain",
+          "items/def-spatial-global-optimization-problem.md: nonempty positive-dimensional box and constraints"
+        ],
+        "next_action": "Assigned mathematical work complete; current focused checks passed. Controller owns consumer routing, independent rejudgment and certification."
+      },
+      "ex-multimodal-polynomial-spatial-bnb-gap-certificate": {
+        "claim": "Three calls realize the stated one-split quartic certificate; exact lower and upper ledger computation is unchanged.",
+        "evidence": [
+          "items/thm-interval-lipschitz-bound-sound-consistent.md: finite polynomial arithmetic gives sound interval bounds",
+          "items/thm-spatial-bnb-gap-certificate-sound.md: complete two-leaf ledger suffices",
+          "items/thm-of-square-roots.md and items/lem-of-square-monotone.md: distinct interior minimizers"
+        ],
+        "next_action": "Assigned mathematical work complete; current focused checks passed. Controller owns consumer routing, independent rejudgment and certification."
+      },
+      "thm-bounded-mixed-integer-finite-budget-terminates": {
+        "claim": "Every fallback budget is a positive integer; total calls across main tree and enumeration do not exceed N.",
+        "evidence": [
+          "items/alg-bounded-mixed-integer-branch-and-bound.md: explicit residual integer allocation and dummy singleton preprocessing",
+          "items/thm-finite-budget-spatial-bnb-terminates.md: termination for positive integer N and finite oracle calls"
+        ],
+        "next_action": "Assigned mathematical work complete; current focused checks passed. Controller owns consumer routing, independent rejudgment and certification."
+      },
+      "thm-bounded-mixed-integer-gap-certificate-sound": {
+        "claim": "Verified dual-value bound and dual feasibility license the main-node pointwise inequality; valid complete ledger and incumbent imply global gap.",
+        "evidence": [
+          "items/thm-factorable-dual-certificate-is-valid-box-lower-bound.md: exact Statement and full proof 1.1\u20133.1",
+          "items/def-factorable-box-convex-relaxation-interface.md: feasible embedding and objective underestimator",
+          "items/alg-bounded-mixed-integer-branch-and-bound.md: bound acceptance, coverage, singleton representation",
+          "items/def-spatial-box-bound-certificate.md: leaf pointwise lower and feasible upper inequalities"
+        ],
+        "next_action": "Assigned mathematical work complete; current focused checks passed. Controller owns consumer routing, independent rejudgment and certification."
+      }
+    },
+    "consumer_examinations": [
+      {
+        "supplier": "alg-finite-candidate-gp-acquisition-search",
+        "consumer": "thm-adaptive-finite-candidate-gp-search-posterior-correct",
+        "path": "items/thm-adaptive-finite-candidate-gp-search-posterior-correct.md",
+        "affected_use": "Statement: conditional law after any successful finite history; Proof 2.1 treats successful observation as Gaussian without conditioning on availability.",
+        "disposition": "owner_repair_required",
+        "evidence": "With one site, f and noise independent N(0,1), return f+noise only when f>0. Success reveals f>0 but N(y/2,1/2) assigns positive mass below 0. Add the algorithm true-posterior availability hypothesis to the theorem and its induction; notation correction itself agrees with actually selected sites."
+      },
+      {
+        "supplier": "alg-finite-candidate-gp-acquisition-search",
+        "consumer": "thm-finite-candidate-gp-search-terminates",
+        "path": "items/thm-finite-candidate-gp-search-terminates.md",
+        "affected_use": "Statement at most N-s observation calls; Proof 2.1 increments once per append.",
+        "disposition": "sound",
+        "evidence": "Renaming candidates and identifying trace pairs preserves the counter argument and all explicit statuses; model-interpretation caveat does not affect termination."
+      },
+      {
+        "supplier": "alg-finite-candidate-gp-acquisition-search",
+        "consumer": "ex-noisy-biological-simulator-finite-candidate-gp-acquisition",
+        "path": "items/ex-noisy-biological-simulator-finite-candidate-gp-acquisition.md",
+        "affected_use": "Verification 1.2 selects b, then 2.1 forms C_2=2I for observed sites (a,b).",
+        "disposition": "sound",
+        "evidence": "The renamed candidate convention produces exactly the example observation order. The oracle always returns a finite value, and no actual-simulator posterior assertion is made."
+      },
+      {
+        "supplier": "alg-certified-spatial-branch-and-bound",
+        "consumer": "thm-finite-budget-spatial-bnb-terminates",
+        "path": "items/thm-finite-budget-spatial-bnb-terminates.md",
+        "affected_use": "Proof 1.1\u20132.1 charges each evaluation, schedules finite two-child lists and returns at N.",
+        "disposition": "sound",
+        "evidence": "Specified child order preserves all call counts and finite branching."
+      },
+      {
+        "supplier": "alg-certified-spatial-branch-and-bound",
+        "consumer": "thm-spatial-bnb-gap-certificate-sound",
+        "path": "items/thm-spatial-bnb-gap-certificate-sound.md",
+        "affected_use": "Proof 1.1 covers root by terminal leaves; 2.1 uses each retained bound.",
+        "disposition": "sound",
+        "evidence": "Lower-first children still cover their parent; pending reports cannot create a false certificate."
+      },
+      {
+        "supplier": "alg-certified-spatial-branch-and-bound",
+        "consumer": "thm-spatial-bnb-eventual-epsilon-termination",
+        "path": "items/thm-spatial-bnb-eventual-epsilon-termination.md",
+        "affected_use": "F6 and Proof 4.1 require strict nonclosed-leaf inequality at expansion.",
+        "disposition": "repaired_in_assigned_review",
+        "evidence": "Closure is applied only after both children are evaluated. Qualify F6 at split checkpoints; ordering does not change shrinking-branch argument."
+      },
+      {
+        "supplier": "alg-certified-spatial-branch-and-bound",
+        "consumer": "cex-invalid-spatial-lower-bound-can-prune-global-minimum",
+        "path": "items/cex-invalid-spatial-lower-bound-can-prune-global-minimum.md",
+        "affected_use": "Construction uses witness x=1 on unconstrained [0,1], contrary to root midpoint witness.",
+        "disposition": "repaired_in_assigned_review",
+        "evidence": "Use mandated midpoint x=1/2 with epsilon=1/4 and invalid lower bound 1/2 to exhibit the same failure."
+      },
+      {
+        "supplier": "alg-certified-spatial-branch-and-bound",
+        "consumer": "alg-bounded-mixed-integer-branch-and-bound",
+        "path": "items/alg-bounded-mixed-integer-branch-and-bound.md",
+        "affected_use": "Definition fallback invokes spatial procedure for every fixed integer assignment.",
+        "disposition": "repaired_in_assigned_review",
+        "evidence": "Lower-first order is compatible with fallback; assigned mixed-procedure repair must preserve finite positive integer call allocation and support zero continuous dimension."
+      },
+      {
+        "supplier": "alg-certified-spatial-branch-and-bound",
+        "consumer": "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+        "path": "items/ex-multimodal-polynomial-spatial-bnb-gap-certificate.md",
+        "affected_use": "Verification 2.1 evaluates both children [-1,0] and [0,1] before calculating L=-1.",
+        "disposition": "repaired_in_assigned_review",
+        "evidence": "Lower-first witnesses have equal objective -3/16; the certificate needs exactly three calls, to be stated explicitly."
+      },
+      {
+        "supplier": "alg-certified-spatial-branch-and-bound",
+        "consumer": "thm-bounded-mixed-integer-gap-certificate-sound",
+        "path": "items/thm-bounded-mixed-integer-gap-certificate-sound.md",
+        "affected_use": "F3 and Proof 1.1 rely on fixed-assignment continuous terminal-box coverage.",
+        "disposition": "repaired_in_assigned_review",
+        "evidence": "Ordering leaves coverage intact and has no effect on the valid-ledger lower-bound argument."
+      },
+      {
+        "supplier": "alg-bounded-mixed-integer-branch-and-bound",
+        "consumer": "thm-bounded-mixed-integer-finite-budget-terminates",
+        "path": "items/thm-bounded-mixed-integer-finite-budget-terminates.md",
+        "affected_use": "F1 and Proof 2.1 allocate a positive continuous budget to each assignment.",
+        "disposition": "repaired_in_assigned_review",
+        "evidence": "Explicit R=Mq+h gives positive integer budgets; dummy preprocessing ensures every spatial subcall has dimension at least one. Add these facts to the proof. Re-examined the final aggregation branches: rejecting pending bounds enforces the stated complete-ledger hypothesis; the all-empty branch takes no undefined minimum, and the no-witness branch returns inconclusive. No consumer Statement changes are needed."
+      },
+      {
+        "supplier": "alg-bounded-mixed-integer-branch-and-bound",
+        "consumer": "thm-bounded-mixed-integer-gap-certificate-sound",
+        "path": "items/thm-bounded-mixed-integer-gap-certificate-sound.md",
+        "affected_use": "F1/F3 and Proof 1.1\u20132.1 use coverage of X times Z and each fixed-assignment continuous ledger.",
+        "disposition": "repaired_in_assigned_review",
+        "evidence": "The dummy singleton projection is bijective and value-preserving. Root initialization, incumbent updates, child ordering and integer budgets preserve those coverage and validity arguments. Re-examined the final aggregation branches: rejecting pending bounds enforces the stated complete-ledger hypothesis; the all-empty branch takes no undefined minimum, and the no-witness branch returns inconclusive. No consumer Statement changes are needed."
+      },
+      {
+        "supplier": "alg-bounded-mixed-integer-branch-and-bound",
+        "consumer": "ex-bounded-engineering-design-mixed-integer-gap-certificate",
+        "path": "items/ex-bounded-engineering-design-mixed-integer-gap-certificate.md",
+        "affected_use": "Given and Verification 2.1 claim one-call continuous reports return attaining x=z/2 for each z.",
+        "disposition": "owner_repair_required",
+        "evidence": "For unconstrained X=[0,1], spatial root witness must be x=1/2. The three exact midpoint uppers are 13/20,1/10,1/4, so aggregate U=1/10 rather than 0, and the advertised witness (2,1) is not returned. With stated exact lower bounds the aggregate gap 1/10 does still certify epsilon=1/10; the zero-gap execution needs a licensed constrained-mode formulation permitting endpoint witnesses or sufficient budget and compatible instructions. Do not weaken its zero-gap claim solely to pass. Owner must repair the unassigned frontier example. Re-examined the final aggregation branches: rejecting pending bounds enforces the stated complete-ledger hypothesis; the all-empty branch takes no undefined minimum, and the no-witness branch returns inconclusive. No consumer Statement changes are needed."
+      },
+      {
+        "supplier": "alg-certified-constraint-emptiness-search",
+        "consumer": "thm-uniform-constraint-margin-enables-empty-box-detection",
+        "path": "items/thm-uniform-constraint-margin-enables-empty-box-detection.md",
+        "affected_use": "F7 and Proof 1.3/3.1 use covering longest-side splits, FIFO processing and increasing singleton precision.",
+        "disposition": "sound",
+        "evidence": "Theorem A1 explicitly excludes unavailable and non-finite reports, so its successful execution is unchanged. Explicit queue-entry replacement preserves coverage; ordered children and vector-query unit preserve its finite-call reasoning. No further propagation through its unchanged Statement."
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-69.proof-contracts.json --strict --items thm-spatial-bnb-eventual-epsilon-termination,cex-invalid-spatial-lower-bound-can-prune-global-minimum",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 2/2 checked; exact step mirrors and current F6 supplier quote installed under shared lock. Revisited unchanged mathematical repairs after metadata update; review hashes unchanged."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts <10 assigned paths> --json",
+        "exit_code": 0,
+        "result": "10 files; six proofs checked, zero failures; four algorithm proofs not applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs <10 assigned paths> --json",
+        "exit_code": 0,
+        "result": "10 checked, zero errors and warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-69.proof-contracts.json --strict --items <10 assigned IDs>",
+        "exit_code": 0,
+        "result": "After repairing four stale quotation mirrors and retaining the gap proof step-1.1 input at step 3.1: 0 errors, 0 warnings, 10/10 checked. Final aggregation change requires final mirror synchronization."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-finite-candidate-gp-acquisition-search.md items/alg-certified-spatial-branch-and-bound.md items/thm-spatial-bnb-eventual-epsilon-termination.md items/cex-invalid-spatial-lower-bound-can-prune-global-minimum.md items/alg-bounded-mixed-integer-branch-and-bound.md items/alg-certified-constraint-emptiness-search.md items/ex-multimodal-polynomial-spatial-bnb-gap-certificate.md items/thm-bounded-mixed-integer-finite-budget-terminates.md items/thm-bounded-mixed-integer-gap-certificate-sound.md --json",
+        "exit_code": 0,
+        "result": "Final carriers: 9 files, 5 proofs checked, 0 failed; 4 algorithms not applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-finite-candidate-gp-acquisition-search.md items/alg-certified-spatial-branch-and-bound.md items/thm-spatial-bnb-eventual-epsilon-termination.md items/cex-invalid-spatial-lower-bound-can-prune-global-minimum.md items/alg-bounded-mixed-integer-branch-and-bound.md items/alg-certified-constraint-emptiness-search.md items/ex-multimodal-polynomial-spatial-bnb-gap-certificate.md items/thm-bounded-mixed-integer-finite-budget-terminates.md items/thm-bounded-mixed-integer-gap-certificate-sound.md --json",
+        "exit_code": 0,
+        "result": "Final carriers: 9 checked, 0 errors, 0 warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-finite-candidate-gp-acquisition-search.md items/alg-certified-spatial-branch-and-bound.md items/thm-spatial-bnb-eventual-epsilon-termination.md items/cex-invalid-spatial-lower-bound-can-prune-global-minimum.md items/alg-bounded-mixed-integer-branch-and-bound.md items/alg-certified-constraint-emptiness-search.md items/ex-multimodal-polynomial-spatial-bnb-gap-certificate.md items/thm-bounded-mixed-integer-finite-budget-terminates.md items/thm-bounded-mixed-integer-gap-certificate-sound.md",
+        "exit_code": 0,
+        "result": "9 items, 17 steps, 0 defects; run once after all final item edits, no formatter afterward."
+      },
+      {
+        "command": "python3 exact Fraction arithmetic for root/child quartic intervals and residual budget divisions",
+        "exit_code": 0,
+        "result": "Root enclosure [-2,2], child enclosures [-1,1], child midpoint -3/16, gap 13/16<9/10, actual error 1/16; invalid-root midpoint error 1/2>1/4. Integer allocations for (M,R)=(1,1),(1,5),(3,3),(3,4),(3,8) are positive and sum to R; engineering midpoint uppers 13/20,1/10,1/4."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-69.proof-contracts.json --strict --items alg-finite-candidate-gp-acquisition-search,alg-certified-spatial-branch-and-bound,thm-spatial-bnb-eventual-epsilon-termination,cex-invalid-spatial-lower-bound-can-prune-global-minimum,thm-interval-lipschitz-bound-sound-consistent,alg-bounded-mixed-integer-branch-and-bound,alg-certified-constraint-emptiness-search,ex-multimodal-polynomial-spatial-bnb-gap-certificate,thm-bounded-mixed-integer-finite-budget-terminates,thm-bounded-mixed-integer-gap-certificate-sound",
+        "exit_code": 0,
+        "result": "Final aggregation quotation mirrors updated under shared lock; 0 errors, 0 warnings, 10/10 items checked."
+      }
+    ],
+    "published_consumer_ledger": "No potentially defective published consumer or published edit was found in the direct-use inventory; no published-ledger amendment is proposed.",
+    "source_reading": "All mathematical adjudications used familiar elementary finite Gaussian conditioning, compact-box bisection, interval arithmetic and weak-duality reasoning, checked against the local complete relevant arguments/interfaces named per item. No external URL was consulted in this dispatch; historical source_locators and earlier reviewer claims are retained without claiming that reading as mine.",
+    "remaining_work": [
+      "Controller/frontier owner must repair informative-availability omission in thm-adaptive-finite-candidate-gp-search-posterior-correct.",
+      "Controller/frontier owner must repair the incompatible zero-gap execution in ex-bounded-engineering-design-mixed-integer-gap-certificate.",
+      "Controller reconciles identified unassigned contract quotation mirrors, obtains independent current judgments and carries out the remaining convergence/certification workflow."
+    ],
+    "interface_comparison": "Direct comparison of original and final bodies: four Definition sections changed (GP acquisition, spatial B&B, mixed-integer B&B, constraint emptiness); no Statement section changed. Eventual termination and the two mixed-integer results have only Fact/Proof edits. The counterexample has Construction/Verification edits; the quartic has Example/Given/Verification edits. No new interfaces or prerequisites were authored.",
+    "page_examinations": [
+      {
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/global-optimization-and-certified-branch-and-bound.md",
+        "disposition": "unaffected",
+        "affected_use": "Paragraph 1 states retained ledger bounds, unavailable/budget statuses, exact-midpoint eventual termination; paragraph 2 describes finite integer fallback; paragraph 3 describes finite-time sound constraint bounds and the chosen GP model.",
+        "reason": "The clarified evaluation order, admissible dummy singleton, explicit complete-bound aggregation and failure branches preserve every stated page interface. The GP paragraph remains conditional on its model and must be read with the newly explicit noninformative-availability caveat; the unassigned theorem requires owner repair as separately recorded."
+      },
+      {
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/global-optimization-and-certified-branch-and-bound-examples.md",
+        "disposition": "unaffected",
+        "affected_use": "Summary promises an invalid-bound counterexample, multimodal quartic epsilon certificate, and bounded mixed-integer design certificate.",
+        "reason": "Assigned repairs realize the first two promises with compliant midpoint calls and budgets. The mixed design zero-gap execution defect is routed to its unassigned frontier owner; no page edit is needed for the valid intended certificate scope."
+      }
+    ],
+    "unassigned_contract_followup": [
+      {
+        "consumer": "thm-adaptive-finite-candidate-gp-search-posterior-correct",
+        "source": "alg-finite-candidate-gp-acquisition-search",
+        "fact": "F3",
+        "uses": [
+          "2.1"
+        ],
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-69.proof-contracts.json",
+        "disposition": "frontier-owner metadata reconciliation; unassigned row left untouched"
+      },
+      {
+        "consumer": "thm-finite-candidate-gp-search-terminates",
+        "source": "alg-finite-candidate-gp-acquisition-search",
+        "fact": "F1",
+        "uses": [
+          "1.1",
+          "2.1"
+        ],
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-69.proof-contracts.json",
+        "disposition": "frontier-owner metadata reconciliation; unassigned row left untouched"
+      },
+      {
+        "consumer": "ex-noisy-biological-simulator-finite-candidate-gp-acquisition",
+        "source": "alg-finite-candidate-gp-acquisition-search",
+        "fact": "F2",
+        "uses": [
+          "1.2"
+        ],
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-69.proof-contracts.json",
+        "disposition": "frontier-owner metadata reconciliation; unassigned row left untouched"
+      },
+      {
+        "consumer": "thm-finite-budget-spatial-bnb-terminates",
+        "source": "alg-certified-spatial-branch-and-bound",
+        "fact": "F1",
+        "uses": [
+          "1.1"
+        ],
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-69.proof-contracts.json",
+        "disposition": "frontier-owner metadata reconciliation; unassigned row left untouched"
+      },
+      {
+        "consumer": "thm-spatial-bnb-gap-certificate-sound",
+        "source": "alg-certified-spatial-branch-and-bound",
+        "fact": "F1",
+        "uses": [
+          "1.1"
+        ],
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-69.proof-contracts.json",
+        "disposition": "frontier-owner metadata reconciliation; unassigned row left untouched"
+      },
+      {
+        "consumer": "thm-uniform-constraint-margin-enables-empty-box-detection",
+        "source": "alg-certified-constraint-emptiness-search",
+        "fact": "F7",
+        "uses": [
+          "1.3",
+          "3.1"
+        ],
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-69.proof-contracts.json",
+        "disposition": "frontier-owner metadata reconciliation; unassigned row left untouched"
+      }
+    ],
+    "repair_complete": true,
+    "scope_summary": {
+      "assigned_items": 10,
+      "changed_item_carriers": 9,
+      "fatal_items": 4,
+      "nonfatal_items": 5,
+      "false_positive_items": 1,
+      "created_items": 0,
+      "published_items_edited": 0,
+      "downstream_items": 13,
+      "assigned_uncertainty": false
+    }
+  }
+}

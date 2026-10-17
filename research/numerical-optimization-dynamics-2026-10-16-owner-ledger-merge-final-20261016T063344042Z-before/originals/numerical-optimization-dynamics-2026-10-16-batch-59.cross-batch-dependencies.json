@@ -1,0 +1,107 @@
+[
+  {
+    "kind": "page",
+    "consumer": "barrier-and-primal-dual-interior-point-methods",
+    "supplier": "finite-precision-direct-factorizations",
+    "status": "verified",
+    "evidence": "Inspected the current batch-1 supplier page and actual bodies for def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma, alg-scaled-householder-reflector-formation-and-application, lem-rounded-triangular-substitution-componentwise-backward-error, and thm-computed-full-rank-least-squares-backward-stability. Their exact operation model, reflector order, successful triangular-solve bound, and full-column-rank QR hypotheses match the conditional finite-precision Newton solve specified on OPT7. This page requirement is retained for scheduling; these exact item edges appear below. Body verification is not independent acceptance."
+  },
+  {
+    "kind": "page",
+    "consumer": "barrier-and-primal-dual-interior-point-methods",
+    "supplier": "inequality-kkt-duality-and-optimality-certificates",
+    "status": "verified",
+    "evidence": "Inspected the current batch-6 page and actual bodies for def-convex-program-duality-and-slater-condition, def-inequality-constrained-program-and-kkt-geometry, and thm-lagrangian-weak-duality. The inequality sign and multiplier conventions, Lagrangian dual value, and weak-duality lower bound agree with the smooth and LP/QP formulations used here. This page requirement is retained for scheduling; exact logical item edges appear below. Body verification is not independent acceptance."
+  },
+  {
+    "kind": "page",
+    "consumer": "barrier-and-primal-dual-interior-point-methods",
+    "supplier": "numerical-optimization-globalization-and-inexact-certificates",
+    "status": "verified",
+    "evidence": "Inspected the current batch-39 page, thm-inexact-gradient-residual-distance-certificate and its local Hessian strong-convexity lemma. The theorem requires a uniform Hessian lower bound, an independently bounded computed-gradient residual and gradient discrepancy, and an attained interior minimizer; OPT7 states these hypotheses explicitly. Batch 39 has transitive page requirements 3 and 12, but no derivative approximation from those batches is instantiated by this theorem. Body verification is not independent acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-conic-optimization-primal-dual-models",
+    "supplier": "def-convex-program-duality-and-slater-condition",
+    "status": "verified",
+    "evidence": "Read the supplier Definition: it specifies the Lagrangian dual value as an infimum of the Lagrangian over the declared domain and the corresponding weak-duality convention. OPT7 cites that convention for its smooth inequality and QP dual values. The current supplier body and the exact definition were inspected; this is not an approval record."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-conic-optimization-primal-dual-models",
+    "supplier": "def-inequality-constrained-program-and-kkt-geometry",
+    "status": "verified",
+    "evidence": "Read the supplier Definition: inequalities use g_i(x)≤0 and their multipliers are nonnegative, with the stated equality-multiplier convention. OPT7 repeats that convention in the smooth model and central-path statement. The current supplier body was inspected; this is not an approval record."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-barrier-central-path-and-newton-residuals",
+    "supplier": "def-inequality-constrained-program-and-kkt-geometry",
+    "status": "verified",
+    "evidence": "Read the supplier Definition and matched its g_i≤0 and nonnegative-multiplier convention against the smooth log-barrier objective and central multiplier λ_i=−1/(t g_i). The exact supplier body was inspected; this is not an approval record."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-central-path-barrier-gap-and-dual-certificate",
+    "supplier": "def-inequality-constrained-program-and-kkt-geometry",
+    "status": "verified",
+    "evidence": "Read the supplier Definition and matched its inequality sign, nonnegative multiplier, and equality multiplier conventions against the smooth Lagrangian used in the proof. The exact supplier body was inspected; this is not an approval record."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-inexact-central-path-distance-and-gap-certificate",
+    "supplier": "thm-inexact-gradient-residual-distance-certificate",
+    "status": "verified",
+    "evidence": "Read the complete supplier statement and proof. It assumes an open convex region, D²φ⪰μI with μ>0, an attained interior minimizer, and independent bounds ||ĝ||≤η and ||ĝ−∇φ||≤δ; it concludes distance ≤(η+δ)/μ. OPT7 carries each assumption into its coordinate restriction and transfers distance by PᵀP=I. The supplier body is verified; this is not independent acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+    "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "status": "verified",
+    "evidence": "Read the full supplier Definition: successful operations use the stated round-to-nearest relative model on zero or normal results, while range and invalid operations return failure. The algorithm uses the same finite stored-input model and declares range-failure statuses; exact audits are distinguished from rounded operations. Body verification is not independent acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+    "supplier": "alg-scaled-householder-reflector-formation-and-application",
+    "status": "verified",
+    "evidence": "Read the supplier procedure and its operation order, including scaled active columns, stored reflectors, trailing-block updates, and explicit range failures. OPT7 specifies this same reflector construction/application for the reduced QR solve. Body verification is not independent acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+    "supplier": "lem-rounded-triangular-substitution-componentwise-backward-error",
+    "status": "verified",
+    "evidence": "Read the full supplier proof: a successful descending rounded solve for an upper-triangular matrix with nonzero diagonal and (n+3)u<1 yields a componentwise and Frobenius backward perturbation, including the zero-solution branch. OPT7 checks the triangular solve and its range/pivot failures before using that result. Body verification is not independent acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+    "supplier": "thm-computed-full-rank-least-squares-backward-stability",
+    "status": "verified",
+    "evidence": "Read the full supplier statement and proof. It requires successful reduced QR on a full-column-rank matrix, successful rounded right-hand-side application, mu u<1, gamma_(n+3)<1/8, and a nonsingular perturbed R. OPT7 exact-rank audits the stored system and checks gamma²||R||_F²||R⁻¹||_F²<1, which guarantees nonsingularity under the supplier perturbation bound. The item body is verified; no owner acceptance is inferred."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+    "supplier": "def-inequality-constrained-program-and-kkt-geometry",
+    "status": "verified",
+    "evidence": "Read the supplier Definition and checked the QP sign convention and KKT stationarity against OPT7’s LP/QP residuals and exact certificate audit. The supplier hypotheses are carried explicitly in the model; body verification is not independent acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-fraction-to-boundary-and-primal-dual-gap-certificates",
+    "supplier": "def-convex-program-duality-and-slater-condition",
+    "status": "verified",
+    "evidence": "Read the supplier Definition for the Lagrangian dual-value convention and matched it to the QP q(y,s)=inf_w L(w,y,s) used in the gap proof. The exact supplier body was inspected; this is not an approval record."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-fraction-to-boundary-and-primal-dual-gap-certificates",
+    "supplier": "thm-lagrangian-weak-duality",
+    "status": "verified",
+    "evidence": "Read the complete supplier statement and proof. Under primal and dual feasibility and nonnegative inequality multipliers, it gives q(y,s)≤p*. OPT7 additionally verifies stationarity so the convex Lagrangian infimum is attained at x and equals f₀(x)−xᵀs. The exact supplier body was inspected; this is not independent acceptance."
+  }
+]

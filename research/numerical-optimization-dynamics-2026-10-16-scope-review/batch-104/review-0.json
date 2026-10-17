@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "104",
+  "round": 0,
+  "reviewed_items": [
+    "alg-frozen-slow-explicit-fast-euler",
+    "alg-synchronous-waveform-relaxation-finite-window",
+    "lem-frozen-slow-euler-variation-bounds",
+    "lem-frozen-slow-euler-one-step-stability",
+    "cor-cubic-defect-gives-second-order-for-symmetric-multirate-composition",
+    "thm-waveform-relaxation-contraction-and-error-bound",
+    "lem-frozen-slow-euler-local-defect-bound",
+    "thm-frozen-slow-euler-global-first-order-error",
+    "ex-linear-electromechanical-multirate-block-cost",
+    "ex-coupled-fast-mode-destabilizes-frozen-slow-euler",
+    "ex-frozen-slow-interpolation-limits-order"
+  ],
+  "reviewed_pages": [
+    "multirate-and-partitioned-time-integration",
+    "multirate-and-partitioned-time-integration-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete batch review found three local procedure/proof gaps on the A page. Request one local repair package; no source edits were made in this read-only review. The batch-28 recurrence supports both stated error bounds, and the current T04 prerequisite supplies finite-dimensional split-flow context; the conditional corollary does not instantiate a method-specific T04 result.",
+  "findings": [
+    {
+      "id": "alg-frozen-slow-explicit-fast-euler",
+      "type": "local",
+      "reason": "The definition sets h=H/m and begins evaluating f before the stated invalid-input returns. An invalid m can divide by zero, and an initial state outside D can be evaluated before its status is returned. Put dimension, H, m, and domain validation first; define h and evaluate fields only after validation succeeds."
+    },
+    {
+      "id": "lem-frozen-slow-euler-variation-bounds",
+      "type": "local",
+      "reason": "Fact F3 restricts the fast recurrence to a successful macro step, but the Statement does not require the final output to lie in D. Under its microstate assumptions the fast loop completes even if the final output check returns domain-exit. Cite the loop recurrence directly without requiring overall success."
+    },
+    {
+      "id": "thm-frozen-slow-euler-global-first-order-error",
+      "type": "local",
+      "reason": "The variation lemma’s numerical microstate bound assumes an exact solution starting at the algorithm’s initial state. Here the algorithm starts a block at U_n while the exact path segment starts at U(t_n). Derive the numerical microstate displacement directly by summing the fast-loop increments, bounded by M h_n at each step; this preserves the theorem’s stated hypotheses."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-frozen-slow-euler-variation-bounds",
+      "decision": "repair",
+      "reason": "Its fast-loop proof needs the local recurrence clarification described in the findings."
+    },
+    {
+      "id": "lem-frozen-slow-euler-one-step-stability",
+      "decision": "accept",
+      "reason": "Both compared runs are required to succeed, and the proof uses only their admitted inputs and fast microstates; the requested invalid-input guard clarification preserves successful-step behavior."
+    },
+    {
+      "id": "lem-frozen-slow-euler-local-defect-bound",
+      "decision": "accept",
+      "reason": "The claim is explicitly conditional on a successful macro output and uses an exact path and algorithm run with the same initial state."
+    },
+    {
+      "id": "thm-frozen-slow-euler-global-first-order-error",
+      "decision": "repair",
+      "reason": "Its fast-stage estimate needs the direct increment bound described in the findings."
+    },
+    {
+      "id": "ex-linear-electromechanical-multirate-block-cost",
+      "decision": "accept",
+      "reason": "The example uses positive H and integer m on the all-space model domain; its computations and successful-step claims remain unchanged."
+    },
+    {
+      "id": "ex-coupled-fast-mode-destabilizes-frozen-slow-euler",
+      "decision": "accept",
+      "reason": "The example uses positive H and integer m on the all-space model domain; its computations and successful-step claims remain unchanged."
+    },
+    {
+      "id": "ex-frozen-slow-interpolation-limits-order",
+      "decision": "accept",
+      "reason": "The example uses positive H and integer m on the all-space model domain; its computations and successful-step claims remain unchanged."
+    },
+    {
+      "id": "multirate-and-partitioned-time-integration",
+      "decision": "accept",
+      "reason": "Its summary describes successful-step behavior and remains valid after the input-guard clarification; the global-error item requires its separate local proof repair."
+    },
+    {
+      "id": "multirate-and-partitioned-time-integration-examples",
+      "decision": "accept",
+      "reason": "Its prerequisite page and example summaries are unaffected by the invalid-input guard clarification."
+    }
+  ]
+}

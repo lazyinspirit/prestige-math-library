@@ -1,0 +1,2947 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-capped-diis-coefficient-minimizer-exists",
+    "lem-spectral-gap-persistence-and-uniform-resolvent-bound",
+    "lem-gapped-projector-map-well-defined",
+    "lem-projector-is-admissible-density",
+    "lem-admissible-density-domain-is-closed-convex-complete",
+    "thm-block-projector-frechet-derivative-and-bound",
+    "thm-contractive-scf-convergence-and-inexact-error-bound",
+    "thm-level-shift-fixed-projector-equivalence",
+    "lem-density-mixing-preserves-domain-but-not-projectors",
+    "thm-gapped-response-projector-lipschitz-certificate",
+    "cor-finite-basis-energy-model-has-c1-response",
+    "thm-density-mixing-contracts-under-jacobian-certificate",
+    "thm-certified-diis-error-inheritance",
+    "ex-occupied-projector-discontinuity-at-zero-gap",
+    "ex-self-consistent-projector-two-cycle-with-gap",
+    "ex-affine-contractive-response-and-residual-error",
+    "ex-density-mixture-leaves-projector-manifold",
+    "ex-diis-singular-gram-fallback",
+    "ex-additive-eigensolve-tolerance-residual-certificate",
+    "lem-finite-budget-scf-iteration-work"
+  ],
+  "contracts": {
+    "lem-capped-diis-coefficient-minimizer-exists": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "The vector $e_1=(1,0,\\ldots,0)$ belongs to $\\mathcal C_{s,C}$ because its entries sum to $1$ and its $\\ell^1$ norm is $1\\le C$. Thus the coefficient set is nonempty. It is closed: the sum constraint is the inverse image of the closed singleton $\\{1\\}$ under a continuous linear map, and the $\\ell^1$ bound is the inverse image of the closed interval $(-\\infty,C]$ under the continuous function $c\\mapsto\\sum_i|c_i|$. It is bounded because $\\|c\\|_1^2=\\sum_i c_i^2+2\\sum_{i<j}|c_i||c_j|\\ge\\|c\\|_2^2$ and $\\|c\\|_1\\le C$. Therefore [F2] makes $\\mathcal C_{s,C}$ compact.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The map $c\\mapsto\\sum_i c_iR_i$ is linear and continuous in finite dimensions, and its squared Frobenius norm is continuous by [F1]. The extreme-value theorem gives a minimum; its minimizer set is closed as the inverse image of the singleton containing that minimum, hence compact as a closed subset of $\\mathcal C_{s,C}$. Thus [F2] gives a nonempty compact set $M=\\operatorname*{argmin}_{c\\in\\mathcal C_{s,C}}J(c)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "For $c,d\\in\\mathcal C_{s,C}$ and $0\\le t\\le1$, the coefficients $e=(1-t)c+td$ satisfy $\\sum_i e_i=(1-t)\\sum_i c_i+t\\sum_i d_i=1$. By [F3], $\\sum_i|e_i|\\le(1-t)\\sum_i|c_i|+t\\sum_i|d_i|\\le C$, so $\\mathcal C_{s,C}$ is convex. The set $M$ is also convex: for matrices $A,B$ the identity $\\|(1-t)A+tB\\|_F^2=(1-t)\\|A\\|_F^2+t\\|B\\|_F^2-t(1-t)\\|A-B\\|_F^2$ proves convexity of the squared norm. Applying it to $A=\\sum_i c_iR_i$ and $B=\\sum_i d_iR_i$ shows $J((1-t)c+td)\\le(1-t)J(c)+tJ(d)=\\min J$, so the convex combination also minimizes. Since $M$ is compact, the continuous function $c\\mapsto\\|c\\|_2^2$ has a minimizer $c_*\\in M$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "If distinct $c,d\\in M$ both had minimum Euclidean norm, their midpoint would lie in $M$ and satisfy $\\left\\|\\frac{c+d}{2}\\right\\|_2^2=\\frac{\\|c\\|_2^2+\\|d\\|_2^2}{2}-\\frac{\\|c-d\\|_2^2}{4}<\\frac{\\|c\\|_2^2+\\|d\\|_2^2}{2},$ contradicting minimality. Thus $c_*$ is the unique minimum-norm least-squares minimizer. No nonsingularity of the Gram matrix is needed for existence or tie-breaking.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 exhibit e1 in the feasible set, so the feasible coefficient set is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter or zero-gap branch is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The boundary s=1 is permitted by the statement; the same compactness and tie-break argument still applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof steps 2.1 and 3.1 obtain a nonempty compact convex minimizer set without assuming the residual Gram matrix invertible. Proof step 4.1 uses strict convexity of the Euclidean squared norm on that set to prove the unique minimum-norm tie-break even for a singular Gram matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The coefficient cap boundary C=1 remains included because the feasible set is defined by ≤C and C≥1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The minimizer is selected uniquely by compactness and strict convexity in steps 2.1–2.2; no family choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Capped DIIS least squares has a unique minimum-Euclidean-norm minimizer, even with singular Gram matrix; no converse characterization of residual matrices is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Capped DIIS least squares has a unique minimum-Euclidean-norm minimizer, even with singular Gram matrix; no converse characterization of residual matrices is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two identical residuals with singular Gram matrix",
+          "method": "exact finite calculation",
+          "input": {
+            "residuals": [
+              "J",
+              "J"
+            ],
+            "frobenius_norm_squared_J": 2,
+            "coefficient_cap": "2"
+          },
+          "calculation": "B=[[2,2],[2,2]] has rank 1; every feasible pair with c1+c2=1 gives the same residual J; the unique minimum-Euclidean-norm feasible minimizer is (1/2,1/2).",
+          "expected": {
+            "gram_rank": 1,
+            "selected_coefficients": [
+              "1/2",
+              "1/2"
+            ]
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "lem-spectral-gap-persistence-and-uniform-resolvent-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-complex-hermitian-eigenvalues-lipschitz",
+          "source_section": "Statement",
+          "quote": "For Hermitian $A,B\\in\\mathbb C^{n\\times n}$, write their eigenvalues in\ndescending order with multiplicity as $\\lambda_1(A)\\ge\\cdots\\ge\\lambda_n(A)$\nand $\\lambda_1(B)\\ge\\cdots\\ge\\lambda_n(B)$. Then, for every $j$,\n$$|\\lambda_j(A)-\\lambda_j(B)|\\le\\|A-B\\|_2.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Since $\\lambda_{r+1}(H_0)=\\lambda_r(H_0)+g$, we have $R=\\lambda_r(H_0)-\\lambda_1(H_0)+g/2\\ge g/2>0$. Reversing the descending-index convention in [F1] gives the same perturbation bound for the ascending eigenvalues used here. Thus if $\\|H-H_0\\|_{op}\\le g/4$, then $\\lambda_1(H)\\ge c-g/4$ and $\\lambda_r(H)\\le c+R-g/4$. Since $R-g/4\\ge g/4$, every first-$r$ eigenvalue therefore satisfies $|\\lambda_j(H)-c|\\le R-g/4$, so it lies at least $g/4$ inside the circle centered at $c$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The same eigenvalue estimate gives $\\lambda_{r+1}(H)\\ge c+R+g/4$, so all remaining eigenvalues satisfy $|\\lambda_j(H)-c|\\ge R+g/4$ and lie at least $g/4$ outside the circle. Also $\\lambda_{r+1}(H)-\\lambda_r(H)\\ge g-2(g/4)=g/2$. Thus the contour separates exactly the occupied cluster and the stated gap persists.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F2], the spectrum of $H$ is real and $H$ diagonalizes unitarily. For every $z\\in\\Gamma$, reverse triangle gives $|z-\\lambda_j(H)|\\ge||z-c|-|\\lambda_j(H)-c||\\ge g/4$ by steps 1.1 and 2.1. In the unitary eigenbasis, $(zI-H)^{-1}$ is diagonal with entries of modulus at most $4/g$. Applying [F3] to a unit vector in this basis gives $\\|(zI-H)^{-1}\\|_{op}\\le4/g$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The ordered eigenvalues lambda_r and lambda_{r+1} in the Statement require 1<=r<n, so neither occupied nor virtual cluster is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement requires g>0; zero gap is excluded and separately shown discontinuous on the B page."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The formula includes both edge ranks r=1 and r=n−1 under 1≤r<n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement counts eigenvalues with multiplicity and separates only the rth gap, so internal cluster degeneracies are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The closed perturbation boundary ||H−H0||op=g/4 is included in steps 1.1–2.1; the resolvent distance is still at least g/4."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses one orthonormal eigenbasis for the given finite Hermitian matrix and no arbitrary indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A positive occupied gap g and a perturbation of at most g/4 imply cluster separation and the resolvent bound4/g, without a converse perturbation threshold."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A positive occupied gap g and a perturbation of at most g/4 imply cluster separation and the resolvent bound4/g, without a converse perturbation threshold."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "sharp-radius 2x2 boundary perturbation",
+          "method": "exact finite calculation",
+          "input": {
+            "H0": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                2
+              ]
+            ],
+            "r": 1,
+            "g": 2,
+            "operator_perturbation_norm": "1/2"
+          },
+          "calculation": "The prescribed center is c=0 and radius R=1. For H=diag(1/2,2), the occupied eigenvalue is 1/2 and the virtual eigenvalue is 2; their distances to the circle are 1/2 and 1, and the occupied gap is 3/2≥g/2=1.",
+          "expected": {
+            "R": "1",
+            "contour_distance_lower_bound": "1/2",
+            "occupied_gap": "3/2"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "lem-gapped-projector-map-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-self-consistent-projector-response-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$, $1\\le r<n$, and use the real Hermitian matrix space $\\mathbb H_n$\nand projector set $\\mathcal P_r$ of\n[[def-rank-r-orthogonal-projector-domain]]. Let $U\\subseteq\\mathbb H_n$ be open\nand let $F:U\\to\\mathbb H_n$ be a specified map. For a Hermitian matrix $H$,\nwrite its eigenvalues with multiplicity in ascending order as\n$$\\lambda_1(H)\\le\\cdots\\le\\lambda_n(H).$$\nWrite $\\sigma(H):=\\{\\lambda_j(H):1\\le j\\le n\\}$ for its finite spectrum,\nwith multiplicity omitted in this set notation.\nFor any Hermitian $H$ with $\\lambda_r(H)<\\lambda_{r+1}(H)$, write $\\Pi_r(H)$\nfor the orthogonal projector onto the sum of eigenspaces belonging to its $r$\nlowest eigenvalues. At a point $X\\in U$ where\n$$\\lambda_r(F(X))<\\lambda_{r+1}(F(X)),$$\ndefine $\\Phi(X):=\\Pi_r(F(X))$. The strict gap separates the occupied cluster\nfrom the unoccupied cluster; eigenvalue multiplicities within either cluster\nare allowed. The construction's well-definedness as a unique member of\n$\\mathcal P_r$ is proved in [[lem-gapped-projector-map-well-defined]].\n\nA set $K\\subseteq U$ has a **uniform occupied/unoccupied gap** $g>0$ when the\ndisplayed gap is at least $g$ for every $X\\in K$. A self-consistent fixed point\nis a point $X_*$ with $\\Phi(X_*)=X_*$. Its fixed-point residual is\n$\\rho(X):=\\|X-\\Phi(X)\\|_F$ whenever $\\Phi(X)$ is defined. The map is not\nasserted to be contractive merely because its gap is positive.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-rank-r-orthogonal-projector-domain",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$ and let $r$ be an integer with $1\\le r<n$. Use Hermitian\nadjoints and matrices as in [[def-self-adjoint-and-normal-endomorphism]] and\n[[def-matrix-product-and-identity-matrix]], trace as in\n[[def-trace-of-a-square-matrix]], and the Frobenius norm as in\n[[def-frobenius-matrix-norm]]. Write\n$$\\mathbb H_n:=\\{A\\in\\mathbb C^{n\\times n}:A=A^*\\}$$\nfor the real vector space of Hermitian matrices, with Frobenius inner product\n$$\\langle A,B\\rangle_F:=\\operatorname{Re}\\operatorname{tr}(A^*B)=\\operatorname{tr}(AB).$$\nThe **rank-$r$ orthogonal projector domain** is\n$$\\mathcal P_r:=\\{P\\in\\mathbb H_n:P^2=P,\\ \\operatorname{tr}P=r\\}.$$\nAn element of $\\mathcal P_r$ is an orthogonal projector; its range is the occupied\nsubspace. The statement that its range has dimension $r$ is justified by\n[[lem-hermitian-idempotent-trace-equals-rank]]. A frame $Y\\in\\mathbb C^{n\\times r}$\nwith $Y^*Y=I_r$ represents $P=YY^*$; replacing $Y$ by $YQ$ for a unitary\n$Q\\in\\mathbb C^{r\\times r}$ leaves $P$ unchanged.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [F1], choose an orthonormal eigenbasis $(u_1,\\ldots,u_n)$ of $F(X)$ with the eigenvalues in the given order. The strict gap prevents an eigenspace for one eigenvalue from straddling positions $r$ and $r+1$, so the sum of the first $r$ eigenspaces is the span of exactly the first $r$ basis vectors.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Changing the orthonormal basis within a repeated eigenspace below the gap leaves that entire eigenspace in the sum; changing one within a repeated eigenspace above the gap leaves that entire eigenspace out. Thus the selected subspace does not depend on the eigenbasis chosen in step 1.1. Its orthogonal projector is $P=\\sum_{j=1}^r u_ju_j^*$, which satisfies $P=P^*$ and $P^2=P$ by orthonormality. By [F3], $\\operatorname{tr}P=\\sum_{a=1}^n P_{aa}=\\sum_{a=1}^n\\sum_{j=1}^r (u_j)_a\\overline{(u_j)_a}=\\sum_{j=1}^r\\sum_{a=1}^n|(u_j)_a|^2=\\sum_{j=1}^r1=r$, since each $u_j$ is a unit vector.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "The operator in step 2.1 is independent of all allowed basis choices, lies in $\\mathcal P_r$ by [L1], and is exactly the map specified by [F2]. Hence it is the unique rank-$r$ occupied spectral projector.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Its Statement uses the occupied projector domain1<=r<n, and Proof step 1.1 selects the first r eigenvectors in an existing finite Hermitian eigenbasis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypothesis λr<λr+1 excludes zero gap; the B-page example checks what fails at equality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The range 1≤r<n includes the rank-one and codimension-one cases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1–2.1 prove uniqueness despite repeated eigenvalues within either side of the strict gap."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The strict occupied/unoccupied gap is required at each inputX. No projector is asserted when that gap closes; repeated eigenvalues within either cluster are expressly handled by proof step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Only one finite orthonormal eigenbasis is chosen for the given matrix; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The strict rth gap implies a unique occupied rank-r projector independently of within-cluster eigenbasis choices; uniqueness is not used to infer a gap."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The strict rth gap implies a unique occupied rank-r projector independently of within-cluster eigenbasis choices; uniqueness is not used to infer a gap."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "lem-projector-is-admissible-density": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rank-r-orthogonal-projector-domain",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$ and let $r$ be an integer with $1\\le r<n$. Use Hermitian\nadjoints and matrices as in [[def-self-adjoint-and-normal-endomorphism]] and\n[[def-matrix-product-and-identity-matrix]], trace as in\n[[def-trace-of-a-square-matrix]], and the Frobenius norm as in\n[[def-frobenius-matrix-norm]]. Write\n$$\\mathbb H_n:=\\{A\\in\\mathbb C^{n\\times n}:A=A^*\\}$$\nfor the real vector space of Hermitian matrices, with Frobenius inner product\n$$\\langle A,B\\rangle_F:=\\operatorname{Re}\\operatorname{tr}(A^*B)=\\operatorname{tr}(AB).$$\nThe **rank-$r$ orthogonal projector domain** is\n$$\\mathcal P_r:=\\{P\\in\\mathbb H_n:P^2=P,\\ \\operatorname{tr}P=r\\}.$$\nAn element of $\\mathcal P_r$ is an orthogonal projector; its range is the occupied\nsubspace. The statement that its range has dimension $r$ is justified by\n[[lem-hermitian-idempotent-trace-equals-rank]]. A frame $Y\\in\\mathbb C^{n\\times r}$\nwith $Y^*Y=I_r$ represents $P=YY^*$; replacing $Y$ by $YQ$ for a unitary\n$Q\\in\\mathbb C^{r\\times r}$ leaves $P$ unchanged.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-admissible-hermitian-density-domain",
+          "source_section": "Definition",
+          "quote": "For $n\\ge2$ and $1\\le r<n$, let $\\mathbb H_n$ and $\\mathcal P_r$ be as in\n[[def-rank-r-orthogonal-projector-domain]]. The **admissible fixed-particle\ndensity domain** is\n$$\\mathcal D_r:=\\{D\\in\\mathbb H_n:0\\preceq D\\preceq I_n,\\ \\operatorname{tr}D=r\\},$$\nwhere $D\\succeq0$ means $x^*Dx\\ge0$ for every $x\\in\\mathbb C^n$, and\n$D\\preceq I_n$ means $I_n-D\\succeq0$. A member of $\\mathcal D_r$ need not be\nidempotent. The matrix norm and metric used below are the Frobenius norm and its\ninduced metric. Every rank-$r$ orthogonal projector is in $\\mathcal D_r$ by\n[[lem-projector-is-admissible-density]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [F2], choose a unitary eigenbasis of $P$ with real eigenvalues $\\mu_j$. From $P^2=P$, each satisfies $\\mu_j^2=\\mu_j$, hence $\\mu_j\\in\\{0,1\\}$. Therefore every eigenvalue lies between $0$ and $1$, so for each $x$ the quadratic forms $x^*Px$ and $x^*(I-P)x$ are nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The matrix $P$ is Hermitian and has trace $r$ by [F1]; step 1.1 gives $0\\preceq P\\preceq I$. These are exactly the conditions in [F3], so $P\\in\\mathcal D_r$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 prove that each supplied projector belongs to the density domain; the projector domain is nonempty for the stated ranks."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The eigenvalue 0 is an allowed endpoint of the interval [0,1] and is handled in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes every 1≤r<n, including r=1 and r=n−1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The proof permits arbitrary multiplicities of eigenvalues 0 and 1; idempotence forces each eigenvalue into that two-point set."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.1 gives every projector eigenvalue exactly0 or1; proof step 2.1 therefore includes both spectral endpoints in the semidefinite density inequalities."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof chooses a single eigenbasis for a finite Hermitian matrix, not a family of such bases."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Hermitian idempotence and trace r imply density admissibility; the converse is expressly not the claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Hermitian idempotence and trace r imply density admissibility; the converse is expressly not the claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "rank-one diagonal projector is an admissible density",
+          "method": "exact finite calculation",
+          "input": {
+            "P": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "r": 1
+          },
+          "calculation": "P*=P, P^2=P, tr(P)=1 and its eigenvalues are 1,0, so 0≤P≤I.",
+          "expected": {
+            "hermitian": true,
+            "idempotent": true,
+            "trace": 1,
+            "admissible": true
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "lem-admissible-density-domain-is-closed-convex-complete": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-admissible-hermitian-density-domain",
+          "source_section": "Definition",
+          "quote": "For $n\\ge2$ and $1\\le r<n$, let $\\mathbb H_n$ and $\\mathcal P_r$ be as in\n[[def-rank-r-orthogonal-projector-domain]]. The **admissible fixed-particle\ndensity domain** is\n$$\\mathcal D_r:=\\{D\\in\\mathbb H_n:0\\preceq D\\preceq I_n,\\ \\operatorname{tr}D=r\\},$$\nwhere $D\\succeq0$ means $x^*Dx\\ge0$ for every $x\\in\\mathbb C^n$, and\n$D\\preceq I_n$ means $I_n-D\\succeq0$. A member of $\\mathcal D_r$ need not be\nidempotent. The matrix norm and metric used below are the Frobenius norm and its\ninduced metric. Every rank-$r$ orthogonal projector is in $\\mathcal D_r$ by\n[[lem-projector-is-admissible-density]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "The diagonal matrix $D_0=\\operatorname{diag}(1,\\ldots,1,0,\\ldots,0)$ with $r$ ones is Hermitian, satisfies $0\\preceq D_0\\preceq I_n$, and has trace $r$. Thus $D_0\\in\\mathcal D_r$, so the domain is nonempty.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Let $(D_k)$ be a Frobenius-Cauchy sequence in $\\mathcal D_r$. Each real and imaginary matrix entry is Cauchy because $| (D_k-D_\\ell)_{ij}|\\le\\|D_k-D_\\ell\\|_F$. By [F2] the finitely many coordinates converge, defining a matrix $D$; conjugate symmetry passes to coordinate limits, so $D=D^*$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "For every fixed $x\\in\\mathbb C^n$, entrywise convergence gives $x^*D_kx\\to x^*Dx$ and $x^*(I_n-D_k)x\\to x^*(I_n-D)x$. Since both sequences are nonnegative, their limits are nonnegative, so $0\\preceq D\\preceq I_n$. Finite sums commute with coordinate limits, hence $\\operatorname{tr}D=\\lim_k\\operatorname{tr}D_k=r$. Therefore $D\\in\\mathcal D_r$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "The finitely many entries converge, so the sum of their squared absolute errors tends to zero; thus $\\|D_k-D\\|_F\\to0$. Every Cauchy sequence in $\\mathcal D_r$ therefore converges there, proving completeness. Any ambient-convergent sequence in $\\mathcal D_r$ is Cauchy, so the same limit argument shows its limit belongs to $\\mathcal D_r$; this proves closedness.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "If $D_1,D_2\\in\\mathcal D_r$ and $t\\in[0,1]$, then $tD_1+(1-t)D_2$ is Hermitian; its quadratic form and that of $I_n-tD_1-(1-t)D_2$ are convex combinations of nonnegative quadratic forms, and its trace is $t\\operatorname{tr}D_1+(1-t)\\operatorname{tr}D_2=tr+(1-t)r=r$. Hence it lies in $\\mathcal D_r$, proving convexity.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 constructs diag(1,…,1,0,…,0) in D_r, proving the domain is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The endpoint eigenvalues 0 and 1 are included by the positive-semidefinite inequalities in steps 2.1–2.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The construction and limit proof apply at both boundary ranks r=1 and r=n−1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Density eigenvalues0 and1 are admitted: proof step 1.1 constructs a projector in the domain and proof step 2.1 preserves the nonstrict semidefinite inequalities at limits. Strict positivity is not required."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Convexity covers t=0 and t=1 in step 3.1; both return the original admissible density."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Coordinate limits are determined by one Cauchy sequence; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The fixed-trace density domain is nonempty, closed, convex and Frobenius complete; these properties are not a characterization of other domains."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The fixed-trace density domain is nonempty, closed, convex and Frobenius complete; these properties are not a characterization of other domains."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "thm-block-projector-frechet-derivative-and-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-spectral-gap-persistence-and-uniform-resolvent-bound",
+          "source_section": "Statement",
+          "quote": "Let $H_0\\in\\mathbb H_n$ have eigenvalues with multiplicity\n$\\lambda_1(H_0)\\le\\cdots\\le\\lambda_n(H_0)$ and gap\n$g=\\lambda_{r+1}(H_0)-\\lambda_r(H_0)>0$. Put\n$$c=\\lambda_1(H_0),\\qquad R=\\frac{\\lambda_r(H_0)+\\lambda_{r+1}(H_0)}2-c,$$\nand let $\\Gamma=\\{c+Re^{it}:0\\le t\\le2\\pi\\}$ be positively oriented.\nFor Hermitian $H$, write $\\sigma(H)=\\{\\lambda_j(H):1\\le j\\le n\\}$.\nThen\n$R\\ge g/2$. For every Hermitian $H$ with $\\|H-H_0\\|_{op}\\le g/4$, exactly\nthe $r$ lowest eigenvalues of $H$, counted with multiplicity, lie inside $\\Gamma$;\nthe gap is at least $g/2$, and\n$$\\operatorname{dist}(\\Gamma,\\sigma(H))\\ge g/4,\\qquad \\|(zI-H)^{-1}\\|_{op}\\le4/g\\quad(z\\in\\Gamma).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-integral-formula-circle",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb C$, let $R>0$, and let $f$ be holomorphic on the disc\n\n$$D(a,R)=\\{\\zeta\\in\\mathbb C:|\\zeta-a|<R\\}.$$\n\nIf $0<r<R$, $|z-a|<r$, and $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$, then\n\n$$f(z)=\\frac{1}{2\\pi i}\\int_\\gamma\\frac{f(\\zeta)}{\\zeta-z}\\,d\\zeta.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-theorem-one-exceptional-point-on-a-star-shaped-domain",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and star-shaped, let $p\\in U$, and let $f:U\\to\\mathbb C$ be continuous and holomorphic on $U\\setminus\\{p\\}$. Then $f$ has a primitive on $U$, and for every closed rectifiable contour $\\gamma$ in $U$,\n\n$$\\int_\\gamma f(z)\\,dz=0.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-complex-line-integral-over-a-rectifiable-path",
+          "source_section": "Definition",
+          "quote": "Let $\\gamma=x+iy:[a,b]\\to\\mathbb C$ be a rectifiable contour in the sense of [[def-complex-contours-reversal-concatenation-and-closedness]] and let $f=u+iv$ be continuous on its trace, with real and imaginary parts from [[def-complex-conjugate-real-imaginary-part-and-modulus]]. Define\n$$\\int_\\gamma f(z)\\,dz:=\\int_a^b u(\\gamma(t))\\,dx(t)-\\int_a^b v(\\gamma(t))\\,dy(t)+i\\left(\\int_a^b v(\\gamma(t))\\,dx(t)+\\int_a^b u(\\gamma(t))\\,dy(t)\\right),$$\nwhere the four integrals are the real Riemann–Stieltjes integrals of [[def-riemann-stieltjes-sum-and-integral]]. Their existence is proved in [[thm-existence-of-complex-line-integrals-on-rectifiable-paths]]. On a singleton parameter interval the integral is $0$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-linearity-of-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "For continuous $f,g$ on the trace of a rectifiable contour $\\gamma$ and $\\alpha,\\beta\\in\\mathbb C$,\n$$\\int_\\gamma(\\alpha f+\\beta g)\\,dz=\\alpha\\int_\\gamma f\\,dz+\\beta\\int_\\gamma g\\,dz.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-existence-of-complex-line-integrals-on-rectifiable-paths",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be rectifiable and let $f$ be continuous on its trace. Then the complex line integral [[def-complex-line-integral-over-a-rectifiable-path]] and the absolute line integral [[def-absolute-line-integral-over-a-rectifiable-path]] both exist.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "source_section": "Definition",
+          "quote": "Let $U$ be an open subset of a real matrix space $\\mathbb R^{m\\times n}$ or of\na complex matrix space $\\mathbb C^{m\\times n}$ viewed as a real vector space,\nand let $F:U\\to W$ take values in a finite-dimensional real normed vector\nspace $(W,\\|\\,\\cdot\\,\\|_W)$.\nWe say that $F$ is **real Fr\\'echet differentiable** at $A\\in U$ if there is a\nreal-linear map $L$ such that\n\n$$\\frac{\\|F(A+H)-F(A)-L[H]\\|_W}{\\|H\\|_F}\\longrightarrow0\\qquad(H\\to0,\\ H\\ne0).$$\n\nThat map $L$ is the **real Fr\\'echet derivative** of $F$ at $A$ and is denoted\n$DF(A)$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Diagonalize $H=U\\operatorname{diag}(\\mu_1,\\ldots,\\mu_n)U^*$ with $\\mu_1\\le\\cdots\\le\\mu_n$ by [F2]. Since [F1] places exactly $\\mu_1,\\ldots,\\mu_r$ inside $\\Gamma$, the resolvent is $U\\operatorname{diag}((z-\\mu_j)^{-1})U^*$ on the contour.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "For a sufficiently small Hermitian perturbation $E$ with $H+E$ still in the ball, the inverse identity gives $R_{H+E}=R_H+R_HE R_{H+E}$. Subtracting $R_H+R_HE R_H$ yields $R_{H+E}-R_H-R_HE R_H=R_HE R_HE R_{H+E}.$ The identity follows by multiplying the two inverse equations for $zI-H$ and $zI-H-E$; all inverses exist by [F1].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Integrating each diagonal entry and using [F3], linearity in [F4], and the finite spectral expansion gives $\\frac1{2\\pi i}\\int_\\Gamma R_H(z)\\,dz=U\\operatorname{diag}(1,\\ldots,1,0,\\ldots,0)U^*=\\Pi_r(H).$ Thus the contour expression represents the full occupied cluster projector, including repeated eigenvalues within that cluster.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "For any matrix $A$ and matrix $X$ with columns $x_j$, the operator-norm definition gives $\\|AX\\|_F^2=\\sum_j\\|Ax_j\\|_2^2\\le\\|A\\|_{op}^2\\|X\\|_F^2$. Applying this also to adjoints gives the right-multiplication bound $\\|XB\\|_F\\le\\|X\\|_F\\|B\\|_{op}$. Iterating these inequalities, then using [F1] and [F6], bounds the Frobenius norm of the right side by $(4/g)^3\\|E\\|_F^2$, uniformly for $z\\in\\Gamma$. The Riemann-sum triangle inequality in [F4] then bounds the integrated remainder by $\\ell(\\Gamma)(4/g)^3\\|E\\|_F^2/(2\\pi)$. Dividing by $\\|E\\|_F$ makes this tend to zero, so the contour formula in step 2.1 is Frechet differentiable in the sense of [F5] and its derivative is the stated integral of $R_HE R_H$. Each difference quotient of the Hermitian-valued projector is Hermitian for real nonzero increments; since $\\mathbb H_n$ is closed, the derivative is Hermitian-valued as well.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "The same left/right multiplication inequalities give $\\|R_H(z)ER_H(z)\\|_F\\le(4/g)^2\\|E\\|_F$ by [F1] and [F6]. Integrating over length $2\\pi R$ yields $\\|D\\Pi_r(H)[E]\\|_F\\le R(4/g)^2\\|E\\|_F=16R\\|E\\|_F/g^2$. For nearby $H'$ in the ball, the resolvent identity and [F1] give uniformly on $\\Gamma$ $\\|R_{H'}-R_H\\|_{op}\\le(4/g)^2\\|H'-H\\|_{op}$. Subtracting the two derivative integrands gives $R_{H'}E(R_{H'}-R_H)+(R_{H'}-R_H)ER_H$. Each summand has Frobenius norm at most $(4/g)^3\\|H'-H\\|_F\\|E\\|_F$ by the left/right multiplication bounds and [F6], so their sum is at most twice this quantity. Integrating over length $2\\pi R$ and dividing by $2\\pi$ bounds the difference of derivative values by $2R(4/g)^3\\|H'-H\\|_F\\|E\\|_F$. The same estimate in operator norm for the derivative maps shows the derivative varies continuously in $H$. By the definition of a real Frechet $C^1$ map, this proves the claimed regularity and bound.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The two spectral clusters have dimensions r and n-r with1<=r<n; Proof step 2.1 integrates the full nonempty occupied cluster."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The gap hypothesis g>0 excludes a zero-gap projector, as illustrated by the B-page boundary example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The theorem permits every 1≤r<n, including rank one and codimension one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement expressly allows repeated eigenvalues within either cluster; the contour encloses the full occupied block."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The base contour has distance at least g/4 on the closed perturbation ball, while the differentiability claim is on its open interior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The spectral decomposition is for a single finite matrix; no indexed family is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A strict occupied/virtual gap yields a C1 block-projector map and derivative estimate16R/g^2; no eigenvalue simplicity within a block is necessary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A strict occupied/virtual gap yields a C1 block-projector map and derivative estimate16R/g^2; no eigenvalue simplicity within a block is necessary."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "2x2 separated projector directional derivative",
+          "method": "exact finite calculation",
+          "input": {
+            "H0": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                2
+              ]
+            ],
+            "r": 1,
+            "E": [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "gap": 2
+          },
+          "calculation": "For H(t)=[[0,t],[t,2]], a normalized lowest eigenvector is (1,-t/2)+O(t^2); the projector derivative at zero is [[0,-1/2],[-1/2,0]], of Frobenius norm 1/sqrt(2), below the theorem bound 16R/g^2·||E||F=4sqrt(2).",
+          "expected": {
+            "derivative": [
+              [
+                0,
+                "-1/2"
+              ],
+              [
+                "-1/2",
+                0
+              ]
+            ],
+            "derivative_frobenius_norm": "1/sqrt(2)",
+            "theorem_bound": "4sqrt(2)"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "thm-contractive-scf-convergence-and-inexact-error-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty complete metric space ([[def-complete-metric-space]])\nand let $f : X \\to X$ be a contraction with constant $q$, so\n$d(f(u),f(v)) \\le q\\,d(u,v)$ for all $u,v \\in X$ and $0 \\le q < 1$\n([[def-lipschitz-holder-contraction]]). Then:\n\n1. There is exactly one $x^{*} \\in X$ with $f(x^{*}) = x^{*}$.\n2. For every $x_0 \\in X$ the sequence of **iterates**, defined by recursion\n   ([[thm-recursion]]) by $x_{n+1} := f(x_n)$, converges to $x^{*}$ in $(X,d)$\n   ([[def-metric-convergence]]). In particular the limit does not depend on\n   $x_0$.\n3. For all $m, n \\in \\mathbb{N}$ with $m \\ge n$,\n   $$d(x_m, x_n) \\;\\le\\; \\frac{q^{\\,n}\\, d(x_1,x_0)}{1-q},$$\n   with the integer power of [[def-integer-power]].\n\nClaim 3 is the quantitative form of the argument that proves claims 1 and 2, and\nit is recorded in the statement because the error estimates\n([[cor-banach-error-estimates]]) are read off from it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-self-consistent-projector-response-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$, $1\\le r<n$, and use the real Hermitian matrix space $\\mathbb H_n$\nand projector set $\\mathcal P_r$ of\n[[def-rank-r-orthogonal-projector-domain]]. Let $U\\subseteq\\mathbb H_n$ be open\nand let $F:U\\to\\mathbb H_n$ be a specified map. For a Hermitian matrix $H$,\nwrite its eigenvalues with multiplicity in ascending order as\n$$\\lambda_1(H)\\le\\cdots\\le\\lambda_n(H).$$\nWrite $\\sigma(H):=\\{\\lambda_j(H):1\\le j\\le n\\}$ for its finite spectrum,\nwith multiplicity omitted in this set notation.\nFor any Hermitian $H$ with $\\lambda_r(H)<\\lambda_{r+1}(H)$, write $\\Pi_r(H)$\nfor the orthogonal projector onto the sum of eigenspaces belonging to its $r$\nlowest eigenvalues. At a point $X\\in U$ where\n$$\\lambda_r(F(X))<\\lambda_{r+1}(F(X)),$$\ndefine $\\Phi(X):=\\Pi_r(F(X))$. The strict gap separates the occupied cluster\nfrom the unoccupied cluster; eigenvalue multiplicities within either cluster\nare allowed. The construction's well-definedness as a unique member of\n$\\mathcal P_r$ is proved in [[lem-gapped-projector-map-well-defined]].\n\nA set $K\\subseteq U$ has a **uniform occupied/unoccupied gap** $g>0$ when the\ndisplayed gap is at least $g$ for every $X\\in K$. A self-consistent fixed point\nis a point $X_*$ with $\\Phi(X_*)=X_*$. Its fixed-point residual is\n$\\rho(X):=\\|X-\\Phi(X)\\|_F$ whenever $\\Phi(X)$ is defined. The map is not\nasserted to be contractive merely because its gap is positive.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-gapped-projector-map-well-defined",
+          "source_section": "Statement",
+          "quote": "For every $X\\in U$ at which the response map of\n[[def-self-consistent-projector-response-map]] has a strict $r$th gap,\n$\\Phi(X)$ is a uniquely defined member of $\\mathcal P_r$. Degeneracies among\nthe first $r$ eigenvalues or among the remaining eigenvalues do not affect it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-lipschitz-holder-contraction",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be a function. Recall that a metric takes nonnegative real values\n([[lem-metric-nonnegativity]]).\n\n- $f$ is **Lipschitz** with **constant** $L$, where $L \\in \\mathbb{R}$ and\n  $L \\ge 0$, if\n  $$d_Y\\big(f(x), f(x')\\big) \\;\\le\\; L \\, d_X(x,x') \\qquad \\text{for all } x, x' \\in X .$$\n  $f$ is *Lipschitz* if it is Lipschitz with some such constant.\n- Let $\\alpha \\in \\mathbb{Q}$ with $0 < \\alpha \\le 1$ ([[def-rat-order]]). $f$ is\n  **$\\alpha$-Hölder** with **constant** $C$, where $C \\in \\mathbb{R}$ and\n  $C \\ge 0$, if\n  $$d_Y\\big(f(x), f(x')\\big) \\;\\le\\; C \\, d_X(x,x')^{\\alpha} \\qquad \\text{for all } x, x' \\in X ,$$\n  the power being the rational power of a nonnegative base\n  ([[def-rational-power]]). $f$ is *$\\alpha$-Hölder* if it is so with some such\n  constant, and *Hölder* if it is $\\alpha$-Hölder for some rational\n  $\\alpha \\in (0,1]$.\n- $f$ is a **contraction** with constant $q$ if it is Lipschitz with constant $q$\n  and $0 \\le q < 1$. The number $q$ is then called a **contraction constant** for\n  $f$.\n\n**The power $d_X(x,x')^{\\alpha}$ is defined at every pair, including $x = x'$.**\nThe base $d_X(x,x')$ is a nonnegative real, and [[def-rational-power]] defines\n$a^{\\alpha}$ for every $a > 0$ and, by its supplementary clause, sets\n$0^{\\alpha} = 0$ for every rational $\\alpha > 0$. Since $\\alpha > 0$ is required\nhere, the displayed inequality at $x = x'$ reads $0 \\le C \\cdot 0$, which holds;\nso no separate clause and no restriction to $x \\ne x'$ is needed. Note that this\ndoes not by itself explain the strict inequality $\\alpha>0$: if one extended the\nformula to $\\alpha=0$ using the convention $0^0=1$ of [[def-integer-power]], the\nequal-point inequality would still be the automatic $0\\le C$. Globally, however,\nthat extension would reduce to the bounded-diameter condition\n$d_Y(f(x),f(x'))\\le C$, outside the standard Hölder range adopted here.\n\n**Why the exponent is rational on this page and why it is at most $1$.** At this\npoint in the reading order only rational powers are available\n([[def-rational-power]]), so $\\alpha$ ranges over the rationals. The upper\nbound $\\alpha \\le 1$ is the standard convention, and it is where the notion is\nuseful: the classical theory reserves the name for $\\alpha \\in (0,1]$, and\nnothing in this library uses an exponent outside that range. No claim is made\nhere about what an exponent $\\alpha > 1$ would do.\n\n**Constants are not unique and are not part of the data.** If $f$ is Lipschitz\nwith constant $L$ it is Lipschitz with every constant $L' \\ge L$, and likewise\nfor Hölder constants; the adjectives above are existential statements. A\n*contraction*, by contrast, requires a constant strictly below $1$, and that is a\nreal restriction: exhibiting the constant is part of exhibiting a contraction, and\na map that shrinks every distance without admitting one uniform constant is not a\ncontraction here.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [F1], there is a unique $X_*$ with $\\Phi(X_*)=X_*$. In the projector application, [L1] supplies the stated map wherever the strict gap hypothesis holds.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "For exact iterates, [F3] gives $d(X_{k+1},X_*)=d(\\Phi(X_k),\\Phi(X_*))\\le qd(X_k,X_*)$. Induction from $k=0$ yields $d(X_k,X_*)\\le q^k d(X_0,X_*)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "F3",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "For any $X\\in K$, [F2] identifies the SCF metric residual with $d(X,\\Phi(X))$. The triangle inequality and contraction property give $d(X,X_*)\\le d(X,\\Phi(X))+d(\\Phi(X),\\Phi(X_*))\\le d(X,\\Phi(X))+q d(X,X_*).$ Since $1-q>0$, rearrangement proves the residual error bound.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.3",
+          "claim": "For an inexact update, the triangle inequality gives $e_{k+1}=d(X_{k+1},X_*)\\le d(X_{k+1},\\Phi(X_k))+d(\\Phi(X_k),\\Phi(X_*))\\le\\eta_k+q e_k.$ This is the one-step recurrence.",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Repeated substitution in the recurrence yields $e_k\\le q^ke_0+\\sum_{j<k}q^{k-1-j}\\eta_j$: it holds at $k=0$ with an empty sum, and substituting its $k$th bound into $e_{k+1}\\le qe_k+\\eta_k$ gives the formula at $k+1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.3",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The nonempty-space hypothesis is explicit and is required by Banach in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The boundary q=0 is included by 0≤q<1 and the proof uses the convention q^0=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If K has one point, the self-map fixes it and all distances in Proof step 2.1 and2.2 are zero, so the same inequalities hold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: No eigenvalue simplicity or nondegeneracy is required by the abstract complete-metric contraction argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The strict endpoint q=1 is excluded because 1−q must be positive in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The Banach supplier constructs the iterates recursively from the supplied starting point; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A contraction on a supplied nonempty complete invariant metric space gives fixed-point and residual/error estimates; a small residual alone is not asserted to imply contraction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A contraction on a supplied nonempty complete invariant metric space gives fixed-point and residual/error estimates; a small residual alone is not asserted to imply contraction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "thm-level-shift-fixed-projector-equivalence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rank-r-orthogonal-projector-domain",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$ and let $r$ be an integer with $1\\le r<n$. Use Hermitian\nadjoints and matrices as in [[def-self-adjoint-and-normal-endomorphism]] and\n[[def-matrix-product-and-identity-matrix]], trace as in\n[[def-trace-of-a-square-matrix]], and the Frobenius norm as in\n[[def-frobenius-matrix-norm]]. Write\n$$\\mathbb H_n:=\\{A\\in\\mathbb C^{n\\times n}:A=A^*\\}$$\nfor the real vector space of Hermitian matrices, with Frobenius inner product\n$$\\langle A,B\\rangle_F:=\\operatorname{Re}\\operatorname{tr}(A^*B)=\\operatorname{tr}(AB).$$\nThe **rank-$r$ orthogonal projector domain** is\n$$\\mathcal P_r:=\\{P\\in\\mathbb H_n:P^2=P,\\ \\operatorname{tr}P=r\\}.$$\nAn element of $\\mathcal P_r$ is an orthogonal projector; its range is the occupied\nsubspace. The statement that its range has dimension $r$ is justified by\n[[lem-hermitian-idempotent-trace-equals-rank]]. A frame $Y\\in\\mathbb C^{n\\times r}$\nwith $Y^*Y=I_r$ represents $P=YY^*$; replacing $Y$ by $YQ$ for a unitary\n$Q\\in\\mathbb C^{r\\times r}$ leaves $P$ unchanged.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-self-consistent-projector-response-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$, $1\\le r<n$, and use the real Hermitian matrix space $\\mathbb H_n$\nand projector set $\\mathcal P_r$ of\n[[def-rank-r-orthogonal-projector-domain]]. Let $U\\subseteq\\mathbb H_n$ be open\nand let $F:U\\to\\mathbb H_n$ be a specified map. For a Hermitian matrix $H$,\nwrite its eigenvalues with multiplicity in ascending order as\n$$\\lambda_1(H)\\le\\cdots\\le\\lambda_n(H).$$\nWrite $\\sigma(H):=\\{\\lambda_j(H):1\\le j\\le n\\}$ for its finite spectrum,\nwith multiplicity omitted in this set notation.\nFor any Hermitian $H$ with $\\lambda_r(H)<\\lambda_{r+1}(H)$, write $\\Pi_r(H)$\nfor the orthogonal projector onto the sum of eigenspaces belonging to its $r$\nlowest eigenvalues. At a point $X\\in U$ where\n$$\\lambda_r(F(X))<\\lambda_{r+1}(F(X)),$$\ndefine $\\Phi(X):=\\Pi_r(F(X))$. The strict gap separates the occupied cluster\nfrom the unoccupied cluster; eigenvalue multiplicities within either cluster\nare allowed. The construction's well-definedness as a unique member of\n$\\mathcal P_r$ is proved in [[lem-gapped-projector-map-well-defined]].\n\nA set $K\\subseteq U$ has a **uniform occupied/unoccupied gap** $g>0$ when the\ndisplayed gap is at least $g$ for every $X\\in K$. A self-consistent fixed point\nis a point $X_*$ with $\\Phi(X_*)=X_*$. Its fixed-point residual is\n$\\rho(X):=\\|X-\\Phi(X)\\|_F$ whenever $\\Phi(X)$ is defined. The map is not\nasserted to be contractive merely because its gap is positive.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-gapped-projector-map-well-defined",
+          "source_section": "Statement",
+          "quote": "For every $X\\in U$ at which the response map of\n[[def-self-consistent-projector-response-map]] has a strict $r$th gap,\n$\\Phi(X)$ is a uniquely defined member of $\\mathcal P_r$. Degeneracies among\nthe first $r$ eigenvalues or among the remaining eigenvalues do not affect it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Assume $PF=FP$. Then both $\\operatorname{ran}P$ and $\\operatorname{ran}(I-P)$ are invariant under $F$: if $x=Px$, then $P(Fx)=F(Px)=Fx$, and the analogous identity holds when $Px=0$. Relative to their orthogonal direct sum, $F$ is block diagonal and $F_s$ leaves the occupied block unchanged while adding $sI$ on the virtual block.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "By [F2], the eigenvalues of $F_s$ are exactly those of $F_{occ}$ together with those of $F_{vir}$ shifted by $s$. If $\\max\\sigma(F_{occ})<\\min\\sigma(F_{vir})+s$, the lowest $r$ eigenvalues are precisely the occupied block and the gap is strict; [L1] gives $\\Pi_r(F_s)=P$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Conversely, if $\\Pi_r(F_s)=P$, the isolated lowest-$r$ spectral projector commutes with $F_s$ by [F2]. Since $[s(I-P),P]=0$, this gives $[F,P]=0$, so the two restrictions in the statement are defined. The map's strict-gap domain in [F2] and uniqueness in [L1] require the largest occupied eigenvalue to be strictly smaller than the smallest shifted virtual eigenvalue; equality closes the $r$th gap, while reverse ordering selects a different spectral block. Hence the displayed ordering holds.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F1",
+            "F2",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement inherits1<=r<n, so both compressed blocks have positive dimension. The max and min eigenvalues are therefore taken over nonempty finite spectra."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The shift s=0 is allowed; it reduces the criterion to the unshifted block ordering."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Both block dimensions remain positive because 1≤r<n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Equality at the occupied/virtual boundary closes the rth gap, so the strict inequality boundary is excluded in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 3.1 explicitly excludes equality of the largest occupied and smallest shifted virtual eigenvalues: equality closes the rth gap, so the unique gapped projector is undefined there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Only finite Hermitian spectral decompositions of the two specified blocks are used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 prove that commutation plus strict shifted block ordering yields Pi_r(F_s)=P."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement and step 3.1 prove that Pi_r(F_s)=P forces commutation and strict shifted ordering."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "lem-density-mixing-preserves-domain-but-not-projectors": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-admissible-hermitian-density-domain",
+          "source_section": "Definition",
+          "quote": "For $n\\ge2$ and $1\\le r<n$, let $\\mathbb H_n$ and $\\mathcal P_r$ be as in\n[[def-rank-r-orthogonal-projector-domain]]. The **admissible fixed-particle\ndensity domain** is\n$$\\mathcal D_r:=\\{D\\in\\mathbb H_n:0\\preceq D\\preceq I_n,\\ \\operatorname{tr}D=r\\},$$\nwhere $D\\succeq0$ means $x^*Dx\\ge0$ for every $x\\in\\mathbb C^n$, and\n$D\\preceq I_n$ means $I_n-D\\succeq0$. A member of $\\mathcal D_r$ need not be\nidempotent. The matrix norm and metric used below are the Frobenius norm and its\ninduced metric. Every rank-$r$ orthogonal projector is in $\\mathcal D_r$ by\n[[lem-projector-is-admissible-density]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-self-consistent-projector-response-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$, $1\\le r<n$, and use the real Hermitian matrix space $\\mathbb H_n$\nand projector set $\\mathcal P_r$ of\n[[def-rank-r-orthogonal-projector-domain]]. Let $U\\subseteq\\mathbb H_n$ be open\nand let $F:U\\to\\mathbb H_n$ be a specified map. For a Hermitian matrix $H$,\nwrite its eigenvalues with multiplicity in ascending order as\n$$\\lambda_1(H)\\le\\cdots\\le\\lambda_n(H).$$\nWrite $\\sigma(H):=\\{\\lambda_j(H):1\\le j\\le n\\}$ for its finite spectrum,\nwith multiplicity omitted in this set notation.\nFor any Hermitian $H$ with $\\lambda_r(H)<\\lambda_{r+1}(H)$, write $\\Pi_r(H)$\nfor the orthogonal projector onto the sum of eigenspaces belonging to its $r$\nlowest eigenvalues. At a point $X\\in U$ where\n$$\\lambda_r(F(X))<\\lambda_{r+1}(F(X)),$$\ndefine $\\Phi(X):=\\Pi_r(F(X))$. The strict gap separates the occupied cluster\nfrom the unoccupied cluster; eigenvalue multiplicities within either cluster\nare allowed. The construction's well-definedness as a unique member of\n$\\mathcal P_r$ is proved in [[lem-gapped-projector-map-well-defined]].\n\nA set $K\\subseteq U$ has a **uniform occupied/unoccupied gap** $g>0$ when the\ndisplayed gap is at least $g$ for every $X\\in K$. A self-consistent fixed point\nis a point $X_*$ with $\\Phi(X_*)=X_*$. Its fixed-point residual is\n$\\rho(X):=\\|X-\\Phi(X)\\|_F$ whenever $\\Phi(X)$ is defined. The map is not\nasserted to be contractive merely because its gap is positive.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gapped-projector-map-well-defined",
+          "source_section": "Statement",
+          "quote": "For every $X\\in U$ at which the response map of\n[[def-self-consistent-projector-response-map]] has a strict $r$th gap,\n$\\Phi(X)$ is a uniquely defined member of $\\mathcal P_r$. Degeneracies among\nthe first $r$ eigenvalues or among the remaining eigenvalues do not affect it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-projector-is-admissible-density",
+          "source_section": "Statement",
+          "quote": "Every $P\\in\\mathcal P_r$ belongs to the admissible density domain\n$\\mathcal D_r$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Since $D$ and $\\Phi(D)$ are Hermitian, $D^+$ is Hermitian. For every $x$, $x^*D^+x=(1-\\alpha)x^*Dx+\\alpha x^*\\Phi(D)x\\ge0$. Likewise $x^*(I-D^+)=(1-\\alpha)x^*(I-D)x+\\alpha x^*(I-\\Phi(D))x\\ge0$, since $D\\in\\mathcal D_r$ and $\\Phi(D)\\in\\mathcal D_r$ by [F1], [F2], [F4].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The trace is linear, so $\\operatorname{tr}D^+=(1-\\alpha)r+\\alpha r=r$. The two positive-semidefinite inequalities and this trace identity give $D^+\\in\\mathcal D_r$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "To verify that idempotence need not be preserved, take $n=2$, $r=1$, the constant Hermitian response $F(X)=\\operatorname{diag}(0,1)$ on $U=\\mathbb H_2$, $D=\\operatorname{diag}(0,1)$, and $\\alpha=1/2$. Directly, $D$ is Hermitian, lies between $0$ and $I_2$, and has trace $1$, so $D\\in\\mathcal D_1$. The response matrix has gap $1$, so [F2] gives $\\Phi(D)=\\operatorname{diag}(1,0)$. Then $D^+=\\tfrac12I_2$ and $(D^+)^2=\\tfrac14I_2\\ne D^+$. Thus the update belongs to $\\mathcal D_1$ by step 2.1 but is not an orthogonal projector.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "D and its defined response are supplied in the Statement, so both endpoints of the convex combination exist."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The endpoint α=0 returns D and α=1 returns Φ(D); both are admissible by the hypotheses and projector-inclusion result."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses the minimal rank-one case n=2,r=1 and shows non-idempotence already there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample in step 2.1 has a strict gap; failure of idempotence is caused by convex mixing, not eigenvalue degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1–1.2 explicitly use 0≤α≤1, including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite diagonal response and densities are explicit; no choice principle is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A convex mixture of an admissible density and response projector stays admissible, while idempotence may fail; it is not an equivalence with projector membership."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A convex mixture of an admissible density and response projector stays admissible, while idempotence may fail; it is not an equivalence with projector membership."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "thm-gapped-response-projector-lipschitz-certificate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-self-consistent-projector-response-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$, $1\\le r<n$, and use the real Hermitian matrix space $\\mathbb H_n$\nand projector set $\\mathcal P_r$ of\n[[def-rank-r-orthogonal-projector-domain]]. Let $U\\subseteq\\mathbb H_n$ be open\nand let $F:U\\to\\mathbb H_n$ be a specified map. For a Hermitian matrix $H$,\nwrite its eigenvalues with multiplicity in ascending order as\n$$\\lambda_1(H)\\le\\cdots\\le\\lambda_n(H).$$\nWrite $\\sigma(H):=\\{\\lambda_j(H):1\\le j\\le n\\}$ for its finite spectrum,\nwith multiplicity omitted in this set notation.\nFor any Hermitian $H$ with $\\lambda_r(H)<\\lambda_{r+1}(H)$, write $\\Pi_r(H)$\nfor the orthogonal projector onto the sum of eigenspaces belonging to its $r$\nlowest eigenvalues. At a point $X\\in U$ where\n$$\\lambda_r(F(X))<\\lambda_{r+1}(F(X)),$$\ndefine $\\Phi(X):=\\Pi_r(F(X))$. The strict gap separates the occupied cluster\nfrom the unoccupied cluster; eigenvalue multiplicities within either cluster\nare allowed. The construction's well-definedness as a unique member of\n$\\mathcal P_r$ is proved in [[lem-gapped-projector-map-well-defined]].\n\nA set $K\\subseteq U$ has a **uniform occupied/unoccupied gap** $g>0$ when the\ndisplayed gap is at least $g$ for every $X\\in K$. A self-consistent fixed point\nis a point $X_*$ with $\\Phi(X_*)=X_*$. Its fixed-point residual is\n$\\rho(X):=\\|X-\\Phi(X)\\|_F$ whenever $\\Phi(X)$ is defined. The map is not\nasserted to be contractive merely because its gap is positive.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-spectral-gap-persistence-and-uniform-resolvent-bound",
+          "source_section": "Statement",
+          "quote": "Let $H_0\\in\\mathbb H_n$ have eigenvalues with multiplicity\n$\\lambda_1(H_0)\\le\\cdots\\le\\lambda_n(H_0)$ and gap\n$g=\\lambda_{r+1}(H_0)-\\lambda_r(H_0)>0$. Put\n$$c=\\lambda_1(H_0),\\qquad R=\\frac{\\lambda_r(H_0)+\\lambda_{r+1}(H_0)}2-c,$$\nand let $\\Gamma=\\{c+Re^{it}:0\\le t\\le2\\pi\\}$ be positively oriented.\nFor Hermitian $H$, write $\\sigma(H)=\\{\\lambda_j(H):1\\le j\\le n\\}$.\nThen\n$R\\ge g/2$. For every Hermitian $H$ with $\\|H-H_0\\|_{op}\\le g/4$, exactly\nthe $r$ lowest eigenvalues of $H$, counted with multiplicity, lie inside $\\Gamma$;\nthe gap is at least $g/2$, and\n$$\\operatorname{dist}(\\Gamma,\\sigma(H))\\ge g/4,\\qquad \\|(zI-H)^{-1}\\|_{op}\\le4/g\\quad(z\\in\\Gamma).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-block-projector-frechet-derivative-and-bound",
+          "source_section": "Statement",
+          "quote": "Let $H_0\\in\\mathbb H_n$ have an occupied/unoccupied gap\n$g=\\lambda_{r+1}(H_0)-\\lambda_r(H_0)>0$, and let $c,R,\\Gamma$ be the circle\nfrom [[lem-spectral-gap-persistence-and-uniform-resolvent-bound]]. For Hermitian\n$H$ in the open operator-norm ball $\\|H-H_0\\|_{op}<g/4$, let $\\Pi_r(H)$ be its\nprojector onto the $r$ lowest eigenvalues. Then $H\\mapsto\\Pi_r(H)$ is real\nFrechet $C^1$ in the Frobenius norm and\n$$D\\Pi_r(H)[E]=\\frac1{2\\pi i}\\int_\\Gamma (zI-H)^{-1}E(zI-H)^{-1}\\,dz$$\nfor each Hermitian direction $E$. With $\\ell(\\Gamma)=2\\pi R$,\n$$\\|D\\Pi_r(H)[E]\\|_F\\le\\frac{16R}{g^2}\\|E\\|_F.$$\nThis is a block/cluster statement: no gap between eigenvalues inside either\ncluster is required.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complex-line-integral-over-a-rectifiable-path",
+          "source_section": "Definition",
+          "quote": "Let $\\gamma=x+iy:[a,b]\\to\\mathbb C$ be a rectifiable contour in the sense of [[def-complex-contours-reversal-concatenation-and-closedness]] and let $f=u+iv$ be continuous on its trace, with real and imaginary parts from [[def-complex-conjugate-real-imaginary-part-and-modulus]]. Define\n$$\\int_\\gamma f(z)\\,dz:=\\int_a^b u(\\gamma(t))\\,dx(t)-\\int_a^b v(\\gamma(t))\\,dy(t)+i\\left(\\int_a^b v(\\gamma(t))\\,dx(t)+\\int_a^b u(\\gamma(t))\\,dy(t)\\right),$$\nwhere the four integrals are the real Riemann–Stieltjes integrals of [[def-riemann-stieltjes-sum-and-integral]]. Their existence is proved in [[thm-existence-of-complex-line-integrals-on-rectifiable-paths]]. On a singleton parameter interval the integral is $0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-existence-of-complex-line-integrals-on-rectifiable-paths",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be rectifiable and let $f$ be continuous on its trace. Then the complex line integral [[def-complex-line-integral-over-a-rectifiable-path]] and the absolute line integral [[def-absolute-line-integral-over-a-rectifiable-path]] both exist.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-linearity-of-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "For continuous $f,g$ on the trace of a rectifiable contour $\\gamma$ and $\\alpha,\\beta\\in\\mathbb C$,\n$$\\int_\\gamma(\\alpha f+\\beta g)\\,dz=\\alpha\\int_\\gamma f\\,dz+\\beta\\int_\\gamma g\\,dz.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-gapped-projector-map-well-defined",
+          "source_section": "Statement",
+          "quote": "For every $X\\in U$ at which the response map of\n[[def-self-consistent-projector-response-map]] has a strict $r$th gap,\n$\\Phi(X)$ is a uniquely defined member of $\\mathcal P_r$. Degeneracies among\nthe first $r$ eigenvalues or among the remaining eigenvalues do not affect it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For $X,Y\\in K$, set $H_X=F(X)$ and $H_Y=F(Y)$. By [F1] and [F3], the common-contour formula and inverse identity give, pointwise on $\\Gamma$, $R_{H_X}(z)-R_{H_Y}(z)=R_{H_X}(z)(H_X-H_Y)R_{H_Y}(z).$ Integrating entrywise and using [F5] yields $\\Phi(X)-\\Phi(Y)=\\frac1{2\\pi i}\\int_\\Gamma R_{H_X}(z)(H_X-H_Y)R_{H_Y}(z)\\,dz.$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Each resolvent in step 1.1 has operator norm at most $4/g$ by [F2]. For matrices $A,X$, writing $X$ by columns gives $\\|AX\\|_F^2\\le\\|A\\|_{op}^2\\|X\\|_F^2$; applying this to adjoints and using [F4] gives $\\|AXB\\|_F\\le\\|A\\|_{op}\\|X\\|_F\\|B\\|_{op}$. Thus the Frobenius norm of the integrand in step 1.1 is at most $(4/g)^2\\|F(X)-F(Y)\\|_F$. The contour has length $2\\pi R$, so [F5]'s line-integral triangle inequality gives $\\|\\Phi(X)-\\Phi(Y)\\|_F\\le R(4/g)^2\\|F(X)-F(Y)\\|_F.$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Substituting $\\|F(X)-F(Y)\\|_F\\le L_F\\|X-Y\\|_F$ into step 2.1 gives the stated factor $q=16RL_F/g^2$. If $q<1$ and $\\Phi(K)\\subseteq K$, this is exactly the contraction condition on $K$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The estimate is quantified over supplied X,Y in K. If K is empty there is no such pair and no fixed-point-existence assertion; its conditional contraction conclusion also requires a self-map."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: A positive reference gap g>0 is required; q may be zero when L_F=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The proof applies to each 1≤r<n by the common contour construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The contour isolates the whole occupied cluster, so internal eigenvalue multiplicities do not affect the Lipschitz estimate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The image condition is strict ||F(X)−H0||op<g/4, matching the open domain of the block derivative theorem; the boundary is intentionally excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: All contour integrals are finite-dimensional and use no arbitrary family of projectors."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A common positive-gap contour and an LF-Lipschitz field yield q=16R LF/g^2, with invariance additionally required for a contraction; gap alone is not sufficient."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A common positive-gap contour and an LF-Lipschitz field yield q=16R LF/g^2, with invariance additionally required for a contraction; gap alone is not sufficient."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "cor-finite-basis-energy-model-has-c1-response": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-basis-projector-energy-model",
+          "source_section": "Definition",
+          "quote": "Let $S=S^*\\succ0$ be an $n\\times n$ finite-basis overlap matrix and supply its\nCholesky factor $L$ with $S=LL^*$, $L$ invertible\n([[def-cholesky-factorisation-with-positive-diagonal]],\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).\nIf $h_0=h_0^*$ is the coefficient-basis one-body matrix, set\n$h=L^{-1}h_0L^{-*}$, where $L^{-*}=(L^*)^{-1}$; this is the Cholesky\nwhitening whose generalized Ritz quotient is preserved by\n[[prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil]].\nFor coefficient vectors use $y=L^*c$; the interaction map and chosen\nexchange-correlation functional below are supplied in these orthonormal\ncoordinates. Fix $1\\le r<n$ and the\nprojector domain $\\mathcal P_r$ of [[def-rank-r-orthogonal-projector-domain]].\n\nSupply a Hermitian matrix $h$, a real-linear self-adjoint map\n$G:\\mathbb H_n\\to\\mathbb H_n$ for the Frobenius inner product, and a real-valued\n$C^2$ functional $E_{xc}$ on an open neighborhood of $\\mathcal P_r$. Define\n$$E(P):=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(P G(P))+E_{xc}(P),\\qquad F(P):=h+G(P)+\\nabla E_{xc}(P).$$\nHere $F(P)$ is the Hermitian Frobenius-gradient formula justified by\n[[prop-finite-projector-energy-reality-and-gradient]].\n\nThe finite-basis Hartree–Fock model is the special case $E_{xc}=0$ with a\nsupplied symmetry-compatible Coulomb/exchange tensor defining $G$. A\nKohn–Sham-like model supplies its density map and chosen differentiable\nexchange-correlation functional. These are finite-dimensional mathematical\nmodels; this definition makes no assertion that the selected functional is an\nexact continuum physical energy.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "source_section": "Definition",
+          "quote": "Let $U$ be an open subset of a real matrix space $\\mathbb R^{m\\times n}$ or of\na complex matrix space $\\mathbb C^{m\\times n}$ viewed as a real vector space,\nand let $F:U\\to W$ take values in a finite-dimensional real normed vector\nspace $(W,\\|\\,\\cdot\\,\\|_W)$.\nWe say that $F$ is **real Fr\\'echet differentiable** at $A\\in U$ if there is a\nreal-linear map $L$ such that\n\n$$\\frac{\\|F(A+H)-F(A)-L[H]\\|_W}{\\|H\\|_F}\\longrightarrow0\\qquad(H\\to0,\\ H\\ne0).$$\n\nThat map $L$ is the **real Fr\\'echet derivative** of $F$ at $A$ and is denoted\n$DF(A)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-block-projector-frechet-derivative-and-bound",
+          "source_section": "Statement",
+          "quote": "Let $H_0\\in\\mathbb H_n$ have an occupied/unoccupied gap\n$g=\\lambda_{r+1}(H_0)-\\lambda_r(H_0)>0$, and let $c,R,\\Gamma$ be the circle\nfrom [[lem-spectral-gap-persistence-and-uniform-resolvent-bound]]. For Hermitian\n$H$ in the open operator-norm ball $\\|H-H_0\\|_{op}<g/4$, let $\\Pi_r(H)$ be its\nprojector onto the $r$ lowest eigenvalues. Then $H\\mapsto\\Pi_r(H)$ is real\nFrechet $C^1$ in the Frobenius norm and\n$$D\\Pi_r(H)[E]=\\frac1{2\\pi i}\\int_\\Gamma (zI-H)^{-1}E(zI-H)^{-1}\\,dz$$\nfor each Hermitian direction $E$. With $\\ell(\\Gamma)=2\\pi R$,\n$$\\|D\\Pi_r(H)[E]\\|_F\\le\\frac{16R}{g^2}\\|E\\|_F.$$\nThis is a block/cluster statement: no gap between eigenvalues inside either\ncluster is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-spectral-gap-persistence-and-uniform-resolvent-bound",
+          "source_section": "Statement",
+          "quote": "Let $H_0\\in\\mathbb H_n$ have eigenvalues with multiplicity\n$\\lambda_1(H_0)\\le\\cdots\\le\\lambda_n(H_0)$ and gap\n$g=\\lambda_{r+1}(H_0)-\\lambda_r(H_0)>0$. Put\n$$c=\\lambda_1(H_0),\\qquad R=\\frac{\\lambda_r(H_0)+\\lambda_{r+1}(H_0)}2-c,$$\nand let $\\Gamma=\\{c+Re^{it}:0\\le t\\le2\\pi\\}$ be positively oriented.\nFor Hermitian $H$, write $\\sigma(H)=\\{\\lambda_j(H):1\\le j\\le n\\}$.\nThen\n$R\\ge g/2$. For every Hermitian $H$ with $\\|H-H_0\\|_{op}\\le g/4$, exactly\nthe $r$ lowest eigenvalues of $H$, counted with multiplicity, lie inside $\\Gamma$;\nthe gap is at least $g/2$, and\n$$\\operatorname{dist}(\\Gamma,\\sigma(H))\\ge g/4,\\qquad \\|(zI-H)^{-1}\\|_{op}\\le4/g\\quad(z\\in\\Gamma).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-gapped-projector-map-well-defined",
+          "source_section": "Statement",
+          "quote": "For every $X\\in U$ at which the response map of\n[[def-self-consistent-projector-response-map]] has a strict $r$th gap,\n$\\Phi(X)$ is a uniquely defined member of $\\mathcal P_r$. Degeneracies among\nthe first $r$ eigenvalues or among the remaining eigenvalues do not affect it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put\n\n$$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$\n\nHere $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of [[def-nat-finite-sum-and-product]], and $n!$ is the factorial of [[def-factorial-and-falling-factorial]]. By contrast, $h^\\alpha$ is the finite product in $\\mathbb R$ of [[def-finite-sum]], with the natural exponents interpreted by [[def-integer-power]]. For the zero multi-index $0$, set $D^0f:=f$. For nonzero $\\alpha$, write\n\n$$D^\\alpha f:=\\partial_0^{\\alpha_0}\\cdots\\partial_{m-1}^{\\alpha_{m-1}}f$$\n\nfor this displayed, canonical order whenever it exists. Coordinate partial derivatives have the meaning fixed in [[def-directional-and-partial-derivatives]].\n\nFor $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$. Thus this definition does **not** presuppose that differently ordered derivatives are equal. Equality of their values is a later theorem under these regularity hypotheses.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "source_section": "Statement",
+          "quote": "For every linear $L:\\mathbb R^m\\to\\mathbb R^n$ there is a unique matrix $A=(a_{ij})_{i<n,j<m}$ such that $(Lh)_i=\\sum_{j<m}a_{ij}h_j$. Moreover there is $K\\ge0$ with $\\|Lh\\|_2\\le K\\|h\\|_2$ for every $h$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Identify the real Hermitian space with its finite coordinate space. The constant map $P\\mapsto h$ has derivative zero. The real-linear map $G$ is continuous by [F9] and has derivative $G$ at every point because $G(P+H)-G(P)-G(H)=0$. By [F7] the first partials of $E_{xc}$ are $C^1$: each has first partials given by the continuous second partials of $E_{xc}$, and [F8] makes each component of $\\nabla E_{xc}$ total differentiable with continuous derivative. Thus all three summands in [F1] are $C^1$, so $F$ is $C^1$ and Hermitian-valued on the model's open domain.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Continuity of $F$ gives a neighborhood $V$ of $P_0$ on which $\\|F(P)-F(P_0)\\|_F<g/4$, where $g$ is the gap at $P_0$. By [F6], the operator-norm difference is also less than $g/4$. By [F5] this image lies in a common gap-preserving ball; [F3] makes its block projector $C^1$ there and [L1] identifies it with the defined occupied projector. By [F4], $\\Phi=\\Pi_r\\circ F$ is $C^1$ on $V$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "L1",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For the local occupied-projector assertion the Statement supplies P0; Proof step 2.1 chooses its gap-preserving neighborhood by continuity rather than a point from an empty model domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: A strict positive occupied gap at P0 is required; the response regularity claim stops at gap closure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The finite-dimensional argument applies to all 1≤r<n, including rank-one and codimension-one projectors."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The block theorem allows internal degeneracy in both spectral clusters; only the occupied/unoccupied gap is needed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The local C1 assertion is on an open neighborhood whose image stays strictly within the gap-preserving ball in proof step 2.1; it asserts no continuation to zero gap."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Only local neighborhoods and one finite spectral projector are chosen; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "C2 energy data make the Hermitian response C1; at a supplied gapped P0 its occupied projector is locally C1, with no converse regularity claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "C2 energy data make the Hermitian response C1; at a supplied gapped P0 its occupied projector is locally C1, with no converse regularity claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "thm-density-mixing-contracts-under-jacobian-certificate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-self-consistent-projector-response-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$, $1\\le r<n$, and use the real Hermitian matrix space $\\mathbb H_n$\nand projector set $\\mathcal P_r$ of\n[[def-rank-r-orthogonal-projector-domain]]. Let $U\\subseteq\\mathbb H_n$ be open\nand let $F:U\\to\\mathbb H_n$ be a specified map. For a Hermitian matrix $H$,\nwrite its eigenvalues with multiplicity in ascending order as\n$$\\lambda_1(H)\\le\\cdots\\le\\lambda_n(H).$$\nWrite $\\sigma(H):=\\{\\lambda_j(H):1\\le j\\le n\\}$ for its finite spectrum,\nwith multiplicity omitted in this set notation.\nFor any Hermitian $H$ with $\\lambda_r(H)<\\lambda_{r+1}(H)$, write $\\Pi_r(H)$\nfor the orthogonal projector onto the sum of eigenspaces belonging to its $r$\nlowest eigenvalues. At a point $X\\in U$ where\n$$\\lambda_r(F(X))<\\lambda_{r+1}(F(X)),$$\ndefine $\\Phi(X):=\\Pi_r(F(X))$. The strict gap separates the occupied cluster\nfrom the unoccupied cluster; eigenvalue multiplicities within either cluster\nare allowed. The construction's well-definedness as a unique member of\n$\\mathcal P_r$ is proved in [[lem-gapped-projector-map-well-defined]].\n\nA set $K\\subseteq U$ has a **uniform occupied/unoccupied gap** $g>0$ when the\ndisplayed gap is at least $g$ for every $X\\in K$. A self-consistent fixed point\nis a point $X_*$ with $\\Phi(X_*)=X_*$. Its fixed-point residual is\n$\\rho(X):=\\|X-\\Phi(X)\\|_F$ whenever $\\Phi(X)$ is defined. The map is not\nasserted to be contractive merely because its gap is positive.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-gapped-projector-map-well-defined",
+          "source_section": "Statement",
+          "quote": "For every $X\\in U$ at which the response map of\n[[def-self-consistent-projector-response-map]] has a strict $r$th gap,\n$\\Phi(X)$ is a uniquely defined member of $\\mathcal P_r$. Degeneracies among\nthe first $r$ eigenvalues or among the remaining eigenvalues do not affect it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-block-projector-frechet-derivative-and-bound",
+          "source_section": "Statement",
+          "quote": "Let $H_0\\in\\mathbb H_n$ have an occupied/unoccupied gap\n$g=\\lambda_{r+1}(H_0)-\\lambda_r(H_0)>0$, and let $c,R,\\Gamma$ be the circle\nfrom [[lem-spectral-gap-persistence-and-uniform-resolvent-bound]]. For Hermitian\n$H$ in the open operator-norm ball $\\|H-H_0\\|_{op}<g/4$, let $\\Pi_r(H)$ be its\nprojector onto the $r$ lowest eigenvalues. Then $H\\mapsto\\Pi_r(H)$ is real\nFrechet $C^1$ in the Frobenius norm and\n$$D\\Pi_r(H)[E]=\\frac1{2\\pi i}\\int_\\Gamma (zI-H)^{-1}E(zI-H)^{-1}\\,dz$$\nfor each Hermitian direction $E$. With $\\ell(\\Gamma)=2\\pi R$,\n$$\\|D\\Pi_r(H)[E]\\|_F\\le\\frac{16R}{g^2}\\|E\\|_F.$$\nThis is a block/cluster statement: no gap between eigenvalues inside either\ncluster is required.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$ and let $a, b \\in \\mathbb{R}$ with $a < b$.\n\n1. **Fundamental theorem, second part, in $\\mathbb{R}^{m}$.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be differentiable at every point of $[a,b]$ as\n   a function on $[a,b]$ ([[def-vector-valued-derivative-and-integral]]), and\n   suppose $f' : [a,b] \\to \\mathbb{R}^{m}$ is integrable. Then\n   $$\\int_a^b f' \\;=\\; f(b) - f(a).$$\n2. **A bounded derivative gives a Lipschitz function.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and differentiable at\n   every point of $(a,b)$, and let $M \\ge 0$ satisfy\n   $\\lVert f'(t)\\rVert_2 \\le M$ for every $t \\in (a,b)$. Then\n   $$\\lVert f(t) - f(s)\\rVert_2 \\;\\le\\; M\\,|t-s| \\qquad \\text{for all } s,t \\in [a,b],$$\n   that is, $f$ is Lipschitz with constant $M$ as a map\n   $([a,b], d_{\\mathbb{R}}) \\to (\\mathbb{R}^{m}, d_2)$\n   ([[def-lipschitz-holder-contraction]], [[lem-real-line-is-a-metric-space]],\n   [[lem-metrics-on-rn]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty complete metric space ([[def-complete-metric-space]])\nand let $f : X \\to X$ be a contraction with constant $q$, so\n$d(f(u),f(v)) \\le q\\,d(u,v)$ for all $u,v \\in X$ and $0 \\le q < 1$\n([[def-lipschitz-holder-contraction]]). Then:\n\n1. There is exactly one $x^{*} \\in X$ with $f(x^{*}) = x^{*}$.\n2. For every $x_0 \\in X$ the sequence of **iterates**, defined by recursion\n   ([[thm-recursion]]) by $x_{n+1} := f(x_n)$, converges to $x^{*}$ in $(X,d)$\n   ([[def-metric-convergence]]). In particular the limit does not depend on\n   $x_0$.\n3. For all $m, n \\in \\mathbb{N}$ with $m \\ge n$,\n   $$d(x_m, x_n) \\;\\le\\; \\frac{q^{\\,n}\\, d(x_1,x_0)}{1-q},$$\n   with the integer power of [[def-integer-power]].\n\nClaim 3 is the quantitative form of the argument that proves claims 1 and 2, and\nit is recorded in the statement because the error estimates\n([[cor-banach-error-estimates]]) are read off from it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.\n\nFor an open $U\\subseteq\\mathbb R^n$ and $a\\in U$, a **local inverse of $f$ at\n$a$** is a function $g:W\\to V$ for open neighbourhoods $a\\in V\\subseteq U$\nand $f(a)\\in W\\subseteq\\mathbb R^n$ such that $f|_V:V\\to W$ is bijective and\n$g=(f|_V)^{-1}$. If both $f|_V$ and $g$ are $C^1$, this restriction is a\n**local diffeomorphism** at $a$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-admissible-density-domain-is-closed-convex-complete",
+          "source_section": "Statement",
+          "quote": "For $n\\ge2$ and $1\\le r<n$, the set $\\mathcal D_r$ of\n[[def-admissible-hermitian-density-domain]] is nonempty, closed, and convex in\n$\\mathbb H_n$, and complete in the Frobenius metric.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For $D,E\\in K$, convexity puts the segment $Z(t)=E+t(D-E)$ in $K$ for $t\\in[0,1]$. By [F1] and [L1], $\\Phi$ is defined along this segment; [F2] gives its local $C^1$ regularity. For an increment $H$, $T_\\alpha(D+H)-T_\\alpha(D)=(1-\\alpha)H+\\alpha(\\Phi(D+H)-\\Phi(D))$, so Frechet differentiability of $\\Phi$ gives $DT_\\alpha(D)=(1-\\alpha)I+\\alpha D\\Phi(D)$. The chain rule [F5] on the segment gives $\\frac d{dt}T_\\alpha(Z(t))=DT_\\alpha(Z(t))[D-E]$. Its norm is at most $q\\|D-E\\|_F$ by the assumed induced-norm bound; continuity follows from [F2] and [F6].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "L1",
+            "F2",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Apply [F3] on $[0,1]$ to this path. It yields $\\|T_\\alpha(D)-T_\\alpha(E)\\|_F\\le q\\|D-E\\|_F$, so $T_\\alpha$ is a contraction on $K$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Any Frobenius-Cauchy sequence in $K$ is Cauchy in $\\mathcal D_r$, so [F7] gives a limit in $\\mathcal D_r$; closedness of $K$ places that limit in $K$. Thus $K$ is complete. Invariance and step 2.1 allow [F4] to give a unique fixed point and convergence of all iterates from $K$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F4",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: K is explicitly nonempty, as required to apply Banach in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The endpoint α=0 is included, but the theorem’s q<1 derivative bound then fails unless K is degenerate; the theorem makes no automatic damping claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If K is a singleton, the segment in Proof step 1.1 is constant and Proof step 2.1 bounds zero distance by zero; invariance fixes its sole density."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: No spectral simplicity is required; local block C1 regularity uses only a strict rth gap."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The endpoint α=1 is allowed; contraction still requires the stated uniform derivative certificate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Completeness of K follows by a direct Cauchy-limit argument inside the closed density set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "An invariant relaxed response with an independently certified induced norm q<1 is contractive; positive mixing alpha alone is not a converse certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An invariant relaxed response with an independently certified induced norm q<1 is contractive; positive mixing alpha alone is not a converse certificate."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "thm-certified-diis-error-inheritance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-contractive-scf-convergence-and-inexact-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $(K,d)$ be a nonempty complete metric space and let $\\Phi:K\\to K$ be a\ncontraction with constant $0\\le q<1$. In the SCF application, $K$ is a\ncomplete invariant subset of the response-map domain from\n[[def-self-consistent-projector-response-map]], with $d(X,Y)=\\|X-Y\\|_F$.\nThen $\\Phi$ has a unique fixed point $X_*$ and exact iterates\n$X_{k+1}=\\Phi(X_k)$ satisfy\n$$d(X_k,X_*)\\le q^k d(X_0,X_*).$$\nFor every $X\\in K$,\n$$d(X,X_*)\\le\\frac{d(X,\\Phi(X))}{1-q}.$$\nIf computed updates $X_{k+1}\\in K$ obey\n$d(X_{k+1},\\Phi(X_k))\\le\\eta_k$, then\n$$e_{k+1}\\le q e_k+\\eta_k,\\qquad e_k\\le q^k e_0+\\sum_{j=0}^{k-1}q^{k-1-j}\\eta_j,$$\nwhere $e_k=d(X_k,X_*)$ and $X_0$ is the supplied initial point.\nUse the convention $q^0=1$, including when $q=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-certified-scf-with-diis-safeguard",
+          "source_section": "Definition",
+          "quote": "Input: a complete invariant set $K$ and a gapped response map $\\Phi:K\\to K$\nwith a certified contraction factor $q<1$; an initial projector $P_0\\in K$;\na certified initial error bound $E_0\\ge\\|P_0-P_*\\|_F$ for the unique fixed\npoint $P_*$; residual tolerance $\\varepsilon\\ge0$; finite update budget\n$N\\in\\mathbb N_0$; memory $m\\ge1$; coefficient cap $C\\ge1$; and an eigensolver\nwhich, on success at $X$, returns $\\widetilde\\Phi(X)\\in K$ and a certified\n$\\eta(X)\\ge0$ with $\\|\\widetilde\\Phi(X)-\\Phi(X)\\|_F\\le\\eta(X)$. The solver\nreturns a separate failure status if it cannot certify the gap or this error.\n\nFor $k=0,\\ldots,N$:\n\n1. If no certified response evaluation is cached for $P_k$, evaluate the finite-basis matrix $F(P_k)$ and its occupied projector solver. If the gap fails, return $\\texttt{gap-loss}$; if the eigensolver cannot certify its output/error, return $\\texttt{eigensolve-failure}$. Cache the certified evaluation $(F(P_k),\\widetilde\\Phi(P_k),\\eta(P_k))$ at exactly $P_k$. Whether this evaluation is newly obtained or already cached, use that current evaluation, check the certified baseline output belongs to $K$ (return $\\texttt{invariance-certificate-failure}$ if not), and retain the current pair $(P_k,F(P_k))$ for this proposal step. Set $\\bar\\rho_k=\\|P_k-\\widetilde\\Phi(P_k)\\|_F+\\eta(P_k)$. If $\\bar\\rho_k\\le\\varepsilon$, return $\\texttt{residual-tolerance-met}$ with error bound $\\bar\\rho_k/(1-q)$.\n2. If $k=N$, return $\\texttt{iteration-budget-exhausted}$ with current bound $E_k$.\n3. Call [[alg-capped-diis-projector-proposal]] with the up-to-$m-1$ preceding stored pairs and the current pair $(P_k,F(P_k))$. For a candidate $Y$, certify $Y\\in K$, the gap at $Y$, and one eigensolver evaluation $\\widetilde\\Phi(Y)$ with error $\\eta(Y)$. Accept $Y$ only if all certificates succeed and\n$$\\frac{\\|Y-\\widetilde\\Phi(Y)\\|_F+\\eta(Y)}{1-q}\\le qE_k.$$\nIf accepted, set $P_{k+1}=Y$ and $E_{k+1}=qE_k$.\n4. If step 3 does not accept a candidate for any reason, use the certified baseline update from step 1. In particular this includes a singular/uncertified least-squares solve, coefficient-cap or affine-constraint failure, failed candidate $K$-membership, failed candidate gap, failed candidate eigensolver output/error certificate, or failed candidate fixed-point residual test. In this fallback branch, set $P_{k+1}=\\widetilde\\Phi(P_k)$ and $E_{k+1}=qE_k+\\eta(P_k)$. If the baseline certificate or $K$-membership check fails, return its distinct gap, eigensolver, or invariance-certificate failure status.\n5. Append the current pair $(P_k,F(P_k))$ to the preceding-iterate history, retaining at most the newest $m-1$ preceding pairs. If step 3 accepted $Y$, cache its certified evaluation $(F(Y),\\widetilde\\Phi(Y),\\eta(Y))$ as the next iteration's current evaluation; if the baseline branch was used, evaluate its new iterate when the next loop begins. Never attach a response matrix evaluated at one density to a different density.\n\nThe DIIS commutator objective is only a proposal score. Acceptance uses the\nseparate fixed-point residual $\\|Y-\\Phi(Y)\\|_F$ with its additive eigensolver\nerror certificate. The algorithm makes no unconditional success claim: finite\nbudget exhaustion and each certificate failure are explicit outcomes.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Initially $\\|P_0-P_*\\|_F\\le E_0$ by input. Suppose $\\|P_k-P_*\\|_F\\le E_k$. If the algorithm accepts candidate $Y=P_{k+1}$, [F2] gives a certified upper bound $\\bar\\rho(Y)$ for $\\|Y-\\Phi(Y)\\|_F$ with $\\bar\\rho(Y)/(1-q)\\le qE_k$. Applying [F1] at $Y$ proves $\\|P_{k+1}-P_*\\|_F\\le qE_k=E_{k+1}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "If the baseline is used, its evaluator certifies $\\|P_{k+1}-\\Phi(P_k)\\|_F\\le\\eta_k$. The triangle inequality and contraction give $\\|P_{k+1}-P_*\\|_F\\le\\eta_k+\\|\\Phi(P_k)-\\Phi(P_*)\\|_F\\le\\eta_k+q\\|P_k-P_*\\|_F\\le qE_k+\\eta_k=E_{k+1}.$ Thus induction proves $\\|P_k-P_*\\|_F\\le E_k$ at every step.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "By [F2], both update branches obey $E_{k+1}\\le qE_k+\\eta_k$ (accepted DIIS uses $\\eta_k=0$ for this upper estimate). Iterating this scalar recurrence by induction gives $E_k\\le q^kE_0+\\sum_{j<k}q^{k-1-j}\\eta_j$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "If the run continues indefinitely with $\\eta_j\\to0$, the convolution tends to zero: for any $\\epsilon>0$, choose $J$ so $\\eta_j\\le(1-q)\\epsilon/2$ for $j\\ge J$. The tail sum is at most $\\epsilon/2$, while the finite head and $q^kE_0$ tend to zero as $k\\to\\infty$. If $q=0$, the recurrence is $E_{k+1}\\le\\eta_k\\to0$ directly. Hence $E_k\\to0$ and step 2.1 gives $P_k\\to P_*$. The conclusion is conditional on indefinite successful continuation and does not assert that a finite budget must meet its stopping tolerance.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The complete invariant set and initial point are inherited from the certified algorithm and the Banach theorem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The q=0 boundary is handled explicitly in step 3.1 with q^0=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At k=1, the convolution bound in proof step 3.1 has just eta_0 and readsE_1<=qE_0+eta_0, matching the baseline branch in proof step 2.1 and the sharper accepted-candidate bound in proof step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The proof includes singular DIIS solves through the fallback branch and makes no Gram nonsingularity assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The finite-update case may exhaust its budget; convergence is asserted only for indefinite successful continuation with ηk→0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Every iterate is determined by the certified algorithm and finite solver outputs; no arbitrary selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Certified candidate tests and baseline response errors propagate the scalar error enclosure; a commutator least-squares residual is not a converse error certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Certified candidate tests and baseline response errors propagate the scalar error enclosure; a commutator least-squares residual is not a converse error certificate."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "ex-occupied-projector-discontinuity-at-zero-gap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-self-consistent-projector-response-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$, $1\\le r<n$, and use the real Hermitian matrix space $\\mathbb H_n$\nand projector set $\\mathcal P_r$ of\n[[def-rank-r-orthogonal-projector-domain]]. Let $U\\subseteq\\mathbb H_n$ be open\nand let $F:U\\to\\mathbb H_n$ be a specified map. For a Hermitian matrix $H$,\nwrite its eigenvalues with multiplicity in ascending order as\n$$\\lambda_1(H)\\le\\cdots\\le\\lambda_n(H).$$\nWrite $\\sigma(H):=\\{\\lambda_j(H):1\\le j\\le n\\}$ for its finite spectrum,\nwith multiplicity omitted in this set notation.\nFor any Hermitian $H$ with $\\lambda_r(H)<\\lambda_{r+1}(H)$, write $\\Pi_r(H)$\nfor the orthogonal projector onto the sum of eigenspaces belonging to its $r$\nlowest eigenvalues. At a point $X\\in U$ where\n$$\\lambda_r(F(X))<\\lambda_{r+1}(F(X)),$$\ndefine $\\Phi(X):=\\Pi_r(F(X))$. The strict gap separates the occupied cluster\nfrom the unoccupied cluster; eigenvalue multiplicities within either cluster\nare allowed. The construction's well-definedness as a unique member of\n$\\mathcal P_r$ is proved in [[lem-gapped-projector-map-well-defined]].\n\nA set $K\\subseteq U$ has a **uniform occupied/unoccupied gap** $g>0$ when the\ndisplayed gap is at least $g$ for every $X\\in K$. A self-consistent fixed point\nis a point $X_*$ with $\\Phi(X_*)=X_*$. Its fixed-point residual is\n$\\rho(X):=\\|X-\\Phi(X)\\|_F$ whenever $\\Phi(X)$ is defined. The map is not\nasserted to be contractive merely because its gap is positive.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "If $t>0$, then $-t<t$ and the lowest eigenvector is $e_1$, so $\\Pi_1(H(t))=e_1e_1^*$. If $t<0$, then $t<-t$ and the lowest eigenvector is $e_2$, so $\\Pi_1(H(t))=e_2e_2^*$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "At $t=0$, both eigenvalues equal $0$, so the gap is $0$ and every rank-one orthogonal projector onto a line is a lowest-eigenspace projector; there is no unique $\\Pi_1(H(0))$ under [F1].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The limits as $t\\downarrow0$ and $t\\uparrow0$ are respectively $e_1e_1^*$ and $e_2e_2^*$, which are distinct because their Frobenius distance is $\\sqrt2$. Thus no continuous extension of the uniquely gapped projector exists at $t=0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes n=2,r=1 and actual matricesH(t), so neither spectral cluster nor the one-sided families of nonzero real t is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example is exactly the zero-gap boundary: both eigenvalues coincide at t=0 and the one-sided projectors differ."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The minimal n=2,r=1 case is computed explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: At t=0 the two-dimensional eigenspace contains every rank-one line projector, so uniqueness fails."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.2 treats t=0 directly: both eigenvalues are zero and the lowest rank-one projector is nonunique. Proof step 2.1 computes the distinct one-sided limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The two eigenvectors e1 and e2 are explicit; no choice axiom is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The fixed2x2 diagonal family has different one-sided occupied-projector limits; it supplies a discontinuity example, not an equivalence for all gap closures."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The fixed2x2 diagonal family has different one-sided occupied-projector limits; it supplies a discontinuity example, not an equivalence for all gap closures."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-sided limits at a zero gap",
+          "method": "exact finite calculation",
+          "input": {
+            "H_t": "diag(-t,t)",
+            "t_positive": 1,
+            "t_negative": -1
+          },
+          "calculation": "For t>0, Pi1=e1e1*; for t<0, Pi1=e2e2*. The two projectors have Frobenius distance sqrt(2), so the one-sided limits at zero differ.",
+          "expected": {
+            "one_sided_limit_distance": "sqrt(2)",
+            "continuous_extension_at_zero": false
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "ex-self-consistent-projector-two-cycle-with-gap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-basis-projector-energy-model",
+          "source_section": "Definition",
+          "quote": "Let $S=S^*\\succ0$ be an $n\\times n$ finite-basis overlap matrix and supply its\nCholesky factor $L$ with $S=LL^*$, $L$ invertible\n([[def-cholesky-factorisation-with-positive-diagonal]],\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).\nIf $h_0=h_0^*$ is the coefficient-basis one-body matrix, set\n$h=L^{-1}h_0L^{-*}$, where $L^{-*}=(L^*)^{-1}$; this is the Cholesky\nwhitening whose generalized Ritz quotient is preserved by\n[[prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil]].\nFor coefficient vectors use $y=L^*c$; the interaction map and chosen\nexchange-correlation functional below are supplied in these orthonormal\ncoordinates. Fix $1\\le r<n$ and the\nprojector domain $\\mathcal P_r$ of [[def-rank-r-orthogonal-projector-domain]].\n\nSupply a Hermitian matrix $h$, a real-linear self-adjoint map\n$G:\\mathbb H_n\\to\\mathbb H_n$ for the Frobenius inner product, and a real-valued\n$C^2$ functional $E_{xc}$ on an open neighborhood of $\\mathcal P_r$. Define\n$$E(P):=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(P G(P))+E_{xc}(P),\\qquad F(P):=h+G(P)+\\nabla E_{xc}(P).$$\nHere $F(P)$ is the Hermitian Frobenius-gradient formula justified by\n[[prop-finite-projector-energy-reality-and-gradient]].\n\nThe finite-basis Hartree–Fock model is the special case $E_{xc}=0$ with a\nsupplied symmetry-compatible Coulomb/exchange tensor defining $G$. A\nKohn–Sham-like model supplies its density map and chosen differentiable\nexchange-correlation functional. These are finite-dimensional mathematical\nmodels; this definition makes no assertion that the selected functional is an\nexact continuum physical energy.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-self-consistent-projector-response-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$, $1\\le r<n$, and use the real Hermitian matrix space $\\mathbb H_n$\nand projector set $\\mathcal P_r$ of\n[[def-rank-r-orthogonal-projector-domain]]. Let $U\\subseteq\\mathbb H_n$ be open\nand let $F:U\\to\\mathbb H_n$ be a specified map. For a Hermitian matrix $H$,\nwrite its eigenvalues with multiplicity in ascending order as\n$$\\lambda_1(H)\\le\\cdots\\le\\lambda_n(H).$$\nWrite $\\sigma(H):=\\{\\lambda_j(H):1\\le j\\le n\\}$ for its finite spectrum,\nwith multiplicity omitted in this set notation.\nFor any Hermitian $H$ with $\\lambda_r(H)<\\lambda_{r+1}(H)$, write $\\Pi_r(H)$\nfor the orthogonal projector onto the sum of eigenspaces belonging to its $r$\nlowest eigenvalues. At a point $X\\in U$ where\n$$\\lambda_r(F(X))<\\lambda_{r+1}(F(X)),$$\ndefine $\\Phi(X):=\\Pi_r(F(X))$. The strict gap separates the occupied cluster\nfrom the unoccupied cluster; eigenvalue multiplicities within either cluster\nare allowed. The construction's well-definedness as a unique member of\n$\\mathcal P_r$ is proved in [[lem-gapped-projector-map-well-defined]].\n\nA set $K\\subseteq U$ has a **uniform occupied/unoccupied gap** $g>0$ when the\ndisplayed gap is at least $g$ for every $X\\in K$. A self-consistent fixed point\nis a point $X_*$ with $\\Phi(X_*)=X_*$. Its fixed-point residual is\n$\\rho(X):=\\|X-\\Phi(X)\\|_F$ whenever $\\Phi(X)$ is defined. The map is not\nasserted to be contractive merely because its gap is positive.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-undamped-scf-with-gap-and-residual-status",
+          "source_section": "Definition",
+          "quote": "Input: $n,r$, a response map $F:U\\to\\mathbb H_n$ and its occupied projector\nmap $\\Phi$ from [[def-self-consistent-projector-response-map]], an initial\nprojector $P_0\\in\\mathcal P_r$, a required gap $g_{min}>0$, residual tolerance\n$\\varepsilon\\ge0$, and update budget $N\\in\\mathbb N_0$. Assume each iterate\nbelongs to a declared invariant input set $K\\subseteq U$. Use the Frobenius\nmetric and the fixed-point interface of [[alg-fixed-point-iteration]].\n\nFor $k=0,1,\\ldots,N$:\n\n1. Compute the ordered eigenvalues of $F(P_k)$. If the eigensolver fails with no certified ordered spectrum, return $(P_k,\\texttt{eigensolve-failure},\\varnothing,k)$. If $\\lambda_{r+1}(F(P_k))-\\lambda_r(F(P_k))<g_{min}$, return $(P_k,\\texttt{gap-loss},\\varnothing,k)$.\n2. Set $P_{k+1}^{raw}=\\Phi(P_k)$ and $\\rho_k=\\|P_k-P_{k+1}^{raw}\\|_F$. If $\\rho_k\\le\\varepsilon$, return $(P_k,\\texttt{residual-tolerance-met},\\rho_k,k)$.\n3. If $k=N$, return $(P_k,\\texttt{iteration-budget-exhausted},\\rho_k,k)$. Otherwise set $P_{k+1}=P_{k+1}^{raw}$ and continue.\n\nIt reports a residual stopping status, gap loss, eigensolver failure, or budget\nexhaustion separately. A finite budget\ndoes not guarantee that the residual tolerance will be met, and the definition\nasserts no convergence from damping or from a positive gap alone.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-gapped-projector-map-well-defined",
+          "source_section": "Statement",
+          "quote": "For every $X\\in U$ at which the response map of\n[[def-self-consistent-projector-response-map]] has a strict $r$th gap,\n$\\Phi(X)$ is a uniquely defined member of $\\mathcal P_r$. Degeneracies among\nthe first $r$ eigenvalues or among the remaining eigenvalues do not affect it.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For Hermitian $X,Y$, the diagonal entries are real and $\\langle G(X),Y\\rangle_F=X_{11}Y_{11}+X_{22}Y_{22}=\\langle X,G(Y)\\rangle_F.$ Thus $G$ is real-linear, Hermitian-valued, and self-adjoint for the Frobenius inner product, so the stated data satisfy [F1]. Each $P_i$ is Hermitian, idempotent, and has trace $1$, hence lies in $\\mathcal P_1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Direct substitution gives $F(P_0)=\\operatorname{diag}(1,0)$ and $F(P_1)=\\operatorname{diag}(0,1)$. Each matrix has eigenvalues $0<1$, so the strict occupied gap is $1$. By [F2], the lowest eigenspace of $F(P_0)$ is $\\operatorname{span}\\{(0,1)^T\\}$ and that of $F(P_1)$ is $\\operatorname{span}\\{(1,0)^T\\}$; [F4] guarantees these give the unique projectors $\\Phi(P_0)=P_1$ and $\\Phi(P_1)=P_0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "By [F3], starting at $P_0$ yields $P_0,P_1,P_0,P_1,\\ldots$. Since $\\|P_0-P_1\\|_F=\\sqrt2>0$, this sequence does not converge. Thus a positive uniform gap at the iterates alone does not imply convergence.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Proof step 1.1 constructs both admissible projectors; Proof step 1.2 computes each unique occupied eigenspace. No unprovided state or empty spectral block is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Both visited matrices have gap 1, so the example isolates nonconvergence with a strictly positive gap."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The minimal rank-one case n=2,r=1 is explicitly computed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Both F(P0) and F(P1) have simple spectra; degeneracy is not needed for cycling."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example has the two specified projector iterates and no interval-valued relaxation parameter; Proof step 2.1 alternates these fixed matrices."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: All matrices and updates are explicit finite calculations."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A concrete rank-one2x2 response cycles betweenP0 andP1 despite gap1; this refutes sufficiency of a gap rather than characterizing convergence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A concrete rank-one2x2 response cycles betweenP0 andP1 despite gap1; this refutes sufficiency of a gap rather than characterizing convergence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "finite-basis 2x2 two-cycle",
+          "method": "exact finite calculation",
+          "input": {
+            "P0": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "P1": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "G": "diag(P11,P22)"
+          },
+          "calculation": "F(P0)=diag(1,0) and F(P1)=diag(0,1); each has gap 1, and their lowest-eigenvalue projectors are P1 and P0 respectively.",
+          "expected": {
+            "Phi_P0": "P1",
+            "Phi_P1": "P0",
+            "both_gaps": 1
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "ex-affine-contractive-response-and-residual-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-contractive-scf-convergence-and-inexact-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $(K,d)$ be a nonempty complete metric space and let $\\Phi:K\\to K$ be a\ncontraction with constant $0\\le q<1$. In the SCF application, $K$ is a\ncomplete invariant subset of the response-map domain from\n[[def-self-consistent-projector-response-map]], with $d(X,Y)=\\|X-Y\\|_F$.\nThen $\\Phi$ has a unique fixed point $X_*$ and exact iterates\n$X_{k+1}=\\Phi(X_k)$ satisfy\n$$d(X_k,X_*)\\le q^k d(X_0,X_*).$$\nFor every $X\\in K$,\n$$d(X,X_*)\\le\\frac{d(X,\\Phi(X))}{1-q}.$$\nIf computed updates $X_{k+1}\\in K$ obey\n$d(X_{k+1},\\Phi(X_k))\\le\\eta_k$, then\n$$e_{k+1}\\le q e_k+\\eta_k,\\qquad e_k\\le q^k e_0+\\sum_{j=0}^{k-1}q^{k-1-j}\\eta_j,$$\nwhere $e_k=d(X_k,X_*)$ and $X_0$ is the supplied initial point.\nUse the convention $q^0=1$, including when $q=0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For $x,y\\in[0,1]$, $\\Phi(x)\\in[1/4,3/4]\\subseteq[0,1]$ and $|\\Phi(x)-\\Phi(y)|=|x-y|/2$. Solving $x=x/2+1/4$ gives the unique fixed point $x_*=1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The exact iterates satisfy $x_{k+1}-1/2=(x_k-1/2)/2$, so induction gives $|x_k-x_*|=2^{-k}|x_0-x_*|$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "For any $x\\in[0,1]$, $|x-\\Phi(x)|=|x-1/2|/2$, hence $|x-x_*|=|x-\\Phi(x)|/(1-1/2)$. This attains equality in the residual estimate of [F1].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example uses K=[0,1], which contains the fixed point1/2 explicitly found in Proof step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The initial value x0=1/2 gives the zero-residual fixed-point case and equality in the bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The first iterate obeys the same exact formula e1=e0/2; all k are covered by induction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At x=1/2 both the fixed-point error and residual in Proof step 3.1 are zero; division is only by the constant1-1/2, which is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Phi maps the closed interval [0,1] into [1/4,3/4], so both endpoint inputs are admissible."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The fixed point and every iterate are given explicitly by the affine formula."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The specified affine scalar response has fixed point1/2 and attains equality in the residual-error bound; it is one worked instance rather than a converse theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The specified affine scalar response has fixed point1/2 and attains equality in the residual-error bound; it is one worked instance rather than a converse theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "affine contraction exact residual certificate",
+          "method": "exact finite calculation",
+          "input": {
+            "Phi": "x/2+1/4",
+            "fixed_point": "1/2",
+            "q": "1/2"
+          },
+          "calculation": "For every x, |x-Phi(x)|=|x-1/2|/2, so division by 1-q=1/2 gives exactly |x-x*|.",
+          "expected": {
+            "residual_error_bound": "equality"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "ex-density-mixture-leaves-projector-manifold": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-projector-is-admissible-density",
+          "source_section": "Statement",
+          "quote": "Every $P\\in\\mathcal P_r$ belongs to the admissible density domain\n$\\mathcal D_r$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-self-consistent-projector-response-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$, $1\\le r<n$, and use the real Hermitian matrix space $\\mathbb H_n$\nand projector set $\\mathcal P_r$ of\n[[def-rank-r-orthogonal-projector-domain]]. Let $U\\subseteq\\mathbb H_n$ be open\nand let $F:U\\to\\mathbb H_n$ be a specified map. For a Hermitian matrix $H$,\nwrite its eigenvalues with multiplicity in ascending order as\n$$\\lambda_1(H)\\le\\cdots\\le\\lambda_n(H).$$\nWrite $\\sigma(H):=\\{\\lambda_j(H):1\\le j\\le n\\}$ for its finite spectrum,\nwith multiplicity omitted in this set notation.\nFor any Hermitian $H$ with $\\lambda_r(H)<\\lambda_{r+1}(H)$, write $\\Pi_r(H)$\nfor the orthogonal projector onto the sum of eigenspaces belonging to its $r$\nlowest eigenvalues. At a point $X\\in U$ where\n$$\\lambda_r(F(X))<\\lambda_{r+1}(F(X)),$$\ndefine $\\Phi(X):=\\Pi_r(F(X))$. The strict gap separates the occupied cluster\nfrom the unoccupied cluster; eigenvalue multiplicities within either cluster\nare allowed. The construction's well-definedness as a unique member of\n$\\mathcal P_r$ is proved in [[lem-gapped-projector-map-well-defined]].\n\nA set $K\\subseteq U$ has a **uniform occupied/unoccupied gap** $g>0$ when the\ndisplayed gap is at least $g$ for every $X\\in K$. A self-consistent fixed point\nis a point $X_*$ with $\\Phi(X_*)=X_*$. Its fixed-point residual is\n$\\rho(X):=\\|X-\\Phi(X)\\|_F$ whenever $\\Phi(X)$ is defined. The map is not\nasserted to be contractive merely because its gap is positive.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gapped-projector-map-well-defined",
+          "source_section": "Statement",
+          "quote": "For every $X\\in U$ at which the response map of\n[[def-self-consistent-projector-response-map]] has a strict $r$th gap,\n$\\Phi(X)$ is a uniquely defined member of $\\mathcal P_r$. Degeneracies among\nthe first $r$ eigenvalues or among the remaining eigenvalues do not affect it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-density-mixing-preserves-domain-but-not-projectors",
+          "source_section": "Statement",
+          "quote": "If $D\\in\\mathcal D_r$ and the gapped map $\\Phi(D)$ of\n[[def-self-consistent-projector-response-map]] is defined, then for every\n$\\alpha\\in[0,1]$,\n$$D^+=(1-\\alpha)D+\\alpha\\Phi(D)$$\nbelongs to $\\mathcal D_r$. The conclusion does not assert $D^+\\in\\mathcal P_r$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "The matrix $P_0$ is a Hermitian idempotent of trace $1$, so $P_0\\in\\mathcal P_1$ and $P_0\\in\\mathcal D_1$ by [F1]. The constant response matrix has eigenvalues $0<1$, so [F2] gives $\\Phi(P_0)=P_1=\\operatorname{diag}(1,0)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Direct calculation gives $D=(1-\\alpha)P_0+\\alpha\\Phi(P_0)=\\tfrac12 I_2$. By [F3], $D\\in\\mathcal D_1$; explicitly it is Hermitian, satisfies $0\\preceq D\\preceq I_2$, and has trace $1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "But $D^2=\\tfrac14 I_2\\ne D$, so $D$ is not idempotent and hence $D\\notin\\mathcal P_1$. This verifies that relaxed density iterates must not be silently identified with projectors.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example supplies the two complementary2x2 rank-one projectors; Proof step 2.1 computes their half-mixtureI2/2, an existing admissible density."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The endpoints α=0 and α=1 return projectors; the chosen interior α=1/2 produces the nonprojector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The minimal case n=2,r=1 suffices to exhibit an admissible non-idempotent density."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The response matrix has a strict gap 1; degeneracy is not involved."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Both endpoints of α∈[0,1] are contrasted with the interior half-mixture."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: All matrices and the response projector are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The specified half-mixture is admissible but not idempotent, disproving preservation of the projector manifold; no converse is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The specified half-mixture is admissible but not idempotent, disproving preservation of the projector manifold; no converse is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "admissible half-mixture is not idempotent",
+          "method": "exact finite calculation",
+          "input": {
+            "P0": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "P1": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "alpha": "1/2"
+          },
+          "calculation": "The response F=diag(0,1) sends P0 to P1 with gap 1. The mixture is I/2, lies between 0 and I and has trace 1, but its square is I/4.",
+          "expected": {
+            "mixture": "I/2",
+            "trace": 1,
+            "idempotent": false
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "ex-diis-singular-gram-fallback": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-basis-projector-energy-model",
+          "source_section": "Definition",
+          "quote": "Let $S=S^*\\succ0$ be an $n\\times n$ finite-basis overlap matrix and supply its\nCholesky factor $L$ with $S=LL^*$, $L$ invertible\n([[def-cholesky-factorisation-with-positive-diagonal]],\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).\nIf $h_0=h_0^*$ is the coefficient-basis one-body matrix, set\n$h=L^{-1}h_0L^{-*}$, where $L^{-*}=(L^*)^{-1}$; this is the Cholesky\nwhitening whose generalized Ritz quotient is preserved by\n[[prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil]].\nFor coefficient vectors use $y=L^*c$; the interaction map and chosen\nexchange-correlation functional below are supplied in these orthonormal\ncoordinates. Fix $1\\le r<n$ and the\nprojector domain $\\mathcal P_r$ of [[def-rank-r-orthogonal-projector-domain]].\n\nSupply a Hermitian matrix $h$, a real-linear self-adjoint map\n$G:\\mathbb H_n\\to\\mathbb H_n$ for the Frobenius inner product, and a real-valued\n$C^2$ functional $E_{xc}$ on an open neighborhood of $\\mathcal P_r$. Define\n$$E(P):=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(P G(P))+E_{xc}(P),\\qquad F(P):=h+G(P)+\\nabla E_{xc}(P).$$\nHere $F(P)$ is the Hermitian Frobenius-gradient formula justified by\n[[prop-finite-projector-energy-reality-and-gradient]].\n\nThe finite-basis Hartree–Fock model is the special case $E_{xc}=0$ with a\nsupplied symmetry-compatible Coulomb/exchange tensor defining $G$. A\nKohn–Sham-like model supplies its density map and chosen differentiable\nexchange-correlation functional. These are finite-dimensional mathematical\nmodels; this definition makes no assertion that the selected functional is an\nexact continuum physical energy.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-capped-diis-coefficient-minimizer-exists",
+          "source_section": "Statement",
+          "quote": "Let $s\\ge1$, let $R_1,\\ldots,R_s$ be complex matrices of one fixed shape,\nand let $C\\ge1$. Define\n$$\\mathcal C_{s,C}:=\\{c\\in\\mathbb R^s:\\sum_{i=1}^s c_i=1,\\ \\sum_{i=1}^s|c_i|\\le C\\}$$\nand $J(c):=\\|\\sum_{i=1}^s c_iR_i\\|_F^2$. Then $J$ attains a minimum on\n$\\mathcal C_{s,C}$. Among all minimizers there is a unique vector of minimum\nEuclidean norm. This rule defines the exact capped DIIS coefficient vector even\nwhen the least-squares Gram matrix is singular.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-capped-diis-projector-proposal",
+          "source_section": "Definition",
+          "quote": "Input: current $P_k\\in\\mathcal P_r$, up to $m-1$ earlier stored projectors\n$P_i$ and their Hermitian matrices $F(P_i)$, memory cap $m\\ge1$, coefficient\ncap $C\\ge1$, and an exact or certified solver for the constrained least-squares\nproblem. The procedure is one proposal step:\n\n1. Form each commutator residual $R_i=[F(P_i),P_i]:=F(P_i)P_i-P_iF(P_i)$ for the stored history together with the current iterate. Retain at most the most recent $m$ residuals.\n2. Find coefficients minimizing $\\|\\sum_i c_iR_i\\|_F^2$ subject to $\\sum_i c_i=1$ and $\\|c\\|_1\\le C$. If the configured linear-system solver reports a singular system or cannot certify a minimizer, return $(P_k,\\texttt{singular-or-uncertified-ls})$ and request the baseline SCF update. If it returns multiple minimizers, select the unique minimum-Euclidean-norm minimizer supplied by [[lem-capped-diis-coefficient-minimizer-exists]].\n3. If the returned coefficients fail either constraint, return $(P_k,\\texttt{coefficient-cap-failure})$ and request the baseline update. Otherwise form $F_{mix}=\\sum_i c_iF(P_i)$. If the $r$th gap of $F_{mix}$ is not certified, return $(P_k,\\texttt{candidate-gap-failure})$ and request the baseline update.\n4. Return the projector $Y=\\Pi_r(F_{mix})$ as a DIIS candidate.\n\nThe commutator least-squares objective defines a proposal; it is not a fixed-point\nerror certificate. The outer safeguarded procedure checks $\\|Y-\\Phi(Y)\\|_F$\nseparately before accepting a candidate. This algorithm makes no bare DIIS\nconvergence claim.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "The matrices $P_0,P_1,X$ are mutually Frobenius-orthogonal and $\\|P_0\\|_F^2=\\|P_1\\|_F^2=1$. The displayed $G$ is a sum of symmetric rank-one real-linear maps, so $\\langle G(A),B\\rangle_F=\\langle A,G(B)\\rangle_F$ for all Hermitian $A,B$; it is Hermitian-valued. Thus the model data satisfy [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Substitution gives $G(P_0)=X$ and $G(P_1)=-X$. The matrices $X$ and $-X$ have eigenvalues $-1,1$, so both iterates have gap $2$. Direct multiplication gives $[G(P_0),P_0]=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}=[G(P_1),P_1]\\ne0.$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Writing the common residual as $J$, the Gram matrix is $B_{ij}=\\langle J,J\\rangle_F=2,\\qquad B=\\begin{pmatrix}2&2\\\\2&2\\end{pmatrix},$ which is singular. The equality-constrained bordered system has matrix $\\begin{pmatrix}2&2&1\\\\2&2&1\\\\1&1&0\\end{pmatrix}$, whose first two rows coincide, so a solver that reports singularity takes the prescribed fallback. With $C=2$, $c=(1/2,1/2)$ is feasible and minimizes the objective; the objective is constant on $c_1+c_2=1$, so [F2] selects this unique minimum-norm minimizer. If a rank-revealing solver returns it instead of reporting singularity, then $F_{mix}=\\tfrac12X-\\tfrac12X=0$ has no strict gap, and the proposal algorithm again falls back by its candidate-gap branch. Thus either outcome of this configured solve uses the baseline.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The two explicitly supplied residual matrices are equal and nonzero in Proof step 2.1. Proof step 3.1 exhibits the feasible coefficient pair(1/2,1/2), so no empty history or feasible coefficient set is involved."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The singular Gram system is the boundary case; the alternate exact minimum-norm solve has zero candidate gap and also falls back."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The finite-memory boundary m=2 uses the smallest history that can produce a singular two-vector Gram matrix."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The Gram matrix has rank one and the bordered system has duplicate rows; the minimum-norm tie-break remains unique."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The coefficient cap C=2 includes the exact minimizer (1/2,1/2)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The matrices, residuals, and candidate coefficients are explicitly calculated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Equal nonzero residuals produce a singular2x2 Gram matrix and configured fallback, even though a capped minimum-norm minimizer exists; not every DIIS input is claimed singular."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Equal nonzero residuals produce a singular2x2 Gram matrix and configured fallback, even though a capped minimum-norm minimizer exists; not every DIIS input is claimed singular."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "singular DIIS bordered system and gap fallback",
+          "method": "exact finite calculation",
+          "input": {
+            "P0": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "P1": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "X": [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ]
+            ],
+            "coefficient_cap": 2
+          },
+          "calculation": "Both commutator residuals equal J=[[0,-1],[1,0]], so B=[[2,2],[2,2]] has rank 1 and the bordered system has duplicate rows. The minimum-norm coefficients (1/2,1/2) give Fmix=0, with no strict occupied gap; either solver branch therefore falls back.",
+          "expected": {
+            "gram_rank": 1,
+            "bordered_system_singular": true,
+            "candidate_gap": false,
+            "fallback": true
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "ex-additive-eigensolve-tolerance-residual-certificate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-contractive-scf-convergence-and-inexact-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $(K,d)$ be a nonempty complete metric space and let $\\Phi:K\\to K$ be a\ncontraction with constant $0\\le q<1$. In the SCF application, $K$ is a\ncomplete invariant subset of the response-map domain from\n[[def-self-consistent-projector-response-map]], with $d(X,Y)=\\|X-Y\\|_F$.\nThen $\\Phi$ has a unique fixed point $X_*$ and exact iterates\n$X_{k+1}=\\Phi(X_k)$ satisfy\n$$d(X_k,X_*)\\le q^k d(X_0,X_*).$$\nFor every $X\\in K$,\n$$d(X,X_*)\\le\\frac{d(X,\\Phi(X))}{1-q}.$$\nIf computed updates $X_{k+1}\\in K$ obey\n$d(X_{k+1},\\Phi(X_k))\\le\\eta_k$, then\n$$e_{k+1}\\le q e_k+\\eta_k,\\qquad e_k\\le q^k e_0+\\sum_{j=0}^{k-1}q^{k-1-j}\\eta_j,$$\nwhere $e_k=d(X_k,X_*)$ and $X_0$ is the supplied initial point.\nUse the convention $q^0=1$, including when $q=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "The computed residual is $|0-6/25|=24/100$. By the triangle inequality, $|0-\\Phi(0)|\\le |0-\\widetilde\\Phi(0)|+|\\widetilde\\Phi(0)-\\Phi(0)|\\le24/100+1/100=25/100.$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Here $q=1/2$ and $|0-x_*|=1/2$. The correct certified error bound from [F1] is $(25/100)/(1-1/2)=1/2$, exact here. Omitting $\\eta$ would give $(24/100)/(1/2)=48/100<1/2$, which is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example evaluates the existing scalar pointx=0 in[0,1] and the fixed affine map; no empty data or spectral selection is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example computes the nonzero eta=1/100 correction; if eta=0, computed and exact residuals agree."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The one-step residual at x=0 is computed directly and gives the stated error certificate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The calculation has fixed contractionq=1/2, so its residual denominator1-q=1/2 is nonzero. The response evaluation error is fixed positive1/100; no singular spectral problem is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The chosen inputx=0 is a domain endpoint; Proof step 1.1 evaluates its computed residual24/100 and Proof step 2.1 obtains the exact certified error1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: All scalar values are explicit; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The scalar numerical response shows why the additive1/100 evaluation error belongs in the residual enclosure; it is not a characterization of all eigensolvers."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The scalar numerical response shows why the additive1/100 evaluation error belongs in the residual enclosure; it is not a characterization of all eigensolvers."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "additive response error prevents a false certificate",
+          "method": "exact finite calculation",
+          "input": {
+            "Phi0": "1/4",
+            "x": 0,
+            "computed_response": "6/25",
+            "eta": "1/100",
+            "q": "1/2"
+          },
+          "calculation": "The computed residual is 24/100 and the exact response residual is 25/100. The correct error bound is (24/100+1/100)/(1-1/2)=1/2, equal to the true fixed-point error; omitting eta gives 48/100, too small.",
+          "expected": {
+            "certified_error": "1/2",
+            "uncorrected_claim": "48/100",
+            "true_error": "1/2"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": {
+        "used": [],
+        "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+      }
+    },
+    "lem-finite-budget-scf-iteration-work": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-undamped-scf-with-gap-and-residual-status",
+          "source_section": "Definition",
+          "quote": "Input: $n,r$, a response map $F:U\\to\\mathbb H_n$ and its occupied projector\nmap $\\Phi$ from [[def-self-consistent-projector-response-map]], an initial\nprojector $P_0\\in\\mathcal P_r$, a required gap $g_{min}>0$, residual tolerance\n$\\varepsilon\\ge0$, and update budget $N\\in\\mathbb N_0$. Assume each iterate\nbelongs to a declared invariant input set $K\\subseteq U$. Use the Frobenius\nmetric and the fixed-point interface of [[alg-fixed-point-iteration]].\n\nFor $k=0,1,\\ldots,N$:\n\n1. Compute the ordered eigenvalues of $F(P_k)$. If the eigensolver fails with no certified ordered spectrum, return $(P_k,\\texttt{eigensolve-failure},\\varnothing,k)$. If $\\lambda_{r+1}(F(P_k))-\\lambda_r(F(P_k))<g_{min}$, return $(P_k,\\texttt{gap-loss},\\varnothing,k)$.\n2. Set $P_{k+1}^{raw}=\\Phi(P_k)$ and $\\rho_k=\\|P_k-P_{k+1}^{raw}\\|_F$. If $\\rho_k\\le\\varepsilon$, return $(P_k,\\texttt{residual-tolerance-met},\\rho_k,k)$.\n3. If $k=N$, return $(P_k,\\texttt{iteration-budget-exhausted},\\rho_k,k)$. Otherwise set $P_{k+1}=P_{k+1}^{raw}$ and continue.\n\nIt reports a residual stopping status, gap loss, eigensolver failure, or budget\nexhaustion separately. A finite budget\ndoes not guarantee that the residual tolerance will be met, and the definition\nasserts no convergence from damping or from a positive gap alone.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-relaxed-density-mixing-with-finite-budget",
+          "source_section": "Definition",
+          "quote": "Input: $D_0\\in\\mathcal D_r$ from\n[[def-admissible-hermitian-density-domain]], a response map $\\Phi$ defined at\neach required iterate, a fixed mixing parameter $\\alpha\\in[0,1]$, a fixed-point\nresidual tolerance $\\varepsilon\\ge0$, and a finite update budget\n$N\\in\\mathbb N_0$. For $k=0,\\ldots,N$, first certify that the occupied gap at\n$D_k$ is positive. If the eigensolver fails, return\n$(D_k,\\texttt{eigensolve-failure},\\varnothing,k)$; if the gap is absent, return\n$(D_k,\\texttt{gap-loss},\\varnothing,k)$. Otherwise evaluate $\\Phi(D_k)$ and\n$$r_k=\\|D_k-((1-\\alpha)D_k+\\alpha\\Phi(D_k))\\|_F.$$\nIf $r_k\\le\\varepsilon$, return\n$(D_k,\\texttt{residual-tolerance-met},r_k,k)$. If $k=N$, return\n$(D_k,\\texttt{iteration-budget-exhausted},r_k,k)$. Otherwise update\n$$D_{k+1}=(1-\\alpha)D_k+\\alpha\\Phi(D_k)$$\nand continue.\n\nBy [[lem-density-mixing-preserves-domain-but-not-projectors]], each successful\nupdate stays in $\\mathcal D_r$; it need not be idempotent. This algorithm is the\nfixed-point iteration of [[alg-fixed-point-iteration]] applied to the relaxed\nmap. It makes no convergence claim unless the derivative-bound and invariance\nhypotheses in [[thm-density-mixing-contracts-under-jacobian-certificate]] are\nverified. If $\\alpha=0$, then the relaxed residual is identically zero and the\nupdate does not move; that stop status alone says nothing about the unmixed\nresponse residual.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "At the initial entered index $0$, no update has occurred, and the pass permits at most one residual test after its spectrum and gap checks.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "For an entered index $k\\le N$, assume its preceding entered indices are exactly $0,\\ldots,k-1$, with at most $k$ preceding residual tests and $k$ updates.",
+          "step": "1.2",
+          "inputs": [
+            "IH"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Pass $k$ permits at most one residual test. A continuing pass requires $k<N$ and makes one update before entering $k+1$. The counts before that next pass are therefore at most $k+1$ residual tests and updates, proving the assertion of step 1.2 at the next index. An earlier gap, eigensolver, residual or budget return creates no further pass.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "The base and induction step show that entered indices form an initial segment of $0,\\ldots,N$, with at most $N+1$ residual tests and $N$ updates. Index $N$ returns before any update. Every entered pass contains finitely many returning primitives, so the procedure terminates with a stated status, including when $N=0$. These are only outer-work and status bounds.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns a supplied admissible initial iterate and returning primitives, not an empty input history; Proof step 1.1 begins at the actual index0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 3.1 explicitly includesN=0: the initial entered index may test once and returns before any update."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "WithN=1, Proof step 2.1 permits at most one update from index0 to1; Proof step 3.1 returns at index1, giving at most two residual tests."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.1 propagates an early gap or eigensolver failure without another pass, and Proof step 3.1 counts only the entered initial segment. Thus singular responses can shorten the work count without invalidating the bound or implying convergence."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1 allows continuation only fork<N; Proof step 3.1 treats the terminal indexN as a return before an update, including zero cap."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The work proof uses the supplied initial point and returning spectrum/response/comparison services; its induction in Proof step 1.1 through3.1 makes no selection of an unspecified minimizer."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Returning primitives and a finite cap imply at mostN updates andN+1 residual tests; this does not characterize convergence or tolerance attainment."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Returning primitives and a finite cap imply at mostN updates andN+1 residual tests; this does not characterize convergence or tolerance attainment."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "original3 same-session completion",
+        "notes": "Exact local induction and returning-primitive qualifications accepted in the original-owner final result; no convergence, success, backend-cost or independently read external proof is asserted."
+      }
+    }
+  }
+}

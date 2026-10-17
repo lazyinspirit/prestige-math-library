@@ -1,0 +1,73 @@
+diff --git a/tools/autopilot/README.md b/tools/autopilot/README.md
+index 353001ae88..1ac3337b14 100644
+--- a/tools/autopilot/README.md
++++ b/tools/autopilot/README.md
+@@ -23,9 +23,11 @@ A successful worker still needs every declared artifact, including after it exit
+ legacy count mode and all readiness, writer and gate checks retain their behavior.
+ 
+ A run-local stage wrapper may opt priority `1-scaffold` into
+-`deferConstructionArtifactsUntilDrain`. While any same-stage local or adopted
+-writer remains, status withholds all completion credit and skips artifact-based
+-stalemate detection. Initial priority dispatch and native refreshes continue;
+-at the actual writer drain, the full artifact, readiness, stalemate and gate paths
+-run normally. This defaults off and is invalid for other stage policies; common
+-mathematics stages do not enable it.
++`deferConstructionArtifactsUntilDrain`. While any owed unit lacks current
++successful coverage (including a pending native refresh), or any same-stage local
++or adopted writer remains, status withholds all completion credit and skips
++artifact-based stalemate detection. Initial priority dispatch, failed-execution
++retry limits and blockers, and native refreshes continue. Once all owed authoring
++has coverage and every writer drains, the full artifact, readiness, stalemate and
++gate paths run normally. This defaults off and is invalid for other stage policies;
++common mathematics stages do not enable it.
+diff --git a/tools/autopilot/src/executor.mts b/tools/autopilot/src/executor.mts
+index f28c7de0a3..d16f898498 100644
+--- a/tools/autopilot/src/executor.mts
++++ b/tools/autopilot/src/executor.mts
+@@ -379,13 +379,16 @@ export class Executor {
+     return { stage: null, status: null };
+   }
+ 
+-  /** Construction-only scheduling mode: no completion credit while any local
+-   * or adopted writer still owns this stage. Other runs/stages keep full checks. */
++  /** Construction-only scheduling mode: withhold completion credit until all
++   * owed authoring has current successful coverage and every writer has drained. */
+   constructionArtifactsDeferred(stage: Stage): boolean {
+-    return stage.deferConstructionArtifactsUntilDrain === true
+-      && stage.id === '1-scaffold' && stage.unitPrerequisitePolicy === 'priority'
+-      && ([...this.inflight.values()].some(row => row.meta.stage === stage.id)
+-        || this.adoptedDispatches().some(dispatch => this.dispatchBelongsToStage(dispatch, stage)));
++    if (stage.deferConstructionArtifactsUntilDrain !== true
++      || stage.id !== '1-scaffold' || stage.unitPrerequisitePolicy !== 'priority') return false;
++    if ([...this.inflight.values()].some(row => row.meta.stage === stage.id)
++      || this.adoptedDispatches().some(dispatch => this.dispatchBelongsToStage(dispatch, stage))) return true;
++    const ctx = this.ctx();
++    const covered = this.stageCoverage(stage, ctx);
++    return (stage.units?.(ctx) ?? []).some(unit => !covered.has(String(unit)));
+   }
+ 
+   /**
+@@ -440,7 +443,7 @@ export class Executor {
+ 
+     if (this.constructionArtifactsDeferred(stage)) {
+       return { ...units, unitsDone: false, gatesPassed: false, done: false,
+-        why: `${units.why}; artifact completion deferred until construction writers drain` };
++        why: `${units.why}; artifact completion deferred until authoring coverage is complete and writers drain` };
+     }
+ 
+     // A RESULT IS NOT AN ARTIFACT. `ok:true` says the process exited zero; it
+diff --git a/tools/autopilot/src/types.mts b/tools/autopilot/src/types.mts
+index 2fe2c48ce4..5c668f75ad 100644
+--- a/tools/autopilot/src/types.mts
++++ b/tools/autopilot/src/types.mts
+@@ -174,8 +174,8 @@ export interface Stage {
+   /** Initial dispatch may use the DAG only for priority. Completion, repair
+    * and review still require actual stable suppliers; default is complete. */
+   unitPrerequisitePolicy?: 'complete' | 'priority';
+-  /** Opt-in only for priority construction: while same-stage writers are live,
+-   * withhold all artifact-completion credit and check the full artifacts at drain. */
++  /** Opt-in only for priority construction: withhold artifact-completion credit
++   * until all owed units have current coverage and same-stage writers drain. */
+   deferConstructionArtifactsUntilDrain?: boolean;
+   /** A temporary per-unit hold. The unit remains owed, and its consumers stay
+    * blocked, while other eligible units can use available dispatch slots. */

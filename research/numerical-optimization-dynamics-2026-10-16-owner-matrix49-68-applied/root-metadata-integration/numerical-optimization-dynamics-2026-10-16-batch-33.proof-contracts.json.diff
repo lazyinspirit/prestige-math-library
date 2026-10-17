@@ -1,0 +1,514 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-33.proof-contracts.json
++++ proposed/research/numerical-optimization-dynamics-2026-10-16-batch-33.proof-contracts.json
+@@ -21,7 +21,8 @@
+     "ex-jordan-eigenvalue-residual-square-root-instability",
+     "ex-real-conjugate-pair-schur-block",
+     "lem-two-sided-scaled-householder-similarity-error",
+-    "lem-exact-rational-two-by-two-discriminant-sign"
++    "lem-exact-rational-two-by-two-discriminant-sign",
++    "thm-finite-budget-francis-schur-termination-and-status"
+   ],
+   "contracts": {
+     "def-real-and-complex-schur-forms": {
+@@ -1116,180 +1117,228 @@
+       }
+     },
+     "alg-finite-budget-francis-schur-reduction": {
+-      "citations": [
+-        {
+-          "fact": "F1",
+-          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+-          "source_section": "Definition",
+-          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+-          "uses": [
+-            "1.2"
+-          ]
+-        },
+-        {
+-          "fact": "F2",
+-          "source": "alg-exact-francis-hessenberg-qr-step",
+-          "source_section": "Definition",
+-          "quote": "Input an exact upper-Hessenberg matrix $H\\in\\mathbb F^{n\\times n}$, with $\\mathbb F=\\mathbb C$ or $\\mathbb R$ and $n\\ge1$, and exactly one shift descriptor:\n\n1. **Complex single shift:** $\\mathbb F=\\mathbb C$ and $\\mu\\in\\mathbb C$. Set $p(z)=z-\\mu$ and $r=1$.\n2. **Real double shift:** $\\mathbb F=\\mathbb R$, $n\\ge2$, and $p(z)=z^2-sz+t$ with $s,t\\in\\mathbb R$. In the ordinary Francis branch, $s$ and $t$ are the trace and determinant of the trailing $2\\times2$ block; a declared exceptional shift may supply another real pair. Set $r=2$.\n\nForm $x=p(H)e_1$. For a Hessenberg $H$, $x$ is supported in its first $r+1$ entries; compute only those entries. If $x=0$, return $H_+=H$, $Q=I$, and status zero-shift-vector. Otherwise choose a Householder reflector $P_0$ on the first $\\min(r+1,n)$ coordinates with $P_0x=\\alpha e_1$, embed it in $\\mathbb F^{n\\times n}$, and set $H_1=P_0^*HP_0$, $Q=P_0$.\n\nFor $j=1,\\ldots,\\max(n-2,0)$, in increasing order, let $I_j=\\{j+1,\\ldots,\\min(j+r+1,n)\\}$. Thus $I_j$ has at most three indices in a real double shift and at most two in a complex single shift. Extract $y=(H_j)_{I_j,j}$. If $y=0$, use the identity on $I_j$; otherwise choose a Householder reflector $P_j$ on $I_j$ sending $y$ to a multiple of its first coordinate vector. Embed $P_j$ in the identity, update $H_{j+1}=P_j^*H_jP_j$, and append it to $Q$ on the right. After the finite chase, check the exact matrix zero pattern and the first-column condition. Return completed only if the output is upper Hessenberg and $Qe_1$ is proportional to $p(H)e_1$; otherwise return bulge-chase-invariant-failure with the partial similarity factors. The procedure makes no convergence claim.",
+-          "uses": [
+-            "1.2"
+-          ]
+-        },
+-        {
+-          "fact": "F3",
+-          "source": "alg-scaled-householder-reflector-formation-and-application",
+-          "source_section": "Definition",
+-          "quote": "Input a real active column $x\\in\\mathbb F^r$ and trailing block $B\\in\\mathbb F^{r\\times q}$, with entries in the floating-point system, $r\\ge1$, and $q\\ge0$. If $x=0$, return the identity action and copy $B$. Otherwise let $s=\\max_i|x_i|>0$, compute $z_i=\\operatorname{fl}(x_i/s)$ and $t=\\operatorname{fl}(\\sum_i z_i^2)$ by sequential rounded operations, then $\\widehat r=\\operatorname{fl}(s\\operatorname{fl}(\\sqrt t))$. Set $\\sigma=1$ when $x_1=0$ and $\\sigma=\\operatorname{sign}(x_1)$ otherwise, $\\widehat\\alpha=-\\sigma\\widehat r$, $v_i=\\operatorname{fl}(x_i-\\widehat\\alpha\\,1_{i=1})$, $w=\\operatorname{fl}(v^Tv)$, and $\\widehat\\tau=\\operatorname{fl}(2/w)$. Compute $d=\\operatorname{fl}(v^TB)$ by sequential rounded products and additions, $p_i=\\operatorname{fl}(\\widehat\\tau v_i)$, $U_{ij}=\\operatorname{fl}(p_i d_j)$, and $\\widehat B_{ij}=\\operatorname{fl}(B_{ij}-U_{ij})$. The complete active output is $C_+=[\\widehat\\alpha e_1\\;\\widehat B]$: write exact zeros below its first diagonal entry. This fixes the multiplication order and includes the column overwrite in the analyzed step. Return the first range failure on any invalid or out-of-range operation; return failure if $t$, $\\widehat r$, or $w$ is not positive normal, or any intermediate is nonfinite. Otherwise return $(v,\\widehat\\tau,\\widehat\\alpha,C_+)$. Store these reflectors to represent the exact orthogonal product; a rounded explicit dense product is a separate output with its own arithmetic error. The exact reflector associated with nonzero stored $v$ is $H(v)=I-2vv^T/(v^Tv)$, using [[def-householder-reflector]] and the QR convention of [[def-full-reduced-and-column-pivoted-computational-qr-factorisations]]. This definition does not assert a local backward-error bound.",
+-          "uses": [
+-            "1.1"
+-          ]
+-        },
+-        {
+-          "fact": "F4",
+-          "source": "alg-complex-scaled-householder-reflector-step",
+-          "source_section": "Definition",
+-          "quote": "For a stored complex column $x\\in\\mathbb C^m$, $m\\ge1$, and block $B\\in\\mathbb C^{m\\times q}$, $q\\ge0$, call the Householder branch of [[alg-scaled-complex-householder-and-givens-updates]] on $[x\\;B]$. This is the canonical scaled real-component norm and separately scaled phase-modulus realization, with fixed sequential dots, real-coefficient multiplication, complex product and subtraction order. It includes the exact target-column overwrite. Return its $(v,\\widehat\\tau,\\widehat\\alpha,\\widehat x,\\widehat B)$ on success; a zero column returns identity, zero column and copied $B$. Report an invalid/nonpositive stored-vector norm as `breakdown`; every other invalid/out-of-range operation returns `range-failure` with its operation index and partial values.\n\nThe exact representative is $P(v)=I-2vv^*/(v^*v)$ for nonzero stored $v$. Store this product representation rather than identifying the rounded rank-one action with an exactly unitary dense matrix. For polynomial-vector initialization, form the reflector from that external vector and use its separate-block application on the entire active row panel; do not overwrite an unrelated matrix column. The proof-backed target and separate-block coefficients are supplied by [[lem-scaled-complex-householder-and-givens-local-backward-error]].",
+-          "uses": [
+-            "1.1"
+-          ]
+-        },
+-        {
+-          "fact": "F5",
+-          "source": "lem-two-sided-scaled-householder-similarity-error",
+-          "source_section": "Statement",
+-          "quote": "Use a successful real or complex scaled Householder formation on active dimension $m\\ge1$, with $0<u<1$ and $mu<1$. Let $P=P^*$ be its stored vector's exact unitary reflector, embedded in an $n\\times n$ identity. Apply it on the left to the active rows of $H$, using the specified rounded rank-one order, and on the right to the active columns: compute each row dot $d_i=\\operatorname{fl}(\\sum_a H^L_{i,s_a}v_a)$, $c_a=\\operatorname{fl}(\\widehat\\tau\\overline v_a)$, the product $\\operatorname{fl}(d_ic_a)$, and subtraction in that order. Every nonzero exact intermediate is normal; otherwise return the specified failure.\n\nFor real arithmetic put $b_m=(1+u)c_m+3u$, with $c_m,\\kappa_m$ from [[lem-scaled-householder-step-meets-local-backward-error-premise]]. With an actual matrix-target column overwrite use $a_m=\\kappa_m$; without such an overwrite use $a_m=b_m$. For complex arithmetic put $b_m=(1+u)c_U+3u$, with $c_U,\\eta_H(m)$ from [[lem-scaled-complex-householder-and-givens-local-backward-error]], and use $a_m=\\eta_H(m)$ or $a_m=b_m$, respectively. Set\n$$\\alpha_m=a_m+b_m+a_mb_m.$$\nThen the complete computed similarity has a perturbation $E$ satisfying\n$$H_+=P^*(H+E)P,\\qquad \\|E\\|_F\\le\\alpha_m\\|H\\|_F.$$\nIdentity branches use $E=0$. If a separate deflation first zeros entries of $H$ by $D$, the same assertion holds with $H+D$ inside the similarity and the bound still uses $\\|H\\|_F$, since deleting entries cannot increase Frobenius norm. All explicit target zero writes are included in $a_m$; no unrelated matrix entry is overwritten when the reflector is formed from an external polynomial vector.",
+-          "uses": [
+-            "2.1"
+-          ]
+-        },
+-        {
+-          "fact": "F6",
+-          "source": "thm-householder-similarity-reduces-to-hessenberg-and-tridiagonal-form",
+-          "source_section": "Statement",
+-          "quote": "Every square matrix over $\\mathbb R$ or $\\mathbb C$ is unitarily similar to an\nupper Hessenberg matrix. Every real symmetric matrix is orthogonally similar to\na real symmetric tridiagonal matrix.",
+-          "uses": [
+-            "1.1"
+-          ]
+-        },
+-        {
+-          "fact": "F7",
+-          "source": "def-real-and-complex-schur-forms",
+-          "source_section": "Definition",
+-          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $n\\ge0$ and $A\\in\\mathbb F^{n\\times n}$, and let $Q^*$ denote transpose over $\\mathbb R$ and conjugate transpose over $\\mathbb C$. A **complex Schur pair** for $A$ is a pair $(Q,T)$ with $Q^*Q=I$ and $A=QTQ^*$, where $T$ is upper triangular.\n\nFor real $A$, a **real Schur pair** is a pair $(Q,T)$ with $Q^TQ=I$ and $A=QTQ^T$, where $T$ is block upper triangular and every diagonal block is either a real $1\\times1$ block or a real $2\\times2$ block with negative characteristic-polynomial discriminant. Such a $2\\times2$ block has one nonreal conjugate eigenvalue pair. The definition does not assert that a finite shift strategy reaches such a pair.\n\nFor $B=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}\\in\\mathbb R^{2\\times2}$, its characteristic-polynomial discriminant means the exact real number $\\Delta(B)=(a+d)^2-4(ad-bc)$. “Negative discriminant” means the exact comparison $\\Delta(B)<0$.",
+-          "uses": [
+-            "2.1"
+-          ]
+-        },
+-        {
+-          "fact": "F8",
+-          "source": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+-          "source_section": "Statement",
+-          "quote": "Let $\\mathbb F=\\mathbb R$ or $\\mathbb C$.\n\n1. Every Householder reflector $H_v=I-2vv^*$ is orthogonal or unitary.\n2. For every nonzero $z\\in \\mathbb F^m$, there is a Householder reflector $H$\n   such that $Hz=\\alpha e_1$ with $|\\alpha|=\\|z\\|_2$.\n3. For every pair $(a,b)\\in \\mathbb F^2$ not both zero, there is a real or\n   complex Givens transformation $G$ such that\n   $$G\\binom{a}{b}=\\binom{\\alpha}{0}$$\n   with $|\\alpha|=(|a|^2+|b|^2)^{1/2}$.",
+-          "uses": [
+-            "2.1"
+-          ]
+-        },
+-        {
+-          "fact": "F9",
+-          "source": "def-exact-real-2x2-discriminant-sign-predicate",
+-          "source_section": "Definition",
+-          "quote": "For a real matrix $B=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$, define its characteristic-polynomial discriminant by $\\Delta(B)=(a+d)^2-4(ad-bc)$. Define $\\operatorname{discSign}(B)$ to be $-1$, $0$, or $1$ according as the exact real number $\\Delta(B)$ is negative, zero, or positive. This is an exact mathematical predicate on the stored real entries, not an operation in the operationwise floating-point model. A computed procedure may report a sign only when its control predicate establishes this exact value; otherwise it reports undecided.",
+-          "uses": [
+-            "2.1"
+-          ]
+-        },
+-        {
+-          "fact": "F10",
+-          "source": "lem-exact-rational-two-by-two-discriminant-sign",
+-          "source_section": "Statement",
+-          "quote": "Suppose the stored entries of $B=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$ have supplied exact rational encodings $a=p_a/q_a$, $b=p_b/q_b$, $c=p_c/q_c$, $d=p_d/q_d$, with integer numerators and positive integer denominators. Put $Q=q_aq_bq_cq_d$ and $A=p_a(Q/q_a)$, $B_0=p_b(Q/q_b)$, $C_0=p_c(Q/q_c)$, $D=p_d(Q/q_d)$. Compute the integer\n$$Z=(A-D)^2+4B_0C_0.$$\nIts integer sign is exactly [[def-exact-real-2x2-discriminant-sign-predicate]] and is found after finitely many exact integer operations. Finite binary floating values with their signed-integer/power-of-two encodings are a special case. This evaluator does not assume arbitrary stored real numbers have rational encodings. If an exact encoding or another terminating exact sign evaluator is unavailable, retain `schur-type-undecided`.",
+-          "uses": [
+-            "2.1"
+-          ]
+-        }
+-      ],
+-      "derivations": [
+-        {
+-          "id": "derive-1.1",
+-          "claim": "The exact Hessenberg target exists by [F6]. The initialization uses at most $n-2$ reflector columns. By [F3] in the real branch and [F4] in the complex branch, each call returns a stated result or an explicit failure. Hence initialization terminates.",
+-          "step": "1.1",
+-          "inputs": [
+-            "given",
+-            "F3",
+-            "F4",
+-            "F6",
+-            "choose"
+-          ]
+-        },
+-        {
+-          "id": "derive-1.2",
+-          "claim": "Each sweep performs finitely many deflation comparisons and at most $\\max(n-2,0)+1$ initial/chase reflector updates per active block. There are at most $N$ sweeps. By [F1], any arithmetic operation either returns its finite value or terminates with range-failure; the finite control table can terminate with stagnation-exhausted, and the explicit invariant check can terminate with bulge-chase-invariant-failure.",
+-          "step": "1.2",
+-          "inputs": [
+-            "given",
+-            "F1",
+-            "F2"
+-          ]
+-        },
+-        {
+-          "id": "derive-2.1",
+-          "claim": "Therefore the procedure returns Schur-computed, budget-exhausted, stagnation-exhausted, schur-type-undecided, breakdown, range-failure, or bulge-chase-invariant-failure after finitely many operations. By [F7] and [F9], its Schur-computed test is exactly the defined real or complex block structure when every required real discriminant sign is available, either from the supplied evaluator or the exact encoded-integer recipe [F10]. By [F8], the exact reflector product $Q$ is unitary, so its orthogonality residual is zero. The definition withholds a backward-error certificate when a local bound is absent; this is the inconclusive branch specified in step 4.",
+-          "step": "2.1",
+-          "inputs": [
+-            "step 1.1",
+-            "step 1.2",
+-            "F5",
+-            "F7",
+-            "F8",
+-            "F9",
+-            "F10",
+-            "algebra"
+-          ]
+-        }
+-      ],
++      "citations": [],
++      "derivations": [],
+       "routine_steps": [],
+       "boundaries": [
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
++          "reason": "Definition-onlyprocedure; mathematicalstatus/terminationpropertiesareseparateresults. CurrentinputchecksandreturnbranchesremainpartoftheDefinition."
+         },
+         {
+           "case": "zero",
+-          "status": "checked",
+-          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
++          "status": "not_applicable",
++          "reason": "Definition-onlyprocedure; mathematicalstatus/terminationpropertiesareseparateresults. CurrentinputchecksandreturnbranchesremainpartoftheDefinition."
+         },
+         {
+           "case": "one",
+-          "status": "checked",
+-          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
++          "status": "not_applicable",
++          "reason": "Definition-onlyprocedure; mathematicalstatus/terminationpropertiesareseparateresults. CurrentinputchecksandreturnbranchesremainpartoftheDefinition."
+         },
+         {
+           "case": "degenerate",
+-          "status": "checked",
+-          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
++          "status": "not_applicable",
++          "reason": "Definition-onlyprocedure; mathematicalstatus/terminationpropertiesareseparateresults. CurrentinputchecksandreturnbranchesremainpartoftheDefinition."
+         },
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
++          "reason": "Definition-onlyprocedure; mathematicalstatus/terminationpropertiesareseparateresults. CurrentinputchecksandreturnbranchesremainpartoftheDefinition."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
++          "reason": "Definition-onlyprocedure; mathematicalstatus/terminationpropertiesareseparateresults. CurrentinputchecksandreturnbranchesremainpartoftheDefinition."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "No if-and-only-if assertion is made."
++          "reason": "Definition-onlyprocedure; mathematicalstatus/terminationpropertiesareseparateresults. CurrentinputchecksandreturnbranchesremainpartoftheDefinition."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "No if-and-only-if assertion is made."
+-        }
+-      ]
++          "reason": "Definition-onlyprocedure; mathematicalstatus/terminationpropertiesareseparateresults. CurrentinputchecksandreturnbranchesremainpartoftheDefinition."
++        }
++      ],
++      "historical_contract_before_owner_repair": {
++        "citations": [
++          {
++            "fact": "F1",
++            "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
++            "source_section": "Definition",
++            "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
++            "uses": [
++              "1.2"
++            ]
++          },
++          {
++            "fact": "F2",
++            "source": "alg-exact-francis-hessenberg-qr-step",
++            "source_section": "Definition",
++            "quote": "Input an exact upper-Hessenberg matrix $H\\in\\mathbb F^{n\\times n}$, with $\\mathbb F=\\mathbb C$ or $\\mathbb R$ and $n\\ge1$, and exactly one shift descriptor:\n\n1. **Complex single shift:** $\\mathbb F=\\mathbb C$ and $\\mu\\in\\mathbb C$. Set $p(z)=z-\\mu$ and $r=1$.\n2. **Real double shift:** $\\mathbb F=\\mathbb R$, $n\\ge2$, and $p(z)=z^2-sz+t$ with $s,t\\in\\mathbb R$. In the ordinary Francis branch, $s$ and $t$ are the trace and determinant of the trailing $2\\times2$ block; a declared exceptional shift may supply another real pair. Set $r=2$.\n\nForm $x=p(H)e_1$. For a Hessenberg $H$, $x$ is supported in its first $r+1$ entries; compute only those entries. If $x=0$, return $H_+=H$, $Q=I$, and status zero-shift-vector. Otherwise choose a Householder reflector $P_0$ on the first $\\min(r+1,n)$ coordinates with $P_0x=\\alpha e_1$, embed it in $\\mathbb F^{n\\times n}$, and set $H_1=P_0^*HP_0$, $Q=P_0$.\n\nFor $j=1,\\ldots,\\max(n-2,0)$, in increasing order, let $I_j=\\{j+1,\\ldots,\\min(j+r+1,n)\\}$. Thus $I_j$ has at most three indices in a real double shift and at most two in a complex single shift. Extract $y=(H_j)_{I_j,j}$. If $y=0$, use the identity on $I_j$; otherwise choose a Householder reflector $P_j$ on $I_j$ sending $y$ to a multiple of its first coordinate vector. Embed $P_j$ in the identity, update $H_{j+1}=P_j^*H_jP_j$, and append it to $Q$ on the right. After the finite chase, check the exact matrix zero pattern and the first-column condition. Return completed only if the output is upper Hessenberg and $Qe_1$ is proportional to $p(H)e_1$; otherwise return bulge-chase-invariant-failure with the partial similarity factors. The procedure makes no convergence claim.",
++            "uses": [
++              "1.2"
++            ]
++          },
++          {
++            "fact": "F3",
++            "source": "alg-scaled-householder-reflector-formation-and-application",
++            "source_section": "Definition",
++            "quote": "Input a real active column $x\\in\\mathbb F^r$ and trailing block $B\\in\\mathbb F^{r\\times q}$, with entries in the floating-point system, $r\\ge1$, and $q\\ge0$. If $x=0$, return the identity action and copy $B$. Otherwise let $s=\\max_i|x_i|>0$, compute $z_i=\\operatorname{fl}(x_i/s)$ and $t=\\operatorname{fl}(\\sum_i z_i^2)$ by sequential rounded operations, then $\\widehat r=\\operatorname{fl}(s\\operatorname{fl}(\\sqrt t))$. Set $\\sigma=1$ when $x_1=0$ and $\\sigma=\\operatorname{sign}(x_1)$ otherwise, $\\widehat\\alpha=-\\sigma\\widehat r$, $v_i=\\operatorname{fl}(x_i-\\widehat\\alpha\\,1_{i=1})$, $w=\\operatorname{fl}(v^Tv)$, and $\\widehat\\tau=\\operatorname{fl}(2/w)$. Compute $d=\\operatorname{fl}(v^TB)$ by sequential rounded products and additions, $p_i=\\operatorname{fl}(\\widehat\\tau v_i)$, $U_{ij}=\\operatorname{fl}(p_i d_j)$, and $\\widehat B_{ij}=\\operatorname{fl}(B_{ij}-U_{ij})$. The complete active output is $C_+=[\\widehat\\alpha e_1\\;\\widehat B]$: write exact zeros below its first diagonal entry. This fixes the multiplication order and includes the column overwrite in the analyzed step. Return the first range failure on any invalid or out-of-range operation; return failure if $t$, $\\widehat r$, or $w$ is not positive normal, or any intermediate is nonfinite. Otherwise return $(v,\\widehat\\tau,\\widehat\\alpha,C_+)$. Store these reflectors to represent the exact orthogonal product; a rounded explicit dense product is a separate output with its own arithmetic error. The exact reflector associated with nonzero stored $v$ is $H(v)=I-2vv^T/(v^Tv)$, using [[def-householder-reflector]] and the QR convention of [[def-full-reduced-and-column-pivoted-computational-qr-factorisations]]. This definition does not assert a local backward-error bound.",
++            "uses": [
++              "1.1"
++            ]
++          },
++          {
++            "fact": "F4",
++            "source": "alg-complex-scaled-householder-reflector-step",
++            "source_section": "Definition",
++            "quote": "For a stored complex column $x\\in\\mathbb C^m$, $m\\ge1$, and block $B\\in\\mathbb C^{m\\times q}$, $q\\ge0$, call the Householder branch of [[alg-scaled-complex-householder-and-givens-updates]] on $[x\\;B]$. This is the canonical scaled real-component norm and separately scaled phase-modulus realization, with fixed sequential dots, real-coefficient multiplication, complex product and subtraction order. It includes the exact target-column overwrite. Return its $(v,\\widehat\\tau,\\widehat\\alpha,\\widehat x,\\widehat B)$ on success; a zero column returns identity, zero column and copied $B$. Report an invalid/nonpositive stored-vector norm as `breakdown`; every other invalid/out-of-range operation returns `range-failure` with its operation index and partial values.\n\nThe exact representative is $P(v)=I-2vv^*/(v^*v)$ for nonzero stored $v$. Store this product representation rather than identifying the rounded rank-one action with an exactly unitary dense matrix. For polynomial-vector initialization, form the reflector from that external vector and use its separate-block application on the entire active row panel; do not overwrite an unrelated matrix column. The proof-backed target and separate-block coefficients are supplied by [[lem-scaled-complex-householder-and-givens-local-backward-error]].",
++            "uses": [
++              "1.1"
++            ]
++          },
++          {
++            "fact": "F5",
++            "source": "lem-two-sided-scaled-householder-similarity-error",
++            "source_section": "Statement",
++            "quote": "Use a successful real or complex scaled Householder formation on active dimension $m\\ge1$, with $0<u<1$ and $mu<1$. Let $P=P^*$ be its stored vector's exact unitary reflector, embedded in an $n\\times n$ identity. Apply it on the left to the active rows of $H$, using the specified rounded rank-one order, and on the right to the active columns: compute each row dot $d_i=\\operatorname{fl}(\\sum_a H^L_{i,s_a}v_a)$, $c_a=\\operatorname{fl}(\\widehat\\tau\\overline v_a)$, the product $\\operatorname{fl}(d_ic_a)$, and subtraction in that order. Every nonzero exact intermediate is normal; otherwise return the specified failure.\n\nFor real arithmetic put $b_m=(1+u)c_m+3u$, with $c_m,\\kappa_m$ from [[lem-scaled-householder-step-meets-local-backward-error-premise]]. With an actual matrix-target column overwrite use $a_m=\\kappa_m$; without such an overwrite use $a_m=b_m$. For complex arithmetic put $b_m=(1+u)c_U+3u$, with $c_U,\\eta_H(m)$ from [[lem-scaled-complex-householder-and-givens-local-backward-error]], and use $a_m=\\eta_H(m)$ or $a_m=b_m$, respectively. Set\n$$\\alpha_m=a_m+b_m+a_mb_m.$$\nThen the complete computed similarity has a perturbation $E$ satisfying\n$$H_+=P^*(H+E)P,\\qquad \\|E\\|_F\\le\\alpha_m\\|H\\|_F.$$\nIdentity branches use $E=0$. If a separate deflation first zeros entries of $H$ by $D$, the same assertion holds with $H+D$ inside the similarity and the bound still uses $\\|H\\|_F$, since deleting entries cannot increase Frobenius norm. All explicit target zero writes are included in $a_m$; no unrelated matrix entry is overwritten when the reflector is formed from an external polynomial vector.",
++            "uses": [
++              "2.1"
++            ]
++          },
++          {
++            "fact": "F6",
++            "source": "thm-householder-similarity-reduces-to-hessenberg-and-tridiagonal-form",
++            "source_section": "Statement",
++            "quote": "Every square matrix over $\\mathbb R$ or $\\mathbb C$ is unitarily similar to an\nupper Hessenberg matrix. Every real symmetric matrix is orthogonally similar to\na real symmetric tridiagonal matrix.",
++            "uses": [
++              "1.1"
++            ]
++          },
++          {
++            "fact": "F7",
++            "source": "def-real-and-complex-schur-forms",
++            "source_section": "Definition",
++            "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $n\\ge0$ and $A\\in\\mathbb F^{n\\times n}$, and let $Q^*$ denote transpose over $\\mathbb R$ and conjugate transpose over $\\mathbb C$. A **complex Schur pair** for $A$ is a pair $(Q,T)$ with $Q^*Q=I$ and $A=QTQ^*$, where $T$ is upper triangular.\n\nFor real $A$, a **real Schur pair** is a pair $(Q,T)$ with $Q^TQ=I$ and $A=QTQ^T$, where $T$ is block upper triangular and every diagonal block is either a real $1\\times1$ block or a real $2\\times2$ block with negative characteristic-polynomial discriminant. Such a $2\\times2$ block has one nonreal conjugate eigenvalue pair. The definition does not assert that a finite shift strategy reaches such a pair.\n\nFor $B=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}\\in\\mathbb R^{2\\times2}$, its characteristic-polynomial discriminant means the exact real number $\\Delta(B)=(a+d)^2-4(ad-bc)$. “Negative discriminant” means the exact comparison $\\Delta(B)<0$.",
++            "uses": [
++              "2.1"
++            ]
++          },
++          {
++            "fact": "F8",
++            "source": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
++            "source_section": "Statement",
++            "quote": "Let $\\mathbb F=\\mathbb R$ or $\\mathbb C$.\n\n1. Every Householder reflector $H_v=I-2vv^*$ is orthogonal or unitary.\n2. For every nonzero $z\\in \\mathbb F^m$, there is a Householder reflector $H$\n   such that $Hz=\\alpha e_1$ with $|\\alpha|=\\|z\\|_2$.\n3. For every pair $(a,b)\\in \\mathbb F^2$ not both zero, there is a real or\n   complex Givens transformation $G$ such that\n   $$G\\binom{a}{b}=\\binom{\\alpha}{0}$$\n   with $|\\alpha|=(|a|^2+|b|^2)^{1/2}$.",
++            "uses": [
++              "2.1"
++            ]
++          },
++          {
++            "fact": "F9",
++            "source": "def-exact-real-2x2-discriminant-sign-predicate",
++            "source_section": "Definition",
++            "quote": "For a real matrix $B=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$, define its characteristic-polynomial discriminant by $\\Delta(B)=(a+d)^2-4(ad-bc)$. Define $\\operatorname{discSign}(B)$ to be $-1$, $0$, or $1$ according as the exact real number $\\Delta(B)$ is negative, zero, or positive. This is an exact mathematical predicate on the stored real entries, not an operation in the operationwise floating-point model. A computed procedure may report a sign only when its control predicate establishes this exact value; otherwise it reports undecided.",
++            "uses": [
++              "2.1"
++            ]
++          },
++          {
++            "fact": "F10",
++            "source": "lem-exact-rational-two-by-two-discriminant-sign",
++            "source_section": "Statement",
++            "quote": "Suppose the stored entries of $B=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$ have supplied exact rational encodings $a=p_a/q_a$, $b=p_b/q_b$, $c=p_c/q_c$, $d=p_d/q_d$, with integer numerators and positive integer denominators. Put $Q=q_aq_bq_cq_d$ and $A=p_a(Q/q_a)$, $B_0=p_b(Q/q_b)$, $C_0=p_c(Q/q_c)$, $D=p_d(Q/q_d)$. Compute the integer\n$$Z=(A-D)^2+4B_0C_0.$$\nIts integer sign is exactly [[def-exact-real-2x2-discriminant-sign-predicate]] and is found after finitely many exact integer operations. Finite binary floating values with their signed-integer/power-of-two encodings are a special case. This evaluator does not assume arbitrary stored real numbers have rational encodings. If an exact encoding or another terminating exact sign evaluator is unavailable, retain `schur-type-undecided`.",
++            "uses": [
++              "2.1"
++            ]
++          }
++        ],
++        "derivations": [
++          {
++            "id": "derive-1.1",
++            "claim": "The exact Hessenberg target exists by [F6]. The initialization uses at most $n-2$ reflector columns. By [F3] in the real branch and [F4] in the complex branch, each call returns a stated result or an explicit failure. Hence initialization terminates.",
++            "step": "1.1",
++            "inputs": [
++              "given",
++              "F3",
++              "F4",
++              "F6",
++              "choose"
++            ]
++          },
++          {
++            "id": "derive-1.2",
++            "claim": "Each sweep performs finitely many deflation comparisons and at most $\\max(n-2,0)+1$ initial/chase reflector updates per active block. There are at most $N$ sweeps. By [F1], any arithmetic operation either returns its finite value or terminates with range-failure; the finite control table can terminate with stagnation-exhausted, and the explicit invariant check can terminate with bulge-chase-invariant-failure.",
++            "step": "1.2",
++            "inputs": [
++              "given",
++              "F1",
++              "F2"
++            ]
++          },
++          {
++            "id": "derive-2.1",
++            "claim": "Therefore the procedure returns Schur-computed, budget-exhausted, stagnation-exhausted, schur-type-undecided, breakdown, range-failure, or bulge-chase-invariant-failure after finitely many operations. By [F7] and [F9], its Schur-computed test is exactly the defined real or complex block structure when every required real discriminant sign is available, either from the supplied evaluator or the exact encoded-integer recipe [F10]. By [F8], the exact reflector product $Q$ is unitary, so its orthogonality residual is zero. The definition withholds a backward-error certificate when a local bound is absent; this is the inconclusive branch specified in step 4.",
++            "step": "2.1",
++            "inputs": [
++              "step 1.1",
++              "step 1.2",
++              "F5",
++              "F7",
++              "F8",
++              "F9",
++              "F10",
++              "algebra"
++            ]
++          }
++        ],
++        "routine_steps": [],
++        "boundaries": [
++          {
++            "case": "empty",
++            "status": "not_applicable",
++            "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
++          },
++          {
++            "case": "zero",
++            "status": "checked",
++            "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
++          },
++          {
++            "case": "one",
++            "status": "checked",
++            "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
++          },
++          {
++            "case": "degenerate",
++            "status": "checked",
++            "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
++          },
++          {
++            "case": "endpoints",
++            "status": "not_applicable",
++            "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
++          },
++          {
++            "case": "nonempty-choice",
++            "status": "not_applicable",
++            "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
++          },
++          {
++            "case": "iff-forward",
++            "status": "not_applicable",
++            "reason": "No if-and-only-if assertion is made."
++          },
++          {
++            "case": "iff-reverse",
++            "status": "not_applicable",
++            "reason": "No if-and-only-if assertion is made."
++          }
++        ]
++      },
++      "owner_repair_evidence": "research/numerical-optimization-dynamics-2026-10-16-owner-matrix49-68-applied/completion.json"
+     },
+     "thm-computed-francis-schur-backward-error": {
+       "citations": [
+@@ -1297,7 +1346,7 @@
+           "fact": "F1",
+           "source": "alg-finite-budget-francis-schur-reduction",
+           "source_section": "Definition",
+-          "quote": "Input a real or complex square matrix $A\\in\\mathbb F^{n\\times n}$ with $n\\ge1$, a finite nonnegative deflation tolerance $\\tau$, a nonnegative integer sweep budget $N$, a positive integer stagnation period $h$, finite tables of finite exceptional shifts, optional exact rational/dyadic encodings of its stored real values, and optionally a terminating exact evaluator of [[def-exact-real-2x2-discriminant-sign-predicate]]. A formation `breakdown` is propagated with the operation index and partial factors. Every scalar operation is evaluated in the operationwise model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. Any invalid, overflow, or underflow operation returns range-failure with the operation index and partial factors.\n\nFor each stored reflector with active indices $S=(s_1,\\ldots,s_m)$, vector $v\\in\\mathbb F^m$, and real computed coefficient $\\widehat\\tau$, the real or complex formation routine first performs the stated finite left application. Then perform the right application in this fixed order: for each matrix row $i=1,\\ldots,n$, compute $d_i=\\operatorname{fl}(\\sum_{a=1}^m H^L_{i,s_a}v_a)$ by left-to-right rounded products and additions; for $a=1,\\ldots,m$, compute $c_a=\\operatorname{fl}(\\widehat\\tau\\overline{v_a})$, $g_{ia}=\\operatorname{fl}(d_ic_a)$, and $H^R_{i,s_a}=\\operatorname{fl}(H^L_{i,s_a}-g_{ia})$. Each complex product uses the six real operations of the arithmetic model. The exact factor appended to $Q$ is $P(v)=I-2vv^*/(v^*v)$; the computed right update uses $\\widehat\\tau$ as displayed and is not asserted equal to multiplication by $P(v)$. For a matrix-target column, the formation routine's explicit zero writes are retained. In the initial polynomial-vector step there is no matrix-target column: use the entire active row panel for the left update and then apply the right update to the active columns. Record deflation writes separately, including a pure deflation with no following reflector as an identity-transform stage; a local error certificate must account for all other rounding and target-column writes.\n\n1. Reduce $A$ to upper Hessenberg form with Householder similarities. For $k=1,\\ldots,\\max(n-2,0)$ in increasing order, use active indices $S=\\{k+1,\\ldots,n\\}$, target $x=H_{S,k}$, and trailing left panel $B=H_{S,\\{k+1,\\ldots,n\\}}$ with columns in increasing order. In the real branch use [[alg-scaled-householder-reflector-formation-and-application]] for the finite left application and overwrite; in the complex branch use [[alg-complex-scaled-householder-reflector-step]]. Complete each similarity by the right application above on columns $S$. If the resulting matrix fails the exact upper-Hessenberg zero-pattern check, return bulge-chase-invariant-failure with the partial factors. Store the exact unitary reflector factors as a product representation $Q_0$.\n2. At each sweep, test every active first-subdiagonal entry by\n   $$|h_{i,i-1}|\\le\\tau\\bigl(|h_{i-1,i-1}|+|h_{i,i}|\\bigr).$$\n   For a complex entry $z=a+ib$, evaluate $|z|$ by $s=\\max(|a|,|b|)$ and $s\\sqrt{(a/s)^2+(b/s)^2}$ when $z\\ne0$, with divisions, squares, sum, square root and final scaling rounded in the stated order; use $|0|=0$. Return range-failure if this evaluation fails. Compute the diagonal-magnitude sum first, then multiply by $\\tau$ in the operationwise model; compare the resulting finite values exactly. When the test holds, set that entry to zero, record its original value as a deflation perturbation, and split the active block. The equality case deflates. Do not use the Hermitian-tridiagonal Wilkinson shift rule for a general Hessenberg matrix.\n3. Check for the target Schur block structure after initialization and after each sweep. A complex active block of size at least two uses a single shift, normally its bottom-right entry. A real active block of size at least two uses the real quadratic $p(z)=z^2-sz+t$ with trailing block $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$; compute $s=\\operatorname{fl}(a+d)$ and $t=\\operatorname{fl}(\\operatorname{fl}(ad)-\\operatorname{fl}(bc))$ in that order, returning range-failure if an operation fails. Maintain a counter for each active block, reset it after any deflation in that block, and after $h$ consecutive sweeps without deflation consume that block's next declared exceptional shift or real quadratic. If the required table entry is absent, return stagnation-exhausted.\n4. Apply the corresponding implicit bulge chase from [[alg-exact-francis-hessenberg-qr-step]]. For the initial single-shift vector compute $x_1=\\operatorname{fl}(h_{11}-\\mu)$ and $x_i=h_{i1}$ for $i>1$. For the initial real double-shift vector, compute $u=He_1$, then $w=Hu$ by left-to-right rounded matrix-vector products, then $x=\\operatorname{fl}(\\operatorname{fl}(w-su)+te_1)$ componentwise. Compute only the first $r+1$ components from the Hessenberg support pattern; on range failure return the operation index and partial factors. For a chase at column $j$, use active indices $S=I_j$, target $x=H_{S,j}$, and trailing left panel $B=H_{S,\\{j+1,\\ldots,n\\}}$ with columns in increasing order. Call the real or complex formation routine, write the target tail zeros exactly, complete the two-sided update by the right-kernel order above on columns $S$, and append the exact reflector representation to $Q$. In the initial polynomial-vector step there is no matrix-target column; use the full active row panel for the left update and then apply the right update to its active columns. If the exact routine or its finite-precision realization returns bulge-chase-invariant-failure, return that status with the partial matrix and factors. Use [[lem-two-sided-scaled-householder-similarity-error]] to store the proved two-sided coefficient $\\alpha_{m_j}=a_{m_j}+b_{m_j}+a_{m_j}b_{m_j}$, with $a$ the target-overwrite coefficient or separate-block coefficient as actually used and $b$ the right separate-block coefficient. This gives $\\|E_j\\|_F\\le\\alpha_{m_j}\\|\\widehat H_{j-1}\\|_F$ when its $m_ju<1$ and range hypotheses hold. Apply the same certificate to every Hessenberg-initialization similarity. If any step lacks that certificate, retain the residual diagnostic and set the backward-error-certificate status to inconclusive.\n5. Stop with Schur-computed when every complex block has size one, or every real block has size one or is a $2\\times2$ block with negative characteristic-polynomial discriminant. Use the supplied evaluator, or the finite integer recipe in [[lem-exact-rational-two-by-two-discriminant-sign]] when exact rational/dyadic encodings are available, for each real block's $\\operatorname{discSign}$ as defined in [[def-exact-real-2x2-discriminant-sign-predicate]]. If no exact sign is available, return schur-type-undecided and do not claim Schur-computed. If the target check fails when the sweep count reaches $N$, return budget-exhausted; in particular, with $N=0$ return Schur-computed only when the initialized matrix already has the target block structure. Return the partial matrix and factors on every failure or nonconvergence status.\n\nLet $\\widehat T$ be the final returned matrix. The output includes the product representation $Q$, residual matrix $R=Q^*AQ-\\widehat T$ and its Frobenius norm as diagnostics, the exact orthogonality bound $0$ for that reflector product, the recorded deflation entries, and either the accumulated backward-error bound when all local certificates exist or certificate status inconclusive. Bound expressions and any claimed upper bounds are evaluated exactly or with rigorous outward allowances; uncorrected rounded residual norms are diagnostics only. A rounded dense matrix formed from $Q$ has its own orthogonality residual and is not asserted exactly unitary. The residual diagnostic does not itself give a forward eigenvalue bound. The procedure asserts no unconditional convergence of any shift schedule.",
++          "quote": "Input a real or complex square matrix $A\\in\\mathbb F^{n\\times n}$ with $n\\ge1$, a finite nonnegative deflation tolerance $\\tau$, a nonnegative integer sweep budget $N$, a positive integer stagnation period $h$, finite tables of finite exceptional shifts, optional exact rational/dyadic encodings of its stored real values, optionally a terminating exact evaluator of [[def-exact-real-2x2-discriminant-sign-predicate]], and optionally a terminating outward evaluator for nonnegative expressions and Frobenius norms. The outward evaluator's `upadd`, `upmul`, and `upsqrt` calls return finite nonnegative represented upper bounds for the exact sum, product, and square root, while `upnormF(X)` returns a finite represented upper bound for $\\|X\\|_F$; any call may instead return `unavailable`. In the declared scalar-cost model, each `upadd`, `upmul`, and `upsqrt` call has unit cost and `upnormF(X)` makes one pass over the entries of $X$ with a fixed number of such calls per real component. The evaluator acts only on certificate bookkeeping. A formation `breakdown` is propagated with the operation index and partial factors. Every scalar operation in the main procedure is evaluated in the operationwise model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. Any invalid, overflow, or underflow operation in the main procedure returns range-failure with the operation index and partial factors.\n\nBefore every real or complex formation in steps 1 and 4, test the target vector componentwise for exact zero, including an external initial polynomial vector. If it is zero, mark the stage `identity`, copy all affected matrix entries unchanged, skip formation and both left and right updates, append the embedded identity $P_j=I$ to the product representation, and record $E_j=0$ and arithmetic coefficient $\\alpha_j=\\bar\\alpha_j=0$. Do not evaluate $P(v)$ or a stored-vector norm in this branch. For a matrix target its column is already zero, so its target zero writes change nothing; for an external vector no matrix column is overwritten. Continue with the invariant checks, sweep counters and stopping tests specified below. Record and process every deflation write separately exactly as specified below; this branch does not discard a deflation perturbation. These identity instructions take precedence over the formation/update instructions in steps 1 and 4.\n\nFor each nonidentity stored reflector with active indices $S=(s_1,\\ldots,s_m)$, nonzero vector $v\\in\\mathbb F^m$, and real computed coefficient $\\widehat\\tau$, the real or complex formation routine first performs the stated finite left application. Then perform the right application in this fixed order: for each matrix row $i=1,\\ldots,n$, compute $d_i=\\operatorname{fl}(\\sum_{a=1}^m H^L_{i,s_a}v_a)$ by left-to-right rounded products and additions; for $a=1,\\ldots,m$, compute $c_a=\\operatorname{fl}(\\widehat\\tau\\overline{v_a})$, $g_{ia}=\\operatorname{fl}(d_ic_a)$, and $H^R_{i,s_a}=\\operatorname{fl}(H^L_{i,s_a}-g_{ia})$. Each complex product uses the six real operations of the arithmetic model. The exact factor appended to $Q$ is $P(v)=I-2vv^*/(v^*v)$; the computed right update uses $\\widehat\\tau$ as displayed and is not asserted equal to multiplication by $P(v)$. For a matrix-target column, the formation routine's explicit zero writes are retained. In the initial polynomial-vector step there is no matrix-target column: use the entire active row panel for the left update and then apply the right update to the active columns. Record deflation writes separately, including a pure deflation with no following reflector as an identity-transform stage; a local error certificate must account for all other rounding and target-column writes.\n\n1. Reduce $A$ to upper Hessenberg form with Householder similarities. For $k=1,\\ldots,\\max(n-2,0)$ in increasing order, use active indices $S=\\{k+1,\\ldots,n\\}$, target $x=H_{S,k}$, and trailing left panel $B=H_{S,\\{k+1,\\ldots,n\\}}$ with columns in increasing order. In the real branch use [[alg-scaled-householder-reflector-formation-and-application]] for the finite left application and overwrite; in the complex branch use [[alg-complex-scaled-householder-reflector-step]]. Complete each similarity by the right application above on columns $S$. If the resulting matrix fails the exact upper-Hessenberg zero-pattern check, return bulge-chase-invariant-failure with the partial factors. Store the exact unitary reflector factors as a product representation $Q_0$.\n2. At each sweep, test every active first-subdiagonal entry by\n   $$|h_{i,i-1}|\\le\\tau\\bigl(|h_{i-1,i-1}|+|h_{i,i}|\\bigr).$$\n   For a complex entry $z=a+ib$, evaluate $|z|$ by $s=\\max(|a|,|b|)$ and $s\\sqrt{(a/s)^2+(b/s)^2}$ when $z\\ne0$, with divisions, squares, sum, square root and final scaling rounded in the stated order; use $|0|=0$. Return range-failure if this evaluation fails. Compute the diagonal-magnitude sum first, then multiply by $\\tau$ in the operationwise model; compare the resulting finite values exactly. When the test holds, set that entry to zero, record its original value as a deflation perturbation, and split the active block. The equality case deflates. Do not use the Hermitian-tridiagonal Wilkinson shift rule for a general Hessenberg matrix.\n3. Check for the target Schur block structure after initialization and after each sweep. A complex active block of size at least two uses a single shift, normally its bottom-right entry. A real active block of size at least two uses the real quadratic $p(z)=z^2-sz+t$ with trailing block $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$; compute $s=\\operatorname{fl}(a+d)$ and $t=\\operatorname{fl}(\\operatorname{fl}(ad)-\\operatorname{fl}(bc))$ in that order, returning range-failure if an operation fails. Maintain a counter for each active block, reset it after any deflation in that block, and after $h$ consecutive sweeps without deflation consume that block's next declared exceptional shift or real quadratic. If the required table entry is absent, return stagnation-exhausted.\n4. Apply the corresponding implicit bulge chase from [[alg-exact-francis-hessenberg-qr-step]]. For the initial single-shift vector compute $x_1=\\operatorname{fl}(h_{11}-\\mu)$ and $x_i=h_{i1}$ for $i>1$. For the initial real double-shift vector, compute $u=He_1$, then $w=Hu$ by left-to-right rounded matrix-vector products, then $x=\\operatorname{fl}(\\operatorname{fl}(w-su)+te_1)$ componentwise. Compute only the first $r+1$ components from the Hessenberg support pattern; on range failure return the operation index and partial factors. For a chase at column $j$, use active indices $S=I_j$, target $x=H_{S,j}$, and trailing left panel $B=H_{S,\\{j+1,\\ldots,n\\}}$ with columns in increasing order. Call the real or complex formation routine, write the target tail zeros exactly, complete the two-sided update by the right-kernel order above on columns $S$, and append the exact reflector representation to $Q$. In the initial polynomial-vector step there is no matrix-target column; use the full active row panel for the left update and then apply the right update to its active columns. If the exact routine or its finite-precision realization returns bulge-chase-invariant-failure, return that status with the partial matrix and factors. Use [[lem-two-sided-scaled-householder-similarity-error]] to store the proved two-sided coefficient $\\alpha_{m_j}=a_{m_j}+b_{m_j}+a_{m_j}b_{m_j}$, with $a$ the target-overwrite coefficient or separate-block coefficient as actually used and $b$ the right separate-block coefficient. This gives $\\|E_j\\|_F\\le\\alpha_{m_j}\\|\\widehat H_{j-1}\\|_F$ when its $m_ju<1$ and range hypotheses hold. Apply the same certificate to every Hessenberg-initialization similarity. If any step lacks that certificate, retain the residual diagnostic and set the backward-error-certificate status to inconclusive.\n5. Stop with Schur-computed when every complex block has size one, or every real block has size one or is a $2\\times2$ block with negative characteristic-polynomial discriminant. Use the supplied evaluator, or the finite integer recipe in [[lem-exact-rational-two-by-two-discriminant-sign]] when exact rational/dyadic encodings are available, for each real block's $\\operatorname{discSign}$ as defined in [[def-exact-real-2x2-discriminant-sign-predicate]]. If no exact sign is available, return schur-type-undecided and do not claim Schur-computed. If the target check fails when the sweep count reaches $N$, return budget-exhausted; in particular, with $N=0$ return Schur-computed only when the initialized matrix already has the target block structure. Return the partial matrix and factors on every failure or nonconvergence status.\n\nFor certificate bookkeeping, start before Hessenberg initialization with $\\rho_0=\\operatorname{upnormF}(A)$ and $C_0=0$. If the evaluator is absent or this call is unavailable, mark the backward-error certificate inconclusive. Process each local similarity update and each deflation-only write as a separate finite stage $j$. For a local similarity, take the actual coefficient $\\alpha_j=a_{m_j}+b_{m_j}+a_{m_j}b_{m_j}$ from [[lem-two-sided-scaled-householder-similarity-error]] and compute $\\bar\\alpha_j=\\operatorname{upadd}(\\operatorname{upadd}(a_{m_j},b_{m_j}),\\operatorname{upmul}(a_{m_j},b_{m_j}))\\ge\\alpha_j$; for an identity update put $\\bar\\alpha_j=0$. A recorded deflation entry stores its old value, while its additive matrix $D_j$ has entry equal to zero minus that old value at the written position. For a deflation-only stage use $P_j=I$, $E_j=0$, $\\bar\\alpha_j=0$, and obtain $\\bar\\beta_j\\ge\\|D_j\\|_F$ by calling `upnormF` on the one-entry list containing the signed recorded value, whose Frobenius norm equals $\\|D_j\\|_F$; do not form or scan a dense matrix $D_j$; for a similarity stage set $\\bar\\beta_j=0$. With the outward evaluator compute\n\n$$g_j=\\operatorname{upadd}(\\operatorname{upmul}(\\bar\\alpha_j,\\rho_{j-1}),\\bar\\beta_j),\\qquad \\rho_j=\\operatorname{upadd}(\\rho_{j-1},g_j),\\qquad C_j=\\operatorname{upadd}(C_{j-1},g_j).$$\n\nIf any local coefficient certificate or evaluator call is unavailable, keep the residual diagnostic and mark the backward-error-certificate status `inconclusive`; this ancillary failure does not change the main algorithm status. Otherwise return $C_J$ as the accumulated backward-error upper bound and mark that status `certified`. The number of recurrence calls is finite: one initialization norm, a fixed number of scalar upper-bound calls per similarity stage, and one norm call per deflation-only stage.\n\nLet $\\widehat T$ be the final returned matrix. The output includes the product representation $Q$, residual matrix $R=Q^*AQ-\\widehat T$ and its Frobenius norm as diagnostics, the exact orthogonality bound $0$ for that reflector product, the recorded deflation entries, and either the accumulated backward-error bound when all local certificates exist or certificate status inconclusive. Bound expressions and any claimed upper bounds are evaluated exactly or with rigorous outward allowances; uncorrected rounded residual norms are diagnostics only. A rounded dense matrix formed from $Q$ has its own orthogonality residual and is not asserted exactly unitary. The residual diagnostic does not itself give a forward eigenvalue bound. The procedure asserts no unconditional convergence of any shift schedule.",
+           "uses": [
+             "1.1",
+             "1.2"
+@@ -2140,6 +2189,119 @@
+           "reason": "No if-and-only-if assertion is made."
+         }
+       ]
++    },
++    "thm-finite-budget-francis-schur-termination-and-status": {
++      "citations": [
++        {
++          "fact": "F1",
++          "source": "alg-finite-budget-francis-schur-reduction",
++          "source_section": "Definition",
++          "quote": "Input a real or complex square matrix $A\\in\\mathbb F^{n\\times n}$ with $n\\ge1$, a finite nonnegative deflation tolerance $\\tau$, a nonnegative integer sweep budget $N$, a positive integer stagnation period $h$, finite tables of finite exceptional shifts, optional exact rational/dyadic encodings of its stored real values, optionally a terminating exact evaluator of [[def-exact-real-2x2-discriminant-sign-predicate]], and optionally a terminating outward evaluator for nonnegative expressions and Frobenius norms. The outward evaluator's `upadd`, `upmul`, and `upsqrt` calls return finite nonnegative represented upper bounds for the exact sum, product, and square root, while `upnormF(X)` returns a finite represented upper bound for $\\|X\\|_F$; any call may instead return `unavailable`. In the declared scalar-cost model, each `upadd`, `upmul`, and `upsqrt` call has unit cost and `upnormF(X)` makes one pass over the entries of $X$ with a fixed number of such calls per real component. The evaluator acts only on certificate bookkeeping. A formation `breakdown` is propagated with the operation index and partial factors. Every scalar operation in the main procedure is evaluated in the operationwise model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. Any invalid, overflow, or underflow operation in the main procedure returns range-failure with the operation index and partial factors.\n\nBefore every real or complex formation in steps 1 and 4, test the target vector componentwise for exact zero, including an external initial polynomial vector. If it is zero, mark the stage `identity`, copy all affected matrix entries unchanged, skip formation and both left and right updates, append the embedded identity $P_j=I$ to the product representation, and record $E_j=0$ and arithmetic coefficient $\\alpha_j=\\bar\\alpha_j=0$. Do not evaluate $P(v)$ or a stored-vector norm in this branch. For a matrix target its column is already zero, so its target zero writes change nothing; for an external vector no matrix column is overwritten. Continue with the invariant checks, sweep counters and stopping tests specified below. Record and process every deflation write separately exactly as specified below; this branch does not discard a deflation perturbation. These identity instructions take precedence over the formation/update instructions in steps 1 and 4.\n\nFor each nonidentity stored reflector with active indices $S=(s_1,\\ldots,s_m)$, nonzero vector $v\\in\\mathbb F^m$, and real computed coefficient $\\widehat\\tau$, the real or complex formation routine first performs the stated finite left application. Then perform the right application in this fixed order: for each matrix row $i=1,\\ldots,n$, compute $d_i=\\operatorname{fl}(\\sum_{a=1}^m H^L_{i,s_a}v_a)$ by left-to-right rounded products and additions; for $a=1,\\ldots,m$, compute $c_a=\\operatorname{fl}(\\widehat\\tau\\overline{v_a})$, $g_{ia}=\\operatorname{fl}(d_ic_a)$, and $H^R_{i,s_a}=\\operatorname{fl}(H^L_{i,s_a}-g_{ia})$. Each complex product uses the six real operations of the arithmetic model. The exact factor appended to $Q$ is $P(v)=I-2vv^*/(v^*v)$; the computed right update uses $\\widehat\\tau$ as displayed and is not asserted equal to multiplication by $P(v)$. For a matrix-target column, the formation routine's explicit zero writes are retained. In the initial polynomial-vector step there is no matrix-target column: use the entire active row panel for the left update and then apply the right update to the active columns. Record deflation writes separately, including a pure deflation with no following reflector as an identity-transform stage; a local error certificate must account for all other rounding and target-column writes.\n\n1. Reduce $A$ to upper Hessenberg form with Householder similarities. For $k=1,\\ldots,\\max(n-2,0)$ in increasing order, use active indices $S=\\{k+1,\\ldots,n\\}$, target $x=H_{S,k}$, and trailing left panel $B=H_{S,\\{k+1,\\ldots,n\\}}$ with columns in increasing order. In the real branch use [[alg-scaled-householder-reflector-formation-and-application]] for the finite left application and overwrite; in the complex branch use [[alg-complex-scaled-householder-reflector-step]]. Complete each similarity by the right application above on columns $S$. If the resulting matrix fails the exact upper-Hessenberg zero-pattern check, return bulge-chase-invariant-failure with the partial factors. Store the exact unitary reflector factors as a product representation $Q_0$.\n2. At each sweep, test every active first-subdiagonal entry by\n   $$|h_{i,i-1}|\\le\\tau\\bigl(|h_{i-1,i-1}|+|h_{i,i}|\\bigr).$$\n   For a complex entry $z=a+ib$, evaluate $|z|$ by $s=\\max(|a|,|b|)$ and $s\\sqrt{(a/s)^2+(b/s)^2}$ when $z\\ne0$, with divisions, squares, sum, square root and final scaling rounded in the stated order; use $|0|=0$. Return range-failure if this evaluation fails. Compute the diagonal-magnitude sum first, then multiply by $\\tau$ in the operationwise model; compare the resulting finite values exactly. When the test holds, set that entry to zero, record its original value as a deflation perturbation, and split the active block. The equality case deflates. Do not use the Hermitian-tridiagonal Wilkinson shift rule for a general Hessenberg matrix.\n3. Check for the target Schur block structure after initialization and after each sweep. A complex active block of size at least two uses a single shift, normally its bottom-right entry. A real active block of size at least two uses the real quadratic $p(z)=z^2-sz+t$ with trailing block $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$; compute $s=\\operatorname{fl}(a+d)$ and $t=\\operatorname{fl}(\\operatorname{fl}(ad)-\\operatorname{fl}(bc))$ in that order, returning range-failure if an operation fails. Maintain a counter for each active block, reset it after any deflation in that block, and after $h$ consecutive sweeps without deflation consume that block's next declared exceptional shift or real quadratic. If the required table entry is absent, return stagnation-exhausted.\n4. Apply the corresponding implicit bulge chase from [[alg-exact-francis-hessenberg-qr-step]]. For the initial single-shift vector compute $x_1=\\operatorname{fl}(h_{11}-\\mu)$ and $x_i=h_{i1}$ for $i>1$. For the initial real double-shift vector, compute $u=He_1$, then $w=Hu$ by left-to-right rounded matrix-vector products, then $x=\\operatorname{fl}(\\operatorname{fl}(w-su)+te_1)$ componentwise. Compute only the first $r+1$ components from the Hessenberg support pattern; on range failure return the operation index and partial factors. For a chase at column $j$, use active indices $S=I_j$, target $x=H_{S,j}$, and trailing left panel $B=H_{S,\\{j+1,\\ldots,n\\}}$ with columns in increasing order. Call the real or complex formation routine, write the target tail zeros exactly, complete the two-sided update by the right-kernel order above on columns $S$, and append the exact reflector representation to $Q$. In the initial polynomial-vector step there is no matrix-target column; use the full active row panel for the left update and then apply the right update to its active columns. If the exact routine or its finite-precision realization returns bulge-chase-invariant-failure, return that status with the partial matrix and factors. Use [[lem-two-sided-scaled-householder-similarity-error]] to store the proved two-sided coefficient $\\alpha_{m_j}=a_{m_j}+b_{m_j}+a_{m_j}b_{m_j}$, with $a$ the target-overwrite coefficient or separate-block coefficient as actually used and $b$ the right separate-block coefficient. This gives $\\|E_j\\|_F\\le\\alpha_{m_j}\\|\\widehat H_{j-1}\\|_F$ when its $m_ju<1$ and range hypotheses hold. Apply the same certificate to every Hessenberg-initialization similarity. If any step lacks that certificate, retain the residual diagnostic and set the backward-error-certificate status to inconclusive.\n5. Stop with Schur-computed when every complex block has size one, or every real block has size one or is a $2\\times2$ block with negative characteristic-polynomial discriminant. Use the supplied evaluator, or the finite integer recipe in [[lem-exact-rational-two-by-two-discriminant-sign]] when exact rational/dyadic encodings are available, for each real block's $\\operatorname{discSign}$ as defined in [[def-exact-real-2x2-discriminant-sign-predicate]]. If no exact sign is available, return schur-type-undecided and do not claim Schur-computed. If the target check fails when the sweep count reaches $N$, return budget-exhausted; in particular, with $N=0$ return Schur-computed only when the initialized matrix already has the target block structure. Return the partial matrix and factors on every failure or nonconvergence status.\n\nFor certificate bookkeeping, start before Hessenberg initialization with $\\rho_0=\\operatorname{upnormF}(A)$ and $C_0=0$. If the evaluator is absent or this call is unavailable, mark the backward-error certificate inconclusive. Process each local similarity update and each deflation-only write as a separate finite stage $j$. For a local similarity, take the actual coefficient $\\alpha_j=a_{m_j}+b_{m_j}+a_{m_j}b_{m_j}$ from [[lem-two-sided-scaled-householder-similarity-error]] and compute $\\bar\\alpha_j=\\operatorname{upadd}(\\operatorname{upadd}(a_{m_j},b_{m_j}),\\operatorname{upmul}(a_{m_j},b_{m_j}))\\ge\\alpha_j$; for an identity update put $\\bar\\alpha_j=0$. A recorded deflation entry stores its old value, while its additive matrix $D_j$ has entry equal to zero minus that old value at the written position. For a deflation-only stage use $P_j=I$, $E_j=0$, $\\bar\\alpha_j=0$, and obtain $\\bar\\beta_j\\ge\\|D_j\\|_F$ by calling `upnormF` on the one-entry list containing the signed recorded value, whose Frobenius norm equals $\\|D_j\\|_F$; do not form or scan a dense matrix $D_j$; for a similarity stage set $\\bar\\beta_j=0$. With the outward evaluator compute\n\n$$g_j=\\operatorname{upadd}(\\operatorname{upmul}(\\bar\\alpha_j,\\rho_{j-1}),\\bar\\beta_j),\\qquad \\rho_j=\\operatorname{upadd}(\\rho_{j-1},g_j),\\qquad C_j=\\operatorname{upadd}(C_{j-1},g_j).$$\n\nIf any local coefficient certificate or evaluator call is unavailable, keep the residual diagnostic and mark the backward-error-certificate status `inconclusive`; this ancillary failure does not change the main algorithm status. Otherwise return $C_J$ as the accumulated backward-error upper bound and mark that status `certified`. The number of recurrence calls is finite: one initialization norm, a fixed number of scalar upper-bound calls per similarity stage, and one norm call per deflation-only stage.\n\nLet $\\widehat T$ be the final returned matrix. The output includes the product representation $Q$, residual matrix $R=Q^*AQ-\\widehat T$ and its Frobenius norm as diagnostics, the exact orthogonality bound $0$ for that reflector product, the recorded deflation entries, and either the accumulated backward-error bound when all local certificates exist or certificate status inconclusive. Bound expressions and any claimed upper bounds are evaluated exactly or with rigorous outward allowances; uncorrected rounded residual norms are diagnostics only. A rounded dense matrix formed from $Q$ has its own orthogonality residual and is not asserted exactly unitary. The residual diagnostic does not itself give a forward eigenvalue bound. The procedure asserts no unconditional convergence of any shift schedule.",
++          "uses": [
++            "1.1",
++            "2.1",
++            "3.1"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
++          "source_section": "Statement",
++          "quote": "Let $\\mathbb F=\\mathbb R$ or $\\mathbb C$.\n\n1. Every Householder reflector $H_v=I-2vv^*$ is orthogonal or unitary.\n2. For every nonzero $z\\in \\mathbb F^m$, there is a Householder reflector $H$\n   such that $Hz=\\alpha e_1$ with $|\\alpha|=\\|z\\|_2$.\n3. For every pair $(a,b)\\in \\mathbb F^2$ not both zero, there is a real or\n   complex Givens transformation $G$ such that\n   $$G\\binom{a}{b}=\\binom{\\alpha}{0}$$\n   with $|\\alpha|=(|a|^2+|b|^2)^{1/2}$.",
++          "uses": [
++            "3.1"
++          ]
++        },
++        {
++          "fact": "F3",
++          "source": "def-real-and-complex-schur-forms",
++          "source_section": "Definition",
++          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $n\\ge0$ and $A\\in\\mathbb F^{n\\times n}$, and let $Q^*$ denote transpose over $\\mathbb R$ and conjugate transpose over $\\mathbb C$. A **complex Schur pair** for $A$ is a pair $(Q,T)$ with $Q^*Q=I$ and $A=QTQ^*$, where $T$ is upper triangular.\n\nFor real $A$, a **real Schur pair** is a pair $(Q,T)$ with $Q^TQ=I$ and $A=QTQ^T$, where $T$ is block upper triangular and every diagonal block is either a real $1\\times1$ block or a real $2\\times2$ block with negative characteristic-polynomial discriminant. Such a $2\\times2$ block has one nonreal conjugate eigenvalue pair. The definition does not assert that a finite shift strategy reaches such a pair.\n\nFor $B=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}\\in\\mathbb R^{2\\times2}$, its characteristic-polynomial discriminant means the exact real number $\\Delta(B)=(a+d)^2-4(ad-bc)$. “Negative discriminant” means the exact comparison $\\Delta(B)<0$.",
++          "uses": [
++            "3.1"
++          ]
++        }
++      ],
++      "derivations": [
++        {
++          "id": "derive-1.1",
++          "step": "1.1",
++          "claim": "Initialization uses at most $\\max(n-2,0)$ reflector stages. Each active reflector formation and both specified applications have finite loops over matrix rows and columns. A main invalid/range/formation failure returns at once. Hence initialization ends with its stored factors or an explicit status.",
++          "inputs": [
++            "F1",
++            "given",
++            "algebra"
++          ]
++        },
++        {
++          "id": "derive-2.1",
++          "step": "2.1",
++          "claim": "Every sweep has a finite active partition and a dimension-bounded bulge chase per block. Deflation tests, shift-table lookups and exact pattern checks are finite; each supplied sign or outward-bound call terminates by the input contract. A missing shift, unavailable type sign or failed invariant/range test gives the declared main failure. There are at most $N$ sweeps, including the initial target test when $N=0$. Bookkeeping makes finitely many calls per stage and sets its own flag inconclusive on unavailable data. Thus all main and bookkeeping paths terminate.",
++          "inputs": [
++            "F1",
++            "step 1.1",
++            "given",
++            "algebra"
++          ]
++        },
++        {
++          "id": "derive-3.1",
++          "step": "3.1",
++          "claim": "The only `Schur-computed` branch checks the entire target pattern and all required exact discriminant signs, which is exactly [F3]. Every exact factor appended is unitary by [F2]; the adjoint of a finite product reverses the factors and cancels them pairwise, so the recorded product remains unitary. No exact original-matrix factorization is inferred from a rounded update or a residual diagnostic. The flag branch is the actual availability test in [F1], not a new backward-error proof.",
++          "inputs": [
++            "F1",
++            "F2",
++            "F3",
++            "step 2.1",
++            "given",
++            "algebra"
++          ]
++        }
++      ],
++      "routine_steps": [],
++      "boundaries": [
++        {
++          "case": "empty",
++          "status": "not_applicable",
++          "reason": "NoadditionalboundaryclaimbeyondtheactualStatementandexplicitcasesinitsnumberedproof; exactfullcurrentstepsrecordedabove."
++        },
++        {
++          "case": "endpoints",
++          "status": "not_applicable",
++          "reason": "NoadditionalboundaryclaimbeyondtheactualStatementandexplicitcasesinitsnumberedproof; exactfullcurrentstepsrecordedabove."
++        },
++        {
++          "case": "nonempty-choice",
++          "status": "not_applicable",
++          "reason": "NoadditionalboundaryclaimbeyondtheactualStatementandexplicitcasesinitsnumberedproof; exactfullcurrentstepsrecordedabove."
++        },
++        {
++          "case": "iff-forward",
++          "status": "not_applicable",
++          "reason": "NoadditionalboundaryclaimbeyondtheactualStatementandexplicitcasesinitsnumberedproof; exactfullcurrentstepsrecordedabove."
++        },
++        {
++          "case": "iff-reverse",
++          "status": "not_applicable",
++          "reason": "NoadditionalboundaryclaimbeyondtheactualStatementandexplicitcasesinitsnumberedproof; exactfullcurrentstepsrecordedabove."
++        },
++        {
++          "case": "zero",
++          "status": "checked",
++          "evidence": "Proof2.1N0stillperformsinitialtargettest; unavailableancillaryboundsetsflaginconclusive."
++        },
++        {
++          "case": "one",
++          "status": "checked",
++          "evidence": "Proof1.1max(n-2,0)allowsn1/n2withoutinitialreflector;3.1targetpatternsretaincase."
++        },
++        {
++          "case": "degenerate",
++          "status": "checked",
++          "evidence": "Proof1.1–3.1explicitfailures/zeroidentitystoredrepresentatives; nocomputedzero-vectorrepresentativedivision."
++        }
++      ],
++      "owner_repair_evidence": "research/numerical-optimization-dynamics-2026-10-16-owner-matrix49-68-applied/completion.json"
+     }
+   }
+ }

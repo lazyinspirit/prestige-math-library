@@ -1,0 +1,798 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-72.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-72.proof-contracts.json
+@@ -257,30 +257,96 @@
+           "source_section": "Definition",
+           "quote": "Let $n\\ge1$.  A linear map $A:\\mathbb R^n\\to\\mathbb R^n$\n([[def-euclidean-linear-map]]) is **invertible** when there is a linear map\n$B:\\mathbb R^n\\to\\mathbb R^n$ such that\n\n$$B(Au)=u\\quad\\hbox{and}\\quad A(Bu)=u\\qquad(u\\in\\mathbb R^n).$$\n\nThe map $B$ is unique: if $C$ has the same two properties, then\n$C=C\\circ(A\\circ B)=(C\\circ A)\\circ B=B$.  It is denoted $A^{-1}$.",
+           "uses": [
++            "1.1"
++          ]
++        },
++        {
++          "fact": "F4",
++          "source": "alg-dogleg-trust-region-step",
++          "source_section": "Definition",
++          "quote": "Input a quadratic trust-region model of\n[[def-trust-region-quadratic-model-and-ratio]] with positive-definite $B$\n([[def-definite-and-indefinite-hessian-quadratic-forms]]) and radius\n$\\Delta>0$. If $g=0$, return $p=0$ with status `stationary`. Otherwise\ncompute the Cauchy step $p_C$ by [[alg-trust-region-cauchy-step]] and the\nNewton-model step $p_N$ by solving $Bp_N=-g$.\n\n1. If $\\|p_N\\|_2\\le\\Delta$, return $p_N$.\n2. If $\\|p_C\\|_2=\\Delta$, return $p_C$.\n3. Otherwise put $d:=p_N-p_C$, $a:=\\|d\\|_2^2$,\n   $b:=2\\langle p_C,d\\rangle$, and $c:=\\|p_C\\|_2^2-\\Delta^2<0$. Compute\n   $$t:=\\frac{-b+\\sqrt{b^2-4ac}}{2a}.$$\n   Set $p_D:=p_C+td$, the boundary intersection on the segment from the\n   Cauchy step to the Newton-model step.\n4. Compare the two model values. Return $p_D$ if $m(p_D)\\le m(p_C)$ and\n   return $p_C$ otherwise.\n\nThe status is `step` in the nonstationary branches.",
++          "uses": [
++            "1.2",
++            "2.1",
++            "3.1"
++          ]
++        },
++        {
++          "fact": "F5",
++          "source": "alg-trust-region-cauchy-step",
++          "source_section": "Definition",
++          "quote": "Input a model of [[def-trust-region-quadratic-model-and-ratio]] with gradient\n$g$, symmetric model matrix $B$, and\nradius $\\Delta>0$. If $g=0$, return $p_C=0$ with status `stationary`. If\n$g\\ne0$, set $c:=g^TBg$ and define\n$$\\tau:=\\begin{cases}\n\\Delta/\\|g\\|_2,&c\\le0,\\\\\n\\min\\{\\|g\\|_2^2/c,\\ \\Delta/\\|g\\|_2\\},&c>0.\n\\end{cases}$$\nReturn $p_C:=-\\tau g$ with status `step`.",
++          "uses": [
++            "1.2"
++          ]
++        },
++        {
++          "fact": "F6",
++          "source": "thm-algebra-of-continuous-functions",
++          "source_section": "Statement",
++          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
++          "uses": [
+             "2.1"
+           ]
++        },
++        {
++          "fact": "F7",
++          "source": "thm-intermediate-value",
++          "source_section": "Statement",
++          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
++          "uses": [
++            "2.1"
++          ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "By [F2], write $B=U\\operatorname{diag}(\\mu_1,\\ldots,\\mu_n)U^T$ with $U$ orthogonal. For each unit eigenvector $u_i$, [F1] gives $\\mu_i=u_i^TBu_i>0$. Thus $C:=U\\operatorname{diag}(1/\\mu_1,\\ldots,1/\\mu_n)U^T$ satisfies $CB=BC=I$, so it is an inverse map.",
++          "claim": "By [F2], write $B=U\\operatorname{diag}(\\mu_1,\\ldots,\\mu_n)U^T$ with $U$\northogonal. Positive definiteness [F1] gives $\\mu_i>0$ for every unit\neigenvector. Thus $C=U\\operatorname{diag}(1/\\mu_1,\\ldots,1/\\mu_n)U^T$\nsatisfies $CB=BC=I$ and is a linear inverse by [F3]. Hence\n$p_N=-Cg$ solves $Bp_N=-g$. If $p$ is another solution, then\n$B(p-p_N)=0$, and applying $C$ gives $p=p_N$.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+             "F1",
+             "F2",
+-            "algebra"
++            "F3",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-1-2",
++          "step": "1.2",
++          "claim": "If $g=0$, [F4] returns $p=0$, which is feasible. Suppose $g\\ne0$.\nThe Cauchy step exists by its explicit formula and is feasible by [F5], and\nstep 1.1 gives the unique Newton step. If $\\|p_N\\|_2\\le\\Delta$, the\nalgorithm returns the feasible $p_N$. If $\\|p_N\\|_2>\\Delta$ but\n$\\|p_C\\|_2=\\Delta$, it returns the feasible $p_C$.",
++          "inputs": [
++            "given",
++            "F4",
++            "F5",
++            "step 1.1",
++            "cases"
+           ]
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "By [F3], $B$ is invertible, and $p_N:=-Cg$ solves $Bp_N=-g$. If $p$ is another solution, then $B(p-p_N)=0$; applying $C$ gives $p=p_N$. This proves existence and uniqueness.",
++          "claim": "In the remaining branch, $\\|p_N\\|_2>\\Delta$ and $\\|p_C\\|_2<\\Delta$.\nPut $d=p_N-p_C$ and\n$q(t)=\\|p_C+td\\|_2^2-\\Delta^2$. Then $q$ is a real quadratic polynomial,\n$q(0)<0$, and $q(1)>0$. By [F6] it is continuous, and [F7] gives a root\n$t\\in(0,1)$. Its coefficients are\n$a=\\|d\\|_2^2>0$, $b=2\\langle p_C,d\\rangle$, and\n$c=\\|p_C\\|_2^2-\\Delta^2<0$. Thus its discriminant\n$b^2-4ac>b^2$, and the two roots have product $c/a<0$. Exactly one root is\npositive, and the quadratic formula identifies it as\n$(-b+\\sqrt{b^2-4ac})/(2a)$. The root in $(0,1)$ is therefore exactly the\nalgorithm's scalar $t$. The vector $p_D=p_C+td$ has norm $\\Delta$; the\nfinal comparison returns either $p_D$ or $p_C$, both feasible.",
+           "step": "2.1",
+           "inputs": [
++            "given",
++            "F4",
++            "F6",
++            "F7",
++            "step 1.2",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-3-1",
++          "step": "3.1",
++          "claim": "Step 1.1 proves unique Newton-step existence, and steps 1.2–2.1 cover\nevery dogleg branch and establish its feasibility and root formula. The\nDefinition calls the Newton solve once on every nonstationary input, calls\nthe scalar-root formula only in branch 3, and has no iteration branch.",
++          "inputs": [
+             "step 1.1",
+-            "F3",
+-            "algebra"
++            "step 1.2",
++            "step 2.1",
++            "F4",
++            "cases"
+           ]
+         }
+       ],
+@@ -294,7 +360,7 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Step 1.1 handles the stated zero parameter or states why it is excluded; no division by that parameter is used outside the declared convention."
++          "evidence": "The Newton equation also has pN=0 when g=0; the dogleg procedure returns stationary before its nonzero-gradient branches."
+         },
+         {
+           "case": "one",
+@@ -309,7 +375,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Step 2.1 includes the relevant closed-ball, interval, boundary, or target endpoint in the displayed inequality."
++          "evidence": "The expanded proof handles returned Newton/Cauchy branches and the unique positive dogleg boundary root in (0,1)."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -366,7 +432,7 @@
+           "fact": "F1",
+           "source": "alg-trust-region-cauchy-step",
+           "source_section": "Definition",
+-          "quote": "Input a model of [[def-trust-region-quadratic-model-and-ratio]] with gradient\n$g$, symmetric model matrix $B$, and\nradius $\\Delta>0$. If $g=0$, return $p_C=0$ with status `stationary`. If\n$g\\ne0$, set $c:=g^TBg$ and define\n$$\\tau:=\\begin{cases}\n\\Delta/\\|g\\|_2,&c\\le0,\\\\\n\\min\\{\\|g\\|_2^2/c,\\ \\Delta/\\|g\\|_2\\},&c>0.\n\\end{cases}$$\nReturn $p_C:=-\\tau g$ with status `step`. The procedure uses no matrix\nfactorization and has no iteration loop.",
++          "quote": "Input a model of [[def-trust-region-quadratic-model-and-ratio]] with gradient\n$g$, symmetric model matrix $B$, and\nradius $\\Delta>0$. If $g=0$, return $p_C=0$ with status `stationary`. If\n$g\\ne0$, set $c:=g^TBg$ and define\n$$\\tau:=\\begin{cases}\n\\Delta/\\|g\\|_2,&c\\le0,\\\\\n\\min\\{\\|g\\|_2^2/c,\\ \\Delta/\\|g\\|_2\\},&c>0.\n\\end{cases}$$\nReturn $p_C:=-\\tau g$ with status `step`.",
+           "uses": [
+             "1.1",
+             "1.2"
+@@ -525,10 +591,12 @@
+           "fact": "F1",
+           "source": "alg-truncated-cg-trust-region-step",
+           "source_section": "Definition",
+-          "quote": "Input a model of [[def-trust-region-quadratic-model-and-ratio]], a finite\ninner cap $J\\in\\mathbb N_0$, and a\nresidual tolerance $\\tau_{tol}\\ge0$. If $g=0$, return $0$ with status\n`stationary`. Otherwise initialize $z_0=0$, $r_0=g$, $d_0=-r_0$, and $j=0$.\nFor at most $J$ inner iterations:\n\n1. If $\\|r_j\\|_2\\le\\tau_{tol}$, take $z_j$ as the candidate and stop.\n2. If $d_j=0$, take $z_j$ as the candidate and stop; the final comparison\n   below then returns $p_C$ whenever $z_j$ does not give at least its model\n   decrease.\n3. Put $c_j:=d_j^TBd_j$. If $c_j\\le0$, set\n   $$t_j:=\\frac{-\\langle z_j,d_j\\rangle+\n   \\sqrt{\\langle z_j,d_j\\rangle^2+\\|d_j\\|_2^2(\\Delta^2-\\|z_j\\|_2^2)}}\n   {\\|d_j\\|_2^2},$$\n   take $z_j+t_jd_j$ as the candidate, and stop. This is the nonpositive\n   curvature boundary exit.\n4. Otherwise put $\\alpha_j:=\\|r_j\\|_2^2/c_j$ and\n   $\\widehat z:=z_j+\\alpha_jd_j$.\n   If $\\|\\widehat z\\|_2\\ge\\Delta$, use the same positive-root formula in\n   step 3, take $z_j+t_jd_j$ as the candidate, and stop at the trust boundary.\n5. Set $r_{j+1}:=r_j+\\alpha_jBd_j$ and $z_{j+1}:=\\widehat z$. If\n   $\\|r_{j+1}\\|_2\\le\\tau_{tol}$, take $z_{j+1}$ as the candidate and stop.\n   Otherwise set\n   $$\\beta_{j+1}:=\\frac{\\|r_{j+1}\\|_2^2}{\\|r_j\\|_2^2},\\qquad\n   d_{j+1}:=-r_{j+1}+\\beta_{j+1}d_j,$$\n   and increase $j$ by one.\n\nIf the cap is reached, take the current feasible $z_j$ as the candidate. In\nall nonstationary cases compute the Cauchy step $p_C$ and compare model values:\nreturn the candidate if its model value is no greater than $m(p_C)$, and\notherwise return $p_C$. Thus a capped or unhelpful inner recurrence still\nreturns an explicit feasible step. A positive boundary root exists in steps 3\nand 4 because every non-exit iterate is strictly inside the ball, the\ndirection is nonzero after the zero-direction guard, and\n$\\|z_j+td_j\\|_2^2-\\Delta^2$ is negative at $t=0$ and tends to $+\\infty$ as\n$t\\to+\\infty$.\nEvery recurrence vector $z_j$ lies in the Krylov subspace\n$K_j(B,-g)$ of [[def-krylov-subspace-of-a-matrix-and-start-vector]].",
++          "quote": "Input a model of [[def-trust-region-quadratic-model-and-ratio]], a finite\ninner cap $J\\in\\mathbb N_0$, and a\nresidual tolerance $\\tau_{tol}\\ge0$. If $g=0$, return $0$ with status\n`stationary`. Otherwise initialize $z_0=0$, $r_0=g$, $d_0=-r_0$, and $j=0$.\nFor at most $J$ inner iterations:\n\n1. If $\\|r_j\\|_2\\le\\tau_{tol}$, take $z_j$ as the candidate and stop.\n2. If $d_j=0$, take $z_j$ as the candidate and stop; the final comparison\n   below then returns $p_C$ whenever $z_j$ does not give at least its model\n   decrease.\n3. Put $c_j:=d_j^TBd_j$. If $c_j\\le0$, set\n   $$t_j:=\\frac{-\\langle z_j,d_j\\rangle+\n   \\sqrt{\\langle z_j,d_j\\rangle^2+\\|d_j\\|_2^2(\\Delta^2-\\|z_j\\|_2^2)}}\n   {\\|d_j\\|_2^2},$$\n   take $z_j+t_jd_j$ as the candidate, and stop. This is the nonpositive\n   curvature boundary exit.\n4. Otherwise put $\\alpha_j:=\\|r_j\\|_2^2/c_j$ and\n   $\\widehat z:=z_j+\\alpha_jd_j$.\n   If $\\|\\widehat z\\|_2\\ge\\Delta$, use the same positive-root formula in\n   step 3, take $z_j+t_jd_j$ as the candidate, and stop at the trust boundary.\n5. Set $r_{j+1}:=r_j+\\alpha_jBd_j$ and $z_{j+1}:=\\widehat z$. If\n   $\\|r_{j+1}\\|_2\\le\\tau_{tol}$, take $z_{j+1}$ as the candidate and stop.\n   Otherwise set\n   $$\\beta_{j+1}:=\\frac{\\|r_{j+1}\\|_2^2}{\\|r_j\\|_2^2},\\qquad\n   d_{j+1}:=-r_{j+1}+\\beta_{j+1}d_j,$$\n   and increase $j$ by one.\n\nIf the cap is reached, take the current $z_j$ as the candidate. In\nall nonstationary cases compute the Cauchy step $p_C$ and compare model values:\nreturn the candidate if its model value is no greater than $m(p_C)$, and\notherwise return $p_C$. Thus a capped or unhelpful inner recurrence still\nreturns the selected candidate or Cauchy step.",
+           "uses": [
+             "1.1",
+-            "1.2"
++            "1.2",
++            "2.1",
++            "3.1"
+           ]
+         },
+         {
+@@ -540,35 +608,85 @@
+             "1.1",
+             "1.2"
+           ]
++        },
++        {
++          "fact": "F3",
++          "source": "alg-trust-region-cauchy-step",
++          "source_section": "Definition",
++          "quote": "Input a model of [[def-trust-region-quadratic-model-and-ratio]] with gradient\n$g$, symmetric model matrix $B$, and\nradius $\\Delta>0$. If $g=0$, return $p_C=0$ with status `stationary`. If\n$g\\ne0$, set $c:=g^TBg$ and define\n$$\\tau:=\\begin{cases}\n\\Delta/\\|g\\|_2,&c\\le0,\\\\\n\\min\\{\\|g\\|_2^2/c,\\ \\Delta/\\|g\\|_2\\},&c>0.\n\\end{cases}$$\nReturn $p_C:=-\\tau g$ with status `step`.",
++          "uses": [
++            "3.1"
++          ]
++        },
++        {
++          "fact": "F4",
++          "source": "def-trust-region-quadratic-model-and-ratio",
++          "source_section": "Definition",
++          "quote": "Let $n\\ge1$, let $f:\\mathbb R^n\\to\\mathbb R$ be differentiable at\n$x\\in\\mathbb R^n$, and put $g:=\\nabla f(x)$ using the gradient convention of\n[[def-jacobian-matrix-and-gradient]]. Let $B\\in\\mathbb R^{n\\times n}$ be a\nsymmetric matrix and let $\\Delta>0$. A quadratic model at $x$ is\n\n$$m(p):=f(x)+\\langle g,p\\rangle+\\tfrac12 p^TBp,\\qquad p\\in\\mathbb R^n,$$\n\nwith the Euclidean inner product and norm of [[def-euclidean-inner-product]]\nand matrix products as in [[def-matrix-product-and-identity-matrix]]. The\ntrust-region ball is $\\mathcal B_\\Delta:=\\{p:\\|p\\|_2\\le\\Delta\\}$. The\npredicted reduction of a feasible step $p\\in\\mathcal B_\\Delta$ is\n$\\operatorname{pred}(p):=m(0)-m(p)$. Its actual reduction is\n$\\operatorname{ared}(p):=f(x)-f(x+p)$. When $\\operatorname{pred}(p)>0$, the\nactual-to-predicted reduction ratio is\n\n$$\\rho(p):=\\frac{\\operatorname{ared}(p)}{\\operatorname{pred}(p)}.$$\n\nThe quantity $\\|B\\|_2$ means the matrix norm induced by the Euclidean vector\nnorm, namely the $p=2$ case of [[def-induced-matrix-p-norm]]. It is not required\nthat $B=\\nabla^2f(x)$ in this definition; exact Hessians and symmetric model\napproximations are both admitted. The ratio is undefined when predicted\nreduction is nonpositive, so an algorithm must use a separately justified\nfallback or return a failure status in that case.",
++          "uses": [
++            "1.1",
++            "1.2",
++            "2.1",
++            "3.1"
++          ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "At $j=0$, [F1] gives $z_0=0\\in K_0$,\n$r_0=g\\in K_1(B,-g)$ because $g$ and $-g$ span the same line, and\n$d_0=-g\\in K_1(B,-g)$.",
++          "claim": "Initially, $z_0=0\\in K_0(B,-g)$, while $r_0=g\\in K_1(B,-g)$ and\n$d_0=-g\\in K_1(B,-g)$. Also $\\|z_0\\|_2=0<\\Delta$.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+             "F1",
+-            "F2"
++            "F2",
++            "F4"
+           ]
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "Suppose the inclusions hold at an interior index $j$. By [F2],\n$Bd_j\\in K_{j+2}$, while $z_j\\in K_j\\subseteq K_{j+1}$ and\n$r_j,d_j\\in K_{j+1}$. The first two recurrences in [F1] therefore give\n$z_{j+1}\\in K_{j+1}$ and $r_{j+1}\\in K_{j+2}$. The last recurrence gives\n$d_{j+1}\\in K_{j+2}$. This proves the inclusions at the next interior index.",
++          "claim": "Suppose the algorithm makes an interior update at index $j$. By [F2],\n$Bd_j\\in K_{j+2}$, while $z_j\\in K_j\\subseteq K_{j+1}$ and\n$r_j,d_j\\in K_{j+1}$. The first two recurrences in [F1] therefore give\n$z_{j+1}\\in K_{j+1}$ and $r_{j+1}\\in K_{j+2}$. The last recurrence gives\n$d_{j+1}\\in K_{j+2}$. The update is made only when\n$\\|\\widehat z\\|_2<\\Delta$, so $z_{j+1}$ remains strictly inside the ball.",
+           "step": "1.2",
+           "inputs": [
+             "step 1.1",
+             "F1",
+             "F2",
++            "F4",
+             "induction",
+             "algebra"
+           ]
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "Induction over the finite sequence of interior updates proves the stated\nKrylov-subspace membership at every iterate before a specified exit.",
++          "claim": "At a boundary exit, put $z=z_j$, $d=d_j$,\n$a=\\|d\\|_2^2$, $b=\\langle z,d\\rangle$, and\n$c=\\|z\\|_2^2-\\Delta^2$. Steps 1.1–1.2 show $\\|z\\|_2<\\Delta$, and the\nzero-direction guard in [F1] gives $d\\ne0$, so $a>0$ and $c<0$. The\nboundary equation is\n$$a t^2+2bt+c=0.$$\nIts discriminant is $4(b^2-ac)>4b^2$, and the product of its roots is\n$c/a<0$. Thus it has exactly one positive root, namely\n$$t=\\frac{-b+\\sqrt{b^2+a(\\Delta^2-\\|z\\|_2^2)}}{a},$$\nwhich is the algorithm's formula. In the positive-curvature exit, the\nunconstrained point $\\widehat z=z+\\alpha_jd$ satisfies\n$\\|\\widehat z\\|_2\\ge\\Delta$, so the quadratic is nonnegative at\n$\\alpha_j$. It is negative on $[0,t_+)$, where $t_+$ is its unique positive\nroot; hence $t_+\\le\\alpha_j$. In either boundary branch,\n$\\|z+t_+d\\|_2=\\Delta$.",
+           "step": "2.1",
++          "inputs": [
++            "given",
++            "F1",
++            "F4",
++            "step 1.1",
++            "step 1.2",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-3-1",
++          "step": "3.1",
++          "claim": "Before a non-boundary stop, the current recurrence vector is strictly\ninside the ball by steps 1.1–1.2. Thus residual-tolerance and zero-direction\nstops, and the inner-cap stop, use a feasible current vector. A boundary stop\nuses a vector of norm $\\Delta$ by step 2.1. The stationary branch returns\nzero, and the final comparison returns either its feasible candidate or the\nCauchy step, which is feasible because [F3] gives\n$\\|p_C\\|_2=\\tau\\|g\\|_2\\le\\Delta$. Hence every returned vector is feasible.",
++          "inputs": [
++            "step 1.1",
++            "step 1.2",
++            "step 2.1",
++            "F1",
++            "F3",
++            "F4",
++            "cases"
++          ]
++        },
++        {
++          "id": "step-4-1",
++          "step": "4.1",
++          "claim": "Induction on the interior updates proves the claimed Krylov memberships.\nThe base case is step 1.1, and the induction step is step 1.2.",
+           "inputs": [
+             "step 1.1",
+             "step 1.2",
+@@ -586,22 +704,22 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Step 1.1 handles the stated zero parameter or states why it is excluded; no division by that parameter is used outside the declared convention."
++          "evidence": "Step 1.1 gives z0=0 in K0; the stationary and zero-direction stops are covered in step 3.1 before any boundary division."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Step 1.1 uses a formula valid at the first index or in dimension one; the same finite argument has no omitted base case."
++          "evidence": "Step 1.1 establishes the base recurrence memberships and strict interior feasibility."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Step 2.1 treats the singular, zero-curvature, capped, or equality branch admitted by the Statement."
++          "evidence": "Step 2.1 uses the zero-direction guard to ensure ||d||²>0; c<0 gives a unique positive boundary root even when the curvature branch is nonpositive."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Step 2.1 includes the relevant closed-ball, interval, boundary, or target endpoint in the displayed inequality."
++          "evidence": "Step 2.1 proves the unique positive boundary root; step 3.1 verifies feasible interior, cap, stationary and final-Cauchy outputs."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -664,7 +782,8 @@
+           "source_section": "Statement",
+           "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+           "uses": [
+-            "1.1"
++            "1.1",
++            "1.2"
+           ]
+         },
+         {
+@@ -673,7 +792,8 @@
+           "source_section": "Statement",
+           "quote": "Let $p\\in\\mathbb{Q}$ with $p\\ge 1$ and let $m,n,q\\in\\mathbb{N}$, with the\ninduced $p$-norms of [[def-induced-matrix-p-norm]].\n\n1. **Compatibility.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and every\n   $x\\in\\mathbb{R}^{n}$,\n   $$\\lVert Ax\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert x\\rVert_p.$$\n2. **Submultiplicativity.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and\n   $B\\in M_{n\\times q}(\\mathbb{R})$,\n   $$\\lVert AB\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert B\\rVert_p.$$\n3. **Normalisation.** For every $n\\ge 1$,\n   $$\\lVert I_n\\rVert_p=1,$$\n   where $I_n$ is the identity matrix of [[def-matrix-product-and-identity-matrix]];\n   at $n=0$ the unique empty matrix $I_0\\in M_0(\\mathbb{R})$ has\n   $\\lVert I_0\\rVert_p=0$, the convention of [[def-induced-matrix-p-norm]].",
+           "uses": [
+-            "1.1"
++            "1.1",
++            "1.2"
+           ]
+         },
+         {
+@@ -701,6 +821,15 @@
+           "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+           "uses": [
+             "2.1"
++          ]
++        },
++        {
++          "fact": "F7",
++          "source": "cor-mean-value-theorem",
++          "source_section": "Statement",
++          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
++          "uses": [
++            "4.1"
+           ]
+         }
+       ],
+@@ -720,11 +849,13 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "The model is continuous, and the closed ball from step 1.1 is nonempty\nand compact by [F4]. Thus [F5] gives a minimizer on that ball. Since $0$ is\nin the ball and every point outside has model value at least $m_\\sigma(0)$,\nthis minimizer is global on $\\mathbb R^n$.",
++          "claim": "The model is continuous: for $u,v\\in\\mathbb R^n$, the triangle\ninequality gives $|\\|u\\|_2-\\|v\\|_2|\\le\\|u-v\\|_2$. If\n$\\|u-v\\|_2<1$, then $\\|u\\|_2\\le\\|v\\|_2+1$, and\n$$|\\|u\\|_2^3-\\|v\\|_2^3|\n=|\\|u\\|_2-\\|v\\|_2|(\\|u\\|_2^2+\\|u\\|_2\\|v\\|_2+\\|v\\|_2^2)$$\ntends to zero with $\\|u-v\\|_2$; this also holds at $v=0$, where\n$\\|u\\|_2^3\\le\\|u\\|_2$ for $\\|u-v\\|_2<1$. The linear term is continuous\nby [F2], and\n$$|u^TBu-v^TBv|\\le\\|u-v\\|_2\\|B\\|_2(\\|u\\|_2+\\|v\\|_2)$$\nby [F2] and [F3], so the quadratic term is continuous as well. The closed\nball from step 1.1 is nonempty and compact by [F4]. Thus [F5] gives a\nminimizer on that ball. Since $0$ is in the ball and every point outside has\nmodel value at least $m_\\sigma(0)$, this minimizer is global on $\\mathbb R^n$.",
+           "step": "1.2",
+           "inputs": [
+             "step 1.1",
+             "F1",
++            "F2",
++            "F3",
+             "F4",
+             "F5"
+           ]
+@@ -749,6 +880,38 @@
+             "given",
+             "algebra"
+           ]
++        },
++        {
++          "id": "step-3-1",
++          "step": "3.1",
++          "claim": "Let $s$ satisfy the two inexact-step conditions in the Statement and\nwrite $r=\\|s\\|_2$. Substituting $-g^Ts=s^TBs+\\sigma r^3$ into the model\ndecrease gives\n$$m_\\sigma(0)-m_\\sigma(s)=\\tfrac12s^TBs+\\tfrac{2\\sigma}{3}r^3.$$\nThe second condition implies $s^TBs\\ge-\\sigma r^3$, and therefore the\nright side is at least $\\sigma r^3/6$.",
++          "inputs": [
++            "given",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-4-1",
++          "step": "4.1",
++          "claim": "Suppose $g\\ne0$, put $a=\\|g\\|_2>0$ and $q=g^TBg$, and define\n$\\psi(t)=m_\\sigma(-tg)-m_\\sigma(0)$ for $t\\ge0$. Then\n$$\\psi(t)=-a^2t+\\tfrac12qt^2+\\tfrac{\\sigma}{3}a^3t^3,\n\\qquad \\psi'(t)=-a^2+qt+\\sigma a^3t^2.$$\nThe two roots of $\\psi'$ are\n$$t_\\pm=\\frac{-q\\pm\\sqrt{q^2+4\\sigma a^5}}{2\\sigma a^3};$$\ntheir product is $-1/(\\sigma a)<0$, so $t_-<0<t_+$. The derivative\nfactors as $\\sigma a^3(t-t_-)(t-t_+)$, hence it is negative on\n$[0,t_+)$ and positive on $(t_+,\\infty)$. Applying [F7] on any subinterval\nof either range shows that $\\psi$ strictly decreases before $t_+$ and\nstrictly increases after it. Thus $t_C=t_+$ is the unique global minimizer\non $[0,\\infty)$, proving the stated Cauchy-ray formula.",
++          "inputs": [
++            "given",
++            "F7",
++            "algebra",
++            "choose"
++          ]
++        },
++        {
++          "id": "step-5-1",
++          "step": "5.1",
++          "claim": "Steps 1.1–2.2 prove the exact global-minimizer claims, step 3.1 proves\nthe inexact-step decrease, and step 4.1 proves the Cauchy-ray assertion.",
++          "inputs": [
++            "step\n1.2",
++            "step 2.1",
++            "step 2.2",
++            "step 3.1",
++            "step 4.1"
++          ]
+         }
+       ],
+       "routine_steps": [],
+@@ -761,22 +924,22 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Step 1.1 handles the stated zero parameter or states why it is excluded; no division by that parameter is used outside the declared convention."
++          "evidence": "Proof 1.2 proves continuity of ||s||^3 at zero; step 2.1 treats g!=0 to exclude a zero exact minimizer. The radial inequality of step 3.1 also holds for s=0."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Step 1.1 uses a formula valid at the first index or in dimension one; the same finite argument has no omitted base case."
++          "evidence": "The scalar ray derivative and its positive quadratic root are proved in step 4.1, including t=0 as the ray endpoint."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Step 2.2 treats the singular, zero-curvature, capped, or equality branch admitted by the Statement."
++          "evidence": "Step 4.1 permits any symmetric B, including q=gTB g=0, because g!=0 and sigma>0 keep the positive-root denominator nonzero."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Step 2.2 includes the relevant closed-ball, interval, boundary, or target endpoint in the displayed inequality."
++          "evidence": "Step 1.2 minimizes on a compact closed ball and compares its boundary/exterior; step 4.1 proves the negative-gradient ray minimum at its unique positive root."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -854,7 +1017,7 @@
+           "fact": "F1",
+           "source": "alg-adaptive-cubic-regularization",
+           "source_section": "Definition",
+-          "quote": "Input an open set $U\\subseteq\\mathbb R^n$, a twice continuously\ndifferentiable $f:U\\to\\mathbb R$, an initial point $x_0\\in U$, target\n$\\varepsilon\\ge0$, outer trial cap $N\\in\\mathbb N_0$, and an exact-Hessian\ncubic-model solver $S$. On an input model and finite inner cap $J\\in\\mathbb N$,\n$S$ returns either `no-candidate` or a global minimizer of that model; the\nsolver is permitted to return `no-candidate` if it cannot certify a minimizer\nwithin its cap. Other inputs are $0<\\eta_1<\\eta_2<1$,\n$\\gamma_{up}>1$, $0<\\gamma_{down}<1$, $0<\\kappa<1$,\n$0<\\sigma_{min}\\le\\sigma_0\\le\\sigma_{max}$, and the inner cap $J$.\nThe output is the last accepted iterate and one of `stationary`,\n`target-achieved`, `outer-budget-exhausted`, `model-solver-failure`,\n`inconsistent-model-solver`, or `regularization-cap-exhausted`.\n\nFor $k=0,1,\\ldots,N$, in order:\n\n1. Compute $g_k:=\\nabla f(x_k)$. If $g_k=0$, return $(x_k,\\texttt{stationary})$.\n   If $\\|g_k\\|_2\\le\\varepsilon$, return $(x_k,\\texttt{target-achieved})$.\n   If $k=N$, return $(x_k,\\texttt{outer-budget-exhausted})$.\n2. Set $B_k:=\\nabla^2 f(x_k)$ and form the model\n   $m_k(s)=f(x_k)+\\langle g_k,s\\rangle+\\tfrac12s^TB_ks+\n   \\tfrac{\\sigma_k}{3}\\|s\\|_2^3$ of\n   [[def-adaptive-cubic-regularization-model]]. Call $S(m_k,J)$. If it returns\n   `no-candidate`, return $(x_k,\\texttt{model-solver-failure})$. For a\n   returned $s_k$, recompute $\\operatorname{pred}_k:=m_k(0)-m_k(s_k)$. If\n   $s_k=0$ or $\\operatorname{pred}_k\\le0$ while $g_k\\ne0$, return\n   `inconsistent-model-solver`.\n3. Evaluate $f(x_k+s_k)$ and set\n   $\\rho_k:=[f(x_k)-f(x_k+s_k)]/\\operatorname{pred}_k$.\n   If $\\rho_k<\\eta_1$, reject the step and keep $x_{k+1}:=x_k$. If\n   $\\sigma_k=\\sigma_{max}$, return\n   $(x_k,\\texttt{regularization-cap-exhausted})$; otherwise set\n   $\\sigma_{k+1}:=\\min\\{\\gamma_{up}\\sigma_k,\\sigma_{max}\\}$ and continue.\n4. If $\\rho_k\\ge\\eta_1$, accept and set $x_{k+1}:=x_k+s_k$. If\n   $\\rho_k>\\eta_2$ and\n   $\\|s_k\\|_2\\ge\\kappa\\|g_k\\|_2/\\sigma_k$, set\n   $\\sigma_{k+1}:=\\max\\{\\sigma_{min},\\gamma_{down}\\sigma_k\\}$;\n   otherwise set $\\sigma_{k+1}:=\\sigma_k$.\n\nThe model solver is an explicit subroutine input, not a claim that its finite\nbudget always succeeds. The global-minimizer decrease estimate is supplied by\n[[lem-global-cubic-model-minimizer-decrease]]. This procedure alone makes no\nunconditional convergence or evaluation-complexity claim.",
++          "quote": "Input an open set $U\\subseteq\\mathbb R^n$, a twice continuously\ndifferentiable $f:U\\to\\mathbb R$, an initial point $x_0\\in U$, target\n$\\varepsilon\\ge0$, outer trial cap $N\\in\\mathbb N_0$, and an exact-Hessian\ncubic-model solver $S$. Other inputs are $0<\\eta_1<\\eta_2<1$,\n$\\gamma_{up}>1$, $0<\\gamma_{down}<1$, $0<\\kappa<1$,\n$0<\\sigma_{min}\\le\\sigma_0\\le\\sigma_{max}$, $0<\\kappa_\\theta<1$,\nand the finite inner cap $J\\in\\mathbb N_0$. On input of the model, $J$,\nand $\\kappa_\\theta$, the solver $S$ returns `no-candidate` or proposes a\nvector. A proposed vector is admissible when it passes the model-solution\nchecks below. The solver may return `no-candidate` if it cannot certify such\na vector within its cap. Exact global minimizers are an admissible special\ncase; the local criterion also permits inexact steps satisfying the stated\nconditions of [[lem-global-cubic-model-minimizer-decrease]].\n\nThe output is the last accepted iterate and one of `stationary`,\n`target-achieved`, `outer-budget-exhausted`, `model-solver-failure`,\n`inconsistent-model-solver`, `domain-exit`, or\n`regularization-cap-exhausted`.\n\nFor $k=0,1,\\ldots,N$, in order:\n\n1. Compute $g_k:=\\nabla f(x_k)$. If $g_k=0$, return $(x_k,\\texttt{stationary})$.\n   If $\\|g_k\\|_2\\le\\varepsilon$, return $(x_k,\\texttt{target-achieved})$.\n   If $k=N$, return $(x_k,\\texttt{outer-budget-exhausted})$.\n2. Set $B_k:=\\nabla^2 f(x_k)$ and form the model\n   $m_k(s)=f(x_k)+\\langle g_k,s\\rangle+\\tfrac12s^TB_ks+\n   \\tfrac{\\sigma_k}{3}\\|s\\|_2^3$ of\n   [[def-adaptive-cubic-regularization-model]]. By\n   [[cor-hessian-is-symmetric]], $B_k$ is symmetric. Put\n   $a_k:=\\|g_k\\|_2$, $q_k:=g_k^TB_kg_k$, and compute the cubic Cauchy\n   step\n   $$s_{C,k}:=-t_{C,k}g_k,\\qquad\n   t_{C,k}:=\\frac{-q_k+\\sqrt{q_k^2+4\\sigma_ka_k^5}}\n   {2\\sigma_ka_k^3}.$$\n   Call $S(m_k,J,\\kappa_\\theta)$. If it returns `no-candidate`, return\n   $(x_k,\\texttt{model-solver-failure})$. For a proposed $s_k$, recompute\n   $\\operatorname{pred}_k:=m_k(0)-m_k(s_k)$ and\n   $\\nabla m_k(s_k):=g_k+B_ks_k+\\sigma_k\\|s_k\\|_2s_k$. Check\n   $$g_k^Ts_k+s_k^TB_ks_k+\\sigma_k\\|s_k\\|_2^3=0,\n   \\qquad s_k^TB_ks_k+\\sigma_k\\|s_k\\|_2^3\\ge0,$$\n   $$\\|\\nabla m_k(s_k)\\|_2\\le\n   \\kappa_\\theta\\min\\{1,\\|s_k\\|_2\\}\\|g_k\\|_2,\n   \\qquad m_k(s_k)\\le m_k(s_{C,k}).$$\n   If any check fails, or if $s_k=0$ or\n   $\\operatorname{pred}_k\\le0$, return\n   $(x_k,\\texttt{inconsistent-model-solver})$.\n3. If $x_k+s_k\\notin U$, return $(x_k,\\texttt{domain-exit})$ without\n   evaluating $f$ there. Otherwise evaluate $f(x_k+s_k)$ and set\n   $\\rho_k:=[f(x_k)-f(x_k+s_k)]/\\operatorname{pred}_k$.\n   If $\\rho_k<\\eta_1$, reject the step and keep $x_{k+1}:=x_k$. If\n   $\\sigma_k=\\sigma_{max}$, return\n   $(x_k,\\texttt{regularization-cap-exhausted})$; otherwise set\n   $\\sigma_{k+1}:=\\min\\{\\gamma_{up}\\sigma_k,\\sigma_{max}\\}$ and continue.\n4. If $\\rho_k\\ge\\eta_1$, accept and set $x_{k+1}:=x_k+s_k$. If\n   $\\rho_k>\\eta_2$ and\n   $\\|s_k\\|_2\\ge\\kappa\\|g_k\\|_2/\\sigma_k$, set\n   $\\sigma_{k+1}:=\\max\\{\\sigma_{min},\\gamma_{down}\\sigma_k\\}$;\n   otherwise set $\\sigma_{k+1}:=\\sigma_k$.\n\nThe finite cap, solver failure, inconsistent-solver, domain-exit, and\nregularization-cap branches are explicit. The model-solution checks include\nthe two cubic conditions (4.1)–(4.2), residual condition TC.s, and the\nCauchy-model decrease condition of Cartis–Gould–Toint, Part II, §4. The\nprocedure alone makes no unconditional convergence or evaluation-complexity\nclaim.",
+           "uses": [
+             "1.1",
+             "1.2"
+@@ -904,12 +1067,21 @@
+           "uses": [
+             "1.2"
+           ]
++        },
++        {
++          "fact": "F7",
++          "source": "cor-hessian-is-symmetric",
++          "source_section": "Statement",
++          "quote": "For a $C^2$ scalar field $f$, $H_f(a)^T=H_f(a)$ at every point $a$.",
++          "uses": [
++            "1.1"
++          ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "Fix a trial point $x$ and returned global model minimizer $s$. Put\n$\\phi(t):=f(x+ts)$ for $0\\le t\\le1$. The Hessian Lipschitz assumption gives\n$$|\\phi''(u)-\\phi''(v)|\n=|s^T(\\nabla^2f(x+us)-\\nabla^2f(x+vs))s|\n\\le L|u-v|\\|s\\|_2^3,$$\nwhere the bound follows from [A1], [F3], and [F4].\nDefine $h(t):=\\phi(t)-\\phi(0)-t\\phi'(0)-\\tfrac12t^2\\phi''(0)$.\nFor $t>0$, [F5] applied to $\\phi'$ on $[0,t]$ gives\n$\\phi'(t)-\\phi'(0)=t\\phi''(u_t)$ for some $u_t\\in(0,t)$. Hence\n$|h'(t)|=t|\\phi''(u_t)-\\phi''(0)|\\le Lt^2\\|s\\|_2^3$. Applying [F5] to\n$h$ on $[0,1]$ yields\n$$|f(x+s)-f(x)-\\langle\\nabla f(x),s\\rangle\n-\\tfrac12s^T\\nabla^2f(x)s|\\le L\\|s\\|_2^3.$$\nBy [F2], when $\\sigma\\ge3L$ the cubic term dominates this remainder, so\n$f(x+s)\\le m_\\sigma(s)$. A global minimizer with nonzero gradient has\npositive predicted reduction by\n[[lem-global-cubic-model-minimizer-decrease]], hence $\\rho\\ge1>\\eta_1$;\nthat trial cannot be rejected.",
++          "claim": "Fix a trial point $x$ and a solver-success candidate $s$ that reaches\nthe ratio computation. By [F7], $B=\\nabla^2f(x)$ is symmetric, so the\ncubic model is defined. Put\n$\\phi(t):=f(x+ts)$ for $0\\le t\\le1$. The Hessian Lipschitz assumption gives\n$$|\\phi''(u)-\\phi''(v)|\n=|s^T(\\nabla^2f(x+us)-\\nabla^2f(x+vs))s|\n\\le L|u-v|\\|s\\|_2^3,$$\nwhere the bound follows from [A1], [F3], and [F4].\nDefine $h(t):=\\phi(t)-\\phi(0)-t\\phi'(0)-\\tfrac12t^2\\phi''(0)$.\nFor $t>0$, [F5] applied to $\\phi'$ on $[0,t]$ gives\n$\\phi'(t)-\\phi'(0)=t\\phi''(u_t)$ for some $u_t\\in(0,t)$. Hence\n$|h'(t)|=t|\\phi''(u_t)-\\phi''(0)|\\le Lt^2\\|s\\|_2^3$. Applying [F5] to\n$h$ on $[0,1]$ yields\n$$|f(x+s)-f(x)-\\langle\\nabla f(x),s\\rangle\n-\\tfrac12s^T\\nabla^2f(x)s|\\le L\\|s\\|_2^3.$$\nBy [F2], when $\\sigma\\ge3L$ the cubic term dominates this remainder, so\n$f(x+s)\\le m_\\sigma(s)$. Since the trial reaches the ratio computation,\n$g\\ne0$ and the algorithm's first two model checks hold; the extended\n[[lem-global-cubic-model-minimizer-decrease]] then gives\n$m_\\sigma(0)-m_\\sigma(s)\\ge\\sigma\\|s\\|_2^3/6>0$. Hence $\\rho\\ge1>\\eta_1$;\nthat trial cannot be rejected.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+@@ -921,6 +1093,7 @@
+             "F3",
+             "F4",
+             "F5",
++            "F7",
+             "algebra"
+           ]
+         },
+@@ -948,7 +1121,7 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Step 1.2 gives R=0 when 3L<=sigma_min, including L=0."
++          "evidence": "Step 1.2 chooses R=0 when 3L<=sigma_min, including L=0. A ratio trial has nonzero checked s and positive predicted decrease by step 1.1."
+         },
+         {
+           "case": "one",
+@@ -963,7 +1136,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Step 1.2 includes the relevant closed-ball, interval, boundary, or target endpoint in the displayed inequality."
++          "evidence": "Step 1.2 treats the capped weight update and the threshold sigma>=3L; sigma_max>=3L prevents an infinite below-threshold rejection block."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1041,7 +1214,7 @@
+           "fact": "F1",
+           "source": "alg-trust-region-cauchy-step",
+           "source_section": "Definition",
+-          "quote": "Input a model of [[def-trust-region-quadratic-model-and-ratio]] with gradient\n$g$, symmetric model matrix $B$, and\nradius $\\Delta>0$. If $g=0$, return $p_C=0$ with status `stationary`. If\n$g\\ne0$, set $c:=g^TBg$ and define\n$$\\tau:=\\begin{cases}\n\\Delta/\\|g\\|_2,&c\\le0,\\\\\n\\min\\{\\|g\\|_2^2/c,\\ \\Delta/\\|g\\|_2\\},&c>0.\n\\end{cases}$$\nReturn $p_C:=-\\tau g$ with status `step`. The procedure uses no matrix\nfactorization and has no iteration loop.",
++          "quote": "Input a model of [[def-trust-region-quadratic-model-and-ratio]] with gradient\n$g$, symmetric model matrix $B$, and\nradius $\\Delta>0$. If $g=0$, return $p_C=0$ with status `stationary`. If\n$g\\ne0$, set $c:=g^TBg$ and define\n$$\\tau:=\\begin{cases}\n\\Delta/\\|g\\|_2,&c\\le0,\\\\\n\\min\\{\\|g\\|_2^2/c,\\ \\Delta/\\|g\\|_2\\},&c>0.\n\\end{cases}$$\nReturn $p_C:=-\\tau g$ with status `step`.",
+           "uses": [
+             "1.1"
+           ]
+@@ -1211,7 +1384,7 @@
+           "fact": "F1",
+           "source": "alg-trust-region-method",
+           "source_section": "Definition",
+-          "quote": "Input $f:\\mathbb R^n\\to\\mathbb R$ of class $C^1$, an initial point $x_0$,\nan initial radius $0<\\Delta_0\\le\\Delta_{max}$, a trial cap\n$N\\in\\mathbb N_0$, a target $\\varepsilon\\ge0$, constants\n$0<\\eta_1<\\eta_2<1$, $0<\\gamma_{dec}<1<\\gamma_{inc}$,\n$0<\\theta_C\\le1$, and a declared model-Hessian bound $M_B\\ge0$. At each\ntrial $k$, the supplied symmetric model matrix $B_k$ must satisfy\n$\\|B_k\\|_2\\le M_B$. A finite-budget subproblem routine $S$ returns either a\nvector or `failure`; its output is treated only as a candidate and is not\nassumed to minimize the trust-region model. The output is the last accepted\npoint and one of `stationary`, `target-achieved`, `outer-budget-exhausted`,\nor `model-evaluation-failure`.\n\nFor $k=0,1,\\ldots,N$, in order:\n\n1. Set $g_k:=\\nabla f(x_k)$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$. If $\\|g_k\\|_2\\le\\varepsilon$, return\n   $(x_k,\\texttt{target-achieved})$. If $k=N$, return\n   $(x_k,\\texttt{outer-budget-exhausted})$.\n2. Form $m_k$ from [[def-trust-region-quadratic-model-and-ratio]], compute\n   the Cauchy step $p_C$ from [[alg-trust-region-cauchy-step]], and set\n   $P_C:=m_k(0)-m_k(p_C)>0$. Query $S$ with this model and radius. Use its\n   candidate $q$ only if it is feasible and\n   $m_k(0)-m_k(q)\\ge\\theta_C P_C$; otherwise set $p:=p_C$. If it qualifies,\n   set $p:=q$. If $M_B=0$, interpret $\\|g_k\\|_2/(2M_B)=+\\infty$. Whenever\n   $\\Delta_k\\le\\|g_k\\|_2/(2M_B)$, replace the candidate by $p:=p_C$.\n3. Recompute $P_k:=m_k(0)-m_k(p)$. The selection rule ensures\n   $P_k\\ge\\theta_C P_C>0$. Evaluate\n   $\\rho_k:=[f(x_k)-f(x_k+p)]/P_k$. If this evaluation is unavailable,\n   return $(x_k,\\texttt{model-evaluation-failure})$.\n4. If $\\rho_k<\\eta_1$, reject: set $x_{k+1}:=x_k$ and\n   $\\Delta_{k+1}:=\\gamma_{dec}\\Delta_k$. Otherwise accept and set\n   $x_{k+1}:=x_k+p$. If $\\rho_k\\ge\\eta_2$ and $\\|p\\|_2=\\Delta_k$, set\n   $\\Delta_{k+1}:=\\min\\{\\gamma_{inc}\\Delta_k,\\Delta_{max}\\}$; in every\n   other accepted case set $\\Delta_{k+1}:=\\Delta_k$.\n\nEvery trial ratio has a positive denominator. The method retains the last\naccepted point; because accepted trials have $\\rho_k\\ge\\eta_1>0$, its\nobjective value is no greater than any earlier accepted value. The finite\nsubproblem budget alone does not imply convergence or a complexity bound.",
++          "quote": "Input $f:\\mathbb R^n\\to\\mathbb R$ of class $C^1$, an initial point $x_0$,\nan initial radius $0<\\Delta_0\\le\\Delta_{max}$, a trial cap\n$N\\in\\mathbb N_0$, a target $\\varepsilon\\ge0$, constants\n$0<\\eta_1<\\eta_2<1$, $0<\\gamma_{dec}<1<\\gamma_{inc}$,\n$0<\\theta_C\\le1$, and a declared model-Hessian bound $M_B\\ge0$. At each\ntrial $k$, the supplied symmetric model matrix $B_k$ must satisfy\n$\\|B_k\\|_2\\le M_B$. A finite-budget subproblem routine $S$ returns either a\nvector or `failure`; its output is treated only as a candidate and is not\nassumed to minimize the trust-region model. The output is the last accepted\npoint and one of `stationary`, `target-achieved`, `outer-budget-exhausted`,\nor `model-evaluation-failure`.\n\nFor $k=0,1,\\ldots,N$, in order:\n\n1. Set $g_k:=\\nabla f(x_k)$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$. If $\\|g_k\\|_2\\le\\varepsilon$, return\n   $(x_k,\\texttt{target-achieved})$. If $k=N$, return\n   $(x_k,\\texttt{outer-budget-exhausted})$.\n2. Form $m_k$ from [[def-trust-region-quadratic-model-and-ratio]], compute\n   the Cauchy step $p_C$ from [[alg-trust-region-cauchy-step]], and set\n   $P_C:=m_k(0)-m_k(p_C)$. Query $S$ with this model and radius. Use its\n   candidate $q$ only if it is feasible and\n   $m_k(0)-m_k(q)\\ge\\theta_C P_C$; otherwise set $p:=p_C$. If it qualifies,\n   set $p:=q$. If $M_B=0$, interpret $\\|g_k\\|_2/(2M_B)=+\\infty$. Whenever\n   $\\Delta_k\\le\\|g_k\\|_2/(2M_B)$, replace the candidate by $p:=p_C$.\n3. Recompute $P_k:=m_k(0)-m_k(p)$. Evaluate\n   $\\rho_k:=[f(x_k)-f(x_k+p)]/P_k$. If this evaluation is unavailable,\n   return $(x_k,\\texttt{model-evaluation-failure})$.\n4. If $\\rho_k<\\eta_1$, reject: set $x_{k+1}:=x_k$ and\n   $\\Delta_{k+1}:=\\gamma_{dec}\\Delta_k$. Otherwise accept and set\n   $x_{k+1}:=x_k+p$. If $\\rho_k\\ge\\eta_2$ and $\\|p\\|_2=\\Delta_k$, set\n   $\\Delta_{k+1}:=\\min\\{\\gamma_{inc}\\Delta_k,\\Delta_{max}\\}$; in every\n   other accepted case set $\\Delta_{k+1}:=\\Delta_k$.\n\nThe finite subproblem budget alone does not imply convergence or a complexity\nbound.",
+           "uses": [
+             "1.1",
+             "1.2"
+@@ -1429,11 +1602,13 @@
+           "fact": "F1",
+           "source": "alg-trust-region-method",
+           "source_section": "Definition",
+-          "quote": "Input $f:\\mathbb R^n\\to\\mathbb R$ of class $C^1$, an initial point $x_0$,\nan initial radius $0<\\Delta_0\\le\\Delta_{max}$, a trial cap\n$N\\in\\mathbb N_0$, a target $\\varepsilon\\ge0$, constants\n$0<\\eta_1<\\eta_2<1$, $0<\\gamma_{dec}<1<\\gamma_{inc}$,\n$0<\\theta_C\\le1$, and a declared model-Hessian bound $M_B\\ge0$. At each\ntrial $k$, the supplied symmetric model matrix $B_k$ must satisfy\n$\\|B_k\\|_2\\le M_B$. A finite-budget subproblem routine $S$ returns either a\nvector or `failure`; its output is treated only as a candidate and is not\nassumed to minimize the trust-region model. The output is the last accepted\npoint and one of `stationary`, `target-achieved`, `outer-budget-exhausted`,\nor `model-evaluation-failure`.\n\nFor $k=0,1,\\ldots,N$, in order:\n\n1. Set $g_k:=\\nabla f(x_k)$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$. If $\\|g_k\\|_2\\le\\varepsilon$, return\n   $(x_k,\\texttt{target-achieved})$. If $k=N$, return\n   $(x_k,\\texttt{outer-budget-exhausted})$.\n2. Form $m_k$ from [[def-trust-region-quadratic-model-and-ratio]], compute\n   the Cauchy step $p_C$ from [[alg-trust-region-cauchy-step]], and set\n   $P_C:=m_k(0)-m_k(p_C)>0$. Query $S$ with this model and radius. Use its\n   candidate $q$ only if it is feasible and\n   $m_k(0)-m_k(q)\\ge\\theta_C P_C$; otherwise set $p:=p_C$. If it qualifies,\n   set $p:=q$. If $M_B=0$, interpret $\\|g_k\\|_2/(2M_B)=+\\infty$. Whenever\n   $\\Delta_k\\le\\|g_k\\|_2/(2M_B)$, replace the candidate by $p:=p_C$.\n3. Recompute $P_k:=m_k(0)-m_k(p)$. The selection rule ensures\n   $P_k\\ge\\theta_C P_C>0$. Evaluate\n   $\\rho_k:=[f(x_k)-f(x_k+p)]/P_k$. If this evaluation is unavailable,\n   return $(x_k,\\texttt{model-evaluation-failure})$.\n4. If $\\rho_k<\\eta_1$, reject: set $x_{k+1}:=x_k$ and\n   $\\Delta_{k+1}:=\\gamma_{dec}\\Delta_k$. Otherwise accept and set\n   $x_{k+1}:=x_k+p$. If $\\rho_k\\ge\\eta_2$ and $\\|p\\|_2=\\Delta_k$, set\n   $\\Delta_{k+1}:=\\min\\{\\gamma_{inc}\\Delta_k,\\Delta_{max}\\}$; in every\n   other accepted case set $\\Delta_{k+1}:=\\Delta_k$.\n\nEvery trial ratio has a positive denominator. The method retains the last\naccepted point; because accepted trials have $\\rho_k\\ge\\eta_1>0$, its\nobjective value is no greater than any earlier accepted value. The finite\nsubproblem budget alone does not imply convergence or a complexity bound.",
++          "quote": "Input $f:\\mathbb R^n\\to\\mathbb R$ of class $C^1$, an initial point $x_0$,\nan initial radius $0<\\Delta_0\\le\\Delta_{max}$, a trial cap\n$N\\in\\mathbb N_0$, a target $\\varepsilon\\ge0$, constants\n$0<\\eta_1<\\eta_2<1$, $0<\\gamma_{dec}<1<\\gamma_{inc}$,\n$0<\\theta_C\\le1$, and a declared model-Hessian bound $M_B\\ge0$. At each\ntrial $k$, the supplied symmetric model matrix $B_k$ must satisfy\n$\\|B_k\\|_2\\le M_B$. A finite-budget subproblem routine $S$ returns either a\nvector or `failure`; its output is treated only as a candidate and is not\nassumed to minimize the trust-region model. The output is the last accepted\npoint and one of `stationary`, `target-achieved`, `outer-budget-exhausted`,\nor `model-evaluation-failure`.\n\nFor $k=0,1,\\ldots,N$, in order:\n\n1. Set $g_k:=\\nabla f(x_k)$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$. If $\\|g_k\\|_2\\le\\varepsilon$, return\n   $(x_k,\\texttt{target-achieved})$. If $k=N$, return\n   $(x_k,\\texttt{outer-budget-exhausted})$.\n2. Form $m_k$ from [[def-trust-region-quadratic-model-and-ratio]], compute\n   the Cauchy step $p_C$ from [[alg-trust-region-cauchy-step]], and set\n   $P_C:=m_k(0)-m_k(p_C)$. Query $S$ with this model and radius. Use its\n   candidate $q$ only if it is feasible and\n   $m_k(0)-m_k(q)\\ge\\theta_C P_C$; otherwise set $p:=p_C$. If it qualifies,\n   set $p:=q$. If $M_B=0$, interpret $\\|g_k\\|_2/(2M_B)=+\\infty$. Whenever\n   $\\Delta_k\\le\\|g_k\\|_2/(2M_B)$, replace the candidate by $p:=p_C$.\n3. Recompute $P_k:=m_k(0)-m_k(p)$. Evaluate\n   $\\rho_k:=[f(x_k)-f(x_k+p)]/P_k$. If this evaluation is unavailable,\n   return $(x_k,\\texttt{model-evaluation-failure})$.\n4. If $\\rho_k<\\eta_1$, reject: set $x_{k+1}:=x_k$ and\n   $\\Delta_{k+1}:=\\gamma_{dec}\\Delta_k$. Otherwise accept and set\n   $x_{k+1}:=x_k+p$. If $\\rho_k\\ge\\eta_2$ and $\\|p\\|_2=\\Delta_k$, set\n   $\\Delta_{k+1}:=\\min\\{\\gamma_{inc}\\Delta_k,\\Delta_{max}\\}$; in every\n   other accepted case set $\\Delta_{k+1}:=\\Delta_k$.\n\nThe finite subproblem budget alone does not imply convergence or a complexity\nbound.",
+           "uses": [
+             "1.1",
+             "1.2",
+-            "2.1"
++            "2.1",
++            "3.1",
++            "4.1"
+           ]
+         },
+         {
+@@ -1442,7 +1617,8 @@
+           "source_section": "Statement",
+           "quote": "In the quadratic model of [[def-trust-region-quadratic-model-and-ratio]],\nlet $g\\ne0$, let $B$ be symmetric, and let $\\Delta>0$. Write\n$M:=\\|B\\|_2$ for the induced Euclidean matrix norm, with the convention\n$\\min\\{\\Delta,\\|g\\|_2/M\\}=\\Delta$ when $M=0$. The Cauchy step\n$p_C$ of [[alg-trust-region-cauchy-step]] minimizes the model on the\nnegative-gradient segment $\\{-tg:0\\le t\\le\\Delta/\\|g\\|_2\\}$ and satisfies\n$$m(0)-m(p_C)\\ge\\tfrac12\\|g\\|_2\n\\min\\{\\Delta,\\|g\\|_2/M\\}.$$",
+           "uses": [
+-            "1.2"
++            "1.2",
++            "3.1"
+           ]
+         },
+         {
+@@ -1563,6 +1739,28 @@
+             "step 2.1",
+             "algebra"
+           ]
++        },
++        {
++          "id": "step-3-1",
++          "step": "3.1",
++          "claim": "For any nonstationary trial, $\\|g_k\\|_2>0$ and $\\Delta_k>0$.\nBy [F2], the Cauchy step has $P_C>0$. The selection rule either chooses a\ncandidate with predicted decrease at least $\\theta_C P_C$, or uses $p_C$;\nthe small-radius override also uses $p_C$. Since $0<\\theta_C\\le1$, every\nbranch therefore gives $P_k\\ge\\theta_C P_C>0$, so the ratio in the\nalgorithm is defined.",
++          "inputs": [
++            "F1",
++            "F2",
++            "given",
++            "cases",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-4-1",
++          "step": "4.1",
++          "claim": "On an accepted trial, $\\rho_k\\ge\\eta_1>0$ and $P_k>0$ by step 3.1.\nThus $f(x_{k+1})=f(x_k)-\\rho_kP_k<f(x_k)$, proving strict decrease at every\naccepted trial.",
++          "inputs": [
++            "F1",
++            "step 3.1",
++            "algebra"
++          ]
+         }
+       ],
+       "routine_steps": [],
+@@ -1575,7 +1773,7 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Step 1.1 applies the algorithm before trial counting; a zero gradient returns immediately, so the trial count is zero."
++          "evidence": "The current Statement separately proves positive prediction for every nonstationary trial and permits stationary at a zero gradient; the zero-denominator conventions for MB=0 remain explicit."
+         },
+         {
+           "case": "one",
+@@ -1590,7 +1788,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Step 2.2 includes the relevant closed-ball, interval, boundary, or target endpoint in the displayed inequality."
++          "evidence": "The finite-cap guarantee allows stationary or target-achieved; actual ratio, radius floor and logarithmic rejection bounds are proved for the current selected feasible trial."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1682,81 +1880,165 @@
+           "fact": "F1",
+           "source": "alg-adaptive-cubic-regularization",
+           "source_section": "Definition",
+-          "quote": "Input an open set $U\\subseteq\\mathbb R^n$, a twice continuously\ndifferentiable $f:U\\to\\mathbb R$, an initial point $x_0\\in U$, target\n$\\varepsilon\\ge0$, outer trial cap $N\\in\\mathbb N_0$, and an exact-Hessian\ncubic-model solver $S$. On an input model and finite inner cap $J\\in\\mathbb N$,\n$S$ returns either `no-candidate` or a global minimizer of that model; the\nsolver is permitted to return `no-candidate` if it cannot certify a minimizer\nwithin its cap. Other inputs are $0<\\eta_1<\\eta_2<1$,\n$\\gamma_{up}>1$, $0<\\gamma_{down}<1$, $0<\\kappa<1$,\n$0<\\sigma_{min}\\le\\sigma_0\\le\\sigma_{max}$, and the inner cap $J$.\nThe output is the last accepted iterate and one of `stationary`,\n`target-achieved`, `outer-budget-exhausted`, `model-solver-failure`,\n`inconsistent-model-solver`, or `regularization-cap-exhausted`.\n\nFor $k=0,1,\\ldots,N$, in order:\n\n1. Compute $g_k:=\\nabla f(x_k)$. If $g_k=0$, return $(x_k,\\texttt{stationary})$.\n   If $\\|g_k\\|_2\\le\\varepsilon$, return $(x_k,\\texttt{target-achieved})$.\n   If $k=N$, return $(x_k,\\texttt{outer-budget-exhausted})$.\n2. Set $B_k:=\\nabla^2 f(x_k)$ and form the model\n   $m_k(s)=f(x_k)+\\langle g_k,s\\rangle+\\tfrac12s^TB_ks+\n   \\tfrac{\\sigma_k}{3}\\|s\\|_2^3$ of\n   [[def-adaptive-cubic-regularization-model]]. Call $S(m_k,J)$. If it returns\n   `no-candidate`, return $(x_k,\\texttt{model-solver-failure})$. For a\n   returned $s_k$, recompute $\\operatorname{pred}_k:=m_k(0)-m_k(s_k)$. If\n   $s_k=0$ or $\\operatorname{pred}_k\\le0$ while $g_k\\ne0$, return\n   `inconsistent-model-solver`.\n3. Evaluate $f(x_k+s_k)$ and set\n   $\\rho_k:=[f(x_k)-f(x_k+s_k)]/\\operatorname{pred}_k$.\n   If $\\rho_k<\\eta_1$, reject the step and keep $x_{k+1}:=x_k$. If\n   $\\sigma_k=\\sigma_{max}$, return\n   $(x_k,\\texttt{regularization-cap-exhausted})$; otherwise set\n   $\\sigma_{k+1}:=\\min\\{\\gamma_{up}\\sigma_k,\\sigma_{max}\\}$ and continue.\n4. If $\\rho_k\\ge\\eta_1$, accept and set $x_{k+1}:=x_k+s_k$. If\n   $\\rho_k>\\eta_2$ and\n   $\\|s_k\\|_2\\ge\\kappa\\|g_k\\|_2/\\sigma_k$, set\n   $\\sigma_{k+1}:=\\max\\{\\sigma_{min},\\gamma_{down}\\sigma_k\\}$;\n   otherwise set $\\sigma_{k+1}:=\\sigma_k$.\n\nThe model solver is an explicit subroutine input, not a claim that its finite\nbudget always succeeds. The global-minimizer decrease estimate is supplied by\n[[lem-global-cubic-model-minimizer-decrease]]. This procedure alone makes no\nunconditional convergence or evaluation-complexity claim.",
+-          "uses": [
++          "quote": "Input an open set $U\\subseteq\\mathbb R^n$, a twice continuously\ndifferentiable $f:U\\to\\mathbb R$, an initial point $x_0\\in U$, target\n$\\varepsilon\\ge0$, outer trial cap $N\\in\\mathbb N_0$, and an exact-Hessian\ncubic-model solver $S$. Other inputs are $0<\\eta_1<\\eta_2<1$,\n$\\gamma_{up}>1$, $0<\\gamma_{down}<1$, $0<\\kappa<1$,\n$0<\\sigma_{min}\\le\\sigma_0\\le\\sigma_{max}$, $0<\\kappa_\\theta<1$,\nand the finite inner cap $J\\in\\mathbb N_0$. On input of the model, $J$,\nand $\\kappa_\\theta$, the solver $S$ returns `no-candidate` or proposes a\nvector. A proposed vector is admissible when it passes the model-solution\nchecks below. The solver may return `no-candidate` if it cannot certify such\na vector within its cap. Exact global minimizers are an admissible special\ncase; the local criterion also permits inexact steps satisfying the stated\nconditions of [[lem-global-cubic-model-minimizer-decrease]].\n\nThe output is the last accepted iterate and one of `stationary`,\n`target-achieved`, `outer-budget-exhausted`, `model-solver-failure`,\n`inconsistent-model-solver`, `domain-exit`, or\n`regularization-cap-exhausted`.\n\nFor $k=0,1,\\ldots,N$, in order:\n\n1. Compute $g_k:=\\nabla f(x_k)$. If $g_k=0$, return $(x_k,\\texttt{stationary})$.\n   If $\\|g_k\\|_2\\le\\varepsilon$, return $(x_k,\\texttt{target-achieved})$.\n   If $k=N$, return $(x_k,\\texttt{outer-budget-exhausted})$.\n2. Set $B_k:=\\nabla^2 f(x_k)$ and form the model\n   $m_k(s)=f(x_k)+\\langle g_k,s\\rangle+\\tfrac12s^TB_ks+\n   \\tfrac{\\sigma_k}{3}\\|s\\|_2^3$ of\n   [[def-adaptive-cubic-regularization-model]]. By\n   [[cor-hessian-is-symmetric]], $B_k$ is symmetric. Put\n   $a_k:=\\|g_k\\|_2$, $q_k:=g_k^TB_kg_k$, and compute the cubic Cauchy\n   step\n   $$s_{C,k}:=-t_{C,k}g_k,\\qquad\n   t_{C,k}:=\\frac{-q_k+\\sqrt{q_k^2+4\\sigma_ka_k^5}}\n   {2\\sigma_ka_k^3}.$$\n   Call $S(m_k,J,\\kappa_\\theta)$. If it returns `no-candidate`, return\n   $(x_k,\\texttt{model-solver-failure})$. For a proposed $s_k$, recompute\n   $\\operatorname{pred}_k:=m_k(0)-m_k(s_k)$ and\n   $\\nabla m_k(s_k):=g_k+B_ks_k+\\sigma_k\\|s_k\\|_2s_k$. Check\n   $$g_k^Ts_k+s_k^TB_ks_k+\\sigma_k\\|s_k\\|_2^3=0,\n   \\qquad s_k^TB_ks_k+\\sigma_k\\|s_k\\|_2^3\\ge0,$$\n   $$\\|\\nabla m_k(s_k)\\|_2\\le\n   \\kappa_\\theta\\min\\{1,\\|s_k\\|_2\\}\\|g_k\\|_2,\n   \\qquad m_k(s_k)\\le m_k(s_{C,k}).$$\n   If any check fails, or if $s_k=0$ or\n   $\\operatorname{pred}_k\\le0$, return\n   $(x_k,\\texttt{inconsistent-model-solver})$.\n3. If $x_k+s_k\\notin U$, return $(x_k,\\texttt{domain-exit})$ without\n   evaluating $f$ there. Otherwise evaluate $f(x_k+s_k)$ and set\n   $\\rho_k:=[f(x_k)-f(x_k+s_k)]/\\operatorname{pred}_k$.\n   If $\\rho_k<\\eta_1$, reject the step and keep $x_{k+1}:=x_k$. If\n   $\\sigma_k=\\sigma_{max}$, return\n   $(x_k,\\texttt{regularization-cap-exhausted})$; otherwise set\n   $\\sigma_{k+1}:=\\min\\{\\gamma_{up}\\sigma_k,\\sigma_{max}\\}$ and continue.\n4. If $\\rho_k\\ge\\eta_1$, accept and set $x_{k+1}:=x_k+s_k$. If\n   $\\rho_k>\\eta_2$ and\n   $\\|s_k\\|_2\\ge\\kappa\\|g_k\\|_2/\\sigma_k$, set\n   $\\sigma_{k+1}:=\\max\\{\\sigma_{min},\\gamma_{down}\\sigma_k\\}$;\n   otherwise set $\\sigma_{k+1}:=\\sigma_k$.\n\nThe finite cap, solver failure, inconsistent-solver, domain-exit, and\nregularization-cap branches are explicit. The model-solution checks include\nthe two cubic conditions (4.1)–(4.2), residual condition TC.s, and the\nCauchy-model decrease condition of Cartis–Gould–Toint, Part II, §4. The\nprocedure alone makes no unconditional convergence or evaluation-complexity\nclaim.",
++          "uses": [
++            "1.2",
++            "1.3",
++            "2.1",
++            "2.2",
++            "2.3"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "lem-global-cubic-model-minimizer-decrease",
++          "source_section": "Statement",
++          "quote": "For the cubic model $m_\\sigma$ of [[def-adaptive-cubic-regularization-model]],\nwith $\\sigma>0$ and symmetric $B$, a global minimizer exists. If $g\\ne0$ and\n$s_*$ is any global minimizer, then $s_*\\ne0$ and\n$$g+Bs_*+\\sigma\\|s_*\\|_2s_*=0,$$\n$$m_\\sigma(0)-m_\\sigma(s_*)\\ge\\frac{\\sigma}{6}\\|s_*\\|_2^3.$$\n\nMore generally, every $s$ satisfying\n$$g^Ts+s^TBs+\\sigma\\|s\\|_2^3=0,\\qquad\ns^TBs+\\sigma\\|s\\|_2^3\\ge0$$\nhas $m_\\sigma(0)-m_\\sigma(s)\\ge\\frac{\\sigma}{6}\\|s\\|_2^3$.\nFor $g\\ne0$, put $a=\\|g\\|_2$ and $q=g^TBg$. The unique minimizer of\nthe cubic model on the negative-gradient ray $\\{-tg:t\\ge0\\}$ is\n$$s_C=-t_Cg,\\qquad\nt_C=\\frac{-q+\\sqrt{q^2+4\\sigma a^5}}{2\\sigma a^3}>0.$$",
++          "uses": [
++            "1.2",
++            "2.2"
++          ]
++        },
++        {
++          "fact": "F3",
++          "source": "lem-adaptive-cubic-unsuccessful-iteration-count",
++          "source_section": "Statement",
++          "quote": "Suppose $f$ is $C^2$ and its Hessian is $L$-Lipschitz on each trial segment,\nmeaning\n$$\\|\\nabla^2f(u)-\\nabla^2f(v)\\|_2\\le L\\|u-v\\|_2.$$\nRun [[alg-adaptive-cubic-regularization]] with exact Hessians, and assume each\ntrial on which a ratio is evaluated uses either an exact global cubic-model\nminimizer or a candidate passing the algorithm's cubic solution, residual, and\nCauchy-decrease checks, together with\n$0<\\sigma_{min}\\le\\sigma_k\\le\\sigma_{max}$ and $\\sigma_{max}\\ge3L$.\nThen no ratio-based rejection occurs when $\\sigma_k\\ge3L$. If\n$\\gamma_{up}>1$, let $R\\in\\mathbb N_0$ satisfy\n$\\gamma_{up}^R\\sigma_{min}\\ge3L$; such an $R$ exists. Every block of\nconsecutive ratio-based rejected trials has length at most $R$.",
++          "uses": [
++            "1.3",
++            "2.3"
++          ]
++        },
++        {
++          "fact": "F4",
++          "source": "cor-hessian-is-symmetric",
++          "source_section": "Statement",
++          "quote": "For a $C^2$ scalar field $f$, $H_f(a)^T=H_f(a)$ at every point $a$.",
++          "uses": [
++            "1.1"
++          ]
++        },
++        {
++          "fact": "F5",
++          "source": "cor-mean-value-theorem",
++          "source_section": "Statement",
++          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
++          "uses": [
++            "1.1",
+             "1.2",
+             "2.1"
+           ]
+         },
+         {
+-          "fact": "F2",
+-          "source": "lem-global-cubic-model-minimizer-decrease",
+-          "source_section": "Statement",
+-          "quote": "For the cubic model $m_\\sigma$ of [[def-adaptive-cubic-regularization-model]],\nwith $\\sigma>0$ and symmetric $B$, a global minimizer exists. If $g\\ne0$ and\n$s_*$ is any global minimizer, then $s_*\\ne0$ and\n$$g+Bs_*+\\sigma\\|s_*\\|_2s_*=0,$$\n$$m_\\sigma(0)-m_\\sigma(s_*)\\ge\\frac{\\sigma}{6}\\|s_*\\|_2^3.$$",
++          "fact": "F6",
++          "source": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
++          "source_section": "Statement",
++          "quote": "Let $p\\in\\mathbb{Q}$ with $p\\ge 1$ and let $m,n,q\\in\\mathbb{N}$, with the\ninduced $p$-norms of [[def-induced-matrix-p-norm]].\n\n1. **Compatibility.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and every\n   $x\\in\\mathbb{R}^{n}$,\n   $$\\lVert Ax\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert x\\rVert_p.$$\n2. **Submultiplicativity.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and\n   $B\\in M_{n\\times q}(\\mathbb{R})$,\n   $$\\lVert AB\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert B\\rVert_p.$$\n3. **Normalisation.** For every $n\\ge 1$,\n   $$\\lVert I_n\\rVert_p=1,$$\n   where $I_n$ is the identity matrix of [[def-matrix-product-and-identity-matrix]];\n   at $n=0$ the unique empty matrix $I_0\\in M_0(\\mathbb{R})$ has\n   $\\lVert I_0\\rVert_p=0$, the convention of [[def-induced-matrix-p-norm]].",
+           "uses": [
+             "1.1",
+-            "1.2"
+-          ]
+-        },
+-        {
+-          "fact": "F3",
+-          "source": "lem-adaptive-cubic-unsuccessful-iteration-count",
+-          "source_section": "Statement",
+-          "quote": "Suppose $f$ is $C^2$ and its Hessian is $L$-Lipschitz on each trial segment,\nmeaning\n$$\\|\\nabla^2f(u)-\\nabla^2f(v)\\|_2\\le L\\|u-v\\|_2.$$\nRun [[alg-adaptive-cubic-regularization]] with exact Hessians, an exact global\nminimizer of each cubic model on every solver-success trial,\n$0<\\sigma_{min}\\le\\sigma_k\\le\\sigma_{max}$, and $\\sigma_{max}\\ge3L$.\nThen no ratio-based rejection occurs when $\\sigma_k\\ge3L$. If\n$\\gamma_{up}>1$, let $R\\in\\mathbb N_0$ satisfy\n$\\gamma_{up}^R\\sigma_{min}\\ge3L$; such an $R$ exists. Every block of\nconsecutive ratio-based rejected trials has length at most $R$.",
+-          "uses": [
+             "2.1"
+           ]
+         },
+         {
+-          "fact": "F4",
+-          "source": "cor-mean-value-theorem",
+-          "source_section": "Statement",
+-          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+-          "uses": [
+-            "1.1"
+-          ]
++          "fact": "F7",
++          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
++          "source_section": "Statement",
++          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
++          "uses": [
++            "1.1",
++            "2.1"
++          ]
++        },
++        {
++          "fact": "F8",
++          "source": "def-euclidean-inner-product",
++          "source_section": "Definition",
++          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
++          "uses": []
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "Consider a nonstationary accepted trial from $x_k$ with step $s_k$.\nFor each coordinate $i$, let $e_i$ be the $i$th standard basis vector and\ndefine\n$$r_i(t):=e_i^T\\big(\\nabla f(x_k+ts_k)-g_k-tB_ks_k\\big),\\qquad\n0\\le t\\le1.$$\nThen $r_i(0)=0$ and\n$$r_i'(t)=e_i^T\\big(\\nabla^2f(x_k+ts_k)-B_k\\big)s_k.$$\nBy [A1] and $B_k=\\nabla^2f(x_k)$,\n$|r_i'(t)|\\le Lt\\|s_k\\|_2^2$. Applying [F4] on $[0,1]$ gives\n$|r_i(1)|\\le L\\|s_k\\|_2^2$. Thus the vector remainder $r$ has\n$\\|r\\|_2\\le\\sqrt n L\\|s_k\\|_2^2$. The stationarity equation in [F2]\nnow yields\n$$\\|\\nabla f(x_{k+1})\\|_2\n=\\|g_k+B_ks_k+r\\|_2\n\\le(\\sigma_k+\\sqrt n L)\\|s_k\\|_2^2\n\\le C_g\\|s_k\\|_2^2.$$",
++          "claim": "On any trial segment, put $s=s_k$ and, for each coordinate $i$, let\n$e_i$ be its standard basis vector and\n$$r_i(t):=e_i^T\\big(\\nabla f(x_k+ts)-g_k-tB_ks\\big),\n\\qquad 0\\le t\\le1.$$\nSince $B_k=\\nabla^2f(x_k)$ by the algorithm and [F4] confirms its symmetry,\n$r_i(0)=0$ and\n$$r_i'(t)=e_i^T\\big(\\nabla^2f(x_k+ts)-B_k\\big)s.$$\nBy [A1], [F6], [F7], and [F8], $|r_i'(t)|\\le Lt\\|s\\|_2^2$. Applying [F5] to\n$r_i$ on $[0,1]$ gives $|r_i(1)|\\le L\\|s\\|_2^2$. Consequently,\n$$\\|\\nabla f(x_k+s)-g_k-B_ks\\|_2\\le\\sqrt n L\\|s\\|_2^2.$$",
+           "step": "1.1",
++          "inputs": [
++            "given",
++            "A1",
++            "F4",
++            "F5",
++            "F6",
++            "F7",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-1-2",
++          "claim": "In case 1, at a nonstationary accepted trial, the exact model-minimizer\ncondition in [F2] and step 1.1 yield\n$$\\|\\nabla f(x_{k+1})\\|_2\n\\le(\\sigma_k+\\sqrt n L)\\|s_k\\|_2^2\n\\le C_g\\|s_k\\|_2^2.$$\nIf the accepted trial is nonterminal, then\n$\\|\\nabla f(x_{k+1})\\|_2>\\varepsilon$, so\n$\\|s_k\\|_2>(\\varepsilon/C_g)^{1/2}$. By [F2], its predicted reduction is\ngreater than $\\sigma_{min}(\\varepsilon/C_g)^{3/2}/6$. Acceptance therefore\ndecreases $f$ by more than $c_g\\varepsilon^{3/2}$. Summing over nonterminal\naccepted trials and using [A2] bounds their number by\n$[f(x_0)-f_{inf}]/(c_g\\varepsilon^{3/2})$. At most one further accepted\ntrial reaches the first iterate with gradient norm at most $\\varepsilon$.",
++          "step": "1.2",
+           "inputs": [
+             "given",
+             "A1",
+             "A2",
++            "F1",
+             "F2",
+-            "F4",
+-            "algebra"
+-          ]
+-        },
+-        {
+-          "id": "step-1-2",
+-          "claim": "If an accepted trial is nonterminal, then both\n$\\|\\nabla f(x_k)\\|_2>\\varepsilon$ and\n$\\|\\nabla f(x_{k+1})\\|_2>\\varepsilon$. Step 1.1 therefore implies\n$\\|s_k\\|_2>(\\varepsilon/C_g)^{1/2}$. By [F2], its predicted reduction\nexceeds\n$$\\frac{\\sigma_{min}}6(\\varepsilon/C_g)^{3/2}.$$\nSince acceptance means $\\rho_k\\ge\\eta_1$, the actual decrease exceeds\n$c\\varepsilon^{3/2}$. Summing over nonterminal accepted trials and using\n[A3] bounds their number by\n$[f(x_0)-f_{inf}]/(c\\varepsilon^{3/2})$. There can be at most one further\naccepted trial, namely the terminal trial that first reaches the target.",
+-          "step": "1.2",
+-          "inputs": [
+-            "given",
+-            "A2",
+-            "A3",
+-            "F1",
+-            "F2",
++            "F5",
+             "step 1.1",
+             "algebra"
+           ]
+         },
+         {
+-          "id": "step-2-1",
+-          "claim": "Every block of rejected trials is followed by an accepted trial, because\n[F3] bounds the block and the exact model solver succeeds at the next trial.\nThere is no rejected block after the terminal accepted trial. Hence\n$N_u\\le R N_s$. Combining this with step 1.2 gives\n$$N_s+N_u\\le(R+1)\\left(\\frac{f(x_0)-f_{inf}}\n{c\\varepsilon^{3/2}}+1\\right)=O(\\varepsilon^{-3/2}).$$\nEach trial evaluates at most one new objective value, gradient, and Hessian;\nthe final target check adds at most one gradient evaluation. The same order\ntherefore bounds all three evaluation counts. Choosing a finite outer cap at\nleast this number prevents budget exhaustion before target attainment.",
+-          "step": "2.1",
+-          "inputs": [
+-            "given",
+-            "A2",
++          "id": "step-1-3",
++          "step": "1.3",
++          "claim": "By [F3], every block of rejected trials has length at most $R$. There\nis no rejected block after the first stationary or target-achieved iterate,\nso $N_u\\le R N_s$. In case 1 this gives\n$$N_s+N_u\\le(R+1)\\left(\\frac{f(x_0)-f_{inf}}\n{c_g\\varepsilon^{3/2}}+1\\right).$$",
++          "inputs": [
++            "given",
+             "F1",
+             "F3",
+             "step 1.2",
+             "algebra"
+           ]
++        },
++        {
++          "id": "step-2-1",
++          "claim": "In case 2, let $s=s_k$, $r=\\|s\\|_2$, $g=g_k$, and\n$g^+=\\nabla f(x_k+s)$. The candidate residual check in [F1] gives\n$$\\|g+B_ks+\\sigma_k r s\\|_2\n\\le\\kappa_\\theta\\min\\{1,r\\}\\|g\\|_2.$$\nStep 1.1 and the triangle inequality therefore imply\n$$\\|g^+\\|_2\\le(\\sigma_{max}+\\sqrt n L)r^2\n+\\kappa_\\theta\\min\\{1,r\\}\\|g\\|_2.$$\nBy the $K$-Lipschitz gradient assumption,\n$\\|g\\|_2\\le\\|g^+\\|_2+Kr$. Substitution and\n$r\\min\\{1,r\\}\\le r^2$ give\n$$ (1-\\kappa_\\theta\\min\\{1,r\\})\\|g^+\\|_2\n\\le(\\sigma_{max}+\\sqrt n L+\\kappa_\\theta K)r^2.$$\nSince $1-\\kappa_\\theta\\min\\{1,r\\}\\ge1-\\kappa_\\theta>0$,\n$\\|g^+\\|_2\\le D_g r^2$.",
++          "step": "2.1",
++          "inputs": [
++            "given",
++            "A1",
++            "F1",
++            "F5",
++            "F6",
++            "F7",
++            "step 1.1",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-2-2",
++          "step": "2.2",
++          "claim": "If an accepted trial in case 2 is nonterminal, then\n$\\|g^+\\|_2>\\varepsilon$, so $r>(\\varepsilon/D_g)^{1/2}$. The second\ndecrease conclusion of [F2] gives predicted reduction greater than\n$\\sigma_{min}(\\varepsilon/D_g)^{3/2}/6$. Acceptance thus decreases $f$ by\nmore than $c_a\\varepsilon^{3/2}$. Summing over nonterminal accepted trials\nand using [A2] bounds their number by\n$[f(x_0)-f_{inf}]/(c_a\\varepsilon^{3/2})$; at most one further accepted\ntrial reaches the first iterate with gradient norm at most $\\varepsilon$.",
++          "inputs": [
++            "given",
++            "A1",
++            "A2",
++            "F1",
++            "F2",
++            "step 2.1",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-2-3",
++          "step": "2.3",
++          "claim": "The rejection count [F3] applies in case 2 as well, so\n$N_u\\le RN_s$ and\n$$N_s+N_u\\le(R+1)\\left(\\frac{f(x_0)-f_{inf}}\n{c_a\\varepsilon^{3/2}}+1\\right).$$\nBoth trial bounds are $O(\\varepsilon^{-3/2})$ for fixed constants. Each\nouter trial evaluates at most one objective, gradient, and Hessian; an\nadditional terminal gradient check changes the count by at most one. Taking\nthe cap $N$ at least the corresponding bound prevents budget exhaustion\nbefore a stationary or target-achieved iterate.",
++          "inputs": [
++            "given",
++            "F1",
++            "F3",
++            "step 2.2",
++            "algebra"
++          ]
+         }
+       ],
+       "routine_steps": [],
+@@ -1769,22 +2051,22 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Step 2.1 and the algorithm statement cover the stationary exit before any model call."
++          "evidence": "The Statement and proof allow an initially stationary iterate. Cases 1/2 assume nonterminal solver success; positive sigma_min, Cg and Dg make the step-count constants defined."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Step 1.1 uses a formula valid at the first index or in dimension one; the same finite argument has no omitted base case."
++          "evidence": "Steps 1.2 and 2.2 allow at most one final accepted trial that reaches a stationary or target-achieved iterate."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Step 2.1 uses the rejection lemma, which permits R=0 when sigma_min>=3L, including L=0."
++          "evidence": "Both exact and admissible inexact cases retain sigma_min>0 and kappa_theta<1; Dg denominator is positive and L=0 is allowed with R=0 when the weight threshold is already met."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Step 2.1 includes the relevant closed-ball, interval, boundary, or target endpoint in the displayed inequality."
++          "evidence": "Steps 1.3 and 2.3 bound rejected blocks and the finite outer cap through the first stationary or target-achieved iterate. Counts exclude internal model-solver work."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1867,7 +2149,7 @@
+           "fact": "F3",
+           "source": "alg-trust-region-cauchy-step",
+           "source_section": "Definition",
+-          "quote": "Input a model of [[def-trust-region-quadratic-model-and-ratio]] with gradient\n$g$, symmetric model matrix $B$, and\nradius $\\Delta>0$. If $g=0$, return $p_C=0$ with status `stationary`. If\n$g\\ne0$, set $c:=g^TBg$ and define\n$$\\tau:=\\begin{cases}\n\\Delta/\\|g\\|_2,&c\\le0,\\\\\n\\min\\{\\|g\\|_2^2/c,\\ \\Delta/\\|g\\|_2\\},&c>0.\n\\end{cases}$$\nReturn $p_C:=-\\tau g$ with status `step`. The procedure uses no matrix\nfactorization and has no iteration loop.",
++          "quote": "Input a model of [[def-trust-region-quadratic-model-and-ratio]] with gradient\n$g$, symmetric model matrix $B$, and\nradius $\\Delta>0$. If $g=0$, return $p_C=0$ with status `stationary`. If\n$g\\ne0$, set $c:=g^TBg$ and define\n$$\\tau:=\\begin{cases}\n\\Delta/\\|g\\|_2,&c\\le0,\\\\\n\\min\\{\\|g\\|_2^2/c,\\ \\Delta/\\|g\\|_2\\},&c>0.\n\\end{cases}$$\nReturn $p_C:=-\\tau g$ with status `step`.",
+           "uses": [
+             "1.2"
+           ]
+@@ -2443,12 +2725,12 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "The domain assumption x>=1 excludes zero, where the natural logarithm is undefined."
++          "reason": "The Statement assumes x>=1, so log is never evaluated at zero."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Steps 1.1–1.2 handle x=1 directly using log 1=0."
++          "evidence": "Proof 1.1 treats x=1 explicitly before applying the mean value theorem for x>1."
+         },
+         {
+           "case": "degenerate",
+@@ -2458,7 +2740,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Step 1.1 applies the mean value theorem on the closed interval [1,x], including x=1 separately."
++          "evidence": "Proof 1.1 uses continuity on [1,x] from the actual logarithm-laws supplier."
+         },
+         {
+           "case": "nonempty-choice",

@@ -1,0 +1,50 @@
+[
+  {
+    "kind": "page",
+    "consumer": "fractional-evolution-and-convolution-quadrature",
+    "supplier": "composite-quadrature-rules",
+    "status": "open",
+    "evidence": "The batch-45 manifest and controlling plan-spec declare the page dependency on composite-quadrature-rules. The T09 appendix also describes NA-12 as an interface for the exact fractional-derivative convention, while the track plan elsewhere describes NA-12 as composite midpoint/Simpson quadrature; the actual current supplier page is generic smooth-integrand quadrature. Its items alg-composite-midpoint-rule and alg-composite-simpson-rule define nodal formulas; lem-composite-midpoint-panel-error-kernel and thm-composite-midpoint-error-bound require C2 integrands; lem-simpson-panel-peano-kernel, thm-composite-simpson-exact-through-degree-three and thm-composite-simpson-error-bound require C4 (or polynomial) integrands. The canonical trapezoid pair likewise gives a C2 smooth-integrand result. None exports a Caputo weak-kernel theorem: (t_n-s)^(-alpha) is singular at s=t_n and does not satisfy these smoothness hypotheses. T09's L1 weights instead integrate the power kernel exactly using lem-fractional-integral-kernel-power-integral; the CQ symbol is derived from its generating function. No item proof in batch 45 consumes a composite-rule error bound, so local mathematical arguments are complete, but the declared page-level edge remains unverified and this pair is not claimed ready. If the edge is intended as a logical prerequisite, the owner must reconcile its interface and placement: either amend the shared page dependency as context-only or assign a T09-owned singular-kernel quadrature result before consumers; the current batch-20 items cannot supply that result. Affected page claims are the L1 panel representation and any error estimate that would try to infer singular-kernel quadrature accuracy from the generic midpoint/Simpson bounds. The exact local L1 formula and scalar proof remain independently derived in T09.",
+    "examined_supplier_items": [
+      "alg-composite-midpoint-rule",
+      "alg-composite-simpson-rule",
+      "lem-composite-midpoint-panel-error-kernel",
+      "thm-composite-midpoint-error-bound",
+      "lem-simpson-panel-peano-kernel",
+      "thm-composite-simpson-exact-through-degree-three",
+      "thm-composite-simpson-error-bound"
+    ],
+    "required_hypotheses": "Current midpoint error theorem requires a C2 integrand; current Simpson Peano-kernel and error bounds require C4, and polynomial exactness applies through degree three. The Caputo panel kernel has an endpoint singularity for 0<alpha<1, so those hypotheses fail for direct composite quadrature of that kernel.",
+    "affected_claims": [
+      "alg-uniform-and-graded-grid-l1: interpretation of L1 weights as exact kernel panel averages",
+      "lem-l1-positive-weights-and-discrete-comparison: positivity and comparison use the singular-kernel weights",
+      "thm-l1-stability-and-smooth-data-error: scalar O(h^(2-alpha)) consistency and stability",
+      "ex-l1-and-cq-fractional-relaxation-first-step: first L1 relaxation step consumes the L1 algorithm",
+      "ex-l1-full-history-cost-and-truncation-bias: history weights and truncated-memory calculation consume the L1 algorithm",
+      "ex-caputo-startup-singularity-and-graded-grid: graded first-node calculation and smooth-rate caveat consume the L1 algorithm and error theorem"
+    ],
+    "local_route": "The exact panel weight and smooth-data residual are derived in T09 from the proved power-kernel integral and cancellation of the panel-average secant error. The companion examples substitute those locally proved recurrences and estimates; no T09 item claims generic midpoint or Simpson error applies to the singular kernel. The six listed items remain escalated only because the declared page-level edge is unresolved, not because a source excerpt or local proof was omitted.",
+    "supplier_excerpts": [
+      {
+        "item": "lem-composite-midpoint-panel-error-kernel",
+        "section": "Statement",
+        "excerpt": "Let $a<b$, $m=(a+b)/2$, and $f\\in C^2([a,b])$ in the sense of [[def-higher-derivatives-and-smoothness]]."
+      },
+      {
+        "item": "thm-composite-midpoint-error-bound",
+        "section": "Statement",
+        "excerpt": "Let $a<b$, let $n\\ge1$ be an integer, and put $h=(b-a)/n$. If $f\\in C^2([a,b])$, define $M_2=\\max_{x\\in[a,b]}|f''(x)|$."
+      },
+      {
+        "item": "lem-simpson-panel-peano-kernel",
+        "section": "Statement",
+        "excerpt": "Let $a<b$, put $L=b-a$ and $m=(a+b)/2$, and let $f\\in C^4([a,b])$."
+      },
+      {
+        "item": "thm-composite-simpson-error-bound",
+        "section": "Statement",
+        "excerpt": "Let $a<b$, let $n\\ge2$ be an even integer, and put $h=(b-a)/n$. If $f\\in C^4([a,b])$, set $M_4=\\max_{x\\in[a,b]}|f^{(4)}(x)|$."
+      }
+    ]
+  }
+]

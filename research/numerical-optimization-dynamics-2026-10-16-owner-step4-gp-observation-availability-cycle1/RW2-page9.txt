@@ -1,0 +1,77 @@
+C. E. Rasmussen & C. K. I. Williams, Gaussian Processes for Machine Learning, the MIT Press, 2006,
+ISBN 026218253X.
+c⃝2006 Massachusetts Institute of Technology.
+www.GaussianProcess.org/gpml
+2.2 Function-space View
+15
+−5
+0
+5
+−2
+−1
+0
+1
+2
+input, x
+output, f(x)
+−5
+0
+5
+−2
+−1
+0
+1
+2
+input, x
+output, f(x)
+(a), prior
+(b), posterior
+Figure 2.2:
+Panel (a) shows three functions drawn at random from a GP prior;
+the dots indicate values of y actually generated; the two other functions have (less
+correctly) been drawn as lines by joining a large number of evaluated points. Panel (b)
+shows three random functions drawn from the posterior, i.e. the prior conditioned on
+the ﬁve noise free observations indicated. In both plots the shaded area represents the
+pointwise mean plus and minus two times the standard deviation for each input value
+(corresponding to the 95% conﬁdence region), for the prior and posterior respectively.
+which informally can be thought of as roughly the distance you have to move in
+input space before the function value can change signiﬁcantly, see section 4.2.1.
+For eq. (2.16) the characteristic length-scale is around one unit. By replacing
+|xp−xq| by |xp−xq|/ℓin eq. (2.16) for some positive constant ℓwe could change
+the characteristic length-scale of the process. Also, the overall variance of the
+magnitude
+random function can be controlled by a positive pre-factor before the exp in
+eq. (2.16). We will discuss more about how such factors aﬀect the predictions
+in section 2.3, and say more about how to set such scale parameters in chapter
+5.
+Prediction with Noise-free Observations
+We are usually not primarily interested in drawing random functions from the
+prior, but want to incorporate the knowledge that the training data provides
+about the function. Initially, we will consider the simple special case where the
+observations are noise free, that is we know {(xi, fi)|i = 1, . . . , n}. The joint
+joint prior
+distribution of the training outputs, f, and the test outputs f∗according to the
+prior is
+
+f
+f∗
+
+∼N
+
+0,
+
+K(X, X)
+K(X, X∗)
+K(X∗, X)
+K(X∗, X∗)
+
+.
+(2.18)
+If there are n training points and n∗test points then K(X, X∗) denotes the
+n × n∗matrix of the covariances evaluated at all pairs of training and test
+points, and similarly for the other entries K(X, X), K(X∗, X∗) and K(X∗, X).
+To get the posterior distribution over functions we need to restrict this joint
+prior distribution to contain only those functions which agree with the observed
+data points. Graphically in Figure 2.2 you may think of generating functions
+from the prior, and rejecting the ones that disagree with the observations, al-
+graphical rejection

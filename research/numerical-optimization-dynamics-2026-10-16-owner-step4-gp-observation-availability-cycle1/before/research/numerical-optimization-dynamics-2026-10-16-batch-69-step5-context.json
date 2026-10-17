@@ -1,0 +1,340 @@
+{
+  "group": "z",
+  "batches": [
+    "69"
+  ],
+  "pages_read": [
+    "global-optimization-and-certified-branch-and-bound",
+    "global-optimization-and-certified-branch-and-bound-examples"
+  ],
+  "items_read": [
+    "def-mccormick-bilinear-box-envelope",
+    "def-spatial-global-optimization-problem",
+    "lem-positive-noise-regularizes-observed-covariance",
+    "alg-finite-candidate-gp-acquisition-search",
+    "def-spatial-box-bound-certificate",
+    "lem-mccormick-envelope-equals-graph-convex-hull",
+    "alg-certified-spatial-branch-and-bound",
+    "thm-adaptive-finite-candidate-gp-search-posterior-correct",
+    "thm-finite-candidate-gp-search-terminates",
+    "thm-finite-budget-spatial-bnb-terminates",
+    "thm-spatial-bnb-eventual-epsilon-termination",
+    "thm-spatial-bnb-gap-certificate-sound",
+    "alg-interval-dag-box-enclosure-and-bound",
+    "def-factorable-box-convex-relaxation-interface",
+    "alg-factorable-mccormick-box-relaxation",
+    "alg-lipschitz-midpoint-box-lower-bound",
+    "thm-factorable-dual-certificate-is-valid-box-lower-bound",
+    "thm-interval-lipschitz-bound-sound-consistent",
+    "alg-certified-constraint-emptiness-search",
+    "alg-bounded-mixed-integer-branch-and-bound",
+    "thm-uniform-constraint-margin-enables-empty-box-detection",
+    "thm-bounded-mixed-integer-finite-budget-terminates",
+    "thm-bounded-mixed-integer-gap-certificate-sound",
+    "ex-noisy-biological-simulator-finite-candidate-gp-acquisition",
+    "cex-invalid-spatial-lower-bound-can-prune-global-minimum",
+    "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+    "ex-bounded-engineering-design-mixed-integer-gap-certificate"
+  ],
+  "conventions": [
+    {
+      "convention": "Boxes have finite ordered real endpoints and dimension n ≥ 1. The feasible set need not be closed; a nonempty feasible set has a real objective infimum, but attainment is not assumed.",
+      "fixed_by": "def-spatial-global-optimization-problem",
+      "matters_for": [
+        "def-spatial-box-bound-certificate",
+        "thm-spatial-bnb-gap-certificate-sound",
+        "thm-spatial-bnb-eventual-epsilon-termination"
+      ]
+    },
+    {
+      "convention": "A lower bound is pointwise valid on B ∩ C, vacuously when that intersection is empty. A feasible witness includes a verified upper bound. Closing a leaf retains its lower bound in the global ledger.",
+      "fixed_by": "def-spatial-box-bound-certificate",
+      "matters_for": [
+        "alg-certified-spatial-branch-and-bound",
+        "thm-spatial-bnb-gap-certificate-sound",
+        "thm-bounded-mixed-integer-gap-certificate-sound"
+      ]
+    },
+    {
+      "convention": "Every spatial oracle call counts toward the budget, including root evaluation, each child evaluation, and singleton precision refinement. Unconstrained-mode witnesses are exact midpoints with exact objective values.",
+      "fixed_by": "alg-certified-spatial-branch-and-bound",
+      "matters_for": [
+        "thm-finite-budget-spatial-bnb-terminates",
+        "thm-spatial-bnb-eventual-epsilon-termination",
+        "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+        "ex-bounded-engineering-design-mixed-integer-gap-certificate"
+      ]
+    },
+    {
+      "convention": "Constraints use g_i ≤ 0, dual inequality multipliers are nonnegative, and a dual certificate supplies a verified lower bound on the dual value, rather than merely an approximate dual objective.",
+      "fixed_by": "def-factorable-box-convex-relaxation-interface",
+      "matters_for": [
+        "thm-factorable-dual-certificate-is-valid-box-lower-bound",
+        "alg-bounded-mixed-integer-branch-and-bound"
+      ]
+    },
+    {
+      "convention": "Arbitrary real input endpoints are enclosed outward by dyadic endpoints. Non-finite operation statuses make no finite-bound claim; consistency requires precision tending to infinity within an exponent range avoiding overflow.",
+      "fixed_by": "alg-interval-dag-box-enclosure-and-bound",
+      "matters_for": [
+        "thm-interval-lipschitz-bound-sound-consistent",
+        "alg-lipschitz-midpoint-box-lower-bound",
+        "thm-uniform-constraint-margin-enables-empty-box-detection"
+      ]
+    },
+    {
+      "convention": "The GP procedure assumes AC, permits repeated observation sites when observed covariance remains positive definite, uses no pseudoinverse or negative-variance clipping, and updates the posterior after the final observation. Exact acquisition ties use least candidate index.",
+      "fixed_by": "alg-finite-candidate-gp-acquisition-search",
+      "matters_for": [
+        "thm-adaptive-finite-candidate-gp-search-posterior-correct",
+        "thm-finite-candidate-gp-search-terminates",
+        "ex-noisy-biological-simulator-finite-candidate-gp-acquisition"
+      ]
+    },
+    {
+      "convention": "Zero integer coordinates give a singleton empty assignment; enumeration fallback budgets are positive per assignment and sum to at most the remaining total budget.",
+      "fixed_by": "alg-bounded-mixed-integer-branch-and-bound",
+      "matters_for": [
+        "thm-bounded-mixed-integer-finite-budget-terminates",
+        "thm-bounded-mixed-integer-gap-certificate-sound",
+        "ex-bounded-engineering-design-mixed-integer-gap-certificate"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-spatial-box-bound-certificate",
+      "statement": "A lower bound ℓ_B ∈ R satisfies ℓ_B ≤ f(x) for every x ∈ B ∩ C; a feasible witness satisfies x_B ∈ B ∩ C and f(x_B) ≤ U_B. Closing a box retains its lower bound in the global ledger.",
+      "used_by": [
+        "alg-certified-spatial-branch-and-bound",
+        "thm-spatial-bnb-gap-certificate-sound",
+        "alg-lipschitz-midpoint-box-lower-bound",
+        "thm-bounded-mixed-integer-gap-certificate-sound"
+      ]
+    },
+    {
+      "id": "thm-spatial-bnb-gap-certificate-sound",
+      "statement": "Suppose the spatial algorithm returns a feasible witness with verified upper bound U and a complete terminal-leaf ledger with valid lower bounds. If their least bound L satisfies U − L ≤ ε, then f(x̂) − inf_C f ≤ ε. If every terminal leaf is certified empty, C is empty.",
+      "used_by": [
+        "cex-invalid-spatial-lower-bound-can-prune-global-minimum",
+        "ex-multimodal-polynomial-spatial-bnb-gap-certificate"
+      ]
+    },
+    {
+      "id": "thm-interval-lipschitz-bound-sound-consistent",
+      "statement": "Under the stated finite arithmetic-DAG, constant-enclosure, denominator-separation and finite-result hypotheses, interval evaluation contains f[B]. On nested shrinking boxes with precision tending to infinity in a fixed exponent range avoiding overflow, its endpoints tend to f(x). Under the Lipschitz hypothesis, midpoint lower bounds are valid and converge likewise.",
+      "used_by": [
+        "alg-certified-constraint-emptiness-search",
+        "thm-uniform-constraint-margin-enables-empty-box-detection",
+        "ex-multimodal-polynomial-spatial-bnb-gap-certificate"
+      ]
+    },
+    {
+      "id": "thm-factorable-dual-certificate-is-valid-box-lower-bound",
+      "statement": "If the factorable algorithm returns a certified convex relaxation on B with B ∩ C nonempty, a dual-feasible pair, and a verified ℓ ≤ q(λ,ν), then ℓ ≤ inf_{B ∩ C} f.",
+      "used_by": [
+        "alg-bounded-mixed-integer-branch-and-bound",
+        "thm-bounded-mixed-integer-gap-certificate-sound"
+      ]
+    },
+    {
+      "id": "lem-mccormick-envelope-equals-graph-convex-hull",
+      "statement": "For every finite box [l_x,u_x] × [l_y,u_y], the McCormick polytope is exactly the convex hull in R³ of its bilinear graph.",
+      "used_by": [
+        "alg-factorable-mccormick-box-relaxation",
+        "thm-factorable-dual-certificate-is-valid-box-lower-bound"
+      ]
+    },
+    {
+      "id": "lem-positive-noise-regularizes-observed-covariance",
+      "statement": "For symmetric positive-semidefinite K and σ² ≥ 0, C = K + σ²I is positive definite if σ² > 0. If σ² = 0, C is positive definite exactly when K is.",
+      "used_by": [
+        "alg-finite-candidate-gp-acquisition-search",
+        "thm-adaptive-finite-candidate-gp-search-posterior-correct"
+      ]
+    },
+    {
+      "id": "thm-bounded-mixed-integer-gap-certificate-sound",
+      "statement": "A feasible incumbent and complete terminal mixed-node ledger with valid lower bounds certify global ε-optimality when U − L ≤ ε. The fallback conclusion requires a complete continuous ledger for every bounded integer assignment.",
+      "used_by": [
+        "ex-bounded-engineering-design-mixed-integer-gap-certificate"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-metric-continuity",
+      "used_for": "Continuity convention for compact-box objectives.",
+      "opened": true
+    },
+    {
+      "id": "def-infimum",
+      "used_for": "Real infima and the direction of valid lower-bound comparisons.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of finite closed boxes, including degenerate boxes.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-image-of-a-compact-space-is-compact",
+      "used_for": "Compact objective and constraint-maximum images.",
+      "opened": true
+    },
+    {
+      "id": "thm-compact-subset-is-closed-and-bounded",
+      "used_for": "Boundedness and closedness of those real images.",
+      "opened": true
+    },
+    {
+      "id": "thm-infimum-property",
+      "used_for": "Existence of real infima for nonempty bounded-below images.",
+      "opened": true
+    },
+    {
+      "id": "lem-real-line-is-a-metric-space",
+      "used_for": "Real balls as intervals in the attainment arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-bounded-diameter",
+      "used_for": "Boundedness and diameter conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-subset-of-euclidean-space",
+      "used_for": "Convexity in the McCormick hull proof.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited GP probability-law assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-gaussian-process",
+      "used_for": "Finite Gaussian vectors, including singular covariance and repeated sites.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Observation-error independence in posterior updating.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Posterior standard deviations and quartic minimizers.",
+      "opened": true
+    },
+    {
+      "id": "def-cholesky-factorisation-with-positive-diagonal",
+      "used_for": "Positive-definite observed covariance and Cholesky conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-forward-and-back-substitution-for-triangular-systems",
+      "used_for": "Posterior linear-system solves.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+      "used_for": "Correctness of evaluating inverse actions through two triangular solves.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-gaussian-process-posterior-and-predictive-laws",
+      "used_for": "Fixed-list Gaussian posterior kernel, positive-definite observed block, and singular predictive covariance.",
+      "opened": true
+    },
+    {
+      "id": "thm-nested-interval-property",
+      "used_for": "Unique limit points of shrinking branches.",
+      "opened": true
+    },
+    {
+      "id": "lem-inf-epsilon",
+      "used_for": "Attainment arguments through closure of compact real images.",
+      "opened": true
+    },
+    {
+      "id": "thm-metric-closure-characterisation",
+      "used_for": "Closed real images contain their infima.",
+      "opened": true
+    },
+    {
+      "id": "def-max-min",
+      "used_for": "Finite constraint maximum and positive separation margin.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-set-has-max",
+      "used_for": "Existence and attainment of the finite constraint maximum.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-square-monotone",
+      "used_for": "Locating the quartic minimizers strictly inside [-1,1].",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Checked the existence/uniqueness statement underlying the cited Cholesky solve theorem.",
+      "opened": true
+    },
+    {
+      "id": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+      "used_for": "Checked the triangular-solve correctness statement underlying posterior computation.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariate-normal-conditional-law",
+      "used_for": "Checked the conditional-kernel statement underlying the published GP posterior supplier.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-adaptive-finite-candidate-gp-search-posterior-correct",
+      "concern": "The claim that 'after any finite history for which ... computes a posterior state, the conditional law ... is the posterior supplied' needs a restriction on informative observation availability. The algorithm permits an oracle to return observation-unavailable without restricting that event. Take one candidate, f ~ N(0,1), independent ξ ~ N(0,1), s=0, N=1, and an exact selector. Let the oracle return f+ξ when f>0 and observation-unavailable otherwise. Every call finishes, returned observations have the stipulated additive-noise form, and C₁=2 is positive definite. A successful terminal history reveals f>0, whereas the computed N(y/2,1/2) posterior assigns positive probability to f<0. The final sentence about unavailable observations does not address this information in successful histories. The true-posterior interpretation in the algorithm has the same missing qualification.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "ex-bounded-engineering-design-mixed-integer-gap-certificate",
+      "concern": "The claimed N=4 zero-gap execution supplies endpoint witnesses incompatible with the cited continuous procedure's unconstrained midpoint instruction. The Given says each one-call fallback report returns 'an attaining feasible point'; Verification 2.1 uses x=z/2. But alg-certified-spatial-branch-and-bound specifies: 'In the unconstrained mode, the oracle returns the exact midpoint as a feasible witness and exact objective value.' Here every continuous feasible set is [0,1], whose midpoint is 1/2. For z=0,1,2, midpoint upper bounds are respectively 13/20, 1/10, 1/4, while lower bounds are 2/5, 1/10, 0. The first and third subcalls have gap 1/4>1/10 and exhaust their one-call budgets. The asserted returned witness (2,1) and U=0 therefore require an explicitly permitted additional-witness or alternative oracle mode. The optimization calculation itself is correct.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "alg-bounded-mixed-integer-branch-and-bound",
+      "concern": "The operational definition uses the FIFO queue, remaining budget, terminal ledger and incumbent U without explicitly initializing them or stating how a returned feasible witness updates U. It begins 'Keep unevaluated nodes in a FIFO queue' and later tests 'when U is finite'. Root initialization with (Z,X), no incumbent, remaining budget N, and incumbent updates can be reconstructed immediately from the spatial procedure, but should be stated for this separate algorithm.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "global-optimization-and-certified-branch-and-bound",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "Checked both page summaries. Newton is contextual prerequisite material; no Newton result is used to supply a global lower bound. The consumer expressly supplies no duplicate Newton or validated root-solving algorithm."
+    },
+    {
+      "from": "global-optimization-and-certified-branch-and-bound",
+      "to": "inequality-kkt-duality-and-optimality-certificates",
+      "faithful": true,
+      "note": "Opened the convex-program definition and weak-duality theorem. The relaxation interface preserves g_i≤0, λ≥0 and ℓ≤q≤relaxed feasible objective≤original objective. No strong-duality, attainment or residual-to-certificate implication is imported."
+    },
+    {
+      "from": "global-optimization-and-certified-branch-and-bound",
+      "to": "outward-rounded-interval-and-ball-arithmetic",
+      "faithful": true,
+      "note": "Opened the rounding, interval and operation definitions, directed-rounding lemma and DAG-soundness theorem. Consumers explicitly convert real input endpoints outward, propagate non-finite statuses, preserve division restrictions, and require increasing precision and overflow avoidance for consistency."
+    },
+    {
+      "from": "global-optimization-and-certified-branch-and-bound",
+      "to": "barrier-and-primal-dual-interior-point-methods",
+      "faithful": true,
+      "note": "Checked both page summaries and actual relaxation-certificate uses. This is contextual solver background; no barrier complexity or convergence theorem is invoked. The consumer requires verified dual feasibility and a verified lower bound on the dual value, consistent with the supplier's warning that residual tolerances alone are diagnostics."
+    }
+  ]
+}

@@ -1,0 +1,684 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "95",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-continuous-riemann-lebesgue-agreement",
+      "model": "gpt-6-luna",
+      "context_sha256": "c3133602b49541c2c8cadd4c8f941093d69e0969776159b1e41b3d591387f4b0",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 1.1 omitted the direct Borel-to-Lebesgue inclusion citation, although that theorem already lies behind the interval-measure supplier. Added F10 and its direct dependency, with Countable Choice explicit. Relative Borel preimages are Borel in R since [0,1] is closed; boundedness on measure-one [0,1] gives integrability. Both integrals are within epsilon of the same finite left sum, proving equality without changing the Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-collocation-quadrature-tableau",
+      "model": "gpt-6-luna",
+      "context_sha256": "65ffa14845cd4e48660cd8cc344fb3c9b65a3ca6ba81002b9965ff513528ee4b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The tableau coefficients were defined correctly, but the IVP formulas left t,u,h implicit despite the cited RK definition requiring (t,u) in D, h>0, and admissible stage points. Stated those domains explicitly. Cardinal integration still gives u_h(c_i)=U_i, u_h prime(c_i)=hF_i and the endpoint identity; no branch solvability is asserted. All direct consumers use the same forward-step/admissible-stage convention or only the unchanged coefficient integrals.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-explicit-left-euler-sdc-sweep",
+      "model": "gpt-6-luna",
+      "context_sha256": "b9df5fd8bc898733d851d9884c88f7ea7d9adbf48a47cf0f0278d2cc150f4414",
+      "outcome": "confirmed_fatal",
+      "reason": "The invariance-certified exit was not determined by the enumerated inputs. Added a caller-supplied Boolean invariance_certified with the exact quantified inner-map guarantee as the admissibility condition for true, and made step 2 read it explicitly. False returns contraction-not-certified. The guarantee is established externally; no undecidable universal test is hidden in the procedure. Strict lower triangularity still determines each new stage, the initial columns cancel, K=0 performs only predictor calls, and acceptance still returns U^k with cached endpoint values. Direct consumer formulas and all stage-call counts remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "other"
+    },
+    {
+      "id": "thm-collocation-one-step-stability",
+      "model": "gpt-6-luna",
+      "context_sha256": "51b3ca0640290977996f4ed3e15e02fb9f006ca8c9ddcbf8dca49580aae5937a",
+      "outcome": "false_positive",
+      "reason": "The negative-step algebraic counterexample is outside the actual collocation-stage interface: def-collocation-quadrature-tableau invokes the implicit Runge-Kutta equations of def-implicit-runge-kutta-stage-equations, whose Definition explicitly fixes h>0. That restriction already applied before the tableau clarification; negative-h algebraic roots are not admissible collocation branches here. With inherited h>0, subtraction gives d_stage<=d_start+hL norm(Q)d_stage, hence the factor 2, and endpoint subtraction gives 1+2hL norm(b). The original item bytes are restored; no mathematical carrier repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-one-node-gauss-collocation-order-two",
+      "model": "gpt-6-luna",
+      "context_sha256": "af2e59884e215c70263b5c7455c6d15d3c780f6c475b4a6fecf7178bee21c739",
+      "outcome": "confirmed_fatal",
+      "reason": "The original step 3.1 applied the global-error theorem without proving numerical endpoint containment in its tube. Preserved the order-two claim and made exact initialization explicit. Added a uniform compact convex neighborhood within the C2 domain, local midpoint stage balls with h B_+/2<=r and h L_+/2<=1/2, and a prefix error bootstrap. Stability and O(h^3) exact-start defect yield e_{n+1}<=(1+2L_+h)e_n+Ch^3; the discrete recurrence bounds e_n<=C_T h^2<r on every prefix, so every step exists and all stages and endpoints remain in the enlarged tube. Uniqueness by stage subtraction identifies this local solution with the assumed branch. No numerical-tube premise was added to bypass the gap. Final bootstrap phase is numbered 4.1 as required by precheck. Reexamined the unchanged mathematical effect of restoring the stability supplier: its inherited h>0 premise and the bound used here still hold. The <=1/2 condition is exactly the smallness premise needed for the factor-2 stability supplier.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "ex-sdc-two-node-gauss-nonstiff-cubic-ivp",
+      "model": "gpt-6-luna",
+      "context_sha256": "624dfd238829a846881c338adda30fa2fc21de447871de001d43c431055a5302",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The old title claimed an exact IVP solution, although a two-node collocation polynomial has degree at most two while the exact path is t^4/4. Renamed the title to assert the exact one-step endpoint. The proof correctly matches Gaussian and collocation cardinal weights by integral agreement and integrates the cubic field exactly, giving sum b_j c_j^3=1/4. The state-independent stage equations are finite and unique. No Statement or Definition changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-gauss-collocation-weighted-defect-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "4c73b6134ef9cc78463791454c869573d0ab9460a1cbe7fad1b295412eb755a9",
+      "outcome": "false_positive",
+      "reason": "The collocation polynomial u_h is the object defined through def-collocation-quadrature-tableau and def-implicit-runge-kutta-stage-equations; the latter already requires h>0. The scaled-derivative supplier also fixes its asymptotic branch as h decreases to zero from above in A1. Thus sufficiently small h<=h0 in this forward-step interface excludes negative h, and the odd-power norm bound is well signed. Checked the full weighted proof: P prime=-PB and e prime=Be-r give e(1)=h integral P(g-I_M g); P-q=O(h^M), interpolation error O(h^M), and Gauss Hermite remainder for qg yield the claimed O(h^(2M+1)). The original item bytes are restored; no edit is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-sdc-constant-predictor-too-few-sweeps",
+      "model": "gpt-6-luna",
+      "context_sha256": "e926499942a231bbf1f5a47f4fe45ccc6d73383ac7e6d45113aa3dfd3221eeac",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 misreported a guaranteed O(h) error bound as an upper limit on possible order. Corrected F3 and its use in step 2.1. Independently, the invariant stage ball [0,2u], q=h/2, exact initialization and exp bounds ensure the first residual check returns U0 and hence Euler endpoints (1+h)^n. Comparing binomial and exponential coefficients gives e-(1+1/N)^N>=1/(2N), so this actual example is not order two regardless of the generic theorem guarantee. The accepted residual is also >=h/2 and fails the h^3 target. Statement and Example are unchanged. Explicitly supplied the new true invariance flag; the already proved [0,2u] self-map inequality is its exact guarantee.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-sdc-inexact-midpoint-stage-residual",
+      "model": "gpt-6-luna",
+      "context_sha256": "6d8a40539aad66301da7d33fb954933083e4d102c905f7277df57e3284aa1a51",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The bare tableau did not specify an SDC preconditioner, so the Q_Delta=0 assertion lacked its actual algorithm prerequisite. Declared and cited the explicit-left-Euler sweep and specified that choice in Given, F5 and step 1.1. Its one-node strictly lower triangular block is zero and S(V)=1-(h/2)V, making S(V)-V=-G(V). The independent implicit-stage proof remains valid: [0,2] maps into [0.9,1], q=1/20, U*=20/21, |G(V)|=21/40000, and residual/(1-q)=21/38000<h^3. Endpoint error h/2000=1/20000<h^4 is a single-step estimate, with no global conclusion. No Statement or Definition changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-continuous-riemann-lebesgue-agreement",
+      "disposition": "repaired",
+      "post_sha256": "a59c81615a5514686c54d39d32cd6dc3629bc4a22fabd31b9018d4ec558efb33",
+      "review_context_sha256": "439c07c511ea0a4de7fe5bf2b419abe374bdd626f53b0eebec9dd055adcc0b93",
+      "reason": "Added the established Borel-to-Lebesgue inclusion supplier and its Countable Choice use. Finite left-sum comparison proves equality; Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-collocation-quadrature-tableau",
+      "disposition": "repaired",
+      "post_sha256": "53defb6493ccdf42cf66c46567e858c61d79b781648524efcc8e0e8c8e7a7032",
+      "review_context_sha256": "ddc80a6b5c9ae33db842e63df2aaeda4593471117aed5b65fb88076e5b007ab9",
+      "reason": "Explicit initial/time/positive-step and admissible-stage domains match the RK supplier. Integrated cardinal identities and coefficient definitions are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-explicit-left-euler-sdc-sweep",
+      "disposition": "repaired",
+      "post_sha256": "d296ce8bcfbd079c047fe11a4f745da3663917810cd6d5c8cb8251ec89606ea8",
+      "review_context_sha256": "9909fdcd2f3ae3e94b45c389c8a15880bc9a0ae2924f246c8feabeec10c32f35",
+      "reason": "Supplied Boolean invariance flag now determines the branch. Its true input guarantees the quantified inner self-map condition; recursion, cache and accepted U^k are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-collocation-one-step-stability",
+      "disposition": "unaffected",
+      "post_sha256": "29c392b2d4eb93852f572411c336ba204ae20190c919c93645fcb03c5ce01706",
+      "review_context_sha256": "4847a8c9ee2b2db9537c62131eed4a11d88cbd981340473bb6a57cabb89bb99b",
+      "reason": "The upstream RK Definition already requires h>0; the negative-step witness is inadmissible. Norm subtraction proves both bounds. Item guard unchanged; only contract citation mirrors and review explanation were reconciled.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    },
+    {
+      "id": "prop-one-node-gauss-collocation-order-two",
+      "disposition": "repaired",
+      "post_sha256": "b3c9233a78d3eb4cc134d7a1e4f02885ac939d8691973a5e730649bc35011885",
+      "review_context_sha256": "850b5bbfca47af83194bf5831069846f9d32ec943ce875fbcd667f0b90eef2ba",
+      "reason": "The compact-neighborhood stage construction and prefix recurrence bootstrap prove endpoint containment and uniform O(h^2) error from exact initialization. The strengthened hL_+/2<=1/2 premise supplies factor-2 stability.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-sdc-two-node-gauss-nonstiff-cubic-ivp",
+      "disposition": "repaired",
+      "post_sha256": "d6c80e2c9f103eb5063b12bcfee23d331e40578993f4b9ed43b72d7427388089",
+      "review_context_sha256": "8a04c874eb56265d0457a5fce1343c6818aaeaca795c8bc540590afd41a79312",
+      "reason": "Title now states exact endpoint integration. Cubic quadrature gives 1/4, while the quadratic collocation path need not equal t^4/4.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-gauss-collocation-weighted-defect-bound",
+      "disposition": "unaffected",
+      "post_sha256": "3b836e98d8c8bb4f78912061d398d5d3ec3688adb2d3c89b62c0222349c5d332",
+      "review_context_sha256": "bc09e142f5a5d47404978d165675c204bbe9c02ff8a9945bda207f496aa80cc1",
+      "reason": "The collocation polynomial inherits h>0 from the RK Definition; the scaled-derivative branch also takes h down to zero from above. Weighted cancellation proves the bound. Item guard unchanged; contract citation mirrors alone were reconciled.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    },
+    {
+      "id": "ex-sdc-constant-predictor-too-few-sweeps",
+      "disposition": "repaired",
+      "post_sha256": "c9c821d43f1da4c1a469e101529db779409ac472cebce92a91e8ce58bfa8c4b5",
+      "review_context_sha256": "d84e09ac2f8ab2edbc4a31945869412f3e6bed95d811ef069ee64002e49234a0",
+      "reason": "F3 now states an O(h) guarantee. The invariant-ball induction and independent binomial lower bound >=h/2 prove the example is not order two; the true invariance flag is supplied.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-sdc-inexact-midpoint-stage-residual",
+      "disposition": "repaired",
+      "post_sha256": "ac67c03f4bf7617c093b732b0139895f9c2acdafaf729d7898f23907d4ebfa2a",
+      "review_context_sha256": "a1a3e5fb2a2ab977877280bcb58ca6d61ef20f53304f399de99abace1a558256",
+      "reason": "Declared the explicit-left-Euler sweep giving Q_Delta=0. Verified invariant ball, update residual 21/40000, stage bound 21/38000<h^3 and endpoint error 1/20000.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-explicit-left-euler-sdc-sweep",
+    "ex-sdc-constant-predictor-too-few-sweeps",
+    "ex-sdc-cost-accounting-per-sweep",
+    "ex-sdc-inexact-midpoint-stage-residual",
+    "ex-sdc-one-node-gauss-stiff-iteration-diverges",
+    "ex-sdc-two-node-gauss-nonstiff-cubic-ivp",
+    "lem-collocation-polynomial-scaled-derivatives",
+    "lem-collocation-quadrature-matrix-well-defined",
+    "lem-gauss-collocation-weighted-defect-bound",
+    "lem-one-node-gauss-data-is-midpoint",
+    "lem-sdc-fixed-point-is-collocation-stage",
+    "lem-sdc-scalar-linear-iteration-matrix",
+    "lem-sdc-sweep-work-and-storage-bound",
+    "prop-one-node-gauss-collocation-order-two",
+    "thm-collocation-local-defect-order-m",
+    "thm-collocation-one-step-stability",
+    "thm-gauss-collocation-local-defect-order-2m",
+    "thm-sdc-finite-sweeps-raise-order",
+    "thm-sdc-residual-tolerance-preserves-order",
+    "thm-sdc-sweep-contraction-and-error-bound"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-continuous-riemann-lebesgue-agreement",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "Completed repair documented in the decision and current review for lem-continuous-riemann-lebesgue-agreement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-collocation-quadrature-tableau",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "Completed repair documented in the decision and current review for def-collocation-quadrature-tableau.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-explicit-left-euler-sdc-sweep",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "status": "fixed",
+      "reason": "Completed repair documented in the decision and current review for alg-explicit-left-euler-sdc-sweep.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-sdc-two-node-gauss-nonstiff-cubic-ivp",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "Completed repair documented in the decision and current review for ex-sdc-two-node-gauss-nonstiff-cubic-ivp.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-sdc-constant-predictor-too-few-sweeps",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "Completed repair documented in the decision and current review for ex-sdc-constant-predictor-too-few-sweeps.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-sdc-inexact-midpoint-stage-residual",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "Completed repair documented in the decision and current review for ex-sdc-inexact-midpoint-stage-residual.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "prop-one-node-gauss-collocation-order-two",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "reason": "Completed repair documented in the decision and current review for prop-one-node-gauss-collocation-order-two.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-sdc-finite-sweeps-raise-order",
+      "status": "open",
+      "route": "frontier-owner",
+      "affected_use": "items/thm-sdc-finite-sweeps-raise-order.md, Statement and proof step 3.1: the Statement supplies no initial-error hypothesis, while step 3.1 asserts The initial error is e_0=0.",
+      "invalidated_claim": "The stated global O(h^p) conclusion does not follow for arbitrary numerical initial data; y prime=0 with an initial offset retains that error under every sweep.",
+      "minimality": "Add exact initialization, or an O(h^p) initial-error premise, to the Statement and A1; inspect direct consumers only after that Statement change.",
+      "reason": "Confirmed the rejection-blind digest concern against the complete current theorem. This unassigned frontier item is read-only in unit 95; its local-defect and contraction proofs are not refuted. The assigned constant-predictor example explicitly starts at 1 and therefore satisfies the missing premise.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "complete for assigned scope; separate unassigned frontier-owner finding remains recorded",
+    "metadata_reconciliation": "The first four reviews were recorded before obtaining the busy shared lock. Acquired the lock, reread and synchronized only their assigned contract/manifest rows, checked each strict contract, released immediately, and reexamined their unchanged mathematics and supplier effects before recording these contexts.",
+    "original_guard_hashes": {
+      "ex-sdc-constant-predictor-too-few-sweeps": "9d311a196ce01652a5b1b00039a3ecc1b080bb436e3574dcbe3b5b36803ab1f2",
+      "lem-continuous-riemann-lebesgue-agreement": "20e533c55a7be180b5d10074df4f168f1cbad8a6b0c709f6491f56df301342af",
+      "lem-gauss-collocation-weighted-defect-bound": "3b836e98d8c8bb4f78912061d398d5d3ec3688adb2d3c89b62c0222349c5d332",
+      "ex-sdc-inexact-midpoint-stage-residual": "3dd0df3a1058b68eab791c552cd858a1c83a1623195ecf1a996739372cb07004",
+      "prop-one-node-gauss-collocation-order-two": "5bd505d285c3f59941eaccb6390268b329ae28d8aa895cd92148e0e1be03d5fd",
+      "alg-explicit-left-euler-sdc-sweep": "db2932b8a3d78a03cfef409c388124ad389f2be655418aefdb05be0c00328f15",
+      "def-collocation-quadrature-tableau": "05c5e82c049e09c7320415762d4a9672473c35361d6020667129d9971bb1cba2",
+      "ex-sdc-two-node-gauss-nonstiff-cubic-ivp": "336450cc357f8f3c84f527ea16f99a49a2d0ec67866275756e302f20f8cfbefa",
+      "thm-collocation-one-step-stability": "29c392b2d4eb93852f572411c336ba204ae20190c919c93645fcb03c5ce01706"
+    },
+    "validation_attempts": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts [seven changed item paths] --json",
+        "exit_code": 1,
+        "result": "Four proof carriers passed; the midpoint proposition required canonical final phase numbering 4.1 instead of 3.2. Adopted that exact numbering repair; two definition-like carriers are not applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs [seven changed item paths] --json",
+        "exit_code": 0,
+        "result": "7 checked; zero errors and warnings."
+      }
+    ],
+    "false_positive_restoration": "Exploratory sign-explicitness edits were fully reverted after checking the actual upstream h>0 domain. Both itemHashGuards match their frozen before hashes; neither false-positive item has a net source change.",
+    "changed_interfaces": [
+      "def-collocation-quadrature-tableau",
+      "alg-explicit-left-euler-sdc-sweep",
+      "prop-one-node-gauss-collocation-order-two"
+    ],
+    "published_ledger": "No potentially defective published supplier or consumer was identified in the examined interfaces. No published-ledger amendment or outside-consumer maintenance target is proposed.",
+    "independent_review": "These are author repair examinations and adjudications of the rejected inputs; no independent acceptance of these repairs is claimed.",
+    "source_reading": "Consulted the local item proofs and dependency statements named in the report and contracts. No external source text was consulted or claimed; these arguments are familiar. No new prerequisite item was needed.",
+    "pending_owner_obligations": [
+      "The unassigned frontier theorem thm-sdc-finite-sweeps-raise-order still requires the initialization clarification recorded in ledger_updates. Route to its frontier owner; unit 95 did not edit it."
+    ],
+    "interface_comparisons": {
+      "lem-continuous-riemann-lebesgue-agreement": {
+        "changed": false,
+        "before_section_text_sha256": "f2772373db8df5da7020ccb4342271f550c0d5ec85d436e8beea75d95f8fe27a",
+        "after_section_text_sha256": "f2772373db8df5da7020ccb4342271f550c0d5ec85d436e8beea75d95f8fe27a"
+      },
+      "def-collocation-quadrature-tableau": {
+        "changed": true,
+        "before_section_text_sha256": "151da961766d717d83ca3a2977689b2dfddab57dfb5d0b2ee33bf17ce4d6959f",
+        "after_section_text_sha256": "81c2f5933313f10dfb886b32acffa1e371679a7b3919b2a39985bd3b0a2473cc"
+      },
+      "alg-explicit-left-euler-sdc-sweep": {
+        "changed": true,
+        "before_section_text_sha256": "d38bfad6c40fd0b0e0974205276799020e3d1603d473ff409cc2624e36b46bea",
+        "after_section_text_sha256": "12982195ee0f538fdf394231f4b3e6940f93d7859fb9c2652581e79e8fcf8765"
+      },
+      "thm-collocation-one-step-stability": {
+        "changed": false,
+        "before_section_text_sha256": "54ecc8a1cc915443df1c09b8cebe35b2203c3ec4472dab846b1190936e62ce6d",
+        "after_section_text_sha256": "54ecc8a1cc915443df1c09b8cebe35b2203c3ec4472dab846b1190936e62ce6d"
+      },
+      "prop-one-node-gauss-collocation-order-two": {
+        "changed": true,
+        "before_section_text_sha256": "fbca5b1962d9d17109128445498c7c66323f50be0de022903e9322f8c5387d9f",
+        "after_section_text_sha256": "6e46b3497739c279ef6440b3be712cfb83708688c7a2c767f513be791fb7ac95"
+      },
+      "lem-gauss-collocation-weighted-defect-bound": {
+        "changed": false,
+        "before_section_text_sha256": "d1620062c92170ce3b0a4f140de532a31a8cbd60d986efa6ca571df0e3c04291",
+        "after_section_text_sha256": "d1620062c92170ce3b0a4f140de532a31a8cbd60d986efa6ca571df0e3c04291"
+      }
+    },
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-continuous-riemann-lebesgue-agreement.md items/def-collocation-quadrature-tableau.md items/alg-explicit-left-euler-sdc-sweep.md items/prop-one-node-gauss-collocation-order-two.md items/ex-sdc-two-node-gauss-nonstiff-cubic-ivp.md items/ex-sdc-constant-predictor-too-few-sweeps.md items/ex-sdc-inexact-midpoint-stage-residual.md --json",
+        "exit_code": 0,
+        "result": "Seven changed carriers: five proof-bearing items pass; definition and algorithm not applicable. After the final midpoint smallness clarification, its focused precheck also passes."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-continuous-riemann-lebesgue-agreement.md items/def-collocation-quadrature-tableau.md items/alg-explicit-left-euler-sdc-sweep.md items/prop-one-node-gauss-collocation-order-two.md items/ex-sdc-two-node-gauss-nonstiff-cubic-ivp.md items/ex-sdc-constant-predictor-too-few-sweeps.md items/ex-sdc-inexact-midpoint-stage-residual.md --json",
+        "exit_code": 0,
+        "result": "Seven changed carriers: zero errors and warnings. The final midpoint carrier was checked again after its final edit and also passed."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-continuous-riemann-lebesgue-agreement.md items/def-collocation-quadrature-tableau.md items/alg-explicit-left-euler-sdc-sweep.md items/prop-one-node-gauss-collocation-order-two.md items/ex-sdc-two-node-gauss-nonstiff-cubic-ivp.md items/ex-sdc-constant-predictor-too-few-sweeps.md items/ex-sdc-inexact-midpoint-stage-residual.md",
+        "exit_code": 0,
+        "result": "Final batched call after every item edit: 7 items, 17 steps, 0 defects."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-95.proof-contracts.json --strict --items lem-continuous-riemann-lebesgue-agreement,def-collocation-quadrature-tableau,alg-explicit-left-euler-sdc-sweep,thm-collocation-one-step-stability,prop-one-node-gauss-collocation-order-two,ex-sdc-two-node-gauss-nonstiff-cubic-ivp,lem-gauss-collocation-weighted-defect-bound,ex-sdc-constant-predictor-too-few-sweeps,ex-sdc-inexact-midpoint-stage-residual",
+        "exit_code": 0,
+        "result": "9/9 assigned contracts checked; zero errors and warnings after final metadata synchronization under the shared lock."
+      },
+      {
+        "command": "node tools/depcheck.mjs --items-file /tmp/step5-u95-items.json --json",
+        "exit_code": 0,
+        "result": "Focused selection is exactly the nine assigned IDs from initial-1.json. Zero errors/warnings; 751 prerequisite items and 351 reachable pages checked for cycles."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items lem-continuous-riemann-lebesgue-agreement,def-collocation-quadrature-tableau,alg-explicit-left-euler-sdc-sweep,thm-collocation-one-step-stability,prop-one-node-gauss-collocation-order-two,ex-sdc-two-node-gauss-nonstiff-cubic-ivp,lem-gauss-collocation-weighted-defect-bound,ex-sdc-constant-predictor-too-few-sweeps,ex-sdc-inexact-midpoint-stage-residual",
+        "exit_code": 0,
+        "result": "Final current hashes match every recorded review; no review was refreshed across an unexamined supplier change."
+      }
+    ],
+    "counts": {
+      "confirmed_fatal": 2,
+      "confirmed_nonfatal": 5,
+      "false_positive": 2,
+      "changed_items": 7,
+      "created_items": 0,
+      "downstream_items": 20
+    }
+  },
+  "downstream_reviews": [
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "lem-gauss-collocation-weighted-defect-bound",
+      "path": "items/lem-gauss-collocation-weighted-defect-bound.md",
+      "affected_use": "[F1] [[def-collocation-quadrature-tableau]]: $u_h(0)=y(t)$, $u_h'(s)=hI_Mg_h(s)$, and $u_h(1)$ is the collocation endpoint.",
+      "disposition": "assigned_review",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "ex-sdc-one-node-gauss-stiff-iteration-diverges",
+      "path": "items/ex-sdc-one-node-gauss-stiff-iteration-diverges.md",
+      "affected_use": "[F4] [[def-collocation-quadrature-tableau]]: the midpoint stage solves $U=1+(z/2)U$ and its endpoint is $1+zU$.",
+      "disposition": "unchanged_sound",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "alg-explicit-left-euler-sdc-sweep",
+      "path": "items/alg-explicit-left-euler-sdc-sweep.md",
+      "affected_use": "After validating the node data, form the collocation tableau $Q,b$ of [[def-collocation-quadrature-tableau]]. Let $c_0=0$, $\\Delta c_j=c_j-c_{j-1}$, and define the left-Euler node-subinterval preconditioner by its initial column $a_i=c_1$ and stage block",
+      "disposition": "assigned_review",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "thm-sdc-residual-tolerance-preserves-order",
+      "path": "items/thm-sdc-residual-tolerance-preserves-order.md",
+      "affected_use": "Fix $M$ nodes and an integer $1\\le p\\le M$. On a fixed interval use exact collocation stages $U_n^*$ and the collocation endpoint map $\\Psi_{h,n}$ of [[def-collocation-quadrature-tableau]]. Assume the hypotheses of [[thm-sdc-sweep-contraction-and-error-bound]] hold uniformly, with contraction constants $q_n\\le q_0<1$, the common field Lipschitz con",
+      "disposition": "unchanged_sound",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "lem-collocation-polynomial-scaled-derivatives",
+      "path": "items/lem-collocation-polynomial-scaled-derivatives.md",
+      "affected_use": "Fix $M$ distinct nodes in $[0,1]$, a time $t$, and an exact IVP solution $y$ on an interval $[t,t+h_0]$ for some $h_0>0$, with initial state $u=y(t)$. Let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open and let $f:D\\to\\mathbb R^d$ be defined on a neighborhood of a compact tube containing this exact trajectory and the collocation stages. Assume each ",
+      "disposition": "unchanged_sound",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "thm-sdc-finite-sweeps-raise-order",
+      "path": "items/thm-sdc-finite-sweeps-raise-order.md",
+      "affected_use": "[F1] [[def-collocation-quadrature-tableau]]: $U^*=\\mathbf1u+hQF(U^*)$ and the collocation endpoint is $u+h\\sum_jb_jF_j(U^*)$.",
+      "disposition": "unchanged_sound",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "thm-collocation-local-defect-order-m",
+      "path": "items/thm-collocation-local-defect-order-m.md",
+      "affected_use": "[F2] [[def-collocation-quadrature-tableau]]: $Q_{ij}=\\int_0^{c_i}\\ell_j(s)\\,ds$, $b_j=\\int_0^1\\ell_j(s)\\,ds$, and the endpoint is $u+h\\sum_jb_jF_j(U)$.",
+      "disposition": "unchanged_sound",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "ex-sdc-two-node-gauss-nonstiff-cubic-ivp",
+      "path": "items/ex-sdc-two-node-gauss-nonstiff-cubic-ivp.md",
+      "affected_use": "[F2] [[def-collocation-quadrature-tableau]]: the collocation endpoint is $y(0)+\\sum_{j=1}^2b_jc_j^3$ for this step, and its stages are finite because the right-hand side is independent of stage state.\n[F5] [[def-gauss-quadrature-rule]] and [[def-collocation-quadrature-tableau]]: Gaussian weights and collocation weights are integrals of the same car",
+      "disposition": "assigned_review",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "thm-collocation-one-step-stability",
+      "path": "items/thm-collocation-one-step-stability.md",
+      "affected_use": "[F1] [[def-collocation-quadrature-tableau]]: $U(u)=\\mathbf1u+hQF(U(u))$ and $\\Psi_h(u)=u+h\\sum_jb_jF_j(U(u))$.\n[F3] [[def-collocation-quadrature-tableau]] defines $\\|Q\\|_\\infty=\\max_i\\sum_j|Q_{ij}|$; [[lem-collocation-quadrature-matrix-well-defined]] proves its entries are finite.",
+      "disposition": "assigned_review",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "thm-sdc-sweep-contraction-and-error-bound",
+      "path": "items/thm-sdc-sweep-contraction-and-error-bound.md",
+      "affected_use": "[F5] [[def-collocation-quadrature-tableau]]: $\\|Q\\|_\\infty=\\max_i\\sum_j|Q_{ij}|$, and the row-sum norm satisfies $\\|AV\\|_{\\infty,2}\\le\\|A\\|_\\infty\\|V\\|_{\\infty,2}$ for block vectors.",
+      "disposition": "unchanged_sound",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "lem-sdc-scalar-linear-iteration-matrix",
+      "path": "items/lem-sdc-scalar-linear-iteration-matrix.md",
+      "affected_use": "The inverse exists for every real $z$ because $Q_\\Delta$ is strictly lower triangular. In the induced infinity norm from [[def-collocation-quadrature-tableau]], $\\|E^k\\|_{\\infty,2}\\le\\|B(z)\\|_\\infty^k\\|E^0\\|_{\\infty,2}$. This identity makes no convergence claim when the powers of $B(z)$ do not tend to zero; stability of the fully solved collocation",
+      "disposition": "unchanged_sound",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "lem-one-node-gauss-data-is-midpoint",
+      "path": "items/lem-one-node-gauss-data-is-midpoint.md",
+      "affected_use": "[F7] [[def-collocation-quadrature-tableau]]: the one-stage collocation coefficient is $Q_{11}=\\int_0^{c_1}\\ell_1(s)\\,ds$ and the endpoint weight is $b_1=\\int_0^1\\ell_1(s)\\,ds$.",
+      "disposition": "unchanged_sound",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "lem-collocation-quadrature-matrix-well-defined",
+      "path": "items/lem-collocation-quadrature-matrix-well-defined.md",
+      "affected_use": "For the distinct nodes and cardinal polynomials in [[def-collocation-quadrature-tableau]], every entry of $Q$, every component of $b$, and the Lebesgue constant $\\Lambda_M$ is a finite real number.\n**Given:** An integer $M\\ge1$ and distinct nodes $0\\le c_1<\\cdots<c_M\\le1$ as in [[def-collocation-quadrature-tableau]].",
+      "disposition": "unchanged_sound",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "lem-sdc-fixed-point-is-collocation-stage",
+      "path": "items/lem-sdc-fixed-point-is-collocation-stage.md",
+      "affected_use": "For an admissible stage vector $U$, the fixed-point equation for one sweep of [[alg-explicit-left-euler-sdc-sweep]] holds if and only if $U=\\mathbf1u+hQF(U)$, the collocation stage equation of [[def-collocation-quadrature-tableau]].\n[F1] [[def-collocation-quadrature-tableau]]: the collocation stage equation is $U=\\mathbf1u+hQF(U)$.",
+      "disposition": "unchanged_sound",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "thm-gauss-collocation-local-defect-order-2m",
+      "path": "items/thm-gauss-collocation-local-defect-order-2m.md",
+      "affected_use": "[F4] [[def-collocation-quadrature-tableau]] and [[lem-collocation-quadrature-matrix-well-defined]]: the resulting collocation coefficients and endpoint map are finite and defined.",
+      "disposition": "unchanged_sound",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-collocation-quadrature-tableau",
+      "id": "prop-one-node-gauss-collocation-order-two",
+      "path": "items/prop-one-node-gauss-collocation-order-two.md",
+      "affected_use": "[F2] [[def-collocation-quadrature-tableau]]: the one-stage equations are $U=u+hQ_{11}f(t+c_1h,U)$ and $Psi_h(u)=u+hb_1f(t+c_1h,U)$.",
+      "disposition": "assigned_review",
+      "reason": "The added admissibility clauses preserve the coefficient integrals and all stage/endpoint identities used here.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-explicit-left-euler-sdc-sweep",
+      "id": "ex-sdc-one-node-gauss-stiff-iteration-diverges",
+      "path": "items/ex-sdc-one-node-gauss-stiff-iteration-diverges.md",
+      "affected_use": "[F2] [[alg-explicit-left-euler-sdc-sweep]]: for one node $Q_\\Delta=0$.",
+      "disposition": "unchanged_sound",
+      "reason": "The new flag controls preliminary acceptance only; this use retains the same formal recursion, invariant-set premise or conditional call counts.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-explicit-left-euler-sdc-sweep",
+      "id": "thm-sdc-finite-sweeps-raise-order",
+      "path": "items/thm-sdc-finite-sweeps-raise-order.md",
+      "affected_use": "Fix $M\\ge1$ collocation nodes and a nonnegative integer $k$ independent of $h$. Use the explicit-left-Euler SDC sweep in [[alg-explicit-left-euler-sdc-sweep]] with constant predictor $U^0=\\mathbf1u$ and form the candidate endpoint from $U^k$, after $k$ completed sweeps. Assume each coordinate of $f$ has continuous partial derivatives through total ",
+      "disposition": "unchanged_sound",
+      "reason": "The new flag controls preliminary acceptance only; this use retains the same formal recursion, invariant-set premise or conditional call counts.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-explicit-left-euler-sdc-sweep",
+      "id": "ex-sdc-cost-accounting-per-sweep",
+      "path": "items/ex-sdc-cost-accounting-per-sweep.md",
+      "affected_use": "[F1] [[alg-explicit-left-euler-sdc-sweep]]: evaluate and cache the predictor derivatives, reuse old derivatives during each sweep, and apply the stated finite-budget and residual branches.",
+      "disposition": "unchanged_sound",
+      "reason": "The new flag controls preliminary acceptance only; this use retains the same formal recursion, invariant-set premise or conditional call counts.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-explicit-left-euler-sdc-sweep",
+      "id": "thm-sdc-sweep-contraction-and-error-bound",
+      "path": "items/thm-sdc-sweep-contraction-and-error-bound.md",
+      "affected_use": "If the initial iterate satisfies $U^0\\in\\mathcal C$, then the iterates $U^{k+1}=S(U^k)$ obey $\\|U^k-U^*\\|_{\\infty,2}\\le q^k\\|U^0-U^*\\|_{\\infty,2}$. In particular, a residual-certified predictor used with [[alg-explicit-left-euler-sdc-sweep]] must lie in $\\mathcal C$. These are local stage-iteration claims; they assert no convergence when either con",
+      "disposition": "unchanged_sound",
+      "reason": "The new flag controls preliminary acceptance only; this use retains the same formal recursion, invariant-set premise or conditional call counts.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-explicit-left-euler-sdc-sweep",
+      "id": "lem-sdc-scalar-linear-iteration-matrix",
+      "path": "items/lem-sdc-scalar-linear-iteration-matrix.md",
+      "affected_use": "For the scalar test equation $y'=\\lambda y$ and $z=h\\lambda$, let $U^*$ be a collocation stage vector and $U^k$ the SDC iterates using the explicit-left-Euler stage block $Q_\\Delta$ from [[alg-explicit-left-euler-sdc-sweep]]. Then\n[F1] [[alg-explicit-left-euler-sdc-sweep]]: the stage update is $U^{k+1}=\\mathbf1u+hQ_\\Delta F(U^{k+1})+h(Q-Q_\\Delta)F(",
+      "disposition": "unchanged_sound",
+      "reason": "The new flag controls preliminary acceptance only; this use retains the same formal recursion, invariant-set premise or conditional call counts.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-explicit-left-euler-sdc-sweep",
+      "id": "ex-sdc-constant-predictor-too-few-sweeps",
+      "path": "items/ex-sdc-constant-predictor-too-few-sweeps.md",
+      "affected_use": "[F1] [[alg-explicit-left-euler-sdc-sweep]]: the first update uses $Q_\\Delta=0$ for one node, computes $U^1$, and returns $U^0$ if $\\|U^1-U^0\\|\\le(1-q)\\mathrm{tol}$.\n[F12] [[lem-one-node-gauss-data-is-midpoint]] and [[alg-explicit-left-euler-sdc-sweep]]: for one-node Gauss data, $Q_{11}=1/2$ and $Q_\\Delta=0$, so at a start state $u$ the sweep map is",
+      "disposition": "assigned_review",
+      "reason": "The new flag controls preliminary acceptance only; this use retains the same formal recursion, invariant-set premise or conditional call counts.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-explicit-left-euler-sdc-sweep",
+      "id": "lem-sdc-sweep-work-and-storage-bound",
+      "path": "items/lem-sdc-sweep-work-and-storage-bound.md",
+      "affected_use": "Consider the procedure of [[alg-explicit-left-euler-sdc-sweep]] with $M,d\\ge1$ and budget $K\\ge0$. Count one **stage call** for each instructed evaluation of $F_j(U)=f(t+c_jh,U_j)$, even when different calls happen to have equal arguments. Generating the supplied predictor and constructing or checking external admissibility, set-membership or invar",
+      "disposition": "unchanged_sound",
+      "reason": "The new flag controls preliminary acceptance only; this use retains the same formal recursion, invariant-set premise or conditional call counts.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-explicit-left-euler-sdc-sweep",
+      "id": "lem-sdc-fixed-point-is-collocation-stage",
+      "path": "items/lem-sdc-fixed-point-is-collocation-stage.md",
+      "affected_use": "For an admissible stage vector $U$, the fixed-point equation for one sweep of [[alg-explicit-left-euler-sdc-sweep]] holds if and only if $U=\\mathbf1u+hQF(U)$, the collocation stage equation of [[def-collocation-quadrature-tableau]].\n[F2] [[alg-explicit-left-euler-sdc-sweep]]: the sweep is defined by $U^+=\\mathbf1u+h\\widehat Q_\\Delta\\widehat F(U^+)+",
+      "disposition": "unchanged_sound",
+      "reason": "The new flag controls preliminary acceptance only; this use retains the same formal recursion, invariant-set premise or conditional call counts.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "prop-one-node-gauss-collocation-order-two",
+      "id": "ex-sdc-inexact-midpoint-stage-residual",
+      "path": "items/ex-sdc-inexact-midpoint-stage-residual.md",
+      "affected_use": "[F1] [[prop-one-node-gauss-collocation-order-two]]: the exact collocation stage is the implicit midpoint stage and its method has order two under a common-tube smoothness assumption.",
+      "disposition": "assigned_review",
+      "reason": "This scalar IVP use satisfies exact initialization and smoothness; the tableau and order-two conclusion are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "prop-one-node-gauss-collocation-order-two",
+      "id": "ex-sdc-constant-predictor-too-few-sweeps",
+      "path": "items/ex-sdc-constant-predictor-too-few-sweeps.md",
+      "affected_use": "[F2] [[prop-one-node-gauss-collocation-order-two]]: the fully solved one-node Gauss method is implicit midpoint and has global order two on the stated smooth tube.",
+      "disposition": "assigned_review",
+      "reason": "This scalar IVP use satisfies exact initialization and smoothness; the tableau and order-two conclusion are unchanged.",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-explicit-left-euler-sdc-sweep",
+      "id": "ex-sdc-inexact-midpoint-stage-residual",
+      "path": "items/ex-sdc-inexact-midpoint-stage-residual.md",
+      "affected_use": "[F5] explicit-left-Euler Q_Delta is strictly lower triangular, hence zero for one node; Verification 1.1 uses S(V)=1-(h/2)V to identify S(V)-V=-G(V).",
+      "disposition": "assigned_review",
+      "reason": "The new flag controls preliminary acceptance only; this use retains the same formal recursion, invariant-set premise or conditional call counts.",
+      "route": "frontier-owner"
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/numerical-differential-equations-and-stochastic-dynamics/deferred-correction-and-collocation-iterations.md",
+      "affected_use": "The page defines a collocation tableau and explicit-left-Euler sweep, proves midpoint global order two and the weighted 2M Gauss endpoint estimate, and conditions iteration results on invariant stage sets.",
+      "disposition": "unchanged_sound",
+      "reason": "The domain and Boolean-input clarifications preserve these summarized claims. The midpoint proof now establishes rather than assumes the missing endpoint containment."
+    },
+    {
+      "path": "library/numerical-differential-equations-and-stochastic-dynamics/deferred-correction-and-collocation-iterations-examples.md",
+      "affected_use": "Summary says exact endpoint integration for a two-node Gauss cubic IVP and controlled update error from a small implicit-midpoint stage residual.",
+      "disposition": "unchanged_sound",
+      "reason": "The existing summary already limits exactness to endpoints and the residual example to a single solve, matching the repaired title and proof."
+    }
+  ]
+}

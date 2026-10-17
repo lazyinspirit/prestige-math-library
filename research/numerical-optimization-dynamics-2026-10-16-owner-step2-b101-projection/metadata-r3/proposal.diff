@@ -1,0 +1,608 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-101.pages.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-101.pages.json (proposed)
+@@ -60,6 +60,7 @@
+           "def-dual-space-of-a-normed-space",
+           "def-hilbert-space",
+           "def-l-p-space-as-a-quotient-by-null-functions",
++          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+           "def-pde-box-control-set",
+           "def-wkp-zero-as-a-sobolev-closure"
+         ],
+@@ -74,6 +75,7 @@
+         "title": "A bounded sequence in a separable Hilbert space has a weakly convergent subsequence",
+         "deps": [
+           "def-countable-choice",
++          "def-countable",
+           "def-hilbert-space",
+           "def-separable-space",
+           "thm-cauchy-schwarz-in-an-inner-product-space",
+@@ -99,6 +101,12 @@
+           "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+           "def-countable-choice",
+           "def-linear-elliptic-pde-constrained-control-problem",
++          "def-sobolev-space-wkp-and-its-norm",
++          "def-wkp-zero-as-a-sobolev-closure",
++          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
++          "lem-weak-derivatives-are-unique-almost-everywhere",
++          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
++          "thm-cauchy-schwarz-in-an-inner-product-space",
+           "thm-lax-milgram"
+         ],
+         "dependency_level": 2
+--- research/numerical-optimization-dynamics-2026-10-16-batch-101.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-101.proof-contracts.json (proposed)
+@@ -157,7 +157,7 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
++          "id": "step-2-1",
+           "claim": "Let $\\mathcal S$ be the countable dense rational box-step family from [F1]. The set $R(\\mathcal S)$ is countable. For $q\\in L^2(E)$, choose any $\\varepsilon>0$ and extend it by $Zq$. By density there is $s\\in\\mathcal S$ with $\\|Zq-s\\|_{L^2(\\mathbb R^d)}<\\varepsilon$; then $\\|q-Rs\\|_{L^2(E)}=\\|R(Zq-s)\\|_2\\le\\|Zq-s\\|_2<\\varepsilon$. Thus $R(\\mathcal S)$ is dense in $L^2(E)$, proving separability.",
+           "step": "2.1",
+           "inputs": [
+@@ -167,7 +167,7 @@
+           ]
+         },
+         {
+-          "id": "step-2-1",
++          "id": "step-3-1",
+           "claim": "The integral pairing makes $L^2(E)$ a real Hilbert space by [F3], so it is both separable and Hilbert. Countable Choice is the only stated choice principle in [F1] and [F3].",
+           "step": "3.1",
+           "inputs": [
+@@ -246,7 +246,7 @@
+           "source_section": "Statement",
+           "quote": "For each $k \\in \\mathbb{N}$ let $I_k = [a_k, b_k]$ be a closed bounded interval\nwith $a_k \\le b_k$ ([[def-interval]]), and suppose the family is **nested**:\n\n$$I_{k+1} \\subseteq I_k \\qquad (k \\in \\mathbb{N}).$$\n\nWrite $\\ell_k = b_k - a_k \\ge 0$ for the length of $I_k$. Then:\n\n1. $\\displaystyle\\bigcap_{k \\in \\mathbb{N}} I_k$ is **nonempty**. More precisely,\n   with $a = \\sup\\{a_k : k \\in \\mathbb{N}\\}$ and\n   $b = \\inf\\{b_k : k \\in \\mathbb{N}\\}$, both of which exist, one has $a \\le b$\n   and $$\\bigcap_{k \\in \\mathbb{N}} I_k = [a, b].$$\n2. $\\displaystyle\\bigcap_{k \\in \\mathbb{N}} I_k$ is a **single point** if and only\n   if $\\ell_k \\to 0$ ([[def-real-limit]]).\n\nEvery hypothesis is load bearing. Dropping closedness makes the intersection\nempty; dropping boundedness does the same; and dropping nonemptiness of the\nindividual intervals is vacuously fatal.",
+           "uses": [
+-            "1.1"
++            "1.2"
+           ]
+         },
+         {
+@@ -281,8 +281,18 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
++          "claim": "By separability choose a dense subset $D\\subseteq H$ that is at most countable. It is nonempty because $H$ contains $0$. If $D$ is finite, a finite listing from its bijection with a natural number, repeated periodically, gives a sequence; if $D$ is countably infinite, a bijection with $\\mathbb N$ gives a sequence. Thus [F4] supplies a dense sequence $(v_j)_{j\\ge1}$ without any choice principle beyond the witnesses in the definition of countability.",
++          "step": "1.1",
++          "inputs": [
++            "F4",
++            "given",
++            "choose"
++          ]
++        },
++        {
++          "id": "step-1-2",
++          "step": "1.2",
+           "claim": "For any bounded real sequence $(a_k)$ in $[-R,R]$, start with $I_0=[-R,R]$. At each stage split the current interval into its two closed halves and choose the left half if it contains infinitely many terms of the current sequence, and otherwise choose the right half. At least one half contains infinitely many terms. Choose the least index later than the preceding selected index whose term lies in the chosen half. The resulting nested intervals have lengths tending to zero, so [F1] gives a common point, and the selected subsequence converges to it. Every choice in this construction is the least natural index or the leftmost of two alternatives, so the extraction is determined by its input sequence.",
+-          "step": "1.1",
+           "inputs": [
+             "F1",
+             "given",
+@@ -290,23 +300,25 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
+-          "claim": "For each $j$, the scalar sequence $\\langle x_n,v_j\\rangle_H$ is bounded by $C\\|v_j\\|_H$ by [F3]. Apply the deterministic extraction in step 1.1 successively to these coordinate sequences, each time inside the previously obtained subsequence. This recursive rule produces nested infinite subsequences $N_1\\supseteq N_2\\supseteq\\cdots$ on which the first, first two, and then first $j$ pairings converge, respectively. Let $n_k$ be the $k$th index of $N_k$. Nestedness makes $(n_k)$ strictly increasing, and for each fixed $j$ the sequence $\\langle x_{n_k},v_j\\rangle_H$ converges because its tail is a subsequence of $N_j$.",
++          "id": "step-2-1",
++          "claim": "For each $j$, the scalar sequence $\\langle x_n,v_j\\rangle_H$ is bounded by $C\\|v_j\\|_H$ by [F3]. Apply the deterministic extraction in step 1.2 successively to these coordinate sequences, each time inside the previously obtained subsequence. This recursive rule produces nested infinite subsequences $N_1\\supseteq N_2\\supseteq\\cdots$ on which the first, first two, and then first $j$ pairings converge, respectively. Let $n_k$ be the $k$th index of $N_k$. Nestedness makes $(n_k)$ strictly increasing, and for each fixed $j$ the sequence $\\langle x_{n_k},v_j\\rangle_H$ converges because its tail is a subsequence of $N_j$.",
+           "step": "2.1",
+           "inputs": [
+             "F3",
+             "step 1.1",
++            "step 1.2",
+             "given",
+             "construct"
+           ]
+         },
+         {
+-          "id": "step-2-1",
++          "id": "step-3-1",
+           "claim": "For any $v\\in H$, choose $v_j$ arbitrarily close to $v$. For indices $k,\\ell$, [F3] gives $|\\langle x_{n_k}-x_{n_\\ell},v\\rangle_H| \\le |\\langle x_{n_k}-x_{n_\\ell},v_j\\rangle_H|+2C\\|v-v_j\\|_H.$ The first term tends to zero as $k,\\ell\\to\\infty$ for fixed $j$, and the second can be made arbitrarily small by density. Thus $\\langle x_{n_k},v\\rangle_H$ converges for every $v$. Its limit $L(v)$ is linear and satisfies $|L(v)|\\le C\\|v\\|_H$, so $L$ is a bounded linear functional. By [F2] there is a unique $x\\in H$ with $L(v)=\\langle x,v\\rangle_H$ for all $v$. Therefore $x_{n_k}\\rightharpoonup x$.",
+           "step": "3.1",
+           "inputs": [
+             "F2",
+             "F3",
++            "step 1.1",
+             "step 2.1",
+             "given",
+             "algebra"
+@@ -400,7 +412,7 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
++          "id": "step-2-1",
+           "claim": "Apply the same argument to $B=\\{x:q(x)>q_b(x)\\}$ and $B_m=\\{x:q(x)\\ge q_b(x)+1/m\\}$. Weak convergence gives $\\int_{B_m}(q-q_b)=\\lim_n\\int_{B_m}(q_n-q_b)\\le0$, while the defining inequality on $B_m$ makes this integral at least $\\mu(B_m)/m>0$ if $B_m$ has positive measure. Thus $q\\le q_b$ almost everywhere, and [F1] gives $q\\in Q_{ad}$.",
+           "step": "2.1",
+           "inputs": [
+@@ -470,10 +482,10 @@
+           "fact": "F1",
+           "source": "def-linear-elliptic-pde-constrained-control-problem",
+           "source_section": "Definition",
+-          "quote": "Let $\\Omega\\subset\\mathbb R^d$ be a bounded Lipschitz domain, $V=H^1_0(\\Omega;\\mathbb R)$, and $H=L^2(\\Omega;\\mathbb R)$, with the continuous inclusion $J:V\\to H$. Let $E\\subseteq\\Omega$ be bounded and measurable, $U=L^2(E;\\mathbb R)$, and let $Q_{ad}\\subset U$ be the pointwise box of [[def-pde-box-control-set]]. Let $a:V\\times V\\to\\mathbb R$ be bilinear, bounded with constant $M$, and coercive with constant $\\beta>0$; symmetry is not assumed. Let $B:U\\to V^*$ be bounded and linear, and fix $f\\in V^*$, $u_d\\in H$, and $\\alpha>0$.\n\nFor $q\\in Q_{ad}$, the **state** $u(q)\\in V$ is required to satisfy\n$$\na(u(q),v)=\\langle f+Bq,v\\rangle_{V^*,V}\\qquad(v\\in V).\n$$\nThe reduced objective is\n$$\n\\widehat J(q)=\\frac12\\|Ju(q)-u_d\\|_H^2+\\frac\\alpha2\\|q\\|_U^2.\n$$\nA spatially varying coefficient, boundary control, variational crimes, finite-element control discretization, and parabolic evolution are separate hypotheses or branches; none is implicit in this definition. The state well-definedness is supplied by [[thm-linear-elliptic-control-state-and-adjoint-wellposedness]].",
+-          "uses": [
+-            "1.1",
+-            "2.1"
++          "quote": "Let $\\Omega\\subset\\mathbb R^d$ be a bounded Lipschitz domain, $V=H^1_0(\\Omega;\\mathbb R)$, and $H=L^2(\\Omega;\\mathbb R)$. Use the real integral pairing on $H$. Equip $V$ with the standard full Sobolev inner product and norm\n$$\n(v,w)_V=(v,w)_H+\\sum_{i=1}^d(D_i v,D_i w)_H,\\qquad\n\\|v\\|_V^2=\\|v\\|_H^2+\\sum_{i=1}^d\\|D_i v\\|_H^2.\n$$\nHere $H^1_0=W^{1,2}_0$ is the closure of $C_c^\\infty(\\Omega;\\mathbb R)$ in the $W^{1,2}$ norm of [[def-wkp-zero-as-a-sobolev-closure]]. Under Countable Choice, $H$ and $V$ are real Hilbert spaces; the local proof of completeness of $V$ is included in [[thm-linear-elliptic-control-state-and-adjoint-wellposedness]]. The inclusion $J:V\\to H$ is continuous with $\\|J\\|\\le1$.\n\nLet $E\\subseteq\\Omega$ be bounded and measurable, $U=L^2(E;\\mathbb R)$ with its real integral inner product, and let $Q_{ad}\\subset U$ be the pointwise box of [[def-pde-box-control-set]]. Under Countable Choice, $U$ is a real Hilbert space by [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. Let $a:V\\times V\\to\\mathbb R$ be bilinear, bounded with constant $M$, and coercive with constant $\\beta>0$ in the stated $V$ norm; symmetry is not assumed. Let $B:U\\to V^*$ be bounded and linear, and fix $f\\in V^*$, $u_d\\in H$, and $\\alpha>0$.\n\nFor every $q\\in U$, the **state** $u(q)\\in V$ is required to satisfy\n$$\na(u(q),v)=\\langle f+Bq,v\\rangle_{V^*,V}\\qquad(v\\in V).\n$$\nThe reduced objective, defined on all of $U$ and minimized over $Q_{ad}$, is\n$$\n\\widehat J(q)=\\frac12\\|Ju(q)-u_d\\|_H^2+\\frac\\alpha2\\|q\\|_U^2.\n$$\nA spatially varying coefficient, boundary control, variational crimes, finite-element control discretization, and parabolic evolution are separate hypotheses or branches; none is implicit in this definition. The state well-definedness is supplied by [[thm-linear-elliptic-control-state-and-adjoint-wellposedness]].",
++          "uses": [
++            "2.1",
++            "2.2"
+           ]
+         },
+         {
+@@ -482,8 +494,8 @@
+           "source_section": "Definition",
+           "quote": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.",
+           "uses": [
+-            "1.1",
+-            "2.1"
++            "2.1",
++            "2.2"
+           ]
+         },
+         {
+@@ -492,8 +504,9 @@
+           "source_section": "Statement",
+           "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a real or complex Hilbert space, let $a$ be a bounded coercive sesquilinear form on $H$ with constants $M,\\alpha$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F:H\\to\\mathbb K$ be a bounded conjugate-linear functional with norm $\\|F\\|=\\sup_{\\|v\\|\\le1}|F(v)|$. Then there is a unique $u\\in H$ with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H,$$ and it satisfies $\\alpha\\|u\\|\\le\\|F\\|$, that is $\\|u\\|\\le\\|F\\|/\\alpha$. The real bilinear case is the same statement with $a$ symmetric or not, $F$ a bounded linear functional, and the conjugation read as the identity.",
+           "uses": [
+-            "1.1",
+-            "2.1"
++            "2.1",
++            "2.2",
++            "3.1"
+           ]
+         },
+         {
+@@ -502,32 +515,82 @@
+           "source_section": "Definition",
+           "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+           "uses": [
+-            "1.1",
+-            "2.1"
++            "2.1",
++            "2.2",
++            "3.1"
+           ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "For fixed $q$, the functional $F_q(v)=\\langle f+Bq,v\\rangle$ is bounded and linear, with $\\|F_q\\|_{V^*}\\le\\|f+Bq\\|_{V^*}$. Apply [F2] to $a$ and $F_q$; this gives the unique state and the stated bound.",
++          "claim": "The weak-derivative test identities are linear, and [F4] makes each derivative coordinate intrinsic, so $W^{1,2}(\\Omega;\\mathbb R)$ is a vector space with the inner product induced from $L^2(\\Omega)^{d+1}$; it induces the displayed full Sobolev norm and is definite because its zeroth coordinate is $v$. Let $(v_n)$ be Cauchy in this norm. Its function coordinates and each of its finitely many weak-derivative coordinates are Cauchy in $L^2(\\Omega)$ because each coordinate norm is bounded by the full $W^{1,2}$ norm. By [F3], there are $v,g_1,\\ldots,g_d\\in L^2(\\Omega)$ with $v_n\\to v$ and $D_i v_n\\to g_i$ in $L^2$ for each $i$.",
+           "step": "1.1",
+           "inputs": [
++            "F3",
++            "F4",
++            "given",
++            "construct",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-1-2",
++          "step": "1.2",
++          "claim": "For every $\\varphi\\in C_c^\\infty(\\Omega)$ and $i$, the weak-derivative identity for $v_n$ is $\\int_\\Omega v_nD_i\\varphi=-\\int_\\Omega (D_i v_n)\\varphi$. By [F5], both test functions are in $L^2$; Cauchy–Schwarz lets both integrals pass to the limits in [F3], giving $\\int_\\Omega vD_i\\varphi=-\\int_\\Omega g_i\\varphi$. Thus each $g_i$ is a weak derivative of $v$. By uniqueness in [F4], $D_i v=g_i$ as an $L^2$ class, and the component convergences from step 1.1 give $v_n\\to v$ in the full $W^{1,2}$ norm. Hence $W^{1,2}(\\Omega;\\mathbb R)$ is complete.",
++          "inputs": [
++            "F3",
++            "F4",
++            "F5",
++            "step 1.1",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-1-3",
++          "step": "1.3",
++          "claim": "By [F4], $V=H^1_0(\\Omega;\\mathbb R)$ is the closure of the linear space $C_c^\\infty(\\Omega;\\mathbb R)$ in $W^{1,2}$. It is therefore a closed linear subspace of that complete space, and the inherited inner product is exactly the one in [[def-linear-elliptic-pde-constrained-control-problem]]. Thus $V$ is a real Hilbert space under Countable Choice.",
++          "inputs": [
++            "F4",
++            "step 1.2",
++            "given"
++          ]
++        },
++        {
++          "id": "step-2-1",
++          "claim": "For fixed $q$, the functional $F_q(v)=\\langle f+Bq,v\\rangle$ is bounded and linear, with $\\|F_q\\|_{V^*}\\le\\|f+Bq\\|_{V^*}$. Applying [F2] to $a$ and $F_q$ now gives the unique state and the stated bound.",
++          "step": "2.1",
++          "inputs": [
+             "F1",
+             "F2",
++            "step 1.3",
+             "given"
+           ]
+         },
+         {
+-          "id": "step-1-2",
++          "id": "step-2-2",
++          "step": "2.2",
+           "claim": "Define the adjoint form $a^*(p,v):=a(v,p)$. It is bounded with the same constant $M$, and $a^*(p,p)=a(p,p)\\ge\\beta\\|p\\|_V^2$, so it is coercive with the same $\\beta$. The functional $G_q(v)=(Ju(q)-u_d,Jv)_H$ is bounded by $\\|J\\|\\|Ju(q)-u_d\\|_H\\|v\\|_V$. Apply [F2] to $a^*$ and $G_q$; the result is the unique $p(q)$ with $a(v,p(q))=G_q(v)$ and the stated bound. No symmetry of $a$ is used.",
+-          "step": "2.1",
+           "inputs": [
+             "F1",
+             "F2",
++            "step 2.1",
++            "given",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-3-1",
++          "step": "3.1",
++          "claim": "Steps 1.1–1.3 establish the real Hilbert structure required by [F2] using Countable Choice through the real $L^2$ completeness result [F3]. Steps 2.1–2.2 give the state, adjoint, uniqueness, and both estimates.",
++          "inputs": [
++            "F2",
++            "F3",
+             "step 1.1",
+-            "given",
+-            "algebra"
++            "step 1.2",
++            "step 1.3",
++            "step 2.1",
++            "step 2.2"
+           ]
+         }
+       ],
+@@ -656,7 +719,7 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
++          "id": "step-2-1",
+           "claim": "Expanding the two squared norms in $\\widehat J(q+h)$ yields $\\widehat J(q+h)-\\widehat J(q) =(Ju(q)-u_d,Jw_h)_H+\\alpha(q,h)_U+\\frac12\\|Sh\\|_H^2+\\frac\\alpha2\\|h\\|_U^2.$ The adjoint equation with $v=w_h$ and the state variation equation with test $p(q)$ give $(Ju(q)-u_d,Jw_h)_H=a(w_h,p(q))=\\langle Bh,p(q)\\rangle=(B^*p(q),h)_U$. The last two terms are bounded by a constant times $\\|h\\|_U^2$, so the Fréchet derivative is $B^*p(q)+\\alpha q$.",
+           "step": "2.1",
+           "inputs": [
+@@ -668,7 +731,7 @@
+           ]
+         },
+         {
+-          "id": "step-2-1",
++          "id": "step-3-1",
+           "claim": "Since the state map is affine with linear part $S$, the same exact expansion at any $q$ shows the second derivative is $D^2\\widehat J[h,k]=(Sh,Sk)_H+\\alpha(h,k)_U$, represented by $S^*S+\\alpha I$. Hence $((S^*S+\\alpha I)h,h)=\\|Sh\\|_H^2+\\alpha\\|h\\|_U^2\\ge\\alpha\\|h\\|_U^2$ and $\\|S^*S+\\alpha I\\|\\le\\|S\\|^2+\\alpha$. The constant Hessian gives the stated Lipschitz-gradient bound; the exact quadratic expansion gives strong convexity.",
+           "step": "3.1",
+           "inputs": [
+@@ -827,7 +890,7 @@
+           ]
+         },
+         {
+-          "id": "step-2-1",
++          "id": "step-1-2",
+           "claim": "If $q_*$ minimizes, fix $v\\in Q_{ad}$. Convexity gives $q_*+t(v-q_*)\\in Q_{ad}$ for $0\\le t\\le1$. Minimality makes the right directional quotient nonnegative for every $t>0$; letting $t\\downarrow0$ and using [F4] proves the variational inequality.",
+           "step": "1.2",
+           "inputs": [
+@@ -837,7 +900,7 @@
+           ]
+         },
+         {
+-          "id": "step-2-2",
++          "id": "step-2-1",
+           "claim": "Write $Ju(q_n)-u_d=J u(0)-u_d+S q_n$. Bounded linear maps preserve weak convergence, so along the subsequence this state residual converges weakly in $H$ to $Ju(q)-u_d$; the controls converge weakly in $U$. The Hilbert norm is weakly lower semicontinuous: if $z\\ne0$, then $\\|z_n\\|\\ge |(z_n,z/\\|z\\|)|\\to\\|z\\|$, while the case $z=0$ is immediate. Applying this to both squared norms in $\\widehat J$ gives $\\widehat J(q)\\le\\liminf_n\\widehat J(q_n)=m$. Thus $q$ attains the infimum.",
+           "step": "2.1",
+           "inputs": [
+@@ -859,7 +922,7 @@
+           ]
+         },
+         {
+-          "id": "step-3-2",
++          "id": "step-4-1",
+           "claim": "Conversely, if $q$ satisfies the variational inequality, then for every $v\\in Q_{ad}$ the exact expansion [F3] gives $\\widehat J(v)-\\widehat J(q)=(B^*p(q)+\\alpha q,v-q)_U+\\frac12\\|S(v-q)\\|_H^2+\\frac\\alpha2\\|v-q\\|_U^2\\ge0.$ Thus $q$ is a minimizer; step 3.1 gives uniqueness.",
+           "step": "4.1",
+           "inputs": [
+@@ -960,7 +1023,7 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
++          "id": "step-2-1",
+           "claim": "For any $v\\in Q_{ad}$, $\\|v-r\\|_2^2-\\|q-r\\|_2^2 =\\|v-q\\|_2^2+2(q-r,v-q)_2\\ge\\|v-q\\|_2^2.$ Thus $q$ minimizes the distance and equality can hold only when $v=q$ in $L^2$. Conversely, if $q$ is a distance minimizer, then for any $v\\in Q_{ad}$ and $0<t\\le1$, $q+t(v-q)\\in Q_{ad}$. Expanding $\\|q+t(v-q)-r\\|_2^2\\ge\\|q-r\\|_2^2$, dividing by $2t$, and letting $t\\downarrow0$ gives $(q-r,v-q)_2\\ge0$.",
+           "step": "2.1",
+           "inputs": [
+@@ -1059,7 +1122,7 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
++          "id": "step-2-1",
+           "claim": "By the explicit formula in [F2], the projection is pointwise clipping to $[q_a(x),q_b(x)]$ almost everywhere. Substitution gives the displayed formula.",
+           "step": "2.1",
+           "inputs": [
+@@ -1174,7 +1237,7 @@
+           ]
+         },
+         {
+-          "id": "step-2-1",
++          "id": "step-1-2",
+           "claim": "Fix a cell $K$ with affine map $F_K(\\hat x)=b_K+A_K\\hat x$ and write $\\hat q=q\\circ F_K$. Change of variables gives $(\\Pi_hq)|_K\\circ F_K=\\hat q_{\\widehat S_d}$, the mean of $\\hat q$ on the reference simplex. By [F3], $\\|q-\\Pi_hq\\|_{L^2(K)} =|\\det A_K|^{1/2}\\|\\hat q-\\hat q_{\\widehat S_d}\\|_{L^2(\\widehat S_d)} \\le C|\\det A_K|^{1/2}|\\hat q|_{H^1(\\widehat S_d)}.$ By [F2], $|\\hat q|_{H^1(\\widehat S_d)}\\le C\\|A_K\\||\\det A_K|^{-1/2}|q|_{H^1(K)}$, and $\\|A_K\\|\\le C_d h_K$ from the fixed reference simplex geometry. Thus $\\|q-\\Pi_hq\\|_{L^2(K)}\\le C h_K|q|_{H^1(K)}$.",
+           "step": "1.2",
+           "inputs": [
+@@ -1187,7 +1250,7 @@
+           ]
+         },
+         {
+-          "id": "step-3-1",
++          "id": "step-2-1",
+           "claim": "Square the cell estimates in step 1.2 and sum over cells; cell interiors are disjoint and omitted facets have measure zero. Since $h_K\\le h$, the sum is at most $C^2h^2|q|_{H^1(E)}^2$. Taking square roots proves the global bound.",
+           "step": "2.1",
+           "inputs": [
+@@ -1265,7 +1328,7 @@
+           "fact": "F1",
+           "source": "def-linear-elliptic-pde-constrained-control-problem",
+           "source_section": "Definition",
+-          "quote": "Let $\\Omega\\subset\\mathbb R^d$ be a bounded Lipschitz domain, $V=H^1_0(\\Omega;\\mathbb R)$, and $H=L^2(\\Omega;\\mathbb R)$, with the continuous inclusion $J:V\\to H$. Let $E\\subseteq\\Omega$ be bounded and measurable, $U=L^2(E;\\mathbb R)$, and let $Q_{ad}\\subset U$ be the pointwise box of [[def-pde-box-control-set]]. Let $a:V\\times V\\to\\mathbb R$ be bilinear, bounded with constant $M$, and coercive with constant $\\beta>0$; symmetry is not assumed. Let $B:U\\to V^*$ be bounded and linear, and fix $f\\in V^*$, $u_d\\in H$, and $\\alpha>0$.\n\nFor $q\\in Q_{ad}$, the **state** $u(q)\\in V$ is required to satisfy\n$$\na(u(q),v)=\\langle f+Bq,v\\rangle_{V^*,V}\\qquad(v\\in V).\n$$\nThe reduced objective is\n$$\n\\widehat J(q)=\\frac12\\|Ju(q)-u_d\\|_H^2+\\frac\\alpha2\\|q\\|_U^2.\n$$\nA spatially varying coefficient, boundary control, variational crimes, finite-element control discretization, and parabolic evolution are separate hypotheses or branches; none is implicit in this definition. The state well-definedness is supplied by [[thm-linear-elliptic-control-state-and-adjoint-wellposedness]].",
++          "quote": "Let $\\Omega\\subset\\mathbb R^d$ be a bounded Lipschitz domain, $V=H^1_0(\\Omega;\\mathbb R)$, and $H=L^2(\\Omega;\\mathbb R)$. Use the real integral pairing on $H$. Equip $V$ with the standard full Sobolev inner product and norm\n$$\n(v,w)_V=(v,w)_H+\\sum_{i=1}^d(D_i v,D_i w)_H,\\qquad\n\\|v\\|_V^2=\\|v\\|_H^2+\\sum_{i=1}^d\\|D_i v\\|_H^2.\n$$\nHere $H^1_0=W^{1,2}_0$ is the closure of $C_c^\\infty(\\Omega;\\mathbb R)$ in the $W^{1,2}$ norm of [[def-wkp-zero-as-a-sobolev-closure]]. Under Countable Choice, $H$ and $V$ are real Hilbert spaces; the local proof of completeness of $V$ is included in [[thm-linear-elliptic-control-state-and-adjoint-wellposedness]]. The inclusion $J:V\\to H$ is continuous with $\\|J\\|\\le1$.\n\nLet $E\\subseteq\\Omega$ be bounded and measurable, $U=L^2(E;\\mathbb R)$ with its real integral inner product, and let $Q_{ad}\\subset U$ be the pointwise box of [[def-pde-box-control-set]]. Under Countable Choice, $U$ is a real Hilbert space by [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. Let $a:V\\times V\\to\\mathbb R$ be bilinear, bounded with constant $M$, and coercive with constant $\\beta>0$ in the stated $V$ norm; symmetry is not assumed. Let $B:U\\to V^*$ be bounded and linear, and fix $f\\in V^*$, $u_d\\in H$, and $\\alpha>0$.\n\nFor every $q\\in U$, the **state** $u(q)\\in V$ is required to satisfy\n$$\na(u(q),v)=\\langle f+Bq,v\\rangle_{V^*,V}\\qquad(v\\in V).\n$$\nThe reduced objective, defined on all of $U$ and minimized over $Q_{ad}$, is\n$$\n\\widehat J(q)=\\frac12\\|Ju(q)-u_d\\|_H^2+\\frac\\alpha2\\|q\\|_U^2.\n$$\nA spatially varying coefficient, boundary control, variational crimes, finite-element control discretization, and parabolic evolution are separate hypotheses or branches; none is implicit in this definition. The state well-definedness is supplied by [[thm-linear-elliptic-control-state-and-adjoint-wellposedness]].",
+           "uses": [
+             "1.1"
+           ]
+@@ -1311,7 +1374,7 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
++          "id": "step-2-1",
+           "claim": "The exact reduced gradient is $B^*p+\\alpha q$ by [F3], and the computed one is $B^*\\tilde p+\\alpha q$. Therefore $\\|\\nabla\\widehat J(q)-(B^*\\tilde p+\\alpha q)\\|_U =\\|B^*(p-\\tilde p)\\|_U \\le\\|B\\|\\,\\|p-\\tilde p\\|_V \\le\\|B\\|\\,\\varepsilon_p.$ The displayed certificate includes every Strang approximation and consistency term used to form $\\varepsilon_p$.",
+           "step": "2.1",
+           "inputs": [
+@@ -1539,58 +1602,48 @@
+           "source": "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+           "source_section": "Statement",
+           "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space and let\n$a:V\\times V\\to\\mathbb K$ be linear in its first argument, conjugate-linear\nin its second, bounded by $M$, and coercive with constant $\\alpha>0$:\n$$|a(v,w)|\\le M\\|v\\|_V\\|w\\|_V,\\qquad \\operatorname{Re}a(v,v)\\ge\\alpha\\|v\\|_V^2.$$\nLet $F:V\\to\\mathbb K$ be bounded and conjugate-linear, and let $V_h\\subseteq V$\nbe finite-dimensional. Then there are unique $u\\in V$ and $u_h\\in V_h$ with\n$$a(u,v)=F(v)\\quad(v\\in V).$$\n$$a(u_h,v_h)=F(v_h)\\quad(v_h\\in V_h).$$\nThe solutions satisfy\n$$\\|u-u_h\\|_V\\le\\frac M\\alpha\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.$$\nThe real bilinear case uses linear functionals and reads $\\operatorname{Re}$ as\nthe identity.",
+-          "uses": [
+-            "1.1"
+-          ]
++          "uses": []
+         },
+         {
+           "fact": "F2",
+           "source": "cor-shape-regular-affine-fe-primal-energy-approximation",
+           "source_section": "Statement",
+           "quote": "Assume Countable Choice. Let $d\\ge2$, let $\\Omega\\subset\\mathbb R^d$ be a\nbounded polyhedral open set with a matching shape-regular affine simplicial\nmesh family $\\{\\mathcal T_h\\}$, and set $h:=\\max_{K\\in\\mathcal T_h}h_K\\le1$.\nFix an integer $r\\ge1$. On the reference simplex let\n$(\\widehat S_d,\\widehat P,\\widehat\\Sigma)$ be an unisolvent real scalar\nfinite element whose polynomial space contains $\\mathbb P_r$. Assume each\ndegree of freedom has a bounded linear extension to\n$W^{r+1,2}(\\widehat S_d)$, and let $\\widehat I$ be its interpolant. Suppose\nthere is a global map $I_h$ whose restriction to each cell is the affine\npullback of $\\widehat I$, and that $I_hu\\in V_h$ for the conforming discrete\nspace $V_h\\subset H^1_0(\\Omega)$ whenever\n$u\\in W^{r+1,2}(\\Omega)\\cap H^1_0(\\Omega)$, where $H^1_0(\\Omega)$ is the\nclosure of $C_c^\\infty(\\Omega)$ in $W^{1,2}(\\Omega)$\n([[def-wkp-zero-as-a-sobolev-closure]]). Then a constant $C$ independent of\n$h$ and $u$ satisfies\n$$\\|u-I_hu\\|_{H^1(\\Omega)}\\le C h^r|u|_{W^{r+1,2}(\\Omega)}.$$\nThe global conformity and zero-boundary mapping property of $I_h$ are explicit\nhypotheses; this estimate does not assert them for arbitrary degrees of\nfreedom.",
+-          "uses": [
+-            "1.1"
+-          ]
++          "uses": []
+         },
+         {
+           "fact": "F3",
+           "source": "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+           "source_section": "Statement",
+           "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space, $a:V\\times V\\to\\mathbb K$ a bounded coercive form with boundedness constant $M$ and coercivity constant $\\alpha>0$, and $F:V\\to\\mathbb K$ a bounded functional linear in the real case and conjugate-linear in the complex test argument. Let $V_h\\subseteq V$ be finite-dimensional, and let $a_h:V_h\\times V_h\\to\\mathbb K$ and $F_h:V_h\\to\\mathbb K$ be bounded, with $F_h$ having the same test-linearity as $F$, and $a_h$ coercive with constant $\\alpha_h>0$ in the inherited norm. There are unique exact and discrete solutions $u$ and $u_h$, and\n\n$$\\|u-u_h\\|_V\\le\\inf_{v_h\\in V_h}\\left((1+M/\\alpha_h)\\|u-v_h\\|_V+\\frac{\\delta_{a,h}(v_h)+\\delta_{F,h}}{\\alpha_h}\\right),$$\n\nwhere the defects are those of [[def-variational-crime-error-framework]]. For a family of meshes this is a uniform estimate whenever $\\inf_h\\alpha_h>0$ and the displayed approximation and defect terms are uniformly controlled. The term $\\delta_{F,h}$ retains source approximation and data oscillation.",
+-          "uses": [
+-            "1.1"
+-          ]
++          "uses": []
+         },
+         {
+           "fact": "F4",
+           "source": "thm-linear-elliptic-reduced-control-gradient-and-hessian",
+           "source_section": "Statement",
+           "quote": "Assume the setting of [[def-linear-elliptic-pde-constrained-control-problem]] and Countable Choice. Let $S:U\\to H$ be the linear part of the state map, so $Ju(q)=Ju(0)+Sq$. Then $\\widehat J$ is Fréchet differentiable on $U$, with\n$$\n\\nabla\\widehat J(q)=B^*p(q)+\\alpha q,\n$$\nwhere $p(q)$ is the adjoint from [[thm-linear-elliptic-control-state-and-adjoint-wellposedness]] and $B^*:V\\to U$ is defined by\n$$\n(B^*p,h)_U=\\langle Bh,p\\rangle_{V^*,V}.\n$$\nIts Hessian is the bounded self-adjoint operator $S^*S+\\alpha I$, and for every $h\\in U$,\n$$\n\\alpha\\|h\\|_U^2\\le ((S^*S+\\alpha I)h,h)_U\\le(\\|S\\|^2+\\alpha)\\|h\\|_U^2.\n$$\nConsequently $\\nabla\\widehat J$ is Lipschitz with constant $L=\\|S\\|^2+\\alpha$, and $\\widehat J$ is $\\alpha$-strongly convex.",
+-          "uses": [
+-            "2.1"
+-          ]
++          "uses": []
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "In this distributed-control setting, the adjoint gradient contribution is $B^*p=p$ under the $L^2$ pairing. Thus $g_h(q)-g(q)=p_h(q)-p(q)$. The explicit uniform $L^2$ premise [A1], including the state-error contribution to the adjoint load and every form/load defect from [F3], gives $\\sup_{q\\in Q_{ad}}\\|g_h(q)-g(q)\\|_U\\le C_g h^2.$ The actual $H^2$, dual-approximation, and defect hypotheses must be used to verify [A1] for the PDE family; this proof does not infer it from an energy estimate of order $h$ alone.",
++          "claim": "The adjoint-consistency identity and the continuous gradient formula give $g_h(q)-g(q)=p_h(q)-p(q)$. The explicit uniform $L^2$ premise [A1], including the state-error contribution to the adjoint load and every form/load defect, therefore gives $\\sup_{q\\in Q_{ad}}\\|g_h(q)-g(q)\\|_U\\le C_g h^2.$ The actual $H^2$, dual-approximation, and defect hypotheses must be used to verify [A1] for the PDE family; this proof does not infer it from an energy estimate of order $h$ alone.",
+           "step": "1.1",
+           "inputs": [
+             "A1",
+             "F1",
+-            "F2",
+-            "F3",
+-            "given",
+-            "algebra"
+-          ]
+-        },
+-        {
+-          "id": "step-1-2",
+-          "claim": "Put $e=q_h^v-q_*$. Strong monotonicity [F4] gives $\\alpha\\|e\\|_U^2\\le(g(q_h^v)-g(q_*),e)_U.$ The continuous variational inequality gives $(g(q_*),e)_U\\ge0$. For the discrete minimizer, the feasible segment $q_h^v+t(q_*-q_h^v)$ for $0\\le t\\le1$ has a nonnegative right derivative at $t=0$, so $(g_h(q_h^v),e)_U\\le0$. Replacing $g(q_h^v)$ by $g_h(q_h^v)$ costs at most $C_g h^2\\|e\\|_U$ by step 1.1. Thus $\\alpha\\|e\\|_U^2\\le C_g h^2\\|e\\|_U$. If $e=0$ the claim is immediate; otherwise divide by $\\alpha\\|e\\|_U$ to get $\\|e\\|_U\\le(C_g/\\alpha)h^2$.",
++            "given",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-2-1",
++          "claim": "Put $e=q_h^v-q_*$. Strong monotonicity [F5] gives $\\alpha\\|e\\|_U^2\\le(g(q_h^v)-g(q_*),e)_U.$ The continuous variational inequality gives $(g(q_*),e)_U\\ge0$. Since $q_h^v$ minimizes the differentiable $\\widehat J_h$ on the convex set $Q_{ad}$, its derivative identity gives $(g_h(q_h^v),e)_U\\le0$ along the feasible segment toward $q_*$. Replacing $g(q_h^v)$ by $g_h(q_h^v)$ costs at most $C_g h^2\\|e\\|_U$ by step 1.1. Thus $\\alpha\\|e\\|_U^2\\le C_g h^2\\|e\\|_U$. If $e=0$ the claim is immediate; otherwise divide by $\\alpha\\|e\\|_U$ to get $\\|e\\|_U\\le(C_g/\\alpha)h^2$.",
+           "step": "2.1",
+           "inputs": [
+-            "F4",
++            "F5",
+             "step 1.1",
+             "given",
+             "algebra"
+@@ -1742,7 +1795,7 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
++          "id": "step-2-1",
+           "claim": "Set $g=u-u_d$ and reverse time: with $s=T-t$, $\\tilde p(s)=p(T-s)$, $\\tilde g(s)=g(T-s)$, and $\\tilde a^*(s;x,y)=a(T-s;y,x)$, the backward equation becomes the forward equation $\\langle\\tilde p',v\\rangle+\\tilde a^*(s;\\tilde p,v)=(\\tilde g,v)_H$ with initial value $\\tilde p(0)=0$. The transposed reversed form is measurable, bounded, and coercive with the same constants, so [A1, F1] supplies its unique energy solution; reflecting back proves [F3] and gives $p\\in W$. Its weak equation is $\\langle-p',v\\rangle+a(t;v,p)=(g,v)_H$. By the energy integration-by-parts identity [F2], testing with the state variation $z$ and using $z(0)=0$ and $p(T)=0$ gives $\\int_0^T(g,z)_Hdt=\\int_0^T\\bigl(\\langle z',p\\rangle+a(t;z,p)\\bigr)dt=\\int_0^T\\langle Br,p\\rangle dt=(B^*p,r)_U.$ Therefore the linear term in step 1.1 is $(B^*p,r)_U$, and the derivative is $B^*p+\\alpha q$.",
+           "step": "2.1",
+           "inputs": [
+@@ -1755,7 +1808,7 @@
+           ]
+         },
+         {
+-          "id": "step-2-1",
++          "id": "step-3-1",
+           "claim": "Boundedness of $S$ makes the remainder in step 1.1 bounded by $\\tfrac12\\|S\\|^2\\|r\\|_U^2+\\tfrac\\alpha2\\|r\\|_U^2$, which is $o(\\|r\\|_U)$. Therefore the derivative is Fr\\'echet; Riesz representation in [A1] gives the stated gradient.",
+           "step": "3.1",
+           "inputs": [
+@@ -1766,7 +1819,7 @@
+           ]
+         },
+         {
+-          "id": "step-3-1",
++          "id": "step-4-1",
+           "claim": "In the additional finite-element setting of [F5], differentiate $\\rho(t)=P_h(t)u(t)-u(t)$ in the weak time sense. The product rule gives $\\rho'=P_h'(t)u(t)+P_h(t)u'(t)-u'(t)$. Thus the comparison residual contains the full displayed derivative, including $P_h'u$; the reduced-gradient formula does not authorize dropping it.",
+           "step": "4.1",
+           "inputs": [
+@@ -1901,7 +1954,7 @@
+           "fact": "F7",
+           "source": "alg-fem-control-proximal-gradient-certified-residual",
+           "source_section": "Definition",
+-          "quote": "Let $U_h\\subset U=L^2(E)$ be the finite-dimensional space of cellwise-constant controls on a finite affine mesh, and let $Q_h=U_h\\cap Q_{ad}$ be nonempty with bounds constant on each control cell. The target is the **exact continuous reduced objective** $\\widehat J$ of [[def-linear-elliptic-pde-constrained-control-problem]], restricted to $Q_h$; write $Ju(q)=c+Sq$ and $g(q)=\\nabla\\widehat J(q)=B^*p(q)+\\alpha q$. Choose a certified $L_h\\ge\\|S|_{U_h}\\|^2+\\alpha>0$. Given a finite budget $N\\ge1$, tolerance $\\tau\\ge0$, and initial $q_0\\in Q_h$, repeat for $k=0,\\ldots,N-1$:\n\n1. Compute conforming finite-element state and adjoint approximations $\\tilde u_k,\\tilde p_k$ and full Strang bounds $\\varepsilon_{u,k},\\varepsilon_{p,k}$ as in [[lem-fem-control-gradient-residual-bound]], including form, geometry, quadrature, and load defects. Set $\\delta_k=\\|B\\|\\varepsilon_{p,k}$ and $\\tilde g_k=B^*\\tilde p_k+\\alpha q_k$.\n2. Set $\\tilde q_{k+1}=P_{Q_h}(q_k-\\tilde g_k/L_h)$, using the clipped-cell-average projection of [[lem-p0-box-projection-is-clipped-cell-average]], and set $\\tilde\\rho_k=\\|q_k-\\tilde q_{k+1}\\|_U$.\n3. If $\\tilde\\rho_k+\\delta_k/L_h\\le\\tau$, return $(q_k,\\texttt{certified},\\tilde\\rho_k+\\delta_k/L_h)$.\n4. Otherwise set $q_{k+1}=\\tilde q_{k+1}$ and continue.\n\nIf all $N$ evaluations finish without that test, return the last evaluated iterate $(q_{N-1},\\texttt{budget-exhausted},\\tilde\\rho_{N-1}+\\delta_{N-1}/L_h)$. A failed or unavailable residual bound returns $(q_k,\\texttt{inconclusive},+\\infty)$. The reported number certifies a projected-gradient residual for the exact continuous PDE objective restricted to $Q_h$; it is not a continuous-control discretization error bound.",
++          "quote": "Let $U_h\\subset U=L^2(E)$ be the finite-dimensional space of cellwise-constant controls on a finite affine mesh, and let $Q_h=U_h\\cap Q_{ad}$ be nonempty with bounds constant on each control cell. The target is the **exact continuous reduced objective** $\\widehat J$ of [[def-linear-elliptic-pde-constrained-control-problem]], restricted to $Q_h$; write $Ju(q)=c+Sq$ and $g(q)=\\nabla\\widehat J(q)=B^*p(q)+\\alpha q$. Choose a certified $L_h\\ge\\|S|_{U_h}\\|^2+\\alpha>0$. Given a finite budget $N\\ge1$, tolerance $\\tau\\ge0$, and initial $q_0\\in Q_h$, repeat for $k=0,\\ldots,N-1$:\n\nAn additional input is a residual-evaluation routine $\\mathcal C$. For every queried $q_k$, it must return in finite time either a valid tuple $(\\tilde u_k,\\tilde p_k,\\varepsilon_{u,k},\\varepsilon_{p,k})$ or `failure`. A valid tuple has $\\tilde u_k,\\tilde p_k\\in V_h$, nonnegative finite bounds that dominate the complete primal and adjoint first-Strang right-hand sides, and an adjoint load defect that includes the state-error contribution $\\|J\\|^2\\varepsilon_{u,k}$. The finite-return condition is part of the algorithm's admissible input contract.\n\nA second input is a projection-evaluation routine $\\mathcal P$. Write $q_{k,K}:=q_k|_K$. For every queried $(q_k,\\tilde p_k,L_h)$ it must return in finite time either `failure` or finite real cell values $z_{k,K}$ and a finite real $r_k\\ge0$ satisfying\n$$z_{k,K}=\\operatorname{clip}_{[q_a|_K,q_b|_K]}\\left(q_{k,K}-\\frac{\\alpha q_{k,K}+|K|^{-1}\\int_K B^*\\tilde p_k}{L_h}\\right),\\qquad r_k^2=\\sum_{K\\in\\mathcal T_h}|K|\\,|q_{k,K}-z_{k,K}|^2.$$\nThus the returned cellwise function is exactly $P_{Q_h}(q_k-\\tilde g_k/L_h)$ and $r_k$ is its exact step norm by [[lem-p0-box-projection-is-clipped-cell-average]]. Computing the required cell averages, clipped values and norm is part of this finite-return backend contract; it is not inferred from boundedness of $B$, and no finite representation of the entire function $B^*\\tilde p_k$ is assumed. Unavailable exact values must be reported as `failure`, not left pending.\n\n1. Call $\\mathcal C(q_k)$. If it returns `failure` or no valid bounds, return $(q_k,\\texttt{inconclusive},+\\infty)$. Otherwise use its conforming finite-element state and adjoint approximations $\\tilde u_k,\\tilde p_k$ and complete Strang bounds $\\varepsilon_{u,k},\\varepsilon_{p,k}$, including form, geometry, quadrature, and load defects. Set $\\delta_k=\\|B\\|\\varepsilon_{p,k}$ and $\\tilde g_k=B^*\\tilde p_k+\\alpha q_k$.\n2. Call $\\mathcal P(q_k,\\tilde p_k,L_h)$. If it returns `failure` or no valid cell values and norm, return $(q_k,\\texttt{inconclusive},+\\infty)$. Otherwise set $\\tilde q_{k+1}|_K=z_{k,K}$ and $\\tilde\\rho_k=r_k$ from its valid return.\n3. If $\\tilde\\rho_k+\\delta_k/L_h\\le\\tau$, return $(q_k,\\texttt{certified},\\tilde\\rho_k+\\delta_k/L_h)$.\n4. Otherwise set $q_{k+1}=\\tilde q_{k+1}$ and continue.\n\nIf all $N$ iterations finish without that test, return the last evaluated iterate $(q_{N-1},\\texttt{budget-exhausted},\\tilde\\rho_{N-1}+\\delta_{N-1}/L_h)$. Both routines' finite-return contracts ensure that an unavailable state/adjoint bound or projection/residual value is reported as `failure` rather than left pending. The reported number certifies a projected-gradient residual for the exact continuous PDE objective restricted to $Q_h$; it is not a continuous-control discretization error bound.",
+           "uses": [
+             "2.1"
+           ]
+@@ -1910,7 +1963,7 @@
+           "fact": "F8",
+           "source": "alg-fem-control-proximal-gradient-certified-residual",
+           "source_section": "Definition",
+-          "quote": "Let $U_h\\subset U=L^2(E)$ be the finite-dimensional space of cellwise-constant controls on a finite affine mesh, and let $Q_h=U_h\\cap Q_{ad}$ be nonempty with bounds constant on each control cell. The target is the **exact continuous reduced objective** $\\widehat J$ of [[def-linear-elliptic-pde-constrained-control-problem]], restricted to $Q_h$; write $Ju(q)=c+Sq$ and $g(q)=\\nabla\\widehat J(q)=B^*p(q)+\\alpha q$. Choose a certified $L_h\\ge\\|S|_{U_h}\\|^2+\\alpha>0$. Given a finite budget $N\\ge1$, tolerance $\\tau\\ge0$, and initial $q_0\\in Q_h$, repeat for $k=0,\\ldots,N-1$:\n\n1. Compute conforming finite-element state and adjoint approximations $\\tilde u_k,\\tilde p_k$ and full Strang bounds $\\varepsilon_{u,k},\\varepsilon_{p,k}$ as in [[lem-fem-control-gradient-residual-bound]], including form, geometry, quadrature, and load defects. Set $\\delta_k=\\|B\\|\\varepsilon_{p,k}$ and $\\tilde g_k=B^*\\tilde p_k+\\alpha q_k$.\n2. Set $\\tilde q_{k+1}=P_{Q_h}(q_k-\\tilde g_k/L_h)$, using the clipped-cell-average projection of [[lem-p0-box-projection-is-clipped-cell-average]], and set $\\tilde\\rho_k=\\|q_k-\\tilde q_{k+1}\\|_U$.\n3. If $\\tilde\\rho_k+\\delta_k/L_h\\le\\tau$, return $(q_k,\\texttt{certified},\\tilde\\rho_k+\\delta_k/L_h)$.\n4. Otherwise set $q_{k+1}=\\tilde q_{k+1}$ and continue.\n\nIf all $N$ evaluations finish without that test, return the last evaluated iterate $(q_{N-1},\\texttt{budget-exhausted},\\tilde\\rho_{N-1}+\\delta_{N-1}/L_h)$. A failed or unavailable residual bound returns $(q_k,\\texttt{inconclusive},+\\infty)$. The reported number certifies a projected-gradient residual for the exact continuous PDE objective restricted to $Q_h$; it is not a continuous-control discretization error bound.",
++          "quote": "Let $U_h\\subset U=L^2(E)$ be the finite-dimensional space of cellwise-constant controls on a finite affine mesh, and let $Q_h=U_h\\cap Q_{ad}$ be nonempty with bounds constant on each control cell. The target is the **exact continuous reduced objective** $\\widehat J$ of [[def-linear-elliptic-pde-constrained-control-problem]], restricted to $Q_h$; write $Ju(q)=c+Sq$ and $g(q)=\\nabla\\widehat J(q)=B^*p(q)+\\alpha q$. Choose a certified $L_h\\ge\\|S|_{U_h}\\|^2+\\alpha>0$. Given a finite budget $N\\ge1$, tolerance $\\tau\\ge0$, and initial $q_0\\in Q_h$, repeat for $k=0,\\ldots,N-1$:\n\nAn additional input is a residual-evaluation routine $\\mathcal C$. For every queried $q_k$, it must return in finite time either a valid tuple $(\\tilde u_k,\\tilde p_k,\\varepsilon_{u,k},\\varepsilon_{p,k})$ or `failure`. A valid tuple has $\\tilde u_k,\\tilde p_k\\in V_h$, nonnegative finite bounds that dominate the complete primal and adjoint first-Strang right-hand sides, and an adjoint load defect that includes the state-error contribution $\\|J\\|^2\\varepsilon_{u,k}$. The finite-return condition is part of the algorithm's admissible input contract.\n\nA second input is a projection-evaluation routine $\\mathcal P$. Write $q_{k,K}:=q_k|_K$. For every queried $(q_k,\\tilde p_k,L_h)$ it must return in finite time either `failure` or finite real cell values $z_{k,K}$ and a finite real $r_k\\ge0$ satisfying\n$$z_{k,K}=\\operatorname{clip}_{[q_a|_K,q_b|_K]}\\left(q_{k,K}-\\frac{\\alpha q_{k,K}+|K|^{-1}\\int_K B^*\\tilde p_k}{L_h}\\right),\\qquad r_k^2=\\sum_{K\\in\\mathcal T_h}|K|\\,|q_{k,K}-z_{k,K}|^2.$$\nThus the returned cellwise function is exactly $P_{Q_h}(q_k-\\tilde g_k/L_h)$ and $r_k$ is its exact step norm by [[lem-p0-box-projection-is-clipped-cell-average]]. Computing the required cell averages, clipped values and norm is part of this finite-return backend contract; it is not inferred from boundedness of $B$, and no finite representation of the entire function $B^*\\tilde p_k$ is assumed. Unavailable exact values must be reported as `failure`, not left pending.\n\n1. Call $\\mathcal C(q_k)$. If it returns `failure` or no valid bounds, return $(q_k,\\texttt{inconclusive},+\\infty)$. Otherwise use its conforming finite-element state and adjoint approximations $\\tilde u_k,\\tilde p_k$ and complete Strang bounds $\\varepsilon_{u,k},\\varepsilon_{p,k}$, including form, geometry, quadrature, and load defects. Set $\\delta_k=\\|B\\|\\varepsilon_{p,k}$ and $\\tilde g_k=B^*\\tilde p_k+\\alpha q_k$.\n2. Call $\\mathcal P(q_k,\\tilde p_k,L_h)$. If it returns `failure` or no valid cell values and norm, return $(q_k,\\texttt{inconclusive},+\\infty)$. Otherwise set $\\tilde q_{k+1}|_K=z_{k,K}$ and $\\tilde\\rho_k=r_k$ from its valid return.\n3. If $\\tilde\\rho_k+\\delta_k/L_h\\le\\tau$, return $(q_k,\\texttt{certified},\\tilde\\rho_k+\\delta_k/L_h)$.\n4. Otherwise set $q_{k+1}=\\tilde q_{k+1}$ and continue.\n\nIf all $N$ iterations finish without that test, return the last evaluated iterate $(q_{N-1},\\texttt{budget-exhausted},\\tilde\\rho_{N-1}+\\delta_{N-1}/L_h)$. Both routines' finite-return contracts ensure that an unavailable state/adjoint bound or projection/residual value is reported as `failure` rather than left pending. The reported number certifies a projected-gradient residual for the exact continuous PDE objective restricted to $Q_h$; it is not a continuous-control discretization error bound.",
+           "uses": [
+             "2.1"
+           ]
+@@ -1954,7 +2007,7 @@
+           ]
+         },
+         {
+-          "id": "step-2-1",
++          "id": "step-1-3",
+           "claim": "Since $Q_h$ is a nonempty compact box in finite-dimensional $U_h$, [F5] gives a minimizer, and $\\alpha$-strong convexity [F4] makes it unique. For any $v\\in Q_h$, the feasible segment from $q_h^*$ to $v$ and differentiability imply $(g(q_h^*),v-q_h^*)_U\\ge0$. Set $w=q_h^*-g(q_h^*)/L_h$. Then $\\|w-v\\|_U^2-\\|w-q_h^*\\|_U^2=\\|v-q_h^*\\|_U^2+(2/L_h)(g(q_h^*),v-q_h^*)_U\\ge0$. Thus $q_h^*$ is the unique nearest point in $Q_h$ to $w$, so $T(q_h^*)=q_h^*$.",
+           "step": "1.3",
+           "inputs": [
+@@ -1967,8 +2020,8 @@
+           ]
+         },
+         {
+-          "id": "step-2-2",
+-          "claim": "By [F7], a \\texttt{certified} return is issued only when $\\rho_k\\le\\tau$, so step 1.1 proves the reported bound for the exact mapping residual. By [F8], each evaluation is finite and at most $N$ are performed; the algorithm therefore terminates with one of its stated statuses.",
++          "id": "step-2-1",
++          "claim": "By [F7], a \\texttt{certified} return is issued only when $\\rho_k\\le\\tau$, so step 1.1 proves the reported bound for the exact mapping residual. By [F8], each residual and projection call returns in finite time, and each is called at most $N$ times; the projection routine supplies the exact cell values and step norm used in step 1.1, and all remaining steps are finite scalar arithmetic and comparisons, so the algorithm terminates with one of its stated statuses.",
+           "step": "2.1",
+           "inputs": [
+             "F7",
+@@ -1979,7 +2032,7 @@
+           ]
+         },
+         {
+-          "id": "step-3-1",
++          "id": "step-2-2",
+           "claim": "For $r=\\|q-T(q)\\|_U$, steps 1.2–1.3 and the triangle inequality imply $\\|q-q_h^*\\|_U\\le r+\\|T(q)-T(q_h^*)\\|_U\\le r+(1-\\alpha/L_h)\\|q-q_h^*\\|_U$. Rearranging yields $\\|q-q_h^*\\|_U\\le(L_h/\\alpha)r$.",
+           "step": "2.2",
+           "inputs": [
+@@ -1989,7 +2042,7 @@
+           ]
+         },
+         {
+-          "id": "step-3-2",
++          "id": "step-3-1",
+           "claim": "On a \\texttt{certified} return, step 1.1 gives $r\\le\\rho=\\tilde\\rho+\\delta/L_h$; substituting into step 2.2 proves both displayed distance bounds.",
+           "step": "3.1",
+           "inputs": [
+@@ -2096,7 +2149,7 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
++          "id": "step-2-1",
+           "claim": "The resulting status has its fixed coordinates equal to the bounds and zero gradient on its free coordinates, so its free subsystem is the one solved by the algorithm. The checked gradient signs hold by step 1.1, hence this candidate is retained by [F1]. The algorithm terminates within $3^n$ checks.",
+           "step": "2.1",
+           "inputs": [
+@@ -2107,7 +2160,7 @@
+           ]
+         },
+         {
+-          "id": "step-2-1",
++          "id": "step-3-1",
+           "claim": "Let $x$ be a retained candidate and $g=Hx+c$. For any feasible $y$, the checked coordinate signs give $g_i(y_i-x_i)\\ge0$ on lower-active coordinates, the same inequality on upper-active coordinates, and zero on free coordinates; hence $g^T(y-x)\\ge0$. The exact expansion $\\phi(y)-\\phi(x)=g^T(y-x)+\\tfrac12(y-x)^TH(y-x)$ is nonnegative, and is strictly positive when $y\\ne x$ because $H$ is positive definite. Thus every retained candidate is the unique minimizer, so the first one returned by the algorithm is.",
+           "step": "3.1",
+           "inputs": [
+@@ -2177,7 +2230,7 @@
+           "fact": "F1",
+           "source": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+           "source_section": "Definition",
+-          "quote": "Let $F_A(z)=0$ be the active KKT system of a finite-dimensional reduced FE control problem, where $z=(x,\\mu)$ stacks the control and active multipliers. Given $z_0$, an ordered finite list of proposed active sets $A_0,\\ldots,A_{m-1}$, maximum budget $N\\ge1$, residual tolerance $\\tau\\ge0$, and the floating-point hypotheses of [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]], process at most $\\min(m,N)$ candidates:\n\n1. For candidate $A_j$, form $F_{A_j}(z_j)$ and its exact-Hessian active KKT Jacobian $K_j=DF_{A_j}(z_j)$.\n2. Apply [[alg-sqp-exact-hessian-newton-step]] when its rank and reduced-curvature checks succeed. Solve its active KKT system by the finite-precision QR algorithm of [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]]. A failed check or solve records `numerical-failure`, sets $z_{j+1}=z_j$, and proceeds.\n3. For a returned step $s_j$ and residual bound $\\eta_j$, set $z_j^+=z_j+s_j$ and $z_{j+1}=z_j^+$. If $\\eta_j\\le\\tau$, return $(z_j^+,A_j,\\texttt{active-kkt-residual-certified},\\eta_j)$; otherwise proceed.\n\nIf the finite list or budget is exhausted, return `budget-exhausted` with the smallest successfully computed residual bound, or `inconclusive` if no solve succeeded. This status concerns the active KKT equation residual only. Box feasibility, multiplier signs, global optimality, and forward accuracy require separate validated checks; none follows from a small linear-system residual alone.",
++          "quote": "Let $F_A(z)=0$ be the active KKT system of a finite-dimensional reduced FE control problem, where $z=(x,\\mu)$ stacks the control and active multipliers. Given $z_0$, an ordered finite list of proposed active sets $A_0,\\ldots,A_{m-1}$, maximum budget $N\\ge1$, residual tolerance $\\tau\\ge0$, a terminating exact-storage routine satisfying the input contract of [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]], and the floating-point hypotheses of [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]], process at most $\\min(m,N)$ candidates:\n\n1. For candidate $A_j$, form $F_{A_j}(z_j)$ and its exact-Hessian active KKT Jacobian $K_j=DF_{A_j}(z_j)$.\n2. Use the active KKT-map/Jacobian convention and rank/reduced-curvature applicability conditions of [[alg-sqp-exact-hessian-newton-step]]. Do not invoke its exact linear solve. Set $b_j=-F_{A_j}(z_j)$ and call [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]] exactly once on the intended system $K_js=b_j$, supplying the terminating exact-storage routine. Before numerical factorization or residual evaluation, that call must verify stored entries equal to the intended $K_j,b_j$; unavailable or unverified admission is a failed QR solve with no residual certificate. A failed applicability check or QR solve records `numerical-failure`, sets $z_{j+1}=z_j$, and proceeds.\n3. On a successful QR return, let $(\\widehat s_j,\\eta_j)$ be its step vector and residual bound. Set $z_j^+=z_j+\\widehat s_j$ and $z_{j+1}=z_j^+$. The QR vector $\\widehat s_j$ is the only step used by this wrapper. If $\\eta_j\\le\\tau$, return $(z_j^+,A_j,\\texttt{active-kkt-residual-certified},\\eta_j)$; otherwise proceed.\n\nIf the finite list or budget is exhausted, return `budget-exhausted` with the smallest successfully computed residual bound, or `inconclusive` if no solve succeeded. This status concerns the active KKT equation residual only. Box feasibility, multiplier signs, global optimality, and forward accuracy require separate validated checks; none follows from a small linear-system residual alone.",
+           "uses": [
+             "1.1"
+           ]
+@@ -2216,7 +2269,7 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
++          "id": "step-2-1",
+           "claim": "If the reduced objective is quadratic and active constraints are affine, then the active KKT map is affine with Jacobian $K$. Therefore $F_A(z+s)=F_A(z)+Ks$, and step 1.1 is exactly a bound for the returned point’s active-system residual.",
+           "step": "2.1",
+           "inputs": [
+@@ -2227,7 +2280,7 @@
+           ]
+         },
+         {
+-          "id": "step-2-1",
++          "id": "step-3-1",
+           "claim": "In the separate exact local branch, the hypotheses listed in [F3] imply the active KKT Jacobian is nonsingular and locally Lipschitz. The cited OPT6 Newton theorem then applies to the exact full-step active-system iteration started sufficiently near its root and gives quadratic convergence. This conclusion is conditional on those hypotheses and is independent of finite-budget status.",
+           "step": "3.1",
+           "inputs": [
+@@ -2325,7 +2378,7 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
++          "id": "step-2-1",
+           "claim": "Among real $z_K\\in[q_a|_K,q_b|_K]$, the square $|z_K-\\bar r_K|^2$ is uniquely minimized by the clipped value: if $\\bar r_K$ is below the interval the nearest endpoint is the lower bound; if it is inside, it is itself; if it is above, the nearest endpoint is the upper bound. Thus the displayed cell value uniquely minimizes the cell integral, and it lies in the required interval by [F1].",
+           "step": "2.1",
+           "inputs": [
+@@ -2335,7 +2388,7 @@
+           ]
+         },
+         {
+-          "id": "step-2-1",
++          "id": "step-3-1",
+           "claim": "The cell choices are independent, so summing the cellwise minima from step 2.1 proves that $P_{Q_h}r$ is the unique global minimizer. For $v\\in Q_h$, convexity makes $p+t(v-p)$ feasible, where $p=P_{Q_h}r$ and $0<t\\le1$. Minimality gives $\\|p+t(v-p)-r\\|_2^2-\\|p-r\\|_2^2=2t(p-r,v-p)_2+t^2\\|v-p\\|_2^2\\ge0.$ Divide by $2t$ and let $t\\downarrow0$ to obtain the projection variational inequality $(p-r,v-p)_2\\ge0$.",
+           "step": "3.1",
+           "inputs": [
+@@ -2346,7 +2399,7 @@
+           ]
+         },
+         {
+-          "id": "step-3-1",
++          "id": "step-4-1",
+           "claim": "Let $p=P_{Q_h}r$ and $q=P_{Q_h}s$. Apply the variational inequality from step 3.1 with $v=q$ and $v=p$, respectively. Adding gives $\\|p-q\\|_2^2\\le(r-s,p-q)_2$. Cauchy–Schwarz then yields $\\|p-q\\|_2\\le\\|r-s\\|_2$ when $p\\ne q$; if $p=q$ the inequality is immediate.",
+           "step": "4.1",
+           "inputs": [
+@@ -2449,7 +2502,7 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
++          "id": "step-2-1",
+           "claim": "The adjoint identity gives $-p_*/\\alpha=q_*$. This function lies in $[0,1]$ almost everywhere, so [F2] clips it to itself. The projection formula gives the variational inequality, and positive regularization makes the minimizer unique.",
+           "step": "2.1",
+           "inputs": [
+@@ -2550,7 +2603,7 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
++          "id": "step-2-1",
+           "claim": "The trace bound from step 1.1 gives $|g v(1)|\\le |g|(\\|v\\|_2+\\|v'\\|_2)$, so $B_\\partial g$ is bounded on $V$. For the one-point boundary its control parameter is a scalar (equivalently $L^2$ for counting measure); it is not an element of the interior $L^2(0,1)$ box from [F1]. Therefore an interior-control theorem applies only after its $U$ and $B$ are replaced and reverified.",
+           "step": "2.1",
+           "inputs": [
+@@ -2649,7 +2702,7 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
++          "id": "step-2-1",
+           "claim": "Integrating the pointwise inequalities gives $\\mathcal L(q)\\ge\\mathcal L(q_*)$. Equality forces the stated values almost everywhere away from $x=1/2$, so the minimizer is unique as an $L^2$ equivalence class. It is bang-bang by construction. Because $\\alpha=0$, the strict convexity and unique-control conclusions that use $\\alpha>0$ are not invoked.",
+           "step": "2.1",
+           "inputs": [
+@@ -2660,7 +2713,7 @@
+           ]
+         },
+         {
+-          "id": "step-2-1",
++          "id": "step-3-1",
+           "claim": "The exact box projection formula from [F2] concerns clipping a point to the interval; this example instead minimizes a linear integrand and reaches the interval endpoints according to the sign of $s$. Thus this is a separate limiting/example branch, not a consequence of substituting $\\alpha=0$ into a formula that divides by $\\alpha$.",
+           "step": "3.1",
+           "inputs": [

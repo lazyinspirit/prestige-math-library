@@ -1,0 +1,384 @@
+{
+  "group": "u",
+  "batches": ["3"],
+  "pages_read": [
+    "nonlinear-equations-and-newton-methods",
+    "nonlinear-equations-and-newton-methods-examples"
+  ],
+  "items_read": [
+    "alg-fixed-point-iteration",
+    "lem-finite-budget-fixed-point-iteration-work",
+    "alg-newton-correction-for-vector-residuals",
+    "alg-forward-difference-jacobian",
+    "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+    "lem-forward-difference-jacobian-error-bound",
+    "alg-finite-budget-newton-for-vector-residuals",
+    "lem-finite-budget-newton-work-and-status",
+    "alg-damped-newton-for-vector-residuals",
+    "alg-finite-difference-newton-for-vector-residuals",
+    "thm-updated-jacobian-newton-local-quadratic-convergence",
+    "thm-damped-newton-vector-residual-accepted-merit-decrease",
+    "ex-nonlinear-equations-and-newton-methods-boundary-cases"
+  ],
+  "conventions": [
+    {
+      "convention": "Coordinates and standard basis vectors are indexed by 0 ≤ i < n; the Jacobian matrix represents the total derivative.",
+      "fixed_by": "alg-forward-difference-jacobian",
+      "matters_for": [
+        "lem-forward-difference-jacobian-error-bound",
+        "alg-finite-difference-newton-for-vector-residuals",
+        "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+        "thm-updated-jacobian-newton-local-quadratic-convergence"
+      ]
+    },
+    {
+      "convention": "The Newton correction has sign As = −r; a singular matrix returns singular-jacobian.",
+      "fixed_by": "alg-newton-correction-for-vector-residuals",
+      "matters_for": [
+        "alg-finite-budget-newton-for-vector-residuals",
+        "alg-damped-newton-for-vector-residuals",
+        "alg-finite-difference-newton-for-vector-residuals",
+        "thm-updated-jacobian-newton-local-quadratic-convergence",
+        "ex-nonlinear-equations-and-newton-methods-boundary-cases"
+      ]
+    },
+    {
+      "convention": "Residual tolerance is tested before the update budget, and both are tested before requesting a correction. The root status means only residual tolerance attainment when ε > 0.",
+      "fixed_by": "alg-finite-budget-newton-for-vector-residuals",
+      "matters_for": [
+        "lem-finite-budget-newton-work-and-status",
+        "alg-finite-difference-newton-for-vector-residuals",
+        "thm-updated-jacobian-newton-local-quadratic-convergence",
+        "ex-nonlinear-equations-and-newton-methods-boundary-cases"
+      ]
+    },
+    {
+      "convention": "The fixed-point budget N permits at most N updates, with residual checks at indices 0 through N; tolerance takes precedence over budget exhaustion.",
+      "fixed_by": "alg-fixed-point-iteration",
+      "matters_for": [
+        "lem-finite-budget-fixed-point-iteration-work",
+        "ex-nonlinear-equations-and-newton-methods-boundary-cases"
+      ]
+    },
+    {
+      "convention": "Vector norms are Euclidean and matrix norms are induced Euclidean operator norms; the Newton remainder uses J(x), the derivative at the evaluation point.",
+      "fixed_by": "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+      "matters_for": [
+        "thm-updated-jacobian-newton-local-quadratic-convergence",
+        "lem-forward-difference-jacobian-error-bound"
+      ]
+    },
+    {
+      "convention": "Stencil construction requires nonzero increments and in-domain endpoints; the error theorem additionally requires the full coordinate segments in the domain and componentwise second-partial bounds.",
+      "fixed_by": "lem-forward-difference-jacobian-error-bound",
+      "matters_for": [
+        "alg-finite-difference-newton-for-vector-residuals"
+      ]
+    },
+    {
+      "convention": "Residual merit is Φ = ‖F‖₂²/2; backtracking tests t = βʲ for j = 0 through B and accepts only Φ(x+ts) ≤ Φ(x) − αt‖F(x)‖₂².",
+      "fixed_by": "alg-damped-newton-for-vector-residuals",
+      "matters_for": [
+        "thm-damped-newton-vector-residual-accepted-merit-decrease"
+      ]
+    },
+    {
+      "convention": "Termination and work counts assume returning primitives and count outer operations rather than evaluator or linear-solver backend complexity.",
+      "fixed_by": "lem-finite-budget-newton-work-and-status",
+      "matters_for": [
+        "alg-finite-budget-newton-for-vector-residuals"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-newton-correction-for-vector-residuals",
+      "statement": "For n ≥ 1, a linear map A: Rⁿ → Rⁿ and residual r ∈ Rⁿ, return singular-jacobian if A is not invertible; otherwise return the unique correction s solving As = −r.",
+      "used_by": [
+        "alg-finite-budget-newton-for-vector-residuals",
+        "alg-damped-newton-for-vector-residuals",
+        "alg-finite-difference-newton-for-vector-residuals",
+        "thm-updated-jacobian-newton-local-quadratic-convergence",
+        "ex-nonlinear-equations-and-newton-methods-boundary-cases"
+      ]
+    },
+    {
+      "id": "alg-finite-budget-newton-for-vector-residuals",
+      "statement": "On an open domain for a C¹ square residual, check residual tolerance, then update budget, then obtain the exact Newton correction and check trial-domain membership before updating; return the last valid iterate with a stated status.",
+      "used_by": [
+        "lem-finite-budget-newton-work-and-status",
+        "alg-finite-difference-newton-for-vector-residuals",
+        "thm-updated-jacobian-newton-local-quadratic-convergence",
+        "ex-nonlinear-equations-and-newton-methods-boundary-cases"
+      ]
+    },
+    {
+      "id": "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+      "statement": "Let n ≥ 1, U ⊆ Rⁿ be open, F: U → Rⁿ be C¹, K ⊆ U be convex, and x*, x ∈ K. If ‖J(y)−J(z)‖op ≤ L‖y−z‖₂ for y,z ∈ K with L ≥ 0, then ‖F(x)−F(x*)−J(x)(x−x*)‖₂ ≤ (L/2)‖x−x*‖₂².",
+      "used_by": [
+        "thm-updated-jacobian-newton-local-quadratic-convergence",
+        "thm-shooting-residual-error-budget",
+        "lem-inexact-newton-error-recurrence-under-lipschitz-jacobian",
+        "thm-dimer-mode-error-contracts-local-saddle-translation"
+      ]
+    },
+    {
+      "id": "thm-updated-jacobian-newton-local-quadratic-convergence",
+      "statement": "For a C² square residual with a simple root and an L-Lipschitz Jacobian on a closed ball contained in its open domain, there is a smaller ball with inverse bound K. With C = KL/2 and Cρ ≤ 1/2, every attempted exact Newton update from the radius-ρ ball remains there and satisfies ‖xₖ₊₁−x*‖₂ ≤ C‖xₖ−x*‖₂². The indefinitely continued exact recurrence converges; a finite budget may stop before tolerance attainment.",
+      "used_by": [
+        "ex-nonlinear-equations-and-newton-methods-boundary-cases",
+        "cor-local-newton-convergence-for-midpoint-bvp-collocation",
+        "cor-local-newton-convergence-for-shooting-bvp-residual",
+        "thm-pseudo-arclength-local-newton-correction",
+        "prop-index-one-eigenvector-step-is-the-local-newton-correction"
+      ]
+    },
+    {
+      "id": "lem-finite-budget-newton-work-and-status",
+      "statement": "For admissible inputs with budget N ∈ N₀, every entered iterate lies in U. The procedure makes at most N correction calls, N accepted updates, and N+1 explicit outer residual evaluations, and returns a stated status under the returning-primitive convention.",
+      "used_by": [
+        "thm-pseudo-arclength-local-newton-correction",
+        "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination",
+        "thm-index-one-dae-finite-budget-solvers-terminate"
+      ]
+    },
+    {
+      "id": "lem-forward-difference-jacobian-error-bound",
+      "statement": "For C² components on an open domain, nonzero coordinate increments with the stated full-segment admissibility, and bounds |∂ᵢᵢFⱼ| ≤ Mᵢⱼ, put Mᵢ = (ΣⱼMᵢⱼ²)¹ᐟ² and M = maxᵢMᵢ. Then ‖JₕF(x)−J_F(x)‖op ≤ (M/2)‖h‖₂.",
+      "used_by": [
+        "nonlinear-equations-and-newton-methods"
+      ]
+    },
+    {
+      "id": "alg-fixed-point-iteration",
+      "statement": "For a metric space, self-map G, initial point, ε ≥ 0 and budget N ∈ N₀, evaluate d(G(xₖ),xₖ), test tolerance before budget, and otherwise update xₖ₊₁ = G(xₖ).",
+      "used_by": [
+        "lem-finite-budget-fixed-point-iteration-work",
+        "ex-nonlinear-equations-and-newton-methods-boundary-cases",
+        "alg-undamped-scf-with-gap-and-residual-status",
+        "alg-relaxed-density-mixing-with-finite-budget"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-metric-space",
+      "used_for": "Metric-space input and fixed-point residual interpretation.",
+      "opened": true
+    },
+    {
+      "id": "def-invertible-euclidean-linear-map",
+      "used_for": "Two-sided linear inverse and uniqueness of the correction.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "Total differentiability and continuity of derivative entries.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Coordinate Jacobian and gradient conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-total-derivative-computes-directional-and-partial-derivatives",
+      "used_for": "Identifying the total-derivative matrix with the coordinate Jacobian.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiating residuals restricted to coordinate or root-to-iterate segments.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-valued-derivative-and-integral",
+      "used_for": "Componentwise vector integration and derivative identification.",
+      "opened": true
+    },
+    {
+      "id": "cor-vector-valued-ftc-and-lipschitz-bound",
+      "used_for": "Integrating the derivative along the root-to-iterate segment.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-inequality-for-the-vector-valued-integral",
+      "used_for": "Bounding the norm of the integrated Newton remainder.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-integral",
+      "used_for": "Subtracting the constant-Jacobian integral componentwise.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "Integrating the scalar Lipschitz remainder bound on [0,1].",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Integrability of continuous segment derivatives and comparison functions.",
+      "opened": true
+    },
+    {
+      "id": "thm-newton-leibniz-with-interior-derivative",
+      "used_for": "Evaluating constant integrals and the integral of 1−t on [0,1].",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-partial-derivatives-imply-total-differentiability",
+      "used_for": "Obtaining total derivatives from componentwise C² hypotheses in the stencil estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "Scalar order-one Taylor expansion of each coordinate-line restriction.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Converting columnwise stencil errors into an operator-norm bound.",
+      "opened": true
+    },
+    {
+      "id": "lem-newton-contraction-near-an-invertible-derivative",
+      "used_for": "Uniform local inverse-Jacobian bound; its fixed-inverse contraction is explicitly distinguished from updated Newton convergence.",
+      "opened": true
+    },
+    {
+      "id": "lem-geometric-sequence-null",
+      "used_for": "Convergence from geometric error bounds and explicit example recurrences.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-space-complete",
+      "used_for": "Completeness of the real-line fixed-point example.",
+      "opened": true
+    },
+    {
+      "id": "thm-banach-fixed-point",
+      "used_for": "Existence, uniqueness and convergence for G(x) = (x+1)/2.",
+      "opened": true
+    },
+    {
+      "id": "cor-banach-error-estimates",
+      "used_for": "A priori error bound in the fixed-point example.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Existence and positivity of √2.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-square-monotone",
+      "used_for": "Bounding √2 to place the explicit initial point inside the invariant ball.",
+      "opened": true
+    },
+    {
+      "id": "alg-damped-newton",
+      "used_for": "Checking the page's distinction between positive-definite objective Newton and residual-merit vector Newton, including pre-update decrement stopping.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-finite-difference-newton-for-vector-residuals",
+      "concern": "Definition step 4 calls the correction routine but does not explicitly bind its successful returned vector to sₖ; step 5 then uses xₖ+sₖ. The intended binding is immediate, but the procedure should name the returned correction.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-nonlinear-equations-and-newton-methods-boundary-cases",
+      "concern": "Verification 3.1 says that at x₀=0, '[F6] returns the singular-jacobian status before any update'. This is correct for a standalone correction call with A=0 and residual −2, but can be read as the finite-budget solver's status. That solver returns root when ε≥2, and returns iteration-budget-exhausted when ε<2 and N=0. Clarify the standalone-call interpretation or specify ε<2 and N≥1 for the finite-solver illustration.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "nonlinear-boundary-value-solvers",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "Shooting and collocation use square corrections and residual-only finite statuses. Local-rate corollaries supply C² regularity, simple roots and local Lipschitz bounds. The shooting error budget validly swaps the two points in the remainder lemma to use the derivative at the root."
+    },
+    {
+      "from": "pseudo-arclength-continuation-and-fold-certificates",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "The bordered residual is square; its root derivative is proved invertible and its Jacobian inherits the stated Lipschitz bound. Newton candidates, finite work and independent root certification remain distinct."
+    },
+    {
+      "from": "periodic-orbit-shooting-collocation-and-floquet-error",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "The corrector uses the linear correction interface on square proposal matrices. Midpoint proposal matrices are explicitly distinguished from exact residual derivatives, and independent validation supplies the root claim."
+    },
+    {
+      "from": "implicit-stiff-time-stepping-and-algebraic-error",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "Updated mode invokes the finite Newton procedure; chord mode preserves As=−r with its retained exact factorization. Residual status is not treated as a forward-error or convergence certificate."
+    },
+    {
+      "from": "rosenbrock-and-linearly-implicit-methods",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "The autonomous γ=1 identity uses G(y)=−hf(y) and DG(y)=I−hDf(y), giving correction s=hk under the stated invertibility hypothesis. It asserts one correction rather than an exact backward-Euler root."
+    },
+    {
+      "from": "differential-algebraic-equations-and-consistent-initialization",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "Initialization and steppers use square residuals on open chart domains or open tube slices, check seeds before calls, preserve residual-only root statuses, and use the work lemma under returning primitives."
+    },
+    {
+      "from": "interval-newton-krawczyk-and-polynomial-root-isolation",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "This is a contextual page prerequisite; no direct batch-3 item dependency was found. The page uses separate interval certificates and does not attribute validated existence or uniqueness to ordinary Newton."
+    },
+    {
+      "from": "numerical-differentiation-and-derivative-error-control",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "This is a contextual page prerequisite with no direct batch-3 item dependency. The page explicitly requires a separate perturbation theorem before inferring Newton convergence from derivative estimates."
+    },
+    {
+      "from": "numerical-optimization-globalization-and-inexact-certificates",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "No direct batch-3 item dependency was found. The page develops the separate objective-based damped Newton branch, consistent with the assigned page's distinction."
+    },
+    {
+      "from": "nonconvex-line-search-and-inexact-newton-methods",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "The inexact recurrence uses the evaluation-point Newton remainder faithfully. Its zero-dimensional case is handled separately before applying the positive-dimensional supplier."
+    },
+    {
+      "from": "global-optimization-and-certified-branch-and-bound",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "No direct batch-3 item dependency was found. Page prose makes no Newton-derived global guarantee and explicitly supplies no duplicate Newton or validated root-solving algorithm."
+    },
+    {
+      "from": "gauss-newton-and-levenberg-marquardt-methods",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "No direct batch-3 item dependency was found. The page retains separate least-squares curvature, rank and Lipschitz hypotheses rather than importing square-system Newton conclusions unconditionally."
+    },
+    {
+      "from": "minimum-energy-paths-string-neb-and-saddle-certificates",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "Eigenvector following uses the exact Hessian correction and applies local Newton only to a sufficiently smooth gradient residual with nonsingular root Hessian. The dimer estimate validly obtains a root-derivative remainder by swapping the supplier's two points."
+    },
+    {
+      "from": "self-consistent-projector-iterations-and-certified-mixing",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "The fixed-point residual and budget pattern is retained with explicit spectral-gap and eigensolver failure branches. The relaxed-map residual is distinguished from the unmixed response residual, including α=0. No reverse mathematical dependency from the assigned batch was found."
+    }
+  ]
+}

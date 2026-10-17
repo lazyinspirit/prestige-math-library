@@ -1,0 +1,264 @@
+{
+  "group": "g",
+  "batches": [
+    "54"
+  ],
+  "pages_read": [
+    "geometric-numerical-integration",
+    "geometric-numerical-integration-examples"
+  ],
+  "items_read": [
+    "def-local-leapfrog-domain-on-an-open-configuration-set",
+    "lem-local-hamiltonian-flow-preserves-symplectic-matrix",
+    "alg-local-symplectic-euler-step",
+    "alg-implicit-midpoint-hamiltonian-step",
+    "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians",
+    "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+    "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+    "thm-implicit-midpoint-branch-symplectic-order-and-error",
+    "lem-finite-modified-hamiltonian-exists",
+    "lem-truncated-modified-flow-matches-map",
+    "lem-finite-modified-hamiltonian-close-to-original",
+    "lem-one-step-modified-energy-defect",
+    "thm-finite-order-modified-energy-bound",
+    "ex-backward-euler-is-a-stable-but-not-symplectic",
+    "ex-stoermer-verlet-bounded-harmonic-oscillator-energy",
+    "ex-symplectic-euler-harmonic-oscillator"
+  ],
+  "conventions": [
+    {
+      "convention": "Canonical coordinates are ordered (q,p), ω = Σ dq_i ∧ dp_i, J has blocks (0,I;−I,0), and contraction of X_H with ω equals dH; consequently X_H = J∇H.",
+      "fixed_by": "lem-local-hamiltonian-flow-preserves-symplectic-matrix",
+      "matters_for": [
+        "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians",
+        "thm-implicit-midpoint-branch-symplectic-order-and-error",
+        "lem-finite-modified-hamiltonian-exists"
+      ]
+    },
+    {
+      "convention": "Local leapfrog is half-kick, full drift, half-kick, with composition read right to left; all intermediate configurations must lie in the open configuration set Q.",
+      "fixed_by": "def-local-leapfrog-domain-on-an-open-configuration-set",
+      "matters_for": [
+        "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+        "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+        "ex-stoermer-verlet-bounded-harmonic-oscillator-energy"
+      ]
+    },
+    {
+      "convention": "Symplectic Euler applies the kick before the drift, takes h > 0, and returns domain-failure when the resulting configuration leaves Q.",
+      "fixed_by": "alg-local-symplectic-euler-step",
+      "matters_for": [
+        "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+        "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+        "ex-symplectic-euler-harmonic-oscillator"
+      ]
+    },
+    {
+      "convention": "Implicit midpoint selects the unique stage root in the certified closed ball; its exact output is 2Z−z. Finite iteration outputs carry error certificates and are not asserted to be exactly symplectic.",
+      "fixed_by": "alg-implicit-midpoint-hamiltonian-step",
+      "matters_for": [
+        "thm-implicit-midpoint-branch-symplectic-order-and-error",
+        "lem-finite-modified-hamiltonian-exists",
+        "thm-finite-order-modified-energy-bound"
+      ]
+    },
+    {
+      "convention": "The modified Hamiltonian is a fixed finite truncation on the star-shaped phase domain, with r = 1 for symplectic Euler and r = 2 for leapfrog or implicit midpoint; no infinite-series convergence is asserted.",
+      "fixed_by": "lem-finite-modified-hamiltonian-exists",
+      "matters_for": [
+        "lem-truncated-modified-flow-matches-map",
+        "lem-finite-modified-hamiltonian-close-to-original",
+        "lem-one-step-modified-energy-defect",
+        "thm-finite-order-modified-energy-bound"
+      ]
+    },
+    {
+      "convention": "For an empty compact set, uniform error is measured by its least nonnegative upper bound, equal to zero, rather than by a real supremum of the empty set.",
+      "fixed_by": "lem-truncated-modified-flow-matches-map",
+      "matters_for": [
+        "lem-finite-modified-hamiltonian-close-to-original"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-finite-modified-hamiltonian-exists",
+      "statement": "For fixed finite N ≥ r, the truncated pullback logarithm has Hamiltonian vector-field coefficients X_r,…,X_N with globally defined primitives H_r,…,H_N on the stated star-shaped phase domain; H_h^[N] = H + Σ h^j H_j is a finite modified Hamiltonian.",
+      "used_by": [
+        "lem-truncated-modified-flow-matches-map",
+        "lem-finite-modified-hamiltonian-close-to-original",
+        "lem-one-step-modified-energy-defect",
+        "thm-finite-order-modified-energy-bound"
+      ]
+    },
+    {
+      "id": "thm-implicit-midpoint-branch-symplectic-order-and-error",
+      "statement": "Under the stated C² closed-ball contraction hypotheses, the selected midpoint stage exists uniquely and its iterates satisfy the displayed stage and output error certificates. Under the additional C³, uniform branch and controlled-tube hypotheses, the exact selected map is symplectic, has one-step defect C|h|³, and finite-time error bounded by e^(L₁T)e₀ + CTe^(L₁T)|h|².",
+      "used_by": [
+        "alg-implicit-midpoint-hamiltonian-step",
+        "lem-finite-modified-hamiltonian-exists",
+        "thm-finite-order-modified-energy-bound"
+      ]
+    },
+    {
+      "id": "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+      "statement": "For V ∈ C³(Q), SPD M and the stated compact convex tube containing exact and numerical trajectories, stages and comparison segments, symplectic Euler and leapfrog have one-step defects bounded by C_E h² and C_V h³, and finite-time errors bounded by e^(LT)e₀ + C_E T e^(LT)h and e^(LT)e₀ + C_V T e^(LT)h², respectively.",
+      "used_by": [
+        "lem-finite-modified-hamiltonian-exists",
+        "thm-finite-order-modified-energy-bound",
+        "thm-separable-vortex-inspired-leapfrog-is-reversible-symplectic-volume-preserving-order-two"
+      ]
+    },
+    {
+      "id": "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians",
+      "statement": "For open Q, V ∈ C²(Q) and SPD M, the local kick and drift are C¹ on their open domains and their Jacobians A satisfy AᵀJA = J.",
+      "used_by": [
+        "prop-local-leapfrog-and-symplectic-euler-are-symplectic"
+      ]
+    },
+    {
+      "id": "lem-truncated-modified-flow-matches-map",
+      "statement": "For fixed N ≥ r and the stated compact-domain, admitted-branch and comparison-tube hypotheses, the method and time-h finite modified flow differ uniformly on K by at most C_N|h|^(N+2), including the declared empty-K convention.",
+      "used_by": [
+        "lem-one-step-modified-energy-defect"
+      ]
+    },
+    {
+      "id": "lem-one-step-modified-energy-defect",
+      "statement": "For fixed N ≥ r and the stated compact comparison tube containing the numerical and modified-flow endpoints and their joining segment, sufficiently small 0 < h ≤ 1 gives |H_h^[N](Φ_h(z)) − H_h^[N](z)| ≤ C₁h^(N+1), uniformly in z,h.",
+      "used_by": [
+        "thm-finite-order-modified-energy-bound"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-leapfrog-step-map",
+      "used_for": "Exact kick/drift formulas, composition ordering, signed shear parameters and the distinction between C¹ potentials and differentiable force kicks.",
+      "opened": true
+    },
+    {
+      "id": "def-hamiltonian-vector-field-and-hamiltonian-function",
+      "used_for": "Hamiltonian sign convention and identification of Hamiltonian coefficients.",
+      "opened": true
+    },
+    {
+      "id": "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+      "used_for": "Local flow existence, state derivatives, variational equation, flow law and compact continuation.",
+      "opened": true
+    },
+    {
+      "id": "thm-symmetry-of-higher-mixed-partials",
+      "used_for": "Symmetric Hessians in the Hamiltonian and shear matrix identities.",
+      "opened": true
+    },
+    {
+      "id": "def-symplectic-form-and-symplectic-manifold",
+      "used_for": "Symplectic-form terminology and the separation of smooth-manifold definitions from finite-regularity matrix identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Composition derivatives, trajectory derivatives and scalar energy comparison along segments.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "Coordinatewise finite Taylor estimates; its scalar conclusion is not treated as supplying a shared vector-valued intermediate point.",
+      "opened": true
+    },
+    {
+      "id": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+      "used_for": "Finite-order smoothness of the midpoint branch near h = 0.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-implicit-function-theorem",
+      "used_for": "Local midpoint solution branch and its implicit derivative formula.",
+      "opened": true
+    },
+    {
+      "id": "thm-banach-fixed-point",
+      "used_for": "Midpoint stage existence, uniqueness, convergence and geometric tail bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-banach-space",
+      "used_for": "The complete Euclidean normed-space setting for the vector mean-value inequality.",
+      "opened": true
+    },
+    {
+      "id": "def-norm-and-normed-space",
+      "used_for": "Norm and induced-metric conventions in trajectory estimates.",
+      "opened": true
+    },
+    {
+      "id": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+      "used_for": "Identification of the Euclidean norm metric with published d₂ in positive phase dimension.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-space-complete",
+      "used_for": "Completeness of Euclidean phase space and closed stage balls.",
+      "opened": true
+    },
+    {
+      "id": "cor-bolzano-weierstrass-in-rn",
+      "used_for": "Continuity of selected midpoint roots through bounded subsequences.",
+      "opened": true
+    },
+    {
+      "id": "lem-mean-value-inequality-for-a-differentiable-banach-valued-curve",
+      "used_for": "Vector Lipschitz estimates along convex comparison segments and contraction estimates on stage balls.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Uniform compact coefficient and derivative bounds, with nonempty compact sets treated separately.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Scalar modified-energy comparison along the segment between numerical and modified-flow endpoints.",
+      "opened": true
+    },
+    {
+      "id": "prop-a-hamiltonian-is-conserved-along-its-own-flow",
+      "used_for": "Exact conservation of the finite modified Hamiltonian by its own local flow.",
+      "opened": true
+    },
+    {
+      "id": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+      "used_for": "Existence of local integral curves of the smooth finite modified Hamiltonian field.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+      "concern": "The Statement says each step “has a C¹ Jacobian” under V ∈ C²(Q). This asserts more regularity than the hypotheses provide. Take d = 1, Q = R, M = 1 and V(q) = |q|^(5/2). Then V is C², but V''(q) = (15/4)|q|^(1/2) is not differentiable at zero. For any h > 0, the kick-then-drift map has Jacobian entry ∂p⁺/∂q = −hV''(q), which is not differentiable at zero, so its Jacobian is not C¹. The proof establishes a C¹ map with a continuous Jacobian satisfying the symplectic identity; it does not establish the Statement's C¹-Jacobian claim.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "geometric-numerical-integration",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "The prerequisite is contextual: no assigned item cites a Runge–Kutta-page proposition. The implicit midpoint algorithm explicitly defines its own implicit stage equation, and the assigned error proofs derive their Taylor coefficients directly. No explicit-midpoint result is substituted for implicit midpoint."
+    },
+    {
+      "from": "constrained-dynamics-shake-and-rattle",
+      "to": "geometric-numerical-integration",
+      "faithful": true,
+      "note": "The constrained page and its listed items do not cite an assigned geometric-integration result as a logical supplier. Its prose keeps exact constraint solves, symplecticity, reversibility and conditional trajectory accuracy separate. In the reverse contextual direction, thm-finite-order-modified-energy-bound explicitly says its unconstrained result does not transfer to RATTLE."
+    },
+    {
+      "from": "interacting-particle-mean-field-and-vortex-blob-error",
+      "to": "geometric-numerical-integration",
+      "faithful": true,
+      "note": "Read the separable comparison-Hamiltonian definition and its leapfrog theorem. They use the local admitted kick/drift domain, cite the symplecticity proposition for its matrix identity, and retain C³ regularity, bounded derivatives and a compact convex tube for order two. They explicitly separate this canonical second-order comparison system from first-order Biot–Savart dynamics and make no modified-energy transfer. The supplier's overstrong Jacobian-regularity wording is recorded in concerns; this consumer only needs the valid C¹-map symplectic identity."
+    }
+  ]
+}

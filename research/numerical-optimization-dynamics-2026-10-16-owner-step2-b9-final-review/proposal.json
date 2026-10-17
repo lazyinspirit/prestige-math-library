@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "9",
+  "status": "applied-root-approved-source-only",
+  "review_source": "research/numerical-optimization-dynamics-2026-10-16-scope-review/batch-9/review-1.json",
+  "cycles_used": 1,
+  "recorded_at": "2026-10-16T08:00:33.503323+00:00",
+  "canonical_edits": true,
+  "before_directory": "research/numerical-optimization-dynamics-2026-10-16-owner-step2-b9-final-review/before",
+  "proposal_directory": "research/numerical-optimization-dynamics-2026-10-16-owner-step2-b9-final-review/proposed",
+  "findings": [
+    {
+      "id": "def-milstein-scheme-and-iterated-integrals",
+      "defect": "S_ii undefined in all-index sum",
+      "repair": "Define S_ij,A_ij for all indices; state S_ii=I_ii,A_ii=0. Algebraic identity and all numerical claims unchanged."
+    },
+    {
+      "id": "ex-scalar-multiplicative-noise-milstein",
+      "defect": "global-rate supplier uniform-grid premise absent",
+      "repair": "Supply fixed T>0,N>=1,h=T/N<=1 and full t_n=nh grid in Example and Given; identify first step as Y1/DeltaW0 and instantiate full max-grid squared error bound. No strong/weak claim removed."
+    }
+  ],
+  "current_manifest_consumer_closure": [
+    "def-milstein-scheme-and-iterated-integrals",
+    "ex-geometric-brownian-milstein-update",
+    "ex-noncommuting-two-noise-milstein-area",
+    "ex-scalar-multiplicative-noise-milstein",
+    "lem-bounded-sde-increment-moments",
+    "lem-iterated-brownian-integral-identities",
+    "lem-milstein-local-defect-bounds",
+    "thm-commutative-milstein-strong-order-one",
+    "thm-milstein-mlmc-level-variance-and-cost"
+  ],
+  "consumer_checks": {
+    "lem-iterated-brownian-integral-identities": "Uses I_ij and the commutative product identity directly; diagonal i=j already explicitly proved; added S_ii/A_ii conventions preserve every formula.",
+    "lem-bounded-sde-increment-moments": "Uses SDE and C_b^3 coefficient conventions only; no S/A split.",
+    "lem-milstein-local-defect-bounds": "Uses I_ij and L_i sigma_j Taylor terms; no S/A split.",
+    "thm-commutative-milstein-strong-order-one": "Uses symmetric I_ij+I_ji product identity; its fixed T,N,h premise is now explicitly supplied by scalar example.",
+    "thm-milstein-mlmc-level-variance-and-cost": "Uses commutative update and shared-path order-one supplier; same-noise coupling, variance O(h\u00b2), and O(epsilon^-2) work unaffected.",
+    "ex-geometric-brownian-milstein-update": "Uses scalar update algebra and Ito exact solution; no S/A split or bounded-coefficient global-rate claim.",
+    "ex-noncommuting-two-noise-milstein-area": "Uses I_12,I_21 directly and proves endpoint-conditioned variance h\u00b2/4; diagonal conventions do not change this.",
+    "ex-scalar-multiplicative-noise-milstein": "Sin and its first three derivatives bounded, b=0, initial value deterministic L\u00b2, scalar commutativity automatic. T,N,h uniform grid now matches exact strong-order supplier; first-step moments unchanged."
+  },
+  "new_dependencies": [],
+  "required_after_approval": [
+    "Root mirrors exact current Definition and Example citations and scalar steps in contracts, including canonical1.1/2.1/3.1 numbering.",
+    "Root owns metadata/hashes/recertification/native acceptance."
+  ],
+  "no_external_fulltext_claim": "These are notation completion and literal existing-local-supplier hypothesis matching; no new external-source reading or theorem claim is needed or asserted.",
+  "applied_at": "2026-10-16T08:02:42.987030+00:00",
+  "root_approval": "Root independently reviewed exact two diffs and original Definition plus strong supplier statement/facts/proof; authorized guarded two-source apply.",
+  "guard": {
+    "batch9_phase": "held",
+    "matching_live_node_dispatch_processes": 0,
+    "both_current_sources_equal_archived_before": true
+  },
+  "postapply_consumer_check": "Same eight actual current-run consumers and both page summaries retain their existing claims; no new wikilink target, alias, dependency or external consumer introduced by either edit.",
+  "final_formatter_adjustment": "Required precheck canonical phase numbering adopted in scalar example: original1.1/1.2/2.1 becomes1.1/2.1/3.1; no proof text changed by numbering.",
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-milstein-scheme-and-iterated-integrals.md items/ex-scalar-multiplicative-noise-milstein.md",
+      "result": "1 checked,0 failing; scalar example PASS, definition has no proof phase."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/def-milstein-scheme-and-iterated-integrals.md items/ex-scalar-multiplicative-noise-milstein.md",
+      "result": "2 items,3 steps,0 defects"
+    }
+  ]
+}

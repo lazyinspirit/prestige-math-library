@@ -16,6 +16,7 @@ import { fileURLToPath } from 'node:url';
 import { quantumQCChecks } from './finite-smoke-quantum-qc.mjs';
 import { quantumQueryChecks } from './finite-smoke-quantum-query.mjs';
 import { quantumEstimationChecks } from './finite-smoke-quantum-estimation.mjs';
+import { numericalChecks } from './finite-smoke-numerical.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -91,6 +92,7 @@ function makeChecks() { return {
   ...quantumQCChecks,
   ...quantumQueryChecks,
   ...quantumEstimationChecks,
+  ...numericalChecks,
   // Finite Gaussian fixtures: integrate the original prior/likelihood product
   // independently of the proposed completed-square parameters.
   'normal-normal-finite-n-posterior': () => {

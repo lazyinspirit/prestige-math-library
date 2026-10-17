@@ -1,0 +1,53 @@
+--- current/items/alg-certified-elementary-range-evaluation.md
++++ proposed/items/alg-certified-elementary-range-evaluation.md
+@@ -158,18 +158,38 @@
+ -\pi+\arctan((-y)/(-x)),&x<0,\ y<0.
+ \end{cases}
+ $$
+-If a quadrant piece has a zero endpoint in its denominator interval, use the
+-coarse argument intervals $[0,p_+/2]$ in quadrant I,
+-$[p_-/2,p_+]$ in quadrant II, $[-p_+,-p_-/2]$ in quadrant III, or
+-$[-p_+/2,0]$ in quadrant IV, where $P_N=[p_-,p_+]$. On the
+-positive imaginary axis set $\operatorname{Arg}(iy)=\pi/2$, on the negative
+-imaginary axis use $P_N/2$ or $-P_N/2$, respectively, and on the positive
+-real axis set it to zero. The initial domain check excludes the origin and negative real axis, so
+-these are all remaining axis cases. On each piece enclose
+-$\ln\sqrt{X^2+Y^2}$ and its argument using the real evaluator, then combine
+-them into a rectangle. If every piece is finite, take the coordinatewise hull
+-of all piece rectangles. If any piece or branch is unresolved, return its
+-status and piece without forming a partial hull.
++Write this call's fixed interval as $P_N=[p_-,p_+]$ and form the exact
++dyadic sector intervals
++$$
++S_{\rm I}=[0,p_+/2],\qquad S_{\rm II}=[p_-/2,p_+],\qquad
++S_{\rm III}=[-p_+,-p_-/2],\qquad S_{\rm IV}=[-p_+/2,0].
++$$
++For every ratio-based quadrant piece, obtain its finite real arctangent
++enclosure by the real rules above; propagate any non-finite result. Form the
++full argument interval $A$ in the displayed quadrant formula by exact
++rational endpoint arithmetic, using this same $P_N$ for each occurrence of
++$\pi$. Before final outward conversion or hull formation, replace $A$ by
++$J=A\cap S_q$, where $q$ is that piece's quadrant. Compute the intersection
++by exact endpoint maxima and minima. If it is empty, return `inconclusive`
++with the piece and status `empty-argument-intersection`; do not omit the
++piece. If the denominator interval has a zero endpoint, use $J=S_q$
++instead of a ratio formula.
++
++For an interval $J=[a,b]$ produced by either branch, apply the same final
++conversion $H(J)=[\operatorname{rd}(a),\operatorname{ru}(b)]$ in the selected
++format. Perform this conversion after intersection for a ratio branch and
++after selecting $S_q$ for a coarse branch. Finite subnormal endpoints are
++accepted; an overflow returns `overflow` with the piece. On the positive
++imaginary axis use $H(P_N/2)$, on the negative imaginary axis use
++$H(-P_N/2)$, and on the positive real axis use $H([0,0])$. The initial domain
++check excludes the origin and negative real axis, so these are all remaining
++axis cases.
++
++On each piece enclose $\ln\sqrt{X^2+Y^2}$ using the real operations and
++evaluator, and combine it with the converted argument interval into a
++rectangle. If every piece is finite, take the coordinatewise hull of all
++piece rectangles. If any piece, conversion or branch is unresolved, return
++its status and piece without forming a partial hull.
+ 
+ 6. Each displayed series uses indices $0,\ldots,N$, hence at most $N+1$
+ terms; the exponential step performs exactly $s$ interval squarings. The

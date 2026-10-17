@@ -1,0 +1,71 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-50.proof-contracts.json
++++ /home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-owner-boundary-b43-56-r1/final47-53/proposed/numerical-optimization-dynamics-2026-10-16-batch-50.proof-contracts.json
+@@ -109,8 +109,8 @@
+         },
+         {
+           "case": "endpoints",
+-          "status": "not_applicable",
+-          "reason": "There is no interval or endpoint parameter."
++          "status": "checked",
++          "evidence": "Example fixes 0<epsilon<1; verification step 1.1 uses epsilon>0 before taking its inverse, and step 3.1 uses epsilon<1 for strict residual understatement. The excluded epsilon=0 is not an invertible preconditioner, while epsilon=1 would remove the strict disparity."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -331,8 +331,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The theorem assumes n>=1 and does not admit an empty matrix input."
++          "status": "checked",
++          "evidence": "Proof step 4.2 sums over the strict-lower pattern P_L; if it is empty then ell=I=J=0, so setup has no multiplier division or matching update. Proof step 6.1 still counts the actual upper-factor slots and n diagonal divisions. A successful diagonal matrix is included rather than excluded as empty data."
+         },
+         {
+           "case": "zero",
+@@ -352,7 +352,7 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "There is no interval or endpoint parameter."
++          "reason": "The ILU work statement counts finite CSR slots, row intersections and two-pointer comparisons; its only loop boundaries are integer starts/stops, not a real interval on which an endpoint limit is asserted. Proof4.2 and6.1 count each visited stored slot exactly once."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -528,7 +528,7 @@
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Steps 1.1–1.3 verify canonical input, present diagonals, and nonzero pivots."
++          "evidence": "Steps 1.1\u20131.3 verify canonical input, present diagonals, and nonzero pivots."
+         },
+         {
+           "case": "endpoints",
+@@ -851,7 +851,7 @@
+         {
+           "id": "d1",
+           "step": "1.1",
+-          "claim": "Since this run reaches the first step, [F1] gives $r_0\\ne0$ and $\\beta=\\sqrt{\\langle r_0,r_0\\rangle}>0$. Since $\\beta$ is real, $\\langle r_0/\\beta,r_0/\\beta\\rangle=\\beta^{-2}\\langle r_0,r_0\\rangle=1$, so $v_1$ has norm $1$. Inductively suppose $v_1,\\ldots,v_j$ are orthonormal. At the $i$th Gram–Schmidt substep, the current vector $w$ is orthogonal to $v_k$ for $k<i$. The update $w':=w-h_{ij}v_i$, with $h_{ij}=\\langle w,v_i\\rangle$, satisfies $\\langle w',v_i\\rangle=h_{ij}-h_{ij}\\langle v_i,v_i\\rangle=0$ and $\\langle w',v_k\\rangle=\\langle w,v_k\\rangle-h_{ij}\\langle v_i,v_k\\rangle=0$ for each $k<i$. These equalities use linearity in the first argument and orthonormality [F4]. After all $i=1,\\ldots,j$, the final $w$ is orthogonal to every current basis vector. Nonbreakdown gives $h_{j+1,j}=\\|w\\|_2>0$; the same inner-product calculation gives $\\langle v_{j+1},v_{j+1}\\rangle=h_{j+1,j}^{-2}\\langle w,w\\rangle=1$, and its orthogonality follows from that of $w$. Induction proves orthonormality through $v_{m+1}$.",
++          "claim": "Since this run reaches the first step, [F1] gives $r_0\\ne0$ and $\\beta=\\sqrt{\\langle r_0,r_0\\rangle}>0$. Since $\\beta$ is real, $\\langle r_0/\\beta,r_0/\\beta\\rangle=\\beta^{-2}\\langle r_0,r_0\\rangle=1$, so $v_1$ has norm $1$. Inductively suppose $v_1,\\ldots,v_j$ are orthonormal. At the $i$th Gram\u2013Schmidt substep, the current vector $w$ is orthogonal to $v_k$ for $k<i$. The update $w':=w-h_{ij}v_i$, with $h_{ij}=\\langle w,v_i\\rangle$, satisfies $\\langle w',v_i\\rangle=h_{ij}-h_{ij}\\langle v_i,v_i\\rangle=0$ and $\\langle w',v_k\\rangle=\\langle w,v_k\\rangle-h_{ij}\\langle v_i,v_k\\rangle=0$ for each $k<i$. These equalities use linearity in the first argument and orthonormality [F4]. After all $i=1,\\ldots,j$, the final $w$ is orthogonal to every current basis vector. Nonbreakdown gives $h_{j+1,j}=\\|w\\|_2>0$; the same inner-product calculation gives $\\langle v_{j+1},v_{j+1}\\rangle=h_{j+1,j}^{-2}\\langle w,w\\rangle=1$, and its orthogonality follows from that of $w$. Induction proves orthonormality through $v_{m+1}$.",
+           "inputs": [
+             "given",
+             "F1",
+@@ -955,8 +955,8 @@
+         },
+         {
+           "case": "endpoints",
+-          "status": "not_applicable",
+-          "reason": "There is no interval or endpoint parameter."
++          "status": "checked",
++          "evidence": "Statement assumes m>=1 completed nonbreakdown steps. Proof step 1.1 excludes zero initial residual and zero Arnoldi subdiagonal before normalization; step 1.2 begins at the actual last row and includes the m=1 triangular-kernel case."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -980,7 +980,7 @@
+           "status": "verified",
+           "source_section": "Definition",
+           "excerpt": "For $i=1,\\ldots,j$ in order, set $$h_{ij}:=\\langle w,v_i\\rangle,\\qquad w:=w-h_{ij}v_i.$$",
+-          "use": "Provides the exact modified Gram–Schmidt column recurrence used to prove the Arnoldi relation."
++          "use": "Provides the exact modified Gram\u2013Schmidt column recurrence used to prove the Arnoldi relation."
+         },
+         {
+           "supplier": "thm-least-squares-solutions-and-normal-equation",

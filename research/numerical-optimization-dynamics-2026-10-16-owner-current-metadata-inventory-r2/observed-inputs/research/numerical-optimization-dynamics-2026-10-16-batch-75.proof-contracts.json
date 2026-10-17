@@ -1,0 +1,1661 @@
+{
+  "version": 1,
+  "scope": [
+    "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+    "def-regular-differentiation-index",
+    "thm-index-one-dae-implicit-function-reduction",
+    "lem-index-one-dae-algebraic-residual-to-state-error",
+    "alg-index-one-dae-consistent-initialization",
+    "alg-index-one-dae-backward-euler-stepper",
+    "alg-index-one-dae-bdf2-stepper",
+    "lem-index-one-dae-backward-euler-local-branch",
+    "lem-index-one-dae-bdf2-local-branch",
+    "thm-index-one-dae-finite-budget-solvers-terminate",
+    "thm-index-one-dae-backward-euler-first-order-with-residuals",
+    "thm-index-one-dae-bdf2-second-order-with-residuals",
+    "ex-index-one-circuit-consistent-initialization-and-be-step",
+    "ex-index-two-dae-algebraic-residual-does-not-control-state",
+    "ex-index-three-pendulum-by-differentiation"
+  ],
+  "contracts": {
+    "def-semi-explicit-index-one-dae-and-consistent-initial-data": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. An invertible algebraic-variable Jacobian defines the selected regular index-one branch, while higher-index hidden constraints are explicitly excluded from that interface."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Algebraic residual zero defines algebraic consistency; singular g_z is outside the regular index-one branch despite that zero residual. An invertible algebraic-variable Jacobian defines the selected regular index-one branch, while higher-index hidden constraints are explicitly excluded from that interface."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A scalar differential or algebraic variable is compatible with the local formulas; BDF2 still requires its two starting states, and the fixed pendulum dimension is not changed. An invertible algebraic-variable Jacobian defines the selected regular index-one branch, while higher-index hidden constraints are explicitly excluded from that interface."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A regular index-one conclusion requires invertible algebraic Jacobian on its chart. The higher-index examples intentionally demonstrate what fails when that premise is absent. An invertible algebraic-variable Jacobian defines the selected regular index-one branch, while higher-index hidden constraints are explicitly excluded from that interface."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: The selected open chart/tube controls domain validity, while the stated finite grid and starting indices determine which initial/last errors or residuals are included. An invertible algebraic-variable Jacobian defines the selected regular index-one branch, while higher-index hidden constraints are explicitly excluded from that interface."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Statement: The algebraic branch is the locally unique supplied implicit-function chart; finite Newton primitives may fail and do not choose an arbitrary global solution branch. An invertible algebraic-variable Jacobian defines the selected regular index-one branch, while higher-index hidden constraints are explicitly excluded from that interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. An invertible algebraic-variable Jacobian defines the selected regular index-one branch, while higher-index hidden constraints are explicitly excluded from that interface."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. An invertible algebraic-variable Jacobian defines the selected regular index-one branch, while higher-index hidden constraints are explicitly excluded from that interface."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 75 author \u2014 not independent approval",
+        "notes": "Author pass checked local scope, actual supplier body excerpts, explicit step inputs, boundary dispositions, and the conditional residual and selected-branch hypotheses. This is not independent mathematical approval."
+      }
+    },
+    "def-regular-differentiation-index": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. The local presentation-specific differentiation count determines algebraic variables and their first derivatives; invertible algebraic Jacobian gives index one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The index convention counts a least positive differentiation count, while singular g_z demands checking further equations rather than assigning index zero. The local presentation-specific differentiation count determines algebraic variables and their first derivatives; invertible algebraic Jacobian gives index one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A scalar differential or algebraic variable is compatible with the local formulas; BDF2 still requires its two starting states, and the fixed pendulum dimension is not changed. The local presentation-specific differentiation count determines algebraic variables and their first derivatives; invertible algebraic Jacobian gives index one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A regular index-one conclusion requires invertible algebraic Jacobian on its chart. The higher-index examples intentionally demonstrate what fails when that premise is absent. The local presentation-specific differentiation count determines algebraic variables and their first derivatives; invertible algebraic Jacobian gives index one."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: The selected open chart/tube controls domain validity, while the stated finite grid and starting indices determine which initial/last errors or residuals are included. The local presentation-specific differentiation count determines algebraic variables and their first derivatives; invertible algebraic Jacobian gives index one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Statement: The algebraic branch is the locally unique supplied implicit-function chart; finite Newton primitives may fail and do not choose an arbitrary global solution branch. The local presentation-specific differentiation count determines algebraic variables and their first derivatives; invertible algebraic Jacobian gives index one."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. The local presentation-specific differentiation count determines algebraic variables and their first derivatives; invertible algebraic Jacobian gives index one."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. The local presentation-specific differentiation count determines algebraic variables and their first derivatives; invertible algebraic Jacobian gives index one."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 75 author \u2014 not independent approval",
+        "notes": "Author pass checked local scope, actual supplier body excerpts, explicit step inputs, boundary dispositions, and the conditional residual and selected-branch hypotheses. This is not independent mathematical approval."
+      }
+    },
+    "thm-index-one-dae-implicit-function-reduction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+          "source_section": "Definition",
+          "quote": "Let $d,m\\ge1$, let $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d\\times\\mathbb R^m$ be open, and let $f:\\Omega\\to\\mathbb R^d$ and $g:\\Omega\\to\\mathbb R^m$. A **semi-explicit differential-algebraic equation (DAE)** on $\\Omega$ is\n\n$$\nx'(t)=f(t,x(t),z(t)),\\qquad 0=g(t,x(t),z(t)).\n$$\n\nThe $x$-coordinates are the **differential variables** because their derivatives occur in the first equation. The $z$-coordinates are the **algebraic variables** because their derivatives do not occur. A solution on an interval $I$ is a pair of functions $x:I\\to\\mathbb R^d$, $z:I\\to\\mathbb R^m$ whose graph lies in $\\Omega$, with $x$ differentiable, satisfying both displayed equations at every $t\\in I$. An initial pair $(x_0,z_0)$ at $t_0$ is **algebraically consistent** when $g(t_0,x_0,z_0)=0$. On the regular index-one branch below this is the algebraic initial condition used for reduction. For higher-index systems, algebraic consistency is only necessary: differentiated constraints may impose additional initial conditions.\n\nAt a point with $g(t_*,x_*,z_*)=0$, the presentation is **regular index one** when $f,g$ are $C^1$ near the point and the square Jacobian $g_z(t_*,x_*,z_*)=D_zg(t_*,x_*,z_*)$ is invertible. The [[thm-index-one-dae-implicit-function-reduction]] then supplies a unique local branch $z=\\psi(t,x)$ through that point. Only that selected branch is used in local numerical claims. Higher-index systems and points with singular $g_z$ are outside this index-one interface.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "source_section": "Statement",
+          "quote": "Let $k,m,n\\ge1$ and $p\\in\\mathbb N$, let $U\\subseteq\\mathbb R^{m+n+p}$ be open, and let $F:U\\to\\mathbb R^n$ be $C^k$. Suppose $F(a,b,\\lambda_0)=0$ and $D_yF(a,b,\\lambda_0)$ is invertible. Then there are neighbourhoods and a unique $C^k$ map $\\varphi$ solving $F(x,\\varphi(x,\\lambda),\\lambda)=0$. More precisely, on suitable open neighbourhoods $P$ of $(a,\\lambda_0)$ and $Q$ of $b$,\n\n$$F(x,y,\\lambda)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x,\\lambda),$$\n\nand\n\n$$D\\varphi(x,\\lambda)=-D_yF(x,\\varphi(x,\\lambda),\\lambda)^{-1}D_{(x,\\lambda)}F(x,\\varphi(x,\\lambda),\\lambda).$$\n\nWhen no parameter block is present, this is the ordinary $C^k$ implicit function theorem.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Treat $(t,x)$ as the parameter block and $z$ as the unknown block in [F2]. Its hypotheses hold because $g$ is $C^k$, $g(t_*,x_*,z_*)=0$, and $g_z(t_*,x_*,z_*)$ is invertible. Therefore [F2] gives neighborhoods $U,V$ and a unique $C^k$ function $\\psi$ with the stated equivalence and derivative formula. Splitting that combined derivative into its $t$ and $x$ blocks gives the two displayed identities.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Differentiating $g(t,x,\\psi(t,x))=0$ in the $t$ direction using [F3] gives $g_t+g_z\\psi_t=0$; multiplying by $g_z^{-1}$ gives $\\psi_t=-g_z^{-1}g_t$. Differentiating in each $x$ direction gives $g_x+g_z\\psi_x=0$, hence $\\psi_x=-g_z^{-1}g_x$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The map $(t,x)\\mapsto (t,x,\\psi(t,x))$ is $C^k$, so [F3] applied to its composition with the $C^k$ map $f$ shows $F(t,x)=f(t,x,\\psi(t,x))$ is $C^k$. On the selected chart the equivalence in step 1.1 forces every DAE solution to have $z(t)=\\psi(t,x(t))$, and substitution gives $x'=F(t,x)$; conversely, a reduced solution paired with $z=\\psi(t,x)$ satisfies both DAE equations.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. A regular consistent point has a unique local algebraic graph, explicit implicit derivatives and an exactly equivalent reduced differential equation inside that chart."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Exact zero algebraic residual, zero Newton work cap or zero-step reference data are used only in the distinct roles explicitly stated; a numerical grid step stays positive. A regular consistent point has a unique local algebraic graph, explicit implicit derivatives and an exactly equivalent reduced differential equation inside that chart."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A scalar differential or algebraic variable is compatible with the local formulas; BDF2 still requires its two starting states, and the fixed pendulum dimension is not changed. A regular consistent point has a unique local algebraic graph, explicit implicit derivatives and an exactly equivalent reduced differential equation inside that chart."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A regular index-one conclusion requires invertible algebraic Jacobian on its chart. The higher-index examples intentionally demonstrate what fails when that premise is absent. A regular consistent point has a unique local algebraic graph, explicit implicit derivatives and an exactly equivalent reduced differential equation inside that chart."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: The selected open chart/tube controls domain validity, while the stated finite grid and starting indices determine which initial/last errors or residuals are included. A regular consistent point has a unique local algebraic graph, explicit implicit derivatives and an exactly equivalent reduced differential equation inside that chart."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The algebraic branch is the locally unique supplied implicit-function chart; finite Newton primitives may fail and do not choose an arbitrary global solution branch. A regular consistent point has a unique local algebraic graph, explicit implicit derivatives and an exactly equivalent reduced differential equation inside that chart."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Statement and proof step 1.1 establish that a zero of g in the chosen chart is the IFT branch value."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Proof step 2.1 substitutes the branch into g=0 and the reduced field to recover a DAE solution."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-75 adjudication",
+        "notes": "Checked current proof 1.1\u20132.1 against the full local parametrized IFT supplier and chain-rule proof. The positive dimensions, open domain, C^k regularity, root and invertible z block supply the IFT hypotheses. The equivalence is restricted to U times V; both solution directions follow by substitution. Derivative blocks retain evaluation on the selected graph. No global uniqueness or existence is asserted and no choice axiom is used."
+      }
+    },
+    "lem-index-one-dae-algebraic-residual-to-state-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-index-one-dae-implicit-function-reduction",
+          "source_section": "Statement",
+          "quote": "Let $d,m\\ge1$, let $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d\\times\\mathbb R^m$ be open, and let $f:\\Omega\\to\\mathbb R^d$, $g:\\Omega\\to\\mathbb R^m$ be $C^k$ for $k\\ge1$. Suppose $g(t_*,x_*,z_*)=0$ and $g_z(t_*,x_*,z_*)$ is invertible. Then there are neighborhoods $U$ of $(t_*,x_*)$ and $V$ of $z_*$, and a unique $C^k$ map $\\psi:U\\to V$, such that, for $(t,x)\\in U$ and $z\\in V$,\n\n$$\ng(t,x,z)=0\\quad\\Longleftrightarrow\\quad z=\\psi(t,x).\n$$\n\nIts derivatives satisfy\n\n$$\n\\psi_t=-g_z^{-1}g_t,\\qquad \\psi_x=-g_z^{-1}g_x,\n$$\n\nwith the derivatives of $g$ evaluated at $(t,x,\\psi(t,x))$. The reduced vector field $F(t,x)=f(t,x,\\psi(t,x))$ is $C^k$ on $U$. Thus solutions of the DAE that stay in this selected chart are exactly solutions of $x'=F(t,x)$ paired with $z=\\psi(t,x)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix any $(t,x)\\in K$, put $z_*=\\psi(t,x)$, and set $\\delta=z-z_*$. Since $g(t,x,z_*)=0$, [F2] applied to each component along the segment from $z_*$ to $z$ gives $g(t,x,z)=G_*(t,x)\\delta+R$. Each component remainder is at most $(\\Lambda/2)\\|\\delta\\|_2^2$; aggregating the $m$ components gives $\\|R\\|_2\\le(\\sqrt m\\,\\Lambda/2)\\|\\delta\\|_2^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The common lower singular-value bound gives $\\|G_*(t,x)\\delta\\|_2\\ge\\gamma\\|\\delta\\|_2$. Using [F3] in the form $\\|G_*(t,x)\\delta+R\\|_2\\ge\\|G_*(t,x)\\delta\\|_2-\\|R\\|_2$, we obtain $\\|g(t,x,z)\\|_2\\ge(\\gamma-(\\sqrt m\\,\\Lambda/2)\\|\\delta\\|_2)\\|\\delta\\|_2$. If $\\Lambda>0$, $\\|\\delta\\|_2<\\rho\\le\\gamma/(\\sqrt m\\,\\Lambda)$ makes the parenthesis at least $\\gamma/2$; if $\\Lambda=0$, it equals $\\gamma$. In either case it is at least $\\gamma/2$, with the same constants for every $(t,x)\\in K$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Dividing the inequality in step 2.1 by $\\gamma/2>0$ proves the asserted residual-to-state estimate for every candidate in the branch ball.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. A uniform positive lower singular bound and a sufficiently small branch ball turn algebraic residual into a local algebraic-state error bound, not a global branch certificate."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Residual zero forces the candidate to equal its selected local branch value; Lambda zero removes the extra radius restriction and gamma stays positive. A uniform positive lower singular bound and a sufficiently small branch ball turn algebraic residual into a local algebraic-state error bound, not a global branch certificate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A scalar differential or algebraic variable is compatible with the local formulas; BDF2 still requires its two starting states, and the fixed pendulum dimension is not changed. A uniform positive lower singular bound and a sufficiently small branch ball turn algebraic residual into a local algebraic-state error bound, not a global branch certificate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A regular index-one conclusion requires invertible algebraic Jacobian on its chart. The higher-index examples intentionally demonstrate what fails when that premise is absent. A uniform positive lower singular bound and a sufficiently small branch ball turn algebraic residual into a local algebraic-state error bound, not a global branch certificate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: The selected open chart/tube controls domain validity, while the stated finite grid and starting indices determine which initial/last errors or residuals are included. A uniform positive lower singular bound and a sufficiently small branch ball turn algebraic residual into a local algebraic-state error bound, not a global branch certificate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The algebraic branch is the locally unique supplied implicit-function chart; finite Newton primitives may fail and do not choose an arbitrary global solution branch. A uniform positive lower singular bound and a sufficiently small branch ball turn algebraic residual into a local algebraic-state error bound, not a global branch certificate."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. A uniform positive lower singular bound and a sufficiently small branch ball turn algebraic residual into a local algebraic-state error bound, not a global branch certificate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. A uniform positive lower singular bound and a sufficiently small branch ball turn algebraic residual into a local algebraic-state error bound, not a global branch certificate."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-75 adjudication",
+        "notes": "Checked proof 1.1\u20133.1 and actual Taylor and Euclidean triangle suppliers. The remainder bound follows directly from the centered Jacobian bound (not an asserted uniform Hessian bound): for each component H_i(s)=g_i(t,x,z_*+s delta)-s(G_*delta)_i, H_i(0)=0 and |H_i-prime(s)|<=Lambda s ||delta||^2. Cauchy mean value applied to H_i and s^2 on [0,1] yields |H_i(1)|<=Lambda||delta||^2/2. The published thm-cauchy-mean-value product identity has been independently read; its interior point has 2s>0. Aggregation gives sqrt(m) Lambda/2, and radius coercivity yields gamma/2. This supplies the elementary intermediate derivation implicit in step 1.1. Checked delta=0, Lambda=0, scalar m=1, empty K (vacuous), and the open-ball restriction. No global inverse or AC claim."
+      }
+    },
+    "alg-index-one-dae-consistent-initialization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. Finite-budget Newton in the selected chart returns exact-consistent only after an exact-zero recheck and distinguishes approximate and failed initialization."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero Newton budget is allowed and can certify only an already satisfactory seed; exact-consistent is issued only after the exact-zero algebraic recheck. Finite-budget Newton in the selected chart returns exact-consistent only after an exact-zero recheck and distinguishes approximate and failed initialization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A scalar differential or algebraic variable is compatible with the local formulas; BDF2 still requires its two starting states, and the fixed pendulum dimension is not changed. Finite-budget Newton in the selected chart returns exact-consistent only after an exact-zero recheck and distinguishes approximate and failed initialization."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A regular index-one conclusion requires invertible algebraic Jacobian on its chart. The higher-index examples intentionally demonstrate what fails when that premise is absent. Finite-budget Newton in the selected chart returns exact-consistent only after an exact-zero recheck and distinguishes approximate and failed initialization."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: The selected open chart/tube controls domain validity, while the stated finite grid and starting indices determine which initial/last errors or residuals are included. Finite-budget Newton in the selected chart returns exact-consistent only after an exact-zero recheck and distinguishes approximate and failed initialization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Statement: The algebraic branch is the locally unique supplied implicit-function chart; finite Newton primitives may fail and do not choose an arbitrary global solution branch. Finite-budget Newton in the selected chart returns exact-consistent only after an exact-zero recheck and distinguishes approximate and failed initialization."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. Finite-budget Newton in the selected chart returns exact-consistent only after an exact-zero recheck and distinguishes approximate and failed initialization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. Finite-budget Newton in the selected chart returns exact-consistent only after an exact-zero recheck and distinguishes approximate and failed initialization."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-75 adjudication",
+        "notes": "Reviewed entire procedure against the selected IFT chart and finite-budget Newton Definition. Fixed (t0,x0) yields a C^1 square residual on the open V domain; N=0 tests the seed, positive tolerance records approximate rather than exact consistency, and domain/singular/budget failures retain valid iterates. No arbitrary-seed convergence is asserted. No AC is used."
+      }
+    },
+    "alg-index-one-dae-backward-euler-stepper": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. The finite positive-step grid uses a coupled scaled differential/algebraic residual, chart-domain tests and finite Newton budget before appending a candidate."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero Newton budget is allowed but does not guarantee an accepted step; nonpositive h and a zero grid count take invalid-grid. The finite positive-step grid uses a coupled scaled differential/algebraic residual, chart-domain tests and finite Newton budget before appending a candidate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A scalar differential or algebraic variable is compatible with the local formulas; BDF2 still requires its two starting states, and the fixed pendulum dimension is not changed. The finite positive-step grid uses a coupled scaled differential/algebraic residual, chart-domain tests and finite Newton budget before appending a candidate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A regular index-one conclusion requires invertible algebraic Jacobian on its chart. The higher-index examples intentionally demonstrate what fails when that premise is absent. The finite positive-step grid uses a coupled scaled differential/algebraic residual, chart-domain tests and finite Newton budget before appending a candidate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The selected open chart/tube controls domain validity, while the stated finite grid and starting indices determine which initial/last errors or residuals are included. The finite positive-step grid uses a coupled scaled differential/algebraic residual, chart-domain tests and finite Newton budget before appending a candidate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Statement: The algebraic branch is the locally unique supplied implicit-function chart; finite Newton primitives may fail and do not choose an arbitrary global solution branch. The finite positive-step grid uses a coupled scaled differential/algebraic residual, chart-domain tests and finite Newton budget before appending a candidate."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. The finite positive-step grid uses a coupled scaled differential/algebraic residual, chart-domain tests and finite Newton budget before appending a candidate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. The finite positive-step grid uses a coupled scaled differential/algebraic residual, chart-domain tests and finite Newton budget before appending a candidate."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-75 adjudication",
+        "notes": "Reviewed full procedure and actual Newton, initialization, backward-Euler residual-unit and selected-chart suppliers. Positive tolerances make scaling legal; the open state slice is the Newton domain, seed membership is checked before a call, and only root status appends. Scaled norm <=1 bounds each derivative/algebraic block separately. Positive grid and zero correction budget cases are specified, and no global Newton success is claimed."
+      }
+    },
+    "alg-index-one-dae-bdf2-stepper": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. The two-start constant-step recurrence uses its extrapolated seed and coupled scaled BDF2 residual only in the selected open chart tube."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero Newton budget may fail from its extrapolated seed; nonpositive h or fewer than two starts take invalid-grid. The two-start constant-step recurrence uses its extrapolated seed and coupled scaled BDF2 residual only in the selected open chart tube."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A scalar differential or algebraic variable is compatible with the local formulas; BDF2 still requires its two starting states, and the fixed pendulum dimension is not changed. The two-start constant-step recurrence uses its extrapolated seed and coupled scaled BDF2 residual only in the selected open chart tube."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A regular index-one conclusion requires invertible algebraic Jacobian on its chart. The higher-index examples intentionally demonstrate what fails when that premise is absent. The two-start constant-step recurrence uses its extrapolated seed and coupled scaled BDF2 residual only in the selected open chart tube."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The selected open chart/tube controls domain validity, while the stated finite grid and starting indices determine which initial/last errors or residuals are included. The two-start constant-step recurrence uses its extrapolated seed and coupled scaled BDF2 residual only in the selected open chart tube."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Statement: The algebraic branch is the locally unique supplied implicit-function chart; finite Newton primitives may fail and do not choose an arbitrary global solution branch. The two-start constant-step recurrence uses its extrapolated seed and coupled scaled BDF2 residual only in the selected open chart tube."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. The two-start constant-step recurrence uses its extrapolated seed and coupled scaled BDF2 residual only in the selected open chart tube."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. The two-start constant-step recurrence uses its extrapolated seed and coupled scaled BDF2 residual only in the selected open chart tube."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-75 adjudication",
+        "notes": "Reviewed complete procedure and actual constant-ratio interpolation coefficients, variable-step algorithm, residual units and finite-budget Newton supplier. Ratio one gives 3,-4,1 and 2h; two starts and positive scaling tolerances are essential. Extrapolated-seed membership and all Newton failure paths preserve the prefix, including zero correction budget. Confirmed refuter:75:1: successful output omitted the accumulated sequence; amended only the completed return clause to return all state pairs 0 through N_t. No equation, branch test or acceptance criterion changes; direct consumers checked for actual use."
+      }
+    },
+    "lem-index-one-dae-backward-euler-local-branch": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-index-one-dae-implicit-function-reduction",
+          "source_section": "Statement",
+          "quote": "Let $d,m\\ge1$, let $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d\\times\\mathbb R^m$ be open, and let $f:\\Omega\\to\\mathbb R^d$, $g:\\Omega\\to\\mathbb R^m$ be $C^k$ for $k\\ge1$. Suppose $g(t_*,x_*,z_*)=0$ and $g_z(t_*,x_*,z_*)$ is invertible. Then there are neighborhoods $U$ of $(t_*,x_*)$ and $V$ of $z_*$, and a unique $C^k$ map $\\psi:U\\to V$, such that, for $(t,x)\\in U$ and $z\\in V$,\n\n$$\ng(t,x,z)=0\\quad\\Longleftrightarrow\\quad z=\\psi(t,x).\n$$\n\nIts derivatives satisfy\n\n$$\n\\psi_t=-g_z^{-1}g_t,\\qquad \\psi_x=-g_z^{-1}g_x,\n$$\n\nwith the derivatives of $g$ evaluated at $(t,x,\\psi(t,x))$. The reduced vector field $F(t,x)=f(t,x,\\psi(t,x))$ is $C^k$ on $U$. Thus solutions of the DAE that stay in this selected chart are exactly solutions of $x'=F(t,x)$ paired with $z=\\psi(t,x)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "source_section": "Statement",
+          "quote": "Let $k,m,n\\ge1$ and $p\\in\\mathbb N$, let $U\\subseteq\\mathbb R^{m+n+p}$ be open, and let $F:U\\to\\mathbb R^n$ be $C^k$. Suppose $F(a,b,\\lambda_0)=0$ and $D_yF(a,b,\\lambda_0)$ is invertible. Then there are neighbourhoods and a unique $C^k$ map $\\varphi$ solving $F(x,\\varphi(x,\\lambda),\\lambda)=0$. More precisely, on suitable open neighbourhoods $P$ of $(a,\\lambda_0)$ and $Q$ of $b$,\n\n$$F(x,y,\\lambda)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x,\\lambda),$$\n\nand\n\n$$D\\varphi(x,\\lambda)=-D_yF(x,\\varphi(x,\\lambda),\\lambda)^{-1}D_{(x,\\lambda)}F(x,\\varphi(x,\\lambda),\\lambda).$$\n\nWhen no parameter block is present, this is the ordinary $C^k$ implicit function theorem.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $\\Phi(h,t,\\xi,X,Z)=(X-\\xi-hf(t,X,Z),g(t,X,Z))$. At $h=0,\\xi=x,X=x,Z=\\psi(t,x)$, [F1] gives $\\Phi=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The derivative of $\\Phi$ in the unknown pair $(X,Z)$ at this zero is the block matrix $\\begin{pmatrix}I_d&0\\\\g_x&g_z\\end{pmatrix}$. If this matrix sends $(u,v)$ to zero, its first row gives $u=0$, and its second gives $g_zv=0$; invertibility in [F1] gives $v=0$. The square matrix is therefore invertible.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] to $\\Phi$, with $(h,t,\\xi)$ as parameters and $(X,Z)$ as unknowns. It gives a unique nearby root branch for all sufficiently small parameter changes, proving the local assertion.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The reference parameter graph $\\{(0,t,x(t)):t\\in[a,b]\\}$ is compact and lies in the open union of the IFT parameter neighborhoods from step 2.1. Compactness gives $\\delta>0$ such that the $\\delta$-neighborhood of this graph lies in that union. Shrink each associated unknown neighborhood inside the common branch chart. Thus, for all sufficiently small $|h|$ and input states sufficiently close to the reference graph, one IFT chart supplies the corresponding unique local root.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. Near the zero-step reference graph the coupled backward-Euler equations have a unique local selected root and a uniform compact-subsegment step bound."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The zero-step datum is the implicit-function reference, where the differential root is the previous state and the algebraic value is its selected branch. Near the zero-step reference graph the coupled backward-Euler equations have a unique local selected root and a uniform compact-subsegment step bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A scalar differential or algebraic variable is compatible with the local formulas; BDF2 still requires its two starting states, and the fixed pendulum dimension is not changed. Near the zero-step reference graph the coupled backward-Euler equations have a unique local selected root and a uniform compact-subsegment step bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A regular index-one conclusion requires invertible algebraic Jacobian on its chart. The higher-index examples intentionally demonstrate what fails when that premise is absent. Near the zero-step reference graph the coupled backward-Euler equations have a unique local selected root and a uniform compact-subsegment step bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The implicit-function reference includes h=0, whereas the resulting numerical theorem uses a sufficiently small positive step. Uniformity requires a compact subsegment strictly inside one chart. Near the zero-step reference graph the coupled backward-Euler equations have a unique local selected root and a uniform compact-subsegment step bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The algebraic branch is the locally unique supplied implicit-function chart; finite Newton primitives may fail and do not choose an arbitrary global solution branch. Near the zero-step reference graph the coupled backward-Euler equations have a unique local selected root and a uniform compact-subsegment step bound."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. Near the zero-step reference graph the coupled backward-Euler equations have a unique local selected root and a uniform compact-subsegment step bound."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. Near the zero-step reference graph the coupled backward-Euler equations have a unique local selected root and a uniform compact-subsegment step bound."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-75 adjudication",
+        "notes": "Checked every proof step against actual IFT and reduced-branch suppliers and the coupled BE Definition. At h=0 the unknown Jacobian has diagonal I_d and g_z, so its kernel is zero. Local parameter neighborhoods cover the compact reference graph; a finite subcover and positive margin give a common small-step bound for chart-selected local roots. This is local uniqueness in the selected neighborhood, not arbitrary-start Newton convergence or global uniqueness. No AC is used."
+      }
+    },
+    "lem-index-one-dae-bdf2-local-branch": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-index-one-dae-implicit-function-reduction",
+          "source_section": "Statement",
+          "quote": "Let $d,m\\ge1$, let $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d\\times\\mathbb R^m$ be open, and let $f:\\Omega\\to\\mathbb R^d$, $g:\\Omega\\to\\mathbb R^m$ be $C^k$ for $k\\ge1$. Suppose $g(t_*,x_*,z_*)=0$ and $g_z(t_*,x_*,z_*)$ is invertible. Then there are neighborhoods $U$ of $(t_*,x_*)$ and $V$ of $z_*$, and a unique $C^k$ map $\\psi:U\\to V$, such that, for $(t,x)\\in U$ and $z\\in V$,\n\n$$\ng(t,x,z)=0\\quad\\Longleftrightarrow\\quad z=\\psi(t,x).\n$$\n\nIts derivatives satisfy\n\n$$\n\\psi_t=-g_z^{-1}g_t,\\qquad \\psi_x=-g_z^{-1}g_x,\n$$\n\nwith the derivatives of $g$ evaluated at $(t,x,\\psi(t,x))$. The reduced vector field $F(t,x)=f(t,x,\\psi(t,x))$ is $C^k$ on $U$. Thus solutions of the DAE that stay in this selected chart are exactly solutions of $x'=F(t,x)$ paired with $z=\\psi(t,x)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "source_section": "Statement",
+          "quote": "Let $k,m,n\\ge1$ and $p\\in\\mathbb N$, let $U\\subseteq\\mathbb R^{m+n+p}$ be open, and let $F:U\\to\\mathbb R^n$ be $C^k$. Suppose $F(a,b,\\lambda_0)=0$ and $D_yF(a,b,\\lambda_0)$ is invertible. Then there are neighbourhoods and a unique $C^k$ map $\\varphi$ solving $F(x,\\varphi(x,\\lambda),\\lambda)=0$. More precisely, on suitable open neighbourhoods $P$ of $(a,\\lambda_0)$ and $Q$ of $b$,\n\n$$F(x,y,\\lambda)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x,\\lambda),$$\n\nand\n\n$$D\\varphi(x,\\lambda)=-D_yF(x,\\varphi(x,\\lambda),\\lambda)^{-1}D_{(x,\\lambda)}F(x,\\varphi(x,\\lambda),\\lambda).$$\n\nWhen no parameter block is present, this is the ordinary $C^k$ implicit function theorem.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $\\Phi(h,t,\\xi,\\zeta,X,Z)=(3X-4\\xi+\\zeta-2hf(t,X,Z),g(t,X,Z))$. At $h=0,\\xi=\\zeta=X=x,Z=\\psi(t,x)$, [F1] gives $\\Phi=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The derivative in $(X,Z)$ at this zero is $\\begin{pmatrix}3I_d&0\\\\g_x&g_z\\end{pmatrix}$. If it annihilates $(u,v)$, then $3u=0$, so $u=0$; the second row then gives $g_zv=0$, so $v=0$ by [F1]. Hence the square derivative matrix is invertible.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] with $(h,t,\\xi,\\zeta)$ as parameters and $(X,Z)$ as unknowns. The implicit function theorem gives a unique nearby root branch for all sufficiently small changes in those parameters.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The reference parameter graph $\\{(0,t,x(t),x(t)):t\\in[a,b]\\}$ is compact and lies in the open union of the IFT parameter neighborhoods from step 2.1. Compactness gives $\\delta>0$ such that the $\\delta$-neighborhood of this graph lies in that union. Shrink each associated unknown neighborhood inside the common branch chart. Thus, for all sufficiently small $|h|$ and pairs of input states sufficiently close to the reference graph, one IFT chart supplies the corresponding unique local root.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. The two-start BDF2 root equations have a locally unique branch near the coincident reference states and zero-step datum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: At zero step and coincident previous states, the differential equation has the reference root; local existence does not require distinct starts. The two-start BDF2 root equations have a locally unique branch near the coincident reference states and zero-step datum."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A scalar differential or algebraic variable is compatible with the local formulas; BDF2 still requires its two starting states, and the fixed pendulum dimension is not changed. The two-start BDF2 root equations have a locally unique branch near the coincident reference states and zero-step datum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A regular index-one conclusion requires invertible algebraic Jacobian on its chart. The higher-index examples intentionally demonstrate what fails when that premise is absent. The two-start BDF2 root equations have a locally unique branch near the coincident reference states and zero-step datum."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The reference data have h=0 and both starts equal to x; the local statement then permits small nearby step/start data. Uniform bounds require positive chart margin. The two-start BDF2 root equations have a locally unique branch near the coincident reference states and zero-step datum."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The algebraic branch is the locally unique supplied implicit-function chart; finite Newton primitives may fail and do not choose an arbitrary global solution branch. The two-start BDF2 root equations have a locally unique branch near the coincident reference states and zero-step datum."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. The two-start BDF2 root equations have a locally unique branch near the coincident reference states and zero-step datum."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. The two-start BDF2 root equations have a locally unique branch near the coincident reference states and zero-step datum."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-75 adjudication",
+        "notes": "Checked all steps: base residual vanishes at (0,t,x,x,x,psi(t,x)), and the square block derivative has invertible diagonal 3I_d and g_z. The actual parametrized IFT supplies the local root for nearby history parameters. Compactness and the common positive chart margin supply a common step bound for selected local neighborhoods. The BDF2 return-output clarification has no effect on the residual or this proof. No AC is used."
+      }
+    },
+    "thm-index-one-dae-finite-budget-solvers-terminate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-finite-budget-newton-work-and-status",
+          "source_section": "Statement",
+          "quote": "For admissible inputs of [[alg-finite-budget-newton-for-vector-residuals]] with budget $N\\in\\mathbb N_0$, every entered iterate lies in $U$. The procedure makes at most $N$ correction calls, at most $N$ accepted updates, and at most $N+1$ explicit outer residual evaluations. It returns a stated residual, singular-Jacobian, invalid-trial or budget status. Termination is in the exact-arithmetic model where residual and Jacobian evaluations, domain decisions and correction calls return in finite time. No convergence, tolerance-attainment or backend complexity claim follows.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-index-one-dae-consistent-initialization",
+          "source_section": "Definition",
+          "quote": "Let $f,g$ define a regular index-one DAE and let $U\\times V$ be a selected local branch chart from [[thm-index-one-dae-implicit-function-reduction]], so $g(t,x,z)=0$ is equivalent to $z=\\psi(t,x)$ there. Input $t_0,x_0$, a seed $z_{\\mathrm{seed}}\\in V$, an algebraic residual tolerance $\\varepsilon_a\\ge0$, and a finite Newton-correction budget $N\\in\\mathbb N_0$. If $(t_0,x_0)\\notin U$, $g(t_0,x_0,\\cdot)$ is undefined at the seed, or dimensions do not match, return invalid-input.\n\nCall [[alg-finite-budget-newton-for-vector-residuals]] on the square residual $G(z)=g(t_0,x_0,z)$, with initial value $z_{\\mathrm{seed}}$, tolerance $\\varepsilon_a$, and budget $N$, restricting evaluations to the chart's open $z$-domain. If it reports root, reevaluate $G(z_0)$ once: if that residual is exactly zero, return $(x_0,z_0,\\texttt{exact-consistent})$; otherwise return $(x_0,z_0,\\texttt{approximate-consistent})$ and its norm. Map singular-jacobian, invalid-trial, and iteration-budget-exhausted to the corresponding initialization statuses and return the last valid iterate.\n\nThe procedure makes no arbitrary-start convergence claim. approximate-consistent records a residual bound; it is not relabeled as exact consistency. Under the index-one branch hypotheses an exact consistent value exists locally, by [[thm-index-one-dae-implicit-function-reduction]], but the finite Newton budget may fail to find it.\n\nThe solve has $m$ algebraic unknowns. Record residual queries, Jacobian assemblies and correction solves separately. Their costs depend on the chosen backend.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-index-one-dae-backward-euler-stepper",
+          "source_section": "Definition",
+          "quote": "Input $f,g$, a constant grid $t_n=t_0+nh$ with $h>0$ and $N_t\\in\\mathbb N$, an initial pair $(X_0,Z_0)$, and a selected open tube $\\mathcal T\\subset\\Omega$ inside the local branch chart of [[thm-index-one-dae-implicit-function-reduction]], where $g(t,x,z)=0$ is equivalent to $z=\\psi(t,x)$. For each time $t$, write $\\mathcal T_t=\\{(X,Z):(t,X,Z)\\in\\mathcal T\\}$ for the open state slice used as the Newton evaluation domain. Also input positive residual tolerances $\\eta_d,\\eta_a$, a finite Newton-correction budget $B\\in\\mathbb N_0$, and an initial algebraic-residual bound $\\eta_{a,0}\\ge0$. Return invalid-grid if $h\\le0$ or $N_t=0$, and invalid-input for incompatible dimensions, data outside the function domains, or $(X_0,Z_0)\\notin\\mathcal T_{t_0}$. Compute the starting algebraic residual once; return inconsistent-initial-data if $\\|g(t_0,X_0,Z_0)\\|_2>\\eta_{a,0}$.\n\nFor $n=1,\\ldots,N_t$, form the coupled update residual\n\n$$\nR_n(X,Z)=\\bigl(X-X_{n-1}-h f(t_n,X,Z),\\ g(t_n,X,Z)\\bigr)\n$$\n\nand the scaled square residual\n\n$$\n\\mathcal R_n(X,Z)=\\left(\\frac{X-X_{n-1}-h f(t_n,X,Z)}{h\\eta_d},\\ \\frac{g(t_n,X,Z)}{\\eta_a}\\right).\n$$\n\nUse $(X_{n-1},Z_{n-1})$ as the Newton seed. Before calling Newton, if $(X_{n-1},Z_{n-1})\\notin\\mathcal T_{t_n}$, return invalid-trial with the already computed prefix. Otherwise call [[alg-finite-budget-newton-for-vector-residuals]] on $\\mathcal R_n$ with residual tolerance $1$, budget $B$, and $\\mathcal T_{t_n}$ as its evaluation domain. If the returned status is root and the candidate lies in $\\mathcal T_{t_n}$, reevaluate $R_n$ once to retain both unscaled residuals, then append the candidate. Otherwise return the corresponding singular-Jacobian, invalid-trial, or iteration-budget-exhausted status and the already computed prefix. The input functions are defined on the selected tube, so no separate evaluation-failure branch is needed. If every step is accepted, return completed and the state sequence.\n\nFor recording, define the derivative residual $r^d_n=(X_n-X_{n-1})/h-f(t_n,X_n,Z_n)$ and the algebraic residual $r^a_n=g(t_n,X_n,Z_n)$. root means only that the scaled residual tolerance was met; it does not assert an exact zero, uniqueness, Newton convergence from an arbitrary seed, or a discretization error bound.\n\nUse the coupled $(d+m)$-dimensional residual and its current block Jacobian. Record residual queries, Jacobian assemblies and correction solves separately; backend costs are not specified.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-index-one-dae-bdf2-stepper",
+          "source_section": "Definition",
+          "quote": "Input $f,g$, a constant grid $t_n=t_0+nh$ with $h>0$ and $N_t\\ge2$, two starting pairs $(X_0,Z_0),(X_1,Z_1)$, and a selected open tube $\\mathcal T\\subset\\Omega$ inside the local branch chart of [[thm-index-one-dae-implicit-function-reduction]], where $g(t,x,z)=0$ is equivalent to $z=\\psi(t,x)$. For each time $t$, write $\\mathcal T_t=\\{(X,Z):(t,X,Z)\\in\\mathcal T\\}$ for the open state slice used as the Newton evaluation domain. Also input positive residual tolerances $\\eta_d,\\eta_a$, a finite Newton-correction budget $B\\in\\mathbb N_0$, and two starting algebraic-residual bounds $\\eta_{a,0},\\eta_{a,1}\\ge0$. Return invalid-grid for a nonpositive step or fewer than two starting states, and invalid-input for incompatible dimensions, data outside the function domains, or $(X_j,Z_j)\\notin\\mathcal T_{t_j}$ for either $j=0,1$. Compute $r^a_j=g(t_j,X_j,Z_j)$ for both $j=0,1$; if $\\|r^a_j\\|_2>\\eta_{a,j}$ for either start, return inconsistent-initial-data.\n\nFor $n=2,\\ldots,N_t$, form\n\n$$\nR_n(X,Z)=\\bigl(3X-4X_{n-1}+X_{n-2}-2h f(t_n,X,Z),\\ g(t_n,X,Z)\\bigr)\n$$\n\nand\n\n$$\n\\mathcal R_n(X,Z)=\\left(\\frac{3X-4X_{n-1}+X_{n-2}-2h f(t_n,X,Z)}{2h\\eta_d},\\ \\frac{g(t_n,X,Z)}{\\eta_a}\\right).\n$$\n\nUse $(2X_{n-1}-X_{n-2},Z_{n-1})$ as the Newton seed. Before calling Newton, if $(2X_{n-1}-X_{n-2},Z_{n-1})\\notin\\mathcal T_{t_n}$, return invalid-trial with the computed prefix. Otherwise call [[alg-finite-budget-newton-for-vector-residuals]] on $\\mathcal R_n$ with tolerance $1$, budget $B$, and $\\mathcal T_{t_n}$ as the evaluation domain. Append a candidate only when Newton reports root and the candidate lies in $\\mathcal T_{t_n}$; reevaluate $R_n$ once to record its unscaled residual blocks. Otherwise return the corresponding singular-Jacobian, invalid-trial, or iteration-budget-exhausted status with the computed prefix. The input functions are defined on the selected tube, so no separate evaluation-failure branch is needed. If all steps are accepted, return completed and the state sequence $((X_0,Z_0),\\ldots,(X_{N_t},Z_{N_t}))$.\n\nFor an accepted step, the constant-step BDF2 derivative residual is\n$$\nr^d_n=\\frac{3X_n-4X_{n-1}+X_{n-2}}{2h}-f(t_n,X_n,Z_n),\n$$\nand the algebraic residual is $r^a_n=g(t_n,X_n,Z_n)$.  The procedure makes no claim that Newton finds a root or that an accepted state is the exact selected branch root.\n\nUse the coupled $(d+m)$-dimensional residual and its current block Jacobian. Record residual queries, Jacobian assemblies and correction solves separately; backend costs are not specified.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply the proved work bound [F1] to each admissible Newton call. It gives at most $B+1$ explicit residual evaluations and $B$ correction calls. The exact procedure [[alg-finite-budget-newton-for-vector-residuals]] passes its current Jacobian and residual to the correction routine; a successful correction solves that single square system. The input dimensions in [F2]\u2013[F4] are $m$ and $d+m$, respectively, giving the asserted system dimensions. This does not bound assembly or solve costs.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Initialization makes one Newton call by [F2]. If it returns a non-root status, the wrapper returns immediately; if it returns root, it reevaluates the algebraic residual once to distinguish exact from approximate consistency. Thus it uses at most $B+2$ residual evaluations.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "A backward-Euler call first evaluates its starting algebraic residual once, and a BDF2 call evaluates its two starting algebraic residuals, by [F3] and [F4]. Thus their preliminary checks use at most one and two evaluations, respectively, even when a bound fails. Each attempted step makes at most one Newton call; on a root status the wrapper reevaluates the block residual once to record the unscaled blocks, and otherwise returns immediately. Each attempted step therefore adds at most $B+2$ evaluations. Summing gives $1+S(B+2)$ for backward Euler and $2+S(B+2)$ for BDF2. The pre-call membership tests add no residual evaluation, and all loops and tests are finite.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "All remaining tests, assignments and arithmetic are finite under the returning-primitive convention. The argument therefore proves termination without assuming that Newton converges or accepts a step.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For each appended candidate, [F3] or [F4] gives a Newton root status with tolerance $1$. The procedure's residual test gives $\\|\\mathcal R_n\\|_2\\le1$. In both methods its blocks equal $r^d_n/\\eta_d$ and $r^a_n/\\eta_a$. Each block norm is at most the concatenated Euclidean norm, and both tolerances are positive; hence $\\|r^d_n\\|_2\\le\\eta_d$ and $\\|r^a_n\\|_2\\le\\eta_a$. No other solver status supplies this premise.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. Returning residual/Jacobian/correction primitives and finite budgets give explicit query counts including initial checks and early failures, plus conditional appended-residual bounds."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: A zero Newton cap permits the initial residual check and an early status; successful candidates are conditional, not promised by a zero budget. Returning residual/Jacobian/correction primitives and finite budgets give explicit query counts including initial checks and early failures, plus conditional appended-residual bounds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A scalar differential or algebraic variable is compatible with the local formulas; BDF2 still requires its two starting states, and the fixed pendulum dimension is not changed. Returning residual/Jacobian/correction primitives and finite budgets give explicit query counts including initial checks and early failures, plus conditional appended-residual bounds."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A regular index-one conclusion requires invertible algebraic Jacobian on its chart. The higher-index examples intentionally demonstrate what fails when that premise is absent. Returning residual/Jacobian/correction primitives and finite budgets give explicit query counts including initial checks and early failures, plus conditional appended-residual bounds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The selected open chart/tube controls domain validity, while the stated finite grid and starting indices determine which initial/last errors or residuals are included. Returning residual/Jacobian/correction primitives and finite budgets give explicit query counts including initial checks and early failures, plus conditional appended-residual bounds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The algebraic branch is the locally unique supplied implicit-function chart; finite Newton primitives may fail and do not choose an arbitrary global solution branch. Returning residual/Jacobian/correction primitives and finite budgets give explicit query counts including initial checks and early failures, plus conditional appended-residual bounds."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. Returning residual/Jacobian/correction primitives and finite budgets give explicit query counts including initial checks and early failures, plus conditional appended-residual bounds."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. Returning residual/Jacobian/correction primitives and finite budgets give explicit query counts including initial checks and early failures, plus conditional appended-residual bounds."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-75 adjudication",
+        "notes": "Checked all five steps against the full Newton work/status proof and all three DAE procedures. Returning primitives are an explicit hypothesis; B=0 still evaluates the seed residual before budget return. Initialization adds at most one post-root query; BE/BDF2 add one/two initial checks and at most B+2 per attempted step, even for seed/domain or early failures. Successful correction dimensions are m and d+m. Each scaled block norm is bounded by the combined norm, so accepted residual bounds follow without claiming convergence, exact roots or backend cost bounds. BDF2 completed-state output clarification requires no consumer repair."
+      }
+    },
+    "thm-index-one-dae-backward-euler-first-order-with-residuals": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-index-one-dae-implicit-function-reduction",
+          "source_section": "Statement",
+          "quote": "Let $d,m\\ge1$, let $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d\\times\\mathbb R^m$ be open, and let $f:\\Omega\\to\\mathbb R^d$, $g:\\Omega\\to\\mathbb R^m$ be $C^k$ for $k\\ge1$. Suppose $g(t_*,x_*,z_*)=0$ and $g_z(t_*,x_*,z_*)$ is invertible. Then there are neighborhoods $U$ of $(t_*,x_*)$ and $V$ of $z_*$, and a unique $C^k$ map $\\psi:U\\to V$, such that, for $(t,x)\\in U$ and $z\\in V$,\n\n$$\ng(t,x,z)=0\\quad\\Longleftrightarrow\\quad z=\\psi(t,x).\n$$\n\nIts derivatives satisfy\n\n$$\n\\psi_t=-g_z^{-1}g_t,\\qquad \\psi_x=-g_z^{-1}g_x,\n$$\n\nwith the derivatives of $g$ evaluated at $(t,x,\\psi(t,x))$. The reduced vector field $F(t,x)=f(t,x,\\psi(t,x))$ is $C^k$ on $U$. Thus solutions of the DAE that stay in this selected chart are exactly solutions of $x'=F(t,x)$ paired with $z=\\psi(t,x)$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-index-one-dae-algebraic-residual-to-state-error",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a compact set of base points $(t,x)$ in a selected branch chart from [[thm-index-one-dae-implicit-function-reduction]], and put $z_*=\\psi(t,x)$. Suppose $g(t,x,\\cdot)$ is $C^2$ on $B(z_*,\\rho)$ for every $(t,x)\\in K$. Let $G_*(t,x)=g_z(t,x,\\psi(t,x))$. Assume common constants $\\gamma>0$, $\\Lambda\\ge0$, and $\\rho>0$ satisfy\n\n$$\n\\|G_*(t,x)v\\|_2\\ge\\gamma\\|v\\|_2\\quad(v\\in\\mathbb R^m),\\qquad \\|g_z(t,x,z)-G_*(t,x)\\|_{\\mathrm{op}}\\le\\Lambda\\|z-\\psi(t,x)\\|_2\n$$\n\nfor every $(t,x)\\in K$ and $z\\in B(\\psi(t,x),\\rho)$; if $\\Lambda>0$, assume $\\rho\\le\\gamma/(\\sqrt m\\,\\Lambda)$. Then, uniformly for all such base points and candidates,\n\n$$\n\\|z-z_*\\|_2\\le \\frac{2}{\\gamma}\\|g(t,x,z)\\|_2.\n$$\n\nThe estimate is local: it applies only to candidates in the specified branch ball and does not turn a residual into a global branch or uniqueness certificate.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-discrete-one-step-error-recurrence-bound",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-backward-euler-step-equation",
+          "source_section": "Definition",
+          "quote": "Let $f:D\\to\\mathbb R^d$ define a first-order initial-value problem on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$. Given a time $t_n$, step $h_n>0$, and state $y_n$ with $(t_n,y_n)\\in D$, an admissible endpoint $y_{n+1}$ must satisfy $(t_n+h_n,y_{n+1})\\in D$. The backward Euler endpoint is any such $y_{n+1}$ satisfying\n\n$$y_{n+1}=y_n+h_n f(t_n+h_n,y_{n+1}).$$\n\nIts update residual at an approximate endpoint $z$ with $(t_n+h_n,z)\\in D$ is\n\n$$G_n^{\\rm BE}(z)=z-y_n-h_n f(t_n+h_n,z).$$\n\nWhen $f$ is defined at the endpoint, the derivative residual is $G_n^{\\rm BE}(z)/h_n$. The equation can have no, one, or several roots on a restricted admissible branch set; this definition by itself asserts neither existence nor uniqueness.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $\\bar x_n=\\bar x(t_n)$ and $\\bar z_n=\\psi(t_n,\\bar x_n)$. By [F2], the algebraic residual at each step gives $\\|Z_n-\\psi(t_n,X_n)\\|_2\\le(2C_a/\\gamma)h$. The initial pair similarly satisfies $\\|Z_0-\\psi(0,X_0)\\|_2\\le(2C_{a,0}/\\gamma)h$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Taylor's formula [F3] applied to the $C^2$ exact solution at $t_n$ gives $\\tau_n:=(\\bar x_n-\\bar x_{n-1})/h-F(t_n,\\bar x_n)$ with $\\|\\tau_n\\|_2\\le C_\\tau h$; one constant $C_\\tau$ works because $\\bar x''$ is bounded on the compact interval.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $\\delta_n=f(t_n,X_n,Z_n)-F(t_n,X_n)$. By [F1] and the $L_z$-Lipschitz bound in $z$, $\\|\\delta_n\\|_2\\le L_z\\|Z_n-\\psi(t_n,X_n)\\|_2\\le(2L_zC_a/\\gamma)h$. The corresponding initial algebraic estimate will be used only for the final $Z_0$ bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $e_n=X_n-\\bar x_n$. The coupled backward-Euler equation from [F5], with the stated residuals, and exact residual $\\tau_n$ give $(e_n-e_{n-1})/h=F(t_n,X_n)-F(t_n,\\bar x_n)+\\delta_n+r^d_n-\\tau_n$. The Lipschitz bounds and triangle inequality imply $(1-hL)\\|e_n\\|_2\\le\\|e_{n-1}\\|_2+h(\\|r^d_n\\|_2+\\|\\delta_n\\|_2+\\|\\tau_n\\|_2)$. For $hL\\le1/2$, $1/(1-hL)\\le1+2Lh$ and $1/(1-hL)\\le2$, so the Statement's residual bounds and step 2.1 give $\\|e_n\\|_2\\le(1+2Lh)\\|e_{n-1}\\|_2+C_2h^2$ with $C_2$ independent of $n,h$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F4] to the recurrence in step 3.1 and the initial bound $\\|e_0\\|_2\\le C_0h$. It gives $\\max_n\\|e_n\\|_2\\le C_3h$.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 3.1",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For every $n$, the triangle inequality and the Lipschitz bound on $\\psi$ give $\\|Z_n-\\bar z_n\\|_2\\le\\|Z_n-\\psi(t_n,X_n)\\|_2+L_\\psi\\|e_n\\|_2$. Step 1.1 bounds the first term by a constant times $h$, and step 4.1 bounds the second. The same argument with the initial residual bound handles $n=0$; hence both state components satisfy the stated $O(h)$ bound.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. First-order starting errors and derivative/algebraic residuals produce a uniform first-order differential-plus-algebraic error on the selected branch tube."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Vanishing residual constants recover the exact-update accuracy case, but h and T remain positive and the algebraic Jacobian has a positive lower singular bound. First-order starting errors and derivative/algebraic residuals produce a uniform first-order differential-plus-algebraic error on the selected branch tube."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A scalar differential or algebraic variable is compatible with the local formulas; BDF2 still requires its two starting states, and the fixed pendulum dimension is not changed. First-order starting errors and derivative/algebraic residuals produce a uniform first-order differential-plus-algebraic error on the selected branch tube."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A regular index-one conclusion requires invertible algebraic Jacobian on its chart. The higher-index examples intentionally demonstrate what fails when that premise is absent. First-order starting errors and derivative/algebraic residuals produce a uniform first-order differential-plus-algebraic error on the selected branch tube."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The selected open chart/tube controls domain validity, while the stated finite grid and starting indices determine which initial/last errors or residuals are included. First-order starting errors and derivative/algebraic residuals produce a uniform first-order differential-plus-algebraic error on the selected branch tube."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The algebraic branch is the locally unique supplied implicit-function chart; finite Newton primitives may fail and do not choose an arbitrary global solution branch. First-order starting errors and derivative/algebraic residuals produce a uniform first-order differential-plus-algebraic error on the selected branch tube."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. First-order starting errors and derivative/algebraic residuals produce a uniform first-order differential-plus-algebraic error on the selected branch tube."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. First-order starting errors and derivative/algebraic residuals produce a uniform first-order differential-plus-algebraic error on the selected branch tube."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-75 adjudication",
+        "notes": "Independently checked all six steps and all cited dependencies. Uniform branch-ball inverse estimate supplies O(h) algebraic displacement; z-Lipschitz gives delta=O(h). C^2 exact trajectory supplies derivative defect O(h), hence the differential error recurrence has O(h^2) forcing. For hL<=1/2 division is legal; the actual finite geometric-recurrence supplier yields uniform O(h), including L=0 and n=0. Initial algebraic residual and psi Lipschitz supply Z0 as well as later Z errors. The theorem remains conditional on common-tube membership and residual attainment, with no AC use."
+      }
+    },
+    "thm-index-one-dae-bdf2-second-order-with-residuals": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-index-one-dae-implicit-function-reduction",
+          "source_section": "Statement",
+          "quote": "Let $d,m\\ge1$, let $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d\\times\\mathbb R^m$ be open, and let $f:\\Omega\\to\\mathbb R^d$, $g:\\Omega\\to\\mathbb R^m$ be $C^k$ for $k\\ge1$. Suppose $g(t_*,x_*,z_*)=0$ and $g_z(t_*,x_*,z_*)$ is invertible. Then there are neighborhoods $U$ of $(t_*,x_*)$ and $V$ of $z_*$, and a unique $C^k$ map $\\psi:U\\to V$, such that, for $(t,x)\\in U$ and $z\\in V$,\n\n$$\ng(t,x,z)=0\\quad\\Longleftrightarrow\\quad z=\\psi(t,x).\n$$\n\nIts derivatives satisfy\n\n$$\n\\psi_t=-g_z^{-1}g_t,\\qquad \\psi_x=-g_z^{-1}g_x,\n$$\n\nwith the derivatives of $g$ evaluated at $(t,x,\\psi(t,x))$. The reduced vector field $F(t,x)=f(t,x,\\psi(t,x))$ is $C^k$ on $U$. Thus solutions of the DAE that stay in this selected chart are exactly solutions of $x'=F(t,x)$ paired with $z=\\psi(t,x)$.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-index-one-dae-algebraic-residual-to-state-error",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a compact set of base points $(t,x)$ in a selected branch chart from [[thm-index-one-dae-implicit-function-reduction]], and put $z_*=\\psi(t,x)$. Suppose $g(t,x,\\cdot)$ is $C^2$ on $B(z_*,\\rho)$ for every $(t,x)\\in K$. Let $G_*(t,x)=g_z(t,x,\\psi(t,x))$. Assume common constants $\\gamma>0$, $\\Lambda\\ge0$, and $\\rho>0$ satisfy\n\n$$\n\\|G_*(t,x)v\\|_2\\ge\\gamma\\|v\\|_2\\quad(v\\in\\mathbb R^m),\\qquad \\|g_z(t,x,z)-G_*(t,x)\\|_{\\mathrm{op}}\\le\\Lambda\\|z-\\psi(t,x)\\|_2\n$$\n\nfor every $(t,x)\\in K$ and $z\\in B(\\psi(t,x),\\rho)$; if $\\Lambda>0$, assume $\\rho\\le\\gamma/(\\sqrt m\\,\\Lambda)$. Then, uniformly for all such base points and candidates,\n\n$$\n\\|z-z_*\\|_2\\le \\frac{2}{\\gamma}\\|g(t,x,z)\\|_2.\n$$\n\nThe estimate is local: it applies only to candidates in the specified branch ball and does not turn a residual into a global branch or uniqueness certificate.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-index-one-dae-bdf2-stepper",
+          "source_section": "Definition",
+          "quote": "Input $f,g$, a constant grid $t_n=t_0+nh$ with $h>0$ and $N_t\\ge2$, two starting pairs $(X_0,Z_0),(X_1,Z_1)$, and a selected open tube $\\mathcal T\\subset\\Omega$ inside the local branch chart of [[thm-index-one-dae-implicit-function-reduction]], where $g(t,x,z)=0$ is equivalent to $z=\\psi(t,x)$. For each time $t$, write $\\mathcal T_t=\\{(X,Z):(t,X,Z)\\in\\mathcal T\\}$ for the open state slice used as the Newton evaluation domain. Also input positive residual tolerances $\\eta_d,\\eta_a$, a finite Newton-correction budget $B\\in\\mathbb N_0$, and two starting algebraic-residual bounds $\\eta_{a,0},\\eta_{a,1}\\ge0$. Return invalid-grid for a nonpositive step or fewer than two starting states, and invalid-input for incompatible dimensions, data outside the function domains, or $(X_j,Z_j)\\notin\\mathcal T_{t_j}$ for either $j=0,1$. Compute $r^a_j=g(t_j,X_j,Z_j)$ for both $j=0,1$; if $\\|r^a_j\\|_2>\\eta_{a,j}$ for either start, return inconsistent-initial-data.\n\nFor $n=2,\\ldots,N_t$, form\n\n$$\nR_n(X,Z)=\\bigl(3X-4X_{n-1}+X_{n-2}-2h f(t_n,X,Z),\\ g(t_n,X,Z)\\bigr)\n$$\n\nand\n\n$$\n\\mathcal R_n(X,Z)=\\left(\\frac{3X-4X_{n-1}+X_{n-2}-2h f(t_n,X,Z)}{2h\\eta_d},\\ \\frac{g(t_n,X,Z)}{\\eta_a}\\right).\n$$\n\nUse $(2X_{n-1}-X_{n-2},Z_{n-1})$ as the Newton seed. Before calling Newton, if $(2X_{n-1}-X_{n-2},Z_{n-1})\\notin\\mathcal T_{t_n}$, return invalid-trial with the computed prefix. Otherwise call [[alg-finite-budget-newton-for-vector-residuals]] on $\\mathcal R_n$ with tolerance $1$, budget $B$, and $\\mathcal T_{t_n}$ as the evaluation domain. Append a candidate only when Newton reports root and the candidate lies in $\\mathcal T_{t_n}$; reevaluate $R_n$ once to record its unscaled residual blocks. Otherwise return the corresponding singular-Jacobian, invalid-trial, or iteration-budget-exhausted status with the computed prefix. The input functions are defined on the selected tube, so no separate evaluation-failure branch is needed. If all steps are accepted, return completed and the state sequence $((X_0,Z_0),\\ldots,(X_{N_t},Z_{N_t}))$.\n\nFor an accepted step, the constant-step BDF2 derivative residual is\n$$\nr^d_n=\\frac{3X_n-4X_{n-1}+X_{n-2}}{2h}-f(t_n,X_n,Z_n),\n$$\nand the algebraic residual is $r^a_n=g(t_n,X_n,Z_n)$.  The procedure makes no claim that Newton finds a root or that an accepted state is the exact selected branch root.\n\nUse the coupled $(d+m)$-dimensional residual and its current block Jacobian. Record residual queries, Jacobian assemblies and correction solves separately; backend costs are not specified.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-variable-step-bdf2-interpolation-and-local-defect",
+          "source_section": "Statement",
+          "quote": "Let $h_{n-1},h_n>0$, $r_n=h_n/h_{n-1}$, and let $y$ be an exact solution with three continuous derivatives near $t_{n-1},t_n,t_{n+1}$, where $h_j=t_{j+1}-t_j$. The derivative at $t_{n+1}$ of the quadratic interpolant through $(t_{n+1},y_{n+1})$, $(t_n,y_n)$, and $(t_{n-1},y_{n-1})$ is\n\n$$\\frac{(1+2r_n)y_{n+1}-(1+r_n)^2y_n+r_n^2y_{n-1}}{h_n(1+r_n)}.$$\n\nEquating this derivative to $f(t_{n+1},Y_{n+1})$ defines the variable-step BDF2 formula\n\n$$\\frac{(1+2r_n)Y_{n+1}-(1+r_n)^2Y_n+r_n^2Y_{n-1}}{h_n(1+r_n)}=f(t_{n+1},Y_{n+1}).$$\n\nFor an exact vector solution $y'=f(t,y)$ whose third derivative is bounded, the unscaled residual\n\n$$\\tau_n=(1+2r_n)y(t_{n+1})-(1+r_n)^2y(t_n)+r_n^2y(t_{n-1})-h_n(1+r_n)y'(t_{n+1})$$\n\nhas norm $\\|\\tau_n\\|_\\infty=O(h_n^3)$ uniformly whenever $r_n$ stays in a fixed compact subinterval of $(0,\\infty)$; the formula and remainder hold componentwise.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-discrete-one-step-error-recurrence-bound",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $N\\in\\mathbb N$ with $N\\ge1$, $h=T/N>0$, $p\\in\\mathbb R$ with $p\\ge1$, and $C_0,C,L\\ge0$. Real powers of the positive base $h$ are as in [[def-real-power]]. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "1.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-variable-step-bdf2-with-selected-implicit-branch",
+          "source_section": "Definition",
+          "quote": "Input a vector field $f(t,y)$, a finite grid $t_0,\\ldots,t_N$, starting states $Y_0,Y_1\\in\\mathbb R^d$ (so $N\\ge1$), and for each later step a prescribed closed ball $B_{n+1}\\subset\\mathbb R^d$ that specifies the admissible implicit branch. Before any evaluation, if either starting state has dimension different from $d$, return `invalid-input`; otherwise, if any time increment is nonpositive, return `invalid-grid`. Set $h_n=t_{n+1}-t_n$ and $r_n=h_n/h_{n-1}$ for $1\\le n<N$.\n\nFor $n=1,\\ldots,N-1$, form the equation\n\n$$\\frac{(1+2r_n)Z-(1+r_n)^2Y_n+r_n^2Y_{n-1}}{h_n(1+r_n)}=f(t_{n+1},Z).$$\n\nIf this equation has exactly one root $Z$ in $B_{n+1}$, set $Y_{n+1}=Z$ and continue. If it has no root there, return `no-root` with the computed prefix; if it has more than one root there, return `ambiguous-branch` with the computed prefix. If an evaluation of $f$ is undefined, return `evaluation-failure` with the prefix. On reaching $N$, return `completed` and $(Y_0,\\ldots,Y_N)$. The procedure is defined for arbitrary positive adjacent step ratios; no convergence or accuracy property is part of this algorithm.\n\nThe coefficients are those obtained from the quadratic interpolation derivative in [[lem-variable-step-bdf2-interpolation-and-local-defect]]. A separate theorem gives the uniform ratio hypotheses needed for second-order convergence; they are not part of this algorithm.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $\\bar x_n=\\bar x(t_n)$, $\\bar z_n=\\psi(t_n,\\bar x_n)$, and $e_n=X_n-\\bar x_n$. By [F2], $\\|Z_n-\\psi(t_n,X_n)\\|_2\\le(2C_a/\\gamma)h^2$. Thus, with $\\delta_n=f(t_n,X_n,Z_n)-F(t_n,X_n)$, the $z$-Lipschitz bound gives $\\|\\delta_n\\|_2\\le(2L_zC_a/\\gamma)h^2$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $\\tau_n=(3\\bar x_n-4\\bar x_{n-1}+\\bar x_{n-2})/(2h)-F(t_n,\\bar x_n)$. By [F4], setting the adjacent-step ratio to $1$ gives an unscaled residual of size $O(h^3)$; division by $2h$ yields $\\|\\tau_n\\|_2\\le C_\\tau h^2$. This also follows by applying [F6] componentwise to the exact solution through degree two.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3] and step 1.1, the numerical recurrence is $(3X_n-4X_{n-1}+X_{n-2})/(2h)=F(t_n,X_n)+\\delta_n+r^d_n$, while the exact defect definition gives the same formula with $X$ replaced by $\\bar x$ and an added $\\tau_n$. With $d_n=e_n-e_{n-1}$ and $w_n=\\delta_n+r^d_n-\\tau_n$, subtraction gives $3d_n-d_{n-1}=2h(F(t_n,X_n)-F(t_n,\\bar x_n)+w_n)$, where $\\|w_n\\|_2\\le q_n:=\\|r^d_n\\|_2+\\|\\delta_n\\|_2+\\|\\tau_n\\|_2$. The Lipschitz bound and $\\|e_n\\|_2\\le\\|e_{n-1}\\|_2+\\|d_n\\|_2$ imply $(3-2hL)\\|d_n\\|_2\\le\\|d_{n-1}\\|_2+2hL\\|e_{n-1}\\|_2+2hq_n$. For $hL\\le3/4$, division by $3-2hL\\ge3/2$ yields $\\|d_n\\|_2\\le(2/3)\\|d_{n-1}\\|_2+(4/3)hL\\|e_{n-1}\\|_2+(4/3)hq_n.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Set $E_n=\\|e_n\\|_2+2\\|d_n\\|_2$. Using $e_n=e_{n-1}+d_n$ and the last inequality of step 2.1 gives $E_n\\le(1+4Lh)\\|e_{n-1}\\|_2+2\\|d_{n-1}\\|_2+4hq_n\\le(1+4Lh)E_{n-1}+4hq_n$. Steps 1.1 and 1.2 and the residual assumptions imply $q_n\\le C_qh^2$, so $E_n\\le(1+4Lh)E_{n-1}+4C_qh^3$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The starting-pair bounds give $E_1\\le\\|e_1\\|_2+2\\|e_1-e_0\\|_2=O(h^2)$. Apply [F5] to the $N-1$ steps from index $1$ to $N$, whose interval length is $(N-1)h\\le T$. This yields $\\max_{1\\le n\\le N}E_n=O(h^2)$; the starting-pair bound also gives $\\|e_0\\|_2=O(h^2)$, so $\\max_{0\\le n\\le N}\\|e_n\\|_2=O(h^2)$.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 3.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The residual estimate [F2] and the Lipschitz bound on $\\psi$ give $\\|Z_n-\\bar z_n\\|_2\\le\\|Z_n-\\psi(t_n,X_n)\\|_2+L_\\psi\\|e_n\\|_2=O(h^2)$ for every $n$, including $n=0,1$ by the starter assumptions.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "To verify the stated backward-Euler startup option, let $X_0=\\bar x_0$. Its exact-start BE defect satisfies $\\tau_1^{\\rm BE}=(\\bar x_1-\\bar x_0)/h-F(t_1,\\bar x_1)=O(h)$ by [F6]. The BE residual equation and Lipschitz bound then give $(1-hL)\\|X_1-\\bar x_1\\|_2\\le h(\\|r^d_1\\|_2+\\|\\delta_1\\|_2+\\|\\tau_1^{\\rm BE}\\|_2)=O(h^2)$, since $r^d_1=O(h)$ and $r^a_1=O(h^2)$ imply $\\delta_1=O(h^2)$ by [F2]. For $hL\\le1/2$, this yields $\\|X_1-\\bar x_1\\|_2=O(h^2)$; [F2] and $r^a_1=O(h^2)$ then give $\\|Z_1-\\bar z_1\\|_2=O(h^2)$.",
+          "step": "6.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. Two second-order accurate starts and quadratic-step residuals give second-order coupled error; a carefully scaled backward-Euler startup is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero starting or update residuals are permitted special cases of the quadratic-step bounds; h stays positive and two starting pairs are required. Two second-order accurate starts and quadratic-step residuals give second-order coupled error; a carefully scaled backward-Euler startup is admitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A scalar differential or algebraic variable is compatible with the local formulas; BDF2 still requires its two starting states, and the fixed pendulum dimension is not changed. Two second-order accurate starts and quadratic-step residuals give second-order coupled error; a carefully scaled backward-Euler startup is admitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A regular index-one conclusion requires invertible algebraic Jacobian on its chart. The higher-index examples intentionally demonstrate what fails when that premise is absent. Two second-order accurate starts and quadratic-step residuals give second-order coupled error; a carefully scaled backward-Euler startup is admitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The selected open chart/tube controls domain validity, while the stated finite grid and starting indices determine which initial/last errors or residuals are included. Two second-order accurate starts and quadratic-step residuals give second-order coupled error; a carefully scaled backward-Euler startup is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The algebraic branch is the locally unique supplied implicit-function chart; finite Newton primitives may fail and do not choose an arbitrary global solution branch. Two second-order accurate starts and quadratic-step residuals give second-order coupled error; a carefully scaled backward-Euler startup is admitted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. Two second-order accurate starts and quadratic-step residuals give second-order coupled error; a carefully scaled backward-Euler startup is admitted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. Two second-order accurate starts and quadratic-step residuals give second-order coupled error; a carefully scaled backward-Euler startup is admitted."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-75 adjudication",
+        "notes": "Independently checked all seven steps and every cited supplier. Ratio-one interpolation gives coefficients 3,-4,1 with 2h derivative scale; C^3 exact trajectory gives derivative defect O(h^2), with finite-dimensional norm equivalence harmless. Reader F3 now uses the actual coupled residual, and step 2.1 has w=delta+r^d-tau. For hL<=3/4 the increment recurrence and E=||e||+2||d|| give E_n<=(1+4Lh)E_(n-1)+4h q_n; q=O(h^2) and E1=O(h^2) yield uniform O(h^2) via the actual geometric lemma over length <=T. Starter and algebraic residual bounds include n=0,1; one exact-start BE step with derivative residual O(h) and algebraic residual O(h^2) supplies the claimed starter. Checked L=0, Lambda=0, N=2, branch-ball restrictions and conditional failure caveat. No AC use; accepted reader repair is complete."
+      }
+    },
+    "ex-index-one-circuit-consistent-initialization-and-be-step": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+          "source_section": "Definition",
+          "quote": "Let $d,m\\ge1$, let $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d\\times\\mathbb R^m$ be open, and let $f:\\Omega\\to\\mathbb R^d$ and $g:\\Omega\\to\\mathbb R^m$. A **semi-explicit differential-algebraic equation (DAE)** on $\\Omega$ is\n\n$$\nx'(t)=f(t,x(t),z(t)),\\qquad 0=g(t,x(t),z(t)).\n$$\n\nThe $x$-coordinates are the **differential variables** because their derivatives occur in the first equation. The $z$-coordinates are the **algebraic variables** because their derivatives do not occur. A solution on an interval $I$ is a pair of functions $x:I\\to\\mathbb R^d$, $z:I\\to\\mathbb R^m$ whose graph lies in $\\Omega$, with $x$ differentiable, satisfying both displayed equations at every $t\\in I$. An initial pair $(x_0,z_0)$ at $t_0$ is **algebraically consistent** when $g(t_0,x_0,z_0)=0$. On the regular index-one branch below this is the algebraic initial condition used for reduction. For higher-index systems, algebraic consistency is only necessary: differentiated constraints may impose additional initial conditions.\n\nAt a point with $g(t_*,x_*,z_*)=0$, the presentation is **regular index one** when $f,g$ are $C^1$ near the point and the square Jacobian $g_z(t_*,x_*,z_*)=D_zg(t_*,x_*,z_*)$ is invertible. The [[thm-index-one-dae-implicit-function-reduction]] then supplies a unique local branch $z=\\psi(t,x)$ through that point. Only that selected branch is used in local numerical claims. Higher-index systems and points with singular $g_z$ are outside this index-one interface.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-backward-euler-step-equation",
+          "source_section": "Definition",
+          "quote": "Let $f:D\\to\\mathbb R^d$ define a first-order initial-value problem on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$. Given a time $t_n$, step $h_n>0$, and state $y_n$ with $(t_n,y_n)\\in D$, an admissible endpoint $y_{n+1}$ must satisfy $(t_n+h_n,y_{n+1})\\in D$. The backward Euler endpoint is any such $y_{n+1}$ satisfying\n\n$$y_{n+1}=y_n+h_n f(t_n+h_n,y_{n+1}).$$\n\nIts update residual at an approximate endpoint $z$ with $(t_n+h_n,z)\\in D$ is\n\n$$G_n^{\\rm BE}(z)=z-y_n-h_n f(t_n+h_n,z).$$\n\nWhen $f$ is defined at the endpoint, the derivative residual is $G_n^{\\rm BE}(z)/h_n$. The equation can have no, one, or several roots on a restricted admissible branch set; this definition by itself asserts neither existence nor uniqueness.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-index-one-dae-implicit-function-reduction",
+          "source_section": "Statement",
+          "quote": "Let $d,m\\ge1$, let $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d\\times\\mathbb R^m$ be open, and let $f:\\Omega\\to\\mathbb R^d$, $g:\\Omega\\to\\mathbb R^m$ be $C^k$ for $k\\ge1$. Suppose $g(t_*,x_*,z_*)=0$ and $g_z(t_*,x_*,z_*)$ is invertible. Then there are neighborhoods $U$ of $(t_*,x_*)$ and $V$ of $z_*$, and a unique $C^k$ map $\\psi:U\\to V$, such that, for $(t,x)\\in U$ and $z\\in V$,\n\n$$\ng(t,x,z)=0\\quad\\Longleftrightarrow\\quad z=\\psi(t,x).\n$$\n\nIts derivatives satisfy\n\n$$\n\\psi_t=-g_z^{-1}g_t,\\qquad \\psi_x=-g_z^{-1}g_x,\n$$\n\nwith the derivatives of $g$ evaluated at $(t,x,\\psi(t,x))$. The reduced vector field $F(t,x)=f(t,x,\\psi(t,x))$ is $C^k$ on $U$. Thus solutions of the DAE that stay in this selected chart are exactly solutions of $x'=F(t,x)$ paired with $z=\\psi(t,x)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the circuit, $f(t,v,i)=i/C$ and $g(t,v,i)=Ri+v-u(t)$, so $g_i=R\\ne0$. Thus the selected algebraic branch is $i=(u(t)-v)/R$, and the reduced ODE follows from [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $C=R=1$, $u(0)=1$, and $v_0=0$, the algebraic residual at $i_0=1$ is $1\\cdot1+0-1=0$, whereas it is $1\\cdot0+0-1=-1$ at $i_0=0$. By [F1], the first pair is consistent and the second cannot be the initial value of a solution.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The backward-Euler differential equation is $v_1=v_0+h i_1$. With $v_0=0$, the algebraic equation is $i_1+v_1=1$. Substituting the first equality into the second gives $(1+h)i_1=1$, hence $i_1=1/(1+h)$ and $v_1=h/(1+h)$; for $h=1$, both equal $1/2$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The exact reduced solution $v(t)=1-e^{-t}$, $i(t)=e^{-t}$ satisfies $v'=i$ and $i+v=1$, and it starts at the consistent pair $(0,1)$. Thus the example's initialization and one-step calculations satisfy both circuit equations.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. The scalar resistor/capacitor constraint yields an explicit current branch and the paired backward-Euler voltage/current values, rejecting the wrong initial current."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The voltage starts at zero with consistent current one; assigning zero to both violates the unit-source algebraic equation. The scalar resistor/capacitor constraint yields an explicit current branch and the paired backward-Euler voltage/current values, rejecting the wrong initial current."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A scalar differential or algebraic variable is compatible with the local formulas; BDF2 still requires its two starting states, and the fixed pendulum dimension is not changed. The scalar resistor/capacitor constraint yields an explicit current branch and the paired backward-Euler voltage/current values, rejecting the wrong initial current."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The circuit assumes C,R>0, so g_i=R is nonsingular."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The selected open chart/tube controls domain validity, while the stated finite grid and starting indices determine which initial/last errors or residuals are included. The scalar resistor/capacitor constraint yields an explicit current branch and the paired backward-Euler voltage/current values, rejecting the wrong initial current."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The algebraic branch is the locally unique supplied implicit-function chart; finite Newton primitives may fail and do not choose an arbitrary global solution branch. The scalar resistor/capacitor constraint yields an explicit current branch and the paired backward-Euler voltage/current values, rejecting the wrong initial current."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. The scalar resistor/capacitor constraint yields an explicit current branch and the paired backward-Euler voltage/current values, rejecting the wrong initial current."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. The scalar resistor/capacitor constraint yields an explicit current branch and the paired backward-Euler voltage/current values, rejecting the wrong initial current."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-75 adjudication",
+        "notes": "Checked all four steps with the actual DAE, reduction and backward-Euler suppliers. R,C>0 give the explicit current branch, and the worked constant-source case is smooth. For positive step h the denominator 1+h is positive; direct substitution gives endpoint differential/algebraic equations and the exact exponential solution. Inconsistent initial current has residual -1. No convergence claim or choice use."
+      }
+    },
+    "ex-index-two-dae-algebraic-residual-does-not-control-state": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+          "source_section": "Definition",
+          "quote": "Let $d,m\\ge1$, let $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d\\times\\mathbb R^m$ be open, and let $f:\\Omega\\to\\mathbb R^d$ and $g:\\Omega\\to\\mathbb R^m$. A **semi-explicit differential-algebraic equation (DAE)** on $\\Omega$ is\n\n$$\nx'(t)=f(t,x(t),z(t)),\\qquad 0=g(t,x(t),z(t)).\n$$\n\nThe $x$-coordinates are the **differential variables** because their derivatives occur in the first equation. The $z$-coordinates are the **algebraic variables** because their derivatives do not occur. A solution on an interval $I$ is a pair of functions $x:I\\to\\mathbb R^d$, $z:I\\to\\mathbb R^m$ whose graph lies in $\\Omega$, with $x$ differentiable, satisfying both displayed equations at every $t\\in I$. An initial pair $(x_0,z_0)$ at $t_0$ is **algebraically consistent** when $g(t_0,x_0,z_0)=0$. On the regular index-one branch below this is the algebraic initial condition used for reduction. For higher-index systems, algebraic consistency is only necessary: differentiated constraints may impose additional initial conditions.\n\nAt a point with $g(t_*,x_*,z_*)=0$, the presentation is **regular index one** when $f,g$ are $C^1$ near the point and the square Jacobian $g_z(t_*,x_*,z_*)=D_zg(t_*,x_*,z_*)$ is invertible. The [[thm-index-one-dae-implicit-function-reduction]] then supplies a unique local branch $z=\\psi(t,x)$ through that point. Only that selected branch is used in local numerical claims. Higher-index systems and points with singular $g_z$ are outside this index-one interface.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-regular-differentiation-index",
+          "source_section": "Definition",
+          "quote": "Fix a semi-explicit presentation $x'=f(t,x,z)$, $0=g(t,x,z)$ as in [[def-semi-explicit-index-one-dae-and-consistent-initial-data]] and a sufficiently differentiable consistent local solution. Differentiate the algebraic constraint along the differential equation, substituting $x'=f(t,x,z)$ and any previously obtained derivative relations at each stage. The **differentiation index in this convention** is the least positive integer $k$ for which the original constraint and its first $k$ differentiated equations locally determine $z$ and $z'$, with the equation for the highest derivative of $z$ having an invertible square Jacobian on a neighborhood of the solution. If no such finite $k$ exists, this local index is undefined. This convention counts through the first derivative of the algebraic variables and is local to the fixed presentation; it is not a universal index theory for arbitrary implicit systems.\n\nIf $g_z$ is invertible, one differentiation gives\n\n$$\ng_t+g_x f+g_z z'=0,\n$$\n\nwhich determines $z'$, so the index is one. If $g_z$ is singular, the index must be checked from the actual differentiated equations; no index-one conclusion follows from this definition alone.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $f(t,x,z)=z$ and $g(t,x,z)=x$, so $g_z=0$ at every point. The regular index-one hypothesis $g_z$ invertible therefore fails.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Along any solution, differentiating $g(x(t),z(t))=x(t)=0$ and substituting $x'=z$ gives $z=0$. Differentiating this relation gives $z'=0$. The original constraint does not involve $z$; the first differentiated relation determines $z$, and the second determines its first derivative. By [F2] the differentiation index is two.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every real $M$, the candidate $(x,z)=(0,M)$ has algebraic residual $g(0,M)=0$, while step 2.1 shows that a solution has $z=0$. Taking arbitrarily small $M\\ne0$ rules out any finite constant $C$ for which $|z|\\le C|g(x,z)|$ throughout a neighborhood of $(0,0)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The pair $(0,1)$ satisfies $g(0,1)=0$, but a solution would require $z(0)=0$ by step 2.1, so it is not a consistent initial pair for a solution. The pair $(1,0)$ has $g(1,0)=1\\ne0$, so it fails even algebraic consistency.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The constant functions $x(t)=0,z(t)=0$ satisfy both equations, so the system has a solution with the consistent initial pair $(0,0)$. The three boundary calculations above concern only this fixed index-two system and imply no index-one numerical guarantee.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. A vanishing algebraic-variable Jacobian leaves the algebraic residual blind to an arbitrary hidden variable even at residual zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The Verification explicitly includes zero algebraic residual with nonzero algebraic-state error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A scalar differential or algebraic variable is compatible with the local formulas; BDF2 still requires its two starting states, and the fixed pendulum dimension is not changed. A vanishing algebraic-variable Jacobian leaves the algebraic residual blind to an arbitrary hidden variable even at residual zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example explicitly sets g_z=0 and proves that the index-one residual estimate fails."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The selected open chart/tube controls domain validity, while the stated finite grid and starting indices determine which initial/last errors or residuals are included. A vanishing algebraic-variable Jacobian leaves the algebraic residual blind to an arbitrary hidden variable even at residual zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The algebraic branch is the locally unique supplied implicit-function chart; finite Newton primitives may fail and do not choose an arbitrary global solution branch. A vanishing algebraic-variable Jacobian leaves the algebraic residual blind to an arbitrary hidden variable even at residual zero."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. A vanishing algebraic-variable Jacobian leaves the algebraic residual blind to an arbitrary hidden variable even at residual zero."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. A vanishing algebraic-variable Jacobian leaves the algebraic residual blind to an arbitrary hidden variable even at residual zero."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 75 author \u2014 not independent approval",
+        "notes": "Author pass checked local scope, actual supplier body excerpts, explicit step inputs, boundary dispositions, and the conditional residual and selected-branch hypotheses. This is not independent mathematical approval."
+      }
+    },
+    "ex-index-three-pendulum-by-differentiation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+          "source_section": "Definition",
+          "quote": "Let $d,m\\ge1$, let $\\Omega\\subseteq\\mathbb R\\times\\mathbb R^d\\times\\mathbb R^m$ be open, and let $f:\\Omega\\to\\mathbb R^d$ and $g:\\Omega\\to\\mathbb R^m$. A **semi-explicit differential-algebraic equation (DAE)** on $\\Omega$ is\n\n$$\nx'(t)=f(t,x(t),z(t)),\\qquad 0=g(t,x(t),z(t)).\n$$\n\nThe $x$-coordinates are the **differential variables** because their derivatives occur in the first equation. The $z$-coordinates are the **algebraic variables** because their derivatives do not occur. A solution on an interval $I$ is a pair of functions $x:I\\to\\mathbb R^d$, $z:I\\to\\mathbb R^m$ whose graph lies in $\\Omega$, with $x$ differentiable, satisfying both displayed equations at every $t\\in I$. An initial pair $(x_0,z_0)$ at $t_0$ is **algebraically consistent** when $g(t_0,x_0,z_0)=0$. On the regular index-one branch below this is the algebraic initial condition used for reduction. For higher-index systems, algebraic consistency is only necessary: differentiated constraints may impose additional initial conditions.\n\nAt a point with $g(t_*,x_*,z_*)=0$, the presentation is **regular index one** when $f,g$ are $C^1$ near the point and the square Jacobian $g_z(t_*,x_*,z_*)=D_zg(t_*,x_*,z_*)$ is invertible. The [[thm-index-one-dae-implicit-function-reduction]] then supplies a unique local branch $z=\\psi(t,x)$ through that point. Only that selected branch is used in local numerical claims. Higher-index systems and points with singular $g_z$ are outside this index-one interface.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-regular-differentiation-index",
+          "source_section": "Definition",
+          "quote": "Fix a semi-explicit presentation $x'=f(t,x,z)$, $0=g(t,x,z)$ as in [[def-semi-explicit-index-one-dae-and-consistent-initial-data]] and a sufficiently differentiable consistent local solution. Differentiate the algebraic constraint along the differential equation, substituting $x'=f(t,x,z)$ and any previously obtained derivative relations at each stage. The **differentiation index in this convention** is the least positive integer $k$ for which the original constraint and its first $k$ differentiated equations locally determine $z$ and $z'$, with the equation for the highest derivative of $z$ having an invertible square Jacobian on a neighborhood of the solution. If no such finite $k$ exists, this local index is undefined. This convention counts through the first derivative of the algebraic variables and is local to the fixed presentation; it is not a universal index theory for arbitrary implicit systems.\n\nIf $g_z$ is invertible, one differentiation gives\n\n$$\ng_t+g_x f+g_z z'=0,\n$$\n\nwhich determines $z'$, so the index is one. If $g_z$ is singular, the index must be checked from the actual differentiated equations; no index-one conclusion follows from this definition alone.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiating $q^\\mathsf Tq=\\ell^2$ once and using $q'=v$ gives $q^\\mathsf Tv=0$, the tangency condition. Differentiating a second time gives $0=\\|v\\|_2^2+q^\\mathsf Tv'=\\|v\\|_2^2-g_0q_2-\\lambda q^\\mathsf Tq$. Using [A1], this equation solves uniquely for $\\lambda=(\\|v\\|_2^2-g_0q_2)/\\ell^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiate $\\|v\\|_2^2-g_0q_2-\\lambda\\ell^2=0$, the second-derivative constraint from step 1.1. Since $q'=v$ and $v'=-g_0e_2-\\lambda q$, this gives $0=2v^\\mathsf Tv'-g_0v_2-\\lambda'\\ell^2=-3g_0v_2-2\\lambda q^\\mathsf Tv-\\lambda'\\ell^2=-3g_0v_2-\\lambda'\\ell^2$, where the last equality uses the tangency condition in step 1.1. Since $\\ell>0$, this determines $\\lambda'=-3g_0v_2/\\ell^2$ with nonzero coefficient $-\\ell^2$ on the highest algebraic derivative.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The original constraint does not contain $\\lambda$; its first derivative yields tangency but not $\\lambda$, its second derivative determines $\\lambda$, and its third derivative determines $\\lambda'$. The prolonged equations are regular because the multiplier coefficients are $-\\ell^2$ at each of these latter solves. Therefore the least differentiation count in [F2] is three.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For example, $q_0=(\\ell,0)$, $v_0=(0,s)$, and $\\lambda_0=s^2/\\ell^2$ satisfy the position and tangency constraints, and the multiplier formula in step 1.1 gives $\\lambda_0$. Thus this tuple satisfies the initial conditions exposed by the first two differentiations.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: Differential and algebraic dimensions are positive and the selected chart/root data are supplied. Empty grids are rejected where the stepper specifies invalid-grid. Positive pendulum length makes the multiplier formula finite after position, tangency and acceleration constraints, giving the stated presentation index three."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example admits zero initial tangential speed s=0 in its displayed initial-data calculation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This fixed example has a two-dimensional position and velocity; it makes no one-dimensional pendulum claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example assumes ell>0 and displays the nonzero coefficient -ell^2 at the multiplier solves."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The selected open chart/tube controls domain validity, while the stated finite grid and starting indices determine which initial/last errors or residuals are included. Positive pendulum length makes the multiplier formula finite after position, tangency and acceleration constraints, giving the stated presentation index three."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The multiplier is explicitly determined by velocity, position and the positive length after the successive constraint equations; no arbitrary algebraic root selection is asserted. Positive pendulum length makes the multiplier formula finite after position, tangency and acceleration constraints, giving the stated presentation index three."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. Positive pendulum length makes the multiplier formula finite after position, tangency and acceleration constraints, giving the stated presentation index three."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stated result is used in its asserted direction; it does not characterize the hypotheses by a converse. Positive pendulum length makes the multiplier formula finite after position, tangency and acceleration constraints, giving the stated presentation index three."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used. The local branch arguments use compactness only for finite subcovers; all other selections are of a single point or a finite iterate.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 75 author \u2014 not independent approval",
+        "notes": "Author pass checked local scope, actual supplier body excerpts, explicit step inputs, boundary dispositions, and the conditional residual and selected-branch hypotheses. This is not independent mathematical approval."
+      }
+    }
+  }
+}

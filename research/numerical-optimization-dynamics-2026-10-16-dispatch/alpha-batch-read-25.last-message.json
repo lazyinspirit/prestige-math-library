@@ -1,0 +1,249 @@
+{
+  "group": "w",
+  "batches": ["25"],
+  "pages_read": [
+    "numerical-inverse-problems-and-regularization-error",
+    "numerical-inverse-problems-and-regularization-error-examples"
+  ],
+  "items_read": [
+    "lem-hilbert-tikhonov-normal-operator-invertible",
+    "lem-truncated-svd-bias-and-data-noise-decomposition",
+    "lem-hilbert-tikhonov-noise-amplification-bound",
+    "thm-tikhonov-error-chain-with-discretization-and-residual",
+    "cor-l2-inverse-error-budget-and-cross-term-condition",
+    "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+    "ex-tikhonov-normal-equation-residual-bound",
+    "ex-diagonal-inverse-noise-amplification",
+    "ex-tikhonov-bias-noise-tradeoff",
+    "ex-quadrature-discretization-residual-before-inversion"
+  ],
+  "conventions": [
+    {
+      "convention": "Hilbert-space inverse and noise estimates assume Countable Choice; inner products are linear in the first argument.",
+      "fixed_by": "lem-hilbert-tikhonov-normal-operator-invertible",
+      "matters_for": [
+        "lem-hilbert-tikhonov-noise-amplification-bound",
+        "thm-tikhonov-error-chain-with-discretization-and-residual"
+      ]
+    },
+    {
+      "convention": "The parameter λ is the coefficient of the squared penalty in ||Ax-b||²+λ||x||², rather than its square root.",
+      "fixed_by": "def-tikhonov-regularised-least-squares",
+      "matters_for": [
+        "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+        "thm-tikhonov-error-chain-with-discretization-and-residual",
+        "ex-diagonal-inverse-noise-amplification",
+        "ex-tikhonov-bias-noise-tradeoff"
+      ]
+    },
+    {
+      "convention": "TSVD retains precisely the positive singular values strictly greater than τ; equality with τ is discarded. Discarded right-singular directions include the nullspace.",
+      "fixed_by": "lem-truncated-svd-bias-and-data-noise-decomposition",
+      "matters_for": ["lem-truncated-svd-bias-and-data-noise-decomposition"]
+    },
+    {
+      "convention": "The refined datum is y_{h,δ}=A_h x†+e with the same noise e as yδ, so d_h=(A-A_h)x†=yδ-y_{h,δ}. Normal residuals are exact unless a separate certified evaluation allowance is supplied.",
+      "fixed_by": "thm-tikhonov-error-chain-with-discretization-and-residual",
+      "matters_for": [
+        "ex-quadrature-discretization-residual-before-inversion",
+        "ex-tikhonov-normal-equation-residual-bound",
+        "cor-l2-inverse-error-budget-and-cross-term-condition"
+      ]
+    },
+    {
+      "convention": "The L² assertion assumes measurable increment norms, measurable norm of their sum, square-integrable increment norms, and measurable scalar pairings. Root-sum-square equality requires aggregate integrated real cross terms to vanish.",
+      "fixed_by": "cor-l2-inverse-error-budget-and-cross-term-condition",
+      "matters_for": ["cor-l2-inverse-error-budget-and-cross-term-condition"]
+    },
+    {
+      "convention": "Computed certificates require successful arithmetic and certified norm allowances. Complex augmented solves use realification; Hilbert-space lifting requires explicit isometric coefficient embeddings. Nearby least-squares conclusions retain a separate nonsingularity condition.",
+      "fixed_by": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+      "matters_for": [
+        "thm-tikhonov-error-chain-with-discretization-and-residual"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-hilbert-tikhonov-normal-operator-invertible",
+      "statement": "Assume the Axiom of Countable Choice. For bounded A:X→Y between real or complex Hilbert spaces and λ>0, Bλ=A*A+λI_X is bijective and ||Bλ⁻¹||≤1/λ.",
+      "used_by": [
+        "lem-hilbert-tikhonov-noise-amplification-bound",
+        "thm-tikhonov-error-chain-with-discretization-and-residual",
+        "ex-tikhonov-normal-equation-residual-bound"
+      ]
+    },
+    {
+      "id": "lem-hilbert-tikhonov-noise-amplification-bound",
+      "statement": "Assume Countable Choice. For bounded A:X→Y between real or complex Hilbert spaces and λ>0, Rλ=(A*A+λI_X)⁻¹A* satisfies ||Rλg||≤||g||/(2√λ) for every g∈Y and ||Rλ||≤1/(2√λ).",
+      "used_by": [
+        "thm-tikhonov-error-chain-with-discretization-and-residual",
+        "ex-diagonal-inverse-noise-amplification"
+      ]
+    },
+    {
+      "id": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+      "statement": "For the stated stored finite real or complex inputs, successful augmented solve and certified residual evaluation, ||x̂-xλ||₂≤(||r̂||₂+ρ)/λ. Explicit coefficient-data and orthogonal-output allowances extend the certificate under the stated Hilbert-space isometric representation.",
+      "used_by": [
+        "thm-tikhonov-error-chain-with-discretization-and-residual"
+      ]
+    },
+    {
+      "id": "thm-tikhonov-error-chain-with-discretization-and-residual",
+      "statement": "Under Countable Choice, for compact A and bounded finite-rank A_h between real or complex Hilbert spaces, the displayed exact telescoping chain separates bias, data noise, regularized-operator discretization and solve error; its norm is bounded by bias + δ/(2√λ) + ||(Rλ-Rλ,h)yδ|| + ||r_h||/λ. The refined datum chain separately includes Rλd_h.",
+      "used_by": [
+        "cor-l2-inverse-error-budget-and-cross-term-condition",
+        "ex-tikhonov-bias-noise-tradeoff",
+        "ex-quadrature-discretization-residual-before-inversion",
+        "thm-tikhonov-forward-discretization-and-stopping-coupling"
+      ]
+    },
+    {
+      "id": "cor-l2-inverse-error-budget-and-cross-term-condition",
+      "statement": "For the stated finite list of inner-product-space-valued maps with measurable square-integrable norms, measurable sum norm and measurable pairings, the L² norm of the sum is bounded by the sum of L² norms. Root-sum-square equality holds if and only if the aggregate integrated real cross-term sum is zero.",
+      "used_by": [
+        "numerical-inverse-problems-and-regularization-error"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-hilbert-space",
+      "used_for": "Cauchy-sequence completeness in the closed-range argument.",
+      "opened": true
+    },
+    {
+      "id": "def-hilbert-space-adjoint",
+      "used_for": "Countable Choice assumption and the linear-first adjoint identity.",
+      "opened": true
+    },
+    {
+      "id": "def-bounded-linear-operator",
+      "used_for": "Boundedness hypotheses and continuity estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-space",
+      "used_for": "Linearity, conjugate symmetry and positive definiteness.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit selection assumption in Hilbert-space results.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm",
+      "used_for": "Unit-ball norm bounds, including zero-domain cases.",
+      "opened": true
+    },
+    {
+      "id": "def-orthogonality-and-orthogonal-complement",
+      "used_for": "The normal operator's range-complement argument.",
+      "opened": true
+    },
+    {
+      "id": "cor-inner-product-induces-a-norm",
+      "used_for": "Induced norm identities and triangle inequalities.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Coercivity, noise amplification, matrix estimates and cross-term integrability.",
+      "opened": true
+    },
+    {
+      "id": "thm-orthogonal-decomposition-by-a-closed-subspace",
+      "used_for": "Surjectivity from closed range and zero orthogonal complement under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+      "used_for": "Strict threshold convention and retained reciprocal singular values.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Full orthonormal bases and the finite singular expansion.",
+      "opened": true
+    },
+    {
+      "id": "def-compact-linear-operator",
+      "used_for": "Compactness implies boundedness in the error-chain theorem.",
+      "opened": true
+    },
+    {
+      "id": "def-tikhonov-regularised-least-squares",
+      "used_for": "The squared-penalty parameter convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+      "used_for": "Exact finite-dimensional minimizer and normal equation.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Euclidean matrix operator norms in computed residual and embedding estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-calligraphic-l-p-on-a-measure-space",
+      "used_for": "Scalar measurable L² functions and their finite integral functional.",
+      "opened": true
+    },
+    {
+      "id": "thm-minkowski-inequality-for-integrals",
+      "used_for": "Finite-sum scalar L² bound.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Integrating norm domination and cross-term absolute bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Integrability of measurable scalar pairings.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Integration of the finite squared-norm expansion.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-conjugate-real-imaginary-part-and-modulus",
+      "used_for": "Real parts of complex cross terms.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "cor-l2-inverse-error-budget-and-cross-term-condition",
+      "concern": "The Statement covers any real or complex inner-product space and any finite list satisfying its scalar measurability assumptions. The Facts' Given instead says 'a real or complex Hilbert space' and 'an exact inverse-error chain', and Proof 1.1 begins by invoking that chain and Countable Choice. The subsequent scalar argument proves the general Statement without completeness, an inverse chain or Choice; distinguish that general argument from its optional inverse-problem application.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "numerical-inverse-problems-and-regularization-error",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Checked the operationwise arithmetic definition, normal-residual certificate and computed least-squares theorem against the augmented-Tikhonov consumer. It preserves successful arithmetic, certified allowances, real backend realization, dimension-dependent hypotheses and nonsingularity. The page does not infer numerical coordinates from finite rank alone."
+    },
+    {
+      "from": "spectral-regularization-and-parameter-choice",
+      "to": "numerical-inverse-problems-and-regularization-error",
+      "faithful": true,
+      "note": "Checked the citing spectral definitions, bias/residual/convergence/rate results, Morozov result and forward-discretization theorem. Uses retain Countable Choice, positive shifts, the 1/(2√λ) noise constant and 1/λ residual constant. The refined chain preserves its pre-inversion forward residual and separate operator difference."
+    },
+    {
+      "from": "iterative-regularization-and-early-stopping",
+      "to": "numerical-inverse-problems-and-regularization-error",
+      "faithful": true,
+      "note": "Checked unanchored and anchored normal-equation procedures, the unanchored one-step recurrence, source-filter bounds and anchored convergence proof. Derivatives are bounded linear maps over the stated field, shifts are positive, and Countable Choice or stronger AC is explicit. No compactness or convergence conclusion is incorrectly imported from the supplier bounds."
+    }
+  ]
+}

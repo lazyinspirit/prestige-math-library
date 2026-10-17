@@ -1,0 +1,12 @@
+--- before/items/alg-mgrit-two-level-cycle.md
++++ proposed/items/alg-mgrit-two-level-cycle.md
+@@ -36,8 +36,7 @@
+ Input: a linear fine-grid system $A_tu=b$ with $N\ge1$ fine intervals as in [[def-linear-all-at-once-time-operator]], a coarsening factor $m\ge2$ dividing $N$ and its C/F partition as in [[lem-mgrit-exact-coarse-elimination]], practical coarse propagators $\Psi_j\in\mathbb R^{d\times d}$ for $1\le j\le N_c:=N/m$, an initial fine-grid iterate $u_{\rm in}$, pre- and post-relaxation choices from $\{F,FCF\}$, a real-valued norm on the fine-grid residual space as in [[def-norm-and-normed-space]], a nonnegative integer cycle budget $J_{\rm cyc}$, and a residual tolerance $\varepsilon\ge0$. The symbol $J_{\rm cyc}$ is the number of permitted cycles; the coarse-interval count is $N_c$ (the letter $J$ in [[lem-mgrit-exact-coarse-elimination]] denotes that lemma's coarse-interval count). The output is the last iterate, its residual norm, the number of completed cycles, and status `converged` or `budget-exhausted`.
+ 
+ In F/C ordering define ideal interpolation $P$ and restriction $R$ by
+-$$P=\begin{bmatrix}-A_{FF}^{-1}A_{FC}\\ I_C\end{bmatrix},
+-\qquad R=\begin{bmatrix}-A_{CF}A_{FF}^{-1}&I_C\end{bmatrix}.$$
++$$P=\begin{bmatrix}-A_{FF}^{-1}A_{FC}\\ I_C\end{bmatrix}, \qquad R=\begin{bmatrix}-A_{CF}A_{FF}^{-1}&I_C\end{bmatrix}.$$
+ 
+ The exact coarse operator is the Schur complement $RA_tP=A_{CC}-A_{CF}A_{FF}^{-1}A_{FC}$ from [[lem-mgrit-exact-coarse-elimination]]. The practical correction matrix $A_c$ has identity diagonal blocks and subdiagonal blocks $-\Psi_j$ for $2\le j\le N_c$; its first row corresponds to the fixed zero initial correction $z_0=0$. For any right-hand side $\rho$, forward substitution uniquely solves $A_cz=\rho$ by setting $z_0=0$ and, in increasing order for $j=1,\ldots,N_c$, setting $z_j=\rho_j+\Psi_jz_{j-1}$. Thus $A_c$ is invertible even when an individual $\Psi_j$ is singular.
+ 

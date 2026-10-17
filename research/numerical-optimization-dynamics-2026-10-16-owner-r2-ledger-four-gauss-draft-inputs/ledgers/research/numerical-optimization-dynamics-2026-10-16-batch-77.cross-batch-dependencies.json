@@ -1,0 +1,140 @@
+[
+  {
+    "kind": "item",
+    "consumer": "def-parareal-propagator-pair",
+    "supplier": "def-backward-euler-step-equation",
+    "supplier_batch": "65",
+    "status": "verified",
+    "required_hypotheses": [
+      "The start pair lies in the open IVP domain and the step size is positive.",
+      "The backward Euler endpoint satisfies the displayed implicit equation and lies in the admitted endpoint branch.",
+      "The definition asserts neither root existence nor uniqueness; the T19 selector must return exactly one branch value or report failure."
+    ],
+    "affected_claims": [
+      "def-parareal-propagator-pair",
+      "alg-parareal-correction-sweeps",
+      "lem-parareal-first-k-nodes-are-fine-exact",
+      "thm-parareal-binomial-error-bound",
+      "thm-parareal-inexact-sweep-error-ledger",
+      "cor-parareal-continuous-target-error-decomposition",
+      "def-linear-all-at-once-time-operator",
+      "alg-mgrit-two-level-cycle",
+      "alg-mgrit-multilevel-recursive-cycle",
+      "thm-mgrit-contraction-implies-residual-and-error-decay"
+    ],
+    "evidence": "Inspected the actual current BE equation and the transitive implicit-residual and first-order-IVP definitions. The residual norm is not a forward-error bound without a separate inverse estimate; no such claim is used in T19."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-parareal-propagator-pair",
+    "supplier": "def-explicit-runge-kutta-tableau-and-stage-map",
+    "supplier_batch": "35",
+    "status": "verified",
+    "required_hypotheses": [
+      "The explicit tableau has a positive stage count and strict lower-triangular stage coefficients.",
+      "Every stage query and the output lie in the admitted open time-state domain.",
+      "Every exact right-hand-side evaluation succeeds; otherwise the stage map returns its declared failure status."
+    ],
+    "affected_claims": [
+      "def-parareal-propagator-pair",
+      "alg-parareal-correction-sweeps",
+      "lem-parareal-first-k-nodes-are-fine-exact",
+      "thm-parareal-binomial-error-bound",
+      "thm-parareal-inexact-sweep-error-ledger",
+      "cor-parareal-continuous-target-error-decomposition",
+      "def-linear-all-at-once-time-operator",
+      "alg-mgrit-two-level-cycle",
+      "alg-mgrit-multilevel-recursive-cycle",
+      "thm-mgrit-contraction-implies-residual-and-error-decay"
+    ],
+    "evidence": "Inspected the complete current supplier definition and its explicit stage recursion. The T19 fine-propagator branch composes only successful stage maps and introduces no order/stability conclusion. Its direct ODE/one-step dependencies were read to verify the open-domain and map conventions."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-mgrit-scalar-diffusion-two-grid-contraction",
+    "supplier": "def-backward-euler-step-equation",
+    "supplier_batch": "65",
+    "status": "verified",
+    "required_hypotheses": [
+      "The selected endpoint solves $z=x-Hz$ for $H=1/2$, giving coarse multiplier $2/3$."
+    ],
+    "affected_claims": [
+      "ex-mgrit-scalar-diffusion-two-grid-contraction"
+    ],
+    "evidence": "Read the complete BE definition and residual convention and solved the scalar endpoint equation exactly; no general implicit-root theorem is imported."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-mgrit-scalar-diffusion-two-grid-contraction",
+    "supplier": "def-euler-midpoint-rk4-tableaus",
+    "supplier_batch": "35",
+    "status": "verified",
+    "required_hypotheses": [
+      "Forward Euler's scalar update for $f(y)=-y$ and $h=1/4$ multiplies by $3/4$."
+    ],
+    "affected_claims": [
+      "ex-mgrit-scalar-diffusion-two-grid-contraction"
+    ],
+    "evidence": "Read the complete Forward Euler tableau definition and computed the scalar multiplier directly from its stage equation."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-parareal-dissipative-scalar-heat-mode",
+    "supplier": "def-backward-euler-step-equation",
+    "supplier_batch": "65",
+    "status": "verified",
+    "required_hypotheses": [
+      "The selected scalar endpoint solves $z=x-Hz$ for $H=1/2$."
+    ],
+    "affected_claims": [
+      "ex-parareal-dissipative-scalar-heat-mode"
+    ],
+    "evidence": "Read the BE equation and algebraic-error convention. The example solves the scalar equation exactly and makes no general solvability or residual-error claim."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-parareal-dissipative-scalar-heat-mode",
+    "supplier": "def-euler-midpoint-rk4-tableaus",
+    "supplier_batch": "35",
+    "status": "verified",
+    "required_hypotheses": [
+      "Forward Euler has the one-stage tableau $A=0$, $b=1$, $c=0$."
+    ],
+    "affected_claims": [
+      "ex-parareal-dissipative-scalar-heat-mode"
+    ],
+    "evidence": "Read the complete supplier tableau definition. The example performs the scalar stage/update algebra directly and imports no order or stability claim."
+  },
+  {
+    "kind": "page",
+    "consumer": "parallel-in-time-parareal-and-mgrit",
+    "supplier": "implicit-stiff-time-stepping-and-algebraic-error",
+    "supplier_batch": "65",
+    "status": "verified",
+    "required_interface": "The current page supplies the backward Euler endpoint equation and its residual convention. The T19 construction requires one selected successful endpoint branch and does not infer root existence, uniqueness, a residual-to-forward-error bound, or global accuracy from the definition.",
+    "affected_claims": [
+      "def-parareal-propagator-pair",
+      "alg-parareal-correction-sweeps",
+      "def-linear-all-at-once-time-operator",
+      "ex-parareal-dissipative-scalar-heat-mode",
+      "ex-mgrit-scalar-diffusion-two-grid-contraction"
+    ],
+    "evidence": "Read the current draft A-page summary and the actual def-backward-euler-step-equation and def-implicit-residual-and-algebraic-error-units bodies. The BE definition permits zero or multiple roots on a branch set; the local map selector and failure branch preserve that limitation. The page and items remain draft; no independent acceptance is asserted."
+  },
+  {
+    "kind": "page",
+    "consumer": "parallel-in-time-parareal-and-mgrit",
+    "supplier": "runge-kutta-methods-and-order",
+    "supplier_batch": "35",
+    "status": "verified",
+    "required_interface": "The current page supplies the explicit Runge–Kutta stage-map convention. The T19 construction uses only its ordered successful stage evaluations and explicit domain/evaluation-failure branches; no order or stability theorem is imported.",
+    "affected_claims": [
+      "def-parareal-propagator-pair",
+      "alg-parareal-correction-sweeps",
+      "def-linear-all-at-once-time-operator",
+      "ex-parareal-dissipative-scalar-heat-mode",
+      "ex-mgrit-scalar-diffusion-two-grid-contraction"
+    ],
+    "evidence": "Read the current draft A-page summary and the actual def-explicit-runge-kutta-tableau-and-stage-map definition, including its strict lower-triangular stage recursion, stage-domain checks, evaluation-failure branch, output-domain check, and successful one-step output. Also inspected its direct ODE and one-step-definition suppliers. The page and items are draft authoring context only; no review acceptance is inferred."
+  }
+]

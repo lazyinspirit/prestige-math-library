@@ -10,8 +10,7 @@ provenance:
 deps: [thm-exact-rank-is-locally-constant-at-full-rank-and-discontinuous-at-nonmaximal-rank-matrices]
 aliases: []
 verification:
-  audited: 2026-08-29
-  precheck: n/a
+  repair: research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-published-focused/def-numerical-rank-relative-to-a-norm-scale-and-tolerance/application/repair.json
 sources:
   scraped: []
   references:
@@ -54,7 +53,7 @@ that perturbation of size at most $\tau$ cannot erase.
 
 - **The choice of norm is part of the data.** Different norms give different
   distances to the low-rank sets, hence possibly different numerical ranks for
-  the same matrix and tolerance. The spectral specialisation is
+  the same matrix and tolerance. The spectral specialisation for real matrices is
   [[prop-spectral-numerical-rank-counts-singular-values-above-the-declared-threshold]];
   the dependence on the declared tolerance itself is genuine: for
   $A=\operatorname{diag}(1,1/2,0)$, the tolerances $3/4$ and $1/4$ give the

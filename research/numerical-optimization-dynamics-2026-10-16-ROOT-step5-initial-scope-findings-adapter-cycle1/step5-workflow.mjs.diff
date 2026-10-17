@@ -1,0 +1,82 @@
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -19,6 +19,7 @@
+ import { syncMaintenance, maintenanceStatus, prepareMaintenance, collectMaintenance } from './consumer-maintenance.mjs';
+ import { orderedItems, runPages } from './item-dependency-levels.mjs';
+ import { loadReaderConcerns, checkFrozenReaderConcernInput, readerConcernSession } from './step5-reader-concerns.mjs';
++import { loadInitialScopeFindings, checkFrozenInitialScopeFindingInput, recordInitialScopeFindings } from './step5-initial-scope-findings.mjs';
+ export { readerConcernSession };
+ 
+ export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
+@@ -588,6 +589,8 @@
+         ? `Read this batch's rejection-blind Step-4 review digest first: ${batchDigest}. Its findings are evidence, not authority; verify relevant concerns against the current item files and the assigned judge tuples.` : '',
+       pack.reader_concerns?.some(row=>assigned.includes(row.id))
+         ? `Owner-confirmed Step-4 reader concerns assigned for genuine current review and smallest necessary repair (these are not judge rejections or downstream claims):\n${JSON.stringify(pack.reader_concerns.filter(row=>assigned.includes(row.id)),null,2)}. Review the bound original digest and individual owner evidence; repair confirmed presentation defects as well as mathematical defects. Return ordinary reviews, with no adjudication decision for these concerns. Only actual Statement/Definition changes propagate consumer examinations.` : '',
++      pack.initial_scope_findings?.some(row=>assigned.includes(row.id))
++        ? `Owner-confirmed findings from original native initial adjudication, assigned for current review and smallest necessary repair:\n${JSON.stringify(pack.initial_scope_findings.filter(row=>assigned.includes(row.id)),null,2)}. Read the original native report/finding and bound individual root instructions. These are explicit work requests, not Step-4 reader concerns, judge rejections, new adjudication decisions, or current acceptance. Return ordinary reviews with no adjudication decision. Only actual Statement/Definition changes propagate consumer examination.` : '',
+       `Write only your assigned frontier item files, their necessary owning contracts/metadata, and ${report}.`,
+       'Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.',
+       'SCOPE: repair only assigned draft frontier items. Published repairs have no item gate, rejudge or adjudication obligation; record their findings separately. Outside consumers are handled by consumer maintenance. Record affected uses without turning them into frontier blockers.',
+@@ -1445,8 +1448,8 @@
+     if(!obligations.has(id))obligations.set(id,new Set());
+     const owners=obligations.get(id),size=owners.size;owners.add(unit);return owners.size!==size;
+   };
+-  for(const pack of packs)if(pack.reader_concerns?.length){
+-    for(const concern of pack.reader_concerns){
++  for(const pack of packs)if(pack.reader_concerns?.length||pack.initial_scope_findings?.length){
++    for(const concern of [...(pack.reader_concerns??[]),...(pack.initial_scope_findings??[])]){
+       const unit=pack.reader_concern_owners?.[concern.id];
+       requireValue(unit&&pack.assignments[unit]?.includes(concern.id)
+         &&(!originalOwners[concern.id]||originalOwners[concern.id]===unit),
+@@ -1753,7 +1756,10 @@
+   const path=packPath(root,run,phase,round);
+   if(existsSync(path)){
+     const saved=read(path);
+-    if(phase==='impact-initial'&&round===1)checkFrozenReaderConcernInput(root,run,saved);
++    if(phase==='impact-initial'&&round===1){
++      checkFrozenReaderConcernInput(root,run,saved);
++      checkFrozenInitialScopeFindingInput(root,run,saved);
++    }
+     return saved;
+   }
+   if(phase==='gate')return prepareGateRepairPack(root,run,phase,round,failures);
+@@ -1763,7 +1769,8 @@
+   const scope=impactTargets(root,run,phase,items,result.restated??result.changed,result.downstream??[]);
+   const {seeds,impacts}=scope;
+   const concerns=phase==='impact-initial'&&round===1?loadReaderConcerns(root,run):null;
+-  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id)])];
++  const scopeFindings=phase==='impact-initial'&&round===1?loadInitialScopeFindings(root,run):null;
++  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id),...(scopeFindings?.entries??[]).map(row=>row.id)])];
+   // Deterministic disjoint lanes run concurrently; shared metadata edits lock.
+   // Closure requeues reviews invalidated by a concurrent supplier repair.
+   const assignments={'1':[],'2':[],'3':[]};
+@@ -1775,7 +1782,15 @@
+   if(concerns){
+     pack.reader_concerns=concerns.entries;
+     pack.reader_concern_owners=Object.fromEntries(concerns.entries.map(row=>[row.id,pack.units.find(unit=>assignments[unit].includes(row.id))]));
+-    pack.input_evidence=frozenSupportingEvidence(root,run,concerns.evidence);
++  }
++  if(scopeFindings)pack.initial_scope_findings=scopeFindings.entries;
++  if(concerns||scopeFindings){
++    pack.reader_concern_owners={...(pack.reader_concern_owners??{}),...Object.fromEntries((scopeFindings?.entries??[]).map(row=>[row.id,pack.units.find(unit=>assignments[unit].includes(row.id))]))};
++    pack.input_evidence??={};
++    for(const admission of [concerns,scopeFindings].filter(Boolean))for(const [file,hash]of Object.entries(frozenSupportingEvidence(root,run,admission.evidence))){
++      requireValue(!Object.hasOwn(pack.input_evidence,file)||pack.input_evidence[file]===hash,`conflicting work-admission evidence: ${file}`);
++      pack.input_evidence[file]=hash;
++    }
+   }
+   frozen(path,pack);writeTasks(root,pack,'repair');return pack;
+ }
+@@ -1971,6 +1986,12 @@
+       requireValue(admission,'reader concern admission missing');
+       console.log(JSON.stringify({run,ids:admission.entries.map(row=>row.id),mathematical_review:false,native_coverage_adopted:false}));return;
+     }
++    case 'record-initial-scope-findings':result=recordInitialScopeFindings(root,run,opt('--authorization'));break;
++    case 'check-initial-scope-findings':{
++      const admission=loadInitialScopeFindings(root,run,{requireCollection:false});
++      requireValue(admission,'initial-scope finding registry missing');
++      console.log(JSON.stringify({run,ids:admission.entries.map(row=>row.id),mathematical_review:false,native_coverage_adopted:false}));return;
++    }
+     case 'init':result=initialize(root,run);break;
+     case 'prepare':result=['initial','repeat'].includes(phase)?prepareAdjudication(root,run,phase,round):prepareImpact(root,run,phase,round,{failures:opt('--failures')?read(opt('--failures')):null});break;
+     case 'collect':result=collect(root,run,phase,round);break;

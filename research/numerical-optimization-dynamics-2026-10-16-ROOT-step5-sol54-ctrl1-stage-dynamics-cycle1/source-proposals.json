@@ -1,0 +1,81 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "research_only": true,
+  "cycle": 1,
+  "supplier_before_consumer_order": [
+    "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+    "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+    "ex-ctrl1-chemical-dosing-linear-model"
+  ],
+  "proposals": [
+    {
+      "id": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+      "target": "items/def-ctrl1-runge-kutta-tableau-and-stage-collocation.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol54-ctrl1-stage-dynamics-cycle1/before/def-ctrl1-runge-kutta-tableau-and-stage-collocation.md",
+      "proposal_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol54-ctrl1-stage-dynamics-cycle1/proposed/def-ctrl1-runge-kutta-tableau-and-stage-collocation.md",
+      "changes_definition_or_statement": true,
+      "exact_replacements": [
+        {
+          "before": "If $A$ is strictly lower triangular, its stages are evaluated recursively by the explicit tableau procedure of [[def-explicit-runge-kutta-tableau-and-stage-map]].",
+          "after": "If $A$ is strictly lower triangular, solve these same stage equations successively for $i=1,\\ldots,s$: the equation for $X_{j,i}$ uses only the preceding stage slopes. The coefficient conditions are those of the explicit tableau in [[def-explicit-runge-kutta-tableau-and-stage-map]]; only that algebraic tableau convention is used here. Evaluation uses the closed-horizon domains and failure checks just stated, rather than that item's open-time-state IVP stage-map interface. No extension of $f$ or $L$ to times outside $[0,T]$ is required."
+        },
+        {
+          "before": "before each query of $f$ or $L$, including trial stages of an implicit solve",
+          "after": "before each query of $f$, $L$, or their state/control derivatives when requested, including queries within a supplied evaluator or trial stages of an implicit solve"
+        }
+      ],
+      "guard": "Future application requires canonical source raw bytes exactly equal before_file, and each replacement to have exactly one occurrence. Stop for fresh focused review on any divergence. Root owns hash binding and all actual native application/certification.",
+      "status": "Research-only proposed successor; no live source or metadata edited."
+    },
+    {
+      "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "target": "items/alg-ctrl1-runge-kutta-shooting-and-collocation-transcription.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol54-ctrl1-stage-dynamics-cycle1/before/alg-ctrl1-runge-kutta-shooting-and-collocation-transcription.md",
+      "proposal_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol54-ctrl1-stage-dynamics-cycle1/proposed/alg-ctrl1-runge-kutta-shooting-and-collocation-transcription.md",
+      "changes_definition_or_statement": true,
+      "exact_replacements": [
+        {
+          "before": "an explicit tableau from [[def-explicit-runge-kutta-tableau-and-stage-map]] or a possibly implicit tableau from [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]]",
+          "after": "a tableau from [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]], using the coefficient convention of [[def-explicit-runge-kutta-tableau-and-stage-map]] when it is explicit"
+        },
+        {
+          "before": "Supply a deterministic derivative evaluator for the actual returned stage maps and resulting finite NLP on an open neighborhood of the queried candidate.",
+          "after": "Supply a deterministic derivative evaluator for the actual returned stage maps and resulting finite NLP on an open neighborhood of the queried candidate. All derivatives here are with respect to the finite decision variables on the fixed mesh; time arguments remain the checked fixed stage or constraint times. The checks below apply before any function or derivative query, including queries made inside a supplied evaluator."
+        },
+        {
+          "before": "check all stage times $t_j+c_i h_j$ lie in $[0,T]$ before querying $f$ or $L$",
+          "after": "check all stage times $t_j+c_i h_j$ lie in $[0,T]$ before any query of $f$, $L$, or their state/control derivatives"
+        },
+        {
+          "before": "For an explicit tableau, form the stages recursively by the displayed equations. Before each query of $f$ or $L$, check",
+          "after": "For an explicit tableau, form the stages recursively by the displayed equations, as the strictly lower triangular case of the closed-horizon stage equations in [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]]; the generic open-time-state IVP stage-map interface is not invoked. Before each query of $f$, $L$, or their state/control derivatives, including a query within a supplied derivative evaluator, check"
+        },
+        {
+          "before": "In multiple shooting, the decision variables are node states and controls; fix $X_{0,0}=x_0$ and define defects $d_j=X_{j+1,0}-\\Phi_j(X_{j,0},u_j)$. In collocation mode, use the same node/control variables and solved internal stage states;",
+          "after": "In multiple shooting, the decision variables are node states and controls; fix $X_{0,0}=x_0$, define defects $d_j=X_{j+1,0}-\\Phi_j(X_{j,0},u_j)$, and impose $d_j=0$ for every $j=0,\\ldots,N-1$. In collocation mode, use the same node/control variables, fixed initial state, continuity equalities $d_j=0$, and solved internal stage states;"
+        },
+        {
+          "before": "and the finite constraints are exactly the declared node/time constraints, the represented control constraints, and endpoint constraints.",
+          "after": "and the finite constraints are exactly the fixed initial-state condition, the continuity equalities $d_j=0$ for every cell in multiple-shooting and collocation modes, the declared node/time constraints, the represented control constraints, and endpoint constraints. Single shooting enforces its initial state and dynamics by substitution. In multiple shooting and collocation, include every component of every $d_j$ in the equality residual $h$ and its derivatives in $Dh$ for the NLP and KKT residuals. A candidate may have nonzero defects: these are constraint residuals, not a stage-construction failure. The equalities use the actual returned deterministic interval maps; the internal stage tolerance $\\tau_s$ does not relax the continuity equalities or assert that an approximate implicit stage vector is an exact Runge--Kutta stage solution."
+        }
+      ],
+      "guard": "Future application requires canonical source raw bytes exactly equal before_file, and each replacement to have exactly one occurrence. Stop for fresh focused review on any divergence. Root owns hash binding and all actual native application/certification.",
+      "status": "Research-only proposed successor; no live source or metadata edited."
+    },
+    {
+      "id": "ex-ctrl1-chemical-dosing-linear-model",
+      "target": "items/ex-ctrl1-chemical-dosing-linear-model.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol54-ctrl1-stage-dynamics-cycle1/before/ex-ctrl1-chemical-dosing-linear-model.md",
+      "proposal_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol54-ctrl1-stage-dynamics-cycle1/proposed/ex-ctrl1-chemical-dosing-linear-model.md",
+      "changes_definition_or_statement": false,
+      "exact_replacements": [
+        {
+          "before": "[F2] The one-step stage and endpoint formulas for an explicit RK tableau are those of [[def-explicit-runge-kutta-tableau-and-stage-map]].",
+          "after": "[F2] The closed-horizon explicit stage and endpoint equations, using the explicit tableau coefficient convention, are those of [[alg-ctrl1-runge-kutta-shooting-and-collocation-transcription]]."
+        }
+      ],
+      "guard": "Future application requires canonical source raw bytes exactly equal before_file, and each replacement to have exactly one occurrence. Stop for fresh focused review on any divergence. Root owns hash binding and all actual native application/certification.",
+      "status": "Research-only proposed successor; no live source or metadata edited."
+    }
+  ]
+}

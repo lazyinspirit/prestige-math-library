@@ -1,0 +1,652 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "105",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-hybrid-mode-guard-reset-system",
+      "model": "gpt-6-luna",
+      "context_sha256": "4ece4cceffc66ab14e070e3c386bb2f945e927bedf22538384022ac54f008a43",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The phrase next mode state domain did not define a time slice of D_n. Explicit guard/reset types and (t,R_mn(t,x)) in D_n now make same-clock outgoing IVP admissibility precise; orientation, priority, finite-event conditions and all mathematical estimates are preserved. This is a nonfatal interface clarification of the intended reset semantics.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-ode-flow-lipschitz-on-a-tube",
+      "model": "gpt-6-luna",
+      "context_sha256": "0b1a119fd28b0d45d7ab0f57632064f218b92db77c841d36faf82b4678ca0e24",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The Volterra supplier explicitly requires an interval with at least two elements; the original proof invoked it without excluding a=T. The proof now handles a=T by equality and only invokes Volterra when a<T. On that branch the continuous norm difference obeys the integral inequality with L>=0, so the stated Gronwall supplier applies. This is a nonfatal omitted immediate-equality boundary case; no positive-length argument or bound changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-reset-error-after-a-mistimed-hybrid-event",
+      "model": "gpt-6-luna",
+      "context_sha256": "585a3996d17066b9136426b94545d67d94dac1b33c288e3b402079433a524ff1",
+      "outcome": "false_positive",
+      "reason": "The lemma propagates a supplied event-time discrepancy; it does not claim to establish transversality or derive that discrepancy from a guard residual. Its estimate holds under the explicitly stronger generality without a crossing-margin assumption. The title describes its application to transverse-event errors. Integral displacement, coordinate-segment reset estimates, earlier outgoing displacement and common-time Gronwall are valid for either ordering, including Delta=0. No item edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+      "model": "gpt-6-luna",
+      "context_sha256": "0b2d09e2e575fc9a4f5af017ceca8ecaa167dfe88d186e6e6e47970bdb4e905a",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The state dimension and scalar signed crossing derivative were both denoted d. Renamed only the latter to kappa throughout, preserving the saltation map and hypotheses. The implicit-function argument uses the identity initial-state derivative and nonzero kappa; the proof now distinguishes the actual event-time shift from its linear part, including its little-o remainder. Advancing the earlier outgoing state gives the same minus f-plus timing correction for either sign of the shift.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-finite-hybrid-trajectory-error-under-separated-events",
+      "model": "gpt-6-luna",
+      "context_sha256": "5bbbf83b86da983ae3bc7cb88828a8e322175ac8abf598a2e950e26727ce7fa8",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The cited reset lemma requires a common convex outgoing tube, whereas this theorem assumes only a common outgoing tube; the original invocation is therefore unsupported. The unchanged recurrence follows directly: integrate the incoming continuation and exact earlier outgoing path to bound their displacements, apply the reset state/time Lipschitz estimates along the supplied coordinate segments, and add the evaluation error. The zero-lag branch uses zero displacement. Added the actual Volterra and integral-norm suppliers without strengthening the Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+      "model": "gpt-6-luna",
+      "context_sha256": "b4bca04799b11d9a4e4e2e8115447a30dbb400f982d8aa4c00aa2a906ad24390",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The rejected title inaccurately named only inconclusive although the procedure also returns domain-failure and budget-exhausted; the title now covers explicit failure. Full review also found step 2.1 invoking the reset lemma without its common-convex-outgoing-tube hypothesis: the provider supplies pathwise outgoing bounds, which suffice but do not meet that lemma interface. Replaced that invocation by direct Volterra displacement, reset Lipschitz and triangle estimates, including zero lag and approximate reset error. Complete root coverage, strict orientation, certified ordering, valid provider calls and finite charged budgets justify the unchanged Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-two-events-between-endpoints-defeat-sign-screening",
+      "model": "gpt-6-luna",
+      "context_sha256": "5353fe5428fec8cb35534bd301aca9e1b5a7cc86eb451fc8e4d6f5df3b0934dd",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The explicit calculations correctly give roots 1/3 and 2/3 with derivatives -1/3 and +1/3 and only the latter enabled. The final sentence nevertheless overstates what complete isolation alone establishes: absence additionally requires no enabled root. Qualified that sentence and called x=t the incoming-mode continuation, since the hybrid state resets at the enabled event. The Example, roots, orientation convention, and finite-budget qualification are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-hybrid-mode-guard-reset-system",
+      "disposition": "repaired",
+      "post_sha256": "35259b5a7ae66b986916078fdc7ada30682a576673ac1bf107e0c224d08fcc0e",
+      "review_context_sha256": "65192010ddd7ab11fe165690e13e1c6111b0bb43af6466be4620cbaef8dd3094",
+      "reason": "The phrase next mode state domain did not define a time slice of D_n. Explicit guard/reset types and (t,R_mn(t,x)) in D_n now make same-clock outgoing IVP admissibility precise; orientation, priority, finite-event conditions and all mathematical estimates are preserved. This is a nonfatal interface clarification of the intended reset semantics.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-ode-flow-lipschitz-on-a-tube",
+      "disposition": "repaired",
+      "post_sha256": "37d06b5469367c8d6b924e8c4e8ff78429fa0e6be47581d1ed610afc0f8ecba3",
+      "review_context_sha256": "c7f223673948d61ab42d10cedd9293aaac549fdaeea608bd3f803430a234e56c",
+      "reason": "The Volterra supplier explicitly requires an interval with at least two elements; the original proof invoked it without excluding a=T. The proof now handles a=T by equality and only invokes Volterra when a<T. On that branch the continuous norm difference obeys the integral inequality with L>=0, so the stated Gronwall supplier applies.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-reset-error-after-a-mistimed-hybrid-event",
+      "disposition": "unaffected",
+      "post_sha256": "c46098fe31cd9cc153ad1c8f53240ea42655dcac16fa045bac169efa1fa9542f",
+      "review_context_sha256": "53fcfe37bc9f1b4aad52df1f713e3c0836fedf66c9538c238e33500d038ffd1c",
+      "reason": "The lemma propagates a supplied event-time discrepancy; it does not claim to establish transversality or derive that discrepancy from a guard residual. Its estimate holds under the explicitly stronger generality without a crossing-margin assumption. The title describes its application to transverse-event errors. Integral displacement, coordinate-segment reset estimates, earlier outgoing displacement and common-time Gronwall are valid for either ordering, including Delta=0. No item edit is needed. Its owning contract citation mirror was updated to the clarified hybrid Definition; item guard and both estimates are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    },
+    {
+      "id": "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+      "disposition": "repaired",
+      "post_sha256": "081af3aefc28665e3963d1c710bab60d7eb55896ce3ad9f79d8f60ac9b6e04cf",
+      "review_context_sha256": "995b34def302ba4b0423ab09aac1f9b2ea7b80c90a46b7bb4d62ea511b19524d",
+      "reason": "The state dimension and scalar signed crossing derivative were both denoted d. Renamed only the latter to kappa throughout, preserving the saltation map and hypotheses. The implicit-function argument uses the identity initial-state derivative and nonzero kappa; the proof now distinguishes the actual event-time shift from its linear part, including its little-o remainder. Advancing the earlier outgoing state gives the same minus f-plus timing correction for either sign of the shift.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-finite-hybrid-trajectory-error-under-separated-events",
+      "disposition": "repaired",
+      "post_sha256": "ac22a60881c73434180e940a76cb6dc5b8de8e354675ae304b636680cfd18d40",
+      "review_context_sha256": "e543e922fb4f0e678af1e8acc53ed0d2abf26e2603d1f06b7bc8be78b6a25058",
+      "reason": "The cited reset lemma requires a common convex outgoing tube, whereas this theorem assumes only a common outgoing tube; the original invocation is therefore unsupported. The unchanged recurrence follows directly: integrate the incoming continuation and exact earlier outgoing path to bound their displacements, apply the reset state/time Lipschitz estimates along the supplied coordinate segments, and add the evaluation error. The zero-lag branch uses zero displacement. Added the actual Volterra and integral-norm suppliers without strengthening the Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+      "disposition": "repaired",
+      "post_sha256": "9d65ac989d32fc65bbc53f8bd94950d668ca5d20c55573701e71c11b536a2e5f",
+      "review_context_sha256": "2648de2b25c9780902781a9a02765f481f2e96cabd09008754f7cbc0152cbd66",
+      "reason": "The rejected title inaccurately named only inconclusive although the procedure also returns domain-failure and budget-exhausted; the title now covers explicit failure. Full review also found step 2.1 invoking the reset lemma without its common-convex-outgoing-tube hypothesis: the provider supplies pathwise outgoing bounds, which suffice but do not meet that lemma interface. Replaced that invocation by direct Volterra displacement, reset Lipschitz and triangle estimates, including zero lag and approximate reset error. Complete root coverage, strict orientation, certified ordering, valid provider calls and finite charged budgets justify the unchanged Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-two-events-between-endpoints-defeat-sign-screening",
+      "disposition": "repaired",
+      "post_sha256": "08e334e736d72eeb918c6ce44ba4b1fb3885b5932633938b832ce82f9276215f",
+      "review_context_sha256": "c15f0bc2411a76ce045a54b7e96d76b26be923f4101aa698f35de0ef85f4f22b",
+      "reason": "The explicit calculations correctly give roots 1/3 and 2/3 with derivatives -1/3 and +1/3 and only the latter enabled. The final sentence nevertheless overstates what complete isolation alone establishes: absence additionally requires no enabled root. Qualified that sentence and called x=t the incoming-mode continuation, since the hybrid state resets at the enabled event. The Example, roots, orientation convention, and finite-budget qualification are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+    "alg-safeguarded-hybrid-event-location-and-restart",
+    "cex-grazing-event-time-error-is-not-linearly-bounded",
+    "cex-inelastic-bouncing-ball-has-zeno-accumulation",
+    "def-certified-hybrid-event-enclosure",
+    "ex-bouncing-ball-transverse-event-error-and-reset",
+    "ex-simultaneous-guards-require-deterministic-priority",
+    "ex-two-events-between-endpoints-defeat-sign-screening",
+    "lem-hybrid-guard-derivative-along-mode",
+    "lem-ode-flow-lipschitz-on-a-tube",
+    "lem-reset-error-after-a-mistimed-hybrid-event",
+    "lem-transverse-hybrid-event-time-error",
+    "thm-finite-hybrid-trajectory-error-under-separated-events",
+    "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+    "thm-saltation-matrix-for-a-transverse-hybrid-reset"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "def-hybrid-mode-guard-reset-system",
+      "model": "gpt-6-luna",
+      "context_sha256": "4ece4cceffc66ab14e070e3c386bb2f945e927bedf22538384022ac54f008a43",
+      "outcome": "confirmed_nonfatal",
+      "disposition": "fixed",
+      "reason": "The phrase next mode state domain did not define a time slice of D_n. Explicit guard/reset types and (t,R_mn(t,x)) in D_n now make same-clock outgoing IVP admissibility precise; orientation, priority, finite-event conditions and all mathematical estimates are preserved. This is a nonfatal interface clarification of the intended reset semantics.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "lem-ode-flow-lipschitz-on-a-tube",
+      "model": "gpt-6-luna",
+      "context_sha256": "0b1a119fd28b0d45d7ab0f57632064f218b92db77c841d36faf82b4678ca0e24",
+      "outcome": "confirmed_nonfatal",
+      "disposition": "fixed",
+      "reason": "The Volterra supplier explicitly requires an interval with at least two elements; the original proof invoked it without excluding a=T. The proof now handles a=T by equality and only invokes Volterra when a<T. On that branch the continuous norm difference obeys the integral inequality with L>=0, so the stated Gronwall supplier applies. This is a nonfatal omitted immediate-equality boundary case; no positive-length argument or bound changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "lem-reset-error-after-a-mistimed-hybrid-event",
+      "model": "gpt-6-luna",
+      "context_sha256": "585a3996d17066b9136426b94545d67d94dac1b33c288e3b402079433a524ff1",
+      "outcome": "false_positive",
+      "disposition": "false-positive",
+      "reason": "The lemma propagates a supplied event-time discrepancy; it does not claim to establish transversality or derive that discrepancy from a guard residual. Its estimate holds under the explicitly stronger generality without a crossing-margin assumption. The title describes its application to transverse-event errors. Integral displacement, coordinate-segment reset estimates, earlier outgoing displacement and common-time Gronwall are valid for either ordering, including Delta=0. No item edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+      "model": "gpt-6-luna",
+      "context_sha256": "0b2d09e2e575fc9a4f5af017ceca8ecaa167dfe88d186e6e6e47970bdb4e905a",
+      "outcome": "confirmed_nonfatal",
+      "disposition": "fixed",
+      "reason": "The state dimension and scalar signed crossing derivative were both denoted d. Renamed only the latter to kappa throughout, preserving the saltation map and hypotheses. The implicit-function argument uses the identity initial-state derivative and nonzero kappa; the proof now distinguishes the actual event-time shift from its linear part, including its little-o remainder. Advancing the earlier outgoing state gives the same minus f-plus timing correction for either sign of the shift.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "thm-finite-hybrid-trajectory-error-under-separated-events",
+      "model": "gpt-6-luna",
+      "context_sha256": "5bbbf83b86da983ae3bc7cb88828a8e322175ac8abf598a2e950e26727ce7fa8",
+      "outcome": "confirmed_fatal",
+      "disposition": "fixed",
+      "reason": "The cited reset lemma requires a common convex outgoing tube, whereas this theorem assumes only a common outgoing tube; the original invocation is therefore unsupported. The unchanged recurrence follows directly: integrate the incoming continuation and exact earlier outgoing path to bound their displacements, apply the reset state/time Lipschitz estimates along the supplied coordinate segments, and add the evaluation error. The zero-lag branch uses zero displacement. Added the actual Volterra and integral-norm suppliers without strengthening the Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+      "model": "gpt-6-luna",
+      "context_sha256": "b4bca04799b11d9a4e4e2e8115447a30dbb400f982d8aa4c00aa2a906ad24390",
+      "outcome": "confirmed_fatal",
+      "disposition": "fixed",
+      "reason": "The rejected title inaccurately named only inconclusive although the procedure also returns domain-failure and budget-exhausted; the title now covers explicit failure. Full review also found step 2.1 invoking the reset lemma without its common-convex-outgoing-tube hypothesis: the provider supplies pathwise outgoing bounds, which suffice but do not meet that lemma interface. Replaced that invocation by direct Volterra displacement, reset Lipschitz and triangle estimates, including zero lag and approximate reset error. Complete root coverage, strict orientation, certified ordering, valid provider calls and finite charged budgets justify the unchanged Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "ex-two-events-between-endpoints-defeat-sign-screening",
+      "model": "gpt-6-luna",
+      "context_sha256": "5353fe5428fec8cb35534bd301aca9e1b5a7cc86eb451fc8e4d6f5df3b0934dd",
+      "outcome": "confirmed_nonfatal",
+      "disposition": "fixed",
+      "reason": "The explicit calculations correctly give roots 1/3 and 2/3 with derivatives -1/3 and +1/3 and only the latter enabled. The final sentence nevertheless overstates what complete isolation alone establishes: absence additionally requires no enabled root. Qualified that sentence and called x=t the incoming-mode continuation, since the hybrid state resets at the enabled event. The Example, roots, orientation convention, and finite-budget qualification are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "no-update-required",
+      "reason": "No new potentially defective published consumer was found. All fifteen direct consumers of the clarified hybrid Definition are draft frozen-frontier items, and saltation has no direct item consumer. Published Volterra, integral-norm, Gronwall and implicit-function interfaces were inspected as local prerequisite context; no whole-item audit or new source-reading claim is made.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "items": {
+      "def-hybrid-mode-guard-reset-system": {
+        "claim": "Reset outputs are state vectors; the same time paired with each output belongs to the outgoing state-time domain. Guards and reset neighborhoods now have explicit types. No event existence or choice claim was added.",
+        "dependencies": [
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-c-one-map-and-local-inverse"
+        ],
+        "source_paths": [
+          "items/def-first-order-ode-initial-value-problem-and-solution.md",
+          "items/def-hybrid-mode-guard-reset-system.md"
+        ],
+        "source_reading": "Local definitions inspected; no external source consultation needed for this typing repair.",
+        "next_action": "Capture review context and examine direct reset-domain consumers."
+      },
+      "lem-ode-flow-lipschitz-on-a-tube": {
+        "claim": "The Volterra supplier explicitly requires an interval with at least two elements; the original proof invoked it without excluding a=T. The proof now handles a=T by equality and only invokes Volterra when a<T. On that branch the continuous norm difference obeys the integral inequality with L>=0, so the stated Gronwall supplier applies.",
+        "source_paths": [
+          "items/lem-ode-flow-lipschitz-on-a-tube.md",
+          "items/prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation.md",
+          "items/thm-norm-inequality-for-the-vector-valued-integral.md",
+          "items/thm-gronwall-integral-inequality.md"
+        ],
+        "next_action": "Reconcile assigned citation/derivation mirrors under shared lock; then run focused checks."
+      },
+      "lem-reset-error-after-a-mistimed-hybrid-event": {
+        "claim": "The lemma propagates a supplied event-time discrepancy; it does not claim to establish transversality or derive that discrepancy from a guard residual. Its estimate holds under the explicitly stronger generality without a crossing-margin assumption. The title describes its application to transverse-event errors. Integral displacement, coordinate-segment reset estimates, earlier outgoing displacement and common-time Gronwall are valid for either ordering, including Delta=0. No item edit is needed.",
+        "source_paths": [
+          "items/lem-reset-error-after-a-mistimed-hybrid-event.md",
+          "items/prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation.md",
+          "items/thm-norm-inequality-for-the-vector-valued-integral.md",
+          "items/thm-gronwall-integral-inequality.md"
+        ],
+        "next_action": "Reconcile assigned citation/derivation mirrors under shared lock; then run focused checks."
+      },
+      "thm-saltation-matrix-for-a-transverse-hybrid-reset": {
+        "claim": "The state dimension and scalar signed crossing derivative were both denoted d. Renamed only the latter to kappa throughout, preserving the saltation map and hypotheses. The implicit-function argument uses the identity initial-state derivative and nonzero kappa; the proof now distinguishes the actual event-time shift from its linear part, including its little-o remainder. Advancing the earlier outgoing state gives the same minus f-plus timing correction for either sign of the shift.",
+        "source_paths": [
+          "items/lem-parameter-ode-flow-tangent-on-common-tube.md",
+          "items/lem-hybrid-guard-derivative-along-mode.md",
+          "items/thm-parametrized-implicit-function-theorem-with-higher-regularity.md"
+        ],
+        "source_reading": "Full local supplier proofs read. No external article reading claimed.",
+        "next_action": "No direct item consumers found; record owning-page use and reconcile contract derivations."
+      },
+      "thm-finite-hybrid-trajectory-error-under-separated-events": {
+        "claim": "The cited reset lemma requires a common convex outgoing tube, whereas this theorem assumes only a common outgoing tube; the original invocation is therefore unsupported. The unchanged recurrence follows directly: integrate the incoming continuation and exact earlier outgoing path to bound their displacements, apply the reset state/time Lipschitz estimates along the supplied coordinate segments, and add the evaluation error. The zero-lag branch uses zero displacement. Added the actual Volterra and integral-norm suppliers without strengthening the Statement.",
+        "source_paths": [
+          "items/prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation.md",
+          "items/thm-norm-inequality-for-the-vector-valued-integral.md",
+          "items/lem-transverse-hybrid-event-time-error.md",
+          "items/def-certified-hybrid-event-enclosure.md",
+          "items/thm-validated-residual-tube-certificate-sound.md"
+        ],
+        "next_action": "Final focused checks; unchanged Statement causes no downstream propagation."
+      },
+      "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted": {
+        "claim": "The rejected title inaccurately named only inconclusive although the procedure also returns domain-failure and budget-exhausted; the title now covers explicit failure. Full review also found step 2.1 invoking the reset lemma without its common-convex-outgoing-tube hypothesis: the provider supplies pathwise outgoing bounds, which suffice but do not meet that lemma interface. Replaced that invocation by direct Volterra displacement, reset Lipschitz and triangle estimates, including zero lag and approximate reset error. Complete root coverage, strict orientation, certified ordering, valid provider calls and finite charged budgets justify the unchanged Statement.",
+        "source_paths": [
+          "items/alg-safeguarded-hybrid-event-location-and-restart.md",
+          "items/def-certified-hybrid-event-enclosure.md",
+          "items/thm-smooth-function-root-isolation-soundness.md",
+          "items/lem-transverse-hybrid-event-time-error.md",
+          "items/thm-validated-residual-tube-certificate-sound.md",
+          "items/prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation.md",
+          "items/thm-norm-inequality-for-the-vector-valued-integral.md"
+        ],
+        "next_action": "Reconcile assigned metadata; final precheck/render/contract/layout verification."
+      },
+      "ex-two-events-between-endpoints-defeat-sign-screening": {
+        "claim": "The explicit calculations correctly give roots 1/3 and 2/3 with derivatives -1/3 and +1/3 and only the latter enabled. The final sentence nevertheless overstates what complete isolation alone establishes: absence additionally requires no enabled root. Qualified that sentence and called x=t the incoming-mode continuation, since the hybrid state resets at the enabled event. The Example, roots, orientation convention, and finite-budget qualification are preserved.",
+        "source_paths": [
+          "items/alg-safeguarded-hybrid-event-location-and-restart.md",
+          "items/def-hybrid-mode-guard-reset-system.md"
+        ],
+        "next_action": "Final focused checks; there is no changed Statement or Definition."
+      }
+    },
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-105.proof-contracts.json --strict --items def-hybrid-mode-guard-reset-system,lem-ode-flow-lipschitz-on-a-tube,lem-reset-error-after-a-mistimed-hybrid-event,thm-saltation-matrix-for-a-transverse-hybrid-reset,thm-finite-hybrid-trajectory-error-under-separated-events --json",
+        "exit_code": 0,
+        "result": "5 selected contracts passed, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-105.proof-contracts.json --strict --items thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted,ex-two-events-between-endpoints-defeat-sign-screening --json",
+        "exit_code": 0,
+        "result": "2 selected contracts passed, no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-hybrid-mode-guard-reset-system.md items/lem-ode-flow-lipschitz-on-a-tube.md items/lem-reset-error-after-a-mistimed-hybrid-event.md items/thm-saltation-matrix-for-a-transverse-hybrid-reset.md items/thm-finite-hybrid-trajectory-error-under-separated-events.md items/thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted.md items/ex-two-events-between-endpoints-defeat-sign-screening.md --json",
+        "exit_code": 0,
+        "result": "7 files: 6 proofs passed, definition not applicable, 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-hybrid-mode-guard-reset-system.md items/lem-ode-flow-lipschitz-on-a-tube.md items/lem-reset-error-after-a-mistimed-hybrid-event.md items/thm-saltation-matrix-for-a-transverse-hybrid-reset.md items/thm-finite-hybrid-trajectory-error-under-separated-events.md items/thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted.md items/ex-two-events-between-endpoints-defeat-sign-screening.md --json",
+        "exit_code": 0,
+        "result": "7 files checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-105.proof-contracts.json --strict --items def-hybrid-mode-guard-reset-system,lem-ode-flow-lipschitz-on-a-tube,lem-reset-error-after-a-mistimed-hybrid-event,thm-saltation-matrix-for-a-transverse-hybrid-reset,thm-finite-hybrid-trajectory-error-under-separated-events,thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted,ex-two-events-between-endpoints-defeat-sign-screening --json",
+        "exit_code": 0,
+        "result": "7 assigned contracts passed, no errors or warnings."
+      },
+      {
+        "command": "node tools/manifest-deps.mjs research/numerical-optimization-dynamics-2026-10-16-batch-105.pages.json",
+        "exit_code": 0,
+        "result": "15 manifest entries checked, no missing dependency arrays or errors."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-hybrid-mode-guard-reset-system.md items/lem-ode-flow-lipschitz-on-a-tube.md items/thm-saltation-matrix-for-a-transverse-hybrid-reset.md items/thm-finite-hybrid-trajectory-error-under-separated-events.md items/thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted.md items/ex-two-events-between-endpoints-defeat-sign-screening.md",
+        "exit_code": 0,
+        "result": "6 changed items, 18 steps, 0 defects."
+      },
+      {
+        "command": "Read-only comparison of current assigned item dependencies with batch-105.pages.json and frozen frontier membership",
+        "exit_code": 0,
+        "result": "All 7 assigned subjects are draft frozen-frontier items and their current dependency arrays match their manifest entries."
+      },
+      {
+        "command": "Read-only report schema/tuple/disposition assertions and canonical JSON pack digest verification",
+        "exit_code": 0,
+        "result": "Identity, 7 exact tuple decisions, 7 reviews, 15 unique consumers and task input hash verified. An initial raw-file SHA assertion failed because input_sha256 binds JSON.stringify(pack), not pretty-printed file bytes; the native canonical representation matches exactly."
+      }
+    ],
+    "next_action": "Engine collects the report, schedules ordinary frontier-owner effects and exact-context rejudgment as required. No judgments, stamps, certificates, gates or round transitions were written or launched by this worker.",
+    "consumer_reviews": [
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "lem-hybrid-guard-derivative-along-mode",
+        "path": "items/lem-hybrid-guard-derivative-along-mode.md",
+        "affected_use": "a solution in mode $m$ satisfies the first-order ODE $y'=f_m(t,y)$.",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "The chain-rule proof uses only the incoming mode ODE and C1 guard; explicit reset output typing does not change either premise.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "frontier-owner",
+        "uncertain": false,
+        "metadata_followup": "Owning reviewer should refresh any stale full-Definition quote in this consumer contract; its mathematical item needs no edit for this interface clarification."
+      },
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "lem-ode-flow-lipschitz-on-a-tube",
+        "path": "items/lem-ode-flow-lipschitz-on-a-tube.md",
+        "affected_use": "each mode trajectory solves its mode's first-order ODE.",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "The stability proof uses the unchanged mode ODE, not an additional reset claim; the separate singleton repair preserves its Statement.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "assigned-review",
+        "uncertain": false
+      },
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "lem-reset-error-after-a-mistimed-hybrid-event",
+        "path": "items/lem-reset-error-after-a-mistimed-hybrid-event.md",
+        "affected_use": "the incoming and outgoing pieces solve their mode ODEs and the state is reset by $R(t,x)$ at the event.",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "The reset is already evaluated as a state vector and outgoing solutions are assumed. Same-clock outgoing admissibility is now explicit; estimates and their tube hypotheses are unchanged.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "assigned-review",
+        "uncertain": false
+      },
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "lem-transverse-hybrid-event-time-error",
+        "path": "items/lem-transverse-hybrid-event-time-error.md",
+        "affected_use": "the incoming trajectory solves a smooth mode ODE, and an event guard has a declared orientation",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "Its guard-root estimate uses the unchanged orientation and C1 incoming continuation; no reset map is used in this proof.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "frontier-owner",
+        "uncertain": false,
+        "metadata_followup": "Owning reviewer should refresh any stale full-Definition quote in this consumer contract; its mathematical item needs no edit for this interface clarification."
+      },
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "def-certified-hybrid-event-enclosure",
+        "path": "items/def-certified-hybrid-event-enclosure.md",
+        "affected_use": "Reset data include state and time Lipschitz constants $L_R,L_{R,t}$ certified on a domain containing both reset inputs",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "The certified input/reset-coordinate segments and outgoing path bounds remain valid. The clarified reset domain is precisely a same-time state-time domain, as required for a successor solution.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "frontier-owner",
+        "uncertain": false,
+        "metadata_followup": "Owning reviewer should refresh any stale full-Definition quote in this consumer contract; its mathematical item needs no edit for this interface clarification."
+      },
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "alg-safeguarded-hybrid-event-location-and-restart",
+        "path": "items/alg-safeguarded-hybrid-event-location-and-restart.md",
+        "affected_use": "Check that $(\\widehat\\tau,U(\\widehat\\tau))$ lies in the reset domain and that the applied reset value lies in the next mode's state domain",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "The domain check is read at the current reported time: the applied state paired with that time lies in D_n. This is the clarified definition; approximate applied states still require their own check. The provider must soundly justify its ledger formula.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "frontier-owner",
+        "uncertain": false,
+        "metadata_followup": "Owning reviewer should refresh any stale full-Definition quote in this consumer contract; its mathematical item needs no edit for this interface clarification."
+      },
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "cex-inelastic-bouncing-ball-has-zeno-accumulation",
+        "path": "items/cex-inelastic-bouncing-ball-has-zeno-accumulation.md",
+        "affected_use": "a guard crossing applies its reset and restarts the outgoing smooth mode.",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "The constant-acceleration mode and linear restitution reset have full state-time extensions. The oriented incoming derivative and geometric flight-time sum do not change.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "frontier-owner",
+        "uncertain": false,
+        "metadata_followup": "Owning reviewer should refresh any stale full-Definition quote in this consumer contract; its mathematical item needs no edit for this interface clarification."
+      },
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "ex-simultaneous-guards-require-deterministic-priority",
+        "path": "items/ex-simultaneous-guards-require-deterministic-priority.md",
+        "affected_use": "an event occurs at a zero of an active guard, the reset is applied at that time, and a fixed priority selects among guards vanishing simultaneously.",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "Both terminal modes may be defined on all state-time space, and the constant zero reset is admissible at the same time. The fixed-priority alternatives and explicit continuations are unchanged.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "frontier-owner",
+        "uncertain": false,
+        "metadata_followup": "Owning reviewer should refresh any stale full-Definition quote in this consumer contract; its mathematical item needs no edit for this interface clarification."
+      },
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "cex-grazing-event-time-error-is-not-linearly-bounded",
+        "path": "items/cex-grazing-event-time-error-is-not-linearly-bounded.md",
+        "affected_use": "a hybrid event requires a guard zero that crosses in its declared orientation; a zero with vanishing derivative is only a guard contact under this definition.",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "The example uses only the unchanged distinction between an enabled crossing and a zero-derivative contact; its square-root sensitivity computation does not use a reset.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "frontier-owner",
+        "uncertain": false,
+        "metadata_followup": "Owning reviewer should refresh any stale full-Definition quote in this consumer contract; its mathematical item needs no edit for this interface clarification."
+      },
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "ex-bouncing-ball-transverse-event-error-and-reset",
+        "path": "items/ex-bouncing-ball-transverse-event-error-and-reset.md",
+        "affected_use": "a mode follows its ODE until an oriented guard crossing, then applies its reset and changes mode.",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "Its reset R(q,v)=(0,-v/2) is globally defined and the outgoing constant-gravity field is defined at the reset state-time. Its explicit convex rectangle still licenses the reset lemma. The digest also identifies a duplicate guard calculation in step 3.2; no mathematical repair is needed for the supplier clarification.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "frontier-owner",
+        "uncertain": false,
+        "metadata_followup": "Owning reviewer should refresh any stale full-Definition quote in this consumer contract; its mathematical item needs no edit for this interface clarification."
+      },
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "ex-two-events-between-endpoints-defeat-sign-screening",
+        "path": "items/ex-two-events-between-endpoints-defeat-sign-screening.md",
+        "affected_use": "an event occurs at an oriented guard crossing; its crossing direction is the sign of the guard derivative along the mode.",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "The time-polynomial guard and constant-zero reset extend to full state-time domains. Root derivatives and the one enabled transition are unchanged by explicit reset typing.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "assigned-review",
+        "uncertain": false
+      },
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "thm-finite-hybrid-trajectory-error-under-separated-events",
+        "path": "items/thm-finite-hybrid-trajectory-error-under-separated-events.md",
+        "affected_use": "each trajectory follows its current smooth mode until an enabled guard event, applies the reset, and changes mode.",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "Its compared reset inputs and outgoing solutions already satisfy the intended same-time admissibility. The separate proof-only citation repair retains every original Statement hypothesis and bound.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "assigned-review",
+        "uncertain": false
+      },
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+        "path": "items/thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted.md",
+        "affected_use": "an event is enabled only when the guard crosses in its declared orientation, and a fixed priority orders simultaneous enabled transitions.",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "Orientation and priority are unchanged. Its successful restart still checks the applied state at the reported time; the separate direct-displacement proof retains the original Statement.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "assigned-review",
+        "uncertain": false
+      },
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+        "path": "items/thm-saltation-matrix-for-a-transverse-hybrid-reset.md",
+        "affected_use": "each transition has a $C^1$ guard with declared orientation and a $C^1$ reset, and a mode trajectory solves its mode ODE until the selected event.",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "The nominal outgoing field is evaluated at (tau,R(tau,x-minus)), now explicitly admissible in D_n. The assumed nearby mode flows and selected-transition caveat remain unchanged. Its own notation repair is recorded separately.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "assigned-review",
+        "uncertain": false
+      },
+      {
+        "supplier": "def-hybrid-mode-guard-reset-system",
+        "id": "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+        "path": "items/alg-event-driven-frictionless-sphere-contact-with-certified-events.md",
+        "affected_use": "The general mode/guard/reset terminology is\n[[def-hybrid-mode-guard-reset-system]].",
+        "invalidated_claim": "None: the explicit reset codomain/time-slice condition preserves this use.",
+        "minimality": "The force field is defined on an open neighborhood of the admitted tube; the provider checks reset domains/tubes and nonpenetration. On pair-distance-positive neighborhoods the norm guard and binary reset are smooth. Same-time reset admissibility is the intended domain check; no physical priority or simultaneous-contact claim is added.",
+        "disposition": "sound_unchanged",
+        "requires_item_repair": false,
+        "route": "frontier-owner",
+        "uncertain": false,
+        "metadata_followup": "Owning reviewer should refresh any stale full-Definition quote in this consumer contract; its mathematical item needs no edit for this interface clarification."
+      }
+    ],
+    "interface_events": [
+      {
+        "id": "def-hybrid-mode-guard-reset-system",
+        "section": "Definition",
+        "before_excerpt": "a $C^1$ reset map $R_{mn}$ defined on a neighborhood of the guard points and taking values in the next mode's state domain.",
+        "after_excerpt": "a $C^1$ reset map $R_{mn}:U_{mn}\\to\\mathbb R^d$ on an open neighborhood $U_{mn}\\subseteq D_m$ of the guard zero set, satisfying $(t,R_{mn}(t,x))\\in D_n$ for every $(t,x)\\in U_{mn}$.",
+        "direct_item_consumers": [
+          "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+          "alg-safeguarded-hybrid-event-location-and-restart",
+          "cex-grazing-event-time-error-is-not-linearly-bounded",
+          "cex-inelastic-bouncing-ball-has-zeno-accumulation",
+          "def-certified-hybrid-event-enclosure",
+          "ex-bouncing-ball-transverse-event-error-and-reset",
+          "ex-simultaneous-guards-require-deterministic-priority",
+          "ex-two-events-between-endpoints-defeat-sign-screening",
+          "lem-hybrid-guard-derivative-along-mode",
+          "lem-ode-flow-lipschitz-on-a-tube",
+          "lem-reset-error-after-a-mistimed-hybrid-event",
+          "lem-transverse-hybrid-event-time-error",
+          "thm-finite-hybrid-trajectory-error-under-separated-events",
+          "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+          "thm-saltation-matrix-for-a-transverse-hybrid-reset"
+        ]
+      },
+      {
+        "id": "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+        "section": "Statement",
+        "before_excerpt": "$$d:=\\partial_tg(\\tau,x^-)+D_xg(\\tau,x^-)f^-\\ne0,$$",
+        "after_excerpt": "$$\\kappa:=\\partial_tg(\\tau,x^-)+D_xg(\\tau,x^-)f^-\\ne0,$$",
+        "direct_item_consumers": []
+      }
+    ],
+    "page_reviews": [
+      {
+        "path": "library/numerical-differential-equations-and-stochastic-dynamics/event-location-and-hybrid-trajectory-error.md",
+        "affected_use": "A hybrid trajectory follows a smooth ODE in each mode, changes mode at an oriented guard crossing, and applies a reset.",
+        "disposition": "sound_unchanged",
+        "reason": "The explicit same-clock reset typing preserves the page summary and item placement. Its saltation summary requires differentiable flows, guards and resets and a nonzero crossing derivative, all unchanged by renaming the derivative to kappa. The explicit three-status page summary matches the repaired locator title."
+      },
+      {
+        "path": "library/numerical-differential-equations-and-stochastic-dynamics/event-location-and-hybrid-trajectory-error-examples.md",
+        "affected_use": "a guard with two roots between equal-sign step endpoints shows why endpoint sign screening cannot certify that no enabled event occurred.",
+        "disposition": "sound_unchanged",
+        "reason": "The two roots and orientation classification remain unchanged; the repaired proof explicitly requires no enabled root before an absence certificate."
+      }
+    ],
+    "repair_complete": true,
+    "unresolved_mathematics": [],
+    "outside_frontier_consumers": []
+  }
+}

@@ -1,0 +1,275 @@
+[
+  {
+    "order": 2426,
+    "id": "bfgs-and-limited-memory-quasi-newton-methods",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Bfgs and limited memory quasi newton methods",
+    "companion": "bfgs-and-limited-memory-quasi-newton-methods-examples",
+    "requires": [
+      "finite-precision-direct-factorizations",
+      "nonconvex-line-search-and-inexact-newton-methods"
+    ],
+    "items": [
+      {
+        "id": "def-bfgs-curvature-pair-and-update-formulas",
+        "kind": "definition",
+        "title": "Bfgs curvature pairs and Hessian/inverse updates",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+        "kind": "lemma",
+        "title": "Uniform Hessian bounds control gradient changes and Taylor remainders",
+        "deps": [
+          "def-jacobian-matrix-and-gradient",
+          "def-hessian-and-euclidean-critical-point",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-chain-rule-for-total-derivatives",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+        "kind": "lemma",
+        "title": "Bfgs updates preserve the secant equations, symmetry, and positive definiteness",
+        "deps": [
+          "def-bfgs-curvature-pair-and-update-formulas"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-wolfe-steps-give-positive-bfgs-curvature",
+        "kind": "lemma",
+        "title": "A Wolfe step gives positive Bfgs curvature on a descent direction",
+        "deps": [
+          "def-wolfe-and-strong-wolfe-conditions",
+          "def-bfgs-curvature-pair-and-update-formulas",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-powell-damping-gives-positive-curvature",
+        "kind": "lemma",
+        "title": "Powell damping gives a strictly positive curvature pair",
+        "deps": [
+          "def-bfgs-curvature-pair-and-update-formulas"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+        "kind": "algorithm",
+        "title": "Bfgs Hessian direction by failure-aware Cholesky solve",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "alg-rounded-cholesky-with-failure-status",
+          "def-forward-and-back-substitution-for-triangular-systems",
+          "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-lbfgs-two-loop-with-curvature-filter",
+        "kind": "algorithm",
+        "title": "Limited-memory Bfgs two-loop recursion with curvature filtering",
+        "deps": [
+          "def-euclidean-inner-product",
+          "alg-bracketing-zoom-strong-wolfe-search"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-bfgs-trace-determinant-potential-identities",
+        "kind": "lemma",
+        "title": "Bfgs trace and determinant identities give a matrix potential inequality",
+        "deps": [
+          "def-bfgs-curvature-pair-and-update-formulas",
+          "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "def-determinant-of-a-square-matrix",
+          "def-natural-logarithm",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-full-memory-bfgs-with-curvature-safeguards",
+        "kind": "algorithm",
+        "title": "Full-memory Bfgs with Wolfe search, descent reset, and Powell damping",
+        "deps": [
+          "def-euclidean-inner-product",
+          "alg-bfgs-hessian-direction-with-rounded-cholesky",
+          "alg-bracketing-zoom-strong-wolfe-search",
+          "def-bfgs-curvature-pair-and-update-formulas"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+        "kind": "lemma",
+        "title": "The L-Bfgs two-loop recursion equals the stored inverse updates and costs linear memory work",
+        "deps": [
+          "def-bfgs-curvature-pair-and-update-formulas",
+          "alg-lbfgs-two-loop-with-curvature-filter"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-full-memory-bfgs-global-linear-convergence",
+        "kind": "theorem",
+        "title": "Full-memory Bfgs converges globally and linearly on a uniformly strongly convex level set",
+        "deps": [
+          "lem-bfgs-trace-determinant-potential-identities",
+          "alg-full-memory-bfgs-with-curvature-safeguards",
+          "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+          "lem-wolfe-steps-give-positive-bfgs-curvature",
+          "thm-zoutendijk-summability-for-wolfe-steps",
+          "lem-wolfe-step-lower-bound-from-the-descent-angle",
+          "def-hessian-and-euclidean-critical-point",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-wolfe-and-strong-wolfe-conditions",
+          "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+          "thm-derivative-of-exponential"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+        "kind": "lemma",
+        "title": "Fixed-memory L-Bfgs curvature and scale bounds imply uniform spectral bounds",
+        "deps": [
+          "alg-lbfgs-two-loop-with-curvature-filter",
+          "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+          "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+          "lem-bfgs-trace-determinant-potential-identities",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-full-memory-bfgs-dennis-more-condition",
+        "kind": "lemma",
+        "title": "Locally Lipschitz Hessians give the BFGS Dennis–Moré condition",
+        "deps": [
+          "thm-full-memory-bfgs-global-linear-convergence",
+          "alg-full-memory-bfgs-with-curvature-safeguards",
+          "def-bfgs-curvature-pair-and-update-formulas",
+          "lem-bfgs-trace-determinant-potential-identities",
+          "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+          "def-wolfe-and-strong-wolfe-conditions",
+          "lem-wolfe-steps-give-positive-bfgs-curvature",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-of-square-roots",
+          "def-hessian-and-euclidean-critical-point",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-lbfgs-fixed-memory-linear-convergence",
+        "kind": "theorem",
+        "title": "Fixed-memory L-Bfgs converges linearly under uniform curvature and scale bounds",
+        "deps": [
+          "alg-lbfgs-two-loop-with-curvature-filter",
+          "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+          "def-wolfe-and-strong-wolfe-conditions",
+          "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+          "lem-wolfe-step-lower-bound-from-the-descent-angle",
+          "cor-uniform-descent-angle-implies-gradient-vanishing",
+          "def-hessian-and-euclidean-critical-point",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-full-memory-bfgs-local-superlinear-convergence",
+        "kind": "theorem",
+        "title": "Full-memory Bfgs is locally superlinear when the Hessian is Lipschitz",
+        "deps": [
+          "thm-full-memory-bfgs-global-linear-convergence",
+          "lem-full-memory-bfgs-dennis-more-condition",
+          "alg-full-memory-bfgs-with-curvature-safeguards",
+          "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+          "cor-second-order-taylor-expansion-with-the-hessian",
+          "alg-bracketing-zoom-strong-wolfe-search",
+          "def-wolfe-and-strong-wolfe-conditions",
+          "def-hessian-and-euclidean-critical-point",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 2427,
+    "id": "bfgs-and-limited-memory-quasi-newton-methods-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Bfgs and limited memory quasi newton methods — Examples",
+    "companion": "bfgs-and-limited-memory-quasi-newton-methods",
+    "requires": [
+      "bfgs-and-limited-memory-quasi-newton-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-bfgs-secant-on-a-strongly-convex-quadratic",
+        "kind": "example",
+        "title": "An exact Bfgs secant update on a two-variable quadratic",
+        "deps": [
+          "def-bfgs-curvature-pair-and-update-formulas",
+          "alg-full-memory-bfgs-with-curvature-safeguards",
+          "lem-bfgs-updates-preserve-secant-symmetry-and-spd"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-bfgs-powell-damping-after-negative-curvature",
+        "kind": "example",
+        "title": "Powell damping repairs a negative-curvature pair",
+        "deps": [
+          "def-bfgs-curvature-pair-and-update-formulas",
+          "lem-powell-damping-gives-positive-curvature",
+          "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+          "alg-full-memory-bfgs-with-curvature-safeguards"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-lbfgs-memory-dependent-cost",
+        "kind": "example",
+        "title": "Full-memory and limited-memory storage costs",
+        "deps": [
+          "alg-lbfgs-two-loop-with-curvature-filter",
+          "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+          "alg-full-memory-bfgs-with-curvature-safeguards"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  }
+]

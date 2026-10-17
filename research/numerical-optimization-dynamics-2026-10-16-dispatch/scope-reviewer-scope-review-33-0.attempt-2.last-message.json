@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "33",
+  "round": 0,
+  "reviewed_items": [
+    "def-real-and-complex-schur-forms",
+    "def-exact-real-2x2-discriminant-sign-predicate",
+    "def-closed-epsilon-pseudospectrum",
+    "lem-unitary-similarity-error-accumulation",
+    "lem-neumann-invertibility-for-finite-matrices",
+    "lem-implicit-q-uniqueness-for-unreduced-hessenberg",
+    "lem-francis-compact-bulge-support-propagation",
+    "alg-complex-scaled-householder-reflector-step",
+    "lem-real-francis-double-shift-polynomial",
+    "thm-closed-pseudospectrum-resolvent-perturbation-equivalence",
+    "thm-bauer-fike-eigenvalue-perturbation-bound",
+    "alg-exact-francis-hessenberg-qr-step",
+    "lem-francis-double-shift-bulge-chase-matches-explicit-qr",
+    "alg-finite-budget-francis-schur-reduction",
+    "thm-computed-francis-schur-backward-error",
+    "thm-computed-pseudospectrum-membership-enclosure",
+    "lem-two-sided-scaled-householder-similarity-error",
+    "lem-exact-rational-two-by-two-discriminant-sign",
+    "ex-jordan-block-epsilon-pseudospectrum",
+    "ex-jordan-eigenvalue-residual-square-root-instability",
+    "ex-real-conjugate-pair-schur-block"
+  ],
+  "reviewed_pages": [
+    "computed-schur-decompositions-and-nonnormal-spectra",
+    "computed-schur-decompositions-and-nonnormal-spectra-examples"
+  ],
+  "decision": "repair",
+  "reason": "The assigned claims and prerequisite interfaces are substantively covered. Local repairs are needed for a complex QR phase argument and for specifying and proving the returned backward-error accumulator. The accumulator also requires an owner-side cost-proof update.",
+  "findings": [
+    {
+      "id": "lem-francis-double-shift-bulge-chase-matches-explicit-qr",
+      "type": "local",
+      "reason": "Step 1.1 identifies the product of two complex shifted-QR factors with the real positive-diagonal factor up to signs, but the individual shifted factorizations have no stated phase convention. QR uniqueness gives diagonal unit-modulus phases in general. Repair the proof by using those phases to transfer the unreduced Hessenberg property, then align the real first columns using p(H)e1 = Q_e R_e e1 before applying the real implicit-Q lemma. The relevant full treatment discusses the real orthogonal implicit-Q comparison and Francis polynomial step in the [Cornell lecture](https://www.cs.cornell.edu/courses/cs6210/2025fa/lec/2025-10-29.html)."
+    },
+    {
+      "id": "alg-finite-budget-francis-schur-reduction",
+      "type": "local",
+      "reason": "The Definition promises an accumulated backward-error bound but gives only per-update coefficients and a general outward-evaluation clause. Specify a finite accumulation rule covering Hessenberg initialization, every chase update, and deflation writes, plus an inconclusive branch when no rigorous bound can be evaluated. A conservative rho/beta recurrence can keep the work linear in the number of updates after an O(n^2) initialization."
+    },
+    {
+      "id": "thm-computed-francis-schur-backward-error",
+      "type": "local",
+      "reason": "The proof establishes the perturbation bound formula, but does not connect it to the algorithm's promised returned certificate. After the algorithm defines its accumulator, show that its returned value rigorously upper-bounds the theorem's sum."
+    },
+    {
+      "id": "thm-bartels-stewart-dense-operation-count",
+      "type": "outside-batch",
+      "reason": "The current complexity proof does not count work for producing the backward-error certificate. With an O(1)-per-update recurrence and O(n^2) initialization, the stated asymptotic bound remains valid, but the proof needs an owner-side accounting update."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-computed-francis-schur-backward-error",
+      "decision": "repair",
+      "reason": "Its proof must link the new algorithm accumulator to the displayed perturbation bound."
+    },
+    {
+      "id": "thm-bartels-stewart-dense-operation-count",
+      "decision": "escalate",
+      "reason": "Outside the assigned write scope; the owner should add the certificate-accumulation cost to the proof."
+    },
+    {
+      "id": "alg-bartels-stewart-sylvester-equation",
+      "decision": "accept",
+      "reason": "Uses the Schur status and candidate factors, then verifies the exact identities; it does not consume the backward-error bound."
+    },
+    {
+      "id": "alg-principal-matrix-logarithm-and-square-root",
+      "decision": "accept",
+      "reason": "Verifies the returned Schur identities and uses the diagonal branch test; the additional bound accumulator does not affect these uses."
+    },
+    {
+      "id": "alg-schur-parlett-matrix-function",
+      "decision": "accept",
+      "reason": "Verifies the returned Schur identities before use and does not consume the backward-error bound."
+    },
+    {
+      "id": "ex-rotation-logarithm-branch-cut",
+      "decision": "accept",
+      "reason": "Its zero-sweep example uses the same candidate factors and Schur status."
+    },
+    {
+      "id": "computed-schur-decompositions-and-nonnormal-spectra",
+      "decision": "accept",
+      "reason": "Its summary of the conditional backward-error output is compatible with a specified accumulator."
+    },
+    {
+      "id": "matrix-functions-and-scaling-squaring",
+      "decision": "accept",
+      "reason": "Its downstream summary relies on candidate verification and makes no unconditional backward-error claim."
+    },
+    {
+      "id": "sylvester-and-lyapunov-matrix-equations",
+      "decision": "accept",
+      "reason": "Its downstream claims retain exact Schur-certificate checks and make no unconditional convergence or backward-error claim."
+    },
+    {
+      "id": "matrix-functions-and-scaling-squaring-examples",
+      "decision": "accept",
+      "reason": "Its branch-cut example uses the unchanged zero-sweep Schur candidate."
+    }
+  ]
+}

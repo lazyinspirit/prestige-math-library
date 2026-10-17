@@ -1,0 +1,95 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 2,
+  "unit": "35",
+  "input_sha256": "99e8fcdaaf4b8c60537fe6619d80cdd7d83ebe205fb35c77da897a78690496fc",
+  "decisions": [
+    {
+      "id": "ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "815a3eda65c032e7dab7227ba512511d6a491aefd1fcf1182722a350b7ad853d",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The final inference in original Verification 2.1 does not follow: A=[[-1,4],[0,-1]] has <A(1,1),(1,1)>=2>0, so it violates dissipativity as well as self-adjointness. Its expansion proves only the eigenvalue-only claim. Repair preserves that witness and proves the stronger conclusion separately with B=[[-1,2],[0,-1]], step 1: <Bu,u>=-(x-y)^2<=0, rho=1, h*rho=1<=2, yet (I+B)(0,1)=(2,0).",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth",
+      "disposition": "repaired",
+      "post_sha256": "80c88bbb3bdb14456f62cc7ca58330680ec52e2d2874d7b3b10ab3a2236863ee",
+      "review_context_sha256": "bc8e3bc4141c82a6cf27f54b95110becddc0b45d8c35016fdd2179c700f05a87",
+      "reason": "Directly checked both Gram products, repeated eigenvalues -1, the original h=1/2 update and norm sqrt(17)/2. Added the dissipative B witness in Verification 3.1 to retain the original stronger self-adjointness conclusion soundly. F2 now states both matrix hypotheses and the spectral restriction; exact evaluation on all of R^2 makes both steps admitted. Existing suppliers suffice and no choice is used. The Example and all Statement/Definition sections are unchanged. This is the repairer review, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "locus": "proof-step",
+      "location": "Verification 2.1; repaired in 2.1 and 3.1",
+      "reason": "Original A also violates <Au,u><=0; its expansion cannot isolate omission of self-adjointness. The added B=[[-1,2],[0,-1]] satisfies dissipativity and the same s=1 spectral restriction while its update doubles the norm of (0,1).",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "claim": "Scalar eigenvalue stability does not imply Euclidean nonexpansion; even dissipativity and the s=1 spectral restriction do not suffice without self-adjointness.",
+    "conventions": "Real Euclidean R^2, s=1, full state domain, exact evaluation. Original A and h=1/2 retained; supplementary B uses h=1.",
+    "sources_consulted": [
+      "items/alg-rkc1-chebyshev.md: Definition",
+      "items/prop-rkc-stability-intervals-and-stage-degree.md: Statement and Proof 1.1, 2.2, 3.1",
+      "items/def-euclidean-inner-product.md: Definition",
+      "library/numerical-differential-equations-and-stochastic-dynamics/runge-kutta-methods-and-order-examples.md: Summary"
+    ],
+    "dependency_ids": [
+      "alg-rkc1-chebyshev",
+      "def-euclidean-inner-product",
+      "prop-rkc-stability-intervals-and-stage-degree"
+    ],
+    "contract": "Updated only the assigned entry under the shared-write lock: current source quotations, citation uses, derivation claims and boundary evidence. Strict focused proof-contract check passed with zero errors or warnings.",
+    "interface": "The original Example paragraph is byte-identical; no Statement or Definition section changed, so no downstream propagation is required. The owning page accurately describes scalar eigenvalue stability alone and needs no edit.",
+    "published_ledger": "No published defect or potentially defective published consumer discovered; no published-ledger update proposed.",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-35.proof-contracts.json --items ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; no errors or warnings"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 checked, 0 failures; status pass"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth.md --json",
+        "exit_code": 0,
+        "result": "1 checked, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth.md",
+        "exit_code": 0,
+        "result": "1 item, 3 steps, 0 defects"
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Handoff complete repair and proposed ledger update to the engine; independent rejudgment and certification remain engine responsibilities."
+  }
+}

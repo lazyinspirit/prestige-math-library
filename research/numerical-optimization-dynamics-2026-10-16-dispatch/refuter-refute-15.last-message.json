@@ -1,0 +1,55 @@
+{
+  "batch": "15",
+  "opened": [
+    "alg-na-certified-unit-circle-phase",
+    "alg-na-computed-fast-transforms-and-convolution",
+    "alg-na-computed-fft-cyclic-and-linear-convolution",
+    "alg-na-computed-unitary-radix-two-fft",
+    "computed-fast-transforms-and-convolution",
+    "computed-fast-transforms-and-convolution-examples",
+    "def-na-dct-ii-and-dst-i-even-odd-extension",
+    "ex-na-prime-length-five-bluestein-transform",
+    "ex-na-three-sample-dct-chebyshev-coefficients",
+    "ex-na-two-point-circular-aliasing",
+    "lem-na-bluestein-chirp-convolution-factorization",
+    "lem-na-complex-product-six-operation-roundoff-bound",
+    "lem-na-computed-unitary-butterfly-error-bound",
+    "lem-na-mixed-radix-cooley-tukey-factorization",
+    "lem-na-zero-padding-removes-linear-convolution-aliasing",
+    "thm-na-arbitrary-length-fft-correctness-and-cost",
+    "thm-na-bluestein-chirp-phase-error-separate-from-fft-error",
+    "thm-na-certified-unit-circle-phase-enclosure",
+    "thm-na-computed-fft-convolution-error-bound",
+    "thm-na-computed-unitary-radix-two-fft-error-bound",
+    "thm-na-dct-ii-chebyshev-coefficient-extraction",
+    "thm-na-dct-ii-orthogonality-inverse-and-dft-extension",
+    "thm-na-dst-i-orthogonality-inverse-and-dft-extension",
+    "thm-na-interval-pi-matches-canonical-fourier-pi",
+    "thm-real-elementary-range-enclosures"
+  ],
+  "not_opened": [],
+  "flagged": [
+    {
+      "id": "thm-real-elementary-range-enclosures",
+      "location": "Proof, step 1.1",
+      "defect": "unlicensed-inference",
+      "evidence": "The current step derives sum_{n_1+...+n_d=k} 1/(n_1!...n_d!) = d^k/k! by naming the multinomial theorem. Its cited supplier, lem-absolutely-convergent-series-cauchy-product, states the two-series result with c_n = sum_{j=0}^n a_j b_{n-j} and sum c_n = AB; it does not evaluate this d-fold coefficient sum. That identity is needed for (exp u)^d = exp(du) in the evaluator's scaling argument. A finite multinomial derivation would close this short gap.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "alg-na-computed-fast-transforms-and-convolution",
+      "location": "Definition, step 3",
+      "defect": "ill-formed",
+      "evidence": "Step 3 explicitly forms twiddle-multiplied vectors for each k2 and u, then says “Apply this procedure recursively ... to the resulting vector indexed by u” without specifying a recursive call for each k2. For N=6, r=2 and s=3, this produces three distinct length-r vectors, but the call and output assignment do not determine the results for all three rows. The later complexity proof counts s length-r calls, which the procedure does not explicitly specify.",
+      "severity": "fatal"
+    },
+    {
+      "id": "thm-na-interval-pi-matches-canonical-fourier-pi",
+      "location": "Statement, second sentence",
+      "defect": "unlicensed-inference",
+      "evidence": "The sentence asserts that the evaluator's Machin enclosure encloses the canonical Fourier constant. The current proof establishes that 4 arctan(1) equals canonical pi, but does not derive the Machin identity connecting it to 16 arctan(1/5) - 4 arctan(1/239). This item's deps omit lem-trigonometric-identities-machin-and-range-reduction, which proves that identity in its step 3.1.",
+      "severity": "nonfatal"
+    }
+  ],
+  "coverage_note": "Reviewed all 25 current scope carriers once and the current suppliers needed to check Fourier normalization, convolution identities, phase enclosures, interval arithmetic, floating-point bounds, and DCT/DST formulas. Checked length-one cases, padding, and mixed-radix indexing. No run-local rendered evidence bundle was present under .autopilot, so I reviewed current Markdown directly. The batch-14 reader finding is present in the current thm-real proof."
+}

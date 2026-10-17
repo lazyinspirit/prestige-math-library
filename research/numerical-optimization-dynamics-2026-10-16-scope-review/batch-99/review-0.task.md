@@ -1,0 +1,13 @@
+# Batch 99: review 0
+
+Run: numerical-optimization-dynamics-2026-10-16
+Batch: 99
+Round: 0
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: polynomial-chaos-stochastic-collocation-and-galerkin-uq, polynomial-chaos-stochastic-collocation-and-galerkin-uq-examples
+Items: def-finite-product-chaos-input, rem-chaos-completeness-and-spectral-rate-caveats, def-chaos-total-degree-and-hyperbolic-cross-index-sets, def-finite-input-bochner-l2-space, lem-positive-moment-gram-produces-univariate-chaos-polynomials, def-chaos-orthonormal-tensor-basis, def-uniformly-elliptic-affine-random-diffusion, lem-chaos-index-sets-are-finite, thm-finite-input-bochner-l2-is-hilbert, alg-christoffel-weighted-least-squares-collocation, def-finite-chaos-orthogonal-projection, lem-affine-form-integrable-on-bochner-l2, thm-independent-polynomial-chaos-tensors-are-orthonormal, def-chaos-quadrature-coefficient-estimator, lem-christoffel-sampling-law-and-gram-mean, thm-affine-random-diffusion-solution-is-bochner, thm-finite-chaos-projection-parseval-and-moments, thm-product-chaos-and-spatial-density-in-bochner-l2, thm-chaos-quadrature-coefficient-error-split, thm-christoffel-gram-concentration-bound, thm-stochastic-galerkin-coercivity-and-cea, cor-smolyak-chaos-coefficient-error-bound, cor-stochastic-galerkin-fe-interpolation-rate, thm-weighted-least-squares-stability-and-error, cor-tensor-gauss-exact-chaos-coefficients, cex-cauchy-input-has-no-degree-one-chaos, cex-finite-support-makes-high-degree-moment-gram-singular, ex-affine-random-diffusion-uniform-coercivity, ex-two-state-reaction-rate-chaos, ex-total-degree-versus-tensor-product-work
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

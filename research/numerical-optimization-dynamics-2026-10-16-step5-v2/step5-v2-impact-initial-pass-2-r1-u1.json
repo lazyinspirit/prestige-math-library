@@ -1,0 +1,602 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "impact-initial-pass-2",
+  "round": 1,
+  "unit": "1",
+  "input_sha256": "67bb471061e0ed400ea90b8d668c93e80ec6129a316f4d060b698455361b9603",
+  "decisions": [],
+  "reviews": [
+    {
+      "id": "alg-relaxed-density-mixing-with-finite-budget",
+      "post_sha256": "add5469dd68820d7977da6b5fd43a75dd3f42614e03360097c16646372de3998",
+      "review_context_sha256": "1d2b7474ae0aad93432a168d45bfbc83b08f4018dc09d655907ffc1a48587905",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The work supplier adds response-evaluation failure for the separate DIIS procedure; this relaxed procedure still has only eigensolver/gap/residual/budget outcomes. Its k=0,...,N order gives at most N updates and N+1 tests, exactly the unchanged branch of that lemma."
+    },
+    {
+      "id": "alg-undamped-scf-with-gap-and-residual-status",
+      "post_sha256": "3e45cf537cff1b4f46791af5ec6d865d62ac5ffb1da48b73236360f401018e77",
+      "review_context_sha256": "80c7617de266abf3bb54de8b2cd2ad9fb56577e8e44ecb564572e72b86fac942",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "Its eigensolver, gap, residual and cap branches already match the work lemma's inclusive three-procedure status list. No approximate-response callback is called here, so adding the DIIS response-evaluation status does not require an undamped branch or change its N+1 test count."
+    },
+    {
+      "id": "alg-certified-scf-with-diis-safeguard",
+      "post_sha256": "c90ba49b614e529d8f2f3596d8df25b37e6e859ed642ec410e56a3381cb650e7",
+      "review_context_sha256": "400fee8252906b5be24cd695cd709626584fc9d43f3e32f49619a5f72c6c60fd",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "Step 1 already distinguishes current-point response-evaluation-failure after a certified gap, retaining the valid E_k. Candidate failures fall back to the cached baseline. The repaired work lemma now describes these actual branches and the same N-update/2N+1-test bounds; no instruction needs changing."
+    },
+    {
+      "id": "alg-differentiate-finite-fixed-point-iteration",
+      "post_sha256": "3c3e68fbffe3785cb78561cd7b034962c600bdcd30cccc92bbc7931e7847848d",
+      "review_context_sha256": "7542b4adb21e13bcdcec82a2ba0d982013615763363990deb06120616de0f7e1",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "Its finite coordinate graphs use the supplied C1 maps and call forward mode with e_l, propagating both failures. The supplier's distinct input labels and explicit input-tangent binding give the same returned coordinate derivatives. Empty m/p loops and K=0 are already specified; no fixed-point derivative is substituted."
+    },
+    {
+      "id": "alg-fem-control-proximal-gradient-certified-residual",
+      "post_sha256": "0fd2c213e5d795cd00334244cd3179e5e1c20c36b136f0561c76104e95d8926f",
+      "review_context_sha256": "8d07c39c5ba8aec19bcb53a78a611ec132fea482380ba881ab1f1397b04f4a63",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The residual backend explicitly requires the complete primal and transposed first-Strang hypotheses at every control, conforming approximations and the extra adjoint load defect. It therefore imports the supplier's added form/load linearity conditions; beta_B*epsilon_p remains a licensed exact-gradient error bound."
+    },
+    {
+      "id": "alg-na-computed-fft-cyclic-and-linear-convolution",
+      "post_sha256": "7a90357e9bee86d3917f5ac3aecaaaaa8dea808cf2f0ffa1d8da8920e5a6caea",
+      "review_context_sha256": "1c166ae628bdc460e566345f7290f119000b923c74c3454d88da7c4bf03bb4e5",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "Its input and validation already require an exact rational twiddle tolerance, the same floating-point instance and representable coordinates. Every forward/inverse FFT call forwards those controls and propagates the new range failures, so the repaired radix-two interface is already respected."
+    },
+    {
+      "id": "alg-na-computed-clenshaw-curtis-via-fast-dft",
+      "post_sha256": "69ac3e4f83759361cfe785d22fb69b95a996073d3ec174134dd5e6573c3df753",
+      "review_context_sha256": "35b5f1c11d7f75abd9a15f18ff416902eaed5c6fee6a2d36c9a2df008a04ec6b",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "repaired",
+      "reason": "The n>=1 branch forwards tau to the DFT, whose input now requires exact rational phase data. Added that requirement precisely when a DFT call is made; the n=0 exact midpoint branch retains its previous domain. Samples, even extension, failure propagation and exact DCT-I postprocessing are unchanged."
+    },
+    {
+      "id": "lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence",
+      "post_sha256": "38eb4412ac05250dfd124118840b1a5cf4f1e1529dab9fd91e4a6cf737fbe139",
+      "review_context_sha256": "99a0dcd09eeac68e05d276abed9d541f4052c42e7f60fac6ebf2754156c4f894",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "Re-examined the current exact sweep: deflation precedes the same alternating right/left adjacent unitary rotations, with zero coupling at block endpoints. The new rounded Gram/shift/comparison schedule is explicitly separate from exact arithmetic, so it changes neither U_s^* B V_s nor the recorded E_D argument. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "alg-rank-thresholded-least-squares-by-svd",
+      "post_sha256": "887d84dc854a21c6b52067ed7b420ba5f8707079e8d7db80ce11621db216e624",
+      "review_context_sha256": "64e96a3ef875bc6c75e2bf0cea871f67301891a1c602e773eaf9a1bf9a534664",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The caller already passes zero deflation tolerance, a finite sweep budget and the successful reduction record, and propagates range-failure or budget-exhausted before any solution claim. Concrete rounded shift failures fit that existing branch; exact convergence and finite-precision unverified candidates retain the same meanings."
+    },
+    {
+      "id": "alg-short-step-self-concordant-path-following",
+      "post_sha256": "917f74fc3c742938783b185ed760490293069cc0c1196fe20f3ba4bd3e8df78c",
+      "review_context_sha256": "bf653e3943dd09b166b0f19df0806168d574864e5d3c9b28daa273cae6915b24",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "This procedure uses the selected barrier objective's restricted gradient, Hessian norm and decrement. It never equates the Lorentz diagnostic Jordan target with a selected-barrier center. The clarified supplier retains its barrier minimizer/stationarity interface and C2 data, so every short-step Newton equation and gap bound is unchanged."
+    },
+    {
+      "id": "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+      "post_sha256": "076545deab14c3a763b796881fcc9c96ab1a93ee5f27188be9252fcadc83891d",
+      "review_context_sha256": "0c883cb1b2466c27b112d1fb655749921ae12a7d1f22b0a537fc38f127062adc",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The supplier's C2 label changes no stacked equality/active row convention. This lemma separately assumes full row rank and reduced positive curvature; the kernel calculation forces z=0 then mu=0, including the zero-row case, without using higher smoothness. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate",
+      "post_sha256": "af77286472ac3795e33a9d9447a9ad807739f46342bac903d0011d04faa3ab64",
+      "review_context_sha256": "db58a8e19f68f5f765c89ddd02131de3754dd4158582150e9ed301c1f8282bef",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "Its affine polyhedron and positive-definite quadratic are unchanged by the supplier's corrected C2 label. Coercive compact sublevels, strict convexity, Farkas stationarity and finite support elimination use only those data, with n=0 explicitly separated; no C-infinity premise is used. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+      "post_sha256": "b3c4ce66e3cea722d9d7853199166cb6213857d4987c33d929f1e993c62eef9d",
+      "review_context_sha256": "42c5d0b8964db77a63f4fe50cf562e69c99e97c1eb35c774482d2bde1d5b00e7",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The theorem imports the same SPD quadratic and affine rows, not higher program regularity. Equality reduction preserves feasibility, the independent supported KKT certificate is among finitely many tested subsets, and the feasibility/multiplier filters retain exactly the unique minimizer under the current supplier."
+    },
+    {
+      "id": "alg-sqp-exhaustive-active-set-qp-solve",
+      "post_sha256": "27825820f0192fd662923522a028747b8157a5b8d4f1955f134c8947dc0ad8cf",
+      "review_context_sha256": "ed205777788b189be06dfc2646df179cdb28f8824b21721ba62aa91d5df36854",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "It reads only the current objective gradient, affine constraint rows and SPD B from the supplier. The C2 regularity clarification leaves those inputs and the independent-row reduction, bit-mask enumeration, exact KKT solve and expanded multipliers unchanged."
+    },
+    {
+      "id": "alg-sqp-feasible-working-set-qp-solve",
+      "post_sha256": "9748f107b77d90e04d618272c22bd8b7014f01be89fdcc563cb7eab482f3b70d",
+      "review_context_sha256": "8d1648f7aed74442339401bff1fc2b4bea4857cf6aa42f2876c48021c8555fc0",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "F1 imports only the quadratic objective and g<=0 convention, both preserved by the supplier repair. Its own feasible-start, independent working-row and SPD assumptions license every face solve and blocking ratio; no new regularity or Hessian identity is inferred from the supplier. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "thm-computed-full-rank-least-squares-backward-stability",
+      "post_sha256": "1405770457b85a06108e9e685025159e96f3191f3dc496c7b81111cc253801d1",
+      "review_context_sha256": "ca323bfec355a63e8ea49411f8361a9c0f8e8356948d9dfb48add73ae543460b",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The current Statement ends with explicit success hypotheses and Given expressly requires successful right-hand-side evaluation with normal intermediates. Thus F1's newly explicit success condition for every stored-reflector update is met before the delta-b construction; the alternative admissible dot-product branch is separate. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+      "post_sha256": "28aefe0a671edd8e4cbba8b0dac66f9379071318b4c4456957283eefb54765c3",
+      "review_context_sha256": "165399f60521d7084fee313e25c67b1ba85a8f8628ce1bfe30f44857335412b1",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "Its KKT inputs independently require rank and reduced curvature; F1 from the changed SQP convention supplies only unchanged affine row/sign conventions. Exact-storage admission, successful reflector/RHS/substitution guards and certified residual bounds already meet the current least-squares and operationwise interfaces."
+    },
+    {
+      "id": "alg-sqp-second-order-correction",
+      "post_sha256": "872bf3bf8c0686424eb6891a79086277c13ba28c21bd1443dff0ac7163f291f3",
+      "review_context_sha256": "5c8aa4ccf483621f62fac75e11482d1773cd43f8a5d173dcf5bd14dbb7485697",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The supplier's C2 naming correction changes no active-row order or affine residual. This procedure already assumes x and x+p in U, full row rank and c_A(x)+Ap=0, and returns displacement p+w with an explicit zero-row branch; its separate minimum-norm suppliers remain applicable."
+    },
+    {
+      "id": "thm-chaos-quadrature-coefficient-error-split",
+      "post_sha256": "d8c753294fb56baa2a7e8c1a014dacb8e35c91d7d7df2edc69b47c4ccf5b2854",
+      "review_context_sha256": "3c0a5ec8a1fb773ab11bbaf606e5d8bee073a96fe00fecdb2890bf4f2ae682db",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The Statement uses the exact and quadrature coefficients of the supplied finite chaos family; those definitions now explicitly restrict Lambda to its admissible degree box. Its finite orthogonality proof applies to precisely that family, including the empty set, and requires neither completeness nor extra choice."
+    },
+    {
+      "id": "cor-smolyak-chaos-coefficient-error-bound",
+      "post_sha256": "7e2d198224547e032cdea26aabb7d1c30f92e8427654880cffbdc42a2acbfb54",
+      "review_context_sha256": "271a665eaa87567d19c7b0d780ffea41c3905a38e7430ad00b759b06639ee565",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The Statement already fixes an admissible cutoff and finite Lambda inside its degree box, and requires an evaluable representative plus each coefficient integrand's mixed regularity. Thus the estimator domain clarification is met, and scalar Smolyak bounds still combine by finite squared summation and the same error split."
+    },
+    {
+      "id": "cor-tensor-gauss-exact-chaos-coefficients",
+      "post_sha256": "8d9a8c75b82084442d27ac7b7916f1ccf353663116fdba98be4e5dd832c01376",
+      "review_context_sha256": "5d5999433e8d4b39ec30b2889dfc72e009fd67c107ad5c569b8fe287e4ff5cd6",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The supplied space P_Lambda is built from the admissible cutoff's real tensor polynomials. Its finite expansion gives real node values and coordinate products of degree at most 2p_j<=2m_j-1, so both the estimator's clarified family domain and the tensor rule's real-valued domain are met, including the empty space."
+    },
+    {
+      "id": "def-sqp-l1-exact-penalty-merit",
+      "post_sha256": "8789c1d0ff731cc8f01640c4ed7572590968899d82d9865bf9e2b0e8b5e02a5f",
+      "review_context_sha256": "5eb12ab72a6686f1edaa94314d06228f4f768e648b8d9c89f626cccddab73de6",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "repaired",
+      "reason": "Changed only the Facts/Given label from smooth to C2 to match the supplier's actual program convention; C-infinity regularity is not required for these finite merit/model expressions. The Definition, Armijo test, penalty signs and proof formulas remain unchanged, so there is no Statement/Definition propagation."
+    },
+    {
+      "id": "ex-bfgs-powell-damping-after-negative-curvature",
+      "post_sha256": "58a3d061f947d281d4c29ed5f4246fa546ffc19987c236833b3fbac2a4599a73",
+      "review_context_sha256": "407aaa3f021bbc18a722ed7aa9785851fc2bfd3e36bb7eeff21c9d65a2ad9943",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The changed supplier only names the successful rounded-Cholesky direction. This example instead uses an explicit exact trial and proves it fails Wolfe, then compares formal raw and damped updates. It does not claim the line search accepts that trial, and its curvature/SPD calculations are unchanged. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "ex-bfgs-secant-on-a-strongly-convex-quadratic",
+      "post_sha256": "2d64a5f78cbff59bb1e21557439cf031f6e7ff4f4e92bec886c65b263af4e4a4",
+      "review_context_sha256": "fcaf90549eec0e96abdbc14a6c5154411af57156ad7e79c497671d009bcc2bd3",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The example explicitly uses exact direction -H g and a supplied exact strong-Wolfe step, whose derivative and Armijo tests are verified. Naming the computed direction in the separate rounded branch changes neither this exact input nor the secant and SPD calculation; no exact bracketing output is asserted. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "ex-boundary-barrier-conditioning",
+      "post_sha256": "c9a4fd6203d8099f99890d00f66862315c0593ef5d538cdd1c70ab778c35389e",
+      "review_context_sha256": "3abfad1cb021cb4252fc57306811b16932a702620e71dad8bca550d0e8873fdf",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "Its affine inequality data are C2 and its direct strict-interior minimizer/Hessian calculation uses only the supplier's unchanged barrier-center definition. No Lorentz Jordan normalization is invoked. The compact-sublevel existence and coordinate Rayleigh quotients still give the same quadratic condition-number lower bound. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "lem-piecewise-linear-delay-history-error",
+      "post_sha256": "881e0a24e429ae90907d5b4c37b9d76bed198b516812b167f2ddabcc98e64d0e",
+      "review_context_sha256": "2725e5ed9f4e85fef1587d92931f5457d084c6905390036af9323ba993c97647",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The supplier still uses h=tau/m and the same nodal linear interpolant. Relocating its work/storage bounds changes neither F1 nor F4; cellwise C2 Taylor remainders and convex endpoint weights still prove E+Mh^2/8 without crossing a delay breakpoint. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "lem-distributed-delay-midpoint-error-split",
+      "post_sha256": "17ad567fa12d90df3af61d8b398633adb69f8082b3a9df80bb910628d69a0a43",
+      "review_context_sha256": "c50e3bfe189b26881db4bc104bd496fe861fed05457a5ed7bcd99b19aa51e740",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The current window definition establishes the same componentwise continuous Riemann integral, and the midpoint algorithm keeps its nodes and sum after work properties move. The assumed cellwise C2 integrand and uniform history error license exactly the separate midpoint remainder and weighted node-error estimates used here."
+    },
+    {
+      "id": "ex-distributed-delay-midpoint-history-error",
+      "post_sha256": "017417d5f3f8e48f5ac304bb3cef4f6ebf74cd486b384d1198805adc007d6331",
+      "review_context_sha256": "5c1ca826819dfc034d34a3c5cc397bebea5853facac4bacfdd090fd5d48c71ae",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The quadratic history and constant kernel satisfy the clarified continuous-window domain. At t=0 all queries remain in supplied history; r=qm keeps every quadrature subcell within one stored chord. The unchanged affine-cell integral gives tau*h^2/6 and separates it from the exact-history midpoint underestimate."
+    },
+    {
+      "id": "ex-lbfgs-memory-dependent-cost",
+      "post_sha256": "3f57b5988df47cfb02b02337fdfddff4a625c5342262640bdd7297a4a4c501ca",
+      "review_context_sha256": "938b475b012a60c029ae5e24468be6c9cc33f9124bf6c2a447d6c10228d1a8a7",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "F3 uses only the paired dense B,H state, while its operation estimate explicitly analyzes exact inverse-matrix mode and outer-product updates. The supplier's named returned direction belongs to the separate rounded-Cholesky branch and changes neither the 2n^2 storage nor this O(n^2) comparison. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "ex-local-trace-misses-disconnected-branch",
+      "post_sha256": "770060c7d5e08e9ee4e0c26ddb46b04a10a93c829bf23862365efadf05e8c76b",
+      "review_context_sha256": "a3d5bf38db8fd16ac865fe0cf7a25006fed37d09872d41f19333a5aa14522f3c",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The current continuation procedure retains its local certified section balls and finite-trace meaning. This polynomial example supplies exact seed/predictor roots, explicit inverse and 2-Lipschitz derivative bounds and a one-step chart; the repaired bounded-error correction binding is never used, and the disconnected component remains outside the certified chart. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "thm-central-path-barrier-gap-and-dual-certificate",
+      "post_sha256": "b150f89ac2f0c36750ba579217c04b063ba1f85ed8b6073c354a4249066fb462",
+      "review_context_sha256": "3a1c810db2574a2ff73d7084555b8559c3818899c7f04cb9a5369adec080410e",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The theorem's smooth convex case is an admissible subclass of the supplier's C2 data. Its proof uses unchanged attained-minimizer stationarity, convex Lagrangian weak duality and the gradient barrier multiplier. The conic nu/t gap follows from log homogeneity, not the diagnostic Lorentz Jordan target, with the repaired conic signs matched exactly."
+    },
+    {
+      "id": "ex-resource-allocation-barrier-central-path",
+      "post_sha256": "fb3a036a6aa7c20fd8540c8719860941bcffa441f93514b110bfbcbfa4ed52a3",
+      "review_context_sha256": "cb9dd706fc89a8d01033429c7e7353e63e050277ed4c4905abdea12f613d4bc3",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The linear equality/resource data use the orthant barrier, with no Lorentz target. Its exact centered t0=1 start, positive restricted Hessian, finite optimum and supplied exact Newton solves/caps meet the current short-step theorem, whose finite-cap qualification is already explicit in F2 and step 2.1."
+    },
+    {
+      "id": "thm-retarded-delay-euler-first-order-global-error",
+      "post_sha256": "b38425c479c5e788519ecf49c149d25b477f2ea9061ada7d7a140da46288eaeb",
+      "review_context_sha256": "019f579e430bfad8d3a91200a2ff580a0f9226e977e4d74ca7a45cd6806aad81",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The current Euler supplier retains its aligned nodal update and stored interpolant; its relocated complexity assertions are unused. This theorem explicitly requires all N updates complete, extends the exact problem through T+eta to cover overshoot, and supplies uniform tube/time-Lipschitz bounds for the unchanged auxiliary-ODE and delayed-Gronwall proof. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "ex-retarded-delayed-feedback-euler",
+      "post_sha256": "afe697f00f90c51bc5cf253a14ae14cdfa6ea2f9309464ed507e86caa63af543",
+      "review_context_sha256": "b5b04c6f0a2a081e509493f1acdb83203aad24402edd54f265b617c648ee7203",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The supplier's numerical recurrence and exact history initialization are unchanged. Summing its two aligned Euler blocks still gives Y_2m and endpoint error a^2*tau*h/2. The example independently verifies a common tube and time-independent field, and uses no moved complexity assertion. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "ex-robertson-reaction-system-newton-work",
+      "post_sha256": "23dad91507f6fded72c4c3fb4a11d81e1cad390c98b79447243a415ce511c555",
+      "review_context_sha256": "6bc6383d4b9ff79035e1f52360538bffa92707b210d731140f24d27ca80b7e9a",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The example uses only backward Euler G=y-y0-hf, already in update units under the clarified residual definition. F3 uses unchanged work logging, not the stepper's new exact-root BDF2 oracle. It explicitly distinguishes its binary64 elimination trace from exact-backend execution and makes no new accuracy claim."
+    },
+    {
+      "id": "ex-rotation-logarithm-branch-cut",
+      "post_sha256": "64040163cab82d91036ab395000c2a47114b7c790b7b0c61596fabae4c6920d2",
+      "review_context_sha256": "d12a1e7a6097b72a04056c8e7c91bbb5644abe0f566820b89eec80abbe870684",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "For n=2 the current Francis initialization has no reflector columns; -I is already triangular and its singleton blocks finish even at zero sweep budget. The principal wrapper checks the negative-real diagonal before requesting any derivative jets, so its new exact-jet input/missing-data branch does not prevent the specified branch-domain failure."
+    },
+    {
+      "id": "rem-chebyshev-collocation-conditioning-and-spectral-radius-scope",
+      "post_sha256": "d1694cbbce3881468d7b6fcb4fba4b67f81c71f9e8f1c3df3ecd9dbadf110449",
+      "review_context_sha256": "9dc83d89dc016e100cb791f0ec04f86a169c5df179c17115c13e3f7244294ff1",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The supplier now constructs the same differentiation matrix by cardinal-product derivatives before a nodal vector exists. This scope note attributes an N^4 observation to a specific matrix/boundary treatment and asserts no algorithmic convergence or universal condition bound; that exact use remains sound."
+    },
+    {
+      "id": "thm-bidiagonal-svd-backward-error-under-local-stability",
+      "post_sha256": "7394636ebc3cf71028e362bda7a27b0eb487c1752a892423fc38632397d7e7f3",
+      "review_context_sha256": "12d6f3f9ce668914507e78511a797058e2fc07ea392d6883203d96bf463459ea",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The theorem conditions on the actual local unitary backward relations, successful scaled arithmetic and dimension bounds, with every discarded entry recorded in D_j. The newly specified rounded shift/comparison schedule changes which rotations execute or returns early, but the conditional stage unwinding and aggregate perturbation bound remain valid without accurate-shift or convergence assumptions. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "thm-chebyshev-dirichlet-collocation-status-and-system",
+      "post_sha256": "d6d8969cc8dcb5b7952ebdfc472f4c0289fc42547b0d18b49e6efe1fe404a345",
+      "review_context_sha256": "3c1b48f996ad9910db9931e6c6d86370611d89fc4c64d2d4614ebf7f5c89fb57",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "The explicit cardinal construction returns precisely the differentiation operator used by F2, so C, A and the endpoint-eliminated right side in F1 are unchanged. Expansion of AU_I=r still yields the stated nodal equations, and invertibility still supplies unique success while the singular branch makes no solvability claim. Repaired only the owning contract quotation mirror; this item carrier is unchanged.",
+      "metadata_repair_only": true
+    },
+    {
+      "id": "thm-inexact-central-path-distance-and-gap-certificate",
+      "post_sha256": "091a2c289636cd65b15525c539599a59798f929075b1f0a6e6f1e41e56ddf39d",
+      "review_context_sha256": "5ee521cb1c6179ad031c69ef569bd88da733bca716c2d9deb632769163032535",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "It estimates the actual restricted barrier gradient, assumes an attained center and Hessian lower bound, and derives a finite dual bound using the current conic sign convention. F5's gradient stationarity and the nu/t gap are retained; none of the proof uses the diagnostic Lorentz Jordan target as an equivalent center condition."
+    },
+    {
+      "id": "thm-matrix-function-finite-algorithms-termination-and-budget-status",
+      "post_sha256": "c61b2f86e65ad33c50d0911638fafe00b9f6ed5f5070885a0e0b4237074440f5",
+      "review_context_sha256": "e989ccd2204785bb61c6ce75e827fb916115de144983b7904b875e94e7737aeb",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "unaffected",
+      "reason": "Its current finite-table/returning-callback assumptions cover the supplied branch jets, missing-data returns and exact comparisons. The Padé complete-candidate gates and finite rounded budgets and the Schur-Parlett n-1 merge bound are explicitly retained. The principal wrapper adds a finite branch test/table forwarding only, so all seven conditional termination/status conclusions remain licensed."
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Examined all 41 current assigned draft consumers, including every selected same-reviewer obligation, against the frozen supplier list and actual current interfaces. Earlier same-session mathematical observations were checked on current artifacts; no previous acceptance or independent review is claimed. All reviews have current guard hashes and review-context hashes captured immediately after their mathematical review, before subsequent supplier edits.",
+    "Two necessary item repairs: the Clenshaw-Curtis wrapper now requires exact rational phase tolerance only in its n>=1 DFT branch, preserving the unrestricted no-DFT n=0 midpoint branch; the SQP merit carrier's Facts/Given now labels the imported program C2 rather than C-infinity smooth. Its Definition is unchanged. The remaining 39 item carriers are byte-for-byte unchanged under itemHashGuard.",
+    "Under the shared-write lock, reread eight owning batch proof contracts and repaired 17 stale source quotation mirrors across 16 assigned entries. Fifteen unchanged carriers are explicitly marked metadata_repair_only. No unaffected worksheet, manifest, page, registry, old report or certificate was rewritten. Appended the two current source findings to the canonical defect ledger with no adjudication or independent-acceptance claim, validated its run rows, and released the shared lock.",
+    "Only the original Clenshaw-Curtis Definition changed. Exact-ID dependency/reference searches found no direct item consumer; its owning A-page status-only description remains valid. The merit Facts-only repair does not propagate. Therefore downstream is empty. No published or outside-frontier mathematical defect or consumer repair arose, so the canonical published-consumer ledger requires no new finding.",
+    "Checks passed: strict proof contracts for all assigned entries in 14 owning batches; precheck and rendercheck on both changed carriers; scoped depcheck and fwdcheck on all 41 assigned IDs with zero errors and warnings; canonical defect-ledger validation (742 run rows, zero errors); exact frozen-input identity, review coverage, guard/disposition and literal Statement/Definition-change checks. The final single proof-layout invocation after all item edits batched both changed paths and reported two items, two proof steps and zero defects. These are focused local checks, not the controller's gate battery or independent rejudgment.",
+    "No new prerequisite was needed and no external-source consultation is claimed in this pass. Current local supplier Statements/Definitions and affected consumer arguments sufficed for the reported familiar mathematics. The supplied other-lane ledger proposals were treated as historical evidence rather than new repair assignments; no unassigned carrier was edited."
+  ],
+  "metadata_repairs": {
+    "ids": [
+      "alg-sqp-feasible-working-set-qp-solve",
+      "def-sqp-l1-exact-penalty-merit",
+      "ex-bfgs-powell-damping-after-negative-curvature",
+      "ex-bfgs-secant-on-a-strongly-convex-quadratic",
+      "ex-boundary-barrier-conditioning",
+      "ex-lbfgs-memory-dependent-cost",
+      "ex-local-trace-misses-disconnected-branch",
+      "ex-retarded-delayed-feedback-euler",
+      "lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence",
+      "lem-piecewise-linear-delay-history-error",
+      "lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate",
+      "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+      "thm-bidiagonal-svd-backward-error-under-local-stability",
+      "thm-chebyshev-dirichlet-collocation-status-and-system",
+      "thm-computed-full-rank-least-squares-backward-stability",
+      "thm-retarded-delay-euler-first-order-global-error"
+    ],
+    "paths": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-44.proof-contracts.json",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-90.proof-contracts.json",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-85.proof-contracts.json",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-59.proof-contracts.json",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-1.proof-contracts.json",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.proof-contracts.json",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-17.proof-contracts.json",
+      "research/defect-ledger.jsonl"
+    ]
+  },
+  "ledger_updates": [
+    {
+      "action": "record-repaired-finding",
+      "id": "alg-na-computed-clenshaw-curtis-via-fast-dft",
+      "reason": "The n>=1 branch forwards tau to the DFT, whose input now requires exact rational phase data. Added that requirement precisely when a DFT call is made; the n=0 exact midpoint branch retains its previous domain. Samples, even extension, failure propagation and exact DCT-I postprocessing are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "independent_acceptance": false,
+      "canonical_defect_id": "nod-step5-v2-impact-initial-pass-2-r1-u1-alg-na-computed-clenshaw-curtis-via-fast-dft"
+    },
+    {
+      "action": "record-repaired-finding",
+      "id": "def-sqp-l1-exact-penalty-merit",
+      "reason": "Changed only the Facts/Given label from smooth to C2 to match the supplier's actual program convention; C-infinity regularity is not required for these finite merit/model expressions. The Definition, Armijo test, penalty signs and proof formulas remain unchanged, so there is no Statement/Definition propagation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "independent_acceptance": false,
+      "canonical_defect_id": "nod-step5-v2-impact-initial-pass-2-r1-u1-def-sqp-l1-exact-penalty-merit"
+    }
+  ],
+  "interface_events": [
+    {
+      "supplier": "alg-na-computed-clenshaw-curtis-via-fast-dft",
+      "direct_consumers": [],
+      "examination": "Literal dependency/reference search in current items and library found only the algorithm itself and its owning A page; there are no direct item consumers.",
+      "page": "library/numerical-linear-algebra-and-approximation/clenshaw-curtis-and-extrapolation-quadrature.md",
+      "affected_use": "The page's final paragraph says the even-extension DFT algorithm inherits only the computed-DFT status and makes no new stability or accuracy claim. The conditional rational-tolerance requirement preserves that statement.",
+      "disposition": "unaffected"
+    }
+  ],
+  "same_reviewer_ids": [
+    "lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence",
+    "alg-rank-thresholded-least-squares-by-svd",
+    "alg-short-step-self-concordant-path-following",
+    "thm-computed-full-rank-least-squares-backward-stability",
+    "ex-boundary-barrier-conditioning",
+    "lem-piecewise-linear-delay-history-error",
+    "lem-distributed-delay-midpoint-error-split",
+    "ex-distributed-delay-midpoint-history-error",
+    "thm-central-path-barrier-gap-and-dual-certificate",
+    "ex-resource-allocation-barrier-central-path",
+    "thm-retarded-delay-euler-first-order-global-error",
+    "ex-retarded-delayed-feedback-euler",
+    "ex-robertson-reaction-system-newton-work",
+    "ex-rotation-logarithm-branch-cut",
+    "rem-chebyshev-collocation-conditioning-and-spectral-radius-scope",
+    "thm-bidiagonal-svd-backward-error-under-local-stability",
+    "thm-chebyshev-dirichlet-collocation-status-and-system",
+    "thm-inexact-central-path-distance-and-gap-certificate",
+    "thm-matrix-function-finite-algorithms-termination-and-budget-status"
+  ],
+  "checks": [
+    {
+      "check": "precheck",
+      "exit_code": 0,
+      "summary": {
+        "files": 2,
+        "checked": 1,
+        "failed": 0
+      }
+    },
+    {
+      "check": "rendercheck",
+      "exit_code": 0,
+      "summary": {
+        "checked": 2
+      }
+    },
+    {
+      "check": "depcheck",
+      "exit_code": 0,
+      "summary": {
+        "items": 32699,
+        "published": 30641,
+        "pages": 2589,
+        "errors": 0,
+        "warnings": 0,
+        "scope": "focused-items",
+        "prerequisite_item_cycle_checks": 2375,
+        "dependency_closure_items": 2375,
+        "dependency_closure_pages": 464,
+        "prerequisite_page_cycle_checks": 464
+      }
+    },
+    {
+      "check": "fwdcheck",
+      "exit_code": 0,
+      "summary": {
+        "items": 32699,
+        "openForwardRefs": 0,
+        "closedForwardRefs": 0,
+        "loadBearing": 0,
+        "restingOnLaterMaterial": 0,
+        "errors": 0,
+        "warnings": 0,
+        "scope": "focused-items",
+        "prerequisite_item_cycle_checks": 2341,
+        "prerequisite_page_cycle_checks": 471
+      }
+    },
+    {
+      "check": "proof-contract --strict with assigned batch members",
+      "batches": 14,
+      "failures": 0
+    },
+    {
+      "check": "defect-ledger validate --run numerical-optimization-dynamics-2026-10-16",
+      "rows": 742,
+      "errors": 0
+    },
+    {
+      "check": "final batched proof-layout after all item edits",
+      "items": 2,
+      "steps": 2,
+      "defects": 0
+    },
+    {
+      "check": "frozen identity, assigned coverage, guard hashes and dispositions",
+      "reviews": 41,
+      "errors": 0
+    }
+  ],
+  "unresolved_in_scope": []
+}

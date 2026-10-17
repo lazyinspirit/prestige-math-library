@@ -1,0 +1,237 @@
+{
+  "operations": [
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-85.pages.json",
+      "path": [
+        0,
+        "items",
+        6
+      ],
+      "before": {
+        "id": "alg-sqp-exhaustive-active-set-qp-solve",
+        "kind": "algorithm",
+        "title": "Exact exhaustive active-set solve for the SQP quadratic subproblem",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature"
+        ],
+        "dependency_level": 3
+      },
+      "after": {
+        "id": "alg-sqp-exhaustive-active-set-qp-solve",
+        "kind": "algorithm",
+        "title": "Exact exhaustive active-set solve for the SQP quadratic subproblem",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature"
+        ],
+        "dependency_level": 3,
+        "justified_by": [
+          "thm-sqp-exhaustive-active-set-qp-solve-correct-finite"
+        ]
+      },
+      "reason": "Mirror existing-result well-definedness reference; same existingApage, no addeditem/order/home/ownership change."
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-85.proof-contracts.json",
+      "path": [
+        "contracts",
+        "alg-sqp-exhaustive-active-set-qp-solve"
+      ],
+      "before": {
+        "citations": [
+          {
+            "fact": "F1",
+            "source": "def-sqp-linearized-quadratic-subproblem",
+            "source_section": "Definition",
+            "quote": "Use the smooth nonlinear program convention of\n[[def-inequality-constrained-program-and-kkt-geometry]]: minimize a $C^2$\nobjective $f:U\\to\\mathbb R$ on an open $U\\subseteq\\mathbb R^n$, subject to\n$h(x)=0$ and componentwise $g(x)\\le0$. Fix a current point $x\\in U$ and a\nsymmetric positive-definite matrix $B\\in\\mathbb R^{n\\times n}$. The\n**SQP quadratic subproblem** is\n$$\\min_{p\\in\\mathbb R^n}\\quad \\nabla f(x)^Tp+\\tfrac12p^TBp \\quad\\text{subject to}\\quad h(x)+Dh(x)p=0,\\quad g(x)+Dg(x)p\\le0.$$\nThe variable $p$ is the proposed displacement. Its feasible set is the\npolyhedron defined by the displayed affine constraints. A constraint index\n$i$ is **active at $p$** when $g_i(x)+Dg_i(x)p=0$. For equality multiplier\n$\\nu$ and inequality multipliers $\\lambda\\ge0$, a **KKT tuple** for the\nsubproblem satisfies primal feasibility,\n$$Bp+\\nabla f(x)+Dh(x)^T\\nu+Dg(x)^T\\lambda=0, \\qquad \\lambda_i\\bigl(g_i(x)+Dg_i(x)p\\bigr)=0\\quad(1\\le i\\le m).$$\nRows of $Dh(x)$ and active rows of $Dg(x)$ are stacked in that order in the\nsubproblem KKT matrix $\\begin{bmatrix}B&A^T\\\\A&0\\end{bmatrix}$.\n\nAll inequality signs and multiplier signs here agree with the source program:\n$g_i\\le0$ and $\\lambda_i\\ge0$.",
+            "uses": [
+              "1.1",
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+            "source_section": "Statement",
+            "quote": "Let $A\\in\\mathbb R^{r\\times n}$ have full row rank, where $0\\le r\\le n$,\nand let $H\\in\\mathbb R^{n\\times n}$ be symmetric and positive definite on\n$\\ker A$: $z^THz>0$ whenever $0\\ne z\\in\\ker A$. Then\n$$K=\\begin{bmatrix}H&A^T\\\\A&0\\end{bmatrix}$$\nis nonsingular. Here the zero-row case $r=0$ is allowed.",
+            "uses": [
+              "1.1"
+            ]
+          }
+        ],
+        "derivations": [],
+        "routine_steps": [
+          {
+            "id": "routine-1.1",
+            "claim": "The equality reduction and subset enumeration each examine finitely many row subsets. Every retained equality system is equivalent to the original consistent system, and every selected subset passing the rank test has a nonsingular KKT matrix by [F2], because $B\\succ0$ on every subspace. Thus each candidate solve is uniquely defined.",
+            "step": "1.1",
+            "inputs": [
+              "given",
+              "A1",
+              "F1",
+              "F2",
+              "algebra"
+            ]
+          },
+          {
+            "id": "routine-2.1",
+            "claim": "Each accepted candidate is checked against all inequalities and has nonnegative selected inequality multipliers. The returned full vectors $(\\nu,\\lambda)$ are the reduced KKT multipliers placed at their original indices and zero elsewhere, so they give the same stationarity equation; feasibility of the retained equality system is equivalent to feasibility of the original consistent system. Thus the return is a feasible KKT tuple for the full QP. If none is accepted, the routine returns its specified infeasibility status. The exact meaning of that status is a separate theorem claim.",
+            "step": "2.1",
+            "inputs": [
+              "given",
+              "A1",
+              "F1",
+              "step 1.1",
+              "algebra"
+            ]
+          }
+        ],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "checked",
+            "evidence": "Definition steps 1\u20133 return QP-infeasible when no subset candidate is accepted; the theorem checks the exact empty-polyhedron direction."
+          },
+          {
+            "case": "zero",
+            "status": "not_applicable",
+            "reason": "Exact exhaustive active-set solve for the SQP quadratic subproblem: The zero-value or excluded-zero-parameter clause is stated in Definition: If no candidate is stored, return `QP-infeasible`. Otherwise return the\nstored candidate with least quadratic objective, breaking an exact tie by the\nleast subset bit mask, as `solution(p, nu, lambda, E, J)`. Here $\\nu$ is\nthe full equality-multiplier vector, initialized to zero and filled from the\nequality components of $\\eta$ at indices $E$; $\\lambda$ is the full\ninequality-multiplier vector, initialized to zero and filled from the selected\ncomponents at indices $J$. A finite-precision\nimplementation that cannot complete a rank test or solve must return\n`numerical-failure`; this definition's exact-arithmetic branch has no such\nfailure. The loop tests at most $2^m$ inequality subsets. It requires no\nfeasible initial step and specifies no pivoting rule for an iterative working\nset solver. The existing argument records step 2.1: Each accepted candidate is checked against all inequalities and has nonnegative selected inequality multipliers. The returned full vectors $(\\nu,\\lambda)$ are the reduced KKT multipliers placed at their original indices and zero elsewhere, so they give the same stationarity equation; feasibility of the retained equality system is equivalent to feasibility of the original consistent system. Thus the return is a feasible KKT tuple for the full QP. If none is accepted, the routine returns its specified infeasibility status. The exact meaning of that status is a separate theorem claim. [given, A1, F1, step 1.1, algebra] \u220e"
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "For m=1 the enumeration contains the empty subset and the single active subset; proof step 1.1 covers the same finite candidate logic."
+          },
+          {
+            "case": "degenerate",
+            "status": "not_applicable",
+            "reason": "Exact exhaustive active-set solve for the SQP quadratic subproblem: The regularity, nonzero denominator, spectral gap, or explicit failure clause relevant to degeneracy is stated in Definition: 1. Stack the retained equality rows and the inequality rows $G_i$ for $i\\in J$.\n   If these rows are dependent, skip $J$.\n2. Treat the selected inequalities as equalities $G_ip=-d_i$ and solve\n   $$\\begin{bmatrix}B&A_J^T\\\\A_J&0\\end{bmatrix} \\binom{p}{\\eta}=\\binom{-c}{b_J},$$\n   where $c=\\nabla f(x)$, $A_J$ is the stacked matrix with equality rows $E$\n   followed by selected inequality rows $J$, and $b_J$ is the right-hand side\n   in that same row order. The multiplier vector $\\eta$ is stored in this row\n   order. The KKT matrix is\n   nonsingular by [[lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature]].\n3. Discard the candidate if any linearized inequality is violated or any\n   selected inequality multiplier is negative. Otherwise store $(p,\\eta,J)$. The existing argument records step 1.1: The equality reduction and subset enumeration each examine finitely many row subsets. Every retained equality system is equivalent to the original consistent system, and every selected subset passing the rank test has a nonsingular KKT matrix by [F2], because $B\\succ0$ on every subspace. Thus each candidate solve is uniquely defined. [given, A1, F1, F2, algebra]"
+          },
+          {
+            "case": "endpoints",
+            "status": "not_applicable",
+            "reason": "Exact exhaustive active-set solve for the SQP quadratic subproblem: The actual endpoint/domain or finite stopping-boundary clause is stated in Definition: 1. Stack the retained equality rows and the inequality rows $G_i$ for $i\\in J$.\n   If these rows are dependent, skip $J$.\n2. Treat the selected inequalities as equalities $G_ip=-d_i$ and solve\n   $$\\begin{bmatrix}B&A_J^T\\\\A_J&0\\end{bmatrix} \\binom{p}{\\eta}=\\binom{-c}{b_J},$$\n   where $c=\\nabla f(x)$, $A_J$ is the stacked matrix with equality rows $E$\n   followed by selected inequality rows $J$, and $b_J$ is the right-hand side\n   in that same row order. The multiplier vector $\\eta$ is stored in this row\n   order. The KKT matrix is\n   nonsingular by [[lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature]].\n3. Discard the candidate if any linearized inequality is violated or any\n   selected inequality multiplier is negative. Otherwise store $(p,\\eta,J)$. The existing argument records step 1.1: The equality reduction and subset enumeration each examine finitely many row subsets. Every retained equality system is equivalent to the original consistent system, and every selected subset passing the rank test has a nonsingular KKT matrix by [F2], because $B\\succ0$ on every subspace. Thus each candidate solve is uniquely defined. [given, A1, F1, F2, algebra]"
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "Exact exhaustive active-set solve for the SQP quadratic subproblem: The stated construction/selection regime, with all declared ambient axioms retained is stated in Definition: 1. Stack the retained equality rows and the inequality rows $G_i$ for $i\\in J$.\n   If these rows are dependent, skip $J$.\n2. Treat the selected inequalities as equalities $G_ip=-d_i$ and solve\n   $$\\begin{bmatrix}B&A_J^T\\\\A_J&0\\end{bmatrix} \\binom{p}{\\eta}=\\binom{-c}{b_J},$$\n   where $c=\\nabla f(x)$, $A_J$ is the stacked matrix with equality rows $E$\n   followed by selected inequality rows $J$, and $b_J$ is the right-hand side\n   in that same row order. The multiplier vector $\\eta$ is stored in this row\n   order. The KKT matrix is\n   nonsingular by [[lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature]].\n3. Discard the candidate if any linearized inequality is violated or any\n   selected inequality multiplier is negative. Otherwise store $(p,\\eta,J)$. The existing argument records step 1.1: The equality reduction and subset enumeration each examine finitely many row subsets. Every retained equality system is equivalent to the original consistent system, and every selected subset passing the rank test has a nonsingular KKT matrix by [F2], because $B\\succ0$ on every subspace. Thus each candidate solve is uniquely defined. [given, A1, F1, F2, algebra]; step 2.1: Each accepted candidate is checked against all inequalities and has nonnegative selected inequality multipliers. The returned full vectors $(\\nu,\\lambda)$ are the reduced KKT multipliers placed at their original indices and zero elsewhere, so they give the same stationarity equation; feasibility of the retained equality system is equivalent to feasibility of the original consistent system. Thus the return is a feasible KKT tuple for the full QP. If none is accepted, the routine returns its specified infeasibility status. The exact meaning of that status is a separate theorem claim. [given, A1, F1, step 1.1, algebra] \u220e This worksheet introduces no additional selection axiom and does not remove any choice assumption in the item or its suppliers."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "Exact exhaustive active-set solve for the SQP quadratic subproblem: The asserted conclusion is a construction, estimate, or conditional assertion, rather than a forward half of an equivalence. The actual Definition conclusion is: If no candidate is stored, return `QP-infeasible`. Otherwise return the\nstored candidate with least quadratic objective, breaking an exact tie by the\nleast subset bit mask, as `solution(p, nu, lambda, E, J)`. Here $\\nu$ is\nthe full equality-multiplier vector, initialized to zero and filled from the\nequality components of $\\eta$ at indices $E$; $\\lambda$ is the full\ninequality-multiplier vector, initialized to zero and filled from the selected\ncomponents at indices $J$. A finite-precision\nimplementation that cannot complete a rank test or solve must return\n`numerical-failure`; this definition's exact-arithmetic branch has no such\nfailure. The loop tests at most $2^m$ inequality subsets. It requires no\nfeasible initial step and specifies no pivoting rule for an iterative working\nset solver."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "Exact exhaustive active-set solve for the SQP quadratic subproblem: The claim does not assert the converse obtained by turning its conclusion into sufficient hypotheses. The actual Definition conclusion is: If no candidate is stored, return `QP-infeasible`. Otherwise return the\nstored candidate with least quadratic objective, breaking an exact tie by the\nleast subset bit mask, as `solution(p, nu, lambda, E, J)`. Here $\\nu$ is\nthe full equality-multiplier vector, initialized to zero and filled from the\nequality components of $\\eta$ at indices $E$; $\\lambda$ is the full\ninequality-multiplier vector, initialized to zero and filled from the selected\ncomponents at indices $J$. A finite-precision\nimplementation that cannot complete a rank test or solve must return\n`numerical-failure`; this definition's exact-arithmetic branch has no such\nfailure. The loop tests at most $2^m$ inequality subsets. It requires no\nfeasible initial step and specifies no pivoting rule for an iterative working\nset solver."
+          }
+        ],
+        "finite_checks": [
+          {
+            "claim": "The exact enumeration visits exactly 2^m inequality subsets; for m=0 it visits one empty subset, and every accepted solve uses the independent-row KKT system.",
+            "evidence": "The Definition iterates all 2^m subsets in increasing bit-mask order; for m=0 the sole subset is empty. Proof steps 1.1 and 2.1 establish that each candidate solve is defined and every accepted candidate is checked against all inequalities and multiplier signs."
+          }
+        ]
+      },
+      "after": {
+        "citations": [],
+        "derivations": [],
+        "routine_steps": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "checked",
+            "evidence": "Definition returns QP-infeasible on inconsistent equalities or when no candidate passes the filters; the named thm-sqp-exhaustive-active-set-qp-solve-correct-finite Statement supplies the empty-polyhedron equivalence."
+          },
+          {
+            "case": "zero",
+            "status": "not_applicable",
+            "reason": "Definition permits zero objective-gradient and affine right-hand-side entries and initializes unselected multipliers to zero; there is no separate nonzero-data hypothesis or zero-input property claim in this procedure."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "Definition with m=1 enumerates the empty subset and the singleton in bit-mask order after consistent equality reduction; the named correctness theorem Proof step 3.1 supplies the finite-test argument."
+          },
+          {
+            "case": "degenerate",
+            "status": "not_applicable",
+            "reason": "Definition tests equality consistency, retains an independent equality row set, and skips selected row stacks that are dependent; b_J now explicitly uses negative equality and selected inequality values. It does not call a singular selected KKT solve."
+          },
+          {
+            "case": "endpoints",
+            "status": "not_applicable",
+            "reason": "Definition includes J empty and J all inequality indices in its bit-mask enumeration, using empty stacked blocks when a row set is empty; success and failure returns are specified without a limiting-parameter assertion."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "Definition selects the lexicographically first maximal independent equality-row subset and the least objective candidate with least bit-mask tie break, using finite exact tests. No additional choice principle is introduced."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "Definition specifies an operational status, not a proved equivalence. The forward infeasibility direction is established separately by thm-sqp-exhaustive-active-set-qp-solve-correct-finite Proof steps 1.1 and 3.1."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "Definition specifies an operational status, not a proved converse. The reverse infeasibility direction is established separately by thm-sqp-exhaustive-active-set-qp-solve-correct-finite Proof steps 2.1 and 3.1."
+          }
+        ],
+        "finite_checks": [
+          {
+            "claim": "After consistent equality reduction, enumeration has at most 2^m inequality subset tests; when m=0 its sole possible subset is empty.",
+            "evidence": "Definition fixes the bit-mask enumeration and explicit independent-row KKT data. The named thm-sqp-exhaustive-active-set-qp-solve-correct-finite Proof steps 1.1, 1.2 and 3.1 prove finiteness and accepted-candidate meaning; no removed algorithm Proof is cited."
+          }
+        ]
+      },
+      "reason": "Keep algorithm contract and statuses/history rather than remove native producer carrier; remove obsolete local fact/proof mappings and bind worksheet text to actual new Definition or named EXISTING theorem. Original proof and old full contract remain in research archive."
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-85.proof-contracts.json",
+      "path": [
+        "contracts",
+        "alg-sqp-merit-globalization-with-finite-budgets",
+        "citations",
+        0,
+        "quote"
+      ],
+      "before": "Input an SQP subproblem from [[def-sqp-linearized-quadratic-subproblem]],\nusing exact real arithmetic. First reduce the linearized equality system\n$A_Ep=b_E$: test consistency, and, if consistent, retain the\nlexicographically first maximal independent set $E$ of equality row indices\nwith their right-hand sides. If it is inconsistent, return\n`QP-infeasible`.\n\nFor each subset $J\\subseteq\\{1,\\ldots,m\\}$ in increasing bit-mask order:\n\n1. Stack the retained equality rows and the inequality rows $G_i$ for $i\\in J$.\n   If these rows are dependent, skip $J$.\n2. Treat the selected inequalities as equalities $G_ip=-d_i$ and solve\n   $$\\begin{bmatrix}B&A_J^T\\\\A_J&0\\end{bmatrix} \\binom{p}{\\eta}=\\binom{-c}{b_J},$$\n   where $c=\\nabla f(x)$, $A_J$ is the stacked matrix with equality rows $E$\n   followed by selected inequality rows $J$, and $b_J$ is the right-hand side\n   in that same row order. The multiplier vector $\\eta$ is stored in this row\n   order. The KKT matrix is\n   nonsingular by [[lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature]].\n3. Discard the candidate if any linearized inequality is violated or any\n   selected inequality multiplier is negative. Otherwise store $(p,\\eta,J)$.\n\nIf no candidate is stored, return `QP-infeasible`. Otherwise return the\nstored candidate with least quadratic objective, breaking an exact tie by the\nleast subset bit mask, as `solution(p, nu, lambda, E, J)`. Here $\\nu$ is\nthe full equality-multiplier vector, initialized to zero and filled from the\nequality components of $\\eta$ at indices $E$; $\\lambda$ is the full\ninequality-multiplier vector, initialized to zero and filled from the selected\ncomponents at indices $J$. A finite-precision\nimplementation that cannot complete a rank test or solve must return\n`numerical-failure`; this definition's exact-arithmetic branch has no such\nfailure. The loop tests at most $2^m$ inequality subsets. It requires no\nfeasible initial step and specifies no pivoting rule for an iterative working\nset solver.",
+      "after": "Input an SQP subproblem from [[def-sqp-linearized-quadratic-subproblem]],\nusing exact real arithmetic. Let $q$ and $m$ be the numbers of equality and\ninequality constraints. Put $A^{\\rm eq}=Dh(x)$, $b^{\\rm eq}=-h(x)$,\n$G=Dg(x)$, $d=g(x)$, and $c=\\nabla f(x)$, so $G_i=Dg_i(x)$ and\n$d_i=g_i(x)$ for $1\\le i\\le m$. First reduce the linearized equality system\n$A^{\\rm eq}p=b^{\\rm eq}$: test consistency, and, if consistent, retain the\nlexicographically first maximal independent set $E\\subseteq\\{1,\\ldots,q\\}$\nof equality row indices with their right-hand sides. If it is inconsistent,\nreturn `QP-infeasible`. Within each retained row set, use increasing original\nindices; an empty row set contributes no rows or right-hand-side entries.\n\nFor each subset $J\\subseteq\\{1,\\ldots,m\\}$ in increasing bit-mask order:\n\n1. Stack the equality rows $(A^{\\rm eq})_E$ and the inequality rows $G_J$,\n   in that order. If these rows are dependent, skip $J$.\n2. Treat the selected inequalities as equalities $G_ip=-d_i$ and solve\n   $$\\begin{bmatrix}B&A_J^T\\\\A_J&0\\end{bmatrix} \\binom{p}{\\eta}=\\binom{-c}{b_J},$$\n   where $A_J=\\binom{(A^{\\rm eq})_E}{G_J}$ and\n   $b_J=\\binom{(b^{\\rm eq})_E}{-d_J}$. Thus the equality entries of $b_J$\n   are $-h_a(x)$ for $a\\in E$, followed by $-g_i(x)$ for $i\\in J$,\n   in the declared row order. The multiplier vector $\\eta$ is stored in this\n   same order. The KKT matrix is\n   nonsingular by [[lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature]].\n3. Discard the candidate if any linearized inequality is violated or any\n   selected inequality multiplier is negative. Otherwise store $(p,\\eta,J)$.\n\nIf no candidate is stored, return `QP-infeasible`. Otherwise return the\nstored candidate with least quadratic objective, breaking an exact tie by the\nleast subset bit mask, as `solution(p, nu, lambda, E, J)`. Here $\\nu$ is\nthe full equality-multiplier vector, initialized to zero and filled from the\nequality components of $\\eta$ at indices $E$; $\\lambda$ is the full\ninequality-multiplier vector, initialized to zero and filled from the selected\ncomponents at indices $J$. A finite-precision\nimplementation that cannot complete a rank test or solve must return\n`numerical-failure`; this definition's exact-arithmetic branch has no such\nfailure. It requires no\nfeasible initial step and specifies no pivoting rule for an iterative working\nset solver.",
+      "reason": "Exact current-source Definition mirror only; preserve proof uses/derivations/risk/smoke/history."
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-85.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+        "citations",
+        2,
+        "quote"
+      ],
+      "before": "Input an SQP subproblem from [[def-sqp-linearized-quadratic-subproblem]],\nusing exact real arithmetic. First reduce the linearized equality system\n$A_Ep=b_E$: test consistency, and, if consistent, retain the\nlexicographically first maximal independent set $E$ of equality row indices\nwith their right-hand sides. If it is inconsistent, return\n`QP-infeasible`.\n\nFor each subset $J\\subseteq\\{1,\\ldots,m\\}$ in increasing bit-mask order:\n\n1. Stack the retained equality rows and the inequality rows $G_i$ for $i\\in J$.\n   If these rows are dependent, skip $J$.\n2. Treat the selected inequalities as equalities $G_ip=-d_i$ and solve\n   $$\\begin{bmatrix}B&A_J^T\\\\A_J&0\\end{bmatrix} \\binom{p}{\\eta}=\\binom{-c}{b_J},$$\n   where $c=\\nabla f(x)$, $A_J$ is the stacked matrix with equality rows $E$\n   followed by selected inequality rows $J$, and $b_J$ is the right-hand side\n   in that same row order. The multiplier vector $\\eta$ is stored in this row\n   order. The KKT matrix is\n   nonsingular by [[lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature]].\n3. Discard the candidate if any linearized inequality is violated or any\n   selected inequality multiplier is negative. Otherwise store $(p,\\eta,J)$.\n\nIf no candidate is stored, return `QP-infeasible`. Otherwise return the\nstored candidate with least quadratic objective, breaking an exact tie by the\nleast subset bit mask, as `solution(p, nu, lambda, E, J)`. Here $\\nu$ is\nthe full equality-multiplier vector, initialized to zero and filled from the\nequality components of $\\eta$ at indices $E$; $\\lambda$ is the full\ninequality-multiplier vector, initialized to zero and filled from the selected\ncomponents at indices $J$. A finite-precision\nimplementation that cannot complete a rank test or solve must return\n`numerical-failure`; this definition's exact-arithmetic branch has no such\nfailure. The loop tests at most $2^m$ inequality subsets. It requires no\nfeasible initial step and specifies no pivoting rule for an iterative working\nset solver.",
+      "after": "Input an SQP subproblem from [[def-sqp-linearized-quadratic-subproblem]],\nusing exact real arithmetic. Let $q$ and $m$ be the numbers of equality and\ninequality constraints. Put $A^{\\rm eq}=Dh(x)$, $b^{\\rm eq}=-h(x)$,\n$G=Dg(x)$, $d=g(x)$, and $c=\\nabla f(x)$, so $G_i=Dg_i(x)$ and\n$d_i=g_i(x)$ for $1\\le i\\le m$. First reduce the linearized equality system\n$A^{\\rm eq}p=b^{\\rm eq}$: test consistency, and, if consistent, retain the\nlexicographically first maximal independent set $E\\subseteq\\{1,\\ldots,q\\}$\nof equality row indices with their right-hand sides. If it is inconsistent,\nreturn `QP-infeasible`. Within each retained row set, use increasing original\nindices; an empty row set contributes no rows or right-hand-side entries.\n\nFor each subset $J\\subseteq\\{1,\\ldots,m\\}$ in increasing bit-mask order:\n\n1. Stack the equality rows $(A^{\\rm eq})_E$ and the inequality rows $G_J$,\n   in that order. If these rows are dependent, skip $J$.\n2. Treat the selected inequalities as equalities $G_ip=-d_i$ and solve\n   $$\\begin{bmatrix}B&A_J^T\\\\A_J&0\\end{bmatrix} \\binom{p}{\\eta}=\\binom{-c}{b_J},$$\n   where $A_J=\\binom{(A^{\\rm eq})_E}{G_J}$ and\n   $b_J=\\binom{(b^{\\rm eq})_E}{-d_J}$. Thus the equality entries of $b_J$\n   are $-h_a(x)$ for $a\\in E$, followed by $-g_i(x)$ for $i\\in J$,\n   in the declared row order. The multiplier vector $\\eta$ is stored in this\n   same order. The KKT matrix is\n   nonsingular by [[lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature]].\n3. Discard the candidate if any linearized inequality is violated or any\n   selected inequality multiplier is negative. Otherwise store $(p,\\eta,J)$.\n\nIf no candidate is stored, return `QP-infeasible`. Otherwise return the\nstored candidate with least quadratic objective, breaking an exact tie by the\nleast subset bit mask, as `solution(p, nu, lambda, E, J)`. Here $\\nu$ is\nthe full equality-multiplier vector, initialized to zero and filled from the\nequality components of $\\eta$ at indices $E$; $\\lambda$ is the full\ninequality-multiplier vector, initialized to zero and filled from the selected\ncomponents at indices $J$. A finite-precision\nimplementation that cannot complete a rank test or solve must return\n`numerical-failure`; this definition's exact-arithmetic branch has no such\nfailure. It requires no\nfeasible initial step and specifies no pivoting rule for an iterative working\nset solver.",
+      "reason": "Exact current-source Definition mirror only; preserve proof uses/derivations/risk/smoke/history."
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-85.proof-contracts.json",
+      "path": [
+        "contracts",
+        "ex-sqp-engineering-design-active-inequality",
+        "citations",
+        1,
+        "quote"
+      ],
+      "before": "Input an SQP subproblem from [[def-sqp-linearized-quadratic-subproblem]],\nusing exact real arithmetic. First reduce the linearized equality system\n$A_Ep=b_E$: test consistency, and, if consistent, retain the\nlexicographically first maximal independent set $E$ of equality row indices\nwith their right-hand sides. If it is inconsistent, return\n`QP-infeasible`.\n\nFor each subset $J\\subseteq\\{1,\\ldots,m\\}$ in increasing bit-mask order:\n\n1. Stack the retained equality rows and the inequality rows $G_i$ for $i\\in J$.\n   If these rows are dependent, skip $J$.\n2. Treat the selected inequalities as equalities $G_ip=-d_i$ and solve\n   $$\\begin{bmatrix}B&A_J^T\\\\A_J&0\\end{bmatrix} \\binom{p}{\\eta}=\\binom{-c}{b_J},$$\n   where $c=\\nabla f(x)$, $A_J$ is the stacked matrix with equality rows $E$\n   followed by selected inequality rows $J$, and $b_J$ is the right-hand side\n   in that same row order. The multiplier vector $\\eta$ is stored in this row\n   order. The KKT matrix is\n   nonsingular by [[lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature]].\n3. Discard the candidate if any linearized inequality is violated or any\n   selected inequality multiplier is negative. Otherwise store $(p,\\eta,J)$.\n\nIf no candidate is stored, return `QP-infeasible`. Otherwise return the\nstored candidate with least quadratic objective, breaking an exact tie by the\nleast subset bit mask, as `solution(p, nu, lambda, E, J)`. Here $\\nu$ is\nthe full equality-multiplier vector, initialized to zero and filled from the\nequality components of $\\eta$ at indices $E$; $\\lambda$ is the full\ninequality-multiplier vector, initialized to zero and filled from the selected\ncomponents at indices $J$. A finite-precision\nimplementation that cannot complete a rank test or solve must return\n`numerical-failure`; this definition's exact-arithmetic branch has no such\nfailure. The loop tests at most $2^m$ inequality subsets. It requires no\nfeasible initial step and specifies no pivoting rule for an iterative working\nset solver.",
+      "after": "Input an SQP subproblem from [[def-sqp-linearized-quadratic-subproblem]],\nusing exact real arithmetic. Let $q$ and $m$ be the numbers of equality and\ninequality constraints. Put $A^{\\rm eq}=Dh(x)$, $b^{\\rm eq}=-h(x)$,\n$G=Dg(x)$, $d=g(x)$, and $c=\\nabla f(x)$, so $G_i=Dg_i(x)$ and\n$d_i=g_i(x)$ for $1\\le i\\le m$. First reduce the linearized equality system\n$A^{\\rm eq}p=b^{\\rm eq}$: test consistency, and, if consistent, retain the\nlexicographically first maximal independent set $E\\subseteq\\{1,\\ldots,q\\}$\nof equality row indices with their right-hand sides. If it is inconsistent,\nreturn `QP-infeasible`. Within each retained row set, use increasing original\nindices; an empty row set contributes no rows or right-hand-side entries.\n\nFor each subset $J\\subseteq\\{1,\\ldots,m\\}$ in increasing bit-mask order:\n\n1. Stack the equality rows $(A^{\\rm eq})_E$ and the inequality rows $G_J$,\n   in that order. If these rows are dependent, skip $J$.\n2. Treat the selected inequalities as equalities $G_ip=-d_i$ and solve\n   $$\\begin{bmatrix}B&A_J^T\\\\A_J&0\\end{bmatrix} \\binom{p}{\\eta}=\\binom{-c}{b_J},$$\n   where $A_J=\\binom{(A^{\\rm eq})_E}{G_J}$ and\n   $b_J=\\binom{(b^{\\rm eq})_E}{-d_J}$. Thus the equality entries of $b_J$\n   are $-h_a(x)$ for $a\\in E$, followed by $-g_i(x)$ for $i\\in J$,\n   in the declared row order. The multiplier vector $\\eta$ is stored in this\n   same order. The KKT matrix is\n   nonsingular by [[lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature]].\n3. Discard the candidate if any linearized inequality is violated or any\n   selected inequality multiplier is negative. Otherwise store $(p,\\eta,J)$.\n\nIf no candidate is stored, return `QP-infeasible`. Otherwise return the\nstored candidate with least quadratic objective, breaking an exact tie by the\nleast subset bit mask, as `solution(p, nu, lambda, E, J)`. Here $\\nu$ is\nthe full equality-multiplier vector, initialized to zero and filled from the\nequality components of $\\eta$ at indices $E$; $\\lambda$ is the full\ninequality-multiplier vector, initialized to zero and filled from the selected\ncomponents at indices $J$. A finite-precision\nimplementation that cannot complete a rank test or solve must return\n`numerical-failure`; this definition's exact-arithmetic branch has no such\nfailure. It requires no\nfeasible initial step and specifies no pivoting rule for an iterative working\nset solver.",
+      "reason": "Exact current-source Definition mirror only; preserve proof uses/derivations/risk/smoke/history."
+    }
+  ],
+  "all_unapplied": true,
+  "hashes_or_native_review_flags_added": false,
+  "preserve_other_metadata": true
+}

@@ -1,0 +1,673 @@
+[
+  {
+    "order": 2310,
+    "id": "automatic-differentiation-and-computational-graphs",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Automatic differentiation and computational graphs",
+    "companion": "automatic-differentiation-and-computational-graphs-examples",
+    "requires": [
+      "the-total-derivative",
+      "finite-precision-direct-factorizations"
+    ],
+    "items": [
+      {
+        "id": "def-finite-straight-line-computational-program",
+        "kind": "definition",
+        "title": "Finite straight-line computational programs and real-arithmetic tapes",
+        "deps": [
+          "def-c-one-map-and-local-inverse",
+          "def-total-derivative-in-euclidean-space"
+        ],
+        "dependency_level": 0,
+        "statement": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and an output node $o$ whose value space is $\\mathbb R$. Input coordinate $i$ has value $x_i$. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot points to an input or an operation with index less than $j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a finite-dimensional real value space $E_j$, an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$, and a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+        "strategy": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and an output node $o$ whose value space is $\\mathbb R$. Input coordinate $i$ has value $x_i$. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot points to an input or an operation with index less than $j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a finite-dimensional real value space $E_j$, an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$, and a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §§8.3–8.4.1",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            },
+            {
+              "title": "A. Griewank, Achieving Logarithmic Growth of Temporal and Spatial Complexity in Reverse Automatic Differentiation, §§1, 3–6",
+              "url": "https://web.archive.org/web/20210506204927/http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.455.4143&rep=rep1&type=pdf",
+              "locator": "Complete 21-page article, §§1 and 3–6; especially §6, Theorem 6.1 and equations (13)–(16), printed pp. 11–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-implicit-sensitivity-error-controlled-by-residual",
+        "kind": "lemma",
+        "title": "An implicit sensitivity evaluated at an approximate state has a local residual bound",
+        "deps": [
+          "thm-euclidean-implicit-function-theorem",
+          "thm-mean-value-inequality-for-total-derivatives"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $R(z,\\theta)$ be $C^2$ near an exact solution $R(z_*,\\theta_0)=0$, with $A(z)=R_z(z,\\theta_0)$ invertible and $B(z)=R_\\theta(z,\\theta_0)$. The implicit sensitivity at a state $z$ is $S(z)=-A(z)^{-1}B(z)$. Suppose the local inverse $\\Psi$ of $z\\mapsto R(z,\\theta_0)$, supplied near $z_*$ by the implicit function theorem, is defined on a convex residual neighborhood containing $0$ and $r=R(\\tilde z,\\theta_0)$, with $\\|D\\Psi(y)\\|\\le\\kappa$ along their segment. Suppose also that the segment from $z_*$ to $\\tilde z=\\Psi(r)$ lies in a convex neighborhood where $\\|A(z)^{-1}\\|\\le M$, $\\|B(z)\\|\\le B_0$, and $A,B$ are Lipschitz with constants $L_A,L_B$. Then\n$$\\|S(\\tilde z)-S(z_*)\\|\\le\\kappa\\bigl(M^2L_AB_0+ML_B\\bigr)\\|r\\|.$$\nThis bounds the implicit sensitivity formula evaluated at an approximate state. It is not by itself a bound for the derivative of a stopped iteration.",
+        "strategy": "direct\n\n**Given:** The exact root, local inverse chart, residual, inverse-norm and Lipschitz bounds in the statement.\n\n[F1] [[thm-euclidean-implicit-function-theorem]]: if the state Jacobian of a $C^1$ residual is invertible at a zero, there is a local $C^1$ solution branch and its derivative formula; applying the theorem to $R(z,\\theta_0)-r=0$ gives the local inverse $\\Psi(r)$.\n\n[F2] [[thm-mean-value-inequality-for-total-derivatives]]: on a convex open set, a uniform derivative bound $\\|Df(z)v\\|\\le M\\|v\\|$ implies $\\|f(y)-f(x)\\|\\le M\\|y-x\\|$.\n\n[A1] The residual segment lies inside the inverse chart and the state segment lies inside the neighborhood where all stated bounds hold.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. Lebl, Basic Analysis II, Theorem 8.5.6 and proof, §8.5.1",
+              "url": "https://www.jirka.org/ra/html/sec_svinvfuncthm.html",
+              "locator": "Basic Analysis II §8.5.1, Theorem 8.5.6 and its complete proof."
+            },
+            {
+              "title": "J. Lebl, Basic Analysis I, Theorem 8.3.7 and proof, §8.3.1",
+              "url": "https://www.jirka.org/ra/html/sec_svtheder.html",
+              "locator": "Basic Analysis I §8.3.1, Theorem 8.3.7 and its complete proof."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-implicit-differentiation-forward-and-adjoint-formulas",
+        "kind": "theorem",
+        "title": "Implicit differentiation and adjoint formulas under a nonsingular residual Jacobian",
+        "deps": [
+          "thm-euclidean-implicit-function-theorem",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $R:\\Theta\\times Z\\to\\mathbb R^m$ be $C^1$, where $\\Theta\\subseteq\\mathbb R^p$ and $Z\\subseteq\\mathbb R^m$ are open. Suppose $R(\\theta_0,z_0)=0$ and the state Jacobian $R_z(\\theta_0,z_0)$ is invertible. The Euclidean implicit function theorem gives a local $C^1$ solution branch $z=\\phi(\\theta)$, and\n$$D\\phi(\\theta_0)=-R_z(\\theta_0,z_0)^{-1}R_\\theta(\\theta_0,z_0).$$\nFor a scalar $C^1$ objective $J(\\theta,z)$, its derivative along that branch is\n$$D(J(\\theta,\\phi(\\theta)))|_{\\theta_0}=J_\\theta-J_zR_z^{-1}R_\\theta.$$\nEquivalently, if $\\lambda$ solves $R_z^T\\lambda=J_z^T$, this derivative is $J_\\theta-\\lambda^TR_\\theta$. These formulas concern the exact local solution branch; differentiating a stopped iteration is a separate finite-map derivative.",
+        "strategy": "direct\n\n**Given:** The residual equation, a $C^1$ residual, a square nonsingular state Jacobian, and a scalar $C^1$ objective.\n\n[F1] [[thm-euclidean-implicit-function-theorem]]: for a $C^1$ Euclidean residual with zero value and invertible state-block derivative, there is a unique local $C^1$ solution branch and $D\\phi=-R_z^{-1}R_\\theta$.\n\n[F2] [[thm-chain-rule-for-total-derivatives]]: for $C^1$ maps $g,f$, $D(g\\circ f)=Dg(f)Df$.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. Lebl, Basic Analysis II, Theorem 8.5.6 and proof, §8.5.1",
+              "url": "https://www.jirka.org/ra/html/sec_svinvfuncthm.html",
+              "locator": "Basic Analysis II §8.5.1, Theorem 8.5.6 and its complete proof."
+            },
+            {
+              "title": "J. Lebl, Basic Analysis I, Theorem 8.3.7 and proof, §8.3.1",
+              "url": "https://www.jirka.org/ra/html/sec_svtheder.html",
+              "locator": "Basic Analysis I §8.3.1, Theorem 8.3.7 and its complete proof."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "alg-forward-mode-automatic-differentiation",
+        "kind": "algorithm",
+        "title": "Forward-mode automatic differentiation on a finite computational graph",
+        "deps": [
+          "def-finite-straight-line-computational-program"
+        ],
+        "dependency_level": 1,
+        "statement": "Input a graph from [[def-finite-straight-line-computational-program]], an admissible point $x$, and a direction $v\\in\\mathbb R^n$. Evaluate all primal node values in topological order and store the tape. Set each input tangent to $\\dot x_i=v_i$. For each operation $j=1,\\ldots,T$, compute\n$$\\dot z_j=D\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})(\\dot z_{p_{j,1}},\\ldots,\\dot z_{p_{j,r_j}}).$$\nReturn the primal scalar output $z_o$ and tangent $\\dot z_o$. If the input is outside the admissible domain, return DOMAIN_ERROR; if a piecewise primitive is at a branch boundary or has no unique strict active branch, return NONDIFFERENTIABLE and no tangent. All derivative evaluations in this definition are exact real-arithmetic operations on the specified primitive maps.",
+        "strategy": "Input a graph from [[def-finite-straight-line-computational-program]], an admissible point $x$, and a direction $v\\in\\mathbb R^n$. Evaluate all primal node values in topological order and store the tape. Set each input tangent to $\\dot x_i=v_i$. For each operation $j=1,\\ldots,T$, compute\n$$\\dot z_j=D\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})(\\dot z_{p_{j,1}},\\ldots,\\dot z_{p_{j,r_j}}).$$\nReturn the primal scalar output $z_o$ and tangent $\\dot z_o$. If the input is outside the admissible domain, return DOMAIN_ERROR; if a piecewise primitive is at a branch boundary or has no unique strict active branch, return NONDIFFERENTIABLE and no tangent. All derivative evaluations in this definition are exact real-arithmetic operations on the specified primitive maps.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §§8.3–8.4.1",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-reverse-mode-automatic-differentiation",
+        "kind": "algorithm",
+        "title": "Reverse-mode automatic differentiation for a scalar graph output",
+        "deps": [
+          "def-finite-straight-line-computational-program"
+        ],
+        "dependency_level": 1,
+        "statement": "Input a graph from [[def-finite-straight-line-computational-program]] and an admissible point $x$. Evaluate and store all primal values in topological order. Initialize every operation cotangent to zero and set the scalar output cotangent $\\bar z_o=1$. For $j=T,T-1,\\ldots,1$, and for every parent slot $k=1,\\ldots,r_j$, accumulate\n$$\\bar z_{p_{j,k}}\\mathrel{+}=D_k\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})^T\\bar z_j.$$\nIf the same parent node occurs in multiple slots, add every slot contribution. Return $z_o$ and the cotangents of the input coordinates as the gradient. A point outside the admissible domain returns DOMAIN_ERROR; a branch boundary or ambiguous active branch returns NONDIFFERENTIABLE and no gradient. The procedure differentiates the real-arithmetic graph; it makes no floating-point error claim.",
+        "strategy": "Input a graph from [[def-finite-straight-line-computational-program]] and an admissible point $x$. Evaluate and store all primal values in topological order. Initialize every operation cotangent to zero and set the scalar output cotangent $\\bar z_o=1$. For $j=T,T-1,\\ldots,1$, and for every parent slot $k=1,\\ldots,r_j$, accumulate\n$$\\bar z_{p_{j,k}}\\mathrel{+}=D_k\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})^T\\bar z_j.$$\nIf the same parent node occurs in multiple slots, add every slot contribution. Return $z_o$ and the cotangents of the input coordinates as the gradient. A point outside the admissible domain returns DOMAIN_ERROR; a branch boundary or ambiguous active branch returns NONDIFFERENTIABLE and no gradient. The procedure differentiates the real-arithmetic graph; it makes no floating-point error claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §§8.3–8.4.1",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-finite-straight-line-program-defines-c1-map",
+        "kind": "lemma",
+        "title": "A finite straight-line C1 program defines a C1 map on its admissible domain",
+        "deps": [
+          "def-finite-straight-line-computational-program",
+          "def-c-one-map-and-local-inverse",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-total-differentiability-gives-a-local-linear-bound-and-continuity"
+        ],
+        "dependency_level": 1,
+        "statement": "For a finite straight-line program whose primitives are $C^1$, the recursively defined admissible input domain is open on each fixed strict branch. The scalar output $f$ is $C^1$ there, and its total derivative is obtained by the ordinary chain rule through the primitive maps.",
+        "strategy": "direct\n\n**Given:** The finite topologically ordered graph and its $C^1$ primitive maps.\n\n[F1] [[def-finite-straight-line-computational-program]]: each node reads only earlier parent slots, each primitive is $C^1$ on an open domain, and the admissible input set requires every parent tuple to lie in that domain.\n\n[F2] [[def-c-one-map-and-local-inverse]]: a map is $C^1$ when it is totally differentiable at every point and its derivative matrix varies continuously.\n\n[F3] [[thm-total-differentiability-gives-a-local-linear-bound-and-continuity]]: total differentiability at a point implies continuity there.\n\n[F4] [[thm-chain-rule-for-total-derivatives]]: if $g$ is totally differentiable at $f(a)$ and $f$ is totally differentiable at $a$, then $g\\circ f$ is totally differentiable at $a$, with derivative $Dg(f(a))Df(a)$.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §§8.3–8.4.1",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-finite-straight-line-program-defines-c2-map",
+        "kind": "lemma",
+        "title": "A finite straight-line C2 program defines a C2 map on each fixed branch",
+        "deps": [
+          "def-finite-straight-line-computational-program",
+          "lem-finite-straight-line-program-defines-c1-map",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives"
+        ],
+        "dependency_level": 2,
+        "statement": "If every primitive of a finite straight-line program is $C^2$ on the selected open branch domains, then the real-arithmetic scalar output is $C^2$ on each fixed strict branch.",
+        "strategy": "direct\n\n**Given:** The finite graph has $C^2$ primitive maps on its selected open branch domains.\n\n[F1] [[def-finite-straight-line-computational-program]]: nodes are finite and topologically ordered; each primitive is a finite-dimensional map, and $C^2$ means that its derivative map is $C^1$.\n\n[F2] [[thm-chain-sum-product-and-composition-rules-for-banach-derivatives]]: compositions of differentiable maps obey the chain rule, and products under bounded bilinear maps obey the product rule. In particular this applies to multiplication of finite-dimensional linear maps.\n\n[F3] [[lem-finite-straight-line-program-defines-c1-map]]: the admissible input domain is open on each fixed strict branch.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §8.4.1",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "alg-checkpointed-reverse-schedules",
+        "kind": "algorithm",
+        "title": "Uniform-block and binomial checkpoint schedules for reverse sweeps",
+        "deps": [
+          "def-finite-straight-line-computational-program",
+          "alg-reverse-mode-automatic-differentiation"
+        ],
+        "dependency_level": 2,
+        "statement": "The input is a finite sequence of deterministic $C^1$ transitions $F_1,\\ldots,F_T$ between open subsets of finite-dimensional Euclidean spaces, with starting state $x_0$. Every transition is evaluated on one fixed strict branch and has its exact local reverse rule. The last transition has scalar output and may be the terminal objective, so its scalar cotangent is $1$. A transition tape stores the local values needed by its exact reverse rule. A deterministic replay applies the same transition maps, in the same order, to the identical checkpoint state and therefore reproduces the same values and local derivative inputs. The procedure returns the terminal output and cotangent at $x_0$; an invalid domain evaluation returns DOMAIN_ERROR, and a branch boundary returns NONDIFFERENTIABLE. A checkpoint schedule is permitted only when its saved states and all deterministic replays lie in these declared domains.\n\n**Uniform-block mode.** For $T=0$, return $x_0$ and the supplied cotangent without work. For $T\\ge1$, require an integer slot budget $m\\ge1$, set $q=\\lceil T/m\\rceil$, and during one forward pass save $x_{jq}$ for $j=0,\\ldots,\\lceil T/q\\rceil-1$ (all indices are below $T$). This uses at most $m$ saved states. Partition the steps into blocks $[a,b]$ with $a=jq$ and $b=\\min(a+q,T)$. Process the blocks from last to first. Within one block, for $\\ell=b,b-1,\\ldots,a+1$, restore $x_a$, replay $F_{a+1},\\ldots,F_{\\ell-1}$ without recording, evaluate $F_\\ell$ once while recording its local tape, apply its reverse rule to the current cotangent, and discard the one-step tape and replay workspace. Retain only the checkpoint states, the live state/cotangent, and the ordinary one-step reverse tape. Do not infer any optimality property of this schedule.\n\n**Binomial mode.** Define $C(d,0)=C(0,t)=1$, and $C(d,t)=C(d-1,t)+C(d,t-1)$ for integers $d,t\\ge1$. The recursive procedure REVERSE$(a,N,d,t,x_a,\\bar x_{a+N})$ requires $0\\le N\\le C(d,t)$ and a known starting state $x_a$. If $N=0$, return the unchanged cotangent. If $N=1$, evaluate and record the unique transition, apply its local reverse rule, and return its output and input cotangents. If $N\\ge2$, then $d,t\\ge1$. Put $L=\\min(N-1,C(d,t-1))$, $R=N-L$; replay the first $L$ transitions from $x_a$ without recording and save the resulting midpoint state $x_{a+L}$. Call REVERSE$(a+L,R,d-1,t,x_{a+L},\\bar x_{a+N})$ on the right block. Release the midpoint checkpoint, restore the caller's supplied $x_a$, and call REVERSE$(a,L,d,t-1,x_a,\\bar x_{a+L})$ on the left block, where $\\bar x_{a+L}$ is the cotangent returned by the right call. Return the right call's terminal value and the left call's cotangent at $x_a$. The top-level call uses $a=0,N=T$, with the specified terminal cotangent. A recursive call with $N>1$ and $d=0$ or $t=0$ is a schedule failure; the capacity condition makes that branch unreachable.\n\nThe parameter $d$ bounds the number of simultaneously saved state snapshots. The parameter $t$ bounds, for each transition, the number of additional unrecorded forward evaluations beyond its one recorded evaluation. Both are finite integer inputs. This mode gives a binomial capacity bound; it does not promise a numerical error estimate or an optimal schedule for arbitrary nonuniform primitive costs. For the storage count in the paired theorem, $R_s$ bounds scalar storage for one full primal state. The binomial recursion may reuse one mutable cotangent workspace: each call consumes its terminal cotangent and returns the cotangent at its start, reusing the same buffer through both children. Let $G$ bound the largest one-step tape and local reverse scratch, the constant number of live cotangent/work vectors, and the scalar call-frame records; it excludes the $d$ saved primal states and one live primal state.",
+        "strategy": "The input is a finite sequence of deterministic $C^1$ transitions $F_1,\\ldots,F_T$ between open subsets of finite-dimensional Euclidean spaces, with starting state $x_0$. Every transition is evaluated on one fixed strict branch and has its exact local reverse rule. The last transition has scalar output and may be the terminal objective, so its scalar cotangent is $1$. A transition tape stores the local values needed by its exact reverse rule. A deterministic replay applies the same transition maps, in the same order, to the identical checkpoint state and therefore reproduces the same values and local derivative inputs. The procedure returns the terminal output and cotangent at $x_0$; an invalid domain evaluation returns DOMAIN_ERROR, and a branch boundary returns NONDIFFERENTIABLE. A checkpoint schedule is permitted only when its saved states and all deterministic replays lie in these declared domains.\n\n**Uniform-block mode.** For $T=0$, return $x_0$ and the supplied cotangent without work. For $T\\ge1$, require an integer slot budget $m\\ge1$, set $q=\\lceil T/m\\rceil$, and during one forward pass save $x_{jq}$ for $j=0,\\ldots,\\lceil T/q\\rceil-1$ (all indices are below $T$). This uses at most $m$ saved states. Partition the steps into blocks $[a,b]$ with $a=jq$ and $b=\\min(a+q,T)$. Process the blocks from last to first. Within one block, for $\\ell=b,b-1,\\ldots,a+1$, restore $x_a$, replay $F_{a+1},\\ldots,F_{\\ell-1}$ without recording, evaluate $F_\\ell$ once while recording its local tape, apply its reverse rule to the current cotangent, and discard the one-step tape and replay workspace. Retain only the checkpoint states, the live state/cotangent, and the ordinary one-step reverse tape. Do not infer any optimality property of this schedule.\n\n**Binomial mode.** Define $C(d,0)=C(0,t)=1$, and $C(d,t)=C(d-1,t)+C(d,t-1)$ for integers $d,t\\ge1$. The recursive procedure REVERSE$(a,N,d,t,x_a,\\bar x_{a+N})$ requires $0\\le N\\le C(d,t)$ and a known starting state $x_a$. If $N=0$, return the unchanged cotangent. If $N=1$, evaluate and record the unique transition, apply its local reverse rule, and return its output and input cotangents. If $N\\ge2$, then $d,t\\ge1$. Put $L=\\min(N-1,C(d,t-1))$, $R=N-L$; replay the first $L$ transitions from $x_a$ without recording and save the resulting midpoint state $x_{a+L}$. Call REVERSE$(a+L,R,d-1,t,x_{a+L},\\bar x_{a+N})$ on the right block. Release the midpoint checkpoint, restore the caller's supplied $x_a$, and call REVERSE$(a,L,d,t-1,x_a,\\bar x_{a+L})$ on the left block, where $\\bar x_{a+L}$ is the cotangent returned by the right call. Return the right call's terminal value and the left call's cotangent at $x_a$. The top-level call uses $a=0,N=T$, with the specified terminal cotangent. A recursive call with $N>1$ and $d=0$ or $t=0$ is a schedule failure; the capacity condition makes that branch unreachable.\n\nThe parameter $d$ bounds the number of simultaneously saved state snapshots. The parameter $t$ bounds, for each transition, the number of additional unrecorded forward evaluations beyond its one recorded evaluation. Both are finite integer inputs. This mode gives a binomial capacity bound; it does not promise a numerical error estimate or an optimal schedule for arbitrary nonuniform primitive costs. For the storage count in the paired theorem, $R_s$ bounds scalar storage for one full primal state. The binomial recursion may reuse one mutable cotangent workspace: each call consumes its terminal cotangent and returns the cotangent at its start, reusing the same buffer through both children. Let $G$ bound the largest one-step tape and local reverse scratch, the constant number of live cotangent/work vectors, and the scalar call-frame records; it excludes the $d$ saved primal states and one live primal state.",
+        "sources": {
+          "references": [
+            {
+              "title": "A. Griewank, Achieving Logarithmic Growth of Temporal and Spatial Complexity in Reverse Automatic Differentiation, §§3–6 and Theorem 6.1",
+              "url": "https://web.archive.org/web/20210506204927/http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.455.4143&rep=rep1&type=pdf",
+              "locator": "Complete 21-page article, §§1 and 3–6; especially §6, Theorem 6.1 and equations (13)–(16), printed pp. 11–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-differentiate-finite-fixed-point-iteration",
+        "kind": "algorithm",
+        "title": "Differentiate a finite fixed-point iteration as a finite composed map",
+        "deps": [
+          "def-finite-straight-line-computational-program",
+          "alg-forward-mode-automatic-differentiation"
+        ],
+        "dependency_level": 2,
+        "statement": "Input a $C^1$ map $G(z,\\theta)$, a $C^1$ initial-state map $z_0(\\theta)$, a parameter $\\theta$, and a finite budget $K\\ge0$. Form the finite computational graph for $z_{k+1}(\\theta)=G(z_k(\\theta),\\theta)$, $k=0,\\ldots,K-1$. Evaluate that graph and run forward mode to compute both $z_K(\\theta)$ and its derivative $D_\\theta z_K(\\theta)$. Return that pair with status ITERATES_DIFFERENTIATED. A primitive-domain failure returns DOMAIN_ERROR; a nonsmooth active-branch switch returns NONDIFFERENTIABLE. This procedure differentiates the $K$-step map actually specified by $G,z_0,K$; it does not substitute the derivative of an exact fixed point.",
+        "strategy": "Input a $C^1$ map $G(z,\\theta)$, a $C^1$ initial-state map $z_0(\\theta)$, a parameter $\\theta$, and a finite budget $K\\ge0$. Form the finite computational graph for $z_{k+1}(\\theta)=G(z_k(\\theta),\\theta)$, $k=0,\\ldots,K-1$. Evaluate that graph and run forward mode to compute both $z_K(\\theta)$ and its derivative $D_\\theta z_K(\\theta)$. Return that pair with status ITERATES_DIFFERENTIATED. A primitive-domain failure returns DOMAIN_ERROR; a nonsmooth active-branch switch returns NONDIFFERENTIABLE. This procedure differentiates the $K$-step map actually specified by $G,z_0,K$; it does not substitute the derivative of an exact fixed point.",
+        "sources": {
+          "references": [
+            {
+              "title": "Atilım Güneş Baydin and Barak A. Pearlmutter, Automatic Differentiation of Algorithms for Machine Learning, complete arXiv text, §§2–3",
+              "url": "https://arxiv.org/pdf/1404.7456",
+              "locator": "Complete 7-page article, §§2–3.2 and §4 Hessian-vector product discussion, printed pp. 2–5."
+            },
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §§8.3–8.4.1",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-forward-over-reverse-hessian-vector-product",
+        "kind": "algorithm",
+        "title": "Forward-over-reverse Hessian-vector products",
+        "deps": [
+          "def-finite-straight-line-computational-program",
+          "alg-forward-mode-automatic-differentiation",
+          "alg-reverse-mode-automatic-differentiation"
+        ],
+        "dependency_level": 2,
+        "statement": "Input a $C^2$ graph, admissible $x$, and direction $v$. First run the forward tangent recurrence to compute every $\\dot z_j=Dz_j(x)v$. Set $\\bar z_o=1$, $\\dot{\\bar z}_o=0$, and all other reverse accumulators to zero. In reverse topological order, for each node $j$ and parent slot $k$, let $A_{j,k}=D_k\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ and update\n$$\\bar z_{p_{j,k}}\\mathrel{+}=A_{j,k}^{T}\\bar z_j,\\qquad \\dot{\\bar z}_{p_{j,k}}\\mathrel{+}=A_{j,k}^{T}\\dot{\\bar z}_j+\\bigl(DA_{j,k}(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})[\\dot z_{p_{j,1}},\\ldots,\\dot z_{p_{j,r_j}}]\\bigr)^{T}\\bar z_j.$$\nReturn the input tangent of the gradient, $(\\dot{\\bar x}_1,\\ldots,\\dot{\\bar x}_n)$. Repeated parent slots receive separate additions. Outside the admissible domain return DOMAIN_ERROR; at a branch boundary return NONDIFFERENTIABLE. The transpose is the real Euclidean transpose, not a complex adjoint.",
+        "strategy": "Input a $C^2$ graph, admissible $x$, and direction $v$. First run the forward tangent recurrence to compute every $\\dot z_j=Dz_j(x)v$. Set $\\bar z_o=1$, $\\dot{\\bar z}_o=0$, and all other reverse accumulators to zero. In reverse topological order, for each node $j$ and parent slot $k$, let $A_{j,k}=D_k\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ and update\n$$\\bar z_{p_{j,k}}\\mathrel{+}=A_{j,k}^{T}\\bar z_j,\\qquad \\dot{\\bar z}_{p_{j,k}}\\mathrel{+}=A_{j,k}^{T}\\dot{\\bar z}_j+\\bigl(DA_{j,k}(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})[\\dot z_{p_{j,1}},\\ldots,\\dot z_{p_{j,r_j}}]\\bigr)^{T}\\bar z_j.$$\nReturn the input tangent of the gradient, $(\\dot{\\bar x}_1,\\ldots,\\dot{\\bar x}_n)$. Repeated parent slots receive separate additions. Outside the admissible domain return DOMAIN_ERROR; at a branch boundary return NONDIFFERENTIABLE. The transpose is the real Euclidean transpose, not a complex adjoint.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §8.4.1",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-forward-mode-computes-directional-derivative",
+        "kind": "theorem",
+        "title": "Forward mode computes the exact directional derivative of the real-arithmetic graph",
+        "deps": [
+          "def-finite-straight-line-computational-program",
+          "lem-finite-straight-line-program-defines-c1-map",
+          "alg-forward-mode-automatic-differentiation",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $f:\\Omega\\to\\mathbb R$ be the output of a finite $C^1$ program on a fixed strict branch. For every admissible $x\\in\\Omega$ and direction $v\\in\\mathbb R^n$, the forward-mode algorithm returns $Df(x)v$.",
+        "strategy": "direct\n\n**Given:** The graph, admissible input, fixed strict branch, and direction $v$.\n\n[F1] [[def-finite-straight-line-computational-program]]: each node is a primitive applied to its earlier parent values; inputs are coordinate maps.\n\n[F2] [[lem-finite-straight-line-program-defines-c1-map]]: every node is $C^1$ on the fixed branch, with derivative given by the chain rule through its parents.\n\n[F3] [[alg-forward-mode-automatic-differentiation]]: input tangents are $v_i$, and each node tangent is the local derivative applied to its parent tangents.\n\n[F4] [[thm-chain-rule-for-total-derivatives]]: $D(g\\circ h)(x)=Dg(h(x))Dh(x)$ under the stated finite-dimensional differentiability hypotheses.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §§8.3–8.4.1",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-reverse-mode-computes-gradient",
+        "kind": "theorem",
+        "title": "Reverse mode computes the exact gradient of the real-arithmetic graph",
+        "deps": [
+          "def-finite-straight-line-computational-program",
+          "lem-finite-straight-line-program-defines-c1-map",
+          "alg-reverse-mode-automatic-differentiation",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 2,
+        "statement": "For a finite $C^1$ program with one scalar output $f$, on a fixed strict branch and at every admissible $x$, the reverse-mode algorithm returns $Df(x)^T1$, the gradient of $f$. More precisely, at any operation node $i$, if its value is temporarily treated as an independent variable and all later operations are recomputed from it, then the accumulated cotangent at $i$ is the derivative of the scalar output with respect to that independent node value.",
+        "strategy": "direct\n\n**Given:** The graph, its admissible input $x$, and a fixed strict branch.\n\n[F1] [[def-finite-straight-line-computational-program]]: the output is obtained from finitely many primitive nodes in topological order, and repeated parent slots are distinct edges.\n\n[F2] [[lem-finite-straight-line-program-defines-c1-map]]: every node map is $C^1$ on the fixed branch.\n\n[F3] [[alg-reverse-mode-automatic-differentiation]]: reverse mode seeds the scalar output with cotangent $1$ and adds $D_k\\phi_j^T\\bar z_j$ to each parent slot in reverse topological order.\n\n[F4] [[thm-chain-rule-for-total-derivatives]]: the derivative of a composition is the ordered composition of its total derivatives.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §§8.3–8.4.1",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            },
+            {
+              "title": "Atilım Güneş Baydin and Barak A. Pearlmutter, Automatic Differentiation of Algorithms for Machine Learning, complete arXiv text, §§2–3",
+              "url": "https://arxiv.org/pdf/1404.7456",
+              "locator": "Complete 7-page article, §§2–3.2 and §4 Hessian-vector product discussion, printed pp. 2–5."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-reverse-mode-work-and-tape-storage-bound",
+        "kind": "theorem",
+        "title": "Reverse-mode work is a fixed multiple of primal work under explicit primitive-cost bounds",
+        "deps": [
+          "def-finite-straight-line-computational-program",
+          "alg-reverse-mode-automatic-differentiation"
+        ],
+        "dependency_level": 2,
+        "statement": "Fix a finite set of scalar/vector primitive types with at most $r$ parent slots per operation. Suppose each operation $j$ has primal work $w_j\\ge1$, its local vector-Jacobian product costs at most $c w_j$, and accumulating each parent-slot contribution costs at most $a$ operations. Count all state-vector dimensions and input-gradient entries in the primal-tape size $S$. Then the exact reverse-mode algorithm for a scalar output uses at most $(1+c+ar)\\sum_{j=1}^T w_j$ operations for the primal evaluation, reverse sweep, and parent accumulations, and stores $O(S)$ scalar entries. Opaque solver calls are excluded unless their primal and derivative costs satisfy the same hypotheses.",
+        "strategy": "direct\n\n**Given:** A finite graph and the stated primitive-cost model, with $W:=\\sum_{j=1}^T w_j$.\n\n[F1] [[def-finite-straight-line-computational-program]]: there are finitely many topologically ordered nodes and the primal tape stores their values and parent slots.\n\n[F2] [[alg-reverse-mode-automatic-differentiation]]: reverse mode evaluates each primitive once in the primal pass, then visits each node once and applies one local vector-Jacobian product per node while accumulating a contribution for each parent slot.\n\n[A1] The primitive set has fixed finite type and bounded dimensions. Local primal, pullback, and parent-accumulation costs obey the constants $w_j,c,a,r$ in the statement; an opaque solver call has no uncharged derivative cost.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §§8.3–8.4",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            },
+            {
+              "title": "W. Baur and V. Strassen, The Complexity of Partial Derivatives, Theoretical Computer Science 22 (1983), §§2 and 4",
+              "url": "https://web.vu.lt/mif/s.jukna/tropical/Baur-Strassen.pdf",
+              "locator": "Complete 14-page article, §2 Theorem 1 and proof, printed pp. 318–322; §4 Theorem 2 and proof sketch, printed pp. 329–330."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+        "kind": "theorem",
+        "title": "Uniform-block and binomial checkpoint schedules preserve reverse adjoints with stated costs",
+        "deps": [
+          "def-finite-straight-line-computational-program",
+          "alg-checkpointed-reverse-schedules",
+          "alg-reverse-mode-automatic-differentiation",
+          "thm-reverse-mode-computes-gradient"
+        ],
+        "dependency_level": 3,
+        "statement": "For the finite-dimensional $C^1$ transition sequences on a fixed strict branch defined in [[alg-checkpointed-reverse-schedules]], provided every schedule replay remains in the declared domains, both schedules return the same terminal value and initial-state cotangent as an uncheckpointed reverse sweep. In uniform-block mode, if $T,m\\ge1$, $q=\\lceil T/m\\rceil$, and the block lengths are $r_1,\\ldots,r_s$, the number of additional unrecorded forward evaluations is exactly $\\sum_{\\ell=1}^s r_\\ell(r_\\ell-1)/2$, at most $m q(q-1)/2$. At most $m$ checkpoint states are saved, with one live replay state and one local step tape. In binomial mode, $C(d,t)=\\binom{d+t}{d}$; any $T\\le C(d,t)$ steps can be reversed with at most $d$ saved snapshots, one recorded forward evaluation and one reverse evaluation per step, at most $t$ additional unrecorded forward evaluations per step, total work at most $\\widehat W+\\overline W+tW$, and storage $G+(d+1)R_s$. Here $W$ is the total cost of one unrecorded full forward pass, $\\widehat W$ the sum of recorded one-step forward costs, $\\overline W$ the sum of local reverse costs, $R_s$ bounds scalar storage for one primal state, and $G$ bounds the largest one-step tape and local reverse scratch, the constant number of live cotangent/work vectors, and scalar recursion-frame records, excluding saved states and one live primal state.",
+        "strategy": "direct\n\n**Given:** The deterministic transitions, exact local reverse rules, and either schedule mode with its stated finite integer parameters.\n\n[F1] [[alg-checkpointed-reverse-schedules]]: uniform mode restores a saved block start and replays to each step; binomial mode splits a block into a left and right interval and reverses the right interval before the left.\n\n[F2] [[thm-reverse-mode-computes-gradient]]: applying each exact local reverse rule once in reverse transition order gives the derivative of the composed real-arithmetic map.\n\n[F3] [[def-finite-straight-line-computational-program]]: replay is deterministic and a graph node's local reverse rule uses the primitive inputs on its tape.",
+        "sources": {
+          "references": [
+            {
+              "title": "A. Griewank, Achieving Logarithmic Growth of Temporal and Spatial Complexity in Reverse Automatic Differentiation, §§4–6 and Theorem 6.1",
+              "url": "https://web.archive.org/web/20210506204927/http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.455.4143&rep=rep1&type=pdf",
+              "locator": "Complete 21-page article, §§1 and 3–6; especially §6, Theorem 6.1 and equations (13)–(16), printed pp. 11–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-finite-iteration-sensitivity-bound-and-residual-limitation",
+        "kind": "theorem",
+        "title": "Finite fixed-point iteration sensitivities differ from the implicit sensitivity with an explicit bound",
+        "deps": [
+          "alg-differentiate-finite-fixed-point-iteration",
+          "thm-euclidean-implicit-function-theorem",
+          "thm-forward-mode-computes-directional-derivative",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $G(z,\\theta)$ be $C^2$ near $(z_*,\\theta_0)$, with $z_*=G(z_*,\\theta_0)$. Let $D$ be an open convex state neighborhood of $z_*$ on which $G$ is defined and $C^2$ near $D\\times\\{\\theta_0\\}$. Assume $G(D,\\theta_0)\\subseteq D$, $\\|G_z(z,\\theta_0)\\|\\le q<1$, and $G_z,G_\\theta$ are Lipschitz in $z$ with constants $L_z,L_\\theta$. Let the initial map $z_0(\\theta)$ be $C^1$ and its iterates remain in $D$. Write $s_*=D\\phi(\\theta_0)$ for the local exact fixed-point branch supplied by the implicit function theorem, $e_k=D_\\theta z_k(\\theta_0)$, $\\delta_0=\\|z_0(\\theta_0)-z_*\\|$, $d_0=\\|e_0-s_*\\|$, and $C=L_z\\|s_*\\|+L_\\theta$. For every integer $K\\ge1$,\n$$\\|z_K(\\theta_0)-z_*\\|\\le q^K\\delta_0,\\qquad \\|e_K-s_*\\|\\le q^K d_0+C K q^{K-1}\\delta_0,$$\nwith $q^0=1$ when $q=0,K=1$. If $R(z,\\theta)=z-G(z,\\theta)$ and $r_K=R(z_K(\\theta_0),\\theta_0)$, then $(1-q)\\|z_K-z_*\\|\\le\\|r_K\\|$. The derivative error is not bounded by the residual alone: for $G(z,\\theta)=qz+(1-q)\\theta$, $\\theta_0=0$, and $z_0(\\theta)=0$, every finite $K$ has residual zero at $\\theta_0$ but $e_K=1-q^K\\ne1=s_*$ when $0<q<1$.",
+        "strategy": "direct\n\n**Given:** The $C^2$ iteration map, invariant convex state neighborhood, contraction and derivative-Lipschitz bounds, fixed point, differentiable initial map, and finite iteration count.\n\n[F1] [[alg-differentiate-finite-fixed-point-iteration]]: $z_{k+1}=G(z_k,\\theta)$, and the procedure applies forward mode to the finite composition.\n\n[F2] [[thm-euclidean-implicit-function-theorem]]: for $R(z,\\theta)=z-G(z,\\theta)$, an invertible $R_z$ at a fixed point gives a local $C^1$ solution branch and its derivative formula.\n\n[F3] [[thm-forward-mode-computes-directional-derivative]]: exact forward mode returns the derivative of the finite graph in every input direction.\n\n[F4] [[thm-chain-rule-for-total-derivatives]]: derivatives of finite compositions satisfy the chain rule.\n\n[A1] The stated invariant-neighborhood, contraction, Lipschitz, and initial-map hypotheses hold on the neighborhoods used below.",
+        "sources": {
+          "references": [
+            {
+              "title": "Atilım Güneş Baydin and Barak A. Pearlmutter, Automatic Differentiation of Algorithms for Machine Learning, complete arXiv text, §§2–3",
+              "url": "https://arxiv.org/pdf/1404.7456",
+              "locator": "Complete 7-page article, §§2–3.2 and §4 Hessian-vector product discussion, printed pp. 2–5."
+            },
+            {
+              "title": "J. Lebl, Basic Analysis II, Theorem 8.5.6 and proof, §8.5.1",
+              "url": "https://www.jirka.org/ra/html/sec_svinvfuncthm.html",
+              "locator": "Basic Analysis II §8.5.1, Theorem 8.5.6 and its complete proof."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-forward-over-reverse-computes-hessian-vector-product",
+        "kind": "theorem",
+        "title": "Forward-over-reverse mode computes the Hessian-vector product",
+        "deps": [
+          "def-finite-straight-line-computational-program",
+          "lem-finite-straight-line-program-defines-c2-map",
+          "alg-forward-over-reverse-hessian-vector-product",
+          "thm-forward-mode-computes-directional-derivative",
+          "thm-reverse-mode-computes-gradient",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $f$ be the scalar output of a finite $C^2$ graph on a fixed strict branch. At every admissible $x$ and direction $v$, the forward-over-reverse algorithm returns $D(\\operatorname{grad} f)(x)v$, the Hessian-vector product $H_f(x)v$. No Hessian symmetry assumption is needed for this identity.",
+        "strategy": "direct\n\n**Given:** The $C^2$ graph, input $x$, and direction $v$.\n\n[F1] [[def-finite-straight-line-computational-program]]: the program uses finite $C^2$ real primitive maps on a fixed strict branch.\n\n[F2] [[lem-finite-straight-line-program-defines-c2-map]]: the scalar output $f$ is $C^2$, so its gradient map is differentiable.\n\n[F3] [[thm-forward-mode-computes-directional-derivative]]: the forward tangent at each node equals the directional derivative of that node value.\n\n[F4] [[thm-reverse-mode-computes-gradient]]: at each internal node, the reverse accumulator is the derivative of the downstream output with respect to an independent node value; at inputs it is the gradient of $f$.\n\n[F5] [[alg-forward-over-reverse-hessian-vector-product]]: the reverse update is $A^T\\bar z_j$ and its directional derivative update is $A^T\\dot{\\bar z}_j+(DA[\\dot z_{pa}])^T\\bar z_j$.\n\n[F6] [[thm-chain-sum-product-and-composition-rules-for-banach-derivatives]]: composition and bounded-bilinear product obey the chain and product rules; finite-dimensional matrix multiplication is such a product.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §8.4.1",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-graph-gradient-error-from-local-jacobian-perturbations",
+        "kind": "theorem",
+        "title": "Local Jacobian perturbations give a pathwise bound for graph-gradient error",
+        "deps": [
+          "def-finite-straight-line-computational-program",
+          "thm-reverse-mode-computes-gradient"
+        ],
+        "dependency_level": 3,
+        "statement": "For a finite scalar-output graph on one fixed strict branch, associate to each parent-slot edge $e$ the exact local derivative map $A_e$ at the exact real-arithmetic primal values. Suppose a reverse recurrence instead uses local maps $\\widetilde A_e$ from the same branch satisfying $\\|\\widetilde A_e-A_e\\|\\le\\eta_e$, with exact accumulation arithmetic. For an input block $i$, let $\\mathcal P(i,o)$ be the finite directed paths from that block to output $o$, and order the edges of a path $\\pi=(e_1,\\ldots,e_s)$ from input to output. The exact gradient contribution is the transpose of $A_{e_s}\\cdots A_{e_1}$, and the perturbed recurrence returns the corresponding sum using $\\widetilde A_e$. It obeys\n$$\\|\\widetilde g_i-g_i\\|\\le\\sum_{\\pi\\in\\mathcal P(i,o)}\\sum_{\\ell=1}^s\\eta_{e_\\ell}\\left(\\prod_{r<\\ell}\\|A_{e_r}\\|\\right)\\left(\\prod_{r>\\ell}(\\|A_{e_r}\\|+\\eta_{e_r})\\right).$$\nThe bound covers local Jacobian and derivative-evaluation errors represented by $\\eta_e$. It does not include roundoff in the reverse accumulation additions.",
+        "strategy": "direct\n\n**Given:** A finite $C^1$ graph on a fixed strict branch, exact edge Jacobians $A_e$, perturbed edge Jacobians $\\widetilde A_e$, and exact real accumulation of the perturbed reverse recurrence.\n\n[F1] [[def-finite-straight-line-computational-program]]: a graph is finite and acyclic, and each parent slot defines a separate edge with a local derivative map.\n\n[F2] [[thm-reverse-mode-computes-gradient]]: exact reverse accumulation returns the gradient of the graph's scalar output.\n\n[A1] Each edge perturbation satisfies the stated operator-norm bound; all sums and products in this theorem are exact real arithmetic.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §§8.3–8.4.1",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            },
+            {
+              "title": "A. Griewank, Achieving Logarithmic Growth of Temporal and Spatial Complexity in Reverse Automatic Differentiation, §1",
+              "url": "https://web.archive.org/web/20210506204927/http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.455.4143&rep=rep1&type=pdf",
+              "locator": "Complete 21-page article, §§1 and 3–6; especially §6, Theorem 6.1 and equations (13)–(16), printed pp. 11–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "rem-real-arithmetic-graph-versus-rounded-execution",
+        "kind": "remark",
+        "title": "Real-arithmetic graph derivatives and rounded execution are different objects",
+        "deps": [
+          "def-finite-straight-line-computational-program",
+          "thm-graph-gradient-error-from-local-jacobian-perturbations",
+          "lem-certified-linear-solve-jacobian-and-pullback-error"
+        ],
+        "dependency_level": 4,
+        "statement": "The exact AD identities refer to the real-arithmetic graph and its exact primitive derivatives. A floating execution uses rounded primal values and derivative arithmetic; its returned AD quantity is not asserted to be the ordinary derivative of the end-to-end rounded machine map. The theorem [[thm-graph-gradient-error-from-local-jacobian-perturbations]] propagates specified local Jacobian discrepancies with exact accumulation and excludes rounding in reverse accumulation additions.\n\nFor a concrete mathematical solve primitive, [[lem-certified-linear-solve-jacobian-and-pullback-error]] supplies those discrepancies. With stored primal $\\widehat x$, fixed approximate inverse $B$ assembled from basis solves, certified $\\|I-AB\\|_2\\le d<1$, $\\|b-A\\widehat x\\|_2\\le\\rho$, $\\|B\\|_2\\le M$, and $K=M/(1-d)$, the vector and matrix edges have $\\eta_b=Kd$ and $\\eta_A=Kd\\|\\widehat x\\|+K^2\\rho$. Its additional explicit dot/outer-product allowances cover rounded pullback evaluation. Triangular, successful Cholesky, and QR backends are admissible once those residuals are certified; a small factorization residual alone is insufficient. The lemma includes the derivative-evaluation-point error, conditioning, arithmetic success and replay hypotheses. At the implicit example's $A(0)=I$, the stored exact solves give $B=I$, $\\widehat x=(2,1)^T$, $d=\\rho=0$, and every operation in that particular adjoint evaluation is exact, so its derivative is exactly $-1$.\n\nA Cholesky or QR factor-output primitive is a different smooth map from the mathematical solve. Its derivative must be evaluated on one fixed strict branch, with its own local derivative errors, or its finite loop must be expanded into the scalar primitives of the graph. The solve bound does not identify a factorization residual with a factor-output derivative bound.",
+        "strategy": "The exact AD identities refer to the real-arithmetic graph and its exact primitive derivatives. A floating execution uses rounded primal values and derivative arithmetic; its returned AD quantity is not asserted to be the ordinary derivative of the end-to-end rounded machine map. The theorem [[thm-graph-gradient-error-from-local-jacobian-perturbations]] propagates specified local Jacobian discrepancies with exact accumulation and excludes rounding in reverse accumulation additions.\n\nFor a concrete mathematical solve primitive, [[lem-certified-linear-solve-jacobian-and-pullback-error]] supplies those discrepancies. With stored primal $\\widehat x$, fixed approximate inverse $B$ assembled from basis solves, certified $\\|I-AB\\|_2\\le d<1$, $\\|b-A\\widehat x\\|_2\\le\\rho$, $\\|B\\|_2\\le M$, and $K=M/(1-d)$, the vector and matrix edges have $\\eta_b=Kd$ and $\\eta_A=Kd\\|\\widehat x\\|+K^2\\rho$. Its additional explicit dot/outer-product allowances cover rounded pullback evaluation. Triangular, successful Cholesky, and QR backends are admissible once those residuals are certified; a small factorization residual alone is insufficient. The lemma includes the derivative-evaluation-point error, conditioning, arithmetic success and replay hypotheses. At the implicit example's $A(0)=I$, the stored exact solves give $B=I$, $\\widehat x=(2,1)^T$, $d=\\rho=0$, and every operation in that particular adjoint evaluation is exact, so its derivative is exactly $-1$.\n\nA Cholesky or QR factor-output primitive is a different smooth map from the mathematical solve. Its derivative must be evaluated on one fixed strict branch, with its own local derivative errors, or its finite loop must be expanded into the scalar primitives of the graph. The solve bound does not identify a factorization residual with a factor-output derivative bound.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §§8.3–8.4.1",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            },
+            {
+              "title": "A. Griewank, Achieving Logarithmic Growth of Temporal and Spatial Complexity in Reverse Automatic Differentiation, §2",
+              "url": "https://web.archive.org/web/20210506204927/http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.455.4143&rep=rep1&type=pdf",
+              "locator": "Complete 21-page article, §§1 and 3–6; especially §6, Theorem 6.1 and equations (13)–(16), printed pp. 11–16."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-certified-linear-solve-jacobian-and-pullback-error",
+        "kind": "lemma",
+        "title": "Certified inverse defects and primal residuals bound linear-solve Jacobian and pullback errors",
+        "deps": [
+          "thm-implicit-differentiation-forward-and-adjoint-formulas",
+          "lem-rounded-linear-and-normal-residual-certificates",
+          "thm-singular-value-decomposition"
+        ],
+        "statement": "For the real mathematical solve primitive $\\phi(A,b)=A^{-1}b$, let $A,B\\in\\mathbb R^{n\\times n}$, $b,\\widehat x\\in\\mathbb R^n$, $n\\ge1$, and suppose certified exact-residual bounds satisfy\n$$\\|I-AB\\|_2\\le d<1,\\qquad \\|b-A\\widehat x\\|_2\\le\\rho,\\qquad \\|B\\|_2\\le M,\\qquad K=\\frac{M}{1-d}.$$\nThen $A$ is invertible; writing $x=A^{-1}b$, the fixed linear derivative approximations $\\widetilde J_bh=Bh$ and $\\widetilde J_AH=-BH\\widehat x$ obey\n$$\\|\\widetilde J_b-J_b\\|\\le\\eta_b=Kd,\\qquad \\|\\widetilde J_A-J_A\\|\\le\\eta_A=Kd\\|\\widehat x\\|_2+K^2\\rho.$$\nUse Euclidean vector norms and Frobenius matrix-input norm. Their adjoints are $B^Tc$ and $-(B^Tc)\\widehat x^T$. If these adjoints are evaluated by successful length-$n$ rounded real dots and componentwise outer products, put $t=\\gamma_n\\|B\\|_F$, assuming $nu<1$. The resulting cotangent errors are bounded by $(\\eta_b+t)\\|c\\|_2$ and $[\\eta_A+(t+u(M+t))\\|\\widehat x\\|_2]\\|c\\|_2$, respectively. These are derivative approximations to the mathematical solve map, not derivatives of the rounded program.\n\nThe fixed $B$ may be assembled from stored basis-vector solves using a triangular, Cholesky or QR backend; its defect must be certified rather than inferred from a factor residual. Replay must preserve the same $\\widehat x,B$ and strict graph branch. Reverse accumulation additions are excluded.",
+        "strategy": "1.1 For every $z$, $\\|ABz\\|\\ge(1-d)\\|z\\|$. Thus [F3] makes $AB$, hence both square factors, invertible and gives $\\|(AB)^{-1}\\|\\le1/(1-d)$. Since $A^{-1}=B(AB)^{-1}$, $\\|A^{-1}\\|\\le K$. The identity $B-A^{-1}=A^{-1}(AB-I)$ gives $\\|B-A^{-1}\\|\\le Kd$, while $\\widehat x-x=A^{-1}(A\\widehat x-b)$ gives $\\|\\widehat x-x\\|\\le K\\rho$. The residuals in these identities are exact; [F2] explains how to certify them from rounded evaluations. [given, F2, F3, algebra]\n\n1.2 Apply [F1] at the exact point $(A,b)$. For the matrix edge, $BH\\widehat x-A^{-1}Hx=(B-A^{-1})H\\widehat x+A^{-1}H(\\widehat x-x)$. Since $\\|H\\|_2\\le\\|H\\|_F$, step 1.1 gives $\\eta_A$; the vector edge gives $\\eta_b$. Taking Euclidean/Frobenius adjoints yields the stated pullbacks with the same norm discrepancies. This explicitly accounts for the perturbed primal evaluation point through $\\rho$. [F1, step 1.1, algebra]\n\n2.1 Real dot-product coefficient expansion bounds $\\|\\widehat\\lambda-B^Tc\\|_2\\le t\\|c\\|_2$, hence $\\|\\widehat\\lambda\\|_2\\le(M+t)\\|c\\|_2$. Each rounded outer-product entry has error at most $u|\\widehat\\lambda_i\\widehat x_j|$, so its Frobenius error is at most $u(M+t)\\|\\widehat x\\|_2\\|c\\|_2$. Combine these with step 1.2 and the contribution $t\\|\\widehat x\\|_2\\|c\\|_2$ from the rounded adjoint solve. [given, step 1.2, algebra]\n\n2.2 For each realized nonzero $c$, any cotangent error vector $z$ is the action on $c$ of the linear map $zc^T/\\|c\\|^2$, whose induced norm is $\\|z\\|/\\|c\\|$; vectorize the matrix cotangent for the matrix edge. When $c=0$, successful operations return exact zero. Thus the realized rounded pullbacks admit local linear-map perturbations with the displayed bounds, without asserting global linearity of rounding. The graph perturbation theorem may propagate these realized maps with exact accumulation. [step 2.1, algebra, construct] ∎",
+        "sources": [
+          {
+            "title": "Stuart and Voss, Matrix Analysis and Algorithms",
+            "url": "https://www.seehuhn.de/publications/StuaVo08/numlinalg.pdf"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2311,
+    "id": "automatic-differentiation-and-computational-graphs-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Automatic differentiation and computational graphs — Examples",
+    "companion": "automatic-differentiation-and-computational-graphs",
+    "requires": [
+      "automatic-differentiation-and-computational-graphs"
+    ],
+    "items": [
+      {
+        "id": "ex-branchwise-ad-at-the-absolute-value-switch",
+        "kind": "example",
+        "title": "Branchwise AD for absolute value and the nondifferentiable switch",
+        "deps": [
+          "def-finite-straight-line-computational-program"
+        ],
+        "dependency_level": 1,
+        "statement": "The primitive $f(x)=|x|$ has two strict branches: $f(x)=x$ for $x>0$ and $f(x)=-x$ for $x<0$. Branchwise AD returns derivative $1$ on the positive branch and $-1$ on the negative branch. At the switch $x=0$ it returns NONDIFFERENTIABLE.",
+        "strategy": "direct\n\n**Given:** The absolute-value primitive with the two strict branch formulas.\n\n[F1] [[def-finite-straight-line-computational-program]]: a piecewise primitive uses the derivative of its unique strict active branch and returns NONDIFFERENTIABLE at a branch boundary.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §§8.3–8.4",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-implicit-linear-solve-adjoint",
+        "kind": "example",
+        "title": "An implicit linear solve and its adjoint gradient",
+        "deps": [
+          "thm-implicit-differentiation-forward-and-adjoint-formulas",
+          "lem-certified-linear-solve-jacobian-and-pullback-error"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $A(\\theta)=\\begin{bmatrix}1&\\theta\\\\0&1\\end{bmatrix}$, $b=(2,1)^T$, and define $u(\\theta)$ by $A(\\theta)u(\\theta)=b$. For the scalar objective $J(\\theta)=\\begin{bmatrix}1&1\\end{bmatrix}u(\\theta)$, at $\\theta=0$ the exact derivative and the adjoint formula both equal $-1$.",
+        "strategy": "**Proof technique:** direct solve and adjoint substitution.\n\n1.1 The system gives $u_2=1$ and $u_1+\\theta u_2=2$, hence $u(\\theta)=(2-\\theta,1)^T$ and $J(\\theta)=3-\\theta$. Therefore $J'(0)=-1$. [given, algebra]\n\n2.1 Write $R(u,\\theta)=A(\\theta)u-b$. At $\\theta=0$, $u=(2,1)^T$, $R_u=A(0)=I$, $R_\\theta=A_\\theta u=(1,0)^T$, and $J_u=(1,1)$. The adjoint equation $R_u^T\\lambda=J_u^T$ gives $\\lambda=(1,1)^T$. [given, step 1.1, algebra]\n\n3.1 The objective has no explicit $\\theta$ dependence, so $J_\\theta=0$; the adjoint formula gives $J_\\theta-\\lambda^TR_\\theta=-(1,1)\\cdot(1,0)=-1$. [F1, step 2.1, algebra]\n\n4.1 The adjoint result agrees with the direct derivative in step 1.1, verifying this nonsingular linear-solve instance. [step 1.1, step 3.1]\n\n4.2 In any arithmetic satisfying the operationwise model and representing $0,1,2,3$, with these small operations in range, at $\\theta=0$ the primal and basis solves give $\\widehat x=(2,1)^T$ and $B=I$ exactly. Their inverse defect and primal residual are zero. The certified solve-Jacobian result [[lem-certified-linear-solve-jacobian-and-pullback-error]] therefore gives zero fixed-map discrepancy; the actual dot and product operations here are also exact, and return derivative $-1$. [F2, step 1.1, step 2.1, step 3.1, algebra] ∎",
+        "sources": {
+          "references": [
+            {
+              "title": "J. Lebl, Basic Analysis II, Theorem 8.5.6 and proof, §8.5.1",
+              "url": "https://www.jirka.org/ra/html/sec_svinvfuncthm.html",
+              "locator": "Basic Analysis II §8.5.1, Theorem 8.5.6 and its complete proof."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-reverse-euler-trajectory-tape",
+        "kind": "example",
+        "title": "Reverse-mode differentiation of an Euler trajectory tape",
+        "deps": [
+          "alg-reverse-mode-automatic-differentiation",
+          "thm-reverse-mode-computes-gradient"
+        ],
+        "dependency_level": 3,
+        "statement": "Take two explicit Euler updates for $x'=\\alpha x$ with step $h=1/2$, initial state $x_0=1$, and scalar output $J=x_2$:\n$$x_{k+1}=x_k+h\\alpha x_k,\\qquad k=0,1.$$\nAt $\\alpha=1$, the tape has $x_1=3/2$ and $x_2=9/4$; reverse mode returns $dJ/d\\alpha=3/2$.",
+        "strategy": "direct\n\n**Given:** The two-step Euler graph, $x_0=1$, $h=1/2$, $\\alpha=1$, and output $J=x_2$.\n\n[F1] [[alg-reverse-mode-automatic-differentiation]]: for each transition, reverse mode applies its local transpose derivative to the incoming cotangent and adds parameter contributions.\n\n[F2] [[thm-reverse-mode-computes-gradient]]: the returned parameter cotangent equals the exact derivative of this scalar graph.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §§8.3–8.4",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-shared-expression-forward-and-reverse-graph",
+        "kind": "example",
+        "title": "Forward and reverse derivatives on a shared-expression graph",
+        "deps": [
+          "def-finite-straight-line-computational-program",
+          "thm-forward-mode-computes-directional-derivative",
+          "thm-reverse-mode-computes-gradient"
+        ],
+        "dependency_level": 3,
+        "statement": "Consider the real-arithmetic graph\n$$z_1=x+y,\\qquad z_2=z_1z_1,\\qquad z_3=xy,\\qquad f=z_2+z_3.$$\nAt $(x,y)=(1,2)$ it has output $f=11$. Both forward and reverse mode should give gradient $(8,7)$; the repeated parent slot in $z_2$ tests that its two edge contributions are both accumulated.",
+        "strategy": "direct\n\n**Given:** The graph and input $(x,y)=(1,2)$.\n\n[F1] [[def-finite-straight-line-computational-program]]: repeated parent slots count as separate edges in the finite real-arithmetic graph.\n\n[F2] [[thm-forward-mode-computes-directional-derivative]]: forward mode returns $Df(x,y)(u,v)$ for any direction $(u,v)$.\n\n[F3] [[thm-reverse-mode-computes-gradient]]: reverse mode returns the exact input gradient of the scalar graph output.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 18.S096, Matrix Calculus for Machine Learning and Beyond, complete lecture notes, Chapter 8 §8.3",
+              "url": "https://live.ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2023/mit18_s096iap23_lec_full.pdf",
+              "locator": "Complete 102-page course notes, Chapter 8 §§8.3–8.4.1, printed pp. 55–63."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

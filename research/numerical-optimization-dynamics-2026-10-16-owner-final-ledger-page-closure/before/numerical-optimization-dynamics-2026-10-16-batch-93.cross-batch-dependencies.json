@@ -1,0 +1,133 @@
+[
+  {
+    "kind": "item",
+    "consumer": "def-smolyak-univariate-level-hierarchy",
+    "supplier": "alg-composite-simpson-rule",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "Input real numbers $a<b$, an integer $n\\ge2$, and a real-valued function\n$f:[a,b]\\to\\mathbb R$ evaluable at every point of $[a,b]$. If $n$ is odd, the\nprocedure returns invalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. If $a\\ge b$ or\n$n<2$, the procedure returns invalid-grid. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
+    "hypotheses": "The level hierarchy explicitly sets Q_l=Q_S(.;0,1,2^(l+1)); matched inputs are a<b, an even panel count at least two, and the exact-real finite weighted-sum convention.",
+    "evidence": "Inspected the current complete supplier body and matched the stated hypotheses to the consuming claim. The level hierarchy explicitly sets Q_l=Q_S(.;0,1,2^(l+1)); matched inputs are a<b, an even panel count at least two, and the exact-real finite weighted-sum convention. This is an interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-smolyak-four-dimensional-product-integrand",
+    "supplier": "def-na-clenshaw-curtis-quadrature",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "Let $a<b$, $m=(a+b)/2$, $d=(b-a)/2$, and $f\\in C[a,b]$. For $n\\ge1$, set $g(t):=f(m+dt)$ on $[-1,1]$, let $y_j=g(\\cos(j\\pi/n))$, and form $a_0,\\ldots,a_n$ from the DCT-I coefficients in [[thm-na-clenshaw-curtis-interpolation-coefficients]]. With the Chebyshev moments $\\mu_k$ of [[lem-na-chebyshev-integral-moments]], define\n$$Q_{n,[a,b]}(f):=d\\sum_{k=0}^{n}a_k\\mu_k.$$\nFor $n=0$, define instead\n$$Q_{0,[a,b]}(f):=(b-a)f(m),$$\nthe midpoint rule. This is the explicit endpoint and zero-degree convention for Clenshaw–Curtis quadrature. The sums and coefficients are exact real quantities; finite-precision evaluation is a separate algorithm.",
+    "hypotheses": "Step 1.1 uses the n=1 endpoint nodes and n=2 endpoint/midpoint nodes from the affine Chebyshev–Lobatto definition on [0,1]; the n=0 convention is not used.",
+    "evidence": "Inspected the current complete supplier body and matched the stated hypotheses to the consuming claim. Step 1.1 uses the n=1 endpoint nodes and n=2 endpoint/midpoint nodes from the affine Chebyshev–Lobatto definition on [0,1]; the n=0 convention is not used. This is an interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-smolyak-four-dimensional-product-integrand",
+    "supplier": "thm-na-clenshaw-curtis-exactness-and-near-best-error",
+    "status": "verified",
+    "source_section": "Statement",
+    "excerpt": "Let $a<b$, $n\\ge0$, and $f\\in C[a,b]$. Put $m=(a+b)/2$, $d=(b-a)/2$, and $g(t)=f(m+dt)$ on $[-1,1]$. Let $E_n(g)$ and $\\Lambda_n^L$ be the best uniform polynomial error and the Chebyshev–Lobatto interpolation norm from [[def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants]]. The rule $Q_{n,[a,b]}$ of [[def-na-clenshaw-curtis-quadrature]] is exact for every polynomial of degree at most $n$, and\n$$\\left|\\int_a^b f(x)\\,dx-Q_{n,[a,b]}(f)\\right|\\le(b-a)(1+\\Lambda_n^L)E_n(g).$$\nBecause affine pullback preserves the supremum norm and polynomial degree, $E_n(g)$ is also the best degree-$n$ uniform error of $f$ on $[a,b]$.",
+    "hypotheses": "Step 1.1 uses exactness only through degrees 1 and 2 for n=1,2 on [0,1], covered by the theorem for continuous polynomials and nonnegative n.",
+    "evidence": "Inspected the current complete supplier body and matched the stated hypotheses to the consuming claim. Step 1.1 uses exactness only through degrees 1 and 2 for n=1,2 on [0,1], covered by the theorem for continuous polynomials and nonnegative n. This is an interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-smolyak-signed-weights-polynomial-chaos-coefficient",
+    "supplier": "alg-composite-simpson-rule",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "Input real numbers $a<b$, an integer $n\\ge2$, and a real-valued function\n$f:[a,b]\\to\\mathbb R$ evaluable at every point of $[a,b]$. If $n$ is odd, the\nprocedure returns invalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. If $a\\ge b$ or\n$n<2$, the procedure returns invalid-grid. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
+    "hypotheses": "Fact F2 uses the exact endpoint weight h/3=1/(3*2^(ell+1)) on [0,1] for even panel counts 2^(ell+1), and the other weights are nonnegative.",
+    "evidence": "Inspected the complete current batch-20 supplier body and matched its hypotheses to the consuming claim. Fact F2 uses the exact endpoint weight h/3=1/(3*2^(ell+1)) on [0,1] for even panel counts 2^(ell+1), and the other weights are nonnegative. This interface check does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-smolyak-signed-weights-polynomial-chaos-coefficient",
+    "supplier": "def-gauss-quadrature-rule",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "Let $(a,b,m,2m-1,\\mu)$ be moment data as in\n[[def-gauss-moment-data]]. Let $p_m$ be its monic degree-$m$ orthogonal\npolynomial and write its ordered roots as\n$a<x_1<\\cdots<x_m<b$, as established in\n[[thm-gauss-orthogonal-polynomial-has-simple-interior-zeros]]. For\n$i=1,\\ldots,m$, define the Lagrange cardinal polynomial\n$$ \\ell_i(X):=\\prod_{\\substack{1\\le j\\le m\\\\j\\ne i}}\\frac{X-x_j}{x_i-x_j} $$\nusing the convention of [[def-cardinal-polynomial-interpolation]]. Define\nthe **Gaussian quadrature weights** and the **m-node Gaussian rule** by\n$$ w_i:=\\int_{[a,b]}\\ell_i(x)\\,d\\mu(x),\\qquad Q_m(f):=\\sum_{i=1}^{m}w_i f(x_i) $$\nfor any real-valued function $f$ defined at the nodes. This definition\nasserts no accuracy; well-definedness of the nodes, cardinal polynomials,\nweights, and finite sum is proved in\n[[lem-gauss-quadrature-rule-data-well-defined]].",
+    "hypotheses": "Step 3.1 uses the supplier finite weighted-sum form and its well-defined node weights; no Gaussian exactness for u is invoked.",
+    "evidence": "Inspected the current complete supplier body and matched the stated hypotheses to the consuming claim. Step 3.1 uses the supplier finite weighted-sum form and its well-defined node weights; no Gaussian exactness for u is invoked. This is an interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-smolyak-signed-weights-polynomial-chaos-coefficient",
+    "supplier": "def-tensor-product-gauss-rule",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "Let $d\\ge1$ and, for each coordinate $j=1,\\ldots,d$, let\n$Q_j(f)=\\sum_{i=1}^{m_j}w_i^{(j)}f(x_i^{(j)})$ be a well-defined Gaussian rule\nas in [[def-gauss-quadrature-rule]] and\n[[lem-gauss-quadrature-rule-data-well-defined]]. Its **tensor-product\nquadrature rule** is\n$$ Q_{\\otimes}(f):= \\sum_{i_1=1}^{m_1}\\cdots\\sum_{i_d=1}^{m_d} \\left(\\prod_{j=1}^{d}w_{i_j}^{(j)}\\right) f\\left(x_{i_1}^{(1)},\\ldots,x_{i_d}^{(d)}\\right). $$\nIts node set is the Cartesian product of the one-dimensional node sets; the\ndisplayed finite sum is its value on any function defined on that node set.",
+    "hypotheses": "Step 3.1 uses the exact tensor product formula, so each tensor weight is a product of coordinate weights; dimensions are two and all factors are positive.",
+    "evidence": "Inspected the current complete supplier body and matched the stated hypotheses to the consuming claim. Step 3.1 uses the exact tensor product formula, so each tensor weight is a product of coordinate weights; dimensions are two and all factors are positive. This is an interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-smolyak-signed-weights-polynomial-chaos-coefficient",
+    "supplier": "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+    "status": "verified",
+    "source_section": "Statement",
+    "excerpt": "Let $(a,b,m,2m-1,\\mu)$ be moment data as in\n[[def-gauss-moment-data]], and let $Q_m$ and $w_i$ be the rule and weights of\n[[def-gauss-quadrature-rule]]. For every real polynomial $f$ of degree at most\n$2m-1$,\n$$ \\int_{[a,b]} f(x)\\,d\\mu(x)=Q_m(f)=\\sum_{i=1}^{m}w_if(x_i). $$\nMoreover, $w_i>0$ for every $i$ and $\\sum_iw_i=\\mu([a,b])$.",
+    "hypotheses": "Step 3.1 uses only strict positivity of weights for valid positive-measure moment data; no degree/exactness conclusion is applied to the degree-16 example factor.",
+    "evidence": "Inspected the current complete supplier body and matched the stated hypotheses to the consuming claim. Step 3.1 uses only strict positivity of weights for valid positive-measure moment data; no degree/exactness conclusion is applied to the degree-16 example factor. This is an interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-smolyak-dyadic-tensor-simpson-convergence",
+    "supplier": "alg-composite-simpson-rule",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "Input real numbers $a<b$, an integer $n\\ge2$, and a real-valued function\n$f:[a,b]\\to\\mathbb R$ evaluable at every point of $[a,b]$. If $n$ is odd, the\nprocedure returns invalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. If $a\\ge b$ or\n$n<2$, the procedure returns invalid-grid. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
+    "hypotheses": "Step 1.2 regroups the batch-20 rule into two-panel blocks; its positive coefficients 1,4,1 and scale h/3 give block weights H(1,4,1)/6.",
+    "evidence": "Inspected the current complete supplier body and matched the stated hypotheses to the consuming claim. Step 1.2 regroups the batch-20 rule into two-panel blocks; its positive coefficients 1,4,1 and scale h/3 give block weights H(1,4,1)/6. This is an interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-smolyak-mixed-simpson-detail-decay",
+    "supplier": "alg-composite-simpson-rule",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "Input real numbers $a<b$, an integer $n\\ge2$, and a real-valued function\n$f:[a,b]\\to\\mathbb R$ evaluable at every point of $[a,b]$. If $n$ is odd, the\nprocedure returns invalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. If $a\\ge b$ or\n$n<2$, the procedure returns invalid-grid. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
+    "hypotheses": "Fact F3 uses the level-zero two-panel rule on [0,1], whose weights are 1/6, 4/6, and 1/6; step 1.1 uses the Simpson error theorem, while the hierarchy panels are even and at least two.",
+    "evidence": "Inspected the complete current batch-20 supplier body and matched its hypotheses to the consuming claim. Fact F3 uses the level-zero two-panel rule on [0,1], whose weights are 1/6, 4/6, and 1/6; step 1.1 uses the Simpson error theorem, while the hierarchy panels are even and at least two. This interface check does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-smolyak-mixed-simpson-detail-decay",
+    "supplier": "thm-composite-simpson-error-bound",
+    "status": "verified",
+    "source_section": "Statement",
+    "excerpt": "Let $a<b$, let $n\\ge2$ be an even integer, and put $h=(b-a)/n$. If\n$f\\in C^4([a,b])$, set $M_4=\\max_{x\\in[a,b]}|f^{(4)}(x)|$. Then the value\n$Q_S(f;a,b,n)$ of [[alg-composite-simpson-rule]] satisfies\n\n$$\\left|\\int_a^b f(x)\\,dx-Q_S(f;a,b,n)\\right|\\le\\frac{(b-a)h^4}{180}M_4.$$\n\nThe integral is the Riemann integral. This is an exact-arithmetic quadrature\nbound; evaluation and summation roundoff are not included.",
+    "hypotheses": "Step 1.1 applies the bound only to [0,1] sections in C^4, with even panel counts 2^(ell+1) and 2^ell. The stated constant (b-a)h^4/180 becomes 1/(180N^4).",
+    "evidence": "Inspected the current complete supplier body and matched the stated hypotheses to the consuming claim. Step 1.1 applies the bound only to [0,1] sections in C^4, with even panel counts 2^(ell+1) and 2^ell. The stated constant (b-a)h^4/180 becomes 1/(180N^4). This is an interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-smolyak-polynomial-multi-degree-exactness",
+    "supplier": "thm-composite-simpson-exact-through-degree-three",
+    "status": "verified",
+    "source_section": "Statement",
+    "excerpt": "Let $a<b$, let $n\\ge2$ be an even integer, and let\n$p(x)=c_0+c_1x+c_2x^2+c_3x^3$ with real coefficients. Then\n\n$$\\int_a^b p(x)\\,dx=Q_S(p;a,b,n),$$\n\nwhere $Q_S$ is the composite Simpson value of\n[[alg-composite-simpson-rule]].",
+    "hypotheses": "Step 4.1 applies the theorem on [0,1] to Q_l with n=2^(l+1), which is even and at least two; the polynomial degree is at most three. This establishes actual exactness degrees m_l=3 for the selected hierarchy.",
+    "evidence": "Inspected the complete batch-20 theorem body. Its interval and parity conditions hold for every selected level, so the actual level exactness premise is matched. This interface check does not claim supplier acceptance."
+  },
+  {
+    "kind": "page",
+    "consumer": "sparse-grid-cubature-and-mixed-regularity",
+    "supplier": "clenshaw-curtis-and-extrapolation-quadrature",
+    "status": "verified",
+    "evidence": "The current A-page requirement is retained. Batch 43 supplies the explicit n=0 midpoint and n≥1 Chebyshev–Lobatto quadrature definition and its polynomial exactness theorem. The B product example verifies the selected levels against these actual bodies; this interface review does not claim acceptance."
+  },
+  {
+    "kind": "page",
+    "consumer": "sparse-grid-cubature-and-mixed-regularity",
+    "supplier": "composite-quadrature-rules",
+    "status": "verified",
+    "evidence": "The current A-page requirement is retained. Batch 20 supplies the actual composite-Simpson algorithm and its C^4 error theorem, whose even-panel and interval hypotheses are stated in the inspected item bodies. This interface review does not claim acceptance of that draft page."
+  },
+  {
+    "kind": "page",
+    "consumer": "sparse-grid-cubature-and-mixed-regularity",
+    "supplier": "gaussian-quadrature",
+    "status": "verified",
+    "evidence": "The current A-page requirement is retained. Batch 82 supplies the Gaussian rule, tensor-product definition, and positive-weight theorem under its valid positive-measure moment-data hypotheses. The B sign comparison uses only that positive-weight conclusion; no supplier acceptance is claimed."
+  }
+]

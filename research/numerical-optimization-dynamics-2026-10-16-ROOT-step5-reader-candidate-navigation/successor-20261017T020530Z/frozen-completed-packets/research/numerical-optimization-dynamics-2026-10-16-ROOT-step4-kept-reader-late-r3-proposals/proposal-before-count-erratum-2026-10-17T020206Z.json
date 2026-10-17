@@ -1,0 +1,445 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "research_only": true,
+  "entries": [
+    {
+      "id": "alg-golub-kahan-lsqr-with-givens-and-status",
+      "batch": 88,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-88-step5-context.json",
+      "pointer": "/concerns/1",
+      "finding": {
+        "id": "alg-golub-kahan-lsqr-with-givens-and-status",
+        "concern": "Step 3 rotates matrix entries at positions “(i,i),(i+1,i)” for i=1,…,j, implicitly using one-based row and column labels. The cited def-matrix-space explicitly fixes zero-based coordinates. Declare the local one-based relabeling so these accesses, including the final row, are defined under the stated conventions.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "alg-golub-kahan-lsqr-with-givens-and-status",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The bidiagonal recurrences, breakdown handling, Givens rotations, and triangular solve are consistent. They produce the least-squares iterate in the stated Krylov subspace; the physical residual check and status priority handle the stated edge cases.",
+        "context_sha256": "6ffd1d644aed62a571983ecb8a13194bb757f552859258c486c66611aa1fee65",
+        "item_sha256": "bc15ebd930672f7ca9d8335393e7277c4de2ca77180ab0fdd433a81f8a06dfe2",
+        "at": "2026-10-17T01:54:10.120Z"
+      },
+      "canonical_path": "items/alg-golub-kahan-lsqr-with-givens-and-status.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/alg-golub-kahan-lsqr-with-givens-and-status.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/proposed/alg-golub-kahan-lsqr-with-givens-and-status.md",
+      "concern_index": 1,
+      "digest_pointer": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-88-step5-context.json",
+        "pointer": "/concerns/1"
+      },
+      "guard": {
+        "kind": "exact-byte-equality",
+        "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/alg-golub-kahan-lsqr-with-givens-and-status.md",
+        "action": "Refuse application unless current canonical source equals archived full preimage; root owns hashes/recert."
+      },
+      "admission_status": "Research-only proposal; no admission or native review coverage claimed.",
+      "verdict": "confirmed; smallest focused repair proposed",
+      "focused_evidence": "Both concerns are genuine local procedural omissions. The projected (j+1)-by-j matrix has canonical row indices 0..j and columns0..j-1, so explicit displayed one-based relabeling validates the last row j+1 at canonical j. Defining V_j=[v1,...,vj] at the beginning of step3 makes the best update well-typed before step4. No numerical operation, stopping threshold, accepted iterate or return priority changes. Zero initial residual, initial discrepancy, N=0, alpha1=0, a zero next beta/alpha, and small QR breakdown retain their original branches. This is one combined draft for native concerns1 and2, not two independent edits.",
+      "inspected_interfaces": [
+        "items/def-matrix-space.md"
+      ],
+      "consumer_reviews": [
+        {
+          "id": "thm-lsqr-residual-minimizes-on-krylov-subspace",
+          "source": "items/thm-lsqr-residual-minimizes-on-krylov-subspace.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/thm-lsqr-residual-minimizes-on-krylov-subspace.md",
+          "verdict": "compatible; no source repair needed",
+          "evidence": "Proof uses exactly the same recurrences, U/V column matrices, orthogonal Givens rotations, and projected solve. The new one-based display labels shift only small-system positions to the existing zero-based coordinates; neither AV=UB nor norm preservation/minimization changes. Its k=0 singleton-feasible-set case and nonbreakdown hypotheses remain valid."
+        },
+        {
+          "id": "cex-full-lsqr-can-amplify-data-noise",
+          "source": "items/cex-full-lsqr-can-amplify-data-noise.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/cex-full-lsqr-can-amplify-data-noise.md",
+          "verdict": "compatible; no source repair needed",
+          "evidence": "The continued one-step projected solve has B1=(N^-2,0)^T, RHS=(N^-1,0)^T and z1=N. The local labels (1,1),(2,1) now unambiguously mean canonical (0,0),(1,0), and V1 is the known first vector before the best update. This preserves the zero residual candidate before final status testing and the assigned algorithm initial discrepancy return at index zero. No counterexample or status priority changes."
+        }
+      ],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-88.proof-contracts.json",
+          "pointer": "/contracts/thm-lsqr-residual-minimizes-on-krylov-subspace/citations/0/quote",
+          "action": "Only after supported admission, mirror the exact changed source section. Original reader digest, concern and Luna keep remain historical."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-88.proof-contracts.json",
+          "pointer": "/contracts/cex-full-lsqr-can-amplify-data-noise/citations/0/quote",
+          "action": "Only after supported admission, mirror the exact changed source section. Original reader digest, concern and Luna keep remain historical."
+        }
+      ],
+      "original_statement_or_definition_changed": true,
+      "consumer_policy": "Complete current direct/indirect logical consumer closure reviewed by this reviewer. Empty closures are recorded explicitly; no unsupported downstream coverage claimed."
+    },
+    {
+      "id": "alg-golub-kahan-lsqr-with-givens-and-status",
+      "batch": 88,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-88-step5-context.json",
+      "pointer": "/concerns/2",
+      "finding": {
+        "id": "alg-golub-kahan-lsqr-with-givens-and-status",
+        "concern": "Step 3 updates x_best=x₀+Vⱼzⱼ before Step 4 defines Vⱼ=[v₁,…,vⱼ]. The intended matrix is immediate, but its definition should precede its first procedural use.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "alg-golub-kahan-lsqr-with-givens-and-status",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The bidiagonal recurrences, breakdown handling, Givens rotations, and triangular solve are consistent. They produce the least-squares iterate in the stated Krylov subspace; the physical residual check and status priority handle the stated edge cases.",
+        "context_sha256": "6ffd1d644aed62a571983ecb8a13194bb757f552859258c486c66611aa1fee65",
+        "item_sha256": "bc15ebd930672f7ca9d8335393e7277c4de2ca77180ab0fdd433a81f8a06dfe2",
+        "at": "2026-10-17T01:54:10.120Z"
+      },
+      "canonical_path": "items/alg-golub-kahan-lsqr-with-givens-and-status.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/alg-golub-kahan-lsqr-with-givens-and-status.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/proposed/alg-golub-kahan-lsqr-with-givens-and-status.md",
+      "concern_index": 2,
+      "digest_pointer": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-88-step5-context.json",
+        "pointer": "/concerns/2"
+      },
+      "guard": {
+        "kind": "exact-byte-equality",
+        "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/alg-golub-kahan-lsqr-with-givens-and-status.md",
+        "action": "Refuse application unless current canonical source equals archived full preimage; root owns hashes/recert."
+      },
+      "admission_status": "Research-only proposal; no admission or native review coverage claimed.",
+      "verdict": "confirmed; smallest focused repair proposed",
+      "focused_evidence": "Both concerns are genuine local procedural omissions. The projected (j+1)-by-j matrix has canonical row indices 0..j and columns0..j-1, so explicit displayed one-based relabeling validates the last row j+1 at canonical j. Defining V_j=[v1,...,vj] at the beginning of step3 makes the best update well-typed before step4. No numerical operation, stopping threshold, accepted iterate or return priority changes. Zero initial residual, initial discrepancy, N=0, alpha1=0, a zero next beta/alpha, and small QR breakdown retain their original branches. This is one combined draft for native concerns1 and2, not two independent edits.",
+      "inspected_interfaces": [
+        "items/def-matrix-space.md"
+      ],
+      "consumer_reviews": [
+        {
+          "id": "thm-lsqr-residual-minimizes-on-krylov-subspace",
+          "source": "items/thm-lsqr-residual-minimizes-on-krylov-subspace.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/thm-lsqr-residual-minimizes-on-krylov-subspace.md",
+          "verdict": "compatible; no source repair needed",
+          "evidence": "Proof uses exactly the same recurrences, U/V column matrices, orthogonal Givens rotations, and projected solve. The new one-based display labels shift only small-system positions to the existing zero-based coordinates; neither AV=UB nor norm preservation/minimization changes. Its k=0 singleton-feasible-set case and nonbreakdown hypotheses remain valid."
+        },
+        {
+          "id": "cex-full-lsqr-can-amplify-data-noise",
+          "source": "items/cex-full-lsqr-can-amplify-data-noise.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/cex-full-lsqr-can-amplify-data-noise.md",
+          "verdict": "compatible; no source repair needed",
+          "evidence": "The continued one-step projected solve has B1=(N^-2,0)^T, RHS=(N^-1,0)^T and z1=N. The local labels (1,1),(2,1) now unambiguously mean canonical (0,0),(1,0), and V1 is the known first vector before the best update. This preserves the zero residual candidate before final status testing and the assigned algorithm initial discrepancy return at index zero. No counterexample or status priority changes."
+        }
+      ],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-88.proof-contracts.json",
+          "pointer": "/contracts/thm-lsqr-residual-minimizes-on-krylov-subspace/citations/0/quote",
+          "action": "Only after supported admission, mirror the exact changed source section. Original reader digest, concern and Luna keep remain historical."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-88.proof-contracts.json",
+          "pointer": "/contracts/cex-full-lsqr-can-amplify-data-noise/citations/0/quote",
+          "action": "Only after supported admission, mirror the exact changed source section. Original reader digest, concern and Luna keep remain historical."
+        }
+      ],
+      "original_statement_or_definition_changed": true,
+      "consumer_policy": "Complete current direct/indirect logical consumer closure reviewed by this reviewer. Empty closures are recorded explicitly; no unsupported downstream coverage claimed."
+    },
+    {
+      "id": "lem-rooted-tree-generating-function-series",
+      "batch": 87,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-87-step5-context.json",
+      "pointer": "/concerns/2",
+      "finding": {
+        "id": "lem-rooted-tree-generating-function-series",
+        "concern": "Proof 1.2 uses 'The coefficients of U are a_k/k' before Proof 2.1 derives that identity. The formal calculation in 2.1 uses only the formal identity from 1.1 and can precede the convergence argument; the current order leaves this coefficient assertion temporarily unjustified.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_row": {
+        "id": "lem-rooted-tree-generating-function-series",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The coefficient extraction, convergence bounds, formal differentiation, and real inverse-branch argument are valid; no fatal defect found.",
+        "context_sha256": "3c395af56e0a8d0b9a67146ec7aa499e97a492e1b665bb6d155018eea02a1a05",
+        "item_sha256": "a9848aa5b86654d73c985e97980149bd2d8da9bd777c83c40d67f33dc3e3ad10",
+        "at": "2026-10-17T01:53:35.649Z"
+      },
+      "canonical_path": "items/lem-rooted-tree-generating-function-series.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/lem-rooted-tree-generating-function-series.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/proposed/lem-rooted-tree-generating-function-series.md",
+      "concern_index": 2,
+      "digest_pointer": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-87-step5-context.json",
+        "pointer": "/concerns/2"
+      },
+      "guard": {
+        "kind": "exact-byte-equality",
+        "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/lem-rooted-tree-generating-function-series.md",
+        "action": "Refuse application unless current canonical source equals archived full preimage; root owns hashes/recert."
+      },
+      "admission_status": "Research-only proposal; no admission or native review coverage claimed.",
+      "verdict": "confirmed; smallest focused repair proposed",
+      "focused_evidence": "The original convergence step uses U coefficients before their formal derivation. Lagrange-Burmann yields a_k from phi=e^u, H=u. Formal differentiation of T=ze^T and invertibility of1-T yield zTprime=T/(1-T), then U=T-T^2/2 gives zUprime=T and [z^k]U=a_k/k before any analytic convergence claim. Move that existing formal argument to1.2; move the ratio/geometric-tail argument to2.1 and cite1.2. Ratios of a_k, a_k/k and their derivative coefficients tend to e, so every radius below e^-1 has geometric majorants. The real branch remains nonnegative and cannot reach1 before the boundary e^-1; ue^-u is strictly increasing on[0,1). All series, inverse-branch range, identities and coefficients remain unchanged.",
+      "inspected_interfaces": [
+        "items/thm-lagrange-burmann-inversion.md",
+        "items/lem-convergent-power-series-termwise-differentiation.md"
+      ],
+      "consumer_reviews": [],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-87.proof-contracts.json",
+          "pointer": "/contracts/lem-rooted-tree-generating-function-series",
+          "action": "Move formal derivation2.1 to1.2; move convergence derivation1.2 to2.1 and add step1.2 input. Change final step3.1 reference from1.2 to2.1. Update all corresponding citation uses and per-step/boundary mirrors with this exact renumbering; preserve Statement."
+        }
+      ],
+      "original_statement_or_definition_changed": false,
+      "consumer_policy": "Proof/Verification-only repair; no downstream propagation proposed."
+    },
+    {
+      "id": "ex-smolyak-diagonal-ridge-breaks-mixed-regularity",
+      "batch": 93,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-93-step5-context.json",
+      "pointer": "/concerns/1",
+      "finding": {
+        "id": "ex-smolyak-diagonal-ridge-breaks-mixed-regularity",
+        "concern": "The Example says the pure fourth derivative 'fails to exist along the diagonal'. Under the stated one-sided endpoint convention this needs an interior qualifier: at (0,0), the fixed-y section is x³ on [0,1], and at (1,1) it is (1−x)³, so their fourth endpoint derivatives exist and equal zero. Step 1.1 correctly proves failure for y∈(0,1); the example's regularity counterexample remains valid.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "ex-smolyak-diagonal-ridge-breaks-mixed-regularity",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The section g(h)=|h|^3 has g'(0)=g''(0)=0, but g''(h)=6|h|, whose quotient at 0 has unequal one-sided limits. Thus ∂x^4 fails on the diagonal, violating the stated mixed-regularity hypothesis. The lower-order partial claims are sound.",
+        "context_sha256": "c4862541f8b2fff281b8904430c7cc37df5c6c0e6e91ce361b5e68986e252f3e",
+        "item_sha256": "032aa86af7c9865cd999d6d3a815362e05cbc2177fb962a54400f8f26bd64fb4",
+        "at": "2026-10-17T01:55:49.935Z"
+      },
+      "canonical_path": "items/ex-smolyak-diagonal-ridge-breaks-mixed-regularity.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/ex-smolyak-diagonal-ridge-breaks-mixed-regularity.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/proposed/ex-smolyak-diagonal-ridge-breaks-mixed-regularity.md",
+      "concern_index": 1,
+      "digest_pointer": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-93-step5-context.json",
+        "pointer": "/concerns/1"
+      },
+      "guard": {
+        "kind": "exact-byte-equality",
+        "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/ex-smolyak-diagonal-ridge-breaks-mixed-regularity.md",
+        "action": "Refuse application unless current canonical source equals archived full preimage; root owns hashes/recert."
+      },
+      "admission_status": "Research-only proposal; no admission or native review coverage claimed.",
+      "verdict": "confirmed; smallest focused repair proposed",
+      "focused_evidence": "Actual mixed-detail supplier uses one-sided endpoints. Fixing any y strictly between0 and1, g(h)=|h|^3 has gprime0=gsecond0=0 and gsecond(h)=6|h|; its third derivative at0 fails because the two quotient limits are6 and-6. Thus fourth derivative does not exist at each interior diagonal point. At endpoints, sections f(x,0)=x^3 and f(x,1)=(1-x)^3 have fourth one-sided derivatives0, and pure y derivatives follow by symmetry. Qualify only the advertised diagonal wording and explicitly retain these endpoint cases in Verification3.1. Continuous pure second partials6|x-y| and failure of required global mixed-fourth regularity remain intact.",
+      "inspected_interfaces": [
+        "items/lem-smolyak-mixed-simpson-detail-decay.md"
+      ],
+      "consumer_reviews": [],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-93.proof-contracts.json",
+          "pointer": "/contracts/ex-smolyak-diagonal-ridge-breaks-mixed-regularity",
+          "action": "Mirror the interior-diagonal qualifier and revised Verification3.1 explicit endpoint fourth-derivative-zero cases in derivation/boundary evidence. Do not imply failure at endpoint diagonal points."
+        }
+      ],
+      "original_statement_or_definition_changed": true,
+      "consumer_policy": "Complete current direct/indirect logical consumer closure reviewed by this reviewer. Empty closures are recorded explicitly; no unsupported downstream coverage claimed."
+    },
+    {
+      "id": "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination",
+      "batch": 90,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-90-step5-context.json",
+      "pointer": "/concerns/0",
+      "finding": {
+        "id": "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination",
+        "concern": "The instruction 'Construct the Chebyshev differentiation matrix D_N by [[alg-chebyshev-gauss-lobatto-differentiation-matrix]]' does not match the called procedure's explicit interface: that supplier inputs both N and nodal data U and says to 'return the derivative vector D_NU', without explicitly returning D_N. The BVP procedure has no U yet at this point. The supplier does construct D_N internally, so the intended matrix construction is immediately recoverable, but the procedure composition should specify that interface.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_row": {
+        "id": "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The descending node order is handled consistently: U₀=g₊ at x₀=1 and U_N=g₋ at x_N=−1. Boundary elimination gives the stated interior system, with singularity reported and no unsupported solvability or stability claim.",
+        "context_sha256": "31c6bdd9f152ca1d8c91a33fa9a9edeafe78bc29ab2a78dd5440bacc4a6a0896",
+        "item_sha256": "ba7f7df4217030288e516771c6503782fcd129e271d4d24bfaef4d7fd0c3ac77",
+        "at": "2026-10-17T01:54:18.657Z"
+      },
+      "canonical_path": "items/alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/proposed/alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination.md",
+      "concern_index": 0,
+      "digest_pointer": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-90-step5-context.json",
+        "pointer": "/concerns/0"
+      },
+      "guard": {
+        "kind": "exact-byte-equality",
+        "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination.md",
+        "action": "Refuse application unless current canonical source equals archived full preimage; root owns hashes/recert."
+      },
+      "admission_status": "Research-only proposal; no admission or native review coverage claimed.",
+      "verdict": "confirmed; smallest focused repair proposed",
+      "focused_evidence": "The supplier returns D_N U and needs U, so claiming to call it before U exists is an interface defect. Its actual Definition explicitly constructs D_ij=ell_(N-j)prime(x_i) from increasing z_k=x_(N-k). Repeat that finite cardinal-product construction locally, requiring no U and no supplier change. Grid distinctness makes every denominator nonzero. The matrix is exactly the existing matrix in the exact-differentiation theorem, and composing it twice still differentiates the interpolant twice. Boundary elimination and exact singular/invertible branches are unchanged, with no unconditional PDE claim introduced.",
+      "inspected_interfaces": [
+        "items/alg-chebyshev-gauss-lobatto-differentiation-matrix.md",
+        "items/thm-chebyshev-gauss-lobatto-differentiation-is-exact.md"
+      ],
+      "consumer_reviews": [
+        {
+          "id": "thm-chebyshev-dirichlet-collocation-status-and-system",
+          "source": "items/thm-chebyshev-dirichlet-collocation-status-and-system.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/thm-chebyshev-dirichlet-collocation-status-and-system.md",
+          "verdict": "compatible; no source repair needed",
+          "evidence": "Local cardinal construction yields exactly the D_N in the actual exact-differentiation supplier. Proof F1 uses unchanged C_ij, reduced A and boundary right-hand side; F2 still identifies D_N U=pprime and D_N^2 U=psecond. The reduced linear system and singular/success alternatives, endpoint orientation U0=gplus,UN=gminus, and unique interior solve are unchanged."
+        },
+        {
+          "id": "rem-chebyshev-collocation-conditioning-and-spectral-radius-scope",
+          "source": "items/rem-chebyshev-collocation-conditioning-and-spectral-radius-scope.md",
+          "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/rem-chebyshev-collocation-conditioning-and-spectral-radius-scope.md",
+          "verdict": "compatible; no source repair needed",
+          "evidence": "Full prose was read. It treats the source-specific N^4 second-derivative spectral-radius observation as conditioning context for the designated Dirichlet treatment and expressly makes no BVP stability or convergence guarantee. The identical matrix/endpoint treatment preserves that scope."
+        }
+      ],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-90.proof-contracts.json",
+          "pointer": "/contracts/thm-chebyshev-dirichlet-collocation-status-and-system/citations/0/quote",
+          "action": "Only after supported admission, mirror the exact changed source section. Original reader digest, concern and Luna keep remain historical."
+        }
+      ],
+      "original_statement_or_definition_changed": true,
+      "consumer_policy": "Complete current direct/indirect logical consumer closure reviewed by this reviewer. Empty closures are recorded explicitly; no unsupported downstream coverage claimed."
+    },
+    {
+      "id": "ex-zero-ritz-residual-does-not-identify-ground-state",
+      "batch": 92,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-92-step5-context.json",
+      "pointer": "/concerns/1",
+      "finding": {
+        "id": "ex-zero-ritz-residual-does-not-identify-ground-state",
+        "concern": "Verification 2.1 says, “The nonzero residual threshold can be zero”. The phrase is contradictory. The verified example has residual norm ρ=0 and correctly demonstrates that zero residual does not identify the lowest eigenvalue; only the wording needs correction.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "ex-zero-ritz-residual-does-not-identify-ground-state",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The diagonal matrix has ground eigenvalue −1, while the unit eigenvector e₂ has Rayleigh quotient 1 and zero residual. The cited theorem correctly gives spectral proximity without identifying the ground state.",
+        "context_sha256": "1e737fc0e65f34bf9deddfc9be13a800a8fd51c2c867f1e0e7208e50e49dceb8",
+        "item_sha256": "a21215c5d87a5ceb0ca9710774ac65ee9e5f708ad7bd829a5d46aefad31429d4",
+        "at": "2026-10-17T01:55:37.235Z"
+      },
+      "canonical_path": "items/ex-zero-ritz-residual-does-not-identify-ground-state.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/ex-zero-ritz-residual-does-not-identify-ground-state.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/proposed/ex-zero-ritz-residual-does-not-identify-ground-state.md",
+      "concern_index": 1,
+      "digest_pointer": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-92-step5-context.json",
+        "pointer": "/concerns/1"
+      },
+      "guard": {
+        "kind": "exact-byte-equality",
+        "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/ex-zero-ritz-residual-does-not-identify-ground-state.md",
+        "action": "Refuse application unless current canonical source equals archived full preimage; root owns hashes/recert."
+      },
+      "admission_status": "Research-only proposal; no admission or native review coverage claimed.",
+      "verdict": "confirmed; smallest focused repair proposed",
+      "focused_evidence": "The example computes a unit eigenvector of diag(-1,1) at excited eigenvalue1, with Rayleigh value1 and exact residual0; lowest eigenvalue is-1. The phrase nonzero threshold can be zero contradicts itself. Replace that sentence with Even an exactly zero residual norm cannot supply spectral ordering information. All mathematics, original Example and CC assumption remain unchanged.",
+      "inspected_interfaces": [
+        "items/thm-finite-hermitian-ritz-residual-certifies-spectrum-and-eigendirection.md"
+      ],
+      "consumer_reviews": [],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-92.proof-contracts.json",
+          "pointer": "/contracts/ex-zero-ritz-residual-does-not-identify-ground-state/derivations",
+          "action": "Mirror corrected Verification2.1 wording only; no Statement, dependency, proof-step or consumer changes."
+        }
+      ],
+      "original_statement_or_definition_changed": false,
+      "consumer_policy": "Proof/Verification-only repair; no downstream propagation proposed."
+    },
+    {
+      "id": "lem-geometry-tensor-gap-bounds-cellwise-form-defect",
+      "batch": 89,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-89-step5-context.json",
+      "pointer": "/concerns/0",
+      "finding": {
+        "id": "lem-geometry-tensor-gap-bounds-cellwise-form-defect",
+        "concern": "The Statement begins 'Assume the geometry setting of [[def-geometry-lift-and-tensor-discrepancy]]' without stating Countable Choice; that definition also does not state it. However, Facts & Assumptions explicitly adds 'Given: Countable Choice', A3 calls it an explicit assumption, and Proof 1.1 invokes the change-of-variables supplier under A3. That supplier's Statement explicitly assumes Countable Choice. The assumption is visible in the proof context but should also be carried into the advertised Statement.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "lem-geometry-tensor-gap-bounds-cellwise-form-defect",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The change of variables and polarization establish the lifted form identity; the tensor bounds give coercivity and boundedness, and the cellwise estimates yield the global defect bound needed for the perturbation lemma.",
+        "context_sha256": "04f7bf2d6d61fa613d88994829d0868656031d18f0af4e2fde61cb8ec9478d8d",
+        "item_sha256": "6f6f9dbb9fb2f2fd088b495f7efe538d103bfdc00e4e4047546105b1e54ddb8a",
+        "at": "2026-10-17T01:54:18.091Z"
+      },
+      "canonical_path": "items/lem-geometry-tensor-gap-bounds-cellwise-form-defect.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/lem-geometry-tensor-gap-bounds-cellwise-form-defect.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/proposed/lem-geometry-tensor-gap-bounds-cellwise-form-defect.md",
+      "concern_index": 0,
+      "digest_pointer": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-89-step5-context.json",
+        "pointer": "/concerns/0"
+      },
+      "guard": {
+        "kind": "exact-byte-equality",
+        "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/lem-geometry-tensor-gap-bounds-cellwise-form-defect.md",
+        "action": "Refuse application unless current canonical source equals archived full preimage; root owns hashes/recert."
+      },
+      "admission_status": "Research-only proposal; no admission or native review coverage claimed.",
+      "verdict": "confirmed; smallest focused repair proposed",
+      "focused_evidence": "The actual published nonnegative measurable change-of-variables Statement explicitly assumes Countable Choice. The geometry Definition does not assume it, while this lemma Given, A3 and Proof1.1 already do. Add precisely the same CC assumption to the advertised Statement using the existing def-countable-choice dependency. Under CC, change of variables for the three finite nonnegative energies and polarization establish cross-form identity. Cellwise operator-norm and integral/finite Cauchy-Schwarz bounds give the same eta_G estimate and optional C_G h^s rate. Quantitative J/L bounds preserve beta=jminus lambda/L^2 and coercivity beta/2 when eta_G<=beta/2; no rate or Hilbert completeness follows from a lift alone. Every original hypothesis, constant, rich form claim and caveat is retained.",
+      "inspected_interfaces": [
+        "items/def-geometry-lift-and-tensor-discrepancy.md",
+        "items/thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions.md"
+      ],
+      "consumer_reviews": [],
+      "future_mirrors": [],
+      "original_statement_or_definition_changed": true,
+      "consumer_policy": "Complete current direct/indirect logical consumer closure reviewed by this reviewer. Empty closures are recorded explicitly; no unsupported downstream coverage claimed."
+    }
+  ],
+  "version": 1,
+  "reviewer": "ROOT/kept_low_stochastic",
+  "actual_record_count": 8,
+  "actual_physical_item_count": 7,
+  "no_canonical_writes": true,
+  "no_hashes_checks_tests_gates_dispatch_or_commits": true,
+  "cycle": 1,
+  "consumer_discovery": {
+    "method": "Read every current items/*.md YAML deps and justified_by; expand each changed-interface reverse transitive closure; supplement with item/library textual reference search. This is research inventory, not a validator/gate certificate.",
+    "roots": {
+      "alg-golub-kahan-lsqr-with-givens-and-status": [
+        "thm-lsqr-residual-minimizes-on-krylov-subspace",
+        "cex-full-lsqr-can-amplify-data-noise"
+      ],
+      "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination": [
+        "thm-chebyshev-dirichlet-collocation-status-and-system",
+        "rem-chebyshev-collocation-conditioning-and-spectral-radius-scope"
+      ],
+      "lem-geometry-tensor-gap-bounds-cellwise-form-defect": [],
+      "ex-smolyak-diagonal-ridge-breaks-mixed-regularity": []
+    },
+    "indirect_consumers": "None for these roots; both LSQR and Chebyshev roots have exactly two direct consumers, the Smolyak example and geometry lemma have none.",
+    "aliases": "No aliases are declared for these changed-interface roots."
+  },
+  "page_reviews": [
+    {
+      "source": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/iterative-regularization-and-early-stopping.md",
+      "verdict": "Full prose read and compatible; no page edit needed."
+    },
+    {
+      "source": "library/numerical-pdes-and-spatial-discretization/spectral-collocation-and-galerkin-methods.md",
+      "verdict": "Full prose read and compatible; no page edit needed."
+    },
+    {
+      "source": "library/numerical-pdes-and-spatial-discretization/variational-crimes-and-strang-lemmas.md",
+      "verdict": "Full prose read and compatible; no page edit needed."
+    },
+    {
+      "source": "library/numerical-linear-algebra-and-approximation/sparse-grid-cubature-and-mixed-regularity-examples.md",
+      "verdict": "Full prose read and compatible; no page edit needed."
+    }
+  ],
+  "history_policy": "Actual intake has eight records/seven physical items. Both LSQR native concerns and both identical original keep judgments are retained, pointing to one physical combined draft. Earlier packets remain immutable. No frozen source/metadata/ledger/runtime changes, hashes, tests/checks/gates, native dispatch/admission or commits. Root owns hashes and recertification. This packet is cycle1 for these distinct findings.",
+  "new_property_result": "None required; all repairs are local interface/notation, proof ordering or advertised-assumption corrections."
+}

@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "86",
+  "round": 0,
+  "reviewed_items": [
+    "def-regular-holonomic-phase-space-and-dynamics",
+    "lem-smooth-residual-quotient-extension",
+    "lem-regular-holonomic-phase-space-is-symplectic-cotangent",
+    "lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold",
+    "def-regular-classical-rattle-step-map",
+    "thm-local-holonomic-constrained-hamiltonian-flow",
+    "lem-rattle-scaled-position-and-momentum-branches",
+    "alg-finite-budget-rattle-step-with-scaled-residuals",
+    "thm-rattle-exact-constraint-preservation-and-reversibility",
+    "thm-rattle-symplecticity-on-regular-constraint-phase-space",
+    "thm-finite-budget-rattle-solver-returns-status",
+    "thm-rattle-second-order-global-accuracy-on-compact-tubes",
+    "thm-rattle-scaled-solve-residual-error-budget",
+    "ex-constrained-pendulum-equations-and-multiplier",
+    "ex-rigid-bond-rattle-free-rotor",
+    "ex-nearly-dependent-constraints-amplify-rattle-residuals",
+    "ex-rattle-residual-budget-and-global-trajectory-drift"
+  ],
+  "reviewed_pages": [
+    "constrained-dynamics-shake-and-rattle",
+    "constrained-dynamics-shake-and-rattle-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete batch and direct supplier review found locally repairable regularity, compactness, and algorithm-interface gaps. Request one repair round; the affected consumers are all within this batch.",
+  "findings": [
+    {
+      "id": "lem-regular-holonomic-phase-space-is-symplectic-cotangent",
+      "type": "prerequisite",
+      "reason": "Step 1.1 uses the published Euclidean IFT, whose statement gives only a C¹ graph, while this lemma claims a smooth manifold and uses smooth differential-form coordinates. Add and apply a higher-regularity IFT result or supply the smoothness bootstrap."
+    },
+    {
+      "id": "lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold",
+      "type": "prerequisite",
+      "reason": "The same C¹-only IFT use does not establish the claimed smooth retraction: its formula depends on Dφ. Prove the graph is smooth, for example with the published higher-regularity IFT, before claiming Π is smooth."
+    },
+    {
+      "id": "lem-rattle-scaled-position-and-momentum-branches",
+      "type": "prerequisite",
+      "reason": "The referenced definition's compact regular chart bounds q in K⊂Q, not p, but this lemma claims a uniform h₀ and derivative bounds over consistent inputs. In the assigned free-rotor example, the position equation has real roots only when |hω|≤1, so unbounded tangent momenta preclude a common h₀. State pointwise branch existence and uniformity on compact subsets of the phase manifold; recheck the affected consumers below."
+    },
+    {
+      "id": "alg-finite-budget-rattle-step-with-scaled-residuals",
+      "type": "local",
+      "reason": "The Definition sends inconsistent-input, missing-branch-ball, and undefined-evaluation cases to an unspecified “corresponding failure status”; define those outputs or remove these cases from the admissible procedure. Also link thm-finite-budget-rattle-solver-returns-status in justified_by: it depends on this algorithm and establishes its status-return well-definedness."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-local-holonomic-constrained-hamiltonian-flow",
+      "decision": "accept",
+      "reason": "Its local, pointwise flow claim is valid once the phase-manifold smoothness proof is repaired."
+    },
+    {
+      "id": "lem-rattle-scaled-position-and-momentum-branches",
+      "decision": "repair",
+      "reason": "Needs the compact phase-set qualification for uniform h₀ and bounds, as well as a smooth phase chart."
+    },
+    {
+      "id": "alg-finite-budget-rattle-step-with-scaled-residuals",
+      "decision": "accept",
+      "reason": "Its input is one fixed phase point with supplied local branch balls; it makes no uniform-in-momentum claim. Its separate interface defect is reported above."
+    },
+    {
+      "id": "thm-rattle-exact-constraint-preservation-and-reversibility",
+      "decision": "accept",
+      "reason": "The claim is conditional on the local selected branches and does not require a chart-uniform step size."
+    },
+    {
+      "id": "thm-rattle-symplecticity-on-regular-constraint-phase-space",
+      "decision": "repair",
+      "reason": "Clarify that the common step-size domain is over a compact phase-space subset, or state the result pointwise on each local branch."
+    },
+    {
+      "id": "thm-finite-budget-rattle-solver-returns-status",
+      "decision": "accept",
+      "reason": "Its finite-call termination argument holds on the stated valid inputs once the algorithm's failure outputs are explicit."
+    },
+    {
+      "id": "thm-rattle-second-order-global-accuracy-on-compact-tubes",
+      "decision": "accept",
+      "reason": "Its compact solution tube is in phase coordinates, and the first-exit argument keeps the numerical states in a bounded phase neighborhood."
+    },
+    {
+      "id": "thm-rattle-scaled-solve-residual-error-budget",
+      "decision": "repair",
+      "reason": "The chart-uniform constant and step threshold require a compact phase-space input range, not only a compact configuration chart."
+    },
+    {
+      "id": "ex-constrained-pendulum-equations-and-multiplier",
+      "decision": "accept",
+      "reason": "The example uses a fixed consistent state and a local flow; the smoothness repair does not change its calculation."
+    },
+    {
+      "id": "ex-rigid-bond-rattle-free-rotor",
+      "decision": "accept",
+      "reason": "It uses a fixed momentum and states the step restriction hω≤1/2."
+    },
+    {
+      "id": "ex-nearly-dependent-constraints-amplify-rattle-residuals",
+      "decision": "accept",
+      "reason": "Its matrix-conditioning calculation is pointwise in ε and does not assert uniformity over unbounded momenta."
+    },
+    {
+      "id": "ex-rattle-residual-budget-and-global-trajectory-drift",
+      "decision": "repair",
+      "reason": "Its repeated-trajectory envelope needs an explicit compact phase-space tube to support uniform constants and the retraction estimates."
+    },
+    {
+      "id": "constrained-dynamics-shake-and-rattle",
+      "decision": "repair",
+      "reason": "Clarify the compact phase-space scope for the page's uniform branch, symplecticity, and residual-error claims."
+    },
+    {
+      "id": "constrained-dynamics-shake-and-rattle-examples",
+      "decision": "accept",
+      "reason": "The page summary remains accurate once the residual-drift example states its compact phase-tube hypothesis."
+    }
+  ]
+}

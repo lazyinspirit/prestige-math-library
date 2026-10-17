@@ -1,0 +1,176 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-certified-exponential-euler-etd2-step",
+    "supplier": "alg-arnoldi-exponential-and-phi-actions",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "**Inputs:** $A\\in M_n(\\mathbb C)$ with $n\\ge1$, $v\\in\\mathbb C^n$, time $t\\in\\mathbb R$, integer $k\\ge0$, Krylov budget $1\\le m\\le n$, nonnegative threshold $\\tau$, an exact-arithmetic Arnoldi run or a finite-precision Arnoldi backend, and a reduced-action configuration. In finite precision, the backend returns a length $j$ with $1\\le j\\le m$, $\\beta>0$ for $v\\ne0$, $V_j\\in\\mathbb C^{n\\times j}$, $H_j\\in M_j(\\mathbb C)$, and a computed subdiagonal; it may supply the relation certificate in Step 2 and an exact happy-breakdown certificate verifying the full Arnoldi recurrence from $v$ through $j$ steps with zero terminal residual. The reduced-action configuration supplies, for each Taylor call, rational operator-norm and input-vector norm upper bounds, a positive tolerance, finite scaling/order budgets, and a provider satisfying [[def-certified-matvec-and-vector-arithmetic]] for Taylor calls, scalar scaling, and final projection. Missing or invalid bounds produce an inconclusive status.",
+    "hypotheses": "Invoke this routine only with phi index zero on A or B_k(hA,v), time 1, using certified relation and reduced-action data; no residual estimate alone is treated as a certificate.",
+    "evidence": "Inspected the complete current batch-81 supplier body and matched its hypotheses to this consumer. This is a cross-batch interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-certified-exponential-euler-etd2-step",
+    "supplier": "def-certified-matvec-and-vector-arithmetic",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "Fix a finite complex matrix $M\\in\\mathbb C^{r\\times s}$ with $r,s\\ge1$ and the Euclidean norms from [[def-inner-product-norm]]. A **normwise certified vector arithmetic provider** supplies the following outputs together with the stated bounds:",
+    "hypotheses": "The implementation requires certified Euclidean-norm bounds for every matrix-vector and vector-step arithmetic operation; a missing bound yields inconclusive status.",
+    "evidence": "Inspected the complete current batch-81 supplier body and matched its hypotheses to this consumer. This is a cross-batch interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-certified-exponential-euler-etd2-step",
+    "supplier": "def-logarithmic-norm-for-complex-matrices",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "Let $n\\ge1$ and $A\\in M_n(\\mathbb C)$. In the standard complex inner product from [[prop-standard-coordinate-inner-products]], the adjoint matrix is the conjugate transpose $A^*$ by [[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]]. The Hermitian part is $H_A:=(A+A^*)/2$. It is self-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]].",
+    "hypotheses": "Each requested matrix B is finite dimensional over C; the backend must supply a certified upper bound rho_B >= max(0, mu_2(B)) for the action theorem’s semigroup factor.",
+    "evidence": "Inspected the complete current batch-81 definition and matched its finite-dimensional logarithmic-norm convention to the per-action certificate input. This interface check does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-certified-exponential-euler-etd2-step",
+    "supplier": "thm-arnoldi-exponential-action-error-bound",
+    "status": "verified",
+    "source_section": "Statement",
+    "excerpt": "Let $A\\in M_n(\\mathbb C)$, $n\\ge1$, $v\\in\\mathbb C^n$, $\\beta\\ge0$, $V\\in M_{n\\times m}(\\mathbb C)$, $H\\in M_m(\\mathbb C)$, and $1\\le m\\le n$. For exact Arnoldi, $\\beta=\\|v\\|_2$; in a certified finite-precision run, $\\beta$ may be the backend's returned nonnegative scalar, with its effect included in the initial mismatch. Put $c(s):=e^{sH}\\beta e_1$ and $u(s):=Vc(s)$. For every real $t$, the exact defect identity is",
+    "hypotheses": "Apply the theorem to the full augmented matrix B_k(hA,v), time 1, input e_k and index zero. Every relation, reduced-action, matvec and projection error required by the theorem must be certified; otherwise the algorithm returns inconclusive.",
+    "evidence": "Inspected the complete current batch-81 supplier body and matched its hypotheses to this consumer. This is a cross-batch interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-certified-exponential-euler-etd2-step",
+    "supplier": "thm-phi-recurrence-and-augmented-matrix-actions",
+    "status": "verified",
+    "source_section": "Statement",
+    "excerpt": "For every integer $k\\ge0$, scalar $z\\in\\mathbb C$, and square matrix $X\\in M_n(\\mathbb C)$, the series-defined functions of [[def-phi-functions-by-everywhere-convergent-series]] satisfy",
+    "hypotheses": "Use its finite-dimensional augmented exponential identity with block matrix B_k(hA,v), time 1, initial vector e_k, k=1 or 2; the upper d coordinates are phi_k(hA)v, including for singular or zero A.",
+    "evidence": "Inspected the complete current batch-81 supplier body and matched its hypotheses to this consumer. This is a cross-batch interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-exponential-euler-and-etd2-step-maps",
+    "supplier": "def-phi-functions-by-everywhere-convergent-series",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].",
+    "hypotheses": "The consumer invokes the supplier under its displayed finite-dimensional hypotheses and uses only the stated interface.",
+    "evidence": "Inspected the complete current batch-81 supplier body and matched its hypotheses to this consumer. This is a cross-batch interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-exponential-euler-and-etd2-step-maps",
+    "supplier": "lem-phi-series-converges-absolutely",
+    "status": "verified",
+    "source_section": "Statement",
+    "excerpt": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge1$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
+    "hypotheses": "The consumers use absolute convergence and values at zero for finite complex matrices; all arguments are finite-dimensional.",
+    "evidence": "Inspected the complete current batch-81 supplier body and matched its hypotheses to this consumer. This is a cross-batch interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-diagonal-stiff-diffusion-with-reaction-etd",
+    "supplier": "def-phi-functions-by-everywhere-convergent-series",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].",
+    "hypotheses": "The consumer invokes the supplier under its displayed finite-dimensional hypotheses and uses only the stated interface.",
+    "evidence": "Inspected the complete current batch-81 supplier body and matched its hypotheses to this consumer. This is a cross-batch interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-phi-functions-at-zero-no-division",
+    "supplier": "def-phi-functions-by-everywhere-convergent-series",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].",
+    "hypotheses": "The consumer invokes the supplier under its displayed finite-dimensional hypotheses and uses only the stated interface.",
+    "evidence": "Inspected the complete current batch-81 supplier body and matched its hypotheses to this consumer. This is a cross-batch interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-phi-functions-at-zero-no-division",
+    "supplier": "lem-phi-series-converges-absolutely",
+    "status": "verified",
+    "source_section": "Statement",
+    "excerpt": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge1$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
+    "hypotheses": "The consumers use absolute convergence and values at zero for finite complex matrices; all arguments are finite-dimensional.",
+    "evidence": "Inspected the complete current batch-81 supplier body and matched its hypotheses to this consumer. This is a cross-batch interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-certified-exponential-step-action-error",
+    "supplier": "def-logarithmic-norm-for-complex-matrices",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "Let $n\\ge1$ and $A\\in M_n(\\mathbb C)$. In the standard complex inner product from [[prop-standard-coordinate-inner-products]], the adjoint matrix is the conjugate transpose $A^*$ by [[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]]. The Hermitian part is $H_A:=(A+A^*)/2$. It is self-adjoint in the sense of [[def-self-adjoint-and-normal-endomorphism]].\n\nDefine the Euclidean logarithmic norm by $\\mu_2(A):=\\lambda_{\\max}(H_A)$, where $\\lambda_{\\max}$ denotes the largest eigenvalue of the Hermitian matrix $H_A$. The item [[lem-logarithmic-norm-is-real-and-variational]] establishes that this eigenvalue exists, is real, and equals $\\max_{\\|x\\|_2=1}\\operatorname{Re}\\langle Ax,x\\rangle$. This is a real growth bound, not a matrix norm.",
+    "hypotheses": "The one-step certificate applies to each finite complex action matrix B and requires an upper bound rho_B >= max(0, mu_2(B)); this definition fixes the logarithmic-norm convention.",
+    "evidence": "Inspected the complete current batch-81 definition and matched its finite-dimensional logarithmic-norm convention to the action-error bound used by this consumer. This is an interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-certified-exponential-step-action-error",
+    "supplier": "thm-arnoldi-exponential-action-error-bound",
+    "status": "verified",
+    "source_section": "Statement",
+    "excerpt": "Let $A\\in M_n(\\mathbb C)$, $n\\ge1$, $v\\in\\mathbb C^n$, $\\beta\\ge0$, $V\\in M_{n\\times m}(\\mathbb C)$, $H\\in M_m(\\mathbb C)$, and $1\\le m\\le n$. For exact Arnoldi, $\\beta=\\|v\\|_2$; in a certified finite-precision run, $\\beta$ may be the backend's returned nonnegative scalar, with its effect included in the initial mismatch. Put $c(s):=e^{sH}\\beta e_1$ and $u(s):=Vc(s)$. For every real $t$, the exact defect identity is",
+    "hypotheses": "Apply the theorem to the full augmented matrix B_k(hA,v), time 1, input e_k and index zero. Every relation, reduced-action, matvec and projection error required by the theorem must be certified; otherwise the algorithm returns inconclusive.",
+    "evidence": "Inspected the complete current batch-81 supplier body and matched its hypotheses to this consumer. This is a cross-batch interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-certified-exponential-step-action-error",
+    "supplier": "thm-phi-recurrence-and-augmented-matrix-actions",
+    "status": "verified",
+    "source_section": "Statement",
+    "excerpt": "For every integer $k\\ge0$, scalar $z\\in\\mathbb C$, and square matrix $X\\in M_n(\\mathbb C)$, the series-defined functions of [[def-phi-functions-by-everywhere-convergent-series]] satisfy",
+    "hypotheses": "Use its finite-dimensional augmented exponential identity with block matrix B_k(hA,v), time 1, initial vector e_k, k=1 or 2; the upper d coordinates are phi_k(hA)v, including for singular or zero A.",
+    "evidence": "Inspected the complete current batch-81 supplier body and matched its hypotheses to this consumer. This is a cross-batch interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-exponential-phi-integral-representations",
+    "supplier": "def-phi-functions-by-everywhere-convergent-series",
+    "status": "verified",
+    "source_section": "Definition",
+    "excerpt": "Use the first-variable-linear standard inner product on $\\mathbb C^n$ and its norm $\\|x\\|_2=\\sqrt{\\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\\|X\\|_2$ is the operator norm of the linear map $x\\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].",
+    "hypotheses": "The consumer invokes the supplier under its displayed finite-dimensional hypotheses and uses only the stated interface.",
+    "evidence": "Inspected the complete current batch-81 supplier body and matched its hypotheses to this consumer. This is a cross-batch interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-exponential-phi-integral-representations",
+    "supplier": "lem-phi-series-converges-absolutely",
+    "status": "verified",
+    "source_section": "Statement",
+    "excerpt": "For every integer $k\\ge0$, the scalar series defining $\\varphi_k(z)$ converges absolutely for every $z\\in\\mathbb C$, and the matrix series defining $\\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\\in M_n(\\mathbb C)$, $n\\ge1$. At zero, $\\varphi_k(0)=1/k!$ and $\\varphi_k(0_{n\\times n})=I_n/k!$.",
+    "hypotheses": "The consumers use absolute convergence and values at zero for finite complex matrices; all arguments are finite-dimensional.",
+    "evidence": "Inspected the complete current batch-81 supplier body and matched its hypotheses to this consumer. This is a cross-batch interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-exponential-euler-etd2-global-error-and-action",
+    "supplier": "thm-global-error-from-one-step-defect-and-stability",
+    "status": "verified",
+    "source_section": "Statement",
+    "excerpt": "Let $d,N,p\\ge1$, $T>0$, $h=T/N$, and $t_n=nh$. Let $y:[0,T]\\to\\mathbb R^d$ solve an initial-value problem in an open time-state domain $D$. Use the Euclidean norm $\\|v\\|_2=(\\sum_{i=1}^d v_i^2)^{1/2}$ of [[def-euclidean-inner-product]], whose triangle inequality is proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]]. Let $\\mathcal T\\subset D$ be a common compact time-state tube with positive margin in $D$, and write $\\mathcal T_t:=\\{v\\in\\mathbb R^d:(t,v)\\in\\mathcal T\\}$. Suppose a one-step map $\\Psi_{h,n}$ is defined on $\\mathcal T_{t_n}$, produces $y_{n+1}=\\Psi_{h,n}(y_n)$, and the entire exact path, all numerical grid states, and every method stage lie in $\\mathcal T$. If constants $C,C_0,L\\ge0$, independent of $N$ and $n$, satisfy",
+    "hypotheses": "The transformed maps use exact initial data, local constants K_- C_p, and stability factors 1+L_p h; the transformed common compact tube lies in the transformed open domain.",
+    "evidence": "Inspected the complete current batch-28 supplier body and matched its hypotheses to this consumer. This is a cross-batch interface check only; it does not claim supplier acceptance."
+  },
+  {
+    "kind": "page",
+    "consumer": "exponential-and-integrating-factor-integrators",
+    "supplier": "global-ode-and-density-error",
+    "status": "verified",
+    "evidence": "The assigned page requires this current page. Inspected batch 28’s complete thm-global-error-from-one-step-defect-and-stability statement and proof; it requires exact-start local defect Ch^(p+1), one-step stability 1+Lh on a common compact time-state tube with positive margin, and exact initial values. The transformed finite-dimensional method is matched to these hypotheses in the local global-error proof. This interface review is not supplier acceptance."
+  },
+  {
+    "kind": "page",
+    "consumer": "exponential-and-integrating-factor-integrators",
+    "supplier": "matrix-exponential-and-phi-function-actions",
+    "status": "verified",
+    "evidence": "The assigned page requires this current page. Inspected batch 81’s phi series and convergence, augmented-matrix identity, certified Taylor/Arnoldi algorithms, and Arnoldi exponential-action error theorem. The local algorithm uses the actual augmented identity and applies the certified exponential-action theorem to the augmented matrix, then projects its top coordinates. This interface review is not supplier acceptance."
+  }
+]

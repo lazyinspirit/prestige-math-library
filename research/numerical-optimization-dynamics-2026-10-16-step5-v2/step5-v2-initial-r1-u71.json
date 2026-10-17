@@ -1,0 +1,115 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "71",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+      "model": "gpt-6-luna",
+      "context_sha256": "65120c8c5296c5550ecd758942b3e3d12294d12328aa515a763409d6c2903082",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The original Definition step 2 leaves rounded dot-product parenthesization unspecified. In precision p=3 with a sufficiently wide normal exponent range, fl(fl(16+2)+2)=16 whereas fl(16+fl(2+2))=20 under ties-to-even. Thus this is an incomplete operational definition, classified as other rather than an erroneous proof inference or missing citation. The repair fixes every row and inner-index order, rounds multiplication, addition, subtraction and division separately, forbids fusion/reassociation, and returns the first failure with its full solve location.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+      "disposition": "repaired",
+      "post_sha256": "7d50db7afc5655e14bb6ee4760eafd6d31f2b9b8fce2369db657561b4cdd8654",
+      "review_context_sha256": "368c78a02d74d6ac59437b11e601704031fffcc084878b0f3e26c16fbe54e47c",
+      "reason": "Checked the arithmetic model, called Cholesky procedure, exact substitution recursions and exact reference-solve theorem. Forward rows increase and use previously initialized z entries; backward rows decrease and use previously initialized p entries via l_ji. Each row starts at zero, including empty sums; sign changes are exact and positive normal diagonals are valid divisors. Every primitive is separately rounded and immediately checked for failure. The exact reference equation and absence of a computed-solve error guarantee are preserved. This is a repair review, not independent review of the newly written instructions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-full-memory-bfgs-with-curvature-safeguards"
+  ],
+  "downstream_uses": {
+    "alg-full-memory-bfgs-with-curvature-safeguards": "Definition paragraph 2 checks finite representability, calls the rounded Cholesky direction procedure, returns factorization/solve failures, and checks the computed direction for descent before line search."
+  },
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+      "severity": "fatal",
+      "defect_type": "other",
+      "locus": "Definition step 2",
+      "finding": "Unspecified rounded accumulation order leaves the returned direction and first failure undetermined.",
+      "repair": "Explicit increasing inner loops with separate rounded product and addition, followed by separately rounded subtraction and division; immediate first-failure return includes pass, row, inner index and operation.",
+      "status": "fixed",
+      "reason": "The original Definition step 2 leaves rounded dot-product parenthesization unspecified. In precision p=3 with a sufficiently wide normal exponent range, fl(fl(16+2)+2)=16 whereas fl(16+fl(2+2))=20 under ties-to-even. Thus this is an incomplete operational definition, classified as other rather than an erroneous proof inference or missing citation. The repair fixes every row and inner-index order, rounds multiplication, addition, subtraction and division separately, forbids fusion/reassociation, and returns the first failure with its full solve location.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "interface_changed": true,
+    "before_itemHashGuard": "cb2d030bdd9cb51b640fa52f567a433764f4a365ead3fbe9a4a364653af0b909",
+    "before_definition_sha256": "aeb9379c809a142064469fa7f377712f3400071d7812e346c5bb485da13036be",
+    "claim_and_conventions": "Unchanged SPD representable inputs and output/failure contract. Step 2 now fixes one-based forward/backward substitution schedules under the supplied no-underflow rounding model; no computed-direction backward-error or convergence property is added.",
+    "source_evidence": [
+      "items/def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma.md#Definition: separate rounded primitives, exact sign changes, ties-to-even, and first range-failure.",
+      "items/alg-rounded-cholesky-with-failure-status.md#Definition: ordered factorization and positive normal successful diagonals.",
+      "items/def-forward-and-back-substitution-for-triangular-systems.md#Definition: exact scalar recursions; no floating-point parenthesization is supplied.",
+      "items/thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost.md#Statement and Proof step 1.1: the unique exact reference solve through two triangular systems."
+    ],
+    "contract_and_metadata": "The current batch-71 proof-contract mapping has no entry for this proof-free algorithm. Its manifest kind, dependencies, level and owning-page placement agree with the unchanged frontmatter; no contract or metadata edit is needed.",
+    "consumer_checks": [
+      {
+        "id": "alg-full-memory-bfgs-with-curvature-safeguards",
+        "path": "items/alg-full-memory-bfgs-with-curvature-safeguards.md",
+        "locus": "Definition paragraph 2 and final paragraph",
+        "affected_use": "Otherwise call [[alg-bfgs-hessian-direction-with-rounded-cholesky]] with $(B_k,g_k)$ in that format; if the factorization or triangular solve fails, return its failure status with $x_k$.",
+        "disposition": "unaffected",
+        "reason": "The caller accepts the computed direction from the chosen format, propagates either solve failure, and tests descent before line search. It assumes no particular prior accumulation schedule, unconditional arithmetic success or backward-error bound. Its Definition is unchanged, so propagation stops at this hop.",
+        "frontier": true,
+        "necessary_repair": false
+      }
+    ],
+    "page_check": {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/bfgs-and-limited-memory-quasi-newton-methods.md",
+      "affected_use": "The page specifies a failure-aware Cholesky direction path and explicitly gives it no backward-error guarantee.",
+      "disposition": "unaffected",
+      "reason": "Specifying the scalar schedule preserves both page clauses without editing the page."
+    },
+    "discovery": "A literal-ID search across items/ and library/ found only the repaired carrier, its sole direct item consumer, and its home page. The item declares no aliases. No outside-frontier or published consumer was found; no published-ledger update is proposed.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-bfgs-hessian-direction-with-rounded-cholesky.md --json",
+        "exit_code": 0,
+        "result": "1 file; not-applicable; 0 checked proofs; 0 failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-bfgs-hessian-direction-with-rounded-cholesky.md --json",
+        "exit_code": 0,
+        "result": "1 checked; errors []; warnings []"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-bfgs-hessian-direction-with-rounded-cholesky.md",
+        "exit_code": 0,
+        "result": "1 items, 0 steps, 0 defects"
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items alg-bfgs-hessian-direction-with-rounded-cholesky",
+        "exit_code": 0,
+        "result": "Current post_sha256 and review_context_sha256 copied verbatim into the review immediately following the repair review."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection, ordinary frontier consumer routing and independent current rejudgment; no judge or certificate was written."
+  }
+}

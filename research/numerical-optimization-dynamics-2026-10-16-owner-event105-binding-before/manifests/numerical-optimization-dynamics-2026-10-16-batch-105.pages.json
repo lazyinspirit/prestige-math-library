@@ -1,0 +1,204 @@
+[
+  {
+    "order": 2494,
+    "id": "event-location-and-hybrid-trajectory-error",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Event location and hybrid trajectory error",
+    "companion": "event-location-and-hybrid-trajectory-error-examples",
+    "requires": [
+      "adaptive-ode-solvers-and-error-estimation",
+      "interval-newton-krawczyk-and-polynomial-root-isolation",
+      "discrete-continuous-and-pde-adjoint-sensitivities"
+    ],
+    "items": [
+      {
+        "id": "def-hybrid-mode-guard-reset-system",
+        "kind": "definition",
+        "title": "Smooth hybrid ODE modes, guards, resets, and deterministic event priority",
+        "deps": [
+          "def-first-order-ode-initial-value-problem-and-solution"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-hybrid-guard-derivative-along-mode",
+        "kind": "lemma",
+        "title": "The derivative of a guard along an ODE mode is its Lie derivative",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-ode-flow-lipschitz-on-a-tube",
+        "kind": "lemma",
+        "title": "A Lipschitz ODE mode flow is stable to its initial state on a tube",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "thm-gronwall-integral-inequality"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-reset-error-after-a-mistimed-hybrid-event",
+        "kind": "lemma",
+        "title": "Reset and smooth-mode flow propagate a transverse event-time error",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "lem-ode-flow-lipschitz-on-a-tube"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+        "kind": "theorem",
+        "title": "The saltation matrix gives the first-order variation across a transverse hybrid reset",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system",
+          "lem-hybrid-guard-derivative-along-mode",
+          "lem-parameter-ode-flow-tangent-on-common-tube",
+          "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "def-certified-hybrid-event-enclosure",
+        "kind": "definition",
+        "title": "Certified dense-output and guard-enclosure data for hybrid event location",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system",
+          "def-validated-residual-tube-certificate",
+          "alg-validated-residual-tube-certificate-checker",
+          "thm-validated-residual-tube-certificate-sound",
+          "def-heun-quadratic-dense-output",
+          "lem-hybrid-guard-derivative-along-mode"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-transverse-hybrid-event-time-error",
+        "kind": "lemma",
+        "title": "A transverse hybrid event time is stable under dense-output and root error",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system",
+          "def-certified-hybrid-event-enclosure",
+          "lem-hybrid-guard-derivative-along-mode",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_level": 9
+      },
+      {
+        "id": "alg-safeguarded-hybrid-event-location-and-restart",
+        "kind": "algorithm",
+        "title": "Safeguarded certified event location and mode restart",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system",
+          "def-certified-hybrid-event-enclosure",
+          "def-heun-quadratic-dense-output",
+          "alg-smooth-function-root-isolation",
+          "lem-transverse-hybrid-event-time-error"
+        ],
+        "dependency_level": 10
+      },
+      {
+        "id": "thm-finite-hybrid-trajectory-error-under-separated-events",
+        "kind": "theorem",
+        "title": "Finite separated transverse events give an event-aligned hybrid trajectory error bound",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system",
+          "def-validated-residual-tube-certificate",
+          "thm-validated-residual-tube-certificate-sound",
+          "def-certified-hybrid-event-enclosure",
+          "lem-ode-flow-lipschitz-on-a-tube",
+          "lem-transverse-hybrid-event-time-error",
+          "lem-reset-error-after-a-mistimed-hybrid-event"
+        ],
+        "dependency_level": 10
+      },
+      {
+        "id": "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+        "kind": "theorem",
+        "title": "The hybrid event locator certifies events or returns inconclusive within its budget",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system",
+          "alg-safeguarded-hybrid-event-location-and-restart",
+          "def-certified-hybrid-event-enclosure",
+          "thm-smooth-function-root-isolation-soundness",
+          "thm-validated-residual-tube-certificate-sound",
+          "lem-transverse-hybrid-event-time-error",
+          "thm-finite-hybrid-trajectory-error-under-separated-events"
+        ],
+        "dependency_level": 11
+      }
+    ]
+  },
+  {
+    "order": 2495,
+    "id": "event-location-and-hybrid-trajectory-error-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Event location and hybrid trajectory error \u2014 Examples",
+    "companion": "event-location-and-hybrid-trajectory-error",
+    "requires": [
+      "event-location-and-hybrid-trajectory-error"
+    ],
+    "items": [
+      {
+        "id": "cex-inelastic-bouncing-ball-has-zeno-accumulation",
+        "kind": "counterexample",
+        "title": "Inelastic bouncing-ball impacts can accumulate in finite time",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-simultaneous-guards-require-deterministic-priority",
+        "kind": "example",
+        "title": "Simultaneous guards need a deterministic priority rule",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "cex-grazing-event-time-error-is-not-linearly-bounded",
+        "kind": "counterexample",
+        "title": "A grazing event has square-root rather than linear event-time sensitivity",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system",
+          "lem-transverse-hybrid-event-time-error"
+        ],
+        "dependency_level": 10
+      },
+      {
+        "id": "ex-bouncing-ball-transverse-event-error-and-reset",
+        "kind": "example",
+        "title": "A bouncing-ball impact has a transverse event-time and reset-error bound",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system",
+          "lem-transverse-hybrid-event-time-error",
+          "lem-reset-error-after-a-mistimed-hybrid-event"
+        ],
+        "dependency_level": 10
+      },
+      {
+        "id": "ex-two-events-between-endpoints-defeat-sign-screening",
+        "kind": "example",
+        "title": "Two guard crossings between endpoints defeat sign-only screening",
+        "deps": [
+          "def-hybrid-mode-guard-reset-system",
+          "alg-safeguarded-hybrid-event-location-and-restart"
+        ],
+        "dependency_level": 11
+      }
+    ]
+  }
+]

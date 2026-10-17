@@ -1,0 +1,9 @@
+# Reader105:2 available-source observation entry — UNSEALED
+
+Read FULL actual current updated observation module and canonical registry. Existing available-source branch supports original_source_unavailable=false with observed_source_archive{path,sha256}. Module requires archive rawSHA equal originalnativeobserved8509c770..., correct draftid/runownership, regular own-run research path, successful complete-native-tail identity and receipt/report/finding/currentproducer hashes. ROOTmustcompute/authenticateallnullfields before addingONLY105:2 whilepreserving25/61/70entries unchanged. Never overwritecanonicalregistryfromthisfragment.
+
+GenuineStep2final-binding-before rawsourcecandidate copied exactly; actual14pre and postrecord original8509c770..., sameas105finding. HelperdidNOTcomputeitsrawSHA; candidatecorrespondenceunsealeduntilROOThash. It is not honest to setsourceunavailable whileanactualcandidateawaitsauthentication. Sourcecopyafterreader105completiondoesnotinventhistoricalcompositecontract/manifest. Current-sourcecapturealsohashless; ROOTbindsactualcurrentfingerprint.
+
+Originalreader105report/findings, alias/attempt1receipt/prompt and14/105preposts copied unchanged. Aliasbytes equalattempt1 andparsedfulltail equalsfullfindings. Reader105genuineended15:05:34.158Z,oktrue. Actualsplit105failed3x withreader105:2observed_source mismatch (events15:05:38/42/46),blocker15:05:48.834Z. Finding1wasnotfailedmismatchandgetsNOexceptionfromthisevidence. NativeAlpha96alsoactualstatecompleted15:05:12.368Z.
+
+Independent source14/96 scientificreviewandconsumerchecks remain required. Sourceproposal separateowner-reader105-two-boundary-intakes fixesepsilon0definitionandzero-horizonStatementwithoutnarrowingclaims; this routingentryacceptsnomathematics. Preserveunknownhistoricalcompositecarrierdispositionevenwithauthenticrawsource. No canonical/nativeedits, hashes, validators, gates, tests or retry occurred.

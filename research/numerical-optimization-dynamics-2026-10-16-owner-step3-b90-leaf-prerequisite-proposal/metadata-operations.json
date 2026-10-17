@@ -1,0 +1,845 @@
+[
+  {
+    "file": "research/numerical-optimization-dynamics-2026-10-16-batch-90.pages.json",
+    "path": [
+      1,
+      "items",
+      1,
+      "deps"
+    ],
+    "before": [
+      "def-chebyshev-gauss-lobatto-collocation-grid",
+      "lem-sine-chord-and-lipschitz-bounds",
+      "thm-sine-and-cosine-subtraction-formulas",
+      "thm-sine-and-cosine-addition-formulas",
+      "thm-sine-cosine-signs-monotonicity-and-ranges",
+      "thm-quarter-turn-values-and-shift-formulas",
+      "thm-of-square-roots",
+      "ex-the-reciprocal-of-k-plus-one-is-null",
+      "thm-algebra-of-limits"
+    ],
+    "after": [
+      "def-chebyshev-gauss-lobatto-collocation-grid",
+      "lem-sine-chord-and-lipschitz-bounds",
+      "thm-sine-and-cosine-subtraction-formulas",
+      "thm-sine-and-cosine-addition-formulas",
+      "thm-sine-cosine-signs-monotonicity-and-ranges",
+      "thm-quarter-turn-values-and-shift-formulas",
+      "thm-of-square-roots",
+      "cor-archimedean-reciprocal",
+      "lem-of-naturals-positive",
+      "lem-of-inverse-positive",
+      "thm-algebra-of-limits"
+    ]
+  },
+  {
+    "file": "research/numerical-optimization-dynamics-2026-10-16-batch-90.proof-contracts.json",
+    "path": [
+      "contracts",
+      "ex-chebyshev-lobatto-endpoint-clustering"
+    ],
+    "before": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-chebyshev-gauss-lobatto-collocation-grid",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ be an integer and put $x_j=\\cos(j\\pi/N)$ for $j=0,\\ldots,N$. The ordering is decreasing: $x_0=1$ and $x_N=-1$. These are the Chebyshev\u2013Gauss\u2013Lobatto nodes; [[thm-chebyshev-multiple-angle-identities]] gives $T_N(x_j)=(-1)^j$. They are distinct because cosine is strictly decreasing on $[0,\\pi]$ by [[thm-sine-cosine-signs-monotonicity-and-ranges]].\n\nFor interpolation using [[def-cardinal-polynomial-interpolation]], use the increasing reindexing $z_k=x_{N-k}$, $k=0,\\ldots,N$. For descending-grid data $U_j$, the corresponding increasing data are $Y_k=U_{N-k}$.\n\nFor nodal data $U_0,\\ldots,U_N$, define $I_N^LU$ to be the cardinal interpolant of $(Y_k)_{k=0}^N$ at $(z_k)_{k=0}^N$. For a function $f$ defined on the interval, write $I_N^Lf$ for the interpolant of its nodal values. The increasing-node interpolation theorem [[thm-cardinal-polynomial-interpolant-exists-uniquely]] makes this polynomial unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-and-cosine-subtraction-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $u,v$,\n$$\\sin(u-v)=\\sin u\\cos v-\\cos u\\sin v,\\qquad \\cos(u-v)=\\cos u\\cos v+\\sin u\\sin v.$$ The conventions and prerequisite facts used below are recorded in [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-sine-chord-and-lipschitz-bounds",
+          "source_section": "Statement",
+          "quote": "For $0\\leq u\\leq\\pi/2$,\n$$\\sin u\\geq \\frac{2u}{\\pi}.$$\nFor all real $u,v$,\n$$|\\sin u-\\sin v|\\leq |u-v|.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "ex-the-reciprocal-of-k-plus-one-is-null",
+          "source_section": "Example",
+          "quote": "The sequence of reals $x_k := (k+1)^{-1}$, with $k+1 = \\sigma(k)$ the successor\nof $k$ read in $\\mathbb{R}$ through the canonical-natural embedding\n([[lem-of-naturals-positive]]), converges to $0$ ([[def-real-limit]],\n[[def-sequence]]). Every term is defined and positive. This is the real-sequence\ncounterpart of the rational null sequence $1/n$ of the construction page, and it\nis the reference null sequence of this page: the later examples and\ncounterexamples compute with it. The argument spends only density of\n$\\mathbb{Q}$ in $\\mathbb{R}$ ([[lem-rat-embeds-dense]]), the Archimedean\nproperty of $\\mathbb{Q}$ ([[lem-rat-archimedean]]) and reciprocal reversal\n([[lem-of-inverse-positive]]); no completeness beyond the Archimedean property\nand no choice principle is used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-limits",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ and $(y_k)$ be sequences of reals ([[def-sequence]]) converging to\n$x$ and $y$ respectively ([[def-real-limit]]), and let $c \\in \\mathbb{R}$. Then\n\n$$x_k + y_k \\to x + y, \\qquad c\\,x_k \\to c\\,x, \\qquad x_k - y_k \\to x - y, \\qquad x_k y_k \\to x y,$$\n\nand if in addition $y \\ne 0$ and $y_k \\ne 0$ for every $k \\in \\mathbb{N}$, then\n\n$$\\frac{1}{y_k} \\to \\frac{1}{y} \\qquad \\text{and} \\qquad \\frac{x_k}{y_k} \\to \\frac{x}{y}.$$\n\nThe quotient case rests on an eventual lower bound for $|y_k|$, proved below\nrather than assumed: $|y_k| > |y|/2$ for all sufficiently large $k$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The subtraction and addition identities [F2] give $x_j-x_{j+1}=2\\sin\\left(\\frac{(2j+1)\\pi}{2N}\\right)\\sin\\left(\\frac\\pi{2N}\\right),\\qquad x_0-x_1=2\\sin^2\\left(\\frac\\pi{2N}\\right).$ By [F3], $\\sin(\\pi/(2N))\\le\\pi/(2N)$, hence $x_0-x_1\\le\\pi^2/(2N^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. Thus $\\sin^2(\\pi/4)=1/2$; the chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, so uniqueness of the nonnegative square root [F5] gives $\\sin(\\pi/4)=\\sqrt2/2$. Monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $a=\\pi/(2N)$. Every adjacent gap has the form $2\\sin((2j+1)a)\\sin a$, with $a\\le(2j+1)a\\le\\pi-a$. Reflecting about $\\pi/2$ and using monotonicity [F4] gives $\\sin((2j+1)a)\\ge\\sin a$; equality occurs at $j=0$ and $j=N-1$. Hence the smallest spacing is exactly $2\\sin^2a$, and [F3] bounds it by $2/N^2\\le2\\sin^2a\\le\\pi^2/(2N^2)$. The endpoint-to-central-gap ratio is at most $\\pi^2/(2N)$, which tends to zero by [F6]. For $N\\ge3$, the selected central angle, reflected into $[0,\\pi/2]$ if necessary, is strictly larger than $a$; strict monotonicity in [F4] makes its gap larger than the endpoint gap. For $N=2$, the nodes are $1,0,-1$ and both gaps equal $1$. This proves the quadratic endpoint scale with its stated nonuniformity exception.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The supplied-data/domain clause for the empty-input distinction is stated in Verification 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra] The existing argument records step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra]"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example uses Lobatto grids with N>=2. Thus the denominators 2N and 2N^2 in proof step 1.1 cannot be zero, and the selected central gap in proof step 2.1 is at least sqrt(2)/N>0 before the ratio in proof step 3.1 is formed. N=0 is not an admissible grid."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The actual scalar/index/dimension regime for the one case is stated in Verification 1.1: The subtraction and addition identities [F2] give $x_j-x_{j+1}=2\\sin\\left(\\frac{(2j+1)\\pi}{2N}\\right)\\sin\\left(\\frac\\pi{2N}\\right),\\qquad x_0-x_1=2\\sin^2\\left(\\frac\\pi{2N}\\right).$ By [F3], $\\sin(\\pi/(2N))\\le\\pi/(2N)$, hence $x_0-x_1\\le\\pi^2/(2N^2)$. [F1, F2, F3, algebra] The existing argument records step 1.1: The subtraction and addition identities [F2] give $x_j-x_{j+1}=2\\sin\\left(\\frac{(2j+1)\\pi}{2N}\\right)\\sin\\left(\\frac\\pi{2N}\\right),\\qquad x_0-x_1=2\\sin^2\\left(\\frac\\pi{2N}\\right).$ By [F3], $\\sin(\\pi/(2N))\\le\\pi/(2N)$, hence $x_0-x_1\\le\\pi^2/(2N^2)$. [F1, F2, F3, algebra]; step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra]"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "N=2 gives the uniform nodes 1,0,-1 with equal gaps 1; nonuniformity is asserted only for N>=3 and proved by strict sine monotonicity in Verification 3.1. N=1 is excluded from this example; the quadratic bounds and asymptotic ratio remain valid for N>=2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The actual endpoint/domain or finite stopping-boundary clause is stated in Example: For $x_j=\\cos(j\\pi/N)$, the endpoint gap $x_0-x_1$ is at most $\\pi^2/(2N^2)$, whereas a central adjacent-node gap is at least $\\sqrt2/N$. Their ratio tends to zero, and the smallest spacing has quadratic endpoint scale. The mesh is nonuniform for $N\\ge3$; for $N=2$ the nodes $1,0,-1$ are equally spaced. The existing argument records step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra]; step 3.1: The ratio of the endpoint gap to this central gap is at most $\\pi^2/(2N)$, which tends to zero as $N\\to\\infty$. This proves the stated endpoint clustering and nonuniformity. [step 1.1, step 2.1, algebra] \u220e"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The stated construction/selection regime, with all declared ambient axioms retained is stated in Verification 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra] The existing argument records step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra] This worksheet introduces no additional selection axiom and does not remove any choice assumption in the item or its suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The asserted conclusion is a construction, estimate, or conditional assertion, rather than a forward half of an equivalence. The actual Example conclusion is: For $x_j=\\cos(j\\pi/N)$, the endpoint gap $x_0-x_1$ is at most $\\pi^2/(2N^2)$, whereas a central adjacent-node gap is at least $\\sqrt2/N$. Their ratio tends to zero, and the smallest spacing has quadratic endpoint scale. The mesh is nonuniform for $N\\ge3$; for $N=2$ the nodes $1,0,-1$ are equally spaced."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The claim does not assert the converse obtained by turning its conclusion into sufficient hypotheses. The actual Example conclusion is: For $x_j=\\cos(j\\pi/N)$, the endpoint gap $x_0-x_1$ is at most $\\pi^2/(2N^2)$, whereas a central adjacent-node gap is at least $\\sqrt2/N$. Their ratio tends to zero, and the smallest spacing has quadratic endpoint scale. The mesh is nonuniform for $N\\ge3$; for $N=2$ the nodes $1,0,-1$ are equally spaced."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "four-interval-lobatto-gap-check",
+          "claim": "For N=4, the endpoint and center gaps exhibit the claimed nonuniformity.",
+          "result": "The nodes are 1,sqrt(2)/2,0,-sqrt(2)/2,-1. The first gap is 1-sqrt(2)/2 and the central gap is sqrt(2)/2."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-90",
+        "notes": "The trigonometric gap formula and chord/Lipschitz bounds yield 2/N^2<=minimum gap<=pi^2/(2N^2). The central gap is >=sqrt(2)/N for both parities, and the ratio bound tends to zero. Found and repaired the overstrong nonuniformity assertion at N=2: nodes (1,0,-1) have equal gaps. For N>=3 the central sine argument is strictly larger than the endpoint argument after reflection, proving strict gap inequality. Statement now retains this exact exception and all asymptotic claims. Repository reference search found only the owning examples page placement, whose endpoint-clustering summary remains sound; no logical item consumers."
+      }
+    },
+    "after": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-chebyshev-gauss-lobatto-collocation-grid",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ be an integer and put $x_j=\\cos(j\\pi/N)$ for $j=0,\\ldots,N$. The ordering is decreasing: $x_0=1$ and $x_N=-1$. These are the Chebyshev\u2013Gauss\u2013Lobatto nodes; [[thm-chebyshev-multiple-angle-identities]] gives $T_N(x_j)=(-1)^j$. They are distinct because cosine is strictly decreasing on $[0,\\pi]$ by [[thm-sine-cosine-signs-monotonicity-and-ranges]].\n\nFor interpolation using [[def-cardinal-polynomial-interpolation]], use the increasing reindexing $z_k=x_{N-k}$, $k=0,\\ldots,N$. For descending-grid data $U_j$, the corresponding increasing data are $Y_k=U_{N-k}$.\n\nFor nodal data $U_0,\\ldots,U_N$, define $I_N^LU$ to be the cardinal interpolant of $(Y_k)_{k=0}^N$ at $(z_k)_{k=0}^N$. For a function $f$ defined on the interval, write $I_N^Lf$ for the interpolant of its nodal values. The increasing-node interpolation theorem [[thm-cardinal-polynomial-interpolant-exists-uniquely]] makes this polynomial unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-and-cosine-subtraction-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $u,v$,\n$$\\sin(u-v)=\\sin u\\cos v-\\cos u\\sin v,\\qquad \\cos(u-v)=\\cos u\\cos v+\\sin u\\sin v.$$ The conventions and prerequisite facts used below are recorded in [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-sine-chord-and-lipschitz-bounds",
+          "source_section": "Statement",
+          "quote": "For $0\\leq u\\leq\\pi/2$,\n$$\\sin u\\geq \\frac{2u}{\\pi}.$$\nFor all real $u,v$,\n$$|\\sin u-\\sin v|\\leq |u-v|.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in [[def-field]], and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-inverse-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and\nlet $a, b \\in F$.\n\n1. If $a > 0$ then $a^{-1} > 0$.\n2. If $0 < a < b$ then $0 < b^{-1} < a^{-1}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-limits",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ and $(y_k)$ be sequences of reals ([[def-sequence]]) converging to\n$x$ and $y$ respectively ([[def-real-limit]]), and let $c \\in \\mathbb{R}$. Then\n\n$$x_k + y_k \\to x + y, \\qquad c\\,x_k \\to c\\,x, \\qquad x_k - y_k \\to x - y, \\qquad x_k y_k \\to x y,$$\n\nand if in addition $y \\ne 0$ and $y_k \\ne 0$ for every $k \\in \\mathbb{N}$, then\n\n$$\\frac{1}{y_k} \\to \\frac{1}{y} \\qquad \\text{and} \\qquad \\frac{x_k}{y_k} \\to \\frac{x}{y}.$$\n\nThe quotient case rests on an eventual lower bound for $|y_k|$, proved below\nrather than assumed: $|y_k| > |y|/2$ for all sufficiently large $k$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The subtraction and addition identities [F2] give $x_j-x_{j+1}=2\\sin\\left(\\frac{(2j+1)\\pi}{2N}\\right)\\sin\\left(\\frac\\pi{2N}\\right),\\qquad x_0-x_1=2\\sin^2\\left(\\frac\\pi{2N}\\right).$ By [F3], $\\sin(\\pi/(2N))\\le\\pi/(2N)$, hence $x_0-x_1\\le\\pi^2/(2N^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. Thus $\\sin^2(\\pi/4)=1/2$; the chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, so uniqueness of the nonnegative square root [F5] gives $\\sin(\\pi/4)=\\sqrt2/2$. Monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $a=\\pi/(2N)$. Every adjacent gap has the form $2\\sin((2j+1)a)\\sin a$, with $a\\le(2j+1)a\\le\\pi-a$. Reflecting about $\\pi/2$ and using monotonicity [F4] gives $\\sin((2j+1)a)\\ge\\sin a$; equality occurs at $j=0$ and $j=N-1$. Hence the smallest spacing is exactly $2\\sin^2a$, and [F3] bounds it by $2/N^2\\le2\\sin^2a\\le\\pi^2/(2N^2)$. For every $\\varepsilon>0$, [F6] supplies an integer $n\\ge1$ with $1/n<\\varepsilon$; for every integer $N\\ge\\max\\{2,n\\}$, positivity and monotonicity of the canonical naturals and reciprocal order give $0<1/N\\le1/n<\\varepsilon$. Thus $1/N\\to0$, and the endpoint-to-central-gap ratio is at most $\\pi^2/(2N)$, which tends to zero by the fixed-multiple limit law in [F6]. For $N\\ge3$, the selected central angle, reflected into $[0,\\pi/2]$ if necessary, is strictly larger than $a$; strict monotonicity in [F4] makes its gap larger than the endpoint gap. For $N=2$, the nodes are $1,0,-1$ and both gaps equal $1$. This proves the quadratic endpoint scale with its stated nonuniformity exception.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The supplied-data/domain clause for the empty-input distinction is stated in Verification 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra] The existing argument records step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra]"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example uses Lobatto grids with N>=2. Thus the denominators 2N and 2N^2 in proof step 1.1 cannot be zero, and the selected central gap in proof step 2.1 is at least sqrt(2)/N>0 before the ratio in proof step 3.1 is formed. N=0 is not an admissible grid."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The actual scalar/index/dimension regime for the one case is stated in Verification 1.1: The subtraction and addition identities [F2] give $x_j-x_{j+1}=2\\sin\\left(\\frac{(2j+1)\\pi}{2N}\\right)\\sin\\left(\\frac\\pi{2N}\\right),\\qquad x_0-x_1=2\\sin^2\\left(\\frac\\pi{2N}\\right).$ By [F3], $\\sin(\\pi/(2N))\\le\\pi/(2N)$, hence $x_0-x_1\\le\\pi^2/(2N^2)$. [F1, F2, F3, algebra] The existing argument records step 1.1: The subtraction and addition identities [F2] give $x_j-x_{j+1}=2\\sin\\left(\\frac{(2j+1)\\pi}{2N}\\right)\\sin\\left(\\frac\\pi{2N}\\right),\\qquad x_0-x_1=2\\sin^2\\left(\\frac\\pi{2N}\\right).$ By [F3], $\\sin(\\pi/(2N))\\le\\pi/(2N)$, hence $x_0-x_1\\le\\pi^2/(2N^2)$. [F1, F2, F3, algebra]; step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra]"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "N=2 gives the uniform nodes 1,0,-1 with equal gaps 1; nonuniformity is asserted only for N>=3 and proved by strict sine monotonicity in Verification 3.1. N=1 is excluded from this example; the quadratic bounds and asymptotic ratio remain valid for N>=2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The actual endpoint/domain or finite stopping-boundary clause is stated in Example: For $x_j=\\cos(j\\pi/N)$, the endpoint gap $x_0-x_1$ is at most $\\pi^2/(2N^2)$, whereas a central adjacent-node gap is at least $\\sqrt2/N$. Their ratio tends to zero, and the smallest spacing has quadratic endpoint scale. The mesh is nonuniform for $N\\ge3$; for $N=2$ the nodes $1,0,-1$ are equally spaced. The existing argument records step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra]; step 3.1: The ratio of the endpoint gap to this central gap is at most $\\pi^2/(2N)$, which tends to zero as $N\\to\\infty$. This proves the stated endpoint clustering and nonuniformity. [step 1.1, step 2.1, algebra] \u220e"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The stated construction/selection regime, with all declared ambient axioms retained is stated in Verification 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra] The existing argument records step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra] This worksheet introduces no additional selection axiom and does not remove any choice assumption in the item or its suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The asserted conclusion is a construction, estimate, or conditional assertion, rather than a forward half of an equivalence. The actual Example conclusion is: For $x_j=\\cos(j\\pi/N)$, the endpoint gap $x_0-x_1$ is at most $\\pi^2/(2N^2)$, whereas a central adjacent-node gap is at least $\\sqrt2/N$. Their ratio tends to zero, and the smallest spacing has quadratic endpoint scale. The mesh is nonuniform for $N\\ge3$; for $N=2$ the nodes $1,0,-1$ are equally spaced."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The claim does not assert the converse obtained by turning its conclusion into sufficient hypotheses. The actual Example conclusion is: For $x_j=\\cos(j\\pi/N)$, the endpoint gap $x_0-x_1$ is at most $\\pi^2/(2N^2)$, whereas a central adjacent-node gap is at least $\\sqrt2/N$. Their ratio tends to zero, and the smallest spacing has quadratic endpoint scale. The mesh is nonuniform for $N\\ge3$; for $N=2$ the nodes $1,0,-1$ are equally spaced."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "four-interval-lobatto-gap-check",
+          "claim": "For N=4, the endpoint and center gaps exhibit the claimed nonuniformity.",
+          "result": "The nodes are 1,sqrt(2)/2,0,-sqrt(2)/2,-1. The first gap is 1-sqrt(2)/2 and the central gap is sqrt(2)/2."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-90",
+        "notes": "The trigonometric gap formula and chord/Lipschitz bounds yield 2/N^2<=minimum gap<=pi^2/(2N^2). The central gap is >=sqrt(2)/N for both parities, and the ratio bound tends to zero. Found and repaired the overstrong nonuniformity assertion at N=2: nodes (1,0,-1) have equal gaps. For N>=3 the central sine argument is strictly larger than the endpoint argument after reflection, proving strict gap inequality. Statement now retains this exact exception and all asymptotic claims. Repository reference search found only the owning examples page placement, whose endpoint-clustering summary remains sound; no logical item consumers."
+      }
+    }
+  },
+  {
+    "file": "research/numerical-optimization-dynamics-2026-10-16-proof-contracts.json",
+    "path": [
+      "contracts",
+      "ex-chebyshev-lobatto-endpoint-clustering"
+    ],
+    "before": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-chebyshev-gauss-lobatto-collocation-grid",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ be an integer and put $x_j=\\cos(j\\pi/N)$ for $j=0,\\ldots,N$. The ordering is decreasing: $x_0=1$ and $x_N=-1$. These are the Chebyshev\u2013Gauss\u2013Lobatto nodes; [[thm-chebyshev-multiple-angle-identities]] gives $T_N(x_j)=(-1)^j$. They are distinct because cosine is strictly decreasing on $[0,\\pi]$ by [[thm-sine-cosine-signs-monotonicity-and-ranges]].\n\nFor interpolation using [[def-cardinal-polynomial-interpolation]], use the increasing reindexing $z_k=x_{N-k}$, $k=0,\\ldots,N$. For descending-grid data $U_j$, the corresponding increasing data are $Y_k=U_{N-k}$.\n\nFor nodal data $U_0,\\ldots,U_N$, define $I_N^LU$ to be the cardinal interpolant of $(Y_k)_{k=0}^N$ at $(z_k)_{k=0}^N$. For a function $f$ defined on the interval, write $I_N^Lf$ for the interpolant of its nodal values. The increasing-node interpolation theorem [[thm-cardinal-polynomial-interpolant-exists-uniquely]] makes this polynomial unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-and-cosine-subtraction-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $u,v$,\n$$\\sin(u-v)=\\sin u\\cos v-\\cos u\\sin v,\\qquad \\cos(u-v)=\\cos u\\cos v+\\sin u\\sin v.$$ The conventions and prerequisite facts used below are recorded in [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-sine-chord-and-lipschitz-bounds",
+          "source_section": "Statement",
+          "quote": "For $0\\leq u\\leq\\pi/2$,\n$$\\sin u\\geq \\frac{2u}{\\pi}.$$\nFor all real $u,v$,\n$$|\\sin u-\\sin v|\\leq |u-v|.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "ex-the-reciprocal-of-k-plus-one-is-null",
+          "source_section": "Example",
+          "quote": "The sequence of reals $x_k := (k+1)^{-1}$, with $k+1 = \\sigma(k)$ the successor\nof $k$ read in $\\mathbb{R}$ through the canonical-natural embedding\n([[lem-of-naturals-positive]]), converges to $0$ ([[def-real-limit]],\n[[def-sequence]]). Every term is defined and positive. This is the real-sequence\ncounterpart of the rational null sequence $1/n$ of the construction page, and it\nis the reference null sequence of this page: the later examples and\ncounterexamples compute with it. The argument spends only density of\n$\\mathbb{Q}$ in $\\mathbb{R}$ ([[lem-rat-embeds-dense]]), the Archimedean\nproperty of $\\mathbb{Q}$ ([[lem-rat-archimedean]]) and reciprocal reversal\n([[lem-of-inverse-positive]]); no completeness beyond the Archimedean property\nand no choice principle is used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-limits",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ and $(y_k)$ be sequences of reals ([[def-sequence]]) converging to\n$x$ and $y$ respectively ([[def-real-limit]]), and let $c \\in \\mathbb{R}$. Then\n\n$$x_k + y_k \\to x + y, \\qquad c\\,x_k \\to c\\,x, \\qquad x_k - y_k \\to x - y, \\qquad x_k y_k \\to x y,$$\n\nand if in addition $y \\ne 0$ and $y_k \\ne 0$ for every $k \\in \\mathbb{N}$, then\n\n$$\\frac{1}{y_k} \\to \\frac{1}{y} \\qquad \\text{and} \\qquad \\frac{x_k}{y_k} \\to \\frac{x}{y}.$$\n\nThe quotient case rests on an eventual lower bound for $|y_k|$, proved below\nrather than assumed: $|y_k| > |y|/2$ for all sufficiently large $k$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The subtraction and addition identities [F2] give $x_j-x_{j+1}=2\\sin\\left(\\frac{(2j+1)\\pi}{2N}\\right)\\sin\\left(\\frac\\pi{2N}\\right),\\qquad x_0-x_1=2\\sin^2\\left(\\frac\\pi{2N}\\right).$ By [F3], $\\sin(\\pi/(2N))\\le\\pi/(2N)$, hence $x_0-x_1\\le\\pi^2/(2N^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. Thus $\\sin^2(\\pi/4)=1/2$; the chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, so uniqueness of the nonnegative square root [F5] gives $\\sin(\\pi/4)=\\sqrt2/2$. Monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $a=\\pi/(2N)$. Every adjacent gap has the form $2\\sin((2j+1)a)\\sin a$, with $a\\le(2j+1)a\\le\\pi-a$. Reflecting about $\\pi/2$ and using monotonicity [F4] gives $\\sin((2j+1)a)\\ge\\sin a$; equality occurs at $j=0$ and $j=N-1$. Hence the smallest spacing is exactly $2\\sin^2a$, and [F3] bounds it by $2/N^2\\le2\\sin^2a\\le\\pi^2/(2N^2)$. The endpoint-to-central-gap ratio is at most $\\pi^2/(2N)$, which tends to zero by [F6]. For $N\\ge3$, the selected central angle, reflected into $[0,\\pi/2]$ if necessary, is strictly larger than $a$; strict monotonicity in [F4] makes its gap larger than the endpoint gap. For $N=2$, the nodes are $1,0,-1$ and both gaps equal $1$. This proves the quadratic endpoint scale with its stated nonuniformity exception.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The supplied-data/domain clause for the empty-input distinction is stated in Verification 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra] The existing argument records step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra]"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example uses Lobatto grids with N>=2. Thus the denominators 2N and 2N^2 in proof step 1.1 cannot be zero, and the selected central gap in proof step 2.1 is at least sqrt(2)/N>0 before the ratio in proof step 3.1 is formed. N=0 is not an admissible grid."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The actual scalar/index/dimension regime for the one case is stated in Verification 1.1: The subtraction and addition identities [F2] give $x_j-x_{j+1}=2\\sin\\left(\\frac{(2j+1)\\pi}{2N}\\right)\\sin\\left(\\frac\\pi{2N}\\right),\\qquad x_0-x_1=2\\sin^2\\left(\\frac\\pi{2N}\\right).$ By [F3], $\\sin(\\pi/(2N))\\le\\pi/(2N)$, hence $x_0-x_1\\le\\pi^2/(2N^2)$. [F1, F2, F3, algebra] The existing argument records step 1.1: The subtraction and addition identities [F2] give $x_j-x_{j+1}=2\\sin\\left(\\frac{(2j+1)\\pi}{2N}\\right)\\sin\\left(\\frac\\pi{2N}\\right),\\qquad x_0-x_1=2\\sin^2\\left(\\frac\\pi{2N}\\right).$ By [F3], $\\sin(\\pi/(2N))\\le\\pi/(2N)$, hence $x_0-x_1\\le\\pi^2/(2N^2)$. [F1, F2, F3, algebra]; step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra]"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "N=2 gives the uniform nodes 1,0,-1 with equal gaps 1; nonuniformity is asserted only for N>=3 and proved by strict sine monotonicity in Verification 3.1. N=1 is excluded from this example; the quadratic bounds and asymptotic ratio remain valid for N>=2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The actual endpoint/domain or finite stopping-boundary clause is stated in Example: For $x_j=\\cos(j\\pi/N)$, the endpoint gap $x_0-x_1$ is at most $\\pi^2/(2N^2)$, whereas a central adjacent-node gap is at least $\\sqrt2/N$. Their ratio tends to zero, and the smallest spacing has quadratic endpoint scale. The mesh is nonuniform for $N\\ge3$; for $N=2$ the nodes $1,0,-1$ are equally spaced. The existing argument records step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra]; step 3.1: The ratio of the endpoint gap to this central gap is at most $\\pi^2/(2N)$, which tends to zero as $N\\to\\infty$. This proves the stated endpoint clustering and nonuniformity. [step 1.1, step 2.1, algebra] \u220e"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The stated construction/selection regime, with all declared ambient axioms retained is stated in Verification 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra] The existing argument records step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra] This worksheet introduces no additional selection axiom and does not remove any choice assumption in the item or its suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The asserted conclusion is a construction, estimate, or conditional assertion, rather than a forward half of an equivalence. The actual Example conclusion is: For $x_j=\\cos(j\\pi/N)$, the endpoint gap $x_0-x_1$ is at most $\\pi^2/(2N^2)$, whereas a central adjacent-node gap is at least $\\sqrt2/N$. Their ratio tends to zero, and the smallest spacing has quadratic endpoint scale. The mesh is nonuniform for $N\\ge3$; for $N=2$ the nodes $1,0,-1$ are equally spaced."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The claim does not assert the converse obtained by turning its conclusion into sufficient hypotheses. The actual Example conclusion is: For $x_j=\\cos(j\\pi/N)$, the endpoint gap $x_0-x_1$ is at most $\\pi^2/(2N^2)$, whereas a central adjacent-node gap is at least $\\sqrt2/N$. Their ratio tends to zero, and the smallest spacing has quadratic endpoint scale. The mesh is nonuniform for $N\\ge3$; for $N=2$ the nodes $1,0,-1$ are equally spaced."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "four-interval-lobatto-gap-check",
+          "claim": "For N=4, the endpoint and center gaps exhibit the claimed nonuniformity.",
+          "result": "The nodes are 1,sqrt(2)/2,0,-sqrt(2)/2,-1. The first gap is 1-sqrt(2)/2 and the central gap is sqrt(2)/2."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-90",
+        "notes": "The trigonometric gap formula and chord/Lipschitz bounds yield 2/N^2<=minimum gap<=pi^2/(2N^2). The central gap is >=sqrt(2)/N for both parities, and the ratio bound tends to zero. Found and repaired the overstrong nonuniformity assertion at N=2: nodes (1,0,-1) have equal gaps. For N>=3 the central sine argument is strictly larger than the endpoint argument after reflection, proving strict gap inequality. Statement now retains this exact exception and all asymptotic claims. Repository reference search found only the owning examples page placement, whose endpoint-clustering summary remains sound; no logical item consumers."
+      }
+    },
+    "after": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-chebyshev-gauss-lobatto-collocation-grid",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ be an integer and put $x_j=\\cos(j\\pi/N)$ for $j=0,\\ldots,N$. The ordering is decreasing: $x_0=1$ and $x_N=-1$. These are the Chebyshev\u2013Gauss\u2013Lobatto nodes; [[thm-chebyshev-multiple-angle-identities]] gives $T_N(x_j)=(-1)^j$. They are distinct because cosine is strictly decreasing on $[0,\\pi]$ by [[thm-sine-cosine-signs-monotonicity-and-ranges]].\n\nFor interpolation using [[def-cardinal-polynomial-interpolation]], use the increasing reindexing $z_k=x_{N-k}$, $k=0,\\ldots,N$. For descending-grid data $U_j$, the corresponding increasing data are $Y_k=U_{N-k}$.\n\nFor nodal data $U_0,\\ldots,U_N$, define $I_N^LU$ to be the cardinal interpolant of $(Y_k)_{k=0}^N$ at $(z_k)_{k=0}^N$. For a function $f$ defined on the interval, write $I_N^Lf$ for the interpolant of its nodal values. The increasing-node interpolation theorem [[thm-cardinal-polynomial-interpolant-exists-uniquely]] makes this polynomial unique.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-and-cosine-subtraction-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $u,v$,\n$$\\sin(u-v)=\\sin u\\cos v-\\cos u\\sin v,\\qquad \\cos(u-v)=\\cos u\\cos v+\\sin u\\sin v.$$ The conventions and prerequisite facts used below are recorded in [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-sine-chord-and-lipschitz-bounds",
+          "source_section": "Statement",
+          "quote": "For $0\\leq u\\leq\\pi/2$,\n$$\\sin u\\geq \\frac{2u}{\\pi}.$$\nFor all real $u,v$,\n$$|\\sin u-\\sin v|\\leq |u-v|.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in [[def-field]], and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-inverse-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and\nlet $a, b \\in F$.\n\n1. If $a > 0$ then $a^{-1} > 0$.\n2. If $0 < a < b$ then $0 < b^{-1} < a^{-1}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-limits",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ and $(y_k)$ be sequences of reals ([[def-sequence]]) converging to\n$x$ and $y$ respectively ([[def-real-limit]]), and let $c \\in \\mathbb{R}$. Then\n\n$$x_k + y_k \\to x + y, \\qquad c\\,x_k \\to c\\,x, \\qquad x_k - y_k \\to x - y, \\qquad x_k y_k \\to x y,$$\n\nand if in addition $y \\ne 0$ and $y_k \\ne 0$ for every $k \\in \\mathbb{N}$, then\n\n$$\\frac{1}{y_k} \\to \\frac{1}{y} \\qquad \\text{and} \\qquad \\frac{x_k}{y_k} \\to \\frac{x}{y}.$$\n\nThe quotient case rests on an eventual lower bound for $|y_k|$, proved below\nrather than assumed: $|y_k| > |y|/2$ for all sufficiently large $k$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The subtraction and addition identities [F2] give $x_j-x_{j+1}=2\\sin\\left(\\frac{(2j+1)\\pi}{2N}\\right)\\sin\\left(\\frac\\pi{2N}\\right),\\qquad x_0-x_1=2\\sin^2\\left(\\frac\\pi{2N}\\right).$ By [F3], $\\sin(\\pi/(2N))\\le\\pi/(2N)$, hence $x_0-x_1\\le\\pi^2/(2N^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. Thus $\\sin^2(\\pi/4)=1/2$; the chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, so uniqueness of the nonnegative square root [F5] gives $\\sin(\\pi/4)=\\sqrt2/2$. Monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $a=\\pi/(2N)$. Every adjacent gap has the form $2\\sin((2j+1)a)\\sin a$, with $a\\le(2j+1)a\\le\\pi-a$. Reflecting about $\\pi/2$ and using monotonicity [F4] gives $\\sin((2j+1)a)\\ge\\sin a$; equality occurs at $j=0$ and $j=N-1$. Hence the smallest spacing is exactly $2\\sin^2a$, and [F3] bounds it by $2/N^2\\le2\\sin^2a\\le\\pi^2/(2N^2)$. For every $\\varepsilon>0$, [F6] supplies an integer $n\\ge1$ with $1/n<\\varepsilon$; for every integer $N\\ge\\max\\{2,n\\}$, positivity and monotonicity of the canonical naturals and reciprocal order give $0<1/N\\le1/n<\\varepsilon$. Thus $1/N\\to0$, and the endpoint-to-central-gap ratio is at most $\\pi^2/(2N)$, which tends to zero by the fixed-multiple limit law in [F6]. For $N\\ge3$, the selected central angle, reflected into $[0,\\pi/2]$ if necessary, is strictly larger than $a$; strict monotonicity in [F4] makes its gap larger than the endpoint gap. For $N=2$, the nodes are $1,0,-1$ and both gaps equal $1$. This proves the quadratic endpoint scale with its stated nonuniformity exception.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The supplied-data/domain clause for the empty-input distinction is stated in Verification 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra] The existing argument records step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra]"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example uses Lobatto grids with N>=2. Thus the denominators 2N and 2N^2 in proof step 1.1 cannot be zero, and the selected central gap in proof step 2.1 is at least sqrt(2)/N>0 before the ratio in proof step 3.1 is formed. N=0 is not an admissible grid."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The actual scalar/index/dimension regime for the one case is stated in Verification 1.1: The subtraction and addition identities [F2] give $x_j-x_{j+1}=2\\sin\\left(\\frac{(2j+1)\\pi}{2N}\\right)\\sin\\left(\\frac\\pi{2N}\\right),\\qquad x_0-x_1=2\\sin^2\\left(\\frac\\pi{2N}\\right).$ By [F3], $\\sin(\\pi/(2N))\\le\\pi/(2N)$, hence $x_0-x_1\\le\\pi^2/(2N^2)$. [F1, F2, F3, algebra] The existing argument records step 1.1: The subtraction and addition identities [F2] give $x_j-x_{j+1}=2\\sin\\left(\\frac{(2j+1)\\pi}{2N}\\right)\\sin\\left(\\frac\\pi{2N}\\right),\\qquad x_0-x_1=2\\sin^2\\left(\\frac\\pi{2N}\\right).$ By [F3], $\\sin(\\pi/(2N))\\le\\pi/(2N)$, hence $x_0-x_1\\le\\pi^2/(2N^2)$. [F1, F2, F3, algebra]; step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra]"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "N=2 gives the uniform nodes 1,0,-1 with equal gaps 1; nonuniformity is asserted only for N>=3 and proved by strict sine monotonicity in Verification 3.1. N=1 is excluded from this example; the quadratic bounds and asymptotic ratio remain valid for N>=2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The actual endpoint/domain or finite stopping-boundary clause is stated in Example: For $x_j=\\cos(j\\pi/N)$, the endpoint gap $x_0-x_1$ is at most $\\pi^2/(2N^2)$, whereas a central adjacent-node gap is at least $\\sqrt2/N$. Their ratio tends to zero, and the smallest spacing has quadratic endpoint scale. The mesh is nonuniform for $N\\ge3$; for $N=2$ the nodes $1,0,-1$ are equally spaced. The existing argument records step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra]; step 3.1: The ratio of the endpoint gap to this central gap is at most $\\pi^2/(2N)$, which tends to zero as $N\\to\\infty$. This proves the stated endpoint clustering and nonuniformity. [step 1.1, step 2.1, algebra] \u220e"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The stated construction/selection regime, with all declared ambient axioms retained is stated in Verification 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra] The existing argument records step 2.1: If $N$ is odd, choose $j=(N-1)/2$; then $(2j+1)\\pi/(2N)=\\pi/2$ and [F4] gives sine equal to $1$, so the gap formula in step 1.1 and [F3] give a central gap at least $2/N\\ge\\sqrt2/N$. If $N$ is even, choose $j=N/2-1$ and write $t=\\pi/2-\\pi/(2N)\\ge\\pi/4$. The addition and subtraction formulas [F2] give $\\sin(\\pi/4)=\\cos(\\pi/4)$ and $2\\sin(\\pi/4)\\cos(\\pi/4)=\\sin(\\pi/2)=1$. The chord bound [F3] gives $\\sin(\\pi/4)\\ge1/2>0$, hence $\\sin(\\pi/4)=\\sqrt2/2$; monotonicity [F4] now gives $\\sin t\\ge\\sqrt2/2$. In either parity, [F3] also gives $\\sin(\\pi/(2N))\\ge1/N$, so the selected central gap in step 1.1 is at least $\\sqrt2/N$. [given, F2, F3, F4, step 1.1, algebra] This worksheet introduces no additional selection axiom and does not remove any choice assumption in the item or its suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The asserted conclusion is a construction, estimate, or conditional assertion, rather than a forward half of an equivalence. The actual Example conclusion is: For $x_j=\\cos(j\\pi/N)$, the endpoint gap $x_0-x_1$ is at most $\\pi^2/(2N^2)$, whereas a central adjacent-node gap is at least $\\sqrt2/N$. Their ratio tends to zero, and the smallest spacing has quadratic endpoint scale. The mesh is nonuniform for $N\\ge3$; for $N=2$ the nodes $1,0,-1$ are equally spaced."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Chebyshev\u2013Lobatto nodes cluster quadratically at the endpoints: The claim does not assert the converse obtained by turning its conclusion into sufficient hypotheses. The actual Example conclusion is: For $x_j=\\cos(j\\pi/N)$, the endpoint gap $x_0-x_1$ is at most $\\pi^2/(2N^2)$, whereas a central adjacent-node gap is at least $\\sqrt2/N$. Their ratio tends to zero, and the smallest spacing has quadratic endpoint scale. The mesh is nonuniform for $N\\ge3$; for $N=2$ the nodes $1,0,-1$ are equally spaced."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "four-interval-lobatto-gap-check",
+          "claim": "For N=4, the endpoint and center gaps exhibit the claimed nonuniformity.",
+          "result": "The nodes are 1,sqrt(2)/2,0,-sqrt(2)/2,-1. The first gap is 1-sqrt(2)/2 and the central gap is sqrt(2)/2."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-90",
+        "notes": "The trigonometric gap formula and chord/Lipschitz bounds yield 2/N^2<=minimum gap<=pi^2/(2N^2). The central gap is >=sqrt(2)/N for both parities, and the ratio bound tends to zero. Found and repaired the overstrong nonuniformity assertion at N=2: nodes (1,0,-1) have equal gaps. For N>=3 the central sine argument is strictly larger than the endpoint argument after reflection, proving strict gap inequality. Statement now retains this exact exception and all asymptotic claims. Repository reference search found only the owning examples page placement, whose endpoint-clustering summary remains sound; no logical item consumers."
+      }
+    }
+  }
+]

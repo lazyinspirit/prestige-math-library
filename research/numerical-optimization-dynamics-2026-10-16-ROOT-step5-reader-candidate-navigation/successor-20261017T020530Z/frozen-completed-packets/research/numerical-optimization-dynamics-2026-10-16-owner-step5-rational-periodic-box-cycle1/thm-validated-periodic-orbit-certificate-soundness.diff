@@ -1,0 +1,39 @@
+--- items/thm-validated-periodic-orbit-certificate-soundness.md
++++ items/thm-validated-periodic-orbit-certificate-soundness.md
+@@ -11,10 +11,11 @@
+   - thm-krawczyk-inclusion-exclusion-and-uniqueness
+   - prop-phase-bordered-bvp-root-equivalence
+   - thm-validated-euler-flow-and-monodromy-enclosure-soundness
++  - lem-rational-box-affine-chart-and-dyadic-enclosure
+ proof_strategy: direct
+ provenance:
+   statement: ai-altered
+-  proof: ai-generated
++  proof: ai-altered
+ verification:
+   precheck: pass
+ sources:
+@@ -29,7 +30,7 @@
+ 
+ ## Statement
+ 
+-Suppose [[alg-validated-periodic-orbit-corrector]] returns `validated-root` for a rational shooting box $Z=X\times\Theta$, with a complete Krawczyk partition of $Z$ containing exactly one `unique-root` box $Y$ and only `root-free` boxes otherwise, outward residual and Jacobian enclosures on $Y$, a separately verified contraction bound, and a component of $f(X_Y)$ excluding zero, where $X_Y$ is the physical-state projection of $Y$. Then there is exactly one zero $(x_*,T_*)\in Z$ of the phase-bordered shooting residual, and it lies in $Y$. It generates a nonconstant periodic solution with $\psi(x_*)=0$, period $T_*>0$, and the returned trajectory and monodromy boxes contain its exact trajectory and monodromy. No uniqueness outside $Z$ is asserted.
++Suppose [[alg-validated-periodic-orbit-corrector]] returns `validated-root` for a rational shooting box $Z=X\times\Theta$, with a complete affinely mapped Krawczyk partition of $Z$ containing exactly one `unique-root` box $Y$ and only `root-free` boxes otherwise, outward residual and Jacobian enclosures on $Y$, a separately verified contraction bound, and a component of $f(X_Y)$ excluding zero, where $X_Y$ is the physical-state projection of $Y$. Then there is exactly one zero $(x_*,T_*)\in Z$ of the phase-bordered shooting residual, and it lies in $Y$. It generates a nonconstant periodic solution with $\psi(x_*)=0$, period $T_*>0$, and the returned trajectory and monodromy boxes contain its exact trajectory and monodromy. No uniqueness outside $Z$ is asserted.
+ 
+ ## Facts & Assumptions
+ 
+@@ -41,11 +42,13 @@
+ 
+ [F3] The successful corrector returns a complete Krawczyk partition with one `unique-root` box and only `root-free` boxes otherwise; it also returns validated residual/Jacobian, trajectory, monodromy, and nonstationarity enclosures on the unique-root box ([[alg-validated-periodic-orbit-corrector]]).
+ 
++[F5] The corrector's exact affine bijection between the dyadic unit box and its rational physical box transfers zero sets and partition root statuses; physical derivatives and normalized derivatives satisfy $D\widehat F=DF\,D$ ([[lem-rational-box-affine-chart-and-dyadic-enclosure]]).
++
+ [F4] A successful validated Euler range-oracle run encloses the exact trajectory and variational solution ([[thm-validated-euler-flow-and-monodromy-enclosure-soundness]]).
+ 
+ ## Proof
+ 
+-1.1 By [F3], the Krawczyk run covers $Z$ with one `unique-root` box $Y$ and root-free boxes otherwise. The interval residual and Jacobian enclosures on $Y$ meet [F1], so strict inclusion gives a zero in $Y$ and the separate contraction bound gives at most one there. The root-free boxes contain no zero, hence this is exactly one zero in all of $Z$. [F1, F3, given]
++1.1 By [F3], the normalized Krawczyk run covers the dyadic unit box with one `unique-root` box $A_Y$ and root-free boxes otherwise. The finite dyadic callback enclosures are for $\widehat F$ and $D\widehat F$, so [F1] gives exactly one zero in $A_Y$ and none in the root-free normalized boxes. By [F5], the exact affine bijection maps their covering partition onto $Z$ and their zero sets onto the corresponding physical zero sets. Hence there is exactly one zero in all of $Z$, and it lies in $Y=T(A_Y)$. All strict inclusion and contraction tests are used in their actual normalized coordinates. [F1, F3, F5, given]
+ 
+ 2.1 Since $\Theta\subset(0,\infty)$, this root has positive period. The field range component excludes zero on its physical-state projection $X_Y$, so $f(x_*)\ne0$. Apply [F2] to obtain the phase-fixed nonconstant periodic solution. [F2, F3, step 1.1]
+ 

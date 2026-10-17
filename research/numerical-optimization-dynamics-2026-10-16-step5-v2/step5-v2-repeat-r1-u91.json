@@ -1,0 +1,129 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "91",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "alg-index-one-eigenvector-following-step",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "525e3114656d211f072b40db59590a211c56343234d9e0f50d7f5c8dc2eaa83f",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "For H=diag(-1,1), Q a rotation through 0.1 radians, lambda_hat=(-1,1), singleton validated intervals, gamma=1 and tau_eig=0.3, both residual norms equal 2 sin(0.1)<0.2<0.3 and sqrt(2)*0.3<0.5. Taking v_ref=q1 and tau_mode=0.5 passes overlap, although q1 has nonzero second coordinate and is not a lowest eigenvector. Thus the asserted exact lowest-mode-line certification is false. Corrected that assertion and the related claim that overlap detects a mode-branch change; all acceptance tests and the Newton solve are retained.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-index-one-eigenvector-following-step",
+      "disposition": "repaired",
+      "post_sha256": "3b5efe0f2b69da3610354de9a6fb2bf7d9a52e3301432c5718eb780117e39ea8",
+      "review_context_sha256": "f10ccdb05d3aa7b95a7fb6f3823ee2bb489f5aed660a86182146d8fe1295ba29",
+      "reason": "Reviewed the supplied finite-time spectral routine, orthogonal Q, ordered independently validated eigenvalue enclosures, residual and strict overlap tests, sign selection, early exits, budget and exact square Newton solve. The reference now records the last accepted signed q1 without falsely certifying exact eigenspace membership or spectral data at a later returned point; overlap is a screening test. The validated intervals still certify index one and nonsingularity, and the accepted correction remains H p=-grad V. The direct consumer needs only these unchanged facts. This is an adjudicator repair review, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "prop-index-one-eigenvector-step-is-the-local-newton-correction"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-index-one-eigenvector-following-step",
+      "phase": "repeat",
+      "round": 1,
+      "unit": "91",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "Definition, introductory mode-reference clause and step 2 overlap description",
+      "finding": "A positive eigenpair residual tolerance and a reference-overlap test do not certify that the stored direction is an exact lowest eigenvector. The rotated diag(-1,1) example passes every supplied check.",
+      "status": "fixed",
+      "correction": "Describe the signed approximate reference and overlap screening accurately; preserve the spectral tests, validated index-one certificate, finite procedure and exact Newton solve.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_paths": [
+      "items/alg-index-one-eigenvector-following-step.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-91.proof-contracts.json"
+    ],
+    "statement_definition_change": {
+      "section": "Definition",
+      "before": "it certifies the current lowest-mode line only when that check has passed at the current iterate",
+      "after": "A positive residual tolerance does not in general certify that q_1 is an exact lowest eigenvector; an earlier accepted reference carries no spectral certification at the returned point.",
+      "procedure_change": false,
+      "explanation": "The false output guarantee is corrected because the explicit counterexample disproves it. No admissible inputs, acceptance inequalities, instructions, Newton correction or conditional local-convergence claim are weakened."
+    },
+    "consumer_examinations": [
+      {
+        "id": "prop-index-one-eigenvector-step-is-the-local-newton-correction",
+        "path": "items/prop-index-one-eigenvector-step-is-the-local-newton-correction.md",
+        "affected_use": "Statement accepted-update and pre-stop local quadratic conclusions; Facts F1; proof steps 1.1 and 2.1 use validated enclosures to infer Hessian invertibility and the exact call with A=H and r=grad V.",
+        "invalidated_claim": "None: neither the statement nor proof assumes that the tracked q_1 is an exact eigenvector.",
+        "disposition": "sound_unchanged; F1 source quotation synchronized in owning contract",
+        "minimality": "No consumer item repair or further-hop examination is needed. Its whole-Definition source quote contains the edited descriptions and must be synchronized in the owning batch contract."
+      }
+    ],
+    "page_examination": {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/minimum-energy-paths-string-neb-and-saddle-certificates.md",
+      "affected_use": "The page places the algorithm and separates exact Hessian enclosures, local residual-to-root bounds and gap-dependent dimer estimates; it makes no exact mode-reference certification claim.",
+      "disposition": "sound_unchanged"
+    },
+    "prerequisite_checks": [
+      "C4 potential implies a symmetric Hessian by cor-hessian-is-symmetric; the real spectral theorem supplies an orthonormal eigenbasis.",
+      "def-validated-eigenvalue-enclosures-for-an-index-one-hessian requires independently checked ordered enclosures, so gap inequalities exclude all zero eigenvalues.",
+      "alg-newton-correction-for-vector-residuals explicitly tests invertibility and uses finite determinant/Cramer computations; this algorithm supplies the exact Hessian and gradient.",
+      "thm-updated-jacobian-newton-local-quadratic-convergence retains C2 residual, simple root, local Jacobian-Lipschitz bound and pre-stop hypotheses; no global claim is imported."
+    ],
+    "contract_repair": "Updated only the assigned algorithm's boundary worksheet and risk-review annotation: supplied routine E, nonempty input, zero tolerances/overlap, imported d>=2 restriction, finite-budget/domain exits and absence of Choice. Refreshed the direct consumer's F1 Definition quotation only; its item carrier and all other consumer contract obligations are unchanged. Both metadata edits used acquire/reread/edit/check/release with tools/step5-shared-write-lock.mjs.",
+    "validation": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-91.proof-contracts.json --strict --items alg-index-one-eigenvector-following-step --json",
+        "exit_code": 0,
+        "result": "1 selected contract, no errors or warnings"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-index-one-eigenvector-following-step.md --json",
+        "exit_code": 0,
+        "result": "1 file; no phase proof, not-applicable; 0 failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-index-one-eigenvector-following-step.md --json",
+        "exit_code": 0,
+        "result": "1 file; no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-index-one-eigenvector-following-step.md",
+        "exit_code": 0,
+        "result": "1 item, 0 proof steps, 0 defects"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-91.proof-contracts.json --strict --items prop-index-one-eigenvector-step-is-the-local-newton-correction --json",
+        "exit_code": 1,
+        "result": "Detected the stale F1 source quotation; repaired under the shared metadata lock and superseded by the successful two-item contract check."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-91.proof-contracts.json --strict --items alg-index-one-eigenvector-following-step,prop-index-one-eigenvector-step-is-the-local-newton-correction --json",
+        "exit_code": 0,
+        "result": "After synchronizing the quotation: both selected contracts pass, no errors or warnings."
+      }
+    ],
+    "source_evidence": "Elementary symmetric-matrix counterexample checked directly: both residuals are 2 sin(0.1)=0.1996668332936563, sqrt(2)*0.3=0.4242640687119285, overlap=1. No external source reading claimed.",
+    "published_consumers": "No direct published item consumers or published defects found; no published-ledger update is proposed.",
+    "unresolved_mathematics": [],
+    "next_action": "Controller collects this report and routes the recorded direct consumer through ordinary frontier-owner processing. The confirmed-fatal decision remains counted for this round; this repair review supplies no independent judgment or certification."
+  }
+}

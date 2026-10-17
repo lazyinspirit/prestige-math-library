@@ -1,0 +1,184 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "27",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-inexact-fista-energy-estimate",
+      "model": "gpt-6-luna",
+      "context_sha256": "264db6d349006f5b198cfbe4dce6e7565f3e2b3d88ef89ca56bbe981d3fef2f8",
+      "outcome": "false_positive",
+      "reason": "The inexact Definition imports the finite FISTA recurrences of alg-proximal-gradient-and-fista and changes only the proximal output. That exact Definition assumes convex C1 f with L-Lipschitz gradient, L>0, and proper closed convex g. Thus f=1-cos(x) is inadmissible. Under the inherited hypotheses F is convex, the certified one-step estimate applies, and expanding u_k=u_{k-1}+t_k(x_k-y_k) yields the stated error term 2t_k^2 eta_k/L. The k=1 proof uses z=x_* directly, avoiding an infinite starting objective.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-strong-convex-proximal-gradient-and-restarted-fista-rates",
+      "model": "gpt-6-luna",
+      "context_sha256": "4295425cba1ed5420803f8744df0c6969eb7142135f7deff7aca751dbe00f47a",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The exact algorithm takes a finite budget N, whereas the theorem leaves k and j unrestricted. This is a nonfatal index-scope omission: the proof already establishes one-step and one-block contraction and then finite induction, and exact proximal uniqueness makes executions with overlapping budgets agree. The Statement now explicitly defines the compatible arbitrary-horizon sequences and states the finite-run restrictions k<=N and jm<=N, preserving both original rates and all restart points. Independently checked gap<=||r||^2/(2mu), ||r||<=2L||d||, descent L||d||^2/2, and quadratic growth, yielding q=1/(1+mu/(4L)) and the block factor 4L/(mu(m+1)^2)<=1/2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-inexact-fista-weighted-error-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "d01ab431d1189c3b53f5641d97866f3da72a8150dd153ea662e256cea7fbdd32",
+      "outcome": "false_positive",
+      "reason": "The supplied inexact Definition explicitly says to use the finite FISTA recurrences of alg-proximal-gradient-and-fista and the same momentum update as that exact recurrence. The named exact Definition states t_1=1 and t_{j+1}=(1+sqrt(1+4t_j^2))/2, so F2 accurately unfolds a composed algorithm rather than assuming an unsupported recurrence. Telescoping the checked energy estimate, dropping ||u_k||^2, and proving (j+1)/2<=t_j<=j by induction give exactly the displayed weighted-error bound. Nonnegative eta_j justifies replacing t_j^2 eta_j by j^2 eta_j. The asymptotic assertion is conditional on a certified sequence and its weighted summability, not on the existence of an arbitrary uncertified infinite run.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-inexact-fista-energy-estimate",
+      "disposition": "unaffected",
+      "post_sha256": "c06db7aef74c7ea8129b8510069f89f8d090d36d73c1cb323f3aa6ef82e39fa9",
+      "review_context_sha256": "66e32ccf7dc10842121ffb3582f60deea016b5b8fea873186a460792521206e9",
+      "reason": "The inexact Definition imports the finite FISTA recurrences of alg-proximal-gradient-and-fista and changes only the proximal output. That exact Definition assumes convex C1 f with L-Lipschitz gradient, L>0, and proper closed convex g. Thus f=1-cos(x) is inadmissible. Under the inherited hypotheses F is convex, the certified one-step estimate applies, and expanding u_k=u_{k-1}+t_k(x_k-y_k) yields the stated error term 2t_k^2 eta_k/L. The k=1 proof uses z=x_* directly, avoiding an infinite starting objective.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-strong-convex-proximal-gradient-and-restarted-fista-rates",
+      "disposition": "repaired",
+      "post_sha256": "fa1b621e3d02f9a6d4329bbff1c56789d65d047119b07b711a08c45a4df030c8",
+      "review_context_sha256": "e97f3bb3576b6791ba82e979fc201c2717592a1b9fa77d61652b41b7ac0becf1",
+      "reason": "The exact algorithm takes a finite budget N, whereas the theorem leaves k and j unrestricted. This is a nonfatal index-scope omission: the proof already establishes one-step and one-block contraction and then finite induction, and exact proximal uniqueness makes executions with overlapping budgets agree. The Statement now explicitly defines the compatible arbitrary-horizon sequences and states the finite-run restrictions k<=N and jm<=N, preserving both original rates and all restart points. Independently checked gap<=||r||^2/(2mu), ||r||<=2L||d||, descent L||d||^2/2, and quadratic growth, yielding q=1/(1+mu/(4L)) and the block factor 4L/(mu(m+1)^2)<=1/2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-inexact-fista-weighted-error-bound",
+      "disposition": "unaffected",
+      "post_sha256": "8150bd4fc00f03c23b9f13e8fefd27233d28805944fd6d8431a309301a921d30",
+      "review_context_sha256": "61fbffcc8f8fd625d1461275d9b72a012d7470f7b4ed15e4f68f06862f1a9de7",
+      "reason": "The supplied inexact Definition explicitly says to use the finite FISTA recurrences of alg-proximal-gradient-and-fista and the same momentum update as that exact recurrence. The named exact Definition states t_1=1 and t_{j+1}=(1+sqrt(1+4t_j^2))/2, so F2 accurately unfolds a composed algorithm rather than assuming an unsupported recurrence. Telescoping the checked energy estimate, dropping ||u_k||^2, and proving (j+1)/2<=t_j<=j by induction give exactly the displayed weighted-error bound. Nonnegative eta_j justifies replacing t_j^2 eta_j by j^2 eta_j. The asymptotic assertion is conditional on a certified sequence and its weighted summability, not on the existence of an arbitrary uncertified infinite run.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "lem-inexact-fista-energy-estimate",
+      "reason": "The inexact Definition imports the finite FISTA recurrences of alg-proximal-gradient-and-fista and changes only the proximal output. That exact Definition assumes convex C1 f with L-Lipschitz gradient, L>0, and proper closed convex g. Thus f=1-cos(x) is inadmissible. Under the inherited hypotheses F is convex, the certified one-step estimate applies, and expanding u_k=u_{k-1}+t_k(x_k-y_k) yields the stated error term 2t_k^2 eta_k/L. The k=1 proof uses z=x_* directly, avoiding an infinite starting objective.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "thm-inexact-fista-weighted-error-bound",
+      "reason": "The supplied inexact Definition explicitly says to use the finite FISTA recurrences of alg-proximal-gradient-and-fista and the same momentum update as that exact recurrence. The named exact Definition states t_1=1 and t_{j+1}=(1+sqrt(1+4t_j^2))/2, so F2 accurately unfolds a composed algorithm rather than assuming an unsupported recurrence. Telescoping the checked energy estimate, dropping ||u_k||^2, and proving (j+1)/2<=t_j<=j by induction give exactly the displayed weighted-error bound. Nonnegative eta_j justifies replacing t_j^2 eta_j by j^2 eta_j. The asymptotic assertion is conditional on a certified sequence and its weighted summability, not on the existence of an arbitrary uncertified infinite run.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-strong-convex-proximal-gradient-and-restarted-fista-rates",
+      "severity": "nonfatal",
+      "locus": "statement",
+      "finding": "Unrestricted indices were not explicitly related to the algorithm finite budget.",
+      "correction": "Defined the compatible arbitrary-horizon exact sequences and explicitly restricted finite-budget uses to k<=N and jm<=N. Existing contraction factors and all-index bounds are preserved.",
+      "reason": "The exact algorithm takes a finite budget N, whereas the theorem leaves k and j unrestricted. This is a nonfatal index-scope omission: the proof already establishes one-step and one-block contraction and then finite induction, and exact proximal uniqueness makes executions with overlapping budgets agree. The Statement now explicitly defines the compatible arbitrary-horizon sequences and states the finite-run restrictions k<=N and jm<=N, preserving both original rates and all restart points. Independently checked gap<=||r||^2/(2mu), ||r||<=2L||d||, descent L||d||^2/2, and quadratic growth, yielding q=1/(1+mu/(4L)) and the block factor 4L/(mu(m+1)^2)<=1/2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-ledger",
+      "action": "record-current-source-observation",
+      "id": "thm-nearest-point-in-a-nonempty-closed-convex-set",
+      "route": "owner / separate published maintenance; no item edit or Step 5 adjudication",
+      "evidence_path": "research/numerical-optimization-dynamics-2026-10-16-batch-27-step5-context.json",
+      "alert_index": 0,
+      "affected_use": "Published Proof 1.1 forms a closed ball to compactify the distance minimization problem.",
+      "current_snippet": "Choose $c_0\\in C$ and put $R=1+\\|x-c_0\\|_2>0$.",
+      "invalidated_claim": "The digest reports a historical R=0 notation possibility, but the current positive radius excludes it, including c_0=x. No current failure of this specific clause was found.",
+      "minimality": "No repair is proposed: the current source already uses the positive enclosing radius requested by the alert. This focused observation supplies no publication-policy validation or whole-item audit.",
+      "reason": "Compared the digest alert with the actual current Proof 1.1 and the strictly positive radius convention of def-metric-ball. The current R=1+||x-c_0||_2 is positive and the tail proof correctly excludes outside-K points by their distance >R.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "completed": [
+      "lem-inexact-fista-energy-estimate",
+      "thm-strong-convex-proximal-gradient-and-restarted-fista-rates",
+      "thm-inexact-fista-weighted-error-bound"
+    ],
+    "changed_item_paths": [
+      "items/thm-strong-convex-proximal-gradient-and-restarted-fista-rates.md"
+    ],
+    "exact_interface_change": {
+      "id": "thm-strong-convex-proximal-gradient-and-restarted-fista-rates",
+      "section": "Statement",
+      "change": "Added the compatible finite-prefix sequence convention and finite-budget index restrictions; the displayed rates and existing proof are unchanged."
+    },
+    "dependency_checks": "Read both algorithm Definitions, the complete exact and inexact energy/rate arguments, the strong-convexity Definition, actual one-step/resolvent/subgradient/gradient interfaces, and assigned contracts. Exact proximal uniqueness plus the deterministic recurrence ensures agreement of overlapping finite prefixes without a choice axiom.",
+    "consumer_examination": {
+      "search_scope": [
+        "items/*.md",
+        "library/**/*.md"
+      ],
+      "supplier": "thm-strong-convex-proximal-gradient-and-restarted-fista-rates",
+      "direct_item_consumers": [],
+      "page_uses": [
+        {
+          "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/proximal-gradient-and-accelerated-composite-optimization.md",
+          "affected_use": "The items list includes the theorem, and its summary says: A strong-convexity argument gives a linear proximal-gradient factor and a fixed restart period with a one-half contraction per block.",
+          "disposition": "unaffected",
+          "reason": "The clarification preserves both rates for every completed iterate/block; the page makes no claim about outputs beyond a finite budget."
+        }
+      ],
+      "reason": "Searching the full item and page trees found no direct dependency or reference consumer item for the changed theorem; its only page placement and summary remain sound. No transitive expansion or outside consumer repair is required."
+    },
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-inexact-fista-energy-estimate.md items/thm-strong-convex-proximal-gradient-and-restarted-fista-rates.md items/thm-inexact-fista-weighted-error-bound.md --json",
+        "exit_code": 0,
+        "result": "3 proofs checked; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-inexact-fista-energy-estimate.md items/thm-strong-convex-proximal-gradient-and-restarted-fista-rates.md items/thm-inexact-fista-weighted-error-bound.md --json",
+        "exit_code": 0,
+        "result": "3 items checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-27.proof-contracts.json --strict --items lem-inexact-fista-energy-estimate,thm-strong-convex-proximal-gradient-and-restarted-fista-rates,thm-inexact-fista-weighted-error-bound --json",
+        "exit_code": 0,
+        "result": "All 3 assigned contracts checked; no errors or warnings. No contract edit needed."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-strong-convex-proximal-gradient-and-restarted-fista-rates.md",
+        "exit_code": 0,
+        "result": "1 changed item, 5 steps, 0 defects; run after the final item edit."
+      }
+    ],
+    "source_reading": "Local mathematical arguments were checked directly; no external source reading is claimed. Familiarity applies to the convexity, subgradient and finite-induction arguments actually used.",
+    "review_limit": "The repaired theorem review records the adjudicator own repair check, not an independent review or new judge verdict.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and ordinary subsequent certification/judgment routing; no worker or cycle launched."
+  }
+}

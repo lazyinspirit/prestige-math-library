@@ -1,0 +1,259 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "78",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-mprk22-1",
+      "model": "gpt-6-luna",
+      "context_sha256": "627ab2d4766e234b62d4918d35dfe3d61cb2cfb3d11dad1bcb228555caee34f8",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The Definition mixes procedure instructions with a correctness assertion. The claim is mathematically valid: both solve matrices have column-dominance margin one, and the existing thm-mprk22-1-positive-conservative already proves uniqueness, strict positivity and conservation in steps 1.1–3.1. Removed the assertion from the procedure and registered that separate result in justified_by; no new prerequisite or numerical rule is needed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1702.04589"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-mprk22-1-positive-conservative",
+      "model": "gpt-6-luna",
+      "context_sha256": "4937d81d586619c47a1ca34ca52e47a919e9786df0474921e352eb1899c28bee",
+      "outcome": "false_positive",
+      "reason": "The Statement explicitly conditions its output claim on z in Omega_+ and explicitly returns rate-domain-failure otherwise; the title does not override those hypotheses. Step 1.1 establishes stage uniqueness, positivity and mass conservation, step 2.1 establishes final uniqueness and positivity using rates at the admitted stage, and step 3.1 proves final mass conservation. No claim of domain invariance or unconditional output exists.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1702.04589"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-zero-denominator-corner-and-factorized-extension",
+      "model": "gpt-6-luna",
+      "context_sha256": "d2d363897a491b0efffe06479a680d0e62892cd786308ea6ff2bc1ffcdf99e0b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F5 incorrectly drops the supplier theorem's source-factorization hypotheses and restrictions y^n in compact K and h>0. The concrete example remains correct independently: its factors are constant nonnegative C^2 functions, its input is in K={(1,0)}, and the h=1 matrix has determinant 6 and solution (2/3,1/3). Restored F5's exact admissibility restrictions and checked their instantiation explicitly in step 1.2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-mprk22-1",
+      "disposition": "repaired",
+      "post_sha256": "debd4ce4471c81d05fb6991ea5c4dbc97e89cc91e899d7829b0610a9be27c2fa",
+      "review_context_sha256": "ad80a82364871a414ecef8ffdad7151341af9ce90dbad10fc278423ca06e5c06",
+      "reason": "Checked the positive-input rejection, Patankar Euler invocation, stage-domain branch before second rate evaluation, donor-indexed averaged coefficients and both exact linear solves. Paired transfers give zero column sums before subtraction from I and dominance margin one afterward. The existing preservation theorem proves well-definedness without assuming it from the Definition, so justified_by introduces no logical cycle. All operational formulas and branches are unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1702.04589"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-mprk22-1-positive-conservative",
+      "disposition": "unaffected",
+      "post_sha256": "420648ad49181cf0c0d952cda84d78036e64e216f8aa4a0c851788aa704b1b43",
+      "review_context_sha256": "f167d532a0a15cdb08a6b9531893ad53190f049b3aae4491418b83148ba23abe",
+      "reason": "Both exact solve matrices have nonpositive off-diagonal entries, positive diagonals and strict column-dominance margin one. The local inverse lemma therefore gives unique positive solutions, and column sums one preserve mass. The algorithm edit removes no equation or branch used by F2, and this proof supplies rather than assumes the removed correctness assertion. The conditional domain statement is already explicit; item unchanged. Its contract supplier quotation will be mirrored to the repaired algorithm.",
+      "metadata_repair_only": true,
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1702.04589"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-zero-denominator-corner-and-factorized-extension",
+      "disposition": "repaired",
+      "post_sha256": "d0ba59ca1db6deb61e11b9aa0366e064d82d1891bdb0cdff177c957968f50197",
+      "review_context_sha256": "fd48bd9d1b00ce50d14a9e6cd0a0fa6106aaf49804c40f8fdf4b813b1e9a6f00",
+      "reason": "The zero standard denominator is rejected before rate evaluation, so its displayed quotient is undefined. The alternative factorization has a21=2,a12=3 on U=R^2, and the input lies in compact K with h>0. Direct multiplication verifies [[3,-3],[-2,4]](2/3,1/3)=(1,0), proving unique positive output of mass one. Repaired the overbroad citation without changing the Example or importing the supplier's conditional local-accuracy clause.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-mprk22-1-positive-conservative",
+    "lem-mprk22-1-positive-tube-local-error-and-stability",
+    "thm-patankar-inexact-solve-residual-ledger",
+    "thm-mprk22-1-global-second-order-error"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "alg-mprk22-1",
+      "severity": "nonfatal",
+      "locus": "definition",
+      "status": "fixed",
+      "reason": "Correctness properties were embedded in a procedural Definition although a separate proved supplier already exists. Removed the duplicated assertion and linked the existing preservation theorem through justified_by; no mathematical claim or algorithmic operation was weakened.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1702.04589"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "ex-zero-denominator-corner-and-factorized-extension",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "status": "fixed",
+      "reason": "F5 omitted the cited theorem's factorization, compact-input-set and positive-step hypotheses. Restored those restrictions and verified constant C^2 nonnegative factors, y=(1,0) in K and h=1 in step 1.2; the example was already correct.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "no-update",
+      "reason": "The sole changed Definition has exactly four direct item consumers, all draft members of the frozen frontier. Their unchanged uses remain sound, and no published consumer repair or source audit finding arose.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "alg-mprk22-1",
+      "claim": "Positive input, h>0; stage z uses denominators y_j; final coefficients are (p_ij(y)+p_ij(z))/(2z_j) only after z lies in Omega_+.",
+      "dependencies": [
+        "alg-modified-patankar-euler",
+        "def-finite-conservative-production-destruction-system",
+        "lem-strict-column-dominance-implies-nonnegative-inverse"
+      ],
+      "well_definedness": "thm-mprk22-1-positive-conservative, Proof 1.1–3.1",
+      "source_reading": "Kopecz–Meister, arXiv:1702.04589, introductory two-stage formulas (PDF p.3) and complete Lemmas 2.6–2.7 (PDF p.6); local matrix lemma read in full. No accuracy proof from the paper is claimed.",
+      "status": "Complete: mathematical review and native hashes captured; necessary contract mirrors updated under shared-write lock; focused checks passed."
+    },
+    {
+      "id": "thm-mprk22-1-positive-conservative",
+      "claim": "Conditional positivity, unique solvability and conservation for the final output when z lies in Omega_+; rate-domain-failure otherwise.",
+      "dependencies": [
+        "alg-mprk22-1",
+        "def-finite-conservative-production-destruction-system",
+        "lem-strict-column-dominance-implies-nonnegative-inverse"
+      ],
+      "review": "Statement, Facts F1–F3 and all proof steps checked. The positive stage is obtained before deciding whether it lies in the rate domain; no invariance of Omega is assumed. No AC.",
+      "status": "Complete: mathematical review and native hashes captured; necessary contract mirrors updated under shared-write lock; focused checks passed."
+    },
+    {
+      "id": "ex-zero-denominator-corner-and-factorized-extension",
+      "claim": "At input (1,0) the standard ratio is undefined, while the factorized h=1 solve yields (2/3,1/3) of mass one.",
+      "dependencies": [
+        "def-finite-conservative-production-destruction-system",
+        "alg-modified-patankar-euler",
+        "def-source-factored-production-destruction-rates",
+        "alg-zero-compatible-modified-patankar-euler",
+        "thm-zero-compatible-modified-patankar-euler-admissibility"
+      ],
+      "source_evidence": "Read the complete local Definition/Statement and relevant proofs of all five suppliers. F5 uses only admissibility and conservation for y in K and h>0; no global boundary accuracy or repeated K-invariance is asserted.",
+      "status": "Complete: mathematical review and native hashes captured; necessary contract mirrors updated under shared-write lock; focused checks passed."
+    },
+    {
+      "interface_change": {
+        "supplier": "alg-mprk22-1",
+        "section": "Definition",
+        "removed": "The stage solve is uniquely solvable and its output is positive under the finite conservative PDS and positive-input hypotheses; when the rate-domain check passes, [[lem-strict-column-dominance-implies-nonnegative-inverse]] also guarantees a unique final solve.",
+        "preserved": "Every input restriction, failure branch, equation, coefficient, denominator and returned value is identical.",
+        "metadata": "justified_by now names thm-mprk22-1-positive-conservative.",
+        "propagation": "All four direct dependency/reference consumers are in downstream and examined above. All are draft frozen-frontier items. No outside or published direct consumer was found; no consumer Statement or Definition changed."
+      },
+      "example_change": "Only Verification F5 and step 1.2 changed; Example, all formulas and the resulting vector are identical. No propagation is triggered."
+    },
+    {
+      "downstream_reviews": [
+        {
+          "supplier": "alg-mprk22-1",
+          "id": "thm-mprk22-1-positive-conservative",
+          "path": "items/thm-mprk22-1-positive-conservative.md",
+          "affected_use": "F2 and Proof 1.1–3.1 use z=y+hA(y)z and the averaged-rate final system.",
+          "disposition": "unchanged_sound",
+          "reason": "The equations, positive-input restrictions and stage-domain branch remain identical; this consumer independently proves the correctness assertion removed from the Definition."
+        },
+        {
+          "supplier": "alg-mprk22-1",
+          "id": "lem-mprk22-1-positive-tube-local-error-and-stability",
+          "path": "items/lem-mprk22-1-positive-tube-local-error-and-stability.md",
+          "affected_use": "Statement defines Psi_h by the algorithm; F3 and Proof 2.1–5.1 use B_ij=(p_ij(y)+p_ij(z))/(2z_j) and its zero column sums.",
+          "disposition": "unchanged_sound",
+          "reason": "No coefficient or branch changes. Proof 1.1 establishes the stage lies in V for small h and uses its own inverse lemma F4; steps 2.1 onward retain the same matrix identities and derivatives."
+        },
+        {
+          "supplier": "alg-mprk22-1",
+          "id": "thm-patankar-inexact-solve-residual-ledger",
+          "path": "items/thm-patankar-inexact-solve-residual-ledger.md",
+          "affected_use": "Statement, F2 and Proof 1.1 identify completed stage/final solve matrices with positive denominators, paired rates and column-dominance margin one.",
+          "disposition": "unchanged_sound",
+          "reason": "The completed-system formulas and admissibility checks are unchanged; step 1.1 derives the matrix properties from the formulas and its own inverse supplier, rather than relying on the removed assertion."
+        },
+        {
+          "supplier": "alg-mprk22-1",
+          "id": "thm-mprk22-1-global-second-order-error",
+          "path": "items/thm-mprk22-1-global-second-order-error.md",
+          "affected_use": "Statement defines every time step with the algorithm; F3 and Proof 1.1 use the Euler stage and averaged-rate final solve with states and stages in K.",
+          "disposition": "unchanged_sound",
+          "reason": "The operational method is identical. K is contained in the positive rate domain, F4 cites the separate preservation theorem, and F5 supplies the local constants; removing a duplicated assertion changes none of those hypotheses."
+        }
+      ],
+      "page_reviews": [
+        {
+          "path": "library/numerical-differential-equations-and-stochastic-dynamics/positive-conservative-production-destruction-integrators.md",
+          "affected_use": "Summary paragraph two conditions positivity and conservation on stage rate evaluation in the PDS domain and otherwise specifies rate-domain failure.",
+          "disposition": "unchanged_sound",
+          "reason": "The owning page already states the correct qualification and the method equations and failure branch are unchanged."
+        },
+        {
+          "path": "library/numerical-differential-equations-and-stochastic-dynamics/positive-conservative-production-destruction-integrators-examples.md",
+          "affected_use": "Summary describes a source-factor representation handling an initially empty compartment without a zero denominator.",
+          "disposition": "unchanged_sound",
+          "reason": "The explicit two-compartment witness and its mass-conservative output are unchanged by correcting F5."
+        }
+      ]
+    },
+    {
+      "checks": [
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-mprk22-1.md items/thm-mprk22-1-positive-conservative.md items/ex-zero-denominator-corner-and-factorized-extension.md --json",
+          "exit_code": 0,
+          "result": "3 files; 2 proof sections checked and passed; algorithm not applicable; 0 failures."
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/alg-mprk22-1.md items/thm-mprk22-1-positive-conservative.md items/ex-zero-denominator-corner-and-factorized-extension.md --json",
+          "exit_code": 0,
+          "result": "3 checked; 0 errors; 0 warnings."
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-78.proof-contracts.json --strict --items alg-mprk22-1,thm-mprk22-1-positive-conservative,ex-zero-denominator-corner-and-factorized-extension,lem-mprk22-1-positive-tube-local-error-and-stability,thm-patankar-inexact-solve-residual-ledger,thm-mprk22-1-global-second-order-error --json",
+          "exit_code": 0,
+          "result": "6 selected contracts checked; ok=true; 0 errors; 0 warnings. Algorithm quotation mirrors updated for all four consumers, plus example F5 interface and step 1.2 citation/use/derivation mirrors."
+        },
+        {
+          "command": "node tools/proof-layout.mjs items/alg-mprk22-1.md items/ex-zero-denominator-corner-and-factorized-extension.md",
+          "exit_code": 0,
+          "result": "2 changed items; 3 numbered steps; 0 defects. Run once after final item edits; no later formatter or item edit."
+        },
+        {
+          "check": "Read-only handoff consistency",
+          "exit_code": 0,
+          "result": "Verified exact frozen input digest and assigned tuples, item dispositions, original theorem Statement hash, and currency of every captured item and review-context hash. No review hash was refreshed."
+        }
+      ],
+      "unresolved_obligations": []
+    }
+  ],
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-78.proof-contracts.json": "6742b24f3a8be18228cb52d75dc2cf2833606df13c1194a3dcf08e308deead7e"
+  }
+}

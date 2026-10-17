@@ -1,0 +1,181 @@
+---
+id: alg-certified-elementary-range-evaluation
+kind: algorithm
+title: Certified range evaluation for elementary real and complex functions
+status: draft
+origin: pipeline
+pipeline_run: numerical-optimization-dynamics-2026-10-16
+page: outward-rounded-interval-and-ball-arithmetic
+dependency_level: 9
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+deps: [def-real-elementary-functions-and-domains, def-dyadic-floating-point-format-and-directed-rounding, def-outward-rounded-interval-and-ball-operations, thm-outward-rounded-operations-are-isotone-and-dag-sound, lem-range-reduced-exp-log-and-arctan-series-enclosures, lem-trigonometric-identities-machin-and-range-reduction]
+justified_by: [thm-real-elementary-range-enclosures, thm-complex-elementary-range-enclosures]
+verification:
+  precheck: pending
+sources:
+  references:
+    - title: "Rump, Rigorous and Portable Standard Functions, §§5–7 and 10"
+      url: "https://www.tuhh.de/ti3/paper/rump/Ru01b.pdf"
+    - title: "Kearfott, Interval Computations: Introduction, Uses, and Resources, §§1–2"
+      url: "https://interval.louisiana.edu/preprints/survey.pdf"
+---
+
+## Definition
+
+Input: a finite, well-formed, typed expression DAG with one or more designated
+output nodes; finite real interval or complex rectangle assignments for its
+input nodes; exact dyadic constants or constants supplied with certified
+enclosing intervals/rectangles; a finite dyadic format $(p,e_{\min},e_{\max})$
+with $p\ge2$ and $e_{\min}\le e_{\max}$; and an integer truncation index
+$N\ge1$. Input interval endpoints and supplied constant enclosures use this
+format. All constants, including every Machin enclosure of $\pi$, use the
+same fixed $N$ and format throughout a call. Real nodes support input and
+constant nodes and the operations $+,-,\times,\div,\sqrt{\phantom{x}},
+\exp,\ln,\arctan,\sin,\cos,\tan$. Complex nodes support input and constant
+nodes and $+,-,\times,\div,\exp,\operatorname{Log}$. Each operation has
+homogeneous real or complex inputs of its stated type; no implicit conversion
+between real and complex nodes is performed. Unsupported node types, arities,
+or type combinations return `inconclusive` with the offending node.
+
+Output: a finite interval/rectangle enclosure for every designated output
+node, or one of `empty`, `entire`, `domain-error`, `split-domain`, `overflow`,
+or `inconclusive` with the node and unresolved domain piece. If any supplied
+input is `empty`, return `empty`. No value from a system `libm` routine is
+treated as a certified endpoint. Each DAG node is evaluated once; shared nodes
+reuse their interval/rectangle enclosure and do not preserve correlations
+between distinct paths.
+
+1. Check that node identifiers are unique, all references resolve, every
+designated output is a node, and the supported node types and arities above
+hold. Use each supplied input enclosure as its node value. For an exact real
+dyadic constant $c$, use $[\operatorname{rd}(c),\operatorname{ru}(c)]$ in the
+selected format. For an exact complex dyadic constant, do this to each
+coordinate. A finite subnormal endpoint remains a valid endpoint; if a
+coordinate conversion overflows, return `overflow` with that constant node.
+Use a supplied certified constant enclosure as given. Construct a topological
+order by repeatedly removing a node whose
+predecessors have already been removed, breaking ties by lexicographically
+smallest node identifier. If no such node exists before all nodes are ordered,
+return `inconclusive` with a node in the cycle. Evaluate nodes in this order
+and store each finite enclosure for its successors. Arithmetic nodes use
+[[def-outward-rounded-interval-and-ball-operations]]; if an operation returns
+a non-finite status, propagate it immediately with its node and unresolved
+piece. For $\sqrt{X}$ require $X\subseteq[0,\infty)$ and for $\ln X$ require
+$X\subseteq(0,\infty)$; otherwise return `domain-error` rather than silently
+discarding points.
+
+2. For a real exponential node, set $s=\max(0,e_{\max}+2)$ using the format
+in [[def-dyadic-floating-point-format-and-directed-rounding]]. Since
+$N_{\max}<2^{e_{\max}+1}$, exact comparison gives $N_{\max}/2^s<1/2$. For
+its input interval $X$, evaluate the degree-$N$ exponential polynomial on
+$U=X/2^s$ by interval arithmetic and add the symmetric tail from
+[[lem-range-reduced-exp-log-and-arctan-series-enclosures]], using
+$\max_{u\in U}|u|$. Square the resulting interval $s$ times. If its lower
+endpoint is not positive or an endpoint overflows, return `inconclusive` or
+`overflow` with the node and input interval.
+
+For a real logarithm node, first require $X\subseteq(0,\infty)$. List all
+integers $j$ for which $X_j=X\cap[2^j,2^{j+1}]$ is nonempty; exact endpoint
+comparisons find this finite list because $X$ has positive finite endpoints.
+On each piece set $Y=2^{-j}X_j\subseteq[1,2]$ and $V=(Y-1)/(Y+1)$, evaluate
+the positive logarithm series on $V$ with its tail determined by $\max|V|$,
+and form $j\ln2+\ln Y$ by outward arithmetic. Compute the fixed enclosure for
+$\ln2$ once by the same series and tail at $y=2$, hence $v=1/3$, and reuse it
+in every bin. If any piece cannot be evaluated finitely, propagate its status
+and that piece. Otherwise take the interval hull of all piece enclosures as
+the node enclosure.
+
+3. Partition a real arctangent input at the fixed breakpoints
+$-3,-1/2,1/2,3$ into nonempty closed pieces, allowing shared endpoints.
+On pieces in $[-1/2,1/2]$, evaluate its alternating power series. For positive
+pieces in $[1/2,1]$, use
+$\arctan t=\pi/4-\arctan((1-t)/(1+t))$; in $[1,3]$, use
+$\arctan t=\pi/4+\arctan((t-1)/(t+1))$; for $t>3$, use
+$\arctan t=\pi/2-\arctan(1/t)$. Evaluate negative pieces by odd symmetry.
+Enclose $\pi$ using Machin's identity and the alternating series at $1/5$ and
+$1/239$, forming rational partial sums and tail endpoints exactly before
+final outward conversion. If every piece is finite, take the interval hull of
+all piece enclosures. If any branch test or piece is unresolved, return its
+non-finite status with that piece and do not use a partial hull.
+
+4. For each sine or cosine node, first compute one outward Machin interval
+$P_N$ for $\pi$ using the same $N$ and format, combining the rational series
+endpoints exactly before final outward conversion. If $P_N$ is non-finite or
+its lower endpoint is not positive, return `inconclusive`. For finite input
+$X=[a,b]$, put $M_X=\max(|a|,|b|)$, $p_-:=\inf(P_N)>0$, and
+$K=\lceil2M_X/p_-\rceil+1$, with the ceiling computed by exact rational
+comparisons. If the width of $X$ is at least $2\sup(P_N)$, return
+$[-1,1]$. Otherwise examine the finite candidate list $k=-K,\ldots,K$ for
+the canonical cells $[k\pi/2-\pi/4,k\pi/2+\pi/4]$. For each candidate form
+the exact rational interval enclosure
+$C_k=kP_N/2+[-1/4,1/4]P_N$ of its canonical cell. For $k>K$, the exact
+left endpoint $(2k-1)\pi/4$ of cell $k$ is at least
+$(2k-1)p_-/4>M_X$; for $k<-K$, its exact right endpoint
+$-(2|k|-1)\pi/4$ is at most $-(2|k|-1)p_-/4<-M_X$. Thus no omitted exact
+cell can intersect $X$. Include each candidate whose $C_k$ intersects $X$;
+exclude only candidates whose intersection is empty by exact comparison. Let
+$X_k$ be the exact interval hull of $X\cap C_k$, without rounding these
+endpoints, and form the residual enclosure $R_k=X_k-kP_N/2$. Certify
+$R_k\subseteq[-1,1]$, evaluate the sine polynomial through degree $2N+1$ or
+the cosine polynomial through degree $2N$, and add the corresponding explicit
+geometric tail from [[lem-trigonometric-identities-machin-and-range-reduction]]
+by exact rational interval arithmetic. Map each enclosure by the appropriate
+quarter-period sign or coordinate swap and intersect it with $[-1,1]$.
+Round the final endpoints outward and take the hull over every included cell.
+If no candidate is included, a cell cannot be certified in the reduced
+interval, or any candidate endpoint overflows, return `inconclusive` or
+`overflow` with the cell; never omit that piece from a finite hull.
+
+For tangent, partition the input into the canonical pieces used for sine and
+cosine. Divide the sine enclosure by the cosine enclosure only when the latter
+excludes zero. If a piece contains a certified cosine zero, return
+`split-domain` with that piece; if the enclosure includes zero but no pole is
+certified, return `inconclusive`. Take the interval hull of tangent enclosures
+only when every piece is finite.
+
+5. For complex exponential on $X+iY$, evaluate real $\exp(X)$, $\cos(Y)$,
+and $\sin(Y)$ and combine their enclosures by rectangle operations. For
+principal $\operatorname{Log}$, first require a rectangle excluding zero and
+every point of the negative real branch cut; otherwise return `domain-error`.
+Compute an outward Machin interval $P_N$ for $\pi$ using this call's $N$ and
+format; if it is non-finite or its lower endpoint is not positive, return
+`inconclusive`.
+Split each coordinate interval into its nonempty strictly negative and
+strictly positive portions, plus the singleton $\{0\}$ when it contains zero.
+Use the closures of the strictly signed portions as interval enclosures; form
+their Cartesian products for the quadrant pieces, and handle products with an
+axis singleton separately. Omit empty pieces. These finitely many pieces
+cover the rectangle, with quadrant closures allowed to overlap their axis
+pieces. On a quadrant where the denominator interval excludes zero, use
+$$
+\operatorname{Arg}(x+iy)=
+\begin{cases}
+\arctan(y/x),&x>0,\ y>0,\\
+-\arctan((-y)/x),&x>0,\ y<0,\\
+\pi-\arctan(y/(-x)),&x<0,\ y>0,\\
+-\pi+\arctan((-y)/(-x)),&x<0,\ y<0.
+\end{cases}
+$$
+If a quadrant piece has a zero endpoint in its denominator interval, use the
+coarse argument intervals $[0,p_+/2]$ in quadrant I,
+$[p_-/2,p_+]$ in quadrant II, $[-p_+,-p_-/2]$ in quadrant III, or
+$[-p_+/2,0]$ in quadrant IV, where $P_N=[p_-,p_+]$. On the
+positive imaginary axis set $\operatorname{Arg}(iy)=\pi/2$, on the negative
+imaginary axis use $P_N/2$ or $-P_N/2$, respectively, and on the positive
+real axis set it to zero. The initial domain check excludes the origin and negative real axis, so
+these are all remaining axis cases. On each piece enclose
+$\ln\sqrt{X^2+Y^2}$ and its argument using the real evaluator, then combine
+them into a rectangle. If every piece is finite, take the coordinatewise hull
+of all piece rectangles. If any piece or branch is unresolved, return its
+status and piece without forming a partial hull.
+
+6. Each displayed series uses indices $0,\ldots,N$, hence at most $N+1$
+terms; the exponential step performs exactly $s$ interval squarings. The
+logarithm bin list, arctangent partition, and sine/cosine candidate list are
+finite and fixed by the input interval and call parameters. All successful
+piece enclosures at a node are combined by their interval or rectangle hull;
+failure of any required piece returns its status rather than a hull of only
+the remaining pieces. No adaptive subdivision or precision refinement is
+hidden inside this evaluator.

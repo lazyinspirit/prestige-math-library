@@ -1,0 +1,126 @@
+{
+  "group": "b",
+  "batches": [
+    "21"
+  ],
+  "pages_read": [
+    "numerical-boundary-value-problems",
+    "numerical-boundary-value-problems-examples"
+  ],
+  "items_read": [
+    "alg-centered-difference-dirichlet-bvp",
+    "lem-centered-difference-dirichlet-inverse-maxnorm",
+    "lem-centered-difference-dirichlet-truncation-residual",
+    "thm-centered-difference-dirichlet-second-order-error",
+    "ex-centered-difference-dirichlet-quadratic-exact",
+    "ex-first-order-neumann-closure-causes-first-order-bvp-error",
+    "ex-dirichlet-inverse-infinity-norm-tight-at-n3"
+  ],
+  "conventions": [
+    {
+      "convention": "N is a positive integer, h=1/(N+1), x_j=jh, and A_h=h⁻² tridiag(-1,2,-1) acts on the N interior values with exact zero endpoint values. The algorithm uses exact real arithmetic.",
+      "fixed_by": "alg-centered-difference-dirichlet-bvp",
+      "matters_for": [
+        "lem-centered-difference-dirichlet-inverse-maxnorm",
+        "lem-centered-difference-dirichlet-truncation-residual",
+        "thm-centered-difference-dirichlet-second-order-error",
+        "ex-centered-difference-dirichlet-quadratic-exact",
+        "ex-dirichlet-inverse-infinity-norm-tight-at-n3"
+      ]
+    },
+    {
+      "convention": "The vector infinity norm is the maximum absolute interior coordinate; truncation residual is A_h u_grid − g_h. The solution u has four continuous derivatives on [0,1], zero endpoint values, and |u⁽⁴⁾|≤M with M≥0.",
+      "fixed_by": "lem-centered-difference-dirichlet-truncation-residual",
+      "matters_for": [
+        "thm-centered-difference-dirichlet-second-order-error"
+      ]
+    },
+    {
+      "convention": "The algebraic residual of an arbitrary approximate vector is ρ_h=A_h v_h−g_h, independently of the truncation residual.",
+      "fixed_by": "thm-centered-difference-dirichlet-second-order-error",
+      "matters_for": [
+        "thm-centered-difference-dirichlet-second-order-error"
+      ]
+    },
+    {
+      "convention": "The mixed-boundary example replaces the right Dirichlet condition by (U_{N+1}−U_N)/h=c, retains U_0=0, and measures error over all nodes including the right endpoint.",
+      "fixed_by": "ex-first-order-neumann-closure-causes-first-order-bvp-error",
+      "matters_for": [
+        "ex-first-order-neumann-closure-causes-first-order-bvp-error"
+      ]
+    },
+    {
+      "convention": "The matrix infinity row-sum norm is max_i Σ_j |b_ij|; the attaining sign vector uses sgn(0)=0.",
+      "fixed_by": "ex-dirichlet-inverse-infinity-norm-tight-at-n3",
+      "matters_for": [
+        "ex-dirichlet-inverse-infinity-norm-tight-at-n3"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-centered-difference-dirichlet-inverse-maxnorm",
+      "statement": "For every N≥1, the Thomas recurrence has pivots p_j=(j+1)/j>0 and returns the unique solution for every admissible exact input. A_h is invertible, A_h⁻¹ preserves coordinatewise nonnegativity, and ‖A_h⁻¹r‖∞≤‖r‖∞/8 for every r∈ℝ^N.",
+      "used_by": [
+        "thm-centered-difference-dirichlet-second-order-error",
+        "ex-centered-difference-dirichlet-quadratic-exact",
+        "ex-dirichlet-inverse-infinity-norm-tight-at-n3"
+      ]
+    },
+    {
+      "id": "alg-centered-difference-dirichlet-bvp",
+      "statement": "For continuous real g on [0,1] and positive integer N, construct the centered zero-Dirichlet system A_hU=g_h and solve it by the stated exact Thomas forward recurrence and backward substitution, checking the equations before returning success.",
+      "used_by": [
+        "lem-centered-difference-dirichlet-inverse-maxnorm",
+        "lem-centered-difference-dirichlet-truncation-residual",
+        "thm-centered-difference-dirichlet-second-order-error",
+        "ex-centered-difference-dirichlet-quadratic-exact",
+        "ex-first-order-neumann-closure-causes-first-order-bvp-error",
+        "ex-dirichlet-inverse-infinity-norm-tight-at-n3"
+      ]
+    },
+    {
+      "id": "lem-centered-difference-dirichlet-truncation-residual",
+      "statement": "If u∈C⁴([0,1]), u(0)=u(1)=0, g=−u'', and |u⁽⁴⁾|≤M with M≥0, then τ_j=(A_hu_grid)_j−g_j satisfies max_{1≤j≤N}|τ_j|≤Mh²/12. Both endpoint closure residuals are zero, so the same bound holds when they are included.",
+      "used_by": [
+        "thm-centered-difference-dirichlet-second-order-error"
+      ]
+    },
+    {
+      "id": "thm-centered-difference-dirichlet-second-order-error",
+      "statement": "For the stated C⁴ zero-Dirichlet solution with |u⁽⁴⁾|≤M, every v_h∈ℝ^N with residual ρ_h=A_hv_h−g_h satisfies ‖v_h−u_grid‖∞≤Mh²/96+‖ρ_h‖∞/8. The exact algorithm returns a solution with ρ_h=0 and error at most Mh²/96.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-taylor-remainder-bound",
+      "used_for": "Degree-three Taylor expansions about each interior node, with remainder bounded by Mh⁴/24 in either direction, including intervals meeting the endpoints.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-triangle-inequality",
+      "used_for": "Combining the two Taylor remainders, bounding the difference of algebraic and truncation residuals coordinatewise, and proving row-sum norm estimates.",
+      "opened": true
+    },
+    {
+      "id": "cor-taylor-lagrange-and-cauchy-remainders",
+      "used_for": "Checking the Lagrange remainder formula supplying the published Taylor remainder bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-taylor-schlomilch-roche-remainder",
+      "used_for": "Checking the underlying Taylor remainder hypotheses and its explicit allowance for targets to the left of the expansion center.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-first-order-neumann-closure-causes-first-order-bvp-error",
+      "concern": "Verification step 4.1 ends with “despite exact interior values.” The interior numerical values are not exact: step 3.1 proves e_j=−h x_j/2, which is nonzero at every interior node. The intended assertion is that the interior stencil is exact on the quadratic, as correctly stated in step 2.1 and the examples page. The computed error and rate remain valid.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": []
+}

@@ -14,7 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
-  audited: 2026-08-02
+  repair: research/numerical-optimization-dynamics-2026-10-16-owner-step2-published-reapplication-ROOT-1035/thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots.repair.json
 sources:
   scraped: []
   references:
@@ -39,6 +39,6 @@ A nonzero real polynomial of degree $n$ has at most $n$ distinct real roots. The
 
 1.2 Assume the claim at degree $n$. [ih]
 
-2.1 If a degree-$n+1$ polynomial has a root $a$, the factor lemma writes it as $(x-a)q(x)$ with $q$ of degree $n$; every other root is a root of $q$. [step 1.2, given]
+1.3 If a degree-$n+1$ polynomial has no root, its root count is already zero. Otherwise choose a root $a$ and write its actual coefficient list as $(c_0,\ldots,c_{n+1})$, with $c_{n+1}\ne0$. Use the explicit quotient construction in [[lem-real-polynomial-factor-at-a-root]]: its coefficient at $X^d$ is $\sum_{k=d+1}^{n+1}c_k a^{k-1-d}$ for $0\le d\le n$. The coefficient at $X^n$ is $c_{n+1}\ne0$, and there are no higher terms, so this particular formal quotient $q$ has degree exactly $n$. For any other root $b\ne a$, $0=p(b)=(b-a)q(b)$ and division by the nonzero real $b-a$ gives $q(b)=0$. [given, construct, algebra]
 
-3.1 The induction hypothesis gives at most $n$ other roots, hence at most $n+1$ roots in all. [discharge-induction] ∎
+2.1 In the root case, the induction hypothesis in step 1.2 applied to the degree-$n$ quotient from step 1.3 gives at most $n$ distinct roots other than $a$, hence at most $n+1$ roots in all. The no-root case already satisfies the same bound. Induction proves the assertion at every degree. [step 1.1, step 1.2, step 1.3, discharge-induction] ∎

@@ -1,0 +1,2054 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-scaled-chebyshev-filter-bound-on-a-separated-interval",
+    "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+    "prop-sparse-unrestarted-gmres-work-and-storage",
+    "thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound",
+    "thm-gmres-true-residual-gap-from-computed-arnoldi-relation",
+    "thm-cg-recursive-residual-gap-and-attainable-accuracy",
+    "ex-unrestarted-and-restarted-gmres-on-a-diagonal-system",
+    "ex-cg-denominator-failure-and-minres-on-an-indefinite-system",
+    "ex-lanczos-poorly-aligned-start-vector-delays-the-largest-ritz-value",
+    "ex-lanczos-repeated-top-zero-component-and-invariant-breakdown"
+  ],
+  "contracts": {
+    "lem-scaled-chebyshev-filter-bound-on-a-separated-interval": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-chebyshev-polynomials-first-and-second-kind",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal P_{\\mathbb R}$ be the set of formal real polynomials of\n[[def-real-polynomial-degree-leading-coefficient-and-monic]]. Associate to every\n$P\\in\\mathcal P_{\\mathbb R}$ an eventually zero coefficient sequence $(p_k)$:\nuse its displayed finite coefficient list and extend it by zeros when $P\\ne0$,\nand put $p_k=0$ for every $k$ when $P=0$. Do the same for $Q$, with coefficients\n$(q_k)$. Define $P+Q$ coefficientwise and define $PQ$ by the convolution\ncoefficients\n$$ (P+Q)_k=p_k+q_k,\\qquad (PQ)_k=\\sum_{j=0}^{k}p_jq_{k-j}. $$\nusing the real finite sum of [[def-finite-sum]]. In either construction, discard\ntrailing zero coefficients; if every coefficient is zero, the result is the zero\npolynomial. Scalar multiplication and subtraction are the corresponding\ncoefficientwise operations. Thus these formulas define operations on the formal\ncoefficient-list objects, independently of evaluation.\n\nWrite $1=(1)$ and $X=(0,1)$, and define\n$$ \\Phi(P,Q):=(Q,2XQ-P)\\qquad(P,Q\\in\\mathcal P_{\\mathbb R}). $$\nApply [[thm-recursion]] to the set\n$\\mathcal P_{\\mathbb R}\\times\\mathcal P_{\\mathbb R}$, first with initial value\n$(1,X)$ and then with initial value $(1,2X)$, always using the function $\\Phi$.\nThis gives unique pair sequences $H^T,H^U$. Define $T_n$ and $U_n$ to be the\nfirst coordinates of $H^T_n$ and $H^U_n$, respectively. Since the first\ncoordinate of $\\Phi(P,Q)$ is $Q$, the second coordinate of $H^T_n$ is\n$T_{n+1}$ and the second coordinate of $H^U_n$ is $U_{n+1}$. Consequently\n$$ T_0=1,\\quad T_1=X,\\quad T_{n+2}=2XT_{n+1}-T_n, $$\n$$ U_0=1,\\quad U_1=2X,\\quad U_{n+2}=2XU_{n+1}-U_n $$\nfor every $n\\in\\mathbb N$. These unique sequences are the **Chebyshev\npolynomials of the first and second kinds**.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal real polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots,a_n)$ with $a_n\\ne0$; we write the latter as $p(X)=\\sum_{k=0}^{n}a_kX^k$. The list, rather than the function it induces, is the polynomial object. Its **evaluation** at $x\\in\\mathbb R$ is the real number $p(x):=\\sum_{k=0}^{n}a_kx^k$.\n\nFor nonzero $p=(a_0,\\ldots,a_n)$, define $\\deg p:=n$ and $\\operatorname{lc}(p):=a_n$. The zero polynomial has no degree and no leading coefficient. A nonzero polynomial is **monic** when $\\operatorname{lc}(p)=1$. Thus degree and leading coefficient are defined from the displayed finite list, without asserting that distinct formal polynomials define distinct functions. The conventions for finite sums and integer powers used in the evaluation are recorded in [[def-finite-sum]], [[def-integer-power]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "1.1 Fix $t\\in[-1,1]$. Since $1-t^2\\ge0$, choose $s\\ge0$ with $s^2=1-t^2$ by [F3]. Define real sequences by $u_0=1$, $v_0=0$, and $$u_{j+1}=tu_j-sv_j,\\qquad v_{j+1}=su_j+tv_j.$$ Direct expansion gives $u_{j+1}^2+v_{j+1}^2=(t^2+s^2)(u_j^2+v_j^2)=u_j^2+v_j^2$, so induction from $u_0^2+v_0^2=1$ gives $|u_j|\\le1$. Also $u_j=tu_{j+1}+sv_{j+1}$, by substituting the recurrences and using $t^2+s^2=1$. Hence $u_{j+2}+u_j=(tu_{j+1}-sv_{j+1})+(tu_{j+1}+sv_{j+1})=2tu_{j+1}$. Since $u_0=1$ and $u_1=t$, [F1] and induction give $u_j=T_j(t)$. Thus $|T_j(t)|\\le1$; equality holds at $t=1$, where $s=0$ and $u_j=1$ for every $j$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "For $\\xi_a>1$, recurrence [F1] gives $T_0(\\xi_a)=1$ and $T_1(\\xi_a)=\\xi_a>1$. If $T_j(\\xi_a)>T_{j-1}(\\xi_a)>0$, then $$T_{j+1}(\\xi_a)=2\\xi_aT_j(\\xi_a)-T_{j-1}(\\xi_a)>(2\\xi_a-1)T_j(\\xi_a)>T_j(\\xi_a).$$ Induction proves $T_k(\\xi_a)>0$, so the normalizing denominator is nonzero.",
+          "inputs": [
+            "given",
+            "F1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The recurrence gives $T_0=1$ of degree $0$ and $T_1=X$ of degree $1$ with leading coefficient $1$. If $j\\ge1$, $T_j$ has degree $j$ and leading coefficient $2^{j-1}$, and $T_{j-1}$ has degree $j-1$ (with $T_0$ having degree $0$ when $j=1$), then $2XT_j$ has degree $j+1$ and leading coefficient $2^j$, while subtracting $T_{j-1}$ cannot change that highest-degree term. By [F1], induction gives $\\deg T_k=k$ and leading coefficient $2^{k-1}$ for every $k\\ge1$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "The affine map $\\xi$ is increasing, has nonzero slope $2/(b-c)$, and sends $[c,b]$ onto $[-1,1]$. For $k\\ge1$, step 1.3 shows that $T_k(\\xi(x))$ has degree $k$; step 1.2 shows division by $T_k(\\xi_a)>0$ preserves that degree. For $k=0$, $p_0=1$ has degree $0$. Step 1.1 bounds the numerator on $[c,b]$ by $1$ in absolute value and attains $1$ at $x=b$, since $\\xi(b)=1$. Since $\\xi(a)=\\xi_a$, steps 1.2 and 1.3 give $p_k(a)=1$ and prove the maximum formula.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "empty case, actual Statement: degenerate: Statement assumes a>b>c; Proof step 1.2 proves T_k(xi_a)>0 before division and step 2.1 uses b-c>0, so neither normalization nor the affine interval map has a zero denominator."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 includes k=0 and T_0=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20131.2 include k=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a>b>c; Proof step 1.2 proves T_k(xi_a)>0 before division and step 2.1 uses b-c>0, so neither normalization nor the affine interval map has a zero denominator."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the bound over all t in [-1,1] and equality at t=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice case, actual Statement: degenerate: Statement assumes a>b>c; Proof step 1.2 proves T_k(xi_a)>0 before division and step 2.1 uses b-c>0, so neither normalization nor the affine interval map has a zero denominator."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward case, actual Statement: degenerate: Statement assumes a>b>c; Proof step 1.2 proves T_k(xi_a)>0 before division and step 2.1 uses b-c>0, so neither normalization nor the affine interval map has a zero denominator."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse case, actual Statement: degenerate: Statement assumes a>b>c; Proof step 1.2 proves T_k(xi_a)>0 before division and step 2.1 uses b-c>0, so neither normalization nor the affine interval map has a zero denominator."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-chebyshev-polynomials-first-and-second-kind",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "Write $1=(1)$ and $X=(0,1)$, and define\n$$ \\Phi(P,Q):=(Q,2XQ-P)\\qquad(P,Q\\in\\mathcal P_{\\mathbb R}). $$\nApply [[thm-recursion]] to the set\n$\\mathcal P_{\\mathbb R}\\times\\mathcal P_{\\mathbb R}$, first with initial value\n$(1,X)$ and then with initial value $(1,2X)$, always using the function $\\Phi$.\nThis gives unique pair sequences $H^T,H^U$. Define $T_n$ and $U_n$ to be the\nfirst coordinates of $H^T_n$ and $H^U_n$, respectively. Since the first\ncoordinate of $\\Phi(P,Q)$ is $Q$, the second coordinate of $H^T_n$ is\n$T_{n+1}$ and the second coordinate of $H^U_n$ is $U_{n+1}$. Consequently\n$$ T_0=1,\\quad T_1=X,\\quad T_{n+2}=2XT_{n+1}-T_n, $$\n$$ U_0=1,\\quad U_1=2X,\\quad U_{n+2}=2XU_{n+1}-U_n $$\nfor every $n\\in\\mathbb N$. These unique sequences are the **Chebyshev\npolynomials of the first and second kinds**.",
+          "use": "Used in proof step(s) 1.1, 1.2.",
+          "fact": "F1",
+          "required_hypotheses": "[F1] [[def-chebyshev-polynomials-first-and-second-kind]]: $T_0=1$, $T_1=X$, and $T_{j+1}=2XT_j-T_{j-1}$ for $j\\ge1$."
+        },
+        {
+          "fact": "F2",
+          "supplier": "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "required_hypotheses": "[F2] [[def-real-polynomial-degree-leading-coefficient-and-monic]]: the degree\nand leading coefficient of a nonzero formal real polynomial are determined by\nits highest nonzero coefficient."
+        },
+        {
+          "fact": "F3",
+          "supplier": "thm-of-square-roots",
+          "required_hypotheses": "[F3] [[thm-of-square-roots]]: every nonnegative real has a nonnegative square\nroot."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "repair_confidence": 1
+    },
+    "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-lanczos-process-as-hermitian-arnoldi",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian and let $q_1=b/\\|b\\|_2$ for a nonzero start vector $b$.\nRunning Arnoldi on $(A,b)$ is called the **Lanczos process** when one records\nthe coefficients, at every step before Arnoldi breakdown, in the three-term\nform\n\n$$Aq_j=\\beta_{j-1}q_{j-1}+\\alpha_jq_j+\\beta_jq_{j+1}\\qquad (j\\ge1,\\ q_0:=0,\\ \\beta_0:=0),$$\n\nwith $\\alpha_j\\in\\mathbb R$ and the phase of $q_{j+1}$ chosen so that\n$\\beta_j\\ge0$ is real. In matrix form this is the Hermitian specialization of\n[[def-arnoldi-process]].",
+          "uses": [
+            "1.1",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+          "source_section": "Statement",
+          "quote": "Let $A$ be an $n\\times n$ matrix over $\\mathbb R$ or $\\mathbb C$, let $b$ be a\nnonzero vector of matching size, and let $m\\ge1$. Assume the Arnoldi process\nfor $(A,b)$ runs through step $m$ without breakdown. Let\n\n$$Q_m=[v_1\\,\\dots\\,v_m], \\qquad Q_{m+1}=[v_1\\,\\dots\\,v_{m+1}],$$\n\nand let $\\bar H_m=(h_{ij})_{1\\le i\\le m+1,\\,1\\le j\\le m}$, where the Arnoldi\ncoefficients occupy the positions $i\\le j+1$ and $h_{ij}:=0$ for $i>j+1$.\nThen:\n\n1. $v_1,\\dots,v_m$ are orthonormal;\n2. $\\operatorname{span}\\{v_1,\\dots,v_m\\}=K_m(A,b)$;\n3. $\\bar H_m$ has the rectangular upper-Hessenberg zero pattern\n   $h_{ij}=0$ for $i>j+1$;\n4. $AQ_m=Q_{m+1}\\bar H_m$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ritz-values-and-ritz-vectors-from-arnoldi",
+          "source_section": "Definition",
+          "quote": "Let Arnoldi run through step $m$ and write\n\n$$H_m:=Q_m^\\ast A Q_m.$$\n\nAn eigenvalue $\\theta$ of $H_m$ is a **Ritz value** of $A$ from the Arnoldi\nsubspace $K_m(A,b)$.\n\nIf $y\\ne0$ satisfies\n\n$$H_my=\\theta y,$$\n\nthen the lifted vector\n\n$$u:=Q_my$$\n\nis the corresponding **Ritz vector**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-ritz-residual-formula-for-an-arnoldi-ritz-pair",
+          "source_section": "Statement",
+          "quote": "Assume Arnoldi runs through step $m$ without breakdown, let\n$H_m=Q_m^\\ast A Q_m$, and let $H_my=\\theta y$ with $\\|y\\|_2=1$. If\n$u=Q_my$ is the associated Ritz vector, then\n\n$$Au-\\theta u=h_{m+1,m}(e_m^\\ast y)v_{m+1}.$$\n\nIn particular,\n\n$$\\|Au-\\theta u\\|_2=|h_{m+1,m}|\\,|e_m^\\ast y|.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-courant-fischer-min-max-principle",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to V$ be self-adjoint on an $n$-dimensional real inner product space,\nand list its eigenvalues in weakly decreasing order:\n\n$$\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_n.$$\n\nThen for every $1\\le k\\le n$,\n\n$$\\lambda_k=\\min_{\\dim W=n-k+1}\\ \\max_{0\\ne v\\in W} R_T(v)=\\max_{\\dim U=k}\\ \\min_{0\\ne v\\in U} R_T(v).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-scaled-chebyshev-filter-bound-on-a-separated-interval",
+          "source_section": "Statement",
+          "quote": "Let $a>b>c$ be real numbers, let $k\\in\\mathbb N$ with $k\\ge0$, and put\n\n$$\\xi(x):=\\frac{2x-b-c}{b-c},\\qquad \\xi_a:=\\xi(a)=1+\\frac{2(a-b)}{b-c}>1.$$\n\nDefine\n\n$$p_k(x):=\\frac{T_k(\\xi(x))}{T_k(\\xi_a)},$$\n\nwhere $T_k$ is the $k$th Chebyshev polynomial of the first kind from\n[[def-chebyshev-polynomials-first-and-second-kind]]. Then $p_k$ is a real\npolynomial of degree exactly $k$, $p_k(a)=1$, and\n\n$$\\max_{x\\in[c,b]}|p_k(x)|=\\frac{1}{T_k(\\xi_a)}.$$",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-arnoldi-process",
+          "source_section": "Definition",
+          "quote": "Let $A$ act on a real or complex inner-product space, and let $b\\ne0$. The\n**Arnoldi process** starts with\n\n$$v_1:=\\frac{b}{\\|b\\|}.$$\n\nGiven orthonormal vectors $v_1,\\dots,v_j$, define\n\n$$h_{ij}:=\\langle Av_j,v_i\\rangle \\qquad(1\\le i\\le j),$$\n\nand the orthogonalized residual\n\n$$w_j:=Av_j-\\sum_{i=1}^j h_{ij}v_i.$$\n\nSet\n\n$$h_{j+1,j}:=\\|w_j\\|.$$\n\nIf $h_{j+1,j}\\ne0$, define\n\n$$v_{j+1}:=\\frac{w_j}{h_{j+1,j}}.$$\n\nThe process is said to **break down exactly** at step $j$ when\n$h_{j+1,j}=0$.",
+          "uses": [
+            "1.6"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a square matrix over $\\mathbb R$ or $\\mathbb C$ and let $b$ be a\nvector of matching size. Define\n\n$$K_0(A,b):=\\{0\\},$$\n\nand for $m\\ge 1$ define the $m$th **Krylov subspace**\n\n$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$\n\nThus $K_m(A,b)\\subseteq K_{m+1}(A,b)$ for every $m\\ge 0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "1.5",
+            "1.6"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "If exact Lanczos runs through step $m$ without breakdown, [F1], [F2], and [F7] give an orthonormal basis $Q_m$ of $K_m$ and a symmetric compression $H_m=Q_m^{\\mathsf T}AQ_m$. By [F3], each eigenpair of $H_m$ lifts to an exact Ritz pair of $A$; by [F4], the largest eigenvalue of $H_m$ is the maximum Rayleigh quotient on $K_m$, namely $\\theta_m$. If Lanczos breaks down earlier, no step-$m$ basis or Ritz assertion is used; $\\theta_m$ remains defined directly by the Rayleigh\u2013Ritz formula in the Statement.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "Assume $r<n$. By [F4], choose an orthonormal eigenbasis of $A$ whose first $r$ vectors span the range of $P$. If $Pb=0$, then $b$ is orthogonal to that eigenspace. For every integer $j\\ge0$ and every top eigenvector $u$, symmetry gives $u^{\\mathsf T}A^jb=(A^ju)^{\\mathsf T}b=\\lambda_1^j u^{\\mathsf T}b=0$. Thus every vector in $K_m$ lies in the orthogonal complement of the top eigenspace, where all Rayleigh quotients are at most $\\lambda_{r+1}$; this proves branch 1.",
+          "inputs": [
+            "given",
+            "F4",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "1.3",
+          "claim": "If $r=n$, every eigenvalue is $\\lambda_1$, so [F4] gives $A=\\lambda_1I$. Every nonzero $x\\in K_m$ then has Rayleigh quotient $\\lambda_1$, proving the stated dimension-one/full-multiplicity branch.",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "1.4",
+          "claim": "Assume $Pb\\ne0$ and $\\lambda_{r+1}>\\lambda_n$. Apply [F5] with $a=\\lambda_1$, $b=\\lambda_{r+1}$, $c=\\lambda_n$, and $k=m-1$ to obtain a polynomial $p_{m-1}$ of degree at most $m-1$ with $p_{m-1}(\\lambda_1)=1$ and $|p_{m-1}(t)|\\le\\delta_m$ on $[\\lambda_n,\\lambda_{r+1}]$, where $\\delta_m:=1/T_{m-1}(1+2(\\lambda_1-\\lambda_{r+1})/(\\lambda_{r+1}-\\lambda_n))$. By [F7], $x:=p_{m-1}(A)b$ belongs to $K_m$, and spectral decomposition gives $Px=Pb$ and $\\|(I-P)x\\|_2\\le\\delta_m\\|(I-P)b\\|_2$.",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d5",
+          "step": "1.5",
+          "claim": "Assume $Pb\\ne0$ and $\\lambda_{r+1}=\\lambda_n$. The spectral decomposition gives $A=\\lambda_n I+(\\lambda_1-\\lambda_n)P$. Hence $Ab=\\lambda_n b+(\\lambda_1-\\lambda_n)Pb$, so [F7] gives $Pb\\in K_2$ and it has Rayleigh quotient $\\lambda_1$; this proves $\\theta_m=\\lambda_1$ for $m\\ge2$. For $m=1$, [F7] gives $K_1=\\operatorname{span}\\{b\\}$, and the same decomposition gives the displayed exact formula for $\\lambda_1-\\theta_1$.",
+          "inputs": [
+            "given",
+            "F4",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d7",
+          "step": "1.6",
+          "claim": "Finally, assume $r<n$, $Pb\\ne0$, and exact Lanczos breaks down at column $d$. For $d>1$, no breakdown occurs at columns $j<d$. Starting from $q_1=b/\\|b\\|_2$, inductively suppose $q_1,\\ldots,q_j$ form an orthonormal basis of $K_j$. By the exact Arnoldi definition [F1, F6], the residual $w_j=Aq_j-\\sum_{i=1}^j h_{ij}q_i$ lies in $K_{j+1}$, is orthogonal to $K_j$, and is nonzero for $j<d$; hence its normalized vector $q_{j+1}$ lies in $K_{j+1}\\setminus K_j$. Since $K_{j+1}$ is generated by $j+1$ vectors, $q_1,\\ldots,q_{j+1}$ form a basis of $K_{j+1}$. Thus $q_1,\\ldots,q_d$ form a basis of $K_d$. For $d=1$, $q_1$ directly spans $K_1$. Each $Aq_j\\in K_d$ for $j<d$, and $Aq_d\\in K_d$ because its orthogonalized residual $w_d$ is zero. Hence $AK_d\\subseteq K_d$, and [F7] plus induction gives $K_m=K_d$ for $m\\ge d$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F7",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d6",
+          "step": "2.1",
+          "claim": "In the eigenbasis of [F4], write $x=Px+(I-P)x$. The two components are orthogonal, $A(Px)=\\lambda_1Px$, and all eigenvalues on the second component lie in $[\\lambda_n,\\lambda_{r+1}]$. Therefore $$\\lambda_1-\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x} =\\frac{\\sum_{j>r}(\\lambda_1-\\lambda_j)x_j^2} {\\|Px\\|_2^2+\\|(I-P)x\\|_2^2} \\le(\\lambda_1-\\lambda_n)\\frac{\\|(I-P)x\\|_2^2}{\\|Pb\\|_2^2} \\le(\\lambda_1-\\lambda_n)\\delta_m^2\\tau^2.$$ Since $\\theta_m$ is the maximum Rayleigh quotient on $K_m$, it is at least the quotient of this nonzero $x$ and at most $\\lambda_1$. This proves branch 2, including $m=1$ because $T_0=1$.",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Let $\\mu_1=\\lambda_1,\\mu_2,\\ldots,\\mu_s$ be the distinct eigenvalues of $A$. Since $r<n$, $s\\ge2$ and the denominators below are nonzero. Define $$p(t):=\\prod_{i=2}^{s}\\frac{t-\\mu_i}{\\lambda_1-\\mu_i}.$$ Then $p(\\lambda_1)=1$ and $p(\\mu_i)=0$ for $i\\ge2$. On the orthonormal eigenbasis from [F4], $p(A)$ therefore acts as the identity on the $\\lambda_1$-eigenspace and as zero on every other eigenspace, so $p(A)=P$. Since $AK_d\\subseteq K_d$ and $b\\in K_d$, every power of $A$ applied to $b$ lies in $K_d$, whence $Pb=p(A)b\\in K_d$. The nonzero vector $Pb$ has Rayleigh quotient $\\lambda_1$, while no quotient can exceed $\\lambda_1$; thus $\\theta_d=\\lambda_1$ and the exact-breakdown branch follows.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.6",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "empty case, actual Statement: nonempty-choice: Proof step 1.2 uses one finite orthonormal eigenbasis supplied by the symmetric spectral theorem; step 3.1 explicitly constructs the finite spectral projector polynomial without arbitrary indexed selections."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 proves Pb=0 separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.3\u20131.4 include n=1 and m=1; step 1.3 covers full multiplicity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.3, 1.5, and 3.1 treat r=n, the collapsed interval, and exact breakdown separately. Collapsed unwanted interval exact recovery requires Pb!=0; Pb=0 is governed only by branch 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.4 uses lambda_n and lambda_{r+1}; step 1.5 treats their equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.2 uses one finite orthonormal eigenbasis supplied by the symmetric spectral theorem; step 3.1 explicitly constructs the finite spectral projector polynomial without arbitrary indexed selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward case, actual Statement: nonempty-choice: Proof step 1.2 uses one finite orthonormal eigenbasis supplied by the symmetric spectral theorem; step 3.1 explicitly constructs the finite spectral projector polynomial without arbitrary indexed selections."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse case, actual Statement: nonempty-choice: Proof step 1.2 uses one finite orthonormal eigenbasis supplied by the symmetric spectral theorem; step 3.1 explicitly constructs the finite spectral projector polynomial without arbitrary indexed selections."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-lanczos-process-as-hermitian-arnoldi",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$Aq_j=\\beta_{j-1}q_{j-1}+\\alpha_jq_j+\\beta_jq_{j+1}\\qquad (j\\ge1,\\ q_0:=0,\\ \\beta_0:=0),$$",
+          "use": "Used in proof step(s) 1.1.",
+          "fact": "F1",
+          "required_hypotheses": "[F1] [[def-lanczos-process-as-hermitian-arnoldi]]: exact Lanczos is Arnoldi applied to a symmetric matrix, with real nonnegative subdiagonal coefficients before breakdown."
+        },
+        {
+          "supplier": "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+          "status": "published-body-inspected",
+          "source_section": "Statement",
+          "excerpt": "Let $A$ be an $n\\times n$ matrix over $\\mathbb R$ or $\\mathbb C$, let $b$ be a\nnonzero vector of matching size, and let $m\\ge1$. Assume the Arnoldi process\nfor $(A,b)$ runs through step $m$ without breakdown. Let\n\n$$Q_m=[v_1\\,\\dots\\,v_m], \\qquad Q_{m+1}=[v_1\\,\\dots\\,v_{m+1}],$$\n\nand let $\\bar H_m=(h_{ij})_{1\\le i\\le m+1,\\,1\\le j\\le m}$, where the Arnoldi\ncoefficients occupy the positions $i\\le j+1$ and $h_{ij}:=0$ for $i>j+1$.\nThen:\n\n1. $v_1,\\dots,v_m$ are orthonormal;\n2. $\\operatorname{span}\\{v_1,\\dots,v_m\\}=K_m(A,b)$;\n3. $\\bar H_m$ has the rectangular upper-Hessenberg zero pattern\n   $h_{ij}=0$ for $i>j+1$;\n4. $AQ_m=Q_{m+1}\\bar H_m$.",
+          "use": "Used in proof step(s) 1.1, 3.1.",
+          "fact": "F2",
+          "required_hypotheses": "[F2] [[thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization]]: before breakdown, the Arnoldi vectors form an orthonormal basis of $K_m$ and satisfy $AQ_m=Q_{m+1}\\bar H_m$."
+        },
+        {
+          "supplier": "def-ritz-values-and-ritz-vectors-from-arnoldi",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "An eigenvalue $\\theta$ of $H_m$ is a **Ritz value** of $A$ from the Arnoldi\nsubspace $K_m(A,b)$.",
+          "use": "Used in proof step(s) 1.1.",
+          "fact": "F3",
+          "required_hypotheses": "[F3] [[def-ritz-values-and-ritz-vectors-from-arnoldi]] and [[prop-ritz-residual-formula-for-an-arnoldi-ritz-pair]]: eigenvalues of $H_m=Q_m^{\\mathsf T}AQ_m$ are Ritz values with vectors $u=Q_my$; if Arnoldi runs through step $m$ without breakdown and $H_my=\\theta y$, then $Au-\\theta u=h_{m+1,m}(e_m^{\\mathsf T}y)v_{m+1}$."
+        },
+        {
+          "supplier": "prop-ritz-residual-formula-for-an-arnoldi-ritz-pair",
+          "status": "published-body-inspected",
+          "source_section": "Statement",
+          "excerpt": "$$Au-\\theta u=h_{m+1,m}(e_m^\\ast y)v_{m+1}.$$",
+          "use": "Used in proof step(s) 1.1.",
+          "fact": "F3",
+          "required_hypotheses": "[F3] [[def-ritz-values-and-ritz-vectors-from-arnoldi]] and [[prop-ritz-residual-formula-for-an-arnoldi-ritz-pair]]: eigenvalues of $H_m=Q_m^{\\mathsf T}AQ_m$ are Ritz values with vectors $u=Q_my$; if Arnoldi runs through step $m$ without breakdown and $H_my=\\theta y$, then $Au-\\theta u=h_{m+1,m}(e_m^{\\mathsf T}y)v_{m+1}$."
+        },
+        {
+          "supplier": "thm-courant-fischer-min-max-principle",
+          "status": "published-body-inspected",
+          "source_section": "Statement",
+          "excerpt": "Let $T:V\\to V$ be self-adjoint on an $n$-dimensional real inner product space,\nand list its eigenvalues in weakly decreasing order:\n\n$$\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_n.$$\n\nThen for every $1\\le k\\le n$,\n\n$$\\lambda_k=\\min_{\\dim W=n-k+1}\\ \\max_{0\\ne v\\in W} R_T(v)=\\max_{\\dim U=k}\\ \\min_{0\\ne v\\in U} R_T(v).$$",
+          "use": "Used in proof step(s) 1.1, 1.2, 1.3, 1.4, 1.5, 2.1, 3.1.",
+          "fact": "F4",
+          "required_hypotheses": "[F4] [[thm-courant-fischer-min-max-principle]] and [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]]: every real symmetric compression has a largest Rayleigh\u2013Ritz value equal to its largest eigenvalue, and $A$ has an orthonormal eigenbasis."
+        },
+        {
+          "supplier": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "status": "published-body-inspected",
+          "source_section": "Statement",
+          "excerpt": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "use": "Used in proof step(s) 1.1, 1.2, 1.3, 1.4, 1.5, 2.1, 3.1.",
+          "fact": "F4",
+          "required_hypotheses": "[F4] [[thm-courant-fischer-min-max-principle]] and [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]]: every real symmetric compression has a largest Rayleigh\u2013Ritz value equal to its largest eigenvalue, and $A$ has an orthonormal eigenbasis."
+        },
+        {
+          "supplier": "lem-scaled-chebyshev-filter-bound-on-a-separated-interval",
+          "status": "authored-local-supplier",
+          "source_section": "Statement",
+          "excerpt": "where $T_k$ is the $k$th Chebyshev polynomial of the first kind from\n[[def-chebyshev-polynomials-first-and-second-kind]]. Then $p_k(a)=1$ and",
+          "use": "Used in proof step(s) 1.4.",
+          "fact": "F5",
+          "required_hypotheses": "[F5] [[lem-scaled-chebyshev-filter-bound-on-a-separated-interval]]: for $a>b>c$, the degree-$k$ scaled filter has value $1$ at $a$ and absolute value at most $1/T_k(1+2(a-b)/(b-c))$ on $[c,b]$."
+        },
+        {
+          "supplier": "def-arnoldi-process",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$w_j:=Av_j-\\sum_{i=1}^j h_{ij}v_i.$$",
+          "use": "Used in proof step(s) 3.1.",
+          "fact": "F6",
+          "required_hypotheses": "[F6] [[def-arnoldi-process]]: each exact Arnoldi column has $Av_j=\\sum_{i=1}^j h_{ij}v_i+w_j$; exact breakdown at column $d$ means $w_d=0$."
+        },
+        {
+          "supplier": "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$",
+          "use": "Used in proof step(s) 1.1, 1.2, 1.4, 1.5, 3.1.",
+          "fact": "F7",
+          "required_hypotheses": "[F7] [[def-krylov-subspace-of-a-matrix-and-start-vector]]: $K_m(A,b)=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\}$."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read all eight steps and nine actual dependencies, including the repaired Chebyshev supplier. Corrected missing Pb!=0 in collapsed-interval branch 3: diag(2,1), b=e2 refutes the prior unconditional equality. Step 1.5 already proves precisely the corrected branch. m=1 uses T0=1; tau=0, Pb=0, full top multiplicity, repeated top eigenspace and exact breakdown checked. Invariance plus polynomial spectral projector supplies top vector without assuming a post-breakdown Arnoldi basis. All four direct item consumers and owning page reviewed; none needs repair. Bindel lectures 38\u201339 pp. 4\u20136 checked for polynomial/start-angle argument. No remaining defect.",
+        "defect_ids": [
+          "numerical-optimization-dynamics-2026-10-16-b34-3a-collapsed-interval-top-component"
+        ],
+        "verdict": "amended_repair"
+      },
+      "repair_confidence": 1
+    },
+    "prop-sparse-unrestarted-gmres-work-and-storage": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csr-matrix-with-stored-entry-semantics",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, and let $m,n,s\\in\\mathbb N$, where $\\mathbb N$ includes\n$0$. A **compressed sparse row (CSR) record** for an $m$ by $n$ matrix over\n$F$ consists of integer arrays $r=(r_0,\\ldots,r_m)$ and\n$c=(c_0,\\ldots,c_{s-1})$, and a value array $v=(v_0,\\ldots,v_{s-1})\\in F^s$,\nsatisfying\n\n$$r_0=0,\\qquad 0=r_0\\le r_1\\le\\cdots\\le r_m=s,\\qquad 0\\le c_t<n\\quad(0\\le t<s).$$\n\nFor each row $i<m$, its **stored entries** are the indices\n$t$ with $r_i\\le t<r_{i+1}$. The row is empty exactly when\n$r_i=r_{i+1}$. Repeated column indices within one row and stored values\n$v_t=0_F$ are permitted; each such entry remains a separate stored entry.\n\nThe represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by\n\n$$A_{ij}:=\\sum_{r_i\\le t<r_{i+1}}\\mathbf 1_{c_t=j}v_t\\qquad(0\\le i<m,\\ 0\\le j<n),$$\n\nwhere $\\mathbf 1_{c_t=j}$ is $1_F$ when $c_t=j$ and $0_F$ otherwise, and an\nempty sum is $0_F$. Repeated entries in column $j$ are therefore added. The\nnumber $s$ is the **stored-entry count**; it is not in general the number of\nnonzero entries of $A$.\n\nA CSR record is **canonical** when no row repeats a column and no stored value\nis zero. In that case every nonzero matrix entry is stored exactly once and\n$s=\\operatorname{nnz}(A)$, where $\\operatorname{nnz}(A)$ denotes the number of\nnonzero entries of $A$. If $m=0$, the endpoint conditions force $s=0$ and the\nrow-pointer array has its single entry $r_0=0$. If $n=0$, the column-index\ncondition forces $s=0$ as well.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-csr-matrix-vector-product-with-validation",
+          "source_section": "Definition",
+          "quote": "Fix a field $F$. The **validated CSR matrix-vector product** takes integer\ndimension candidates $m,n$, integer arrays $r,c$, a value array $v$ of elements\nof $F$, and a vector candidate $x$ of elements of $F$. All input arrays are\nfinite; write $s=\\operatorname{length}(v)$.\n\n1. If $m\\notin\\mathbb N$, $n\\notin\\mathbb N$,\n   $\\operatorname{length}(r)\\ne m+1$,\n   $\\operatorname{length}(c)\\ne s$, or\n   $\\operatorname{length}(x)\\ne n$, return the status `invalid-dimension`.\n2. For $i=0,\\ldots,m$, check that $r_i\\in\\{0,\\ldots,s\\}$; return\n   `invalid-index` if a check fails. Check $r_0=0$ and $r_m=s$, and for each\n   $i=0,\\ldots,m-1$ check $r_i\\le r_{i+1}$; return `invalid-index` if any\n   check fails. For each $t=0,\\ldots,s-1$, check $0\\le c_t<n$ and return\n   `invalid-index` if a check fails.\n3. Initialize $y_i=0_F$ for $0\\le i<m$. For each row\n   $i=0,\\ldots,m-1$, and then each stored index\n   $t=r_i,\\ldots,r_{i+1}-1$, update\n   $$y_i\\gets y_i+v_t x_{c_t}.$$\n4. Return the status `ok` together with $y\\in F^m$.\n\nFor valid CSR data this uses exact field operations. Validation examines only\nfinite arrays, and the row intervals partition the $s$ stored entries, so the\nspecified loops are bounded. This procedure makes no floating-point rounding,\nbackward-stability, convergence, runtime, or memory-bandwidth claim.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-csr-storage-and-exact-matvec-cost",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $m,n\\in\\mathbb N$, and let a valid CSR record have\n$s$ stored entries. Its input arrays use exactly $s$ field-value slots, $s$\ninteger column-index slots, and $m+1$ integer row-pointer slots, for a total of\n$2s+m+1$ data slots. On valid input, the algorithm\n[[alg-csr-matrix-vector-product-with-validation]] performs exactly $s$ field\nmultiplications, $s$ field additions, and $m$ zero initializations. Its index\nvalidation and loop-control work is $O(m+s+1)$. Counting the CSR arrays and\nreturned output but excluding the supplied vector $x$ and constant-size\nworkspace, it uses exactly $2s+2m+1$ data slots, hence $O(m+s+1)$ slots; for\n$m\\ge1$ this is $O(m+s)$. Here $O(g)$ means bounded by $Cg$ for a constant $C$ independent of\nthe dimensions and input values.\n\nFor a square record of order $m\\ge1$ with at least one stored entry in each\nrow, $s\\ge m$, so the work and storage are $O(s)$. For a canonical record as defined in\n[[def-csr-matrix-with-stored-entry-semantics]], $s=\\operatorname{nnz}(A)$;\nwithout that convention, the cost is in terms of stored entries, not\n$\\operatorname{nnz}(A)$. These are arithmetic, index, and storage counts, not\nruntime, memory-bandwidth, convergence, or factorization-cost bounds.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-arnoldi-process",
+          "source_section": "Definition",
+          "quote": "Let $A$ act on a real or complex inner-product space, and let $b\\ne0$. The\n**Arnoldi process** starts with\n\n$$v_1:=\\frac{b}{\\|b\\|}.$$\n\nGiven orthonormal vectors $v_1,\\dots,v_j$, define\n\n$$h_{ij}:=\\langle Av_j,v_i\\rangle \\qquad(1\\le i\\le j),$$\n\nand the orthogonalized residual\n\n$$w_j:=Av_j-\\sum_{i=1}^j h_{ij}v_i.$$\n\nSet\n\n$$h_{j+1,j}:=\\|w_j\\|.$$\n\nIf $h_{j+1,j}\\ne0$, define\n\n$$v_{j+1}:=\\frac{w_j}{h_{j+1,j}}.$$\n\nThe process is said to **break down exactly** at step $j$ when\n$h_{j+1,j}=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+          "source_section": "Statement",
+          "quote": "Let $A$ be an $n\\times n$ matrix over $\\mathbb R$ or $\\mathbb C$, let $b$ be a\nnonzero vector of matching size, and let $m\\ge1$. Assume the Arnoldi process\nfor $(A,b)$ runs through step $m$ without breakdown. Let\n\n$$Q_m=[v_1\\,\\dots\\,v_m], \\qquad Q_{m+1}=[v_1\\,\\dots\\,v_{m+1}],$$\n\nand let $\\bar H_m=(h_{ij})_{1\\le i\\le m+1,\\,1\\le j\\le m}$, where the Arnoldi\ncoefficients occupy the positions $i\\le j+1$ and $h_{ij}:=0$ for $i>j+1$.\nThen:\n\n1. $v_1,\\dots,v_m$ are orthonormal;\n2. $\\operatorname{span}\\{v_1,\\dots,v_m\\}=K_m(A,b)$;\n3. $\\bar H_m$ has the rectangular upper-Hessenberg zero pattern\n   $h_{ij}=0$ for $i>j+1$;\n4. $AQ_m=Q_{m+1}\\bar H_m$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-gmres-iterate",
+          "source_section": "Definition",
+          "quote": "Let $Ax=b$ be a linear system, let $x_0$ be an initial guess, and let\n\n$$r_0:=b-Ax_0.$$\n\nFor $m\\ge 0$, a **GMRES iterate at step $m$** is any vector\n$x_m\\in x_0+K_m(A,r_0)$ such that\n\n$$\\|b-Ax_m\\|_2=\\min_{x\\in x_0+K_m(A,r_0)} \\|b-Ax\\|_2.$$\n\nThus GMRES is defined by residual minimization over the affine Krylov space\ngenerated by the initial residual.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The canonical convention [F1] identifies the stored count with $s=\\operatorname{nnz}(A)$. Each of at most $m$ columns uses one sparse matvec, which costs $O(s)$ by [F2] and [F3]. Summing over the columns gives $O(ms)$ work; if breakdown stops the run at $d<m$, the sum through $d$ is no larger.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "At column $j$, one complete MGS pass computes $j$ length-$n$ inner products and $j$ length-$n$ vector updates, hence $O(jn)$ arithmetic; two passes multiply this by the fixed factor two. Therefore total orthogonalization work through $m$ columns is $O(n\\sum_{j=1}^m j)=O(m^2n)$, and stopping earlier only reduces it.",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "1.3",
+          "claim": "In the no-breakdown branch, [F5] gives a projected matrix $\\bar H_m\\in\\mathbb R^{(m+1)\\times m}$ with nonzero subdiagonal entries $h_{j+1,j}$. For orthonormal $Q_{m+1}$ and $r_0=\\beta q_1$, each candidate $x_0+Q_my$ has residual $$b-A(x_0+Q_my)=Q_{m+1}(\\beta e_1-\\bar H_my).$$ Therefore [F6] reduces GMRES minimization to this projected least-squares problem. The submatrix formed by rows $2,\\ldots,m+1$ is upper triangular with diagonal $h_{2,1},\\ldots,h_{m+1,m}$, so its columns are linearly independent. Thus $\\bar H_m$ has full column rank. Applying one plane Givens rotation to each row pair eliminates one subdiagonal entry while preserving the Euclidean least-squares norm; the rotations create an upper-triangular $m\\times m$ factor with nonzero diagonal. At column $j$, applying the previous at most $j-1$ rotations and forming the new rotation takes $O(j)$ scalar operations; all columns cost $O(m^2)$. Back substitution in the nonsingular triangular factor takes $O(m^2)$ operations, and forming the Krylov correction costs $O(mn)$. By [F6] this solves the specified GMRES projected least-squares problem.",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "2.1",
+          "claim": "2.1 Since $n\\ge1$ and $m\\le n$, $m^2\\le m^2n$ and $mn\\le m^2n$. Adding the work bounds in steps 1.1, 1.2, and 1.3 gives $O(ms+m^2n)$. Storing at most $m+1$ length-$n$ basis vectors takes $O(mn)$ slots; the Hessenberg and Givens data take $O(m^2)$ slots; temporary vectors use $O(n)$ slots. Since $m\\le n$, both $m^2$ and $n$ are at most $mn$, proving the storage bound. If breakdown occurs at column $d<m$, the already formed basis and projected data use at most the same bounds with $d$ in place of $m$, and no fallback least-squares solve is included. [given, step 1.1, step 1.2, step 1.3, algebra] \u220e",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "empty case, actual Statement: zero: Statement excludes r0=0, fixes m>=1 and stops at an earlier breakdown; Proof step 1.1 counts only columns actually reached. one: Proof step 1.1 counts one sparse matvec; step 2.1 uses m<=n to give the work/storage bound also at n=m=1. degenerate: Statement and Proof step 2.1 stop on earlier Arnoldi breakdown and exclude a rank-deficient fallback least-squares solve. endpoints: Statement requires canonical CSR with every row nonempty; Proof step 1.1 uses its stored-count convention and step 2.1 includes the extremal m=n storage inequality."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement excludes r0=0, fixes m>=1 and stops at an earlier breakdown; Proof step 1.1 counts only columns actually reached."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.1 counts one sparse matvec; step 2.1 uses m<=n to give the work/storage bound also at n=m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Proof step 2.1 stop on earlier Arnoldi breakdown and exclude a rank-deficient fallback least-squares solve."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires canonical CSR with every row nonempty; Proof step 1.1 uses its stored-count convention and step 2.1 includes the extremal m=n storage inequality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice case, actual Statement: zero: Statement excludes r0=0, fixes m>=1 and stops at an earlier breakdown; Proof step 1.1 counts only columns actually reached. one: Proof step 1.1 counts one sparse matvec; step 2.1 uses m<=n to give the work/storage bound also at n=m=1. degenerate: Statement and Proof step 2.1 stop on earlier Arnoldi breakdown and exclude a rank-deficient fallback least-squares solve. endpoints: Statement requires canonical CSR with every row nonempty; Proof step 1.1 uses its stored-count convention and step 2.1 includes the extremal m=n storage inequality."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward case, actual Statement: zero: Statement excludes r0=0, fixes m>=1 and stops at an earlier breakdown; Proof step 1.1 counts only columns actually reached. one: Proof step 1.1 counts one sparse matvec; step 2.1 uses m<=n to give the work/storage bound also at n=m=1. degenerate: Statement and Proof step 2.1 stop on earlier Arnoldi breakdown and exclude a rank-deficient fallback least-squares solve. endpoints: Statement requires canonical CSR with every row nonempty; Proof step 1.1 uses its stored-count convention and step 2.1 includes the extremal m=n storage inequality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse case, actual Statement: zero: Statement excludes r0=0, fixes m>=1 and stops at an earlier breakdown; Proof step 1.1 counts only columns actually reached. one: Proof step 1.1 counts one sparse matvec; step 2.1 uses m<=n to give the work/storage bound also at n=m=1. degenerate: Statement and Proof step 2.1 stop on earlier Arnoldi breakdown and exclude a rank-deficient fallback least-squares solve. endpoints: Statement requires canonical CSR with every row nonempty; Proof step 1.1 uses its stored-count convention and step 2.1 includes the extremal m=n storage inequality."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-csr-matrix-with-stored-entry-semantics",
+          "status": "draft-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "A CSR record is **canonical** when no row repeats a column and no stored value\nis zero. In that case every nonzero matrix entry is stored exactly once and\n$s=\\operatorname{nnz}(A)$, where $\\operatorname{nnz}(A)$ denotes the number of\nnonzero entries of $A$. If $m=0$, the endpoint conditions force $s=0$ and the\nrow-pointer array has its single entry $r_0=0$. If $n=0$, the column-index\ncondition forces $s=0$ as well.",
+          "use": "Used in proof step(s) 1.1.",
+          "fact": "F1",
+          "required_hypotheses": "[F1] [[def-csr-matrix-with-stored-entry-semantics]]: canonical storage has\n$s=\\operatorname{nnz}(A)$; CSR row intervals partition the stored entries."
+        },
+        {
+          "supplier": "alg-csr-matrix-vector-product-with-validation",
+          "status": "draft-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "1. If $m\\notin\\mathbb N$, $n\\notin\\mathbb N$,\n   $\\operatorname{length}(r)\\ne m+1$,\n   $\\operatorname{length}(c)\\ne s$, or\n   $\\operatorname{length}(x)\\ne n$, return the status `invalid-dimension`.\n2. For $i=0,\\ldots,m$, check that $r_i\\in\\{0,\\ldots,s\\}$; return\n   `invalid-index` if a check fails. Check $r_0=0$ and $r_m=s$, and for each\n   $i=0,\\ldots,m-1$ check $r_i\\le r_{i+1}$; return `invalid-index` if any\n   check fails. For each $t=0,\\ldots,s-1$, check $0\\le c_t<n$ and return\n   `invalid-index` if a check fails.\n3. Initialize $y_i=0_F$ for $0\\le i<m$. For each row\n   $i=0,\\ldots,m-1$, and then each stored index\n   $t=r_i,\\ldots,r_{i+1}-1$, update\n   $$y_i\\gets y_i+v_t x_{c_t}.$$\n4. Return the status `ok` together with $y\\in F^m$.",
+          "use": "Used in proof step(s) 1.1.",
+          "fact": "F2",
+          "required_hypotheses": "[F2] [[alg-csr-matrix-vector-product-with-validation]]: a valid CSR matvec\nvisits each stored entry once and performs one multiply and one addition at\neach visit."
+        },
+        {
+          "supplier": "thm-csr-storage-and-exact-matvec-cost",
+          "status": "draft-body-inspected",
+          "source_section": "Statement",
+          "excerpt": "For a square record of order $m\\ge1$ with at least one stored entry in each\nrow, $s\\ge m$, so the work and storage are $O(s)$. For a canonical record as defined in\n[[def-csr-matrix-with-stored-entry-semantics]], $s=\\operatorname{nnz}(A)$;\nwithout that convention, the cost is in terms of stored entries, not\n$\\operatorname{nnz}(A)$. These are arithmetic, index, and storage counts, not\nruntime, memory-bandwidth, convergence, or factorization-cost bounds.",
+          "use": "Used in proof step(s) 1.1.",
+          "fact": "F3",
+          "required_hypotheses": "[F3] [[thm-csr-storage-and-exact-matvec-cost]]: for a square record of order\n$n\\ge1$ with a nonempty stored row pattern, one exact matvec uses $O(s)$ work."
+        },
+        {
+          "supplier": "def-arnoldi-process",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$w_j:=Av_j-\\sum_{i=1}^j h_{ij}v_i.$$",
+          "use": "Used in proof step(s) 1.2.",
+          "fact": "F4",
+          "required_hypotheses": "[F4] [[def-arnoldi-process]]: Arnoldi orthogonalizes each $Av_j$ against the\nexisting vectors and breaks down when its exact residual is zero."
+        },
+        {
+          "supplier": "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+          "status": "published-body-inspected",
+          "source_section": "Statement",
+          "excerpt": "Let $A$ be an $n\\times n$ matrix over $\\mathbb R$ or $\\mathbb C$, let $b$ be a\nnonzero vector of matching size, and let $m\\ge1$. Assume the Arnoldi process\nfor $(A,b)$ runs through step $m$ without breakdown. Let\n\n$$Q_m=[v_1\\,\\dots\\,v_m], \\qquad Q_{m+1}=[v_1\\,\\dots\\,v_{m+1}],$$\n\nand let $\\bar H_m=(h_{ij})_{1\\le i\\le m+1,\\,1\\le j\\le m}$, where the Arnoldi\ncoefficients occupy the positions $i\\le j+1$ and $h_{ij}:=0$ for $i>j+1$.\nThen:\n\n1. $v_1,\\dots,v_m$ are orthonormal;\n2. $\\operatorname{span}\\{v_1,\\dots,v_m\\}=K_m(A,b)$;\n3. $\\bar H_m$ has the rectangular upper-Hessenberg zero pattern\n   $h_{ij}=0$ for $i>j+1$;\n4. $AQ_m=Q_{m+1}\\bar H_m$.",
+          "use": "Used in proof step(s) 1.3.",
+          "fact": "F5",
+          "required_hypotheses": "[F5] [[thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization]]:\nwithout breakdown, Arnoldi forms an orthonormal Krylov basis and its projected\nmatrix is upper Hessenberg with positive subdiagonal entries."
+        },
+        {
+          "supplier": "def-gmres-iterate",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "For $m\\ge 0$, a **GMRES iterate at step $m$** is any vector\n$x_m\\in x_0+K_m(A,r_0)$ such that",
+          "use": "Used in proof step(s) 1.3.",
+          "fact": "F6",
+          "required_hypotheses": "[F6] [[def-gmres-iterate]]: GMRES minimizes the true residual over the affine\nKrylov space, represented in exact Arnoldi coordinates by the projected\nleast-squares problem."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read four proof steps and all six actual dependencies including complete CSR procedure and cost proof. Canonical/nonempty-row assumptions imply s=nnz and s>=n; validation/control absorbed into O(s). At column j, fixed one/two passes cost O(jn); positive subdiagonals make rows 2..m+1 of projected H triangular with nonzero diagonal. Givens O(j), triangular solve O(m\u00b2), correction O(mn), basis O(mn) and projected data O(m\u00b2) with m<=n give advertised totals. Earlier breakdown counts only performed work, no singular solve. n=1 and m=n necessarily break down but are covered by that branch. Reader self-reference correction accepted. No remaining defect."
+      },
+      "repair_confidence": 1
+    },
+    "thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound": {
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-arnoldi-process",
+          "source_section": "Definition",
+          "quote": "Let $A$ act on a real or complex inner-product space, and let $b\\ne0$. The\n**Arnoldi process** starts with\n\n$$v_1:=\\frac{b}{\\|b\\|}.$$\n\nGiven orthonormal vectors $v_1,\\dots,v_j$, define\n\n$$h_{ij}:=\\langle Av_j,v_i\\rangle \\qquad(1\\le i\\le j),$$\n\nand the orthogonalized residual\n\n$$w_j:=Av_j-\\sum_{i=1}^j h_{ij}v_i.$$\n\nSet\n\n$$h_{j+1,j}:=\\|w_j\\|.$$\n\nIf $h_{j+1,j}\\ne0$, define\n\n$$v_{j+1}:=\\frac{w_j}{h_{j+1,j}}.$$\n\nThe process is said to **break down exactly** at step $j$ when\n$h_{j+1,j}=0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $x=(x_j),y=(y_j)\\in\\mathbb{R}^{n}$, with the dot product\n$x\\cdot y=\\sum_{j<n}x_jy_j$ computed from left to right in an arithmetic model\nwith unit roundoff $u$ satisfying $nu<1$\n([[def-standard-relative-floating-point-model-and-unit-roundoff]]), where every\nproduct $x_jy_j$, every rounded product\n$p_j:=\\operatorname{fl}(x_jy_j)$, and every intermediate sum lies in the normal\nrange. Let $s_1:=p_0$ and, for $1\\le k<n$, let\n$s_{k+1}:=\\operatorname{fl}(s_k+p_k)$. Then:\n\n1. **Componentwise form.** There are reals $\\delta_0,\\dots,\\delta_{n-1}$ with\n   $|\\delta_j|\\le\\gamma_n:=nu/(1-nu)$ such that\n   $$s_n=\\sum_{j<n}x_jy_j(1+\\delta_j).$$\n2. **Normwise form.**\n   $$|s_n-x\\cdot y|\\;\\le\\;\\gamma_n\\sum_{j<n}|x_jy_j|\\;\\le\\;\\gamma_n\\,\\lVert x\\rVert_1\\lVert y\\rVert_1,$$\n   where $\\lVert\\cdot\\rVert_1$ is the published $1$-norm\n   ([[def-p-norms-on-rn]], [[lem-p-norms-are-norms-and-induce-the-published-metrics]])\n   and $|\\cdot|$ the absolute value ([[def-abs-value]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, let $u\\ge 0$, let\n$\\delta_0,\\dots,\\delta_{n-1}\\in\\mathbb{R}$ satisfy $|\\delta_i|\\le u$ for every\n$i<n$, and suppose $n u<1$. Then\n\n$$\\prod_{i<n}(1+\\delta_i)=1+\\theta_n\\qquad\\text{with}\\qquad|\\theta_n|\\le\\gamma_n:=\\frac{n u}{1-n u}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Consider any length-$n$ dot product used here. Each exact product and partial sum is either zero or normal-range. By [F2], an exact-zero operation returns zero and contributes a factor $1+0$, while every nonzero successful operation contributes a factor $1+\\varepsilon$ with $|\\varepsilon|\\le u$. Unrolling the left-to-right sum, each exact product has a coefficient that is a product of at most $n$ such factors; padding with factors $1$ and applying [F5] bounds each coefficient's deviation from $1$ by $\\gamma_n$. Therefore the absolute dot-product error is at most $\\gamma_n$ times the sum of the absolute exact products, including when exact-zero products or sums occur. This extends the narrower supplier bound [F3] to the operationwise model's exact-zero cases.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "1.2",
+          "claim": "For one component of an update, write the rounded product as $h q_i(1+\\epsilon_1)$ and the rounded subtraction as $(w-hq_i(1+\\epsilon_1))(1+\\epsilon_2)$, with $|\\epsilon_1|,|\\epsilon_2|\\le u$; an exact-zero operation has its corresponding $\\epsilon$ equal to zero by [F2]. Subtracting $w-hq_i$ and using the triangle inequality bounds the component error by $\\gamma_2(|w|+|h q_i|)$. Taking vector norms gives the stated $\\zeta$ estimate. The rounded addition combining two pass coefficients has error at most $u|h^{(1)}+h^{(2)}|$, including exact-zero sums, which is the stated $\\chi$ bound.",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Apply step 1.1 to each row dot product defining $z_j$. The absolute error in row $a$ is at most $\\gamma_n\\sum_b|A_{ab}||q_{j,b}|$. Taking the Euclidean norm of this vector of rowwise bounds proves the displayed $\\delta_j^{mv}$ estimate.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "By step 1.1, $|t_j-\\|w_{jj}^{(2)}\\|_2^2|\\le\\gamma_n\\|w_{jj}^{(2)}\\|_2^2$, so $t_j\\ge(1-\\gamma_n)\\|w_{jj}^{(2)}\\|_2^2$. Correct rounding of the positive square root gives $\\beta_{j+1}\\ge(1-u)\\sqrt{t_j}$, proving the lower bound. Each component division gives $q_{j+1,a}=(w_{jj,a}^{(2)}/\\beta_{j+1})(1+\\epsilon_a)$ with $|\\epsilon_a|\\le u$, including zero components with $\\epsilon_a=0$; hence $|\\delta_{j,a}^{norm}|\\le u|w_{jj,a}^{(2)}|$ and the displayed vector bound follows.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "3.1",
+          "claim": "The two-pass updates telescope to $$w_{jj}^{(2)}=z_j-\\sum_{p=1}^2\\sum_{i=1}^j h_{ij}^{(p)}q_i+\\sum_{p=1}^2\\sum_{i=1}^j\\zeta_{ij}^{(p)}.$$ Also $h_{ij}=h_{ij}^{(1)}+h_{ij}^{(2)}+\\chi_{ij}$, $w_{jj}^{(2)}=\\beta_{j+1}q_{j+1}-\\delta_j^{norm}$, and $z_j=Aq_j+\\delta_j^{mv}$. Substituting these identities into the telescoped equation yields $$Aq_j=\\sum_i h_{ij}q_i+\\beta_{j+1}q_{j+1} -\\delta_j^{norm}-\\delta_j^{mv}-\\sum_{p,i}\\zeta_{ij}^{(p)} -\\sum_i\\chi_{ij}q_i.$$ This is the stated local Arnoldi relation, whose exact-arithmetic column shape is the one defined in [F1].",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d5",
+          "step": "4.1",
+          "claim": "Fix $\\ell\\le j$ and one pass. Before its $i=\\ell$ update, the absolute value of $q_\\ell^{\\mathsf T}w_{\\ell-1,j}^{(p)}$ is at most $G_{\\ell j}^{p-1}+\\sum_{i<\\ell}(|h_i||c_{\\ell i}|+ \\|q_\\ell\\|_2\\|\\zeta_i\\|_2)$ by the updates already made in this pass. At $i=\\ell$, write the computed dot as that exact inner product plus a dot error $\\delta h$; then the new inner product is $(1-\\|q_\\ell\\|_2^2)q_\\ell^{\\mathsf T}w_{\\ell-1,j}^{(p)} -\\|q_\\ell\\|_2^2\\delta h+q_\\ell^{\\mathsf T}\\zeta_\\ell$. Its absolute value is bounded by the first three terms in the definition of $G_{\\ell j}^{p}$. Each later update $i>\\ell$ changes that inner product by $-h_i c_{\\ell i}+q_\\ell^{\\mathsf T}\\zeta_i$, bounded by the corresponding summand there. Thus $|q_\\ell^{\\mathsf T}w_{jj}^{(p)}|\\le G_{\\ell j}^{p}$ for both passes.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "step 3.1",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "d6",
+          "step": "5.1",
+          "claim": "Step 4.1 with $p=2$ gives $|q_\\ell^{\\mathsf T}w_{jj}^{(2)}|\\le G_{\\ell j}^{2}$. Since $\\beta_{j+1}q_{j+1}=w_{jj}^{(2)}+\\delta_j^{norm}$, [F4] and step 2.2 yield $$|q_\\ell^{\\mathsf T}q_{j+1}| \\le G_{\\ell j}^{2}/\\beta_{j+1} +u\\|q_\\ell\\|_2\\|w_{jj}^{(2)}\\|_2/\\beta_{j+1} \\le G_{\\ell j}^{2}/\\beta_{j+1}+u\\|q_\\ell\\|_2/c_n.$$ Each diagonal entry of $Q_{m+1}^{\\mathsf T}Q_{m+1}-I$ has absolute value $\\nu_i$, and each off-diagonal entry is bounded by the preceding inequality. Summing the squares of all entries proves the Frobenius Gram-defect bound.",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "step 4.1",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement has n,m>=1, but inner sums i<ell or i>ell can be empty. Proof step 4.1 retains their value zero at the first/last update index, and step 5.1 sums the actual diagonal/off-diagonal Gram entries."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 1.2 give exact-zero products/sums error factor one; Statement makes t_j=0 breakdown with no division or new vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits n=1 for the conditional local arithmetic identities; Proof step 2.2 uses only the positive t_j normalization. Its extra full-column-rank orthogonality premise is not asserted possible for two columns in R^1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Proof step 2.2 require t_j>0 and successful range assumptions; the conditioning-dependent recurrence applies only with its separately stated full-column-rank premise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "No interval endpoint occurs in the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice case, actual Statement: zero: Proof steps 1.1 and 1.2 give exact-zero products/sums error factor one; Statement makes t_j=0 breakdown with no division or new vector. one: Statement permits n=1 for the conditional local arithmetic identities; Proof step 2.2 uses only the positive t_j normalization. Its extra full-column-rank orthogonality premise is not asserted possible for two columns in R^1. degenerate: Statement and Proof step 2.2 require t_j>0 and successful range assumptions; the conditioning-dependent recurrence applies only with its separately stated full-column-rank premise. empty: Statement has n,m>=1, but inner sums i<ell or i>ell can be empty. Proof step 4.1 retains their value zero at the first/last update index, and step 5.1 sums the actual diagonal/off-diagonal Gram entries."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward case, actual Statement: zero: Proof steps 1.1 and 1.2 give exact-zero products/sums error factor one; Statement makes t_j=0 breakdown with no division or new vector. one: Statement permits n=1 for the conditional local arithmetic identities; Proof step 2.2 uses only the positive t_j normalization. Its extra full-column-rank orthogonality premise is not asserted possible for two columns in R^1. degenerate: Statement and Proof step 2.2 require t_j>0 and successful range assumptions; the conditioning-dependent recurrence applies only with its separately stated full-column-rank premise. empty: Statement has n,m>=1, but inner sums i<ell or i>ell can be empty. Proof step 4.1 retains their value zero at the first/last update index, and step 5.1 sums the actual diagonal/off-diagonal Gram entries."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse case, actual Statement: zero: Proof steps 1.1 and 1.2 give exact-zero products/sums error factor one; Statement makes t_j=0 breakdown with no division or new vector. one: Statement permits n=1 for the conditional local arithmetic identities; Proof step 2.2 uses only the positive t_j normalization. Its extra full-column-rank orthogonality premise is not asserted possible for two columns in R^1. degenerate: Statement and Proof step 2.2 require t_j>0 and successful range assumptions; the conditioning-dependent recurrence applies only with its separately stated full-column-rank premise. empty: Statement has n,m>=1, but inner sums i<ell or i>ell can be empty. Proof step 4.1 retains their value zero at the first/last update index, and step 5.1 sums the actual diagonal/off-diagonal Gram entries."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-arnoldi-process",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$w_j:=Av_j-\\sum_{i=1}^j h_{ij}v_i.$$",
+          "use": "Used in proof step(s) 2.1.",
+          "fact": "F1",
+          "required_hypotheses": "[F1] [[def-arnoldi-process]]: exact Arnoldi subtracts projections onto existing\nvectors and normalizes the residual; exact zero residual is breakdown."
+        },
+        {
+          "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "et the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.",
+          "use": "Used in proof step(s) 1.2, 1.3.",
+          "fact": "F2",
+          "required_hypotheses": "[F2] [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]:\nreal arithmetic operations round with relative error at most $u$ when they\nsucceed, exact-zero operations return zero, and positive square roots are\ncorrectly rounded; for $ku<1$, $\\gamma_k=ku/(1-ku)$."
+        },
+        {
+          "supplier": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+          "status": "published-body-inspected",
+          "source_section": "Statement",
+          "excerpt": "1. **Componentwise form.** There are reals $\\delta_0,\\dots,\\delta_{n-1}$ with\n   $|\\delta_j|\\le\\gamma_n:=nu/(1-nu)$ such that\n   $$s_n=\\sum_{j<n}x_jy_j(1+\\delta_j).$$\n2. **Normwise form.**\n   $$|s_n-x\\cdot y|\\;\\le\\;\\gamma_n\\sum_{j<n}|x_jy_j|\\;\\le\\;\\gamma_n\\,\\lVert x\\rVert_1\\lVert y\\rVert_1,$$\n   where $\\lVert\\cdot\\rVert_1$ is the published $1$-norm\n   ([[def-p-norms-on-rn]], [[lem-p-norms-are-norms-and-induce-the-published-metrics]])\n   and $|\\cdot|$ the absolute value ([[def-abs-value]]).",
+          "use": "Used in proof step(s) 1.1, 1.2, 1.3, 2.2.",
+          "fact": "F3",
+          "required_hypotheses": "[F3] [[thm-floating-point-dot-product-componentwise-and-normwise-error-bounds]]:\nwhen every exact product, rounded product, and intermediate sum is nonzero\nnormal-range, a length-$n$ dot product differs from its exact dot by at most\n$\\gamma_n$ times the sum of the absolute products."
+        },
+        {
+          "supplier": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "status": "published-body-inspected",
+          "source_section": "Statement",
+          "excerpt": "1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.",
+          "use": "Used in proof step(s) 3.1.",
+          "fact": "F4",
+          "required_hypotheses": "[F4] [[thm-cauchy-schwarz-and-the-euclidean-norm]]: for real vectors,\n$|x^{\\mathsf T}y|\\le\\|x\\|_2\\|y\\|_2$."
+        },
+        {
+          "fact": "F5",
+          "supplier": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "required_hypotheses": "[F5] [[lem-product-of-one-plus-deltas-gives-theta-n]]: padding any product of\nat most $n$ factors $1+\\varepsilon$, $|\\varepsilon|\\le u$, with factors $1$\nallows the published $n$-factor bound $\\gamma_n$ when $nu<1$."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read all seven steps and five actual dependencies. Exact-zero extension is locally proved using theta_n; gamma_n<1 and t_j>0 yield positive beta and c_n. Telescoping signs, coefficient-addition error and normalization error independently checked. At projection ell, coefficient 1-||q_ell||\u00b2 gives nu_ell and dot error coefficient <=1+nu_ell; earlier/later projection sums give G for both passes. Divide only by positive beta; Cauchy\u2013Schwarz gives final Frobenius entrywise sum. Full rank is a sufficient extra hypothesis; no uniform O(u) promise. t_j=0 and range failure remain separate. No defect found."
+      }
+    },
+    "thm-gmres-true-residual-gap-from-computed-arnoldi-relation": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{n\\times n}$, $n\\ge1$, and let the computed starting\nvector $q_1$ be nonzero. Fix $m\\ge1$ and, for $j=1,\\ldots,m$, compute each component of\n$z_j=\\operatorname{fl}(Aq_j)$ by the length-$n$ rounded dot product of that\nrow with $q_j$. Then perform two complete modified Gram\u2013Schmidt passes: for\n$p=1,2$ and $i=1,\\ldots,j$, compute\n$$h_{ij}^{(p)}=\\operatorname{fl}(q_i^{\\mathsf T}w_{i-1,j}^{(p)}),\\qquad w_{ij}^{(p)}=\\operatorname{fl}(w_{i-1,j}^{(p)}-h_{ij}^{(p)}q_i),$$\nwhere $w_{0j}^{(1)}=z_j$ and $w_{0j}^{(2)}=w_{jj}^{(1)}$. The vector update\nis componentwise one rounded product followed by one rounded subtraction.\nStore $h_{ij}=\\operatorname{fl}(h_{ij}^{(1)}+h_{ij}^{(2)})$. Compute\n$t_j=\\operatorname{fl}((w_{jj}^{(2)})^{\\mathsf T}w_{jj}^{(2)})$ as a\nlength-$n$ dot product, $\\beta_{j+1}=\\operatorname{fl}(\\sqrt{t_j})$, and\n$q_{j+1}=\\operatorname{fl}(w_{jj}^{(2)}/\\beta_{j+1})$ componentwise.\n\nAssume all products, partial sums, square roots, divisions, and updates used\nhere succeed in the operationwise model, so every nonzero exact product and\npartial sum is normal-range; exact-zero products and sums are permitted.\nAssume $nu<1$, $\\gamma_n<1$, $2u<1$, and $t_j>0$. Define\n$c_n=(1-u)\\sqrt{1-\\gamma_n}$. Then\n$\\beta_{j+1}\\ge c_n\\|w_{jj}^{(2)}\\|_2>0$, and the computed columns satisfy\n$$Aq_j=\\sum_{i=1}^j h_{ij}q_i+\\beta_{j+1}q_{j+1}+e_j,$$\nwhere, writing $\\delta_j^{mv}=z_j-Aq_j$,\n$$e_j=-\\delta_j^{norm}-\\delta_j^{mv} -\\sum_{p=1}^2\\sum_{i=1}^j\\zeta_{ij}^{(p)} -\\sum_{i=1}^j\\chi_{ij}q_i,$$\nwith $\\delta_j^{norm}=\\beta_{j+1}q_{j+1}-w_{jj}^{(2)}$,\n$\\zeta_{ij}^{(p)}=w_{ij}^{(p)}-(w_{i-1,j}^{(p)}-h_{ij}^{(p)}q_i)$, and\n$\\chi_{ij}=h_{ij}-(h_{ij}^{(1)}+h_{ij}^{(2)})$. These errors obey\n$$\\|\\delta_j^{mv}\\|_2\\le\\gamma_n \\left(\\sum_{a=1}^n\\left(\\sum_{b=1}^n|A_{ab}|\\,|q_{j,b}|\\right)^2\\right)^{1/2}, \\quad \\|\\delta_j^{norm}\\|_2\\le u\\|w_{jj}^{(2)}\\|_2,$$\n$$|h_{ij}^{(p)}-q_i^{\\mathsf T}w_{i-1,j}^{(p)}| \\le\\gamma_n\\|q_i\\|_1\\|w_{i-1,j}^{(p)}\\|_1,$$\n$$\\|\\zeta_{ij}^{(p)}\\|_2\\le\\gamma_2\\bigl( \\|w_{i-1,j}^{(p)}\\|_2+|h_{ij}^{(p)}|\\|q_i\\|_2\\bigr),\\qquad |\\chi_{ij}|\\le u|h_{ij}^{(1)}+h_{ij}^{(2)}|.$$\n\nIf the generated vectors $q_1,\\ldots,q_{m+1}$ have full column rank, there\nis also an explicit conditioning-dependent orthogonality recurrence.\nPut $\\nu_\\ell=|\\|q_\\ell\\|_2^2-1|$ and $c_{\\ell i}=q_\\ell^{\\mathsf T}q_i$.\nFor fixed $j$ and $\\ell\\le j$, set\n$$G_{\\ell j}^{0}=|q_\\ell^{\\mathsf T}z_j|.$$\nFor each pass $p$, with $h_i=h_{ij}^{(p)}$ and\n$\\zeta_i=\\zeta_{ij}^{(p)}$, define\n$$\\begin{aligned} G_{\\ell j}^{p}:={}&\\nu_\\ell\\left(G_{\\ell j}^{p-1}+ \\sum_{i<\\ell}(|h_i||c_{\\ell i}|+\\|q_\\ell\\|_2\\|\\zeta_i\\|_2)\\right) +(1+\\nu_\\ell)\\gamma_n\\|q_\\ell\\|_1\\|w_{\\ell-1,j}^{(p)}\\|_1\\\\ &+\\|q_\\ell\\|_2\\|\\zeta_\\ell\\|_2 +\\sum_{i>\\ell}(|h_i||c_{\\ell i}|+\\|q_\\ell\\|_2\\|\\zeta_i\\|_2). \\end{aligned}$$\nThen the off-diagonal inner products satisfy\n$$|q_\\ell^{\\mathsf T}q_{j+1}| \\le\\frac{G_{\\ell j}^{2}}{\\beta_{j+1}} +\\frac{u\\|q_\\ell\\|_2}{c_n}.$$\nConsequently the Frobenius norm of the Gram defect of $Q_{m+1}$ is at most\n$$\\left(\\sum_{i=1}^{m+1}\\nu_i^2+ 2\\sum_{1\\le\\ell<i\\le m+1} \\left(\\frac{G_{\\ell,i-1}^{2}}{\\beta_i} +\\frac{u\\|q_\\ell\\|_2}{c_n}\\right)^2\\right)^{1/2},$$\nwhere $\\|B\\|_F=(\\sum_{a,b}|B_{ab}|^2)^{1/2}$. A zero $t_j$ is a\nbreakdown branch with no division or new vector; failure of any stated\nrounding or positivity hypothesis makes the bound inconclusive.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $x=(x_j),y=(y_j)\\in\\mathbb{R}^{n}$, with the dot product\n$x\\cdot y=\\sum_{j<n}x_jy_j$ computed from left to right in an arithmetic model\nwith unit roundoff $u$ satisfying $nu<1$\n([[def-standard-relative-floating-point-model-and-unit-roundoff]]), where every\nproduct $x_jy_j$, every rounded product\n$p_j:=\\operatorname{fl}(x_jy_j)$, and every intermediate sum lies in the normal\nrange. Let $s_1:=p_0$ and, for $1\\le k<n$, let\n$s_{k+1}:=\\operatorname{fl}(s_k+p_k)$. Then:\n\n1. **Componentwise form.** There are reals $\\delta_0,\\dots,\\delta_{n-1}$ with\n   $|\\delta_j|\\le\\gamma_n:=nu/(1-nu)$ such that\n   $$s_n=\\sum_{j<n}x_jy_j(1+\\delta_j).$$\n2. **Normwise form.**\n   $$|s_n-x\\cdot y|\\;\\le\\;\\gamma_n\\sum_{j<n}|x_jy_j|\\;\\le\\;\\gamma_n\\,\\lVert x\\rVert_1\\lVert y\\rVert_1,$$\n   where $\\lVert\\cdot\\rVert_1$ is the published $1$-norm\n   ([[def-p-norms-on-rn]], [[lem-p-norms-are-norms-and-induce-the-published-metrics]])\n   and $|\\cdot|$ the absolute value ([[def-abs-value]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-induced-matrix-p-norm",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is\n\n$$\\lVert A\\rVert_{p}\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_{p}\\;:\\;x\\in\\mathbb{R}^{n},\\ \\lVert x\\rVert_{p}\\le 1\\,\\Bigr\\}.$$\n\nWhen $n\\ge1$, the following three displayed quantities are the same number:\n\n$$\\lVert A\\rVert_p=\\sup_{\\lVert x\\rVert_p\\le 1}\\lVert Ax\\rVert_p=\\sup_{\\lVert x\\rVert_p=1}\\lVert Ax\\rVert_p=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_p}{\\lVert x\\rVert_p},$$\n\nthe equalities following from positive homogeneity of $\\lVert\\cdot\\rVert_p$\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]], axiom (N2)) and\nthe equality $\\lVert 0\\rVert_p=0$.\n\n**The value is a finite nonnegative real.** For $n\\ge 1$ the norms\n$\\lVert\\cdot\\rVert_p$ and $\\lVert\\cdot\\rVert_2$ are equivalent by\n[[thm-all-norms-on-rn-are-equivalent]], so there is $C>0$ with\n$\\lVert x\\rVert_\\infty\\le C\\lVert x\\rVert_p$ for every $x$. For every $i<m$,\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty\\le C\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_p$,\nso $\\lVert Ax\\rVert_p\\le \\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C\\lVert x\\rVert_p$;\nhence the supremum over the unit ball is at most the finite constant\n$\\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C$.\n\n**The induced infinity norm is a separate named case.** When $m,n\\ge1$, define\n\n$$\\lVert A\\rVert_\\infty\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_\\infty\\;:\\;x\\in\\mathbb R^n,\\ \\lVert x\\rVert_\\infty\\le 1\\,\\Bigr\\}.$$\n\nAs in the rational-$p$ case, positive homogeneity gives\n\n$$\\lVert A\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty\\le 1}\\lVert Ax\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty=1}\\lVert Ax\\rVert_\\infty=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_\\infty}{\\lVert x\\rVert_\\infty}.$$\n\nThe supremum is finite because for every $i<m$ one has\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty$,\nso\n\n$$\\lVert Ax\\rVert_\\infty\\le\\max_{i<m}\\sum_{j<n}|a_{ij}|\\,\\lVert x\\rVert_\\infty.$$\n\n**At $n=0$ the convention is explicit.** The only element of $\\mathbb{R}^{0}$\nis the zero vector, the only matrix $A\\in M_{m\\times 0}(\\mathbb{R})$ is the\nempty matrix, and the unit-ball definition gives $\\lVert A\\rVert_{p}=0$.\nThe unit sphere and the set of nonzero vectors are empty, so the two ratio\nformulas above are not asserted in this case.\n\nThe induced quantity is a norm on the matrix space $M_{m\\times n}(\\mathbb{R})$:\nfor each rational $p\\ge1$, and likewise for the separately named\n$\\infty$-case when $m,n\\ge1$, separation, absolute homogeneity and the triangle\ninequality follow from the same three axioms of the underlying vector norm\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]]) through the\ndefining supremum. The compatibility with matrix-vector multiplication, the\nsubmultiplicativity and the value on identity matrices are\n[[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]];\nthe explicit value at $p=1$ and the separate $\\infty$-formula are\n[[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, let $u\\ge 0$, let\n$\\delta_0,\\dots,\\delta_{n-1}\\in\\mathbb{R}$ satisfy $|\\delta_i|\\le u$ for every\n$i<n$, and suppose $n u<1$. Then\n\n$$\\prod_{i<n}(1+\\delta_i)=1+\\theta_n\\qquad\\text{with}\\qquad|\\theta_n|\\le\\gamma_n:=\\frac{n u}{1-n u}.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "From the representations in the Statement, $$\\begin{aligned} r&=b-A(x_0+Q_my+\\delta_x)\\\\ &=r_0-AQ_my-A\\delta_x\\\\ &=Q_{m+1}(\\beta_1e_1-\\bar H_my) +\\delta_0-E_my-A\\delta_x\\\\ &=Q_{m+1}g+\\delta_0-E_my-A\\delta_x. \\end{aligned}$$ Subtracting $Q_{m+1}g$ and applying the triangle inequality and [F4] proves the first bound.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "For any $v\\in\\mathbb R^{m+1}$, $$\\|Q_{m+1}v\\|_2^2 =v^{\\mathsf T}(I+\\bar G)v =\\|v\\|_2^2+v^{\\mathsf T}\\bar Gv.$$ By [F5], $|v^{\\mathsf T}\\bar Gv|\\le\\|v\\|_2\\|\\bar Gv\\|_2$. By [F4], $\\|\\bar Gv\\|_2\\le\\|\\bar G\\|_2\\|v\\|_2$, and $\\|\\bar G\\|_2\\le\\|\\bar G\\|_F=\\eta$: for each row, [F5] bounds the square of its dot product with $v$ by the squared row norm times $\\|v\\|_2^2$; summing rows gives this inequality. Thus $\\|Q_{m+1}v\\|_2\\le\\sqrt{1+\\eta}\\|v\\|_2$. Apply this to $v=g$ in step 1.1 and use the triangle inequality to obtain the true-residual bound.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "For row $i$, each exact product and partial sum is either zero or normal-range. By [F2], a zero operation returns zero and contributes relative-error factor $1$, while every nonzero operation contributes a factor $1+\\varepsilon$ with $|\\varepsilon|\\le u$. Unrolling the row dot gives at most $n$ factors in the coefficient of each product, so [F6] yields $|\\widehat{Ax}_i-(A\\hat x)_i| \\le\\gamma_n\\sum_j|A_{ij}||\\hat x_j|$, the same error bound as the narrower supplier [F3]. The rounded subtraction gives $|\\hat r_i-(b_i-\\widehat{Ax}_i)| \\le u|b_i-\\widehat{Ax}_i|$ by [F2], with an exact-zero subtraction contributing zero error. Adding these errors shows $|\\hat r_i-r_i|\\le d_i$, hence $\\|\\hat r-r\\|_2\\le\\rho_{rec}$. The reverse triangle inequality proves the stated difference of residual norms.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires n,m>=1, making coordinate and column sums nonempty; Proof step 1.1 is a finite matrix identity and step 3.1 includes exact-zero dot-product terms."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1 gives r=Q*g when delta0,E and deltax vanish; step 2.1 further gives unit norm factor when the Gram defect vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement has m>=1 and the displayed (m+1)-by-m shapes; Proof step 1.1 is the same matrix identity for m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement accepts the actual computed coefficient vector y without least-squares accuracy; Proof step 1.1 retains its resulting explicit gap terms."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "endpoints case, actual Statement: zero: Proof step 1.1 gives r=Q*g when delta0,E and deltax vanish; step 2.1 further gives unit norm factor when the Gram defect vanishes. one: Statement has m>=1 and the displayed (m+1)-by-m shapes; Proof step 1.1 is the same matrix identity for m=1. degenerate: Statement accepts the actual computed coefficient vector y without least-squares accuracy; Proof step 1.1 retains its resulting explicit gap terms. empty: Statement requires n,m>=1, making coordinate and column sums nonempty; Proof step 1.1 is a finite matrix identity and step 3.1 includes exact-zero dot-product terms."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice case, actual Statement: zero: Proof step 1.1 gives r=Q*g when delta0,E and deltax vanish; step 2.1 further gives unit norm factor when the Gram defect vanishes. one: Statement has m>=1 and the displayed (m+1)-by-m shapes; Proof step 1.1 is the same matrix identity for m=1. degenerate: Statement accepts the actual computed coefficient vector y without least-squares accuracy; Proof step 1.1 retains its resulting explicit gap terms. empty: Statement requires n,m>=1, making coordinate and column sums nonempty; Proof step 1.1 is a finite matrix identity and step 3.1 includes exact-zero dot-product terms."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward case, actual Statement: zero: Proof step 1.1 gives r=Q*g when delta0,E and deltax vanish; step 2.1 further gives unit norm factor when the Gram defect vanishes. one: Statement has m>=1 and the displayed (m+1)-by-m shapes; Proof step 1.1 is the same matrix identity for m=1. degenerate: Statement accepts the actual computed coefficient vector y without least-squares accuracy; Proof step 1.1 retains its resulting explicit gap terms. empty: Statement requires n,m>=1, making coordinate and column sums nonempty; Proof step 1.1 is a finite matrix identity and step 3.1 includes exact-zero dot-product terms."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse case, actual Statement: zero: Proof step 1.1 gives r=Q*g when delta0,E and deltax vanish; step 2.1 further gives unit norm factor when the Gram defect vanishes. one: Statement has m>=1 and the displayed (m+1)-by-m shapes; Proof step 1.1 is the same matrix identity for m=1. degenerate: Statement accepts the actual computed coefficient vector y without least-squares accuracy; Proof step 1.1 retains its resulting explicit gap terms. empty: Statement requires n,m>=1, making coordinate and column sums nonempty; Proof step 1.1 is a finite matrix identity and step 3.1 includes exact-zero dot-product terms."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound",
+          "status": "authored-local-supplier",
+          "source_section": "Statement",
+          "excerpt": "Let $A\\in\\mathbb R^{n\\times n}$, $n\\ge1$, and let the computed starting\nvector $q_1$ be nonzero. Fix $m\\ge1$ and, for $j=1,\\ldots,m$, compute each component of\n$z_j=\\operatorname{fl}(Aq_j)$ by the length-$n$ rounded dot product of that\nrow with $q_j$. Then perform two complete modified Gram\u2013Schmidt passes: for\n$p=1,2$ and $i=1,\\ldots,j$, compute\n$$h_{ij}^{(p)}=\\operatorname{fl}(q_i^{\\mathsf T}w_{i-1,j}^{(p)}),\\qquad w_{ij}^{(p)}=\\operatorname{fl}(w_{i-1,j}^{(p)}-h_{ij}^{(p)}q_i),$$\nwhere $w_{0j}^{(1)}=z_j$ and $w_{0j}^{(2)}=w_{jj}^{(1)}$. The vector update\nis componentwise one rounded product followed by one rounded subtraction.\nStore $h_{ij}=\\operatorname{fl}(h_{ij}^{(1)}+h_{ij}^{(2)})$. Compute\n$t_j=\\operatorname{fl}((w_{jj}^{(2)})^{\\mathsf T}w_{jj}^{(2)})$ as a\nlength-$n$ dot product, $\\beta_{j+1}=\\operatorname{fl}(\\sqrt{t_j})$, and\n$q_{j+1}=\\operatorname{fl}(w_{jj}^{(2)}/\\beta_{j+1})$ componentwise.\n\nAssume all products, partial sums, square roots, divisions, and updates used\nhere succeed in the operationwise model, $nu<1$, $\\gamma_n<1$, $2u<1$, and\n$t_j>0$. Define $c_n=(1-u)\\sqrt{1-\\gamma_n}$. Then\n$\\beta_{j+1}\\ge c_n\\|w_{jj}^{(2)}\\|_2>0$, and the computed columns satisfy\n$$Aq_j=\\sum_{i=1}^j h_{ij}q_i+\\beta_{j+1}q_{j+1}+e_j,$$\nwhere, writing $\\delta_j^{mv}=z_j-Aq_j$,\n$$e_j=-\\delta_j^{norm}-\\delta_j^{mv} -\\sum_{p=1}^2\\sum_{i=1}^j\\zeta_{ij}^{(p)} -\\sum_{i=1}^j\\chi_{ij}q_i,$$\nwith $\\delta_j^{norm}=\\beta_{j+1}q_{j+1}-w_{jj}^{(2)}$,\n$\\zeta_{ij}^{(p)}=w_{ij}^{(p)}-(w_{i-1,j}^{(p)}-h_{ij}^{(p)}q_i)$, and\n$\\chi_{ij}=h_{ij}-(h_{ij}^{(1)}+h_{ij}^{(2)})$. These errors obey\n$$\\|\\delta_j^{mv}\\|_2\\le\\gamma_n \\left(\\sum_{a=1}^n\\left(\\sum_{b=1}^n|A_{ab}|\\,|q_{j,b}|\\right)^2\\right)^{1/2}, \\quad \\|\\delta_j^{norm}\\|_2\\le u\\|w_{jj}^{(2)}\\|_2,$$\n$$|h_{ij}^{(p)}-q_i^{\\mathsf T}w_{i-1,j}^{(p)}| \\le\\gamma_n\\|q_i\\|_1\\|w_{i-1,j}^{(p)}\\|_1,$$\n$$\\|\\zeta_{ij}^{(p)}\\|_2\\le\\gamma_2\\bigl( \\|w_{i-1,j}^{(p)}\\|_2+|h_{ij}^{(p)}|\\|q_i\\|_2\\bigr),\\qquad |\\chi_{ij}|\\le u|h_{ij}^{(1)}+h_{ij}^{(2)}|.$$\n\nIf the generated vectors $q_1,\\ldots,q_{m+1}$ have full column rank, there\nis also an explicit conditioning-dependent orthogonality recurrence.\nPut $\\nu_\\ell=|\\|q_\\ell\\|_2^2-1|$ and $c_{\\ell i}=q_\\ell^{\\mathsf T}q_i$.\nFor fixed $j$ and $\\ell\\le j$, set\n$$G_{\\ell j}^{0}=|q_\\ell^{\\mathsf T}z_j|.$$\nFor each pass $p$, with $h_i=h_{ij}^{(p)}$ and\n$\\zeta_i=\\zeta_{ij}^{(p)}$, define\n$$\\begin{aligned} G_{\\ell j}^{p}:={}&\\nu_\\ell\\left(G_{\\ell j}^{p-1}+ \\sum_{i<\\ell}(|h_i||c_{\\ell i}|+\\|q_\\ell\\|_2\\|\\zeta_i\\|_2)\\right) +(1+\\nu_\\ell)\\gamma_n\\|q_\\ell\\|_1\\|w_{\\ell-1,j}^{(p)}\\|_1\\\\ &+\\|q_\\ell\\|_2\\|\\zeta_\\ell\\|_2 +\\sum_{i>\\ell}(|h_i||c_{\\ell i}|+\\|q_\\ell\\|_2\\|\\zeta_i\\|_2). \\end{aligned}$$\nThen the off-diagonal inner products satisfy\n$$|q_\\ell^{\\mathsf T}q_{j+1}| \\le\\frac{G_{\\ell j}^{2}}{\\beta_{j+1}} +\\frac{u\\|q_\\ell\\|_2}{c_n}.$$\nConsequently the Frobenius norm of the Gram defect of $Q_{m+1}$ is at most\n$$\\left(\\sum_{i=1}^{m+1}\\nu_i^2+ 2\\sum_{1\\le\\ell<i\\le m+1} \\left(\\frac{G_{\\ell,i-1}^{2}}{\\beta_i} +\\frac{u\\|q_\\ell\\|_2}{c_n}\\right)^2\\right)^{1/2},$$\nwhere $\\|B\\|_F=(\\sum_{a,b}|B_{ab}|^2)^{1/2}$. A zero $t_j$ is a\nbreakdown branch with no division or new vector; failure of any stated\nrounding or positivity hypothesis makes the bound inconclusive.",
+          "use": "Used in proof step(s) 1.1, 2.1.",
+          "fact": "F1",
+          "required_hypotheses": "[F1] [[thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound]]:\ntwo-pass MGS produces $AQ_m=Q_{m+1}\\bar H_m+E_m$ and an explicit bound on\n$\\|Q_{m+1}^{\\mathsf T}Q_{m+1}-I\\|_F$ under its success and full-rank\nhypotheses."
+        },
+        {
+          "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "et the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.",
+          "use": "Used in proof step(s) 3.1.",
+          "fact": "F2",
+          "required_hypotheses": "[F2] [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]:\nsuccessful real operations round with relative error at most $u$, exact-zero\noperations return zero, and $\\gamma_n=nu/(1-nu)$ for $nu<1$."
+        },
+        {
+          "supplier": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+          "status": "published-body-inspected",
+          "source_section": "Statement",
+          "excerpt": "1. **Componentwise form.** There are reals $\\delta_0,\\dots,\\delta_{n-1}$ with\n   $|\\delta_j|\\le\\gamma_n:=nu/(1-nu)$ such that\n   $$s_n=\\sum_{j<n}x_jy_j(1+\\delta_j).$$\n2. **Normwise form.**\n   $$|s_n-x\\cdot y|\\;\\le\\;\\gamma_n\\sum_{j<n}|x_jy_j|\\;\\le\\;\\gamma_n\\,\\lVert x\\rVert_1\\lVert y\\rVert_1,$$\n   where $\\lVert\\cdot\\rVert_1$ is the published $1$-norm\n   ([[def-p-norms-on-rn]], [[lem-p-norms-are-norms-and-induce-the-published-metrics]])\n   and $|\\cdot|$ the absolute value ([[def-abs-value]]).",
+          "use": "Used in proof step(s) 3.1.",
+          "fact": "F3",
+          "required_hypotheses": "[F3] [[thm-floating-point-dot-product-componentwise-and-normwise-error-bounds]]:\nwhen every exact product, rounded product, and intermediate sum is nonzero\nnormal-range, a length-$n$ row dot has absolute error at most $\\gamma_n$ times\nthe sum of absolute products."
+        },
+        {
+          "supplier": "def-induced-matrix-p-norm",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "et $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is",
+          "use": "Used in proof step(s) 1.1, 2.1.",
+          "fact": "F4",
+          "required_hypotheses": "[F4] [[def-induced-matrix-p-norm]]: $\\|Bv\\|_2\\le\\|B\\|_2\\|v\\|_2$ for the\ninduced Euclidean matrix norm."
+        },
+        {
+          "supplier": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "status": "published-body-inspected",
+          "source_section": "Statement",
+          "excerpt": "1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.",
+          "use": "Used in proof step(s) 2.1.",
+          "fact": "F5",
+          "required_hypotheses": "[F5] [[thm-cauchy-schwarz-and-the-euclidean-norm]]: for finite real vectors,\n$|u^{\\mathsf T}v|\\le\\|u\\|_2\\|v\\|_2$."
+        },
+        {
+          "fact": "F6",
+          "supplier": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "required_hypotheses": "[F6] [[lem-product-of-one-plus-deltas-gives-theta-n]]: padding a product of at\nmost $n$ relative-error factors with factors $1$ gives deviation at most\n$\\gamma_n$ when $nu<1$."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read all three proof steps and six actual supplier interfaces. Residual identity r=Qg+delta0-Ey-A delta_x has correct dimensions and signs. Entrywise Cauchy\u2013Schwarz proves induced Gram norm <= Frobenius eta; no eta<1 needed for upper bound sqrt(1+eta). Recomputed row dots admit zeros using local factor expansion and subtraction error is u|b-Ax_computed|, not u|true residual|. Reverse triangle applies to exact norms of stored vectors. No accuracy premise on computed y is smuggled in. Zero residual and update error cases remain valid. No defect found."
+      }
+    },
+    "thm-cg-recursive-residual-gap-and-attainable-accuracy": {
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $x=(x_j),y=(y_j)\\in\\mathbb{R}^{n}$, with the dot product\n$x\\cdot y=\\sum_{j<n}x_jy_j$ computed from left to right in an arithmetic model\nwith unit roundoff $u$ satisfying $nu<1$\n([[def-standard-relative-floating-point-model-and-unit-roundoff]]), where every\nproduct $x_jy_j$, every rounded product\n$p_j:=\\operatorname{fl}(x_jy_j)$, and every intermediate sum lies in the normal\nrange. Let $s_1:=p_0$ and, for $1\\le k<n$, let\n$s_{k+1}:=\\operatorname{fl}(s_k+p_k)$. Then:\n\n1. **Componentwise form.** There are reals $\\delta_0,\\dots,\\delta_{n-1}$ with\n   $|\\delta_j|\\le\\gamma_n:=nu/(1-nu)$ such that\n   $$s_n=\\sum_{j<n}x_jy_j(1+\\delta_j).$$\n2. **Normwise form.**\n   $$|s_n-x\\cdot y|\\;\\le\\;\\gamma_n\\sum_{j<n}|x_jy_j|\\;\\le\\;\\gamma_n\\,\\lVert x\\rVert_1\\lVert y\\rVert_1,$$\n   where $\\lVert\\cdot\\rVert_1$ is the published $1$-norm\n   ([[def-p-norms-on-rn]], [[lem-p-norms-are-norms-and-induce-the-published-metrics]])\n   and $|\\cdot|$ the absolute value ([[def-abs-value]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-conjugate-gradient-recurrence",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian positive definite, let $Ax=b$, and fix an initial guess\n$x_0$. Set\n\n$$r_0:=b-Ax_0,\\qquad p_0:=r_0.$$\n\nFor every index $k$ with $r_k\\ne0$, define\n\n$$\\alpha_k:=\\frac{\\langle r_k,r_k\\rangle}{\\langle Ap_k,p_k\\rangle},\\qquad x_{k+1}:=x_k+\\alpha_kp_k,\\qquad r_{k+1}:=r_k-\\alpha_kAp_k,$$\n\nand then\n\n$$\\beta_k:=\\frac{\\langle r_{k+1},r_{k+1}\\rangle}{\\langle r_k,r_k\\rangle},\\qquad p_{k+1}:=r_{k+1}+\\beta_kp_k.$$\n\nThis is the **conjugate-gradient recurrence**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite in the sense of\n[[def-cholesky-factorisation-with-positive-diagonal]]. For vectors\n$u,v\\in\\mathbb C^n$, define the **energy inner product**\n\n$$\\langle u,v\\rangle_A:=\\langle Au,v\\rangle,$$\n\nwhere $\\langle \\cdot,\\cdot\\rangle$ is the standard coordinate inner product of\n[[prop-standard-coordinate-inner-products]]. Because $A$ is Hermitian positive\ndefinite, this is an inner product on $\\mathbb C^n$, and its induced norm\n\n$$\\|u\\|_A:=\\sqrt{\\langle u,u\\rangle_A}$$\n\nis the **energy norm** of $u$.\n\nEquivalently, if $A=LL^*$ is the Cholesky factorization from\n[[def-cholesky-factorisation-with-positive-diagonal]], then\n$\\langle u,v\\rangle_A=\\langle L^*u,L^*v\\rangle$ and\n$\\|u\\|_A=\\|L^*u\\|_2$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-induced-matrix-p-norm",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is\n\n$$\\lVert A\\rVert_{p}\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_{p}\\;:\\;x\\in\\mathbb{R}^{n},\\ \\lVert x\\rVert_{p}\\le 1\\,\\Bigr\\}.$$\n\nWhen $n\\ge1$, the following three displayed quantities are the same number:\n\n$$\\lVert A\\rVert_p=\\sup_{\\lVert x\\rVert_p\\le 1}\\lVert Ax\\rVert_p=\\sup_{\\lVert x\\rVert_p=1}\\lVert Ax\\rVert_p=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_p}{\\lVert x\\rVert_p},$$\n\nthe equalities following from positive homogeneity of $\\lVert\\cdot\\rVert_p$\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]], axiom (N2)) and\nthe equality $\\lVert 0\\rVert_p=0$.\n\n**The value is a finite nonnegative real.** For $n\\ge 1$ the norms\n$\\lVert\\cdot\\rVert_p$ and $\\lVert\\cdot\\rVert_2$ are equivalent by\n[[thm-all-norms-on-rn-are-equivalent]], so there is $C>0$ with\n$\\lVert x\\rVert_\\infty\\le C\\lVert x\\rVert_p$ for every $x$. For every $i<m$,\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty\\le C\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_p$,\nso $\\lVert Ax\\rVert_p\\le \\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C\\lVert x\\rVert_p$;\nhence the supremum over the unit ball is at most the finite constant\n$\\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C$.\n\n**The induced infinity norm is a separate named case.** When $m,n\\ge1$, define\n\n$$\\lVert A\\rVert_\\infty\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_\\infty\\;:\\;x\\in\\mathbb R^n,\\ \\lVert x\\rVert_\\infty\\le 1\\,\\Bigr\\}.$$\n\nAs in the rational-$p$ case, positive homogeneity gives\n\n$$\\lVert A\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty\\le 1}\\lVert Ax\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty=1}\\lVert Ax\\rVert_\\infty=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_\\infty}{\\lVert x\\rVert_\\infty}.$$\n\nThe supremum is finite because for every $i<m$ one has\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty$,\nso\n\n$$\\lVert Ax\\rVert_\\infty\\le\\max_{i<m}\\sum_{j<n}|a_{ij}|\\,\\lVert x\\rVert_\\infty.$$\n\n**At $n=0$ the convention is explicit.** The only element of $\\mathbb{R}^{0}$\nis the zero vector, the only matrix $A\\in M_{m\\times 0}(\\mathbb{R})$ is the\nempty matrix, and the unit-ball definition gives $\\lVert A\\rVert_{p}=0$.\nThe unit sphere and the set of nonzero vectors are empty, so the two ratio\nformulas above are not asserted in this case.\n\nThe induced quantity is a norm on the matrix space $M_{m\\times n}(\\mathbb{R})$:\nfor each rational $p\\ge1$, and likewise for the separately named\n$\\infty$-case when $m,n\\ge1$, separation, absolute homogeneity and the triangle\ninequality follow from the same three axioms of the underlying vector norm\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]]) through the\ndefining supremum. The compatibility with matrix-vector multiplication, the\nsubmultiplicativity and the value on identity matrices are\n[[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]];\nthe explicit value at $p=1$ and the separate $\\infty$-formula are\n[[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, let $u\\ge 0$, let\n$\\delta_0,\\dots,\\delta_{n-1}\\in\\mathbb{R}$ satisfy $|\\delta_i|\\le u$ for every\n$i<n$, and suppose $n u<1$. Then\n\n$$\\prod_{i<n}(1+\\delta_i)=1+\\theta_n\\qquad\\text{with}\\qquad|\\theta_n|\\le\\gamma_n:=\\frac{n u}{1-n u}.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The update equations in the Statement give $$\\begin{aligned} g_{k+1} &=\\hat r_k-\\alpha_k(A\\hat p_k+\\delta^A_k)+\\delta^r_k -(b-A(\\hat x_k+\\alpha_k\\hat p_k+\\delta^x_k))\\\\ &=g_k+\\delta^r_k-\\alpha_k\\delta^A_k+A\\delta^x_k. \\end{aligned}$$ The $\\alpha_kA\\hat p_k$ terms cancel exactly.",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "In a row dot product, each exact product and each partial sum is either zero or normal-range by the Statement. At an exact zero, [F1] gives $\\operatorname{fl}(0)=0$, so its relative-error factor is $1$; every nonzero operation has a factor $1+\\varepsilon$ with $|\\varepsilon|\\le u$. Unrolling the left-to-right sum gives at most $n$ such factors in the coefficient of each exact product, so [F7] gives an error at most $\\gamma_n\\sum_\\ell|A_{i\\ell}\\hat p_{k,\\ell}|$, the same bound as the narrower dot-product estimate [F2]. Squaring these $n$ rowwise bounds and summing gives the displayed $\\|\\delta^A_k\\|_2$ bound. For either vector update, each component consists of one rounded product and one rounded addition or subtraction; an exact-zero operation again contributes factor $1$. Unrolling those two relative errors and applying [F7] with two factors gives the component bound $\\gamma_2(|v_i|+|\\alpha||p_i|)$, where $(v,p)$ is $(\\hat x_k,\\hat p_k)$ or $(\\hat r_k,\\hat q_k)$. Taking the Euclidean norm and applying the triangle inequality gives the two displayed $\\gamma_2$ bounds.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "Taking Euclidean norms in step 1.1 and using [F6] yields $$\\|g_{k+1}\\|_2\\le\\|g_k\\|_2+\\|\\delta^r_k\\|_2+ |\\alpha_k|\\|\\delta^A_k\\|_2+\\|A\\|_2\\|\\delta^x_k\\|_2.$$ Induction from $k=0$ proves $\\|g_j\\|_2\\le\\Gamma_j$. Since $\\hat r_j=(b-A\\hat x_j)+g_j$, the triangle inequality gives the recursive residual bound.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F6",
+            "induction"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "3.1",
+          "claim": "Let $e=x_*-\\hat x_j$. Then $Ae=b-A\\hat x_j$. In the orthonormal eigenbasis of [F5], $$\\|e\\|_A^2=e^{\\mathsf T}Ae =\\sum_i\\lambda_i e_i^2 \\le\\lambda_{\\min}^{-1}\\sum_i\\lambda_i^2e_i^2 =\\lambda_{\\min}^{-1}\\|Ae\\|_2^2.$$ Thus $\\|e\\|_A\\le\\|b-A\\hat x_j\\|_2/\\sqrt{\\lambda_{\\min}}$; step 2.1 then proves the claimed bound.",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement defines Gamma_j for every reached j. At j=0 the k<j sum is empty and Gamma0=norm(g0); Proof step 2.1 explicitly starts its induction at that initial gap."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1 starts with the actual g0; at j=0 the cumulative correction sum is empty, and vanishing rounding errors leave Gamma_j=norm(g0)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement admits n=1; Proof step 1.2 unrolls one-term row dots and the same two-operation updates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires SPD and completed successful computed steps; Proof step 3.1 divides only by sqrt(lambda_min)>0 and supplies no failed-step accuracy claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 3.1 uses the strictly positive smallest eigenvalue in the energy conversion; the Statement makes no extension to a singular endpoint lambda_min=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice case, actual Statement: zero: Proof step 2.1 starts with the actual g0; at j=0 the cumulative correction sum is empty, and vanishing rounding errors leave Gamma_j=norm(g0). one: Statement admits n=1; Proof step 1.2 unrolls one-term row dots and the same two-operation updates. degenerate: Statement requires SPD and completed successful computed steps; Proof step 3.1 divides only by sqrt(lambda_min)>0 and supplies no failed-step accuracy claim. endpoints: Proof step 3.1 uses the strictly positive smallest eigenvalue in the energy conversion; the Statement makes no extension to a singular endpoint lambda_min=0. empty: Statement defines Gamma_j for every reached j. At j=0 the k<j sum is empty and Gamma0=norm(g0); Proof step 2.1 explicitly starts its induction at that initial gap."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward case, actual Statement: zero: Proof step 2.1 starts with the actual g0; at j=0 the cumulative correction sum is empty, and vanishing rounding errors leave Gamma_j=norm(g0). one: Statement admits n=1; Proof step 1.2 unrolls one-term row dots and the same two-operation updates. degenerate: Statement requires SPD and completed successful computed steps; Proof step 3.1 divides only by sqrt(lambda_min)>0 and supplies no failed-step accuracy claim. endpoints: Proof step 3.1 uses the strictly positive smallest eigenvalue in the energy conversion; the Statement makes no extension to a singular endpoint lambda_min=0. empty: Statement defines Gamma_j for every reached j. At j=0 the k<j sum is empty and Gamma0=norm(g0); Proof step 2.1 explicitly starts its induction at that initial gap."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse case, actual Statement: zero: Proof step 2.1 starts with the actual g0; at j=0 the cumulative correction sum is empty, and vanishing rounding errors leave Gamma_j=norm(g0). one: Statement admits n=1; Proof step 1.2 unrolls one-term row dots and the same two-operation updates. degenerate: Statement requires SPD and completed successful computed steps; Proof step 3.1 divides only by sqrt(lambda_min)>0 and supplies no failed-step accuracy claim. endpoints: Proof step 3.1 uses the strictly positive smallest eigenvalue in the energy conversion; the Statement makes no extension to a singular endpoint lambda_min=0. empty: Statement defines Gamma_j for every reached j. At j=0 the k<j sum is empty and Gamma0=norm(g0); Proof step 2.1 explicitly starts its induction at that initial gap."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "et the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.",
+          "use": "Used in proof step(s) 1.2.",
+          "fact": "F1",
+          "required_hypotheses": "[F1] [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]:\neach real addition and multiplication is rounded with relative error at most\n$u$ on a successful normal-range operation, exact-zero operations return\nzero, and for $ku<1$,\n$\\gamma_k=ku/(1-ku)$."
+        },
+        {
+          "supplier": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+          "status": "published-body-inspected",
+          "source_section": "Statement",
+          "excerpt": "1. **Componentwise form.** There are reals $\\delta_0,\\dots,\\delta_{n-1}$ with\n   $|\\delta_j|\\le\\gamma_n:=nu/(1-nu)$ such that\n   $$s_n=\\sum_{j<n}x_jy_j(1+\\delta_j).$$\n2. **Normwise form.**\n   $$|s_n-x\\cdot y|\\;\\le\\;\\gamma_n\\sum_{j<n}|x_jy_j|\\;\\le\\;\\gamma_n\\,\\lVert x\\rVert_1\\lVert y\\rVert_1,$$\n   where $\\lVert\\cdot\\rVert_1$ is the published $1$-norm\n   ([[def-p-norms-on-rn]], [[lem-p-norms-are-norms-and-induce-the-published-metrics]])\n   and $|\\cdot|$ the absolute value ([[def-abs-value]]).",
+          "use": "Used in proof step(s) 1.2.",
+          "fact": "F2",
+          "required_hypotheses": "[F2] [[thm-floating-point-dot-product-componentwise-and-normwise-error-bounds]]:\nwhen every exact product, rounded product, and intermediate sum is nonzero\nnormal-range, a length-$n$ dot product has absolute error at most\n$\\gamma_n\\sum_\\ell|x_\\ell y_\\ell|$."
+        },
+        {
+          "supplier": "def-conjugate-gradient-recurrence",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "For every index $k$ with $r_k\\ne0$, define",
+          "use": "Used in proof step(s) 1.1.",
+          "fact": "F3",
+          "required_hypotheses": "[F3] [[def-conjugate-gradient-recurrence]]: CG updates $x$ by adding\n$\\alpha p$ and updates the recursive residual by subtracting $\\alpha Ap$."
+        },
+        {
+          "supplier": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "et $A\\in M_n(\\mathbb C)$ be Hermitian positive definite in the sense of\n[[def-cholesky-factorisation-with-positive-diagonal]]. For vectors\n$u,v\\in\\mathbb C^n$, define the **energy inner product**",
+          "use": "Used in proof step(s) 3.1.",
+          "fact": "F4",
+          "required_hypotheses": "[F4] [[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]]:\nfor real SPD $A$, $\\|e\\|_A^2=e^{\\mathsf T}Ae$."
+        },
+        {
+          "supplier": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "status": "published-body-inspected",
+          "source_section": "Statement",
+          "excerpt": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "use": "Used in proof step(s) 3.1.",
+          "fact": "F5",
+          "required_hypotheses": "[F5] [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]]: the real\nsymmetric $A$ has an orthonormal eigenbasis; its eigenvalues are positive by\npositive definiteness."
+        },
+        {
+          "supplier": "def-induced-matrix-p-norm",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "et $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is",
+          "use": "Used in proof step(s) 2.1.",
+          "fact": "F6",
+          "required_hypotheses": "[F6] [[def-induced-matrix-p-norm]]: at $p=2$, $\\|A\\|_2$ is the supremum of\n$\\|Av\\|_2$ over $\\|v\\|_2\\le1$, hence\n$\\|Av\\|_2\\le\\|A\\|_2\\|v\\|_2$."
+        },
+        {
+          "fact": "F7",
+          "supplier": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "required_hypotheses": "[F7] [[lem-product-of-one-plus-deltas-gives-theta-n]]: padding a product of at\nmost $n$ relative-error factors with factors $1$ gives deviation at most\n$\\gamma_n$ when $nu<1$."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read every step and all seven actual supplier statements. Gap signs follow g_next=g+delta_r-alpha delta_A+A delta_x. Unrolling row dots uses at most n factors and admits exact zeros; two-factor update bounds need 2u<1. j=0 gives Gamma_0=||g_0||. Spectral estimate uses SPD lambda_min>0, not an indefinite energy norm. No monotonicity or termination conclusion. No defect found."
+      }
+    },
+    "ex-unrestarted-and-restarted-gmres-on-a-diagonal-system": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gmres-iterate",
+          "source_section": "Definition",
+          "quote": "Let $Ax=b$ be a linear system, let $x_0$ be an initial guess, and let\n\n$$r_0:=b-Ax_0.$$\n\nFor $m\\ge 0$, a **GMRES iterate at step $m$** is any vector\n$x_m\\in x_0+K_m(A,r_0)$ such that\n\n$$\\|b-Ax_m\\|_2=\\min_{x\\in x_0+K_m(A,r_0)} \\|b-Ax\\|_2.$$\n\nThus GMRES is defined by residual minimization over the affine Krylov space\ngenerated by the initial residual.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a square matrix over $\\mathbb R$ or $\\mathbb C$ and let $b$ be a\nvector of matching size. Define\n\n$$K_0(A,b):=\\{0\\},$$\n\nand for $m\\ge 1$ define the $m$th **Krylov subspace**\n\n$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$\n\nThus $K_m(A,b)\\subseteq K_{m+1}(A,b)$ for every $m\\ge 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-restarted-gmres-m",
+          "source_section": "Definition",
+          "quote": "Fix a restart length $m\\ge 1$. **Restarted GMRES$(m)$** produces iterates in\ncycles:\n\n1. start from $x^{(0)}=x_0$;\n2. at cycle $j$, form the residual $r^{(j)}=b-Ax^{(j)}$;\n3. run ordinary GMRES for exactly $m$ steps with initial guess $x^{(j)}$ and\n   initial residual $r^{(j)}$;\n4. call the resulting residual minimizer $x^{(j+1)}$ and restart from it.\n\nThus each cycle uses only the current residual and a fresh size-$m$ Krylov\nspace.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "We have $Ab=(1,2)^{\\mathsf T}$ and the determinant of the matrix with columns $b,Ab$ is $1\\cdot2-1\\cdot1=1\\ne0$. Thus $K_2(A,b)=\\mathbb R^2$. The exact solution is $x_*=A^{-1}b=(1,1/2)^{\\mathsf T}\\in K_2(A,b)$, so the minimum residual in [F1] is zero at step $2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "In the first GMRES$(1)$ cycle, [F1] restricts $x_1$ to $x_0+yb=yb$ for a scalar $y$. Its residual is $b-yAb=(1-y,1-2y)^{\\mathsf T}$, whose squared norm is $(1-y)^2+(1-2y)^2=5(y-3/5)^2+1/5$. The unique minimizer is $y=3/5$, and the residual is $(2/5,-1/5)^{\\mathsf T}$, which is nonzero. By [F3] this is the first-cycle residual before any restart.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "empty case, actual Statement: zero: Proof step 1.1 attains exact zero residual in K2, while step 2.1 computes the nonzero first restarted residual (2/5,-1/5). one: Proof step 2.1 solves the length-one restarted cycle by minimizing 5(y-3/5)^2+1/5. degenerate: Proof step 1.1 shows K2=R^2 by determinant one; step 2.1 shows K1 does not solve the system."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1 attains exact zero residual in K2, while step 2.1 computes the nonzero first restarted residual (2/5,-1/5)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 2.1 solves the length-one restarted cycle by minimizing 5(y-3/5)^2+1/5."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.1 shows K2=R^2 by determinant one; step 2.1 shows K1 does not solve the system."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "endpoints case, actual Statement: zero: Proof step 1.1 attains exact zero residual in K2, while step 2.1 computes the nonzero first restarted residual (2/5,-1/5). one: Proof step 2.1 solves the length-one restarted cycle by minimizing 5(y-3/5)^2+1/5. degenerate: Proof step 1.1 shows K2=R^2 by determinant one; step 2.1 shows K1 does not solve the system."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice case, actual Statement: zero: Proof step 1.1 attains exact zero residual in K2, while step 2.1 computes the nonzero first restarted residual (2/5,-1/5). one: Proof step 2.1 solves the length-one restarted cycle by minimizing 5(y-3/5)^2+1/5. degenerate: Proof step 1.1 shows K2=R^2 by determinant one; step 2.1 shows K1 does not solve the system."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward case, actual Statement: zero: Proof step 1.1 attains exact zero residual in K2, while step 2.1 computes the nonzero first restarted residual (2/5,-1/5). one: Proof step 2.1 solves the length-one restarted cycle by minimizing 5(y-3/5)^2+1/5. degenerate: Proof step 1.1 shows K2=R^2 by determinant one; step 2.1 shows K1 does not solve the system."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse case, actual Statement: zero: Proof step 1.1 attains exact zero residual in K2, while step 2.1 computes the nonzero first restarted residual (2/5,-1/5). one: Proof step 2.1 solves the length-one restarted cycle by minimizing 5(y-3/5)^2+1/5. degenerate: Proof step 1.1 shows K2=R^2 by determinant one; step 2.1 shows K1 does not solve the system."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-gmres-iterate",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "For $m\\ge 0$, a **GMRES iterate at step $m$** is any vector\n$x_m\\in x_0+K_m(A,r_0)$ such that",
+          "use": "Used in proof step(s) 1.1, 2.1.",
+          "fact": "F1",
+          "required_hypotheses": "[F1] [[def-gmres-iterate]]: GMRES minimizes $\\|b-Ax\\|_2$ over\n$x_0+K_m(A,b)$."
+        },
+        {
+          "supplier": "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$",
+          "use": "Used in proof step(s) 1.1.",
+          "fact": "F2",
+          "required_hypotheses": "[F2] [[def-krylov-subspace-of-a-matrix-and-start-vector]]:\n$K_m(A,b)=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\}$."
+        },
+        {
+          "supplier": "def-restarted-gmres-m",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "ix a restart length $m\\ge 1$. **Restarted GMRES$(m)$** produces iterates in\ncycles:",
+          "use": "Used in proof step(s) 2.1.",
+          "fact": "F3",
+          "required_hypotheses": "[F3] [[def-restarted-gmres-m]]: GMRES$(1)$ completes one GMRES step at the\ncurrent guess and then starts a new cycle from the resulting residual."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "unrestarted-two-step",
+          "calculation": "det[b,Ab]=1; x*=(1,1/2), and the exact residual is zero.",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "first-GMRES1-cycle",
+          "calculation": "||b-yAb||^2=5(y-3/5)^2+1/5, so r_1=(2/5,-1/5) and ||r_1||=sqrt(5)/5.",
+          "evidence": "Step 2.1."
+        }
+      ],
+      "repair_confidence": 1
+    },
+    "ex-cg-denominator-failure-and-minres-on-an-indefinite-system": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conjugate-gradient-recurrence",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian positive definite, let $Ax=b$, and fix an initial guess\n$x_0$. Set\n\n$$r_0:=b-Ax_0,\\qquad p_0:=r_0.$$\n\nFor every index $k$ with $r_k\\ne0$, define\n\n$$\\alpha_k:=\\frac{\\langle r_k,r_k\\rangle}{\\langle Ap_k,p_k\\rangle},\\qquad x_{k+1}:=x_k+\\alpha_kp_k,\\qquad r_{k+1}:=r_k-\\alpha_kAp_k,$$\n\nand then\n\n$$\\beta_k:=\\frac{\\langle r_{k+1},r_{k+1}\\rangle}{\\langle r_k,r_k\\rangle},\\qquad p_{k+1}:=r_{k+1}+\\beta_kp_k.$$\n\nThis is the **conjugate-gradient recurrence**.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cg-recursive-residual-gap-and-attainable-accuracy",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{n\\times n}$, $n\\ge1$, be symmetric positive definite, let\n$Ax_*=b$, and suppose the computed CG process from\n[[def-conjugate-gradient-recurrence]] completes steps $k=0,\\ldots,j-1$ in\nthe no-range-failure model of\n[[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]].\nAssume $nu<1$ and $2u<1$, and that every nonzero exact product and partial\nsum in each length-$n$ matrix-vector dot product is normal-range; exact-zero\nproducts and sums are permitted. Write the actual stored scalars and vectors\nas $\\alpha_k,\\hat x_k,\\hat r_k,\\hat p_k$, and compute each component of\n$\\hat q_k=\\operatorname{fl}(A\\hat p_k)$ by a rounded length-$n$ dot product.\nSet $\\delta^A_k:=\\hat q_k-A\\hat p_k$. Compute the updates componentwise as\n$$\\hat x_{k+1}=\\operatorname{fl}(\\hat x_k+ \\operatorname{fl}(\\alpha_k\\hat p_k)),\\qquad \\hat r_{k+1}=\\operatorname{fl}(\\hat r_k- \\operatorname{fl}(\\alpha_k\\hat q_k)),$$\nwhere the inner products and outer additions/subtractions are rounded\noperations and $\\alpha_k$ is the actual stored scalar used by the algorithm.\nDefine the resulting update errors by\n$$\\delta^x_k:=\\hat x_{k+1}-(\\hat x_k+\\alpha_k\\hat p_k),\\qquad \\delta^r_k:=\\hat r_{k+1}-(\\hat r_k-\\alpha_k\\hat q_k).$$\nFor any index $j$ reached by the process, define\n$$g_j:=\\hat r_j-(b-A\\hat x_j),\\qquad \\Gamma_j:=\\|g_0\\|_2+\\sum_{k<j} \\bigl(\\|\\delta^r_k\\|_2+\\|A\\|_2\\|\\delta^x_k\\|_2+ |\\alpha_k|\\|\\delta^A_k\\|_2\\bigr).$$\nHere $\\|A\\|_2$ is the induced Euclidean operator norm. Then\n$$\\|g_j\\|_2\\le\\Gamma_j, \\qquad \\|b-A\\hat x_j\\|_2\\le\\|\\hat r_j\\|_2+\\Gamma_j.$$\nIf $\\lambda_{\\min}>0$ is the smallest eigenvalue of $A$, then\n$$\\|x_*-\\hat x_j\\|_A\\le \\frac{\\|b-A\\hat x_j\\|_2}{\\sqrt{\\lambda_{\\min}}} \\le\\frac{\\|\\hat r_j\\|_2+\\Gamma_j}{\\sqrt{\\lambda_{\\min}}},$$\nwhere $\\|e\\|_A=\\sqrt{e^{\\mathsf T}Ae}$. The explicit operation errors obey\n$$\\|\\delta^A_k\\|_2\\le\\gamma_n \\left(\\sum_{i=1}^n\\left(\\sum_{\\ell=1}^n |A_{i\\ell}|\\,|\\hat p_{k,\\ell}|\\right)^2\\right)^{1/2},$$\nand, when $2u<1$,\n$$\\|\\delta^x_k\\|_2\\le\\gamma_2 \\bigl(\\|\\hat x_k\\|_2+|\\alpha_k|\\|\\hat p_k\\|_2\\bigr),\\quad \\|\\delta^r_k\\|_2\\le\\gamma_2 \\bigl(\\|\\hat r_k\\|_2+|\\alpha_k|\\|\\hat q_k\\|_2\\bigr).$$\nNo exact-grade termination or monotonicity of the true residual is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-minres-iterate-from-the-lanczos-tridiagonalization",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian, let $x_0$ be an initial guess for $Ax=b$, let\n$r_0=b-Ax_0$, and put $\\beta=\\|r_0\\|_2$. Assume Lanczos runs through step $m$\nwithout breakdown and yields\n\n$$AQ_m=Q_{m+1}\\bar T_m,\\qquad r_0=\\beta q_1=\\beta Q_{m+1}e_1,$$\n\nwith $\\bar T_m$ tridiagonal in the sense of\n[[thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence]]. A\nvector\n\n$$x_m:=x_0+Q_my_m$$\n\nis an **$m$th MINRES iterate** when $y_m$ minimizes\n\n$$\\|\\beta e_1-\\bar T_my\\|_2$$\n\nover all $y\\in\\mathbb C^m$. Such a minimizer exists by\n[[thm-least-squares-solutions-and-normal-equation]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a square matrix over $\\mathbb R$ or $\\mathbb C$ and let $b$ be a\nvector of matching size. Define\n\n$$K_0(A,b):=\\{0\\},$$\n\nand for $m\\ge 1$ define the $m$th **Krylov subspace**\n\n$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$\n\nThus $K_m(A,b)\\subseteq K_{m+1}(A,b)$ for every $m\\ge 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite in the sense of\n[[def-cholesky-factorisation-with-positive-diagonal]]. For vectors\n$u,v\\in\\mathbb C^n$, define the **energy inner product**\n\n$$\\langle u,v\\rangle_A:=\\langle Au,v\\rangle,$$\n\nwhere $\\langle \\cdot,\\cdot\\rangle$ is the standard coordinate inner product of\n[[prop-standard-coordinate-inner-products]]. Because $A$ is Hermitian positive\ndefinite, this is an inner product on $\\mathbb C^n$, and its induced norm\n\n$$\\|u\\|_A:=\\sqrt{\\langle u,u\\rangle_A}$$\n\nis the **energy norm** of $u$.\n\nEquivalently, if $A=LL^*$ is the Cholesky factorization from\n[[def-cholesky-factorisation-with-positive-diagonal]], then\n$\\langle u,v\\rangle_A=\\langle L^*u,L^*v\\rangle$ and\n$\\|u\\|_A=\\|L^*u\\|_2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "For $A_-$, $p_0=b$ and $A_-p_0=(1,-1)^{\\mathsf T}$, so $p_0^{\\mathsf T}A_-p_0=1-1=0$ while $b^{\\mathsf T}b=2$. Thus the first CG step would divide by zero; [F1] does not define that step, and the SPD theorem [F2] does not apply.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "1.2 The normalized first Lanczos vector is $q_1=b/\\sqrt2$. Then $q_1^{\\mathsf T}A_-q_1=0$ and $A_-q_1=(1,-1)^{\\mathsf T}/\\sqrt2$ has norm $1$, so the first subdiagonal coefficient is $\\beta_1=1>0$. Hence [F3] applies at step $1$, with $\\beta=\\|r_0\\|_2=\\sqrt2$ and $\\bar T_1=(0,1)^{\\mathsf T}$. The squared objective is $\\|(\\sqrt2,0)^{\\mathsf T}-(0,y)^{\\mathsf T}\\|_2^2=2+y^2$, uniquely minimized at $y=0$. Also $b$ and $A_-b=(1,-1)^{\\mathsf T}$ are linearly independent, so [F4] gives $K_2(A_-,b)=\\mathbb R^2$. The exact solution $A_-^{-1}b=(1,-1)^{\\mathsf T}$ therefore lies in $K_2$; no step-$2$ MINRES claim is needed after the invariant-subspace breakdown.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "For $A_+$, the first CG denominator is $b^{\\mathsf T}A_+b=1+2=3>0$ and $\\alpha_0=2/3$. The exact solution is $x_*=A_+^{-1}b=(1,1/2)^{\\mathsf T}$, so $e_0=x_*-x_0=(1,1/2)^{\\mathsf T}$ and [F5] gives $\\|e_0\\|_{A_+}^2=1+2(1/2)^2=3/2$. The first iterate is $x_1=x_0+\\alpha_0b=(2/3,2/3)^{\\mathsf T}$, hence $e_1=x_*-x_1=(1/3,-1/6)^{\\mathsf T}$ and $\\|e_1\\|_{A_+}^2=(1/3)^2+2(1/6)^2=1/6$. Thus the energy-error norm decreases from $\\sqrt{3/2}$ to $1/\\sqrt6$, a factor of $1/3$. The recursive residual is $r_1=b-\\alpha_0A_+b=(1/3,-1/3)^{\\mathsf T}\\ne0$. This verifies the positive first denominator and energy decrease in this SPD instance, contrasting with step 1.1.",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "empty case, actual Statement: zero: Proof step 1.1 computes first indefinite CG denominator zero, while step 2.1 computes the SPD comparison denominator three. one: Proof step 1.2 has beta2=1 and the first MINRES least-squares objective 2+y^2 with minimizer zero. degenerate: Proof step 1.2 limits its MINRES claim to the first step; K2 is invariant and no second-step MINRES iterate after breakdown is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1 computes first indefinite CG denominator zero, while step 2.1 computes the SPD comparison denominator three."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.2 has beta_1=1, beta=||r_0||=sqrt(2), and the first MINRES least-squares objective 2+y^2 with minimizer zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.2 limits its MINRES claim to the first step; K2 is invariant and no second-step MINRES iterate after breakdown is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "endpoints case, actual Statement: zero: Proof step 1.1 computes first indefinite CG denominator zero, while step 2.1 computes the SPD comparison denominator three. one: Proof step 1.2 has beta2=1 and the first MINRES least-squares objective 2+y^2 with minimizer zero. degenerate: Proof step 1.2 limits its MINRES claim to the first step; K2 is invariant and no second-step MINRES iterate after breakdown is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice case, actual Statement: zero: Proof step 1.1 computes first indefinite CG denominator zero, while step 2.1 computes the SPD comparison denominator three. one: Proof step 1.2 has beta2=1 and the first MINRES least-squares objective 2+y^2 with minimizer zero. degenerate: Proof step 1.2 limits its MINRES claim to the first step; K2 is invariant and no second-step MINRES iterate after breakdown is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward case, actual Statement: zero: Proof step 1.1 computes first indefinite CG denominator zero, while step 2.1 computes the SPD comparison denominator three. one: Proof step 1.2 has beta2=1 and the first MINRES least-squares objective 2+y^2 with minimizer zero. degenerate: Proof step 1.2 limits its MINRES claim to the first step; K2 is invariant and no second-step MINRES iterate after breakdown is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse case, actual Statement: zero: Proof step 1.1 computes first indefinite CG denominator zero, while step 2.1 computes the SPD comparison denominator three. one: Proof step 1.2 has beta2=1 and the first MINRES least-squares objective 2+y^2 with minimizer zero. degenerate: Proof step 1.2 limits its MINRES claim to the first step; K2 is invariant and no second-step MINRES iterate after breakdown is asserted."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-conjugate-gradient-recurrence",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "For every index $k$ with $r_k\\ne0$, define",
+          "use": "Used in proof step(s) 1.1, 2.1.",
+          "fact": "F1",
+          "required_hypotheses": "[F1] [[def-conjugate-gradient-recurrence]]: from $p_0=r_0=b$, the first CG\nstep uses $\\alpha_0=(b^{\\mathsf T}b)/(p_0^{\\mathsf T}A p_0)$."
+        },
+        {
+          "supplier": "thm-cg-recursive-residual-gap-and-attainable-accuracy",
+          "status": "authored-local-supplier",
+          "source_section": "Statement",
+          "excerpt": "Let $A\\in\\mathbb R^{n\\times n}$ be symmetric positive definite, let\n$Ax_*=b$, and suppose the computed CG process from\n[[def-conjugate-gradient-recurrence]] completes steps $k=0,\\ldots,j-1$ in\nthe no-range-failure model of\n[[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]].\nAssume $nu<1$ and $2u<1$, and that every product and partial sum in each\nlength-$n$ matrix-vector dot product is normal-range. Write the actual stored\nscalars and vectors as $\\alpha_k,\\hat x_k,\\hat r_k,\\hat p_k$, and compute\neach component of $\\hat q_k=\\operatorname{fl}(A\\hat p_k)$ by a rounded\nlength-$n$ dot product. Compute the updates componentwise as\n$$\\hat x_{k+1}=\\operatorname{fl}(\\hat x_k+ \\operatorname{fl}(\\alpha_k\\hat p_k)),\\qquad \\hat r_{k+1}=\\operatorname{fl}(\\hat r_k- \\operatorname{fl}(\\alpha_k\\hat q_k)),$$\nwhere the inner products and outer additions/subtractions are rounded\noperations and $\\alpha_k$ is the actual stored scalar used by the algorithm.\nDefine the resulting update errors by\n$$\\delta^x_k:=\\hat x_{k+1}-(\\hat x_k+\\alpha_k\\hat p_k),\\qquad \\delta^r_k:=\\hat r_{k+1}-(\\hat r_k-\\alpha_k\\hat q_k).$$\nFor any index $j$ reached by the process, define\n$$g_j:=\\hat r_j-(b-A\\hat x_j),\\qquad \\Gamma_j:=\\|g_0\\|_2+\\sum_{k<j} \\bigl(\\|\\delta^r_k\\|_2+\\|A\\|_2\\|\\delta^x_k\\|_2+ |\\alpha_k|\\|\\delta^A_k\\|_2\\bigr).$$\nHere $\\|A\\|_2$ is the induced Euclidean operator norm. Then\n$$\\|g_j\\|_2\\le\\Gamma_j, \\qquad \\|b-A\\hat x_j\\|_2\\le\\|\\hat r_j\\|_2+\\Gamma_j.$$\nIf $\\lambda_{\\min}>0$ is the smallest eigenvalue of $A$, then\n$$\\|x_*-\\hat x_j\\|_A\\le \\frac{\\|b-A\\hat x_j\\|_2}{\\sqrt{\\lambda_{\\min}}} \\le\\frac{\\|\\hat r_j\\|_2+\\Gamma_j}{\\sqrt{\\lambda_{\\min}}},$$\nwhere $\\|e\\|_A=\\sqrt{e^{\\mathsf T}Ae}$. The explicit operation errors obey\n$$\\|\\delta^A_k\\|_2\\le\\gamma_n \\left(\\sum_{i=1}^n\\left(\\sum_{\\ell=1}^n |A_{i\\ell}|\\,|\\hat p_{k,\\ell}|\\right)^2\\right)^{1/2},$$\nand, when $2u<1$,\n$$\\|\\delta^x_k\\|_2\\le\\gamma_2 \\bigl(\\|\\hat x_k\\|_2+|\\alpha_k|\\|\\hat p_k\\|_2\\bigr),\\quad \\|\\delta^r_k\\|_2\\le\\gamma_2 \\bigl(\\|\\hat r_k\\|_2+|\\alpha_k|\\|\\hat q_k\\|_2\\bigr).$$\nNo exact-grade termination or monotonicity of the true residual is asserted.",
+          "use": "Used in proof step(s) 1.1.",
+          "fact": "F2",
+          "required_hypotheses": "[F2] [[thm-cg-recursive-residual-gap-and-attainable-accuracy]]: its hypotheses\nrequire a symmetric positive-definite matrix; it makes no claim for the\nindefinite system $A_-$."
+        },
+        {
+          "supplier": "def-minres-iterate-from-the-lanczos-tridiagonalization",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "over all $y\\in\\mathbb C^m$. Such a minimizer exists by\n[[thm-least-squares-solutions-and-normal-equation]].",
+          "use": "Used in proof step(s) 1.2.",
+          "fact": "F3",
+          "required_hypotheses": "[F3] [[def-minres-iterate-from-the-lanczos-tridiagonalization]]: MINRES step\n$1$ minimizes $\\|\\beta_0e_1-\\bar T_1y\\|_2$ when Lanczos completes its first\ncolumn without breakdown."
+        },
+        {
+          "supplier": "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$",
+          "use": "Used in proof step(s) 1.2.",
+          "fact": "F4",
+          "required_hypotheses": "[F4] [[def-krylov-subspace-of-a-matrix-and-start-vector]]:\n$K_2(A,b)=\\operatorname{span}\\{b,Ab\\}$."
+        },
+        {
+          "fact": "F5",
+          "supplier": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+          "required_hypotheses": "[F5] [[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]]:\nfor real SPD $A$, $\\|e\\|_A^2=e^{\\mathsf T}Ae$."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "indefinite-CG-denominator",
+          "calculation": "b^T A_- b=1-1=0 while b^T b=2.",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "MINRES-first-column",
+          "calculation": "q_1=b/sqrt(2), q_1^T A_- q_1=0, beta=||r_0||=sqrt(2), beta_1=1 and Tbar_1=(0,1)^T.",
+          "evidence": "Step 1.2."
+        },
+        {
+          "case": "SPD-CG-denominator",
+          "calculation": "b^T A_+ b=3, alpha_0=2/3, and r_1=(1/3,-1/3)^T.",
+          "evidence": "Step 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read all three verification steps and five actual suppliers. Indefinite diag(1,-1) gives denominator zero and is outside the CG definition SPD domain; no theorem is applied there. Lanczos alpha1=0, beta1=1, residual scale beta=sqrt(2) match MINRES definition and its no-breakdown first column. Objective 2+y\u00b2 gives y=0; K2=R\u00b2 is checked without claiming MINRES applicability after breakdown. SPD case denominator 3, alpha=2/3 and squared energy errors 3/2 and 1/6 recomputed. Reader notation repair accepted; refuter heading defect corrected. No remaining defect."
+      },
+      "repair_confidence": 1
+    },
+    "ex-lanczos-poorly-aligned-start-vector-delays-the-largest-ritz-value": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{n\\times n}$, $n\\ge1$, be symmetric with ordered eigenvalues\n$\\lambda_1\\ge\\cdots\\ge\\lambda_n$. Let $r$ be the multiplicity of $\\lambda_1$.\nIf $r<n$, assume $\\lambda_1>\\lambda_{r+1}$, and let $P$ be the orthogonal\nprojection onto the $\\lambda_1$-eigenspace. Let $b\\in\\mathbb R^n$ be a unit\nvector and, for $m\\ge1$, define\n\n$$K_m:=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\},\\qquad \\theta_m:=\\max_{0\\ne x\\in K_m}\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x}.$$\n\nThus $\\theta_m$ is the largest Rayleigh\u2013Ritz value on $K_m$; if Lanczos runs\nthrough step $m$ without breakdown, it is the largest Ritz value of\n$Q_m^{\\mathsf T}AQ_m$. If $r=n$, then $A=\\lambda_1I$ and $\\theta_m=\\lambda_1$\nfor every $m\\ge1$. Suppose $r<n$.\n\n1. If $Pb=0$, then $\\theta_m\\le\\lambda_{r+1}$ for every $m$; no convergence\n   to $\\lambda_1$ is asserted.\n\n2. If $Pb\\ne0$, put\n   $$\\tau:=\\frac{\\|(I-P)b\\|_2}{\\|Pb\\|_2}.$$\n   If $\\lambda_{r+1}>\\lambda_n$, then for every $m\\ge1$,\n   $$0\\le\\lambda_1-\\theta_m\\le \\frac{(\\lambda_1-\\lambda_n)\\tau^2} {T_{m-1}\\!\\left(1+2\\frac{\\lambda_1-\\lambda_{r+1}} {\\lambda_{r+1}-\\lambda_n}\\right)^2}.$$\n   For a simple top eigenvalue ($r=1$), $\\tau$ is the tangent of the angle\n   between $b$ and a unit top eigenvector, so the starting-angle denominator\n   is explicit.\n\n3. If $\\lambda_{r+1}=\\lambda_n$, then\n   $$\\lambda_1-\\theta_1=(\\lambda_1-\\lambda_n) \\frac{\\|(I-P)b\\|_2^2}{\\|b\\|_2^2},\\qquad \\theta_m=\\lambda_1\\quad(m\\ge2).$$\n\nWhen $r<n$, $Pb\\ne0$, and exact Lanczos breakdown occurs at dimension $d$, then\n$\\theta_d=\\lambda_1$ and $K_m=K_d$ for all $m\\ge d$. These are exact-arithmetic\nclaims; they give no finite-precision grade-termination guarantee.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Since $1/10000+2(9999/20000)=1$, the vector $b$ is unit. Also $Ab=(1/10,2\\alpha,\\alpha)^{\\mathsf T}$. Set $$v:=(-\\alpha^2,9\\alpha/100,-8\\alpha/100)^{\\mathsf T}.$$ Direct dot products give $v^{\\mathsf T}b=0$ and $v^{\\mathsf T}Ab=-\\alpha^2/10+18\\alpha^2/100-8\\alpha^2/100=0$. The vectors $b,Ab$ are independent because their first coordinates would force a proportionality factor $10$, while the second coordinates would force factor $2$. Hence $K_2(A,b)$ is two-dimensional and equals $v^\\perp$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "We have $$\\frac{v_2^2+v_3^2}{v_1^2} =\\frac{145(1/10000)}{\\alpha^2}=\\frac{290}{9999}.$$ For every unit $x\\in K_2(A,b)$, $v^{\\mathsf T}x=0$. By [F2], $$|x_1|^2\\le\\frac{v_2^2+v_3^2}{v_1^2}(x_2^2+x_3^2) =\\frac{290}{9999}(1-|x_1|^2),$$ so $|x_1|^2\\le290/10289$. Its Rayleigh quotient satisfies $$x^{\\mathsf T}Ax=10x_1^2+2x_2^2+x_3^2 \\le2+8x_1^2\\le2+\\frac{2320}{10289}<\\frac94,$$ since $4(2320)=9280<10289$. Taking the maximum gives $\\theta_2<9/4$, so $\\lambda_1-\\theta_2>31/4$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "The top eigenspace is $\\operatorname{span}\\{e_1\\}$, hence $\\tau^2=(9999/10000)/(1/10000)=9999$. The unwanted interval is $[1,2]$, and its affine exterior point is $1+2(10-2)/(2-1)=17$, so $T_1(17)=17$. The theorem's $m=2$ bound is $$\\lambda_1-\\theta_2\\le\\frac{9\\cdot9999}{17^2} =\\frac{89991}{289},$$ which is valid but large. If its factor $\\tau^2$ were deleted, the proposed right side would be $9/289<31/4$, contradicting step 1.2. Thus this start cannot support that angle-free bound.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "empty case, actual Statement: zero: Proof step 2.1 computes nonzero top projection squared 1/10000 and finite tau^2=9999, so no division by zero projection occurs. degenerate: Proof step 1.1 shows b and Ab independent despite weak top alignment; step 2.1 retains the large angle factor instead of an unsupported angle-free bound. endpoints: Proof step 2.1 uses unwanted interval [1,2], exterior point17 and T1(17)=17; step 1.2 establishes theta2<9/4. one: The Statement fixes a three-dimensional diagonal matrix and a two-step Ritz value; it makes no scalar-dimension or one-step Ritz assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1 computes nonzero top projection squared 1/10000 and finite tau^2=9999, so no division by zero projection occurs."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a three-dimensional diagonal matrix and a two-step Ritz value; it makes no scalar-dimension or one-step Ritz assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.1 shows b and Ab independent despite weak top alignment; step 2.1 retains the large angle factor instead of an unsupported angle-free bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1 uses unwanted interval [1,2], exterior point17 and T1(17)=17; step 1.2 establishes theta2<9/4."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice case, actual Statement: zero: Proof step 2.1 computes nonzero top projection squared 1/10000 and finite tau^2=9999, so no division by zero projection occurs. degenerate: Proof step 1.1 shows b and Ab independent despite weak top alignment; step 2.1 retains the large angle factor instead of an unsupported angle-free bound. endpoints: Proof step 2.1 uses unwanted interval [1,2], exterior point17 and T1(17)=17; step 1.2 establishes theta2<9/4. one: The Statement fixes a three-dimensional diagonal matrix and a two-step Ritz value; it makes no scalar-dimension or one-step Ritz assertion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward case, actual Statement: zero: Proof step 2.1 computes nonzero top projection squared 1/10000 and finite tau^2=9999, so no division by zero projection occurs. degenerate: Proof step 1.1 shows b and Ab independent despite weak top alignment; step 2.1 retains the large angle factor instead of an unsupported angle-free bound. endpoints: Proof step 2.1 uses unwanted interval [1,2], exterior point17 and T1(17)=17; step 1.2 establishes theta2<9/4. one: The Statement fixes a three-dimensional diagonal matrix and a two-step Ritz value; it makes no scalar-dimension or one-step Ritz assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse case, actual Statement: zero: Proof step 2.1 computes nonzero top projection squared 1/10000 and finite tau^2=9999, so no division by zero projection occurs. degenerate: Proof step 1.1 shows b and Ab independent despite weak top alignment; step 2.1 retains the large angle factor instead of an unsupported angle-free bound. endpoints: Proof step 2.1 uses unwanted interval [1,2], exterior point17 and T1(17)=17; step 1.2 establishes theta2<9/4. one: The Statement fixes a three-dimensional diagonal matrix and a two-step Ritz value; it makes no scalar-dimension or one-step Ritz assertion."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+          "status": "authored-local-supplier",
+          "source_section": "Statement",
+          "excerpt": "Let $A\\in\\mathbb R^{n\\times n}$ be symmetric with ordered eigenvalues\n$\\lambda_1\\ge\\cdots\\ge\\lambda_n$. Let $r$ be the multiplicity of $\\lambda_1$.\nIf $r<n$, assume $\\lambda_1>\\lambda_{r+1}$, and let $P$ be the orthogonal\nprojection onto the $\\lambda_1$-eigenspace. Let $b\\in\\mathbb R^n$ be a unit\nvector and, for $m\\ge1$, define\n\n$$K_m:=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\},\\qquad \\theta_m:=\\max_{0\\ne x\\in K_m}\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x}.$$\n\nThus $\\theta_m$ is the largest Rayleigh\u2013Ritz value on $K_m$; if Lanczos runs\nthrough step $m$ without breakdown, it is the largest Ritz value of\n$Q_m^{\\mathsf T}AQ_m$. If $r=n$, then $A=\\lambda_1I$ and $\\theta_m=\\lambda_1$\nfor every $m\\ge1$. Suppose $r<n$.\n\n1. If $Pb=0$, then $\\theta_m\\le\\lambda_{r+1}$ for every $m$; no convergence\n   to $\\lambda_1$ is asserted.\n\n2. If $Pb\\ne0$, put\n   $$\\tau:=\\frac{\\|(I-P)b\\|_2}{\\|Pb\\|_2}.$$\n   If $\\lambda_{r+1}>\\lambda_n$, then for every $m\\ge1$,\n   $$0\\le\\lambda_1-\\theta_m\\le \\frac{(\\lambda_1-\\lambda_n)\\tau^2} {T_{m-1}\\!\\left(1+2\\frac{\\lambda_1-\\lambda_{r+1}} {\\lambda_{r+1}-\\lambda_n}\\right)^2}.$$\n   For a simple top eigenvalue ($r=1$), $\\tau$ is the tangent of the angle\n   between $b$ and a unit top eigenvector, so the starting-angle denominator\n   is explicit.\n\n3. If $\\lambda_{r+1}=\\lambda_n$, then\n   $$\\lambda_1-\\theta_1=(\\lambda_1-\\lambda_n) \\frac{\\|(I-P)b\\|_2^2}{\\|b\\|_2^2},\\qquad \\theta_m=\\lambda_1\\quad(m\\ge2).$$\n\nWhen $r<n$, $Pb\\ne0$, and exact Lanczos breakdown occurs at dimension $d$, then\n$\\theta_d=\\lambda_1$ and $K_m=K_d$ for all $m\\ge d$. These are exact-arithmetic\nclaims; they give no finite-precision grade-termination guarantee.",
+          "use": "Used in proof step(s) 1.1, 1.2, 2.1.",
+          "fact": "F1",
+          "required_hypotheses": "[F1] [[thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases]]:\nfor a simple top eigenvalue, $\\theta_m$ is the maximum Rayleigh quotient on\n$K_m(A,b)$ and the stated Chebyshev error bound includes\n$\\tau^2=\\|(I-P)b\\|_2^2/\\|Pb\\|_2^2$."
+        },
+        {
+          "supplier": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "status": "published-body-inspected",
+          "source_section": "Statement",
+          "excerpt": "1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.",
+          "use": "Used in proof step(s) 1.2.",
+          "fact": "F2",
+          "required_hypotheses": "[F2] [[thm-cauchy-schwarz-and-the-euclidean-norm]]: for real vectors,\n$|u^{\\mathsf T}v|\\le\\|u\\|_2\\|v\\|_2$."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "unit-start",
+          "calculation": "1/10000+2(9999/20000)=1.",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "plane-angle-bound",
+          "calculation": "(v_2^2+v_3^2)/v_1^2=290/9999, so |x_1|^2<=290/10289 and theta_2<9/4.",
+          "evidence": "Step 1.2."
+        },
+        {
+          "case": "chebyshev-angle-factor",
+          "calculation": "tau^2=9999, xi=17 and T_1(17)=17; without tau the proposed RHS 9/289 is less than the proved gap 31/4.",
+          "evidence": "Step 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read all three verification steps and both actual suppliers. Unit norm and independence checked. The explicit vector v is orthogonal to b and Ab; Cauchy\u2013Schwarz gives x1\u00b2<=290/10289, so quotient<=2+2320/10289<9/4. tau\u00b2=9999, separated interval [1,2], exterior point 17 and T1(17)=17 satisfy repaired theorem branch 2. Dropping tau\u00b2 gives 9/289<31/4 and is genuinely refuted. Heading defect corrected; no claim that the loose full bound is sharp. No remaining defect."
+      },
+      "repair_confidence": 1
+    },
+    "ex-lanczos-repeated-top-zero-component-and-invariant-breakdown": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{n\\times n}$, $n\\ge1$, be symmetric with ordered eigenvalues\n$\\lambda_1\\ge\\cdots\\ge\\lambda_n$. Let $r$ be the multiplicity of $\\lambda_1$.\nIf $r<n$, assume $\\lambda_1>\\lambda_{r+1}$, and let $P$ be the orthogonal\nprojection onto the $\\lambda_1$-eigenspace. Let $b\\in\\mathbb R^n$ be a unit\nvector and, for $m\\ge1$, define\n\n$$K_m:=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\},\\qquad \\theta_m:=\\max_{0\\ne x\\in K_m}\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x}.$$\n\nThus $\\theta_m$ is the largest Rayleigh\u2013Ritz value on $K_m$; if Lanczos runs\nthrough step $m$ without breakdown, it is the largest Ritz value of\n$Q_m^{\\mathsf T}AQ_m$. If $r=n$, then $A=\\lambda_1I$ and $\\theta_m=\\lambda_1$\nfor every $m\\ge1$. Suppose $r<n$.\n\n1. If $Pb=0$, then $\\theta_m\\le\\lambda_{r+1}$ for every $m$; no convergence\n   to $\\lambda_1$ is asserted.\n\n2. If $Pb\\ne0$, put\n   $$\\tau:=\\frac{\\|(I-P)b\\|_2}{\\|Pb\\|_2}.$$\n   If $\\lambda_{r+1}>\\lambda_n$, then for every $m\\ge1$,\n   $$0\\le\\lambda_1-\\theta_m\\le \\frac{(\\lambda_1-\\lambda_n)\\tau^2} {T_{m-1}\\!\\left(1+2\\frac{\\lambda_1-\\lambda_{r+1}} {\\lambda_{r+1}-\\lambda_n}\\right)^2}.$$\n   For a simple top eigenvalue ($r=1$), $\\tau$ is the tangent of the angle\n   between $b$ and a unit top eigenvector, so the starting-angle denominator\n   is explicit.\n\n3. If $\\lambda_{r+1}=\\lambda_n$, then\n   $$\\lambda_1-\\theta_1=(\\lambda_1-\\lambda_n) \\frac{\\|(I-P)b\\|_2^2}{\\|b\\|_2^2},\\qquad \\theta_m=\\lambda_1\\quad(m\\ge2).$$\n\nWhen $r<n$, $Pb\\ne0$, and exact Lanczos breakdown occurs at dimension $d$, then\n$\\theta_d=\\lambda_1$ and $K_m=K_d$ for all $m\\ge d$. These are exact-arithmetic\nclaims; they give no finite-precision grade-termination guarantee.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a square matrix over $\\mathbb R$ or $\\mathbb C$ and let $b$ be a\nvector of matching size. Define\n\n$$K_0(A,b):=\\{0\\},$$\n\nand for $m\\ge 1$ define the $m$th **Krylov subspace**\n\n$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$\n\nThus $K_m(A,b)\\subseteq K_{m+1}(A,b)$ for every $m\\ge 0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-arnoldi-process",
+          "source_section": "Definition",
+          "quote": "Let $A$ act on a real or complex inner-product space, and let $b\\ne0$. The\n**Arnoldi process** starts with\n\n$$v_1:=\\frac{b}{\\|b\\|}.$$\n\nGiven orthonormal vectors $v_1,\\dots,v_j$, define\n\n$$h_{ij}:=\\langle Av_j,v_i\\rangle \\qquad(1\\le i\\le j),$$\n\nand the orthogonalized residual\n\n$$w_j:=Av_j-\\sum_{i=1}^j h_{ij}v_i.$$\n\nSet\n\n$$h_{j+1,j}:=\\|w_j\\|.$$\n\nIf $h_{j+1,j}\\ne0$, define\n\n$$v_{j+1}:=\\frac{w_j}{h_{j+1,j}}.$$\n\nThe process is said to **break down exactly** at step $j$ when\n$h_{j+1,j}=0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-lanczos-process-as-hermitian-arnoldi",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian and let $q_1=b/\\|b\\|_2$ for a nonzero start vector $b$.\nRunning Arnoldi on $(A,b)$ is called the **Lanczos process** when one records\nthe coefficients, at every step before Arnoldi breakdown, in the three-term\nform\n\n$$Aq_j=\\beta_{j-1}q_{j-1}+\\alpha_jq_j+\\beta_jq_{j+1}\\qquad (j\\ge1,\\ q_0:=0,\\ \\beta_0:=0),$$\n\nwith $\\alpha_j\\in\\mathbb R$ and the phase of $q_{j+1}$ chosen so that\n$\\beta_j\\ge0$ is real. In matrix form this is the Hermitian specialization of\n[[def-arnoldi-process]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "1.1 In case (i), take $b=1$. Then $P=I$, $Pb=b\\ne0$, and $K_1=\\mathbb R$ is invariant under $A=5I_1$. The first Arnoldi residual is zero, so Lanczos breaks down at $d=1$; every nonzero vector has Rayleigh quotient $5$, giving $\\theta_m=5$ for all $m\\ge1$ by [F1]. In case (ii), $P$ projects onto $\\operatorname{span}\\{e_1,e_2\\}$, so $Pb=e_1/\\sqrt2\\ne0$. Here $Ab=(5,0,1)^{\\mathsf T}/\\sqrt2$ and $Ab-b=(4,0,0)^{\\mathsf T}/\\sqrt2$, so $K_2(A,b)=\\operatorname{span}\\{e_1,e_3\\}$, an invariant subspace. The first Arnoldi residual is nonzero, while $Aq_2\\in K_2=\\operatorname{span}\\{q_1,q_2\\}$ makes the second residual zero; hence Lanczos breaks down at $d=2$. Since $e_1\\in K_2$ has Rayleigh quotient $5$, the maximum is $\\theta_2=5$, as [F1] predicts for the collapsed interval branch.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "In case (iii), $P$ projects onto $e_1$, so $Pb=0$; $A e_2=2e_2$ gives $K_m(A,e_2)=\\operatorname{span}\\{e_2\\}$ for every $m$, and therefore $\\theta_m=2=\\lambda_{r+1}$, in agreement with [F1]. At the first Arnoldi column, $Ae_2$ already lies in $K_1=\\operatorname{span}\\{e_2\\}$, so subtracting its projection leaves zero residual. Thus [F3]\u2013[F4] give exact Lanczos breakdown at $d=1$ without a top component.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "In case (iv), $b$ and $Ab=(5e_1+2e_2)/\\sqrt2$ are independent, so $K_2=\\operatorname{span}\\{e_1,e_2\\}$; this space is invariant under $A$. At the second Arnoldi column, $Aq_2\\in K_2=\\operatorname{span}\\{q_1,q_2\\}$, so subtracting its two orthogonal projections leaves zero residual. Thus [F3]\u2013[F4] give exact Lanczos breakdown at $d=2$. Since $Pb=e_1/\\sqrt2\\ne0$, [F1] gives $\\theta_2=5$; directly, $Ab-2b=3e_1/\\sqrt2\\in K_2$, so $e_1\\in K_2$ and its Rayleigh quotient is $5$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "empty case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 cover scalar, repeated-top, absent-top, and invariant-breakdown cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks lambda_{r+1}=lambda_n in the repeated-top case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+          "status": "authored-local-supplier",
+          "source_section": "Statement",
+          "excerpt": "Let $A\\in\\mathbb R^{n\\times n}$ be symmetric with ordered eigenvalues\n$\\lambda_1\\ge\\cdots\\ge\\lambda_n$. Let $r$ be the multiplicity of $\\lambda_1$.\nIf $r<n$, assume $\\lambda_1>\\lambda_{r+1}$, and let $P$ be the orthogonal\nprojection onto the $\\lambda_1$-eigenspace. Let $b\\in\\mathbb R^n$ be a unit\nvector and, for $m\\ge1$, define\n\n$$K_m:=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\},\\qquad \\theta_m:=\\max_{0\\ne x\\in K_m}\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x}.$$\n\nThus $\\theta_m$ is the largest Rayleigh\u2013Ritz value on $K_m$; if Lanczos runs\nthrough step $m$ without breakdown, it is the largest Ritz value of\n$Q_m^{\\mathsf T}AQ_m$. If $r=n$, then $A=\\lambda_1I$ and $\\theta_m=\\lambda_1$\nfor every $m\\ge1$. Suppose $r<n$.\n\n1. If $Pb=0$, then $\\theta_m\\le\\lambda_{r+1}$ for every $m$; no convergence\n   to $\\lambda_1$ is asserted.\n\n2. If $Pb\\ne0$, put\n   $$\\tau:=\\frac{\\|(I-P)b\\|_2}{\\|Pb\\|_2}.$$\n   If $\\lambda_{r+1}>\\lambda_n$, then for every $m\\ge1$,\n   $$0\\le\\lambda_1-\\theta_m\\le \\frac{(\\lambda_1-\\lambda_n)\\tau^2} {T_{m-1}\\!\\left(1+2\\frac{\\lambda_1-\\lambda_{r+1}} {\\lambda_{r+1}-\\lambda_n}\\right)^2}.$$\n   For a simple top eigenvalue ($r=1$), $\\tau$ is the tangent of the angle\n   between $b$ and a unit top eigenvector, so the starting-angle denominator\n   is explicit.\n\n3. If $\\lambda_{r+1}=\\lambda_n$, then\n   $$\\lambda_1-\\theta_1=(\\lambda_1-\\lambda_n) \\frac{\\|(I-P)b\\|_2^2}{\\|b\\|_2^2},\\qquad \\theta_m=\\lambda_1\\quad(m\\ge2).$$\n\nWhen $r<n$, $Pb\\ne0$, and exact Lanczos breakdown occurs at dimension $d$, then\n$\\theta_d=\\lambda_1$ and $K_m=K_d$ for all $m\\ge d$. These are exact-arithmetic\nclaims; they give no finite-precision grade-termination guarantee.",
+          "use": "Used in proof step(s) 1.1, 1.2, 2.1.",
+          "fact": "F1",
+          "required_hypotheses": "[F1] [[thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases]]:\nif the top eigenvalue has multiplicity $r=n$, every Rayleigh\u2013Ritz value is\n$\\lambda_1$; if $Pb=0$, every $\\theta_m\\le\\lambda_{r+1}$; if the unwanted\ninterval collapses and $Pb\\ne0$, then $\\theta_m=\\lambda_1$ for $m\\ge2$; and\nexact breakdown at dimension $d$ with $Pb\\ne0$ gives $\\theta_d=\\lambda_1$."
+        },
+        {
+          "supplier": "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$",
+          "use": "Used in proof step(s) 1.1, 1.2, 2.1.",
+          "fact": "F2",
+          "required_hypotheses": "[F2] [[def-krylov-subspace-of-a-matrix-and-start-vector]]:\n$K_m(A,b)=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\}$."
+        },
+        {
+          "supplier": "def-arnoldi-process",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$w_j:=Av_j-\\sum_{i=1}^j h_{ij}v_i.$$",
+          "use": "Used in proof step(s) 1.2, 2.1.",
+          "fact": "F3",
+          "required_hypotheses": "[F3] [[def-arnoldi-process]]: exact breakdown at a column means its\northogonalized residual is zero."
+        },
+        {
+          "supplier": "def-lanczos-process-as-hermitian-arnoldi",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$Aq_j=\\beta_{j-1}q_{j-1}+\\alpha_jq_j+\\beta_jq_{j+1}\\qquad (j\\ge1,\\ q_0:=0,\\ \\beta_0:=0),$$",
+          "use": "Used in proof step(s) 1.2, 2.1.",
+          "fact": "F4",
+          "required_hypotheses": "[F4] [[def-lanczos-process-as-hermitian-arnoldi]]: for a real symmetric\nmatrix, exact Lanczos is the corresponding exact Arnoldi process specialized\nto the Hermitian three-term recurrence."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "dimension-one",
+          "calculation": "A=[5], b=1; P=I, K_1=R is invariant, breakdown is at d=1, and every Rayleigh quotient is 5.",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "repeated-top-collapsed-interval",
+          "calculation": "For diag(5,5,1), b=(1,0,1)/sqrt(2), Pb=e_1/sqrt(2), and K_2=span{e_1,e_3} is invariant; breakdown is at d=2 and theta_2=5.",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "zero-top-component",
+          "calculation": "A e_2=2e_2, so K_m=span{e_2}, theta_m=2, and breakdown is at d=1.",
+          "evidence": "Step 1.2."
+        },
+        {
+          "case": "top-containing-invariant-breakdown",
+          "calculation": "K_2=span{e_1,e_2} is invariant and contains e_1; breakdown is at d=2 and theta_2=5.",
+          "evidence": "Step 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read all three verification steps and all four actual suppliers after theorem branch repair. Scalar b=1 spans R and breaks at d=1; repeated top case has Pb=e1/sqrt(2), K2=span(e1,e3) and d=2, satisfying repaired collapsed branch. Zero top case b=e2 gives theta_m=2 and d=1 without top recovery. Top-containing case has K2=span(e1,e2), Pb!=0 and d=2. Residual nonzero at first column in both two-dimensional cases follows from independence. Reader explicit-start and breakdown repair accepted; headings corrected. No remaining defect."
+      },
+      "repair_confidence": 1
+    }
+  }
+}

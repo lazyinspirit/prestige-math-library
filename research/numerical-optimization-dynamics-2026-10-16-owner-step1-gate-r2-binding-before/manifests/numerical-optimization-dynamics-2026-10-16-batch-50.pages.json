@@ -1,0 +1,157 @@
+[
+  {
+    "order": 2384,
+    "id": "preconditioner-algorithms-and-residual-metrics",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Preconditioner algorithms and residual metrics",
+    "companion": "preconditioner-algorithms-and-residual-metrics-examples",
+    "requires": [
+      "conjugate-gradients-minres-and-preconditioning",
+      "sparse-matrix-models-and-kernel-costs",
+      "stationary-iterations-and-relaxation",
+      "krylov-methods-and-lanczos-convergence"
+    ],
+    "items": [
+      {
+        "id": "alg-ilu0-fixed-pattern-factorization",
+        "kind": "algorithm",
+        "title": "Fixed-pattern ILU(0) factorization and application",
+        "statement": "Define a fixed-order, exact-field ILU(0) procedure on a canonical sorted CSR matrix. It checks missing diagonals and zero pivots, updates only positions retained in the input pattern, returns the unit-lower and upper factors on success, and applies them by forward and backward substitution.",
+        "strategy": "Specify the input domain, structural pattern, validation and pivot branches, exact nested recurrence, returned factor slots, and triangular-solve application. Make no convergence or accuracy claim.",
+        "deps": [
+          "def-field",
+          "def-csr-matrix-with-stored-entry-semantics",
+          "def-forward-and-back-substitution-for-triangular-systems"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-ilu0-factor-pattern-and-work-counts",
+        "kind": "theorem",
+        "title": "ILU(0) factor slots, setup work, and application work",
+        "statement": "Prove finite termination with a status; on success, the stored strict-lower and upper factor slots stay within the input pattern, the factor storage uses exactly the input's canonical stored-entry count, setup arithmetic is counted by actual pattern intersections, and applying the factors uses two triangular solves with an exact sparse-entry operation count. The claim concerns the factor slots, not the product LU.",
+        "strategy": "Induct through the declared row-wise updates to establish the retained factor slots; count each pivot division and each matching pattern-intersection update; then derive the two triangular-solve counts from their coordinate recurrences.",
+        "deps": [
+          "alg-ilu0-fixed-pattern-factorization",
+          "def-field",
+          "def-csr-matrix-with-stored-entry-semantics",
+          "def-forward-and-back-substitution-for-triangular-systems",
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-flexible-gmres-variable-right-preconditioning",
+        "kind": "algorithm",
+        "title": "Flexible GMRES with variable right preconditioning",
+        "statement": "Define a bounded exact-arithmetic flexible GMRES run for a finite-dimensional complex system, with a possibly changing right-preconditioning action at every step, a modified Gram–Schmidt Arnoldi relation, a small least-squares minimization, and explicit zero-residual, breakdown, and budget-exhaustion branches.",
+        "strategy": "Specify the input data, per-step preconditioner interface, orthogonalization recurrence, stored preconditioned vectors, minimizer selection, statuses, and finite budget. State no convergence guarantee.",
+        "deps": [
+          "def-natural-numbers",
+          "def-complex-numbers-and-arithmetic",
+          "thm-complex-numbers-form-a-field",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-function-space",
+          "prop-standard-coordinate-inner-products",
+          "def-inner-product-norm",
+          "lem-standard-basis-of-f-n",
+          "thm-least-squares-solutions-and-normal-equation"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+        "kind": "theorem",
+        "title": "Flexible GMRES minimizes over the actual preconditioned-vector span",
+        "statement": "For every nonbreakdown m-step run of the variable-right-preconditioned flexible GMRES algorithm, the Arnoldi relation identifies each true residual with its small least-squares residual; any small least-squares minimizer produces a true-residual minimizer over x0 + span{z1,…,zm}, without a fixed-preconditioner spectral or convergence claim.",
+        "strategy": "Prove orthonormality and the columnwise Arnoldi relation by induction from modified Gram–Schmidt, assemble AZm=V_{m+1} Hbar_m, establish the norm identity, and transfer least-squares minimizers to the actual affine span.",
+        "deps": [
+          "alg-flexible-gmres-variable-right-preconditioning",
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "thm-complex-numbers-form-a-field",
+          "prop-standard-coordinate-inner-products",
+          "def-inner-product-norm",
+          "def-matrix-product-and-identity-matrix",
+          "lem-standard-basis-of-f-n",
+          "thm-least-squares-solutions-and-normal-equation"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      }
+    ]
+  },
+  {
+    "order": 2385,
+    "id": "preconditioner-algorithms-and-residual-metrics-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Preconditioner algorithms and residual metrics — Examples",
+    "companion": "preconditioner-algorithms-and-residual-metrics",
+    "requires": [
+      "preconditioner-algorithms-and-residual-metrics"
+    ],
+    "items": [
+      {
+        "id": "ex-left-preconditioned-residual-can-understate-physical-residual",
+        "kind": "example",
+        "title": "A small left-preconditioned residual can hide a large physical residual",
+        "statement": "For any ordered field F and 0<epsilon<1, the scalar system A=[1], M=[epsilon^-1], b=[1], x=0 has physical residual absolute value 1 and left-preconditioned residual absolute value epsilon.",
+        "strategy": "Apply the exact left-residual map and the ordered-field absolute-value definition to the specified scalar residuals.",
+        "deps": [
+          "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+          "def-field",
+          "def-ordered-field",
+          "def-abs-value"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-ilu0-tridiagonal-factorization",
+        "kind": "example",
+        "title": "ILU(0) factors of a three-row tridiagonal matrix",
+        "statement": "For A=[[4,-1,0],[-1,4,-1],[0,-1,4]] in the fixed natural order, the fixed-pattern ILU(0) procedure returns the displayed exact unit-lower and upper factors, whose product is A.",
+        "strategy": "Run the specified recurrence row by row and multiply the resulting triangular factors exactly.",
+        "deps": [
+          "alg-ilu0-fixed-pattern-factorization",
+          "def-csr-matrix-with-stored-entry-semantics",
+          "def-matrix-product-and-identity-matrix",
+          "thm-rat-field"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-ilu0-product-can-create-fill-outside-input-pattern",
+        "kind": "counterexample",
+        "title": "The product of ILU(0) factors can contain a fill position",
+        "statement": "The fixed-pattern ILU(0) factor slots do not imply that every nonzero of LU lies in the input matrix pattern.",
+        "strategy": "Apply the exact three-row recurrence and exhibit one nonzero product entry at an input zero position.",
+        "deps": [
+          "alg-ilu0-fixed-pattern-factorization",
+          "def-csr-matrix-with-stored-entry-semantics",
+          "def-matrix-product-and-identity-matrix",
+          "thm-rat-field"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

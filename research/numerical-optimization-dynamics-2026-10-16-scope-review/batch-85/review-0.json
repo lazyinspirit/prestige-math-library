@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "85",
+  "round": 0,
+  "reviewed_items": [
+    "def-sqp-linearized-quadratic-subproblem",
+    "def-sqp-augmented-lagrangian-equality-and-inequality",
+    "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+    "def-sqp-l1-exact-penalty-merit",
+    "alg-sqp-augmented-lagrangian-multiplier-method",
+    "lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate",
+    "alg-sqp-exhaustive-active-set-qp-solve",
+    "alg-sqp-feasible-working-set-qp-solve",
+    "alg-sqp-second-order-correction",
+    "alg-sqp-exact-hessian-newton-step",
+    "alg-sqp-reduced-bfgs-kkt-step",
+    "alg-sqp-merit-globalization-with-finite-budgets",
+    "thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+    "thm-sqp-working-set-qp-terminates-under-nondegeneracy-anticycling",
+    "thm-sqp-second-order-correction-residual-order",
+    "thm-sqp-exact-hessian-local-quadratic-convergence",
+    "thm-sqp-reduced-bfgs-superlinear-under-dm",
+    "thm-sqp-augmented-lagrangian-local-convergence",
+    "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+    "thm-sqp-merit-globalization-finite-budget-status",
+    "thm-sqp-finite-precision-kkt-residual-certificate-sound",
+    "ex-sqp-engineering-design-active-inequality",
+    "ex-sqp-maratos-effect-and-second-order-correction",
+    "ex-sqp-augmented-lagrangian-penalty-conditioning"
+  ],
+  "reviewed_pages": [
+    "sqp-active-set-and-augmented-lagrangian-methods",
+    "sqp-active-set-and-augmented-lagrangian-methods-examples"
+  ],
+  "decision": "repair",
+  "reason": "Reviewed the complete assigned inventory, approved OPT6 contract, current supplier claims and proofs, and page interfaces. Three defects can be addressed locally on the A page: the globalization SOC call is underspecified, its accepted outputs and domain-exit status omit approved scope, and the augmented-Lagrangian method has no finite inner budget.",
+  "findings": [
+    {
+      "id": "alg-sqp-merit-globalization-with-finite-budgets",
+      "type": "local",
+      "reason": "The SOC call does not specify which constraint map c_A to correct or supply it. The exact QP solver returns J but this algorithm discards it and does not identify the retained independent equality rows. It also calls SOC without ensuring x+p is in U, a stated SOC precondition. Retain J and the deterministic independent equality basis, pass c_A=(h_E,g_J), and skip SOC when x+p is outside U."
+    },
+    {
+      "id": "alg-sqp-merit-globalization-with-finite-budgets",
+      "type": "scope",
+      "reason": "The approved OPT6 contract requires accepted steps to take the QP multipliers and treats domain exit separately. Both accepted branches currently return only a point or fraction, and if all ordinary trials are outside U they are folded into line-search-budget-exhausted. Return the QP multiplier data on acceptance and add a distinct domain-exit status when no trial can be evaluated in-domain."
+    },
+    {
+      "id": "alg-sqp-augmented-lagrangian-multiplier-method",
+      "type": "scope",
+      "reason": "The approved OPT6 contract requires finite inner and outer budgets. This method caps only outer iterations; its inner oracle has no stated cap or finite-call condition, although the proof asserts each call is finite. Specify a finite inner budget and an explicit exhaustion result carrying the reported residual or failure data."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-sqp-merit-globalization-finite-budget-status",
+      "decision": "repair",
+      "reason": "Update the finite-status proof to include the distinct domain-exit branch."
+    },
+    {
+      "id": "ex-sqp-maratos-effect-and-second-order-correction",
+      "decision": "accept",
+      "reason": "The example uses U=R² and a single full-rank equality row; its SOC candidate and merit calculation are unchanged."
+    },
+    {
+      "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "decision": "accept",
+      "reason": "The wrapper returns any failure status and uses the accepted point; the proposed changes preserve that interface and add no convergence claim."
+    },
+    {
+      "id": "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+      "decision": "accept",
+      "reason": "Its local convergence claim uses the exact-Hessian branch and already allows the finite dispatcher to stop early."
+    },
+    {
+      "id": "thm-sqp-augmented-lagrangian-local-convergence",
+      "decision": "accept",
+      "reason": "The theorem concerns successful inner points and the repeated multiplier update; a finite inner-failure or budget-exhaustion branch does not alter that conditional claim."
+    },
+    {
+      "id": "ex-sqp-augmented-lagrangian-penalty-conditioning",
+      "decision": "accept",
+      "reason": "The example assumes an exact inner minimizer; the added finite-budget failure branch does not change its successful exact-solve calculation."
+    },
+    {
+      "id": "sqp-active-set-and-augmented-lagrangian-methods",
+      "decision": "accept",
+      "reason": "The page summary remains sound with the specified SOC call, multiplier output, domain status, and inner budget."
+    },
+    {
+      "id": "sqp-active-set-and-augmented-lagrangian-methods-examples",
+      "decision": "accept",
+      "reason": "The example-page calculations and conclusions are unchanged by these procedure-interface repairs."
+    },
+    {
+      "id": "direct-transcription-and-numerical-ode-optimal-control",
+      "decision": "accept",
+      "reason": "Its dispatcher summary remains accurate; it claims explicit finite statuses and no global SQP convergence."
+    }
+  ]
+}

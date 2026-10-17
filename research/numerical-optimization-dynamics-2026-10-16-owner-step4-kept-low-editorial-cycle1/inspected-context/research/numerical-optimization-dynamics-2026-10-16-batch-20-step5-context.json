@@ -1,0 +1,345 @@
+{
+  "group": "p",
+  "batches": [
+    "20"
+  ],
+  "pages_read": [
+    "composite-quadrature-rules",
+    "composite-quadrature-rules-examples"
+  ],
+  "items_read": [
+    "alg-composite-midpoint-rule",
+    "alg-composite-simpson-rule",
+    "lem-composite-midpoint-panel-error-kernel",
+    "thm-composite-midpoint-error-bound",
+    "lem-simpson-panel-peano-kernel",
+    "thm-composite-simpson-exact-through-degree-three",
+    "thm-composite-simpson-error-bound",
+    "ex-convex-composite-midpoint-and-trapezoid-bracketing",
+    "ex-quadratic-exact-for-composite-simpson",
+    "ex-cubic-exact-for-composite-simpson"
+  ],
+  "conventions": [
+    {
+      "convention": "Midpoint uses strictly increasing endpoints, integer n ≥ 1, h=(b-a)/n, and indices 0 ≤ j < n. Invalid endpoints or panel counts return invalid-grid.",
+      "fixed_by": "alg-composite-midpoint-rule",
+      "matters_for": [
+        "thm-composite-midpoint-error-bound",
+        "ex-convex-composite-midpoint-and-trapezoid-bracketing"
+      ]
+    },
+    {
+      "convention": "Simpson n counts subintervals, must be even and at least two, and produces n/2 two-subinterval blocks. A block of total length L has coefficient L/6.",
+      "fixed_by": "alg-composite-simpson-rule",
+      "matters_for": [
+        "lem-simpson-panel-peano-kernel",
+        "thm-composite-simpson-exact-through-degree-three",
+        "thm-composite-simpson-error-bound",
+        "ex-quadratic-exact-for-composite-simpson",
+        "ex-cubic-exact-for-composite-simpson"
+      ]
+    },
+    {
+      "convention": "The quadrature procedures use exact-real arithmetic; their derivative-norm error bounds exclude evaluation and summation roundoff.",
+      "fixed_by": "alg-composite-simpson-rule",
+      "matters_for": [
+        "thm-composite-midpoint-error-bound",
+        "thm-composite-simpson-error-bound",
+        "ex-quadratic-exact-for-composite-simpson",
+        "ex-cubic-exact-for-composite-simpson"
+      ]
+    },
+    {
+      "convention": "Both panel error identities use integral minus quadrature. The midpoint kernel is nonnegative; the Simpson kernel is nonpositive.",
+      "fixed_by": "lem-simpson-panel-peano-kernel",
+      "matters_for": [
+        "thm-composite-simpson-exact-through-degree-three",
+        "thm-composite-simpson-error-bound"
+      ]
+    },
+    {
+      "convention": "C^k on a closed interval requires continuous derivatives through order k, with endpoint derivatives interpreted one-sidedly.",
+      "fixed_by": "def-higher-derivatives-and-smoothness",
+      "matters_for": [
+        "lem-composite-midpoint-panel-error-kernel",
+        "thm-composite-midpoint-error-bound",
+        "lem-simpson-panel-peano-kernel",
+        "thm-composite-simpson-error-bound"
+      ]
+    },
+    {
+      "convention": "Convex bracketing explicitly assumes Darboux integrability and requires no differentiability.",
+      "fixed_by": "ex-convex-composite-midpoint-and-trapezoid-bracketing",
+      "matters_for": [
+        "ex-convex-composite-midpoint-and-trapezoid-bracketing"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-simpson-panel-peano-kernel",
+      "statement": "For a<b, L=b-a, m=(a+b)/2 and f∈C^4([a,b]), S=L(f(a)+4f(m)+f(b))/6 satisfies ∫f−S=∫K f⁽⁴⁾. Here K(x)=(x-a)^3(3(x-a)-2L)/72 on [a,m] and K(x)=(b-x)^3(3(b-x)-2L)/72 on [m,b]; K≤0 and ∫|K|=L^5/2880.",
+      "used_by": [
+        "thm-composite-simpson-exact-through-degree-three",
+        "thm-composite-simpson-error-bound",
+        "lem-composite-simpson-asymptotic-error-expansion"
+      ]
+    },
+    {
+      "id": "thm-composite-simpson-error-bound",
+      "statement": "Let a<b, let n≥2 be an even integer, and put h=(b-a)/n. If f∈C^4([a,b]), set M₄=max|f⁽⁴⁾| on [a,b]. Then |∫f−Q_S(f;a,b,n)|≤(b-a)h^4 M₄/180.",
+      "used_by": [
+        "alg-certified-adaptive-simpson",
+        "thm-certified-adaptive-simpson-enclosure",
+        "lem-smolyak-mixed-simpson-detail-decay",
+        "thm-tensor-simpson-force-error",
+        "thm-composite-simpson-error-for-chebyshev-weighted-mass-matrix"
+      ]
+    },
+    {
+      "id": "alg-composite-simpson-rule",
+      "statement": "For a<b, an even integer n≥2, and an everywhere-evaluable real-valued f on [a,b], put h=(b-a)/n and x_j=a+jh; return Q_S=(h/3)Σ_{j<n/2}(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})). Invalid endpoints or n<2 return invalid-grid; remaining odd n returns invalid-Simpson-panel-count.",
+      "used_by": [
+        "lem-simpson-panel-peano-kernel",
+        "thm-composite-simpson-exact-through-degree-three",
+        "thm-composite-simpson-error-bound",
+        "def-adaptive-simpson-refinement-indicator",
+        "def-smolyak-univariate-level-hierarchy",
+        "alg-tensor-simpson-force-evaluator",
+        "alg-chebyshev-composite-simpson-weighted-mass-matrix"
+      ]
+    },
+    {
+      "id": "lem-composite-midpoint-panel-error-kernel",
+      "statement": "For a<b, m=(a+b)/2 and f∈C^2([a,b]), K(t)=(t-a)^2/2 on [a,m] and K(t)=(b-t)^2/2 on [m,b] is continuous and nonnegative. Then ∫f−(b-a)f(m)=∫Kf'', with absolute error at most (b-a)^3 max|f''|/24; if f''≥0, the midpoint value does not exceed the integral.",
+      "used_by": [
+        "thm-composite-midpoint-error-bound"
+      ]
+    },
+    {
+      "id": "thm-composite-midpoint-error-bound",
+      "statement": "Let a<b, let n≥1 be an integer, and put h=(b-a)/n. If f∈C^2([a,b]), define M₂=max|f''| on [a,b]. Then |∫f−Q_M(f;a,b,n)|≤(b-a)h²M₂/24.",
+      "used_by": [
+        "thm-age-structured-renewal-smooth-first-order-convergence",
+        "lem-midpoint-quadrature-defect-for-p1-stiffness"
+      ]
+    },
+    {
+      "id": "alg-composite-midpoint-rule",
+      "statement": "For a<b, an integer n≥1, and an everywhere-evaluable real-valued f on [a,b], put h=(b-a)/n and m_j=a+(j+1/2)h for 0≤j<n; return Q_M=hΣ_{j<n}f(m_j). If a≥b or n<1, return invalid-grid without evaluating f.",
+      "used_by": [
+        "thm-composite-midpoint-error-bound",
+        "ex-convex-composite-midpoint-and-trapezoid-bracketing",
+        "alg-age-cohort-characteristic-quadrature",
+        "alg-age-structured-positive-birth-quadrature",
+        "alg-size-structured-finite-volume-flux-and-kernel-quadrature"
+      ]
+    },
+    {
+      "id": "thm-composite-simpson-exact-through-degree-three",
+      "statement": "Let a<b, let n≥2 be an even integer, and let p(x)=c₀+c₁x+c₂x²+c₃x³ with real coefficients. Then ∫_a^b p(x) dx=Q_S(p;a,b,n).",
+      "used_by": [
+        "ex-quadratic-exact-for-composite-simpson",
+        "ex-cubic-exact-for-composite-simpson",
+        "thm-smolyak-polynomial-multi-degree-exactness"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-finite-sum",
+      "used_for": "Zero-based finite sums, finite-list conventions and empty sums in the quadrature formulas.",
+      "opened": true
+    },
+    {
+      "id": "def-higher-derivatives-and-smoothness",
+      "used_for": "C² and C⁴ regularity, including one-sided endpoint derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-by-parts",
+      "used_for": "Two integrations by parts on each midpoint half-panel and four on each Simpson half-panel; derivative integrability hypotheses checked.",
+      "opened": true
+    },
+    {
+      "id": "thm-additivity-over-subintervals",
+      "used_for": "Combining half-panel identities, summing composite errors and restricting integrable functions to panels.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-integral",
+      "used_for": "Scalar integral bounds and the convex reflection argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "Kernel error bounds and convex bracketing on increasing intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+      "used_for": "Riemann integrability of continuous functions on nondegenerate intervals, using dimension one.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-r",
+      "used_for": "Compactness of the closed intervals supporting derivative maxima.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-r",
+      "used_for": "Attainment and finiteness of derivative absolute-value maxima on nonempty compact intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Integrating polynomial kernels and affine chords, and verifying the quadratic and cubic integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of polynomial pieces, products and absolute values.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Derivatives of shifted and reflected polynomial kernel expressions.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-of-a-power",
+      "used_for": "Kernel antiderivatives, polynomial exactness and explicit example integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Polynomial differentiation and antiderivative verification.",
+      "opened": true
+    },
+    {
+      "id": "lem-triangle-inequality-finite",
+      "used_for": "Summing absolute panel-error bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-composite-trapezoidal-rule",
+      "used_for": "The canonical trapezoid value and its endpoint half-weight convention in convex bracketing and page prose.",
+      "opened": true
+    },
+    {
+      "id": "thm-composite-trapezoidal-rule-error-bound",
+      "used_for": "Checking the canonical published C² trapezoid bound identified by the assigned A page.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-concave-and-midpoint-convex-functions",
+      "used_for": "Chord and midpoint inequalities in the convex bracketing example.",
+      "opened": true
+    },
+    {
+      "id": "def-darboux-integral",
+      "used_for": "The explicit integrability premise and reflection invariance via lower and upper integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-darboux-equals-riemann",
+      "used_for": "Identifying the Darboux integral in the convex example with the displayed Riemann integral.",
+      "opened": true
+    },
+    {
+      "id": "def-darboux-sums",
+      "used_for": "Equality of reflected lower and upper sums.",
+      "opened": true
+    },
+    {
+      "id": "def-partition-and-refinement",
+      "used_for": "Panel partitions and the reflection involution in the convex example.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-permutation-invariance",
+      "used_for": "Reversing the finite term lists of reflected Darboux sums.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "lem-composite-simpson-asymptotic-error-expansion",
+      "finding": "Fact F1 says the Simpson kernel has \"the two cubic pieces displayed in its Statement\" in lem-simpson-panel-peano-kernel. The cited pieces are (x-a)^3(3(x-a)-2L)/72 and its reflection, hence quartic polynomials with nonzero leading coefficient 1/24. The sign, mass and error identity are otherwise quoted correctly.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-adaptive-simpson-refinement-indicator",
+      "finding": "The Definition assumes only \"let f be real-valued at the nodes of the uniform grids with n and 2n subintervals\" and then defines both values \"using [[alg-composite-simpson-rule]]\". That supplier requires a real-valued function on all of [a,b] evaluable at every point. The sampled-data premise does not supply that input contract. The finite formulas are meaningful, but a total extension or an explicit formula-only interpretation is left unstated.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "item": "def-smolyak-univariate-level-hierarchy",
+      "finding": "The Definition begins \"Let Q:[0,1]→R be a finite quadrature functional\" and immediately writes Q(g)=Σ w_i g(x_i). A map with domain [0,1] takes scalar arguments, whereas this expression takes a function g as its argument. The declared domain is mistyped; the intended finite functional on functions is clear from the formula.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "composite-quadrature-rules",
+      "to": "polynomial-interpolation-and-remainder",
+      "faithful": true,
+      "note": "Contextual page prerequisite only. The assigned proofs use local integration-by-parts kernels, not an interpolation remainder or interpolation uniqueness theorem."
+    },
+    {
+      "from": "fractional-evolution-and-convolution-quadrature",
+      "to": "composite-quadrature-rules",
+      "faithful": true,
+      "note": "Page prose explicitly limits the supplier to smooth-integrand midpoint and Simpson rules. It does not claim a fractional-kernel theorem; local power-kernel integration and generating-function arguments supply those results."
+    },
+    {
+      "from": "renewal-age-and-size-structured-numerical-methods",
+      "to": "composite-quadrature-rules",
+      "faithful": true,
+      "note": "Midpoint calls use n=1 separately on positive-width cells, or positive integer subpanel counts. The smooth convergence proof applies the C² estimate to smooth fertility and reaction integrands with the correct 1/24 constant."
+    },
+    {
+      "from": "coagulation-fragmentation-and-sectional-population-balance-numerics",
+      "to": "composite-quadrature-rules",
+      "faithful": true,
+      "note": "Contextual prerequisite with no direct batch-20 item citation. The fixed-pivot quadrature estimate is derived locally from barycentric displacement and Lipschitz bounds; it does not import a C² midpoint bound for merely Lipschitz kernels."
+    },
+    {
+      "from": "clenshaw-curtis-and-extrapolation-quadrature",
+      "to": "composite-quadrature-rules",
+      "faithful": true,
+      "note": "Contextual prerequisite. Romberg directly uses the canonical published trapezoid definition; the page does not attribute its Euler–Maclaurin expansion or general Peano theorem to batch 20."
+    },
+    {
+      "from": "adaptive-quadrature-and-error-indicators",
+      "to": "composite-quadrature-rules",
+      "faithful": false,
+      "note": "Two limited mismatches are recorded in alerts: the asymptotic lemma calls quartic kernel pieces cubic, and the indicator definition supplies only nodal data to a supplier requiring an everywhere-evaluable function. The kernel sign and mass, C⁴ restriction, even panel counts, and certified one-block constant L^5/2880 are otherwise faithful."
+    },
+    {
+      "from": "sparse-grid-cubature-and-mixed-regularity",
+      "to": "composite-quadrature-rules",
+      "faithful": true,
+      "note": "Levels use even panel counts 2^(ℓ+1)≥2. Simpson weights, degree-three exactness and the unit-interval bound 1/(180N^4) are quoted correctly. The hierarchy's separate functional-domain typo is recorded in alerts."
+    },
+    {
+      "from": "interacting-particle-mean-field-and-vortex-blob-error",
+      "to": "composite-quadrature-rules",
+      "faithful": true,
+      "note": "The tensor evaluator supplies everywhere-evaluable interpolants and valid even grids. Its error proof applies the scalar C⁴ estimate componentwise and retains the interval-length factors and separate vector norm factor."
+    },
+    {
+      "from": "variational-crimes-and-strang-lemmas",
+      "to": "composite-quadrature-rules",
+      "faithful": true,
+      "note": "The P1 stiffness argument applies midpoint with n=1 independently on each positive-width cell. The integrand is C² there; the h_K^3/24 bound is correct. Continuity and positive interval measure justify replacing the ordinary maximum by the essential supremum."
+    },
+    {
+      "from": "spectral-collocation-and-galerkin-methods",
+      "to": "composite-quadrature-rules",
+      "faithful": true,
+      "note": "Mass assembly uses [0,π] with even M≥2. The proof establishes C⁴ regularity of the transformed trigonometric integrand before using πh^4 max|g⁽⁴⁾|/180, including the zero-degree case."
+    }
+  ]
+}

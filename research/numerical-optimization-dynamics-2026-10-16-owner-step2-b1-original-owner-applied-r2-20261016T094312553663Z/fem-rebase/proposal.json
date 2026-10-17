@@ -1,0 +1,22 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "path": "items/alg-fem-control-active-set-sqp-with-finite-residual-status.md",
+  "canonical_applied": false,
+  "requires_root_approval": true,
+  "basis": "Actual current101 source; not the zero-match obsolete snippet",
+  "proposed_edits": [
+    {
+      "path": "items/alg-fem-control-active-set-sqp-with-finite-residual-status.md",
+      "exact_current_excerpt": "residual tolerance $\\tau\\ge0$, and the floating-point hypotheses of",
+      "replacement": "residual tolerance $\\tau\\ge0$, a terminating exact-storage routine satisfying the input contract of [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]], and the floating-point hypotheses of",
+      "mathematical_justification": "The wrapper must explicitly receive the new terminating storage-admission input; no exact-real representation decision is inferred."
+    },
+    {
+      "path": "items/alg-fem-control-active-set-sqp-with-finite-residual-status.md",
+      "exact_current_excerpt": "2. Use the active KKT-map/Jacobian convention and rank/reduced-curvature applicability conditions of [[alg-sqp-exact-hessian-newton-step]]. Do not invoke its exact linear solve. Set $b_j=-F_{A_j}(z_j)$ and run the finite-precision QR algorithm of [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]] exactly once on $K_js=b_j$. A failed applicability check or QR solve records `numerical-failure`, sets $z_{j+1}=z_j$, and proceeds.",
+      "replacement": "2. Use the active KKT-map/Jacobian convention and rank/reduced-curvature applicability conditions of [[alg-sqp-exact-hessian-newton-step]]. Do not invoke its exact linear solve. Set $b_j=-F_{A_j}(z_j)$ and call [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]] exactly once on the intended system $K_js=b_j$, supplying the terminating exact-storage routine. Before numerical factorization or residual evaluation, that call must verify stored entries equal to the intended $K_j,b_j$; unavailable or unverified admission is a failed QR solve with no residual certificate. A failed applicability check or QR solve records `numerical-failure`, sets $z_{j+1}=z_j$, and proceeds.",
+      "mathematical_justification": "Preserves the current101 applicability-only exact-Hessian use, exactly one finite QR invocation, its sole step vector and existing failure routing. On successful unchanged-data admission the supplier certifies ||K_j s+b_F||=||K_j s-b_j|| against the intended KKT linearization."
+    }
+  ],
+  "consumer_disposition": "The FE residual theorem remains conditional on successful unchanged-data admission; no nonlinear next-point, box-feasibility or forward-error claim is added."
+}

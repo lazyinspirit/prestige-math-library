@@ -1,0 +1,663 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "59",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-conic-optimization-primal-dual-models",
+      "model": "gpt-6-luna",
+      "context_sha256": "50126c06ea34bf4697bdad625023ee8b8727b9560cc28329b6ff16ae9d67376e",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The supplier defines q as infimum of the Lagrangian and d* as its supremum over nonnegative inequality and free equality multipliers. Corrected the QP terminology to dual function q(y,s) and explicitly defined d*. The Lagrangian sign, stationarity equations, conic models and gap identities are unchanged; no use requires inf L to equal the optimal dual value.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-self-concordant-local-newton-calculus",
+      "model": "gpt-6-luna",
+      "context_sha256": "99f05ff46df7e58e90bd7a1f2b2d14864c95ea713cb84f273ac601d7a89cb291",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed false unconditional coercivity inference: for F=-log x, lambda=1 and the sublevel is unbounded. The lemma Statement already restricts attainment and distance to lambda<1. Scoped divergence/boundedness in step 2.2 and compactness/attainment in step 3.2 explicitly to that condition; the all-lambda damped-step proof remains unrestricted. Verified the reciprocal-norm integration, mixed Hessian comparison, remainder r^2/(1-r), compactness via boundary blow-up, and r^2/(1+r)<=lambda r distance calculation. This repairs a missing proof condition without changing any asserted conclusion.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.damtp.cam.ac.uk/user/hf323/M19-OPT/lecture14.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-boundary-barrier-conditioning",
+      "model": "gpt-6-luna",
+      "context_sha256": "762be8fcf8068f276450335de1b3a755b4a08cfc9eea488d99ff50a845f0406e",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 reverses the literal supplied implication. Replaced it by: any attained strict-interior barrier minimizer is a central point. Verification 1.1 already constructs the unique attained minimizer by compact sublevels and a positive-definite Hessian, so this is a nonfatal dependency restatement issue. Checked stationarity q=x2, x1<1/t and x2=q to 1/2, and coordinate Rayleigh quotients yielding kappa2>9t^2/128 for t>=4. No Example or Statement/Definition changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "model": "gpt-6-luna",
+      "context_sha256": "266351d1927386e571b0df36bf620a65fc3784f662e17270ab47ab57daebcbd7",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The cone equations are ordered primal, dual, complementarity, while the conversion instruction used the LP/QP dual, primal, complementarity RHS. Corrected the cone RHS to (-r_p,-r_d,-r_c), retaining (-r_d,-r_p,-r_c) for LP/QP. A block permutation without the matching matrix permutation changes the solved equations, so this is a fatal logic defect. Also moved the (d+3)u<1 check before defining gamma and gave its declared failure return. Verified exact rational audits, QR/substitution hypotheses, inverse-norm nonsingularity test, safe fractions and finite-cap exits. Clarified that the Lorentz Jordan residual target differs from the selected barrier normalization; no convergence theorem or exact-gap test depends on that target.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.seas.ucla.edu/~vandenbe/publications/coneprog.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-short-step-complexity-and-primal-gap-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "6915b2a198993aeb31cb6a89f82130d6f19b702ef4ac29cd28d6edcb41394aab",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The exact ceiling and k<=1+9 sqrt(nu) log R are correct for R>1. The unqualified O(sqrt(nu) log(nu/(epsilon t0))) summary is not a uniform bound on that range, because the logarithm can vanish or be negative. Added the valid uniform bound O(1+sqrt(nu) log R) and retained the original logarithmic rate explicitly as nu/(epsilon t0) tends to infinity. Verified nu>=1, the restricted gradient norm bound, decrement 13/32 after a path update, at most two damped corrections, the center-distance conversion 1/3 to 1/2, and the gap (nu+sqrt(nu)/2)/t. This is a nonfatal qualification of the summary; the explicit successful count and its cap conditions are preserved.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.damtp.cam.ac.uk/user/hf323/M19-OPT/lecture15.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-resource-allocation-barrier-central-path",
+      "model": "gpt-6-luna",
+      "context_sha256": "cb703ef1c0d28e37ad4a277ee832c60c5def1be2baee4a47077a382e3bbbe409",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 omitted the cited theorem cap and valid-input conditions, and Verification 2.1 gave an unconditional finite-budget count. Restated those hypotheses and supplied exact scalar restricted Newton solves with N_out>=K=ceil(log(3/epsilon)/log(1+1/(8 sqrt(2)))) and N_in>=2. The positive scalar Hessian and exact centered t0=1 start are checked in 1.1; 2.1 proves p*=1 and the dual gap 2/t. Thus every theorem hypothesis is now accounted for. The central-path formulas and explicit count are unchanged; this is a nonfatal omitted invocation condition, with no Statement/Definition change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-conic-optimization-primal-dual-models",
+      "disposition": "repaired",
+      "post_sha256": "ac57bb4af5220d1f2e15ff5e4fa35ff39a5c70f5a4ed34b3d0991df71fe11f08",
+      "review_context_sha256": "ead02fa0a4482c77ce2202f61b366f409d8ab3c498c758f57938fc7219d9b1b4",
+      "reason": "The supplier defines q as infimum of the Lagrangian and d* as its supremum over nonnegative inequality and free equality multipliers. Corrected the QP terminology to dual function q(y,s) and explicitly defined d*. The Lagrangian sign, stationarity equations, conic models and gap identities are unchanged; no use requires inf L to equal the optimal dual value. Re-examined concurrent supplier edits: deterministic deletion/relabeling does not remove any QP constraint -w_i<=0, and the C^2/KKT sign convention is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-self-concordant-local-newton-calculus",
+      "disposition": "repaired",
+      "post_sha256": "6dcc9442510fc31b21897523aa21d9315fb9d77ec2a94a21276fa872ce64be1c",
+      "review_context_sha256": "eaca9e9663573697b7d98c0466e89b19a3fb8a086354866ad351e35184dec9fc",
+      "reason": "Confirmed false unconditional coercivity inference: for F=-log x, lambda=1 and the sublevel is unbounded. The lemma Statement already restricts attainment and distance to lambda<1. Scoped divergence/boundedness in step 2.2 and compactness/attainment in step 3.2 explicitly to that condition; the all-lambda damped-step proof remains unrestricted. Verified the reciprocal-norm integration, mixed Hessian comparison, remainder r^2/(1-r), compactness via boundary blow-up, and r^2/(1+r)<=lambda r distance calculation. This repairs a missing proof condition without changing any asserted conclusion.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.damtp.cam.ac.uk/user/hf323/M19-OPT/lecture14.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-boundary-barrier-conditioning",
+      "disposition": "repaired",
+      "post_sha256": "c9a4fd6203d8099f99890d00f66862315c0593ef5d538cdd1c70ab778c35389e",
+      "review_context_sha256": "9a2ef7855e8320554d5f6cdee1def19de5ea5eb2d0c4f99fb58fd485144cd2b2",
+      "reason": "F1 reverses the literal supplied implication. Replaced it by: any attained strict-interior barrier minimizer is a central point. Verification 1.1 already constructs the unique attained minimizer by compact sublevels and a positive-definite Hessian, so this is a nonfatal dependency restatement issue. Checked stationarity q=x2, x1<1/t and x2=q to 1/2, and coordinate Rayleigh quotients yielding kappa2>9t^2/128 for t>=4. No Example or Statement/Definition changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "disposition": "repaired",
+      "post_sha256": "f10e73802ab20ee1d8441e1bcfd1d0c781ea9d1a2d9ce1770e34171db88ff40b",
+      "review_context_sha256": "cd8f468469c334981b5a27cdbb7c3b4639443bb876a0b26b12c9294900af7951",
+      "reason": "The cone equations are ordered primal, dual, complementarity, while the conversion instruction used the LP/QP dual, primal, complementarity RHS. Corrected the cone RHS to (-r_p,-r_d,-r_c), retaining (-r_d,-r_p,-r_c) for LP/QP. A block permutation without the matching matrix permutation changes the solved equations, so this is a fatal logic defect. Also moved the (d+3)u<1 check before defining gamma and gave its declared failure return. Verified exact rational audits, QR/substitution hypotheses, inverse-norm nonsingularity test, safe fractions and finite-cap exits. Clarified that the Lorentz Jordan residual target differs from the selected barrier normalization; no convergence theorem or exact-gap test depends on that target.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.seas.ucla.edu/~vandenbe/publications/coneprog.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "thm-short-step-complexity-and-primal-gap-bound",
+      "disposition": "repaired",
+      "post_sha256": "7d3148d4649450b58bfb118580615e8185a87152eee84ab8591de68e7d7ec6af",
+      "review_context_sha256": "73b838d162220e0ba537b860ffc5e4239c97e92f68911fc4d7ef9bfb59e351d0",
+      "reason": "The exact ceiling and k<=1+9 sqrt(nu) log R are correct for R>1. The unqualified O(sqrt(nu) log(nu/(epsilon t0))) summary is not a uniform bound on that range, because the logarithm can vanish or be negative. Added the valid uniform bound O(1+sqrt(nu) log R) and retained the original logarithmic rate explicitly as nu/(epsilon t0) tends to infinity. Verified nu>=1, the restricted gradient norm bound, decrement 13/32 after a path update, at most two damped corrections, the center-distance conversion 1/3 to 1/2, and the gap (nu+sqrt(nu)/2)/t. This is a nonfatal qualification of the summary; the explicit successful count and its cap conditions are preserved.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.damtp.cam.ac.uk/user/hf323/M19-OPT/lecture15.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-resource-allocation-barrier-central-path",
+      "disposition": "repaired",
+      "post_sha256": "fb3a036a6aa7c20fd8540c8719860941bcffa441f93514b110bfbcbfa4ed52a3",
+      "review_context_sha256": "e3d3d399299249b230c86e4465f30942871413f992908cb8a55a53706c181602",
+      "reason": "F2 omitted the cited theorem cap and valid-input conditions, and Verification 2.1 gave an unconditional finite-budget count. Restated those hypotheses and supplied exact scalar restricted Newton solves with N_out>=K=ceil(log(3/epsilon)/log(1+1/(8 sqrt(2)))) and N_in>=2. The positive scalar Hessian and exact centered t0=1 start are checked in 1.1; 2.1 proves p*=1 and the dual gap 2/t. Thus every theorem hypothesis is now accounted for. The central-path formulas and explicit count are unchanged; this is a nonfatal omitted invocation condition, with no Statement/Definition change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+    "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+    "def-barrier-central-path-and-newton-residuals",
+    "ex-lp-primal-dual-residual-and-gap",
+    "ex-resource-allocation-barrier-central-path",
+    "ex-robust-least-squares-as-a-second-order-cone-program",
+    "ex-small-semidefinite-relaxation-primal-dual-certificate",
+    "ex-strict-versus-weak-semidefinite-feasibility",
+    "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+    "lem-loghom-barrier-gradient-is-dual",
+    "lem-lorentz-cone-log-barrier",
+    "lem-nonnegative-orthant-log-barrier",
+    "lem-primal-dual-lp-qp-newton-matrix-nonsingular",
+    "lem-psd-cone-self-dual-logdet-barrier",
+    "thm-central-path-barrier-gap-and-dual-certificate",
+    "thm-fraction-to-boundary-and-primal-dual-gap-certificates",
+    "thm-inexact-central-path-distance-and-gap-certificate",
+    "thm-phase-i-margin-status-and-weak-infeasibility"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-repaired-finding",
+      "id": "def-conic-optimization-primal-dual-models",
+      "outcome": "confirmed_nonfatal",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "reason": "The supplier defines q as infimum of the Lagrangian and d* as its supremum over nonnegative inequality and free equality multipliers. Corrected the QP terminology to dual function q(y,s) and explicitly defined d*. The Lagrangian sign, stationarity equations, conic models and gap identities are unchanged; no use requires inf L to equal the optimal dual value.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-repaired-finding",
+      "id": "lem-self-concordant-local-newton-calculus",
+      "outcome": "confirmed_nonfatal",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "reason": "Confirmed false unconditional coercivity inference: for F=-log x, lambda=1 and the sublevel is unbounded. The lemma Statement already restricts attainment and distance to lambda<1. Scoped divergence/boundedness in step 2.2 and compactness/attainment in step 3.2 explicitly to that condition; the all-lambda damped-step proof remains unrestricted. Verified the reciprocal-norm integration, mixed Hessian comparison, remainder r^2/(1-r), compactness via boundary blow-up, and r^2/(1+r)<=lambda r distance calculation. This repairs a missing proof condition without changing any asserted conclusion.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.damtp.cam.ac.uk/user/hf323/M19-OPT/lecture14.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-repaired-finding",
+      "id": "ex-boundary-barrier-conditioning",
+      "outcome": "confirmed_nonfatal",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "reason": "F1 reverses the literal supplied implication. Replaced it by: any attained strict-interior barrier minimizer is a central point. Verification 1.1 already constructs the unique attained minimizer by compact sublevels and a positive-definite Hessian, so this is a nonfatal dependency restatement issue. Checked stationarity q=x2, x1<1/t and x2=q to 1/2, and coordinate Rayleigh quotients yielding kappa2>9t^2/128 for t>=4. No Example or Statement/Definition changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-repaired-finding",
+      "id": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "outcome": "confirmed_fatal",
+      "severity": "fatal",
+      "disposition": "fixed",
+      "reason": "The cone equations are ordered primal, dual, complementarity, while the conversion instruction used the LP/QP dual, primal, complementarity RHS. Corrected the cone RHS to (-r_p,-r_d,-r_c), retaining (-r_d,-r_p,-r_c) for LP/QP. A block permutation without the matching matrix permutation changes the solved equations, so this is a fatal logic defect. Also moved the (d+3)u<1 check before defining gamma and gave its declared failure return. Verified exact rational audits, QR/substitution hypotheses, inverse-norm nonsingularity test, safe fractions and finite-cap exits. Clarified that the Lorentz Jordan residual target differs from the selected barrier normalization; no convergence theorem or exact-gap test depends on that target.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.seas.ucla.edu/~vandenbe/publications/coneprog.pdf"
+      ],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-repaired-finding",
+      "id": "thm-short-step-complexity-and-primal-gap-bound",
+      "outcome": "confirmed_nonfatal",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "reason": "The exact ceiling and k<=1+9 sqrt(nu) log R are correct for R>1. The unqualified O(sqrt(nu) log(nu/(epsilon t0))) summary is not a uniform bound on that range, because the logarithm can vanish or be negative. Added the valid uniform bound O(1+sqrt(nu) log R) and retained the original logarithmic rate explicitly as nu/(epsilon t0) tends to infinity. Verified nu>=1, the restricted gradient norm bound, decrement 13/32 after a path update, at most two damped corrections, the center-distance conversion 1/3 to 1/2, and the gap (nu+sqrt(nu)/2)/t. This is a nonfatal qualification of the summary; the explicit successful count and its cap conditions are preserved.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.damtp.cam.ac.uk/user/hf323/M19-OPT/lecture15.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-repaired-finding",
+      "id": "ex-resource-allocation-barrier-central-path",
+      "outcome": "confirmed_nonfatal",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "reason": "F2 omitted the cited theorem cap and valid-input conditions, and Verification 2.1 gave an unconditional finite-budget count. Restated those hypotheses and supplied exact scalar restricted Newton solves with N_out>=K=ceil(log(3/epsilon)/log(1+1/(8 sqrt(2)))) and N_in>=2. The positive scalar Hessian and exact centered t0=1 start are checked in 1.1; 2.1 proves p*=1 and the dual gap 2/t. Thus every theorem hypothesis is now accounted for. The central-path formulas and explicit count are unchanged; this is a nonfatal omitted invocation condition, with no Statement/Definition change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "no-update",
+      "reason": "All 18 direct item consumers of the three changed interfaces are draft frozen-frontier items. No potentially defective published consumer or published repair was found; no published audit classification or repair evidence is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "def-conic-optimization-primal-dual-models",
+      "claim": "QP dual function q(y,s)=inf_w L(w,y,s), dual value d*=sup q; s>=0 and y free.",
+      "dependencies": [
+        "def-convex-program-duality-and-slater-condition",
+        "def-inequality-constrained-program-and-kkt-geometry"
+      ],
+      "evidence": "Read both dependency Definitions and current owning A/B pages. Definition changes only the named QP dual function and supremum; direct consumers inventoried and inspected for the affected convention. No AC or new prerequisite.",
+      "checks": "Final batched checks passed: precheck 6 files/4 proofs/0 failures; renderer 6 checked/0 errors/0 warnings; proof-layout 6 items/15 steps/0 defects. Strict focused contract check passed 13 rows with no errors or warnings. Exact derivation and source-quotation mirrors reconciled under acquire/reread/edit/check/release shared lock.",
+      "next_action": "Handoff to controller for independent current-source judgment and convergence accounting; no unresolved mathematics."
+    },
+    {
+      "id": "lem-self-concordant-local-newton-calculus",
+      "claim": "All-lambda damped Newton bound; compact sublevels, attained minimizer and center distance only when lambda<1.",
+      "dependencies": [
+        "def-self-concordant-log-homogeneous-barrier"
+      ],
+      "evidence": "Proof 1.1\u20134.1 checked directly from mixed third derivative bound and positive Hessian. Read Fawzi Lecture 14 in full: its Theorem 14.1 is full-step and is not used as a damped estimate. Its scalar Dikin example contains an interval typo; the actual interval is (0,2x), so that line is not used.",
+      "checks": "Final batched checks passed: precheck 6 files/4 proofs/0 failures; renderer 6 checked/0 errors/0 warnings; proof-layout 6 items/15 steps/0 defects. Strict focused contract check passed 13 rows with no errors or warnings. Exact derivation and source-quotation mirrors reconciled under acquire/reread/edit/check/release shared lock.",
+      "next_action": "Handoff to controller for independent current-source judgment and convergence accounting; no unresolved mathematics."
+    },
+    {
+      "id": "ex-boundary-barrier-conditioning",
+      "claim": "An attained minimizer is central; existence and uniqueness are proved for the triangle.",
+      "dependencies": [
+        "def-barrier-central-path-and-newton-residuals",
+        "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+      ],
+      "evidence": "Supplier Definition states the forward implication only; the spectral theorem supplies the orthonormal eigenbasis used for both Rayleigh bounds.",
+      "checks": "Final batched checks passed: precheck 6 files/4 proofs/0 failures; renderer 6 checked/0 errors/0 warnings; proof-layout 6 items/15 steps/0 defects. Strict focused contract check passed 13 rows with no errors or warnings. Exact derivation and source-quotation mirrors reconciled under acquire/reread/edit/check/release shared lock.",
+      "next_action": "Handoff to controller for independent current-source judgment and convergence accounting; no unresolved mathematics."
+    },
+    {
+      "id": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "claim": "Mode-specific Newton RHS row order; gamma only evaluated after a positive-denominator audit; exact feasibility still required for certified-gap.",
+      "dependencies": [
+        "def-barrier-central-path-and-newton-residuals",
+        "lem-primal-dual-lp-qp-newton-matrix-nonsingular",
+        "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+        "alg-scaled-householder-reflector-formation-and-application",
+        "lem-rounded-triangular-substitution-componentwise-backward-error",
+        "thm-computed-full-rank-least-squares-backward-stability"
+      ],
+      "evidence": "Read actual matrix and residual definitions, the four relevant floating-point/QR interfaces, the nonsingularity proof and complete fraction-to-boundary proof. Consulted Vandenberghe coneprog \u00a7\u00a72\u20133 in full through its Jordan central-path equivalence; its half-log Lorentz barrier and degree 1 differ from the local parameter 2. No source convention was silently substituted.",
+      "checks": "Final batched checks passed: precheck 6 files/4 proofs/0 failures; renderer 6 checked/0 errors/0 warnings; proof-layout 6 items/15 steps/0 defects. Strict focused contract check passed 13 rows with no errors or warnings. Exact derivation and source-quotation mirrors reconciled under acquire/reread/edit/check/release shared lock.",
+      "next_action": "Handoff to controller for independent current-source judgment and convergence accounting; no unresolved mathematics."
+    },
+    {
+      "id": "thm-short-step-complexity-and-primal-gap-bound",
+      "claim": "Uniform Newton count <=2+18 sqrt(nu) log R for R>1; original rate holds in the large-ratio regime.",
+      "dependencies": [
+        "alg-short-step-self-concordant-path-following",
+        "lem-self-concordant-local-newton-calculus",
+        "thm-central-path-barrier-gap-and-dual-certificate",
+        "def-self-concordant-log-homogeneous-barrier"
+      ],
+      "evidence": "Read the exact procedure and its cap/solver inputs. Read Fawzi Lecture 15 including full Proposition 15.1 proof, Lemma 15.1 and gap proof and complexity discussion. Its exact-center implementation is not substituted for the local two-damped-correction proof. Local lemma proof repair leaves its Statement unchanged.",
+      "checks": "Final batched checks passed: precheck 6 files/4 proofs/0 failures; renderer 6 checked/0 errors/0 warnings; proof-layout 6 items/15 steps/0 defects. Strict focused contract check passed 13 rows with no errors or warnings. Exact derivation and source-quotation mirrors reconciled under acquire/reread/edit/check/release shared lock.",
+      "next_action": "Handoff to controller for independent current-source judgment and convergence accounting; no unresolved mathematics."
+    },
+    {
+      "id": "ex-resource-allocation-barrier-central-path",
+      "claim": "The explicit allocation path and gap 2/t; for 0<epsilon<3 the stated update count requires exact scalar solves, N_out>=K and N_in>=2.",
+      "dependencies": [
+        "def-conic-optimization-primal-dual-models",
+        "def-barrier-central-path-and-newton-residuals",
+        "lem-nonnegative-orthant-log-barrier",
+        "thm-central-path-barrier-gap-and-dual-certificate",
+        "thm-short-step-complexity-and-primal-gap-bound"
+      ],
+      "evidence": "Verified the positive quadratic root for all t>0, x2 by rationalization, positive restricted Hessian, golden-ratio start, equality multiplier y=1-lambda1=2-lambda2 and exact objective optimum. Reviewed the changed theorem Statement before updating F2 and its exact contract quotation.",
+      "checks": "Final batched checks passed: precheck 6 files/4 proofs/0 failures; renderer 6 checked/0 errors/0 warnings; proof-layout 6 items/15 steps/0 defects. Strict focused contract check passed 13 rows with no errors or warnings. Exact derivation and source-quotation mirrors reconciled under acquire/reread/edit/check/release shared lock.",
+      "next_action": "Handoff to controller for independent current-source judgment and convergence accounting; no unresolved mathematics."
+    },
+    {
+      "contract_path": "research/numerical-optimization-dynamics-2026-10-16-batch-59.proof-contracts.json",
+      "repair": "Updated exact derivation mirrors for the four assigned proof carriers and full supplier quotations in necessary batch-59 consumer rows. Shared lock acquired, current contract reread, rows edited, strict focused check passed, lock released. Existing risk-review attributions were preserved; no independent review of these repairs is claimed.",
+      "remaining_owner_metadata": "Batch 100 F3 conic-definition quote is stale; minimal metadata followup recorded on its consumer review. No unassigned carrier was edited."
+    },
+    {
+      "id": "def-conic-optimization-primal-dual-models",
+      "review_continuity": "The final read-only currency check found that the direct duality supplier changed concurrently after the original review. Reread both complete current defining dependencies and examined their effects before requesting a fresh review context. The convex-program definition now fixes smallest-original-index deletion order and relabeling; each QP inequality -w_i<=0 on R^n is nonremovable, so its displayed Lagrangian and dual function/value convention are unchanged. The inequality/KKT supplier changes the label smooth to C^2 and its prose page to This page; all C^2, signs, multipliers and stationarity equations used by the conic definition remain identical. No conic carrier edit is needed.",
+      "previous_review_context_sha256": "fa310c3787e58be84e594f63f6f876d1519973350c5a34e2882549068b732947",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "consumer_reviews": [
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "lem-nonnegative-orthant-log-barrier",
+      "path": "items/lem-nonnegative-orthant-log-barrier.md:40",
+      "affected_use": "[F2] The dual cone is $K^*=\\{z:\\langle z,y\\rangle\\ge0\\text{ for every }y\\in K\\}$ ([[def-conic-optimization-primal-dual-models]]).",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "The dual-cone definition is unchanged; the coordinate proof of orthant self-duality does not use QP dual terminology.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "lem-lorentz-cone-log-barrier",
+      "path": "items/lem-lorentz-cone-log-barrier.md:40",
+      "affected_use": "[F2] The dual cone is the set of vectors pairing nonnegatively with every cone element ([[def-conic-optimization-primal-dual-models]]).",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "The dual-cone pairing is unchanged; its Lorentz separating-vector proof does not use the QP dual function.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "lem-psd-cone-self-dual-logdet-barrier",
+      "path": "items/lem-psd-cone-self-dual-logdet-barrier.md:48",
+      "affected_use": "[F2] The trace pairing on symmetric matrices is $\\langle X,Y\\rangle=\\operatorname{tr}(XY)$ and $X\\succeq0$ means $v^TXv\\ge0$ for every $v$ ([[def-conic-optimization-primal-dual-models]]).",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "The trace pairing and PSD convention are unchanged; no QP dual optimal value is used.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "lem-loghom-barrier-gradient-is-dual",
+      "path": "items/lem-loghom-barrier-gradient-is-dual.md:38",
+      "affected_use": "[F1] $K^*=\\{z:\\langle z,k\\rangle\\ge0\\text{ for all }k\\in K\\}$ ([[def-conic-optimization-primal-dual-models]]), and $F(\\alpha x)=F(x)-\\nu\\log\\alpha$ for $\\alpha>0$ ([[def-self-concordant-log-homogeneous-barrier]]).",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "The dual-cone definition and scaling identity are unchanged; the directional derivative argument needs neither QP q nor d*.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "def-barrier-central-path-and-newton-residuals",
+      "path": "items/def-barrier-central-path-and-newton-residuals.md:41",
+      "affected_use": "For a standard-form LP or convex QP with $n\\ge1$, $Ax=b$, $x\\ge0$, and objective $f_0(x)=\\tfrac12x^TQx+c^Tx$ ($Q=0$ for an LP), define the primal-dual residuals",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "Its stationarity and LP/QP Newton matrix use the same Lagrangian and signs; the terminology correction changes none of its equations.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "lem-primal-dual-lp-qp-newton-matrix-nonsingular",
+      "path": "items/lem-primal-dual-lp-qp-newton-matrix-nonsingular.md:40",
+      "affected_use": "[F2] A full-row-rank matrix has injective transpose, and a symmetric positive-semidefinite $Q$ satisfies $u^TQu\\ge0$ ([[def-conic-optimization-primal-dual-models]]).",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "Full row rank and positive-semidefinite Q are unchanged; the kernel argument is independent of the optimal dual value.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "path": "items/alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones.md:42",
+      "affected_use": "**LP/QP mode.** Let $n\\ge1$, $p\\ge0$, $Q\\in\\mathbb R^{n\\times n}$ be symmetric positive semidefinite, and $A\\in\\mathbb R^{p\\times n}$ have full row rank. The supplied data are $A,b,c,Q$ for $\\min\\tfrac12x^TQx+c^Tx$ subject to $Ax=b$, $x\\ge0$; LP is $Q=0$. The iterate inputs are $x>0$, $s>0$, and free $y$. Also supply $0<\\sigma<1$, $0<\\eta<1$, finite tolerances $\\epsilon_p,\\epsilon_d,\\epsilon_g\\ge0$, and an integer update cap $N\\ge0$.",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "The same QP objective, primal inequalities and stationarity equation are used. Its own separate Newton RHS repair is covered by its assigned review.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+      "path": "items/lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program.md:41",
+      "affected_use": "[F3] A convex QP has a positive-semidefinite quadratic objective Hessian and affine equalities/inequalities ([[def-conic-optimization-primal-dual-models]], [[def-inequality-constrained-program-and-kkt-geometry]]).",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "The finite transcription uses the PSD quadratic objective and affine constraints. It does not identify inf L with the supremal dual value; its mathematical use remains sound.",
+      "frontier": true,
+      "uncertain": false,
+      "metadata_followup": {
+        "route": "frontier-owner, batch 100",
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-100.proof-contracts.json",
+        "affected_use": "contracts[lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program].citations[F3].quote contains the full old conic Definition, including the old QP dual-value wording.",
+        "minimality": "Refresh only the exact supplier quotation under the shared lock; no mathematical item edit is required. This unassigned owning contract was not edited."
+      }
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "ex-resource-allocation-barrier-central-path",
+      "path": "items/ex-resource-allocation-barrier-central-path.md:54",
+      "affected_use": "2.1 The central inequality multipliers are $\\lambda_i=1/(t x_i)>0$. Their difference is $\\lambda_2-\\lambda_1=(1/t)(1/x_2-1/x_1)=1$, so the equality multiplier $y=1-\\lambda_1=2-\\lambda_2$ satisfies both dual stationarity equations. Every primal feasible vector has objective $x_1+2x_2=1+x_2\\ge1$, while $(1,0)$ attains $1$, so $p^*=1$ and the objective excess is $x_2$. The primal-dual gap is $x_1\\lambda_1+x_2\\lambda_2=2/t$; hence $x_2\\le2/t$ by [F1]. By [F3], $\\nu=2$. For $0<\\varepsilon<3$, put $K=\\lceil\\log(3/\\varepsilon)/\\log(1+1/(8\\sqrt2))\\rceil$, supply exact solves of the scalar restricted Newton equations, and choose $N_{out}\\ge K$ and $N_{in}\\ge2$. Their scalar Hessian is positive by step 1.1. With the exact $t_0=1$ start from that step and $p^*=1$, all hypotheses of [F2] hold, so at most $K$ path updates suffice, with at most two corrections each. [F1, F2, F3, step 1.1, algebra] \u220e",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "LP dual stationarity y=1-lambda1=2-lambda2 and gap 2/t use unchanged signs. Its separate cap-condition repair is covered by its assigned review.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "ex-strict-versus-weak-semidefinite-feasibility",
+      "path": "items/ex-strict-versus-weak-semidefinite-feasibility.md:39",
+      "affected_use": "[F1] $X\\succeq0$ exactly when $v^TXv\\ge0$ for every $v$, and the cone is self-dual ([[lem-psd-cone-self-dual-logdet-barrier]]).",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "The PSD membership convention used for the three explicit matrix slices is unchanged; the QP dual-value label has no role.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "ex-small-semidefinite-relaxation-primal-dual-certificate",
+      "path": "items/ex-small-semidefinite-relaxation-primal-dual-certificate.md:36",
+      "affected_use": "**Given:** The SDP relaxation and the trace-inner-product primal-dual convention of [[def-conic-optimization-primal-dual-models]].",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "The trace SDP primal-dual signs, diagonal equality multiplier and trace gap are unchanged. The exact matching feasible values remain -1.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "ex-robust-least-squares-as-a-second-order-cone-program",
+      "path": "items/ex-robust-least-squares-as-a-second-order-cone-program.md:41",
+      "affected_use": "[F2] A constraint $\\|v\\|_2\\le t$ is Lorentz-cone membership $(t,v)\\in\\mathcal L$ ([[def-conic-optimization-primal-dual-models]]).",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "Lorentz membership is unchanged; the robust norm maximization and SOCP formulation never use QP dual terminology.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "thm-central-path-barrier-gap-and-dual-certificate",
+      "path": "items/thm-central-path-barrier-gap-and-dual-certificate.md:55",
+      "affected_use": "3.1 In the conic case set $z_t=-\\nabla F(s_t)/t\\in K^*$ by [F3] and $y_t=-w/t$. The stationarity equation in [[def-barrier-central-path-and-newton-residuals]] gives $A^Ty_t-G^*z_t=c$, so the pair is dual feasible. The conic gap identity in [[def-conic-optimization-primal-dual-models]] gives $c^Tx_t-(b^Ty_t-\\langle h,z_t\\rangle)=\\langle z_t,s_t\\rangle=-DF(s_t)[s_t]/t=\\nu/t$. For every primal feasible $x$, the same identity and $z_t\\in K^*$ make its objective at least the dual value, so $b^Ty_t-\\langle h,z_t\\rangle\\le p^*$. Since $x_t$ is primal feasible, $p^*\\le c^Tx_t$; combining these inequalities with the exact gap gives $0\\le c^Tx_t-p^*\\le\\nu/t$. [F3, step 2.1, algebra] \u220e",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "The conic dual feasible objective b^Ty-<h,z> and gap <z,s> are unchanged. The proof only uses that objective at a feasible pair, not equality to its supremum.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "thm-inexact-central-path-distance-and-gap-certificate",
+      "path": "items/thm-inexact-central-path-distance-and-gap-certificate.md:56",
+      "affected_use": "1.2 Let $x_*=x_0+Pz_*$ and $s_*=h-Gx_*$. By [F5], $t c-G^*\\nabla F(s_*)+A^Tw=0$ for some $w$. Set $\\widehat z_*=-\\nabla F(s_*)/t\\in K^*$ by [F2] and $y_*=-w/t$. The stationarity equation gives $A^Ty_*-G^*\\widehat z_*=c$, so $(y_*,\\widehat z_*)$ is dual feasible. The conic gap identity in [[def-conic-optimization-primal-dual-models]] then gives a finite dual lower bound on every primal feasible objective. Since $x_*$ is primal feasible with finite objective, this proves that $p^*$ is finite, establishing the finiteness hypothesis needed for [F3]. [F2, F5, given, algebra]",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "The proof uses the unchanged conic dual feasible pair to give a finite lower bound on p*. It never replaces that bound by an asserted optimum of the dual.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "thm-phase-i-margin-status-and-weak-infeasibility",
+      "path": "items/thm-phase-i-margin-status-and-weak-infeasibility.md:33",
+      "affected_use": "[F1] A proper cone is closed, convex, closed under addition and positive scaling, and has nonempty interior ([[def-conic-optimization-primal-dual-models]]).",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "Closedness, convexity and nonempty cone interior are unchanged; the Phase-I margin proof uses none of the modified QP terminology.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "def-conic-optimization-primal-dual-models",
+      "id": "thm-fraction-to-boundary-and-primal-dual-gap-certificates",
+      "path": "items/thm-fraction-to-boundary-and-primal-dual-gap-certificates.md:67",
+      "affected_use": "1.4 In LP/QP mode, exact $Ax=b$, $x\\ge0$, $s\\ge0$, and $Qx+c-A^Ty-s=0$ make $\\nabla_w L(x,y,s)=0$. To apply [F4], use the smooth inequality convention $g_i(w)=-w_i\\le0$, multiplier $\\lambda=s$, and equality multiplier $\\nu=-y$. Since $Q\\succeq0$, $L$ is convex, so [F5] implies $L(w,y,s)\\ge L(x,y,s)$ for every $w$; therefore $q(y,s)=L(x,y,s)=f_0(x)-x^Ts$. By [F4], $q(y,s)\\le p^*$, and primal feasibility gives $p^*\\le f_0(x)$. Thus $0\\le f_0(x)-p^*\\le x^Ts$. [F3, F4, F5, given, algebra]",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "Proof 1.4 already correctly calls the Lagrangian infimum q(y,s), proves q=f0(x)-x^Ts by stationarity and uses weak duality q<=p*. This agrees with the corrected definition.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "id": "thm-fraction-to-boundary-and-primal-dual-gap-certificates",
+      "path": "items/thm-fraction-to-boundary-and-primal-dual-gap-certificates.md:63",
+      "affected_use": "1.2 For a Lorentz factor, write $s=(t,u)$ and $\\Delta s=(\\dot t,v)$, with $t>\\|u\\|_2$. Set $q=t^2-\\|u\\|_2^2>0$ and $c=|\\dot t|+\\sum_i|v_i|$. If $c=0$ the step is unchanged. Otherwise $t-\\|u\\|_2=q/(t+\\|u\\|_2)\\ge q/(2t)$, while $|\\dot t|+\\|v\\|_2\\le c$. The algorithm's safe fraction $\\beta=\\min(1,q/(2tc))$ therefore gives $\\alpha=\\eta\\beta$ with $\\alpha(|\\dot t|+\\|v\\|_2)<t-\\|u\\|_2$. The triangle inequality then yields $t+\\alpha\\dot t>\\|u+\\alpha v\\|_2$, so the updated Lorentz vector is interior. For a PSD factor $Y\\succ0$ and symmetric direction $D$, let $C=L(Y^{-1})L(D)$ as in the algorithm, where $L(M)=\\sum_{i,j}|M_{ij}|$. If $C=0$, then $D=0$. Otherwise set $B=Y^{-1/2}DY^{-1/2}$. Submultiplicativity of the operator norm and [F7] give $\\|B\\|_2\\le\\|Y^{-1}\\|_2\\|D\\|_2\\le\\|Y^{-1}\\|_F\\|D\\|_F\\le C$. Since $\\alpha=\\eta\\min(1,1/C)$, $\\alpha C<1$, and for every nonzero $w$, $w^T(I+\\alpha B)w\\ge(1-\\alpha\\|B\\|_2)\\|w\\|_2^2>0$. Thus $Y+\\alpha D=Y^{1/2}(I+\\alpha B)Y^{1/2}\\succ0$. The same bounds apply",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "The safe-fraction formulas and exact feasible-gap tests are unchanged. Its finite-termination proof gains an explicit return for the precision-denominator failure; the new cone RHS order restores the equations and changes no claimed invariant.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "id": "ex-lp-primal-dual-residual-and-gap",
+      "path": "items/ex-lp-primal-dual-residual-and-gap.md:38",
+      "affected_use": "[F1] The algorithm's residuals are $r_p=Ax-b$ and $r_d=c-A^Ty-s$ for this LP ([[alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones]]).",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "This example uses only LP r_p and r_d and the separate exact feasibility/gap theorem. It performs no Newton solve and uses neither the changed cone block order nor gamma.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "path": "items/alg-ctrl1-finite-budget-transcription-solver-dispatch.md:32",
+      "affected_use": "First audit the transcription dimensions, sampled domains, and data status fields. If stage construction failed, return the partial record with its stage and NLP statuses and do not call a solver. If the model satisfies [[lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program]], map its finite quadratic objective and affine constraints to canonical LP/QP form: replace each free variable $z_i$ by $z_i^+-z_i^-$ with $z_i^+,z_i^-\\ge0$; for each affine inequality $a_i^Tz+d_i\\le0$, add a primal slack $\\xi_i\\ge0$ and equality $a_i^Tz+\\xi_i=-d_i$; retain existing equalities; and transform the quadratic objective by substitution. The transcription record supplies finite stored coefficient arrays. Canonicalize using exact rational arithmetic on their dyadic values, then round each resulting coefficient once to the nearest normal representable value under [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], preserving exact zeros; any range failure makes the QP route ina",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "The dispatcher calls only LP/QP mode with sigma=eta=1/2 and forwards all other failure statuses. The LP/QP RHS is unchanged and uncertified-newton-solve was already a declared status; the new guard requires no caller change.",
+      "frontier": true,
+      "uncertain": false
+    },
+    {
+      "supplier": "thm-short-step-complexity-and-primal-gap-bound",
+      "id": "ex-resource-allocation-barrier-central-path",
+      "path": "items/ex-resource-allocation-barrier-central-path.md:46",
+      "affected_use": "[F2] For valid inputs with positive-definite restricted barrier Hessian and finite primal value, the short-step theorem gives the stated count from a strictly feasible centered start, provided the exact Newton solver is supplied and the finite caps permit all required updates ([[thm-short-step-complexity-and-primal-gap-bound]]).",
+      "invalidated_claim": "None: the cited mathematical interface used at this clause is preserved.",
+      "disposition": "sound",
+      "minimality": "The explicit ceiling for nu=2 and t0=1 is unchanged for 0<epsilon<3. The assigned repair specifies sufficient finite caps and exact scalar solves. No further propagation follows because the example Statement/Definition did not change.",
+      "frontier": true,
+      "uncertain": false
+    }
+  ],
+  "downstream_uses": {},
+  "page_reviews": [
+    {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/barrier-and-primal-dual-interior-point-methods.md",
+      "affected_use": "The Objective develops conic primal-dual systems, exact gaps and a short-step bound; its items list contains all three changed interfaces.",
+      "disposition": "sound",
+      "reason": "The page states no uniform unshifted logarithmic formula and promises no convergence for the heuristic cone residual. Models, exact gap certificates and the short-step result remain supplied."
+    },
+    {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/barrier-and-primal-dual-interior-point-methods-examples.md",
+      "affected_use": "The Objective names a resource-allocation central path and LP primal-dual gap, together with boundary conditioning and cone examples.",
+      "disposition": "sound",
+      "reason": "The example formulas and gap calculations are preserved; the added cap hypotheses make the resource invocation faithful without altering the page claims."
+    }
+  ],
+  "interface_changes": [
+    {
+      "id": "def-conic-optimization-primal-dual-models",
+      "section": "Definition",
+      "before": "and its dual value is $\\inf_{w\\in\\mathbb R^n}L(w,y,s)$.",
+      "after": "and its dual function is $q(y,s)=\\inf_{w\\in\\mathbb R^n}L(w,y,s)$. The dual value is $d^*=\\sup_{y\\in\\mathbb R^p,\\ s\\ge0}q(y,s)$.",
+      "comparison": "Direct literal replacement in the Definition; all other model formulas and conventions unchanged."
+    },
+    {
+      "id": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "section": "Definition",
+      "before": "Convert the exact rational right-hand side $(-r_d,-r_p,-r_c)$ componentwise",
+      "after": "Use the row order of the displayed system: $(-r_d,-r_p,-r_c)$ in LP/QP mode and, after eliminating $\\Delta s$, $(-r_p,-r_d,-r_c)$ in symmetric-cone mode. Convert that exact rational right-hand side componentwise",
+      "comparison": "Direct Definition comparison also adds the pre-evaluation (d+3)u guard and a diagnostic-normalization caveat. Safe fractions, gap conditions, input caps and declared statuses are unchanged."
+    },
+    {
+      "id": "thm-short-step-complexity-and-primal-gap-bound",
+      "section": "Statement",
+      "before": "This is $O(\\sqrt\\nu\\log(\\nu/(\\varepsilon t_0)))$ Newton corrections.",
+      "after": "Uniformly for $R>1$, this is $O(1+\\sqrt\\nu\\log R)$ Newton corrections. As $\\nu/(\\varepsilon t_0)\\to\\infty$, it is $O(\\sqrt\\nu\\log(\\nu/(\\varepsilon t_0)))$ Newton corrections.",
+      "comparison": "Direct Statement comparison preserves the exact ceiling, error bounds and cap conditions. Only the rate qualification changes."
+    }
+  ],
+  "owner_observations": [
+    {
+      "id": "def-barrier-central-path-and-newton-residuals",
+      "route": "batch 59 frontier owner; unassigned supplier remains read-only",
+      "affected_use": "The Definition calls s\u2218z\u2212sigma mu e an analogous cone residual with mu=<s,z>/nu, while selecting the Lorentz -log(t^2-||u||^2) barrier of parameter 2.",
+      "evidence": "At a Lorentz s=e, the selected barrier multiplier is z=2e/t, so mu=1/t while s\u2218z=2e/t. More generally the selected barrier gives s_j\u2218z_j=2e_j/t on Lorentz factors and e_j/t on orthant/PSD factors. Thus a common Jordan target mu e differs from that barrier-centering interface. Vandenberghe coneprog \u00a7\u00a72\u20133 uses a half-log Lorentz barrier and degree 1, which does match mu e.",
+      "disposition": "Resolved mathematically as a different diagnostic residual, not a false exact-gap certificate. The assigned algorithm now states that normalization caveat. Owner may add the same clarification to the unassigned definition; no claimed convergence result depends on equating the two paths.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.seas.ucla.edu/~vandenbe/publications/coneprog.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "validation": {
+    "precheck": {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-conic-optimization-primal-dual-models.md items/lem-self-concordant-local-newton-calculus.md items/ex-boundary-barrier-conditioning.md items/alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones.md items/thm-short-step-complexity-and-primal-gap-bound.md items/ex-resource-allocation-barrier-central-path.md --json",
+      "exit_code": 0,
+      "files": 6,
+      "checked_proofs": 4,
+      "failed": 0
+    },
+    "rendercheck": {
+      "command": "node tools/rendercheck.mjs items/def-conic-optimization-primal-dual-models.md items/lem-self-concordant-local-newton-calculus.md items/ex-boundary-barrier-conditioning.md items/alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones.md items/thm-short-step-complexity-and-primal-gap-bound.md items/ex-resource-allocation-barrier-central-path.md --json",
+      "exit_code": 0,
+      "checked": 6,
+      "errors": [],
+      "warnings": []
+    },
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/def-conic-optimization-primal-dual-models.md items/lem-self-concordant-local-newton-calculus.md items/ex-boundary-barrier-conditioning.md items/alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones.md items/thm-short-step-complexity-and-primal-gap-bound.md items/ex-resource-allocation-barrier-central-path.md",
+      "exit_code": 0,
+      "result": "6 items, 15 steps, 0 defects; run once after final item edits."
+    },
+    "proof_contract": {
+      "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-59.proof-contracts.json --strict --items lem-self-concordant-local-newton-calculus,ex-boundary-barrier-conditioning,thm-short-step-complexity-and-primal-gap-bound,ex-resource-allocation-barrier-central-path,lem-nonnegative-orthant-log-barrier,lem-lorentz-cone-log-barrier,lem-psd-cone-self-dual-logdet-barrier,lem-loghom-barrier-gradient-is-dual,thm-phase-i-margin-status-and-weak-infeasibility,lem-primal-dual-lp-qp-newton-matrix-nonsingular,thm-fraction-to-boundary-and-primal-dual-gap-certificates,ex-robust-least-squares-as-a-second-order-cone-program,ex-lp-primal-dual-residual-and-gap --json",
+      "exit_code": 0,
+      "checked_contract_rows": 13,
+      "errors": [],
+      "warnings": []
+    },
+    "report_currency": {
+      "exit_code": 0,
+      "result": "Exact input digest and all six rejected tuples match; all six stored reviews match current item guards and supplier interfaces. Exactly three original Statement/Definition sections changed. The native dependency/reference graph yields exactly the 18 reported direct consumer IDs. No review hash was refreshed after a supplier change without examining its current mathematical effects."
+    }
+  }
+}

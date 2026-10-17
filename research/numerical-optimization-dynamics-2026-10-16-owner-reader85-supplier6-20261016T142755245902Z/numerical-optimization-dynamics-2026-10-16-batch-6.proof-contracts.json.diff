@@ -1,0 +1,41 @@
+--- before/research/numerical-optimization-dynamics-2026-10-16-batch-6.proof-contracts.json
++++ proposed/research/numerical-optimization-dynamics-2026-10-16-batch-6.proof-contracts.json
+@@ -132,6 +132,15 @@
+           "uses": [
+             "1.2"
+           ]
++        },
++        {
++          "fact": "F2",
++          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
++          "source_section": "Statement",
++          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
++          "uses": [
++            "1.2"
++          ]
+         }
+       ],
+       "derivations": [
+@@ -147,11 +156,12 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "Fix an independent index set $J$ and let $A_J$ have columns $a_j$, $j\\in J$. Its Gram matrix $G_J=A_J^TA_J$ is invertible: for every nonzero $v$, $v^TG_Jv=\\|A_Jv\\|_2^2>0$ by independence. On the closed subspace $S_J=\\operatorname{span}\\{a_j:j\\in J\\}$, the map $R_J(y)=G_J^{-1}A_J^Ty$ is continuous and satisfies $A_JR_J(y)=y$. Hence $A_J(\\mathbb R_{\\ge0}^{|J|})= S_J\\cap R_J^{-1}(\\mathbb R_{\\ge0}^{|J|})$ is closed: $S_J$ is closed by [F1], the nonnegative orthant is closed, and $R_J$ is continuous. For $J=\\varnothing$ this cone is $\\{0\\}$, also closed.",
++          "claim": "Fix an independent index set $J$ and let $A_J$ have columns $a_j$, $j\\in J$. Its Gram matrix $G_J=A_J^TA_J$ is invertible: for every nonzero $v$, $v^TG_Jv=\\|A_Jv\\|_2^2>0$ by independence. Put $B_J=G_J^{-1}A_J^T$, define $R_J(y)=B_Jy$ on $\\mathbb R^n$, and set $L_J=(\\sum_{r=1}^{|J|}\\sum_{s=1}^n(B_J)_{rs}^2)^{1/2}$. Applying [F2] to each row gives $\\|R_J(y)-R_J(y')\\|_2^2\\le L_J^2\\|y-y'\\|_2^2$, so $R_J$ is Lipschitz with finite constant $L_J$, hence continuous. On the closed subspace $S_J=\\operatorname{span}\\{a_j:j\\in J\\}$ it satisfies $A_JR_J(y)=y$. Hence $A_J(\\mathbb R_{\\ge0}^{|J|})= S_J\\cap R_J^{-1}(\\mathbb R_{\\ge0}^{|J|})$ is closed: $S_J$ is closed by [F1], the nonnegative orthant is closed, and $R_J$ is continuous. For $J=\\varnothing$ this cone is $\\{0\\}$, also closed.",
+           "step": "1.2",
+           "inputs": [
+             "given",
+             "F1",
++            "F2",
+             "algebra"
+           ]
+         },
+@@ -1987,7 +1997,7 @@
+           "fact": "F2",
+           "source": "thm-convex-kkt-sufficiency-and-normal-cone-certificate",
+           "source_section": "Statement",
+-          "quote": "Let $U\\subseteq\\mathbb R^n$ be open and convex, and suppose the objective\n$f:U\\to\\mathbb R$ and inequalities $g_i:U\\to\\mathbb R$ are differentiable\nand convex. Let the equalities be $Ax=b$. If a feasible tuple\n$(x_*,\\nu,\\lambda)$ satisfies the KKT conditions with $\\lambda\\ge0$, then\n$x_*$ is a global minimizer over the feasible set $C$. Moreover,\n$-\\nabla f(x_*)\\in N_C(x_*)$, where the normal cone has the convention of\n[[def-kkt-residual-and-normal-cone]].",
++          "quote": "Let $m\\ge0$ be an integer. Let $U\\subseteq\\mathbb R^n$ be open and convex,\nand suppose the objective $f:U\\to\\mathbb R$ and inequalities\n$g_i:U\\to\\mathbb R$ $(1\\le i\\le m)$ are differentiable and convex.\nLet the equalities be $Ax=b$ and define the feasible set\n$C=\\{x\\in U:Ax=b,\\ g_i(x)\\le0\\ (1\\le i\\le m)\\}$. If a feasible tuple\n$(x_*,\\nu,\\lambda)$ satisfies the KKT conditions with $\\lambda\\ge0$, then\n$x_*$ is a global minimizer over the feasible set $C$. Moreover,\n$-\\nabla f(x_*)\\in N_C(x_*)$, where the normal cone has the convention of\n[[def-kkt-residual-and-normal-cone]].",
+           "uses": [
+             "2.1"
+           ]

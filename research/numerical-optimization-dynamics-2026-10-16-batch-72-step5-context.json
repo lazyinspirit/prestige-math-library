@@ -1,0 +1,322 @@
+{
+  "group": "aa",
+  "batches": [
+    "72"
+  ],
+  "pages_read": [
+    "trust-region-and-cubic-regularization-methods",
+    "trust-region-and-cubic-regularization-methods-examples"
+  ],
+  "items_read": [
+    "def-trust-region-quadratic-model-and-ratio",
+    "def-adaptive-cubic-regularization-model",
+    "lem-natural-logarithm-bounded-by-argument",
+    "lem-trust-region-subproblem-optimality-and-hard-case",
+    "alg-trust-region-cauchy-step",
+    "lem-positive-definite-model-has-unique-newton-step",
+    "lem-global-cubic-model-minimizer-decrease",
+    "lem-trust-region-cauchy-decrease",
+    "alg-dogleg-trust-region-step",
+    "alg-truncated-cg-trust-region-step",
+    "alg-adaptive-cubic-regularization",
+    "lem-truncated-cg-iterates-are-krylov-vectors",
+    "alg-trust-region-method",
+    "lem-trust-region-ratio-accuracy-for-small-radii",
+    "lem-adaptive-cubic-unsuccessful-iteration-count",
+    "thm-trust-region-global-liminf-gradient",
+    "thm-trust-region-epsilon-iteration-complexity",
+    "thm-adaptive-cubic-regularization-epsilon-complexity",
+    "ex-indefinite-trust-region-boundary-minimizer",
+    "ex-trust-region-singular-hard-case",
+    "ex-trust-region-newton-cauchy-truncated-cg"
+  ],
+  "conventions": [
+    {
+      "convention": "Trust regions use the Euclidean ball with positive radius and a symmetric model matrix; predicted reduction is m(0)−m(p), and the ratio is defined only for positive predicted reduction. The model matrix need not be the exact Hessian.",
+      "fixed_by": "def-trust-region-quadratic-model-and-ratio",
+      "matters_for": [
+        "alg-trust-region-method",
+        "lem-trust-region-subproblem-optimality-and-hard-case",
+        "lem-trust-region-cauchy-decrease",
+        "lem-trust-region-ratio-accuracy-for-small-radii"
+      ]
+    },
+    {
+      "convention": "The cubic coefficient is σ/3, with σ>0; the ratio denominator includes the cubic term.",
+      "fixed_by": "def-adaptive-cubic-regularization-model",
+      "matters_for": [
+        "alg-adaptive-cubic-regularization",
+        "lem-global-cubic-model-minimizer-decrease",
+        "lem-adaptive-cubic-unsuccessful-iteration-count",
+        "thm-adaptive-cubic-regularization-epsilon-complexity"
+      ]
+    },
+    {
+      "convention": "The Cauchy procedure returns zero at g=0; otherwise nonpositive directional curvature selects the boundary point.",
+      "fixed_by": "alg-trust-region-cauchy-step",
+      "matters_for": [
+        "lem-trust-region-cauchy-decrease",
+        "alg-dogleg-trust-region-step",
+        "alg-truncated-cg-trust-region-step",
+        "alg-trust-region-method"
+      ]
+    },
+    {
+      "convention": "Rejected trust-region trials contract the radius; accepted trials retain or expand it. At Δ≤‖g‖/(2M_B), step selection overrides the candidate with the Cauchy step; the threshold is infinite when M_B=0.",
+      "fixed_by": "alg-trust-region-method",
+      "matters_for": [
+        "thm-trust-region-global-liminf-gradient",
+        "thm-trust-region-epsilon-iteration-complexity"
+      ]
+    },
+    {
+      "convention": "ARC checks two scalar cubic solution conditions, a model-gradient residual bound, and Cauchy-model decrease. Rejections increase σ up to its cap; successful trials never increase σ.",
+      "fixed_by": "alg-adaptive-cubic-regularization",
+      "matters_for": [
+        "lem-global-cubic-model-minimizer-decrease",
+        "lem-adaptive-cubic-unsuccessful-iteration-count",
+        "thm-adaptive-cubic-regularization-epsilon-complexity"
+      ]
+    },
+    {
+      "convention": "Complexity targets satisfy 0<ε≤1, constants remain fixed as ε decreases, and counts concern outer trials rather than inner solver work.",
+      "fixed_by": "thm-adaptive-cubic-regularization-epsilon-complexity",
+      "matters_for": [
+        "thm-adaptive-cubic-regularization-epsilon-complexity"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-trust-region-cauchy-decrease",
+      "statement": "The Cauchy step minimizes the model on the negative-gradient segment and satisfies m(0)−m(p_C)≥½‖g‖₂ min{Δ,‖g‖₂/M}, where M=‖B‖₂ and the minimum is Δ when M=0.",
+      "used_by": [
+        "alg-trust-region-method",
+        "lem-trust-region-ratio-accuracy-for-small-radii",
+        "thm-trust-region-global-liminf-gradient",
+        "thm-trust-region-epsilon-iteration-complexity",
+        "lem-riemannian-trust-region-ratio-accuracy-for-small-radii",
+        "thm-riemannian-trust-region-first-order-complexity"
+      ]
+    },
+    {
+      "id": "lem-trust-region-ratio-accuracy-for-small-radii",
+      "statement": "Under its segmentwise Lipschitz-gradient, model-bound, feasibility and Cauchy-fraction assumptions, if Δ≤‖g‖₂/(2M_B), predicted reduction is positive and |ρ(p)−1|≤2(L+M_B)Δ/(θ‖g‖₂).",
+      "used_by": [
+        "thm-trust-region-global-liminf-gradient",
+        "thm-trust-region-epsilon-iteration-complexity"
+      ]
+    },
+    {
+      "id": "lem-global-cubic-model-minimizer-decrease",
+      "statement": "For σ>0 and symmetric B, a global cubic-model minimizer exists. When g≠0, every global minimizer is nonzero, satisfies g+Bs_*+σ‖s_*‖₂s_*=0, and gives model decrease at least σ‖s_*‖₂³/6. The same decrease follows from the two stated scalar cubic solution conditions.",
+      "used_by": [
+        "alg-adaptive-cubic-regularization",
+        "lem-adaptive-cubic-unsuccessful-iteration-count",
+        "thm-adaptive-cubic-regularization-epsilon-complexity"
+      ]
+    },
+    {
+      "id": "lem-adaptive-cubic-unsuccessful-iteration-count",
+      "statement": "Under the stated exact-Hessian, segmentwise L-Lipschitz-Hessian, model-solution and weight assumptions, no ratio-based rejection occurs when σ_k≥3L. Every consecutive rejection block has length at most R whenever γ_up^R σ_min≥3L.",
+      "used_by": [
+        "thm-adaptive-cubic-regularization-epsilon-complexity"
+      ]
+    },
+    {
+      "id": "lem-trust-region-subproblem-optimality-and-hard-case",
+      "statement": "A feasible p_* globally minimizes the symmetric quadratic over the ball exactly when some λ≥0 satisfies (B+λI)p_*=−g, B+λI positive semidefinite, and λ(Δ−‖p_*‖₂)=0. A minimizer always exists, including the stated singular hard-case construction.",
+      "used_by": [
+        "ex-indefinite-trust-region-boundary-minimizer",
+        "ex-trust-region-singular-hard-case",
+        "ex-trust-region-newton-cauchy-truncated-cg"
+      ]
+    },
+    {
+      "id": "lem-positive-definite-model-has-unique-newton-step",
+      "statement": "A real symmetric positive-definite model matrix gives a unique solution of Bp_N=−g. The dogleg procedure is well-defined and feasible, and its boundary branch uses the unique root t∈(0,1) of the stated boundary equation.",
+      "used_by": [
+        "alg-dogleg-trust-region-step",
+        "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Euclidean inner products, vector norms, and coordinate conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Gradient coordinates in both model definitions.",
+      "opened": true
+    },
+    {
+      "id": "def-hessian-and-euclidean-critical-point",
+      "used_for": "Exact Hessians and stationarity conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-induced-matrix-p-norm",
+      "used_for": "The induced Euclidean matrix norm and zero-matrix conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Matrix products and shifted-Hessian identities.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Positive-domain logarithms in rejected-trial accounting.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Monotonicity, log 1=0, and product and quotient laws.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Derivative 1/x in the elementary logarithm bound.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Scalar remainder bounds, cubic-ray monotonicity, and the logarithm bound.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Orthogonal diagonalization in trust-region optimality and positive-definite inversion.",
+      "opened": true
+    },
+    {
+      "id": "def-definite-and-indefinite-hessian-quadratic-forms",
+      "used_for": "Positive-definite and positive-semidefinite quadratic-form criteria.",
+      "opened": true
+    },
+    {
+      "id": "thm-intermediate-value",
+      "used_for": "The secular-equation construction and dogleg boundary intersection.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of secular sums, quotients, and boundary polynomials.",
+      "opened": true
+    },
+    {
+      "id": "def-invertible-euclidean-linear-map",
+      "used_for": "Two-sided inverse convention in Newton-step well-definedness.",
+      "opened": true
+    },
+    {
+      "id": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+      "used_for": "Matrix-vector norm bounds throughout the decrease and remainder arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Inner-product estimates and Euclidean triangle inequalities.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-power-continuity-and-derivatives",
+      "used_for": "Differentiating the cubic norm away from zero.",
+      "opened": true
+    },
+    {
+      "id": "cor-euclidean-closed-balls-and-spheres-are-compact",
+      "used_for": "Compactness of the positive-radius ball used to obtain a cubic-model minimizer.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Attainment of the cubic-model minimum on a nonempty compact ball.",
+      "opened": true
+    },
+    {
+      "id": "def-krylov-subspace-of-a-matrix-and-start-vector",
+      "used_for": "K_0={0}, nested Krylov spaces, and recurrence-vector memberships.",
+      "opened": true
+    },
+    {
+      "id": "cor-hessian-is-symmetric",
+      "used_for": "Symmetry of the exact Hessian for C² objectives.",
+      "opened": true
+    },
+    {
+      "id": "lem-geometric-sequence-null",
+      "used_for": "Vanishing contracted radii and divergence of increasing regularization powers.",
+      "opened": true
+    },
+    {
+      "id": "def-limsup-liminf",
+      "used_for": "Extended-real tail-infimum definition of gradient liminf.",
+      "opened": true
+    },
+    {
+      "id": "lem-extended-reals-complete",
+      "used_for": "Existence and order properties of tail infima and their supremum.",
+      "opened": true
+    },
+    {
+      "id": "def-upper-bound",
+      "used_for": "The upper-bound argument converting eventual-gradient contradictions into liminf zero.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Choosing an integer number of accepted decreases exceeding the available objective gap.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-adaptive-cubic-regularization-epsilon-complexity",
+      "concern": "The Statement asserts that the uncapped process reaches the target. Proof steps 2.1 and 3.2 bound nonterminal accepted trials, while steps 3.1 and 4.1 count rejection blocks through the first target iterate without explicitly establishing that this iterate exists. The short missing argument is that an infinite nonterminal run, with solver success and rejection blocks bounded by R, must have infinitely many accepted trials, contradicting the fixed positive decrease and lower bound. This closes the proof under its existing hypotheses.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "trust-region-and-cubic-regularization-methods",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "The prerequisite page supplies broader Krylov context. Actual local memberships use the published Krylov-space definition and explicit exact recurrences; no finite-precision or Lanczos convergence claim is imported."
+    },
+    {
+      "from": "trust-region-and-cubic-regularization-methods",
+      "to": "nonconvex-line-search-and-inexact-newton-methods",
+      "faithful": true,
+      "note": "The comparison example respects the Newton–Krylov solver interface, verifies its zero-shift residual and strict descent test, and checks both strong Wolfe inequalities at the first trial t=1."
+    },
+    {
+      "from": "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+      "to": "trust-region-and-cubic-regularization-methods",
+      "faithful": true,
+      "note": "The ratio and complexity items transfer the Cauchy formula and decrease bound through orthonormal real tangent coordinates. Their nonzero-gradient uses ensure positive tangent dimension; the logarithm estimate is applied only for arguments at least one."
+    },
+    {
+      "from": "gauss-newton-and-levenberg-marquardt-methods",
+      "to": "trust-region-and-cubic-regularization-methods",
+      "faithful": true,
+      "note": "The scaled LM lemma verifies symmetry and positive definiteness before using unique Newton-step existence. LM ratio uses preserve the positive predicted-reduction requirement."
+    },
+    {
+      "from": "minimum-energy-paths-string-neb-and-saddle-certificates",
+      "to": "trust-region-and-cubic-regularization-methods",
+      "faithful": true,
+      "note": "This is a contextual page prerequisite. Its page prose and listed item references do not invoke an assigned trust-region or cubic result, so there is no stronger cited proposition to compare."
+    },
+    {
+      "from": "finite-basis-projector-energies-and-variational-electronic-structure",
+      "to": "trust-region-and-cubic-regularization-methods",
+      "faithful": true,
+      "note": "This is a contextual page prerequisite. The page and listed item references do not cite an assigned trust-region or cubic result or claim its complexity guarantees."
+    }
+  ]
+}

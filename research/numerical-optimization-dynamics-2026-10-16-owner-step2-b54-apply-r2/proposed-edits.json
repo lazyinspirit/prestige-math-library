@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "54",
+  "owner_cycle2": 2,
+  "original_session_id": "01a143cc-16a3-73a3-af1b-6a1745c431f3",
+  "decision": "exact-proposals-ready",
+  "canonical_application_authorized": false,
+  "application_order": [
+    "items/thm-implicit-midpoint-branch-symplectic-order-and-error.md",
+    "items/alg-implicit-midpoint-hamiltonian-step.md"
+  ],
+  "edits": [
+    {
+      "path": "items/thm-implicit-midpoint-branch-symplectic-order-and-error.md",
+      "purpose": "Separate C2 contraction/output certificates from the preserved C3 exact-map conclusions",
+      "source_excerpt": "Let $U\\subseteq\\mathbb R^{2d}$ be open, $H\\in C^3(U)$, $z=(q,p)$, and $J=\\begin{pmatrix}0&I\\\\-I&0\\end{pmatrix}$; define $F(q,p)=(\\nabla_pH(q,p),-\\nabla_qH(q,p))=J\\nabla H(q,p)$. Suppose, uniformly for initial values $z$ in a compact convex tube, that $\\overline B(z,\\rho)\\subset U$, $\\|F\\|\\le M$, $\\|DF\\|\\le L_0$ on these balls, and $|h|M/2\\le\\rho$, $|h|L_0/2<1$. The exact implicit midpoint branch [[alg-implicit-midpoint-hamiltonian-step]] then exists uniquely in each ball. At every admitted initial value its selected branch is locally the restriction of a $C^1$ solution branch, and its local map $\\Psi_h(z)=2Z-z$ satisfies $D\\Psi_h(z)^TJ D\\Psi_h(z)=J$.\n\nAssume also that the exact and numerical trajectories, the branch balls, and the segments used in comparison lie in a compact convex subset of $U$ whenever $n|h|\\le T$, with the displayed derivatives uniformly bounded. Then for some constants $C,L_1$ independent of $h,n$,\n$$\\|\\Psi_h(z)-\\varphi_h(z)\\|\\le C|h|^3,\\qquad e_n\\le e^{L_1T}e_0+CTe^{L_1T}|h|^2,$$\nwhere $\\varphi_h$ is the exact Hamiltonian flow and $e_n=\\|z_n-\\varphi_{nh}(z_0)\\|$.\n",
+      "proposed_replacement": "Let $U\\subseteq\\mathbb R^{2d}$ be open, $H\\in C^2(U)$, $z=(q,p)$, and $J=\\begin{pmatrix}0&I\\\\-I&0\\end{pmatrix}$; define $F(q,p)=(\\nabla_pH(q,p),-\\nabla_qH(q,p))=J\\nabla H(q,p)$. For a signed step $h$, suppose a declared closed ball $\\overline B(z,\\rho)\\subset U$ has bounds $\\|F\\|\\le M$ and $\\|DF\\|\\le L$ satisfying $|h|M/2\\le\\rho$ and $\\theta:=|h|L/2<1$. The exact implicit midpoint branch [[alg-implicit-midpoint-hamiltonian-step]] then has a unique stage root $Z$ in this ball. The exact iterates $Z_0=z$, $Z_{k+1}=z+(h/2)F(Z_k)$ stay in the ball, converge to $Z$, and for every $k\\in\\mathbb N_0$ satisfy\n$$\\|Z_k-Z\\|\\le b_k:=\\frac{\\theta^k\\|Z_1-Z_0\\|}{1-\\theta},\\qquad \\|(2Z_k-z)-(2Z-z)\\|\\le2b_k.$$\nHere $\\theta^0=1$, including when $\\theta=0$; if $\\theta=0$, the first update equals $Z$ and $b_k=0$ for $k\\ge1$. Also $\\|(2Z-z)-z\\|\\le2\\rho$, which supplies an output-error bound when no update is computed.\n\nAssume additionally $H\\in C^3(U)$ and that these ball hypotheses hold uniformly for initial values $z$ in a compact convex tube, with common $\\rho,M,L$. At every admitted initial value the selected branch is locally the restriction of a $C^1$ solution branch, and its exact local map $\\Psi_h(z)=2Z-z$ satisfies $D\\Psi_h(z)^TJ D\\Psi_h(z)=J$.\n\nUnder these additional $C^3$ and uniform branch hypotheses, assume also that the exact and numerical trajectories, the branch balls, and the segments used in comparison lie in a compact convex subset of $U$ whenever $n|h|\\le T$, with the displayed derivatives uniformly bounded. Then for some constants $C,L_1$ independent of $h,n$,\n$$\\|\\Psi_h(z)-\\varphi_h(z)\\|\\le C|h|^3,\\qquad e_n\\le e^{L_1T}e_0+CTe^{L_1T}|h|^2,$$\nwhere $\\varphi_h$ is the exact Hamiltonian flow and $e_n=\\|z_n-\\varphi_{nh}(z_0)\\|$. These symplecticity and trajectory-error conclusions concern the exact selected map; no such conclusion is asserted here for a finite iteration output.\n"
+    },
+    {
+      "path": "items/thm-implicit-midpoint-branch-symplectic-order-and-error.md",
+      "purpose": "Make the conditional proof hypotheses explicit",
+      "source_excerpt": "**Given:** The stated local Hamiltonian field, compact branch balls, bounds, small-step inequalities, and controlled finite-time tube.",
+      "proposed_replacement": "**Given:** For the contraction and iteration estimates, the stated $C^2$ Hamiltonian, admitted closed ball, bounds, and signed-step inequalities. For the symplecticity and trajectory-error claims, assume additionally the stated $C^3$ regularity, uniform branch hypotheses, and controlled finite-time tube."
+    },
+    {
+      "path": "items/thm-implicit-midpoint-branch-symplectic-order-and-error.md",
+      "purpose": "Keep the Hessian fact within the stronger exact-map portion",
+      "source_excerpt": "[F5] Differentiating the explicit coordinate field in the Statement gives $DF=J\\nabla^2H$; since $H\\in C^3(U)$, its Hessian is symmetric. [[thm-symmetry-of-higher-mixed-partials]]",
+      "proposed_replacement": "[F5] Under the additional $C^3$ hypotheses, differentiating the explicit coordinate field in the Statement gives $DF=J\\nabla^2H$, and the Hessian is symmetric. [[thm-symmetry-of-higher-mixed-partials]]"
+    },
+    {
+      "path": "items/thm-implicit-midpoint-branch-symplectic-order-and-error.md",
+      "purpose": "Prove signed C2 well-definedness, stage bounds, doubled output bounds and zero cases",
+      "source_excerpt": "1.1 On each closed ball, $T_z(Z)=z+(h/2)F(Z)$ maps the ball into itself because $\\|T_z(Z)-z\\|\\le |h|M/2\\le\\rho$. The mean-value estimate on the convex ball gives $\\|T_z(Z)-T_z(W)\\|\\le q\\|Z-W\\|$ with $q=|h|L_0/2<1$. The ball is complete, so [F1] gives a unique fixed point $Z$ and the stated convergent iteration. [A1, F1, given]",
+      "proposed_replacement": "1.1 Since $H\\in C^2(U)$, the coordinate field $F$ is $C^1$. On the admitted closed ball, $T_z(W)=z+(h/2)F(W)$ maps the ball into itself because $\\|T_z(W)-z\\|\\le |h|M/2\\le\\rho$. The mean-value estimate on this convex ball gives $\\|T_z(W)-T_z(V)\\|\\le\\theta\\|W-V\\|$ with $\\theta=|h|L/2<1$. The ball is nonempty and complete, so [F1] gives a unique fixed point $Z$, keeps all iterates in the ball, and gives $\\|Z_k-Z\\|\\le b_k=\\theta^k\\|Z_1-Z_0\\|/(1-\\theta)$. Multiplication by two gives $\\|(2Z_k-z)-(2Z-z)\\|=2\\|Z_k-Z\\|\\le2b_k$, and $Z\\in\\overline B(z,\\rho)$ gives $\\|(2Z-z)-z\\|\\le2\\rho$. The convention $\\theta^0=1$ makes the bound valid at $k=0$. If $\\theta=0$, $T_z$ is constant on the ball, hence $Z_1=T_z(z)=T_z(Z)=Z$ and every later iterate equals $Z$; thus $b_k=0$ for $k\\ge1$. These assertions require only the $C^2$ hypotheses. [A1, F1, given, algebra]"
+    },
+    {
+      "path": "items/thm-implicit-midpoint-branch-symplectic-order-and-error.md",
+      "purpose": "Delimit the stronger proof portion",
+      "source_excerpt": "1.2 Fix an admitted initial value $z$ and let",
+      "proposed_replacement": "1.2 For the remaining claims, assume the additional $C^3$ and uniform branch hypotheses. Fix an admitted initial value $z$ and let"
+    },
+    {
+      "path": "items/thm-implicit-midpoint-branch-symplectic-order-and-error.md",
+      "purpose": "Discharge each conclusion under its own regularity assumptions",
+      "source_excerpt": "3.1 Steps 1.1–2.2 prove the unique admitted branch, symplecticity, local second order, and the stated finite-time error. [A1, step 1.1, step 2.1, step 1.4, step 2.2] ∎",
+      "proposed_replacement": "3.1 Step 1.1 proves existence, uniqueness, convergence, and the stage and output certificates under the $C^2$ hypotheses. Under the additional $C^3$ and tube hypotheses, steps 1.2–2.2 prove the exact branch's stated regularity, symplecticity, local second order, and finite-time error. [A1, step 1.1, step 1.2, step 2.1, step 1.4, step 2.2] ∎"
+    },
+    {
+      "path": "items/alg-implicit-midpoint-hamiltonian-step.md",
+      "purpose": "Specify bounded iteration and use the doubled output radius in both return values and tolerance checks",
+      "source_excerpt": "For a finite implementation, start with $Z_0=z$ and iterate $Z_{k+1}=z+(h/2)F(Z_k)$ up to the supplied budget. The contraction estimate gives a certified radius for $Z_k-Z$. Return the approximation $2Z_k-z$ with that radius if it is within the requested tolerance; otherwise return `inconclusive` with the current iterate and bound. An approximate result is not asserted to be exactly symplectic. The exact map is the selected branch value $2Z-z$.",
+      "proposed_replacement": "For a finite iteration implementation of these exact operations, input an output tolerance $\\tau>0$ and an update budget $B\\in\\mathbb N_0$. Use $\\theta=|h|L/2$ and proceed as follows.\n\n1. Set $Z_0=z$. If $B=0$, return `inconclusive` with current stage iterate $Z_0$, approximate output $z$, and output-error bound $2\\rho$.\n2. If $B\\ge1$, compute $Z_1=z+(h/2)F(Z_0)$ and set $d_1=\\|Z_1-Z_0\\|$.\n3. For $k=1,\\ldots,B$, set $b_k=\\theta^k d_1/(1-\\theta)$ and the output radius $r_k=2b_k$. If $r_k\\le\\tau$, return the approximation $2Z_k-z$ with output-error certificate $r_k$. Otherwise, if $k<B$, compute $Z_{k+1}=z+(h/2)F(Z_k)$ and continue. If the check fails at $k=B$, return `inconclusive` with current stage iterate $Z_B$, approximate output $2Z_B-z$, and output-error bound $2b_B$.\n\nWhen $\\theta=0$, use $\\theta^k=0$ for $k\\ge1$; the procedure never evaluates $0^0$. These certificates concern the displayed exact recurrence and exact output operations; inexact evaluations require additional certified error accounting before a tolerance claim can be made. An approximate result is not asserted to be exactly symplectic. The exact map is the selected branch value $2Z-z$."
+    }
+  ],
+  "mathematical_notes": [
+    "The C2 clause proves only contraction existence, uniqueness and error certificates. The original C3 exact-branch symplectic and order/error claims remain under their stronger hypotheses.",
+    "For the theorem estimate at k=0, theta^0 is defined as 1 even when theta=0. For theta=0 and k>=1, theta^k=0 and the first update equals the root.",
+    "A zero update budget computes no Z1 and returns inconclusive with output-error bound 2rho from root membership in the admitted ball. This bound is not substituted for b_k in positive-budget tolerance checks.",
+    "For every positive-budget return, the reported radius and tolerance comparison use 2b_k, because the output map multiplies the stage error by two.",
+    "The finite procedure specifies exact mathematical operations; its radius does not certify errors from inexact force or arithmetic evaluations."
+  ],
+  "root_review_requirements": [
+    "Independently read and approve the exact full proposed theorem and algorithm files, including their unchanged frontmatter.",
+    "Review C2/C3 separation, signed h, the Banach estimate, factor-two output certificate, zero budget and theta=0 handling.",
+    "Explicit acceptance must name these exact candidates before canonical application; proposal generation grants no application authority.",
+    "At application time require canonical-before byte equality, no overlapping active source writer, and the native batch54 held/drained boundary. Stop on any stale or conflicting guard.",
+    "After any approved application, the original repairer must retrace current and retained-old consumer edges and dispose all actual consumers and relevant pages."
+  ],
+  "limitations": [
+    "Research candidates only; canonical source files and native reports/state were not modified.",
+    "No hashes, validators, formatters, gates, tests or controller commands were run."
+  ],
+  "source_guard_results": {
+    "preparation_canonical_equals_complete_before": {
+      "thm-implicit-midpoint-branch-symplectic-order-and-error": true,
+      "alg-implicit-midpoint-hamiltonian-step": true,
+      "lem-finite-modified-hamiltonian-exists": true,
+      "lem-truncated-modified-flow-matches-map": true,
+      "lem-finite-modified-hamiltonian-close-to-original": true,
+      "lem-one-step-modified-energy-defect": true,
+      "thm-finite-order-modified-energy-bound": true
+    },
+    "canonical_application": "not attempted; first phase permits research candidates only",
+    "root_exact_candidate_acceptance": "not received",
+    "application_time_before_equality": "must be rechecked after explicit root approval",
+    "overlapping_active_writer": "not assessed in proposal phase; required before application",
+    "native54_held_drained_boundary": "not independently verified in proposal phase; required before application"
+  },
+  "actual_changed_interfaces": [],
+  "proposed_changed_interfaces": [
+    "thm-implicit-midpoint-branch-symplectic-order-and-error",
+    "alg-implicit-midpoint-hamiltonian-step"
+  ],
+  "consumer_traversal": {
+    "method": "actual exported read-only consumers function in tools/batch-scope-review.mjs",
+    "roots": [
+      "lem-local-hamiltonian-flow-preserves-symplectic-matrix",
+      "alg-implicit-midpoint-hamiltonian-step",
+      "thm-implicit-midpoint-branch-symplectic-order-and-error",
+      "lem-finite-modified-hamiltonian-exists"
+    ],
+    "item_count": 7,
+    "retained_before_edges": "All seven complete before snapshots equal the current canonical files at preparation; candidate edits change no dependency lists, aliases, or wikilink targets.",
+    "excluded_paths": "Prepared paths rooted only at unchanged interfaces are not treated as new mathematical acceptance."
+  },
+  "consumer_checks": [
+    {
+      "id": "alg-implicit-midpoint-hamiltonian-step",
+      "decision": "repair-proposed",
+      "reason": "Current C2 justified_by scope and output-radius defect remain unapplied. The exact proposed theorem supplies signed C2 existence and b_k bounds; the proposed algorithm tests and returns 2b_k, preserves inconclusive, and claims no approximate symplecticity."
+    },
+    {
+      "id": "thm-implicit-midpoint-branch-symplectic-order-and-error",
+      "decision": "accept",
+      "reason": "Current exact-root C3 argument remains supported. Proposed text adds a separately proved C2 contraction clause and retains all C3 exact-branch symplecticity and signed trajectory-error hypotheses and conclusions."
+    },
+    {
+      "id": "lem-finite-modified-hamiltonian-exists",
+      "decision": "accept",
+      "reason": "Actual current proof uses smooth H and the exact root, hence satisfies the preserved C3 exact-map supplier; no finite-output certificate is used."
+    },
+    {
+      "id": "lem-truncated-modified-flow-matches-map",
+      "decision": "accept",
+      "reason": "Actual current proof compares the smooth exact method with its finite modified flow; no substitution of a finite iteration output occurs."
+    },
+    {
+      "id": "lem-finite-modified-hamiltonian-close-to-original",
+      "decision": "accept",
+      "reason": "Actual current proof bounds the finite smooth coefficient sum on a compact set and does not use finite-tolerance certificates."
+    },
+    {
+      "id": "lem-one-step-modified-energy-defect",
+      "decision": "accept",
+      "reason": "Actual current proof uses the exact method and an exact energy-preserving modified flow; its comparison is unchanged by the proposed output certificate repair."
+    },
+    {
+      "id": "thm-finite-order-modified-energy-bound",
+      "decision": "accept",
+      "reason": "Actual current proof telescopes the exact-method defect under smooth-H and positive-step compact-tube conditions. Its splitting and RATTLE references are nonlogical context, not method transfer."
+    },
+    {
+      "id": "geometric-numerical-integration",
+      "decision": "accept",
+      "reason": "Actual page summary describes the selected exact contraction branch, symplectic pullback and finite-time order result in context; it does not assert symplecticity or the exact-map energy theorem for approximate outputs. No page change is proposed."
+    }
+  ],
+  "next_action": "Root independently reviews and explicitly accepts the exact full candidates; only then may this same session perform the guarded supplier-before-consumer canonical application and post-application consumer recheck."
+}

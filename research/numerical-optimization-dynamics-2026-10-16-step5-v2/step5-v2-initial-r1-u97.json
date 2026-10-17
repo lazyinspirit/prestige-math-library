@@ -1,0 +1,226 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "97",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-certified-scf-with-diis-safeguard",
+      "model": "gpt-6-luna",
+      "context_sha256": "54863cc77d974c9b566958f644f8a723cf2cc918f5f0513a2d0e08346cfbed1c",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The current-point eigensolver has already certified a strict gap when the separate approximate response evaluator fails. Returning eigensolve-failure conflates distinct returning primitives; changed that branch to response-evaluation-failure and included it in the failure-budget sentence. No iterate or E_k is changed on this return, so the existing error certificate remains valid. This is a nonfatal status-interface defect, not an error in the contraction estimates.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-gapped-response-projector-lipschitz-certificate",
+      "model": "gpt-6-luna",
+      "context_sha256": "f393b538f540a75c3ee5cb212aa2eefef397cf82002fa6614739a16925203ab4",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F3 asserted the projector contour formula, while the contracted Statement of thm-block-projector-frechet-derivative-and-bound exports only C1 regularity, the derivative contour formula and its norm bound. Its proof step 2.1 does establish the projector formula, but that proof-only intermediate was not the contracted interface. Replaced the unsupported interface use by the exported derivative bound along the Hermitian segment H(t)=(1-t)F(Y)+tF(X), which stays in the common open ball, then applied the published vector-valued bounded-derivative Lipschitz corollary in real entry coordinates. The original claim and q=16RL_F/g² are unchanged; K need not be convex and F need not be differentiable.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-relaxed-density-mixing-with-finite-budget",
+      "model": "gpt-6-luna",
+      "context_sha256": "780de49e72f3681cc7965e899ffa58dac9a81f24bcb7a3d1e293cc6e2b65776c",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Requiring Phi at every required iterate forces a strict r-gap in F(D_k), excluding the intended gap-loss input cases before execution. This is a nonfatal domain/status-interface defect: the original successful gapped executions and update formula are sound. Replaced that precondition with F:U -> H_n being defined at every entered density iterate, and explicitly retained Phi only at the strict-gap points of U. Thus F(D_k) can be tested for a gap before any Phi value is requested, while successful updates, relaxed residuals and stopping order are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-certified-scf-with-diis-safeguard",
+      "disposition": "repaired",
+      "post_sha256": "c90ba49b614e529d8f2f3596d8df25b37e6e859ed642ec410e56a3381cb650e7",
+      "review_context_sha256": "e9a0181d45b891743635df07c711286036ed919315d78ec5d5e62d3f5f48746e",
+      "reason": "The current-point eigensolver has already certified a strict gap when the separate approximate response evaluator fails. Returning eigensolve-failure conflates distinct returning primitives; changed that branch to response-evaluation-failure and included it in the failure-budget sentence. No iterate or E_k is changed on this return, so the existing error certificate remains valid. This is a nonfatal status-interface defect, not an error in the contraction estimates. Checked the K-membership, additive residual bound, acceptance threshold, fallback recurrence, cache-to-point binding and finite stopping order against the defining suppliers. Updated its existing manifest Definition mirror under the shared-write lock. This is a repair review, not independent judgment of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-gapped-response-projector-lipschitz-certificate",
+      "disposition": "repaired",
+      "post_sha256": "07adb13133f0bc0977eb12682a1cf01f15c28ee2c90cec01be10ce103b458195",
+      "review_context_sha256": "98a89038fe3eb62d9ed6b4b8372861de0d7edfd0b20ead186da900d0e033cc13",
+      "reason": "F3 asserted the projector contour formula, while the contracted Statement of thm-block-projector-frechet-derivative-and-bound exports only C1 regularity, the derivative contour formula and its norm bound. Its proof step 2.1 does establish the projector formula, but that proof-only intermediate was not the contracted interface. Replaced the unsupported interface use by the exported derivative bound along the Hermitian segment H(t)=(1-t)F(Y)+tF(X), which stays in the common open ball, then applied the published vector-valued bounded-derivative Lipschitz corollary in real entry coordinates. The original claim and q=16RL_F/g² are unchanged; K need not be convex and F need not be differentiable. Checked the Frechet expansion for the affine path, the Delta=0 case, endpoint continuity, and the exact Euclidean/Frobenius isometry. Reconciled the theorem contract and manifest dependencies under the shared lock; strict focused proof-contract validation passed with no warnings. No Statement change, so no downstream propagation from this proof repair. This is an author repair review, not independent rejudgment.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-relaxed-density-mixing-with-finite-budget",
+      "disposition": "repaired",
+      "post_sha256": "add5469dd68820d7977da6b5fd43a75dd3f42614e03360097c16646372de3998",
+      "review_context_sha256": "5536ee111d8e08bbf28f2a3bf946c69fe097f4be230d8c84c99de15680e5c577",
+      "reason": "Requiring Phi at every required iterate forces a strict r-gap in F(D_k), excluding the intended gap-loss input cases before execution. This is a nonfatal domain/status-interface defect: the original successful gapped executions and update formula are sound. Replaced that precondition with F:U -> H_n being defined at every entered density iterate, and explicitly retained Phi only at the strict-gap points of U. Thus F(D_k) can be tested for a gap before any Phi value is requested, while successful updates, relaxed residuals and stopping order are preserved. Checked that strict-gap output is a unique rank-r projector; convex mixing stays in D_r by its supplier. Alpha=0 still checks the gap before stopping and certifies only the relaxed residual; alpha=1 gives the ordinary response update. N=0 performs the current tests before a budget return. The convergence theorem is invoked only conditionally with its own invariance/derivative hypotheses. Its existing manifest has no statement mirror and this definition-like carrier has no phase-proof contract. This is a repair-author review, not independent rejudgment.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-certified-diis-error-inheritance",
+    "lem-finite-budget-scf-iteration-work"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-certified-scf-with-diis-safeguard",
+      "severity": "nonfatal",
+      "locus": "definition",
+      "reason": "The current-point eigensolver has already certified a strict gap when the separate approximate response evaluator fails. Returning eigensolve-failure conflates distinct returning primitives; changed that branch to response-evaluation-failure and included it in the failure-budget sentence. No iterate or E_k is changed on this return, so the existing error certificate remains valid. This is a nonfatal status-interface defect, not an error in the contraction estimates."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "lem-finite-budget-scf-iteration-work",
+      "supplier": "alg-certified-scf-with-diis-safeguard",
+      "severity": "nonfatal",
+      "locus": "statement",
+      "reason": "The supplier now distinguishes response-evaluation-failure; the lemma exhaustive terminal-status list must add that status. Work bounds remain correct. Route to frontier owner; no consumer edits made in unit 97."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-gapped-response-projector-lipschitz-certificate",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "locus": "facts-block",
+      "reason": "F3 asserted the projector contour formula, while the contracted Statement of thm-block-projector-frechet-derivative-and-bound exports only C1 regularity, the derivative contour formula and its norm bound. Its proof step 2.1 does establish the projector formula, but that proof-only intermediate was not the contracted interface. Replaced the unsupported interface use by the exported derivative bound along the Hermitian segment H(t)=(1-t)F(Y)+tF(X), which stays in the common open ball, then applied the published vector-valued bounded-derivative Lipschitz corollary in real entry coordinates. The original claim and q=16RL_F/g² are unchanged; K need not be convex and F need not be differentiable."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-relaxed-density-mixing-with-finite-budget",
+      "severity": "nonfatal",
+      "locus": "definition",
+      "reason": "Requiring Phi at every required iterate forces a strict r-gap in F(D_k), excluding the intended gap-loss input cases before execution. This is a nonfatal domain/status-interface defect: the original successful gapped executions and update formula are sound. Replaced that precondition with F:U -> H_n being defined at every entered density iterate, and explicitly retained Phi only at the strict-gap points of U. Thus F(D_k) can be tested for a gap before any Phi value is requested, while successful updates, relaxed residuals and stopping order are preserved."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "alg-certified-scf-with-diis-safeguard",
+      "thm-gapped-response-projector-lipschitz-certificate",
+      "alg-relaxed-density-mixing-with-finite-budget"
+    ],
+    "next_action": "Controller to route the finite-work lemma status-list finding to its frontier owner and obtain the required independent rejudgment. No judges, item gates, certification or round transitions were launched by this worker.",
+    "conventions": "Ascending eigenvalues, strict r-gap, Frobenius norm, 0 <= q < 1. The new evaluator-failure return preserves the current E_k.",
+    "source_evidence": [
+      "items/def-self-consistent-projector-response-map.md: Definition",
+      "items/alg-capped-diis-projector-proposal.md: Definition",
+      "items/thm-contractive-scf-convergence-and-inexact-error-bound.md: residual estimate and inexact recurrence",
+      "items/thm-block-projector-frechet-derivative-and-bound.md: complete Statement and Proof, especially 2.1 and 3.1–4.1",
+      "items/cor-vector-valued-ftc-and-lipschitz-bound.md: Statement clause 2 and complete proof",
+      "items/def-frobenius-matrix-norm.md: Definition as quoted in current contract",
+      "items/lem-density-mixing-preserves-domain-but-not-projectors.md: Statement and complete Proof",
+      "items/thm-density-mixing-contracts-under-jacobian-certificate.md: Statement and complete Proof",
+      "items/alg-fixed-point-iteration.md: Definition stopping order",
+      "items/def-admissible-hermitian-density-domain.md: Definition"
+    ],
+    "consumer_examinations": [
+      {
+        "supplier": "alg-certified-scf-with-diis-safeguard",
+        "id": "thm-certified-diis-error-inheritance",
+        "path": "items/thm-certified-diis-error-inheritance.md",
+        "affected_use": "Statement assumes the certified algorithm hypotheses; F2 and proof steps 1.1–3.1 use its candidate threshold and fallback E_{k+1} recurrence.",
+        "disposition": "unaffected",
+        "reason": "The new early-return label changes no produced iterate, candidate threshold, residual bound, or error recurrence."
+      },
+      {
+        "supplier": "alg-certified-scf-with-diis-safeguard",
+        "id": "lem-finite-budget-scf-iteration-work",
+        "path": "items/lem-finite-budget-scf-iteration-work.md",
+        "affected_use": "Statement says each procedure terminates with a stated residual, gap, eigensolver, invariance-certificate or budget status; F3 and steps 1.1–3.1 count current/candidate tests.",
+        "invalidated_claim": "The exhaustive terminal-status enumeration omits the newly explicit response-evaluation-failure status.",
+        "minimality": "Add response-evaluation to the Statement status enumeration and response-evaluation failure to proof step 2.1 early returns; no count or update bound changes.",
+        "disposition": "frontier_owner_repair_required",
+        "reason": "This frontier consumer is outside the assigned rejected subjects; route its minimal status-list repair to the ordinary owner lane."
+      },
+      {
+        "supplier": "alg-relaxed-density-mixing-with-finite-budget",
+        "id": "lem-finite-budget-scf-iteration-work",
+        "path": "items/lem-finite-budget-scf-iteration-work.md",
+        "affected_use": "Statement covers admissible inputs of the relaxed procedure; F2 and proof steps 1.1–3.1 use its gap-first, residual-before-budget order and indices 0 through N.",
+        "disposition": "unaffected_by_this_interface_change",
+        "reason": "The revised input admits gapless entered matrices, for which the procedure immediately returns gap-loss. F2 and the proof already allow these early gap returns, so the N-update and N+1-test bounds remain sound. The separate missing response-evaluation status from the certified DIIS supplier is already routed once."
+      }
+    ],
+    "page_examinations": [
+      {
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/self-consistent-projector-iterations-and-certified-mixing.md",
+        "disposition": "unaffected",
+        "reason": "Its DIIS paragraph uses the unchanged candidate residual budget. The final sentence lists retained gap/eigensolver/budget outcomes without asserting that list is exhaustive."
+      },
+      {
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/self-consistent-projector-iterations-and-certified-mixing-examples.md",
+        "disposition": "unaffected",
+        "reason": "The companion prose discusses explicit finite examples and neither calls nor cites the changed algorithm interfaces."
+      }
+    ],
+    "unresolved_assigned_mathematics": [],
+    "published_consumer_findings": [],
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-97.proof-contracts.json --strict --items thm-gapped-response-projector-lipschitz-certificate --json",
+        "exit_code": 0,
+        "result": "ok true; one theorem checked; zero errors and warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-certified-scf-with-diis-safeguard.md items/thm-gapped-response-projector-lipschitz-certificate.md items/alg-relaxed-density-mixing-with-finite-budget.md --json",
+        "exit_code": 0,
+        "result": "Three files, one checked proof, zero failures; both algorithms correctly not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-certified-scf-with-diis-safeguard.md items/thm-gapped-response-projector-lipschitz-certificate.md items/alg-relaxed-density-mixing-with-finite-budget.md --json",
+        "exit_code": 0,
+        "result": "Three files checked; zero errors and warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-certified-scf-with-diis-safeguard.md items/thm-gapped-response-projector-lipschitz-certificate.md items/alg-relaxed-density-mixing-with-finite-budget.md",
+        "exit_code": 0,
+        "result": "3 items, 3 numbered proof steps, 0 defects; run once after final item edits."
+      },
+      {
+        "command": "Read-only node assertions importing itemHashGuard and statementHash, applied to the assigned pack, report and current carriers",
+        "exit_code": 0,
+        "result": "Exact rejected-tuple coverage and item guards match; both algorithm Definitions changed, theorem Statement unchanged; both direct item consumers are frozen-frontier subjects; all three owning-manifest dependency rows and the DIIS Definition mirror agree with current items."
+      }
+    ],
+    "repair_complete": true,
+    "interface_events": [
+      {
+        "id": "alg-certified-scf-with-diis-safeguard",
+        "before_statement_sha256": "e3ec13c116740f76b6effe1507c355d4c1edf5f7934607b4e57ec7dda72fedb8",
+        "after_statement_sha256": "44298cbf701d095da6d98d143ae865aa9a0d9f64ff33e2df26c23f92d363b4c3",
+        "direct_item_consumers": [
+          "thm-certified-diis-error-inheritance",
+          "lem-finite-budget-scf-iteration-work"
+        ]
+      },
+      {
+        "id": "alg-relaxed-density-mixing-with-finite-budget",
+        "before_statement_sha256": "3898d4f339e893fd0209ca4dcc254c9f76ea2c460cffb5404acb5461acb48772",
+        "after_statement_sha256": "f80d8d18b1fb265675c20f530d6a51c1e8d443f6d24e1afe3d9a4ced538616a7",
+        "direct_item_consumers": [
+          "lem-finite-budget-scf-iteration-work"
+        ]
+      }
+    ],
+    "outside_consumer_maintenance": []
+  }
+}

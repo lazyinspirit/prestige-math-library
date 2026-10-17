@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "future_native_creation_only": true,
+  "contracts": {
+    "cor-sqp-augmented-lagrangian-finite-budget-status": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-sqp-augmented-lagrangian-multiplier-method",
+          "source_section": "Definition",
+          "quote": "Fix a smooth program as in\n[[def-sqp-augmented-lagrangian-equality-and-inequality]], a penalty\n$\\rho>0$, finite outer cap $K\\ge1$, finite per-call inner cap $M\\ge1$,\ntolerances $\\epsilon_k\\ge0$, and KKT tolerance $\\tau\\ge0$. A supplied\nfinite-budget inner procedure receives\n$(x_k,\\nu_k,\\lambda_k,\\rho,\\epsilon_k,M)$, performs at most $M$ inner\niterations, and returns one of: `success(x_k^+,\\widehat\\epsilon_k)` with\n$x_k^+\\in U$ and\n$\\widehat\\epsilon_k=\\|\\nabla_x\\mathcal L_\\rho(x_k^+,\\nu_k,\\lambda_k)\\|_2\n\\le\\epsilon_k$; `budget-exhausted(x_{\\rm last},\\widehat\\epsilon_{\\rm last})`\nwith $x_{\\rm last}\\in U$ and\n$\\widehat\\epsilon_{\\rm last}=\n\\|\\nabla_x\\mathcal L_\\rho(x_{\\rm last},\\nu_k,\\lambda_k)\\|_2$; or\n`failure(data)` when it cannot continue or report a residual. Each inner\niteration and report computation is finite, and the procedure returns by its\ncap.\n\nInitialize $x_0\\in U$, $\\nu_0\\in\\mathbb R^p$, and\n$\\lambda_0\\in\\mathbb R^m_+$. For $k=0,\\ldots,K-1$:\n\n1. Call the inner procedure with cap $M$. On\n   `budget-exhausted(x_{\\rm last},\\widehat\\epsilon_{\\rm last})`, return\n   `inner-budget-exhausted` with current $(x_k,\\nu_k,\\lambda_k)$, that point,\n   and residual. On `failure(data)`,\n   return `inner-failure` with the data. If a purported success reports a\n   residual exceeding $\\epsilon_k$, return `inner-failure` with the reported\n   data. Otherwise store its reported inner residual\n   $\\widehat\\epsilon_k$.\n2. Set\n   $$\\nu_{k+1}=\\nu_k+\\rho h(x_k^+),\\qquad \\lambda_{k+1}=[\\lambda_k+\\rho g(x_k^+)]_+.$$\n3. Set $r_k=r_{\\rm KKT}(x_k^+,\\nu_{k+1},\\lambda_{k+1})$. If $r_k\\le\\tau$,\n   return `kkt-tolerance-reached` with $x_k^+$, $(\\nu_{k+1},\\lambda_{k+1})$,\n   $r_k$, and $\\widehat\\epsilon_k$; otherwise set $x_{k+1}=x_k^+$ and\n   continue.\n\nIf all $K$ outer iterations finish without that test passing, return\n`outer-budget-exhausted` with $x_K$, $(\\nu_K,\\lambda_K)$, the last KKT\nresidual $r_{K-1}$, and inner residual $\\widehat\\epsilon_{K-1}$. The routine\nclaims neither convergence nor that the inner procedure succeeds within its\ncap.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sqp-augmented-lagrangian-equality-and-inequality",
+          "source_section": "Definition",
+          "quote": "Use the smooth program, dimensions, gradient conventions, and Lagrangian\n$L(x,\\nu,\\lambda)=f(x)+\\nu^Th(x)+\\lambda^Tg(x)$ of\n[[def-inequality-constrained-program-and-kkt-geometry]]. Let $\\rho>0$,\n$\\nu\\in\\mathbb R^p$, and $\\lambda\\in\\mathbb R^m_+$. The equality\naugmented Lagrangian is\n$$\\mathcal L^E_\\rho(x,\\nu)=f(x)+\\nu^Th(x)+\\tfrac{\\rho}{2}\\|h(x)\\|_2^2.$$\nFor inequalities, with $[z]_i^+=\\max\\{z_i,0\\}$, the projected\n(Powell–Hestenes–Rockafellar) augmented Lagrangian is\n$$\\mathcal L_\\rho(x,\\nu,\\lambda)=f(x)+\\nu^Th(x)+\\tfrac{\\rho}{2}\\|h(x)\\|_2^2+ \\frac{\\|[\\lambda+\\rho g(x)]_+\\|_2^2-\\|\\lambda\\|_2^2}{2\\rho}.$$\nAfter an inner candidate $x^+$ is produced, the multiplier update is\n$$\\nu^+=\\nu+\\rho h(x^+),\\qquad \\lambda^+=[\\lambda+\\rho g(x^+)]_+.$$\nThe bracket is componentwise. A **declared inner stationarity residual** is\n$\\|\\nabla_x\\mathcal L_\\rho(x^+,\\nu,\\lambda)\\|_2$; an inner procedure must\nreport the residual it achieved or an explicit failure status.\n\nThe equality and inequality formulas are distinct branches. For an inequality\nwith $\\lambda_i+\\rho g_i(x)>0$, its summand equals\n$\\lambda_i g_i(x)+\\rho g_i(x)^2/2$; when\n$\\lambda_i+\\rho g_i(x)\\le0$, its summand is constant in $x$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-kkt-residual-and-normal-cone",
+          "source_section": "Definition",
+          "quote": "Use the program and dimensions of\n[[def-inequality-constrained-program-and-kkt-geometry]]. For any $x\\in U$,\n$\\nu\\in\\mathbb R^p$, and $\\lambda\\in\\mathbb R^m$, define coordinatewise\n$[v]_i^+=\\max\\{v_i,0\\}$ and the scaled residual\n$$\nr_{\\mathrm{KKT}}(x,\\nu,\\lambda)=\\|\\nabla f(x)+Dh(x)^T\\nu+Dg(x)^T\\lambda\\|_2+\\|h(x)\\|_2+\\|[g(x)]^+\\|_2+\\|[-\\lambda]^+\\|_2+\\|\\lambda\\circ g(x)\\|_2.\n$$\nThe symbol $\\circ$ denotes coordinatewise multiplication. The norm is the\nEuclidean norm from [[def-euclidean-inner-product]], and the norm of the\nzero-dimensional vector is $0$.\n\nFor a convex set $C\\subseteq\\mathbb R^n$ and $x\\in C$, its (outward) normal\ncone is\n$$\nN_C(x)=\\{v\\in\\mathbb R^n:\\langle v,y-x\\rangle\\le0\\text{ for every }y\\in C\\}.\n$$\nThis definition applies in particular when $C$ is closed and convex.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Initially $x_0\\in U$ and $\\lambda_0\\ge0$. An inner failure or budget return stops before an update. Otherwise [F1] supplies $x_k^+\\in U$ and checks its reported inner residual against $\\epsilon_k$. The multiplier update in [F2] is therefore defined, and each component of $\\lambda_{k+1}$ is nonnegative. If the procedure continues, it sets $x_{k+1}=x_k^+\\in U$. Induction proves the domain and multiplier assertions at every reached index, including when the equality or inequality multiplier space has dimension zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "At each reached outer index, [A1] gives at most $M$ inner iterations and finite return/report work. Either the inner status or a failed success-residual check terminates the procedure, or one finite multiplier update and one finite KKT test [F3] follow. Thus every outer iteration is finite. There are only $K$ possible outer indices, so total inner iterations are at most $KM$ and total KKT tests are at most $K$. If none of the earlier returns occurs, the procedure reaches its explicitly prescribed `outer-budget-exhausted` return.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "A passing KKT test is exactly $r_k\\le\\tau$, and its reported point and updated multipliers are those used to evaluate $r_k$; the preceding success check ensures the reported inner residual is at most $\\epsilon_k$. If the outer cap is reached, $K\\ge1$ ensures the last successful call and test exist, so $x_K$, $(\\nu_K,\\lambda_K)$, $r_{K-1}$ and $\\widehat\\epsilon_{K-1}$ are defined and returned. The two inner terminal statuses return exactly the state/data specified by [F1]. These are all branches, and none requires that any KKT or inner tolerance eventually be met.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Empty equality/inequality constraint blocks are permitted by supplied program dimensions: multiplier projection is vacuous and the KKT definition uses zero-dimensional norm zero. K,M>=1 ensures no empty outer-loop exhaustion with undefined last reports."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "K,M are positive finite integers; zero tolerances remain permitted and certify only when an exact zero residual test passes. Empty equality/inequality blocks use the zero-dimensional norms in F3 and vacuous projection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "K=M=1 permits one inner iteration and one KKT test, with outer exhaustion reporting r0/inner residual if the test does not pass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "A residual exactly at epsilon_k or tau passes the stated non-strict checks; above-epsilon reported success returns inner-failure. K-th successful but failing KKT test returns outer-budget-exhausted with defined last residuals."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Inner budget or failure can return before any multiplier update/KKT test. Those paths preserve current state and explicit last-point/residual or failure data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite procedure uses a supplied returning inner routine; no arbitrary choices or selection axiom are invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This direct finite-composition result is not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse or convergence claim is made."
+        }
+      ],
+      "risk": "Research-only complete future native-creation proposal; no item ownership, native authoring, independent review, creation certificate or passing check is asserted.",
+      "axioms": [],
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    }
+  }
+}

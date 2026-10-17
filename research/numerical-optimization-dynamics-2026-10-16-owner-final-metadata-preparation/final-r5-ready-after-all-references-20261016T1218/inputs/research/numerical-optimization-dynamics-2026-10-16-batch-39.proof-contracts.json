@@ -1,0 +1,1495 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-hessian-lower-bound-strong-convexity-gradient-gap",
+    "thm-exact-line-search-gradient-descent-global-contraction",
+    "thm-armijo-gradient-descent-global-linear-rate",
+    "thm-damped-newton-global-phase-and-local-quadratic-rate",
+    "thm-inexact-gradient-residual-distance-certificate",
+    "ex-global-exact-line-search-on-an-anisotropic-quadratic",
+    "ex-damped-newton-halves-step-before-local-phase",
+    "ex-small-gradient-can-hide-error-at-ill-conditioned-minimizer",
+    "ex-approximate-gradient-residual-distance-certificate",
+    "ex-inner-quadrature-error-in-gradient-certificate"
+  ],
+  "contracts": {
+    "lem-hessian-lower-bound-strong-convexity-gradient-gap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hessian-characterises-convexity",
+          "source_section": "Statement",
+          "quote": "A $C^2$ function on an open convex set is convex if and only if its Hessian is positive semidefinite at every point. Hessians and their quadratic forms have the conventions of [[def-hessian-and-euclidean-critical-point]], [[cor-hessian-is-symmetric]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$. If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative**\n\n$$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$\n\nFor a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. These are ordinary vector-valued one-variable derivatives in the sense of [[def-vector-valued-derivative-and-integral]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For any $x,y\\in U$, convexity keeps the segment from $x$ to $y$ in $U$. Applying [F1] with Taylor order one gives $f(y)=f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac12(y-x)^TH_f(x+\\theta(y-x))(y-x)$ for some $\\theta\\in(0,1)$. The Hessian hypothesis makes the last term at least $\\mu\\|y-x\\|_2^2/2$, proving the first inequality. Since $H_f\\succeq\\mu I\\succeq0$, [F2] also makes $f$ convex on $U$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Let $x^*$ be an interior minimizer. For each standard basis vector $e_j$, openness gives an interval around $0$ on which $x^*+te_j\\in U$. The one-variable function $t\\mapsto f(x^*+te_j)$ has a minimum at $0$, so its derivative there is $0$; [F4] identifies this derivative with $\\partial_j f(x^*)$. Thus every coordinate of $\\nabla f(x^*)$ is zero.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Apply the first inequality from step 1.1 once to $(x,y)$ and once to $(y,x)$, and add. The function-value terms cancel, leaving $\\langle\\nabla f(y)-\\nabla f(x),y-x\\rangle\\ge\\mu\\|y-x\\|_2^2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "claim": "Apply step 1.1 with $x=x^*$ and $y=x$. Using $\\nabla f(x^*)=0$ gives $f(x)-f^*\\ge\\mu\\|x-x^*\\|_2^2/2$. This also proves uniqueness, because equality of the minimum values forces $x=x^*$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Apply step 1.1 with the ordered pair $(x,x^*)$ and write $d:=x-x^*$. Rearrangement gives $f(x)-f^*\\le\\langle\\nabla f(x),d\\rangle-\\mu\\|d\\|_2^2/2$. By [F5] and completing the square, the right-hand side is at most $\\|\\nabla f(x)\\|_2^2/(2\\mu)$, since $0\\le(\\|\\nabla f(x)\\|_2-\\mu\\|d\\|_2)^2$. This is the gradient-gap inequality.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If $U$ were empty, the pointwise conclusions are vacuous and the minimizer clause has no instance; the stated conditional remains consistent. The quantified domain is explicit in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At $x=y$, the displacement and both sides of the strong-monotonicity inequality vanish; step 1.1 applies Taylor on this coincident segment."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof includes dimension $d=1$: the standard-basis stationarity argument in step 1.2 has one coordinate and all norm inequalities remain scalar."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The hypothesis requires $\\mu>0$; the distance and gradient-gap conclusions are not claimed at zero curvature, which is necessary for uniqueness and division by $\\mu$ in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both endpoints are required to lie in the open convex set, so the segment used in step 1.1 stays in the domain; the argument makes no claim for boundary points outside $U$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The minimizer is supplied as $x^*$ and the standard basis is finite; steps 1.2–3.1 construct no choice from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The A Hessian lower bound gives strong convexity and gradient-gap bounds statement is one-way and contains no forward equivalence direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The A Hessian lower bound gives strong convexity and gradient-gap bounds statement is one-way and contains no reverse equivalence direction to prove."
+        }
+      ]
+    },
+    "thm-exact-line-search-gradient-descent-global-contraction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-exact-gradient-line-search-step",
+          "source_section": "Definition",
+          "quote": "This is an ideal one-step line-search oracle that uses the negative-gradient direction of [[alg-gradient-descent]] and replaces only its step-selection rule. It is not a second definition of the gradient-descent iteration.\n\n**Inputs:** an open convex set $U\\subseteq\\mathbb R^d$, a $C^2$ objective $f:U\\to\\mathbb R$, an initial point $x_0\\in U$ whose sublevel set $K:=\\{y\\in U:f(y)\\le f(x_0)\\}$ is compact, and a current point $x\\in K$. **Admissible conditions:** for some $0<m\\le M$, there is a convex open set $V\\subseteq U$ containing $K$ on which the Hessian satisfies $mI\\preceq H_f(y)\\preceq MI$. **Output:** if $\\nabla f(x)=0$, return $(x,\\texttt{stationary})$. Otherwise set $g:=\\nabla f(x)$ and return $(x-t_*g,\\texttt{exact-step})$, where $t_*$ is the unique minimizer of $t\\mapsto f(x-tg)$ over all $t\\ge0$ with $x-tg\\in U$. The set $K$ is nonempty because $x_0\\in K$, and the continuous restriction $f|_K$ attains a minimum at some $x^*\\in K$ by [[thm-extreme-value-metric]]. Every $y\\in U\\setminus K$ satisfies $f(y)>f(x_0)\\ge f(x^*)$, so $x^*$ is an attained global minimizer of $f$ on $U$. Thus the algorithm inputs supply the minimizer premise of [[thm-exact-line-search-gradient-descent-global-contraction]], whose remaining hypotheses are stated above.\n\nThe minimization is an exact real-valued oracle; this definition gives no finite evaluation procedure or floating-point accuracy claim. A finite implementation must report its own search status and error bounds.",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-hessian-characterises-convexity",
+          "source_section": "Statement",
+          "quote": "A $C^2$ function on an open convex set is convex if and only if its Hessian is positive semidefinite at every point. Hessians and their quadratic forms have the conventions of [[def-hessian-and-euclidean-critical-point]], [[cor-hessian-is-symmetric]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-hessian-lower-bound-strong-convexity-gradient-gap",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and convex, let $f\\in C^2(U,\\mathbb R)$, and fix $\\mu>0$. Suppose $v^TH_f(z)v\\ge\\mu\\|v\\|_2^2$ for every $z\\in U$ and $v\\in\\mathbb R^d$. Then for every $x,y\\in U$,\n\n$$f(y)\\ge f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac\\mu2\\|y-x\\|_2^2,$$\n\nand\n\n$$\\langle\\nabla f(y)-\\nabla f(x),y-x\\rangle\\ge\\mu\\|y-x\\|_2^2.$$\n\nIf $x^*\\in U$ is a global minimizer and $f^*:=f(x^*)$, it is unique and every $x\\in U$ satisfies\n\n$$f(x)-f^*\\ge\\frac\\mu2\\|x-x^*\\|_2^2,\\qquad \\|\\nabla f(x)\\|_2^2\\ge2\\mu(f(x)-f^*).$$\n\nHere $H_f$ is the matrix of second partial derivatives and $\\nabla f$ is the vector of first partial derivatives, as in [[def-hessian-and-euclidean-critical-point]] and [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-compact-subset-is-closed-and-bounded",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $K \\subseteq X$ be a\ncompact subset ([[def-metric-compactness]]). Then $K$ is closed in $X$\n([[def-metric-topology]]) and bounded ([[def-metric-bounded-diameter]]).\n\nNo choice principle is used: both covers below are given by a rule, and the\nindexed form of [[lem-compactness-is-intrinsic]] returns indices rather than\nsets.\n\n**The converse is false in general.** A closed and bounded subset of an arbitrary\nmetric space need not be compact\n([[fs-closed-and-bounded-implies-compact-in-every-metric-space]]); it is exactly\nin $\\mathbb{R}^n$ that the converse holds ([[thm-heine-borel-rn]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-metric-continuity-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be a function, with images and preimages written $f[\\,\\cdot\\,]$\nand $f^{-1}[\\,\\cdot\\,]$ ([[def-injection-surjection-bijection]]). Conditions\n(a), (b), (c), and (e) below are equivalent without choice, and each implies\n(d). Assuming Countable Choice ([[def-countable-choice]]), all five are\nequivalent. The authorized Axiom of Choice ([[def-axiom-of-choice]]) suffices;\nonly its countable instance is used for the converse from (d).\n\n- **(a)** $f$ is continuous at every point of $X$ in the $\\varepsilon$-$\\delta$\n  sense ([[def-metric-continuity]]).\n- **(b)** $f^{-1}[V]$ is open in $X$ for every open $V \\subseteq Y$\n  ([[def-metric-topology]]).\n- **(c)** $f^{-1}[G]$ is closed in $X$ for every closed $G \\subseteq Y$.\n- **(d)** $f$ is **sequentially continuous**: whenever $x_k \\to x$ in $(X,d_X)$,\n  also $f(x_k) \\to f(x)$ in $(Y,d_Y)$ ([[def-metric-convergence]]).\n- **(e)** $f[\\overline{A}] \\subseteq \\overline{f[A]}$ for every $A \\subseteq X$\n  ([[def-metric-interior-closure-boundary]]).\n\n**Where choice is used.** Only the implication (d) $\\Rightarrow$ (e) uses a\nchoice principle, and it uses it only through\n[[thm-metric-sequential-closure]], whose forward direction spends the Axiom of\nCountable Choice ([[def-countable-choice]]). The cycle\n(a) $\\Rightarrow$ (b) $\\Rightarrow$ (c) $\\Rightarrow$ (e) $\\Rightarrow$ (a) and\nthe implication (a) $\\Rightarrow$ (d) are choice free.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "If $g=0$, [F6] gives $0\\ge2m(f(x)-f^*)$; since $f(x)\\ge f^*$ and $m>0$, $f(x)=f^*$, and uniqueness gives $x=x^*$. Now assume $g\\ne0$ and put $r(t):=x-tg$ for $t\\ge0$. [F3] gives $\\phi'(0)=-\\|g\\|_2^2<0$ for $\\phi(t):=f(r(t))$. Openness of $U$ and this strict derivative provide a sufficiently small $t>0$ with $r(t)\\in U$ and $f(r(t))<f(x)\\le f(x_0)$, so $S:=\\{t\\ge0:r(t)\\in K\\}$ is nonempty.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "By [F4], $f$ is convex on $V$, so its sublevel set $K$ is convex because $K\\subset V$. By [F7], $K$ is closed and bounded. The affine map $r$ is continuous since $\\|r(s)-r(t)\\|_2=|s-t|\\|g\\|_2$, so [F8] makes $S=r^{-1}(K)\\cap[0,\\infty)$ closed. Boundedness gives $c\\in\\mathbb R^d$ and $R_0>0$ with $K\\subset B(c,R_0)$; hence $\\|y\\|_2\\le\\|c\\|_2+R_0=:R$ on $K$. For $t\\in S$, the triangle inequality [F11] yields $t\\|g\\|_2=\\|x-r(t)\\|_2\\le\\|x\\|_2+R$. Thus $S$ is bounded and compact by [F9].",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "F8",
+            "F9",
+            "F11",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "The continuous restriction of $\\phi$ to the nonempty compact set $S$ attains a minimum $t_*\\in S$ by [F10]. Since $0\\in S$, we have $f(r(t_*))\\le f(x)$. Every feasible ray parameter $t$ with $r(t)\\in U$ but $t\\notin S$ has $f(r(t))>f(x_0)\\ge f(x)\\ge f(r(t_*))$, so $t_*$ is a global feasible-ray minimizer. If two distinct parameters minimized, their endpoints $y_1,y_2$ would be distinct because $g\\ne0$; their midpoint $z$ lies in $K$ by step 2.1. Apply the strong-convexity inequality [F6] from $z$ to each endpoint and add: $f(z)\\le(f(y_1)+f(y_2))/2-m\\|y_1-y_2\\|_2^2/8$, strictly below their common minimum. Thus the minimizer is unique and the output specified by [F1] is well-defined.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "F10",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "The small step in step 1.1 strictly decreases $f$, so the minimizer from step 3.1 has $t_*>0$. Since $r(t_*)\\in K\\subset U$ and $U$ is open, $t_*$ is interior to the feasible ray and $\\phi'(t_*)=0$. Convexity of $V$ and step 2.1 put the segment $[x,r(t_*)]$ in $V$. By [F2], [F3], and the Hessian bounds, $m\\|g\\|_2^2\\le\\phi''(s)=g^TH_f(r(s))g\\le M\\|g\\|_2^2$ on this segment, so $\\phi'$ is strictly increasing. The mean-value theorem [F12] applied to $\\phi'$ on $[0,t_*]$ gives $\\|g\\|_2^2=\\phi'(t_*)-\\phi'(0)=t_*\\phi''(s_0)\\le t_*M\\|g\\|_2^2$ for some $s_0\\in(0,t_*)$. Since $g\\ne0$, division yields $t_*\\ge1/M$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F12",
+            "given",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "claim": "The candidate $t_0:=1/M$ lies in $[0,t_*]$ by step 4.1, so $r(t_0)$ lies on the segment from $x$ to $r(t_*)$ and belongs to $V$. The lower Hessian bound makes $\\phi''(s)>0$ there; since $\\phi'(t_*)=0$, $\\phi'(s)<0$ for $0\\le s<t_*$. Hence $f(r(t_0))\\le f(x)\\le f(x_0)$ and $r(t_0)\\in K$. Taylor's formula [F5] with the upper Hessian bound gives $f(r(t_0))\\le f(x)-M^{-1}\\|g\\|_2^2+(M/(2M^2))\\|g\\|_2^2=f(x)-\\|g\\|_2^2/(2M)$. By the minimization proved in step 3.1, $f(x_+)\\le f(r(t_0))$.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "given",
+            "step 3.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "derivation-6.1",
+          "claim": "Subtract $f^*$ in step 5.1 and use [F6] to get $f(x_+)-f^*\\le f(x)-f^*-\\|g\\|_2^2/(2M)\\le(1-m/M)(f(x)-f^*)$. The factor is nonnegative because $m\\le M$. Exact steps never increase the objective, so every later iterate remains in $K$; applying the one-step bound successively proves the stated rate for all generated iterates.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "given",
+            "step 5.1",
+            "algebra",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The initial point $x_0$ belongs to its own sublevel set $K$, and step 1.1 constructs a nonempty feasible ray portion when the gradient is nonzero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-gradient branch is handled separately in step 1.1: the gradient-gap inequality forces zero objective gap and uniqueness gives $x=x^*$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows every finite dimension $d\\ge1$; the proof uses Euclidean facts valid also for $d=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The permitted endpoint $m=M$ gives contraction factor zero for every generated $k\\ge1$; the Statement explicitly avoids a $0^0$ convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For nonzero gradient, step 4.1 proves the minimizer is interior to the feasible ray because $r(t_*)\\in K\\subset U$ and $U$ is open."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 makes $S$ nonempty, step 2.1 proves it compact, and the nonempty EVT hypothesis supplies a minimizer in step 3.1 without a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Exact gradient line search has a global objective-gap contraction statement is one-way and contains no forward equivalence direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Exact gradient line search has a global objective-gap contraction statement is one-way and contains no reverse equivalence direction to prove."
+        }
+      ]
+    },
+    "thm-armijo-gradient-descent-global-linear-rate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and let $f:U\\to\\mathbb R$ be continuously\nFréchet differentiable. The gradient $\\nabla f(x)$ is the vector of partial\nderivatives in the Euclidean coordinates, with the convention of\n[[def-jacobian-matrix-and-gradient]]; differentiability is the Fréchet\ncondition of [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]].\n\n**Inputs:** an initial point $x_0\\in U$; either a positive fixed-step\nsequence $(t_k)_{k\\ge0}$ or backtracking parameters $\\alpha\\in(0,1)$ and\n$\\beta\\in(0,1)$; and an optional caller stopping predicate\n$S(k,x,g)\\in\\{\\mathrm{false},\\mathrm{true}\\}$, with\n$S:\\{0,1,2,\\ldots\\}\\times U\\times\\mathbb R^d\\to\\{\\mathrm{false},\\mathrm{true}\\}$.\nIf no predicate is supplied, use $S\\equiv\\mathrm{false}$. **Output:** when the\nprocedure stops, return the last valid iterate $x_k$ and the status\n`stationary`, `caller-stop`, or `domain-failure`.\nIf no stopping status occurs, the sequence continues and there is no finite\nreturn.\nFor example, an outer procedure's at-most-$M$-updates limit, for finite real\n$M\\ge0$, is implemented by $S(k,x,g):=(k+1>M)$.\n\nAt iteration $k$, where $k$ is the number of accepted updates so far and the\ncurrent iterate is $x_k$:\n\n1. Compute $g_k:=\\nabla f(x_k)$ and set $p_k:=-g_k$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $S(k,x_k,g_k)$ is true, return $(x_k,\\texttt{caller-stop})$. Check this\n   predicate at the current iterate after its gradient is computed and before\n   any step is selected.\n3. In fixed-step mode, set $t=t_k$. If $x_k+tp_k\\notin U$, return\n   $(x_k,\\texttt{domain-failure})$ without accepting that candidate.\n4. In backtracking mode, start with $t=1$ and repeatedly replace $t$ by\n   $\\beta t$ until $x_k+tp_k\\in U$ and\n   $f(x_k+tp_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe fixed-step update map is $x\\mapsto x-t_k\\nabla f(x)$; at a stationary\npoint its value is $x$, which is the returned iterate. A backtracking search\nthat is reached at a nonstationary iterate is well-defined by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. The\nprocedure asserts no convergence or global-minimization property for an\narbitrary objective.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-armijo-backtracking-terminates-for-strict-descent-directions",
+          "source_section": "Statement",
+          "quote": "For either backtracking procedure in [[alg-gradient-descent]] and\n[[alg-damped-newton]], suppose the objective is differentiable at a point\n$x$ of an open domain and the current direction $p$ satisfies $Df(x)[p]<0$.\nIf the line search starts at $t=1$, uses a factor $\\beta\\in(0,1)$, and\naccepts when\n$$f(x+tp)\\le f(x)+\\alpha t\\,Df(x)[p]$$\nfor a fixed $\\alpha\\in(0,1)$, it accepts after finitely many reductions.\nFor the Newton branch, assume the current Hessian is symmetric positive\ndefinite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-hessian-lower-bound-strong-convexity-gradient-gap",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and convex, let $f\\in C^2(U,\\mathbb R)$, and fix $\\mu>0$. Suppose $v^TH_f(z)v\\ge\\mu\\|v\\|_2^2$ for every $z\\in U$ and $v\\in\\mathbb R^d$. Then for every $x,y\\in U$,\n\n$$f(y)\\ge f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac\\mu2\\|y-x\\|_2^2,$$\n\nand\n\n$$\\langle\\nabla f(y)-\\nabla f(x),y-x\\rangle\\ge\\mu\\|y-x\\|_2^2.$$\n\nIf $x^*\\in U$ is a global minimizer and $f^*:=f(x^*)$, it is unique and every $x\\in U$ satisfies\n\n$$f(x)-f^*\\ge\\frac\\mu2\\|x-x^*\\|_2^2,\\qquad \\|\\nabla f(x)\\|_2^2\\ge2\\mu(f(x)-f^*).$$\n\nHere $H_f$ is the matrix of second partial derivatives and $\\nabla f$ is the vector of first partial derivatives, as in [[def-hessian-and-euclidean-critical-point]] and [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "At a nonstationary iterate, $g:=\\nabla f(x)\\ne0$, so [F1] uses the strict descent direction $p=-g$ and [F2] guarantees finite acceptance. Let $T:=2(1-a)/M$. If $T\\ge1$, the initial trial $t=1$ satisfies $t\\le T$. If $T<1$, [F3] gives an index $j$ with $b^j\\le T$; choose the least such $j$, so $b^{j-1}>T$ and $b^j>bT$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For any trial $0<t\\le T$ on the assumed segment, [F5] and $H_f\\preceq MI$ give $f(x-tg)\\le f(x)-t\\|g\\|_2^2+(M/2)t^2\\|g\\|_2^2\\le f(x)-at\\|g\\|_2^2$. Thus the initial trial is accepted when $T\\ge1$; when $T<1$, the candidate $b^j$ from step 1.1 passes, so the actual accepted step is at least $b^j>bT$. Both cases give $t_k\\ge\\min\\{1,bT\\}=\\tau$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Armijo acceptance and step 2.1 imply $f(x_{k+1})\\le f(x_k)-a\\tau\\|\\nabla f(x_k)\\|_2^2$. Apply [F4] to obtain $f(x_{k+1})-f^*\\le(1-2am\\tau)(f(x_k)-f^*)$. The factor is positive because $\\tau\\le2b(1-a)/M$ gives $2am\\tau\\le4ab(1-a)m/M<1$, and it is below one because $a,m,\\tau>0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "Every accepted step decreases $f$, so all generated iterates remain in $K$. Repeatedly apply step 3.1 along the generated updates; induction gives the asserted $k$-step bound, and a stopping status creates no later iterate.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "given",
+            "algebra",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The sublevel set contains $x_0$ by definition; the rate is asserted only along generated iterates from this nonempty set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement restricts the per-update claim to nonstationary iterates whose line search is reached; a stationary status creates no later iterate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits $U\\subseteq\\mathbb R^d$ for arbitrary $d\\ge1$, and the proof relies only on dimension-independent Euclidean inequalities."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The open parameter ranges $a\\in(0,1/2)$ and $b\\in(0,1)$ exclude zero or unit shrink factors; step 2.1 proves the resulting factor lies strictly between zero and one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The trial endpoint $t=1$ is covered when $T\\ge1$ in step 1.1, including $T=1$; when $T<1$ the geometric candidate is strictly above $bT$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "When $T<1$, step 1.1 uses convergence of $b^j$ and the least qualifying natural index; this is a single explicit least-index argument and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Armijo gradient descent has an explicit global linear rate statement is one-way and contains no forward equivalence direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Armijo gradient descent has an explicit global linear rate statement is one-way and contains no reverse equivalence direction to prove."
+        }
+      ]
+    },
+    "thm-damped-newton-global-phase-and-local-quadratic-rate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-damped-newton",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U\\subseteq\\mathbb R^d$ be open, and let $f:U\\to\\mathbb R$ be twice\ncontinuously Fréchet differentiable. Write $g(x)=\\nabla f(x)$ and\n$H(x)=\\nabla^2 f(x)$ using [[def-jacobian-matrix-and-gradient]] and\n[[def-hessian-and-euclidean-critical-point]]. The Hessian is symmetric by\n[[cor-hessian-is-symmetric]].\n\n**Inputs:** $x_0\\in U$, a Newton-decrement tolerance $\\varepsilon>0$, and\nline-search parameters $\\alpha\\in(0,1/2)$ and $\\beta\\in(0,1)$. **Output:**\nwhen the procedure stops, return the last valid iterate $x_k$ and one of the\nstatuses `stationary`, `decrement`, or\n`positive-definite solve unavailable`.\nIf none of these stopping conditions occurs, the sequence continues and there\nis no finite return.\n\nAt iteration $k$ with current iterate $x_k$:\n\n1. Compute $g_k:=g(x_k)$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $H_k:=H(x_k)$ is not positive definite, return\n   $(x_k,\\texttt{positive-definite solve unavailable})$ without a Newton\n   update. Otherwise compute its Cholesky factorization $H_k=L_kL_k^T$, solve\n   $L_kw=-g_k$ and $L_k^Tp_k=w$, and set\n   $$\\lambda_k^2:=-\\langle g_k,p_k\\rangle=g_k^TH_k^{-1}g_k>0.$$\n3. Before line search, if $\\lambda_k^2/2\\le\\varepsilon$, return\n   $(x_k,\\texttt{decrement})$. This is the Newton-decrement stopping test.\n4. Start with $t=1$ and repeatedly replace $t$ by $\\beta t$ until\n   $x_k+t p_k\\in U$ and\n   $f(x_k+t p_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe Cholesky factor exists and is unique when the symmetric Hessian is positive\ndefinite by\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nIts positive diagonal makes both triangular solves unique. The backtracking\nbranch terminates whenever it is reached, since $g_k\\ne0$ and $H_k$ is\npositive definite, by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. This\nprocedure makes no global-optimality claim.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-newton-local-quadratic-convergence-under-lipschitz-hessian",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $U\\subseteq\\mathbb R^d$ be open, and let\n$f:U\\to\\mathbb R$ be $C^2$.\nUse the Hessian convention of [[def-hessian-and-euclidean-critical-point]].\nSuppose $x^*\\in U$ is an interior critical point,\n$H(x^*):=\\nabla^2f(x^*)$\nis positive definite, and for some $R>0$, $K\\ge0$ the ball $B(x^*,R)$ lies\nin $U$ and\n$$\\|H(x)-H(y)\\|_{\\rm op}\\le K\\|x-y\\| \\qquad(x,y\\in B(x^*,R)).$$\nFix any Newton-decrement tolerance $\\varepsilon>0$ and the Armijo parameters\n$0<\\alpha<1/2$ and $0<\\beta<1$ in [[alg-damped-newton]]. There are\n$\\rho>0$ and $C<\\infty$ such that every generated iterate from a start\n$x_0\\in B(x^*,\\rho)$ remains in this ball. At each generated nonstationary\niterate $x_k$ for which the algorithm's decrement test satisfies\n$\\lambda_k^2/2>\\varepsilon$ and a Newton update is therefore attempted, the\nline search accepts the full step $t_k=1$ and\n$$\\|x_{k+1}-x^*\\|\\le C\\|x_k-x^*\\|^2.$$\nIf the decrement test stops the procedure, no next iterate or update bound is\nasserted at that point.\nHere $\\lambda_k^2=\\nabla f(x_k)^TH(x_k)^{-1}\\nabla f(x_k)$ is the decrement\ncomputed by [[alg-damped-newton]].\nThis is a local statement; it supplies no global optimum or convergence\nclaim for a nonconvex objective.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hessian-lower-bound-strong-convexity-gradient-gap",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and convex, let $f\\in C^2(U,\\mathbb R)$, and fix $\\mu>0$. Suppose $v^TH_f(z)v\\ge\\mu\\|v\\|_2^2$ for every $z\\in U$ and $v\\in\\mathbb R^d$. Then for every $x,y\\in U$,\n\n$$f(y)\\ge f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac\\mu2\\|y-x\\|_2^2,$$\n\nand\n\n$$\\langle\\nabla f(y)-\\nabla f(x),y-x\\rangle\\ge\\mu\\|y-x\\|_2^2.$$\n\nIf $x^*\\in U$ is a global minimizer and $f^*:=f(x^*)$, it is unique and every $x\\in U$ satisfies\n\n$$f(x)-f^*\\ge\\frac\\mu2\\|x-x^*\\|_2^2,\\qquad \\|\\nabla f(x)\\|_2^2\\ge2\\mu(f(x)-f^*).$$\n\nHere $H_f$ is the matrix of second partial derivatives and $\\nabla f$ is the vector of first partial derivatives, as in [[def-hessian-and-euclidean-critical-point]] and [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-hessian-is-symmetric",
+          "source_section": "Statement",
+          "quote": "For a $C^2$ scalar field $f$, $H_f(a)^T=H_f(a)$ at every point $a$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "At a nonstationary iterate, $H:=H_f(x)$ is symmetric positive definite by [F6] and the lower bound. Put $g:=\\nabla f(x)$ and $p:=-H^{-1}g$. The Newton decrement is $\\lambda^2=g^TH^{-1}g=p^THp$, and [F5] gives $\\lambda^2\\ge\\|g\\|_2^2/M$ and $\\lambda^2\\ge m\\|p\\|_2^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Set $T_N:=2m(1-a)/M$. For any trial $0<t\\le T_N$, [F4] and $H_f\\preceq MI$ on its segment give $f(x+tp)\\le f(x)-t\\lambda^2+(M/2)t^2\\|p\\|_2^2\\le f(x)-at\\lambda^2$, where the last inequality uses $\\lambda^2\\ge m\\|p\\|_2^2$. If $T_N\\ge1$, trial $t=1$ passes. If $T_N<1$, [F8] gives a least $j$ with $b^j\\le T_N$; then $b^j>bT_N$ and that candidate passes, so the first accepted step is at least $\\tau_N$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F8",
+            "step 1.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "For any accepted update before the local ball, $\\lambda^2\\ge\\|g\\|_2^2/M$ by step 1.1 and $t\\ge\\tau_N$ by step 2.1. Armijo acceptance and [F3] therefore give $f(x_+)-f^*\\le f(x)-f^*-(a\\tau_N/M)\\|g\\|_2^2\\le(1-2am\\tau_N/M)(f(x)-f^*)$. The coefficient is positive because $\\tau_N\\le2b(1-a)m/M$ implies $2am\\tau_N/M\\le4ab(1-a)(m/M)^2<1$; it is less than one because all factors in the subtracted term are positive.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "If $x$ lies outside $B(x^*,\\rho)$, [F3] gives $f(x)-f^*\\ge m\\rho^2/2$. Step 1.1 then gives $\\lambda^2/2\\ge\\|g\\|_2^2/(2M)\\ge(m/M)(f(x)-f^*)\\ge m^2\\rho^2/(2M)$. Thus if $\\varepsilon<m^2\\rho^2/(2M)$ the decrement test cannot stop outside the ball. Repeating step 3.1 gives a gap bounded by $q_N^k(f(x_0)-f^*)$; choose $N$ with $q_N^N(f(x_0)-f^*)<m\\rho^2/2$, which exists by [F8]. If no earlier stop occurs, [F3] places the $N$th generated iterate inside $B(x^*,\\rho)$. For larger tolerances the method may stop before this finite entry, and no post-stop sequence is asserted.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F8",
+            "step 1.1",
+            "step 3.1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "claim": "Starting the canonical local theorem [F2] at the first generated iterate in $B(x^*,\\rho)$ shows that every later generated iterate remains in that ball. Whenever its decrement test does not stop, [F2] gives $t_k=1$ and $\\|x_{k+1}-x^*\\|_2\\le C\\|x_k-x^*\\|_2^2$. If the decrement test stops, the algorithm returns there and no later update is asserted.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement defines the initial sublevel using $x_0$, so it contains $x_0$; the theorem starts from a generated iterate in that set and does not require an empty-sublevel case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Stationary points return before a Newton update by the algorithm; steps 1.1–5.1 handle only the stated attempted updates and preserve the decrement-stop branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement assumes $d\\ge1$ through its Euclidean setting; the local supplier and its constants also cover dimension one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The hypotheses permit $m=M$ and a zero Hessian-Lipschitz constant; tau_N>0 and the proof of $0<q_N<1$ in step 3.1 still holds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 uses the strict threshold $\\varepsilon<m^2\\rho^2/(2M)$; equality is not claimed to prevent stopping, and the local claim is conditional on updates continuing."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 obtains finite entry by choosing an integer exponent from $q_N^k\to0$; the first generated iterate in the ball is in a finite prefix, so no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Damped Newton reaches its local quadratic phase in finitely many continued updates statement is one-way and contains no forward equivalence direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Damped Newton reaches its local quadratic phase in finitely many continued updates statement is one-way and contains no reverse equivalence direction to prove."
+        }
+      ]
+    },
+    "thm-inexact-gradient-residual-distance-certificate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hessian-lower-bound-strong-convexity-gradient-gap",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and convex, let $f\\in C^2(U,\\mathbb R)$, and fix $\\mu>0$. Suppose $v^TH_f(z)v\\ge\\mu\\|v\\|_2^2$ for every $z\\in U$ and $v\\in\\mathbb R^d$. Then for every $x,y\\in U$,\n\n$$f(y)\\ge f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac\\mu2\\|y-x\\|_2^2,$$\n\nand\n\n$$\\langle\\nabla f(y)-\\nabla f(x),y-x\\rangle\\ge\\mu\\|y-x\\|_2^2.$$\n\nIf $x^*\\in U$ is a global minimizer and $f^*:=f(x^*)$, it is unique and every $x\\in U$ satisfies\n\n$$f(x)-f^*\\ge\\frac\\mu2\\|x-x^*\\|_2^2,\\qquad \\|\\nabla f(x)\\|_2^2\\ge2\\mu(f(x)-f^*).$$\n\nHere $H_f$ is the matrix of second partial derivatives and $\\nabla f$ is the vector of first partial derivatives, as in [[def-hessian-and-euclidean-critical-point]] and [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Apply [F1] with $x=\\widetilde x$ and $y=x^*$. Since $\\nabla f(x^*)=0$, it gives $\\mu\\|\\widetilde x-x^*\\|_2^2\\le\\langle\\nabla f(\\widetilde x),\\widetilde x-x^*\\rangle\\le\\|\\nabla f(\\widetilde x)\\|_2\\|\\widetilde x-x^*\\|_2$ by [F3]. If $\\widetilde x=x^*$ the result is immediate; otherwise divide by the positive distance to obtain $\\mu\\|\\widetilde x-x^*\\|_2\\le\\|\\nabla f(\\widetilde x)\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The triangle inequality in [F3] and the two verified bounds give $\\|\\nabla f(\\widetilde x)\\|_2\\le\\|\\widehat g\\|_2+\\|\\nabla f(\\widetilde x)-\\widehat g\\|_2\\le\\eta+\\delta$. Combine with step 1.1 and divide by $\\mu>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes an attained minimizer and a candidate in $U$, so every instance has nonempty $U$ and no empty-domain case arises."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When the candidate equals $x^*$ the distance conclusion is immediate; when it differs, step 1.1 divides only by a positive distance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits $d=1$; strong monotonicity, Cauchy–Schwarz and the triangle inequality reduce to their scalar versions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The curvature constant satisfies $\\mu>0$, while $\\eta$ and $\\delta$ may be zero; step 1.1 handles zero distance and step 2.1 retains zero residual/discrepancy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement places the candidate and attained minimizer in the open domain $U$; no bound is asserted for candidates outside the objective domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the given minimizer $x^*$, and the proof uses only supplied residual/discrepancy bounds and pointwise inequalities; no selection principle occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The An inexact gradient residual certifies distance under strong convexity statement is one-way and contains no forward equivalence direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The An inexact gradient residual certifies distance under strong convexity statement is one-way and contains no reverse equivalence direction to prove."
+        }
+      ]
+    },
+    "ex-global-exact-line-search-on-an-anisotropic-quadratic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-exact-line-search-gradient-descent-global-contraction",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and convex, let $f\\in C^2(U,\\mathbb R)$ have an attained global minimum $f^*=f(x^*)$ at $x^*\\in U$, and fix $x_0\\in U$. Suppose the initial sublevel set $K:=\\{y\\in U:f(y)\\le f(x_0)\\}$ is compact and is contained in a convex open set $V\\subseteq U$ on which\n\n$$mI\\preceq H_f(y)\\preceq MI\\qquad(y\\in V)$$\n\nfor constants $0<m\\le M$. For every current iterate $x\\in K$, the oracle [[alg-exact-gradient-line-search-step]] is well-defined. If $g:=\\nabla f(x)\\ne0$ and $x_+$ is its returned point, then\n\n$$f(x_+)-f^*\\le\\left(1-\\frac mM\\right)(f(x)-f^*).$$\n\nIf $g=0$, the oracle returns the unique minimizer $x=x^*$. Repeated exact steps from $x_0$ therefore satisfy\n\n$$f(x_k)-f^*\\le\\left(1-\\frac mM\\right)^k(f(x_0)-f^*)$$\n\nfor every generated $k\\ge1$. When $m=M$, the factor is zero for $k\\ge1$; no $0^0$ convention is used. This is an objective-gap statement and does not identify an iterate-error bound without an additional curvature estimate.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-armijo-gradient-descent-global-linear-rate",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and convex, and let $f\\in C^2(U,\\mathbb R)$ have an attained global minimum $f^*=f(x^*)$ at $x^*\\in U$. Fix $x_0\\in U$ and suppose $K:=\\{y\\in U:f(y)\\le f(x_0)\\}$ is compact. Let $V\\subseteq U$ be convex and open, contain $K$ and every backtracking trial segment under consideration, and satisfy\n\n$$mI\\preceq H_f(y)\\preceq MI\\qquad(y\\in V)$$\n\nfor $0<m\\le M$. Run [[alg-gradient-descent]] in backtracking mode with Armijo parameter $a\\in(0,1/2)$ and shrink factor $b\\in(0,1)$. For every accepted update at a nonstationary iterate $x_k$, the accepted step satisfies\n\n$$t_k\\ge\\tau:=\\min\\left\\{1,\\frac{2b(1-a)}{M}\\right\\},$$\n\nand\n\n$$f(x_{k+1})-f^*\\le(1-2am\\tau)(f(x_k)-f^*).$$\n\nConsequently, for every generated $k\\ge1$,\n\n$$f(x_k)-f^*\\le(1-2am\\tau)^k(f(x_0)-f^*).$$\n\nThe factor lies in $(0,1)$. If the algorithm's caller-stop predicate fires, no later iterate is asserted. These are objective-gap bounds, not iterate-error bounds.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and let $f:U\\to\\mathbb R$ be continuously\nFréchet differentiable. The gradient $\\nabla f(x)$ is the vector of partial\nderivatives in the Euclidean coordinates, with the convention of\n[[def-jacobian-matrix-and-gradient]]; differentiability is the Fréchet\ncondition of [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]].\n\n**Inputs:** an initial point $x_0\\in U$; either a positive fixed-step\nsequence $(t_k)_{k\\ge0}$ or backtracking parameters $\\alpha\\in(0,1)$ and\n$\\beta\\in(0,1)$; and an optional caller stopping predicate\n$S(k,x,g)\\in\\{\\mathrm{false},\\mathrm{true}\\}$, with\n$S:\\{0,1,2,\\ldots\\}\\times U\\times\\mathbb R^d\\to\\{\\mathrm{false},\\mathrm{true}\\}$.\nIf no predicate is supplied, use $S\\equiv\\mathrm{false}$. **Output:** when the\nprocedure stops, return the last valid iterate $x_k$ and the status\n`stationary`, `caller-stop`, or `domain-failure`.\nIf no stopping status occurs, the sequence continues and there is no finite\nreturn.\nFor example, an outer procedure's at-most-$M$-updates limit, for finite real\n$M\\ge0$, is implemented by $S(k,x,g):=(k+1>M)$.\n\nAt iteration $k$, where $k$ is the number of accepted updates so far and the\ncurrent iterate is $x_k$:\n\n1. Compute $g_k:=\\nabla f(x_k)$ and set $p_k:=-g_k$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $S(k,x_k,g_k)$ is true, return $(x_k,\\texttt{caller-stop})$. Check this\n   predicate at the current iterate after its gradient is computed and before\n   any step is selected.\n3. In fixed-step mode, set $t=t_k$. If $x_k+tp_k\\notin U$, return\n   $(x_k,\\texttt{domain-failure})$ without accepting that candidate.\n4. In backtracking mode, start with $t=1$ and repeatedly replace $t$ by\n   $\\beta t$ until $x_k+tp_k\\in U$ and\n   $f(x_k+tp_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe fixed-step update map is $x\\mapsto x-t_k\\nabla f(x)$; at a stationary\npoint its value is $x$, which is the returned iterate. A backtracking search\nthat is reached at a nonstationary iterate is well-defined by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. The\nprocedure asserts no convergence or global-minimization property for an\narbitrary objective.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The Hessian is $\\operatorname{diag}(1,4)$, so $m=1$ and $M=4$; $x^*=(0,0)$ is the unique minimizer and $f(x_0)=5/2$. The sublevel set is closed by continuity and bounded because $\\tfrac12u^2\\le5/2$ and $2v^2\\le5/2$ on it; it is compact by [F4]. The gradient at $x_0$ is $(1,4)$.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Along the negative-gradient ray, $\\phi(t)=\\tfrac12(1-t)^2+2(1-4t)^2$ and $\\phi'(t)=65t-17$, so the unique minimizer is $t_*=17/65$. It gives $x_+=(48/65,-3/65)$ and $f(x_+)=234/845$. The theorem [F1] bounds the gap by $(1-1/4)(5/2)=15/8$, and $234/845<15/8$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "claim": "For Armijo, the first trial $t=1$ has candidate $(0,-3)$ with value $18$ and threshold $5/2-17/4=-7/4$, so it fails. The second trial $t=1/2$ has candidate $(1/2,-1)$ with value $17/8$ and threshold $3/8$, so it fails. At $t=1/4$, the candidate is $(3/4,0)$ with value $9/32<23/16$, the Armijo threshold; hence [F3] accepts $t=1/4$.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Here $\\tau=\\min\\{1,2b(1-a)/M\\}=3/16$, so [F2] gives the gap factor $1-2am\\tau=29/32$. The actual new gap $9/32$ is below $(29/32)(5/2)=145/64$. The exact and Armijo calculations concern objective gaps; neither calculation supplies an iterate-error bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The explicit initial point belongs to its sublevel, so the compact set used by the exact-search theorem is nonempty; step 1.1 also proves its boundedness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example is deliberately nonstationary: step 1.1 computes $\\nabla f(x_0)=(1,4)\\ne0$, so the line-search branches are reached."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This fixed witness is explicitly on $\\mathbb R^2$; the one-dimensional case is a different example, while both cited theorems state their result for arbitrary $d\\ge1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Hessian eigenvalues are distinct and positive, $m=1<M=4$, so no singular or isotropic-curvature case is hidden; step 1.1 supplies the exact constants."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The exact ray minimum $17/65$ lies in the admissible ray and the Armijo tests include rejected endpoints $1$ and $1/2$ followed by acceptance at $1/4$ in steps 1.2–1.3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The witness and exact minimizer are explicit; steps 1.2–2.1 use finite algebra and no nonconstructive selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Exact and Armijo rates on an anisotropic quadratic statement is one-way and contains no forward equivalence direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Exact and Armijo rates on an anisotropic quadratic statement is one-way and contains no reverse equivalence direction to prove."
+        }
+      ]
+    },
+    "ex-damped-newton-halves-step-before-local-phase": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-damped-newton-global-phase-and-local-quadratic-rate",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and convex, let $f\\in C^2(U,\\mathbb R)$ have an attained global minimum $f^*=f(x^*)$ at $x^*\\in U$, and fix $x_0\\in U$. Suppose $K:=\\{y\\in U:f(y)\\le f(x_0)\\}$ is compact and is contained in a convex open $V\\subseteq U$ that contains every Newton backtracking trial segment under consideration. For constants $0<m\\le M$, assume\n\n$$m\\|v\\|_2^2\\le v^TH_f(y)v\\le M\\|v\\|_2^2\\qquad(y\\in V,\\ v\\in\\mathbb R^d).$$\n\nAssume also that there are $R>0$ and $L_H\\ge0$ with $B(x^*,R)\\subseteq V$ and $\\|H_f(y)-H_f(z)\\|_{\\mathrm{op}}\\le L_H\\|y-z\\|_2$ for $y,z\\in B(x^*,R)$, where $\\|A\\|_{\\mathrm{op}}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$. Run [[alg-damped-newton]] with $a\\in(0,1/2)$, $b\\in(0,1)$, and positive decrement tolerance $\\varepsilon$. Let $\\rho>0$ and $C<\\infty$ be constants furnished by [[thm-newton-local-quadratic-convergence-under-lipschitz-hessian]] for these data, and set\n\n$$\\tau_N:=\\min\\left\\{1,\\frac{2b(1-a)m}{M}\\right\\},\\qquad q_N:=1-\\frac{2am\\tau_N}{M}.$$\n\nFor every accepted update before entry into $B(x^*,\\rho)$,\n\n$$f(x_{k+1})-f^*\\le q_N(f(x_k)-f^*),\\qquad 0<q_N<1.$$\n\nThus, after finitely many such updates the method either has stopped at its positive decrement test or has entered $B(x^*,\\rho)$. More explicitly, if $\\varepsilon<m^2\\rho^2/(2M)$, the decrement test cannot stop outside that ball, so the method reaches it after finitely many accepted updates. Once in this ball, every later attempted update has step $t_k=1$ and satisfies\n\n$$\\|x_{k+1}-x^*\\|_2\\le C\\|x_k-x^*\\|_2^2.$$\n\nThe last assertion is conditional on the decrement test not stopping first. No post-stop iterate or update is asserted. This is a strongly convex objective result; it does not apply to arbitrary vector roots or indefinite Hessians.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-damped-newton",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U\\subseteq\\mathbb R^d$ be open, and let $f:U\\to\\mathbb R$ be twice\ncontinuously Fréchet differentiable. Write $g(x)=\\nabla f(x)$ and\n$H(x)=\\nabla^2 f(x)$ using [[def-jacobian-matrix-and-gradient]] and\n[[def-hessian-and-euclidean-critical-point]]. The Hessian is symmetric by\n[[cor-hessian-is-symmetric]].\n\n**Inputs:** $x_0\\in U$, a Newton-decrement tolerance $\\varepsilon>0$, and\nline-search parameters $\\alpha\\in(0,1/2)$ and $\\beta\\in(0,1)$. **Output:**\nwhen the procedure stops, return the last valid iterate $x_k$ and one of the\nstatuses `stationary`, `decrement`, or\n`positive-definite solve unavailable`.\nIf none of these stopping conditions occurs, the sequence continues and there\nis no finite return.\n\nAt iteration $k$ with current iterate $x_k$:\n\n1. Compute $g_k:=g(x_k)$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $H_k:=H(x_k)$ is not positive definite, return\n   $(x_k,\\texttt{positive-definite solve unavailable})$ without a Newton\n   update. Otherwise compute its Cholesky factorization $H_k=L_kL_k^T$, solve\n   $L_kw=-g_k$ and $L_k^Tp_k=w$, and set\n   $$\\lambda_k^2:=-\\langle g_k,p_k\\rangle=g_k^TH_k^{-1}g_k>0.$$\n3. Before line search, if $\\lambda_k^2/2\\le\\varepsilon$, return\n   $(x_k,\\texttt{decrement})$. This is the Newton-decrement stopping test.\n4. Start with $t=1$ and repeatedly replace $t$ by $\\beta t$ until\n   $x_k+t p_k\\in U$ and\n   $f(x_k+t p_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe Cholesky factor exists and is unique when the symmetric Hessian is positive\ndefinite by\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nIts positive diagonal makes both triangular solves unique. The backtracking\nbranch terminates whenever it is reached, since $g_k\\ne0$ and $H_k$ is\npositive definite, by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. This\nprocedure makes no global-optimality claim.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-newton-local-quadratic-convergence-under-lipschitz-hessian",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $U\\subseteq\\mathbb R^d$ be open, and let\n$f:U\\to\\mathbb R$ be $C^2$.\nUse the Hessian convention of [[def-hessian-and-euclidean-critical-point]].\nSuppose $x^*\\in U$ is an interior critical point,\n$H(x^*):=\\nabla^2f(x^*)$\nis positive definite, and for some $R>0$, $K\\ge0$ the ball $B(x^*,R)$ lies\nin $U$ and\n$$\\|H(x)-H(y)\\|_{\\rm op}\\le K\\|x-y\\| \\qquad(x,y\\in B(x^*,R)).$$\nFix any Newton-decrement tolerance $\\varepsilon>0$ and the Armijo parameters\n$0<\\alpha<1/2$ and $0<\\beta<1$ in [[alg-damped-newton]]. There are\n$\\rho>0$ and $C<\\infty$ such that every generated iterate from a start\n$x_0\\in B(x^*,\\rho)$ remains in this ball. At each generated nonstationary\niterate $x_k$ for which the algorithm's decrement test satisfies\n$\\lambda_k^2/2>\\varepsilon$ and a Newton update is therefore attempted, the\nline search accepts the full step $t_k=1$ and\n$$\\|x_{k+1}-x^*\\|\\le C\\|x_k-x^*\\|^2.$$\nIf the decrement test stops the procedure, no next iterate or update bound is\nasserted at that point.\nHere $\\lambda_k^2=\\nabla f(x_k)^TH(x_k)^{-1}\\nabla f(x_k)$ is the decrement\ncomputed by [[alg-damped-newton]].\nThis is a local statement; it supplies no global optimum or convergence\nclaim for a nonconvex objective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Differentiation gives $g(x)=x+10x/\\sqrt{1+x^2}$, $H(x)=1+10/(1+x^2)^{3/2}$, and $H'(x)=-30x/(1+x^2)^{5/2}$. Thus $1\\le H(x)\\le11$, $g(x)$ has the sign of $x$, and $x^*=0$ is the unique minimizer. Also $|H'(x)|\\le30$, since $|x|\\le1+x^2\\le(1+x^2)^{5/2}$; [F4] makes $H$ globally $30$-Lipschitz. The initial sublevel set is closed by continuity and bounded because $f(x)\\ge x^2/2$, hence compact by [F5].",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "At $x_0=2$, $g=2+4\\sqrt5$, $H=1+2/\\sqrt5$, and the Newton direction is $p=-g/H=30-16\\sqrt5$. Its decrement is $\\lambda^2=g^2/H=260-88\\sqrt5>62$, since $5<81/16$ gives $\\sqrt5<9/4$; hence the positive tolerance test does not stop before the first line search.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Step 1.1 gives $g(0)=0$, $H(0)=11>0$, and a $30$-Lipschitz Hessian on $B(0,1)$, so [F3] applies there; we directly verify the local radius $\\rho=10^{-6}$ and constant $C=10$. For $0<|x|\\le\\rho$, $H(x)\\ge1$ and $|g(x)|\\le11|x|$, so the Newton direction $p=-g(x)/H(x)$ satisfies $|p|\\le11|x|$. Every point $\\xi$ between $x$ and $x+p$ therefore satisfies $|H(\\xi)-H(x)|\\le30|p|\\le330\\rho$. Since $330\\rho=33/100000<49/50=1-2a$ and $H(x)\\ge1$, we have $H(\\xi)\\le H(x)+330\\rho\\le2(1-a)H(x)$. Taylor's formula [F7] and $g(x)p=-H(x)p^2$ now give $f(x+p)-f(x)-ag(x)p=-(1-a)H(x)p^2+H(\\xi)p^2/2\\le0$, so the full step passes Armijo. Also $x+p=(xH(x)-g(x))/H(x)=-10x^3/((1+x^2)^{3/2}H(x))$, hence $|x+p|\\le10|x|^3\\le10|x|^2$ because $|x|\\le\\rho<1$, and $|x+p|\\le10\\rho^2|x|<\\rho$ since $10\\rho^2=10^{-11}<1$. Thus $C=10$ and this $\\rho$ give a directly verified invariant local ball and quadratic bound whenever the decrement test permits an update.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F7",
+            "given",
+            "step 1.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "claim": "The full-step point is $x_1=32-16\\sqrt5$, whose absolute value exceeds $2$ because $289/64<5$ gives $\\sqrt5>17/8$. The objective is even and strictly increasing as a function of $|x|>0$, so $f(x_1)>f(2)$; its Armijo threshold $f(2)+agp=f(2)-a\\lambda^2$ is smaller than $f(2)$, and the unit step fails.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.3",
+          "claim": "The half-step point is $x_{1/2}=17-8\\sqrt5=-r$, where $0<r=8\\sqrt5-17<1$: indeed $289/64<5<324/64$ implies $17/8<\\sqrt5<9/4$. Thus $f(x_{1/2})=r^2/2+10\\sqrt{1+r^2}<1/2+10\\sqrt2<31/2$, using $2<9/4$ and so $\\sqrt2<3/2$, while $f(2)=2+10\\sqrt5>22$ because $\\sqrt5>2$. The objective drop exceeds $13/2$. The half-step Armijo decrease required is $q/200$, where $q=\\lambda^2<84$ because $\\sqrt5>2$, so $q/200<21/50<13/2$. Hence $t=1/2$ passes, and it is accepted after the failed unit trial.",
+          "step": "2.3",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Choose $V=\\mathbb R$, which contains every trial segment and $B(0,1)$. By step 1.1 the global Hessian bounds are $m=1$, $M=11$, and the decrement threshold in [F1] is $m^2\\rho^2/(2M)=10^{-12}/22$. The chosen $\\varepsilon=10^{-16}$ is smaller, since $22<10^4$ gives $10^{-16}<10^{-12}/22$, so the decrement test cannot stop outside $B(0,\\rho)$. The first accepted step was the damped half-step in step 2.3; [F1] now gives finite entry into the local ball, followed by unit quadratic updates whenever the decrement test does not stop.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The initial point $2$ belongs to its own nonempty sublevel; step 1.1 proves that sublevel is closed and bounded and hence compact."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 computes a positive decrement above the tolerance, while the proof also identifies the stationary minimizer $0$; the algorithm’s zero-gradient branch is not conflated with this start."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is one-dimensional, so the local constants in step 2.1 use $\\sqrt d=1$ and all stated bounds remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Hessian satisfies $1\\le H\\le11$ everywhere and the tolerance is positive; steps 1.1–2.1 verify positive curvature and the nondegenerate local hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 rejects the full trial $t=1$, step 2.3 verifies acceptance at $t=1/2$, and step 3.1 uses a strict decrement threshold before claiming finite entry."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All local constants and $\\rho$ are explicit in step 2.1; finite entry is inherited from the proved theorem under the checked strict threshold in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The A damped Newton step precedes the local quadratic phase statement is one-way and contains no forward equivalence direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The A damped Newton step precedes the local quadratic phase statement is one-way and contains no reverse equivalence direction to prove."
+        }
+      ]
+    },
+    "ex-small-gradient-can-hide-error-at-ill-conditioned-minimizer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-inexact-gradient-residual-distance-certificate",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and convex, let $f\\in C^2(U,\\mathbb R)$ have an attained interior global minimizer $x^*$, and suppose $H_f(x)\\succeq\\mu I$ on $U$ for some $\\mu>0$. For a candidate $\\widetilde x\\in U$, let $\\widehat g\\in\\mathbb R^d$ be a computed gradient vector. If independently verified bounds\n\n$$\\|\\widehat g\\|_2\\le\\eta,\\qquad \\|\\widehat g-\\nabla f(\\widetilde x)\\|_2\\le\\delta$$\n\nhold for $\\eta,\\delta\\ge0$, then\n\n$$\\|\\widetilde x-x^*\\|_2\\le\\frac{\\eta+\\delta}{\\mu}.$$\n\nThe residual $\\eta$ and discrepancy $\\delta$ are mathematical hypotheses. A software stopping flag alone establishes neither bound.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The Hessian is $\\operatorname{diag}(10^{-8},1)$, so the unique minimizer is $x^*=(0,0)$ and the strong-convexity constant is $\\mu=10^{-8}$. At $\\widetilde x=(1,0)$, $\\nabla f(\\widetilde x)=(10^{-8},0)$, so $\\eta=\\|\\nabla f(\\widetilde x)\\|_2=10^{-8}$ and the true distance is $\\|\\widetilde x-x^*\\|_2=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Applying [F1] gives the sharp bound $\\eta/\\mu=10^{-8}/10^{-8}=1$. The residual is small in absolute size, but the weak curvature in the first coordinate makes this distance bound equal to one rather than a small number.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example specifies a nonempty Euclidean domain and an explicit candidate; the quadratic has a unique minimizer at the origin in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The computed gradient is small but nonzero in step 1.1, so the example does not rely on a stationary point."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness is explicitly two-dimensional; it fixes the anisotropic direction needed to exhibit weak curvature, while the theorem itself covers $d\\ge1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Hessian eigenvalues $10^{-8}$ and $1$ are both positive; step 1.1 identifies the small but nonzero strong-convexity constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The certificate is attained exactly at the endpoint value $\\eta/\\mu=1$, equal to the true distance in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The minimizer, candidate, gradient and distance are explicit finite vectors, so step 1.1 requires no selection argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The A small gradient can hide error when the minimizer is ill conditioned statement is one-way and contains no forward equivalence direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The A small gradient can hide error when the minimizer is ill conditioned statement is one-way and contains no reverse equivalence direction to prove."
+        }
+      ]
+    },
+    "ex-approximate-gradient-residual-distance-certificate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-inexact-gradient-residual-distance-certificate",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and convex, let $f\\in C^2(U,\\mathbb R)$ have an attained interior global minimizer $x^*$, and suppose $H_f(x)\\succeq\\mu I$ on $U$ for some $\\mu>0$. For a candidate $\\widetilde x\\in U$, let $\\widehat g\\in\\mathbb R^d$ be a computed gradient vector. If independently verified bounds\n\n$$\\|\\widehat g\\|_2\\le\\eta,\\qquad \\|\\widehat g-\\nabla f(\\widetilde x)\\|_2\\le\\delta$$\n\nhold for $\\eta,\\delta\\ge0$, then\n\n$$\\|\\widetilde x-x^*\\|_2\\le\\frac{\\eta+\\delta}{\\mu}.$$\n\nThe residual $\\eta$ and discrepancy $\\delta$ are mathematical hypotheses. A software stopping flag alone establishes neither bound.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Here $\\mu=1$, $\\nabla f(\\widetilde x)=1/10$, and the computed residual is $\\eta=|\\widehat g|=1/50$. The independently verified discrepancy is $\\delta=|1/50-1/10|=2/25$. The actual distance is $|\\widetilde x-x^*|=1/10$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The certificate [F1] gives $(\\eta+\\delta)/\\mu=(1/50+2/25)=1/10$, exactly the actual distance. If the discrepancy were omitted, the proposed bound $1/50$ would be false.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The real line and candidate are explicit, and the quadratic has the stated attained minimizer; the example is nonempty by construction."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Both the computed vector $1/50$ and true gradient $1/10$ are nonzero in step 1.1; the example also retains a nonzero discrepancy."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is one-dimensional and uses absolute value as its Euclidean norm in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that the quadratic has $\\mu=1>0$; the computed residual and discrepancy are positive and finite, with no singular-curvature case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 shows the complete certificate equals the true endpoint distance $1/10$, whereas omitting the discrepancy gives the false smaller value $1/50$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every object and discrepancy is evaluated explicitly in step 1.1; no minimizer or error bound is chosen nonconstructively."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The A computed-gradient residual needs its discrepancy bound statement is one-way and contains no forward equivalence direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The A computed-gradient residual needs its discrepancy bound statement is one-way and contains no reverse equivalence direction to prove."
+        }
+      ]
+    },
+    "ex-inner-quadrature-error-in-gradient-certificate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-inexact-gradient-residual-distance-certificate",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and convex, let $f\\in C^2(U,\\mathbb R)$ have an attained interior global minimizer $x^*$, and suppose $H_f(x)\\succeq\\mu I$ on $U$ for some $\\mu>0$. For a candidate $\\widetilde x\\in U$, let $\\widehat g\\in\\mathbb R^d$ be a computed gradient vector. If independently verified bounds\n\n$$\\|\\widehat g\\|_2\\le\\eta,\\qquad \\|\\widehat g-\\nabla f(\\widetilde x)\\|_2\\le\\delta$$\n\nhold for $\\eta,\\delta\\ge0$, then\n\n$$\\|\\widetilde x-x^*\\|_2\\le\\frac{\\eta+\\delta}{\\mu}.$$\n\nThe residual $\\eta$ and discrepancy $\\delta$ are mathematical hypotheses. A software stopping flag alone establishes neither bound.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Integrating gives $f(x)=(x^5-(x-1)^5)/5$, hence $f'(x)=x^4-(x-1)^4$ and $f''(x)=12(x-1/2)^2+1\\ge1$. Thus $\\mu=1$ is valid and the minimizer is $x^*=1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "At $\\widetilde x=3/5$, the true gradient is $f'(3/5)=13/125=104/1000$. The two midpoint nodes are $1/4$ and $3/4$, so the composite midpoint estimate is $\\widehat g=\\tfrac12\\bigl(4(7/20)^3+4(-3/20)^3\\bigr)=79/1000$. Therefore the computed residual is $\\eta=79/1000$ and the exact discrepancy is $\\delta=|104/1000-79/1000|=1/40=25/1000$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The actual distance is $|3/5-1/2|=1/10=100/1000$. By [F1] the certificate is $(\\eta+\\delta)/\\mu=104/1000$, which is valid and close to the actual distance. The objective's inner integral was evaluated approximately, so its gradient discrepancy was not inferred from the residual.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The domain is $\\mathbb R$ and the integral defines an explicit polynomial objective; step 1.1 identifies its attained minimizer."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 computes distinct nonzero true and quadrature gradients, so both residual and inner quadrature discrepancy are visible."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The calculation is one-dimensional and all norms in steps 1.1–2.1 are absolute values."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves $f(x)=12(x-1/2)^2+1\\ge1$, so the curvature lower bound is strictly positive everywhere."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The candidate $3/5$ and minimizer $1/2$ are interior points of $\\mathbb R$; the two midpoint nodes $1/4,3/4$ are interior to the quadrature interval, as computed in step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The minimizer and quadrature nodes are explicit; exact integration and a two-node finite sum give every quantity in steps 1.1–2.1 without choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Inner quadrature error enters an outer gradient certificate statement is one-way and contains no forward equivalence direction to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Inner quadrature error enters an outer gradient certificate statement is one-way and contains no reverse equivalence direction to prove."
+        }
+      ]
+    }
+  }
+}

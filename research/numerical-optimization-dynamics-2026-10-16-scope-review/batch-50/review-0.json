@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "50",
+  "round": 0,
+  "reviewed_items": [
+    "alg-ilu0-fixed-pattern-factorization",
+    "thm-ilu0-factor-pattern-and-work-counts",
+    "alg-flexible-gmres-variable-right-preconditioning",
+    "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+    "ex-left-preconditioned-residual-can-understate-physical-residual",
+    "ex-ilu0-tridiagonal-factorization",
+    "cex-ilu0-product-can-create-fill-outside-input-pattern"
+  ],
+  "reviewed_pages": [
+    "preconditioner-algorithms-and-residual-metrics",
+    "preconditioner-algorithms-and-residual-metrics-examples"
+  ],
+  "decision": "repair",
+  "reason": "The mathematical claims and their prerequisites are sound within the approved scope, but the ILU procedure does not specify execution that supports its exact sparse counts, FGMRES matrix indexing needs an explicit mapping, and several source locators are incorrect. These are locally repairable.",
+  "findings": [
+    {
+      "id": "alg-ilu0-fixed-pattern-factorization",
+      "type": "local",
+      "reason": "The merge is named but its pointer-advance branches are unspecified, while the theorem's J comparison bound depends on that traversal. Application gives dense triangular sums, but the theorem counts only stored slots; specify loops over P_L and P_U, including slots whose values became zero, to support the exact s−n counts."
+    },
+    {
+      "id": "thm-ilu0-factor-pattern-and-work-counts",
+      "type": "local",
+      "reason": "The application-count proof depends on the sparse loops requested for the algorithm. Its source locators also point to unrelated sections: use Saad §§10.3.1–10.3.2 and Templates §§3.4.1–3.4.2. [Saad PDF](https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf) [Templates PDF](https://www.netlib.org/templates/templates.pdf)"
+    },
+    {
+      "id": "alg-flexible-gmres-variable-right-preconditioning",
+      "type": "local",
+      "reason": "The h_ik labels are one-based, while H̄_j and Z_j are matrices under the library's zero-based coordinates. State the explicit label-to-slot mapping, such as (i−1,k−1)↔h_ik, and the column convention."
+    },
+    {
+      "id": "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+      "type": "local",
+      "reason": "The theorem uses V_{m+1} without defining it; define its columns and indexing consistently with the algorithm. Its source locator should be §9.4.1, pp. 287–289, not §9.3.1, which is left-preconditioned GMRES. [Saad PDF](https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf)"
+    },
+    {
+      "id": "ex-left-preconditioned-residual-can-understate-physical-residual",
+      "type": "local",
+      "reason": "The Templates locator §3.2.1, pp. 35–36 is misnumbered; left/right preconditioning is §3.1.2 at those pages, while §3.2.1 is block Jacobi. [Templates PDF](https://www.netlib.org/templates/templates.pdf)"
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-ilu0-factor-pattern-and-work-counts",
+      "decision": "repair",
+      "reason": "Its sparse application counts are justified once the algorithm explicitly traverses the stored factor slots; its proof already counts that way. Correct the source locators as noted."
+    },
+    {
+      "id": "ex-ilu0-tridiagonal-factorization",
+      "decision": "accept",
+      "reason": "The example uses the ILU setup recurrence and factor values; adding explicit application loops does not change them."
+    },
+    {
+      "id": "cex-ilu0-product-can-create-fill-outside-input-pattern",
+      "decision": "accept",
+      "reason": "The counterexample uses the setup recurrence and factor slots; its witness and product calculation remain valid."
+    },
+    {
+      "id": "thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span",
+      "decision": "repair",
+      "reason": "The proof's AZ_m=V_{m+1}H̄_m and residual identities need the algorithm's one-based Hessenberg labels mapped explicitly to zero-based matrix slots, and V_{m+1} defined by columns."
+    },
+    {
+      "id": "preconditioner-algorithms-and-residual-metrics",
+      "decision": "accept",
+      "reason": "Its summary remains accurate after these clarifications. The current supplier pages were inspected: CSR and residual-map uses are supported by their actual definitions/results; the stationary-iteration and Krylov page requirements provide context only, with no imported item claim."
+    },
+    {
+      "id": "preconditioner-algorithms-and-residual-metrics-examples",
+      "decision": "accept",
+      "reason": "Its examples remain mathematically correct, and its linked preconditioner-worsening counterexample is the existing published item rather than a duplicate."
+    }
+  ]
+}

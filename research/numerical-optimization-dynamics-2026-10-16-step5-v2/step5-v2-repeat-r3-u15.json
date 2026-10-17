@@ -1,0 +1,89 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 3,
+  "unit": "15",
+  "input_sha256": "7ac50847ea3f7fe1092f9b97928b9bfcec604124aa04c175bc8f576ebe91821e",
+  "decisions": [
+    {
+      "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "d4c201ab64bea5b18e853c06044e23d19f84290b0661a93eb48a74d0e2563564",
+      "outcome": "false_positive",
+      "reason": "The alleged missing hypothesis follows from the explicitly imported procedure semantics. alg-na-computed-unitary-radix-two-fft fixes the operationwise model, uses the same instance throughout recursion, and propagates arithmetic failures. That model's Definition explicitly says: 'A procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite'. Its first paragraph also rejects every nonzero subnormal exact result. Consequently a successful FFT execution supplies the butterfly lemma's exact-nonzero-normal hypothesis at every recursive butterfly; cancellation to exact zero is allowed. Certified twiddle errors and unit-modulus exact phases supply the other hypotheses. F2 and step 2.1 are valid under the theorem's existing success premise, without an additional assumption or edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+      "disposition": "unaffected",
+      "post_sha256": "a639619e99db122b489d2eecdd439ac9f528da95a39ef6771365530622fbea22",
+      "review_context_sha256": "16b8067f9bad35b8e0da2c3f027e4727a43b66f341530f93415199884b864810",
+      "reason": "Reviewed the complete theorem and butterfly/product proofs, the algorithm and arithmetic-model Definitions, actual Fourier supplier statements, the owning contract and page. Successful execution implies zero-or-normal exact intermediates, so the local eta bound applies. Exact normalized blocks preserve pair norms; stacking child errors and local errors gives rho_m=rho_(m-1)+eta(1+rho_(m-1))=(1+eta)^m-1. The length-one case is exact, conjugation transfers the bound to successful inverse calls, and the exponential series gives rho_m<=2m eta when m eta<=1. The certificate and smallness caveats are retained. The item guard equals the assignment before guard; no item or metadata repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "d4c201ab64bea5b18e853c06044e23d19f84290b0661a93eb48a74d0e2563564",
+      "disposition": "false-positive",
+      "reason": "The operationwise model explicitly makes zero-or-normal exact intermediates necessary for procedure success. The assigned FFT algorithm imports that model, keeps one instance through recursion, and propagates range failures; hence the claimed missing butterfly prerequisite is already enforced. No published-consumer finding or published-ledger update arises.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "review_complete_no_repair_needed",
+    "item_edits": [],
+    "metadata_edits": [],
+    "evidence": [
+      "items/def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma.md, Definition paragraphs 1 and 3: every nonzero exact subnormal or overflow returns range-failure; procedure success requires every exact intermediate zero or normal.",
+      "items/alg-na-computed-unitary-radix-two-fft.md, Definition paragraphs 1 and 2: fixes that operationwise model, requires representable input/phase coordinates, uses the same instance throughout recursion, and propagates arithmetic failure.",
+      "items/lem-na-computed-unitary-butterfly-error-bound.md, Statement and Proof steps 1.1-3.1; items/lem-na-complex-product-six-operation-roundoff-bound.md, Statement and Proof steps 1.1-2.1: the successful procedure supplies the local normal-range prerequisites; the explicit constants imply the claimed 10u+epsilon pair bound.",
+      "items/thm-na-computed-unitary-radix-two-fft-error-bound.md, Proof steps 1.1-4.1: exact block normalization, stacked-norm induction, conjugated inverse and small-error series bound were checked directly.",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-15.proof-contracts.json, contracts.thm-na-computed-unitary-radix-two-fft-error-bound: F2 quotes the complete butterfly normality hypothesis; derivations and boundaries agree with the current proof.",
+      "library/numerical-linear-algebra-and-approximation/computed-fast-transforms-and-convolution.md: the page explicitly describes normal-range successful operations and retains the twiddle and smallness restrictions."
+    ],
+    "interface_change": false,
+    "propagation": "No Statement or Definition changed and no prerequisite was created; no downstream examination or maintenance event is triggered.",
+    "checks": [
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items thm-na-computed-unitary-radix-two-fft-error-bound",
+        "exit_code": 0,
+        "result": "Run immediately after completing the mathematical review; returned the post guard and review context copied into the review row."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-na-computed-unitary-radix-two-fft-error-bound.md --json",
+        "exit_code": 0,
+        "result": "One proof checked, status pass, zero failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-na-computed-unitary-radix-two-fft-error-bound.md --json",
+        "exit_code": 0,
+        "result": "One item checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-15.proof-contracts.json --strict --items thm-na-computed-unitary-radix-two-fft-error-bound --json",
+        "exit_code": 0,
+        "result": "Scoped strict contract check passed with no errors or warnings."
+      }
+    ],
+    "proof_layout": "No changed item paths: the mandatory post-edit proof-layout command is not applicable.",
+    "sources": "No external source was consulted or claimed; the finding is resolved by the complete local definitions and familiar finite-dimensional norm/error algebra.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection; no judges, certificates, shared ledgers or round state were written."
+  }
+}

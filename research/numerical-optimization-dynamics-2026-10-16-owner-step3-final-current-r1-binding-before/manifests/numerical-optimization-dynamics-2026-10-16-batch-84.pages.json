@@ -1,0 +1,216 @@
+[
+  {
+    "order": 2452,
+    "id": "gauss-newton-and-levenberg-marquardt-methods",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Gauss newton and levenberg marquardt methods",
+    "companion": "gauss-newton-and-levenberg-marquardt-methods-examples",
+    "requires": [
+      "finite-precision-direct-factorizations",
+      "nonlinear-equations-and-newton-methods",
+      "trust-region-and-cubic-regularization-methods"
+    ],
+    "items": [
+      {
+        "id": "thm-nonlinear-least-squares-gradient-and-hessian",
+        "kind": "theorem",
+        "title": "The nonlinear least-squares gradient and Hessian formulas",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-euclidean-inner-product",
+          "def-hessian-and-euclidean-critical-point",
+          "def-jacobian-matrix-and-gradient",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-algebra-of-derivatives",
+          "thm-algebra-of-continuous-functions",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian",
+        "kind": "lemma",
+        "title": "Rectangular residual linearization error under a Lipschitz Jacobian",
+        "deps": [
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "def-c-one-map-and-local-inverse",
+          "def-euclidean-inner-product",
+          "def-induced-matrix-p-norm",
+          "def-jacobian-matrix-and-gradient",
+          "def-vector-valued-derivative-and-integral",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-continuous-implies-integrable",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-monotonicity-of-the-integral",
+          "thm-newton-leibniz-with-interior-derivative",
+          "thm-norm-inequality-for-the-vector-valued-integral"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+        "kind": "lemma",
+        "title": "A damped least-squares step solves a scaled trust-region model",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-positive-definite-model-has-unique-newton-step"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+        "kind": "algorithm",
+        "title": "Gauss-Newton linearized least-squares step with QR/SVD rank safeguards",
+        "deps": [
+          "alg-scaled-householder-reflector-formation-and-application",
+          "def-forward-and-back-substitution-for-triangular-systems",
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+          "def-jacobian-matrix-and-gradient",
+          "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-computed-full-rank-least-squares-backward-stability",
+          "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "alg-safeguarded-levenberg-marquardt",
+        "kind": "algorithm",
+        "title": "Finite-budget Levenberg-Marquardt with a trust-ratio safeguard",
+        "deps": [
+          "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "def-euclidean-inner-product",
+          "def-c-one-map-and-local-inverse",
+          "def-jacobian-matrix-and-gradient",
+          "def-matrix-product-and-identity-matrix",
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-of-square-roots",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-gauss-newton-local-linear-contraction",
+        "kind": "theorem",
+        "title": "Gauss-Newton contracts linearly under a controlled residual-curvature bound",
+        "deps": [
+          "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "def-euclidean-inner-product",
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-nonlinear-least-squares-gradient-and-hessian",
+          "thm-singular-value-decomposition",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-norm-inequality-for-the-vector-valued-integral"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-gauss-newton-zero-residual-quadratic-convergence",
+        "kind": "theorem",
+        "title": "Gauss-Newton converges quadratically at a full-rank zero-residual root",
+        "deps": [
+          "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "def-euclidean-inner-product",
+          "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+        "kind": "lemma",
+        "title": "Uniformly large damping forces an acceptable LM trial in finitely many attempts",
+        "deps": [
+          "alg-safeguarded-levenberg-marquardt",
+          "def-euclidean-inner-product",
+          "def-induced-matrix-p-norm",
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+          "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-singular-value-decomposition",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+        "kind": "theorem",
+        "title": "Exact safeguarded Levenberg-Marquardt iterates approach stationarity on compact sublevels",
+        "deps": [
+          "alg-safeguarded-levenberg-marquardt",
+          "def-euclidean-inner-product",
+          "def-induced-matrix-p-norm",
+          "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+          "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+          "thm-singular-value-decomposition",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "def-c-one-map-and-local-inverse",
+          "def-jacobian-matrix-and-gradient",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+          "thm-algebra-of-continuous-functions"
+        ],
+        "dependency_level": 8
+      }
+    ]
+  },
+  {
+    "order": 2453,
+    "id": "gauss-newton-and-levenberg-marquardt-methods-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Gauss newton and levenberg marquardt methods \u2014 Examples",
+    "companion": "gauss-newton-and-levenberg-marquardt-methods",
+    "requires": [
+      "gauss-newton-and-levenberg-marquardt-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-exponential-kinetics-gauss-newton-fit",
+        "kind": "example",
+        "title": "An exponential-decay kinetics fit has a full-rank exact solution",
+        "deps": [
+          "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-derivative-of-exponential"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-rank-deficient-identifiability-and-lm-step",
+        "kind": "example",
+        "title": "Rank-deficient data do not identify both parameters, while LM has a unique damped step",
+        "deps": [
+          "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "alg-safeguarded-levenberg-marquardt",
+          "def-euclidean-inner-product",
+          "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-nonzero-residual-gauss-newton-is-only-linear",
+        "kind": "example",
+        "title": "A nonzero-residual stationary point gives only linear Gauss-Newton convergence",
+        "deps": [
+          "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+          "thm-gauss-newton-local-linear-contraction",
+          "thm-nonlinear-least-squares-gradient-and-hessian"
+        ],
+        "dependency_level": 7
+      }
+    ]
+  }
+]

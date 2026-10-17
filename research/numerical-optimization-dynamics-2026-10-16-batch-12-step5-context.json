@@ -1,0 +1,292 @@
+{
+  "group": "v",
+  "batches": [
+    "12"
+  ],
+  "pages_read": [
+    "numerical-differentiation-and-derivative-error-control",
+    "numerical-differentiation-and-derivative-error-control-examples"
+  ],
+  "items_read": [
+    "def-complex-step-derivative-estimator",
+    "def-finite-difference-stencils-and-evaluation-error-model",
+    "def-jacobian-and-hessian-vector-difference-products",
+    "def-structural-column-coloring-for-sparse-jacobian-recovery",
+    "lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative",
+    "thm-complex-step-derivative-has-second-order-error-under-holomorphy",
+    "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds",
+    "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds",
+    "thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring",
+    "def-richardson-extrapolation-under-a-fourth-order-remainder",
+    "thm-optimal-step-for-forward-and-central-difference-error-bounds",
+    "thm-richardson-extrapolation-has-fourth-order-error-bound",
+    "cex-colliding-column-colors-do-not-identify-a-jacobian",
+    "cex-complex-step-absolute-value-returns-the-wrong-derivative",
+    "ex-colored-jacobian-of-two-independent-reactions",
+    "ex-forward-difference-noise-bound-has-a-balanced-step"
+  ],
+  "conventions": [
+    {
+      "convention": "Scalar steps satisfy h>0. Evaluation errors are absolute per-call bounds, with no independence, correlation, or relative-error assumption.",
+      "fixed_by": "def-finite-difference-stencils-and-evaluation-error-model",
+      "matters_for": [
+        "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds",
+        "thm-optimal-step-for-forward-and-central-difference-error-bounds",
+        "thm-richardson-extrapolation-has-fourth-order-error-bound",
+        "ex-forward-difference-noise-bound-has-a-balanced-step"
+      ]
+    },
+    {
+      "convention": "The scalar central evaluation contribution is δ/h; 2δ/h is an explicitly conservative common bound. The central balancing step optimizes that conservative bound.",
+      "fixed_by": "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds",
+      "matters_for": [
+        "thm-optimal-step-for-forward-and-central-difference-error-bounds"
+      ]
+    },
+    {
+      "convention": "Complex-step estimation uses a holomorphic extension real on a real interval; imaginary-component error contributes δ_im/h.",
+      "fixed_by": "def-complex-step-derivative-estimator",
+      "matters_for": [
+        "thm-complex-step-derivative-has-second-order-error-under-holomorphy",
+        "cex-complex-step-absolute-value-returns-the-wrong-derivative"
+      ]
+    },
+    {
+      "convention": "Directional products use m,n≥1 and Euclidean norms. Vector error bounds apply per evaluation call; random bounded errors satisfy the bounds almost surely.",
+      "fixed_by": "def-jacobian-and-hessian-vector-difference-products",
+      "matters_for": [
+        "thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds"
+      ]
+    },
+    {
+      "convention": "Structural rows and columns are indexed from zero. Safe supports contain every actual nonzero; graph edges join columns sharing a declared row support, including structurally allowed zero entries.",
+      "fixed_by": "def-structural-column-coloring-for-sparse-jacobian-recovery",
+      "matters_for": [
+        "thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring",
+        "cex-colliding-column-colors-do-not-identify-a-jacobian",
+        "ex-colored-jacobian-of-two-independent-reactions"
+      ]
+    },
+    {
+      "convention": "Richardson extrapolation is (4D⁰_(h/2)−D⁰_h)/3; its guarantee requires one coefficient c₂ and one remainder constant M valid uniformly over 0<t≤h.",
+      "fixed_by": "thm-richardson-extrapolation-has-fourth-order-error-bound",
+      "matters_for": [
+        "thm-richardson-extrapolation-has-fourth-order-error-bound"
+      ]
+    },
+    {
+      "convention": "Balancing optimizes the displayed upper bounds over permitted steps (0,H], rather than actual derivative error; zero noise and zero truncation constants have separately stated cases.",
+      "fixed_by": "thm-optimal-step-for-forward-and-central-difference-error-bounds",
+      "matters_for": [
+        "ex-forward-difference-noise-bound-has-a-balanced-step"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds",
+      "statement": "For h>0, C² regularity and |f''|≤M₂ on the forward stencil interval give |D⁺_h f(x)−f'(x)|≤M₂h/2; C³ regularity and |f'''|≤M₃ on the central stencil interval give |D⁰_h f(x)−f'(x)|≤M₃h²/6. Per-call absolute errors ≤δ add at most 2δ/h forward and δ/h central, with 2δ/h also displayed as a conservative central bound.",
+      "used_by": [
+        "thm-optimal-step-for-forward-and-central-difference-error-bounds",
+        "thm-spsa-gradient-bias-is-second-order"
+      ]
+    },
+    {
+      "id": "lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative",
+      "statement": "For h>0 with [x−h,x+h]⊂I, f∈C⁵ on a neighborhood of that interval and |f⁽⁵⁾|≤M₅ throughout it imply D⁰_h f(x)=f'(x)+f'''(x)h²/6+r_h, with |r_h|≤M₅h⁴/120. The coefficient f'''(x)/6 is the same for every admissible h at fixed x.",
+      "used_by": [
+        "def-richardson-extrapolation-under-a-fourth-order-remainder",
+        "thm-richardson-extrapolation-has-fourth-order-error-bound"
+      ]
+    },
+    {
+      "id": "def-structural-column-coloring-for-sparse-jacobian-recovery",
+      "statement": "A safe structural row pattern satisfies J_ij=0 whenever j∉S_i. Distinct columns interfere exactly when some S_i contains both; a proper coloring assigns adjacent columns different labels, and sᶜ is the indicator vector of color c.",
+      "used_by": [
+        "thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring",
+        "cex-colliding-column-colors-do-not-identify-a-jacobian",
+        "ex-colored-jacobian-of-two-independent-reactions"
+      ]
+    },
+    {
+      "id": "thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring",
+      "statement": "For a proper coloring of a safe structural row pattern, every j∈S_i with χ(j)=c satisfies J_ij=(Jsᶜ)_i; entries outside S_i are zero. Thus all entries are recovered from one compressed product per color.",
+      "used_by": [
+        "cex-colliding-column-colors-do-not-identify-a-jacobian",
+        "ex-colored-jacobian-of-two-independent-reactions"
+      ]
+    },
+    {
+      "id": "thm-optimal-step-for-forward-and-central-difference-error-bounds",
+      "statement": "For positive truncation constants and δ>0, M₂h/2+2δ/h has unique unconstrained minimizer √(4δ/M₂), and M₃h²/6+2δ/h has unique unconstrained minimizer ∛(6δ/M₃). On (0,H], each minimizer is capped at H. Zero-constant cases are stated separately.",
+      "used_by": [
+        "ex-forward-difference-noise-bound-has-a-balanced-step"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-complex-differentiability-holomorphic-and-entire",
+      "used_for": "Holomorphy and real-direction difference quotients in the complex-step argument.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-conjugate-real-imaginary-part-and-modulus",
+      "used_for": "Complex coordinates and the absolute-value counterexample.",
+      "opened": true
+    },
+    {
+      "id": "def-abs-value",
+      "used_for": "Absolute evaluation and truncation errors.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-abs-value",
+      "used_for": "Sign invariance and multiplicativity of absolute values.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-triangle-inequality",
+      "used_for": "Combining Taylor remainders and evaluation errors.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Jacobian and gradient coordinate conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-hessian-and-euclidean-critical-point",
+      "used_for": "Hessian indexing in gradient-difference products.",
+      "opened": true
+    },
+    {
+      "id": "def-ck-and-multi-index-notation-in-several-variables",
+      "used_for": "Ordered partial derivatives and component smoothness.",
+      "opened": true
+    },
+    {
+      "id": "def-p-norms-on-rn",
+      "used_for": "Euclidean vector norm and its coordinate formula.",
+      "opened": true
+    },
+    {
+      "id": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+      "used_for": "Euclidean triangle inequality and absolute homogeneity.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Compressed products as finite row sums.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum-in-a-commutative-monoid",
+      "used_for": "Order-independent finite sums and empty sums in sparse recovery.",
+      "opened": true
+    },
+    {
+      "id": "def-semigroup-and-monoid",
+      "used_for": "Additive identity and associativity underlying finite sums.",
+      "opened": true
+    },
+    {
+      "id": "def-taylor-polynomial-and-remainder",
+      "used_for": "Taylor coefficients and remainder notation.",
+      "opened": true
+    },
+    {
+      "id": "cor-taylor-lagrange-and-cauchy-remainders",
+      "used_for": "Degree-one, degree-two, and degree-four scalar Taylor remainders.",
+      "opened": true
+    },
+    {
+      "id": "thm-taylor-schlomilch-roche-remainder",
+      "used_for": "Checking the hypotheses inherited by the Taylor remainder corollary, including reflected intervals.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivatives-along-a-line-have-the-multinomial-expansion",
+      "used_for": "Identifying line derivatives with Jacobian and gradient directional products.",
+      "opened": true
+    },
+    {
+      "id": "thm-symmetry-of-higher-mixed-partials",
+      "used_for": "Identifying the derivative of the gradient along a line with H_f(x)v.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+      "used_for": "Vertical derivatives of real and imaginary components.",
+      "opened": true
+    },
+    {
+      "id": "cor-holomorphic-functions-are-real-analytic-and-smooth",
+      "used_for": "Smoothness needed for real Taylor expansion along the vertical segment.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-integral-formula-higher-derivatives",
+      "used_for": "Existence of iterated complex derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-c2-holomorphic-function-has-holomorphic-derivative",
+      "used_for": "Applying Cauchy–Riemann identities to f' and f''.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Square-integrable evaluation-noise moments.",
+      "opened": true
+    },
+    {
+      "id": "lem-variance-and-covariance-identities-for-random-variables",
+      "used_for": "Variance of a difference, including its covariance term.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Zero covariance of independent centered integrable noises.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Positive square root defining the forward balancing step.",
+      "opened": true
+    },
+    {
+      "id": "thm-nth-roots-exist",
+      "used_for": "Positive cube root defining the central balancing step.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "numerical-differentiation-and-derivative-error-control",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "Contextual prerequisite only: no assigned proof imports Newton convergence. The page's warning preserves the supplier's distinction between exact updated-Jacobian local convergence and finite-difference procedures without a rate guarantee."
+    },
+    {
+      "from": "numerical-differentiation-and-derivative-error-control",
+      "to": "polynomial-interpolation-and-remainder",
+      "faithful": true,
+      "note": "Contextual prerequisite only: the assigned stencil proofs use the published Taylor remainder, rather than claiming a stronger consequence of interpolation. The interpolation supplier retains distinct nodes and its stated smoothness hypotheses."
+    },
+    {
+      "from": "numerical-optimization-globalization-and-inexact-certificates",
+      "to": "numerical-differentiation-and-derivative-error-control",
+      "faithful": true,
+      "note": "No direct assigned-item citation appears in the consumer page's items. Its residual-distance certificate assumes a separately verified Euclidean gradient discrepancy and does not infer that discrepancy from a stopping flag or scalar bound."
+    },
+    {
+      "from": "simulation-gradient-estimation-and-simultaneous-perturbation",
+      "to": "numerical-differentiation-and-derivative-error-control",
+      "faithful": true,
+      "note": "The SPSA bias theorem F2 faithfully specializes the central truncation bound to g(t)=f(θ+tΔ). Its open-neighborhood C³ hypotheses and third-derivative bound supply the required stencil assumptions; division by |Δ_i| and expectation retain the stated weighted moment condition."
+    }
+  ]
+}

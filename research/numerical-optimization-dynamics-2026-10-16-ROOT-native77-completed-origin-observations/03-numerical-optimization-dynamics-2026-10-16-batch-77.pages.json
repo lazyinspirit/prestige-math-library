@@ -1,0 +1,222 @@
+[
+  {
+    "order": 2438,
+    "id": "parallel-in-time-parareal-and-mgrit",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Parallel in time parareal and mgrit",
+    "companion": "parallel-in-time-parareal-and-mgrit-examples",
+    "requires": [
+      "runge-kutta-methods-and-order",
+      "implicit-stiff-time-stepping-and-algebraic-error"
+    ],
+    "items": [
+      {
+        "id": "def-parareal-propagator-pair",
+        "kind": "definition",
+        "title": "Fine and coarse propagators on a common macro grid",
+        "deps": [
+          "def-explicit-runge-kutta-tableau-and-stage-map",
+          "def-backward-euler-step-equation"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-parareal-correction-sweeps",
+        "kind": "algorithm",
+        "title": "Finite-budget Parareal correction sweeps",
+        "deps": [
+          "def-parareal-propagator-pair"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-linear-all-at-once-time-operator",
+        "kind": "definition",
+        "title": "The all-at-once bidiagonal time operator and C/F points",
+        "deps": [
+          "def-parareal-propagator-pair"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-parareal-first-k-nodes-are-fine-exact",
+        "kind": "lemma",
+        "title": "Parareal reproduces the first k fine-grid nodes after k sweeps",
+        "deps": [
+          "alg-parareal-correction-sweeps",
+          "def-parareal-propagator-pair"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-parareal-binomial-error-bound",
+        "kind": "theorem",
+        "title": "A conditional binomial error bound for Parareal",
+        "deps": [
+          "alg-parareal-correction-sweeps",
+          "def-parareal-propagator-pair",
+          "def-norm-and-normed-space",
+          "def-real-exponential-function-and-e",
+          "lem-exponential-dominates-one-plus-x",
+          "thm-exponential-addition-formula"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-mgrit-exact-coarse-elimination",
+        "kind": "lemma",
+        "title": "Eliminating F-points gives the exact coarse time operator",
+        "deps": [
+          "def-linear-all-at-once-time-operator"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-parareal-inexact-sweep-error-ledger",
+        "kind": "theorem",
+        "title": "An additive error ledger for inexact Parareal sweeps",
+        "deps": [
+          "thm-parareal-binomial-error-bound"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "alg-mgrit-two-level-cycle",
+        "kind": "algorithm",
+        "title": "A declared two-level MGRIT coarse-correction cycle",
+        "deps": [
+          "def-linear-all-at-once-time-operator",
+          "lem-mgrit-exact-coarse-elimination",
+          "def-norm-and-normed-space"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-parareal-continuous-target-error-decomposition",
+        "kind": "corollary",
+        "title": "Separate Parareal iteration error from fine-method error",
+        "deps": [
+          "thm-parareal-inexact-sweep-error-ledger",
+          "def-parareal-propagator-pair",
+          "def-first-order-ode-initial-value-problem-and-solution"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-mgrit-contraction-implies-residual-and-error-decay",
+        "kind": "theorem",
+        "title": "A verified MGRIT error-matrix contraction controls error and residual",
+        "deps": [
+          "def-linear-all-at-once-time-operator",
+          "alg-mgrit-two-level-cycle",
+          "lem-mgrit-exact-coarse-elimination",
+          "def-norm-and-normed-space"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "alg-mgrit-multilevel-recursive-cycle",
+        "kind": "algorithm",
+        "title": "Recursive multilevel MGRIT cycles",
+        "deps": [
+          "def-linear-all-at-once-time-operator",
+          "alg-mgrit-two-level-cycle",
+          "lem-mgrit-exact-coarse-elimination",
+          "def-norm-and-normed-space"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-parareal-sweep-work-and-span",
+        "kind": "lemma",
+        "title": "Work and idealized span of completed Parareal sweeps",
+        "deps": [
+          "alg-parareal-correction-sweeps"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-mgrit-two-level-call-counts",
+        "kind": "lemma",
+        "title": "Propagator call counts for the two-level MGRIT cycle",
+        "deps": [
+          "alg-mgrit-two-level-cycle"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-mgrit-recursive-work-and-visits",
+        "kind": "lemma",
+        "title": "Finite recursion and work accounting for multilevel MGRIT",
+        "deps": [
+          "alg-mgrit-multilevel-recursive-cycle",
+          "lem-mgrit-two-level-call-counts"
+        ],
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 2439,
+    "id": "parallel-in-time-parareal-and-mgrit-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Parallel in time parareal and mgrit \u2014 Examples",
+    "companion": "parallel-in-time-parareal-and-mgrit",
+    "requires": [
+      "parallel-in-time-parareal-and-mgrit"
+    ],
+    "items": [
+      {
+        "id": "ex-parareal-dissipative-scalar-heat-mode",
+        "kind": "example",
+        "title": "A dissipative scalar heat mode with Parareal correction",
+        "deps": [
+          "def-parareal-propagator-pair",
+          "alg-parareal-correction-sweeps",
+          "def-euler-midpoint-rk4-tableaus",
+          "def-backward-euler-step-equation"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-parareal-oscillatory-coarse-phase-error",
+        "kind": "example",
+        "title": "A coarse phase mismatch can increase the Parareal error",
+        "deps": [
+          "def-parareal-propagator-pair",
+          "alg-parareal-correction-sweeps",
+          "lem-parareal-first-k-nodes-are-fine-exact"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-parareal-nonlinear-tube-escape",
+        "kind": "example",
+        "title": "A nonlinear Parareal iterate can leave its local Lipschitz tube",
+        "deps": [
+          "def-parareal-propagator-pair",
+          "alg-parareal-correction-sweeps",
+          "thm-parareal-binomial-error-bound"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-mgrit-scalar-diffusion-two-grid-contraction",
+        "kind": "example",
+        "title": "A scalar diffusion mode gives an explicit two-grid MGRIT matrix",
+        "deps": [
+          "def-linear-all-at-once-time-operator",
+          "lem-mgrit-exact-coarse-elimination",
+          "alg-mgrit-two-level-cycle",
+          "thm-mgrit-contraction-implies-residual-and-error-decay",
+          "def-euler-midpoint-rk4-tableaus",
+          "def-backward-euler-step-equation",
+          "def-norm-and-normed-space"
+        ],
+        "dependency_level": 7
+      }
+    ]
+  }
+]

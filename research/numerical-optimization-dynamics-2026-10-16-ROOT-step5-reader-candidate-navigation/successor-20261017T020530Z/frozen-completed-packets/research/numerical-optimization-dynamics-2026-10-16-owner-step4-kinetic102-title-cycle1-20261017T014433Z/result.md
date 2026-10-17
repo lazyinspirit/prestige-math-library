@@ -1,0 +1,5 @@
+Confirmed the title overclaim for the admitted observation set T={0}. Proposed title: “Parallel first-order decay observations depend only on the sum of two rates”. This asserts dependence and permits constant observations; no positive-time condition is added. The entire item body remains byte-for-byte unchanged.
+
+The sole current title mirror is batch102.pages.json /1/items/1/title. Its /1/items/1/statement also has a pre-existing stale “rank one” phrase; a separately guarded “rank at most one” mirror alignment is included. The proof contract already has the correct rank bound and zero-time boundary. No item consumers were found in current items/ or library/ beyond the examples-page inventory; that page and its companion are sound unchanged.
+
+Original Luna status remains pending at this observation: no target verdict or attempt row. This supplies no native verdict, review acceptance, concern admission, hash certification or source repair. All canonical and historical carriers are untouched.

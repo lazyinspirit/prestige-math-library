@@ -1,0 +1,3317 @@
+Optimal Convergence Rates for the Proximal Bundle Method
+
+Mateo Díaz∗
+Benjamin Grimmer†
+
+Abstract
+
+We study convergence rates of the classic proximal bundle method for a variety of nonsmooth
+convex optimization problems. We show that, without any modification, this algorithm adapts
+to converge faster in the presence of smoothness or a Hölder growth condition. Our analysis
+reveals that with a constant stepsize, the bundle method is adaptive, yet it exhibits suboptimal
+convergence rates. We overcome this shortcoming by proposing nonconstant stepsize schemes
+with optimal rates. These schemes use function information such as growth constants, which
+might be prohibitive in practice. We provide a parallelizable variant of the bundle method that
+can be applied without prior knowledge of function parameters while maintaining near-optimal
+rates. The practical impact of this scheme is limited since we incur a (parallelizable) log factor
+in the complexity. These results improve on the scarce existing convergence rates and provide a
+unified analysis approach across problem settings and algorithmic details. Numerical experiments
+support our findings.
+
+1
+Introduction
+
+Convex optimization has played a fundamental role in recent developments in high-dimensional
+statistics, signal processing, and data science. Large-scale applications have motivated researchers to
+develop first-order methods with computationally simple iterations. Although impressive in scope,
+these methods often require delicate parameter tuning involving geometrical information about the
+objective function. Thus, imposing an obstacle for practitioners that rarely have access to such
+information.
+In this work, we develop efficiency guarantees for proximal bundle methods, which date back to
+the 70s, that solve unconstrained convex minimization problems
+
+minimize
+x∈Rd
+f(x)
+(1.1)
+
+where f : Rd →R is a proper closed convex function. Throughout we assume f attains its minimum
+value f∗= inf f on some nonempty set X∗= {x | f(x) = f∗}. Our core finding is that classic
+bundle methods, without any modification, are adaptive, which means that they speed up in the
+presence of smoothness or error bounds, with little to no tuning.
+Proximal bundle methods were originally introduced by [33], [40], and [59]. They are conceptually
+similar to model-based methods [8,15,50]. That is, methods that update their iterates by applying
+a proximal step to an approximation of the function, known as the model fk:
+
+xk+1 ←argmin
+x
+fk(x) + ρk
+
+2 ∥x −xk∥2
+with
+ρk > 0.
+(1.2)
+
+∗Center for Applied Mathematics, Cornell University Ithaca, NY 14850, USA; people.cam.cornell.edu/md825/
+†ORIE, Cornell University Ithaca, NY 14850, USA; people.orie.cornell.edu/bdg79/
+This material is based upon work supported by the National Science Foundation Graduate Research Fellowship under
+Grant No. DGE-1650441.
+
+1
+
+arXiv:2105.07874v2  [math.OC]  1 May 2023
+
+
+Unlike these schemes, bundle methods only update their iterates xk when the decrease in objective
+value is at least a fraction of the decrease that the model predicted. Moreover, bundle methods
+incorporate information from past iterations into their models, allowing fk to capture more than
+the just objective’s geometry near xk.
+This seemingly subtle change has a rather surprising consequence: the iterates generated
+by a bundle method, with any constant parameter configuration, converge to a minimizer of f;
+see [27, Thm. 4.9], [22, Thm. XV.3.2.4], or [54, Thm. 7.16] for different variations of this result. This
+stands in harsh contrast to other classic first-order algorithms; for example, gradient descent and its
+accelerated variants rely on selecting a stepsize inversely proportional to the level of smoothness.
+Similarly, subgradient methods rely on carefully controlled decreasing stepsize sequences. These
+simpler algorithms may fail to converge when the stepsizes are not carefully managed. Thus,
+providing a compelling reason to consider bundle methods.
+Although bundle methods are known to converge under a number of assumptions [2,7,10,19,26,
+39,41,45,46,56] and have been successfully used in applications [11,55], nonasympotic guarantees
+have remained mostly evasive. The purpose of this paper is to close this gap. We study convergence
+rates for finding an ε-minimizer, e.g., f(x) −inf f ≤ε, under a variety of different assumptions on
+f. We consider settings where the objective function is either M-Lipschitz continuous
+
+|f(x) −f(y)| ≤M∥x −y∥
+for all x, y ∈Rd
+(1.3)
+
+or differentiable with an L-Lipschitz gradient, often referred to as L-smoothness,
+
+∥∇f(x) −∇f(y)∥≤L∥x −y∥
+for all x, y ∈Rd .
+(1.4)
+
+In either setting, we investigate the method’s rate of convergence with and without the presence of
+Hölder growth
+f(x) −f∗≥µ · dist(x, X∗)p
+for all x ∈Rd ,
+(1.5)
+
+where dist(x, S) = infy∈S ∥x −y∥. Particularly important cases are when p = 1 and p = 2 which
+correspond to sharp growth (µ-SG) [4] and a generalization of strong convexity, known as quadratic
+growth (µ-QG).
+Historically, bundle methods were primarily conceived for nonsmooth optimization. The reason
+for this is simple: solving the proximal bundle subproblem (1.2) is believed to be expensive,
+which is acceptable for nonsmooth problems because of their intrinsic higher complexity. Yet,
+it is not acceptable for smooth problems. Thus, studying rates for smooth setting might seem
+odd. Nonetheless, recently Nesterov and Florea [48] introduced an efficient routine to tackle the
+subproblems and use it to derive a model-based method with sound theoretical and practical
+performance. This motivates our pursuit for efficiency guarantees for smooth optimization.
+
+1.1
+Contributions
+
+The main contribution of this work is to establish convergence rates under every realizable com-
+bination of continuity/smoothness (1.3) or (1.4) and growth assumptions (1.5), see Table 1. Full
+theorem statements are given in Section 2 and apply for any Hölder growth exponent (rather than
+just the cases of p = 1 and p = 2 shown in the table). Our analysis technique is fairly general as
+we apply it to every combination of assumptions as well as different stepsize rules. We show rates
+for the constant stepsize rule ρk = ρ > 0, which tend to be suboptimal. Yet, they improve under
+additional assumptions such as quadratic growth or smoothness. Tuning the constant ρ to depend
+on a target accuracy ϵ yields faster convergence rates. Further, we propose nonconstant stepsize
+
+2
+
+
+Assumptions
+Rate for generic ρ
+Rate for tuned ρ
+Rate for adaptive ρk
+
+M-Lipschitz
+
+No Growth
+O
+�M 2∥x0 −x∗∥4
+
+ρϵ3
+
+�
+
+O
+�M 2∥x0 −x∗∥2
+
+ϵ2
+
+�
+
+O
+�M 2∥x0 −x∗∥2
+
+ϵ2
+
+�
+
+µ-QG
+O
+�
+M 2
+
+min{µ, ρ}ϵ
+
+�
+
+O
+�M 2
+
+µϵ
+
+�
+
+O
+�M 2
+
+µϵ
+
+�
+
+µ-SG
+O
+�M 2
+
+ρϵ
+
+�
+
+O
+
+�
+M 2
+
+µ2
+
+�
+
+∆f
+
+ϵ
+
+�
+
+O
+�M 2
+
+µ2 log
+�∆f
+
+ϵ
+
+��
+
+L-Smooth
+
+No Growth
+O
+�L3∥x0 −x∗∥2
+
+ρ2ϵ
+
+�
+
+O
+�L∥x0 −x∗∥2
+
+ϵ
+
+�
+
+O
+�L∥x0 −x∗∥2
+
+ϵ
+
+�
+
+µ-QG
+O
+�L3
+
+ρ2µ log
+�∆f
+
+ϵ
+
+��
+
+O
+�L
+
+µ log
+�∆f
+
+ϵ
+
+��
+
+O
+�L
+
+µ log
+�∆f
+
+ϵ
+
+��
+
+Table 1: Convergence rates. We denote ∆f := f(x0) −inf f. Here QG and SG denotes quadratic
+and sharp growth, respectively. The first column applies for any choice of the parameter ρ, showing
+progressively faster convergence as more structure is introduced. The second column shows the rate
+after optimizing the choice of ρ. The third column further improves these by allowing nonconstant
+stepsizes ρk, albeit it requires information about the function that might be unavailable.
+
+rules ρk with two clear advantages: they yield yet faster convergence and their convergence does
+not slow down after reaching the target accuracy.
+The existing convergence theory for the proximal bundle method applies to settings comparable to
+the first two rows of our table. Kiwiel [30] derived a O(ϵ−3) convergence rate for Lipschitz problems,
+which agrees with our theory. Du and Ruszczynski [16] and subsequently Liang and Monteiro [37]
+showed a O(log(1/ϵ)/ϵ) convergence rate for Lipschitz, strongly convex problems, which we improve
+on by removing the extra logarithmic term and thus achieve the optimal convergence rate for
+this setting of O(1/ϵ). To our knowledge, the rest of our convergence results apply to wholly new
+settings for the proximal bundle method. In all of the M-Lipschitz settings considered, we show that
+using a nonconstant stepsize the bundle method attains the optimal nonsmooth convergence rate.
+In the L-smooth settings considered, the bundle method converges at the same rate as gradient
+descent. Although, unlike gradient descent, our convergence theory applies to any configuration of
+its algorithmic parameters.
+To complement these results we propose a simple parallelizable variant of the bundle method
+that avoids the reliance on tuning a stepsize or sequence of stepsizes based on potentially unrealistic
+knowledge of underlying problem constants. This parallel method too falls under the umbrella of our
+analysis. It attains near optimal nonsmooth convergence rates for Lipschitz problems with any level
+of Hölder growth, at the cost of running a logarithmic number of instances of the bundle method in
+parallel. This additional cost may make the method impractical in settings when processor power
+is limited. Its primary value lies in showing a parameter-free, optimal proximal bundle method is
+theoretically possible.
+
+1.2
+Related work
+
+In 2000, Kiwiel [30] gave the first convergence rate for the proximal bundle method, showing that
+an ϵ-minimizer xk is found with k ≤O
+�∥x0−x∗∥4
+
+ϵ3
+�
+. More recently, Du and Ruszczyński [16] gave
+the first analysis of bundle methods when applied to problems satisfying a quadratic growth bound.
+In this case, an ϵ-minimizer is found within O(log(1/ϵ)/ϵ) iterations. Following this, Liang and
+Monteiro [37] showed a variant of the proximal bundle method with proper stepsize selection attains
+
+3
+
+
+the optimal convergence rate for convex and strongly convex optimization, up to logarithmic terms.
+This work continues this direction establishing a wide range of guarantees for an unmodified proximal
+bundle method. Note that our work assumes the given problem is unconstrained (matching the
+model of [16] but falling short of that of [30,37]). Generalizing our analysis beyond the unconstrained
+setting provides an interesting future direction.
+Despite historically having weaker convergence rate guarantees than simple alternatives like the
+subgradient method, bundle methods have persisted as a method of choice for nonsmooth convex
+optimization. See [18,34] as a survey of much of the bundle method literature. In practice, bundle
+methods have proven to be efficient methods for solving many nonsmooth problems (see [11,55,
+56] for further discussion). Extensions that apply to nonconvex problems have been considered
+in [2,10,19,26,39,41,45,46] and as well as extensions to problems where only an inexact first-order
+oracle is available in [13,20,38]. Bundle-based methods that exploit the so called VU-structure of
+the objective function were develop in [42,43]; under suitable conditions these algorithms exhibit
+superlinear convergence.
+Stronger convergence rates have been established for related level bundle methods [35], which
+share many core elements with proximal bundle methods. Variations of level bundle methods were
+studied in [9,29,32]. The results of Lan [32] provide guarantees across a range of problem settings,
+while incorporating Nesterov-type acceleration at the cost of needing two oracle calls per iteration.
+For nonsmooth optimization, their level bundle method rates align with the optimal rates we derive
+for the proximal bundle method. For smooth optimization, they achieve the optimal accelerated rate
+whereas our analysis finds the proximal bundle method only converges as fast as gradient descent.
+A few parallel bundle methods have been proposed in the literature [17,23,24]. The authors
+of [24] propose a bundle-trust-region targeted to stochastic mixed-integer programming problems.
+While [23] introduces an asynchronous level bundle method that assumes that f is a sum of
+convex functions and exploits this decomposition to distribute computation. To our knowledge, [17]
+introduced the only parallel variant of the proximal bundle method, which seeks to reduce the
+computational load by greedily picking subsets of coordinates and executing parallel instances of the
+bundle method restricted to each subset. In contrast, our parallel bundle method aims to bypass
+the need for tuning by running a small number of instances with different stepsizes.
+
+Outline
+Section 2 introduces the Proximal Bundle Method and provides the formal convergence
+guarantees under different regularity assumptions. This section also introduces simple stepsize rules
+that guarantee optimal convergence rates for all nonsmooth settings. Practical implementations
+of these rules require access growth constants of the function. To illustrate that nearly optimal
+parameter-free guarantees are possible, in Section 3 we propose an adaptive parallel bundle method.
+We complement our findings with numerical experiments in Section 4. Finally, Section 5 presents a
+broadly applicable proof technique to analyze bundle methods and uses it to establish the theoretical
+results.
+
+2
+Bundle Methods
+
+In this section, we formally define the family of proximal bundle methods that our theory applies to.
+We present the convergence rates for the classic method with constant stepsizes. Additionally, we
+introduce and analyze nonconstant stepsize rules that guarantee faster convergence rates.
+Proximal bundle methods work by maintaining a model function fk : Rn →R at each iteration
+
+4
+
+
+Algorithm 1: Proximal Bundle Method
+
+Data: z0 = x0 ∈Rn, f0 = f(x0) + ⟨g0, · −x0⟩
+Step k: (k ≥0)
+Compute candidate iterate zk+1 ←argmin
+z∈Rd
+fk(z) + ρk
+
+2 ∥z −xk∥2;
+
+If β(f(xk) −fk(zk+1)) ≤f(xk) −f(zk+1)
+// Descent step
+Set xk+1 ←zk+1;
+Else
+// Null step
+Set xk+1 ←xk;
+Update fk+1 and ρk+1 without violating Assumption A;
+
+k and a current iterate xk. The method computes a candidate for the next iterate as
+
+zk+1 = argmin
+z∈Rd
+fk(z) + ρk
+
+2 ∥z −xk∥2.
+(2.1)
+
+However, unlike other model-based algorithms, bundle methods do not necessarily move their next
+iterate to zk+1. Instead, it first checks whether the candidate zk+1 has at least β ∈(0, 1) fraction of the
+decrease in objective value that our model fk(·) predicts, i.e., β(f(xk)−fk(zk+1)) ≤f(xk)−f(zk+1).
+If it does, it updates xk+1 = zk+1 as the next iterate, this is called a Descent Step. Otherwise the
+method keeps the iterate the same xk+1 = xk and updates the model function fk+1, called a Null
+Step.
+The proximal bundle method is stated fully in Algorithm 1. Our analysis does not presume a
+particular parametrization or form of the models. We only assume that the models satisfy mild
+assumptions, typical of bundle methods in the literature. To state the assumptions, note the
+first-order optimality conditions define a subgradient
+
+sk+1 = ρk(xk −zk+1) ∈∂fk(zk+1)
+for each k ≥0
+
+where ∂f(x) = {g | f(x′) ≥f(x) + ⟨g, x′ −x⟩∀x′ ∈Rd} denotes the subdifferential of f at x. As it
+is customary, we assume access to a black-box oracle that for a given point x returns f(x) and some
+subgradient g(x) ∈∂f(x).
+
+Assumption A. Let
+�
+fk : Rd →R
+�
+and {ρk} be the sequence of models and stepsizes used through-
+out the execution of a bundle method. Assume that for any iteration k ≥0, the next model fk+1 and
+stepsize ρk+1 satisfy the following:
+
+1. Minorant.
+fk+1(x) ≤f(x)
+for all x ∈Rd .
+(2.2)
+
+2. Subgradient lower bound. The oracle output gk+1 := g(zk+1) ∈∂f(zk+1) satisfies
+
+fk+1(x) ≥f(zk+1) + ⟨gk+1, x −zk+1⟩
+for all x ∈Rd .
+(2.3)
+
+3. Model subgradient lower bound. After a null step k
+
+fk+1(x) ≥fk(zk+1) + ⟨sk+1, x −zk+1⟩
+for all x ∈Rd .
+(2.4)
+
+4. Nondecreasing stepsize between null steps. After a null step k,
+
+ρk+1 ≥ρk .
+(2.5)
+
+5
+
+
+The first two conditions are natural as they ensure that a new model incorporates first-order
+information from the objective at zk+1. The third condition is mild and, intuitively, requires the new
+model to retain some of the approximation accuracy of the previous model. The last assumption is
+trivial to enforce algorithmically.
+
+2.1
+Bundle Method Model Function Choices
+
+Several methods for constructing model functions fk that satisfy (2.2)-(2.4) have been considered.
+In practice, the main consideration lies in weighing the potentially greater per iteration gains from
+having more complex models against the lower iteration costs from having simpler models.
+
+Full-Memory Proximal Bundle Method.
+The earliest proposed bundle methods [33,59] rely
+on using all of the past subgradient evaluations to construct the models as
+
+fk+1(x) =
+max
+j=0...k+1 {f(zj) + ⟨gj, x −zj⟩} .
+(2.6)
+
+In this case, solving the quadratically regularized subproblem at each iteration amounts to solving a
+quadratic programming problem.
+
+Finite Memory Proximal Bundle Method.
+Alternatively using cut-aggregation [25,27], the
+collection of k +1 lower bounds used by (2.6) can be simplified down to just two linear lower bounds.
+The only two necessary lower bounds are exactly those required by (2.3) and (2.4). Namely, one
+could construct the model functions as
+
+fk+1(x) = max {fk(zk+1) + ⟨sk+1, x −zk+1⟩, f(zk+1) + ⟨gk+1, x −zk+1⟩} .
+(2.7)
+
+Then the subproblem that needs to be solved at each iteration can be done in closed form,
+see Claim 1. Hence the iteration cost using this model is limited primarily by the cost of one
+subgradient evaluation.
+
+Spectral Bundle Methods.
+Both of the above models rely on constructing piecewise linear
+models of the objective. For more structure problems, richer models can be constructed. For
+example, in eigenvalue optimization or more broadly semidefinite programming, better spectral
+lower bounds can be constructed instead of using simple polyhedral bounds [21,51]. Primal-dual
+convergence rate guarantees for such spectral bundle methods were recently developed by Ding and
+Grimmer [14].
+
+2.2
+Iterations, Oracle Queries, Stopping and Inexactness
+
+In the sequel, we present convergence rates of the bundle method with respect to the number of
+iterations. Depending on the choice of the model function fk, solving the proximal subproblem
+(2.1) might require a numerical procedure. Our results treat this step as a black box. In turn, our
+statements are written in terms of the number of descent and null steps. The sum of these two gives
+what we call the “iteration count” and ignores any inner-loop iterations needed for solving (2.1).
+Although the total number inner and outer of iterations might indeed be much higher than our
+iteration count, our claims about the optimality of the bundle method hold; black-box complexity
+theory [47] measures optimality in terms of the number of oracle queries. Regardless of the model
+function choice, the number of oracle queries matches our iteration count.
+
+6
+
+
+In general, provable stopping criteria for the proximal bundle method are not readily available.
+One reasonable heuristic lies in stopping once the aggregate ∥sk+1∥is small, but this provides no
+bound on the algorithm’s suboptimality. Stopping conditions are possible given more structure
+(for example, a bound on the distance to optimality or when (1.1) corresponds to the dual of a
+constrained problem). Alternative approaches like the level bundle method naturally lend themselves
+to a stopping criteria.
+One shortcoming of our theory is that we do not account for methods where the oracle queries or
+the solutions of (2.1) are inexact. There is a vast literature on this topic [11,13,31,58]. Algorithmic
+variants that handle inexactness require additional checks in order to guarantee convergence. As
+extensions of our results to the inexact setting goes beyond the scope of this work; we leave this as
+an intriguing question for future research.
+
+2.3
+Convergence Rates from Constant Stepsize Choice
+
+We now formalize our convergence theory for the proximal bundle method using any constant choice
+of the stepsize parameter ρk = ρ and any β ∈(0, 1). These guarantees match those claimed in the
+first column of Table 1. After each theorem, we remark on the tuned choice of ρ that gives rise to
+the claimed rate in the second column of Table 1. We start by considering the setting where only
+Lipschitz continuity is assumed. The proof of this result is deferred to Section 5.4.
+
+Theorem 2.1 (Lipschitz). For any M-Lipschitz convex objective function f, consider applying
+the bundle method using a constant stepsize ρk = ρ. Then for any 0 < ϵ ≤f(x0) −f∗, the number
+of descent steps before an ϵ-minimizer is found is at most
+
+2ρD2
+
+βϵ
++
+
+
+
+
+
+2 log
+�f(x0)−f∗
+
+ρD2
+�
+
+β
+
+
+
+
++
+
+and the number of null steps is at most
+
+48ρM2D4
+
+β(1 −β)2ϵ3 +
+32M2
+
+β(1 −β)2ρ2D2
+
+where D2 = supk dist(xk, X∗)2 < ∞.
+
+It follows from [54][(7.64)] that D2 ≤dist(x0, X∗)2 + 2(1−β)(f(x0)−f∗)
+
+βρ
+. Alternatively, if the level
+sets of f are bounded, the fact that f(xk) is non-increasing ensures D2 ≤sup{dist(xk, X∗)2 | f(x) ≤
+f(x0)}.
+Selecting ρ = ϵ/D2 gives an overall complexity bound of O
+�
+M2D2
+
+ϵ2
+�
+and matches the optimal
+rate for nonsmooth, Lipschitz convex optimization [47].
+If instead of Lipschitz continuity of the objective, we assume the objective has Lipschitz gradient,
+the bundle method adapts to give the following faster rate. We defer the proof to Section 5.5.
+
+Theorem 2.2 (Smooth). For any L-smooth convex objective function f, consider applying the
+bundle method using a constant stepsize ρk = ρ. Then for any 0 < ϵ ≤f(x0) −f∗, the number of
+descent steps before an ϵ-minimizer is found is at most
+
+2ρD2
+
+βϵ
++
+
+
+
+
+
+2 log
+�f(x0)−f∗
+
+ρD2
+�
+
+−β
+
+
+
+
++
+
+7
+
+
+and the number of null steps is at most
+
+16(L + ρ)3
+
+(1 −β)2ρ3
+
+
+
+2ρD2
+
+βϵ
++
+
+
+
+
+
+2 log
+�f(x0)−f∗
+
+ρD2
+�
+
+β
+
+
+
+
++
++ 1
+
+
+
+
+
+where D2 = supk dist(xk, X∗)2 < ∞.
+
+Selecting ρ = L gives an overall complexity bound of O
+�
+LD2
+β(1−β)2ϵ
+
+�
+. This matches the standard
+convergence rate for gradient descent [47]. It is likely that a variant of the bundle method can
+achieve accelerated rates, either by enforcing additional assumptions about the models fk or by
+modifying the logic of the algorithm. We leave this as an intriguing open question for future research.
+We refer the interested reader to [48], which developed a bundle-like method for smooth functions
+that outperforms gradient descent in practice.
+Next, we reconsider the settings of Lipschitz continuity and smoothness with additional structure
+in the form of a Hölder growth bound. We find that the convergence guarantees divide into three
+regions depending on the growth exponent p, whether it is large, equal to, or smaller than 2. Here
+p = 2 is the critical exponent value since the proximal subproblem adds a regularizer with quadratic
+growth. Regardless, as p decreases, the bundle method converges faster. We defer the proof of the
+next result to Section 5.6.
+
+Theorem 2.3 (Lipschitz with Hölder growth). For any M-Lipschitz objective function f
+satisfying the Hölder growth condition (1.5), consider applying the bundle method using a constant
+stepsize ρk = ρ. Then for any 0 < ϵ ≤f(x0)−f∗, the number of descent steps before an ϵ-minimizer
+is found is at most
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2ρ
+(1 −2/p)βµ2/pϵ1−2/p +
+
+
+
+
+
+2 log
+�
+f(x0)−f∗
+
+(ρ/µ2/p)1/(1−2/p)
+�
+
+β
+
+
+
+
++
+if p > 2
+
+
+
+
+
+2 log
+�f(x0)−f∗
+
+ϵ
+
+�
+
+β min{µ/ρ, 1}
+
+
+
+
+if p = 2
+
+
+
+
+
+2 log
+�(ρ/µ2/p)1/(1−2/p)
+
+ϵ
+
+�
+
+β
+
+
+
+
++
+
++ 2ρ(f(x0) −f∗)2/p−1
+
+(1 −21−2/p)βµ2/p
+if 1 ≤p < 2
+
+and the number of null steps is at most
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+48ρM2
+
+(1 −2/p)β(1 −β)2µ4/pϵ3−4/p +
+32M2
+
+β(1 −β)2ρ(ρ/µ2/p)1/(1−2/p)
+if p > 2
+
+16M2
+
+β(1 −β)2 min{µ/ρ, 1}ρϵ
+if p = 2
+
+16M2
+
+β(1 −β)2ρϵ +
+32M2
+
+β(1 −β)2ρ(ρ/µ2/p)1/(1−2/p) C
+if 1 ≤p < 2
+
+with C = max
+�
+(f(x0)−f∗)4/p−3
+
+(ρ/µ2/p)(4/p−3)/(1−2/p) , 1
+�
+min
+�
+1
+1−2−|4/p−3| ,
+�
+log2
+�
+f(x0)−f∗
+
+(ρ/µ2/p)1/(1−2/p)
+���
+.
+
+When p = 2, selecting ρ = µ gives an optimal overall complexity bound of O(M2/µϵ). Selecting
+ρ = O(ϵ1−2/p) matches the optimal rate for Lipschitz optimization with growth exponent p > 2.
+When p = 1, selecting ρ = O(1/√ϵ) minimizes this bound, but the resulting sublinear O(1/√ϵ) rate
+
+8
+
+
+falls short of the best known rate for sharp, Lipschitz optimization, i.e., linear convergence [52]. In
+the next section where we consider nonconstant stepsizes, this disconnect will be remedied and a
+linear convergence guarantee will follow.
+The proof of the next result is deferred to Section 5.7.
+
+Theorem 2.4 (Smooth with Hölder growth). For any L-smooth objective function f satisfying
+the Hölder growth condition (1.5), consider applying the bundle method using a constant stepsize
+ρk = ρ. Then for any 0 < ϵ ≤f(x0) −f∗, the number of descent steps before an ϵ-minimizer is
+found is at most
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2ρ
+(1 −2/p)βµ2/pϵ1−2/p +
+
+
+
+
+
+2 log
+�
+f(x0)−f∗
+
+(ρ/µ2/p)1/(1−2/p)
+�
+
+β
+
+
+
+
++
+if p > 2
+
+
+
+
+
+2 log
+�f(x0)−f∗
+
+ϵ
+
+�
+
+β min{µ/ρ, 1}
+
+
+
+
+if p = 2
+
+and the number of null steps is at most
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+16(L + ρ)3
+
+(1 −β)2ρ3
+
+
+
+
+2ρ
+(1 −2/p)βµ2/pϵ1−2/p +
+
+
+
+
+
+2 log
+�
+f(x0)−f∗
+
+(ρ/µ2/p)1/(1−2/p)
+�
+
+β
+
+
+
+
++
++ 1
+
+
+
+
+if p > 2
+
+16(L + ρ)3
+
+(1 −β)2ρ3
+
+
+
+
+
+2 log
+�f(x0)−f∗
+
+ϵ
+
+�
+
+β min{µ/ρ, 1}
+
+
+
+
+if p = 2 .
+
+Selecting ρ = L gives an overall complexity bound matching gradient descent [47].
+
+2.4
+Convergence Rates from Improved Stepsize Choice
+
+Picking ρk to vary throughout the execution of the bundle method allows for stronger convergence
+guarantees. These rates are formalized in the following pair of theorems that consider settings with
+and without Hölder growth. In the latter case, we find that our stepsize choice removes the need for
+piecewise guarantees around growth exponent p = 2, which notably simplifies the statement of our
+results.
+Intuitively, the stepsize choices are aim to mimic the following idealistic (and impractical) stepsize
+rule that naturally arises from our theory
+
+ρk = f(xk) −f(x∗)
+
+∥xk −x∗∥2
+.
+(2.8)
+
+In Section 5 after introducing our main lemmas, we discuss the convergence bounds that would
+result from approximating this stepsize. The proof techniques we develop could be extended to
+study other nonconstant stepsizes. For instance, stepsizes that shrink/grow polynomial with the
+number of iterations, mirroring those used for subgradient methods. The analysis of such schemes
+is beyond the scope of this work.
+The proof of the next two Theorems are presented in Sections 5.8 and 5.9, respectively.
+
+Theorem 2.5 (Lipschitz). For any M-Lipschitz objective function f, consider applying the bundle
+method using the stepsize policy
+ρk = (f(xk) −f∗)/D2
+(2.9)
+
+9
+
+
+with any choice of D2 ≥sup{dist(x, X∗)2 | f(x) ≤f(x0)}. Then for any 0 < ϵ ≤f(x0) −f∗, the
+number of descent steps before an ϵ-minimizer is found is at most
+
+
+
+
+2 log
+�f(x0)−f∗
+
+ϵ
+
+�
+
+β
+
+
+
+
+
+and the number of null steps is at most
+�
+1
+1 −(1 −β/2)2
+
+�
+8M2D2
+
+(1 −β)2ϵ2 .
+
+Theorem 2.6 (Lipschitz with Hölder growth). For any M-Lipschitz objective function f
+satisfying the Hölder growth condition (1.5), consider applying the bundle method using the stepsize
+policy
+ρk = µ2/p(f(xk) −f∗)1−2/p.
+(2.10)
+
+Then for any 0 < ϵ ≤f(x0) −f∗, the number of descent steps before an ϵ-minimizer is found is at
+most
+
+
+
+
+2 log
+�f(x0)−f∗
+
+ϵ
+
+�
+
+β
+
+
+
+
+
+and the number of null steps is at most
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+�
+1
+1 −(1 −β/2)2−2/p
+
+�
+8M2
+
+(1 −β)2µ2/pϵ2−2/p
+if p > 1
+
+8M2
+
+(1 −β)2µ2
+
+
+
+
+
+2 log
+�f(x0)−f∗
+
+ϵ
+
+�
+
+β
+
+
+
+
+if p = 1 .
+
+3
+The parallel bundle method
+
+Several works [3,12,28,36] have proposed practical step size rules that update ρk on the fly using
+the objective values of the iterates. Such rules enjoy asymptotic convergence guarantees and tend
+to perform well in practice. However, to our knowledge, none of them come equipped with efficiency
+rates. In this section, we take an alternative approach to tackle tuning: we run a logarithmic number
+of parallel instances of the bundle method, with different constant step sizes, inspired by the ideas
+of [53]. The instances communicate at the end of each iteration and update their models based on
+each other’s progress. We show that this procedure achieves optimal convergence rates, up to the
+cost of running a logarithmic number of instances which can be mitigated through parallelization.
+Unlike the step sizes proposed in the previous section, this parallel scheme provides a provably
+near optimal proximal bundle method that is parameter-free. This scheme’s primary drawback lies
+in the nontrivial overhead of running several instances at once.
+The core observation behind our parallel method is that if we run the bundle method with the
+nonconstant step size rules (2.9) and (2.10), then the step sizes ρk will lie in the interval
+
+ρk ∈
+�
+c1ϵ, c2ϵ−1�
+,
+for some fixed constants c1, c2 > 0,
+
+before the algorithm finds an ϵ-minimizer. Intuitively, our plan will be to run a modest number of
+instances of the bundle method, each with a different constant step size in the interval above, and
+combine their progress to achieve a faster convergence rate.
+
+10
+
+
+As input, we only assume the following are given: a lower bound ¯ρ and an upper bound 2J ¯ρ on
+the range of step sizes to consider, where J ∈N controls the number of instances we run in parallel.
+Provided our step size rules (2.9) and (2.10) lie in this interval,
+
+ρk ∈
+�
+¯ρ, 2J ¯ρ
+�
+,
+
+we are able to recover nearly optimal convergence rates. Notice that the interval [¯ρ, 2J ¯ρ] can span
+the whole range of step sizes needed for our Hölder growth analysis by setting ¯ρ = O(ϵ) and
+J = O(log2(1/ϵ2)). Our resulting convergence guarantees only depend logarithmically on the size
+of this interval (a cost which can be mitigated through parallelization), so ¯ρ and 2J ¯ρ can bet set
+generously at relatively little cost.
+
+Description of the algorithm.
+We now informally outline the parallel bundle method and
+refer the reader to Algorithm 2 for detailed pseudo-code. Recall that we use g(z) to denote the
+subgradient oracle evaluated at z ∈Rd. We propose running J instances of the bundle method in
+parallel and enumerate them as {0, . . . J −1}. The jth instance uses a constant step size ρ(j) = 2j ¯ρ.
+We denote its iterates by x(j)
+k
+and its model functions by f(j)
+k . Each instance j proceeds as normal
+with the only modification being that after it takes a descent step, the algorithm checks if there
+exists an instance j′ that has an iterate with even lower objective value f(x(j′)
+k
+) < f(x(j)
+k+1). If such
+an improvement exists, instance j updates
+
+
+
+
+x(j)
+k+1
+←x(j′)
+k
+f(j)
+k+1(z)
+←f(x(j′)
+k
+) + ⟨g(x(j′)
+k
+), z −x(j′)
+k
+⟩
+
+and then proceeds.
+For the sake of analysis, we assume that each parallel instance of the bundle method operates
+synchronously; that is, all instances have to finish the current iteration before any of them can
+proceed to the next one. This process can be implemented either sequentially or in parallel by
+cycling through the bundle method instances and computing one iteration for each before repeating.
+An asynchronous variant of this procedure could be analyzed as well, using similar techniques as
+those in [53]. However, this is beyond the focus of this work.
+The choice to use powers of two defining ρ(j) is arbitrary. For the numerical experiments in
+Section 4, we use powers of 10 and 10000 demonstrating the effectiveness of this scheme even when
+using a sparse selection of sample step sizes.
+
+3.1
+Convergence Rates for the Parallel Bundle Method
+
+First, we remark that all of our previous convergence theory for constant stepsizes (Theorems 2.1, 2.2,
+2.3, and 2.4) immediately apply to the Parallel Bundle Method fixing ρ = 2j ¯ρ for any j ∈{0, . . . J−1}.
+This follows as our convergence theory on relies on a lemma ensuring sufficient decrease at each
+descent step (Lemma 5.1) and the new case of a bundle method restarting at another method’s
+lower objective value iterate can only further improve on this decrease. Hence any individual
+instance of the bundle method with ρ(j) = 2j ¯ρ in our parallel scheme will converge at least as fast
+as Theorems 2.1, 2.2, 2.3, and 2.4 guarantee it would converge on its own.
+Further and more importantly, when our nonconstant stepsize rules (2.9) and (2.10) lie in the
+interval [¯ρ, 2J ¯ρ], we find that their convergence theory (Theorems 2.5 and 2.6) also extends to our
+parallel algorithm. This is formalized by the following theorem. We defer the proof of this result to
+Section 5.10.
+
+11
+
+
+Algorithm 2: Parallel bundle method
+
+Data: x0 ∈Rn, f0 = f(x0) + ⟨g(x0), · −x0⟩, ¯ρ ∈R+, J ∈N+
+For j ∈{0, . . . , J −1}
+Set ρ(j) ←2j · ¯ρ, x(k)
+0
+←x0, descent(j) = true;
+
+Step k: (k ≥0)
+ParallelFor j ∈{0, . . . , J −1}
+// Each instance runs a step
+
+Compute z(j)
+k+1 ←argmin
+z∈Rd
+f(j)
+k (z) + ρ(j)
+
+2 ∥z −x(j)
+k ∥2;
+
+If β(f(x(j)
+k ) −f(j)
+k (z(j)
+k+1)) ≤f(x(j)
+k ) −f(z(j)
+k+1)
+// Descent step
+Update x(j)
+k+1 ←z(j)
+k+1, and descent(j) ←true;
+Else
+// Null step
+Update x(j)
+k+1 ←x(j)
+k
+and descent(j) ←false;
+
+Update f(j)
+k+1 without violating Assumption A.
+
+Find best iterate j∗←argminj∈{0,...,J−1} f(x(j)
+k );
+
+ParallelFor j ∈{0, . . . , J −1}
+// Communication round
+If descent(j) and f(x(j∗)
+k
+) < f(x(j)
+k+1)
+Update x(j)
+k+1 ←x(j∗)
+k
+, and f(j)
+k+1 ←f(x(j∗)
+k
+) + ⟨g(x(j∗)
+k
+), · −x(j∗)
+k
+⟩;
+
+Theorem 3.1. For any M-Lipschitz objective function f that satisfies the Hölder growth condi-
+tion (1.5), consider applying the Parallel Bundle Method with stepsizes (Algorithm 2) with input
+x0 ∈Rd, ¯ρ ∈R+, and J ∈N+. Then for any 0 < ϵ ≤f(x0) −f(x∗), if
+
+¯ρ ≤1
+
+4µ2/p min{ϵ1−2/p, (f(x0) −f(x∗))1−2/p}
+
+and
+
+J ≥log2
+
+�
+µ2/p(max{ϵ1−2/p, (f(x0) −f(x∗))1−2/p}
+
+4¯ρ
+
+�
+
+,
+
+then the iterate with minimum objective xbest becomes an ϵ-minimizer within the first
+
+
+
+
+
+
+
+
+
+
+
+
+
+�
+2
+1 −(1 −β/2)2−2/p
+
+�
+64M2
+
+(1 −β)2µ2/pϵ2−2/p + 2
+
+�
+2 log( f(x0)−f∗
+
+ϵ
+)
+β
+
+�
+
+if p > 1
+
+2
+
+�
+64M2
+
+(1 −β)2µ2 + 1
+
+��
+2 log( f(x0)−f∗
+
+ϵ
+)
+β
+
+�
+
+if p = 1
+
+iterations, each utilizing J subgradient oracle evaluations.
+
+We reiterate that the total number of oracle calls required by the parallel method is given by
+the product between number of iterations and J. This limits the practicality for applications where
+oracle costs are expensive or cannot be easily parallelized.
+Nonetheless, these rates nearly match the optimal lower bounds for nonsmooth Lipschitz
+optimization, up to small constants and an additive logarithmic term when p > 1. For example,
+under quadratic growth when p = 2, selecting ¯ρ ≤µ/4 and J ≥log2(µ/4¯ρ), an ϵ-minimizer is found
+within
+
+O
+
+�
+M2
+
+µϵ
+
+�
+
+12
+
+
+Figure 1: Objective gap against iteration count: using ideal stepsize (2.8) (left) and using the
+parallel bundle method (right), plotting each instance deployed with stepsizes from 100, . . . , 108.
+
+iterations (each utilizing J subgradient evaluations, which in this case, is constant with respect to ϵ).
+Under sharp growth p = 1, selecting ¯ρ ≤
+µ2
+4(f(x0)−f(x∗)) and J ≥log2(µ2/4¯ρϵ) yields a convergence
+rate of
+
+O
+
+�
+M2
+
+µ2 log(1/ϵ)
+
+�
+
+with each step utilizing a logarithmic number J = O(log(1/ϵ)) of subgradient evaluations. Critically,
+these convergence rates only depend on ¯ρ and J through the (parallelizable) cost of updating the J
+bundle method instances at each iteration.
+
+4
+Numerical experiments
+
+In this section, we present three examples with a focus on illustrating our theory for the bundle
+method rather than on the numerical practicality of any proposed stepsize scheme. These experiments
+were implemented in Julia; see https://github.com/mateodd25/proximal-bundle-method for the
+source code. For all the numerical experiments, we use a finite-memory model function (2.7). The
+reason is two-fold: first, we want to illustrate our theoretical efficiency rates, which are independent
+of the model fk, and, second, with this choice, the subproblem (2.1) has a closed-form solution, thus
+reducing the computational footprint.
+
+4.1
+Sharp linear regression
+
+The first experiment aims to exemplify the fast convergence of the bundle method under sharp
+growth. We consider a simple linear regression problem of the form
+
+min
+x∈Rd f(x) := ∥Ax −b∥
+
+where A ∈Rn×d is a matrix and b = Ax⋆for a fixed x⋆. This problem is equivalent to the classic
+least-squares problem after taking squares. Yet, without the square it is well known that for
+Gaussian matrices, (A)ij ∼N(0,
+1
+√n), this function is sharp and Lipchitz continuous provided n is
+large enough [6].
+We generate a random Gaussian matrix A ∈R100×50 and random solution x⋆∼N(0, Id). We run
+three algorithms: two proximal bundle methods with step sizes (2.8) and (2.10), respectively, and
+the parallel bundle method described in Section 3. The step sizes (2.8) and (2.10) are impractical
+
+13
+
+
+Figure 2: Stepsize against iteration count: using ideal stepsize (2.8) (left) and using the parallel
+bundle method (right).
+
+since they require knowing the minimum value, and the sharpness constant. However, the theoretical
+analysis shows that they yield optimal convergence rates, and so we use them as a baseline. The
+parallel bundle method uses nine parallel instances with step sizes in ρ ∈{1, 10, . . . , 108}. We let
+both methods run for 150 iterations.
+Figure 1 displays the best objective gap f −min f so far against the iteration count for the three
+methods. On the other hand, Figure 2 shows the step size used at each iteration. For the parallel
+bundle method, we display the step size used by the last instance to reduce the best objective value
+seen. As the theory predicts the convergence of all three methods is linear. The bundle method
+with step size (2.8) exhibits steady progress and reaches an objective gap of 10−15, while the parallel
+version slows down around 100 iterations and only achieves a loss of gap of 10−10. This behavior is
+explained by the step size plots. The impractical step sizes behave like µ2/(f(xk) −min f), and so
+they keep increasing as the iterates converge. Figure 2 plots how the parallel algorithm roughly
+emulates (2.8), until it exceeds the maximum step size that the parallel bundle method can use, i.e.,
+108. After which, the instance with step size 108 consistently leads the method’s progress, albeit
+sublinearly. The fact that the parallel method adapted to follow a stepsize scheme similar to (2.8)
+provides numerical support for our proposed ideal stepsize.
+
+Figure 3: Objective gap with mis-
+specified sharpness constant. See
+text for description.
+
+Parameter misspecification.
+The theoretical analysis sug-
+gests that the convergence of proximal bundle methods degrades
+gracefully with the misspecification of the growth constants; see
+the discussion after Lemma 5.3 below. To corroborate this, we
+perform the same sharp regression experiment, but we underes-
+timate by a factor of 1/3 and overestimate by a factor of 3 the
+sharpness constant. We use these estimates with step size (2.10)
+and compare them against the previous executions with the
+correct estimate and the ideal step size (2.8). Figure 3 displays
+the results: even with a misspecified µ, the method still exhibits
+linear convergence, although at a slower rate.
+
+4.2
+Support Vector Machine
+
+To illustrate the adaptive features of the parallel bundle method
+we consider the standard Support Vector Machine (SVM) formulation: we are giving datapoints
+
+14
+
+
+Figure 4: Log-log plot of best objective gap against coefficient λ for the three problems, solved by a
+subgradient method and by the parallel bundle method: colon-cancer (left), duke (center), and
+leu (right); see text for details.
+
+(x1, y1), . . . (xn, yn) with xi ∈Rd and yi ∈{±1} and our goal is to solve
+
+min
+w∈Rd
+1
+n
+
+�
+max {0, 1 −yi⟨w, xi⟩} + λ
+
+2 ∥w∥2
+(4.1)
+
+where λ ∈R is a fixed constant. This problem is not smooth due to the first term. For this
+experiment we compare against a subgradient method based on Pegasos [57], a state-of-the art
+solver for SVM. Our vanilla implementation of the parallel bundle method is not tuned for efficiency
+and does not aim to be competitive with commercial solvers. Instead, we aim to show that an
+out-of-the-box implementation is immediately comparable to a specialized first-order method for
+this problem.
+We generate SVM problems using three datasets from the LIBSVM Binary Classification
+Database [1]. In particular, we use colon-cancer, duke, and leu.1 We preprocess the data by
+deleting empty features, normalizing the features, and adding an extra component xk = (xk, 1) to
+allow for affine functions.
+The implementation of the subgradient algorithm updates
+
+wk+1 ←(1 −ηkλ)wk + ηk
+
+n
+�
+
+i=1
+1{1 ≤yi⟨wk, xi⟩}yixi
+
+where ηk =
+1
+λk and 1{·} is one if · holds true and zero otherwise. This is analogous to Pegasos with
+the exception that it does full instead of stochastic subgradient evaluations. Knowledge of λ is
+necessary for the implementation of this method.
+For the parallel bundle method, we use stepsizes three instances with constant stepsizes ρ ∈
+{10−9 · 104j | j = 0, 1, 2}. We run the bundle method for 2000 iterations and the subgradient method
+for 6000 thousand iterations, that way both methods make the same number of oracle calls. We
+measure the best objective gap f(xk) −min f so far. To compute the minimum we use Gurobi
+with accuracy set to 10−10. Figure 4 plots the gap against regularizer coefficient λ; we consider
+λ ∈{10−4, 10−3, 10−2, 10−1, 1.0, 2.0}.
+In this simple setting, the parallel bundle method out-of-the-box performs similarly to the tuned
+subgradient method without the need of function related information. We see that the parallel
+method can handle a wide range of parameters λ with a scarce set of potential stepsizes. Notice that
+while for small λ the performance of the subgradient method tends to deteriorate, the performance
+of the bundle method improves.
+
+15
+
+
+Figure 5: Best objective gap against number of oracle calls for the Log-Sum-Exp problem. Results
+for different parameters γ: 0.01 (left), 0.05 (middle), and 0.08 (right).
+
+4.3
+Log-Sum-Exp function
+
+In this section, we aim to illustrate the performance of the bundle method on smooth problems. We
+consider a soft-max problem of the form:
+
+argmin
+x∈Rd
+f(x; A, b) := γ log
+
+�n
+�
+
+i=1
+exp
+�⟨ai, x⟩−bi
+
+γ
+
+��
+
+.
+
+where ai is the ith column of the matrix A. This problem lacks strong convexity and becomes
+“stiffer” as γ approaches zero. We generate random instances as follows: we let bi be i.i.d. random
+variables with distribution Unif[−1, 1], similarly, we draw a random matrix �A with i.i.d. entries
+(�ai)j ∼Unif[−1, 1] and set ai = �ai −∇f(0; �A, b). This choice ensures that zero is a minimizer of
+f(·; A, b).
+We fix d = 100 and n = 6d and vary the parameter γ ∈{0.01, 0.05, 0.08}. We test four
+algorithms: Gradient Descent(GD), Accelerated Gradient Descent (AGD), Limited-Memory Broy-
+den–Fletcher–Goldfarb–Shanno algorithm (L-BFGS) [5], and the parallel bundle method. We use
+the open source implementation of GD, AGD, and L-BFGS provided by Optim.jl [44]. We set the
+memory of L-BFGS to ten and use four instances, with stepsizes ρ ∈{10−3, 10−2, 10−1, 1}, for the
+parallel bundle method. This way, L-BFGS and the bundle method have a comparable memory
+footprint. GD and AGD use the theoretically sound step size 0.9/L, where L is the smoothness
+constant of f. While L-BFGS uses backtracking line search [49, Section 3.5].
+Figure 5 plots the best seen objective gap f −min f against the number of oracle calls for the
+different values of µ. L-BFGS is faster than all the other algorithms in all scenarios; this is somewhat
+expected since L-BFGS is widely recognized for its superior practical performance. Nonetheless, the
+parallel bundle method consistently outperforms GD and is often competitive with AGD, despite
+its very real practical drawback of utilizing J = 4 oracle calls per iteration. It would be interesting
+to explore whether one can accelerate the bundle method to make it competitive with AGD when µ
+is small. This is left as an intriguing question for future research.
+
+5
+Analysis
+
+In this section, we develop the proofs of the convergence rates. We start by introducing the general
+strategy that we use to establish all of our results and then specialize it to each scenario.
+
+1We refer the reader to LIBSVM for the origin of each of these datasets.
+
+16
+
+
+5.1
+Analysis Overview and Proof Sketch
+
+Each iteration of the bundle method can be viewed as an attempt to mimic the proximal point
+method, using the model fk instead of the true objective function f. At each iteration k, we denote
+the objective gap of the proximal subproblem, called the proximal gap, by
+
+∆k := f(xk) −
+�
+f(¯xk+1) + ρk
+
+2 ∥¯xk+1 −xk∥2
+�
+
+where ¯xk+1 = argminx∈Rd
+�f(x) + ρk
+
+2 ∥x −xk∥2�.
+Regardless of which continuity, smoothness and growth assumptions are made, our analysis
+works by relating the proximal steps computed by the bundle method on the models fk to proximal
+steps on f. The following pair of observations show that the behavior on both descent steps and
+null steps is controlled by the proximal gap ∆k.
+
+(i) Descent steps attain decrease proportional to the proximal gap.
+
+Lemma 5.1. A descent step, at iteration k, has
+
+f(xk+1) ≤f(xk) −β∆k.
+
+(ii) The number of consecutive null steps is bounded by the proximal gap.
+
+Lemma 5.2. A descent step, at iteration k, followed by T consecutive null steps has at most
+
+T ≤
+8G2
+k+1
+(1 −β)2ρk+1∆k+T
+
+where Gk+1 = sup{∥gt+1∥| k ≤t ≤k + T}. This simplifies to
+
+T ≤
+
+
+
+
+
+
+
+
+
+
+
+
+2M2
+
+(1 −β)2ρk+1∆k+T
+if f is M-Lipschitz, or
+
+16(L + ρk+1)3
+
+(1 −β)2ρ3
+k+1
+if f is L-smooth .
+
+With these two observations in hand, convergence guarantees for the bundle method follow
+from specifying any choice of the parameter ρk. For fixed ρk, bounding the proximal gap is a
+classic, well-understand problem. Standard analysis [54, Lemma 7.12] of the proximal gap shows
+the following bound for any minimizer x∗.2
+
+Lemma 5.3. Fix a minimizer x∗of f and let xk ∈Rn \ {x∗}. Then, proximal gap is lower bounded
+by
+
+∆k ≥
+
+
+
+
+
+
+
+
+
+
+1
+2ρk
+
+�f(xk) −f(x∗)
+
+∥xk −x∗∥
+
+�2
+if f(xk) −f(x∗) ≤ρk∥xk −x∗∥2
+
+f(xk) −f(x∗) −ρk
+
+2 ∥xk −x∗∥2
+otherwise.
+(5.1)
+
+Our ideal stepsize (2.8) is chosen to balance the two cases of this classic bound, ensuring ∆k ≥
+1
+2(f(xk) −f(x∗)). This lemma then gives insight into the effect of approximating this stepsize by
+some ρk = λ(f(xk) −f(x∗))/∥xk −x∗∥2. Using an over estimate of the target stepsize (i.e., λ > 1),
+one has ∆k ≥
+1
+2λ(f(xk) −f(x∗)), weakening the descent bound (Lemma 5.1) by a factor of 1/λ.
+
+2 [54, Lemma 7.12] is missing a “1/2” in its statement, however it does appear in the proof.
+
+17
+
+
+Similarly, underestimating the target stepsize (i.e., λ < 1), one maintains ∆k ≥1
+
+2(f(xk) −f(x∗)),
+but the smaller ρk leads the null step bound (Lemma 5.2) to grow by 1/λ. Similar reasoning holds
+for approximating the stepsizes (2.9) and (2.10).
+All of our analysis follows directly from applying these core lemmas. We bound the number
+of descent steps by combining Lemmas 5.1 and 5.3 to give a recurrence relation describing the
+decrease in the objective gap. Then Lemmas 5.2 and 5.3 together allow us to bound the number of
+consecutive null steps between each of these descent steps, which can then be summed up to bound
+the total number of iterations required.
+
+5.2
+Proof of the Descent Step Lemma 5.1
+
+Let ¯xk+1 = argmin{f(·) + ρk
+
+2 ∥· −xk∥2}. From (2.2), we have
+
+fk(xk+1) ≤fk(xk+1) + ρk
+
+2 ∥xk+1 −xk∥2
+
+≤fk(¯xk+1) + ρk
+
+2 ∥¯xk+1 −xk∥2
+
+≤f(¯xk+1) + ρk
+
+2 ∥¯xk+1 −xk∥2 .
+
+The second line follows by the definition of xk+1 and the last line uses fk ≤f. Hence f(xk) −
+fk(xk+1) ≥∆k. Since we have assumed that iteration k was a descent step, this implies (f(xk) −
+f(xk+1))/β ≥∆k. Concluding the proof.
+
+5.3
+Proof of the Null Step Lemma 5.2
+
+Consider some descent step, at iteration k, followed by T consecutive null steps. Denote the proximal
+subproblem gap at iteration k < t ≤k + T on the model ft by
+
+�∆t := f(xk+1) −
+�
+ft(zt+1) + ρt
+
+2 ∥zt+1 −xk+1∥2
+�
+.
+
+Note every such null step t has stepsize ρt ≥ρk+1 and the same proximal center xt = xk+1. The
+core of this null step bound relies on the following recurrence showing �∆t decreases at each step
+
+�∆t+1 ≤�∆t −(1 −β)2ρk+1 �∆2
+t
+8G2
+k+1
+.
+(5.2)
+
+Before deriving this inequality, we show how it completes the proof of this lemma. After T consecutive
+null steps, the fact that fk+T ≤f ensures �∆k+T ≥∆k+T . Thus, to bound T it suffices to bound
+the minimum iteration at which the reversed inequality hold. By solving the recurrence (5.2), see
+Lemma A.1 in the appendix with ϵ = ∆k+T , we conclude the number of consecutive null steps is at
+most
+
+T ≤
+8G2
+k+1
+(1 −β)2ρk+1∆k+T
+.
+
+Now all that remains is to derive the recurrence (5.2). Consider some null step k < t ≤k + T in
+the sequence of consecutive null steps. It suffices to assume ρt+1 = ρt as increasing the value of the
+proximal parameter can only further decrease the proximal gap. Define the necessary lower bound
+on ft+1 given by (2.3) and (2.4) as
+
+˜ft+1(·) := max {ft(zt+1) + ⟨st+1, · −zt+1⟩, f(zt+1) + ⟨gt+1, · −zt+1⟩} ≤ft+1(·) .
+
+Denote the result of a proximal step on ˜ft+1 by yt+2 = argmin
+�˜ft+1(·) + ρt
+
+2 ∥· −xk+1∥2�
+.
+
+18
+
+
+Claim 1. The solution to the above optimization problem is:
+
+θt+1 = min
+�
+1, ρt (f(zt+1) −ft(zt+1))
+
+∥gt+1 −st+1∥2
+
+�
+
+yt+2 = xk+1 −1
+
+ρt
+(θt+1gt+1 + (1 −θt+1)st+1) .
+(5.3)
+
+This claim is a well-known fact, we include a brief proof in Appendix B for completion.
+Considering yt+2, the objective of the proximal subproblem at iteration t+1 is lower bounded by
+
+ft+1(zt+2) + ρt
+
+2 ∥zt+2 −xk+1∥2
+
+≥˜ft+1(yt+2) + ρt
+
+2 ∥yt+2 −xk+1∥2
+
+≥θt+1 (f(zt+1) + ⟨gt+1, yt+2 −zt+1⟩)
+
++ (1 −θt+1) (ft(zt+1) + ⟨st+1, yt+2 −zt+1⟩) + ρt
+
+2 ∥yt+2 −xk+1∥2
+
+= ft(zt+1) + θt+1 (f(zt+1) −ft(zt+1))
+
++ ⟨θt+1gt+1 + (1 −θt+1)st+1, yt+2 −zt+1⟩+ ρt
+
+2 ∥yt+2 −xk+1∥2
+
+= ft(zt+1) + θt+1 (f(zt+1) −ft(zt+1))
+
+−θ2
+t+1∥gt+1 −st+1∥2/2ρt + ρt
+
+2 ∥zt+1 −xk+1∥2 ,
+
+where the first inequality uses that ft+1 ≥˜ft+1, the second inequality takes a convex combination of
+the two affine functions defining ˜ft+1, and the second equality uses the definition of yt+2 to complete
+the square (noting yk+2 −zk+1 = θt+1/ρt(st+1 −gt+1)). Thus we have
+
+�∆t+1 ≤�∆t −θt+1 (f(zt+1) −ft(zt+1)) + θ2
+t+1∥gt+1 −st+1∥2/2ρt .
+
+The amount of decrease guaranteed above can be lower bounded as follows
+
+θt+1 (f(zt+1) −ft(zt+1)) −θ2
+t+1∥gt+1 −st+1∥2/2ρt
+
+≥1
+
+2 min
+
+�
+
+f(zt+1) −ft(zt+1), ρt(f(zt+1) −ft(zt+1))2
+
+∥gt+1 −st+1∥2
+
+�
+
+≥1
+
+2 min
+
+�
+
+(1 −β) �∆t,
+ρt(1 −β)2 �∆2
+t
+∥gt+1 −st+1∥2
+
+�
+
+≥1
+
+2 min
+
+�
+
+(1 −β) �∆t,
+ρt(1 −β)2 �∆2
+t
+2∥gt+1∥2 + 2∥st+1∥2
+
+�
+
+where the first inequality uses the definition of θt+1, the second inequality uses the definition of
+a null step. Noting that both components of this minimum above are nonnegative, we conclude
+the weaker results that �∆t+1 is nonincreasing. Utilizing the chain of inequalities ∥st+1∥2 ≤2ρt ˜∆t ≤
+(ρt/ρk+1)G2
+k+1 (which we will show in a second) and that ρt ≥ρk+1, the decrease bound above is at
+
+19
+
+
+least
+
+≥1
+
+2 min
+
+�
+
+(1 −β) �∆t,
+ρt(1 −β)2 �∆2
+t
+2∥gt+1∥2 + 2∥st+1∥2
+
+�
+
+≥1
+
+2 min
+
+�
+
+2ρk+1(1 −β) �∆2
+t
+G2
+k+1
+, ρt(1 −β)2 �∆2
+t
+4G2
+k+1
+
+�
+
+≥ρk+1(1 −β)2 �∆2
+t
+8G2
+k+1
+.
+
+This needed chain of inequalities holds as
+
+ρt
+
+2 ∥zt+1 −xk+1∥2 ≤ft(xk+1) −
+�
+ft(zt+1) + ρt
+
+2 ∥zt+1 −xk+1∥2
+�
+
+≤�∆t
+
+≤�∆k+1
+
+≤
+1
+2ρk+1
+∥gk+1∥2
+
+(5.4)
+
+where the first inequality uses the ρt-strongly convexity of the proximal subproblem ft(z) + ρt
+
+2 ∥z −
+xk+1∥2, the second uses the fact that ˜∆t is nonincreasing, and the last inequality follows by (2.3)
+applied at the descent step (i.e., xk+1 = zk+1).
+For any M-Lipschitz objective, our specialized result follows from observing that Gk ≤M
+as subgradients everywhere are uniformly bounded in norm by the Lipschitz constant. For any
+L-smooth objective, the following three inequalities hold for any null step t in the sequence of
+consecutive null steps following a descent step k < t:
+
+∥gt+1∥≤∥gk+1∥+ L∥zt+1 −xk+1∥
+(5.5)
+
+∥zt+1 −xk+1∥≤∥gk+1∥/ρk+1
+(5.6)
+
+∥gk+1∥≤
+�
+
+2(L + ρk+1)∆k+1 .
+(5.7)
+
+Combined these three inequalities give the claimed bound as
+
+Gk+1 = sup
+t {∥gt+1∥} ≤sup
+t {∥gk+1∥+ L∥zt+1 −xk+1∥}
+
+≤(1 + L/ρk+1)∥gk+1∥
+
+≤(1 + L/ρk+1)
+�
+
+2(L + ρk+1)∆k+1
+
+and thus G2
+k+1 ≤2(L + ρk+1)3∆k+1/ρ2
+k+1. First (5.5) follows directly from the gradient being
+L-Lipschitz continuous. Second (5.6) follows from (5.4). Third (5.7) follows from the L-smoothness
+of f and considering the full proximal subproblem f(z) + ρk+1
+
+2 ∥z −xk+1∥2 since
+
+∆k+1 = f(xk+1) −min
+z
+
+�
+f(z) + ρk+1
+
+2
+∥z −xk+1∥2
+�
+
+≥f(xk+1) −min
+z
+
+�
+f(xk+1) + ⟨gk+1, z −xk+1⟩+ L + ρk+1
+
+2
+∥z −xk+1∥2
+�
+
+=
+∥gk+1∥2
+
+2(L + ρk+1) .
+
+20
+
+
+5.4
+Proof of Theorem 2.1
+
+For a constant stepsize ρk = ρ, we can simplify the lower bound (5.1) to only depend on xk through
+a simple threshold on f(xk) −f∗as
+
+∆k ≥
+
+
+
+
+
+
+
+
+
+
+1
+2ρ
+
+�f(xk) −f∗
+
+D
+
+�2
+if f(xk) −f∗≤ρD2
+
+1
+2 (f(xk) −f∗)
+otherwise.
+(5.8)
+
+Combining this with Lemma 5.1 gives a recurrence relation describing the decrease in the objective
+gap δk = f(xk) −f∗on any descent step k of
+
+δk+1 ≤
+
+
+
+
+
+
+
+
+δk −βδ2
+k
+2ρD2
+if δk ≤ρD2
+
+(1 −β/2)δk
+if δk > ρD2 .
+
+Our analysis of the bundle method then proceeds by considering these two cases separately. In
+each case, solving the given recurrence relation bounds the number of descent steps and applying
+Lemma 5.2 bounds the number of null steps.
+
+5.4.1
+Bounding steps with δk > ρD2. First we show that the number of descent steps with
+δk > ρD2 is bounded by
+
+
+
+
+log
+�f(x0)−f∗
+
+ρD2
+�
+
+−log(1 −β/2)
+
+
+
+
++
+(5.9)
+
+and the number of null steps with δk > ρD2 is at most
+
+32M2
+
+β(1 −β)2ρ2D2 .
+(5.10)
+
+In this case, our recurrence relation simplifies to have geometric decrease at each descent step
+δk+1 ≤(1 −β/2)δk. This immediately bounds the number of descent steps by (5.9). Index the
+descent steps before a ρD2-minimizer is found by k1 < · · · < kn such that xkn+1 is the first iterate
+with objective value less than ρD2. Define k0 = −1. Then for each i = 0 . . . n −1, f(xki+1) −f∗≥
+(1−β/2)i−(n−1)ρD2 . It follows from (5.1) that ∆ki+1 ≥(f(xki+1)−f∗)/2 ≥(1 −β/2)i−(n−1) ρD2/2.
+Plugging this into Lemma 5.2 (note ∆k+T = ∆k+1 since the stepsize is held constant) upper bounds
+the number of consecutive null steps after the descent step ki by
+
+ki+1 −ki −1 ≤(1 −β/2)(n−1)−i
+16M2
+
+(1 −β)2ρ2D2 .
+
+Summing this over i = 0 . . . n −1 bounds the total number of null steps before a ρD2-minimizer is
+found by (5.10) as
+
+n−1
+�
+
+i=0
+(1 −β/2)(n−1)−i
+16M2
+
+(1 −β)2ρ2D2 ≤
+32M2
+
+β(1 −β)2ρ2D2 .
+
+21
+
+
+5.4.2
+Bounding steps with ρD2 ≥δk > ϵ. Now we complete our proof of Theorem 2.1 by
+bounding the number of descent steps with ρD2 ≥δk > ϵ by
+
+2ρD2
+
+βϵ
+(5.11)
+
+and the number of null steps with ρD2 ≥δk > ϵ by
+
+48ρD4M2
+
+(1 −β)2ϵ3 .
+(5.12)
+
+After the bundle method has passed objective value ρD2, the recurrence relation becomes
+
+δk+1 ≤δk −βδ2
+k
+2ρD2 .
+
+Solving this recurrence with Lemma A.1 implies δk > ϵ holds for at most (5.11) descent steps.
+Then we can bound the number of null steps between these descent steps by noting (5.8) implies
+∆k ≥(f(xk) −f∗)2/2ρD2 ≥ϵ2/2ρD2. Then Lemma 5.2 (note ∆k+T = ∆k+1 since the stepsize is
+held constant) upper bounds the number of consecutive null steps by 16D2M2/(1 −β)2ϵ2. Then
+multiplying this by our bound on the number of descent steps gives (5.12) as
+
+�
+2ρD2
+
+βϵ
++ 1
+
+�
+16D2M2
+
+(1 −β)2ϵ2 ≤48ρD4M2
+
+β(1 −β)2ϵ3 .
+
+5.5
+Proof of Theorem 2.2
+
+Our bound on the number of descent steps comes directly from Theorem 2.1. Our claimed bound
+on the total number of null steps follows by multiplying this by the constant bound on the number
+of consecutive null steps from Lemma 5.2.
+
+5.6
+Proof of Theorem 2.3
+
+Assuming Hölder growth (1.5) holds and fixing ρk = ρ, the lower bound (5.1) simplifies to only
+depend on a simple threshold with f(xk) −f∗as
+
+∆k ≥
+
+
+
+
+
+
+
+
+
+
+µ2/p(f(xk) −f∗)2−2/p
+
+2ρ
+if (f(xk) −f∗)1−2/p ≤ρ/µ2/p
+
+1
+2 (f(xk) −f∗)
+otherwise .
+(5.13)
+
+From this, we arrive at a recurrence relation on the objective gap δk = f(xk) −f∗decrease at each
+descent step k by plugging this lower bound into Lemma 5.1 of
+
+δk+1 ≤
+
+
+
+
+
+
+
+δk −βµ2/pδ2−2/p
+k
+2ρ
+if δ1−2/p
+k
+≤ρ/µ2/p
+
+(1 −β/2)δk
+if δ1−2/p
+k
+> ρ/µ2/p .
+
+Our analysis proceeds by considering the two cases of this recurrence and the three cases of p > 2,
+p = 2, and 1 ≤p < 2 separately. In each case, solving the given recurrence relation bounds the
+number of descent steps and applying Lemma 5.2 bounds the number of null steps.
+
+22
+
+
+5.6.1
+Given p > 2, bounding steps with δk > (ρ/µ2/p)1/(1−2/p). First we show that the
+number of descent steps with δk > (ρ/µ2/p)1/(1−2/p) is bounded by
+
+
+
+
+log
+�
+f(x0)−f∗
+
+(ρ/µ2/p)1/(1−2/p)
+�
+
+−log(1 −β/2)
+
+
+
+
++
+(5.14)
+
+and the number of null steps with δk > (ρ/µ2/p)1/(1−2/p) is at most
+
+8M2
+
+β(1 −β)2ρ(ρ/µ2/p)1/(1−2/p) .
+(5.15)
+
+In this case, our recurrence relation simplifies to have geometric decrease at each descent step
+δk+1 ≤(1 −β/2)δk. This immediately bounds the number of descent steps by (5.14). Index the
+descent steps before a (ρ/µ2/p)1/(1−2/p)-minimizer is found by k1 < · · · < kn such that xkn+1 is
+the first iterate with objective value less than (ρ/µ2/p)1/(1−2/p). Define k0 = −1. Then for each
+i = 0 . . . n −1, f(xki+1) −f∗≥(1 −β/2)i−(n−1)(ρ/µ2/p)1/(1−2/p). It follows from (5.1) that
+
+∆ki+1 ≥(f(xki+1) −f∗)/2 ≥(1 −β/2)i−(n−1) (ρ/µ2/p)1/(1−2/p)/2.
+
+Plugging this into Lemma 5.2 (note ∆k+T = ∆k+1 since the stepsize is held constant) upper bounds
+the number of consecutive null steps after the descent step ki by
+
+ki+1 −ki −1 ≤(1 −β/2)(n−1)−i
+16M2
+
+(1 −β)2ρ(ρ/µ2/p)1/(1−2/p) .
+
+Summing this over i = 0 . . . n −1 bounds the total number of null steps before a (ρ/µ2/p)1/(1−2/p)-
+minimizer is found by (5.15) as
+
+n−1
+�
+
+i=0
+(1 −β/2)(n−1)−i
+16M2
+
+(1 −β)2ρ(ρ/µ2/p)1/(1−2/p) ≤
+32M2
+
+β(1 −β)2ρ(ρ/µ2/p)1/(1−2/p) .
+
+5.6.2
+Given p > 2, bounding steps with (ρ/µ2/p)1/(1−2/p) ≥δk > ϵ. Next we show that the
+total number of descent steps with(ρ/µ2/p)1/(1−2/p) ≥δk > ϵ is bounded by
+
+2ρ
+(1 −2/p)βµ2/pϵ1−2/p
+(5.16)
+
+and the number of null steps with (ρ/µ2/p)1/(1−2/p) ≥δk > ϵ is at most
+
+48ρM2
+
+(1 −2/p)β(1 −β)2µ4/pϵ3−4/p .
+(5.17)
+
+In this case, the recurrence relation on objective value decrease becomes
+
+δk+1 ≤δk −βµ2/pδ2−2/p
+k
+2ρ
+.
+
+Applying Lemma A.1 gives our bound on the number of descent steps with δk > ϵ in (5.16). Plugging
+the lower bound ∆k ≥µ2/p(f(xk) −f∗)2−2/p/2ρ ≥µ2/pϵ2−2/p/2ρ into Lemma 5.2, the number of
+consecutive null steps after a descent step is at most
+
+16M2
+
+(1 −β)2µ2/pϵ2−2/p .
+
+23
+
+
+Then multiplying our limit on consecutive null steps by the number of descent steps between finding
+a (ρ/µ2/p)1/(1−2/p)-minimizer and finding an ϵ-minimizer gives the bound (5.17) as
+
+�
+2ρ
+(1 −2/p)βµ2/pϵ1−2/p + 1
+�
+16M2
+
+(1 −β)2µ2/pϵ2−2/p ≤
+48ρM2
+
+(1 −2/p)β(1 −β)2µ4/pϵ3−4/p .
+
+5.6.3
+Given p = 2, bounding steps with δk > ϵ. Here both cases of our recurrence relation
+have a similar form, and so we directly bound the total number of descent steps with δk > ϵ by
+
+
+
+
+
+log
+�f(x0)−f∗
+
+ϵ
+
+�
+
+−log(1 −β min{µ/2ρ, 1/2})
+
+
+
+
+(5.18)
+
+and the number of null steps with δk > ϵ by
+
+8M2
+
+β(1 −β)2 min{µ/2ρ, 1/2}ρϵ .
+(5.19)
+
+In this case, our recurrence relation simplifies to have geometric decrease at each descent step
+δk+1 ≤(1 −β min{µ/2ρ, 1/2})δk. This immediately bounds the number of descent steps by (5.18).
+Index the descent steps before an ϵ-minimizer is found by k1 < · · · < kn such that xkn+1 is the first
+iterate with objective value less than ϵ. Define k0 = −1. Then for each i = 0 . . . n−1, f(xki+1)−f∗≥
+(1−β min{µ/2ρ, 1/2})i−(n−1)ϵ. It follows from (5.1) that ∆ki+1 ≥(1 −β min{µ/2ρ, 1/2})i−(n−1) ϵ/2.
+Plugging this into Lemma 5.2 (note ∆k+T = ∆k+1 since the stepsize is held constant) upper bounds
+the number of consecutive null steps after the descent step ki by
+
+ki+1 −ki −1 ≤(1 −β min{µ/2ρ, 1/2})(n−1)−i
+8M2
+
+(1 −β)2ρϵ .
+
+Summing this over i = 0 . . . n −1 bounds the total number of null steps before an ϵ-minimizer is
+found by
+
+n−1
+�
+
+i=0
+(1 −β min{µ/2ρ, 1/2})(n−1)−i
+8M2
+
+(1 −β)2ρϵ ≤
+8M2
+
+min{µ/2ρ, 1/2}β(1 −β)2ρϵ .
+
+5.6.4
+Given 1 ≤p < 2, bounding steps with δk > (ρ/µ2/p)1/(1−2/p). Now we show that the
+number of descent steps with δk > (ρ/µ2/p)1/(1−2/p) is bounded by
+
+2ρ(f(x0) −f∗)2/p−1
+
+(1 −21−2/p)βµ2/p
+(5.20)
+
+and the number of null steps with δk > (ρ/µ2/p)1/(1−2/p) is at most
+
+32M2
+
+β(1 −β)2ρ(ρ/µ2/p)1/(1−2/p) C
+(5.21)
+
+with C = max
+�
+(f(x0)−f∗)4/p−3
+
+(ρ/µ2/p)(4/p−3)/(1−2/p) , 1
+�
+min
+�
+1
+1−2−|4/p−3| ,
+�
+log2
+�
+f(x0)−f∗
+
+(ρ/µ2/p)1/(1−2/p)
+���
+.
+Notice that
+since p < 2, the power 1 −2/p of δk in the threshold condition of our recurrence is negative.
+
+24
+
+
+Then, the recurrence relation on objective value decrease becomes δk+1 ≤δk −βµ2/pδ2−2/p
+k
+2ρ
+. For
+
+any i ≥0, we first bound the number of descent and null steps with
+
+2i+1(ρ/µ2/p)1/(1−2/p) ≥δk > 2i(ρ/µ2/p)1/(1−2/p) .
+
+Since descent steps decreases the gap by at least βµ2/pδ2−2/p
+k
+/2ρ, there are at most
+
+2ρ(2i(ρ/µ2/p)1/(1−2/p))2/p−1
+
+βµ2/p
+= 2(2/p−1)i+1
+
+β
+
+descent steps in this interval. Further, noting that in this interval
+
+∆k ≥µ2/p(2i(ρ/µ2/p)1/(1−2/p))2−2/p
+
+2ρ
+= 2(2−2/p)i−1(ρ/µ2/p)1/(1−2/p) ,
+
+we can bound the number of consecutive null steps following any of these descent steps via Lemma 5.2.
+Hence there are at most
+2(4/p−3)i+5M2
+
+β(1 −β)2ρ(ρ/µ2/p)1/(1−2/p)
+
+null steps in this interval.
+The bundle method halves its objective value at most N = ⌈log2((f(x0)−f∗)/(ρ/µ2/p)1/(1−2/p))⌉
+times before an (ρ/µ2/p)1/(1−2/p)-minimizer is found. Then summing up these bounds on the descent
+and null steps in each interval limits the number of descent steps needed to find a (ρ/µ2/p)1/(1−2/p)-
+minimizer by (5.20) as
+
+N−1
+�
+
+i=0
+
+2(2/p−1)i+1
+
+β
+≤2
+
+β
+
+N−1
+�
+
+i=0
+2(2/p−1)i ≤2(2/p−1)(N−1)+1
+
+(1 −21−2/p)β
+≤2ρ(f(x0) −f∗)2/p−1
+
+(1 −21−2/p)βµ2/p
+
+and similarly, the number of null steps needed by (5.21) as
+
+N−1
+�
+
+i=0
+
+2(4/p−3)i+5M2
+
+β(1 −β)2ρ(ρ/µ2/p)1/(1−2/p)
+
+≤
+32M2
+
+β(1 −β)2ρ(ρ/µ2/p)1/(1−2/p)
+
+N−1
+�
+
+i=0
+2(4/p−3)i
+
+≤
+32M2
+
+β(1 −β)2ρ(ρ/µ2/p)1/(1−2/p)
+
+max
+
+�
+(f(x0) −f∗)4/p−3
+
+(ρ/µ2/p)(4/p−3)/(1−2/p) , 1
+
+�
+
+min
+�
+1
+1 −2−|4/p−3| , N
+�
+
+where the last inequality bounds the sum regardless of the sign of the exponent 4/p −3.
+
+5.6.5
+Given 1 ≤p < 2, bounding steps with (ρ/µ2/p)1/(1−2/p) ≥δk > ϵ. Finally, we show
+that the number of descent steps with (ρ/µ2/p)1/(1−2/p) ≥δk > ϵ is bounded by
+
+
+
+
+log
+�(ρ/µ2/p)1/(1−2/p)
+
+ϵ
+
+�
+
+−log(1 −β/2)
+
+
+
+
+(5.22)
+
+25
+
+
+and the number of null steps with (ρ/µ2/p)1/(1−2/p) ≥δk > ϵ is at most
+
+16M2
+
+β(1 −β)2ρϵ .
+(5.23)
+
+In this case, our recurrence relation simplifies to have geometric decrease at each descent step
+δk+1 ≤(1 −β/2)δk. This immediately bounds the number of descent steps by (5.22). Index the
+descent steps after a (ρ/µ2/p)1/(1−2/p)-minimizer but before an ϵ-minimizer is found by k1 < · · · < kn
+such that xkn+1 is the first iterate with objective value less than ϵ. Then for each i = 0 . . . n −
+1, f(xki+1) −f∗≥(1 −β/2)i−(n−1)ϵ. It follows from (5.1) that ∆ki+1 ≥(f(xki+1) −f∗)/2 ≥
+(1 −β/2)i−(n−1) ϵ/2. Plugging this into Lemma 5.2 (note ∆k+T = ∆k+1 since the stepsize is held
+constant) upper bounds the number of consecutive null steps after the descent step ki by
+
+ki+1 −ki −1 ≤(1 −β/2)(n−1)−i
+8M2
+
+(1 −β)2ρϵ .
+
+Summing this over i = 0 . . . n −1 bounds the additional number of null steps before an ϵ-minimizer
+is found by (5.23) as
+n−1
+�
+
+i=0
+(1 −β/2)(n−1)−i
+8M2
+
+(1 −β)2ρϵ ≤
+16M2
+
+β(1 −β)2ρϵ .
+
+5.7
+Proof of Theorem 2.4
+
+Our bound on the number of descent steps comes directly from Theorem 2.3. Our claimed bound
+on the total number of null steps follows by multiplying this by the constant bound on the number
+of consecutive null steps from Lemma 5.2.
+
+5.8
+Proof of Theorem 2.5
+
+Combining the lower bound ∆k ≥1
+
+2(f(xk) −f∗) with Lemma 5.1 shows linear decrease in the
+objective every descent step
+
+f(xk+1) −f∗≤
+�
+1 −β
+
+2
+
+�
+(f(xk) −f∗).
+
+Our bound on the number of descent steps follows immediately from this. Combining the lower
+bound ∆k ≥1
+
+2(f(xk) −f∗) with Lemma 5.2 shows that at most
+
+8M2D2
+
+(1 −β)2(f(xk+1) −f∗)2
+
+null steps occur between each descent step. Denote the sequence of descent steps taken by the
+bundle method by k1, k2, k3 . . . and as a base case define k0 = −1. Let kn be the first descent step
+finding an ϵ-minimizer, which must have n ≤⌈log(1−β/2)(
+ϵ
+f(x0)−f∗)⌉+. From our linear decrease
+condition, we know for any i = 0, 1, 2, 3, . . . n −1
+
+f(xki+1) −f∗≥(1 −β/2)i−(n−1) ϵ
+
+and from our null step bound, we know for any i = 0, 1, 2, . . . n −1
+
+ki+1 −ki −1 ≤
+8M2D2
+
+(1 −β)2(f(xki+1) −f∗)2 ≤(1 −β/2)2(i−(n−1)) 8M2D2
+
+(1 −β)2ϵ2 .
+
+26
+
+
+Then summing up our null step bounds ensures
+
+kn −n ≤
+
+n
+�
+
+i=1
+(1 −β/2)2(i−1−(n−1)) 8M2D2
+
+(1 −β)2ϵ2 .
+
+Bounding this geometric series shows us that the bundle method finds an ϵ-minimizer with the
+number of null steps bounded by
+
+�
+1
+1 −(1 −β/2)2
+
+�
+8M2D2
+
+(1 −β)2ϵ2 .
+
+5.9
+Proof of Theorem 2.6
+
+Our bound on the number of descent steps follows from Theorem 2.5. Our proof of the null step
+bound follows the same approach as Theorem 2.5 with only minor differences. Applying Lemma 5.2
+with our stepsize choice (2.10) bounds the number of consecutive null steps after some descent step
+k by
+8M2
+
+(1 −β)2µ2/p(f(xk+1) −f∗)2−2/p .
+
+Denote the descent steps −1 = k0 < k1 < k2 < . . . and suppose the xkn+1 is the first ϵ-minimizer.
+Then
+
+ki+1 −ki −1 ≤(1 −β/2)(2−2/p)(i−(n−1))
+8M2
+
+(1 −β)2µ2/pϵ2−2/p
+
+since f(xki+1) −f∗≥
+�
+1 −β
+
+2
+
+�i−(n−1) ϵ. Summing this up gives
+
+kn −n ≤
+
+n
+�
+
+i=1
+(1 −β/2)(2−2/p)(i−1−(n−1))
+8M2
+
+(1 −β)2µ2/pϵ2−2/p .
+
+When p > 1, this geometric series shows us that the bundle method finds an ϵ-minimizer with
+the number of null steps bounded by
+
+�
+1
+1 −(1 −β/2)2−2/p
+
+�
+8M2
+
+(1 −β)2µ2/pϵ2−2/p .
+
+When p = 1, we have a constant upper bound on the number of null steps following a descent
+step. Hence the number of null steps is bounded by
+
+8M2
+
+(1 −β)2µ2
+
+
+
+
+
+log
+�f(x0)−f∗
+
+ϵ
+
+�
+
+−log(1 −β/2)
+
+
+
+
+.
+
+5.10
+Proof of Theorem 3.1
+
+Let δk = minj∈{0,...,J−1}{f(x(j)
+k ) −f∗} denote the lowest objective gap among all of our J instances
+of the bundle method after they have taken k synchronous steps. Then the core of our convergence
+proof is bounding the number of iterations where this lowest objective gap is in the interval
+
+(1 −β/2)−nϵ ≤δk ≤(1 −β/2)−(n+1)ϵ .
+
+27
+
+
+for any integer 0 ≤n < N :=
+�log((f(x0)−f∗)/ϵ)
+
+−log(1−β/2)
+
+�
+. Within this interval, we focus on the instance
+
+j =
+
+�
+
+log2
+
+�
+µ2/p((1 −β/2)−nϵ)1−2/p
+
+4¯ρ
+
+��
+
+.
+
+This instance of the bundle method’s constant stepsize ρ(j) = 2j ¯ρ approximates the stepsize (2.10)
+as
+1
+4µ2/p((1 −β/2)−nϵ)1−2/p ≤ρ(j) ≤1
+
+2µ2/p((1 −β/2)−nϵ)1−2/p .
+
+Then (5.13) bounds this method’s proximal gap before an (1 −β/2)−nϵ-minimizer is found by
+
+∆(j)
+k
+≥1
+
+2(f(x(j)
+k ) −f∗) ≥(1 −β/2)−nϵ/2 .
+
+Letting δ(j)
+k
+= f(x(j)
+k ) −f∗, each descent step k improves method j’s objective gap according
+to the recurrence δ(j)
+k+1 ≤min{(1 −β/2)δ(j)
+k , δk} where the first term in the minimum comes from
+Lemma 5.1 and the second term comes from method j taking any further improvement from the
+other bundle methods. By assumption, we have δk ≤(1 −β/2)−(n+1)ϵ, and so after one descent
+step k′ > k we must have δ(j)
+k′+1 ≤(1 −β/2)−(n+1)ϵ. Thus after a second descent step k′′ > k′, our
+
+intermediate target accuracy is met as δk′′+1 ≤δ(j)
+k′′+1 ≤(1 −β/2)−nϵ.
+Applying Lemma 5.2 bounds the number of null steps between descent steps by
+
+8M2
+
+(1 −β)2ρ(j)∆(j)
+k+1
+≤
+64M2
+
+(1 −β)2µ2/p((1 −β/2)−nϵ)2−2/p .
+
+Hence the total number of steps before δ(j)
+k
+< 2nϵ (and consequently δk < 2nϵ) is at most
+
+2
+
+�
+64M2
+
+(1 −β)2µ2/p((1 −β/2)−nϵ)2−2/p + 1
+
+�
+
+.
+
+Summing over this bound completes our proof. When p > 1, this gives
+
+N−1
+�
+
+n=0
+2
+
+�
+64M2
+
+(1 −β)2µ2/p((1 −β/2)−nϵ)2−2/p + 1
+
+�
+
+= 2
+
+N−1
+�
+
+n=0
+
+64M2
+
+(1 −β)2µ2/p((1 −β/2)−nϵ)2−2/p + 2
+�log((f(x0) −f∗)/ϵ)
+
+−log(1 −β/2)
+
+�
+
+≤
+�
+2
+1 −(1 −β/2)2−2/p
+
+�
+64M2
+
+(1 −β)2µ2/pϵ2−2/p + 2
+�log((f(x0) −f∗)/ϵ)
+
+−log(1 −β/2)
+
+�
+.
+
+When p = 1, the number of steps in each of our intervals is constant. Consequently, the total
+number of iterations before an ϵ minimizer is found is at most
+
+N−1
+�
+
+n=0
+2
+
+�
+64M2
+
+(1 −β)2µ2 + 1
+
+�
+
+= 2
+
+�
+64M2
+
+(1 −β)2µ2 + 1
+
+��log((f(x0) −f∗)/ϵ)
+
+−log(1 −β/2)
+
+�
+.
+
+Acknowledgements
+
+We would like to thank Haihao Lu for pointing out a number of typos in an early version of this
+manuscript. We would also like to thank the anonymous reviewers for their insightful comments
+and feedback. Finally, we thank Adrian Lewis for introducing us to bundle methods.
+
+28
+
+
+References
+
+[1] Libsvm data: Classification (binary class).
+https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/
+datasets/binary.html. Accessed: 2021-05-12.
+
+[2] P. Apkarian, D. Noll, and O. Prot, A Proximity Control Algorithm to Minimize Nonsmooth and
+Nonconvex Semi-infinite Maximum Eigenvalue Functions, J. Convex Anal., 16 (2009), pp. 641–666.
+
+[3] J. F. Bonnans, J. C. Gilbert, C. Lemaréchal, and C. A. Sagastizábal, A family of variable
+metric proximal methods, Mathematical Programming, 68 (1995), pp. 15–47.
+
+[4] J. V. Burke and M. C. Ferris, Weak sharp minima in mathematical programming, SIAM Journal on
+Control and Optimization, 31 (1993), pp. 1340–1359.
+
+[5] R. H. Byrd, J. Nocedal, and R. B. Schnabel, Representations of quasi-newton matrices and their
+use in limited memory methods, Mathematical Programming, 63 (1994), pp. 129–156.
+
+[6] V. Charisopoulos, Y. Chen, D. Davis, M. Díaz, L. Ding, and D. Drusvyatskiy, Low-rank
+matrix recovery with composite optimization: good conditioning and rapid convergence, Foundations of
+Computational Mathematics, (2021), pp. 1–89.
+
+[7] R. Correa and C. Lemaréchal, Convergence of some algorithms for convex minimization, Mathe-
+matical Programming, 62 (1993), pp. 261–275.
+
+[8] D. Davis and D. Drusvyatskiy, Stochastic model-based minimization of weakly convex functions,
+SIAM Journal on Optimization, 29 (2019), p. 207–239.
+
+[9] W. de Oliveira, Target radius methods for nonsmooth convex optimization, Operations Research
+Letters, 45 (2017), pp. 659–664.
+
+[10] W. de Oliveira, Proximal bundle methods for nonsmooth DC programming, J. Glob. Optim., 75 (2019),
+pp. 523–563.
+
+[11] W. de Oliveira, C. A. Sagastizábal, and C. Lemaréchal, Convex proximal bundle methods in
+depth: a unified analysis for inexact oracles, Math. Program., 148 (2014), pp. 241–277.
+
+[12] W. De Oliveira and M. Solodov, A doubly stabilized bundle method for nonsmooth convex opti-
+mization, Mathematical programming, 156 (2016), pp. 125–159.
+
+[13] W. de Oliveira and M. Solodov, Bundle Methods for Inexact Data, Springer International Publishing,
+Cham, 2020, pp. 417–459.
+
+[14] L. Ding and B. Grimmer, Revisit of spectral bundle methods: Primal-dual (sub)linear convergence
+rates, 2020, https://arxiv.org/abs/2008.07067.
+
+[15] D. Drusvyatskiy, A. D. Ioffe, and A. S. Lewis, Nonsmooth optimization using taylor-like models:
+error bounds, convergence, and termination criteria, Math. Program., 185 (2021), pp. 357–383.
+
+[16] Y. Du and A. Ruszczyński, Rate of Convergence of the Bundle Method, J. Optim. Theory Appl., 173
+(2017), pp. 908–922.
+
+[17] F. Fischer and C. Helmberg, A parallel bundle framework for asynchronous subspace optimization
+of nonsmooth convex functions, SIAM Journal on Optimization, 24 (2014), pp. 795–822.
+
+[18] A. Frangioni, Standard Bundle Methods: Untrusted Models and Duality, Springer International
+Publishing, Cham, 2020, pp. 61–116.
+
+[19] W. Hare and C. Sagastizábal, A Redistributed Proximal Bundle Method for Nonconvex Optimization,
+SIAM J. Optim., 20 (2010), pp. 2442–2473.
+
+[20] W. Hare, C. Sagastizábal, and M. Solodov, A Proximal Bundle Method for Nonsmooth Nonconvex
+Functions with Inexact Information, Computational Optimization and Applications, 63 (2016), pp. 1–28.
+
+29
+
+
+[21] C. Helmberg and F. Rendl, A spectral bundle method for semidefinite programming, SIAM Journal
+on Optimization, 10 (2000), pp. 673–696.
+
+[22] J.-B. Hiriart-Urruty and C. Lemaréchal, Convex Analysis and Minimization Algorithms II:
+Advanced Theory and Bundle Methods, vol. 306, Springer Berlin Heidelberg, 1993.
+
+[23] F. Iutzeler, J. Malick, and W. de Oliveira, Asynchronous level bundle methods, Mathematical
+Programming, 184 (2020), pp. 319–348.
+
+[24] K. Kim, C. G. Petra, and V. M. Zavala, An asynchronous bundle-trust-region method for dual
+decomposition of stochastic mixed-integer programming, SIAM Journal on Optimization, 29 (2019),
+pp. 318–342.
+
+[25] K. C. Kiwiel, An Aggregate Subgradient Method for Nonsmooth Convex Minimization, Math. Program.,
+27 (1983), pp. 320–341.
+
+[26] K. C. Kiwiel, A Linearization Algorithm for Nonsmooth Minimization, Mathematics of Operations
+Research, 10 (1985), pp. 185–194.
+
+[27] K. C. Kiwiel, Methods of Descent for Nondifferentiable Optimization., Springer, Berlin, 1985.
+
+[28] K. C. Kiwiel, Proximity control in bundle methods for convex nondifferentiable minimization, Mathe-
+matical programming, 46 (1990), pp. 105–122.
+
+[29] K. C. Kiwiel, Proximal Level Bundle Methods for Convex Nondifferentiable Optimization, Saddle-point
+Problems and Variational Inequalities, Math. Program., 69 (1995), pp. 89–109.
+
+[30] K. C. Kiwiel, Efficiency of Proximal Bundle Methods, Journal of Optimization Theory and Applications,
+104 (2000), pp. 589–603.
+
+[31] K. C. Kiwiel, A proximal bundle method with approximate subgradient linearizations, SIAM Journal on
+optimization, 16 (2006), pp. 1007–1023.
+
+[32] G. Lan, Bundle-Level Type Methods Uniformly Optimal For Smooth And Nonsmooth Convex Optimiza-
+tion, Mathematical Programming, 149 (2015), pp. 1–45.
+
+[33] C. Lemarechal, An Extension of Davidon Methods to Nondifferentiable Problems, Springer Berlin
+Heidelberg, Berlin, Heidelberg, 1975, pp. 95–109.
+
+[34] C. Lemaréchal, Lagrangian Relaxation, Springer Berlin Heidelberg, Berlin, Heidelberg, 2001, pp. 112–
+156.
+
+[35] C. Lemaréchal, A. Nemirovskii, and Y. Nesterov, New Variants of Bundle Methods, Math.
+Program., 69 (1995), pp. 111–147.
+
+[36] C. Lemaréchal and C. Sagastizábal, Variable metric bundle methods: from conceptual to imple-
+mentable forms, Mathematical Programming, 76 (1997), pp. 393–410.
+
+[37] J. Liang and R. D. C. Monteiro, A proximal bundle variant with optimal iteration-complexity for a
+large range of prox stepsizes, 2021, https://arxiv.org/abs/2003.11457.
+
+[38] J. Lv, L. Pang, and F. Meng, A proximal bundle method for constrained nonsmooth nonconvex
+optimization with inexact information, J. Glob. Optim., 70 (2018), pp. 517–549.
+
+[39] J. Lv, L. Pang, N. Xu, and Z. Xiao, An infeasible bundle method for nonconvex constrained
+optimization with application to semi-infinite programming problems, Numer. Algorithms, 80 (2019),
+pp. 397–427.
+
+[40] R. Mifflin, An algorithm for constrained optimization with semismooth functions, Mathematics of
+Operations Research, 2 (1977), pp. 191–207.
+
+[41] R. Mifflin, A Modification and an Extension of Lemarechal’s Algorithm for Nonsmooth Minimization,
+Springer Berlin Heidelberg, Berlin, Heidelberg, 1982, pp. 77–90.
+
+30
+
+
+[42] R. Mifflin and C. Sagastizábal, A vu-algorithm for convex minimization, Mathematical program-
+ming, 104 (2005), pp. 583–608.
+
+[43] R. Mifflin and C. Sagastizábal, A science fiction story in nonsmooth optimization originating at
+iiasa, this volume, (2012).
+
+[44] P. K. Mogensen and A. N. Riseth, Optim: A mathematical optimization package for Julia, Journal
+of Open Source Software, 3 (2018), p. 615.
+
+[45] N. H. Monjezi and S. Nobakhtian, A new infeasible proximal bundle algorithm for nonsmooth
+nonconvex constrained optimization, Comput. Optim. Appl., 74 (2019), pp. 443–480.
+
+[46] N. H. Monjezi and S. Nobakhtian, A filter proximal bundle method for nonsmooth nonconvex
+constrained optimization, J. Glob. Optim., 79 (2021), pp. 1–37.
+
+[47] Y. Nesterov, Introductory lectures on convex optimization, vol. 87 of Applied Optimization, Kluwer
+Academic Publishers, Boston, MA, 2004. A basic course.
+
+[48] Y. Nesterov and M. I. Florea, Gradient methods with memory, Optimization Methods and Software,
+0 (2021), pp. 1–18.
+
+[49] J. Nocedal and S. Wright, Numerical optimization, Springer Series in Operations Research and
+Financial Engineering, Springer, New York, second ed., 2006.
+
+[50] P. Ochs, J. Fadili, and T. Brox, Non-smooth non-convex bregman minimization: Unification and
+new algorithms, J. Optim. Theory Appl., 181 (2019), pp. 244–278.
+
+[51] F. Oustry, A second-order bundle method to minimize the maximum eigenvalue function, Math.
+Program., 89 (2000), pp. 1–33.
+
+[52] B. T. Polyak, Introduction to optimization. optimization software, Inc., Publications Division, New
+York, 1 (1987), p. 32.
+
+[53] J. Renegar and B. Grimmer, A Simple Nearly-Optimal Restart Scheme For Speeding-Up First Order
+Methods, Foundations of Computational Mathematics, (2021).
+
+[54] A. Ruszczynski, Nonlinear Optimization, Princeton University Press, Princeton, NJ, USA, 2006.
+
+[55] C. Sagastizábal, Divide to Conquer: Decomposition Methods for Energy Optimization, Mathematical
+Programming, 134 (2012), pp. 187–222.
+
+[56] C. Sagastizábal and M. Solodov, An Infeasible Bundle Method for Nonsmooth Convex Constrained
+Optimization without a Penalty Function or a Filter, SIAM Journal on Optimization, 16 (2005), pp. 146–
+169.
+
+[57] S. Shalev-Shwartz, Y. Singer, N. Srebro, and A. Cotter, Pegasos: Primal estimated sub-gradient
+solver for svm, Mathematical programming, 127 (2011), pp. 3–30.
+
+[58] M. V. Solodov, On approximations with finite precision in bundle methods for nonsmooth optimization,
+Journal of Optimization Theory and Applications, 119 (2003), pp. 151–165.
+
+[59] P. Wolfe, A Method of Conjugate Subgradients for Minimizing Nondifferentiable Functions, Springer
+Berlin Heidelberg, Berlin, Heidelberg, 1975, pp. 145–173.
+
+A
+Solutions to Recurrence Relations
+
+Throughout our analysis, we frequently encounter recurrence relations of the form δk+1 ≤δk −αδq
+k
+for some α > 0 and q > 1. The following lemma bounds the number of steps of such a recurrence to
+reach a desired level of accuracy δk ≤ϵ.
+
+31
+
+
+Lemma A.1. Assume that a sequence {δk}∞
+k=1, satisfies the recurrence δk+1 ≤δk −αδq
+k. Then for
+any ϵ > 0, the inequality δk ≤ϵ holds for some
+
+k ≤
+�
+1
+(q −1)αϵq−1
+
+�
+.
+
+Proof. It suffices to show the following upper bound on δk as a function of k
+
+δk ≤
+�
+1
+(q −1)αk
+
+�1/(q−1)
+.
+
+First we show this bound holds with k = 1. This follows as
+
+δ1 ≤δ0 −αδq
+0 ≤max
+δ∈R {δ −αδq} ≤
+�1
+
+qα
+
+�1/(q−1)
+.
+
+Then we complete our proof by induction using the following weighted arithmetic-geometric mean
+
+(AM-GM) inequality, which ensures for any a, α, b, β > 0 we have aαbβ ≤
+�
+αa+βb
+
+α+β
+
+�α+β . This implies
+
+that for any k ≥1, (k −(q −1)−1)(k + 1)1/(q−1) ≤kq/(q−1) by taking a = k −(q −1)−1, α = 1,
+b = k + 1, β = 1/(q −1). By expanding the recurrence at k + 1 and applying this inequality we get
+
+δk+1 ≤δk −αδq
+k ≤
+�
+1
+(q −1)αk
+
+�1/(q−1)
+−α
+�
+1
+(q −1)αk
+
+�q/(q−1)
+
+=
+�
+1
+(q −1)α
+
+�1/(q−1) �
+k
+kq/(q−1) −
+1
+(q −1)kq/(q−1)
+
+�
+
+=
+�
+1
+(q −1)α
+
+�1/(q−1) k −(q −1)−1
+
+kq/(q−1)
+
+≤
+�
+1
+(q −1)α(k + 1)
+
+�1/(q−1)
+.
+
+Proving the result.
+
+B
+Proof of Claim 1
+
+For notational convenience define h1(·) := ft(zt+1) + ⟨st+1, · −zt+1⟩and h2(·) := f(zt+1) + ⟨gt+1, · −
+zt+1⟩and so ˜ft+1 = max{h1, h2}. Since the problem is strongly convex, there is unique solution.
+The solution is characterized by
+
+yt+2 ∈xk+1 −1
+
+ρt
+∂˜ft+1(yt+2)
+(B.1)
+
+where subdifferential is
+
+∂˜ft+1(yt+2) =
+
+
+
+
+
+
+
+
+
+
+{st+1}
+if h1(yt+2) > h2(yt+2),
+{gt+1}
+if h2(yt+2) > h1(yt+2),
+conv({st+1, gt+1})
+otherwise,
+
+and conv denotes the convex hull.
+Define w = θt+1gt+1 + (1 −θt+1)st+1. In light of (B.1), the claim would follow if we had
+w ∈∂˜ft+1(yt+2). Let’s prove that this is the case. Observe that the coefficient θt+1 ∈[0, 1] because
+f ≥ft. We consider two cases.
+
+32
+
+
+Case 1. Assume θt+1 = 1 < ρt(f(zt+1)−ft(zt+1))
+
+∥gt+1−st+1∥2
+, then w = gt+1. Moreover,
+
+h1(yk+2) −h2(yk+2) = ft(zt+1) −f(zt+1) + ⟨st+1 −gt+1, yt+2 −zt+1⟩
+
+< −1
+
+ρt
+∥gt+1 −st+1∥2 + ⟨st+1 −gt+1, xk+1 −zt+1 −1
+
+ρt
+gt+1⟩
+
+= −1
+
+ρt
+∥gt+1 −st+1∥2 + 1
+
+ρt
+∥gt+1 −st+1∥2 = 0,
+
+where we used st+1 = ρt(xk+1 −zt+1). Thus w ∈∂˜ft+1(yt+2).
+Case 2. Assume θt+1 = ρt(f(zt+1)−ft(zt+1))
+
+∥gt+1−st+1∥2
+≤1. Then,
+
+h1(yk+2) −h2(yk+2) = ft(zt+1) −f(zt+1) +
+�
+st+1 −gt+1, xk+1 −zt+1 −1
+
+ρt
+w
+�
+
+= ft(zt+1) −f(zt+1) + θt+1∥st+1 −gt+1∥2 = 0
+
+where the middle equality follows from the definition of st+1 and the last equality uses the definition
+of θt+1. We conclude that w ∈∂˜ft+1(yt+2).
+
+33
+
+

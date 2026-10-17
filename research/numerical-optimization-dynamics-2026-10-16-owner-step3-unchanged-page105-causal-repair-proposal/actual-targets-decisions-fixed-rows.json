@@ -1,0 +1,130 @@
+{
+  "targets": [
+    {
+      "obligation": "refuter:105:1",
+      "id": "alg-safeguarded-hybrid-event-location-and-restart",
+      "location": "Definition, steps 3\u20138 and final sentence",
+      "defect": "ill-formed",
+      "evidence": "Step 3 says, \u201cIf any result is `inconclusive` or contains unresolved boxes, return `inconclusive`.\u201d The `alg-smooth-function-root-isolation` dependency says its status is `complete` exactly when the unresolved list is empty and otherwise `inconclusive`. Since B_root may be 0, an active guard can leave the initial box unresolved and trigger Step 3\u2019s `inconclusive` return; the final sentence instead says, \u201cAny exhausted step, root-box, or event budget returns `budget-exhausted`.\u201d Steps 4, 5, 7, and 8 also return `inconclusive` when root-box work cannot continue at the budget limit. The procedure gives conflicting statuses for an allowed root-budget exhaustion.",
+      "severity": "fatal",
+      "observed_sha256": "864809c5ee346588f37fc99e09d1cdf39f4dd3a02d2e0dadeea88c0e10c03c58"
+    },
+    {
+      "obligation": "refuter:105:2",
+      "id": "event-location-and-hybrid-trajectory-error",
+      "location": "Paragraph 1",
+      "defect": "false-claim",
+      "evidence": "The paragraph says, \u201cexhausted budgets return `budget-exhausted`.\u201d For the allowed case B_root=0 with an active guard, the root isolator leaves its initial box unresolved, and the algorithm\u2019s Step 3 returns `inconclusive`. The page\u2019s status summary therefore does not match the current procedure.",
+      "severity": "fatal",
+      "observed_sha256": "9acb68e712e67a9d8949d7ab0b1c7a83b536627c05cda48d17c787d5d871b91e"
+    }
+  ],
+  "decisions": [
+    {
+      "obligation": "touched:105:alg-safeguarded-hybrid-event-location-and-restart",
+      "id": "alg-safeguarded-hybrid-event-location-and-restart",
+      "route": "touched",
+      "verdict": "amended_repair",
+      "evidence": "Inputs and initialization now include a valid E0 bound, reset-evaluation error is charged to successor E, and rational scalar data with positive rational trial duration make the local root-isolator minimum width admissible. Independently checked current claim, proof/definition and exact prerequisite interfaces; see item-specific report and risk review. Alpha additionally makes exhausted root-work statuses consistent, including Broot=0 and refinement/endpoint calls; all direct consumers retain valid uses.",
+      "defect_ids": [
+        "nod-b105-3a-reader-repair-alg-safeguarded-hybrid-event-location-and-restart",
+        "nod-b105-3a-root-budget-status"
+      ],
+      "repair_confidence": 1,
+      "same_defect_as": "refuter:105:1",
+      "same_defect_evidence": "The additional explicit root-budget precedence and consistent branch labels repair exactly the post-reader conflicting-return-status defect in refuter105:1; the reader input/ledger repair is distinct."
+    },
+    {
+      "obligation": "refuter:105:1",
+      "id": "alg-safeguarded-hybrid-event-location-and-restart",
+      "route": "flagged",
+      "verdict": "confirmed_fatal",
+      "evidence": "The post-reader procedure returned inconclusive for Broot=0 and exhausted refinements but also promised budget-exhausted for those inputs. Current explicit precedence and corrected budget branches define one status consistently; complete last-box certificates remain usable.",
+      "defect_ids": [
+        "nod-b105-3a-root-budget-status"
+      ],
+      "repair_confidence": 1,
+      "observed_sha256": "864809c5ee346588f37fc99e09d1cdf39f4dd3a02d2e0dadeea88c0e10c03c58"
+    },
+    {
+      "obligation": "refuter:105:2",
+      "id": "event-location-and-hybrid-trajectory-error",
+      "route": "flagged",
+      "verdict": "confirmed_fatal",
+      "evidence": "The original page budget summary conflicted with the actual post-reader locator at Broot=0. Repairing the defining locator budget statuses restores the unchanged page summary. Current page prose and both full page inventories were independently reviewed; no page edit was needed.",
+      "defect_ids": [
+        "nod-b105-3a-page-budget-summary"
+      ],
+      "repair_confidence": 1,
+      "observed_sha256": "9acb68e712e67a9d8949d7ab0b1c7a83b536627c05cda48d17c787d5d871b91e"
+    }
+  ],
+  "fixed_rows": [
+    {
+      "defect_id": "nod-b105-3a-root-budget-status",
+      "run": "numerical-optimization-dynamics-2026-10-16",
+      "at": "2026-10-16T15:25:50.390242+00:00",
+      "class": "accuracy",
+      "subclass": "ill-formed",
+      "severity": "fatal",
+      "location": "definition",
+      "subject": "alg-safeguarded-hybrid-event-location-and-restart",
+      "caught_at_stage": "3a-adjudicate",
+      "caught_by_role": "group-alpha",
+      "disposition": "fixed",
+      "batch": "105",
+      "group": "batch-105",
+      "repair_confidence": 1,
+      "subclass_note": "The post-reader procedure returned inconclusive for Broot=0 and exhausted refinements but also promised budget-exhausted for those inputs. Current explicit precedence and corrected budget branches define one status consistently; complete last-box certificates remain usable.",
+      "evidence": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-105-3a.md"
+        },
+        {
+          "path": "items/alg-safeguarded-hybrid-event-location-and-restart.md"
+        }
+      ],
+      "adjudication_ref": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-105-3a-decisions.json",
+          "obligation": "refuter:105:1"
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-105-3a-decisions.json",
+          "obligation": "touched:105:alg-safeguarded-hybrid-event-location-and-restart"
+        }
+      ]
+    },
+    {
+      "defect_id": "nod-b105-3a-page-budget-summary",
+      "run": "numerical-optimization-dynamics-2026-10-16",
+      "at": "2026-10-16T15:25:50.390242+00:00",
+      "class": "accuracy",
+      "subclass": "false-or-overstrong-statement",
+      "severity": "fatal",
+      "location": "page-prose",
+      "subject": "event-location-and-hybrid-trajectory-error",
+      "caught_at_stage": "3a-adjudicate",
+      "caught_by_role": "group-alpha",
+      "disposition": "fixed",
+      "batch": "105",
+      "group": "batch-105",
+      "repair_confidence": 1,
+      "subclass_note": "The original page budget summary conflicted with the actual post-reader locator at Broot=0. Repairing the defining locator budget statuses restores the unchanged page summary. Current page prose and both full page inventories were independently reviewed; no page edit was needed.",
+      "evidence": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-105-3a.md"
+        },
+        {
+          "path": "library/numerical-differential-equations-and-stochastic-dynamics/event-location-and-hybrid-trajectory-error.md"
+        }
+      ],
+      "adjudication_ref": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-105-3a-decisions.json",
+          "obligation": "refuter:105:2"
+        }
+      ]
+    }
+  ]
+}

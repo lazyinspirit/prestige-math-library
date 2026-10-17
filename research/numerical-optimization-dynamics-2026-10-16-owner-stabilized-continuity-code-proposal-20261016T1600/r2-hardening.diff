@@ -1,0 +1,101 @@
+--- proposed helper r1
++++ proposed helper r2
+@@ -1,7 +1,7 @@
+ // Continuity of genuine native acceptance across authenticated review metadata.
+ // This policy supplies no review, origin certification, ledger or gate waiver.
+-import { readFileSync, existsSync, readdirSync, realpathSync } from 'node:fs';
+-import { resolve, join } from 'node:path';
++import { readFileSync, existsSync, lstatSync } from 'node:fs';
++import { resolve, join, isAbsolute, dirname } from 'node:path';
+ import { createHash } from 'node:crypto';
+ import { spawnSync } from 'node:child_process';
+ import { splitFrontmatter, sectionText, numberedProofSteps } from './facts-block.mjs';
+@@ -19,22 +19,32 @@
+ const assert = (ok, message) => { if (!ok) throw Error(message); };
+ const readJSON = path => JSON.parse(readFileSync(path, 'utf8'));
+ const researchPath = (root, run, path) => {
+-  assert(typeof path === 'string' && path.startsWith(`research/${run}-`), 'Expected own-run research evidence');
++  assert(typeof path === 'string' && !isAbsolute(path) && !path.includes('\\')
++    && !path.split('/').some(part => part === '..' || part === '.' || part === '')
++    && path.startsWith(`research/${run}-`), 'Expected plain own-run research evidence path');
+   const absolute = resolve(root, path);
+-  assert(absolute.startsWith(resolve(root) + '/') && realpathSync(absolute).startsWith(realpathSync(join(root, 'research')) + '/'), 'Evidence escapes research');
++  for (let component = absolute; ; component = dirname(component)) {
++    const stat = lstatSync(component);
++    assert(!stat.isSymbolicLink() && (component === absolute ? stat.isFile() : stat.isDirectory()),
++      'Evidence must use existing regular files/directories without any symlink component');
++    if (dirname(component) === component) break;
++  }
+   return absolute;
+ };
+ const textRef = (root, run, ref) => {
+   assert(/^[a-f0-9]{64}$/.test(ref?.sha256 ?? ''), 'Missing evidence raw hash');
+-  const text = readFileSync(researchPath(root, run, ref.path), 'utf8');
+-  assert(sha(text) === ref.sha256, 'Changed evidence: ' + ref.path);
+-  return text;
++  const bytes = readFileSync(researchPath(root, run, ref.path));
++  assert(sha(bytes) === ref.sha256, 'Changed evidence: ' + ref.path);
++  return bytes.toString('utf8');
+ };
+ const jsonRef = (root, run, ref) => JSON.parse(textRef(root, run, ref));
+-const successful = (result, run, batch) => result.run === run && result.role === 'alpha' && result.ok === true
++const successful = (result, run, batch) => result.run === run && result.role === 'alpha'
++  && result.label === `3a-batch-${batch}` && Number.isInteger(result.attempt) && result.attempt >= 1
++  && result.evidence_tag === `.attempt-${result.attempt}` && result.ok === true
+   && result.exit_code === 0 && result.process_exit_code === 0 && result.timed_out !== true
+   && result.covers?.map(String).includes(String(batch)) && result.terminal_summary?.task_completed === true
+-  && result.terminal_summary?.task_aborted !== true && typeof result.session_id === 'string' && result.session_id.length > 0
++  && result.terminal_summary?.task_aborted === false && result.terminal_summary?.final_response_present === true
++  && typeof result.session_id === 'string' && result.session_id.length > 0
+   && Number.isFinite(Date.parse(result.started_at)) && Number.isFinite(Date.parse(result.ended_at))
+   && Date.parse(result.ended_at) >= Date.parse(result.started_at);
+ function currentEntry(root, run, batch, id) {
+@@ -65,7 +75,13 @@
+   assert(evidence?.result?.path === `research/${run}-dispatch/alpha-3a-batch-${batch}.result.json`
+     && evidence.report?.path === `research/${run}-alpha-batch-${batch}-3a.md`
+     && evidence.assignment?.path === `research/${run}-alpha-batch-${batch}-3a-order.task.md`, 'Wrong current native review paths');
+-  const result = jsonRef(root, run, evidence.result), report = textRef(root, run, evidence.report);
++  const stableText = textRef(root, run, evidence.result), result = JSON.parse(stableText);
++  assert(successful(result, run, batch), 'Native stable result is not genuine complete success');
++  assert(evidence.immutable_result?.path === `research/${run}-dispatch/alpha-3a-batch-${batch}${result.evidence_tag}.result.json`
++    && textRef(root, run, evidence.immutable_result) === stableText
++    && readFileSync(researchPath(root, run, evidence.immutable_result.path)).equals(
++      readFileSync(researchPath(root, run, evidence.result.path))), 'Stable alias differs from actual immutable attempt result');
++  const report = textRef(root, run, evidence.report);
+   const assignment = textRef(root, run, evidence.assignment);
+   assert(successful(result, run, batch) && assignment.includes(id), 'Native review not genuine complete coverage');
+   const decision = acceptedDocument(root, run, evidence.decisions, evidence.obligation, id, evidence.decision_sha256);
+@@ -134,8 +150,15 @@
+   // item; preserve its document without fabricating an independent verdict.
+   assert(typeof decision.causal_subject === 'string' && decision.same_defect_as
+     && Array.isArray(decision.defect_ids) && decision.defect_ids.length, 'Missing real added-helper causal repair identity');
+-  assert(evidence.creation_certification?.path === `research/${run}-step3-auditor-certifications.json`, 'Wrong actual native creation certification path');
+-  jsonRef(root, run, evidence.creation_certification);
++  const certification = evidence.creation_certification;
++  assert(certification?.path === `research/${run}-step3-auditor-certifications.json`, 'Wrong actual native creation certification path');
++  if (Object.hasOwn(certification, 'required_current_native_certification')) {
++    assert(certification.required_current_native_certification === true
++      && Object.keys(certification).every(key => ['path', 'required_current_native_certification'].includes(key)),
++      'Invalid deferred native certification requirement');
++    // Native certification is produced by the actual first gate, never by this entry.
++    researchPath(root, run, certification.path);
++  } else jsonRef(root, run, certification);
+   const certificates = loadAuditorCreatedCertifications(join(root, 'research', `${run}-step3-auditor-certifications.json`), { root, run, steps: [3] });
+   assert(certificates.some(row => row.id === target.id && String(row.batch) === target.batch), 'Actual current native creation certification remains owed');
+ }
+@@ -229,6 +252,15 @@
+     if (Array.isArray(object)) { for (const child of object) visit(child); return; }
+     if (!object || typeof object !== 'object') return;
+     const references = [];
++    if (Object.hasOwn(object, 'required_current_native_certification')) {
++      assert(object.required_current_native_certification === true
++        && object.path === `research/${run}-step3-auditor-certifications.json`
++        && Object.keys(object).every(key => ['path', 'required_current_native_certification'].includes(key)),
++        'Invalid required native certification artifact');
++      // Close runs after the passed native gate; absence here must fail.
++      const bytes = readFileSync(researchPath(root, run, object.path));
++      references.push({ path: object.path, digest: sha(bytes) });
++    }
+     if (object.path && (object.sha256 !== undefined || object.raw_sha256 !== undefined)) {
+       assert(object.sha256 === undefined || object.raw_sha256 === undefined || object.sha256 === object.raw_sha256, 'Conflicting evidence hashes');
+       references.push({ path: object.path, digest: object.sha256 ?? object.raw_sha256 });

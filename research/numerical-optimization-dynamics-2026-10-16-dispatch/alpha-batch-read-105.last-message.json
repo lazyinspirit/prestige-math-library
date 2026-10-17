@@ -1,0 +1,241 @@
+{
+  "group": "l",
+  "batches": ["105"],
+  "pages_read": [
+    "event-location-and-hybrid-trajectory-error",
+    "event-location-and-hybrid-trajectory-error-examples"
+  ],
+  "items_read": [
+    "def-hybrid-mode-guard-reset-system",
+    "lem-hybrid-guard-derivative-along-mode",
+    "lem-ode-flow-lipschitz-on-a-tube",
+    "lem-reset-error-after-a-mistimed-hybrid-event",
+    "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+    "def-certified-hybrid-event-enclosure",
+    "lem-transverse-hybrid-event-time-error",
+    "alg-safeguarded-hybrid-event-location-and-restart",
+    "thm-finite-hybrid-trajectory-error-under-separated-events",
+    "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+    "cex-inelastic-bouncing-ball-has-zeno-accumulation",
+    "ex-simultaneous-guards-require-deterministic-priority",
+    "cex-grazing-event-time-error-is-not-linearly-bounded",
+    "ex-bouncing-ball-transverse-event-error-and-reset",
+    "ex-two-events-between-endpoints-defeat-sign-screening"
+  ],
+  "conventions": [
+    {
+      "convention": "An enabled event is a guard zero with σ times its incoming guard derivative strictly positive. A fixed total order selects among simultaneous enabled outgoing transitions; a grazing zero is not an enabled event.",
+      "fixed_by": "def-hybrid-mode-guard-reset-system",
+      "matters_for": [
+        "alg-safeguarded-hybrid-event-location-and-restart",
+        "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+        "ex-simultaneous-guards-require-deterministic-priority",
+        "cex-grazing-event-time-error-is-not-linearly-bounded",
+        "ex-two-events-between-endpoints-defeat-sign-screening"
+      ]
+    },
+    {
+      "convention": "Local reconstruction error is measured against the exact mode solution launched from the reported reset state. Total reference error also includes prior aligned reset-state discrepancy; a local certificate alone does not supply this total bound.",
+      "fixed_by": "def-certified-hybrid-event-enclosure",
+      "matters_for": [
+        "alg-safeguarded-hybrid-event-location-and-restart",
+        "thm-finite-hybrid-trajectory-error-under-separated-events",
+        "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted"
+      ]
+    },
+    {
+      "convention": "Reported event times are upper endpoints of exact-reference root boxes. Restart requires a certified lag bound Δ < δ/3, and state comparisons occur at the common reported time, after the exact trajectory's outgoing flow during the lag.",
+      "fixed_by": "def-certified-hybrid-event-enclosure",
+      "matters_for": [
+        "alg-safeguarded-hybrid-event-location-and-restart",
+        "thm-finite-hybrid-trajectory-error-under-separated-events",
+        "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted"
+      ]
+    },
+    {
+      "convention": "The locator transforms each physical trial interval to [0,1], scales derivative enclosures by b−a, and uses the positive rational minimum width ω/(b−a). Root work is budgeted per guard per trial, including refinements and endpoint checks.",
+      "fixed_by": "alg-safeguarded-hybrid-event-location-and-restart",
+      "matters_for": [
+        "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted"
+      ]
+    },
+    {
+      "convention": "A root at the terminal time T is processed, and the locator's output at T is post-reset. Incomplete certificates and exhausted budgets retain only the certified prefix.",
+      "fixed_by": "alg-safeguarded-hybrid-event-location-and-restart",
+      "matters_for": [
+        "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted"
+      ]
+    },
+    {
+      "convention": "Saltation compares outgoing trajectories at the same clock time max{τ,τδ}; the nearby root must remain the selected transition. Incoming flow dependence is required on both sides of τ, using time reversal on the left.",
+      "fixed_by": "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+      "matters_for": [
+        "thm-saltation-matrix-for-a-transverse-hybrid-reset"
+      ]
+    },
+    {
+      "convention": "Finite-trajectory bounds concern matched smooth-mode prefixes and reset states at aligned times; they assert no same-clock state bound between an exact jump and its delayed reported jump.",
+      "fixed_by": "thm-finite-hybrid-trajectory-error-under-separated-events",
+      "matters_for": [
+        "thm-finite-hybrid-trajectory-error-under-separated-events"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-certified-hybrid-event-enclosure",
+      "statement": "Admissible enclosure data supply justified local and total reference trajectory-error bounds, exact-reference guard and derivative enclosures on every queried interval, reset and field bounds, and a sound restart ledger with certified event separation. The rational residual-tube checker is one sufficient provider, not a universal evaluator.",
+      "used_by": [
+        "lem-transverse-hybrid-event-time-error",
+        "alg-safeguarded-hybrid-event-location-and-restart",
+        "thm-finite-hybrid-trajectory-error-under-separated-events",
+        "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted"
+      ]
+    },
+    {
+      "id": "lem-transverse-hybrid-event-time-error",
+      "statement": "On a matched bracket J, if the dense state error is at most η, g is L_g-Lipschitz in state, h(τ)=0, σh′ ≥ ν > 0 throughout J, and the reported dense guard residual is at most ε, then |τ̂−τ| ≤ (L_gη+ε)/ν ≤ max{L_g,1}(η+ε)/ν. The guard root in J is unique.",
+      "used_by": [
+        "alg-safeguarded-hybrid-event-location-and-restart",
+        "thm-finite-hybrid-trajectory-error-under-separated-events",
+        "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+        "cex-grazing-event-time-error-is-not-linearly-bounded",
+        "ex-bouncing-ball-transverse-event-error-and-reset"
+      ]
+    },
+    {
+      "id": "lem-reset-error-after-a-mistimed-hybrid-event",
+      "statement": "Under the stated incoming-error, reset-domain, Lipschitz and outgoing-tube hypotheses, at t₀=max{τ,τ̂} the outgoing state discrepancy is at most L_Rη+(L_RM⁻+L_{R,t}+M⁺)|τ̂−τ|. Later common-mode evolution multiplies this bound by e^{L⁺(s−t₀)}.",
+      "used_by": [
+        "alg-safeguarded-hybrid-event-location-and-restart",
+        "thm-finite-hybrid-trajectory-error-under-separated-events",
+        "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+        "ex-bouncing-ball-transverse-event-error-and-reset"
+      ]
+    },
+    {
+      "id": "lem-ode-flow-lipschitz-on-a-tube",
+      "statement": "For two solutions on [a,T] in a common convex tube where the field is uniformly L-Lipschitz in state, ||u(t)−v(t)||₂ ≤ e^{L(t−a)}||u(a)−v(a)||₂.",
+      "used_by": [
+        "lem-reset-error-after-a-mistimed-hybrid-event",
+        "def-certified-hybrid-event-enclosure",
+        "thm-finite-hybrid-trajectory-error-under-separated-events"
+      ]
+    },
+    {
+      "id": "alg-safeguarded-hybrid-event-location-and-restart",
+      "statement": "The finite-budget procedure completely isolates exact-reference guard roots, classifies their crossing directions, certifies earliest-event order or an exact priority tie, checks residual and restart certificates, and returns certified panels/events or an explicit failure status with the certified prefix.",
+      "used_by": [
+        "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+        "ex-two-events-between-endpoints-defeat-sign-screening"
+      ]
+    },
+    {
+      "id": "def-hybrid-mode-guard-reset-system",
+      "statement": "A smooth hybrid ODE system has finitely many smooth modes and transitions, C¹ oriented guards and resets, and a fixed total outgoing-event priority. Existence, detection and finiteness of the event list are not asserted by the definition.",
+      "used_by": [
+        "lem-hybrid-guard-derivative-along-mode",
+        "lem-ode-flow-lipschitz-on-a-tube",
+        "lem-reset-error-after-a-mistimed-hybrid-event",
+        "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+        "def-certified-hybrid-event-enclosure",
+        "alg-safeguarded-hybrid-event-location-and-restart",
+        "thm-finite-hybrid-trajectory-error-under-separated-events",
+        "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+        "cex-inelastic-bouncing-ball-has-zeno-accumulation",
+        "ex-simultaneous-guards-require-deterministic-priority"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "The meaning of a mode solution, including domain-relative endpoint derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "C¹ regularity of fields, guards and resets, and total differentiability of the guard.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Guard differentiation and composition/implicit differentiation in the saltation argument.",
+      "opened": true
+    },
+    {
+      "id": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+      "used_for": "Integral equations for flow stability and field-bound estimates for displacement. Its nondegenerate-interval hypothesis is relevant; zero displacement is handled separately in the reset proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-inequality-for-the-vector-valued-integral",
+      "used_for": "Norm estimates for solution differences and incoming/outgoing displacements, with orientation handled when limits are reversed.",
+      "opened": true
+    },
+    {
+      "id": "thm-gronwall-integral-inequality",
+      "used_for": "Exponential same-mode stability and the external common-tube tangent supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+      "used_for": "The local C¹ guard-root time as a function of incoming state when the crossing derivative is nonzero.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "The transverse event-time estimate and uniqueness of its matched guard root.",
+      "opened": true
+    },
+    {
+      "id": "thm-mean-value-inequality-for-total-derivatives",
+      "used_for": "Checking the external parameter-flow supplier's Lipschitz and uniform first-order remainder arguments on convex open sets.",
+      "opened": true
+    },
+    {
+      "id": "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+      "used_for": "Checking existence and uniqueness of tangent columns in the external parameter-flow supplier. The current statement separates singleton initial evaluation from positive-length ODE solutions.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+      "concern": "The Statement first fixes 'state dimension d≥1' and later redefines 'd := ∂_t g(τ,x⁻)+D_x g(τ,x⁻)f⁻ ≠ 0'. The dimension and signed scalar crossing derivative use the same symbol. The intended saltation formula and proof are recoverable, but the two quantities need distinct notation.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-bouncing-ball-transverse-event-error-and-reset",
+      "concern": "Verification step 3.2 repeats step 3.1's guard Lipschitz calculation and application of the event-time bound, beginning 'Since g(q,v)=q' and ending 'agreeing with the explicit bound in step 2.1'. This adds no argument to the reset estimate; step 3.2 can use step 3.1 directly.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "event-location-and-hybrid-trajectory-error",
+      "to": "adaptive-ode-solvers-and-error-estimation",
+      "faithful": true,
+      "note": "Opened the dense-output definition and residual certificate definition, checker and soundness theorem, together with the piecewise-C¹ residual supplier. The event page preserves the rational-field/polynomial restrictions, requires a uniform radius bound over the accumulated prefix, and explicitly distinguishes local error from total reference error. Heun dense output alone is not treated as certification."
+    },
+    {
+      "from": "event-location-and-hybrid-trajectory-error",
+      "to": "interval-newton-krawczyk-and-polynomial-root-isolation",
+      "faithful": true,
+      "note": "Opened the smooth isolator and soundness theorem and their scalar Newton procedure and theorem. The consumer supplies a C¹ exact-reference guard on an open interval, valid scaled derivative enclosures, the dyadic initial interval [0,1], and positive rational width tolerance. It preserves unresolved-box limitations and handles shared-endpoint roots with singleton checks or refinement."
+    },
+    {
+      "from": "event-location-and-hybrid-trajectory-error",
+      "to": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "faithful": true,
+      "note": "Opened the parameter-dependent common-tube flow lemma and checked its proof and matrix-ODE supplier. Saltation explicitly supplies the identity initial-state parameterization, common compact convex tube hypotheses, and reversed incoming flow for left-time variations. Its use concerns positive-length neighborhoods and does not invoke a singleton time derivative."
+    },
+    {
+      "from": "nonsmooth-contact-time-stepping-and-projections",
+      "to": "event-location-and-hybrid-trajectory-error",
+      "faithful": true,
+      "note": "Opened the contact page, event-driven sphere procedure and sphere guard/reset bounds. The consumer uses downward orientation, the full-state guard constant √2, a whole-bracket transverse margin, total reference error, separate reset-evaluation error and outgoing lag displacement. It compares matched prefixes and aligned reset states and requires explicit valid providers rather than claiming a universal rational checker for arbitrary C¹ forces."
+    }
+  ]
+}

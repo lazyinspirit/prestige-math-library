@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "77",
+  "cycle": 1,
+  "recorded_at": "2026-10-16T08:51:06.376087+00:00",
+  "status": "proposal-only-awaiting-root-independent-review",
+  "canonical_edits": false,
+  "confirmed_defect": "F-relaxation call count incorrectly includes i=1 although that operation assigns supplied b_1; FCF repeats this excess twice, and the recursive consumer repeats the formulas.",
+  "repair": "Change only the work-model text in the two algorithm Definition sections: F count N_f-N_c-1, FCF count 2(N_f-N_c-1)+N_c, with explicit no-call boundary assignment. C count N_c, coarse substitution counts, recursive visit/cost sum, caching and communication/span model unchanged. No new or wasted computation is introduced.",
+  "exact_count_proof": "There are N_f-N_c=N_c(m-1) F-indices. The first coarse interval contributes m-2 fine calls, since i=1 is a copy; each of the other N_c-1 intervals contributes m-1. Their sum is (m-2)+(N_c-1)(m-1)=N_f-N_c-1. Every C index is at least m>=2 and uses its Phi action, giving N_c calls. FCF composes two F passes and one C pass, so its count is 2(N_f-N_c-1)+N_c. Every noncoarsest recursive level has the same supplied-first-row convention and hence the same count per visit.",
+  "boundary_cases": "N=m=2 gives F=0, C=1, FCF=1, matching assignments u1=b1, u2=b2+Phi2u1, u1=b1. For one coarse interval and general m, F=m-2. Counts are nonnegative because m>=2 and N_f>=m. Budget zero or an initially converged iterate performs no relaxation; total visits/cycles already account for this. Initial b1 assembly, if charged, occurs when supplying the input and is not repeated by these F-relaxations.",
+  "source_inspection": "Read full actual two algorithms, all-at-once operator definition, Schur elimination proof, contraction theorem proof, scalar MGRIT example proof, native original repair/final review, and both A/B pages. The missing count follows directly from the specified operations; no external full-text reading is claimed.",
+  "consumer_search": "Searched all current items/ and library/ canonical-ID text and count formulas. Both changed algorithms have no aliases. Two-level direct item consumers are the recursive algorithm, contraction theorem and scalar example; the example also consumes the contraction theorem. The recursive algorithm has no downstream item consumer. A page lists both; B page lists the scalar example. No outside uses found.",
+  "consumer_dispositions": [
+    {
+      "id": "alg-mgrit-multilevel-recursive-cycle",
+      "decision": "accept-proposed",
+      "reason": "Same owner corrects the repeated per-visit F/FCF counts; supplied first-row convention holds at each recursive level and work sum remains intact."
+    },
+    {
+      "id": "thm-mgrit-contraction-implies-residual-and-error-decay",
+      "decision": "unchanged-compatible",
+      "reason": "Its entire proof uses the cycle matrix and induced norms; relaxation operations and error maps are unchanged."
+    },
+    {
+      "id": "ex-mgrit-scalar-diffusion-two-grid-contraction",
+      "decision": "unchanged-compatible",
+      "reason": "Its explicit F action sets e1=0 and propagates e3=alpha e2, so it already reflects one fine call for N_f=4,N_c=2. The E matrix, norm5/48 and residual/error conclusions do not use old counts."
+    },
+    {
+      "id": "parallel-in-time-parareal-and-mgrit",
+      "decision": "unchanged-compatible",
+      "reason": "Summary references general work/span dependence and all visited levels without an exact F count."
+    },
+    {
+      "id": "parallel-in-time-parareal-and-mgrit-examples",
+      "decision": "unchanged-compatible",
+      "reason": "Scalar example summary contains no relaxation count and remains supported."
+    }
+  ],
+  "next": "Root independently reviews exact full proposed carriers before any canonical application. Root owns metadata, native acceptance and recertification. No controls/gates/hashes/native-history edits performed."
+}

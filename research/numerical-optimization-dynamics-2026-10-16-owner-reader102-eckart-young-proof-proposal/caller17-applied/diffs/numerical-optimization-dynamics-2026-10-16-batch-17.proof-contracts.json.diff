@@ -1,0 +1,84 @@
+--- research/numerical-optimization-dynamics-2026-10-16-owner-reader102-eckart-young-proof-proposal/caller17-applied/before/research/numerical-optimization-dynamics-2026-10-16-batch-17.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-17.proof-contracts.json
+@@ -1463,7 +1463,8 @@
+           "source_section": "Statement",
+           "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+           "uses": [
+-            "1.1"
++            "1.1",
++            "1.2"
+           ]
+         },
+         {
+@@ -1538,6 +1539,15 @@
+           "uses": [
+             "2.2"
+           ]
++        },
++        {
++          "fact": "F9",
++          "source": "def-numerical-rank-relative-to-a-norm-scale-and-tolerance",
++          "source_section": "Definition",
++          "quote": "Let $m,n\\in\\mathbb{N}$, let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let\n$\\lVert\\cdot\\rVert$ be a declared norm on the matrix space\n$M_{m\\times n}(\\mathbb F)$, let $A\\in M_{m\\times n}(\\mathbb F)$, and let\n$\\tau\\ge 0$ be a declared tolerance. The **numerical rank of $A$ at\ntolerance $\\tau$** is\n\n$$\\operatorname{rank}_{\\tau}(A)\\;:=\\;\\min\\Bigl\\{\\,\\operatorname{rank}B\\;:\\;B\\in M_{m\\times n}(\\mathbb F),\\ \\lVert A-B\\rVert\\le\\tau\\,\\Bigr\\}.$$\n\nThe minimum exists: it is a minimum of a nonempty subset of the finite set\n$\\{0,1,\\dots,\\min(m,n)\\}$, the value $\\operatorname{rank}A$ being attained at\n$B=A$.\n\n**Scale.** The tolerance may be declared absolutely, as a real number\n$\\tau\\ge 0$, or relative to a scale, as $\\tau=\\tau_0\\lVert A\\rVert$ for a\ndeclared factor $\\tau_0\\ge 0$. Both enter the definition through the single\nthreshold $\\tau$; the scale only fixes which threshold is meant, and every\nstatement about $\\operatorname{rank}_{\\tau}$ is a statement about that one\nthreshold.\n\n**Why the exact-rank discontinuity forces the parameter.** Exact rank is\nlocally constant at the full-rank matrices but discontinuous at every\nnonmaximal-rank matrix\n([[thm-exact-rank-is-locally-constant-at-full-rank-and-discontinuous-at-nonmaximal-rank-matrices]]);\nan exact rank read from noisy data is therefore unstable. Numerical rank\nreplaces exact rank by the smallest exact rank attainable within the declared\nnorm tolerance $\\tau$: it is, by construction, constant on every open ball of\nradius below the relevant gaps, and it counts as rank exactly those directions\nthat perturbation of size at most $\\tau$ cannot erase.",
++          "uses": [
++            "1.2"
++          ]
+         }
+       ],
+       "derivations": [
+@@ -1554,12 +1564,15 @@
+         },
+         {
+           "id": "step-1-2",
+-          "claim": "By [F5], $q$ is the spectral numerical rank retained by the strict threshold. The SVD truncation and [F4] give $\\|A-A_\\tau\\|_2=\\sigma_{q+1}\\le\\tau$; when $q=p$, the tail is zero.",
++          "claim": "If $p=0$, the matrix has no singular-value terms, so $A_\\tau=A$, $q=0$, and its spectral numerical rank is zero because $A$ has rank zero and distance zero from itself by [F9]. If $p>0$, [F5] identifies $q$ with the spectral numerical rank retained by the strict threshold. When $q<p$, one has $q<p\\le n$, so [F4] applies with $k=q$ and gives $\\|A-A_\\tau\\|_2=\\sigma_{q+1}\\le\\tau$. When $q=p$, [F1] shows directly that all positive singular terms are retained, hence $A_\\tau=A$ and the residual norm is zero, equal to the stated convention $\\sigma_{p+1}=0$. This last branch also covers $p=0$ without applying [F4] or [F5] outside their dimension hypotheses.",
+           "step": "1.2",
+           "inputs": [
++            "F1",
+             "F4",
+             "F5",
+-            "F7"
++            "F7",
++            "F9",
++            "algebra"
+           ]
+         },
+         {
+@@ -1610,7 +1623,7 @@
+         {
+           "case": "empty",
+           "status": "checked",
+-          "evidence": "Proof steps 1.1, 1.2: An empty retained singular set gives the zero pseudoinverse and minimum-norm model solution zero; the claim remains about the truncated model."
++          "evidence": "Proof steps 1.1 and 1.2 cover an empty retained singular set and p=0: zero-dimensional matrices have rank and numerical rank zero by F9, and the complete SVD gives A_tau=A without an out-of-range positive-dimension theorem call."
+         },
+         {
+           "case": "zero",
+@@ -1630,7 +1643,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Steps 1.2 and 3.1 cover q=p, tau equality, and discarded positive singular values."
++          "evidence": "Proof step 1.2 applies Eckart–Young only when q<p<=n. At q=p the full SVD gives A_tau=A directly and the residual is zero; p=0 is handled from F1/F9, and equality sigma=tau remains discarded."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1658,6 +1671,19 @@
+           "status": "complete",
+           "evidence": "Fresh current source and exact prerequisites read in this continuation. Checked all six proof steps against SVD, canonical strict-threshold pseudoinverse, four Penrose equations, minimum-norm least-squares supplier, Eckart–Young and triangle/operator inequalities. Retained reciprocals have sigma>tau>=0; empty retained set gives zero matrices and unique minimum-norm solution zero. q=p and p=0 have zero tail directly, with no out-of-range Eckart–Young use needed. At equality sigma=tau the value is discarded. Residual bound follows by addition and norm control; zero discarded tail is sufficient for original-matrix optimality, and the theorem does not assert its necessity for a particular b. Output assertion is conditional on exact SVD convergence; finite-precision candidates remain uncertified. Scalar supplier now has explicit component/index order with first-term-copy folds. Its schedule preserves all coefficients and exact-versus-rounded distinctions used here; no source change to this carrier was necessary. Original reader/refuter and stabilized historical dispositions are retained in the focused report."
+         }
++      },
++      "owner_endpoint_citation_repair": {
++        "by": "same focused owner /root/num_ledger_10_18",
++        "basis": "ROOT authorized current caller17 source/proof-contract repair after actual published EckartYoung repair; native17 still owns its next independent current-source review.",
++        "source_before": "research/numerical-optimization-dynamics-2026-10-16-owner-reader102-eckart-young-proof-proposal/caller17-applied/before/items/thm-svd-thresholded-least-squares-minimum-norm-model.md",
++        "contract_before": "research/numerical-optimization-dynamics-2026-10-16-owner-reader102-eckart-young-proof-proposal/caller17-applied/before/research/numerical-optimization-dynamics-2026-10-16-batch-17.proof-contracts.json",
++        "changes": [
++          "Proof1.2 explicit q<p versus q=p and p=0 branches",
++          "F4/F5/F7 retain actual supplier hypotheses",
++          "Existing numerical-rank definition added as F9/directdep for p=0",
++          "Full new source quote, actual uses, changed1.2 derivation and concrete empty/endpoint evidence"
++        ],
++        "native_review_pending": true
+       }
+     },
+     "cor-computed-singular-values-absolute-error-from-backward-stability": {

@@ -1,0 +1,38 @@
+---
+id: alg-periodic-orbit-pseudoarclength-continuation
+kind: algorithm
+title: "Finite pseudo-arclength continuation of phase-fixed periodic orbits"
+status: draft
+origin: pipeline
+pipeline_run: numerical-optimization-dynamics-2026-10-16
+dependency_level: 7
+deps:
+  - alg-validated-periodic-orbit-corrector
+  - alg-pseudo-arclength-continuation-with-certified-local-corrector
+  - lem-phase-bordered-shooting-jacobian-invertibility
+  - thm-pseudo-arclength-local-newton-correction
+  - thm-c2-ode-flow-on-common-tube
+  - def-validated-periodic-shooting-jet-enclosure
+  - def-ck-euclidean-maps-and-diffeomorphisms
+justified_by: []
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+verification:
+  precheck: n/a
+sources:
+  references:
+    - title: "E. J. Doedel and B. E. Oldeman, AUTO-07P full manual (2021)"
+      url: "https://raw.githubusercontent.com/auto-07p/auto-07p/master/doc/auto.tex"
+      locator: "Full 12,856-line manual retrieved; inspected periodic families/Floquet source lines 587–645, ISP warning lines 4926–4950, and phase-shifting demo ph1 lines 6822–6863."
+---
+
+## Definition
+
+Let $f(x,\mu)$ be a $C^2$ one-parameter family in the map convention of [[def-ck-euclidean-maps-and-diffeomorphisms]], and let $G(x,T,\mu)$ be the parameterized phase-bordered shooting map of [[def-validated-periodic-shooting-jet-enclosure]]. Applying [[thm-c2-ode-flow-on-common-tube]] to its static-parameter augmented field $g(x,\mu)=(f(x,\mu),0)$ makes this shooting map $C^2$ on a common compact tube. The branch residual is $F=G:\mathbb R^{d+2}\to\mathbb R^{d+1}$. If a fold check is requested, additionally supply a verified $C^3$ neighborhood of the shooting map $G$ on the fold subtube, as required by [[alg-pseudo-arclength-continuation-with-certified-local-corrector]]; $C^2$ regularity of $f$ alone is not this evidence. Without it, retain fold status inconclusive and do not invoke the fold callback, while ordinary continuation may proceed without a fold request. A finite periodic-orbit continuation request supplies a validated seed section root, a unit orientation, step size, requested step count, finite continuation/corrector budgets, residual tolerance, angle margin, and the sound flow/jet range provider.
+
+At a certified root, a tangent routine must certify a unit vector in $\ker DF$ and a rank-$d+1$ condition. The predictor is advanced along that tangent. The corrector is [[alg-validated-periodic-orbit-corrector]] in section mode, which appends the pseudo-arclength plane and validates the resulting square residual by Krawczyk inclusion. Forward its complete finite input package: the candidate mode and its required pointwise evaluators if that mode uses them (or choose its enclosure-guided mode), rational initial candidate, a validation box with finite dyadic endpoints and its open convex shooting domain, nonzero rational phase covector and rational reference point, validated-jet step counts and arithmetic caps, preconditioner and exact inverse witness, minimum Krawczyk box width, and box/update budgets. For possibly nonrational tangent/predictor data, forward certified outward rational enclosures of the affine section row and its derivative; unavailable row bounds return inconclusive. The arithmetic evaluator supplies exact or interval-enclosed $F$ and $DF$ from the validated shooting jet, with queries reordered to $(x,\mu,T)$ and Jacobian columns returned to $(x,T,\mu)$ before adjoining the section row. The local inverse and chart interfaces are [[lem-phase-bordered-shooting-jacobian-invertibility]] and [[thm-pseudo-arclength-local-newton-correction]]. Run [[alg-pseudo-arclength-continuation-with-certified-local-corrector]] with these callbacks and its chart, angle, inverse, and finite-budget checks.
+
+When the fixed-parameter phase-bordered $(x,T)$ Jacobian is certified invertible, the full derivative $DF$ has row rank $d+1$: its $(x,T)$ columns already span $\mathbb R^{d+1}$. Thus a fold in the parameter projection does not by itself make the branch singular. Missing tangent/rank evidence, tube exit, failed Krawczyk inclusion, unresolved angle, or exhausted finite budgets returns the corresponding inconclusive status; no global branch-completeness claim is made. Any requested fold certificate is emitted only when the generic continuation algorithm's separate fold checks succeed.
+
+The generic section keeps the supplied previous unit orientation fixed as its normal during each attempt, while the predictor uses the current certified tangent candidate. Forward this previous normal and certify its angle with the current true kernel, along with the generic predictor-offset/chart inequalities. Finite termination is conditional on every invoked flow/jet, tangent, section and fold callback returning in finite time; an outer work budget is not a timeout for a nonreturning callback.

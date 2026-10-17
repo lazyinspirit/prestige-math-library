@@ -1,0 +1,47 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "30",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "alg-adaptive-euler-maruyama-on-predictable-grid",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "9ac4f778ac69066fac7cdd9ac779060c4df900b881f08b2c6571ea1754629f28",
+      "outcome": "false_positive",
+      "reason": "The cited lemma's Statement is restricted to the usual augmented Brownian filtration, but the algorithm explicitly invokes its upper-grid approximation and null-completion argument, rather than applying that restricted Statement as a black box. I checked the entire local proof: steps 1.1 and 2.1 require only adaptedness, an increasing filtration, bounded stopping times and path continuity; step 3.1 requires ambient null subsets in F_0, which the algorithm's usual conditions provide. No step uses Brownian naturalness, Gaussian laws or a filtration representation. Thus the expressly claimed extension of the argument is valid. Watkins, Definition 1.12 and Proposition 1.17 with its full proof (printed pp. 6-8), independently corroborate the filtration-general measurability mechanism. There is no unsupported inference requiring repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://public.econ.duke.edu/~get/browse/courses/883/Spr16/COURSE-MATERIALS/Z_Papers/notesc.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-adaptive-euler-maruyama-on-predictable-grid",
+      "disposition": "unaffected",
+      "post_sha256": "98972bf2e2dbd9cbc67a922ff767a9ef0e1e623a4874f3771e7a63b460333bcb",
+      "review_context_sha256": "e51231d94bbd89bbdf78783be318f610a63e2aece4aff33e46ee0b9b533fbdaa",
+      "reason": "Reviewed the full procedure, its owning contract and A-page interface, and the stopped-value supplier's complete proof. The argument extends to the stated usual filtered space; stopped-time event tests also give tau_n measurable at F_tau_n and F_tau_n contained in F_tau_(n+1). Borel coefficient evaluation then preserves endpoint measurability, and restricting stopped variables to {tau_n <= t} gives adapted interpolation. The two modes retain their distinct output types, stored bridge increments and completion-before-budget order. No item or metadata edit is needed; the guard equals the frozen assignment's before guard.",
+      "uncertain": false,
+      "source_urls": [
+        "https://public.econ.duke.edu/~get/browse/courses/883/Spr16/COURSE-MATERIALS/Z_Papers/notesc.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "No files other than this assigned report were changed. The Definition and every Statement remain unchanged, so no downstream propagation or published-consumer maintenance event is triggered.",
+    "Direct mathematical check: for each fixed t>0 round tau wedge t upward on the deterministic grid {k*t/2^n}. Each finite-valued approximation rho_n <= t has {rho_n=q} in F_q, so X_(rho_n) is F_t-measurable. Its limit where existent, set to zero elsewhere, is F_t-measurable and agrees with X_tau on {tau<=t} outside the common continuity-null event. Every subset of that exceptional event belongs to F_0 under the usual conditions. Therefore {X_tau in C} intersect {tau<=t} lies in F_t for each Borel C; t=T establishes ambient measurability, and t=0 follows from X_0. This is exactly the local cited proof, with no Brownian-filtration-specific step.",
+    "The phrase complete filtration is interpreted in the ambient-null-completion sense of the algorithm's usual conditions, rather than merely separate completeness of each F_t. That distinction is essential when paths are only almost surely continuous. It is also the convention in Watkins Definition 1.12.",
+    "Consulted Watkins sections 1.3-1.4, specifically Definition 1.12, the progressive-process definition and Proposition 1.17 with its full composition-of-measurable-maps proof. Its argument assumes progressive measurability and no Brownian natural filtration. I used the repository lemma's full deterministic-grid argument to verify the almost-sure-continuity case locally; no external reference substitutes for a local proof.",
+    "Focused check: node tools/tsx-run.mjs tools/precheck.mts items/alg-adaptive-euler-maruyama-on-predictable-grid.md --json exited 0: one file, zero checked proofs, zero failures, status not-applicable. Focused check: node tools/rendercheck.mjs items/alg-adaptive-euler-maruyama-on-predictable-grid.md --json exited 0: one checked file, no errors or warnings.",
+    "Immediately after completing the mathematical review, review-contexts returned the two hashes recorded in reviews. No supplier edit occurred. No proof-layout run is required for changed items because there are no changed item paths. No judges, stamps, central certificates, round state or shared ledgers were written. No unresolved mathematical obligation remains in this assigned tuple; engine collection and any later certification remain engine-owned."
+  ]
+}

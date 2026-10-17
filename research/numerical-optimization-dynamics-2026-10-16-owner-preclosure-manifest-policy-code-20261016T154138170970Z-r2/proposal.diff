@@ -1,0 +1,255 @@
+--- a/tools/step3-manifest-history.mjs
++++ b/tools/step3-manifest-history.mjs
+@@ -94,7 +94,90 @@
+     'owner continuity lacks the exact paused drained native downstream-manifest failure');
+   return archived;
+ }
+-export function historicalStep3Manifest(root,run,batch,r,route) {
++
++export const PRECLOSURE_MANIFEST_POLICY='owner-step3-preclosure-manifest-evidence-v1';
++const canonicalRoute=x=>Array.isArray(x)?x.map(canonicalRoute):x&&typeof x==='object'
++  ?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canonicalRoute(x[k])])):x;
++// A historical routing capture is not a reader observation or math acceptance.
++function preclosureArchive(root,run,batch,r,route,current) {
++  if(route.kind!=='downstream-consumer')return null;
++  const path=`research/${run}-step3-owner-preclosure-manifest-continuities.json`;
++  if(!existsSync(resolve(root,path)))return null;
++  const raw=bytes(root,path),doc=JSON.parse(raw);
++  assert(doc.version===1&&doc.kind===PRECLOSURE_MANIFEST_POLICY&&doc.run===run
++    &&doc.authorized_by==='owner'&&doc.owner_identity==='/root'&&doc.historical_only===true
++    &&doc.mathematical_acceptance===false&&doc.native_coverage_adopted===false
++    &&Number.isFinite(Date.parse(doc.recorded_at))&&typeof doc.reason==='string'
++    &&doc.reason.trim().length>=80&&Array.isArray(doc.entries)&&doc.entries.length>0,'invalid preclosure authority');
++  assert(doc.entries.every(e=>Number.isSafeInteger(e.route_index)&&e.route_index>=0
++    &&['manifest','consumer_manifest'].includes(e.field)),'invalid preclosure route identity');
++  const keys=doc.entries.map(e=>JSON.stringify([e.route_index,e.field]));
++  assert(new Set(keys).size===keys.length,'duplicate preclosure route');
++  const matches=doc.entries.filter(e=>e.route_index===route.index&&e.field===route.field);
++  if(!matches.length)return null;
++  const e=matches[0],evidence={[path]:sha(raw)};
++  const ownRef=q=>{
++    assert(typeof q?.path==='string'&&q.path.startsWith(`research/${run}-`)
++      &&!q.path.split('/').includes('..'),'preclosure evidence outside own run');
++    const b=ref(root,q);assert(evidence[q.path]===undefined||evidence[q.path]===q.sha256,'ambiguous preclosure evidence');
++    evidence[q.path]=q.sha256;return b;
++  };
++  assert(e.original?.path===r.path&&e.original.sha256===r.sha256
++    &&e.archive?.sha256===r.sha256&&e.preimage_origin?.sha256===r.sha256
++    &&e.route_registry?.path===route.registry&&typeof e.reason==='string'
++    &&e.reason.trim().length>=80,'wrong preclosure subject');
++  const registry=JSON.parse(ownRef(e.route_registry)),original=registry.routes?.[route.index];
++  assert(registry.version===1&&registry.run===run
++    &&registry.policy==='owner-step3-downstream-consumer-route-v1'
++    &&sha(JSON.stringify(canonicalRoute(original)))===e.route_entry_sha256
++    &&original?.[route.field]?.path===r.path&&original[route.field].sha256===r.sha256,
++    'changed original preclosure route');
++  assert((route.field==='manifest'?original.batch:original.consumer_batch)===String(batch),'wrong preclosure batch');
++  const historical=ownRef(e.archive);assert(ownRef(e.preimage_origin).equals(historical),'original full preimage differs');
++  assert(e.current?.path===r.path&&e.current.sha256===sha(current)
++    &&ownRef(e.current_archive).equals(current),'current manifest capture differs');
++  evidence[r.path]=e.current.sha256;
++  const identity=b=>{
++    const d=JSON.parse(b),pages=Array.isArray(d)?d:d.pages;
++    assert(Array.isArray(pages),'invalid manifest pages');
++    const ids=[],itemIds=[];
++    const value=pages.map(p=>{assert(typeof p.id==='string'&&Array.isArray(p.items),'invalid page identity');ids.push(p.id);
++      const items=p.items.map(x=>typeof x==='string'?x:x.id);assert(items.every(x=>typeof x==='string'),'invalid item identity');
++      itemIds.push(...items);return {id:p.id,category:p.category??null,kind:p.kind??null,items:items.sort()};}).sort((a,b)=>a.id.localeCompare(b.id));
++    assert(new Set(ids).size===ids.length&&new Set(itemIds).size===itemIds.length,'ambiguous manifest identity');
++    return JSON.stringify(value);
++  };
++  assert(identity(historical)===identity(current),'changed historical/current page or item identity');
++  const prefix=`research/${run}-dispatch/alpha-3a-batch-${batch}`;
++  assert(new RegExp(`^${prefix}\\.attempt-[1-9]\\d*\\.result\\.json$`).test(e.native_result?.path),'nonimmutable Alpha result');
++  const result=JSON.parse(ownRef(e.native_result));
++  assert(result.run===run&&result.role==='alpha'&&result.label===`3a-batch-${batch}`
++    &&result.ok===true&&result.exit_code===0&&result.process_exit_code===0&&result.timed_out!==true
++    &&result.terminal_summary?.task_completed===true&&result.terminal_summary.task_aborted===false
++    &&result.terminal_summary.final_response_present===true
++    &&result.covers?.map(String).includes(String(batch))&&Number.isFinite(Date.parse(result.started_at))
++    &&Number.isFinite(Date.parse(result.ended_at))&&Date.parse(result.started_at)<=Date.parse(result.ended_at)
++    &&Date.parse(result.ended_at)<=Date.parse(doc.recorded_at),'Alpha did not genuinely complete');
++  assert(e.native_report?.path===`research/${run}-alpha-batch-${batch}-3a.md`
++    &&typeof result.tail==='string'&&result.tail.includes(e.native_report.path),'Alpha completion lacks actual report');
++  const report=ownRef(e.native_report);assert(report.length>0,'empty native Alpha report');
++  const reconciliation=JSON.parse(ownRef(e.current_metadata_evidence));
++  assert(reconciliation.version===1&&reconciliation.kind==='owner-step3-current-manifest-reconciliation'
++    &&reconciliation.run===run&&reconciliation.owner_identity==='/root'
++    &&reconciliation.mathematical_acceptance===false&&reconciliation.native_coverage_adopted===false
++    &&reconciliation.bindings?.[r.path]===e.current.sha256
++    &&reconciliation.original_bindings?.[r.path]===r.sha256
++    &&reconciliation.native_result?.path===e.native_result.path
++    &&reconciliation.native_result.sha256===e.native_result.sha256
++    &&Number.isFinite(Date.parse(reconciliation.recorded_at))
++    &&Date.parse(reconciliation.recorded_at)>=Date.parse(result.ended_at)
++    &&Date.parse(reconciliation.recorded_at)<=Date.parse(doc.recorded_at)
++    &&typeof reconciliation.reason==='string'&&reconciliation.reason.trim().length>=80,
++    'missing genuine current root metadata reconciliation');
++  return {historical,current,archived:true,evidence};
++}
++
++export function historicalStep3Manifest(root,run,batch,r,route,{preclosure=false}={}) {
+   assert(/^[a-zA-Z0-9_-]+$/.test(run)&&/^[1-9]\d*$/.test(String(batch))
+     &&r?.path===`research/${run}-batch-${batch}.pages.json`&&/^[a-f0-9]{64}$/.test(r.sha256??''),'wrong manifest reference');
+   const current=bytes(root,r.path);
+@@ -103,6 +186,7 @@
+     &&['required-page','downstream-consumer'].includes(route.kind)
+     &&route.registry===`research/${run}-step3-owner-${route.kind}-routes.json`,
+     'invalid historical route identity');
++  if(preclosure){const captured=preclosureArchive(root,run,batch,r,route,current);if(captured)return captured;}
+   const historical=ownerArchive(root,run,r,route)??certifiedArchive(root,run,r);
+   return {historical,current,archived:true};
+ }
+--- a/tools/step3-owner-downstream-consumer-routes.mjs
++++ b/tools/step3-owner-downstream-consumer-routes.mjs
+@@ -3,7 +3,7 @@
+ import { existsSync, readFileSync, readdirSync, lstatSync } from 'node:fs';
+ import { resolve, relative, isAbsolute } from 'node:path';
+ import { split, yaml } from './pathway-lib.mjs';
+-import { historicalStep3Manifest } from './step3-manifest-history.mjs';
++import { historicalStep3Manifest, PRECLOSURE_MANIFEST_POLICY } from './step3-manifest-history.mjs';
+ import { draftOwnerMatcher } from './run-draft-ownership.mjs';
+ import { requiredPageHash as hash } from './step3-owner-required-page-routes.mjs';
+ export const downstreamConsumerHash = hash;
+@@ -88,8 +88,14 @@
+     && sha(before)===pre.hashes?.[e.supplier_id]?.item_sha256
+     && sha(after)===post.hashes?.[e.supplier_id]?.item_sha256 && sha(before)!==sha(after),'assigned supplier did not actually change pre/post');
+   for(const [key,batch,item] of [['manifest',e.batch,e.supplier_id],['consumer_manifest',e.consumer_batch,e.consumer_id]]) {
+-    const manifest=JSON.parse(ref(root,e[key],`research/${run}-batch-${batch}.pages.json`));
+-    assert(inventory(manifest).filter(x=>x===item).length===1,'subject absent or duplicated in assigned manifest');
++    assert(binding.path===`research/${run}-step3-owner-downstream-consumer-routes.json`,'wrong route binding');
++    const registry=JSON.parse(bytes(root,binding.path));
++    const index=registry.routes?.findIndex(candidate=>hash(candidate)===binding.entry_sha256);
++    assert(Number.isSafeInteger(index)&&index>=0&&hash(e)===binding.entry_sha256,'lost exact route index');
++    const manifest=historicalStep3Manifest(root,run,batch,e[key],
++      {kind:'downstream-consumer',registry:binding.path,index,field:key},{preclosure:true});
++    for(const value of [manifest.historical,manifest.current])
++      assert(inventory(JSON.parse(value)).filter(x=>x===item).length===1,'subject absent or duplicated in historical/current manifest');
+   }
+   // This immutable owner capture establishes the routing edge, not what the
+   // reader saw. Later genuine consumer repairs use their own current carrier.
+@@ -150,7 +156,8 @@
+   }
+   return route;
+ }
+-export function downstreamConsumerClosureEvidence(root,run) {
++export function downstreamConsumerClosureEvidence(root,run,manifestPolicy=null) {
++  assert(manifestPolicy===null||manifestPolicy===PRECLOSURE_MANIFEST_POLICY,'unknown manifest evidence policy');
+   assert(safe(run),'invalid run');const p=`research/${run}-step3-owner-downstream-consumer-routes.json`;
+   if(!existsSync(resolve(root,p)))return {};
+   const raw=bytes(root,p),doc=JSON.parse(raw);
+@@ -161,10 +168,17 @@
+     const r=e[key];
+     if(['manifest','consumer_manifest'].includes(key)){
+       const batch=key==='manifest'?e.batch:e.consumer_batch,item=key==='manifest'?e.supplier_id:e.consumer_id;
+-      const manifest=historicalStep3Manifest(root,run,batch,r,{kind:'downstream-consumer',registry:p,index,field:key});
++      const manifest=historicalStep3Manifest(root,run,batch,r,{kind:'downstream-consumer',registry:p,index,field:key},
++        {preclosure:manifestPolicy===PRECLOSURE_MANIFEST_POLICY});
+       for(const value of [manifest.historical,manifest.current])assert(inventory(JSON.parse(value)).filter(id=>id===item).length===1,
+         'subject absent or duplicated in historical/current assigned manifest');
+       if(manifest.archived)currentOwnership(root,run,e);
++      if(manifestPolicy===PRECLOSURE_MANIFEST_POLICY&&manifest.evidence){
++        for(const [path,digest] of Object.entries(manifest.evidence)){
++          assert(out[path]===undefined||out[path]===digest,'ambiguous current/historical evidence');out[path]=digest;
++        }
++        continue; // Live path binds CURRENT bytes; the historical SHA binds its archive.
++      }
+     }else ref(root,r);
+     assert(out[r.path]===undefined || out[r.path]===r.sha256,'ambiguous historical reference');out[r.path]=r.sha256;
+   }
+--- a/tools/step3-close.mjs
++++ b/tools/step3-close.mjs
+@@ -8,6 +8,7 @@
+ import { join, resolve } from 'node:path';
+ import { itemHashGuard } from './item-hash.mjs';
+ import { requiredPageClosureEvidence } from './step3-owner-required-page-routes.mjs';
++import { PRECLOSURE_MANIFEST_POLICY } from './step3-manifest-history.mjs';
+ import { downstreamConsumerClosureEvidence } from './step3-owner-downstream-consumer-routes.mjs';
+ import { closureEvidence, OBSERVATION_EVIDENCE_POLICY } from './step3-owner-unbound-reader-observations.mjs';
+ import { isPublishedItem } from './published-repair-policy.mjs';
+@@ -40,12 +41,12 @@
+   || (name.startsWith(`${run}-alpha-`) && name.endsWith('-3a-decisions.json'))
+   || version === 2 && [ `${run}-alpha-3b.md`, `${run}-cross-group-edges.json`,
+     `${run}-3b-verdicts.jsonl` ].includes(name)).sort();
+-const artifactHashes = (version = 3, observationPolicy = null) => ({
++const artifactHashes = (version = 3, observationPolicy = null, manifestPolicy = null) => ({
+   ...Object.fromEntries(artifactNames(version).map((name) => [
+     `research/${name}`, sha256(readFileSync(R('research', name))),
+   ])),
+   ...(version === 3 ? requiredPageClosureEvidence(root, run) : {}),
+-  ...(version === 3 ? downstreamConsumerClosureEvidence(root, run) : {}),
++  ...(version === 3 ? downstreamConsumerClosureEvidence(root, run, manifestPolicy) : {}),
+   ...(version === 3 && observationPolicy === OBSERVATION_EVIDENCE_POLICY ? closureEvidence(root, run) : {}),
+ });
+ const jsonl = (path) => existsSync(path)
+@@ -87,7 +88,11 @@
+     && (receipt.version !== 3 || receipt.observation_evidence_policy !== OBSERVATION_EVIDENCE_POLICY)) {
+     fail('unknown or unsupported observation_evidence_policy');
+   }
+-  const currentArtifacts = artifactHashes(receipt.version, receipt.observation_evidence_policy);
++  if (Object.hasOwn(receipt, 'manifest_evidence_policy')
++    && (receipt.version !== 3 || receipt.manifest_evidence_policy !== PRECLOSURE_MANIFEST_POLICY)) {
++    fail('unknown or unsupported manifest_evidence_policy');
++  }
++  const currentArtifacts = artifactHashes(receipt.version, receipt.observation_evidence_policy, receipt.manifest_evidence_policy);
+   if (JSON.stringify(Object.keys(currentArtifacts).sort()) !== JSON.stringify(Object.keys(receipt.artifacts ?? {}).sort())) {
+     errors.push('the exact Step-3 artifact set changed');
+   }
+@@ -121,13 +126,14 @@
+   if (result.error) fail(`${label} could not complete: ${result.error.message}`);
+   if (result.status !== 0) fail(`${label} failed\n${result.stderr || result.stdout}`);
+ }
+-const artifacts = artifactHashes(3, OBSERVATION_EVIDENCE_POLICY);
++const artifacts = artifactHashes(3, OBSERVATION_EVIDENCE_POLICY, PRECLOSURE_MANIFEST_POLICY);
+ if (!Object.keys(artifacts).length) fail('no exact Step-3 artifacts exist');
+ const ledgerRows = step3LedgerRows();
+ writeFileSync(receiptPath, `${JSON.stringify({
+   version: 3,
+   basis: 'dependency-ordered-step3a',
+   observation_evidence_policy: OBSERVATION_EVIDENCE_POLICY,
++  manifest_evidence_policy: PRECLOSURE_MANIFEST_POLICY,
+   run,
+   status: 'closed',
+   closed_at: new Date().toISOString(),
+--- /dev/null
++++ b/tools/step3-preclosure-manifest-continuity.md
+@@ -0,0 +1,39 @@
++# Historical downstream manifests before first Step3 closure
++
++This is a research-only native-policy proposal. It supplies no edit permission, historical reader observation, mathematical acceptance or new native coverage. No proposed tool was executed, tested, installed or hashed.
++
++The existing three target modules are `step3-manifest-history.mjs`, `step3-owner-downstream-consumer-routes.mjs`, and `step3-close.mjs`. The first filename has no `owner-` prefix in this repository. Full actual before and proposed files and a unified diff accompany this document. Root must guard their current bytes against `before/` before installing, especially the concurrently maintained close tool.
++
++## Strict new record
++
++Root creates `research/R-step3-owner-preclosure-manifest-continuities.json` only after final manifest bytes stabilize. Its envelope is:
++
++- version 1; kind `owner-step3-preclosure-manifest-evidence-v1`; exact run;
++- authorized_by `owner`; owner_identity `/root`; historical_only true;
++- mathematical_acceptance false; native_coverage_adopted false;
++- genuine recorded_at and substantive reason (at least80characters);
++- nonempty entries with unique `(route_index,field)` tuples.
++
++Each entry contains `route_index`, `field` (`manifest` or `consumer_manifest`), substantive `reason`, `original` (the UNCHANGED route reference), `route_registry` (actual original canonical registry path/rawSHA), `route_entry_sha256` (existing canonical sorted-object route hash, not raw JSON field-order hash), `archive`, `preimage_origin`, `current` (canonical path/currentSHA), `current_archive`, `native_result`, `native_report`, and `current_metadata_evidence`. All references have `{path,sha256}`. Every archive/evidence path must be a regular nonsymlink own-run research file with no `..` path segment, even if normalization would stay inside the repository. Root supplies actual hashes and timestamps; this proposal creates no sealed evidence.
++
++The authenticated preimage origins for the current run are the FULL original manifests at `research/numerical-optimization-dynamics-2026-10-16-owner-step2-three-errors-final-binding-before/manifests/numerical-optimization-dynamics-2026-10-16-batch-{6,20,36}.pages.json`. Root's `ROOT-original-downstream-manifest-search.json` authenticates their original route SHAs. Five entries are needed: index0/manifest (batch6), index1/manifest, index2/manifest, index3/manifest (batch20), index4/manifest (batch36). Full-byte archives may be shared for three batch20 entries. No original entry or finding binding changes.
++
++`current_metadata_evidence` is a NEW truthfully dated root reconciliation record, not a rewrite of historical native authority. It has version1, kind `owner-step3-current-manifest-reconciliation`, exact run, owner_identity `/root`, mathematical_acceptance false, native_coverage_adopted false, `bindings:{canonicalManifestPath:CURRENT_SHA}`, `original_bindings:{canonicalManifestPath:ORIGINAL_ROUTE_SHA}`, exact `native_result:{path,sha256}`, actual `recorded_at`, and substantive `reason` explaining actual manifest deltas and root reconciliation. Its date must be at/after successful native completion and at/before continuity registration. Root may put actual existing operation/receipt pointers in additional fields; original publication/native histories remain untouched. The record does not assert that Alpha authored root's later metadata.
++
++The immutable native result must be the actual successful `alpha-3a-batch-B.attempt-N.result.json`, with exact run/alpha role/label, both zero exit codes, not timedout, actual terminal_summary.task_completed true, task_aborted false and final_response_present true, batch cover, ordered actual start/end dates and completion before registration. Its final response must name the exact nonempty hash-bound current native report. For this run the actual completed attempts are6attempt2,20attempt1,36attempt1. Root must not repoint a stable result alias and call it immutable.
++
++## What the implementation verifies
++
++Original full archive bytes equal the authenticated original SHA and durable original capture. Current full archive equals current live bytes and its sealed currentSHA. Historical/current page IDs, category, kind (where present), and each page's exact item-ID inventory are equal, with duplicates rejected. Missing category/kind normalize to null; any actual value change rejects. The existing current ownership/draft/run/directdependency checks remain in the downstream loader and closure path; neither the original null consumer nor original unbound observation is reconstructed. Original reader/refuter native-result and structured-tail checks are unchanged.
++
++Validation now obtains the exact full-registry index from the existing entry binding, rather than adding a field to that entry. It passes that index into the history helper for both original manifest references. Only the explicit new helper option admits new typed preclosure continuity; default callers retain old postclosure/certifiedStep5 branches byte-for-byte. Invalid matching new evidence throws, never silently falls back.
++
++## Closure compatibility
++
++New close receipts carry `manifest_evidence_policy: owner-step3-preclosure-manifest-evidence-v1`. Only that marker opts into the extra registry/provenance/result/report/current/archive evidence. Unknown or version2 markers reject. Unmarked old v2/v3 receipts retain their old artifact-set behavior; no fallback changes an unmarked historical closure into the new policy.
++
++For a new continuity, the current canonical manifest path binds CURRENT bytes, while the historical original SHA binds its archive path. This avoids asserting that a historical SHA describes a changed live file. Every new provenance reference and the continuity registry are frozen in the marked artifact set. Neither close checks, stageIDs nor ordinary currency/splice prerequisites are altered. Do not run close before the ordinary native battery.
++
++The new record is deliberately strict about its sealed current manifest. Any subsequent manifest change requires a separately supported native continuity/repair route; this proposal does not authorize editing its currentSHA or rewriting a frozen close receipt. In particular a later Step5 manifest change must not be silently accepted through this first-closure capture. Existing old history branches remain available to their original callers; this new branch is not a universal future-manifest waiver.
++
++Root installs only after full source review and exact before-byte guards, then supplies actual registry/current reconciliation captures. Root owns tool policy sealing, checks, native reload if needed, carrier hashes and closure. No optional tests were run by this worker.

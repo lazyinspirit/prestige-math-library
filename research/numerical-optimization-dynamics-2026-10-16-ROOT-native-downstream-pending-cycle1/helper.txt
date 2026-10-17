@@ -1,0 +1,82 @@
+// An explicit native pending consumer is an owner-wave duty, even when the
+// old initial source review still matches an unchanged Statement/Definition.
+function nativeDownstreamPending(root,run,packs,receipts,items,current) {
+  const contexts=reviewContexts(items),frontier=gateFrontier(root,run),claims=[],records=[],evidence={};
+  const bound=(receipt,path)=>receipt.evidence?.[path]===digest(readFileSync(path,'utf8'));
+  const success=record=>{
+    const {pack,receipt,unit,report,reportPath}=record;
+    const label=workerLabel(pack.phase,pack.round,unit);
+    const dispatchPath=join(root,'research',`${run}-dispatch`,`alpha-repair-${label}.result.json`);
+    requireValue(receipt.run===run&&receipt.phase===pack.phase&&receipt.round===pack.round
+      &&report.run===run&&report.phase===pack.phase&&report.round===pack.round&&String(report.unit)===unit
+      &&report.input_sha256===digest(pack)&&bound(receipt,reportPath)&&bound(receipt,dispatchPath)
+      &&bound(receipt,packPath(root,run,pack.phase,pack.round)),
+      'native pending work lacks its original exact collected report/pack/dispatch');
+    const native=read(dispatchPath);
+    requireValue(native.run===run&&native.role==='alpha-repair'&&native.label===label
+      &&native.ok===true&&native.model===MODELS.sol61.id&&native.provider_effort==='high'
+      &&JSON.stringify(native.covers)===JSON.stringify([unit])
+      &&native.exit_code===0&&native.process_exit_code===0&&native.timed_out===false
+      &&native.terminal_summary?.task_completed===true&&native.terminal_summary.task_aborted===false
+      &&native.terminal_summary.final_response_present===true&&native.terminal_summary.error_events===0
+      &&Number.isSafeInteger(native.attempt)&&native.attempt>0&&native.evidence_tag===`.attempt-${native.attempt}`,
+      'native pending work requires genuine successful immutable owner execution');
+    const attemptPath=dispatchPath.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`);
+    requireValue(readFileSync(attemptPath,'utf8')===readFileSync(dispatchPath,'utf8'),
+      'native pending work immutable attempt differs from original collected result');
+    for(const path of [reportPath,dispatchPath,attemptPath])evidence[path]=digest(readFileSync(path,'utf8'));
+    return {dispatchPath,attemptPath,native};
+  };
+  for(let index=0;index<packs.length;index++){
+    const pack=packs[index],receipt=receipts[index];
+    for(const unit of pack.units){
+      const reportPath=workerReport(root,run,pack.phase,pack.round,unit),report=read(reportPath);
+      const record={pack,receipt,unit,report,reportPath,index};records.push(record);
+      if(report.downstream_pending===undefined)continue;
+      requireValue(Array.isArray(report.downstream_pending)&&Array.isArray(report.downstream)
+        &&report.downstream_pending.length<=report.downstream.length
+        &&new Set(report.downstream_pending).size===report.downstream_pending.length
+        &&report.downstream_pending.every(id=>typeof id==='string'&&frontier.has(id)
+          &&report.downstream.includes(id)&&receipt.downstream?.includes(id)),
+        'native downstream_pending must be unique actual downstream frontier IDs');
+      if(!report.downstream_pending.length)continue;
+      const auth=success(record);
+      for(const id of report.downstream_pending)claims.push({id,unit,phase:pack.phase,index,
+        report:reportPath,dispatch:auth.dispatchPath,attempt:auth.attemptPath,
+        affected_use:typeof report.downstream_uses?.[id]==='string'?report.downstream_uses[id]:null});
+    }
+  }
+  const pending=new Map(),coverage=[];
+  for(const id of [...new Set(claims.map(row=>row.id))].sort()){
+    const latest=Math.max(...claims.filter(row=>row.id===id).map(row=>row.index));
+    let match=null;
+    // A same-wave sibling or later genuine owner review may discharge the
+    // consumer. Initial adjudicator reviews and earlier passes cannot do so.
+    for(const record of records.filter(row=>row.index>=latest))for(const review of record.report.reviews??[]){
+      if(review.id!==id||!record.pack.assignments[record.unit]?.includes(id)
+        ||!contexts.matches(review,current,record.receipt.post))continue;
+      requireValue(record.receipt.reviews.some(row=>digest(row)===digest(review)),
+        'pending consumer review is absent from its original native collection');
+      const auth=success(record);match={id,phase:record.pack.phase,unit:record.unit,
+        report:record.reportPath,dispatch:auth.dispatchPath,review_sha256:digest(review)};
+    }
+    if(match)coverage.push(match);
+    else {
+      const claim=claims.filter(row=>row.id===id&&row.index===latest).sort((a,b)=>a.unit.localeCompare(b.unit))[0];
+      pending.set(id,claim.unit);
+      // Selecting a lane must resume the actual reporting reviewer, not a
+      // coincidentally numbered fresh process. Existing session routing is reused.
+      const origin=join(root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel('impact-initial',1,claim.unit)}.result.json`);
+      const first=read(origin),reporting=read(claim.dispatch),home=resolve(root,'.autopilot',run,'step5-reader-owner-sessions',`u${claim.unit}`);
+      requireValue(first.run===run&&first.role==='alpha-repair'&&first.ok===true
+        &&first.model===MODELS.sol61.id&&first.provider_effort==='high'
+        &&typeof first.session_home==='string'&&resolve(root,first.session_home)===home
+        &&typeof first.session_id==='string'&&first.session_id.length>0
+        &&typeof reporting.session_home==='string'&&resolve(root,reporting.session_home)===home
+        &&reporting.session_id===first.session_id,'pending consumer lacks its actual persistent reporting owner');
+      evidence[origin]=digest(readFileSync(origin,'utf8'));
+    }
+  }
+  return {obligations:claims,pending,coverage,evidence};
+}
+

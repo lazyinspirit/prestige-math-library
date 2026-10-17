@@ -12,6 +12,9 @@ import { itemHashGuard } from './item-hash.mjs';
 import { currentHashesMany } from './step5-terminal-resolution.mjs';
 import { MODELS } from './models.mjs';
 import { supportingQuoteHistory } from './step5-quote-history.mjs';
+import { loadInitialMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
+import { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';
+import { createdMaintenanceBasis } from './step5-created-maintenance-cert.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 import { gateDiagnostics } from './step5-gate-diagnostics.mjs';
 import { FATAL_TYPES } from './step5-adjudication-compat.mjs';
@@ -19,6 +22,7 @@ import { restatedIds, statementHash } from './step5-statement.mjs';
 import { syncMaintenance, maintenanceStatus, prepareMaintenance, collectMaintenance } from './consumer-maintenance.mjs';
 import { orderedItems, runPages } from './item-dependency-levels.mjs';
 import { loadReaderConcerns, checkFrozenReaderConcernInput, readerConcernSession } from './step5-reader-concerns.mjs';
+import { loadInitialScopeFindings, checkFrozenInitialScopeFindingInput, recordInitialScopeFindings } from './step5-initial-scope-findings.mjs';
 export { readerConcernSession };
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
@@ -193,6 +197,8 @@ function repairedRun44LedgerHistory(history,path,expected) {
 function supportingMetadataHistory(history,path,expected) {
   const quotes = supportingQuoteHistory(history,path,expected);
   if (quotes) return quotes;
+  const metadata = initialMetadataSupportingHistory(history,path,expected);
+  if (metadata) return metadata;
   if(!history||history.run!=='frontier-44-special-representation-examples-28-six-step')return null;
   const {root,run}=history,base=join(root,'research',`${run}-owner-escalation-repairs`,
     'resume-20261011','step5-evidence-handoff');
@@ -588,6 +594,8 @@ function writeTasks(root,pack,mode) {
         ? `Read this batch's rejection-blind Step-4 review digest first: ${batchDigest}. Its findings are evidence, not authority; verify relevant concerns against the current item files and the assigned judge tuples.` : '',
       pack.reader_concerns?.some(row=>assigned.includes(row.id))
         ? `Owner-confirmed Step-4 reader concerns assigned for genuine current review and smallest necessary repair (these are not judge rejections or downstream claims):\n${JSON.stringify(pack.reader_concerns.filter(row=>assigned.includes(row.id)),null,2)}. Review the bound original digest and individual owner evidence; repair confirmed presentation defects as well as mathematical defects. Return ordinary reviews, with no adjudication decision for these concerns. Only actual Statement/Definition changes propagate consumer examinations.` : '',
+      pack.initial_scope_findings?.some(row=>assigned.includes(row.id))
+        ? `Owner-confirmed findings from original native initial adjudication, assigned for current review and smallest necessary repair:\n${JSON.stringify(pack.initial_scope_findings.filter(row=>assigned.includes(row.id)),null,2)}. Read the original native report/finding and bound individual root instructions. These are explicit work requests, not Step-4 reader concerns, judge rejections, new adjudication decisions, or current acceptance. Return ordinary reviews with no adjudication decision. Only actual Statement/Definition changes propagate consumer examination.` : '',
       `Write only your assigned frontier item files, their necessary owning contracts/metadata, and ${report}.`,
       'Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.',
       'SCOPE: repair only assigned draft frontier items. Published repairs have no item gate, rejudge or adjudication obligation; record their findings separately. Outside consumers are handled by consumer maintenance. Record affected uses without turning them into frontier blockers.',
@@ -601,6 +609,8 @@ function writeTasks(root,pack,mode) {
       mode==='adjudicate' ? 'Return a decision for every exact rejected tuple; decisions use outcome confirmed_fatal, confirmed_nonfatal, or false_positive. Each confirmed_fatal decision requires defect_type: logic, dependency_citation, or other, based on the actual finding. Both confirmed fatal and confirmed nonfatal findings require completed repairs. Do not edit false-positive items.' :
         'Examine assigned frontier consumers, not the whole library. Assignment requires examination, not an edit. Leave a sound consumer byte-for-byte unchanged with an item-specific explanation. Repair only an actual logical defect using the smallest sufficient edit; no stylistic or unrelated rewriting. Work supplier-before-consumer and reconcile only metadata actually invalidated. A reference is not automatic repair authority. Report direct downstream effects of statement changes, including outside consumers for separate maintenance.',
       `Return JSON {run:"${pack.run}",phase:"${pack.phase}",round:${pack.round},unit:"${unit}",input_sha256:"${digest(pack)}",decisions:[],reviews:[],created_items:[],downstream:[]}. Copy these exact identity values; a phase such as impact-repeat is not repeat. Each decision includes id,model,context_sha256,outcome,reason,uncertain:false,source_urls:[...],familiar:boolean. Each review includes id,disposition:"repaired"|"unaffected"|"authored",post_sha256,review_context_sha256,reason,uncertain:false,source_urls,familiar. Disposition describes the item carrier: if its itemHashGuard is unchanged from the assignment before hash, use unaffected even when you repaired a contract or page; retain those metadata repairs explicitly in the reason and metadata_repair_only:true. Never claim an item repair without an item change. All assigned and created items require a review; only a newly created item uses authored. Each created_items row includes id,kind,home_page,batch,consumers:[direct consumer IDs],reason,uncertain:false,source_urls,familiar. Reasons must explain actual logical checks (at least 40 characters). familiar:false requires authoritative source URLs actually consulted; never switch it to true merely to pass validation. Unresolved uncertainty blocks completion.`,
+      pack.native_downstream_pending?.some(row=>assigned.includes(row.id))
+        ? `Explicit native pending consumer work (read the unchanged original report and examine actual current supplier effects): ${JSON.stringify(pack.native_downstream_pending.filter(row=>assigned.includes(row.id)))}. An earlier initial adjudicator review does not discharge this assignment. Return a genuine current review and repair only confirmed defects.` : '',
       `Immediately after completing each mathematical review, before editing another supplier, run node tools/step5-workflow.mjs review-contexts --run ${pack.run} --items ID and copy its post_sha256 and review_context_sha256 into that review. You may batch ids reviewed on the same stable state. Never recompute an old review's context after a supplier edit without actually reviewing its effects again. The controller will schedule unresolved effects before certification.`,
       pack.reader_review_owners?`This pass retains your own genuine prior reviewer session. Selected same-reviewer obligations for this lane: ${assigned.filter(id=>pack.reader_review_owners[id]===unit).join(', ')||'(none)'}. Actually examine each current assigned consumer against your earlier supplier changes. Another reviewer may separately owe the same consumer in a later serialized pass; your review supplies only your own obligation.`:'',
       mode==='adjudicate' ? 'The assigned tuples below are ordered by increasing in-run dependency level. Adjudicate and repair lower-level items before higher-level items within this batch; keep multiple tuples for the same item together.' : '',
@@ -1054,7 +1064,7 @@ function loadSupplierRepairs(root,pack,reports,current,items) {
   return {pack_sha256:digest(pack),resolved,evidence,path,[supplierRepairSeal]:true};
 }
 
-export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,operationalSupplement=null,supplierRepairs=null}={}) {
+export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,currentRepairs=null,operationalSupplement=null,supplierRepairs=null}={}) {
   const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
   requireValue(!ownerSupplement||(root&&ownerSupplement[ownerSupplementSeal]===true
     &&ownerSupplement.pack_sha256===digest(pack)),'owner supplement must pass native guarded loading');
@@ -1062,8 +1072,15 @@ export function validateReports(pack,reports,now,{root=null,ownerSupplement=null
     &&operationalSupplement.pack_sha256===digest(pack)),'unvalidated operational supplement');
   requireValue(!supplierRepairs||(root&&supplierRepairs[supplierRepairSeal]===true
     &&supplierRepairs.pack_sha256===digest(pack)),'unvalidated supplier repair supplement');
-  const ownerReviews=new Map((ownerSupplement?.reviews??[]).map(row=>[row.id,row]));
-  const ownerDecisions=new Map((ownerSupplement?.decisions??[]).map(row=>[key(row),row]));
+  requireValue(!currentRepairs||(root&&currentRepairs[ownerSupplementSeal]===true
+    &&currentRepairs.pack_sha256===digest(pack)),'unvalidated current-root repair supplement');
+  const ownerReviews=new Map(),ownerDecisions=new Map();
+  for(const row of [...(ownerSupplement?.reviews??[]),...(currentRepairs?.reviews??[])]){
+    requireValue(!ownerReviews.has(row.id)||digest(ownerReviews.get(row.id))===digest(row),'conflicting coexisting current root reviews');ownerReviews.set(row.id,row);
+  }
+  for(const row of [...(ownerSupplement?.decisions??[]),...(currentRepairs?.decisions??[])]){
+    requireValue(!ownerDecisions.has(key(row))||digest(ownerDecisions.get(key(row)))===digest(row),'conflicting coexisting original-classification decisions');ownerDecisions.set(key(row),row);
+  }
   for(const unit of pack.units) {
     const report=reports.find(r=>String(r.unit)===unit);
     if(!report||report.run!==pack.run||report.phase!==pack.phase||report.round!==pack.round||report.input_sha256!==digest(pack)) { errors.push(`missing or mismatched report ${unit}`);continue; }
@@ -1286,7 +1303,16 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   const pack=readPack(root,run,phase,round);
   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
   const current=hashes(root,run),reported={...current},items=readLibraryItems(root,{run});
+  const metadataHistory=phase==='initial'&&round===1?loadInitialMetadataHistory(root,run,{current:true}):null;
+  // Validate original reviews against exact historical source bytes only.
+  // The collection's post snapshot below always describes actual current bytes.
+  if(metadataHistory)Object.assign(reported,metadataHistory.historicalGuards);
   const ownerSupplement=loadOwnerSupplement(root,pack,reports,current,items);
+  const currentRepairPath=join(workflowDir(root,run),`${phase}-${round}-owner-current-repairs.json`);
+  const currentRepairs=existsSync(currentRepairPath)?{
+    ...loadOwnerCurrentRepairs(root,pack,reports,current,items,read(currentRepairPath),{matchesReview:review=>reviewContexts(items).matches(review,current)}),
+    [ownerSupplementSeal]:true,
+  }:null;
   const operationalSupplement=loadOperationalSupplement(root,pack,reports,current);
   const supplierRepairs=loadSupplierRepairs(root,pack,reports,current,items);
   if(deferImpactClosure) {
@@ -1296,10 +1322,10 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     const assigned=new Set(Object.values(pack.assignments).flat());
     for(const row of reports.flatMap(report=>report.reviews??[]))if(assigned.has(row.id)&&/^[a-f0-9]{64}$/.test(row.post_sha256??''))reported[row.id]=row.post_sha256;
   }
-  const result=validateReports(pack,reports,reported,{root,ownerSupplement,operationalSupplement,supplierRepairs});
+  const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs});
   if(result.errors.length)throw Error(result.errors.join('\n'));
   const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
-  Object.assign(evidence,ownerSupplement?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{});
+  Object.assign(evidence,ownerSupplement?.evidence??{},currentRepairs?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{});
   verifyEvidence(evidence);
   const creationAuthors=new Map();
   for(const unit of pack.units) {
@@ -1350,6 +1376,15 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   // joining them records routing, never an additional mathematical review.
   const downstream=[...new Set([...reports.flatMap(row=>row.downstream),...result.created_items.flatMap(row=>row.consumers)])];
   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root,run),downstream,ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
+  if(metadataHistory){
+    const historical=new Set(metadataHistory.sourceIds);
+    receipt.metadata_history={path:metadataHistory.path,historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false};
+    receipt.metadata_history_current_review_targets=[...historical];
+    receipt.historical_metadata_reviews=receipt.reviews.filter(row=>historical.has(row.id));
+    receipt.reviews=receipt.reviews.filter(row=>!historical.has(row.id));
+    // Preserve original rows and hashes separately; none is certified current.
+    requireValue(JSON.stringify(receipt.historical_metadata_reviews)===JSON.stringify(metadataHistory.historicalReviews),'historical metadata review inventory mismatch');
+  }
   if(operationalSupplement){
     receipt.operational_resolution={path:operationalSupplement.path,subjects:[...operationalSupplement.ids],
       reason:operationalSupplement.reason,mathematical_review:false,native_coverage_adopted:false};
@@ -1376,6 +1411,17 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
       supplement:ownerSupplement.path,supplement_sha256:evidence[ownerSupplement.path],
       reviewed_ids:[...ownerSupplement.ids],supporting_evidence:ownerSupplement.supporting_evidence};
   }
+  if(currentRepairs){
+    receipt.owner_current_repairs=currentRepairs.path;
+    receipt.native_current_repair_reviews=reports.flatMap(report=>report.reviews).filter(review=>currentRepairs.ids.has(review.id));
+    receipt.native_current_repair_decisions=reports.flatMap(report=>report.decisions).filter(decision=>currentRepairs.rejections.some(rejected=>key(decision)===key(rejected)));
+    receipt.native_current_repair_origins=currentRepairs.origin_rows;
+    receipt.root_current_reviews=currentRepairs.reviews;
+    receipt.root_current_repair_resolution={reviewed_by:'root',ids:currentRepairs.entries.map(entry=>entry.id),
+      repairer_identity:currentRepairs.repairer_identity,repair_evidence:currentRepairs.repair_evidence,completed_at:currentRepairs.completed_at,
+      root_interface_changes:currentRepairs.root_interface_changes,examined_ids:[...currentRepairs.ids],
+      native_execution_coverage_adopted:false,native_finding_synthesized:false};
+  }
   receipt.restated=restatedIds(pack,result.changed,statementHashes(root,run));
   const afterStatements=statementHashes(root,run);
   receipt.statement_events=receipt.restated.filter(id=>pack.before_statements?.[id]||!pack.before[id]).map(id=>({id,before_statement_sha256:pack.before_statements?.[id]??statementHash(''),after_statement_sha256:afterStatements[id]}));
@@ -1397,6 +1443,11 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     receipt.downstream=[...new Set([...receipt.downstream,...receipt.owner_downstream])];
     receipt.owner_resolution.examined_downstream=receipt.owner_downstream;
     if(ownerSupplement.version===3)receipt.owner_resolution.extra_supplier=ownerSupplement.required_supplier;
+  }
+  if(currentRepairs){
+    const primary=new Set(currentRepairs.entries.map(entry=>entry.id));
+    receipt.root_current_downstream=[...currentRepairs.ids].filter(id=>!primary.has(id));
+    receipt.downstream=[...new Set([...receipt.downstream,...receipt.root_current_downstream])];
   }
   const discoveries=receipt.downstream.filter(id=>!frontier.has(id)&&!direct.some(row=>row.id===id)&&!receipt.restated.includes(id));
   const uses=Object.assign({},...reports.map(row=>row.downstream_uses??{}));
@@ -1445,8 +1496,8 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
     if(!obligations.has(id))obligations.set(id,new Set());
     const owners=obligations.get(id),size=owners.size;owners.add(unit);return owners.size!==size;
   };
-  for(const pack of packs)if(pack.reader_concerns?.length){
-    for(const concern of pack.reader_concerns){
+  for(const pack of packs)if(pack.reader_concerns?.length||pack.initial_scope_findings?.length){
+    for(const concern of [...(pack.reader_concerns??[]),...(pack.initial_scope_findings??[])]){
       const unit=pack.reader_concern_owners?.[concern.id];
       requireValue(unit&&pack.assignments[unit]?.includes(concern.id)
         &&(!originalOwners[concern.id]||originalOwners[concern.id]===unit),
@@ -1553,6 +1604,94 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
 const readerObligationInventory=ownership=>Object.fromEntries([...ownership.obligations]
   .sort(([a],[b])=>a.localeCompare(b)).map(([id,units])=>[id,[...units].sort()]));
 
+// An explicit native pending consumer is an owner-wave duty, even when the
+// old initial source review still matches an unchanged Statement/Definition.
+function nativeDownstreamPending(root,run,packs,receipts,items,current) {
+  const contexts=reviewContexts(items),frontier=gateFrontier(root,run),claims=[],records=[],evidence={};
+  const bound=(receipt,path)=>receipt.evidence?.[path]===digest(readFileSync(path,'utf8'));
+  const success=record=>{
+    const {pack,receipt,unit,report,reportPath}=record;
+    const label=workerLabel(pack.phase,pack.round,unit);
+    const dispatchPath=join(root,'research',`${run}-dispatch`,`alpha-repair-${label}.result.json`);
+    requireValue(receipt.run===run&&receipt.phase===pack.phase&&receipt.round===pack.round
+      &&report.run===run&&report.phase===pack.phase&&report.round===pack.round&&String(report.unit)===unit
+      &&report.input_sha256===digest(pack)&&bound(receipt,reportPath)&&bound(receipt,dispatchPath)
+      &&bound(receipt,packPath(root,run,pack.phase,pack.round)),
+      'native pending work lacks its original exact collected report/pack/dispatch');
+    const native=read(dispatchPath);
+    // ownerUnits uses the bare lane only for the base owner pack. Native
+    // continuation dispatches cover the encoded phase:lane stage unit, while
+    // report.unit remains the decoded bare lane. Match that exact identity.
+    const basePhase=pack.basePhase??pack.phase;
+    const nativeCover=pack.phase===basePhase?unit:`${pack.phase}:${unit}`;
+    requireValue(native.run===run&&native.role==='alpha-repair'&&native.label===label
+      &&native.ok===true&&native.model===MODELS.sol61.id&&native.provider_effort==='high'
+      &&JSON.stringify(native.covers)===JSON.stringify([nativeCover])
+      &&native.exit_code===0&&native.process_exit_code===0&&native.timed_out===false
+      &&native.terminal_summary?.task_completed===true&&native.terminal_summary.task_aborted===false
+      &&native.terminal_summary.final_response_present===true&&native.terminal_summary.error_events===0
+      &&Number.isSafeInteger(native.attempt)&&native.attempt>0&&native.evidence_tag===`.attempt-${native.attempt}`,
+      'native pending work requires genuine successful immutable owner execution');
+    const attemptPath=dispatchPath.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`);
+    requireValue(readFileSync(attemptPath,'utf8')===readFileSync(dispatchPath,'utf8'),
+      'native pending work immutable attempt differs from original collected result');
+    for(const path of [reportPath,dispatchPath,attemptPath])evidence[path]=digest(readFileSync(path,'utf8'));
+    return {dispatchPath,attemptPath,native};
+  };
+  for(let index=0;index<packs.length;index++){
+    const pack=packs[index],receipt=receipts[index];
+    for(const unit of pack.units){
+      const reportPath=workerReport(root,run,pack.phase,pack.round,unit),report=read(reportPath);
+      const record={pack,receipt,unit,report,reportPath,index};records.push(record);
+      if(report.downstream_pending===undefined)continue;
+      requireValue(Array.isArray(report.downstream_pending)&&Array.isArray(report.downstream)
+        &&report.downstream_pending.length<=report.downstream.length
+        &&new Set(report.downstream_pending).size===report.downstream_pending.length
+        &&report.downstream_pending.every(id=>typeof id==='string'&&frontier.has(id)
+          &&report.downstream.includes(id)&&receipt.downstream?.includes(id)),
+        'native downstream_pending must be unique actual downstream frontier IDs');
+      if(!report.downstream_pending.length)continue;
+      const auth=success(record);
+      for(const id of report.downstream_pending)claims.push({id,unit,phase:pack.phase,index,
+        report:reportPath,dispatch:auth.dispatchPath,attempt:auth.attemptPath,
+        affected_use:typeof report.downstream_uses?.[id]==='string'?report.downstream_uses[id]:null});
+    }
+  }
+  const pending=new Map(),coverage=[];
+  for(const id of [...new Set(claims.map(row=>row.id))].sort()){
+    const latest=Math.max(...claims.filter(row=>row.id===id).map(row=>row.index));
+    let match=null;
+    // A same-wave sibling or later genuine owner review may discharge the
+    // consumer. Initial adjudicator reviews and earlier passes cannot do so.
+    for(const record of records.filter(row=>row.index>=latest))for(const review of record.report.reviews??[]){
+      if(review.id!==id||!record.pack.assignments[record.unit]?.includes(id)
+        ||!contexts.matches(review,current,record.receipt.post))continue;
+      requireValue(record.receipt.reviews.some(row=>digest(row)===digest(review)),
+        'pending consumer review is absent from its original native collection');
+      const auth=success(record);match={id,phase:record.pack.phase,unit:record.unit,
+        report:record.reportPath,dispatch:auth.dispatchPath,review_sha256:digest(review)};
+    }
+    if(match)coverage.push(match);
+    else {
+      const claim=claims.filter(row=>row.id===id&&row.index===latest).sort((a,b)=>a.unit.localeCompare(b.unit))[0];
+      pending.set(id,claim.unit);
+      // Selecting a lane must resume the actual reporting reviewer, not a
+      // coincidentally numbered fresh process. Existing session routing is reused.
+      const origin=join(root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel('impact-initial',1,claim.unit)}.result.json`);
+      const first=read(origin),reporting=read(claim.dispatch),home=resolve(root,'.autopilot',run,'step5-reader-owner-sessions',`u${claim.unit}`);
+      requireValue(first.run===run&&first.role==='alpha-repair'&&first.ok===true
+        &&first.label===workerLabel('impact-initial',1,claim.unit)&&JSON.stringify(first.covers)===JSON.stringify([claim.unit])
+        &&first.model===MODELS.sol61.id&&first.provider_effort==='high'
+        &&typeof first.session_home==='string'&&resolve(root,first.session_home)===home
+        &&typeof first.session_id==='string'&&first.session_id.length>0
+        &&typeof reporting.session_home==='string'&&resolve(root,reporting.session_home)===home
+        &&reporting.session_id===first.session_id,'pending consumer lacks its actual persistent reporting owner');
+      evidence[origin]=digest(readFileSync(origin,'utf8'));
+    }
+  }
+  return {obligations:claims,pending,coverage,evidence};
+}
+
 export function assertImpactProgress(packs,pending,current,{items=null,reviewOwners=null}={}) {
   const targets=[...new Set(pending)].sort();
   for(const pack of packs) {
@@ -1633,13 +1772,15 @@ export function advanceImpact(root,run,phase,round) {
   if(operationalIds.length){verifyOperationalCoverage(root,run,operationalIds,current);for(const id of operationalIds)required.delete(id);}
   const packs=progress.passes.map(pass=>readPack(root,run,pass,round));
   const ownership=readerReviewOwnership(root,run,packs,completed,items,current);
+  const explicitPending=nativeDownstreamPending(root,run,packs,completed,items,current);
   const pending=[...new Set([...required].filter(id=>!contexts.matches(reviews.get(id)??sourceReviews.get(id),current,snapshots.get(id)))
-    .concat([...ownership.pending.keys()]))].sort();
+    .concat([...ownership.pending.keys()],[...explicitPending.pending.keys()]))].sort();
   if(pending.length) {
     // One actual reviewer per item in this pass. Remaining owed reviewers run
     // in later drained native passes, preserving disjoint write assignments.
     const selectedOwners=Object.fromEntries([...ownership.pending].map(([id,units])=>[id,units[0]]));
     for(const id of pending)if(!selectedOwners[id]&&ownership.obligations.has(id))selectedOwners[id]=[...ownership.obligations.get(id)].sort()[0];
+    for(const [id,unit]of explicitPending.pending)if(!selectedOwners[id])selectedOwners[id]=unit;
     assertImpactProgress(packs,pending,current,{items,reviewOwners:selectedOwners});
     const nextPhase=nextImpactPhase(phase,progress);
     const assignments={'1':[],'2':[],'3':[]};
@@ -1647,7 +1788,7 @@ export function advanceImpact(root,run,phase,round) {
     order.forEach((id,index)=>assignments[selectedOwners[id]??String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
     const identity=libraryIdentity(root,run);
     const pack={version:2,run,phase:nextPhase,basePhase:phase,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,round,units:['1','2','3'],assignments,before:current,before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds,impacts,cycles,failures:null,gateAssignments:{},ledger_updates:completed.flatMap(receipt=>receipt.ledger_updates??[])};
-    if(ownership.obligations.size){
+    if(ownership.obligations.size||explicitPending.pending.size){
       pack.reader_concern_owners=ownership.originalOwners;
       pack.reader_review_obligations=readerObligationInventory(ownership);
       pack.reader_review_owners=selectedOwners;
@@ -1669,6 +1810,14 @@ export function advanceImpact(root,run,phase,round) {
           `reader concern continuation lacks genuine persistent reviewer: ${unit}`);
       }
     }
+    if(explicitPending.obligations.length){
+      pack.native_downstream_pending=explicitPending.obligations;
+      pack.input_evidence??={};
+      for(const [file,hash]of Object.entries(explicitPending.evidence)){
+        requireValue(!Object.hasOwn(pack.input_evidence,file)||pack.input_evidence[file]===hash,'conflicting native pending-work origin evidence');
+        pack.input_evidence[file]=hash;
+      }
+    }
     frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
     progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});progress.activePhase=nextPhase;atomic(path,progress);
     return {complete:false,pack,passes:progress.passes};
@@ -1679,10 +1828,14 @@ export function advanceImpact(root,run,phase,round) {
     if(!progress.work_order.some(row=>row.kind==='maintenance'&&row.id===outside.pack.id))progress.work_order.push({kind:'maintenance',id:outside.pack.id});
     atomic(path,progress);return {complete:false,maintenance:outside.pack,passes:progress.passes};
   }
-  const evidence=Object.assign({},...completed.map(receipt=>receipt.evidence),progress.maintenance_evidence??{});
+  const evidence=Object.assign({},...completed.map(receipt=>receipt.evidence),progress.maintenance_evidence??{},explicitPending.evidence);
   for(const pass of progress.passes){const p=effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`${pass}-${round}-collected.json`));evidence[p]=digest(readFileSync(p,'utf8'));}
   for(const collection of maintenance.collections.filter(row=>maintenanceIds.has(row.pack)))evidence[join(root,collection.path)]=collection.sha256;
   const receipt={version:2,run,phase,round,errors:[],decisions:[],reviews:[...reviews.values()],created_items:completed.flatMap(row=>row.created_items??[]),changed,restated:seeds,post:current,evidence,downstream:scope.targets,consumer_maintenance:scope.maintenance,maintenance_packs:[...maintenanceIds],ledger_updates:completed.flatMap(row=>row.ledger_updates??[])};
+  if(explicitPending.obligations.length){
+    receipt.native_downstream_pending=explicitPending.obligations;
+    receipt.native_downstream_pending_coverage=explicitPending.coverage;
+  }
   receipt.operational_carries=operationalIds;
   receipt.operational_resolutions=completed.filter(row=>row.operational_resolution).map(row=>row.operational_resolution);
   if(ownership.obligations.size){
@@ -1731,7 +1884,12 @@ export function verifyCompletedImpact(root,run,phase,round) {
   const contexts=reviewContexts(items);
   for(const id of required)if(frontier.has(id))requireValue(contexts.matches(reviews.get(id),current,snapshots.get(id)),
     `completed owner collection lacks current review: ${id}`);
-  const ownership=readerReviewOwnership(root,run,progress.passes.map(pass=>readPack(root,run,pass,round)),passes,items,current);
+  const ownerPacks=progress.passes.map(pass=>readPack(root,run,pass,round));
+  const explicitPending=nativeDownstreamPending(root,run,ownerPacks,passes,items,current);
+  requireValue(explicitPending.pending.size===0,`completed owner collection lacks explicit native pending-consumer review: ${[...explicitPending.pending.keys()].join('; ')}`);
+  if(result.native_downstream_pending!==undefined)requireValue(digest(result.native_downstream_pending)===digest(explicitPending.obligations)
+    &&digest(result.native_downstream_pending_coverage)===digest(explicitPending.coverage),'completed explicit native pending-work coverage changed');
+  const ownership=readerReviewOwnership(root,run,ownerPacks,passes,items,current);
   requireValue(ownership.pending.size===0,
     `completed owner collection lacks current same-reviewer obligations: ${[...ownership.pending].map(([id,units])=>`${id}/${units.join(',')}`).join('; ')}`);
   if(ownership.obligations.size)requireValue(digest(result.reader_review_obligations)===digest(readerObligationInventory(ownership))
@@ -1753,7 +1911,10 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   const path=packPath(root,run,phase,round);
   if(existsSync(path)){
     const saved=read(path);
-    if(phase==='impact-initial'&&round===1)checkFrozenReaderConcernInput(root,run,saved);
+    if(phase==='impact-initial'&&round===1){
+      checkFrozenReaderConcernInput(root,run,saved);
+      checkFrozenInitialScopeFindingInput(root,run,saved);
+    }
     return saved;
   }
   if(phase==='gate')return prepareGateRepairPack(root,run,phase,round,failures);
@@ -1763,7 +1924,8 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   const scope=impactTargets(root,run,phase,items,result.restated??result.changed,result.downstream??[]);
   const {seeds,impacts}=scope;
   const concerns=phase==='impact-initial'&&round===1?loadReaderConcerns(root,run):null;
-  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id)])];
+  const scopeFindings=phase==='impact-initial'&&round===1?loadInitialScopeFindings(root,run):null;
+  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id),...(scopeFindings?.entries??[]).map(row=>row.id),...(result.metadata_history_current_review_targets??[])])];
   // Deterministic disjoint lanes run concurrently; shared metadata edits lock.
   // Closure requeues reviews invalidated by a concurrent supplier repair.
   const assignments={'1':[],'2':[],'3':[]};
@@ -1772,10 +1934,28 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
   const identity=libraryIdentity(root,run);
   const pack={version:2,run,phase,round,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,units:['1','2','3'],assignments,before:hashes(root,run),before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),impacts,seeds,failures:null,gateAssignments:{},cycles:[...new Set(cycles)],ledger_updates:result.ledger_updates??[]};
+  if(result.metadata_history){
+    pack.metadata_history_current_review_targets=[...result.metadata_history_current_review_targets];
+    pack.input_evidence??={};
+    const collection=join(workflowDir(root,run),'initial-1-collected.json');
+    pack.input_evidence[collection]=digest(readFileSync(collection,'utf8'));
+    for(const [file,hash]of Object.entries(result.evidence)){
+      requireValue(!Object.hasOwn(pack.input_evidence,file)||pack.input_evidence[file]===hash,'conflicting initial metadata history evidence');
+      pack.input_evidence[file]=hash;
+    }
+  }
   if(concerns){
     pack.reader_concerns=concerns.entries;
     pack.reader_concern_owners=Object.fromEntries(concerns.entries.map(row=>[row.id,pack.units.find(unit=>assignments[unit].includes(row.id))]));
-    pack.input_evidence=frozenSupportingEvidence(root,run,concerns.evidence);
+  }
+  if(scopeFindings)pack.initial_scope_findings=scopeFindings.entries;
+  if(concerns||scopeFindings){
+    pack.reader_concern_owners={...(pack.reader_concern_owners??{}),...Object.fromEntries((scopeFindings?.entries??[]).map(row=>[row.id,pack.units.find(unit=>assignments[unit].includes(row.id))]))};
+    pack.input_evidence??={};
+    for(const admission of [concerns,scopeFindings].filter(Boolean))for(const [file,hash]of Object.entries(frozenSupportingEvidence(root,run,admission.evidence))){
+      requireValue(!Object.hasOwn(pack.input_evidence,file)||pack.input_evidence[file]===hash,`conflicting work-admission evidence: ${file}`);
+      pack.input_evidence[file]=hash;
+    }
   }
   frozen(path,pack);writeTasks(root,pack,'repair');return pack;
 }
@@ -1830,6 +2010,17 @@ export function verifyCertification(root,run,{allowMissing=true}={}) {
   requireValue(sha256===digest(payload),'Step 5 certification payload changed');
   const seen=new Set();for(const item of row.items){requireValue(!seen.has(item.id)&&['item_sha256','context_sha256','guard_sha256'].every(k=>/^[a-f0-9]{64}$/.test(item[k]??'')),`malformed Step 5 certificate item ${item.id}`);seen.add(item.id);}
   const created=new Set();for(const item of row.creations??[]){requireValue(!created.has(item.id)&&seen.has(item.id)&&typeof item.author_result==='string',`malformed Step 5 creation ${item.id}`);created.add(item.id);creationRegistration(root,run,item);}
+  requireValue(Array.isArray(row.maintenance_certifications??[]),'malformed maintenance certification basis');
+  const maintenanceSeen=new Set();
+  for(const entry of row.maintenance_certifications??[]){
+    const item=row.items.find(x=>x.id===entry.id);
+    requireValue(entry.basis==='native-consumer-maintenance'&&created.has(entry.id)&&!maintenanceSeen.has(entry.id)
+      &&entry.after_item_sha256===item?.item_sha256&&entry.after_guard_sha256===item?.guard_sha256
+      &&['before_sha256','after_sha256','after_item_sha256','before_guard_sha256','after_guard_sha256','statement_sha256'].every(k=>/^[a-f0-9]{64}$/.test(entry[k]??''))
+      &&['collection','report','dispatch','prompt'].every(k=>typeof entry[k]==='string'&&row.evidence[entry[k]])
+      &&typeof entry.reason==='string'&&entry.reason.trim().length>=40,'malformed created-helper maintenance basis');
+    maintenanceSeen.add(entry.id);
+  }
   verifyEvidence(row.evidence,{root,run,certificate:row});
   return row;
 }
@@ -1838,7 +2029,8 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const savedPath=effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`certification-${phase}-${round}.json`));
   if(existsSync(savedPath)) {
     const saved=read(savedPath),{sha256,...payload}=saved;requireValue(sha256===digest(payload),'completed certification payload changed');verifyEvidence(saved.evidence,{root,run});
-    const frontier=gateFrontier(root,run),scoped=saved.items.filter(row=>frontier.has(row.id));
+    const frontier=gateFrontier(root,run),maintained=new Set((saved.maintenance_certifications??[]).map(row=>row.id));
+    const scoped=saved.items.filter(row=>frontier.has(row.id)||maintained.has(row.id));
     const current=hashes(root,run);for(const row of scoped)requireValue(row.guard_sha256===current[row.id],`stale completed certification ${row.id}`);
     const contexts=contextHasher(root,scoped.map(row=>row.id));
     for(const row of scoped){const now=contexts.get(row.id);requireValue(now?.item_sha256===row.item_sha256&&now?.context_sha256===row.context_sha256,`stale completed certification context ${row.id}`);}
@@ -1857,6 +2049,10 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const certifiedScope=id=>eligible.has(id)||createdIds.has(id);
   const reviewed=new Map(allReviews.filter(row=>certifiedScope(row.id)).map(row=>[row.id,row]));
   const current=hashes(root,run), rawBefore=rawHashes(root,run), baseline=read(join(dir,'baseline.json'));
+  // A changed source label is still a changed guard. Only actual subsequent
+  // native owner review can supply current certification for this target.
+  for(const id of sourceResult?.metadata_history_current_review_targets??[])
+    requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing current native metadata-target review: ${id}`);
   const changed=diff(baseline,current).filter(certifiedScope);
   const priorItems=new Map((prior?.items??[]).filter(row=>certifiedScope(row.id)).map(row=>[row.id,row]));
   const progress=read(impactProgressPath(root,run,phase,round));
@@ -1872,7 +2068,10 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const allowed=gateFrontier(root,run);
   for(const id of currentImpacts)if((!allowed||allowed.has(id))&&!reviewed.has(id))throw Error(`new downstream consumer requires owner review: ${id}`);
   for(const row of allReviews)if(row.post_sha256!==current[row.id]&&reviewed.get(row.id)===row)throw Error(`review changed before certification: ${row.id}`);
-  for(const id of changed) if(!reviewed.has(id)&&priorItems.get(id)?.guard_sha256!==current[id])throw Error(`uncertified change ${id}`);
+  // A completed native outside-maintenance repair is a separate typed basis,
+  // never a synthesized frontier review or a rewritten creation certificate.
+  const maintenance=createdMaintenanceBasis(root,run,phase,round,{prior,result,progress,eligible,items:library,current});
+  for(const id of changed) if(!reviewed.has(id)&&!maintenance.basis.has(id)&&priorItems.get(id)?.guard_sha256!==current[id])throw Error(`uncertified change ${id}`);
   const ids=[...new Set([...changed,...reviewed.keys(),...priorItems.keys()])].sort();
   const contexts=contextHasher(root,ids); // One corpus read, after every writer drains.
   for(const id of ids)requireValue(contexts.has(id),`missing certification context: ${id}`);
@@ -1883,14 +2082,15 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
       `stale root owner review context before certification: ${id}`);
   }
   if(diff(rawBefore,rawHashes(root,run)).some(id=>stable.has(id)))throw Error('relevant item writer overlapped certification');
-  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence};
+  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence};
   for(const name of ['frontier.json','baseline.json','step4-verdicts.json',`${phase}-${round}-closed.json`,`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
-  const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??priorItems.get(id)?.reason}));
+  const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??maintenance.basis.get(id)?.reason??priorItems.get(id)?.reason}));
   const creationRows=[...(prior?.creations??[]),...(sourceResult?.created_items??[]),...(result.created_items??[])],creationById=new Map();
   for(const row of creationRows){const old=creationById.get(row.id);if(old&&JSON.stringify(old)!==JSON.stringify(row))throw Error(`conflicting creation provenance: ${row.id}`);creationById.set(row.id,row);}
   const creations=[...creationById.values()].sort((a,b)=>a.id.localeCompare(b.id));
   for(const row of creations){creationRegistration(root,run,row);requireValue(current[row.id],`created item missing at certification: ${row.id}`);}
   const certificate={version:2,run,phase,round,at:new Date().toISOString(),items,creations,evidence,changed,
+    ...(maintenance.records.length?{maintenance_certifications:maintenance.records}:{}),
     latest_adjudication_round:phase==='impact-repeat'?round:(prior?.latest_adjudication_round??null)};
   if(phase==='impact-repeat') {
     const frontier=read(join(dir,'frontier.json'));
@@ -1969,6 +2169,12 @@ function main() {
     case 'check-reader-concerns':{
       const admission=loadReaderConcerns(root,run,{requireCollection:false});
       requireValue(admission,'reader concern admission missing');
+      console.log(JSON.stringify({run,ids:admission.entries.map(row=>row.id),mathematical_review:false,native_coverage_adopted:false}));return;
+    }
+    case 'record-initial-scope-findings':result=recordInitialScopeFindings(root,run,opt('--authorization'));break;
+    case 'check-initial-scope-findings':{
+      const admission=loadInitialScopeFindings(root,run,{requireCollection:false});
+      requireValue(admission,'initial-scope finding registry missing');
       console.log(JSON.stringify({run,ids:admission.entries.map(row=>row.id),mathematical_review:false,native_coverage_adopted:false}));return;
     }
     case 'init':result=initialize(root,run);break;

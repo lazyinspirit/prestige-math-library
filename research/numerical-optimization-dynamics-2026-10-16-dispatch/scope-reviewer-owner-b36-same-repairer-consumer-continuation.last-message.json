@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "36",
+  "round": 1,
+  "reviewed_items": [
+    "def-linear-multistep-method-consistency-order-and-root-condition",
+    "lem-variable-step-adams-lagrange-weights",
+    "alg-adams-pece-one-correction",
+    "lem-companion-powers-bounded-under-root-condition",
+    "lem-linear-multistep-order-conditions-from-taylor",
+    "lem-variable-step-bdf2-interpolation-and-local-defect",
+    "alg-variable-step-bdf2-with-selected-implicit-branch",
+    "thm-dahlquist-equivalence-for-linear-multistep-methods",
+    "lem-variable-step-bdf2-increment-ratio-recurrence",
+    "thm-variable-step-bdf2-order-two-under-ratio-bound",
+    "cex-repeated-unit-root-causes-linear-parasitic-growth",
+    "ex-one-pass-pece-differs-from-implicit-adams-stability",
+    "ex-repeated-interior-root-preserves-bounded-powers",
+    "ex-simple-unit-circle-roots-give-bounded-oscillation",
+    "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+    "cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error"
+  ],
+  "reviewed_pages": [
+    "linear-multistep-methods-and-dahlquist-equivalence",
+    "linear-multistep-methods-and-dahlquist-equivalence-examples"
+  ],
+  "decision": "escalate",
+  "reason": "This read-only owner continuation supplies evidence only and preserves the original native success and report unchanged. The four actual changed interfaces and their current alias-resolved reference cone, united with relevant prepared old paths, have been checked, including all 16 item consumers and both previous omissions. The constant-step corollary still requires the proof-only correction below to be applied by the owner; no source correction was applied here.",
+  "findings": [
+    {
+      "id": "alg-adams-pece-one-correction",
+      "type": "local",
+      "reason": "The existing repair separates procedure instructions from correctness and termination arguments and clarifies input validation. Its predictor, single corrector, and final derivative evaluation remain unchanged."
+    },
+    {
+      "id": "alg-variable-step-bdf2-with-selected-implicit-branch",
+      "type": "local",
+      "reason": "The existing repair removes inline completion arguments and clarifies input validation. The BDF2 equation, prescribed-ball root selection, and positive-ratio domain remain unchanged."
+    },
+    {
+      "id": "lem-companion-powers-bounded-under-root-condition",
+      "type": "local",
+      "reason": "The existing proof repair handles nonreal unstable modes by real and imaginary recurrence solutions, at least one of which is unbounded. This is a proof change, not a changed public interface."
+    },
+    {
+      "id": "thm-dahlquist-equivalence-for-linear-multistep-methods",
+      "type": "scope",
+      "reason": "The existing repair uses a uniform local selected branch and a first-exit bootstrap, preserving the convergence equivalence and order estimate. A remaining source typo in the Statement requires inserting the closing math delimiter: replace 'as $h\\to0, each selected run' with 'as $h\\to0$, each selected run'. This correction was not applied in this continuation."
+    },
+    {
+      "id": "thm-variable-step-bdf2-order-two-under-ratio-bound",
+      "type": "scope",
+      "reason": "The current Statement explicitly requires uniform history and root radii and agreement between the local root and the prescribed-ball root. The weighted increment estimate and first-exit bootstrap establish the claimed O(H²) bound under these assumptions."
+    },
+    {
+      "id": "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+      "type": "prerequisite",
+      "reason": "The existing repair specifies K and branch balls. Its explicit root estimate, using defect -4h³/3, supplies the revised uniform local branch prerequisite before applying the Dahlquist theorem."
+    },
+    {
+      "id": "cor-constant-step-bdf2-order-two-with-consistent-start",
+      "type": "outside-batch",
+      "reason": "Current proof Step 1.1 does not establish the revised theorem's uniform local branch and same-selected-root premise. Preserve the entire Statement and Step 2.1. Proposed proof-only replacement for Step 1.1: 'Choose ε>0 so that every closed max-norm ε-ball about y([0,T]) lies in K; such a uniform ε exists by compactness and the interior assumption. Set η=ε/10. Taylor expansion and y∈C³ give ρ_n=3y(t_{n+1})-4y(t_n)+y(t_{n-1})-2h f(t_{n+1},y(t_{n+1})), with ||ρ_n||∞≤Cρ h³ uniformly in n and h. For any U,V within η of y(t_n),y(t_{n-1}), respectively, U,V∈K, so the assumed all-histories condition supplies the unique root Z in B_{n+1}⊂K. Subtracting the exact residual equation and using the common Lipschitz constant L gives (3-2hL)||Z-y(t_{n+1})||∞≤4||U-y(t_n)||∞+||V-y(t_{n-1})||∞+Cρh³≤5η+Cρh³. Choose h uniformly small enough that 2hL≤1 and Cρh³≤ε/2. Then ||Z-y(t_{n+1})||∞≤ε/2<ε. Any two roots Z,W∈K for the same history satisfy 3||Z-W||∞≤2hL||Z-W||∞, hence coincide. Therefore the ε-ball contains exactly one root, and it is exactly the unique root in the prescribed B_{n+1} selected by the algorithm. These ε,η and the step threshold are independent of n and N. On the constant grid choose r_min=r_*=1 and H=h. All premises of the full revised theorem [F2], including its uniform local branch and selection premise, now hold, so it yields the asserted O(h²) maximum error. [A1, F1, F2, F3, F4, algebra]' This proves the missing implication without adding global existence or narrowing the corollary. Step 2.1 independently retains the BE startup estimate through its invariant-ball residual bound. Owner application remains required."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-one-pass-pece-differs-from-implicit-adams-stability",
+      "decision": "accept",
+      "reason": "The unchanged single correction gives 1+z+z²/2; the final derivative evaluation does not change the state. At z=-3 the PECE and implicit Adams moduli remain 5/2 and 1/5."
+    },
+    {
+      "id": "lem-variable-step-bdf2-increment-ratio-recurrence",
+      "decision": "accept",
+      "reason": "Subtracting consecutive states in the unchanged BDF2 equation gives q(r)=r²/(1+2r). Its positivity and q(r)<1 precisely for r<1+sqrt(2) require no revised convergence premise."
+    },
+    {
+      "id": "thm-variable-step-bdf2-order-two-under-ratio-bound",
+      "decision": "accept",
+      "reason": "Uses the unchanged algorithmic equation and explicitly assumes selection of the same local root. The weighted error recurrence and bootstrap keep histories within the uniform branch radius and give O(H²)."
+    },
+    {
+      "id": "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+      "decision": "accept",
+      "reason": "The moment and root computations are valid. K=[-1,T³/3+1], history radius 1/6, root radius 1/2, and the explicit defect estimate establish the revised Dahlquist branch premise uniformly."
+    },
+    {
+      "id": "cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error",
+      "decision": "accept",
+      "reason": "The positive grid sums to one with H=1/m. Its first amplified increment tends to 1/2; subsequent increments sum to less than one. Every unique scalar root stays inside the prescribed radius-two balls, so the counterexample remains an admissible completed algorithm run."
+    },
+    {
+      "id": "cor-constant-step-bdf2-order-two-with-consistent-start",
+      "decision": "escalate",
+      "reason": "The current Step 1.1 omits the uniform local branch derivation. The explicit replacement in the finding proves it from the existing stronger assumption, with uniform constants and exactly the algorithm-selected root. The owner must apply that proof-only correction; the O(h²) Statement and BE startup proof remain intact."
+    },
+    {
+      "id": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+      "decision": "accept",
+      "reason": "The exact-root path calls the unchanged BDF2 procedure; the finite-solve path distinguishes residual-tolerance completion. Accuracy is expressly conditional on the full order theorem. Its BE startup reference uses the corollary's unchanged residual estimate, not its incomplete Step 1.1."
+    },
+    {
+      "id": "alg-index-one-dae-bdf2-stepper",
+      "decision": "accept",
+      "reason": "Its coupled residual uses the unchanged constant-step BDF2 coefficients. The scaled finite Newton solve records derivative and algebraic residuals and expressly makes no exact selected-root or accuracy claim."
+    },
+    {
+      "id": "lem-index-one-dae-bdf2-local-branch",
+      "decision": "accept",
+      "reason": "Read the full lemma, coupled stepper, reduction theorem, and parametrized IFT. At h=0 the unknown-block derivative is [[3I,0],[g_x,g_z]], invertible because g_z is invertible. The IFT supplies the local root, and compactness with chart margin supplies a common small-step neighborhood. No revised ODE convergence branch premise is imported."
+    },
+    {
+      "id": "thm-index-one-dae-bdf2-second-order-with-residuals",
+      "decision": "accept",
+      "reason": "Its proof independently subtracts the unchanged BDF2 recurrence and uses its stated tube assumptions, algebraic residual estimate, and cubic exact defect. The weighted error recurrence proves O(h²), including the separately derived BE startup, without invoking the revised ODE order theorem."
+    },
+    {
+      "id": "thm-index-one-dae-finite-budget-solvers-terminate",
+      "decision": "accept",
+      "reason": "The actual Newton supplier permits at most B+1 residual evaluations. The initialization and step wrappers add at most one reevaluation after root status, giving B+2 per call or attempted step. These finite-loop bounds do not use a BDF2 root-existence or convergence assertion."
+    },
+    {
+      "id": "lem-bdf2-root-locus-location",
+      "decision": "accept",
+      "reason": "The unchanged uniform-grid equation gives P_z(ζ)=(3-2z)ζ²-4ζ+1. Its reciprocal-root identity establishes the claimed location restriction independently of nonlinear branch assumptions."
+    },
+    {
+      "id": "prop-bdf2-roots-vanish-in-stiff-limit",
+      "decision": "accept",
+      "reason": "For C=|3-2z| and r=|ζ|, the unchanged polynomial gives Cr²≤4r+1. When C>5 this forces r<1 and then r<sqrt(5/C), proving decay of every root without choosing a quadratic-root branch."
+    },
+    {
+      "id": "thm-bdf2-is-a-stable",
+      "decision": "accept",
+      "reason": "The leading coefficient cannot vanish in the closed left half-plane. The checked root-locus lemma excludes exterior roots and permits a unit root only at z=0, where the factorization gives simple roots 1 and 1/3."
+    },
+    {
+      "id": "ex-stiff-decay-mode-damping-comparison",
+      "decision": "accept",
+      "reason": "Read the full example and its actual exponential, BE, trapezoidal, and BDF2 suppliers. The integrating-factor argument gives the exact factor exp(-x); the rational factors tend to 0 and -1, and the checked BDF2 polynomial bound makes both roots tend to zero. The example imports no revised local-branch or order premise."
+    },
+    {
+      "id": "ex-robertson-reaction-system-newton-work",
+      "decision": "accept",
+      "reason": "Its supplier use concerns BE residuals, Newton/chord refresh schedules, and work accounting. The polynomial Jacobian and conservation identity are consistent with those instructions. The reported binary64 record makes no BDF2 order claim and was not recomputed in this continuation."
+    },
+    {
+      "id": "linear-multistep-methods-and-dahlquist-equivalence",
+      "decision": "accept",
+      "reason": "The page accurately describes the conditional branch and ratio hypotheses and assigns no inherited accuracy or stability guarantee to PECE. Its inventory is preserved."
+    },
+    {
+      "id": "linear-multistep-methods-and-dahlquist-equivalence-examples",
+      "decision": "accept",
+      "reason": "The summary accurately describes the PECE comparison, repaired uniform-step example, and admissible unrestricted-ratio counterexample."
+    },
+    {
+      "id": "differential-algebraic-equations-and-consistent-initialization",
+      "decision": "accept",
+      "reason": "The page conditions DAE accuracy on selected branches, residual budgets, and uniform tube bounds. It does not infer Newton success or import the revised ODE branch premise."
+    },
+    {
+      "id": "stability-regions-and-stiff-equations",
+      "decision": "accept",
+      "reason": "Its BDF2 A-stability and damping claims follow from the unchanged polynomial arguments; scalar stability is explicitly distinguished from accuracy and matrix contraction."
+    },
+    {
+      "id": "implicit-stiff-time-stepping-and-algebraic-error",
+      "decision": "accept",
+      "reason": "The summary explicitly conditions BDF2 order on the selected-root, smooth-tube, and starter hypotheses of the variable-step theorem. The required corollary proof correction does not require changing this summary."
+    },
+    {
+      "id": "stability-regions-and-stiff-equations-examples",
+      "decision": "accept",
+      "reason": "The page's BDF2 damping description is supported by the checked decay example and polynomial asymptotics; it asserts no general accuracy or matrix-contractivity result."
+    },
+    {
+      "id": "implicit-stiff-time-stepping-and-algebraic-error-examples",
+      "decision": "accept",
+      "reason": "The Robertson summary describes finite-precision work evidence and expressly avoids a general convergence or forward-error guarantee. No changed BDF2 theorem premise is used."
+    }
+  ]
+}

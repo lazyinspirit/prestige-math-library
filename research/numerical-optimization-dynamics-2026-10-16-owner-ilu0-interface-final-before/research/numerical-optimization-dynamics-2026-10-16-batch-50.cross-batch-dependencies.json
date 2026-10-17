@@ -1,0 +1,111 @@
+[
+  {
+    "kind": "page",
+    "consumer": "preconditioner-algorithms-and-residual-metrics",
+    "supplier": "sparse-matrix-models-and-kernel-costs",
+    "status": "verified",
+    "supplier_batch": "2",
+    "supplier_item_ids": [
+      "def-csr-matrix-with-stored-entry-semantics",
+      "def-symmetric-structural-elimination-graph-and-ordering",
+      "alg-csr-matrix-vector-product-with-validation",
+      "thm-filled-graph-contains-schur-complement-support",
+      "thm-csr-matvec-algorithm-terminates-with-status",
+      "thm-csr-matvec-returns-the-represented-matrix-product",
+      "thm-csr-storage-and-exact-matvec-cost"
+    ],
+    "required_interface": "The ILU input is the actual represented square matrix of a canonical CSR record; therefore duplicates and explicit zeros are excluded and s=nnz(A). The algorithm adds its own sorted-column condition. All recurrence arithmetic is exact in the supplied field; no CSR runtime, finite-precision, or convergence claim is imported.",
+    "affected_claims": [
+      "alg-ilu0-fixed-pattern-factorization uses the CSR representation and its canonical support.",
+      "thm-ilu0-factor-pattern-and-work-counts counts the canonical input slots; it does not use the batch-2 matvec or graph theorem. The tridiagonal example and product-pattern counterexample use the same canonical record convention."
+    ],
+    "evidence": "Inspected the current batch-2 manifest and A-page body, the complete current definition def-csr-matrix-with-stored-entry-semantics, and its ready Step-1 record. The definition explicitly distinguishes stored count from nnz for noncanonical records; this batch assumes canonical input, so its equality s=nnz(A) is valid. No source excerpt from the other batch-2 items is used."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-ilu0-fixed-pattern-factorization",
+    "supplier": "def-csr-matrix-with-stored-entry-semantics",
+    "status": "verified",
+    "supplier_batch": "2",
+    "supplier_item_ids": ["def-csr-matrix-with-stored-entry-semantics"],
+    "required_interface": "A valid n by n CSR record represents A entrywise by summing stored values at the matching column. Canonicality means no duplicate columns and no stored zero, so each mathematical nonzero occupies one slot; all field and index hypotheses are taken from the complete current definition.",
+    "affected_claims": [
+      "The algorithm's input domain, input pattern P, missing-diagonal test, and retained factor positions."
+    ],
+    "evidence": "The complete current Statement/Definition was inspected. Its stated deps are def-field, def-matrix-space, and def-finite-sum-in-a-commutative-monoid; the field, matrix coordinate convention, zero-based indices, and finite-sum empty/singleton conventions were checked. The supplier's current Step-1 readiness record is ready."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-ilu0-factor-pattern-and-work-counts",
+    "supplier": "def-csr-matrix-with-stored-entry-semantics",
+    "status": "verified",
+    "supplier_batch": "2",
+    "supplier_item_ids": ["def-csr-matrix-with-stored-entry-semantics"],
+    "required_interface": "For canonical input, the stored slots partition into the strict-lower and upper sets, including the diagonal in the upper set, and s=nnz(A). Duplicate and explicit-zero records are outside the theorem's hypotheses.",
+    "affected_claims": [
+      "The factor-slot partition, the storage equality, and the interpretation of the input sparsity pattern."
+    ],
+    "evidence": "The complete supplier definition and its current ready Step-1 record were inspected. The theorem states canonicality and exact field hypotheses explicitly and does not use the CSR matvec-cost theorem."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-ilu0-tridiagonal-factorization",
+    "supplier": "def-csr-matrix-with-stored-entry-semantics",
+    "status": "verified",
+    "supplier_batch": "2",
+    "supplier_item_ids": ["def-csr-matrix-with-stored-entry-semantics"],
+    "required_interface": "The displayed matrix is stored canonically with sorted columns, omitted zeros, one stored diagonal entry per row, and exact rational values.",
+    "affected_claims": ["The concrete input pattern and its represented matrix."],
+    "evidence": "Inspected the complete current CSR definition and its current ready Step-1 record; the example verifies the row pattern directly."
+  },
+  {
+    "kind": "item",
+    "consumer": "cex-ilu0-product-can-create-fill-outside-input-pattern",
+    "supplier": "def-csr-matrix-with-stored-entry-semantics",
+    "status": "verified",
+    "supplier_batch": "2",
+    "supplier_item_ids": ["def-csr-matrix-with-stored-entry-semantics"],
+    "required_interface": "The displayed matrix is a canonical sorted CSR record over Q; omitted coordinates represent zero and each nonzero coordinate is stored once.",
+    "affected_claims": ["The exact input support and the zero value A_32 in the counterexample."],
+    "evidence": "Inspected the complete current CSR definition and its current ready Step-1 record; the counterexample's five stored values and omitted coordinates are written explicitly."
+  },
+  {
+    "kind": "page",
+    "consumer": "preconditioner-algorithms-and-residual-metrics",
+    "supplier": "stationary-iterations-and-relaxation",
+    "status": "verified",
+    "supplier_batch": "18",
+    "supplier_item_ids": [
+      "def-diagonal-lower-upper-splitting-convention",
+      "alg-richardson-stationary-iteration",
+      "lem-irreducible-row-substochastic-matrix-has-strict-weighted-contraction",
+      "alg-jacobi-stationary-iteration",
+      "alg-gauss-seidel-stationary-iteration",
+      "alg-sor-stationary-iteration",
+      "thm-strict-row-diagonal-dominance-implies-jacobi-and-gauss-seidel-convergence",
+      "thm-irreducibly-weakly-diagonally-dominant-jacobi-and-gauss-seidel-converge",
+      "thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two"
+    ],
+    "required_interface": "This is declared page context only. Batch 50 introduces no stationary iteration and imports no splitting or convergence statement; no stationary item hypothesis is required by an authored claim.",
+    "affected_claims": ["None of the batch-50 item Statements, Facts, or proofs use a batch-18 item."],
+    "evidence": "Inspected the current batch-18 manifest and A-page body. The assigned ILU recurrence and all five batch-50 item dependency arrays contain no batch-18 item ID, so no stationary supplier excerpt or theorem is imported."
+  },
+  {
+    "kind": "page",
+    "consumer": "preconditioner-algorithms-and-residual-metrics",
+    "supplier": "krylov-methods-and-lanczos-convergence",
+    "status": "open",
+    "supplier_batch": "34",
+    "supplier_item_ids": [
+      "lem-scaled-chebyshev-filter-bound-on-a-separated-interval",
+      "thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound",
+      "thm-cg-recursive-residual-gap-and-attainable-accuracy",
+      "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+      "thm-gmres-true-residual-gap-from-computed-arnoldi-relation",
+      "prop-sparse-unrestarted-gmres-work-and-storage"
+    ],
+    "required_interface": "No item-level Krylov hypothesis is imported by batch 50. Because the broader NA-06 design promises the flexible-GMRES condition and the owner scope allows that interface when promised and not already covered, batch 50 supplies a local variable-right-preconditioned FGMRES definition and residual-minimization theorem. These are proved from the explicit algorithm and finite-dimensional least-squares supplier, not from batch 34. The declared page-context requirement remains subject to owner reconciliation.",
+    "affected_claims": ["The local FGMRES item pair proves residual minimization over span{z_1,...,z_m}; none of its statements, facts, or proofs imports a batch-34 item. The remaining unresolved edge is the A-page's declared Krylov prerequisite context."],
+    "evidence": "Inspected the current batch-34 A-page file and manifest; the run snapshot listed batch 34 in flight, so no batch-34 readiness or proof acceptance is assumed. A full local definition and residual-minimization proof were authored using the exact preconditioned-vector span, so no missing batch-34 item blocks these claims. The declared page-context edge remains open for owner reconciliation."
+  }
+]

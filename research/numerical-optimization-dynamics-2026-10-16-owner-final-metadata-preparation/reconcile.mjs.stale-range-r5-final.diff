@@ -1,0 +1,39 @@
+--- reconcile.mjs.before
++++ reconcile.mjs
+@@ -104,7 +104,11 @@
+     .replaceAll('\\lbrackih,(i+1)h\\rbrack','[ih,(i+1)h]')
+     .replace(/\s+/g,'').replace(/∎$/,'');
+ }
++function priorParagraphClaim(...args){
++  try{return paragraphClaim(...args);}catch(e){if(e.message.startsWith('Unbound/reversed paragraph reference range '))return null;throw e;}
++}
+ function proofIdentities(id,steps,contract,phases){
++  try {
+   const prior=['derivations','routine_steps'].flatMap(group=>(contract[group]??[]).map(row=>({row,group})));
+   const currentOrder=steps.map(st=>st.id),phase=phases.get(id),inverse=new Map(Object.entries(phase?.map??{}).map(([a,b])=>[b,a])),used=new Set(),out=new Map();
+   for(const step of steps){
+@@ -116,12 +120,12 @@
+       const source=phase.original.get(oldLabel);
+       if(!source||paragraphClaim(source.claim,phase.map,[...phase.original.keys()])!==paragraphClaim(step.claim,{},currentOrder))throw Error('Mapped source paragraph identity drift '+id+' '+oldLabel+' -> '+step.id);
+       // Direct inverse-map candidate must actually carry that paragraph's claim.
+-      const direct=prior.filter(x=>x.row.step===oldLabel&&paragraphClaim(x.row.claim,{},[...phase.original.keys()])===paragraphClaim(source.claim,{},[...phase.original.keys()]));
+-      candidates=direct.length?direct:prior.filter(x=>paragraphClaim(x.row.claim,{},currentOrder)===paragraphClaim(step.claim,{},currentOrder)||paragraphClaim(x.row.claim,phase.map,[...phase.original.keys()])===paragraphClaim(step.claim,{},currentOrder));
++      const direct=prior.filter(x=>x.row.step===oldLabel&&priorParagraphClaim(x.row.claim,{},[...phase.original.keys()])===paragraphClaim(source.claim,{},[...phase.original.keys()]));
++      candidates=direct.length?direct:prior.filter(x=>priorParagraphClaim(x.row.claim,{},currentOrder)===paragraphClaim(step.claim,{},currentOrder)||priorParagraphClaim(x.row.claim,phase.map,[...phase.original.keys()])===paragraphClaim(step.claim,{},currentOrder));
+     }else{
+       // Rewritten paragraphs (e.g. a new proof) receive no invented old identity.
+-      const direct=prior.filter(x=>x.row.step===step.id&&paragraphClaim(x.row.claim,{},currentOrder)===paragraphClaim(step.claim,{},currentOrder));
+-      candidates=direct.length?direct:prior.filter(x=>paragraphClaim(x.row.claim,{},currentOrder)===paragraphClaim(step.claim,{},currentOrder));
++      const direct=prior.filter(x=>x.row.step===step.id&&priorParagraphClaim(x.row.claim,{},currentOrder)===paragraphClaim(step.claim,{},currentOrder));
++      candidates=direct.length?direct:prior.filter(x=>priorParagraphClaim(x.row.claim,{},currentOrder)===paragraphClaim(step.claim,{},currentOrder));
+     }
+     if(candidates.length>1)throw Error('Ambiguous original paragraph identity '+id+' '+step.id);
+     const match=candidates[0]??null;
+@@ -129,6 +133,7 @@
+     out.set(step.id,match);
+   }
+   return out;
++  } catch(e) {e.message = id+': '+e.message;throw e;}
+ }
+ function supplierInterfaceProjection(contract,body){
+   const facts=[...factParagraphs(body)].flatMap(([fact,f])=>[...new Set(f.links)].map(supplier=>({fact,supplier,text:f.text.trim()})));

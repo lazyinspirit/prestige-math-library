@@ -1,0 +1,71 @@
+--- a/items/def-complex-grassmann-polar-retraction.md
++++ b/items/def-complex-grassmann-polar-retraction.md
+@@ -10,7 +10,7 @@
+   - def-complex-stiefel-grassmann-optimization-conventions
+   - def-stiefel-space-grassmannian-and-tautological-bundle
+   - thm-complex-stiefel-grassmann-tangent-projections
+-  - lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots
++  - thm-non-negative-square-root-exists-and-is-unique
+ justified_by: []
+ provenance:
+   statement: literature-derived
+@@ -46,7 +46,7 @@
+ 
+ [F1] A horizontal representative satisfies $X^*\eta=0$ ([[thm-complex-stiefel-grassmann-tangent-projections]]).
+ 
+-[F2] Positive-definite self-adjoint maps have unique positive square roots ([[lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots]]).
++[F2] On a finite-dimensional real or complex inner-product space, a nonnegative operator has a unique nonnegative square root; for a positive-definite input its eigenvalues are the positive square roots of the input eigenvalues, so the root is positive definite and invertible ([[thm-non-negative-square-root-exists-and-is-unique]]).
+ 
+ [F3] The complex Grassmannian is the quotient of complex orthonormal frames by right unitary changes of frame ([[def-stiefel-space-grassmannian-and-tautological-bundle]]).
+ 
+@@ -54,7 +54,7 @@
+ 
+ **Proof technique:** verify full rank, orthonormality, and unitary equivariance of the polar formula.
+ 
+-1.1 By [F1], $(X+\eta)^*(X+\eta)=I+\eta^*\eta$. For every nonzero $v\in\mathbb C^r$, $v^*(I+\eta^*\eta)v=\|v\|_2^2+\|\eta v\|_2^2>0$, so the Gram matrix is positive definite and the inverse root in [F2] exists. [F1, F2, given, algebra]
++1.1 By [F1], $(X+\eta)^*(X+\eta)=I+\eta^*\eta$. For every nonzero $v\in\mathbb C^r$, $v^*(I+\eta^*\eta)v=\|v\|_2^2+\|\eta v\|_2^2>0$, so the Gram matrix is Hermitian positive definite. Apply [F2] on $\mathbb C^r$: its unique nonnegative Hermitian square root has strictly positive eigenvalues and is invertible, which defines the inverse root in the formula. [F1, F2, given, algebra]
+ 
+ 2.1 Write $C=(X+\eta)^*(X+\eta)$ and $Y=(X+\eta)C^{-1/2}$. Since $C^{-1/2}$ is Hermitian and $C^{-1/2}CC^{-1/2}=I_r$, we have $Y^*Y=I_r$. Thus $Y$ is a complex orthonormal frame and its range is a point of the stated Grassmannian. [F2, given, step 1.1, algebra]
+ 
+--- a/items/thm-complex-grassmann-polar-retraction-is-first-order.md
++++ b/items/thm-complex-grassmann-polar-retraction-is-first-order.md
+@@ -49,7 +49,7 @@
+ 
+ [F1] The polar frame and quotient maps are given by the Gram inverse-square-root formula ([[def-complex-grassmann-polar-retraction]]).
+ 
+-[F2] The map $C\mapsto C^{1/2}$ is smooth on positive-definite self-adjoint matrices ([[lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots]]).
++[F2] The positive square root depends smoothly on real symmetric positive-definite matrices, by applying the real bundle theorem to the trivial Euclidean bundle over that open matrix domain ([[lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots]]).
+ 
+ [F3] Horizontal matrices are the representatives of the complex Grassmann tangent ([[thm-complex-stiefel-grassmann-tangent-projections]]).
+ 
+--- a/items/def-geometry-lift-and-tensor-discrepancy.md
++++ b/items/def-geometry-lift-and-tensor-discrepancy.md
+@@ -6,7 +6,7 @@
+ origin: pipeline
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+ dependency_level: 1
+-deps: [def-variational-crime-error-framework, thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, thm-chain-rule-for-differentials-of-smooth-maps, def-countable-choice]
++deps: [def-variational-crime-error-framework, thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, thm-chain-rule-for-total-derivatives, def-countable-choice]
+ provenance:
+   statement: literature-derived
+   proof: not-applicable
+--- a/items/lem-geometry-tensor-gap-bounds-cellwise-form-defect.md
++++ b/items/lem-geometry-tensor-gap-bounds-cellwise-form-defect.md
+@@ -6,7 +6,7 @@
+ origin: pipeline
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+ dependency_level: 2
+-deps: [def-geometry-lift-and-tensor-discrepancy, lem-discrete-form-perturbation-preserves-coercivity, def-bounded-coercive-and-symmetric-sesquilinear-forms, thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, thm-chain-rule-for-differentials-of-smooth-maps, thm-holder-inequality-for-integrals, thm-cauchy-schwarz-and-the-euclidean-norm, def-countable-choice]
++deps: [def-geometry-lift-and-tensor-discrepancy, lem-discrete-form-perturbation-preserves-coercivity, def-bounded-coercive-and-symmetric-sesquilinear-forms, thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, thm-chain-rule-for-total-derivatives, thm-holder-inequality-for-integrals, thm-cauchy-schwarz-and-the-euclidean-norm, def-countable-choice]
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -35,7 +35,7 @@
+ 
+ [F1] [[def-geometry-lift-and-tensor-discrepancy]]: $B_h=J_hD\Phi_h^{-1}(A\circ\Phi_h)D\Phi_h^{-T}$ and $\eta_{G,K}=\|B_h-\widetilde B_h\|_{L^\infty(K;\mathrm{op})}$.
+ 
+-[F2] [[thm-chain-rule-for-differentials-of-smooth-maps]]: differentiating $U\circ\Phi_h$ gives $\nabla(U\circ\Phi_h)=D\Phi_h^T(\nabla U\circ\Phi_h)$, so $\nabla U\circ\Phi_h=D\Phi_h^{-T}\nabla(U\circ\Phi_h)$.
++[F2] [[thm-chain-rule-for-total-derivatives]]: differentiating $U\circ\Phi_h$ gives $\nabla(U\circ\Phi_h)=D\Phi_h^T(\nabla U\circ\Phi_h)$, so $\nabla U\circ\Phi_h=D\Phi_h^{-T}\nabla(U\circ\Phi_h)$.
+ 
+ [F3] [[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]]: under Countable Choice, a $C^1$ diffeomorphism changes variables by the positive factor $J_h$ for every nonnegative measurable integrand.
+ 

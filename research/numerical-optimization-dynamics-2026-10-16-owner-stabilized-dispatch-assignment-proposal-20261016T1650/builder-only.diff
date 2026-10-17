@@ -1,0 +1,37 @@
+--- before/build-eight-proposed.mjs
++++ proposed/build-eight-proposed.mjs
+@@ -67,9 +67,16 @@
+   assert(successful(result, b), 'Actual current native review incomplete');
+   const immutable = `research/${RUN}-dispatch/alpha-3a-batch-${b}${result.evidence_tag}.result.json`;
+   assert(read(immutable).raw.equals(read(resultPath).raw), 'Stable result differs from immutable attempt');
+-  const reportPath = `research/${RUN}-alpha-batch-${b}-3a.md`, assignmentPath = `research/${RUN}-alpha-batch-${b}-3a-order.task.md`;
+-  assert(read(reportPath).text.includes(spec.report_excerpt) && spec.report_excerpt.trim().length >= 80
+-    && read(assignmentPath).text.includes(id), 'Actual specific report excerpt/assignment absent');
++  const reportPath = `research/${RUN}-alpha-batch-${b}-3a.md`, originalAssignmentPath = `research/${RUN}-alpha-batch-${b}-3a-order.task.md`;
++  assert(read(reportPath).text.includes(spec.report_excerpt) && spec.report_excerpt.trim().length >= 80,
++    'Actual specific report excerpt absent');
++  let assignmentPath = originalAssignmentPath, assignmentContext = {};
++  if (!read(originalAssignmentPath).text.includes(id)) {
++    assignmentPath = `research/${RUN}-dispatch/alpha-3a-batch-${b}${result.evidence_tag}.prompt.md`;
++    assert(typeof result.prompt === 'string' && [assignmentPath, resolve(ROOT, assignmentPath)].includes(result.prompt)
++      && read(assignmentPath).text.includes(id), 'Neither static task nor authenticated actual native dispatch prompt names the item');
++    assignmentContext = { assignment_kind: 'native-dispatch-prompt', original_assignment: ref(originalAssignmentPath) };
++  }
+   const decisionsPath = `research/${RUN}-alpha-batch-${b}-3a-decisions.json`, doc = json(decisionsPath);
+   assert(doc.version === 1 && doc.group === `batch-${b}` && (!Object.hasOwn(doc, 'run') || doc.run === RUN), 'Wrong native decision document identity');
+   const matches = doc.decisions.filter(d => d.id === id && d.obligation === obligation);
+@@ -106,10 +113,12 @@
+   }
+   archive(sourcePath, `${id}.current-before.md`);
+   archive(resultPath, `native-b${b}-stable-result.json`); archive(immutable, `native-b${b}-attempt-${result.attempt}-result.json`);
+-  archive(reportPath, `native-b${b}-report.md`); archive(assignmentPath, `native-b${b}-assignment.md`);
++  archive(reportPath, `native-b${b}-report.md`);
++  archive(originalAssignmentPath, `native-b${b}-original-static-assignment.md`);
++  archive(assignmentPath, assignmentPath === originalAssignmentPath ? `native-b${b}-original-static-assignment.md` : `native-b${b}-actual-attempt-${result.attempt}-prompt.md`);
+   return { result, decision, source, parsed, native_review: { result: ref(resultPath), immutable_result: ref(immutable),
+     report: ref(reportPath), assignment: ref(assignmentPath), decisions: decisionArchive,
+-    obligation, decision_sha256: hash(decision), full_proof_review: put(`bindings/${id}.actual-native-review-binding.json`, witness) } };
++    ...assignmentContext, obligation, decision_sha256: hash(decision), full_proof_review: put(`bindings/${id}.actual-native-review-binding.json`, witness) } };
+ }
+ function retained(oldEntry, current) {
+   const before = oldEntry.risk_review, after = current.risk_review;

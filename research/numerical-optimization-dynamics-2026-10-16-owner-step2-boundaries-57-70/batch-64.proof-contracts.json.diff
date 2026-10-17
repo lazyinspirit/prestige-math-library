@@ -1,0 +1,762 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-64.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-owner-step2-boundaries-57-70/proposed/batch-64.proof-contracts.json
+@@ -191,7 +191,7 @@
+         {
+           "id": "derive-2-1",
+           "step": "2.1",
+-          "claim": "Put $Z_k=X_k/A_k+T_k$. Each $Z_k$ is nonnegative, adapted, and integrable by [F1]–[F3]. By [F12], division by the positive deterministic $A_{k+1}$ and addition of the deterministic $T_{k+1}$ commute with conditional expectation. Since $A_{k+1}=A_k(1+a_k)$ and $T_k=c_k/A_{k+1}+T_{k+1}$, the given conditional inequality yields $\\mathbb E[Z_{k+1}\\mid\\mathcal F_k]\\le \\frac{(1+a_k)X_k-b_k+c_k}{A_{k+1}}+T_{k+1}=Z_k-\\frac{b_k}{A_{k+1}}.$ Hence $-Z_k$ is an integrable adapted submartingale and $\\sup_k\\mathbb E[(-Z_k)^+]=0$. By [F4], $Z_k$ converges almost surely to a finite limit.",
++          "claim": "Put $Z_k=X_k/A_k+T_k$. Each $Z_k$ is nonnegative, adapted, and integrable by [F1]\u2013[F3]. By [F12], division by the positive deterministic $A_{k+1}$ and addition of the deterministic $T_{k+1}$ commute with conditional expectation. Since $A_{k+1}=A_k(1+a_k)$ and $T_k=c_k/A_{k+1}+T_{k+1}$, the given conditional inequality yields $\\mathbb E[Z_{k+1}\\mid\\mathcal F_k]\\le \\frac{(1+a_k)X_k-b_k+c_k}{A_{k+1}}+T_{k+1}=Z_k-\\frac{b_k}{A_{k+1}}.$ Hence $-Z_k$ is an integrable adapted submartingale and $\\sup_k\\mathbb E[(-Z_k)^+]=0$. By [F4], $Z_k$ converges almost surely to a finite limit.",
+           "inputs": [
+             "A1",
+             "F1",
+@@ -207,7 +207,7 @@
+         {
+           "id": "derive-3-1",
+           "step": "3.1",
+-          "claim": "Define $S_k=\\sum_{j<k}b_j/A_{j+1}$ and $W_k=Z_k+S_k$. For each $k$, $S_{k+1}=S_k+b_k/A_{k+1}$ is $\\mathcal F_k$-measurable: each earlier $b_j$ is $\\mathcal F_j$-measurable with $\\mathcal F_j\\subseteq\\mathcal F_k$, the new term $b_k$ is $\\mathcal F_k$-measurable by hypothesis, and the denominators are deterministic. The finite sums $S_k,S_{k+1}$ are nonnegative and integrable by [F2]–[F3]. Hence [F12] gives $\\mathbb E[S_{k+1}\\mid\\mathcal F_k]=S_{k+1}=S_k+b_k/A_{k+1}$. Combining this with step 2.1 by linearity yields $\\mathbb E[W_{k+1}\\mid\\mathcal F_k]\\le Z_k-b_k/A_{k+1}+S_k+b_k/A_{k+1}=W_k$. Thus $-W_k$ is an integrable adapted submartingale with $\\sup_k\\mathbb E[(-W_k)^+]=0$; [F4] gives a finite almost-sure limit for $W_k$. Since the increasing partial sums $S_k$ are bounded above by $W_k$, their limit is finite almost surely.",
++          "claim": "Define $S_k=\\sum_{j<k}b_j/A_{j+1}$ and $W_k=Z_k+S_k$. For each $k$, $S_{k+1}=S_k+b_k/A_{k+1}$ is $\\mathcal F_k$-measurable: each earlier $b_j$ is $\\mathcal F_j$-measurable with $\\mathcal F_j\\subseteq\\mathcal F_k$, the new term $b_k$ is $\\mathcal F_k$-measurable by hypothesis, and the denominators are deterministic. The finite sums $S_k,S_{k+1}$ are nonnegative and integrable by [F2]\u2013[F3]. Hence [F12] gives $\\mathbb E[S_{k+1}\\mid\\mathcal F_k]=S_{k+1}=S_k+b_k/A_{k+1}$. Combining this with step 2.1 by linearity yields $\\mathbb E[W_{k+1}\\mid\\mathcal F_k]\\le Z_k-b_k/A_{k+1}+S_k+b_k/A_{k+1}=W_k$. Thus $-W_k$ is an integrable adapted submartingale with $\\sup_k\\mathbb E[(-W_k)^+]=0$; [F4] gives a finite almost-sure limit for $W_k$. Since the increasing partial sums $S_k$ are bounded above by $W_k$, their limit is finite almost surely.",
+           "inputs": [
+             "A1",
+             "F1",
+@@ -235,23 +235,23 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement has a nonempty domain/process or N≥1; no empty horizon is admitted."
++          "status": "checked",
++          "evidence": "The Statement processes and sums are indexed by k>=0. Step 1.1 explicitly initializes A_0=1, the empty finite product value, and step 3.1 has S_0=sum_{j<0} b_j/A_{j+1}=0. Summability allows all a,c,b to vanish; steps 2.1\u20134.1 need no strictly positive term in those sums."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "If all a_k,c_k,b_k vanish, A_k=1 and T_k=0; the Doob argument still yields the claimed convergence (steps 1.1–4.1)."
++          "evidence": "If all a_k,c_k,b_k vanish, A_k=1 and T_k=0; the Doob argument still yields the claimed convergence (steps 1.1\u20134.1)."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "The Statement quantifies over k≥0 and step 1.1 verifies the initial product A_0=1; no finite one-step horizon is asserted."
++          "evidence": "The Statement quantifies over k\u22650 and step 1.1 verifies the initial product A_0=1; no finite one-step horizon is asserted."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "If all a_k,c_k,b_k vanish, A_k=1 and T_k=0; the Doob argument still yields the claimed convergence (steps 1.1–4.1)."
++          "evidence": "If all a_k,c_k,b_k vanish, A_k=1 and T_k=0; the Doob argument still yields the claimed convergence (steps 1.1\u20134.1)."
+         },
+         {
+           "case": "endpoints",
+@@ -261,20 +261,20 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "AC is declared in the Statement and its conditional-expectation or Doob use is identified in a proof step."
++          "evidence": "The Statement explicitly assumes AC for conditional-expectation and Doob interfaces. Step 2.1 invokes those almost-sure classes and Doob; step 3.1 applies Doob again. This boundary is checked with that actual axiom, not excused as finite-dimensional selection."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
++          "reason": "The almost-supermartingale conclusion is sufficient under summable a,c and its conditional drift inequality. Steps 2.1\u20134.1 derive convergence and finite decrement sum; neither conclusion is asserted to characterize all such drift processes."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
+-        }
+-      ],
+-      "source_locators": "Dimitri P. Bertsekas, Convex Optimization Algorithms, Appendix A, Proposition A.4.5: Appendix A, Proposition A.4.5, printed pp. 464–465; its generalized theorem statement is cited for context, while the complete proof below is local",
++          "reason": "The almost-supermartingale conclusion is sufficient under summable a,c and its conditional drift inequality. Steps 2.1\u20134.1 derive convergence and finite decrement sum; neither conclusion is asserted to characterize all such drift processes."
++        }
++      ],
++      "source_locators": "Dimitri P. Bertsekas, Convex Optimization Algorithms, Appendix A, Proposition A.4.5: Appendix A, Proposition A.4.5, printed pp. 464\u2013465; its generalized theorem statement is cited for context, while the complete proof below is local",
+       "finite_checks": [],
+       "risk_review": {
+         "status": "author-self-review-complete",
+@@ -301,7 +301,7 @@
+           "fact": "F1",
+           "source": "def-stochastic-gradient-oracle-and-unconstrained-update",
+           "source_section": "Definition",
+-          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins–Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
++          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins\u2013Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
+           "uses": [
+             "1.1",
+             "2.1"
+@@ -376,7 +376,7 @@
+         {
+           "id": "derive-1-1",
+           "step": "1.1",
+-          "claim": "Write $V_k=\\|x_k-x^\\ast\\|_2^2$. By [F6] and $(\\sqrt\\mu\\|u\\|_2-\\|v\\|_2/\\sqrt\\mu)^2\\ge0$, $2|\\langle u,v\\rangle|\\le\\mu\\|u\\|_2^2+\\mu^{-1}\\|v\\|_2^2$. The update therefore gives $V_{k+1}\\le(1+\\mu\\alpha_k)V_k+(\\alpha_k/\\mu+\\alpha_k^2)\\|G_k\\|_2^2.$ By [F4], the conditional moment bound implies $\\mathbb E\\|G_k\\|_2^2\\le M^2$. Using [F1] and nonnegativity of conditional variance gives $\\mathbb E[\\|h(x_k)\\|_2^2]\\le M^2$. Thus [F7] and induction from square-integrable $x_0$ show every $V_k$ is integrable; Cauchy–Schwarz makes the products of $x_k-x^\\ast$ with both $G_k$ and $h(x_k)$ integrable.",
++          "claim": "Write $V_k=\\|x_k-x^\\ast\\|_2^2$. By [F6] and $(\\sqrt\\mu\\|u\\|_2-\\|v\\|_2/\\sqrt\\mu)^2\\ge0$, $2|\\langle u,v\\rangle|\\le\\mu\\|u\\|_2^2+\\mu^{-1}\\|v\\|_2^2$. The update therefore gives $V_{k+1}\\le(1+\\mu\\alpha_k)V_k+(\\alpha_k/\\mu+\\alpha_k^2)\\|G_k\\|_2^2.$ By [F4], the conditional moment bound implies $\\mathbb E\\|G_k\\|_2^2\\le M^2$. Using [F1] and nonnegativity of conditional variance gives $\\mathbb E[\\|h(x_k)\\|_2^2]\\le M^2$. Thus [F7] and induction from square-integrable $x_0$ show every $V_k$ is integrable; Cauchy\u2013Schwarz makes the products of $x_k-x^\\ast$ with both $G_k$ and $h(x_k)$ integrable.",
+           "inputs": [
+             "F1",
+             "F4",
+@@ -431,46 +431,46 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement has a nonempty domain/process or N≥1; no empty horizon is admitted."
++          "status": "checked",
++          "evidence": "The Statement supplies x_0 and x* and a natural-indexed infinite oracle path with sum alpha_k divergent, excluding an empty horizon. Step 1.1 starts integrability induction at x_0 and step 3.1 uses the actual infinite positive step sequence."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "The allowed M=0 case is covered by the same conditional recurrence and the two divergent/summable stepsize conditions (steps 1.1–4.1)."
++          "evidence": "The allowed M=0 case is covered by the same conditional recurrence and the two divergent/summable stepsize conditions (steps 1.1\u20134.1)."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "The first update and the base integrability case are included before the later-index argument (steps 1.1–2.1)."
++          "evidence": "The first update and the base integrability case are included before the later-index argument (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "The allowed M=0 case is covered by the same conditional recurrence and the two divergent/summable stepsize conditions (steps 1.1–4.1)."
++          "evidence": "The allowed M=0 case is covered by the same conditional recurrence and the two divergent/summable stepsize conditions (steps 1.1\u20134.1)."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "The Statement allows α_k=1/(2μ); step 2.1 retains a nonnegative decrement coefficient at that endpoint."
++          "evidence": "The Statement allows \u03b1_k=1/(2\u03bc); step 2.1 retains a nonnegative decrement coefficient at that endpoint."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "AC is declared in the Statement and its conditional-expectation or Doob use is identified in a proof step."
++          "evidence": "Facts A1 explicitly assumes AC for conditional expectation and Doob. Step 3.1 uses the AC-dependent Robbins\u2013Siegmund lemma with predictable b_k and summable c_k; no removal of that axiom is claimed."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
++          "reason": "Robbins\u2013Monro convergence is derived from strong monotonicity, bounded conditional moment and the specified positive step sums. Step 4.1 rules out a positive error limit and proves root uniqueness; it supplies no converse from almost-sure convergence to those assumptions."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
+-        }
+-      ],
+-      "source_locators": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), §4.2: §4.2, the square-summable/nonsummable stepsize discussion and strongly convex diminishing-step theorem ; Dimitri P. Bertsekas, Convex Optimization Algorithms, Appendix A, Proposition A.4.5: Appendix A, Proposition A.4.5; the local Robbins–Siegmund proof is supplied from the library Doob interface",
++          "reason": "Robbins\u2013Monro convergence is derived from strong monotonicity, bounded conditional moment and the specified positive step sums. Step 4.1 rules out a positive error limit and proves root uniqueness; it supplies no converse from almost-sure convergence to those assumptions."
++        }
++      ],
++      "source_locators": "L\u00e9on Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), \u00a74.2: \u00a74.2, the square-summable/nonsummable stepsize discussion and strongly convex diminishing-step theorem ; Dimitri P. Bertsekas, Convex Optimization Algorithms, Appendix A, Proposition A.4.5: Appendix A, Proposition A.4.5; the local Robbins\u2013Siegmund proof is supplied from the library Doob interface",
+       "finite_checks": [],
+       "risk_review": {
+         "status": "author-self-review-complete",
+@@ -496,7 +496,7 @@
+           "fact": "F1",
+           "source": "def-stochastic-gradient-oracle-and-unconstrained-update",
+           "source_section": "Definition",
+-          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins–Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
++          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins\u2013Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
+           "uses": [
+             "1.1",
+             "2.1"
+@@ -644,46 +644,46 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement has a nonempty domain/process or N≥1; no empty horizon is admitted."
++          "status": "checked",
++          "evidence": "The Statement requires an independently uniform R in {0,...,N-1}; such an index requires N>=1. Steps 3.1 and 4.1 use exactly its N-term average and division by N. There is no uniform probability law on the empty index set and no N=0 conclusion is asserted."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "The proof separates Δ=0 and σ=0, and also covers both zero at step 4.1."
++          "evidence": "The proof separates \u0394=0 and \u03c3=0, and also covers both zero at step 4.1."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "For N=1 the telescope has one term and the random index is R=0; the bound follows unchanged (steps 2.1–3.1)."
++          "evidence": "For N=1 the telescope has one term and the random index is R=0; the bound follows unchanged (steps 2.1\u20133.1)."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "The proof separates Δ=0 and σ=0, and also covers both zero at step 4.1."
++          "evidence": "The proof separates \u0394=0 and \u03c3=0, and also covers both zero at step 4.1."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "The endpoint α=1/L is allowed; it yields the coefficient 1/2 in the descent telescope (steps 1.1–2.1)."
++          "evidence": "The endpoint \u03b1=1/L is allowed; it yields the coefficient 1/2 in the descent telescope (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "AC is declared in the Statement and its conditional-expectation or Doob use is identified in a proof step."
++          "evidence": "The Statement assumes AC and independently selects a uniform finite index R. Step 4.1 uses its exact averaging identity; the finite selection is made on the stated product extension, while Facts A1 retains the axiom for conditional classes."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
++          "reason": "The nonconvex SGD theorem gives an upper expected squared-gradient estimate from unbiased bounded-variance gradients. Steps 3.1\u20134.1 establish its average and uniform-index identity; a small output norm is not claimed to imply unbiasedness or the input assumptions."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
+-        }
+-      ],
+-      "source_locators": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), §4.3, Theorem 4.8: §4.3, Theorem 4.8 and its complete telescoping proof ; Saeed Ghadimi and Guanghui Lan, Stochastic First- and Zeroth-Order Methods for Nonconvex Stochastic Programming, §2.1, Theorem 2.1: §2.1, Algorithm 1, Assumption A1, Theorem 2.1 and its proof",
++          "reason": "The nonconvex SGD theorem gives an upper expected squared-gradient estimate from unbiased bounded-variance gradients. Steps 3.1\u20134.1 establish its average and uniform-index identity; a small output norm is not claimed to imply unbiasedness or the input assumptions."
++        }
++      ],
++      "source_locators": "L\u00e9on Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), \u00a74.3, Theorem 4.8: \u00a74.3, Theorem 4.8 and its complete telescoping proof ; Saeed Ghadimi and Guanghui Lan, Stochastic First- and Zeroth-Order Methods for Nonconvex Stochastic Programming, \u00a72.1, Theorem 2.1: \u00a72.1, Algorithm 1, Assumption A1, Theorem 2.1 and its proof",
+       "finite_checks": [],
+       "risk_review": {
+         "status": "author-self-review-complete",
+@@ -710,7 +710,7 @@
+           "fact": "F1",
+           "source": "def-stochastic-gradient-oracle-and-unconstrained-update",
+           "source_section": "Definition",
+-          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins–Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
++          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins\u2013Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
+           "uses": [
+             "1.1",
+             "2.1"
+@@ -879,46 +879,46 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement has a nonempty domain/process or N≥1; no empty horizon is admitted."
++          "status": "checked",
++          "evidence": "The Statement explicitly restricts the weighted estimate to N>=1 and every alpha_k>0. Hence the finite weight sum is positive, as used for division in step 4.1. Step 5.1 specializes the same nonempty sums to constants; the infinite limsup is over these positive horizons."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Zero β_k or σ_k removes the corresponding nonnegative term in the exact bound; constant-step specialization remains valid (steps 4.1–5.1)."
++          "evidence": "Zero \u03b2_k or \u03c3_k removes the corresponding nonnegative term in the exact bound; constant-step specialization remains valid (steps 4.1\u20135.1)."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "For N=1 the weighted sum has one positive weight; steps 4.1–5.1 apply without an asymptotic assumption."
++          "evidence": "For N=1 the weighted sum has one positive weight; steps 4.1\u20135.1 apply without an asymptotic assumption."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Zero β_k or σ_k removes the corresponding nonnegative term in the exact bound; constant-step specialization remains valid (steps 4.1–5.1)."
++          "evidence": "Zero \u03b2_k or \u03c3_k removes the corresponding nonnegative term in the exact bound; constant-step specialization remains valid (steps 4.1\u20135.1)."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "The endpoint α_k=1/(4L) is allowed and is used in the coefficient bounds (steps 3.1–5.1)."
++          "evidence": "The endpoint \u03b1_k=1/(4L) is allowed and is used in the coefficient bounds (steps 3.1\u20135.1)."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "AC is declared in the Statement and its conditional-expectation or Doob use is identified in a proof step."
++          "evidence": "Facts A1 assumes AC for conditional-expectation classes. Step 1.1 checks integrable products before step 2.1 conditions the smoothness inequality; no arbitrary oracle selection is inferred from the finite moment expressions."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
++          "reason": "The biased-noise theorem gives a one-way weighted bound and its constant-step limsup specialization. Steps 4.1 and 5.1 do not characterize all processes attaining a particular floor or infer bias/variance assumptions from the bound."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
+-        }
+-      ],
+-      "source_locators": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), §§4.1 and 4.3: §4.1, first- and second-moment assumptions; §4.3, nonconvex fixed-step descent and telescoping",
++          "reason": "The biased-noise theorem gives a one-way weighted bound and its constant-step limsup specialization. Steps 4.1 and 5.1 do not characterize all processes attaining a particular floor or infer bias/variance assumptions from the bound."
++        }
++      ],
++      "source_locators": "L\u00e9on Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), \u00a7\u00a74.1 and 4.3: \u00a74.1, first- and second-moment assumptions; \u00a74.3, nonconvex fixed-step descent and telescoping",
+       "finite_checks": [],
+       "risk_review": {
+         "status": "author-self-review-complete",
+@@ -997,28 +997,28 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement has a nonempty domain/process or N≥1; no empty horizon is admitted."
++          "status": "checked",
++          "evidence": "The Statement permits a convex C without asserting it nonempty. If C is empty, both conclusions quantify over x,y in C and are vacuous. Proof 1.1 begins conditionally with fixed x,y in C, so no element of an empty C is selected; U need only support the differentiability hypotheses."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "For x=y, both inequalities reduce to equality; no division by the displacement occurs (steps 1.1–3.1)."
++          "evidence": "For x=y, both inequalities reduce to equality; no division by the displacement occurs (steps 1.1\u20133.1)."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "The proof holds for every d≥1 and includes the zero displacement case (steps 1.1–3.1)."
++          "evidence": "The proof holds for every d\u22651 and includes the zero displacement case (steps 1.1\u20133.1)."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "For x=y, both inequalities reduce to equality; no division by the displacement occurs (steps 1.1–3.1)."
++          "evidence": "For x=y, both inequalities reduce to equality; no division by the displacement occurs (steps 1.1\u20133.1)."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "The limit t↓0 is taken from 0<t<1 and does not assume differentiability outside the stated open domain (steps 1.1–2.1)."
++          "evidence": "The limit t\u21930 is taken from 0<t<1 and does not assume differentiability outside the stated open domain (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1028,15 +1028,15 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
++          "reason": "The strong-Jensen lemma derives the first-order lower support inequality in step 2.1 and strong gradient monotonicity in step 3.1 by swapping x,y. Its Statement asserts these consequences, without a reverse characterization theorem."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
+-        }
+-      ],
+-      "source_locators": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, §3.4.2: §3.4.2, strongly convex objective and gradient inequalities ; Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), §4.2: §4.2, Assumption 4.5 and the strongly convex gradient-gap inequality",
++          "reason": "The strong-Jensen lemma derives the first-order lower support inequality in step 2.1 and strong gradient monotonicity in step 3.1 by swapping x,y. Its Statement asserts these consequences, without a reverse characterization theorem."
++        }
++      ],
++      "source_locators": "S\u00e9bastien Bubeck, Convex Optimization: Algorithms and Complexity, \u00a73.4.2: \u00a73.4.2, strongly convex objective and gradient inequalities ; L\u00e9on Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), \u00a74.2: \u00a74.2, Assumption 4.5 and the strongly convex gradient-gap inequality",
+       "finite_checks": [],
+       "risk_review": {
+         "status": "author-self-review-complete",
+@@ -1062,7 +1062,7 @@
+           "fact": "F1",
+           "source": "def-stochastic-gradient-oracle-and-unconstrained-update",
+           "source_section": "Definition",
+-          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins–Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
++          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins\u2013Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
+           "uses": [
+             "1.1"
+           ],
+@@ -1153,7 +1153,7 @@
+         {
+           "id": "derive-1-1",
+           "step": "1.1",
+-          "claim": "Put $V_k=\\|x_k-x^\\ast\\|_2^2$. First, the pointwise bound $V_{k+1}\\le(1+\\mu\\alpha_k)V_k+(\\alpha_k/\\mu+\\alpha_k^2)\\|G_k\\|_2^2$ follows from [F5], [F7], and $2uv\\le\\mu u^2+\\mu^{-1}v^2$, so induction from deterministic $x_0$ and the unconditional moment bound gives $V_k\\in L^1$ for every $k$. The conditional-moment identity in [F1] gives $\\mathbb E\\|\\nabla f(x_k)\\|_2^2\\le M^2$; hence Cauchy–Schwarz makes the inner-product products integrable. By [F8], the strong-Jensen hypothesis is the one used in [F2]; applying [F2] with $y=x^\\ast$ gives $\\langle\\nabla f(x_k),x_k-x^\\ast\\rangle\\ge\\mu V_k$. Expanding the update and conditioning using [F1] and [F4] now gives $\\mathbb E[V_{k+1}\\mid\\mathcal F_k]\\le(1-2\\mu\\alpha_k)V_k+M^2\\alpha_k^2$.",
++          "claim": "Put $V_k=\\|x_k-x^\\ast\\|_2^2$. First, the pointwise bound $V_{k+1}\\le(1+\\mu\\alpha_k)V_k+(\\alpha_k/\\mu+\\alpha_k^2)\\|G_k\\|_2^2$ follows from [F5], [F7], and $2uv\\le\\mu u^2+\\mu^{-1}v^2$, so induction from deterministic $x_0$ and the unconditional moment bound gives $V_k\\in L^1$ for every $k$. The conditional-moment identity in [F1] gives $\\mathbb E\\|\\nabla f(x_k)\\|_2^2\\le M^2$; hence Cauchy\u2013Schwarz makes the inner-product products integrable. By [F8], the strong-Jensen hypothesis is the one used in [F2]; applying [F2] with $y=x^\\ast$ gives $\\langle\\nabla f(x_k),x_k-x^\\ast\\rangle\\ge\\mu V_k$. Expanding the update and conditioning using [F1] and [F4] now gives $\\mathbb E[V_{k+1}\\mid\\mathcal F_k]\\le(1-2\\mu\\alpha_k)V_k+M^2\\alpha_k^2$.",
+           "inputs": [
+             "A1",
+             "F1",
+@@ -1195,46 +1195,46 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement has a nonempty domain/process or N≥1; no empty horizon is admitted."
++          "status": "checked",
++          "evidence": "The Statement begins at x_0 and specifies alpha_0 separately, with the displayed estimates only for k>=1. Step 2.1 proves the k=1 base before induction, so it neither divides by k=0 nor uses an empty iteration list."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "M=0 is included in the recurrence and induction; all right sides are zero (steps 1.1–3.1)."
++          "evidence": "M=0 is included in the recurrence and induction; all right sides are zero (steps 1.1\u20133.1)."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "The specially defined α_0 gives the k=1 base case, then the induction starts at k=1 (step 2.1)."
++          "evidence": "The specially defined \u03b1_0 gives the k=1 base case, then the induction starts at k=1 (step 2.1)."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "M=0 is included in the recurrence and induction; all right sides are zero (steps 1.1–3.1)."
++          "evidence": "M=0 is included in the recurrence and induction; all right sides are zero (steps 1.1\u20133.1)."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "The first-index α_0 is handled separately; the later recurrence starts with k=1 (steps 2.1–3.1)."
++          "evidence": "The first-index \u03b1_0 is handled separately; the later recurrence starts with k=1 (steps 2.1\u20133.1)."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "AC is declared in the Statement and its conditional-expectation or Doob use is identified in a proof step."
++          "evidence": "Facts A1 assumes AC for conditional classes; step 1.1 establishes integrable cross products before conditioning. The deterministic schedule and given minimizer supply no new arbitrary family choices."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
++          "reason": "The diminishing-step theorem bounds expected distance and objective gap for k>=1 under its specified schedule. Step 2.1 proves the base and induction, and step 3.1 transfers to objective gap. It does not infer strong convexity or a schedule from an observed rate."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
+-        }
+-      ],
+-      "source_locators": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), §4.2, Theorem 4.7: §4.2, Theorem 4.7 and the induction proving the O(1/k) expected objective-gap bound ; Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, §6.1, Theorem 6.2: §6.1, Theorem 6.2, strongly convex stochastic-gradient averaging",
++          "reason": "The diminishing-step theorem bounds expected distance and objective gap for k>=1 under its specified schedule. Step 2.1 proves the base and induction, and step 3.1 transfers to objective gap. It does not infer strong convexity or a schedule from an observed rate."
++        }
++      ],
++      "source_locators": "L\u00e9on Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), \u00a74.2, Theorem 4.7: \u00a74.2, Theorem 4.7 and the induction proving the O(1/k) expected objective-gap bound ; S\u00e9bastien Bubeck, Convex Optimization: Algorithms and Complexity, \u00a76.1, Theorem 6.2: \u00a76.1, Theorem 6.2, strongly convex stochastic-gradient averaging",
+       "finite_checks": [],
+       "risk_review": {
+         "status": "author-self-review-complete",
+@@ -1375,7 +1375,7 @@
+           "fact": "F11",
+           "source": "def-stochastic-gradient-oracle-and-unconstrained-update",
+           "source_section": "Definition",
+-          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins–Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
++          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins\u2013Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
+           "uses": [
+             "1.1"
+           ],
+@@ -1406,7 +1406,7 @@
+         {
+           "id": "derive-1-1",
+           "step": "1.1",
+-          "claim": "Since $P_C$ is the proximal map of $\\iota_C$ by [F3], [F2] makes it nonexpansive and therefore continuous; [F3] also gives $P_C(x^\\ast)=x^\\ast$ and $x_{k+1}\\in C$. The point $x_k-\\alpha_kG_k$ is $\\mathcal F_{k+1}$-measurable, so continuity makes $x_{k+1}$ $\\mathcal F_{k+1}$-measurable. Thus the distance process is adapted. Hence $V_{k+1}=\\|x_{k+1}-x^\\ast\\|_2^2\\le\\|x_k-\\alpha_kG_k-x^\\ast\\|_2^2\\le(1+\\mu\\alpha_k)V_k+(\\alpha_k/\\mu+\\alpha_k^2)\\|G_k\\|_2^2,$ where the last inequality follows by expanding the square, applying [F8], [F9], and using $2uv\\le\\mu u^2+\\mu^{-1}v^2$. By [F6], $\\mathbb E\\|G_k\\|_2^2\\le M^2$, so induction from square-integrable $x_0$ shows each $V_k$ is integrable. By [F11] and the conditional moment bound, $\\|\\nabla f(x_k)\\|_2^2=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2\\le M^2$ almost surely. Cauchy–Schwarz therefore makes the cross products in the conditional expansion integrable.",
++          "claim": "Since $P_C$ is the proximal map of $\\iota_C$ by [F3], [F2] makes it nonexpansive and therefore continuous; [F3] also gives $P_C(x^\\ast)=x^\\ast$ and $x_{k+1}\\in C$. The point $x_k-\\alpha_kG_k$ is $\\mathcal F_{k+1}$-measurable, so continuity makes $x_{k+1}$ $\\mathcal F_{k+1}$-measurable. Thus the distance process is adapted. Hence $V_{k+1}=\\|x_{k+1}-x^\\ast\\|_2^2\\le\\|x_k-\\alpha_kG_k-x^\\ast\\|_2^2\\le(1+\\mu\\alpha_k)V_k+(\\alpha_k/\\mu+\\alpha_k^2)\\|G_k\\|_2^2,$ where the last inequality follows by expanding the square, applying [F8], [F9], and using $2uv\\le\\mu u^2+\\mu^{-1}v^2$. By [F6], $\\mathbb E\\|G_k\\|_2^2\\le M^2$, so induction from square-integrable $x_0$ shows each $V_k$ is integrable. By [F11] and the conditional moment bound, $\\|\\nabla f(x_k)\\|_2^2=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2\\le M^2$ almost surely. Cauchy\u2013Schwarz therefore makes the cross products in the conditional expansion integrable.",
+           "inputs": [
+             "A1",
+             "F1",
+@@ -1467,46 +1467,46 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement has a nonempty domain/process or N≥1; no empty horizon is admitted."
++          "status": "checked",
++          "evidence": "The Statement assumes nonempty C with x_0,x* in C. Step 1.1 proves each projection lies in C and the sequence is adapted; no projection onto an empty set or empty-horizon convergence claim is formed."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "M=0 is included in the conditional recurrence; the RS decrement argument still proves convergence (steps 1.1–3.1)."
++          "evidence": "M=0 is included in the conditional recurrence; the RS decrement argument still proves convergence (steps 1.1\u20133.1)."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "The initial point belongs to C and the projection fixes the minimizer; the first conditional update is covered (steps 1.1–2.1)."
++          "evidence": "The initial point belongs to C and the projection fixes the minimizer; the first conditional update is covered (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "M=0 is included in the conditional recurrence; the RS decrement argument still proves convergence (steps 1.1–3.1)."
++          "evidence": "M=0 is included in the conditional recurrence; the RS decrement argument still proves convergence (steps 1.1\u20133.1)."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "The projection and one-sided derivative argument include boundary minimizers on C (steps 1.1–2.1)."
++          "evidence": "The projection and one-sided derivative argument include boundary minimizers on C (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "AC is declared in the Statement and its conditional-expectation or Doob use is identified in a proof step."
++          "evidence": "Facts A1 retains AC for conditional expectation and Doob. Step 1.1 uses the unique projection to prove adaptedness and integrability; step 3.1 calls the AC-dependent convergence supplier rather than treating the projection as a choice axiom replacement."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
++          "reason": "The projected strong-convex theorem derives almost-sure convergence from its moment/stepsize/composite-convexity hypotheses. Step 3.1 invokes almost-supermartingale convergence and excludes a positive limiting distance; no converse criterion for all convergent projected paths is asserted."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
+-        }
+-      ],
+-      "source_locators": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), §4.2: §4.2, Robbins–Monro diminishing stepsizes and the strongly convex branch ; Dimitri P. Bertsekas, Convex Optimization Algorithms, Appendix A, Proposition A.4.5: Appendix A, Proposition A.4.5; local proof below derives the needed convergence from the library Doob supplier",
++          "reason": "The projected strong-convex theorem derives almost-sure convergence from its moment/stepsize/composite-convexity hypotheses. Step 3.1 invokes almost-supermartingale convergence and excludes a positive limiting distance; no converse criterion for all convergent projected paths is asserted."
++        }
++      ],
++      "source_locators": "L\u00e9on Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), \u00a74.2: \u00a74.2, Robbins\u2013Monro diminishing stepsizes and the strongly convex branch ; Dimitri P. Bertsekas, Convex Optimization Algorithms, Appendix A, Proposition A.4.5: Appendix A, Proposition A.4.5; local proof below derives the needed convergence from the library Doob supplier",
+       "finite_checks": [],
+       "risk_review": {
+         "status": "author-self-review-complete",
+@@ -1685,7 +1685,7 @@
+           "fact": "F13",
+           "source": "def-stochastic-gradient-oracle-and-unconstrained-update",
+           "source_section": "Definition",
+-          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins–Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
++          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins\u2013Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
+           "uses": [
+             "1.1",
+             "2.1"
+@@ -1697,7 +1697,7 @@
+         {
+           "id": "derive-1-1",
+           "step": "1.1",
+-          "claim": "First establish adaptedness of the projected iterates. The deterministic $x_0$ is $\\mathcal F_0$-measurable. If $x_k$ is $\\mathcal F_k$-measurable, then $x_k$ and $G_k$ are $\\mathcal F_{k+1}$-measurable because $\\mathcal F_k\\subseteq\\mathcal F_{k+1}$ and [F13] makes $G_k$ $\\mathcal F_{k+1}$-measurable. Thus $x_k-\\alpha G_k$ is $\\mathcal F_{k+1}$-measurable. By [F2]–[F3], $P_C$ is nonexpansive and hence continuous, so $x_{k+1}=P_C(x_k-\\alpha G_k)$ is $\\mathcal F_{k+1}$-measurable and lies in $C$. Induction [F6] proves this for every $k$. The set of pairwise distances in the nonempty set $C$ is nonempty and bounded above by the finite $D$, so [F12] supplies its supremum. By [F10] and [F13], $\\|\\nabla f(x_k)\\|_2^2\\le\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le G^2$. Since $x_k,x^\\ast\\in C$, their distance is at most $D$. The convex gradient inequality [F4] and [F11] give $0\\le f(x_k)-f(x^\\ast)\\le\\langle\\nabla f(x_k),x_k-x^\\ast\\rangle\\le DG$, so each objective value in the telescope is integrable.",
++          "claim": "First establish adaptedness of the projected iterates. The deterministic $x_0$ is $\\mathcal F_0$-measurable. If $x_k$ is $\\mathcal F_k$-measurable, then $x_k$ and $G_k$ are $\\mathcal F_{k+1}$-measurable because $\\mathcal F_k\\subseteq\\mathcal F_{k+1}$ and [F13] makes $G_k$ $\\mathcal F_{k+1}$-measurable. Thus $x_k-\\alpha G_k$ is $\\mathcal F_{k+1}$-measurable. By [F2]\u2013[F3], $P_C$ is nonexpansive and hence continuous, so $x_{k+1}=P_C(x_k-\\alpha G_k)$ is $\\mathcal F_{k+1}$-measurable and lies in $C$. Induction [F6] proves this for every $k$. The set of pairwise distances in the nonempty set $C$ is nonempty and bounded above by the finite $D$, so [F12] supplies its supremum. By [F10] and [F13], $\\|\\nabla f(x_k)\\|_2^2\\le\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le G^2$. Since $x_k,x^\\ast\\in C$, their distance is at most $D$. The convex gradient inequality [F4] and [F11] give $0\\le f(x_k)-f(x^\\ast)\\le\\langle\\nabla f(x_k),x_k-x^\\ast\\rangle\\le DG$, so each objective value in the telescope is integrable.",
+           "inputs": [
+             "A1",
+             "F2",
+@@ -1777,8 +1777,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement has a nonempty domain/process or N≥1; no empty horizon is admitted."
++          "status": "checked",
++          "evidence": "The Statement assumes nonempty C with x_0 and x* in C and defines its mean only for N>=1. Step 1.1 verifies the pairwise-distance set is nonempty before its supremum; step 4.1 proves Jensen by induction starting at one point. Neither the feasible set nor averaging horizon is left empty."
+         },
+         {
+           "case": "zero",
+@@ -1788,7 +1788,7 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "For N=1, x̄_1=x_0 and the finite telescope in step 3.1 gives the result."
++          "evidence": "For N=1, x\u0304_1=x_0 and the finite telescope in step 3.1 gives the result."
+         },
+         {
+           "case": "degenerate",
+@@ -1798,25 +1798,25 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Step 5.1 treats the zero D/G endpoints without dividing by DG and uses α=D/(G√N) only when both are positive."
++          "evidence": "Step 5.1 treats the zero D/G endpoints without dividing by DG and uses \u03b1=D/(G\u221aN) only when both are positive."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "AC is declared in the Statement and its conditional-expectation or Doob use is identified in a proof step."
++          "evidence": "Facts A1 explicitly retains AC for conditional classes. Step 1.1 checks projection-measurability and supremum existence, while step 4.1 is an ordinary finite Jensen induction; this does not claim the axiom is unnecessary for the stochastic interfaces."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
++          "reason": "The projected convex theorem derives an expected finite-average gap bound. Step 4.1 uses Jensen and step 5.1 chooses the stated stepsize or handles D=0/G=0. It does not characterize all functions or oracles producing that finite rate."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
+-        }
+-      ],
+-      "source_locators": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, §§3.1 and 6.1, Theorem 6.1: §6.1, Theorem 6.1 and the projected stochastic mirror-descent telescoping argument ; Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), §4.1: §4.1, Algorithm 4.1 and stochastic-gradient first/second-moment assumptions",
++          "reason": "The projected convex theorem derives an expected finite-average gap bound. Step 4.1 uses Jensen and step 5.1 chooses the stated stepsize or handles D=0/G=0. It does not characterize all functions or oracles producing that finite rate."
++        }
++      ],
++      "source_locators": "S\u00e9bastien Bubeck, Convex Optimization: Algorithms and Complexity, \u00a7\u00a73.1 and 6.1, Theorem 6.1: \u00a76.1, Theorem 6.1 and the projected stochastic mirror-descent telescoping argument ; L\u00e9on Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018), \u00a74.1: \u00a74.1, Algorithm 4.1 and stochastic-gradient first/second-moment assumptions",
+       "finite_checks": [],
+       "risk_review": {
+         "status": "author-self-review-complete",
+@@ -1862,7 +1862,7 @@
+           "fact": "F3",
+           "source": "def-stochastic-gradient-oracle-and-unconstrained-update",
+           "source_section": "Definition",
+-          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins–Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
++          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins\u2013Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
+           "uses": [
+             "1.1",
+             "2.1"
+@@ -1904,7 +1904,7 @@
+         {
+           "id": "derive-1-1",
+           "step": "1.1",
+-          "claim": "By [F1]–[F2], $f(x)=\\frac14(x+1)^2+\\frac14(x-1)^2=\\frac12(x^2+1).$ Its difference quotient at $x$ is $\\bigl(f(x+h)-f(x)\\bigr)/h=x+h/2$, so [F5] gives $\\nabla f(x)=x$. Likewise $\\bigl(\\ell(h,Y)-\\ell(0,Y)\\bigr)/h=h/2-Y$, so $G_0=-Y$. Its conditional mean given the trivial $\\mathcal F_0$ is zero, equal to $\\nabla f(0)$, and [F6] with [F1]–[F2] gives conditional variance $\\mathbb E[Y^2]=1$.",
++          "claim": "By [F1]\u2013[F2], $f(x)=\\frac14(x+1)^2+\\frac14(x-1)^2=\\frac12(x^2+1).$ Its difference quotient at $x$ is $\\bigl(f(x+h)-f(x)\\bigr)/h=x+h/2$, so [F5] gives $\\nabla f(x)=x$. Likewise $\\bigl(\\ell(h,Y)-\\ell(0,Y)\\bigr)/h=h/2-Y$, so $G_0=-Y$. Its conditional mean given the trivial $\\mathcal F_0$ is zero, equal to $\\nabla f(0)$, and [F6] with [F1]\u2013[F2] gives conditional variance $\\mathbb E[Y^2]=1$.",
+           "inputs": [
+             "A1",
+             "F1",
+@@ -1932,43 +1932,43 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement has a nonempty domain/process or N≥1; no empty horizon is admitted."
++          "status": "checked",
++          "evidence": "The Example has exactly two probability outcomes and a supplied initial x_0=0. Verification 1.1 computes a two-term expectation and 2.1 one update Y/2, so no empty probability space, sample list or trajectory is used."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "The support has fixed outcomes ±1; the computed update and gap are exact for both outcomes (steps 1.1–2.1)."
++          "evidence": "The support has fixed outcomes \u00b11; the computed update and gap are exact for both outcomes (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "The single update x_1 and its exact gap are computed directly (steps 1.1–2.1)."
++          "evidence": "The single update x_1 and its exact gap are computed directly (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "The support has fixed outcomes ±1; the computed update and gap are exact for both outcomes (steps 1.1–2.1)."
++          "evidence": "The support has fixed outcomes \u00b11; the computed update and gap are exact for both outcomes (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "The finite probability weights sum exactly to one and both outcomes are checked (steps 1.1–2.1)."
++          "evidence": "The finite probability weights sum exactly to one and both outcomes are checked (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "AC is declared in the Statement and its conditional-expectation or Doob use is identified in a proof step."
++          "evidence": "The Example finite sample space is explicitly Y=-1 or1 with weights1/2. Verification 1.1 sums those values; Facts A1 still records AC for the canonical conditional-expectation interface, not an unstated sample-selection oracle."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
++          "reason": "The streaming least-squares Example computes one two-outcome mean gradient, update and realized gap. Verification 1.1 and 2.1 establish that specific finite model, without a biconditional characterization of unbiased estimators or all SGD trajectories."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
++          "reason": "The streaming least-squares Example computes one two-outcome mean gradient, update and realized gap. Verification 1.1 and 2.1 establish that specific finite model, without a biconditional characterization of unbiased estimators or all SGD trajectories."
+         }
+       ],
+       "source_locators": "",
+@@ -1998,7 +1998,7 @@
+           "fact": "F1",
+           "source": "def-stochastic-gradient-oracle-and-unconstrained-update",
+           "source_section": "Definition",
+-          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins–Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
++          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins\u2013Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
+           "uses": [
+             "1.1"
+           ],
+@@ -2111,23 +2111,23 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement has a nonempty domain/process or N≥1; no empty horizon is admitted."
++          "status": "checked",
++          "evidence": "The Example specifies x_0=0 and an infinite sequence xi_k in {-1,1}. Verification 1.1 starts its stability induction there, and 2.1 uses p-series from n>=2. Both step sums have fixed infinite nonempty index sets."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "The example uses unit-magnitude noise, so zero noise is outside its stated instance; its finite moment and step conditions are exact (steps 1.1–2.1)."
++          "evidence": "The example uses unit-magnitude noise, so zero noise is outside its stated instance; its finite moment and step conditions are exact (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "The initial index k=0 has α_0=1/(4·2^(3/4)); the uniform moment and step bound include it (steps 1.1–2.1)."
++          "evidence": "The initial index k=0 has \u03b1_0=1/(4\u00b72^(3/4)); the uniform moment and step bound include it (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "The example uses unit-magnitude noise, so zero noise is outside its stated instance; its finite moment and step conditions are exact (steps 1.1–2.1)."
++          "evidence": "The example uses unit-magnitude noise, so zero noise is outside its stated instance; its finite moment and step conditions are exact (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "endpoints",
+@@ -2137,17 +2137,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "AC is declared in the Statement and its conditional-expectation or Doob use is identified in a proof step."
++          "evidence": "Facts A1 explicitly assumes AC for conditional and almost-sure convergence interfaces. The noise sequence is given with conditional moments, not constructed by choosing arbitrary signs; Verification 2.1 invokes the stated theorem under those hypotheses."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
++          "reason": "The noisy-root Example verifies its particular bounded scalar recursion against the Robbins\u2013Monro theorem. Verification 1.1 proves stability and moments and 2.1 checks step sums; it asserts neither independence nor a converse characterization of convergent noises."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
++          "reason": "The noisy-root Example verifies its particular bounded scalar recursion against the Robbins\u2013Monro theorem. Verification 1.1 proves stability and moments and 2.1 checks step sums; it asserts neither independence nor a converse characterization of convergent noises."
+         }
+       ],
+       "source_locators": "",
+@@ -2176,7 +2176,7 @@
+           "fact": "F1",
+           "source": "def-stochastic-gradient-oracle-and-unconstrained-update",
+           "source_section": "Definition",
+-          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins–Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
++          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins\u2013Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
+           "uses": [
+             "1.1"
+           ],
+@@ -2290,43 +2290,43 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The statement has a nonempty domain/process or N≥1; no empty horizon is admitted."
++          "status": "checked",
++          "evidence": "The Example probability space has one point of mass one, not an empty space. Verification 1.1 initializes x_0=0 and 2.1 averages only for N>=1; the b=0 special case leaves those nonempty indices and yields identically zero values."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "b=0 gives x_k=0 and zero average; the geometric formula and theorem bound remain valid (steps 1.1–2.1)."
++          "evidence": "b=0 gives x_k=0 and zero average; the geometric formula and theorem bound remain valid (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "The exact average formula is stated for every N≥1, including the first term (step 2.1)."
++          "evidence": "The exact average formula is stated for every N\u22651, including the first term (step 2.1)."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "b=0 gives x_k=0 and zero average; the geometric formula and theorem bound remain valid (steps 1.1–2.1)."
++          "evidence": "b=0 gives x_k=0 and zero average; the geometric formula and theorem bound remain valid (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "The geometric denominators 1−q and 1−q² are positive for q=3/4, and the formula applies for each N≥1 (steps 1.1–2.1)."
++          "evidence": "The geometric denominators 1\u2212q and 1\u2212q\u00b2 are positive for q=3/4, and the formula applies for each N\u22651 (steps 1.1\u20132.1)."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "AC is declared in the Statement and its conditional-expectation or Doob use is identified in a proof step."
++          "evidence": "The Example fixes the one-point probability space and deterministic recurrence. Facts A1 nevertheless records AC for the imported conditional bias-floor theorem, which Verification 2.1 invokes after explicit moment checks. No arbitrary noise selection is introduced."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
++          "reason": "The simulator Example computes a particular exact limiting floor b^2 and compares it with the nonsharp theorem bound(5/2)b^2 in Verification 2.1. It is not an iff characterization of simulator bias or equality in the general floor bound."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item is a one-way result or finite verification, not an equivalence."
++          "reason": "The simulator Example computes a particular exact limiting floor b^2 and compares it with the nonsharp theorem bound(5/2)b^2 in Verification 2.1. It is not an iff characterization of simulator bias or equality in the general floor bound."
+         }
+       ],
+       "source_locators": "",

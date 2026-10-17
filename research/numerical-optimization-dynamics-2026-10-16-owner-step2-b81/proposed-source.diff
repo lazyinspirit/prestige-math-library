@@ -1,0 +1,83 @@
+--- items/def-phi-functions-by-everywhere-convergent-series.md (before)
++++ items/def-phi-functions-by-everywhere-convergent-series.md (proposed)
+@@ -35,14 +35,14 @@
+ 
+ ## Definition
+ 
+-Use the first-variable-linear standard inner product on $\mathbb C^n$ and its norm $\|x\|_2=\sqrt{\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\|X\|_2$ is the operator norm of the linear map $x\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].
++Use the first-variable-linear standard inner product on $\mathbb C^n$ and its norm $\|x\|_2=\sqrt{\sum_{i<n}|x_i|^2}$ from [[prop-standard-coordinate-inner-products]] and [[def-inner-product-norm]]. The matrix norm $\|X\|_2$ is the operator norm of the linear map $x\mapsto Xx$ in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. On $\mathbb C^0=\{0\}$ this operator norm is $0$, as specified in that definition.
+ 
+ For each integer $k\ge0$, define the scalar phi function and its finite-matrix action by
+ 
+ $$\varphi_k(z):=\sum_{j=0}^{\infty}\frac{z^j}{(j+k)!},\qquad \varphi_k(X):=\sum_{j=0}^{\infty}\frac{X^j}{(j+k)!}.$$
+ 
+-Here $z\in\mathbb C$, $X\in M_n(\mathbb C)$, $n\ge1$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\varphi_0(z)=\exp z$; for matrices, $\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].
++Here $z\in\mathbb C$, $X\in M_n(\mathbb C)$, $n\ge0$, $X^0=I_n$, and factorials are the usual positive integer factorials. [[lem-phi-series-converges-absolutely]] establishes that both series converge absolutely for every such input, so these expressions define values on their full stated domains. By the published power-series definition [[def-complex-exponential]], $\varphi_0(z)=\exp z$; for matrices, $\varphi_0(X)$ is the bounded-operator exponential series of [[lem-exponential-series-of-a-bounded-operator]].
+ 
+-At zero, only the $j=0$ term remains, so $\varphi_k(0)=1/k!$ and $\varphi_k(0_{n\times n})=I_n/k!$.
++At zero, the series gives $\varphi_k(0)=1/k!$ and $\varphi_k(0_{n\times n})=I_n/k!$ for every $n\ge0$. For $n\ge1$, only the $j=0$ matrix term can be nonzero. For $n=0$, [[def-matrix-space]] and [[def-matrix-product-and-identity-matrix]] identify $I_0$ with the unique empty matrix $0_{0\times0}$; every power $X^j$ and every partial sum is that matrix. Thus $\varphi_k(0_{0\times0})=I_0/k!=0_{0\times0}$, including $k=0$.
+ 
+ The recurrence is always interpreted as a series identity, including at zero; division by $z$ is not part of this definition.
+--- items/lem-phi-series-converges-absolutely.md (before)
++++ items/lem-phi-series-converges-absolutely.md (proposed)
+@@ -34,13 +34,13 @@
+ 
+ ## Statement
+ 
+-For every integer $k\ge0$, the scalar series defining $\varphi_k(z)$ converges absolutely for every $z\in\mathbb C$, and the matrix series defining $\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\in M_n(\mathbb C)$, $n\ge1$. At zero, $\varphi_k(0)=1/k!$ and $\varphi_k(0_{n\times n})=I_n/k!$.
++For every integer $k\ge0$, the scalar series defining $\varphi_k(z)$ converges absolutely for every $z\in\mathbb C$, and the matrix series defining $\varphi_k(X)$ converges absolutely in operator $2$-norm for every $X\in M_n(\mathbb C)$, $n\ge0$. At zero, $\varphi_k(0)=1/k!$ and $\varphi_k(0_{n\times n})=I_n/k!$.
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** $k\ge0$, $z\in\mathbb C$, $X\in M_n(\mathbb C)$ with $n\ge1$, and the series definitions of [[def-phi-functions-by-everywhere-convergent-series]].
++**Given:** $k\ge0$, $z\in\mathbb C$, $X\in M_n(\mathbb C)$ with $n\ge0$, and the series definitions of [[def-phi-functions-by-everywhere-convergent-series]].
+ 
+-[F1] [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]: $\|X\|_2=\max_{\|x\|_2=1}\|Xx\|_2$ for a linear endomorphism of $\mathbb C^n$.
++[F1] [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]: $\|X\|_2=0$ on $\mathbb C^0$; for $n\ge1$, $\|X\|_2=\max_{\|x\|_2=1}\|Xx\|_2$ for a linear endomorphism of $\mathbb C^n$.
+ 
+ [F2] [[cor-operator-norm-submultiplicative-and-t-star-t-identity]]: $\|YZ\|_2\le\|Y\|_2\|Z\|_2$ for compatible finite-dimensional maps.
+ 
+@@ -54,8 +54,8 @@
+ 
+ 1.1 Put $R:=|z|$. Since $(j+k)!\ge j!$ for every $j\ge0$, $|z^j/(j+k)!|\le R^j/j!$; the majorant sums to $e^R$ by [F4]. Thus the scalar series is absolutely convergent. [given, F4, algebra]
+ 
+-1.2 Put $R:=\|X\|_2$. The operator norm is defined by [F1]. Repeated submultiplicativity in [F2] gives $\|X^j\|_2\le R^j$, so $\|X^j/(j+k)!\|_2\le R^j/j!$ for every $j$. The norms therefore have a finite sum by [F4]. [given, F1, F2, F4]
++1.2 If $n=0$, the series definition gives $X^j=I_0=0_{0\times0}$ for every $j\ge0$. Every term has norm $0$ by [F1], so the matrix series is absolutely convergent and every partial sum equals the unique empty matrix. For $n\ge1$, put $R:=\|X\|_2$. The operator norm is defined by [F1]. Repeated submultiplicativity in [F2] gives $\|X^j\|_2\le R^j$, so $\|X^j/(j+k)!\|_2\le R^j/j!$ for every $j$. The norms therefore have a finite sum by [F4]. [given, F1, F2, F4]
+ 
+-2.1 Let $S_N$ be the partial sums of the matrix series. For $N>M$, the triangle inequality bounds $\|S_N-S_M\|_2$ by the tail of the convergent scalar majorant in step 1.2, so $(S_N)$ is Cauchy. The matrix space is finite-dimensional and complete by [F3], hence $(S_N)$ converges in operator norm. [given, step 1.2, F3, algebra]
++2.1 For $n\ge1$, let $S_N$ be the partial sums of the matrix series. For $N>M$, the triangle inequality bounds $\|S_N-S_M\|_2$ by the tail of the convergent scalar majorant in step 1.2, so $(S_N)$ is Cauchy. The matrix space is finite-dimensional and complete by [F3], hence $(S_N)$ converges in operator norm. For $n=0$, convergence was established directly in step 1.2. [given, step 1.2, F3, algebra]
+ 
+-3.1 At $z=0$ only the $j=0$ term of the scalar series is nonzero, and at $X=0$ only the $j=0$ matrix term is nonzero; these terms are respectively $1/k!$ and $I_n/k!$. Hence both stated zero values follow. [given, step 1.1, step 2.1, algebra] ∎
++3.1 At $z=0$ only the $j=0$ term of the scalar series is nonzero, and at $X=0$ with $n\ge1$ only the $j=0$ matrix term is nonzero; these terms are respectively $1/k!$ and $I_n/k!$. When $n=0$, every matrix term and $I_0/k!$ is the unique empty matrix by step 1.2. Hence both stated zero values follow for every allowed size. [given, step 1.1, step 1.2, step 2.1, algebra] ∎
+--- items/thm-phi-recurrence-and-augmented-matrix-actions.md (before)
++++ items/thm-phi-recurrence-and-augmented-matrix-actions.md (proposed)
+@@ -30,7 +30,7 @@
+ 
+ ## Statement
+ 
+-For every integer $k\ge0$, scalar $z\in\mathbb C$, and square matrix $X\in M_n(\mathbb C)$ with $n\ge1$, the series-defined functions of [[def-phi-functions-by-everywhere-convergent-series]] satisfy
++For every integer $k\ge0$, scalar $z\in\mathbb C$, and square matrix $X\in M_n(\mathbb C)$ with $n\ge0$, the series-defined functions of [[def-phi-functions-by-everywhere-convergent-series]] satisfy
+ 
+ $$\varphi_k(z)=\frac1{k!}+z\varphi_{k+1}(z),\qquad \varphi_k(X)=\frac1{k!}I_n+X\varphi_{k+1}(X).$$
+ 
+@@ -38,7 +38,7 @@
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** $k\ge0$, $z\in\mathbb C$, $X\in M_n(\mathbb C)$ with $n\ge1$, and $w\in\mathbb C^n$ when $k\ge1$.
++**Given:** $k\ge0$, $z\in\mathbb C$, $X\in M_n(\mathbb C)$ with $n\ge0$, and $w\in\mathbb C^n$ when $k\ge1$.
+ 
+ [F1] [[def-phi-functions-by-everywhere-convergent-series]]: $\varphi_k(z)=\sum_{j\ge0}z^j/(j+k)!$ and $\varphi_k(X)=\sum_{j\ge0}X^j/(j+k)!$.
+ 
+@@ -50,8 +50,8 @@
+ 
+ 1.1 Absolute convergence in [F2] permits an index shift: $z\varphi_{k+1}(z)=\sum_{j\ge0}z^{j+1}/(j+k+1)!=\sum_{r\ge1}z^r/(r+k)!=\varphi_k(z)-1/k!$. Rearranging proves the scalar recurrence, including $z=0$. [F1, F2, algebra]
+ 
+-1.2 The same index shift is valid in operator norm by [F2]; left multiplication by $X$ sends the $(j+k+1)!$ denominator term to $X^{j+1}/(j+k+1)!$. Thus $X\varphi_{k+1}(X)=\varphi_k(X)-I_n/k!$, proving the matrix recurrence. [F1, F2, algebra]
++1.2 For $n=0$, every matrix term is the unique empty matrix by [F1], so the matrix recurrence is the equality of that matrix with itself. For $n\ge1$, the same index shift is valid in operator norm by [F2]; left multiplication by $X$ sends the $(j+k+1)!$ denominator term to $X^{j+1}/(j+k+1)!$. Thus $X\varphi_{k+1}(X)=\varphi_k(X)-I_n/k!$, proving the matrix recurrence. [F1, F2, algebra]
+ 
+-1.3 In $B_k(X,w)$, a block-product path from the first block row to the last column of the last block must move through the $w e_1^*$ block and then through all $k-1$ superdiagonal entries of $J_k$. It uses exactly $k$ block transitions; any remaining factors can only be copies of $X$ before that first transition. Hence the last column of the top-right block of $B_k^r$ is zero for $r<k$, and is $X^{r-k}w$ for $r\ge k$. [given, algebra]
++1.3 For $n\ge1$, in $B_k(X,w)$, a block-product path from the first block row to the last column of the last block must move through the $w e_1^*$ block and then through all $k-1$ superdiagonal entries of $J_k$. It uses exactly $k$ block transitions; any remaining factors can only be copies of $X$ before that first transition. Hence the last column of the top-right block of $B_k^r$ is zero for $r<k$, and is $X^{r-k}w$ for $r\ge k$. [given, algebra]
+ 
+-2.1 By [F2] with $k=0$, $e^{B_k}=\varphi_0(B_k)=\sum_{r\ge0}B_k^r/r!$. By step 1.3, the last column of its top-right block is $\sum_{r\ge k}X^{r-k}w/r!=\sum_{j\ge0}X^jw/(j+k)!=\varphi_k(X)w$. This is exactly the first $n$ entries obtained by applying $e^{B_k}$ to the last coordinate vector. [step 1.3, F1, F2, algebra] ∎
++2.1 For $n\ge1$, by [F2] with $k=0$, $e^{B_k}=\varphi_0(B_k)=\sum_{r\ge0}B_k^r/r!$. By step 1.3, the last column of its top-right block is $\sum_{r\ge k}X^{r-k}w/r!=\sum_{j\ge0}X^jw/(j+k)!=\varphi_k(X)w$. This is exactly the first $n$ entries obtained by applying $e^{B_k}$ to the last coordinate vector. When $n=0$, $w$ is the unique vector in $\mathbb C^0$ and $B_k(X,w)=J_k$; the first zero entries of $e^{J_k}e_k$ and $\varphi_k(X)w$ are both the empty vector. Thus the augmented identity also holds in that case. [step 1.3, F1, F2, algebra] ∎

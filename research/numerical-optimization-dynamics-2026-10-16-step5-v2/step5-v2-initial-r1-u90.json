@@ -1,0 +1,220 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "90",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-chebyshev-polynomials-orthogonal-in-arcsine-weight",
+      "model": "gpt-6-luna",
+      "context_sha256": "cdc30547a785da5c2b0d1656de1bae27108b208513c76ec1bb3c2e1cb706f0c2",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The omitted cosine-surjectivity justification is a nonfatal short proof gap. Continuity and cos(0)=1, cos(pi)=-1 meet thm-intermediate-value on [0,pi], supplying exactly the preimages used in steps 3.1 and 4.1. Added that dependency and F11; the Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-legendre-weighted-sobolev-scale",
+      "model": "gpt-6-luna",
+      "context_sha256": "828e66a4fbd5a00700f52919f114db8ef9b49484e645a6399d85a28d1bdd60ff",
+      "outcome": "confirmed_fatal",
+      "reason": "The Definition falsely asserts that full weights increase with n: at s=0, w_n=2/(2n+1) decreases. This is a confirmed fatal logic defect in an asserted claim, although the norm construction remains sound. Replaced it by the proved nondecreasing spectral-factor assertion and stated that full weights need not be nondecreasing.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "ex-analytic-and-nonsmooth-chebyshev-coefficient-decay",
+      "model": "gpt-6-luna",
+      "context_sha256": "fef4ad0cb06fb8b3e6679281382d24521899c4aa407e246bab4cf14b8a2b49cf",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 1.1 proves holomorphy but omits the elementary local-series verification of analyticity. This is a nonfatal short proof gap, with no false coefficient claim. Added the expansion about each real c<2, whose finite remainder is bounded by 2^(-M)/(2-c) for |x-c|<(2-c)/2, and cited def-real-analytic-function.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-chebyshev-gauss-lobatto-collocation-grid",
+      "model": "gpt-6-luna",
+      "context_sha256": "21d68bfc6f6252fc848e17e8564d09ad5fdd0b07408cb22086db624a5d84df89",
+      "outcome": "confirmed_fatal",
+      "reason": "The defining interface leaves U and f untyped although its cardinal-interpolation supplier accepts only real data. This is a confirmed fatal other/typing defect in the Definition. Specified U_j in R and f:[-1,1]->R explicitly; the nodes, reversal and interpolation formula are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "other"
+    },
+    {
+      "id": "thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact",
+      "model": "gpt-6-luna",
+      "context_sha256": "d53a2086a24d4e8a9b47085a879fbabe5ccb9a73e9c1c7db7025624efc2795e9",
+      "outcome": "confirmed_fatal",
+      "reason": "F2 cited an infinite-support spectral-scale definition under hypotheses allowing only N+2 support points. This is a confirmed fatal dependency_citation defect: the cited interface does not apply. Replaced it with def-gauss-moment-data and thm-monic-gauss-orthogonal-polynomials-exist-uniquely at m=N+1, and explicitly defined h_i as the finite squared integral.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "dependency_citation"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-chebyshev-polynomials-orthogonal-in-arcsine-weight",
+      "disposition": "repaired",
+      "post_sha256": "3512a2727570719ba8a0d69d84ab592d347e2ea419eb9287875f139ef06e0dc2",
+      "review_context_sha256": "3aa218c8a91d92083e330409851d2d7586615df4e20ea49f1069ca0e59731694",
+      "reason": "Product-to-sum gives pi, pi/2 and zero in the three orthogonality cases; distinct polynomial degrees give a basis. Uniform approximation bounds the squared norm by pi*M*epsilon, and continuity gives a strictly positive integral near any nonzero value, including endpoints. The repaired F11 explicitly supplies the cosine preimage for this last step. Checked the local argument directly; no independent acceptance of my repair is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-legendre-weighted-sobolev-scale",
+      "disposition": "repaired",
+      "post_sha256": "fa8d67d8dcf94d1b89a85da45bf03728e344c497d04119f3e5ed1215b9d6ac1d",
+      "review_context_sha256": "40b7218a7c96436cf5622da82c1e0cbdaa7692ea965b24aebe01404aa5284762",
+      "reason": "Distinct Legendre degrees give unique coefficients; positive weights give the square-root isometry onto real ell^2 and dense truncations. Norm and projection formulas are preserved. The only changed Definition clause concerns monotonicity. The direct projection-rate consumer already compares only (1+n(n+1))^s and retains 2/(2n+1) on both sides, so its proof remains sound unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-analytic-and-nonsmooth-chebyshev-coefficient-decay",
+      "disposition": "repaired",
+      "post_sha256": "ac600e886e3d827aed04c19b2848559464a0bbd1397cd9d92883e77f78246d61",
+      "review_context_sha256": "dff4d1b36fe7173763e39e1d164a3a6e67543a5b4fb3d22660976efab35e27d0",
+      "reason": "The explicit local series converges by the existing geometric-null lemma. Checked the finite complex geometric sum, Poisson-kernel algebra and uniform-integral error yielding a_0=1/sqrt(3) and a_n=2(2-sqrt(3))^n/sqrt(3). Reflection kills odd cusp coefficients; product-to-sum integration gives 4(-1)^(m-1)/(pi(4m^2-1)), with the zero mode 2/pi. The Example section is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-chebyshev-gauss-lobatto-collocation-grid",
+      "disposition": "repaired",
+      "post_sha256": "229c78a95bbe6a2ece303d2b4759d26a53760c654ef9618effc85ae496818275",
+      "review_context_sha256": "d1655b0456be672fcfe0e23a4adee2ef443f870f40c90e8b58844b7a3ca02dff",
+      "reason": "Cosine monotonicity makes the reversed nodes strictly increasing for every N>=1, including N=1, so the real cardinal-interpolation theorem applies. Examined all seven direct item consumers, the unlinked spectral-regularity interpolation use, and page prose. All use real data/functions or only unchanged nodes. Three full-Definition quote mirrors were reconciled in the owning contract; consumer item files are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact",
+      "disposition": "repaired",
+      "post_sha256": "49ce872e357acc3e0aeb8f57cb8911e7e4c4444fa94c846701eb81bdbe527c96",
+      "review_context_sha256": "2df59315610e2fdde187436d6b51f838b8415f2cbcad7e194c9c48c3f7935f01",
+      "reason": "The moment-data interface includes a finite positive relative Borel measure on a compact interval, at least m+1=N+2 support points and moments through 2m-1=2N+1. The finite supplier gives monic orthogonality through degree N. Each product degree i+j<=2N is within Gaussian exactness; orthogonality gives zero off diagonal and the defined h_i on diagonal. N=0 reduces to p_0=1. The Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-legendre-weighted-projection-error-rate",
+    "lem-chebyshev-lobatto-mode-aliasing",
+    "alg-chebyshev-gauss-lobatto-differentiation-matrix",
+    "thm-chebyshev-gauss-lobatto-differentiation-is-exact",
+    "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination",
+    "thm-chebyshev-lobatto-pointwise-remainder-bound",
+    "ex-chebyshev-lobatto-endpoint-clustering",
+    "thm-chebyshev-lobatto-interpolation-exponential-rate-for-analytic-data",
+    "thm-chebyshev-lobatto-interpolation-rate-under-spectral-sobolev-regularity"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-chebyshev-polynomials-orthogonal-in-arcsine-weight",
+      "severity": "nonfatal",
+      "location": "proof steps 3.1 and 4.1 / Facts F11",
+      "reason": "The omitted cosine-surjectivity justification is a nonfatal short proof gap. Continuity and cos(0)=1, cos(pi)=-1 meet thm-intermediate-value on [0,pi], supplying exactly the preimages used in steps 3.1 and 4.1. Added that dependency and F11; the Statement is unchanged."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-legendre-weighted-sobolev-scale",
+      "severity": "fatal",
+      "location": "Definition, spectral-weight monotonicity sentence",
+      "reason": "The Definition falsely asserts that full weights increase with n: at s=0, w_n=2/(2n+1) decreases. This is a confirmed fatal logic defect in an asserted claim, although the norm construction remains sound. Replaced it by the proved nondecreasing spectral-factor assertion and stated that full weights need not be nondecreasing.",
+      "defect_type": "logic"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-analytic-and-nonsmooth-chebyshev-coefficient-decay",
+      "severity": "nonfatal",
+      "location": "Proof 1.1 and new F15",
+      "reason": "Step 1.1 proves holomorphy but omits the elementary local-series verification of analyticity. This is a nonfatal short proof gap, with no false coefficient claim. Added the expansion about each real c<2, whose finite remainder is bounded by 2^(-M)/(2-c) for |x-c|<(2-c)/2, and cited def-real-analytic-function."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-chebyshev-gauss-lobatto-collocation-grid",
+      "severity": "fatal",
+      "location": "Definition, data and function domains",
+      "reason": "The defining interface leaves U and f untyped although its cardinal-interpolation supplier accepts only real data. This is a confirmed fatal other/typing defect in the Definition. Specified U_j in R and f:[-1,1]->R explicitly; the nodes, reversal and interpolation formula are preserved.",
+      "defect_type": "other"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact",
+      "severity": "fatal",
+      "location": "Facts F2 / Proof 1.1 and 2.1",
+      "reason": "F2 cited an infinite-support spectral-scale definition under hypotheses allowing only N+2 support points. This is a confirmed fatal dependency_citation defect: the cited interface does not apply. Replaced it with def-gauss-moment-data and thm-monic-gauss-orthogonal-polynomials-exist-uniquely at m=N+1, and explicitly defined h_i as the finite squared integral.",
+      "defect_type": "dependency_citation"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "route-finding-to-owner",
+      "id": "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination",
+      "reason": "The called algorithm explicitly takes N and real nodal U and returns D_N U, whereas the caller needs the matrix D_N before solving for U.",
+      "evidence": {
+        "id": "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination",
+        "route": "frontier owner for batch 90",
+        "affected_use": "Definition: 'Construct the Chebyshev differentiation matrix $D_N$ by [[alg-chebyshev-gauss-lobatto-differentiation-matrix]]' occurs before any vector U is supplied.",
+        "invalidated_claim": "The called algorithm explicitly takes N and real nodal U and returns D_N U, whereas the caller needs the matrix D_N before solving for U.",
+        "minimality": "The supplier constructs D_N internally. Expose the matrix as an output or specify obtaining its columns by calls on standard basis vectors; any supplier Definition change requires its own direct-consumer examination. This corroborates the frozen Step-4 concern; neither algorithm was edited or adjudicated by this assignment."
+      }
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "action": "record-maintenance-alert",
+      "id": "thm-sine-cosine-signs-monotonicity-and-ranges",
+      "status": "owner-review-requested",
+      "reason": "Endpoint values and monotonicity alone do not justify every intermediate value in the asserted ranges; continuity and IVT supply that step, but its dependency list omits thm-intermediate-value.",
+      "evidence": {
+        "id": "thm-sine-cosine-signs-monotonicity-and-ranges",
+        "route": "published-consumer maintenance / owner",
+        "affected_use": "Published Proof 2.1: \"The period moves these conclusions to every integer $m$, and the endpoint values in [L2] show both ranges are exactly $[-1,1]$.\"",
+        "invalidated_claim": "Endpoint values and monotonicity alone do not justify every intermediate value in the asserted ranges; continuity and IVT supply that step, but its dependency list omits thm-intermediate-value.",
+        "minimality": "Potential routine published proof-citation omission only: add continuity/IVT justification to the range clause. No published item was edited or adjudicated. Assigned grid consumers use the already proved strict cosine monotonicity, and the repaired orthogonality lemma now cites IVT directly; no defective assigned conclusion relies on this omission."
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "All five assigned draft items belong to the frozen frontier and were handled in task order. All five rejected tuples are covered: three confirmed fatal defects (logic, other/typing, dependency_citation) and two nonfatal proof omissions, all repaired. No new items, external source consultation, choice assumptions, judgments, stamps, shared ledgers or round state were authored. Familiar elementary arguments were checked directly; existing bibliography URLs are not represented as sources newly consulted.",
+    "Each review-context command ran immediately after the corresponding mathematical review and before editing a later supplier; the returned hashes are copied verbatim. Subsequent changes affected only owning manifest/contract metadata. Current itemHashGuard values match all five stored post hashes. Direct comparison with the frozen Statement/Definition hashes identifies only the Legendre and grid Definitions as changed interfaces.",
+    "Local source evidence: items/thm-intermediate-value.md Statement and proof; items/def-chebyshev-arcsine-weighted-l2-pairing.md Definition; current trigonometric facts; items/lem-legendre-weighted-derivative-orthogonality-and-norm.md and its projection-rate consumer; items/def-real-analytic-function.md Definition; items/def-cardinal-polynomial-interpolation.md Definition and its existence/uniqueness theorem; items/def-gauss-moment-data.md Definition, items/thm-monic-gauss-orthogonal-polynomials-exist-uniquely.md Statement and proof, and the Gaussian exactness theorem and assembly algorithm. Exact affected consumer uses are recorded in downstream_uses.",
+    "All shared metadata edits used tools/step5-shared-write-lock.mjs acquire/reread/edit/check/release. Changed only assigned proof-contract derivations/citations, their manifest dependency mirrors, and three necessary literal grid-source quote mirrors after checking the consumers. No consumer item source was edited. The eight direct dependency/reference item consumers are all in the frozen frontier; the additional unlinked real interpolation use is also inventoried. Owning page prose remains sound. No outside consumer source repair was identified from the changed interfaces.",
+    "Final precheck command: node tools/tsx-run.mjs tools/precheck.mts followed by the five assigned item paths and --json. Exit 0: 5 files, 3 proofs passed, 2 definitions not applicable, 0 failures. Final rendercheck command: node tools/rendercheck.mjs followed by the same five paths and --json. Exit 0: 5 checked, 0 errors, 0 warnings.",
+    "After the final item edits, ran once: node tools/proof-layout.mjs items/lem-chebyshev-polynomials-orthogonal-in-arcsine-weight.md items/def-legendre-weighted-sobolev-scale.md items/ex-analytic-and-nonsmooth-chebyshev-coefficient-decay.md items/def-chebyshev-gauss-lobatto-collocation-grid.md items/thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact.md. Exit 0: 5 items, 12 steps, 0 defects. No item edits or formatter followed.",
+    "Focused downstream contract check initially found three stale full-grid Definition quotations; reconciled those exact quote mirrors under the lock. Final node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-90.proof-contracts.json --items lem-chebyshev-polynomials-orthogonal-in-arcsine-weight,ex-analytic-and-nonsmooth-chebyshev-coefficient-decay,thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact,thm-legendre-weighted-projection-error-rate,lem-chebyshev-lobatto-mode-aliasing,thm-chebyshev-gauss-lobatto-differentiation-is-exact,thm-chebyshev-lobatto-pointwise-remainder-bound,ex-chebyshev-lobatto-endpoint-clustering,thm-chebyshev-lobatto-interpolation-exponential-rate-for-analytic-data,thm-chebyshev-lobatto-interpolation-rate-under-spectral-sobolev-regularity --strict exited 0: 10/10 checked, 0 errors, 0 warnings. node tools/manifest-deps.mjs research/numerical-optimization-dynamics-2026-10-16-batch-90.pages.json exited 0: 34 items, 0 normalized, 0 errors. A separate five-item comparison confirmed exact equality of source and manifest dependency arrays.",
+    "No unresolved assigned mathematics remains. The two outside-lane observations in ledger_updates are proposed owner/maintenance routes only, not adjudications or repairs of those items. Original round evidence remains unchanged. Independent rejudgment, downstream owner handling, separate published maintenance and convergence/certification remain engine duties; this report does not assert round closure."
+  ],
+  "downstream_uses": {
+    "thm-legendre-weighted-projection-error-rate": "items/thm-legendre-weighted-projection-error-rate.md: F1 explicitly says its spectral factor is nondecreasing in n; Proof 1.1 compares (1+n(n+1))^s with the first omitted spectral factor while retaining 2/(2n+1) on both sides. Disposition: mathematically sound unchanged.",
+    "lem-chebyshev-lobatto-mode-aliasing": "items/lem-chebyshev-lobatto-mode-aliasing.md: F1 and Proof 2.1-3.1 use the same distinct nodes and interpolate T_n, a real polynomial, to the real polynomial T_r. Disposition: mathematically sound unchanged. Updated only its full-Definition source quotation in the owning batch contract.",
+    "alg-chebyshev-gauss-lobatto-differentiation-matrix": "items/alg-chebyshev-gauss-lobatto-differentiation-matrix.md: Definition explicitly inputs real nodal values U_0,...,U_N and reverses them to Y_k=U_(N-k) before forming real cardinal polynomials. Disposition: mathematically sound unchanged.",
+    "thm-chebyshev-gauss-lobatto-differentiation-is-exact": "items/thm-chebyshev-gauss-lobatto-differentiation-is-exact.md: Statement and Given require real nodal data; F1 and Proof 1.1 reverse the same nodes and data for interpolation uniqueness. Disposition: mathematically sound unchanged.",
+    "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination": "items/alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination.md: Definition uses N>=2, real coefficient/forcing functions and real endpoint data on the unchanged descending grid; the scalar-domain clarification is satisfied. Disposition: this grid use remains sound unchanged; the separate matrix-output interface concern is routed in ledger_updates.",
+    "thm-chebyshev-lobatto-pointwise-remainder-bound": "items/thm-chebyshev-lobatto-pointwise-remainder-bound.md: Statement uses f in C^(N+1)([-1,1]), which def-higher-derivatives-and-smoothness defines for real-valued functions; F1 uses unchanged nodes. Disposition: mathematically sound unchanged. Updated only its full-Definition source quotation in the owning batch contract.",
+    "ex-chebyshev-lobatto-endpoint-clustering": "items/ex-chebyshev-lobatto-endpoint-clustering.md: F1 and Verification 1.1 use only x_j=cos(j*pi/N); no data or interpolation scalar field enters the spacing argument. Disposition: mathematically sound unchanged. Updated only its full-Definition source quotation in the owning batch contract.",
+    "thm-chebyshev-lobatto-interpolation-exponential-rate-for-analytic-data": "items/thm-chebyshev-lobatto-interpolation-exponential-rate-for-analytic-data.md: Statement explicitly requires f real-valued on [-1,1]; Proof 3.1-4.1 interpolates its real nodal restriction despite using a holomorphic extension off the interval. Disposition: mathematically sound unchanged.",
+    "thm-chebyshev-lobatto-interpolation-rate-under-spectral-sobolev-regularity": "items/thm-chebyshev-lobatto-interpolation-rate-under-spectral-sobolev-regularity.md: Statement defines I_N^L u and F3 / Proof 2.1 apply the Lobatto cardinal sum to u; its real coefficient model and uniform convergence in Proof 1.1 give a real continuous representative and real nodal values. Disposition: mathematically sound unchanged."
+  }
+}

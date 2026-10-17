@@ -1,0 +1,3040 @@
+{
+  "version": 1,
+  "level": "numerical-optimization-dynamics-2026-10-16-batch-73",
+  "scope": [
+    "lem-finite-sum-gradient-is-average",
+    "lem-positive-diagonal-map-preserves-closed-convexity",
+    "cex-adam-periodic-linear-losses-force-divergence",
+    "lem-convex-smooth-component-gradient-cocoercivity",
+    "thm-independent-minibatch-conditional-variance",
+    "cex-saga-linear-factor-fails-under-standard-initialization",
+    "lem-saga-estimator-and-table-recurrence",
+    "lem-svrg-unbiasedness-and-variance-bound",
+    "lem-diagonal-adagrad-subproblem-well-defined",
+    "thm-saga-expected-linear-contraction",
+    "thm-svrg-epoch-expected-linear-contraction",
+    "lem-diagonal-adagrad-one-step-regret-bound",
+    "thm-diagonal-adagrad-regret-bound",
+    "ex-regularized-logistic-finite-sum",
+    "ex-svrg-saga-gradient-work-storage-comparison",
+    "ex-adam-adaptive-step-divergence"
+  ],
+  "contracts": {
+    "lem-finite-sum-gradient-is-average": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F1] [[def-finite-sum]]: finite sums are recursively defined, with each successor sum equal to the preceding sum plus its next term."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-algebra-of-total-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f,g:U\\to\\mathbb R^n$ are totally differentiable at $a$ and $c\\in\\mathbb R$, then $f+g$ and $cf$ are totally differentiable at $a$, with",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F2] [[thm-algebra-of-total-derivatives]]: the sum and scalar multiple of totally differentiable maps are totally differentiable, with derivatives equal to the corresponding sum and scalar multiple."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "[F3] [[thm-total-derivative-computes-directional-and-partial-derivatives]]: for each standard basis vector e_j, the partial derivative is DF(x)e_j, and the matrix of DF(x) is the Jacobian."
+        },
+        {
+          "fact": "F4",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "[F4] [[def-jacobian-matrix-and-gradient]]: the gradient of a scalar function is the vector of its partial derivatives."
+        },
+        {
+          "fact": "F5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F5] [[thm-induction-principle]]: a property true at zero and inherited by each successor holds for every natural index."
+        },
+        {
+          "fact": "F6",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "[F6] [[def-euclidean-inner-product]]: vectors in R^d are equal when their d coordinates agree."
+        },
+        {
+          "fact": "F7",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F7] [[def-total-derivative-in-euclidean-space]]: total differentiability means a linear first-order approximation with a remainder whose norm divided by ||h||_2 tends to zero."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "For 0<=m<=n define S_m:U->R by S_m(y)=sum_{i<m}f_{i+1}(y), using [F1]. The base S_0 is the zero function, whose total derivative is the zero linear map directly from [F7]. If S_m is totally differentiable at x with derivative sum_{i<m}Df_{i+1}(x), then S_{m+1}=S_m+f_{m+1}; [F2] makes it differentiable with derivative sum_{i<m}Df_{i+1}(x)+Df_{m+1}(x)=sum_{i<m+1}Df_{i+1}(x). Induction [F5] proves this formula through m=n.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F7",
+            "given",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Since F=n^{-1}S_n and n>=1, the scalar n^{-1} is defined. The scalar-multiple rule [F2] gives DF(x)=n^{-1}sum_{i<n}Df_{i+1}(x).",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "For each coordinate j, [F3] gives partial_j F(x)=DF(x)e_j=n^{-1}sum_{i<n}Df_{i+1}(x)e_j=n^{-1}sum_{i<n}partial_j f_{i+1}(x). By [F4] these are exactly the coordinates of n^{-1}sum_{i=1}^n grad f_i(x); [F6] then identifies the vectors. Hence the displayed gradient formula holds.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero is outside the fixed nonzero data or positive-parameter hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the induction ends after one component and step 3.1 gives grad F=grad f1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate object is admitted beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or conditional-expectation existence interface is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "John Lebl, Basic Analysis I, Section 8.3, The Derivative: Proposition 8.3.6, sum/scalar rules for total derivatives; Subsection 8.3.3, gradient representation.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    },
+    "lem-positive-diagonal-map-preserves-closed-convexity": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F1] [[def-convex-subset-of-euclidean-space]]: convexity means every segment between two points of C lies in C."
+        },
+        {
+          "fact": "F2",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).",
+          "uses": [
+            "1.2",
+            "2.1"
+          ],
+          "use_explanation": "[F2] [[def-metric-topology]]: C is closed exactly when its complement is open; an open set contains a positive-radius ball around each of its points."
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $x \\in X$ and let\n$r \\in \\mathbb{R}$ with $r > 0$ ([[def-real-order]]). Define",
+          "uses": [
+            "1.2",
+            "2.1"
+          ],
+          "use_explanation": "[F3] [[def-metric-ball]]: B(x,r)={y:||y-x||_2<r}."
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so",
+          "uses": [
+            "1.2"
+          ],
+          "use_explanation": "[F4] [[def-euclidean-inner-product]]: ||z||_2^2=sum_{j=1}^d z_j^2."
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).",
+          "uses": [
+            "1.2"
+          ],
+          "use_explanation": "[F5] [[def-finite-sum]]: finite sums are well-defined and obey their finite-sum algebra."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.2"
+          ],
+          "use_explanation": "[F6] [[thm-of-square-roots]]: a nonnegative real has a unique nonnegative square root."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Choose x_0 in C. Then Dx_0 in DC, so DC is nonempty. If x,y in C and t in [0,1], then by linearity D((1-t)x+ty)=(1-t)Dx+tDy; [F1] puts the left side in DC, so DC is convex.",
+          "inputs": [
+            "F1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Fix z notin DC. Then x=D^{-1}z is notin C. Since C is closed, [F2] supplies r>0 with B(x,r) disjoint from C. Define M=sqrt(sum_j d_j^{-2})>0. For every q in R^d, [F4]–[F6] give ||D^{-1}q||_2^2=sum_j d_j^{-2}q_j^2 <= (sum_j d_j^{-2})(sum_j q_j^2)=M^2||q||_2^2, because all summands d_j^{-2} and q_j^2 are nonnegative. Thus ||D^{-1}q||_2<=M||q||_2.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "If ||w-z||_2<r/M, then step 1.2 gives ||D^{-1}w-x||_2<r, hence D^{-1}w notin C and w notin DC. Therefore B(z,r/M) lies in the complement of DC. Every point outside DC has such a ball, so [F2] makes DC closed; step 1.1 already proved DC nonempty and convex.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero is outside the fixed nonzero data or positive-parameter hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The coordinate argument works for d=1 in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A singleton C maps to a singleton; steps 1.1–2.1 establish the properties."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or conditional-expectation existence interface is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph: Section 6.3, finite-dimensional convex optimization context; this elementary set-transform claim is proved locally.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    },
+    "cex-adam-periodic-linear-losses-force-divergence": {
+      "risk": "high",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-adam-update",
+          "source_section": "Definition",
+          "quote": "Fix a dimension d at least 1, an initial point x_1 in R^d, a constant step size eta>0, a denominator constant epsilon>0, and parameters beta_1,beta_2 in [0,1). Set m_0=v_0=0. Given a gradient g_t in R^d at each integer time t>=1, calculate",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F1] [[alg-adam-update]]: Adam uses m_t=beta_1m_{t-1}+(1-beta_1)g_t, v_t=beta_2v_{t-1}+(1-beta_2)g_t^2, bias corrections, and x_{t+1}=x_t-eta mhat_t/(sqrt(vhat_t)+epsilon)."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "use_explanation": "[F2] [[thm-induction-principle]]: a property true at zero and inherited by each successor holds for every natural index."
+        },
+        {
+          "fact": "F3",
+          "source": "def-complete-ordered-field",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and $S \\subseteq F$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "use_explanation": "[F3] [[def-complete-ordered-field]]: the real numbers are an ordered field, so order is preserved by addition and multiplication by nonnegative numbers."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F4] [[thm-of-square-roots]]: each nonnegative real has a unique nonnegative square root."
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "use_explanation": "[F5] [[def-natural-numbers]]: time and cycle indices are natural numbers."
+        },
+        {
+          "fact": "F6",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$, where $\\mathbb{R}$ is the ambient ordered field\n([[def-ordered-field]], [[def-field]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F6] [[def-integer-power]]: beta^t is the integer power of beta at natural time t."
+        },
+        {
+          "fact": "F7",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F7] [[def-convex-and-strictly-convex-functions-on-euclidean-sets]]: convexity means the segment inequality for function values."
+        },
+        {
+          "fact": "F8",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "[F8] [[thm-of-archimedean]]: for every real $M$ there is a natural $r$ with $r>M$."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "The losses are affine, hence convex by direct substitution in [F7]. With $\\beta_2=1/2$, define $h_k=v_{3k+1}$, $u_k=v_{3k+2}$, and $w_k=v_{3k+3}$. Substituting the three gradients in [F1] gives $h_0=25/8$, $u_k=h_k/2+1/2$, $w_k=h_k/4+3/4$, and $h_{k+1}=h_k/8+7/2$. The formula $h_k=4-7/8^{k+1}$ holds at $k=0$ because $4-7/8=25/8$; substitution proves the successor formula, so [F2] gives it for every $k$. It yields $h_k<4$ and $u_k<5/2$, $w_k<7/4$. Also $h_{k+1}-h_k=(7/8)(4-h_k)>0$, so for $k\\ge2$, $h_k\\ge h_2=4-7/512>3.98$, where $7/512<1/50$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Let $a_k,b_k,c_k>0$ be the magnitudes of the three Adam updates in cycle $k$, so the cycle change is $-a_k+b_k+c_k$. For $k >= 2$, step 1.1 gives $\\widehat v_{3k+1} >= h_k > 3.98 > (1.99)^2$, $\\widehat v_{3k+2} <= (5/2)/(1-2^{-8})=128/51 < (8/5)^2$, and $\\widehat v_{3k+3} < (7/4)/(1-2^{-9})=896/511 < (7/5)^2$. Since $\\beta_1=0$, $\\widehat m_t=g_t$; with $\\epsilon=1/100$ the update magnitudes satisfy $a_k<(5/2)/(1.99+0.01)=5/4$, $b_k>1/(8/5+1/100)=100/161$, and $c_k>1/(7/5+1/100)=100/141$. Exact arithmetic gives $100/161+100/141-5/4=7295/90804>0$, so every such cycle increases $x$ by at least this amount.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Put $X_k=x_{3k+1}$. For every $k\\ge2$, step 2.1 gives $X_{k+1}\\ge X_k+\\delta$, where $\\delta=7295/90804>0$. Induction gives $X_{2+r}\\ge X_2+r\\delta$ for each integer $r\\ge0$. Given any real bound $M$, [F8] supplies an integer $r>(M-X_2)/\\delta$ ; hence $X_{2+r}>M$. Thus the terminal subsequence is unbounded above, disproving boundedness from bounded gradients alone.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F8",
+            "step 2.1",
+            "given",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes the nonzero periodic gradients 5/2,-1,-1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A single-term or one-step boundary is not part of this fixed statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate object is admitted beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The drift bound holds for k>=2 in step 2.1 and divergence follows in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or conditional-expectation existence interface is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "Sashank J. Reddi, Satyen Kale, and Sanjiv Kumar, On the Convergence of Adam and Beyond, ICLR 2018: Section 2, Theorem 1; Appendix F, Theorem 6, which treats an epsilon-denominator projected variant.\nDiederik P. Kingma and Jimmy Ba, Adam: A Method for Stochastic Optimization, ICLR 2015: Section 2, Algorithm 1 and bias-correction equations (2)–(5).",
+      "finite_checks": [
+        {
+          "name": "Exact lower drift",
+          "calculation": "100/161 + 100/141 - 5/4 = 7295/90804 > 0",
+          "steps": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    },
+    "lem-convex-smooth-component-gradient-cocoercivity": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-l-smoothness-descent-inequality",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable and suppose $\\nabla f$ is Lipschitz with constant $L\\ge0$ in the Euclidean norm. Then\n$$f(y)\\le f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac{L}{2}\\|y-x\\|_2^2\\qquad(x,y\\in\\mathbb R^n).$$",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F1] [[lem-l-smoothness-descent-inequality]]: an L-Lipschitz gradient gives f(z)<=f(w)+<grad f(w),z-w>+(L/2)||z-w||_2^2 for all w,z."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-differentiable-convex-functions-and-gradient-inequality",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^n$ be open and convex, and let $f:U\\to\\mathbb R$ be differentiable. Then $f$ is convex if and only if",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F2] [[thm-differentiable-convex-functions-and-gradient-inequality]]: a differentiable convex function satisfies f(z)>=f(w)+<grad f(w),z-w>."
+        },
+        {
+          "fact": "F3",
+          "source": "def-lipschitz-holder-contraction",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be a function. Recall that a metric takes nonnegative real values\n([[lem-metric-nonnegativity]]).",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F3] [[def-lipschitz-holder-contraction]]: L-Lipschitz means ||grad f_i(a)-grad f_i(b)||_2<=L||a-b||_2."
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-sum-gradient-is-average",
+          "source_section": "Statement",
+          "quote": "Let U be open in R^d, let x in U, let n>=1, and let f_1,...,f_n:U->R be totally differentiable at x. Put F=n^{-1}sum_{i=1}^n f_i. Then F is totally differentiable at x and",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "[F4] [[lem-finite-sum-gradient-is-average]]: grad F(y)=n^{-1}sum_i grad f_i(y)."
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F5] [[def-euclidean-inner-product]]: ||z||_2^2=<z,z>, and the inner product is linear in each variable."
+        },
+        {
+          "fact": "F6",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F6] [[def-convex-and-strictly-convex-functions-on-euclidean-sets]]: convexity is the segment inequality for values of the function."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Fix i and y, and define h_i(z)=f_i(z)-<grad f_i(y),z>. Substituting this expression into the segment inequality [F6] shows that subtracting this linear function preserves convexity, and grad h_i(y)=0. By [F2] applied at y, h_i(z)>=h_i(y) for every z, so y is a global minimizer of h_i.",
+          "inputs": [
+            "F2",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Apply [F1] to h_i at x and z=x-grad h_i(x)/L. Since subtracting a linear function leaves gradient differences unchanged, h_i is still L-smooth; substitution and algebra give h_i(z)<=h_i(x)-||grad h_i(x)||_2^2/(2L). Step 1.1 gives h_i(y)<=h_i(z), hence ||grad f_i(x)-grad f_i(y)||_2^2<=2L(f_i(x)-f_i(y)-<grad f_i(y),x-y>).",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Sum the step 2.1 inequalities over i and divide by n. By [F4], grad F(y)=n^{-1}sum_i grad f_i(y); linearity of the finite sum identifies the right side with 2L(F(x)-F(y)-<grad F(y),x-y>).",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For x=y both sides vanish in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 step 3.1 is exactly the single component inequality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The coincident-point case is equality in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or conditional-expectation existence interface is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "Rie Johnson and Tong Zhang, Accelerating Stochastic Gradient Descent using Predictive Variance Reduction, NeurIPS 2013: Section 3, inequality (8) and the proof of Theorem 1.\nSébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph: Section 6.3, Lemma 6.4 and its complete proof.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    },
+    "thm-independent-minibatch-conditional-variance": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ],
+          "use_explanation": "[A1] [[def-axiom-of-choice]]: assume AC for conditional-expectation classes."
+        },
+        {
+          "fact": "F1",
+          "source": "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "source_section": "Definition",
+          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ],
+          "use_explanation": "[F1] [[def-stochastic-gradient-oracle-and-unconstrained-update]]: stochastic-gradient conditional expectations are taken with respect to the current filtration, and AC is assumed for their existence."
+        },
+        {
+          "fact": "F2",
+          "source": "def-filtration-and-filtered-probability-space",
+          "source_section": "Definition",
+          "quote": "A **discrete filtered probability space** is $(\\Omega,\\mathcal F,(\\mathcal F_n)_{n\\in\\mathbb N_0},P)$, where $(\\Omega,\\mathcal F,P)$ is a probability space [[def-probability-measure]], each $\\mathcal F_n$ is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]], and $\\mathcal F_n\\subseteq\\mathcal F_{n+1}\\subseteq\\mathcal F$. The sequence $(\\mathcal F_n)$ is a **filtration**. Time starts at zero. Neither completeness nor triviality of $\\mathcal F_0$ is required.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "use_explanation": "[F2] [[def-filtration-and-filtered-probability-space]]: $\\mathcal F_k$ is a sigma-algebra and $\\mathcal F_k\\subseteq\\mathcal F$."
+        },
+        {
+          "fact": "F3",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F3] [[def-conditional-expectation-as-an-ae-class]]: under AC, conditional expectations of integrable random variables exist as almost-sure classes."
+        },
+        {
+          "fact": "F4",
+          "source": "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X\\in L^1(P)$, if $X$ is $\\mathcal G$-measurable, then $E[X\\mid\\mathcal G]=X$. If $P(\\{X\\in B\\}\\cap A)=P(X\\in B)P(A)$ for every real Borel $B$ and $A\\in\\mathcal G$, then $E[X\\mid\\mathcal G]=EX$ almost surely.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ],
+          "use_explanation": "[F4] [[lem-conditioning-a-known-variable-and-an-independent-variable]]: an integrable random variable independent of the conditioning sigma-algebra has conditional expectation equal to its mean."
+        },
+        {
+          "fact": "F5",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F5] [[thm-taking-out-what-is-known]]: an integrable factor measurable in the conditioning sigma-algebra can be taken outside conditional expectation."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F6] [[thm-basic-algebra-and-order-properties-of-conditional-expectation]]: conditional expectation is linear and preserves finite integrable sums."
+        },
+        {
+          "fact": "F7",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F7] [[def-euclidean-inner-product]]: $\\|z\\|_2^2=\\langle z,z\\rangle$, and the inner product is bilinear."
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-sum-gradient-is-average",
+          "source_section": "Statement",
+          "quote": "Let U be open in R^d, let x in U, let n>=1, and let f_1,...,f_n:U->R be totally differentiable at x. Put F=n^{-1}sum_{i=1}^n f_i. Then F is totally differentiable at x and",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F8] [[lem-finite-sum-gradient-is-average]]: the gradient of $F$ is the average of the component gradients."
+        },
+        {
+          "fact": "F9",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F9] [[def-finite-sum]]: a finite average is the finite recursively defined sum scaled by $1/n$."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "For every $j,i$, independence and [F4] give $\\mathbb E[\\mathbf1_{\\{I_j=i\\}}\\mid\\mathcal F_k]=1/n$. Since $g_i$ is $\\mathcal F_k$-measurable and square-integrable, [F1]–[F3], [F5], and [F6] allow $g_{I_j}=\\sum_i\\mathbf1_{\\{I_j=i\\}}g_i$ to be conditioned coordinatewise and termwise, yielding $\\mathbb E[g_{I_j}\\mid\\mathcal F_k]=\\bar g$. For $j\\ne\\ell$ and every $A\\in\\mathcal F_k$, joint independence gives $P(A,I_j=r,I_\\ell=s)=P(A)/n^2$; hence $\\mathbb E[\\langle g_{I_j}-\\bar g,g_{I_\\ell}-\\bar g\\rangle\\mid\\mathcal F_k]=n^{-2}\\sum_{r,s}\\langle g_r-\\bar g,g_s-\\bar g\\rangle=\\langle n^{-1}\\sum_r(g_r-\\bar g),n^{-1}\\sum_s(g_s-\\bar g)\\rangle=0$, since each centered finite sum vanishes. Expanding $\\|G_b-\\bar g\\|_2^2$ leaves $b$ diagonal terms, each with conditional expectation $\\sigma^2(x)$, so division by $b^2$ proves the with-replacement identities.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Assume $n>1$. Let $Z_i=\\mathbf1_{\\{i\\in S\\}}$ and $a_i=g_i-\\bar g$, so $\\sum_i a_i=0$. Counting the $\\binom nb$ equally likely subsets gives $\\mathbb E[Z_i\\mid\\mathcal F_k]=\\binom{n-1}{b-1}/\\binom nb=b/n$. For $i\\ne j$, if $b=1$ then $Z_iZ_j=0$; if $2\\le b\\le n$, then $\\mathbb E[Z_iZ_j\\mid\\mathcal F_k]=\\binom{n-2}{b-2}/\\binom nb=b(b-1)/(n(n-1))$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "The first inclusion probability in step 1.2, with [F5] and [F6], gives $\\mathbb E[G_S\\mid\\mathcal F_k]=b^{-1}\\sum_i(b/n)g_i=\\bar g$. Put $a_i=g_i-\\bar g$; since $G_S-\\bar g=b^{-1}\\sum_i Z_i a_i$, [F5]–[F7] give $\\mathbb E[\\|G_S-\\bar g\\|_2^2\\mid\\mathcal F_k]=b^{-2}[(b/n)\\sum_i\\|a_i\\|_2^2+(b(b-1)/(n(n-1)))\\sum_{i\\ne j}\\langle a_i,a_j\\rangle]$. The cross sum is $-\\sum_i\\|a_i\\|_2^2$ by expanding $\\langle\\sum_i a_i,\\sum_j a_j\\rangle=0$, so the result is $(n-b)/(b(n-1))\\sigma^2(x)$. If $n=1$, the only draw and subset contain the sole component, so both errors are zero.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If all component gradients equal their average, sigma^2=0 and centered errors vanish in steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the only without-replacement sample is b=1 and both errors vanish in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The n=1 case is calculated in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 covers b=1; step 2.1 gives zero without-replacement variance at b=n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is declared at [A1] and used in steps 1.1, 1.2, 2.1 for conditional-expectation existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "Robert M. Gower and Alexandre Gramfort, Optimization for Data Science: Stochastic Variance Reduced Gradient Methods, lecture notes: Slides 5–14 on minibatches and variance reduction; full 81-slide deck.\nJohn Duchi, Elad Hazan, and Yoram Singer, Adaptive Subgradient Methods for Online Learning and Stochastic Optimization, JMLR 12 (2011): Section 2, online stochastic gradients and conditional expectations.",
+      "finite_checks": [
+        {
+          "name": "Sampling boundaries",
+          "calculation": "n=1,b=1 gives zero error; b=n without replacement gives (n-b)/(b(n-1)) sigma^2=0",
+          "steps": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    },
+    "cex-saga-linear-factor-fails-under-standard-initialization": {
+      "risk": "high",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-saga-finite-sum-method",
+          "source_section": "Definition",
+          "quote": "Let n,d>=1, let f_1,...,f_n:R^d->R be continuously differentiable, and set F(x)=n^{-1}sum_i f_i(x), with \\nabla F(x)=n^{-1}sum_i\\nabla f_i(x) by [[lem-finite-sum-gradient-is-average]] and [[def-finite-sum]]. Given a deterministic initial point x_0 and step size \\eta>0, initialize a table \\alpha_i^0=\\nabla f_i(x_0) and its mean \\bar\\alpha_0=n^{-1}sum_i\\alpha_i^0. At iteration k:",
+          "uses": [
+            "1.2"
+          ],
+          "use_explanation": "[F1] [[alg-saga-finite-sum-method]]: initialize $\\alpha_i^0=\\nabla f_i(x_0)$; at each step form $v_k=\\nabla f_{I_k}(x_k)-\\alpha_{I_k}^k+\\bar\\alpha_k$, set $x_{k+1}=x_k-\\eta v_k$, then replace the selected table entry using the pre-update point."
+        },
+        {
+          "fact": "F2",
+          "source": "def-strong-convex-composite-objective",
+          "source_section": "Definition",
+          "quote": "Let $F:\\mathbb R^n\\to(-\\infty,+\\infty]$ be a proper convex extended-real function ([[def-extended-reals]]). For $\\mu>0$, say that $F$ is **$\\mu$-strongly convex** if for every $x,y\\in\\operatorname{dom}F$ and $0<\\theta<1$,\n$$F((1-\\theta)x+\\theta y)\\le(1-\\theta)F(x)+\\theta F(y)-\\frac\\mu2\\theta(1-\\theta)\\|x-y\\|_2^2.$$\nThis definition permits $F$ to be extended-real-valued outside its effective domain. The endpoint cases are identities and are not included in the strict range for $\\theta$.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F2] [[def-strong-convex-composite-objective]]: $1$-strong convexity is the strong-Jensen inequality with decrement $\\tfrac12\\theta(1-\\theta)|x-y|^2$."
+        },
+        {
+          "fact": "F3",
+          "source": "def-lipschitz-holder-contraction",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be a function. Recall that a metric takes nonnegative real values\n([[lem-metric-nonnegativity]]).",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F3] [[def-lipschitz-holder-contraction]]: a $1$-Lipschitz gradient satisfies $|f_i'(x)-f_i'(y)|\\le|x-y|$."
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F4] [[def-euclidean-inner-product]]: in one dimension $\\|x\\|_2^2=x^2$."
+        },
+        {
+          "fact": "F5",
+          "source": "def-complete-ordered-field",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and $S \\subseteq F$.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F5] [[def-complete-ordered-field]]: rational inequalities are preserved by multiplication by positive denominators."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Each $f_i'(x)=x$, so [F3] holds with $L=1$. For $z=(1-\\theta)x+\\theta y$, direct expansion gives $(1-\\theta)f_i(x)+\\theta f_i(y)-f_i(z)=\\tfrac12\\theta(1-\\theta)(x-y)^2$; hence [F2] holds with $\\mu=1$. The average is $F(x)=x^2/2$, so $x^*=0$ is stationary. The step size satisfies $1/13\\le1/3$ and $1/13=\\mu/(13L^2)$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "By [F1], every initial table entry and its mean equal $1$. For any sampled index, $v_0=f_{I_0}'(1)-1+1=1$, so $x_1=1-1/13=12/13$. The replacement stores $f_{I_0}'(x_0)=1$, leaving the whole table unchanged. Therefore $V_0=1$, $V_1=(12/13)^2=144/169$, and $S_0=S_1=1$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "With $\\mathcal L_k=V_k+7\\eta^2nS_k$, [F4] gives $\\mathcal L_0=1+700/169=869/169$ and $\\mathcal L_1=144/169+700/169=844/169$. Thus $\\mathcal L_1/\\mathcal L_0=844/869$. Since $13\\cdot844=10972>10428=12\\cdot869$ by [F5], this ratio is greater than $12/13=1-\\mu\\eta$. The sampled update is deterministic because all components are identical, so the same strict failure holds for the expected Lyapunov values.",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero is outside the fixed nonzero data or positive-parameter hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A single-term or one-step boundary is not part of this fixed statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "All components are identical, so the sampled index does not change the deterministic update in step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The step size equals mu/(13L^2), and step 1.1 verifies that it is allowed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or conditional-expectation existence interface is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "Aaron Defazio, Francis Bach, and Simon Lacoste-Julien, SAGA: A Fast Incremental Gradient Method With Support for Non-Strongly Convex Composite Objectives, NeurIPS 2014: §2, SAGA algorithm initialization, estimator, update, and table replacement.\nLéon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018): §5.3.2, Algorithm 5.2 and the stored-gradient SAGA update.",
+      "finite_checks": [
+        {
+          "name": "One-step refutation from standard initialization",
+          "calculation": "L0=869/169; L1=844/169; ratio 844/869 > 12/13",
+          "steps": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    },
+    "lem-saga-estimator-and-table-recurrence": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-saga-finite-sum-method",
+          "source_section": "Definition",
+          "quote": "Let n,d>=1, let f_1,...,f_n:R^d->R be continuously differentiable, and set F(x)=n^{-1}sum_i f_i(x), with \\nabla F(x)=n^{-1}sum_i\\nabla f_i(x) by [[lem-finite-sum-gradient-is-average]] and [[def-finite-sum]]. Given a deterministic initial point x_0 and step size \\eta>0, initialize a table \\alpha_i^0=\\nabla f_i(x_0) and its mean \\bar\\alpha_0=n^{-1}sum_i\\alpha_i^0. At iteration k:",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ],
+          "use_explanation": "[F1] [[alg-saga-finite-sum-method]]: v_k uses the old table; after the step, only alpha_{I_k} is replaced by grad f_{I_k}(x_k)."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-convex-smooth-component-gradient-cocoercivity",
+          "source_section": "Statement",
+          "quote": "Let n,d>=1, L>0, and let f_i:R^d->R be continuously differentiable, convex, with L-Lipschitz gradients. Put F=n^{-1}sum_i f_i. For all x,y in R^d,",
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "use_explanation": "[F2] [[lem-convex-smooth-component-gradient-cocoercivity]]: n^{-1}sum_i||grad f_i(x)-grad f_i(y)||_2^2<=2L(F(x)-F(y)-<grad F(y),x-y>)."
+        },
+        {
+          "fact": "F3",
+          "source": "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "source_section": "Definition",
+          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ],
+          "use_explanation": "[F3] [[def-stochastic-gradient-oracle-and-unconstrained-update]]: the iterate and table are measurable with respect to the current sigma-algebra."
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F4] [[def-conditional-expectation-as-an-ae-class]]: conditional expectations are almost-sure classes and assume AC for existence."
+        },
+        {
+          "fact": "F5",
+          "source": "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X\\in L^1(P)$, if $X$ is $\\mathcal G$-measurable, then $E[X\\mid\\mathcal G]=X$. If $P(\\{X\\in B\\}\\cap A)=P(X\\in B)P(A)$ for every real Borel $B$ and $A\\in\\mathcal G$, then $E[X\\mid\\mathcal G]=EX$ almost surely.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ],
+          "use_explanation": "[F5] [[lem-conditioning-a-known-variable-and-an-independent-variable]]: an independent integrable index indicator has conditional expectation equal to its mean."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ],
+          "use_explanation": "[F6] [[thm-taking-out-what-is-known]]: measurable integrable factors can be taken outside conditional expectation."
+        },
+        {
+          "fact": "F7",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ],
+          "use_explanation": "[F7] [[thm-basic-algebra-and-order-properties-of-conditional-expectation]]: conditional expectation is linear and preserves finite sums."
+        },
+        {
+          "fact": "F8",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so",
+          "uses": [
+            "1.2"
+          ],
+          "use_explanation": "[F8] [[def-euclidean-inner-product]]: the inner product is bilinear and ||z||_2^2=<z,z>."
+        },
+        {
+          "fact": "F9",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:",
+          "uses": [
+            "1.2"
+          ],
+          "use_explanation": "[F9] [[thm-cauchy-schwarz-and-the-euclidean-norm]]: |<u,v>|<=||u||_2||v||_2."
+        },
+        {
+          "fact": "F10",
+          "source": "lem-finite-sum-gradient-is-average",
+          "source_section": "Statement",
+          "quote": "Let U be open in R^d, let x in U, let n>=1, and let f_1,...,f_n:U->R be totally differentiable at x. Put F=n^{-1}sum_{i=1}^n f_i. Then F is totally differentiable at x and",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F10] [[lem-finite-sum-gradient-is-average]]: grad F is the finite average of component gradients."
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ],
+          "use_explanation": "[A1] [[def-axiom-of-choice]]: assume AC for existence of the conditional-expectation classes used below."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "By [F1], v_k=grad f_{I_k}(x_k)-alpha_{I_k}^k+\\bar alpha_k. Conditioned on \\mathcal F_k, x_k and every alpha_i^k are known, while each event {I_k=i} has conditional probability 1/n by [F5]; taking known vectors out by [F6], linearity [F7], and [F10] give E[v_k|\\mathcal F_k]=grad F(x_k).",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Let g_i=grad f_i(x_k)-grad f_i(x*) and h_i=alpha_i^k-grad f_i(x*), so bar h=n^{-1}sum_i h_i=bar alpha_k because grad F(x*)=0. Then v_k=g_{I_k}-h_{I_k}+\\bar h. Expanding its square and applying [F9] and 2ab<=a^2+b^2 gives ||a+b+c||_2^2<=3(||a||_2^2+||b||_2^2+||c||_2^2); averaging yields E[||v_k||_2^2|\\mathcal F_k]<=3(n^{-1}sum_i||g_i||_2^2+S_k+||bar h||_2^2). Also, expanding the finite average and applying vector and scalar Cauchy–Schwarz from [F9] gives $||\\bar h||_2^2=n^{-2}\\sum_{i,j}\\langle h_i,h_j\\rangle\\le n^{-2}(\\sum_i||h_i||_2)^2\\le n^{-1}\\sum_i||h_i||_2^2=S_k$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Apply [F2] with y=x* to obtain n^{-1}sum_i||g_i||_2^2<=2L(F(x_k)-F(x*)). Substitution in step 1.2 proves E[||v_k||_2^2|\\mathcal F_k]<=6L(F(x_k)-F(x*))+6S_k.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "If I_k=i, the table update [F1] changes S by n^{-1}(||g_i||_2^2-||h_i||_2^2). Averaging over the n equally likely indices gives E[S_{k+1}|\\mathcal F_k]=(1-1/n)S_k+n^{-2}sum_i||g_i||_2^2; [F2] bounds the last term by (2L/n)(F(x_k)-F(x*)).",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At x_k=x* and alpha_i=grad f_i(x*), estimator and table error vanish in steps 1.2–3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Uniform-index formulas in steps 1.1 and 3.1 remain defined for n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The centered stationary-table state gives zero in steps 1.2–3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is declared at [A1] and used in steps 1.1, 1.2, 2.1, 3.1 for conditional-expectation existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "Aaron Defazio, Francis Bach, and Simon Lacoste-Julien, SAGA: A Fast Incremental Gradient Method With Support for Non-Strongly Convex Composite Objectives, NeurIPS 2014: Section 2, unbiased SAGA estimator and Theorem 1 proof.\nLéon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018): Section 5.3.2, equation (5.14) and Algorithm 5.2.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    },
+    "lem-svrg-unbiasedness-and-variance-bound": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-svrg-finite-sum-method",
+          "source_section": "Definition",
+          "quote": "Let n,d>=1 and let f_1,...,f_n:R^d->R be continuously differentiable convex functions. Define the finite-sum objective",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F1] [[alg-svrg-finite-sum-method]]: v_t=grad f_{I_t}(x_t)-grad f_{I_t}(\\tilde x)+grad F(\\tilde x), with I_t uniform and independent of the past."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-convex-smooth-component-gradient-cocoercivity",
+          "source_section": "Statement",
+          "quote": "Let n,d>=1, L>0, and let f_i:R^d->R be continuously differentiable, convex, with L-Lipschitz gradients. Put F=n^{-1}sum_i f_i. For all x,y in R^d,",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "[F2] [[lem-convex-smooth-component-gradient-cocoercivity]]: n^{-1}sum_i||grad f_i(x)-grad f_i(y)||_2^2<=2L(F(x)-F(y)-<grad F(y),x-y>)."
+        },
+        {
+          "fact": "F3",
+          "source": "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "source_section": "Definition",
+          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F3] [[def-stochastic-gradient-oracle-and-unconstrained-update]]: filtration-measurable iterates and conditional expectations use the stated oracle convention; AC is assumed for the conditional-expectation classes."
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F4] [[def-conditional-expectation-as-an-ae-class]]: conditional expectations are almost-sure classes whose existence is supplied under AC."
+        },
+        {
+          "fact": "F5",
+          "source": "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X\\in L^1(P)$, if $X$ is $\\mathcal G$-measurable, then $E[X\\mid\\mathcal G]=X$. If $P(\\{X\\in B\\}\\cap A)=P(X\\in B)P(A)$ for every real Borel $B$ and $A\\in\\mathcal G$, then $E[X\\mid\\mathcal G]=EX$ almost surely.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F5] [[lem-conditioning-a-known-variable-and-an-independent-variable]]: an integrable real variable independent of the conditioning sigma-algebra has conditional expectation equal to its mean."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F6] [[thm-taking-out-what-is-known]]: an integrable measurable factor can be taken outside conditional expectation."
+        },
+        {
+          "fact": "F7",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F7] [[thm-basic-algebra-and-order-properties-of-conditional-expectation]]: conditional expectation is linear and preserves finite integrable sums."
+        },
+        {
+          "fact": "F8",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so",
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "use_explanation": "[F8] [[def-euclidean-inner-product]]: the inner product is bilinear and ||u||_2^2=<u,u>."
+        },
+        {
+          "fact": "F9",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:",
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "use_explanation": "[F9] [[thm-cauchy-schwarz-and-the-euclidean-norm]]: |<u,v>|<=||u||_2||v||_2."
+        },
+        {
+          "fact": "F10",
+          "source": "lem-finite-sum-gradient-is-average",
+          "source_section": "Statement",
+          "quote": "Let U be open in R^d, let x in U, let n>=1, and let f_1,...,f_n:U->R be totally differentiable at x. Put F=n^{-1}sum_{i=1}^n f_i. Then F is totally differentiable at x and",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F10] [[lem-finite-sum-gradient-is-average]]: the gradient of F is the finite average of the component gradients."
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "use_explanation": "[A1] [[def-axiom-of-choice]]: assume AC for existence of the conditional-expectation classes used below."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Condition on \\mathcal F_t. Each component gradient at x_t or \\tilde x is known given \\mathcal F_t, while the indicators 1_{I_t=i} have conditional expectation 1/n by [F5]. Taking the known component gradients outside with [F6], summing by [F7], and using [F10] gives E[v_t|\\mathcal F_t]=n^{-1}sum_i(grad f_i(x_t)-grad f_i(\\tilde x))+grad F(\\tilde x)=grad F(x_t).",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Write $a_i=\\nabla f_i(x_t)-\\nabla f_i(x^*)$ and $b_i=\\nabla f_i(\\widetilde x)-\\nabla f_i(x^*)$. Since $\\nabla F(x^*)=0$, [F1] gives $v_t=a_{I_t}-(b_{I_t}-\\bar b)$ with $\\bar b=n^{-1}\\sum_i b_i=\\nabla F(\\widetilde x)$. The centered term has conditional mean zero by [F5]–[F7], and $\\mathbb E[\\|b_{I_t}-\\bar b\\|_2^2\\mid\\mathcal F_t]=n^{-1}\\sum_i\\|b_i-\\bar b\\|_2^2=n^{-1}\\sum_i\\|b_i\\|_2^2-\\|\\bar b\\|_2^2\\le n^{-1}\\sum_i\\|b_i\\|_2^2$, by expansion and $n^{-1}\\sum_i b_i=\\bar b$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Expanding the square and applying [F9] together with 2ab<=a^2+b^2 gives ||a_{I_t}-(b_{I_t}-\\bar b)||_2^2<=2||a_{I_t}||_2^2+2||b_{I_t}-\\bar b||_2^2. Apply [F2] with y=x* to the first finite average and to the second; grad F(x*)=0 makes the linear term vanish, so the two averages are at most 2L(F(x_t)-F(x*)) and 2L(F(\\tilde x)-F(x*)). Multiplying their sum by 2 proves the displayed second-moment bound.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F8",
+            "F9",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At x_t=tilde x=x*, estimator and gaps vanish in steps 1.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the finite uniform averages in steps 1.1–3.1 are single terms."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At the stationary snapshot and iterate, the variance decomposition is zero in steps 2.1–3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is declared at [A1] and used in steps 1.1, 2.1, 3.1 for conditional-expectation existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "Rie Johnson and Tong Zhang, Accelerating Stochastic Gradient Descent using Predictive Variance Reduction, NeurIPS 2013: Section 3, Theorem 1 proof and the conditional estimator variance inequality.\nSébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph: Section 6.3, Lemma 6.4 and the full variance calculation in Theorem 6.5.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    },
+    "lem-diagonal-adagrad-subproblem-well-defined": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-diagonal-adagrad-online-regret",
+          "source_section": "Definition",
+          "quote": "Let d>=1 and let C be a nonempty closed convex subset of R^d, closed in the standard Euclidean metric topology of [[lem-metrics-on-rn]] and convex as in [[def-convex-subset-of-euclidean-space]]. Fix x_1 in C, a constant eta>0, and epsilon>0. On round t, after observing a convex loss ell_t:C->R, choose a subgradient g_t in partial ell_t(x_t), with subgradient convention [[def-subgradient-and-subdifferential]]. For j=1,...,d set",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F1] [[alg-diagonal-adagrad-online-regret]]: its update is the minimizer of eta<g,z>+||z-x||_A^2/2 over C, with A positive diagonal."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-positive-diagonal-map-preserves-closed-convexity",
+          "source_section": "Statement",
+          "quote": "Let d>=1, let C be a nonempty closed convex subset of R^d, and let D=diag(d_1,...,d_d) with every d_j>0. Then DC={Dx:x in C} is nonempty, closed, and convex.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F2] [[lem-positive-diagonal-map-preserves-closed-convexity]]: if T is diagonal with positive entries, TC is nonempty closed and convex whenever C is nonempty closed convex."
+        },
+        {
+          "fact": "F3",
+          "source": "def-indicator-function-of-closed-convex-set",
+          "source_section": "Definition",
+          "quote": "For any set $C\\subseteq\\mathbb R^n$, its extended-real indicator is\n$$\\iota_C(x)=\\begin{cases}0,&x\\in C,\\\\+\\infty,&x\\notin C.\\end{cases}$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F3] [[def-indicator-function-of-closed-convex-set]]: the indicator of a set is zero on the set and +infinity off it."
+        },
+        {
+          "fact": "F4",
+          "source": "lem-prox-indicator-is-euclidean-projection",
+          "source_section": "Statement",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be nonempty, closed and convex. Its indicator $\\iota_C$ is proper, closed and convex in the convention of [[def-proper-closed-convex-function-on-rn]]. For every $t>0$ and $v\\in\\mathbb R^n$, $\\operatorname{prox}_{t\\iota_C}(v)$ is the singleton consisting of the unique nearest point in $C$ to $v$.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F4] [[lem-prox-indicator-is-euclidean-projection]]: the indicator of a nonempty closed convex set is proper, closed, and convex."
+        },
+        {
+          "fact": "F5",
+          "source": "def-proper-closed-convex-function-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$ and let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$. Its effective domain is $\\operatorname{dom}g=\\{x:g(x)<+\\infty\\}$. The function is **proper** if $\\operatorname{dom}g\\ne\\varnothing$; it is **convex** if\n$$g((1-\\theta)x+\\theta y)\\le(1-\\theta)g(x)+\\theta g(y)\\qquad(x,y\\in\\mathbb R^n,\\ 0\\le\\theta\\le1),$$\nusing the endpoint convention $0\\cdot(+\\infty)=0$ of [[def-convex-and-strictly-convex-functionals-on-a-banach-space]]. It is **closed** (equivalently, lower semicontinuous in the extended-real convex-analysis convention used here) if its epigraph\n$$\\operatorname{epi}g=\\{(x,s)\\in\\mathbb R^n\\times\\mathbb R:g(x)\\le s\\}$$\nis closed in $\\mathbb R^{n+1}$. The proximal-gradient items on this page assume $g$ is proper, closed and convex.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F5] [[def-proper-closed-convex-function-on-rn]]: proper means nonempty effective domain, convexity is the extended-real convexity inequality, and closedness means closed epigraph."
+        },
+        {
+          "fact": "F6",
+          "source": "def-proximal-mapping",
+          "source_section": "Definition",
+          "quote": "Let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$ be proper, closed and convex, and let $t>0$. For $v\\in\\mathbb R^n$, define the set-valued proximal mapping\n$$\\operatorname{prox}_{tg}(v)=\\left\\{u\\in\\mathbb R^n:g(u)+\\frac{\\|u-v\\|_2^2}{2t}\\le g(w)+\\frac{\\|w-v\\|_2^2}{2t}\\text{ for every }w\\in\\mathbb R^n\\right\\}.$$\nThe existence and uniqueness theorem on this page proves that this set is a singleton for every admissible $g,t,v$; its unique member is also denoted $\\operatorname{prox}_{tg}(v)$.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F6] [[def-proximal-mapping]]: prox_g(v) is the set of global minimizers of g(y)+||y-v||_2^2/2 when the parameter is one."
+        },
+        {
+          "fact": "F7",
+          "source": "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "source_section": "Statement",
+          "quote": "Let $g:\\mathbb R^n\\to(-\\infty,+\\infty]$ be proper, closed and convex in the epigraph convention of [[def-proper-closed-convex-function-on-rn]]. For every $t>0$ and $v\\in\\mathbb R^n$, the set $\\operatorname{prox}_{tg}(v)$ is a singleton. Its unique element $u$ satisfies the resolvent equivalence\n$$u=\\operatorname{prox}_{tg}(v)\\quad\\Longleftrightarrow\\quad (v-u)/t\\in\\partial g(u).$$\nFor any $v_1,v_2$ and $u_i=\\operatorname{prox}_{tg}(v_i)$,\n$$\\|u_1-u_2\\|_2^2\\le\\langle u_1-u_2,v_1-v_2\\rangle.$$\nIn particular the proximal map is nonexpansive.",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "[F7] [[thm-proximal-operator-existence-resolvent-firm-nonexpansive]]: for every proper closed convex g, prox_g(v) is a singleton."
+        },
+        {
+          "fact": "F8",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F8] [[thm-of-square-roots]]: each positive diagonal entry has a unique positive square root."
+        },
+        {
+          "fact": "F9",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F9] [[def-euclidean-inner-product]]: the Euclidean squared norm is the sum of coordinate squares."
+        },
+        {
+          "fact": "F10",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F10] [[def-convex-subset-of-euclidean-space]]: convexity means every segment between points of C lies in C."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Let T=diag(sqrt(a_1),...,sqrt(a_d)); it is invertible and T^2=A by [F8]. Set C'=TC. Since T is positive diagonal, [F2] makes C' nonempty, closed, and convex; [F10] supplies the convex-set convention used by [F2]. Therefore [F3]–[F5] make its indicator ι_{C'} a proper closed convex function.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "F10",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Put $v=Tx-\\eta T^{-1}g$. Since $T$ is diagonal, $T(z-x)$ has squared norm $\\|z-x\\|_A^2$ and $\\langle T(z-x),T^{-1}g\\rangle=\\langle z-x,g\\rangle$. Coordinate expansion gives $\\eta\\langle g,z\\rangle+\\tfrac12\\|z-x\\|_A^2=\\tfrac12\\|Tz-v\\|_2^2+\\eta\\langle g,x\\rangle-\\tfrac12\\eta^2\\|T^{-1}g\\|_2^2$. The last two terms are independent of $z$, and $z\\mapsto Tz$ bijects $C$ with $C'$, so the minimizers correspond to $\\operatorname{prox}_{\\iota_{C'}}(v)$ by [F3] and [F6].",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "F9",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "By [F7] the latter proximal set is a singleton. The inverse map T^{-1} is one-to-one, so its corresponding minimizer z in C is also unique. This proves the Statement.",
+          "inputs": [
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero is outside the fixed nonzero data or positive-parameter hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scaling and square-root argument applies for d=1 in steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For singleton C the transformed set is a singleton and the minimizer is unique in steps 1.1–3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or conditional-expectation existence interface is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "John Duchi, Elad Hazan, and Yoram Singer, Adaptive Subgradient Methods for Online Learning and Stochastic Optimization, JMLR 12 (2011): Section 2, composite mirror-descent minimization update and its diagonal scaling.\nSébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph: Sections 3.1–3.3, Euclidean projection and proximal-gradient facts.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    },
+    "thm-saga-expected-linear-contraction": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-saga-finite-sum-method",
+          "source_section": "Definition",
+          "quote": "Let n,d>=1, let f_1,...,f_n:R^d->R be continuously differentiable, and set F(x)=n^{-1}sum_i f_i(x), with \\nabla F(x)=n^{-1}sum_i\\nabla f_i(x) by [[lem-finite-sum-gradient-is-average]] and [[def-finite-sum]]. Given a deterministic initial point x_0 and step size \\eta>0, initialize a table \\alpha_i^0=\\nabla f_i(x_0) and its mean \\bar\\alpha_0=n^{-1}sum_i\\alpha_i^0. At iteration k:",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F1] [[alg-saga-finite-sum-method]]: $x_{k+1}=x_k-\\eta v_k$, then the sampled table entry is replaced by $\\nabla f_{I_k}(x_k)$ using the pre-update iterate."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-saga-estimator-and-table-recurrence",
+          "source_section": "Statement",
+          "quote": "Let f_i:R^d->R be convex and continuously differentiable with L-Lipschitz gradients, set F=n^{-1}sum_i f_i, and let x* satisfy grad F(x*)=0. Conditional on the current iterate x_k and table alpha_i^k, assume an independent uniform index I_k and finite second moments. Put",
+          "uses": [
+            "2.1",
+            "2.2"
+          ],
+          "use_explanation": "[F2] [[lem-saga-estimator-and-table-recurrence]]: conditionally on the history, $\\mathbb E[v_k\\mid\\mathcal F_k]=\\nabla F(x_k)$, $\\mathbb E[\\|v_k\\|_2^2\\mid\\mathcal F_k]\\le6L(F(x_k)-F(x^*))+6S_k$, and $\\mathbb E[S_{k+1}\\mid\\mathcal F_k]\\le(1-1/n)S_k+(2L/n)(F(x_k)-F(x^*))$."
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-sum-gradient-is-average",
+          "source_section": "Statement",
+          "quote": "Let U be open in R^d, let x in U, let n>=1, and let f_1,...,f_n:U->R be totally differentiable at x. Put F=n^{-1}sum_{i=1}^n f_i. Then F is totally differentiable at x and",
+          "uses": [
+            "1.1",
+            "4.1"
+          ],
+          "use_explanation": "[F3] [[lem-finite-sum-gradient-is-average]]: $\\nabla F(w)=n^{-1}\\sum_i\\nabla f_i(w)$."
+        },
+        {
+          "fact": "F4",
+          "source": "lem-l-smoothness-descent-inequality",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable and suppose $\\nabla f$ is Lipschitz with constant $L\\ge0$ in the Euclidean norm. Then\n$$f(y)\\le f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac{L}{2}\\|y-x\\|_2^2\\qquad(x,y\\in\\mathbb R^n).$$",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F4] [[lem-l-smoothness-descent-inequality]]: each $f_i$ satisfies its $L$-smooth upper descent inequality."
+        },
+        {
+          "fact": "F5",
+          "source": "lem-strong-convexity-implies-strong-monotonicity-of-gradient",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and convex, let $C\\subseteq U$ be convex, and let $f:U\\to\\mathbb R$ be differentiable. Suppose $f|_C$ is $\\mu$-strongly convex in the strong-Jensen sense of [[def-strong-convex-composite-objective]], for $\\mu>0$; explicitly, for $x,y\\in C$ and $0<t<1$,\n$$f((1-t)x+ty)\\le(1-t)f(x)+tf(y)-\\frac\\mu2t(1-t)\\|x-y\\|_2^2.$$\nThen for all $x,y\\in C$,\n$$f(y)\\ge f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac{\\mu}{2}\\|y-x\\|_2^2,$$\nand consequently\n$$\\langle\\nabla f(x)-\\nabla f(y),x-y\\rangle\\ge\\mu\\|x-y\\|_2^2.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ],
+          "use_explanation": "[F5] [[lem-strong-convexity-implies-strong-monotonicity-of-gradient]]: $F(y)\\ge F(x)+\\langle\\nabla F(x),y-x\\rangle+(\\mu/2)\\|y-x\\|_2^2$."
+        },
+        {
+          "fact": "F6",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F6] [[def-euclidean-inner-product]]: the Euclidean inner product is bilinear and $\\|z\\|_2^2=\\langle z,z\\rangle$."
+        },
+        {
+          "fact": "F7",
+          "source": "def-lipschitz-holder-contraction",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be a function. Recall that a metric takes nonnegative real values\n([[lem-metric-nonnegativity]]).",
+          "uses": [
+            "4.1"
+          ],
+          "use_explanation": "[F7] [[def-lipschitz-holder-contraction]]: an $L$-Lipschitz gradient satisfies $\\|\\nabla f_i(x)-\\nabla f_i(y)\\|_2\\le L\\|x-y\\|_2$."
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:",
+          "uses": [
+            "4.1"
+          ],
+          "use_explanation": "[F8] [[thm-cauchy-schwarz-and-the-euclidean-norm]]: $|\\langle z,w\\rangle|\\le\\|z\\|_2\\|w\\|_2$; applying Cauchy–Schwarz to the finite vector of component norms bounds an average by its root-mean-square norm."
+        },
+        {
+          "fact": "F9",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "4.1"
+          ],
+          "use_explanation": "[F9] [[thm-basic-algebra-and-order-properties-of-conditional-expectation]]: conditional expectation preserves order and $\\mathbb E[\\mathbb E[X\\mid\\mathcal F_k]]=\\mathbb E[X]$ for integrable $X$."
+        },
+        {
+          "fact": "F10",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).",
+          "uses": [
+            "4.1"
+          ],
+          "use_explanation": "[F10] [[def-finite-sum]]: the finite average is the recursively defined finite sum scaled by $1/n$."
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ],
+          "use_explanation": "[A1] [[def-axiom-of-choice]]: AC is assumed by the conditional-expectation interface [F2]."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Put $\\Delta_k=F(x_k)-F(x^*)$. Averaging [F4] from $x^*$ to $x_k$, and using [F3] and $\\nabla F(x^*)=0$, gives $\\Delta_k\\le(L/2)V_k$. Applying [F5] from $x^*$ to $x_k$ also gives $\\Delta_k\\ge(\\mu/2)V_k\\ge0$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Expand [F1] and condition on the current history. The unbiased part of [F2] gives cross term $-2\\eta\\langle\\nabla F(x_k),x_k-x^*\\rangle\\le-2\\mu\\eta V_k$ by [F5]. The second-moment bound in [F2] and step 1.1 then give $\\mathbb E[V_{k+1}\\mid\\mathcal F_k]\\le(1-2\\mu\\eta+3\\eta^2L^2)V_k+6\\eta^2S_k$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "The table recurrence in [F2], followed by step 1.1, gives $\\mathbb E[S_{k+1}\\mid\\mathcal F_k]\\le(1-1/n)S_k+(L^2/n)V_k$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Multiply step 2.2 by $7\\eta^2n$ and add step 2.1. The coefficient of $V_k$ is $1-2\\mu\\eta+10\\eta^2L^2$, and the coefficient of $S_k$ is $(7n-1)\\eta^2$. Since $\\eta\\le\\mu/(13L^2)$, the first coefficient is at most $1-\\mu\\eta$; since $\\eta\\le1/(7\\mu n)$, the second is at most $7\\eta^2n(1-\\mu\\eta)$. Thus $\\mathbb E[\\mathcal L_{k+1}\\mid\\mathcal F_k]\\le(1-\\mu\\eta)\\mathcal L_k$.",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "By [F3], [F7], [F8], [F10], and finite Cauchy–Schwarz, $\\|\\nabla F(x)-\\nabla F(y)\\|_2^2\\le n^{-1}\\sum_i\\|\\nabla f_i(x)-\\nabla f_i(y)\\|_2^2\\le L^2\\|x-y\\|_2^2$. For $x\\ne y$, [F5] and [F8] now give $\\mu\\|x-y\\|_2^2\\le\\langle\\nabla F(x)-\\nabla F(y),x-y\\rangle\\le L\\|x-y\\|_2^2$, so $\\mu\\le L$. Thus $1-\\mu\\eta\\ge2/3>0$ by the step-size bound. Apply [F9] to take expectations in the conditional inequality from step 3.1; this proves the stated contraction.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At x0=x* the standard initialized table gives V0=S0=0; the recurrence stays zero in steps 1.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The formulas are defined for n=1 under the step-size condition in steps 2.2–4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate object is admitted beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is declared at [A1] and used in steps 2.1, 2.2, 3.1, 4.1 for conditional-expectation existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "Aaron Defazio, Francis Bach, and Simon Lacoste-Julien, SAGA: A Fast Incremental Gradient Method With Support for Non-Strongly Convex Composite Objectives, NeurIPS 2014: Section 2, Theorem 1 and its complete Lyapunov proof.\nRobert M. Gower and Alexandre Gramfort, Optimization for Data Science: Stochastic Variance Reduced Gradient Methods, complete lecture-note deck: Slides 57–59, SAGA estimator and convergence comparison.",
+      "finite_checks": [
+        {
+          "name": "Corrected S-coefficient check",
+          "calculation": "eta <= 1/(7 mu n) implies (7n-1)eta^2 <= 7 eta^2 n (1-mu eta)",
+          "steps": [
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "author-self-review-complete-with-contract-escalation",
+        "reviewer": "beta-73",
+        "notes": "The corrected theorem proof is complete. A separate standard-initialization counterexample refutes the unamended factor; this item remains escalated for owner reconciliation."
+      }
+    },
+    "thm-svrg-epoch-expected-linear-contraction": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-svrg-finite-sum-method",
+          "source_section": "Definition",
+          "quote": "Let n,d>=1 and let f_1,...,f_n:R^d->R be continuously differentiable convex functions. Define the finite-sum objective",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F1] [[alg-svrg-finite-sum-method]]: $x_{t+1}=x_t-\\eta v_t$, with $v_t=\\nabla f_{I_t}(x_t)-\\nabla f_{I_t}(\\widetilde x)+\\nabla F(\\widetilde x)$ and independent uniform $I_t$."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-svrg-unbiasedness-and-variance-bound",
+          "source_section": "Statement",
+          "quote": "Let f_i:R^d->R be convex and continuously differentiable with L-Lipschitz gradients, set F=n^{-1}sum_i f_i, and let x* satisfy grad F(x*)=0. Conditional on a filtration \\mathcal F_t, suppose x_t and the snapshot \\tilde x are measurable, the uniform index I_t is independent of \\mathcal F_t, and the relevant second moments are finite. For",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F2] [[lem-svrg-unbiasedness-and-variance-bound]]: conditionally on the history, $\\mathbb E[v_t]=\\nabla F(x_t)$ and $\\mathbb E\\|v_t\\|_2^2\\le4L(F(x_t)-F(x^*))+4L(F(\\widetilde x)-F(x^*))$."
+        },
+        {
+          "fact": "F3",
+          "source": "lem-l-smoothness-descent-inequality",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable and suppose $\\nabla f$ is Lipschitz with constant $L\\ge0$ in the Euclidean norm. Then\n$$f(y)\\le f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac{L}{2}\\|y-x\\|_2^2\\qquad(x,y\\in\\mathbb R^n).$$",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F3] [[lem-l-smoothness-descent-inequality]]: an $L$-Lipschitz gradient gives $f_i(z)\\le f_i(w)+\\langle\\nabla f_i(w),z-w\\rangle+(L/2)\\|z-w\\|_2^2$."
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-sum-gradient-is-average",
+          "source_section": "Statement",
+          "quote": "Let U be open in R^d, let x in U, let n>=1, and let f_1,...,f_n:U->R be totally differentiable at x. Put F=n^{-1}sum_{i=1}^n f_i. Then F is totally differentiable at x and",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F4] [[lem-finite-sum-gradient-is-average]]: $\\nabla F(w)=n^{-1}\\sum_i\\nabla f_i(w)$."
+        },
+        {
+          "fact": "F5",
+          "source": "lem-strong-convexity-implies-strong-monotonicity-of-gradient",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and convex, let $C\\subseteq U$ be convex, and let $f:U\\to\\mathbb R$ be differentiable. Suppose $f|_C$ is $\\mu$-strongly convex in the strong-Jensen sense of [[def-strong-convex-composite-objective]], for $\\mu>0$; explicitly, for $x,y\\in C$ and $0<t<1$,\n$$f((1-t)x+ty)\\le(1-t)f(x)+tf(y)-\\frac\\mu2t(1-t)\\|x-y\\|_2^2.$$\nThen for all $x,y\\in C$,\n$$f(y)\\ge f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac{\\mu}{2}\\|y-x\\|_2^2,$$\nand consequently\n$$\\langle\\nabla f(x)-\\nabla f(y),x-y\\rangle\\ge\\mu\\|x-y\\|_2^2.$$",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F5] [[lem-strong-convexity-implies-strong-monotonicity-of-gradient]]: $F(y)\\ge F(x)+\\langle\\nabla F(x),y-x\\rangle+(\\mu/2)\\|y-x\\|_2^2$."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-differentiable-convex-functions-and-gradient-inequality",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^n$ be open and convex, and let $f:U\\to\\mathbb R$ be differentiable. Then $f$ is convex if and only if",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F6] [[thm-differentiable-convex-functions-and-gradient-inequality]]: convex differentiable $F$ satisfies $F(y)\\ge F(x)+\\langle\\nabla F(x),y-x\\rangle$."
+        },
+        {
+          "fact": "F7",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F7] [[def-euclidean-inner-product]]: $\\|z\\|_2^2=\\langle z,z\\rangle$ and the inner product is bilinear."
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[A1] [[def-axiom-of-choice]]: AC is assumed for the conditional-expectation interfaces used in [F2]."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Write $\\Delta_t=F(x_t)-F(x^*)$ and $\\widetilde\\Delta=F(\\widetilde x)-F(x^*)$. Averaging [F3] and using [F4] gives the $L$-smooth descent inequality for $F$. By [F1], [F2], [F6], and [F7], expansion of the squared distance and the convex gradient inequality yield $\\mathbb E[\\|x_{t+1}-x^*\\|_2^2\\mid\\mathcal F_t]\\le\\|x_t-x^*\\|_2^2-2\\eta\\Delta_t+\\eta^2\\mathbb E[\\|v_t\\|_2^2\\mid\\mathcal F_t]\\le\\|x_t-x^*\\|_2^2-2\\eta(1-2L\\eta)\\Delta_t+4\\eta^2L\\widetilde\\Delta$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Average the conditional inequality in step 1.1 over the finite index histories and sum for $t=0,\\ldots,m-1$. Squared distances telescope, the terminal squared distance is nonnegative, and $x_0=\\widetilde x$, hence $m^{-1}\\sum_{t=0}^{m-1}\\mathbb E[\\Delta_t]\\le\\|\\widetilde x-x^*\\|_2^2/[2\\eta(1-2L\\eta)m]+[2\\eta L/(1-2L\\eta)]\\widetilde\\Delta$. By [F5] and $\\nabla F(x^*)=0$, $\\|\\widetilde x-x^*\\|_2^2\\le2\\widetilde\\Delta/\\mu$; the independent uniform $J$ makes its expected gap the average on the left, giving the stated $q$.",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "With $\\eta=1/(10L)$ and $m=2n$, $1-2L\\eta=4/5$, so $q=25L/(4\\mu n)+1/4\\le5/8+1/4=7/8$ by $n\\ge10L/\\mu$. This proves the Statement.",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At snapshot x*, each estimator is zero and the objective gap is zero in steps 1.1–2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A single-term or one-step boundary is not part of this fixed statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate object is admitted beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Equality n=10L/mu in step 3.1 gives q=7/8."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is declared at [A1] and used in steps 1.1, 2.1 for conditional-expectation existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "Rie Johnson and Tong Zhang, Accelerating Stochastic Gradient Descent using Predictive Variance Reduction, NeurIPS 2013: Sections 2–3, Theorem 1 proof, especially inequality (8) and the epoch telescope.\nSébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph: Section 6.3, Lemma 6.4 and the complete proof of Theorem 6.5.",
+      "finite_checks": [
+        {
+          "name": "Contract parameter substitution",
+          "calculation": "q=25L/(4 mu n)+1/4 <= 5/8+1/4=7/8",
+          "steps": [
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    },
+    "lem-diagonal-adagrad-one-step-regret-bound": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-diagonal-adagrad-online-regret",
+          "source_section": "Definition",
+          "quote": "Let d>=1 and let C be a nonempty closed convex subset of R^d, closed in the standard Euclidean metric topology of [[lem-metrics-on-rn]] and convex as in [[def-convex-subset-of-euclidean-space]]. Fix x_1 in C, a constant eta>0, and epsilon>0. On round t, after observing a convex loss ell_t:C->R, choose a subgradient g_t in partial ell_t(x_t), with subgradient convention [[def-subgradient-and-subdifferential]]. For j=1,...,d set",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F1] [[alg-diagonal-adagrad-online-regret]]: an update minimizes $\\eta\\langle g,z\\rangle+\\tfrac12\\|z-x\\|_A^2$ on $C$, with positive diagonal $A$."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-diagonal-adagrad-subproblem-well-defined",
+          "source_section": "Statement",
+          "quote": "Let C be a nonempty closed convex subset of R^d, let A=diag(a_1,...,a_d) with every a_j>0, and let eta>0 and x,g in R^d. Then the minimizer set",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F2] [[lem-diagonal-adagrad-subproblem-well-defined]]: for these data the minimizer exists and is unique."
+        },
+        {
+          "fact": "F3",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F3] [[def-convex-subset-of-euclidean-space]]: every segment between points of $C$ lies in $C$."
+        },
+        {
+          "fact": "F4",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F4] [[def-metric-topology]]: closed means that the complement is open in the stated metric topology."
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F5] [[def-euclidean-inner-product]]: the inner product is bilinear and the squared Euclidean norm is the sum of coordinate squares."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F6] [[thm-of-square-roots]]: each positive diagonal entry has a positive square root."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Write $q(z)=\\eta\\langle g,z\\rangle+\\tfrac12\\|z-x\\|_A^2$ and $d=u-x^+$. Since $C$ is nonempty, closed in the metric topology [F4], and convex, [F2] ensures the unique update minimizer exists. For $0<s\\le1$, [F3] gives $x^++sd\\in C$, so [F1] minimality gives $0\\le q(x^++sd)-q(x^+)=s\\langle\\eta g+A(x^+-x),d\\rangle+(s^2/2)\\|d\\|_A^2$. Divide by $s$ and let $s\\downarrow0$; the coefficient remains nonnegative, yielding $\\langle\\eta g+A(x^+-x),u-x^+\\rangle\\ge0$ and therefore $\\eta\\langle g,x^+-u\\rangle\\le\\langle A(x-x^+),x^+-u\\rangle$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Expanding gives $2\\langle A(x-x^+),x^+-u\\rangle=\\|x-u\\|_A^2-\\|x^+-u\\|_A^2-\\|x-x^+\\|_A^2$. Also [F5]–[F6] and nonnegativity of squares give $0\\le\\sum_j(\\sqrt{a_j}(x_j-x_j^+)-\\eta g_j/\\sqrt{a_j})^2$, hence $\\eta\\langle g,x-x^+\\rangle-\\tfrac12\\|x-x^+\\|_A^2\\le(\\eta^2/2)\\|g\\|_{A^{-1}}^2$. Add the inequality from step 1.1 and divide by $\\eta>0$ to obtain the Statement.",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For g=0 the unique minimizer is x+=x and the bound is equality in steps 1.1–2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A single-term or one-step boundary is not part of this fixed statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For singleton C, x=x+=u and both sides vanish in steps 1.1–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or conditional-expectation existence interface is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "John Duchi, Elad Hazan, and Yoram Singer, Adaptive Subgradient Methods for Online Learning and Stochastic Optimization, JMLR 12 (2011): Section 2, mirror-descent one-step bound and composite update.\nSébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph: Sections 3.1–3.3, Euclidean projection variational inequality and telescoping argument.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    },
+    "thm-diagonal-adagrad-regret-bound": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-diagonal-adagrad-online-regret",
+          "source_section": "Definition",
+          "quote": "Let d>=1 and let C be a nonempty closed convex subset of R^d, closed in the standard Euclidean metric topology of [[lem-metrics-on-rn]] and convex as in [[def-convex-subset-of-euclidean-space]]. Fix x_1 in C, a constant eta>0, and epsilon>0. On round t, after observing a convex loss ell_t:C->R, choose a subgradient g_t in partial ell_t(x_t), with subgradient convention [[def-subgradient-and-subdifferential]]. For j=1,...,d set",
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "use_explanation": "[F1] [[alg-diagonal-adagrad-online-regret]]: $A_t=\\operatorname{diag}(s_{t,1},\\ldots,s_{t,d})$ and the update minimizes the stated diagonal quadratic objective."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-diagonal-adagrad-one-step-regret-bound",
+          "source_section": "Statement",
+          "quote": "Let $A=\\operatorname{diag}(a_1,\\ldots,a_d)$ with $a_j>0$, let $C\\subseteq\\mathbb R^d$ be nonempty, closed, and convex, and let $x,x^+,u\\in C$ where $x^+$ minimizes $\\eta\\langle g,z\\rangle+\\tfrac12\\|z-x\\|_A^2$ over $z\\in C$, for $\\eta>0$ and $g\\in\\mathbb R^d$. With $\\|w\\|_A^2=w^TAw$, $A^{-1}=\\operatorname{diag}(1/a_1,\\ldots,1/a_d)$, and $\\|g\\|_{A^{-1}}^2=g^TA^{-1}g$,",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F2] [[lem-diagonal-adagrad-one-step-regret-bound]]: for each $u\\in C$, $\\langle g_t,x_t-u\\rangle\\le(\\|x_t-u\\|_{A_t}^2-\\|x_{t+1}-u\\|_{A_t}^2)/(2\\eta)+(\\eta/2)\\|g_t\\|_{A_t^{-1}}^2$."
+        },
+        {
+          "fact": "F3",
+          "source": "def-subgradient-and-subdifferential",
+          "source_section": "Definition",
+          "quote": "Let $f:C\\to\\mathbb R$ be convex on a convex set $C\\subseteq\\mathbb R^n$ ([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]), and let $a\\in C$. A vector $v$ is a subgradient of $f$ at $a$ when $f(y)\\ge f(a)+\\langle v,y-a\\rangle$ for every $y$ in the domain.",
+          "uses": [
+            "4.1"
+          ],
+          "use_explanation": "[F3] [[def-subgradient-and-subdifferential]]: $g_t\\in\\partial\\ell_t(x_t)$ means $\\ell_t(u)\\ge\\ell_t(x_t)+\\langle g_t,u-x_t\\rangle$ for all $u\\in C$."
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "use_explanation": "[F4] [[def-finite-sum]]: finite sums obey their recursive addition and finite-sum algebra."
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "use_explanation": "[F5] [[def-euclidean-inner-product]]: for diagonal $A_t$, $\\|z\\|_{A_t}^2=\\sum_j s_{t,j}z_j^2$."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Sum [F2] for $t=1,\\ldots,T$. Finite-sum algebra [F4] telescopes each coordinate to $\\sum_t\\langle g_t,x_t-u\\rangle\\le(\\|x_1-u\\|_{A_1}^2+\\sum_{t=2}^T\\|x_t-u\\|_{A_t-A_{t-1}}^2-\\|x_{T+1}-u\\|_{A_T}^2)/(2\\eta)+(\\eta/2)\\sum_t\\|g_t\\|_{A_t^{-1}}^2$. The last metric term is nonnegative and may be dropped.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Since $x_t,u\\in C$, $|x_{t,j}-u_j|\\le D_j$. Thus [F5] bounds the initial and metric-increment terms in step 1.1 by $\\sum_jD_j^2s_{T,j}$: for each $j$, $s_{1,j}+\\sum_{t=2}^T(s_{t,j}-s_{t-1,j})=s_{T,j}$.",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Set $s_{0,j}=\\epsilon$. The accumulator gives $s_{t,j}^2-s_{t-1,j}^2=g_{t,j}^2$ and $s_{t,j}\\ge s_{t-1,j}>0$, so $g_{t,j}^2/s_{t,j}=(s_{t,j}-s_{t-1,j})(s_{t,j}+s_{t-1,j})/s_{t,j}\\le2(s_{t,j}-s_{t-1,j})$. Summing gives $\\sum_t\\|g_t\\|_{A_t^{-1}}^2\\le2\\sum_j(s_{T,j}-\\epsilon)\\le2\\sum_j s_{T,j}$. Substitute in step 1.1 and combine with step 2.1 to obtain the linearized-loss bound.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "By [F3], each convex-loss difference satisfies $\\ell_t(x_t)-\\ell_t(u)\\le\\langle g_t,x_t-u\\rangle$. Summing these inequalities and applying step 3.1 proves the stated regret bound.",
+          "inputs": [
+            "F3",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If all g_t=0, s_t=epsilon and linearized terms vanish; step 4.1 bounds regret by the nonnegative right side."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For T=1 the sums in steps 1.1–4.1 reduce to one initial metric and one gradient term."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate object is admitted beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The T=1 horizon is admitted and covered in steps 1.1–4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or conditional-expectation existence interface is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "John Duchi, Elad Hazan, and Yoram Singer, Adaptive Subgradient Methods for Online Learning and Stochastic Optimization, JMLR 12 (2011): Section 2, Theorem 5, composite mirror-descent update, and the complete Appendix C proof of the diagonal cumulative-gradient inequality in Lemma 4.\nSébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph: Sections 3.1–3.3, projection inequality and online-gradient telescoping.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    },
+    "ex-regularized-logistic-finite-sum": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-svrg-finite-sum-method",
+          "source_section": "Definition",
+          "quote": "Let n,d>=1 and let f_1,...,f_n:R^d->R be continuously differentiable convex functions. Define the finite-sum objective",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "[F1] [[alg-svrg-finite-sum-method]]: SVRG returns an independent uniform inner iterate and uses a full gradient plus two component gradients per inner update."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-svrg-epoch-expected-linear-contraction",
+          "source_section": "Statement",
+          "quote": "Let $n,d\\ge1$, and let $f_i:\\mathbb R^d\\to\\mathbb R$ be convex, continuously differentiable, with $L$-Lipschitz gradients for a common $L>0$. Put $F=n^{-1}\\sum_{i=1}^n f_i$, assume $F$ is $\\mu$-strongly convex for $\\mu>0$, and let $x^*$ satisfy $\\nabla F(x^*)=0$. In one SVRG epoch [[alg-svrg-finite-sum-method]], take a deterministic snapshot $\\widetilde x$, set $x_0=\\widetilde x$, choose",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "[F2] [[thm-svrg-epoch-expected-linear-contraction]]: if all components are convex and $L$-smooth, the average is $\\mu$-strongly convex, $n\\ge10L/\\mu$, $\\eta=1/(10L)$, and $m=2n$, then the expected output gap contracts by the stated $q$."
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-sum-gradient-is-average",
+          "source_section": "Statement",
+          "quote": "Let U be open in R^d, let x in U, let n>=1, and let f_1,...,f_n:U->R be totally differentiable at x. Put F=n^{-1}sum_{i=1}^n f_i. Then F is totally differentiable at x and",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "[F3] [[lem-finite-sum-gradient-is-average]]: the gradient of the finite average is the average of component gradients."
+        },
+        {
+          "fact": "F4",
+          "source": "def-strong-convex-composite-objective",
+          "source_section": "Definition",
+          "quote": "Let $F:\\mathbb R^n\\to(-\\infty,+\\infty]$ be a proper convex extended-real function ([[def-extended-reals]]). For $\\mu>0$, say that $F$ is **$\\mu$-strongly convex** if for every $x,y\\in\\operatorname{dom}F$ and $0<\\theta<1$,\n$$F((1-\\theta)x+\\theta y)\\le(1-\\theta)F(x)+\\theta F(y)-\\frac\\mu2\\theta(1-\\theta)\\|x-y\\|_2^2.$$\nThis definition permits $F$ to be extended-real-valued outside its effective domain. The endpoint cases are identities and are not included in the strict range for $\\theta$.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F4] [[def-strong-convex-composite-objective]]: $\\mu$-strong convexity is the strong-Jensen inequality with decrement $(\\mu/2)\\theta(1-\\theta)|x-y|^2$."
+        },
+        {
+          "fact": "F5",
+          "source": "def-lipschitz-holder-contraction",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be a function. Recall that a metric takes nonnegative real values\n([[lem-metric-nonnegativity]]).",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F5] [[def-lipschitz-holder-contraction]]: an $L$-Lipschitz gradient obeys $|f_i'(u)-f_i'(v)|\\le L|u-v|$ in one dimension."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F6] [[thm-derivative-of-exponential]]: $(e^w)'=e^w$."
+        },
+        {
+          "fact": "F7",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F7] [[thm-logarithm-derivative-and-integral]]: $(\\log u)'=1/u$ for $u>0$."
+        },
+        {
+          "fact": "F8",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F8] [[thm-chain-rule-for-total-derivatives]]: the derivative of a composition is the derivative of the outer function applied to the derivative of the inner function."
+        },
+        {
+          "fact": "F9",
+          "source": "thm-algebra-of-total-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f,g:U\\to\\mathbb R^n$ are totally differentiable at $a$ and $c\\in\\mathbb R$, then $f+g$ and $cf$ are totally differentiable at $a$, with",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F9] [[thm-algebra-of-total-derivatives]]: sums and scalar multiples differentiate termwise."
+        },
+        {
+          "fact": "F10",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F10] [[cor-mean-value-theorem]]: a differentiable scalar function's difference over an interval equals its derivative at an intermediate point times the interval length."
+        },
+        {
+          "fact": "F11",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F11] [[thm-multivariable-taylor-formula-with-lagrange-remainder]]: a $C^2$ scalar function on a segment has a second-order Taylor formula with Hessian remainder at an intermediate point."
+        },
+        {
+          "fact": "F12",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F12] [[def-euclidean-inner-product]]: in one dimension the Euclidean norm is absolute value."
+        },
+        {
+          "fact": "F13",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "use_explanation": "[F13] [[def-real-exponential-function-and-e]]: $\\exp(w)$ is the real exponential and $e=\\exp(1)$."
+        },
+        {
+          "fact": "F14",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "use_explanation": "[F14] [[def-finite-sum]]: $F$ is the finite average of its fourteen component losses."
+        },
+        {
+          "fact": "F15",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "[F15] [[def-natural-logarithm]]: for $x>0$, $\\log x$ is the unique real $y$ with $\\exp(y)=x$."
+        },
+        {
+          "fact": "F16",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "[F16] [[thm-natural-logarithm-laws]]: $\\log$ is strictly increasing on $(0,\\infty)$ and $\\log(ab)=\\log a+\\log b$ for $a,b>0$."
+        },
+        {
+          "fact": "F17",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "use_explanation": "[F17] [[cor-exponential-reciprocal-and-positivity]]: $\\exp(w)>0$ and $\\exp(-w)=1/\\exp(w)$."
+        },
+        {
+          "fact": "F18",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F18] [[def-convex-and-strictly-convex-functions-on-euclidean-sets]]: convexity is the segment inequality for function values."
+        },
+        {
+          "fact": "F19",
+          "source": "def-complete-ordered-field",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and $S \\subseteq F$.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F19] [[def-complete-ordered-field]]: positive denominators preserve inequalities and every real square is nonnegative."
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "[A1] [[def-axiom-of-choice]]: assume AC for the conditional-expectation interfaces inherited from the SVRG theorem [F2]."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Write $r=\\exp(w)>0$ by [F13] and [F17]. By [F6]–[F9], $f_+'(w)=-1/(1+r)+w$, $f_-'(w)=r/(1+r)+w$, and $f_+''(w)=f_-''(w)=1+r/(1+r)^2$. Since $(1+r)^2-4r=(r-1)^2\\ge0$ by [F19], $1\\le f_i''(w)\\le5/4$ for every component and $w$.",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F13",
+            "F17",
+            "F19",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Apply [F10] to $f_i'$ and [F12]; step 1.1 gives $|f_i'(u)-f_i'(v)|\\le(5/4)|u-v|$, so every component is $5/4$-smooth. For any $u,v$, [F11] gives $f_i(v)\\ge f_i(u)+f_i'(u)(v-u)+(v-u)^2/2$. Put $z=(1-\\theta)u+\\theta v$, apply this inequality from $z$ to $u,v$, weight by $1-\\theta,\\theta$, and add; the gradient terms cancel and $(1-\\theta)(u-z)^2+\\theta(v-z)^2=\\theta(1-\\theta)(v-u)^2$. Thus each component is 1-strongly convex by [F4], hence convex by [F18]; averaging proves F is 1-strongly convex.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F10",
+            "F11",
+            "F12",
+            "F14",
+            "F18",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "At $w=0$, the two component derivatives in step 1.1 are $-1/2$ and $1/2$, so [F3] and [F14] give $F'(0)=0$. Averaging the lower Taylor inequality from step 2.1 gives $F(w)\\ge F(0)+F'(0)w+w^2/2=F(0)+w^2/2$, so $0$ is the unique minimizer. Substitution gives $F(0)=\\log2$. The product law [F16] and $e=\\exp(1)$ from [F13], with $e^{-1}=1/e$ from [F17], give $F(1)-F(0)=\\tfrac12\\log(2+e+e^{-1})+\\tfrac12-\\log2$. Since $n=14\\ge10(5/4)/1$, $\\eta=2/25=1/(10L)$, and $m=28=2n$, [F1] and [F2] give the claimed SVRG guarantee with $q=\\frac{25L}{4\\mu n}+\\frac14=\\frac{125}{224}+\\frac{56}{224}=\\frac{181}{224}$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F13",
+            "F14",
+            "F15",
+            "F16",
+            "F17",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The fit has F'(0)=0 and the unique minimum is verified in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A single-term or one-step boundary is not part of this fixed statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The balanced labels and positive quadratic term give the unique fit in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is declared at [A1] and used in steps 3.1 for conditional-expectation existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "Rie Johnson and Tong Zhang, Accelerating Stochastic Gradient Descent using Predictive Variance Reduction, NeurIPS 2013: Sections 2–3, finite-sum objective and SVRG Theorem 1.\nSébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph: Sections 3.1–3.4 and 6.3, smooth convex objectives and SVRG.\nJohn Lebl, Basic Analysis I, Section 8.3: Sum, scalar multiple, and chain rules used in the local finite-dimensional gradient calculations.",
+      "finite_checks": [
+        {
+          "name": "SVRG parameter arithmetic",
+          "calculation": "n=14 >= 10(5/4); eta=2/25; m=28; q=181/224",
+          "steps": [
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    },
+    "ex-svrg-saga-gradient-work-storage-comparison": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-svrg-finite-sum-method",
+          "source_section": "Definition",
+          "quote": "Let n,d>=1 and let f_1,...,f_n:R^d->R be continuously differentiable convex functions. Define the finite-sum objective",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F1] [[alg-svrg-finite-sum-method]]: each epoch computes a full gradient using $n$ component gradients, uses two component gradients per inner update without caching, and keeps $O(d)$ working memory."
+        },
+        {
+          "fact": "F2",
+          "source": "alg-saga-finite-sum-method",
+          "source_section": "Definition",
+          "quote": "Let n,d>=1, let f_1,...,f_n:R^d->R be continuously differentiable, and set F(x)=n^{-1}sum_i f_i(x), with \\nabla F(x)=n^{-1}sum_i\\nabla f_i(x) by [[lem-finite-sum-gradient-is-average]] and [[def-finite-sum]]. Given a deterministic initial point x_0 and step size \\eta>0, initialize a table \\alpha_i^0=\\nabla f_i(x_0) and its mean \\bar\\alpha_0=n^{-1}sum_i\\alpha_i^0. At iteration k:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F2] [[alg-saga-finite-sum-method]]: initialization computes $n$ component gradients, each later update uses one new component gradient, and the gradient table occupies $O(nd)$ storage."
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "[F3] [[def-finite-sum]]: the finite objective contains exactly $n$ component functions."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "By [F1], SVRG's $n$ full-gradient evaluations plus $2m$ inner evaluations total $1000+2(2000)=5000$. By [F2], SAGA's initialization plus the first block costs $n+m=1000+2000=3000$; once the table exists, a later equally long block costs one new gradient at each of its $m$ updates, hence $2000$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Using the same $n,d$ and algorithms from step 1.1, the SVRG state consists of a fixed number of $d$-vectors by [F1], so its storage scales as $O(d)=O(20)$. The SAGA table has one $d$-vector for each of the $n$ terms by [F2], hence $nd=1000\\cdot20=20{,}000$ scalar coordinates and $O(nd)$ storage. These are gradient-evaluation and storage counts; they do not count arithmetic within each gradient evaluation.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero is outside the fixed nonzero data or positive-parameter hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Initialization and later-block SAGA counts are separated in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate object is admitted beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or conditional-expectation existence interface is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "Rie Johnson and Tong Zhang, Accelerating Stochastic Gradient Descent using Predictive Variance Reduction, NeurIPS 2013: Section 2, SVRG work and storage.\nAaron Defazio, Francis Bach, and Simon Lacoste-Julien, SAGA: A Fast Incremental Gradient Method With Support for Non-Strongly Convex Composite Objectives, NeurIPS 2014: Sections 2–3, SAGA stored-gradient work and memory comparison.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    },
+    "ex-adam-adaptive-step-divergence": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-adam-update",
+          "source_section": "Definition",
+          "quote": "Fix a dimension d at least 1, an initial point x_1 in R^d, a constant step size eta>0, a denominator constant epsilon>0, and parameters beta_1,beta_2 in [0,1). Set m_0=v_0=0. Given a gradient g_t in R^d at each integer time t>=1, calculate",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F1] [[alg-adam-update]]: Adam's bias-corrected moments and coordinate update are defined for the fixed parameters in the Statement."
+        },
+        {
+          "fact": "F2",
+          "source": "cex-adam-periodic-linear-losses-force-divergence",
+          "source_section": "Statement refuted",
+          "quote": "The claim that bounded gradients alone keep every bias-corrected Adam iterate bounded is false, even in one dimension with fixed parameters beta_1=0, beta_2=1/2, eta=1, and epsilon=1/100.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "[F2] [[cex-adam-periodic-linear-losses-force-divergence]]: this exact loss sequence and parameter choice give cycle drift at least $7295/90804>0$ for every cycle $k\\ge2$ and hence an unbounded terminal subsequence."
+        },
+        {
+          "fact": "F3",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "[F3] [[def-convex-and-strictly-convex-functions-on-euclidean-sets]]: affine losses satisfy the convex segment inequality."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Each loss is affine, so direct substitution in [F3] verifies convexity. Its derivative is respectively $5/2,-1,-1$, all of magnitude at most $5/2$; the updates are the bias-corrected Adam updates [F1].",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "The gradients and parameters in step 1.1 are the specified inputs of [F2]; its complete recurrence calculation yields $x_{3(k+1)+1}-x_{3k+1}\\ge7295/90804$ for every $k\\ge2$. Inducting over cycles gives $x_{3k+1}\\ge x_7+(k-2)(7295/90804)$ for $k\\ge2$, so the terminal subsequence tends to $+\\infty$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires nonempty sets/domains, positive sample counts/dimensions, or a horizon T>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes nonzero periodic gradients."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A single-term or one-step boundary is not part of this fixed statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate object is admitted beyond the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The drift lower bound applies for every k>=2 in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or conditional-expectation existence interface is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way statement, not an equivalence."
+        }
+      ],
+      "source_locators": "Sashank J. Reddi, Satyen Kale, and Sanjiv Kumar, On the Convergence of Adam and Beyond, ICLR 2018, full arXiv text: Section 2 and Appendix F, Theorem 6 counterexample.\nDiederik P. Kingma and Jimmy Ba, Adam: A Method for Stochastic Optimization, ICLR 2015: Section 2, Algorithm 1 and bias-correction equations.",
+      "finite_checks": [],
+      "risk_review": {
+        "status": "author-self-review-complete",
+        "reviewer": "beta-73",
+        "notes": "Proof steps, exact supplier bodies, source excerpts, and applicable boundary cases were reconciled. Authored evidence is not independent approval."
+      }
+    }
+  }
+}

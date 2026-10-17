@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "88",
+  "round": 0,
+  "reviewed_items": [
+    "alg-landweber-iteration-with-discrepancy-stopping",
+    "alg-golub-kahan-lsqr-with-givens-and-status",
+    "lem-local-lipschitz-derivative-quadratic-remainder",
+    "alg-iteratively-regularized-gauss-newton-step",
+    "thm-lsqr-residual-minimizes-on-krylov-subspace",
+    "lem-landweber-filter-and-residual-identities",
+    "lem-irlgnm-one-step-error-recurrence",
+    "thm-landweber-source-and-noise-error-bounds",
+    "cor-landweber-discrepancy-stopped-convergence-rate",
+    "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "alg-anchored-irgnm-with-discrepancy-stopping",
+    "lem-anchored-irgnm-fixed-reference-error-and-residual",
+    "thm-irlgnm-local-source-condition-discrepancy-convergence",
+    "cex-full-lsqr-can-amplify-data-noise",
+    "ex-nonlinear-exponential-kinetics-one-step",
+    "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+    "ex-three-pixel-blur-landweber-reconstruction"
+  ],
+  "reviewed_pages": [
+    "iterative-regularization-and-early-stopping",
+    "iterative-regularization-and-early-stopping-examples"
+  ],
+  "decision": "repair",
+  "reason": "Reviewed both pages, all 17 items, the approved INV2 contract, and the actual prerequisite claims and proofs. The defects below can be resolved in one local repair pass while preserving the approved claims; no owner escalation is needed.",
+  "findings": [
+    {
+      "id": "landweber-infinite-path",
+      "type": "scope",
+      "reason": "alg-landweber-iteration-with-discrepancy-stopping defines x_k only through k=N, but lem-landweber-filter-and-residual-identities quantifies over all k and the Landweber convergence/rate results and two examples use an unbounded path. The approved contract requires those all-k claims. Define the infinite mathematical extension separately from finite execution and retain budget exhaustion as inconclusive."
+    },
+    {
+      "id": "complex-frechet-interface",
+      "type": "prerequisite",
+      "reason": "The available def-frechet-derivative-between-banach-spaces is expressly real-only, while lem-local-lipschitz-derivative-quadratic-remainder and the IRGNM items cover complex spaces. Its proof step 1.1 also attributes a Banach-valued segment chain rule to that definition, which does not state one; the scalar real chain-rule theorem does not supply it. State a same-field derivative convention with complex-linear bounded derivatives, require the factorization R_x to be bounded linear, and justify the segment derivative locally."
+    },
+    {
+      "id": "landweber-filter-rate-proof",
+      "type": "local",
+      "reason": "thm-landweber-source-and-noise-error-bounds step 1.2 asserts 1-u ≤ exp(-u), the maximum bound for u^s exp(-u), and boundedness of k^s q^k for q in (0,1), without proving or supplying these scalar estimates. This leaves the all-s source-filter bound incomplete; add a local proof or matched suppliers."
+    },
+    {
+      "id": "kinetics-first-update",
+      "type": "local",
+      "reason": "ex-nonlinear-exponential-kinetics-one-step allows any N≥1 but says the algorithm returns c1 after one step. For N>1, if the post-step discrepancy test fails, the algorithm continues. Set N=1 and state the possible status, or describe c1 as the first-update state."
+    },
+    {
+      "id": "landweber-zero-source",
+      "type": "scope",
+      "reason": "cor-landweber-discrepancy-stopped-convergence-rate assumes R=||w||>0, omitting the approved source case w=0. Then x†=y=0, the initial residual is at most δ≤τδ, and the stopped error is zero; include this trivial branch."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-landweber-filter-and-residual-identities",
+      "decision": "repair",
+      "reason": "Its all-k identities require the mathematical extension; revise the recurrence premise to cover that extension."
+    },
+    {
+      "id": "thm-landweber-source-and-noise-error-bounds",
+      "decision": "repair",
+      "reason": "Its convergence and source/noise estimates use the unbounded path and step 1.2 needs the scalar-bound repair."
+    },
+    {
+      "id": "cor-landweber-discrepancy-stopped-convergence-rate",
+      "decision": "repair",
+      "reason": "Recheck against the extended path and completed filter estimate; add the w=0 case."
+    },
+    {
+      "id": "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+      "decision": "repair",
+      "reason": "Its un-stopped path and k_j sequence require the all-k mathematical extension."
+    },
+    {
+      "id": "ex-three-pixel-blur-landweber-reconstruction",
+      "decision": "repair",
+      "reason": "Its limit claim requires the all-k mathematical extension."
+    },
+    {
+      "id": "alg-iteratively-regularized-gauss-newton-step",
+      "decision": "repair",
+      "reason": "Make the real/complex derivative and operator-linearity convention explicit for its complex Hilbert-space case."
+    },
+    {
+      "id": "lem-irlgnm-one-step-error-recurrence",
+      "decision": "repair",
+      "reason": "Its complex-space claim inherits the missing derivative convention and needs the segment remainder argument to use a valid derivative interface."
+    },
+    {
+      "id": "alg-anchored-irgnm-with-discrepancy-stopping",
+      "decision": "repair",
+      "reason": "Make its complex derivative convention explicit so F'(x_k) has the complex-linear Hilbert adjoint used by the algorithm."
+    },
+    {
+      "id": "lem-anchored-irgnm-fixed-reference-error-and-residual",
+      "decision": "repair",
+      "reason": "State that F' and each R_x are bounded linear operators, as required by the adjoints and operator norms in the proof."
+    },
+    {
+      "id": "thm-irlgnm-local-source-condition-discrepancy-convergence",
+      "decision": "repair",
+      "reason": "Its complex-space theorem depends on the same derivative and factorization conventions."
+    },
+    {
+      "id": "ex-nonlinear-exponential-kinetics-one-step",
+      "decision": "repair",
+      "reason": "Clarify that c1 is the first-update state or set the cap to one."
+    },
+    {
+      "id": "iterative-regularization-and-early-stopping",
+      "decision": "accept",
+      "reason": "Its all-k claims match the approved scope once the Landweber mathematical extension is defined; the page summary needs no separate change."
+    },
+    {
+      "id": "iterative-regularization-and-early-stopping-examples",
+      "decision": "accept",
+      "reason": "The page's un-stopped-path summary matches that extension, and its one-step summary remains accurate after c1 is identified as the first-update state."
+    }
+  ]
+}

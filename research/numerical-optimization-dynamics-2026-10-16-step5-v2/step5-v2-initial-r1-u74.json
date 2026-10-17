@@ -1,0 +1,1038 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "74",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-rosenbrock-euler-step-map",
+      "model": "gpt-6-luna",
+      "context_sha256": "842a0ca6e32c63d96bbcd6227f48cb6a5a353df12e41cd4e295f3521132724f7",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The ODE field need not have state partial derivatives, so the exact-J branch required an explicit existence qualifier. Added that qualifier without altering either shifted-stage equation or the approximate-J branch. Smooth and linear exact-J consumers supply these derivatives; matrix-comparison consumers need only supplied matrices.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-rosenbrock-stage-residual-certificate",
+      "model": "gpt-6-luna",
+      "context_sha256": "0af37e7d2b143ba3db996fc9cc87c84f5290d4c6b1cc84cd8d3e17c3964801c8",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 required normal products and intermediate sums, whereas successful operations may be exactly zero. Replaced this unsupported application with an explicit error-factor unrolling: zero operations get error zero, each term has at most d factors, and the published product-of-errors lemma yields gamma_d. Cauchy-Schwarz and subtraction then prove the unchanged certificate.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+      "model": "gpt-6-luna",
+      "context_sha256": "51a6518030639fb16d3ec69f106e3edaf55d66b68e95d7a970fe5c18a61b8e24",
+      "outcome": "false_positive",
+      "reason": "An arbitrary stored square-matrix solver also accepts every stored shifted matrix. The title identifies its intended Rosenbrock use without claiming that all inputs must be shifted; explicit factor, replay, back-substitution and original-system residual branches remain well defined. No edit is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+      "model": "gpt-6-luna",
+      "context_sha256": "c5956440885d04871195fd253482530d1c99f6457a972ab5dc3acef26e7af0a8",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Made positive dimension explicit to match both called interfaces. For the C1 autonomous field, the state Jacobian exists, G(y)=-hf(y) and DG(y)=I-hDf(y); the unique correction is hk. The scalar decay consumer uses d=1 and remains sound. No root or Newton convergence claim is introduced.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-rosenbrock-euler-step",
+      "model": "gpt-6-luna",
+      "context_sha256": "fa0d01fe40122d755ea3a5e78814dc3cacb661d8d20840091ea5db1862225e41",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The gamma-positive procedure is the one-stage Rosenbrock family; only gamma=1 is Rosenbrock-Euler by the supplying definition. Broadened the display title, made that naming explicit, and stated d>=1. Exact storage, rounded solve, residual failure statuses and all positive gamma values are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-two-stage-rosenbrock-w-method",
+      "model": "gpt-6-luna",
+      "context_sha256": "c4e1c0b429c75d6aaed6c421e4b800d87d27365351cb79f861b2254cc400608f",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The ODE convention already has positive state dimension, but the local solver precondition and data shapes were implicit. Made them explicit and repaired the independently confirmed unbound q2 output. Also supplied a terminating domain-membership input for the fatal termination finding, explicitly bound both residual outputs, and conditioned the exact-J branch on existence of its partial derivatives. The stage equations and shared factorization are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+      "model": "gpt-6-luna",
+      "context_sha256": "72ce49493d91f93755704fe40d0d22ebef357de00fc30d0c4389a7836d0f3e21",
+      "outcome": "confirmed_fatal",
+      "reason": "Arbitrary open-domain membership need not be decidable by the other returning routines, so the original finite-work conclusion lacked a necessary computational hypothesis. Added a terminating domain-membership input in the supplier and named its termination here. The proof now uses it explicitly and counts at most d reflector calls before early failure; all remaining loops are finite.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "cex-omitting-rosenbrock-stage-correction-loses-order-two",
+      "model": "gpt-6-luna",
+      "context_sha256": "cf5ac5efab55f279c135b17864df64ae0853b8db6a493900e2689b26e1129959",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The uniqueness supplier alone does not construct a solution or give exp(0)=1. Added the power-series definition and explicitly verified exp(0)=1 and exp prime=exp before using uniqueness. Smoothness supplies continuous, integrable derivatives for the FTC remainder; the unchanged altered-step coefficient differs from the exact flow by alpha h^2+O(h^3).",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-two-stage-rosenbrock-factorization-reuse",
+      "model": "gpt-6-luna",
+      "context_sha256": "fe9b713ba9930d751ba7c43c5f17763ef66d6d6d525624bfc11f26b59596c35d",
+      "outcome": "confirmed_fatal",
+      "reason": "The original evaluator returned residual-norm bound 5, forcing rho>=5 and contradicting rho<=1/2 and tolerance one. It now returns 0 for the exactly zero computed residual and 5 for the other vector norms. Exact reflector/substitution arithmetic gives R=-I, k1=(-1,-4), q2=(1/2,4); the allowance is <0.31, so Wbar=rho=1/2 is sound. The domain routine is explicitly true on the whole-space autonomous extension.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "thm-rosenbrock-euler-global-first-order-error",
+      "model": "gpt-6-luna",
+      "context_sha256": "577f59428cd0951b065e709c4d6671d84b4de40c5706e98fbc211d73227ec087",
+      "outcome": "false_positive",
+      "reason": "The C2 hypothesis uses def-ck-euclidean-maps-and-diffeomorphisms, whose Definition requires target dimension q>=1; the exact ODE solution interface also requires dimension >=1. Thus d=0 is outside the existing hypotheses. The Lipschitz shifted-map estimate, residual perturbation and finite recurrence give the stated bound, including n=0 and zero Cs, without editing the sound item.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-rosenbrock-euler-step-map",
+      "disposition": "repaired",
+      "post_sha256": "fbac734db3968994de156095cfd3eb15d095c9226533e431e39f1709592d8621",
+      "review_context_sha256": "4ee413a0a9b1f0d66ffe8d5651d9f609e658dc4c41898616f9bbb25371153d69",
+      "reason": "The ODE field need not have state partial derivatives, so the exact-J branch required an explicit existence qualifier. Added that qualifier without altering either shifted-stage equation or the approximate-J branch. Smooth and linear exact-J consumers supply these derivatives; matrix-comparison consumers need only supplied matrices.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-rosenbrock-stage-residual-certificate",
+      "disposition": "repaired",
+      "post_sha256": "b54c9153497e5f403ceb4cdceffad66173ee856f0440236f9507d6b820e40001",
+      "review_context_sha256": "8f7845aa4194d5bfaa282343ecd6b9d9e50927e752cd303e78746ddb21d02923",
+      "reason": "F2 required normal products and intermediate sums, whereas successful operations may be exactly zero. Replaced this unsupported application with an explicit error-factor unrolling: zero operations get error zero, each term has at most d factors, and the published product-of-errors lemma yields gamma_d. Cauchy-Schwarz and subtraction then prove the unchanged certificate.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+      "disposition": "unaffected",
+      "post_sha256": "c56df230cb96821bbac40509c2039f7a953fbe46d5655815788f86ad56430f76",
+      "review_context_sha256": "48196d8bd0f33c8fa5c5843432bd3bcc5fd405738591c32f29526d0fdf5b4914",
+      "reason": "An arbitrary stored square-matrix solver also accepts every stored shifted matrix. The title identifies its intended Rosenbrock use without claiming that all inputs must be shifted; explicit factor, replay, back-substitution and original-system residual branches remain well defined. No edit is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+      "disposition": "repaired",
+      "post_sha256": "e1c379c2e1175125748ba4b0a3d89cf16deb9f0a8715413b803664db77e5242c",
+      "review_context_sha256": "2b4019b7fc01888ba905c90b886524f3b456f9657d4b7137c7997ef13ca7e2bd",
+      "reason": "Made positive dimension explicit to match both called interfaces. For the C1 autonomous field, the state Jacobian exists, G(y)=-hf(y) and DG(y)=I-hDf(y); the unique correction is hk. The scalar decay consumer uses d=1 and remains sound. No root or Newton convergence claim is introduced.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-rosenbrock-euler-step",
+      "disposition": "repaired",
+      "post_sha256": "0f1ca0eef21d13a11240a2a00173e567edbcc0705a4dc1575bf7cbaab45f88f2",
+      "review_context_sha256": "a3b51944cd12eabc9bddab1680ac0ab105d5603eba0f97ed2c78946f8103f368",
+      "reason": "The gamma-positive procedure is the one-stage Rosenbrock family; only gamma=1 is Rosenbrock-Euler by the supplying definition. Broadened the display title, made that naming explicit, and stated d>=1. Exact storage, rounded solve, residual failure statuses and all positive gamma values are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-two-stage-rosenbrock-w-method",
+      "disposition": "repaired",
+      "post_sha256": "86a712521e040d49d7f39e33029f2e8cdbcfdb9d213283162fd7ec7602d20e7b",
+      "review_context_sha256": "0c2076ebf217781137afd0da5fdcdfcd7d332b85dc2adff5c251cab409fb16bf",
+      "reason": "The ODE convention already has positive state dimension, but the local solver precondition and data shapes were implicit. Made them explicit and repaired the independently confirmed unbound q2 output. Also supplied a terminating domain-membership input for the fatal termination finding, explicitly bound both residual outputs, and conditioned the exact-J branch on existence of its partial derivatives. The stage equations and shared factorization are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+      "disposition": "repaired",
+      "post_sha256": "155b8161a977503a71d2a5df5e185a2a5f53c9eb3cded799f7fbc5e9c48350c4",
+      "review_context_sha256": "785d1439c795a11ae93444b12a5b161b506893bbae612147a72d4e40fa246c31",
+      "reason": "Arbitrary open-domain membership need not be decidable by the other returning routines, so the original finite-work conclusion lacked a necessary computational hypothesis. Added a terminating domain-membership input in the supplier and named its termination here. The proof now uses it explicitly and counts at most d reflector calls before early failure; all remaining loops are finite.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-omitting-rosenbrock-stage-correction-loses-order-two",
+      "disposition": "repaired",
+      "post_sha256": "552d04ee233f41796ef486afde7e8099b52ceb36898a3bbf17462952906f66c7",
+      "review_context_sha256": "32b7cbe639ab3395ff4f147bc985dd81bfda4d26f066c89fd8debc2fb44df6c8",
+      "reason": "The uniqueness supplier alone does not construct a solution or give exp(0)=1. Added the power-series definition and explicitly verified exp(0)=1 and exp prime=exp before using uniqueness. Smoothness supplies continuous, integrable derivatives for the FTC remainder; the unchanged altered-step coefficient differs from the exact flow by alpha h^2+O(h^3).",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-two-stage-rosenbrock-factorization-reuse",
+      "disposition": "repaired",
+      "post_sha256": "486ea16e948a2ad707d382ed9b3615f91439da148304e2cbb3592a92464ca283",
+      "review_context_sha256": "8d46beffbf25b6abfb490b07d5a93ab2f7c318101057e95772c38e890aefc512",
+      "reason": "The original evaluator returned residual-norm bound 5, forcing rho>=5 and contradicting rho<=1/2 and tolerance one. It now returns 0 for the exactly zero computed residual and 5 for the other vector norms. Exact reflector/substitution arithmetic gives R=-I, k1=(-1,-4), q2=(1/2,4); the allowance is <0.31, so Wbar=rho=1/2 is sound. The domain routine is explicitly true on the whole-space autonomous extension.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-rosenbrock-euler-global-first-order-error",
+      "disposition": "unaffected",
+      "post_sha256": "0f4308e6dffe45a0ede7b6912e445dd403389f7aa380b6b7849461cd1bfa0606",
+      "review_context_sha256": "6bb29faa9ca6b11c2a9fb0a846ac1e5241b5a2260000c59671f2649d4766191b",
+      "reason": "The C2 hypothesis uses def-ck-euclidean-maps-and-diffeomorphisms, whose Definition requires target dimension q>=1; the exact ODE solution interface also requires dimension >=1. Thus d=0 is outside the existing hypotheses. The Lipschitz shifted-map estimate, residual perturbation and finite recurrence give the stated bound, including n=0 and zero Cs, without editing the sound item.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+    "thm-rosenbrock-euler-global-first-order",
+    "lem-rosenbrock-euler-step-map-lipschitz",
+    "ex-rosenbrock-euler-stiff-linear-damping",
+    "thm-rosenbrock-euler-a-l-stable",
+    "lem-rosenbrock-euler-local-defect",
+    "thm-rosenbrock-euler-one-newton-step-for-backward-euler",
+    "ex-rosenbrock-euler-stiff-decay-and-backward-euler",
+    "thm-rosenbrock-euler-scalar-a-and-l-stability",
+    "alg-rosenbrock-euler-step",
+    "lem-rosenbrock-euler-local-defect-and-residual-error",
+    "lem-rosenbrock-euler-jacobian-approximation-defect",
+    "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+    "thm-rosenbrock-euler-global-first-order-error",
+    "thm-two-stage-rosenbrock-global-order-two",
+    "prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves",
+    "cex-approximate-jacobian-breaks-stiff-damping",
+    "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+    "cex-omitting-rosenbrock-stage-correction-loses-order-two",
+    "ex-two-stage-rosenbrock-factorization-reuse",
+    "thm-two-stage-rosenbrock-scalar-l-stability"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "def-rosenbrock-euler-step-map",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "finding": "The ODE field need not have state partial derivatives, so the exact-J branch required an explicit existence qualifier. Added that qualifier without altering either shifted-stage equation or the approximate-J branch. Smooth and linear exact-J consumers supply these derivatives; matrix-comparison consumers need only supplied matrices."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "lem-rosenbrock-stage-residual-certificate",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "finding": "F2 required normal products and intermediate sums, whereas successful operations may be exactly zero. Replaced this unsupported application with an explicit error-factor unrolling: zero operations get error zero, each term has at most d factors, and the published product-of-errors lemma yields gamma_d. Cauchy-Schwarz and subtraction then prove the unchanged certificate."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "finding": "Made positive dimension explicit to match both called interfaces. For the C1 autonomous field, the state Jacobian exists, G(y)=-hf(y) and DG(y)=I-hDf(y); the unique correction is hk. The scalar decay consumer uses d=1 and remains sound. No root or Newton convergence claim is introduced."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "alg-rosenbrock-euler-step",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "finding": "The gamma-positive procedure is the one-stage Rosenbrock family; only gamma=1 is Rosenbrock-Euler by the supplying definition. Broadened the display title, made that naming explicit, and stated d>=1. Exact storage, rounded solve, residual failure statuses and all positive gamma values are preserved."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "alg-two-stage-rosenbrock-w-method",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "finding": "Made d>=1 and the matrix/vector shapes explicit for the factor interface. Bound the second solve output to q2 and both residual outputs explicitly. To repair the later termination finding, the procedure now requires and calls a terminating exact domain-membership routine; exact-J partial derivatives are required where that branch is used. Stage equations and both shared solves are unchanged."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "finding": "Arbitrary open-domain membership need not be decidable by the other returning routines, so the original finite-work conclusion lacked a necessary computational hypothesis. Added a terminating domain-membership input in the supplier and named its termination here. The proof now uses it explicitly and counts at most d reflector calls before early failure; all remaining loops are finite."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "cex-omitting-rosenbrock-stage-correction-loses-order-two",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "finding": "The uniqueness supplier alone does not construct a solution or give exp(0)=1. Added the power-series definition and explicitly verified exp(0)=1 and exp prime=exp before using uniqueness. Smoothness supplies continuous, integrable derivatives for the FTC remainder; the unchanged altered-step coefficient differs from the exact flow by alpha h^2+O(h^3)."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "ex-two-stage-rosenbrock-factorization-reuse",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "finding": "The original evaluator returned residual-norm bound 5, forcing rho>=5 and contradicting rho<=1/2 and tolerance one. It now returns 0 for the exactly zero computed residual and 5 for the other vector norms. Exact reflector/substitution arithmetic gives R=-I, k1=(-1,-4), q2=(1/2,4); the allowance is <0.31, so Wbar=rho=1/2 is sound. The domain routine is explicitly true on the whole-space autonomous extension."
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "supplier": "def-rosenbrock-euler-step-map",
+      "consumer": "thm-rosenbrock-euler-global-first-order",
+      "status": "examined-unaffected",
+      "path": "items/thm-rosenbrock-euler-global-first-order.md",
+      "affected_use": "Let $K\\subset U\\subset\\mathbb R^d$ be compact and convex, let $f\\in C^2(U,\\mathbb R^d)$, and assume the bounds and uniform inverse hypothesis of [[lem-rosenbrock-euler-local-defect]] and [[lem-rosenbrock-euler-step-map-lipschitz]] hold with constants $F,L,H,B,h_0$. Let an exact solution $y(t)$ and the exact-method iterates $Y_{n+1}=\\Phi_h(Y_n)$ of the autonomous exact-Jacobian map [[def-rosenbrock-euler-step-map]] with $\\gamma=1$ stay in $K$ for $0\\le t_n=nh\\le T$, with $Y_0=y(0)$ and $0<h\\le h_0$. Define $C_0:=FL(B+1/2)$ and $L_*:=BL+h_0B^2HF$. Then\n$$\n\\|Y_n-y(t_n)\\|\\le C_0T e^{L_*T}h\\qquad(0\\le t_n\\le T).\n$$\nThus this exact-J method has global order at least one on the stated compact tube. The theorem is conditional on the iterates remaining in that tube.\n\n[F1] [[def-rosenbrock-euler-step-map]] defines the autonomous exact-Jacobian map with $\\gamma=1$ by the exact solve $(I-hDf(y))k=f(y)$ and $\\Phi_h(y)=y+hk$.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "route": "separate-maintenance",
+      "uncertain": false
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "supplier": "def-rosenbrock-euler-step-map",
+      "consumer": "lem-rosenbrock-euler-step-map-lipschitz",
+      "status": "examined-unaffected",
+      "path": "items/lem-rosenbrock-euler-step-map-lipschitz.md",
+      "affected_use": "Let $K\\subset U\\subset\\mathbb R^d$ be compact and convex, let $f\\in C^2(U,\\mathbb R^d)$, and suppose on $K$ that $\\|f\\|\\le F$, $\\|Df\\|\\le L$, and $\\|D^2f\\|\\le H$. For $0<h\\le h_0$, assume $M_h(y):=I-hDf(y)$ is invertible for every $y\\in K$ with $\\|M_h(y)^{-1}\\|\\le B$. The exact-arithmetic autonomous exact-Jacobian Rosenbrock-Euler map $\\Phi_h(y)=y+hM_h(y)^{-1}f(y)$ of [[def-rosenbrock-euler-step-map]], with $\\gamma=1$, then satisfies\n$$\n\\|\\Phi_h(u)-\\Phi_h(v)\\|\\le(1+L_*h)\\|u-v\\|,\\qquad L_*:=BL+h_0B^2HF,\n$$\nfor all $u,v\\in K$.\n\n[F1] [[def-rosenbrock-euler-step-map]]: in the autonomous exact-Jacobian branch with $\\gamma=1$, the exact-method map is $\\Phi_h(y)=y+hM_h(y)^{-1}f(y)$ when $M_h(y)$ is invertible.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "route": "separate-maintenance",
+      "uncertain": false
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "supplier": "def-rosenbrock-euler-step-map",
+      "consumer": "ex-rosenbrock-euler-stiff-linear-damping",
+      "status": "examined-unaffected",
+      "path": "items/ex-rosenbrock-euler-stiff-linear-damping.md",
+      "affected_use": "[F1] [[def-rosenbrock-euler-step-map]]: the exact scalar method with $\\gamma=1$ solves $(1-h\\lambda)k=\\lambda y_n$ and has update $y_{n+1}=y_n+hk$.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "route": "separate-maintenance",
+      "uncertain": false
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "supplier": "def-rosenbrock-euler-step-map",
+      "consumer": "thm-rosenbrock-euler-a-l-stable",
+      "status": "examined-unaffected",
+      "path": "items/thm-rosenbrock-euler-a-l-stable.md",
+      "affected_use": "Consider the exact-arithmetic Rosenbrock-Euler map of [[def-rosenbrock-euler-step-map]] with $\\gamma=1$, exact Jacobian, and its complex scalar test equation $y'=\\lambda y$, $z=h\\lambda$. The complexification is the real two-dimensional exact map under $(\\operatorname{Re}y,\\operatorname{Im}y)$, with multiplication by $\\lambda$ represented by $C_\\lambda=\\begin{pmatrix}\\operatorname{Re}\\lambda&-\\operatorname{Im}\\lambda\\\\\\operatorname{Im}\\lambda&\\operatorname{Re}\\lambda\\end{pmatrix}$. Thus its exact stage equation is $(I_2-hC_\\lambda)k=C_\\lambda y$, equivalently $(1-z)k=\\lambda y$, and its update is $y+hk$. This is the $\\gamma=1$ exact complexification used in [[thm-rosenbrock-euler-scalar-a-and-l-stability]], not execution of a real rounded solver. Its amplification factor is $R(z)=(1-z)^{-1}$. A-stability means no pole and $|R(z)|\\le1$ throughout $\\operatorname{Re}z\\le0$; L-stability additionally means $R(z)\\to0$ as $|z|\\to\\infty$ within that half-plane. The exact method is both A-stable and L-stable, and its amplification factor agrees with backward Euler.\n\n[F1] [[def-rosenbrock-euler-step-map]] gives the real exact-Jacobian equation and update at $\\gamma=1$. Under the real two-dimensional representation in the Statement these are exactly $y^+=y+hk$ and $(1-h\\lambda)k=\\lambda y$; [[thm-rosenbrock-euler-scalar-a-and-l-stability]] uses the same exact complexification and rational-function stability criteria.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "route": "separate-maintenance",
+      "uncertain": false
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "supplier": "def-rosenbrock-euler-step-map",
+      "consumer": "lem-rosenbrock-euler-local-defect",
+      "status": "examined-unaffected",
+      "path": "items/lem-rosenbrock-euler-local-defect.md",
+      "affected_use": "Let $K\\subset U\\subset\\mathbb R^d$ be compact and convex, let $f:U\\to\\mathbb R^d$ be continuously differentiable, and suppose $\\|f(y)\\|\\le F$ and $\\|Df(y)\\|\\le L$ on $K$. For $0<h\\le h_0$, assume $I-hDf(y)$ is invertible for every $y\\in K$ with inverse norm at most $B$. If the exact solution starting at $y$ stays in $K$ on $[t,t+h]$, the exact-arithmetic step $\\Phi_h(y)$ of [[def-rosenbrock-euler-step-map]], with $\\gamma=1$, autonomous field $f$ and exact Jacobian $Df(y)$, satisfies\n$$\n\\|\\Phi_h(y)-y(t+h)\\|\\le FL(B+1)h^2.\n$$\nThe claim is a local defect bound; it does not by itself assert global convergence.\n\n[F1] [[def-rosenbrock-euler-step-map]]: for the autonomous exact-Jacobian branch with $\\gamma=1$, the exact stage solves $(I-hDf(y))k=f(y)$ and the exact-method update is $\\Phi_h(y)=y+hk$. No finite-precision execution or success status is used.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "route": "separate-maintenance",
+      "uncertain": false
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "supplier": "def-rosenbrock-euler-step-map",
+      "consumer": "thm-rosenbrock-euler-one-newton-step-for-backward-euler",
+      "status": "examined-unaffected",
+      "path": "items/thm-rosenbrock-euler-one-newton-step-for-backward-euler.md",
+      "affected_use": "Let $f:U\\to\\mathbb R^d$ be continuously differentiable, $y\\in U$, $h>0$, and suppose $M:=I-hDf(y)$ is invertible. The backward-Euler increment equation is $G(s):=s-hf(y+s)=0$. A Newton correction for $G$ at $s_0=0$, defined by $s_1=s_0-DG(s_0)^{-1}G(s_0)$, is $s_1=hM^{-1}f(y)$. Consequently, the state $y+s_1$ equals the exact-arithmetic autonomous exact-Jacobian Rosenbrock-Euler map [[def-rosenbrock-euler-step-map]] with $\\gamma=1$. This identity concerns one Newton correction only; it asserts neither convergence of Newton iteration nor that the corrected increment solves $G(s)=0$.\n\n[F1] [[def-rosenbrock-euler-step-map]]: the exact-arithmetic autonomous exact-Jacobian map at $\\gamma=1$ is $y+h(I-hDf(y))^{-1}f(y)$ whenever the stage matrix is invertible.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "route": "separate-maintenance",
+      "uncertain": false
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "def-rosenbrock-euler-step-map",
+      "claim": "The ODE field need not have state partial derivatives, so the exact-J branch required an explicit existence qualifier. Added that qualifier without altering either shifted-stage equation or the approximate-J branch. Smooth and linear exact-J consumers supply these derivatives; matrix-comparison consumers need only supplied matrices.",
+      "source_paths": [
+        "items/def-rosenbrock-euler-step-map.md",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json"
+      ],
+      "validation": "Focused contract and bounded finite-smoke checks passed for this item. Every changed carrier passed precheck/rendercheck/proof-layout as applicable.",
+      "unresolved_obligations": [],
+      "next_action": "Controller-owned collection, any scheduled consumer maintenance, certification and independent rejudgment. No independent review of this repair is claimed.",
+      "page_interface": "The owning page Summary fixes gamma=1 naming and shifted systems; its smoothness-independent stage formulas remain unchanged.",
+      "dependency_ids": [
+        "def-first-order-ode-initial-value-problem-and-solution",
+        "def-jacobian-matrix-and-gradient",
+        "def-invertible-euclidean-linear-map"
+      ],
+      "source_locators": [
+        "Current item Statement/Definition, Facts & Assumptions and complete numbered proof where present; exact supplier statements are quoted in the owning proof contract."
+      ]
+    },
+    {
+      "id": "lem-rosenbrock-stage-residual-certificate",
+      "claim": "F2 required normal products and intermediate sums, whereas successful operations may be exactly zero. Replaced this unsupported application with an explicit error-factor unrolling: zero operations get error zero, each term has at most d factors, and the published product-of-errors lemma yields gamma_d. Cauchy-Schwarz and subtraction then prove the unchanged certificate.",
+      "source_paths": [
+        "items/lem-rosenbrock-stage-residual-certificate.md",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json"
+      ],
+      "validation": "Focused contract and bounded finite-smoke checks passed for this item. Every changed carrier passed precheck/rendercheck/proof-layout as applicable.",
+      "unresolved_obligations": [],
+      "next_action": "Controller-owned collection, any scheduled consumer maintenance, certification and independent rejudgment. No independent review of this repair is claimed.",
+      "dependency_ids": [
+        "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+        "lem-product-of-one-plus-deltas-gives-theta-n",
+        "thm-cauchy-schwarz-finite",
+        "def-abs-value",
+        "thm-cauchy-schwarz-and-the-euclidean-norm",
+        "lem-of-abs-value",
+        "lem-of-triangle-inequality"
+      ],
+      "source_locators": [
+        "Current item Statement/Definition, Facts & Assumptions and complete numbered proof where present; exact supplier statements are quoted in the owning proof contract."
+      ]
+    },
+    {
+      "id": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+      "claim": "An arbitrary stored square-matrix solver also accepts every stored shifted matrix. The title identifies its intended Rosenbrock use without claiming that all inputs must be shifted; explicit factor, replay, back-substitution and original-system residual branches remain well defined. No edit is warranted.",
+      "source_paths": [
+        "items/alg-rosenbrock-shifted-qr-solver-with-residual-certificate.md",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json"
+      ],
+      "validation": "Focused contract and bounded finite-smoke checks passed for this item. Every changed carrier passed precheck/rendercheck/proof-layout as applicable.",
+      "unresolved_obligations": [],
+      "next_action": "Controller-owned collection, any scheduled consumer maintenance, certification and independent rejudgment. No independent review of this repair is claimed.",
+      "dependency_ids": [
+        "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+        "alg-scaled-householder-reflector-formation-and-application",
+        "lem-rosenbrock-stage-residual-certificate",
+        "def-forward-and-back-substitution-for-triangular-systems",
+        "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+        "def-householder-reflector"
+      ],
+      "source_locators": [
+        "Current item Statement/Definition, Facts & Assumptions and complete numbered proof where present; exact supplier statements are quoted in the owning proof contract."
+      ]
+    },
+    {
+      "id": "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+      "claim": "Made positive dimension explicit to match both called interfaces. For the C1 autonomous field, the state Jacobian exists, G(y)=-hf(y) and DG(y)=I-hDf(y); the unique correction is hk. The scalar decay consumer uses d=1 and remains sound. No root or Newton convergence claim is introduced.",
+      "source_paths": [
+        "items/prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler.md",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json"
+      ],
+      "validation": "Focused contract and bounded finite-smoke checks passed for this item. Every changed carrier passed precheck/rendercheck/proof-layout as applicable.",
+      "unresolved_obligations": [],
+      "next_action": "Controller-owned collection, any scheduled consumer maintenance, certification and independent rejudgment. No independent review of this repair is claimed.",
+      "dependency_ids": [
+        "def-rosenbrock-euler-step-map",
+        "def-backward-euler-step-equation",
+        "alg-newton-correction-for-vector-residuals",
+        "def-jacobian-matrix-and-gradient",
+        "def-c-one-map-and-local-inverse",
+        "thm-total-derivative-computes-directional-and-partial-derivatives",
+        "thm-chain-rule-for-total-derivatives"
+      ],
+      "source_locators": [
+        "Current item Statement/Definition, Facts & Assumptions and complete numbered proof where present; exact supplier statements are quoted in the owning proof contract."
+      ]
+    },
+    {
+      "id": "alg-rosenbrock-euler-step",
+      "claim": "The gamma-positive procedure is the one-stage Rosenbrock family; only gamma=1 is Rosenbrock-Euler by the supplying definition. Broadened the display title, made that naming explicit, and stated d>=1. Exact storage, rounded solve, residual failure statuses and all positive gamma values are preserved.",
+      "source_paths": [
+        "items/alg-rosenbrock-euler-step.md",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json"
+      ],
+      "validation": "Focused contract and bounded finite-smoke checks passed for this item. Every changed carrier passed precheck/rendercheck/proof-layout as applicable.",
+      "unresolved_obligations": [],
+      "next_action": "Controller-owned collection, any scheduled consumer maintenance, certification and independent rejudgment. No independent review of this repair is claimed.",
+      "dependency_ids": [
+        "def-rosenbrock-euler-step-map",
+        "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+        "def-implicit-residual-and-algebraic-error-units",
+        "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+      ],
+      "source_locators": [
+        "Current item Statement/Definition, Facts & Assumptions and complete numbered proof where present; exact supplier statements are quoted in the owning proof contract."
+      ]
+    },
+    {
+      "id": "alg-two-stage-rosenbrock-w-method",
+      "claim": "Made d>=1 and the matrix/vector shapes explicit for the factor interface. Bound the second solve output to q2 and both residual outputs explicitly. To repair the later termination finding, the procedure now requires and calls a terminating exact domain-membership routine; exact-J partial derivatives are required where that branch is used. Stage equations and both shared solves are unchanged.",
+      "source_paths": [
+        "items/alg-two-stage-rosenbrock-w-method.md",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json"
+      ],
+      "validation": "Focused contract and bounded finite-smoke checks passed for this item. Every changed carrier passed precheck/rendercheck/proof-layout as applicable.",
+      "unresolved_obligations": [],
+      "next_action": "Controller-owned collection, any scheduled consumer maintenance, certification and independent rejudgment. No independent review of this repair is claimed.",
+      "dependency_ids": [
+        "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+        "def-implicit-residual-and-algebraic-error-units",
+        "def-first-order-ode-initial-value-problem-and-solution",
+        "def-jacobian-matrix-and-gradient",
+        "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+      ],
+      "source_locators": [
+        "Current item Statement/Definition, Facts & Assumptions and complete numbered proof where present; exact supplier statements are quoted in the owning proof contract."
+      ]
+    },
+    {
+      "id": "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+      "claim": "Arbitrary open-domain membership need not be decidable by the other returning routines, so the original finite-work conclusion lacked a necessary computational hypothesis. Added a terminating domain-membership input in the supplier and named its termination here. The proof now uses it explicitly and counts at most d reflector calls before early failure; all remaining loops are finite.",
+      "source_paths": [
+        "items/thm-rosenbrock-computational-steps-terminate-with-finite-work.md",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json"
+      ],
+      "validation": "Focused contract and bounded finite-smoke checks passed for this item. Every changed carrier passed precheck/rendercheck/proof-layout as applicable.",
+      "unresolved_obligations": [],
+      "next_action": "Controller-owned collection, any scheduled consumer maintenance, certification and independent rejudgment. No independent review of this repair is claimed.",
+      "dependency_ids": [
+        "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+        "alg-rosenbrock-euler-step",
+        "alg-two-stage-rosenbrock-w-method",
+        "alg-scaled-householder-reflector-formation-and-application",
+        "def-forward-and-back-substitution-for-triangular-systems",
+        "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+      ],
+      "source_locators": [
+        "Current item Statement/Definition, Facts & Assumptions and complete numbered proof where present; exact supplier statements are quoted in the owning proof contract."
+      ]
+    },
+    {
+      "id": "cex-omitting-rosenbrock-stage-correction-loses-order-two",
+      "claim": "The uniqueness supplier alone does not construct a solution or give exp(0)=1. Added the power-series definition and explicitly verified exp(0)=1 and exp prime=exp before using uniqueness. Smoothness supplies continuous, integrable derivatives for the FTC remainder; the unchanged altered-step coefficient differs from the exact flow by alpha h^2+O(h^3).",
+      "source_paths": [
+        "items/cex-omitting-rosenbrock-stage-correction-loses-order-two.md",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json"
+      ],
+      "validation": "Focused contract and bounded finite-smoke checks passed for this item. Every changed carrier passed precheck/rendercheck/proof-layout as applicable.",
+      "unresolved_obligations": [],
+      "next_action": "Controller-owned collection, any scheduled consumer maintenance, certification and independent rejudgment. No independent review of this repair is claimed.",
+      "dependency_ids": [
+        "alg-two-stage-rosenbrock-w-method",
+        "cor-vector-valued-ftc-and-lipschitz-bound",
+        "thm-exponential-ivp-uniqueness",
+        "thm-derivative-of-exponential",
+        "thm-exponential-is-strictly-increasing",
+        "def-real-exponential-function-and-e",
+        "thm-continuous-implies-integrable"
+      ],
+      "source_locators": [
+        "Current item Statement/Definition, Facts & Assumptions and complete numbered proof where present; exact supplier statements are quoted in the owning proof contract."
+      ]
+    },
+    {
+      "id": "ex-two-stage-rosenbrock-factorization-reuse",
+      "claim": "The original evaluator returned residual-norm bound 5, forcing rho>=5 and contradicting rho<=1/2 and tolerance one. It now returns 0 for the exactly zero computed residual and 5 for the other vector norms. Exact reflector/substitution arithmetic gives R=-I, k1=(-1,-4), q2=(1/2,4); the allowance is <0.31, so Wbar=rho=1/2 is sound. The domain routine is explicitly true on the whole-space autonomous extension.",
+      "source_paths": [
+        "items/ex-two-stage-rosenbrock-factorization-reuse.md",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json"
+      ],
+      "validation": "Focused contract and bounded finite-smoke checks passed for this item. Every changed carrier passed precheck/rendercheck/proof-layout as applicable.",
+      "unresolved_obligations": [],
+      "next_action": "Controller-owned collection, any scheduled consumer maintenance, certification and independent rejudgment. No independent review of this repair is claimed.",
+      "dependency_ids": [
+        "alg-two-stage-rosenbrock-w-method",
+        "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+        "alg-scaled-householder-reflector-formation-and-application",
+        "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+        "lem-rosenbrock-stage-residual-certificate"
+      ],
+      "source_locators": [
+        "Current item Statement/Definition, Facts & Assumptions and complete numbered proof where present; exact supplier statements are quoted in the owning proof contract."
+      ]
+    },
+    {
+      "id": "thm-rosenbrock-euler-global-first-order-error",
+      "claim": "The C2 hypothesis uses def-ck-euclidean-maps-and-diffeomorphisms, whose Definition requires target dimension q>=1; the exact ODE solution interface also requires dimension >=1. Thus d=0 is outside the existing hypotheses. The Lipschitz shifted-map estimate, residual perturbation and finite recurrence give the stated bound, including n=0 and zero Cs, without editing the sound item.",
+      "source_paths": [
+        "items/thm-rosenbrock-euler-global-first-order-error.md",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json"
+      ],
+      "validation": "Focused contract and bounded finite-smoke checks passed for this item. Every changed carrier passed precheck/rendercheck/proof-layout as applicable.",
+      "unresolved_obligations": [],
+      "next_action": "Controller-owned collection, any scheduled consumer maintenance, certification and independent rejudgment. No independent review of this repair is claimed.",
+      "dependency_ids": [
+        "alg-rosenbrock-euler-step",
+        "lem-rosenbrock-euler-local-defect-and-residual-error",
+        "lem-rosenbrock-shifted-inverse-perturbation",
+        "lem-rosenbrock-stage-residual-certificate",
+        "def-ck-euclidean-maps-and-diffeomorphisms",
+        "def-first-order-ode-initial-value-problem-and-solution",
+        "def-jacobian-matrix-and-gradient",
+        "def-induced-matrix-p-norm",
+        "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+        "thm-chain-rule-for-total-derivatives",
+        "thm-continuous-partial-derivatives-imply-total-differentiability",
+        "thm-total-derivative-computes-directional-and-partial-derivatives",
+        "cor-vector-valued-ftc-and-lipschitz-bound",
+        "lem-exponential-dominates-one-plus-x"
+      ],
+      "source_locators": [
+        "Current item Statement/Definition, Facts & Assumptions and complete numbered proof where present; exact supplier statements are quoted in the owning proof contract."
+      ]
+    },
+    {
+      "scope": "consumer inventory",
+      "evidence": "Compared exact original Statement/Definition sections saved before edits with current sections. Six interfaces changed; all direct ID dependency/reference uses and owning page placements were examined. Proof-only repairs did not propagate. No necessary outside-item edit or defective published consumer was found. Shared ledger rows are proposals only. No external source was consulted; these finite-dimensional algebra, rounding and ODE consistency arguments are familiar.",
+      "unresolved_obligations": []
+    },
+    {
+      "scope": "integration and handoff",
+      "metadata_paths": [
+        "research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-74.pages.json"
+      ],
+      "evidence": "Used step5-shared-write-lock acquire/reread/edit/check/release for owning metadata. Regenerated only the five changed proof derivations and their citation maps, synchronized exact supplier-interface quotations throughout the owning contract, updated changed smoke assertion excerpts, and synchronized assigned manifest dependencies and the one-stage display title. Preserved prior risk-review records and original round evidence. Ledger updates remain controller-merge proposals. No judge, audit stamp, certificate, round state, or unrelated item was written.",
+      "unresolved_obligations": [],
+      "next_action": "Controller collection and ordinary independent certification/rejudgment. Fatal-round count remains two after repair."
+    }
+  ],
+  "downstream_evidence": [
+    {
+      "supplier": "def-rosenbrock-euler-step-map",
+      "id": "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+      "path": "items/prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler.md",
+      "affected_use": "[F7] [[def-rosenbrock-euler-step-map]]: at $\\gamma=1$, $k$ solves $(I_d-hDf(y))k=f(y)$ and the update is $y+hk$.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-rosenbrock-euler-step-map",
+      "id": "thm-rosenbrock-euler-global-first-order",
+      "path": "items/thm-rosenbrock-euler-global-first-order.md",
+      "affected_use": "Let $K\\subset U\\subset\\mathbb R^d$ be compact and convex, let $f\\in C^2(U,\\mathbb R^d)$, and assume the bounds and uniform inverse hypothesis of [[lem-rosenbrock-euler-local-defect]] and [[lem-rosenbrock-euler-step-map-lipschitz]] hold with constants $F,L,H,B,h_0$. Let an exact solution $y(t)$ and the exact-method iterates $Y_{n+1}=\\Phi_h(Y_n)$ of the autonomous exact-Jacobian map [[def-rosenbrock-euler-step-map]] with $\\gamma=1$ stay in $K$ for $0\\le t_n=nh\\le T$, with $Y_0=y(0)$ and $0<h\\le h_0$. Define $C_0:=FL(B+1/2)$ and $L_*:=BL+h_0B^2HF$. Then\n$$\n\\|Y_n-y(t_n)\\|\\le C_0T e^{L_*T}h\\qquad(0\\le t_n\\le T).\n$$\nThus this exact-J method has global order at least one on the stated compact tube. The theorem is conditional on the iterates remaining in that tube.\n\n[F1] [[def-rosenbrock-euler-step-map]] defines the autonomous exact-Jacobian map with $\\gamma=1$ by the exact solve $(I-hDf(y))k=f(y)$ and $\\Phi_h(y)=y+hk$.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "disposition": "unaffected",
+      "route": "separate-maintenance"
+    },
+    {
+      "supplier": "def-rosenbrock-euler-step-map",
+      "id": "lem-rosenbrock-euler-step-map-lipschitz",
+      "path": "items/lem-rosenbrock-euler-step-map-lipschitz.md",
+      "affected_use": "Let $K\\subset U\\subset\\mathbb R^d$ be compact and convex, let $f\\in C^2(U,\\mathbb R^d)$, and suppose on $K$ that $\\|f\\|\\le F$, $\\|Df\\|\\le L$, and $\\|D^2f\\|\\le H$. For $0<h\\le h_0$, assume $M_h(y):=I-hDf(y)$ is invertible for every $y\\in K$ with $\\|M_h(y)^{-1}\\|\\le B$. The exact-arithmetic autonomous exact-Jacobian Rosenbrock-Euler map $\\Phi_h(y)=y+hM_h(y)^{-1}f(y)$ of [[def-rosenbrock-euler-step-map]], with $\\gamma=1$, then satisfies\n$$\n\\|\\Phi_h(u)-\\Phi_h(v)\\|\\le(1+L_*h)\\|u-v\\|,\\qquad L_*:=BL+h_0B^2HF,\n$$\nfor all $u,v\\in K$.\n\n[F1] [[def-rosenbrock-euler-step-map]]: in the autonomous exact-Jacobian branch with $\\gamma=1$, the exact-method map is $\\Phi_h(y)=y+hM_h(y)^{-1}f(y)$ when $M_h(y)$ is invertible.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "disposition": "unaffected",
+      "route": "separate-maintenance"
+    },
+    {
+      "supplier": "def-rosenbrock-euler-step-map",
+      "id": "ex-rosenbrock-euler-stiff-linear-damping",
+      "path": "items/ex-rosenbrock-euler-stiff-linear-damping.md",
+      "affected_use": "[F1] [[def-rosenbrock-euler-step-map]]: the exact scalar method with $\\gamma=1$ solves $(1-h\\lambda)k=\\lambda y_n$ and has update $y_{n+1}=y_n+hk$.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "disposition": "unaffected",
+      "route": "separate-maintenance"
+    },
+    {
+      "supplier": "def-rosenbrock-euler-step-map",
+      "id": "thm-rosenbrock-euler-a-l-stable",
+      "path": "items/thm-rosenbrock-euler-a-l-stable.md",
+      "affected_use": "Consider the exact-arithmetic Rosenbrock-Euler map of [[def-rosenbrock-euler-step-map]] with $\\gamma=1$, exact Jacobian, and its complex scalar test equation $y'=\\lambda y$, $z=h\\lambda$. The complexification is the real two-dimensional exact map under $(\\operatorname{Re}y,\\operatorname{Im}y)$, with multiplication by $\\lambda$ represented by $C_\\lambda=\\begin{pmatrix}\\operatorname{Re}\\lambda&-\\operatorname{Im}\\lambda\\\\\\operatorname{Im}\\lambda&\\operatorname{Re}\\lambda\\end{pmatrix}$. Thus its exact stage equation is $(I_2-hC_\\lambda)k=C_\\lambda y$, equivalently $(1-z)k=\\lambda y$, and its update is $y+hk$. This is the $\\gamma=1$ exact complexification used in [[thm-rosenbrock-euler-scalar-a-and-l-stability]], not execution of a real rounded solver. Its amplification factor is $R(z)=(1-z)^{-1}$. A-stability means no pole and $|R(z)|\\le1$ throughout $\\operatorname{Re}z\\le0$; L-stability additionally means $R(z)\\to0$ as $|z|\\to\\infty$ within that half-plane. The exact method is both A-stable and L-stable, and its amplification factor agrees with backward Euler.\n\n[F1] [[def-rosenbrock-euler-step-map]] gives the real exact-Jacobian equation and update at $\\gamma=1$. Under the real two-dimensional representation in the Statement these are exactly $y^+=y+hk$ and $(1-h\\lambda)k=\\lambda y$; [[thm-rosenbrock-euler-scalar-a-and-l-stability]] uses the same exact complexification and rational-function stability criteria.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "disposition": "unaffected",
+      "route": "separate-maintenance"
+    },
+    {
+      "supplier": "def-rosenbrock-euler-step-map",
+      "id": "lem-rosenbrock-euler-local-defect",
+      "path": "items/lem-rosenbrock-euler-local-defect.md",
+      "affected_use": "Let $K\\subset U\\subset\\mathbb R^d$ be compact and convex, let $f:U\\to\\mathbb R^d$ be continuously differentiable, and suppose $\\|f(y)\\|\\le F$ and $\\|Df(y)\\|\\le L$ on $K$. For $0<h\\le h_0$, assume $I-hDf(y)$ is invertible for every $y\\in K$ with inverse norm at most $B$. If the exact solution starting at $y$ stays in $K$ on $[t,t+h]$, the exact-arithmetic step $\\Phi_h(y)$ of [[def-rosenbrock-euler-step-map]], with $\\gamma=1$, autonomous field $f$ and exact Jacobian $Df(y)$, satisfies\n$$\n\\|\\Phi_h(y)-y(t+h)\\|\\le FL(B+1)h^2.\n$$\nThe claim is a local defect bound; it does not by itself assert global convergence.\n\n[F1] [[def-rosenbrock-euler-step-map]]: for the autonomous exact-Jacobian branch with $\\gamma=1$, the exact stage solves $(I-hDf(y))k=f(y)$ and the exact-method update is $\\Phi_h(y)=y+hk$. No finite-precision execution or success status is used.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "disposition": "unaffected",
+      "route": "separate-maintenance"
+    },
+    {
+      "supplier": "def-rosenbrock-euler-step-map",
+      "id": "thm-rosenbrock-euler-one-newton-step-for-backward-euler",
+      "path": "items/thm-rosenbrock-euler-one-newton-step-for-backward-euler.md",
+      "affected_use": "Let $f:U\\to\\mathbb R^d$ be continuously differentiable, $y\\in U$, $h>0$, and suppose $M:=I-hDf(y)$ is invertible. The backward-Euler increment equation is $G(s):=s-hf(y+s)=0$. A Newton correction for $G$ at $s_0=0$, defined by $s_1=s_0-DG(s_0)^{-1}G(s_0)$, is $s_1=hM^{-1}f(y)$. Consequently, the state $y+s_1$ equals the exact-arithmetic autonomous exact-Jacobian Rosenbrock-Euler map [[def-rosenbrock-euler-step-map]] with $\\gamma=1$. This identity concerns one Newton correction only; it asserts neither convergence of Newton iteration nor that the corrected increment solves $G(s)=0$.\n\n[F1] [[def-rosenbrock-euler-step-map]]: the exact-arithmetic autonomous exact-Jacobian map at $\\gamma=1$ is $y+h(I-hDf(y))^{-1}f(y)$ whenever the stage matrix is invertible.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "disposition": "unaffected",
+      "route": "separate-maintenance"
+    },
+    {
+      "supplier": "def-rosenbrock-euler-step-map",
+      "id": "ex-rosenbrock-euler-stiff-decay-and-backward-euler",
+      "path": "items/ex-rosenbrock-euler-stiff-decay-and-backward-euler.md",
+      "affected_use": "[F1] [[def-rosenbrock-euler-step-map]]: at $\\gamma=1$, $(1-hJ)k=f(y)$ and $y_+=y+hk$.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-rosenbrock-euler-step-map",
+      "id": "thm-rosenbrock-euler-scalar-a-and-l-stability",
+      "path": "items/thm-rosenbrock-euler-scalar-a-and-l-stability.md",
+      "affected_use": "[F1] [[def-rosenbrock-euler-step-map]]: the real exact-Jacobian stage equation is $A k=f$ and the update is $y+hk$; the complex extension analyzed here is specified explicitly in the Statement.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-rosenbrock-euler-step-map",
+      "id": "alg-rosenbrock-euler-step",
+      "path": "items/alg-rosenbrock-euler-step.md",
+      "affected_use": "The name Rosenbrock–Euler applies when $\\gamma=1$. The exact-arithmetic stage equation is $M k_n=f(t_n,y_n)$, exactly the map of [[def-rosenbrock-euler-step-map]]. Its residual $Mk_n-f(t_n,y_n)$ is the update residual of the linear stage equation in the sense of [[def-implicit-residual-and-algebraic-error-units]]. For this mixed-arithmetic specification, evaluations and outer affine combinations are exact real operations and every matrix/RHS passed to factorization or solve must pass `store`; only the factorization, triangular solve, and residual dot products use rounded operations, while residual-bound formation is delegated to the terminating certificate evaluator. A full hardware-rounding theorem for outer operations needs additional certified evaluation and update-error terms. This implementation has one shifted-matrix factorization and one stage solve. It does not turn a small residual into a forward-error claim without an inverse bound.\n",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-rosenbrock-euler-step-map",
+      "id": "lem-rosenbrock-euler-local-defect-and-residual-error",
+      "path": "items/lem-rosenbrock-euler-local-defect-and-residual-error.md",
+      "affected_use": "[F1] [[def-rosenbrock-euler-step-map]]: $\\Phi_{\\gamma,h}^{J}(t,y)=y+h(I-\\gamma hJ)^{-1}f(t,y)$.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-rosenbrock-euler-step-map",
+      "id": "lem-rosenbrock-euler-jacobian-approximation-defect",
+      "path": "items/lem-rosenbrock-euler-jacobian-approximation-defect.md",
+      "affected_use": "Use the one-stage map of [[def-rosenbrock-euler-step-map]] with the same $t,y,h,\\gamma,f$ but matrices $J$ and $\\widetilde J$. If $I_d-\\gamma hJ$ and $I_d-\\gamma h\\widetilde J$ are invertible, with inverse norms bounded by $K$ and $\\widetilde K$, then\n$$\\|\\Phi_{\\gamma,h}^{\\widetilde J}(t,y)-\\Phi_{\\gamma,h}^{J}(t,y)\\|_2\\le\\gamma h^2K\\widetilde K\\|\\widetilde J-J\\|_2\\,\\|f(t,y)\\|_2.$$\nThis is a one-step perturbation bound; it alone gives no uniform stability or convergence claim for a sequence of approximate Jacobians.\n\n[F1] [[def-rosenbrock-euler-step-map]]: $\\Phi_{\\gamma,h}^{J}(t,y)=y+h(I_d-\\gamma hJ)^{-1}f(t,y)$ when the shifted matrix is invertible.",
+      "invalidated_claim": null,
+      "minimality": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+      "id": "ex-rosenbrock-euler-stiff-decay-and-backward-euler",
+      "path": "items/ex-rosenbrock-euler-stiff-decay-and-backward-euler.md",
+      "affected_use": "[F3] [[prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler]]: for an autonomous field, the $\\gamma=1$ step is one Newton correction of the backward-Euler residual from the starting value.",
+      "invalidated_claim": null,
+      "minimality": "The only item consumer is the scalar linear decay example with d=1; its affine backward-Euler residual satisfies the explicit positive-dimension and C1 premises.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-rosenbrock-euler-step",
+      "id": "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+      "path": "items/thm-rosenbrock-computational-steps-terminate-with-finite-work.md",
+      "affected_use": "For every finite dimension $d\\ge1$, finite stored matrix, unit roundoff $u>0$ with $du<1$, and finite collection of stored right-hand sides and nonnegative residual tolerances in the input domains of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]], [[alg-rosenbrock-euler-step]], and [[alg-two-stage-rosenbrock-w-method]], assume each called field-evaluation, domain-membership, exact-storage, and certificate-evaluation routine returns in finite work. Then the factorization operation, every requested solve operation, and each step procedure terminate after finitely many elementary operations with one of their stated success or failure statuses. Termination does not imply that the factorization is nonsingular, a residual is certified, or a step succeeds. No asymptotic runtime bound is claimed.\n\n[F5] [[alg-rosenbrock-euler-step]]: a one-stage step performs one factorization and at most one solve.",
+      "invalidated_claim": null,
+      "minimality": "The exact stage equations and gamma range are unchanged. Scalar stability uses real dimension two; the local/global ODE interfaces use positive target dimension and the termination theorem explicitly assumes d>=1.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-rosenbrock-euler-step",
+      "id": "thm-rosenbrock-euler-scalar-a-and-l-stability",
+      "path": "items/thm-rosenbrock-euler-scalar-a-and-l-stability.md",
+      "affected_use": "For scalar stability, consider the exact-arithmetic complexification of the exact-Jacobian one-stage equation. For $\\lambda,y,k\\in\\mathbb C$, $h>0$, $\\gamma>0$, and $z=h\\lambda$, use $(1-\\gamma z)k=\\lambda y$ and $y_+=y+hk$. Equivalently, identify $\\mathbb C$ with $\\mathbb R^2$ and multiplication by $\\lambda$ with the real matrix $C_\\lambda=\\begin{pmatrix}\\operatorname{Re}\\lambda&-\\operatorname{Im}\\lambda\\\\\\operatorname{Im}\\lambda&\\operatorname{Re}\\lambda\\end{pmatrix}$; the corresponding real exact Jacobian is $C_\\lambda$, and the equations become $(I_2-\\gamma h C_\\lambda)k=C_\\lambda y$ and $y_+=y+hk$. This is a scalar stability analysis of exact stage equations; it is not an execution of the finite-precision real algorithm [[alg-rosenbrock-euler-step]]. Use the scalar rational-function criteria in [[def-scalar-rk-a-and-l-stability]] for its amplification function. Its scalar stability function is\n$$R_\\gamma(z)=1+\\frac{z}{1-\\gamma z}=\\frac{1+(1-\\gamma)z}{1-\\gamma z}.$$\nIt has no pole in $\\operatorname{Re}z\\le0$ and satisfies $|R_\\gamma(z)|\\le1$ throughout that half-plane if and only if $\\gamma\\ge\\tfrac12$. Among these parameters, it is L-stable if and only if $\\gamma=1$. In particular, the named Rosenbrock–Euler case $\\gamma=1$ has the backward-Euler factor $R(z)=(1-z)^{-1}$.\n\n[F2] [[alg-rosenbrock-euler-step]]: this is a finite-precision real-space implementation with the real exact stage equation of [F1]; no execution or numerical status of that algorithm is used here.\n",
+      "invalidated_claim": null,
+      "minimality": "The exact stage equations and gamma range are unchanged. Scalar stability uses real dimension two; the local/global ODE interfaces use positive target dimension and the termination theorem explicitly assumes d>=1.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-rosenbrock-euler-step",
+      "id": "lem-rosenbrock-euler-local-defect-and-residual-error",
+      "path": "items/lem-rosenbrock-euler-local-defect-and-residual-error.md",
+      "affected_use": "[F6] [[alg-rosenbrock-euler-step]]: the stage equation is $(I-\\gamma h\\widetilde J)k=f(t,y)$ and the update is $y+hk$.",
+      "invalidated_claim": null,
+      "minimality": "The exact stage equations and gamma range are unchanged. Scalar stability uses real dimension two; the local/global ODE interfaces use positive target dimension and the termination theorem explicitly assumes d>=1.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-rosenbrock-euler-step",
+      "id": "thm-rosenbrock-euler-global-first-order-error",
+      "path": "items/thm-rosenbrock-euler-global-first-order-error.md",
+      "affected_use": "At each step $t_n=t_0+nh$, use the one-stage algorithm of [[alg-rosenbrock-euler-step]] with a certified stage residual upper bound $\\rho_n\\le R h$, for a fixed $R\\ge0$, and assume each call returns `success`, including its field evaluation, factorization, residual certification, and exact-storage checks. Starting from $y_0=y(t_0)$, suppose the computed states and comparison segments remain in $Q$ and $Nh\\le T$. Then, with\n$$C_E=\\gamma\\kappa_0LF+\\frac{M_1}{2}+\\gamma\\kappa_0\\kappa_1\\delta F, \\qquad C_s=\\kappa_1L+\\gamma\\kappa_1^2L_JFh_0.$$\nthe global error obeys\n$$\n\\|y_n-y(t_n)\\|_2\\le (C_E+\\kappa_1R)T e^{C_sT}h\\qquad(0\\le n\\le N).\n$$\nThus the method is first order on this common tube when the linear solve residuals are $O(h)$. The theorem is conditional on the stated tube and inverse bounds; it does not prove that computed states stay in the tube.\n\n[F1] [[alg-rosenbrock-euler-step]]: the stage system is $A(t,y)k=f(t,y)$ with $A(t,y)=I-\\gamma h\\widetilde J(t,y)$ and output $y+hk$.",
+      "invalidated_claim": null,
+      "minimality": "The exact stage equations and gamma range are unchanged. Scalar stability uses real dimension two; the local/global ODE interfaces use positive target dimension and the termination theorem explicitly assumes d>=1.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-two-stage-rosenbrock-w-method",
+      "id": "thm-two-stage-rosenbrock-global-order-two",
+      "path": "items/thm-two-stage-rosenbrock-global-order-two.md",
+      "affected_use": "Use the method of [[alg-two-stage-rosenbrock-w-method]] with stage residual upper bounds $\\rho_{1,n}\\le R_1h$ and $\\rho_{2,n}\\le R_2h^2$, where $R_1,R_2$ are fixed, and assume each call returns `success`, including both field evaluations, residual certifications, and exact-storage checks. Starting from $y_0=y(t_0)$ and assuming $Nh\\le T$ and all stated tube conditions hold, define\n$$\nG_1=F+\\alpha h_0B_T,\\quad K_s=\\kappa G_1,\n$$\n$$\nL_1=\\kappa(L+\\alpha h_0L_T)+\\alpha h_0\\kappa^2L_JG_1,\n$$\n$$\nV=F+\\alpha h_0B_JK_s,\n$$\n$$L_V=L(1+h_0L_1/2)+\\alpha h_0(L_JK_s+B_JL_1),\\qquad L_2=\\kappa L_V+\\alpha h_0\\kappa^2L_JV.$$\nThen the global error satisfies\n$$\n\\|y_n-y(t_n)\\|_2\\le(C_{loc}+C_rR_1+\\kappa R_2)T e^{L_2T}h^2\\qquad(0\\le n\\le N).\n$$\nThis is a conditional order-two theorem on the common tube. Its constants and assumptions permit both the exact-J branch and the bounded W-method branch; scalar A/L-stability is asserted separately only for the exact-J branch.\n\n[F1] [[alg-two-stage-rosenbrock-w-method]]: the two stages use $W=I-\\alpha h\\widetilde J$, the midpoint field value, and one shared factorization.",
+      "invalidated_claim": null,
+      "minimality": "Stage equations, shifted matrix and exact-J coefficients are unchanged. Exact-equation analyses need no computational membership test. Successful-call claims inherit the supplied terminating domain routine and output binding; the concrete example uses the whole real time-state domain. The assigned termination theorem is repaired to name the domain routine.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-two-stage-rosenbrock-w-method",
+      "id": "prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves",
+      "path": "items/prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves.md",
+      "affected_use": "On every successful call of [[alg-two-stage-rosenbrock-w-method]], the procedure forms one matrix $W=I-\\alpha h\\widetilde J$, factorizes it once, and uses that stored factor object for exactly two stage right-hand sides, one for $k_1$ and one for $q_2$. Thus it uses one shifted-matrix factorization and two triangular solves. This is an operation-count statement, not a claim that either solve succeeds.\n\n[F1] [[alg-two-stage-rosenbrock-w-method]]: the procedure factors $W$ once, solves the first stage, then calls the same factor object's solve operation for $Wq_2=F_1-k_1$.",
+      "invalidated_claim": null,
+      "minimality": "Stage equations, shifted matrix and exact-J coefficients are unchanged. Exact-equation analyses need no computational membership test. Successful-call claims inherit the supplied terminating domain routine and output binding; the concrete example uses the whole real time-state domain. The assigned termination theorem is repaired to name the domain routine.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-two-stage-rosenbrock-w-method",
+      "id": "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+      "path": "items/thm-rosenbrock-computational-steps-terminate-with-finite-work.md",
+      "affected_use": "For every finite dimension $d\\ge1$, finite stored matrix, unit roundoff $u>0$ with $du<1$, and finite collection of stored right-hand sides and nonnegative residual tolerances in the input domains of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]], [[alg-rosenbrock-euler-step]], and [[alg-two-stage-rosenbrock-w-method]], assume each called field-evaluation, domain-membership, exact-storage, and certificate-evaluation routine returns in finite work. Then the factorization operation, every requested solve operation, and each step procedure terminate after finitely many elementary operations with one of their stated success or failure statuses. Termination does not imply that the factorization is nonsingular, a residual is certified, or a step succeeds. No asymptotic runtime bound is claimed.\n\n[F6] [[alg-two-stage-rosenbrock-w-method]]: a two-stage step performs one factorization and at most two solves, with no iterative stage loop.",
+      "invalidated_claim": null,
+      "minimality": "Stage equations, shifted matrix and exact-J coefficients are unchanged. Exact-equation analyses need no computational membership test. Successful-call claims inherit the supplied terminating domain routine and output binding; the concrete example uses the whole real time-state domain. The assigned termination theorem is repaired to name the domain routine.",
+      "disposition": "repaired-in-assigned-review",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-two-stage-rosenbrock-w-method",
+      "id": "cex-approximate-jacobian-breaks-stiff-damping",
+      "path": "items/cex-approximate-jacobian-breaks-stiff-damping.md",
+      "affected_use": "[F1] [[alg-two-stage-rosenbrock-w-method]]: the stages satisfy $Wk_1=f+\\alpha h\\widetilde T$, $F_1=f(y+hk_1/2)$ for this autonomous equation, $Wq_2=F_1-k_1$, $k_2=q_2+k_1$, and $y_+=y+hk_2$.",
+      "invalidated_claim": null,
+      "minimality": "Stage equations, shifted matrix and exact-J coefficients are unchanged. Exact-equation analyses need no computational membership test. Successful-call claims inherit the supplied terminating domain routine and output binding; the concrete example uses the whole real time-state domain. The assigned termination theorem is repaired to name the domain routine.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-two-stage-rosenbrock-w-method",
+      "id": "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+      "path": "items/lem-two-stage-rosenbrock-local-defect-and-residual-error.md",
+      "affected_use": "For exact-arithmetic stages $k_1,q_2,k_2$ of [[alg-two-stage-rosenbrock-w-method]] (with its exact-storage checks successful), define\n$$C_1=B_JF+B_T,\\quad K_1=F+\\alpha h\\kappa C_1,\\quad C_F=\\frac{\\alpha\\kappa L C_1}{2}+\\frac{H(1+K_1^2)}{8}.$$\n$$C_K=\\alpha^2\\kappa^2B_JC_1+\\frac{\\alpha\\kappa B_JM}{2}+\\kappa C_F, \\qquad M_2=H(1+F^2)+LT_0+L^2F.$$\nThen the exact one-step defect is at most\n$$\n\\|y(t)+hk_2-y(t+h)\\|_2\\le (C_K+M_2/6)h^3.\n$$\nIf the computed first and second shifted solves have certified update-residual bounds $\\rho_1$ and $\\rho_2$, then the computed update satisfies\n$$\\|\\widehat y_+-y(t+h)\\|_2\\le (C_K+M_2/6)h^3+C_rh^2\\rho_1+\\kappa h\\rho_2, \\qquad C_r:=\\kappa^2(L/2+\\alpha B_J).$$\nThus $\\rho_1=O(h)$ and $\\rho_2=O(h^2)$ preserve a cubic local defect. These are equation-residual conditions, not stage forward-error claims without the inverse bound.\n\n[F1] [[alg-two-stage-rosenbrock-w-method]]: $W=I-\\alpha h\\widetilde J$, $Wk_1=f+\\alpha h\\widetilde T$, $F_1=f(t+h/2,y+hk_1/2)$, $Wq_2=F_1-k_1$, and $k_2=q_2+k_1$.",
+      "invalidated_claim": null,
+      "minimality": "Stage equations, shifted matrix and exact-J coefficients are unchanged. Exact-equation analyses need no computational membership test. Successful-call claims inherit the supplied terminating domain routine and output binding; the concrete example uses the whole real time-state domain. The assigned termination theorem is repaired to name the domain routine.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-two-stage-rosenbrock-w-method",
+      "id": "cex-omitting-rosenbrock-stage-correction-loses-order-two",
+      "path": "items/cex-omitting-rosenbrock-stage-correction-loses-order-two.md",
+      "affected_use": "[F1] [[alg-two-stage-rosenbrock-w-method]]: the correct stages use the second right-hand side $F_1-k_1$ and then set $k_2=q_2+k_1$.",
+      "invalidated_claim": null,
+      "minimality": "Stage equations, shifted matrix and exact-J coefficients are unchanged. Exact-equation analyses need no computational membership test. Successful-call claims inherit the supplied terminating domain routine and output binding; the concrete example uses the whole real time-state domain. The assigned termination theorem is repaired to name the domain routine.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-two-stage-rosenbrock-w-method",
+      "id": "ex-two-stage-rosenbrock-factorization-reuse",
+      "path": "items/ex-two-stage-rosenbrock-factorization-reuse.md",
+      "affected_use": "[F1] [[alg-two-stage-rosenbrock-w-method]]: both stages use the same $W$ and the method factors $W$ once.",
+      "invalidated_claim": null,
+      "minimality": "Stage equations, shifted matrix and exact-J coefficients are unchanged. Exact-equation analyses need no computational membership test. Successful-call claims inherit the supplied terminating domain routine and output binding; the concrete example uses the whole real time-state domain. The assigned termination theorem is repaired to name the domain routine.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "alg-two-stage-rosenbrock-w-method",
+      "id": "thm-two-stage-rosenbrock-scalar-l-stability",
+      "path": "items/thm-two-stage-rosenbrock-scalar-l-stability.md",
+      "affected_use": "For scalar stability, consider the exact-arithmetic complexification of the exact-Jacobian stage equations of [[alg-two-stage-rosenbrock-w-method]]. For $\\lambda,y,k_1,q_2,k_2\\in\\mathbb C$, $h>0$, $z=h\\lambda$, and $\\alpha=1-1/\\sqrt2$, use\n$$\n(1-\\alpha z)k_1=\\lambda y,\\qquad F_1=\\lambda(y+hk_1/2),\\qquad (1-\\alpha z)q_2=F_1-k_1,\\qquad k_2=q_2+k_1,\\qquad y_+=y+hk_2.\n$$\nEquivalently, identify $\\mathbb C$ with $\\mathbb R^2$ and multiplication by $\\lambda$ with $C_\\lambda=\\begin{pmatrix}\\operatorname{Re}\\lambda&-\\operatorname{Im}\\lambda\\\\\\operatorname{Im}\\lambda&\\operatorname{Re}\\lambda\\end{pmatrix}$ in the real stage equations, with exact-J data $\\widetilde J=C_\\lambda$ and $\\widetilde T=0$. This is a scalar stability analysis of exact stage equations; it is not an execution of the finite-precision real algorithm. Use the scalar rational-function criteria in [[def-scalar-rk-a-and-l-stability]] for its amplification function. Its scalar stability function is\n$$R(z)=\\frac{1+(1-2\\alpha)z}{(1-\\alpha z)^2}.$$\nThis function has no pole on $\\operatorname{Re}z\\le0$, has modulus at most one there, and tends to zero as $|z|\\to\\infty$ in that half-plane. Hence this exact-J scalar method is L-stable. This theorem makes no A/L-stability claim for an arbitrary approximate Jacobian.\n\n[F1] [[alg-two-stage-rosenbrock-w-method]]: its real stage coefficients and equations have the form displayed in the Statement; this theorem analyzes their exact complexification, not a finite-precision real execution.",
+      "invalidated_claim": null,
+      "minimality": "Stage equations, shifted matrix and exact-J coefficients are unchanged. Exact-equation analyses need no computational membership test. Successful-call claims inherit the supplied terminating domain routine and output binding; the concrete example uses the whole real time-state domain. The assigned termination theorem is repaired to name the domain routine.",
+      "disposition": "unaffected",
+      "route": "frontier-owner"
+    }
+  ],
+  "interface_changes": [
+    {
+      "id": "def-rosenbrock-euler-step-map",
+      "section": "Definition",
+      "before": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, let $d\\ge1$, and let $f:D\\to\\mathbb R^d$ be a vector field ([[def-first-order-ode-initial-value-problem-and-solution]]). For $(t,y)\\in D$, a step size $h>0$, a parameter $\\gamma>0$, and a matrix $\\widetilde J\\in\\mathbb R^{d\\times d}$, put\n$$A_{\\gamma,h}(\\widetilde J):=I_d-\\gamma h\\widetilde J.$$\nWhen this matrix is invertible, the **one-stage Rosenbrock step** uses the stage slope $k$ and update\n$$A_{\\gamma,h}(\\widetilde J)k=f(t,y),\\qquad \\Phi_{\\gamma,h}^{\\widetilde J}(t,y):=y+hk.$$\nThe **exact-Jacobian branch** sets $\\widetilde J=D_yf(t,y)$, where $D_yf$ is the Jacobian in the state variables as in [[def-jacobian-matrix-and-gradient]]. An approximate-Jacobian branch may supply a different $\\widetilde J$; the equation requires the chosen shifted matrix to be invertible. The name **Rosenbrock–Euler** here refers to the case $\\gamma=1$. This definition specifies one linearized step and does not say that it solves the full backward-Euler nonlinear equation.",
+      "after": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, let $d\\ge1$, and let $f:D\\to\\mathbb R^d$ be a vector field ([[def-first-order-ode-initial-value-problem-and-solution]]). For $(t,y)\\in D$, a step size $h>0$, a parameter $\\gamma>0$, and a matrix $\\widetilde J\\in\\mathbb R^{d\\times d}$, put\n$$A_{\\gamma,h}(\\widetilde J):=I_d-\\gamma h\\widetilde J.$$\nWhen this matrix is invertible, the **one-stage Rosenbrock step** uses the stage slope $k$ and update\n$$A_{\\gamma,h}(\\widetilde J)k=f(t,y),\\qquad \\Phi_{\\gamma,h}^{\\widetilde J}(t,y):=y+hk.$$\nAt points where all state partial derivatives exist, the **exact-Jacobian branch** sets $\\widetilde J=D_yf(t,y)$, where $D_yf$ is the Jacobian in the state variables as in [[def-jacobian-matrix-and-gradient]]. An approximate-Jacobian branch may supply a different $\\widetilde J$; the equation requires the chosen shifted matrix to be invertible. The name **Rosenbrock–Euler** here refers to the case $\\gamma=1$. This definition specifies one linearized step and does not say that it solves the full backward-Euler nonlinear equation.",
+      "direct_consumers": [
+        "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+        "thm-rosenbrock-euler-global-first-order",
+        "lem-rosenbrock-euler-step-map-lipschitz",
+        "ex-rosenbrock-euler-stiff-linear-damping",
+        "thm-rosenbrock-euler-a-l-stable",
+        "lem-rosenbrock-euler-local-defect",
+        "thm-rosenbrock-euler-one-newton-step-for-backward-euler",
+        "ex-rosenbrock-euler-stiff-decay-and-backward-euler",
+        "thm-rosenbrock-euler-scalar-a-and-l-stability",
+        "alg-rosenbrock-euler-step",
+        "lem-rosenbrock-euler-local-defect-and-residual-error",
+        "lem-rosenbrock-euler-jacobian-approximation-defect"
+      ],
+      "page_uses": [
+        {
+          "path": "library/numerical-differential-equations-and-stochastic-dynamics/rosenbrock-and-linearly-implicit-methods.md",
+          "affected_use": "  - def-rosenbrock-euler-step-map",
+          "disposition": "unaffected",
+          "reason": "The exact-J use has a C1/C2 or linear field, so state partial derivatives exist; arbitrary-matrix comparison uses do not need the exact-J branch. Stage equations are unchanged."
+        }
+      ],
+      "post_sha256": "fbac734db3968994de156095cfd3eb15d095c9226533e431e39f1709592d8621",
+      "before_section_sha256": "661eb99cb746ba6d81c2f2cd97feebe3b46b140a2dfcd1b2027c5a989a9c206b",
+      "after_section_sha256": "c0c564925fceabf2f1e3c407c616f005f606eacb4b37ca09275cd0a14342be40"
+    },
+    {
+      "id": "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+      "section": "Statement",
+      "before": "Let $f:U\\to\\mathbb R^d$ be autonomous and $C^1$ on an open $U\\subseteq\\mathbb R^d$, let $y\\in U$, and let $h>0$. Suppose $I_d-hD f(y)$ is invertible. Then the exact-arithmetic Rosenbrock–Euler step with $\\gamma=1$ is the first Newton correction of the backward-Euler residual at the initial guess $y$. This does not assert that the corrected point solves the full backward-Euler equation.",
+      "after": "Let $d\\ge1$ and let $f:U\\to\\mathbb R^d$ be autonomous and $C^1$ on an open $U\\subseteq\\mathbb R^d$, let $y\\in U$, and let $h>0$. Suppose $I_d-hD f(y)$ is invertible. Then the exact-arithmetic Rosenbrock–Euler step with $\\gamma=1$ is the first Newton correction of the backward-Euler residual at the initial guess $y$. This does not assert that the corrected point solves the full backward-Euler equation.",
+      "direct_consumers": [
+        "ex-rosenbrock-euler-stiff-decay-and-backward-euler"
+      ],
+      "page_uses": [
+        {
+          "path": "library/numerical-differential-equations-and-stochastic-dynamics/rosenbrock-and-linearly-implicit-methods.md",
+          "affected_use": "  - prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+          "disposition": "unaffected",
+          "reason": "The only item consumer is the scalar linear decay example with d=1; its affine backward-Euler residual satisfies the explicit positive-dimension and C1 premises."
+        }
+      ],
+      "post_sha256": "e1c379c2e1175125748ba4b0a3d89cf16deb9f0a8715413b803664db77e5242c",
+      "before_section_sha256": "0e96156ef6409b736cc53038942df41b158bf29aa323baa5b07a114ab0130dbb",
+      "after_section_sha256": "4e98e963d28fe525fe361b4846eb914412b4fe6c36490a5d1c6e5acc41cd480e"
+    },
+    {
+      "id": "alg-rosenbrock-euler-step",
+      "section": "Definition",
+      "before": "**Input:** an ODE field $f:D\\to\\mathbb R^d$ on the open domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$, $(t_n,y_n)\\in D$, $h>0$, $\\gamma>0$, a finite real Jacobian matrix $\\widetilde J_n\\in\\mathbb R^{d\\times d}$, a residual tolerance $\\varepsilon\\ge0$, a unit roundoff $u>0$ with $du<1$, the selected stored finite set $\\mathbb F$ of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], a terminating field-evaluation routine that returns either the exact value $f(t,y)$ or `evaluation-failure` for each requested $(t,y)\\in D$, a terminating partial exact-storage check `store`, and a terminating certificate evaluator `evaluator` meeting the input contract of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. For an exact real scalar, vector, or matrix $v$, `store(v)` returns $v$ if every entry belongs to $\\mathbb F$ and returns `unavailable` otherwise; it does not round. Apply it before each factorization call.\n\n1. Form $M=I_d-\\gamma h\\widetilde J_n$ by exact outer arithmetic and set $M_s:=\\operatorname{store}(M)$. If storage returns `unavailable`, return $(y_n,\\texttt{representation-unavailable})$. Call `factor(M_s,u,evaluator)` of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. If it returns a factorization failure status, return $(y_n,\\text{that status})$; otherwise retain the returned factor object.\n2. Request the field evaluation at $(t_n,y_n)$. If it returns `evaluation-failure`, return $(y_n,\\texttt{field-evaluation-failure})$. Otherwise set $b=f(t_n,y_n)$ to the returned exact value and set $b_s:=\\operatorname{store}(b)$. If storage returns `unavailable`, return $(y_n,\\texttt{representation-unavailable})$. Call the retained factor object's `solve(b_s,\\varepsilon)`. If the solve status is not `success`, return $(y_n,\\text{that status})$ and retain its residual bound for diagnosis.\n3. If the solve returns $k_n$ and a certified residual upper bound $\\rho_n\\le\\varepsilon$, return $(y_n+h k_n,\\texttt{success},\\rho_n)$.\n\nThe exact-arithmetic stage equation is $M k_n=f(t_n,y_n)$, exactly the map of [[def-rosenbrock-euler-step-map]]. Its residual $Mk_n-f(t_n,y_n)$ is the update residual of the linear stage equation in the sense of [[def-implicit-residual-and-algebraic-error-units]]. For this mixed-arithmetic specification, evaluations and outer affine combinations are exact real operations and every matrix/RHS passed to factorization or solve must pass `store`; only the factorization, triangular solve, and residual dot products use rounded operations, while residual-bound formation is delegated to the terminating certificate evaluator. A full hardware-rounding theorem for outer operations needs additional certified evaluation and update-error terms. This implementation has one shifted-matrix factorization and one stage solve. It does not turn a small residual into a forward-error claim without an inverse bound.",
+      "after": "**Input:** a dimension $d\\ge1$, an ODE field $f:D\\to\\mathbb R^d$ on the open domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$, $(t_n,y_n)\\in D$, $h>0$, $\\gamma>0$, a finite real Jacobian matrix $\\widetilde J_n\\in\\mathbb R^{d\\times d}$, a residual tolerance $\\varepsilon\\ge0$, a unit roundoff $u>0$ with $du<1$, the selected stored finite set $\\mathbb F$ of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], a terminating field-evaluation routine that returns either the exact value $f(t,y)$ or `evaluation-failure` for each requested $(t,y)\\in D$, a terminating partial exact-storage check `store`, and a terminating certificate evaluator `evaluator` meeting the input contract of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. For an exact real scalar, vector, or matrix $v$, `store(v)` returns $v$ if every entry belongs to $\\mathbb F$ and returns `unavailable` otherwise; it does not round. Apply it before each factorization call.\n\n1. Form $M=I_d-\\gamma h\\widetilde J_n$ by exact outer arithmetic and set $M_s:=\\operatorname{store}(M)$. If storage returns `unavailable`, return $(y_n,\\texttt{representation-unavailable})$. Call `factor(M_s,u,evaluator)` of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. If it returns a factorization failure status, return $(y_n,\\text{that status})$; otherwise retain the returned factor object.\n2. Request the field evaluation at $(t_n,y_n)$. If it returns `evaluation-failure`, return $(y_n,\\texttt{field-evaluation-failure})$. Otherwise set $b=f(t_n,y_n)$ to the returned exact value and set $b_s:=\\operatorname{store}(b)$. If storage returns `unavailable`, return $(y_n,\\texttt{representation-unavailable})$. Call the retained factor object's `solve(b_s,\\varepsilon)`. If the solve status is not `success`, return $(y_n,\\text{that status})$ and retain its residual bound for diagnosis.\n3. If the solve returns $k_n$ and a certified residual upper bound $\\rho_n\\le\\varepsilon$, return $(y_n+h k_n,\\texttt{success},\\rho_n)$.\n\nThe name Rosenbrock–Euler applies when $\\gamma=1$. The exact-arithmetic stage equation is $M k_n=f(t_n,y_n)$, exactly the map of [[def-rosenbrock-euler-step-map]]. Its residual $Mk_n-f(t_n,y_n)$ is the update residual of the linear stage equation in the sense of [[def-implicit-residual-and-algebraic-error-units]]. For this mixed-arithmetic specification, evaluations and outer affine combinations are exact real operations and every matrix/RHS passed to factorization or solve must pass `store`; only the factorization, triangular solve, and residual dot products use rounded operations, while residual-bound formation is delegated to the terminating certificate evaluator. A full hardware-rounding theorem for outer operations needs additional certified evaluation and update-error terms. This implementation has one shifted-matrix factorization and one stage solve. It does not turn a small residual into a forward-error claim without an inverse bound.",
+      "direct_consumers": [
+        "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+        "thm-rosenbrock-euler-scalar-a-and-l-stability",
+        "lem-rosenbrock-euler-local-defect-and-residual-error",
+        "thm-rosenbrock-euler-global-first-order-error"
+      ],
+      "page_uses": [
+        {
+          "path": "library/numerical-differential-equations-and-stochastic-dynamics/rosenbrock-and-linearly-implicit-methods.md",
+          "affected_use": "  - alg-rosenbrock-euler-step",
+          "disposition": "unaffected",
+          "reason": "The exact stage equations and gamma range are unchanged. Scalar stability uses real dimension two; the local/global ODE interfaces use positive target dimension and the termination theorem explicitly assumes d>=1."
+        }
+      ],
+      "post_sha256": "0f1ca0eef21d13a11240a2a00173e567edbcc0705a4dc1575bf7cbaab45f88f2",
+      "before_section_sha256": "afa0f7aee74aad9c4cd5f42bd6651e34471ae38c7114dd26c5ac76759035deb0",
+      "after_section_sha256": "e0bf5a8d94e10aed5cdb2735c0b47e735519e652dae938a7c18ec9fc930611d9"
+    },
+    {
+      "id": "alg-two-stage-rosenbrock-w-method",
+      "section": "Definition",
+      "before": "**Input:** an ODE field $f:D\\to\\mathbb R^d$ on the open domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$, $(t_n,y_n)\\in D$, $h>0$, a finite real state-Jacobian approximation $\\widetilde J_n$, a finite approximation $\\widetilde T_n$ to $\\partial_t f(t_n,y_n)$, stage residual tolerances $\\varepsilon_1,\\varepsilon_2\\ge0$, a unit roundoff $u>0$ with $du<1$, the selected stored finite set $\\mathbb F$ of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], a terminating field-evaluation routine `evaluate_f` that returns either the exact value $f(t,y)$ or `evaluation-failure` for each requested $(t,y)\\in D$, terminating `store` routine, and terminating certificate evaluator `evaluator` meeting the input contract of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. The exact-storage check returns $v$ if every entry is in $\\mathbb F$ and `unavailable` otherwise; it does not round. Put\n$$\\alpha:=\\frac{1}{2+\\sqrt2}=1-\\frac{1}{\\sqrt2},\\qquad W:=I_d-\\alpha h\\widetilde J_n.$$\nThe two-stage method is\n$$W k_1=f(t_n,y_n)+\\alpha h\\widetilde T_n,$$\n$$F_1=f\\!\\left(t_n+\\frac h2,y_n+\\frac h2k_1\\right),\\qquad W q_2=F_1-k_1,\\qquad k_2=q_2+k_1,$$\n$$y_{n+1}=y_n+h k_2.$$\n\nThe residuals $Wk_1-[f(t_n,y_n)+\\alpha h\\widetilde T_n]$ and $Wq_2-(F_1-k_1)$ are update residuals of their linear stage equations in the sense of [[def-implicit-residual-and-algebraic-error-units]]. The coefficient $\\alpha$ and the autonomous two-stage formula are the second-order Rosenbrock formula recorded for ode23s in WIAS Example 2.37. The first-stage $\\alpha h\\widetilde T_n$ term specifies the nonautonomous extension used here; its order is independently established under the stated boundedness hypotheses.\n\n1. Form $W$ by exact outer arithmetic and set $W_s:=\\operatorname{store}(W)$. If storage returns `unavailable`, return $(y_n,\\texttt{representation-unavailable})$. Call `factor(W_s,u,evaluator)` of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. If it returns a factorization failure status, return $(y_n,\\texttt{factorization-failure})$; otherwise retain its factor object.\n2. Call `evaluate_f(t_n,y_n)`. If it returns `evaluation-failure`, return $(y_n,\\texttt{input-or-representation-failure})$. Otherwise denote its returned exact value by $f_0$, form $b_1=f_0+\\alpha h\\widetilde T_n$ by exact outer arithmetic, and set $b_{1,s}:=\\operatorname{store}(b_1)$. If storage returns `unavailable`, return $(y_n,\\texttt{input-or-representation-failure})$. Call the retained factor object's `solve(b_{1,s},\\varepsilon_1)`. If it is not certified, return $(y_n,\\text{stage-1 status})$. Otherwise set $k_1$ to its returned vector.\n3. Check $(t_n+h/2,y_n+hk_1/2)\\in D$. If not, return $(y_n,\\texttt{invalid-stage-domain})$. Otherwise call `evaluate_f(t_n+h/2,y_n+hk_1/2)`. If it returns `evaluation-failure`, return $(y_n,\\texttt{stage-2-input-or-representation-failure})$. Otherwise set $F_1$ to the returned exact value, form $b_2=F_1-k_1$ exactly, and set $b_{2,s}:=\\operatorname{store}(b_2)$. If storage returns `unavailable`, return $(y_n,\\texttt{stage-2-input-or-representation-failure})$. Call the same factor object's `solve(b_{2,s},\\varepsilon_2)`. If this solve is not certified, return $(y_n,\\text{stage-2 status})$.\n4. Set $k_2=q_2+k_1$ and return $(y_n+h k_2,\\texttt{success},\\rho_1,\\rho_2)$ with the two certified update-residual bounds.\n\nThe exact-J branch takes $\\widetilde J_n=D_yf(t_n,y_n)$ and $\\widetilde T_n=\\partial_t f(t_n,y_n)$. The W-method branch permits any bounded matrix approximations satisfying the hypotheses of the local and global order results; it receives no scalar A/L-stability guarantee from the exact-J result. The factor matrix is the same in both stages, so the procedure performs one shifted-matrix factorization and two stage solves. For this mixed-arithmetic specification, field evaluations and outer affine combinations are exact real operations, and every matrix/RHS passed to factorization or solve must pass `store`; factorization, triangular solves, and residual dot products use the operationwise model, while residual-bound formation is delegated to the terminating certificate evaluator. A full hardware-rounding theorem for outer operations would need additional certified evaluation and update-error terms. A finite arithmetic residual is not a forward-error bound without an inverse estimate.",
+      "after": "**Input:** a dimension $d\\ge1$, an ODE field $f:D\\to\\mathbb R^d$ on the open domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$, $(t_n,y_n)\\in D$, $h>0$, a finite real state-Jacobian approximation $\\widetilde J_n\\in\\mathbb R^{d\\times d}$, a finite approximation $\\widetilde T_n\\in\\mathbb R^d$ to $\\partial_t f(t_n,y_n)$, stage residual tolerances $\\varepsilon_1,\\varepsilon_2\\ge0$, a unit roundoff $u>0$ with $du<1$, the selected stored finite set $\\mathbb F$ of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], a terminating field-evaluation routine `evaluate_f` that returns either the exact value $f(t,y)$ or `evaluation-failure` for each requested $(t,y)\\in D$, a terminating domain-membership routine `in_domain` returning true exactly for points in $D$ and false otherwise, a terminating `store` routine, and terminating certificate evaluator `evaluator` meeting the input contract of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. The exact-storage check returns $v$ if every entry is in $\\mathbb F$ and `unavailable` otherwise; it does not round. Put\n$$\\alpha:=\\frac{1}{2+\\sqrt2}=1-\\frac{1}{\\sqrt2},\\qquad W:=I_d-\\alpha h\\widetilde J_n.$$\nThe two-stage method is\n$$W k_1=f(t_n,y_n)+\\alpha h\\widetilde T_n,$$\n$$F_1=f\\!\\left(t_n+\\frac h2,y_n+\\frac h2k_1\\right),\\qquad W q_2=F_1-k_1,\\qquad k_2=q_2+k_1,$$\n$$y_{n+1}=y_n+h k_2.$$\n\nThe residuals $Wk_1-[f(t_n,y_n)+\\alpha h\\widetilde T_n]$ and $Wq_2-(F_1-k_1)$ are update residuals of their linear stage equations in the sense of [[def-implicit-residual-and-algebraic-error-units]]. The coefficient $\\alpha$ and the autonomous two-stage formula are the second-order Rosenbrock formula recorded for ode23s in WIAS Example 2.37. The first-stage $\\alpha h\\widetilde T_n$ term specifies the nonautonomous extension used here; its order is independently established under the stated boundedness hypotheses.\n\n1. Form $W$ by exact outer arithmetic and set $W_s:=\\operatorname{store}(W)$. If storage returns `unavailable`, return $(y_n,\\texttt{representation-unavailable})$. Call `factor(W_s,u,evaluator)` of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. If it returns a factorization failure status, return $(y_n,\\texttt{factorization-failure})$; otherwise retain its factor object.\n2. Call `evaluate_f(t_n,y_n)`. If it returns `evaluation-failure`, return $(y_n,\\texttt{input-or-representation-failure})$. Otherwise denote its returned exact value by $f_0$, form $b_1=f_0+\\alpha h\\widetilde T_n$ by exact outer arithmetic, and set $b_{1,s}:=\\operatorname{store}(b_1)$. If storage returns `unavailable`, return $(y_n,\\texttt{input-or-representation-failure})$. Call the retained factor object's `solve(b_{1,s},\\varepsilon_1)`. If it is not certified, return $(y_n,\\text{stage-1 status})$. Otherwise set $k_1$ to its returned vector and $\\rho_1$ to its certified residual bound.\n3. Call `in_domain` on $(t_n+h/2,y_n+hk_1/2)$. If it returns false, return $(y_n,\\texttt{invalid-stage-domain})$. Otherwise call `evaluate_f(t_n+h/2,y_n+hk_1/2)`. If it returns `evaluation-failure`, return $(y_n,\\texttt{stage-2-input-or-representation-failure})$. Otherwise set $F_1$ to the returned exact value, form $b_2=F_1-k_1$ exactly, and set $b_{2,s}:=\\operatorname{store}(b_2)$. If storage returns `unavailable`, return $(y_n,\\texttt{stage-2-input-or-representation-failure})$. Call the same factor object's `solve(b_{2,s},\\varepsilon_2)`. If this solve is not certified, return $(y_n,\\text{stage-2 status})$. Otherwise set $q_2$ to its returned vector and $\\rho_2$ to its certified residual bound.\n4. Set $k_2=q_2+k_1$ and return $(y_n+h k_2,\\texttt{success},\\rho_1,\\rho_2)$ with the two certified update-residual bounds.\n\nWhere all the indicated state and time partial derivatives exist, the exact-J branch takes $\\widetilde J_n=D_yf(t_n,y_n)$ and $\\widetilde T_n=\\partial_t f(t_n,y_n)$. The W-method branch permits any bounded matrix approximations satisfying the hypotheses of the local and global order results; it receives no scalar A/L-stability guarantee from the exact-J result. The factor matrix is the same in both stages, so the procedure performs one shifted-matrix factorization and two stage solves. For this mixed-arithmetic specification, field evaluations and outer affine combinations are exact real operations, and every matrix/RHS passed to factorization or solve must pass `store`; factorization, triangular solves, and residual dot products use the operationwise model, while residual-bound formation is delegated to the terminating certificate evaluator. A full hardware-rounding theorem for outer operations would need additional certified evaluation and update-error terms. A finite arithmetic residual is not a forward-error bound without an inverse estimate.",
+      "direct_consumers": [
+        "thm-two-stage-rosenbrock-global-order-two",
+        "prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves",
+        "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+        "cex-approximate-jacobian-breaks-stiff-damping",
+        "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+        "cex-omitting-rosenbrock-stage-correction-loses-order-two",
+        "ex-two-stage-rosenbrock-factorization-reuse",
+        "thm-two-stage-rosenbrock-scalar-l-stability"
+      ],
+      "page_uses": [
+        {
+          "path": "library/numerical-differential-equations-and-stochastic-dynamics/rosenbrock-and-linearly-implicit-methods.md",
+          "affected_use": "  - alg-two-stage-rosenbrock-w-method",
+          "disposition": "unaffected",
+          "reason": "Stage equations, shifted matrix and exact-J coefficients are unchanged. Exact-equation analyses need no computational membership test. Successful-call claims inherit the supplied terminating domain routine and output binding; the concrete example uses the whole real time-state domain. The assigned termination theorem is repaired to name the domain routine."
+        }
+      ],
+      "post_sha256": "86a712521e040d49d7f39e33029f2e8cdbcfdb9d213283162fd7ec7602d20e7b",
+      "before_section_sha256": "f337843a2b7c840472a4605dfbd2f3792ebc8f4465967802d54dc6a02e9d37ad",
+      "after_section_sha256": "1e4ef4fab9625aef2a55a44cff4475e172ce8e15b1d1b05729c94b0ff6177c54"
+    },
+    {
+      "id": "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+      "section": "Statement",
+      "before": "For every finite dimension $d\\ge1$, finite stored matrix, unit roundoff $u>0$ with $du<1$, and finite collection of stored right-hand sides and nonnegative residual tolerances in the input domains of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]], [[alg-rosenbrock-euler-step]], and [[alg-two-stage-rosenbrock-w-method]], assume each called field-evaluation, exact-storage, and certificate-evaluation routine returns in finite work. Then the factorization operation, every requested solve operation, and each step procedure terminate after finitely many elementary operations with one of their stated success or failure statuses. Termination does not imply that the factorization is nonsingular, a residual is certified, or a step succeeds. No asymptotic runtime bound is claimed.",
+      "after": "For every finite dimension $d\\ge1$, finite stored matrix, unit roundoff $u>0$ with $du<1$, and finite collection of stored right-hand sides and nonnegative residual tolerances in the input domains of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]], [[alg-rosenbrock-euler-step]], and [[alg-two-stage-rosenbrock-w-method]], assume each called field-evaluation, domain-membership, exact-storage, and certificate-evaluation routine returns in finite work. Then the factorization operation, every requested solve operation, and each step procedure terminate after finitely many elementary operations with one of their stated success or failure statuses. Termination does not imply that the factorization is nonsingular, a residual is certified, or a step succeeds. No asymptotic runtime bound is claimed.",
+      "direct_consumers": [],
+      "page_uses": [
+        {
+          "path": "library/numerical-differential-equations-and-stochastic-dynamics/rosenbrock-and-linearly-implicit-methods.md",
+          "affected_use": "  - thm-rosenbrock-computational-steps-terminate-with-finite-work",
+          "disposition": "unaffected",
+          "reason": "There are no item consumers. The owning page describes finite status reporting under the procedure interfaces, including the newly explicit returning domain routine."
+        }
+      ],
+      "post_sha256": "155b8161a977503a71d2a5df5e185a2a5f53c9eb3cded799f7fbc5e9c48350c4",
+      "before_section_sha256": "3d126907af972434597d379196590c357297a1c5ac1e8463c09b92559f98511b",
+      "after_section_sha256": "c2493c75bd420630e49051870cd6ef03821635db41efa42dc44659d38f311a85"
+    },
+    {
+      "id": "ex-two-stage-rosenbrock-factorization-reuse",
+      "section": "Statement",
+      "before": "Take $J=\\operatorname{diag}(-1,-2)$, $f(y)=Jy$, $y=(1,2)^T$, $h=1$, and the W-method approximation $\\widetilde J=0$, $\\widetilde T=0$. Choose a stored finite system containing zero and the normal values $\\pm\\frac12,\\pm1,\\pm2,\\pm4,\\pm8$, with unit roundoff $0<u\\le1/100$. Let a terminating certificate evaluator return norm upper bounds $2$ for $\\|W\\|_F$ and $5$ for each displayed vector norm, and return certified upper bounds at most $1/2$ for the residual-bound expressions in both solves. Take stage tolerances $\\varepsilon_1=\\varepsilon_2=1$. Then $W=I_2$ and both stage right-hand sides use its single factor object. The exact stages are $k_1=(-1,-4)^T$, midpoint state $(1/2,0)^T$, $F_1=(-1/2,0)^T$, and $q_2=F_1-k_1=(1/2,4)^T$. The prescribed QR factorization succeeds and is reused for both stage solves. No stability or rounding-cost claim is made.",
+      "after": "Take $J=\\operatorname{diag}(-1,-2)$, $f(y)=Jy$, $y=(1,2)^T$, $h=1$, and the W-method approximation $\\widetilde J=0$, $\\widetilde T=0$. Choose a stored finite system containing zero and the normal values $\\pm\\frac12,\\pm1,\\pm2,\\pm4,\\pm8$, with unit roundoff $0<u\\le1/100$. Let a terminating certificate evaluator return norm upper bounds $2$ for $\\|W\\|_F$, $0$ for the computed-residual norm $\\|\\widehat r\\|_2$, and $5$ for each other requested vector norm, and return certified upper bounds at most $1/2$ for the residual-bound expressions in both solves. Take stage tolerances $\\varepsilon_1=\\varepsilon_2=1$. Then $W=I_2$ and both stage right-hand sides use its single factor object. The exact stages are $k_1=(-1,-4)^T$, midpoint state $(1/2,0)^T$, $F_1=(-1/2,0)^T$, and $q_2=F_1-k_1=(1/2,4)^T$. The prescribed QR factorization succeeds and is reused for both stage solves. No stability or rounding-cost claim is made.",
+      "direct_consumers": [],
+      "page_uses": [
+        {
+          "path": "library/numerical-differential-equations-and-stochastic-dynamics/rosenbrock-and-linearly-implicit-methods-examples.md",
+          "affected_use": "  - ex-two-stage-rosenbrock-factorization-reuse",
+          "disposition": "unaffected",
+          "reason": "There are no item consumers. The owning examples page only describes one common factorization and two right-hand sides, which the corrected zero-residual certificate now witnesses."
+        }
+      ],
+      "post_sha256": "486ea16e948a2ad707d382ed9b3615f91439da148304e2cbb3592a92464ca283",
+      "before_section_sha256": "54b50ce99a6c87ff5e40d9189b0b55d9b74ec59a3e3e7d24c57b2dc6b67b1743",
+      "after_section_sha256": "8c30bbd8d3d857b3eb7968c507b7ead17526801d26eee868933597192505ced1"
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-rosenbrock-euler-step-map.md items/lem-rosenbrock-stage-residual-certificate.md items/prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler.md items/alg-rosenbrock-euler-step.md items/alg-two-stage-rosenbrock-w-method.md items/thm-rosenbrock-computational-steps-terminate-with-finite-work.md items/cex-omitting-rosenbrock-stage-correction-loses-order-two.md items/ex-two-stage-rosenbrock-factorization-reuse.md",
+      "exit_code": 0,
+      "result": "5 proof-bearing items checked, 0 failing; 3 definition/algorithm carriers not applicable."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-rosenbrock-euler-step-map.md items/lem-rosenbrock-stage-residual-certificate.md items/prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler.md items/alg-rosenbrock-euler-step.md items/alg-two-stage-rosenbrock-w-method.md items/thm-rosenbrock-computational-steps-terminate-with-finite-work.md items/cex-omitting-rosenbrock-stage-correction-loses-order-two.md items/ex-two-stage-rosenbrock-factorization-reuse.md",
+      "exit_code": 0,
+      "result": "8 files passed renderer YAML and KaTeX checks."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/def-rosenbrock-euler-step-map.md items/lem-rosenbrock-stage-residual-certificate.md items/prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler.md items/alg-rosenbrock-euler-step.md items/alg-two-stage-rosenbrock-w-method.md items/thm-rosenbrock-computational-steps-terminate-with-finite-work.md items/cex-omitting-rosenbrock-stage-correction-loses-order-two.md items/ex-two-stage-rosenbrock-factorization-reuse.md",
+      "exit_code": 0,
+      "result": "8 items, 21 steps, 0 defects; run once after final item edits."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json --items def-rosenbrock-euler-step-map,lem-rosenbrock-stage-residual-certificate,alg-rosenbrock-shifted-qr-solver-with-residual-certificate,prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler,alg-rosenbrock-euler-step,alg-two-stage-rosenbrock-w-method,thm-rosenbrock-computational-steps-terminate-with-finite-work,cex-omitting-rosenbrock-stage-correction-loses-order-two,ex-two-stage-rosenbrock-factorization-reuse,thm-rosenbrock-euler-global-first-order-error --strict",
+      "exit_code": 0,
+      "result": "0 errors, 0 warnings, 10/10 assigned items checked."
+    },
+    {
+      "command": "node tools/finite-smoke.mjs research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json --items def-rosenbrock-euler-step-map,lem-rosenbrock-stage-residual-certificate,alg-rosenbrock-shifted-qr-solver-with-residual-certificate,prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler,alg-rosenbrock-euler-step,alg-two-stage-rosenbrock-w-method,thm-rosenbrock-computational-steps-terminate-with-finite-work,cex-omitting-rosenbrock-stage-correction-loses-order-two,ex-two-stage-rosenbrock-factorization-reuse,thm-rosenbrock-euler-global-first-order-error",
+      "exit_code": 0,
+      "result": "0 errors, 10 bounded fixture checks over 10/10 assigned items. These do not prove the general mathematical results."
+    },
+    {
+      "command": "node tools/manifest-deps.mjs research/numerical-optimization-dynamics-2026-10-16-batch-74.pages.json",
+      "exit_code": 0,
+      "result": "21 manifest items, 0 normalized, 0 errors."
+    },
+    {
+      "command": "python3 inline assignment/frontier/manifest consistency assertions",
+      "exit_code": 0,
+      "result": "Exact tuple coverage, frozen draft membership, disposition versus before guards, unchanged false-positive source bytes, and all 10 assigned source/manifest dependency mirrors passed."
+    }
+  ]
+}

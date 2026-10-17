@@ -1,0 +1,410 @@
+[
+  {
+    "order": 2320,
+    "id": "stationary-iterations-and-relaxation",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Stationary iterations and relaxation",
+    "companion": "stationary-iterations-and-relaxation-examples",
+    "requires": [
+      "conjugate-gradients-minres-and-preconditioning",
+      "krylov-subspaces-arnoldi-and-gmres",
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "sparse-matrix-models-and-kernel-costs"
+    ],
+    "items": [
+      {
+        "id": "def-diagonal-lower-upper-splitting-convention",
+        "kind": "definition",
+        "title": "Diagonal, lower, and upper parts in the stationary-iteration convention",
+        "deps": [
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, let $n\\ge1$, fix the coordinate\norder $1,\\ldots,n$, and let $A=(a_{ij})\\in M_n(F)$. Define $D,L,U\\in M_n(F)$\nby\n\n$$D_{ij}=\\begin{cases}a_{ii}&i=j,\\\\0&i\\ne j,\\end{cases}\\qquad\nL_{ij}=\\begin{cases}-a_{ij}&i>j,\\\\0&i\\le j,\\end{cases}\\qquad\nU_{ij}=\\begin{cases}-a_{ij}&i<j,\\\\0&i\\ge j.\\end{cases}$$\n\nThus $D$ is diagonal, $L$ is strictly lower triangular, $U$ is strictly upper\ntriangular (in the sense of\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]), and\n$A=D-L-U$. If $A=A^*$, then $U=L^*$, where $*$ denotes conjugate transpose.\nThe decomposition uses the fixed coordinate order and is an exact-arithmetic\nidentity.\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §4.1",
+              "url": "https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf",
+              "locator": "Printed pp. 105–108: the diagonal/strict lower/strict upper decomposition used for Jacobi, Gauss–Seidel, and SOR."
+            },
+            {
+              "title": "David Bindel, Matrix Computations (CS 6210), Cornell University, Fall 2012, Lecture 31",
+              "url": "https://www.cs.cornell.edu/~bindel/class/cs6210-f12/notes/lec31.pdf",
+              "locator": "PDF pp. 3–4: the fixed-order lower/upper splitting used for Gauss–Seidel and SOR."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-richardson-stationary-iteration",
+        "kind": "algorithm",
+        "title": "Finite-budget Richardson stationary iteration",
+        "deps": [
+          "def-stationary-iteration-from-a-matrix-splitting"
+        ],
+        "dependency_level": 0,
+        "statement": "Input $n\\ge1$, $A\\in M_n(\\mathbb C)$, $b,x^{(0)}\\in\\mathbb C^n$, a real\nrelaxation parameter $\\omega$, and an iteration budget $m\\in\\mathbb N_0$.\nFirst, if dimensions do not match, return `invalid-input`. Otherwise, if\n$\\omega=0$, return `invalid-relaxation`. If both checks pass, set\n$M=\\omega^{-1}I_n$ and $N=M-A$, and for\n$k=0,\\ldots,m-1$ set\n\n$$x^{(k+1)}=M^{-1}Nx^{(k)}+M^{-1}b =x^{(k)}+\\omega\\bigl(b-Ax^{(k)}\\bigr).$$\n\nReturn `completed` with $x^{(m)}$. This is the stationary iteration of\n[[def-stationary-iteration-from-a-matrix-splitting]] for $A=M-N$; $M$ is\ninvertible because $\\omega\\ne0$. The budget may be zero, in which case the\noutput is $x^{(0)}$. The procedure reports no convergence or accuracy\ncertificate.\n",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §4.2.1",
+              "url": "https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf",
+              "locator": "Printed p. 116, Example 4.1: the Richardson update (4.31) and iteration matrix (4.32); the example takes its parameter nonnegative."
+            },
+            {
+              "title": "David Bindel, Matrix Computations (CS 6210), Cornell University, Fall 2012, Lecture 31",
+              "url": "https://www.cs.cornell.edu/~bindel/class/cs6210-f12/notes/lec31.pdf",
+              "locator": "PDF pp. 1–2: matrix-splitting iteration and Richardson update."
+            },
+            {
+              "title": "Rutgers University MATH 574, Lecture Notes, §3 Matrix iterative methods",
+              "url": "https://sites.math.rutgers.edu/~falk/math574/lecture4.pdf",
+              "locator": "PDF pp. 1–2: splitting recurrence and spectral-radius convergence criterion."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-irreducible-row-substochastic-matrix-has-strict-weighted-contraction",
+        "kind": "lemma",
+        "title": "An irreducible row-substochastic matrix with a strict row has a weighted contraction",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "Let $n\\ge1$ and let $C=(c_{ij})\\in M_n(\\mathbb R)$ have nonnegative entries\nand row sums at most $1$. Form the directed graph with vertices\n$\\{1,\\ldots,n\\}$ and an edge $i\\to j$ exactly when $c_{ij}>0$; assume this\ngraph is strongly connected, with paths of length $0$ allowed. Assume one row\n$r$ has sum strictly less than $1$. Then, with $\\mathbf1=(1,\\ldots,1)^T$,\n\n$$C^n\\mathbf1<\\mathbf1$$\n\ncoordinatewise, and the series $v=\\sum_{k=0}^{\\infty}C^k\\mathbf1$ converges\ncoordinatewise to a vector satisfying $v>0$ and $Cv<v$ coordinatewise.\n\n",
+        "strategy": "1.1 Put $d=\\mathbf1-C\\mathbf1$. Telescoping gives $\\mathbf1-C^n\\mathbf1=\\sum_{k=0}^{n-1}C^k d$, since $(I-C)\\sum_{k=0}^{n-1}C^k=I-C^n$. Each summand is coordinatewise nonnegative by [A1]. [given, A1, algebra]\n\n2.1 For each $i$, choose by [A2] a path of length $s_i\\le n-1$ from $i$ to $r$. The product of the positive edge weights along it is a positive term of $(C^{s_i})_{ir}$; for $s_i=0$ this entry is $1$. Hence $(C^{s_i}d)_i\\ge(C^{s_i})_{ir}d_r>0$. Step 1.1 then gives $(C^n\\mathbf1)_i<1$ for every $i$. [A1, A2, step 1.1, algebra]\n\n3.1 Let $q:=\\max_i(C^n\\mathbf1)_i<1$. Since $C^s\\mathbf1\\le\\mathbf1$ for $0\\le s<n$, nonnegativity gives $C^{kn+s}\\mathbf1\\le q^k\\mathbf1$ for all $k\\ge0$ and $0\\le s<n$. Therefore $\\sum_{j=0}^{\\infty}C^j\\mathbf1$ converges coordinatewise and its sum $v$ satisfies $v\\ge\\mathbf1>0$. [A1, step 2.1, algebra]\n\n4.1 Multiplying the convergent series by $C$ shifts its terms, so $Cv=v-\\mathbf1<v$ coordinatewise. [step 3.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §4.2.3",
+              "url": "https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf",
+              "locator": "Printed pp. 119–122: Definition 4.5 and Theorem 4.9 for irreducibly diagonally dominant matrices, with at least one strict row."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-jacobi-stationary-iteration",
+        "kind": "algorithm",
+        "title": "Finite-budget Jacobi stationary iteration",
+        "deps": [
+          "def-diagonal-lower-upper-splitting-convention",
+          "def-stationary-iteration-from-a-matrix-splitting",
+          "def-forward-and-back-substitution-for-triangular-systems",
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost"
+        ],
+        "dependency_level": 1,
+        "statement": "Input $n\\ge1$, $A\\in M_n(\\mathbb C)$, $b,x^{(0)}\\in\\mathbb C^n$, and an\niteration budget $m\\in\\mathbb N_0$. Check dimensions; on a mismatch return\n`invalid-input`. Form $D,L,U$ by\n[[def-diagonal-lower-upper-splitting-convention]]. If some diagonal entry of\n$A$ is zero, return `pivot-failure(i)` for the least such index $i$.\n\nOtherwise set $M=D$ and $N=L+U$, so $A=M-N$. For each\n$k=0,\\ldots,m-1$, compute the diagonal solve\n\n$$D x^{(k+1)}=(L+U)x^{(k)}+b,$$\n\nequivalently, simultaneously for every $i$,\n\n$$x_i^{(k+1)}=\\frac{b_i-\\sum_{j\\ne i}a_{ij}x_j^{(k)}}{a_{ii}}.$$\n\nReturn `completed` with $x^{(m)}$. The solve is the unique diagonal instance of\n[[def-forward-and-back-substitution-for-triangular-systems]] when the pivot\ncheck succeeds; [[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]]\ngives its well-definedness. A zero budget returns $x^{(0)}$. The procedure\nreports no convergence or accuracy certificate.\n",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §4.1",
+              "url": "https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf",
+              "locator": "Printed pp. 105–107: Jacobi update, diagonal splitting, and stationary iteration matrix."
+            },
+            {
+              "title": "David Bindel, Matrix Computations (CS 6210), Cornell University, Fall 2012, Lecture 31",
+              "url": "https://www.cs.cornell.edu/~bindel/class/cs6210-f12/notes/lec31.pdf",
+              "locator": "PDF pp. 1–3: splitting form and Jacobi component update."
+            },
+            {
+              "title": "Rutgers University MATH 574, Lecture Notes, §3 Matrix iterative methods",
+              "url": "https://sites.math.rutgers.edu/~falk/math574/lecture4.pdf",
+              "locator": "PDF p. 1: diagonal splitting and simultaneous Jacobi updates."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-gauss-seidel-stationary-iteration",
+        "kind": "algorithm",
+        "title": "Finite-budget Gauss–Seidel stationary iteration",
+        "deps": [
+          "def-diagonal-lower-upper-splitting-convention",
+          "def-stationary-iteration-from-a-matrix-splitting",
+          "def-forward-and-back-substitution-for-triangular-systems",
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost"
+        ],
+        "dependency_level": 1,
+        "statement": "Input $n\\ge1$, $A\\in M_n(\\mathbb C)$, $b,x^{(0)}\\in\\mathbb C^n$, and an\niteration budget $m\\in\\mathbb N_0$. Use the fixed order $1,\\ldots,n$. Check\ndimensions; on a mismatch return `invalid-input`. Form $D,L,U$ by\n[[def-diagonal-lower-upper-splitting-convention]]. If some diagonal entry of\n$A$ is zero, return `pivot-failure(i)` for the least such index $i$.\n\nOtherwise set $M=D-L$ and $N=U$, so $A=M-N$. For each\n$k=0,\\ldots,m-1$, solve the lower-triangular system\n\n$$ (D-L)x^{(k+1)}=Ux^{(k)}+b $$\n\nby forward substitution in increasing index order. Equivalently, the component\nupdates are\n\n$$x_i^{(k+1)}=\\frac{b_i+\\sum_{j<i}L_{ij}x_j^{(k+1)}+\\sum_{j>i}U_{ij}x_j^{(k)}}{a_{ii}},\\qquad i=1,\\ldots,n.$$\n\nReturn `completed` with $x^{(m)}$. The lower-triangular solve is unique after\nthe pivot check by [[def-forward-and-back-substitution-for-triangular-systems]]\nand [[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]].\nA zero budget returns $x^{(0)}$. The procedure reports no convergence or\naccuracy certificate.\n",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §4.1",
+              "url": "https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf",
+              "locator": "Printed pp. 106–108: fixed-order Gauss–Seidel sweep and its lower-triangular splitting."
+            },
+            {
+              "title": "David Bindel, Matrix Computations (CS 6210), Cornell University, Fall 2012, Lecture 31",
+              "url": "https://www.cs.cornell.edu/~bindel/class/cs6210-f12/notes/lec31.pdf",
+              "locator": "PDF pp. 3–4: lexicographic Gauss–Seidel update and lower-triangular solve."
+            },
+            {
+              "title": "Rutgers University MATH 574, Lecture Notes, §3 Matrix iterative methods",
+              "url": "https://sites.math.rutgers.edu/~falk/math574/lecture4.pdf",
+              "locator": "PDF p. 1: sequential Gauss–Seidel updates and splitting."
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-sor-stationary-iteration",
+        "kind": "algorithm",
+        "title": "Finite-budget successive over-relaxation stationary iteration",
+        "deps": [
+          "def-diagonal-lower-upper-splitting-convention",
+          "def-stationary-iteration-from-a-matrix-splitting",
+          "def-forward-and-back-substitution-for-triangular-systems",
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost"
+        ],
+        "dependency_level": 1,
+        "statement": "Input $n\\ge1$, $A\\in M_n(\\mathbb C)$, $b,x^{(0)}\\in\\mathbb C^n$, a real\nrelaxation parameter $\\omega$, and an iteration budget $m\\in\\mathbb N_0$.\nCheck dimensions; on a mismatch return `invalid-input`. If $\\omega=0$, return\n`invalid-relaxation`. Form $D,L,U$ by\n[[def-diagonal-lower-upper-splitting-convention]]. If some diagonal entry of\n$A$ is zero, return `pivot-failure(i)` for the least such index $i$.\n\nOtherwise set\n\n$$M_\\omega=\\omega^{-1}D-L,\\qquad\nN_\\omega=(\\omega^{-1}-1)D+U,$$\n\nso $A=M_\\omega-N_\\omega$. For each $k=0,\\ldots,m-1$, solve\n\n$$M_\\omega x^{(k+1)}=N_\\omega x^{(k)}+b$$\n\nby forward substitution in increasing index order. The lower-triangular\ncoefficient matrix has diagonal entries $a_{ii}/\\omega$, which are nonzero\nafter the checks. Return `completed` with $x^{(m)}$. The solve is unique by\n[[def-forward-and-back-substitution-for-triangular-systems]] and\n[[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]].\nA zero budget returns $x^{(0)}$. This procedure is defined for every real\n$\\omega\\ne0$; it reports no convergence or accuracy certificate.\n",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §4.1",
+              "url": "https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf",
+              "locator": "Printed pp. 107–108: fixed-order SOR recurrence and the relaxation parameter."
+            },
+            {
+              "title": "David Bindel, Matrix Computations (CS 6210), Cornell University, Fall 2012, Lecture 31",
+              "url": "https://www.cs.cornell.edu/~bindel/class/cs6210-f12/notes/lec31.pdf",
+              "locator": "PDF p. 5: SOR as relaxation of a fixed-order Gauss–Seidel sweep."
+            },
+            {
+              "title": "Rutgers University MATH 574, Lecture Notes, §3 Matrix iterative methods",
+              "url": "https://sites.math.rutgers.edu/~falk/math574/lecture4.pdf",
+              "locator": "PDF pp. 2–3: relaxation recurrence, matrix update, and failure/convergence parameter discussion."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-strict-row-diagonal-dominance-implies-jacobi-and-gauss-seidel-convergence",
+        "kind": "theorem",
+        "title": "Strict row diagonal dominance guarantees Jacobi and Gauss–Seidel convergence",
+        "deps": [
+          "def-diagonal-lower-upper-splitting-convention",
+          "alg-jacobi-stationary-iteration",
+          "alg-gauss-seidel-stationary-iteration",
+          "def-stationary-iteration-from-a-matrix-splitting",
+          "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one",
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $n\\ge1$ and $A=(a_{ij})\\in M_n(\\mathbb R)$ satisfy strict row diagonal\ndominance:\n\n$$|a_{ii}|>\\sum_{j\\ne i}|a_{ij}|\\qquad(i=1,\\ldots,n).$$\n\nThen the Jacobi and fixed-order Gauss–Seidel iterations defined by\n[[alg-jacobi-stationary-iteration]] and\n[[alg-gauss-seidel-stationary-iteration]] converge in exact arithmetic to the\nunique solution of $Ax=b$ for every $b,x^{(0)}\\in\\mathbb R^n$.\n\n",
+        "strategy": "1.1 By [A1], every $a_{ii}\\ne0$. Thus $D$ and the lower-triangular matrix $D-L$ have nonzero diagonal, so the solves in [F1] and [F2] are uniquely defined by [L2]. [A1, F1, F2, L2, algebra]\n\n2.1 By [F1]–[F2] and [L3], the iteration matrices are $G_J=D^{-1}(L+U)$ and $G_G=(D-L)^{-1}U$. [F1, F2, L3, step 1.1, algebra]\n\n3.1 For each row $i$, set $q_i=\\sum_{j\\ne i}|a_{ij}|/|a_{ii}|$ and $q_J=\\max_i q_i<1$. Since $L_{ij}=-a_{ij}$ below the diagonal and $U_{ij}=-a_{ij}$ above it, $\\sum_j|(G_J)_{ij}|=q_i$. Hence for any eigenpair $G_Jz=\\lambda z$ with $z\\ne0$, choose $i$ with $|z_i|=\\max_j|z_j|$; the row equation gives $|\\lambda||z_i|\\le q_i|z_i|\\le q_J|z_i|$, so $|\\lambda|<1$ and $\\rho(G_J)<1$. [A1, L1, step 2.1, algebra]\n\n3.2 Let $G_Gz=\\lambda z$ with $z\\ne0$, and choose $i$ with $|z_i|=\\max_j|z_j|=:R$. The equation $Uz=\\lambda(D-L)z$ in row $i$ is $\\sum_{j>i}U_{ij}z_j=\\lambda(a_{ii}z_i-\\sum_{j<i}L_{ij}z_j)$, so $|\\lambda|\\,|a_{ii}z_i-\\sum_{j<i}L_{ij}z_j| \\le\\sum_{j>i}|U_{ij}||z_j|$. By the reverse triangle inequality and [A1], the left factor is at least $|\\lambda|(|a_{ii}|-\\sum_{j<i}|a_{ij}|)R$, while the right side is at most $\\sum_{j>i}|a_{ij}|R$. Therefore $|\\lambda|\\le\\max_i\\frac{\\sum_{j>i}|a_{ij}|}{|a_{ii}|-\\sum_{j<i}|a_{ij}|}<1$; the denominators are positive and each strict inequality follows from [A1]. Thus $\\rho(G_G)<1$. [A1, L1, step 2.1, algebra]\n\n4.1 The bounds in steps 3.1 and 3.2 and [L4] imply that both methods converge to the unique solution of $Ax=b$ for every $b$ and every initial vector. [L4, step 3.1, step 3.2] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §4.2.3",
+              "url": "https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf",
+              "locator": "Printed pp. 119–122, Theorem 4.9: strict row diagonal dominance implies convergence of Jacobi and Gauss–Seidel; proofs by eigenvector bounds."
+            },
+            {
+              "title": "David Bindel, Matrix Computations (CS 6210), Cornell University, Fall 2012, Lecture 31",
+              "url": "https://www.cs.cornell.edu/~bindel/class/cs6210-f12/notes/lec31.pdf",
+              "locator": "PDF pp. 2–4: strict row diagonal dominance gives Jacobi and Gauss–Seidel contraction bounds."
+            },
+            {
+              "title": "Rutgers University MATH 574, Lecture Notes, §3 Matrix iterative methods",
+              "url": "https://sites.math.rutgers.edu/~falk/math574/lecture4.pdf",
+              "locator": "PDF pp. 2–3, Theorems 7–8: strict diagonal dominance convergence tests for Jacobi and Gauss–Seidel."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-irreducibly-weakly-diagonally-dominant-jacobi-and-gauss-seidel-converge",
+        "kind": "theorem",
+        "title": "Irreducibly weak row diagonal dominance with a strict row guarantees Jacobi and Gauss–Seidel convergence",
+        "deps": [
+          "def-diagonal-lower-upper-splitting-convention",
+          "alg-jacobi-stationary-iteration",
+          "alg-gauss-seidel-stationary-iteration",
+          "lem-irreducible-row-substochastic-matrix-has-strict-weighted-contraction",
+          "def-stationary-iteration-from-a-matrix-splitting",
+          "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one",
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $n\\ge1$ and $A=(a_{ij})\\in M_n(\\mathbb R)$ satisfy weak row diagonal\ndominance\n\n$$|a_{ii}|\\ge\\sum_{j\\ne i}|a_{ij}|\\qquad(i=1,\\ldots,n),$$\n\nwith strict inequality in at least one row. Assume the directed off-diagonal\ngraph, with edge $i\\to j$ when $i\\ne j$ and $a_{ij}\\ne0$, is strongly\nconnected (paths of length $0$ are allowed). Then the Jacobi and fixed-order\nGauss–Seidel iterations defined by [[alg-jacobi-stationary-iteration]] and\n[[alg-gauss-seidel-stationary-iteration]] converge in exact arithmetic to the\nunique solution of $Ax=b$ for every $b,x^{(0)}\\in\\mathbb R^n$.\n\n",
+        "strategy": "1.1 If $n>1$ and $a_{ii}=0$, [A1] forces every off-diagonal entry in row $i$ to vanish, contradicting strong connectivity. If $n=1$, the strict-row hypothesis forces $|a_{11}|>0$. Hence every diagonal entry is nonzero, and the Jacobi and lower-triangular Gauss–Seidel solves are defined by [L5]. [A1, L5, algebra]\n\n2.1 Define $C_{ii}=0$ and $C_{ij}=|a_{ij}|/|a_{ii}|$ for $i\\ne j$. Its row sums are at most $1$, one is strictly below $1$, and its positive-entry graph is the graph in [A1]. By [L2], choose $v>0$ with $Cv<v$, and set $q_J=\\max_i (Cv)_i/v_i<1$. [A1, L1, L2, step 1.1, algebra]\n\n3.1 By [F1], $|G_J|=C$ entrywise. For $\\|z\\|_v:=\\max_i |z_i|/v_i$, nonnegativity gives $|G_Jz|\\le C|z|\\le\\|z\\|_v Cv\\le q_J\\|z\\|_v v$. Thus every eigenvalue $\\lambda$ of $G_J$ satisfies $|\\lambda|\\le q_J<1$, so $\\rho(G_J)<1$. [F1, step 2.1, algebra]\n\n3.2 Set $B_L=|D|^{-1}|L|$ and $B_U=|D|^{-1}|U|$. Then $C=B_L+B_U$, $B_L$ is strictly lower triangular, and $(I-B_L)^{-1}=\\sum_{r=0}^{n-1}B_L^r\\ge I$. Thus $H:=(I-B_L)^{-1}B_U=\\sum_{r=0}^{n-1}B_L^rB_U\\ge0$. Since $(I-B_L)v-B_Uv=(I-C)v>0$, multiplying by $(I-B_L)^{-1}\\ge I$ gives $Hv<v$. Consequently $q_G:=\\max_i(Hv)_i/v_i<1$. [A1, L1, step 2.1, algebra]\n\n4.1 Because $D-L=D(I-D^{-1}L)$ and $D^{-1}L$ is strictly lower triangular, $(D-L)^{-1}U=\\sum_{r=0}^{n-1}(D^{-1}L)^rD^{-1}U$. Entrywise absolute values obey $|XY|\\le|X||Y|$, so $|G_G|\\le H$. The same weighted-vector estimate as in step 3.1 yields $\\|G_Gz\\|_v\\le q_G\\|z\\|_v$; hence $\\rho(G_G)<1$. [F2, L1, step 3.2, algebra]\n\n5.1 By [L3]–[L4], the two spectral-radius bounds imply convergence to the unique solution of $Ax=b$ for every right-hand side and every initial vector. [L3, L4, step 3.1, step 4.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §4.2.3",
+              "url": "https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf",
+              "locator": "Printed pp. 119–122, Theorem 4.9: Jacobi and Gauss–Seidel convergence for irreducibly diagonally dominant matrices, with at least one strict row."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two",
+        "kind": "theorem",
+        "title": "SOR converges exactly for positive-definite A and relaxation parameter in (0, 2)",
+        "deps": [
+          "def-diagonal-lower-upper-splitting-convention",
+          "alg-sor-stationary-iteration",
+          "def-stationary-iteration-from-a-matrix-splitting",
+          "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one",
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-determinant-is-product-of-eigenvalues",
+          "thm-the-complex-numbers-are-algebraically-closed"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $n\\ge1$, $A\\in M_n(\\mathbb C)$ be Hermitian with strictly positive\ndiagonal, and let $\\omega\\in\\mathbb R\\setminus\\{0\\}$. Write\n$A=D-L-L^*$ by [[def-diagonal-lower-upper-splitting-convention]], and define\n\n$$M_\\omega=\\omega^{-1}D-L,\\qquad\nN_\\omega=(\\omega^{-1}-1)D+L^*,\\qquad\nG_\\omega=M_\\omega^{-1}N_\\omega.$$\n\nThe SOR iteration is $x^{(k+1)}=G_\\omega x^{(k)}+M_\\omega^{-1}b$. It converges\nto the unique solution of $Ax=b$ for every $b,x^{(0)}\\in\\mathbb C^n$ if and\nonly if $A$ is positive definite (meaning $x^*Ax>0$ for every nonzero $x$)\nand $0<\\omega<2$.\n\n",
+        "strategy": "1.1 By [A1] and [F1], $M_\\omega$ is lower triangular with diagonal $a_{ii}/\\omega\\ne0$, hence invertible by [L5]. Also $A=M_\\omega-N_\\omega$ by [L1], so [L2] applies with iteration matrix $G_\\omega$. The matrix $N_\\omega$ is upper triangular with diagonal entries $(\\omega^{-1}-1)a_{ii}$. Thus [L6]–[L7] give $\\det(M_\\omega)=\\omega^{-n}\\prod_i a_{ii}$ and $\\det(N_\\omega)=(\\omega^{-1}-1)^n\\prod_i a_{ii}$. From $M_\\omega G_\\omega=N_\\omega$ and multiplicativity, $\\det(G_\\omega)=\\det(N_\\omega)/\\det(M_\\omega)=(1-\\omega)^n$. [A1, F1, L1, L2, L5, L6, L7, algebra]\n\n1.2 For sufficiency, suppose $A$ is positive definite and $0<\\omega<2$. Then $Q:=M_\\omega+M_\\omega^*-A=(2/\\omega-1)D$ is positive definite. For an eigenpair $G_\\omega v=\\lambda v$ with $v\\ne0$, one has $\\lambda\\ne1$ since $Av=(1-\\lambda)M_\\omega v$ and $A$ is invertible. Put $a=v^*Av>0$. Then $v^*M_\\omega v=a/(1-\\lambda)$, so $v^*Qv=a\\left(2\\operatorname{Re}\\frac{1}{1-\\lambda}-1\\right) =a\\frac{1-|\\lambda|^2}{|1-\\lambda|^2}>0$. Therefore $|\\lambda|<1$ for every eigenvalue and $\\rho(G_\\omega)<1$. [A1, F1, L1, L2, L4, algebra]\n\n2.1 If SOR converges for every right-hand side and start, [L3] gives $\\rho(G_\\omega)<1$. By [L8]–[L9], $|\\det(G_\\omega)|=\\prod_{j=1}^n|\\lambda_j|\\le\\rho(G_\\omega)^n<1$. Step 1.1 therefore gives $|1-\\omega|<1$, which for real $\\omega$ is equivalent to $0<\\omega<2$. [L3, L8, L9, step 1.1, algebra]\n\n2.2 Assume now that SOR converges for every right-hand side and start. Then $\\rho(G_\\omega)<1$ by [L3], so $1$ is not an eigenvalue of $G_\\omega$ and $I-G_\\omega$ is invertible. By [L2], $A=M_\\omega(I-G_\\omega)$ is invertible. For $b=0$, its unique solution is $x_*=0$. For arbitrary $e^{(0)}:=x^{(0)}$, set $e^{(k)}:=x^{(k)}-x_*=x^{(k)}$ and $\\delta_k=e^{(k+1)}-e^{(k)}$. The homogeneous SOR recurrence gives $M_\\omega e^{(k+1)}=N_\\omega e^{(k)}$, hence $Ae^{(k)}+M_\\omega\\delta_k=0$. Expanding the Hermitian quadratic form gives $(e^{(k)})^*Ae^{(k)}-(e^{(k+1)})^*Ae^{(k+1)} =\\delta_k^*(M_\\omega+M_\\omega^*-A)\\delta_k =(2/\\omega-1)\\delta_k^*D\\delta_k$. The last equality follows from [L1] and [F1]. [A1, F1, L1, L2, L3, step 1.1, algebra]\n\n3.1 By step 2.1, $c:=2/\\omega-1>0$. Summing the identity in step 2.2 from $k=0$ to $N-1$ and taking $N\\to\\infty$ (the error tends to $0$ by the assumed convergence) gives $(e^{(0)})^*Ae^{(0)}=c\\sum_{k=0}^{\\infty}\\delta_k^*D\\delta_k$. Moreover $\\delta_0\\ne0$: otherwise step 2.2 implies $Ae^{(0)}=0$, contrary to invertibility of $A$. Since $D$ has positive diagonal, the first summand is strictly positive and all others are nonnegative. Thus $(e^{(0)})^*Ae^{(0)}>0$ for every nonzero $e^{(0)}$, so [L4] gives that $A$ is positive definite. [A1, L3, L4, step 2.1, step 2.2, algebra]\n\n4.1 By [L3], $\\rho(G_\\omega)<1$ implies convergence to the unique solution for every right-hand side and every initial vector. Steps 2.1 and 3.1 prove the reverse implication. [L3, step 2.1, step 3.1, step 1.2] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §4.2.4",
+              "url": "https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf",
+              "locator": "Printed p. 122, Theorem 4.10: for symmetric A with positive diagonal and 0<ω<2, SOR converges for every start iff A is positive definite. The local proof below also verifies the Hermitian extension."
+            },
+            {
+              "title": "Rutgers University MATH 574, Lecture Notes, §3 Matrix iterative methods",
+              "url": "https://sites.math.rutgers.edu/~falk/math574/lecture4.pdf",
+              "locator": "PDF pp. 3–4, Theorems 10–11: the necessary relaxation range and the positive-definite sufficient condition."
+            },
+            {
+              "title": "David Bindel, Matrix Computations (CS 6210), Cornell University, Fall 2012, Lecture 31",
+              "url": "https://www.cs.cornell.edu/~bindel/class/cs6210-f12/notes/lec31.pdf",
+              "locator": "PDF p. 5: SOR is defined as relaxation of the fixed-order Gauss–Seidel sweep; this source is used for the recurrence, not the iff theorem."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2321,
+    "id": "stationary-iterations-and-relaxation-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Stationary iterations and relaxation — Examples",
+    "companion": "stationary-iterations-and-relaxation",
+    "requires": [
+      "stationary-iterations-and-relaxation"
+    ],
+    "items": [
+      {
+        "id": "ex-stationary-splitting-with-an-initial-error-missing-an-unstable-eigenspace",
+        "kind": "example",
+        "title": "A stationary split converges from an error missing its unstable eigenspace",
+        "deps": [
+          "def-stationary-iteration-from-a-matrix-splitting",
+          "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one"
+        ],
+        "dependency_level": 0,
+        "statement": "Take $A=I_2$, $b=0$, $M=\\operatorname{diag}(-1,2)$, and\n$N=M-A=\\operatorname{diag}(-2,1)$. This is a stationary splitting with\niteration matrix $G=M^{-1}N=\\operatorname{diag}(2,1/2)$ and $\\rho(G)=2$.\nStarting from $x^{(0)}=(0,1)^T$ gives $x^{(k)}=(0,2^{-k})^T\\to0$; starting\nfrom $(1,0)^T$ gives $x^{(k)}=(2^k,0)^T$, which diverges. Thus one start\nconverges because its error has no component in the unstable eigenspace, even\nthough the splitting does not converge for every start.\n\n",
+        "strategy": "1.1 The matrices satisfy $M-N=I_2=A$ and $M$ is invertible. By [F1], $G=M^{-1}N=\\operatorname{diag}(2,1/2)$, whose spectral radius is $2$. The unique solution for $b=0$ is $0$. [given, F1, algebra]\n\n2.1 The recurrence is diagonal, so from $x^{(0)}=(0,1)^T$ it gives $x^{(k)}=(0,2^{-k})^T\\to0$, while from $(1,0)^T$ it gives $x^{(k)}=(2^k,0)^T$ and does not converge. This directly exhibits both the missing-unstable-eigenspace case and the failure of the all-start condition [L1] because $\\rho(G)=2$. [given, F1, L1, step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §4.2.1",
+              "url": "https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf",
+              "locator": "Printed pp. 115–116: all-start convergence depends on the full spectrum and a particular initial error may miss a dominant eigenspace."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-jacobi-iteration-for-a-strictly-diagonally-dominant-matrix",
+        "kind": "example",
+        "title": "Jacobi iteration on a strictly row-diagonally-dominant system",
+        "deps": [
+          "alg-jacobi-stationary-iteration",
+          "thm-strict-row-diagonal-dominance-implies-jacobi-and-gauss-seidel-convergence"
+        ],
+        "dependency_level": 3,
+        "statement": "Take\n\n$$A=\\begin{pmatrix}5&1\\\\1&4\\end{pmatrix},\\qquad\nb=\\binom23,\\qquad x^{(0)}=\\binom00.$$\n\nBoth rows are strictly diagonally dominant. The Jacobi iteration matrix is\n$G_J=\\begin{pmatrix}0&-1/5\\\\-1/4&0\\end{pmatrix}$, with eigenvalues\n$\\pm1/\\sqrt{20}$, and the exact solution is\n$x_*=(5/19,13/19)^T$. The strict-dominance theorem therefore guarantees\nconvergence from every start to this solution.\n\n",
+        "strategy": "1.1 The row inequalities are $5>1$ and $4>1$. Direct multiplication gives $A(5/19,13/19)^T=(2,3)^T$, so the displayed vector is the exact solution. [given, algebra]\n\n2.1 By [F1], $G_J=-D^{-1}(A-D)=\\begin{pmatrix}0&-1/5\\\\-1/4&0\\end{pmatrix}$, whose characteristic polynomial is $\\lambda^2-1/20$. Thus $\\rho(G_J)=1/\\sqrt{20}<1$; [L1] gives convergence from every initial vector to the verified solution. [F1, L1, step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §§4.1–4.2.3",
+              "url": "https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf",
+              "locator": "Printed pp. 105–107 and 119–122: Jacobi update and strict diagonal-dominance convergence criterion."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-sor-iteration-for-a-positive-definite-matrix-with-omega-in-zero-two",
+        "kind": "example",
+        "title": "SOR on a positive-definite system with relaxation parameter in (0, 2)",
+        "deps": [
+          "alg-sor-stationary-iteration",
+          "thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two",
+          "def-cholesky-factorisation-with-positive-diagonal"
+        ],
+        "dependency_level": 3,
+        "statement": "Take\n\n$$A=\\begin{pmatrix}2&-1\\\\-1&2\\end{pmatrix},\\qquad b=0,\\qquad\nx^{(0)}=\\binom10,\\qquad \\omega=\\frac32.$$\n\nThe matrix is positive definite and $\\omega\\in(0,2)$. For the fixed order\n$1,2$, the SOR iteration matrix is\n\n$$G_\\omega=\\begin{pmatrix}-1/2&3/4\\\\-3/8&1/16\\end{pmatrix},$$\n\nwith eigenvalues $(-7\\pm i\\sqrt{207})/32$, both of modulus $1/2$. Thus the\nerror converges to zero for every initial vector.\n\n",
+        "strategy": "1.1 For $z=(z_1,z_2)^T$, $z^*Az=|z_1|^2+|z_2|^2+|z_1-z_2|^2$, so [L2] shows that $A$ is positive definite; its diagonal is positive and $0<3/2<2$. [given, L2, algebra]\n\n1.2 Here $D=2I$, $L_{21}=1$, and $U=L^*$. By [F1], $M_\\omega=\\begin{pmatrix}4/3&0\\\\-1&4/3\\end{pmatrix}$ and $N_\\omega=\\begin{pmatrix}-2/3&1\\\\0&-2/3\\end{pmatrix}$, hence $G_\\omega=M_\\omega^{-1}N_\\omega= \\begin{pmatrix}-1/2&3/4\\\\-3/8&1/16\\end{pmatrix}$. Its characteristic polynomial is $\\lambda^2+(7/16)\\lambda+1/4$, whose roots are $(-7\\pm i\\sqrt{207})/32$ and have modulus $1/2$. [F1, algebra]\n\n2.1 The hypotheses of [L1] hold by step 1.1, so SOR converges for every start; in particular the stated start converges to the solution $0$. [L1, step 1.1, step 1.2] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §§4.1 and 4.2.4",
+              "url": "https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf",
+              "locator": "Printed pp. 107–108 and 122: SOR recurrence and the positive-definite convergence interval."
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

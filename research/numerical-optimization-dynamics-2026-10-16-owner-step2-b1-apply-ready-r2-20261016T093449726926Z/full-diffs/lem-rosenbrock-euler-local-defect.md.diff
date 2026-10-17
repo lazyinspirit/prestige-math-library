@@ -1,0 +1,29 @@
+--- current/items/lem-rosenbrock-euler-local-defect.md
++++ proposed/items/lem-rosenbrock-euler-local-defect.md
+@@ -5,7 +5,7 @@
+ status: draft
+ origin: pipeline
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+-deps: [alg-rosenbrock-euler-step, cor-mean-value-theorem, def-first-order-ode-initial-value-problem-and-solution, thm-chain-rule-for-total-derivatives]
++deps: [def-rosenbrock-euler-step-map, cor-mean-value-theorem, def-first-order-ode-initial-value-problem-and-solution, thm-chain-rule-for-total-derivatives]
+ dependency_level: 1
+ proof_strategy: direct
+ provenance:
+@@ -23,7 +23,7 @@
+ 
+ ## Statement
+ 
+-Let $K\subset U\subset\mathbb R^d$ be compact and convex, let $f:U\to\mathbb R^d$ be continuously differentiable, and suppose $\|f(y)\|\le F$ and $\|Df(y)\|\le L$ on $K$. For $0<h\le h_0$, assume $I-hDf(y)$ is invertible for every $y\in K$ with inverse norm at most $B$. If the exact solution starting at $y$ stays in $K$ on $[t,t+h]$, the step $\Phi_h(y)$ of [[alg-rosenbrock-euler-step]] satisfies
++Let $K\subset U\subset\mathbb R^d$ be compact and convex, let $f:U\to\mathbb R^d$ be continuously differentiable, and suppose $\|f(y)\|\le F$ and $\|Df(y)\|\le L$ on $K$. For $0<h\le h_0$, assume $I-hDf(y)$ is invertible for every $y\in K$ with inverse norm at most $B$. If the exact solution starting at $y$ stays in $K$ on $[t,t+h]$, the exact-arithmetic step $\Phi_h(y)$ of [[def-rosenbrock-euler-step-map]], with $\gamma=1$, autonomous field $f$ and exact Jacobian $Df(y)$, satisfies
+ $$
+ \|\Phi_h(y)-y(t+h)\|\le FL(B+1)h^2.
+ $$
+@@ -33,7 +33,7 @@
+ 
+ **Given:** The compact convex set, vector field, bounds, exact solution segment, and uniform inverse bound in the statement.
+ 
+-[F1] [[alg-rosenbrock-euler-step]]: at state $y$, the successful stage solves $(I-hDf(y))k=f(y)$ and returns $\Phi_h(y)=y+hk$.
++[F1] [[def-rosenbrock-euler-step-map]]: for the autonomous exact-Jacobian branch with $\gamma=1$, the exact stage solves $(I-hDf(y))k=f(y)$ and the exact-method update is $\Phi_h(y)=y+hk$. No finite-precision execution or success status is used.
+ 
+ [F2] [[thm-chain-rule-for-total-derivatives]]: for differentiable maps, the derivative of a composition is the derivative of the outer map composed with the derivative of the inner map.
+ 

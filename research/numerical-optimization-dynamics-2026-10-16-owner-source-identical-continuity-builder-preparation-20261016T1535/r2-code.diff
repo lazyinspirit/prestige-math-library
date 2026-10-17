@@ -1,0 +1,74 @@
+--- build-proposed.mjs r1
++++ build-proposed.mjs r2
+@@ -42,7 +42,8 @@
+ if (inventory.version !== 1 || inventory.run !== RUN || inventory.root !== ROOT
+   || inventory.mode !== 'read-only-owner-evidence-inventory' || !Array.isArray(inventory.groups)) throw Error('Unexpected actual root inventory');
+ const rehomes = loadStep3OwnerRehomes(ROOT, RUN);
+-const prepared = [], held = [], skipped = [], archives = new Map();
++const prepared = [], held = [], skipped = [], archives = new Map(), derivedArchives = new Map();
++const norm = value => String(value ?? '').replace(/\s+/g, ' ').trim();
+ const modulePath = 'tools/step3-owner-source-identical-continuity.mjs';
+ read(modulePath);
+ const archive = (path, name) => {
+@@ -95,13 +96,16 @@
+       if (contract == null && (!['definition', 'algorithm', 'remark'].includes(meta.kind)
+         || numberedProofSteps(body).length !== 0 || before.contract_sha256 !== hash(null) || current.contract_sha256 !== hash(null))) throw Error('Null contract does not satisfy the native restricted definition/algorithm/remark branch');
+       const claim = sectionText(body, heading);
+-      // Exact complete claim mirror is a prerequisite, never synthesized here.
+-      if (!claim || typeof manifestRow.statement !== 'string' || manifestRow.statement.trim() !== claim.trim()) throw Error('HOLD: manifest lacks exact whole current ' + heading + ' mirror; no expansion/projection performed');
++      // Exact native normalization of the complete section; never substring matching.
++      if (!claim || typeof manifestRow.statement !== 'string' || norm(manifestRow.statement) !== norm(claim)) throw Error('HOLD: manifest lacks whole current ' + heading + ' mirror under native whitespace normalization; no expansion/projection performed');
+       const decisionPath = relative(ROOT, resolve(ROOT, group.decision_path));
+       const document = parsed(decisionPath);
+       const candidates = document.decisions?.filter(d => d.obligation === decision.obligation && d.id === decision.id) ?? [];
+-      if (document.run !== RUN || candidates.length !== 1 || candidates[0].verdict !== 'accepted_repair'
+-        || hash(candidates[0]) !== hash(decision)) throw Error('Actual accepted decision changed since inventory');
++      const nativeDecisionPath = `research/${RUN}-alpha-${group.group}-3a-decisions.json`;
++      const hasDocumentRun = Object.hasOwn(document, 'run');
++      if (decisionPath !== nativeDecisionPath || document.version !== 1 || document.group !== group.group
++        || hasDocumentRun && document.run !== RUN || candidates.length !== 1 || candidates[0].verdict !== 'accepted_repair'
++        || hash(candidates[0]) !== hash(decision)) throw Error('Actual accepted document path/group/run/decision differs from native inventory');
+       const nativeResultPath = `research/${RUN}-dispatch/alpha-3a-batch-${target.batch}.result.json`;
+       const result = parsed(nativeResultPath);
+       if (result.run !== RUN || result.role !== 'alpha' || result.ok !== true || result.exit_code !== 0
+@@ -111,7 +115,22 @@
+       const nativeAssignmentPath = `research/${RUN}-alpha-batch-${target.batch}-3a-order.task.md`;
+       read(nativeReportPath);
+       if (!read(nativeAssignmentPath).text.includes(target.id)) throw Error('Actual current native assignment does not contain item ID');
+-      const acceptedArchive = archive(decisionPath, `alpha-${group.group}-accepted-before-stamp.json`);
++      const originalAcceptedArchive = archive(decisionPath, `alpha-${group.group}-accepted-before-stamp.json`);
++      let acceptedArchive = originalAcceptedArchive;
++      if (!hasDocumentRun) {
++        // The original native document remains archived byte-exact. This is
++        // explicit ROOT-derived run binding, not original native output.
++        const wrapper = { run: RUN, decisions: [candidates[0]], owner_archive_provenance: {
++          root_derived: true, original_document: originalAcceptedArchive,
++          original_group: document.group,
++          reason_missing_run_context: 'Original native version1 decision document omits top-level run. Root binds its unchanged accepted decision to the actual run-local native path/group and genuine successful current Alpha result, assignment and report; no new native authorship, coverage or mathematical acceptance is asserted.',
++          native_result: ref(nativeResultPath), native_assignment: ref(nativeAssignmentPath), native_report: ref(nativeReportPath)
++        } };
++        const filename = `ROOT-derived-${encodeURIComponent(decision.obligation)}-accepted.json`;
++        const raw = Buffer.from(JSON.stringify(wrapper, null, 2) + '\n');
++        derivedArchives.set(filename, raw);
++        acceptedArchive = { path: output.relative + '/archives/' + filename, sha256: sha(raw) };
++      }
+       archive(nativeResultPath, `alpha-batch-${target.batch}.stable-result.json`);
+       archive(nativeReportPath, `alpha-batch-${target.batch}.report.md`);
+       archive(nativeAssignmentPath, `alpha-batch-${target.batch}.assignment.md`);
+@@ -124,6 +143,8 @@
+         accepted_decision_sha256: hash(decision) };
+       prepared.push({ ...label, entry, current_batch: currentBatch, actual_target: target,
+         source_path: sourcePath, current_source_raw_sha256: source.sha256,
++        accepted_archive_kind: hasDocumentRun ? 'byte-exact original native document' : 'explicit ROOT-derived missing-run binding wrapper',
++        original_accepted_document: originalAcceptedArchive,
+         native_strict_contract_validation: 'NOT RUN: mandatory native runtime predicate remains owed',
+         rationale: 'An actual existing native accepted_repair on an original touched, nonadded item is preserved across exact-source-identical current carrier metadata; historical manifest delta remains unknown and no independent execution coverage is adopted.' });
+     } catch (cause) { held.push({ ...label, reason: String(cause?.message ?? cause) }); }
+@@ -133,6 +154,7 @@
+ for (const [absolute, file] of cache) if (!readFileSync(absolute).equals(file.raw)) throw Error('Input changed while preparing packet: ' + file.path);
+ mkdirSync(join(output.absolute, 'archives'), { recursive: true });
+ for (const { filename, file } of archives.values()) writeFileSync(join(output.absolute, 'archives', filename), file.raw, { flag: 'wx' });
++for (const [filename, raw] of derivedArchives) writeFileSync(join(output.absolute, 'archives', filename), raw, { flag: 'wx' });
+ writeFileSync(join(output.absolute, 'input-inventory.json'), read(input.absolute).raw, { flag: 'wx' });
+ writeFileSync(join(output.absolute, 'continuity-module-reviewed.mjs'), read(modulePath).raw, { flag: 'wx' });
+ writeFileSync(join(output.absolute, 'proposed-owner-evidence-fragment.json'), JSON.stringify({ version: 1, run: RUN,

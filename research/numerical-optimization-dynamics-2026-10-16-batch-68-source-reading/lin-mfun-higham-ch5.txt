@@ -1,0 +1,2576 @@
+Functions of Matrices: Theory and Computation
+
+Higham, Nicholas J.
+
+2008
+
+MIMS EPrint: 2008.39
+
+Manchester Institute for Mathematical Sciences
+
+School of Mathematics
+
+The University of Manchester
+
+Reports available from:
+http://eprints.maths.manchester.ac.uk/
+
+And by contacting:
+The MIMS Secretary
+
+School of Mathematics
+
+The University of Manchester
+
+Manchester, M13 9PL, UK
+
+ISSN 1749-9097
+
+
+Chapter 5
+Matrix Sign Function
+
+The scalar sign function is defined for z ∈C lying off the imaginary axis by
+
+sign(z) =
+�
+1,
+Re z > 0,
+−1,
+Re z < 0.
+
+The matrix sign function can be obtained from any of the definitions in Chapter 1.
+Note that in the case of the Jordan canonical form and interpolating polynomial
+definitions, the derivatives sign(k)(z) are zero for k ≥1. Throughout this chapter,
+A ∈Cn×n is assumed to have no eigenvalues on the imaginary axis, so that sign(A)
+is defined. Note that this assumption implies that A is nonsingular.
+As we noted in Section 2.4, if A = ZJZ−1 is a Jordan canonical form arranged
+so that J = diag(J1, J2), where the eigenvalues of J1 ∈Cp×p lie in the open left
+half-plane and those of J2 ∈Cq×q lie in the open right half-plane, then
+
+sign(A) = Z
+�
+−Ip
+0
+0
+Iq
+
+�
+Z−1.
+(5.1)
+
+Two other representations have some advantages. First is the particularly concise
+formula (see (5.5))
+sign(A) = A(A2)−1/2,
+(5.2)
+
+which generalizes the scalar formula sign(z) = z/(z2)1/2. Recall that B1/2 denotes the
+principal square root of B (see Section 1.7). Note that A having no pure imaginary
+eigenvalues is equivalent to A2 having no eigenvalues on R−. Next, sign(A) has the
+integral representation (see Problem 5.3)
+
+sign(A) = 2
+
+π A
+�∞
+
+0
+(t2I + A2)−1 dt.
+(5.3)
+
+Some properties of sign(A) are collected in the following theorem.
+
+Theorem 5.1 (properties of the sign function). Let A ∈Cn×n have no pure imagi-
+nary eigenvalues and let S = sign(A). Then
+
+(a) S2 = I (S is involutory);
+
+(b) S is diagonalizable with eigenvalues ±1;
+
+(c) SA = AS;
+
+(d) if A is real then S is real;
+
+(e) (I + S)/2 and (I −S)/2 are projectors onto the invariant subspaces associated
+with the eigenvalues in the right half-plane and left half-plane, respectively.
+
+107
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+108
+Matrix Sign Function
+
+Proof. The properties follow from (5.1)–(5.3). Of course, properties (c) and (d)
+hold more generally for matrix functions, as we know from Chapter 1 (see Theo-
+rem 1.13 (a) and Theorem 1.18).
+
+Although sign(A) is a square root of the identity matrix, it is not equal to I or
+−I unless the spectrum of A lies entirely in the open right half-plane or open left
+half-plane, respectively. Hence, in general, sign(A) is a nonprimary square root of I.
+Moreover, although sign(A) has eigenvalues ±1, its norm can be arbitrarily large.
+The early appearance of this chapter in the book is due to the fact that the sign
+function plays a fundamental role in iterative methods for matrix roots and the polar
+decomposition. The definition (5.2) might suggest that the sign function is a “special
+case” of the square root. The following theorem, which provides an explicit formula
+for the sign of a block 2×2 matrix with zero diagonal blocks, shows that, if anything,
+the converse is true: the square root can be obtained from the sign function (see
+(5.4)). The theorem will prove useful in the next three chapters.
+
+Theorem 5.2 (Higham, Mackey, Mackey, and Tisseur). Let A, B ∈Cn×n and sup-
+pose that AB (and hence also BA) has no eigenvalues on R−. Then
+
+sign
+��
+0
+A
+B
+0
+
+��
+=
+�
+0
+C
+C−1
+0
+
+�
+,
+
+where C = A(BA)−1/2.
+
+Proof. The matrix P =
+�0
+B
+A
+0
+�
+cannot have any eigenvalues on the imaginary
+axis, because if it did then P 2 =
+�AB
+0
+0
+BA
+�
+would have an eigenvalue on R−. Hence
+sign(P) is defined and
+
+sign(P) = P(P 2)−1/2 =
+�
+0
+A
+B
+0
+
+��
+AB
+0
+0
+BA
+
+�−1/2
+
+=
+�
+0
+A
+B
+0
+
+��
+(AB)−1/2
+0
+0
+(BA)−1/2
+
+�
+
+=
+�
+0
+A(BA)−1/2
+
+B(AB)−1/2
+0
+
+�
+=:
+�
+0
+C
+D
+0
+
+�
+.
+
+Since the square of the matrix sign of any matrix is the identity,
+
+I = (sign(P))2 =
+�
+0
+C
+D
+0
+
+�2
+=
+�
+CD
+0
+0
+DC
+
+�
+,
+
+so D = C−1. Alternatively, Corollary 1.34 may be used to see more directly that
+CD = A(BA)−1/2B(AB)−1/2 is equal to I.
+
+A special case of the theorem, first noted by Higham [274, ], is
+
+sign
+��
+0
+A
+I
+0
+
+��
+=
+�
+0
+A1/2
+
+A−1/2
+0
+
+�
+.
+(5.4)
+
+In addition to the association with matrix roots and the polar decomposition
+(Chapter 8), the importance of the sign function stems from its applications to Ric-
+cati equations (Section 2.4), the eigenvalue problem (Section 2.5), and lattice QCD
+(Section 2.7).
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+5.1 Sensitivity and Conditioning
+109
+
+In this chapter we first give perturbation theory for the matrix sign function and
+identify appropriate condition numbers. An expensive, but stable, Schur method for
+sign(A) is described. Then Newton’s method and a rich Pad´e family of iterations,
+having many interesting properties, are described and analyzed. How to scale and how
+to terminate the iterations are discussed. Then numerical stability is considered, with
+the very satisfactory conclusion that all sign iterations of practical interest are sta-
+ble. Numerical experiments illustrating these various features are presented. Finally,
+best L∞rational approximation via Zolotarev’s formulae, of interest for Hermitian
+matrices, is described.
+As we will see in Chapter 8, the matrix sign function has many connections with
+the polar decomposition, particularly regarding iterations for computing it. Some
+of the results and ideas in Chapter 8 are applicable, with suitable modification, to
+the sign function, but are not discussed here to avoid repetition. See, for example,
+Problem 8.26.
+
+5.1. Sensitivity and Conditioning
+
+Associated with the matrix sign function is the matrix sign decomposition
+
+A = SN,
+S = sign(A),
+N = (A2)1/2.
+(5.5)
+
+To establish the decomposition note that N = S−1A = SA.
+Since S commutes
+with A, N 2 = A2, and since the spectrum of SA lies in the open right half-plane,
+N = (A2)1/2.
+The matrix sign factor N is useful in characterizing the Fr´echet derivative of the
+matrix sign function.
+Let S + ∆S = sign(A + ∆A), where the sign function is assumed to be defined in
+a ball of radius ∥∆A∥about A. The definition (3.6) of Fr´echet derivative says that
+
+∆S −L(A, ∆A) = o(∥∆A∥),
+(5.6)
+
+where L(A, ∆A) is the Fr´echet derivative of the matrix sign function at A in the
+direction ∆A. Now from (A + ∆A)(S + ∆S) = (S + ∆S)(A + ∆A) we have
+
+A∆S −∆SA = S∆A −∆AS + ∆S∆A −∆A∆S = S∆A −∆AS + o(∥∆A∥), (5.7)
+
+since ∆S = O(∥∆A∥). Moreover, (S + ∆S)2 = I gives
+
+S∆S + ∆SS = −∆S2 = o(∥∆A∥).
+
+Premultiplying (5.7) by S and using the latter equation gives
+
+N∆S + ∆SN = ∆A −S∆AS + o(∥∆A∥).
+(5.8)
+
+Theorem 5.3 (Kenney and Laub). The Fr´echet derivative L = Lsign(A, ∆A) of the
+matrix sign function satisfies
+
+NL + LN = ∆A −S∆AS,
+(5.9)
+
+where A = SN is the matrix sign decomposition.
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+110
+Matrix Sign Function
+
+Proof. Since the eigenvalues of N lie in the open right half-plane, the Sylvester
+equation (5.9) has a unique solution L which is a linear function of ∆A and, in view
+of (5.8), differs from ∆S = sign(A + ∆A) −S by o(∥∆A∥). Hence (5.6) implies that
+L = L(A, ∆A).
+
+By applying the vec operator and using the relation (B.16) we can rewrite (5.9)
+as
+P vec(L) = (In2 −ST ⊗S) vec(∆A),
+
+where
+P = I ⊗N + N T ⊗I.
+
+Hence
+
+max
+∥∆A∥F =1 ∥L(A, ∆A)∥F =
+max
+∥∆A∥F =1 ∥P −1(In2 −ST ⊗S) vec(∆A)∥2
+
+= ∥P −1(In2 −ST ⊗S)∥2.
+
+The (relative) condition number of sign(A) in the Frobenius norm is therefore
+
+κsign(A) := condrel(sign, A) = ∥P −1(In2 −ST ⊗S)∥2
+∥A∥F
+∥S∥F
+.
+(5.10)
+
+If S = I, which means that all the eigenvalues of A are in the open right half-plane,
+then cond(S) = 0, which corresponds to the fact that the eigenvalues remain in this
+half-plane under sufficiently small perturbations of A.
+To gain some insight into the condition number, suppose that A is diagonalizable:
+A = ZDZ−1, where D = diag(λi). Then S = ZDSZ−1 and N = ZDNZ−1, where
+DS = diag(σi) and DN = diag(σiλi), with σi = sign(λi). Hence
+
+κsign(A) = ∥(Z−T ⊗Z) · (I ⊗DN + DN ⊗I)−1(In2 −DT
+S ⊗DS) · (ZT ⊗Z−1)∥2
+∥A∥F
+∥S∥F
+.
+
+The diagonal matrix in the middle has elements (1 −σiσj)/(σiλi + σjλj), which are
+either zero or of the form 2/|λi −λj|. Hence
+
+κsign(A) ≤2κ2(Z)2 max
+�
+1
+|λi −λj| : Re λi Re λj < 0
+�∥A∥F
+
+∥S∥F
+.
+(5.11)
+
+Equality holds in this bound for normal A, for which Z can be taken to unitary.
+The gist of (5.11) is that the condition of S is bounded in terms of the minimum
+distance between eigenvalues across the imaginary axis and the square of the condition
+of the eigenvectors. Note that (5.11) is precisely the bound obtained by applying
+Theorem 3.15 to the matrix sign function.
+One of the main uses of κsign is to indicate the sensitivity of sign(A) to perturba-
+tions in A, through the perturbation bound (3.3), which we rewrite here for the sign
+function as
+
+∥sign(A + E) −sign(A)∥F
+
+∥sign(A)∥F
+≤κsign(A)∥E∥F
+
+∥A∥F
++ o(∥E∥F ).
+(5.12)
+
+This bound is valid as long as sign(A+tE) is defined for all t ∈[0, 1]. It is instructive
+to see what can go wrong when this condition is not satisfied. Consider the example,
+from [347, ],
+
+A = diag(1, −ǫ2),
+E = diag(0, 2ǫ2),
+0 < ǫ ≪1.
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+5.1 Sensitivity and Conditioning
+111
+
+We have sign(A) = diag(1, −1) and sign(A + E) = I. Because A is normal, (5.11)
+gives κsign(A) = (2/(1 + ǫ2))∥A∥F /
+√
+
+2. Hence the bound (5.12) takes the form
+
+2
+√
+
+2 ≤
+2
+√
+
+2(1 + ǫ2)2ǫ2 + o(ǫ2) = 2
+√
+
+2ǫ2 + o(ǫ2).
+
+This bound is clearly incorrect. The reason is that the perturbation E causes eigenval-
+ues to cross the imaginary axis; therefore sign(A + tE) does not exist for all t ∈[0, 1].
+Referring back to the analysis at the start of this section, we note that (5.7) is valid
+for ∥∆A∥F < ∥E∥F /3, but does not hold for ∆A = E, since then ∆S ̸= O(∥∆A∥).
+Another useful characterization of the Fr´echet derivative is as the limit of a matrix
+iteration; see Theorem 5.7.
+Consider now how to estimate κsign(A). We need to compute a norm of B =
+P −1(In2 −ST ⊗S). For the 2-norm we can use Algorithm 3.20 (the power method).
+Alternatively, Algorithm 3.22 can be used to estimate the 1-norm. In both cases we
+need to compute L(A, E), which if done via (5.9) requires solving a Sylvester equation
+involving N; this can be done via a matrix sign evaluation (see Section 2.4), since N
+is positive stable. We can compute L⋆(X, E) in a similar fashion, solving a Sylvester
+equation of the same form. Alternatively, L(A, E) can be computed using iteration
+(5.23) or estimated by finite differences. All these methods require O(n3) operations.
+It is also of interest to understand the conditioning of the sign function for A ≈
+sign(A), which is termed the asymptotic conditioning. The next result provides useful
+bounds.
+
+Theorem 5.4 (Kenney and Laub). Let A ∈Cn×n have no pure imaginary eigenval-
+ues and let S = sign(A). If ∥(A −S)S∥2 < 1, then
+
+∥S∥2
+2 −1
+2(1 + ∥(A −S)S∥2) ≤
+κsign(A)
+∥A∥F /∥S∥F
+≤
+∥S∥2
+2 + 1
+2(1 −∥(A −S)S∥2).
+(5.13)
+
+In particular,
+∥S∥2
+2 −1
+2
+≤κsign(S) ≤∥S∥2
+2 + 1
+2
+.
+(5.14)
+
+Proof.
+We need to bound ∥Lsign(A)∥F = κsign(A)∥S∥F /∥A∥F .
+Let ∆S =
+Lsign(A, ∆A). Then by (5.9),
+
+N∆S + ∆SN = ∆A −S∆AS,
+
+where N = SA = AS. Defining G = AS −S2 = N −I, we have
+
+2∆S = ∆A −S∆AS −G∆S −∆SG.
+(5.15)
+
+Taking norms, using (B.7), leads to
+
+∥∆S∥F ≤(∥S∥2
+2 + 1)∥∆A∥F
+2(1 −∥G∥2)
+,
+
+which gives the upper bound.
+Now let σ = ∥S∥2 and Sv = σu, u∗S = σv∗, where u and v are (unit-norm) left
+and right singular vectors, respectively. Putting ∆A = vu∗in (5.15) gives
+
+2∆S = vu∗−Svu∗S −G∆S −∆SG = vu∗−σ2uv∗−G∆S −∆SG.
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+112
+Matrix Sign Function
+
+Hence
+(∥S∥2
+2 −1)∥∆A∥F = (σ2 −1)∥∆A∥F ≤2∥∆S∥F (1 + ∥G∥2),
+
+which implies the lower bound.
+Setting A = S in (5.13) gives (5.14).
+
+Theorem 5.4 has something to say about the attainable accuracy of a computed
+sign function.
+In computing S = sign(A) we surely cannot do better than if we
+computed sign(fl(S)). But Theorem 5.4 says that relative errors in S can be magnified
+when we take the sign by as much as ∥S∥2/2, so we cannot expect a relative error in
+our computed sign smaller than ∥S∥2u/2, whatever the method used.
+
+5.2. Schur Method
+
+The first method that we consider for computing sign(A) is expensive but has excellent
+numerical stability.
+Because the method utilizes a Schur decomposition it is not
+suitable for the applications in Sections 2.4 and 2.5, since those problems can be
+solved directly by the use of a Schur decomposition, without explicitly forming the
+sign function.
+Let A ∈Cn×n have the Schur decomposition A = QTQ∗, where Q is unitary
+and T is upper triangular.
+Then sign(A) = Q sign(T)Q∗(see Theorem 1.13 (c)).
+The problem therefore reduces to computing U = sign(T), and clearly U is upper
+triangular with uii = sign(tii) = ±1 for all i. We will determine uij from the equation
+U 2 = I when possible (namely, when uii + ujj ̸= 0), and from TU = UT otherwise
+(in which case tii ̸= tjj), employing the Parlett recurrence (Algorithm 4.13) in this
+second case.
+
+Algorithm 5.5 (Schur method). Given A ∈Cn×n having no pure imaginary eigen-
+values, this algorithm computes S = sign(A) via a Schur decomposition.
+
+1
+Compute a (complex) Schur decomposition A = QTQ∗.
+
+2
+uii = sign(tii), i = 1: n
+3
+for j = 2: n
+4
+for i = j −1: −1: 1
+
+5
+uij =
+
+
+
+
+
+
+
+
+
+
+
+
+−
+
+�j−1
+k=i+1 uikukj
+
+uii + ujj
+,
+uii + ujj ̸= 0,
+
+tij
+uii −ujj
+
+tii −tjj
++
+
+�j−1
+k=i+1(uiktkj −tikukj)
+
+tii −tjj
+,
+uii + ujj = 0.
+
+6
+end
+7
+end
+
+8
+S = QUQ∗
+
+Cost: 25n3 flops for the Schur decomposition plus between n3/3 and 2n3/3 flops for
+U and 3n3 flops to form S: about 28 2
+
+3n3 flops in total.
+It is worth noting that the sign of an upper triangular matrix T will usually
+have some zero elements in the upper triangle. Indeed, suppose for some j > i that
+tii, ti+1,i+1, . . . , tjj all have the same sign, and let Tij = T(i: j, i: j). Then, since
+all the eigenvalues of Tij have the same sign, the corresponding block S(i: j, i: j) of
+S = sign(T) is ±I. This fact could be exploited by reordering the Schur form so that
+the diagonal of T is grouped according to sign. Then sign(T) would have the form
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+5.3 Newton’s Method
+113
+
+�±I
+0
+W
+∓I
+�
+, where W is computed by the Parlett recurrence. The cost of the reordering
+may or may not be less than the cost of (redundantly) computing zeros from the first
+expression for uij in Algorithm 5.5.
+
+5.3. Newton’s Method
+
+The most widely used and best known method for computing the sign function is the
+Newton iteration, due to Roberts:
+
+Newton iteration (matrix sign function):
+
+Xk+1 = 1
+
+2(Xk + X−1
+k ),
+X0 = A.
+(5.16)
+
+The connection of this iteration with the sign function is not immediately obvious,
+but in fact the iteration can be derived by applying Newton’s method to the equation
+X2 = I (see Problem 5.8), and of course sign(A) is one solution of this equation
+(Theorem 5.1 (a)). The following theorem describes the convergence of the iteration.
+
+Theorem 5.6 (convergence of the Newton sign iteration). Let A ∈Cn×n have no
+pure imaginary eigenvalues. Then the Newton iterates Xk in (5.16) converge quadrat-
+ically to S = sign(A), with
+
+∥Xk+1 −S∥≤1
+
+2∥X−1
+k ∥∥Xk −S∥2
+(5.17)
+
+for any consistent norm. Moreover, for k ≥1,
+
+Xk = (I −G2k
+0 )−1(I + G2k
+0 )S,
+where G0 = (A −S)(A + S)−1.
+(5.18)
+
+Proof. For λ = reiθ we have λ+λ−1 = (r+r−1) cos θ+i(r−r−1) sin θ, and hence
+eigenvalues of Xk remain in their open half-plane under the mapping (5.16). Hence
+Xk is defined and nonsingular for all k. Moreover, sign(Xk) = sign(X0) = S, and so
+Xk + S = Xk + sign(Xk) is also nonsingular.
+Clearly the Xk are (rational) functions of A and hence, like A, commute with S.
+Then
+
+Xk+1 ± S = 1
+
+2
+�
+Xk + X−1
+k
+± 2S
+�
+
+= 1
+
+2X−1
+k
+�
+X2
+k ± 2XkS + I
+�
+
+= 1
+
+2X−1
+k (Xk ± S)2,
+(5.19)
+
+and hence
+(Xk+1 −S)(Xk+1 + S)−1 =
+�
+(Xk −S)(Xk + S)−1�2 .
+
+Defining Gk = (Xk −S)(Xk + S)−1, we have Gk+1 = G2
+k = · · · = G2k+1
+0
+.
+Now
+G0 = (A −S)(A + S)−1 has eigenvalues (λ −sign(λ))/(λ + sign(λ)), where λ ∈Λ(A),
+all of which lie inside the unit circle since λ is not pure imaginary. Since Gk = G2k
+0
+and ρ(G0) < 1, by a standard result (B.9) Gk →0 as k →∞. Hence
+
+Xk = (I −Gk)−1(I + Gk)S →S
+as k →∞.
+(5.20)
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+114
+Matrix Sign Function
+
+The norm inequality (5.17), which displays the quadratic convergence, is obtained by
+taking norms in (5.19) with the minus sign.
+
+Theorem 5.6 reveals quadratic convergence of the Newton iteration, but also dis-
+plays in (5.18) precisely how convergence occurs: through the powers of the matrix
+G0 converging to zero. Since for any matrix norm,
+
+∥G2k
+0 ∥≥ρ(G2k
+0 ) =
+�
+max
+λ∈Λ(A)
+|λ −sign(λ)|
+|λ + sign(λ)|.
+�2k
+
+,
+(5.21)
+
+It is clear that convergence will be slow if either ρ(A) ≫1 or A has an eigenvalue
+close to the imaginary axis. We return to the speed of convergence in Section 5.5.
+For the behaviour of the iteration when it does not converge, see Problem 5.11.
+The Newton iteration provides one of the rare circumstances in numerical analysis
+where the explicit computation of a matrix inverse is required. One way to try to
+remove the inverse from the formula is to approximate it by one step of Newton’s
+method for the matrix inverse, which has the form Yk+1 = Yk(2I−BYk) for computing
+B−1; this is known as the Newton–Schulz iteration [512, ] (see Problem 7.8).
+Replacing X−1
+k
+by Xk(2I −X2
+k) in (5.16) (having taken Yk = B = Xk) gives
+
+Newton–Schulz iteration:
+
+Xk+1 = 1
+
+2Xk(3I −X2
+k),
+X0 = A.
+(5.22)
+
+This iteration is multiplication-rich and retains the quadratic convergence of Newton’s
+method.
+However, it is only locally convergent, with convergence guaranteed for
+∥I −A2∥< 1; see Theorem 5.8.
+The Newton iteration also provides a way of computing the Fr´echet derivative of
+the sign function.
+
+Theorem 5.7 (Kenney and Laub). Let A ∈Cn×n have no pure imaginary eigenval-
+ues. With Xk defined by the Newton iteration (5.16), let
+
+Yk+1 = 1
+
+2(Yk −X−1
+k YkX−1
+k ),
+Y0 = E.
+(5.23)
+
+Then limk→∞Yk = Lsign(A, E).
+
+Proof. Denote by Bk the Newton sign iterates (5.16) for the matrix B =
+�A
+0
+E
+A
+�
+,
+which clearly has no pure imaginary eigenvalues. It is easy to show by induction that
+Bk =
+�Xk
+0
+Yk
+Xk
+�
+. By Theorem 5.6 and (3.16) we have
+
+Bk →sign(B) =
+�
+sign(A)
+Lsign(A, E)
+0
+sign(A)
+
+�
+.
+
+The result follows on equating the (1,2) blocks.
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+5.4 The Pad´e Family of Iterations
+115
+
+5.4. The Pad´e Family of Iterations
+
+The Newton iteration is by no means the only rational matrix iteration for computing
+the matrix sign function. A variety of other iterations have been derived, with various
+aims, including to avoid matrix inversion in favour of matrix multiplication, to achieve
+a higher order of convergence, and to be better suited to parallel computation. Ad hoc
+manipulations can be used to derive new iterations, as we now indicate for the scalar
+case. By setting yk = x−1
+k
+in the Newton formula xk+1 = (xk + x−1
+k )/2, we obtain
+the “inverse Newton” variant
+
+yk+1 =
+2yk
+y2
+k + 1,
+y0 = a,
+(5.24)
+
+which has quadratic convergence to sign(a).
+Combining two Newton steps yields
+yk+2 = (y4
+k + 6y2
+k + 1)/(4yk(y2
+k + 1)), and we can thereby define the quartically con-
+vergent iteration
+
+yk+1 = y4
+k + 6y2
+k + 1
+4yk(y2
+k + 1) ,
+y0 = a.
+
+While a lot can be done using arguments such as these, a more systematic development
+is preferable. We describe an elegant Pad´e approximation approach, due to Kenney
+and Laub [343, ], that yields a whole table of methods containing essentially all
+those of current interest.
+For non–pure imaginary z ∈C we can write
+
+sign(z) =
+z
+(z2)1/2 =
+z
+(1 −(1 −z2))1/2 =
+z
+(1 −ξ)1/2 ,
+(5.25)
+
+where ξ = 1 −z2. Hence the task of approximating sign(z) leads to that of approxi-
+mating
+h(ξ) = (1 −ξ)−1/2,
+(5.26)
+
+where we may wish to think of ξ as having magnitude less than 1.
+Now h is a
+particular case of a hypergeometric function and hence much is known about [ℓ/m]
+Pad´e approximants rℓm(ξ) = pℓm(ξ)/qℓm(ξ) to h, including explicit formulae for pℓm
+and qℓm. (See Section 4.4.2 for the definition of Pad´e approximants.) Kenney and
+Laub’s idea is to set up the family of iterations
+
+xk+1 = fℓm(xk) := xk
+pℓm(1 −x2
+k)
+qℓm(1 −x2
+k),
+x0 = a.
+(5.27)
+
+Table 5.1 shows the first nine iteration functions fℓm from this family. Note that f11
+gives Halley’s method (see Problem 5.12), while f10 gives the Newton–Schulz iteration
+(5.22). The matrix versions of the iterations are defined in the obvious way:
+
+Pad´e iteration:
+
+Xk+1 = Xk pℓm(I −X2
+k)qℓm(I −X2
+k)−1,
+X0 = A.
+(5.28)
+
+Two key questions are “what can be said about the convergence of (5.28)?” and “how
+should the iteration be evaluated?”
+The convergence question is answered by the following theorem.
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+116
+Matrix Sign Function
+
+Table 5.1. Iteration functions fℓm from the Pad´e family (5.27).
+
+m = 0
+m = 1
+m = 2
+
+ℓ= 0
+x
+2x
+1 + x2
+8x
+3 + 6x2 −x4
+
+ℓ= 1
+x
+2 (3 −x2)
+x(3 + x2)
+
+1 + 3x2
+4x(1 + x2)
+1 + 6x2 + x4
+
+ℓ= 2
+x
+8 (15 −10x2 + 3x4)
+x
+4
+(15 + 10x2 −x4)
+
+1 + 5x2
+x(5 + 10x2 + x4)
+
+1 + 10x2 + 5x4
+
+Theorem 5.8 (convergence of Pad´e iterations). Let A ∈Cn×n have no pure imagi-
+nary eigenvalues. Consider the iteration (5.28) with ℓ+ m > 0 and any subordinate
+matrix norm.
+
+(a) For ℓ≥m−1, if ∥I −A2∥< 1 then Xk →sign(A) as k →∞and ∥I −X2
+k∥<
+∥I −A2∥(ℓ+m+1)k.
+
+(b) For ℓ= m −1 and ℓ= m,
+
+(S −Xk)(S + Xk)−1 =
+�
+(S −A)(S + A)−1�(ℓ+m+1)k
+
+and hence Xk →sign(A) as k →∞.
+
+Proof. See Kenney and Laub [343, ].
+
+Theorem 5.8 shows that the iterations with ℓ= m −1 and ℓ= m are globally
+convergent, while those with ℓ≥m + 1 have local convergence, the convergence rate
+being ℓ+ m + 1 in every case.
+We now concentrate on the cases ℓ= m −1 and ℓ= m which we call the principal
+Pad´e iterations. For these ℓand m we define
+
+gr(x) ≡gℓ+m+1(x) = fℓm(x).
+(5.29)
+
+The gr are the iteration functions from the Pad´e table taken in a zig-zag fashion from
+the main diagonal and first superdiagonal:
+
+g1(x) = x,
+g2(x) =
+2x
+1 + x2 ,
+g3(x) = x(3 + x2)
+
+1 + 3x2 ,
+
+g4(x) =
+4x(1 + x2)
+1 + 6x2 + x4 ,
+g5(x) = x(5 + 10x2 + x4)
+
+1 + 10x2 + 5x4 ,
+g6(x) =
+x(6 + 20x2 + 6x4)
+1 + 15x2 + 15x4 + x6 .
+
+We know from Theorem 5.8 that the iteration Xk+1 = gr(Xk) converges to sign(X0)
+with order r whenever sign(X0) is defined. These iterations share some interesting
+properties that are collected in the next theorem.
+
+Theorem 5.9 (properties of principal Pad´e iterations). The principal Pad´e iteration
+function gr defined in (5.29) has the following properties.
+
+(a) gr(x) = (1 + x)r −(1 −x)r
+
+(1 + x)r + (1 −x)r .
+In other words, gr(x) = pr(x)/qr(x), where
+
+pr(x) and qr(x) are, respectively, the odd and even parts of (1 + x)r.
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+5.4 The Pad´e Family of Iterations
+117
+
+(b) gr(x) = tanh(r arctanh(x)).
+
+(c) gr(gs(x)) = grs(x) (the semigroup property).
+
+(d) gr has the partial fraction expansion
+
+gr(x) = 2
+
+r
+
+⌈r−2
+
+2
+⌉
+�′
+
+i=0
+
+x
+
+sin2�
+(2i+1)π
+
+2r
+�
++ cos2
+�
+(2i+1)π
+
+2r
+�
+x2 ,
+(5.30)
+
+where the prime on the summation symbol denotes that the last term in the sum is
+halved when r is odd.
+
+Proof.
+
+(a) See Kenney and Laub [343, 1991, Thm. 3.2].
+
+(b) Recalling that tanh(x) = (ex −e−x)/(ex + e−x), it is easy to check that
+
+arctanh(x) = 1
+
+2 log
+�1 + x
+
+1 −x
+
+�
+.
+
+Hence
+
+r arctanh(x) = log
+�1 + x
+
+1 −x
+
+�r/2
+.
+
+Taking the tanh of both sides gives
+
+tanh(r arctanh(x)) =
+
+�1 + x
+
+1 −x
+
+�r/2
+−
+�1 −x
+
+1 + x
+
+�r/2
+
+�1 + x
+
+1 −x
+
+�r/2
++
+�1 −x
+
+1 + x
+
+�r/2 = (1 + x)r −(1 −x)r
+
+(1 + x)r + (1 −x)r = gr(x).
+
+(c) Using (b) we have
+
+gr(gs(x)) = tanh(r arctanh(tanh(s arctanh(x)))) = tanh(rs arctanh(x))
+
+= grs(x).
+
+(d) The partial fraction expansion is obtained from a partial fraction expansion for
+the hyperbolic tangent; see Kenney and Laub [345, , Thm. 3].
+
+Some comments on the theorem are in order. The equality in (a) is a scalar equiv-
+alent of (b) in Theorem 5.8, and it provides an easy way to generate the gr. Property
+(c) says that one rth order principal Pad´e iteration followed by one sth order iteration
+is equivalent to one rsth order iteration. Whether or not it is worth using higher order
+iterations therefore depends on the efficiency with which the different iterations can
+be evaluated. The properties in (b) and (c) are analogous to properties of the Cheby-
+shev polynomials. Figure 5.1 confirms, for real x, that gr(x) = tanh(r arctanh(x))
+approximates sign(x) increasingly well near the origin as r increases.
+Some more insight into the convergence, or nonconvergence, of the iteration xk+1 =
+gr(xk) from (5.29) can be obtained by using Theorem 5.8 (b) to write, in polar form,
+
+ρk+1eiθk+1 := (s −xk+1)(s + xk+1)−1 :=
+�
+(s −xk)(s + xk)−1�r =
+�
+ρkeiθk�r,
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+118
+Matrix Sign Function
+
+−3
+−2
+−1
+0
+1
+2
+3
+
+−1
+
+−0.5
+
+0
+
+0.5
+
+1
+
+r =  2
+r =  4
+r =  8
+r = 16
+
+Figure 5.1. The function gr(x) = tanh(r arctanh(x)) for r = 2, 4, 8, 16.
+
+where s = sign(x0). Hence
+
+ρk+1 = ρr
+k,
+θk+1 = rθk.
+
+These relations illustrate the convergence of xk to s for x0 off the imaginary axis,
+since ρ0 < 1. But they also reveal a chaotic aspect to the convergence through θk,
+which, in view of the periodicity of eiθk, can be written
+
+θk+1 = rθk mod 2π.
+(5.31)
+
+This recurrence can be described as a linear congruential random number generator
+[211, , Sec. 1.2], [357, , Sec. 3.2], though with a real, rather than integer,
+modulus. If x0 is pure imaginary then the iteration does not converge: ρk ≡1, xk
+remains pure imaginary for all k, and (s −xk)(s + xk)−1 wanders chaotically around
+the circle of radius 1 centred at the origin; see also Problem 5.11.
+We turn now to evaluation of the matrix iteration Xj+1 = gr(Xj). As discussed
+in Section 4.4.2, several approaches are possible, based on different representations of
+the rational iteration function gk. Evaluating gk(Xj) as the ratio of two polynomials
+may require more flops than via the partial fraction expansion (5.30). For example,
+evaluating g3 from the formula x(3 + x2)/(1 + 3x2) at an n × n matrix requires 6 2
+
+3n3
+
+flops, whereas (5.30) can be written as
+
+g3(x) = 1
+
+3
+
+�
+x +
+8x
+1 + 3x2
+
+�
+(5.32)
+
+and evaluated in 4 2
+
+3n3 flops. An attractive feature of the partial fraction expansion
+(5.30) is that it comprises ⌈r−2
+
+2 ⌉independent matrix inversions (or multiple right-
+hand side linear systems), which can be carried out in parallel.
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+5.5 Scaling the Newton Iteration
+119
+
+5.5. Scaling the Newton Iteration
+
+For scalar a, the Newton iteration (5.16) is
+
+xk+1 = 1
+
+2(xk + x−1
+k ),
+x0 = a,
+(5.33)
+
+which converges to sign(a) = ±1 if a is not pure imaginary. This is precisely Newton’s
+method for the square root of 1 and convergence is at a quadratic rate, as described by
+(5.17). Once the error is sufficiently small (in practice, less than, say, 0.5), successive
+errors decrease rapidly, each being approximately the square of the previous one (see
+(5.19)). However, initially convergence can be slow: if |xk| ≫1 then xk+1 ≈xk/2
+and the iteration is an expensive way to divide by 2! From (5.18) and (5.21) we also
+see that slow convergence will result when a is close to the imaginary axis. Therefore
+a way is needed of speeding up the initial phase of convergence in these unfavourable
+cases. For matrices, the same comments apply to the eigenvalues, because the New-
+ton iteration (5.16) is effectively performing the scalar iteration (5.33) independently
+on each eigenvalue. However, the behaviour of the matrix iteration is not entirely
+determined by the eigenvalues: nonnormality of A can delay, though not prevent,
+convergence, as the following finite termination result shows.
+
+Theorem 5.10 (Kenney and Laub). For the Newton iteration (5.16), if Xk has eigen-
+values ±1 for some k then Xk+p = sign(A) for 2p ≥m, where m is the size of the
+largest Jordan block of Xk (which is no larger than the size of the largest Jordan block
+of A).
+
+Proof. Let Xk have the Jordan form Xk = ZJkZ−1, where Jk = D + Nk, with
+D = diag(±1) = sign(Jk) and Nk strictly upper triangular. Nk has index of nilpotence
+m, that is, N m
+k = 0 but all lower powers are nonzero. We can restrict our attention
+to the convergence of the sequence beginning with Jk to diag(±1), and so we can set
+Z = I. The next iterate, Xk+1 = D + Nk+1, satisfies, in view of (5.19),
+
+Nk+1 = 1
+
+2X−1
+k N 2
+k.
+
+Since Nk has index of nilpotence m, Nk+1 must have index of nilpotence ⌈m/2⌉. Ap-
+plying this argument repeatedly shows that for 2p ≥m, Nk+p has index of nilpotence
+1 and hence is zero, as required. That m is no larger than the order of the largest
+Jordan block of A follows from Theorem 1.36.
+
+An effective way to enhance the initial speed of convergence is to scale the iterates:
+prior to each iteration, Xk is replaced by µkXk, giving the scaled Newton iteration
+
+Scaled Newton iteration:
+
+Xk+1 = 1
+
+2
+�
+µkXk + µ−1
+k X−1
+k
+�
+,
+X0 = A.
+(5.34)
+
+As long as µk is real and positive, the sign of the iterates is preserved. Three main
+scalings have been proposed:
+
+determinantal scaling:
+µk = | det(Xk)|−1/n,
+(5.35)
+
+spectral scaling:
+µk =
+�
+
+ρ(X−1
+k )/ρ(Xk),
+(5.36)
+
+norm scaling:
+µk =
+�
+
+∥X−1
+k ∥/∥Xk∥.
+(5.37)
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+120
+Matrix Sign Function
+
+For determinantal scaling, | det(µkXk)| = 1, so that the geometric mean of the eigen-
+values of µkXk has magnitude 1. This scaling has the property that µk minimizes
+d(µkXk), where
+
+d(X) =
+
+n
+�
+
+i=1
+(log |λi|)2
+
+and the are λi the eigenvalues of X. Hence determinantal scaling tends to bring the
+eigenvalues closer to the unit circle; see Problem 5.13.
+When evaluating the determinantal scaling factor (5.35) some care is needed to
+avoid unnecessary overflow and underflow, especially when n is large.
+The quan-
+tity µk should be within the range of the floating point arithmetic, since its re-
+ciprocal has magnitude the geometric mean of the eigenvalues of Xk and hence
+lies between the moduli of the smallest and largest eigenvalues. But det(Xk) can
+underflow or overflow.
+Assuming that an LU factorization PXk = LkUk is com-
+puted, where Uk has diagonal elements uii, we can rewrite µk = |u11 . . . unn|−1/n as
+µk = exp((−1/n) �n
+i=1 log |uii|). The latter expression avoids underflow and over-
+flow; however, cancellation in the summation can produce an inaccurate computed
+µk, so it may be desirable to use one of the summation methods from Higham [276,
+, Chap. 4].
+For spectral scaling, if λn, . . . , λ1 are the eigenvalues of Xk ordered by increasing
+magnitude, then µk = |λ1λn|−1/2 and so µkXk has eigenvalues of smallest and largest
+magnitude |µkλn| = |λn/λ1|1/2 and |µkλ1| = |λ1/λn|1/2. If λ1 and λn are real, then
+in the Cayley metric
+
+C(x, sign(x)) :=
+�
+|x −1|/|x + 1|,
+Re x > 0,
+|x + 1|/|x −1|,
+Re x < 0,
+
+µkλn is the same distance from sign(λn) as µkλ1 is from sign(λ1), so in this case
+spectral scaling equalizes the extremal eigenvalue errors in the Cayley metric. The
+norm scaling (5.37) can be regarded as approximating the spectral scaling.
+What can be said about the effectiveness of these scaling strategies? In general,
+all of them work well, but there are some specific advantages and disadvantages.
+Spectral scaling is essentially optimal when all the eigenvalues of A are real; indeed
+it yields finite termination, as the following result shows.
+
+Theorem 5.11 (Barraud). Let the nonsingular matrix A ∈Cn×n have all real eigen-
+values and let S = sign(A). Then, for the Newton iteration (5.34) with spectral scaling,
+Xd+p−1 = sign(A), where d is the number of distinct eigenvalues of A and 2p ≥m,
+where m is the size of the largest Jordan block of A.
+
+Proof. We will need to use the following easily verified properties of the iteration
+function f(x) = 1
+
+2(x + 1/x):
+
+f(x) = f(1/x),
+(5.38a)
+0 ≤x2 ≤x1 ≤1
+or
+1 ≤x1 ≤x2
+⇒
+1 ≤f(x1) ≤f(x2).
+(5.38b)
+
+Let the eigenvalues of X0 = A, which we know to be real, be ordered |λn| ≤· · · ≤|λ1|.
+Then, from (5.36), µ0 = |λnλ1|−1/2, and the eigenvalues of µ0X0 have moduli lying
+between |µ0λn| = |λn/λ1|1/2 and |µ0λ1| = |λ1/λn|1/2. These values are reciprocals,
+and hence by (5.38a), and since the eigenvalues are real, λn and λ1 are mapped
+to values with the same modulus.
+By (5.38b) these values are the eigenvalues of
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+5.6 Terminating the Iterations
+121
+
+X1 of largest modulus.
+Hence X1 has eigenvalues λ(1)
+i
+satisfying |λ(1)
+n | ≤· · · ≤
+|λ(1)
+2 | = |λ(1)
+1 |.
+Each subsequent iteration increases by at least 1 the number of
+eigenvalues with maximal modulus until, after d −1 iterations, Xd−1 has eigenvalues
+of constant modulus. Then µd−1Xd−1 has converged eigenvalues ±1 (as does Xd).
+By Theorem 5.10, at most a further p iterations after Xd−1 are needed to dispose of
+the Jordan blocks (and during these iterations µk ≡1, since the eigenvalues are fixed
+at ±1).
+
+For 1 × 1 matrices spectral scaling and determinantal scaling are equivalent, and
+both give convergence in at most two iterations (see Problem 5.14). For 2×2 matrices
+spectral scaling and determinantal scaling are again equivalent, and Theorem 5.11
+tells us that we have convergence in at most two iterations if the eigenvalues are
+real. However, slightly more is true: both scalings give convergence in at most two
+iterations for any real 2 × 2 matrix (see Problem 5.14).
+Determinantal scaling can be ineffective when there is a small group of outlying
+eigenvalues and the rest are nearly converged.
+Suppose that A has an eigenvalue
+10q (q ≥1) with the rest all ±1. Then determinantal scaling gives µk = 10−q/n,
+whereas spectral scaling gives µk = 10−q/2; the former quantity is close to 1 and hence
+the determinantally scaled iteration will behave like the unscaled iteration. Spectral
+scaling can be ineffective when the eigenvalues of A cluster close to the imaginary
+axis (see the numerical examples in Section 5.8).
+All three scaling schemes are inexpensive to implement. The determinant det(Xk)
+can be computed at negligible cost from the LU factorization that will be used to
+compute X−1
+k . The spectral scaling parameter can be cheaply estimated by applying
+the power method to Xk and its inverse, again exploiting the LU factorization in the
+latter case. Note, however, that for a real spectrum spectral scaling increases the
+number of eigenvalues with maximal modulus on each iteration, which makes reliable
+implementation of the power method more difficult. The norm scaling is trivial to
+compute for the Frobenius norm, and for the 2-norm can be estimated using the power
+method (Algorithm 3.19).
+The motivation for scaling is to reduce the length of the initial phase during
+which the error is reduced below 1. Should we continue to scale throughout the whole
+iteration? All three scaling parameters (5.35)–(5.37) converge to 1 as Xk →S, so
+scaling does not destroy the quadratic convergence. Nor does it bring any benefit, so
+it is sensible to set µk ≡1 once the error is sufficiently less than 1.
+
+5.6. Terminating the Iterations
+
+Crucial to the success of any sign iteration is an inexpensive and effective way to decide
+when to terminate it. We begin with a lemma that provides some bounds that help
+guide the choice of stopping criterion in both relative error-based and residual-based
+tests.
+
+Lemma 5.12 (Kenney, Laub, Pandey, and Papadopoulos). Let A ∈Cn×n have no
+pure imaginary eigenvalues, let S = sign(A), and let ∥· ∥be any subordinate matrix
+norm. If ∥S(A −S)∥= ǫ < 1 then
+
+�1 −ǫ
+
+2 + ǫ
+
+�
+∥A −A−1∥≤∥A −S∥≤
+�1 + ǫ
+
+2 −ǫ
+
+�
+∥A −A−1∥
+(5.39)
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+122
+Matrix Sign Function
+
+and
+∥A2 −I∥
+∥S∥(∥A∥+ ∥S∥) ≤∥A −S∥
+
+∥S∥
+≤∥A2 −I∥.
+(5.40)
+
+The lower bound in (5.40) always holds.
+
+Proof. Let E = A −S. Since S2 = I, we have A = S + E = (I + ES)S. It is
+then straightforward to show that
+
+E(2I + ES) = (A −A−1)(I + ES),
+
+using the fact that A and S, and hence also E and S, commute. The upper bound
+in (5.39) is obtained by postmultiplying by (2I + ES)−1 and taking norms, while
+postmultiplying by (I + ES)−1 and taking norms gives the lower bound.
+The lower bound in (5.40) is obtained by taking norms in A2−I = (A−S)(A+S).
+For the upper bound, we write the last equation as A −S = (A2 −I)(A + S)−1 and
+need to bound ∥(A + S)−1∥. Since A + S = 2S(I + 1
+
+2S(A −S)), we have
+
+∥(A + S)−1∥= 1
+
+2∥S−1�
+I + 1
+
+2S(A −S)
+�−1∥≤
+
+1
+2∥S−1∥
+
+1 −1
+
+2ǫ ≤∥S∥.
+
+Note that since the iterations of interest satisfy sign(Xk) = sign(A), the bounds
+of Lemma 5.12 are applicable with A replaced by an iterate Xk.
+We now describe some possible convergence criteria, using η to denote a con-
+vergence tolerance proportional to both the unit roundoff (or a larger value if full
+accuracy is not required) and a constant depending on the matrix dimension, n. A
+norm will denote any easily computable norm such as the 1-, ∞-, or Frobenius norms.
+We begin with the Newton iteration, describing a variety of existing criteria followed
+by a new one.
+A natural stopping criterion, of negligible cost, is
+
+δk+1 := ∥Xk+1 −Xk∥
+
+∥Xk+1∥
+≤η.
+(5.41)
+
+As discussed in Section 4.9, this criterion is really bounding the error in Xk, rather
+than Xk+1, so it may stop one iteration too late. This drawback can be seen very
+clearly from (5.39): since Xk+1−Xk = 1
+
+2(X−1
+k −Xk), (5.39) shows that ∥Xk+1−Xk∥≈
+∥S −Xk∥is an increasingly good approximation as the iteration converges.
+The test (5.41) could potentially never be satisfied in floating point arithmetic.
+The best bound for the error in the computed �Zk = fl(X−1
+k ), which we assume to
+be obtained by Gaussian elimination with partial pivoting, is of the form [276, ,
+Sec. 14.3]
+∥�Zk −X−1
+k ∥
+∥X−1
+k ∥
+≤cnuκ(Xk),
+(5.42)
+
+where cn is a constant. Therefore for the computed sequence Xk, ∥Xk+1 −Xk∥≈
+1
+2∥�Zk −Xk∥might be expected to be proportional to κ(Xk)∥Xk∥u, suggesting the
+test δk+1 ≤κ(Xk)η. Close to convergence, Xk+1 ≈Xk ≈S = S−1 and so κ(Xk) ≈
+∥Xk+1∥2. A test δk+1 ≤∥Xk+1∥2η is also suggested by the asymptotic conditioning
+of the sign function, discussed at the end of Section 5.1. On the other hand, a test of
+the form δk+1 ≤∥Xk+1∥η is suggested by Byers, He, and Mehrmann [89, ], based
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+5.7 Numerical Stability of Sign Iterations
+123
+
+on a perturbation bound for the sign function. To summarize, there are arguments
+for using the stopping criterion
+
+δk+1 ≤∥Xk+1∥p η
+(5.43)
+
+for each of p = 0, 1, and 2.
+A different approach is based on the bound (5.17): ∥Xk+1 −S∥≤1
+
+2∥X−1
+k ∥∥Xk −
+S∥2. Since ∥Xk+1 −Xk∥≈∥S −Xk∥close to convergence, as noted above,
+
+∥Xk+1 −S∥<∼
+1
+2∥X−1
+k ∥∥Xk+1 −Xk∥2.
+
+Hence we can expect ∥Xk+1 −S∥/∥Xk+1∥<∼η if
+
+∥Xk+1 −Xk∥≤
+�
+2η ∥Xk+1∥
+
+∥X−1
+k ∥
+
+�1/2
+.
+(5.44)
+
+This is essentially the same test as (4.25), bearing in mind that in the latter bound
+c = ∥S−1∥/2 ≈∥X−1
+k ∥/2.
+This bound should overcome the problem of (5.41) of
+stopping one iteration too late, but unlike (5.43) with p = 1, 2 it takes no explicit
+account of rounding error effects. A test of this form has been suggested by Benner
+and Quintana-Ort´ı [55, ]. The experiments in Section 5.8 give further insight.
+For general sign iterations, intuitively appealing stopping criteria can be devised
+based on the fact that trace(sign(A)) is an integer, but these are of little practical
+use; see Problem 5.16.
+The upper bound in (5.40) shows that ∥A −Xk∥/∥Xk∥≤∥X2
+k −I∥and hence
+suggests stopping when
+∥X2
+k −I∥≤η.
+(5.45)
+
+This test is suitable for iterations that already form X2
+k, such as the Schulz iteration
+(5.22). Note, however, that the error in forming fl(X2
+k −I) is bounded at best by
+cnu∥Xk∥2 ≈cnu∥S∥2, so when ∥S∥is large it may not be possible to satisfy (5.45),
+and a more suitable test is then
+
+∥X2
+k −I∥
+∥Xk∥2
+≤η.
+
+5.7. Numerical Stability of Sign Iterations
+
+The question of the stability of sign iterations, where stability is defined in Defini-
+tion 4.17, has a particularly nice answer for all the iterations of interest.
+
+Theorem 5.13 (stability of sign iterations). Let S = sign(A), where A ∈Cn×n has
+no pure imaginary eigenvalues.
+Let Xk+1 = g(Xk) be superlinearly convergent to
+sign(X0) for all X0 sufficiently close to S and assume that g is independent of X0.
+Then the iteration is stable, and the Fr´echet derivative of g at S is idempotent and is
+given by Lg(S, E) = L(S, E) = 1
+
+2(E −SES), where L(S) is the Fr´echet derivative of
+the matrix sign function at S.
+
+Proof. Since the sign function is idempotent, stability, the idempotence of Lg,
+and the equality of Lg(S) and L(S), follow from Theorems 4.18 and 4.19. The formula
+for L(S, E) is obtained by taking N = I in Theorem 5.3.
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+124
+Matrix Sign Function
+
+Theorem 5.13 says that the Fr´echet derivative at S is the same for any superlinearly
+convergent sign iteration and that this Fr´echet derivative is idempotent. Unbounded
+propagation of errors near the solution is therefore not possible for any such iteration.
+The constancy of the Fr´echet derivative is not shared by iterations for all the functions
+in this book, as we will see in the next chapter.
+Turning to limiting accuracy (see Definition 4.20), Theorem 5.13 yields ∥Lg(S, E)∥≤
+1
+2(1+∥S∥2)∥E∥, so an estimate for the limiting accuracy of any superlinearly conver-
+gent sign iteration is ∥S∥2u. Hence if, for example, κ(S) = ∥S∥2 ≤u−1/2, then we
+can hope to compute the sign function to half precision.
+If S commutes with E then Lg(S, E) = 0, which shows that such errors E are
+eliminated by the iteration to first order. To compare with what convergence con-
+siderations say about E, note first that in all the sign iterations considered here
+the matrix whose sign is being computed appears only as the starting matrix and
+not within the iteration.
+Hence if we start the iteration at S + E then the iter-
+ation converges to sign(S + E), for sufficiently small ∥E∥(so that the sign exists
+and any convergence conditions are satisfied).
+Given that S has the form (5.1),
+any E commuting with S has the form Z diag(F11, F22)Z−1, so that sign(S + E) =
+Z sign(diag(−Ip + F11, Iq + F22))Z−1. Hence there is an ǫ such that for all ∥E∥≤ǫ,
+sign(S + E) = S. Therefore, the Fr´echet derivative analysis is consistent with the
+convergence analysis.
+Of course, to obtain a complete picture, we also need to understand the effect
+of rounding errors on the iteration prior to convergence. This effect is surprisingly
+difficult to analyze, even though the iterative methods are built purely from matrix
+multiplication and inversion. The underlying behaviour is, however, easy to describe.
+Suppose, as discussed above, that we have an iteration for sign(A) that does not
+contain A, except as the starting matrix. Errors on the (k −1)st iteration can be
+accounted for by perturbing Xk to Xk + Ek.
+If there are no further errors then
+(regarding Xk + Ek as a new starting matrix) sign(Xk + Ek) will be computed. The
+error thus depends on the conditioning of Xk and the size of Ek. Since errors will
+in general occur on each iteration, the overall error will be a complicated function of
+κsign(Xk) and Ek for all k.
+We now restrict our attention to the Newton iteration (5.16). First, we note that
+the iteration can be numerically unstable: the relative error is not always bounded by
+a modest multiple of the condition number κsign(A), as is easily shown by example (see
+the next section). Nevertheless, it generally performs better than might be expected,
+given that it inverts possibly ill conditioned matrices.
+We are not aware of any
+published rounding error analysis for the computation of sign(A) via the Newton
+iteration.
+Error analyses aimed at the application of the matrix sign function to invariant
+subspace computation (Section 2.5) are given by Bai and Demmel [29, ] and By-
+ers, He, and Mehrmann [89, ]. These analyses show that the matrix sign function
+may be more ill conditioned than the problem of evaluating the invariant subspaces
+corresponding to eigenvalues in the left half-plane and right half-plane. Neverthe-
+less, they show that when Newton’s method is used to evaluate the sign function the
+computed invariant subspaces are usually about as good as those computed by the
+QR algorithm. In other words, the potential instability rarely manifests itself. The
+analyses are complicated and we refer the reader to the two papers for details.
+In cases where the matrix sign function approach to computing an invariant sub-
+space suffers from instability, iterative refinement can be used to improve the com-
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+5.8 Numerical Experiments and Algorithm
+125
+
+Table 5.2.
+Number of iterations for scaled Newton iteration. The unnamed matrices are
+(quasi)-upper triangular with normal (0, 1) distributed elements in the upper triangle.
+
+Scaling
+Matrix
+none
+determinantal
+spectral
+norm
+Lotkin
+25
+9
+8
+9
+Grcar
+11
+9
+9
+15
+A(j: j + 1, j: j + 1) =
+ˆ
+1
+−(j/n)1000
+(j/n)1000
+1
+˜
+
+24
+16
+19
+19
+ajj = 1 + 1000i(j −1)/(n −1)
+24
+16
+22
+22
+a11 = 1000, ajj ≡1, j ≥2
+14
+12
+6
+10
+a11 = 1 + 1000i, ajj ≡1, j ≥2
+24
+22
+8
+19
+
+puted subspace [29, ]. Iterative refinement can also be used when the sign function
+is used to solve algebraic Riccati equations (as described in Section 2.4) [88, ].
+Finally, we note that all existing numerical stability analysis is for the unscaled
+Newton iteration. Our experience is that scaling tends to improve stability, not worsen
+it.
+
+5.8. Numerical Experiments and Algorithm
+
+We present some numerical experiments to illustrate the theory of the previous three
+sections and to give further insight into the choice of iteration, acceleration scheme,
+and stopping criterion. In all the tests, scaling was used as long as the relative change
+δk = ∥Xk −Xk−1∥∞/∥Xk∥∞exceeded 10−2; thereafter µk ≡1 and, where relevant,
+µk is not shown in the tables.
+First, we consider the effects of scaling.
+For a variety of matrices we ran the
+Newton iteration (5.34) with no scaling and with the scalings (5.35)–(5.37), with the
+2-norm used for norm scaling.
+We recorded how many iterations are required to
+produce an error ∥S −Xk∥∞/∥S∥∞≤5 × 10−14. The matrices are as follows:
+
+1. The 8×8 Lotkin matrix, MATLAB’s gallery(’lotkin’,8): badly conditioned
+with many negative eigenvalues of small magnitude.
+
+2. The 25 × 25 Grcar matrix, gallery(’grcar’,25): a Toeplitz matrix with sen-
+sitive eigenvalues.
+
+3. 25 × 25 (quasi-) upper triangular matrices with elements in the upper triangle
+(outside the diagonal blocks) from the normal (0,1) distribution.
+
+Table 5.2 reports the results. The Lotkin matrix is a typical example of how scaling
+can greatly reduce the number of iterations. The Grcar example shows how norm
+scaling can perform poorly (indeed being worse than no scaling). The third matrix
+(real) and fourth matrix (complex) have eigenvalues on a line with real part 1 and
+imaginary parts between 0 and 1000. Here, spectral scaling and norm scaling are
+both poor. The fifth and sixth matrices, again real and complex, respectively, have
+eigenvalues all equal to 1 except for one large outlier, and they are bad cases for
+determinantal scaling.
+Table 5.3 illustrates the convergence results in Theorems 5.10 and 5.11 by showing
+the behaviour of the Newton iteration with spectral scaling for J(2) ∈R16×16, which
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+126
+Matrix Sign Function
+
+Table 5.3. Newton iteration with spectral scaling for Jordan block J(2) ∈R16×16.
+
+k
+∥S −Xk∥∞
+
+∥S∥∞
+δk
+∥X2
+k −I∥∞
+∥Xk∥2∞
+µk
+(5.41)
+(5.44)
+
+1
+2.5e-1
+1.8e+0
+3.6e-1
+5.0e-1
+2
+2.5e-2
+2.2e-1
+4.8e-2
+1.0e0
+3
+3.0e-4
+2.5e-2
+6.0e-4
+1.0e0
+4
+0
+3.0e-4
+0
+1.0e0
+5
+0
+0
+0
+√
+√
+
+Table 5.4. Newton iteration with determinantal scaling for random A ∈R16×16 with κ2(A) =
+1010; κsign(A) = 3 × 108, ∥S∥F = 16.
+
+k
+∥S −Xk∥∞
+
+∥S∥∞
+δk
+∥X2
+k −I∥∞
+∥Xk∥2∞
+µk
+(5.41)
+(5.44)
+
+1
+4.3e3
+1.0e0
+1.1e-1
+1.0e5
+2
+1.5e1
+2.8e2
+1.3e-1
+6.8e-3
+3
+1.9e0
+6.3e0
+5.9e-2
+1.4e-1
+4
+2.1e-1
+1.7e0
+2.1e-2
+6.1e-1
+5
+6.4e-2
+2.3e-1
+4.3e-3
+9.5e-1
+6
+2.0e-3
+6.2e-2
+1.6e-4
+9.8e-1
+7
+4.1e-6
+2.0e-3
+3.3e-7
+1.0e0
+8
+2.1e-9
+4.1e-6
+8.9e-13
+9
+2.1e-9
+1.1e-11
+3.2e-17
+√
+
+10
+2.1e-9
+1.5e-15
+3.5e-17
+√
+√
+
+is a Jordan block with eigenvalue 2. Here and below the last two columns of the table
+indicate with a tick iterations on which the convergence conditions (5.41) and (5.44)
+are satisfied for the ∞-norm, with η = n1/2u. In Theorem 5.11, d = 1 and p = 4,
+and indeed Xd+p−1 = X4 = sign(J(2)). At the start of the first iteration, µ0X0 has
+eigenvalues 1, and the remaining four iterations remove the nonnormal part; it is easy
+to see that determinantal scaling gives exactly the same results.
+Table 5.4 reports 12 iterations for a random A ∈R16×16 with κ2(A) = 1010
+
+generated in MATLAB by gallery(’randsvd’,16,1e10,3). Determinantal scaling
+was used. Note that the relative residual decreases significantly after the error has
+stagnated. The limiting accuracy of ∥S∥2
+2u is clearly not relevant here, as the iterates
+do not approach S sufficiently closely.
+Both these examples confirm that the relative change δk+1 is a good estimate
+of the relative error in Xk (compare the numbers in the third column with those
+immediately to the northwest) until roundoff starts to dominate, but thereafter the
+relative error and relative change can behave quite differently.
+Finally, Table 5.5 gives examples with large ∥S∥.
+The matrix is of the form
+A = QTQT , where Q is a random orthogonal matrix and T ∈R16×16 is generated as
+an upper triangular matrix with normal (0,1) distributed elements and tii is replaced
+by d|tii| for i = 1: 8 and by −d|tii| for i = 9: 16. As d is decreased the eigenvalues
+of A approach the origin (and hence the imaginary axis). Determinantal scaling was
+used and we terminated the iteration when the relative error stopped decreasing sig-
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+5.8 Numerical Experiments and Algorithm
+127
+
+Table 5.5. Newton iteration with determinantal scaling for random A ∈R16×16 with real
+eigenvalues parametrized by d.
+
+d
+no. iterations
+mink ∥S −Xk∥∞
+
+∥S∥∞
+∥A∥2
+κ2(A)
+∥S∥2
+κsign(A)
+
+1
+6
+2.7e-13
+6.7
+4.1e3
+1.3e2
+4.7e3
+3/4
+6
+4.1e-10
+6.5
+5.7e5
+5.4e3
+6.5e5
+1/2
+6
+2.6e-6
+6.2
+2.6e8
+3.9e5
+6.5e7
+1/3
+3
+7.8e-1
+6.4
+2.6e15
+7.5e11
+3.9e7
+
+nificantly. This example shows that the Newton iteration can behave in a numerically
+unstable way: the relative error can greatly exceed κsign(A)u. Note that the limiting
+accuracy ∥S∥2
+2u provides a good estimate of the relative error for the first three values
+of d.
+Our experience indicates that (5.44) is the most reliable termination criterion,
+though on badly behaved matrices such as those in Table 5.5 no one test can be relied
+upon to terminate at the “right moment”, if at all.
+Based on this and other evidence we suggest the following algorithm based on the
+scaled Newton iteration (5.34).
+
+Algorithm 5.14 (Newton algorithm for matrix sign function). Given a nonsingular
+A ∈Cn×n with no pure imaginary eigenvalues this algorithm computes X = sign(A)
+using the scaled Newton iteration.
+Two tolerances are used: a tolerance tol cgce
+for testing convergence and a tolerance tol scale for deciding when to switch to the
+unscaled iteration.
+
+1
+X0 = A; scale = true
+
+2
+for k = 1: ∞
+
+3
+Yk = X−1
+k
+4
+if scale
+
+5
+Set µk to one of the scale factors (5.35)–(5.37).
+6
+else
+7
+µk = 1
+
+8
+end
+
+9
+Xk+1 = 1
+
+2(µkXk + µ−1
+k Yk)
+10
+δk+1 = ∥Xk+1 −Xk∥F /∥Xk+1∥F
+11
+if scale = true and δk+1 ≤tol scale, scale = false, end
+
+12
+if ∥Xk+1 −Xk∥F ≤(tol cgce∥Xk+1∥/∥Yk∥)1/2 or
+(δk+1 > δk/2 and scale = false)
+13
+goto line 16
+14
+end
+
+15
+end
+16
+X = Xk+1
+
+Cost: 2kn3 flops, where k iterations are used.
+The algorithm uses the unscaled Newton iteration once the relative change in the
+iterates is less than tol scale. A value of tol scale safely less than 1 is intended and
+the motivation is to avoid the (nonoptimal) scaling parameters interfering with the
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+128
+Matrix Sign Function
+
+quadratic convergence once the convergence has set in. The convergence test is (5.44)
+combined with the requirement to stop if, in the final convergence phase, δk has not
+decreased by at least a factor 2 during the previous iteration (which is a sign that
+roundoff errors are starting to dominate).
+We have left the choice of scale factor at line 5 open, as the best choice will depend
+on the class of problems considered.
+
+5.9. Best L∞Approximation
+
+Most applications of the matrix sign function involve nonnormal matrices of small
+to medium size. An exception is the application in lattice quantum chromodynamics
+(QCD) described in Section 2.7, where the action on a vector of the sign of a large,
+sparse, Hermitian matrix is required. For Hermitian A, approximating sign(A) re-
+duces to approximating sign(x) at the eigenvalues of A, which is a scalar problem
+on the real axis. The full range of scalar approximation techniques and results can
+therefore be brought into play. In particular, we can use best L∞rational approxima-
+tions. For the sign function and the interval [−δmax, −δmin] ∪[δmin, δmax] an explicit
+formula for the best L∞approximation is known. It follows from a corresponding
+result for the inverse square root. The result is phrased in terms of elliptic functions.
+The Jacobi elliptic function sn(w; κ) = x is defined implicitly by the elliptic integral
+
+w =
+�x
+
+0
+
+1
+�
+
+(1 −t2)(1 −κ2t2)
+dt
+
+and the complete elliptic integral (for the modulus κ) is defined by
+
+K =
+�1
+
+0
+
+1
+�
+
+(1 −t2)(1 −κ2t2)
+dt.
+
+Theorem 5.15 (Zolotarev, 1877).
+
+(a) The best L∞approximation �r from Rm−1,m to x−1/2 on the interval [1,
+(δmax/δmin)2] is
+
+�r(x) = D
+
+�m−1
+j=1 (x + c2j)
+�m
+j=1(x + c2j−1),
+
+where
+
+cj =
+sn2(jK/(2m); κ)
+1 −sn2(jK/(2m); κ),
+
+κ = (1 −(δmin/δmax)2)1/2, and K is the complete elliptic integral for the modulus κ.
+The constant D is determined by the condition
+
+max
+x∈[1,(δmin/δmax)2)](1 −√x �r(x)) = −
+min
+x∈[1,(δmin/δmax)2)](1 −√x �r(x)),
+
+and the extrema occur at xj = dn−2(jK/(2m)), j = 0: 2m, where dn2(w; κ) = 1 −
+κ2 sn2(w; κ).
+
+(b) The best L∞approximation r from R2m−1,2m to sign(x) on the interval
+[−δmax, −δmin] ∪[δmin, δmax] is r(x) = (x/δmin)�r((x/δmin)2), where �r is defined in
+(a).
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+5.10 Notes and References
+129
+
+−2
+−1.5
+−1
+−0.5
+0
+0.5
+1
+1.5
+2
+
+−1
+
+0
+
+1
+
+sign(x)
+r(x)
+
+−2
+−1.5
+−1
+
+−0.9998 
+
+−1.0000 
+
+1
+1.5
+2
+0.9998 
+
+1.0000 
+
+Figure 5.2. Best L∞approximation r(x) to sign(x) from R3,4 on [−2, −1]∪[1, 2]. The lower
+two plots show r(x) in particular regions of the overall plot above.
+
+Figure 5.2 plots the best L∞approximation to sign(x) from R3,4 on [−2, −1] ∪
+[1, 2], and displays the characteristic equioscillation property of the error, which has
+maximum magnitude about 10−4. In the QCD application δmin and δmax are chosen
+so that the spectrum of the matrix is enclosed and r is used in partial fraction form.
+
+5.10. Notes and References
+
+The matrix sign function was introduced by Roberts [496] in 1971 as a tool for model
+reduction and for solving Lyapunov and algebraic Riccati equations. He defined the
+sign function as a Cauchy integral and obtained the integral (5.3).
+Roberts also
+proposed the Newton iteration (5.16) for computing sign(A) and proposed scaling the
+iteration, though his scale parameters are not as effective as the ones described here.
+Interest in the sign function grew steadily in the 1970s and 1980s, initially among
+engineers and later among numerical analysts. Kenney and Laub give a thorough
+survey of the matrix sign function and its history in [347, ].
+The attractions of the concise representation sign(A) = A(A2)−1/2 in (5.2) were
+pointed out by Higham [273, ], though the formula can be found in earlier work
+of Tsai, Shieh, and Yates [576, 1988].
+Theorem 5.2 is from Higham, Mackey, Mackey, and Tisseur [283, ].
+Theorems 5.3 and 5.7 are due to Kenney and Laub [342, ]. The expression
+(5.10) and upper bound (5.11) for the matrix sign function condition number are from
+Higham [273, ]. Theorem 5.4 is a refined version of a result of Kenney and Laub
+[342, ]. Another source of perturbation results for the matrix sign function is Sun
+[548, ].
+The Schur method, Algorithm 5.5, is implemented in function signm of the Matrix
+Computation Toolbox [264] (on which signm in the Matrix Function Toolbox is based)
+but appears here in print for the first time.
+For more on the recursions related to (5.26), and related references, see Chapter 8.
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+130
+Matrix Sign Function
+
+It is natural to ask how sharp the sufficient condition for convergence ∥I −A2∥< 1
+in Theorem 5.8 (a) is for ℓ> m and what can be said about convergence for ℓ< m−1.
+These questions are answered experimentally by Kenney and Laub [343, ], who
+give plots showing the boundaries of the regions of convergence of the scalar iterations
+in C.
+The principal Pad´e iterations for the sign function were first derived by Howland
+[302, ], though for even k his iteration functions are the inverses of those given
+here. Iannazzo [307, ] points out that these iterations can be obtained from the
+general K¨onig family (which goes back to Schr¨oder [509, ], [510, ]) applied to
+the equation x2−1 = 0. Parts (b)–(d) of Theorem 5.9 are from Kenney and Laub [345,
+]. Pandey, Kenney, and Laub originally obtained the partial fraction expansion
+(5.30), for even k only, by applying Gaussian quadrature to an integral expression for
+h(ξ) in (5.26) [457, ]. The analysis leading to (5.31) is from Kenney and Laub
+[345, ].
+Theorem 5.10 is due to Kenney and Laub [344, ], and the triangular matrices
+in Table 5.2 are taken from the same paper.
+Theorem 5.11 is due to Barraud [44, , Sec. 4], but, perhaps because his paper
+is written in French, his result went unnoticed until it was presented by Kenney and
+Laub [344, , Thm. 3.4].
+Lemma 5.12 collects results from Kenney, Laub, and Papadopoulos [350, ]
+and Pandey, Kenney, and Laub [457, ].
+The spectral scaling (5.36) and norm scaling (5.37) were first suggested by Barraud
+[44, ], while determinantal scaling (5.35) is due to Byers [88, ].
+Kenney and Laub [344, ] derive a “semioptimal” scaling for the Newton iter-
+ation that requires estimates of the dominant eigenvalue (not just its modulus, i.e.,
+the spectral radius) of Xk and of X−1
+k . Numerical experiments show this scaling to
+be generally at least as good as the other scalings we have described. Semioptimal
+scaling does not seem to have become popular, probably because it is more delicate
+to implement than the other scalings and the other scalings typically perform about
+as well in practice.
+Theorem 5.13 on the stability of sign iterations is new. Indeed we are not aware
+of any previous analysis of the stability of sign iterations.
+Our presentation of Zolotarev’s Theorem 5.15 is based on that in van den Eshof,
+Frommer, Lippert, Schilling, and Van der Vorst [585, ] and van den Eshof [586,
+]. In the numerical analysis literature this result seems to have been first pointed
+out by Kenney and Laub [347, , Sec. III]. Theorem 5.15 can also be found in
+Achieser [1, , Sec. E.27], Kennedy [338, ], [339, ], and Petrushev and
+Popov [470, , Sec. 4.3].
+A “generalized Newton sign iteration” proposed by Gardiner and Laub [205, ]
+has the form
+
+Xk+1 = 1
+
+2(Xk + BX−1
+k B),
+X0 = A.
+
+If B is nonsingular this is essentially the standard Newton iteration applied to B−1A
+and it converges to B sign(B−1A).
+For singular B, convergence may or may not
+occur and can be at a linear rate; see Bai, Demmel, and Gu [31, ] and Sun and
+Quintana-Ort´ı [550, ]. This iteration is useful for computing invariant subspaces
+of matrix pencils A −λB (generalizing the approach in Section 2.5) and for solving
+generalized algebraic Riccati equations.
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+Problems
+131
+
+Problems
+
+5.1. Show that sign(A) = A for any involutory matrix.
+
+5.2. How are sign(A) and sign(A−1) related?
+
+5.3. Derive the integral formula (5.3) from (5.2) by using the Cauchy integral formula
+(1.12).
+
+5.4. Show that sign(A) = (2/π) limt→∞tan−1(tA).
+
+5.5. Can
+
+A =
+
+
+
+
+−1
+1
+1/2
+0
+1
+−1
+0
+0
+1
+
+
+
+
+
+be the sign of some matrix?
+
+5.6. Show that the geometric mean A#B of two Hermitian positive definite matrices
+A and B satisfies
+�
+0
+A # B
+(A # B)−1
+0
+
+�
+= sign
+��
+0
+B
+A−1
+0
+
+��
+.
+
+5.7. (Kenney and Laub [342, ]) Verify that for A ∈R2×2 the matrix sign
+decomposition (5.5) is given as follows.
+If det(A) > 0 and trace(A) ̸= 0 then
+S = sign(trace(A))I and N = sign(trace(A))A; if det(A) < 0 then
+
+S = µ
+�
+A −det(A)A−1�
+,
+N = µ
+�
+A2 −det(A)I
+�
+,
+
+where
+µ =
+�
+−det(A −det(A)A−1)
+�−1/2;
+
+otherwise S is undefined.
+
+5.8. Show that the Newton iteration (5.16) for the matrix sign function can be derived
+by applying Newton’s method to the equation X2 = I.
+
+5.9. By expanding the expression sign(S + E) = (S + E)((S + E)2)−1/2 from (5.2),
+show directly that the Fr´echet derivative of the matrix sign function at S = sign(S)
+is given by L(S, E) = 1
+
+2(E −SES).
+
+5.10. Consider the scalar Newton sign iteration xk+1 = 1
+
+2(xk + x−1
+k ). Show that if
+x0 = coth θ0 then xk = coth 2kθ0. Deduce a convergence result.
+
+5.11. (Schroeder [511, ]) Investigate the behaviour of the Newton iteration (5.16)
+for scalar, pure imaginary x0.
+Hint: let x0 = ir0 ≡−i cot(πθ0) and work in θ
+coordinates.
+
+5.12. Halley’s iteration for solving f(x) = 0 is [201, ]
+
+xk+1 = xk −
+fk/f ′
+k
+1 −1
+
+2fkf ′′
+k /(f ′
+k)2 ,
+
+where fk, f ′
+k, and f ′′
+k denote the values of f and its first two derivatives at xk. Show
+that applying Halley’s iteration to f(x) = x2 −1 yields the iteration function f1,1 in
+Table 5.1.
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+
+132
+Matrix Sign Function
+
+5.13. (Byers [88, ])
+Show that determinantal scaling µ = | det(X)|−1/n mini-
+mizes d(µX), where
+
+d(X) =
+
+n
+�
+
+i=1
+(log |λi|)2
+
+and the λi are the eigenvalues of X. Show also that d(X) = 0 if and only if the
+spectrum of X lies on the unit circle and that d(X) is an increasing function of
+|1 −|λi|| for each eigenvalue λi.
+
+5.14. Consider the Newton iteration (5.34), with determinantal scaling (5.35) and
+spectral scaling (5.36). Show that with both scalings the iteration converges in at
+most two iterations (a) for scalars and (b) for any real 2 × 2 matrix.
+
+5.15. (Higham, Mackey, Mackey, and Tisseur [283, ]) Suppose that sign(A) = I
+and A2 = I + E, where ∥E∥< 1, for some consistent norm. Show that
+
+∥A −I∥≤
+∥E∥
+
+1 +
+�
+
+1 −∥E∥
+< ∥E∥.
+
+How does this bound compare with the upper bound in (5.40)?
+
+5.16. Discuss the pros and cons of terminating an iteration Xk+1 = g(Xk) for the
+matrix sign function with one of the tests
+
+| trace(X2
+k) −n| ≤η,
+(5.46)
+| trace(Xk) −round(trace(Xk))| ≤η,
+(5.47)
+
+where round(x) denotes the nearest integer to x.
+
+5.17. (Byers [88, ]) The matrix
+
+W =
+�
+A∗
+G
+F
+−A
+
+�
+,
+F = F ∗,
+G = G∗,
+
+arising in (2.14) in connection with the Riccati equation is Hamiltonian, that is, it
+satisfies the condition that JW is Hermitian, where J =
+�
+0
+−In
+In
+0
+�
+. Show that the
+Newton iteration for sign(W) can be written in such a way that only Hermitian
+matrices need to be inverted. The significance of this fact is that standard algorithms
+or software for Hermitian matrices can then be used, which halves the storage and
+computational costs compared with treating W as a general matrix.
+
+The sign function of a square matrix can be defined in terms of a contour integral
+or as the result of an iterated map Zr+1 = 1
+
+2(Zr + Z−1
+r ).
+Application of this function enables a matrix to be decomposed into
+two components whose spectra lie on opposite sides of the imaginary axis.
+
+— J. D. ROBERTS, Linear Model Reduction and Solution of the
+Algebraic Riccati Equation by Use of the Sign Function (1980)
+
+The matrix sign function method is an elegant and,
+when combined with defect correction,
+effective numerical method for the algebraic Riccati equation.
+
+— VOLKER MEHRMANN, The Autonomous Linear Quadratic Control Problem:
+Theory and Numerical Solution (1991)
+
+Copyright ©2008 by the Society for Industrial and Applied Mathematics. 
+This electronic version is for personal use and may not be duplicated or distributed. 
+
+From "Functions of Matrices: Theory and Computation" by Nicholas J. Higham. 
+This book is available for purchase at www.siam.org/catalog.
+
+

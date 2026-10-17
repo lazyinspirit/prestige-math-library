@@ -1,0 +1,562 @@
+Chapter 2
+
+Optimal Control of ODEs: the
+Linear-Quadratic (LQ) case
+
+
+
+In this chapter, the optimal control of systems governed by an ODE is studied quite brieﬂy. We
+refer to [26] for a full course on the subject; the present chapter follows closely the presentation
+done in [26] 1.
+First we present basic examples, next we deﬁne the notion of controllability and present the
+Kalman’s condition. The most simple but very important case is studied more in details: linear
+model - quadratic cost function (LQ case). In particular a proof of existence and uniqueness of
+the solution is given; and its characterization using the Pontryagin’s maximum principle and
+the Hamiltonian.
+
+
+2.1  Introduction
+
+In order to illustrate what is an optimal control problem let us give a simple example (extracted
+from a Wikipedia webpage).
+Consider a car traveling on a straight line through a hilly road. The question is, how should the
+driver press the accelerator pedal in order to minimize the total traveling time? The control
+law refers speciﬁcally to the way in which the driver presses the accelerator and shifts the gears.
+The ”system” or ”direct model” is the car dynamics, and the optimality criterion is the mini-
+mization of the total traveling time. Control problems usually include additional constraints.
+For example the amount of available fuel might be limited, the speed limits must be respected,
+etc.
+The ”cost function” is a mathematical functional giving the traveling time as a function of the
+speed, initial conditions and parameters of the system.
+
+   Another optimal control problem can be to ﬁnd the way to drive the car so as to minimize
+its fuel consumption, given that it must complete a given course in a time not exceeding some
+amount. Yet another control problem can be to minimize the total monetary cost of completing
+the trip, given assumed monetary prices for time and fuel.
+
+  1The students of INSA Toulouse GMM5 can refer too to the course of automatic by C. B`es, [8].
+
+
+                                        13
+14                                             Course ”Variational Data Assimilation”
+
+
+Let us notice that the optimal control problem may have multiple solutions (i.e. the solution
+may not be unique), if it exists...
+
+
+      !"#$%&'()*$++",-.',$/&'%),&#)+0'
+
+                            7,32&'89#9($&$#5':'%),&#)+';9#"9<+$'
+                                  ! '$=-='(9&$#"9+'3#)3$#6$5.'$(3"#"%9+'+9>5'%)$?5'
+                                ! '@)2,*9#A'%),*"6),5.'7,"69+'%),*"6),5''
+       F$/&4'%),&#)+'
+       )?'&G$'5A5&$('
+
+                          Model (ODEs, PDEs)
+                              -
+                           Computational Code
+
+
+
+
+                B9#-$&'
+                            C'                            12&32&4'
+           1<5$#;96),5.''
+         ($952#$($,&5''              %)(32&$*'5)+26),''
+                    :'
+            D&9<"+"E96),'
+
+
+
+
+   Figure 2.1: Direct Modelling with input parameters. Towards the control of the system.
+
+
+2.2  An example
+
+2.2.1  The controlled system
+
+This classical example is treated in detail in [26], we refer to this book for more details; see also
+[8].
+   Let us consider a spring - mass system (see Figure 2.2). The mass m is submitted to a force
+f, which supposed to be equal to:−[k1(x −L) + k2(x −L)3]. L is the spring length at rest, k∗are the spring stiﬀness parameters. We will apply an external force: u(t)￿i (depending on time
+t). Given the external force, the spring position x(t) is described by the equation:
+                    mx￿￿(t) + k1(x(t) −L) + k2(x(t) −L)3 = u(t) for t ≥0
+    It is the so-called direct model.  It is an ordinary diﬀerential equation, linear  if k2 = 0,
+non-linear if not. The initial condition, x(0) = x0, x￿(0) = y0, is given.
+J. Monnier                                                                       15
+
+
+
+
+
+                             Figure 2.2: The spring example.
+
+
+   The problem we consider is as follows. Given an initial state (x0, y0), ﬁnd the ”best” exter-
+nal force u(t) such that x(t) = L in a minimum time and under the constraint u(t) ≤1 (theexternal force is bounded).
+
+    u(t) is the control of the problem.
+For sake of simplicity (and without any change of the nature of problem), we set: m = 1, k1 =
+1, L = 0. Then in the phase space (x, x￿), the direct model writes:
+
+                     X￿(t) = AX(t) + f(X(t)) + Bu(t) ,  X(0) = X0.
+
+where X(t) = (x, x￿)(t) is the state of the system,
+               ￿0   1 ￿
+             A =                  , B = (0, 1)T  ,  f = (0,                              0                        −k2x3)T                    −1
+   The model is a 1st order diﬀerential system, linear if k2 = 0, non-linear if not.
+
+2.2.2  Diﬀerent states of the system according to the control values
+
+1) In the case u(t) = 0 (no external action), the solution of the system satisﬁes:
+
+                                           x￿￿(t) + x(t) + 2x(t)3 = 0
+
+It is the so-called Duﬃng’s equation. One can prove that its solution x(t) satisﬁes: x(t)2 +
+x(t)4 + x￿(t)2 = Cste. All solutions are periodic and can be represented by an algebraic curve.
+We plot the phase diagram and the trajectory on Fig. 2.3.
+
+   2) In the case u(t) = −x￿(t), hence we try to damp the spring, the model writes:
+                                      x￿￿(t) + x(t) + 2x(t)3 + x￿(t) = 0
+
+   One compute numerically its solution and one plot the phase diagram and the trajectory
+on Fig. 2.4.
+   One could verify with Lyapunov’s theory that the origin is asymptotically stable. One can
+notice that the spring position and velocity reach the equilibrium position in inﬁnite time, and
+not in ﬁnite time, thus this control do not satisﬁes the original problem.
+16                                             Course ”Variational Data Assimilation”
+
+
+
+
+
+       Figure 2.3: The spring example. State of the system without control, from [26].
+
+
+
+
+
+     Figure 2.4: The spring example. State of the system with damp control, from [26].
+
+   3) Let us set u(t) = −(x(t)2 −1)x￿(t), then the model writes:
+
+                                x￿￿(t) + x(t) + 2x(t)3 + (x(t)2 −1)x￿(t) = 0
+
+
+It is a Van Der Pol type equation.
+
+   One compute numerically two diﬀerent solutions and we plot the corresponding phase dia-
+gram and the trajectories on Fig. 2.5.
+
+   One could prove with Lyapunov’s theory that there exists a periodic solution which is at-
+tractive (Figure 2.5), [26, 8].
+
+
+   These three examples of regimes illustrate the wide range of behaviors one can obtain on
+this a-priori very simple diﬀerential system, if changing the control term.
+J. Monnier                                                                       17
+
+
+
+
+
+     Figure 2.5: The spring example. State of the system with a given control, from [26].
+
+2.3  Controllability
+
+2.3.1  Reachable sets
+
+Let xu(t) be the solution of the ODE system corresponding to a given control u(t) (xu  is
+supposed to exist and to be unique).
+
+Deﬁnition 2.3.1. The set of reachable states from the initial state x0 in time T > 0, is deﬁned
+by:
+                       Acc(x0, T) = {xu(T), with u ∈L∞([0, T], Ω)}
+with Ωa compact subset of Rm.
+We set: Acc(x0, 0) = x0.
+Theorem 2.3.1. Let us consider the following 1st order linear ODE system in Rn:
+
+                                  x￿(t) = A(t)x(t) + B(t)u(t) + r(t)
+
+Then Acc(x0, t) is compact, convex, and varies continuously with t, t ∈[0, T].
+   Partial proof. We prove only that Acc(x0, t) is convex in the case u ∈L∞([0, T], Ω) with Ωconvex. We refer to [26] for the proof of the remaining results.
+
+   Let Ωbe convex. Let xt1, xt2 ∈Acc(x0, t); we denote by ui the corresponding controls. Wehave:
+          xi(0) = x0 ; xti(t) = xi(t) ; x￿i(s) = A(s)xi(s) + B(s)ui(s) + r(s) ;  i = 1, 2
+Let λ ∈[0, 1]. We seek to prove that: (λxt                                                  1 + (1 −λ)xt2) ∈Acc(x0, t).We solve the 1st order linear ODE, we obtain:
+                                  ￿t
+                       xti = xi(t) = M(t)x0 + M(t)   M(s)−1B(s)ui(s)ds
+                                                              0
+with M(t) ∈Mn,n(R) such that: M ￿(t) = A(t)M(t), M(0) = Id. (If A(t) = A constant thenM(t) = exp tA).
+18                                             Course ”Variational Data Assimilation”
+
+  We set: u(t) = λu1(t) + (1 −λ)u2(t). Since Ωis convex, u(t) ∈Ω; also u ∈L∞([0, T], Ω).
+   Let x(t) be the solution associated to u(t). We have x(t) ∈Acc(x0, t) and:
+                                ￿t
+                         x(t) = M(t)x0 + M(t)   M(s)−1B(s)u(s)ds
+                                                           0
+
+In other respect,
+                           ￿t                         ￿t
+                  2 =  M(t)x0 + λ[M(t)λxt1 + (1 −λ)xt                                                 0                                      M(s)−1B(s)u1(s)ds] + (1 −λ)[M(t)  0 M(s)−1B(s)u2(s)ds]
+          =  x(t)
+
+   Thus (λxt1 + (1 −λ)xt2) ∈Acc(x0, t) and Acc(x0, t) is convex.               ￿
+
+
+
+
+
+                   Figure 2.6: Reachable set in the linear case, from [26].
+
+
+
+A more simple case
+
+Let us consider: r = 0 and x0 = 0. The system becomes:
+
+                               x￿(t) = A(t)x(t) + B(t)u(t) ;  x(0) = x0
+
+and its (unique) solution writes:
+                             ￿t
+                               x(t) = M(t)   M(s)−1B(s)u(s)ds
+                                                     0
+
+Thus x is linear in u. Then we have
+
+Proposition 2.3.1. Let us consider the system: x￿(t) = A(t)x(t) + B(t)u(t); x(0) = x0, and
+Ω= Rm. Then for all t > 0, the reachable set Acc(0, t) is a vectorial subspace of Rn.
+If we assume in addition B(t) = B constant, then for any 0 < t1 < t2, we have: Acc(0, t1) ⊂
+Acc(0, t2).
+
+  We refer to [26] for the proof.
+J. Monnier                                                                       19
+
+2.3.2  Controllability of autonomous linear systems: Kalman’s con-
+       dition
+
+In the following we consider a ﬁrst order linear autonomous ODE system in Rn:
+
+                                     x￿(t) = Ax(t) + Bu(t) + r(t)
+
+with A and B independent of t. Furthermore, we set Ω= Rm (i.e. we do not constraint the
+control variable).
+  We say that the system is controllable at any time T  if Acc(x0, T) = Rn; it means that for
+any x0 and x1 in Rn, there exists a control u such that x(0) = x0 and x(T) = x1.
+
+
+
+Theorem 2.3.2. Under the assumptions above, the ﬁrst order linear autonomous ODE system
+is controllable at any time T  if and only if the rank of matrix
+C = (B, AB, ..., An−1B) is equal to n.
+
+   The matrix C is called the Kalman matrix and the condition rank(C) = n is called the
+Kalman controllability condition.
+
+   Since the Kalman’s condition does not depend neither on T nor on x0, then the ﬁrst order
+linear autonomous system is controllable at any time from any initial condition. (R. Kalman
+is a hongarian-american mathematician-electrical engineer, born in 1930).
+Sketch of the proof.  First, one proves that rank(C) = n if and only if the following linear
+application Φ is surjective.
+
+                              ￿T
+           Φ : L∞([0, T], Rm) ￿→Rn ; u ￿→  0  exp ((T −t)A)Bu(t)dt
+
+Thus Φ : L∞([0, T], Rm) = Rn. In other respect, given u, we have:
+                         ￿T
+                x(T) = exp (TA)x0 +                                      exp ((T −t)A)(Bu(t) + r(t))dt                                                   0
+
+Thus the reachable states is:
+                         ￿T
+             Acc(x0, T) = exp (TA)x0 +                                       exp ((T −t)A)r(t)dt + Φ(L∞) = Rn                                                   0
+
+Therefore, the system is controllable.
+We refer to [26] for the full proof of the theorem; also to your course of automatism [8].   ￿
+
+
+   These results give an overview of notions of controllability for linear systems. We refer e.g.
+to [26] for more details and the study of non-linear systems.
+20                                             Course ”Variational Data Assimilation”
+
+2.4  The Linear-Quadratic (LQ) problem
+
+Let A, B and s be three mappings deﬁned from I = [0, T] into Mn,n(R), Mn,m(R) and Rn re-
+spectively. The three mappings are assumed to be bounded i.e. L∞(I) (this assumption could
+be relaxed since locally integrable would be suﬃcient). We consider the following linear 1st
+order ODE.
+         
+          Given u(t), ﬁnd x(t) such that:
+                         x￿(t) = A(t)x(t) + B(t)u(t) + s(t) for t   = [0, T]                 (2.1)                                  ∈I
+                    with the initial condition: x(0) = x0.
+   The function u(t) is assumed to be in L∞(I).
+
+   In other words, we consider a phenomena which can be modelled by this linear ODE. (2.1)
+is the direct model, x(t) is the the state of the system, and u(t) will be the control of the system.
+Existence and uniqueness of the solution. One knowns (classical theorem of existence) that
+(2.1) has one and only one solution x(t), x(t) continuous from I into Rn.
+Let us remark that one knowns to give an explicit expression of x in an integral form; the
+unique solution x(t) depends on u(t) of course.
+
+  A controllability problem reads as follows: given x1 ∈Rn, is there exist a control u(t) such
+that x(t) goes from x0 (at initial time) to x1 in ﬁnite time ?
+
+  An optimal control problem reads as follows: is there exist a control u(t) such that it mini-
+mizes a given criteria j(u) ?
+j(u) is called the cost function. Potentially, the optimal control problem can be considered with
+the additional constraint: x(t) must go from x0 (initial state) to x1 given in ﬁnite time.
+
+   The course [8] treats mainly controllability problems for linear systems.  In the present
+course, we consider optimal control problems.
+
+
+Remark 2.4.1. - Since the previous spring academic example is modelled by a linear ODE in
+the case k2 = 0, the results which follow will apply to such a case.
+- Among the historical optimal control problems, let us cite the so-called brachistochrone prob-
+lem (end of the 17th century, from the greek words ”brakhisto” (shorter) and ”chronos” (time))
+where the system is a simple 1d gravitational dynamic without friction, and j is time, from x0
+to x1.
+
+
+
+Quadratic cost function
+
+We consider the following ”quadratic” cost function j(u).  Quadratic cost are often use in
+practice and particularly in variational data assimilation (see next chapter). Somehow, such
+cost functions set the inverse problem as a least-square problem.
+Let Q, W and U be given in Mn,n(R), Mn,n(R) and Mm,m(R) respectively. We assume that
+each of them are symmetric positive, furthermore, U  is deﬁne. These three matrices deﬁne
+J. Monnier                                                                       21
+
+
+corresponding semi-norms and norms respectively.
+We set:                  ￿T          ￿T
+                        1                1               1
+                   j(u) =          Wdt +           Udt +       Q                (2.2)                        2  0  ￿x(t)￿2     2  0  ￿u(t)￿2     2￿x(T)￿2
+
+   The three terms are the time averaged cost of: the state, the control and the ﬁnal state,
+respectively in the metrics W, U and Q.
+In fact, Q, W must be symmetric positive, but deﬁnite is not necessary. As a matter of fact,
+for example, one can have the cost function minimal for a vanishing control.
+Since the deﬁnition of the cost function cost is quadratic, and the model is linear, the natural
+functional space for control variable is M = L2([0, T], Rm).
+Let us point out that the a-priori natural space C0([0, T], Rm) is not a Hilbert space...
+
+   Let us recall that for a matrix M symmetric positive deﬁnite, in vertu of Courant-Fischer’s
+theorem (Rayleigh’s quotient), there exists a constant c > 0 such that:
+
+
+
+                                   M                           ∀t ∈[0, T], ∀v ∈Rm,  ￿v￿2                                            ≥c￿v￿2
+
+In other words, the (linear) operator M is coercive, uniformly in time.
+
+  The linear-quadratic optimal control problem we consider reads as follows:
+Given x0 and T, ﬁnd u(t) such that x(t), solution of (2.1), minimizes the cost function j(u)
+deﬁned by (2.2).
+
+   The linear-quadratic problem seems a-priori idealistic but not so much. Indeed, cost func-
+tions are often deﬁned quadratic and many ”simple” automatism process may be modelled by a
+linear equation. Furthermore, for more complex non-linear models, if linearized around a given
+state, it is by deﬁnition locally linear...
+In addition, one knowns to write a lot of very useful and instructive properties for the LQ
+problem, both in a mathematical and numerical point of view.
+
+   For a sake of simplicity, in the sequel we consider the source term s(t) = 0 in the direct
+model.
+
+
+2.5  Necessary conditions: Pontryagin’s maximum prin-
+      ciple
+
+2.5.1  Existence and uniqueness of the solution
+
+We have the following result of existence and uniqueness.
+
+Theorem 2.5.1. There exists an unique solution u ∈M which minimize j(u) deﬁned by (2.2)with the ”constraint” x(t) solution of (2.1).
+In other words, there exists an unique optimal trajectory x(t) to the LQ problem.
+22                                             Course ”Variational Data Assimilation”
+
+
+   Proof. A) Existence.  It is based on the convergence of minimizing sequence (calcul of
+variations, D. Hilbert, 1900 approx.).
+Step 1). The cost function is bounded by below: inf{j(u), u ∈M} > −∞since j(u) ≥0.
+There exists a minimizing sequence (un) deﬁned for all t ∈[0, T]; i.e. a sequence such that:
+                         n→+∞j(un)lim    = inf{j(u), u ∈M}
+
+                                                        1
+(As a matter of fact, ∀n ∈N, ∃vn such that: m ≤j(vn) < m + n).
+Step 2) There exists α > 0 such that: j(u) ≥α￿u￿2M. Thus, the minimizing sequence (un) is
+bounded in M. Hence there exists a sub-sequence (unk) which converges weakly to a control u
+in M:
+                                      unk ￿u in L2(I)
+
+Step 3) Let us denote by xn (resp. x) the state associated to un (resp. u). The system (2.1)
+is a ﬁrst order linear O.D. E. (and with s(t) = 0); one knowns an explicit expression of the
+solution:                            ￿t
+                        ∀t, xn(t) = M(t)x0 + M(t)  0 M(s)−1B(s)un(s)ds                  (2.3)
+with M(t) ∈Mn,n(R) such that: M ￿(t) = A(t)M(t), M(0) = Id. (If A(t) = A constant thenM(t) = exp (tA)).                                           ￿t
+                                                         0 M(s)−1B(s)u(s)ds. Thus, we obtain that theSimilarly, we have: ∀t, x(t) = M(t)x0 + M(t)
+sequence (xn)n converge to x.
+Passing to the limit in (2.3), we obtain the existence of xu, solution corresponding to u.
+Step 4) It remains to prove that u minimizes j. Since un ￿u in L2, since j is continuous hence
+lower semi-continuous, we have (by deﬁnition):
+
+                                    j(u) ≤limn  inf j(un)
+
+and necessarily j(u) = inf j(v).
+                   v∈M
+
+
+
+
+
+Figure 2.7: A function j lower semi-continuous at u0: for u close to u0, j(u) is either close to
+u0 or lower than u0.
+
+   In other words, u(t) minimizes j(u) (j(u) = min j(v)) and the corresponding state (trajec-
+                                         v∈M
+tory) xu is an optimal trajectory.
+J. Monnier                                                                       23
+
+
+   B) Uniqueness. Let us prove that j(u) is strictly convex i.e.
+∀(u1, u2) ∈M 2, ∀t ∈]0, 1[, j(tu1 + (1 −t)u2) < tj(u1) + (1 −t)j(u2) unless u1 = u2.
+For all t, ￿u(t)￿U is a norm hence convex and not strictly convex (proof: triangle inequality).
+But in a Hilbert space, the square of a norm (eg ￿u(t)￿2U) is strictly convex (see e.g. [3] chap.10, p118).
+Let us deﬁne the ”mapping model”:
+
+        M : u(t) ￿→xu(t); M = L2(I, Rm) →C0(I, Rn)
+  We have:
+
+Lemma 2.5.1. The mapping model M(u(t)) is aﬃne, thus convex for all t in [0, T].
+   The proof is similar to those of Theorem 2.3.1.                       ￿
+
+
+
+Exercice 2.5.1. Prove this lemma.
+
+   Proof of uniqueness (continued).
+In vertu of Lemma 2.5.1, and since ￿.￿W and ￿.￿Q are semi-norms hence convex, the cost func-tion j(u) is strictly convex. Finally, the uniqueness follows straightforwardly.
+Let u1 and u2 be such that:  j(uk) =  inf j(v), k = 1, 2. We have:  j(tu1 + (1 −t)u2) <                                  v∈M
+tj(u1) + (1 −t)j(u2).
+Hence: j(tu1 + (1 −t)u2) < inf j(v) unless u1 = u2, which must be the case.         ￿                        v∈M
+
+
+Remark 2.5.1. In the autonomous case (A and B constant), we have:
+              ￿x￿(t)￿≤￿A￿￿x(t)￿+ ￿B￿￿u(t)￿≤cst(￿x(t)￿2 + ￿u(t)￿2)
+Then, if all hypothesis are satisﬁed in I = [0, +∞then x￿(t) is in L1(I) and necessarily the
+minimizing trajectory x(t) tends to 0 when t tends to +∞.
+
+2.5.2  Pontryagin’s maximum principle in the LQ case
+
+We have the following Pontryagin’s maximum principle in the LQ case:
+
+Theorem 2.5.2. The trajectory x(t) associated with the control u(t), is optimal for the LQ
+problem (system (2.1) (2.2)) if there exists an adjoint vector p(t) which satisﬁes:
+                         p￿(t) = −p(t)A(t) + x(t)TW(t) for almost t ∈[0, T]
+with the ﬁnal condition: p(T) = −x(T)TQ.Furthermore, the optimal control u satisﬁes:
+                         u(t) = U(t)−1B(t)Tp(t)T for almost t ∈[0, T]
+24                                             Course ”Variational Data Assimilation”
+
+
+   The ideas of the proof based on ’calculus of variations’ is similar to those of Theorem 3.8.1
+in next chapter. Since we will detail the latter in next chapter (non-linear elliptic PDE case),
+we refer to [26] for the present proof.                              ￿
+
+
+
+Remark 2.5.2. In the general case, i.e. a non-linear state equation hence a non convex cost
+function, the Pontryagin’s maximum principle is a necessary condition only and its proof is
+quite complex.
+It makes introduce the so-called hamiltonian of the system and its maximisation (thus the ter-
+minology), see e.g. [26]. (L. Pontryagin, 1908-1988; W. Hamilton, irish physicist, 1805-1865).
+In the LQ case, the Pontryagin’s maximum principle is a necessary and suﬃcient condition.
+
+Remark 2.5.3.
+- In case of an inﬁnite time intervall (T = +∞), the ﬁnal condition becomes: lim+∞p(t) = 0.
+- If the system has a source term s(t) non null, the result remains true.
+
+2.5.3  The Hamiltonian
+
+Let us present the Hamiltonian H in the present LQ case. It writes:
+                       H : Rn × Rn × Rm →R
+                  H(x, p, u) = p(Ax + Bu)                                 + uTUu)                          −12(xTWx
+         N = xTNx).(Recall: ￿x￿2Then, the necessary and suﬃcient equations of Theorem 2.5.2 re-writes as follows:
+          
+           x￿(t) = ∂pH(x, p, u) = Ax + Bu
+                            p￿(t) = ∂xH(x, p, u) = pA + xTW
+          
+                    ∂uH(x, p, u)     =  0  since pB −uTU = 0
+   where p is considered to be a line vector in Rn.
+
+   In other words, a necessary and suﬃcient condition to solve the LQ problem, is the Hamil-
+tonian must be maximized.
+
+
+2.5.4  Example
+
+Let us consider the control of the 1d trajectory of a vehicule (without friction forces). We have
+the simple scalar linear second order model:
+
+                                      x￿￿(t) = u(t) ;  x(0) = x￿(0) = 0
+
+Given the ﬁnal time T, we seek to maximize the distance travelled with a minimum of energy.
+To this end, we consider the cost function:
+                                ￿T
+                             j(u) = −α1x(T)2 + α2  0  u2(t)dt
+J. Monnier                                                                       25
+
+with α∗given weight parameters, modelling the importance we want to give to each term of
+the cost function. For a sake of simplicity, we set: α1 = α2 = 1.
+
+
+Exercice 2.5.2. Give the expression of the optimal control.
+
+2.6  Feedback and Riccati’s equation
+
+Riccati’s familly (father and son), italian mathematicians, 18th century.
+
+   In the LQ case, it is possible to write the control as a feedback (closed-loop control), and
+compute it by solving the Riccati’s equation. It is the purpose of the present section.
+
+2.6.1  Solution in the LQ case: Feedback and Riccati’s equation
+
+We have
+
+Theorem 2.6.1. Under the assumptions of the existence - uniqueness Theorem 2.3, the (unique)
+optimal control u writes as a feedback function (closed-loop control):
+
+                         u(t) = K(t)x(t) with K(t) = U(t)−1BT(t)E(t)
+
+where the matrix E(t), E(t) ∈Mn(R), is solution of the Riccati equation:
+       E￿(t) = W(t) −AT(t)E(t) −E(t)A(t) −E(t)B(t)U −1(t)BT(t)E(t)  ∀t ∈(0, T)
+with the ﬁnal condition: E(T) = −Q.For all t, the matrix E(t) is symmetric. Furthermore, since Q and W are positive deﬁnite,
+E(t) is positive deﬁnite too.
+  We refer to [26] for the proof.                                 ￿
+
+
+
+2.6.2  And in general cases ?
+
+In practice, optimal control problems are often non-linear, thus the results presented for the
+LQ problem do not apply directly, in particular the analytic expression of the optimal control...
+Nevertheless, a good understanding of the LQ solution structure (e.g. the strict convexity of
+the resulting cost function) is useful to tackle non-linear problems.
+
+   Then, to solve a non-linear optimal control problem (in the sense compute an optimal con-
+trol u and the optimal trajectory xu), one can use numerical methods to solve the necessary
+ﬁrst-order optimality conditions based on the Hamiltonian system.
+
+   For Partial Derivatives Equations (PDE) systems, the Pontryagin’s maximum principle does
+not apply anymore; the Riccati’s equations are generally not known. These questions are still
+26                                             Course ”Variational Data Assimilation”
+
+
+an active mathematical research ﬁeld and some recent results exist (eg. the Riccati’s equations
+for the Navier-Stokes ﬂuid ﬂows equations at low Reynolds number etc).
+
+   Nevertheless, for non-linear PDEs one can obtain easily write equations characterizing the
+optimal control solution:  it is the optimality system based on the adjoint equations. In next
+section, we study this approach for non-linear elliptic PDEs systems.

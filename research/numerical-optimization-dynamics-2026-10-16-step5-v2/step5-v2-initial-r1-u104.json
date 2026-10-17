@@ -1,0 +1,102 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "104",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-frozen-slow-euler-variation-bounds",
+      "model": "gpt-6-luna",
+      "context_sha256": "e217f7a78cab9ea782b347ef6cc6f435a19e765e3c0003fb5cbf5328255b8835",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original Statement assumes only m>=1. For m=3/2, even with r=s=1, F=0 on all of R^2 and a constant exact path, procedure step 1 returns invalid-input before creating z_0 or z_m. Merely running the algorithm does not imply admission. The finite-increment conclusion therefore lacks a necessary integer hypothesis. Explicit positive integers r,s,m repair this domain defect without changing either estimate.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-frozen-slow-euler-variation-bounds",
+      "disposition": "repaired",
+      "post_sha256": "95d3744ad4094a8707cee44b21d53501795502c5aa8a9bb58c340f4664421788",
+      "review_context_sha256": "f1a438bee2dc27ca181d26c57e106e9f2f4a3f7dfedabc017eb785255f52339c",
+      "reason": "Explicit positive integer dimensions and microstep count satisfy algorithm step 1. For a<b, the autonomous field on R x Omega is continuous and the restricted exact solution satisfies the Volterra identity; the vector-integral theorem supplies norm integrability and scalar monotonicity gives M(b-a). For a=b both sides vanish. All frozen evaluation states lie in S subset Omega, so every loop update exists and each increment has norm <=hM; finite triangle inequalities give jhM, including j=0,m, m=1 and M=0. Macro success is not needed: a final domain-exit does not erase completed microstates. Existing contract already requires a positive integer m, and its unchanged derivations and exact supplier quotations remain valid. No choice axiom or new prerequisite is used. This is adjudicator repair review, not independent acceptance of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-frozen-slow-euler-local-defect-bound",
+    "thm-frozen-slow-euler-global-first-order-error"
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-frozen-slow-euler-local-defect-bound",
+      "path": "items/lem-frozen-slow-euler-local-defect-bound.md",
+      "affected_use": "Fact F4 invokes both variation estimates; proof steps 1.1 and 1.2 use exact-path displacement and step 1.2 uses the fast-microstate displacement before step 2.1 sums m microintervals.",
+      "disposition": "unaffected",
+      "reason": "The conclusion concerns a successful macro output of the algorithm, whose input check forces m to be a positive integer. Given explicitly calls it a positive integer microstep count. Thus every use of the repaired supplier meets its integer hypothesis.",
+      "route": "frontier-owner-context-reconciliation"
+    },
+    {
+      "id": "thm-frozen-slow-euler-global-first-order-error",
+      "path": "items/thm-frozen-slow-euler-global-first-order-error.md",
+      "affected_use": "Fact F5 and proof step 3.1 bound exact displacement by M j h_n; fact F8 supplies the unchanged product-norm projection identity used to bound each numerical fast increment.",
+      "disposition": "unaffected",
+      "reason": "Statement explicitly chooses an integer m_n>=1 for each block and requires successful numerical and exact-start runs in the common bounded set. Apply the repaired variation lemma to each exact-start restricted path; the product-norm identity is unchanged.",
+      "route": "frontier-owner-context-reconciliation"
+    }
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-frozen-slow-euler-variation-bounds",
+      "locus": "statement",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "finding": "The unqualified m>=1 admits noninteger counts rejected by algorithm step 1, leaving z_m undefined.",
+      "correction": "Replaced the opening r,s,m>=1 by explicit positive integers r,s,m; all estimates and proofs retained.",
+      "evidence": "Algorithm Definition steps 1 and 3-4; lemma Statement and proof step 2.1. Current contract empty-boundary row already demands positive integer m.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Only the assigned draft item was changed; no shared metadata edit is necessary.",
+    "Read the batch-104 rejection-blind digest (no concerns or alerts), assigned task, frozen tuple and frontier; checked the current algorithm, all direct supplier statements, owning proof contract and page, and both direct consumer arguments.",
+    "Authoritative external sources were not consulted: these elementary integral and finite-sum estimates are familiar; local supplier statements and the Volterra argument were inspected.",
+    "Owning page Summary makes no claim for noninteger microstep counts and its first listed algorithm explicitly checks integer counts. No page edit is needed. No published direct consumer or outside-frontier consumer was found. No further hop is triggered because both consumer Statements remain unchanged.",
+    "Focused checks completed successfully: precheck 1 checked, 0 failing; rendercheck 1 file with every math span and YAML block parsed; strict proof contract 1/1 item, 0 errors and 0 warnings; final proof-layout 1 item, 2 steps, 0 defects. git diff --check on the assigned item exited 0. No outstanding mathematical obligation or uncertainty."
+  ],
+  "validation": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-frozen-slow-euler-variation-bounds.md",
+      "exit_code": 0,
+      "result": "1 checked, 0 failing"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-frozen-slow-euler-variation-bounds.md",
+      "exit_code": 0,
+      "result": "1 file; math and renderer YAML parsing passed"
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-104.proof-contracts.json --strict --items lem-frozen-slow-euler-variation-bounds",
+      "exit_code": 0,
+      "result": "0 errors, 0 warnings, 1/1 item checked"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/lem-frozen-slow-euler-variation-bounds.md",
+      "exit_code": 0,
+      "result": "1 item, 2 steps, 0 defects"
+    }
+  ]
+}

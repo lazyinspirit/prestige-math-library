@@ -1,0 +1,516 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "mode": "ROOT-ONLY suggestions; no canonical metadata application",
+  "items": [
+    {
+      "id": "lem-scaled-real-householder-step-termination-and-status",
+      "batch": "1",
+      "source": "research/numerical-optimization-dynamics-2026-10-16-owner-reader33-procedure-properties-proposal/cycle2-current-closure/proposed/items/lem-scaled-real-householder-step-termination-and-status.md",
+      "source_state": "New research-only draft; root authorization required",
+      "deps": [
+        "alg-scaled-householder-reflector-formation-and-application",
+        "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+      ],
+      "algorithm_justified_by": {
+        "target": "items/alg-scaled-householder-reflector-formation-and-application.md",
+        "required_entry": "lem-scaled-real-householder-step-termination-and-status",
+        "note": "Result deps includes analyzed algorithm; no reverse deps edge. Check current list before adding."
+      },
+      "page_inventory": {
+        "target": "library/numerical-linear-algebra-and-approximation/finite-precision-direct-factorizations.md",
+        "field": "items",
+        "after": "alg-scaled-householder-reflector-formation-and-application",
+        "value": "lem-scaled-real-householder-step-termination-and-status",
+        "already_present": false,
+        "guard": "research/numerical-optimization-dynamics-2026-10-16-owner-reader33-procedure-properties-proposal/cycle2-current-closure/source-inputs/library/numerical-linear-algebra-and-approximation/finite-precision-direct-factorizations.md"
+      },
+      "manifest_item": {
+        "target": "research/numerical-optimization-dynamics-2026-10-16-batch-1.pages.json",
+        "page": "finite-precision-direct-factorizations",
+        "already_present": false,
+        "suggested_entry": {
+          "id": "lem-scaled-real-householder-step-termination-and-status",
+          "kind": "lemma",
+          "title": "The scaled real-column Householder procedure terminates with defined statuses",
+          "deps": [
+            "alg-scaled-householder-reflector-formation-and-application",
+            "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+          ]
+        },
+        "dependency_level": "ROOT recomputes after source settled; no invented level here"
+      },
+      "contract": {
+        "target": "research/numerical-optimization-dynamics-2026-10-16-batch-1.proof-contracts.json",
+        "pointer": "/contracts/lem-scaled-real-householder-step-termination-and-status",
+        "scope_add_if_absent": "lem-scaled-real-householder-step-termination-and-status",
+        "already_present": false,
+        "draft": {
+          "citations": [
+            {
+              "fact": "F1",
+              "source": "alg-scaled-householder-reflector-formation-and-application",
+              "source_section": "Definition",
+              "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. Input a real active column $x\\in\\mathbb R^r\\subseteq\\mathbb F^r$ and trailing block $B\\in\\mathbb F^{r\\times q}$ with entries in the floating-point system, $r\\ge1$, $q\\ge0$. If every component of $x$ is zero, return the identity action and a copy of $B$, with the active output column set to exact zeros, so that $C_+=[0e_1\\;B]$; return $(v=0,\\widehat\\tau=0,\\widehat\\alpha=0,C_+)$ marked `identity`. Otherwise compute $s=\\max_{1\\le i\\le r}|x_i|>0$, and then, in increasing $i$, compute $z_i=\\operatorname{fl}(x_i/s)$. Initialize $t=0$ and, in increasing $i$, compute $a_i=\\operatorname{fl}(z_i z_i)$ followed by $t=\\operatorname{fl}(t+a_i)$. Compute $h=\\operatorname{fl}(\\sqrt t)$ and then $\\widehat r=\\operatorname{fl}(s h)$. Set $\\sigma=1$ if $x_1=0$ and $\\sigma=\\operatorname{sign}(x_1)$ otherwise, and set $\\widehat\\alpha=-\\sigma\\widehat r$ using the exact sign change. Compute $v_1=\\operatorname{fl}(x_1-\\widehat\\alpha)$, then copy $v_i=x_i$ exactly for $i=2,\\ldots,r$.\n\nInitialize $w=0$ and, in increasing $i$, compute $a_i=\\operatorname{fl}(v_i v_i)$ followed by $w=\\operatorname{fl}(w+a_i)$. Then compute $\\widehat\\tau=\\operatorname{fl}(2/w)$. For each column $j=1,\\ldots,q$ in increasing order, initialize $d_j=0$ and, in increasing $i$, compute $a_{ij}=\\operatorname{fl}(v_i B_{ij})$ followed by $d_j=\\operatorname{fl}(d_j+a_{ij})$. After all $d_j$ have been computed, in increasing $i$ compute $p_i=\\operatorname{fl}(\\widehat\\tau v_i)$. Then, in increasing $j$ and within each column in increasing $i$, compute $U_{ij}=\\operatorname{fl}(p_i d_j)$ and $\\widehat B_{ij}=\\operatorname{fl}(B_{ij}-U_{ij})$ in that order. The complete active output is $C_+=[\\widehat\\alpha e_1\\;\\widehat B]$, with exact zeros written below its first diagonal entry. If any elementary operation fails, return the first range failure with its stage and indices in the order above. Also return failure if $t$, $\\widehat r$, or $w$ is not positive normal, or any intermediate is nonfinite. Otherwise return $(v,\\widehat\\tau,\\widehat\\alpha,C_+)$ marked `reflector`. For a separate block $Y\\in\\mathbb F^{r\\times q'}$, $q'\\ge0$, apply the stored reflector by computing its sequential column dots in increasing column order, then the vector $p_i=\\operatorname{fl}(\\widehat\\tau v_i)$ in increasing $i$, and then each rounded product and subtraction by increasing column and row; omit the target-column overwrite. Store reflector factors with their identity/reflector marker to represent the exact orthogonal product; a rounded explicit dense product is a separate output with its own arithmetic error. For a nonzero stored $v$, the associated exact reflector is $H(v)=I-2vv^T/(v^Tv)$, using [[def-householder-reflector]] and the QR convention of [[def-full-reduced-and-column-pivoted-computational-qr-factorisations]]. Since $v$ is real, this matrix acts on $\\mathbb F^r$ as an orthogonal reflector over $\\mathbb R$ and a unitary reflector over $\\mathbb C$. This definition does not assert a local backward-error bound.",
+              "uses": [
+                "1.1",
+                "1.2",
+                "2.1"
+              ]
+            },
+            {
+              "fact": "F2",
+              "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+              "source_section": "Definition",
+              "quote": "At each precision, let the representable set, normal range, and unit roundoff be an instance of [[def-standard-relative-floating-point-model-and-unit-roundoff]] specialized to a finite binary format of integer precision $p\\ge2$ and integer normal-exponent bounds $j_{\\min}\\le j\\le j_{\\max}$. Its normal values are $\\pm m2^{j-p+1}$ for integers $2^{p-1}\\le m<2^p$ and $j_{\\min}\\le j\\le j_{\\max}$, with $N_{\\min}=2^{j_{\\min}}$ and $N_{\\max}=(2^p-1)2^{j_{\\max}-p+1}$. The rounding rule is round-to-nearest, ties-to-even by the parity of the normalized significand. Each precision in a mixed-precision procedure has its own format, range, and valid unit-roundoff bound. On every real exact result that is zero or normal, $\\operatorname{fl}$ uses this rule; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range $x$, $\\operatorname{fl}(\\sqrt{x})$ is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression $ab+c$; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+              "uses": [
+                "1.1",
+                "1.2",
+                "2.1"
+              ]
+            }
+          ],
+          "derivations": [
+            {
+              "id": "derive-1.1",
+              "step": "1.1",
+              "claim": "The zero test scans a finite column. If it succeeds, [F1] returns its initialized identity record, zero target and copied finite block without forming any squared-vector norm or quotient. Otherwise the scaling maximum, the two norm sums, coefficient formation, column dots and ordered update products each use finitely many indices. By [F2], each attempted arithmetic operation returns its next value or a first failure. The extra finite positivity and normality tests either return failure or allow the next finite stage. Thus formation and application terminate with a declared record.",
+              "inputs": [
+                "given",
+                "F1",
+                "F2",
+                "algebra"
+              ]
+            },
+            {
+              "id": "derive-1.2",
+              "step": "1.2",
+              "claim": "A specified separate block has finitely many columns and rows. Its sequential dots, coefficient-vector products and ordered update products have finite bounds; [F2] again makes each attempt return or fail. Hence this additional application terminates, including zero columns of the separate block.",
+              "inputs": [
+                "given",
+                "F1",
+                "F2",
+                "algebra"
+              ]
+            },
+            {
+              "id": "derive-2.1",
+              "step": "2.1",
+              "claim": "In a successful nonzero-column branch, the stored squared-norm sum is positive by [F1]. If the stored vector were zero, every square and every sum in that computation would be exact zero by [F2], contradicting that positive test. Therefore $v\\ne0$ and $d=v^Tv>0$. For $K=vv^T/d$, direct multiplication gives $K^T=K$, $K^2=K$ and $(I-2K)^T(I-2K)=I$. Its real entries give the same adjoint identity over $\\mathbb C$. Together with steps 1.1–1.2 this proves every stated status and representative property.",
+              "inputs": [
+                "F1",
+                "F2",
+                "step 1.1",
+                "step 1.2",
+                "algebra"
+              ]
+            }
+          ],
+          "routine_steps": [],
+          "boundaries": [
+            {
+              "case": "empty",
+              "status": "checked",
+              "evidence": "Statement admits q=0 and a separate block with zero columns. Proof1.1–1.2 count finite loops, so the absent column dots/updates are skipped without an undefined sum or output."
+            },
+            {
+              "case": "zero",
+              "status": "checked",
+              "evidence": "Proof1.1 returns the zero target and copied block at the componentwise-zero branch without forming a reflector denominator. Proof2.1 uses exact-zero squares to exclude v=0 only on successful nonzero input."
+            },
+            {
+              "case": "one",
+              "status": "checked",
+              "evidence": "Statement imports r>=1, so r=1 has one scale/norm component and no copied tail. Proof1.1 covers those finite index bounds; Proof2.1 still proves positivity of the exact v squared norm on success."
+            },
+            {
+              "case": "degenerate",
+              "status": "checked",
+              "evidence": "Proof1.1 retains the first arithmetic or positive-normal test failure. Proof2.1 conditions the reflector denominator on successful nonzero stored v; no singular-vector normalization is evaluated in the identity branch."
+            },
+            {
+              "case": "endpoints",
+              "status": "checked",
+              "evidence": "Definition of the analyzed procedure fixes increasing finite row/column indices; Proof1.1–1.2 include zero trailing columns and completion of the final finite loop, with no extra iteration."
+            },
+            {
+              "case": "nonempty-choice",
+              "status": "not_applicable",
+              "reason": "This Statement analyzes supplied finite stored vectors/blocks and deterministic indexed arithmetic. Its rank-one representative is an explicit formula on nonzero v, not a selection from an unspecified family."
+            },
+            {
+              "case": "iff-forward",
+              "status": "not_applicable",
+              "reason": "The real-column result asserts finite returns and a conditional explicit representative. It states no biconditional; positivity is used to exclude v=0 on success, without claiming the converse arithmetic success."
+            },
+            {
+              "case": "iff-reverse",
+              "status": "not_applicable",
+              "reason": "The real-column result gives no converse from a nonzero stored vector to successful range execution; its one-way success implication is the entire representative claim."
+            }
+          ]
+        },
+        "note": "Complete parsed source paragraphs/final tags and exact supplier claim sections, not proof-verdict stamps; preserve existing native contract/history if present and merge only necessary source-exact corrections after writer drains."
+      },
+      "coverage": {
+        "target": "research/numerical-optimization-dynamics-2026-10-16-batch-1.coverage.json",
+        "page": "finite-precision-direct-factorizations",
+        "operation": "Add local-extraction source mapping only if absent, retaining inherited source entries as method context; no invented whole-source reading/fetch, status or supported external theorem claim.",
+        "local_basis": [
+          "alg-scaled-householder-reflector-formation-and-application",
+          "alg-scaled-householder-reflector-formation-and-application",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "no_new_external_read": true
+      },
+      "source_provenance": "ai-altered extraction/composition; references copied from actual analyzed procedure; verification.precheck pending; no gate result asserted"
+    },
+    {
+      "id": "lem-complex-scaled-householder-step-termination-and-status",
+      "batch": "33",
+      "source": "research/numerical-optimization-dynamics-2026-10-16-owner-reader33-procedure-properties-proposal/cycle2-current-closure/source-inputs/items/lem-complex-scaled-householder-step-termination-and-status.md",
+      "source_state": "Existing native-created draft; preserve actual source and writer ownership",
+      "deps": [
+        "alg-complex-scaled-householder-reflector-step",
+        "alg-scaled-complex-householder-and-givens-updates",
+        "lem-scaled-complex-householder-and-givens-local-backward-error"
+      ],
+      "algorithm_justified_by": {
+        "target": "items/alg-complex-scaled-householder-reflector-step.md",
+        "required_entry": "lem-complex-scaled-householder-step-termination-and-status",
+        "note": "Result deps includes analyzed algorithm; no reverse deps edge. Check current list before adding."
+      },
+      "page_inventory": {
+        "target": "library/numerical-linear-algebra-and-approximation/computed-schur-decompositions-and-nonnormal-spectra.md",
+        "field": "items",
+        "after": "alg-complex-scaled-householder-reflector-step",
+        "value": "lem-complex-scaled-householder-step-termination-and-status",
+        "already_present": true,
+        "guard": "research/numerical-optimization-dynamics-2026-10-16-owner-reader33-procedure-properties-proposal/cycle2-current-closure/source-inputs/library/numerical-linear-algebra-and-approximation/computed-schur-decompositions-and-nonnormal-spectra.md"
+      },
+      "manifest_item": {
+        "target": "research/numerical-optimization-dynamics-2026-10-16-batch-33.pages.json",
+        "page": "computed-schur-decompositions-and-nonnormal-spectra",
+        "already_present": true,
+        "suggested_entry": {
+          "id": "lem-complex-scaled-householder-step-termination-and-status",
+          "kind": "lemma",
+          "title": "The scaled complex Householder wrapper terminates with a unitary representative",
+          "deps": [
+            "alg-complex-scaled-householder-reflector-step",
+            "alg-scaled-complex-householder-and-givens-updates",
+            "lem-scaled-complex-householder-and-givens-local-backward-error"
+          ]
+        },
+        "dependency_level": "ROOT recomputes after source settled; no invented level here"
+      },
+      "contract": {
+        "target": "research/numerical-optimization-dynamics-2026-10-16-batch-33.proof-contracts.json",
+        "pointer": "/contracts/lem-complex-scaled-householder-step-termination-and-status",
+        "scope_add_if_absent": "lem-complex-scaled-householder-step-termination-and-status",
+        "already_present": true,
+        "draft": {
+          "citations": [
+            {
+              "fact": "F1",
+              "source": "alg-scaled-complex-householder-and-givens-updates",
+              "source_section": "Definition",
+              "quote": "Use the operationwise real/complex arithmetic model, with six-real-operation complex products and componentwise division by positive real scalars. A scaled norm of a nonzero complex vector first chooses the largest absolute real or imaginary component $s>0$, rounds every real component divided by $s$, sums their rounded squares sequentially, rounds the positive square root, and rounds multiplication by $s$. A norm of already scaled components omits the last multiplication. Zero input has exact norm zero. Reject every nonzero exact intermediate outside the normal range, nonfinite/invalid operation, and nonpositive required norm; return the first range-failure. All sign changes and conjugations are exact.\n\nFor a Householder active block $C=[x\\;B]$, $x\\in\\mathbb C^r$, a zero $x$ copies the block with identity action. Otherwise compute $\\widehat N$ by the scaled norm. If $x_1=0$ put $\\widehat\\phi=1$; otherwise compute its modulus $\\widehat a$ by its own two-component scaled norm and divide its real and imaginary parts by $\\widehat a$. Set $\\widehat\\alpha=-\\operatorname{fl}(\\widehat\\phi\\widehat N)$ using real-scalar component multiplication, and $v=\\operatorname{fl}(x-\\widehat\\alpha e_1)$. Compute $w$ by sequential summation of all $2r$ rounded real component squares of $v$, and $\\widehat\\tau=\\operatorname{fl}(2/w)$. Compute $d=\\operatorname{fl}(v^*B)$, $p=\\operatorname{fl}(\\widehat\\tau v)$, $Z=\\operatorname{fl}(pd)$, and $\\widehat B=\\operatorname{fl}(B-Z)$. Return $C_+=[\\widehat\\alpha e_1\\;\\widehat B]$, writing exact zeros below the target diagonal, and store $v,\\widehat\\tau$. Its theoretical representative is $H(v)=I-2vv^*/(v^*v)$. For a separate block application omit the column overwrite. For a right step apply these instructions to the conjugate-transposed block and transpose back.\n\nFor a Givens target pair $(a,b)$, use the identity when $b=0$, including $(0,0)$. Otherwise choose $\\lambda$ as the largest absolute real/imaginary component of $(a,b)$, round $z=a/\\lambda$ and $w=b/\\lambda$ componentwise, and compute $h$ as the norm of their four already scaled components. If $z\\ne0$, compute $n_z$ as the norm of its two components, $\\widehat\\phi=\\operatorname{fl}(z/n_z)$, $c=\\operatorname{fl}(n_z/h)$ and $s=\\operatorname{fl}(\\operatorname{fl}(\\widehat\\phi\\overline w)/h)$. If $z=0$, set $c=0$ and $s=\\operatorname{fl}(\\overline w/h)$. Store $T=\\begin{pmatrix}c&s\\\\-\\overline s&c\\end{pmatrix}$ and apply it to the chosen two rows using two complex products and one rounded componentwise addition for each output entry. For an actual target column, set its intended annihilated entry to exact zero after the update. The initial shift-vector rotation is formed from the shift vector but applied to the matrix without zeroing an unrelated matrix entry. Right applications use the conjugate-transposed form. Its exact unitary representative is $Q=T/\\sqrt{c^2+|s|^2}$; this normalization defines a mathematical representative and is not an additional rounded operation.\n\nThese are arithmetic realizations of the canonical Householder and Givens methods. Returned dense transformation accumulators may be rounded; the exact unitary products used in backward-error statements are represented by the stored local data. Additional discarded matrix entries must be recorded separately, including their magnitudes. Their omission is never implicit in a sparsity convention.",
+              "uses": [
+                "1.1",
+                "2.1"
+              ]
+            },
+            {
+              "fact": "F2",
+              "source": "lem-scaled-complex-householder-and-givens-local-backward-error",
+              "source_section": "Statement",
+              "quote": "Use [[alg-scaled-complex-householder-and-givens-updates]] successfully, with $0<u<1$ and $(r-1)u<1$ for every Householder dimension $r$. For a nonzero Householder column define\n$$e=(1+u)^{r+3}-1,\\quad a_\\phi=\\frac{1+u}{(1-u)^4}-1,\\quad a_\\alpha=(1+a_\\phi)(1+e)(1+u)-1,\\quad d_v=a_\\alpha+u(2+a_\\alpha),$$\n$$a_\\tau=\\frac{1+u}{(1-u)^{2r}}-1,\\quad g=\\frac{1+6u}{1-(r-1)u}-1,\\quad c_U=2\\bigl((1+a_\\tau)(1+u)(1+6u)(1+g)-1\\bigr),$$\n$$\\eta_H(r)=\\max\\{a_\\alpha+8d_v,(1+u)c_U+3u\\}.$$\nFor a Givens step define\n$$a_2=\\frac{1+u}{(1-u)^2}-1,\\quad q=\\max\\left\\{\\left(\\frac{1+u}{1-u}\\right)^3-1,\\frac{(1+a_2)(1+6u)(1+u)}{(1-u)^3}-1\\right\\},$$\n$$\\epsilon=\\sqrt2(7u+6u^2)(1+q),\\quad v=q+\\epsilon,\\quad \\eta_G=2v+u+2q.$$\nEach complete left update, including its target zero write, has an exact unitary representative $W$ and perturbation $E$ with\n$$W(C+E)=C_+,\\qquad \\|E\\|_F\\le\\eta\\|C\\|_F,$$\nwhere $\\eta=\\eta_H(r)$ or $\\eta_G$. Identity branches have $E=0$. The corresponding right relation follows by conjugate transposition. For a Givens application without an annihilation overwrite use the smaller coefficient $v$; for a Householder separate-block application use $(1+u)c_U+3u$. All coefficients are explicit and $O(ru)$ or $O(u)$ for fixed dimensions.",
+              "uses": [
+                "2.1"
+              ]
+            }
+          ],
+          "derivations": [
+            {
+              "id": "derive-1.1",
+              "step": "1.1",
+              "claim": "Every loop in [F1] is over a finite input dimension. Its zero branch returns immediately; its nonzero branch either terminates at its first range/invalid operation or completes the finite sequence. The wrapper preserves these results with the stated breakdown label.",
+              "inputs": [
+                "given",
+                "F1",
+                "choose"
+              ]
+            },
+            {
+              "id": "derive-2.1",
+              "step": "2.1",
+              "claim": "In the nonzero-input formation branch, success requires positive stored-vector squared norm. If $v=0$, its squares and sum are exactly zero, contradicting success in that branch. Thus $v\\ne0$. Put $K=vv^*/(v^*v)$; then $K^*=K$ and $K^2=K$, so $(I-2K)^*(I-2K)=I$. Under its stated hypotheses, [F2] supplies the corresponding target/separate-block error bounds. In the zero-input branch the representative is $I$, the block is copied exactly, and both target and separate-block errors are zero; no expression $P(0)$ is evaluated.",
+              "inputs": [
+                "F1",
+                "F2",
+                "step 1.1",
+                "algebra"
+              ]
+            }
+          ],
+          "routine_steps": [],
+          "boundaries": [
+            {
+              "case": "empty",
+              "status": "checked",
+              "evidence": "Statement admits q=0 through the wrapper input. Proof1.1 counts its finite norm and update schedule, so the separate panel may have no columns while formation still returns or fails."
+            },
+            {
+              "case": "zero",
+              "status": "checked",
+              "evidence": "Statement and Proof2.1 expressly use I and exact copies for a zero input column, with zero discrepancies and no expression P(0)."
+            },
+            {
+              "case": "one",
+              "status": "checked",
+              "evidence": "Statement covers every admitted finite wrapper input, including m=1. Proof1.1 uses the same component/phase schedule, and Proof2.1 requires positive stored-vector squared norm before the scalar rank-one denominator."
+            },
+            {
+              "case": "degenerate",
+              "status": "checked",
+              "evidence": "Proof1.1 preserves breakdown for invalid/nonpositive stored-vector norms and first range failure otherwise. Proof2.1 establishes unitarity only on successful nonzero input and retains the error lemma hypotheses separately."
+            },
+            {
+              "case": "endpoints",
+              "status": "not_applicable",
+              "reason": "The complex wrapper theorem has finite stored dimensions and conditional arithmetic success, not a parameter-interval claim or threshold equality limit. Finite loop endpoints are already included in Proof1.1."
+            },
+            {
+              "case": "nonempty-choice",
+              "status": "not_applicable",
+              "reason": "The wrapper uses supplied finite data and the fixed scaled phase/norm realization. P(v) is an explicit rank-one formula after success; no external family representative is chosen."
+            },
+            {
+              "case": "iff-forward",
+              "status": "not_applicable",
+              "reason": "The complex wrapper result states termination plus one-way success and conditional-error conclusions; it asserts no equivalence between range success and any exact algebraic property."
+            },
+            {
+              "case": "iff-reverse",
+              "status": "not_applicable",
+              "reason": "Nonzero v and a unitary mathematical representative are not asserted to imply successful rounded arithmetic; no reverse success implication occurs in the Statement."
+            }
+          ]
+        },
+        "note": "Complete parsed source paragraphs/final tags and exact supplier claim sections, not proof-verdict stamps; preserve existing native contract/history if present and merge only necessary source-exact corrections after writer drains."
+      },
+      "coverage": {
+        "target": "research/numerical-optimization-dynamics-2026-10-16-batch-33.coverage.json",
+        "page": "computed-schur-decompositions-and-nonnormal-spectra",
+        "operation": "Add local-extraction source mapping only if absent, retaining inherited source entries as method context; no invented whole-source reading/fetch, status or supported external theorem claim.",
+        "local_basis": [
+          "alg-complex-scaled-householder-reflector-step",
+          "alg-complex-scaled-householder-reflector-step",
+          "alg-scaled-complex-householder-and-givens-updates",
+          "lem-scaled-complex-householder-and-givens-local-backward-error"
+        ],
+        "no_new_external_read": true
+      },
+      "source_provenance": "ai-altered extraction/composition; references copied from actual analyzed procedure; verification.precheck pending; no gate result asserted"
+    },
+    {
+      "id": "lem-exact-francis-step-termination-and-similarity",
+      "batch": "33",
+      "source": "research/numerical-optimization-dynamics-2026-10-16-owner-reader33-procedure-properties-proposal/cycle2-current-closure/source-inputs/items/lem-exact-francis-step-termination-and-similarity.md",
+      "source_state": "Existing native-created draft; preserve actual source and writer ownership",
+      "deps": [
+        "alg-exact-francis-hessenberg-qr-step",
+        "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices",
+        "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift",
+        "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+        "lem-francis-compact-bulge-support-propagation",
+        "lem-real-francis-double-shift-polynomial"
+      ],
+      "algorithm_justified_by": {
+        "target": "items/alg-exact-francis-hessenberg-qr-step.md",
+        "required_entry": "lem-exact-francis-step-termination-and-similarity",
+        "note": "Result deps includes analyzed algorithm; no reverse deps edge. Check current list before adding."
+      },
+      "page_inventory": {
+        "target": "library/numerical-linear-algebra-and-approximation/computed-schur-decompositions-and-nonnormal-spectra.md",
+        "field": "items",
+        "after": "alg-exact-francis-hessenberg-qr-step",
+        "value": "lem-exact-francis-step-termination-and-similarity",
+        "already_present": true,
+        "guard": "research/numerical-optimization-dynamics-2026-10-16-owner-reader33-procedure-properties-proposal/cycle2-current-closure/source-inputs/library/numerical-linear-algebra-and-approximation/computed-schur-decompositions-and-nonnormal-spectra.md"
+      },
+      "manifest_item": {
+        "target": "research/numerical-optimization-dynamics-2026-10-16-batch-33.pages.json",
+        "page": "computed-schur-decompositions-and-nonnormal-spectra",
+        "already_present": true,
+        "suggested_entry": {
+          "id": "lem-exact-francis-step-termination-and-similarity",
+          "kind": "lemma",
+          "title": "An exact Francis step terminates with unitary similarity and its stated status",
+          "deps": [
+            "alg-exact-francis-hessenberg-qr-step",
+            "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices",
+            "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift",
+            "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+            "lem-francis-compact-bulge-support-propagation",
+            "lem-real-francis-double-shift-polynomial"
+          ]
+        },
+        "dependency_level": "ROOT recomputes after source settled; no invented level here"
+      },
+      "contract": {
+        "target": "research/numerical-optimization-dynamics-2026-10-16-batch-33.proof-contracts.json",
+        "pointer": "/contracts/lem-exact-francis-step-termination-and-similarity",
+        "scope_add_if_absent": "lem-exact-francis-step-termination-and-similarity",
+        "already_present": true,
+        "draft": {
+          "citations": [
+            {
+              "fact": "F1",
+              "source": "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices",
+              "source_section": "Definition",
+              "quote": "A square matrix $H=(h_{ij})$ is **upper Hessenberg** when\n$h_{ij}=0$ for every $i>j+1$, so entries below the first subdiagonal vanish.\n\nA real symmetric matrix $T=(t_{ij})$ is **tridiagonal** when\n$t_{ij}=0$ for every $|i-j|>1$. Thus a real symmetric tridiagonal matrix is\nexactly a symmetric upper Hessenberg matrix.",
+              "uses": [
+                "1.1"
+              ]
+            },
+            {
+              "fact": "F2",
+              "source": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+              "source_section": "Statement",
+              "quote": "Let $\\mathbb F=\\mathbb R$ or $\\mathbb C$.\n\n1. Every Householder reflector $H_v=I-2vv^*$ is orthogonal or unitary.\n2. For every nonzero $z\\in \\mathbb F^m$, there is a Householder reflector $H$\n   such that $Hz=\\alpha e_1$ with $|\\alpha|=\\|z\\|_2$.\n3. For every pair $(a,b)\\in \\mathbb F^2$ not both zero, there is a real or\n   complex Givens transformation $G$ such that\n   $$G\\binom{a}{b}=\\binom{\\alpha}{0}$$\n   with $|\\alpha|=(|a|^2+|b|^2)^{1/2}$.",
+              "uses": [
+                "2.1",
+                "3.1"
+              ]
+            },
+            {
+              "fact": "F3",
+              "source": "lem-real-francis-double-shift-polynomial",
+              "source_section": "Statement",
+              "quote": "Let $B=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}\\in\\mathbb R^{2\\times2}$, set $s=\\operatorname{tr}B=a+d$, $t=\\det B=ad-bc$, and define $p(z)=z^2-sz+t$. Then $p(z)=\\det(zI-B)$ and $p(B)=0$. If $s^2-4t<0$, the roots are a nonreal conjugate pair $\\mu,\\overline\\mu$, and for every real square matrix $H$ of positive dimension,\n\n$$p(H)=H^2-sH+tI=(H-\\mu I)(H-\\overline\\mu I)$$\n\nis real. This supplies the exact polynomial used by a real double-shift step; it asserts no convergence of the iteration.",
+              "uses": [
+                "2.1"
+              ]
+            },
+            {
+              "fact": "F4",
+              "source": "lem-francis-compact-bulge-support-propagation",
+              "source_section": "Statement",
+              "quote": "Let $n\\ge1$, let $r\\in\\{1,2\\}$, and require $n\\ge2$ when $r=2$. Let $H_0\\in\\mathbb F^{n\\times n}$ be upper Hessenberg, and let $P_0$ be a Householder reflector supported on the first $\\min(r+1,n)$ coordinates. Set $H_1=P_0^*H_0P_0$. For $j=1,\\ldots,J:=\\max(n-2,0)$, put $I_j=\\{j+1,\\ldots,\\min(j+r+1,n)\\}$. Let $P_j$ be either the identity on $I_j$ or a Householder reflector supported on $I_j$, in either case required to map the active vector $(H_j)_{I_j,j}$ to a multiple of the first coordinate vector, and set $H_{j+1}=P_j^*H_jP_j$. Then $H_{J+1}$ is upper Hessenberg.\n\nIf, in addition, $x\\ne0$, $P_0x=\\alpha e_1$ with $\\alpha\\ne0$, and $Q=P_0P_1\\cdots P_J$, then $Qe_1=x/\\alpha$. Thus the exact chase preserves the initial direction while restoring the Hessenberg zero pattern.",
+              "uses": [
+                "4.1"
+              ]
+            }
+          ],
+          "derivations": [
+            {
+              "id": "derive-1.1",
+              "step": "1.1",
+              "claim": "If $H$ is upper Hessenberg, then $He_1$ is supported in rows $1,2$; applying $H$ once more makes $H^2e_1$ supported in rows $1,2,3$. Thus the defined $p(H)e_1$ is supported in its first $r+1$ entries for either shift descriptor.",
+              "inputs": [
+                "given",
+                "F1",
+                "algebra"
+              ]
+            },
+            {
+              "id": "derive-2.1",
+              "step": "2.1",
+              "claim": "If the initial vector is zero, the algorithm returns the identity step. Otherwise [F2] supplies $P_0$. Each later active vector either is zero, in which case its identity branch is defined, or [F2] supplies $P_j$. The loop has at most $\\max(n-2,0)$ iterations, so the step terminates. In the ordinary real branch [F3] identifies the trace/determinant polynomial with the conjugate-pair shifts when the trailing block has negative discriminant.",
+              "inputs": [
+                "given",
+                "F2",
+                "F3",
+                "step 1.1",
+                "choose"
+              ]
+            },
+            {
+              "id": "derive-3.1",
+              "step": "3.1",
+              "claim": "Every update is the exact similarity $H_{j+1}=P_j^*H_jP_j$. Hence the product $Q=P_0P_1\\cdots P_j$ gives $H_{j+1}=Q^*HQ$ by induction on the finite update list; every factor is unitary by [F2].",
+              "inputs": [
+                "F2",
+                "step 2.1",
+                "algebra"
+              ]
+            },
+            {
+              "id": "derive-4.1",
+              "step": "4.1",
+              "claim": "In the nonzero-vector branch, [F4] proves that the final matrix is upper Hessenberg and $Qe_1$ is proportional to $p(H)e_1$, so the exact checks return completed. The zero-vector branch already returned its explicit status. Hence the invariant-failure branch is unreachable for valid exact inputs, and every returned status and similarity factor is well-defined.",
+              "inputs": [
+                "given",
+                "F4",
+                "step 3.1",
+                "algebra"
+              ]
+            }
+          ],
+          "routine_steps": [],
+          "boundaries": [
+            {
+              "case": "empty",
+              "status": "checked",
+              "evidence": "Proof2.1 bounds the chase by max(n−2,0); when n=1 or n=2 the chase list is empty. Proof3.1 then uses the initial factor only, or the zero-vector return uses I."
+            },
+            {
+              "case": "zero",
+              "status": "checked",
+              "evidence": "Statement and Proof2.1 return H unchanged,Q=I and zero-shift-vector for p(H)e1=0. Zero later active segments use identities, satisfying F4 alignment without normalizing zero."
+            },
+            {
+              "case": "one",
+              "status": "checked",
+              "evidence": "The admitted complex-single descriptor includes n=1. Proof1.1 has only the first polynomial-vector coordinate, and Proof2.1 has no chase indices; a nonzero initial vector uses its scalar aligning reflector."
+            },
+            {
+              "case": "degenerate",
+              "status": "checked",
+              "evidence": "The exact Statement imposes no nonsingular-shift hypothesis. A vanishing initial vector has its explicit return; later zero vectors use identity, while F4 explicitly requires alignment of every chosen factor."
+            },
+            {
+              "case": "endpoints",
+              "status": "checked",
+              "evidence": "Proof2.1 includes all j=1 through max(n−2,0); Proof4.1 uses F4 final pattern/direction only after that finite list. The zero-chase small dimensions and last active window are covered by that supplier."
+            },
+            {
+              "case": "nonempty-choice",
+              "status": "checked",
+              "evidence": "Proof2.1 uses F2 constructive Householder existence only for each nonzero vector in a finite chase; zero vectors have an explicit identity. Thus every required finite choice has a stated witness supplier, without arbitrary-family choice."
+            },
+            {
+              "case": "iff-forward",
+              "status": "not_applicable",
+              "reason": "The exact result gives one-way valid-input termination and status properties. It does not characterize all matrices that could produce a completed record or assert an equivalence with convergence."
+            },
+            {
+              "case": "iff-reverse",
+              "status": "not_applicable",
+              "reason": "The exact result does not infer valid inputs, nonsingular shifts or convergence from a Hessenberg candidate. Its precise forward status claim is not a biconditional."
+            }
+          ]
+        },
+        "note": "Complete parsed source paragraphs/final tags and exact supplier claim sections, not proof-verdict stamps; preserve existing native contract/history if present and merge only necessary source-exact corrections after writer drains."
+      },
+      "coverage": {
+        "target": "research/numerical-optimization-dynamics-2026-10-16-batch-33.coverage.json",
+        "page": "computed-schur-decompositions-and-nonnormal-spectra",
+        "operation": "Add local-extraction source mapping only if absent, retaining inherited source entries as method context; no invented whole-source reading/fetch, status or supported external theorem claim.",
+        "local_basis": [
+          "alg-exact-francis-hessenberg-qr-step",
+          "alg-exact-francis-hessenberg-qr-step",
+          "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices",
+          "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift",
+          "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+          "lem-francis-compact-bulge-support-propagation",
+          "lem-real-francis-double-shift-polynomial"
+        ],
+        "no_new_external_read": true
+      },
+      "source_provenance": "ai-altered extraction/composition; references copied from actual analyzed procedure; verification.precheck pending; no gate result asserted"
+    }
+  ],
+  "guards": "Full actual metadata before bytes archived for review only; native writers active, root must rebase/preserve their current changes before application."
+}

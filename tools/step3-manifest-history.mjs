@@ -94,15 +94,117 @@ function ownerArchive(root,run,r,route) {
     'owner continuity lacks the exact paused drained native downstream-manifest failure');
   return archived;
 }
-export function historicalStep3Manifest(root,run,batch,r,route) {
+
+export const PRECLOSURE_MANIFEST_POLICY='owner-step3-preclosure-manifest-evidence-v1';
+const canonicalRoute=x=>Array.isArray(x)?x.map(canonicalRoute):x&&typeof x==='object'
+  ?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canonicalRoute(x[k])])):x;
+// A historical routing capture is not a reader observation or math acceptance.
+function preclosureArchive(root,run,batch,r,route,current,frozenArtifacts=null) {
+  if(route.kind!=='downstream-consumer')return null;
+  const path=`research/${run}-step3-owner-preclosure-manifest-continuities.json`;
+  if(!existsSync(resolve(root,path)))return null;
+  const raw=bytes(root,path),doc=JSON.parse(raw);
+  if(frozenArtifacts)assert(frozenArtifacts[path]===sha(raw),'preclosure registry is not the exact sealed original');
+  assert(doc.version===1&&doc.kind===PRECLOSURE_MANIFEST_POLICY&&doc.run===run
+    &&doc.authorized_by==='owner'&&doc.owner_identity==='/root'&&doc.historical_only===true
+    &&doc.mathematical_acceptance===false&&doc.native_coverage_adopted===false
+    &&Number.isFinite(Date.parse(doc.recorded_at))&&typeof doc.reason==='string'
+    &&doc.reason.trim().length>=80&&Array.isArray(doc.entries)&&doc.entries.length>0,'invalid preclosure authority');
+  assert(doc.entries.every(e=>Number.isSafeInteger(e.route_index)&&e.route_index>=0
+    &&['manifest','consumer_manifest'].includes(e.field)),'invalid preclosure route identity');
+  const keys=doc.entries.map(e=>JSON.stringify([e.route_index,e.field]));
+  assert(new Set(keys).size===keys.length,'duplicate preclosure route');
+  const matches=doc.entries.filter(e=>e.route_index===route.index&&e.field===route.field);
+  if(!matches.length)return null;
+  const e=matches[0],evidence={[path]:sha(raw)};
+  const ownRef=q=>{
+    assert(typeof q?.path==='string'&&q.path.startsWith(`research/${run}-`)
+      &&!q.path.split('/').includes('..'),'preclosure evidence outside own run');
+    if(frozenArtifacts)assert(frozenArtifacts[q.path]===q.sha256,'preclosure reference is not in the exact sealed artifact map');
+    const b=ref(root,q);assert(evidence[q.path]===undefined||evidence[q.path]===q.sha256,'ambiguous preclosure evidence');
+    evidence[q.path]=q.sha256;return b;
+  };
+  assert(e.original?.path===r.path&&e.original.sha256===r.sha256
+    &&e.archive?.sha256===r.sha256&&e.preimage_origin?.sha256===r.sha256
+    &&e.route_registry?.path===route.registry&&typeof e.reason==='string'
+    &&e.reason.trim().length>=80,'wrong preclosure subject');
+  const registry=JSON.parse(ownRef(e.route_registry)),original=registry.routes?.[route.index];
+  assert(registry.version===1&&registry.run===run
+    &&registry.policy==='owner-step3-downstream-consumer-route-v1'
+    &&sha(JSON.stringify(canonicalRoute(original)))===e.route_entry_sha256
+    &&original?.[route.field]?.path===r.path&&original[route.field].sha256===r.sha256,
+    'changed original preclosure route');
+  assert((route.field==='manifest'?original.batch:original.consumer_batch)===String(batch),'wrong preclosure batch');
+  const historical=ownRef(e.archive);assert(ownRef(e.preimage_origin).equals(historical),'original full preimage differs');
+  const closureCapture=ownRef(e.current_archive);
+  assert(e.current?.path===r.path&&e.current.sha256===sha(closureCapture)
+    &&e.current_archive.sha256===e.current.sha256,'closure-time manifest capture differs');
+  if(frozenArtifacts)assert(frozenArtifacts[r.path]===e.current.sha256,'canonical closure-time manifest binding changed');
+  else assert(closureCapture.equals(current),'current manifest capture differs');
+  // In verify mode this canonical key denotes the original artifact slot;
+  // its authenticated bytes come from closureCapture, never the later live file.
+  evidence[r.path]=e.current.sha256;
+  const identity=b=>{
+    const d=JSON.parse(b),pages=Array.isArray(d)?d:d.pages;
+    assert(Array.isArray(pages),'invalid manifest pages');
+    const ids=[],itemIds=[];
+    const value=pages.map(p=>{assert(typeof p.id==='string'&&Array.isArray(p.items),'invalid page identity');ids.push(p.id);
+      const items=p.items.map(x=>typeof x==='string'?x:x.id);assert(items.every(x=>typeof x==='string'),'invalid item identity');
+      itemIds.push(...items);return {id:p.id,category:p.category??null,kind:p.kind??null,items:items.sort()};}).sort((a,b)=>a.id.localeCompare(b.id));
+    assert(new Set(ids).size===ids.length&&new Set(itemIds).size===itemIds.length,'ambiguous manifest identity');
+    return JSON.stringify(value);
+  };
+  assert(identity(historical)===identity(frozenArtifacts?closureCapture:current),'changed historical/current page or item identity');
+  const prefix=`research/${run}-dispatch/alpha-3a-batch-${batch}`;
+  assert(new RegExp(`^${prefix}\\.attempt-[1-9]\\d*\\.result\\.json$`).test(e.native_result?.path),'nonimmutable Alpha result');
+  const result=JSON.parse(ownRef(e.native_result));
+  assert(result.run===run&&result.role==='alpha'&&result.label===`3a-batch-${batch}`
+    &&result.ok===true&&result.exit_code===0&&result.process_exit_code===0&&result.timed_out!==true
+    &&result.terminal_summary?.task_completed===true&&result.terminal_summary.task_aborted===false
+    &&result.terminal_summary.final_response_present===true
+    &&result.covers?.map(String).includes(String(batch))&&Number.isFinite(Date.parse(result.started_at))
+    &&Number.isFinite(Date.parse(result.ended_at))&&Date.parse(result.started_at)<=Date.parse(result.ended_at)
+    &&Date.parse(result.ended_at)<=Date.parse(doc.recorded_at),'Alpha did not genuinely complete');
+  assert(e.native_report?.path===`research/${run}-alpha-batch-${batch}-3a.md`
+    &&typeof result.tail==='string'&&result.tail.includes(e.native_report.path),'Alpha completion lacks actual report');
+  const report=ownRef(e.native_report);assert(report.length>0,'empty native Alpha report');
+  const reconciliation=JSON.parse(ownRef(e.current_metadata_evidence));
+  assert(reconciliation.version===1&&reconciliation.kind==='owner-step3-current-manifest-reconciliation'
+    &&reconciliation.run===run&&reconciliation.owner_identity==='/root'
+    &&reconciliation.mathematical_acceptance===false&&reconciliation.native_coverage_adopted===false
+    &&reconciliation.bindings?.[r.path]===e.current.sha256
+    &&reconciliation.original_bindings?.[r.path]===r.sha256
+    &&reconciliation.native_result?.path===e.native_result.path
+    &&reconciliation.native_result.sha256===e.native_result.sha256
+    &&Number.isFinite(Date.parse(reconciliation.recorded_at))
+    &&Date.parse(reconciliation.recorded_at)>=Date.parse(result.ended_at)
+    &&Date.parse(reconciliation.recorded_at)<=Date.parse(doc.recorded_at)
+    &&typeof reconciliation.reason==='string'&&reconciliation.reason.trim().length>=80,
+    'missing genuine current root metadata reconciliation');
+  return {historical,current,archived:true,evidence,...(frozenArtifacts?{closureCapture}: {})};
+}
+
+export function historicalStep3Manifest(root,run,batch,r,route,{preclosure=false,frozenArtifacts=null}={}) {
   assert(/^[a-zA-Z0-9_-]+$/.test(run)&&/^[1-9]\d*$/.test(String(batch))
     &&r?.path===`research/${run}-batch-${batch}.pages.json`&&/^[a-f0-9]{64}$/.test(r.sha256??''),'wrong manifest reference');
+  if(frozenArtifacts){
+    const frozen=json(root,`research/${run}-step3-closure.json`);
+    assert(preclosure&&frozen.version===3&&frozen.run===run&&frozen.status==='closed'
+      &&frozen.basis==='dependency-ordered-step3a'&&frozen.manifest_evidence_policy===PRECLOSURE_MANIFEST_POLICY
+      &&JSON.stringify(frozen.artifacts)===JSON.stringify(frozenArtifacts),'not the actual original marked frozen closure');
+  }
   const current=bytes(root,r.path);
-  if(sha(current)===r.sha256)return {historical:current,current,archived:false};
+  if(!frozenArtifacts&&sha(current)===r.sha256)return {historical:current,current,archived:false};
   assert(route&&Number.isSafeInteger(route.index)&&route.index>=0&&['manifest','consumer_manifest'].includes(route.field)
     &&['required-page','downstream-consumer'].includes(route.kind)
     &&route.registry===`research/${run}-step3-owner-${route.kind}-routes.json`,
     'invalid historical route identity');
+  if(preclosure){const captured=preclosureArchive(root,run,batch,r,route,current,frozenArtifacts);if(captured)return captured;}
+  if(frozenArtifacts){
+    // No new certified/owner archive may enlarge an already frozen artifact set.
+    assert(frozenArtifacts[r.path]===r.sha256&&sha(current)===r.sha256,'missing exact original closure-time manifest archive');
+    return {historical:current,current,archived:false};
+  }
   const historical=ownerArchive(root,run,r,route)??certifiedArchive(root,run,r);
   return {historical,current,archived:true};
 }

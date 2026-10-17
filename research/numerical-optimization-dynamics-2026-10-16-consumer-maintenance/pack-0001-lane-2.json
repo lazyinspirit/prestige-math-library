@@ -1,0 +1,86 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "pack": "pack-0001",
+  "lane": 2,
+  "ids": [
+    "ex-rosenbrock-euler-stiff-linear-damping",
+    "thm-rosenbrock-euler-a-l-stable",
+    "thm-rosenbrock-euler-one-newton-step-for-backward-euler"
+  ],
+  "assignment": "research/numerical-optimization-dynamics-2026-10-16-consumer-maintenance/pack-0001-lane-2.json",
+  "task": "research/numerical-optimization-dynamics-2026-10-16-consumer-maintenance/pack-0001-lane-2.md",
+  "report": "research/numerical-optimization-dynamics-2026-10-16-consumer-maintenance/pack-0001-lane-2-report.json",
+  "before": {
+    "ex-rosenbrock-euler-stiff-linear-damping": {
+      "sha256": "f9e3f7e9a5a8f7dcab10dc5befb4e2bb946330236e1e866545e08f020c97dc67",
+      "guard_sha256": "da40518361841abac33afbc4d4d74ba91cff0e86f07038aadd520cd5b21c89bd",
+      "statement_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "text": "---\nid: ex-rosenbrock-euler-stiff-linear-damping\nkind: example\ntitle: Rosenbrock-Euler damps a stiff scalar mode\nstatus: draft\norigin: pipeline\npipeline_run: numerical-optimization-dynamics-2026-10-16\ndeps: [def-rosenbrock-euler-step-map, thm-rosenbrock-euler-a-l-stable]\ndependency_level: 2\nproof_strategy: direct\nprovenance:\n  statement: ai-generated\n  proof: ai-generated\ngeneration:\n  role: example\nsources:\n  references:\n    - title: \"Ralf Kornhuber, Notes on Numerical Methods for ODEs and Numerical Linear Algebra, §1.8, pp. 33–34\"\n      url: \"https://numerik.mi.fu-berlin.de/wiki/WS_2021/NumericsII_Dokumente/NumericsIIKornhuber_rev5.pdf\"\nverification:\n  precheck: pending\n---\n\n## Example\n\nFor the scalar equation $y'=-10y$, take $h=1/5$ and $y_n=1$. The Rosenbrock-Euler factor is $1/(1-h\\lambda)=1/3$, whereas the explicit Euler step gives $1+h\\lambda=-1$. Thus Rosenbrock-Euler contracts this stiff scalar mode on this step while explicit Euler changes its sign without reducing its magnitude.\n\n## Facts & Assumptions\n\n**Given:** $f(y)=-10y$, $y_n=1$, $h=1/5$, and exact-arithmetic stage equations with $\\gamma=1$.\n\n[F1] [[def-rosenbrock-euler-step-map]]: the exact scalar method with $\\gamma=1$ solves $(1-h\\lambda)k=\\lambda y_n$ and has update $y_{n+1}=y_n+hk$.\n\n[F2] [[thm-rosenbrock-euler-a-l-stable]] gives Rosenbrock-Euler's scalar factor $R(z)=(1-z)^{-1}$ when the stage is invertible.\n\n## Verification\n\n1.1 Here $\\lambda=-10$ and $z=h\\lambda=-2$, so $1-h\\lambda=3$. The exact stage solve in [F1] gives $k=-10/3$ and $y_{n+1}=1-(1/5)(10/3)=1/3$. [given, F1, algebra]\n\n2.1 The explicit Euler update is $1+h\\lambda=1-2=-1$. The two amplification magnitudes are therefore $1/3$ and $1$, respectively, proving the stated contrast for this finite scalar example. [given, step 1.1, algebra] ∎\n"
+    },
+    "thm-rosenbrock-euler-a-l-stable": {
+      "sha256": "482dab607ffed92cb3dcf8015c1d409c9a553a41dc055fa11a2d44ce7a78cdb5",
+      "guard_sha256": "3a9c17cc7b906a238e240d870fe9f7aeadc52066f2a2d2a17911c6d24e50895b",
+      "statement_sha256": "5bbb4df43cf859a8c8927da3a54c4d4bc7e38bbe333da7699b75c3cedbc3f6d3",
+      "text": "---\nid: thm-rosenbrock-euler-a-l-stable\nkind: theorem\ntitle: Rosenbrock-Euler is A-stable and L-stable on the scalar test equation\nstatus: draft\norigin: pipeline\npipeline_run: numerical-optimization-dynamics-2026-10-16\ndeps: [def-rosenbrock-euler-step-map, thm-rosenbrock-euler-scalar-a-and-l-stability]\ndependency_level: 1\nproof_strategy: direct\nprovenance:\n  statement: ai-altered\n  proof: ai-generated\nsources:\n  references:\n    - title: \"Ralf Kornhuber, Notes on Numerical Methods for ODEs and Numerical Linear Algebra, §§1.3 and 1.8, pp. 11–13, 33–34\"\n      url: \"https://numerik.mi.fu-berlin.de/wiki/WS_2021/NumericsII_Dokumente/NumericsIIKornhuber_rev5.pdf\"\n    - title: \"Peter Benner and Hermann Mena, Rosenbrock methods for solving differential Riccati equations, §II, pp. 2–4\"\n      url: \"https://cscproxy.mpi-magdeburg.mpg.de/preprints/2011/MPIMD11-06.pdf\"\nverification:\n  precheck: pending\n---\n\n## Statement\n\nConsider the exact-arithmetic Rosenbrock-Euler map of [[def-rosenbrock-euler-step-map]] with $\\gamma=1$, exact Jacobian, and its complex scalar test equation $y'=\\lambda y$, $z=h\\lambda$. The complexification is the real two-dimensional exact map under $(\\operatorname{Re}y,\\operatorname{Im}y)$, with multiplication by $\\lambda$ represented by $C_\\lambda=\\begin{pmatrix}\\operatorname{Re}\\lambda&-\\operatorname{Im}\\lambda\\\\\\operatorname{Im}\\lambda&\\operatorname{Re}\\lambda\\end{pmatrix}$. Thus its exact stage equation is $(I_2-hC_\\lambda)k=C_\\lambda y$, equivalently $(1-z)k=\\lambda y$, and its update is $y+hk$. This is the $\\gamma=1$ exact complexification used in [[thm-rosenbrock-euler-scalar-a-and-l-stability]], not execution of a real rounded solver. Its amplification factor is $R(z)=(1-z)^{-1}$. A-stability means no pole and $|R(z)|\\le1$ throughout $\\operatorname{Re}z\\le0$; L-stability additionally means $R(z)\\to0$ as $|z|\\to\\infty$ within that half-plane. The exact method is both A-stable and L-stable, and its amplification factor agrees with backward Euler.\n\n## Facts & Assumptions\n\n**Given:** A scalar complex test equation, a step $h>0$, and $\\operatorname{Re}\\lambda\\le0$ when stability is asserted.\n\n[F1] [[def-rosenbrock-euler-step-map]] gives the real exact-Jacobian equation and update at $\\gamma=1$. Under the real two-dimensional representation in the Statement these are exactly $y^+=y+hk$ and $(1-h\\lambda)k=\\lambda y$; [[thm-rosenbrock-euler-scalar-a-and-l-stability]] uses the same exact complexification and rational-function stability criteria.\n\n## Proof\n\n1.1 If $\\operatorname{Re}z\\le0$, then $1-z\\ne0$. Solving the stage equation in [F1] gives $y^+=y+h\\lambda y/(1-z)=y/(1-z)$, so $R(z)=(1-z)^{-1}$; this is also the scalar backward-Euler update. [given, F1, algebra]\n\n2.1 For $\\operatorname{Re}z\\le0$, $|1-z|^2=1-2\\operatorname{Re}z+|z|^2\\ge1+|z|^2>0$. Hence there is no pole there and $|R(z)|\\le1/\\sqrt{1+|z|^2}\\le1$. The same bound tends to zero whenever $|z|\\to\\infty$ within the closed left half-plane. These prove the stated A- and full L-stability conditions. [given, F1, step 1.1, algebra] ∎\n"
+    },
+    "thm-rosenbrock-euler-one-newton-step-for-backward-euler": {
+      "sha256": "1aea27d250eaffe5b84f258c639d11b2779aecc5d12ae4f3f0b7efcf6d7a8d02",
+      "guard_sha256": "405d9aeb9ae4203d33b75a7335d285d5568d8beb0d8cbb148c8ff44dfff58115",
+      "statement_sha256": "9e959505bf5b9f45d9d1278a2f4b35c281b51d3a0087361ef46616fb30faeaf5",
+      "text": "---\nid: thm-rosenbrock-euler-one-newton-step-for-backward-euler\nkind: theorem\ntitle: Rosenbrock-Euler is one Newton correction for backward Euler\nstatus: draft\norigin: pipeline\npipeline_run: numerical-optimization-dynamics-2026-10-16\ndeps: [def-rosenbrock-euler-step-map]\ndependency_level: 1\nproof_strategy: direct\nprovenance:\n  statement: ai-altered\n  proof: ai-generated\nsources:\n  references:\n    - title: \"Ralf Kornhuber, Notes on Numerical Methods for ODEs and Numerical Linear Algebra, §§1.7.2 and 1.8, pp. 31–34\"\n      url: \"https://numerik.mi.fu-berlin.de/wiki/WS_2021/NumericsII_Dokumente/NumericsIIKornhuber_rev5.pdf\"\n    - title: \"Peter Benner and Hermann Mena, Rosenbrock methods for solving differential Riccati equations, §II, pp. 2–4\"\n      url: \"https://cscproxy.mpi-magdeburg.mpg.de/preprints/2011/MPIMD11-06.pdf\"\nverification:\n  precheck: pending\n---\n\n## Statement\n\nLet $f:U\\to\\mathbb R^d$ be continuously differentiable, $y\\in U$, $h>0$, and suppose $M:=I-hDf(y)$ is invertible. The backward-Euler increment equation is $G(s):=s-hf(y+s)=0$. A Newton correction for $G$ at $s_0=0$, defined by $s_1=s_0-DG(s_0)^{-1}G(s_0)$, is $s_1=hM^{-1}f(y)$. Consequently, the state $y+s_1$ equals the exact-arithmetic autonomous exact-Jacobian Rosenbrock-Euler map [[def-rosenbrock-euler-step-map]] with $\\gamma=1$. This identity concerns one Newton correction only; it asserts neither convergence of Newton iteration nor that the corrected increment solves $G(s)=0$.\n\n## Facts & Assumptions\n\n**Given:** The differentiable vector field, state, positive step, and invertible matrix in the statement.\n\n[F1] [[def-rosenbrock-euler-step-map]]: the exact-arithmetic autonomous exact-Jacobian map at $\\gamma=1$ is $y+h(I-hDf(y))^{-1}f(y)$ whenever the stage matrix is invertible.\n\n## Proof\n\n1.1 Differentiating $G(s)=s-hf(y+s)$ at $s=0$ gives $DG(0)=I-hDf(y)=M$, while direct substitution gives $G(0)=-hf(y)$. [given, algebra]\n\n2.1 The Newton correction is therefore $s_1=0-M^{-1}(-hf(y))=hM^{-1}f(y)$. [given, step 1.1, algebra]\n\n3.1 By [F1], the Rosenbrock-Euler output is $y+hM^{-1}f(y)=y+s_1$, as claimed. [F1, step 2.1, algebra] ∎\n"
+    }
+  },
+  "obligations": [
+    {
+      "key": "c3dfb6c1374ab1fff6d9bb3a29aab59a6b26034b8175949c9575d3cf25ca253f",
+      "id": "ex-rosenbrock-euler-stiff-linear-damping",
+      "event_key": "5fd633f11bdcb624dad3219a063ffbaa4fba0b2b5466b4f8d24f860e5cce0521",
+      "status": "pending",
+      "paths": [
+        [
+          "def-rosenbrock-euler-step-map",
+          "ex-rosenbrock-euler-stiff-linear-damping"
+        ]
+      ],
+      "event": {
+        "id": "def-rosenbrock-euler-step-map",
+        "before_statement_sha256": "001e4d260a39c14e47c1de4735fe8afe4bceee1f68f5741f82ec52d0242cb6eb",
+        "after_statement_sha256": "91fd0ae85e9eeccad279bc84331107a2c9cd6b30cbd9e9d2f4653751e7746cf7"
+      }
+    },
+    {
+      "key": "3aa11b639744b7250ea8628a549043a40e7089398f25d65e5cc81ad7d366bec1",
+      "id": "thm-rosenbrock-euler-a-l-stable",
+      "event_key": "5fd633f11bdcb624dad3219a063ffbaa4fba0b2b5466b4f8d24f860e5cce0521",
+      "status": "pending",
+      "paths": [
+        [
+          "def-rosenbrock-euler-step-map",
+          "thm-rosenbrock-euler-a-l-stable"
+        ]
+      ],
+      "event": {
+        "id": "def-rosenbrock-euler-step-map",
+        "before_statement_sha256": "001e4d260a39c14e47c1de4735fe8afe4bceee1f68f5741f82ec52d0242cb6eb",
+        "after_statement_sha256": "91fd0ae85e9eeccad279bc84331107a2c9cd6b30cbd9e9d2f4653751e7746cf7"
+      }
+    },
+    {
+      "key": "ff8fec090db570b5a2c21976437c106658f06fe9417d7dd1eff9bf45ac85be56",
+      "id": "thm-rosenbrock-euler-one-newton-step-for-backward-euler",
+      "event_key": "5fd633f11bdcb624dad3219a063ffbaa4fba0b2b5466b4f8d24f860e5cce0521",
+      "status": "pending",
+      "paths": [
+        [
+          "def-rosenbrock-euler-step-map",
+          "thm-rosenbrock-euler-one-newton-step-for-backward-euler"
+        ]
+      ],
+      "event": {
+        "id": "def-rosenbrock-euler-step-map",
+        "before_statement_sha256": "001e4d260a39c14e47c1de4735fe8afe4bceee1f68f5741f82ec52d0242cb6eb",
+        "after_statement_sha256": "91fd0ae85e9eeccad279bc84331107a2c9cd6b30cbd9e9d2f4653751e7746cf7"
+      }
+    }
+  ]
+}

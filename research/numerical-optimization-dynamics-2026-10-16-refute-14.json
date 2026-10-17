@@ -1,0 +1,90 @@
+{
+  "batch": "14",
+  "opened": [
+    "alg-budgeted-validated-range-evaluation",
+    "alg-certified-elementary-range-evaluation",
+    "def-centered-taylor-model-with-derivative-interval",
+    "def-complete-ordered-real-field",
+    "def-continuity-and-derivative-on-real-interval",
+    "def-dyadic-floating-point-format-and-directed-rounding",
+    "def-intervals-rectangles-and-complex-balls",
+    "def-outward-rounded-interval-and-ball-operations",
+    "def-real-elementary-functions-and-domains",
+    "ex-certified-sine-near-a-multiple-of-pi",
+    "ex-division-by-interval-containing-zero",
+    "ex-interval-subtraction-dependency",
+    "lem-absolutely-convergent-series-cauchy-product",
+    "lem-archimedean-property-from-completeness",
+    "lem-closed-interval-compactness-from-completeness",
+    "lem-continuous-functions-riemann-integrable",
+    "lem-derivative-algebra-and-chain-rules",
+    "lem-directed-dyadic-rounding-enclosure-and-error",
+    "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+    "lem-extreme-value-theorem-from-compactness",
+    "lem-fundamental-theorem-and-integration-by-parts",
+    "lem-mean-value-theorem-on-closed-interval",
+    "lem-nonnegative-square-root-exists-and-unique",
+    "lem-power-series-termwise-differentiation",
+    "lem-range-reduced-exp-log-and-arctan-series-enclosures",
+    "lem-real-and-complex-modulus-rules",
+    "lem-riemann-integral-linearity",
+    "lem-rolle-theorem-from-extreme-values",
+    "lem-taylor-integral-remainder",
+    "lem-taylor-lagrange-remainder-from-mean-value",
+    "lem-trigonometric-identities-machin-and-range-reduction",
+    "outward-rounded-interval-and-ball-arithmetic",
+    "outward-rounded-interval-and-ball-arithmetic-examples",
+    "thm-budgeted-range-evaluation-terminates-and-is-sound",
+    "thm-centered-taylor-model-encloses-function-range",
+    "thm-complex-elementary-range-enclosures",
+    "thm-dyadic-square-root-bisection-encloses",
+    "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "thm-real-elementary-range-enclosures"
+  ],
+  "not_opened": [],
+  "flagged": [
+    {
+      "id": "alg-certified-elementary-range-evaluation",
+      "location": "Definition, Step 2 (real exponential node)",
+      "defect": "missing-hypothesis",
+      "evidence": "The step says to evaluate on the outward-rounded interval U=X/2^s and use the exponential-tail lemma with max |u| on U; that lemma requires |u|≤1/2. The allowed format p=4, e_min=e_max=5 has η=4 and N_max=60. For X=[60,60], s=7 and the exact scaled value is 15/32, but directed rounding gives U=[0,4]. With N=1, q=max|U|/(N+2)=4/3, so the displayed tail formula has a negative denominator and gives no symmetric remainder interval. The procedure has no guard or valid tail branch for this admissible case.",
+      "severity": "fatal"
+    },
+    {
+      "id": "def-outward-rounded-interval-and-ball-operations",
+      "location": "Definition, complex-rectangle reciprocal paragraph and Well-definedness",
+      "defect": "false-claim",
+      "evidence": "The text asserts that a rectangle excluding zero has a denominator interval with strictly positive lower endpoint. In the valid format p=2, e_min=e_max=0, η=1/2; for X=[1/2,1/2] and imaginary interval Y=[0,0], the rectangle excludes zero, but X²=[1/4,1/4] rounds outward to [0,1/2]. Thus X²+Y² contains zero, contrary to the asserted positivity, and the stated real interval division cannot compute the reciprocal as claimed.",
+      "severity": "fatal"
+    },
+    {
+      "id": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+      "location": "Proof, Step 1.1",
+      "defect": "unlicensed-inference",
+      "evidence": "Step 1.1 says that if a rectangle excludes zero, its squared coordinate interval has a positive lower endpoint, so the denominator interval is positive. For p=2, e_min=e_max=0 and rectangle [1/2,1/2]+i[0,0], the exact square 1/4 rounds to [0,1/2]. Directed rounding guarantees enclosure but not a strictly positive rounded lower endpoint, so this step does not license a finite reciprocal calculation.",
+      "severity": "fatal"
+    },
+    {
+      "id": "thm-real-elementary-range-enclosures",
+      "location": "Proof, Step 1.1",
+      "defect": "unlicensed-inference",
+      "evidence": "The proof applies the tail bound from [L3] using the largest absolute endpoint of the scaled interval. [L3] is stated only for |u|≤1/2, while outward rounding can enlarge that interval beyond this domain: in the allowed p=4, e_min=e_max=5 format, X=[60,60] gives U=[0,4]. The exact scaled input remains 15/32, but using 4 as the lemma parameter is not licensed. The proof can instead use the exact scaled-input bound or prove an extended tail estimate; this is a small proof gap.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "thm-real-elementary-range-enclosures",
+      "location": "Proof, Step 1.1",
+      "defect": "unlicensed-inference",
+      "evidence": "The current step states that the coefficient sum ∑_{n₁+⋯+n_d=k}1/(n₁!⋯n_d!) equals d^k/k!, “where the equality is the multinomial theorem.” Its cited [L6] supplier establishes finite Cauchy-product convolutions but does not evaluate this d-fold coefficient sum, and the step gives no derivation or exact supplier for that identity. The missing expansion of (1+⋯+1)^k is elementary, so this is nonfatal.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "outward-rounded-interval-and-ball-arithmetic-examples",
+      "location": "B-page summary, opening sentence",
+      "defect": "overstrong-title-or-statement",
+      "evidence": "The summary says a divisor interval crossing zero cannot produce a finite sound hull. For numerator [0,0] and divisor [-1,1], restricting to nonzero divisors gives the exact quotient range {0}, with finite hull [0,0]. The assigned [1,2]/[-1,1] example is valid, but the summary generalizes beyond it.",
+      "severity": "fatal"
+    }
+  ],
+  "coverage_note": "Read each scoped item and page carrier once. Also checked claim-critical dependencies, including alg-dyadic-square-root-bisection and the two A-page prerequisite pages, and verified the batch-15 in-run finding against the current thm-real proof. I did not exhaustively verify external bibliography locators; the Rump PDF fetch timed out. The autopilot status command could not recompute in the read-only filesystem and displayed its last report."
+}

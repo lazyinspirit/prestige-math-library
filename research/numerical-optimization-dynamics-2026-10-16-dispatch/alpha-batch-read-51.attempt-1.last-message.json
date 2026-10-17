@@ -1,0 +1,253 @@
+{
+  "group": "r",
+  "batches": ["51"],
+  "pages_read": [
+    "adaptive-quadrature-and-error-indicators",
+    "adaptive-quadrature-and-error-indicators-examples"
+  ],
+  "items_read": [
+    "def-adaptive-simpson-refinement-indicator",
+    "lem-composite-simpson-asymptotic-error-expansion",
+    "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+    "thm-simpson-richardson-error-estimator-asymptotic",
+    "thm-adaptive-simpson-cap-termination-and-indicator-budget",
+    "alg-certified-adaptive-simpson",
+    "thm-certified-adaptive-simpson-enclosure",
+    "ex-adaptive-simpson-misses-narrow-feature",
+    "ex-adaptive-simpson-cap-reached",
+    "ex-adaptive-simpson-leading-error-cancellation"
+  ],
+  "conventions": [
+    {
+      "convention": "For a<b and even n≥2, S₀=Q_S(f;a,b,n), S₁=Q_S(f;a,b,2n), the signed indicator is (S₁−S₀)/15, and its magnitude is |S₁−S₀|/15. The indicator alone is not a true-error bound.",
+      "fixed_by": "def-adaptive-simpson-refinement-indicator",
+      "matters_for": [
+        "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+        "thm-simpson-richardson-error-estimator-asymptotic",
+        "thm-adaptive-simpson-cap-termination-and-indicator-budget",
+        "ex-adaptive-simpson-misses-narrow-feature",
+        "ex-adaptive-simpson-cap-reached",
+        "ex-adaptive-simpson-leading-error-cancellation"
+      ]
+    },
+    {
+      "convention": "The asymptotic sequence starts at k=1, with n_k=2^k, h_k=(b−a)/n_k, exact-real Simpson values, and Riemann integrals. The error orientation is I−Q_k.",
+      "fixed_by": "lem-composite-simpson-asymptotic-error-expansion",
+      "matters_for": [
+        "thm-simpson-richardson-error-estimator-asymptotic",
+        "ex-adaptive-simpson-leading-error-cancellation"
+      ]
+    },
+    {
+      "convention": "Relative asymptotic accuracy of the indicator requires c=−(1/180)∫f⁽⁴⁾≠0. The Richardson correction adds (Q_{k+1}−Q_k)/15 to Q_{k+1}.",
+      "fixed_by": "thm-simpson-richardson-error-estimator-asymptotic",
+      "matters_for": [
+        "ex-adaptive-simpson-leading-error-cancellation"
+      ]
+    },
+    {
+      "convention": "The heuristic adaptive algorithm accepts before testing caps. P counts panel calls, including the parent; a split allocates positive child budgets with sum p−1. It returns uncorrected refined Simpson values, and evaluation failure returns no estimate.",
+      "fixed_by": "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+      "matters_for": [
+        "thm-adaptive-simpson-cap-termination-and-indicator-budget",
+        "ex-adaptive-simpson-misses-narrow-feature",
+        "ex-adaptive-simpson-cap-reached"
+      ]
+    },
+    {
+      "convention": "Certification assumes f∈C⁴([a,b]), finite dyadic endpoints and tolerance, sound point-value enclosures, and sound fourth-derivative range enclosures. Midpoint representability and non-finite operation failures are explicit. Returned interval midpoints, half-widths, and tolerance comparisons use exact rational arithmetic.",
+      "fixed_by": "alg-certified-adaptive-simpson",
+      "matters_for": [
+        "thm-certified-adaptive-simpson-enclosure"
+      ]
+    },
+    {
+      "convention": "A certified result requires the final enclosure half-width to meet the tolerance, including outward rounding when child enclosures are added. An inconclusive result still encloses the integral; failure asserts no finite enclosure.",
+      "fixed_by": "alg-certified-adaptive-simpson",
+      "matters_for": [
+        "thm-certified-adaptive-simpson-enclosure"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-composite-simpson-asymptotic-error-expansion",
+      "statement": "For a<b, f∈C⁴([a,b]), n_k=2^k and h_k=(b−a)/n_k with k≥1, I−Q_k=−(h_k⁴/180)∫_a^b f⁽⁴⁾(x) dx+o(h_k⁴) as k→∞.",
+      "used_by": [
+        "thm-simpson-richardson-error-estimator-asymptotic"
+      ]
+    },
+    {
+      "id": "def-adaptive-simpson-refinement-indicator",
+      "statement": "The signed refinement indicator is (S₁−S₀)/15 and its magnitude is η_n(f;a,b)=|S₁−S₀|/15. This definition alone is not a bound on the true error.",
+      "used_by": [
+        "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+        "thm-simpson-richardson-error-estimator-asymptotic",
+        "thm-adaptive-simpson-cap-termination-and-indicator-budget",
+        "ex-adaptive-simpson-misses-narrow-feature",
+        "ex-adaptive-simpson-cap-reached",
+        "ex-adaptive-simpson-leading-error-cancellation"
+      ]
+    },
+    {
+      "id": "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+      "statement": "A call computes nested two- and four-subinterval Simpson values, accepts when η≤t, returns cap-reached when rejected and d=0 or p<3, and otherwise recurses with depths d−1, tolerances t/2, and budgets floor((p−1)/2), ceil((p−1)/2). Child estimates and indicators are summed; failure propagates without an estimate.",
+      "used_by": [
+        "thm-adaptive-simpson-cap-termination-and-indicator-budget",
+        "ex-adaptive-simpson-misses-narrow-feature",
+        "ex-adaptive-simpson-cap-reached",
+        "alg-age-structured-positive-birth-quadrature"
+      ]
+    },
+    {
+      "id": "alg-certified-adaptive-simpson",
+      "statement": "Under its sound enclosure-oracle contracts, a panel combines an outward-rounded Simpson enclosure with the upward-rounded bound ML⁵/2880. Recursive child enclosures are outward-added, and certified status is returned only when the exact final half-width is at most the local tolerance.",
+      "used_by": [
+        "thm-certified-adaptive-simpson-enclosure"
+      ]
+    },
+    {
+      "id": "thm-simpson-richardson-error-estimator-asymptotic",
+      "statement": "Under the stated C⁴ and dyadic-grid hypotheses, η_k=|c|h_k⁴/16+o(h_k⁴); if c≠0, η_k/|I−Q_{k+1}|→1. The Richardson-corrected value satisfies I−R_{k+1}=o(h_k⁴). When c=0 these statements give no relative error estimate, and the indicator alone certifies no finite-level true error.",
+      "used_by": [
+        "ex-adaptive-simpson-leading-error-cancellation"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-higher-derivatives-and-smoothness",
+      "used_for": "C⁴ regularity, including one-sided endpoint derivatives and continuity of all derivatives through order four.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-r",
+      "used_for": "Compactness of closed bounded panels for uniform continuity and derivative maxima.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-cantor-metric",
+      "used_for": "Uniform continuity of f⁽⁴⁾ in the composite Simpson asymptotic expansion.",
+      "opened": true
+    },
+    {
+      "id": "thm-additivity-over-subintervals",
+      "used_for": "Summing panel integrals and combining certified child enclosures; splitting the missed-feature example into adjacent intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+      "used_for": "Riemann integrability of continuous integrands, derivatives, polynomial examples, and kernel products on nondegenerate intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "Integrating kernel remainder bounds and the positive lower bound in the missed-feature example.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-integral",
+      "used_for": "Separating constant derivative values from panel remainders in the asymptotic expansion.",
+      "opened": true
+    },
+    {
+      "id": "lem-integral-elementary-bounds",
+      "used_for": "Integrals of constant comparison functions in the asymptotic expansion and missed-feature example.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of polynomial examples and kernel products.",
+      "opened": true
+    },
+    {
+      "id": "lem-bernoulli-inequality",
+      "used_for": "The bound 2^k≥1+k used to prove the mesh widths tend to zero.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Choosing a finite index beyond which dyadic mesh widths are below a prescribed positive number.",
+      "opened": true
+    },
+    {
+      "id": "cor-of-reverse-triangle",
+      "used_for": "Absolute-value asymptotics and continuity of |f⁽⁴⁾| for the certified enclosure proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-r",
+      "used_for": "Existence of the maximum of |f⁽⁴⁾| on a nonempty compact panel.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Exact polynomial integrals in the cancellation example and kernel-mass computation in the Simpson supplier.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-of-a-power",
+      "used_for": "Polynomial derivatives and antiderivatives in the cancellation example and Simpson kernel supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Differentiating polynomial sums and scalar multiples.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "The finite block-sum convention underlying the composite Simpson algorithm.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-by-parts",
+      "used_for": "The four integrations by parts establishing the cited Simpson panel kernel identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Differentiation of shifted polynomial expressions in the Simpson panel kernel supplier.",
+      "opened": true
+    },
+    {
+      "id": "lem-triangle-inequality-finite",
+      "used_for": "Summation of local error bounds in the composite Simpson error-bound supplier.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-composite-simpson-asymptotic-error-expansion",
+      "concern": "Fact F1 describes the Simpson kernel as having “the two cubic pieces displayed in its Statement.” The cited kernel pieces are quartic: (x−a)³(3(x−a)−2L)/72 and its reflected expression. The proof uses the correct kernel identity and mass, so this is a wording defect.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "adaptive-quadrature-and-error-indicators",
+      "to": "composite-quadrature-rules",
+      "faithful": true,
+      "note": "The composite Simpson formula, panel kernel sign and mass, and C⁴ error bound are used with increasing nondegenerate intervals and admissible even grids. The one-block certified remainder is correctly specialized to ML⁵/2880."
+    },
+    {
+      "from": "adaptive-quadrature-and-error-indicators",
+      "to": "outward-rounded-interval-and-ball-arithmetic",
+      "faithful": true,
+      "note": "The certified procedure uses finite dyadic intervals, directed rounding and finite-DAG enclosure soundness consistently. It propagates non-finite statuses and includes interval-summation rounding in the final radius test."
+    },
+    {
+      "from": "adaptive-quadrature-and-error-indicators",
+      "to": "clenshaw-curtis-and-extrapolation-quadrature",
+      "faithful": true,
+      "note": "This is contextual reading order: the assigned items do not invoke a Clenshaw–Curtis or Romberg proposition. Their Simpson Richardson cancellation is proved locally from the stated C⁴ asymptotic expansion, consistent with the prerequisite page's distinction between observed ratios and justified expansions."
+    },
+    {
+      "from": "renewal-age-and-size-structured-numerical-methods",
+      "to": "adaptive-quadrature-and-error-indicators",
+      "faithful": true,
+      "note": "The positive-birth quadrature algorithm invokes the capped Simpson procedure with finite depth, positive panel budget and positive indicator tolerance, propagates failure and retains statuses. Its text and page prose explicitly distinguish indicator acceptance from a true quadrature-defect bound. The supplier returns refined Simpson values without Richardson correction, preserving the positive-weight use."
+    }
+  ]
+}

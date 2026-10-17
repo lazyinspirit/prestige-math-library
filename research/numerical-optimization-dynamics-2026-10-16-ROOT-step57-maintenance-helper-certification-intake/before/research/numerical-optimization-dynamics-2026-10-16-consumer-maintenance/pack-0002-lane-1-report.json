@@ -1,0 +1,36 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "pack": "pack-0002",
+  "lane": 1,
+  "input_sha256": "3d33a8d1b5eedd35ac494694d0fc9c7d540a75ec53842cfbb6636c3aa194cb12",
+  "decisions": [
+    {
+      "id": "lem-rational-box-affine-chart-and-dyadic-enclosure",
+      "disposition": "repaired",
+      "reason": "The changed supplier permits a finite saturated endpoint during overflow: with p=2, emin=0 and emax=2, Nmax=6 and rd(7)=6, while ru(7)=+infinity. Thus the categorical assertion in [F3] that overflow does not give finite endpoints is false. Inserting \"two\" states precisely the finite-pair exclusion used by step 2.1 without changing the theorem.",
+      "understanding": {
+        "basis": "familiarity",
+        "evidence": "Read the complete assigned consumer and current supplier definition, the Definition section of the archived supplier at research/numerical-optimization-dynamics-2026-10-16-step5-v2/initial-metadata-history/sources/def-dyadic-floating-point-format-and-directed-rounding.md, and the exact supplier repair in step5-v2-repeat-r1-u14.json. Also read the local rounding-enclosure lemma and the rational ordered-field, chain-rule and Euclidean-norm suppliers. The explicit overflow branches prove the correction directly: positive overflow has the pair (Nmax,+infinity), negative overflow has (-infinity,-Nmax). For l<=u, overflow at l or u forces rd(l)=-infinity or ru(u)=+infinity; hence two finite outward endpoints imply both inputs are in range. Within range their definitions give rd(l)<=l<=u<=ru(u), including subnormals and zero. Exact rational interval arithmetic, the coordinate-sum norm bounds, and the invertible positive diagonal affine chart require no change to this argument. Understanding rests on elementary finite ordered sets, interval monotonicity, norms and the chain rule; no external source was consulted.",
+        "uncertainty": false,
+        "sources": []
+      },
+      "event_uses": [
+        {
+          "event_key": "b7dada400998ed01293da69cdd712265ccd088e6d2c00b9b451aa748e76d23e1",
+          "affected_use": "The supplier is used in [F2] for exact rational endpoint conversion and in step 2.1, through [F2] and [F3], for outward enclosure. Step 3.1 invokes step 2.1 to convert the normalized Jacobian enclosure entrywise.",
+          "reason": "The new extended endpoint selection preserves exact comparison and the outward inequalities, so [F2] and steps 2.1 and 3.1 remain valid under their finite-return condition. Only [F3] incorrectly excludes every finite overflow endpoint. Its corrected two-endpoint exclusion follows from the explicit overflow pairs; no numerical error bound or relative-error assumption is used."
+        }
+      ],
+      "affected_use": "[F3] supplies the overflow qualification for the finite dyadic replacement in proof step 2.1. This proof requires an entire finite outward interval, rather than finiteness of either selected endpoint alone.",
+      "invalidated_claim": "The original [F3] says overflow does not give finite endpoints, but positive overflow now has finite rd(x)=Nmax and negative overflow has finite ru(x)=-Nmax. For example the admissible format p=2, emin=0, emax=2 gives rd(7)=6 during overflow.",
+      "minimality": "Insert only the word \"two\" in [F3], correcting the false exclusion of individual finite overflow endpoints to the true exclusion of a finite pair. Preserve every statement, proof step, dependency, reference and other byte; the finite-enclosure condition and affine chart argument already suffice. No shared metadata changes are needed. Validation: the explicit one-item precheck and rendercheck commands exited 0; node tools/proof-layout.mjs items/lem-rational-box-affine-chart-and-dyadic-enclosure.md reported 1 item, 6 steps and 0 defects after the final item edit. Sequential replacement of the unique frozen before snippet reconstructs every current item byte. No unresolved supplier-event obligation remains; next action is controller collection of this report. Shared files were not edited, so no shared-file integration handoff is required.",
+      "edits": [
+        {
+          "before": "[F3] Directed roundings enclose each finite exact value; overflow does not give finite endpoints ([[lem-directed-dyadic-rounding-enclosure-and-error]]).",
+          "after": "[F3] Directed roundings enclose each finite exact value; overflow does not give two finite endpoints ([[lem-directed-dyadic-rounding-enclosure-and-error]]).",
+          "necessity": "The revised supplier explicitly returns one finite saturated endpoint in each overflow branch. The old assertion excludes that endpoint; adding \"two\" corrects exactly this false premise while retaining the pair-finiteness requirement used in step 2.1."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+[
+  {
+    "kind": "page",
+    "consumer": "simulation-gradient-estimation-and-simultaneous-perturbation",
+    "supplier": "numerical-differentiation-and-derivative-error-control",
+    "status": "verified",
+    "evidence": "The batch-12 central-difference theorem is present and its full statement and proof were inspected. It assumes f is C^3 on a neighborhood of [x-h,x+h] and |f'''|<=M3, and gives |D_h^0 f(x)-f'(x)|<=M3 h^2/6. In thm-spsa-gradient-bias-is-second-order, set g(t)=f(theta+t Delta); the chain rule gives |g'''(t)|<=M3||Delta||^3, so the exact supplier hypotheses hold along each admitted perturbation segment. This verifies the page interface used by this batch; it does not accept the supplier draft.",
+    "examined_supplier_items": [
+      "def-finite-difference-stencils-and-evaluation-error-model",
+      "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds"
+    ],
+    "required_hypotheses": "A scalar C^3 function on a neighborhood of the full central-difference segment and a uniform bound on its third derivative. In the consumer, f must be C^3 along each segment theta+t Delta, |t|<=c, and the directional third derivative is bounded by M3||Delta||^3.",
+    "affected_claims": [
+      "thm-spsa-gradient-bias-is-second-order"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds",
+        "section": "Statement",
+        "excerpt": "For the central bound assume $[x-h,x+h]\\subset I$, $f\\in C^3$ on a neighborhood of that interval, and $|f'''(y)|\\le M_3$ there. Then\n\n$$|D_h^+f(x)-f'(x)|\\le \\frac{M_2h}{2},\\qquad |D_h^0f(x)-f'(x)|\\le \\frac{M_3h^2}{6}.$$"
+      }
+    ]
+  },
+  {
+    "kind": "page",
+    "consumer": "simulation-gradient-estimation-and-simultaneous-perturbation",
+    "supplier": "stochastic-approximation-and-stochastic-gradient-methods",
+    "status": "verified",
+    "evidence": "The batch-64 Robbins–Siegmund lemma and filtration-adapted oracle definition are present; their full statements and proofs were inspected. The consumer takes a_k=0, b_k=alpha_k||grad f(x_k)||^2 and deterministic c_k=r_k. It checks nonnegativity, adaptedness, integrability and summability before invoking the lemma. The oracle definition supplies the vector conditional second-moment identity. The A-page stochastic-approximation conclusion is therefore within the actual supplier interface; this review does not accept the supplier draft.",
+    "examined_supplier_items": [
+      "lem-robbins-siegmund-almost-supermartingale",
+      "def-stochastic-gradient-oracle-and-unconstrained-update"
+    ],
+    "required_hypotheses": "AC; a nonnegative adapted integrable Lyapunov process; nonnegative predictable integrable decrements; deterministic nonnegative summable multiplicative and additive errors. The consumer uses zero multiplicative error and verifies the decrement is bounded by the stated pathwise gradient bound.",
+    "affected_claims": [
+      "thm-spsa-stochastic-approximation-has-stationary-limit-points"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "lem-robbins-siegmund-almost-supermartingale",
+        "section": "Statement",
+        "excerpt": "If\n$$\\mathbb E[X_{k+1}\\mid\\mathcal F_k]\\le(1+a_k)X_k-b_k+c_k\\quad\\text{almost surely for every }k,$$\nthen $X_k$ converges almost surely to a finite nonnegative random variable and $\\sum_{k\\ge0}b_k<\\infty$ almost surely."
+      },
+      {
+        "item": "def-stochastic-gradient-oracle-and-unconstrained-update",
+        "section": "Definition",
+        "excerpt": "By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely."
+      }
+    ]
+  },
+  {
+    "kind": "page",
+    "consumer": "simulation-gradient-estimation-and-simultaneous-perturbation",
+    "supplier": "discrete-continuous-and-pde-adjoint-sensitivities",
+    "status": "verified",
+    "evidence": "The exact finite-step objective and reverse-gradient carriers in batch 96 are present and their actual bodies were read. For N>=1 and each realization outside the single null set, freeze xi and define x0^xi(theta)=u0(theta,xi0), Psi_k^xi(u,theta)=Psi_k(u,theta,xi_{k+1}), with the corresponding fixed sample costs. These are the finite C^1 state-step maps required by the definition, and the theorem supplies the deterministic tangent/adjoint identity. The consumer handles N=0 directly by the chain rule. It separately supplies the common derivative envelope and L1 adjoint-integrand convergence needed for expectation/gradient interchange. Broader ODE error-order claims are not imported. This verifies the declared interface only and does not accept either supplier draft.",
+    "examined_supplier_items": [
+      "def-parameterized-finite-state-step-objective",
+      "thm-discrete-adjoint-gradient-recursion",
+      "alg-reverse-mode-automatic-differentiation",
+      "thm-reverse-mode-computes-gradient",
+      "def-finite-straight-line-computational-program",
+      "lem-finite-straight-line-program-defines-c1-map",
+      "thm-chain-rule-for-total-derivatives"
+    ],
+    "required_hypotheses": "For the supplied reverse-recursion theorem, N>=1 and a fixed realization with a finite C^1 state-step graph on the parameter neighborhood; the consumer handles N=0 directly. For the stochastic expectation claim, require joint measurability, payoff integrability, a common integrable pathwise-derivative envelope, and square-integrability at theta0. L1 convergence of adjoint integrands is separately assumed for the discretization-limit claim; weak payoff convergence alone is not used.",
+    "affected_claims": [
+      "thm-discrete-sde-adjoint-gradient-interchange"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-parameterized-finite-state-step-objective",
+        "section": "Definition",
+        "excerpt": "A finite parameterized state-step graph consists of a $C^1$ initial map $x_0:\\Theta\\to U_0$ and $C^1$ step maps $\\Psi_n:U_n\\times\\Theta\\to U_{n+1}$ for $0\\le n<N$, such that the recursion $x_{n+1}(\\theta)=\\Psi_n(x_n(\\theta),\\theta)$ is defined for every $\\theta$ in the chosen parameter neighborhood."
+      },
+      {
+        "item": "thm-discrete-adjoint-gradient-recursion",
+        "section": "Statement",
+        "excerpt": "The exact gradient of the finite objective is\n$$\\nabla_\\theta J=D_\\theta\\phi(x_N,\\theta)^T+S_0^Tp_0+\\sum_{n=0}^{N-1}\\bigl(D_\\theta\\ell_n(x_n,\\theta)^T+B_n^Tp_{n+1}\\bigr).$$"
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-spsa-gradient-bias-is-second-order",
+    "supplier": "thm-forward-and-central-difference-truncation-and-evaluation-error-bounds",
+    "status": "verified",
+    "evidence": "Consumer-side check: the proof applies the supplier to g(t)=f(theta+t Delta) on [-c,c]. Its C^3 and uniform third-derivative bound follow from the consumer's directional derivative hypothesis and the chain rule, yielding the M3 c^2 ||Delta||^3/6 ray error. The density of the SPSA vector is not used; the consumer additionally checks reciprocal moments for every coordinate quotient. This is a dependency interface check, not supplier acceptance.",
+    "required_hypotheses": "C^3 ray restriction on the whole interval and the directional third derivative bound stated in the consumer theorem.",
+    "used_in": [
+      "1.1"
+    ],
+    "supplier_excerpt": "For the central bound assume $[x-h,x+h]\\subset I$, $f\\in C^3$ on a neighborhood of that interval, and $|f'''(y)|\\le M_3$ there."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-spsa-stochastic-approximation-has-stationary-limit-points",
+    "supplier": "lem-robbins-siegmund-almost-supermartingale",
+    "status": "verified",
+    "evidence": "Consumer-side check: step 2.1 establishes E[X_{k+1}|F_k]<=X_k-b_k+r_k with b_k=alpha_k||grad f(x_k)||^2, r_k=GB alpha_k c_k^2+LK alpha_k^2/c_k^2, both deterministic summability conditions checked, and b_k nonnegative predictable and integrable. AC, adapted nonnegative integrable X_k, and the exact conditional inequality match the supplier. This is an interface check only.",
+    "required_hypotheses": "AC; nonnegative adapted integrable X_k and predictable nonnegative integrable b_k; deterministic summable errors. The consumer has a_k=0.",
+    "used_in": [
+      "3.1",
+      "4.1"
+    ],
+    "supplier_excerpt": "If\n$$\\mathbb E[X_{k+1}\\mid\\mathcal F_k]\\le(1+a_k)X_k-b_k+c_k\\quad\\text{almost surely for every }k,$$"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-discrete-sde-adjoint-gradient-interchange",
+    "supplier": "thm-discrete-adjoint-gradient-recursion",
+    "status": "verified",
+    "evidence": "Consumer-side check: for N>=1 freeze each sample input outside the single exceptional null set; the sample-specific initial/transition/cost maps are finite and C^1, so they meet the supplier interface. Its tangent and adjoint recursions have the same matrix dimensions and column-gradient convention as the consumer. The consumer independently writes the telescoping identity and adds the pathwise envelope and L1 convergence hypotheses, which the deterministic supplier does not provide. The N=0 case is proved directly by the chain rule. No continuous-time convergence or rate is inferred.",
+    "required_hypotheses": "For the supplier theorem, N>=1 and samplewise C^1 state-step maps on U; the consumer proves N=0 separately. Expectation interchange and discretization convergence require the separate assumptions in the consumer statement.",
+    "used_in": [
+      "3.1"
+    ],
+    "supplier_excerpt": "The exact gradient of the finite objective is\n$$\\nabla_\\theta J=D_\\theta\\phi(x_N,\\theta)^T+S_0^Tp_0+\\sum_{n=0}^{N-1}\\bigl(D_\\theta\\ell_n(x_n,\\theta)^T+B_n^Tp_{n+1}\\bigr).$$"
+  }
+]

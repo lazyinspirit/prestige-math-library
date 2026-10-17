@@ -1,0 +1,1038 @@
+--- items/ex-finite-basis-projector-optimization-on-grassmann.md
++++ items/ex-finite-basis-projector-optimization-on-grassmann.md (proposed)
+@@ -23,7 +23,6 @@
+   - cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases
+   - thm-extreme-value-metric
+   - thm-euclidean-heine-borel-pseudocompactness-and-extreme-values
+-forward_refs:
+   - def-finite-basis-projector-energy-model
+   - prop-finite-projector-energy-reality-and-gradient
+ justified_by: []
+--- library/numerical-optimization-inverse-problems-and-uncertainty-quantification/riemannian-optimization-on-stiefel-and-grassmann-manifolds-examples.md
++++ library/numerical-optimization-inverse-problems-and-uncertainty-quantification/riemannian-optimization-on-stiefel-and-grassmann-manifolds-examples.md (proposed)
+@@ -7,13 +7,8 @@
+   - ex-repeated-eigenspace-on-grassmann
+   - ex-riemannian-stiefel-nonconvex-saddle
+   - ex-trace-eigenspace-optimization-with-lanczos-start-angle
+-  - ex-finite-basis-projector-optimization-on-grassmann
+ ---
+ 
+ These examples work through a trace eigenspace objective and a Krylov start-angle
+-bound, a strict saddle on the sphere-shaped Stiefel manifold, the continuum of
+-minimizers produced by a repeated eigenvalue, and complex finite-basis PC-VAR
+-optimization on the Grassmann quotient. The PC-VAR example declares its later
+-model and energy-gradient items as forward references because the supplier page
+-is scheduled after this page; its local complex geometry and trust-region
+-argument are fully proved here.
++bound, a strict saddle on the sphere-shaped Stiefel manifold, and the continuum of
++minimizers produced by a repeated eigenvalue.
+--- library/numerical-optimization-inverse-problems-and-uncertainty-quantification/finite-basis-projector-energies-and-variational-electronic-structure-examples.md
++++ library/numerical-optimization-inverse-problems-and-uncertainty-quantification/finite-basis-projector-energies-and-variational-electronic-structure-examples.md (proposed)
+@@ -8,7 +8,8 @@
+            ex-zero-ritz-residual-does-not-identify-ground-state,
+            ex-overlap-whitening-can-amplify-coefficient-errors,
+            ex-nonsmooth-exchange-correlation-functional-breaks-c2,
+-           ex-two-level-nonlinear-projector-stationary-maximum]
++           ex-two-level-nonlinear-projector-stationary-maximum,
++           ex-finite-basis-projector-optimization-on-grassmann]
+ ---
+ 
+ The examples separate model properties that are easy to conflate. A stationary
+@@ -19,3 +20,7 @@
+ nonincreasing but not necessarily strictly decreasing minima. A cusp in a chosen
+ exchange-correlation term falls outside the $C^2$ hypothesis.
+ 
++
++The complex finite-basis PC-VAR example represents the projector energy on the
++Grassmann quotient and verifies its complex-polar trust-region optimization
++guarantee under the stated finite-dimensional model hypotheses.
+--- research/numerical-optimization-dynamics-2026-10-16-batch-83.pages.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-83.pages.json (proposed)
+@@ -312,7 +312,7 @@
+     "id": "riemannian-optimization-on-stiefel-and-grassmann-manifolds-examples",
+     "kind": "B",
+     "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+-    "title": "Riemannian optimization on stiefel and grassmann manifolds — Examples",
++    "title": "Riemannian optimization on stiefel and grassmann manifolds \u2014 Examples",
+     "companion": "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+     "requires": [
+       "riemannian-optimization-on-stiefel-and-grassmann-manifolds"
+@@ -354,35 +354,6 @@
+           "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases"
+         ],
+         "dependency_level": 3
+-      },
+-      {
+-        "id": "ex-finite-basis-projector-optimization-on-grassmann",
+-        "kind": "example",
+-        "title": "Complex finite-basis PC-VAR optimization on Grassmann",
+-        "statement": "The complex finite-basis PC-VAR model defines a real C2 energy E(P) and Hermitian gradient F(P) on rank-r orthogonal projectors. The parameterization P=XX* is unitary-invariant, has Grassmann gradient 2(I-P)F(P)X, and supports complex-polar trust-region optimization with the proved O(epsilon^-2) trial bound.",
+-        "deps": [
+-          "def-stiefel-grassmann-optimization-conventions",
+-          "thm-stiefel-grassmann-tangent-projections",
+-          "prop-stiefel-grassmann-riemannian-gradient-formulas",
+-          "alg-riemannian-trust-region",
+-          "thm-stiefel-retractions-are-first-order",
+-          "thm-gram-schmidt-orthonormalisation",
+-          "def-complex-stiefel-grassmann-optimization-conventions",
+-          "thm-complex-stiefel-grassmann-tangent-projections",
+-          "prop-complex-stiefel-grassmann-are-compact",
+-          "prop-complex-grassmann-projector-energy-gradient",
+-          "def-complex-grassmann-polar-retraction",
+-          "thm-complex-grassmann-polar-retraction-is-first-order",
+-          "thm-riemannian-trust-region-first-order-complexity",
+-          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+-          "thm-extreme-value-metric",
+-          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+-        ],
+-        "forward_refs": [
+-          "def-finite-basis-projector-energy-model",
+-          "prop-finite-projector-energy-reality-and-gradient"
+-        ],
+-        "dependency_level": 9
+       }
+     ]
+   }
+--- research/numerical-optimization-dynamics-2026-10-16-batch-92.pages.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-92.pages.json (proposed)
+@@ -301,7 +301,7 @@
+     "id": "finite-basis-projector-energies-and-variational-electronic-structure-examples",
+     "kind": "B",
+     "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+-    "title": "Finite basis projector energies and variational electronic structure — Examples",
++    "title": "Finite basis projector energies and variational electronic structure \u2014 Examples",
+     "companion": "finite-basis-projector-energies-and-variational-electronic-structure",
+     "requires": [
+       "finite-basis-projector-energies-and-variational-electronic-structure"
+@@ -375,6 +375,33 @@
+           "prop-finite-projector-energy-reality-and-gradient",
+           "thm-finite-projector-commutator-stationarity"
+         ]
++      },
++      {
++        "id": "ex-finite-basis-projector-optimization-on-grassmann",
++        "kind": "example",
++        "title": "Complex finite-basis PC-VAR optimization on Grassmann",
++        "statement": "The complex finite-basis PC-VAR model defines a real C2 energy E(P) and Hermitian gradient F(P) on rank-r orthogonal projectors. The parameterization P=XX* is unitary-invariant, has Grassmann gradient 2(I-P)F(P)X, and supports complex-polar trust-region optimization with the proved O(epsilon^-2) trial bound.",
++        "deps": [
++          "def-stiefel-grassmann-optimization-conventions",
++          "thm-stiefel-grassmann-tangent-projections",
++          "prop-stiefel-grassmann-riemannian-gradient-formulas",
++          "alg-riemannian-trust-region",
++          "thm-stiefel-retractions-are-first-order",
++          "thm-gram-schmidt-orthonormalisation",
++          "def-complex-stiefel-grassmann-optimization-conventions",
++          "thm-complex-stiefel-grassmann-tangent-projections",
++          "prop-complex-stiefel-grassmann-are-compact",
++          "prop-complex-grassmann-projector-energy-gradient",
++          "def-complex-grassmann-polar-retraction",
++          "thm-complex-grassmann-polar-retraction-is-first-order",
++          "thm-riemannian-trust-region-first-order-complexity",
++          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
++          "thm-extreme-value-metric",
++          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
++          "def-finite-basis-projector-energy-model",
++          "prop-finite-projector-energy-reality-and-gradient"
++        ],
++        "dependency_level": 9
+       }
+     ]
+   }
+--- research/numerical-optimization-dynamics-2026-10-16-batch-83.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-83.proof-contracts.json (proposed)
+@@ -24,8 +24,7 @@
+     "thm-riemannian-trust-region-first-order-complexity",
+     "ex-repeated-eigenspace-on-grassmann",
+     "ex-riemannian-stiefel-nonconvex-saddle",
+-    "ex-trace-eigenspace-optimization-with-lanczos-start-angle",
+-    "ex-finite-basis-projector-optimization-on-grassmann"
++    "ex-trace-eigenspace-optimization-with-lanczos-start-angle"
+   ],
+   "contracts": {
+     "def-stiefel-grassmann-optimization-conventions": {
+@@ -644,7 +643,7 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "For full-column-rank $Y=[y_1\\ \\cdots\\ y_r]$, its columns are linearly independent. Apply Gram–Schmidt [F1], writing $u_j=y_j-\\sum_{i<j}(q_i^{\\mathsf T}y_j)q_i$ and $q_j=u_j/\\|u_j\\|_2$. The residuals are nonzero, so $Q=[q_1\\ \\cdots\\ q_r]$ has orthonormal columns. Set $R=Q^{\\mathsf T}Y$. For $i>j$, $q_i$ is orthogonal to $\\operatorname{span}(y_1,\\ldots,y_j)$, so $R_{ij}=0$; and $R_{jj}=q_j^{\\mathsf T}y_j=\\|u_j\\|_2>0$. Since each $y_j$ lies in $\\operatorname{span}(q_1,\\ldots,q_j)$, $QR=Y$. This constructs a reduced QR factorization with positive diagonal. To check uniqueness, if $Y=Q_1R_1=Q_2R_2$ are two such factorizations, then $Q_2^{\\mathsf T}Q_1=R_2R_1^{-1}$ is orthogonal and upper triangular with positive diagonal. Its first column has only its first entry, which must be $1$ by unit norm and positivity; orthogonality zeros the rest of its first row. Induction on the remaining block makes it $I_r$, so $Q_1=Q_2$ and $R_1=R_2$. For the polar factor $U=Y(Y^{\\mathsf T}Y)^{-1/2}$, symmetry of the root and its defining square give $U^{\\mathsf T}U=(Y^{\\mathsf T}Y)^{-1/2}(Y^{\\mathsf T}Y)(Y^{\\mathsf T}Y)^{-1/2}=I_r$. Hence both outputs have orthonormal columns. If $Y$ is replaced by $YQ_0$ for $Q_0\\in\\operatorname O(r)$, the column space is unchanged; uniqueness of the positive root gives $(Q_0^{\\mathsf T}Y^{\\mathsf T}YQ_0)^{-1/2}=Q_0^{\\mathsf T}(Y^{\\mathsf T}Y)^{-1/2}Q_0$, so the polar output is multiplied by $Q_0$. Thus the Grassmann outputs are well-defined.",
++          "claim": "For full-column-rank $Y=[y_1\\ \\cdots\\ y_r]$, its columns are linearly independent. Apply Gram\u2013Schmidt [F1], writing $u_j=y_j-\\sum_{i<j}(q_i^{\\mathsf T}y_j)q_i$ and $q_j=u_j/\\|u_j\\|_2$. The residuals are nonzero, so $Q=[q_1\\ \\cdots\\ q_r]$ has orthonormal columns. Set $R=Q^{\\mathsf T}Y$. For $i>j$, $q_i$ is orthogonal to $\\operatorname{span}(y_1,\\ldots,y_j)$, so $R_{ij}=0$; and $R_{jj}=q_j^{\\mathsf T}y_j=\\|u_j\\|_2>0$. Since each $y_j$ lies in $\\operatorname{span}(q_1,\\ldots,q_j)$, $QR=Y$. This constructs a reduced QR factorization with positive diagonal. To check uniqueness, if $Y=Q_1R_1=Q_2R_2$ are two such factorizations, then $Q_2^{\\mathsf T}Q_1=R_2R_1^{-1}$ is orthogonal and upper triangular with positive diagonal. Its first column has only its first entry, which must be $1$ by unit norm and positivity; orthogonality zeros the rest of its first row. Induction on the remaining block makes it $I_r$, so $Q_1=Q_2$ and $R_1=R_2$. For the polar factor $U=Y(Y^{\\mathsf T}Y)^{-1/2}$, symmetry of the root and its defining square give $U^{\\mathsf T}U=(Y^{\\mathsf T}Y)^{-1/2}(Y^{\\mathsf T}Y)(Y^{\\mathsf T}Y)^{-1/2}=I_r$. Hence both outputs have orthonormal columns. If $Y$ is replaced by $YQ_0$ for $Q_0\\in\\operatorname O(r)$, the column space is unchanged; uniqueness of the positive root gives $(Q_0^{\\mathsf T}Y^{\\mathsf T}YQ_0)^{-1/2}=Q_0^{\\mathsf T}(Y^{\\mathsf T}Y)^{-1/2}Q_0$, so the polar output is multiplied by $Q_0$. Thus the Grassmann outputs are well-defined.",
+           "step": "2.1",
+           "inputs": [
+             "F1",
+@@ -705,7 +704,7 @@
+         {
+           "fact": "F1",
+           "supplier": "thm-gram-schmidt-orthonormalisation",
+-          "required_hypotheses": "[F1] Gram–Schmidt orthonormalization gives an orthonormal basis from a linearly independent ordered family ([[thm-gram-schmidt-orthonormalisation]])."
++          "required_hypotheses": "[F1] Gram\u2013Schmidt orthonormalization gives an orthonormal basis from a linearly independent ordered family ([[thm-gram-schmidt-orthonormalisation]])."
+         },
+         {
+           "fact": "F2",
+@@ -789,7 +788,7 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "On the full-rank set, the Gram–Schmidt recurrences divide only by positive residual norms, so [F3] expresses the QR factors by smooth additions, products, divisions by nonzero functions, and positive square roots. The polar formula is smooth there by [F4], [F5] applied to its positive-definite Gram matrix, and smooth matrix multiplication. Both maps land in Stiefel by [F1]. At $\\eta=0$, the factorizations are $X=X I_r$, so each map returns $X$.",
++          "claim": "On the full-rank set, the Gram\u2013Schmidt recurrences divide only by positive residual norms, so [F3] expresses the QR factors by smooth additions, products, divisions by nonzero functions, and positive square roots. The polar formula is smooth there by [F4], [F5] applied to its positive-definite Gram matrix, and smooth matrix multiplication. Both maps land in Stiefel by [F1]. At $\\eta=0$, the factorizations are $X=X I_r$, so each map returns $X$.",
+           "step": "1.1",
+           "inputs": [
+             "F1",
+@@ -893,7 +892,7 @@
+         {
+           "fact": "F3",
+           "supplier": "thm-gram-schmidt-orthonormalisation",
+-          "required_hypotheses": "[F3] Gram–Schmidt constructs an orthonormal basis on the full-rank domain ([[thm-gram-schmidt-orthonormalisation]])."
++          "required_hypotheses": "[F3] Gram\u2013Schmidt constructs an orthonormal basis on the full-rank domain ([[thm-gram-schmidt-orthonormalisation]])."
+         },
+         {
+           "fact": "F4",
+@@ -1263,7 +1262,7 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "Write $a=\\|g\\|>0$ and $c=\\langle g,B_xg\\rangle$. The operator norm bound and Cauchy–Schwarz in [F5] give $c\\le |c|\\le a\\|B_xg\\|\\le M_Ba^2$. If $c\\le0$, [F3] gives a boundary Cauchy step. If $c>0$, then $M_B>0$, the unconstrained segment minimizer has length $a^3/c\\ge a/M_B$, and $\\Delta\\le a/(2M_B)$ forces the constrained minimizer to the boundary. Thus $\\|p_C\\|=\\Delta$ in both branches, including $M_B=0$.",
++          "claim": "Write $a=\\|g\\|>0$ and $c=\\langle g,B_xg\\rangle$. The operator norm bound and Cauchy\u2013Schwarz in [F5] give $c\\le |c|\\le a\\|B_xg\\|\\le M_Ba^2$. If $c\\le0$, [F3] gives a boundary Cauchy step. If $c>0$, then $M_B>0$, the unconstrained segment minimizer has length $a^3/c\\ge a/M_B$, and $\\Delta\\le a/(2M_B)$ forces the constrained minimizer to the boundary. Thus $\\|p_C\\|=\\Delta$ in both branches, including $M_B=0$.",
+           "step": "1.1",
+           "inputs": [
+             "F3",
+@@ -1321,7 +1320,7 @@
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "The Statement and steps 1.1–3.1 explicitly use the infinite reciprocal convention for zero operator bounds; positive gradient and radius make the predicted reduction positive."
++          "evidence": "The Statement and steps 1.1\u20133.1 explicitly use the infinite reciprocal convention for zero operator bounds; positive gradient and radius make the predicted reduction positive."
+         },
+         {
+           "case": "endpoints",
+@@ -1374,12 +1373,12 @@
+         {
+           "fact": "F5",
+           "supplier": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+-          "required_hypotheses": "[F5] The matrix norm is compatible with the vector norm and the Euclidean inner product satisfies Cauchy–Schwarz ([[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]], [[thm-cauchy-schwarz-and-the-euclidean-norm]])."
++          "required_hypotheses": "[F5] The matrix norm is compatible with the vector norm and the Euclidean inner product satisfies Cauchy\u2013Schwarz ([[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]], [[thm-cauchy-schwarz-and-the-euclidean-norm]])."
+         },
+         {
+           "fact": "F5",
+           "supplier": "thm-cauchy-schwarz-and-the-euclidean-norm",
+-          "required_hypotheses": "[F5] The matrix norm is compatible with the vector norm and the Euclidean inner product satisfies Cauchy–Schwarz ([[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]], [[thm-cauchy-schwarz-and-the-euclidean-norm]])."
++          "required_hypotheses": "[F5] The matrix norm is compatible with the vector norm and the Euclidean inner product satisfies Cauchy\u2013Schwarz ([[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]], [[thm-cauchy-schwarz-and-the-euclidean-norm]])."
+         },
+         {
+           "fact": "F6",
+@@ -1689,7 +1688,7 @@
+         {
+           "fact": "F5",
+           "supplier": "thm-cauchy-schwarz-and-the-euclidean-norm",
+-          "required_hypotheses": "[F5] The Euclidean inner product obeys Cauchy–Schwarz ([[thm-cauchy-schwarz-and-the-euclidean-norm]])."
++          "required_hypotheses": "[F5] The Euclidean inner product obeys Cauchy\u2013Schwarz ([[thm-cauchy-schwarz-and-the-euclidean-norm]])."
+         },
+         {
+           "fact": "F6",
+@@ -2337,7 +2336,7 @@
+           "fact": "F2",
+           "source": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+           "source_section": "Statement",
+-          "quote": "Let $A\\in\\mathbb R^{n\\times n}$, $n\\ge1$, be symmetric with ordered eigenvalues\n$\\lambda_1\\ge\\cdots\\ge\\lambda_n$. Let $r$ be the multiplicity of $\\lambda_1$.\nIf $r<n$, assume $\\lambda_1>\\lambda_{r+1}$, and let $P$ be the orthogonal\nprojection onto the $\\lambda_1$-eigenspace. Let $b\\in\\mathbb R^n$ be a unit\nvector and, for $m\\ge1$, define\n\n$$K_m:=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\},\\qquad \\theta_m:=\\max_{0\\ne x\\in K_m}\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x}.$$\n\nThus $\\theta_m$ is the largest Rayleigh–Ritz value on $K_m$; if Lanczos runs\nthrough step $m$ without breakdown, it is the largest Ritz value of\n$Q_m^{\\mathsf T}AQ_m$. If $r=n$, then $A=\\lambda_1I$ and $\\theta_m=\\lambda_1$\nfor every $m\\ge1$. Suppose $r<n$.\n\n1. If $Pb=0$, then $\\theta_m\\le\\lambda_{r+1}$ for every $m$; no convergence\n   to $\\lambda_1$ is asserted.\n\n2. If $Pb\\ne0$, put\n   $$\\tau:=\\frac{\\|(I-P)b\\|_2}{\\|Pb\\|_2}.$$\n   If $\\lambda_{r+1}>\\lambda_n$, then for every $m\\ge1$,\n   $$0\\le\\lambda_1-\\theta_m\\le \\frac{(\\lambda_1-\\lambda_n)\\tau^2} {T_{m-1}\\!\\left(1+2\\frac{\\lambda_1-\\lambda_{r+1}} {\\lambda_{r+1}-\\lambda_n}\\right)^2}.$$\n   For a simple top eigenvalue ($r=1$), $\\tau$ is the tangent of the angle\n   between $b$ and a unit top eigenvector, so the starting-angle denominator\n   is explicit.\n\n3. If $\\lambda_{r+1}=\\lambda_n$, then\n   $$\\lambda_1-\\theta_1=(\\lambda_1-\\lambda_n) \\frac{\\|(I-P)b\\|_2^2}{\\|b\\|_2^2},\\qquad \\theta_m=\\lambda_1\\quad(m\\ge2).$$\n\nWhen $r<n$, $Pb\\ne0$, and exact Lanczos breakdown occurs at dimension $d$, then\n$\\theta_d=\\lambda_1$ and $K_m=K_d$ for all $m\\ge d$. These are exact-arithmetic\nclaims; they give no finite-precision grade-termination guarantee.",
++          "quote": "Let $A\\in\\mathbb R^{n\\times n}$, $n\\ge1$, be symmetric with ordered eigenvalues\n$\\lambda_1\\ge\\cdots\\ge\\lambda_n$. Let $r$ be the multiplicity of $\\lambda_1$.\nIf $r<n$, assume $\\lambda_1>\\lambda_{r+1}$, and let $P$ be the orthogonal\nprojection onto the $\\lambda_1$-eigenspace. Let $b\\in\\mathbb R^n$ be a unit\nvector and, for $m\\ge1$, define\n\n$$K_m:=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\},\\qquad \\theta_m:=\\max_{0\\ne x\\in K_m}\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x}.$$\n\nThus $\\theta_m$ is the largest Rayleigh\u2013Ritz value on $K_m$; if Lanczos runs\nthrough step $m$ without breakdown, it is the largest Ritz value of\n$Q_m^{\\mathsf T}AQ_m$. If $r=n$, then $A=\\lambda_1I$ and $\\theta_m=\\lambda_1$\nfor every $m\\ge1$. Suppose $r<n$.\n\n1. If $Pb=0$, then $\\theta_m\\le\\lambda_{r+1}$ for every $m$; no convergence\n   to $\\lambda_1$ is asserted.\n\n2. If $Pb\\ne0$, put\n   $$\\tau:=\\frac{\\|(I-P)b\\|_2}{\\|Pb\\|_2}.$$\n   If $\\lambda_{r+1}>\\lambda_n$, then for every $m\\ge1$,\n   $$0\\le\\lambda_1-\\theta_m\\le \\frac{(\\lambda_1-\\lambda_n)\\tau^2} {T_{m-1}\\!\\left(1+2\\frac{\\lambda_1-\\lambda_{r+1}} {\\lambda_{r+1}-\\lambda_n}\\right)^2}.$$\n   For a simple top eigenvalue ($r=1$), $\\tau$ is the tangent of the angle\n   between $b$ and a unit top eigenvector, so the starting-angle denominator\n   is explicit.\n\n3. If $\\lambda_{r+1}=\\lambda_n$, then\n   $$\\lambda_1-\\theta_1=(\\lambda_1-\\lambda_n) \\frac{\\|(I-P)b\\|_2^2}{\\|b\\|_2^2},\\qquad \\theta_m=\\lambda_1\\quad(m\\ge2).$$\n\nWhen $r<n$, $Pb\\ne0$, and exact Lanczos breakdown occurs at dimension $d$, then\n$\\theta_d=\\lambda_1$ and $K_m=K_d$ for all $m\\ge d$. These are exact-arithmetic\nclaims; they give no finite-precision grade-termination guarantee.",
+           "uses": [
+             "1.1",
+             "3.1"
+@@ -2442,289 +2441,6 @@
+           "expected": "pass"
+         }
+       ]
+-    },
+-    "ex-finite-basis-projector-optimization-on-grassmann": {
+-      "risk": "high",
+-      "kind": "example",
+-      "citations": [
+-        {
+-          "fact": "F1",
+-          "source": "def-finite-basis-projector-energy-model",
+-          "source_section": "Definition",
+-          "quote": "Let $S=S^*\\succ0$ be an $n\\times n$ finite-basis overlap matrix and supply its\nCholesky factor $L$ with $S=LL^*$, $L$ invertible\n([[def-cholesky-factorisation-with-positive-diagonal]],\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).\nIf $h_0=h_0^*$ is the coefficient-basis one-body matrix, set\n$h=L^{-1}h_0L^{-*}$, where $L^{-*}=(L^*)^{-1}$; this is the Cholesky\nwhitening whose generalized Ritz quotient is preserved by\n[[prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil]].\nFor coefficient vectors use $y=L^*c$; the interaction map and chosen\nexchange-correlation functional below are supplied in these orthonormal\ncoordinates. Fix $1\\le r<n$ and the\nprojector domain $\\mathcal P_r$ of [[def-rank-r-orthogonal-projector-domain]].\n\nSupply a Hermitian matrix $h$, a real-linear self-adjoint map\n$G:\\mathbb H_n\\to\\mathbb H_n$ for the Frobenius inner product, and a real-valued\n$C^2$ functional $E_{xc}$ on an open neighborhood of $\\mathcal P_r$. Define\n$$E(P):=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(P G(P))+E_{xc}(P),\\qquad F(P):=h+G(P)+\\nabla E_{xc}(P).$$\nHere $F(P)$ is the Hermitian Frobenius-gradient formula justified by\n[[prop-finite-projector-energy-reality-and-gradient]].\n\nThe finite-basis Hartree–Fock model is the special case $E_{xc}=0$ with a\nsupplied symmetry-compatible Coulomb/exchange tensor defining $G$. A\nKohn–Sham-like model supplies its density map and chosen differentiable\nexchange-correlation functional. These are finite-dimensional mathematical\nmodels; this definition makes no assertion that the selected functional is an\nexact continuum physical energy.",
+-          "uses": [
+-            "1.1",
+-            "3.1"
+-          ]
+-        },
+-        {
+-          "fact": "F2",
+-          "source": "prop-finite-projector-energy-reality-and-gradient",
+-          "source_section": "Statement",
+-          "quote": "For the data of [[def-finite-basis-projector-energy-model]], $E(P)$ is real\nand $C^2$ on its stated neighborhood. For every Hermitian $P$ in that\nneighborhood and every Hermitian direction $H$,\n$$DE(P)[H]=\\operatorname{tr}\\big((h+G(P)+\\nabla E_{xc}(P))H\\big)=\\langle F(P),H\\rangle_F.$$\nThus $F(P)$ is the Hermitian Frobenius gradient of $E$.",
+-          "uses": [
+-            "2.1",
+-            "3.1"
+-          ]
+-        },
+-        {
+-          "fact": "F3",
+-          "source": "thm-complex-stiefel-grassmann-tangent-projections",
+-          "source_section": "Statement",
+-          "quote": "For $X\\in\\operatorname{St}_{\\mathbb C}(n,r)$, as a real manifold, $T_X\\operatorname{St}_{\\mathbb C}(n,r)=\\{Z:X^*Z+Z^*X=0\\}$ and $\\Pi_X^{\\rm St}(G)=G-X\\operatorname{Herm}(X^*G)$. The complex Grassmann tangent has the unique horizontal representative $X^*Z=0$, and its quotient-metric projection is $\\Pi_X^{\\rm Gr}(G)=(I-XX^*)G$.",
+-          "uses": [
+-            "2.1"
+-          ]
+-        },
+-        {
+-          "fact": "F4",
+-          "source": "prop-complex-grassmann-projector-energy-gradient",
+-          "source_section": "Statement",
+-          "quote": "Let $1\\le r\\le n$, and let $E$ be real-valued and continuously differentiable on an open set of\nHermitian $n\\times n$ matrices containing the rank-$r$ orthogonal projectors.\nSuppose its real Frobenius gradient $K(P)=K(P)^*$ satisfies\n$$DE(P)[H]=\\operatorname{Re}\\operatorname{tr}(K(P)^*H)$$\nfor every Hermitian direction $H$. Then $f([X])=E(XX^*)$ is well-defined on\n$\\operatorname{Gr}_{\\mathbb C}(r,n)$ and has horizontal gradient\n$$\\operatorname{grad}f([X])=2(I-XX^*)K(XX^*)X.$$",
+-          "uses": [
+-            "2.1"
+-          ]
+-        },
+-        {
+-          "fact": "F5",
+-          "source": "prop-complex-stiefel-grassmann-are-compact",
+-          "source_section": "Statement",
+-          "quote": "For $1\\le r\\le n$, $\\operatorname{St}_{\\mathbb C}(n,r)$ is a nonempty closed\nbounded subset of the real coordinate space $\\mathbb R^{2nr}$, and\n$\\operatorname{Gr}_{\\mathbb C}(r,n)$ is its continuous quotient image. Both\nspaces are compact.",
+-          "uses": [
+-            "2.2",
+-            "3.1"
+-          ]
+-        },
+-        {
+-          "fact": "F5",
+-          "source": "def-complex-grassmann-polar-retraction",
+-          "source_section": "Definition",
+-          "quote": "For $X\\in\\operatorname{St}_{\\mathbb C}(n,r)$ and horizontal $\\eta\\in T_{[X]}\\operatorname{Gr}_{\\mathbb C}(r,n)$, so $X^*\\eta=0$, define $R_X^{\\rm pol}(\\eta)=(X+\\eta)\\bigl((X+\\eta)^*(X+\\eta)\\bigr)^{-1/2}$ and $R_{[X]}^{\\rm pol}(\\eta)=\\operatorname{range}(R_X^{\\rm pol}(\\eta))$.\nThe inverse square root is the inverse of the unique positive-definite\nHermitian square root. The horizontal condition gives\n$(X+\\eta)^*(X+\\eta)=I+\\eta^*\\eta\\succ0$, so this map is defined for every\nhorizontal tangent vector, and its frame representative is unchanged as a\nGrassmann point when $(X,\\eta)$ is replaced by $(XQ,\\eta Q)$ with unitary $Q$.",
+-          "uses": [
+-            "2.2",
+-            "3.1"
+-          ]
+-        },
+-        {
+-          "fact": "F5",
+-          "source": "thm-complex-grassmann-polar-retraction-is-first-order",
+-          "source_section": "Statement",
+-          "quote": "The frame formula of [[def-complex-grassmann-polar-retraction]] is smooth on the\nhorizontal tangent bundle, maps into $\\operatorname{St}_{\\mathbb C}(n,r)$,\nfixes zero, and has frame differential $D R_X^{\\rm pol}(0)[\\eta]=\\eta$ for\nhorizontal $\\eta$. It is right-unitary equivariant, so its range map is\nrepresentative-independent and has identity differential under the horizontal\ntangent identification. Thus it is a first-order retraction on\n$\\operatorname{Gr}_{\\mathbb C}(r,n)$.",
+-          "uses": [
+-            "2.2",
+-            "3.1"
+-          ]
+-        },
+-        {
+-          "fact": "F6",
+-          "source": "alg-riemannian-trust-region",
+-          "source_section": "Definition",
+-          "quote": "Let $1\\le r\\le n$. Let $M$ be a real Stiefel manifold\n$\\operatorname{St}(n,r)$, a real Grassmannian $\\operatorname{Gr}(r,n)$, or a\ncomplex Grassmannian $\\operatorname{Gr}_{\\mathbb C}(r,n)$, with each tangent\nspace regarded as a real inner-product space under the corresponding\nFrobenius metric. On a real Stiefel manifold or real Grassmannian choose the\ninduced map of either the real QR or real polar formula from\n[[def-stiefel-qr-polar-retractions]]; on a complex Grassmannian choose the\ncomplex polar map from [[def-complex-grassmann-polar-retraction]]. Denote the\nchosen map by $R$. Let $f:M\\to\\mathbb R$ be of class $C^2$ and take an initial point\n$x_0\\in M$. For this regularity, $\\operatorname{grad}f(x)$ denotes the\npointwise metric dual of $df_x$: in any orthonormal real basis $e_i$ of\n$T_xM$, it is $\\sum_i df_x(e_i)e_i$ (the empty sum is zero). This\nconvention agrees with [[def-riemannian-gradient-of-a-smooth-function]]\nwhen $f$ is smooth; no infinitely differentiable gradient field is required.\n\nFix $0<\\eta_1<\\eta_2<1$, $0<\\gamma_{\\rm dec}<1<\\gamma_{\\rm inc}$,\n$0<\\theta_C\\le1$, a declared model-operator bound $M_B\\ge0$, a maximum\nradius $\\Delta_{\\max}>0$, an initial radius $0<\\Delta_0\\le\\Delta_{\\max}$,\ntarget $\\varepsilon\\ge0$, and finite outer cap $N\\in\\mathbb N_0$. Each\nself-adjoint real-linear model operator $B_x$ on the Stiefel tangent or\nGrassmann horizontal space must satisfy $\\|B_x\\|_{\\rm op}\\le M_B$, where\n$$\\|B_x\\|_{\\rm op}:=\\sup_{s\\ne0}\\frac{\\|B_xs\\|}{\\|s\\|},$$\nwith $\\|B_x\\|_{\\rm op}=0$ when the tangent space is $\\{0\\}$. The subproblem\nroutine $S$ has a finite budget and returns a candidate tangent vector or\nfailure.\n\nStarting with $x_0$ and $\\Delta_0$, process $k=0,\\ldots,N$ in order:\n\n1. Set $g_k=\\operatorname{grad}f(x_k)$. Return $(x_k,\\texttt{stationary})$ if\n   $g_k=0$, $(x_k,\\texttt{target-achieved})$ if $\\|g_k\\|\\le\\varepsilon$, and\n   $(x_k,\\texttt{outer-budget-exhausted})$ if $k=N$.\n2. Form the real pullback quadratic model\n   $$m_k(s)=f(x_k)+\\langle g_k,s\\rangle+\\tfrac12\\langle s,B_{x_k}s\\rangle.$$\n   With $c_k=\\langle g_k,B_{x_k}g_k\\rangle$, set\n   $$\\tau_k=\\begin{cases}\\Delta_k/\\|g_k\\|,&c_k\\le0,\\\\\n   \\min\\{\\|g_k\\|^2/c_k,\\Delta_k/\\|g_k\\|\\},&c_k>0,\\end{cases}\n   \\qquad p_C=-\\tau_k g_k,$$\n   and set $P_C=m_k(0)-m_k(p_C)$.\n3. Query $S$. If it returned a vector $q$ with $\\|q\\|\\le\\Delta_k$ and\n   $m_k(0)-m_k(q)\\ge\\theta_C P_C$, set $p_k=q$; otherwise set $p_k=p_C$. If\n   $\\Delta_k\\le\\|g_k\\|/(2M_B)$, replace the candidate by $p_k=p_C$, interpreting\n   that threshold as $+\\infty$ when $M_B=0$. Set\n   $P_k=m_k(0)-m_k(p_k)$.\n4. If $P_k\\le0$, return $(x_k,\\texttt{model-evaluation-failure})$. Otherwise\n   evaluate $y_k=R_{x_k}(p_k)$; if the selected retraction is unavailable,\n   return $(x_k,\\texttt{model-evaluation-failure})$. If $f(y_k)$ cannot be\n   evaluated, return the same status. Otherwise set\n   $\\rho_k=(f(x_k)-f(y_k))/P_k$.\n5. If $\\rho_k<\\eta_1$, reject and set\n   $(x_{k+1},\\Delta_{k+1})=(x_k,\\gamma_{\\rm dec}\\Delta_k)$. Otherwise accept\n   and set $x_{k+1}=y_k$. If also $\\rho_k\\ge\\eta_2$ and $\\|p_k\\|=\\Delta_k$,\n   set $\\Delta_{k+1}=\\min\\{\\gamma_{\\rm inc}\\Delta_k,\\Delta_{\\max}\\}$; in every\n   other accepted case set $\\Delta_{k+1}=\\Delta_k$.\n\nReturn the last accepted point with the corresponding stop status. A failed\nfinite subproblem call, infeasible candidate, or candidate that misses the\nfraction-of-Cauchy test uses $p_C$.",
+-          "uses": [
+-            "2.2",
+-            "3.1"
+-          ]
+-        },
+-        {
+-          "fact": "F6",
+-          "source": "thm-riemannian-trust-region-first-order-complexity",
+-          "source_section": "Statement",
+-          "quote": "Let $1\\le r\\le n$, and let $M$ be a compact real Stiefel manifold\n$\\operatorname{St}(n,r)$, a compact real Grassmannian $\\operatorname{Gr}(r,n)$,\nor a compact complex Grassmannian $\\operatorname{Gr}_{\\mathbb C}(r,n)$. Let\n$f:M\\to\\mathbb R$ be of class $C^2$ and take $x_0\\in M$; set\n$f_{\\inf}=\\min_M f$, whose existence is proved below. Equip each tangent or\nhorizontal space with its real Frobenius inner product. For each self-adjoint\nreal-linear model operator $B_x$, define\n$$\\|B_x\\|_{\\rm op}:=\\sup_{s\\ne0}\\frac{\\|B_xs\\|}{\\|s\\|},$$\nwith value $0$ on a zero tangent space, and assume $\\|B_x\\|_{\\rm op}\\le M_B$\nfor some $M_B\\ge0$. Assume the pullback gradients of the chosen first-order\nretraction are uniformly $L_R$-Lipschitz on every trial ball of radius at most\n$\\Delta_{\\max}$, for some $L_R\\ge0$. Run\n[[alg-riemannian-trust-region]] with fixed\n$0<\\eta_1<\\eta_2<1$, $0<\\gamma_{\\rm dec}<1<\\gamma_{\\rm inc}$,\n$0<\\theta_C\\le1$, $0<\\Delta_0\\le\\Delta_{\\max}$, and target\n$0<\\varepsilon\\le1$. Assume every model and objective evaluation on a valid\ntrial is available. The counts concern the uncapped trial sequence up to its\nfirst target iterate; for the finite-cap implementation, choose an outer cap\nat least the resulting total-trial bound.\n\nUsing $+\\infty$ for reciprocals of zero, define\n$$c_\\delta=\\min\\left\\{\\frac1{2M_B}, \\frac{\\theta_C(1-\\eta_2)}{2(L_R+M_B)}\\right\\},\\qquad c_R=\\min\\{\\Delta_0,\\gamma_{\\rm dec}\\min\\{c_\\delta,\\Delta_{\\max}\\}\\},$$\n$$c_P=\\min\\{c_R,1/M_B\\},\\qquad c_S=\\tfrac12\\eta_1\\theta_Cc_P>0,\\qquad r_\\varepsilon=\\min\\{\\Delta_0,\\gamma_{\\rm dec}\\min\\{c_\\delta\\varepsilon,\\Delta_{\\max}\\}\\}.$$\nThen the number $N_s$ of accepted steps and $N_u$ of rejected trials before\nthe first iterate with $\\|\\operatorname{grad}f(x_k)\\|\\le\\varepsilon$ obey\n$$N_s\\le\\frac{f(x_0)-f_{\\inf}}{c_S\\varepsilon^2},\\qquad N_u\\le \\frac{\\log(\\Delta_0/r_\\varepsilon)+N_s\\log\\gamma_{\\rm inc}} {|\\log\\gamma_{\\rm dec}|}.$$\nConsequently accepted steps and total trials $N_s+N_u$ are\n$O(\\varepsilon^{-2})$ as $\\varepsilon\\downarrow0$, with all displayed\nconstants fixed. Such a finite cap suffices to return either stationary or target-achieved\nstatus, in both cases with gradient norm at most $\\varepsilon$; a smaller cap may return outer-budget-exhausted first. The constants\nand proof count accepted and rejected outer trials; they do not bound inner subproblem\noperations.",
+-          "uses": [
+-            "2.2",
+-            "3.1"
+-          ]
+-        },
+-        {
+-          "fact": "F7",
+-          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+-          "source_section": "Statement",
+-          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+-          "uses": [
+-            "2.2"
+-          ]
+-        },
+-        {
+-          "fact": "F8",
+-          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+-          "source_section": "Statement",
+-          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.",
+-          "uses": [
+-            "3.1"
+-          ]
+-        },
+-        {
+-          "fact": "F9",
+-          "source": "thm-extreme-value-metric",
+-          "source_section": "Statement",
+-          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+-          "uses": [
+-            "3.1"
+-          ]
+-        }
+-      ],
+-      "derivations": [
+-        {
+-          "id": "step-1-1",
+-          "claim": "If $X^*X=I_r$, then $P=XX^*$ is Hermitian and $P^2=X(X^*X)X^*=P$, with range equal to the column space of $X$ and therefore rank $r$. For unitary $Q$, $(XQ)(XQ)^*=XQQ^*X^*=P$. Thus $E(XX^*)$ is unitary-invariant and descends to complex Grassmann by [F1].",
+-          "step": "1.1",
+-          "inputs": [
+-            "F1",
+-            "given",
+-            "algebra"
+-          ]
+-        },
+-        {
+-          "id": "step-2-1",
+-          "claim": "For every horizontal $Z$, [F2] and [F4] yield the complex Grassmann gradient $2(I-P)F(P)X$. This formula uses the real derivative of the Hermitian-matrix energy, as required for a real-valued objective on complex coordinates.",
+-          "step": "2.1",
+-          "inputs": [
+-            "F2",
+-            "F3",
+-            "F4",
+-            "given",
+-            "step 1.1",
+-            "algebra"
+-          ]
+-        },
+-        {
+-          "id": "step-2-2",
+-          "claim": "Conversely, let $P$ be any rank-$r$ orthogonal projector. Choose an orthonormal basis of its $r$-dimensional range by [F7] and collect its vectors as the columns of $X$. Then $X^*X=I_r$ and $XX^*=P$, so the parameterization covers exactly the model's projector domain. By [F5], the polar-retracted trial remains a complex orthonormal frame, so its projector remains Hermitian, idempotent, and rank $r$; rejection leaves the old projector unchanged by [F6].",
+-          "step": "2.2",
+-          "inputs": [
+-            "F5",
+-            "F6",
+-            "F7",
+-            "given",
+-            "step 1.1",
+-            "construct",
+-            "algebra"
+-          ]
+-        },
+-        {
+-          "id": "step-3-1",
+-          "claim": "Fix any finite $\\Delta_{\\max}>0$. The set of pairs $(X,\\eta)$ with $X^*X=I_r$, $X^*\\eta=0$, and $\\|\\eta\\|_F\\le\\Delta_{\\max}$ is closed and bounded in a finite-dimensional real coordinate space, hence compact by [F8]. The polar retraction is smooth on it, and [F1]–[F2] make the pullback energy $C^2$ along the horizontal tangent bundle. Its fiber Hessian is continuous on this compact set, so its operator norm has a finite maximum by [F9]. Integrating this Hessian along each fiber segment gives a uniform Lipschitz bound for the pullback gradient. Choose the model operator $B_x=0$, which is self-adjoint and uniformly bounded by $M_B=0$. Hence all regularity and model hypotheses in [F6] hold, and a finite cap at least the theorem's trial bound suffices.",
+-          "step": "3.1",
+-          "inputs": [
+-            "F1",
+-            "F2",
+-            "F5",
+-            "F6",
+-            "F8",
+-            "F9",
+-            "given",
+-            "step 2.2",
+-            "algebra"
+-          ]
+-        }
+-      ],
+-      "routine_steps": [],
+-      "boundaries": [
+-        {
+-          "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The Statement or Definition restricts dimensions/rank to a nonempty domain; The item statement restricts to the stated nonempty finite-dimensional domain and makes no claim for this boundary case."
+-        },
+-        {
+-          "case": "zero",
+-          "status": "not_applicable",
+-          "reason": "The item statement restricts to the stated nonempty finite-dimensional domain and makes no claim for this boundary case."
+-        },
+-        {
+-          "case": "one",
+-          "status": "not_applicable",
+-          "reason": "The item statement restricts to the stated nonempty finite-dimensional domain and makes no claim for this boundary case."
+-        },
+-        {
+-          "case": "degenerate",
+-          "status": "not_applicable",
+-          "reason": "The item statement restricts to the stated nonempty finite-dimensional domain and makes no claim for this boundary case."
+-        },
+-        {
+-          "case": "endpoints",
+-          "status": "not_applicable",
+-          "reason": "The item statement restricts to the stated nonempty finite-dimensional domain and makes no claim for this boundary case."
+-        },
+-        {
+-          "case": "nonempty-choice",
+-          "status": "not_applicable",
+-          "reason": "The argument uses no choice principle; its finite-dimensional basis/frame construction is explicit in the Statement or the cited finite orthonormalization interface."
+-        },
+-        {
+-          "case": "iff-forward",
+-          "status": "checked",
+-          "evidence": "The biconditional claim is stated and proved in step 2.1."
+-        },
+-        {
+-          "case": "iff-reverse",
+-          "status": "checked",
+-          "evidence": "The biconditional claim is stated and proved in step 2.1."
+-        }
+-      ],
+-      "axioms": [],
+-      "supplier_interfaces": [
+-        {
+-          "fact": "F1",
+-          "supplier": "def-finite-basis-projector-energy-model",
+-          "required_hypotheses": "[F1] The model defines $E(P)=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(PG(P))+E_{xc}(P)$ on rank-$r$ Hermitian projectors ([[def-finite-basis-projector-energy-model]])."
+-        },
+-        {
+-          "fact": "F2",
+-          "supplier": "prop-finite-projector-energy-reality-and-gradient",
+-          "required_hypotheses": "[F2] The real-valued $C^2$ energy has Hermitian Frobenius gradient $F(P)$ ([[prop-finite-projector-energy-reality-and-gradient]])."
+-        },
+-        {
+-          "fact": "F3",
+-          "supplier": "thm-complex-stiefel-grassmann-tangent-projections",
+-          "required_hypotheses": "[F3] The complex Grassmann tangent is represented by $X^*Z=0$ and projects by $(I-XX^*)G$ ([[thm-complex-stiefel-grassmann-tangent-projections]])."
+-        },
+-        {
+-          "fact": "F4",
+-          "supplier": "prop-complex-grassmann-projector-energy-gradient",
+-          "required_hypotheses": "[F4] The gradient of a Hermitian projector energy with gradient $K(P)$ is $2(I-XX^*)K(P)X$ ([[prop-complex-grassmann-projector-energy-gradient]])."
+-        },
+-        {
+-          "fact": "F5",
+-          "supplier": "prop-complex-stiefel-grassmann-are-compact",
+-          "required_hypotheses": "[F5] Complex Grassmann is compact, and its polar map is defined on horizontal vectors, maps to orthonormal frames, is smooth, and has frame differential $D R_X^{\\rm pol}(0)[\\eta]=\\eta$ ([[prop-complex-stiefel-grassmann-are-compact]], [[def-complex-grassmann-polar-retraction]], [[thm-complex-grassmann-polar-retraction-is-first-order]])."
+-        },
+-        {
+-          "fact": "F5",
+-          "supplier": "def-complex-grassmann-polar-retraction",
+-          "required_hypotheses": "[F5] Complex Grassmann is compact, and its polar map is defined on horizontal vectors, maps to orthonormal frames, is smooth, and has frame differential $D R_X^{\\rm pol}(0)[\\eta]=\\eta$ ([[prop-complex-stiefel-grassmann-are-compact]], [[def-complex-grassmann-polar-retraction]], [[thm-complex-grassmann-polar-retraction-is-first-order]])."
+-        },
+-        {
+-          "fact": "F5",
+-          "supplier": "thm-complex-grassmann-polar-retraction-is-first-order",
+-          "required_hypotheses": "[F5] Complex Grassmann is compact, and its polar map is defined on horizontal vectors, maps to orthonormal frames, is smooth, and has frame differential $D R_X^{\\rm pol}(0)[\\eta]=\\eta$ ([[prop-complex-stiefel-grassmann-are-compact]], [[def-complex-grassmann-polar-retraction]], [[thm-complex-grassmann-polar-retraction-is-first-order]])."
+-        },
+-        {
+-          "fact": "F6",
+-          "supplier": "alg-riemannian-trust-region",
+-          "required_hypotheses": "[F6] The trust-region method uses a retracted trial, leaves the current point on rejection, and has the proved first-order count under its pullback hypotheses ([[alg-riemannian-trust-region]], [[thm-riemannian-trust-region-first-order-complexity]])."
+-        },
+-        {
+-          "fact": "F6",
+-          "supplier": "thm-riemannian-trust-region-first-order-complexity",
+-          "required_hypotheses": "[F6] The trust-region method uses a retracted trial, leaves the current point on rejection, and has the proved first-order count under its pullback hypotheses ([[alg-riemannian-trust-region]], [[thm-riemannian-trust-region-first-order-complexity]])."
+-        },
+-        {
+-          "fact": "F7",
+-          "supplier": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+-          "required_hypotheses": "[F7] Every finite-dimensional complex inner-product subspace has an orthonormal basis ([[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]])."
+-        },
+-        {
+-          "fact": "F8",
+-          "supplier": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+-          "required_hypotheses": "[F8] Closed bounded subsets of a finite-dimensional Euclidean space are compact ([[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]])."
+-        },
+-        {
+-          "fact": "F9",
+-          "supplier": "thm-extreme-value-metric",
+-          "required_hypotheses": "[F9] A continuous real-valued function on a compact metric space attains its maximum ([[thm-extreme-value-metric]])."
+-        }
+-      ],
+-      "finite_checks": []
+     },
+     "def-complex-stiefel-grassmann-optimization-conventions": {
+       "risk": "medium",
+--- research/numerical-optimization-dynamics-2026-10-16-batch-92.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-92.proof-contracts.json (proposed)
+@@ -26,7 +26,8 @@
+     "ex-zero-ritz-residual-does-not-identify-ground-state",
+     "ex-overlap-whitening-can-amplify-coefficient-errors",
+     "ex-nonsmooth-exchange-correlation-functional-breaks-c2",
+-    "ex-two-level-nonlinear-projector-stationary-maximum"
++    "ex-two-level-nonlinear-projector-stationary-maximum",
++    "ex-finite-basis-projector-optimization-on-grassmann"
+   ],
+   "contracts": {
+     "def-rank-r-orthogonal-projector-domain": {
+@@ -365,7 +366,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -536,7 +537,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -664,7 +665,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -968,7 +969,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -1138,7 +1139,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -1256,7 +1257,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -1324,7 +1325,7 @@
+           "fact": "F3",
+           "source": "def-finite-basis-projector-energy-model",
+           "source_section": "Definition",
+-          "quote": "Let $S=S^*\\succ0$ be an $n\\times n$ finite-basis overlap matrix and supply its\nCholesky factor $L$ with $S=LL^*$, $L$ invertible\n([[def-cholesky-factorisation-with-positive-diagonal]],\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).\nIf $h_0=h_0^*$ is the coefficient-basis one-body matrix, set\n$h=L^{-1}h_0L^{-*}$, where $L^{-*}=(L^*)^{-1}$; this is the Cholesky\nwhitening whose generalized Ritz quotient is preserved by\n[[prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil]].\nFor coefficient vectors use $y=L^*c$; the interaction map and chosen\nexchange-correlation functional below are supplied in these orthonormal\ncoordinates. Fix $1\\le r<n$ and the\nprojector domain $\\mathcal P_r$ of [[def-rank-r-orthogonal-projector-domain]].\n\nSupply a Hermitian matrix $h$, a real-linear self-adjoint map\n$G:\\mathbb H_n\\to\\mathbb H_n$ for the Frobenius inner product, and a real-valued\n$C^2$ functional $E_{xc}$ on an open neighborhood of $\\mathcal P_r$. Define\n$$E(P):=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(P G(P))+E_{xc}(P),\\qquad F(P):=h+G(P)+\\nabla E_{xc}(P).$$\nHere $F(P)$ is the Hermitian Frobenius-gradient formula justified by\n[[prop-finite-projector-energy-reality-and-gradient]].\n\nThe finite-basis Hartree–Fock model is the special case $E_{xc}=0$ with a\nsupplied symmetry-compatible Coulomb/exchange tensor defining $G$. A\nKohn–Sham-like model supplies its density map and chosen differentiable\nexchange-correlation functional. These are finite-dimensional mathematical\nmodels; this definition makes no assertion that the selected functional is an\nexact continuum physical energy.",
++          "quote": "Let $S=S^*\\succ0$ be an $n\\times n$ finite-basis overlap matrix and supply its\nCholesky factor $L$ with $S=LL^*$, $L$ invertible\n([[def-cholesky-factorisation-with-positive-diagonal]],\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).\nIf $h_0=h_0^*$ is the coefficient-basis one-body matrix, set\n$h=L^{-1}h_0L^{-*}$, where $L^{-*}=(L^*)^{-1}$; this is the Cholesky\nwhitening whose generalized Ritz quotient is preserved by\n[[prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil]].\nFor coefficient vectors use $y=L^*c$; the interaction map and chosen\nexchange-correlation functional below are supplied in these orthonormal\ncoordinates. Fix $1\\le r<n$ and the\nprojector domain $\\mathcal P_r$ of [[def-rank-r-orthogonal-projector-domain]].\n\nSupply a Hermitian matrix $h$, a real-linear self-adjoint map\n$G:\\mathbb H_n\\to\\mathbb H_n$ for the Frobenius inner product, and a real-valued\n$C^2$ functional $E_{xc}$ on an open neighborhood of $\\mathcal P_r$. Define\n$$E(P):=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(P G(P))+E_{xc}(P),\\qquad F(P):=h+G(P)+\\nabla E_{xc}(P).$$\nHere $F(P)$ is the Hermitian Frobenius-gradient formula justified by\n[[prop-finite-projector-energy-reality-and-gradient]].\n\nThe finite-basis Hartree\u2013Fock model is the special case $E_{xc}=0$ with a\nsupplied symmetry-compatible Coulomb/exchange tensor defining $G$. A\nKohn\u2013Sham-like model supplies its density map and chosen differentiable\nexchange-correlation functional. These are finite-dimensional mathematical\nmodels; this definition makes no assertion that the selected functional is an\nexact continuum physical energy.",
+           "uses": [
+             "1.1",
+             "1.2",
+@@ -1390,7 +1391,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -1505,7 +1506,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -1603,7 +1604,7 @@
+       "derivations": [
+         {
+           "id": "proof-step-1.1",
+-          "claim": "Diagonalize $D$ by [F2], with eigenvalues $d_j\\in[0,1]$ and $\\sum_jd_j=r$. If $d_i=0$, then $r>0$ gives an index $j$ with $d_j>0$. For small $t>0$, $D_t=D+t(e_ie_i^*-e_je_j^*)$ remains in $\\mathcal D_r$. If $d_j\\in(0,1)$, $\\phi'$ is bounded near $d_j$, so [F4] gives $\\phi(d_j-t)-\\phi(d_j)=O(t)$. Also $(1-t)\\log(1-t)=O(t)$ because this scalar function is differentiable at $0$. Thus the entropy change is $\\phi(t)+\\phi(d_j-t)-\\phi(0)-\\phi(d_j)=t\\log t+O(t)$ by [F3]. If $d_j=1$, it is $\\phi(t)+\\phi(1-t)=2t\\log t+O(t)$ by $\\phi(1-t)=\\phi(t)$. The energy change is $O(t)$ by Fréchet differentiability of $\\mathcal E$ at $D$ along the fixed direction $e_ie_i^*-e_je_j^*$. Dividing the total free-energy change by $t$ gives $\\beta^{-1}\\log t+O(1)$ (or $2\\beta^{-1}\\log t+O(1)$), which is negative for sufficiently small $t$. This contradicts minimality.",
++          "claim": "Diagonalize $D$ by [F2], with eigenvalues $d_j\\in[0,1]$ and $\\sum_jd_j=r$. If $d_i=0$, then $r>0$ gives an index $j$ with $d_j>0$. For small $t>0$, $D_t=D+t(e_ie_i^*-e_je_j^*)$ remains in $\\mathcal D_r$. If $d_j\\in(0,1)$, $\\phi'$ is bounded near $d_j$, so [F4] gives $\\phi(d_j-t)-\\phi(d_j)=O(t)$. Also $(1-t)\\log(1-t)=O(t)$ because this scalar function is differentiable at $0$. Thus the entropy change is $\\phi(t)+\\phi(d_j-t)-\\phi(0)-\\phi(d_j)=t\\log t+O(t)$ by [F3]. If $d_j=1$, it is $\\phi(t)+\\phi(1-t)=2t\\log t+O(t)$ by $\\phi(1-t)=\\phi(t)$. The energy change is $O(t)$ by Fr\u00e9chet differentiability of $\\mathcal E$ at $D$ along the fixed direction $e_ie_i^*-e_je_j^*$. Dividing the total free-energy change by $t$ gives $\\beta^{-1}\\log t+O(1)$ (or $2\\beta^{-1}\\log t+O(1)$), which is negative for sufficiently small $t$. This contradicts minimality.",
+           "step": "1.1",
+           "inputs": [
+             "F1",
+@@ -1838,7 +1839,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -1893,7 +1894,7 @@
+           "fact": "F1",
+           "source": "def-finite-basis-projector-energy-model",
+           "source_section": "Definition",
+-          "quote": "Let $S=S^*\\succ0$ be an $n\\times n$ finite-basis overlap matrix and supply its\nCholesky factor $L$ with $S=LL^*$, $L$ invertible\n([[def-cholesky-factorisation-with-positive-diagonal]],\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).\nIf $h_0=h_0^*$ is the coefficient-basis one-body matrix, set\n$h=L^{-1}h_0L^{-*}$, where $L^{-*}=(L^*)^{-1}$; this is the Cholesky\nwhitening whose generalized Ritz quotient is preserved by\n[[prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil]].\nFor coefficient vectors use $y=L^*c$; the interaction map and chosen\nexchange-correlation functional below are supplied in these orthonormal\ncoordinates. Fix $1\\le r<n$ and the\nprojector domain $\\mathcal P_r$ of [[def-rank-r-orthogonal-projector-domain]].\n\nSupply a Hermitian matrix $h$, a real-linear self-adjoint map\n$G:\\mathbb H_n\\to\\mathbb H_n$ for the Frobenius inner product, and a real-valued\n$C^2$ functional $E_{xc}$ on an open neighborhood of $\\mathcal P_r$. Define\n$$E(P):=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(P G(P))+E_{xc}(P),\\qquad F(P):=h+G(P)+\\nabla E_{xc}(P).$$\nHere $F(P)$ is the Hermitian Frobenius-gradient formula justified by\n[[prop-finite-projector-energy-reality-and-gradient]].\n\nThe finite-basis Hartree–Fock model is the special case $E_{xc}=0$ with a\nsupplied symmetry-compatible Coulomb/exchange tensor defining $G$. A\nKohn–Sham-like model supplies its density map and chosen differentiable\nexchange-correlation functional. These are finite-dimensional mathematical\nmodels; this definition makes no assertion that the selected functional is an\nexact continuum physical energy.",
++          "quote": "Let $S=S^*\\succ0$ be an $n\\times n$ finite-basis overlap matrix and supply its\nCholesky factor $L$ with $S=LL^*$, $L$ invertible\n([[def-cholesky-factorisation-with-positive-diagonal]],\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).\nIf $h_0=h_0^*$ is the coefficient-basis one-body matrix, set\n$h=L^{-1}h_0L^{-*}$, where $L^{-*}=(L^*)^{-1}$; this is the Cholesky\nwhitening whose generalized Ritz quotient is preserved by\n[[prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil]].\nFor coefficient vectors use $y=L^*c$; the interaction map and chosen\nexchange-correlation functional below are supplied in these orthonormal\ncoordinates. Fix $1\\le r<n$ and the\nprojector domain $\\mathcal P_r$ of [[def-rank-r-orthogonal-projector-domain]].\n\nSupply a Hermitian matrix $h$, a real-linear self-adjoint map\n$G:\\mathbb H_n\\to\\mathbb H_n$ for the Frobenius inner product, and a real-valued\n$C^2$ functional $E_{xc}$ on an open neighborhood of $\\mathcal P_r$. Define\n$$E(P):=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(P G(P))+E_{xc}(P),\\qquad F(P):=h+G(P)+\\nabla E_{xc}(P).$$\nHere $F(P)$ is the Hermitian Frobenius-gradient formula justified by\n[[prop-finite-projector-energy-reality-and-gradient]].\n\nThe finite-basis Hartree\u2013Fock model is the special case $E_{xc}=0$ with a\nsupplied symmetry-compatible Coulomb/exchange tensor defining $G$. A\nKohn\u2013Sham-like model supplies its density map and chosen differentiable\nexchange-correlation functional. These are finite-dimensional mathematical\nmodels; this definition makes no assertion that the selected functional is an\nexact continuum physical energy.",
+           "uses": [
+             "1.1"
+           ]
+@@ -1958,7 +1959,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -2057,7 +2058,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -2152,7 +2153,7 @@
+           "fact": "F5",
+           "source": "thm-intermediate-value",
+           "source_section": "Statement",
+-          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
++          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] \u2014 hence the least-upper-bound property \u2014 that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+           "uses": [
+             "4.1"
+           ]
+@@ -2242,7 +2243,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -2367,7 +2368,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -2576,7 +2577,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -2832,7 +2833,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -2887,7 +2888,7 @@
+           "fact": "F1",
+           "source": "def-finite-basis-projector-energy-model",
+           "source_section": "Definition",
+-          "quote": "Let $S=S^*\\succ0$ be an $n\\times n$ finite-basis overlap matrix and supply its\nCholesky factor $L$ with $S=LL^*$, $L$ invertible\n([[def-cholesky-factorisation-with-positive-diagonal]],\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).\nIf $h_0=h_0^*$ is the coefficient-basis one-body matrix, set\n$h=L^{-1}h_0L^{-*}$, where $L^{-*}=(L^*)^{-1}$; this is the Cholesky\nwhitening whose generalized Ritz quotient is preserved by\n[[prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil]].\nFor coefficient vectors use $y=L^*c$; the interaction map and chosen\nexchange-correlation functional below are supplied in these orthonormal\ncoordinates. Fix $1\\le r<n$ and the\nprojector domain $\\mathcal P_r$ of [[def-rank-r-orthogonal-projector-domain]].\n\nSupply a Hermitian matrix $h$, a real-linear self-adjoint map\n$G:\\mathbb H_n\\to\\mathbb H_n$ for the Frobenius inner product, and a real-valued\n$C^2$ functional $E_{xc}$ on an open neighborhood of $\\mathcal P_r$. Define\n$$E(P):=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(P G(P))+E_{xc}(P),\\qquad F(P):=h+G(P)+\\nabla E_{xc}(P).$$\nHere $F(P)$ is the Hermitian Frobenius-gradient formula justified by\n[[prop-finite-projector-energy-reality-and-gradient]].\n\nThe finite-basis Hartree–Fock model is the special case $E_{xc}=0$ with a\nsupplied symmetry-compatible Coulomb/exchange tensor defining $G$. A\nKohn–Sham-like model supplies its density map and chosen differentiable\nexchange-correlation functional. These are finite-dimensional mathematical\nmodels; this definition makes no assertion that the selected functional is an\nexact continuum physical energy.",
++          "quote": "Let $S=S^*\\succ0$ be an $n\\times n$ finite-basis overlap matrix and supply its\nCholesky factor $L$ with $S=LL^*$, $L$ invertible\n([[def-cholesky-factorisation-with-positive-diagonal]],\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).\nIf $h_0=h_0^*$ is the coefficient-basis one-body matrix, set\n$h=L^{-1}h_0L^{-*}$, where $L^{-*}=(L^*)^{-1}$; this is the Cholesky\nwhitening whose generalized Ritz quotient is preserved by\n[[prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil]].\nFor coefficient vectors use $y=L^*c$; the interaction map and chosen\nexchange-correlation functional below are supplied in these orthonormal\ncoordinates. Fix $1\\le r<n$ and the\nprojector domain $\\mathcal P_r$ of [[def-rank-r-orthogonal-projector-domain]].\n\nSupply a Hermitian matrix $h$, a real-linear self-adjoint map\n$G:\\mathbb H_n\\to\\mathbb H_n$ for the Frobenius inner product, and a real-valued\n$C^2$ functional $E_{xc}$ on an open neighborhood of $\\mathcal P_r$. Define\n$$E(P):=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(P G(P))+E_{xc}(P),\\qquad F(P):=h+G(P)+\\nabla E_{xc}(P).$$\nHere $F(P)$ is the Hermitian Frobenius-gradient formula justified by\n[[prop-finite-projector-energy-reality-and-gradient]].\n\nThe finite-basis Hartree\u2013Fock model is the special case $E_{xc}=0$ with a\nsupplied symmetry-compatible Coulomb/exchange tensor defining $G$. A\nKohn\u2013Sham-like model supplies its density map and chosen differentiable\nexchange-correlation functional. These are finite-dimensional mathematical\nmodels; this definition makes no assertion that the selected functional is an\nexact continuum physical energy.",
+           "uses": [
+             "2.1"
+           ]
+@@ -2945,7 +2946,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -3009,7 +3010,7 @@
+           "fact": "F2",
+           "source": "def-finite-basis-projector-energy-model",
+           "source_section": "Definition",
+-          "quote": "Let $S=S^*\\succ0$ be an $n\\times n$ finite-basis overlap matrix and supply its\nCholesky factor $L$ with $S=LL^*$, $L$ invertible\n([[def-cholesky-factorisation-with-positive-diagonal]],\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).\nIf $h_0=h_0^*$ is the coefficient-basis one-body matrix, set\n$h=L^{-1}h_0L^{-*}$, where $L^{-*}=(L^*)^{-1}$; this is the Cholesky\nwhitening whose generalized Ritz quotient is preserved by\n[[prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil]].\nFor coefficient vectors use $y=L^*c$; the interaction map and chosen\nexchange-correlation functional below are supplied in these orthonormal\ncoordinates. Fix $1\\le r<n$ and the\nprojector domain $\\mathcal P_r$ of [[def-rank-r-orthogonal-projector-domain]].\n\nSupply a Hermitian matrix $h$, a real-linear self-adjoint map\n$G:\\mathbb H_n\\to\\mathbb H_n$ for the Frobenius inner product, and a real-valued\n$C^2$ functional $E_{xc}$ on an open neighborhood of $\\mathcal P_r$. Define\n$$E(P):=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(P G(P))+E_{xc}(P),\\qquad F(P):=h+G(P)+\\nabla E_{xc}(P).$$\nHere $F(P)$ is the Hermitian Frobenius-gradient formula justified by\n[[prop-finite-projector-energy-reality-and-gradient]].\n\nThe finite-basis Hartree–Fock model is the special case $E_{xc}=0$ with a\nsupplied symmetry-compatible Coulomb/exchange tensor defining $G$. A\nKohn–Sham-like model supplies its density map and chosen differentiable\nexchange-correlation functional. These are finite-dimensional mathematical\nmodels; this definition makes no assertion that the selected functional is an\nexact continuum physical energy.",
++          "quote": "Let $S=S^*\\succ0$ be an $n\\times n$ finite-basis overlap matrix and supply its\nCholesky factor $L$ with $S=LL^*$, $L$ invertible\n([[def-cholesky-factorisation-with-positive-diagonal]],\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).\nIf $h_0=h_0^*$ is the coefficient-basis one-body matrix, set\n$h=L^{-1}h_0L^{-*}$, where $L^{-*}=(L^*)^{-1}$; this is the Cholesky\nwhitening whose generalized Ritz quotient is preserved by\n[[prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil]].\nFor coefficient vectors use $y=L^*c$; the interaction map and chosen\nexchange-correlation functional below are supplied in these orthonormal\ncoordinates. Fix $1\\le r<n$ and the\nprojector domain $\\mathcal P_r$ of [[def-rank-r-orthogonal-projector-domain]].\n\nSupply a Hermitian matrix $h$, a real-linear self-adjoint map\n$G:\\mathbb H_n\\to\\mathbb H_n$ for the Frobenius inner product, and a real-valued\n$C^2$ functional $E_{xc}$ on an open neighborhood of $\\mathcal P_r$. Define\n$$E(P):=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(P G(P))+E_{xc}(P),\\qquad F(P):=h+G(P)+\\nabla E_{xc}(P).$$\nHere $F(P)$ is the Hermitian Frobenius-gradient formula justified by\n[[prop-finite-projector-energy-reality-and-gradient]].\n\nThe finite-basis Hartree\u2013Fock model is the special case $E_{xc}=0$ with a\nsupplied symmetry-compatible Coulomb/exchange tensor defining $G$. A\nKohn\u2013Sham-like model supplies its density map and chosen differentiable\nexchange-correlation functional. These are finite-dimensional mathematical\nmodels; this definition makes no assertion that the selected functional is an\nexact continuum physical energy.",
+           "uses": [
+             "1.1",
+             "3.1"
+@@ -3079,7 +3080,7 @@
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item’s stated inputs."
++          "reason": "No zero-valued boundary variable or zero-dimensional case is part of this item\u2019s stated inputs."
+         },
+         {
+           "case": "one",
+@@ -3125,6 +3126,289 @@
+         "status": "open",
+         "notes": "Authoring contract only; independent review and acceptance remain pending."
+       }
++    },
++    "ex-finite-basis-projector-optimization-on-grassmann": {
++      "risk": "high",
++      "kind": "example",
++      "citations": [
++        {
++          "fact": "F1",
++          "source": "def-finite-basis-projector-energy-model",
++          "source_section": "Definition",
++          "quote": "Let $S=S^*\\succ0$ be an $n\\times n$ finite-basis overlap matrix and supply its\nCholesky factor $L$ with $S=LL^*$, $L$ invertible\n([[def-cholesky-factorisation-with-positive-diagonal]],\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).\nIf $h_0=h_0^*$ is the coefficient-basis one-body matrix, set\n$h=L^{-1}h_0L^{-*}$, where $L^{-*}=(L^*)^{-1}$; this is the Cholesky\nwhitening whose generalized Ritz quotient is preserved by\n[[prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil]].\nFor coefficient vectors use $y=L^*c$; the interaction map and chosen\nexchange-correlation functional below are supplied in these orthonormal\ncoordinates. Fix $1\\le r<n$ and the\nprojector domain $\\mathcal P_r$ of [[def-rank-r-orthogonal-projector-domain]].\n\nSupply a Hermitian matrix $h$, a real-linear self-adjoint map\n$G:\\mathbb H_n\\to\\mathbb H_n$ for the Frobenius inner product, and a real-valued\n$C^2$ functional $E_{xc}$ on an open neighborhood of $\\mathcal P_r$. Define\n$$E(P):=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(P G(P))+E_{xc}(P),\\qquad F(P):=h+G(P)+\\nabla E_{xc}(P).$$\nHere $F(P)$ is the Hermitian Frobenius-gradient formula justified by\n[[prop-finite-projector-energy-reality-and-gradient]].\n\nThe finite-basis Hartree\u2013Fock model is the special case $E_{xc}=0$ with a\nsupplied symmetry-compatible Coulomb/exchange tensor defining $G$. A\nKohn\u2013Sham-like model supplies its density map and chosen differentiable\nexchange-correlation functional. These are finite-dimensional mathematical\nmodels; this definition makes no assertion that the selected functional is an\nexact continuum physical energy.",
++          "uses": [
++            "1.1",
++            "3.1"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "prop-finite-projector-energy-reality-and-gradient",
++          "source_section": "Statement",
++          "quote": "For the data of [[def-finite-basis-projector-energy-model]], $E(P)$ is real\nand $C^2$ on its stated neighborhood. For every Hermitian $P$ in that\nneighborhood and every Hermitian direction $H$,\n$$DE(P)[H]=\\operatorname{tr}\\big((h+G(P)+\\nabla E_{xc}(P))H\\big)=\\langle F(P),H\\rangle_F.$$\nThus $F(P)$ is the Hermitian Frobenius gradient of $E$.",
++          "uses": [
++            "2.1",
++            "3.1"
++          ]
++        },
++        {
++          "fact": "F3",
++          "source": "thm-complex-stiefel-grassmann-tangent-projections",
++          "source_section": "Statement",
++          "quote": "For $X\\in\\operatorname{St}_{\\mathbb C}(n,r)$, as a real manifold, $T_X\\operatorname{St}_{\\mathbb C}(n,r)=\\{Z:X^*Z+Z^*X=0\\}$ and $\\Pi_X^{\\rm St}(G)=G-X\\operatorname{Herm}(X^*G)$. The complex Grassmann tangent has the unique horizontal representative $X^*Z=0$, and its quotient-metric projection is $\\Pi_X^{\\rm Gr}(G)=(I-XX^*)G$.",
++          "uses": [
++            "2.1"
++          ]
++        },
++        {
++          "fact": "F4",
++          "source": "prop-complex-grassmann-projector-energy-gradient",
++          "source_section": "Statement",
++          "quote": "Let $1\\le r\\le n$, and let $E$ be real-valued and continuously differentiable on an open set of\nHermitian $n\\times n$ matrices containing the rank-$r$ orthogonal projectors.\nSuppose its real Frobenius gradient $K(P)=K(P)^*$ satisfies\n$$DE(P)[H]=\\operatorname{Re}\\operatorname{tr}(K(P)^*H)$$\nfor every Hermitian direction $H$. Then $f([X])=E(XX^*)$ is well-defined on\n$\\operatorname{Gr}_{\\mathbb C}(r,n)$ and has horizontal gradient\n$$\\operatorname{grad}f([X])=2(I-XX^*)K(XX^*)X.$$",
++          "uses": [
++            "2.1"
++          ]
++        },
++        {
++          "fact": "F5",
++          "source": "prop-complex-stiefel-grassmann-are-compact",
++          "source_section": "Statement",
++          "quote": "For $1\\le r\\le n$, $\\operatorname{St}_{\\mathbb C}(n,r)$ is a nonempty closed\nbounded subset of the real coordinate space $\\mathbb R^{2nr}$, and\n$\\operatorname{Gr}_{\\mathbb C}(r,n)$ is its continuous quotient image. Both\nspaces are compact.",
++          "uses": [
++            "2.2",
++            "3.1"
++          ]
++        },
++        {
++          "fact": "F5",
++          "source": "def-complex-grassmann-polar-retraction",
++          "source_section": "Definition",
++          "quote": "For $X\\in\\operatorname{St}_{\\mathbb C}(n,r)$ and horizontal $\\eta\\in T_{[X]}\\operatorname{Gr}_{\\mathbb C}(r,n)$, so $X^*\\eta=0$, define $R_X^{\\rm pol}(\\eta)=(X+\\eta)\\bigl((X+\\eta)^*(X+\\eta)\\bigr)^{-1/2}$ and $R_{[X]}^{\\rm pol}(\\eta)=\\operatorname{range}(R_X^{\\rm pol}(\\eta))$.\nThe inverse square root is the inverse of the unique positive-definite\nHermitian square root. The horizontal condition gives\n$(X+\\eta)^*(X+\\eta)=I+\\eta^*\\eta\\succ0$, so this map is defined for every\nhorizontal tangent vector, and its frame representative is unchanged as a\nGrassmann point when $(X,\\eta)$ is replaced by $(XQ,\\eta Q)$ with unitary $Q$.",
++          "uses": [
++            "2.2",
++            "3.1"
++          ]
++        },
++        {
++          "fact": "F5",
++          "source": "thm-complex-grassmann-polar-retraction-is-first-order",
++          "source_section": "Statement",
++          "quote": "The frame formula of [[def-complex-grassmann-polar-retraction]] is smooth on the\nhorizontal tangent bundle, maps into $\\operatorname{St}_{\\mathbb C}(n,r)$,\nfixes zero, and has frame differential $D R_X^{\\rm pol}(0)[\\eta]=\\eta$ for\nhorizontal $\\eta$. It is right-unitary equivariant, so its range map is\nrepresentative-independent and has identity differential under the horizontal\ntangent identification. Thus it is a first-order retraction on\n$\\operatorname{Gr}_{\\mathbb C}(r,n)$.",
++          "uses": [
++            "2.2",
++            "3.1"
++          ]
++        },
++        {
++          "fact": "F6",
++          "source": "alg-riemannian-trust-region",
++          "source_section": "Definition",
++          "quote": "Let $1\\le r\\le n$. Let $M$ be a real Stiefel manifold\n$\\operatorname{St}(n,r)$, a real Grassmannian $\\operatorname{Gr}(r,n)$, or a\ncomplex Grassmannian $\\operatorname{Gr}_{\\mathbb C}(r,n)$, with each tangent\nspace regarded as a real inner-product space under the corresponding\nFrobenius metric. On a real Stiefel manifold or real Grassmannian choose the\ninduced map of either the real QR or real polar formula from\n[[def-stiefel-qr-polar-retractions]]; on a complex Grassmannian choose the\ncomplex polar map from [[def-complex-grassmann-polar-retraction]]. Denote the\nchosen map by $R$. Let $f:M\\to\\mathbb R$ be of class $C^2$ and take an initial point\n$x_0\\in M$. For this regularity, $\\operatorname{grad}f(x)$ denotes the\npointwise metric dual of $df_x$: in any orthonormal real basis $e_i$ of\n$T_xM$, it is $\\sum_i df_x(e_i)e_i$ (the empty sum is zero). This\nconvention agrees with [[def-riemannian-gradient-of-a-smooth-function]]\nwhen $f$ is smooth; no infinitely differentiable gradient field is required.\n\nFix $0<\\eta_1<\\eta_2<1$, $0<\\gamma_{\\rm dec}<1<\\gamma_{\\rm inc}$,\n$0<\\theta_C\\le1$, a declared model-operator bound $M_B\\ge0$, a maximum\nradius $\\Delta_{\\max}>0$, an initial radius $0<\\Delta_0\\le\\Delta_{\\max}$,\ntarget $\\varepsilon\\ge0$, and finite outer cap $N\\in\\mathbb N_0$. Each\nself-adjoint real-linear model operator $B_x$ on the Stiefel tangent or\nGrassmann horizontal space must satisfy $\\|B_x\\|_{\\rm op}\\le M_B$, where\n$$\\|B_x\\|_{\\rm op}:=\\sup_{s\\ne0}\\frac{\\|B_xs\\|}{\\|s\\|},$$\nwith $\\|B_x\\|_{\\rm op}=0$ when the tangent space is $\\{0\\}$. The subproblem\nroutine $S$ has a finite budget and returns a candidate tangent vector or\nfailure.\n\nStarting with $x_0$ and $\\Delta_0$, process $k=0,\\ldots,N$ in order:\n\n1. Set $g_k=\\operatorname{grad}f(x_k)$. Return $(x_k,\\texttt{stationary})$ if\n   $g_k=0$, $(x_k,\\texttt{target-achieved})$ if $\\|g_k\\|\\le\\varepsilon$, and\n   $(x_k,\\texttt{outer-budget-exhausted})$ if $k=N$.\n2. Form the real pullback quadratic model\n   $$m_k(s)=f(x_k)+\\langle g_k,s\\rangle+\\tfrac12\\langle s,B_{x_k}s\\rangle.$$\n   With $c_k=\\langle g_k,B_{x_k}g_k\\rangle$, set\n   $$\\tau_k=\\begin{cases}\\Delta_k/\\|g_k\\|,&c_k\\le0,\\\\\n   \\min\\{\\|g_k\\|^2/c_k,\\Delta_k/\\|g_k\\|\\},&c_k>0,\\end{cases}\n   \\qquad p_C=-\\tau_k g_k,$$\n   and set $P_C=m_k(0)-m_k(p_C)$.\n3. Query $S$. If it returned a vector $q$ with $\\|q\\|\\le\\Delta_k$ and\n   $m_k(0)-m_k(q)\\ge\\theta_C P_C$, set $p_k=q$; otherwise set $p_k=p_C$. If\n   $\\Delta_k\\le\\|g_k\\|/(2M_B)$, replace the candidate by $p_k=p_C$, interpreting\n   that threshold as $+\\infty$ when $M_B=0$. Set\n   $P_k=m_k(0)-m_k(p_k)$.\n4. If $P_k\\le0$, return $(x_k,\\texttt{model-evaluation-failure})$. Otherwise\n   evaluate $y_k=R_{x_k}(p_k)$; if the selected retraction is unavailable,\n   return $(x_k,\\texttt{model-evaluation-failure})$. If $f(y_k)$ cannot be\n   evaluated, return the same status. Otherwise set\n   $\\rho_k=(f(x_k)-f(y_k))/P_k$.\n5. If $\\rho_k<\\eta_1$, reject and set\n   $(x_{k+1},\\Delta_{k+1})=(x_k,\\gamma_{\\rm dec}\\Delta_k)$. Otherwise accept\n   and set $x_{k+1}=y_k$. If also $\\rho_k\\ge\\eta_2$ and $\\|p_k\\|=\\Delta_k$,\n   set $\\Delta_{k+1}=\\min\\{\\gamma_{\\rm inc}\\Delta_k,\\Delta_{\\max}\\}$; in every\n   other accepted case set $\\Delta_{k+1}=\\Delta_k$.\n\nReturn the last accepted point with the corresponding stop status. A failed\nfinite subproblem call, infeasible candidate, or candidate that misses the\nfraction-of-Cauchy test uses $p_C$.",
++          "uses": [
++            "2.2",
++            "3.1"
++          ]
++        },
++        {
++          "fact": "F6",
++          "source": "thm-riemannian-trust-region-first-order-complexity",
++          "source_section": "Statement",
++          "quote": "Let $1\\le r\\le n$, and let $M$ be a compact real Stiefel manifold\n$\\operatorname{St}(n,r)$, a compact real Grassmannian $\\operatorname{Gr}(r,n)$,\nor a compact complex Grassmannian $\\operatorname{Gr}_{\\mathbb C}(r,n)$. Let\n$f:M\\to\\mathbb R$ be of class $C^2$ and take $x_0\\in M$; set\n$f_{\\inf}=\\min_M f$, whose existence is proved below. Equip each tangent or\nhorizontal space with its real Frobenius inner product. For each self-adjoint\nreal-linear model operator $B_x$, define\n$$\\|B_x\\|_{\\rm op}:=\\sup_{s\\ne0}\\frac{\\|B_xs\\|}{\\|s\\|},$$\nwith value $0$ on a zero tangent space, and assume $\\|B_x\\|_{\\rm op}\\le M_B$\nfor some $M_B\\ge0$. Assume the pullback gradients of the chosen first-order\nretraction are uniformly $L_R$-Lipschitz on every trial ball of radius at most\n$\\Delta_{\\max}$, for some $L_R\\ge0$. Run\n[[alg-riemannian-trust-region]] with fixed\n$0<\\eta_1<\\eta_2<1$, $0<\\gamma_{\\rm dec}<1<\\gamma_{\\rm inc}$,\n$0<\\theta_C\\le1$, $0<\\Delta_0\\le\\Delta_{\\max}$, and target\n$0<\\varepsilon\\le1$. Assume every model and objective evaluation on a valid\ntrial is available. The counts concern the uncapped trial sequence up to its\nfirst target iterate; for the finite-cap implementation, choose an outer cap\nat least the resulting total-trial bound.\n\nUsing $+\\infty$ for reciprocals of zero, define\n$$c_\\delta=\\min\\left\\{\\frac1{2M_B}, \\frac{\\theta_C(1-\\eta_2)}{2(L_R+M_B)}\\right\\},\\qquad c_R=\\min\\{\\Delta_0,\\gamma_{\\rm dec}\\min\\{c_\\delta,\\Delta_{\\max}\\}\\},$$\n$$c_P=\\min\\{c_R,1/M_B\\},\\qquad c_S=\\tfrac12\\eta_1\\theta_Cc_P>0,\\qquad r_\\varepsilon=\\min\\{\\Delta_0,\\gamma_{\\rm dec}\\min\\{c_\\delta\\varepsilon,\\Delta_{\\max}\\}\\}.$$\nThen the number $N_s$ of accepted steps and $N_u$ of rejected trials before\nthe first iterate with $\\|\\operatorname{grad}f(x_k)\\|\\le\\varepsilon$ obey\n$$N_s\\le\\frac{f(x_0)-f_{\\inf}}{c_S\\varepsilon^2},\\qquad N_u\\le \\frac{\\log(\\Delta_0/r_\\varepsilon)+N_s\\log\\gamma_{\\rm inc}} {|\\log\\gamma_{\\rm dec}|}.$$\nConsequently accepted steps and total trials $N_s+N_u$ are\n$O(\\varepsilon^{-2})$ as $\\varepsilon\\downarrow0$, with all displayed\nconstants fixed. Such a finite cap suffices to return either stationary or target-achieved\nstatus, in both cases with gradient norm at most $\\varepsilon$; a smaller cap may return outer-budget-exhausted first. The constants\nand proof count accepted and rejected outer trials; they do not bound inner subproblem\noperations.",
++          "uses": [
++            "2.2",
++            "3.1"
++          ]
++        },
++        {
++          "fact": "F7",
++          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
++          "source_section": "Statement",
++          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
++          "uses": [
++            "2.2"
++          ]
++        },
++        {
++          "fact": "F8",
++          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
++          "source_section": "Statement",
++          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.",
++          "uses": [
++            "3.1"
++          ]
++        },
++        {
++          "fact": "F9",
++          "source": "thm-extreme-value-metric",
++          "source_section": "Statement",
++          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
++          "uses": [
++            "3.1"
++          ]
++        }
++      ],
++      "derivations": [
++        {
++          "id": "step-1-1",
++          "claim": "If $X^*X=I_r$, then $P=XX^*$ is Hermitian and $P^2=X(X^*X)X^*=P$, with range equal to the column space of $X$ and therefore rank $r$. For unitary $Q$, $(XQ)(XQ)^*=XQQ^*X^*=P$. Thus $E(XX^*)$ is unitary-invariant and descends to complex Grassmann by [F1].",
++          "step": "1.1",
++          "inputs": [
++            "F1",
++            "given",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-2-1",
++          "claim": "For every horizontal $Z$, [F2] and [F4] yield the complex Grassmann gradient $2(I-P)F(P)X$. This formula uses the real derivative of the Hermitian-matrix energy, as required for a real-valued objective on complex coordinates.",
++          "step": "2.1",
++          "inputs": [
++            "F2",
++            "F3",
++            "F4",
++            "given",
++            "step 1.1",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-2-2",
++          "claim": "Conversely, let $P$ be any rank-$r$ orthogonal projector. Choose an orthonormal basis of its $r$-dimensional range by [F7] and collect its vectors as the columns of $X$. Then $X^*X=I_r$ and $XX^*=P$, so the parameterization covers exactly the model's projector domain. By [F5], the polar-retracted trial remains a complex orthonormal frame, so its projector remains Hermitian, idempotent, and rank $r$; rejection leaves the old projector unchanged by [F6].",
++          "step": "2.2",
++          "inputs": [
++            "F5",
++            "F6",
++            "F7",
++            "given",
++            "step 1.1",
++            "construct",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-3-1",
++          "claim": "Fix any finite $\\Delta_{\\max}>0$. The set of pairs $(X,\\eta)$ with $X^*X=I_r$, $X^*\\eta=0$, and $\\|\\eta\\|_F\\le\\Delta_{\\max}$ is closed and bounded in a finite-dimensional real coordinate space, hence compact by [F8]. The polar retraction is smooth on it, and [F1]\u2013[F2] make the pullback energy $C^2$ along the horizontal tangent bundle. Its fiber Hessian is continuous on this compact set, so its operator norm has a finite maximum by [F9]. Integrating this Hessian along each fiber segment gives a uniform Lipschitz bound for the pullback gradient. Choose the model operator $B_x=0$, which is self-adjoint and uniformly bounded by $M_B=0$. Hence all regularity and model hypotheses in [F6] hold, and a finite cap at least the theorem's trial bound suffices.",
++          "step": "3.1",
++          "inputs": [
++            "F1",
++            "F2",
++            "F5",
++            "F6",
++            "F8",
++            "F9",
++            "given",
++            "step 2.2",
++            "algebra"
++          ]
++        }
++      ],
++      "routine_steps": [],
++      "boundaries": [
++        {
++          "case": "empty",
++          "status": "not_applicable",
++          "reason": "The Statement or Definition restricts dimensions/rank to a nonempty domain; The item statement restricts to the stated nonempty finite-dimensional domain and makes no claim for this boundary case."
++        },
++        {
++          "case": "zero",
++          "status": "not_applicable",
++          "reason": "The item statement restricts to the stated nonempty finite-dimensional domain and makes no claim for this boundary case."
++        },
++        {
++          "case": "one",
++          "status": "not_applicable",
++          "reason": "The item statement restricts to the stated nonempty finite-dimensional domain and makes no claim for this boundary case."
++        },
++        {
++          "case": "degenerate",
++          "status": "not_applicable",
++          "reason": "The item statement restricts to the stated nonempty finite-dimensional domain and makes no claim for this boundary case."
++        },
++        {
++          "case": "endpoints",
++          "status": "not_applicable",
++          "reason": "The item statement restricts to the stated nonempty finite-dimensional domain and makes no claim for this boundary case."
++        },
++        {
++          "case": "nonempty-choice",
++          "status": "not_applicable",
++          "reason": "The argument uses no choice principle; its finite-dimensional basis/frame construction is explicit in the Statement or the cited finite orthonormalization interface."
++        },
++        {
++          "case": "iff-forward",
++          "status": "checked",
++          "evidence": "The biconditional claim is stated and proved in step 2.1."
++        },
++        {
++          "case": "iff-reverse",
++          "status": "checked",
++          "evidence": "The biconditional claim is stated and proved in step 2.1."
++        }
++      ],
++      "axioms": [],
++      "supplier_interfaces": [
++        {
++          "fact": "F1",
++          "supplier": "def-finite-basis-projector-energy-model",
++          "required_hypotheses": "[F1] The model defines $E(P)=\\operatorname{tr}(hP)+\\tfrac12\\operatorname{tr}(PG(P))+E_{xc}(P)$ on rank-$r$ Hermitian projectors ([[def-finite-basis-projector-energy-model]])."
++        },
++        {
++          "fact": "F2",
++          "supplier": "prop-finite-projector-energy-reality-and-gradient",
++          "required_hypotheses": "[F2] The real-valued $C^2$ energy has Hermitian Frobenius gradient $F(P)$ ([[prop-finite-projector-energy-reality-and-gradient]])."
++        },
++        {
++          "fact": "F3",
++          "supplier": "thm-complex-stiefel-grassmann-tangent-projections",
++          "required_hypotheses": "[F3] The complex Grassmann tangent is represented by $X^*Z=0$ and projects by $(I-XX^*)G$ ([[thm-complex-stiefel-grassmann-tangent-projections]])."
++        },
++        {
++          "fact": "F4",
++          "supplier": "prop-complex-grassmann-projector-energy-gradient",
++          "required_hypotheses": "[F4] The gradient of a Hermitian projector energy with gradient $K(P)$ is $2(I-XX^*)K(P)X$ ([[prop-complex-grassmann-projector-energy-gradient]])."
++        },
++        {
++          "fact": "F5",
++          "supplier": "prop-complex-stiefel-grassmann-are-compact",
++          "required_hypotheses": "[F5] Complex Grassmann is compact, and its polar map is defined on horizontal vectors, maps to orthonormal frames, is smooth, and has frame differential $D R_X^{\\rm pol}(0)[\\eta]=\\eta$ ([[prop-complex-stiefel-grassmann-are-compact]], [[def-complex-grassmann-polar-retraction]], [[thm-complex-grassmann-polar-retraction-is-first-order]])."
++        },
++        {
++          "fact": "F5",
++          "supplier": "def-complex-grassmann-polar-retraction",
++          "required_hypotheses": "[F5] Complex Grassmann is compact, and its polar map is defined on horizontal vectors, maps to orthonormal frames, is smooth, and has frame differential $D R_X^{\\rm pol}(0)[\\eta]=\\eta$ ([[prop-complex-stiefel-grassmann-are-compact]], [[def-complex-grassmann-polar-retraction]], [[thm-complex-grassmann-polar-retraction-is-first-order]])."
++        },
++        {
++          "fact": "F5",
++          "supplier": "thm-complex-grassmann-polar-retraction-is-first-order",
++          "required_hypotheses": "[F5] Complex Grassmann is compact, and its polar map is defined on horizontal vectors, maps to orthonormal frames, is smooth, and has frame differential $D R_X^{\\rm pol}(0)[\\eta]=\\eta$ ([[prop-complex-stiefel-grassmann-are-compact]], [[def-complex-grassmann-polar-retraction]], [[thm-complex-grassmann-polar-retraction-is-first-order]])."
++        },
++        {
++          "fact": "F6",
++          "supplier": "alg-riemannian-trust-region",
++          "required_hypotheses": "[F6] The trust-region method uses a retracted trial, leaves the current point on rejection, and has the proved first-order count under its pullback hypotheses ([[alg-riemannian-trust-region]], [[thm-riemannian-trust-region-first-order-complexity]])."
++        },
++        {
++          "fact": "F6",
++          "supplier": "thm-riemannian-trust-region-first-order-complexity",
++          "required_hypotheses": "[F6] The trust-region method uses a retracted trial, leaves the current point on rejection, and has the proved first-order count under its pullback hypotheses ([[alg-riemannian-trust-region]], [[thm-riemannian-trust-region-first-order-complexity]])."
++        },
++        {
++          "fact": "F7",
++          "supplier": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
++          "required_hypotheses": "[F7] Every finite-dimensional complex inner-product subspace has an orthonormal basis ([[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]])."
++        },
++        {
++          "fact": "F8",
++          "supplier": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
++          "required_hypotheses": "[F8] Closed bounded subsets of a finite-dimensional Euclidean space are compact ([[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]])."
++        },
++        {
++          "fact": "F9",
++          "supplier": "thm-extreme-value-metric",
++          "required_hypotheses": "[F9] A continuous real-valued function on a compact metric space attains its maximum ([[thm-extreme-value-metric]])."
++        }
++      ],
++      "finite_checks": []
+     }
+   }
+ }

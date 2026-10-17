@@ -1,0 +1,64 @@
+--- a/tools/step5-reader-concerns.mjs
++++ b/tools/step5-reader-concerns.mjs
+@@ -77,7 +77,60 @@
+     'requires drained initial workers before first impact dispatch');
+   // V2 is an explicit typed-source opt-in. V1 retains its original own-batch
+   // concern path and its exact checks below.
+-  if(row.version===2)need(state.paused===true,'v2 admission requires a paused, drained boundary');
++  if(row.version===2){
++    // Creation authority belongs to the real paused 5.1 hold. Native planning
++    // later runs in drained, unpaused 5.2; it authenticates that creation rather
++    // than claiming another pause occurred at the planning boundary.
++    const creation=row.creation_state,requestRef=row.owner_gate_request;
++    need(creation&&typeof creation.file==='string'&&date(creation.captured_at)
++      &&requestRef&&typeof requestRef.file==='string'&&typeof requestRef.id==='string'
++      &&requestRef.id.length>0,'missing v2 paused-creation archives');
++    const creationPath=resolve(root,creation.file),requestPath=resolve(root,requestRef.file);
++    const created=bound(creationPath),request=bound(requestPath);
++    need(created.run===run&&created.stage==='5.1-adjudicate'&&created.paused===true
++      &&Object.values(created.dispatches??{}).every(value=>!value.startedAt||Boolean(value.endedAt))
++      &&request.version===1&&request.run===run&&request.id===requestRef.id
++      &&request.group==='5.1-adjudicate'
++      &&JSON.stringify(request.stages)===JSON.stringify(['5.1-adjudicate'])&&date(request.at),
++      'v2 creation must archive the actual paused, drained native 5.1 owner hold');
++    const captured=Date.parse(creation.captured_at),recorded=Date.parse(row.recorded_at);
++    need(Date.parse(request.at)<=captured&&captured<=recorded,
++      'v2 owner capture and recording must follow the native creation request');
++    need(Array.isArray(initial.units)&&initial.units.length>0
++      &&new Set(initial.units).size===initial.units.length,'invalid v2 initial unit inventory');
++    for(const unit of initial.units){
++      const label=`step5-v2-initial-r1-u${unit}`,report=bound(join(dir,`${label}.json`));
++      const mechanical=report.completion==='mechanical-zero-work';
++      const dispatchLabel=mechanical?`step5-v2-empty-initial-r1-u${unit}`:label;
++      const native=bound(join(dispatchDir,`${mechanical?'tool-':'alpha-adjudicate-'}${dispatchLabel}.result.json`));
++      const observed=created.dispatches?.[`5.1-adjudicate:${dispatchLabel}`];
++      need(observed?.stage==='5.1-adjudicate'&&observed.role===native.role
++        &&observed.label===native.label&&observed.lastExitOk===true
++        &&JSON.stringify(observed.covers)===JSON.stringify([unit])
++        &&JSON.stringify(native.covers)===JSON.stringify(observed.covers)
++        &&date(observed.startedAt)&&date(observed.endedAt)&&date(native.ended_at)
++        &&Date.parse(observed.startedAt)<=Date.parse(native.ended_at)
++        &&Date.parse(native.ended_at)<=Date.parse(observed.endedAt)
++        &&Date.parse(observed.endedAt)<=Date.parse(request.at),
++        'v2 creation archive lacks a matching successful actual initial unit');
++      if(!mechanical){
++        need(Number.isSafeInteger(native.attempt)&&native.attempt>0
++          &&observed.attempt===native.attempt&&native.evidence_tag===`.attempt-${native.attempt}`
++          &&date(native.started_at)&&Date.parse(observed.startedAt)<=Date.parse(native.started_at)
++          &&Date.parse(native.started_at)<=Date.parse(native.ended_at)
++          &&native.process_exit_code===0&&native.exit_code===0&&native.timed_out===false
++          &&native.terminal_summary?.task_completed===true&&native.terminal_summary.task_aborted===false
++          &&native.terminal_summary.final_response_present===true&&native.terminal_summary.error_events===0,
++          'incomplete v2 initial native execution');
++        const attempt=bound(join(dispatchDir,`alpha-adjudicate-${label}.attempt-${native.attempt}.result.json`));
++        need(hash(native)===hash(attempt),'v2 initial stable result differs from immutable attempt');
++      }
++    }
++    // The common guard above still requires a paused/drained live 5.1 state or
++    // a drained live 5.2 state. Only actual 5.2 preparation may use the latter.
++    need(state.stage==='5.1-adjudicate'||requireCollection===true,
++      'v2 read-only admission validation requires the paused native 5.1 hold');
++  }
+   const ids=new Set(),entries=[];
+   for(const entry of row.entries){
+     const {id,batch,concern_index,owner_review:review}=entry;

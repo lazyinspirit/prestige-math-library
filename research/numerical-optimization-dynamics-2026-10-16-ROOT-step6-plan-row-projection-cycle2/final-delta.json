@@ -1,0 +1,31 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "research_only": true,
+  "cycle": 2,
+  "final_cycle": true,
+  "base_packet": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step6-plan-row-projection-cycle1",
+  "changes_from_first_cycle": [
+    {
+      "target": "tools/run-commit-scope.mjs",
+      "before": "      planProjections: planProjections.map(({ path, authority, sha256 }) => ({ path, authority, sha256 })) })) };",
+      "after": "      ...(policy.plan_projection !== undefined\n        ? { planProjections: planProjections.map(({ path, authority, sha256 }) => ({ path, authority, sha256 })) }\n        : {}) })) };"
+    },
+    {
+      "target": "tools/step6-commit.mjs",
+      "before": "        plan_projections: [...planStates].map(([path, row]) => ({ path, authority: row.projection.authority,\n          authority_sha256: row.projection.sha256, page_ids: row.projection.spec.page_ids,\n          before_head_blob: row.headRow.oid, before_index_blob: row.indexRow.oid,\n          head_foreign_raw_sha256: row.headForeign, index_foreign_raw_sha256: row.indexForeign,\n          head_result_sha256: sha256(row.head.text), index_result_sha256: sha256(row.index.text) })) } }, null, 2) + '\\n');",
+      "after": "        ...(scope.planProjections.length ? { plan_projections: [...planStates].map(([path, row]) => ({ path, authority: row.projection.authority,\n          authority_sha256: row.projection.sha256, page_ids: row.projection.spec.page_ids,\n          before_head_blob: row.headRow.oid, before_index_blob: row.indexRow.oid,\n          head_foreign_raw_sha256: row.headForeign, index_foreign_raw_sha256: row.indexForeign,\n          head_result_sha256: sha256(row.head.text), index_result_sha256: sha256(row.index.text) })) } : {}) } }, null, 2) + '\\n');"
+    },
+    {
+      "target": "tools/STEP6-REBUILD.md",
+      "before": "projection authority and separate base/result/foreign-residual bindings.\n",
+      "after": "projection authority and separate base/result/foreign-residual bindings only\nwhen the policy explicitly opts into this feature. Without `plan_projection`,\nthe scope-context JSON has no `planProjections` member and receipts have no\n`plan_projections` member; existing default mathematics, physics and legacy\nscope-context serialization and historical receipt shape are retained.\n"
+    }
+  ],
+  "unchanged_first_cycle_proposals": [
+    "tools/step6-plan-projection.mjs",
+    "tools/step6-owned-inputs.mjs",
+    "tools/step6-scoped-tree.mjs"
+  ],
+  "scope": "Only conditional opt-in serialization and its precise documentation changed. No first-cycle parser/authority/span composition/selection/readiness/transaction logic changed.",
+  "guard": "Review these exact literal deltas against immutable first-cycle proposed preimages. Canonical installation still requires every first-cycle original canonical before-byte guard and absent new-helper target; do not install first-cycle successors as an intermediate step."
+}

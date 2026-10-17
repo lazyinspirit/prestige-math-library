@@ -9,7 +9,7 @@ dependency_level: 1
 justified_by: []
 aliases: []
 proof_strategy: direct
-deps: [def-scalar-conservation-law-and-flux, def-linear-transport-equation-and-its-characteristic-flow, lem-transport-equation-along-a-characteristic, thm-chain-rule, thm-algebra-of-derivatives, def-total-derivative-in-euclidean-space, def-ck-and-multi-index-notation-in-several-variables, thm-clairaut-schwarz-mixed-partials, thm-picard-lindelof-local-existence-and-uniqueness, thm-existence-and-uniqueness-of-a-maximal-ode-solution]
+deps: [def-scalar-conservation-law-and-flux, def-linear-transport-equation-and-its-characteristic-flow, lem-transport-equation-along-a-characteristic, thm-chain-rule, thm-algebra-of-derivatives, def-total-derivative-in-euclidean-space, def-ck-and-multi-index-notation-in-several-variables, thm-clairaut-schwarz-mixed-partials, thm-picard-lindelof-local-existence-and-uniqueness, thm-existence-and-uniqueness-of-a-maximal-ode-solution, cor-mean-value-theorem]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -26,6 +26,7 @@ sources:
       locator: "Section 12.1.1, pp. 350--352"
 verification:
   precheck: pass
+  repair: research/numerical-optimization-dynamics-2026-10-16-owner-step2-preclaimed-published-receipts-ROOT-1035/prop-characteristics-for-a-one-dimensional-scalar-conservation-law.repair.json
 ---
 
 ## Statement
@@ -66,18 +67,20 @@ solution cannot persist through $t_*$ along this characteristic
 
 [F4] A continuous field locally Lipschitz in its state has a unique local and maximal ODE solution ([[thm-picard-lindelof-local-existence-and-uniqueness]], [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]]). The field $f'(u(x,t))$ is locally state-Lipschitz because its $x$ derivative $f''(u)u_x$ is continuous and bounded on compact boxes.
 
+[F5] [[cor-mean-value-theorem]]: for a function continuous on $[a,b]$ and differentiable on $(a,b)$, its increment is $(b-a)$ times an interior derivative. In particular, zero derivative gives constancy and a nonpositive derivative gives a nonincreasing function on an interval.
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 **Part (i).** With $a(x,t)=f'(u(x,t))$, [F2] gives $\frac{d}{dt}u(x(t),t)=u_t+u_x\dot x$ along the characteristic. Substituting the characteristic ODE $\dot x=f'(u(x(t),t))$ and then the pointwise equation of [F1] gives $\frac{d}{dt}u(x(t),t)=u_t+f'(u)u_x=u_t+(f(u))_x=0$. Hence $t\mapsto u(x(t),t)$ is constant along every characteristic. [F1, F2]
+1.1 **Part (i).** With $a(x,t)=f'(u(x,t))$, [F2] gives $\frac{d}{dt}u(x(t),t)=u_t+u_x\dot x$ along the characteristic. Substituting the characteristic ODE $\dot x=f'(u(x(t),t))$ and then the pointwise equation of [F1] gives $\frac{d}{dt}u(x(t),t)=u_t+f'(u)u_x=u_t+(f(u))_x=0$. The composition is continuous along the characteristic. Applying [F5] on any compact subinterval of its interval of existence makes it constant there, hence on that whole interval. [F1, F2, F5]
 
 1.2 **Part (ii): differentiation in $x$.** Assume now $u\in C^2$, so that $p=u_x$ is $C^1$ and $f'(u)p$ is $C^1$ by [F1] and [F3]. Differentiating the pointwise equation $u_t+(f(u))_x=0$ in $x$ gives $p_t+(f'(u)p)_x=0$, and the product and chain rules give $(f'(u)p)_x=f''(u)u_xp+f'(u)p_x=f''(u)p^2+f'(u)p_x$, so that $p_t+f'(u)p_x+f''(u)p^2=0$. [F1, F3]
 
 2.1 **The Riccati equation along characteristics.** Along the characteristic of step 1.1, [F2] applied to the $C^1$ function $p$ gives $\dot p=p_t+p_x\dot x=p_t+f'(u)p_x$. By step 1.2 this equals $-f''(u(x(t),t))p^2$, which is the asserted Riccati equation. [F2, step 1.2]
 
-3.1 **Monotonicity.** By step 1.1, $u(x(t),t)\equiv u_*$ is constant along the characteristic, so along that curve $f''(u(x(t),t))=f''(u_*)$ is a constant $c$ and step 2.1 reads $\dot p=-cp^2$. If $f''\ge0$ on the range of $u$, then $c\ge0$, so $\dot p\le0$ and $p$ is nonincreasing along the characteristic. [step 1.1, step 2.1]
+3.1 **Monotonicity.** By step 1.1, $u(x(t),t)\equiv u_*$ is constant along the characteristic, so along that curve $f''(u(x(t),t))=f''(u_*)$ is a constant $c$ and step 2.1 reads $\dot p=-cp^2$. If $f''\ge0$ on the range of $u$, then $c\ge0$, so $\dot p\le0$. Since $p$ is continuously differentiable along the characteristic, [F5] on any compact subinterval makes $p$ nonincreasing along the characteristic. [step 1.1, step 2.1, F5]
 
-4.1 **Exact Riccati solution.** Suppose $p_0=p(t_0)<0$ and $c:=f''(u(x_0,t_0))\ge\kappa>0$; by step 3.1 the constant is $c=f''(u_*)$ along the whole characteristic. The scalar ODE $\dot p=-cp^2$ has a locally Lipschitz right-hand side, so uniqueness in [F4] and the zero solution imply that $p$ cannot reach zero on its interval of existence. Since $p(t_0)<0$, it remains negative there. Hence one has $\frac{d}{dt}\bigl(\tfrac1p\bigr)=-\dot p/p^2=c$ by step 3.1, hence $\tfrac1{p(t)}=\tfrac1{p_0}+c(t-t_0)$ and therefore $p(t)=\frac{p_0}{1+cp_0(t-t_0)}=\frac{p_0}{1-c|p_0|(t-t_0)}$. [step 3.1, F4, algebra]
+4.1 **Exact Riccati solution.** Suppose $p_0=p(t_0)<0$ and $c:=f''(u(x_0,t_0))\ge\kappa>0$; by step 3.1 the constant is $c=f''(u_*)$ along the whole characteristic. The scalar ODE $\dot p=-cp^2$ has a locally Lipschitz right-hand side, so uniqueness in [F4] and the zero solution imply that $p$ cannot reach zero on its interval of existence. Since $p(t_0)<0$, it remains negative there. Hence one has $\frac{d}{dt}\bigl(\tfrac1p\bigr)=-\dot p/p^2=c$ by step 3.1. The derivative of $1/p-ct$ is zero; continuity and [F5] on the interval joining $t_0$ to $t$ therefore give $\tfrac1{p(t)}=\tfrac1{p_0}+c(t-t_0)$ and therefore $p(t)=\frac{p_0}{1+cp_0(t-t_0)}=\frac{p_0}{1-c|p_0|(t-t_0)}$. [step 3.1, F4, F5, algebra]
 
 5.1 **Blow-up and the persistence bound.** Since $u(x(t),t)\equiv u_*$ by step 1.1, the speed $\dot x=f'(u_*)$ is constant, so the characteristic is the straight line $x(t)=x_0+f'(u_*)(t-t_0)$, on its maximal interval. If that interval ended at an interior time $t_1\in(0,T)$, the straight line would have a finite endpoint $x_1$; continuity would give $u(x_1,t_1)=u_*$, and [F4] would extend the characteristic with initial condition $x(t_1)=x_1$, contradicting maximality. Thus its interval is $(0,T)$. The denominator in step 4.1 is positive exactly for $t<t_*=t_0+1/(c|p_0|)\le t_0+1/(\kappa|p_0|)$ and tends to $0$ as $t\uparrow t_*$, while $p_0<0$, so $p(t)\to-\infty$. Were a $C^2$ solution defined on $\mathbb R\times(0,T)$ with $T>t_*$, then $p=u_x$ would be continuous, hence finite, on the compact rectangle $[-A,A]\times[t_0,\tfrac12(t_*+T)]$, with $A>1+|x_0|+|f'(u_*)|(T-t_0)$, and along the straight characteristic it would equal the explicit solution of step 4.1, which is unbounded on that interval near $t_*$: a contradiction. Hence the $C^2$ solution cannot persist through $t_*$ along this characteristic. [step 1.1, step 4.1, F3, F4] ∎

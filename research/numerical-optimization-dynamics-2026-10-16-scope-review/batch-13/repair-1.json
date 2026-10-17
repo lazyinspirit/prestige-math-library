@@ -1,0 +1,281 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "13",
+  "round": 1,
+  "reviewed_items": [
+    "def-finite-straight-line-computational-program",
+    "lem-implicit-sensitivity-error-controlled-by-residual",
+    "thm-implicit-differentiation-forward-and-adjoint-formulas",
+    "alg-forward-mode-automatic-differentiation",
+    "alg-reverse-mode-automatic-differentiation",
+    "lem-finite-straight-line-program-defines-c1-map",
+    "lem-finite-straight-line-program-defines-c2-map",
+    "alg-checkpointed-reverse-schedules",
+    "alg-differentiate-finite-fixed-point-iteration",
+    "alg-forward-over-reverse-hessian-vector-product",
+    "thm-forward-mode-computes-directional-derivative",
+    "thm-reverse-mode-computes-gradient",
+    "thm-reverse-mode-work-and-tape-storage-bound",
+    "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+    "thm-finite-iteration-sensitivity-bound-and-residual-limitation",
+    "thm-forward-over-reverse-computes-hessian-vector-product",
+    "thm-graph-gradient-error-from-local-jacobian-perturbations",
+    "rem-real-arithmetic-graph-versus-rounded-execution",
+    "lem-certified-linear-solve-jacobian-and-pullback-error",
+    "ex-branchwise-ad-at-the-absolute-value-switch",
+    "ex-implicit-linear-solve-adjoint",
+    "ex-reverse-euler-trajectory-tape",
+    "ex-shared-expression-forward-and-reverse-graph"
+  ],
+  "reviewed_pages": [
+    "automatic-differentiation-and-computational-graphs",
+    "automatic-differentiation-and-computational-graphs-examples"
+  ],
+  "decision": "accept",
+  "reason": "Resolved the local gaps and checked all 35 affected item consumers and 6 page consumers, including current dependency and alias-resolved paths. No outside repair remains; ready for final whole-batch review.",
+  "findings": [
+    {
+      "id": "def-finite-straight-line-computational-program",
+      "type": "local",
+      "reason": "Specified Euclidean coordinate spaces, standard product inner products, transposes and gradients, and clarified that the scalar output may be an input or operation value. Updated affected in-scope arguments for the input-output case."
+    },
+    {
+      "id": "alg-reverse-mode-automatic-differentiation",
+      "type": "local",
+      "reason": "Initialized input and operation cotangents and specified the output seed for either an input or operation output; the gradient theorem now covers both cases."
+    },
+    {
+      "id": "alg-forward-over-reverse-hessian-vector-product",
+      "type": "local",
+      "reason": "Initialized input cotangent and tangent-cotangent accumulators and specified the seed when the output is an input; its theorem covers the constant-coordinate HVP."
+    },
+    {
+      "id": "alg-checkpointed-reverse-schedules",
+      "type": "local",
+      "reason": "The binomial N=0 branch now returns the known terminal state together with the unchanged cotangent; nonnegative integer budgets and interval indices are explicit."
+    },
+    {
+      "id": "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+      "type": "local",
+      "reason": "The induction base and recursive step now verify both returned state and cotangent."
+    },
+    {
+      "id": "lem-certified-linear-solve-jacobian-and-pullback-error",
+      "type": "local",
+      "reason": "Defined u and gamma_n=nu/(1-nu), stated operationwise success conditions, and derived the sequential real dot-product bound for separately rounded products and additions. Added the model and product-bound suppliers."
+    },
+    {
+      "id": "thm-reverse-mode-work-and-tape-storage-bound",
+      "type": "local",
+      "reason": "Clarified that the stated work bound counts arithmetic operations; cotangent-buffer initialization is counted in storage."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-checkpointed-reverse-schedules",
+      "decision": "accept",
+      "reason": "Procedure and empty-interval return repaired."
+    },
+    {
+      "id": "alg-differentiate-finite-fixed-point-iteration",
+      "decision": "accept",
+      "reason": "Finite state and parameter spaces are Euclidean coordinates; its forward-mode use is sound."
+    },
+    {
+      "id": "alg-forward-mode-automatic-differentiation",
+      "decision": "accept",
+      "reason": "Uses the clarified coordinate convention and returns the input-output tangent when applicable."
+    },
+    {
+      "id": "alg-forward-over-reverse-hessian-vector-product",
+      "decision": "accept",
+      "reason": "Input accumulators and output seed cases repaired."
+    },
+    {
+      "id": "ex-branchwise-ad-at-the-absolute-value-switch",
+      "decision": "accept",
+      "reason": "Scalar branch derivatives remain well-defined under the coordinate convention."
+    },
+    {
+      "id": "ex-reverse-euler-trajectory-tape",
+      "decision": "accept",
+      "reason": "Scalar reverse sweep uses the initialized accumulators and operation output seed."
+    },
+    {
+      "id": "ex-shared-expression-forward-and-reverse-graph",
+      "decision": "accept",
+      "reason": "Euclidean scalar/vector operations and repeated-slot accumulation remain sound."
+    },
+    {
+      "id": "lem-finite-straight-line-program-defines-c1-map",
+      "decision": "accept",
+      "reason": "Proof now covers an input-coordinate scalar output."
+    },
+    {
+      "id": "lem-finite-straight-line-program-defines-c2-map",
+      "decision": "accept",
+      "reason": "Proof now covers an input-coordinate scalar output."
+    },
+    {
+      "id": "rem-real-arithmetic-graph-versus-rounded-execution",
+      "decision": "accept",
+      "reason": "Its exact-versus-rounded distinction and solve-pullback use remain compatible with the repaired hypotheses."
+    },
+    {
+      "id": "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+      "decision": "accept",
+      "reason": "Proof verifies the repaired empty-interval state and cotangent."
+    },
+    {
+      "id": "thm-discrete-adjoint-gradient-recursion",
+      "decision": "accept",
+      "reason": "Its state-step definition uses Euclidean coordinate spaces and its reverse recursion uses the repaired pullback convention."
+    },
+    {
+      "id": "thm-forward-mode-computes-directional-derivative",
+      "decision": "accept",
+      "reason": "Proof now handles both operation and input-coordinate outputs."
+    },
+    {
+      "id": "thm-forward-over-reverse-computes-hessian-vector-product",
+      "decision": "accept",
+      "reason": "Proof accounts for the constant gradient when the output is an input coordinate."
+    },
+    {
+      "id": "thm-graph-gradient-error-from-local-jacobian-perturbations",
+      "decision": "accept",
+      "reason": "Path expansion includes the length-zero output path; its perturbation bound remains valid."
+    },
+    {
+      "id": "thm-reverse-mode-computes-gradient",
+      "decision": "accept",
+      "reason": "Path-sum proof now covers output seeding at an input coordinate."
+    },
+    {
+      "id": "thm-reverse-mode-work-and-tape-storage-bound",
+      "decision": "accept",
+      "reason": "Arithmetic work and cotangent-buffer storage counts are now explicit."
+    },
+    {
+      "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "decision": "accept",
+      "reason": "Finite transcription and state-step derivatives use Euclidean coordinates; no repair required."
+    },
+    {
+      "id": "ex-4dvar-discrete-adjoint-gradient",
+      "decision": "accept",
+      "reason": "Scalar state-step adjoint use remains sound."
+    },
+    {
+      "id": "ex-discrete-terminal-condition-mismatch",
+      "decision": "accept",
+      "reason": "Scalar terminal seed example remains sound."
+    },
+    {
+      "id": "ex-multiple-shooting-sensitivity-jacobian",
+      "decision": "accept",
+      "reason": "Finite-dimensional scalar flow and adjoint calculations remain sound."
+    },
+    {
+      "id": "ex-tent-map-finite-time-sensitivity-growth",
+      "decision": "accept",
+      "reason": "Scalar strict-branch derivative use remains sound."
+    },
+    {
+      "id": "thm-discrete-continuous-gradient-error-order-p",
+      "decision": "accept",
+      "reason": "Uses Euclidean state and gradient coordinates; no repair required."
+    },
+    {
+      "id": "thm-discrete-sde-adjoint-gradient-interchange",
+      "decision": "accept",
+      "reason": "Its state and parameter spaces are explicitly Euclidean and match the clarified convention."
+    },
+    {
+      "id": "thm-finite-iteration-sensitivity-bound-and-residual-limitation",
+      "decision": "accept",
+      "reason": "Finite iteration states and parameters use Euclidean coordinates; no repair required."
+    },
+    {
+      "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "decision": "accept",
+      "reason": "Its finite NLP consumer uses coordinate variables; no derivative-interface gap found."
+    },
+    {
+      "id": "cex-state-error-alone-does-not-control-gradient",
+      "decision": "accept",
+      "reason": "Its scalar counterexample and downstream sensitivity use remain sound."
+    },
+    {
+      "id": "ex-ctrl1-chemical-dosing-linear-model",
+      "decision": "accept",
+      "reason": "Scalar-state transcription consumer remains sound."
+    },
+    {
+      "id": "ex-ctrl1-single-versus-multiple-shooting-two-intervals",
+      "decision": "accept",
+      "reason": "Finite scalar transcription consumer remains sound."
+    },
+    {
+      "id": "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+      "decision": "accept",
+      "reason": "Finite NLP coordinate use is compatible with the clarified convention."
+    },
+    {
+      "id": "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent",
+      "decision": "accept",
+      "reason": "Deterministic finite-dimensional state maps use Euclidean coordinates."
+    },
+    {
+      "id": "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+      "decision": "accept",
+      "reason": "Its fixed finite NLP is coordinate-based; no repair required."
+    },
+    {
+      "id": "thm-ctrl1-mesh-consistent-lqr-minimizers-converge",
+      "decision": "accept",
+      "reason": "Its finite state-map consumer assumptions remain compatible."
+    },
+    {
+      "id": "thm-ctrl1-objective-and-control-error-from-consistency-bounds",
+      "decision": "accept",
+      "reason": "Its finite transcription consumer assumptions remain compatible."
+    },
+    {
+      "id": "ex-implicit-linear-solve-adjoint",
+      "decision": "accept",
+      "reason": "Its exact rounded operations satisfy the revised sequential pullback assumptions."
+    },
+    {
+      "id": "automatic-differentiation-and-computational-graphs",
+      "decision": "accept",
+      "reason": "Page summary and placed item interfaces match the clarified Euclidean convention."
+    },
+    {
+      "id": "automatic-differentiation-and-computational-graphs-examples",
+      "decision": "accept",
+      "reason": "Placed examples remain compatible with the repaired reverse and solve procedures."
+    },
+    {
+      "id": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "decision": "accept",
+      "reason": "Page uses the Euclidean finite-adjoint interface with its stated separate hypotheses."
+    },
+    {
+      "id": "discrete-continuous-and-pde-adjoint-sensitivities-examples",
+      "decision": "accept",
+      "reason": "Placed scalar and finite-state examples remain sound."
+    },
+    {
+      "id": "simulation-gradient-estimation-and-simultaneous-perturbation",
+      "decision": "accept",
+      "reason": "Its discrete SDE adjoint interface uses explicit Euclidean state and parameter spaces."
+    },
+    {
+      "id": "direct-transcription-and-numerical-ode-optimal-control",
+      "decision": "accept",
+      "reason": "Its finite transcription and adjoint interface use coordinate variables."
+    }
+  ]
+}

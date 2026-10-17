@@ -1,0 +1,119 @@
+# Batch 1 Step 3a adjudication
+
+Run: `numerical-optimization-dynamics-2026-10-16`; group: `batch-1`.
+
+## Completed level 0 review
+
+`def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma`: reviewed the current Definition against the published standard relative model. The explicit p-bit grid and even-significand tie rule make nearest rounding determinate, including p=2, exponent endpoints and zero. The normal-only success restriction is retained. Accept the reader repair; direct batch consumers use precisely these restrictions. The reader-post and current carrier agree; the pre/post item hashes differ. Source: Shewchuk, https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf, §§2.1–2.3 (source reading continues below).
+
+`lem-binary-rounding-grid-and-ordered-two-sum`: independently checked all four proof steps. Archimedean bracketing constructs the exponent and nearest grid point; integer-grid bounds prove representable rounding error; same-sign ratio bounds imply Sterbenz subtraction; ordered TwoSum splits at B=-A/2. Zero and power-of-two boundaries are covered, and the unbounded exponent restriction is explicit. No defect found. Risk review complete; no choice axiom is used.
+
+## Completed level 1 review
+
+Reviewed the eight procedures in routed order, plus both residual/substitution lemmas. Pairwise summation pads to a full binary tree, including n=1. Kahan/Neumaier retain their actual recurrences; explicit finite n>=0 and math delimiters are sound clarification, including final Neumaier fl(0+0). TwoSum specifies the six rounded operations; TwoProduct requires a representable exact residual for recovery. Cholesky has explicit complex product order and positive pivots; its complete independent risk review is in the contract. Householder has a real active column and field-valued trailing blocks; real v defines a unitary matrix on complex blocks, while its error theorem remains real. The residual lemma's 6u product bound, g_k dot bound, row Cauchy–Schwarz, propagated FW and final additions check; triangular row identities produce a matrix perturbation even for zero solution and n=1.
+
+Confirmed and repaired refuter:1:1 in `alg-bounded-mixed-precision-iterative-refinement`. Certificates now consist of B, rho[0..N], omega[0..N-1], with missing entries allowed. Exact finite verifier checks B L U=I, Frobenius contraction bound, and squared defect bounds. a_minus=||A||F/sqrt(n)<=||A||2<=a_plus=||A||F proves that acceptance implies all original recurrence hypotheses. The verifier is explicitly an ideal exact-real procedure, not a finite-bit algorithm for arbitrary real data. N=0 still checks initial residual; missing certificates return inconclusive; stagnation has no forward-accuracy meaning. Direct consumer `thm-mixed-precision-refinement-error-recurrence-and-floor` uses only the unchanged certified inequalities and exact update identity: no consumer repair. Manifest deps and proof-contract routine step are synchronized.
+
+## Completed level 2 review
+
+Reviewed local Householder Proofs 1.1–3.1, finite compensated error identities, rounded Cholesky Proofs 1.1–3.1, TwoProduct, TwoSum and range-failure example, with exact dependency statements. Detailed risk checks are recorded in the contract. The Householder norm-factor count, stored-vector perturbation, normalized-projector estimate, two-product update error and overwrite combination are valid. The real Y qualification only makes the existing real-matrix scope explicit; no complex error theorem was previously established. Kahan telescoping leaves only the final sum error; Neumaier's leading-sum error cancels in both branches. Corrected its F3 wording from “operand magnitude” to the exact-result relative error rule; the displayed bounds already use the correct expressions. TwoProduct exactness follows from correct rounding of the representable residual. TwoSum's p=2 proof uses the sharper one-error bound and covers both magnitude orders. Cholesky's generous constants and absorption estimates check, including trace conversion and n=1. The example exact subnormal sum and overflow both trigger the declared failure policy.
+
+## Completed levels 3–5 review
+
+QR local-error transport gives beta_Q=(1+kappa_m)^n-1 for the matrix and separate right-hand side. The exact reflector product, not a rounded dense product, supplies orthogonality. Neumaier cancellation, rounded 2x2 Cholesky and TwoSum midpoint examples check by their actual operations. The least-squares proof constructs delta b in the range of Qhat, uses the triangular matrix backward error including xhat=0, and requires nonsingular perturbed R. Its extra 20 gamma comparisons are not inferred from success. Normal-equations example: the 2^-54 Gram increment lies strictly below the binary64 midpoint; no unconditional computed QR success is claimed. Diagonal sensitivity example: condition 2^40 and relative changes 2^-40 and 1 are correct. All nine required risk reviews are complete.
+
+## Verdict inventory and completed repairs
+
+The companion decisions file contains exactly 26 owed decisions: 21 touched carriers, one page, three reader findings and one flagged/refuter finding. No untouched risk-only carrier receives an extra decision. `reviewed_no_defect` entries explicitly identify citation metadata/audit enrichment and have empty defect IDs. Finite-list/loop/type clarifications that already follow the existing mathematical context are not relabeled as new mathematical defects.
+
+- Accepted reader repairs: operationwise binary tie rule, Householder field binding, and page TwoProduct caveat.
+- Amended repairs: refinement certificate verifier, TwoProduct's stale manifest title, and the compensated theorem's inaccurate F3 phrase.
+- Reader:1:1–3: confirmed nonfatal; three separate closed `nonfatal-recorded` rows preserve published owner repair debt.
+- Refuter:1:1: confirmed fatal and locally fixed; touched/refuter decisions share the exact same `nod-b1-3a-refinement-certificate-verifier` row.
+
+Nine closed rows were appended through `tools/defect-ledger.mjs` at `caught_at_stage: 3a-adjudicate`; each is referenced by its exact decision. Completed repair decisions set `repair_confidence: 1`. No mathematical Statement was changed by Alpha; the refinement Definition was repaired, and its sole direct consumer needs no source correction. The two edited items had no `verification.judge` record. No audit or judge stamp was added.
+
+## Exact reader-change comparison
+
+The immutable pre/post item hashes distinguish six reader item edits from fifteen contract-only touches. Current item bytes match reader-post for all routed items except the two Alpha source repairs. FMA additionally has an amended manifest title; two residual/substitution manifest Statement/strategy mirrors were synchronized with their current carriers. The original scope group remains `m`; this dispatch's output/decision group is `batch-1`.
+
+The following archived sources were found by matching their raw SHA-256 exactly to the immutable pre-reader snapshot. Comparisons used actual bytes, not reconstructed or guessed preimages:
+
+- `alg-kahan-compensated-summation`: `research/numerical-optimization-dynamics-2026-10-16-owner-step1-gate-r1-binding-before/items/alg-kahan-compensated-summation.md`; pre `a6d43aae46ee05121f9157ad37b284adb51d83d1ce856888127ef8674f6ba6f9`, reader-post `8da1bf14b53b24bc622c3b2afc3cba0937d4b3e2feede8b246f54333076d5627`.
+- `alg-neumaier-compensated-summation`: `research/numerical-optimization-dynamics-2026-10-16-owner-step1-gate-r1-binding-before/items/alg-neumaier-compensated-summation.md`; pre `855ba1cdff714654f876782d2555366ff516777f2005c12d178b01accd5a8c38`, reader-post `2d372c4cd67ecd3b37f5d7127eb37414ac3681803673700449a2daf49309b9ae`.
+- `alg-scaled-householder-reflector-formation-and-application`: `research/numerical-optimization-dynamics-2026-10-16-owner-step2-b1-b14-b74-final-metadata-r2-20261016T095722391698Z/before-proposal/items/alg-scaled-householder-reflector-formation-and-application.md`; pre `b95c8b60045dada065e86f25148d9a9adf02cf678ab816dd65439922d67230c3`, reader-post `d09b37d969c79d49a08bf9edc843b41b2997df1d4020afd8e8d679092087af6d`.
+- `alg-two-product-fma-error-free-transform`: `research/numerical-optimization-dynamics-2026-10-16-owner-step1-gate-r1-binding-before/items/alg-two-product-fma-error-free-transform.md`; pre `d54a8cc5df6101b4ec7d172fb369a6760f69e7e0f28d54f8c73cef0f8c8dd4f3`, reader-post `993d5611c26c94e55bade81b06869ff060013ba5cc0b5614f917ab960ac251b3`.
+- `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma`: `research/numerical-optimization-dynamics-2026-10-16-owner-ldl-kernel-escalation-preimages/def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma.md`; pre `522bb38d37befb442d2525dde8f9920c7707990b7cbe7ba9b3b0d3791e788ada`, reader-post `fe7b3af07b0c7a03c1965a9855201303b1b420dd75fca13fd9a2fc6c3f3e2de5`.
+- `lem-scaled-householder-step-meets-local-backward-error-premise`: `research/numerical-optimization-dynamics-2026-10-16-owner-boundary-integration-intake/integration-current-sources/lem-scaled-householder-step-meets-local-backward-error-premise.md`; pre `f88c9668761b840b14172b67100fb6d1712ad125b12e785ea397d04b499d7ae6`, reader-post `144ef76744d541d3ebe1bc19ae1a9629e159261f356d8b5560bd2b6a133cb09d`.
+
+The A-page preimage is `research/numerical-optimization-dynamics-2026-10-16-owner-completed-repair-binding-before/library/numerical-analysis/finite-precision-direct-factorizations.md` (raw `8d596300dcfe28ecda32a432772b7b544822901de25b8e1b32ae6342ec84ce94`, equal to the immutable pre-page hash). Its only prose delta is the product-transform/caveat clarification; current page bytes equal reader-post. No historical-byte uncertainty or owner-authorized current-content substitution was needed.
+
+## Published findings and actual closures
+
+Both full current published carrier proofs were independently read. Their raw hashes are recorded in `research/published-consumer-supplier-ledger.md`; SHA256(JSON.stringify({item_sha256: raw_sha256})) exactly equals each routed observed hash. Thus different raw and observed hash strings do not mean missing historical bytes.
+
+1. `reader:1:1`, reduced-QR Proof 1.1: let W be the span of Qhat's orthonormal columns. `thm-finite-dimensional-orthogonal-decomposition` gives R^m=W direct-sum W-perp; `cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases` supplies an orthonormal basis of W-perp. Appending it gives the asserted orthogonal Q, including empty complement when m=n. Missing explicit citation/construction is nonfatal polish.
+2. `reader:1:2`, reduced-QR Proof 2.1: from A=Qhat Rhat and Qhat^T Qhat=I, ker(Rhat)=ker(A)={0}; a triangular square matrix has determinant equal to its diagonal product, so injectivity makes every diagonal entry nonzero. This immediate omitted derivation is nonfatal.
+3. `reader:1:3`, successive-QR Proof 1.1: the actual annihilation supplier applies to nonzero vectors. For zero active vector use identity: every targeted entry already vanishes, and preceding zeros remain. This immediate branch is nonfatal.
+
+The owning QR aggregation uses exact orthogonal-product/triangular conventions and already includes identity factors. The owning least-squares theorem explicitly assumes nonsingularity of its perturbed triangular factor; it uses the sound exact minimizer characterization. Neither consumer needs mathematical repair. Published items remain unedited; the ledger records exact IDs, suppliers, current hashes, three closed nonfatal dispositions and pending owner editorial strategies. Two deduplicated A-P classification entries were added while holding and releasing only this session's published-ledger lock. These are bounded findings, not whole-item publication audits.
+
+## Supplier and consumer continuity
+
+Read the actual direct external definitions/results used by the owned arguments: standard relative model; finite gamma-product bound; Archimedean property; Cholesky definition/existence; triangular recurrences/correctness; Householder definition/annihilation; full/reduced QR convention/construction; exact reduced-QR least squares; Euclidean and inner-product Cauchy–Schwarz; Frobenius/operator/induced norms; spectral/Frobenius comparison; condition number; and induced norm compatibility. Read the additional orthogonal-decomposition and orthonormal-basis statements to close the published completion observation. No arbitrary choice use was introduced. The untouched pairwise-bound and refinement-recurrence proofs were read as actual procedure consumers; the former expands each root path and the latter substitutes the unchanged accepted error inequalities.
+
+The operation-model Definition has 57 direct item/reference consumers. Each actual use was checked for the reader's binary-grid change: uses invoke the same real/complex operation counts, exact-zero and normal-range failure rules, relative-error bounds or exact stored dyadic arithmetic. None requires a nonbinary format. Householder has nine direct users; their uses are real active columns, exact product conventions/finite work, or explicit real/complex kernel splits. Its local error lemma has five direct users, all selecting the real separate-block bound in the real branch. The finite-list Kahan/Neumaier changes preserve all direct uses. These are bounded interface checks; no foreign proof was edited or newly certified.
+
+Direct reference inventory for `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma`: `alg-balanced-pairwise-summation`, `alg-bfgs-hessian-direction-with-rounded-cholesky`, `alg-bounded-mixed-precision-iterative-refinement`, `alg-certified-hermitian-one-and-two-by-two-ldl-kernel`, `alg-ctrl1-finite-budget-transcription-solver-dispatch`, `alg-finite-budget-francis-schur-reduction`, `alg-finite-budget-qz-iteration-with-deflation-and-residual`, `alg-kahan-compensated-summation`, `alg-multifrontal-cholesky-and-sparse-triangular-solves`, `alg-na-computed-fast-transforms-and-convolution`, `alg-na-computed-fft-cyclic-and-linear-convolution`, `alg-na-computed-unitary-radix-two-fft`, `alg-neumaier-compensated-summation`, `alg-newton-matrix-sign-iteration`, `alg-newton-polar-factor-iteration`, `alg-pade-denominator-solve-by-householder-qr`, `alg-pade-scaling-and-squaring-exponential`, `alg-point-verified-linear-system-certifier`, `alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones`, `alg-revised-simplex-qr-basis-recompute-and-audit`, `alg-rosenbrock-euler-step`, `alg-rosenbrock-shifted-qr-solver-with-residual-certificate`, `alg-rounded-cholesky-with-failure-status`, `alg-scaled-complex-householder-and-givens-updates`, `alg-scaled-householder-reflector-formation-and-application`, `alg-sparse-cholesky-with-invalid-pivot-status`, `alg-sqp-finite-precision-kkt-qr-solve-and-residual-check`, `alg-threshold-partial-pivot-sparse-lu`, `alg-two-product-fma-error-free-transform`, `alg-two-stage-rosenbrock-w-method`, `alg-two-sum-error-free-transform`, `cor-computed-singular-values-absolute-error-from-backward-stability`, `ex-full-rank-least-squares-normal-equations-versus-qr`, `ex-neumaier-recovers-low-order-term-after-cancellation`, `ex-rounded-cholesky-two-by-two-residual`, `ex-subnormal-and-overflow-range-failure`, `ex-two-stage-rosenbrock-factorization-reuse`, `ex-two-sum-recovers-a-rounded-away-low-part`, `lem-certified-linear-solve-jacobian-and-pullback-error`, `lem-computed-augmented-tikhonov-solve-residual-and-output-error`, `lem-na-complex-product-six-operation-roundoff-bound`, `lem-na-computed-unitary-butterfly-error-bound`, `lem-rosenbrock-stage-residual-certificate`, `lem-rounded-linear-and-normal-residual-certificates`, `lem-rounded-triangular-substitution-componentwise-backward-error`, `lem-scaled-householder-step-meets-local-backward-error-premise`, `thm-cg-recursive-residual-gap-and-attainable-accuracy`, `thm-gmres-true-residual-gap-from-computed-arnoldi-relation`, `thm-kahan-and-neumaier-finite-error-identities`, `thm-na-computed-fft-convolution-error-bound`, `thm-patankar-inexact-solve-residual-ledger`, `thm-rosenbrock-computational-steps-terminate-with-finite-work`, `thm-sqp-finite-precision-kkt-residual-certificate-sound`, `thm-threshold-sparse-lu-residual-with-growth`, `thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound`, `thm-two-product-fma-error-free-transform`, `thm-two-sum-error-free-transform`.
+
+Direct reference inventory for `alg-scaled-householder-reflector-formation-and-application`: `alg-finite-budget-francis-schur-reduction`, `alg-gauss-newton-qr-svd-step-with-rank-safeguard`, `alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones`, `alg-revised-simplex-qr-basis-recompute-and-audit`, `alg-rosenbrock-shifted-qr-solver-with-residual-certificate`, `ex-two-stage-rosenbrock-factorization-reuse`, `lem-scaled-householder-step-meets-local-backward-error-premise`, `thm-rosenbrock-computational-steps-terminate-with-finite-work`, `thm-scaled-householder-qr-backward-stability`.
+
+Direct reference inventory for `lem-scaled-householder-step-meets-local-backward-error-premise`: `alg-finite-budget-francis-schur-reduction`, `alg-revised-simplex-qr-basis-recompute-and-audit`, `alg-sqp-finite-precision-kkt-qr-solve-and-residual-check`, `lem-two-sided-scaled-householder-similarity-error`, `thm-scaled-householder-qr-backward-stability`.
+
+## Owner handoff: outside citation mirrors
+
+A scan of current run-owned contracts found the following 18 exact quotations that no longer occur in their supplier's current Definition/Statement. This is a supplier-induced metadata synchronization handoff, not a finding that these consumers' mathematical arguments are false. Their actual source uses were checked above. These contracts are outside batch 1 and were left untouched; the owner should route synchronization to their owning batches before the engine battery. Do not copy old full-section quotations back into the suppliers.
+
+| Batch | Consumer | Fact | Current supplier |
+|---|---|---|---|
+| 15 | `lem-na-complex-product-six-operation-roundoff-bound` | F1 | `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma` |
+| 15 | `lem-na-computed-unitary-butterfly-error-bound` | F3 | `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma` |
+| 15 | `thm-na-computed-fft-convolution-error-bound` | F5 | `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma` |
+| 25 | `lem-computed-augmented-tikhonov-solve-residual-and-output-error` | F3 | `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma` |
+| 33 | `lem-two-sided-scaled-householder-similarity-error` | F1 | `lem-scaled-householder-step-meets-local-backward-error-premise` |
+| 34 | `thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound` | F2 | `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma` |
+| 34 | `thm-gmres-true-residual-gap-from-computed-arnoldi-relation` | F2 | `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma` |
+| 34 | `thm-cg-recursive-residual-gap-and-attainable-accuracy` | F1 | `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma` |
+| 74 | `lem-rosenbrock-stage-residual-certificate` | F1 | `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma` |
+| 74 | `thm-rosenbrock-computational-steps-terminate-with-finite-work` | F1 | `alg-scaled-householder-reflector-formation-and-application` |
+| 74 | `thm-rosenbrock-computational-steps-terminate-with-finite-work` | F4 | `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma` |
+| 74 | `ex-two-stage-rosenbrock-factorization-reuse` | F3 | `alg-scaled-householder-reflector-formation-and-application` |
+| 74 | `ex-two-stage-rosenbrock-factorization-reuse` | F5 | `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma` |
+| 78 | `thm-patankar-inexact-solve-residual-ledger` | F4 | `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma` |
+| 84 | `alg-gauss-newton-qr-svd-step-with-rank-safeguard` | F5 | `alg-scaled-householder-reflector-formation-and-application` |
+| 85 | `alg-sqp-finite-precision-kkt-qr-solve-and-residual-check` | F1 | `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma` |
+| 85 | `alg-sqp-finite-precision-kkt-qr-solve-and-residual-check` | F5 | `lem-scaled-householder-step-meets-local-backward-error-premise` |
+| 85 | `thm-sqp-finite-precision-kkt-residual-certificate-sound` | F4 | `def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma` |
+
+The owned cross-batch consumer input remains the existing empty array: all logical suppliers outside batch 1 used by this batch are published prerequisite context. The shared frontier-dependency ledger contains this batch's disposition, and its native refresh completed successfully. No proposed withdrawal was removed or introduced.
+
+## Sources and coverage limits
+
+- [Shewchuk, Adaptive Precision Floating-Point Arithmetic](https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf), §§2.1–2.3, printed pp.3–8 (PDF pp.7–12), especially Lemmas 1,4,5 and Theorems 6–7. Read the complete relevant rounding, grid/error, FastTwoSum and TwoSum arguments. Nearest-even binary format and the source p>=3 restriction were checked; the current local proof separately handles p=2.
+- [Stuart and Voss, Matrix Analysis and Algorithms](https://www.seehuhn.de/publications/StuaVo08/numlinalg.pdf), §5.3, printed p.63, Theorems 5.12–5.13; §7.2, printed pp.87–88, QR least-squares algorithm, its normal-equation derivation and Theorem 7.5. These source statements assume successful sufficiently small-roundoff computation. They provide context, not the exact local constants: the notes refer proofs of the stability theorems elsewhere. This adjudication checked the complete locally supplied quantitative arguments directly and does not claim to have read the external Higham-book proofs.
+
+I did not audit the full transitive published closure, read every bibliographic reference, or infer a mathematical verdict from reader/refuter/gate status. No subagents, judge cycle, stamp, self-certification, engine scheduling or publication was initiated.
+
+## Local checks and final state
+
+- `node tools/risk-report.mjs research/numerical-optimization-dynamics-2026-10-16-batch-1.proof-contracts.json`: 27 items, 0 errors; six HIGH and three CRITICAL items required review. All nine now have specific independent complete reviews.
+- Same command with `--require-reviewed`: 27 items, 0 errors.
+- `node tools/tsx-run.mjs tools/reflow.mts items/alg-bounded-mixed-precision-iterative-refinement.md items/thm-kahan-and-neumaier-finite-error-identities.md`: both unchanged.
+- `node tools/tsx-run.mjs tools/precheck.mts` on those two explicit paths: 2 checked, 0 failing.
+- `node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-1.proof-contracts.json --strict`: 27/27 items, 0 errors, 0 warnings.
+- `node tools/rendercheck.mjs` on the two explicit edited paths: both valid, including actual KaTeX/YAML parsing.
+- Final single batched `node tools/proof-layout.mjs items/alg-bounded-mixed-precision-iterative-refinement.md items/thm-kahan-and-neumaier-finite-error-identities.md`: 2 items, 7 steps, 0 defects; no item edit or formatter followed it.
+- Native defect-ledger append: 9 rows appended and generated view refreshed. This is accounting, not proof certification.
+- `node tools/frontier-dependency-ledger.mjs refresh --run numerical-optimization-dynamics-2026-10-16`: refreshed/deduplicated successfully.
+
+No local substantial mathematical prerequisite remains unresolved. The external citation-mirror synchronization and published nonfatal editorial maintenance remain explicit owner handoffs. The engine owns current carrier hashes, decision stamping and the gate battery after this dispatch.

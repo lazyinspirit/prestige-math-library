@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "25",
+  "batch_dependency_level": 1,
+  "prerequisite_batches": ["1"],
+  "scheduling_input_sha256": "ca41fcdd6d4a40fbd61e4921a8bfdd410bd704a05c937a5f709843ed28d2e97d",
+  "suppliers": [
+    {
+      "supplier_batch": "1",
+      "supplier_pair": "NA-02",
+      "supplier_page": "finite-precision-direct-factorizations",
+      "status": "unresolved-after-body-inspection",
+      "required_interface": {
+        "finite_dimensional_representation": "Give a finite-dimensional coefficient space and prove that the represented discrete Tikhonov solve corresponds to the R_{lambda,h} normal-equation solution used by NA-44. A_h:X→Y has finite rank in the Hilbert-space theorem, but the theorem does not identify a finite-dimensional domain basis or restrict the returned output to that represented space.",
+        "augmented_least_squares": "For the finite representation, apply a complete computed-solve theorem to [A_h; sqrt(lambda) I] and the augmented data, prove its returned output's error relative to the exact regularized solution, and include the real or complex field branch, representation/rounding of sqrt(lambda), range/status conditions, successful factorization and solve conditions, and any nonsingularity/conditioning hypotheses.",
+        "residual_or_roundoff": "Alternatively or additionally, prove a certified rho_h (and rho_{h,h} for the refined chain) comparing evaluated residuals with exact normal-equation residuals, and bound the returned-output roundoff difference from any specified exact-arithmetic stopping output.",
+        "existing_supplier_hypotheses": "The current computed reduced-QR least-squares statement is real and conditional on full column rank, a successful factorization satisfying its local Householder premise and Frobenius backward bound, gamma_m<1, gamma_{n+3}<1/8, successful rounded dot products and back substitution, and nonsingularity of R-hat+Delta R. Its actual proof does not establish the rounded triangular-solve estimate or zero-solution branch; the Householder local nonzero premise is also unresolved."
+      },
+      "actual_supplier_item_ids": [
+        "thm-computed-full-rank-least-squares-backward-stability",
+        "thm-scaled-householder-qr-backward-stability",
+        "lem-scaled-householder-step-meets-local-backward-error-premise",
+        "thm-rounded-cholesky-componentwise-and-normwise-backward-error"
+      ],
+      "actual_supplier_findings": [
+        {
+          "item": "thm-computed-full-rank-least-squares-backward-stability",
+          "section": "Proof 1.2",
+          "exact_excerpt": "No such estimate has been proved here, so DeltaR cannot yet be constructed.",
+          "disposition": "The rounded triangular-solve estimate is missing; the following proof step also leaves the zero-solution branch unresolved. Not used as a proved result."
+        },
+        {
+          "item": "thm-scaled-householder-qr-backward-stability",
+          "section": "Readiness",
+          "exact_excerpt": "Its formation/update estimate is unresolved, so this item cannot be ready for acceptance.",
+          "disposition": "Conditional on the local per-step Householder estimate. Not used as a proved result."
+        },
+        {
+          "item": "lem-scaled-householder-step-meets-local-backward-error-premise",
+          "section": "Statement",
+          "exact_excerpt": "The nonzero formation and rank-one-update estimate is unresolved.",
+          "disposition": "Only the zero-column branch is established. Not used as a proved result."
+        },
+        {
+          "item": "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+          "section": "Statement",
+          "exact_excerpt": "These bounds apply on success only; positive definiteness does not guarantee rounded success.",
+          "disposition": "Its proved claim bounds factorization error; the inspected item supplies no triangular solve or evaluated normal-equation residual certificate."
+        }
+      ],
+      "source_excerpt": null,
+      "readiness_claim": "none",
+      "affected_claims": [
+        "thm-tikhonov-error-chain-with-discretization-and-residual: applying rho_h or rho_{h,h} to a residual computed in finite precision",
+        "thm-tikhonov-error-chain-with-discretization-and-residual: bounding the difference between a specified exact-arithmetic stopping output and the returned computed output",
+        "thm-tikhonov-error-chain-with-discretization-and-residual: interpreting the abstract Hilbert-space A_h normal solve as an actual finite-dimensional direct-factorization computation",
+        "cor-l2-inverse-error-budget-and-cross-term-condition: readiness follows the escalated NA-44 chain supplier",
+        "ex-tikhonov-bias-noise-tradeoff: readiness follows its escalated NA-44 chain supplier",
+        "ex-quadrature-discretization-residual-before-inversion: readiness follows its escalated NA-44 chain supplier"
+      ],
+      "authoring_disposition": "All independent Hilbert-space lemmas, the exact conditional error chains, the exact finite-matrix specialization, and the scalar examples were authored. No unproved batch-1 item is placed in deps, proof-contract citations, or a readiness claim. The four affected items are recorded escalated until the finite-dimensional and arithmetic interface above is proved and reconciled."
+    }
+  ],
+  "outgoing_interfaces": []
+}

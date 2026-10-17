@@ -1,0 +1,168 @@
+[
+  {
+    "order": 2334,
+    "id": "numerical-inverse-problems-and-regularization-error",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Numerical inverse problems and regularization error",
+    "companion": "numerical-inverse-problems-and-regularization-error-examples",
+    "requires": [
+      "direct-matrix-factorisations-lu-cholesky-and-qr",
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "the-moore-penrose-pseudoinverse-and-regularised-least-squares",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "finite-precision-direct-factorizations"
+    ],
+    "items": [
+      {
+        "id": "lem-hilbert-tikhonov-normal-operator-invertible",
+        "kind": "lemma",
+        "deps": [
+          "def-hilbert-space",
+          "def-hilbert-space-adjoint",
+          "def-bounded-linear-operator",
+          "def-inner-product-space",
+          "def-countable-choice",
+          "def-operator-norm",
+          "def-orthogonality-and-orthogonal-complement",
+          "cor-inner-product-induces-a-norm",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-orthogonal-decomposition-by-a-closed-subspace"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-truncated-svd-bias-and-data-noise-decomposition",
+        "kind": "lemma",
+        "deps": [
+          "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+          "thm-singular-value-decomposition",
+          "def-inner-product-space",
+          "cor-inner-product-induces-a-norm"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-hilbert-tikhonov-noise-amplification-bound",
+        "kind": "lemma",
+        "deps": [
+          "lem-hilbert-tikhonov-normal-operator-invertible",
+          "def-hilbert-space-adjoint",
+          "def-inner-product-space",
+          "def-countable-choice",
+          "cor-inner-product-induces-a-norm",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-operator-norm"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-tikhonov-error-chain-with-discretization-and-residual",
+        "kind": "theorem",
+        "deps": [
+          "lem-hilbert-tikhonov-normal-operator-invertible",
+          "lem-hilbert-tikhonov-noise-amplification-bound",
+          "def-hilbert-space",
+          "def-compact-linear-operator",
+          "def-hilbert-space-adjoint",
+          "def-countable-choice",
+          "def-bounded-linear-operator",
+          "def-operator-norm",
+          "cor-inner-product-induces-a-norm",
+          "def-tikhonov-regularised-least-squares",
+          "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+          "lem-computed-augmented-tikhonov-solve-residual-and-output-error"
+        ],
+        "dependency_level": 2,
+        "title": "Tikhonov error separates bias, data noise, discretization and solve residual",
+        "statement": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces, let\n$A:X\\to Y$ be compact (hence bounded), and let $A_h:X\\to Y$ be a bounded\ndiscrete operator whose range is a finite-dimensional subspace of $Y$. For\n$\\lambda>0$,\ndefine\n\n$$R_\\lambda=(A^*A+\\lambda I_X)^{-1}A^*,\\qquad R_{\\lambda,h}=(A_h^*A_h+\\lambda I_X)^{-1}A_h^*.$$\n\nThese maps are well-defined by [[lem-hilbert-tikhonov-normal-operator-invertible]]. Let $x^\\dagger\\in X$, $y=Ax^\\dagger$, $y_\\delta=y+e$ with $\\|e\\|\\le\\delta$ and $\\delta\\ge0$, and let $\\widetilde x\\in X$. Define the exact discrete normal-equation residual\n\n$$r_h=(A_h^*A_h+\\lambda I_X)\\widetilde x-A_h^*y_\\delta.$$\n\nThen the following chain is exact:\n\n$$x^\\dagger-\\widetilde x=(x^\\dagger-R_\\lambda y) +(R_\\lambda y-R_\\lambda y_\\delta) +(R_\\lambda y_\\delta-R_{\\lambda,h}y_\\delta) +(R_{\\lambda,h}y_\\delta-\\widetilde x).$$\n\nIts norm satisfies\n\n$$\\|x^\\dagger-\\widetilde x\\|\\le \\|x^\\dagger-R_\\lambda y\\|+\\frac{\\delta}{2\\sqrt\\lambda} +\\|(R_\\lambda-R_{\\lambda,h})y_\\delta\\|+\\frac{\\|r_h\\|}{\\lambda}.$$\n\nThe first term is regularization bias, the second is data noise, the third is the regularized-operator discretization difference, and the fourth is the solve residual. The third term receives a numerical bound only when an operator-perturbation bound is supplied: if $\\|R_\\lambda-R_{\\lambda,h}\\|\\le\\eta_{\\lambda,h}$, it is at most $\\eta_{\\lambda,h}\\|y_\\delta\\|$. If residual evaluation returns $\\widehat r_h$ with a certified $\\|r_h-\\widehat r_h\\|\\le\\rho_h$, the last term is at most $(\\|\\widehat r_h\\|+\\rho_h)/\\lambda$. If an algorithm has a specified exact-arithmetic stopping output $x_{\\mathrm{stop}}$ and returns a computed output $\\widetilde x$, the last difference can further split as\n\n$$R_{\\lambda,h}y_\\delta-\\widetilde x= (R_{\\lambda,h}y_\\delta-x_{\\mathrm{stop}}) +(x_{\\mathrm{stop}}-\\widetilde x).$$\n\nWriting $r_{\\mathrm{stop}}=(A_h^*A_h+\\lambda I_X)x_{\\mathrm{stop}} -A_h^*y_\\delta$, the first term is at most $\\|r_{\\mathrm{stop}}\\|/\\lambda$; the second is the separate returned-output roundoff term. Any bound on that roundoff or on residual-evaluation error requires its own arithmetic hypotheses. For a discretized datum $y_{h,\\delta}=A_hx^\\dagger+e$ formed before inversion, put $d_h=(A-A_h)x^\\dagger=y_\\delta-y_{h,\\delta}$. Let $\\widetilde x_h\\in X$ be a computed discrete output. The corresponding exact refinement is\n\n$$x^\\dagger-\\widetilde x_h=(x^\\dagger-R_\\lambda y) +(R_\\lambda y-R_\\lambda y_\\delta) +R_\\lambda d_h+(R_\\lambda-R_{\\lambda,h})y_{h,\\delta} +(R_{\\lambda,h}y_{h,\\delta}-\\widetilde x_h),$$\n\nso the forward residual discarded by quadrature or collocation is counted before inversion as $R_\\lambda d_h$, with $\\|R_\\lambda d_h\\|\\le\\|d_h\\|/(2\\sqrt\\lambda)$. The separate operator discretization and solve terms remain. For this refined chain, define $r_{h,h}=(A_h^*A_h+\\lambda I_X)\\widetilde x_h-A_h^*y_{h,\\delta}$; then $\\|R_{\\lambda,h}y_{h,\\delta}-\\widetilde x_h\\|\\le\\|r_{h,h}\\|/\\lambda$. If its evaluation returns $\\widehat r_{h,h}$ with a certified $\\|r_{h,h}-\\widehat r_{h,h}\\|\\le\\rho_{h,h}$, the last term is at most $(\\|\\widehat r_{h,h}\\|+\\rho_{h,h})/\\lambda$. No rate for $d_h$, no operator perturbation estimate, and no floating-point residual bound is implicit. When $X,Y$ are finite-dimensional and $b=Ax^\\dagger+e$, the same identity is the canonical Tikhonov bias/noise formula\n\n$$x^\\dagger-A^\\#_\\lambda b=(I-A^\\#_\\lambda A)x^\\dagger-A^\\#_\\lambda e, \\qquad A^\\#_\\lambda=(A^*A+\\lambda I)^{-1}A^*.$$\n\nHere $\\lambda$ is the coefficient of $\\|x\\|^2$ in\n$\\|Ax-b\\|^2+\\lambda\\|x\\|^2$.\n\nFor stored finite matrices, [[lem-computed-augmented-tikhonov-solve-residual-and-output-error]] supplies the concrete augmented-QR or independently certified-residual application: take its $\\rho$ as $\\rho_h$ with datum $y_\\delta$, or as $\\rho_{h,h}$ with datum $y_{h,\\delta}$. It bounds returned-output roundoff for the exact direct-solve target and retains explicit real/complex realization, square-root representation, successful-operation and nonsingularity conditions.",
+        "strategy": "1.1 By [F7], $A$ is bounded, and [F8] supplies the Hilbert-space hypotheses. By [F1], both shifted normal operators are invertible, so the displayed $R_\\lambda$ and $R_{\\lambda,h}$ are defined. Multiplying their definitions by their normal operators gives $(A^*A+\\lambda I)R_\\lambda=A^*$ and $(A_h^*A_h+\\lambda I)R_{\\lambda,h}=A_h^*$. [given, A1, F1, F3, F7, F8, algebra]\n\n1.2 Adding and subtracting the intermediate vectors $R_\\lambda y$, $R_\\lambda y_\\delta$, and $R_{\\lambda,h}y_\\delta$ cancels the intervening terms and proves the stated four-term identity. Since $y_\\delta=y+e$, [F2] gives $\\|R_\\lambda y-R_\\lambda y_\\delta\\|=\\|R_\\lambda e\\| \\le\\delta/(2\\sqrt\\lambda)$. [given, F2, algebra]\n\n1.3 Adding and subtracting $x_{\\mathrm{stop}}$ gives the optional stopping/roundoff identity. The normal equation for $R_{\\lambda,h}y_\\delta$ and the definition of $r_{\\mathrm{stop}}$ imply $(A_h^*A_h+\\lambda I)(x_{\\mathrm{stop}}-R_{\\lambda,h}y_\\delta) =r_{\\mathrm{stop}}$. By [F1], the stopping term is at most $\\|r_{\\mathrm{stop}}\\|/\\lambda$; the other term is exactly the stated roundoff difference. [given, F1, algebra]\n\n1.4 In the refined datum case, $y_\\delta-y_{h,\\delta}=(Ax^\\dagger+e)-(A_hx^\\dagger+e)=d_h$. Inserting $R_\\lambda y_{h,\\delta}$ and $R_{\\lambda,h}y_{h,\\delta}$ into the chain therefore gives the displayed five-term identity by cancellation. [given, F3, algebra]\n\n2.1 Let $z=R_{\\lambda,h}y_\\delta$. The normal equation in step 1.1 gives $(A_h^*A_h+\\lambda I)(\\widetilde x-z)=r_h$. By [F1], $\\|\\widetilde x-z\\|\\le\\|r_h\\|/\\lambda$. The triangle inequality [F9] applied to the four-term identity, using step 1.2 for its noise term, proves the stated total error bound. [F1, F9, step 1.1, step 1.2, algebra]\n\n2.2 Applying [F2] to $d_h$ bounds its pre-inversion contribution by $\\|R_\\lambda d_h\\|\\le\\|d_h\\|/(2\\sqrt\\lambda)$. Applying [F1] to $r_{h,h}=(A_h^*A_h+\\lambda I)(\\widetilde x_h-R_{\\lambda,h}y_{h,\\delta})$ gives the stated refined solve-residual bound. Under the residual-evaluation hypothesis, the triangle inequality [F9] gives $\\|r_{h,h}\\|\\le\\|\\widehat r_{h,h}\\|+\\rho_{h,h}$. [F1, F2, F9, step 1.4, algebra]\n\n3.1 By [F4], an assumed operator-norm bound $\\|R_\\lambda-R_{\\lambda,h}\\|\\le\\eta_{\\lambda,h}$ gives $\\|(R_\\lambda-R_{\\lambda,h})y_\\delta\\| \\le\\eta_{\\lambda,h}\\|y_\\delta\\|$. Also, the triangle inequality [F9] gives $\\|r_h\\|\\le\\|\\widehat r_h\\|+\\|r_h-\\widehat r_h\\| \\le\\|\\widehat r_h\\|+\\rho_h$ under the stated residual-evaluation hypothesis. These are conditional estimates, not automatic stability claims. [given, F4, F9, step 2.1, algebra]\n\n4.1 In the finite-matrix case with $A_h=A$ and the exact regularized output $\\widetilde x=R_\\lambda y_\\delta$, [F5]–[F6] identify $R_\\lambda$ with the canonical Tikhonov minimizer. The baseline identity from step 1.2 then reduces to the displayed finite-matrix bias/noise formula. [F5, F6, step 1.2, algebra]\n\n4.2 For stored finite data, or for supplied isometric coordinates $A_h=VMU^*$ and returned output $U\\widehat x$, apply [F10] to the coefficient matrix $M$ (the matrix case uses identity embeddings) and datum $g=y_\\delta$ or $g=y_{h,\\delta}$. The exact normal residual lifts isometrically to $r_h$ or $r_{h,h}$, with any certified coordinate-data and orthogonal-output allowances from [F10]. Hence steps 2.2 and 3.1 apply. For the exact direct augmented solve, $x_{\\mathrm{stop}}=R_{\\lambda,h}g$, and [F10] bounds the returned-output term by $(\\|\\widehat r\\|+\\rho)/\\lambda$. The analytic identity and its independent bias, noise and discretization terms are unchanged. [F10, step 1.3, step 2.2, step 3.1, algebra] ∎"
+      },
+      {
+        "id": "cor-l2-inverse-error-budget-and-cross-term-condition",
+        "kind": "corollary",
+        "deps": [
+          "thm-tikhonov-error-chain-with-discretization-and-residual",
+          "def-calligraphic-l-p-on-a-measure-space",
+          "thm-minkowski-inequality-for-integrals",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-inner-product-space",
+          "cor-inner-product-induces-a-norm"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+        "kind": "lemma",
+        "title": "Computed augmented Tikhonov solves have certified residual and output-error bounds",
+        "deps": [
+          "lem-rounded-linear-and-normal-residual-certificates",
+          "thm-computed-full-rank-least-squares-backward-stability",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser"
+        ],
+        "statement": "Let stored $A\\in\\mathbb F^{m\\times n}$ and $y\\in\\mathbb F^m$ be real or complex, $m,n\\ge1$, and let stored real $\\lambda>0$. Let $x_\\lambda=(A^*A+\\lambda I)^{-1}A^*y$. Compute $\\alpha=\\operatorname{fl}(\\sqrt\\lambda)>0$ under the successful normal-range square-root model, and solve the stored augmented problem $\\min_x\\|[A;\\alpha I]x-[y;0]\\|_2$ by scaled Householder QR and rounded substitution. For complex inputs use the realification described below, so the backend uses only real triangular divisions. Every operation must succeed; failed pivots, invalid operations and out-of-range nonzero intermediates return range-failure.\n\nFor any returned $\\widehat x$, evaluate $\\widehat r$ and its certified allowance $\\rho$ by [[lem-rounded-linear-and-normal-residual-certificates]] for the intended residual $r=(A^*A+\\lambda I)\\widehat x-A^*y$. Then\n$$\\|\\widehat x-x_\\lambda\\|_2\\le\\frac{\\|\\widehat r\\|_2+\\rho}{\\lambda}.$$\nThis bounds returned-output roundoff relative to the exact direct-solve target $x_{\\rm stop}=x_\\lambda$. It also certifies the solve term in any larger analytic error chain, irrespective of the backend. The representation of $\\sqrt\\lambda$ contributes no hidden change of target: $|\\alpha^2-\\lambda|\\le(2u+u^2)\\lambda$. If residual evaluation instead uses exact $\\alpha^2$, add $|\\alpha^2-\\lambda|\\|\\widehat x\\|_2$ to its allowance; rounding a computed $\\alpha^2$ needs its own scalar error as well.\n\nThe backend's nearby least-squares conclusion holds under the completed QR/solve hypotheses and nonsingularity condition. In real dimension, write $C=[A;\\alpha I]$ and $\\epsilon_Q=\\beta_Q\\|C\\|_F$. A sufficient check is $\\epsilon_Q<\\alpha$ and $\\|\\Delta R\\|_F<\\alpha-\\epsilon_Q$. An explicit certified nonsingularity check may replace this sufficient margin.\n\nFor a Hilbert-space discrete operator, supply isometries $U:\\mathbb F^n\\to X$ and $V:\\mathbb F^m\\to Y$ with $A_h=VAU^*$, and return $U\\widehat x$. With coefficient datum $y_c=V^*y_\\delta$, the exact normal solution lies in $\\operatorname{ran}U$ and the coefficient residual lifts isometrically, so the same certificate applies to $r_h$; likewise use $V^*y_{h,\\delta}$ for $r_{h,h}$. If a stored coefficient datum $\\widehat y_c$ differs from $V^*y$ by at most $\\epsilon_y$, add $\\|A\\|_2\\epsilon_y$ to the residual allowance. If the returned output also has an orthogonal component $z\\perp\\operatorname{ran}U$ of norm at most $\\epsilon_\\perp$, add $\\lambda\\epsilon_\\perp$. Finite rank alone does not supply these coordinate or output certificates.",
+        "strategy": "1.1 The stored augmented matrix has full column rank, since $\\|[A;\\alpha I]z\\|_2^2=\\|Az\\|_2^2+\\alpha^2\\|z\\|_2^2\\ge\\alpha^2\\|z\\|_2^2$. If $C+\\Delta_Q=\\widehat Q\\widehat R$, then $\\|\\widehat Rz\\|=\\|(C+\\Delta_Q)z\\|\\ge(\\alpha-\\epsilon_Q)\\|z\\|$. Under the sufficient margin, the further triangular perturbation preserves a positive lower bound. Thus the nonsingularity premise in [F2] holds under the stated check. The theorem still explicitly requires successful arithmetic; exact full rank alone does not ensure rounded success. [given, F2, algebra]\n\n1.2 For complex inputs identify $z=z_R+iz_I$ with $(z_R,z_I)\\in\\mathbb R^{2n}$. The real matrix $A_R=\\begin{pmatrix}\\operatorname{Re}A&-\\operatorname{Im}A\\\\\\operatorname{Im}A&\\operatorname{Re}A\\end{pmatrix}$ represents exactly the same linear map, preserves vector norms, and satisfies $\\|A_R\\|_2=\\|A\\|_2$, $\\|A_R\\|_F=\\sqrt2\\|A\\|_F$ by direct component sums. Apply [F2] to $[A_R;\\alpha I_{2n}]$ and datum $((\\operatorname{Re}y,\\operatorname{Im}y),0)$; this is exactly the original complex objective. Mapping its output back needs only component pairing, so introduces no arithmetic error or unmodeled complex division. [F2, step 1.1, algebra]\n\n2.1 By [F3], $\\alpha=\\sqrt\\lambda(1+\\delta)$, $|\\delta|\\le u$, whence $|\\alpha^2-\\lambda|\\le(2u+u^2)\\lambda$. For any $z$, Cauchy-Schwarz gives $\\|(A^*A+\\lambda I)z\\|\\|z\\|\\ge\\langle(A^*A+\\lambda I)z,z\\rangle=\\|Az\\|^2+\\lambda\\|z\\|^2\\ge\\lambda\\|z\\|^2$. The normal equation [F4] therefore implies $\\|\\widehat x-x_\\lambda\\|\\le\\|r\\|/\\lambda\\le(\\|\\widehat r\\|+\\rho)/\\lambda$ by [F1]. Replacing the coefficient in a residual by $\\alpha^2$ changes that exact residual by $(\\alpha^2-\\lambda)\\widehat x$, giving the stated additional allowance. [F1, F3, F4, algebra]\n\n2.2 In exact arithmetic with the intended $\\sqrt\\lambda$, full-rank augmented QR returns the unique minimizer in [F4], hence $x_{\\rm stop}=x_\\lambda$. Step 2.1 bounds the returned computed output's difference from that target, including square-root representation and all solve error through its certified residual. For an iterative stopping target different from $x_\\lambda$, retain separate stopping and output terms rather than calling their sum pure roundoff. [F2, F4, step 1.1, step 1.2, step 2.1, algebra]\n\n3.1 In the supplied Hilbert representation, $U^*U=I$, $V^*V=I$, and $A_h^*=UA^*V^*$. The subspaces $\\operatorname{ran}U$ and its orthogonal complement are invariant under $A_h^*A_h+\\lambda I$; on the complement that operator is $\\lambda I$ and its right-hand side $A_h^*y$ has zero component. Thus the exact normal solution is $Ux_\\lambda$, with coefficient datum $V^*y$. Direct substitution gives $r_h=U((A^*A+\\lambda I)\\widehat x-A^*V^*y)$, and isometry preserves its norm. Perturbing the datum adds $UA^*(\\widehat y_c-V^*y)$ of norm at most $\\|A\\|\\epsilon_y$; an orthogonal output component adds $\\lambda z$. Triangle inequality gives the stated allowances. These explicit coordinate hypotheses preserve the general Hilbert theorem while justifying its concrete finite solve. [step 2.1, algebra] ∎",
+        "sources": [
+          {
+            "title": "Stuart and Voss, Matrix Analysis and Algorithms",
+            "url": "https://www.seehuhn.de/publications/StuaVo08/numlinalg.pdf"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2335,
+    "id": "numerical-inverse-problems-and-regularization-error-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Numerical inverse problems and regularization error — Examples",
+    "companion": "numerical-inverse-problems-and-regularization-error",
+    "requires": [
+      "numerical-inverse-problems-and-regularization-error"
+    ],
+    "items": [
+      {
+        "id": "ex-tikhonov-normal-equation-residual-bound",
+        "kind": "example",
+        "deps": [
+          "lem-hilbert-tikhonov-normal-operator-invertible"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-diagonal-inverse-noise-amplification",
+        "kind": "example",
+        "deps": [
+          "lem-hilbert-tikhonov-noise-amplification-bound"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-tikhonov-bias-noise-tradeoff",
+        "kind": "example",
+        "deps": [
+          "thm-tikhonov-error-chain-with-discretization-and-residual"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-quadrature-discretization-residual-before-inversion",
+        "kind": "example",
+        "deps": [
+          "thm-tikhonov-error-chain-with-discretization-and-residual"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  }
+]

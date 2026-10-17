@@ -1,0 +1,237 @@
+[
+  {
+    "order": 2330,
+    "id": "elliptic-finite-difference-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Elliptic finite-difference methods",
+    "companion": "elliptic-finite-difference-methods-examples",
+    "requires": [
+      "lax-milgram-and-weak-elliptic-solutions",
+      "sobolev-poincare-and-morrey-inequalities",
+      "linear-scheme-stability-and-lax-equivalence"
+    ],
+    "items": [
+      {
+        "id": "def-rectangular-grid-and-dirichlet-flux-stencil",
+        "kind": "definition",
+        "title": "Rectangular grid and Dirichlet flux stencil",
+        "statement": "Define the rectangular grid, the weighted inner product and norm on interior vectors (a semidefinite form and seminorm on full grid functions, positive definite on X_{h,0}), and the real divergence-form Dirichlet operator with exact midpoint face coefficients; the constant-coefficient case is the five-point Laplacian.",
+        "deps": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, Numerical Solution of PDEs, complete lecture notes",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 5: Finite Difference Approximation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 6: General Linear Second Order Equation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c395389a94e1177997aa6364b24852d8_MIT18_336S09_lec6.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+        "kind": "lemma",
+        "title": "Discrete summation by parts, Poincaré inequality and inverse bound",
+        "statement": "The rectangular grid operator satisfies a boundary-term summation-by-parts identity; zero-boundary grid functions satisfy a mesh-uniform discrete Poincaré inequality, and the positive-coefficient operator has a mesh-uniform inverse bound in the weighted grid L2 norm.",
+        "deps": [
+          "def-rectangular-grid-and-dirichlet-flux-stencil"
+        ],
+        "dependency_level": 1,
+        "strategy": "Direct telescoping on horizontal and vertical edges, followed by a one-direction discrete Poincaré estimate and coercivity.",
+        "axiom_base": "No choice axiom is used; only finite sums and finite-dimensional linear algebra are used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, Numerical Solution of PDEs, complete lecture notes",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 5: Finite Difference Approximation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 6: General Linear Second Order Equation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c395389a94e1177997aa6364b24852d8_MIT18_336S09_lec6.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-variable-coefficient-flux-stencil-second-order-consistency",
+        "kind": "lemma",
+        "title": "Second-order consistency of the variable-coefficient flux stencil",
+        "statement": "For a positive scalar coefficient in C3 and a solution in C4 on a rectangle, exact midpoint face coefficients in the divergence-form stencil have a second-order interior residual with an explicit derivative bound.",
+        "deps": [
+          "def-rectangular-grid-and-dirichlet-flux-stencil"
+        ],
+        "dependency_level": 1,
+        "strategy": "Expand each face coefficient and one-sided difference through second order; the common quadratic flux term cancels between adjacent faces.",
+        "axiom_base": "No choice axiom is used; the proof uses pointwise Taylor estimates.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, Numerical Solution of PDEs, complete lecture notes",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 5: Finite Difference Approximation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 6: General Linear Second Order Equation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c395389a94e1177997aa6364b24852d8_MIT18_336S09_lec6.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-elliptic-finite-difference-l2-error-on-rectangles",
+        "kind": "theorem",
+        "title": "Second-order grid L2 error for rectangular Dirichlet flux differences",
+        "statement": "For a C3 uniformly positive scalar coefficient and a C4 solution of the Dirichlet problem on a rectangle, the exact-boundary divergence-form finite-difference solution is unique and its weighted grid L2 error is bounded explicitly by a constant times hx2+hy2.",
+        "deps": [
+          "def-rectangular-grid-and-dirichlet-flux-stencil",
+          "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+          "lem-variable-coefficient-flux-stencil-second-order-consistency"
+        ],
+        "dependency_level": 2,
+        "strategy": "Apply the discrete inverse bound to the complete interior residual; exact Dirichlet boundary rows make the boundary error zero.",
+        "axiom_base": "No choice axiom is used; existence and uniqueness are proved by finite-dimensional coercivity.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, Numerical Solution of PDEs, complete lecture notes",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 5: Finite Difference Approximation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Lecture 6: General Linear Second Order Equation",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c395389a94e1177997aa6364b24852d8_MIT18_336S09_lec6.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2331,
+    "id": "elliptic-finite-difference-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Elliptic finite-difference methods — Examples",
+    "companion": "elliptic-finite-difference-methods",
+    "requires": [
+      "elliptic-finite-difference-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-first-order-neumann-closure-causes-first-order-error",
+        "kind": "example",
+        "title": "A one-sided Neumann closure gives only first-order error",
+        "statement": "For u(x)=x2 on [0,1], the centered interior Poisson stencil with the one-sided left Neumann row D+U0=0 and exact right Dirichlet value has grid error h(1-xi), so its maximum error is h.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Compute the one-sided boundary residual and solve the homogeneous interior error recurrence with the right endpoint condition.",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-dirichlet-laplacian-has-uniform-infinity-inverse-bound",
+        "kind": "example",
+        "title": "A Dirichlet Laplacian inverse is uniformly bounded in the maximum norm",
+        "statement": "For the one-dimensional centered Dirichlet Laplacian on [0,1], the induced maximum-norm operator bound satisfies ||A_N^{-1}||infinity-to-infinity <= 1/8 for every mesh width h=1/N.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Use a quadratic barrier and the discrete minimum principle to bound both signs of the solution.",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-variable-coefficient-flux-and-expanded-stencils",
+        "kind": "example",
+        "title": "Flux and expanded variable-coefficient stencils differ by a second-order term",
+        "statement": "For a(x,y)=1+x2 and u(x,y)=x2 on (0,1)2, the midpoint divergence-form x-flux and the independently expanded centered operator differ by exactly hx2/2 at every interior grid point.",
+        "deps": [
+          "def-rectangular-grid-and-dirichlet-flux-stencil"
+        ],
+        "dependency_level": 1,
+        "strategy": "Evaluate the two midpoint face fluxes and compare them with a_i delta2_x u+a_x D0_x u.",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-five-point-laplacian-is-exact-on-quadratics",
+        "kind": "example",
+        "title": "The five-point Laplacian is exact on a quadratic solution",
+        "statement": "For u(x,y)=x2+y2 on a rectangle with exact sampled Dirichlet data and f=-4, the five-point scheme returns the exact grid samples on every rectangular uniform grid.",
+        "deps": [
+          "def-rectangular-grid-and-dirichlet-flux-stencil",
+          "lem-discrete-summation-by-parts-poincare-and-inverse-bound"
+        ],
+        "dependency_level": 2,
+        "strategy": "Compute the central second differences exactly and use the zero-boundary uniqueness estimate.",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

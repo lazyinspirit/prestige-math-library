@@ -1,0 +1,2210 @@
+{
+  "version": 1,
+  "level": "numerical-optimization-dynamics-2026-10-16",
+  "scope": [
+    "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+    "thm-adjoint-problem-for-bounded-coercive-variational-forms",
+    "cor-poisson-adjoint-h2-estimate-from-global-regularity",
+    "lem-two-cell-hat-and-quadratic-functions-lie-in-h10",
+    "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+    "cor-symmetric-galerkin-best-approximation-in-energy-norm",
+    "thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity",
+    "cor-shape-regular-affine-fe-primal-energy-approximation",
+    "cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation",
+    "ex-nonsymmetric-coercive-form-attains-cea-factor",
+    "ex-symmetric-poisson-best-approximation-on-two-cell-mesh",
+    "cex-reentrant-corner-poisson-solution-not-h2"
+  ],
+  "contracts": {
+    "lem-galerkin-orthogonality-for-conforming-galerkin-approximations": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Fix $v_h\\in V_h$. Since $V_h\\subseteq V$, the continuous equation is valid at $v_h$, so $a(u,v_h)=F(v_h)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The discrete equation gives $a(u_h,v_h)=F(v_h)$. Subtracting the two equalities and using the stated linearity of $a$ in its first slot yields $a(u-u_h,v_h)=0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof: For V_h={0}, the only test is v_h=0; the cited proof steps give a(u-u_h,0)=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: If u=u_h, the cited proof steps pairs the zero error with every test."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No independent parameter-one boundary branch is asserted in this item. (item lem-galerkin-orthogonality-for-conforming-galerkin-approximations: Galerkin orthogonality for conforming approximations)"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: No coercivity or nondegeneracy is needed; the cited proof steps uses only V_h⊆V."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no varying interval or limiting parameter with an additional endpoint case in this item. (item lem-galerkin-orthogonality-for-conforming-galerkin-approximations: Galerkin orthogonality for conforming approximations)"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses its explicitly stated supplier hypotheses and no unrecorded arbitrary-index choice. (item lem-galerkin-orthogonality-for-conforming-galerkin-approximations: Galerkin orthogonality for conforming approximations)"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional forward direction. (item lem-galerkin-orthogonality-for-conforming-galerkin-approximations: Galerkin orthogonality for conforming approximations)"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional reverse direction. (item lem-galerkin-orthogonality-for-conforming-galerkin-approximations: Galerkin orthogonality for conforming approximations)"
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-adjoint-problem-for-bounded-coercive-variational-forms": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lax-milgram",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a real or complex Hilbert space, let $a$ be a bounded coercive sesquilinear form on $H$ with constants $M,\\alpha$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F:H\\to\\mathbb K$ be a bounded conjugate-linear functional with norm $\\|F\\|=\\sup_{\\|v\\|\\le1}|F(v)|$. Then there is a unique $u\\in H$ with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H,$$ and it satisfies $\\alpha\\|u\\|\\le\\|F\\|$, that is $\\|u\\|\\le\\|F\\|/\\alpha$. The real bilinear case is the same statement with $a$ symmetric or not, $F$ a bounded linear functional, and the conjugation read as the identity.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Define the adjoint form by $a^\\dagger(z,v):=\\overline{a(v,z)}$. The sesquilinearity of $a$ shows that $a^\\dagger$ is linear in $z$ and conjugate-linear in $v$. Also $|a^\\dagger(z,v)|=|a(v,z)|\\le M\\|z\\|_V\\|v\\|_V$, and $\\operatorname{Re}a^\\dagger(z,z)=\\operatorname{Re}a(z,z)\\ge\\alpha\\|z\\|_V^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Set $G^\\dagger(v):=\\overline{G(v)}$. Since $G$ is linear, $G^\\dagger$ is conjugate-linear, and $|G^\\dagger(v)|=|G(v)|\\le\\|G\\|_{V^*}\\|v\\|_V$; hence $\\|G^\\dagger\\|_{V^*}=\\|G\\|_{V^*}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Apply [F2] to $a^\\dagger$ and $G^\\dagger$. It gives a unique $z\\in V$ with $a^\\dagger(z,v)=G^\\dagger(v)$ and $\\alpha\\|z\\|_V\\le\\|G^\\dagger\\|_{V^*}$. Conjugating the equation gives $a(v,z)=G(v)$ for every $v$, and the norm equality in step 1.2 gives the claimed estimate and uniqueness.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof: For V={0}, z=0 is the unique solution and satisfies the cited proof steps."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: For G=0, z=0 solves the equation and the cited proof steps gives the zero bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No independent parameter-one boundary branch is asserted in this item. (item thm-adjoint-problem-for-bounded-coercive-variational-forms: Well-posedness of the adjoint variational problem)"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: α>0 excludes degenerate coercivity; the cited proof steps preserves the same positive α."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no varying interval or limiting parameter with an additional endpoint case in this item. (item thm-adjoint-problem-for-bounded-coercive-variational-forms: Well-posedness of the adjoint variational problem)"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Countable Choice is explicit and used for Lax–Milgram in the cited proof steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional forward direction. (item thm-adjoint-problem-for-bounded-coercive-variational-forms: Well-posedness of the adjoint variational problem)"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional reverse direction. (item thm-adjoint-problem-for-bounded-coercive-variational-forms: Well-posedness of the adjoint variational problem)"
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "Countable Choice is the explicit assumption for adjoint Lax–Milgram."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Steps 1.1–2.1: conjugate transpose form preserves boundedness and real-part coercivity; conjugating the bounded linear datum produces exactly the conjugate-linear datum required by local Lax–Milgram. Conjugating its equation gives a(v,z)=G(v); norm equality and uniqueness survive conjugation. Real and zero-space cases are valid. Countable Choice matches the supplier."
+      }
+    },
+    "cor-poisson-adjoint-h2-estimate-from-global-regularity": {
+      "risk": "high",
+      "kind": "corollary",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]), and let $L$ and its form $a$ be as in [[def-uniformly-elliptic-divergence-form-operator]] on an open set $\\Omega\\subseteq\\mathbb R^n$. **Homogeneous problem.** Given $F\\in H^{-1}(\\Omega)$ ([[def-h-minus-one-as-the-dual-of-h-one-zero]]), a **weak solution** of $Lu=F$ with zero boundary values is a class $u\\in H^1_0(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]]) with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H^1_0(\\Omega).$$ **Inhomogeneous problem.** Additionally assume the Axiom of Choice ([[def-axiom-of-choice]]) for the trace supplier, and let $n\\ge2$ and $\\Omega$ be a bounded $C^1$ domain ([[def-bounded-c-k-domain-and-boundary-charts]]), let $g\\in H^{1/2}(\\partial\\Omega):=W^{1/2,2}(\\partial\\Omega)$ in the boundary scale of [[def-fractional-sobolev-space-on-a-compact-c-one-boundary]] and let $T$ be the trace operator of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]]. A weak solution with boundary data $g$ is a class $u\\in H^1(\\Omega)$ with $Tu=g$ and $a(u,v)=F(v)$ for every $v\\in H^1_0(\\Omega)$. The defining identities are identities between functionals on the $H^1_0$ classes, so they are independent of the chosen almost-everywhere representatives of $u$, of the coefficients and of the data ([[lem-weak-derivative-is-independent-of-lp-representatives]], [[def-complex-lp-and-euclidean-test-function-conventions]]); the boundary condition is imposed through the trace of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]], never by pointwise evaluation. The Dirichlet condition is imposed by $u\\in H^1_0(\\Omega)$ in the homogeneous problem and by $Tu=g$ in the inhomogeneous problem; testing against $v\\in H^1_0$ expresses the weak equation and does not by itself impose boundary data; the integrals are the ones proved absolutely convergent in [[lem-elliptic-form-is-well-defined-and-bounded]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-global-h-two-dirichlet-regularity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subset\\mathbb R^n$ be a bounded $C^2$\ndomain, $n\\ge2$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $L,a$ be as in\n[[def-uniformly-elliptic-divergence-form-operator]] with ellipticity\nconstant $\\theta$, bounds $M_a,M_b,M_c$ and $a^{ij}\\in W^{1,\\infty}(\\Omega)$,\n$b^i,c\\in L^\\infty(\\Omega)$, and let $f\\in L^2(\\Omega)$. If\n$u\\in H^1_0(\\Omega)$ is a weak solution of $Lu=f$ with zero boundary values\n([[def-weak-dirichlet-solution-for-a-divergence-form-operator]]), then\n$u\\in H^2(\\Omega)$ and there is\n$C=C(n,\\Omega,\\theta,M_a,M_b,M_c,\\|Da^{ij}\\|_\\infty)$ with\n$$\\|u\\|_{H^2(\\Omega)}\\le C\\big(\\|f\\|_{L^2(\\Omega)}+\\|u\\|_{L^2(\\Omega)}\\big).$$\nThe $L^2$ norm of $u$ on the right cannot be deleted without a hypothesis\nexcluding the homogeneous kernel, as the companion counterexample shows; the\ntheorem is stated for zero Dirichlet data, and nonzero compatible boundary\ndata are handled by an $H^2$ lifting, with an $L^2$ residual forcing,\nbefore the theorem is applied.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "source_section": "Statement",
+          "quote": "On every measure space the pairing $\\langle f,g\\rangle=\\int f\\overline g$ on complex $L^2$ is representative-independent, linear in the first variable, conjugate-linear in the second, conjugate symmetric and positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$. Moreover,\n$$|\\langle f,g\\rangle|\\le\\|f\\|_2\\|g\\|_2.$$\nIf $g\\ne0$ as a class, equality holds iff $f=cg$ a.e. for some $c\\in\\mathbb C$. If $g=0$, equality holds for every $f$.\n\nFor each finite $m\\ge0$, the same conclusions hold on tuples $F=(f_j)_{j<m}$, with pairing $B(F,G)=\\sum_{j<m}\\langle f_j,g_j\\rangle$ and $\\|F\\|^2=\\sum_{j<m}\\|f_j\\|_2^2$. For $G\\ne0$, equality means $f_j=cg_j$ a.e. for every $j$, with one common scalar $c$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Test the weak equation with $v=z$ and take real parts. By [F3] and [A1], $\\|\\nabla z\\|_{L^2}^2=\\operatorname{Re}\\int_\\Omega g\\overline z\\,dx\\le\\|g\\|_{L^2}\\|z\\|_{L^2}\\le C_P\\|g\\|_{L^2}\\|\\nabla z\\|_{L^2}.$ If $\\|\\nabla z\\|_{L^2}=0$, [A1] gives $z=0$ in $L^2$; otherwise divide by $\\|\\nabla z\\|_{L^2}$. In either case $\\|\\nabla z\\|_{L^2}\\le C_P\\|g\\|_{L^2}$ and $\\|z\\|_{L^2}\\le C_P^2\\|g\\|_{L^2}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The operator $-\\Delta$ has principal matrix $a^{ij}=\\delta_{ij}$, ellipticity constant $1$, coefficients in $W^{1,\\infty}$, and zero lower order coefficients. Thus [F2] applies to the given weak solution and yields $\\|z\\|_{H^2}\\le C_{\\rm reg}(\\|g\\|_{L^2}+\\|z\\|_{L^2}).$ Insert the bound from step 1.1 to obtain the asserted estimate.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-domain/subspace assertion is part of this item's hypotheses or conclusion. (item cor-poisson-adjoint-h2-estimate-from-global-regularity: A global H² bound for the Poisson adjoint on a C² domain)"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: For g=0, the cited proof steps and the Poincaré assumption force z=0; the cited proof steps gives the zero H² bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No independent parameter-one boundary branch is asserted in this item. (item cor-poisson-adjoint-h2-estimate-from-global-regularity: A global H² bound for the Poisson adjoint on a C² domain)"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim excludes degenerate inputs or has no degenerating parameter; the exact domain is stated in the item. (item cor-poisson-adjoint-h2-estimate-from-global-regularity: A global H² bound for the Poisson adjoint on a C² domain)"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: The minimum allowed dimension n=2 is covered by the stated regularity supplier in the cited proof steps."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Countable Choice is an explicit hypothesis of the global H² supplier applied in the cited proof steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional forward direction. (item cor-poisson-adjoint-h2-estimate-from-global-regularity: A global H² bound for the Poisson adjoint on a C² domain)"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional reverse direction. (item cor-poisson-adjoint-h2-estimate-from-global-regularity: A global H² bound for the Poisson adjoint on a C² domain)"
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "The global H² regularity supplier explicitly assumes Countable Choice in step 2.1."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Steps 1.1–2.1: tested with z using the stated Poincare bound and L2 Cauchy–Schwarz, treating zero gradient separately. Identity principal matrix meets the exact global-H2 supplier on a bounded C2 domain, n>=2, under Countable Choice; retained L2 solution term gives C_reg(1+C_P^2). No Lipschitz extension or hidden Poincare branch is used."
+      }
+    },
+    "lem-two-cell-hat-and-quadratic-functions-lie-in-h10": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.\n\nEvery $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ belongs to\n$W^{k,p}(\\Omega;\\mathbb K)$. Indeed $\\varphi$ is bounded with compact support,\nhence lies in $L^p(\\Omega;\\mathbb K)$ for every exponent in range, and each of\nits classical partial derivatives is again smooth and compactly supported,\nhence lies in $L^p(\\Omega;\\mathbb K)$ and is the corresponding weak derivative\nby [[lem-classical-derivatives-are-weak-derivatives]].\n\nDefine the **zero-boundary Sobolev space**\n$$W_0^{k,p}(\\Omega;\\mathbb K):=\\overline{C_c^\\infty(\\Omega;\\mathbb K)},$$\nthe closure taken in the normed space\n$(W^{k,p}(\\Omega;\\mathbb K),\\|\\cdot\\|_{W^{k,p}(\\Omega)})$ of\n[[def-sobolev-space-wkp-and-its-norm]]. The norm is a genuine norm on classes\nby [[lem-sobolev-norm-is-well-defined-and-definite]], so this is the usual\nmetric closure of a subset of a normed space: $u\\in W_0^{k,p}(\\Omega;\\mathbb K)$\nif and only if for every $\\delta>0$ there is\n$\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with\n$\\|u-\\varphi\\|_{W^{k,p}(\\Omega)}<\\delta$. Write\n$H_0^k(\\Omega):=W_0^{k,2}(\\Omega;\\mathbb K)$ when the scalar field is fixed by\ncontext.\n\nThree warnings are part of the definition. First, this is a closure of\nalmost-everywhere classes, and all its equalities are equalities of Sobolev\nclasses. Second, no pointwise boundary values and no trace characterization\nare asserted: a description of $W_0^{k,p}$ by vanishing boundary data belongs\nto the later trace theory and is not used here. Third, the closure is defined\nfor every $1\\le p\\le\\infty$, but for $p=\\infty$ it is not claimed that every\ncompactly supported $W^{k,\\infty}(\\Omega)$ function lies in $W_0^{k,\\infty}(\\Omega)$;\nthe definition merely names the closure of the test functions.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-classical-derivatives-are-weak-derivatives",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open,\n$n\\ge1$, let $k\\in\\mathbb N_0$, and let $u:\\Omega\\to\\mathbb C$ have real\nand imaginary parts of class $C^k$. For each multi-index\n$\\alpha\\in\\mathbb N_0^n$ with $|\\alpha|\\le k$, the componentwise classical\nderivative $\\partial^\\alpha u$ is locally integrable and is the weak\nderivative $D^\\alpha u$. By the uniqueness lemma, it represents the unique\nlocally integrable weak-derivative class. For $\\alpha=0$, this says\n$D^0u=u$.\n\nIf $\\Omega=\\varnothing$, the assertion is vacuous: there is only the zero\nclass and every displayed test identity is zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-the-standard-smooth-step-function",
+          "source_section": "Definition",
+          "quote": "Let $\\beta$ be the standard flat function. The **standard smooth step function** is\n$$ \\sigma(t):=\\frac{\\beta(t)}{\\beta(t)+\\beta(1-t)}. $$\nBecause $\\beta$ is smooth and positive on $(0,\\infty)$, the denominator is positive on $(0,1)$, while $\\sigma(t)=0$ for $t\\le 0$ and $\\sigma(t)=1$ for $t\\ge 1$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-extreme-value-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be **nonempty** and compact\n([[def-open-cover-r]]). Then $\\sup f[K]$ and $\\inf f[K]$ exist and are\n**attained**: there are $p, q \\in K$ with\n\n$$f(q) \\;=\\; \\inf f[K] \\;\\le\\; f(x) \\;\\le\\; \\sup f[K] \\;=\\; f(p) \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, the set $f[K]$ has a maximum and a minimum\n([[def-max-min]]), namely $\\max f[K] = f(p)$ and $\\min f[K] = f(q)$.\n\n**Nonemptiness of $K$ is a hypothesis, not an oversight.** For $K = \\varnothing$\nthe set $f[K]$ is empty, and neither a supremum nor a maximum of the empty set\nexists in this library ([[def-complete-ordered-field]] supplies suprema of\nnonempty sets bounded above only).\n\n**This theorem is stated twice in this library, on purpose.** Its metric-space\ntwin is [[thm-extreme-value-metric]], proved from the cover machinery of metric\nspaces; the proof below is $\\mathbb{R}$-native, running through Heine-Borel for\n$\\mathbb{R}$ and the order-completeness of $\\mathbb{R}$, and it uses no cover\nargument beyond the one already spent in\n[[thm-continuous-image-of-a-compact-set-r]]. That the two statements are the\nsame statement in two vocabularies is proved in\n[[lem-real-and-metric-notions-agree]], later on this page.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "source_section": "Statement",
+          "quote": "On any measure space, if $p,p^{\\prime}\\in[1,\\infty]$ are conjugate, $f\\in L^p(\\mu;\\mathbb C)$ and $g\\in L^{p^{\\prime}}(\\mu;\\mathbb C)$, then\n$$\\int|fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_{p^{\\prime}},\\qquad \\left|\\int fg\\,d\\mu\\right|\\le\\|f\\|_p\\|g\\|_{p^{\\prime}}.$$\nFor every $1\\le p\\le\\infty$, complex vector operations and $\\|[f]\\|_p=N_p(f)$ are well-defined on the a.e. quotient and give a norm, with\n$$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p,\\qquad \\|\\overline f\\|_p=\\|f\\|_p,$$\n$$\\|\\operatorname{Re}f\\|_p,\\|\\operatorname{Im}f\\|_p\\le\\|f\\|_p\\le\\|\\operatorname{Re}f\\|_p+\\|\\operatorname{Im}f\\|_p.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple ([[def-nonnegative-simple-measurable-function]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Put $\\zeta(t)=1-2\\sigma(t)$. Formula [F4] gives $\\sigma(1-t)=1-\\sigma(t)$ on $[0,1]$, hence $\\zeta(1-t)=-\\zeta(t)$. Let $T(t)=1-t$ on $I$; it is a $C^1$ diffeomorphism with $|T'(t)|=1$. The continuous functions $\\zeta_+=\\max(\\zeta,0)$ and $\\zeta_- =\\max(-\\zeta,0)$ satisfy $0\\le\\zeta_\\pm\\le1$, and [F10] gives $\\int_I\\zeta_\\pm\\le\\int_I1_I=\\lambda_1(I)=1$, so both are integrable. Applying [F6] separately to these nonnegative functions gives $\\int_I\\zeta_+=\\int_I\\zeta_+(1-t)=\\int_I\\zeta_-$, where the last equality uses antisymmetry. By [F9], $\\int_I\\zeta=\\int_I\\zeta_+-\\int_I\\zeta_-=0$. For $0<\\varepsilon<1/6$, define $g_\\varepsilon(x)=2\\zeta((x-1/2+\\varepsilon)/(2\\varepsilon))$ and $q_\\varepsilon(x)=\\int_0^xg_\\varepsilon(t)\\,dt$. By [F4]–[F5], $g_\\varepsilon$ is smooth, equals $2$ for $x\\le1/2-\\varepsilon$ and $-2$ for $x\\ge1/2+\\varepsilon$. Applying [F6] separately to $\\zeta_+$ and $\\zeta_-$ under $x=1/2-\\varepsilon+2\\varepsilon t$, and subtracting by [F9], gives the transition integral $4\\varepsilon\\int_0^1\\zeta=0$; the two constant pieces cancel, so $\\int_0^1g_\\varepsilon=0$. For $h\\ne0$ with $x+h\\in[0,1]$, the difference quotient of $q_\\varepsilon$ is the average of $g_\\varepsilon$ between $x$ and $x+h$; its difference from $g_\\varepsilon(x)$ is bounded by $\\sup_{|t-x|\\le|h|}|g_\\varepsilon(t)-g_\\varepsilon(x)|$, which tends to zero by continuity. Thus $q_\\varepsilon'=g_\\varepsilon$ and $q_\\varepsilon$ is smooth. It vanishes at both endpoints and agrees with $\\phi$ outside $(1/2-\\varepsilon,1/2+\\varepsilon)$. On that interval, $|q_\\varepsilon'-\\phi'|\\le4$ almost everywhere, so $\\|q_\\varepsilon'-\\phi'\\|_2^2\\le32\\varepsilon$. Also $|q_\\varepsilon-\\phi|\\le8\\varepsilon$ there and the difference vanishes outside, so $\\|q_\\varepsilon-\\phi\\|_2^2\\le128\\varepsilon^3$.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "F10",
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "By [F3], each $q_\\varepsilon$ has weak derivative $g_\\varepsilon$. The convergence estimates in step 1.1 and [F8] allow passage to the limit in $\\int_I q_\\varepsilon\\psi'=-\\int_Ig_\\varepsilon\\psi$ for every $\\psi\\in C_c^\\infty(I)$, giving $\\int_I\\phi\\psi'=-\\int_I\\phi'\\psi$, where $\\phi'=2$ on the left half and $\\phi'=-2$ on the right half. Thus $\\phi\\in W^{1,2}(I)$. The polynomial $p$ is smooth with $p'=1/2-x$ and both $p,p'\\in L^2(I)$, so [F1] and [F3] give $p\\in W^{1,2}(I)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F8",
+            "A1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "Let $C_\\sigma=\\sup_{[0,1]}|\\sigma'|<\\infty$ by [F7], and define $\\eta_\\varepsilon(x)=\\sigma(x/\\varepsilon-1)\\sigma((1-x)/\\varepsilon-1)$. By [F4]–[F5], this smooth cutoff vanishes for $x\\le\\varepsilon$ and $x\\ge1-\\varepsilon$, equals $1$ on $[2\\varepsilon,1-2\\varepsilon]$, and $|\\eta_\\varepsilon'|\\le2C_\\sigma/\\varepsilon$. For the same $\\varepsilon$, $q_\\varepsilon=2x$ on $(0,2\\varepsilon)$ and $q_\\varepsilon=2(1-x)$ on $(1-2\\varepsilon,1)$. Thus $\\eta_\\varepsilon q_\\varepsilon\\in C_c^\\infty(I)$, $|q_\\varepsilon|\\le4\\varepsilon$ and $|q_\\varepsilon'|=2$ on $E_\\varepsilon=(0,2\\varepsilon)\\cup(1-2\\varepsilon,1)$. The function error has squared norm at most $64\\varepsilon^3$. For the derivative difference $(\\eta_\\varepsilon-1)q_\\varepsilon'+\\eta_\\varepsilon'q_\\varepsilon$, the first term has squared norm at most $16\\varepsilon$; the second has modulus at most $8C_\\sigma$ on a set of length $2\\varepsilon$, so its squared norm is at most $128C_\\sigma^2\\varepsilon$. Therefore $\\eta_\\varepsilon q_\\varepsilon-q_\\varepsilon\\to0$ in $W^{1,2}(I)$. Together with step 1.1 this gives $\\eta_\\varepsilon q_\\varepsilon\\to\\phi$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F7",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Using the cutoff $\\eta_\\varepsilon$ from step 2.2, its product with $p$ lies in $C_c^\\infty(I)$. Since $|p(x)|\\le\\min(x,1-x)/2$ and $|p'(x)|\\le1/2$, $\\|\\eta_\\varepsilon p-p\\|_2^2\\le4\\varepsilon^3$. The derivative difference is $(\\eta_\\varepsilon-1)p'+\\eta_\\varepsilon'p$; the first term has squared norm at most $\\varepsilon$, and the second is supported on two intervals of total length $2\\varepsilon$ with modulus at most $2C_\\sigma$, so its squared norm is at most $8C_\\sigma^2\\varepsilon$. Hence $\\eta_\\varepsilon p\\to p$ in $W^{1,2}(I)$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F7",
+            "A1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Take the explicit sequence $\\varepsilon_n=1/(10(n+1))$, which lies in $(0,1/6)$ and tends to zero. Steps 3.1 and 2.2 approximate $p$ and $\\phi$ by members of $C_c^\\infty(I)$ along this sequence. By the closure definition [F2], both classes belong to $W^{1,2}_0(I)$, as claimed.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "A1",
+            "step 3.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes the nonempty interval I=(0,1) and makes no empty-domain assertion."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Neither displayed function is zero; the item makes no separate zero-function claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no independent parameter whose value one gives a separate branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The explicit cutoff widths are positive and below 1/6; the approximants in steps 2.1 and 2.2 remain supported inside I as the width tends to zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: both functions vanish at x=0 and x=1, and the cutoffs vanish on neighborhoods of these endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Countable Choice is declared; the approximating sequence epsilon_n=1/(10n) is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way membership statement, not an if-and-only-if characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way membership statement, not an if-and-only-if characterization."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ],
+          "reason": "Countable Choice is carried by the Sobolev definitions, weak-derivative identification and Lebesgue change-of-variables supplier."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Steps 1.1–4.1: antisymmetry of 1-2 sigma makes the smoothed derivative have integral zero; resulting q_epsilon agrees with the hat off the middle interval. All displayed L2 errors tend to zero. Endpoint cutoffs have derivative support of length 2 epsilon and the stated pointwise bounds. Classical weak derivatives and Holder justify the test-identity limit. Explicit epsilon_n gives H10 closure membership without a trace characterization; Countable Choice is inherited from Sobolev and change-of-variables suppliers."
+      }
+    },
+    "thm-cea-quasi-optimality-for-conforming-galerkin-approximations": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).\n\n**The completion convention is the Cauchy-sequence one.**\n[[def-banach-space]] defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness — the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-dimensional-subspaces-are-closed",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and let\n$W\\subseteq V$ be a normed subspace over that same field: use [[def-normed-subspace]] for $\\mathbb R$ and [[def-complex-normed-subspace]] for $\\mathbb C$. If $W$ admits an ordered basis of finite\nlength, including length zero, then $W$ is closed in $V$. This holds in ZF,\nwithout a choice axiom; the ambient space need not be complete.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lax-milgram",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a real or complex Hilbert space, let $a$ be a bounded coercive sesquilinear form on $H$ with constants $M,\\alpha$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F:H\\to\\mathbb K$ be a bounded conjugate-linear functional with norm $\\|F\\|=\\sup_{\\|v\\|\\le1}|F(v)|$. Then there is a unique $u\\in H$ with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H,$$ and it satisfies $\\alpha\\|u\\|\\le\\|F\\|$, that is $\\|u\\|\\le\\|F\\|/\\alpha$. The real bilinear case is the same statement with $a$ symmetric or not, $F$ a bounded linear functional, and the conjugation read as the identity.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$V_h\\subseteq V$ be a subspace, let $a$ be linear in its first argument and\nconjugate-linear in its second, and let $F:V\\to\\mathbb K$ be conjugate-linear.\nIf $u\\in V$ and $u_h\\in V_h$ satisfy\n$$a(u,v)=F(v)\\quad(v\\in V),\\qquad a(u_h,v_h)=F(v_h)\\quad(v_h\\in V_h),$$\nthen\n$$a(u-u_h,v_h)=0\\qquad\\text{for every }v_h\\in V_h.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Apply [F4] on $V$; its hypotheses are exactly the boundedness, coercivity, Hilbert, and datum assumptions in **Given**. This gives a unique $u\\in V$ with $a(u,v)=F(v)$ for all $v\\in V$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Fix a finite ordered basis of $V_h$. By [F3], $V_h$ is closed in $V$. A Cauchy sequence in $V_h$ is Cauchy in $V$, so [F2] gives a limit in $V$; the closedness puts the limit in $V_h$. The restricted inner product is complete, so $V_h$ is Hilbert, also when $V_h=\\{0\\}$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The restrictions of $a$ and $F$ to $V_h$ retain the same bounds $M$ and $\\alpha$, and $F|_{V_h}$ is bounded. Apply [F4] on the Hilbert space from step 1.2. This gives a unique $u_h\\in V_h$ satisfying the discrete equations.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "By [F5], with $e:=u-u_h$, we have $a(e,w_h)=0$ for every $w_h\\in V_h$.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Fix any $v_h\\in V_h$. Since $u-v_h=e+(u_h-v_h)$ and $u_h-v_h\\in V_h$, [F5] gives $a(e,e)=a(e,u-v_h)-a(e,u_h-v_h)=a(e,u-v_h).$ Coercivity and boundedness therefore give $\\alpha\\|e\\|_V^2\\le\\operatorname{Re}a(e,e)\\le|a(e,u-v_h)|\\le M\\|e\\|_V\\|u-v_h\\|_V.$",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "If $e=0$, the claimed estimate is immediate. Otherwise divide step 4.1 by $\\alpha\\|e\\|_V$ and then take the infimum over all $v_h\\in V_h$. This proves Céa's estimate.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof: V_h={0} is explicitly included in the cited proof steps; the cited proof steps gives the discrete solution u_h=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: the cited proof steps handles e=0 before division."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No independent parameter-one boundary branch is asserted in this item. (item thm-cea-quasi-optimality-for-conforming-galerkin-approximations: Céa quasi-optimality for coercive conforming Galerkin problems)"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: The zero-dimensional V_h is included in the cited proof steps; α remains positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no varying interval or limiting parameter with an additional endpoint case in this item. (item thm-cea-quasi-optimality-for-conforming-galerkin-approximations: Céa quasi-optimality for coercive conforming Galerkin problems)"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Countable Choice is used for the two Lax–Milgram applications in the cited proof steps and 1.3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional forward direction. (item thm-cea-quasi-optimality-for-conforming-galerkin-approximations: Céa quasi-optimality for coercive conforming Galerkin problems)"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional reverse direction. (item thm-cea-quasi-optimality-for-conforming-galerkin-approximations: Céa quasi-optimality for coercive conforming Galerkin problems)"
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "reason": "Countable Choice is required by continuous and restricted discrete Lax–Milgram."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Steps 1.1–5.1: local Lax–Milgram supplies continuous and restricted solutions; finite-dimensional closedness plus ambient completeness proves the subspace Hilbert, including the zero subspace. Subtracting the same variational equations yields orthogonality. Coercivity applied to e and boundedness against u-v_h give M/alpha after handling e=0 before division; taking an infimum needs no minimizer. Real/complex conventions and Countable Choice match the suppliers."
+      }
+    },
+    "cor-symmetric-galerkin-best-approximation-in-energy-norm": {
+      "risk": "medium",
+      "kind": "corollary",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space and let\n$a:V\\times V\\to\\mathbb K$ be linear in its first argument, conjugate-linear\nin its second, bounded by $M$, and coercive with constant $\\alpha>0$:\n$$|a(v,w)|\\le M\\|v\\|_V\\|w\\|_V,\\qquad \\operatorname{Re}a(v,v)\\ge\\alpha\\|v\\|_V^2.$$\nLet $F:V\\to\\mathbb K$ be bounded and conjugate-linear, and let $V_h\\subseteq V$\nbe finite-dimensional. Then there are unique $u\\in V$ and $u_h\\in V_h$ with\n$$a(u,v)=F(v)\\quad(v\\in V).$$\n$$a(u_h,v_h)=F(v_h)\\quad(v_h\\in V_h).$$\nThe solutions satisfy\n$$\\|u-u_h\\|_V\\le\\frac M\\alpha\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.$$\nThe real bilinear case uses linear functionals and reads $\\operatorname{Re}$ as\nthe identity.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$V_h\\subseteq V$ be a subspace, let $a$ be linear in its first argument and\nconjugate-linear in its second, and let $F:V\\to\\mathbb K$ be conjugate-linear.\nIf $u\\in V$ and $u_h\\in V_h$ satisfy\n$$a(u,v)=F(v)\\quad(v\\in V),\\qquad a(u_h,v_h)=F(v_h)\\quad(v_h\\in V_h),$$\nthen\n$$a(u-u_h,v_h)=0\\qquad\\text{for every }v_h\\in V_h.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Hermitian symmetry makes $a(v,v)$ real, and coercivity makes it positive for every nonzero $v$. Thus $a$ is an inner product and $\\|\\cdot\\|_a$ is its induced norm.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Put $e=u-u_h$ and, for arbitrary $v_h\\in V_h$, put $\\eta_h=u_h-v_h$. By [F2], $a(e,\\eta_h)=0$; Hermitian symmetry gives $a(\\eta_h,e)=\\overline{a(e,\\eta_h)}=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Since $u-v_h=e+\\eta_h$, sesquilinearity and step 1.2 give $\\|u-v_h\\|_a^2=a(e+\\eta_h,e+\\eta_h) =\\|e\\|_a^2+\\|\\eta_h\\|_a^2\\ge\\|e\\|_a^2.$ Therefore $\\|u-u_h\\|_a\\le\\|u-v_h\\|_a$ for every $v_h\\in V_h$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Taking the infimum in step 2.1 gives one inequality. The choice $v_h=u_h$ gives the reverse inequality, so equality holds.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof: For V_h={0}, the choice v_h=u_h=0 in the cited proof steps gives the infimum equality."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: If e=0, both sides of the equality are zero by the cited proof steps."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No independent parameter-one boundary branch is asserted in this item. (item cor-symmetric-galerkin-best-approximation-in-energy-norm: Hermitian Galerkin solutions are best in the energy norm)"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: Coercivity makes a(v,v)>0 for every nonzero v in the cited proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no varying interval or limiting parameter with an additional endpoint case in this item. (item cor-symmetric-galerkin-best-approximation-in-energy-norm: Hermitian Galerkin solutions are best in the energy norm)"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Countable Choice is inherited through the Céa existence supplier cited in F1 and used in the cited proof steps; no new arbitrary family is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional forward direction. (item cor-symmetric-galerkin-best-approximation-in-energy-norm: Hermitian Galerkin solutions are best in the energy norm)"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional reverse direction. (item cor-symmetric-galerkin-best-approximation-in-energy-norm: Hermitian Galerkin solutions are best in the energy norm)"
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "3.1"
+          ],
+          "reason": "Countable Choice is inherited through the Céa existence supplier cited in F1."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Steps 1.1–3.1: Hermitian positive definite sesquilinearity gives the energy inner product; coercivity guarantees definiteness. Orthogonality in the second slot and its conjugate eliminate both cross terms. Pythagoras gives the lower bound for every candidate and v_h=u_h attains it, including e=0 and V_h={0}. Cea supplies existence under Countable Choice; no projection theorem or arbitrary choice is added."
+      }
+    },
+    "thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space and let\n$a:V\\times V\\to\\mathbb K$ be linear in its first argument, conjugate-linear\nin its second, bounded by $M$, and coercive with constant $\\alpha>0$:\n$$|a(v,w)|\\le M\\|v\\|_V\\|w\\|_V,\\qquad \\operatorname{Re}a(v,v)\\ge\\alpha\\|v\\|_V^2.$$\nLet $F:V\\to\\mathbb K$ be bounded and conjugate-linear, and let $V_h\\subseteq V$\nbe finite-dimensional. Then there are unique $u\\in V$ and $u_h\\in V_h$ with\n$$a(u,v)=F(v)\\quad(v\\in V).$$\n$$a(u_h,v_h)=F(v_h)\\quad(v_h\\in V_h).$$\nThe solutions satisfy\n$$\\|u-u_h\\|_V\\le\\frac M\\alpha\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.$$\nThe real bilinear case uses linear functionals and reads $\\operatorname{Re}$ as\nthe identity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-adjoint-problem-for-bounded-coercive-variational-forms",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space and let\n$a:V\\times V\\to\\mathbb K$ be linear in the first slot, conjugate-linear in\nthe second, bounded by $M$, and coercive with constant $\\alpha>0$:\n$$|a(u,v)|\\le M\\|u\\|_V\\|v\\|_V.$$\n$$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|_V^2.$$\nFor every bounded linear functional $G:V\\to\\mathbb K$, there is a unique\n$z\\in V$ such that\n$$a(v,z)=G(v)\\qquad(v\\in V),$$\nand $\\alpha\\|z\\|_V\\le\\|G\\|_{V^*}$. In the real case conjugation is the\nidentity and both forms and functionals are linear over $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$V_h\\subseteq V$ be a subspace, let $a$ be linear in its first argument and\nconjugate-linear in its second, and let $F:V\\to\\mathbb K$ be conjugate-linear.\nIf $u\\in V$ and $u_h\\in V_h$ satisfy\n$$a(u,v)=F(v)\\quad(v\\in V),\\qquad a(u_h,v_h)=F(v_h)\\quad(v_h\\in V_h),$$\nthen\n$$a(u-u_h,v_h)=0\\qquad\\text{for every }v_h\\in V_h.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "source_section": "Statement",
+          "quote": "On every measure space the pairing $\\langle f,g\\rangle=\\int f\\overline g$ on complex $L^2$ is representative-independent, linear in the first variable, conjugate-linear in the second, conjugate symmetric and positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$. Moreover,\n$$|\\langle f,g\\rangle|\\le\\|f\\|_2\\|g\\|_2.$$\nIf $g\\ne0$ as a class, equality holds iff $f=cg$ a.e. for some $c\\in\\mathbb C$. If $g=0$, equality holds for every $f$.\n\nFor each finite $m\\ge0$, the same conclusions hold on tuples $F=(f_j)_{j<m}$, with pairing $B(F,G)=\\sum_{j<m}\\langle f_j,g_j\\rangle$ and $\\|F\\|^2=\\sum_{j<m}\\|f_j\\|_2^2$. For $G\\ne0$, equality means $f_j=cg_j$ a.e. for every $j$, with one common scalar $c$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Define $G_e(v):=(Jv,e)_H$. By [F4] and the assumed continuity of $J$, $|G_e(v)|\\le C_E\\|v\\|_V\\|e\\|_H,$ so $G_e$ is a bounded linear functional. Fact [F2] gives the unique $z_e$ with $a(v,z_e)=G_e(v)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Set $v=u-u_h$ in the adjoint equation. Then $\\|e\\|_H^2=(J(u-u_h),e)_H=a(u-u_h,z_e).$ For any $w_h\\in V_h$, [F3] gives $a(u-u_h,w_h)=0$, hence $a(u-u_h,z_e)=a(u-u_h,z_e-w_h)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Since the scalar in step 2.1 equals the nonnegative real number $\\|e\\|_H^2$, boundedness of $a$ gives $\\|e\\|_H^2=|a(u-u_h,z_e-w_h)|\\le M\\|u-u_h\\|_V\\|z_e-w_h\\|_V$ for every $w_h\\in V_h$. Taking the infimum and using the approximation and regularity assumptions yields $\\|e\\|_H^2\\le M C_I C_R h^s\\|u-u_h\\|_V\\|e\\|_H.$",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "If $\\|e\\|_H=0$, the conclusion is immediate. Otherwise divide step 3.1 by $\\|e\\|_H$ to obtain the asserted Aubin–Nitsche estimate.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-domain/subspace assertion is part of this item's hypotheses or conclusion. (item thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity: Aubin–Nitsche L² error estimate from adjoint approximation)"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: the cited proof steps handles ||e||_H=0 before division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: The endpoint s=1 is included in (0,1] and uses the same estimates in the cited proof steps."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim excludes degenerate inputs or has no degenerating parameter; the exact domain is stated in the item. (item thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity: Aubin–Nitsche L² error estimate from adjoint approximation)"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no varying interval or limiting parameter with an additional endpoint case in this item. (item thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity: Aubin–Nitsche L² error estimate from adjoint approximation)"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Countable Choice is used through adjoint Lax–Milgram in the cited proof steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional forward direction. (item thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity: Aubin–Nitsche L² error estimate from adjoint approximation)"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional reverse direction. (item thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity: Aubin–Nitsche L² error estimate from adjoint approximation)"
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "Countable Choice is used by the adjoint well-posedness supplier."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Steps 1.1–4.1: G_e(v)=(Jv,e) is linear and bounded by C_E||v||||e|| under the first-slot convention. The reviewed adjoint theorem applies. Testing with u-u_h yields ||e||^2 and Galerkin orthogonality removes any w_h. Taking an infimum and the two explicit assumptions give M C_I C_R h^s; divide only when ||e||>0. Fractional approximation and regularity are assumptions, with no automatic H2 claim on Lipschitz domains."
+      }
+    },
+    "cor-shape-regular-affine-fe-primal-energy-approximation": {
+      "risk": "high",
+      "kind": "corollary",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reference-finite-element-and-unisolvent-dofs",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $\\widehat K\\subset\\mathbb R^d$ be a nonempty bounded open\nreference cell, let $q\\ge1$ be an integer, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. A **reference finite element** is a\ntriple $(\\widehat K,\\widehat P,\\widehat\\Sigma)$ where $\\widehat P$ is an\n$N$-dimensional subspace of $[C(\\overline{\\widehat K};\\mathbb K)]^q$ for\n$N\\in\\mathbb N_0$ and\n$\\widehat\\Sigma=(\\widehat\\sigma_1,\\ldots,\\widehat\\sigma_N)$ is a list of\nlinear functionals on $\\widehat P$ for which\n$$J_{\\widehat\\Sigma}:\\widehat P\\to\\mathbb K^N,\\qquad J_{\\widehat\\Sigma}(p):=(\\widehat\\sigma_1(p),\\ldots,\\widehat\\sigma_N(p)),$$\nis bijective. The functionals are the **degrees of freedom** and the triple\nis **unisolvent**. Its **shape functions** are the unique dual basis\n$\\widehat\\phi_1,\\ldots,\\widehat\\phi_N\\in\\widehat P$ satisfying\n$\\widehat\\sigma_i(\\widehat\\phi_j)=\\delta_{ij}$.\n\nIf $X$ is a normed vector space of functions on $\\widehat K$ containing\n$\\widehat P$ and each $\\widehat\\sigma_i$ has a well-defined bounded linear\nextension to $X$, the associated **reference interpolation operator** is\n$$\\widehat I:X\\to\\widehat P,\\qquad \\widehat I v:=\\sum_{i=1}^N\\widehat\\sigma_i(v)\\widehat\\phi_i.$$\nThe definition of a reference finite element does not assert that any\nparticular list of functionals is unisolvent or bounded on a given Sobolev\nspace; those are separate proof obligations. For $N=0$, $\\widehat P=\\{0\\}$,\n$\\mathbb K^0=\\{0\\}$, the empty list gives the unique bijection between these\nzero spaces, and the shape-function list is empty. The corresponding\ninterpolation formula is the empty sum, hence the zero map into $\\{0\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-unisolvent-dofs-define-reference-interpolant",
+          "source_section": "Statement",
+          "quote": "Let $(\\widehat K,\\widehat P,\\widehat\\Sigma)$ be a reference finite element\nwith $N=\\dim\\widehat P$, dual shape functions $\\widehat\\phi_i$, and bounded\nextensions of its degrees of freedom to a normed function space $X$ containing\n$\\widehat P$. Then the operator\n$$\\widehat I v:=\\sum_{i=1}^N\\widehat\\sigma_i(v)\\widehat\\phi_i$$\nis the unique linear map $X\\to\\widehat P$ satisfying\n$\\widehat\\sigma_i(\\widehat I v)=\\widehat\\sigma_i(v)$ for every $i$, and\n$\\widehat I p=p$ for every $p\\in\\widehat P$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bramble-hilbert-on-reference-simplex",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $1\\le p<\\infty$, integer $r\\ge1$,\ninteger $s\\ge0$, and real-valued $v\\in W^{\\max(r,s),p}(\\widehat S_d)$.\nThere is a polynomial $q\\in\\mathbb P_{r-1}(\\widehat S_d)$, chosen by\nmatching all means $\\int_{\\widehat S_d}D^\\alpha q=\n\\int_{\\widehat S_d}D^\\alpha v$ for $|\\alpha|\\le r-1$, such that:\n\n- if $0\\le s\\le r$, then\n  $\\|v-q\\|_{W^{s,p}(\\widehat S_d)}\\le C|v|_{W^{r,p}(\\widehat S_d)}$;\n- if $s>r$, then\n  $\\|v-q\\|_{W^{s,p}(\\widehat S_d)}\\le\n  C\\sum_{j=r}^{s}|v|_{W^{j,p}(\\widehat S_d)}$.\n\nThe second clause assumes $v\\in W^{s,p}$; constants depend only on\n$d,p,r,s$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-affine-pullback-weak-derivatives-and-scaling",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $F(\\widehat x)=A\\widehat x+b$ be an affine bijection from a bounded open\nset $\\widehat K\\subset\\mathbb R^d$ to $K$, where $A$ is invertible, and let\n$1\\le p\\le\\infty$. For every integer $r\\ge0$ and scalar\n$v\\in W^{r,p}(K)$, the pullback $\\widehat v:=v\\circ F$ belongs to\n$W^{r,p}(\\widehat K)$. For $r\\ge1$ its first weak derivatives satisfy\n$$D_{\\widehat x_j}\\widehat v=\\sum_{i=1}^d A_{ij}(D_{x_i}v)\\circ F,$$\nand higher derivatives are obtained by applying this constant-matrix rule\nrepeatedly. In particular, for each $0\\le m\\le r$,\n$$|\\widehat v|_{W^{m,p}(\\widehat K)}\\le C(d,m)\\|A\\|^m|\\det A|^{-1/p}|v|_{W^{m,p}(K)},$$\nwhere $|\\det A|^{-1/p}:=1$ for $p=\\infty$. The reverse estimate holds\nwith $A^{-1}$ and $|\\det A|^{1/p}$ in place of $A$ and\n$|\\det A|^{-1/p}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-shape-regular-affine-simplex-scaling",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $F_K(\\widehat x)=b_K+A_K\\widehat x$ map the fixed reference simplex\n$\\widehat S_d$ bijectively to a cell $K$ of a shape-regular family, and let\n$h_K$ be its diameter and $\\rho_K$ its inradius. There are constants\n$c,C>0$, depending only on $d$, the reference simplex, and the shape\nregularity bound, such that\n$$c h_K\\le s_{\\min}(A_K)\\le \\|A_K\\|\\le C h_K, \\qquad c h_K^d\\le\\det A_K\\le C h_K^d.$$\nFor each facet $F$, its affine surface Jacobian is comparable to\n$h_K^{d-1}$, and its altitude from the opposite vertex is comparable to\n$h_K$. Thus Sobolev scaling constants can be expressed using $h_K$ alone,\nwith constants uniform over the family.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-lebesgue-outer-measure",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$. **Lebesgue outer measure** $\\lambda_n^*$ on $\\mathbb{R}^n$ is the\nouter set function induced by the premeasure $\\mu_0$ of\n[[thm-box-volume-is-a-premeasure-on-the-elementary-algebra]] on the algebra\n$\\mathcal{E}_n$ of elementary sets ([[def-elementary-set-in-rn]]), in the sense\nof [[def-outer-measure-induced-by-a-premeasure]]:",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it ([[def-measure]]);\n2. the measure space $(\\mathbb{R}^n, \\mathcal{L}(\\mathbb{R}^n), \\lambda_n)$ is\n   complete ([[def-complete-measure-space]]), and every $S \\subseteq \\mathbb{R}^n$\n   with $\\lambda_n^*(S) = 0$ is Lebesgue measurable with $\\lambda_n(S) = 0$;\n3. every elementary set is Lebesgue measurable and\n   $\\lambda_n(A) = \\mu_0(A)$ for every $A \\in \\mathcal{E}_n$; in particular\n   $\\lambda_n(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\n   $\\lambda_n(\\varnothing) = 0$ and $\\lambda_n(\\mathbb{R}^n) = +\\infty$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "On the reference polynomial space, bounded degrees of freedom and finite W1,2 shape-function norms give a bounded interpolant; polynomial reproduction then yields the error identity after subtracting q in P_r.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Choose the polynomial $q\\in\\mathbb P_r$ supplied by [F2]. Since $m\\le1\\le r+1$, [F2] bounds both terms in step 1.1 by $C|w|_{W^{r+1,2}}$. Hence the reference-cell interpolation error obeys $\\|w-\\widehat Iw\\|_{W^{m,2}}\\le C|w|_{W^{r+1,2}}$ for $m=0,1$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "For a cell $K$ with affine matrix $A_K$, apply [F3] to transform the reference error and the order-$(r+1)$ derivative seminorm back to $K$. The determinant factors cancel; the remaining factor is bounded by $C\\|A_K^{-1}\\|^m\\|A_K\\|^{r+1}\\le C h_K^{r+1-m}$ by [F4]. Therefore $\\|u-I_Ku\\|_{L^2(K)}\\le C h_K^{r+1}|u|_{W^{r+1,2}(K)},\\qquad |u-I_Ku|_{W^{1,2}(K)}\\le C h_K^r|u|_{W^{r+1,2}(K)}.$",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "A grid cover of each affine facet by O(N^(d-1)) boxes of volume O(N^(-d)) shows its outer measure is zero; completeness makes the finite facet union null. Summing over the disjoint cell interiors then gives the global estimate.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement estimates each selected mesh with h=max_K h_K, so that instance has at least one cell. If the indexed mesh family is empty, there is no instance to estimate; Proof step 4.1 sums over the actual selected cells, not over all family indices."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: For u=0, linear interpolation gives zero and the bound in the cited proof steps is exact."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: The minimum degree r=1 satisfies 0≤m≤1≤r+1 in the cited proof steps."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: Singular affine cells are excluded; the inverse-matrix bound in the cited proof steps requires nondegenerate cells."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: The allowed endpoint h=1 satisfies h_K^(r+1)≤h^r in the cited proof steps."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Countable Choice is stated and assumed by the reference Bramble–Hilbert/affine suppliers in the cited proof steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional forward direction. (item cor-shape-regular-affine-fe-primal-energy-approximation: Primal H¹ approximation on shape-regular affine finite-element meshes)"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional reverse direction. (item cor-shape-regular-affine-fe-primal-energy-approximation: Primal H¹ approximation on shape-regular affine finite-element meshes)"
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ],
+          "reason": "Countable Choice is assumed by the Bramble–Hilbert and affine Sobolev suppliers."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Steps 1.1–4.1: polynomial local shape functions have finite W12 norms; finitely many bounded DOFs give reference interpolant continuity. Bramble–Hilbert is used with its order parameter r+1 and s=0,1,r+1: its unique moment polynomial is the same for each s, so it controls the full W^{r+1,2} term required by step 1.1. The F2 paraphrase lists only lower orders but the exact cited Statement includes the needed endpoint; no missing prerequisite. Affine seminorm scaling in both directions cancels determinants and gives h_K^{r+1-m}; shape regularity supplies uniform constants. Facet graph covers have O(N^{d-1}) boxes of O(N^{-d}) volume, hence outer measure zero under the exact measure suppliers. Matching mesh interiors partition Omega up to those facets, and conformity is assumed, so local squares sum to the global H1 norm. h<=1 handles the L2 contribution. No fractional approximation or curved-cell assertion follows. Reader clarification preserves the already stated polynomial-space contract."
+      }
+    },
+    "cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation": {
+      "risk": "high",
+      "kind": "corollary",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-shape-regular-affine-fe-primal-energy-approximation",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge2$, let $\\Omega\\subset\\mathbb R^d$ be a\nbounded polyhedral open set with a matching shape-regular affine simplicial\nmesh family $\\{\\mathcal T_h\\}$, and set $h:=\\max_{K\\in\\mathcal T_h}h_K\\le1$.\nFix an integer $r\\ge1$. On the reference simplex let\n$(\\widehat S_d,\\widehat P,\\widehat\\Sigma)$ be an unisolvent real scalar\nfinite element whose finite-dimensional local space $\\widehat P$ consists of\npolynomials and contains $\\mathbb P_r$. Assume each\ndegree of freedom has a bounded linear extension to\n$W^{r+1,2}(\\widehat S_d)$, and let $\\widehat I$ be its interpolant. Suppose\nthere is a global map $I_h$ whose restriction to each cell is the affine\npullback of $\\widehat I$, and that $I_hu\\in V_h$ for the conforming discrete\nspace $V_h\\subset H^1_0(\\Omega)$ whenever\n$u\\in W^{r+1,2}(\\Omega)\\cap H^1_0(\\Omega)$, where $H^1_0(\\Omega)$ is the\nclosure of $C_c^\\infty(\\Omega)$ in $W^{1,2}(\\Omega)$\n([[def-wkp-zero-as-a-sobolev-closure]]). Then a constant $C$ independent of\n$h$ and $u$ satisfies\n$$\\|u-I_hu\\|_{H^1(\\Omega)}\\le C h^r|u|_{W^{r+1,2}(\\Omega)}.$$\nThe global conformity and zero-boundary mapping property of $I_h$ are explicit\nhypotheses; this estimate does not assert them for arbitrary degrees of\nfreedom.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space and let\n$a:V\\times V\\to\\mathbb K$ be linear in its first argument, conjugate-linear\nin its second, bounded by $M$, and coercive with constant $\\alpha>0$:\n$$|a(v,w)|\\le M\\|v\\|_V\\|w\\|_V,\\qquad \\operatorname{Re}a(v,v)\\ge\\alpha\\|v\\|_V^2.$$\nLet $F:V\\to\\mathbb K$ be bounded and conjugate-linear, and let $V_h\\subseteq V$\nbe finite-dimensional. Then there are unique $u\\in V$ and $u_h\\in V_h$ with\n$$a(u,v)=F(v)\\quad(v\\in V).$$\n$$a(u_h,v_h)=F(v_h)\\quad(v_h\\in V_h).$$\nThe solutions satisfy\n$$\\|u-u_h\\|_V\\le\\frac M\\alpha\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.$$\nThe real bilinear case uses linear functionals and reads $\\operatorname{Re}$ as\nthe identity.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the conforming Galerkin setting of\n[[thm-cea-quasi-optimality-for-conforming-galerkin-approximations]]. Let\n$H=L^2(\\Omega;\\mathbb K)$ with inner product linear in the first slot, and\nlet $J:V\\to H$ be a continuous linear inclusion with\n$\\|Jv\\|_H\\le C_E\\|v\\|_V$. Put $e:=J(u-u_h)$. The adjoint solution $z_e$ is\nthe unique element of $V$ satisfying\n$$a(v,z_e)=(Jv,e)_H\\qquad(v\\in V);$$\nit exists by [[thm-adjoint-problem-for-bounded-coercive-variational-forms]].\nLet $s\\in(0,1]$, and let $R_s\\subseteq V$ be a specified normed space of\nadjoint-regular functions. Assume constants $C_R,C_I$ independent of $h$ and\nthe error satisfy\n$$\\|z_e\\|_{R_s}\\le C_R\\|e\\|_H,\\qquad \\inf_{w_h\\in V_h}\\|z_e-w_h\\|_V\\le C_Ih^s\\|z_e\\|_{R_s}.$$\nThen\n$$\\|u-u_h\\|_{L^2(\\Omega)} \\le M C_I C_R h^s\\|u-u_h\\|_V.$$\nThe symbol $R_s$ means exactly the chosen regularity norm space in the two\ndisplayed assumptions; no fractional Sobolev interpolation estimate is\nasserted unless it verifies the second inequality. The integer endpoint may\nbe instantiated with $R_1=H^2(\\Omega)=W^{2,2}(\\Omega)$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Since $I_hu\\in V_h$ by the finite-element approximation hypotheses, $\\inf_{v_h\\in V_h}\\|u-v_h\\|_{H^1}\\le\\|u-I_hu\\|_{H^1}\\le C_{\\rm FE}h^r|u|_{W^{r+1,2}}$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Apply the Aubin–Nitsche estimate [F3] with $V=H^1_0(\\Omega)$ in its $H^1$ norm, $C_I=C_D$, and the two dual bounds [A1]. This gives $\\|u-u_h\\|_{L^2}\\le M C_DC_Rh^s\\|u-u_h\\|_{H^1}$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Apply [F2] to the best-approximation bound in step 1.1. This gives $\\|u-u_h\\|_{H^1}\\le \\frac M\\alpha C_{\\rm FE}h^r|u|_{W^{r+1,2}}.$",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Substitute the $H^1$ bound from step 2.1 into step 1.2. This gives $\\|u-u_h\\|_{L^2}\\le(M^2/\\alpha)C_{\\rm FE}C_DC_Rh^{r+s}|u|_{W^{r+1,2}}$, including zero error without division. Setting $s=1$ gives $h^{r+1}$ under the stated full adjoint hypotheses.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-domain/subspace assertion is part of this item's hypotheses or conclusion. (item cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation: The h^(r+s) L² rate under primal and dual approximation)"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof steps 1.2 and 3.1 combine norm inequalities without division, including zero L2 error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: The endpoint s=1 is included, giving h^(r+1) in the cited proof steps under both dual bounds."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim excludes degenerate inputs or has no degenerating parameter; the exact domain is stated in the item. (item cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation: The h^(r+s) L² rate under primal and dual approximation)"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no varying interval or limiting parameter with an additional endpoint case in this item. (item cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation: The h^(r+s) L² rate under primal and dual approximation)"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Countable Choice is inherited through the Céa and adjoint suppliers used in the cited proof steps and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional forward direction. (item cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation: The h^(r+s) L² rate under primal and dual approximation)"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional reverse direction. (item cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation: The h^(r+s) L² rate under primal and dual approximation)"
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1",
+            "1.2"
+          ],
+          "reason": "Countable Choice is inherited through the Céa and adjoint suppliers."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Steps 1.1–3.1: the real scalar affine FE hypotheses include the explicit polynomial space, bounded Sobolev DOFs, global conformity and zero-boundary mapping. The H1 norm dominates L2, giving J continuous. I_hu is an admissible comparison in finite-dimensional V_h; Cea gives (M/alpha) C_FE h^r, while the actual two dual bounds give M C_D C_R h^s by Aubin–Nitsche. Their product is exactly (M^2/alpha) C_FE C_D C_R h^{r+s}. Zero error needs no division. s=1 is conditional on both dual bounds and uses H2 intersect H10 with the H2 norm, not an arbitrary Lipschitz regularity assertion."
+      }
+    },
+    "ex-nonsymmetric-coercive-form-attains-cea-factor": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space and let\n$a:V\\times V\\to\\mathbb K$ be linear in its first argument, conjugate-linear\nin its second, bounded by $M$, and coercive with constant $\\alpha>0$:\n$$|a(v,w)|\\le M\\|v\\|_V\\|w\\|_V,\\qquad \\operatorname{Re}a(v,v)\\ge\\alpha\\|v\\|_V^2.$$\nLet $F:V\\to\\mathbb K$ be bounded and conjugate-linear, and let $V_h\\subseteq V$\nbe finite-dimensional. Then there are unique $u\\in V$ and $u_h\\in V_h$ with\n$$a(u,v)=F(v)\\quad(v\\in V).$$\n$$a(u_h,v_h)=F(v_h)\\quad(v_h\\in V_h).$$\nThe solutions satisfy\n$$\\|u-u_h\\|_V\\le\\frac M\\alpha\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.$$\nThe real bilinear case uses linear functionals and reads $\\operatorname{Re}$ as\nthe identity.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For $x=(x_1,x_2)$, $Ax=(x_1-x_2,x_1+x_2)$, so $\\|Ax\\|_2^2=2\\|x\\|_2^2$ and $|a(x,y)|\\le\\sqrt2\\|x\\|_2\\|y\\|_2$. Also $a(x,x)=x_1^2+x_2^2$, so the coercivity constant is $\\alpha=1$. Finally, $a(e_1,e_2)=1$ and $a(e_2,e_1)=-1$, so the form is not symmetric.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Since $u=e_2$ and $F(v)=a(e_2,v)$, the continuous variational equation holds for every $v\\in\\mathbb R^2$. Write $u_h=ce_1$. Testing the discrete equation with $e_1$ gives $c\\,a(e_1,e_1)=a(e_2,e_1)$, hence $c=-1$ because $a(e_1,e_1)=1$ and $a(e_2,e_1)=-1$. Thus $u_h=-e_1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "For $v_h=te_1$, $\\|u-v_h\\|_2^2=\\|e_2-te_1\\|_2^2=1+t^2$, whose infimum is $1$ at $t=0$. Meanwhile $u-u_h=e_1+e_2$, so $\\|u-u_h\\|_2=\\sqrt2$. Therefore the ratio is $\\sqrt2=M/\\alpha$, and the constant in [F1] cannot be decreased in general.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-domain/subspace assertion is part of this item's hypotheses or conclusion. (item ex-nonsymmetric-coercive-form-attains-cea-factor: A nonsymmetric coercive form attains the M over alpha factor)"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-valued parameter branch is asserted in this item. (item ex-nonsymmetric-coercive-form-attains-cea-factor: A nonsymmetric coercive form attains the M over alpha factor)"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: the cited proof steps gives α=1 and M=√2; the cited proof steps attains their ratio."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim excludes degenerate inputs or has no degenerating parameter; the exact domain is stated in the item. (item ex-nonsymmetric-coercive-form-attains-cea-factor: A nonsymmetric coercive form attains the M over alpha factor)"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no varying interval or limiting parameter with an additional endpoint case in this item. (item ex-nonsymmetric-coercive-form-attains-cea-factor: A nonsymmetric coercive form attains the M over alpha factor)"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Countable Choice is the explicit hypothesis of Céa's theorem invoked in the cited proof steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional forward direction. (item ex-nonsymmetric-coercive-form-attains-cea-factor: A nonsymmetric coercive form attains the M over alpha factor)"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional reverse direction. (item ex-nonsymmetric-coercive-form-attains-cea-factor: A nonsymmetric coercive form attains the M over alpha factor)"
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "Countable Choice is the explicit assumption for the Céa estimate."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-dimensional-rotation-dilation-sharpness",
+          "claim": "The coercive nonsymmetric form attains the Céa factor M/α.",
+          "result": "AᵀA=2I gives ||A||=√2, and x·Ax=||x||² gives α=1. The Galerkin coefficient is c=−1; best-approximation distance is 1 and error is √2, so the ratio is M/α.",
+          "evidence": "Proof steps 1.1, 1.2, and 2.1."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-symmetric-poisson-best-approximation-on-two-cell-mesh": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-symmetric-galerkin-best-approximation-in-energy-norm",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses and notation of\n[[thm-cea-quasi-optimality-for-conforming-galerkin-approximations]], and\nsuppose additionally that $a$ is Hermitian:\n$a(v,w)=\\overline{a(w,v)}$. Then\n$$\\|v\\|_a:=\\sqrt{a(v,v)}$$\nis the energy norm and the Galerkin solution is its best approximation:\n$$\\|u-u_h\\|_a=\\inf_{v_h\\in V_h}\\|u-v_h\\|_a.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-two-cell-hat-and-quadratic-functions-lie-in-h10",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $I=(0,1)$ and define\n$$\\phi(x)=\\begin{cases}2x,&0\\le x\\le\\frac12,\\\\2(1-x),&\\frac12\\le x\\le1,\\end{cases} \\qquad p(x)=\\frac12x(1-x).$$\nThen $\\phi|_I,p|_I\\in H^1_0(I)=W^{1,2}_0(I)$, the closure of\n$C_c^\\infty(I)$ in $W^{1,2}(I)$ ([[def-wkp-zero-as-a-sobolev-closure]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, inherited through the Poincaré supplier named below, together with Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, nonempty and bounded in one direction, with Poincar\\'e constant $C_P$ for $W^{1,2}_0$ ([[thm-poincare-inequality-for-w-one-p-zero]]). For every $F\\in H^{-1}(\\Omega)$ ([[def-h-minus-one-as-the-dual-of-h-one-zero]]) there is a unique $u\\in H^1_0(\\Omega)$ with $$\\int_\\Omega\\nabla u\\cdot\\overline{\\nabla v}\\,dx=F(v)\\qquad\\text{for every }v\\in H^1_0(\\Omega),$$ that is, the unique weak solution of $-\\Delta u=F$ with zero boundary values; it satisfies $$\\|u\\|_{H^1_0}\\le(1+C_P^2)\\|F\\|_{H^{-1}},\\qquad\\text{and}\\qquad\\|Du\\|_{L^2}\\le(1+C_P^2)^{1/2}\\|F\\|_{H^{-1}} .$$ Here $-\\Delta$ is the constant-coefficient operator $Lu=-\\Delta u$ of [[def-uniformly-elliptic-divergence-form-operator]], and the solution is the Lax--Milgram solution for the form $a_0(u,v)=\\int\\nabla u\\cdot\\overline{\\nabla v}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "source_section": "Statement",
+          "quote": "On every measure space the pairing $\\langle f,g\\rangle=\\int f\\overline g$ on complex $L^2$ is representative-independent, linear in the first variable, conjugate-linear in the second, conjugate symmetric and positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$. Moreover,\n$$|\\langle f,g\\rangle|\\le\\|f\\|_2\\|g\\|_2.$$\nIf $g\\ne0$ as a class, equality holds iff $f=cg$ a.e. for some $c\\in\\mathbb C$. If $g=0$, equality holds for every $f$.\n\nFor each finite $m\\ge0$, the same conclusions hold on tuples $F=(f_j)_{j<m}$, with pairing $B(F,G)=\\sum_{j<m}\\langle f_j,g_j\\rangle$ and $\\|F\\|^2=\\sum_{j<m}\\|f_j\\|_2^2$. For $G\\ne0$, equality means $f_j=cg_j$ a.e. for every $j$, with one common scalar $c$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-classical-derivatives-are-weak-derivatives",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open,\n$n\\ge1$, let $k\\in\\mathbb N_0$, and let $u:\\Omega\\to\\mathbb C$ have real\nand imaginary parts of class $C^k$. For each multi-index\n$\\alpha\\in\\mathbb N_0^n$ with $|\\alpha|\\le k$, the componentwise classical\nderivative $\\partial^\\alpha u$ is locally integrable and is the weak\nderivative $D^\\alpha u$. By the uniqueness lemma, it represents the unique\nlocally integrable weak-derivative class. For $\\alpha=0$, this says\n$D^0u=u$.\n\nIf $\\Omega=\\varnothing$, the assertion is vacuous: there is only the zero\nclass and every displayed test identity is zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "source_section": "Statement",
+          "quote": "On every measure space the pairing $\\langle f,g\\rangle=\\int f\\overline g$ on complex $L^2$ is representative-independent, linear in the first variable, conjugate-linear in the second, conjugate symmetric and positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$. Moreover,\n$$|\\langle f,g\\rangle|\\le\\|f\\|_2\\|g\\|_2.$$\nIf $g\\ne0$ as a class, equality holds iff $f=cg$ a.e. for some $c\\in\\mathbb C$. If $g=0$, equality holds for every $f$.\n\nFor each finite $m\\ge0$, the same conclusions hold on tuples $F=(f_j)_{j<m}$, with pairing $B(F,G)=\\sum_{j<m}\\langle f_j,g_j\\rangle$ and $\\|F\\|^2=\\sum_{j<m}\\|f_j\\|_2^2$. For $G\\ne0$, equality means $f_j=cg_j$ a.e. for every $j$, with one common scalar $c$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) and let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, with $H^1_0(\\Omega;\\mathbb K)$ the zero-boundary Sobolev space $W^{1,2}_0$ over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]], [[def-hk-and-hk-zero-notation]]). Define\n$$H^{-1}(\\Omega):=\\{\\,F:H^1_0(\\Omega)\\to\\mathbb K : F\\text{ is bounded and conjugate-linear}\\,\\},$$\nwith\n$$\\|F\\|_{H^{-1}}:=\\sup_{\\|v\\|_{H^1_0}\\le1}|F(v)| .$$\n**Pairing convention.** The pairing $\\langle F,v\\rangle:=F(v)$ is linear in $F$ and conjugate-linear in $v$; it is the dual pairing of $H^{-1}(\\Omega)$ with $H^1_0(\\Omega)$, not the $L^2$ inner product. The map $F\\mapsto\\overline{F(\\cdot)}$ is an isometric conjugate-linear bijection of $H^{-1}(\\Omega)$ onto the Banach dual $(H^1_0(\\Omega))^*$ of [[def-dual-space-of-a-normed-space]] ([[def-operator-norm]], [[def-space-of-bounded-linear-operators]]); the design's notation $(H^1_0)^*$ is read through this identification, which is the one compatible with the page's sesquilinear convention (linear in the first argument, conjugate-linear in the second) fixed in [[def-bounded-coercive-and-symmetric-sesquilinear-forms]]. The space $H^{-1}(\\Omega)$ is a normed space, complete because $(H^1_0(\\Omega))^*$ is complete and $\\overline{F(\\cdot)}$ is an isometry in both directions ([[thm-bounded-operator-space-is-banach]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]). For $f\\in L^2(\\Omega)$ the map $v\\mapsto(f,v)_{L^2}$ is the corresponding element of $H^{-1}(\\Omega)$ under the conventions of [[def-l-p-space-as-a-quotient-by-null-functions]] and [[def-complex-lp-and-euclidean-test-function-conventions]], where complex integrability is in the sense of the latter; identifying a general element of $H^{-1}$ with an $L^2$ function is an embedding statement, never a definition. Elements of $H^{-1}$ are defined here by their action on Sobolev classes; this does not exclude their identification with distributions through smooth test functions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.\n\nEvery $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ belongs to\n$W^{k,p}(\\Omega;\\mathbb K)$. Indeed $\\varphi$ is bounded with compact support,\nhence lies in $L^p(\\Omega;\\mathbb K)$ for every exponent in range, and each of\nits classical partial derivatives is again smooth and compactly supported,\nhence lies in $L^p(\\Omega;\\mathbb K)$ and is the corresponding weak derivative\nby [[lem-classical-derivatives-are-weak-derivatives]].\n\nDefine the **zero-boundary Sobolev space**\n$$W_0^{k,p}(\\Omega;\\mathbb K):=\\overline{C_c^\\infty(\\Omega;\\mathbb K)},$$\nthe closure taken in the normed space\n$(W^{k,p}(\\Omega;\\mathbb K),\\|\\cdot\\|_{W^{k,p}(\\Omega)})$ of\n[[def-sobolev-space-wkp-and-its-norm]]. The norm is a genuine norm on classes\nby [[lem-sobolev-norm-is-well-defined-and-definite]], so this is the usual\nmetric closure of a subset of a normed space: $u\\in W_0^{k,p}(\\Omega;\\mathbb K)$\nif and only if for every $\\delta>0$ there is\n$\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with\n$\\|u-\\varphi\\|_{W^{k,p}(\\Omega)}<\\delta$. Write\n$H_0^k(\\Omega):=W_0^{k,2}(\\Omega;\\mathbb K)$ when the scalar field is fixed by\ncontext.\n\nThree warnings are part of the definition. First, this is a closure of\nalmost-everywhere classes, and all its equalities are equalities of Sobolev\nclasses. Second, no pointwise boundary values and no trace characterization\nare asserted: a description of $W_0^{k,p}$ by vanishing boundary data belongs\nto the later trace theory and is not used here. Third, the closure is defined\nfor every $1\\le p\\le\\infty$, but for $p=\\infty$ it is not claimed that every\ncompactly supported $W^{k,\\infty}(\\Omega)$ function lies in $W_0^{k,\\infty}(\\Omega)$;\nthe definition merely names the closure of the test functions.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a closed nondegenerate rectangle $Q\\subseteq\\mathbb R^m$, $m\\ge1$, is Riemann integrable.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let\n$f:X\\to[0,+\\infty]$ be measurable, and let $E\\in\\mathcal A$. Since\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]\nimplies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$**\nby\n$$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$\nwhere the integral on the right is the nonnegative Lebesgue integral of\n[[def-nonnegative-lebesgue-integral]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple ([[def-nonnegative-simple-measurable-function]]).",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "The function $\\phi$ is absolutely continuous, vanishes at $0$ and $1$, and has derivative $2$ on $(0,1/2)$ and $-2$ on $(1/2,1)$. Its derivative is in $L^2$, so [F2] gives $\\phi\\in H^1_0(0,1)$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Put $p(x)=\\frac12x(1-x)$. It is absolutely continuous with zero endpoint values, $p'=\\frac12-x\\in L^2$, and $p''=-1$; [F2] gives $p\\in H^1_0(0,1)$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "claim": "Poincar\\'e constant for this interval. Let $v\\in H^1_0(0,1;\\mathbb K)$ and $\\delta>0$. By [F7], choose $\\varphi\\in C_c^\\infty(0,1;\\mathbb K)$ with $\\|v-\\varphi\\|_{H^1}<\\delta$. For $0<x\\le1$, apply the real second fundamental theorem to the real and imaginary parts of $\\varphi$ on $[0,x]$; their derivatives are continuous and hence Riemann integrable by [F8]. The Riemann--Lebesgue equality in [F8] and the definition of the integral over a set give $\\varphi(x)=(\\varphi',\\mathbf1_{[0,x]})_{L^2(0,1)}$, since $\\varphi(0)=0$. By [F9], $\\|\\mathbf1_{[0,x]}\\|_2=\\sqrt{x}$, so [F4] gives $|\\varphi(x)|\\le\\sqrt{x}\\|\\varphi'\\|_2\\le\\|\\varphi'\\|_2$; this also holds at $x=0$. Integrating the squared bound over $(0,1)$ and using $\\lambda_1((0,1))=1$ and [F10] yields $\\|\\varphi\\|_2\\le\\|\\varphi'\\|_2$. Therefore $\\|v\\|_2\\le\\|\\varphi\\|_2+\\delta\\le\\|\\varphi'\\|_2+\\delta\\le\\|v'\\|_2+2\\delta$. Since $\\delta$ is arbitrary, $\\|v\\|_2\\le\\|v'\\|_2$ for every $v\\in H^1_0(0,1;\\mathbb K)$, so the required Poincar\\'e constant is $C_P=1$.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "2.1",
+          "claim": "For $v\\in C_c^\\infty(0,1)$, apply [F5] to $p'$ with test $\\overline v$. Since $p''=-1$, it gives $a(p,v)=\\int_0^1p'\\overline{v'}\\,dx=-\\int_0^1p''\\overline v\\,dx=\\int_0^1\\overline v\\,dx$. Both sides are continuous in the $H^1$ norm by [F4]. Since $H^1_0$ is the $W^{1,2}$-closure of these tests, the identity extends to all $v\\in H^1_0(0,1)$ by [F7]. By [F6], the datum $v\\mapsto\\int_0^1\\overline v$ lies in $H^{-1}(0,1)$. The interval $I$ is open and nonempty, is bounded in direction $e=1$ between $a=0$ and $b=1$, and step 1.3 supplies $C_P=1$; [A1] supplies the required axioms. Thus [F3] applies and makes $p$ the unique weak solution.",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "A1",
+            "step 1.3",
+            "given",
+            "algebra",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Direct integration gives $a(\\phi,\\phi)=\\int_0^{1/2}4\\,dx+\\int_{1/2}^1 4\\,dx=4,\\qquad \\int_0^1\\phi(x)\\,dx=\\frac12.$ For $u_h=c\\phi$, the Galerkin equation tested with $\\phi$ is $4c=\\int_0^1\\phi=\\frac12$, hence $c=\\frac18$ and $u_h=\\frac18\\phi$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "On the first half interval, $(p-u_h)'=\\frac14-x$; on the second, $(p-u_h)'=\\frac34-x$. Therefore $\\|p-u_h\\|_a^2=\\int_0^{1/2}(\\tfrac14-x)^2\\,dx+\\int_{1/2}^1(\\tfrac34-x)^2\\,dx=\\frac1{96}+\\frac1{96}=\\frac1{48}.$ By [F1], with the Hilbert and coercivity hypotheses verified in [F3] and the Hermitian property in [F4], this computed Galerkin solution is the energy-best approximation.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "A1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-domain/subspace assertion is part of this item's hypotheses or conclusion. (item ex-symmetric-poisson-best-approximation-on-two-cell-mesh: A two-cell linear finite element best approximation for Poisson)"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-valued parameter branch is asserted in this item. (item ex-symmetric-poisson-best-approximation-on-two-cell-mesh: A two-cell linear finite element best approximation for Poisson)"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: There is one interior degree of freedom; the cited proof steps solves its single scalar equation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: Both mesh intervals have positive length and φ is nonzero in the cited proof steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: The basis function vanishes at x=0 and x=1 in the cited proof steps."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Axiom of Choice and Countable Choice are carried from weak-Poisson/Poincaré suppliers in the cited proof steps and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional forward direction. (item ex-symmetric-poisson-best-approximation-on-two-cell-mesh: A two-cell linear finite element best approximation for Poisson)"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional reverse direction. (item ex-symmetric-poisson-best-approximation-on-two-cell-mesh: A two-cell linear finite element best approximation for Poisson)"
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "3.1"
+          ],
+          "reason": "Countable Choice is carried by the local Sobolev supplier and weak-Poisson theorem."
+        },
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.3",
+            "3.1"
+          ],
+          "reason": "The weak-Poisson theorem and its Poincaré branch explicitly assume the Axiom of Choice."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-cell-linear-poisson-exact-energy-error",
+          "claim": "The one degree of freedom Galerkin solution on the two-cell mesh has exact energy error squared 1/48.",
+          "result": "The stiffness value is 4 and the load is 1/2, so c=1/8. The two derivative-error integrals are 1/96 each, totaling 1/48.",
+          "evidence": "Proof steps 1.1, 1.2, and 2.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Steps 1.1–3.1: the reviewed explicit approximation lemma gives H10 membership over both fields. The test-function primitive estimate proves C_P=1 using real component FTC and L2 Cauchy–Schwarz; density transfers it to H10. The quadratic weak identity and bounded datum satisfy the exact Poisson theorem with the explicitly retained AC and Countable Choice. Direct integration gives stiffness 4, load 1/2, coefficient 1/8, and two errors 1/96, hence 1/48. The Poisson supplier proves Hilbert/coercivity prerequisites and the integral form is Hermitian, so the reviewed energy-best theorem applies."
+      }
+    },
+    "cex-reentrant-corner-poisson-solution-not-h2": {
+      "risk": "high",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Define the **zero-boundary Sobolev space**\n$$W_0^{k,p}(\\Omega;\\mathbb K):=\\overline{C_c^\\infty(\\Omega;\\mathbb K)},$$\nthe closure taken in the normed space\n$(W^{k,p}(\\Omega;\\mathbb K),\\|\\cdot\\|_{W^{k,p}(\\Omega)})$ of\n[[def-sobolev-space-wkp-and-its-norm]]. The norm is a genuine norm on classes\nby [[lem-sobolev-norm-is-well-defined-and-definite]], so this is the usual\nmetric closure of a subset of a normed space: $u\\in W_0^{k,p}(\\Omega;\\mathbb K)$\nif and only if for every $\\delta>0$ there is\n$\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with\n$\\|u-\\varphi\\|_{W^{k,p}(\\Omega)}<\\delta$. Write\n$H_0^k(\\Omega):=W_0^{k,2}(\\Omega;\\mathbb K)$ when the scalar field is fixed by\ncontext.",
+          "uses": [
+            "2.1",
+            "2.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Define $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.",
+          "uses": [
+            "2.1",
+            "2.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-the-standard-smooth-step-function",
+          "source_section": "Definition",
+          "quote": "Let $\\beta$ be the standard flat function. The **standard smooth step function** is\n$$ \\sigma(t):=\\frac{\\beta(t)}{\\beta(t)+\\beta(1-t)}. $$\nBecause $\\beta$ is smooth and positive on $(0,\\infty)$, the denominator is positive on $(0,1)$, while $\\sigma(t)=0$ for $t\\le 0$ and $\\sigma(t)=1$ for $t\\ge 1$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-extreme-value-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be **nonempty** and compact\n([[def-open-cover-r]]). Then $\\sup f[K]$ and $\\inf f[K]$ exist and are\n**attained**: there are $p, q \\in K$ with",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "source_section": "Statement",
+          "quote": "On every measure space the pairing $\\langle f,g\\rangle=\\int f\\overline g$ on complex $L^2$ is representative-independent, linear in the first variable, conjugate-linear in the second, conjugate symmetric and positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$. Moreover,\n$$|\\langle f,g\\rangle|\\le\\|f\\|_2\\|g\\|_2.$$\nIf $g\\ne0$ as a class, equality holds iff $f=cg$ a.e. for some $c\\in\\mathbb C$. If $g=0$, equality holds for every $f$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-poincare-inequality-for-w-one-p-zero",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $\\Omega\\subseteq\\mathbb R^n$ be open and bounded in one direction: there are a unit vector $e$ and $a<b$ with $a<x\\cdot e<b$ for every $x\\in\\Omega$. Let $1\\le p<\\infty$. Then $\\|u\\|_{L^p(\\Omega)}\\le C(p)\\,(b-a)\\,\\|Du\\|_{L^p(\\Omega)}$ for every $u\\in W^{1,p}_0(\\Omega;\\mathbb K)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-weak-dirichlet-solution-for-a-divergence-form-operator",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]), and let $L$ and its form $a$ be as in [[def-uniformly-elliptic-divergence-form-operator]] on an open set $\\Omega\\subseteq\\mathbb R^n$. **Homogeneous problem.** Given $F\\in H^{-1}(\\Omega)$ ([[def-h-minus-one-as-the-dual-of-h-one-zero]]), a **weak solution** of $Lu=F$ with zero boundary values is a class $u\\in H^1_0(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]]) with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H^1_0(\\Omega).$$ **Inhomogeneous problem.** Additionally assume the Axiom of Choice ([[def-axiom-of-choice]]) for the trace supplier, and let $n\\ge2$ and $\\Omega$ be a bounded $C^1$ domain ([[def-bounded-c-k-domain-and-boundary-charts]]), let $g\\in H^{1/2}(\\partial\\Omega):=W^{1/2,2}(\\partial\\Omega)$ in the boundary scale of [[def-fractional-sobolev-space-on-a-compact-c-one-boundary]] and let $T$ be the trace operator of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]]. A weak solution with boundary data $g$ is a class $u\\in H^1(\\Omega)$ with $Tu=g$ and $a(u,v)=F(v)$ for every $v\\in H^1_0(\\Omega)$. The defining identities are identities between functionals on the $H^1_0$ classes, so they are independent of the chosen almost-everywhere representatives of $u$, of the coefficients and of the data ([[lem-weak-derivative-is-independent-of-lp-representatives]], [[def-complex-lp-and-euclidean-test-function-conventions]]); the boundary condition is imposed through the trace of [[thm-lp-trace-operator-on-a-bounded-c-one-domain]], never by pointwise evaluation. The Dirichlet condition is imposed by $u\\in H^1_0(\\Omega)$ in the homogeneous problem and by $Tu=g$ in the inhomogeneous problem; testing against $v\\in H^1_0$ expresses the weak equation and does not by itself impose boundary data; the integrals are the ones proved absolutely convergent in [[lem-elliptic-form-is-well-defined-and-bounded]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-h-minus-one-as-the-dual-of-h-one-zero",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) and let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, with $H^1_0(\\Omega;\\mathbb K)$ the zero-boundary Sobolev space $W^{1,2}_0$ over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ ([[def-wkp-zero-as-a-sobolev-closure]], [[def-sobolev-space-wkp-and-its-norm]], [[def-hk-and-hk-zero-notation]]). Define\n$$H^{-1}(\\Omega):=\\{\\,F:H^1_0(\\Omega)\\to\\mathbb K : F\\text{ is bounded and conjugate-linear}\\,\\},$$\nwith\n$$\\|F\\|_{H^{-1}}:=\\sup_{\\|v\\|_{H^1_0}\\le1}|F(v)| .$$\n**Pairing convention.** The pairing $\\langle F,v\\rangle:=F(v)$ is linear in $F$ and conjugate-linear in $v$; it is the dual pairing of $H^{-1}(\\Omega)$ with $H^1_0(\\Omega)$, not the $L^2$ inner product. The map $F\\mapsto\\overline{F(\\cdot)}$ is an isometric conjugate-linear bijection of $H^{-1}(\\Omega)$ onto the Banach dual $(H^1_0(\\Omega))^*$ of [[def-dual-space-of-a-normed-space]] ([[def-operator-norm]], [[def-space-of-bounded-linear-operators]]); the design's notation $(H^1_0)^*$ is read through this identification, which is the one compatible with the page's sesquilinear convention (linear in the first argument, conjugate-linear in the second) fixed in [[def-bounded-coercive-and-symmetric-sesquilinear-forms]]. The space $H^{-1}(\\Omega)$ is a normed space, complete because $(H^1_0(\\Omega))^*$ is complete and $\\overline{F(\\cdot)}$ is an isometry in both directions ([[thm-bounded-operator-space-is-banach]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]). For $f\\in L^2(\\Omega)$ the map $v\\mapsto(f,v)_{L^2}$ is the corresponding element of $H^{-1}(\\Omega)$ under the conventions of [[def-l-p-space-as-a-quotient-by-null-functions]] and [[def-complex-lp-and-euclidean-test-function-conventions]], where complex integrability is in the sense of the latter; identifying a general element of $H^{-1}$ with an $L^2$ function is an embedding statement, never a definition. Elements of $H^{-1}$ are defined here by their action on Sobolev classes; this does not exclude their identification with distributions through smooth test functions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-classical-derivatives-are-weak-derivatives",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open,\n$n\\ge1$, let $k\\in\\mathbb N_0$, and let $u:\\Omega\\to\\mathbb C$ have real\nand imaginary parts of class $C^k$. For each multi-index\n$\\alpha\\in\\mathbb N_0^n$ with $|\\alpha|\\le k$, the componentwise classical\nderivative $\\partial^\\alpha u$ is locally integrable and is the weak\nderivative $D^\\alpha u$. By the uniqueness lemma, it represents the unique\nlocally integrable weak-derivative class. For $\\alpha=0$, this says\n$D^0u=u$.",
+          "uses": [
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the conforming Galerkin setting of\n[[thm-cea-quasi-optimality-for-conforming-galerkin-approximations]]. Let\n$H=L^2(\\Omega;\\mathbb K)$ with inner product linear in the first slot, and\nlet $J:V\\to H$ be a continuous linear inclusion with\n$\\|Jv\\|_H\\le C_E\\|v\\|_V$. Put $e:=J(u-u_h)$. The adjoint solution $z_e$ is\nthe unique element of $V$ satisfying\n$$a(v,z_e)=(Jv,e)_H\\qquad(v\\in V);$$\nit exists by [[thm-adjoint-problem-for-bounded-coercive-variational-forms]].\nLet $s\\in(0,1]$, and let $R_s\\subseteq V$ be a specified normed space of\nadjoint-regular functions. Assume constants $C_R,C_I$ independent of $h$ and\nthe error satisfy\n$$\\|z_e\\|_{R_s}\\le C_R\\|e\\|_H,\\qquad \\inf_{w_h\\in V_h}\\|z_e-w_h\\|_V\\le C_Ih^s\\|z_e\\|_{R_s}.$$\nThen\n$$\\|u-u_h\\|_{L^2(\\Omega)} \\le M C_I C_R h^s\\|u-u_h\\|_V.$$\nThe symbol $R_s$ means exactly the chosen regularity norm space in the two\ndisplayed assumptions; no fractional Sobolev interpolation estimate is\nasserted unless it verifies the second inequality. The integer endpoint may\nbe instantiated with $R_1=H^2(\\Omega)=W^{2,2}(\\Omega)$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ],
+          "claim": "Verify the L-shaped domain is bounded Lipschitz; construct chi and the corner singularity; compute local derivatives and L2 bounds."
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ],
+          "claim": "Construct smooth radial and angular cutoffs with compact support away from the boundary."
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ],
+          "claim": "The cutoff errors vanish in H1, so the singular function belongs to H1_0."
+        },
+        {
+          "id": "step-2.2",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ],
+          "claim": "The forcing -Delta u is bounded and supported on the cutoff annulus, hence belongs to L2."
+        },
+        {
+          "id": "step-2.3",
+          "step": "2.3",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F10",
+            "step 1.1",
+            "algebra",
+            "contradiction"
+          ],
+          "claim": "If u were H2 then its radial second derivative would be L2, but its polar integral diverges."
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F6",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ],
+          "claim": "The forcing defines an H-1 functional; integration by parts and density prove the weak equation."
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "step 3.1",
+            "algebra"
+          ],
+          "claim": "Subtracting two weak equations and using the slab Poincare inequality proves uniqueness."
+        },
+        {
+          "id": "step-5.1",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F11",
+            "step 4.1",
+            "step 2.3",
+            "contradiction"
+          ],
+          "claim": "Uniqueness and non-H2 regularity show the forcing has no H2 weak solution."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-domain/subspace assertion is part of this item's hypotheses or conclusion. (item cex-reentrant-corner-poisson-solution-not-h2: A reentrant corner prevents automatic H² dual regularity)"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No separate zero-valued parameter branch is asserted in this item. (item cex-reentrant-corner-poisson-solution-not-h2: A reentrant corner prevents automatic H² dual regularity)"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: the cited proof steps fixes λ=2/3 and the 3π/2 reentrant angle."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: The angle 3π/2 is a genuine reentrant sector; the cited proof steps use its two distinct rays."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: The angular factor vanishes at θ=0 and θ=3π/2, as used in the cited proof steps."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The cutoff sequence epsilon_n is explicit; Countable Choice is inherited from the polar-change, Sobolev, Poincare, weak-derivative and Aubin suppliers in steps 1.1, 2.1, 2.3, 3.1, 4.1 and 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional forward direction. (item cex-reentrant-corner-poisson-solution-not-h2: A reentrant corner prevents automatic H² dual regularity)"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim and contains no biconditional reverse direction. (item cex-reentrant-corner-poisson-solution-not-h2: A reentrant corner prevents automatic H² dual regularity)"
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3",
+            "3.1",
+            "4.1",
+            "5.1"
+          ],
+          "reason": "Countable Choice is assumed by the polar-change, Sobolev, classical weak-derivative, Poincare, weak-solution and Aubin suppliers used in these steps."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Steps 1.1–5.1 checked independently: origin coordinates give t>-|s|, and all other polygon vertices admit Lipschitz graphs. lambda=2/3 is harmonic on the 3pi/2 sector. Radial errors have powers 10/3 and 4/3; angular cutoff derivative times u is O(r^(-1/3)), whose squared polar integral is finite and O(epsilon) on shrinking angular strips. Classical weak-derivative identification gives H1 membership; explicit compactly supported approximants give H10. f is bounded on the radial annulus. The radial Hessian contraction has nonzero angular integral 3pi/4 and divergent radial exponent -5/3. The weak identity extends by H1 continuity. Slab Poincare supplier proof step 3.1 explicitly permits constant 1, so width 2 proves uniqueness and rules out any alternative H2 weak solution. All cited supplier assumptions use Countable Choice. Accepted reader closure of an elementary omitted uniqueness argument; no change to the refuted statement."
+      }
+    }
+  }
+}

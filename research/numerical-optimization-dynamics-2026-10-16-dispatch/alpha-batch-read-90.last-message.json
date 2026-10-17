@@ -1,0 +1,295 @@
+{
+  "group": "aj",
+  "batches": ["90"],
+  "pages_read": [
+    "spectral-collocation-and-galerkin-methods",
+    "spectral-collocation-and-galerkin-methods-examples"
+  ],
+  "items_read": [
+    "def-periodic-fourier-collocation-grid",
+    "lem-periodic-fourier-mode-aliasing-under-sampling",
+    "alg-periodic-fourier-collocation-differentiation-matrix",
+    "thm-periodic-fourier-collocation-differentiation-is-exact",
+    "def-chebyshev-gauss-lobatto-collocation-grid",
+    "lem-chebyshev-lobatto-mode-aliasing",
+    "alg-chebyshev-gauss-lobatto-differentiation-matrix",
+    "thm-chebyshev-gauss-lobatto-differentiation-is-exact",
+    "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination",
+    "thm-chebyshev-dirichlet-collocation-status-and-system",
+    "def-chebyshev-arcsine-weighted-l2-pairing",
+    "lem-chebyshev-polynomials-orthogonal-in-arcsine-weight",
+    "def-chebyshev-weighted-spectral-sobolev-scale",
+    "thm-chebyshev-weighted-orthogonal-projection-rate",
+    "thm-chebyshev-lobatto-interpolation-near-best-weighted-error",
+    "thm-chebyshev-lobatto-interpolation-rate-under-spectral-sobolev-regularity",
+    "thm-chebyshev-lobatto-pointwise-remainder-bound",
+    "thm-chebyshev-lobatto-interpolation-exponential-rate-for-analytic-data",
+    "alg-chebyshev-composite-simpson-weighted-mass-matrix",
+    "thm-composite-simpson-error-for-chebyshev-weighted-mass-matrix",
+    "def-weighted-orthogonal-polynomial-galerkin-space",
+    "thm-weighted-orthogonal-polynomial-galerkin-projection-is-well-defined",
+    "alg-gaussian-orthogonal-polynomial-galerkin-mass-matrix",
+    "thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact",
+    "def-legendre-polynomial-family-and-l2-pairing",
+    "lem-legendre-weighted-derivative-orthogonality-and-norm",
+    "def-legendre-weighted-sobolev-scale",
+    "thm-legendre-weighted-projection-error-rate",
+    "rem-chebyshev-collocation-conditioning-and-spectral-radius-scope",
+    "ex-periodic-fourier-collocation-exactness-and-nyquist-mode",
+    "ex-chebyshev-lobatto-endpoint-clustering",
+    "ex-analytic-and-nonsmooth-chebyshev-coefficient-decay",
+    "ex-quadratic-product-aliases-on-even-fourier-grid",
+    "ex-gaussian-and-simpson-weighted-mass-matrix-check"
+  ],
+  "conventions": [
+    {
+      "convention": "The periodic grid has N points x_j=2πj/N, N≥2. For even N, the interpolation space contains the Nyquist cosine only; its sampled first derivative is zero.",
+      "fixed_by": "def-periodic-fourier-collocation-grid",
+      "matters_for": [
+        "lem-periodic-fourier-mode-aliasing-under-sampling",
+        "alg-periodic-fourier-collocation-differentiation-matrix",
+        "thm-periodic-fourier-collocation-differentiation-is-exact",
+        "ex-periodic-fourier-collocation-exactness-and-nyquist-mode",
+        "ex-quadratic-product-aliases-on-even-fourier-grid"
+      ]
+    },
+    {
+      "convention": "Lobatto nodes are descending: x_j=cos(jπ/N), x_0=1 and x_N=−1, N≥1. Increasing-node interpolation uses z_k=x_{N−k} and reversed data.",
+      "fixed_by": "def-chebyshev-gauss-lobatto-collocation-grid",
+      "matters_for": [
+        "lem-chebyshev-lobatto-mode-aliasing",
+        "alg-chebyshev-gauss-lobatto-differentiation-matrix",
+        "thm-chebyshev-gauss-lobatto-differentiation-is-exact",
+        "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination",
+        "thm-chebyshev-lobatto-pointwise-remainder-bound"
+      ]
+    },
+    {
+      "convention": "The Chebyshev pairing is the angular integral from 0 to π. This fixes the singular-weight endpoint convention and gives squared mode norms π at degree zero and π/2 at positive degrees.",
+      "fixed_by": "def-chebyshev-arcsine-weighted-l2-pairing",
+      "matters_for": [
+        "lem-chebyshev-polynomials-orthogonal-in-arcsine-weight",
+        "def-chebyshev-weighted-spectral-sobolev-scale",
+        "thm-chebyshev-lobatto-interpolation-near-best-weighted-error",
+        "alg-chebyshev-composite-simpson-weighted-mass-matrix",
+        "thm-composite-simpson-error-for-chebyshev-weighted-mass-matrix"
+      ]
+    },
+    {
+      "convention": "H_C^s is a coefficient completion with weights (1+n²)^s, s≥0. Its elements need not have pointwise convergent series; nodal interpolation is established separately for s>1/2.",
+      "fixed_by": "def-chebyshev-weighted-spectral-sobolev-scale",
+      "matters_for": [
+        "thm-chebyshev-weighted-orthogonal-projection-rate",
+        "thm-chebyshev-lobatto-interpolation-rate-under-spectral-sobolev-regularity"
+      ]
+    },
+    {
+      "convention": "The Dirichlet solver requires N≥2, assigns U_0=g_+ and U_N=g_−, and returns singular-interior-matrix whenever the interior matrix is singular, without claiming inconsistency.",
+      "fixed_by": "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination",
+      "matters_for": [
+        "thm-chebyshev-dirichlet-collocation-status-and-system",
+        "rem-chebyshev-collocation-conditioning-and-spectral-radius-scope"
+      ]
+    },
+    {
+      "convention": "Gaussian mass assembly uses N+1 nodes, moment order at least 2N+1, and a common measure for the rule and monic orthogonal basis. Simpson assembly instead integrates in the angular variable with an even panel count M≥2.",
+      "fixed_by": "alg-gaussian-orthogonal-polynomial-galerkin-mass-matrix",
+      "matters_for": [
+        "thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact",
+        "ex-gaussian-and-simpson-weighted-mass-matrix-check"
+      ]
+    },
+    {
+      "convention": "Legendre polynomials have Rodrigues normalization, squared norms 2/(2n+1), and spectral factors (1+n(n+1))^s; the scale is a coefficient completion rather than an asserted derivative-Sobolev equivalence.",
+      "fixed_by": "def-legendre-weighted-sobolev-scale",
+      "matters_for": [
+        "thm-legendre-weighted-projection-error-rate"
+      ]
+    },
+    {
+      "convention": "Countable Choice is explicitly assumed for the Lebesgue measure construction and Riemann–Lebesgue agreement in the finite Gaussian mass example.",
+      "fixed_by": "ex-gaussian-and-simpson-weighted-mass-matrix-check",
+      "matters_for": [
+        "ex-gaussian-and-simpson-weighted-mass-matrix-check"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-chebyshev-polynomials-orthogonal-in-arcsine-weight",
+      "statement": "The Chebyshev pairing gives π for m=n=0, π/2 for m=n≥1, and zero for m≠n. The Chebyshev polynomials form a polynomial basis; the pairing is positive definite on continuous real functions; a continuous function orthogonal to every mode is zero.",
+      "used_by": [
+        "def-chebyshev-weighted-spectral-sobolev-scale",
+        "thm-chebyshev-weighted-orthogonal-projection-rate",
+        "thm-chebyshev-lobatto-interpolation-rate-under-spectral-sobolev-regularity",
+        "thm-chebyshev-lobatto-interpolation-exponential-rate-for-analytic-data",
+        "ex-analytic-and-nonsmooth-chebyshev-coefficient-decay",
+        "ex-gaussian-and-simpson-weighted-mass-matrix-check"
+      ]
+    },
+    {
+      "id": "lem-chebyshev-lobatto-mode-aliasing",
+      "statement": "For N≥1 and every integer n≥0, I_N^L T_n=T_{ρ_N(n)}, where ρ_N(n) is the unique r∈{0,…,N} congruent to n or −n modulo 2N.",
+      "used_by": [
+        "thm-chebyshev-lobatto-interpolation-rate-under-spectral-sobolev-regularity",
+        "thm-chebyshev-lobatto-interpolation-exponential-rate-for-analytic-data"
+      ]
+    },
+    {
+      "id": "thm-chebyshev-gauss-lobatto-differentiation-is-exact",
+      "statement": "For N≥1 and real nodal data with degree-at-most-N interpolant p, (D_NU)_i=p′(x_i) at every node. Applying D_N twice gives p″(x_i).",
+      "used_by": [
+        "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination",
+        "thm-chebyshev-dirichlet-collocation-status-and-system",
+        "rem-chebyshev-collocation-conditioning-and-spectral-radius-scope"
+      ]
+    },
+    {
+      "id": "lem-legendre-weighted-derivative-orthogonality-and-norm",
+      "statement": "For m,n≥0, ∫P_nP_m=2δ_mn/(2n+1) and ∫(1−x²)P_n′P_m′=2n(n+1)δ_mn/(2n+1). Each P_n has degree n and nonzero leading coefficient.",
+      "used_by": [
+        "def-legendre-weighted-sobolev-scale",
+        "thm-legendre-weighted-projection-error-rate",
+        "ex-gaussian-and-simpson-weighted-mass-matrix-check"
+      ]
+    },
+    {
+      "id": "thm-periodic-fourier-collocation-differentiation-is-exact",
+      "statement": "For N≥2 and U∈R^N, the matrix satisfies (D_NU)_i=(I_NU)′(x_i), including the even-grid Nyquist cosine whose derivative vanishes at the nodes.",
+      "used_by": [
+        "ex-periodic-fourier-collocation-exactness-and-nyquist-mode"
+      ]
+    },
+    {
+      "id": "thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact",
+      "statement": "For N≥0, order-2N+1 moment data with support containing at least N+2 points, and the corresponding (N+1)-node Gaussian rule and orthogonal polynomials, M^G_ij=∫p_i p_j dμ, equal to zero for i≠j and h_i for i=j.",
+      "used_by": [
+        "ex-gaussian-and-simpson-weighted-mass-matrix-check"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {"id":"thm-sine-and-cosine-derivatives","used_for":"Trigonometric differentiation, smoothness, and endpoint evaluations.","opened":true},
+    {"id":"thm-quarter-turn-values-and-shift-formulas","used_for":"Grid values, periodicity, and integer-multiple sine zeros.","opened":true},
+    {"id":"thm-chain-rule","used_for":"Differentiation of scaled trigonometric arguments.","opened":true},
+    {"id":"thm-algebra-of-derivatives","used_for":"Finite-sum and polynomial differentiation.","opened":true},
+    {"id":"thm-sine-and-cosine-subtraction-formulas","used_for":"Cardinal-kernel expansion, spacing identities, and coefficient calculations.","opened":true},
+    {"id":"thm-sine-and-cosine-addition-formulas","used_for":"Product-to-sum identities and polynomial/trigonometric calculations.","opened":true},
+    {"id":"thm-sine-cosine-signs-monotonicity-and-ranges","used_for":"Distinct nodes, cosine bounds, endpoint clustering, and coefficient symmetry.","opened":true},
+    {"id":"thm-of-square-roots","used_for":"Weighted coefficient isometries and finite example constants.","opened":true},
+    {"id":"cor-archimedean-reciprocal","used_for":"The endpoint-to-central-spacing ratio tends to zero.","opened":true},
+    {"id":"lem-of-naturals-positive","used_for":"Positivity and ordering in the spacing limit.","opened":true},
+    {"id":"lem-of-inverse-positive","used_for":"Reciprocal bounds in the spacing limit.","opened":true},
+    {"id":"thm-algebra-of-limits","used_for":"The fixed-multiple reciprocal limit in the clustering example.","opened":true},
+    {"id":"def-chebyshev-polynomials-first-and-second-kind","used_for":"Chebyshev recurrence and polynomial families.","opened":true},
+    {"id":"thm-chebyshev-multiple-angle-identities","used_for":"Mode values, aliasing, orthogonality, and angular mass integrands.","opened":true},
+    {"id":"thm-ftc-second-part","used_for":"Trigonometric and polynomial integral evaluations and the power-tail bound.","opened":true},
+    {"id":"cor-trigonometric-parity-and-pythagorean-identity","used_for":"Parity, trigonometric bounds, and ellipse calculations.","opened":true},
+    {"id":"lem-geometric-sequence-null","used_for":"Uniform convergence in the analytic coefficient example.","opened":true},
+    {"id":"lem-complex-conjugation-and-modulus-laws","used_for":"Complex geometric-sum remainder bounds.","opened":true},
+    {"id":"lem-of-abs-value","used_for":"Absolute-value bounds and continuity calculations in examples.","opened":true},
+    {"id":"lem-uniform-integral-error-bound","used_for":"Passing finite geometric expansions to coefficient integrals.","opened":true},
+    {"id":"thm-continuous-implies-integrable","used_for":"Existence of angular and polynomial Riemann integrals.","opened":true},
+    {"id":"thm-linearity-of-the-integral","used_for":"Orthogonality and finite coefficient integral calculations.","opened":true},
+    {"id":"thm-algebra-of-continuous-functions","used_for":"Continuity of polynomial, trigonometric, and absolute-value integrands.","opened":true},
+    {"id":"thm-composition-of-continuous-functions","used_for":"Continuity after the cosine substitution.","opened":true},
+    {"id":"cor-differentiable-implies-continuous","used_for":"Continuity of trigonometric functions and their derivatives.","opened":true},
+    {"id":"cor-complex-exponential-cartesian-form-modulus-and-eulers-identity","used_for":"Fourier character expansions and analytic coefficient bounds.","opened":true},
+    {"id":"def-complex-differentiability-holomorphic-and-entire","used_for":"Holomorphicity of the rational example.","opened":true},
+    {"id":"thm-complex-numbers-form-a-field","used_for":"Complex rational and geometric-sum algebra.","opened":true},
+    {"id":"def-derivative","used_for":"Nondifferentiability of the cusp at zero.","opened":true},
+    {"id":"def-countable-choice","used_for":"Explicit choice assumption in the Lebesgue/Gaussian example.","opened":true},
+    {"id":"thm-lebesgue-measure-is-a-complete-measure","used_for":"Lebesgue measure used in the finite Gaussian example.","opened":true},
+    {"id":"thm-borel-sets-are-lebesgue-measurable","used_for":"Restriction of Lebesgue measure to relative Borel sets.","opened":true},
+    {"id":"thm-lebesgue-measure-of-a-box-of-every-kind","used_for":"Interval masses and full relative support.","opened":true},
+    {"id":"lem-derivative-of-a-power","used_for":"Rodrigues calculations and polynomial primitives.","opened":true},
+    {"id":"thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral","used_for":"Matching polynomial Riemann and Lebesgue integrals in the Gaussian example.","opened":true},
+    {"id":"thm-linearity-of-the-lebesgue-integral-on-l-one","used_for":"Finite Galerkin orthogonality calculations and Gaussian moments.","opened":true},
+    {"id":"def-subspace-topology-top","used_for":"Relative neighborhoods in the full-support check.","opened":true},
+    {"id":"def-metric-topology","used_for":"Neighborhood intervals in the full-support check.","opened":true},
+    {"id":"lem-qa-13-pi-rational-bounds","used_for":"Checking π/6 against the Simpson error bound.","opened":true},
+    {"id":"def-sine-and-cosine-by-power-series","used_for":"Underlying real trigonometric functions.","opened":true},
+    {"id":"thm-finite-fourier-inversion","used_for":"Uniqueness of real and complexified periodic interpolants.","opened":true},
+    {"id":"lem-orthogonality-of-characters-on-a-finite-cyclic-group","used_for":"Cardinal values of Fourier kernels.","opened":true},
+    {"id":"thm-complex-exponential-addition-and-real-extension","used_for":"Fourier aliasing, periodicity, and analytic contour calculations.","opened":true},
+    {"id":"thm-kernel-and-fibres-of-complex-exponential","used_for":"Exponential periodicity on integer grid shifts.","opened":true},
+    {"id":"lem-chebyshev-degree-leading-coefficients-and-extreme-values","used_for":"Degrees in mode folding and the monic Lobatto node polynomial.","opened":true},
+    {"id":"thm-invertible-matrix-theorem","used_for":"Uniqueness on the successful Dirichlet solve branch.","opened":true},
+    {"id":"def-pi-via-first-positive-cosine-zero","used_for":"Positivity of the angular integration interval.","opened":true},
+    {"id":"cor-weierstrass-approximation-on-a-closed-interval","used_for":"Continuous-function completeness of Chebyshev orthogonality.","opened":true},
+    {"id":"thm-heine-borel-r","used_for":"Compactness for boundedness and derivative maxima.","opened":true},
+    {"id":"thm-extreme-value-r","used_for":"Finite continuous-function bounds and remainder maxima.","opened":true},
+    {"id":"thm-monotonicity-of-the-integral","used_for":"Weighted norm bounds and positive-definiteness arguments.","opened":true},
+    {"id":"def-real-power","used_for":"Positive spectral coefficient weights.","opened":true},
+    {"id":"def-integer-power","used_for":"Natural powers and geometric tails.","opened":true},
+    {"id":"thm-real-power-continuity-and-derivatives","used_for":"Monotonic spectral factors and the algebraic alias-class tail estimate.","opened":true},
+    {"id":"cor-exponential-reciprocal-and-positivity","used_for":"Positive weights and conversion of exponential decay to powers of ρ.","opened":true},
+    {"id":"cor-mean-value-theorem","used_for":"Monotonicity of positive-base power functions.","opened":true},
+    {"id":"thm-cauchy-schwarz-finite","used_for":"Absolute summability and alias-class coefficient estimates.","opened":true},
+    {"id":"thm-real-power-laws","used_for":"Scaling the algebraic alias-class bounds.","opened":true},
+    {"id":"thm-nonnegative-series-bounded-partial-sums","used_for":"Existence and bounds of nonnegative coefficient sums.","opened":true},
+    {"id":"thm-p-series-real-exponents","used_for":"The s>1/2 absolute-summability threshold.","opened":true},
+    {"id":"thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots","used_for":"Identifying the monic Lobatto node polynomial.","opened":true},
+    {"id":"def-higher-derivatives-and-smoothness","used_for":"Closed-interval smoothness and repeated derivatives.","opened":true},
+    {"id":"thm-cauchy-theorem-one-exceptional-point-on-a-star-shaped-domain","used_for":"Contour shift on an open rectangle in the analytic interpolation proof.","opened":true},
+    {"id":"thm-geometric-series","used_for":"Summing the analytic Chebyshev coefficient tail.","opened":true},
+    {"id":"def-complex-trigonometric-and-hyperbolic-functions","used_for":"Complex cosine and the Bernstein ellipse parametrization.","opened":true},
+    {"id":"cor-complex-trigonometric-and-hyperbolic-derivatives","used_for":"Entire complex cosine.","opened":true},
+    {"id":"thm-complex-exponential-is-entire-with-derivative-itself","used_for":"Holomorphic exponential factors in the contour argument.","opened":true},
+    {"id":"thm-chain-rule-for-complex-derivatives","used_for":"Holomorphic composition with cosine.","opened":true},
+    {"id":"thm-algebra-of-complex-derivatives","used_for":"Holomorphic products in the contour argument.","opened":true},
+    {"id":"cor-complex-differentiability-implies-continuity","used_for":"Continuity required by the contour supplier.","opened":true},
+    {"id":"def-natural-logarithm","used_for":"Setting L=log ρ in the analytic estimate.","opened":true},
+    {"id":"thm-natural-logarithm-laws","used_for":"Positivity of log ρ and its exponential inverse.","opened":true},
+    {"id":"thm-exponential-is-strictly-increasing","used_for":"Bounding the strip-to-ellipse radial parameter.","opened":true},
+    {"id":"def-real-exponential-function-and-e","used_for":"The exponential normalization in the contour argument.","opened":true},
+    {"id":"lem-power-laws","used_for":"Converting exponential factors to ρ^(−n).","opened":true},
+    {"id":"def-factorial-and-falling-factorial","used_for":"Rodrigues normalization.","opened":true},
+    {"id":"thm-integration-by-parts","used_for":"Legendre orthogonality, norms, and weighted derivative identities.","opened":true}
+  ],
+  "concerns": [
+    {
+      "id": "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination",
+      "concern": "The instruction 'Construct the Chebyshev differentiation matrix D_N by [[alg-chebyshev-gauss-lobatto-differentiation-matrix]]' does not match the called procedure's explicit interface: that supplier inputs both N and nodal data U and says to 'return the derivative vector D_NU', without explicitly returning D_N. The BVP procedure has no U yet at this point. The supplier does construct D_N internally, so the intended matrix construction is immediately recoverable, but the procedure composition should specify that interface.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact",
+      "concern": "The Statement allows support containing only N+2 points, but F2 cites def-weighted-orthogonal-polynomial-galerkin-space, whose Definition assumes infinite relative support, for orthogonality and h_i. Thus that cited definition does not literally cover every measure allowed by this theorem. The opened Gaussian supplier thm-monic-gauss-orthogonal-polynomials-exist-uniquely supplies the required finite-support orthogonality directly, so the proof is readily closed with the appropriate supplier and explicit h_i convention.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "spectral-collocation-and-galerkin-methods",
+      "to": "polynomial-interpolation-and-remainder",
+      "faithful": true,
+      "note": "Cardinal interpolation is applied after reversing descending Lobatto nodes and data. The remainder use preserves C^(N+1) regularity, separates node and nonnode cases, and uses the stated factorial and node polynomial."
+    },
+    {
+      "from": "spectral-collocation-and-galerkin-methods",
+      "to": "polynomial-approximation-and-chebyshev-interpolation",
+      "faithful": true,
+      "note": "The weighted near-best estimate multiplies the supplied uniform estimate by √π. The supplier explicitly defines the N=0 Lobatto node as zero, covering this consumer's N≥0 range."
+    },
+    {
+      "from": "spectral-collocation-and-galerkin-methods",
+      "to": "composite-quadrature-rules",
+      "faithful": true,
+      "note": "Angular Simpson assembly uses an even panel count M≥2 on [0,π]. Its C^4 trigonometric integrands satisfy the supplier hypotheses, and the fourth-derivative estimate gives the stated πh^4(i+j)^4/180 bound."
+    },
+    {
+      "from": "spectral-collocation-and-galerkin-methods",
+      "to": "gaussian-quadrature",
+      "faithful": true,
+      "note": "N+1 nodes correspond to exactness through degree 2N+1; each mass integrand has degree at most 2N. Required support size is N+2. The separate concern identifies an internal citation to this batch's more restrictive infinite-support definition, rather than an overstatement of the Gaussian supplier."
+    },
+    {
+      "from": "polynomial-chaos-stochastic-collocation-and-galerkin-uq",
+      "to": "spectral-collocation-and-galerkin-methods",
+      "faithful": true,
+      "note": "The page requirement is contextual: the polynomial-chaos items do not directly cite these spectral items. The page and its completeness/rate caveat retain finite orthogonality, law-specific density, explicit regularity, and polynomial-degree restrictions; they infer neither universal spectral rates nor general collocation–Galerkin equality."
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "research_only": true,
+  "created_at": "2026-10-17T05:06:29.288297+00:00",
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "cycle": 1,
+  "issue": "Sol5.4 periodic BVP linear IVP global-continuation prerequisite",
+  "assessment": "Confirmed unsupported F3 attribution; existing published homogeneous matrix-ODE theorem supplies the missing full-interval existence, also for continuous inhomogeneity by an explicit finite block lift.",
+  "statement_delta": null,
+  "definition_delta": null,
+  "proof_facts_delta": "F3, proof1.1 and proof2.2 only; unchanged proof2.1,3.1,4.1, all constants and original Statement.",
+  "dependency_delta": {
+    "remove": [
+      "thm-picard-lindelof-local-existence-and-uniqueness",
+      "thm-existence-and-uniqueness-of-a-maximal-ode-solution"
+    ],
+    "add": [
+      "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval"
+    ],
+    "reason": "Replace the unsupported direct F3 interface with the already proved compact-interval linear matrix IVP interface. Removed direct local suppliers remain genuine indirect prerequisites of that published theorem."
+  },
+  "source_operations": [
+    {
+      "path": "items/lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse.md",
+      "kind": "exact_text_replace",
+      "before": "  - thm-picard-lindelof-local-existence-and-uniqueness\n  - thm-existence-and-uniqueness-of-a-maximal-ode-solution\n",
+      "after": "  - lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval\n"
+    },
+    {
+      "path": "items/lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse.md",
+      "kind": "exact_text_replace",
+      "before": "[F3] Linear IVPs with continuous coefficients have unique local solutions, and their maximal solutions extend while bounded ([[thm-picard-lindelof-local-existence-and-uniqueness]], [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]]).",
+      "after": "[F3] A homogeneous square-matrix IVP with continuous coefficients on a compact interval has a unique solution throughout that interval, with one-sided endpoint derivatives ([[lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]]). The same existence and uniqueness hold for vector initial data by putting the vector in the first column of the initial matrix and the remaining columns equal to zero."
+    },
+    {
+      "path": "items/lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse.md",
+      "kind": "exact_text_replace",
+      "before": "1.1 The coefficient $A$ is continuous on $[0,1]$. For $0\\le s\\le t\\le1$, let $U(t,s)$ be the solution operator of $v'=A(t)v$. Local existence and uniqueness follow from [F3]. For any initial vector $\\xi$, [F6] and the equation give $\\|U(t,s)\\xi\\|_2\\le\\|\\xi\\|_2+a_0\\int_s^t\\|U(r,s)\\xi\\|_2\\,dr$; Gronwall [F4] yields $\\|U(t,s)\\|_2\\le e^{a_0(t-s)}$. Thus the solution remains bounded and [F3] extends it through $t=1$. In particular $U$ exists on the full triangle $0\\le s\\le t\\le1$. [given, F3, F4, F6]",
+      "after": "1.1 The coefficient $A$ is continuous on $[0,1]$. For $0\\le s<1$, apply [F3] on $[s,1]$ with initial matrix $I$ at $s$; its solution is the homogeneous solution operator $U(t,s)$ throughout that interval. Put $U(1,1)=I$. For any initial vector $\\xi$, [F6] and the equation give $\\|U(t,s)\\xi\\|_2\\le\\|\\xi\\|_2+a_0\\int_s^t\\|U(r,s)\\xi\\|_2\\,dr$; Gronwall [F4] yields $\\|U(t,s)\\|_2\\le e^{a_0(t-s)}$ for every $0\\le s\\le t\\le1$. The full interval of existence comes from [F3], not from boundedness alone. [given, F3, F4, F6]"
+    },
+    {
+      "path": "items/lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse.md",
+      "kind": "exact_text_replace",
+      "before": "2.2 For data $(g,q)\\in Z$, let $p$ be the unique solution of $p'=Ap+g$, $p(0)=0$. Local existence and uniqueness follow from [F3]. Since $p'$ is continuous, [F6] gives $\\|p(t)\\|_2=\\|\\int_0^t p'(s)\\,ds\\|_2\\le\\int_0^t\\|p'(s)\\|_2\\,ds$. Pointwise, $\\|p'(s)\\|_2\\le a_0\\|p(s)\\|_2+\\|g\\|_\\infty$, so monotonicity in [F6] gives $\\|p(t)\\|_2\\le\\|g\\|_\\infty+a_0\\int_0^t\\|p(s)\\|_2\\,ds$, hence $\\|p\\|_\\infty\\le E\\|g\\|_\\infty$ by [F4]. This bound extends $p$ through the full interval by [F3]. Every solution with initial value $\\xi$ equals $U(t,0)\\xi+p(t)$, since their difference solves the homogeneous linear IVP with initial value $\\xi$ and uniqueness [F3] applies. [F1, F3, F4, F6, step 1.1, algebra]",
+      "after": "2.2 For data $(g,q)\\in Z$, form the continuous $(d+2)\\times(d+2)$ coefficient $H(t)=\\begin{bmatrix}A(t)&g(t)\\\\0&0\\end{bmatrix}$ on $[0,1]$. Apply [F3] with initial matrix whose first column is $(0,1)^T\\in\\mathbb R^{d+1}\\times\\mathbb R$ and whose remaining columns are zero. The last component of its first solution column has derivative zero and initial value one, hence is identically one by [F6]. Its upper component $p$ therefore solves $p'=Ap+g$, $p(0)=0$ throughout $[0,1]$. Any other such $p$ gives the same matrix solution by placing $(p,1)^T$ in the first column and zeros elsewhere, so uniqueness in [F3] proves uniqueness of $p$. Since $p'$ is continuous, [F6] gives $\\|p(t)\\|_2=\\|\\int_0^t p'(s)\\,ds\\|_2\\le\\int_0^t\\|p'(s)\\|_2\\,ds$. Pointwise, $\\|p'(s)\\|_2\\le a_0\\|p(s)\\|_2+\\|g\\|_\\infty$, so monotonicity in [F6] gives $\\|p(t)\\|_2\\le\\|g\\|_\\infty+a_0\\int_0^t\\|p(s)\\|_2\\,ds$, hence $\\|p\\|_\\infty\\le E\\|g\\|_\\infty$ by [F4]. Every solution with initial value $\\xi$ equals $U(t,0)\\xi+p(t)$, since their difference solves the homogeneous linear IVP with initial value $\\xi$ and uniqueness [F3] applies. [F1, F3, F4, F6, step 1.1, algebra, construct]"
+    }
+  ],
+  "source_guard": "Full observed source preimage before/items/lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse.md must match current source before actual application; preserve concurrent native changes and transparently rebase. No hashes computed or acceptance authored.",
+  "consumer_disposition": {
+    "direct_item": "thm-periodic-midpoint-collocation-error-budget",
+    "observation": "Source occurrence/dependency/F2 interface inspected only. It uses bounded continuous inverse, unchanged Statement and K_L bound. No mandatory whole-consumer proof rereview for this Proof/Facts/dependency-only repair; no consumer source edit proposed.",
+    "page": "library/numerical-differential-equations-and-stochastic-dynamics/periodic-orbit-shooting-collocation-and-floquet-error.md",
+    "page_disposition": "Carrier occurrence only; no content change or page acceptance claimed."
+  },
+  "native_obligations": [
+    "Genuine native5.5 adjudication/assignment after judge writers drain, no rewritten old keep:false evidence.",
+    "Assigned owner reads exact current existing matrix supplier and target, applies only an appropriate guarded/rebased repair.",
+    "Synchronize current own manifest deps and target proof-contract F3 citation/1.1 and2.2 derivations using exact literal current source; no new Statement mirror. No metadata edits are preapplied by this packet.",
+    "Root owns actual source-current bindings, native certification, required proof-layout and ordinary full gates."
+  ],
+  "not_performed": [
+    "canonical writes",
+    "metadata writes",
+    "hash computation",
+    "checks/tests/gates",
+    "native controls",
+    "external source reading",
+    "current native review acceptance"
+  ]
+}

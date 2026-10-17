@@ -1,0 +1,222 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-22.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-22.proof-contracts.json proposed
+@@ -284,7 +284,7 @@
+       "risk_review": {
+         "status": "complete",
+         "reviewer": "alpha-batch-22",
+-        "notes": "Checked steps 1.1\u20134.1 against the current eleven supplier statements. Convex K keeps comparison segments admissible; compactness bounds and uniformly controls D_y f. The nonzero-increment Gronwall remainder proves total differentiability uniformly in t; the second Gronwall comparison proves continuity of S. Endpoint extension of A and bounded S\u2032 exclude maximal endpoints at b as well as before b. Empty U is vacuous; h=0 needs no division. Unique linear IVPs require no AC. Reader endpoint clarification accepted."
++        "notes": "Checked steps 1.1–4.1 against the current eleven supplier statements. Convex K keeps comparison segments admissible; compactness bounds and uniformly controls D_y f. The nonzero-increment Gronwall remainder proves total differentiability uniformly in t; the second Gronwall comparison proves continuity of S. Endpoint extension of A and bounded S′ exclude maximal endpoints at b as well as before b. Empty U is vacuous; h=0 needs no division. Unique linear IVPs require no AC. Reader endpoint clarification accepted."
+       }
+     },
+     "def-certified-ivp-approximation-and-sensitivity-interface": {
+@@ -629,7 +629,7 @@
+       "risk_review": {
+         "status": "complete",
+         "reviewer": "alpha-batch-22",
+-        "notes": "Checked both implications and uniqueness against the current BVP definition and Picard\u2013Lindelof statement. For each queried s in U, the exact shot is explicitly C1, its graph is admissible as an IVP, and its endpoint pair belongs to D_B. R=0 therefore supplies the only missing BVP equation. Conversely IVP uniqueness identifies every BVP with initial s with that shot and its boundary row vanishes. Empty U is vacuous; no arbitrary-start existence or AC is inferred. Reader domain/regularity repair accepted."
++        "notes": "Checked both implications and uniqueness against the current BVP definition and Picard–Lindelof statement. For each queried s in U, the exact shot is explicitly C1, its graph is admissible as an IVP, and its endpoint pair belongs to D_B. R=0 therefore supplies the only missing BVP equation. Conversely IVP uniqueness identifies every BVP with initial s with that shot and its boundary row vanishes. Empty U is vacuous; no arbitrary-start existence or AC is inferred. Reader domain/regularity repair accepted."
+       }
+     },
+     "alg-midpoint-collocation-for-nonlinear-bvps": {
+@@ -753,19 +753,39 @@
+             "1.1",
+             "2.1"
+           ]
++        },
++        {
++          "fact": "F8",
++          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
++          "source_section": "Statement",
++          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
++          "uses": [
++            "1.1",
++            "2.1"
++          ]
++        },
++        {
++          "fact": "F9",
++          "source": "thm-norm-inequality-for-the-vector-valued-integral",
++          "source_section": "Statement",
++          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
++          "uses": [
++            "2.1"
++          ]
+         }
+       ],
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "Write $A(t)=D_yf(t,y^*(t))$ and let $X(t)$ solve $X'=A(t)X$, $X(a)=I_d$. Since $A$ is continuous and bounded on $[a,b]$, extend it continuously by its endpoint values to an open interval containing $[a,b]$. Local existence follows from [F3], and the maximal solution from [F7] is bounded by Gronwall; if it stopped at or before $b$, boundedness of $X'=AX$ would give a finite endpoint limit from which local existence extends it, a contradiction. Thus $X$ exists on $[a,b]$. Define $Q=B_1+B_2X(b)$. If $Qc=0$, then $v(t)=X(t)c$ satisfies $\\mathcal Lv=(0,0)$; [F2] forces $v=0$, and $v(a)=c$ then gives $c=0$. The square matrix $Q$ is therefore invertible.",
++          "claim": "Write $A(t)=D_yf(t,y^*(t))$ and let $X(t)$ solve $X'=A(t)X$, $X(a)=I_d$. Since $A$ is continuous and bounded on $[a,b]$, extend it continuously by its endpoint values to an open interval containing $[a,b]$. Local existence follows from [F3], and the integral equation [F8] gives the Gronwall bound for the maximal solution from [F7]; if it stopped at or before $b$, boundedness of $X'=AX$ would give a finite endpoint limit from which local existence extends it, a contradiction. Thus $X$ exists on $[a,b]$. Define $Q=B_1+B_2X(b)$. If $Qc=0$, then $v(t)=X(t)c$ satisfies $\\mathcal Lv=(0,0)$; [F2] forces $v=0$, and $v(a)=c$ then gives $c=0$. The square matrix $Q$ is therefore invertible.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+             "F2",
+             "F3",
+             "F4",
+-            "F7"
++            "F7",
++            "F8"
+           ]
+         },
+         {
+@@ -781,12 +801,14 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "Let $M_h=M_{N-1}^h\\cdots M_0^h$, the discrete homogeneous transfer from $z_0$ to $z_N$. The exact fundamental matrix $X$ satisfies $X(t_{i+1})-X(t_i)=\\int_{t_i}^{t_{i+1}}A(t)X(t)dt$. The integrand is uniformly continuous, so its average over each cell differs from its midpoint value by a quantity tending uniformly to zero as $h\\to0$. Since $C_i^h-A(t_i+h/2)\\to0$ uniformly and $X$ is uniformly continuous, the samples $X(t_i)$ satisfy the implicit-midpoint recurrence with a normalized defect $\\eta_i^h$ for which $\\max_i\\|\\eta_i^h\\|\\to0$. The transition bound in step 1.2 propagates the increment defects $h\\eta_i^h$ with total bound at most $C_1(b-a)\\max_i\\|\\eta_i^h\\|$; hence $M_h\\to X(b)$.",
++          "claim": "Let $M_h=M_{N-1}^h\\cdots M_0^h$, the discrete homogeneous transfer from $z_0$ to $z_N$. By [F8] on each column, the exact fundamental matrix $X$ satisfies $X(t_{i+1})-X(t_i)=\\int_{t_i}^{t_{i+1}}A(t)X(t)dt$. The integrand is uniformly continuous, so its average over each cell differs from its midpoint value by a quantity tending uniformly to zero as $h\\to0$. Explicitly, put $m_i=t_i+h/2$, $H(t)=A(t)X(t)$ and $\\omega_G(\\rho)=\\sup_{|s-t|\\le\\rho}\\|G(s)-G(t)\\|_{\\rm op}$ for $s,t\\in[a,b]$ and $G=H,X$. Write $S_X=\\sup_t\\|X(t)\\|_{\\rm op}$, $S_A=\\sup_t\\|A(t)\\|_{\\rm op}$, and $\\delta_h=\\max_i\\|C_i^h-A(m_i)\\|_{\\rm op}\\to0$ by step 1.2. By [F9], $\\|h^{-1}\\int_{t_i}^{t_{i+1}}H(t)dt-H(m_i)\\|_{\\rm op}\\le\\omega_H(h/2)$. Define the normalized midpoint defect by $\\eta_i^h=(X(t_{i+1})-X(t_i))/h-C_i^h(X(t_i)+X(t_{i+1}))/2$. Adding and subtracting $H(m_i)$ and $A(m_i)(X(t_i)+X(t_{i+1}))/2$ therefore gives $\\max_i\\|\\eta_i^h\\|_{\\rm op}\\le\\omega_H(h/2)+\\delta_h S_X+S_A\\omega_X(h/2)\\to0$, since $H$ and $X$ are uniformly continuous on $[a,b]$. The transition bound in step 1.2 propagates the increment defects $h\\eta_i^h$ with total bound at most $C_1(b-a)\\max_i\\|\\eta_i^h\\|$; hence $M_h\\to X(b)$.",
+           "step": "2.1",
+           "inputs": [
+             "F3",
+             "F4",
+             "F7",
++            "F8",
++            "F9",
+             "step 1.2",
+             "algebra"
+           ]
+@@ -860,7 +882,7 @@
+       "risk_review": {
+         "status": "complete",
+         "reviewer": "alpha-batch-22",
+-        "notes": "Checked Proof 1.1\u20134.1 and current midpoint/continuous-operator definitions, local and maximal ODE existence, Gronwall, chain rule and Euclidean completeness statements. Extending A by endpoint values justifies X through b. Kernel triviality implies Q=B1+B2X(b) injective and square invertible. Midpoint differentiation has factors I\u00b1hC_i/2; geometric inverses are bounded for small h. Uniform continuity gives normalized transfer defects o(1), whose h-weighted sum is o(1) since Nh=b\u2212a; products are bounded by exp(C0(b\u2212a)). Q_h converges to Q, so its inverse and the forced recurrence give a uniform block maximum norm bound. N\u22651 and h>0; all midpoint evaluations lie in the open smooth neighborhood for small h. No AC or nonlinear convergence imported. Reader endpoint clarification accepted."
++        "notes": "Checked Proof 1.1–4.1 and current midpoint/continuous-operator definitions, local and maximal ODE existence, Gronwall, chain rule and Euclidean completeness statements. Extending A by endpoint values justifies X through b. Kernel triviality implies Q=B1+B2X(b) injective and square invertible. Midpoint differentiation has factors I±hC_i/2; geometric inverses are bounded for small h. Uniform continuity gives normalized transfer defects o(1), whose h-weighted sum is o(1) since Nh=b−a; products are bounded by exp(C0(b−a)). Q_h converges to Q, so its inverse and the forced recurrence give a uniform block maximum norm bound. N≥1 and h>0; all midpoint evaluations lie in the open smooth neighborhood for small h. No AC or nonlinear convergence imported. Reader endpoint clarification accepted."
+       }
+     },
+     "prop-midpoint-residual-zero-is-collocation": {
+@@ -980,7 +1002,7 @@
+       "risk_review": {
+         "status": "complete",
+         "reviewer": "alpha-batch-22",
+-        "notes": "Checked all three proof steps against the normalized residual definition and BVP endpoint equation. h=(b\u2212a)/N>0 permits multiplication and division in the two implications. Linear interpolation gives midpoint state (Y_i+Y_{i+1})/2 and constant slope (Y_{i+1}\u2212Y_i)/h, so the equivalent wording is exact on every cell; no globally C1 or exact ODE solution is asserted. N=1 and zero rows work unchanged; D_h supplies all evaluation domains. No choice."
++        "notes": "Checked all three proof steps against the normalized residual definition and BVP endpoint equation. h=(b−a)/N>0 permits multiplication and division in the two implications. Linear interpolation gives midpoint state (Y_i+Y_{i+1})/2 and constant slope (Y_{i+1}−Y_i)/h, so the equivalent wording is exact on every cell; no globally C1 or exact ODE solution is asserted. N=1 and zero rows work unchanged; D_h supplies all evaluation domains. No choice."
+       }
+     },
+     "prop-multiple-shooting-residual-block-jacobian": {
+@@ -1089,7 +1111,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "Statement gives the sparse block Jacobian of continuity rows Psi_i(s_i)-s_(i+1) and the endpoint row B(s_0,s_N). The segment maps are supplied C1 maps; proof steps 1.1\u20131.2 differentiate their fixed formulas without selecting exact or numerical branches."
++          "reason": "Statement gives the sparse block Jacobian of continuity rows Psi_i(s_i)-s_(i+1) and the endpoint row B(s_0,s_N). The segment maps are supplied C1 maps; proof steps 1.1–1.2 differentiate their fixed formulas without selecting exact or numerical branches."
+         },
+         {
+           "case": "iff-forward",
+@@ -1119,7 +1141,7 @@
+       "risk_review": {
+         "status": "complete",
+         "reviewer": "alpha-batch-22",
+-        "notes": "Checked all steps and current chain-rule, common-tube flow, certified-evaluator and residual definitions. Each continuity row depends only on s_i and s_{i+1}; derivatives are D\u03a8_i and \u2212I. Boundary derivatives occupy distinct columns 0 and N even for N=1. Domain and C1 are explicit hypotheses, with common-tube/evaluator facts only supplying the two map choices under their respective conditions. Numerical derivatives are for the numerical map. Dimensions are (N+1)d square; no invertibility or convergence is claimed. No AC."
++        "notes": "Checked all steps and current chain-rule, common-tube flow, certified-evaluator and residual definitions. Each continuity row depends only on s_i and s_{i+1}; derivatives are DΨ_i and −I. Boundary derivatives occupy distinct columns 0 and N even for N=1. Domain and C1 are explicit hypotheses, with common-tube/evaluator facts only supplying the two map choices under their respective conditions. Numerical derivatives are for the numerical map. Dimensions are (N+1)d square; no invertibility or convergence is claimed. No AC."
+       }
+     },
+     "prop-shooting-residual-derivative": {
+@@ -1243,7 +1265,7 @@
+       "risk_review": {
+         "status": "complete",
+         "reviewer": "alpha-batch-22",
+-        "notes": "Checked steps 1.1\u20133.1 using current chain-rule, total derivative, Jacobian, common-tube flow and evaluator interfaces. The derivative of s\u21a6(s,\u03a8(s)) applied to v is (v,D\u03a8(s)v), so DB gives D1B+D2B D\u03a8 with correct dimensions and order. Continuous derivative entries establish C1. B is C1 on an open neighborhood of the entire graph; exact and approximate endpoint choices retain their own prerequisites. Numerical derivative is not identified with exact-flow sensitivity. Empty U is vacuous; no AC."
++        "notes": "Checked steps 1.1–3.1 using current chain-rule, total derivative, Jacobian, common-tube flow and evaluator interfaces. The derivative of s↦(s,Ψ(s)) applied to v is (v,DΨ(s)v), so DB gives D1B+D2B DΨ with correct dimensions and order. Continuous derivative entries establish C1. B is C1 on an open neighborhood of the entire graph; exact and approximate endpoint choices retain their own prerequisites. Numerical derivative is not identified with exact-flow sensitivity. Empty U is vacuous; no AC."
+       }
+     },
+     "alg-multiple-shooting-for-nonlinear-bvps": {
+@@ -1296,7 +1318,7 @@
+       "risk_review": {
+         "status": "complete",
+         "reviewer": "alpha-batch-22",
+-        "notes": "Reviewed the full Definition and actual block-Jacobian, certified evaluator, finite-budget Newton and correction procedure definitions. Inputs require N\u22651, open product domain, C1 boundary and endpoint maps, \u03c4\u22650 and M\u22650. Each segment supplies its own exact numerical derivative. The explicit evaluator, residual, budget, singular and invalid-trial branches determine the finite procedure; M=0 checks the initial residual before budget exit and takes no correction. Status root-tolerance-met certifies only the computed residual. Repeated segment calls add no self-edge. No global convergence, exact BVP existence, exact joins or choice claim is made."
++        "notes": "Reviewed the full Definition and actual block-Jacobian, certified evaluator, finite-budget Newton and correction procedure definitions. Inputs require N≥1, open product domain, C1 boundary and endpoint maps, τ≥0 and M≥0. Each segment supplies its own exact numerical derivative. The explicit evaluator, residual, budget, singular and invalid-trial branches determine the finite procedure; M=0 checks the initial residual before budget exit and takes no correction. Status root-tolerance-met certifies only the computed residual. Repeated segment calls add no self-edge. No global convergence, exact BVP existence, exact joins or choice claim is made."
+       }
+     },
+     "alg-single-shooting-for-nonlinear-bvps": {
+@@ -1525,7 +1547,7 @@
+       "risk_review": {
+         "status": "complete",
+         "reviewer": "alpha-batch-22",
+-        "notes": "Checked Proof 1.1\u20134.1 and every current cited supplier statement. Coordinatewise C3 Taylor gives an O(h2) normalized defect and exact zero boundary defect. Bounded second derivatives act on two node blocks per row, so L_G and C_G are uniform in N despite the 1/h linear increment. Choose r independently of h for domain containment, K L_G r\u22641/2 and 4K C_G r\u22641/2, then h small for center displacement\u2264r/2. Closed block-norm ball is finite-dimensional, nonempty and complete; contraction gives the unique local root. The geometric inverse has norm\u22642K; Taylor absorption yields distance\u22644K epsilon_alg for every candidate in the ball. Convex interpolation preserves the nodal max bound, and coordinatewise interpolation (or its integral remainder) gives the Euclidean vector error h2 sup||y\u2033||/8. Zero tolerance, endpoint nodes and fine-mesh restriction are retained. No global branch or Newton assertion and no AC. Reader coordinatewise/local-row Taylor clarification accepted."
++        "notes": "Checked Proof 1.1–4.1 and every current cited supplier statement. Coordinatewise C3 Taylor gives an O(h2) normalized defect and exact zero boundary defect. Bounded second derivatives act on two node blocks per row, so L_G and C_G are uniform in N despite the 1/h linear increment. Choose r independently of h for domain containment, K L_G r≤1/2 and 4K C_G r≤1/2, then h small for center displacement≤r/2. Closed block-norm ball is finite-dimensional, nonempty and complete; contraction gives the unique local root. The geometric inverse has norm≤2K; Taylor absorption yields distance≤4K epsilon_alg for every candidate in the ball. Convex interpolation preserves the nodal max bound, and coordinatewise interpolation (or its integral remainder) gives the Euclidean vector error h2 sup||y″||/8. Zero tolerance, endpoint nodes and fine-mesh restriction are retained. No global branch or Newton assertion and no AC. Reader coordinatewise/local-row Taylor clarification accepted."
+       }
+     },
+     "cor-local-newton-convergence-for-midpoint-bvp-collocation": {
+@@ -1571,7 +1593,7 @@
+       "derivations": [
+         {
+           "id": "step-1-1",
+-          "claim": "By [F1], the branch theorem\u2019s $C^2$ convention means continuous second total derivatives. For this fixed mesh, $G_h$ maps the open nodal domain in $\\mathbb R^{d(N+1)}$ to the same-dimensional residual space. Since $f$ and $B$ are $C^2$, composition with the affine midpoint maps shows that $G_h$ is $C^2$; on a closed ball around $Y_h$ inside the domain its continuous second derivatives are bounded, so its Jacobian is Lipschitz there.",
++          "claim": "By [F1], the branch theorem’s $C^2$ convention means continuous second total derivatives. For this fixed mesh, $G_h$ maps the open nodal domain in $\\mathbb R^{d(N+1)}$ to the same-dimensional residual space. Since $f$ and $B$ are $C^2$, composition with the affine midpoint maps shows that $G_h$ is $C^2$; on a closed ball around $Y_h$ inside the domain its continuous second derivatives are bounded, so its Jacobian is Lipschitz there.",
+           "step": "1.1",
+           "inputs": [
+             "given",
+@@ -1754,7 +1776,7 @@
+       "risk_review": {
+         "status": "complete",
+         "reviewer": "alpha-batch-22",
+-        "notes": "Checked both proof steps, the full current single-shooting Definition, evaluator interface, derivative formula and updated-Jacobian Newton proof. C2 R alone would not provide the numerical endpoint differentiability needed by the algorithm; the repaired Statement explicitly assumes a successful exact evaluator with \u03b4_IVP=0 on an open U and C1 B near its endpoint graph. Intersect that U with the residual neighborhood and choose an interior Newton ball; chain rule gives exactly DR. Simple root, square dimension and local Lipschitz DR meet the supplier theorem. Every attempted update stays valid; zero budget or tolerance stops remain possible. When L_R=0 the supplier estimate has C=0 and any larger positive C meets this corollary. No AC or arbitrary-start assertion. Reader interface repair accepted."
++        "notes": "Checked both proof steps, the full current single-shooting Definition, evaluator interface, derivative formula and updated-Jacobian Newton proof. C2 R alone would not provide the numerical endpoint differentiability needed by the algorithm; the repaired Statement explicitly assumes a successful exact evaluator with δ_IVP=0 on an open U and C1 B near its endpoint graph. Intersect that U with the residual neighborhood and choose an interior Newton ball; chain rule gives exactly DR. Simple root, square dimension and local Lipschitz DR meet the supplier theorem. Every attempted update stays valid; zero budget or tolerance stops remain possible. When L_R=0 the supplier estimate has C=0 and any larger positive C meets this corollary. No AC or arbitrary-start assertion. Reader interface repair accepted."
+       }
+     },
+     "thm-shooting-residual-error-budget": {
+@@ -1841,7 +1863,7 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "Under the statement\u2019s common compact-tube hypotheses, [F6] gives the Volterra equations for both exact flows. The state-Lipschitz bound then yields u(t)<=||e||+L int_a^t u; [F5] gives u(t)<=exp(L(b-a))||e||. Add the evaluator error from [F2] and use the stated BVP trajectory at s star.",
++          "claim": "Under the statement’s common compact-tube hypotheses, [F6] gives the Volterra equations for both exact flows. The state-Lipschitz bound then yields u(t)<=||e||+L int_a^t u; [F5] gives u(t)<=exp(L(b-a))||e||. Add the evaluator error from [F2] and use the stated BVP trajectory at s star.",
+           "step": "3.1",
+           "inputs": [
+             "given",
+@@ -1878,7 +1900,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "The trajectory conclusion is conditional on the stated common C1 tube for all initial values in an open neighborhood of the trial ball. Under that premise, proof step 3.1 compares complete exact trajectories and adds the evaluator\u2019s uniform error; step 2.1 keeps the first boundary argument fixed."
++          "evidence": "The trajectory conclusion is conditional on the stated common C1 tube for all initial values in an open neighborhood of the trial ball. Under that premise, proof step 3.1 compares complete exact trajectories and adds the evaluator’s uniform error; step 2.1 keeps the first boundary argument fixed."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1900,7 +1922,7 @@
+       "risk_review": {
+         "status": "complete",
+         "reviewer": "alpha-batch-22",
+-        "notes": "Checked steps 1.1\u20133.1 and current Newton-remainder proof, BVP/evaluator/single-shooting/derivative/correspondence interfaces, Gronwall and scalar Taylor statement. Apply vector remainder with its evaluation point x=s* and other point x_*=s, then reverse sign; the symmetric Lipschitz estimate gives expansion at DR(s*) with L_R/2. Inverse norm gives ||DR(s*)e||\u2265\u03c3||e||, and the stated radius condition absorbs at most half, including L_R=0 and e=0. Terminal Lipschitz comparison keeps the first boundary argument fixed and adds L_B \u03b4_IVP to \u03c4_root. Additional open common-tube C1 hypotheses justify Volterra/Gronwall and give e^{L(b\u2212a)} initial-data amplification before adding \u03b4_IVP. The first estimate does not rely on these extra trajectory assumptions. Reader r>0/open-neighborhood/tube clarification accepted. No global solver or AC claim."
++        "notes": "Checked steps 1.1–3.1 and current Newton-remainder proof, BVP/evaluator/single-shooting/derivative/correspondence interfaces, Gronwall and scalar Taylor statement. Apply vector remainder with its evaluation point x=s* and other point x_*=s, then reverse sign; the symmetric Lipschitz estimate gives expansion at DR(s*) with L_R/2. Inverse norm gives ||DR(s*)e||≥σ||e||, and the stated radius condition absorbs at most half, including L_R=0 and e=0. Terminal Lipschitz comparison keeps the first boundary argument fixed and adds L_B δ_IVP to τ_root. Additional open common-tube C1 hypotheses justify Volterra/Gronwall and give e^{L(b−a)} initial-data amplification before adding δ_IVP. The first estimate does not rely on these extra trajectory assumptions. Reader r>0/open-neighborhood/tube clarification accepted. No global solver or AC claim."
+       }
+     },
+     "ex-midpoint-collocation-has-two-branches": {
+@@ -2015,7 +2037,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "Example computes the two constant scalar BVP/collocation branches +1 and -1 for y prime=0 and boundary Y_0 squared-1. The two branches are explicitly the constant vectors +1 and -1, constructed by Verification steps 1.1\u20132.1; no arbitrary solution selection is performed."
++          "reason": "Example computes the two constant scalar BVP/collocation branches +1 and -1 for y prime=0 and boundary Y_0 squared-1. The two branches are explicitly the constant vectors +1 and -1, constructed by Verification steps 1.1–2.1; no arbitrary solution selection is performed."
+         },
+         {
+           "case": "iff-forward",
+@@ -2059,7 +2081,7 @@
+       "risk_review": {
+         "status": "complete",
+         "reviewer": "alpha-batch-22",
+-        "notes": "Checked all four verification steps and current BVP/residual/equivalence/procedure definitions. y\u2032=0 forces constant curves; zero interior rows force constant node vectors and c2\u22121=0 gives exactly \u00b11 for every N\u22651. At either root the homogeneous Jacobian enforces z_i=c and \u00b12c=0, hence a trivial kernel in a square system. Two simple branches do not contradict the local uniqueness theorem; the algorithm claims no global branch selection. No limiting-mesh or AC assumption is needed."
++        "notes": "Checked all four verification steps and current BVP/residual/equivalence/procedure definitions. y′=0 forces constant curves; zero interior rows force constant node vectors and c2−1=0 gives exactly ±1 for every N≥1. At either root the homogeneous Jacobian enforces z_i=c and ±2c=0, hence a trivial kernel in a square system. Two simple branches do not contradict the local uniqueness theorem; the algorithm claims no global branch selection. No limiting-mesh or AC assumption is needed."
+       }
+     },
+     "ex-unstable-single-shooting-amplifies-error": {
+@@ -2114,7 +2136,7 @@
+         },
+         {
+           "id": "step-3-1",
+-          "claim": "Since $\\sinh\\lambda-\\lambda$ has value zero at $0$ and derivative $\\cosh\\lambda-1>0$ for $\\lambda>0$, we have $\\sinh\\lambda/\\lambda>1$. Also the derivative of $q(\\lambda)=\\sinh\\lambda/\\lambda$ has numerator $g(\\lambda)=\\lambda\\cosh\\lambda-\\sinh\\lambda$, where $g(0)=0$ and $g\\prime(\\lambda)=\\lambda\\sinh\\lambda>0$; hence $q$ is increasing. For $\\lambda\\ge2$, $\\sinh\\lambda\\ge e^{\\lambda-1}/2$, so $q(\\lambda)\\ge e^{\\lambda-1}/(2\\lambda)\\to\\infty$. The perturbed terminal boundary residual vector changes by $(0,\\delta\\sinh\\lambda/\\lambda)$, while [F2]\u2013[F3] identify this as the endpoint residual evaluated by exact single shooting.",
++          "claim": "Since $\\sinh\\lambda-\\lambda$ has value zero at $0$ and derivative $\\cosh\\lambda-1>0$ for $\\lambda>0$, we have $\\sinh\\lambda/\\lambda>1$. Also the derivative of $q(\\lambda)=\\sinh\\lambda/\\lambda$ has numerator $g(\\lambda)=\\lambda\\cosh\\lambda-\\sinh\\lambda$, where $g(0)=0$ and $g\\prime(\\lambda)=\\lambda\\sinh\\lambda>0$; hence $q$ is increasing. For $\\lambda\\ge2$, $\\sinh\\lambda\\ge e^{\\lambda-1}/2$, so $q(\\lambda)\\ge e^{\\lambda-1}/(2\\lambda)\\to\\infty$. The perturbed terminal boundary residual vector changes by $(0,\\delta\\sinh\\lambda/\\lambda)$, while [F2]–[F3] identify this as the endpoint residual evaluated by exact single shooting.",
+           "step": "3.1",
+           "inputs": [
+             "F2",
+@@ -2333,7 +2355,7 @@
+       "risk_review": {
+         "status": "complete",
+         "reviewer": "alpha-batch-22",
+-        "notes": "Checked all verification steps and five current dependencies. The exact constant flow \u03c6(t;s)=s is a C1 endpoint evaluator with zero trajectory error on every open neighborhood; the polynomial boundary map is globally C1. R=s2\u22121 has simple roots \u00b11, Lipschitz derivative 2s, and local Newton basins satisfying the repaired corollary. At s=0 with \u03c4=0 and M\u22651, residual \u22121 fails tolerance, budget permits a correction, and the zero scalar Jacobian cannot solve 0u=1, so singular-jacobian is the exact procedure outcome. For M=0 or \u03c4\u22651 that conclusion would differ, and these are explicitly excluded in Given. No arbitrary-start inference or AC."
++        "notes": "Checked all verification steps and five current dependencies. The exact constant flow φ(t;s)=s is a C1 endpoint evaluator with zero trajectory error on every open neighborhood; the polynomial boundary map is globally C1. R=s2−1 has simple roots ±1, Lipschitz derivative 2s, and local Newton basins satisfying the repaired corollary. At s=0 with τ=0 and M≥1, residual −1 fails tolerance, budget permits a correction, and the zero scalar Jacobian cannot solve 0u=1, so singular-jacobian is the exact procedure outcome. For M=0 or τ≥1 that conclusion would differ, and these are explicitly excluded in Given. No arbitrary-start inference or AC."
+       }
+     }
+   }

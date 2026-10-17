@@ -1,0 +1,77 @@
+[
+  {
+    "kind": "page",
+    "consumer": "stable-sde-schemes-for-superlinear-drift",
+    "supplier": "euler-maruyama-convergence",
+    "status": "reviewed-context-only",
+    "evidence": "The published prerequisite page and its actual item thm-euler-maruyama-strong-rate-under-higham-mao-stuart-hypotheses were inspected. That theorem assumes uniform all-finite-moment bounds for the exact solution and the ordinary Euler step and continuous processes. The cubic explicit-Euler companion proves those moments diverge, while tamed, drift-implicit, and CIR paths are distinct schemes. No batch-76 proof cites this Euler rate theorem; the declared page edge is retained as context and no claim transfers its conclusion.",
+    "examined_supplier_items": [
+      "alg-euler-maruyama-autonomous",
+      "thm-euler-maruyama-strong-rate-under-higham-mao-stuart-hypotheses"
+    ],
+    "required_hypotheses": "The published strong-rate item requires uniform finite moments of every order for the exact process and the ordinary Euler grid, step, and continuous interpolation. Its all-moment premise is not supplied for a superlinear explicit Euler drift.",
+    "affected_claims": [
+      "cex-euler-moments-diverge-for-cubic-dissipative-sde: explicitly exhibits why the ordinary-Euler moment premise can fail",
+      "thm-tamed-euler-strong-order-half: proves the distinct tamed method using lem-tamed-euler-uniform-moment-bounds",
+      "thm-drift-implicit-euler-sde-strong-order-half: proves the distinct backward-resolvent method"
+    ],
+    "local_route": "The canonical Euler algorithm is used only for the assigned counterexample and the noise-stability example. Tamed moments and both new strong-rate results are proved locally under their method-specific hypotheses. The published all-moment theorem is not cited as a mathematical supplier.",
+    "supplier_excerpts": [
+      {
+        "item": "thm-euler-maruyama-strong-rate-under-higham-mao-stuart-hypotheses",
+        "section": "Statement",
+        "excerpt": "Assume AC. Let $d,m\\ge1$ be finite, fix $T>0$, and work on a complete filtered\nprobability space whose filtration is right-continuous and contains every\n$P$-null subset of $\\mathcal F$ in $\\mathcal F_0$. Let $W=(W_t)_{0\\le t\\le T}$\nbe an adapted standard $m$-dimensional Brownian motion whose increments are\nindependent of the current filtration. Let\n$X_0$ be finite and $\\mathcal F_0$-measurable, independent of\n$\\sigma(W_t-W_0:0\\le t\\le T)$. Use Euclidean state norms and the Frobenius\nmatrix norm. Consider\nthe autonomous SDE\n$$X_t=X_0+\\int_0^t f(X_s)\\,ds+\\int_0^t g(X_s)\\,dW_s, \\qquad X_t\\in\\mathbb R^d,$$\nwhere $f:\\mathbb R^d\\to\\mathbb R^d$ and\n$g:\\mathbb R^d\\to\\mathbb R^{d\\times m}$ are $C^1$. Assume that constants\n$\\mu,c,D\\ge0$ and an integer $q\\ge1$ satisfy, for all $x,y\\in\\mathbb R^d$,\n$$\\langle x-y,f(x)-f(y)\\rangle\\le\\mu|x-y|^2, \\qquad \\|g(x)-g(y)\\|_F^2\\le c|x-y|^2,$$\nand\n$$|f(x)-f(y)|^2\\le D(1+|x|^q+|y|^q)|x-y|^2.$$\nFor each $0<h\\le1$ with $N=T/h\\in\\mathbb N$, let $Y^h$ be the continuous\nEuler–Maruyama interpolation and $\\bar Y^h$ its left-endpoint step process\nfrom [[alg-euler-maruyama-autonomous]]. Assume\nthat an exact strong solution $X$ and these exact, step and continuous Euler\nprocesses have uniformly bounded moments of every finite order on $[0,T]$:\nfor every $p\\ge1$,\n$$\\mathbb E\\sup_{t\\le T}|X_t|^p+ \\sup_{0<h\\le1,\\ T/h\\in\\mathbb N}\\left( \\mathbb E\\sup_{t\\le T}|Y_t^h|^p+ \\mathbb E\\sup_{t\\le T}|\\bar Y_t^h|^p\\right)<\\infty.$$\nThen a constant $C$, independent of $h$, satisfies\n$$\\mathbb E\\sup_{0\\le t\\le T}|X_t-Y_t^h|^2\\le Ch.$$\nIn particular the grid-point root-mean-square error is $O(h^{1/2})$.\nThe all-moment premise is part of this source contract; $X_0\\in L^2$ alone\ndoes not imply it."
+      }
+    ]
+  },
+  {
+    "kind": "page",
+    "consumer": "stable-sde-schemes-for-superlinear-drift",
+    "supplier": "milstein-stochastic-taylor-and-iterated-integrals",
+    "status": "open-page-interface-reconciliation",
+    "evidence": "The declared T13 page and its current item lem-stochastic-local-to-global-rms-bound were inspected. The lemma proves an order-one RMS recurrence only when the drift defect is O(h^2), the centered leading error has variance O(h E|e_n|^2), and the remaining centered defect has variance O(h^3). T14 methods here have order-one-half local errors, so that lemma's variance order is not the interface for either new half-order theorem. No batch-76 carrier lists the T13 lemma as an item dependency. The A page remains linked to T13 as assigned context, but the owner should reconcile whether that page edge is navigational or requires a separate compatible supplier.",
+    "examined_supplier_items": [
+      "def-milstein-scheme-and-iterated-integrals",
+      "lem-stochastic-local-to-global-rms-bound",
+      "thm-commutative-milstein-strong-order-one"
+    ],
+    "required_hypotheses": "The T13 recurrence requires |r_n|<=C_0 h^2, orthogonal centered M_(n+1),Q_(n+1), E|M_(n+1)|^2<=C_1 h E|e_n|^2, and E|Q_(n+1)|^2<=C_1 h^3. It yields E|e_N|^2=O(h^2), an order-one RMS conclusion.",
+    "affected_claims": [
+      "thm-tamed-euler-strong-order-half: the assigned proof has its own path-supremum Itô error recurrence and order-half tamed moment supplier",
+      "thm-drift-implicit-euler-sde-strong-order-half: the assigned proof has its own resolvent inequality, local defects, and discrete error recurrence"
+    ],
+    "local_route": "Both half-order results carry complete local recurrences with the actual method-specific defect orders. No T13 fact, proof excerpt, or acceptance is imported. The unresolved issue is the declared page-level edge only; it does not block the independently proved item arguments.",
+    "supplier_excerpts": [
+      {
+        "item": "lem-stochastic-local-to-global-rms-bound",
+        "section": "Statement",
+        "excerpt": "Let $N\\ge1$, $0<h\\le1$, and $Nh\\le T$. Let $(\\mathcal F_n)_{n=0}^N$ be a filtration as in [[def-filtration-and-filtered-probability-space]]. For every $n$, let $e_n,u_n,r_n$ be square-integrable $\\mathbb R^d$-valued, $\\mathcal F_n$-measurable random vectors; let $M_{n+1},Q_{n+1}$ be square-integrable and $\\mathcal F_{n+1}$-measurable. Say $Z$ is orthogonal to $\\mathcal F_n$ if $\\mathbb E\\langle H,Z\\rangle=0$ for every square-integrable $\\mathcal F_n$-measurable vector $H$. Suppose\n$$e_0=0,\\quad e_{n+1}=e_n+hu_n+r_n+M_{n+1}+Q_{n+1},$$\n$$|u_n|\\le L|e_n|,\\qquad |r_n|\\le C_0h^2,$$\nand $M_{n+1},Q_{n+1}$ are orthogonal to $\\mathcal F_n$, with\n$$\\mathbb E|M_{n+1}|^2\\le C_1h\\,\\mathbb E|e_n|^2,\\qquad \\mathbb E|Q_{n+1}|^2\\le C_1h^3.$$\nThen $\\mathbb E|e_N|^2\\le C_T h^2$, where $C_T$ depends only on $T,L,C_0,C_1$ and not on $h$ or $N$. This is a local-to-global estimate for an order-one grid RMS error when the drift error is Lipschitz and the centered one-step defect has second moment $O(h^3)$."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-drift-implicit-euler-sde",
+    "supplier": "thm-backward-euler-dissipative-resolvent-contraction",
+    "status": "inspected-interface-draft",
+    "evidence": "The complete actual supplier statement and its two-step proof body were inspected. For the autonomous T14 drift, b is C^1 and hence continuous; the displayed global dissipativity assumption with mu>=0 exactly supplies the supplier hypothesis. The supplier is a draft item from batch 65, and this record verifies its body and interface only; it does not claim independent approval.",
+    "examined_supplier_items": [
+      "thm-backward-euler-dissipative-resolvent-contraction",
+      "def-backward-euler-step-equation",
+      "lem-strongly-monotone-continuous-map-is-bijective"
+    ],
+    "required_hypotheses": "A continuous vector field on the full Euclidean state space and one global constant mu>=0 such that <b(x)-b(y),x-y><=-mu|x-y|^2 for every x,y. Then x-hb(x) is bijective and its inverse has Lipschitz constant (1+h mu)^(-1).",
+    "affected_claims": [
+      "alg-drift-implicit-euler-sde: each exact-real update has a unique finite resolvent root",
+      "thm-drift-implicit-euler-sde-strong-order-half: uses the resolvent contraction in its stability and local-error inequalities"
+    ],
+    "local_route": "The algorithm restricts the supplier to the autonomous continuous dissipative drift. The strong-rate proof states the same dissipativity inequality and otherwise proves its stochastic estimates locally. The supplier proof body establishes strong monotonicity of x-hb(x), then invokes the stated continuous-map bijection theorem.",
+    "supplier_excerpts": [
+      {
+        "item": "thm-backward-euler-dissipative-resolvent-contraction",
+        "section": "Statement",
+        "excerpt": "Let $d\\ge1$, let $f:\\mathbb R\\times\\mathbb R^d\\to\\mathbb R^d$ be continuous, and suppose for every fixed $t$ and all $x,y\\in\\mathbb R^d$,"
+      }
+    ]
+  }
+]

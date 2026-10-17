@@ -1,0 +1,246 @@
+--- tools/step3-owner-unbound-reader-observations.mjs
++++ tools/step3-owner-unbound-reader-observations.mjs
+@@ -1,10 +1,48 @@
+-// Preserve an intermediate reader observation whose original source bytes
+-// were not captured. This grants routing, never defect acceptance.
+-import { readFileSync, existsSync } from 'node:fs';
+-import { join } from 'node:path';
++// Preserve intermediate reader observations without inventing a historical
++// composite carrier. Available raw source may be bound separately; routing only.
++import { readFileSync, existsSync, lstatSync } from 'node:fs';
++import { join, resolve, relative, isAbsolute } from 'node:path';
+ import { createHash } from 'node:crypto';
+ import { partialReaderHash } from './step3-owner-partial-reader-repairs.mjs';
++import { split, yaml } from './pathway-lib.mjs';
++import { draftOwnerMatcher } from './run-draft-ownership.mjs';
+ const sha = bytes => createHash('sha256').update(bytes).digest('hex');
++export const OBSERVATION_EVIDENCE_POLICY = 'owner-reader-observation-evidence-v1';
++// New archive/closure inputs are regular own-run research files, never links.
++function researchBytes(root, run, path) {
++  if (typeof path !== 'string' || isAbsolute(path) || path.includes('\\')
++    || !path.startsWith(`research/${run}-`) || path.split('/').some(part => !part || part === '.' || part === '..'))
++    throw Error('Invalid reader observation research path');
++  const full = resolve(root, path), local = relative(resolve(root), full);
++  if (!local || local.startsWith('..') || isAbsolute(local)) throw Error('Escaping reader observation research path');
++  let cursor = resolve(root);
++  for (const part of local.split('/')) {
++    cursor = join(cursor, part);
++    if (lstatSync(cursor).isSymbolicLink()) throw Error('Symlink reader observation evidence');
++  }
++  if (!lstatSync(full).isFile()) throw Error('Nonregular reader observation evidence');
++  return readFileSync(full);
++}
++function observedSourceArchive(root, run, entry, finding, receipt, report) {
++  const marker = entry.observed_source_archive;
++  if (!marker || Object.keys(marker).some(key => !['path', 'sha256'].includes(key))
++    || !/^[a-f0-9]{64}$/.test(marker.sha256 ?? '')
++    || marker.sha256 !== finding.observed_source.item_sha256)
++    throw Error('Invalid observed source archive binding');
++  const bytes = researchBytes(root, run, marker.path), fm = yaml().parse(split(bytes.toString('utf8')).fm);
++  if (sha(bytes) !== marker.sha256 || fm?.id !== finding.id
++    || typeof fm.pipeline_run !== 'string' || !draftOwnerMatcher(root, run)(fm))
++    throw Error('Observed source archive has wrong bytes or draft ownership');
++  let tail;
++  try { tail = JSON.parse(receipt.tail); } catch { throw Error('Reader observation requires a complete native structured tail'); }
++  if (!Array.isArray(report.findings) || !/^[a-z][a-z0-9-]*$/.test(finding.id)
++    || receipt.label !== `reader-${entry.batch}` || receipt.exit_code !== 0 || receipt.process_exit_code !== 0
++    || receipt.timed_out === true || !Number.isFinite(Date.parse(receipt.ended_at))
++    || ![String(entry.batch), `${run}-batch-${entry.batch}`].includes(String(report.batch))
++    || partialReaderHash(tail) !== partialReaderHash(report))
++    throw Error('Observed source archive lacks exact successful native completion');
++  return { path: marker.path, sha256: marker.sha256 };
++}
+ export function unboundReaderObservations(root, run, batch) {
+   if (!/^[A-Za-z0-9_-]+$/.test(run ?? '') || !/^[1-9]\d*$/.test(String(batch))) throw Error('Invalid unbound reader identity');
+   const path = join(root, 'research', `${run}-step3-owner-unbound-reader-observations.json`);
+@@ -16,10 +54,10 @@
+   for (const entry of doc.observations.filter(x => String(x.batch) === String(batch))) {
+     const reportBytes = readFileSync(join(root, 'research', `${run}-reader-findings-${batch}.json`));
+     const receiptBytes = readFileSync(join(root, 'research', `${run}-dispatch`, `reader-reader-${batch}.result.json`));
+-    const receipt = JSON.parse(receiptBytes), finding = JSON.parse(reportBytes).findings?.[entry.index - 1];
++    const receipt = JSON.parse(receiptBytes), report = JSON.parse(reportBytes), finding = report.findings?.[entry.index - 1];
+     const obligation = `reader:${batch}:${entry.index}`;
+     if (!Number.isSafeInteger(entry.index) || entry.index < 1 || result.has(obligation)
+-      || entry.original_source_unavailable !== true || typeof entry.reason !== 'string' || entry.reason.trim().length < 80
++      || ![true, false].includes(entry.original_source_unavailable) || typeof entry.reason !== 'string' || entry.reason.trim().length < 80
+       || entry.report_sha256 !== sha(reportBytes) || entry.result_sha256 !== sha(receiptBytes)
+       || receipt.ok !== true || receipt.run !== run || receipt.role !== 'reader' || !receipt.covers?.map(String).includes(String(batch))
+       || finding?.subject_type !== 'in-run-dependency' || finding.id !== entry.id
+@@ -27,7 +65,40 @@
+       || partialReaderHash(finding) !== entry.finding_sha256
+       || !/^[a-f0-9]{64}$/.test(entry.producer_sha256_at_registration ?? '')
+       || entry.producer_sha256_at_registration === finding.observed_source.item_sha256) throw Error('Invalid unbound reader evidence');
+-    result.set(obligation, { record_sha256: partialReaderHash(entry), original_source_unavailable: true });
++    if (entry.original_source_unavailable === false) {
++      const archive = observedSourceArchive(root, run, entry, finding, receipt, report);
++      result.set(obligation, { record_sha256: partialReaderHash(entry), original_source_unavailable: false,
++        observed_source_archive: archive });
++    } else {
++      // Preserve the existing missing-source binding exactly, including key order.
++      result.set(obligation, { record_sha256: partialReaderHash(entry), original_source_unavailable: true });
++    }
+   }
+   return result;
+ }
++
++// Opt-in closure evidence only: never expands unmarked historical receipts.
++export function closureEvidence(root, run) {
++  if (!/^[A-Za-z0-9_-]+$/.test(run ?? '')) throw Error('Invalid observation closure identity');
++  const registry = `research/${run}-step3-owner-unbound-reader-observations.json`;
++  if (!existsSync(join(root, registry))) return {};
++  const bytes = researchBytes(root, run, registry), doc = JSON.parse(bytes);
++  if (doc.version !== 1 || doc.run !== run || doc.registered_by !== 'root'
++    || doc.mathematical_acceptance !== false || !Array.isArray(doc.observations))
++    throw Error('Invalid observation closure authority');
++  for (const batch of new Set(doc.observations.map(entry => String(entry.batch))))
++    unboundReaderObservations(root, run, batch);
++  const out = { [registry]: sha(bytes) };
++  const add = (path, expected) => {
++    if (sha(researchBytes(root, run, path)) !== expected
++      || out[path] !== undefined && out[path] !== expected) throw Error('Changed observation closure evidence');
++    out[path] = expected;
++  };
++  for (const entry of doc.observations) {
++    add(`research/${run}-reader-findings-${entry.batch}.json`, entry.report_sha256);
++    add(`research/${run}-dispatch/reader-reader-${entry.batch}.result.json`, entry.result_sha256);
++    if (entry.original_source_unavailable === false)
++      add(entry.observed_source_archive.path, entry.observed_source_archive.sha256);
++  }
++  return out;
++}
+--- tools/step3-close.mjs
++++ tools/step3-close.mjs
+@@ -9,6 +9,7 @@
+ import { itemHashGuard } from './item-hash.mjs';
+ import { requiredPageClosureEvidence } from './step3-owner-required-page-routes.mjs';
+ import { downstreamConsumerClosureEvidence } from './step3-owner-downstream-consumer-routes.mjs';
++import { closureEvidence, OBSERVATION_EVIDENCE_POLICY } from './step3-owner-unbound-reader-observations.mjs';
+ import { isPublishedItem } from './published-repair-policy.mjs';
+ 
+ const argv = process.argv.slice(2);
+@@ -39,12 +40,13 @@
+   || (name.startsWith(`${run}-alpha-`) && name.endsWith('-3a-decisions.json'))
+   || version === 2 && [ `${run}-alpha-3b.md`, `${run}-cross-group-edges.json`,
+     `${run}-3b-verdicts.jsonl` ].includes(name)).sort();
+-const artifactHashes = (version = 3) => ({
++const artifactHashes = (version = 3, observationPolicy = null) => ({
+   ...Object.fromEntries(artifactNames(version).map((name) => [
+     `research/${name}`, sha256(readFileSync(R('research', name))),
+   ])),
+   ...(version === 3 ? requiredPageClosureEvidence(root, run) : {}),
+   ...(version === 3 ? downstreamConsumerClosureEvidence(root, run) : {}),
++  ...(version === 3 && observationPolicy === OBSERVATION_EVIDENCE_POLICY ? closureEvidence(root, run) : {}),
+ });
+ const jsonl = (path) => existsSync(path)
+   ? readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)) : [];
+@@ -81,7 +83,11 @@
+     || receipt.version === 3 && receipt.basis !== 'dependency-ordered-step3a') {
+     errors.push('wrong version, run, or status');
+   }
+-  const currentArtifacts = artifactHashes(receipt.version);
++  if (Object.hasOwn(receipt, 'observation_evidence_policy')
++    && (receipt.version !== 3 || receipt.observation_evidence_policy !== OBSERVATION_EVIDENCE_POLICY)) {
++    fail('unknown or unsupported observation_evidence_policy');
++  }
++  const currentArtifacts = artifactHashes(receipt.version, receipt.observation_evidence_policy);
+   if (JSON.stringify(Object.keys(currentArtifacts).sort()) !== JSON.stringify(Object.keys(receipt.artifacts ?? {}).sort())) {
+     errors.push('the exact Step-3 artifact set changed');
+   }
+@@ -115,12 +121,13 @@
+   if (result.error) fail(`${label} could not complete: ${result.error.message}`);
+   if (result.status !== 0) fail(`${label} failed\n${result.stderr || result.stdout}`);
+ }
+-const artifacts = artifactHashes();
++const artifacts = artifactHashes(3, OBSERVATION_EVIDENCE_POLICY);
+ if (!Object.keys(artifacts).length) fail('no exact Step-3 artifacts exist');
+ const ledgerRows = step3LedgerRows();
+ writeFileSync(receiptPath, `${JSON.stringify({
+   version: 3,
+   basis: 'dependency-ordered-step3a',
++  observation_evidence_policy: OBSERVATION_EVIDENCE_POLICY,
+   run,
+   status: 'closed',
+   closed_at: new Date().toISOString(),
+--- /dev/null
++++ tools/step3-owner-unbound-reader-observations.md
+@@ -0,0 +1,80 @@
++# Historical reader source observations without a full carrier
++
++`step3-owner-unbound-reader-observations.mjs` preserves exact native in-run
++reader findings whose reported current source differs from the producer at root
++registration. It authorizes routing only: no edit permission, mathematical
++acceptance, independent review, new execution coverage or gate exemption.
++Original findings, including `observed_source.snapshot: "current"` and the
++original raw item digest, remain unchanged.
++
++The existing root registry is
++`research/RUN-step3-owner-unbound-reader-observations.json`, version1,
++`registered_by: "root"`, `mathematical_acceptance: false`, with `observations`.
++Each entry retains batch, one-based finding index, item ID, a concrete reason
++of at least80characters, exact report/result/finding digests and the producer
++raw digest at registration. That registration digest must differ from the
++original reported source digest. Do not relabel a later current producer as
++what the original reader observed.
++
++## Two truthful evidence cases
++
++- `original_source_unavailable: true` is the existing missing-full-source case.
++  Its validation and returned binding remain unchanged:
++  `{record_sha256, original_source_unavailable: true}`. Do not use it when the
++  authentic complete original source is available.
++- `original_source_unavailable: false` requires
++  `observed_source_archive: {path, sha256}`. Its bytes must match BOTH the
++  archive digest and the original native finding's `observed_source.item_sha256`.
++  It must parse as the exact item's draft with explicit run identity accepted
++  by the ordinary run-draft ownership matcher. A restored run's authenticated
++  ownership rules apply; no source without a run marker is admitted here.
++  The archive must be a regular own-run `research/RUN-...` file with no escape
++  components or symlink anywhere in its repository-relative path.
++
++The available-source branch additionally requires the actual matching reader
++label, successful run/role/batch coverage, zero process and dispatch exit codes,
++no timeout, an actual completion time, the actual report batch, and equality
++between the **entire parsed native structured tail** and the full findings JSON.
++A clipped tail, asserted successful reread, wrong archive ID/run, reconstructed
++source, or convenient pre-reader digest is insufficient. There is no
++batch-specific waiver.
++
++Its returned binding is
++`{record_sha256, original_source_unavailable: false, observed_source_archive}`.
++The full record digest continues to bind the root registration; the explicit
++archive marker authenticates only the historical raw source. A source-only
++archive does not recover its historical contract or manifest, even when its
++raw digest also occurs in a native pre/post snapshot. Do not copy those other
++snapshot fields into the observation or claim a full observed composite carrier.
++
++Both cases deliberately remain `observation_basis: "unbound"` with
++`observed_sha256: null` under ordinary scope routing. An Alpha must retain
++`historical_delta_unknown: true`, provide the concrete owner_resolution required
++for unbound history, independently review the actual current producer and
++consumer uses, and adjudicate the original finding through normal verdict and
++closed-ledger rules. Authentic historical source bytes do not certify current
++mathematics or close an already-repaired finding automatically.
++
++## Closure evidence and receipt compatibility
++
++Exported `closureEvidence(root, run)` validates registered observations and
++returns the exact root registry, native findings reports, successful result
++files and every available observed-source archive as raw evidence bindings.
++The existing closure artifact scan already includes the native Markdown reader
++reports. Conflicting repeated references, changed native evidence or changed
++archive bytes are rejected.
++
++New version3 Step3 closure receipts carry
++`observation_evidence_policy: "owner-reader-observation-evidence-v1"` and freeze
++these additional inputs. Verification of a marked receipt requires its exact
++artifact set and bytes to remain unchanged. Creating or deleting the registry,
++adding an entry, or changing its native result/archive after closure changes
++the marked evidence set or a frozen digest and fails verification.
++
++Historical version2 and unmarked version3 receipts retain their original
++artifact-set calculation; this policy does not retroactively add evidence to
++an old closure or rewrite it. A marker with any unknown value, or a marker on
++a non-version3 receipt, is rejected. Existing native checks, current-carrier
++currency, owner policy sealing and the mandatory full native battery remain
++unchanged. Root records genuine registry entries, installs/reseals policy and
++runs the authorized native workflow; this module has no registration command.

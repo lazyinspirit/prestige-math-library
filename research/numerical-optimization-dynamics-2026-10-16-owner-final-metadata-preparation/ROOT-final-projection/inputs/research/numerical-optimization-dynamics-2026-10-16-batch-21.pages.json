@@ -1,0 +1,269 @@
+[
+  {
+    "order": 2326,
+    "id": "numerical-boundary-value-problems",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Linear numerical boundary-value problems",
+    "companion": "numerical-boundary-value-problems-examples",
+    "requires": [
+      "darboux-lhopital-and-taylor"
+    ],
+    "items": [
+      {
+        "id": "alg-centered-difference-dirichlet-bvp",
+        "kind": "algorithm",
+        "title": "Centered finite differences for the zero-Dirichlet boundary-value problem",
+        "statement": "For continuous g on [0,1] and an integer N≥1, form h=1/(N+1), the interior grid, and the centered second-difference Dirichlet system for −u''=g; solve it by an explicit Thomas recurrence in exact real arithmetic, returning invalid-mesh or linear-solve-failure when the stated checks fail.",
+        "deps": [],
+        "justified_by": [
+          "lem-centered-difference-dirichlet-inverse-maxnorm"
+        ],
+        "dependency_level": 0,
+        "strategy": "Specify inputs, the grid, exact boundary closure, matrix, recurrence, outputs and failure statuses. The following local lemma proves that all pivots are positive, the system has a unique solution, and the failure branch is unreachable for admissible inputs.",
+        "axiom_base": "No choice or additional axiom; operations are exact real arithmetic.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, author-source revision 2025.01.27, Chapter 10, linear.md",
+              "url": "https://raw.githubusercontent.com/fncbook/fnc/a280ed1a013393ee0a184dcbaa866522f35a3516/chapter10/linear.md"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 5: Finite Difference Approximation, Spring 2009",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 6: General Linear Second Order Equation, Spring 2009",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c395389a94e1177997aa6364b24852d8_MIT18_336S09_lec6.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-centered-difference-dirichlet-inverse-maxnorm",
+        "kind": "lemma",
+        "title": "Discrete maximum principle and uniform inverse bound for the Dirichlet stencil",
+        "statement": "For every N≥1 on the uniform zero-Dirichlet grid, A_h is invertible, A_h^{-1} preserves componentwise nonnegativity, and ||A_h^{-1}r||∞≤||r||∞/8 for every r∈R^N; the bound is independent of h.",
+        "deps": [
+          "alg-centered-difference-dirichlet-bvp"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove the Thomas pivots are (j+1)/j, prove the discrete maximum principle by propagation from a negative minimum, and compare A_h^{-1}r with the discrete barrier q_j=x_j(1−x_j)/2.",
+        "axiom_base": "Choice-free finite-dimensional argument over the ordered real field.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, author-source revision 2025.01.27, Chapter 10, linear.md",
+              "url": "https://raw.githubusercontent.com/fncbook/fnc/a280ed1a013393ee0a184dcbaa866522f35a3516/chapter10/linear.md"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 5: Finite Difference Approximation, Spring 2009",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 6: General Linear Second Order Equation, Spring 2009",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c395389a94e1177997aa6364b24852d8_MIT18_336S09_lec6.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-centered-difference-dirichlet-truncation-residual",
+        "kind": "lemma",
+        "title": "Centered-difference residual bound with exact Dirichlet closure",
+        "statement": "If u has four continuous derivatives on [0,1], −u''=g, and ||u⁽⁴⁾||∞≤M, then the interior centered-difference residual has max norm at most Mh²/12 and the imposed zero-Dirichlet endpoint residuals are exactly zero.",
+        "deps": [
+          "alg-centered-difference-dirichlet-bvp",
+          "cor-taylor-remainder-bound",
+          "lem-of-triangle-inequality"
+        ],
+        "dependency_level": 1,
+        "strategy": "Apply the order-three Lagrange remainder bound at x_j−h and x_j+h for every interior node, add the two remainders, and record the exact endpoint closure residual separately.",
+        "axiom_base": "No choice; the finite maximum norm is explicitly defined.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, author-source revision 2025.01.27, Chapter 10, linear.md",
+              "url": "https://raw.githubusercontent.com/fncbook/fnc/a280ed1a013393ee0a184dcbaa866522f35a3516/chapter10/linear.md"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 5: Finite Difference Approximation, Spring 2009",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 6: General Linear Second Order Equation, Spring 2009",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c395389a94e1177997aa6364b24852d8_MIT18_336S09_lec6.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-centered-difference-dirichlet-second-order-error",
+        "kind": "theorem",
+        "title": "Second-order max-norm error for the centered Dirichlet scheme",
+        "statement": "Under the preceding C⁴ and uniform fourth-derivative bound, the exact discrete solution has max-norm error at most Mh²/96. Any vector with residual ρ_h=A_hv_h−g_h satisfies ||v_h−u_grid||∞≤Mh²/96+||ρ_h||∞/8; this separates discretization error from linear-solve residual.",
+        "deps": [
+          "alg-centered-difference-dirichlet-bvp",
+          "lem-centered-difference-dirichlet-inverse-maxnorm",
+          "lem-centered-difference-dirichlet-truncation-residual",
+          "lem-of-triangle-inequality"
+        ],
+        "dependency_level": 2,
+        "strategy": "Set e_h=v_h−u_grid, use the exact boundary closure and residual identity A_he_h=ρ_h−τ_h, and apply the uniform inverse bound to both terms.",
+        "axiom_base": "No choice; the proof is a finite-dimensional norm estimate over the reals.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, author-source revision 2025.01.27, Chapter 10, linear.md",
+              "url": "https://raw.githubusercontent.com/fncbook/fnc/a280ed1a013393ee0a184dcbaa866522f35a3516/chapter10/linear.md"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 5: Finite Difference Approximation, Spring 2009",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 6: General Linear Second Order Equation, Spring 2009",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c395389a94e1177997aa6364b24852d8_MIT18_336S09_lec6.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2327,
+    "id": "numerical-boundary-value-problems-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Linear numerical boundary-value problems — Examples",
+    "companion": "numerical-boundary-value-problems",
+    "requires": [
+      "numerical-boundary-value-problems"
+    ],
+    "items": [
+      {
+        "id": "ex-centered-difference-dirichlet-quadratic-exact",
+        "kind": "example",
+        "title": "The quadratic Dirichlet solution is represented exactly",
+        "statement": "For g(x)=1 and u(x)=x(1−x)/2, the centered zero-Dirichlet scheme returns the exact nodal values for every N≥1.",
+        "deps": [
+          "alg-centered-difference-dirichlet-bvp",
+          "lem-centered-difference-dirichlet-inverse-maxnorm"
+        ],
+        "dependency_level": 2,
+        "strategy": "Substitute the quadratic into the centered stencil, verify both endpoint values, then use the unique-solvability result.",
+        "axiom_base": "No choice; exact algebra on a finite grid.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, author-source revision 2025.01.27, Chapter 10, linear.md",
+              "url": "https://raw.githubusercontent.com/fncbook/fnc/a280ed1a013393ee0a184dcbaa866522f35a3516/chapter10/linear.md"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 5: Finite Difference Approximation, Spring 2009",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 6: General Linear Second Order Equation, Spring 2009",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c395389a94e1177997aa6364b24852d8_MIT18_336S09_lec6.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-first-order-neumann-closure-causes-first-order-bvp-error",
+        "kind": "example",
+        "title": "A first-order Neumann closure limits the global rate",
+        "statement": "For a smooth quadratic solution of −u''=1 with left Dirichlet and right Neumann data, a first-order backward-difference closure at the right endpoint produces an exact grid error of h/2 in max norm, despite exact centered interior equations.",
+        "deps": [
+          "alg-centered-difference-dirichlet-bvp"
+        ],
+        "dependency_level": 1,
+        "strategy": "Solve the finite-difference recurrence in first differences and compare it with the exact quadratic samples; the endpoint closure defect propagates linearly across the grid.",
+        "axiom_base": "No choice; a finite recurrence and exact arithmetic suffice.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, author-source revision 2025.01.27, Chapter 10, linear.md",
+              "url": "https://raw.githubusercontent.com/fncbook/fnc/a280ed1a013393ee0a184dcbaa866522f35a3516/chapter10/linear.md"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 5: Finite Difference Approximation, Spring 2009",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 6: General Linear Second Order Equation, Spring 2009",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c395389a94e1177997aa6364b24852d8_MIT18_336S09_lec6.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-dirichlet-inverse-infinity-norm-tight-at-n3",
+        "kind": "example",
+        "title": "The inverse infinity row-sum bound is uniform and sharp",
+        "statement": "The row-sum matrix norm of A_h^{-1} is at most 1/8 for every N, and at N=3 it equals 1/8.",
+        "deps": [
+          "alg-centered-difference-dirichlet-bvp",
+          "lem-centered-difference-dirichlet-inverse-maxnorm"
+        ],
+        "dependency_level": 2,
+        "strategy": "Relate the maximum row sum to the induced infinity operator norm, apply the discrete inverse estimate, then compute A_h^{-1} exactly at N=3.",
+        "axiom_base": "No choice; row sums and the finite matrix inverse are computed exactly.",
+        "sources": {
+          "references": [
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, author-source revision 2025.01.27, Chapter 10, linear.md",
+              "url": "https://raw.githubusercontent.com/fncbook/fnc/a280ed1a013393ee0a184dcbaa866522f35a3516/chapter10/linear.md"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 5: Finite Difference Approximation, Spring 2009",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/32dc4472b2967f90761db3677eade13e_MIT18_336S09_lec5.pdf"
+            },
+            {
+              "title": "Benjamin Seibold, MIT OpenCourseWare 18.336, Lecture 6: General Linear Second Order Equation, Spring 2009",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c395389a94e1177997aa6364b24852d8_MIT18_336S09_lec6.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

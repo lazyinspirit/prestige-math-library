@@ -1,0 +1,1899 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "54",
+  "scope": [
+    "def-local-leapfrog-domain-on-an-open-configuration-set",
+    "lem-local-hamiltonian-flow-preserves-symplectic-matrix",
+    "alg-local-symplectic-euler-step",
+    "alg-implicit-midpoint-hamiltonian-step",
+    "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians",
+    "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+    "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+    "thm-implicit-midpoint-branch-symplectic-order-and-error",
+    "lem-finite-modified-hamiltonian-exists",
+    "lem-truncated-modified-flow-matches-map",
+    "lem-finite-modified-hamiltonian-close-to-original",
+    "lem-one-step-modified-energy-defect",
+    "thm-finite-order-modified-energy-bound",
+    "ex-backward-euler-is-a-stable-but-not-symplectic",
+    "ex-stoermer-verlet-bounded-harmonic-oscillator-energy",
+    "ex-symplectic-euler-harmonic-oscillator"
+  ],
+  "contracts": {
+    "def-local-leapfrog-domain-on-an-open-configuration-set": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition or procedure takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero-step or zero-parameter specialization is the identity and the stated calculation remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made; map operations and admitted branches are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "lem-local-hamiltonian-flow-preserves-symplectic-matrix": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hamiltonian-vector-field-and-hamiltonian-function",
+          "source_section": "Definition",
+          "quote": "For $H\\in C^\\infty(M)$, its **Hamiltonian vector field** is the vector field\n$X_H$ determined by the library sign convention\n\n$$\\iota_{X_H}\\omega=dH.$$\n\nA vector field $X$ is **Hamiltonian** if $\\iota_X\\omega=dH$ for some smooth\nfunction $H$; such an $H$ is a **Hamiltonian function for $X$**. A function and\nits vector field are distinct data, and completeness of $X_H$ is not assumed.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 1.1."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+          "source_section": "Statement",
+          "quote": "Let U⊂R^n be open and Y:U→R^n be C¹. There is a unique maximal flow Φ on an open domain\nD⊂R×U containing {0}×U, and Φ is jointly C¹. Its time slices are local C¹\ndiffeomorphisms with inverse Φ_{−t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V′=DY(\\Phi)V$, V(0)=I. Each regular point has a C¹ flow box. If Y\nis C², Φ and those flow boxes are C²; the second state variation W satisfies\n$W′=DY(\\Phi)W+D²Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C¹ field are\nC² in time. A trajectory remaining in a compact K⊂⊂U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "F2 uses the supplier's exact stated interface in 2.1."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-symmetry-of-higher-mixed-partials",
+          "source_section": "Statement",
+          "quote": "Let $k\\ge2$. If $f\\in C^k(U)$ for an open $U\\subseteq\\mathbb R^m$, then every iterated derivative of $f$ of order $k$ is unchanged by any permutation of its coordinate differentiations.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F3 uses the supplier's exact stated interface in 1.1."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "In canonical coordinates [F1] gives $X_H=J\\nabla H$, hence $A(z):=DX_H(z)=J\\nabla^2H(z)$. By [F3] the Hessian is symmetric, and $J^T=-J$, $J^2=-I$; therefore $A^TJ+JA=0$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Set $Y(t)=D\\varphi_t(z)$. By [F2], $Y'=A(\\varphi_t(z))Y$ and $Y(0)=I$. The product rule gives $\\frac d{dt}(Y^TJY)=Y^T(A^TJ+JA)Y=0$ by step 1.1. Thus $Y(t)^TJY(t)=Y(0)^TJY(0)=J$ throughout the local time interval.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-step or zero-parameter specialization is the identity and the stated calculation remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made; map operations and admitted branches are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "alg-local-symplectic-euler-step": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition or procedure takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement or procedure requires a strictly positive step size, so h=0 is outside its declared input domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made; map operations and admitted branches are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "alg-implicit-midpoint-hamiltonian-step": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition or procedure takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero-step or zero-parameter specialization is the identity and the stated calculation remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made; map operations and admitted branches are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-leapfrog-step-map",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable, and let $M$ be a real symmetric positive-definite $d\\times d$ matrix. Write $\\nabla U$ for its Euclidean gradient, and let $\\epsilon>0$.\n\nFor $a,b\\in\\mathbb R$, define the **force kick** and **drift shear**\n$$K_a(q,p)=(q,p-a\\nabla U(q)),\\qquad D_b(q,p)=(q+bM^{-1}p,p).$$\nThe one-step leapfrog map is\n$$\\Phi_\\epsilon=K_{\\epsilon/2}\\circ D_\\epsilon\\circ K_{\\epsilon/2},$$\nwhere composition is read right to left. For a finite integer $L\\ge1$, its $L$-step map is $\\Phi_\\epsilon^L$. Define the momentum flip $R(q,p)=(q,-p)$ and the flipped proposal map $T_{\\epsilon,L}=R\\circ\\Phi_\\epsilon^L$.\n\nEach kick and drift is a continuous bijection with inverse $K_{-a}$ or $D_{-b}$, respectively. These finite maps use only $\\nabla U$ and do not require a solution of Hamilton's ODE. The classical derivative of a force kick is not part of this definition: for merely $U\\in C^1$, $\\nabla U$ need not be differentiable.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 1.1, 1.2."
+        },
+        {
+          "fact": "F2",
+          "source": "def-local-leapfrog-domain-on-an-open-configuration-set",
+          "source_section": "Definition",
+          "quote": "Let $Q\\subseteq\\mathbb R^d$ be open, let $V\\in C^1(Q,\\mathbb R)$, and let $M$ be a real symmetric positive-definite matrix. Use the force-kick $K_a$ and drift $D_b$ already defined in [[def-leapfrog-step-map]], with $U$ there replaced by $V$. The local kick is the restriction of $K_a$ to $Q\\times\\mathbb R^d$. The local drift is the restriction of $D_b$ to\n$$\\{(q,p):q\\in Q,\\ q+bM^{-1}p\\in Q\\}.$$\n\nFor a signed step $h$, the local leapfrog map is the restriction of $K_{h/2}\\circ D_h\\circ K_{h/2}$ to the states for which all three intermediate configurations lie in $Q$. Its output is defined only on that admitted set. This definition changes the configuration domain of the published map; it does not redefine the global leapfrog map or assert that the local map is complete.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "use_explanation": "F2 uses the supplier's exact stated interface in 1.1, 1.2."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-symmetry-of-higher-mixed-partials",
+          "source_section": "Statement",
+          "quote": "Let $k\\ge2$. If $f\\in C^k(U)$ for an open $U\\subseteq\\mathbb R^m$, then every iterated derivative of $f$ of order $k$ is unchanged by any permutation of its coordinate differentiations.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "use_explanation": "F3 uses the supplier's exact stated interface in 1.1, 1.2."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "At an admitted point, differentiation of [F1] gives $DK_a=\\begin{pmatrix}I&0\\\\-a\\nabla^2V(q)&I\\end{pmatrix}.$ Writing $C=-a\\nabla^2V(q)=C^T$, block multiplication gives $DK_a^T J DK_a=\\begin{pmatrix}C-C^T&I\\\\-I&0\\end{pmatrix}=J.$",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Differentiation of the drift gives $DD_b=\\begin{pmatrix}I&bM^{-1}\\\\0&I\\end{pmatrix}.$ Writing $B=bM^{-1}=B^T$, multiplication yields $DD_b^T J DD_b=\\begin{pmatrix}0&I\\\\-I&B^T-B\\end{pmatrix}=J.$",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Thus each admitted shear satisfies the claimed identity at every point of its open domain.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-step or zero-parameter specialization is the identity and the stated calculation remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made; map operations and admitted branches are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "prop-local-leapfrog-and-symplectic-euler-are-symplectic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-local-leapfrog-domain-on-an-open-configuration-set",
+          "source_section": "Definition",
+          "quote": "Let $Q\\subseteq\\mathbb R^d$ be open, let $V\\in C^1(Q,\\mathbb R)$, and let $M$ be a real symmetric positive-definite matrix. Use the force-kick $K_a$ and drift $D_b$ already defined in [[def-leapfrog-step-map]], with $U$ there replaced by $V$. The local kick is the restriction of $K_a$ to $Q\\times\\mathbb R^d$. The local drift is the restriction of $D_b$ to\n$$\\{(q,p):q\\in Q,\\ q+bM^{-1}p\\in Q\\}.$$\n\nFor a signed step $h$, the local leapfrog map is the restriction of $K_{h/2}\\circ D_h\\circ K_{h/2}$ to the states for which all three intermediate configurations lie in $Q$. Its output is defined only on that admitted set. This definition changes the configuration domain of the published map; it does not redefine the global leapfrog map or assert that the local map is complete.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 1.1."
+        },
+        {
+          "fact": "F2",
+          "source": "alg-local-symplectic-euler-step",
+          "source_section": "Definition",
+          "quote": "Input an admitted state $(q,p)\\in Q\\times\\mathbb R^d$, step $h>0$, $V\\in C^1(Q)$, and symmetric positive-definite $M$. First set $p^+=p-h\\nabla V(q)$. Then set $q^+=q+hM^{-1}p^+$. If $q^+\\notin Q$, return `domain-failure`; otherwise return $(q^+,p^+)$. This fixes the kick-then-drift ordering. The returned map is the partial composition $D_h\\circ K_h$ in the notation of [[def-local-leapfrog-domain-on-an-open-configuration-set]].\n\nFor exact mathematical statements the displayed operations are evaluated exactly. A finite implementation that cannot certify the state and force evaluation returns `inconclusive`; it does not report a step outside $Q$ as successful.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F2 uses the supplier's exact stated interface in 1.1."
+        },
+        {
+          "fact": "F3",
+          "source": "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians",
+          "source_section": "Statement",
+          "quote": "Let $Q\\subseteq\\mathbb R^d$ be open, $V\\in C^2(Q)$, and $M$ be symmetric positive definite. Put $J=\\begin{pmatrix}0&I\\\\-I&0\\end{pmatrix}$. At every point of their open domains, the local kick and drift from [[def-local-leapfrog-domain-on-an-open-configuration-set]] are $C^1$ and their Jacobians $A$ satisfy $A^TJA=J$. Here this matrix identity is the finite-regularity meaning of symplecticity; no smooth-manifold definition is being applied to a map of insufficient regularity.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "F3 uses the supplier's exact stated interface in 2.1."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "F4 uses the supplier's exact stated interface in 2.1."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "By [F1] and [F2], each step under discussion is a finite composition of admitted local kicks and drifts. The intermediate points lie in $Q$ by the admitted-domain conditions, so every derivative in the composition is defined.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "If $A$ and $B$ satisfy $A^TJA=J$ and $B^TJB=J$, then $(AB)^TJ(AB)=B^T(A^TJA)B=B^TJB=J$. Applying this identity successively to [F3], with [F4] identifying the Jacobian of each composition, proves the result for both step maps.",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-step or zero-parameter specialization is the identity and the stated calculation remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made; map operations and admitted branches are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "thm-local-symplectic-euler-and-leapfrog-trajectory-errors": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-local-leapfrog-domain-on-an-open-configuration-set",
+          "source_section": "Definition",
+          "quote": "Let $Q\\subseteq\\mathbb R^d$ be open, let $V\\in C^1(Q,\\mathbb R)$, and let $M$ be a real symmetric positive-definite matrix. Use the force-kick $K_a$ and drift $D_b$ already defined in [[def-leapfrog-step-map]], with $U$ there replaced by $V$. The local kick is the restriction of $K_a$ to $Q\\times\\mathbb R^d$. The local drift is the restriction of $D_b$ to\n$$\\{(q,p):q\\in Q,\\ q+bM^{-1}p\\in Q\\}.$$\n\nFor a signed step $h$, the local leapfrog map is the restriction of $K_{h/2}\\circ D_h\\circ K_{h/2}$ to the states for which all three intermediate configurations lie in $Q$. Its output is defined only on that admitted set. This definition changes the configuration domain of the published map; it does not redefine the global leapfrog map or assert that the local map is complete.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ],
+          "use_explanation": "A1 uses the supplier's exact stated interface in 1.1, 1.2, 2.1, 2.2, 3.1."
+        },
+        {
+          "fact": "A1",
+          "source": "alg-local-symplectic-euler-step",
+          "source_section": "Definition",
+          "quote": "Input an admitted state $(q,p)\\in Q\\times\\mathbb R^d$, step $h>0$, $V\\in C^1(Q)$, and symmetric positive-definite $M$. First set $p^+=p-h\\nabla V(q)$. Then set $q^+=q+hM^{-1}p^+$. If $q^+\\notin Q$, return `domain-failure`; otherwise return $(q^+,p^+)$. This fixes the kick-then-drift ordering. The returned map is the partial composition $D_h\\circ K_h$ in the notation of [[def-local-leapfrog-domain-on-an-open-configuration-set]].\n\nFor exact mathematical statements the displayed operations are evaluated exactly. A finite implementation that cannot certify the state and force evaluation returns `inconclusive`; it does not report a step outside $Q$ as successful.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ],
+          "use_explanation": "A1 uses the supplier's exact stated interface in 1.1, 1.2, 2.1, 2.2, 3.1."
+        },
+        {
+          "fact": "F1",
+          "source": "def-hamiltonian-vector-field-and-hamiltonian-function",
+          "source_section": "Definition",
+          "quote": "For $H\\in C^\\infty(M)$, its **Hamiltonian vector field** is the vector field\n$X_H$ determined by the library sign convention\n\n$$\\iota_{X_H}\\omega=dH.$$\n\nA vector field $X$ is **Hamiltonian** if $\\iota_X\\omega=dH$ for some smooth\nfunction $H$; such an $H$ is a **Hamiltonian function for $X$**. A function and\nits vector field are distinct data, and completeness of $X_H$ is not assumed.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 1.1, 1.2, 2.1, 2.2."
+        },
+        {
+          "fact": "F1",
+          "source": "def-symplectic-form-and-symplectic-manifold",
+          "source_section": "Definition",
+          "quote": "A **symplectic form** on a smooth manifold $M$ is a smooth two-form $\\omega$\nsuch that\n\n1. $d\\omega=0$, and\n2. $(T_pM,\\omega_p)$ is a [[def-symplectic-vector-space|symplectic vector\n   space]] for every $p\\in M$.\n\nThe pair $(M,\\omega)$ is a **symplectic manifold**. Thus both closedness and\npointwise nondegeneracy are required. A zero-dimensional manifold with its\nzero two-form satisfies the definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 1.1, 1.2, 2.1, 2.2."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+          "source_section": "Statement",
+          "quote": "Let U⊂R^n be open and Y:U→R^n be C¹. There is a unique maximal flow Φ on an open domain\nD⊂R×U containing {0}×U, and Φ is jointly C¹. Its time slices are local C¹\ndiffeomorphisms with inverse Φ_{−t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V′=DY(\\Phi)V$, V(0)=I. Each regular point has a C¹ flow box. If Y\nis C², Φ and those flow boxes are C²; the second state variation W satisfies\n$W′=DY(\\Phi)W+D²Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C¹ field are\nC² in time. A trajectory remaining in a compact K⊂⊂U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F2 uses the supplier's exact stated interface in 1.1."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F3 uses the supplier's exact stated interface in 1.1."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ],
+          "use_explanation": "F4 uses the supplier's exact stated interface in 1.1, 1.2, 2.2."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "By [F1]–[F3], the exact solution satisfies $z'=F(z)$ and $z''=DF(z)F(z)$. Since $D^2F$ is bounded on $K$, [F4] gives uniformly $\\varphi_h(z)=z+hF(z)+\\tfrac12h^2DF(z)F(z)+R(z,h),\\qquad \\|R(z,h)\\|\\le C_0h^3.$",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "The kick derivative is $I+hA_K(q)$ with $A_K=\\begin{pmatrix}0&0\\\\-\\nabla^2V(q)&0\\end{pmatrix}$ and the drift derivative is $I+hA_D$ with $A_D=\\begin{pmatrix}0&M^{-1}\\\\0&0\\end{pmatrix}$. Their sum is $DF(q,p)$. For kick-then-drift, the derivative product is $(I+hA_D)(I+hA_K)=I+hDF+O(h^2)$. For leapfrog it is $(I+(h/2)A_K(q_1))(I+hA_D)(I+(h/2)A_K(q))=I+hDF+O(h^2)$, because $q_1-q=O(h)$ and $\\nabla^2V$ is Lipschitz on $K$ by bounded third derivatives of $V$. The remainders are uniform on $K$, so $\\|D\\Psi_h\\|\\le1+Lh$ for a fixed $L$ and small $h$. The mean-value theorem on the stipulated convex segments gives the same one-step Lipschitz bound for pairs of compared states.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Kick-then-drift Euler gives $p^E=p-h\\nabla V(q)$ and $q^E=q+hM^{-1}p^E$. Thus $p^E=p-h\\nabla V(q)$ and $q^E=q+hM^{-1}p-h^2M^{-1}\\nabla V(q)$. Comparing with the two coordinate components of step 1.1 gives a uniform one-step defect at most $C_Eh^2$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "For leapfrog, the intermediate momentum is $p_{1/2}=p-(h/2)\\nabla V(q)$ and the new position is $q_1=q+hM^{-1}p_{1/2}=q+hM^{-1}p-(h^2/2)M^{-1}\\nabla V(q)$. Taylor expansion of $\\nabla V(q_1)$, using bounded third derivatives of $V$, gives $p_1=p-\\tfrac h2\\nabla V(q)-\\tfrac h2\\nabla V(q_1)=p-h\\nabla V(q)-\\tfrac{h^2}{2}\\nabla^2V(q)M^{-1}p+O(h^3).$ These are exactly the terms through degree two in step 1.1, so the leapfrog one-step defect is at most $C_Vh^3$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "For either method, if its local defect is $Ch^{s+1}$, steps 1.2, 2.1, and 2.2 give $e_{n+1}\\le(1+Lh)e_n+Ch^{s+1}$. Iterating this inequality and using $(1+Lh)^j\\le e^{LT}$ and $n\\le T/h$ yields $e_n\\le e^{LT}e_0+CTe^{LT}h^s$.",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Substitution of $s=1,C=C_E$ for symplectic Euler and $s=2,C=C_V$ for leapfrog in step 3.1 gives the two stated bounds.",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement or procedure requires a strictly positive step size, so h=0 is outside its declared input domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made; map operations and admitted branches are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "thm-implicit-midpoint-branch-symplectic-order-and-error": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "alg-implicit-midpoint-hamiltonian-step",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^{2d}$ be open, $H\\in C^2(U)$, $F=J\\nabla H$, and $z\\in U$. For a signed step $h$, the **exact local implicit midpoint step** is defined by\n$$Z=z+\\frac h2F(Z),\\qquad z^+=2Z-z,$$\nusing the locally unique solution $Z$ in a declared closed ball $\\overline B(z,\\rho)\\subset U$. The branch is admissible when certified bounds $M\\ge\\sup_{\\overline B}\\|F\\|$ and $L\\ge\\sup_{\\overline B}\\|DF\\|$ satisfy $|h|M/2\\le\\rho$ and $|h|L/2<1$. It returns `branch-not-certified` if the ball or bounds are unavailable, and `domain-failure` if the admitted ball is not contained in $U$.\n\nFor a finite implementation, start with $Z_0=z$ and iterate $Z_{k+1}=z+(h/2)F(Z_k)$ up to the supplied budget. The contraction estimate gives a certified radius for $Z_k-Z$. Return the approximation $2Z_k-z$ with that radius if it is within the requested tolerance; otherwise return `inconclusive` with the current iterate and bound. An approximate result is not asserted to be exactly symplectic. The exact map is the selected branch value $2Z-z$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "2.2",
+            "3.1"
+          ],
+          "use_explanation": "A1 uses the supplier's exact stated interface in 1.1, 1.2, 1.4, 2.1, 2.2, 3.1."
+        },
+        {
+          "fact": "F1",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty complete metric space ([[def-complete-metric-space]])\nand let $f : X \\to X$ be a contraction with constant $q$, so\n$d(f(u),f(v)) \\le q\\,d(u,v)$ for all $u,v \\in X$ and $0 \\le q < 1$\n([[def-lipschitz-holder-contraction]]). Then:\n\n1. There is exactly one $x^{*} \\in X$ with $f(x^{*}) = x^{*}$.\n2. For every $x_0 \\in X$ the sequence of **iterates**, defined by recursion\n   ([[thm-recursion]]) by $x_{n+1} := f(x_n)$, converges to $x^{*}$ in $(X,d)$\n   ([[def-metric-convergence]]). In particular the limit does not depend on\n   $x_0$.\n3. For all $m, n \\in \\mathbb{N}$ with $m \\ge n$,\n   $$d(x_m, x_n) \\;\\le\\; \\frac{q^{\\,n}\\, d(x_1,x_0)}{1-q},$$\n   with the integer power of [[def-integer-power]].\n\nClaim 3 is the quantitative form of the argument that proves claims 1 and 2, and\nit is recorded in the statement because the error estimates\n([[cor-banach-error-estimates]]) are read off from it.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 1.1."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^1$.  Suppose $(a,b)\\in U$, $F(a,b)=0$, and the\n**partial derivative in the second block**\n\n$$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$\n\nis invertible.  Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$.  Then there are open\nneighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map\n$\\varphi:P\\to Q$, such that\n\n$$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$\n\nAfter shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and\n\n$$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "uses": [
+            "1.2"
+          ],
+          "use_explanation": "F2 uses the supplier's exact stated interface in 1.2."
+        },
+        {
+          "fact": "F3",
+          "source": "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+          "source_section": "Statement",
+          "quote": "Let U⊂R^n be open and Y:U→R^n be C¹. There is a unique maximal flow Φ on an open domain\nD⊂R×U containing {0}×U, and Φ is jointly C¹. Its time slices are local C¹\ndiffeomorphisms with inverse Φ_{−t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V′=DY(\\Phi)V$, V(0)=I. Each regular point has a C¹ flow box. If Y\nis C², Φ and those flow boxes are C²; the second state variation W satisfies\n$W′=DY(\\Phi)W+D²Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C¹ field are\nC² in time. A trajectory remaining in a compact K⊂⊂U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
+          "uses": [
+            "1.4"
+          ],
+          "use_explanation": "F3 uses the supplier's exact stated interface in 1.4."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "1.4",
+            "2.2"
+          ],
+          "use_explanation": "F4 uses the supplier's exact stated interface in 1.4, 2.2."
+        },
+        {
+          "fact": "F5",
+          "source": "def-hamiltonian-vector-field-and-hamiltonian-function",
+          "source_section": "Definition",
+          "quote": "For $H\\in C^\\infty(M)$, its **Hamiltonian vector field** is the vector field\n$X_H$ determined by the library sign convention\n\n$$\\iota_{X_H}\\omega=dH.$$\n\nA vector field $X$ is **Hamiltonian** if $\\iota_X\\omega=dH$ for some smooth\nfunction $H$; such an $H$ is a **Hamiltonian function for $X$**. A function and\nits vector field are distinct data, and completeness of $X_H$ is not assumed.",
+          "uses": [
+            "1.3"
+          ],
+          "use_explanation": "F5 uses the supplier's exact stated interface in 1.3."
+        },
+        {
+          "fact": "F5",
+          "source": "thm-symmetry-of-higher-mixed-partials",
+          "source_section": "Statement",
+          "quote": "Let $k\\ge2$. If $f\\in C^k(U)$ for an open $U\\subseteq\\mathbb R^m$, then every iterated derivative of $f$ of order $k$ is unchanged by any permutation of its coordinate differentiations.",
+          "uses": [
+            "1.3"
+          ],
+          "use_explanation": "F5 uses the supplier's exact stated interface in 1.3."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.2"
+          ],
+          "use_explanation": "F6 uses the supplier's exact stated interface in 1.2, 1.4, 2.2."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "On each closed ball, $T_z(Z)=z+(h/2)F(Z)$ maps the ball into itself because $\\|T_z(Z)-z\\|\\le |h|M/2\\le\\rho$. The mean-value estimate on the convex ball gives $\\|T_z(Z)-T_z(W)\\|\\le q\\|Z-W\\|$ with $q=|h|L_0/2<1$. The ball is complete, so [F1] gives a unique fixed point $Z$ and the stated convergent iteration.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Set $G(z,Z)=Z-z-(h/2)F(Z)$. At the selected branch, $D_ZG=I-(h/2)A$ with $A=DF(Z)$. Since $\\|(h/2)A\\|<1$, its inverse is the convergent Neumann series; [F2] therefore makes $Z$ a local $C^1$ function of $z$. Differentiating $G=0$ gives $D_zZ=(I-(h/2)A)^{-1}$ and hence $S:=D\\Psi_h=(I-B)^{-1}(I+B),\\qquad B=(h/2)A.$",
+          "inputs": [
+            "A1",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.3",
+          "step": "1.3",
+          "claim": "By [F5], $A=J\\nabla^2H(Z)$ and $A^TJ+JA=0$; therefore $B^TJ+JB=0$. Expanding both products gives $(I+B)^TJ(I+B)-(I-B)^TJ(I-B)=2(B^TJ+JB)=0$. Thus $(I-B)^TJ(I-B)=(I+B)^TJ(I+B)$.",
+          "inputs": [
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.4",
+          "step": "1.4",
+          "claim": "The fixed-point equation and [F4] give $Z=z+(h/2)F(z)+(h^2/4)DF(z)F(z)+O(h^3)$ uniformly on the tube: first $Z-z=O(h)$ by the ball bound, then Taylor-expand $F(Z)$ at $z$ and substitute once. Consequently $2Z-z=z+hF(z)+(h^2/2)DF(z)F(z)+O(h^3)$. The exact flow has the same expansion by [F3], [F4], and [F6], so its one-step defect is at most $Ch^3$.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The matrices $I-B$ and $I+B$ commute. Multiplying the equality in step 1.3 on the left by $(I-B)^{-T}$ and on the right by $(I-B)^{-1}$ yields $J=(I-B)^{-T}(I+B)^TJ(I+B)(I-B)^{-1}=S^TJS$. This proves the exact branch is symplectic.",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Differentiating the fixed-point relation shows $D\\Psi_h=I+hDF(z)+O(h^2)$ uniformly on the tube; bounded derivatives make $\\|D\\Psi_h\\|\\le1+L_1h$ after decreasing $h_0$. The mean-value theorem on the stipulated convex comparison segments gives $e_{n+1}\\le(1+L_1h)e_n+Ch^3$. Iteration and $(1+L_1h)^n\\le e^{L_1T}$ give $e_n\\le e^{L_1T}e_0+CTe^{L_1T}h^2$.",
+          "inputs": [
+            "A1",
+            "F4",
+            "F6",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Steps 1.1–2.2 prove the unique admitted branch, symplecticity, local second order, and the stated finite-time error.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "step 1.4",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-step or zero-parameter specialization is the identity and the stated calculation remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 obtains the unique branch by the stated Banach iteration; it does not select arbitrarily from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "lem-finite-modified-hamiltonian-exists": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-local-symplectic-euler-step",
+          "source_section": "Definition",
+          "quote": "Input an admitted state $(q,p)\\in Q\\times\\mathbb R^d$, step $h>0$, $V\\in C^1(Q)$, and symmetric positive-definite $M$. First set $p^+=p-h\\nabla V(q)$. Then set $q^+=q+hM^{-1}p^+$. If $q^+\\notin Q$, return `domain-failure`; otherwise return $(q^+,p^+)$. This fixes the kick-then-drift ordering. The returned map is the partial composition $D_h\\circ K_h$ in the notation of [[def-local-leapfrog-domain-on-an-open-configuration-set]].\n\nFor exact mathematical statements the displayed operations are evaluated exactly. A finite implementation that cannot certify the state and force evaluation returns `inconclusive`; it does not report a step outside $Q$ as successful.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 1.1, 1.2, 3.1."
+        },
+        {
+          "fact": "F1",
+          "source": "def-local-leapfrog-domain-on-an-open-configuration-set",
+          "source_section": "Definition",
+          "quote": "Let $Q\\subseteq\\mathbb R^d$ be open, let $V\\in C^1(Q,\\mathbb R)$, and let $M$ be a real symmetric positive-definite matrix. Use the force-kick $K_a$ and drift $D_b$ already defined in [[def-leapfrog-step-map]], with $U$ there replaced by $V$. The local kick is the restriction of $K_a$ to $Q\\times\\mathbb R^d$. The local drift is the restriction of $D_b$ to\n$$\\{(q,p):q\\in Q,\\ q+bM^{-1}p\\in Q\\}.$$\n\nFor a signed step $h$, the local leapfrog map is the restriction of $K_{h/2}\\circ D_h\\circ K_{h/2}$ to the states for which all three intermediate configurations lie in $Q$. Its output is defined only on that admitted set. This definition changes the configuration domain of the published map; it does not redefine the global leapfrog map or assert that the local map is complete.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 1.1, 1.2, 3.1."
+        },
+        {
+          "fact": "F1",
+          "source": "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[lem-canonical-kick-and-drift-shears-have-symplectic-jacobians]], every admitted local leapfrog step and every admitted kick-then-drift symplectic Euler step has a $C^1$ Jacobian satisfying $D\\Phi^TJD\\Phi=J$ on its open admitted domain. The result concerns symplecticity, not energy conservation.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 1.1, 1.2, 3.1."
+        },
+        {
+          "fact": "F1",
+          "source": "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+          "source_section": "Statement",
+          "quote": "Let $Q\\subseteq\\mathbb R^d$ be open, $V\\in C^3(Q)$, and $M$ symmetric positive definite. Set $H(q,p)=\\tfrac12p^TM^{-1}p+V(q)$ and $F(q,p)=(M^{-1}p,-\\nabla V(q))$. Fix $T>0$ and $h=T/N$ with $N\\ge1$. Suppose the exact solution, numerical states, all kick/drift intermediate states, and every line segment used below lie in one compact convex tube $K\\Subset Q\\times\\mathbb R^d$, with the derivatives of $F$ through order two bounded there. For $z_0$ in that tube, write $e_n^E$ for the error of iterated kick-then-drift symplectic Euler and $e_n^V$ for the error of iterated local leapfrog relative to the exact solution at $t_n=nh$. For sufficiently small $h$, constants $C_E,C_V,L$ independent of $h,N,n$ satisfy, whenever $nh\\le T$,\n$$e_n^E\\le e^{LT}e_0+C_ETe^{LT}h,\\qquad e_n^V\\le e^{LT}e_0+C_VTe^{LT}h^2.$$\nThus symplectic Euler has global order one and leapfrog has global order two on the stated controlled tube. No unconditional domain-admissibility claim is made.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 1.1, 1.2, 3.1."
+        },
+        {
+          "fact": "F2",
+          "source": "alg-implicit-midpoint-hamiltonian-step",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^{2d}$ be open, $H\\in C^2(U)$, $F=J\\nabla H$, and $z\\in U$. For a signed step $h$, the **exact local implicit midpoint step** is defined by\n$$Z=z+\\frac h2F(Z),\\qquad z^+=2Z-z,$$\nusing the locally unique solution $Z$ in a declared closed ball $\\overline B(z,\\rho)\\subset U$. The branch is admissible when certified bounds $M\\ge\\sup_{\\overline B}\\|F\\|$ and $L\\ge\\sup_{\\overline B}\\|DF\\|$ satisfy $|h|M/2\\le\\rho$ and $|h|L/2<1$. It returns `branch-not-certified` if the ball or bounds are unavailable, and `domain-failure` if the admitted ball is not contained in $U$.\n\nFor a finite implementation, start with $Z_0=z$ and iterate $Z_{k+1}=z+(h/2)F(Z_k)$ up to the supplied budget. The contraction estimate gives a certified radius for $Z_k-Z$. Return the approximation $2Z_k-z$ with that radius if it is within the requested tolerance; otherwise return `inconclusive` with the current iterate and bound. An approximate result is not asserted to be exactly symplectic. The exact map is the selected branch value $2Z-z$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ],
+          "use_explanation": "F2 uses the supplier's exact stated interface in 1.1, 1.2, 3.1."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-implicit-midpoint-branch-symplectic-order-and-error",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^{2d}$ be open, $H\\in C^3(U)$, and $F=J\\nabla H$. Suppose, uniformly for initial values $z$ in a compact convex tube, that $\\overline B(z,\\rho)\\subset U$, $\\|F\\|\\le M$, $\\|DF\\|\\le L_0$ on these balls, and $|h|M/2\\le\\rho$, $|h|L_0/2<1$. The exact implicit midpoint branch [[alg-implicit-midpoint-hamiltonian-step]] then exists uniquely in each ball. Its local map $\\Psi_h(z)=2Z-z$ is $C^1$ and satisfies $D\\Psi_h(z)^TJ D\\Psi_h(z)=J$.\n\nAssume also that the exact and numerical trajectories, the branch balls, and the segments used in comparison lie in a compact convex subset of $U$ for $nh\\le T$, with the displayed derivatives uniformly bounded. Then for some constants $C,L_1$ independent of $h,n$,\n$$\\|\\Psi_h(z)-\\varphi_h(z)\\|\\le Ch^3,\\qquad e_n\\le e^{L_1T}e_0+CTe^{L_1T}h^2,$$\nwhere $\\varphi_h$ is the exact Hamiltonian flow and $e_n=\\|z_n-\\varphi_{nh}(z_0)\\|$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ],
+          "use_explanation": "F2 uses the supplier's exact stated interface in 1.1, 1.2, 3.1."
+        },
+        {
+          "fact": "F3",
+          "source": "lem-local-hamiltonian-flow-preserves-symplectic-matrix",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^{2d}$ be open, $H\\in C^\\infty(U)$, $J=\\begin{pmatrix}0&I\\\\-I&0\\end{pmatrix}$, and $X_H=J\\nabla H$. Let $\\varphi_t$ be the local flow on any open set where it is defined. At each initial state and time for which the intervening trajectory lies in $U$, its derivative satisfies\n$$D\\varphi_t(z)^T J D\\varphi_t(z)=J.$$\nThis is a local, choice-free variational proof; no completeness is asserted.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ],
+          "use_explanation": "F3 uses the supplier's exact stated interface in 2.2, 3.1."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "source_section": "Statement",
+          "quote": "Let $k,m,n\\ge1$ and $p\\in\\mathbb N$, let $U\\subseteq\\mathbb R^{m+n+p}$ be open, and let $F:U\\to\\mathbb R^n$ be $C^k$. Suppose $F(a,b,\\lambda_0)=0$ and $D_yF(a,b,\\lambda_0)$ is invertible. Then there are neighbourhoods and a unique $C^k$ map $\\varphi$ solving $F(x,\\varphi(x,\\lambda),\\lambda)=0$. More precisely, on suitable open neighbourhoods $P$ of $(a,\\lambda_0)$ and $Q$ of $b$,\n\n$$F(x,y,\\lambda)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x,\\lambda),$$\n\nand\n\n$$D\\varphi(x,\\lambda)=-D_yF(x,\\varphi(x,\\lambda),\\lambda)^{-1}D_{(x,\\lambda)}F(x,\\varphi(x,\\lambda),\\lambda).$$\n\nWhen no parameter block is present, this is the ordinary $C^k$ implicit function theorem.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F4 uses the supplier's exact stated interface in 1.1."
+        },
+        {
+          "fact": "F5",
+          "source": "def-hamiltonian-vector-field-and-hamiltonian-function",
+          "source_section": "Definition",
+          "quote": "For $H\\in C^\\infty(M)$, its **Hamiltonian vector field** is the vector field\n$X_H$ determined by the library sign convention\n\n$$\\iota_{X_H}\\omega=dH.$$\n\nA vector field $X$ is **Hamiltonian** if $\\iota_X\\omega=dH$ for some smooth\nfunction $H$; such an $H$ is a **Hamiltonian function for $X$**. A function and\nits vector field are distinct data, and completeness of $X_H$ is not assumed.",
+          "uses": [
+            "4.1"
+          ],
+          "use_explanation": "F5 uses the supplier's exact stated interface in 4.1."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ],
+          "use_explanation": "F6 uses the supplier's exact stated interface in 1.2, 2.1."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Fix $N$. Smoothness of the kick and drift formulas, and [F4] for the implicit midpoint branch, gives a Taylor expansion $\\Phi_h(z)=z+\\sum_{k=1}^{N+1}h^kd_k(z)+O(h^{N+2})$ on each compact subset where the maps are admitted. Its first coefficient is $d_1=X_H$ because the methods are consistent.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Seek $Y_h=X_H+\\sum_{m=1}^Nh^mX_m$. The time-$h$ flow expansion is $z+\\sum_{k=1}^{N+1}\\frac{h^k}{k!}(Y_h\\cdot\\nabla)^{k-1}Y_h(z)+O(h^{N+2})$. At coefficient $h^{m+1}$, the first term $hY_h$ contributes $X_m$; every term with $k\\ge2$ can involve only $X_1,\\ldots,X_{m-1}$ at that degree. Thus set $X_m=d_{m+1}-P_m$, where $P_m$ is the already determined coefficient from those higher flow terms. This finite recursion matches coefficients through degree $N+1$. Since each method agrees with the exact $X_H$ flow through degree $r$, it gives $X_1=\\cdots=X_{r-1}=0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For fixed parameter $h$, the pullback $Q_{h,t}$ of the time-$t$ flow of $Y_h$ obeys $\\partial_t(Q_{h,t}f)=Q_{h,t}(\\mathcal L_{Y_h}f)$ and $Q_{h,0}=I$. Coefficient recursion in $t$ therefore gives $Q_{h,t}=\\sum_{k=0}^{N+1}t^k\\mathcal L_{Y_h}^k/k!$ modulo terms of total order $N+2$; at $t=h$, this is $\\exp(h\\mathcal L_{Y_h})$. Step 1.2 gives $\\Phi_h$ and its comparison flow equal Taylor coefficients through degree $N+1$, so [F6] makes their pullbacks equal modulo $h^{N+2}$. Since $P_h-I=O(h)$, the finite polynomial logarithm in the Statement is valid modulo $h^{N+2}$. The formal identity $\\log(\\exp A)=A$ in the truncated algebra then gives $\\log_N(P_h)=h\\mathcal L_{Y_h}$ modulo $h^{N+2}$.",
+          "inputs": [
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Fix $m\\in\\{r,\\ldots,N\\}$ and assume $X_r,\\ldots,X_{m-1}$ are Hamiltonian. The truncated field $Y_h^{[m-1]}=X_H+\\sum_{j=r}^{m-1}h^jX_j$ is Hamiltonian, so by [F3] its time-$h$ flow $\\psi_h$ is symplectic. Step 1.2 gives $\\Phi_h-\\psi_h=h^{m+1}X_m+O(h^{m+2})$ and, after differentiating the smooth expansions, $D\\Phi_h-D\\psi_h=h^{m+1}DX_m+O(h^{m+2})$.",
+          "inputs": [
+            "F3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The symplectic matrix identity for both maps and $D\\psi_h=I+O(h)$ imply $0=h^{m+1}(DX_m^TJ+JDX_m)+O(h^{m+2})$. Divide by $h^{m+1}$ and take $h\\to0$ to obtain $DX_m^TJ+JDX_m=0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "The one-form $\\alpha_m=\\iota_{X_m}\\omega$ has coefficient column $-JX_m$, so its derivative matrix is $-JDX_m$. Step 3.1 says this matrix is symmetric; hence $\\alpha_m$ is closed. Fix a star center $z_*$ and define $H_m(z)=\\int_0^1\\alpha_m(z_*+t(z-z_*))[z-z_*]dt$. For any direction $v$, differentiation under the integral gives $t(D\\alpha_m(z_*+t(z-z_*))[v])[z-z_*]+\\alpha_m(z_*+t(z-z_*))[v]$. Closedness swaps the two arguments in the first term, making the integrand $\\frac d{dt}(t\\alpha_m(z_*+t(z-z_*))[v])$. Integration yields $DH_m(z)[v]=\\alpha_m(z)[v]$. Thus $dH_m=\\alpha_m$ and [F5] makes $X_m$ Hamiltonian on all of $U$.",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Applying the induction step in 2.1, the matrix consequence in 2.2, and the primitive construction in 2.3 successively for $m=r,\\ldots,N$ supplies all finite Hamiltonians $H_j$. Step 2.1 identifies the resulting vector-field coefficients with the truncated formal logarithm. The construction makes no assertion about convergence as $N\\to\\infty$.",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-step or zero-parameter specialization is the identity and the stated calculation remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 uses one fixed star center in the explicit radial primitive; this is a single supplied witness and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "lem-truncated-modified-flow-matches-map": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "source_section": "Statement",
+          "quote": "Let $k,m,n\\ge1$ and $p\\in\\mathbb N$, let $U\\subseteq\\mathbb R^{m+n+p}$ be open, and let $F:U\\to\\mathbb R^n$ be $C^k$. Suppose $F(a,b,\\lambda_0)=0$ and $D_yF(a,b,\\lambda_0)$ is invertible. Then there are neighbourhoods and a unique $C^k$ map $\\varphi$ solving $F(x,\\varphi(x,\\lambda),\\lambda)=0$. More precisely, on suitable open neighbourhoods $P$ of $(a,\\lambda_0)$ and $Q$ of $b$,\n\n$$F(x,y,\\lambda)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x,\\lambda),$$\n\nand\n\n$$D\\varphi(x,\\lambda)=-D_yF(x,\\varphi(x,\\lambda),\\lambda)^{-1}D_{(x,\\lambda)}F(x,\\varphi(x,\\lambda),\\lambda).$$\n\nWhen no parameter block is present, this is the ordinary $C^k$ implicit function theorem.",
+          "uses": [
+            "1.2"
+          ],
+          "use_explanation": "A1 uses the supplier's exact stated interface in 1.2."
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-modified-hamiltonian-exists",
+          "source_section": "Statement",
+          "quote": "Let $Q\\subseteq\\mathbb R^d$ be open and star-shaped about a point $q_*\\in Q$, meaning $q_*+t(q-q_*)\\in Q$ for every $q\\in Q$ and $t\\in[0,1]$. Let $M$ be real symmetric positive-definite, $U=Q\\times\\mathbb R^d$, and $H(q,p)=\\tfrac12p^TM^{-1}p+V(q)$ with $V\\in C^\\infty(Q)$. Let $\\Phi_h$ be the kick-then-drift symplectic-Euler map, the local leapfrog map, or an admitted implicit-midpoint branch, on a compact subset where the chosen map is defined. Write $r=1$ for the kick-then-drift symplectic-Euler map and $r=2$ for leapfrog or implicit midpoint, as proved in [[thm-local-symplectic-euler-and-leapfrog-trajectory-errors]] and [[thm-implicit-midpoint-branch-symplectic-order-and-error]]. For a smooth test function $f$, define the pullback $P_hf=f\\circ\\Phi_h$ by its Taylor coefficients at $h=0$. For fixed finite $N\\ge r$, its truncated logarithm is the polynomial\n$$\\log_N(P_h)=\\sum_{k=1}^{N+1}\\frac{(-1)^{k+1}}{k}(P_h-I)^k,$$\ncomputed modulo terms of order $h^{N+2}$. There are smooth vector fields $X_r,\\ldots,X_N$ and globally defined functions $H_r,\\ldots,H_N$ on $U$ such that\n$$h^{-1}\\log_N(P_h)=\\mathcal L_{X_H}+\\sum_{j=r}^Nh^j\\mathcal L_{X_j}\\pmod{h^{N+1}},\\qquad \\iota_{X_j}\\omega=dH_j,$$\nwhere $\\mathcal L_Xf:=Df[X]$. Thus $H_h^{[N]}=H+\\sum_{j=r}^Nh^jH_j$ is a globally defined finite modified Hamiltonian. The logarithm is a finite formal polynomial for each fixed $N$; no convergence of an infinite series is asserted.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 1.1, 2.1."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+          "source_section": "Statement",
+          "quote": "Let U⊂R^n be open and Y:U→R^n be C¹. There is a unique maximal flow Φ on an open domain\nD⊂R×U containing {0}×U, and Φ is jointly C¹. Its time slices are local C¹\ndiffeomorphisms with inverse Φ_{−t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V′=DY(\\Phi)V$, V(0)=I. Each regular point has a C¹ flow box. If Y\nis C², Φ and those flow boxes are C²; the second state variation W satisfies\n$W′=DY(\\Phi)W+D²Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C¹ field are\nC² in time. A trajectory remaining in a compact K⊂⊂U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
+          "uses": [
+            "1.2"
+          ],
+          "use_explanation": "F2 uses the supplier's exact stated interface in 1.2."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "F3 uses the supplier's exact stated interface in 2.1."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "By [F1], the coefficients of $\\Phi_h(z)$ and $\\varphi_h^{[N]}(z)$ at every power from $h^0$ through $h^{N+1}$ agree for each $z\\in K$.",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "The method is a finite composition of smooth shears, or the smooth midpoint branch from [A1]; hence its $h$-derivatives through order $N+2$ are bounded on the compact tube. For the modified flow, differentiate the integral equation in [F2] repeatedly in time: the first derivative is $X_h^{[N]}(u)$, and each next derivative is a finite sum of products of derivatives of $X_h^{[N]}$ and previously obtained derivatives of $u$. Since the field is smooth and the comparison path lies in $K'$, induction gives a uniform bound through order $N+2$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Apply [F3] to both maps with those derivative bounds. Their remainders after degree $N+1$ are each at most a constant times $|h|^{N+2}$, uniformly on $K$. The coefficients through degree $N+1$ cancel by step 1.1, so the difference is bounded by the sum of those remainders.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-step or zero-parameter specialization is the identity and the stated calculation remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made; map operations and admitted branches are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "lem-finite-modified-hamiltonian-close-to-original": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-finite-modified-hamiltonian-exists",
+          "source_section": "Statement",
+          "quote": "Let $Q\\subseteq\\mathbb R^d$ be open and star-shaped about a point $q_*\\in Q$, meaning $q_*+t(q-q_*)\\in Q$ for every $q\\in Q$ and $t\\in[0,1]$. Let $M$ be real symmetric positive-definite, $U=Q\\times\\mathbb R^d$, and $H(q,p)=\\tfrac12p^TM^{-1}p+V(q)$ with $V\\in C^\\infty(Q)$. Let $\\Phi_h$ be the kick-then-drift symplectic-Euler map, the local leapfrog map, or an admitted implicit-midpoint branch, on a compact subset where the chosen map is defined. Write $r=1$ for the kick-then-drift symplectic-Euler map and $r=2$ for leapfrog or implicit midpoint, as proved in [[thm-local-symplectic-euler-and-leapfrog-trajectory-errors]] and [[thm-implicit-midpoint-branch-symplectic-order-and-error]]. For a smooth test function $f$, define the pullback $P_hf=f\\circ\\Phi_h$ by its Taylor coefficients at $h=0$. For fixed finite $N\\ge r$, its truncated logarithm is the polynomial\n$$\\log_N(P_h)=\\sum_{k=1}^{N+1}\\frac{(-1)^{k+1}}{k}(P_h-I)^k,$$\ncomputed modulo terms of order $h^{N+2}$. There are smooth vector fields $X_r,\\ldots,X_N$ and globally defined functions $H_r,\\ldots,H_N$ on $U$ such that\n$$h^{-1}\\log_N(P_h)=\\mathcal L_{X_H}+\\sum_{j=r}^Nh^j\\mathcal L_{X_j}\\pmod{h^{N+1}},\\qquad \\iota_{X_j}\\omega=dH_j,$$\nwhere $\\mathcal L_Xf:=Df[X]$. Thus $H_h^{[N]}=H+\\sum_{j=r}^Nh^jH_j$ is a globally defined finite modified Hamiltonian. The logarithm is a finite formal polynomial for each fixed $N$; no convergence of an infinite series is asserted.\n\n",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 1.1."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Each $H_j$ is continuous on compact $K$, so its supremum $M_j=\\sup_K|H_j|$ is finite. By [F1], $|H_h^{[N]}(z)-H(z)|\\le\\sum_{j=r}^Nh^jM_j\\le h^r\\sum_{j=r}^NM_j$ for $0<h\\le1$, because $h^j\\le h^r$ when $j\\ge r$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Taking the supremum over $z\\in K$ proves the displayed estimate with $C_0=\\sum_{j=r}^NM_j$.",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement or procedure requires a strictly positive step size, so h=0 is outside its declared input domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made; map operations and admitted branches are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "lem-one-step-modified-energy-defect": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-truncated-modified-flow-matches-map",
+          "source_section": "Statement",
+          "quote": "Fix an integer $N\\ge r$ and a compact set $K\\Subset U$ for which the method maps and their selected branches are defined on a neighborhood. Let $H_h^{[N]}$ and $X_h^{[N]}$ be the finite modified Hamiltonian and vector field from [[lem-finite-modified-hamiltonian-exists]], and let $\\varphi_h^{[N]}$ be the time-$h$ flow of $X_h^{[N]}$. If the method, the comparison flow, and all Taylor segments remain in a compact $K'\\Subset U$, then there are $h_0,C_N>0$ such that\n$$\\sup_{z\\in K}\\|\\Phi_h(z)-\\varphi_h^{[N]}(z)\\|\\le C_N|h|^{N+2}\\qquad(|h|\\le h_0).$$\nThe constants depend on the fixed truncation order and the compact derivative bounds; no uniformity as $N\\to\\infty$ is claimed.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 2.1."
+        },
+        {
+          "fact": "F2",
+          "source": "prop-a-hamiltonian-is-conserved-along-its-own-flow",
+          "source_section": "Statement",
+          "quote": "$H$ is constant along every integral curve of $X_H$.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F2 uses the supplier's exact stated interface in 1.1."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Every initial value problem satisfying the Picard-Lindelof hypotheses has a unique maximal solution. Its domain is an open interval containing the initial time, and every other solution through the same data is its restriction.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F3 uses the supplier's exact stated interface in 1.1."
+        },
+        {
+          "fact": "F3",
+          "source": "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+          "source_section": "Statement",
+          "quote": "Let U⊂R^n be open and Y:U→R^n be C¹. There is a unique maximal flow Φ on an open domain\nD⊂R×U containing {0}×U, and Φ is jointly C¹. Its time slices are local C¹\ndiffeomorphisms with inverse Φ_{−t}; $\\partial_t\\Phi=Y(\\Phi)$ and $D_p\\Phi$ is the\nunique solution V of $V′=DY(\\Phi)V$, V(0)=I. Each regular point has a C¹ flow box. If Y\nis C², Φ and those flow boxes are C²; the second state variation W satisfies\n$W′=DY(\\Phi)W+D²Y(\\Phi)[Ve_i,Ve_j]$, W(0)=0. Individual trajectories of a C¹ field are\nC² in time. A trajectory remaining in a compact K⊂⊂U cannot have a finite maximal\nendpoint. These Euclidean conclusions use no full AC or DC.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F3 uses the supplier's exact stated interface in 1.1."
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-modified-hamiltonian-exists",
+          "source_section": "Statement",
+          "quote": "Let $Q\\subseteq\\mathbb R^d$ be open and star-shaped about a point $q_*\\in Q$, meaning $q_*+t(q-q_*)\\in Q$ for every $q\\in Q$ and $t\\in[0,1]$. Let $M$ be real symmetric positive-definite, $U=Q\\times\\mathbb R^d$, and $H(q,p)=\\tfrac12p^TM^{-1}p+V(q)$ with $V\\in C^\\infty(Q)$. Let $\\Phi_h$ be the kick-then-drift symplectic-Euler map, the local leapfrog map, or an admitted implicit-midpoint branch, on a compact subset where the chosen map is defined. Write $r=1$ for the kick-then-drift symplectic-Euler map and $r=2$ for leapfrog or implicit midpoint, as proved in [[thm-local-symplectic-euler-and-leapfrog-trajectory-errors]] and [[thm-implicit-midpoint-branch-symplectic-order-and-error]]. For a smooth test function $f$, define the pullback $P_hf=f\\circ\\Phi_h$ by its Taylor coefficients at $h=0$. For fixed finite $N\\ge r$, its truncated logarithm is the polynomial\n$$\\log_N(P_h)=\\sum_{k=1}^{N+1}\\frac{(-1)^{k+1}}{k}(P_h-I)^k,$$\ncomputed modulo terms of order $h^{N+2}$. There are smooth vector fields $X_r,\\ldots,X_N$ and globally defined functions $H_r,\\ldots,H_N$ on $U$ such that\n$$h^{-1}\\log_N(P_h)=\\mathcal L_{X_H}+\\sum_{j=r}^Nh^j\\mathcal L_{X_j}\\pmod{h^{N+1}},\\qquad \\iota_{X_j}\\omega=dH_j,$$\nwhere $\\mathcal L_Xf:=Df[X]$. Thus $H_h^{[N]}=H+\\sum_{j=r}^Nh^jH_j$ is a globally defined finite modified Hamiltonian. The logarithm is a finite formal polynomial for each fixed $N$; no convergence of an infinite series is asserted.\n\n",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "F4 uses the supplier's exact stated interface in 2.1."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "By [F3], the modified Hamiltonian vector field has a local flow from $z$. By [F2], that flow preserves $H_h^{[N]}$, so $H_h^{[N]}(\\varphi_h^{[N]}(z))=H_h^{[N]}(z)$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The mean-value theorem along the segment in [A1] and the gradient bound [F4] give $|H_h^{[N]}(\\Phi_h(z))-H_h^{[N]}(\\varphi_h^{[N]}(z))|\\le G_N\\|\\Phi_h(z)-\\varphi_h^{[N]}(z)\\|\\le G_NC_Nh^{N+2}$ by [F1]. For $h\\le1$ this is at most $G_NC_Nh^{N+1}$. Substituting the equality from step 1.1 proves the statement with $C_1=G_NC_N$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement or procedure requires a strictly positive step size, so h=0 is outside its declared input domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made; map operations and admitted branches are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "thm-finite-order-modified-energy-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "lem-finite-modified-hamiltonian-exists",
+          "source_section": "Statement",
+          "quote": "Let $Q\\subseteq\\mathbb R^d$ be open and star-shaped about a point $q_*\\in Q$, meaning $q_*+t(q-q_*)\\in Q$ for every $q\\in Q$ and $t\\in[0,1]$. Let $M$ be real symmetric positive-definite, $U=Q\\times\\mathbb R^d$, and $H(q,p)=\\tfrac12p^TM^{-1}p+V(q)$ with $V\\in C^\\infty(Q)$. Let $\\Phi_h$ be the kick-then-drift symplectic-Euler map, the local leapfrog map, or an admitted implicit-midpoint branch, on a compact subset where the chosen map is defined. Write $r=1$ for the kick-then-drift symplectic-Euler map and $r=2$ for leapfrog or implicit midpoint, as proved in [[thm-local-symplectic-euler-and-leapfrog-trajectory-errors]] and [[thm-implicit-midpoint-branch-symplectic-order-and-error]]. For a smooth test function $f$, define the pullback $P_hf=f\\circ\\Phi_h$ by its Taylor coefficients at $h=0$. For fixed finite $N\\ge r$, its truncated logarithm is the polynomial\n$$\\log_N(P_h)=\\sum_{k=1}^{N+1}\\frac{(-1)^{k+1}}{k}(P_h-I)^k,$$\ncomputed modulo terms of order $h^{N+2}$. There are smooth vector fields $X_r,\\ldots,X_N$ and globally defined functions $H_r,\\ldots,H_N$ on $U$ such that\n$$h^{-1}\\log_N(P_h)=\\mathcal L_{X_H}+\\sum_{j=r}^Nh^j\\mathcal L_{X_j}\\pmod{h^{N+1}},\\qquad \\iota_{X_j}\\omega=dH_j,$$\nwhere $\\mathcal L_Xf:=Df[X]$. Thus $H_h^{[N]}=H+\\sum_{j=r}^Nh^jH_j$ is a globally defined finite modified Hamiltonian. The logarithm is a finite formal polynomial for each fixed $N$; no convergence of an infinite series is asserted.\n\n",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "A1 uses the supplier's exact stated interface in 1.1."
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-modified-hamiltonian-close-to-original",
+          "source_section": "Statement",
+          "quote": "For a fixed $N\\ge r$ and compact $K\\Subset U$, let $H_h^{[N]}=H+\\sum_{j=r}^Nh^jH_j$ be the finite modified Hamiltonian constructed in [[lem-finite-modified-hamiltonian-exists]]. Then for $0<h\\le1$,\n$$\\sup_{z\\in K}|H_h^{[N]}(z)-H(z)|\\le C_0h^r,\\qquad C_0:=\\sum_{j=r}^N\\sup_{z\\in K}|H_j(z)|<\\infty.$$",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 2.1."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-one-step-modified-energy-defect",
+          "source_section": "Statement",
+          "quote": "Fix $N\\ge r$ and a compact comparison tube $K'\\Subset U$. Let $H_h^{[N]}$ be the finite modified Hamiltonian from [[lem-finite-modified-hamiltonian-exists]]. Suppose $z$, $\\Phi_h(z)$, the exact time-$h$ flow of $X_{H_h^{[N]}}$ from $z$, and the line segment joining those two endpoints all lie in $K'$. For sufficiently small $0<h\\le1$, there is a constant $C_1$ independent of $z,h$ such that\n$$|H_h^{[N]}(\\Phi_h(z))-H_h^{[N]}(z)|\\le C_1h^{N+1}.$$",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F2 uses the supplier's exact stated interface in 1.1."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+          "source_section": "Statement",
+          "quote": "Let $Q\\subseteq\\mathbb R^d$ be open, $V\\in C^3(Q)$, and $M$ symmetric positive definite. Set $H(q,p)=\\tfrac12p^TM^{-1}p+V(q)$ and $F(q,p)=(M^{-1}p,-\\nabla V(q))$. Fix $T>0$ and $h=T/N$ with $N\\ge1$. Suppose the exact solution, numerical states, all kick/drift intermediate states, and every line segment used below lie in one compact convex tube $K\\Subset Q\\times\\mathbb R^d$, with the derivatives of $F$ through order two bounded there. For $z_0$ in that tube, write $e_n^E$ for the error of iterated kick-then-drift symplectic Euler and $e_n^V$ for the error of iterated local leapfrog relative to the exact solution at $t_n=nh$. For sufficiently small $h$, constants $C_E,C_V,L$ independent of $h,N,n$ satisfy, whenever $nh\\le T$,\n$$e_n^E\\le e^{LT}e_0+C_ETe^{LT}h,\\qquad e_n^V\\le e^{LT}e_0+C_VTe^{LT}h^2.$$\nThus symplectic Euler has global order one and leapfrog has global order two on the stated controlled tube. No unconditional domain-admissibility claim is made.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F3 uses the supplier's exact stated interface in 1.1."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-implicit-midpoint-branch-symplectic-order-and-error",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^{2d}$ be open, $H\\in C^3(U)$, and $F=J\\nabla H$. Suppose, uniformly for initial values $z$ in a compact convex tube, that $\\overline B(z,\\rho)\\subset U$, $\\|F\\|\\le M$, $\\|DF\\|\\le L_0$ on these balls, and $|h|M/2\\le\\rho$, $|h|L_0/2<1$. The exact implicit midpoint branch [[alg-implicit-midpoint-hamiltonian-step]] then exists uniquely in each ball. Its local map $\\Psi_h(z)=2Z-z$ is $C^1$ and satisfies $D\\Psi_h(z)^TJ D\\Psi_h(z)=J$.\n\nAssume also that the exact and numerical trajectories, the branch balls, and the segments used in comparison lie in a compact convex subset of $U$ for $nh\\le T$, with the displayed derivatives uniformly bounded. Then for some constants $C,L_1$ independent of $h,n$,\n$$\\|\\Psi_h(z)-\\varphi_h(z)\\|\\le Ch^3,\\qquad e_n\\le e^{L_1T}e_0+CTe^{L_1T}h^2,$$\nwhere $\\varphi_h$ is the exact Hamiltonian flow and $e_n=\\|z_n-\\varphi_{nh}(z_0)\\|$.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F3 uses the supplier's exact stated interface in 1.1."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "For the selected method, [F3] fixes the order $r$ of the finite modification. For each $k<n$, [A1] and [F2] then give $|H_h^{[N]}(z_{k+1})-H_h^{[N]}(z_k)|\\le C_1h^{N+1}$. The triangle inequality over the $n$ consecutive increments yields $|H_h^{[N]}(z_n)-H_h^{[N]}(z_0)|\\le C_1n h^{N+1}.$",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Add and subtract the modified Hamiltonian at both endpoints: $H(z_n)-H(z_0)=(H-H_h^{[N]})(z_n)+(H_h^{[N]}(z_n)-H_h^{[N]}(z_0))+(H_h^{[N]}-H)(z_0).$ Applying [F1] to the first and third terms and step 1.1 to the middle term gives the stated bound.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement or procedure requires a strictly positive step size, so h=0 is outside its declared input domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made; map operations and admitted branches are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "ex-backward-euler-is-a-stable-but-not-symplectic": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "For $y'=\\lambda y$, backward Euler gives $(1-h\\lambda)y^+=y$, so $R(z)=1/(1-z)$ wherever defined. If $\\operatorname{Re}z\\le0$, then $|1-z|^2=1-2\\operatorname{Re}z+|z|^2\\ge1$, whence $|R(z)|\\le1$ and the method is A-stable.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For the oscillator, $I-hA=\\begin{pmatrix}1&-h\\\\h&1\\end{pmatrix}$, so $S_{BE}=(I-hA)^{-1}=\\frac1{1+h^2}\\begin{pmatrix}1&h\\\\-h&1\\end{pmatrix},\\qquad \\det S_{BE}=\\frac1{1+h^2}<1.$ By [F2], $S_{BE}^TJS_{BE}=(\\det S_{BE})J\\ne J$. It is therefore not symplectic.",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement or procedure requires a strictly positive step size, so h=0 is outside its declared input domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made; map operations and admitted branches are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "ex-stoermer-verlet-bounded-harmonic-oscillator-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-leapfrog-step-map",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable, and let $M$ be a real symmetric positive-definite $d\\times d$ matrix. Write $\\nabla U$ for its Euclidean gradient, and let $\\epsilon>0$.\n\nFor $a,b\\in\\mathbb R$, define the **force kick** and **drift shear**\n$$K_a(q,p)=(q,p-a\\nabla U(q)),\\qquad D_b(q,p)=(q+bM^{-1}p,p).$$\nThe one-step leapfrog map is\n$$\\Phi_\\epsilon=K_{\\epsilon/2}\\circ D_\\epsilon\\circ K_{\\epsilon/2},$$\nwhere composition is read right to left. For a finite integer $L\\ge1$, its $L$-step map is $\\Phi_\\epsilon^L$. Define the momentum flip $R(q,p)=(q,-p)$ and the flipped proposal map $T_{\\epsilon,L}=R\\circ\\Phi_\\epsilon^L$.\n\nEach kick and drift is a continuous bijection with inverse $K_{-a}$ or $D_{-b}$, respectively. These finite maps use only $\\nabla U$ and do not require a solution of Hamilton's ODE. The classical derivative of a force kick is not part of this definition: for merely $U\\in C^1$, $\\nabla U$ need not be differentiable.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 1.1."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The first kick gives $p_{1/2}=p-hq/2$, the drift gives $q_1=q+hp_{1/2}=(1-h^2/2)q+hp$, and the last kick gives $p_1=p_{1/2}-hq_1/2=-h(1-h^2/4)q+(1-h^2/2)p$. Thus $S_h=\\begin{pmatrix}a&h\\\\-hs&a\\end{pmatrix},\\quad a=1-h^2/2,\\quad s=1-h^2/4.$",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Direct multiplication gives $S_h^T\\begin{pmatrix}s&0\\\\0&1\\end{pmatrix}S_h=\\begin{pmatrix}s(a^2+h^2s)&0\\\\0&a^2+h^2s\\end{pmatrix}=\\begin{pmatrix}s&0\\\\0&1\\end{pmatrix},$ because $a^2+h^2s=1$. Hence $\\widetilde H_h$ is exactly invariant. Since $s>0$, invariance implies $q_n^2\\le2\\widetilde H_h(q_0,p_0)/s$ for every $n$.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The identity $\\widetilde H_h=H-(h^2/8)q^2$ gives $H(q_n,p_n)-H(q_0,p_0)=\\frac{h^2}{8}(q_n^2-q_0^2).$ Apply the bound from step 2.1 and the triangle inequality to obtain the stated uniform error estimate.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement or procedure requires a strictly positive step size, so h=0 is outside its declared input domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made; map operations and admitted branches are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    },
+    "ex-symplectic-euler-harmonic-oscillator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-local-symplectic-euler-step",
+          "source_section": "Definition",
+          "quote": "Input an admitted state $(q,p)\\in Q\\times\\mathbb R^d$, step $h>0$, $V\\in C^1(Q)$, and symmetric positive-definite $M$. First set $p^+=p-h\\nabla V(q)$. Then set $q^+=q+hM^{-1}p^+$. If $q^+\\notin Q$, return `domain-failure`; otherwise return $(q^+,p^+)$. This fixes the kick-then-drift ordering. The returned map is the partial composition $D_h\\circ K_h$ in the notation of [[def-local-leapfrog-domain-on-an-open-configuration-set]].\n\nFor exact mathematical statements the displayed operations are evaluated exactly. A finite implementation that cannot certify the state and force evaluation returns `inconclusive`; it does not report a step outside $Q$ as successful.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F1 uses the supplier's exact stated interface in 1.1."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Since $V'(q)=q$, [F1] gives $p^+=p-hq$ and $q^+=q+h(p-hq)=(1-h^2)q+hp$, which is the displayed matrix.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Its determinant is $(1-h^2)\\cdot1-h(-h)=1$. By [F2], $S^TJS=J$, verifying symplecticity.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim takes a supplied state or method; it makes no assertion about an empty state input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-step or zero-parameter specialization is the identity and the stated calculation remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the one-dimensional or single-step case is included by the same displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-force, zero-coefficient, or equilibrium specialization is covered by the stated hypotheses and the same algebra."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the admitted domain and step/tube endpoints are handled by the stated restriction, estimate, or failure status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made; map operations and admitted branches are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 54 author — not independent approval",
+        "notes": "Author checked scope, exact supplier excerpts, proof-step mappings, dependencies, and boundary cases. This is not independent proof acceptance."
+      }
+    }
+  }
+}

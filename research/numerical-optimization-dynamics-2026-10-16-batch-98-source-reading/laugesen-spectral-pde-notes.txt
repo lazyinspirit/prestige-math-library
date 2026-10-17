@@ -1,0 +1,6773 @@
+Spectral Theory of Partial Differential
+Equations
+
+Lecture Notes
+
+University of Illinois
+at Urbana–Champaign
+
+Richard S. Laugesen ∗
+
+November 27, 2024
+
+∗Copyright c⃝2011, Richard S. Laugesen (Laugesen@illinois.edu). This work is
+licensed under the Creative Commons Attribution–Noncommercial–Share Alike 3.0
+Unported License. To view a copy of this license, visit http://creativecommons.
+org/licenses/by-nc-sa/3.0/.
+
+arXiv:1203.2344v1  [math.AP]  11 Mar 2012
+
+
+Preface
+
+A textbook presents far more material than any professor can cover in class.
+These lecture notes present only somewhat more than I covered during the
+half-semester course Spectral Theory of Partial Differential Equations (Math
+595 STP) at the University of Illinois, Urbana–Champaign, in Fall 2011.
+
+I make no claims of originality for the material presented other than some
+originality of emphasis: I emphasize computable examples before developing
+the general theory. This approach leads to occasional redundancy, and some-
+times we use ideas before they are properly defined, but I think students gain
+a better understanding of the purpose of a theory after they are first well
+grounded in specific examples.
+Please email me with corrections, and suggested improvements.
+
+Richard S. Laugesen
+Email: Laugesen@illinois.edu
+Department of Mathematics
+University of Illinois at Urbana–Champaign, U.S.A.
+
+2
+
+
+Prerequisites and notation
+
+We assume familiarity with elementary Hilbert space theory: inner product,
+norm, Cauchy–Schwarz, orthogonal complement, Riesz Representation The-
+orem, orthonormal basis (ONB), bounded operators, and compact operators.
+Our treatment of discrete spectra builds on the spectral theorem for compact,
+selfadjoint operators.
+All functions are assumed to be measurable. We use the function spaces
+
+L1 = integrable functions,
+
+L2 = square integrable functions,
+L∞= bounded functions,
+
+but we have no need of general Lp spaces.
+Sometimes we employ the L2-theory of the Fourier transform,
+
+�f(ξ) =
+�
+
+Rd f(x)e−2πiξ·x dx.
+
+Only the basic facts are needed, such as that the Fourier transform preserves
+the L2 norm and maps derivatives in the spatial domain to multipliers in the
+frequency domain.
+We use the language of Sobolev spaces throughout. Readers unfamiliar
+with this language can proceed unharmed: we mainly need that
+
+H1 = W1,2 = {L2-functions with 1 derivative in L2},
+
+H2 = W2,2 = {L2-functions with 2 derivatives in L2},
+
+and
+
+H1
+0 = W1,2
+0
+= {H1-functions that equal zero on the boundary}.
+
+(These characterizations are not mathematically precise, but they are good
+enough for our purposes.) Later we will recall the standard inner products
+that make these spaces into Hilbert spaces.
+For more on Sobolev space theory, and related concepts of weak solutions
+and elliptic regularity, see [Evans].
+
+3
+
+
+Introduction
+
+Spectral methods permeate the theory of partial differential equations. One
+solves linear PDEs by separation of variables, getting eigenvalues when the
+spectrum is discrete and continuous spectrum when it is not.
+Linearized
+stability of a steady state or traveling wave of a nonlinear PDE depends on
+the sign of the first eigenvalue, or on the location of the continuous spectrum
+in the complex plane.
+This minicourse aims at highlights of spectral theory for selfadjoint par-
+tial differential operators, with a heavy emphasis on problems with discrete
+spectrum.
+
+Style of the course. Research work differs from standard course work.
+Research often starts with questions motivated by analogy, or by trying to
+generalize special cases. Normally we find answers in a nonlinear fashion,
+slowly developing a coherent theory by linking up and extending our scraps
+of known information.
+We cannot predict what we will need to know in
+order to succeed, and we certainly do not have enough time to study all
+relevant background material. To succeed in research, we must develop a
+rough mental map of the surrounding mathematical landscape, so that we
+know the key concepts and canonical examples (without necessarily knowing
+the proofs). Then when we need to learn more about a topic, we know where
+to begin.
+This course aims to develop your mental map of spectral theory in partial
+differential equations. We will emphasize computable examples, and will be
+neither complete in our coverage nor completely rigorous in our approach.
+Yet you will finish the course having a much better appreciation of the main
+issues and techniques in the subject.
+
+Closing thoughts. If the course were longer, then we could treat topics
+such as nodal patterns, geometric bounds for the first eigenvalue and the
+spectral gap, majorization techniques (passing from eigenvalue sums to spec-
+tral zeta functions and heat traces), and inverse spectral problems. And we
+could investigate more deeply the spectral and scattering theory of opera-
+tors with continuous spectrum, giving applications to stability of traveling
+waves and similarity solutions. These fascinating topics must await another
+course. . .
+
+4
+
+
+Contents
+
+I
+Discrete Spectrum
+7
+
+1
+ODE preview
+8
+
+2
+Laplacian — computable spectra
+14
+
+3
+Schr¨odinger — computable spectra
+22
+
+4
+Discrete spectral theorem
+27
+
+5
+Laplace eigenfunctions
+33
+
+6
+Natural boundary conditions
+42
+
+7
+Magnetic Laplacian
+44
+
+8
+Schr¨odinger in confining well
+48
+
+9
+Variational characterizations
+51
+
+10 Monotonicity of eigenvalues
+57
+
+11 Weyl’s asymptotic
+62
+
+12 P´olya’s conjecture
+66
+
+13 Reaction–diffusion stability
+68
+
+14 Thin fluid film stability
+78
+
+5
+
+
+II
+Continuous Spectrum
+86
+
+15 Laplacian on whole space
+88
+
+16 Schr¨odinger with −2 sech2 potential
+93
+
+17 Selfadjoint operators
+101
+
+18 Spectra: discrete and continuous
+107
+
+19 Discrete spectrum revisited
+113
+
+6
+
+
+Part I
+
+Discrete Spectrum
+
+7
+
+
+Chapter 1
+
+ODE preview
+
+Goal
+
+To review the role of eigenvalues and eigenvectors in solving 1st and 2nd order
+systems of linear ODEs; to interpret eigenvalues as decay rates, frequencies,
+and stability indices; and to observe formal analogies with PDEs.
+
+Notational convention
+
+Eigenvalues are written with multiplicity, and are listed in increasing order
+(when real-valued):
+
+λ1 ≤λ2 ≤λ3 ≤· · ·
+
+Spectrum of a real symmetric matrix
+
+If A is a real symmetric d × d matrix (e.g.
+A = [ a b
+b c ] when d = 2) or
+Hermitian matrix then its spectrum is the collection of eigenvalues:
+
+spec(A) = {λ1, . . . , λd} ⊂R
+
+(see the figure). Recall that
+
+Avj = λjvj
+
+where the eigenvectors {v1, . . . , vd} can be chosen to form an ONB for Rd.
+
+8
+
+
+spec�A�
+
+�
+
+Λ1
+Λ2
+Λ3
+Λ4
+�
+�
+�
+�
+
+Observe A : Rd →Rd is diagonal with respect to the eigenbasis:
+
+A
+��
+cjvj
+�
+=
+�
+λjcjvj
+
+
+
+
+
+λ1
+0
+...
+0
+λd
+
+
+
+
+
+
+
+
+
+c1
+...
+cd
+
+
+
+=
+
+
+
+
+
+λ1c1
+...
+λdcd
+
+
+
+
+
+What does the spectrum tell us about linear ODEs?
+
+Example 1.1 (1st order). The equation
+
+dv
+dt = −Av
+
+v(0) =
+�
+cjvj
+
+has solution
+v(t) = e−Atv(0)
+def
+=
+�
+e−λjtcjvj.
+
+Notice λj =decay rate of the solution in direction vj if λj > 0, or growth
+rate (if λj < 0).
+Long-time behavior: the solution is dominated by the first mode, with
+
+v(t) ∼e−λ1tc1v1
+for large t,
+
+assuming λ1 < λ2 (so that the second mode decays faster than the first). The
+rate of collapse onto the first mode is governed by the spectral gap λ2 −λ1
+
+9
+
+
+since
+
+v(t) = e−λ1t�
+c1v1 +
+
+d
+�
+
+j=2
+e−(λj−λ1)tcjvj
+�
+
+∼e−λ1t�
+c1v1 + O(e−(λ2−λ1)t).
+
+Example 1.2 (2nd order). Assume λ1 > 0, so that all the eigenvalues are
+positive. Then
+
+d2v
+dt2 = −Av
+
+v(0) =
+�
+cjvj
+
+v′(0) =
+�
+c′
+jvj
+
+has solution
+
+v(t) = cos(
+√
+
+At)v(0) +
+1
+√
+
+A
+sin(
+√
+
+At)v′(0)
+
+def
+=
+�
+cos(
+�
+
+λjt)cjvj +
+�
+1
+�
+
+λj
+sin(
+�
+
+λjt)c′
+jvj.
+
+Notice
+�
+
+λj =frequency of the solution in direction vj.
+
+Example 1.3 (1st order imaginary). The equation
+
+idv
+
+dt = Av
+
+v(0) =
+�
+cjvj
+
+has complex-valued solution
+
+v(t) = e−iAtv(0)
+def
+=
+�
+e−iλjtcjvj.
+
+This time λj =frequency of the solution in direction vj.
+
+10
+
+
+What does the spectrum tell us about nonlinear ODEs?
+In/stability!
+
+Example 1.4 (1st order nonlinear). Suppose
+
+dv
+dt = F(v)
+
+where the vector field F satisfies F(0) = 0, with first order Taylor expansion
+
+F(v) = Bv + O(|v|2)
+
+for some matrix B having d linearly independent eigenvectors v1, . . . , vd and
+corresponding eigenvalues λ1, . . . , λd ∈C. (The eigenvalues come in complex
+conjugate pairs, since B is real.)
+Clearly v(t) ≡0 is an equilibrium solution. Is it stable? To investigate,
+we linearize the ODE around the equilibrium to get
+dv
+dt = Bv, which has
+solution
+v(t) = eBtv(0) =
+�
+eλjtcjvj.
+
+Notice v(t) →0 as t →∞if Re(λj) < 0 for all j, whereas |v(t)| →∞if
+Re(λj) > 0 for some j (provided the corresponding coefficient cj is nonzero,
+and so on). Hence the equilibrium solution v(t) ≡0 is:
+
+• linearly asymptotically stable if spec(B) ⊂LHP,
+
+spec�B�
+
+�
+�
+
+�
+
+�
+�
+
+• linearly unstable if spec(B) ∩RHP ̸= ∅.
+
+The Linearization Theorem guarantees that the nonlinear ODE indeed be-
+haves like the linearized ODE near the equilibrium solution, in the stable
+and unstable cases.
+
+11
+
+
+spec�B�
+
+�
+�
+
+�
+
+�
+�
+
+The nonlinear ODE’s behavior requires further investigation in the neu-
+trally stable case where the spectrum lies in the closed left half plane and
+intersects the imaginary axis (Re(λj) ≤0 for all j and Re(λj) = 0 for some
+j).
+
+spec�B�
+
+�
+�
+
+�
+
+�
+�
+
+For example, if B =
+�0 −1
+1 0
+�
+(which has eigenvalues ±i), then the phase
+portrait for dv
+
+dt = Bv consists of circles centered at the origin, but the phase
+portrait for the nonlinear system dv
+
+dt = F(v) might spiral in towards the origin
+(stability) or out towards infinity (instability), or could display even more
+complicated behavior.
+
+Looking ahead to PDEs
+
+Now suppose A is an elliptic operator on a domain Ω⊂Rd. For simplic-
+ity, take A = −∆. Assume boundary conditions that make the operator
+self-adjoint (we will say more about boundary conditions later). Then the
+eigenvalues λj and eigenfunctions vj(x) of the Laplacian satisfy
+
+−∆vj = λjvj
+in Ω
+
+and the spectrum increases to infinity:
+
+λ1 ≤λ2 ≤λ3 ≤· · · →∞.
+
+12
+
+
+The eigenfunctions form an ONB for L2(Ω).
+Substituting A = −∆into the ODE Examples 1.1–1.3 transforms them
+into famous partial differential equations for the function v(x, t). We solve
+these PDEs formally by separation of variables:
+
+• Example 1.1 — diffusion equation vt = ∆v. Separation of variables
+gives the solution
+
+v = e∆tv(·, 0)
+def
+=
+�
+e−λjtcjvj
+
+where the initial value is v(·, 0) = �cjvj. Here λj =decay rate.
+
+• Example 1.2 — wave equation vtt = ∆v. Separation of variables gives
+
+v = cos(
+√
+
+−∆t)v(·, 0) +
+1
+√
+
+−∆sin(
+√
+
+−∆t)vt(·, 0)
+
+def
+=
+�
+cos(
+�
+
+λjt)cjvj +
+�
+1
+�
+
+λj
+sin(
+�
+
+λjt)c′
+jvj.
+
+So
+�
+
+λj =frequency and vj =mode of vibration.
+
+• Example 1.3 — Schr¨odinger equation ivt = −∆v. Separation of vari-
+ables gives
+v = ei∆tv(·, 0)
+def
+=
+�
+e−iλjtcjvj.
+
+Here λj =frequency or energy level, and vj =quantum state.
+
+We aim in what follows to analyze not just the Laplacian, but a whole
+family of related operators including:
+
+A = −∆
+Laplacian,
+A = −∆+ V(x)
+Schr¨odinger operator,
+
+A = (i∇+ ⃗A)2
+magnetic Laplacian,
+
+A = (−∆)2 = ∆∆
+biLaplace operator.
+
+The spectral theory of these operators helps explain the stability of different
+kinds of “equilibria” for evolution equations: steady states, standing waves,
+traveling waves, and similarity solutions.
+
+13
+
+
+Chapter 2
+
+Laplacian — computable
+spectra
+
+Goal
+
+To develop a library of explicitly computable spectra, which we use later to
+motivate and understand the general theory. The examples are classical and
+so proofs are left to the reader, or else omitted, except that Weyl’s asymptotic
+law is proved in detail for rectangles.
+
+References
+[Strauss] Chapters 4, 10; [Farlow] Lesson 30.
+
+Notation
+
+Let Ωbe a bounded domain in Rd, d ≥1. Fix L > 0.
+Abbreviate “boundary condition” as “BC”:
+
+• Dirichlet BC means u = 0 on ∂Ω,
+
+• Robin BC means
+∂u
+∂n + σu = 0 on ∂Ω(where σ ∈R is the Robin
+constant),
+
+• Neumann BC means ∂u
+
+∂n = 0 on ∂Ω.
+
+Spectra of the Laplacian
+
+∆= ∇· ∇=
+�∂
+
+∂x1
+
+�2
++ · · · +
+�∂
+
+∂xd
+
+�2
+
+14
+
+
+Eigenfunctions satisfy −∆u = λu , and we order the eigenvalues in increas-
+ing order as
+
+λ1 ≤λ2 ≤λ3 ≤· · · →∞.
+
+To get an ONB one should normalize the eigenfunctions in L2, but for sim-
+plicity, we will not normalize the following examples.
+
+One dimension
+−u′′ = λu
+
+1. Circle T = R/2πZ, periodic BC: u(−π) = u(π), u′(−π) = u′(π).
+Eigenfunctions eijx for j ∈Z, or equivalently 1, cos(jx), sin(jx) for j ≥1.
+Eigenvalues λj = j2 for j ∈Z, or λ = 02, 12, 12, 22, 22, . . .
+
+2. Interval (0, L)
+
+(a) Dirichlet BC: u(0) = u(L) = 0.
+Eigenfunctions uj(x) = sin(jπx/L) for j ≥1.
+Eigenvalues λj = (jπ/L)2 for j ≥1, e.g. L = π ⇒λ = 12, 22, 32, . . .
+
+Dirichlet spectrum
+
+ΛL2�Π2
+�
+�
+�
+
+Dirichlet modes
+
+L�2
+L
+
+(b) Robin BC: −u′(0) + σu(0) = u′(L) + σu(L) = 0.
+Eigenfunctions uj(x) = √ρj cos(√ρjx) + σ sin(√ρjx).
+
+Eigenvalues ρj = jth positive root of tan(√ρL) = 2σ√ρ
+
+ρ−σ2 for j ≥1.
+
+(c) Neumann BC: u′(0) = u′(L) = 0.
+Eigenfunctions uj(x) = cos(jπx/L) for j ≥0 (note u0 ≡1).
+Eigenvalues µj = (jπ/L)2 for j ≥0, e.g. L = π ⇒λ = 02, 12, 22, 32, . . .
+
+15
+
+
+Robin spectrum
+
+ΡL2�Π2
+�
+�
+�
+�
+
+Robin modes
+
+L�2
+L
+
+Neumann spectrum
+
+ΜL2�Π2
+��
+�
+�
+
+Neumann modes
+
+L�2
+L
+
+Spectral features in 1 dim
+i. Scaling: eigenvalue must balance d2/dx2, and so λ ∼(length scale)−2.
+Precisely, λj
+�
+(0, tL)
+�
+= λj
+�
+(0, L)
+�
+/t2.
+ii. Asymptotic: eigenvalues grow at a regular rate, λj ∼(const.)j2
+
+iii. Robin spectrum lies between Neumann and Dirichlet:
+
+Neumann
+σ→0
+←−−−Robin
+σ→∞
+−−−−→Dirichlet
+
+as one sees formally by letting σ approach 0 or ∞in the Robin BC ∂u
+
+∂n +σu =
+0.
+
+Two dimensions
+−∆u = λu
+
+1. Rectangle Ω= (0, L) × (0, M) (product of intervals).
+Separate variables using rectangular coordinates x1, x2. See the figures at
+the end of the chapter!
+(Note that every rectangle can be reduced to a rectangle with sides par-
+allel to the coordinate axes because the Laplacian, and hence its spectrum,
+is rotationally and translationally invariant.)
+
+(a) Dirichlet BC: u = 0
+Eigenfunctions ujk(x) = sin(jπx1/L) sin(kπx2/M) for j, k ≥1.
+
+16
+
+
+Eigenvalues λjk = (jπ/L)2 + (kπ/M)2 for j, k ≥1,
+e.g. L = M = π ⇒λ = 2, 5, 5, 8, 10, 10, . . .
+
+(b) Neumann BC: ∂u
+
+∂n = 0
+Eigenfunctions ujk(x) = cos(jπx1/L) cos(kπx2/M) for j, k ≥0.
+Eigenvalues µjk = (jπ/L)2 + (kπ/M)2 for j, k ≥0,
+e.g. L = M = π ⇒λ = 0, 1, 1, 2, 4, 4, . . .
+
+2. Disk Ω= {x ∈R2 : |x| < R}.
+Separate variables using polar coordinates r, θ.
+
+(a) Dirichlet BC: u = 0
+Eigenfunctions
+
+J0(rj0,m/R) for m ≥1,
+Jn(rjn,mr/R) cos(nθ) and Jn(rjn,mr/R) sin(nθ) for n ≥1, m ≥1.
+
+Notice the modes with n = 0 are purely radial, whereas when n ≥1 the
+modes have angular dependence.
+Eigenvalues λ = (jn,m/R)2 for n ≥0, m ≥1, where
+
+Jn = Bessel function of order n, and
+jn,m = m-th positive root of Jn(r) = 0.
+
+The eigenvalue λn,m has multiplicity 2 when n ≥1, associated to both cosine
+and sine modes.
+From the graphs of the Bessel functions J0, J1, J2 we can read off the first
+4 roots:
+j0,1 ≃2.40,
+j1,1 ≃3.83
+j2,1 ≃5.13
+j1,2 ≃5.52.
+
+These roots generate the first 6 eigenvalues (remembering the eigenvalues are
+double when n ≥1).
+
+(b) Neumann BC: ∂u
+
+∂n = 0
+Use roots of J′
+n(r) = 0. See [Bandle, Chapter III].
+
+3. Equilateral triangle of sidelength L.
+Separation of variables fails, but one may reflect repeatedly to a hexagonal
+lattice whose eigenfunctions are trigonometric.
+Dirichlet eigenvalues λjk = 16π2
+
+9L2 (j2 + jk + k2) for j, k ≥1.
+Neumann eigenvalues µjk = 16π2
+
+9L2 (j2 + jk + k2) for j, k ≥0.
+See [Mathews & Walker, McCartin].
+
+17
+
+
+J0�r�
+
+J1�r�J2�r�
+
+2
+4
+6
+8
+10
+
+Spectral features in 2 dim
+
+i. Scaling: eigenvalue must balance ∆, and so λ ∼(length scale)−2.
+Precisely, λj(tΩ) = λj(Ω)/t2.
+
+ii.
+Dirichlet and Neumann spectra behave quite differently when the
+domain degenerates. Consider the rectangle, for example. Fix one side length
+L, and let the other side length M tend to 0. Then the first positive Dirichlet
+eigenvalue blows up: taking j = k = 1 gives eigenvalue (π/L)2 + (π/M)2 →
+∞. The first positive Neumann eigenvalue is constant (independent of M):
+taking j = 1, k = 0, gives eigenvalue (π/L)2.
+
+iii. Asymptotic: eigenvalues of the rectangle grow at a regular rate.
+
+Proposition 2.1. (Weyl’s law for rectangles) The rectangle (0, L) × (0, M)
+has
+λj ∼µj ∼4πj
+
+Area
+as j →∞,
+
+where Area = LM is the area of the rectangle and λ1, λ2, λ3, . . . and µ1, µ2, µ3, . . .
+are the Dirichlet and Neumann eigenvalues respectively, in increasing order.
+
+Proof. We give the proof for Dirichlet eigenvalues. (The Neumann case is
+similar.) Define for α > 0 the eigenvalue counting function
+
+N(α) = #{eigenvalues ≤α}
+
+= #
+�
+j, k ≥1 :
+j2
+
+αL2/π2 +
+k2
+
+αM2/π2 ≤1
+�
+
+= #
+�
+(j, k) ∈N × N : (j, k) ∈E
+�
+
+where E is the ellipse (x/a)2 + (y/b)2 ≤1 and a = √αL/π, b = √αM/π.
+
+18
+
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+j
+
+k
+
+E
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+�
+
+j
+
+k
+
+E��1,1�
+
+We associate each lattice point (j, k) ∈E with the square
+
+S(j, k) = [j −1, j] × [k −1, k]
+
+whose upper right corner lies at (j, k). These squares all lie within E, and so
+by comparing areas we find
+
+N(α) ≤(area of E in first quadrant) = 1
+
+4πab = Area
+
+4π α.
+
+On the other hand, a little thought shows that the union of the squares covers
+a copy of E shifted down and left by one unit:
+
+∪(j,k)∈E S(j, k) ⊃
+�
+E −(1, 1)
+�
+∩(first quadrant).
+
+Comparing areas shows that
+
+N(α) ≥1
+
+4πab −a −b
+
+= LM
+
+4π α −L + M
+
+π
+√α
+
+= Area
+
+4π α −Perimeter
+
+2π
+√α.
+
+Combining our upper and lower estimates shows that
+
+N(α) ∼Area
+
+4π α
+
+as α →∞. To complete the proof we simply invert this last asymptotic,
+with the help of the lemma below.
+
+Lemma 2.2. (Inversion of asymptotics) Fix c > 0. Then:
+
+N(α) ∼α
+
+c
+=⇒
+λj ∼cj.
+
+19
+
+
+Proof. Formally substituting α = λj and N(α) = j takes us from the first
+asymptotic to the second. The difficulty with making this substitution rig-
+orous is that if λj is a multiple eigenvalue, then N(λj) can exceed j.
+To circumvent the problem, we argue as follows. Given ε > 0 we know
+from N(α) ∼α/c that
+
+(1 −ε)α
+
+c < N(α) < (1 + ε)α
+
+c
+
+for all large α. Substituting α = λj into the right hand inequality implies
+that
+j < (1 + ε)λj
+
+c
+for all large j. Substituting α = λj −δ into the left hand inequality implies
+that
+(1 −ε)λj −δ
+
+c
+< j
+
+for each large j and 0 < δ < 1, and hence (by letting δ →0) that
+
+(1 −ε)λj
+
+c ≤j.
+
+We conclude that
+1
+1 + ε < λj
+
+cj ≤
+1
+1 −ε
+
+for all large j, so that
+
+lim
+j→∞
+λj
+cj = 1
+
+as desired.
+
+Later, in Chapter 11, we will prove Weyl’s Asymptotic Law that
+
+λj ∼4πj/Area
+
+for all bounded domains in 2 dimensions, regardless of shape or boundary
+conditions.
+
+Question to ask yourself
+What does a “typical” eigenfunction look like,
+in each of the examples above? See the following figures.
+
+20
+
+
+Dirichlet square �L�M�Π�
+
+�
+��
+�
+��
+
+Neumann square �L�M�Π�
+
+����
+����
+�����
+��
+
+Dirichlet disk �R�
+Π ,A�Π2�
+�
+��
+���
+��
+
+21
+
+
+Chapter 3
+
+Schr¨odinger — computable
+spectra
+
+Goal
+
+To study the classic examples of the harmonic oscillator (1 dim) and hydrogen
+atom (3 dim).
+
+References
+[Strauss] Sections 9.4, 9.5, 10.7; [GustafsonSigal] Section 7.5,
+7.7
+
+Harmonic oscillator in 1 dimension −u′′ + x2u = Eu
+
+Boundary condition: u(x) →0 as x →±∞. (Later we give a deeper per-
+spective, in terms of a weighted L2-space.)
+Eigenfunctions uk(x) = Hk(x)e−x2/2 for k ≥0, where Hk = k-th Hermite
+polynomial.
+Eigenvalues Ek = 2k + 1 for k ≥0, or E = 1, 3, 5, 7, . . .
+Examples. H0(x) = 1, H1(x) = 2x, H2(x) = 4x2−2, Hk(x) = (−1)kex2�d
+
+dx
+�ke−x2
+
+Ground state: u0(x) = e−x2/2 = Gaussian. (Check: −u′′
+0 + x2u0 = u0)
+
+Quantum mechanical interpretation
+
+If u(x, t) solves the time-dependent Schr¨odinger equation
+
+iut = −u′′ + x2u
+
+22
+
+
+Harmonic osc. spectrum
+
+�
+�
+�
+�
+�
+�
+
+V�x��x2
+
+�3
+3
+1
+3
+5
+7
+
+Harmonic oscillator modes
+
+with potential V(x) = x2 and u has L2 norm equal to 1, then |u|2 represents
+the probability density for the location of a particle in a quadratic potential
+well.
+The k-th eigenfunction uk(x) is called the k-th excited state, because it
+gives a “standing wave” solution
+
+u(x, t) = e−iEktuk(x)
+
+to the time-dependent equation. The higher the frequency or “energy” Ek of
+the excited state, the more it can spread out in the confining potential well,
+as the solution plots show.
+
+Harmonic oscillator investigations
+
+Method 1: ODEs Since u0(x) = e−x2/2 is an eigenfunction, we guess that all
+eigenfunctions decay like e−x2/2. So we try the change of variable u = we−x2/2.
+The eigenfunction equation becomes
+
+w′′ −2xw′ + (E −1)w = 0,
+
+which we recognize as the Hermite equation. Solving by power series, we
+find that the only appropriate solutions have terminating power series: they
+are the Hermite polynomials. (All other solutions grow like ex2 at infinity,
+violating the boundary condition on u.)
+
+Method 2: Raising and lowering Define
+
+h+ = −d
+
+dx + x
+(raising or creation operator),
+
+h−= d
+
+dx + x
+(lowering or annihilation operator).
+
+23
+
+
+Write H = −d2
+
+dx2 +x2 for the harmonic oscillator operator. Then one computes
+that
+
+H = h+h−+ 1
+= h−h+ −1
+
+Claim. If u is an eigenfunction with eigenvalue E then h±u is an eigenfunc-
+tion with eigenvalue E ± 2. (In other words, h+ “raises” the energy, and h−
+
+“lowers” the energy.)
+Proof.
+
+H(h+u) = (h+h−+ 1)(h+u)
+= h+(h−h+ + 1)u
+= h+(H + 2)u
+= h+(E + 2)u
+= (E + 2)h+u
+
+and similarly H(h−u) = (E −2)h−u (exercise).
+
+The only exception to the Claim is that h−u will not be an eigenfunction
+if h−u ≡0, which occurs precisely when u = u0 = e−x2/2. Thus the lowering
+operator annihilates the ground state.
+
+Relation to classical harmonic oscillator
+
+Consider a classical oscillator with mass m = 2, spring constant k = 2, and
+displacement x(t), so that 2¨x = −2x. The total energy is
+
+˙x2 + x2 = const. = E.
+
+To describe a quantum oscillator, we formally replace the momentum ˙x with
+the “momentum operator” −i d
+
+dx and let the equation act on a function u:
+
+��
+−i d
+
+dx
+�2 + x2�
+u = Eu.
+
+This is exactly the eigenfunction equation −u′′ + x2u = Eu.
+
+24
+
+
+Harmonic oscillator in higher dimensions −∆u + |x|2u = Eu
+
+Here |x|2 = x2
+1 +· · ·+x2
+d. The operator separates into a sum of 1 dimensional
+operators, and hence has product type eigenfunctions
+
+u = uk1(x1) · · · ukd(xd),
+E = (2k1 + 1) + · · · + (2kd + 1).
+
+Hydrogen atom in 3 dimensions −∆u −2
+
+|x|u = Eu
+
+Here V(x) = −2/|x| is an attractive electrostatic (“Coulomb”) potential cre-
+ated by the proton in the hydrogen nucleus. (Notice the gradient of this
+potential gives the correct |x|−2 inverse square law for electrostatic force.)
+Boundary conditions: u(x) →0 as |x| →∞(we will say more later about
+the precise formulation of the eigenvalue problem).
+Eigenvalues: E = −1, −1
+
+4, −1
+
+9, . . . with multiplicities 1, 4, 9, . . .
+That is, the eigenvalue E = −1/n2 has multiplicity n2.
+Eigenfunctions: e−r/nLℓ
+n(r)Ym
+ℓ(θ, φ) for 0 ≤|m| ≤n −1, where Ym
+ℓ
+is a
+spherical harmonic and Lℓ
+n equals rℓtimes a Laguerre polynomial.
+(Recall the spherical harmonics are eigenfunctions of the spherical Lapla-
+cian in 3 dimensions, with −∆sphereYm
+ℓ
+= ℓ(ℓ+ 1)Ym
+ℓ. In 2 dimensions the
+spherical harmonics have the form Y = cos(kθ) and Y = sin(kθ), which
+satisfy −d2
+
+dθ2Y = k2Y.)
+
+Examples. The first three purely radial eigenfunctions (ℓ= m = 0, n =
+1, 2, 3) are e−r, e−r/2(1 −r
+
+2), e−r/3(1 −2
+
+3r + 2
+
+27r2).
+
+Hydrogen atom spectrum
+
+without multiplicities
+�
+��
+�1
+�
+
+1
+
+4
+
+�
+
+1
+
+9
+
+u�x��e�x
+
+E��1
+
+V�x���2��x�
+
+1
+
+Hydrogen atom: radial n�1
+
+The corner in the graph of the eigenfunction at r = 0 is caused by the
+singularity of the Coulomb potential.
+
+25
+
+
+u�x��e�x �2�1�
+
+1
+
+2
+
+�x��
+
+E��
+
+1
+
+4
+
+V�x���2��x�
+
+1
+
+Hydrogen atom: radial n�2
+
+u�x��e�x �3�1�
+
+2
+
+3
+
+�x��
+
+2
+
+27
+
+�x 2�
+
+E��
+
+1
+
+9
+
+V�x���2��x�
+
+1
+
+Hydrogen atom: radial n�3
+
+Continuous spectrum
+Eigenfunctions with positive energy E > 0 do ex-
+ist, but they oscillate as |x| →∞, and thus do not satisfy our boundary
+conditions. They represent “free electrons” that are not bound to the nu-
+cleus. See our later discussion of continuous spectrum, in Chapter 18.
+
+26
+
+
+Chapter 4
+
+Discrete spectral theorem
+
+Goal
+
+To state the spectral theorem for an elliptic sesquilinear form on a dense,
+compactly imbedded Hilbert space, and to prove it using the spectral theorem
+for compact, selfadjoint operators. In later chapters we apply the spectral
+theorem to unify and extend the examples of Chapters 2 and 3.
+
+References
+[BlanchardBr¨uning] Section 6.3
+
+Matrix preview — weak eigenvectors
+
+Consider a Hermitian matrix A, and suppose u is an eigenvector with eigen-
+value γ, so that Au = γu. Take the dot product with an arbitrary vector v
+to obtain
+Au · v = γu · v,
+∀v ∈Cd.
+
+We call this condition the “weak form” of the eigenvector equation. Clearly
+it implies the original “strong” form, because if (Au −γu) · v = 0 for all v,
+then Au −γu = 0.
+We will find the weak form useful below, when we generalize to Hilbert
+spaces.
+The Hermitian nature of the matrix guarantees conjugate-symmetry of
+the left side of the weak equation, when u and v are interchanged:
+
+Au · v = Av · u.
+
+27
+
+
+This symmetry ensures that all eigenvalues are real, by choosing v = u. We
+will need a similar symmetry property in the Hilbert space setting.
+
+PDE preview — weak eigenfunctions
+
+Consider the eigenfunction equation −∆u = λu for the Laplacian, in a do-
+main Ω. Multiply by a function v ∈H1
+0(Ω), so that v equals 0 on ∂Ω, and
+integrate to obtain
+
+−
+�
+
+Ω
+v∆u dx = λ
+�
+
+Ω
+uv dx.
+
+Assume u and v are real-valued. Green’s theorem and the boundary condi-
+tion on v imply
+
+�
+
+Ω
+∇u · ∇v dx = λ⟨u, v⟩L2(Ω),
+∀v ∈H1
+0(Ω).
+
+We call this condition the “weak form” of the eigenfunction equation. To
+prove existence of ONBs of such weak eigenfunctions, we will generalize to a
+Hilbert space problem.
+Notice the left side of the weak eigenfunction equation,
+�
+
+Ω∇u · ∇v dx, is
+symmetric with respect to u and v.
+
+Hypotheses
+
+Consider two infinite dimensional Hilbert spaces H and K over R (or C).
+H: inner product ⟨u, v⟩H, norm ∥u∥H
+K: inner product ⟨u, v⟩K, norm ∥u∥K
+
+Assume:
+1. K is continuously and densely imbedded in H, meaning there exists a
+continuous linear injection ι : K →H with ι(K) dense in H.
+2. The imbedding K �→H is compact, meaning if B is a bounded subset
+of K then B is precompact when considered as a subset of H. (Equivalently,
+every bounded sequence in K has a subsequence that converges in H.)
+3. We have a map a : K × K →R (or C) that is sesquilinear, continuous,
+
+28
+
+
+and symmetric, meaning
+
+u �→a(u, v) is linear, for each fixed v,
+v �→a(u, v) is linear (or conjugate linear), for each fixed u,
+|a(u, v)| ≤(const.)∥u∥K∥v∥K
+a(v, u) = a(u, v)
+(or a(u, v))
+
+4. a is elliptic on K, meaning
+
+a(u, u) ≥c∥u∥2
+K
+∀u ∈K,
+
+for some c > 0. Hence a(u, u) ≍∥u∥2
+K.
+
+An important consequence of symmetry and ellipticity is that:
+
+a(u, v) defines an inner product whose norm is equivalent to the
+∥·∥K-norm.
+
+Spectral theorem
+
+Theorem 4.1. Under the hypotheses above, there exist vectors u1, u2, u3, . . . ∈
+K and numbers
+0 < γ1 ≤γ2 ≤γ3 ≤· · · →∞
+
+such that:
+
+• uj is an eigenvector of a(·, ·) with eigenvalue γj, meaning
+
+a(uj, v) = γj⟨uj, v⟩H
+∀v ∈K,
+(4.1)
+
+• {uj} is an ONB for H,
+
+• {uj/√γj} is an ONB for K with respect to the a-inner product.
+
+The decomposition
+f =
+�
+
+j
+⟨f, uj⟩H uj
+(4.2)
+
+converges in H for each f ∈H, and converges in K for each f ∈K.
+
+29
+
+
+The idea is to show that a certain “inverse” operator associated with a
+is compact and selfadjoint on H. This approach makes sense in terms of
+differential equations, where a would correspond to a differential operator
+such as −∆(which is unbounded) and the inverse would correspond to an
+integral operator (−∆)−1 (which is bounded, and in fact compact, on suit-
+able domains). Indeed, we will begin by solving the analogue of −∆u = f
+weakly in our Hilbert space setting, with the help of the Riesz Representation
+Theorem.
+
+Remark. For a more general spectral theorem, readers may consult the recent
+paper [Auchmuty] and certain references therein. Briefly, the eigenvectors
+there satisfy a(uj, v) = γjb(uj, v) for all v ∈K, where the bilinear form b
+is assumed to be weakly continuous on K × K. In our situation, b(u, v) =
+⟨u, v⟩H and our assumption that K imbeds compactly into H implies weak
+continuity of b.
+
+Proof of Theorem 4.1. We first claim that for each f ∈H there exists a
+unique u ∈K such that
+
+a(u, v) = ⟨f, v⟩H
+∀v ∈K.
+(4.3)
+
+Furthermore, the map
+
+B :H →K
+f �→u
+
+is linear and bounded. To prove this claim, fix f ∈H and define a bounded
+linear functional F(v) = ⟨v, f⟩H on K, noting for the boundedness that
+
+|F(v)| ≤∥v∥H∥f∥H
+≤(const.)∥v∥K∥f∥H
+since K is imbedded in H
+
+≤(const.)a(v, v)1/2∥f∥H
+
+by ellipticity. Hence by the Riesz Representation Theorem on K (with respect
+to the a-inner product and norm on K), there exists a unique u ∈K such
+that F(v) = a(v, u) for all v ∈K. That is,
+
+⟨v, f⟩H = a(v, u)
+∀v ∈K,
+
+as desired for (4.3). Thus the map B : f �→u is well defined. Clearly it is
+linear. And
+a(u, u) = |F(u)| ≤(const.)a(u, u)1/2∥f∥H.
+
+30
+
+
+Hence a(u, u)1/2 ≤(const.)∥f∥H, so that B is bounded from H to K, which
+proves our initial claim.
+Next, B : H →K →H is compact, since K imbeds compactly into H.
+Further, B is selfadjoint on H, since for all f, g ∈H we have
+
+⟨Bf, g⟩H = ⟨g, Bf⟩H
+= a(Bg, Bf)
+by definition of B,
+= a(Bf, Bg)
+by symmetry of a,
+= ⟨f, Bg⟩H
+by definition of B,
+
+which implies B∗= B.
+Hence the spectral theorem for compact, self-adjoint operators [Evans,
+App. D] provides an ONB for H consisting of eigenvectors of B, with
+
+Buj = �γjuj
+
+for some eigenvalues �γj →0. The decomposition (4.2) holds in H because
+{uj} forms an ONB for H.
+The eigenvalues of B are all nonzero, because B is injective: Bf = 0 would
+imply ⟨f, v⟩H = 0 for all v ∈K by (4.3), so that f = 0 (using density of K in
+H). Thus �γj ̸= 0.
+Since we may divide by the eigenvalue we deduce that uj = B(uj/ �γj).
+Thus uj belongs to the range of B, and so uj ∈K.
+The eigenvalues are all positive, since
+
+�γja(uj, v) = a(Buj, v) = ⟨uj, v⟩H
+∀v ∈K
+
+and choosing v = uj ∈K and using ellipticity shows that �γj > 0. Thus we
+see that the reciprocal numbers 0 < γj
+def
+= 1/�γj →∞satisfy
+
+a(uj, v) = γj⟨uj, v⟩H
+∀v ∈K,
+
+which is (4.1).
+Finally, we have a-orthonormality of the set {uj/√γj}:
+
+a(uj, uk) = γj⟨uj, uk⟩H
+= γjδjk
+= √γj
+√γk δjk.
+
+31
+
+
+This orthonormal set is complete in K, because if a(uj, v) = 0 for all j then
+⟨uj, v⟩H = 0 for all j, by (4.1), so that v = 0. Therefore each f ∈K can be
+decomposed as
+f =
+�
+
+j
+a(f, uj/√γj) uj/√γj
+
+with convergence in K, and this decomposition reduces to (4.2) because
+a(f, uj) = γj⟨f, uj⟩H.
+
+Remark.
+Eigenvectors corresponding to distinct eigenvalues are automat-
+ically orthogonal, since
+
+(γj −γk)⟨uj, uk⟩H = γj⟨uj, uk⟩H −γk⟨uk, uj⟩H
+= a(uj, uk) −a(uk, uj)
+= 0
+
+by symmetry of a.
+
+32
+
+
+Chapter 5
+
+Application: ONBs of Laplace
+eigenfunctions
+
+Goal
+
+To apply the spectral theorem from the previous chapter to the Dirichlet,
+Robin and Neumann Laplacians, and to the fourth order biLaplacian.
+
+Laplacian
+
+Dirichlet Laplacian
+
+−∆u = λu
+in Ω
+u = 0
+on ∂Ω
+
+Ω=bounded domain in Rd.
+H = L2(Ω), inner product ⟨u, v⟩L2 =
+�
+
+Ωuv dx.
+K = H1
+0(Ω) =Sobolev space, which is the completion of C∞
+0 (Ω) (smooth
+functions equalling zero on a neighborhood of the boundary) under the inner
+product
+
+⟨u, v⟩H1 =
+�
+
+Ω
+[∇u · ∇v + uv] dx.
+
+Density: H1
+0 contains C∞
+0 , which is dense in L2.
+
+33
+
+
+Continuous imbedding H1
+0 �→L2 is trivial:
+
+∥u∥L2 =
+��
+
+Ω
+u2 dx
+�1/2
+
+≤
+��
+
+Ω
+[ |∇u|2 + u2] dx
+�1/2
+
+= ∥u∥H1
+
+Compact imbedding: H1
+0 �→L2 compactly by the Rellich–Kondrachov
+Theorem [GilbargTrudinger, Theorem 7.22].
+Sesquilinear form: define
+
+a(u, v) =
+�
+
+Ω
+∇u · ∇v dx +
+�
+
+Ω
+uv dx = ⟨u, v⟩H1,
+u, v ∈H1
+0(Ω).
+
+Clearly a is symmetric and continuous on H1
+0(Ω).
+Ellipticity: a(u, u) = ∥u∥2
+H1
+
+The discrete spectral Theorem 4.1 gives an ONB {uj} for L2(Ω) and cor-
+responding eigenvalues which we denote γj = λj + 1 > 0 satisfying
+
+⟨uj, v⟩H1 = (λj + 1)⟨uj, v⟩L2
+∀v ∈H1
+0(Ω).
+
+Equivalently,
+�
+
+Ω
+∇uj · ∇v dx = λj
+
+�
+
+Ω
+ujv dx
+∀v ∈H1
+0(Ω).
+
+That is,
+−∆uj = λjuj
+
+weakly, so that uj is a weak eigenfunction of the Laplacian with eigenvalue λj.
+Elliptic regularity theory gives that uj is C∞-smooth in Ω[GilbargTrudinger,
+Corollary 8.11], and hence satisfies the eigenfunction equation classically.
+The boundary condition uj = 0 is satisfied in the sense of Sobolev spaces
+(since H1
+0 is the closure of C∞
+0 ), and is satisfied classically on any smooth
+portion of ∂Ω, again by elliptic regularity.
+The eigenvalues are nonnegative, with
+
+λj =
+
+�
+
+Ω|∇uj|2 dx
+�
+
+Ωu2
+j dx
+≥0,
+
+34
+
+
+as we see by choosing v = uj in the weak formulation.
+Further, λj > 0 because: if λj = 0 then |∇uj| ≡0 by the last formula,
+so that uj ≡0 by the Sobolev inequality for H1
+0 [GilbargTrudinger, Theorem
+7.10], but uj cannot vanish identically because it has L2-norm equal to 1.
+Hence
+0 < λ1 ≤λ2 ≤λ3 ≤· · · →∞.
+
+Aside. The Sobolev inequality we used is easily proved: for u ∈H1
+0(Ω),
+
+∥u∥2
+L2 =
+�
+
+Ω
+u2 dx
+
+= −
+�
+
+Ω
+2xiu ∂u
+
+∂xi
+dx
+by parts
+
+≤2(max
+x∈Ω|x|)∥u∥L2∥∂u/∂xi∥L2
+
+≤(const.)∥u∥L2∥∇u∥L2
+
+so that we have a Sobolev inequality
+
+∥u∥L2 ≤(const.)∥∇u∥L2
+∀u ∈H1
+0(Ω),
+
+where the constant depends on the domain Ω. Incidentally, this Sobolev
+inequality provides another proof that λj > 0 for the Dirichlet Laplacian.
+
+Neumann Laplacian
+
+−∆u = µu
+in Ω
+∂u
+∂n = 0
+on ∂Ω
+
+Ω=bounded domain in Rd with Lipschitz boundary.
+H = L2(Ω)
+K = H1(Ω) =Sobolev space, which is the completion of C∞(Ω) under
+the inner product ⟨u, v⟩H1 (see [GilbargTrudinger, p. 174]).
+Argue as for the Dirichlet Laplacian. The compact imbedding is provided
+by the Rellich–Kondrachov Theorem [GilbargTrudinger, Theorem 7.26], which
+relies on Lipschitz smoothness of the boundary.
+One writes the eigenvalues in the discrete spectral Theorem 4.1 as γj =
+µj + 1 > 0 and finds
+�
+
+Ω
+∇uj · ∇v dx = µj
+
+�
+
+Ω
+ujv dx
+∀v ∈H1(Ω),
+(5.1)
+
+35
+
+
+which implies that
+−∆uj = µjuj
+
+weakly (and hence classically). In fact (5.1) says a little more, because it
+holds for all v ∈H1(Ω), not just for v ∈H1
+0(Ω) as needed for a weak
+solution. We will use this additional information in the next chapter to show
+that eigenfunctions automatically satisfy the Neumann boundary condition
+(even though we never imposed it)!
+Choosing v = uj proves µj ≥0. The first Neumann eigenvalue is zero:
+µ1 = 0, with a constant eigenfunction u1 ≡const. ̸= 0.
+(This constant
+function belongs to H1(Ω), although not to H1
+0(Ω).) Hence
+
+0 = µ1 ≤µ2 ≤µ3 ≤· · · →∞.
+
+Robin Laplacian
+
+−∆u = ρu
+in Ω
+∂u
+∂n + σu = 0
+on ∂Ω
+
+Ω=bounded domain in Rd with Lipschitz boundary.
+H = L2(Ω)
+K = H1(Ω)
+σ > 0 is the Robin constant.
+The density and compact imbedding conditions are as in the Neumann
+case above.
+Before defining the sesquilinear form, we need to make sense of the bound-
+ary values of u. Sobolev functions do have well defined boundary values.
+More precisely, there is a bounded linear operator (called the trace operator)
+T : H1(Ω) →L2(∂Ω) such that
+
+∥Tu∥L2(∂Ω) ≤τ∥u∥H1(Ω)
+(5.2)
+
+for some τ > 0, and with the property that if u extends to a continuous
+function on ∂Ω, then Tu = u on ∂Ω. (Thus the trace operator truly captures
+the boundary values of u.) Further, if u ∈H1
+0(Ω) then Tu = 0, meaning that
+functions in H1
+0 “equal zero on the boundary”. For these trace results, see
+[Evans, Section 5.5] for domains with C1 boundary, or [EvansGariepy, §4.3]
+for the slightly rougher case of Lipschitz boundary.
+
+36
+
+
+Sesquilinear form:
+
+a(u, v) =
+�
+
+Ω
+∇u · ∇v dx + σ
+�
+
+∂Ω
+uv dS(x) +
+�
+
+Ω
+uv dx
+
+(where u and v on the boundary should be interpreted as the trace values
+Tu and Tv). Clearly a is symmetric and continuous on H1(Ω).
+Ellipticity: a(u, u) ≥∥u∥2
+H1, since σ > 0.
+
+One writes the eigenvalues in the discrete spectral Theorem 4.1 as γj =
+ρj + 1 > 0 and finds
+�
+
+Ω
+∇uj · ∇v dx + σ
+�
+
+∂Ω
+ujv dS(x) = ρj
+
+�
+
+Ω
+ujv dx
+∀v ∈H1(Ω),
+
+which implies that
+−∆uj = ρjuj
+
+weakly and hence classically. For the weak solution here we need (by defini-
+tion) only to use trial functions v ∈H1
+0(Ω) (functions equalling zero on the
+boundary). In the next chapter we use the full class v ∈H1(Ω) to show that
+the eigenfunctions satisfy the Robin boundary condition.
+Choosing v = uj proves
+
+ρj =
+
+�
+
+Ω|∇uj|2 dx + σ
+�
+
+∂Ωu2
+j dS(x)
+�
+
+Ωu2
+j dx
+≥0,
+
+using again that σ > 0. Further, ρj > 0 because: if ρj = 0 then |∇uj| ≡0 so
+that uj ≡const., and this constant must equal zero because
+�
+
+∂Ωu2
+j dS(x) = 0;
+but uj cannot vanish identically because it has L2-norm equal to 1. Hence
+when σ > 0 we have
+
+0 < ρ1 ≤ρ2 ≤ρ3 ≤· · · →∞.
+
+Negative Robin constant:
+σ < 0.
+Ellipticity more difficult to prove
+when σ < 0. We start by controlling the boundary values in terms of the
+gradient and L2 norm. We have
+�
+
+∂Ω
+u2 dS(x) ≤(const.)
+�
+
+Ω
+|∇u||u| dx + (const.)
+�
+
+Ω
+u2 dx,
+
+37
+
+
+as one sees by inspecting the proof of the trace theorem ([Evans, §5.5] or
+[EvansGariepy, §4.3]). An application of Cauchy-with-ε gives
+�
+
+∂Ω
+u2 dS(x) ≤ε∥∇u∥2
+L2 + C∥u∥2
+L2
+
+for some constant C = C(ε) > 0 (independent of u). Let us choose ε =
+1/2|σ|, so that
+
+a(u, u) ≥1
+
+2∥u∥2
+H1 −C|σ| ∥u∥2
+L2.
+
+Hence the new sesquilinear form �a(u, v) = a(u, v) + C|σ|⟨u, v⟩L2 is elliptic.
+We apply the discrete spectral theorem to this new form, and then obtain the
+eigenvalues of a by subtracting C|σ| (with the same ONB of eigenfunctions).
+
+Eigenfunction expansions in the L2 and H1 norms
+
+The L2-ONB of eigenfunctions {uj} of the Laplacian gives the decomposition
+
+f =
+�
+
+j
+⟨f, uj⟩L2 uj
+(5.3)
+
+with convergence in the L2 and H1 norms, for all f in the following spaces:
+
+f ∈
+
+
+
+
+
+
+
+
+H1
+0(Ω)
+for Dirichlet,
+H1(Ω)
+for Neumann,
+H1(Ω)
+for Robin.
+
+These claims follow immediately from the discrete spectral Theorem 4.1, in
+view of our applications above.
+
+Invariance of eigenvalues under translation, rotation and reflection,
+and scaling under dilation
+
+Eigenvalues of the Laplacian remain invariant when the domain Ωis trans-
+lated, rotated or reflected, as one sees by a straightforward change of variable
+in either the classical or weak formulation of the eigenvalue problem. Physi-
+cally, this invariance simply means that a vibrating membrane is unaware of
+any coordinate system we impose upon it.
+Dilations do change the eigenvalues, of course, by a simple rescaling re-
+lation: λj(tΩ) = t−2λj(Ω) for each j and all t > 0, and similarly for the
+
+38
+
+
+Neumann eigenvalues. (We can understand this scale factor t−2 physically,
+by recalling that large drums vibrate with low tones.) The Robin eigenval-
+ues rescale the same way under dilation, provided the Robin parameter is
+rescaled to σ/t on the domain tΩ.
+
+BiLaplacian — vibrating plates
+
+The fourth order wave equation φtt = −∆∆φ describes the transverse vibra-
+tions of a rigid plate. (In one dimension, this equation simplifies to the beam
+equation: φtt = −φ′′′′). After separating out the time variable, one arrives
+at the eigenvalue problem for the biLaplacian:
+
+∆∆u = Λu
+in Ω.
+
+We will prove existence of an orthonormal basis of eigenfunctions. For sim-
+plicity, we treat only the Dirichlet case, which has boundary conditions
+
+u = |∇u| = 0
+on ∂Ω.
+
+(The Neumann “natural” boundary conditions are rather complicated, for
+the biLaplacian.)
+
+Ω=bounded domain in Rd
+
+H = L2(Ω)
+K = H2
+0(Ω) = completion of C∞
+0 (Ω) under the inner product
+
+⟨u, v⟩H2 =
+�
+
+Ω
+[
+
+d
+�
+
+m,n=1
+uxmxnvxmxn +
+
+d
+�
+
+m=1
+uxmvxm + uv ] dx.
+
+Density: H2
+0 contains C∞
+0 , which is dense in L2.
+Compact imbedding: H2
+0 �→H1
+0 �→L2 and the second imbedding is com-
+pact.
+Sesquilinear form: define
+
+a(u, v) =
+�
+
+Ω
+[
+
+d
+�
+
+m,n=1
+uxmxnvxmxn + uv ] dx,
+u, v ∈H2
+0(Ω).
+
+Clearly a is symmetric and continuous on H2
+0(Ω).
+
+39
+
+
+Ellipticity: ∥u∥2
+H2 ≤(d + 1)a(u, u), because integration by parts gives
+
+�
+
+Ω
+
+d
+�
+
+m=1
+u2
+xm dx = −
+
+d
+�
+
+m=1
+
+�
+
+Ω
+uxmxmu dx
+
+≤
+
+d
+�
+
+m=1
+
+�
+
+Ω
+[ u2
+xmxm + u2 ] dx
+
+≤a(u, u)d.
+
+The discrete spectral Theorem 4.1 gives an ONB {uj} for L2(Ω) and cor-
+responding eigenvalues which we denote γj = Λj + 1 > 0 satisfying
+
+a(uj, v) = (Λj + 1)⟨uj, v⟩L2
+∀v ∈H2
+0(Ω).
+
+Equivalently,
+
+�
+
+Ω
+
+d
+�
+
+m,n=1
+(uj)xmxnvxmxn dx = Λj
+
+�
+
+Ω
+ujv dx
+∀v ∈H2
+0(Ω).
+
+That is,
+d
+�
+
+m,n=1
+(uj)xmxmxnxn = Λjuj
+
+weakly, which says
+∆∆uj = Λjuj
+
+weakly. Hence uj is a weak eigenfunction of the biLaplacian with eigenvalue
+Λj. Elliptic regularity gives that uj is C∞-smooth, and hence satisfies the
+eigenfunction equation classically. The boundary condition uj = |∇uj| = 0 is
+satisfied in the sense of Sobolev spaces (since uj and each partial derivative
+(uj)xm belong to H1
+0), and the boundary condition is satisfied classically on
+any smooth portion of ∂Ω, again by elliptic regularity.
+The eigenvalues are nonnegative, with
+
+Λj =
+
+�
+
+Ω|D2uj|2 dx
+�
+
+Ωu2
+j dx
+≥0,
+
+as we see by choosing v = uj in the weak formulation and writing D2u =
+[uxmxn]d
+m,n=1 for the Hessian matrix.
+
+40
+
+
+Further, Λj > 0 because: if Λj = 0 then (uj)xmxn ≡0 by the last formula,
+so that (uj)xm ≡0 by the Sobolev inequality for H1
+0 applied to (uj)xm, and
+hence uj ≡0 by the same Sobolev inequality, which gives a contradiction.
+Hence
+0 < Λ1 ≤Λ2 ≤Λ3 ≤· · · →∞.
+
+Compact resolvents
+
+The essence of the proof of the discrete spectral Theorem 4.1 is to show
+that the inverse operator B is compact, which means for our differential
+operators that the inverse is a compact integral operator. For example, in
+the Neumann Laplacian application we see that (−∆+ 1)−1 is compact from
+L2(Ω) to H1(Ω). So is (−∆+ α)−1 for any positive α, but α = 0 does not
+give an invertible operator because the Neumann Laplacian has nontrivial
+kernel, with −∆(c) = 0 for every constant c.
+Thus for the Neumann Laplacian, the resolvent operator
+
+Rλ = (−∆−λ)−1
+
+is compact whenever λ is negative.
+
+41
+
+
+Chapter 6
+
+Natural boundary conditions
+
+Goal
+
+To understand how the Neumann and Robin boundary conditions arise “nat-
+urally” from the weak eigenfunction equation.
+
+Dirichlet boundary conditions
+are imposed directly by our choice of function space H1
+0(Ω), since each func-
+tion in that space is a limit of functions with compact support in Ω.
+
+Neumann boundary conditions
+The weak form of the Neumann eigenequation for the Laplacian, from
+Chapter 5, is:
+�
+
+Ω
+∇u · ∇v dx = µ
+�
+
+Ω
+uv dx
+∀v ∈H1(Ω).
+(6.1)
+
+From this formula we showed that −∆u = µu weakly and hence classically,
+by using only functions v that vanish on the boundary, meaning v ∈H1
+0(Ω).
+To deduce the Neumann boundary condition ∂u/∂n = 0, we will take v
+not to vanish on the boundary. Assume for simplicity that the boundary is
+smooth, so that u extends smoothly to Ω. Green’s formula (integration by
+parts) applied to (6.1) implies that
+
+�
+
+Ω
+(−∆u)v dx +
+�
+
+∂Ω
+
+∂u
+∂nv dS =
+�
+
+Ω
+(µu)v dx
+∀v ∈C∞(Ω).
+
+42
+
+
+Since −∆u = µu, we deduce
+�
+
+∂Ω
+
+∂u
+∂nv dS = 0
+∀v ∈C∞(Ω).
+
+One may choose v ∈C∞(Ω) to equal the normal derivative of u on the bound-
+ary (meaning v|∂Ω= ∂u
+
+∂n), or alternatively one may use density of C∞(Ω)
+��
+∂Ω
+in L2(∂Ω); either way one concludes that
+
+∂u
+∂n = 0
+on ∂Ω,
+
+which is the Neumann boundary condition.
+Note. If the boundary is only piecewise smooth, then one merely applies
+the above reasoning on the smooth portions of the boundary, to show the
+Neumann condition holds there.
+
+Robin boundary conditions
+Integrating by parts in the Robin eigenfunction equation
+�
+
+Ω
+∇u · ∇v dx + σ
+�
+
+∂Ω
+uv dS = ρ
+�
+
+Ω
+uv dx
+∀v ∈H1(Ω)
+
+(that is, applying Green’s formula to this equation) and then using that
+−∆u = ρu gives that
+�
+
+∂Ω
+
+�∂u
+
+∂n + σu
+�
+v dS = 0
+∀v ∈C∞(Ω).
+
+Like above, we obtain the Robin boundary condition
+
+∂u
+∂n + σu = 0
+on ∂Ω,
+
+at least on smooth portions of the boundary.
+
+BiLaplacian — natural boundary conditions
+Natural boundary conditions for the biLaplacian can be derived similarly
+[Chasman, §5]. They are much more complicated than for the Laplacian.
+
+43
+
+
+Chapter 7
+
+Application: ONB of
+eigenfunctions for the
+Laplacian with magnetic field
+
+Goals
+
+To apply the spectral theorem from Chapter 4 to the magnetic Laplacian
+(the Schr¨odinger operator for a particle in the presence of a classical magnetic
+field).
+
+Magnetic Laplacian
+
+Take a bounded domain Ωin Rd, with d = 2 or d = 3. We seek an ONB
+of eigenfunctions and eigenvalues for the magnetic Laplacian
+
+(i∇+ ⃗A)2 u = βu
+in Ω,
+u = 0
+on ∂Ω,
+
+where u(x) is complex-valued and
+
+⃗A : Rd →Rd
+
+is a given bounded vector field.
+Physically, ⃗A represents the vector potential, whose curl equals the mag-
+netic field: ∇× ⃗A = ⃗B.
+Note that in 2 dimensions, one extends ⃗A =
+
+44
+
+
+(A1, A2) to a 3-vector (A1, A2, 0) before taking the curl, so that the field
+⃗B = (0, 0, ∂A2
+
+∂x1 −∂A1
+
+∂x2 ) cuts vertically through the plane of the domain. For a
+brief explanation of how the magnetic Laplacian arises from the correspon-
+dence between classical energy functions and quantum mechanical Hamilto-
+nians, see [ReedSimon2, p. 173].
+Now we choose the Hilbert spaces and sesquilinear form. Consider only
+the Dirichlet boundary condition, for simplicity:
+
+H = L2(Ω; C) (complex valued functions), with inner product
+
+⟨u, v⟩L2 =
+�
+
+Ω
+uv dx.
+
+K = H1
+0(Ω; C) with inner product
+
+⟨u, v⟩H1 =
+�
+
+Ω
+[ ∇u · ∇v + uv ] dx
+
+Density: K contains C∞
+0 , which is dense in L2.
+Continuous imbedding H1
+0 �→L2 is trivial, since ∥u∥L2 ≤∥u∥H1, and the
+imbedding is compact by the Rellich–Kondrachov Theorem [GilbargTrudinger,
+Theorem 7.22].
+
+Sesquilinear form: define
+
+a(u, v) =
+�
+
+Ω
+(i∇+ ⃗A)u · (i∇+ ⃗A)v dx + C
+�
+
+Ω
+uv dx,
+u, v ∈H1
+0(Ω; C),
+
+with constant C = ∥⃗A∥2
+L∞+ 1
+
+2. Clearly a is symmetric and continuous on H1
+0.
+Ellipticity:
+
+a(u, u) =
+�
+
+Ω
+
+�
+|∇u|2 + 2 Re(i∇u · ⃗Au) + |⃗A|2|u|2 + C|u|2 �
+dx
+
+≥
+�
+
+Ω
+
+�
+|∇u|2 −2|∇u||⃗A||u| + 2|⃗A|2|u|2 + 1
+
+2|u|2 �
+dx
+
+≥
+�
+
+Ω
+
+�1
+
+2|∇u|2 + 1
+
+2|u|2 �
+dx
+
+= 1
+
+2∥u∥2
+H1
+
+45
+
+
+The discrete spectral Theorem 4.1 gives an ONB {uj} for L2(Ω; C) and
+corresponding eigenvalues which we denote γj = βj + C > 0 satisfying
+�
+
+Ω
+(i∇+ ⃗A)uj · (i∇+ ⃗A)v) dx = βj
+
+�
+
+Ω
+ujv dx
+∀v ∈H1
+0(Ω; C).
+
+In particular,
+(i∇+ ⃗A)2 uj = βjuj
+
+weakly (and hence classically, assuming smoothness of the vector potential
+⃗A), so that uj is an eigenfunction of the magnetic Laplacian (i∇+ ⃗A)2 with
+eigenvalue βj. We have
+
+β1 ≤β2 ≤β3 ≤· · · →∞.
+
+The eigenvalues satisfy
+
+βj =
+
+�
+
+Ω|(i∇+ ⃗A)uj|2 dx
+�
+
+Ω|uj|2 dx
+,
+
+as we see by choosing v = uj in the weak formulation. Hence the eigenvalues
+are all nonnegative.
+In fact β1 > 0 if the magnetic field vanishes nowhere, as we will show by
+proving the contrapositive. If β1 = 0 then (i∇+ ⃗A)u1 ≡0, which implies
+⃗A = −i∇log u1 wherever u1 is nonzero. Then ∇× ⃗A = 0 wherever u1 is
+nonzero, since the curl of a gradient vanishes identically. (Here we assume
+u1 is twice continuously differentiable.) Thus the magnetic field vanishes
+somewhere, as we wanted to show.
+Aside. The preceding argument works regardless of the boundary condi-
+tion. In the case of Dirichlet boundary conditions, one need not assume the
+magnetic field is nonvanishing, because the above argument and the reality
+of ⃗A together imply that if β1 = 0 then |u1| is constant, which is impossible
+since u1 = 0 on the boundary.
+
+Gauge invariance
+Many different vector potentials can generate the same magnetic field.
+For example, in 2 dimensions the potentials
+
+⃗A = (0, x1),
+⃗A = (−x2, 0),
+⃗A = 1
+
+2(−x2, x1),
+
+46
+
+
+all generate the same (constant) magnetic field: ∇× ⃗A = (0, 0, 1). Indeed,
+adding any gradient vector ∇f to the potential leaves the magnetic field
+unchanged, since the curl of a gradient equals zero. This phenomenon goes
+by the name of gauge invariance.
+How is the spectral theory of the magnetic Laplacian affected by gauge
+invariance? The sesquilinear form definitely changes when we replace ⃗A with
+⃗A + ∇f. Fortunately, the new eigenfunctions are related to the old by a
+unitary transformation, as follows. Suppose f is C1-smooth on the closure of
+the domain. For any trial function u ∈H1
+0(Ω; C) we note that the modulated
+function eifu also belongs to H1
+0(Ω; C), and that
+
+(i∇+ ⃗A)u = (i∇+ ⃗A + ∇f)(eifu).
+
+Thus if we write a for the original sesquilinear form and �a for the analogous
+form coming from the vector potential ⃗A + ∇f, we deduce
+
+a(u, v) = �a(eifu, eifv)
+
+for all trial functions u, v. Since also ⟨u, v⟩L2 = ⟨eifu, eifv⟩L2, we find that
+the ONB of eigenfunctions uj associated with a transforms to an ONB of
+eigenfunctions eifuj associated with �a. The eigenvalues (energy levels) βj
+are unchanged by this transformation.
+For geometric invariance of the spectrum with respect to rotations, re-
+flections and translations, and for a discussion of the Neumann and Robin
+situations, see [LaugesenLiangRoy, Appendix A].
+
+Higher dimensions
+
+In dimensions d ≥4 we identify the vector potential ⃗A : Rd →Rd with a
+1-form
+A = A1 dx1 + · · · + Ad dxd
+
+and obtain the magnetic field from the exterior derivative:
+
+B = dA.
+
+Apart from that, the spectral theory proceeds as in dimensions 2 and 3.
+
+47
+
+
+Chapter 8
+
+Application: ONB of
+eigenfunctions for Schr¨odinger
+in a confining well
+
+Goal
+
+To apply the spectral theorem from Chapter 4 to the harmonic oscillator and
+more general confining potentials in higher dimensions.
+
+Schr¨odinger operator with potential growing to infinity
+We treat a locally bounded, real-valued potential V(x) on Rd that grows
+at infinity:
+−C ≤V(x) →∞
+as |x| →∞,
+
+for some constant C > 0.
+For example, V(x) = |x|2 gives the harmonic
+oscillator.
+We aim to prove existence of an ONB of eigenfunctions and eigenvalues
+for
+
+(−∆+ V)u = Eu
+in Rd
+
+u →0
+as |x| →∞
+
+Ω= Rd
+
+H = L2(Rd), inner product ⟨u, v⟩L2 =
+�
+
+Rd uv dx.
+
+48
+
+
+K = H1(Rd) ∩L2(|V| dx) under the inner product
+
+⟨u, v⟩K =
+�
+
+Rd[ ∇u · ∇v + (1 + |V|)uv ] dx.
+
+Density: K contains C∞
+0 , which is dense in L2.
+Continuous imbedding K �→L2 is trivial, since ∥u∥L2 ≤∥u∥K. To prove
+the imbedding is compact:
+Proof that imbedding is compact. Suppose {fk} is a bounded sequence in K,
+say with ∥fk∥K ≤M for all k. We must prove the existence of a subsequence
+converging in L2(Rd).
+The sequence is bounded in H1(B(R)) for each ball B(R) ⊂Rd that is cen-
+tered at the origin. Take R = 1. The Rellich–Kondrachov theorem provides
+a subsequence that converges in L2�
+B(1)
+�
+. Repeating with R = 2 provides a
+sub-subsequence converging in L2�
+B(2)
+�
+. Continue in this fashion and then
+consider the diagonal subsequence, to obtain a subsequence that converges
+in L2�
+B(R)
+�
+for each R > 0.
+We will show this subsequence converges in L2(Rd). Denote it by {fkℓ}.
+Let ε > 0.
+Since V(x) grows to infinity, we may choose R so large that
+V(x) ≥1/ε when |x| ≥R. Then
+�
+
+Rd\B(R)
+f2
+kℓdx ≤ε
+�
+
+Rd\B(R)
+f2
+kℓV dx
+
+≤ε∥fkℓ∥2
+K
+≤εM2
+
+for all ℓ. Since also {fkℓ} converges on B(R), we have
+
+lim sup
+ℓ,m→∞
+∥fkℓ−fkm∥L2(Rd) = lim sup
+ℓ,m→∞
+∥fkℓ−fkm∥L2(Rd\B(R)) ≤2√εM.
+
+Therefore {fkℓ} is Cauchy in L2(Rd), and hence converges.
+Sesquilinear form: define
+
+a(u, v) =
+�
+
+Rd[ ∇u · ∇v + Vuv ] dx + (2C + 1)
+�
+
+Rd uv dx,
+u, v ∈K.
+
+Clearly a is symmetric and continuous on K.
+Ellipticity: a(u, u) ≥∥u∥2
+K, since V + 2C + 1 ≥1 + |V|.
+
+49
+
+
+The discrete spectral Theorem 4.1 gives an ONB {uj} for L2(Rd) and
+corresponding eigenvalues which we denote γj = Ej + 2C + 1 > 0 satisfying
+�
+
+Rd[ ∇uj · ∇v + Vujv] dx = Ej
+
+�
+
+Rd ujv dx
+∀v ∈K.
+
+In particular,
+−∆uj + Vuj = Ejuj
+
+weakly (and hence classically, assuming smoothness of V), so that uj is an
+eigenfunction of the Schr¨odinger operator −∆+ V, with eigenvalue Ej. We
+have
+E1 ≤E2 ≤E3 ≤· · · →∞.
+
+The boundary condition uj →0 at infinity is interpreted to mean, more
+precisely, that uj belongs to the space H1(Rd) ∩L2(|V| dx). This condition
+suffices to rule out the existence of any other eigenvalues for the harmonic
+oscillator, for example, as one can show by direct estimation [Strauss].
+The eigenvalues satisfy
+
+Ej =
+
+�
+
+Rd
+�
+|∇uj|2 + Vu2
+j
+�
+dx
+�
+
+Rd u2
+j dx
+,
+
+as we see by choosing v = uj in the weak formulation. Hence if V ≥0 then
+the eigenvalues are all positive.
+
+50
+
+
+Chapter 9
+
+Variational characterizations of
+eigenvalues
+
+Goal
+
+To obtain minimax and maximin characterizations of the eigenvalues of the
+sesquilinear form in Chapter 4.
+
+References
+[Bandle] Section III.1.2
+
+Motivation and hypotheses.
+How can one estimate the eigenvalues if the
+spectrum cannot be computed explicitly? We will develop two complemen-
+tary variational characterizations of eigenvalues. The intuition for these char-
+acterizations comes from the special case of eigenvalues of a Hermitian (or
+real symmetric) matrix A, for which the sesquilinear form is a(u, v) = Au·v
+and the first eigenvalue is
+
+γ1 = min
+v̸=0
+Av · v
+
+v · v .
+
+We will work under the assumptions of the discrete spectral theorem in
+Chapter 4, for the sesquilinear form a. Recall the ordering
+
+γ1 ≤γ2 ≤γ3 ≤· · · →∞.
+
+Poincar´e’s minimax characterization of the eigenvalues
+
+51
+
+
+Define the Rayleigh quotient of u to be
+
+a(u, u)
+⟨u, u⟩H
+.
+
+We claim γ1 equals the minimum value of the Rayleigh quotient:
+
+γ1 = min
+f∈K\{0}
+a(f, f)
+⟨f, f⟩H
+.
+(9.1)
+
+This characterization of the first eigenvalue is the Rayleigh principle.
+More generally, each eigenvalue is given by a minimax formula known as
+the Poincar´e principle:
+
+γj = min
+S
+max
+f∈S\{0}
+a(f, f)
+⟨f, f⟩H
+
+(9.2)
+
+where S ranges over all j-dimensional subspaces of K.
+
+Remark.
+The Rayleigh and Poincar´e principles provide upper bounds on
+eigenvalues, since they expresses γj as a minimum. More precisely, we obtain
+an upper bound on γj by choosing S to be any j-dimensional subspace and
+evaluating the maximum of the Rayleigh quotient over f ∈S.
+
+Proof of Poincar´e principle. First we prove the Rayleigh principle for the
+first eigenvalue. Let f ∈K. Then f can be expanded in terms of the ONB of
+eigenvectors as
+f =
+�
+
+j
+cjuj
+
+where cj = ⟨f, uj⟩H. This series converges in both H and K (as we proved in
+Chapter 4). Hence we may substitute it into the Rayleigh quotient to obtain
+
+a(f, f)
+⟨f, f⟩H
+=
+
+�
+
+j,k cjcka(uj, uk)
+�
+
+j,k cjck⟨uj, uk⟩H
+
+=
+
+�
+
+j |cj|2γj
+�
+
+j |cj|2
+(9.3)
+
+since the eigenvectors {uj} are orthonormal in H and the collection {uj/√γj}
+is a-orthonormal in K (that is, a(uj, uk) = γjδjk). The expression (9.3) is
+
+52
+
+
+obviously greater than or equal to γ1, with equality when f = u1, and so we
+have proved the Rayleigh principle (9.1).
+Next we prove the minimax formula (9.2) for j = 2. (We leave the case
+of higher j-values as an exercise.) Choose S = {c1u1 + c2u2 : c1, c2 scalars} to
+be the span of the first two eigenvectors. Then
+
+max
+f∈S\{0}
+a(f, f)
+⟨f, f⟩H
+=
+max
+(c1,c2)̸=(0,0)
+
+�2
+j=1 |cj|2γj
+�2
+j=1 |cj|2
+= γ2.
+
+Hence the minimum on the right side of (9.2) is ≤γ2.
+To prove the opposite inequality, consider an arbitrary 2-dimensional sub-
+space S ⊂K. This subspace contains a nonzero vector g that is orthogonal to
+u1 (since given a basis {v1, v2} for the subspace, we can find scalars d1, d2 not
+both zero such that g = d1v1 + d2v2 satisfies 0 = d1⟨v1, u1⟩H + d2⟨v2, u1⟩H =
+⟨g, u1⟩H). Then c1 = 0 in the expansion for g, and so by (9.3),
+
+a(g, g)
+⟨g, g⟩H
+=
+
+�∞
+j=2 |cj|2γj
+�∞
+j=2 |cj|2
+≥γ2.
+
+Hence
+
+max
+f∈S\{0}
+a(f, f)
+⟨f, f⟩H
+≥a(g, g)
+
+⟨g, g⟩H
+≥γ2,
+
+which implies that the minimum on the right side of (9.2) is ≥γ2.
+
+Variational characterization of eigenvalue sums.
+The sum of the
+first n eigenvalues has a simple “minimum” characterization, similar to the
+Rayleigh principle for the first eigenvalue, but now involving pairwise orthog-
+onal trial functions:
+
+γ1 + · · · + γn
+(9.4)
+
+= min
+�a(f1, f1)
+
+⟨f1, f1⟩H
++ · · · + a(fn, fn)
+
+⟨fn, fn⟩H
+: fj ∈K \ {0}, ⟨fj, fk⟩H = 0 when j ̸= k
+�
+.
+
+See Bandle’s book for the proof and related results [Bandle, Section III.1.2].
+
+Courant’s maximin characterization
+
+53
+
+
+The eigenvalues are given also by a maximin formula known as the Courant
+principle:
+
+γj = max
+S
+min
+f∈S⊥\{0}
+a(f, f)
+⟨f, f⟩H
+
+(9.5)
+
+where this time S ranges over all (j −1)-dimensional subspaces of K.
+
+Remark. The Courant principle provide lower bounds on eigenvalues, since
+it expresses γj as a maximum. The lower bounds are difficult to compute,
+however, because S⊥is an infinite dimensional space.
+
+Sketch of proof of Courant principle.
+The Courant principle reduces to
+Rayleigh’s principle when j = 1, since in that case S is the zero subspace
+and S⊥= K.
+Now take j = 2 (we leave the higher values of j as an exercise). For
+the “≤” direction of the proof, we choose S to be the 1-dimensional space
+spanned by the first eigenvector u1. Then every f ∈S⊥has c1 = ⟨f, u1⟩H = 0
+and so
+
+γ2 ≤
+min
+f∈S⊥\{0}
+a(f, f)
+⟨f, f⟩H
+
+by expanding f = �∞
+j=2 cjuj and computing as in our proof of the Poincar´e
+principle.
+For the “≥” direction of the proof, consider an arbitrary 1-dimensional
+subspace S of K. Then S⊥contains some vector of the form f = c1u1 + c2u2
+with at least one of c1 or c2 nonzero. Hence
+
+min
+f∈S⊥\{0}
+a(f, f)
+⟨f, f⟩H
+≤
+
+�2
+j=1 |cj|2γj
+�2
+j=1 |cj|2
+≤γ2,
+
+as desired.
+
+Eigenvalues as critical values of the Rayleigh quotient
+
+Even if we did not know the existence of an ONB of eigenvectors we could
+still prove the Rayleigh principle, by the following direct approach. Define
+γ∗to equal the infimum of the Rayleigh quotient:
+
+γ∗=
+inf
+f∈K\{0}
+a(f, f)
+⟨f, f⟩H
+.
+
+54
+
+
+We will prove γ∗is an eigenvalue. It follows that γ∗is the lowest eigenvalue,
+γ∗= γ1 (because if any eigenvector f corresponded to a smaller eigenvalue,
+then the Rayleigh quotient of f would be smaller than γ∗, a contradiction).
+First, choose an infimizing sequence {fk} normalized with ∥fk∥H = 1, so
+that
+a(fk, fk) →γ∗.
+
+By weak compactness of closed balls in the Hilbert space K, we may suppose
+fk converges weakly in K to some u ∈K. Hence fk also converges weakly in
+H to u (because if F(·) is any bounded linear functional on H then it is also
+a bounded linear functional on K). We may further suppose fk converges in
+H to some v ∈H (by compactness of the imbedding K �→H) and then fk
+converges weakly in H to v, which forces v = u. To summarize: fk ⇀u
+weakly in K and fk →u in H. In particular, ∥u∥H = 1. Therefore we have
+
+0 ≤a(fk −u, fk −u)
+= a(fk, fk) −2 Re a(fk, u) + a(u, u)
+→γ∗−2 Re a(u, u) + a(u, u)
+using weak convergence fk ⇀u
+= γ∗−a(u, u)
+≤0
+
+by definition of γ∗as an infimum.
+We have shown that the infimum defining γ∗is actually a minimum,
+
+γ∗= min
+f∈K\{0}
+a(f, f)
+⟨f, f⟩H
+,
+
+and that the minimum is attained when f = u.
+Our second task is to show u is an eigenvector with eigenvalue γ∗. Let
+v ∈K be arbitrary and use f = u + εv as a trial function in the Rayleigh
+quotient; since u gives the minimizer, the derivative at ε = 0 must equal zero
+by the first derivative test from calculus:
+
+0 = d
+
+dε
+a(u + εv, u + εv)
+⟨u + εv, u + εv⟩H
+
+����
+ε=0
+= 2 Re a(u, v) −γ∗2 Re⟨u, v⟩H.
+
+The same equation holds with Im instead of Re, as we see by replacing v with
+iv. (This last step is unnecessary when working with real Hilbert spaces, of
+course.) Hence
+a(u, v) = γ∗⟨u, v⟩H
+∀v ∈K,
+
+55
+
+
+which means u is an eigenvector for the sesquilinear form a, with eigenvalue
+γ∗.
+Aside. The higher eigenvalues (γj for j > 1) can be obtained by a similar
+process, minimizing the Rayleigh quotient on the orthogonal complement of
+the span of the preceding eigenfunctions u1, . . . , uj−1. In particular,
+
+γ2 = min
+f⊥u1
+a(f, f)
+⟨f, f⟩H
+
+where f ⊥u1 means that the trial function f ∈K \{0} is assumed orthogonal
+to u1 in H: ⟨f, u1⟩H = 0.
+
+56
+
+
+Chapter 10
+
+Monotonicity properties of
+eigenvalues
+
+Goal
+
+To apply Poincar´e’s minimax principle to the Laplacian and related opera-
+tors, and hence to establish monotonicity results for Dirichlet and Neumann
+eigenvalues of the Laplacian, and a diamagnetic comparison for the magnetic
+Laplacian.
+
+References
+[Bandle]
+
+Laplacian, biLaplacian, and Schr¨odinger operators
+
+Applying the Rayleigh principle (9.1) to the examples in Chapters 5–8 gives:
+
+λ1 =
+min
+f∈H1
+0(Ω)
+
+�
+
+Ω|∇f|2 dx
+�
+
+Ωf2 dx
+Dirichlet Laplacian on Ω,
+
+ρ1 =
+min
+f∈H1(Ω)
+
+�
+
+Ω|∇f|2 dx + σ
+�
+
+∂Ωf2 dS
+�
+
+Ωf2 dx
+Robin Laplacian on Ω,
+
+µ1 =
+min
+f∈H1(Ω)
+
+�
+
+Ω|∇f|2 dx
+�
+
+Ωf2 dx
+Neumann Laplacian on Ω,
+
+57
+
+
+Λ1 =
+min
+f∈H2
+0(Ω)
+
+�
+
+Ω
+�d
+m,n=1 f2
+xmxn dx
+�
+
+Ωf2 dx
+Dirichlet biLaplacian on Ω
+
+=
+min
+f∈H2
+0(Ω)
+
+�
+
+Ω(∆f)2 dx
+�
+
+Ωf2 dx ,
+
+β1 =
+min
+f∈H1
+0(Ω)
+
+�
+
+Rd |i∇f + ⃗Af|2 dx
+�
+
+Rd |f|2 dx
+magnetic Laplacian
+
+E1 =
+min
+f∈H1(Rd)∩L2(|V| dx)
+
+�
+
+Rd
+�
+|∇f|2 + Vf2�
+dx
+�
+
+Rd f2 dx
+Schr¨odinger with potential
+
+V(x) growing to infinity.
+
+The Poincar´e principle applies too, giving formulas for the higher eigenvalues
+and hence implying certain monotonicity relations, as follows.
+
+Neumann ≤Robin ≤Dirichlet
+
+Free membranes give lower tones than partially free and fixed membranes:
+
+Theorem 10.1 (Neumann–Robin–Dirichlet comparison). Let Ωbe a bounded
+domain in Rd with Lipschitz boundary, and fix σ > 0.
+Then the Neumann eigenvalues of the Laplacian lie below their Robin
+counterparts, which in turn lie below the Dirichlet eigenvalues:
+
+µj ≤ρj ≤λj
+∀j ≥1.
+
+Proof. Poincar´e’s minimax principle gives the formulas
+
+µj = min
+U
+max
+f∈U\{0}
+
+�
+
+Ω|∇f|2 dx
+�
+
+Ωf2 dx
+
+ρj = min
+T
+max
+f∈T\{0}
+
+�
+
+Ω|∇f|2 dx + σ
+�
+
+∂Ωf2 dS
+�
+
+Ωf2 dx
+
+λj = min
+S
+max
+f∈S\{0}
+
+�
+
+Ω|∇f|2 dx
+�
+
+Ωf2 dx
+
+where S ranges over all j-dimensional subspaces of H1
+0(Ω), and T and U range
+over all j-dimensional subspaces of H1(Ω).
+Clearly µj ≤ρj. Further, every subspace S is also a valid T, since H1
+0 ⊂H1.
+Thus the minimum for ρj is taken over a larger class of subspaces. Since for
+f ∈H1
+0 the boundary term vanishes in the Rayleigh quotient for ρj, we
+conclude that ρj ≤λj.
+
+58
+
+
+Domain monotonicity for Dirichlet spectrum
+
+Making a drum smaller increases its frequencies of vibration:
+
+Theorem 10.2. Let Ωand �Ωbe bounded domains in Rd, and denote the
+eigenvalues of the Dirichlet Laplacian on these domains by λj and �λj, respec-
+tively.
+If Ω⊃�Ωthen
+λj ≤�λj
+∀j ≥1.
+
+Proof. Poincar´e’s minimax principle gives that
+
+λj = min
+S
+max
+f∈S\{0}
+
+�
+
+Ω|∇f|2 dx
+�
+
+Ωf2 dx
+
+�λj = min
+�S
+max
+f∈�S\{0}
+
+�
+�Ω|∇f|2 dx
+�
+�Ωf2 dx
+
+where S ranges over all j-dimensional subspaces of H1
+0(Ω) and �S ranges over
+all j-dimensional subspaces of H1
+0( �Ω).
+Every subspace �S is also a valid S, since H1
+0( �Ω) ⊂H1
+0(Ω) (noting that
+any approximating function in C∞
+0 ( �Ω) belongs also to C∞
+0 (Ω) by extension
+by 0.) Therefore λj ≤�λj.
+
+Restricted reverse monotonicity for Neumann spectrum
+
+The monotonicity proof breaks down in the Neumann case because H1( �Ω) is
+not a subspace of H1(Ω). More precisely, while one can extend a function in
+H1( �Ω) to belong to H1(Ω), the extended function must generally be nonzero
+outside �Ω, and so its L2 norm and Dirichlet integral will differ from those of
+the original function.
+Furthermore, counterexamples to domain monotonicity are easy to con-
+struct for Neumann eigenvalues, as the figure below shows with a rectangle
+contained in a square. In that example, the square has side length 1 and hence
+µ2 = π2, while the rectangle has side length
+√
+
+2(0.9) and so �µ2 = π2/(1.62),
+which is smaller than µ2.
+Nonetheless, monotonicity does holds in a certain restricted situation,
+although the inequality is reversed — the smaller drum has lower tones:
+
+59
+
+
+��
+
+�
+
+Theorem 10.3. Let Ωand �Ωbe bounded Lipschitz domains in Rd, and
+denote the eigenvalues of the Neumann Laplacian on these domains by µj
+and �µj, respectively.
+
+If �Ω⊂Ωand Ω\ �Ωhas measure zero, then
+
+�µj ≤µj
+∀j ≥1.
+
+One might imagine the smaller domain �Ωas being constructed by remov-
+ing a hypersurface of measure zero from Ω, thus introducing an additional
+boundary surface. Reverse monotonicity then makes perfect sense, because
+the additional boundary, on which values are not specified for the eigenfunc-
+tions, enables the eigenfunctions to “relax” and hence lowers the eigenvalues.
+
+��
+�
+
+Introducing additional boundary surfaces to a Dirichlet problem would
+have the opposite effect: the eigenfunctions would be further constrained,
+and the eigenvalues raised.
+
+60
+
+
+Proof. Poincar´e’s minimax principle gives that
+
+µj = min
+S
+max
+f∈S\{0}
+
+�
+
+Ω|∇f|2 dx
+�
+
+Ωf2 dx
+
+�µj = min
+�S
+max
+f∈�S\{0}
+
+�
+
+Ω|∇f|2 dx
+�
+
+Ωf2 dx
+
+where S ranges over all j-dimensional subspaces of H1(Ω) and �S ranges over
+all j-dimensional subspaces of H1( �Ω).
+Every subspace S is also a valid �S, since each f ∈H1(Ω) restricts to a
+function in H1( �Ω) that has the same H1-norm (using here that Ω\ �Ωhas
+measure zero). Therefore �µj ≤µj.
+
+Diamagnetic comparison for the magnetic Laplacian
+
+Imposing a magnetic field always raises the ground state energy.
+
+Theorem 10.4 (Diamagnetic comparison).
+
+β1 ≥λ1
+
+First we prove a pointwise comparison.
+
+Lemma 10.5 (Diamagnetic inequality).
+
+|(i∇+ ⃗A)f| ≥
+��∇|f|
+��
+
+Proof of Lemma 10.5. Write f in polar form as f = ReiΘ. Then
+
+|i∇f + ⃗Af|2 = |ieiΘ∇R −ReiΘ∇Θ + ⃗AReiΘ|2
+
+= |i∇R −R∇Θ + ⃗AR|2
+
+= |∇R|2 + R2|∇Θ −⃗A|2
+
+≥|∇R|2 =
+��∇|f|
+��2.
+
+Proof of Theorem 10.4. The proof is immediate from the diamagnetic in-
+equality in Lemma 10.5 and the Rayleigh principles for β1 and λ1 at the
+beginning of this chapter. Note we can assume f ≥0 in the Rayleigh prin-
+ciple for λ1, since the first Dirichlet eigenfunction can be taken nonnegative
+[GilbargTrudinger, Theorem 8.38].
+
+61
+
+
+Chapter 11
+
+Weyl’s asymptotic for high
+eigenvalues
+
+Goal
+
+To determine the rate of growth of eigenvalues of the Laplacian.
+
+References
+[Arendt]; [CourantHilbert] Section VI.4
+
+Notation
+
+The asymptotic notation αj ∼βj means
+
+lim
+j→∞
+αj
+βj
+= 1.
+
+Write Vd for the volume of the unit ball in d-dimensions.
+
+Growth of eigenvalues
+
+The eigenvalues of the Laplacian grow at a rate cj2/d where the constant
+depends only on the volume of the domain, independent of the boundary
+conditions.
+
+62
+
+
+Theorem 11.1 (Weyl’s law). Let Ωbe a bounded domain in Rd with piece-
+wise smooth boundary. As j →∞the eigenvalues grow according to:
+
+λj ∼ρj ∼µj ∼
+
+
+
+
+
+
+
+
+(πj/|Ω|)2
+(d = 1)
+4πj/|Ω|
+(d = 2)
+�
+6π2j/|Ω|
+�2/3
+(d = 3)
+
+and more generally,
+
+λj ∼ρj ∼µj ∼4π2
+�
+j
+Vd|Ω|
+
+�2/d
+(d ≥1).
+
+Here |Ω| denotes the d-dimensional volume of the domain, in other words its
+length when d = 1 and area when d = 2.
+
+In 1 dimension the theorem is proved by the explicit formulas for the
+eigenvalues in Chapter 2. We will prove the theorem in 2 dimensions, by
+a technique known as “Dirichlet–Neumann bracketing”. The higher dimen-
+sional proof is similar.
+An alternative proof using small-time heat kernel asymptotics can be
+found (for example) in the survey paper by Arendt et al. [Arendt, §1.6].
+
+Proof of Weyl aymptotic — Step 1: rectangular domains. In view of the Neu-
+mann–Robin–Dirichlet comparison (Theorem 10.1), we need only prove Weyl’s
+law for the Neumann and Dirichlet eigenvalues.
+We provided a proof in
+Proposition 2.1, for rectangles.
+
+Proof of Weyl aymptotic — Step 2: finite union of rectangles. Next we sup-
+pose R1, . . . , Rn are disjoint rectangular domains and put
+
+�Ω= ∪n
+m=1Rm ,
+
+Ω= Int
+�
+∪n
+m=1Rm
+�
+.
+
+��
+�
+
+63
+
+
+For example, if R1 and R2 are adjacent squares of side length 1, then �Ωis
+the disjoint union of those squares whereas Ωis the 2×1 rectangular domain
+formed from the interior of their union.
+Admittedly �Ωis not connected, but the spectral theory of the Laplacian
+remains valid on a finite union of disjoint domains: the eigenfunctions are
+simply the eigenfunctions of each of the component domains extended to
+be zero on the other components, and the spectrum equals the union of
+the spectra of the individual components. (On an infinite union of disjoint
+domains, on the other hand, one would lose compactness of the imbedding
+H1 �→L2, and the zero eigenvalue of the Neumann Laplacian would have
+infinite multiplicity.)
+Write �λj and �µj for the Dirichlet and Neumann eigenvalues of �Ω.
+Then by the restricted reverse Neumann monotonicity (Theorem 10.3),
+Neumann–Robin–Dirichlet comparison (Theorem 10.1) and Dirichlet mono-
+tonicity (Theorem 10.2), we deduce that
+
+�µj ≤µj ≤ρj ≤λj ≤�λj
+∀j ≥1.
+
+Hence if we can prove Weyl’s law
+
+�µj ∼�λj ∼4πj
+
+|Ω|
+(11.1)
+
+for the union-of-rectangles domain �Ω, then Weyl’s law will follow for the
+original domain Ω.
+Define the eigenvalue counting functions of the rectangle Rm to be
+
+NNeu(α; Rm) = #{j ≥1 : µj(Rm) ≤α},
+NDir(α; Rm) = #{j ≥1 : λj(Rm) ≤α}.
+
+We know from Weyl’s law for rectangles (Step 1 of the proof above) that
+
+NNeu(α; Rm) ∼NDir(α; Rm) ∼|Rm|
+
+4π α
+(11.2)
+
+as α →∞.
+The spectrum of �Ωis the union of the spectra of the Rm, and so (here
+comes the key step in the proof!) the eigenvalue counting functions of �Ω
+
+64
+
+
+equal the sums of the corresponding counting functions of the rectangles:
+
+NNeu(α; �Ω) =
+
+n
+�
+
+m=1
+NNeu(α; Rm),
+
+NDir(α; �Ω) =
+
+n
+�
+
+m=1
+NDir(α; Rm).
+
+Combining these sums with the asymptotic (11.2) shows that
+
+NNeu(α; �Ω) ∼
+
+�n
+�
+
+m=1
+
+|Rm|
+
+4π
+
+�
+
+α = |Ω|
+
+4π α
+
+and similarly
+
+NDir(α; �Ω) ∼|Ω|
+
+4π α
+
+as α →∞. We can invert these last two asymptotic formulas with the help
+of Lemma 2.2, thus obtaining Weyl’s law (11.1) for �Ω.
+
+Proof of Weyl aymptotic — Step 3: approximation of arbitrary domains. Lastly
+we suppose Ωis an arbitrary domain with piecewise smooth boundary. The
+idea is to approximate Ωwith a union-of-rectangles domain such as in Step
+2, such that the volume of the approximating domain is within ε of the vol-
+ume of Ω. We refer to the text of Courant and Hilbert for the detailed proof
+[CourantHilbert, §VI.4.4].
+
+65
+
+
+Chapter 12
+
+P´olya’s conjecture and the
+Berezin–Li–Yau Theorem
+
+Goal
+
+To describe Polya’s conjecture about Weyl’s law, and to state the “tiling
+domain” and “summed” versions that are known to hold.
+
+References
+[Kellner, Laptev, P´olya]
+
+P´olya’s conjecture
+
+Weyl’s law (Theorem 11.1) says that
+
+λj ∼4πj
+
+|Ω| ∼µj
+as j →∞,
+
+for a bounded plane domain Ωwith piecewise smooth boundary. (We restrict
+to plane domains, in this chapter, for simplicity.)
+P´olya conjectured that these asymptotic formulas hold as inequalities.
+
+Conjecture 12.1 ([P´olya], 1960).
+
+λj ≥4πj
+
+|Ω| ≥µj
+∀j ≥1.
+
+The conjecture remains open even for a disk.
+P´olya proved the Dirichlet part of the inequality for tiling domains [P´olya],
+and Kellner did the same for the Neumann part [Kellner]. Recall that a
+
+66
+
+
+“tiling domain” covers the plane with congruent copies of itself (transla-
+tions, rotations and reflections). For example, parallelograms and triangles
+are tiling domains, as are many variants of these domains (a fact that M. C.
+Escher exploited in his artistic creations).
+P´olya and Kellner’s proofs are remarkably simple, using a rescaling argu-
+ment together with Weyl’s law.
+For arbitrary domains, P´olya’s conjecture has been proved only for λ1, λ2
+(see [Henrot, Th. 3.2.1 and (4.3)]) and for µ1, µ2, µ3 (see [Girouard]). The
+conjecture remains open for j ≥3 (Dirichlet) and j ≥4 (Neumann).
+
+Berezin–Li–Yau results
+
+The major progress for arbitrary domains has been on a “summed” version of
+the conjecture. (Quite often in analysis, summing or integrating an expres-
+sion produces a significantly more tractable quantity.) Li and Yau [LiYau]
+proved that
+j
+�
+
+k=1
+λk ≥2πj2
+
+|Ω| ,
+
+which is only slightly smaller than the quantity (2π/|Ω|)j(j+1) that one gets
+by summing the left side of the P´olya conjecture. An immediate consequence
+is a Weyl-type inequality for Dirichlet eigenvalues:
+
+λj ≥2πj
+
+|Ω|
+
+by combining the very rough estimate jλj ≥�j
+k=1 λk with the Li–Yau in-
+equality. The last formula has 2π whereas P´olya’s conjecture demands 4π,
+and so we see the conjecture is true up to a factor of 2, at worst.
+Similar results hold for Neumann eigenvalues.
+A somewhat more general approach had been obtained earlier by Berezin.
+For more information, consult the work of Laptev [Laptev] and a list of open
+problems from recent conferences [AIM].
+
+67
+
+
+Chapter 13
+
+Case study: stability of steady
+states for reaction–diffusion
+PDEs
+
+Goal
+
+To linearize a nonlinear reaction–diffusion PDE around a steady state, and
+study the spectral theory of the linearized operator by time-map methods.
+
+References
+[Schaaf] Section 4.1
+
+Reaction–diffusion PDEs
+
+Assume throughout this section that f(y) is a smooth function on R. Let
+X > 0. We study the reaction–diffusion PDE
+
+ut = uxx + f(u)
+(13.1)
+
+on the interval (0, X) with Dirichlet boundary conditions u(0) = u(X) = 0.
+Physical interpretations include: (i) u =temperature and f =rate of heat
+generation, (ii) u =chemical concentration and f =reaction rate of chemical
+creation.
+Intuitively, the 2nd order diffusion term in the PDE is stabilizing (since
+ut = uxx is the usual diffusion equation), whereas the 0th order reaction
+term can be destabilizing (since solutions to ut = f(u) will grow, when f is
+positive). Thus the reaction–diffusion PDE features a competition between
+
+68
+
+
+stabilizing and destabilizing effects. This competition leads to nonconstant
+steady states, and interesting stability behavior.
+
+Steady states.
+If U(x) is a steady state, then
+
+U′′ + f(U) = 0,
+0 < x < X.
+(13.2)
+
+More than one steady state can exist. For example if f(0) = 0 then U ≡0
+is a steady state, but nonconstant steady states might exist too, such as
+U(x) = sin x when X = π and f(y) = y.
+
+Linearized PDE
+
+We perturb a steady state by considering
+
+u = U + εφ
+
+where the perturbation φ(x, t) is assumed to satisfy the Dirichlet BC φ = 0
+at x = 0, L, for each t. Substituting u into the equation (13.1) gives
+
+0 + εφt = (Uxx + εφxx) + f(U + εφ)
+
+= Uxx + εφxx + f(U) + f′(U)εφ + O(ε2).
+
+The leading terms, of order ε0, equal zero by the steady state equation for
+U. We discard terms of order ε2 and higher. The remaining terms, of order
+ε1, give the linearized equation:
+
+φt = φxx + f′(U)φ.
+(13.3)
+
+That is,
+φt = −Lφ
+
+where L is the symmetric linear operator
+
+Lw = −wxx −f′(U)w.
+
+Separation of variables gives (formally) solutions of the form
+
+φ =
+�
+
+j
+cje−τjtwj(x),
+
+69
+
+
+where the eigenvalues τj and Dirichlet eigenfunctions wj satisfy
+
+Lwj = τjwj
+
+with wj(0) = wj(X) = 0.
+Thus the steady state U of the reaction–diffusion PDE is
+
+linearly unstable if τ1 < 0
+
+because the perturbation φ grows to infinity, whereas the steady state is
+
+linearly stable if τ1 ≥0
+
+because φ remains bounded in that case.
+To make these claims rigorous, we study the spectrum of L.
+
+Spectrum of L
+
+We take:
+Ω= (0, X)
+H = L2(0, X), inner product ⟨u, v⟩L2 =
+�X
+0 uv dx
+K = H1
+0(0, X), inner product
+
+⟨u, v⟩H1 =
+�X
+
+0
+(u′v′ + uv) dx
+
+Compact imbedding H1
+0 �→L2 by Rellich–Kondrachov
+Symmetric sesquilinear form
+
+a(u, v) =
+�X
+
+0
+
+�
+u′v′ −f′(U)uv + Cuv
+�
+dx
+
+where C > 0 is chosen larger than ∥f′∥L∞+ 1. Proof of ellipticity:
+
+a(u, u) ≥
+�X
+
+0
+
+�
+(u′)2 + u2�
+dx = ∥u∥2
+H1
+
+by choice of C.
+
+The discrete spectral Theorem 4.1 now yields an ONB of eigenfunctions
+{wj} with eigenvalues γj such that
+
+a(wj, v) = γj⟨wj, v⟩L2
+∀v ∈H1
+0(0, X).
+
+70
+
+
+Writing γj = τj + C we get
+
+�X
+
+0
+
+�
+w′
+jv′ −f′(U)wjv
+�
+dx = τj
+
+�X
+
+0
+wjv dx
+∀v ∈H1
+0(0, X).
+
+These eigenfunctions satisfy Lwj = τjwj weakly, and hence also classically.
+
+Stability of the zero steady state.
+
+Assume f(0) = 0, so that U ≡0 is a steady state. Its stability is easily
+determined, as follows.
+The linearized operator is Lw = −w′′ −f′(0)w, which on the interval
+(0, X) has Dirichlet eigenvalues
+
+τj =
+�jπ
+
+X
+�2 −f′(0).
+
+Thus the zero steady state is linearly unstable if and only if
+
+�π
+
+X
+�2 < f′(0).
+
+Thus we may call the reaction–diffusion PDE “long-wave unstable” when
+f′(0) > 0, because then the zero steady state is unstable with respect to per-
+turbations of sufficiently long wavelength X. On short intervals, the Dirichlet
+BCs are strong enough to stabilize the steady state.
+
+Sufficient conditions for linearized instability of nonconstant steady
+states
+
+Our first instability criterion is structural, meaning it depends on properties
+of the reaction function f rather than on properties of the particular steady
+state U.
+
+Theorem 13.1. Assume the steady state U is nonconstant, and that f(0) =
+0, f′′(0) = 0 and f′′′ > 0. Then τ1 < 0.
+
+For example, the theorem shows that nonconstant steady states are un-
+stable when f(y) = y3.
+
+71
+
+
+Proof. First we collect facts about boundary values, to be used later in the
+proof when we integrate by parts:
+
+U = 0 at x = 0, X
+by the Dirichlet BC,
+f(U) = 0 at x = 0, X
+since f(0) = 0,
+U′′ = 0 at x = 0, X
+because U′′ = −f(U)
+f′′(U) = 0 at x = 0, X
+since f′′(0) = 0.
+
+The Rayleigh principle for L says that
+
+τ1 = min
+��X
+0
+�
+(w′)2 −f′(U)w2�
+dx
+�X
+0 w2 dx
+: w ∈H1
+0(0, X)
+�
+.
+
+We choose a trial function
+w = U′′,
+
+which is not the zero function, since U is nonconstant. Then the numerator
+of the Rayleigh quotient for w is
+�X
+
+0
+
+�
+(U′′′)2 −f′(U)(U′′)2�
+dx
+
+=
+�X
+
+0
+
+�
+−U′′′′ −f′(U)U′′�
+U′′ dx
+by parts
+
+=
+�X
+
+0
+f′′(U)(U′)2U′′ dx
+by the steady state equation (13.2)
+
+= 1
+
+3
+
+�X
+
+0
+f′′(U)
+�
+(U′)3�′ dx
+
+= −1
+
+3
+
+�X
+
+0
+f′′′(U)(U′)4 dx
+by parts
+
+< 0
+
+since f′′′ > 0 and U is nonconstant. Hence τ1 < 0, by the Rayleigh principle.
+
+Motivation for the choice of trial function. Our trial function w = U′′ corre-
+sponds to a perturbation u = U + εφ = U + εU′′, which tends (when ε > 0)
+to push the steady state towards the constant function. The opposite per-
+turbation (ε < 0) would tend to make the solution grow even further away
+from the constant steady state.
+
+72
+
+
+The next instability criterion, rather than being structural, depends on
+particular properties of the steady state.
+
+Theorem 13.2 ([Schaaf, Proposition 4.1.2]). Assume the nonconstant steady
+state U changes sign on (0, X). Then τ1 < 0.
+
+For example, suppose f(y) = y so that the steady state equation is U′′ +
+U = 0. If X = 2π then the steady state U = sin x is linearly unstable, by
+the theorem. Of course, for that example we can compute the spectrum of
+L exactly: the lowest eigenfunction is w = sin(x/2) with eigenvalue τ1 =
+�1
+
+2
+�2 −1 < 0.
+
+Proof. If U changes sign then it has a positive local maximum and a negative
+local minimum in (0, X), recalling that U = 0 at the endpoints. Obviously
+U′ must be nonzero at some point between these local extrema, and so there
+exist points 0 < x1 < x2 < X such that
+
+U′(x1) = U′(x2) = 0
+
+and U′ ̸= 0 on (x1, x2). Define a trial function
+
+w =
+
+�
+U′
+on (x1, x2),
+0
+elsewhere.
+
+(We motivate this choice of trial function at the end of the proof.) Then
+w is piecewise smooth, and is continuous since w = U′ = 0 at x1 and x2.
+Therefore w ∈H1
+0(0, X), and w ̸≡0 since U′ ̸= 0 on (x1, x2).
+The numerator of the Rayleigh quotient for w is
+
+�X
+
+0
+
+�
+(w′)2 −f′(U)w2�
+dx =
+�x2
+
+x1
+
+�
+−w′′ −f′(U)w
+�
+w dx
+by parts
+
+= 0
+
+since
+−w′′ = −U′′′ =
+�
+f(U)
+�′ = f′(U)U′ = f′(U)w.
+(13.4)
+
+Hence τ1 ≤0, by the Rayleigh principle for the first eigenvalue.
+Suppose τ1 = 0, so that the Rayleigh quotient of w equals τ1. Then
+w must be an eigenfunction with eigenvalue τ1 (because substituting w =
+
+73
+
+
+�
+
+j cjwj into the Rayleigh quotient would give a value larger than τ1, if cj
+were nonzero for any term with eigenvalue larger than τ1).
+Since the eigenfunction w must be smooth, the slopes of w from the left
+and the right at x2 must agree, which means w′(x2) = w′(x2+) = 0. Thus
+w(x2) = w′(x2) = 0 and w satisfies the second order linear ODE (13.4) on
+(x1, x2). Therefore w ≡0 on (x1, x2), by uniqueness, which contradicts our
+construction of w. We conclude τ1 < 0.
+
+Motivation for the choice of trial function. The steady state equation reads
+U′′ + f(U) = 0, and differentiating shows that U′ lies in the nullspace of the
+linearized operator L:
+
+LU′ = −(U′)′′ −f′(U)U′ = 0.
+
+In other words, U′ is an eigenfunction with eigenvalue 0, which almost proves
+instability (since instability would correspond to a negative eigenvalue). Of
+course, the eigenfunction U′ does not satisfy the Dirichlet boundary condi-
+tions at the endpoints, and hence we must restrict to the subinterval (x1, x2),
+in the proof above, in order to obtain a valid trial function.
+
+Time maps and linearized stability
+
+Next we derive instability criteria that are almost necessary and sufficient.
+These conditions depend on the time map for a family of steady states.
+Parameterize the steady states by their slope at the left endpoint: given
+s ̸= 0, write Us(x) for the steady state on R (if it exists) satisfying
+
+Us(0) = 0,
+U′
+s(0) = s,
+Us(x) = 0 for some x > 0.
+
+Define the time map to give the first point or “time” x at which the steady
+state hits the axis:
+
+T(s) = min{x > 0 : Us(x) = 0}.
+
+If Us exists for some s ̸= 0 then it exists for all nonzero s-values in a
+neighborhood, and the time map is smooth on that neighborhood [Schaaf,
+Proposition 4.1.1]. The time map can be determined numerically by plotting
+solutions with different initial slopes, as the figures below show. In the first
+figure the time map is decreasing, whereas in the second it increases.
+Monotonicity of the time maps determines stability of the steady state:
+
+74
+
+
+Uxx�U3�0
+
+1
+2
+3
+4
+5
+
+Uxx�tanh�U ��0
+
+1
+2
+3
+4
+5
+
+Theorem 13.3 ([Schaaf, Proposition 4.1.3]). The steady state Us is lin-
+early unstable on the interval (0, T(s)) if sT ′(s) < 0, and is linearly stable if
+sT ′(s) > 0.
+
+Proof. We begin by differentiating the family of steady states with respect
+to the parameter s, and obtaining some properties of that function. Then
+we treat the “instability” and “stability” parts of the theorem separately.
+Write s0 ̸= 0 for a specific value of s, in order to reduce notational con-
+fusion. Let X = T(s0). Define a function
+
+v = ∂Us
+
+∂s
+
+���
+s=s0
+on (0, X), where we use that Us(x) is jointly smooth in (x, s). Then
+
+v′′ + f′(U)v = 0
+(13.5)
+
+as one sees by differentiating the steady state equation (13.2) with respect
+to s, and writing U for Us0.
+At the left endpoint we have
+
+v(0) = 0,
+v′(0) = 1,
+
+because Us(0) = 0, U′
+s(0) = s for all s.
+We do not expect v to vanish at the right endpoint, but we can calculate
+its value there to be
+v(X) = s0T ′(s0),
+
+as follows. First, differentiating the equation 0 = Us(T(s)) gives that
+
+0 = ∂
+
+∂sUs(T(s))
+
+= ∂Us
+
+∂s
+�
+T(s)
+�
++ U′
+s(T(s))T ′(s)
+
+= v
+�
+T(s)
+�
++ U′
+s(T(s))T ′(s).
+
+75
+
+
+Note the steady state Us is symmetric about the midpoint of the interval
+(0, T(s)) (exercise; use that Us = 0 at both endpoints and that the steady
+state equation is invariant under x �→−x, so that steady states must be
+symmetric about any local maximum point). Thus U′
+s(T(s)) = −U′
+s(0) =
+−s, and evaluating the last displayed formula at s = s0 then gives that
+0 = v(X) −s0T ′(s0), as we wanted.
+
+Proof of instability. Assume s0T ′(s0) < 0. Then v(X) < 0. Since v′(0) = 1
+we know v(x) is positive for small values of x, and so some x2 ∈(0, X) exists
+at which v(x2) = 0. Define a trial function
+
+w =
+
+�
+v
+on [0, x2),
+0
+elsewhere.
+
+Then w is piecewise smooth, and is continuous since v = 0 at x2.
+Note
+w(0) = 0. Therefore w ∈H1
+0(0, X), and w ̸≡0.
+Hence τ1 < 0 by arguing as in the proof of Theorem 13.2, except with
+x1 = 0.
+
+[Motivation for the choice of trial function. Differentiating the steady state
+equation U′′ + f(U) = 0 with respect to s shows that ∂U/∂s is an eigenfunc-
+tion with eigenvalue zero:
+
+L
+�∂U
+
+∂s
+�
+= −
+�∂U
+
+∂s
+�′′ −f′(U)∂U
+
+∂s = 0.
+
+In other words, ∂U/∂s lies in the nullspace of the linearized operator. It does
+not satisfy the Dirichlet boundary condition at the right endpoint, but we
+handled that issue in the proof above by restricting to the subinterval (0, x2),
+in order to obtain a valid trial function.]
+
+Proof of stability. Assume s0T ′(s0) > 0, so that v(X) > 0. Define σ =
+−v′(X)/v(X). Then
+
+v(0) = 0,
+v′(X) + σv(X) = 0,
+
+which is a mixed Dirichlet–Robin boundary condition. We will show later
+that v is a first eigenfunction for L, under this mixed condition, with eigen-
+value is ρ1 = 0 (since Lv = 0 by (13.5)).
+By adapting our Dirichlet-to-Robin monotonicity result (Theorem 10.1)
+one deduces that
+τ1 ≥ρ1 = 0,
+
+76
+
+
+which gives linearized stability of the steady state U.
+To show v is a first eigenfunction for L, as used above, we first show v is
+positive on (0, X). Apply the steady state equation (13.2) to Us, and multiply
+by U′
+s and integrate to obtain the energy equation
+
+1
+2(U′
+s)2 + F(Us) = 1
+
+2s2,
+(13.6)
+
+where F is an antiderivative of f chosen with F(0) = 0. Differentiating with
+respect to s at s = s0 gives that
+
+U′v′ + f(U)v = s0.
+
+Hence if v vanishes at some x0 ∈(0, X) then U′v′ = s0 ̸= 0 and so v′(x0) ̸=
+0. Thus at any two successive zeros of v, we know v′ has opposite signs.
+Therefore U′ has opposite signs too, because U′v′ = s0 at the zeros. It is
+straightforward to show from (13.6) that U increases on [0, X/2] and decreases
+on [X/2, X], and so after the zero of v at x = 0 the next zero (if it exists) can
+only be > X/2, and the one after that must be > X. Since we know v(x) is
+positive for small x and that v(X) > 0, we conclude v has no zeros in (0, X)
+and hence is positive there.
+The first eigenfunction of L with mixed Dirichlet–Robin boundary con-
+dition is positive, and it is the unique positive eigenfunction (adapt the ar-
+gument in [GilbargTrudinger, Theorem 8.38]). Since the eigenfunction v is
+positive, we conclude that it is the first Dirichlet–Robin eigenfunction, as
+desired.
+
+77
+
+
+Chapter 14
+
+Case study: stability of steady
+states for thin fluid film PDEs
+
+Goal
+
+To linearize a particular nonlinear PDE around a steady state, and develop
+the spectral theory of the linearized operator.
+
+References
+[LaugesenPugh1, LaugesenPugh2]
+
+Thin fluid film PDE
+
+The evolution of a thin layer of fluid (such as paint) on a flat substrate (such
+as the ceiling) can be modeled using the thin fluid film PDE:
+
+ht = −
+�
+f(h)hxxx
+�
+
+x −
+�
+g(h)hx
+�
+
+x
+
+where h(x, t) > 0 measures the thickness of the fluid, and the smooth, posi-
+tive coefficient functions f and g represent surface tension and gravitational
+effects (or substrate-fluid interactions). For simplicity we assume f ≡1, so
+that the equation becomes
+
+ht = −hxxxx −
+�
+g(h)hx
+�
+
+x.
+(14.1)
+
+We will treat the case of general g, but readers are welcome to focus on the
+special case g(y) = yp for some p ∈R.
+
+78
+
+
+Solutions are known to exist for small time, given positive smooth initial
+data. But films can “rupture” in finite time, meaning h(x, t) ↘0 as t ↗T,
+for some coefficient functions g (for example, for g ≡1).
+Intuitively, the 4th order “surface tension” term in the PDE is stabilizing
+(since ht = −hxxxx is the usual 4th order diffusion equation) whereas the
+2nd order “gravity” term is destabilizing (since ht = −hxx is the backwards
+heat equation).
+Thus the thin film PDE features a competition between
+stabilizing and destabilizing effects. This competition leads to nonconstant
+steady states, and interesting stability behavior.
+
+Periodic BCs and conservation of fluid.
+Fix X > 0 and assume h is
+X-periodic with respect to x. Then the total volume of fluid is conserved,
+since
+
+d
+dt
+
+�X
+
+0
+h(x, t) dx = −
+�X
+
+0
+
+�
+hxxxx +
+�
+g(h)hx
+�
+
+x
+�
+dx
+
+= −
+�
+hxxx + g(h)hx
+����
+x=X
+
+x=0
+= 0
+
+by periodicity.
+
+Nonconstant steady states.
+Every constant function is a steady state
+of (14.1). We discuss the stability of these steady states at the end of the
+chapter.
+To find nonconstant steady states, substitute h = H(x) and solve:
+
+−Hxxxx −(g(H)Hx)x = 0
+(14.2)
+Hxxx + g(H)Hx = α
+Hxx + G(H) = β + αx
+Hxx + G(H) = β
+
+where G is an antiderivative of g; here α = 0 is forced because the left side of
+the equation (Hxx +G(H)) is periodic. This last equation describes a nonlin-
+ear oscillator, and it is well known how to construct solutions (one multiplies
+by Hx and integrates). For example, when g ≡(2π/X)2 we have steady states
+H(x) = (const.) + cos(2πx/X). For the general case see [LaugesenPugh1].
+Assume from now on that H(x) is a nonconstant steady state with period X.
+
+79
+
+
+Linearized PDE
+
+We perturb a steady state by considering
+
+h = H + εφ
+
+where the perturbation φ(x, t) is assumed to have mean value zero
+�X
+0 φ(x, t) dx =
+0), so that fluid is conserved. Substituting h into the equation (14.1) gives
+
+0 + εφt = −(Hxxxx + εφxxxx) −
+�
+g(H + εφ)(Hx + εφx)
+�
+
+x
+= −Hxxxx −
+�
+g(H)Hx
+�
+
+x −ε
+�
+φxxx + g(H)φx + g′(H)Hxφ
+�
+
+x + O(ε2).
+
+The leading terms, of order ε0, equal zero by the steady state equation for
+H. We discard terms of order ε2 and higher. The remaining terms, of order
+ε1, give the linearized equation:
+
+φt = −
+�
+φxx + g(H)φ
+�
+
+xx.
+(14.3)
+
+Unfortunately, the operator on the right side is not symmetric (meaning it
+does not equal its formal adjoint). To make it symmetric, we “integrate up”
+the equation, as follows. Write
+
+φ = ψx
+
+where ψ is X-periodic (since φ has mean value zero). We may suppose ψ
+has mean value zero at each time, by adding to ψ a suitable function of t.
+Substituting φ = ψx into (14.3) gives that
+
+ψtx = −
+�
+ψxxx + g(H)ψx
+�
+
+xx
+ψt = −
+�
+ψxxx + g(H)ψx
+�
+
+x
+
+(noting the constant of integration must equal 0, by integrating both sides
+and using periodicity). Thus
+
+ψt = −Lψ
+
+where L is the symmetric operator
+
+Lw = wxxxx +
+�
+g(H)wx
+�
+
+x.
+
+80
+
+
+Separation of variables gives (formally) solutions of the form
+
+ψ =
+�
+
+j
+cje−τjtwj(x),
+φ =
+�
+
+j
+cje−τjtw′
+j(x),
+
+where the eigenvalues τj and periodic eigenfunctions wj satisfy
+
+Lwj = τjwj.
+
+We conclude that the steady state H of the thin fluid film PDE is
+
+linearly unstable if τ1 < 0
+
+because the perturbation φ grows to infinity, whereas the steady state is
+
+linearly stable if τ1 ≥0
+
+because φ remains bounded in that case. Remember these stability claims
+relate only to mean zero (volume preserving) perturbations.
+To make these claims more rigorous, we need to understand the eigenvalue
+problem for L.
+
+Spectrum of L
+
+We take:
+Ω= T = R/(XZ) = torus of length X, so that functions on Ωare X-
+periodic
+H = L2(T), inner product ⟨u, v⟩L2 =
+�X
+0 uv dx
+K = H2(T) ∩{u :
+�X
+0 u dx = 0}, with inner product
+
+⟨u, v⟩H2 =
+�X
+
+0
+(u′′v′′ + u′v′ + uv) dx
+
+Compact imbedding K �→L2 by Rellich–Kondrachov
+Symmetric sesquilinear form
+
+a(u, v) =
+�X
+
+0
+
+�
+u′′v′′ −g(H)u′v′ + Cuv
+�
+dx
+
+where C > 0 is a sufficiently large constant to be chosen below.
+
+81
+
+
+Proof of ellipticity: The quantity a(u, u) has a term of the form −(u′)2,
+whereas for ∥u∥2
+H2 we need +(u′)2. To get around this obstacle we “hide”
+the −(u′)2 term inside the terms of the form (u′′)2 and u2. Specifically,
+�X
+
+0
+(u′)2 dx = −
+�X
+
+0
+u′′u dx
+
+≤
+�X
+
+0
+
+�
+δ(u′′)2 + (4δ)−1u2�
+dx
+(14.4)
+
+for any δ > 0. Here we used “Cauchy-with-δ, which is the observation that
+for any α, β ∈R,
+
+0 ≤
+�√
+
+δα ± (4δ)−1/2β
+�2
+=⇒
+|αβ| ≤δα2 + (4δ)−1β2.
+
+Next,
+
+a(u, u)
+
+≥
+�X
+
+0
+
+�
+(u′′)2 −
+�
+∥g(H)∥L∞+ 1
+
+2
+�
+(u′)2 + 1
+
+2(u′)2 + Cu2�
+dx
+
+≥
+�X
+
+0
+
+��
+1 −
+�
+∥g(H)∥L∞+ 1
+
+2
+�
+δ
+�
+(u′′)2 + 1
+
+2(u′)2 +
+�
+C −
+�
+∥g(H)∥L∞+ 1
+
+2
+�
+(4δ)−1�
+u2�
+dx
+
+by (14.4)
+
+≥1
+
+2∥u∥2
+H2
+
+provided we choose δ sufficiently small (depending on H) and then choose C
+sufficiently large. Thus ellipticity holds.
+
+The discrete spectral Theorem 4.1 now yields an ONB of eigenfunctions
+{wj} with eigenvalues γj such that
+
+a(wj, v) = γj⟨wj, v⟩L2
+∀v ∈K.
+
+Writing γj = τj + C we get
+�X
+
+0
+
+�
+w′′
+j v′′ −g(H)w′
+jv′�
+dx = τj
+
+�X
+
+0
+wjv dx
+∀v ∈K.
+
+These eigenfunctions satisfy Lwj = τjwj weakly, and hence also classically
+(by elliptic regularity, since H and g are smooth).
+
+82
+
+
+Zero eigenvalue due to translational symmetry.
+We will show that
+τ = 0 is always an eigenvalue, with eigenfunction u = H −H, where the
+constant H equals the mean value of the steady state H. Indeed,
+
+Lu = L(H −H) = Hxxxx +
+�
+g(H)Hx
+�
+
+x = 0
+
+by the steady state equation (14.2).
+This zero eigenvalue arises from a translational perturbation of the steady
+state, because choosing
+
+h = H(x + ε) = H(x) + εH′(x) + O(ε2)
+
+gives rise to φ = H′ and hence ψ = H −H.
+
+Sufficient condition for linearized instability of nonconstant steady
+state H
+
+Theorem 14.1 ([LaugesenPugh2, Th. 3]). If g is strictly convex then τ1 < 0.
+
+For example, the theorem shows that nonconstant steady states are un-
+stable with respect to volume-preserving perturbations if g(y) = yp with
+either p > 1 or p < 0.
+Incidentally, the theorem is essentially the same as Theorem 13.1 for
+the reaction–diffusion PDE, simply writing g instead of f′ and noting that
+our periodic boundary conditions take care of the boundary terms in the
+integrations by parts.
+
+Proof. The Rayleigh principle for L says that
+
+τ1 = min
+��X
+0
+�
+(w′′)2 −g(H)(w′)2�
+dx
+�X
+0 w2 dx
+: w ∈H2(T) \ {0},
+�X
+
+0
+w dx = 0
+�
+.
+
+We choose
+w = H′,
+
+which is not the zero function since H is nonconstant, and note w has mean
+value zero (as required), by periodicity of H. Then the numerator of the
+
+83
+
+
+Rayleigh quotient for w is
+�X
+
+0
+
+�
+(H′′′)2 −g(H)(H′′)2�
+dx
+
+=
+�X
+
+0
+
+�
+−H′′′′ −g(H)H′′�
+H′′ dx
+by parts
+
+=
+�X
+
+0
+g′(H)(H′)2H′′ dx
+by the steady state equation (14.2)
+
+= 1
+
+3
+
+�X
+
+0
+g′(H)
+�
+(H′)3�′ dx
+
+= −1
+
+3
+
+�X
+
+0
+g′′(H)(H′)4 dx
+by parts
+
+< 0
+
+by convexity of g and since H′ ̸≡0. Hence τ1 < 0, by the Rayleigh principle.
+
+Motivation for the choice of trial function. Our trial function w = H′ corre-
+sponds to a perturbation φ = H′′. This perturbation h = H+εφ = H+εH′′
+
+tends to push the steady state towards the constant function. The oppo-
+site perturbation would tend to push the steady state towards a “droplet”
+solution that equals 0 at some point. Thus our instability proof in Theo-
+rem 14.1 suggests (in the language of dynamical systems) that a heteroclinic
+connection might exist between the nonconstant steady state and the con-
+stant steady state, and similarly between the nonconstant steady state and
+a droplet steady state.
+
+Linear stability of nonconstant steady states.
+It is more difficult to
+prove stability results, because lower bounds on the first eigenvalue are more
+difficult to prove (generally) than upper bounds.
+See [LaugesenPugh2, §3.2] for some results when g(y) = yp, 0 < p ≤3/4,
+based on time-map monotonicity ideas from the theory of reaction diffusion
+equations (see Chapter 13).
+
+Stability of constant steady states.
+
+Let H > 0 be constant. Then H ≡H is a constant steady state. Its stability
+is easily determined, as follows.
+
+84
+
+
+Linearizing gives
+φt = −φxxxx −g(H)φxx
+
+by (14.3), where the right side is linear and symmetric with constant coeffi-
+cients.
+We substitute the periodic Fourier mode φ = e−τt exp(2πikx/X), where
+k ∈Z (and k ̸= 0 since our perturbations have mean value zero), obtaining
+the eigenvalue
+
+τ =
+�2πk
+
+X
+�2��2πk
+
+X
+�2 −g(H)
+�
+.
+
+If g ≤0 (which means the second order term in the thin film PDE behaves
+like a forwards heat equation), then τ ≥0 for each k, and so all constant
+steady states are linearly stable.
+If g > 0 and
+�2π
+
+X
+�2 ≥g(H) then τ ≥0 for each k, and so the constant
+steady states H is linearly stable.
+If g > 0 and
+�2π
+
+X
+�2 < g(H) then the constant steady states H is linearly
+unstable with respect to the k = 1 mode (and possibly other modes too). In
+particular, this occurs if X is large enough. Hence we call the thin film PDE
+“long-wave unstable” if g > 0, since constant steady states are then unstable
+with respect to perturbations of sufficiently long wavelength.
+
+85
+
+
+Part II
+
+Continuous Spectrum
+
+86
+
+
+Looking ahead to continuous
+spectrum
+
+The discrete spectral theory in Part I of the course generated, in each appli-
+cation,
+
+• eigenfunctions {uj} with “discrete” spectrum λ1, λ2, λ3, . . . satisfying
+Luj = λjuj where L is a symmetric differential operator, together with
+
+• a spectral decomposition (or “resolution”) of each f ∈L2 into a sum of
+eigenfunctions: f = �
+
+j⟨f, uj⟩uj.
+
+These constructions depended heavily on symmetry of the differential opera-
+tor L (which ensured symmetry of the sesquilinear form a) and on compact-
+ness of the imbedding of the Hilbert space K into H.
+For the remainder of the course we retain the symmetry assumption on
+the operator, but drop the compact imbedding assumption. The resulting
+“continuous” spectrum leads to a decomposition of f ∈L2 into an integral of
+“almost eigenfunctions”.
+We begin with examples, and later put the examples in context by de-
+veloping some general spectral theory for unbounded, selfadjoint differential
+operators.
+
+87
+
+
+Chapter 15
+
+Computable example:
+Laplacian (free Schr¨odinger) on
+all of space
+
+Goal
+
+To determine for the Laplacian on Euclidean space its continuous spectrum
+[0, ∞), and the associated spectral decomposition of L2.
+
+Spectral decomposition
+
+The Laplacian L = −∆on a bounded domain has discrete spectrum, as we
+saw in Chapters 2 and 5.
+When the domain expands to be all of space,
+though, the Laplacian has no eigenvalues at all. For example in 1 dimension,
+solutions of −u′′ = λu are linear combinations of e±i
+√
+
+λx, which oscillates
+if λ > 0, or is constant if λ = 0, or grows in one direction or the other if
+λ ∈C \ [0, ∞). In none of these situations does u belong to L2. (In all
+dimensions we can argue as follows: if −∆u = λu and u ∈L2 then by taking
+Fourier transforms, 4π2|ξ|2�u(ξ) = �u(ξ) a.e., and so �u = 0 a.e. Thus no
+L2-eigenfunctions exist.)
+A fundamental difference between the whole space case and the case of
+bounded domains is that the imbedding H1(Rd) �→L2(Rd) is not compact.
+For example, given any nonzero f ∈H1(R), the functions f(·−k) are bounded
+in L2(R), but have no L2-convergent subsequence as k →∞.
+Hence the
+discrete spectral theorem (Theorem 4.1) is inapplicable.
+
+88
+
+
+Nevertheless, the Laplacian −∆on Rd has:
+
+1. generalized eigenfunctions
+
+vω(x) = e2πiω·x,
+ω ∈Rd,
+
+(note that vω is bounded, but it is not an eigenfunction since vω ̸∈L2)
+which satisfy the eigenfunction equation −∆vω = λvω with generalized
+eigenvalue
+λ = λ(ω) = 4π2|ω|2,
+
+Generalized eigenfn: Re v2�x�
+
+2. and a spectral decomposition
+
+f =
+�
+
+Rd⟨f, vω⟩vω dω,
+∀f ∈L2(Rd).
+
+Proof of spectral decomposition. Since
+
+⟨f, vω⟩=
+�
+
+Rd f(x)e−2πiω·x dx = �f(ω),
+
+the spectral decomposition simply says
+
+f(x) =
+�
+
+Rd
+�f(ω)e2πiω·x dω,
+
+which is the Fourier inversion formula.
+
+89
+
+
+Application of spectral decomposition
+
+One may solve evolution equations by separating variables: for example, the
+heat equation ut = ∆u with initial condition h(x) has solution
+
+u(x, t) =
+�
+
+Rd
+�h(ω)e−λ(ω)tvω(x) dω.
+
+Note the analogy to the series solution by separation of variables, in the case
+of discrete spectrum.
+Aside. Typically, one evaluates the last integral (an inverse Fourier trans-
+form) and thus obtains a convolution of the initial data h and the fundamen-
+tal solution of the heat equation (which is the inverse transform of e−λ(ω)t).
+
+Continuous spectrum = [0, ∞)
+
+The generalized eigenvalue λ ≥0 is “almost” an eigenvalue, in two senses:
+
+• the eigenfunction equation (−∆−λ)u = 0 does not have a solution in
+L2, but it does have a solution vω ∈L∞,
+
+• a Weyl sequence exists for −∆and λ, meaning there exist functions
+wn such that
+
+(W1) ∥(−∆−λ)wn∥L2 →0 as n →∞,
+
+(W2) ∥wn∥L2 = 1,
+
+(W3) wn ⇀0 weakly in L2 as n →∞.
+
+We prove existence of a Weyl sequence in the Proposition below. Later we
+will define the continuous spectrum to consist of those λ-values for which
+a Weyl sequence exists. Thus the continuous spectrum of −∆is precisely
+the nonnegative real axis. Recall it is those values of λ that entered into our
+spectral decomposition earlier in the chapter.
+
+Remark. Existence of a Weyl sequence ensures that (−∆−λ) does not have
+a bounded inverse from L2 →L2, for if we write fn = (−∆−λ)wn then
+
+∥(−∆−λ)−1fn∥L2
+
+∥fn∥L2
+=
+∥wn∥L2
+∥(−∆−λ)wn∥L2 →∞
+
+as n →∞, by (W1) and (W2). In this way, existence of a Weyl sequence is
+similar to existence of an eigenfunction, which also prevents invertibility of
+(−∆−λ).
+
+90
+
+
+spec����
+
+�
+
+Proposition 15.1 (Weyl sequences for negative Laplacian). A Weyl se-
+quence exists for −∆and λ ∈C if and only if λ ∈[0, ∞).
+
+Proof. “⇐=” Fix λ ∈[0, ∞) and choose ω ∈Rd with 4π|ω|2 = λ. Take a
+cut-off function κ ∈C∞
+0 (Rd) such that κ ≡1 on the unit ball B(1) and κ ≡0
+on Rd \ B(2). Define a cut-off version of the generalized eigenfunction, by
+
+wn = cnκ( x
+
+n)vω(x)
+
+where the normalizing constant is
+
+cn =
+1
+nd/2∥κ∥L2 .
+
+Weyl approx. eigenfn. w4�x�
+
+First we prove (W1). We have
+
+(λ + ∆)wn
+
+= cn(λvω + ∆vω)κ( x
+
+n) + 2cn
+
+n ∇vω(x) · (∇κ)( x
+
+n) + cn
+
+n2vω(x)(∆κ)( x
+
+n).
+
+The first term vanishes because ∆vω = −4π|ω|2vω pointwise. In the third
+term, note that vω is a bounded function, and that a change of variable shows
+
+cn
+n2∥(∆κ)( ·
+
+n)∥L2 = 1
+
+n2
+∥∆κ∥L2
+
+∥κ∥L2
+→0.
+
+91
+
+
+The second term similarly vanishes in the limit, as n →∞. Hence (λ +
+∆)wn →0 in L2, which is (W1).
+For (W2) we simply observe that |vω(x)| = 1 pointwise, so that ∥wn∥L2 =
+1 by a change of variable, using the definition of cn.
+To prove (W3), take f ∈L2 and let R > 0. We decompose f into “near”
+and “far” components, as f = g + h where g = f1B(R) and h = f1Rd\B(R).
+Then
+⟨f, wn⟩L2 = ⟨g, wn⟩L2 + ⟨h, wn⟩L2.
+
+We have
+��⟨g, wn⟩L2
+��≤cn∥κ∥L∞∥g∥L1 →0
+
+as n →∞, since cn →0. Also, by Cauchy–Schwarz and (W2) we see
+
+lim sup
+n→∞
+
+��⟨h, wn⟩L2
+��≤∥h∥L2.
+
+This last quantity can be made arbitrarily small by letting R →∞, and so
+limn→∞⟨f, wn⟩L2 = 0. That is, wn ⇀0 weakly.
+
+“=⇒” Assume λ ∈C \ [0, ∞), and let
+
+δ = dist
+�
+λ, [0, ∞)
+�
+
+so that δ > 0.
+Suppose (W1) holds, and write gn = (−∆−λ)wn. Then
+
+�
+gn(ξ) = (4π2|ξ|2 −λ)�
+wn(ξ)
+
+�
+wn(ξ) =
+1
+(4π2|ξ|2 −λ)�
+gn(ξ)
+
+|�
+wn(ξ)| ≤δ−1|�
+gn(ξ)|
+
+and hence
+
+∥wn∥L2 = ∥�
+wn∥L2 ≤δ−1∥�
+gn∥L2
+
+= δ−1∥gn∥L2
+→0
+
+by (W1). Thus (W2) does not hold.
+(Aside. The calculations above show, in fact, that (−∆−λ)−1 is bounded
+from L2 →L2 with norm bound δ−1, when λ /∈[0, ∞).)
+
+92
+
+
+Chapter 16
+
+Computable example:
+Schr¨odinger with a bounded
+potential well
+
+Goal
+
+To show that the Schr¨odinger operator
+
+L = −d2
+
+dx2 −2 sech2 x
+
+in 1 dimension has a single negative eigenvalue (discrete spectrum) as well
+as nonnegative continuous spectrum [0, ∞). The spectral decomposition will
+show the potential is reflectionless.
+
+�3
+3
+
+�1
+
+�2
+
+�2 sech2x potential
+
+spec�L�
+
+�
+�1
+
+�
+
+Reference
+[Keener] Section 7.5
+
+93
+
+
+Discrete spectrum = {−1}
+
+We claim −1 is an eigenvalue of L with eigenfunction sech x. This fact can
+be checked directly, but we will proceed more systematically by factoring the
+Schr¨odinger operator with the help of the first order operators
+
+L+ = −d
+
+dx + tanh x,
+
+L−=
+d
+dx + tanh x.
+
+We compute
+
+L+L−−1 =
+�
+−d
+
+dx + tanh x
+��d
+
+dx + tanh x
+�
+−1
+
+= −d2
+
+dx2 −(tanh x)′ + tanh2 x −1
+
+= −d2
+
+dx2 −2 sech2 x
+
+= L
+
+since (tanh)′ = sech2 and 1 −tanh2 = sech2. Thus
+
+L = L+L−−1.
+(16.1)
+
+It follows that functions in the kernel of L−are eigenfunctions of L with
+eigenvalue λ = −1. To find the kernel we solve:
+
+L−v = 0
+v′ + (tanh x)v = 0
+(cosh x)v′ + (sinh x)v = 0
+(cosh x)v = const.
+v = c sech x
+
+Clearly sech x ∈L2(R), since sech decays exponentially. Thus −1 lies in the
+discrete spectrum of L, with eigenfunction sech x.
+Are there any other eigenvalues? No! Argue as follows. By composing
+
+94
+
+
+sech�x�
+�3
+3
+
+�1
+
+Bound state, with energy �1
+
+L+ and L−in the reverse order we find
+
+L−L+ −1 =
+�d
+
+dx + tanh x
+��
+−d
+
+dx + tanh x
+�
+−1
+
+= −d2
+
+dx2 + (tanh x)′ + tanh2 x −1
+
+= −d2
+
+dx2.
+(16.2)
+
+From (16.1) and (16.2) we deduce
+
+−d2
+
+dx2L−= L−L.
+
+Thus if Lv = λv then −d2
+
+dx2(L−v) = L−Lv = λ(L−v). By solving for L−v in
+terms of e±i
+√
+
+λx, and then integrating to obtain v, we conclude after some
+thought (omitted) that the only way for v to belong to L2(R) is to have
+L−v = 0 and hence v = c sech x, so that λ = −1.
+
+Continuous spectrum ⊃[0, ∞)
+
+Let λ ∈[0, ∞). Generalized eigenfunctions with Lv = λv certainly exist:
+choose ω ∈R with λ = 4π2ω2 and define
+
+v(x) = L+(e2πiωx) = (tanh x −2πiω)e2πiωx,
+
+95
+
+
+which is bounded but not square integrable. We compute
+
+Lv = (L+L−−1)L+(e2πiωx)
+by (16.1)
+
+= L+(L−L+ −1)(e2πiωx)
+
+= −L+ d2
+
+dx2(e2πiωx)
+by (16.2)
+
+= L+(4π2ω2e2πiωx)
+= λv,
+
+which verifies that v(x) is a generalized eigenfunction.
+We can further prove existence of a Weyl sequence for L and λ by adapting
+Lemma 15.1 “⇐=”, using the same Weyl functions wn(x) as for the free
+Schr¨odinger operator −∆. The only new step in the proof, for proving ∥(L −
+λ)wn∥L2 →0 in (W1), is to observe that
+
+|2 sech2 x wn(x)| = 2cn|κ( x
+
+n)e2πiωx| sech2 x
+
+≤2cn∥κ∥L∞sech2 x
+→0
+
+in L2(R) as n →∞, because cn →0. (Note. This part of the proof works
+not only for the sech2 potential, but for any potential belonging to L2.)
+We have shown that the continuous spectrum contains [0, ∞). We will
+prove the reverse inclusion at the end of the chapter.
+
+Generalized eigenfunctions as traveling waves.
+The eigenfunction
+(“bound state”) v(x) = sech x with eigenvalue (“energy”) −1 produces a
+standing wavefunction
+u = eit sech x
+
+satisfying the time-dependent Schr¨odinger equation
+
+iut = Lu.
+
+The generalized eigenfunction
+
+v(x) = (tanh x −2πiω)e2πiωx
+(16.3)
+
+with generalized eigenvalue λ = 4π2ω2 similarly produces a standing wave
+
+u = e−i4π2ω2t(tanh x −2πiω)e2πiωx.
+
+96
+
+
+Gen. eigenfn, Ω�
+
+1
+
+16
+
+: Re v�x�
+
+More usefully, we rewrite this formula as a traveling plane wave multiplied
+by an x-dependent amplitude:
+
+u = (tanh x −2πiω)e2πiω(x−2πωt).
+(16.4)
+
+The amplitude factor serves to quantify the effect of the potential on the
+traveling wave: in the absence of a potential, the amplitude would be identi-
+cally 1, since the plane wave e2πiω(x−2πωt) solves the free Schr¨odinger equation
+iut = −∆u.
+
+Reflectionless nature of the potential, and a nod to scattering the-
+ory.
+One calls the potential −2 sech2 x “reflectionless” because the right-
+moving wave in (16.4) passes through the potential with none of its energy
+reflected into a left-moving wave. In other words, the generalized eigenfunc-
+tion (16.3) has the form ce2πiωx both as x →−∞and as x →∞(with
+different constants, it turns out, although the constants are equal in magni-
+tude).
+This reflectionless property is unusual. A typical Schr¨odinger potential
+would produce generalized eigenfunctions equalling approximately
+
+cIe2πiωx + cRe−2πiωx
+as x →−∞
+
+and
+cTe2πiωx
+as x →∞
+
+(or similarly with the roles of ±∞interchanged). Here |cI| is the amplitude
+of the incident right-moving wave, |cR| is the amplitude of the left-moving
+wave reflected by the potential, and |cT| is the amplitude of the right-moving
+wave transmitted through the potential. Conservation of L2-energy demands
+that
+|cI|2 = |cR|2 + |cT|2.
+
+97
+
+
+For a gentle introduction to this “scattering theory” see [Keener, Section 7.5].
+Then one can proceed to the book-length treatment in [ReedSimon3].
+
+Spectral decomposition of L2
+
+Analogous to an orthonormal expansion in terms of eigenfunctions, we have:
+
+Theorem 16.1.
+
+f = 1
+
+2⟨f, sech⟩sech +
+�
+
+R
+⟨f, L+vω⟩L+vω
+dω
+1 + 4π2ω2,
+∀f ∈L2(R),
+
+where L+vω(x) = (tanh x −2πiω)e2πiωx is the generalized eigenfunction at
+frequency ω.
+
+The discrete part of the decomposition has the same form as the contin-
+uous part, in fact, because sech = −L+(sinh).
+
+Proof. We will sketch the main idea of the proof, and leave it to the reader
+to make the argument rigorous.
+By analogy with an orthonormal expansion in the discrete case, we assume
+that f ∈L2(R) has a decomposition in terms of the eigenfunction sech x and
+the generalized eigenfunctions L+vω in the form
+
+f = c⟨f, sech⟩sech +
+�
+
+R
+mf(ω)⟨f, L+vω⟩L+vω dω,
+
+where the coefficient c and multiplier mf(ω) are to be determined.
+Taking the inner product with sech x implies that c = 1
+
+2, since ∥sech∥2
+L2(R) =
+2 and ⟨L+vω, sech⟩= ⟨vω, L−sech⟩= 0.
+Next we annihilate the sech term by applying L−to both sides:
+
+L−f = L−��
+
+R
+mf(ω)⟨f, L+vω⟩L+vω dω
+�
+.
+
+Note that by integration by parts,
+
+⟨f, L+vω⟩= ⟨L−f, vω⟩= �
+(L−f)(ω).
+
+98
+
+
+Hence
+
+L−f = L−��
+
+R
+mf(ω) �
+(L−f)(ω)L+vω dω
+�
+
+=
+�
+
+R
+mf(ω) �
+(L−f)(ω)L−L+vω dω
+
+=
+�
+
+R
+mf(ω) �
+(L−f)(ω)(1 + 4π2ω2)vω dω
+
+by (16.2). Thus the multiplier should be mf(ω) = 1/(1 + 4π2ω2), in order
+for Fourier inversion to hold.
+This argument shows the necessity of the
+formula in the theorem, and one can show sufficiency by suitably reversing
+the steps.
+
+The theorem implies a Plancherel type identity.
+
+Corollary 16.2.
+
+∥f∥2
+L2 = 1
+
+2|⟨f, sech⟩|2 +
+�
+
+R
+|⟨f, L+vω⟩|2
+dω
+1 + 4π2ω2,
+∀f ∈L2(R).
+
+Proof. Take the inner product of f with the formula in Theorem 16.1.
+
+Continuous spectrum = [0, ∞)
+
+Earlier we showed that the continuous spectrum contains [0, ∞). For the
+reverse containment, suppose λ /∈[0, ∞) and λ ̸= −1. Then L−λ is invertible
+on L2, with
+
+(L −λ)−1f = −
+1
+λ + 1
+1
+2⟨f, sech⟩sech +
+�
+
+R
+
+⟨f, L+vω⟩
+4π2ω2 −λL+vω
+dω
+1 + 4π2ω2
+
+as one sees by applying L −λ to both sides and recalling Theorem 16.1. To
+check the boundedness of this inverse, note that
+
+∥(L −λ)−1f∥2
+L2 =
+1
+|λ + 1|2
+1
+2|⟨f, sech⟩|2 +
+�
+
+R
+
+|⟨f, L+vω⟩|2
+
+|4π2ω2 −λ|2
+dω
+1 + 4π2ω2
+
+≤
+1
+|λ + 1|2
+1
+2|⟨f, sech⟩|2 +
+1
+
+dist
+�
+λ, [0, ∞)
+�2
+
+�
+
+R
+|⟨f, L+vω⟩|2
+dω
+1 + 4π2ω2
+
+≤(const.)∥f∥2
+L2,
+
+99
+
+
+where we used Corollary 16.2.
+The boundedness of (L−λ)−1 implies that the Weyl conditions (W1) and
+(W2) cannot both hold. Thus no Weyl sequence can exist for λ, so that λ
+does not belong to the continuous spectrum.
+Next suppose λ = −1. If a Weyl sequence wn exists, then
+
+⟨wn, sech⟩L2 →0
+as n →∞,
+
+by the weak convergence in (W3). Hence if we project away from the λ = −1
+eigenspace by defining
+
+yn = wn −1
+
+2⟨wn, sech⟩L2 sech
+and
+zn = yn/∥yn∥L2,
+
+then we find ∥yn∥L2 →1 and ∥zn∥L2 = 1, with ⟨zn, sech⟩L2 = 0. Also
+
+(L + 1)zn = (L + 1)yn/∥yn∥L2 = (L + 1)wn/∥yn∥L2 →0
+
+in L2.
+Thus zn satisfies (W1) and (W2) and lies in the orthogonal com-
+plement of the eigenspace spanned by sech.
+A contradiction now follows
+from the boundedness of (L + 1)−1 on that orthogonal complement (with the
+boundedness being proved by the same argument as above for λ ̸= −1). This
+contradiction shows that no such Weyl sequence wn can exist, and so −1
+does not belong to the continuous spectrum.
+
+Note. The parallels with our derivation of the continuous spectrum for
+the Laplacian in Chapter 15 are instructive.
+
+100
+
+
+Chapter 17
+
+Selfadjoint, unbounded linear
+operators
+
+Goal
+
+To develop the theory of unbounded linear operators on a Hilbert space, and
+to define selfadjointness for such operators.
+
+References
+[GustafsonSigal] Sections 1.5, 2.4
+[HislopSigal] Chapters 4, 5
+
+Motivation
+
+Now we should develop some general theory, to provide context for the ex-
+amples computed in Chapters 15 and 16.
+We begin with a basic principle of calculus:
+
+integration makes functions better, while differentiation makes
+them worse.
+
+More precisely, integral operators are bounded (generally speaking), while
+differential operators are unbounded.
+For example, e2πiinx has norm 1 in
+L2[0, 1] while its derivative d
+
+dxe2πiinx = 2πine2πinx has norm that grows with
+n.
+The unboundedness of such operators prevents us from applying the
+spectral theory of bounded operators on a Hilbert space.
+Further, differential operators are usually defined only on a (dense) sub-
+space of our natural function spaces.
+In particular, we saw in our study
+
+101
+
+
+of discrete spectra that the Laplacian is most naturally studied using the
+Sobolev space H1, even though the Laplacian involves two derivatives and
+H1-functions are guaranteed only to possess a single derivative.
+To meet these challenges, we will develop the theory of densely defined,
+unbounded linear operators, along with the notion of adjoints and selfad-
+jointness for such operators.
+
+Domains and inverses of (unbounded) operators
+
+Take a complex Hilbert space H with inner product ⟨·, ·⟩. Suppose A is a
+linear operator (not necessarily bounded) from a subspace D(A) ⊂H into
+H:
+A : D(A) →H.
+
+Call D(A) the domain of A.
+An operator B with domain D(B) is called the inverse of A if
+
+• D(B) = Ran(A), D(A) = Ran(B), and
+
+• BA = idRan(B), AB = idRan(A).
+
+Write A−1 for this inverse, if it exists. Obviously A−1 is unique, if it exists,
+because in that case A is bijective.
+Further say A is invertible if A−1 exists and is bounded on H (mean-
+ing that A−1 exists, Ran(A) = H, and A−1 : H →H is a bounded linear
+operator).
+
+Example. Consider the operator A = −∆+1 with domain H2(Rd) ⊂L2(Rd).
+Invertibility is proved using the Fourier transform: let D(B) = L2(Rd), and
+define a bounded operator B : L2 →L2 by
+
+�
+Bf(ξ) = (1 + 4π2|ξ|2)−1�f(ξ).
+
+One can check that Ran(B) = H2(Rd) = D(A). Notice BA = idH2, AB =
+idL2. The second identity implies that Ran(A) = L2 = D(B).
+
+Adjoint of an (unbounded) operator
+
+Call A symmetric if
+
+⟨Af, g⟩= ⟨f, Ag⟩,
+∀f, g ∈D(A).
+(17.1)
+
+102
+
+
+Symmetry is a simpler concept than selfadjointness, which requires the
+operator and its adjoint to have the same domain, as we now explain.
+First we define a subspace
+
+D(A∗) = {f ∈H : the linear functional g �→⟨f, Ag⟩is bounded on D(A)}.
+
+Assume from now on that A is densely defined, meaning D(A) is dense in
+H. Then for each f ∈D(A∗), the bounded linear functional g �→⟨f, Ag⟩is
+defined on a dense subspace of H and hence extends uniquely to a bounded
+linear functional on all of H. By the Riesz Representation Theorem, that
+linear functional can be represented as the inner product of g against a unique
+element of H, which we call A∗f. Hence
+
+⟨f, Ag⟩= ⟨A∗f, g⟩,
+∀f ∈D(A∗),
+g ∈D(A).
+(17.2)
+
+Clearly this operator A∗: D(A∗) →H is linear. We call it the adjoint of A.
+
+Lemma 17.1. If A is a densely defined linear operator and λ ∈C, then
+(A −λ)∗= A∗−λ.
+
+We leave the (easy) proof to the reader. Implicit in the proof is that
+domains are unchanged by subtracting a constant: D(A −λ) = D(A) and
+D
+�
+((A −λ)∗�
+= D(A∗).
+The kernel of the adjoint complements the range of the original operator,
+as follows.
+
+Proposition 17.2. If A is a densely defined linear operator then Ran(A) ⊕
+ker(A∗) = H.
+
+Proof. Clearly ker(A∗) ⊂Ran(A)⊥, because if f ∈ker(A∗) then A∗f = 0 and
+so for all g ∈D(A) we have
+
+⟨f, Ag⟩= ⟨A∗f, g⟩= 0.
+
+To prove the reverse inclusion, Ran(A)⊥⊂ker(A∗), suppose h ∈Ran(A)⊥.
+For all g ∈D(A) we have ⟨h, Ag⟩= 0. In particular, h ∈D(A∗). Hence
+
+⟨A∗h, g⟩= ⟨h, Ag⟩= 0
+∀g ∈D(A),
+
+and so from density of D(A) we conclude A∗h = 0. That is, h ∈ker(A∗).
+We have shown Ran(A)⊥= ker(A∗), and so (since the orthogonal com-
+plement is unaffected by taking the closure) Ran(A)
+⊥= ker(A∗). The propo-
+sition follows immediately.
+
+103
+
+
+We will need later that the graph of the adjoint, {(f, A∗f) : f ∈D(A∗)},
+is closed in H × H.
+
+Theorem 17.3. If A is a densely defined linear operator then A∗is a closed
+operator.
+
+Proof. Suppose fn ∈D(A∗) with fn →f, A∗fn →g, for some f, g ∈H. To
+prove the graph of A∗is closed, we must show f ∈D(A∗) with A∗f = g.
+For each h ∈D(A) we have
+
+⟨f, Ah⟩= lim
+n ⟨fn, Ah⟩= lim
+n ⟨A∗fn, h⟩= ⟨g, h⟩.
+
+Thus the map h �→⟨f, Ah⟩is bounded for h ∈D(A). Hence f ∈D(A∗), and
+using the last calculation we see
+
+⟨A∗f, h⟩= ⟨f, Ah⟩= ⟨g, h⟩
+
+for all h ∈D(A). Density of the domain implies A∗f = g, as we wanted.
+
+Selfadjointness
+
+Call A selfadjoint if A∗= A, meaning D(A∗) = D(A) and A∗= A on their
+common domain.
+Selfadjoint operators have closed graphs, due to closedness of the adjoint
+in Theorem 17.3. Thus:
+
+Proposition 17.4. If a densely defined linear operator A is selfadjoint then
+it is closed.
+
+The relation between selftadjointness and symmetry is clear:
+
+Proposition 17.5. The densely defined linear operator A is selfadjoint if
+and only if it is symmetric and D(A) = D(A∗).
+
+Proof. “=⇒” If A∗= A then the adjoint relation (17.2) reduces immediately
+to the symmetry relation (17.1).
+
+“⇐=” The symmetry relation (17.1) together with the adjoint relation
+(17.2) implies that ⟨Af, g⟩= ⟨A∗f, g⟩for all f, g ∈D(A) = D(A∗). Since
+D(A) is dense in H, we conclude Af = A∗f.
+
+For bounded operators, selfadjointness and symmetry are equivalent.
+
+104
+
+
+Lemma 17.6. If a linear operator A is bounded on H, then it is selfadjoint
+if and only if it is symmetric.
+
+Proof. Boundedness of A ensures that D(A∗) = H = D(A), and so the
+adjoint relation (17.2) holds for all f, g ∈H. Thus A∗= A is equivalent to
+symmetry.
+
+Example: selfadjointness for Schr¨odinger operators
+
+Let L = −∆+ V be a Schr¨odinger operator with potential V(x) that is
+bounded and real-valued. Choose the domain to be D(L) = H2(Rd) in the
+Hilbert space L2(Rd). This Schr¨odinger operator is selfadjoint.
+
+Proof. Density of D(L) follows from density in L2 of the smooth functions
+with compact support.
+Our main task is to determine the domain of L∗. Fix f, g ∈H2(Rd).
+From the integration by parts formula ⟨f, ∆g⟩L2 = ⟨∆f, g⟩L2 (which one may
+alternatively prove with the help of the Fourier transform), one deduces that
+
+|⟨f, ∆g⟩L2| = |⟨∆f, g⟩L2| ≤∥f∥H2∥g∥L2.
+
+Also |⟨f, Vg⟩L2| ≤∥f∥L2∥V∥L∞∥g∥L2. Hence the linear functional g �→⟨f, Lg⟩L2
+is bounded on g ∈D(L). Therefore f ∈D(L∗), which tells us H2(Rd) ⊂
+D(L∗).
+To prove the reverse inclusion, fix f ∈D(L∗). Then
+
+|⟨f, Lg⟩L2| ≤(const.)∥g∥L2,
+∀g ∈D(L) = H2(Rd).
+
+Since the potential V is bounded, the last formula still holds if we replace V
+with 1, so that
+
+|⟨f, (−∆+ 1)g⟩L2| ≤(const.)∥g∥L2,
+∀g ∈H2(Rd).
+
+Taking Fourier transforms gives
+
+|⟨�f, (1 + 4π2|ξ|2)�g⟩L2| ≤(const.)∥�g∥L2,
+∀g ∈H2(Rd).
+
+In particular, we may suppose �g = h ∈C∞
+0 (Rd), since every such �g gives
+g ∈H2(Rd). Hence
+
+|⟨(1 + 4π2|ξ|2)�f, h⟩L2| ≤(const.)∥h∥L2,
+∀h ∈C∞
+0 (Rd).
+
+105
+
+
+Taking the supremum of the left side over all h with L2-norm equal to 1
+shows that
+∥(1 + 4π2|ξ|2)�f∥L2 ≤(const.)
+
+Hence (1+|ξ|)2 �f ∈L2(Rd), which means f ∈H2(Rd). Thus D(L∗) ⊂H2(Rd).
+Now that we know the domains of L and L∗agree, we have only to check
+symmetry, and that is straightforward. When f, g ∈H2(Rd) we have
+
+⟨Lf, g⟩= −⟨∆f, g⟩L2 + ⟨Vf, g⟩L2
+= −⟨f, ∆g⟩L2 + ⟨f, Vg⟩L2
+= ⟨f, Lg⟩L2
+
+where we integrated by parts and used that V(x) is real-valued.
+
+106
+
+
+Chapter 18
+
+Spectra: discrete and
+continuous
+
+Goal
+
+To develop the spectral theory of selfadjoint unbounded linear operators.
+
+References
+[GustafsonSigal] Sections 2.4, 5.1
+[HislopSigal] Chapters 1, 5, 7
+[Rudin] Chapter 13
+
+Resolvent set, and spectrum
+
+Let A be a densely defined linear operator on a complex Hilbert space H,
+as in the preceding chapter. The operator A −λ has domain D(A), for each
+constant λ ∈C. Define the resolvent set
+
+res(A) = {λ ∈C : A −λ is invertible (has a bounded inverse defined on H)}.
+
+For λ in the resolvent set, we call the inverse (A −λ)−1 the resolvent op-
+erator.
+The spectrum is defined as the complement of the resolvent set:
+
+spec(A) = C \ res(A).
+
+For example, if λ is an eigenvalue of A then λ ∈spec(A), because if Af = λf
+for some f ̸= 0, then (A −λ)f = 0 and so A −λ is not injective, and hence
+is not invertible.
+
+107
+
+
+Proposition 18.1 ([HislopSigal, Theorem 1.2]). The resolvent set is open,
+and hence the spectrum is closed.
+
+We omit the proof.
+The next result generalizes the fact that Hermitian matrices have only
+real eigenvalues.
+
+Theorem 18.2. If A is selfadjoint then its spectrum is real: spec(A) ⊂R.
+
+Proof. We prove the contrapositive. Suppose λ ∈C has nonzero imaginary
+part, Im λ ̸= 0. We will show λ ∈res(A).
+The first step is to show A −λ is injective. For all f ∈D(A),
+
+∥(A −λ)f∥2 = ∥Af∥2 −2(Re λ)⟨f, Af⟩+ |λ|2∥f∥2
+
+and so
+
+∥(A −λ)f∥2 ≥∥Af∥2 −2| Re λ|∥f∥∥Af∥+ |λ|2∥f∥2
+
+=
+�
+∥Af∥−| Re λ|∥f∥
+�2 + | Im λ|2∥f∥2
+
+≥| Im λ|2∥f∥2.
+(18.1)
+
+The last inequality implies that A−λ is injective, using here that | Im λ| > 0.
+That is, ker(A −λ) = {0}.
+Selfadjointness (A∗= A) now gives ker(A∗−λ) = 0, and so Ran(A −λ) =
+H by Proposition 17.2. That is, A −λ has dense range.
+Next we show Ran(A −λ) = H. Let g ∈H. By density of the range, we
+may take a sequence fn ∈D(A) such that (A −λ)fn →g. The sequence fn
+is Cauchy, in view of (18.1). Hence the sequence (fn, (A −λ)fn) is Cauchy
+in H × H, and so converges to (f, g) for some f ∈H. Note each ordered
+pair (fn, (A −λ)fn) lies in the graph of A −λ, and this graph is closed
+by Proposition 17.4 (relying here on selfadjointness again). Therefore (f, g)
+belongs to the graph of A −λ, and so g ∈Ran(A −λ). Thus A −λ has full
+range.
+To summarize: we have shown A −λ is injective and surjective, and so it
+has an inverse operator
+
+(A −λ)−1 : H →D(A) ⊂H.
+
+This inverse is bounded with
+
+∥(A −λ)−1g∥≤| Im λ|−1∥g∥,
+∀g ∈H,
+
+by taking f = (A−λ)−1g in estimate (18.1). The proof is thus complete.
+
+108
+
+
+Characterizing the spectrum
+
+We will characterize the spectrum in terms of approximate eigenfunctions.
+Given a number λ ∈C and a sequence wn ∈D(A), consider three conditions:
+
+(W1) ∥(A −λ)wn∥H →0 as n →∞,
+
+(W2) ∥wn∥H = 1,
+
+(W3) wn ⇀0 weakly in H as n →∞.
+
+(We considered these conditions in Chapter 15 for the special case of the
+Laplacian).
+Condition (W1) says wn is an “approximate eigenfunction”, and condi-
+tion (W2) simply normalizes the sequence. These conditions characterize the
+spectrum, for a selfadjoint operator.
+
+Theorem 18.3. If A is selfadjoint then
+
+spec(A) = {λ ∈C : (W1) and (W2) hold for some sequence wn ∈D(A)}.
+
+Proof. “⊃” Assume (W1) and (W2) hold for λ, and that A−λ has an inverse
+defined on H. Then for fn = (A −λ)wn we find
+
+∥(A −λ)−1fn∥H
+
+∥fn∥H
+=
+∥wn∥H
+∥(A −λ)wn∥H
+→∞
+
+as n →∞, by (W1) and (W2). Thus the inverse operator is not bounded,
+and so λ ∈spec(A).
+“⊂” Assume λ ∈spec(A), so that λ is real by Theorem 18.2. If λ is an
+eigenvalue, say with normalized eigenvector f, then we simply choose wn = f
+for each n, and (W1) and (W2) hold trivially.
+Suppose λ is not an eigenvalue.
+Then A −λ is injective, hence so is
+(A −λ)∗, which equals A −λ by selfadjointness of A and reality of λ. Thus
+ker
+�
+(A −λ)∗�
+= {0}, and so Ran(A −λ) is dense in H by Proposition 17.2.
+Injectivity ensures that (A−λ)−1 exists on Ran(A−λ). If it is unbounded
+there, then we may choose a sequence fn ∈Ran(A−λ) with ∥(A−λ)−1fn∥H =
+1 and ∥fn∥H →0. Letting wn = (A−λ)−1fn gives (W1) and (W2) as desired.
+Suppose on the other hand that (A −λ)−1 is bounded on Ran(A −λ). Then
+the argument in the proof of Theorem 18.2 shows that Ran(A −λ) = H,
+which means λ belongs to the resolvent set, and not the spectrum. Thus this
+case cannot occur.
+
+109
+
+
+Discrete and continuous spectra
+
+Define the discrete spectrum
+
+specdisc(A)
+= {λ ∈spec(A) : λ is an isolated eigenvalue of A having finite multiplicity},
+
+where “isolated” means that some neighborhood of λ in the complex plane
+intersects spec(A) only at λ. By “multiplicity” we mean the geometric mul-
+tiplicity (dimension of the eigenspace); if A is not selfadjoint then we should
+use instead the algebraic multiplicity [HislopSigal].
+Next define the continuous spectrum
+
+speccont(A)
+= {λ ∈C : (W1), (W2) and (W3) hold for some sequence wn ∈D(A)}.
+
+The continuous spectrum lies within the spectrum, by Theorem 18.3. The
+characterization in that theorem required only (W1) and (W2), whereas the
+continuous spectrum imposes in addition the “weak convergence” condition
+(W3).
+A Weyl sequence for A and λ is a sequence wn ∈D(A) such that (W1),
+(W2) and (W3) hold.
+Thus the preceding definition says the continuous
+spectrum consists of λ-values for which Weyl sequences exist.
+The continuous spectrum can contain eigenvalues that are not isolated
+(“imbedded eigenvalues”) or which have infinite multiplicity.
+
+A famous theorem of Weyl says that for selfadjoint operators, the entire
+spectrum is covered by the discrete and continuous spectra.
+
+Theorem 18.4. If A is selfadjoint then
+
+spec(A) = specdisc(A) ∪speccont(A).
+
+(Further, the discrete and continuous spectra are disjoint.)
+
+We omit the proof. See [HislopSigal, Theorem 7.2].
+
+Applications to Schr¨odinger operators
+
+The continuous spectrum of the Laplacian −∆equals [0, ∞), and the spec-
+trum contains no eigenvalues, as we saw in Chapter 15.
+
+110
+
+
+The hydrogen atom too has continuous spectrum [0, ∞), with its Schr¨odinger
+operator L = −∆−2/|x| on R3 having domain H2(Rd) ⊂L2(Rd); see [Taylor,
+Section 8.7]. The discrete spectrum {−1/n2 : n ≥1} of the hydrogen atom
+was stated in Chapter 3.
+As the hydrogen atom example suggests, potentials vanishing at infinity
+generate continuous spectrum that includes all nonnegative numbers:
+
+Theorem 18.5. Assume V(x) is real-valued, continuous, and vanishes at
+infinity (V(x) →0 as |x| →∞).
+Then the Schr¨odinger operator −∆+V is selfadjoint (with domain H2(Rd) ⊂
+L2(Rd)) and has continuous spectrum = [0, ∞).
+
+For a proof see [HislopSigal, Corollary 14.10], where a stronger theorem
+is proved that covers also the Coulomb potential −2/|x| for the hydrogen
+atom. Note the Coulomb potential vanishes at infinity but is discontinuous
+at the origin, where it blows up. The stronger version of the theorem re-
+quires (instead of continuity and vanishing at infinity) that for each ε > 0,
+the potential V(x) be decomposable as V = V2 + V∞where V2 ∈L2 and
+∥V∞∥L∞< ε. This decomposition can easily be verified for the Coulomb
+potential, by “cutting off” the potential near infinity.
+Theorem 18.5 implies that any isolated eigenvalues of L must lie on the
+negative real axis (possibly accumulating at 0). For example, the −2 sech2
+
+potential in Chapter 16 generates a negative eigenvalue at −1.
+
+Connection to generalized eigenvalues and eigenfunctions
+
+Just as the discrete spectrum is characterized by eigenfunctions in L2, so the
+full spectrum is characterized by existence of a generalized eigenfunction that
+grows at most polynomially at infinity.
+
+Theorem 18.6. Assume V(x) is real-valued and bounded on Rd. Then the
+Schr¨odinger operator −∆+ V has spectrum
+
+spec(−∆+ V) =
+closure of {λ ∈C : (−∆+ V)u = λu for some polynomially bounded u}.
+
+We omit the proof; see [GustafsonSigal, Theorem 5.22].
+
+111
+
+
+Further reading
+
+A wealth of information on spectral theory, especially for Schr¨odinger oper-
+ators, can be found in the books [GustafsonSigal, HislopSigal, ReedSimon2,
+ReedSimon4].
+
+112
+
+
+Chapter 19
+
+Discrete spectrum revisited
+
+Goal
+
+To fit the discrete spectral Theorem 4.1 (from Part I of the course) into
+the spectral theory of selfadjoint operators and, in particular, to prove the
+absence of continuous spectrum in that situation.
+
+Discrete spectral theorem
+
+The discrete spectral Theorem 4.1 concerns a symmetric, elliptic, bounded
+sesquilinear form a(u, v) on an infinite dimensional Hilbert space K, where
+K imbeds compactly and densely into the Hilbert space H. The theorem
+guarantees existence of an ONB for H consisting of eigenvectors of a:
+
+a(uj, v) = γj⟨uj, v⟩H
+∀v ∈K,
+
+where the eigenvalues satisfy
+
+0 < γ1 ≤γ2 ≤γ3 ≤· · · →∞.
+
+We want to interpret these eigenvalues as the discrete spectrum of some
+selfadjoint, densely defined linear operator on H. By doing so, we will link
+the discrete spectral theory in Part I of the course with the spectral theory
+of unbounded operators in Part II.
+Our tasks are to identify the operator A and its domain, to prove A is
+symmetric, to determine the domain of the adjoint, to conclude selfadjoint-
+ness, and finally to show that the spectrum of A consists precisely of the
+eigenvalues γj.
+
+113
+
+
+Operator A and its domain
+
+In the proof of Theorem 4.1 we found a bounded, selfadjoint linear operator
+B : H →K ⊂H with eigenvalues 1/γj and eigenvectors uj:
+
+Buj = 1
+
+γj
+uj.
+
+We showed B is injective (meaning its eigenvalues are nonzero). Notice B
+has dense range because its eigenvectors uj span H.
+(Aside. This operator B relates to the sesquilinear form a by satisfying
+a(Bf, v) = ⟨f, v⟩H for all v ∈K. We will not need that formula below.)
+Define
+A = B−1 : Ran(B) →H.
+
+Then A is a linear operator, and its domain
+
+D(A) = Ran(B)
+
+is dense in H.
+
+Symmetry of A
+
+Let u, v ∈D(A). Then
+
+⟨Au, v⟩H = ⟨Au, BAv⟩H
+since BA = Id,
+= ⟨BAu, Av⟩H
+since B is selfadjoint,
+= ⟨u, Av⟩H
+since BA = Id.
+
+Domain of the adjoint
+
+First we show D(A) ⊂D(A∗). Let u ∈D(A). For all v ∈D(A) we have
+
+|⟨u, Av⟩H| = |⟨Au, v⟩H|
+by symmetry
+≤∥Au∥H∥v∥H.
+
+Hence the functional v �→⟨u, Av⟩H is bounded on D(A) with respect to the
+H-norm, so that u belongs to the domain of the adjoint A∗.
+Next we show D(A∗) ⊂D(A). Let u ∈D(A∗) ⊂H. We have
+
+|⟨u, Av⟩H| ≤(const.)∥v∥H
+∀v ∈D(A) = Ran(B).
+
+114
+
+
+Writing v = Bg gives
+
+|⟨u, g⟩H| ≤(const.)∥Bg∥H
+∀g ∈H.
+
+One can express u in terms of the ONB as u = �
+
+j djuj. Fix J ≥1 and
+choose g = �J
+j=1 γ2
+j djuj ∈H, so that Bg = �J
+j=1 γjdjuj. We deduce from
+the last inequality that
+
+J
+�
+
+j=1
+γ2
+j |dj|2 ≤(const.)
+�
+J
+�
+
+j=1
+γ2
+j |dj|2�1/2,
+
+and so
+J
+�
+
+j=1
+γ2
+j |dj|2 ≤(const.)2
+
+Letting J →∞implies that
+�
+
+j
+γ2
+j |dj|2 ≤(const.)2
+
+and so the sequence {γjdj} belongs to ℓ2. Put f = �
+
+j γjdjuj ∈H. Then
+Bf = �
+
+j djuj = u, and so u ∈Ran(B) = D(A), as desired.
+
+Selfadjointness, and discreteness of the spectrum
+
+Theorem 19.1. A is selfadjoint, with domain
+
+D(A) = Ran(B) =
+��
+
+j
+γ−1
+j cjuj : {cj} ∈ℓ2�
+.
+
+Furthermore, spec(A) = specdisc(A) = {γj : j ≥1}.
+
+Proof. We have shown above that A is symmetric and D(A∗) = D(A), which
+together imply that A is selfadjoint.
+We will show that if
+
+λ ∈C \ {γ1, γ2, γ3, . . .}
+
+then A−λ is invertible, so that λ belongs to the resolvent set. Thus the spec-
+trum consists of precisely the eigenvalues γj. Note each eigenvalue has finite
+
+115
+
+
+multiplicity by Theorem 4.1, and is isolated from the rest of the spectrum;
+hence A has purely discrete spectrum.
+The inverse of A−λ can be defined explicitly, as follows. Define a bounded
+operator C : H →H on f = �
+
+j cjuj ∈H by
+
+Cf =
+�
+
+j
+(γj −λ)−1cjuj,
+
+where we note that (γj −λ)−1 is bounded for all j, and in fact approaches 0
+as j →∞, because |γj −λ| is never zero and tends to ∞as j →∞. This
+new operator has range Ran(C) = Ran(B), because (γj −λ)−1 is comparable
+to γ−1
+j
+(referring here to the characterization of Ran(B) in Theorem 19.1).
+Thus Ran(C) = D(A).
+Clearly (A −λ)Cf = f by definition of A, and so Ran(A −λ) = H.
+Similarly one finds that C(A −λ)u = u for all u ∈D(A). Thus C is the
+inverse operator of A −λ. Because C is bounded on all of H we conclude
+A −λ is invertible, according to the definition in Chapter 17.
+
+Example: Laplacian on a bounded domain
+
+To animate the preceding theory, let us consider the Laplacian on a bounded
+domain Ω⊂Rd, with Dirichlet boundary conditions. We work with the
+Hilbert spaces
+H = L2(Ω),
+K = H1
+0(Ω),
+
+and the sesquilinear form
+
+a(u, v) =
+�
+
+Ω
+∇u · ∇v dx +
+�
+
+Ω
+uv dx = ⟨u, v⟩H1,
+
+which in Chapter 5 gave eigenfunctions satisfying (−∆+ 1)u = (λ + 1)u
+weakly. In this setting, u = Bf means that (−∆+ 1)u = f weakly. Note
+B : L2(Ω) →H1
+0(Ω), and recall that A = B−1.
+
+Proposition 19.2. The domain of the operator A contains H2(Ω)∩H1
+0(Ω),
+and
+A = −∆+ 1
+
+on H2(Ω) ∩H1
+0(Ω).
+Furthermore, if ∂Ωis smooth then D(A) = H2(Ω) ∩H1
+0(Ω), in which
+case A = −∆+ 1 on all of its domain.
+
+116
+
+
+Proof. For all u ∈H2(Ω) ∩H1
+0(Ω), v ∈H1
+0(Ω), we have
+
+⟨u, v⟩H1 = ⟨−∆u + u, v⟩L2
+by parts
+= ⟨B(−∆u + u), v⟩H1
+by definition of B.
+
+Since both u and B(−∆u + u) belong to H1
+0(Ω), and v ∈H1
+0(Ω) is arbitrary,
+we conclude from above that u = B(−∆u + u). Therefore u ∈Ran(B) =
+D(A), and so H2(Ω) ∩H1
+0(Ω) ⊂D(A).
+Further, we find Au = −∆u + u because B = A−1, and so
+
+A = −∆+ 1
+on H2(Ω) ∩H1
+0(Ω).
+
+Finally we note that if ∂Ωis C2-smooth then by elliptic regularity the
+weak solution u of (−∆+ 1)u = f belongs to H2(Ω), so that Ran(B) ⊂
+H2(Ω) ∩H1
+0(Ω). Thus
+
+D(A) = H2(Ω) ∩H1
+0(Ω)
+
+when ∂Ωis smooth enough. In that case A = −∆+1 on all of its domain.
+
+117
+
+
+Bibliography
+
+[AIM] Open problems from the AIM and Oberwolfach Workshops on Low
+Eigenvalues of Laplace and Schr¨odinger Operators. http://aimath.
+org/WWN/loweigenvalues/loweigenvalues.pdf
+
+[Arendt] W. Arendt, R. Nittka, Wolfgang Peter and Frank Steiner. Weyl’s
+law: spectral properties of the Laplacian in mathematics and physics.
+In: Mathematical Analysis of Evolution, Information, and Complexity.
+Wiley-VCH Verlag, Weinheim, 2009. http://dx.doi.org/10.1002/
+9783527628025.ch1
+
+[Auchmuty] G. Auchmuty. Bases and comparison results for linear elliptic
+eigenproblems. J. Math. Anal. Appl. 390 (2012), 394–406.
+
+[Bandle] C. Bandle. Isoperimetric Inequalities and Applications. Pitman,
+Boston, Mass., 1979.
+
+[BlanchardBr¨uning] P. Blanchard and E. Br¨uning. Variational methods in
+mathematical physics. A unified approach. Translated from the Ger-
+man by Gillian M. Hayes. Texts and Monographs in Physics. Springer–
+Verlag, Berlin, 1992.
+
+[Chasman] L. M. Chasman. An isoperimetric inequality for fundamental
+tones of free plates. Comm. Math. Phys. 303 (2011), 421–449.
+
+[CourantHilbert] R. Courant and D. Hilbert. Methods of Mathematical
+Physics. First English edition. Volume 1. Interscience Publishers, New
+York, 1953.
+
+[Evans] L. C. Evans. Partial Differential Equations. Second edition. Gradu-
+ate Studies in Mathematics, 19. American Mathematical Society, Prov-
+idence, RI, 2010.
+
+118
+
+
+[EvansGariepy] L. C. Evans and R. F. Gariepy. Measure Theory and Fine
+Properties of Functions. Studies in Advanced Mathematics. CRC Press,
+Boca Raton, FL, 1992.
+
+[Farlow] S. J. Farlow. Partial Differential Equations for Scientists and En-
+gineers. Revised reprint of the 1982 original. Dover Publications, Inc.,
+New York, 1993.
+
+[GilbargTrudinger] D. Gilbarg and N. S. David. Elliptic Partial Differential
+Equations of Second Order. Reprint of the 1998 edition. Classics in
+Mathematics. Springer-Verlag, Berlin, 2001.
+
+[Girouard] A. Girouard, N. Nadirashvili and I. Polterovich. Maximization of
+the second positive Neumann eigenvalue for planar domains. J. Differ-
+ential Geom. 83 (2009), no. 3, 637–661.
+
+[GustafsonSigal] S. J. Gustafson and I. M. Sigal. Mathematical Concepts of
+Quantum Mechanics. Universitext. Springer-Verlag, Berlin, 2003.
+
+[Henrot] A. Henrot. Extremum Problems for Eigenvalues of Elliptic Opera-
+tors. Frontiers in Mathematics. Birkh¨auser Verlag, Basel, 2006.
+
+[HislopSigal] P. D. Hislop and I. M. Sigal. Introduction to Spectral Theory.
+With applications to Schr¨odinger operators. Applied Mathematical Sci-
+ences, 113. Springer-Verlag, New York, 1996.
+
+[Keener] J. P. Keener. Principles of Applied Mathematics. Second edition.
+Westview Press, Cambridge, Massachusetts, 2000.
+
+[Kellner] R. Kellner. On a theorem of Polya. Amer. Math. Monthly 73 (1966),
+856–858.
+
+[Laptev] A. Laptev. Dirichlet and Neumann eigenvalue problems on domains
+in Euclidean spaces. J. Funct. Anal. 151 (1997), no. 2, 531–545.
+
+[LaugesenLiangRoy] R. S. Laugesen, J. Liang and A. Roy. Sums of magnetic
+eigenvalues are maximal on rotationally symmetric domains. Ann.
+Henri Poincar´e, appeared online, 2011.
+
+[LaugesenPugh1] R. S. Laugesen and M. C. Pugh. Properties of steady states
+for thin film equations. European J. Appl. Math. 11 (2000), no. 3, 293–
+351.
+
+119
+
+
+[LaugesenPugh2] R. S. Laugesen and M. C. Pugh. Linear stability of steady
+states for thin film and Cahn–Hilliard type equations. Arch. Ration.
+Mech. Anal. 154 (2000), no. 1, 3–51.
+
+[LiYau] P. Li and S. T. Yau. On the Schr¨odinger equation and the eigenvalue
+problem. Comm. Math. Phys. 88 (1983), no. 3, 309–318.
+
+[Mathews & Walker] J. Mathews and R. L. Walker. Mathematical Methods
+of Physics. Second edition. W. A. Benjamin, New York, 1970.
+
+[McCartin] B. J. McCartin. Eigenstructure of the equilateral triangle. I. The
+Dirichlet problem. SIAM Rev. 45 (2003), 267–287. Eigenstructure of
+the equilateral triangle. II. The Neumann problem. Math. Probl. Eng.
+8 (2002), 517–539. Eigenstructure of the equilateral triangle. III. The
+Robin problem. Int. J. Math. Math. Sci. 2004, 807–825.
+
+[P´olya] G. P´olya. On the eigenvalues of vibrating membranes. Proc. London
+Math. Soc. (3) 11 (1961) 419–433.
+
+[ReedSimon2] M. Reed and B. Simon. Methods of Modern Mathematical
+Physics. II. Fourier analysis, self-adjointness. Academic Press, New
+York, 1975.
+
+[ReedSimon3] M. Reed and B. Simon. Methods of Modern Mathematical
+Physics. III. Scattering theory. Academic Press, New York, 1979.
+
+[ReedSimon4] M. Reed and B. Simon. Methods of Modern Mathematical
+Physics. IV. Analysis of operators. Academic Press, New York, 1978.
+
+[Rudin] W. Rudin. Functional Analysis. Second edition. International Series
+in Pure and Applied Mathematics. McGraw-Hill, Inc., New York, 1991.
+
+[Schaaf] R. Schaaf. Global Solution Branches of Two-point Boundary
+Value Problems. Lecture Notes in Mathematics, 1458. Springer-Verlag,
+Berlin, 1990.
+
+[Strauss] W. A. Strauss. Partial Differential Equations. An introduction. Sec-
+ond edition. John Wiley & Sons, Ltd., Chichester, 2008.
+
+[Taylor] M. E. Taylor. Partial Differential Equations III. Nonlinear equa-
+tions. Second edition. Applied Mathematical Sciences, 117. Springer,
+New York, 2011.
+
+120
+
+

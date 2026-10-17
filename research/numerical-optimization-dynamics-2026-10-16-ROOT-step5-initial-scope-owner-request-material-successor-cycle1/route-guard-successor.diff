@@ -1,0 +1,12 @@
+--- a/tools/step5-initial-scope-findings.mjs
++++ b/tools/step5-initial-scope-findings.mjs
+@@ -103,7 +103,8 @@
+       &&finding.ledger==='canonical-defect-ledger'&&finding.action==='record-open-finding'&&finding.id===id
+       &&['fatal','nonfatal'].includes(finding.severity)&&finding.uncertain===false
+       &&(!Object.hasOwn(finding,'status')||finding.status==='open')&&entry.route==='frontier-owner'
+-      &&['frontier-owner','Owner / owning frontier lane; item outside this assignment.','Owner / owning frontier lane; item outside this assignment, not separate outside-frontier maintenance.'].includes(finding.route)
++      &&(['frontier-owner','Owner / owning frontier lane; item outside this assignment.','Owner / owning frontier lane; item outside this assignment, not separate outside-frontier maintenance.'].includes(finding.route)
++        || /^frontier-owner; outside unit ([1-9]\d*) assignment$/.exec(finding.route??'')?.[1]===unit)
+       &&typeof finding.reason==='string'&&finding.reason.trim().length>=40, 'not the exact original frontier-owner open finding');
+     const summary=origin.output.ledger_updates?.[entry.output_finding_index];
+     need(Number.isSafeInteger(entry.output_finding_index)&&entry.output_finding_index>=0&&same(summary,entry.output_finding)

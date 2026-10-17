@@ -1,0 +1,141 @@
+{
+  "summary": {
+    "files": 23,
+    "checked": 13,
+    "failed": 4
+  },
+  "results": [
+    {
+      "file": "items/thm-total-derivative-computes-directional-and-partial-derivatives.md",
+      "item_id": "thm-total-derivative-computes-directional-and-partial-derivatives",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/alg-finite-budget-newton-for-vector-residuals.md",
+      "item_id": "alg-finite-budget-newton-for-vector-residuals",
+      "status": "not-applicable"
+    },
+    {
+      "file": "items/alg-fixed-point-iteration.md",
+      "item_id": "alg-fixed-point-iteration",
+      "status": "not-applicable"
+    },
+    {
+      "file": "items/alg-newton-chord-implicit-residual-with-factorization-reuse.md",
+      "item_id": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+      "status": "not-applicable"
+    },
+    {
+      "file": "items/alg-implicit-stiff-time-stepper-with-consistent-starts.md",
+      "item_id": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+      "status": "not-applicable"
+    },
+    {
+      "file": "items/alg-index-one-dae-consistent-initialization.md",
+      "item_id": "alg-index-one-dae-consistent-initialization",
+      "status": "not-applicable"
+    },
+    {
+      "file": "items/alg-index-one-dae-backward-euler-stepper.md",
+      "item_id": "alg-index-one-dae-backward-euler-stepper",
+      "status": "not-applicable"
+    },
+    {
+      "file": "items/alg-index-one-dae-bdf2-stepper.md",
+      "item_id": "alg-index-one-dae-bdf2-stepper",
+      "status": "not-applicable"
+    },
+    {
+      "file": "items/lem-regular-curve-chart-and-pseudo-arclength-predictor-defect.md",
+      "item_id": "lem-regular-curve-chart-and-pseudo-arclength-predictor-defect",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/lem-finite-budget-newton-work-and-status.md",
+      "item_id": "lem-finite-budget-newton-work-and-status",
+      "status": "fail",
+      "strategy": "induction",
+      "error": "strategy-missing(base,IH,discharge-induction-final)"
+    },
+    {
+      "file": "items/thm-pseudo-arclength-local-newton-correction.md",
+      "item_id": "thm-pseudo-arclength-local-newton-correction",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/alg-pseudo-arclength-continuation-with-certified-local-corrector.md",
+      "item_id": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+      "status": "not-applicable"
+    },
+    {
+      "file": "items/alg-undamped-scf-with-gap-and-residual-status.md",
+      "item_id": "alg-undamped-scf-with-gap-and-residual-status",
+      "status": "not-applicable"
+    },
+    {
+      "file": "items/ex-self-consistent-projector-two-cycle-with-gap.md",
+      "item_id": "ex-self-consistent-projector-two-cycle-with-gap",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/lem-finite-budget-fixed-point-iteration-work.md",
+      "item_id": "lem-finite-budget-fixed-point-iteration-work",
+      "status": "fail",
+      "strategy": "induction",
+      "error": "strategy-missing(base,IH,discharge-induction-final)"
+    },
+    {
+      "file": "items/alg-relaxed-density-mixing-with-finite-budget.md",
+      "item_id": "alg-relaxed-density-mixing-with-finite-budget",
+      "status": "not-applicable"
+    },
+    {
+      "file": "items/lem-finite-budget-scf-iteration-work.md",
+      "item_id": "lem-finite-budget-scf-iteration-work",
+      "status": "fail",
+      "strategy": "induction",
+      "error": "strategy-missing(base,IH,discharge-induction-final)"
+    },
+    {
+      "file": "items/lem-forward-difference-jacobian-error-bound.md",
+      "item_id": "lem-forward-difference-jacobian-error-bound",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/thm-index-one-dae-finite-budget-solvers-terminate.md",
+      "item_id": "thm-index-one-dae-finite-budget-solvers-terminate",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** The finite grids, finite correction budget, exact loops and status branches in the three DAE algorithms, and the returning-primitive convention in the Statement.\n\n[F1] [[lem-finite-budget-newton-work-and-status]]: with budget $B$, an admissible Newton call makes at most $B$ correction calls and $B+1$ explicit residual evaluations and returns a stated status under the returning-primitive convention.\n\n[F2] [[alg-index-one-dae-consistent-initialization]]: initialization makes one such Newton call in $m$ algebraic unknowns and, on root status, one extra algebraic-residual evaluation.\n\n[F3] [[alg-index-one-dae-backward-euler-stepper]]: the wrapper checks one starting algebraic residual and checks the previous-state seed against the open slice $\\mathcal T_{t_n}$ before each Newton call, returning `invalid-trial` with the computed prefix if that check fails. Otherwise it calls Newton once with budget $B$, tolerance $1$ and scaled residual $\\mathcal R_n=(r^d_n/\\eta_d,r^a_n/\\eta_a)$ on that slice. It reevaluates the unscaled block residual once after a root status and returns immediately on any non-root status. The unknown has dimension $d+m$.\n\n[F4] [[alg-index-one-dae-bdf2-stepper]]: the wrapper checks both starting algebraic residuals and checks its extrapolated seed against the open slice $\\mathcal T_{t_n}$ before each Newton call, returning `invalid-trial` with the computed prefix if that check fails. Otherwise it calls Newton once with budget $B$, tolerance $1$ and scaled residual $\\mathcal R_n=(r^d_n/\\eta_d,r^a_n/\\eta_a)$ on that slice. It reevaluates the unscaled block residual once after a root status and returns immediately on any non-root status. The unknown has dimension $d+m$.\n\n\n\n\n\n1.1 Apply the proved work bound [F1] to each admissible Newton call. It gives at most $B+1$ explicit residual evaluations and $B$ correction calls. The exact procedure [[alg-finite-budget-newton-for-vector-residuals]] passes its current Jacobian and residual to the correction routine; a successful correction solves that single square system. The input dimensions in [F2]–[F4] are $m$ and $d+m$, respectively, giving the asserted system dimensions. This does not bound assembly or solve costs. [given, F1, F2, F3, F4]\n\n2.1 Initialization makes one Newton call by [F2]. If it returns a non-root status, the wrapper returns immediately; if it returns root, it reevaluates the algebraic residual once to distinguish exact from approximate consistency. Thus it uses at most $B+2$ residual evaluations. [F1, F2, step 1.1]\n\n2.2 A backward-Euler call first evaluates its starting algebraic residual once, and a BDF2 call evaluates its two starting algebraic residuals, by [F3] and [F4]. Thus their preliminary checks use at most one and two evaluations, respectively, even when a bound fails. Each attempted step makes at most one Newton call; on a root status the wrapper reevaluates the block residual once to record the unscaled blocks, and otherwise returns immediately. Each attempted step therefore adds at most $B+2$ evaluations. Summing gives $1+S(B+2)$ for backward Euler and $2+S(B+2)$ for BDF2. The pre-call membership tests add no residual evaluation, and all loops and tests are finite. [F1, F3, F4, step 1.1, algebra]\n\n3.1 All remaining tests, assignments and arithmetic are finite under the returning-primitive convention. The argument therefore proves termination without assuming that Newton converges or accepts a step. [given, step 1.1, step 2.1, step 2.2]\n\n4.1 For each appended candidate, [F3] or [F4] gives a Newton root status with tolerance $1$. The procedure's residual test gives $\\|\\mathcal R_n\\|_2\\le1$. In both methods its blocks equal $r^d_n/\\eta_d$ and $r^a_n/\\eta_a$. Each block norm is at most the concatenated Euclidean norm, and both tolerances are positive; hence $\\|r^d_n\\|_2\\le\\eta_d$ and $\\|r^a_n\\|_2\\le\\eta_a$. No other solver status supplies this premise. [given, F3, F4, algebra] ∎"
+    },
+    {
+      "file": "items/thm-periodic-midpoint-collocation-error-budget.md",
+      "item_id": "thm-periodic-midpoint-collocation-error-budget",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/thm-pseudo-arclength-finite-trace-partial-correctness-and-termination.md",
+      "item_id": "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/thm-shooting-residual-error-budget.md",
+      "item_id": "thm-shooting-residual-error-budget",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/thm-sqp-reduced-bfgs-superlinear-under-dm.md",
+      "item_id": "thm-sqp-reduced-bfgs-superlinear-under-dm",
+      "status": "pass",
+      "strategy": "direct"
+    }
+  ]
+}

@@ -1,0 +1,381 @@
+{
+  "group": "a",
+  "batches": [
+    "10"
+  ],
+  "pages_read": [
+    "stochastic-reaction-jump-simulation-and-coupling",
+    "stochastic-reaction-jump-simulation-and-coupling-examples"
+  ],
+  "items_read": [
+    "def-reaction-network-propensity-system-and-generator",
+    "lem-competing-exponential-race-for-reaction-channels",
+    "alg-gillespie-direct-method-for-reaction-networks",
+    "alg-next-reaction-random-time-change-method",
+    "alg-dominating-thinning-for-time-varying-reaction-rates",
+    "thm-countable-state-reaction-networks-lyapunov-nonexplosion",
+    "thm-dominating-thinning-exactly-simulates-reaction-rates",
+    "alg-minimum-intensity-coupling-for-reaction-networks",
+    "thm-finite-state-gillespie-and-next-reaction-exactness",
+    "thm-minimum-intensity-coupling-preserves-exact-marginals",
+    "thm-reaction-counts-have-compensators-brackets-and-isometry",
+    "cex-quadratic-pure-birth-reaction-network-explodes",
+    "cex-understated-thinning-envelope-is-invalid",
+    "ex-zero-total-hazard-state-is-absorbing",
+    "ex-finite-state-birth-death-reaction-simulation",
+    "ex-two-chain-minimum-intensity-birth-death-coupling"
+  ],
+  "conventions": [
+    {
+      "convention": "There are finitely many reaction channels, finite total rate at each state, and admissible active poststates. Countable includes finite.",
+      "fixed_by": "def-reaction-network-propensity-system-and-generator",
+      "matters_for": [
+        "thm-countable-state-reaction-networks-lyapunov-nonexplosion",
+        "thm-dominating-thinning-exactly-simulates-reaction-rates",
+        "thm-finite-state-gillespie-and-next-reaction-exactness"
+      ]
+    },
+    {
+      "convention": "Zero-increment channels count as marked reaction events. They contribute to total reaction intensity but contribute zero to the state generator; the state-generator diagonal uses only state-changing rates.",
+      "fixed_by": "def-reaction-network-propensity-system-and-generator",
+      "matters_for": [
+        "thm-finite-state-gillespie-and-next-reaction-exactness",
+        "thm-reaction-counts-have-compensators-brackets-and-isometry",
+        "cex-understated-thinning-envelope-is-invalid"
+      ]
+    },
+    {
+      "convention": "The direct method's budget counts reaction events, defaults to infinity, and budget-exhausted returns an incomplete prefix. Absorption is checked before budget exhaustion.",
+      "fixed_by": "alg-gillespie-direct-method-for-reaction-networks",
+      "matters_for": [
+        "thm-finite-state-gillespie-and-next-reaction-exactness",
+        "ex-zero-total-hazard-state-is-absorbing",
+        "ex-finite-state-birth-death-reaction-simulation"
+      ]
+    },
+    {
+      "convention": "Thinning requires a deterministic global envelope valid at every time and state. Its budget counts candidates, including rejections; the runtime guard detects only evaluated violations and never clips rates.",
+      "fixed_by": "alg-dominating-thinning-for-time-varying-reaction-rates",
+      "matters_for": [
+        "thm-dominating-thinning-exactly-simulates-reaction-rates",
+        "cex-understated-thinning-envelope-is-invalid"
+      ]
+    },
+    {
+      "convention": "Generalized thinning mark sets must be disjoint, have the prescribed lengths, and have product-measurable time-mark regions for each fixed state.",
+      "fixed_by": "thm-dominating-thinning-exactly-simulates-reaction-rates",
+      "matters_for": [
+        "thm-minimum-intensity-coupling-preserves-exact-marginals",
+        "ex-two-chain-minimum-intensity-birth-death-coupling"
+      ]
+    },
+    {
+      "convention": "Properness means every integer sublevel set of V is finite; V is at least one. QV is a finite local expression rather than an assertion that V belongs to the bounded-function generator domain.",
+      "fixed_by": "thm-countable-state-reaction-networks-lyapunov-nonexplosion",
+      "matters_for": [
+        "cex-quadratic-pure-birth-reaction-network-explodes"
+      ]
+    },
+    {
+      "convention": "Reaction-count martingales use the natural filtration of candidate times and marks, predictable left-limit intensities, and finite-energy predictable real integrands. Full AC is declared for the conditional-expectation and stochastic-integral interfaces.",
+      "fixed_by": "thm-reaction-counts-have-compensators-brackets-and-isometry",
+      "matters_for": [
+        "thm-reaction-counts-have-compensators-brackets-and-isometry"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-reaction-network-propensity-system-and-generator",
+      "statement": "A reaction propensity system has finite or countable E ⊆ Z^d, finitely many increments and nonnegative finite propensities, with a_j(x)>0 implying x+ν_j ∈ E. Its generator is Qf(x)=Σ_{j:a_j(x)>0} a_j(x)(f(x+ν_j)−f(x)); zero increments remain marked events.",
+      "used_by": [
+        "alg-gillespie-direct-method-for-reaction-networks",
+        "alg-next-reaction-random-time-change-method",
+        "alg-dominating-thinning-for-time-varying-reaction-rates",
+        "thm-countable-state-reaction-networks-lyapunov-nonexplosion",
+        "thm-dominating-thinning-exactly-simulates-reaction-rates",
+        "alg-minimum-intensity-coupling-for-reaction-networks",
+        "thm-finite-state-gillespie-and-next-reaction-exactness",
+        "thm-minimum-intensity-coupling-preserves-exact-marginals",
+        "thm-reaction-counts-have-compensators-brackets-and-isometry",
+        "cex-quadratic-pure-birth-reaction-network-explodes",
+        "cex-understated-thinning-envelope-is-invalid",
+        "ex-zero-total-hazard-state-is-absorbing",
+        "ex-finite-state-birth-death-reaction-simulation",
+        "ex-two-chain-minimum-intensity-birth-death-coupling"
+      ]
+    },
+    {
+      "id": "thm-dominating-thinning-exactly-simulates-reaction-rates",
+      "statement": "Assuming Countable Choice and Dependent Choice and a certified global finite envelope, unlimited-budget dominating thinning has no-reaction survival exp(−∫λ(s,x)ds), first-channel-event density a_j(s,x)exp(−∫λ(v,x)dv), and the same restart rule after reactions. Candidate count is Poisson with mean ΛT, bounding accepted counts. The conclusions also hold for disjoint mark sets of the prescribed measures with product-measurable time-mark regions.",
+      "used_by": [
+        "thm-finite-state-gillespie-and-next-reaction-exactness",
+        "thm-minimum-intensity-coupling-preserves-exact-marginals",
+        "thm-reaction-counts-have-compensators-brackets-and-isometry",
+        "cex-understated-thinning-envelope-is-invalid",
+        "ex-two-chain-minimum-intensity-birth-death-coupling"
+      ]
+    },
+    {
+      "id": "lem-competing-exponential-race-for-reaction-channels",
+      "statement": "Assume Countable Choice. For finitely many independent unit exponentials and nonnegative rates with positive sum r_0, the minimum scaled clock is Exp(r_0), its unique winning channel has probabilities r_j/r_0, and winner and waiting time are independent. If r_0=0, no finite reaction clock is active.",
+      "used_by": [
+        "thm-dominating-thinning-exactly-simulates-reaction-rates",
+        "thm-finite-state-gillespie-and-next-reaction-exactness"
+      ]
+    },
+    {
+      "id": "thm-finite-state-gillespie-and-next-reaction-exactness",
+      "statement": "Assume Countable Choice and Dependent Choice, finite E and a reaction system, and the independent streams required by the direct and next-reaction algorithms. “Then both algorithms have the law of this reference process on every finite horizon.” The reference process uses exponential total-rate waiting times and independent propensity-proportional channel selection. Its generator is the reaction generator and its expected total reaction count is at most ΛT.",
+      "used_by": [
+        "thm-reaction-counts-have-compensators-brackets-and-isometry",
+        "cex-understated-thinning-envelope-is-invalid",
+        "ex-zero-total-hazard-state-is-absorbing",
+        "ex-finite-state-birth-death-reaction-simulation"
+      ]
+    },
+    {
+      "id": "thm-countable-state-reaction-networks-lyapunov-nonexplosion",
+      "statement": "Assume Countable Choice and Dependent Choice. For the recursively constructed minimal finite-channel reaction process on countable E, if a proper V:E→[1,∞) satisfies the finite local bound QV≤cV for c≥0, then the limit of reaction event times is infinity almost surely. No full Axiom of Choice is used.",
+      "used_by": [
+        "cex-quadratic-pure-birth-reaction-network-explodes"
+      ]
+    },
+    {
+      "id": "thm-minimum-intensity-coupling-preserves-exact-marginals",
+      "statement": "Assume Countable Choice and Dependent Choice. For two finite-state reaction systems, the unlimited-candidate-budget minimum-intensity coupling preserves each coordinate's Gillespie reaction law. Shared and residual channel rates are respectively the minimum and the two positive rate differences; the candidate count has mean MT.",
+      "used_by": [
+        "ex-two-chain-minimum-intensity-birth-death-coupling"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Natural-number and zero-index conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-integers",
+      "used_for": "Integer lattice states and reaction increments.",
+      "opened": true
+    },
+    {
+      "id": "def-countable",
+      "used_for": "Countable includes finite state sets.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Borel measurability of time-dependent propensity sections.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Declared choice assumption of the martingale and integral interfaces.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Declared assumptions for exponential, uniform and product probability laws.",
+      "opened": true
+    },
+    {
+      "id": "def-dependent-choice",
+      "used_for": "Declared assumption of countable input-stream constructions.",
+      "opened": true
+    },
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Measurable random inputs and coordinate tuples.",
+      "opened": true
+    },
+    {
+      "id": "def-law-or-distribution-of-a-random-element",
+      "used_for": "Laws of random inputs and simulated processes.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-sigma-algebras-and-events",
+      "used_for": "Finite product probabilities in the exponential race.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independence of clocks, marks and input streams.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Measurability of finite clock tuples and rectangle generators.",
+      "opened": true
+    },
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "used_for": "Uniform input laws and time integration.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-with-density",
+      "used_for": "Exponential holding-time density in the explosion example.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Power-series bound controlling the exponential tail in the explosion example.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Holding-time expectations and Lyapunov and count moment estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-countable-product-of-probability-spaces",
+      "used_for": "Existence of independent countable random-input streams under Countable Choice and Dependent Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-and-weibull-survival-laws",
+      "used_for": "Exponential densities, survival functions, scaling and memorylessness calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Uniform mark probabilities, interval lengths and null endpoints.",
+      "opened": true
+    },
+    {
+      "id": "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+      "used_for": "Identification of the finite joint clock law from rectangle probabilities.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Finite product clock and mark laws and time-mark measures.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Lyapunov expectation inequalities and passage of cross-product expectations to limits.",
+      "opened": true
+    },
+    {
+      "id": "def-scalar-poisson-count-law",
+      "used_for": "Candidate-count probabilities.",
+      "opened": true
+    },
+    {
+      "id": "lem-poisson-count-law-normalization-and-moments",
+      "used_for": "Candidate-count means and second moments.",
+      "opened": true
+    },
+    {
+      "id": "def-poisson-and-cox-point-process",
+      "used_for": "Independent counts on disjoint candidate time-mark regions.",
+      "opened": true
+    },
+    {
+      "id": "lem-homogeneous-poisson-ordered-event-time-density",
+      "used_for": "Finite-window ordered candidate densities, simplicity and threshold-clock identification.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-intensity-poisson-process-existence-and-mixed-binomial-law",
+      "used_for": "Identification of the finite marked candidate pattern as a Poisson point process.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Integration over measurable time-mark regions and nonnegative candidate-pattern series.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Truncated holding-time expectations and expectation of the infinite explosion-time sum.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonnegative-series-bounded-partial-sums",
+      "used_for": "Nonnegative exponential-series lower bound in the explosion example.",
+      "opened": true
+    },
+    {
+      "id": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+      "used_for": "Identification of bounded-interval density integrals with their Riemann evaluations.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Evaluation of the truncated exponential holding-time first moment.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-schwarz-for-random-variables",
+      "used_for": "Continuity of cross-product expectations under L2 convergence.",
+      "opened": true
+    },
+    {
+      "id": "def-continuous-time-filtration-and-all-pairs-martingale",
+      "used_for": "Natural candidate filtration and all-pairs martingale identity without augmentation.",
+      "opened": true
+    },
+    {
+      "id": "def-continuous-time-adapted-process-and-martingale",
+      "used_for": "Square-integrable continuous-time martingale terminology and inherited AC assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-progressively-measurable-and-predictable-process",
+      "used_for": "Predictable generators and left-grid approximation of left-limit intensities and continuous compensators.",
+      "opened": true
+    },
+    {
+      "id": "def-counting-process-intensity-and-compensator-contract",
+      "used_for": "Exact hypotheses established before invoking counting-process bracket and integral results.",
+      "opened": true
+    },
+    {
+      "id": "lem-predictable-step-processes-dense-in-compensator-l2",
+      "used_for": "Approximation of finite-energy predictable integrands by bounded predictable step processes.",
+      "opened": true
+    },
+    {
+      "id": "thm-compensated-counting-process-brackets",
+      "used_for": "Optional and predictable brackets after proving the square-integrable martingale contract.",
+      "opened": true
+    },
+    {
+      "id": "thm-cross-brackets-vanish-under-no-simultaneous-jumps",
+      "used_for": "Zero cross brackets for distinct reaction channels.",
+      "opened": true
+    },
+    {
+      "id": "thm-l2-counting-process-integral-isometry",
+      "used_for": "Existence and scalar isometry of each finite-energy reaction-count integral.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-finite-state-gillespie-and-next-reaction-exactness",
+      "concern": "The Statement says “Then both algorithms have the law of this reference process on every finite horizon” without explicitly restricting their event budgets to infinity. Both cited algorithms admit finite budgets and return incomplete prefixes. For E={0,1}, death rate a(1)=1, a(0)=0, initial state 1, T=1 and B=0, each immediately returns a prefix at time zero, whereas the reference process reaches 0 by T with probability 1−e^(−1). The proof establishes full-horizon equality for unrestricted event recursion, not for these finite-budget outputs. The algorithms default to infinite budgets, which may be the intended reading, but the theorem should explicitly bind that essential qualification or state a prefix-law conclusion.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "tau-leaping-and-reaction-diffusion-model-error",
+      "to": "stochastic-reaction-jump-simulation-and-coupling",
+      "faithful": true,
+      "note": "Checked the reaction-system uses, exact-chain event-law citations in the Dynkin and weak-defect arguments, and the critical SSA call. The critical procedure invokes Gillespie with event budget one solely to obtain a first event or no event before its horizon. Page prose and the level-variance theorem explicitly distinguish exact event-time coupling from the separately proved frozen-rate Poisson-count coupling. No reverse dependency or conflation was found."
+    },
+    {
+      "from": "finite-generator-master-equations-and-uniformization",
+      "to": "stochastic-reaction-jump-simulation-and-coupling",
+      "faithful": true,
+      "note": "This is a conceptual page prerequisite; the checked finite-generator and projection items do not directly cite batch-10 items. Their column convention places source states in columns, corresponding to the transpose of the reaction operator's matrix on functions. Exit rates exclude self-events, consistently with batch 10's zero-increment convention. Countable-chain nonexplosion is explicitly supplied as a hypothesis rather than inferred from finite per-state rates. No reverse dependency was found."
+    }
+  ]
+}

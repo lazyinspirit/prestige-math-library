@@ -2,10 +2,10 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 
-/** One fresh native read for an owner-reviewed exact coverage-output defect.
+/** One fresh native read per unit for an owner-reviewed exact coverage-output defect.
  * The immutable archive binds old observations; current guards run only before
  * dispatch, because the new native report legitimately replaces the old one. */
-export function refuterContinuations(ctx: any, original: any, beforeDispatch = false): any[] {
+export function refuterContinuations(ctx: any, original: any, beforeDispatch = false, dispatchUnits: string[] | null = null): any[] {
   const path = join(ctx.repo, 'research', `${ctx.run}-step3-refuter-continuations.json`);
   if (!existsSync(path)) return [];
   const row = JSON.parse(readFileSync(path, 'utf8'));
@@ -20,11 +20,13 @@ export function refuterContinuations(ctx: any, original: any, beforeDispatch = f
   };
   if (row.version !== 1 || row.run !== ctx.run || row.authorized_by !== 'owner'
     || !String(row.authorization ?? '').trim() || !Array.isArray(row.continuations)
-    || row.continuations.length !== 1) reject();
+    || !row.continuations.length) reject();
   const units = original.units(ctx).map(String);
+  if (row.continuations.length > units.length
+    || new Set(row.continuations.map((entry: any) => String(entry.unit))).size !== row.continuations.length) reject();
   for (const entry of row.continuations) {
     const unit = String(entry.unit), label = `refute-${unit}-coverage-correction-1`;
-    if (!units.includes(unit) || entry.label !== label || !String(entry.reason ?? '').trim()
+    if (!/^[1-9]\d*$/.test(unit) || !units.includes(unit) || entry.label !== label || !String(entry.reason ?? '').trim()
       || !Number.isFinite(Date.parse(entry.writers_drained_at))
       || entry.previous_result?.path !== `research/${ctx.run}-dispatch/refuter-refute-${unit}.result.json`
       || entry.report_path !== `research/${ctx.run}-refute-${unit}.json`
@@ -53,7 +55,7 @@ export function refuterContinuations(ctx: any, original: any, beforeDispatch = f
         || !archive.toString().trimEnd().endsWith(tail)) reject();
     }
     bound(entry.task);
-    if (beforeDispatch) {
+    if (beforeDispatch && (dispatchUnits === null || dispatchUnits.map(String).includes(unit))) {
       // Any completed fresh attempt, including failure, holds rather than loops.
       if (existsSync(join(ctx.repo, 'research', `${ctx.run}-dispatch`, `refuter-${label}.result.json`)))
         throw Error('Step-3 refuter correction already attempted; owner review required');
@@ -88,10 +90,11 @@ export function refuterContinuationPattern(ctx: any, original: any): RegExp {
   const pattern = typeof original.pattern === 'function' ? original.pattern(ctx) : original.pattern;
   const entries = refuterContinuations(ctx, original);
   if (!entries.length) return pattern;
-  const unit = entries[0].unit;
+  const originals = entries.map(entry => `refuter-refute-${entry.unit}\\.result\\.json`).join('|');
+  const corrections = entries.map(entry => `refuter-${entry.label}\\.result\\.json`).join('|');
   // Exact new stable filename only: attempts and other correction labels cannot
   // supply coverage. Ordinary sibling-unit results retain their original route.
-  return new RegExp(`^(?!refuter-refute-${unit}\\.result\\.json$)(?:${pattern.source}|refuter-${entries[0].label}\\.result\\.json)$`, pattern.flags);
+  return new RegExp(`^(?!(?:${originals})$)(?:${pattern.source}|${corrections})$`, pattern.flags);
 }
 
 /** Applied once by the ordinary Step-3 table; alternate wrappers inherit it. */
@@ -105,8 +108,11 @@ export function withRefuterContinuation(original: any): any {
         return original.plan(ctx, pending);
       // Doctor inspects command descriptors; only a real launch checks the
       // one-attempt budget and the pre-repair current-source guards.
-      if (!ctx.doctor) refuterContinuations(ctx, original, true);
-      return original.plan(ctx, pending).map((plan: any) => {
+      const plans = original.plan(ctx, pending);
+      const dispatchUnits = plans.flatMap((plan: any) => plan.covers.map(String))
+        .filter((unit: string) => pending.map(String).includes(unit));
+      if (!ctx.doctor) refuterContinuations(ctx, original, true, dispatchUnits);
+      return plans.map((plan: any) => {
         const entry = entries.find(e => plan.covers.length === 1 && String(e.unit) === String(plan.covers[0]));
         return entry ? { ...plan, label: entry.label, task: entry.task.path } : plan;
       });

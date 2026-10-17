@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "46",
+  "round": 0,
+  "reviewed_items": [
+    "lem-equi-lipschitz-curves-in-compact-euclidean-set-have-uniformly-convergent-subsequence",
+    "lem-projection-onto-closed-convex-set-is-nonexpansive",
+    "alg-one-dimensional-first-impact-with-restitution",
+    "thm-frictionless-sphere-binary-impact-impulse-laws",
+    "lem-projected-euler-projection-residual-certificate",
+    "thm-first-impact-step-complementarity-momentum-and-energy",
+    "lem-sphere-contact-guard-normal-and-reset-lipschitz-bounds",
+    "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+    "def-projected-contact-dynamics-and-euler-step",
+    "lem-naive-all-pairs-collision-search-has-quadratic-work",
+    "lem-normal-cone-maximal-monotone-and-projection-resolvent",
+    "alg-certified-projected-euler-method",
+    "lem-projected-contact-solutions-are-unique",
+    "thm-projected-euler-existence-uniqueness-and-convergence",
+    "thm-projected-euler-square-root-global-error",
+    "cex-nonconvex-set-can-have-nonunique-nearest-points",
+    "ex-frictionless-sphere-binary-impact-calculation",
+    "ex-one-dimensional-impact-restitution-boundaries",
+    "ex-penalty-stiffness-requires-time-step-control",
+    "ex-projected-overdamped-particle-euler-trajectory"
+  ],
+  "reviewed_pages": [
+    "nonsmooth-contact-time-stepping-and-projections",
+    "nonsmooth-contact-time-stepping-and-projections-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch and its actual projected-normal-cone, proximal, and event-provider suppliers were reviewed. The remaining defects are repairable within this batch; no unresolved supplier gap requires owner escalation.",
+  "findings": [
+    {
+      "id": "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+      "type": "local",
+      "reason": "The Definition permits initially penetrated reference states and its no-event certificate excludes incoming roots without requiring nonpenetration or accounting for every possible guard zero. A grazing or zero-speed crossing into penetration could therefore be accepted as event-free. State the exact equations q_i'=v_i and v_i'=F_i(t,q,v), require nonpenetrating reference states, and make any possible unlisted or nontransverse zero unresolved. Also define epsilon_R as a bound on reset-output error in the full-state norm before adding it to E."
+    },
+    {
+      "id": "alg-one-dimensional-first-impact-with-restitution",
+      "type": "local",
+      "reason": "For q=v=a=0, the gap polynomial is identically zero, so the claim that the exact branch has at most two distinct roots is false. Add an explicit zero-polynomial branch; it has no incoming root because w=0 and can take the certified nonpenetrating free-flight branch."
+    },
+    {
+      "id": "nonsmooth-contact-time-stepping-and-projections",
+      "type": "local",
+      "reason": "The A-page summary says grazing produces an unresolved status for the scalar algorithm, but the approved first-incoming-root procedure returns free-flight when there is no incoming root and nonpenetration is certified. Align the summary with that behavior and state that unresolved applies when contact onset or nonpenetration cannot be certified."
+    },
+    {
+      "id": "lem-equi-lipschitz-curves-in-compact-euclidean-set-have-uniformly-convergent-subsequence",
+      "type": "local",
+      "reason": "Steps 1.1, 4.1 and 5.1 use coordinate-to-Euclidean norm bounds and the triangle inequality for lattice coverage, uniform Cauchyness and limit passage without displaying those estimates; thm-cauchy-schwarz-and-the-euclidean-norm is also absent from deps. Add the direct Euclidean estimate/dependency and justify that each infinite I_r is unbounded before choosing n_r."
+    },
+    {
+      "id": "lem-projection-onto-closed-convex-set-is-nonexpansive",
+      "type": "local",
+      "reason": "The Statement does not restrict d, while its projection-variational-inequality and nearest-point suppliers require d>=1. Preserve the all-d claim by adding the trivial R^0 case, or make the positive-d convention explicit."
+    },
+    {
+      "id": "lem-projected-euler-projection-residual-certificate",
+      "type": "local",
+      "reason": "The Statement likewise omits d>=1 although its projection-variational-inequality supplier requires it. Add the trivial R^0 case to preserve the stated scope, or make the positive-d convention explicit."
+    },
+    {
+      "id": "thm-projected-euler-existence-uniqueness-and-convergence",
+      "type": "prerequisite",
+      "reason": "Step 5.1 asserts that Q^d is countable and dense using scalar Q-countability, N×N countability and scalar rational density, but does not provide the finite-product encoding or coordinatewise norm estimate needed to obtain the common null set for every z in C. Supply those finite-dimensional arguments there. Also state the compact-implies-closed use before invoking the projected-contact definition in steps 1.1–1.2."
+    },
+    {
+      "id": "alg-certified-projected-euler-method",
+      "type": "local",
+      "reason": "Its input says C is compact and convex, while the projected-contact definition requires C closed. State the compact-implies-closed justification for this Euclidean input, or include closedness explicitly as an admissibility condition."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-first-impact-step-complementarity-momentum-and-energy",
+      "decision": "accept",
+      "reason": "The zero-polynomial free-flight branch has q_*=0 and J=0, satisfying the theorem's free-flight interface; the impact conclusions are unchanged."
+    },
+    {
+      "id": "ex-one-dimensional-impact-restitution-boundaries",
+      "decision": "accept",
+      "reason": "The example uses incoming-root impact branches, which the proposed special case does not alter."
+    },
+    {
+      "id": "nonsmooth-contact-time-stepping-and-projections-examples",
+      "decision": "accept",
+      "reason": "The example calculations and placements remain valid; the A-page summary is the consumer needing repair."
+    },
+    {
+      "id": "lem-naive-all-pairs-collision-search-has-quadratic-work",
+      "decision": "accept",
+      "reason": "The event-algorithm input and certificate conditions can be clarified without changing its one-inspection-per-pair loop."
+    },
+    {
+      "id": "thm-projected-euler-square-root-global-error",
+      "decision": "accept",
+      "reason": "Its use of the certified projected-Euler output remains valid with closedness stated for compact Euclidean C."
+    },
+    {
+      "id": "ex-projected-overdamped-particle-euler-trajectory",
+      "decision": "accept",
+      "reason": "Its input C=[0,1] is closed, and the example's exact recurrence is unaffected."
+    },
+    {
+      "id": "nonsmooth-contact-time-stepping-and-projections",
+      "decision": "repair",
+      "reason": "Update the scalar grazing description and reflect the event algorithm's explicit nonpenetration and zero-handling conditions."
+    }
+  ]
+}

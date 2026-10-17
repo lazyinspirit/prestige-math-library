@@ -1,0 +1,57 @@
+--- before/research/numerical-optimization-dynamics-2026-10-16-batch-38.proof-contracts.json
++++ proposed/research/numerical-optimization-dynamics-2026-10-16-batch-38.proof-contracts.json
+@@ -1301,9 +1301,19 @@
+           "fact": "F3",
+           "source": "thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity",
+           "source_section": "Statement",
+-          "quote": "Assume Countable Choice and the conforming Galerkin setting of\n[[thm-cea-quasi-optimality-for-conforming-galerkin-approximations]]. Let\n$H=L^2(\\Omega;\\mathbb K)$ with inner product linear in the first slot, and\nlet $J:V\\to H$ be a continuous linear inclusion with\n$\\|Jv\\|_H\\le C_E\\|v\\|_V$. Put $e:=J(u-u_h)$. The adjoint solution $z_e$ is\nthe unique element of $V$ satisfying\n$$a(v,z_e)=(Jv,e)_H\\qquad(v\\in V);$$\nit exists by [[thm-adjoint-problem-for-bounded-coercive-variational-forms]].\nLet $s\\in(0,1]$, and let $R_s\\subseteq V$ be a specified normed space of\nadjoint-regular functions. Assume constants $C_R,C_I$ independent of $h$ and\nthe error satisfy\n$$\\|z_e\\|_{R_s}\\le C_R\\|e\\|_H,\\qquad \\inf_{w_h\\in V_h}\\|z_e-w_h\\|_V\\le C_Ih^s\\|z_e\\|_{R_s}.$$\nThen\n$$\\|u-u_h\\|_{L^2(\\Omega)} \\le M C_I C_R h^s\\|u-u_h\\|_V.$$\nThe symbol $R_s$ means exactly the chosen regularity norm space in the two\ndisplayed assumptions; no fractional Sobolev interpolation estimate is\nasserted unless it verifies the second inequality. The integer endpoint may\nbe instantiated with $R_1=H^2(\\Omega)=W^{2,2}(\\Omega)$.",
++          "quote": "Assume Countable Choice and the conforming Galerkin setting of\n[[thm-cea-quasi-optimality-for-conforming-galerkin-approximations]]. Let\n$H=L^2(\\Omega;\\mathbb K)$ with inner product linear in the first slot, and\nlet $J:V\\to H$ be a continuous linear inclusion with\n$\\|Jv\\|_H\\le C_E\\|v\\|_V$. Put $e:=J(u-u_h)$. The adjoint solution $z_e$ is\nthe unique element of $V$ satisfying\n$$a(v,z_e)=(Jv,e)_H\\qquad(v\\in V);$$\nit exists by [[thm-adjoint-problem-for-bounded-coercive-variational-forms]].\nLet $s\\in(0,1]$, and let $R_s\\subseteq V$ be a specified normed space of\nadjoint-regular functions. Assume constants $C_R,C_I$ independent of $h$ and\nthe error satisfy\n$$\\|z_e\\|_{R_s}\\le C_R\\|e\\|_H,\\qquad \\inf_{w_h\\in V_h}\\|z_e-w_h\\|_V\\le C_Ih^s\\|z_e\\|_{R_s}.$$\nThen\n$$\\|u-u_h\\|_{L^2(\\Omega)} \\le M C_I C_R h^s\\|u-u_h\\|_V.$$\nThe symbol $R_s$ means exactly the chosen regularity norm space in the two\ndisplayed assumptions; no fractional Sobolev interpolation estimate is\nasserted unless it verifies the second inequality. The integer endpoint may\nbe instantiated with $R_1=H^2(\\Omega)\\cap V$, using the\n$H^2(\\Omega)=W^{2,2}(\\Omega)$ norm. If $H^2(\\Omega)\\subseteq V$,\nthis is simply $R_1=H^2(\\Omega)$.",
+           "uses": [
+             "1.2"
++          ]
++        },
++        {
++          "fact": "F4",
++          "source": "lem-w-one-two-is-a-hilbert-space",
++          "source_section": "Statement",
++          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. On $H^1(\\Omega)=W^{1,2}(\\Omega;\\mathbb K)$ ([[def-sobolev-space-wkp-and-its-norm]], [[def-hk-and-hk-zero-notation]]) define $$(u,v)_{H^1}:=(u,v)_{L^2}+\\sum_{i=1}^n(D_iu,D_iv)_{L^2},$$ with the $L^2$ inner product of [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. Then $(\\cdot,\\cdot)_{H^1}$ is an inner product on the Sobolev classes whose induced norm is the $W^{1,2}$ norm of [[def-sobolev-space-wkp-and-its-norm]], and $H^1(\\Omega)$ is a Hilbert space for it. The zero-boundary space $H^1_0(\\Omega)$ is a closed subspace of $H^1(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]]) and hence a Hilbert space for the restricted inner product. The pairing is linear in the first argument and conjugate-linear in the second, in the convention of [[def-real-and-complex-inner-product-space]].",
++          "uses": [
++            "1.2",
++            "2.1"
+           ]
+         }
+       ],
+@@ -1319,20 +1329,22 @@
+         },
+         {
+           "id": "step-1.2",
+-          "claim": "Apply the Aubin–Nitsche estimate [F3] with $V=H^1_0(\\Omega)$ in its $H^1$ norm, $C_I=C_D$, and the two dual bounds [A1]. This gives $\\|u-u_h\\|_{L^2}\\le M C_DC_Rh^s\\|u-u_h\\|_{H^1}$.",
++          "claim": "By [F4], $V=H^1_0(\\Omega)$ is a Hilbert space in its stated $H^1$ norm. Apply the Aubin–Nitsche estimate [F3] with $V=H^1_0(\\Omega)$ in its $H^1$ norm, $C_I=C_D$, and the two dual bounds [A1]. This gives $\\|u-u_h\\|_{L^2}\\le M C_DC_Rh^s\\|u-u_h\\|_{H^1}$.",
+           "step": "1.2",
+           "inputs": [
+             "F3",
++            "F4",
+             "A1",
+             "given"
+           ]
+         },
+         {
+           "id": "step-2.1",
+-          "claim": "Apply [F2] to the best-approximation bound in step 1.1. This gives $\\|u-u_h\\|_{H^1}\\le \\frac M\\alpha C_{\\rm FE}h^r|u|_{W^{r+1,2}}.$",
++          "claim": "Apply [F2] on the Hilbert space supplied by [F4] to the best-approximation bound in step 1.1. This gives $\\|u-u_h\\|_{H^1}\\le \\frac M\\alpha C_{\\rm FE}h^r|u|_{W^{r+1,2}}.$",
+           "step": "2.1",
+           "inputs": [
+             "F2",
++            "F4",
+             "step 1.1"
+           ]
+         },
+@@ -2011,7 +2023,7 @@
+           "fact": "F11",
+           "source": "thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity",
+           "source_section": "Statement",
+-          "quote": "Assume Countable Choice and the conforming Galerkin setting of\n[[thm-cea-quasi-optimality-for-conforming-galerkin-approximations]]. Let\n$H=L^2(\\Omega;\\mathbb K)$ with inner product linear in the first slot, and\nlet $J:V\\to H$ be a continuous linear inclusion with\n$\\|Jv\\|_H\\le C_E\\|v\\|_V$. Put $e:=J(u-u_h)$. The adjoint solution $z_e$ is\nthe unique element of $V$ satisfying\n$$a(v,z_e)=(Jv,e)_H\\qquad(v\\in V);$$\nit exists by [[thm-adjoint-problem-for-bounded-coercive-variational-forms]].\nLet $s\\in(0,1]$, and let $R_s\\subseteq V$ be a specified normed space of\nadjoint-regular functions. Assume constants $C_R,C_I$ independent of $h$ and\nthe error satisfy\n$$\\|z_e\\|_{R_s}\\le C_R\\|e\\|_H,\\qquad \\inf_{w_h\\in V_h}\\|z_e-w_h\\|_V\\le C_Ih^s\\|z_e\\|_{R_s}.$$\nThen\n$$\\|u-u_h\\|_{L^2(\\Omega)} \\le M C_I C_R h^s\\|u-u_h\\|_V.$$\nThe symbol $R_s$ means exactly the chosen regularity norm space in the two\ndisplayed assumptions; no fractional Sobolev interpolation estimate is\nasserted unless it verifies the second inequality. The integer endpoint may\nbe instantiated with $R_1=H^2(\\Omega)=W^{2,2}(\\Omega)$.",
++          "quote": "Assume Countable Choice and the conforming Galerkin setting of\n[[thm-cea-quasi-optimality-for-conforming-galerkin-approximations]]. Let\n$H=L^2(\\Omega;\\mathbb K)$ with inner product linear in the first slot, and\nlet $J:V\\to H$ be a continuous linear inclusion with\n$\\|Jv\\|_H\\le C_E\\|v\\|_V$. Put $e:=J(u-u_h)$. The adjoint solution $z_e$ is\nthe unique element of $V$ satisfying\n$$a(v,z_e)=(Jv,e)_H\\qquad(v\\in V);$$\nit exists by [[thm-adjoint-problem-for-bounded-coercive-variational-forms]].\nLet $s\\in(0,1]$, and let $R_s\\subseteq V$ be a specified normed space of\nadjoint-regular functions. Assume constants $C_R,C_I$ independent of $h$ and\nthe error satisfy\n$$\\|z_e\\|_{R_s}\\le C_R\\|e\\|_H,\\qquad \\inf_{w_h\\in V_h}\\|z_e-w_h\\|_V\\le C_Ih^s\\|z_e\\|_{R_s}.$$\nThen\n$$\\|u-u_h\\|_{L^2(\\Omega)} \\le M C_I C_R h^s\\|u-u_h\\|_V.$$\nThe symbol $R_s$ means exactly the chosen regularity norm space in the two\ndisplayed assumptions; no fractional Sobolev interpolation estimate is\nasserted unless it verifies the second inequality. The integer endpoint may\nbe instantiated with $R_1=H^2(\\Omega)\\cap V$, using the\n$H^2(\\Omega)=W^{2,2}(\\Omega)$ norm. If $H^2(\\Omega)\\subseteq V$,\nthis is simply $R_1=H^2(\\Omega)$.",
+           "uses": [
+             "5.1"
+           ]

@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "54",
+  "round": 0,
+  "reviewed_items": [
+    "def-local-leapfrog-domain-on-an-open-configuration-set",
+    "lem-local-hamiltonian-flow-preserves-symplectic-matrix",
+    "alg-local-symplectic-euler-step",
+    "alg-implicit-midpoint-hamiltonian-step",
+    "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians",
+    "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+    "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+    "thm-implicit-midpoint-branch-symplectic-order-and-error",
+    "lem-finite-modified-hamiltonian-exists",
+    "lem-truncated-modified-flow-matches-map",
+    "lem-finite-modified-hamiltonian-close-to-original",
+    "lem-one-step-modified-energy-defect",
+    "thm-finite-order-modified-energy-bound",
+    "ex-backward-euler-is-a-stable-but-not-symplectic",
+    "ex-stoermer-verlet-bounded-harmonic-oscillator-energy",
+    "ex-symplectic-euler-harmonic-oscillator"
+  ],
+  "reviewed_pages": [
+    "geometric-numerical-integration",
+    "geometric-numerical-integration-examples"
+  ],
+  "decision": "repair",
+  "reason": "Reviewed the complete assigned pages and items, current supplier proofs, controlling NA-22 contract, and relevant full-text arguments in [Hairer's Lecture 2](https://www.unige.ch/~hairer/poly_geoint/week2.pdf) and [Lecture 3](https://www.unige.ch/~hairer/poly_geoint/week3.pdf). First review requests one local repair pass; no unresolved outside-batch mathematical premise was found.",
+  "findings": [
+    {
+      "id": "alg-implicit-midpoint-hamiltonian-step",
+      "type": "prerequisite",
+      "reason": "The Definition admits H∈C², but its Hamiltonian supplier defines X_H only for smooth H and does not define the canonical J. State z=(q,p), J=[[0,I],[-I,0]], and the finite-regularity coordinate field locally so the procedure does not rely on the smooth-manifold definition outside its hypotheses."
+    },
+    {
+      "id": "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+      "type": "prerequisite",
+      "reason": "With V∈C³, the stated H is only C³, while F1 invokes def-hamiltonian-vector-field-and-hamiltonian-function, whose actual Definition requires H∈C∞. Derive the displayed coordinate field directly from the theorem's F instead of importing that smooth-definition premise."
+    },
+    {
+      "id": "thm-implicit-midpoint-branch-symplectic-order-and-error",
+      "type": "prerequisite",
+      "reason": "With H∈C³, F5 invokes a supplier restricted to smooth H. Derive DF=J∇²H from the locally specified coordinate field and use Hessian symmetry under the stated regularity."
+    },
+    {
+      "id": "thm-implicit-midpoint-branch-symplectic-order-and-error",
+      "type": "local",
+      "reason": "The algorithm admits signed h, but the theorem claims a norm bound C h³ and uses nh≤T. For h<0 the defect bound has a negative right side, and the horizon condition does not bound backward time. Use C|h|³ and n|h|≤T, with 1+L₁|h| in the recurrence, to preserve the signed-step scope."
+    },
+    {
+      "id": "thm-implicit-midpoint-branch-symplectic-order-and-error",
+      "type": "local",
+      "reason": "Step 1.2 applies the implicit function theorem to get a local root curve but does not identify it with the contraction-selected root in the closed ball. The allowed equality |h|M/2=ρ can put that root on the boundary. Add a parameter-continuity and uniqueness argument under the uniform contraction conditions before using the selected branch derivative."
+    },
+    {
+      "id": "geometric-numerical-integration",
+      "type": "local",
+      "reason": "The summary says the original Hamiltonian is not an exact invariant, categorically. For V=0, all three listed methods leave p unchanged and preserve H=pᵀM⁻¹p/2 exactly. Change this to say the original Hamiltonian need not be exactly preserved."
+    },
+    {
+      "id": "ex-symplectic-euler-harmonic-oscillator",
+      "type": "local",
+      "reason": "The verification proves symplecticity but does not establish the separate claim that the original energy need not be conserved. For h>0, the initial state (q,p)=(0,1) maps to (h,1), changing H by h²/2; add this witness."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-implicit-midpoint-hamiltonian-step",
+      "decision": "repair",
+      "reason": "The signed-step correction preserves the branch scope, but this Definition also needs the finite-regularity canonical-coordinate convention noted above."
+    },
+    {
+      "id": "thm-implicit-midpoint-branch-symplectic-order-and-error",
+      "decision": "repair",
+      "reason": "It consumes the midpoint algorithm and has the finite-regularity, signed-step, and selected-branch proof findings above."
+    },
+    {
+      "id": "lem-finite-modified-hamiltonian-exists",
+      "decision": "accept",
+      "reason": "Its r=2 and symplectic-branch uses are under V∈C∞; the absolute-step correction preserves the Taylor-order conclusion it consumes."
+    },
+    {
+      "id": "lem-truncated-modified-flow-matches-map",
+      "decision": "accept",
+      "reason": "Its fixed-order remainder uses the finite modified-Hamiltonian construction; the proposed correction preserves its coefficients and order."
+    },
+    {
+      "id": "lem-finite-modified-hamiltonian-close-to-original",
+      "decision": "accept",
+      "reason": "Its finite coefficient-sum estimate is unaffected."
+    },
+    {
+      "id": "lem-one-step-modified-energy-defect",
+      "decision": "accept",
+      "reason": "It uses positive h and the unchanged fixed-order modified-flow remainder."
+    },
+    {
+      "id": "thm-finite-order-modified-energy-bound",
+      "decision": "accept",
+      "reason": "Its positive-step finite-time estimate remains supported by the corrected midpoint order statement and unchanged modified-energy chain."
+    },
+    {
+      "id": "geometric-numerical-integration",
+      "decision": "repair",
+      "reason": "The corrected midpoint statement supports its error claim; the page summary also needs the separate non-invariance wording repair."
+    },
+    {
+      "id": "geometric-numerical-integration-examples",
+      "decision": "repair",
+      "reason": "Its A-page requirement introduces no midpoint use, but the assigned symplectic-Euler example needs the energy-change witness above."
+    }
+  ]
+}

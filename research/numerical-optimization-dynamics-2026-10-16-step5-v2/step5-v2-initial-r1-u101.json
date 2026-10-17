@@ -1,0 +1,500 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "101",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-pde-box-control-set",
+      "model": "gpt-6-luna",
+      "context_sha256": "50c467b29482be9251a43b60737fe5e1087b2315b49f32459c139529e6c17ab5",
+      "outcome": "false_positive",
+      "reason": "False positive: definitions need not prove their descriptive titles locally. The actual box is nonempty and convex; lem-pde-box-control-set-basic-properties proves norm closure by the inequalities (q_a-q)^+ <= |q_n-q| and (q-q_b)^+ <= |q_n-q|, whose L2 norms tend to zero. The page uses that proved result, so no unproved closedness premise is introduced.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-linear-elliptic-pde-constrained-control-problem",
+      "model": "gpt-6-luna",
+      "context_sha256": "e05715fdfc6d0b09ae4d56b81cf4e3508c801f98009072a84b7df88e8ee14a68",
+      "outcome": "false_positive",
+      "reason": "False positive: 'let Q_ad be the pointwise box of def-pde-box-control-set' fixes an arbitrary box as part of the input data. That linked definition requires ordered L2 bounds; thus Q_ad means Q_ad(q_a,q_b) for such fixed bounds, even though their names are suppressed here. State well-posedness does not depend on the box, and all minimization consumers retain exactly these box hypotheses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-fem-control-active-set-box-quadratic-solve-sound-finite",
+      "model": "gpt-6-luna",
+      "context_sha256": "0c5bbc5c6273e0be1865ef43a0111b6102f81941d3a399fb1e3cec2d8b124f23",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal citation/derivation omission: F1's 'precisely' omitted strict free-coordinate feasibility. The scalar witness H=1,c=0,[0,1] is rejected in free status but retained in lower status, so it does not refute the theorem. F1 now states the exact rule; step 2.1 assigns only strictly interior minimizer coordinates free status, proves the principal block invertible, and shows its unique solve recovers those coordinates. Coincident bounds use a sign-compatible active status; quadratic expansion proves uniqueness.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-linear-elliptic-control-existence-and-variational-inequality",
+      "model": "gpt-6-luna",
+      "context_sha256": "60d04b41bcb33c16af4802bc4aa9bd7d435ac3be884fd81e6f784762083d444b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal indexing defect: 1/n is undefined at the library's natural index zero. Both the Countable Choice family and step 1.1 now use 1/(n+1), with nonemptiness justified by the infimum and a uniform tolerance at most one. The positive-indexed tail matches the weak-subsequence supplier. Weak norm lower semicontinuity, the affine state map, strict convexity, and both directions of the variational inequality remain valid; the Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-fem-control-proximal-gradient-certified-residual",
+      "model": "gpt-6-luna",
+      "context_sha256": "b40ab1d96521fca03db86f45a5cbce996409fc6984ad8d7f5aa78bc2e8ad9ad6",
+      "outcome": "false_positive",
+      "reason": "False positive: thm-fem-control-proximal-gradient-residual-distance-bound is the existing separate proved correctness result. Its steps 1.1 and 2.1 use the complete Strang gradient bound and nonexpansive clipped-cell projection to prove the exact residual bound and finite termination. The two finite-return routines explicitly return valid exact outputs or failure; no exact-computation ability is inferred from boundedness of B. The compressed Hessian argument also correctly uses the restricted L_h bound. No algorithm edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-distributed-heat-source-control-with-an-exact-box-optimum",
+      "model": "gpt-6-luna",
+      "context_sha256": "f961621a84ba72aaa8233e5d4f2bcc53593597b88ab225cf6ff29dfb227ab38b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal dependency overstatement: the clipped-adjoint corollary gives necessity for an existing optimum, not the sufficiency claimed by F2. The existing existence/VI theorem supplies sufficiency directly: B*p_*=p_* and p_*+q_*=0, so the VI is zero for every feasible comparison. Replaced the citation and dependency accordingly. Also made the necessary fixed load f=0 and E=Omega explicit; the weak state/adjoint identities, coercivity, bounded load operator, and 0<=q_*<=1/2 are verified. No new supplier is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+      "model": "gpt-6-luna",
+      "context_sha256": "5ab131b474d3ed2ef7c59bcfe23482365c0a4863c2cec8f85fce7d96d4a2de86",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal interface/citation imprecision: the exact-Newton Definition requires nonsingularity, whereas QR needs independent active rows and positive Lagrangian curvature on their null space. These checks were named but not specified there. Step 1 now explicitly verifies both conditions, cites the QR Definition that actually requires them, and fails when either cannot be verified. The successful status is explicitly a linearized KKT residual; nonlinear equalities remain allowed and need a separate next-point check. No local convergence or global feasibility claim is added.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-variational-fem-control-o-h2-error",
+      "model": "gpt-6-luna",
+      "context_sha256": "4303219f29e0c3d3b2cf9ed479c9510b8911672d88cfd52b851bb188345e209b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal title omission: the valid conditional Statement assumes full uniform O(h^2) state/adjoint L2 estimates, including all defects, in addition to H2 regularity and dual approximation. The title now includes that indispensable condition. Adjoint consistency gives g_h-g=p_h-p; continuous and discrete VIs and alpha-strong monotonicity yield alpha||e||^2<=C h^2||e||, with e=0 handled before division. No rate is inferred merely from an energy estimate. Statement, proof, and page remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-fem-control-active-set-sqp-finite-budget-certificate",
+      "model": "gpt-6-luna",
+      "context_sha256": "072b7f27a989b6858fe2e6bb9d5db1d775565d61a27f28c52da4e756719defc5",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed fatal logic defect in the original next-point claim: affine box constraints do not make F_A affine when nonlinear equalities are allowed. For phi(x)=x^2/2, h(x)=x^2-1, inactive box [-3,3], z=(2,0), K=[[1,4],[4,0]], the step s=(-3/4,-5/16) has zero linear residual, but F_A(z+s)=(15/32,9/16). The repaired affine branch explicitly requires all equalities and active inequalities affine and derives the block identity directly. The universal intended-linear-system certificate and the separate conditional exact-Newton convergence conclusion are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-pde-box-control-set",
+      "disposition": "unaffected",
+      "post_sha256": "6b37b5f0ee5f29687c75d2a8910da201ffaa4abcb02738fb006eeb755cccde13",
+      "review_context_sha256": "d105070e270f24642bfdfd9d8097ab75f57015eb989f1ebaf117898c89691ba2",
+      "reason": "False positive: definitions need not prove their descriptive titles locally. The actual box is nonempty and convex; lem-pde-box-control-set-basic-properties proves norm closure by the inequalities (q_a-q)^+ <= |q_n-q| and (q-q_b)^+ <= |q_n-q|, whose L2 norms tend to zero. The page uses that proved result, so no unproved closedness premise is introduced.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-linear-elliptic-pde-constrained-control-problem",
+      "disposition": "unaffected",
+      "post_sha256": "6003f77b61ebc5757ac6a2386cd86bbf55afa28a7e4d0eb5dff8436962be6d7c",
+      "review_context_sha256": "37aa9429e596af454b0a761ac886674c51a2bb569ec6db57bf91058f8c9f8760",
+      "reason": "False positive: 'let Q_ad be the pointwise box of def-pde-box-control-set' fixes an arbitrary box as part of the input data. That linked definition requires ordered L2 bounds; thus Q_ad means Q_ad(q_a,q_b) for such fixed bounds, even though their names are suppressed here. State well-posedness does not depend on the box, and all minimization consumers retain exactly these box hypotheses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-fem-control-active-set-box-quadratic-solve-sound-finite",
+      "disposition": "repaired",
+      "post_sha256": "90518043e22f7decdf7915758aaaec34182142861a68ff98afaea88c7ef75fdc",
+      "review_context_sha256": "ac39d4d0d2f79708c0e8cae9f6aa64bf7d13ee707dd4520cbf1e3a3052ca8d4b",
+      "reason": "Confirmed nonfatal citation/derivation omission: F1's 'precisely' omitted strict free-coordinate feasibility. The scalar witness H=1,c=0,[0,1] is rejected in free status but retained in lower status, so it does not refute the theorem. F1 now states the exact rule; step 2.1 assigns only strictly interior minimizer coordinates free status, proves the principal block invertible, and shows its unique solve recovers those coordinates. Coincident bounds use a sign-compatible active status; quadratic expansion proves uniqueness.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-linear-elliptic-control-existence-and-variational-inequality",
+      "disposition": "repaired",
+      "post_sha256": "1417663323eed26f8511a317fd377695483e7f7386f448aa25678dee4eaddbec",
+      "review_context_sha256": "4c6e2756fa1bdf23f991974a5d6d889041ea95d5bd5566a65290139b5dfb78be",
+      "reason": "Confirmed nonfatal indexing defect: 1/n is undefined at the library's natural index zero. Both the Countable Choice family and step 1.1 now use 1/(n+1), with nonemptiness justified by the infimum and a uniform tolerance at most one. The positive-indexed tail matches the weak-subsequence supplier. Weak norm lower semicontinuity, the affine state map, strict convexity, and both directions of the variational inequality remain valid; the Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-fem-control-proximal-gradient-certified-residual",
+      "disposition": "unaffected",
+      "post_sha256": "0fd2c213e5d795cd00334244cd3179e5e1c20c36b136f0561c76104e95d8926f",
+      "review_context_sha256": "ee99593c7a30b2b404beb75710795d973e8a9f6dd950355aa4c451b657abe3cc",
+      "reason": "False positive: thm-fem-control-proximal-gradient-residual-distance-bound is the existing separate proved correctness result. Its steps 1.1 and 2.1 use the complete Strang gradient bound and nonexpansive clipped-cell projection to prove the exact residual bound and finite termination. The two finite-return routines explicitly return valid exact outputs or failure; no exact-computation ability is inferred from boundedness of B. The compressed Hessian argument also correctly uses the restricted L_h bound. No algorithm edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-distributed-heat-source-control-with-an-exact-box-optimum",
+      "disposition": "repaired",
+      "post_sha256": "15ee689d7f159d05b9af71e4d7c224a60c5c3dbb8648e028725dca60ab25495f",
+      "review_context_sha256": "bf6ae45d9ea965fe4b9dafdc8a87fa9b6859cbc66599ed46170b446a32c7d6ad",
+      "reason": "Confirmed nonfatal dependency overstatement: the clipped-adjoint corollary gives necessity for an existing optimum, not the sufficiency claimed by F2. The existing existence/VI theorem supplies sufficiency directly: B*p_*=p_* and p_*+q_*=0, so the VI is zero for every feasible comparison. Replaced the citation and dependency accordingly. Also made the necessary fixed load f=0 and E=Omega explicit; the weak state/adjoint identities, coercivity, bounded load operator, and 0<=q_*<=1/2 are verified. No new supplier is needed. Rechecked the same zero-gradient argument after synchronizing dependency_level from 6 to 5; this final metadata edit changes neither Statement nor proof.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+      "disposition": "repaired",
+      "post_sha256": "c7297c897617139d36fa310bd5c9114fd6baeae9e71da3319299d76f8e33e69c",
+      "review_context_sha256": "65d8fdf283901dde6b726429c34ea512ac7f1697ad9e717f9aabcb970d688446",
+      "reason": "Confirmed nonfatal interface/citation imprecision: the exact-Newton Definition requires nonsingularity, whereas QR needs independent active rows and positive Lagrangian curvature on their null space. These checks were named but not specified there. Step 1 now explicitly verifies both conditions, cites the QR Definition that actually requires them, and fails when either cannot be verified. The successful status is explicitly a linearized KKT residual; nonlinear equalities remain allowed and need a separate next-point check. No local convergence or global feasibility claim is added.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-variational-fem-control-o-h2-error",
+      "disposition": "repaired",
+      "post_sha256": "7c7d864cba7d8968c9494afd595a65f71481ae6bdd50fdf5afdbbe136217515a",
+      "review_context_sha256": "3e846a133e49a7bca861a6da4b398893acd5fc4b53ad583f899b3327c06a9f8d",
+      "reason": "Confirmed nonfatal title omission: the valid conditional Statement assumes full uniform O(h^2) state/adjoint L2 estimates, including all defects, in addition to H2 regularity and dual approximation. The title now includes that indispensable condition. Adjoint consistency gives g_h-g=p_h-p; continuous and discrete VIs and alpha-strong monotonicity yield alpha||e||^2<=C h^2||e||, with e=0 handled before division. No rate is inferred merely from an energy estimate. Statement, proof, and page remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-fem-control-active-set-sqp-finite-budget-certificate",
+      "disposition": "repaired",
+      "post_sha256": "7fe7b52a36f27e7073875d77c43170ff7380c44fdd09a91270c22081715d1e6e",
+      "review_context_sha256": "af876e6e01bd8a19a5e7acc72ec91e2ab056f26cf2187a1ff919f8d1b81e1123",
+      "reason": "Confirmed fatal logic defect in the original next-point claim: affine box constraints do not make F_A affine when nonlinear equalities are allowed. For phi(x)=x^2/2, h(x)=x^2-1, inactive box [-3,3], z=(2,0), K=[[1,4],[4,0]], the step s=(-3/4,-5/16) has zero linear residual, but F_A(z+s)=(15/32,9/16). The repaired affine branch explicitly requires all equalities and active inequalities affine and derives the block identity directly. The universal intended-linear-system certificate and the separate conditional exact-Newton convergence conclusion are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-fem-control-active-set-sqp-finite-budget-certificate"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-fem-control-active-set-box-quadratic-solve-sound-finite",
+      "action": "record-fixed-finding",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "finding": "Confirmed nonfatal citation/derivation omission: F1's 'precisely' omitted strict free-coordinate feasibility. The scalar witness H=1,c=0,[0,1] is rejected in free status but retained in lower status, so it does not refute the theorem. F1 now states the exact rule; step 2.1 assigns only strictly interior minimizer coordinates free status, proves the principal block invertible, and shows its unique solve recovers those coordinates. Coincident bounds use a sign-compatible active status; quadratic expansion proves uniqueness.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-linear-elliptic-control-existence-and-variational-inequality",
+      "action": "record-fixed-finding",
+      "severity": "nonfatal",
+      "locus": "proof-step",
+      "finding": "Confirmed nonfatal indexing defect: 1/n is undefined at the library's natural index zero. Both the Countable Choice family and step 1.1 now use 1/(n+1), with nonemptiness justified by the infimum and a uniform tolerance at most one. The positive-indexed tail matches the weak-subsequence supplier. Weak norm lower semicontinuity, the affine state map, strict convexity, and both directions of the variational inequality remain valid; the Statement is unchanged.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-distributed-heat-source-control-with-an-exact-box-optimum",
+      "action": "record-fixed-finding",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "finding": "Confirmed nonfatal dependency overstatement: the clipped-adjoint corollary gives necessity for an existing optimum, not the sufficiency claimed by F2. The existing existence/VI theorem supplies sufficiency directly: B*p_*=p_* and p_*+q_*=0, so the VI is zero for every feasible comparison. Replaced the citation and dependency accordingly. Also made the necessary fixed load f=0 and E=Omega explicit; the weak state/adjoint identities, coercivity, bounded load operator, and 0<=q_*<=1/2 are verified. No new supplier is needed.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+      "action": "record-fixed-finding",
+      "severity": "nonfatal",
+      "locus": "definition",
+      "finding": "Confirmed nonfatal interface/citation imprecision: the exact-Newton Definition requires nonsingularity, whereas QR needs independent active rows and positive Lagrangian curvature on their null space. These checks were named but not specified there. Step 1 now explicitly verifies both conditions, cites the QR Definition that actually requires them, and fails when either cannot be verified. The successful status is explicitly a linearized KKT residual; nonlinear equalities remain allowed and need a separate next-point check. No local convergence or global feasibility claim is added.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-variational-fem-control-o-h2-error",
+      "action": "record-fixed-finding",
+      "severity": "nonfatal",
+      "locus": "frontmatter",
+      "finding": "Confirmed nonfatal title omission: the valid conditional Statement assumes full uniform O(h^2) state/adjoint L2 estimates, including all defects, in addition to H2 regularity and dual approximation. The title now includes that indispensable condition. Adjoint consistency gives g_h-g=p_h-p; continuous and discrete VIs and alpha-strong monotonicity yield alpha||e||^2<=C h^2||e||, with e=0 handled before division. No rate is inferred merely from an energy estimate. Statement, proof, and page remain unchanged.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-fem-control-active-set-sqp-finite-budget-certificate",
+      "action": "record-fixed-finding",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "finding": "Confirmed fatal logic defect in the original next-point claim: affine box constraints do not make F_A affine when nonlinear equalities are allowed. For phi(x)=x^2/2, h(x)=x^2-1, inactive box [-3,3], z=(2,0), K=[[1,4],[4,0]], the step s=(-3/4,-5/16) has zero linear residual, but F_A(z+s)=(15/32,9/16). The repaired affine branch explicitly requires all equalities and active inequalities affine and derives the block identity directly. The universal intended-linear-system certificate and the separate conditional exact-Newton convergence conclusion are preserved.",
+      "status": "fixed"
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "def-pde-box-control-set",
+      "def-linear-elliptic-pde-constrained-control-problem",
+      "thm-fem-control-active-set-box-quadratic-solve-sound-finite",
+      "thm-linear-elliptic-control-existence-and-variational-inequality",
+      "alg-fem-control-proximal-gradient-certified-residual",
+      "ex-distributed-heat-source-control-with-an-exact-box-optimum",
+      "alg-fem-control-active-set-sqp-with-finite-residual-status",
+      "thm-variational-fem-control-o-h2-error",
+      "thm-fem-control-active-set-sqp-finite-budget-certificate"
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-fem-control-active-set-box-quadratic-solve-sound-finite.md items/thm-linear-elliptic-control-existence-and-variational-inequality.md items/ex-distributed-heat-source-control-with-an-exact-box-optimum.md items/alg-fem-control-active-set-sqp-with-finite-residual-status.md items/thm-variational-fem-control-o-h2-error.md items/thm-fem-control-active-set-sqp-finite-budget-certificate.md --json",
+        "exit_code": 0,
+        "result": "6 files: 5 proof sections passed; algorithm not applicable; zero failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-fem-control-active-set-box-quadratic-solve-sound-finite.md items/thm-linear-elliptic-control-existence-and-variational-inequality.md items/ex-distributed-heat-source-control-with-an-exact-box-optimum.md items/alg-fem-control-active-set-sqp-with-finite-residual-status.md items/thm-variational-fem-control-o-h2-error.md items/thm-fem-control-active-set-sqp-finite-budget-certificate.md --json",
+        "exit_code": 0,
+        "result": "6 files checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-101.proof-contracts.json --strict --items thm-fem-control-active-set-box-quadratic-solve-sound-finite,thm-linear-elliptic-control-existence-and-variational-inequality,ex-distributed-heat-source-control-with-an-exact-box-optimum,thm-fem-control-active-set-sqp-finite-budget-certificate --json",
+        "exit_code": 0,
+        "result": "4 selected contracts passed with zero errors or warnings after exact derivation and citation repairs."
+      },
+      {
+        "command": "node tools/finite-smoke.mjs research/numerical-optimization-dynamics-2026-10-16-batch-101.proof-contracts.json --items ex-distributed-heat-source-control-with-an-exact-box-optimum --json",
+        "exit_code": 0,
+        "result": "The registered heat three-node state/adjoint/projection fixture passed; it does not prove continuum optimality."
+      },
+      {
+        "command": "node tools/depcheck.mjs --items def-pde-box-control-set,def-linear-elliptic-pde-constrained-control-problem,thm-fem-control-active-set-box-quadratic-solve-sound-finite,thm-linear-elliptic-control-existence-and-variational-inequality,alg-fem-control-proximal-gradient-certified-residual,ex-distributed-heat-source-control-with-an-exact-box-optimum,alg-fem-control-active-set-sqp-with-finite-residual-status,thm-variational-fem-control-o-h2-error,thm-fem-control-active-set-sqp-finite-budget-certificate --json",
+        "exit_code": 1,
+        "result": "Invalid selector: the tool ignored unsupported --items and ran full-library scope, reporting 6776 unrelated errors. This invocation supplies no scoped acceptance; corrected below. No outside files were edited."
+      },
+      {
+        "command": "node tools/depcheck.mjs --items-file /dev/stdin --json (stdin: exact nine assigned IDs)",
+        "exit_code": 0,
+        "result": "focused-items scope: all 9 assigned item checks and both owning pages passed, with 1520 prerequisite item-cycle checks and 325 prerequisite page-cycle checks; zero errors or warnings."
+      },
+      {
+        "command": "node tools/manifest-deps.mjs research/numerical-optimization-dynamics-2026-10-16-batch-101.pages.json",
+        "exit_code": 0,
+        "result": "26 owned items, explicit dependency arrays, zero errors."
+      },
+      {
+        "command": "node --input-type=module: import dependencyLevels/runPages; filter diagnostics to the 26 batch-101 IDs and compare each carrier label",
+        "exit_code": 0,
+        "result": "26 selected items; source/manifest levels match actual in-run dependencies; example recomputes to 5; zero owned errors."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-101.proof-contracts.json --strict --items thm-fem-control-active-set-box-quadratic-solve-sound-finite,thm-linear-elliptic-control-existence-and-variational-inequality,ex-distributed-heat-source-control-with-an-exact-box-optimum,thm-variational-fem-control-o-h2-error,thm-fem-control-active-set-sqp-finite-budget-certificate --json",
+        "exit_code": 0,
+        "result": "All 5 assigned proof-bearing contracts passed, zero errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-fem-control-active-set-box-quadratic-solve-sound-finite.md items/thm-linear-elliptic-control-existence-and-variational-inequality.md items/ex-distributed-heat-source-control-with-an-exact-box-optimum.md items/alg-fem-control-active-set-sqp-with-finite-residual-status.md items/thm-variational-fem-control-o-h2-error.md items/thm-fem-control-active-set-sqp-finite-budget-certificate.md",
+        "exit_code": 0,
+        "result": "6 items, 15 steps, zero defects. Ran once after the final item edit; no item edits followed."
+      },
+      {
+        "command": "Read-only Node consistency check using itemHashGuard and SHA256(JSON.stringify(frozen pack))",
+        "exit_code": 0,
+        "result": "Exact requested input hash; all 9 current guards match report; no omitted or duplicate tuples; repaired/unaffected dispositions agree with assignment before hashes; all 9 are assigned draft frontier items."
+      }
+    ],
+    "next_action": "Controller collection, independent current judgments for changed items, and the required subsequent adjudication round; this unit does not certify or close the run.",
+    "interface_events": [
+      {
+        "supplier": "ex-distributed-heat-source-control-with-an-exact-box-optimum",
+        "section": "Statement",
+        "change": "Explicitly fix E=Omega and f=0, as required by the displayed exact state.",
+        "direct_item_consumers": [],
+        "page_uses": [
+          {
+            "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/finite-element-pde-constrained-optimization-examples.md",
+            "affected_use": "The examples list embeds this item; page prose describes a smooth heat source, state, adjoint and exact nonzero optimum.",
+            "disposition": "unaffected",
+            "reason": "The explicit zero fixed load matches the existing trigonometric construction and does not change the page's described optimum.",
+            "source_excerpt": "The distributed example constructs a smooth box-feasible heat source, state, and adjoint with an exact nonzero optimum."
+          }
+        ]
+      },
+      {
+        "supplier": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+        "section": "Definition",
+        "change": "State QR's rank/curvature prerequisites explicitly and identify certified residual as linearized KKT residual.",
+        "direct_item_consumers": [
+          "thm-fem-control-active-set-sqp-finite-budget-certificate"
+        ],
+        "page_uses": [
+          {
+            "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/finite-element-pde-constrained-optimization.md",
+            "affected_use": "The SQP paragraph says the wrapper reports only a certified active linear-system residual, with feasibility and conditioning separately checked.",
+            "disposition": "unaffected",
+            "reason": "The repaired Definition states exactly the linear-system residual already described on the page.",
+            "source_excerpt": "The SQP branch returns the QR-computed step and reports only a certified active linear-system residual unless feasibility, complementarity, conditioning, and the required local hypotheses are separately verified."
+          }
+        ]
+      },
+      {
+        "supplier": "thm-fem-control-active-set-sqp-finite-budget-certificate",
+        "section": "Statement",
+        "change": "Require every equality and active inequality affine in the quadratic next-point residual branch; retain general linear-system and exact-local conclusions.",
+        "direct_item_consumers": [],
+        "page_uses": [
+          {
+            "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/finite-element-pde-constrained-optimization.md",
+            "affected_use": "The items list embeds the theorem; the page states only an active linear-system certificate, with local hypotheses and feasibility separate.",
+            "disposition": "unaffected",
+            "reason": "The page makes no universal next-point nonlinear KKT claim and remains correct under the repaired affine-constraint condition.",
+            "source_excerpt": "The SQP branch returns the QR-computed step and reports only a certified active linear-system residual unless feasibility, complementarity, conditioning, and the required local hypotheses are separately verified."
+          }
+        ]
+      }
+    ],
+    "consumer_uses": [
+      {
+        "supplier": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+        "id": "thm-fem-control-active-set-sqp-finite-budget-certificate",
+        "path": "items/thm-fem-control-active-set-sqp-finite-budget-certificate.md",
+        "affected_use": "Statement and F1 use the returned QR step and eta<=tau; proof 1.1 applies the intended-system QR residual certificate.",
+        "disposition": "repaired_in_this_assignment",
+        "invalidated_claim": "Its additional next-point KKT claim must require affine equalities as well as affine active inequalities.",
+        "minimality": "Keep the universal linear-system bound and the exact local convergence branch; explicitly delimit when the KKT map is affine.",
+        "source_excerpt": "[F1] The finite algorithm returns the finite-precision QR vector as its step and reports `active-kkt-residual-certified` only after checking $\\eta\\le\\tau$; it does not label box feasibility or global optimality ([[alg-fem-control-active-set-sqp-with-finite-residual-status]])."
+      }
+    ],
+    "exact_counterexample": {
+      "objective": "phi(x)=x^2/2",
+      "equality": "h(x)=x^2-1",
+      "inactive_box": "[-3,3]",
+      "z": [
+        "2",
+        "0"
+      ],
+      "K": [
+        [
+          "1",
+          "4"
+        ],
+        [
+          "4",
+          "0"
+        ]
+      ],
+      "F": [
+        "2",
+        "3"
+      ],
+      "step": [
+        "-3/4",
+        "-5/16"
+      ],
+      "linear_residual": [
+        "0",
+        "0"
+      ],
+      "next_KKT_residual": [
+        "15/32",
+        "9/16"
+      ],
+      "validation": "Computed exactly with Python fractions.Fraction; independent of floating-point tolerance."
+    },
+    "published_consumer_ledger": {
+      "proposed_updates": [],
+      "reason": "Exact searches of current items and library pages found no published direct consumer of any changed Statement/Definition. Owning pages remain sound; no outside item repair is proposed."
+    },
+    "contract_repairs": {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-101.proof-contracts.json",
+      "items": [
+        "thm-fem-control-active-set-box-quadratic-solve-sound-finite",
+        "thm-linear-elliptic-control-existence-and-variational-inequality",
+        "ex-distributed-heat-source-control-with-an-exact-box-optimum",
+        "thm-fem-control-active-set-sqp-finite-budget-certificate"
+      ],
+      "changes": "Updated only these assigned proof derivations, example F2 citation and finite-smoke excerpt, and SQP theorem F1 quote/use and F3 use. Preserved prior risk-review evidence and all unrelated contracts.",
+      "lock": "Acquired, reread exact current metadata, edited, ran strict selected contracts successfully, and released."
+    },
+    "outstanding_obligations": [],
+    "manifest_repairs": {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-101.pages.json",
+      "changes": "Only the assigned example's actual deps and dependency_level=5 and the assigned rate theorem's corrected title were synchronized. Its carrier level is also 5. All 26 owning batch rows have matching computed levels.",
+      "lock": "Acquired, reread current manifest, changed only assigned rows, checked explicit manifest dependencies and all 26 owned carrier/manifest levels, released."
+    },
+    "repair_complete": true,
+    "independence": "This is adjudication of the original rejection evidence and author-side verification of the resulting repairs. No independent review of these repairs, judge execution, stamp, certificate, or round-state transition is claimed.",
+    "sources": "Familiar elementary Hilbert/convex-quadratic and Newton/KKT arguments were checked directly against the local suppliers and proofs cited in the reasons and assigned contracts. No external paper was consulted or represented as read.",
+    "statement_comparison": [
+      {
+        "id": "def-pde-box-control-set",
+        "section": "Definition",
+        "changed": false
+      },
+      {
+        "id": "def-linear-elliptic-pde-constrained-control-problem",
+        "section": "Definition",
+        "changed": false
+      },
+      {
+        "id": "thm-fem-control-active-set-box-quadratic-solve-sound-finite",
+        "section": "Statement",
+        "changed": false
+      },
+      {
+        "id": "thm-linear-elliptic-control-existence-and-variational-inequality",
+        "section": "Statement",
+        "changed": false
+      },
+      {
+        "id": "alg-fem-control-proximal-gradient-certified-residual",
+        "section": "Definition",
+        "changed": false
+      },
+      {
+        "id": "ex-distributed-heat-source-control-with-an-exact-box-optimum",
+        "section": "Statement",
+        "changed": true,
+        "before": "Let $\\Omega=(0,1)$; set $q_a=0$, $q_b=1$, and $\\alpha=1$ (fixed load omitted).",
+        "after": "Let $E=\\Omega=(0,1)$; set $f=0$, $q_a=0$, $q_b=1$, and $\\alpha=1$."
+      },
+      {
+        "id": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+        "section": "Definition",
+        "changed": true,
+        "before": "the active-row rank and reduced-curvature applicability conditions of [[alg-sqp-exact-hessian-newton-step]]",
+        "after": "Verify that $G_j$ has full row rank and $d^TH_jd>0$ for every nonzero $d\\in\\ker G_j$, as required by [[alg-sqp-finite-precision-kkt-qr-solve-and-residual-check]]."
+      },
+      {
+        "id": "thm-variational-fem-control-o-h2-error",
+        "section": "Statement",
+        "changed": false
+      },
+      {
+        "id": "thm-fem-control-active-set-sqp-finite-budget-certificate",
+        "section": "Statement",
+        "changed": true,
+        "before": "For a quadratic FE reduced objective and affine box constraints, this also bounds the exact active KKT residual of the returned next point.",
+        "after": "For a quadratic FE reduced objective with affine equality constraints and affine active inequalities, in particular a program constrained only by a box, this also bounds the exact active KKT residual of the returned next point."
+      }
+    ]
+  }
+}

@@ -1,0 +1,527 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+    "supplier": "alg-rounded-cholesky-with-failure-status",
+    "consumer_batch": "71",
+    "supplier_batch": "1",
+    "status": "verified",
+    "evidence": "The direction algorithm supplies stored real symmetric SPD B (a real instance of the Hermitian source) and calls the actual rounded Cholesky routine. A failed pivot/range returns factorization-failure; successful positive-normal diagonal factors feed two real rounded triangular loops with their own failure indices. It expressly gives no direction backward-error bound or guarantee rounded Cholesky succeeds.",
+    "inspected_paths": [
+      "items/alg-rounded-cholesky-with-failure-status.md#Definition",
+      "items/alg-bfgs-hessian-direction-with-rounded-cholesky.md#Definition"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Input a Hermitian positive-definite matrix $A\\in\\mathbb C^{n\\times n}$, $n\\ge1$, whose real and imaginary components are in the floating-point system, using the convention of [[def-cholesky-factorisation-with-positive-diagonal]]; real matrices are included. Initialize every entry of $\\widehat L$ to zero. Process columns $j=1,\\ldots,n$ in increasing order. For the diagonal, initialize $s=0$ and, for $k=1,\\ldots,j-1$ in increasing order, compute\n$$r_k=\\operatorname{fl}(\\Re(\\widehat l_{jk})^2),\\quad t_k=\\operatorname{fl}(\\Im(\\widehat l_{jk})^2),\\quad q_k=\\operatorname{fl}(r_k+t_k),\\quad s=\\operatorname{fl}(s+q_k),$$\nin that order. Then compute $p_j=\\operatorname{fl}(a_{jj}-s)$. If an operation fails, or if $p_j$ is not positive and normal, return `failure` with pivot $j$ and the first failing operation location. Otherwise compute $\\widehat l_{jj}=\\operatorname{fl}(\\sqrt{p_j})$; if it is not positive and normal, return `failure` at pivot $j$.\n\nFor each $i=j+1,\\ldots,n$ in increasing order, initialize the complex accumulator $c_{ij}=0$. For $k=1,\\ldots,j-1$ in increasing order, compute the complex product $w_{ik}=\\widehat l_{ik}\\overline{\\widehat l_{jk}}$ using exactly the six real operations of the complex-product convention in [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], then update\n$$\\Re(c_{ij})\\gets\\operatorname{fl}(\\Re(c_{ij})+\\Re(w_{ik})),\\qquad \\Im(c_{ij})\\gets\\operatorname{fl}(\\Im(c_{ij})+\\Im(w_{ik})).$$\nAfter this dot product, compute $r_{ij}=a_{ij}-c_{ij}$ by one rounded real subtraction for each component, then compute each component of $\\widehat l_{ij}=r_{ij}/\\widehat l_{jj}$ by one rounded real division. The empty dot product is zero. On any failure return `failure` with pivot $j$ and its first failing operation location (stage, column, row, inner index, component, and operation where applicable), with the diagonal and row loops ordered as stated. If all columns finish, return `success(\\widehat L)`. All loops are finite. By [[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]], exact positive definiteness ensures an exact factor exists, but does not ensure the rounded algorithm succeeds.",
+    "consumer_use_excerpts": [
+      "1. Call [[alg-rounded-cholesky-with-failure-status]] on $B$. If it returns a failure status, return factorization-failure with that pivot and operation index."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[312]",
+      "missing[6].currentDeclaredOwnedEdges[4]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#deps",
+      "items/alg-bfgs-hessian-direction-with-rounded-cholesky.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/24",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Current finite ordered factorization, range/pivot statuses and representable-input domain checked; no guaranteed rounded success is imported."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+    "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "consumer_batch": "71",
+    "supplier_batch": "1",
+    "status": "verified",
+    "evidence": "The direction algorithm supplies stored real symmetric SPD B (a real instance of the Hermitian source) and calls the actual rounded Cholesky routine. A failed pivot/range returns factorization-failure; successful positive-normal diagonal factors feed two real rounded triangular loops with their own failure indices. It expressly gives no direction backward-error bound or guarantee rounded Cholesky succeeds.",
+    "inspected_paths": [
+      "items/def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma.md#Definition",
+      "items/alg-bfgs-hessian-direction-with-rounded-cholesky.md#Definition"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "At each precision, let the representable set, normal range, and unit roundoff be an instance of [[def-standard-relative-floating-point-model-and-unit-roundoff]] specialized to a finite binary format of integer precision $p\\ge2$ and integer normal-exponent bounds $j_{\\min}\\le j\\le j_{\\max}$. Its normal values are $\\pm m2^{j-p+1}$ for integers $2^{p-1}\\le m<2^p$ and $j_{\\min}\\le j\\le j_{\\max}$, with $N_{\\min}=2^{j_{\\min}}$ and $N_{\\max}=(2^p-1)2^{j_{\\max}-p+1}$. The rounding rule is round-to-nearest, ties-to-even by the parity of the normalized significand. Each precision in a mixed-precision procedure has its own format, range, and valid unit-roundoff bound. On every real exact result that is zero or normal, $\\operatorname{fl}$ uses this rule; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range $x$, $\\operatorname{fl}(\\sqrt{x})$ is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression $ab+c$; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+    "consumer_use_excerpts": [
+      "Input a real symmetric positive-definite matrix $B\\in\\mathbb R^{n\\times n}$, $n\\ge1$, a vector $g\\in\\mathbb R^n$, and representable finite entries in the operationwise arithmetic model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. **Output:** either a computed direction $p$ or a failure status."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[311]",
+      "missing[6].currentDeclaredOwnedEdges[3]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#deps",
+      "items/alg-bfgs-hessian-direction-with-rounded-cholesky.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/23",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Current binary nearest-even no-underflow model checked; full-memory caller now checks input representability before every rounded call."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-full-memory-bfgs-with-curvature-safeguards",
+    "supplier": "alg-bracketing-zoom-strong-wolfe-search",
+    "consumer_batch": "71",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "The algorithm passes a verified strict descent direction, constants 0<c1<c2<1/2 and finite E,Z to the actual bracketing/zoom routine. It propagates search failures and accepts only a returned positive strong-Wolfe step before forming a curvature pair; finite budgets are not asserted to succeed.",
+    "inspected_paths": [
+      "items/alg-bracketing-zoom-strong-wolfe-search.md#Definition",
+      "items/alg-full-memory-bfgs-with-curvature-safeguards.md#Definition"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$,\nlet $x\\in D$, and let $p\\in\\mathbb R^n$ be arbitrary. Fix $0<c_1<c_2<1/2$ and finite\nbudgets $E,Z\\in\\mathbb N$ for expansion and zoom trials. After the direction check passes, use the functions\n$\\phi(t)=f(x+tp)$ and $\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$ from\n[[def-wolfe-and-strong-wolfe-conditions]]. **Output:** either a positive\nstrong Wolfe step, or one of `invalid-direction`, `domain-exit`, and\n`evaluation-budget-exhausted`.\n\n1. Evaluate and retain $f(x)$ and $\\nabla f(x)$, and set\n   $\\phi(0):=f(x)$ and $\\phi'(0):=\\langle\\nabla f(x),p\\rangle$.\n   If $\\phi'(0)\\ge0$, return `invalid-direction`.\n   Set $a:=0$ and $t:=1$. For at most $E$ expansion trials, in order:\n   - If $x+tp\\notin D$, return `domain-exit` without evaluating the trial.\n   - Evaluate $\\phi(t)$ and $\\phi'(t)$. If\n     $\\phi(t)>\\phi(0)+c_1t\\phi'(0)$ or $\\phi(t)\\ge\\phi(a)$, call the zoom\n     procedure below with the ordered endpoint pair $(a,t)$ and return its\n     output.\n   - If $|\\phi'(t)|\\le c_2|\\phi'(0)|$, return $t$ as a strong Wolfe step.\n   - If $\\phi'(t)\\ge0$, call zoom with the reversed endpoint pair $(t,a)$ and\n     return its output.\n   - Otherwise set $a:=t$ and $t:=2t$.\n2. If the expansion budget is exhausted, return `evaluation-budget-exhausted`.\n\nFor `zoom(a,b)`, preserve the endpoint order even when $b<a$. For at most\n$Z$ zoom trials, in order:\n\n1. Set $m:=(a+b)/2$. If $x+mp\\notin D$, return `domain-exit` without\n   evaluating the trial.\n2. Evaluate $\\phi(m)$ and $\\phi'(m)$. If\n   $\\phi(m)>\\phi(0)+c_1m\\phi'(0)$ or $\\phi(m)\\ge\\phi(a)$, set $b:=m$.\n   Otherwise, if $|\\phi'(m)|\\le c_2|\\phi'(0)|$, return $m$ as a strong Wolfe\n   step. In the remaining branch, if $\\phi'(m)(b-a)\\ge0$, first set\n   $b:=a$; then set $a:=m$.\n3. If the zoom budget is exhausted, return `evaluation-budget-exhausted`.\n\nThe procedure returns a step only after both strong Wolfe inequalities have\nbeen checked. Finite budgets and domain exits may return failure even when a\nstrong Wolfe step exists; no convergence claim follows from the procedure\nalone.",
+    "consumer_use_excerpts": [
+      "Call [[alg-bracketing-zoom-strong-wolfe-search]] with $(f,x_k,p_k,c_1,c_2,E,Z)$. If it returns a failure status, return that status and $x_k$. Otherwise take its positive strong Wolfe step $\\alpha_k$, and define\n$$ s_k:=\\alpha_kp_k,\\qquad y_k:=\\nabla f(x_k+s_k)-g_k. $$\nIn undamped mode set $\\bar y_k:=y_k$. In Powell mode put $c_k:=s_k^TB_ks_k$ and use the damping rule of [[def-bfgs-curvature-pair-and-update-formulas]] to form $\\bar y_k$. If $s_k^T\\bar y_k\\le0$, skip the matrix update and return curvature-rejected. Otherwise update both matrices by\n$$ B_{k+1}=B_k-\\frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k} +\\frac{\\bar y_k\\bar y_k^T}{s_k^T\\bar y_k}, \\qquad H_{k+1}=(I-\\rho_ks_k\\bar y_k^T)H_k(I-\\rho_k\\bar y_ks_k^T)+\\rho_ks_ks_k^T, \\quad \\rho_k=(s_k^T\\bar y_k)^{-1}. $$\nReturn update-failure if any required scalar or matrix operation is undefined; otherwise continue until stationarity or budget exhaustion. The output is the last point and one of stationary, a line-search status, factorization/solve failure, curvature-rejected, update-failure, or iteration-budget-exhausted."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[314]",
+      "missing[6].currentDeclaredOwnedEdges[6]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#deps",
+      "items/alg-full-memory-bfgs-with-curvature-safeguards.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/26",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Current direction check, domain guard, nonnegative finite budgets, first unit trial, strong-Wolfe checks and propagated statuses support this exact consumer."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-lbfgs-two-loop-with-curvature-filter",
+    "supplier": "alg-bracketing-zoom-strong-wolfe-search",
+    "consumer_batch": "71",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "The algorithm passes a verified strict descent direction, constants 0<c1<c2<1/2 and finite E,Z to the actual bracketing/zoom routine. It propagates search failures and accepts only a returned positive strong-Wolfe step before forming a curvature pair; finite budgets are not asserted to succeed.",
+    "inspected_paths": [
+      "items/alg-bracketing-zoom-strong-wolfe-search.md#Definition",
+      "items/alg-lbfgs-two-loop-with-curvature-filter.md#Definition"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$,\nlet $x\\in D$, and let $p\\in\\mathbb R^n$ be arbitrary. Fix $0<c_1<c_2<1/2$ and finite\nbudgets $E,Z\\in\\mathbb N$ for expansion and zoom trials. After the direction check passes, use the functions\n$\\phi(t)=f(x+tp)$ and $\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$ from\n[[def-wolfe-and-strong-wolfe-conditions]]. **Output:** either a positive\nstrong Wolfe step, or one of `invalid-direction`, `domain-exit`, and\n`evaluation-budget-exhausted`.\n\n1. Evaluate and retain $f(x)$ and $\\nabla f(x)$, and set\n   $\\phi(0):=f(x)$ and $\\phi'(0):=\\langle\\nabla f(x),p\\rangle$.\n   If $\\phi'(0)\\ge0$, return `invalid-direction`.\n   Set $a:=0$ and $t:=1$. For at most $E$ expansion trials, in order:\n   - If $x+tp\\notin D$, return `domain-exit` without evaluating the trial.\n   - Evaluate $\\phi(t)$ and $\\phi'(t)$. If\n     $\\phi(t)>\\phi(0)+c_1t\\phi'(0)$ or $\\phi(t)\\ge\\phi(a)$, call the zoom\n     procedure below with the ordered endpoint pair $(a,t)$ and return its\n     output.\n   - If $|\\phi'(t)|\\le c_2|\\phi'(0)|$, return $t$ as a strong Wolfe step.\n   - If $\\phi'(t)\\ge0$, call zoom with the reversed endpoint pair $(t,a)$ and\n     return its output.\n   - Otherwise set $a:=t$ and $t:=2t$.\n2. If the expansion budget is exhausted, return `evaluation-budget-exhausted`.\n\nFor `zoom(a,b)`, preserve the endpoint order even when $b<a$. For at most\n$Z$ zoom trials, in order:\n\n1. Set $m:=(a+b)/2$. If $x+mp\\notin D$, return `domain-exit` without\n   evaluating the trial.\n2. Evaluate $\\phi(m)$ and $\\phi'(m)$. If\n   $\\phi(m)>\\phi(0)+c_1m\\phi'(0)$ or $\\phi(m)\\ge\\phi(a)$, set $b:=m$.\n   Otherwise, if $|\\phi'(m)|\\le c_2|\\phi'(0)|$, return $m$ as a strong Wolfe\n   step. In the remaining branch, if $\\phi'(m)(b-a)\\ge0$, first set\n   $b:=a$; then set $a:=m$.\n3. If the zoom budget is exhausted, return `evaluation-budget-exhausted`.\n\nThe procedure returns a step only after both strong Wolfe inequalities have\nbeen checked. Finite budgets and domain exits may return failure even when a\nstrong Wolfe step exists; no convergence claim follows from the procedure\nalone.",
+    "consumer_use_excerpts": [
+      "Call [[alg-bracketing-zoom-strong-wolfe-search]] with $(f,x,p,c_1,c_2,E,Z)$. If it returns a failure status, return that status with the current point. If it returns $\\alpha>0$, set $x^+:=x+\\alpha p$, compute $g^+:=\\nabla f(x^+)$, and set $s:=x^+-x$, $y:=g^+-g$. If $s^Ty>0$, append $(s,y)$ and $\\rho=(s^Ty)^{-1}$, dropping the oldest pair if the list would exceed $m$. If $s^Ty\\le0$ or the pair arithmetic fails, skip that pair and preserve the existing valid list."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[313]",
+      "missing[6].currentDeclaredOwnedEdges[5]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#deps",
+      "items/alg-lbfgs-two-loop-with-curvature-filter.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/25",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Current direction check, domain guard, nonnegative finite budgets, first unit trial, strong-Wolfe checks and propagated statuses support this exact consumer."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-full-memory-bfgs-dennis-more-condition",
+    "supplier": "def-wolfe-and-strong-wolfe-conditions",
+    "consumer_batch": "71",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "FactF6/proof1.2 use only that a successful strong-Wolfe step is Wolfe, ensuring the existing local curvature lemma applies on a strict SPD descent direction. Exact-undamped and successful-search restrictions are retained.",
+    "inspected_paths": [
+      "items/def-wolfe-and-strong-wolfe-conditions.md#Definition",
+      "items/lem-full-memory-bfgs-dennis-more-condition.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy\u2013Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+    "consumer_use_excerpts": [
+      "[F6] [[def-wolfe-and-strong-wolfe-conditions]]: every strong Wolfe step is a Wolfe step."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[318]",
+      "missing[6].currentDeclaredOwnedEdges[10]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#deps",
+      "items/lem-full-memory-bfgs-dennis-more-condition.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/30",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Current open parameter domain includes zero and the gradient directional derivative; strong Wolfe implies Wolfe for strict descent, and constants satisfy 0<c1<c2<1/2."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-wolfe-steps-give-positive-bfgs-curvature",
+    "supplier": "def-wolfe-and-strong-wolfe-conditions",
+    "consumer_batch": "71",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "FactF1/proof1.1 use g_plus^Tp\u2265c2 g^Tp with alpha>0, g^Tp<0 to derive s^Ty\u2265(1-c2)alpha|g^Tp|>0. The source constants actually satisfy the stronger c2<1/2, which implies the weaker c2<1 used in that algebra.",
+    "inspected_paths": [
+      "items/def-wolfe-and-strong-wolfe-conditions.md#Definition",
+      "items/lem-wolfe-steps-give-positive-bfgs-curvature.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy\u2013Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+    "consumer_use_excerpts": [
+      "Let $f:D\\to\\mathbb R$ be $C^1$ on an open $D\\subseteq\\mathbb R^n$. At $x\\in D$, let $p\\ne0$ be a strict descent direction, so $g^Tp<0$ for $g:=\\nabla f(x)$. Suppose $\\alpha>0$, $x+\\alpha p\\in D$, and $\\alpha$ satisfies the Wolfe curvature condition of [[def-wolfe-and-strong-wolfe-conditions]]. With $s:=\\alpha p$ and $y:=\\nabla f(x+\\alpha p)-\\nabla f(x)$, one has\n$$ s^Ty\\ge(1-c_2)\\alpha |g^Tp|>0. $$",
+      "[F1] [[def-wolfe-and-strong-wolfe-conditions]]: for $\\phi(t)=f(x+tp)$, a Wolfe step satisfies $\\phi'(\\alpha)\\ge c_2\\phi'(0)$ with $0<c_2<1$; the chain rule gives $\\phi'(t)=\\nabla f(x+tp)^Tp$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[310]",
+      "missing[6].currentDeclaredOwnedEdges[2]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#deps",
+      "items/lem-wolfe-steps-give-positive-bfgs-curvature.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/22",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Current open parameter domain includes zero and the gradient directional derivative; strong Wolfe implies Wolfe for strict descent, and constants satisfy 0<c1<c2<1/2."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-full-memory-bfgs-global-linear-convergence",
+    "supplier": "def-wolfe-and-strong-wolfe-conditions",
+    "consumer_batch": "71",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "The exact successful branch uses source strong-Wolfe\u21d2Wolfe and Armijo with 0<c1<c2<1/2. Positive SPD directions/curvature are proved locally; finite failures and rounded/damped branches remain excluded from the convergence transfer.",
+    "inspected_paths": [
+      "items/def-wolfe-and-strong-wolfe-conditions.md#Definition",
+      "items/thm-full-memory-bfgs-global-linear-convergence.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy\u2013Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+    "consumer_use_excerpts": [
+      "[F9] [[def-wolfe-and-strong-wolfe-conditions]]: every strong Wolfe step satisfies the Wolfe Armijo and curvature conditions."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[317]",
+      "missing[6].currentDeclaredOwnedEdges[9]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#deps",
+      "items/thm-full-memory-bfgs-global-linear-convergence.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/29",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Current open parameter domain includes zero and the gradient directional derivative; strong Wolfe implies Wolfe for strict descent, and constants satisfy 0<c1<c2<1/2."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-full-memory-bfgs-global-linear-convergence",
+    "supplier": "lem-wolfe-step-lower-bound-from-the-descent-angle",
+    "consumer_batch": "71",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "The proof first derives accepted segments in convex L0 and Lambda-Lipschitz gradient, then applies the source alpha\u2265(1-c2)cos(theta)||g||/(Lambda||p||) to a nonzero strict descent direction. Full-memory uses its potential angle sum; fixed-memory supplies a uniform angle from its explicit spectrum hypotheses.",
+    "inspected_paths": [
+      "items/lem-wolfe-step-lower-bound-from-the-descent-angle.md#Statement",
+      "items/thm-full-memory-bfgs-global-linear-convergence.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, $f:D\\to\\mathbb R$ be $C^1$, and\n$x,p\\in\\mathbb R^n$ satisfy $x\\in D$, $p\\ne0$, and\n$g^Tp<0$, where $g:=\\nabla f(x)$. Let $t>0$ with $x+tp\\in D$, and suppose\nthere are a set $N\\subseteq D$ containing $x+[0,t]p$ and a constant $L>0$\nsuch that\n$$\n\\|\\nabla f(u)-\\nabla f(v)\\|_2\\le L\\|u-v\\|_2\\qquad(u,v\\in N).\n$$\nIf $t$ satisfies the Wolfe conditions of\n[[def-wolfe-and-strong-wolfe-conditions]] with $0<c_1<c_2<1/2$, then its\ndescent angle $\\theta$ satisfies\n$$\nt\\ge\\frac{1-c_2}{L}\\frac{\\cos\\theta\\,\\|g\\|_2}{\\|p\\|_2}.\n$$",
+    "consumer_use_excerpts": [
+      "[F6] [[lem-wolfe-step-lower-bound-from-the-descent-angle]]: on a segment with gradient Lipschitz constant $\\Lambda$, a Wolfe step satisfies $\\alpha_k\\ge\\frac{1-c_2}{\\Lambda}\\frac{\\cos\\theta_k\\|g_k\\|_2}{\\|p_k\\|_2}$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[316]",
+      "missing[6].currentDeclaredOwnedEdges[8]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#deps",
+      "items/thm-full-memory-bfgs-global-linear-convergence.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/28",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Current lower step bound applies because accepted endpoints and segments remain in convex L0 with Lambda-Lipschitz gradient and strict descent."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-full-memory-bfgs-global-linear-convergence",
+    "supplier": "thm-zoutendijk-summability-for-wolfe-steps",
+    "consumer_batch": "71",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "FactF5/proof2.1 establish every accepted segment lies in convex L0, gradient is Lambda-Lipschitz there, objective is bounded below by f(x*) and directions/steps are descending/Wolfe. The source summability is used only for an infinite successful exact continuation, with finite prefixes kept separate.",
+    "inspected_paths": [
+      "items/thm-zoutendijk-summability-for-wolfe-steps.md#Statement",
+      "items/thm-full-memory-bfgs-global-linear-convergence.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$ and\nlet $x_0\\in D$. Define its initial sublevel set\n$L_0:=\\{x\\in D:f(x)\\le f(x_0)\\}$, and suppose $f$ is bounded below on\n$L_0$. Let $N\\subseteq D$ contain every segment $x_k+[0,t_k]p_k$ in a\nsequence $(x_k)_{k\\ge0}\\subset D$. Suppose there is $L>0$ such that\n$$\n\\|\\nabla f(u)-\\nabla f(v)\\|_2\\le L\\|u-v\\|_2\\qquad(u,v\\in N).\n$$\nFor every $k\\ge0$, assume $x_{k+1}=x_k+t_kp_k$, $p_k\\ne0$ is a descent\ndirection at $x_k$, and $t_k>0$ is a Wolfe step for $f,x_k,p_k$ under\n[[def-wolfe-and-strong-wolfe-conditions]]. Define\n$$\\cos\\theta_k:=-\\frac{\\langle\\nabla f(x_k),p_k\\rangle}{\\|\\nabla f(x_k)\\|_2\\|p_k\\|_2}.$$\nThen\n$$\n\\sum_{k=0}^{\\infty}\\cos^2\\theta_k\\,\\|\\nabla f(x_k)\\|_2^2<\\infty.\n$$",
+    "consumer_use_excerpts": [
+      "[F5] [[thm-zoutendijk-summability-for-wolfe-steps]]: if the gradient is Lipschitz on a set containing every accepted-step segment, the objective is bounded below on the initial sublevel, and every accepted step is a Wolfe step, then $\\sum_k\\cos^2\\theta_k\\|\\nabla f(x_k)\\|_2^2<\\infty$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[315]",
+      "missing[6].currentDeclaredOwnedEdges[7]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#deps",
+      "items/thm-full-memory-bfgs-global-linear-convergence.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/27",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Current source requires all accepted segments in a common Lipschitz set and a lower bound on L0. Consumer supplies N=L0, f>=f(x*) and positive Wolfe steps."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-full-memory-bfgs-local-superlinear-convergence",
+    "supplier": "alg-bracketing-zoom-strong-wolfe-search",
+    "consumer_batch": "71",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "FactF6/proof3.1 use exactly the source first trial alpha=1 and return-on-both-checks rule. The consumer independently proves eventual Armijo/strong curvature at that trial and retains its exact branch/success hypotheses; no finite search termination-to-success theorem is imported.",
+    "inspected_paths": [
+      "items/alg-bracketing-zoom-strong-wolfe-search.md#Definition",
+      "items/thm-full-memory-bfgs-local-superlinear-convergence.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$,\nlet $x\\in D$, and let $p\\in\\mathbb R^n$ be arbitrary. Fix $0<c_1<c_2<1/2$ and finite\nbudgets $E,Z\\in\\mathbb N$ for expansion and zoom trials. After the direction check passes, use the functions\n$\\phi(t)=f(x+tp)$ and $\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$ from\n[[def-wolfe-and-strong-wolfe-conditions]]. **Output:** either a positive\nstrong Wolfe step, or one of `invalid-direction`, `domain-exit`, and\n`evaluation-budget-exhausted`.\n\n1. Evaluate and retain $f(x)$ and $\\nabla f(x)$, and set\n   $\\phi(0):=f(x)$ and $\\phi'(0):=\\langle\\nabla f(x),p\\rangle$.\n   If $\\phi'(0)\\ge0$, return `invalid-direction`.\n   Set $a:=0$ and $t:=1$. For at most $E$ expansion trials, in order:\n   - If $x+tp\\notin D$, return `domain-exit` without evaluating the trial.\n   - Evaluate $\\phi(t)$ and $\\phi'(t)$. If\n     $\\phi(t)>\\phi(0)+c_1t\\phi'(0)$ or $\\phi(t)\\ge\\phi(a)$, call the zoom\n     procedure below with the ordered endpoint pair $(a,t)$ and return its\n     output.\n   - If $|\\phi'(t)|\\le c_2|\\phi'(0)|$, return $t$ as a strong Wolfe step.\n   - If $\\phi'(t)\\ge0$, call zoom with the reversed endpoint pair $(t,a)$ and\n     return its output.\n   - Otherwise set $a:=t$ and $t:=2t$.\n2. If the expansion budget is exhausted, return `evaluation-budget-exhausted`.\n\nFor `zoom(a,b)`, preserve the endpoint order even when $b<a$. For at most\n$Z$ zoom trials, in order:\n\n1. Set $m:=(a+b)/2$. If $x+mp\\notin D$, return `domain-exit` without\n   evaluating the trial.\n2. Evaluate $\\phi(m)$ and $\\phi'(m)$. If\n   $\\phi(m)>\\phi(0)+c_1m\\phi'(0)$ or $\\phi(m)\\ge\\phi(a)$, set $b:=m$.\n   Otherwise, if $|\\phi'(m)|\\le c_2|\\phi'(0)|$, return $m$ as a strong Wolfe\n   step. In the remaining branch, if $\\phi'(m)(b-a)\\ge0$, first set\n   $b:=a$; then set $a:=m$.\n3. If the zoom budget is exhausted, return `evaluation-budget-exhausted`.\n\nThe procedure returns a step only after both strong Wolfe inequalities have\nbeen checked. Finite budgets and domain exits may return failure even when a\nstrong Wolfe step exists; no convergence claim follows from the procedure\nalone.",
+    "consumer_use_excerpts": [
+      "[F6] [[alg-bracketing-zoom-strong-wolfe-search]]: the first expansion trial is $\\alpha=1$ and is returned if both strong Wolfe checks pass."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[322]",
+      "missing[6].currentDeclaredOwnedEdges[14]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#deps",
+      "items/thm-full-memory-bfgs-local-superlinear-convergence.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/34",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Current direction check, domain guard, nonnegative finite budgets, first unit trial, strong-Wolfe checks and propagated statuses support this exact consumer."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-full-memory-bfgs-local-superlinear-convergence",
+    "supplier": "def-wolfe-and-strong-wolfe-conditions",
+    "consumer_batch": "71",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "FactF7/proof3.1 check the source Armijo and strong curvature inequalities at unit length after the local Taylor/Dennis\u2013Mor\u00e9 estimates. The exact-undamped infinite successful branch and c1<c2<1/2 are stated; no damped/rounded superlinear conclusion is transferred.",
+    "inspected_paths": [
+      "items/def-wolfe-and-strong-wolfe-conditions.md#Definition",
+      "items/thm-full-memory-bfgs-local-superlinear-convergence.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy\u2013Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+    "consumer_use_excerpts": [
+      "[F7] [[def-wolfe-and-strong-wolfe-conditions]]: strong Wolfe requires Armijo and $|g_{k+1}^Tp_k|\\le c_2|g_k^Tp_k|$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[323]",
+      "missing[6].currentDeclaredOwnedEdges[15]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#deps",
+      "items/thm-full-memory-bfgs-local-superlinear-convergence.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/35",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Current open parameter domain includes zero and the gradient directional derivative; strong Wolfe implies Wolfe for strict descent, and constants satisfy 0<c1<c2<1/2."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-lbfgs-fixed-memory-linear-convergence",
+    "supplier": "cor-uniform-descent-angle-implies-gradient-vanishing",
+    "consumer_batch": "71",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "FactF6/proof2.1 establish successful Wolfe steps, bounded-below objective, convex accepted segments and Lipschitz gradient; the locally proved spectrum bounds give cos(theta)\u2265lambda_lower/lambda_upper>0. Only then is gradient-norm convergence imported. The displayed iterate-rate proof uses separate strong-convexity assumptions.",
+    "inspected_paths": [
+      "items/cor-uniform-descent-angle-implies-gradient-vanishing.md#Statement",
+      "items/thm-lbfgs-fixed-memory-linear-convergence.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Under the hypotheses of [[thm-zoutendijk-summability-for-wolfe-steps]], suppose\nthere is a constant $\\delta>0$ such that $\\cos\\theta_k\\ge\\delta$ for every\n$k$. Then $\\|\\nabla f(x_k)\\|_2\\to0$. This is convergence of gradient norms\nto zero; it does not assert convergence of $(x_k)$ or that a limit point is a\nminimizer.",
+    "consumer_use_excerpts": [
+      "[F6] [[cor-uniform-descent-angle-implies-gradient-vanishing]]: under the Zoutendijk hypotheses and Wolfe steps, a uniform positive lower bound on $\\cos\\theta_k$ implies $\\|g_k\\|_2\\to0$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[321]",
+      "missing[6].currentDeclaredOwnedEdges[13]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#deps",
+      "items/thm-lbfgs-fixed-memory-linear-convergence.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/33",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Current source uses the actual Zoutendijk hypotheses and a uniform angle; this consumer supplies them from bounded SPD spectrum and convex L0."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-lbfgs-fixed-memory-linear-convergence",
+    "supplier": "def-wolfe-and-strong-wolfe-conditions",
+    "consumer_batch": "71",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "The exact successful branch uses source strong-Wolfe\u21d2Wolfe and Armijo with 0<c1<c2<1/2. Positive SPD directions/curvature are proved locally; finite failures and rounded/damped branches remain excluded from the convergence transfer.",
+    "inspected_paths": [
+      "items/def-wolfe-and-strong-wolfe-conditions.md#Definition",
+      "items/thm-lbfgs-fixed-memory-linear-convergence.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy\u2013Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+    "consumer_use_excerpts": [
+      "[F2] [[def-wolfe-and-strong-wolfe-conditions]]: every strong Wolfe step is a Wolfe step and satisfies the Armijo inequality."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[319]",
+      "missing[6].currentDeclaredOwnedEdges[11]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#deps",
+      "items/thm-lbfgs-fixed-memory-linear-convergence.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/31",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Current open parameter domain includes zero and the gradient directional derivative; strong Wolfe implies Wolfe for strict descent, and constants satisfy 0<c1<c2<1/2."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-lbfgs-fixed-memory-linear-convergence",
+    "supplier": "lem-wolfe-step-lower-bound-from-the-descent-angle",
+    "consumer_batch": "71",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "The proof first derives accepted segments in convex L0 and Lambda-Lipschitz gradient, then applies the source alpha\u2265(1-c2)cos(theta)||g||/(Lambda||p||) to a nonzero strict descent direction. Full-memory uses its potential angle sum; fixed-memory supplies a uniform angle from its explicit spectrum hypotheses.",
+    "inspected_paths": [
+      "items/lem-wolfe-step-lower-bound-from-the-descent-angle.md#Statement",
+      "items/thm-lbfgs-fixed-memory-linear-convergence.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, $f:D\\to\\mathbb R$ be $C^1$, and\n$x,p\\in\\mathbb R^n$ satisfy $x\\in D$, $p\\ne0$, and\n$g^Tp<0$, where $g:=\\nabla f(x)$. Let $t>0$ with $x+tp\\in D$, and suppose\nthere are a set $N\\subseteq D$ containing $x+[0,t]p$ and a constant $L>0$\nsuch that\n$$\n\\|\\nabla f(u)-\\nabla f(v)\\|_2\\le L\\|u-v\\|_2\\qquad(u,v\\in N).\n$$\nIf $t$ satisfies the Wolfe conditions of\n[[def-wolfe-and-strong-wolfe-conditions]] with $0<c_1<c_2<1/2$, then its\ndescent angle $\\theta$ satisfies\n$$\nt\\ge\\frac{1-c_2}{L}\\frac{\\cos\\theta\\,\\|g\\|_2}{\\|p\\|_2}.\n$$",
+    "consumer_use_excerpts": [
+      "[F5] [[lem-wolfe-step-lower-bound-from-the-descent-angle]]: if $\\nabla f$ is $\\Lambda$-Lipschitz on an accepted step segment, a Wolfe step satisfies $\\alpha_k\\ge\\frac{1-c_2}{\\Lambda}\\frac{\\cos\\theta_k\\|g_k\\|_2}{\\|p_k\\|_2}$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[320]",
+      "missing[6].currentDeclaredOwnedEdges[12]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#deps",
+      "items/thm-lbfgs-fixed-memory-linear-convergence.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/32",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Current lower step bound applies because accepted endpoints and segments remain in convex L0 with Lambda-Lipschitz gradient and strict descent."
+    }
+  },
+  {
+    "kind": "page",
+    "consumer": "bfgs-and-limited-memory-quasi-newton-methods",
+    "supplier": "finite-precision-direct-factorizations",
+    "consumer_batch": "71",
+    "supplier_batch": "1",
+    "status": "verified",
+    "evidence": "The BFGS page explicitly separates its rounded-Cholesky direction computation from exact convergence. The named factorization returns failure or a stored factor; subsequent scalar solve/range checks and descent reset are retained. No backward-error guarantee for the direction is imported by this page context.",
+    "inspected_paths": [
+      "library/numerical-linear-algebra-and-approximation/finite-precision-direct-factorizations.md#body",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/bfgs-and-limited-memory-quasi-newton-methods.md#body",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#requires"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[308]",
+      "missing[6].currentDeclaredOwnedEdges[0]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#requires"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/20",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Read actual page summaries and the required rounded-factorization / exact-Wolfe interfaces; these are context edges without transferring unstated guarantees."
+    }
+  },
+  {
+    "kind": "page",
+    "consumer": "bfgs-and-limited-memory-quasi-newton-methods",
+    "supplier": "nonconvex-line-search-and-inexact-newton-methods",
+    "consumer_batch": "71",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "The page uses Wolfe curvature/Armijo, successful finite bracketing/zoom and the angle-weighted convergence interfaces under their hypotheses. Its exact-undamped convergence results require successful searches; rounded directions, damping and finite search failures remain distinct.",
+    "inspected_paths": [
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/nonconvex-line-search-and-inexact-newton-methods.md#body",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/bfgs-and-limited-memory-quasi-newton-methods.md#body",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#requires"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[309]",
+      "missing[6].currentDeclaredOwnedEdges[1]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json#requires"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/21",
+    "alpha_review": {
+      "reviewer": "alpha-batch-71",
+      "status": "verified",
+      "evidence": "Read actual page summaries and the required rounded-factorization / exact-Wolfe interfaces; these are context edges without transferring unstated guarantees."
+    }
+  }
+]

@@ -1,0 +1,1451 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "recorded_at": "2026-10-17T02:08:45.070159+00:00",
+  "kind": "focused-root-defect-reviews-not-an-admission",
+  "entries": [
+    {
+      "id": "alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "The caller needs the differentiation matrix before any nodal vector exists; its explicit cardinal-product matrix construction supplies the same operator without changing the supplier interface.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/proposed/alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -2,7 +2,7 @@\n $$\n -u''(x)+a(x)u'(x)+b(x)u(x)=f(x),\\quad -1<x<1,\\qquad u(-1)=g_-,\\quad u(1)=g_+.\n $$\n-The finite algorithm uses only the values at the nodes and does not assume a continuous BVP solvability theorem. Construct the Chebyshev differentiation matrix $D_N$ by [[alg-chebyshev-gauss-lobatto-differentiation-matrix]] and set $D_N^{(2)}=D_ND_N$. For each interior row $i=1,\\ldots,N-1$ and each column $j=0,\\ldots,N$, put\n+The finite algorithm uses only the values at the nodes and does not assume a continuous BVP solvability theorem. Construct the matrix explicitly using the matrix construction in [[alg-chebyshev-gauss-lobatto-differentiation-matrix]]: set $z_k=x_{N-k}$ for $0\\le k\\le N$, form the cardinal polynomials $\\ell_k(x)=\\prod_{0\\le q\\le N,\\ q\\ne k}(x-z_q)/(z_k-z_q)$, and set $(D_N)_{ij}=\\ell_{N-j}'(x_i)$ for $0\\le i,j\\le N$. This construction uses the grid alone and does not call the derivative-vector procedure with unknown nodal data. Set $D_N^{(2)}=D_ND_N$. For each interior row $i=1,\\ldots,N-1$ and each column $j=0,\\ldots,N$, put\n $$\n C_{ij}=-(D_N^{(2)})_{ij}+a(x_i)(D_N)_{ij}+b(x_i)\\delta_{ij}.\n $$\n"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-distributed-delay-composite-midpoint-rule",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "The algorithm embeds work/storage properties; preserve their exact counts and grid-alignment justification in a separately proved result, retaining the defining procedure.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-distributed-delay-composite-midpoint-rule.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/alg-distributed-delay-composite-midpoint-rule/before.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/alg-distributed-delay-composite-midpoint-rule/proposal.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -20,9 +20,5 @@\n 3. Return $A$, equivalently\n    $$\\widehat{\\mathcal I}_{K,h,r}(t_n)=\\Delta\\sum_{j=0}^{r-1}K(\\theta_j)\\widehat y_h(t_n-\\theta_j).$$\n \n-Each history query uses the piecewise-linear interpolant, including queries\n-between Euler nodes. The computation uses $r$ kernel/history evaluations and\n-$O(rd)$ arithmetic. It uses $O(d)$ working memory if weights are recomputed\n-and $O(r+d)$ if cached. Since $h=q\\Delta$ and every query time is a multiple of\n-$h$, every Euler-grid knot of the sampled history, including each delay\n-breakpoint $k\\tau$, is a quadrature-cell endpoint.+Each history query evaluates the piecewise-linear interpolant, including queries\n+between Euler nodes."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-finite-difference-newton-for-vector-residuals",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "The returned successful Newton correction needs an explicit local name before the next step uses it.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-finite-difference-newton-for-vector-residuals.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-low-editorial-cycle1/before/items/alg-finite-difference-newton-for-vector-residuals.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-low-editorial-cycle1/proposed/items/alg-finite-difference-newton-for-vector-residuals.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -15,7 +15,7 @@\n    `invalid-stencil`, return $(x_k,\\texttt{invalid-stencil})$.\n 4. Otherwise call [[alg-newton-correction-for-vector-residuals]] with\n    $A=J_hF(x_k)$ and $r=F(x_k)$. If that correction is unavailable, return\n-   $(x_k,\\texttt{singular-jacobian})$.\n+   $(x_k,\\texttt{singular-jacobian})$. Otherwise let $s_k$ be the returned correction.\n 5. If the trial $x_k+s_k$ is outside $U$, return\n    $(x_k,\\texttt{invalid-trial})$; otherwise set $x_{k+1}=x_k+s_k$ and\n    continue.\n"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-golub-kahan-lsqr-with-givens-and-status",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "The projected LSQR positions require a local indexing convention, and the basis matrix must be defined before its use in the best-candidate update.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-golub-kahan-lsqr-with-givens-and-status.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/alg-golub-kahan-lsqr-with-givens-and-status.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/proposed/alg-golub-kahan-lsqr-with-givens-and-status.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -21,7 +21,11 @@\n    $q_j=A^Tu_{j+1}-\\beta_{j+1}v_j$ and $\\alpha_{j+1}=\\|q_j\\|_2$. If\n    $\\alpha_{j+1}>0$, set $v_{j+1}=q_j/\\alpha_{j+1}$. A zero\n    $\\beta_{j+1}$ or $\\alpha_{j+1}$ marks bidiagonalization breakdown.\n-3. Form the $(j+1)\\times j$ lower-bidiagonal matrix $B_j$ with diagonal\n+3. Put $V_j=[v_1,\\ldots,v_j]$. In the projected matrix and right-hand side\n+   below, use local one-based row/column/position labels: a displayed matrix\n+   position $(r,c)$ means canonical zero-based position $(r-1,c-1)$, and\n+   vector position $r$ means coordinate $r-1$ under [[def-matrix-space]].\n+   Form the $(j+1)\\times j$ lower-bidiagonal matrix $B_j$ with diagonal\n    $\\alpha_1,\\ldots,\\alpha_j$ and subdiagonal\n    $\\beta_2,\\ldots,\\beta_{j+1}$, using $\\beta_{j+1}=0$ if step 1 broke down.\n    Let $e_1=(1,0,\\ldots,0)^T\\in\\mathbb R^{j+1}$ and $c=\\beta_1e_1$.\n@@ -34,7 +38,7 @@\n    let $R_j$ be the first $j$ rows of the rotated matrix and $d_j$ the first\n    $j$ entries of the rotated right-hand side. Solve $R_jz_j=d_j$ by back\n    substitution. Update $(x_{\\rm best},j_{\\rm best})=(x_0+V_jz_j,j)$.\n-4. Put $V_j=[v_1,\\ldots,v_j]$ and $x_j=x_0+V_jz_j$. Compute the physical\n+4. Put $x_j=x_0+V_jz_j$. Compute the physical\n    residual $\\|Ax_j-b\\|_2$. If it is at most $\\tau\\delta$, return\n    $(x_j,j,\\text{discrepancy})$. If bidiagonalization broke down, return\n    $(x_j,j,\\text{bidiagonalization-breakdown})$. If $j=N$, return\n"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "Operationwise floating-point execution needs an actual rounded scalar shift and deflation schedule with its existing range-failure rule; the explicit four-real-component norm schedule retains the exact branch and conditional claims.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-implicit-shifted-bidiagonal-qr-with-deflation.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/preimages/alg-implicit-shifted-bidiagonal-qr-with-deflation.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/successor-v2/alg-implicit-shifted-bidiagonal-qr-with-deflation.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -1,6 +1,13 @@\n Input the original $A\\in\\mathbb F^{m\\times n}$, the successful output record of [[alg-householder-bidiagonalization]] for $C=A$ if $m\\ge n$ and $C=A^*$ otherwise, a deflation tolerance $\\tau\\ge0$, and a finite nonnegative integer sweep budget $N$. The reduction record supplies the upper bidiagonal work matrix $B_0$, dense accumulators $U_B,V_B$, and ordered stored local transformation data. Initialize $B=B_0$, the sweep accumulators $U_\\Sigma,V_\\Sigma$ to identities of order $p=\\min(m,n)$, empty ordered left/right transformation lists, an empty deflation record, a pass counter $t=0$, and a sweep counter $s=0$. Write the diagonal as $d_i$ and superdiagonal as $e_i$, and set $e_0=0$.\n \n At the start of each pass, set $t\\leftarrow t+1$, set $e_i$ to zero and append $(t,i,e_i^{old})$ to the deflation record whenever $|e_i|\\le\\tau(|d_i|+|d_{i+1}|)$. The corresponding additive matrix change has entry $-e_i^{old}$ at $(i,i+1)$ and zero elsewhere. Record any later non-target sparsity cleanup the same way with its row, column, and old value. The zero entries split the active blocks. If every active block has size one, stop with `converged`. Otherwise process the active blocks in increasing order of $\\ell$, skipping singleton blocks. Before each block sweep, if $s=N$, stop with `budget-exhausted`; otherwise form only the tridiagonal entries of $T=B^*B$ on that block: $T_{ii}=|d_i|^2+|e_{i-1}|^2$ and $T_{i,i+1}=\\overline{d_i}e_i$. Choose $\\mu$ to be the eigenvalue of the trailing Hermitian block $\\begin{bmatrix}T_{r-1,r-1}&T_{r-1,r}\\\\T_{r,r-1}&T_{rr}\\end{bmatrix}$ closest to $T_{rr}$, resolving a tie by the smaller eigenvalue. If the leading pivot $d_\\ell$ is zero or has magnitude at most $\\tau\\max(|e_{\\ell-1}|,|e_\\ell|)$, use the zero-shift branch $\\mu=0$ and choose the initial right Givens factor $G_\\ell$ so that $(d_\\ell,e_\\ell)G_\\ell=(\\rho,0)$, avoiding division by the small or zero diagonal.\n+\n+\n+**Finite-precision shift and comparison schedule.** The preceding exact-arithmetic formulas retain their exact meaning. For finite precision use the scalar order, six-real-operation complex product, scaled real-component norm, and first-failing-primitive range policy of [[alg-scaled-complex-householder-and-givens-updates]] also for the following stages. All assignments below are stored; do not fuse operations. Comparisons, maxima, copies, conjugations, sign changes, and real absolute values are exact operations on stored finite values. Evaluate each complex magnitude by that helper's scaled two-component norm, with zero magnitude returned exactly as zero. At each pass visit deflation indices increasingly; at index $i$ evaluate $a_i=|e_i|$, $b_i=|d_i|$, $c_i=|d_{i+1}|$ in that order, then $h_i=\\operatorname{fl}(b_i+c_i)$ and $k_i=\\operatorname{fl}(\\tau h_i)$, and deflate exactly when $a_i\\le k_i$.\n+\n+For each nonsingleton block, form its Gram diagonal entries in increasing index order, followed by its upper off-diagonal entries in increasing index order. To form $T_{ii}$, square $\\Re d_i,\\Im d_i,\\Re e_{i-1},\\Im e_{i-1}$ separately with rounding, add the first two rounded squares, add the last two, and add these two rounded sums, rounding each addition. Form $T_{i,i+1}$ by the helper's complex product for $\\overline{d_i}e_i$ and copy its conjugate to the lower off-diagonal. No other Gram entries are formed. Write the stored trailing block as $\\begin{bmatrix}a&z\\\\\\overline z&c\\end{bmatrix}$. In this order compute $h=\\operatorname{fl}(\\operatorname{fl}(a+c)/2)$, $\\delta=\\operatorname{fl}(\\operatorname{fl}(a-c)/2)$, and $k$ by the helper's scaled norm on the ordered four-real-component list $(\\delta,0,\\Re z,\\Im z)$, corresponding to the complex vector $(\\delta,z)$, returning exact zero for the zero list. Then compute $\\mu_-=\\operatorname{fl}(h-k)$, $\\mu_+=\\operatorname{fl}(h+k)$, $q_-=|\\operatorname{fl}(\\mu_--c)|$, and $q_+=|\\operatorname{fl}(\\mu_+-c)|$. Choose $\\mu=\\mu_-$ if $q_-\\le q_+$ and $\\mu=\\mu_+$ otherwise. In exact arithmetic these are the two Hermitian eigenvalues and the stated nearest-eigenvalue/tie rule; in finite precision they specify the shift estimates without asserting their accuracy.\n+\n+Next evaluate $|d_\\ell|$, $|e_{\\ell-1}|$, and $|e_\\ell|$ in that order and form $w=\\operatorname{fl}(\\tau\\max(|e_{\\ell-1}|,|e_\\ell|))$. Use the zero-shift branch exactly when $d_\\ell=0$ or $|d_\\ell|\\le w$. In the ordinary branch form the first shift-vector entry as $\\operatorname{fl}(T_{\\ell\\ell}-\\mu)$ and use the stored lower Gram entry as its second entry. If any of these primitives fails the helper's normal-range/finite-value requirements, return the existing `range-failure` record immediately, before any sweep transformation for that block. This rule permits range failure in shift formation and makes no unconditional progress claim. For $p=0$ or only singleton active blocks none of the block stages is requested.\n \n In the ordinary branch choose the first right Givens factor $G_\\ell$ so that $G_\\ell^*(T_{\\ell\\ell}-\\mu,T_{\\ell+1,\\ell})^T=(\\rho,0)^T$, where $T_{\\ell+1,\\ell}=\\overline{e_\\ell}d_\\ell$. In either branch, apply $B\\leftarrow BG_\\ell$, update columns $\\ell,\\ell+1$ of $V_\\Sigma$ by right multiplication by this same stored rotation, and append its exact unitary representative to the right list. For $j=\\ell,\\ldots,r-1$, choose a left Givens factor $H_j$ so that $H_j^*(B_{j,j},B_{j+1,j})^T=(\\rho,0)^T$; apply it to rows $j,j+1$, update columns $j,j+1$ of $U_\\Sigma$ by right multiplication by this same stored rotation, and append its exact unitary representative to the left list. If $j<r-1$, choose a right Givens factor $G_{j+1}$ so that $(B_{j,j+1},B_{j,j+2})G_{j+1}=(\\rho,0)$; apply it to columns $j+1,j+2$, update the corresponding columns of $V_\\Sigma$ by right multiplication by this same stored rotation, and append its exact unitary representative to the right list. Continue until the bulge reaches the active block endpoint. A zero annihilation vector uses the identity rotation. In finite precision each Givens formation/update uses [[alg-scaled-complex-householder-and-givens-updates]], conjugate-transposed as needed for the stated left/right orientation; accumulator multiplications use the same stored local data but omit all target-zero writes. The dense accumulator multiplications follow the operationwise arithmetic model, while the ordered lists retain the exact unitary representatives used in analysis. Target zero writes to $B$ are included in their local error bounds. The initial shift-vector rotation does not zero an unrelated entry of $B$. Each Givens factor is chosen using [[def-real-and-complex-givens-transformations]] and its annihilation guarantee in [[thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries]].\n \n"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-kahan-compensated-summation",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "A numbered termination proof is present in a definition-like algorithm; move it to the complete separate property result and retain the procedure and all sound properties.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-kahan-compensated-summation.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/alg-kahan-compensated-summation.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/alg-kahan-compensated-summation.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-morozov-discrepancy-bracketing-and-bisection",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "The Hilbert adjoint and inverse suppliers require Countable Choice; include that admissibility assumption explicitly while preserving the compact-operator procedure.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-morozov-discrepancy-bracketing-and-bisection.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-stochastic-proposals/before/alg-morozov-discrepancy-bracketing-and-bisection.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-stochastic-proposals/proposed/alg-morozov-discrepancy-bracketing-and-bisection.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -1,4 +1,5 @@\n-Input a compact operator $A:X\\to Y$ between real or complex Hilbert spaces,\n+Assume Countable Choice [[def-countable-choice]], as required for the Hilbert\n+adjoint and shifted normal-operator inverse used below. Input a compact operator $A:X\\to Y$ between real or complex Hilbert spaces,\n data $g\\in Y$, a declared noise level $\\delta>0$, a discrepancy factor\n $\\tau>1$, an initial parameter $\\lambda_0>0$, integer budgets $M,N\\ge0$,\n an exact residual evaluator for\n"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-neumaier-compensated-summation",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "A numbered termination proof is present in a definition-like algorithm; move it to the complete separate property result and retain the procedure and all sound properties.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-neumaier-compensated-summation.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/alg-neumaier-compensated-summation.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/alg-neumaier-compensated-summation.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-neutral-delay-euler-compatible-grid",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "Evaluation, storage and compatibility consequences belong in the complete separate proved property result, while operational grid initialization and updates stay in the Definition.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-neutral-delay-euler-compatible-grid.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/alg-neutral-delay-euler-compatible-grid/before.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/alg-neutral-delay-euler-compatible-grid/proposal.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -16,11 +16,7 @@\n    `budget-exhausted` with $n$ completed updates, the initialized values,\n    $Y_0,\\ldots,Y_n$, and $V_0,\\ldots,V_{n-1}$. Otherwise set\n    $D_n=\\phi'(t_n-\\tau)$ when $n<m$ and $D_n=V_{n-m}$ when $n\\ge m$, then\n-   set $V_n=aD_n+f(t_n,Y_n,Y_{n-m})$ and $Y_{n+1}=Y_n+hV_n$. Every required\n-   evaluation is defined because $n<N$ gives $t_n<T$ and $f$ is defined for all\n-   state values on the time domain containing $[0,T]$.\n+   set $V_n=aD_n+f(t_n,Y_n,Y_{n-m})$ and $Y_{n+1}=Y_n+hV_n$.\n \n 3. Return `completed`, the nodal states $Y_0,\\ldots,Y_N$ and nodal derivative\n-   values $V_0,\\ldots,V_{N-1}$. Compatibility makes $V_0=\\phi'(0)$. The full\n-   method uses $N$ evaluations of $f$ and stores $O(N+m)$ scalar state and\n-   derivative values; it has no constant-memory guarantee.+   values $V_0,\\ldots,V_{N-1}$."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-nonlinear-conjugate-gradient-methods",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "The first conjugate-gradient candidate and the negative-index restart coefficient need explicit first-iteration handling; setting the candidate to minus the gradient preserves the intended iteration.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-nonlinear-conjugate-gradient-methods.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/alg-nonlinear-conjugate-gradient-methods.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/proposed/alg-nonlinear-conjugate-gradient-methods.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -6,9 +6,9 @@\n \n 2. For $k=0,\\ldots,K-1$, if $g_k=0$, return **stationary** with $x_k$. For $k\\ge1$, set\n    $$ \\beta_{k-1}^{\\rm FR}=\\frac{\\|g_k\\|_2^2}{\\|g_{k-1}\\|_2^2},\\qquad \\beta_{k-1}^{\\rm PR+}=\\max\\!\\left\\{0,\\frac{g_k^T(g_k-g_{k-1})}{\\|g_{k-1}\\|_2^2}\\right\\}. $$\n-   Choose the selected coefficient and form $d_k^{\\rm cand}=-g_k+\\beta_{k-1}d_{k-1}$. For $k=0$, use $d_0$ above. Denominators are nonzero because the procedure has already returned at any zero gradient.\n+   Choose the selected coefficient and form $d_k^{\\rm cand}=-g_k+\\beta_{k-1}d_{k-1}$. For $k=0$, set $d_0^{\\rm cand}=d_0=-g_0$. Denominators are nonzero because the procedure has already returned at any zero gradient.\n \n-3. In the $\\mathrm{PR+}$ method, test the candidate at the current point. If $g_k^Td_k^{\\rm cand}>-\\sigma\\|g_k\\|_2^2$ or $\\|d_k^{\\rm cand}\\|_2>C\\|g_k\\|_2$, restart by setting $\\beta_{k-1}=0$ and $d_k=-g_k$, and record that a restart occurred. Otherwise set $d_k=d_k^{\\rm cand}$. In the $\\mathrm{FR}$ method set $d_k=d_k^{\\rm cand}$ without this safeguard. If $g_k^Td_k\\ge0$, return **search-failure** with cause **invalid-direction**.\n+3. In the $\\mathrm{PR+}$ method, test the candidate at the current point. If $g_k^Td_k^{\\rm cand}>-\\sigma\\|g_k\\|_2^2$ or $\\|d_k^{\\rm cand}\\|_2>C\\|g_k\\|_2$, restart by setting $d_k=-g_k$ and, only when $k\\ge1$, $\\beta_{k-1}=0$, and record that a restart occurred. Otherwise set $d_k=d_k^{\\rm cand}$. In the $\\mathrm{FR}$ method set $d_k=d_k^{\\rm cand}$ without this safeguard. If $g_k^Td_k\\ge0$, return **search-failure** with cause **invalid-direction**.\n \n 4. In bounded-strong-Wolfe mode, call [[alg-bracketing-zoom-strong-wolfe-search]] at $(f,x_k,d_k,c_1,c_2)$ with budgets $E,Z$. That procedure returns a step only after checking both strong Wolfe inequalities. If it instead returns **invalid-direction**, **domain-exit**, or **evaluation-budget-exhausted**, return **search-failure** with that cause.\n \n"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-principal-matrix-logarithm-and-square-root",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "The exact matrix-function wrapper requires finite supplied branch derivative data and an explicit missing-data status; field arithmetic alone cannot silently evaluate those scalar branches.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-principal-matrix-logarithm-and-square-root.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/alg-principal-matrix-logarithm-and-square-root.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/proposed/alg-principal-matrix-logarithm-and-square-root.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -2,7 +2,11 @@\n logarithm or principal square root, finite Schur and Schur\u2013Parlett controls,\n an initial partition of $\\{1,\\ldots,n\\}$ into nonempty contiguous intervals\n for the Schur\u2013Parlett call, and a finite table of exact Jordan certificates\n-keyed by contiguous intervals. The first Schur reduction is used only to\n+keyed by contiguous intervals. Also supply a finite table of exact scalar\n+derivative data $f^{(k)}(\\lambda)$ for the requested principal branch, keyed\n+by spectral value and derivative order; these are exact input data of that\n+same branch, not values inferred from field arithmetic. Entries may be absent,\n+with missing-data handling as below. The first Schur reduction is used only to\n certify the branch domain; no Jordan derivative data are needed if the branch\n check fails.\n \n@@ -15,11 +19,15 @@\n    branch-domain-failure; if an exact sign comparison is unavailable, return\n    branch-domain-undecided. This test occurs before any holomorphic matrix\n    evaluation.\n-3. For the logarithm request, evaluate the scalar branch\n+3. For the logarithm request, select the scalar branch\n    $f(z)=\\operatorname{Log}z$. For the square-root request, use\n    $f(z)=z^{1/2}_{\\operatorname{Log}}$. Then call\n    [[alg-schur-parlett-matrix-function]] with $A$, $f$, its controls, the\n-   supplied initial partition, and the Jordan-certificate table. Propagate any\n+   supplied initial partition, the Jordan-certificate table, and the supplied\n+   exact derivative table for its diagonal block evaluators, including blocks\n+   created by merges. If a required derivative is absent, that call returns\n+   missing-jordan-data; no scalar logarithm or square-root evaluation is\n+   implicitly requested from field arithmetic. Propagate any\n    Schur, Jordan-data, Sylvester, range, or budget status. On parlett-success,\n    return its factored primary value with status branch-aware-candidate.\n \n"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-retarded-delay-euler-with-stored-history",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "The history-query costs and evaluation counts must survive in the separate proved property result rather than remain unproved algorithm assertions.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-retarded-delay-euler-with-stored-history.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/alg-retarded-delay-euler-with-stored-history/before.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/alg-retarded-delay-euler-with-stored-history/proposal.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -12,24 +12,15 @@\n the last accepted node.\n \n 1. Set $h=\\tau/m$, $N=\\lceil T/h\\rceil$ (the least integer with $Nh\\ge T$),\n-   and $T_h=Nh$, so $0\\le T_h-T<h$. Initialize and store $Y_j=\\phi(jh)$ for\n+   and $T_h=Nh$. Initialize and store $Y_j=\\phi(jh)$ for\n    $j=-m,-m+1,\\ldots,0$.\n \n 2. For $n=0,1,\\ldots,N-1$, if a budget was supplied and $n\\ge B$, return\n    `budget-exhausted` with $n$ completed updates, the stored values\n    $Y_{-m},\\ldots,Y_n$, and their interpolant on $[-\\tau,t_n]$. Otherwise\n-   evaluate $F_n=f(t_n,Y_n,Y_{n-m})$ and set $Y_{n+1}=Y_n+hF_n$. The delayed\n-   query is a stored node because $t_n-\\tau=t_{n-m}$. Every required evaluation\n-   is defined: $n<N$ implies $t_n<T$, and the vector field is defined for every\n-   state on the time domain containing $[0,T]$.\n+   evaluate $F_n=f(t_n,Y_n,Y_{n-m})$ and set $Y_{n+1}=Y_n+hF_n$. \n \n 3. On each grid cell in $[-\\tau,T_h]$, define $\\widehat y_h$ by linear\n    interpolation between the stored endpoints. Return `completed`, the nodes\n    $Y_{-m},\\ldots,Y_N$, and $\\widehat y_h$ on $[-\\tau,T_h]$ and its restriction\n-   to $[0,T]$.\n-\n-The full run stores $N+m+1$ vectors in $\\mathbb R^d$, so its history storage is\n-$O(d(N+m))=O(d(T+\\tau)/h)$ real entries, and it uses $N$ vector-field\n-evaluations. A run stopped after $B<N$ calls stores $m+B+1$ vectors and performs\n-$B$ evaluations. An arbitrary stored-history query uses $O(d)$ arithmetic with\n-direct array indexing. The method makes no constant-memory claim.+   to $[0,T]$."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-sqp-augmented-lagrangian-multiplier-method",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "The actual outside-batch native alert identifies a numbered finite-budget property proof in the algorithm; preserve it in the proposed separate corollary with ordinary genuine creation and independent-review obligations.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-sqp-augmented-lagrangian-multiplier-method.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r2-proposals/before/alg-sqp-augmented-lagrangian-multiplier-method.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r2-proposals/proposed/alg-sqp-augmented-lagrangian-multiplier-method.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-two-evaluation-spsa-gradient-estimator",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "Fixed-parameter unbiasedness does not make random-parameter oracle evaluations measurable; the stated paired-call measurability condition excludes the genuine nonmeasurable witness without changing the two-call method or moment conclusions.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-two-evaluation-spsa-gradient-estimator.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-b103-spsa-measurability-cycle1/before/items/alg-two-evaluation-spsa-gradient-estimator.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-b103-spsa-measurability-cycle1/proposed/items/alg-two-evaluation-spsa-gradient-estimator.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -1,4 +1,4 @@\n-Input a dimension $d\\ge1$, $\\theta\\in\\Theta\\subseteq\\mathbb R^d$, a scalar $c>0$, a payoff oracle from [[def-simulation-gradient-objective-and-payoff-oracle]], and a random vector $\\Delta=(\\Delta_1,\\ldots,\\Delta_d)$ whose coordinates are independent, symmetric about zero, and nonzero almost surely. Require $\\theta+c\\Delta,\\theta-c\\Delta\\in\\Theta$ almost surely.\n+Input a dimension $d\\ge1$, $\\theta\\in\\Theta\\subseteq\\mathbb R^d$, a scalar $c>0$, a payoff oracle from [[def-simulation-gradient-objective-and-payoff-oracle]], and a random vector $\\Delta=(\\Delta_1,\\ldots,\\Delta_d)$ whose coordinates are independent, symmetric about zero, and nonzero almost surely. Require $\\theta+c\\Delta,\\theta-c\\Delta\\in\\Theta$ almost surely. In the chosen joint probability space for the perturbation and oracle calls, require the two random-parameter outputs $Y^+$ and $Y^-$ in step 2 to be measurable real random variables on the valid-draw event, with measurable zero extensions to its complement. This is a separate admissibility condition on the chosen coupling; fixed-parameter unbiasedness alone does not imply it.\n \n 1. Draw one $\\Delta$. If any $\\Delta_i=0$ or either $\\theta+c\\Delta$ or $\\theta-c\\Delta$ is outside $\\Theta$, return the zero vector in $\\mathbb R^d$ without calling the oracle.\n \n"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-two-product-fma-error-free-transform",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "The finite-status proof belongs in the separate proved property result; preserve both the complete procedure and its existing successful-operation residual properties.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-two-product-fma-error-free-transform.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/alg-two-product-fma-error-free-transform.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/alg-two-product-fma-error-free-transform.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "alg-xd-budgeted-uniformization-accumulation",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "An arbitrary validated upper bound need not obey the requested tail budget; copying the already certified accepted budget as the rounded returned tail certificate proves both required inequalities.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/alg-xd-budgeted-uniformization-accumulation.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-b47-rounded-tail-cycle1/before/items/alg-xd-budgeted-uniformization-accumulation.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-b47-rounded-tail-cycle1/proposed/items/alg-xd-budgeted-uniformization-accumulation.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -1,12 +1,12 @@\n-**Inputs.** A finite column generator $Q$, a column probability vector $p_0$, $t\\ge0$, an admissible rate $\\nu\\ge\\max_jr_j$, a positive tail budget $\\varepsilon$, a positive integer total-term cap $B$, and either exact real arithmetic or a validated arithmetic backend. In a rounded execution, the backend must certify the scalar control decisions defining $m$ and $\\mu$, each finite tail-budget comparison, and an outward upper bound $T\\ge mG_K(\\mu)$; it must also return a certified $\\ell^1$ error bound $E_{\\rm alg}:=\\|\\widehat p-R_{\\mu,K}^mp_0\\|_1$ for its computed vector. The vector bound includes any arithmetic error from the weights, time split, and matrix-free $P$ actions. If any scalar or vector certificate is unavailable, return `certificate-unavailable`.\n+**Inputs.** A finite column generator $Q$, a column probability vector $p_0$, $t\\ge0$, an admissible rate $\\nu\\ge\\max_jr_j$, a positive tail budget $\\varepsilon$, a positive integer total-term cap $B$, and either exact real arithmetic or a validated arithmetic backend. In a rounded execution, the backend must certify the scalar control decisions defining $m$ and $\\mu$, each finite tail-budget comparison, and an outward upper bound $U\\ge mG_K(\\mu)$; this backend bound may be arbitrarily loose. The returned tail certificate $T$ is chosen below from the already certified tail-budget comparison. The backend must also return a certified $\\ell^1$ error bound $E_{\\rm alg}:=\\|\\widehat p-R_{\\mu,K}^mp_0\\|_1$ for its computed vector. The vector bound includes any arithmetic error from the weights, time split, and matrix-free $P$ actions. If any scalar or vector certificate is unavailable, return `certificate-unavailable`.\n \n-**Outputs.** Return $(p_0,0,0)$ when $\\nu=0$ or $t=0$. Otherwise return `budget-exhausted` or `certificate-unavailable`, or an approximate vector $\\widehat p$ and certified bounds $(T,E_{\\rm alg})$ for which $\\|p(t)-\\widehat p\\|_1\\le T+E_{\\rm alg}$. Here $T\\ge mG_K(\\mu)$ is an outward-certified Poisson-tail upper bound and $E_{\\rm alg}$ bounds the arithmetic/algebraic error relative to the exact truncated accumulation. In exact real arithmetic, $T=mG_K(\\mu)$ and $E_{\\rm alg}=0$.\n+**Outputs.** Return $(p_0,0,0)$ when $\\nu=0$ or $t=0$. Otherwise return `budget-exhausted` or `certificate-unavailable`, or an approximate vector $\\widehat p$ and certified bounds $(T,E_{\\rm alg})$ for which $\\|p(t)-\\widehat p\\|_1\\le T+E_{\\rm alg}$. Here $mG_K(\\mu)\\le T\\le\\varepsilon$ is certified: in rounded arithmetic return the supplied budget $T:=\\varepsilon$, while in exact arithmetic return $T:=mG_K(\\mu)$. The quantity $E_{\\rm alg}$ bounds the arithmetic/algebraic error relative to the exact truncated accumulation. In exact real arithmetic, $T=mG_K(\\mu)$ and $E_{\\rm alg}=0$.\n \n **Procedure.** For $\\nu t>0$, set $m=\\lceil\\nu t\\rceil$ and $\\mu=\\nu t/m$, so $0<\\mu\\le1$. A rounded backend must certify these values and inequalities; if it cannot, return `certificate-unavailable`. If $m>B$, return `budget-exhausted`. Set $K_{\\max}=\\lfloor B/m\\rfloor-1$. Search the finite list $K=0,1,\\ldots,K_{\\max}$ for a member satisfying\n \n $$G_K(\\mu):=\\frac{e^{-\\mu}\\mu^{K+1}}{(K+1)!\\left(1-\\mu/(K+2)\\right)}\\le\\varepsilon/m.$$\n \n-In rounded arithmetic, accept a candidate only when a validated upper enclosure proves the displayed inequality, and set $T$ to a validated upper bound for $mG_K(\\mu)$. If no candidate works, return `budget-exhausted` when the comparisons certify that every candidate fails, and `certificate-unavailable` when they do not decide the search. In exact arithmetic set $T=mG_K(\\mu)$. Set $P=I+Q/\\nu$ and $x_0=p_0$. For each substep $j=1,\\ldots,m$, initialize $v_0=x_{j-1}$, $w_0=e^{-\\mu}$, and $x_j=w_0v_0$. For $k=0,\\ldots,K-1$, update\n+In rounded arithmetic, accept a candidate only when a validated upper enclosure proves the displayed inequality. Obtain the backend's validated upper bound $U\\ge mG_K(\\mu)$ as required by the input contract, and set the returned certificate $T:=\\varepsilon$ by copying the supplied budget; the accepted comparison certifies $mG_K(\\mu)\\le T$. No comparison or sharper enclosure of $U$ is required. If no candidate works, return `budget-exhausted` when the comparisons certify that every candidate fails, and `certificate-unavailable` when they do not decide the search. In exact arithmetic set $T=mG_K(\\mu)$. Set $P=I+Q/\\nu$ and $x_0=p_0$. For each substep $j=1,\\ldots,m$, initialize $v_0=x_{j-1}$, $w_0=e^{-\\mu}$, and $x_j=w_0v_0$. For $k=0,\\ldots,K-1$, update\n \n $$v_{k+1}=Pv_k,\\qquad w_{k+1}=w_k\\frac{\\mu}{k+1},\\qquad x_j\\leftarrow x_j+w_{k+1}v_{k+1}.$$\n \n"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "cor-constant-step-bdf2-order-two-with-consistent-start",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "Endpoint-time bounds do not imply containment of the exact ODE endpoint; retain that premise and state the invariant contraction condition with its actual bound.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/cor-constant-step-bdf2-order-two-with-consistent-start.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/cor-constant-step-bdf2-order-two-with-consistent-start.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/proposed/cor-constant-step-bdf2-order-two-with-consistent-start.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1,3 +1,3 @@\n Let $T>0$ and consider the family of constant grids $t_n=nh$, $h=T/N\\to0$, $N\\ge2$. Let $y:[0,T]\\to\\mathbb R^d$ be a $C^3$ solution of $y'=f(t,y)$. Suppose $K\\subset\\mathbb R^d$ is compact, $y([0,T])\\subset\\operatorname{int}K$, and $f$ is defined on $[0,T]\\times K$ and is Lipschitz in the state variable there in the max norm. Start the BDF2 branch algorithm of [[alg-variable-step-bdf2-with-selected-implicit-branch]] with states $Y_0,Y_1$ satisfying\n $$\\|Y_0-y(0)\\|_\\infty+\\|Y_1-y(h)\\|_\\infty=O(h^2).$$\n-At each step prescribe a closed branch ball $B_{n+1}\\subset K$ and suppose that for every pair of preceding states in $K$ the BDF2 equation has exactly one root in $B_{n+1}$; select that root. Then, for all sufficiently small $h$, the selected sequence satisfies $\\max_{0\\le n\\le N}\\|Y_n-y(t_n)\\|_\\infty=O(h^2)$. If $Y_0=y(0)$, an exact BE startup also has $\\|Y_1-y(h)\\|_\\infty=O(h^2)$ under the following local condition: a closed Euclidean ball $B_{\\rm BE}\\subset K$ of positive radius contains both $y(h)$ and the exact BE root, and the BE stage map $\\Phi(z)=y(0)+hf(h,z)$ maps this ball into itself and is $q$-contractive there with $q=hL_2\\le1/2$. A sufficient condition is that $B_{\\rm BE}$ is centered at $y(0)$, $\\|f(h,z)\\|_2\\le M$ on it, $hM\\le\\operatorname{rad}(B_{\\rm BE})$, and $f(h,\\cdot)$ is $L_2$-Lipschitz there. A finite-tolerance startup must separately meet the displayed $O(h^2)$ starter budget; a residual-tolerance status alone does not establish it. This statement makes no scalar stability claim.+At each step prescribe a closed branch ball $B_{n+1}\\subset K$ and suppose that for every pair of preceding states in $K$ the BDF2 equation has exactly one root in $B_{n+1}$; select that root. Then, for all sufficiently small $h$, the selected sequence satisfies $\\max_{0\\le n\\le N}\\|Y_n-y(t_n)\\|_\\infty=O(h^2)$. If $Y_0=y(0)$, an exact BE startup also has $\\|Y_1-y(h)\\|_\\infty=O(h^2)$ under the following local condition: a closed Euclidean ball $B_{\\rm BE}\\subset K$ of positive radius contains both $y(h)$ and the exact BE root, and the BE stage map $\\Phi(z)=y(0)+hf(h,z)$ maps this ball into itself and is $q$-contractive there with $q=hL_2\\le1/2$. Retaining the requirement $y(h)\\in B_{\\rm BE}$, sufficient conditions for stage-map invariance and the required contraction bound are that $B_{\\rm BE}$ is centered at $y(0)$, $\\|f(h,z)\\|_2\\le M$ on it, $hM\\le\\operatorname{rad}(B_{\\rm BE})$, and $f(h,\\cdot)$ is $L_2$-Lipschitz there with $hL_2\\le1/2$. A finite-tolerance startup must separately meet the displayed $O(h^2)$ starter budget; a residual-tolerance status alone does not establish it. This statement makes no scalar stability claim."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "cor-l2-inverse-error-budget-and-cross-term-condition",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "The scalar finite inner-product argument does not require a complete Hilbert space or inverse-error chain; separate the general proof from the optional application assumptions.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/cor-l2-inverse-error-budget-and-cross-term-condition.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-low-editorial-cycle1/before/items/cor-l2-inverse-error-budget-and-cross-term-condition.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-low-editorial-cycle1/proposed/items/cor-l2-inverse-error-budget-and-cross-term-condition.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "cor-mlmc-complexity-for-poisson-tau-leaping",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "Shared-minimum coupling draws shared and residual Poisson components on each fine half interval; account for these actual draws without changing the rate or complexity conclusion.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/cor-mlmc-complexity-for-poisson-tau-leaping.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-stochastic-proposals/before/cor-mlmc-complexity-for-poisson-tau-leaping.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-stochastic-proposals/proposed/cor-mlmc-complexity-for-poisson-tau-leaping.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -5,8 +5,10 @@\n the shared-minimum construction. Under the work convention that each channel\n Poisson draw, propensity evaluation, and stoichiometric update has unit cost,\n for each $\\ell\\ge1$ one correction sample costs at most $C h_\\ell^{-1}$:\n-there are $T/h_\\ell$ fine steps and $T/h_{\\ell-1}$ coarse steps, with $R$\n-draws per step. The base-level sample uses one path and costs $O(R)$, which\n+there are $T/h_\\ell$ fine half intervals, each using at most three Poisson\n+component draws per channel (one shared and two residual), with $O(R)$\n+propensity and update work. The coarse counts are accumulated over pairs\n+of half intervals at the frozen coarse state. The base-level sample uses one path and costs $O(R)$, which\n is $O(h_0^{-1})$ for fixed $T$. The level bias is $O(h_L)$ and the\n correction variance is $O(h_\\ell)$. Therefore, for all\n sufficiently small $\\epsilon>0$, deterministic sample counts in the generic\n"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "cor-shape-regular-affine-fe-primal-energy-approximation",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:08.182191+00:00",
+      "confirmed_defect": true,
+      "reason": "The reference approximation fact must include the top Sobolev norm of the same polynomial used in the lower-order estimates; the supplied Bramble-Hilbert interface provides it.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/cor-shape-regular-affine-fe-primal-energy-approximation.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/preimages/cor-shape-regular-affine-fe-primal-energy-approximation.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/proposed/cor-shape-regular-affine-fe-primal-energy-approximation.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "def-barrier-central-path-and-newton-residuals",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The symmetric-cone formula combines \u201cr_c=s\u2218z\u2212\u03c3\u03bce\u201d and \u201c\u03bc=\u27e8s,z\u27e9/\u03bd\u201d, with \u03bd the sum of the selected barrier parameters. Under the stated Euclidean Lorentz pairing, e=(1,0) has \u27e8e,e\u27e9=1, whereas the selected Lorentz barrier has parameter 2. At s=e and the barrier multiplier z=\u2212\u2207F(e)/t=2e/t, \u03bc=1/t but s\u2218z=2\u03bce. Thus the displayed residual is not the centered residual associated with the selected barrier using a common target parameter across factors. The algorithm repeats this normalization. Clarify whether this is deliberately a differently weighted heuristic residual or reconcile its central-path interpretation. This does not invalidate the separately audited gap certificates. For comparison, Vandenberghe's cone solver report, \u00a7\u00a72\u20133, https://www.seas.ucla.edu/~vandenbe/publications/coneprog.pdf, uses the half-log Lorentz barrier and Lorentz degree 1 with this Jordan identity convention.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/def-barrier-central-path-and-newton-residuals.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-kept-barrier59-analysis/before/items/def-barrier-central-path-and-newton-residuals.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-kept-barrier59-analysis/proposed/items/def-barrier-central-path-and-newton-residuals.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -11,6 +11,6 @@\n where $X=\\operatorname{diag}(x)$, $S=\\operatorname{diag}(s)$, $\\mu=x^Ts/n$, and $0<\\sigma<1$. For $x,s>0$, the modified KKT Newton direction solves\n $$\\begin{bmatrix}Q&-A^T&-I\\\\ A&0&0\\\\ S&0&X\\end{bmatrix}\\begin{bmatrix}\\Delta x\\\\\\Delta y\\\\\\Delta s\\end{bmatrix}=-\\begin{bmatrix}r_d\\\\r_p\\\\r_c\\end{bmatrix}.$$\n \n-For orthant, Lorentz, or positive-semidefinite cone factors, the analogous conic residuals are $r_p=Ax-b$, $r_d=A^Ty-G^*z-c$, and $r_c=s\\circ z-\\sigma\\mu e$. These factors are self-dual under their standard Euclidean or trace pairings by [[lem-nonnegative-orthant-log-barrier]], [[lem-lorentz-cone-log-barrier]], and [[lem-psd-cone-self-dual-logdet-barrier]], so $s$ and $z$ occupy the same factor spaces. For the orthant, $\\circ$ is coordinatewise multiplication and $e=\\mathbf1$. The Lorentz Jordan product is $(t,u)\\circ(q,v)=(tq+u^Tv,tv+qu)$ with $e=(1,0)$; for symmetric matrices $X\\circ S=(XS+SX)/2$ with $e=I$. In each factor, pairing $s\\circ z$ with $e$ gives $\\langle s,z\\rangle$: this is the coordinate sum for the orthant, the first coordinate for the Lorentz product, and $\\operatorname{tr}((XS+SX)/2)=\\operatorname{tr}(XS)$ for symmetric matrices by the finite-index trace identity. In each product cone, $\\mu=\\langle s,z\\rangle/\\nu$, where $\\nu$ is the sum of the factor barrier parameters. The linearized slack is $\\Delta s=-G\\Delta x$.\n+For a finite product of orthant, Lorentz, or positive-semidefinite cone factors, use the sum $F$ of the selected factor barriers in the three cited lemmas. The analogous conic residuals are $r_p=Ax-b$, $r_d=A^Ty-G^*z-c$, and $r_c=s\\circ z-\\sigma\\mu e_F$. These factors are self-dual under their standard Euclidean or trace pairings by [[lem-nonnegative-orthant-log-barrier]], [[lem-lorentz-cone-log-barrier]], and [[lem-psd-cone-self-dual-logdet-barrier]], so $s$ and $z$ occupy the same factor spaces. For the orthant, $\\circ$ is coordinatewise multiplication and $e=\\mathbf1$. The Lorentz Jordan product is $(t,u)\\circ(q,v)=(tq+u^Tv,tv+qu)$ with $e=(1,0)$; for symmetric matrices $X\\circ S=(XS+SX)/2$ with $e=I$. In each factor, pairing $s\\circ z$ with $e$ gives $\\langle s,z\\rangle$: this is the coordinate sum for the orthant, the first coordinate for the Lorentz product, and $\\operatorname{tr}((XS+SX)/2)=\\operatorname{tr}(XS)$ for symmetric matrices by the finite-index trace identity. Write $e_F$ for the product vector whose orthant and matrix factors are $e_j$ and whose Lorentz factors are $2e_j$; it is a barrier target vector, whereas $e$ remains the Jordan identity. Then $\\langle e,e_F\\rangle=\\nu$, the sum of the selected factor barrier parameters, and set $\\mu=\\langle s,z\\rangle/\\nu$. Indeed, $-\\nabla F_j(s_j)$ is the coordinatewise inverse in the orthant, $2(q,-u)/(q^2-\\|u\\|_2^2)$ at a Lorentz point $(q,u)$, and $X^{-1}$ at a positive-definite matrix $X$. Their Jordan products with $s_j$ are respectively $e_j$, $2e_j$, and $e_j$. Thus a barrier multiplier $z_t=-\\nabla F(s_t)/t$ satisfies $s_t\\circ z_t=e_F/t$ and $\\mu=1/t$. At an iteration, the centering target $\\sigma\\mu$ is held fixed when linearizing: the complementarity equation is $\\Delta s\\circ z+s\\circ\\Delta z=-r_c$, with $\\Delta s=-G\\Delta x$.\n \n Residual tolerances describe a candidate unless an independent argument also verifies feasibility and a primal-dual gap. A finite iteration or factorization budget that returns a candidate, failure, or inconclusive status is not itself an optimality certificate."
+          }
+        },
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-kept-barrier59-analysis/observed/items/def-barrier-central-path-and-newton-residuals.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-kept-barrier59-analysis/proposed/items/def-barrier-central-path-and-newton-residuals.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -11,6 +11,6 @@\n where $X=\\operatorname{diag}(x)$, $S=\\operatorname{diag}(s)$, $\\mu=x^Ts/n$, and $0<\\sigma<1$. For $x,s>0$, the modified KKT Newton direction solves\n $$\\begin{bmatrix}Q&-A^T&-I\\\\ A&0&0\\\\ S&0&X\\end{bmatrix}\\begin{bmatrix}\\Delta x\\\\\\Delta y\\\\\\Delta s\\end{bmatrix}=-\\begin{bmatrix}r_d\\\\r_p\\\\r_c\\end{bmatrix}.$$\n \n-For orthant, Lorentz, or positive-semidefinite cone factors, the analogous conic residuals are $r_p=Ax-b$, $r_d=A^Ty-G^*z-c$, and $r_c=s\\circ z-\\sigma\\mu e$. These factors are self-dual under their standard Euclidean or trace pairings by [[lem-nonnegative-orthant-log-barrier]], [[lem-lorentz-cone-log-barrier]], and [[lem-psd-cone-self-dual-logdet-barrier]], so $s$ and $z$ occupy the same factor spaces. For the orthant, $\\circ$ is coordinatewise multiplication and $e=\\mathbf1$. The Lorentz Jordan product is $(t,u)\\circ(q,v)=(tq+u^Tv,tv+qu)$ with $e=(1,0)$; for symmetric matrices $X\\circ S=(XS+SX)/2$ with $e=I$. In each factor, pairing $s\\circ z$ with $e$ gives $\\langle s,z\\rangle$: this is the coordinate sum for the orthant, the first coordinate for the Lorentz product, and $\\operatorname{tr}((XS+SX)/2)=\\operatorname{tr}(XS)$ for symmetric matrices by the finite-index trace identity. In each product cone, $\\mu=\\langle s,z\\rangle/\\nu$, where $\\nu$ is the sum of the factor barrier parameters. The linearized slack is $\\Delta s=-G\\Delta x$.\n+For a finite product of orthant, Lorentz, or positive-semidefinite cone factors, use the sum $F$ of the selected factor barriers in the three cited lemmas. The analogous conic residuals are $r_p=Ax-b$, $r_d=A^Ty-G^*z-c$, and $r_c=s\\circ z-\\sigma\\mu e_F$. These factors are self-dual under their standard Euclidean or trace pairings by [[lem-nonnegative-orthant-log-barrier]], [[lem-lorentz-cone-log-barrier]], and [[lem-psd-cone-self-dual-logdet-barrier]], so $s$ and $z$ occupy the same factor spaces. For the orthant, $\\circ$ is coordinatewise multiplication and $e=\\mathbf1$. The Lorentz Jordan product is $(t,u)\\circ(q,v)=(tq+u^Tv,tv+qu)$ with $e=(1,0)$; for symmetric matrices $X\\circ S=(XS+SX)/2$ with $e=I$. In each factor, pairing $s\\circ z$ with $e$ gives $\\langle s,z\\rangle$: this is the coordinate sum for the orthant, the first coordinate for the Lorentz product, and $\\operatorname{tr}((XS+SX)/2)=\\operatorname{tr}(XS)$ for symmetric matrices by the finite-index trace identity. Write $e_F$ for the product vector whose orthant and matrix factors are $e_j$ and whose Lorentz factors are $2e_j$; it is a barrier target vector, whereas $e$ remains the Jordan identity. Then $\\langle e,e_F\\rangle=\\nu$, the sum of the selected factor barrier parameters, and set $\\mu=\\langle s,z\\rangle/\\nu$. Indeed, $-\\nabla F_j(s_j)$ is the coordinatewise inverse in the orthant, $2(q,-u)/(q^2-\\|u\\|_2^2)$ at a Lorentz point $(q,u)$, and $X^{-1}$ at a positive-definite matrix $X$. Their Jordan products with $s_j$ are respectively $e_j$, $2e_j$, and $e_j$. Thus a barrier multiplier $z_t=-\\nabla F(s_t)/t$ satisfies $s_t\\circ z_t=e_F/t$ and $\\mu=1/t$. At an iteration, the centering target $\\sigma\\mu$ is held fixed when linearizing: the complementarity equation is $\\Delta s\\circ z+s\\circ\\Delta z=-r_c$, with $\\Delta s=-G\\Delta x$.\n \n Residual tolerances describe a candidate unless an independent argument also verifies feasibility and a primal-dual gap. A finite iteration or factorization budget that returns a candidate, failure, or inconclusive status is not itself an optimality certificate."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "def-finite-input-bochner-l2-space",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The definition takes all strongly measurable maps with square-integrable norm and defines their inner product by integrating the pointwise pairing, but the underlying probability space has the uncompleted trace Borel sigma-algebra. Strong measurability here permits arbitrary values on measurable null sets. For uniform \u03c1 on [0,1], choose a Borel null Cantor set C and a non-Borel subset A\u2282C. With V=R, U=2\u00b71_A\u22121_C is strongly measurable (zero simple approximants converge outside C), and |U|\u00b2=1_C is Borel integrable. W=1 also qualifies, but UW=U is not Borel measurable. Thus the displayed inner-product integral is not defined under the stated scalar integration convention. This also affects the well-definedness assertion and Step 1.1 of thm-finite-input-bochner-l2-is-hilbert. A measurable-version integration convention is used later in proofs but is not fixed by this definition.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/def-finite-input-bochner-l2-space.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-b99-measurable-version-proposal/before/items/def-finite-input-bochner-l2-space.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-b99-measurable-version-proposal/proposed/items/def-finite-input-bochner-l2-space.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -1,6 +1,22 @@\n Let $(\\Gamma,\\mathcal B(\\Gamma),\\rho)$ be the finite product-law probability\n space of [[def-finite-product-chaos-input]], and let $V$ be a separable real\n-Hilbert space. Define $L^2_\\rho(V)$ to be the space of strongly measurable\n+Hilbert space. Every strongly measurable map $U:\\Gamma\\to V$ has a\n+Borel measurable version $\\widetilde U$: choose measurable finite-valued\n+simple maps converging to $U$ outside a Borel null set $N$, and replace\n+both $U$ and those simple maps by zero on $N$. The modified simple maps\n+converge everywhere to $\\widetilde U$, which is Borel measurable.\n+\n+Throughout the use of this space, scalar integrals involving strongly\n+measurable maps mean integrals of their Borel measurable versions. In\n+particular, $\\int\\|U\\|_V^2\\,d\\rho$ means\n+$\\int\\|\\widetilde U\\|_V^2\\,d\\rho$, and the pairing below means\n+$\\int(\\widetilde U,\\widetilde W)_V\\,d\\rho$. Any two such versions agree\n+outside a Borel null set, so the nonnegative norm integral, and every finite\n+pairing integral, are independent of the versions. This convention does not\n+assert Borel measurability of the original pointwise scalar functions and\n+does not complete the underlying measure space.\n+\n+Define $L^2_\\rho(V)$ to be the space of strongly measurable\n maps $U:\\Gamma\\to V$ for which\n $\\int_\\Gamma\\|U(y)\\|_V^2\\,d\\rho(y)<\\infty$, modulo equality\n $\\rho$-almost everywhere. Its inner product is\n"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "def-uniform-grid-and-difference-operators",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The finite-interval Definition writes \u27e8p,q\u27e9_{e,h}=h \u03a3_{j=0}^{N\u22121}(D\u208ap)_j conjugate((D\u208aq)_j), whereas the periodic Definition writes the same right-hand side as \u27e8D\u208ap,D\u208aq\u27e9_{e,h}. Consequently the finite-interval pairing is defined on nodal functions as a derivative pairing, but lem-dirichlet-grid-summation-by-parts applies it to edge arrays D\u208au,D\u208av. Those arrays have only N entries, so applying the defined D\u208a again requires an unavailable endpoint entry. Thus its displayed identity and the cross term defining thm-dirichlet-leapfrog-discrete-energy are not well-typed under the supplied Definition. The intended finite edge pairing h \u03a3 p_j conjugate(q_j) makes the subsequent finite-sum arguments work, but that is not the definition currently written.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/def-uniform-grid-and-difference-operators.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-b55-edge-pairing-proposal/before/items/def-uniform-grid-and-difference-operators.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-b55-edge-pairing-proposal/proposed/items/def-uniform-grid-and-difference-operators.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": true
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Definition": "--- archived-before/Definition\n+++ archived-successor/Definition\n@@ -9,7 +9,7 @@\n where the indices in $D_+$ are reduced periodically, and set $\\|D_+p\\|_{e,h}^2=\\langle D_+p,D_+p\\rangle_{e,h}$. The same definitions apply to real-valued grid functions.\n \n For a finite interval of length $L=Nh$, use physical nodes $x_j=jh$ with indices $j=0,\\ldots,N$. On its edges $j=0,\\ldots,N-1$ define $(D_+v)_j=(v_{j+1}-v_j)/h$, and on interior nodes $j=1,\\ldots,N-1$ use $(\\Delta_hv)_j=(v_{j+1}-2v_j+v_{j-1})/h^2$. At the right endpoint define $(D_-v)_N=(v_N-v_{N-1})/h$. The interior inner product, norm, and edge inner product are\n-$$ \\langle p,q\\rangle_h=h\\sum_{j=1}^{N-1}p_j\\overline{q_j},\\qquad \\|v\\|_h^2=\\langle v,v\\rangle_h,\\qquad \\langle p,q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}. $$\n-Dirichlet grid functions have prescribed endpoint values; when they are zero, the interior norm and edge inner product above are the ones used for the wave energy.\n+$$ \\langle p,q\\rangle_h=h\\sum_{j=1}^{N-1}p_j\\overline{q_j},\\qquad \\|v\\|_h^2=\\langle v,v\\rangle_h,\\qquad \\langle p,q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}p_j\\overline{q_j}. $$\n+Here the finite-interval edge pairing takes edge arrays $p,q:\\{0,\\ldots,N-1\\}\\to\\mathbb C$, and for such an array $z$ set $\\|z\\|_{e,h}^2=\\langle z,z\\rangle_{e,h}$. Dirichlet grid functions have prescribed endpoint values; when they are zero, the interior norm and edge inner product above are the ones used for the wave energy.\n \n All statements below distinguish these periodic, infinite, and finite-interval index sets. Periodic Fourier calculations are not boundary estimates for the finite-interval grid."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-affine-triangle-and-parallelogram-maps",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The Statement writes \u201cthe reference triangle \u015c\u2082=conv{(0,0),(1,0),(0,1)}\u201d. The mesh definition reserves \u015c\u2082 for the open simplex and its closure for this convex hull. The vertex and area computations are correct, but the example should distinguish the closed reference triangle from the open-simplex symbol.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-affine-triangle-and-parallelogram-maps.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-low-editorial-cycle1/before/items/ex-affine-triangle-and-parallelogram-maps.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-low-editorial-cycle1/proposed/items/ex-affine-triangle-and-parallelogram-maps.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1,5 +0,0 @@\n-The orientation-preserving map $F(x,y)=(2x,3y)$ sends the reference\n-triangle $\\widehat S_2=\\operatorname{conv}\\{(0,0),(1,0),(0,1)\\}$ to the\n-triangle with vertices $(0,0),(2,0),(0,3)$ and area $3$. The affine map\n-$G(s,t)=(2s+t,3t)$ sends the unit square to the parallelogram with vertices\n-$(0,0),(2,0),(1,3),(3,3)$ and area $6$."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-bouncing-ball-transverse-event-error-and-reset",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Verification step 3.2 repeats step 3.1's guard Lipschitz calculation and application of the event-time bound, beginning 'Since g(q,v)=q' and ending 'agreeing with the explicit bound in step 2.1'. This adds no argument to the reset estimate; step 3.2 can use step 3.1 directly.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-bouncing-ball-transverse-event-error-and-reset.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r4-proposals/ex-bouncing-ball-transverse-event-error-and-reset/before.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r4-proposals/ex-bouncing-ball-transverse-event-error-and-reset/proposal.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-bounded-engineering-design-mixed-integer-gap-certificate",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The claimed N=4 zero-gap execution supplies endpoint witnesses incompatible with the cited continuous procedure's unconstrained midpoint instruction. The Given says each one-call fallback report returns 'an attaining feasible point'; Verification 2.1 uses x=z/2. But alg-certified-spatial-branch-and-bound specifies: 'In the unconstrained mode, the oracle returns the exact midpoint as a feasible witness and exact objective value.' Here every continuous feasible set is [0,1], whose midpoint is 1/2. For z=0,1,2, midpoint upper bounds are respectively 13/20, 1/10, 1/4, while lower bounds are 2/5, 1/10, 0. The first and third subcalls have gap 1/4>1/10 and exhaust their one-call budgets. The asserted returned witness (2,1) and U=0 therefore require an explicitly permitted additional-witness or alternative oracle mode. The optimization calculation itself is correct.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-bounded-engineering-design-mixed-integer-gap-certificate.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-b69-engineering-oracle-mode-cycle1/before/items/ex-bounded-engineering-design-mixed-integer-gap-certificate.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-b69-engineering-oracle-mode-cycle1/proposed/items/ex-bounded-engineering-design-mixed-integer-gap-certificate.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-dirichlet-laplacian-has-uniform-infinity-inverse-bound",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Verification step 1.1 introduces \u03c6_i=x_i(1\u2212x_i)/2, but this standalone item never defines x_i. The intended x_i=ih is immediate and makes the barrier calculation correct; explicitly defining it would close the notation omission.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-dirichlet-laplacian-has-uniform-infinity-inverse-bound.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-low-editorial-cycle1/before/items/ex-dirichlet-laplacian-has-uniform-infinity-inverse-bound.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-low-editorial-cycle1/proposed/items/ex-dirichlet-laplacian-has-uniform-infinity-inverse-bound.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-first-order-neumann-closure-causes-first-order-bvp-error",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Verification step 4.1 ends with \u201cdespite exact interior values.\u201d The interior numerical values are not exact: step 3.1 proves e_j=\u2212h x_j/2, which is nonzero at every interior node. The intended assertion is that the interior stencil is exact on the quadratic, as correctly stated in step 2.1 and the examples page. The computed error and rate remain valid.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-first-order-neumann-closure-causes-first-order-bvp-error.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-low-editorial-cycle1/before/items/ex-first-order-neumann-closure-causes-first-order-bvp-error.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-low-editorial-cycle1/proposed/items/ex-first-order-neumann-closure-causes-first-order-bvp-error.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-full-rank-least-squares-normal-equations-versus-qr",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-full-rank-least-squares-normal-equations-versus-qr.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/ex-full-rank-least-squares-normal-equations-versus-qr.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/ex-full-rank-least-squares-normal-equations-versus-qr.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1 +0,0 @@\n-In binary64 RNE take A=((1,1),(0,2^-27)). Its determinant 2^-27 is nonzero. The exact Gram matrix is A^T A=((1,1),(1,1+2^-54)). The spacing above 1 is 2^-52, so the midpoint is 1+2^-53; 1+2^-54 lies strictly below it and rounds to 1. Thus the formed Gram matrix has equal rows and is singular. Reduced QR works directly on A and avoids forming this rounded Gram matrix; the computed stability statement remains conditional on its own hypotheses."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-ill-conditioned-design-stability-versus-forward-error",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-ill-conditioned-design-stability-versus-forward-error.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/ex-ill-conditioned-design-stability-versus-forward-error.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/ex-ill-conditioned-design-stability-versus-forward-error.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1 +0,0 @@\n-Let A=diag(1,2^-40), with condition number 2^40. For b=(1,0)^T the unique solution is x=(1,0)^T; for b-tilde=(1,2^-40)^T it is x-tilde=(1,1)^T. The relative data change is 2^-40 while the relative solution change is 1. Thus backward stability does not imply small forward error for an ill-conditioned design."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-neumaier-recovers-low-order-term-after-cancellation",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-neumaier-recovers-low-order-term-after-cancellation.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/ex-neumaier-recovers-low-order-term-after-cancellation.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/ex-neumaier-recovers-low-order-term-after-cancellation.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1 +0,0 @@\n-In binary64 RNE sum (1,2^-53,-1). Ordinary left-to-right summation rounds 1+2^-53 to 1 by ties-to-even, then returns zero after adding -1. Neumaier step 2 gives s_1=1, t_2=1, q_2=0, a_2=2^-53, c_2=2^-53; step 3 gives t_3=0, q_3=1, a_3=0, c_3=2^-53. The final result is 2^-53, the exact sum. The finite error identity accounts for each branch correction and the final rounding."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-nonlinear-equations-and-newton-methods-boundary-cases",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": false,
+      "reason": "I do not confirm a mandatory defect: the actual item already explicitly describes the standalone correction call; the suggested additional finite-solver qualification is optional and receives no repair admission.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-nonlinear-equations-and-newton-methods-boundary-cases.md",
+      "candidate_sources": [],
+      "preimage_matches_current_at_index_time": false
+    },
+    {
+      "id": "ex-nonnormal-exponential-large-transient-norm",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Verification 1.1 says 'This is a single Jordan block at \u22121' for A = [[\u22121,10],[0,\u22121]]. Under the batch's Jordan convention, a canonical Jordan block has superdiagonal entry 1. This A is similar to that block, rather than literally that block. The displayed exponential is correct, but invoking the Jordan formula requires that similarity or a direct nilpotent-series argument.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-nonnormal-exponential-large-transient-norm.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/ex-nonnormal-exponential-large-transient-norm.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/proposed/ex-nonnormal-exponential-large-transient-norm.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-rounded-cholesky-two-by-two-residual",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-rounded-cholesky-two-by-two-residual.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/ex-rounded-cholesky-two-by-two-residual.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/ex-rounded-cholesky-two-by-two-residual.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1,9 +0,0 @@\n-In binary64 round-to-nearest, ties-to-even, let\n-$$A=\\begin{pmatrix}1&1/2\\\\1/2&1\\\\\\end{pmatrix}.$$\n-For every nonzero real $v=(v_1,v_2)^T$,\n-$$v^TAv=(v_1+v_2/2)^2+3v_2^2/4>0,$$\n-so $A$ is positive definite. The rounded recurrence gives\n-$\\widehat l_{11}=1$, $\\widehat l_{21}=1/2$, $p_2=3/4$ exactly, and\n-$\\widehat l_{22}=\\operatorname{fl}(\\sqrt{3/4})$. Since $\\sqrt3/2$ is irrational and every binary64 number is rational, $\\widehat l_{22}^2\\ne3/4$. Therefore\n-$$E=\\widehat L\\widehat L^T-A= \\begin{pmatrix}0&0\\\\0&\\widehat l_{22}^2-3/4\\end{pmatrix}\\ne0.$$\n-The successful factor satisfies the backward bound, but its residual is not zero."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-smolyak-diagonal-ridge-breaks-mixed-regularity",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The Example says the pure fourth derivative 'fails to exist along the diagonal'. Under the stated one-sided endpoint convention this needs an interior qualifier: at (0,0), the fixed-y section is x\u00b3 on [0,1], and at (1,1) it is (1\u2212x)\u00b3, so their fourth endpoint derivatives exist and equal zero. Step 1.1 correctly proves failure for y\u2208(0,1); the example's regularity counterexample remains valid.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-smolyak-diagonal-ridge-breaks-mixed-regularity.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/ex-smolyak-diagonal-ridge-breaks-mixed-regularity.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/proposed/ex-smolyak-diagonal-ridge-breaks-mixed-regularity.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-subnormal-and-overflow-range-failure",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: This kind: example carrier uses ## Statement and ## Proof instead of the schema's ## Example and ## Verification headings.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-subnormal-and-overflow-range-failure.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/ex-subnormal-and-overflow-range-failure.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/ex-subnormal-and-overflow-range-failure.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1 +0,0 @@\n-Use binary64 and the no-subnormal success policy. Put N_min=2^-1022 and the least positive subnormal 2^-1074. Inputs N_min and -(N_min+2^-1074) are normal, but their exact sum is -2^-1074, so the only tree sum in pairwise summation returns range-failure. Also N_max+N_max overflows at the root and returns range-failure. These are policy branches, not claims that IEEE hardware lacks gradual underflow."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-svrg-saga-gradient-work-storage-comparison",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The Statement claims 'O(d) working storage' for SVRG, and F1 attributes a fixed number of temporary vectors to alg-svrg-finite-sum-method. That procedure draws J only after completing all inner updates and then returns x_J. The storage proof does not explain how the selected past iterate is retained without storing the trajectory or replaying updates. Presampling the independent uniform output index and saving its iterate gives the same output law with O(d) storage and the stated gradient count, but this implementation equivalence should be stated to justify the ledger for the specified random-iterate output.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-svrg-saga-gradient-work-storage-comparison.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r2-proposals/before/ex-svrg-saga-gradient-work-storage-comparison.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r2-proposals/proposed/ex-svrg-saga-gradient-work-storage-comparison.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-unrestarted-and-restarted-gmres-on-a-diagonal-system",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The title says \u201cUnrestarted GMRES solves a two-dimensional diagonal system before GMRES(1) restarts\u201d. The verification instead shows that the first GMRES step has nonzero residual, GMRES(1) then restarts, and unrestarted GMRES solves at step 2. The phrase \u201cbefore GMRES(1) restarts\u201d misstates that timing; the Example and calculations themselves are correct.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-unrestarted-and-restarted-gmres-on-a-diagonal-system.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-stochastic-proposals/before/ex-unrestarted-and-restarted-gmres-on-a-diagonal-system.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-stochastic-proposals/proposed/ex-unrestarted-and-restarted-gmres-on-a-diagonal-system.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "ex-zero-ritz-residual-does-not-identify-ground-state",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Verification 2.1 says, \u201cThe nonzero residual threshold can be zero\u201d. The phrase is contradictory. The verified example has residual norm \u03c1=0 and correctly demonstrates that zero residual does not identify the lowest eigenvalue; only the wording needs correction.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/ex-zero-ritz-residual-does-not-identify-ground-state.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/ex-zero-ritz-residual-does-not-identify-ground-state.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/proposed/ex-zero-ritz-residual-does-not-identify-ground-state.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "lem-affine-form-integrable-on-bochner-l2",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The Statement says the scalar form and load functions 'are measurable and integrable' for U,W in the defined Bochner space. Step 1.1 further says 'Defining the scalar function arbitrarily on the measurable exceptional null set gives a measurable representative.' Arbitrary modifications on null sets need not be measurable for the explicitly uncompleted Borel law. Concretely, take uniform parameter law on [0,1], cutoff zero, spatial D=(0,1), a=1, a nonzero v\u2208H0\u00b9(D), a Borel null Cantor set C, and non-Borel A\u2282C. Set U(y)=(2\u00b71_A(y)\u22121_C(y))v and W(y)=v. Both satisfy strong measurability and have measurable square-integrable norms, but a_y(U(y),W(y))=(2\u00b71_A\u22121_C)||v||\u00b2 is not Borel measurable. Having a measurable version does not establish the Statement's literal measurability assertion.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/lem-affine-form-integrable-on-bochner-l2.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-b99-measurable-version-proposal/before/items/lem-affine-form-integrable-on-bochner-l2.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-b99-measurable-version-proposal/proposed/items/lem-affine-form-integrable-on-bochner-l2.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1,7 +1,9 @@\n For the model of [[def-uniformly-elliptic-affine-random-diffusion]], let\n $\\mathcal H=L^2_\\rho(V)$. For $U,W\\in\\mathcal H$, the scalar functions\n-$y\\mapsto a_y(U(y),W(y))$ and $y\\mapsto F(y)(W(y))$ are measurable and\n-integrable, so $\\mathcal A(U,W)$ and $\\mathcal F(W)$ are well-defined on\n+$y\\mapsto a_y(U(y),W(y))$ and $y\\mapsto F(y)(W(y))$ admit Borel\n+measurable integrable versions. Their integrals use the measurable-version\n+convention of [[def-finite-input-bochner-l2-space]], so\n+$\\mathcal A(U,W)$ and $\\mathcal F(W)$ are well-defined on\n equivalence classes. They satisfy\n $$|\\mathcal A(U,W)|\\le a^*\\|U\\|_{\\mathcal H}\\|W\\|_{\\mathcal H},\\qquad \\mathcal A(U,U)\\ge a_*\\|U\\|_{\\mathcal H}^2,$$\n and\n"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "lem-composite-simpson-asymptotic-error-expansion",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Fact F1 says the Simpson kernel has \"the two cubic pieces displayed in its Statement\" in lem-simpson-panel-peano-kernel. The cited pieces are (x-a)^3(3(x-a)-2L)/72 and its reflection, hence quartic polynomials with nonzero leading coefficient 1/24. The sign, mass and error identity are otherwise quoted correctly.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/lem-composite-simpson-asymptotic-error-expansion.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-low-editorial-cycle1/before/items/lem-composite-simpson-asymptotic-error-expansion.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/lem-composite-simpson-asymptotic-error-expansion/proposal.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        },
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/lem-composite-simpson-asymptotic-error-expansion/before.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/lem-composite-simpson-asymptotic-error-expansion/proposal.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "lem-geometry-tensor-gap-bounds-cellwise-form-defect",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The Statement begins 'Assume the geometry setting of [[def-geometry-lift-and-tensor-discrepancy]]' without stating Countable Choice; that definition also does not state it. However, Facts & Assumptions explicitly adds 'Given: Countable Choice', A3 calls it an explicit assumption, and Proof 1.1 invokes the change-of-variables supplier under A3. That supplier's Statement explicitly assumes Countable Choice. The assumption is visible in the proof context but should also be carried into the advertised Statement.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/lem-geometry-tensor-gap-bounds-cellwise-form-defect.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/lem-geometry-tensor-gap-bounds-cellwise-form-defect.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/proposed/lem-geometry-tensor-gap-bounds-cellwise-form-defect.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1,4 +1,4 @@\n-Assume the geometry setting of [[def-geometry-lift-and-tensor-discrepancy]], and suppose $\\Omega_h$ has a nonempty finite measurable partition into bounded cells $\\{K\\}$, with $h_K:=\\operatorname{diam}(K)$ and $h:=\\max_Kh_K$. For real-valued $U,W\\in C^1(\\Omega)$ with $\\nabla U,\\nabla W\\in L^2(\\Omega)$, put $v:=U\\circ\\Phi_h$ and $w:=W\\circ\\Phi_h$, and assume their gradients are square-integrable on each cell. Then the physical exact form $a(U,W)$ pulled back by $\\Phi_h$ is $a_h^{\\mathrm{lift}}(v,w)$. Suppose the implemented tensors $\\widetilde B_h$ are real symmetric and measurable, with $\\eta_{G,K}<\\infty$. The form $\\widetilde a_h(v,w):=\\sum_K\\int_K\\nabla v^T\\widetilde B_h\\nabla w$ satisfies\n+Assume Countable Choice [[def-countable-choice]] and the geometry setting of [[def-geometry-lift-and-tensor-discrepancy]], and suppose $\\Omega_h$ has a nonempty finite measurable partition into bounded cells $\\{K\\}$, with $h_K:=\\operatorname{diam}(K)$ and $h:=\\max_Kh_K$. For real-valued $U,W\\in C^1(\\Omega)$ with $\\nabla U,\\nabla W\\in L^2(\\Omega)$, put $v:=U\\circ\\Phi_h$ and $w:=W\\circ\\Phi_h$, and assume their gradients are square-integrable on each cell. Then the physical exact form $a(U,W)$ pulled back by $\\Phi_h$ is $a_h^{\\mathrm{lift}}(v,w)$. Suppose the implemented tensors $\\widetilde B_h$ are real symmetric and measurable, with $\\eta_{G,K}<\\infty$. The form $\\widetilde a_h(v,w):=\\sum_K\\int_K\\nabla v^T\\widetilde B_h\\nabla w$ satisfies\n \n $$|a_h^{\\mathrm{lift}}(v,w)-\\widetilde a_h(v,w)|\\le\\sum_K\\eta_{G,K}\\|\\nabla v\\|_{L^2(K)}\\|\\nabla w\\|_{L^2(K)}\\le\\eta_G\\|\\nabla v\\|_{L^2(\\Omega_h)}\\|\\nabla w\\|_{L^2(\\Omega_h)},$$\n \n"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "lem-index-one-dae-algebraic-residual-to-state-error",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Proof 1.1 asserts from componentwise Lagrange Taylor expansion that 'Each component remainder is at most (Lambda/2)||delta||\u2082\u00b2.' The hypothesis bounds ||g_z(z)\u2212G_*|| by Lambda||z\u2212z_*|| only relative to the branch center; it does not directly bound Hessians at the Lagrange intermediate points. The claimed remainder estimate follows immediately by integrating (g_z(z_*+s delta)\u2212G_*)delta over 0\u2264s\u22641, but that justification is absent.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/lem-index-one-dae-algebraic-residual-to-state-error.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r2-proposals/before/lem-index-one-dae-algebraic-residual-to-state-error.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r2-proposals/proposed/lem-index-one-dae-algebraic-residual-to-state-error.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "lem-local-center-manifold-for-a-simple-hopf-point",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Proof 5.1 writes \u201cL_\u03be:=D_uT_\u03be(\u0393_\u03be)=K\u2218DN(\u0393_\u03be)\u201d before treating L_\u03be as an operator X_j\u2192X_j. This asserts same-weight Fr\u00e9chet differentiability, which generally fails for nonlinear substitution on these exponentially weighted spaces. At \u0393_0=0, fixed-amplitude compact pulses translated to times t_n\u2192\u221e have X_j norm tending to zero; their nonlinear integral images can have a norm of the same order, rather than little-o of that norm, although DN(0)=0. The subsequent scale-of-weights difference-quotient argument does not need this same-space derivative assertion: L_\u03be can be defined directly as the bounded formal linearization. The displayed derivative identification should be qualified accordingly.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/lem-local-center-manifold-for-a-simple-hopf-point.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/lem-local-center-manifold-for-a-simple-hopf-point/before.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/lem-local-center-manifold-for-a-simple-hopf-point/proposal.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "lem-rooted-tree-generating-function-series",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Proof 1.2 uses 'The coefficients of U are a_k/k' before Proof 2.1 derives that identity. The formal calculation in 2.1 uses only the formal identity from 1.1 and can precede the convergence argument; the current order leaves this coefficient assertion temporarily unjustified.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/lem-rooted-tree-generating-function-series.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/before/lem-rooted-tree-generating-function-series.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r3-proposals/proposed/lem-rooted-tree-generating-function-series.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "lem-strong-rrqr-column-swap-volume-ratio",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The displayed replacement set is '(J\\setminus\\{i\\})\\cup\\{j\\}', although i and j index selected and trailing QR positions, respectively. These are not original column indices. Literally, take A=diag(1,2), Pi=I, Q=I, k=1, J={1}, i=j=1. The displayed numerator selects column 1 again, so its ratio is 1, whereas X=0, omega_1=1 and gamma_1=2 give score 2. The proof analyzes replacement by the actual trailing column; the Statement must map positions through Pi and use position k+j for that trailing column.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/lem-strong-rrqr-column-swap-volume-ratio.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step5-rrqr-column-labels-cycle1-20261016T180654920590Z/before/items/lem-strong-rrqr-column-swap-volume-ratio.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step5-rrqr-column-labels-cycle1-20261016T180654920590Z/proposed/items/lem-strong-rrqr-column-swap-volume-ratio.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1,2 +1,2 @@\n-Let $A\\in\\mathbb F^{m\\times n}$ have full column rank, $m\\ge n$, and let $A\\Pi=QR$ be a full QR factorization, with $Q\\in\\mathbb F^{m\\times m}$ unitary and $R\\in\\mathbb F^{m\\times n}$ upper trapezoidal. Partition $R=\\begin{bmatrix}R_{11}&R_{12}\\\\0&R_{22}\\end{bmatrix}$ after the first $k$ rows and columns, where $R_{11}\\in\\mathbb F^{k\\times k}$ is nonsingular and $1\\le k<n$. Write $X=R_{11}^{-1}R_{12}$, $\\omega_i=\\|e_i^*R_{11}^{-1}\\|_2$, and $\\gamma_j=\\|R_{22}(:,j)\\|_2$. Let $J$ be the selected set of $k$ columns and define its volume by $\\operatorname{vol}(A(:,J))=\\det(A(:,J)^*A(:,J))^{1/2}$. Replacing selected column $i$ by trailing column $j$ changes this volume by the factor\n-$$\\frac{\\operatorname{vol}(A(:,(J\\setminus\\{i\\})\\cup\\{j\\}))}{\\operatorname{vol}(A(:,J))}=\\bigl(|X_{ij}|^2+(\\omega_i\\gamma_j)^2\\bigr)^{1/2}.$$+Let $A\\in\\mathbb F^{m\\times n}$ have full column rank, $m\\ge n$, and let $A\\Pi=QR$ be a full QR factorization, with $Q\\in\\mathbb F^{m\\times m}$ unitary and $R\\in\\mathbb F^{m\\times n}$ upper trapezoidal. Partition $R=\\begin{bmatrix}R_{11}&R_{12}\\\\0&R_{22}\\end{bmatrix}$ after the first $k$ rows and columns, where $R_{11}\\in\\mathbb F^{k\\times k}$ is nonsingular and $1\\le k<n$. Write $X=R_{11}^{-1}R_{12}$, $\\omega_i=\\|e_i^*R_{11}^{-1}\\|_2$, and $\\gamma_j=\\|R_{22}(:,j)\\|_2$. Define the column-order permutation $\\pi$ by $\\Pi e_r=e_{\\pi(r)}$ for $1\\le r\\le n$, so $(A\\Pi)(:,r)=A(:,\\pi(r))$. Let $J=\\{\\pi(1),\\ldots,\\pi(k)\\}$ be the selected set of original column labels and define its volume by $\\operatorname{vol}(A(:,J))=\\det(A(:,J)^*A(:,J))^{1/2}$. For $1\\le i\\le k$ and $1\\le j\\le n-k$, replacing selected column $A(:,\\pi(i))$ by trailing column $A(:,\\pi(k+j))$ changes this volume by the factor\n+$$\\frac{\\operatorname{vol}(A(:,(J\\setminus\\{\\pi(i)\\})\\cup\\{\\pi(k+j)\\}))}{\\operatorname{vol}(A(:,J))}=\\bigl(|X_{ij}|^2+(\\omega_i\\gamma_j)^2\\bigr)^{1/2}.$$"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The Statement says each step \u201chas a C\u00b9 Jacobian\u201d under V \u2208 C\u00b2(Q). This asserts more regularity than the hypotheses provide. Take d = 1, Q = R, M = 1 and V(q) = |q|^(5/2). Then V is C\u00b2, but V''(q) = (15/4)|q|^(1/2) is not differentiable at zero. For any h > 0, the kick-then-drift map has Jacobian entry \u2202p\u207a/\u2202q = \u2212hV''(q), which is not differentiable at zero, so its Jacobian is not C\u00b9. The proof establishes a C\u00b9 map with a continuous Jacobian satisfying the symplectic identity; it does not establish the Statement's C\u00b9-Jacobian claim.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/prop-local-leapfrog-and-symplectic-euler-are-symplectic.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step5-b54-C1-map-proposal-20261016T180432984332Z/before/items/prop-local-leapfrog-and-symplectic-euler-are-symplectic.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step5-b54-C1-map-proposal-20261016T180432984332Z/proposed/items/prop-local-leapfrog-and-symplectic-euler-are-symplectic.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1 +1 @@\n-Under the hypotheses of [[lem-canonical-kick-and-drift-shears-have-symplectic-jacobians]], every admitted local leapfrog step and every admitted kick-then-drift symplectic Euler step has a $C^1$ Jacobian satisfying $D\\Phi^TJD\\Phi=J$ on its open admitted domain. The result concerns symplecticity, not energy conservation.+Under the hypotheses of [[lem-canonical-kick-and-drift-shears-have-symplectic-jacobians]], every admitted local leapfrog step and every admitted kick-then-drift symplectic Euler step is a $C^1$ map with a continuous Jacobian satisfying $D\\Phi^TJD\\Phi=J$ on its open admitted domain. The result concerns symplecticity, not energy conservation."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "rem-gauss-newton-information-is-not-full-hessian",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The remark begins \u201cFor the unweighted nonlinear least-squares objective\u201d and asserts the exact Hessian identity without stating that the residual map is C2. Its cited supplier thm-nonlinear-least-squares-gradient-and-hessian explicitly requires C2, whereas the batch observation definition supplies only C1. For example r(\u03b8)=1+|\u03b8|^(3/2) is C1 but its squared-residual objective has no second derivative at zero. The intended supplier hypothesis is immediately recoverable, but should be stated in the remark.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/rem-gauss-newton-information-is-not-full-hessian.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step5-b102-C2-hessian-qualification-20261016T181016122349Z/before/items/rem-gauss-newton-information-is-not-full-hessian.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step5-b102-C2-hessian-qualification-20261016T181016122349Z/proposed/items/rem-gauss-newton-information-is-not-full-hessian.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-adaptive-cubic-regularization-epsilon-complexity",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The Statement asserts that the uncapped process reaches the target. Proof steps 2.1 and 3.2 bound nonterminal accepted trials, while steps 3.1 and 4.1 count rejection blocks through the first target iterate without explicitly establishing that this iterate exists. The short missing argument is that an infinite nonterminal run, with solver success and rejection blocks bounded by R, must have infinitely many accepted trials, contradicting the fixed positive decrease and lower bound. This closes the proof under its existing hypotheses.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-adaptive-cubic-regularization-epsilon-complexity.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r2-proposals/before/thm-adaptive-cubic-regularization-epsilon-complexity.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r2-proposals/proposed/thm-adaptive-cubic-regularization-epsilon-complexity.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-adaptive-finite-candidate-gp-search-posterior-correct",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The claim that 'after any finite history for which ... computes a posterior state, the conditional law ... is the posterior supplied' needs a restriction on informative observation availability. The algorithm permits an oracle to return observation-unavailable without restricting that event. Take one candidate, f ~ N(0,1), independent \u03be ~ N(0,1), s=0, N=1, and an exact selector. Let the oracle return f+\u03be when f>0 and observation-unavailable otherwise. Every call finishes, returned observations have the stipulated additive-noise form, and C\u2081=2 is positive definite. A successful terminal history reveals f>0, whereas the computed N(y/2,1/2) posterior assigns positive probability to f<0. The final sentence about unavailable observations does not address this information in successful histories. The true-posterior interpretation in the algorithm has the same missing qualification.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-adaptive-finite-candidate-gp-search-posterior-correct.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-gp-observation-availability-cycle1/before/items/thm-adaptive-finite-candidate-gp-search-posterior-correct.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-gp-observation-availability-cycle1/proposed/items/thm-adaptive-finite-candidate-gp-search-posterior-correct.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1 +1,7 @@\n-Assume AC; let $f_X$ have a fixed real Gaussian-process prior with mean $m$ and symmetric positive-semidefinite covariance matrix on a nonempty finite ordered candidate set $X$. Let the observation errors be independent $N(0,\\sigma^2)$ variables, independent of the entire process. The initial observation sites, if any, are fixed before their observations and their values are generated by $y_i=f(x_i)+\\xi_i$ under this same model. At every valid history length $t$, assume $C_t=K_t+\\sigma^2 I$ is positive definite when $t\\ge1$ (which holds for every possibly singular $K_t$ when $\\sigma^2>0$ by [[lem-positive-noise-regularizes-observed-covariance]], and holds for zero noise when $K_t$ itself is positive definite). Use the exact least-index maximizer, or a deterministic approximate selector that is measurable with respect to the observed history and supplies its verified error $\\delta_t$. Then after any finite history for which [[alg-finite-candidate-gp-acquisition-search]] computes a posterior state, the conditional law of $f_X$ given that history is the posterior supplied by [[thm-finite-gaussian-process-posterior-and-predictive-laws]], with mean and covariance computed from the actually selected observation list. This includes the updated state at the final horizon. An unavailable solve or observation ends the assertion at the last history with a computed posterior state. This theorem proves a sequential posterior update, not a regret or global-search guarantee.+Assume AC; let $f_X$ have a fixed real Gaussian-process prior with mean $m$ and symmetric positive-semidefinite covariance matrix on a nonempty finite ordered candidate set $X$. Let the observation errors be independent $N(0,\\sigma^2)$ variables, independent of the entire process. The initial observation sites, if any, are fixed before their observations and their values are generated by $y_i=f(x_i)+\\xi_i$ under this same model, without an additional informative inclusion event. Use the exact least-index maximizer, or a deterministic approximate selector that is measurable with respect to the observed history and supplies its verified error $\\delta_t$.\n+\n+Let $H_t$ contain the initial data, selected sites, successful observation values, and earlier availability flags, where $t$ is the current number of observations. Before each reached adaptive call, write $A_{t+1}=1$ when the oracle returns $Y_{t+1}=f(x_{t+1})+\\xi_{t+1}$ and $A_{t+1}=0$ when it returns `observation-unavailable`. Assume a measurable $q_t(H_t)\\in[0,1]$ satisfies\n+$$P(A_{t+1}=1\\mid H_t,f_X,\\xi_{t+1},\\ldots,\\xi_N)=q_t(H_t)$$\n+almost surely. This is conditional independence of availability from the joint latent vector and all unused observation errors given the observed past. Other computation and status decisions are measurable functions of the observed history and fixed inputs. Availability may depend on past values and the selected site; $q_t=1$ includes always available observations.\n+\n+At every valid history length $t$, assume $C_t=K_t+\\sigma^2 I$ is positive definite when $t\\ge1$ (which holds for every possibly singular $K_t$ when $\\sigma^2>0$ by [[lem-positive-noise-regularizes-observed-covariance]], and holds for zero noise when $K_t$ itself is positive definite). Then whenever [[alg-finite-candidate-gp-acquisition-search]] computes a posterior state, a version of the conditional law of $f_X$ given the full observed history is the Gaussian kernel supplied by [[thm-finite-gaussian-process-posterior-and-predictive-laws]], evaluated on the actually selected observation list. This includes successful availability flags and the updated state at the final horizon. If the next call is unavailable, the retained current state remains the conditional law after learning that flag. Conditional-law assertions hold almost surely for realized histories; the fixed-list formulas provide an all-data-vector version and make no claim about uniquely determined laws on impossible histories. A failed solve after appending an observation leaves only an older stored state, whose assertion concerns its earlier history. This theorem proves a sequential posterior update, not a regret or global-search guarantee."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-damped-newton-global-phase-and-local-quadratic-rate",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The Statement does not impose d \u2265 1, but its cited local supplier thm-newton-local-quadratic-convergence-under-lipschitz-hessian explicitly assumes d \u2265 1. It also defines the operator norm as sup over \u2016v\u2016\u2082 = 1, whose indexing set is empty in dimension zero, without a zero-dimensional convention. The positive-dimensional argument is sound; explicitly requiring d \u2265 1, or supplying the zero-dimensional convention and stationary case, would close this boundary mismatch.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-damped-newton-global-phase-and-local-quadratic-rate.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/preimages/thm-damped-newton-global-phase-and-local-quadratic-rate.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/proposed/thm-damped-newton-global-phase-and-local-quadratic-rate.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -2,7 +2,7 @@\n \n $$m\\|v\\|_2^2\\le v^TH_f(y)v\\le M\\|v\\|_2^2\\qquad(y\\in V,\\ v\\in\\mathbb R^d).$$\n \n-Assume also that there are $R>0$ and $L_H\\ge0$ with $B(x^*,R)\\subseteq V$ and $\\|H_f(y)-H_f(z)\\|_{\\mathrm{op}}\\le L_H\\|y-z\\|_2$ for $y,z\\in B(x^*,R)$, where $\\|A\\|_{\\mathrm{op}}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$. Run [[alg-damped-newton]] with $a\\in(0,1/2)$, $b\\in(0,1)$, and positive decrement tolerance $\\varepsilon$. Let $\\rho>0$ and $C<\\infty$ be constants furnished by [[thm-newton-local-quadratic-convergence-under-lipschitz-hessian]] for these data, and set\n+Assume also that there are $R>0$ and $L_H\\ge0$ with $B(x^*,R)\\subseteq V$ and $\\|H_f(y)-H_f(z)\\|_{\\mathrm{op}}\\le L_H\\|y-z\\|_2$ for $y,z\\in B(x^*,R)$, where $\\|A\\|_{\\mathrm{op}}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$ for $d\\ge1$, and the unique operator on $\\mathbb R^0$ has norm zero. For $d\\ge1$, run [[alg-damped-newton]] with $a\\in(0,1/2)$, $b\\in(0,1)$, and positive decrement tolerance $\\varepsilon$, and let $\\rho>0$ and $C<\\infty$ be constants furnished by [[thm-newton-local-quadratic-convergence-under-lipschitz-hessian]] for these data. For $d=0$, interpret the procedure as the immediate return $(x_0,\\texttt{stationary})$, and set $\\rho=R$ and $C=0$. In either case set\n \n $$\\tau_N:=\\min\\left\\{1,\\frac{2b(1-a)m}{M}\\right\\},\\qquad q_N:=1-\\frac{2am\\tau_N}{M}.$$\n \n@@ -10,7 +10,7 @@\n \n $$f(x_{k+1})-f^*\\le q_N(f(x_k)-f^*),\\qquad 0<q_N<1.$$\n \n-Thus, after finitely many such updates the method either has stopped at its positive decrement test or has entered $B(x^*,\\rho)$. More explicitly, if $\\varepsilon<m^2\\rho^2/(2M)$, the decrement test cannot stop outside that ball, so the method reaches it after finitely many accepted updates. Once in this ball, every later attempted update has step $t_k=1$ and satisfies\n+Thus, after finitely many such updates the method either has stopped at its stationary or positive decrement test or has entered $B(x^*,\\rho)$. More explicitly, if $\\varepsilon<m^2\\rho^2/(2M)$, the decrement test cannot stop outside that ball, so the method reaches it after finitely many accepted updates. Once in this ball, every later attempted update has step $t_k=1$ and satisfies\n \n $$\\|x_{k+1}-x^*\\|_2\\le C\\|x_k-x^*\\|_2^2.$$\n \n"
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-discrete-sde-adjoint-gradient-interchange",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Proof 1.1 says to apply the chain rule to 'u_{k+1}=\u03a8_k(u_k,\u03b8\u2080,\u03be_{k+1})' while deriving D\u03b8u_{k+1}=D_u\u03a8_k D\u03b8u_k + D\u03b8\u03a8_k. The parameter must remain variable in the composition before evaluating its derivative at \u03b8\u2080; freezing that argument literally removes the displayed direct parameter derivative. The intended composition is explicit in the Statement and the rest of the proof, so this is a local notation correction.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-discrete-sde-adjoint-gradient-interchange.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r4-proposals/thm-discrete-sde-adjoint-gradient-interchange/before.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r4-proposals/thm-discrete-sde-adjoint-gradient-interchange/proposal.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: F4 and Proof 1.1 write f=p_m s+t with \u201cdeg s<m\u201d, allowing t=0 explicitly but omitting the analogous s=0 case. For example, f=1 gives s=0 for every m\u22651, and def-real-polynomial-degree-leading-coefficient-and-monic explicitly gives the zero polynomial no degree. State \u201cs=0 or deg s<m\u201d and treat its orthogonality integral as zero. This is an immediate zero-case clarification; the exactness conclusion remains sound.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r2-proposals/before/thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r2-proposals/proposed/thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-implicit-differentiation-forward-and-adjoint-formulas",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The Statement imposes no positivity restriction on p,m, but Proof 1.1 says the cited implicit-function theorem applies 'under exactly the nonsingularity hypothesis in the statement.' The opened supplier thm-euclidean-implicit-function-theorem explicitly requires both block dimensions \u22651. If zero dimensions are permitted, as elsewhere on this page, p=0 and m=0 require separate elementary constant/zero-space arguments. The formulas remain valid; this is a missing boundary-case justification.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-implicit-differentiation-forward-and-adjoint-formulas.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/preimages/thm-implicit-differentiation-forward-and-adjoint-formulas.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/proposed/thm-implicit-differentiation-forward-and-adjoint-formulas.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-interval-linear-krawczyk-certifier-soundness",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: F3 says the algorithm 'checks RS=SR=I'. The cited algorithm instead admits input matrices 'with exact identities RS=SR=I'; its operational steps check interval evaluation, inclusion and the defect norm, but contain no inverse-witness check. The theorem remains sound on its admitted inputs, and Proof 1.1 correctly uses the supplied identity. F3 inaccurately describes an input condition as an executed check.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-interval-linear-krawczyk-certifier-soundness.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/thm-interval-linear-krawczyk-certifier-soundness/before.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/thm-interval-linear-krawczyk-certifier-soundness/proposal.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-low-rank-adi-conditional-convergence-bound",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Step 3.1 writes: \u201cIf R_j=U\u03a3V* is an SVD, then R_jR_j*=U\u03a3\u00b2U*\u201d. Here R_j has shape n\u00d7r and r need not equal n, so the full SVD factor \u03a3 is rectangular and \u03a3\u00b2 is undefined. The required product is \u03a3\u03a3*, whose diagonal contains the squared singular values. The following norm inequality is correct and closes immediately with that product.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-low-rank-adi-conditional-convergence-bound.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/thm-low-rank-adi-conditional-convergence-bound/before.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/thm-low-rank-adi-conditional-convergence-bound/proposal.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-milstein-mlmc-level-variance-and-cost",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The title says \u201cMilstein MLMC correction variance and epsilon-squared cost\u201d, whereas the Statement and Proof establish work O(\u03b5^(-2)). The title should say inverse-epsilon-squared cost to match the proved exponent.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-milstein-mlmc-level-variance-and-cost.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-low-editorial-cycle1/before/items/thm-milstein-mlmc-level-variance-and-cost.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-low-editorial-cycle1/proposed/items/thm-milstein-mlmc-level-variance-and-cost.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-multifrontal-elimination-equivalence-and-sparse-costs",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The Statement writes its work and exact allocation sums over r=1,...,n, although the supplying algorithm defines F_r and pivot position r over 0,...,n\u22121. Thus d_n is undefined and d_0 is omitted. Use the established zero-based range, or explicitly reindex the column sizes.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-multifrontal-elimination-equivalence-and-sparse-costs.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/preimages/thm-multifrontal-elimination-equivalence-and-sparse-costs.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/proposed/thm-multifrontal-elimination-equivalence-and-sparse-costs.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1,3 +1,3 @@\n Assume exact arithmetic, a Hermitian positive-definite $A$, and a successful ordered factorization using [[alg-multifrontal-cholesky-and-sparse-triangular-solves]]. The fronts and contribution arrays give the same Cholesky factor as scalar elimination in ordering $\\pi$. With $d_r=\\ell_r+1=|F_r|$, the arithmetic work for assembly and scalar front updates is\n-$$O\\!\\left(\\sum_{r=1}^n d_r^2\\right),$$\n-the symbolic factor allocation has exactly $\\sum_{r=1}^n d_r$ positions, and each forward/back substitution solve uses $O(\\sum_r d_r)$ scalar operations. These are arithmetic and factor-storage counts; they are not wall-clock or total workspace bounds.+$$O\\!\\left(\\sum_{r=0}^{n-1} d_r^2\\right),$$\n+the symbolic factor allocation has exactly $\\sum_{r=0}^{n-1} d_r$ positions, and each forward/back substitution solve uses $O(\\sum_r d_r)$ scalar operations. These are arithmetic and factor-storage counts; they are not wall-clock or total workspace bounds."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-pade-scaling-and-squaring-error-bound",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The proof conflates the initial candidate and exact reference. Step 1.3 calls the candidate X\u2080 = r_m(B); step 2.1 then defines X_j = exp(2^j B), including X\u2080 = exp(B). Step 2.2 consequently writes norm(X\u2080 \u2212 exp(B)) \u2264 E\u2080 rather than the required initial candidate bound norm(X\u0302\u2080 \u2212 exp(B)) \u2264 E\u2080. The contour argument establishes the intended bound, but the notation as written does not state the induction base used in step 3.1.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-pade-scaling-and-squaring-error-bound.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/before/thm-pade-scaling-and-squaring-error-bound.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-proposals/proposed/thm-pade-scaling-and-squaring-error-bound.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-parabolic-adjoint-gradient-sensitivity",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Proof 1.2 uses 'the adjoint equation with v=w_\u03b7 and the linearized state equation with v=p', although the Statement gives equations 'for every v\u2208V and almost every t'. Neither this theorem nor def-parameterized-parabolic-variational-problem requires the bilinear forms to be bounded, so fixed-test equations cannot in general be substituted at time-dependent tests. Under the written fixed-test quantifier order the claim is false. A counterexample in ZFC: take T=1 and V=H=\u2113\u00b2(R), with w(t)=(1,t,t\u00b2/2!,t\u00b3/3!,...). The vectors w(t), 0\u2264t\u22641, are linearly independent by the finite Vandermonde determinant. Extend them to a Hamel basis and let \u03bb_t be the coefficient functional of w(t). For each fixed v, \u03bb_t(v) is nonzero at only finitely many times. Set a\u03b8(t;x,y)=\u03bb_t(x)(e\u2080,y), independently of \u03b8; u\u03b8(t)=\u03b8w(t); f\u03b8(t)=\u03b8(w\u2032(t)+e\u2080); u\u2080,\u03b8=\u03b8e\u2080; L=0; and \u03c6(x,\u03b8)=(e\u2080,x). The state and tangent equations hold for all tests at every time. The constant p=e\u2080 satisfies the written adjoint equation for every fixed test almost everywhere, since \u03bb_t(v)=0 almost everywhere, and has the required terminal value. All state, forcing, objective and parameter derivatives have the required regularity. The true reduced objective is j(\u03b8)=\u03b8, whereas the asserted formula gives Dj[1]=1+\u222b\u2080\u00b9(e\u2080,w\u2032+e\u2080)dt=2. An explicit bounded-form/operator-equation hypothesis, or appropriately strengthened simultaneous-test assumptions, is needed to license the cancellation.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-parabolic-adjoint-gradient-sensitivity.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-parabolic96-common-null-cycle1/guards/items/thm-parabolic-adjoint-gradient-sensitivity.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-parabolic96-common-null-cycle1/proposed/items/thm-parabolic-adjoint-gradient-sensitivity.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1,7 +1,9 @@\n-Assume Countable Choice and $T>0$, and use the real evolution triple $(V,H,V^*)$ of [[def-parameterized-parabolic-variational-problem]]. On an open parameter set $\\Theta\\subseteq\\mathbb R^m$, assume the state map $\\theta\\mapsto u_\\theta$ is Fr\\'echet differentiable into $W(0,T;V)$, with derivative $w_\\eta$ in direction $\\eta\\in\\mathbb R^m$. Assume, for every $v\\in V$ and almost every $t$,\n+Assume Countable Choice and $T>0$, and use the real evolution triple $(V,H,V^*)$ of [[def-parameterized-parabolic-variational-problem]]. On an open parameter set $\\Theta\\subseteq\\mathbb R^m$, assume the state map $\\theta\\mapsto u_\\theta$ is Fr\\'echet differentiable into $W(0,T;V)$, with derivative $w_\\eta$ in direction $\\eta\\in\\mathbb R^m$. For each fixed $\\theta$ and direction $\\eta$, assume there is a null set $N_{\\theta,\\eta}\\subset(0,T)$ such that the linearized equation below holds for every $t\\notin N_{\\theta,\\eta}$ and simultaneously every $v\\in V$, using representatives of its data:\n $$\\langle w_\\eta'(t),v\\rangle+a_\\theta(t;w_\\eta(t),v)=\\langle f_\\theta'[\\eta](t),v\\rangle-a_\\theta'[\\eta](t;u_\\theta(t),v),\\qquad w_\\eta(0)=u_{0,\\theta}'[\\eta].$$\n-Let $\\phi:H\\times\\Theta\\to\\mathbb R$ be $C^1$, and let $L:[0,T]\\times V\\times\\Theta\\to\\mathbb R$ be measurable in time and $C^1$ in $(u,\\theta)$ for almost every time, with a common integrable majorant that justifies differentiating its time integral. Assume $D_u\\phi$ is represented by an element of $H$ and $D_uL(t,u_\\theta,\\theta)\\in V^*$ is square-integrable in time. Suppose the adjoint $p\\in W(0,T;V)$ satisfies\n+Let $\\phi:H\\times\\Theta\\to\\mathbb R$ be $C^1$, and let $L:[0,T]\\times V\\times\\Theta\\to\\mathbb R$ be measurable in time and $C^1$ in $(u,\\theta)$ for almost every time, with a common integrable majorant that justifies differentiating its time integral. Assume $D_u\\phi$ is represented by an element of $H$ and $D_uL(t,u_\\theta,\\theta)\\in V^*$ is square-integrable in time. Suppose the adjoint $p\\in W(0,T;V)$ satisfies the following equation simultaneously for every $v\\in V$ outside one null set $M_\\theta\\subset(0,T)$, and has the stated terminal trace:\n $$-\\langle p'(t),v\\rangle+a_\\theta(t;v,p(t))=D_uL(t,u_\\theta(t),\\theta)[v],\\qquad p(T)=\\nabla_H\\phi(u_\\theta(T),\\theta).$$\n Then for $j(\\theta)=\\phi(u_\\theta(T),\\theta)+\\int_0^T L(t,u_\\theta(t),\\theta)\\,dt$,\n $$D j(\\theta)[\\eta]=D_\\theta\\phi(u_\\theta(T),\\theta)[\\eta]+(p(0),u_{0,\\theta}'[\\eta])_H+\\int_0^T\\left(D_\\theta L(t,u_\\theta,\\theta)[\\eta]+\\langle f_\\theta'[\\eta](t),p(t)\\rangle-a_\\theta'[\\eta](t;u_\\theta(t),p(t))\\right)dt.$$\n+The exceptional sets are independent of the test $v$; they need not be common to all parameters or directions. The forcing/form-derivative difference in the integrand is interpreted together. The hypotheses imply it is measurable and integrable: almost everywhere it equals $\\langle w_\\eta',p\\rangle+\\langle p',w_\\eta\\rangle+D_uL[w_\\eta]$. No global boundedness or coercivity of $a_\\theta$, or separability of $V$, is required for this conditional identity.\n+\n This is conditional on the displayed differentiable state and adjoint; it does not prove either exists. The adjoint form is transposed as shown, so symmetry of $a_\\theta$ is not required."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-scalar-brownian-bridge-barrier-crossing-probability",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Proof step 2.1 explicitly says \u201cDominated convergence proves continuity of q.\u201d The declared deps omit thm-dominated-convergence, although that published supplier is available and its hypotheses hold here because the crossing indicators are bounded by one. This is a missing logical dependency declaration, not a failure of the continuity argument.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-scalar-brownian-bridge-barrier-crossing-probability.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-stochastic-proposals/before/thm-scalar-brownian-bridge-barrier-crossing-probability.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-stochastic-proposals/proposed/thm-scalar-brownian-bridge-barrier-crossing-probability.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-scaled-householder-qr-backward-stability",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The Statement says that applying the stored reflectors to a separate b 'gives a full vector' with the stated error bound, but explicitly assumes success only for the QR steps. Its Facts section additionally assumes successful vector updates. This qualification should also appear in the Statement: in binary64, A=[1] factors successfully with stored v=2 and tau=1/2, while applying that reflector to b=[N_max] fails at the dot product 2*N_max. The proof is sound under its stated successful-vector-update assumption.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-scaled-householder-qr-backward-stability.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/before/thm-scaled-householder-qr-backward-stability.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-batch1-resolution/proposed/thm-scaled-householder-qr-backward-stability.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1,5 +1,5 @@\n Let $A\\in\\mathbb R^{m\\times n}$, $m\\ge n\\ge1$, undergo successful QR steps of [[alg-scaled-householder-reflector-formation-and-application]], with $mu<1$. Use $\\kappa_m$ from [[lem-scaled-householder-step-meets-local-backward-error-premise]] and set $\\beta_Q=(1+\\kappa_m)^n-1$. The exact orthogonal product represented by the stored reflectors has reduced first $n$ columns $\\widehat Q$, and the computed triangular block is $\\widehat R$. Then\n $$A+\\Delta A=\\widehat Q\\widehat R,\\qquad \\|\\Delta A\\|_F\\le\\beta_Q\\|A\\|_F.$$\n-Applying the stored reflectors in the same order to a separate vector $b$, by their rounded rank-one updates without column overwrites, gives a full vector $\\widehat c$ satisfying\n+Successful application of the stored reflectors in the same order to a separate vector $b$, by their rounded rank-one updates without column overwrites, gives a full vector $\\widehat c$ satisfying\n $$\\|\\widehat c-Q_{\\rm full}^Tb\\|_2\\le\\beta_Q\\|b\\|_2.$$\n The bounds are $O(u)$ for fixed dimensions. An explicitly rounded dense product for $Q_{\\rm full}$ is not asserted exactly orthogonal."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-sdc-finite-sweeps-raise-order",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: The Statement concludes global order p = min(M,k+1) without explicitly specifying the numerical initial error. Proof 3.1 introduces 'The initial error is e_0=0' without a corresponding stated premise. Exact initialization is the natural intended convention, but it should be stated, or replaced by an O(h^p) initial-error assumption. If arbitrary numerical starting data are admitted literally, y'=0 with numerical initial value different from the exact initial value satisfies the tube and contraction conditions while retaining a nonvanishing grid error.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-sdc-finite-sweeps-raise-order.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r4-proposals/thm-sdc-finite-sweeps-raise-order/before.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-late-r4-proposals/thm-sdc-finite-sweeps-raise-order/proposal.md",
+          "statement_definition_delta": {
+            "Statement": true,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {
+            "Statement": "--- archived-before/Statement\n+++ archived-successor/Statement\n@@ -1 +1 @@\n-Fix $M\\ge1$ collocation nodes and a nonnegative integer $k$ independent of $h$. Use the explicit-left-Euler SDC sweep in [[alg-explicit-left-euler-sdc-sweep]] with constant predictor $U^0=\\mathbf1u$ and form the candidate endpoint from $U^k$, after $k$ completed sweeps. Assume each coordinate of $f$ has continuous partial derivatives through total order $M$ on an open neighborhood of a common compact tube $\\mathcal T$; assume $f$ is state-Lipschitz with constant $L$ and bounded by $B$ on $\\mathcal T$, which contains the exact path, all iterates, and the comparison segments. Also assume the exact-path integrand has the derivative bound required by [[thm-collocation-local-defect-order-m]]. At each mesh time $t_n$, let $\\mathcal U_n\\subseteq\\mathcal T_{t_n}:=\\{u:(t_n,u)\\in\\mathcal T\\}$ be a set of starting states containing the exact and numerical grid states used in the global-error comparison. For every $u\\in\\mathcal U_n$, assume the constant predictor $U^0=\\mathbf1u$ belongs to a nonempty closed product ball $\\mathcal C_{n,u}$ used in [[thm-sdc-sweep-contraction-and-error-bound]], and each inner stage map and sweep preserves $\\mathcal C_{n,u}$. Assume the contraction theorem holds uniformly with $a=hL\\|Q_\\Delta\\|_\\infty\\le1/2$ and $q\\le C_qh<1$. For fixed $k$, the $U^k$ endpoint map has exact-start defect $O(h^{p+1})$ and global order $p=\\min(M,k+1)$ on any fixed interval, provided all grid states stay in $\\mathcal T$. The claim is local-step and fixed-$k$; it asserts no uniform constants as $M$ or $k$ grows.+Fix $M\\ge1$ collocation nodes and a nonnegative integer $k$ independent of $h$. Use the explicit-left-Euler SDC sweep in [[alg-explicit-left-euler-sdc-sweep]] with constant predictor $U^0=\\mathbf1u$ and form the candidate endpoint from $U^k$, after $k$ completed sweeps. Assume each coordinate of $f$ has continuous partial derivatives through total order $M$ on an open neighborhood of a common compact tube $\\mathcal T$; assume $f$ is state-Lipschitz with constant $L$ and bounded by $B$ on $\\mathcal T$, which contains the exact path, all iterates, and the comparison segments. Also assume the exact-path integrand has the derivative bound required by [[thm-collocation-local-defect-order-m]]. At each mesh time $t_n$, let $\\mathcal U_n\\subseteq\\mathcal T_{t_n}:=\\{u:(t_n,u)\\in\\mathcal T\\}$ be a set of starting states containing the exact and numerical grid states used in the global-error comparison. For every $u\\in\\mathcal U_n$, assume the constant predictor $U^0=\\mathbf1u$ belongs to a nonempty closed product ball $\\mathcal C_{n,u}$ used in [[thm-sdc-sweep-contraction-and-error-bound]], and each inner stage map and sweep preserves $\\mathcal C_{n,u}$. Assume the contraction theorem holds uniformly with $a=hL\\|Q_\\Delta\\|_\\infty\\le1/2$ and $q\\le C_qh<1$. For fixed $k$, the $U^k$ endpoint map has exact-start defect $O(h^{p+1})$ and global order $p=\\min(M,k+1)$ on any fixed interval, provided all grid states stay in $\\mathcal T$ and the numerical initial value satisfies $\\|y_0-y(t_0)\\|_2\\le C_0h^p$ for a constant $C_0\\ge0$ independent of $h$ (in particular, exact initialization is allowed). The claim is local-step and fixed-$k$; it asserts no uniform constants as $M$ or $k$ grows."
+          }
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Proof step 2.2 introduces an arbitrary initial error, and step 3.1 then asserts \u201cMoreover \u03b4\u2080\u22600\u201d from invertibility of A. This needs the restriction e\u207d\u2070\u207e\u22600, stated only in the final conclusion of step 3.1: for e\u207d\u2070\u207e=0, \u03b4\u2080=0. Fixing an arbitrary nonzero initial error before this assertion closes the proof immediately; the theorem itself remains supported.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/preimages/thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/proposed/thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    },
+    {
+      "id": "thm-two-block-admm-residual-objective-and-dual-convergence",
+      "reviewed_by": "root",
+      "reviewed_at": "2026-10-17T02:08:45.070159+00:00",
+      "confirmed_defect": true,
+      "reason": "I independently confirm this specific defect after reviewing the original finding, focused source delta and its argument. Concrete finding: Proof 4.1 says \u201cusing steps 2.2\u20132.2\u201d when passing to the limit in step 1.2. Objective convergence from step 3.1 is also needed and is correctly included in the trailing tags; the prose range appears to be a typographical error.",
+      "evidence_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-focused-confirmations/thm-two-block-admm-residual-objective-and-dual-convergence.md",
+      "candidate_sources": [
+        {
+          "preimage_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/thm-two-block-admm-residual-objective-and-dual-convergence/before.md",
+          "successor_path": "research/numerical-optimization-dynamics-2026-10-16-owner-step4-kept-reader-other-high-cycle1/thm-two-block-admm-residual-objective-and-dual-convergence/proposal.md",
+          "statement_definition_delta": {
+            "Statement": false,
+            "Definition": false
+          },
+          "comparison_kind": "navigation-only archived text comparison; no current guard/currency validation",
+          "changed_interface_hunks": {}
+        }
+      ],
+      "preimage_matches_current_at_index_time": true
+    }
+  ],
+  "native_coverage_adopted": false,
+  "actual_admission_pending": "Only at native paused drained5.1 with all actual initial reports/results and unchanged current baseline guards."
+}

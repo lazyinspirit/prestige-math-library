@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "105",
+  "round": 0,
+  "reviewed_items": [
+    "def-hybrid-mode-guard-reset-system",
+    "lem-hybrid-guard-derivative-along-mode",
+    "lem-ode-flow-lipschitz-on-a-tube",
+    "lem-reset-error-after-a-mistimed-hybrid-event",
+    "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+    "def-certified-hybrid-event-enclosure",
+    "lem-transverse-hybrid-event-time-error",
+    "alg-safeguarded-hybrid-event-location-and-restart",
+    "thm-finite-hybrid-trajectory-error-under-separated-events",
+    "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+    "cex-inelastic-bouncing-ball-has-zeno-accumulation",
+    "ex-simultaneous-guards-require-deterministic-priority",
+    "cex-grazing-event-time-error-is-not-linearly-bounded",
+    "ex-bouncing-ball-transverse-event-error-and-reset",
+    "ex-two-events-between-endpoints-defeat-sign-screening"
+  ],
+  "reviewed_pages": [
+    "event-location-and-hybrid-trajectory-error",
+    "event-location-and-hybrid-trajectory-error-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch, approved T10 design, supplier claims and proofs, and affected consumers were reviewed. Request one local repair round for the scope and page-local defects below; no owner escalation is needed at this stage.",
+  "findings": [
+    {
+      "id": "def-certified-hybrid-event-enclosure",
+      "type": "scope",
+      "reason": "The Definition makes a finite rational expression certificate and rational initial/reset state mandatory. The approved T10 contract permits explicitly supplied valid C1 dense/error data generally and specifies the rational residual checker as one sufficient provider branch. Expand the interface to admit a justified general provider while retaining the rational branch, then update consumers that currently rely on the rational-only error proof."
+    },
+    {
+      "id": "alg-safeguarded-hybrid-event-location-and-restart",
+      "type": "prerequisite",
+      "reason": "The supplier root isolator requires a finite dyadic initial interval, but the algorithm admits any positive-length trial interval. Also, its width target only limits unresolved boxes; a unique-root result may be wider, and the stated refinement branch has no executable instructions or clearly aggregated box budget. Specify compatible interval inputs, a finite endpoint-safe refinement procedure charged to B_root, and the certificate needed to apply priority to an exactly simultaneous tie; otherwise return inconclusive."
+    },
+    {
+      "id": "ex-two-events-between-endpoints-defeat-sign-screening",
+      "type": "local",
+      "reason": "The roots 1/4 and 3/4 lie on the smooth isolator's deterministic bisection boundaries. Its derivative test on the parent intervals can fail, leaving endpoint roots unresolved in the child boxes; the proof therefore does not establish that complete isolation finds both roots. Use roots away from those boundaries, such as 1/3 and 2/3, or provide an exact endpoint-root isolation route."
+    },
+    {
+      "id": "event-location-and-hybrid-trajectory-error",
+      "type": "local",
+      "reason": "The page says event absence is concluded only when the whole step is root-free. The algorithm also accepts a no-event step when complete isolation finds roots but certifies each as oppositely oriented. Rephrase the summary to match the actual enabled-event rule."
+    },
+    {
+      "id": "cex-grazing-event-time-error-is-not-linearly-bounded",
+      "type": "local",
+      "reason": "F1 paraphrases the system definition as though every guard zero were an event, although the definition requires an oriented crossing. This example uses a grazing root, which is not an enabled event under that definition. Clarify that it demonstrates root-location sensitivity at a guard contact."
+    },
+    {
+      "id": "ex-simultaneous-guards-require-deterministic-priority",
+      "type": "local",
+      "reason": "The example omits a fixed total priority, so as written it is not a system satisfying the linked definition. Identify it as an incomplete specification and compare the resulting continuations under explicit priority orders."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-transverse-hybrid-event-time-error",
+      "decision": "repair",
+      "reason": "Generalize its certificate premise to the valid supplied C1 error and guard bounds while preserving the proved event-time inequality."
+    },
+    {
+      "id": "alg-safeguarded-hybrid-event-location-and-restart",
+      "decision": "repair",
+      "reason": "Update its provider interface and make root-box refinement, interval admissibility, budget accounting, and tie evidence executable."
+    },
+    {
+      "id": "thm-finite-hybrid-trajectory-error-under-separated-events",
+      "decision": "repair",
+      "reason": "Its current facts derive local error from the rational residual checker; state the general certified local-error premise so the theorem supports the approved provider interface."
+    },
+    {
+      "id": "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+      "decision": "repair",
+      "reason": "Its proof currently uses the rational checker for local error and must be checked against the generalized provider contract and revised algorithm."
+    },
+    {
+      "id": "ex-two-events-between-endpoints-defeat-sign-screening",
+      "decision": "repair",
+      "reason": "Adjust the example or its isolation evidence to match the actual root isolator behavior at bisection-boundary roots."
+    },
+    {
+      "id": "cex-grazing-event-time-error-is-not-linearly-bounded",
+      "decision": "repair",
+      "reason": "Clarify that the grazing zero is a guard contact, not an enabled event under the linked definition."
+    },
+    {
+      "id": "ex-simultaneous-guards-require-deterministic-priority",
+      "decision": "repair",
+      "reason": "Make explicit that the example compares completions of a specification without a priority rule."
+    },
+    {
+      "id": "event-location-and-hybrid-trajectory-error",
+      "decision": "repair",
+      "reason": "Align its no-event summary with the algorithm's handling of oppositely oriented roots."
+    },
+    {
+      "id": "ex-bouncing-ball-transverse-event-error-and-reset",
+      "decision": "accept",
+      "reason": "Its explicit dense-error, transversality, residual, reset, and field bounds support the stated local estimates."
+    },
+    {
+      "id": "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+      "decision": "accept",
+      "reason": "The external consumer supplies its own explicit general C1 error and guard certificates and uses the unchanged transverse-time and reset bounds consistently."
+    }
+  ]
+}

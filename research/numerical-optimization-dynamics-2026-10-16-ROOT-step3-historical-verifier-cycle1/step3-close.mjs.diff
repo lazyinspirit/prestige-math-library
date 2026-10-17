@@ -1,0 +1,29 @@
+--- a/tools/step3-close.mjs
++++ b/tools/step3-close.mjs
+@@ -42,12 +42,12 @@
+   || (name.startsWith(`${run}-alpha-`) && name.endsWith('-3a-decisions.json'))
+   || version === 2 && [ `${run}-alpha-3b.md`, `${run}-cross-group-edges.json`,
+     `${run}-3b-verdicts.jsonl` ].includes(name)).sort();
+-const artifactHashes = (version = 3, observationPolicy = null, manifestPolicy = null, repairEvidencePolicy = null) => ({
++const artifactHashes = (version = 3, observationPolicy = null, manifestPolicy = null, repairEvidencePolicy = null, frozenManifestArtifacts = null) => ({
+   ...Object.fromEntries(artifactNames(version).map((name) => [
+     `research/${name}`, sha256(readFileSync(R('research', name))),
+   ])),
+   ...(version === 3 ? requiredPageClosureEvidence(root, run) : {}),
+-  ...(version === 3 ? downstreamConsumerClosureEvidence(root, run, manifestPolicy) : {}),
++  ...(version === 3 ? downstreamConsumerClosureEvidence(root, run, manifestPolicy, { frozenArtifacts: frozenManifestArtifacts }) : {}),
+   ...(version === 3 && observationPolicy === OBSERVATION_EVIDENCE_POLICY ? closureEvidence(root, run) : {}),
+   ...(version === 3 && repairEvidencePolicy === OWNER_REPAIR_EVIDENCE_FREEZE_POLICY
+     ? ownerRepairEvidenceClosure(root, run, { required: true }) : {}),
+@@ -99,7 +99,10 @@
+     && (receipt.version !== 3 || receipt.owner_repair_evidence_policy !== OWNER_REPAIR_EVIDENCE_FREEZE_POLICY)) {
+     fail('unknown or unsupported owner_repair_evidence_policy');
+   }
+-  const currentArtifacts = artifactHashes(receipt.version, receipt.observation_evidence_policy, receipt.manifest_evidence_policy, receipt.owner_repair_evidence_policy);
++  // Only verification authenticates closure-time manifest slots through their
++  // already sealed archives. Close/default calls retain live preclosure currency.
++  const currentArtifacts = artifactHashes(receipt.version, receipt.observation_evidence_policy, receipt.manifest_evidence_policy, receipt.owner_repair_evidence_policy,
++    receipt.manifest_evidence_policy === PRECLOSURE_MANIFEST_POLICY ? receipt.artifacts : null);
+   if (JSON.stringify(Object.keys(currentArtifacts).sort()) !== JSON.stringify(Object.keys(receipt.artifacts ?? {}).sort())) {
+     errors.push('the exact Step-3 artifact set changed');
+   }

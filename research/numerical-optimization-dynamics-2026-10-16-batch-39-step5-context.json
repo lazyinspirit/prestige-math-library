@@ -1,0 +1,266 @@
+{
+  "group": "x",
+  "batches": [
+    "39"
+  ],
+  "pages_read": [
+    "numerical-optimization-globalization-and-inexact-certificates",
+    "numerical-optimization-globalization-and-inexact-certificates-examples"
+  ],
+  "items_read": [
+    "alg-exact-gradient-line-search-step",
+    "lem-hessian-lower-bound-strong-convexity-gradient-gap",
+    "thm-exact-line-search-gradient-descent-global-contraction",
+    "thm-armijo-gradient-descent-global-linear-rate",
+    "thm-damped-newton-global-phase-and-local-quadratic-rate",
+    "thm-inexact-gradient-residual-distance-certificate",
+    "ex-global-exact-line-search-on-an-anisotropic-quadratic",
+    "ex-damped-newton-halves-step-before-local-phase",
+    "ex-small-gradient-can-hide-error-at-ill-conditioned-minimizer",
+    "ex-approximate-gradient-residual-distance-certificate",
+    "ex-inner-quadrature-error-in-gradient-certificate"
+  ],
+  "conventions": [
+    {
+      "convention": "Exact line search is an ideal real-valued oracle over feasible t ≥ 0, with direction −∇f(x); it returns stationary when the gradient vanishes and makes no finite-evaluation claim.",
+      "fixed_by": "alg-exact-gradient-line-search-step",
+      "matters_for": [
+        "thm-exact-line-search-gradient-descent-global-contraction",
+        "ex-global-exact-line-search-on-an-anisotropic-quadratic"
+      ]
+    },
+    {
+      "convention": "Hessian bounds for globalization hold on a convex open neighborhood V containing the compact initial sublevel set; the Armijo and Newton results additionally require V to contain every trial segment under consideration.",
+      "fixed_by": "thm-armijo-gradient-descent-global-linear-rate",
+      "matters_for": [
+        "thm-armijo-gradient-descent-global-linear-rate",
+        "thm-damped-newton-global-phase-and-local-quadratic-rate"
+      ]
+    },
+    {
+      "convention": "Armijo backtracking starts at t = 1, uses a ∈ (0, 1/2) and b ∈ (0, 1), and the reported rates concern objective gaps along generated iterates.",
+      "fixed_by": "thm-armijo-gradient-descent-global-linear-rate",
+      "matters_for": [
+        "ex-global-exact-line-search-on-an-anisotropic-quadratic",
+        "thm-damped-newton-global-phase-and-local-quadratic-rate",
+        "ex-damped-newton-halves-step-before-local-phase"
+      ]
+    },
+    {
+      "convention": "The positive Newton-decrement tolerance is checked before line search. Finite local-ball entry is guaranteed when ε < m²ρ²/(2M); subsequent unit-step quadratic bounds apply only to attempted updates.",
+      "fixed_by": "thm-damped-newton-global-phase-and-local-quadratic-rate",
+      "matters_for": [
+        "ex-damped-newton-halves-step-before-local-phase"
+      ]
+    },
+    {
+      "convention": "The computed-gradient residual η and true-gradient discrepancy δ are separate independently verified Euclidean bounds; the distance certificate also requires an attained interior minimizer and a uniform positive Hessian lower bound.",
+      "fixed_by": "thm-inexact-gradient-residual-distance-certificate",
+      "matters_for": [
+        "ex-small-gradient-can-hide-error-at-ill-conditioned-minimizer",
+        "ex-approximate-gradient-residual-distance-certificate",
+        "ex-inner-quadrature-error-in-gradient-certificate",
+        "thm-inexact-central-path-distance-and-gap-certificate"
+      ]
+    },
+    {
+      "convention": "The repeated exact-search rate is stated for generated k ≥ 1; when m = M its factor is zero, without using a 0⁰ convention.",
+      "fixed_by": "thm-exact-line-search-gradient-descent-global-contraction",
+      "matters_for": [
+        "ex-global-exact-line-search-on-an-anisotropic-quadratic"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-hessian-lower-bound-strong-convexity-gradient-gap",
+      "statement": "On an open convex U, a C² objective with H_f ≥ μI, μ > 0, satisfies f(y) ≥ f(x) + ⟨∇f(x), y−x⟩ + μ‖y−x‖²/2 and ⟨∇f(y)−∇f(x), y−x⟩ ≥ μ‖y−x‖². An attained global minimizer x* ∈ U is unique, and f(x)−f* ≥ μ‖x−x*‖²/2 and ‖∇f(x)‖² ≥ 2μ(f(x)−f*).",
+      "used_by": [
+        "thm-exact-line-search-gradient-descent-global-contraction",
+        "thm-armijo-gradient-descent-global-linear-rate",
+        "thm-damped-newton-global-phase-and-local-quadratic-rate",
+        "thm-inexact-gradient-residual-distance-certificate"
+      ]
+    },
+    {
+      "id": "thm-inexact-gradient-residual-distance-certificate",
+      "statement": "Let U be open and convex, f ∈ C²(U, R) have an attained interior global minimizer x*, and H_f ≥ μI on U for μ > 0. If a candidate x̃ ∈ U and computed vector ĝ satisfy independently verified bounds ‖ĝ‖ ≤ η and ‖ĝ−∇f(x̃)‖ ≤ δ, with η, δ ≥ 0, then ‖x̃−x*‖ ≤ (η+δ)/μ.",
+      "used_by": [
+        "ex-small-gradient-can-hide-error-at-ill-conditioned-minimizer",
+        "ex-approximate-gradient-residual-distance-certificate",
+        "ex-inner-quadrature-error-in-gradient-certificate",
+        "thm-inexact-central-path-distance-and-gap-certificate"
+      ]
+    },
+    {
+      "id": "thm-exact-line-search-gradient-descent-global-contraction",
+      "statement": "For a C² objective on open convex U with an attained global minimizer and compact initial sublevel K contained in a convex open V with mI ≤ H_f ≤ MI, 0 < m ≤ M, the exact-search oracle is well-defined for every x ∈ K. A nonstationary exact step satisfies f(x+)−f* ≤ (1−m/M)(f(x)−f*); a stationary input is the unique minimizer. Repeated steps satisfy the corresponding k-step bound for every generated k ≥ 1.",
+      "used_by": [
+        "alg-exact-gradient-line-search-step",
+        "ex-global-exact-line-search-on-an-anisotropic-quadratic"
+      ]
+    },
+    {
+      "id": "thm-armijo-gradient-descent-global-linear-rate",
+      "statement": "Under the stated attained-minimum, compact-sublevel and uniform Hessian bounds on a convex open V containing all trial segments, backtracking gradient descent with a ∈ (0, 1/2), b ∈ (0, 1) accepts t_k ≥ τ = min{1, 2b(1−a)/M} and satisfies f(x_{k+1})−f* ≤ (1−2amτ)(f(x_k)−f*). The factor lies in (0,1), and the repeated bound holds for generated iterates only.",
+      "used_by": [
+        "ex-global-exact-line-search-on-an-anisotropic-quadratic"
+      ]
+    },
+    {
+      "id": "thm-damped-newton-global-phase-and-local-quadratic-rate",
+      "statement": "Under the stated attained-minimum, compact-sublevel, uniform Hessian and local Lipschitz-Hessian hypotheses, every accepted update before the local ball contracts the objective gap by q_N = 1−2amτ_N/M ∈ (0,1), where τ_N = min{1, 2b(1−a)m/M}. After finitely many such updates the method either stops at its positive decrement test or enters the local ball. If ε < m²ρ²/(2M), it cannot stop outside that ball. Later attempted updates are unit steps with ‖x_{k+1}−x*‖ ≤ C‖x_k−x*‖².",
+      "used_by": [
+        "ex-damped-newton-halves-step-before-local-phase"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "alg-gradient-descent",
+      "used_for": "Canonical negative-gradient direction, backtracking sequence, acceptance rule and caller-stop semantics.",
+      "opened": true
+    },
+    {
+      "id": "alg-damped-newton",
+      "used_for": "Positive-definite Newton solve, decrement definition, pre-line-search stopping order and Armijo procedure.",
+      "opened": true
+    },
+    {
+      "id": "lem-armijo-backtracking-terminates-for-strict-descent-directions",
+      "used_for": "Finite acceptance for a strict descent direction on an open domain.",
+      "opened": true
+    },
+    {
+      "id": "thm-newton-local-quadratic-convergence-under-lipschitz-hessian",
+      "used_for": "Invariant local ball and conditional full-step quadratic error estimate for canonical damped Newton.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Standard-coordinate gradient and Jacobian conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-hessian-and-euclidean-critical-point",
+      "used_for": "Second-partial Hessian convention and zero-gradient critical points.",
+      "opened": true
+    },
+    {
+      "id": "def-directional-and-partial-derivatives",
+      "used_for": "Coordinate-line derivatives used to show an interior minimizer has zero gradient.",
+      "opened": true
+    },
+    {
+      "id": "thm-hessian-characterises-convexity",
+      "used_for": "Convexity on V from its positive-semidefinite Hessian.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "First-order Taylor expansions with second-order Hessian remainders along admissible segments.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Cauchy–Schwarz, triangle inequalities and completing-square gradient-gap estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-partial-derivatives-imply-total-differentiability",
+      "used_for": "Identification of the derivative of a C¹ scalar field with its Jacobian.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiating the objective and gradient along lines.",
+      "opened": true
+    },
+    {
+      "id": "thm-compact-subset-is-closed-and-bounded",
+      "used_for": "Closedness and boundedness of the initial compact sublevel set.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of the feasible-ray parameter sublevel and the examples' closed bounded sublevel sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-metric-continuity-characterisations",
+      "used_for": "Choice-free closed-preimage implication in the exact-search existence proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Attainment on nonempty compact sublevels and feasible-ray parameter sets.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "The lower bound t* ≥ 1/M and the Newton example's Hessian Lipschitz estimate.",
+      "opened": true
+    },
+    {
+      "id": "lem-geometric-sequence-null",
+      "used_for": "Geometric backtracking reaches a sufficient step size, and geometric objective gaps cross the local-entry threshold.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Inverse-Hessian bounds from an orthonormal eigenbasis.",
+      "opened": true
+    },
+    {
+      "id": "cor-hessian-is-symmetric",
+      "used_for": "Symmetry of C² Hessians in the Newton estimates.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-damped-newton-global-phase-and-local-quadratic-rate",
+      "concern": "The Statement does not impose d ≥ 1, but its cited local supplier thm-newton-local-quadratic-convergence-under-lipschitz-hessian explicitly assumes d ≥ 1. It also defines the operator norm as sup over ‖v‖₂ = 1, whose indexing set is empty in dimension zero, without a zero-dimensional convention. The positive-dimensional argument is sound; explicitly requiring d ≥ 1, or supplying the zero-dimensional convention and stationary case, would close this boundary mismatch.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "numerical-optimization-globalization-and-inexact-certificates",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "Contextual page prerequisite. The batch uses the published scalar-objective Newton algorithm and local theorem, rather than importing the vector-residual results. Both pages preserve the distinction between positive-definite objective Newton and arbitrary vector-root Newton."
+    },
+    {
+      "from": "numerical-optimization-globalization-and-inexact-certificates",
+      "to": "numerical-differentiation-and-derivative-error-control",
+      "faithful": true,
+      "note": "Contextual page prerequisite. No finite-difference estimate is instantiated in this batch: the discrepancy examples compute their errors directly. The derivative-error page does not claim that its estimates alone establish Newton convergence."
+    },
+    {
+      "from": "nonconvex-line-search-and-inexact-newton-methods",
+      "to": "numerical-optimization-globalization-and-inexact-certificates",
+      "faithful": true,
+      "note": "No batch-39 theorem is imported as a logical premise. The consumer develops Wolfe/Zoutendijk and local unshifted inexact-Newton results separately and expressly disclaims guaranteed entry into the local branch."
+    },
+    {
+      "from": "barrier-and-primal-dual-interior-point-methods",
+      "to": "numerical-optimization-globalization-and-inexact-certificates",
+      "faithful": true,
+      "note": "thm-inexact-central-path-distance-and-gap-certificate applies the residual-distance theorem in orthonormal affine coordinates. It states the open convex region, attained interior minimizer, uniform restricted Hessian lower bound and independently verified residual/discrepancy bounds; the coordinate map preserves distance."
+    },
+    {
+      "from": "stochastic-approximation-and-stochastic-gradient-methods",
+      "to": "numerical-optimization-globalization-and-inexact-certificates",
+      "faithful": true,
+      "note": "Contextual prerequisite with no logical citation of a batch-39 item. The consumer derives strong gradient monotonicity locally from differentiable strong-Jensen convexity and states stochastic hypotheses separately."
+    },
+    {
+      "from": "minimum-energy-paths-string-neb-and-saddle-certificates",
+      "to": "numerical-optimization-globalization-and-inexact-certificates",
+      "faithful": true,
+      "note": "Contextual prerequisite. The saddle results use vector-root Newton and local residual-to-root arguments, without applying the positive-definite strongly convex objective theorem to an indefinite index-one Hessian."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "research_only": true,
+  "applied": false,
+  "path": "tools/step5-workflow.mjs",
+  "before_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-metadata-preview/before/tools/step5-workflow.mjs",
+  "proposed_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-metadata-preview/proposed/tools/step5-workflow.mjs",
+  "replacements": [
+    {
+      "source_excerpt": "import { supportingQuoteHistory } from './step5-quote-history.mjs';",
+      "proposed_replacement": "import { supportingQuoteHistory } from './step5-quote-history.mjs';\nimport { loadInitialMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';"
+    },
+    {
+      "source_excerpt": "  const quotes = supportingQuoteHistory(history,path,expected);\n  if (quotes) return quotes;",
+      "proposed_replacement": "  const quotes = supportingQuoteHistory(history,path,expected);\n  if (quotes) return quotes;\n  const metadata = initialMetadataSupportingHistory(history,path,expected);\n  if (metadata) return metadata;"
+    },
+    {
+      "source_excerpt": "  const current=hashes(root,run),reported={...current},items=readLibraryItems(root,{run});\n  const ownerSupplement=",
+      "proposed_replacement": "  const current=hashes(root,run),reported={...current},items=readLibraryItems(root,{run});\n  const metadataHistory=phase==='initial'&&round===1?loadInitialMetadataHistory(root,run,{current:true}):null;\n  // Validate original reviews against exact historical source bytes only.\n  // The collection's post snapshot below always describes actual current bytes.\n  if(metadataHistory)Object.assign(reported,metadataHistory.historicalGuards);\n  const ownerSupplement="
+    },
+    {
+      "source_excerpt": "  Object.assign(evidence,ownerSupplement?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{});",
+      "proposed_replacement": "  Object.assign(evidence,ownerSupplement?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{});"
+    },
+    {
+      "source_excerpt": "  if(operationalSupplement){\n    receipt.operational_resolution=",
+      "proposed_replacement": "  if(metadataHistory){\n    const historical=new Set(metadataHistory.sourceIds);\n    receipt.metadata_history={path:metadataHistory.path,historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false};\n    receipt.metadata_history_current_review_targets=[...historical];\n    receipt.historical_metadata_reviews=receipt.reviews.filter(row=>historical.has(row.id));\n    receipt.reviews=receipt.reviews.filter(row=>!historical.has(row.id));\n    // Preserve original rows and hashes separately; none is certified current.\n    requireValue(JSON.stringify(receipt.historical_metadata_reviews)===JSON.stringify(metadataHistory.historicalReviews),'historical metadata review inventory mismatch');\n  }\n  if(operationalSupplement){\n    receipt.operational_resolution="
+    },
+    {
+      "source_excerpt": "const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id),...(scopeFindings?.entries??[]).map(row=>row.id)])];",
+      "proposed_replacement": "const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id),...(scopeFindings?.entries??[]).map(row=>row.id),...(result.metadata_history_current_review_targets??[])])];"
+    },
+    {
+      "source_excerpt": "  if(concerns){\n    pack.reader_concerns=",
+      "proposed_replacement": "  if(result.metadata_history){\n    pack.metadata_history_current_review_targets=[...result.metadata_history_current_review_targets];\n    pack.input_evidence??={};\n    const collection=join(workflowDir(root,run),'initial-1-collected.json');\n    pack.input_evidence[collection]=digest(readFileSync(collection,'utf8'));\n    for(const [file,hash]of Object.entries(result.evidence)){\n      requireValue(!Object.hasOwn(pack.input_evidence,file)||pack.input_evidence[file]===hash,'conflicting initial metadata history evidence');\n      pack.input_evidence[file]=hash;\n    }\n  }\n  if(concerns){\n    pack.reader_concerns="
+    },
+    {
+      "source_excerpt": "  const current=hashes(root,run), rawBefore=rawHashes(root,run), baseline=read(join(dir,'baseline.json'));",
+      "proposed_replacement": "  const current=hashes(root,run), rawBefore=rawHashes(root,run), baseline=read(join(dir,'baseline.json'));\n  // A changed source label is still a changed guard. Only actual subsequent\n  // native owner review can supply current certification for this target.\n  for(const id of sourceResult?.metadata_history_current_review_targets??[])\n    requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing current native metadata-target review: ${id}`);"
+    }
+  ]
+}

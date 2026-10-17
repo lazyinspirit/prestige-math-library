@@ -1,0 +1,1764 @@
+[
+  {
+    "target": "research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json",
+    "path": [
+      "contracts",
+      "ex-pseudo-arclength-crosses-x-squared-fold",
+      "citations",
+      0,
+      "uses"
+    ],
+    "pointer": "/contracts/ex-pseudo-arclength-crosses-x-squared-fold/citations/0/uses",
+    "batch": 29,
+    "id": "ex-pseudo-arclength-crosses-x-squared-fold",
+    "before": [
+      "1.1"
+    ],
+    "after": [
+      "1.1",
+      "1.2"
+    ],
+    "reason": "Current Verification step1.2 explicitly cites F1 while realizing the regular solution graph and its tangent; retain1.1 and map the actual additional citation, without claiming a global fold theorem.",
+    "source_guard": {
+      "path": "items/ex-pseudo-arclength-crosses-x-squared-fold.md",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/items/ex-pseudo-arclength-crosses-x-squared-fold.md"
+    },
+    "carrier_guard": {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json"
+    },
+    "contract_row_guard": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-simple-fold-lyapunov-schmidt-parameterization",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n\\times\\mathbb R$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^3$. Write\n$D_xF(x,\\lambda)u:=DF(x,\\lambda)(u,0)$ and\n$F_\\lambda(x,\\lambda):=DF(x,\\lambda)(0,1)$. Define\n$$F_{xx}(x_0,\\lambda_0)[v,v] :=\\left.\\frac{d}{dt}\\bigl(D_xF(x_0+tv,\\lambda_0)v\\bigr)\\right|_{t=0}.$$\nSuppose\n$$F(x_0,\\lambda_0)=0,\\qquad J:=D_xF(x_0,\\lambda_0),\\qquad \\operatorname{rank}J=n-1.$$\nAssume that $v\\in\\mathbb R^n$ is a unit vector with\n$\\ker J=\\operatorname{span}\\{v\\}$, that $w\\in\\mathbb R^n\\setminus\\{0\\}$\nsatisfies $w^TJ=0$, and that\n$$a:=w^TF_\\lambda(x_0,\\lambda_0)\\ne0,\\qquad b:=w^TF_{xx}(x_0,\\lambda_0)[v,v]\\ne0.$$\nThen there is $\\delta>0$ and a unique local $C^3$ curve of solutions\n$(x(s),\\lambda(s))$, $|s|<\\delta$, with\n$$x(0)=x_0,\\quad \\lambda(0)=\\lambda_0,\\quad v^T(x(s)-x_0)=s,\\quad x'(0)=v,\\quad \\lambda'(0)=0,\\quad \\lambda''(0)=-\\frac{b}{a}\\ne0.$$\nIn particular, on a smaller interval there is a finite $M_3$ such that\n$$\\left|\\lambda(s)-\\lambda_0+\\frac{b}{2a}s^2\\right| \\le\\frac{M_3}{6}|s|^3.$$\nThe full derivative $D_{(x,\\lambda)}F$ has rank $n$ at the fold, and the\nsolution curve tangent there is $(v,0)$. Thus an augmented pseudo-arclength\nhyperplane with unit normal $\\tau$ remains locally regular whenever\n$|\\tau^T(v,0)|>0$. This is a local statement; it asserts no global branch\ncompleteness.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pseudo-arclength-local-newton-correction",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$. Suppose $z_*\\in U$ satisfies $F(z_*)=0$ and\n$A:=DF(z_*)$ has rank $n$. Let $t\\in\\ker A$ be a unit vector, let\n$\\tau\\in\\mathbb R^{n+1}$ be a unit vector with\n$|\\tau^Tt|\\ge c$ for some $0<c\\le1$, and let $z_p$ satisfy\n$\\tau^T(z_*-z_p)=0$. Define\n$$G(z):=\\bigl(F(z),\\tau^T(z-z_p)\\bigr).$$\nLet $K_A\\ge0$ satisfy\n$$\\|(A|_{t^\\perp})^{-1}u\\|_2\\le K_A\\|u\\|_2\\qquad(u\\in\\mathbb R^n),$$\nand set\n$$\\beta_*:=\\sqrt{K_A^2(1+c^{-1})^2+c^{-2}}.$$\nThe derivative $DG(z_*)$ is invertible and\n$\\|DG(z_*)^{-1}\\|_{\\rm op}\\le\\beta_*$. There is a local regular\nunit-speed solution-curve chart through $z_*$, and after shrinking it, the\nhyperplane $\\tau^T(z-z_p)=0$ has exactly one intersection with that chart.\n\nSuppose also that for some $R>0$ and $L\\ge0$ the closed ball\n$\\overline B_2(z_*,R)$ lies in $U$ and\n$$\\|DF(u)-DF(v)\\|_{\\rm op}\\le L\\|u-v\\|_2 \\qquad(u,v\\in\\overline B_2(z_*,R)).$$\nThen there are $\\rho\\in(0,R]$ and $K>0$ such that each exact-Jacobian\nNewton update for $G$ started in $\\overline B_2(z_*,\\rho)$ is defined,\nremains in that ball, and satisfies\n$$\\|z_{k+1}-z_*\\|_2\\le C\\|z_k-z_*\\|_2^2,\\qquad C:=KL/2,$$\nwhere $C\\rho\\le1/2$ (if $L=0$, any sufficiently small $\\rho$ works).\nContinuing the exact recurrence indefinitely gives convergence to $z_*$;\na finite update budget may stop first, and its `root` status means only that\nthe residual tolerance was met. Separately, whenever the hypotheses of\n[[thm-augmented-residual-contraction-certificate]] hold for $G$ on a proposed\nclosed ball, that theorem certifies exactly one zero there and its stated\nresidual-to-root error bound. These conclusions are local and imply no\nglobal branch-completeness claim.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-augmented-residual-contraction-certificate",
+          "source_section": "Statement",
+          "quote": "For a linear map $A$ between Euclidean spaces, write\n$\\|A\\|_{\\rm op}:=\\sup_{\\|u\\|_2=1}\\|Au\\|_2$. Let $m\\ge1$, let\n$V\\subseteq\\mathbb R^m$ be open, and let\n$G:V\\to\\mathbb R^m$ be $C^1$. Let $y\\in V$, $R>0$, and suppose the closed\nball $\\overline B_2(y,R)$ lies in $V$. Assume that for some $L\\ge0$,\n$$\\|DG(u)-DG(v)\\|_{\\rm op}\\le L\\|u-v\\|_2\\qquad(u,v\\in\\overline B_2(y,R)).$$\nLet $\\widehat g\\in\\mathbb R^m$ and $\\widehat A\\in\\mathbb R^{m\\times m}$\ncome with certified bounds\n$$\\|\\widehat g-G(y)\\|_2\\le\\epsilon_g,\\qquad \\|\\widehat A-DG(y)\\|_{\\rm op}\\le\\epsilon_J,$$\nwhere $\\epsilon_g,\\epsilon_J\\ge0$. Suppose $\\widehat A$ is invertible and\n$\\|\\widehat A^{-1}\\|_{\\rm op}\\le\\widehat\\beta$, with\n$\\widehat\\beta\\epsilon_J<1$. Define\n$$\\beta:=\\frac{\\widehat\\beta}{1-\\widehat\\beta\\epsilon_J},\\qquad \\rho:=\\|\\widehat g\\|_2+\\epsilon_g,\\qquad q:=\\beta L R.$$\nIf $q<1$ and $\\beta\\rho\\le(1-q)R$, then $G$ has exactly one zero $y^*$\nin $\\overline B_2(y,R)$ and\n$$\\|y^*-y\\|_2\\le\\frac{\\beta\\rho}{1-q}.$$",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$ in the componentwise sense of\n[[def-ck-euclidean-maps-and-diffeomorphisms]] on a declared tube; its total\nderivative $DF$ has the linear first-order meaning of\n[[def-total-derivative-in-euclidean-space]]. Require $C^3$ on any subtube\nwhere a fold check is requested. A valid seed consists of a center\n$\\bar z_0$, a radius $r_0$, and a certified ball containing exactly one\nzero $z_0^*$ of an initial augmented section\n$$G_{-1}(z):=\\bigl(F(z),\\tau_{-1}^T(z-z_{p,-1})\\bigr),$$\nwhere $\\tau_{-1}$ is unit and the section is transverse to the regular local\nsolution branch. Thus the seed certifies one solution point of $F=0$ by\nintersecting the branch with a hyperplane; it does not claim that $F=0$ has an\nisolated zero in $\\mathbb R^{n+1}$. The seed also includes a neighborhood\nin which every zero of $F$ lies on the certified local curve chart and a\nverified rank-$n$ condition on that chart.\n\nSupply a unit previous orientation, step length $h>0$, requested step count\n$N_{\\rm req}\\in\\mathbb N_0$, continuation budget $N_s\\in\\mathbb N_0$,\ncorrector budget $N_c\\in\\mathbb N_0$, residual tolerance $\\epsilon\\ge0$,\nand angle margin $c\\in(0,1]$. At each current certified section ball\n$B_k=\\overline B_2(\\bar z_k,r_k)$, its unique branch point is denoted\n$z_k^*$. A tangent routine must provide a unit candidate $\\widehat t_k$ and\na certified error bound to a unit vector $t_k\\in\\ker DF(z_k^*)$, plus a\nverified inverse bound for $DF(z_k^*)|_{t_k^\\perp}$. Missing rank, tangent,\nor error bounds are failures; they are never treated as zero error.\n\nAt a queried point $z$, an evaluator returns either exact $(F(z),DF(z))$ or\ncertified data $(\\widehat F(z),\\eta_F,\\widehat J(z),\\eta_J)$ with\n$$\\|\\widehat F(z)-F(z)\\|_2\\le\\eta_F,\\qquad \\|\\widehat J(z)-DF(z)\\|_{\\rm op}\\le\\eta_J.$$\nAll supplied tangent, evaluator, chart, certificate and requested fold callbacks must return a result or their declared failure in finite time for a termination claim. Their mathematical bounds must be sound; finite outer budgets cannot force a nonreturning callback to finish. For every proposed root ball, the certificate routine must also supply an\ninverse bound for the approximate augmented Jacobian, a Jacobian-Lipschitz\nconstant on the whole ball, and an isolating branch neighborhood/angle\nenclosure. If any\nbound is missing, return `root-certificate-inconclusive` for that candidate.\nInitialize the fold field as `not-requested` when no fold check was asked,\nand as `inconclusive` while a requested check remains unresolved.\n\n**Output:** a finite list of certified local section-root balls; a\ncontinuation status from `finite-trace`, `rank-or-tangent-unverified`,\n`tangent-angle-failure`, `tube-exit`, `singular-corrector`,\n`corrector-budget-exhausted`, `root-certificate-inconclusive`, or\n`continuation-budget-exhausted`; and a fold field with value\n`not-requested`, `certified`, or `inconclusive`. Each ball records its\ncenter, radius, strict contraction bounds from\n[[thm-augmented-residual-contraction-certificate]], the local chart and\nangle enclosure identifying it with the unique next point on the traced\nbranch, and the evaluation-error bounds used.\n\n**Procedure:**\n\n1. Initialize the list with the valid seed ball, accepted count $a=0$ and attempted continuation count $s=0$. Denote the supplied unit previous orientation by $\\tau_k$ at the current ball. If $a=N_{\\rm req}$, including $N_{\\rm req}=0$, finalize with status `finite-trace`. Otherwise, if $s=N_s$, finalize with `continuation-budget-exhausted`. Increment $s$ before making any callback for the next attempt. Thus $N_s$ caps attempts, not just successful steps.\n2. At the unique current root $z_k^*$, query the tangent routine. Verify rank $DF(z_k^*)=n$, a unit candidate $\\widehat t_k$, a unit true kernel vector $t_k$, its certified error $\\|\\widehat t_k-t_k\\|_2\\le e_k$, and the complement inverse bound. Missing evidence returns `rank-or-tangent-unverified`. Orient $\\widehat t_k$ and its corresponding $t_k$ together, keeping $\\tau_k$ fixed. Certify $\\tau_k^Tt_k\\ge c$ and $a_k:=\\tau_k^T\\widehat t_k>0$; an unavailable or failed angular test returns `tangent-angle-failure`.\n3. Set $z_p=\\bar z_k+h\\widehat t_k$ and retain the **previous** orientation as section normal:\n$$G_k(z)=\\bigl(F(z),\\tau_k^T(z-z_p)\\bigr).$$\nThe chart certificate supplies a unit-speed chart $c_k$ with $c_k(0)=z_k^*$, $c_k'(0)=t_k$, an interval $[-r_{\\rm ch}^-,r_{\\rm ch}^+]$, a number $\\kappa>0$, and a neighborhood $V_k$ in which every zero of $F$ belongs to that chart interval. Verify $\\tau_k^Tc_k'(u)\\ge\\kappa$ throughout the interval and\n$$h a_k>r_k,\\qquad h a_k+r_k\\le\\kappa r_{\\rm ch}^+.$$\nThese checks bound $d=\\tau_k^T(z_p-z_k^*)$ between $h a_k-r_k$ and $h a_k+r_k$, so the selected section has one forward intersection on the supplied chart by [[lem-transverse-hyperplane-selects-unique-local-branch-point]]. A failed chart angle gives `tangent-angle-failure`; failed offset/length evidence gives `root-certificate-inconclusive`. If the predictor, proposed ball or required chart leaves the declared tube, return `tube-exit`.\n4. With exact evaluations, call [[alg-finite-budget-newton-for-vector-residuals]] on $G_k$ from $z_p$, tolerance $\\epsilon$ and update budget $N_c$. Map `singular-jacobian` to `singular-corrector` and `invalid-trial` to `tube-exit`. For `root` or `iteration-budget-exhausted`, retain the last valid iterate as a candidate. If the predictor is certified inside the invariant ball of [[thm-pseudo-arclength-local-newton-correction]], every attempted exact update has its quadratic error bound; otherwise this is only a candidate generator. Apply the root certificate of [[thm-augmented-residual-contraction-certificate]] to the last candidate. Accept only if every inequality passes and the **whole** ball lies in $V_k$. Unavailable inputs give `root-certificate-inconclusive`; failed tests after a `root` residual stop give that same status; failed tests after exhausted updates give `corrector-budget-exhausted`. Neither residual tolerance nor budget alone is a root proof. A passing ball proceeds to step6, without an earlier append.\n5. With bounded evaluation errors, set $y_0=z_p$. For $j=0,\\ldots,N_c$, query the supplied certified residual/Jacobian and root-ball data at $y_j$. Unavailable certificate inputs give `root-certificate-inconclusive`. Apply the same strict contraction tests and whole-ball inclusion in $V_k$ as in step4. A passing ball proceeds to step6, without an earlier append. If the tests fail at $j=N_c$, return `corrector-budget-exhausted`. Otherwise call [[alg-newton-correction-for-vector-residuals]] on the supplied approximate augmented residual and matrix. Map `singular-jacobian` to `singular-corrector`; a trial outside the tube gives `tube-exit`; otherwise set $y_{j+1}=y_j+s_j$.  This bounded-error branch has no convergence promise.\n6. Append the passing ball **once**, with its section, error bounds and chart/angle record; increase $a$ by one. For the next attempt use the already certified unit candidate $\\widehat t_k$ as the new previous orientation. It is not silently declared the exact tangent at the new root: step2 must certify its angle against the next root's tangent. Return to step1.\n7. At every finalization, including every early return, retain the continuation status already assigned. For a requested fold check require a returned certified record satisfying all hypotheses of [[thm-simple-fold-lyapunov-schmidt-parameterization]] at its specified point: $F=0$, the required $C^3$ neighborhood, $\\operatorname{rank}F_x=n-1$, normalized right and nonzero left nullvectors, and strict enclosures excluding zero for $w^TF_\\lambda$ and $w^TF_{xx}[v,v]$, together with the stated complement/parameter normalization. Missing or failed evidence leaves the fold field `inconclusive`; otherwise set it to `certified` and record only the local fold chart and curvature formula. Without a fold request keep `not-requested`. This finalization makes finitely many callback requests and performs no unbounded search.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "At $(0,0)$, $F_x=0$, $F_\\lambda=-1$, and $F_{xx}=2$. With $v=w=1$, $a=-1$ and $b=2$, so [F1] gives $\\lambda''(0)=2$. The full derivative is $DF(x,\\lambda)=[2x,-1]$, which has rank $1$ everywhere, and at the fold its unit kernel tangent is $t=(1,0).",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Choose $0<\\alpha<1/32$ and use the seed center $\\bar z_0=(-\\alpha,\\alpha^2)$, radius $R_0=\\alpha/4$, previous orientation $\\tau_{-1}=(1,0)$, and seed section point $z_{p,-1}=(-\\alpha,0)$, so $G_{-1}(x,\\lambda)=(x^2-\\lambda,x+\\alpha)$. At the seed center the residual is zero and the inverse of the bordered Jacobian is $\\begin{bmatrix}0&1\\\\-1&-2\\alpha\\end{bmatrix}$, whose operator norm is less than $2$. The Jacobian is $2$-Lipschitz, so the exact-data certificate with $\\widehat\\beta=2$, $\\widehat g=0$, zero error bounds, and radius $R_0$ has $q=4R_0=\\alpha<1$ and certifies the seed ball. The ball lies in $V=\\{(x,\\lambda):|x|<1/4\\}$, where every zero lies on the regular graph $(x,x^2)$ and $DF=[2x,-1]$ has rank $1$. Parametrize that graph from $x=-\\alpha$ by arclength $s(x)=\\int_{-\\alpha}^x\\sqrt{1+4u^2}\\,du$. Its positive unit tangent is $(1,2x)/\\sqrt{1+4x^2}$, so the previous normal has dot product at least $\\kappa=2/\\sqrt5$ throughout $|x|\\le1/4$. The forward chart length to $x=1/4$ is at least $1/4+\\alpha$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "At the seed root, the exact unit tangent oriented toward increasing $x$ is $t=(1,-2\\alpha)/\\sqrt{1+4\\alpha^2}$. The tangent callback may return $\\widehat t=(1,0)$ with certified error $e=\\|\\widehat t-t\\|_2=\\sqrt{2-2/\\sqrt{1+4\\alpha^2}}$. With previous normal $\\tau=(1,0)$, the angle tests are $\\tau^Tt=1/\\sqrt{1+4\\alpha^2}\\ge2/\\sqrt5$ and $a=\\tau^T\\widehat t=1$. Set step length $H=2\\alpha+\\alpha^2$. Then $z_p=\\bar z_0+H\\widehat t=(\\alpha+\\alpha^2,\\alpha^2)$. The section $G_H(x,\\lambda)=(x^2-\\lambda,x-(\\alpha+\\alpha^2))$ has the unique zero $z_*=(x_*,x_*^2)$, where $x_*=\\alpha+\\alpha^2$. The forward-offset tests hold because $H>R_0$ and $H+R_0=9\\alpha/4+\\alpha^2<1/8<1/(2\\sqrt5)\\le\\kappa r_{\\rm ch}^+$. The section is transverse throughout the chart. At its selected root, with $\\sigma_*=\\sqrt{1+4x_*^2}$ and $t_*=(1,2x_*)/\\sigma_*$, the unit vector $e_*=(-2x_*,1)/\\sigma_*$ spans $t_*^\\perp$ and $[2x_*,-1]e_*=-\\sigma_*$. Thus $A=DF(x_*,x_*^2)$ restricts to an isomorphism with inverse norm $1/\\sigma_*\\le1$ on $t_*^\\perp$. Since $\\tau^Tt_*=1/\\sigma_*>0$, [F2] gives a local quadratic Newton corrector; the bordered Jacobian has determinant $1$.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "At the predictor, the augmented residual is $(2\\alpha^3+\\alpha^4,0)$ and its Jacobian is $\\begin{bmatrix}2(\\alpha+\\alpha^2)&-1\\\\1&0\\end{bmatrix}$. The Newton equation forces $\\Delta x=0$ and $\\Delta\\lambda=2\\alpha^3+\\alpha^4$, so one exact correction reaches the section root $(\\alpha+\\alpha^2,(\\alpha+\\alpha^2)^2)$.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "At corrected center $z_*=(x_*,x_*^2)$ with $x_*=\\alpha+\\alpha^2<1/4$, the inverse bordered Jacobian is $\\begin{bmatrix}0&1\\\\-1&2x_*\\end{bmatrix}$ and its operator norm is at most $\\sqrt{2+4x_*^2}<2$. Choose radius $R_1=\\alpha/4$; the ball lies in $V$ since $x_*+R_1<1/4$. Exact data with $\\widehat\\beta=2$, zero residual and derivative errors, and Lipschitz constant $2$ give $q=4R_1=\\alpha<1$ and $\\beta\\rho=0$. The certificate proves a unique section zero in the ball, and inclusion in $V$ identifies it with the unique forward branch point. With $N_{\\rm req}=N_s=N_c=1$, residual tolerance $\\epsilon=0$, and exact callbacks, steps 2.1 and 3.1 produce the accepted ball in one attempt and one Newton update.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "The certified trace starts at $x=-\\alpha$ and accepts a next section root at $x=\\alpha+\\alpha^2>0$, with the fold $x=0$ lying between them on the supplied chart. This is a finite local continuation step through the fold even though $\\lambda'(0)=0$; it asserts nothing about other components.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes n=1 and uses a positive half-width alpha; no zero-dimensional or empty-input conclusion is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The fold has F_x=0 but full derivative rank one; both exact section certificates have zero residual and error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 reaches the positive section root in one exact Newton update, and step 4.1 uses Nc=Nreq=Ns=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes F_lambda=-1 and F_xx=2, verifying a simple fold rather than loss of full derivative rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The range 0<alpha<1/32 gives strict seed, predictor-offset, chart-length, and corrected-ball bounds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2\u20134.1 give explicit finite seed, tangent, step, and ball choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a concrete continuation trace and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a concrete continuation trace and states no biconditional."
+        }
+      ],
+      "historical_author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 2.1, 3.1, 3.2, 4.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      },
+      "owner_repair_evidence": "research/numerical-optimization-dynamics-2026-10-16-owner-continuation29-step2-applied/completion.json",
+      "finite_checks": [
+        {
+          "case": "one exact continuation step crosses the fold",
+          "method": "exact-hand-calculation",
+          "input": "0<alpha<1/32; seed (-alpha,alpha^2); previous normal and tangent candidate (1,0); step length H=2alpha+alpha^2; residual tolerance epsilon=0; Nc=Nreq=Ns=1.",
+          "result": "The predictor is (alpha+alpha^2,alpha^2), its residual is (2alpha^3+alpha^4,0), and one exact Newton correction gives (alpha+alpha^2,(alpha+alpha^2)^2). Seed and corrected zero-residual certificates use beta-hat=2, L=2, radii alpha/4, and q=alpha<1.",
+          "disposition": "certifies a finite step from the negative-x branch through x=0 to the positive-x branch."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all six Verification steps and all four complete current suppliers. The old realization began at x=0 and reached only x=h>0; the repaired realization starts at -alpha and ends at alpha+alpha^2>0 on one isolating regular chart. For every 0<alpha<1/32, H+R0=9alpha/4+alpha^2<1/8<1/(2sqrt(5))<=kappa*r_chart_plus; both zero-residual certificates have inverse bound 2, L=2, radius alpha/4 and q=alpha<1. The seed and corrected balls lie in |x|<1/4. The approximate unit tangent has the displayed exact error bound; the seed complement inverse bound is 1/sqrt(1+4alpha^2)<=1 by the same two-dimensional computation shown at the selected root. Choose admitted angle margin c=2/sqrt(5). One Newton correction has delta x=0 and delta lambda=2alpha^3+alpha^4, reaches the positive root, then passes certification. Checked alpha approaching both excluded endpoints, zero residual/error, all budgets one and epsilon=0. Accepted reader repair; no further item edit, unresolved defect or global completeness claim."
+      }
+    },
+    "status": "UNAPPLIED root-review proposal"
+  },
+  {
+    "target": "research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json",
+    "path": [
+      "contracts",
+      "ex-pseudo-arclength-crosses-x-squared-fold",
+      "citations",
+      3,
+      "uses"
+    ],
+    "pointer": "/contracts/ex-pseudo-arclength-crosses-x-squared-fold/citations/3/uses",
+    "batch": 29,
+    "id": "ex-pseudo-arclength-crosses-x-squared-fold",
+    "before": [
+      "1.2",
+      "2.1",
+      "3.1",
+      "4.1",
+      "5.1"
+    ],
+    "after": [
+      "1.2",
+      "2.1",
+      "4.1",
+      "5.1"
+    ],
+    "reason": "Verification3.1 performs the exact Newton correction using F2 and step2.1; it does not cite F4. The algorithm acceptance/certified-trace uses remain1.2,2.1,4.1,5.1.",
+    "source_guard": {
+      "path": "items/ex-pseudo-arclength-crosses-x-squared-fold.md",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/items/ex-pseudo-arclength-crosses-x-squared-fold.md"
+    },
+    "carrier_guard": {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json"
+    },
+    "contract_row_guard": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-simple-fold-lyapunov-schmidt-parameterization",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n\\times\\mathbb R$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^3$. Write\n$D_xF(x,\\lambda)u:=DF(x,\\lambda)(u,0)$ and\n$F_\\lambda(x,\\lambda):=DF(x,\\lambda)(0,1)$. Define\n$$F_{xx}(x_0,\\lambda_0)[v,v] :=\\left.\\frac{d}{dt}\\bigl(D_xF(x_0+tv,\\lambda_0)v\\bigr)\\right|_{t=0}.$$\nSuppose\n$$F(x_0,\\lambda_0)=0,\\qquad J:=D_xF(x_0,\\lambda_0),\\qquad \\operatorname{rank}J=n-1.$$\nAssume that $v\\in\\mathbb R^n$ is a unit vector with\n$\\ker J=\\operatorname{span}\\{v\\}$, that $w\\in\\mathbb R^n\\setminus\\{0\\}$\nsatisfies $w^TJ=0$, and that\n$$a:=w^TF_\\lambda(x_0,\\lambda_0)\\ne0,\\qquad b:=w^TF_{xx}(x_0,\\lambda_0)[v,v]\\ne0.$$\nThen there is $\\delta>0$ and a unique local $C^3$ curve of solutions\n$(x(s),\\lambda(s))$, $|s|<\\delta$, with\n$$x(0)=x_0,\\quad \\lambda(0)=\\lambda_0,\\quad v^T(x(s)-x_0)=s,\\quad x'(0)=v,\\quad \\lambda'(0)=0,\\quad \\lambda''(0)=-\\frac{b}{a}\\ne0.$$\nIn particular, on a smaller interval there is a finite $M_3$ such that\n$$\\left|\\lambda(s)-\\lambda_0+\\frac{b}{2a}s^2\\right| \\le\\frac{M_3}{6}|s|^3.$$\nThe full derivative $D_{(x,\\lambda)}F$ has rank $n$ at the fold, and the\nsolution curve tangent there is $(v,0)$. Thus an augmented pseudo-arclength\nhyperplane with unit normal $\\tau$ remains locally regular whenever\n$|\\tau^T(v,0)|>0$. This is a local statement; it asserts no global branch\ncompleteness.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pseudo-arclength-local-newton-correction",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$. Suppose $z_*\\in U$ satisfies $F(z_*)=0$ and\n$A:=DF(z_*)$ has rank $n$. Let $t\\in\\ker A$ be a unit vector, let\n$\\tau\\in\\mathbb R^{n+1}$ be a unit vector with\n$|\\tau^Tt|\\ge c$ for some $0<c\\le1$, and let $z_p$ satisfy\n$\\tau^T(z_*-z_p)=0$. Define\n$$G(z):=\\bigl(F(z),\\tau^T(z-z_p)\\bigr).$$\nLet $K_A\\ge0$ satisfy\n$$\\|(A|_{t^\\perp})^{-1}u\\|_2\\le K_A\\|u\\|_2\\qquad(u\\in\\mathbb R^n),$$\nand set\n$$\\beta_*:=\\sqrt{K_A^2(1+c^{-1})^2+c^{-2}}.$$\nThe derivative $DG(z_*)$ is invertible and\n$\\|DG(z_*)^{-1}\\|_{\\rm op}\\le\\beta_*$. There is a local regular\nunit-speed solution-curve chart through $z_*$, and after shrinking it, the\nhyperplane $\\tau^T(z-z_p)=0$ has exactly one intersection with that chart.\n\nSuppose also that for some $R>0$ and $L\\ge0$ the closed ball\n$\\overline B_2(z_*,R)$ lies in $U$ and\n$$\\|DF(u)-DF(v)\\|_{\\rm op}\\le L\\|u-v\\|_2 \\qquad(u,v\\in\\overline B_2(z_*,R)).$$\nThen there are $\\rho\\in(0,R]$ and $K>0$ such that each exact-Jacobian\nNewton update for $G$ started in $\\overline B_2(z_*,\\rho)$ is defined,\nremains in that ball, and satisfies\n$$\\|z_{k+1}-z_*\\|_2\\le C\\|z_k-z_*\\|_2^2,\\qquad C:=KL/2,$$\nwhere $C\\rho\\le1/2$ (if $L=0$, any sufficiently small $\\rho$ works).\nContinuing the exact recurrence indefinitely gives convergence to $z_*$;\na finite update budget may stop first, and its `root` status means only that\nthe residual tolerance was met. Separately, whenever the hypotheses of\n[[thm-augmented-residual-contraction-certificate]] hold for $G$ on a proposed\nclosed ball, that theorem certifies exactly one zero there and its stated\nresidual-to-root error bound. These conclusions are local and imply no\nglobal branch-completeness claim.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-augmented-residual-contraction-certificate",
+          "source_section": "Statement",
+          "quote": "For a linear map $A$ between Euclidean spaces, write\n$\\|A\\|_{\\rm op}:=\\sup_{\\|u\\|_2=1}\\|Au\\|_2$. Let $m\\ge1$, let\n$V\\subseteq\\mathbb R^m$ be open, and let\n$G:V\\to\\mathbb R^m$ be $C^1$. Let $y\\in V$, $R>0$, and suppose the closed\nball $\\overline B_2(y,R)$ lies in $V$. Assume that for some $L\\ge0$,\n$$\\|DG(u)-DG(v)\\|_{\\rm op}\\le L\\|u-v\\|_2\\qquad(u,v\\in\\overline B_2(y,R)).$$\nLet $\\widehat g\\in\\mathbb R^m$ and $\\widehat A\\in\\mathbb R^{m\\times m}$\ncome with certified bounds\n$$\\|\\widehat g-G(y)\\|_2\\le\\epsilon_g,\\qquad \\|\\widehat A-DG(y)\\|_{\\rm op}\\le\\epsilon_J,$$\nwhere $\\epsilon_g,\\epsilon_J\\ge0$. Suppose $\\widehat A$ is invertible and\n$\\|\\widehat A^{-1}\\|_{\\rm op}\\le\\widehat\\beta$, with\n$\\widehat\\beta\\epsilon_J<1$. Define\n$$\\beta:=\\frac{\\widehat\\beta}{1-\\widehat\\beta\\epsilon_J},\\qquad \\rho:=\\|\\widehat g\\|_2+\\epsilon_g,\\qquad q:=\\beta L R.$$\nIf $q<1$ and $\\beta\\rho\\le(1-q)R$, then $G$ has exactly one zero $y^*$\nin $\\overline B_2(y,R)$ and\n$$\\|y^*-y\\|_2\\le\\frac{\\beta\\rho}{1-q}.$$",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$ in the componentwise sense of\n[[def-ck-euclidean-maps-and-diffeomorphisms]] on a declared tube; its total\nderivative $DF$ has the linear first-order meaning of\n[[def-total-derivative-in-euclidean-space]]. Require $C^3$ on any subtube\nwhere a fold check is requested. A valid seed consists of a center\n$\\bar z_0$, a radius $r_0$, and a certified ball containing exactly one\nzero $z_0^*$ of an initial augmented section\n$$G_{-1}(z):=\\bigl(F(z),\\tau_{-1}^T(z-z_{p,-1})\\bigr),$$\nwhere $\\tau_{-1}$ is unit and the section is transverse to the regular local\nsolution branch. Thus the seed certifies one solution point of $F=0$ by\nintersecting the branch with a hyperplane; it does not claim that $F=0$ has an\nisolated zero in $\\mathbb R^{n+1}$. The seed also includes a neighborhood\nin which every zero of $F$ lies on the certified local curve chart and a\nverified rank-$n$ condition on that chart.\n\nSupply a unit previous orientation, step length $h>0$, requested step count\n$N_{\\rm req}\\in\\mathbb N_0$, continuation budget $N_s\\in\\mathbb N_0$,\ncorrector budget $N_c\\in\\mathbb N_0$, residual tolerance $\\epsilon\\ge0$,\nand angle margin $c\\in(0,1]$. At each current certified section ball\n$B_k=\\overline B_2(\\bar z_k,r_k)$, its unique branch point is denoted\n$z_k^*$. A tangent routine must provide a unit candidate $\\widehat t_k$ and\na certified error bound to a unit vector $t_k\\in\\ker DF(z_k^*)$, plus a\nverified inverse bound for $DF(z_k^*)|_{t_k^\\perp}$. Missing rank, tangent,\nor error bounds are failures; they are never treated as zero error.\n\nAt a queried point $z$, an evaluator returns either exact $(F(z),DF(z))$ or\ncertified data $(\\widehat F(z),\\eta_F,\\widehat J(z),\\eta_J)$ with\n$$\\|\\widehat F(z)-F(z)\\|_2\\le\\eta_F,\\qquad \\|\\widehat J(z)-DF(z)\\|_{\\rm op}\\le\\eta_J.$$\nAll supplied tangent, evaluator, chart, certificate and requested fold callbacks must return a result or their declared failure in finite time for a termination claim. Their mathematical bounds must be sound; finite outer budgets cannot force a nonreturning callback to finish. For every proposed root ball, the certificate routine must also supply an\ninverse bound for the approximate augmented Jacobian, a Jacobian-Lipschitz\nconstant on the whole ball, and an isolating branch neighborhood/angle\nenclosure. If any\nbound is missing, return `root-certificate-inconclusive` for that candidate.\nInitialize the fold field as `not-requested` when no fold check was asked,\nand as `inconclusive` while a requested check remains unresolved.\n\n**Output:** a finite list of certified local section-root balls; a\ncontinuation status from `finite-trace`, `rank-or-tangent-unverified`,\n`tangent-angle-failure`, `tube-exit`, `singular-corrector`,\n`corrector-budget-exhausted`, `root-certificate-inconclusive`, or\n`continuation-budget-exhausted`; and a fold field with value\n`not-requested`, `certified`, or `inconclusive`. Each ball records its\ncenter, radius, strict contraction bounds from\n[[thm-augmented-residual-contraction-certificate]], the local chart and\nangle enclosure identifying it with the unique next point on the traced\nbranch, and the evaluation-error bounds used.\n\n**Procedure:**\n\n1. Initialize the list with the valid seed ball, accepted count $a=0$ and attempted continuation count $s=0$. Denote the supplied unit previous orientation by $\\tau_k$ at the current ball. If $a=N_{\\rm req}$, including $N_{\\rm req}=0$, finalize with status `finite-trace`. Otherwise, if $s=N_s$, finalize with `continuation-budget-exhausted`. Increment $s$ before making any callback for the next attempt. Thus $N_s$ caps attempts, not just successful steps.\n2. At the unique current root $z_k^*$, query the tangent routine. Verify rank $DF(z_k^*)=n$, a unit candidate $\\widehat t_k$, a unit true kernel vector $t_k$, its certified error $\\|\\widehat t_k-t_k\\|_2\\le e_k$, and the complement inverse bound. Missing evidence returns `rank-or-tangent-unverified`. Orient $\\widehat t_k$ and its corresponding $t_k$ together, keeping $\\tau_k$ fixed. Certify $\\tau_k^Tt_k\\ge c$ and $a_k:=\\tau_k^T\\widehat t_k>0$; an unavailable or failed angular test returns `tangent-angle-failure`.\n3. Set $z_p=\\bar z_k+h\\widehat t_k$ and retain the **previous** orientation as section normal:\n$$G_k(z)=\\bigl(F(z),\\tau_k^T(z-z_p)\\bigr).$$\nThe chart certificate supplies a unit-speed chart $c_k$ with $c_k(0)=z_k^*$, $c_k'(0)=t_k$, an interval $[-r_{\\rm ch}^-,r_{\\rm ch}^+]$, a number $\\kappa>0$, and a neighborhood $V_k$ in which every zero of $F$ belongs to that chart interval. Verify $\\tau_k^Tc_k'(u)\\ge\\kappa$ throughout the interval and\n$$h a_k>r_k,\\qquad h a_k+r_k\\le\\kappa r_{\\rm ch}^+.$$\nThese checks bound $d=\\tau_k^T(z_p-z_k^*)$ between $h a_k-r_k$ and $h a_k+r_k$, so the selected section has one forward intersection on the supplied chart by [[lem-transverse-hyperplane-selects-unique-local-branch-point]]. A failed chart angle gives `tangent-angle-failure`; failed offset/length evidence gives `root-certificate-inconclusive`. If the predictor, proposed ball or required chart leaves the declared tube, return `tube-exit`.\n4. With exact evaluations, call [[alg-finite-budget-newton-for-vector-residuals]] on $G_k$ from $z_p$, tolerance $\\epsilon$ and update budget $N_c$. Map `singular-jacobian` to `singular-corrector` and `invalid-trial` to `tube-exit`. For `root` or `iteration-budget-exhausted`, retain the last valid iterate as a candidate. If the predictor is certified inside the invariant ball of [[thm-pseudo-arclength-local-newton-correction]], every attempted exact update has its quadratic error bound; otherwise this is only a candidate generator. Apply the root certificate of [[thm-augmented-residual-contraction-certificate]] to the last candidate. Accept only if every inequality passes and the **whole** ball lies in $V_k$. Unavailable inputs give `root-certificate-inconclusive`; failed tests after a `root` residual stop give that same status; failed tests after exhausted updates give `corrector-budget-exhausted`. Neither residual tolerance nor budget alone is a root proof. A passing ball proceeds to step6, without an earlier append.\n5. With bounded evaluation errors, set $y_0=z_p$. For $j=0,\\ldots,N_c$, query the supplied certified residual/Jacobian and root-ball data at $y_j$. Unavailable certificate inputs give `root-certificate-inconclusive`. Apply the same strict contraction tests and whole-ball inclusion in $V_k$ as in step4. A passing ball proceeds to step6, without an earlier append. If the tests fail at $j=N_c$, return `corrector-budget-exhausted`. Otherwise call [[alg-newton-correction-for-vector-residuals]] on the supplied approximate augmented residual and matrix. Map `singular-jacobian` to `singular-corrector`; a trial outside the tube gives `tube-exit`; otherwise set $y_{j+1}=y_j+s_j$.  This bounded-error branch has no convergence promise.\n6. Append the passing ball **once**, with its section, error bounds and chart/angle record; increase $a$ by one. For the next attempt use the already certified unit candidate $\\widehat t_k$ as the new previous orientation. It is not silently declared the exact tangent at the new root: step2 must certify its angle against the next root's tangent. Return to step1.\n7. At every finalization, including every early return, retain the continuation status already assigned. For a requested fold check require a returned certified record satisfying all hypotheses of [[thm-simple-fold-lyapunov-schmidt-parameterization]] at its specified point: $F=0$, the required $C^3$ neighborhood, $\\operatorname{rank}F_x=n-1$, normalized right and nonzero left nullvectors, and strict enclosures excluding zero for $w^TF_\\lambda$ and $w^TF_{xx}[v,v]$, together with the stated complement/parameter normalization. Missing or failed evidence leaves the fold field `inconclusive`; otherwise set it to `certified` and record only the local fold chart and curvature formula. Without a fold request keep `not-requested`. This finalization makes finitely many callback requests and performs no unbounded search.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "At $(0,0)$, $F_x=0$, $F_\\lambda=-1$, and $F_{xx}=2$. With $v=w=1$, $a=-1$ and $b=2$, so [F1] gives $\\lambda''(0)=2$. The full derivative is $DF(x,\\lambda)=[2x,-1]$, which has rank $1$ everywhere, and at the fold its unit kernel tangent is $t=(1,0).",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Choose $0<\\alpha<1/32$ and use the seed center $\\bar z_0=(-\\alpha,\\alpha^2)$, radius $R_0=\\alpha/4$, previous orientation $\\tau_{-1}=(1,0)$, and seed section point $z_{p,-1}=(-\\alpha,0)$, so $G_{-1}(x,\\lambda)=(x^2-\\lambda,x+\\alpha)$. At the seed center the residual is zero and the inverse of the bordered Jacobian is $\\begin{bmatrix}0&1\\\\-1&-2\\alpha\\end{bmatrix}$, whose operator norm is less than $2$. The Jacobian is $2$-Lipschitz, so the exact-data certificate with $\\widehat\\beta=2$, $\\widehat g=0$, zero error bounds, and radius $R_0$ has $q=4R_0=\\alpha<1$ and certifies the seed ball. The ball lies in $V=\\{(x,\\lambda):|x|<1/4\\}$, where every zero lies on the regular graph $(x,x^2)$ and $DF=[2x,-1]$ has rank $1$. Parametrize that graph from $x=-\\alpha$ by arclength $s(x)=\\int_{-\\alpha}^x\\sqrt{1+4u^2}\\,du$. Its positive unit tangent is $(1,2x)/\\sqrt{1+4x^2}$, so the previous normal has dot product at least $\\kappa=2/\\sqrt5$ throughout $|x|\\le1/4$. The forward chart length to $x=1/4$ is at least $1/4+\\alpha$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "At the seed root, the exact unit tangent oriented toward increasing $x$ is $t=(1,-2\\alpha)/\\sqrt{1+4\\alpha^2}$. The tangent callback may return $\\widehat t=(1,0)$ with certified error $e=\\|\\widehat t-t\\|_2=\\sqrt{2-2/\\sqrt{1+4\\alpha^2}}$. With previous normal $\\tau=(1,0)$, the angle tests are $\\tau^Tt=1/\\sqrt{1+4\\alpha^2}\\ge2/\\sqrt5$ and $a=\\tau^T\\widehat t=1$. Set step length $H=2\\alpha+\\alpha^2$. Then $z_p=\\bar z_0+H\\widehat t=(\\alpha+\\alpha^2,\\alpha^2)$. The section $G_H(x,\\lambda)=(x^2-\\lambda,x-(\\alpha+\\alpha^2))$ has the unique zero $z_*=(x_*,x_*^2)$, where $x_*=\\alpha+\\alpha^2$. The forward-offset tests hold because $H>R_0$ and $H+R_0=9\\alpha/4+\\alpha^2<1/8<1/(2\\sqrt5)\\le\\kappa r_{\\rm ch}^+$. The section is transverse throughout the chart. At its selected root, with $\\sigma_*=\\sqrt{1+4x_*^2}$ and $t_*=(1,2x_*)/\\sigma_*$, the unit vector $e_*=(-2x_*,1)/\\sigma_*$ spans $t_*^\\perp$ and $[2x_*,-1]e_*=-\\sigma_*$. Thus $A=DF(x_*,x_*^2)$ restricts to an isomorphism with inverse norm $1/\\sigma_*\\le1$ on $t_*^\\perp$. Since $\\tau^Tt_*=1/\\sigma_*>0$, [F2] gives a local quadratic Newton corrector; the bordered Jacobian has determinant $1$.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "At the predictor, the augmented residual is $(2\\alpha^3+\\alpha^4,0)$ and its Jacobian is $\\begin{bmatrix}2(\\alpha+\\alpha^2)&-1\\\\1&0\\end{bmatrix}$. The Newton equation forces $\\Delta x=0$ and $\\Delta\\lambda=2\\alpha^3+\\alpha^4$, so one exact correction reaches the section root $(\\alpha+\\alpha^2,(\\alpha+\\alpha^2)^2)$.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "At corrected center $z_*=(x_*,x_*^2)$ with $x_*=\\alpha+\\alpha^2<1/4$, the inverse bordered Jacobian is $\\begin{bmatrix}0&1\\\\-1&2x_*\\end{bmatrix}$ and its operator norm is at most $\\sqrt{2+4x_*^2}<2$. Choose radius $R_1=\\alpha/4$; the ball lies in $V$ since $x_*+R_1<1/4$. Exact data with $\\widehat\\beta=2$, zero residual and derivative errors, and Lipschitz constant $2$ give $q=4R_1=\\alpha<1$ and $\\beta\\rho=0$. The certificate proves a unique section zero in the ball, and inclusion in $V$ identifies it with the unique forward branch point. With $N_{\\rm req}=N_s=N_c=1$, residual tolerance $\\epsilon=0$, and exact callbacks, steps 2.1 and 3.1 produce the accepted ball in one attempt and one Newton update.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "The certified trace starts at $x=-\\alpha$ and accepts a next section root at $x=\\alpha+\\alpha^2>0$, with the fold $x=0$ lying between them on the supplied chart. This is a finite local continuation step through the fold even though $\\lambda'(0)=0$; it asserts nothing about other components.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes n=1 and uses a positive half-width alpha; no zero-dimensional or empty-input conclusion is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The fold has F_x=0 but full derivative rank one; both exact section certificates have zero residual and error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 reaches the positive section root in one exact Newton update, and step 4.1 uses Nc=Nreq=Ns=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes F_lambda=-1 and F_xx=2, verifying a simple fold rather than loss of full derivative rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The range 0<alpha<1/32 gives strict seed, predictor-offset, chart-length, and corrected-ball bounds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2\u20134.1 give explicit finite seed, tangent, step, and ball choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a concrete continuation trace and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a concrete continuation trace and states no biconditional."
+        }
+      ],
+      "historical_author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 2.1, 3.1, 3.2, 4.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      },
+      "owner_repair_evidence": "research/numerical-optimization-dynamics-2026-10-16-owner-continuation29-step2-applied/completion.json",
+      "finite_checks": [
+        {
+          "case": "one exact continuation step crosses the fold",
+          "method": "exact-hand-calculation",
+          "input": "0<alpha<1/32; seed (-alpha,alpha^2); previous normal and tangent candidate (1,0); step length H=2alpha+alpha^2; residual tolerance epsilon=0; Nc=Nreq=Ns=1.",
+          "result": "The predictor is (alpha+alpha^2,alpha^2), its residual is (2alpha^3+alpha^4,0), and one exact Newton correction gives (alpha+alpha^2,(alpha+alpha^2)^2). Seed and corrected zero-residual certificates use beta-hat=2, L=2, radii alpha/4, and q=alpha<1.",
+          "disposition": "certifies a finite step from the negative-x branch through x=0 to the positive-x branch."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all six Verification steps and all four complete current suppliers. The old realization began at x=0 and reached only x=h>0; the repaired realization starts at -alpha and ends at alpha+alpha^2>0 on one isolating regular chart. For every 0<alpha<1/32, H+R0=9alpha/4+alpha^2<1/8<1/(2sqrt(5))<=kappa*r_chart_plus; both zero-residual certificates have inverse bound 2, L=2, radius alpha/4 and q=alpha<1. The seed and corrected balls lie in |x|<1/4. The approximate unit tangent has the displayed exact error bound; the seed complement inverse bound is 1/sqrt(1+4alpha^2)<=1 by the same two-dimensional computation shown at the selected root. Choose admitted angle margin c=2/sqrt(5). One Newton correction has delta x=0 and delta lambda=2alpha^3+alpha^4, reaches the positive root, then passes certification. Checked alpha approaching both excluded endpoints, zero residual/error, all budgets one and epsilon=0. Accepted reader repair; no further item edit, unresolved defect or global completeness claim."
+      }
+    },
+    "status": "UNAPPLIED root-review proposal"
+  },
+  {
+    "target": "research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json",
+    "path": [
+      "contracts",
+      "ex-pseudo-arclength-crosses-x-squared-fold",
+      "boundaries",
+      1,
+      "evidence"
+    ],
+    "pointer": "/contracts/ex-pseudo-arclength-crosses-x-squared-fold/boundaries/1/evidence",
+    "batch": 29,
+    "id": "ex-pseudo-arclength-crosses-x-squared-fold",
+    "before": "The fold has F_x=0 but full derivative rank one; both exact section certificates have zero residual and error.",
+    "after": "Verification step 1.1 computes F_x(0,0)=0 while the full derivative DF=[2x,-1] has rank one. Verification steps 1.2 and 4.1 use zero residual and zero evaluation errors with positive radii R0=R1=alpha/4 and q=alpha<1. The Given range 0<alpha<1/32 excludes a zero-radius alpha=0 input.",
+    "reason": "Existing zero disposition is checked by actual1.1 fold derivatives and1.2/4.1 exact-data certificate branches; add real current step anchors and distinguish zero error from excluded zero alpha.",
+    "source_guard": {
+      "path": "items/ex-pseudo-arclength-crosses-x-squared-fold.md",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/items/ex-pseudo-arclength-crosses-x-squared-fold.md"
+    },
+    "carrier_guard": {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json"
+    },
+    "contract_row_guard": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-simple-fold-lyapunov-schmidt-parameterization",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n\\times\\mathbb R$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^3$. Write\n$D_xF(x,\\lambda)u:=DF(x,\\lambda)(u,0)$ and\n$F_\\lambda(x,\\lambda):=DF(x,\\lambda)(0,1)$. Define\n$$F_{xx}(x_0,\\lambda_0)[v,v] :=\\left.\\frac{d}{dt}\\bigl(D_xF(x_0+tv,\\lambda_0)v\\bigr)\\right|_{t=0}.$$\nSuppose\n$$F(x_0,\\lambda_0)=0,\\qquad J:=D_xF(x_0,\\lambda_0),\\qquad \\operatorname{rank}J=n-1.$$\nAssume that $v\\in\\mathbb R^n$ is a unit vector with\n$\\ker J=\\operatorname{span}\\{v\\}$, that $w\\in\\mathbb R^n\\setminus\\{0\\}$\nsatisfies $w^TJ=0$, and that\n$$a:=w^TF_\\lambda(x_0,\\lambda_0)\\ne0,\\qquad b:=w^TF_{xx}(x_0,\\lambda_0)[v,v]\\ne0.$$\nThen there is $\\delta>0$ and a unique local $C^3$ curve of solutions\n$(x(s),\\lambda(s))$, $|s|<\\delta$, with\n$$x(0)=x_0,\\quad \\lambda(0)=\\lambda_0,\\quad v^T(x(s)-x_0)=s,\\quad x'(0)=v,\\quad \\lambda'(0)=0,\\quad \\lambda''(0)=-\\frac{b}{a}\\ne0.$$\nIn particular, on a smaller interval there is a finite $M_3$ such that\n$$\\left|\\lambda(s)-\\lambda_0+\\frac{b}{2a}s^2\\right| \\le\\frac{M_3}{6}|s|^3.$$\nThe full derivative $D_{(x,\\lambda)}F$ has rank $n$ at the fold, and the\nsolution curve tangent there is $(v,0)$. Thus an augmented pseudo-arclength\nhyperplane with unit normal $\\tau$ remains locally regular whenever\n$|\\tau^T(v,0)|>0$. This is a local statement; it asserts no global branch\ncompleteness.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pseudo-arclength-local-newton-correction",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$. Suppose $z_*\\in U$ satisfies $F(z_*)=0$ and\n$A:=DF(z_*)$ has rank $n$. Let $t\\in\\ker A$ be a unit vector, let\n$\\tau\\in\\mathbb R^{n+1}$ be a unit vector with\n$|\\tau^Tt|\\ge c$ for some $0<c\\le1$, and let $z_p$ satisfy\n$\\tau^T(z_*-z_p)=0$. Define\n$$G(z):=\\bigl(F(z),\\tau^T(z-z_p)\\bigr).$$\nLet $K_A\\ge0$ satisfy\n$$\\|(A|_{t^\\perp})^{-1}u\\|_2\\le K_A\\|u\\|_2\\qquad(u\\in\\mathbb R^n),$$\nand set\n$$\\beta_*:=\\sqrt{K_A^2(1+c^{-1})^2+c^{-2}}.$$\nThe derivative $DG(z_*)$ is invertible and\n$\\|DG(z_*)^{-1}\\|_{\\rm op}\\le\\beta_*$. There is a local regular\nunit-speed solution-curve chart through $z_*$, and after shrinking it, the\nhyperplane $\\tau^T(z-z_p)=0$ has exactly one intersection with that chart.\n\nSuppose also that for some $R>0$ and $L\\ge0$ the closed ball\n$\\overline B_2(z_*,R)$ lies in $U$ and\n$$\\|DF(u)-DF(v)\\|_{\\rm op}\\le L\\|u-v\\|_2 \\qquad(u,v\\in\\overline B_2(z_*,R)).$$\nThen there are $\\rho\\in(0,R]$ and $K>0$ such that each exact-Jacobian\nNewton update for $G$ started in $\\overline B_2(z_*,\\rho)$ is defined,\nremains in that ball, and satisfies\n$$\\|z_{k+1}-z_*\\|_2\\le C\\|z_k-z_*\\|_2^2,\\qquad C:=KL/2,$$\nwhere $C\\rho\\le1/2$ (if $L=0$, any sufficiently small $\\rho$ works).\nContinuing the exact recurrence indefinitely gives convergence to $z_*$;\na finite update budget may stop first, and its `root` status means only that\nthe residual tolerance was met. Separately, whenever the hypotheses of\n[[thm-augmented-residual-contraction-certificate]] hold for $G$ on a proposed\nclosed ball, that theorem certifies exactly one zero there and its stated\nresidual-to-root error bound. These conclusions are local and imply no\nglobal branch-completeness claim.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-augmented-residual-contraction-certificate",
+          "source_section": "Statement",
+          "quote": "For a linear map $A$ between Euclidean spaces, write\n$\\|A\\|_{\\rm op}:=\\sup_{\\|u\\|_2=1}\\|Au\\|_2$. Let $m\\ge1$, let\n$V\\subseteq\\mathbb R^m$ be open, and let\n$G:V\\to\\mathbb R^m$ be $C^1$. Let $y\\in V$, $R>0$, and suppose the closed\nball $\\overline B_2(y,R)$ lies in $V$. Assume that for some $L\\ge0$,\n$$\\|DG(u)-DG(v)\\|_{\\rm op}\\le L\\|u-v\\|_2\\qquad(u,v\\in\\overline B_2(y,R)).$$\nLet $\\widehat g\\in\\mathbb R^m$ and $\\widehat A\\in\\mathbb R^{m\\times m}$\ncome with certified bounds\n$$\\|\\widehat g-G(y)\\|_2\\le\\epsilon_g,\\qquad \\|\\widehat A-DG(y)\\|_{\\rm op}\\le\\epsilon_J,$$\nwhere $\\epsilon_g,\\epsilon_J\\ge0$. Suppose $\\widehat A$ is invertible and\n$\\|\\widehat A^{-1}\\|_{\\rm op}\\le\\widehat\\beta$, with\n$\\widehat\\beta\\epsilon_J<1$. Define\n$$\\beta:=\\frac{\\widehat\\beta}{1-\\widehat\\beta\\epsilon_J},\\qquad \\rho:=\\|\\widehat g\\|_2+\\epsilon_g,\\qquad q:=\\beta L R.$$\nIf $q<1$ and $\\beta\\rho\\le(1-q)R$, then $G$ has exactly one zero $y^*$\nin $\\overline B_2(y,R)$ and\n$$\\|y^*-y\\|_2\\le\\frac{\\beta\\rho}{1-q}.$$",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$ in the componentwise sense of\n[[def-ck-euclidean-maps-and-diffeomorphisms]] on a declared tube; its total\nderivative $DF$ has the linear first-order meaning of\n[[def-total-derivative-in-euclidean-space]]. Require $C^3$ on any subtube\nwhere a fold check is requested. A valid seed consists of a center\n$\\bar z_0$, a radius $r_0$, and a certified ball containing exactly one\nzero $z_0^*$ of an initial augmented section\n$$G_{-1}(z):=\\bigl(F(z),\\tau_{-1}^T(z-z_{p,-1})\\bigr),$$\nwhere $\\tau_{-1}$ is unit and the section is transverse to the regular local\nsolution branch. Thus the seed certifies one solution point of $F=0$ by\nintersecting the branch with a hyperplane; it does not claim that $F=0$ has an\nisolated zero in $\\mathbb R^{n+1}$. The seed also includes a neighborhood\nin which every zero of $F$ lies on the certified local curve chart and a\nverified rank-$n$ condition on that chart.\n\nSupply a unit previous orientation, step length $h>0$, requested step count\n$N_{\\rm req}\\in\\mathbb N_0$, continuation budget $N_s\\in\\mathbb N_0$,\ncorrector budget $N_c\\in\\mathbb N_0$, residual tolerance $\\epsilon\\ge0$,\nand angle margin $c\\in(0,1]$. At each current certified section ball\n$B_k=\\overline B_2(\\bar z_k,r_k)$, its unique branch point is denoted\n$z_k^*$. A tangent routine must provide a unit candidate $\\widehat t_k$ and\na certified error bound to a unit vector $t_k\\in\\ker DF(z_k^*)$, plus a\nverified inverse bound for $DF(z_k^*)|_{t_k^\\perp}$. Missing rank, tangent,\nor error bounds are failures; they are never treated as zero error.\n\nAt a queried point $z$, an evaluator returns either exact $(F(z),DF(z))$ or\ncertified data $(\\widehat F(z),\\eta_F,\\widehat J(z),\\eta_J)$ with\n$$\\|\\widehat F(z)-F(z)\\|_2\\le\\eta_F,\\qquad \\|\\widehat J(z)-DF(z)\\|_{\\rm op}\\le\\eta_J.$$\nAll supplied tangent, evaluator, chart, certificate and requested fold callbacks must return a result or their declared failure in finite time for a termination claim. Their mathematical bounds must be sound; finite outer budgets cannot force a nonreturning callback to finish. For every proposed root ball, the certificate routine must also supply an\ninverse bound for the approximate augmented Jacobian, a Jacobian-Lipschitz\nconstant on the whole ball, and an isolating branch neighborhood/angle\nenclosure. If any\nbound is missing, return `root-certificate-inconclusive` for that candidate.\nInitialize the fold field as `not-requested` when no fold check was asked,\nand as `inconclusive` while a requested check remains unresolved.\n\n**Output:** a finite list of certified local section-root balls; a\ncontinuation status from `finite-trace`, `rank-or-tangent-unverified`,\n`tangent-angle-failure`, `tube-exit`, `singular-corrector`,\n`corrector-budget-exhausted`, `root-certificate-inconclusive`, or\n`continuation-budget-exhausted`; and a fold field with value\n`not-requested`, `certified`, or `inconclusive`. Each ball records its\ncenter, radius, strict contraction bounds from\n[[thm-augmented-residual-contraction-certificate]], the local chart and\nangle enclosure identifying it with the unique next point on the traced\nbranch, and the evaluation-error bounds used.\n\n**Procedure:**\n\n1. Initialize the list with the valid seed ball, accepted count $a=0$ and attempted continuation count $s=0$. Denote the supplied unit previous orientation by $\\tau_k$ at the current ball. If $a=N_{\\rm req}$, including $N_{\\rm req}=0$, finalize with status `finite-trace`. Otherwise, if $s=N_s$, finalize with `continuation-budget-exhausted`. Increment $s$ before making any callback for the next attempt. Thus $N_s$ caps attempts, not just successful steps.\n2. At the unique current root $z_k^*$, query the tangent routine. Verify rank $DF(z_k^*)=n$, a unit candidate $\\widehat t_k$, a unit true kernel vector $t_k$, its certified error $\\|\\widehat t_k-t_k\\|_2\\le e_k$, and the complement inverse bound. Missing evidence returns `rank-or-tangent-unverified`. Orient $\\widehat t_k$ and its corresponding $t_k$ together, keeping $\\tau_k$ fixed. Certify $\\tau_k^Tt_k\\ge c$ and $a_k:=\\tau_k^T\\widehat t_k>0$; an unavailable or failed angular test returns `tangent-angle-failure`.\n3. Set $z_p=\\bar z_k+h\\widehat t_k$ and retain the **previous** orientation as section normal:\n$$G_k(z)=\\bigl(F(z),\\tau_k^T(z-z_p)\\bigr).$$\nThe chart certificate supplies a unit-speed chart $c_k$ with $c_k(0)=z_k^*$, $c_k'(0)=t_k$, an interval $[-r_{\\rm ch}^-,r_{\\rm ch}^+]$, a number $\\kappa>0$, and a neighborhood $V_k$ in which every zero of $F$ belongs to that chart interval. Verify $\\tau_k^Tc_k'(u)\\ge\\kappa$ throughout the interval and\n$$h a_k>r_k,\\qquad h a_k+r_k\\le\\kappa r_{\\rm ch}^+.$$\nThese checks bound $d=\\tau_k^T(z_p-z_k^*)$ between $h a_k-r_k$ and $h a_k+r_k$, so the selected section has one forward intersection on the supplied chart by [[lem-transverse-hyperplane-selects-unique-local-branch-point]]. A failed chart angle gives `tangent-angle-failure`; failed offset/length evidence gives `root-certificate-inconclusive`. If the predictor, proposed ball or required chart leaves the declared tube, return `tube-exit`.\n4. With exact evaluations, call [[alg-finite-budget-newton-for-vector-residuals]] on $G_k$ from $z_p$, tolerance $\\epsilon$ and update budget $N_c$. Map `singular-jacobian` to `singular-corrector` and `invalid-trial` to `tube-exit`. For `root` or `iteration-budget-exhausted`, retain the last valid iterate as a candidate. If the predictor is certified inside the invariant ball of [[thm-pseudo-arclength-local-newton-correction]], every attempted exact update has its quadratic error bound; otherwise this is only a candidate generator. Apply the root certificate of [[thm-augmented-residual-contraction-certificate]] to the last candidate. Accept only if every inequality passes and the **whole** ball lies in $V_k$. Unavailable inputs give `root-certificate-inconclusive`; failed tests after a `root` residual stop give that same status; failed tests after exhausted updates give `corrector-budget-exhausted`. Neither residual tolerance nor budget alone is a root proof. A passing ball proceeds to step6, without an earlier append.\n5. With bounded evaluation errors, set $y_0=z_p$. For $j=0,\\ldots,N_c$, query the supplied certified residual/Jacobian and root-ball data at $y_j$. Unavailable certificate inputs give `root-certificate-inconclusive`. Apply the same strict contraction tests and whole-ball inclusion in $V_k$ as in step4. A passing ball proceeds to step6, without an earlier append. If the tests fail at $j=N_c$, return `corrector-budget-exhausted`. Otherwise call [[alg-newton-correction-for-vector-residuals]] on the supplied approximate augmented residual and matrix. Map `singular-jacobian` to `singular-corrector`; a trial outside the tube gives `tube-exit`; otherwise set $y_{j+1}=y_j+s_j$.  This bounded-error branch has no convergence promise.\n6. Append the passing ball **once**, with its section, error bounds and chart/angle record; increase $a$ by one. For the next attempt use the already certified unit candidate $\\widehat t_k$ as the new previous orientation. It is not silently declared the exact tangent at the new root: step2 must certify its angle against the next root's tangent. Return to step1.\n7. At every finalization, including every early return, retain the continuation status already assigned. For a requested fold check require a returned certified record satisfying all hypotheses of [[thm-simple-fold-lyapunov-schmidt-parameterization]] at its specified point: $F=0$, the required $C^3$ neighborhood, $\\operatorname{rank}F_x=n-1$, normalized right and nonzero left nullvectors, and strict enclosures excluding zero for $w^TF_\\lambda$ and $w^TF_{xx}[v,v]$, together with the stated complement/parameter normalization. Missing or failed evidence leaves the fold field `inconclusive`; otherwise set it to `certified` and record only the local fold chart and curvature formula. Without a fold request keep `not-requested`. This finalization makes finitely many callback requests and performs no unbounded search.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "At $(0,0)$, $F_x=0$, $F_\\lambda=-1$, and $F_{xx}=2$. With $v=w=1$, $a=-1$ and $b=2$, so [F1] gives $\\lambda''(0)=2$. The full derivative is $DF(x,\\lambda)=[2x,-1]$, which has rank $1$ everywhere, and at the fold its unit kernel tangent is $t=(1,0).",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Choose $0<\\alpha<1/32$ and use the seed center $\\bar z_0=(-\\alpha,\\alpha^2)$, radius $R_0=\\alpha/4$, previous orientation $\\tau_{-1}=(1,0)$, and seed section point $z_{p,-1}=(-\\alpha,0)$, so $G_{-1}(x,\\lambda)=(x^2-\\lambda,x+\\alpha)$. At the seed center the residual is zero and the inverse of the bordered Jacobian is $\\begin{bmatrix}0&1\\\\-1&-2\\alpha\\end{bmatrix}$, whose operator norm is less than $2$. The Jacobian is $2$-Lipschitz, so the exact-data certificate with $\\widehat\\beta=2$, $\\widehat g=0$, zero error bounds, and radius $R_0$ has $q=4R_0=\\alpha<1$ and certifies the seed ball. The ball lies in $V=\\{(x,\\lambda):|x|<1/4\\}$, where every zero lies on the regular graph $(x,x^2)$ and $DF=[2x,-1]$ has rank $1$. Parametrize that graph from $x=-\\alpha$ by arclength $s(x)=\\int_{-\\alpha}^x\\sqrt{1+4u^2}\\,du$. Its positive unit tangent is $(1,2x)/\\sqrt{1+4x^2}$, so the previous normal has dot product at least $\\kappa=2/\\sqrt5$ throughout $|x|\\le1/4$. The forward chart length to $x=1/4$ is at least $1/4+\\alpha$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "At the seed root, the exact unit tangent oriented toward increasing $x$ is $t=(1,-2\\alpha)/\\sqrt{1+4\\alpha^2}$. The tangent callback may return $\\widehat t=(1,0)$ with certified error $e=\\|\\widehat t-t\\|_2=\\sqrt{2-2/\\sqrt{1+4\\alpha^2}}$. With previous normal $\\tau=(1,0)$, the angle tests are $\\tau^Tt=1/\\sqrt{1+4\\alpha^2}\\ge2/\\sqrt5$ and $a=\\tau^T\\widehat t=1$. Set step length $H=2\\alpha+\\alpha^2$. Then $z_p=\\bar z_0+H\\widehat t=(\\alpha+\\alpha^2,\\alpha^2)$. The section $G_H(x,\\lambda)=(x^2-\\lambda,x-(\\alpha+\\alpha^2))$ has the unique zero $z_*=(x_*,x_*^2)$, where $x_*=\\alpha+\\alpha^2$. The forward-offset tests hold because $H>R_0$ and $H+R_0=9\\alpha/4+\\alpha^2<1/8<1/(2\\sqrt5)\\le\\kappa r_{\\rm ch}^+$. The section is transverse throughout the chart. At its selected root, with $\\sigma_*=\\sqrt{1+4x_*^2}$ and $t_*=(1,2x_*)/\\sigma_*$, the unit vector $e_*=(-2x_*,1)/\\sigma_*$ spans $t_*^\\perp$ and $[2x_*,-1]e_*=-\\sigma_*$. Thus $A=DF(x_*,x_*^2)$ restricts to an isomorphism with inverse norm $1/\\sigma_*\\le1$ on $t_*^\\perp$. Since $\\tau^Tt_*=1/\\sigma_*>0$, [F2] gives a local quadratic Newton corrector; the bordered Jacobian has determinant $1$.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "At the predictor, the augmented residual is $(2\\alpha^3+\\alpha^4,0)$ and its Jacobian is $\\begin{bmatrix}2(\\alpha+\\alpha^2)&-1\\\\1&0\\end{bmatrix}$. The Newton equation forces $\\Delta x=0$ and $\\Delta\\lambda=2\\alpha^3+\\alpha^4$, so one exact correction reaches the section root $(\\alpha+\\alpha^2,(\\alpha+\\alpha^2)^2)$.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "At corrected center $z_*=(x_*,x_*^2)$ with $x_*=\\alpha+\\alpha^2<1/4$, the inverse bordered Jacobian is $\\begin{bmatrix}0&1\\\\-1&2x_*\\end{bmatrix}$ and its operator norm is at most $\\sqrt{2+4x_*^2}<2$. Choose radius $R_1=\\alpha/4$; the ball lies in $V$ since $x_*+R_1<1/4$. Exact data with $\\widehat\\beta=2$, zero residual and derivative errors, and Lipschitz constant $2$ give $q=4R_1=\\alpha<1$ and $\\beta\\rho=0$. The certificate proves a unique section zero in the ball, and inclusion in $V$ identifies it with the unique forward branch point. With $N_{\\rm req}=N_s=N_c=1$, residual tolerance $\\epsilon=0$, and exact callbacks, steps 2.1 and 3.1 produce the accepted ball in one attempt and one Newton update.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "The certified trace starts at $x=-\\alpha$ and accepts a next section root at $x=\\alpha+\\alpha^2>0$, with the fold $x=0$ lying between them on the supplied chart. This is a finite local continuation step through the fold even though $\\lambda'(0)=0$; it asserts nothing about other components.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes n=1 and uses a positive half-width alpha; no zero-dimensional or empty-input conclusion is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The fold has F_x=0 but full derivative rank one; both exact section certificates have zero residual and error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 reaches the positive section root in one exact Newton update, and step 4.1 uses Nc=Nreq=Ns=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes F_lambda=-1 and F_xx=2, verifying a simple fold rather than loss of full derivative rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The range 0<alpha<1/32 gives strict seed, predictor-offset, chart-length, and corrected-ball bounds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2\u20134.1 give explicit finite seed, tangent, step, and ball choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a concrete continuation trace and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a concrete continuation trace and states no biconditional."
+        }
+      ],
+      "historical_author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 2.1, 3.1, 3.2, 4.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      },
+      "owner_repair_evidence": "research/numerical-optimization-dynamics-2026-10-16-owner-continuation29-step2-applied/completion.json",
+      "finite_checks": [
+        {
+          "case": "one exact continuation step crosses the fold",
+          "method": "exact-hand-calculation",
+          "input": "0<alpha<1/32; seed (-alpha,alpha^2); previous normal and tangent candidate (1,0); step length H=2alpha+alpha^2; residual tolerance epsilon=0; Nc=Nreq=Ns=1.",
+          "result": "The predictor is (alpha+alpha^2,alpha^2), its residual is (2alpha^3+alpha^4,0), and one exact Newton correction gives (alpha+alpha^2,(alpha+alpha^2)^2). Seed and corrected zero-residual certificates use beta-hat=2, L=2, radii alpha/4, and q=alpha<1.",
+          "disposition": "certifies a finite step from the negative-x branch through x=0 to the positive-x branch."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all six Verification steps and all four complete current suppliers. The old realization began at x=0 and reached only x=h>0; the repaired realization starts at -alpha and ends at alpha+alpha^2>0 on one isolating regular chart. For every 0<alpha<1/32, H+R0=9alpha/4+alpha^2<1/8<1/(2sqrt(5))<=kappa*r_chart_plus; both zero-residual certificates have inverse bound 2, L=2, radius alpha/4 and q=alpha<1. The seed and corrected balls lie in |x|<1/4. The approximate unit tangent has the displayed exact error bound; the seed complement inverse bound is 1/sqrt(1+4alpha^2)<=1 by the same two-dimensional computation shown at the selected root. Choose admitted angle margin c=2/sqrt(5). One Newton correction has delta x=0 and delta lambda=2alpha^3+alpha^4, reaches the positive root, then passes certification. Checked alpha approaching both excluded endpoints, zero residual/error, all budgets one and epsilon=0. Accepted reader repair; no further item edit, unresolved defect or global completeness claim."
+      }
+    },
+    "status": "UNAPPLIED root-review proposal"
+  },
+  {
+    "target": "research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json",
+    "path": [
+      "contracts",
+      "ex-pseudo-arclength-crosses-x-squared-fold",
+      "boundaries",
+      4,
+      "evidence"
+    ],
+    "pointer": "/contracts/ex-pseudo-arclength-crosses-x-squared-fold/boundaries/4/evidence",
+    "batch": 29,
+    "id": "ex-pseudo-arclength-crosses-x-squared-fold",
+    "before": "The range 0<alpha<1/32 gives strict seed, predictor-offset, chart-length, and corrected-ball bounds.",
+    "after": "Verification step 1.2 fixes 0<alpha<1/32 and the seed radius R0=alpha/4. Verification step 2.1 proves H+R0=9alpha/4+alpha^2<1/8<1/(2sqrt(5))<=kappa*r_ch_plus; Verification step 4.1 proves x_star+R1<1/4 and q=alpha<1 for the corrected ball. These are strict bounds on the admitted open alpha range; neither excluded endpoint alpha=0 nor alpha=1/32 is asserted to be an input.",
+    "reason": "Retain endpoint-range evidence, now attached to actual seed, forward-offset/chart-length and corrected-ball proof steps. No new endpoint computation or closed-range claim is invented.",
+    "source_guard": {
+      "path": "items/ex-pseudo-arclength-crosses-x-squared-fold.md",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/items/ex-pseudo-arclength-crosses-x-squared-fold.md"
+    },
+    "carrier_guard": {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json"
+    },
+    "contract_row_guard": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-simple-fold-lyapunov-schmidt-parameterization",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n\\times\\mathbb R$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^3$. Write\n$D_xF(x,\\lambda)u:=DF(x,\\lambda)(u,0)$ and\n$F_\\lambda(x,\\lambda):=DF(x,\\lambda)(0,1)$. Define\n$$F_{xx}(x_0,\\lambda_0)[v,v] :=\\left.\\frac{d}{dt}\\bigl(D_xF(x_0+tv,\\lambda_0)v\\bigr)\\right|_{t=0}.$$\nSuppose\n$$F(x_0,\\lambda_0)=0,\\qquad J:=D_xF(x_0,\\lambda_0),\\qquad \\operatorname{rank}J=n-1.$$\nAssume that $v\\in\\mathbb R^n$ is a unit vector with\n$\\ker J=\\operatorname{span}\\{v\\}$, that $w\\in\\mathbb R^n\\setminus\\{0\\}$\nsatisfies $w^TJ=0$, and that\n$$a:=w^TF_\\lambda(x_0,\\lambda_0)\\ne0,\\qquad b:=w^TF_{xx}(x_0,\\lambda_0)[v,v]\\ne0.$$\nThen there is $\\delta>0$ and a unique local $C^3$ curve of solutions\n$(x(s),\\lambda(s))$, $|s|<\\delta$, with\n$$x(0)=x_0,\\quad \\lambda(0)=\\lambda_0,\\quad v^T(x(s)-x_0)=s,\\quad x'(0)=v,\\quad \\lambda'(0)=0,\\quad \\lambda''(0)=-\\frac{b}{a}\\ne0.$$\nIn particular, on a smaller interval there is a finite $M_3$ such that\n$$\\left|\\lambda(s)-\\lambda_0+\\frac{b}{2a}s^2\\right| \\le\\frac{M_3}{6}|s|^3.$$\nThe full derivative $D_{(x,\\lambda)}F$ has rank $n$ at the fold, and the\nsolution curve tangent there is $(v,0)$. Thus an augmented pseudo-arclength\nhyperplane with unit normal $\\tau$ remains locally regular whenever\n$|\\tau^T(v,0)|>0$. This is a local statement; it asserts no global branch\ncompleteness.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pseudo-arclength-local-newton-correction",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$. Suppose $z_*\\in U$ satisfies $F(z_*)=0$ and\n$A:=DF(z_*)$ has rank $n$. Let $t\\in\\ker A$ be a unit vector, let\n$\\tau\\in\\mathbb R^{n+1}$ be a unit vector with\n$|\\tau^Tt|\\ge c$ for some $0<c\\le1$, and let $z_p$ satisfy\n$\\tau^T(z_*-z_p)=0$. Define\n$$G(z):=\\bigl(F(z),\\tau^T(z-z_p)\\bigr).$$\nLet $K_A\\ge0$ satisfy\n$$\\|(A|_{t^\\perp})^{-1}u\\|_2\\le K_A\\|u\\|_2\\qquad(u\\in\\mathbb R^n),$$\nand set\n$$\\beta_*:=\\sqrt{K_A^2(1+c^{-1})^2+c^{-2}}.$$\nThe derivative $DG(z_*)$ is invertible and\n$\\|DG(z_*)^{-1}\\|_{\\rm op}\\le\\beta_*$. There is a local regular\nunit-speed solution-curve chart through $z_*$, and after shrinking it, the\nhyperplane $\\tau^T(z-z_p)=0$ has exactly one intersection with that chart.\n\nSuppose also that for some $R>0$ and $L\\ge0$ the closed ball\n$\\overline B_2(z_*,R)$ lies in $U$ and\n$$\\|DF(u)-DF(v)\\|_{\\rm op}\\le L\\|u-v\\|_2 \\qquad(u,v\\in\\overline B_2(z_*,R)).$$\nThen there are $\\rho\\in(0,R]$ and $K>0$ such that each exact-Jacobian\nNewton update for $G$ started in $\\overline B_2(z_*,\\rho)$ is defined,\nremains in that ball, and satisfies\n$$\\|z_{k+1}-z_*\\|_2\\le C\\|z_k-z_*\\|_2^2,\\qquad C:=KL/2,$$\nwhere $C\\rho\\le1/2$ (if $L=0$, any sufficiently small $\\rho$ works).\nContinuing the exact recurrence indefinitely gives convergence to $z_*$;\na finite update budget may stop first, and its `root` status means only that\nthe residual tolerance was met. Separately, whenever the hypotheses of\n[[thm-augmented-residual-contraction-certificate]] hold for $G$ on a proposed\nclosed ball, that theorem certifies exactly one zero there and its stated\nresidual-to-root error bound. These conclusions are local and imply no\nglobal branch-completeness claim.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-augmented-residual-contraction-certificate",
+          "source_section": "Statement",
+          "quote": "For a linear map $A$ between Euclidean spaces, write\n$\\|A\\|_{\\rm op}:=\\sup_{\\|u\\|_2=1}\\|Au\\|_2$. Let $m\\ge1$, let\n$V\\subseteq\\mathbb R^m$ be open, and let\n$G:V\\to\\mathbb R^m$ be $C^1$. Let $y\\in V$, $R>0$, and suppose the closed\nball $\\overline B_2(y,R)$ lies in $V$. Assume that for some $L\\ge0$,\n$$\\|DG(u)-DG(v)\\|_{\\rm op}\\le L\\|u-v\\|_2\\qquad(u,v\\in\\overline B_2(y,R)).$$\nLet $\\widehat g\\in\\mathbb R^m$ and $\\widehat A\\in\\mathbb R^{m\\times m}$\ncome with certified bounds\n$$\\|\\widehat g-G(y)\\|_2\\le\\epsilon_g,\\qquad \\|\\widehat A-DG(y)\\|_{\\rm op}\\le\\epsilon_J,$$\nwhere $\\epsilon_g,\\epsilon_J\\ge0$. Suppose $\\widehat A$ is invertible and\n$\\|\\widehat A^{-1}\\|_{\\rm op}\\le\\widehat\\beta$, with\n$\\widehat\\beta\\epsilon_J<1$. Define\n$$\\beta:=\\frac{\\widehat\\beta}{1-\\widehat\\beta\\epsilon_J},\\qquad \\rho:=\\|\\widehat g\\|_2+\\epsilon_g,\\qquad q:=\\beta L R.$$\nIf $q<1$ and $\\beta\\rho\\le(1-q)R$, then $G$ has exactly one zero $y^*$\nin $\\overline B_2(y,R)$ and\n$$\\|y^*-y\\|_2\\le\\frac{\\beta\\rho}{1-q}.$$",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^{n+1}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^2$ in the componentwise sense of\n[[def-ck-euclidean-maps-and-diffeomorphisms]] on a declared tube; its total\nderivative $DF$ has the linear first-order meaning of\n[[def-total-derivative-in-euclidean-space]]. Require $C^3$ on any subtube\nwhere a fold check is requested. A valid seed consists of a center\n$\\bar z_0$, a radius $r_0$, and a certified ball containing exactly one\nzero $z_0^*$ of an initial augmented section\n$$G_{-1}(z):=\\bigl(F(z),\\tau_{-1}^T(z-z_{p,-1})\\bigr),$$\nwhere $\\tau_{-1}$ is unit and the section is transverse to the regular local\nsolution branch. Thus the seed certifies one solution point of $F=0$ by\nintersecting the branch with a hyperplane; it does not claim that $F=0$ has an\nisolated zero in $\\mathbb R^{n+1}$. The seed also includes a neighborhood\nin which every zero of $F$ lies on the certified local curve chart and a\nverified rank-$n$ condition on that chart.\n\nSupply a unit previous orientation, step length $h>0$, requested step count\n$N_{\\rm req}\\in\\mathbb N_0$, continuation budget $N_s\\in\\mathbb N_0$,\ncorrector budget $N_c\\in\\mathbb N_0$, residual tolerance $\\epsilon\\ge0$,\nand angle margin $c\\in(0,1]$. At each current certified section ball\n$B_k=\\overline B_2(\\bar z_k,r_k)$, its unique branch point is denoted\n$z_k^*$. A tangent routine must provide a unit candidate $\\widehat t_k$ and\na certified error bound to a unit vector $t_k\\in\\ker DF(z_k^*)$, plus a\nverified inverse bound for $DF(z_k^*)|_{t_k^\\perp}$. Missing rank, tangent,\nor error bounds are failures; they are never treated as zero error.\n\nAt a queried point $z$, an evaluator returns either exact $(F(z),DF(z))$ or\ncertified data $(\\widehat F(z),\\eta_F,\\widehat J(z),\\eta_J)$ with\n$$\\|\\widehat F(z)-F(z)\\|_2\\le\\eta_F,\\qquad \\|\\widehat J(z)-DF(z)\\|_{\\rm op}\\le\\eta_J.$$\nAll supplied tangent, evaluator, chart, certificate and requested fold callbacks must return a result or their declared failure in finite time for a termination claim. Their mathematical bounds must be sound; finite outer budgets cannot force a nonreturning callback to finish. For every proposed root ball, the certificate routine must also supply an\ninverse bound for the approximate augmented Jacobian, a Jacobian-Lipschitz\nconstant on the whole ball, and an isolating branch neighborhood/angle\nenclosure. If any\nbound is missing, return `root-certificate-inconclusive` for that candidate.\nInitialize the fold field as `not-requested` when no fold check was asked,\nand as `inconclusive` while a requested check remains unresolved.\n\n**Output:** a finite list of certified local section-root balls; a\ncontinuation status from `finite-trace`, `rank-or-tangent-unverified`,\n`tangent-angle-failure`, `tube-exit`, `singular-corrector`,\n`corrector-budget-exhausted`, `root-certificate-inconclusive`, or\n`continuation-budget-exhausted`; and a fold field with value\n`not-requested`, `certified`, or `inconclusive`. Each ball records its\ncenter, radius, strict contraction bounds from\n[[thm-augmented-residual-contraction-certificate]], the local chart and\nangle enclosure identifying it with the unique next point on the traced\nbranch, and the evaluation-error bounds used.\n\n**Procedure:**\n\n1. Initialize the list with the valid seed ball, accepted count $a=0$ and attempted continuation count $s=0$. Denote the supplied unit previous orientation by $\\tau_k$ at the current ball. If $a=N_{\\rm req}$, including $N_{\\rm req}=0$, finalize with status `finite-trace`. Otherwise, if $s=N_s$, finalize with `continuation-budget-exhausted`. Increment $s$ before making any callback for the next attempt. Thus $N_s$ caps attempts, not just successful steps.\n2. At the unique current root $z_k^*$, query the tangent routine. Verify rank $DF(z_k^*)=n$, a unit candidate $\\widehat t_k$, a unit true kernel vector $t_k$, its certified error $\\|\\widehat t_k-t_k\\|_2\\le e_k$, and the complement inverse bound. Missing evidence returns `rank-or-tangent-unverified`. Orient $\\widehat t_k$ and its corresponding $t_k$ together, keeping $\\tau_k$ fixed. Certify $\\tau_k^Tt_k\\ge c$ and $a_k:=\\tau_k^T\\widehat t_k>0$; an unavailable or failed angular test returns `tangent-angle-failure`.\n3. Set $z_p=\\bar z_k+h\\widehat t_k$ and retain the **previous** orientation as section normal:\n$$G_k(z)=\\bigl(F(z),\\tau_k^T(z-z_p)\\bigr).$$\nThe chart certificate supplies a unit-speed chart $c_k$ with $c_k(0)=z_k^*$, $c_k'(0)=t_k$, an interval $[-r_{\\rm ch}^-,r_{\\rm ch}^+]$, a number $\\kappa>0$, and a neighborhood $V_k$ in which every zero of $F$ belongs to that chart interval. Verify $\\tau_k^Tc_k'(u)\\ge\\kappa$ throughout the interval and\n$$h a_k>r_k,\\qquad h a_k+r_k\\le\\kappa r_{\\rm ch}^+.$$\nThese checks bound $d=\\tau_k^T(z_p-z_k^*)$ between $h a_k-r_k$ and $h a_k+r_k$, so the selected section has one forward intersection on the supplied chart by [[lem-transverse-hyperplane-selects-unique-local-branch-point]]. A failed chart angle gives `tangent-angle-failure`; failed offset/length evidence gives `root-certificate-inconclusive`. If the predictor, proposed ball or required chart leaves the declared tube, return `tube-exit`.\n4. With exact evaluations, call [[alg-finite-budget-newton-for-vector-residuals]] on $G_k$ from $z_p$, tolerance $\\epsilon$ and update budget $N_c$. Map `singular-jacobian` to `singular-corrector` and `invalid-trial` to `tube-exit`. For `root` or `iteration-budget-exhausted`, retain the last valid iterate as a candidate. If the predictor is certified inside the invariant ball of [[thm-pseudo-arclength-local-newton-correction]], every attempted exact update has its quadratic error bound; otherwise this is only a candidate generator. Apply the root certificate of [[thm-augmented-residual-contraction-certificate]] to the last candidate. Accept only if every inequality passes and the **whole** ball lies in $V_k$. Unavailable inputs give `root-certificate-inconclusive`; failed tests after a `root` residual stop give that same status; failed tests after exhausted updates give `corrector-budget-exhausted`. Neither residual tolerance nor budget alone is a root proof. A passing ball proceeds to step6, without an earlier append.\n5. With bounded evaluation errors, set $y_0=z_p$. For $j=0,\\ldots,N_c$, query the supplied certified residual/Jacobian and root-ball data at $y_j$. Unavailable certificate inputs give `root-certificate-inconclusive`. Apply the same strict contraction tests and whole-ball inclusion in $V_k$ as in step4. A passing ball proceeds to step6, without an earlier append. If the tests fail at $j=N_c$, return `corrector-budget-exhausted`. Otherwise call [[alg-newton-correction-for-vector-residuals]] on the supplied approximate augmented residual and matrix. Map `singular-jacobian` to `singular-corrector`; a trial outside the tube gives `tube-exit`; otherwise set $y_{j+1}=y_j+s_j$.  This bounded-error branch has no convergence promise.\n6. Append the passing ball **once**, with its section, error bounds and chart/angle record; increase $a$ by one. For the next attempt use the already certified unit candidate $\\widehat t_k$ as the new previous orientation. It is not silently declared the exact tangent at the new root: step2 must certify its angle against the next root's tangent. Return to step1.\n7. At every finalization, including every early return, retain the continuation status already assigned. For a requested fold check require a returned certified record satisfying all hypotheses of [[thm-simple-fold-lyapunov-schmidt-parameterization]] at its specified point: $F=0$, the required $C^3$ neighborhood, $\\operatorname{rank}F_x=n-1$, normalized right and nonzero left nullvectors, and strict enclosures excluding zero for $w^TF_\\lambda$ and $w^TF_{xx}[v,v]$, together with the stated complement/parameter normalization. Missing or failed evidence leaves the fold field `inconclusive`; otherwise set it to `certified` and record only the local fold chart and curvature formula. Without a fold request keep `not-requested`. This finalization makes finitely many callback requests and performs no unbounded search.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "At $(0,0)$, $F_x=0$, $F_\\lambda=-1$, and $F_{xx}=2$. With $v=w=1$, $a=-1$ and $b=2$, so [F1] gives $\\lambda''(0)=2$. The full derivative is $DF(x,\\lambda)=[2x,-1]$, which has rank $1$ everywhere, and at the fold its unit kernel tangent is $t=(1,0).",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Choose $0<\\alpha<1/32$ and use the seed center $\\bar z_0=(-\\alpha,\\alpha^2)$, radius $R_0=\\alpha/4$, previous orientation $\\tau_{-1}=(1,0)$, and seed section point $z_{p,-1}=(-\\alpha,0)$, so $G_{-1}(x,\\lambda)=(x^2-\\lambda,x+\\alpha)$. At the seed center the residual is zero and the inverse of the bordered Jacobian is $\\begin{bmatrix}0&1\\\\-1&-2\\alpha\\end{bmatrix}$, whose operator norm is less than $2$. The Jacobian is $2$-Lipschitz, so the exact-data certificate with $\\widehat\\beta=2$, $\\widehat g=0$, zero error bounds, and radius $R_0$ has $q=4R_0=\\alpha<1$ and certifies the seed ball. The ball lies in $V=\\{(x,\\lambda):|x|<1/4\\}$, where every zero lies on the regular graph $(x,x^2)$ and $DF=[2x,-1]$ has rank $1$. Parametrize that graph from $x=-\\alpha$ by arclength $s(x)=\\int_{-\\alpha}^x\\sqrt{1+4u^2}\\,du$. Its positive unit tangent is $(1,2x)/\\sqrt{1+4x^2}$, so the previous normal has dot product at least $\\kappa=2/\\sqrt5$ throughout $|x|\\le1/4$. The forward chart length to $x=1/4$ is at least $1/4+\\alpha$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "At the seed root, the exact unit tangent oriented toward increasing $x$ is $t=(1,-2\\alpha)/\\sqrt{1+4\\alpha^2}$. The tangent callback may return $\\widehat t=(1,0)$ with certified error $e=\\|\\widehat t-t\\|_2=\\sqrt{2-2/\\sqrt{1+4\\alpha^2}}$. With previous normal $\\tau=(1,0)$, the angle tests are $\\tau^Tt=1/\\sqrt{1+4\\alpha^2}\\ge2/\\sqrt5$ and $a=\\tau^T\\widehat t=1$. Set step length $H=2\\alpha+\\alpha^2$. Then $z_p=\\bar z_0+H\\widehat t=(\\alpha+\\alpha^2,\\alpha^2)$. The section $G_H(x,\\lambda)=(x^2-\\lambda,x-(\\alpha+\\alpha^2))$ has the unique zero $z_*=(x_*,x_*^2)$, where $x_*=\\alpha+\\alpha^2$. The forward-offset tests hold because $H>R_0$ and $H+R_0=9\\alpha/4+\\alpha^2<1/8<1/(2\\sqrt5)\\le\\kappa r_{\\rm ch}^+$. The section is transverse throughout the chart. At its selected root, with $\\sigma_*=\\sqrt{1+4x_*^2}$ and $t_*=(1,2x_*)/\\sigma_*$, the unit vector $e_*=(-2x_*,1)/\\sigma_*$ spans $t_*^\\perp$ and $[2x_*,-1]e_*=-\\sigma_*$. Thus $A=DF(x_*,x_*^2)$ restricts to an isomorphism with inverse norm $1/\\sigma_*\\le1$ on $t_*^\\perp$. Since $\\tau^Tt_*=1/\\sigma_*>0$, [F2] gives a local quadratic Newton corrector; the bordered Jacobian has determinant $1$.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "At the predictor, the augmented residual is $(2\\alpha^3+\\alpha^4,0)$ and its Jacobian is $\\begin{bmatrix}2(\\alpha+\\alpha^2)&-1\\\\1&0\\end{bmatrix}$. The Newton equation forces $\\Delta x=0$ and $\\Delta\\lambda=2\\alpha^3+\\alpha^4$, so one exact correction reaches the section root $(\\alpha+\\alpha^2,(\\alpha+\\alpha^2)^2)$.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "At corrected center $z_*=(x_*,x_*^2)$ with $x_*=\\alpha+\\alpha^2<1/4$, the inverse bordered Jacobian is $\\begin{bmatrix}0&1\\\\-1&2x_*\\end{bmatrix}$ and its operator norm is at most $\\sqrt{2+4x_*^2}<2$. Choose radius $R_1=\\alpha/4$; the ball lies in $V$ since $x_*+R_1<1/4$. Exact data with $\\widehat\\beta=2$, zero residual and derivative errors, and Lipschitz constant $2$ give $q=4R_1=\\alpha<1$ and $\\beta\\rho=0$. The certificate proves a unique section zero in the ball, and inclusion in $V$ identifies it with the unique forward branch point. With $N_{\\rm req}=N_s=N_c=1$, residual tolerance $\\epsilon=0$, and exact callbacks, steps 2.1 and 3.1 produce the accepted ball in one attempt and one Newton update.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "The certified trace starts at $x=-\\alpha$ and accepts a next section root at $x=\\alpha+\\alpha^2>0$, with the fold $x=0$ lying between them on the supplied chart. This is a finite local continuation step through the fold even though $\\lambda'(0)=0$; it asserts nothing about other components.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes n=1 and uses a positive half-width alpha; no zero-dimensional or empty-input conclusion is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The fold has F_x=0 but full derivative rank one; both exact section certificates have zero residual and error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 reaches the positive section root in one exact Newton update, and step 4.1 uses Nc=Nreq=Ns=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes F_lambda=-1 and F_xx=2, verifying a simple fold rather than loss of full derivative rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The range 0<alpha<1/32 gives strict seed, predictor-offset, chart-length, and corrected-ball bounds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2\u20134.1 give explicit finite seed, tangent, step, and ball choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a concrete continuation trace and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a concrete continuation trace and states no biconditional."
+        }
+      ],
+      "historical_author_audit": {
+        "status": "complete",
+        "reviewer": "beta-batch-29-author",
+        "notes": "Checked the exact current proof steps 1.1, 2.1, 3.1, 3.2, 4.1 against their declared supplier excerpts and hypotheses. This is an authoring self-check only, not independent approval."
+      },
+      "owner_repair_evidence": "research/numerical-optimization-dynamics-2026-10-16-owner-continuation29-step2-applied/completion.json",
+      "finite_checks": [
+        {
+          "case": "one exact continuation step crosses the fold",
+          "method": "exact-hand-calculation",
+          "input": "0<alpha<1/32; seed (-alpha,alpha^2); previous normal and tangent candidate (1,0); step length H=2alpha+alpha^2; residual tolerance epsilon=0; Nc=Nreq=Ns=1.",
+          "result": "The predictor is (alpha+alpha^2,alpha^2), its residual is (2alpha^3+alpha^4,0), and one exact Newton correction gives (alpha+alpha^2,(alpha+alpha^2)^2). Seed and corrected zero-residual certificates use beta-hat=2, L=2, radii alpha/4, and q=alpha<1.",
+          "disposition": "certifies a finite step from the negative-x branch through x=0 to the positive-x branch."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all six Verification steps and all four complete current suppliers. The old realization began at x=0 and reached only x=h>0; the repaired realization starts at -alpha and ends at alpha+alpha^2>0 on one isolating regular chart. For every 0<alpha<1/32, H+R0=9alpha/4+alpha^2<1/8<1/(2sqrt(5))<=kappa*r_chart_plus; both zero-residual certificates have inverse bound 2, L=2, radius alpha/4 and q=alpha<1. The seed and corrected balls lie in |x|<1/4. The approximate unit tangent has the displayed exact error bound; the seed complement inverse bound is 1/sqrt(1+4alpha^2)<=1 by the same two-dimensional computation shown at the selected root. Choose admitted angle margin c=2/sqrt(5). One Newton correction has delta x=0 and delta lambda=2alpha^3+alpha^4, reaches the positive root, then passes certification. Checked alpha approaching both excluded endpoints, zero residual/error, all budgets one and epsilon=0. Accepted reader repair; no further item edit, unresolved defect or global completeness claim."
+      }
+    },
+    "status": "UNAPPLIED root-review proposal"
+  },
+  {
+    "target": "research/numerical-optimization-dynamics-2026-10-16-batch-34.proof-contracts.json",
+    "path": [
+      "contracts",
+      "ex-lanczos-repeated-top-zero-component-and-invariant-breakdown",
+      "citations",
+      2,
+      "uses"
+    ],
+    "pointer": "/contracts/ex-lanczos-repeated-top-zero-component-and-invariant-breakdown/citations/2/uses",
+    "batch": 34,
+    "id": "ex-lanczos-repeated-top-zero-component-and-invariant-breakdown",
+    "before": [
+      "1.2",
+      "2.1"
+    ],
+    "after": [
+      "1.1",
+      "1.2",
+      "2.1"
+    ],
+    "reason": "Current Verification1.1 explicitly uses F3 to turn zero Arnoldi residuals in cases(i)/(ii) into exact Lanczos breakdown at dimensions1/2; keep the existing1.2/2.1 uses.",
+    "source_guard": {
+      "path": "items/ex-lanczos-repeated-top-zero-component-and-invariant-breakdown.md",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/items/ex-lanczos-repeated-top-zero-component-and-invariant-breakdown.md"
+    },
+    "carrier_guard": {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-34.proof-contracts.json",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/research/numerical-optimization-dynamics-2026-10-16-batch-34.proof-contracts.json"
+    },
+    "contract_row_guard": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{n\\times n}$, $n\\ge1$, be symmetric with ordered eigenvalues\n$\\lambda_1\\ge\\cdots\\ge\\lambda_n$. Let $r$ be the multiplicity of $\\lambda_1$.\nIf $r<n$, assume $\\lambda_1>\\lambda_{r+1}$, and let $P$ be the orthogonal\nprojection onto the $\\lambda_1$-eigenspace. Let $b\\in\\mathbb R^n$ be a unit\nvector and, for $m\\ge1$, define\n\n$$K_m:=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\},\\qquad \\theta_m:=\\max_{0\\ne x\\in K_m}\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x}.$$\n\nThus $\\theta_m$ is the largest Rayleigh\u2013Ritz value on $K_m$; if Lanczos runs\nthrough step $m$ without breakdown, it is the largest Ritz value of\n$Q_m^{\\mathsf T}AQ_m$. If $r=n$, then $A=\\lambda_1I$ and $\\theta_m=\\lambda_1$\nfor every $m\\ge1$. Suppose $r<n$.\n\n1. If $Pb=0$, then $\\theta_m\\le\\lambda_{r+1}$ for every $m$; no convergence\n   to $\\lambda_1$ is asserted.\n\n2. If $Pb\\ne0$, put\n   $$\\tau:=\\frac{\\|(I-P)b\\|_2}{\\|Pb\\|_2}.$$\n   If $\\lambda_{r+1}>\\lambda_n$, then for every $m\\ge1$,\n   $$0\\le\\lambda_1-\\theta_m\\le \\frac{(\\lambda_1-\\lambda_n)\\tau^2} {T_{m-1}\\!\\left(1+2\\frac{\\lambda_1-\\lambda_{r+1}} {\\lambda_{r+1}-\\lambda_n}\\right)^2}.$$\n   For a simple top eigenvalue ($r=1$), $\\tau$ is the tangent of the angle\n   between $b$ and a unit top eigenvector, so the starting-angle denominator\n   is explicit.\n\n3. If $Pb\\ne0$ and $\\lambda_{r+1}=\\lambda_n$, then\n   $$\\lambda_1-\\theta_1=(\\lambda_1-\\lambda_n) \\frac{\\|(I-P)b\\|_2^2}{\\|b\\|_2^2},\\qquad \\theta_m=\\lambda_1\\quad(m\\ge2).$$\n\nWhen $r<n$, $Pb\\ne0$, and exact Lanczos breakdown occurs at dimension $d$, then\n$\\theta_d=\\lambda_1$ and $K_m=K_d$ for all $m\\ge d$. These are exact-arithmetic\nclaims; they give no finite-precision grade-termination guarantee.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a square matrix over $\\mathbb R$ or $\\mathbb C$ and let $b$ be a\nvector of matching size. Define\n\n$$K_0(A,b):=\\{0\\},$$\n\nand for $m\\ge 1$ define the $m$th **Krylov subspace**\n\n$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$\n\nThus $K_m(A,b)\\subseteq K_{m+1}(A,b)$ for every $m\\ge 0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-arnoldi-process",
+          "source_section": "Definition",
+          "quote": "Let $A$ act on a real or complex inner-product space, and let $b\\ne0$. The\n**Arnoldi process** starts with\n\n$$v_1:=\\frac{b}{\\|b\\|}.$$\n\nGiven orthonormal vectors $v_1,\\dots,v_j$, define\n\n$$h_{ij}:=\\langle Av_j,v_i\\rangle \\qquad(1\\le i\\le j),$$\n\nand the orthogonalized residual\n\n$$w_j:=Av_j-\\sum_{i=1}^j h_{ij}v_i.$$\n\nSet\n\n$$h_{j+1,j}:=\\|w_j\\|.$$\n\nIf $h_{j+1,j}\\ne0$, define\n\n$$v_{j+1}:=\\frac{w_j}{h_{j+1,j}}.$$\n\nThe process is said to **break down exactly** at step $j$ when\n$h_{j+1,j}=0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-lanczos-process-as-hermitian-arnoldi",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian and let $q_1=b/\\|b\\|_2$ for a nonzero start vector $b$.\nRunning Arnoldi on $(A,b)$ is called the **Lanczos process** when one records\nthe coefficients, at every step before Arnoldi breakdown, in the three-term\nform\n\n$$Aq_j=\\beta_{j-1}q_{j-1}+\\alpha_jq_j+\\beta_jq_{j+1}\\qquad (j\\ge1,\\ q_0:=0,\\ \\beta_0:=0),$$\n\nwith $\\alpha_j\\in\\mathbb R$ and the phase of $q_{j+1}$ chosen so that\n$\\beta_j\\ge0$ is real. In matrix form this is the Hermitian specialization of\n[[def-arnoldi-process]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "1.1 In case (i), take $b=1$. Then $P=I$, $Pb=b\\ne0$, and $K_1=\\mathbb R$ is invariant under $A=5I_1$. The first Arnoldi residual is zero, so Lanczos breaks down at $d=1$; every nonzero vector has Rayleigh quotient $5$, giving $\\theta_m=5$ for all $m\\ge1$ by [F1]. In case (ii), $P$ projects onto $\\operatorname{span}\\{e_1,e_2\\}$, so $Pb=e_1/\\sqrt2\\ne0$. Here $Ab=(5,0,1)^{\\mathsf T}/\\sqrt2$ and $Ab-b=(4,0,0)^{\\mathsf T}/\\sqrt2$, so $K_2(A,b)=\\operatorname{span}\\{e_1,e_3\\}$, an invariant subspace. The first Arnoldi residual is nonzero, while $Aq_2\\in K_2=\\operatorname{span}\\{q_1,q_2\\}$ makes the second residual zero; hence Lanczos breaks down at $d=2$. Since $e_1\\in K_2$ has Rayleigh quotient $5$, the maximum is $\\theta_2=5$, as [F1] predicts for the collapsed interval branch.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "In case (iii), $P$ projects onto $e_1$, so $Pb=0$; $A e_2=2e_2$ gives $K_m(A,e_2)=\\operatorname{span}\\{e_2\\}$ for every $m$, and therefore $\\theta_m=2=\\lambda_{r+1}$, in agreement with [F1]. At the first Arnoldi column, $Ae_2$ already lies in $K_1=\\operatorname{span}\\{e_2\\}$, so subtracting its projection leaves zero residual. Thus [F3]\u2013[F4] give exact Lanczos breakdown at $d=1$ without a top component.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "In case (iv), $b$ and $Ab=(5e_1+2e_2)/\\sqrt2$ are independent, so $K_2=\\operatorname{span}\\{e_1,e_2\\}$; this space is invariant under $A$. At the second Arnoldi column, $Aq_2\\in K_2=\\operatorname{span}\\{q_1,q_2\\}$, so subtracting its two orthogonal projections leaves zero residual. Thus [F3]\u2013[F4] give exact Lanczos breakdown at $d=2$. Since $Pb=e_1/\\sqrt2\\ne0$, [F1] gives $\\theta_2=5$; directly, $Ab-2b=3e_1/\\sqrt2\\in K_2$, so $e_1\\in K_2$ and its Rayleigh quotient is $5$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "empty case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 cover scalar, repeated-top, absent-top, and invariant-breakdown cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks lambda_{r+1}=lambda_n in the repeated-top case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+          "status": "authored-local-supplier",
+          "source_section": "Statement",
+          "excerpt": "Let $A\\in\\mathbb R^{n\\times n}$ be symmetric with ordered eigenvalues\n$\\lambda_1\\ge\\cdots\\ge\\lambda_n$. Let $r$ be the multiplicity of $\\lambda_1$.\nIf $r<n$, assume $\\lambda_1>\\lambda_{r+1}$, and let $P$ be the orthogonal\nprojection onto the $\\lambda_1$-eigenspace. Let $b\\in\\mathbb R^n$ be a unit\nvector and, for $m\\ge1$, define\n\n$$K_m:=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\},\\qquad \\theta_m:=\\max_{0\\ne x\\in K_m}\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x}.$$\n\nThus $\\theta_m$ is the largest Rayleigh\u2013Ritz value on $K_m$; if Lanczos runs\nthrough step $m$ without breakdown, it is the largest Ritz value of\n$Q_m^{\\mathsf T}AQ_m$. If $r=n$, then $A=\\lambda_1I$ and $\\theta_m=\\lambda_1$\nfor every $m\\ge1$. Suppose $r<n$.\n\n1. If $Pb=0$, then $\\theta_m\\le\\lambda_{r+1}$ for every $m$; no convergence\n   to $\\lambda_1$ is asserted.\n\n2. If $Pb\\ne0$, put\n   $$\\tau:=\\frac{\\|(I-P)b\\|_2}{\\|Pb\\|_2}.$$\n   If $\\lambda_{r+1}>\\lambda_n$, then for every $m\\ge1$,\n   $$0\\le\\lambda_1-\\theta_m\\le \\frac{(\\lambda_1-\\lambda_n)\\tau^2} {T_{m-1}\\!\\left(1+2\\frac{\\lambda_1-\\lambda_{r+1}} {\\lambda_{r+1}-\\lambda_n}\\right)^2}.$$\n   For a simple top eigenvalue ($r=1$), $\\tau$ is the tangent of the angle\n   between $b$ and a unit top eigenvector, so the starting-angle denominator\n   is explicit.\n\n3. If $\\lambda_{r+1}=\\lambda_n$, then\n   $$\\lambda_1-\\theta_1=(\\lambda_1-\\lambda_n) \\frac{\\|(I-P)b\\|_2^2}{\\|b\\|_2^2},\\qquad \\theta_m=\\lambda_1\\quad(m\\ge2).$$\n\nWhen $r<n$, $Pb\\ne0$, and exact Lanczos breakdown occurs at dimension $d$, then\n$\\theta_d=\\lambda_1$ and $K_m=K_d$ for all $m\\ge d$. These are exact-arithmetic\nclaims; they give no finite-precision grade-termination guarantee.",
+          "use": "Used in proof step(s) 1.1, 1.2, 2.1.",
+          "fact": "F1",
+          "required_hypotheses": "[F1] [[thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases]]:\nif the top eigenvalue has multiplicity $r=n$, every Rayleigh\u2013Ritz value is\n$\\lambda_1$; if $Pb=0$, every $\\theta_m\\le\\lambda_{r+1}$; if the unwanted\ninterval collapses and $Pb\\ne0$, then $\\theta_m=\\lambda_1$ for $m\\ge2$; and\nexact breakdown at dimension $d$ with $Pb\\ne0$ gives $\\theta_d=\\lambda_1$."
+        },
+        {
+          "supplier": "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$",
+          "use": "Used in proof step(s) 1.1, 1.2, 2.1.",
+          "fact": "F2",
+          "required_hypotheses": "[F2] [[def-krylov-subspace-of-a-matrix-and-start-vector]]:\n$K_m(A,b)=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\}$."
+        },
+        {
+          "supplier": "def-arnoldi-process",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$w_j:=Av_j-\\sum_{i=1}^j h_{ij}v_i.$$",
+          "use": "Used in proof step(s) 1.2, 2.1.",
+          "fact": "F3",
+          "required_hypotheses": "[F3] [[def-arnoldi-process]]: exact breakdown at a column means its\northogonalized residual is zero."
+        },
+        {
+          "supplier": "def-lanczos-process-as-hermitian-arnoldi",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$Aq_j=\\beta_{j-1}q_{j-1}+\\alpha_jq_j+\\beta_jq_{j+1}\\qquad (j\\ge1,\\ q_0:=0,\\ \\beta_0:=0),$$",
+          "use": "Used in proof step(s) 1.2, 2.1.",
+          "fact": "F4",
+          "required_hypotheses": "[F4] [[def-lanczos-process-as-hermitian-arnoldi]]: for a real symmetric\nmatrix, exact Lanczos is the corresponding exact Arnoldi process specialized\nto the Hermitian three-term recurrence."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "dimension-one",
+          "calculation": "A=[5], b=1; P=I, K_1=R is invariant, breakdown is at d=1, and every Rayleigh quotient is 5.",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "repeated-top-collapsed-interval",
+          "calculation": "For diag(5,5,1), b=(1,0,1)/sqrt(2), Pb=e_1/sqrt(2), and K_2=span{e_1,e_3} is invariant; breakdown is at d=2 and theta_2=5.",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "zero-top-component",
+          "calculation": "A e_2=2e_2, so K_m=span{e_2}, theta_m=2, and breakdown is at d=1.",
+          "evidence": "Step 1.2."
+        },
+        {
+          "case": "top-containing-invariant-breakdown",
+          "calculation": "K_2=span{e_1,e_2} is invariant and contains e_1; breakdown is at d=2 and theta_2=5.",
+          "evidence": "Step 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read all three verification steps and all four actual suppliers after theorem branch repair. Scalar b=1 spans R and breaks at d=1; repeated top case has Pb=e1/sqrt(2), K2=span(e1,e3) and d=2, satisfying repaired collapsed branch. Zero top case b=e2 gives theta_m=2 and d=1 without top recovery. Top-containing case has K2=span(e1,e2), Pb!=0 and d=2. Residual nonzero at first column in both two-dimensional cases follows from independence. Reader explicit-start and breakdown repair accepted; headings corrected. No remaining defect."
+      },
+      "repair_confidence": 1
+    },
+    "status": "UNAPPLIED root-review proposal"
+  },
+  {
+    "target": "research/numerical-optimization-dynamics-2026-10-16-batch-34.proof-contracts.json",
+    "path": [
+      "contracts",
+      "ex-lanczos-repeated-top-zero-component-and-invariant-breakdown",
+      "citations",
+      3,
+      "uses"
+    ],
+    "pointer": "/contracts/ex-lanczos-repeated-top-zero-component-and-invariant-breakdown/citations/3/uses",
+    "batch": 34,
+    "id": "ex-lanczos-repeated-top-zero-component-and-invariant-breakdown",
+    "before": [
+      "1.2",
+      "2.1"
+    ],
+    "after": [
+      "1.1",
+      "1.2",
+      "2.1"
+    ],
+    "reason": "Current Verification1.1 explicitly uses F4 to turn zero Arnoldi residuals in cases(i)/(ii) into exact Lanczos breakdown at dimensions1/2; keep the existing1.2/2.1 uses.",
+    "source_guard": {
+      "path": "items/ex-lanczos-repeated-top-zero-component-and-invariant-breakdown.md",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/items/ex-lanczos-repeated-top-zero-component-and-invariant-breakdown.md"
+    },
+    "carrier_guard": {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-34.proof-contracts.json",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/research/numerical-optimization-dynamics-2026-10-16-batch-34.proof-contracts.json"
+    },
+    "contract_row_guard": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{n\\times n}$, $n\\ge1$, be symmetric with ordered eigenvalues\n$\\lambda_1\\ge\\cdots\\ge\\lambda_n$. Let $r$ be the multiplicity of $\\lambda_1$.\nIf $r<n$, assume $\\lambda_1>\\lambda_{r+1}$, and let $P$ be the orthogonal\nprojection onto the $\\lambda_1$-eigenspace. Let $b\\in\\mathbb R^n$ be a unit\nvector and, for $m\\ge1$, define\n\n$$K_m:=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\},\\qquad \\theta_m:=\\max_{0\\ne x\\in K_m}\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x}.$$\n\nThus $\\theta_m$ is the largest Rayleigh\u2013Ritz value on $K_m$; if Lanczos runs\nthrough step $m$ without breakdown, it is the largest Ritz value of\n$Q_m^{\\mathsf T}AQ_m$. If $r=n$, then $A=\\lambda_1I$ and $\\theta_m=\\lambda_1$\nfor every $m\\ge1$. Suppose $r<n$.\n\n1. If $Pb=0$, then $\\theta_m\\le\\lambda_{r+1}$ for every $m$; no convergence\n   to $\\lambda_1$ is asserted.\n\n2. If $Pb\\ne0$, put\n   $$\\tau:=\\frac{\\|(I-P)b\\|_2}{\\|Pb\\|_2}.$$\n   If $\\lambda_{r+1}>\\lambda_n$, then for every $m\\ge1$,\n   $$0\\le\\lambda_1-\\theta_m\\le \\frac{(\\lambda_1-\\lambda_n)\\tau^2} {T_{m-1}\\!\\left(1+2\\frac{\\lambda_1-\\lambda_{r+1}} {\\lambda_{r+1}-\\lambda_n}\\right)^2}.$$\n   For a simple top eigenvalue ($r=1$), $\\tau$ is the tangent of the angle\n   between $b$ and a unit top eigenvector, so the starting-angle denominator\n   is explicit.\n\n3. If $Pb\\ne0$ and $\\lambda_{r+1}=\\lambda_n$, then\n   $$\\lambda_1-\\theta_1=(\\lambda_1-\\lambda_n) \\frac{\\|(I-P)b\\|_2^2}{\\|b\\|_2^2},\\qquad \\theta_m=\\lambda_1\\quad(m\\ge2).$$\n\nWhen $r<n$, $Pb\\ne0$, and exact Lanczos breakdown occurs at dimension $d$, then\n$\\theta_d=\\lambda_1$ and $K_m=K_d$ for all $m\\ge d$. These are exact-arithmetic\nclaims; they give no finite-precision grade-termination guarantee.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a square matrix over $\\mathbb R$ or $\\mathbb C$ and let $b$ be a\nvector of matching size. Define\n\n$$K_0(A,b):=\\{0\\},$$\n\nand for $m\\ge 1$ define the $m$th **Krylov subspace**\n\n$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$\n\nThus $K_m(A,b)\\subseteq K_{m+1}(A,b)$ for every $m\\ge 0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-arnoldi-process",
+          "source_section": "Definition",
+          "quote": "Let $A$ act on a real or complex inner-product space, and let $b\\ne0$. The\n**Arnoldi process** starts with\n\n$$v_1:=\\frac{b}{\\|b\\|}.$$\n\nGiven orthonormal vectors $v_1,\\dots,v_j$, define\n\n$$h_{ij}:=\\langle Av_j,v_i\\rangle \\qquad(1\\le i\\le j),$$\n\nand the orthogonalized residual\n\n$$w_j:=Av_j-\\sum_{i=1}^j h_{ij}v_i.$$\n\nSet\n\n$$h_{j+1,j}:=\\|w_j\\|.$$\n\nIf $h_{j+1,j}\\ne0$, define\n\n$$v_{j+1}:=\\frac{w_j}{h_{j+1,j}}.$$\n\nThe process is said to **break down exactly** at step $j$ when\n$h_{j+1,j}=0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-lanczos-process-as-hermitian-arnoldi",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian and let $q_1=b/\\|b\\|_2$ for a nonzero start vector $b$.\nRunning Arnoldi on $(A,b)$ is called the **Lanczos process** when one records\nthe coefficients, at every step before Arnoldi breakdown, in the three-term\nform\n\n$$Aq_j=\\beta_{j-1}q_{j-1}+\\alpha_jq_j+\\beta_jq_{j+1}\\qquad (j\\ge1,\\ q_0:=0,\\ \\beta_0:=0),$$\n\nwith $\\alpha_j\\in\\mathbb R$ and the phase of $q_{j+1}$ chosen so that\n$\\beta_j\\ge0$ is real. In matrix form this is the Hermitian specialization of\n[[def-arnoldi-process]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "1.1 In case (i), take $b=1$. Then $P=I$, $Pb=b\\ne0$, and $K_1=\\mathbb R$ is invariant under $A=5I_1$. The first Arnoldi residual is zero, so Lanczos breaks down at $d=1$; every nonzero vector has Rayleigh quotient $5$, giving $\\theta_m=5$ for all $m\\ge1$ by [F1]. In case (ii), $P$ projects onto $\\operatorname{span}\\{e_1,e_2\\}$, so $Pb=e_1/\\sqrt2\\ne0$. Here $Ab=(5,0,1)^{\\mathsf T}/\\sqrt2$ and $Ab-b=(4,0,0)^{\\mathsf T}/\\sqrt2$, so $K_2(A,b)=\\operatorname{span}\\{e_1,e_3\\}$, an invariant subspace. The first Arnoldi residual is nonzero, while $Aq_2\\in K_2=\\operatorname{span}\\{q_1,q_2\\}$ makes the second residual zero; hence Lanczos breaks down at $d=2$. Since $e_1\\in K_2$ has Rayleigh quotient $5$, the maximum is $\\theta_2=5$, as [F1] predicts for the collapsed interval branch.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "In case (iii), $P$ projects onto $e_1$, so $Pb=0$; $A e_2=2e_2$ gives $K_m(A,e_2)=\\operatorname{span}\\{e_2\\}$ for every $m$, and therefore $\\theta_m=2=\\lambda_{r+1}$, in agreement with [F1]. At the first Arnoldi column, $Ae_2$ already lies in $K_1=\\operatorname{span}\\{e_2\\}$, so subtracting its projection leaves zero residual. Thus [F3]\u2013[F4] give exact Lanczos breakdown at $d=1$ without a top component.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "In case (iv), $b$ and $Ab=(5e_1+2e_2)/\\sqrt2$ are independent, so $K_2=\\operatorname{span}\\{e_1,e_2\\}$; this space is invariant under $A$. At the second Arnoldi column, $Aq_2\\in K_2=\\operatorname{span}\\{q_1,q_2\\}$, so subtracting its two orthogonal projections leaves zero residual. Thus [F3]\u2013[F4] give exact Lanczos breakdown at $d=2$. Since $Pb=e_1/\\sqrt2\\ne0$, [F1] gives $\\theta_2=5$; directly, $Ab-2b=3e_1/\\sqrt2\\in K_2$, so $e_1\\in K_2$ and its Rayleigh quotient is $5$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "empty case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 cover scalar, repeated-top, absent-top, and invariant-breakdown cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks lambda_{r+1}=lambda_n in the repeated-top case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+          "status": "authored-local-supplier",
+          "source_section": "Statement",
+          "excerpt": "Let $A\\in\\mathbb R^{n\\times n}$ be symmetric with ordered eigenvalues\n$\\lambda_1\\ge\\cdots\\ge\\lambda_n$. Let $r$ be the multiplicity of $\\lambda_1$.\nIf $r<n$, assume $\\lambda_1>\\lambda_{r+1}$, and let $P$ be the orthogonal\nprojection onto the $\\lambda_1$-eigenspace. Let $b\\in\\mathbb R^n$ be a unit\nvector and, for $m\\ge1$, define\n\n$$K_m:=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\},\\qquad \\theta_m:=\\max_{0\\ne x\\in K_m}\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x}.$$\n\nThus $\\theta_m$ is the largest Rayleigh\u2013Ritz value on $K_m$; if Lanczos runs\nthrough step $m$ without breakdown, it is the largest Ritz value of\n$Q_m^{\\mathsf T}AQ_m$. If $r=n$, then $A=\\lambda_1I$ and $\\theta_m=\\lambda_1$\nfor every $m\\ge1$. Suppose $r<n$.\n\n1. If $Pb=0$, then $\\theta_m\\le\\lambda_{r+1}$ for every $m$; no convergence\n   to $\\lambda_1$ is asserted.\n\n2. If $Pb\\ne0$, put\n   $$\\tau:=\\frac{\\|(I-P)b\\|_2}{\\|Pb\\|_2}.$$\n   If $\\lambda_{r+1}>\\lambda_n$, then for every $m\\ge1$,\n   $$0\\le\\lambda_1-\\theta_m\\le \\frac{(\\lambda_1-\\lambda_n)\\tau^2} {T_{m-1}\\!\\left(1+2\\frac{\\lambda_1-\\lambda_{r+1}} {\\lambda_{r+1}-\\lambda_n}\\right)^2}.$$\n   For a simple top eigenvalue ($r=1$), $\\tau$ is the tangent of the angle\n   between $b$ and a unit top eigenvector, so the starting-angle denominator\n   is explicit.\n\n3. If $\\lambda_{r+1}=\\lambda_n$, then\n   $$\\lambda_1-\\theta_1=(\\lambda_1-\\lambda_n) \\frac{\\|(I-P)b\\|_2^2}{\\|b\\|_2^2},\\qquad \\theta_m=\\lambda_1\\quad(m\\ge2).$$\n\nWhen $r<n$, $Pb\\ne0$, and exact Lanczos breakdown occurs at dimension $d$, then\n$\\theta_d=\\lambda_1$ and $K_m=K_d$ for all $m\\ge d$. These are exact-arithmetic\nclaims; they give no finite-precision grade-termination guarantee.",
+          "use": "Used in proof step(s) 1.1, 1.2, 2.1.",
+          "fact": "F1",
+          "required_hypotheses": "[F1] [[thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases]]:\nif the top eigenvalue has multiplicity $r=n$, every Rayleigh\u2013Ritz value is\n$\\lambda_1$; if $Pb=0$, every $\\theta_m\\le\\lambda_{r+1}$; if the unwanted\ninterval collapses and $Pb\\ne0$, then $\\theta_m=\\lambda_1$ for $m\\ge2$; and\nexact breakdown at dimension $d$ with $Pb\\ne0$ gives $\\theta_d=\\lambda_1$."
+        },
+        {
+          "supplier": "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$",
+          "use": "Used in proof step(s) 1.1, 1.2, 2.1.",
+          "fact": "F2",
+          "required_hypotheses": "[F2] [[def-krylov-subspace-of-a-matrix-and-start-vector]]:\n$K_m(A,b)=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\}$."
+        },
+        {
+          "supplier": "def-arnoldi-process",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$w_j:=Av_j-\\sum_{i=1}^j h_{ij}v_i.$$",
+          "use": "Used in proof step(s) 1.2, 2.1.",
+          "fact": "F3",
+          "required_hypotheses": "[F3] [[def-arnoldi-process]]: exact breakdown at a column means its\northogonalized residual is zero."
+        },
+        {
+          "supplier": "def-lanczos-process-as-hermitian-arnoldi",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$Aq_j=\\beta_{j-1}q_{j-1}+\\alpha_jq_j+\\beta_jq_{j+1}\\qquad (j\\ge1,\\ q_0:=0,\\ \\beta_0:=0),$$",
+          "use": "Used in proof step(s) 1.2, 2.1.",
+          "fact": "F4",
+          "required_hypotheses": "[F4] [[def-lanczos-process-as-hermitian-arnoldi]]: for a real symmetric\nmatrix, exact Lanczos is the corresponding exact Arnoldi process specialized\nto the Hermitian three-term recurrence."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "dimension-one",
+          "calculation": "A=[5], b=1; P=I, K_1=R is invariant, breakdown is at d=1, and every Rayleigh quotient is 5.",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "repeated-top-collapsed-interval",
+          "calculation": "For diag(5,5,1), b=(1,0,1)/sqrt(2), Pb=e_1/sqrt(2), and K_2=span{e_1,e_3} is invariant; breakdown is at d=2 and theta_2=5.",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "zero-top-component",
+          "calculation": "A e_2=2e_2, so K_m=span{e_2}, theta_m=2, and breakdown is at d=1.",
+          "evidence": "Step 1.2."
+        },
+        {
+          "case": "top-containing-invariant-breakdown",
+          "calculation": "K_2=span{e_1,e_2} is invariant and contains e_1; breakdown is at d=2 and theta_2=5.",
+          "evidence": "Step 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read all three verification steps and all four actual suppliers after theorem branch repair. Scalar b=1 spans R and breaks at d=1; repeated top case has Pb=e1/sqrt(2), K2=span(e1,e3) and d=2, satisfying repaired collapsed branch. Zero top case b=e2 gives theta_m=2 and d=1 without top recovery. Top-containing case has K2=span(e1,e2), Pb!=0 and d=2. Residual nonzero at first column in both two-dimensional cases follows from independence. Reader explicit-start and breakdown repair accepted; headings corrected. No remaining defect."
+      },
+      "repair_confidence": 1
+    },
+    "status": "UNAPPLIED root-review proposal"
+  },
+  {
+    "target": "research/numerical-optimization-dynamics-2026-10-16-batch-34.proof-contracts.json",
+    "path": [
+      "contracts",
+      "ex-lanczos-repeated-top-zero-component-and-invariant-breakdown",
+      "derivations",
+      0,
+      "inputs"
+    ],
+    "pointer": "/contracts/ex-lanczos-repeated-top-zero-component-and-invariant-breakdown/derivations/0/inputs",
+    "batch": 34,
+    "id": "ex-lanczos-repeated-top-zero-component-and-invariant-breakdown",
+    "before": [
+      "given",
+      "F1",
+      "F2",
+      "algebra"
+    ],
+    "after": [
+      "given",
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "algebra"
+    ],
+    "reason": "d1 maps actual step1.1. Its zero first/second Arnoldi residuals use F3 and its Lanczos identification uses F4; both appear in the actual source tag. Preserve d1 identity, claim and classification.",
+    "source_guard": {
+      "path": "items/ex-lanczos-repeated-top-zero-component-and-invariant-breakdown.md",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/items/ex-lanczos-repeated-top-zero-component-and-invariant-breakdown.md"
+    },
+    "carrier_guard": {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-34.proof-contracts.json",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/research/numerical-optimization-dynamics-2026-10-16-batch-34.proof-contracts.json"
+    },
+    "contract_row_guard": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{n\\times n}$, $n\\ge1$, be symmetric with ordered eigenvalues\n$\\lambda_1\\ge\\cdots\\ge\\lambda_n$. Let $r$ be the multiplicity of $\\lambda_1$.\nIf $r<n$, assume $\\lambda_1>\\lambda_{r+1}$, and let $P$ be the orthogonal\nprojection onto the $\\lambda_1$-eigenspace. Let $b\\in\\mathbb R^n$ be a unit\nvector and, for $m\\ge1$, define\n\n$$K_m:=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\},\\qquad \\theta_m:=\\max_{0\\ne x\\in K_m}\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x}.$$\n\nThus $\\theta_m$ is the largest Rayleigh\u2013Ritz value on $K_m$; if Lanczos runs\nthrough step $m$ without breakdown, it is the largest Ritz value of\n$Q_m^{\\mathsf T}AQ_m$. If $r=n$, then $A=\\lambda_1I$ and $\\theta_m=\\lambda_1$\nfor every $m\\ge1$. Suppose $r<n$.\n\n1. If $Pb=0$, then $\\theta_m\\le\\lambda_{r+1}$ for every $m$; no convergence\n   to $\\lambda_1$ is asserted.\n\n2. If $Pb\\ne0$, put\n   $$\\tau:=\\frac{\\|(I-P)b\\|_2}{\\|Pb\\|_2}.$$\n   If $\\lambda_{r+1}>\\lambda_n$, then for every $m\\ge1$,\n   $$0\\le\\lambda_1-\\theta_m\\le \\frac{(\\lambda_1-\\lambda_n)\\tau^2} {T_{m-1}\\!\\left(1+2\\frac{\\lambda_1-\\lambda_{r+1}} {\\lambda_{r+1}-\\lambda_n}\\right)^2}.$$\n   For a simple top eigenvalue ($r=1$), $\\tau$ is the tangent of the angle\n   between $b$ and a unit top eigenvector, so the starting-angle denominator\n   is explicit.\n\n3. If $Pb\\ne0$ and $\\lambda_{r+1}=\\lambda_n$, then\n   $$\\lambda_1-\\theta_1=(\\lambda_1-\\lambda_n) \\frac{\\|(I-P)b\\|_2^2}{\\|b\\|_2^2},\\qquad \\theta_m=\\lambda_1\\quad(m\\ge2).$$\n\nWhen $r<n$, $Pb\\ne0$, and exact Lanczos breakdown occurs at dimension $d$, then\n$\\theta_d=\\lambda_1$ and $K_m=K_d$ for all $m\\ge d$. These are exact-arithmetic\nclaims; they give no finite-precision grade-termination guarantee.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a square matrix over $\\mathbb R$ or $\\mathbb C$ and let $b$ be a\nvector of matching size. Define\n\n$$K_0(A,b):=\\{0\\},$$\n\nand for $m\\ge 1$ define the $m$th **Krylov subspace**\n\n$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$\n\nThus $K_m(A,b)\\subseteq K_{m+1}(A,b)$ for every $m\\ge 0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-arnoldi-process",
+          "source_section": "Definition",
+          "quote": "Let $A$ act on a real or complex inner-product space, and let $b\\ne0$. The\n**Arnoldi process** starts with\n\n$$v_1:=\\frac{b}{\\|b\\|}.$$\n\nGiven orthonormal vectors $v_1,\\dots,v_j$, define\n\n$$h_{ij}:=\\langle Av_j,v_i\\rangle \\qquad(1\\le i\\le j),$$\n\nand the orthogonalized residual\n\n$$w_j:=Av_j-\\sum_{i=1}^j h_{ij}v_i.$$\n\nSet\n\n$$h_{j+1,j}:=\\|w_j\\|.$$\n\nIf $h_{j+1,j}\\ne0$, define\n\n$$v_{j+1}:=\\frac{w_j}{h_{j+1,j}}.$$\n\nThe process is said to **break down exactly** at step $j$ when\n$h_{j+1,j}=0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-lanczos-process-as-hermitian-arnoldi",
+          "source_section": "Definition",
+          "quote": "Let $A$ be Hermitian and let $q_1=b/\\|b\\|_2$ for a nonzero start vector $b$.\nRunning Arnoldi on $(A,b)$ is called the **Lanczos process** when one records\nthe coefficients, at every step before Arnoldi breakdown, in the three-term\nform\n\n$$Aq_j=\\beta_{j-1}q_{j-1}+\\alpha_jq_j+\\beta_jq_{j+1}\\qquad (j\\ge1,\\ q_0:=0,\\ \\beta_0:=0),$$\n\nwith $\\alpha_j\\in\\mathbb R$ and the phase of $q_{j+1}$ chosen so that\n$\\beta_j\\ge0$ is real. In matrix form this is the Hermitian specialization of\n[[def-arnoldi-process]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "1.1 In case (i), take $b=1$. Then $P=I$, $Pb=b\\ne0$, and $K_1=\\mathbb R$ is invariant under $A=5I_1$. The first Arnoldi residual is zero, so Lanczos breaks down at $d=1$; every nonzero vector has Rayleigh quotient $5$, giving $\\theta_m=5$ for all $m\\ge1$ by [F1]. In case (ii), $P$ projects onto $\\operatorname{span}\\{e_1,e_2\\}$, so $Pb=e_1/\\sqrt2\\ne0$. Here $Ab=(5,0,1)^{\\mathsf T}/\\sqrt2$ and $Ab-b=(4,0,0)^{\\mathsf T}/\\sqrt2$, so $K_2(A,b)=\\operatorname{span}\\{e_1,e_3\\}$, an invariant subspace. The first Arnoldi residual is nonzero, while $Aq_2\\in K_2=\\operatorname{span}\\{q_1,q_2\\}$ makes the second residual zero; hence Lanczos breaks down at $d=2$. Since $e_1\\in K_2$ has Rayleigh quotient $5$, the maximum is $\\theta_2=5$, as [F1] predicts for the collapsed interval branch.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "In case (iii), $P$ projects onto $e_1$, so $Pb=0$; $A e_2=2e_2$ gives $K_m(A,e_2)=\\operatorname{span}\\{e_2\\}$ for every $m$, and therefore $\\theta_m=2=\\lambda_{r+1}$, in agreement with [F1]. At the first Arnoldi column, $Ae_2$ already lies in $K_1=\\operatorname{span}\\{e_2\\}$, so subtracting its projection leaves zero residual. Thus [F3]\u2013[F4] give exact Lanczos breakdown at $d=1$ without a top component.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "In case (iv), $b$ and $Ab=(5e_1+2e_2)/\\sqrt2$ are independent, so $K_2=\\operatorname{span}\\{e_1,e_2\\}$; this space is invariant under $A$. At the second Arnoldi column, $Aq_2\\in K_2=\\operatorname{span}\\{q_1,q_2\\}$, so subtracting its two orthogonal projections leaves zero residual. Thus [F3]\u2013[F4] give exact Lanczos breakdown at $d=2$. Since $Pb=e_1/\\sqrt2\\ne0$, [F1] gives $\\theta_2=5$; directly, $Ab-2b=3e_1/\\sqrt2\\in K_2$, so $e_1\\in K_2$ and its Rayleigh quotient is $5$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "empty case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 cover scalar, repeated-top, absent-top, and invariant-breakdown cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks lambda_{r+1}=lambda_n in the repeated-top case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse case, actual Statement: Proof step 1.1 explicitly treats the scalar A=5I1 and the repeated-top/collapsed-unwanted-interval example. Proof step 1.2 has top projection zero, invariant K1 and exact breakdown at1 without convergence to the top eigenvalue. Proof step 2.1 has nonzero top projection, invariant K2 and exact breakdown at2 with top Ritz value5. These finite explicit vectors distinguish scalar, zero-component and multiplicity cases; no finite-precision termination or arbitrary family choice is asserted."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+          "status": "authored-local-supplier",
+          "source_section": "Statement",
+          "excerpt": "Let $A\\in\\mathbb R^{n\\times n}$ be symmetric with ordered eigenvalues\n$\\lambda_1\\ge\\cdots\\ge\\lambda_n$. Let $r$ be the multiplicity of $\\lambda_1$.\nIf $r<n$, assume $\\lambda_1>\\lambda_{r+1}$, and let $P$ be the orthogonal\nprojection onto the $\\lambda_1$-eigenspace. Let $b\\in\\mathbb R^n$ be a unit\nvector and, for $m\\ge1$, define\n\n$$K_m:=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\},\\qquad \\theta_m:=\\max_{0\\ne x\\in K_m}\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x}.$$\n\nThus $\\theta_m$ is the largest Rayleigh\u2013Ritz value on $K_m$; if Lanczos runs\nthrough step $m$ without breakdown, it is the largest Ritz value of\n$Q_m^{\\mathsf T}AQ_m$. If $r=n$, then $A=\\lambda_1I$ and $\\theta_m=\\lambda_1$\nfor every $m\\ge1$. Suppose $r<n$.\n\n1. If $Pb=0$, then $\\theta_m\\le\\lambda_{r+1}$ for every $m$; no convergence\n   to $\\lambda_1$ is asserted.\n\n2. If $Pb\\ne0$, put\n   $$\\tau:=\\frac{\\|(I-P)b\\|_2}{\\|Pb\\|_2}.$$\n   If $\\lambda_{r+1}>\\lambda_n$, then for every $m\\ge1$,\n   $$0\\le\\lambda_1-\\theta_m\\le \\frac{(\\lambda_1-\\lambda_n)\\tau^2} {T_{m-1}\\!\\left(1+2\\frac{\\lambda_1-\\lambda_{r+1}} {\\lambda_{r+1}-\\lambda_n}\\right)^2}.$$\n   For a simple top eigenvalue ($r=1$), $\\tau$ is the tangent of the angle\n   between $b$ and a unit top eigenvector, so the starting-angle denominator\n   is explicit.\n\n3. If $\\lambda_{r+1}=\\lambda_n$, then\n   $$\\lambda_1-\\theta_1=(\\lambda_1-\\lambda_n) \\frac{\\|(I-P)b\\|_2^2}{\\|b\\|_2^2},\\qquad \\theta_m=\\lambda_1\\quad(m\\ge2).$$\n\nWhen $r<n$, $Pb\\ne0$, and exact Lanczos breakdown occurs at dimension $d$, then\n$\\theta_d=\\lambda_1$ and $K_m=K_d$ for all $m\\ge d$. These are exact-arithmetic\nclaims; they give no finite-precision grade-termination guarantee.",
+          "use": "Used in proof step(s) 1.1, 1.2, 2.1.",
+          "fact": "F1",
+          "required_hypotheses": "[F1] [[thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases]]:\nif the top eigenvalue has multiplicity $r=n$, every Rayleigh\u2013Ritz value is\n$\\lambda_1$; if $Pb=0$, every $\\theta_m\\le\\lambda_{r+1}$; if the unwanted\ninterval collapses and $Pb\\ne0$, then $\\theta_m=\\lambda_1$ for $m\\ge2$; and\nexact breakdown at dimension $d$ with $Pb\\ne0$ gives $\\theta_d=\\lambda_1$."
+        },
+        {
+          "supplier": "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$K_m(A,b):=\\operatorname{span}\\{b,Ab,\\dots,A^{m-1}b\\}.$$",
+          "use": "Used in proof step(s) 1.1, 1.2, 2.1.",
+          "fact": "F2",
+          "required_hypotheses": "[F2] [[def-krylov-subspace-of-a-matrix-and-start-vector]]:\n$K_m(A,b)=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\}$."
+        },
+        {
+          "supplier": "def-arnoldi-process",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$w_j:=Av_j-\\sum_{i=1}^j h_{ij}v_i.$$",
+          "use": "Used in proof step(s) 1.2, 2.1.",
+          "fact": "F3",
+          "required_hypotheses": "[F3] [[def-arnoldi-process]]: exact breakdown at a column means its\northogonalized residual is zero."
+        },
+        {
+          "supplier": "def-lanczos-process-as-hermitian-arnoldi",
+          "status": "published-body-inspected",
+          "source_section": "Definition",
+          "excerpt": "$$Aq_j=\\beta_{j-1}q_{j-1}+\\alpha_jq_j+\\beta_jq_{j+1}\\qquad (j\\ge1,\\ q_0:=0,\\ \\beta_0:=0),$$",
+          "use": "Used in proof step(s) 1.2, 2.1.",
+          "fact": "F4",
+          "required_hypotheses": "[F4] [[def-lanczos-process-as-hermitian-arnoldi]]: for a real symmetric\nmatrix, exact Lanczos is the corresponding exact Arnoldi process specialized\nto the Hermitian three-term recurrence."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "dimension-one",
+          "calculation": "A=[5], b=1; P=I, K_1=R is invariant, breakdown is at d=1, and every Rayleigh quotient is 5.",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "repeated-top-collapsed-interval",
+          "calculation": "For diag(5,5,1), b=(1,0,1)/sqrt(2), Pb=e_1/sqrt(2), and K_2=span{e_1,e_3} is invariant; breakdown is at d=2 and theta_2=5.",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "zero-top-component",
+          "calculation": "A e_2=2e_2, so K_m=span{e_2}, theta_m=2, and breakdown is at d=1.",
+          "evidence": "Step 1.2."
+        },
+        {
+          "case": "top-containing-invariant-breakdown",
+          "calculation": "K_2=span{e_1,e_2} is invariant and contains e_1; breakdown is at d=2 and theta_2=5.",
+          "evidence": "Step 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read all three verification steps and all four actual suppliers after theorem branch repair. Scalar b=1 spans R and breaks at d=1; repeated top case has Pb=e1/sqrt(2), K2=span(e1,e3) and d=2, satisfying repaired collapsed branch. Zero top case b=e2 gives theta_m=2 and d=1 without top recovery. Top-containing case has K2=span(e1,e2), Pb!=0 and d=2. Residual nonzero at first column in both two-dimensional cases follows from independence. Reader explicit-start and breakdown repair accepted; headings corrected. No remaining defect."
+      },
+      "repair_confidence": 1
+    },
+    "status": "UNAPPLIED root-review proposal"
+  },
+  {
+    "target": "research/numerical-optimization-dynamics-2026-10-16-batch-107.proof-contracts.json",
+    "path": [
+      "contracts",
+      "thm-monte-carlo-shapley-effects-clt-and-standard-errors",
+      "citations",
+      2,
+      "uses"
+    ],
+    "pointer": "/contracts/thm-monte-carlo-shapley-effects-clt-and-standard-errors/citations/2/uses",
+    "batch": 107,
+    "id": "thm-monte-carlo-shapley-effects-clt-and-standard-errors",
+    "before": [
+      "1.1",
+      "1.2",
+      "2.1"
+    ],
+    "after": [
+      "1.1",
+      "1.2",
+      "2.1",
+      "3.1"
+    ],
+    "reason": "Current Proof3.1 explicitly cites F2 for the finite n-row,d-entry coalition calls and statistic loops. Its derivation already includes F2; only the citation-use index omitted3.1.",
+    "source_guard": {
+      "path": "items/thm-monte-carlo-shapley-effects-clt-and-standard-errors.md",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/items/thm-monte-carlo-shapley-effects-clt-and-standard-errors.md"
+    },
+    "carrier_guard": {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-107.proof-contracts.json",
+      "expected_full_bytes_file": "research/numerical-optimization-dynamics-2026-10-16-owner-step3-proof-contract-threeitems-r1/before/research/numerical-optimization-dynamics-2026-10-16-batch-107.proof-contracts.json"
+    },
+    "contract_row_guard": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-dependent-input-shapley-effects",
+          "source_section": "Definition",
+          "quote": "Assume AC. On a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, let\n$d\\ge1$ be finite and let $X=(X_1,\\ldots,X_d)$ be any jointly distributed\nfinite family of random elements. Let $Y=f(X)\\in L^2(\\mathbb P)$, and put\n$V=\\operatorname{Var}(Y)$. For $S\\subseteq[d]$, set\n$\\mathcal G_S=\\sigma(X_j:j\\in S)$, with $\\mathcal G_\\varnothing=\\{\\varnothing,\\Omega\\}$, and\n$$v(S)=\\operatorname{Var}(\\mathbb E[Y\\mid\\mathcal G_S]).$$\nIf $V>0$, let $\\mathfrak S_d$ be the set of all $d!$ permutations of $[d]$,\nand let $P_i^\\pi$ contain the indices occurring before $i$ in $\\pi$. The\n**Shapley effect** of coordinate $i$ under this convention is\n$$\\phi_i=\\frac{1}{d!\\,V}\\sum_{\\pi\\in\\mathfrak S_d}\\bigl(v(P_i^\\pi\\cup\\{i\\})-v(P_i^\\pi)\\bigr).$$\nIf $V=0$, the normalized effects are undefined. This definition is for\ndependent inputs as well as independent ones; the independent Sobol ANOVA\ncomponents are not used to define $v$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-monte-carlo-permutation-shapley-effects",
+          "source_section": "Definition",
+          "quote": "**Input:** A finite player set $[d]$, exact coalition values $v(S)$ with\n$v(\\varnothing)=0$, $v([d])=V>0$, and a declared integer sample size $n\\ge2$.\n\n1. Draw $n$ independent permutations $\\pi_1,\\ldots,\\pi_n$, each uniformly\n   from the $d!$ permutations of $[d]$.\n2. For each row $r$ and each $i$, compute\n   $\\Delta_i^{(r)}=v(P_i^{\\pi_r}\\cup\\{i\\})-v(P_i^{\\pi_r})$.\n3. Return $\\widehat\\phi_i=(nV)^{-1}\\sum_r\\Delta_i^{(r)}$ and the standard-error\n   covariance estimate $\\widehat\\Sigma_\\Delta/(nV^2)$, where\n   $\\widehat\\Sigma_\\Delta=(n-1)^{-1}\\sum_r(\\Delta^{(r)}-\\bar\\Delta)\n   (\\Delta^{(r)}-\\bar\\Delta)^{\\mathsf T}$.\n\nThe exact conditional-variance evaluation is an input oracle. This permutation\nsampling procedure does not supply a conditional sampler or bound its numerical\nerror.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-shapley-effects-are-nonnegative-and-efficient",
+          "source_section": "Statement",
+          "quote": "Assume AC and the positive-variance hypotheses of\n[[def-dependent-input-shapley-effects]]. Then $v$ is monotone with\n$v(\\varnothing)=0$, $v([d])=V$, and $0\\le v(S)\\le V$ for every\n$S\\subseteq[d]$. Every $\\phi_i\\ge0$, and\n$$\\sum_{i=1}^d\\phi_i=1.$$\nMoreover, on the exact-oracle input for this game, the procedure\n[[alg-exact-permutation-shapley-effects]] terminates after at most\n$2d\\,d!$ coalition-value calls and returns the Shapley effects defined above.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-iid-finite-variance-strong-law",
+          "source_section": "Statement",
+          "quote": "IID square-integrable real variables satisfy $S_n/n\\to\\mathbb EX_1$ almost surely.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-multivariate-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $d\\ge1$ be a finite integer. Let $(X_k)_{k\\ge1}$ be iid $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean m and covariance Sigma. Then $$n^{-1/2}\\sum_{k=1}^n(X_k-m)\\Rightarrow N_d(0,\\Sigma).$$ The covariance may be singular.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix $i$ and $S\\subseteq[d]\\setminus\\{i\\}$. Exactly $|S|!(d-|S|-1)!$ permutations place precisely $S$ before $i$: order $S$ first, place $i$, and order the remaining coordinates last. Dividing by $d!$ gives the coefficient of $v(S\\cup\\{i\\})-v(S)$ in the expectation of $\\Delta_i$. This is exactly the Shapley weight in [F1], so $\\mathbb E\\Delta_i=V\\phi_i$ and the estimator is unbiased.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The range and monotonicity of $v$ in [F3] give $0\\le\\Delta_i\\le V$ for every permutation. Thus the increment vector is bounded and has finite covariance. Each increment coordinate and each pairwise product is the same measurable function of each sampled permutation; [F5] gives independence, and the common input law gives identical distributions. Apply [F4] to their coordinate and product sequences; the sample mean and covariance converge almost surely to their population values.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The bounded increment vector satisfies the finite second-moment hypothesis of [F6]. The multivariate CLT gives $\\sqrt n(\\bar\\Delta-\\mathbb E\\Delta)\\Rightarrow N(0,\\operatorname{Cov}(\\Delta))$. Scaling by the fixed positive $V$ and using step 1.1 gives the stated joint limit for $\\widehat\\phi$. Step 1.2 gives consistency of the covariance and standard-error estimates.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For each of the $n$ rows, the procedure traverses $d$ entries and requests two coalition values per entry. The loops are finite, so it terminates after $n$ rows and makes at most $2nd$ oracle calls. Computing the $d$ sample means and the $d\\times d$ sample covariance from these rows takes $O(nd^2)$ arithmetic operations; this excludes permutation generation and oracle costs.",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "empty review of thm-monte-carlo-shapley-effects-clt-and-standard-errors: Statement inherits d>=1,V>0 and iid permutation rows. Proof 1.1 includes predecessor S=empty and S=[d] minus {i}, where factorial 0!=1 is used; 1.2 bounds each increment in [0,V] and allows zero covariance; 2.1 applies the multivariate CLT including singular covariance. At d=1 all sampled increments equal V, so the estimator is one and limiting covariance zero. The algorithm\u2019s n>=2 protects sample covariance denominator n-1; V=0 is excluded. AC is inherited by the CLT. Step 3.1 proves termination after $n$ rows, at most $2nd$ oracle calls and $O(nd^2)$ statistic arithmetic, excluding permutation generation and oracle costs. This asymptotic implication is not an equivalence or an existence claim for a conditional sampler.",
+          "reason": null
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "zero review of thm-monte-carlo-shapley-effects-clt-and-standard-errors: Statement inherits d>=1,V>0 and iid permutation rows. Proof 1.1 includes predecessor S=empty and S=[d] minus {i}, where factorial 0!=1 is used; 1.2 bounds each increment in [0,V] and allows zero covariance; 2.1 applies the multivariate CLT including singular covariance. At d=1 all sampled increments equal V, so the estimator is one and limiting covariance zero. The algorithm\u2019s n>=2 protects sample covariance denominator n-1; V=0 is excluded. AC is inherited by the CLT. Step 3.1 proves termination after $n$ rows, at most $2nd$ oracle calls and $O(nd^2)$ statistic arithmetic, excluding permutation generation and oracle costs. This asymptotic implication is not an equivalence or an existence claim for a conditional sampler.",
+          "reason": null
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "one review of thm-monte-carlo-shapley-effects-clt-and-standard-errors: Statement inherits d>=1,V>0 and iid permutation rows. Proof 1.1 includes predecessor S=empty and S=[d] minus {i}, where factorial 0!=1 is used; 1.2 bounds each increment in [0,V] and allows zero covariance; 2.1 applies the multivariate CLT including singular covariance. At d=1 all sampled increments equal V, so the estimator is one and limiting covariance zero. The algorithm\u2019s n>=2 protects sample covariance denominator n-1; V=0 is excluded. AC is inherited by the CLT. Step 3.1 proves termination after $n$ rows, at most $2nd$ oracle calls and $O(nd^2)$ statistic arithmetic, excluding permutation generation and oracle costs. This asymptotic implication is not an equivalence or an existence claim for a conditional sampler.",
+          "evidence": null
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "degenerate review of thm-monte-carlo-shapley-effects-clt-and-standard-errors: Statement inherits d>=1,V>0 and iid permutation rows. Proof 1.1 includes predecessor S=empty and S=[d] minus {i}, where factorial 0!=1 is used; 1.2 bounds each increment in [0,V] and allows zero covariance; 2.1 applies the multivariate CLT including singular covariance. At d=1 all sampled increments equal V, so the estimator is one and limiting covariance zero. The algorithm\u2019s n>=2 protects sample covariance denominator n-1; V=0 is excluded. AC is inherited by the CLT. Step 3.1 proves termination after $n$ rows, at most $2nd$ oracle calls and $O(nd^2)$ statistic arithmetic, excluding permutation generation and oracle costs. This asymptotic implication is not an equivalence or an existence claim for a conditional sampler.",
+          "evidence": null
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "endpoints review of thm-monte-carlo-shapley-effects-clt-and-standard-errors: Statement inherits d>=1,V>0 and iid permutation rows. Proof 1.1 includes predecessor S=empty and S=[d] minus {i}, where factorial 0!=1 is used; 1.2 bounds each increment in [0,V] and allows zero covariance; 2.1 applies the multivariate CLT including singular covariance. At d=1 all sampled increments equal V, so the estimator is one and limiting covariance zero. The algorithm\u2019s n>=2 protects sample covariance denominator n-1; V=0 is excluded. AC is inherited by the CLT. Step 3.1 proves termination after $n$ rows, at most $2nd$ oracle calls and $O(nd^2)$ statistic arithmetic, excluding permutation generation and oracle costs. This asymptotic implication is not an equivalence or an existence claim for a conditional sampler.",
+          "reason": null
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "nonempty-choice review of thm-monte-carlo-shapley-effects-clt-and-standard-errors: Statement inherits d>=1,V>0 and iid permutation rows. Proof 1.1 includes predecessor S=empty and S=[d] minus {i}, where factorial 0!=1 is used; 1.2 bounds each increment in [0,V] and allows zero covariance; 2.1 applies the multivariate CLT including singular covariance. At d=1 all sampled increments equal V, so the estimator is one and limiting covariance zero. The algorithm\u2019s n>=2 protects sample covariance denominator n-1; V=0 is excluded. AC is inherited by the CLT. Step 3.1 proves termination after $n$ rows, at most $2nd$ oracle calls and $O(nd^2)$ statistic arithmetic, excluding permutation generation and oracle costs. This asymptotic implication is not an equivalence or an existence claim for a conditional sampler.",
+          "reason": null
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of thm-monte-carlo-shapley-effects-clt-and-standard-errors: Statement inherits d>=1,V>0 and iid permutation rows. Proof 1.1 includes predecessor S=empty and S=[d] minus {i}, where factorial 0!=1 is used; 1.2 bounds each increment in [0,V] and allows zero covariance; 2.1 applies the multivariate CLT including singular covariance. At d=1 all sampled increments equal V, so the estimator is one and limiting covariance zero. The algorithm\u2019s n>=2 protects sample covariance denominator n-1; V=0 is excluded. AC is inherited by the CLT. Step 3.1 proves termination after $n$ rows, at most $2nd$ oracle calls and $O(nd^2)$ statistic arithmetic, excluding permutation generation and oracle costs. This asymptotic implication is not an equivalence or an existence claim for a conditional sampler.",
+          "evidence": null
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of thm-monte-carlo-shapley-effects-clt-and-standard-errors: Statement inherits d>=1,V>0 and iid permutation rows. Proof 1.1 includes predecessor S=empty and S=[d] minus {i}, where factorial 0!=1 is used; 1.2 bounds each increment in [0,V] and allows zero covariance; 2.1 applies the multivariate CLT including singular covariance. At d=1 all sampled increments equal V, so the estimator is one and limiting covariance zero. The algorithm\u2019s n>=2 protects sample covariance denominator n-1; V=0 is excluded. AC is inherited by the CLT. Step 3.1 proves termination after $n$ rows, at most $2nd$ oracle calls and $O(nd^2)$ statistic arithmetic, excluding permutation generation and oracle costs. This asymptotic implication is not an equivalence or an existence claim for a conditional sampler.",
+          "evidence": null
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-107",
+        "notes": "Reviewed all four steps and exact permutation procedure. Counting predecessor sets gives E\u0394i=V\u03c6i; 0\u2264\u0394i\u2264V implies coordinate/product SLLNs and finite covariance. The AC multivariate iid CLT permits singular covariance; division by fixed V>0 preserves the limit. Sample covariance estimates the CLT scale, including identically zero variance at d=1. Added finite n\u22652 termination, \u22642nd oracle calls and O(nd\u00b2) arithmetic exclude permutation/oracle costs and follow directly from finite loops. Exact pre-reader bytes recovered; the change is a sound audit enrichment, not repair of a false prior CLT."
+      }
+    },
+    "status": "UNAPPLIED root-review proposal"
+  }
+]

@@ -1,0 +1,537 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "15",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-na-bluestein-chirp-convolution-factorization",
+      "model": "gpt-6-luna",
+      "context_sha256": "641600696f93ea54bab42955a5da4eb2fd5e9bddfe0af2961ee1880f39a7537d",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F4 overstates the addition-law supplier by mentioning an integer-period law, but no periodicity is used: the exponent identity -j^2+(k-j)^2-k^2=-2kj is exact. Removed that unused assertion, cited F4 in step 2.1, and corrected step 3.1 to apply the inverse without the erroneous extra division. Distinct chirp residues follow from |t-t′|<M, and inverse linearity leaves the required sqrt(M) factor. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-na-zero-padding-removes-linear-convolution-aliasing",
+      "model": "gpt-6-luna",
+      "context_sha256": "05ca50c505cada0bd017a60db96d0c5f9757236396e6208899daecbe884e86c7",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The zero-padding support is a hypothesis, not a consequence of the finite-sum or modular-algebra suppliers. F2 now attributes it to the given extension and cites thm-standard-representatives-modulo-n for uniqueness. The support sums satisfy 0<=j+q<=n+m-2<M, so no contributing pair wraps, including n=m=M=1; the proof and Statement remain valid. This repairs an inaccurate citation, not a missing mathematical argument.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-na-complex-product-six-operation-roundoff-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "7a77cd513e87de8fbd58a2bed2c618c8ff14258704d80d710e2d36acee993592",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The statement omits an explicit binding of u to the imported operationwise unit roundoff. The imported standard model already requires u>0, so the alleged u=0 counterexample does not apply to that model; this is a nonfatal missing convention. Made that binding explicit in the Statement and Given. Independently checked the two component errors (2u+u^2) times absolute-product sums and sqrt(2)(2+u)<3 for 0<u<=1/16, with exact zeros and normal-range success.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-na-three-sample-dct-chebyshev-coefficients",
+      "model": "gpt-6-luna",
+      "context_sha256": "ea774f226dfd962a6c3a8e32cb70f2bd2ba23aa39d4b620b9c4b793e15325f7d",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 attributes Chebyshev coefficient recovery to a theorem whose inverse formula reconstructs sample coordinates. The required coefficient rule is already supplied by F1 and follows by division by N or N/2. Relabelled F2 as coefficient recovery and cited thm-na-dct-ii-chebyshev-coefficient-extraction. Checked that T0=1, p has coefficient vector (2,1,-1), and the DCT output (6,3/2,-3/2) recovers it. The Example and dependencies are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-na-interval-pi-matches-canonical-fourier-pi",
+      "model": "gpt-6-luna",
+      "context_sha256": "f5ad1f2e6a71d05e1560f503c064c8b049546c21c679e3825b21ac81bc91f25b",
+      "outcome": "false_positive",
+      "reason": "F2 uses the published principal arctangent and canonical trigonometric pi, not a new uninterpreted constant. Read its full proof: step 4.1 obtains arctan(1)=pi/4 from the principal range and tan(pi/4)=1. Its principal-branch and cofunction suppliers use the same power-series trigonometry and canonical quarter-turn convention. Thus the endpoint series in F2 is already canonical. Abel applied at x^2 and continuity at 1 legitimately recover that value; F1 equates the two integrals, and the complete Machin supplier proof 3.1 gives 16A(1/5)-4A(1/239)=4A(1). No repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-na-certified-unit-circle-phase",
+      "model": "gpt-6-luna",
+      "context_sha256": "b645a001fd12fe99871b45824f9c0acff9a08bd9ca48af6f82244caec4d442cb",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The final epsilon<=tau branch requires a decidable exact comparison, but the original Definition supplies no finite representation for tau. Required an exact rational tolerance, so both epsilon (dyadic) and tau can be compared by integer arithmetic. All rational angle construction, finite precision/series budgets, enclosing sine/cosine intervals, lower-left endpoint selection and failure branches are retained. This fixes an unspecified computational input interface; no unconditional certification claim is added.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-na-computed-fft-cyclic-and-linear-convolution",
+      "model": "gpt-6-luna",
+      "context_sha256": "149c7c14a0d6bff9e939d95c92faf6e06ad3cdde340eab5029db8c9bad15b876",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The original instruction to return its status on invalid dimensions, representability, controls or power-of-two conditions defines no corresponding status. Added a pre-transform validation branch returning inconclusive with invalid-input and the offending parameter/coordinate, and an explicit arithmetic range-failure branch. Also made the forwarded twiddle tolerance exact rational to match the repaired phase interface. The two forward transforms, six-operation pointwise products, inverse transform, sqrt(M) scaling and retained linear block are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "66ba4bfaf7b443a50824b80aa2993848d8f4f7b66a055006cf53e6012751806a",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The rejected normality objection is false: the FFT fixes a single operationwise instance, whose Definition explicitly says success requires every exact intermediate to be zero or normal and otherwise returns range-failure. Thus F2 applies. Checked the unitary butterfly decomposition, stacked child errors, recurrence rho_m=(1+eta)rho_(m-1)+eta, exact m=0 base and conjugated inverse. Found a separate nonfatal endpoint typo in step 4.1: the strict exponential inequality is false at t=0. Restricted that strict inequality to 0<t<=1 and stated equality at zero. The weak 2m eta conclusion and Statement are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-na-bluestein-chirp-convolution-factorization",
+      "disposition": "repaired",
+      "post_sha256": "364db97ed6aee22a1a34c9466bbd9a917e0f35cf43975b679983a0a7c1848bc1",
+      "review_context_sha256": "0947d58a03812fb75fd1cb6a4cd297ca1867e4220f3570d4081bab7de7a2a031",
+      "reason": "F4 overstates the addition-law supplier by mentioning an integer-period law, but no periodicity is used: the exponent identity -j^2+(k-j)^2-k^2=-2kj is exact. Removed that unused assertion, cited F4 in step 2.1, and corrected step 3.1 to apply the inverse without the erroneous extra division. Distinct chirp residues follow from |t-t′|<M, and inverse linearity leaves the required sqrt(M) factor. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-na-zero-padding-removes-linear-convolution-aliasing",
+      "disposition": "repaired",
+      "post_sha256": "1067a55c8d71246fc84000861391824b838d884cb5bd5d1307ebc32849551da2",
+      "review_context_sha256": "65989ba03c7209f67aca600ae0212997de64788c922507cd769aa356b7676f8f",
+      "reason": "The zero-padding support is a hypothesis, not a consequence of the finite-sum or modular-algebra suppliers. F2 now attributes it to the given extension and cites thm-standard-representatives-modulo-n for uniqueness. The support sums satisfy 0<=j+q<=n+m-2<M, so no contributing pair wraps, including n=m=M=1; the proof and Statement remain valid. This repairs an inaccurate citation, not a missing mathematical argument.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-na-complex-product-six-operation-roundoff-bound",
+      "disposition": "repaired",
+      "post_sha256": "33a49f3f402b9f8eb2c84ecd1e651cd7a7e3ef825e01b2944ab4c8793ff77c8a",
+      "review_context_sha256": "fa2a7b2471e9b73945d65314d5aec5124cb2c18e62a4641da9cd69c4ff0cb238",
+      "reason": "The statement omits an explicit binding of u to the imported operationwise unit roundoff. The imported standard model already requires u>0, so the alleged u=0 counterexample does not apply to that model; this is a nonfatal missing convention. Made that binding explicit in the Statement and Given. Independently checked the two component errors (2u+u^2) times absolute-product sums and sqrt(2)(2+u)<3 for 0<u<=1/16, with exact zeros and normal-range success.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-na-three-sample-dct-chebyshev-coefficients",
+      "disposition": "repaired",
+      "post_sha256": "8aa18afcccdd6cda0faed6f869a6284cd7459ca006b1b98673c9c5b3b0168bbf",
+      "review_context_sha256": "287ac4836974fa99361a9f5572d5bbfc74e2216cc32d0181833857be4f4d5524",
+      "reason": "F2 attributes Chebyshev coefficient recovery to a theorem whose inverse formula reconstructs sample coordinates. The required coefficient rule is already supplied by F1 and follows by division by N or N/2. Relabelled F2 as coefficient recovery and cited thm-na-dct-ii-chebyshev-coefficient-extraction. Checked that T0=1, p has coefficient vector (2,1,-1), and the DCT output (6,3/2,-3/2) recovers it. The Example and dependencies are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-na-interval-pi-matches-canonical-fourier-pi",
+      "disposition": "unaffected",
+      "post_sha256": "042b7fbee7b8a900e8e93d3af8812fc1ca89484bd93b222148082520fa03c9a0",
+      "review_context_sha256": "3cea95393e94020d586b2f401c7f7f81053fba5b09b5aa074d11428d9c214beb",
+      "reason": "F2 uses the published principal arctangent and canonical trigonometric pi, not a new uninterpreted constant. Read its full proof: step 4.1 obtains arctan(1)=pi/4 from the principal range and tan(pi/4)=1. Its principal-branch and cofunction suppliers use the same power-series trigonometry and canonical quarter-turn convention. Thus the endpoint series in F2 is already canonical. Abel applied at x^2 and continuity at 1 legitimately recover that value; F1 equates the two integrals, and the complete Machin supplier proof 3.1 gives 16A(1/5)-4A(1/239)=4A(1). No repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-na-certified-unit-circle-phase",
+      "disposition": "repaired",
+      "post_sha256": "6ebcd95f080c11526606660aa5f103684212e9f68548ac29164bfc390bfaa0fe",
+      "review_context_sha256": "56a19e8f6a431a825a011a98dfb25b4a96cca40fd27b3441c84b6230e651a348",
+      "reason": "The final epsilon<=tau branch requires a decidable exact comparison, but the original Definition supplies no finite representation for tau. Required an exact rational tolerance, so both epsilon (dyadic) and tau can be compared by integer arithmetic. All rational angle construction, finite precision/series budgets, enclosing sine/cosine intervals, lower-left endpoint selection and failure branches are retained. This fixes an unspecified computational input interface; no unconditional certification claim is added.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-na-computed-fft-cyclic-and-linear-convolution",
+      "disposition": "repaired",
+      "post_sha256": "7a90357e9bee86d3917f5ac3aecaaaaa8dea808cf2f0ffa1d8da8920e5a6caea",
+      "review_context_sha256": "5aff9127c3c6426aa3cbc898e31a7ea73554724273dfca2490c7343cd5a56ddd",
+      "reason": "The original instruction to return its status on invalid dimensions, representability, controls or power-of-two conditions defines no corresponding status. Added a pre-transform validation branch returning inconclusive with invalid-input and the offending parameter/coordinate, and an explicit arithmetic range-failure branch. Also made the forwarded twiddle tolerance exact rational to match the repaired phase interface. The two forward transforms, six-operation pointwise products, inverse transform, sqrt(M) scaling and retained linear block are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+      "disposition": "repaired",
+      "post_sha256": "a639619e99db122b489d2eecdd439ac9f528da95a39ef6771365530622fbea22",
+      "review_context_sha256": "79a613730801b5cb460fbe59cdba39316304acef901cf8b5253d3a9cf0ad6f25",
+      "reason": "The rejected normality objection is false: the FFT fixes a single operationwise instance, whose Definition explicitly says success requires every exact intermediate to be zero or normal and otherwise returns range-failure. Thus F2 applies. Checked the unitary butterfly decomposition, stacked child errors, recurrence rho_m=(1+eta)rho_(m-1)+eta, exact m=0 base and conjugated inverse. Found a separate nonfatal endpoint typo in step 4.1: the strict exponential inequality is false at t=0. Restricted that strict inequality to 0<t<=1 and stated equality at zero. The weak 2m eta conclusion and Statement are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-na-computed-unitary-butterfly-error-bound",
+    "thm-na-computed-fft-convolution-error-bound",
+    "thm-na-bluestein-chirp-phase-error-separate-from-fft-error",
+    "alg-na-computed-unitary-radix-two-fft",
+    "thm-na-certified-unit-circle-phase-enclosure",
+    "alg-na-computed-fast-transforms-and-convolution",
+    "alg-box-muller-finite-bit-transform",
+    "thm-na-arbitrary-length-fft-correctness-and-cost"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "lem-na-bluestein-chirp-convolution-factorization",
+      "model": "gpt-6-luna",
+      "context_sha256": "641600696f93ea54bab42955a5da4eb2fd5e9bddfe0af2961ee1880f39a7537d",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "F4 overstates the addition-law supplier by mentioning an integer-period law, but no periodicity is used: the exponent identity -j^2+(k-j)^2-k^2=-2kj is exact. Removed that unused assertion, cited F4 in step 2.1, and corrected step 3.1 to apply the inverse without the erroneous extra division. Distinct chirp residues follow from |t-t′|<M, and inverse linearity leaves the required sqrt(M) factor. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "lem-na-zero-padding-removes-linear-convolution-aliasing",
+      "model": "gpt-6-luna",
+      "context_sha256": "05ca50c505cada0bd017a60db96d0c5f9757236396e6208899daecbe884e86c7",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "The zero-padding support is a hypothesis, not a consequence of the finite-sum or modular-algebra suppliers. F2 now attributes it to the given extension and cites thm-standard-representatives-modulo-n for uniqueness. The support sums satisfy 0<=j+q<=n+m-2<M, so no contributing pair wraps, including n=m=M=1; the proof and Statement remain valid. This repairs an inaccurate citation, not a missing mathematical argument.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "lem-na-complex-product-six-operation-roundoff-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "7a77cd513e87de8fbd58a2bed2c618c8ff14258704d80d710e2d36acee993592",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "The statement omits an explicit binding of u to the imported operationwise unit roundoff. The imported standard model already requires u>0, so the alleged u=0 counterexample does not apply to that model; this is a nonfatal missing convention. Made that binding explicit in the Statement and Given. Independently checked the two component errors (2u+u^2) times absolute-product sums and sqrt(2)(2+u)<3 for 0<u<=1/16, with exact zeros and normal-range success.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "ex-na-three-sample-dct-chebyshev-coefficients",
+      "model": "gpt-6-luna",
+      "context_sha256": "ea774f226dfd962a6c3a8e32cb70f2bd2ba23aa39d4b620b9c4b793e15325f7d",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "F2 attributes Chebyshev coefficient recovery to a theorem whose inverse formula reconstructs sample coordinates. The required coefficient rule is already supplied by F1 and follows by division by N or N/2. Relabelled F2 as coefficient recovery and cited thm-na-dct-ii-chebyshev-coefficient-extraction. Checked that T0=1, p has coefficient vector (2,1,-1), and the DCT output (6,3/2,-3/2) recovers it. The Example and dependencies are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "thm-na-interval-pi-matches-canonical-fourier-pi",
+      "model": "gpt-6-luna",
+      "context_sha256": "f5ad1f2e6a71d05e1560f503c064c8b049546c21c679e3825b21ac81bc91f25b",
+      "outcome": "false_positive",
+      "status": "false_positive",
+      "reason": "F2 uses the published principal arctangent and canonical trigonometric pi, not a new uninterpreted constant. Read its full proof: step 4.1 obtains arctan(1)=pi/4 from the principal range and tan(pi/4)=1. Its principal-branch and cofunction suppliers use the same power-series trigonometry and canonical quarter-turn convention. Thus the endpoint series in F2 is already canonical. Abel applied at x^2 and continuity at 1 legitimately recover that value; F1 equates the two integrals, and the complete Machin supplier proof 3.1 gives 16A(1/5)-4A(1/239)=4A(1). No repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "alg-na-certified-unit-circle-phase",
+      "model": "gpt-6-luna",
+      "context_sha256": "b645a001fd12fe99871b45824f9c0acff9a08bd9ca48af6f82244caec4d442cb",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "reason": "The final epsilon<=tau branch requires a decidable exact comparison, but the original Definition supplies no finite representation for tau. Required an exact rational tolerance, so both epsilon (dyadic) and tau can be compared by integer arithmetic. All rational angle construction, finite precision/series budgets, enclosing sine/cosine intervals, lower-left endpoint selection and failure branches are retained. This fixes an unspecified computational input interface; no unconditional certification claim is added.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "other"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "alg-na-computed-fft-cyclic-and-linear-convolution",
+      "model": "gpt-6-luna",
+      "context_sha256": "149c7c14a0d6bff9e939d95c92faf6e06ad3cdde340eab5029db8c9bad15b876",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "reason": "The original instruction to return its status on invalid dimensions, representability, controls or power-of-two conditions defines no corresponding status. Added a pre-transform validation branch returning inconclusive with invalid-input and the offending parameter/coordinate, and an explicit arithmetic range-failure branch. Also made the forwarded twiddle tolerance exact rational to match the repaired phase interface. The two forward transforms, six-operation pointwise products, inverse transform, sqrt(M) scaling and retained linear block are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "other"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "66ba4bfaf7b443a50824b80aa2993848d8f4f7b66a055006cf53e6012751806a",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "The rejected normality objection is false: the FFT fixes a single operationwise instance, whose Definition explicitly says success requires every exact intermediate to be zero or normal and otherwise returns range-failure. Thus F2 applies. Checked the unitary butterfly decomposition, stacked child errors, recurrence rho_m=(1+eta)rho_(m-1)+eta, exact m=0 base and conjugated inverse. Found a separate nonfatal endpoint typo in step 4.1: the strict exponential inequality is false at t=0. Restricted that strict inequality to 0<t<=1 and stated equality at zero. The weak 2m eta conclusion and Statement are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "record-consumer-examination",
+      "ids": [
+        "lem-na-complex-product-six-operation-roundoff-bound",
+        "alg-na-certified-unit-circle-phase",
+        "alg-na-computed-fft-cyclic-and-linear-convolution"
+      ],
+      "reason": "Direct dependency/reference scans for the three changed interfaces found eight distinct consumer items, all draft members of the frozen frontier, and the owning draft page. No published or outside-frontier item requires maintenance for these events. Route the three tolerance-input caller repairs to their ordinary frontier owners; preserve the published suppliers and all historical evidence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed": [
+      "lem-na-bluestein-chirp-convolution-factorization",
+      "lem-na-zero-padding-removes-linear-convolution-aliasing",
+      "lem-na-complex-product-six-operation-roundoff-bound",
+      "ex-na-three-sample-dct-chebyshev-coefficients",
+      "thm-na-interval-pi-matches-canonical-fourier-pi",
+      "alg-na-certified-unit-circle-phase",
+      "alg-na-computed-fft-cyclic-and-linear-convolution",
+      "thm-na-computed-unitary-radix-two-fft-error-bound"
+    ],
+    "checks": [
+      {
+        "check": "focused precheck",
+        "exit_code": 0,
+        "files": 8,
+        "checked_proofs": 6,
+        "failed": 0
+      },
+      {
+        "check": "assigned proof contracts",
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-15.proof-contracts.json --strict --items lem-na-bluestein-chirp-convolution-factorization,lem-na-zero-padding-removes-linear-convolution-aliasing,lem-na-complex-product-six-operation-roundoff-bound,ex-na-three-sample-dct-chebyshev-coefficients,thm-na-interval-pi-matches-canonical-fourier-pi,alg-na-certified-unit-circle-phase,alg-na-computed-fft-cyclic-and-linear-convolution,thm-na-computed-unitary-radix-two-fft-error-bound --json",
+        "exit_code": 1,
+        "output": "{\n  \"ok\": false,\n  \"errors\": [\n    {\n      \"code\": \"citation-source-not-in-fact\",\n      \"message\": \"F2 does not link [[thm-standard-representatives-modulo-n]]\",\n      \"id\": \"lem-na-zero-padding-removes-linear-convolution-aliasing\"\n    },\n    {\n      \"code\": \"citation-fact-uncontracted\",\n      \"message\": \"F2 -> def-finite-sum-in-a-commutative-monoid needs an exact citation contract\",\n      \"id\": \"lem-na-zero-padding-removes-linear-convolution-aliasing\"\n    },\n    {\n      \"code\": \"citation-fact-uncontracted\",\n      \"message\": \"F2 -> thm-integers-modulo-n-basic-algebra, thm-standard-representatives-modulo-n needs an exact citation contract\",\n      \"id\": \"lem-na-zero-padding-removes-linear-convolution-aliasing\"\n    }\n  ],\n  \"warnings\": [],\n  \"scope\": [\n    \"lem-na-bluestein-chirp-convolution-factorization\",\n    \"lem-na-zero-padding-removes-linear-convolution-aliasing\",\n    \"lem-na-complex-product-six-operation-roundoff-bound\",\n    \"thm-na-interval-pi-matches-canonical-fourier-pi\",\n    \"alg-na-certified-unit-circle-phase\",\n    \"alg-na-computed-fft-cyclic-and-linear-convolution\",\n    \"thm-na-computed-unitary-radix-two-fft-error-bound\",\n    \"ex-na-three-sample-dct-chebyshev-coefficients\"\n  ],\n  \"checked\": [\n    \"lem-na-bluestein-chirp-convolution-factorization\",\n    \"lem-na-zero-padding-removes-linear-convolution-aliasing\",\n    \"lem-na-complex-product-six-operation-roundoff-bound\",\n    \"thm-na-interval-pi-matches-canonical-fourier-pi\",\n    \"alg-na-certified-unit-circle-phase\",\n    \"alg-na-computed-fft-cyclic-and-linear-convolution\",\n    \"thm-na-computed-unitary-radix-two-fft-error-bound\",\n    \"ex-na-three-sample-dct-chebyshev-coefficients\"\n  ]\n}"
+      },
+      {
+        "check": "assigned proof contracts after correcting F2 wikilink",
+        "exit_code": 0,
+        "checked": 8,
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "check": "rendercheck of all assigned items",
+        "exit_code": 0,
+        "checked": 8,
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "check": "precheck and rendercheck of corrected zero-padding item",
+        "exit_code": 0,
+        "checked": 1,
+        "failed": 0
+      },
+      {
+        "check": "final proof-layout after all item edits",
+        "exit_code": 0,
+        "items": 7,
+        "steps": 13,
+        "defects": 0
+      },
+      {
+        "check": "manifest-deps",
+        "exit_code": 0,
+        "items": 22,
+        "errors": 0
+      },
+      {
+        "check": "assigned tuple coverage, current guard hashes, literal Statement/Definition event inventory and assigned manifest mirrors",
+        "exit_code": 0,
+        "items": 8,
+        "interface_events": 3
+      },
+      {
+        "check": "read-only current item/context comparison after focused checks; existing reviews were not refreshed",
+        "exit_code": 0,
+        "stale_reviews": []
+      }
+    ],
+    "pending": "The engine must route and complete the three unassigned frontier caller tolerance-representation repairs before certification. Two confirmed-fatal assigned algorithm defects were repaired; this round still requires another adjudication round under the fatal threshold. No worker judges, stamps or central certification were written.",
+    "interface_events": [
+      {
+        "id": "lem-na-complex-product-six-operation-roundoff-bound",
+        "old": "Let $u\\le1/16$.",
+        "new": "Let $u$ be the unit roundoff of the operationwise model in [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], with $0<u\\le1/16$.",
+        "consumers": [
+          {
+            "id": "lem-na-computed-unitary-butterfly-error-bound",
+            "path": "items/lem-na-computed-unitary-butterfly-error-bound.md",
+            "affected_use": "F1 and Proof 1.1 apply the 3u complex-product bound to fl_C(w_hat b).",
+            "disposition": "unaffected",
+            "reason": "Its successful butterfly is in the fixed operationwise model and F3 uses that model unit roundoff; binding u explicitly adds no missing assumption.",
+            "source_excerpt": "[F1] Six-operation complex multiplication obeys $|\\operatorname{fl}_{\\mathbb C}(zw)-zw|\\le3u|z||w|$ when its six operations succeed ([[lem-na-complex-product-six-operation-roundoff-bound]]).",
+            "uncertain": false,
+            "familiar": true,
+            "source_urls": []
+          },
+          {
+            "id": "thm-na-computed-fft-convolution-error-bound",
+            "path": "items/thm-na-computed-fft-convolution-error-bound.md",
+            "affected_use": "F4 and Proof 1.1 apply the 3u bound to each transformed pointwise product.",
+            "disposition": "unaffected",
+            "reason": "The Statement assumes every operation succeeds in the convolution algorithm; its fixed operationwise instance supplies the same positive unit roundoff to all calls.",
+            "source_excerpt": "[F4] Each pointwise complex product error is at most $3u|\\widehat A_k||\\widehat B_k|$ ([[lem-na-complex-product-six-operation-roundoff-bound]]).",
+            "uncertain": false,
+            "familiar": true,
+            "source_urls": []
+          },
+          {
+            "id": "thm-na-bluestein-chirp-phase-error-separate-from-fft-error",
+            "path": "items/thm-na-bluestein-chirp-phase-error-separate-from-fft-error.md",
+            "affected_use": "F3 and Proof 1.1/3.1 use 3u for chirp modulation and demodulation products.",
+            "disposition": "unaffected",
+            "reason": "The Statement explicitly requires successful six-operation-model products; u is their model roundoff. The clarified supplier keeps both 3u estimates unchanged.",
+            "source_excerpt": "[F3] A successful complex multiplication contributes at most $3u|z||w|$ absolute error ([[lem-na-complex-product-six-operation-roundoff-bound]]).",
+            "uncertain": false,
+            "familiar": true,
+            "source_urls": []
+          }
+        ]
+      },
+      {
+        "id": "alg-na-certified-unit-circle-phase",
+        "old": "Input an exact rational $q$, a target $0<\\tau\\le1/4$,",
+        "new": "Input an exact rational $q$, an exact rational target $0<\\tau\\le1/4$,",
+        "consumers": [
+          {
+            "id": "alg-na-computed-unitary-radix-two-fft",
+            "path": "items/alg-na-computed-unitary-radix-two-fft.md",
+            "affected_use": "Definition inputs an unspecified twiddle tolerance tau and forwards it in every phase call on q=-2k/N.",
+            "disposition": "owner_repair_required",
+            "reason": "The computational input convention should explicitly make tau an exact rational; no FFT arithmetic instruction or accuracy bound needs alteration.",
+            "source_excerpt": "a twiddle tolerance $0<\\tau\\le1/4$",
+            "uncertain": false,
+            "familiar": true,
+            "source_urls": []
+          },
+          {
+            "id": "thm-na-certified-unit-circle-phase-enclosure",
+            "path": "items/thm-na-certified-unit-circle-phase-enclosure.md",
+            "affected_use": "Statement conditions the enclosure bound on a certified return; F2 and step 2.1 use epsilon<=tau.",
+            "disposition": "unaffected",
+            "reason": "A certified return now imports the exact rational input convention; containment and width inequalities hold without any new mathematical premise.",
+            "source_excerpt": "Whenever [[alg-na-certified-unit-circle-phase]] returns `certified(\\widehat w,\\epsilon)` on rational input $q$, its output satisfies $|\\widehat w-e^{\\pi iq}|\\le\\epsilon\\le\\tau$.",
+            "uncertain": false,
+            "familiar": true,
+            "source_urls": []
+          },
+          {
+            "id": "alg-na-computed-fast-transforms-and-convolution",
+            "path": "items/alg-na-computed-fast-transforms-and-convolution.md",
+            "affected_use": "Definition inputs unspecified phase tolerance tau and forwards it to mixed-radix twiddle and prime chirp phase calls.",
+            "disposition": "owner_repair_required",
+            "reason": "Declare the phase tolerance an exact rational in the Definition; the same dyadic phase values, control caps and failure propagation remain applicable.",
+            "source_excerpt": "a phase tolerance $0<\\tau\\le1/4$",
+            "uncertain": false,
+            "familiar": true,
+            "source_urls": []
+          },
+          {
+            "id": "alg-box-muller-finite-bit-transform",
+            "path": "items/alg-box-muller-finite-bit-transform.md",
+            "affected_use": "Definition configuration gives phase parameters 0<tau<=1/4; instruction 4 forwards tau with exact q_phase=2u2.",
+            "disposition": "owner_repair_required",
+            "reason": "The fixed deterministic configuration should explicitly represent phase tau as an exact rational or dyadic, matching its exact log/root width-target conventions. Item is draft in the frozen frontier; route to its ordinary owner, not published maintenance.",
+            "source_excerpt": "and phase parameters $0<\\tau\\le1/4$, integer exponent limits",
+            "uncertain": false,
+            "familiar": true,
+            "source_urls": []
+          }
+        ]
+      },
+      {
+        "id": "alg-na-computed-fft-cyclic-and-linear-convolution",
+        "changes": [
+          "Input twiddle tolerance is explicitly exact rational.",
+          "Invalid input constraints return inconclusive with invalid-input and the offending parameter/coordinate; range failures return range-failure with operation/index and no vector."
+        ],
+        "consumers": [
+          {
+            "id": "alg-na-computed-fast-transforms-and-convolution",
+            "path": "items/alg-na-computed-fast-transforms-and-convolution.md",
+            "affected_use": "Definition instruction 4 invokes cyclic convolution on power-of-two M>=2N-1 and propagates its first failure status.",
+            "disposition": "owner_repair_required",
+            "reason": "Its existing status interface accepts inconclusive and range-failure, so the newly defined validation diagnostics propagate correctly. The tolerance representation requires the same single exact-rational declaration already routed for the phase-interface event; handle the item once.",
+            "source_excerpt": "a phase tolerance $0<\\tau\\le1/4$",
+            "uncertain": false,
+            "familiar": true,
+            "source_urls": []
+          },
+          {
+            "id": "thm-na-computed-fft-convolution-error-bound",
+            "path": "items/thm-na-computed-fft-convolution-error-bound.md",
+            "affected_use": "Statement conditions the normwise bound on all convolution operations succeeding; proof 1.1-3.1 analyzes forward/product/inverse/scale stages.",
+            "disposition": "unaffected",
+            "reason": "The successful arithmetic path is identical and the theorem is conditional on a vector return. Newly explicit invalid-input statuses assert no error bound.",
+            "source_excerpt": "Let $M=2^q$ with integer $q\\ge0$ and let $a,b\\in\\mathbb C^M$ be the arrays actually transformed by [[alg-na-computed-fft-cyclic-and-linear-convolution]] (zero-padded in linear mode). Assume all operations succeed, $u\\le1/16$, the twiddle certificates satisfy $\\epsilon_\\ell\\le\\epsilon_{\\rm tw}\\le1/4$, and put $\\eta=10u+\\epsilon_{\\rm tw}$, $\\rho=(1+\\eta)^q-1$, $\\epsilon_p=3u$, $\\epsilon_s=2u+u^2$, and $\\lambda=2\\rho+\\rho^2+\\epsilon_p(1+\\rho)^2$. If $c=a*_M b$ is the exact unnormalised cyclic convolution, then the computed length-$M$ result $\\widehat c$ satisfies",
+            "uncertain": false,
+            "familiar": true,
+            "source_urls": []
+          },
+          {
+            "id": "thm-na-arbitrary-length-fft-correctness-and-cost",
+            "path": "items/thm-na-arbitrary-length-fft-correctness-and-cost.md",
+            "affected_use": "F4 and Proof 2.2 use exact cyclic convolution inside the formal exact-constant prime-length branch.",
+            "disposition": "unaffected",
+            "reason": "The formal model suppresses arithmetic/phase failures and supplies valid padded dimensions and power-of-two length; validation does not change its arithmetic schedule or exact convolution identity.",
+            "source_excerpt": "[F4] In exact arithmetic, the cyclic convolution algorithm takes two unitary DFTs, pointwise multiplication, the inverse unitary DFT, and the $\\sqrt M$ scale; the published DFT convolution identity and inversion theorem identify this with $a*_Mb$ ([[alg-na-computed-fft-cyclic-and-linear-convolution]], [[lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product]], [[thm-finite-fourier-inversion]], [[def-cyclic-convolution-on-z-mod-n]]).",
+            "uncertain": false,
+            "familiar": true,
+            "source_urls": []
+          }
+        ]
+      }
+    ],
+    "metadata_edits": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-15.proof-contracts.json",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-15.pages.json"
+    ],
+    "context_followup": "Reexamined convolution after the final zero-padding citation correction: the no-aliasing Statement and supported-sum argument are unchanged, so the successful arithmetic path is unaffected. Its immediately recaptured post/context hashes remained 7a90357e9bee86d3917f5ac3aecaaaaa8dea808cf2f0ffa1d8da8920e5a6caea / 5aff9127c3c6426aa3cbc898e31a7ea73554724273dfca2490c7343cd5a56ddd.",
+    "page_review": {
+      "path": "library/numerical-linear-algebra-and-approximation/computed-fast-transforms-and-convolution.md",
+      "affected_use": "The page lists all three changed-interface suppliers and describes certified twiddle bounds, six-operation product constants and conditional successful convolution.",
+      "disposition": "unaffected",
+      "reason": "The clarified positive model roundoff and exact tolerance representation preserve every displayed bound and convention. The page already allows inconclusive certification and conditions arithmetic guarantees on success. The examples page uses the unchanged DCT and no-aliasing statements."
+    },
+    "metadata_followup": "Only assigned contract rows and their necessary manifest mirrors were edited under the shared lock. Ordinary consumer owners must refresh their own exact quote mirrors after reviewing the changed supplier interfaces; these mechanical quote updates grant no independent review of this repair.",
+    "repair_complete": true,
+    "original_evidence_preserved": true
+  }
+}

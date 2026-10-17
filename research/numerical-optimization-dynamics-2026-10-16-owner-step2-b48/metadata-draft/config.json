@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "root_review_required": true,
+  "file": "research/numerical-optimization-dynamics-2026-10-16-batch-48.proof-contracts.json",
+  "source_guards": [
+    "items/thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique.md",
+    "items/thm-generalized-schur-form-exists-for-regular-pencil.md",
+    "items/lem-zero-determinant-matrix-has-nonzero-kernel-vector.md",
+    "items/thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries.md",
+    "items/alg-generalized-hessenberg-triangular-reduction.md",
+    "items/thm-operator-invertible-iff-determinant-nonzero.md"
+  ],
+  "operations": [
+    {
+      "path": [
+        "contracts",
+        "lem-zero-determinant-matrix-has-nonzero-kernel-vector",
+        "derivations",
+        0,
+        "claim"
+      ],
+      "before": "Suppose $\\ker M=\\{0\\}$. By [F1], $\\operatorname{rank}(M)=n$; by [F2] the image of $M$ has dimension $n$ in the $n$-dimensional space $\\mathbb C^n$, so $M$ is surjective. It is also injective by the supposition, hence invertible.",
+      "after": "Suppose $\\ker M=\\{0\\}$. By [F1], $\\operatorname{rank}(M)=n$; by [F2] the image of $M$ has dimension $n$ in the $n$-dimensional space $\\mathbb F^n$, so $M$ is surjective. It is also injective by the supposition, hence invertible."
+    },
+    {
+      "path": [
+        "contracts",
+        "thm-generalized-schur-form-exists-for-regular-pencil",
+        "derivations",
+        4,
+        "claim"
+      ],
+      "before": "Apply [F5] to obtain orthonormal bases $z_1,z_2$ of $X$ and $q_1,q_2$ of $Y$, choosing $q_1,q_2$ by Gram\u2013Schmidt on $Bz_1,Bz_2$. Since the two images are independent, the leading matrix $B_{11}=Q_1^TBZ_1$ is upper triangular with nonzero diagonal and hence invertible. Extend these bases by orthonormal bases of $Y^\\perp$ and $X^\\perp$ using [F6]. In these full bases, the first two columns of both transformed matrices are supported in the first two rows. Let $P$ be the invertible change-of-basis matrix from $(x,y)$ to $(z_1,z_2)$. The equations in step 2.2 give $A[z_1\\ z_2]=B[z_1\\ z_2]C$, where $C=P^{-1}\\begin{pmatrix}a&b\\\\-b&a\\end{pmatrix}P$. Thus the leading blocks satisfy $A_{11}=B_{11}C$, and $C$ is similar to $\\begin{pmatrix}a&b\\\\-b&a\\end{pmatrix}$. Consequently $\\det(A_{11}-\\mu B_{11}) =\\det(B_{11})\\det(C-\\mu I) =\\det(B_{11})\\bigl((a-\\mu)^2+b^2\\bigr)$ is a nonzero polynomial with roots $a\\pm ib$.",
+      "after": "Apply [F5] to obtain orthonormal bases $z_1,z_2$ of $X$ and $q_1,q_2$ of $Y$, choosing $q_1,q_2$ by Gram\u2013Schmidt on $Bz_1,Bz_2$. The restriction $B|_X:X\\to Y$ sends a basis to the independent pair $Bz_1,Bz_2$ and is therefore an isomorphism. Its matrix in these bases is $B_{11}=Q_1^TBZ_1$, so $B_{11}$ is invertible and [F7] gives $\\det(B_{11})\\ne0$; the Gram\u2013Schmidt choice makes this matrix upper triangular. Extend these bases by orthonormal bases of $Y^\\perp$ and $X^\\perp$ using [F6]. In these full bases, the first two columns of both transformed matrices are supported in the first two rows. Let $P$ be the invertible change-of-basis matrix from $(x,y)$ to $(z_1,z_2)$. The equations in step 2.2 give $A[z_1\\ z_2]=B[z_1\\ z_2]C$, where $C=P^{-1}\\begin{pmatrix}a&b\\\\-b&a\\end{pmatrix}P$. Thus the leading blocks satisfy $A_{11}=B_{11}C$, and $C$ is similar to $\\begin{pmatrix}a&b\\\\-b&a\\end{pmatrix}$. Consequently $\\det(A_{11}-\\mu B_{11}) =\\det(B_{11})\\det(C-\\mu I) =\\det(B_{11})\\bigl((a-\\mu)^2+b^2\\bigr)$ is a nonzero polynomial with roots $a\\pm ib$."
+    },
+    {
+      "path": [
+        "contracts",
+        "thm-generalized-schur-form-exists-for-regular-pencil",
+        "derivations",
+        4,
+        "inputs"
+      ],
+      "before": [
+        "step 2.2",
+        "F5",
+        "F6",
+        "F11",
+        "algebra",
+        "construct"
+      ],
+      "after": [
+        "step 2.2",
+        "F5",
+        "F6",
+        "F7",
+        "F11",
+        "algebra",
+        "construct"
+      ]
+    },
+    {
+      "path": [
+        "contracts",
+        "thm-generalized-schur-form-exists-for-regular-pencil",
+        "citations",
+        6,
+        "uses"
+      ],
+      "before": [
+        "2.2",
+        "4.1",
+        "6.1"
+      ],
+      "after": [
+        "2.2",
+        "3.1",
+        "4.1",
+        "6.1"
+      ]
+    },
+    {
+      "path": [
+        "contracts",
+        "prop-generalized-hessenberg-triangular-reduction-preserves-form-and-equivalence",
+        "citations",
+        0,
+        "quote"
+      ],
+      "before": "Input $A,B\\in\\mathbb F^{n\\times n}$, $n\\ge1$, with\n$\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. All transformations here are exact.\nLet $Q=Z=I_n$.\n\nUse a left Givens factor $L(a,b)$ that sends the column pair $(a,b)^T$ to\n$(\\gamma,0)^T$, with $|\\gamma|=(|a|^2+|b|^2)^{1/2}$; if $a=b=0$, use the\nidentity. Use a right Givens factor $R(a,b)$ that sends the row pair $(a,b)$ to\n$(0,\\eta)$, with $|\\eta|=(|a|^2+|b|^2)^{1/2}$; if $a=b=0$, use the identity.\nThese factors are obtained from\n[[def-real-and-complex-givens-transformations]] and are orthogonal over\n$\\mathbb R$ or unitary over $\\mathbb C$.\n\n1. Triangularise $B$ by left rotations. For $j=1,\\ldots,n$ and, in descending\norder, $i=n,n-1,\\ldots,j+1$, set\n$$L=L(B_{i-1,j},B_{i,j}),\\quad A\\leftarrow LA,\\quad B\\leftarrow LB, \\quad Q\\leftarrow QL^*.$$\n\n2. Reduce $A$ to upper Hessenberg form while restoring triangularity of $B$.\nFor $j=1,\\ldots,n-2$ and, in descending order, $i=n,n-1,\\ldots,j+2$, set\n$$L=L(A_{i-1,j},A_{i,j}),\\quad A\\leftarrow LA,\\quad B\\leftarrow LB, \\quad Q\\leftarrow QL^*,$$\nthen set\n$$R=R(B_{i,i-1},B_{i,i}),\\quad A\\leftarrow AR,\\quad B\\leftarrow BR, \\quad Z\\leftarrow ZR.$$\n\nReturn $Q,Z,H=A,T=B$, where $H$ is upper Hessenberg and $T$ is upper\ntriangular in the senses of\n[[def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices]] and\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]. The outputs are represented by the exact products of\nthe recorded Givens factors; no dense rounded factor is asserted unitary.",
+      "after": "Input $A,B\\in\\mathbb F^{n\\times n}$, $n\\ge1$, with\n$\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$. All transformations here are exact.\nLet $Q=Z=I_n$.\n\nFor a target pair $(a,b)$, define the left factor $L(a,b)$ deterministically. Use $I_2$ if $a=b=0$. Otherwise put $r=(|a|^2+|b|^2)^{1/2}$ and $L=\\begin{pmatrix}c&s\\\\-\\overline s&c\\end{pmatrix}$. Over $\\mathbb R$, take $c=a/r$, $s=b/r$. Over $\\mathbb C$, if $a=0$ take $c=0$, $s=\\overline b/|b|$; otherwise take $\\phi=a/|a|$, $c=|a|/r$, $s=\\phi\\overline b/r$. Thus $L(a,b)(a,b)^T=(\\gamma,0)^T$ with $|\\gamma|=r$. Set $J=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ and define the right factor\n$$R(a,b)=J L(\\overline b,\\overline a)^*J.$$\nThen $(a,b)R(a,b)=(0,\\eta)$ with $|\\eta|=r$; the zero pair again uses identity. These factors are real orthogonal over $\\mathbb R$ or unitary over $\\mathbb C$, as direct multiplication shows in [[thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries]]; the right identity follows by taking adjoints of the left annihilation of $(\\overline b,\\overline a)^T$ and reversing the coordinates. Use their identity embeddings on the two rows or columns specified by each step below.\n1. Triangularise $B$ by left rotations. For $j=1,\\ldots,n$ and, in descending\norder, $i=n,n-1,\\ldots,j+1$, set\n$$L=L(B_{i-1,j},B_{i,j}),\\quad A\\leftarrow LA,\\quad B\\leftarrow LB, \\quad Q\\leftarrow QL^*.$$\n\n2. Reduce $A$ to upper Hessenberg form while restoring triangularity of $B$.\nFor $j=1,\\ldots,n-2$ and, in descending order, $i=n,n-1,\\ldots,j+2$, set\n$$L=L(A_{i-1,j},A_{i,j}),\\quad A\\leftarrow LA,\\quad B\\leftarrow LB, \\quad Q\\leftarrow QL^*,$$\nthen set\n$$R=R(B_{i,i-1},B_{i,i}),\\quad A\\leftarrow AR,\\quad B\\leftarrow BR, \\quad Z\\leftarrow ZR.$$\n\nReturn $Q,Z,H=A,T=B$, where $H$ is upper Hessenberg and $T$ is upper\ntriangular in the senses of\n[[def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices]] and\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]. The outputs are represented by the exact products of\nthe recorded Givens factors; no dense rounded factor is asserted unitary."
+    }
+  ],
+  "new_published_supplier_context": "published-supplier-deps.json",
+  "canonical_applied": false
+}

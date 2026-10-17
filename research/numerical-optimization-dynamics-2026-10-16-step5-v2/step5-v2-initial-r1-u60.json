@@ -1,0 +1,445 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "60",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-saddle-point-for-convex-concave-lagrangian",
+      "model": "gpt-6-luna",
+      "context_sha256": "8f7f003d6987127450b992dfbc98b1a03e47bcf0167461aa76533dce6e6b09ff",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Proof 2.1 incorrectly asserted domain-restriction equivalence for arbitrary extended-real saddle functions. For X={0}, Y={0,1}, Psi(0,0)=0 and Psi(0,1)=+infinity, restriction to the finite domain creates a saddle while the original left inequality fails. Replaced only the proof claim by the exact omitted-slice conditions; the Definition is byte-for-byte unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-naive-sequential-three-block-admm",
+      "model": "gpt-6-luna",
+      "context_sha256": "59d4e526eb3d0c458da933603c3d69f56d0c2e7658678de65d7c906698c68f4d",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "Confirmed missing executable input/call semantics: the old text required exact solves and finite caps without naming routines, checker inputs, a budget rule or a precise exhaustion branch. Added supplied deterministic solver/checker programs, sound exact-minimizer certificate postconditions, shared per-block step caps with last-step success precedence, sequential tentative updates, atomic commit and explicit failure/exhaustion outputs. Exact Gauss-Seidel block equations and all admitted problems are retained; nonattainment cannot yield success.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-two-block-admm-scaled",
+      "model": "gpt-6-luna",
+      "context_sha256": "b82a89498bfb15e1d66ae811c6b1abdd19d5e5dcab489d26565a388203e570be",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "Confirmed that the old capped wrapper omitted executable solver/checker inputs and an unambiguous budget/status rule. Added supplied deterministic programs with sound certificates for exact attained minimum-norm minimizers, explicit ordered calls, total per-block step caps and atomic state commit. Made exact-recurrence attainment conditional. For f(x)=-x and K=0, no finite point minimizes the x objective, so no sound checker can certify success; failure/exhaustion now returns the old state rather than requiring a nonexistent minimizer. The recurrence, residual/dual outputs and minimum-norm tie-break are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-fenchel-young-equality-characterizes-subgradients",
+      "model": "gpt-6-luna",
+      "context_sha256": "052582238fac702d037ead22332935b790a625151a1455795df1b8c7bbcdbb75",
+      "outcome": "false_positive",
+      "reason": "False positive: def-proper-closed-convex-function-on-rn defines properness (nonempty finite domain), convexity (with the 0*infinity endpoint convention) and closedness separately. The subdifferential Definition explicitly assumes only proper and convex; its reference to that convention does not impose closedness. The lemma has exactly that extended-real codomain and those assumptions. Its supremum proof excludes minus-infinite conjugate values using a finite competitor, treats both infinite cases, and at finite values rearranges the maximizer inequality into the defining subgradient inequalities. No extra convention hypothesis or edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-pdhg-primal-dual-hybrid-gradient",
+      "model": "gpt-6-luna",
+      "context_sha256": "1d9bda878c84a0ffcddefd1dbba627d3a9ebf8729021c01081722d946297a811",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "Confirmed missing cap/program inputs and ambiguous finite failure branches. Added supplied deterministic proximal solver and sound certificate-checker programs, positive integer dual/primal caps, precise shared per-call step accounting, success-on-last-step precedence, ordered calls with an explicit failed-call field, and atomic state commit. The unique proximal points remain mathematically defined by the existing existence theorem; no generic finite evaluator is inferred from that theorem. Exact recurrence, domain restriction, extrapolation and strict norm bound are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-saddle-point-for-convex-concave-lagrangian",
+      "disposition": "repaired",
+      "post_sha256": "7e89b3d3811470358e4fa65a334303a88a1f9289f2fc657eb638f920565b2641",
+      "review_context_sha256": "b7e931e9f7a68e12bdcd7cf6dc6420995df92a42b93932d3d14848bc22312747",
+      "reason": "Proof 2.1 incorrectly asserted domain-restriction equivalence for arbitrary extended-real saddle functions. For X={0}, Y={0,1}, Psi(0,0)=0 and Psi(0,1)=+infinity, restriction to the finite domain creates a saddle while the original left inequality fails. Replaced only the proof claim by the exact omitted-slice conditions; the Definition is byte-for-byte unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-naive-sequential-three-block-admm",
+      "disposition": "repaired",
+      "post_sha256": "7002547ba9eb40282f60c7dff42dea299bdc6fda51f30bb3080405c64308714a",
+      "review_context_sha256": "c8336e1eed2c1d0071a5d5ae5352a31b7045ab5c0a8aec77eee0c5acc70eb4ba",
+      "reason": "Confirmed missing executable input/call semantics: the old text required exact solves and finite caps without naming routines, checker inputs, a budget rule or a precise exhaustion branch. Added supplied deterministic solver/checker programs, sound exact-minimizer certificate postconditions, shared per-block step caps with last-step success precedence, sequential tentative updates, atomic commit and explicit failure/exhaustion outputs. Exact Gauss-Seidel block equations and all admitted problems are retained; nonattainment cannot yield success.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-two-block-admm-scaled",
+      "disposition": "repaired",
+      "post_sha256": "995cfa48f9d9e6188e2b6e292391dbcbd4fd60ae60425992f93b2e99eef7f866",
+      "review_context_sha256": "7ae4c1d9f75e85ce4fd32b38871887ddb36f2aeb4c4147e62b22c183d52aada6",
+      "reason": "Confirmed that the old capped wrapper omitted executable solver/checker inputs and an unambiguous budget/status rule. Added supplied deterministic programs with sound certificates for exact attained minimum-norm minimizers, explicit ordered calls, total per-block step caps and atomic state commit. Made exact-recurrence attainment conditional. For f(x)=-x and K=0, no finite point minimizes the x objective, so no sound checker can certify success; failure/exhaustion now returns the old state rather than requiring a nonexistent minimizer. The recurrence, residual/dual outputs and minimum-norm tie-break are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-fenchel-young-equality-characterizes-subgradients",
+      "disposition": "unaffected",
+      "post_sha256": "704298df30dd1672bbe6d88f137b72ccb1993e5dd30689233c51dd40df9c80f4",
+      "review_context_sha256": "fb0855a3a43aa1b48c2b7de00054866138c1cb525d45209475a8d7dfc27b8b05",
+      "reason": "False positive: def-proper-closed-convex-function-on-rn defines properness (nonempty finite domain), convexity (with the 0*infinity endpoint convention) and closedness separately. The subdifferential Definition explicitly assumes only proper and convex; its reference to that convention does not impose closedness. The lemma has exactly that extended-real codomain and those assumptions. Its supremum proof excludes minus-infinite conjugate values using a finite competitor, treats both infinite cases, and at finite values rearranges the maximizer inequality into the defining subgradient inequalities. No extra convention hypothesis or edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-pdhg-primal-dual-hybrid-gradient",
+      "disposition": "repaired",
+      "post_sha256": "eacb05026116c03c9d4e9dafa0e31c60f4e62e9004c41bbbfc0e66d7c059c57b",
+      "review_context_sha256": "e73a94d340b01f6230e81fd66f1997b72a1cf4f3fe73aec7672e06f0f97aa64d",
+      "reason": "Confirmed missing cap/program inputs and ambiguous finite failure branches. Added supplied deterministic proximal solver and sound certificate-checker programs, positive integer dual/primal caps, precise shared per-call step accounting, success-on-last-step precedence, ordered calls with an explicit failed-call field, and atomic state commit. The unique proximal points remain mathematically defined by the existing existence theorem; no generic finite evaluator is inferred from that theorem. Exact recurrence, domain restriction, extrapolation and strict norm bound are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "cex-naive-three-block-admm-divergence",
+    "ex-consensus-admm-least-squares",
+    "ex-lanczos-ritz-value-is-not-a-norm-certificate",
+    "ex-two-pixel-pdhg-total-variation-step",
+    "lem-admm-exact-subproblem-optimality-relations",
+    "lem-pdhg-one-step-gap-telescope",
+    "lem-two-block-admm-energy-and-objective-estimates",
+    "thm-pdhg-ergodic-saddle-gap-o1k",
+    "thm-two-block-admm-residual-objective-and-dual-convergence"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-saddle-point-for-convex-concave-lagrangian",
+      "status": "fixed",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "reason": "Proof 2.1 incorrectly asserted domain-restriction equivalence for arbitrary extended-real saddle functions. For X={0}, Y={0,1}, Psi(0,0)=0 and Psi(0,1)=+infinity, restriction to the finite domain creates a saddle while the original left inequality fails. Replaced only the proof claim by the exact omitted-slice conditions; the Definition is byte-for-byte unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-naive-sequential-three-block-admm",
+      "status": "fixed",
+      "severity": "fatal",
+      "defect_type": "other",
+      "reason": "Confirmed missing executable input/call semantics: the old text required exact solves and finite caps without naming routines, checker inputs, a budget rule or a precise exhaustion branch. Added supplied deterministic solver/checker programs, sound exact-minimizer certificate postconditions, shared per-block step caps with last-step success precedence, sequential tentative updates, atomic commit and explicit failure/exhaustion outputs. Exact Gauss-Seidel block equations and all admitted problems are retained; nonattainment cannot yield success.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-two-block-admm-scaled",
+      "status": "fixed",
+      "severity": "fatal",
+      "defect_type": "other",
+      "reason": "Confirmed that the old capped wrapper omitted executable solver/checker inputs and an unambiguous budget/status rule. Added supplied deterministic programs with sound certificates for exact attained minimum-norm minimizers, explicit ordered calls, total per-block step caps and atomic state commit. Made exact-recurrence attainment conditional. For f(x)=-x and K=0, no finite point minimizes the x objective, so no sound checker can certify success; failure/exhaustion now returns the old state rather than requiring a nonexistent minimizer. The recurrence, residual/dual outputs and minimum-norm tie-break are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "lem-fenchel-young-equality-characterizes-subgradients",
+      "status": "dismissed",
+      "severity": "none",
+      "defect_type": null,
+      "reason": "False positive: def-proper-closed-convex-function-on-rn defines properness (nonempty finite domain), convexity (with the 0*infinity endpoint convention) and closedness separately. The subdifferential Definition explicitly assumes only proper and convex; its reference to that convention does not impose closedness. The lemma has exactly that extended-real codomain and those assumptions. Its supremum proof excludes minus-infinite conjugate values using a finite competitor, treats both infinite cases, and at finite values rearranges the maximizer inequality into the defining subgradient inequalities. No extra convention hypothesis or edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-pdhg-primal-dual-hybrid-gradient",
+      "status": "fixed",
+      "severity": "fatal",
+      "defect_type": "other",
+      "reason": "Confirmed missing cap/program inputs and ambiguous finite failure branches. Added supplied deterministic proximal solver and sound certificate-checker programs, positive integer dual/primal caps, precise shared per-call step accounting, success-on-last-step precedence, ordered calls with an explicit failed-call field, and atomic state commit. The unique proximal points remain mathematically defined by the existing existence theorem; no generic finite evaluator is inferred from that theorem. Exact recurrence, domain restriction, extrapolation and strict norm bound are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "action": "no-update",
+      "reason": "All nine direct item consumers of the three changed algorithm Definitions are draft frozen-frontier items. No published consumer or outside-frontier item uses these interfaces; no published defect or maintenance repair was found. The saddle Definition is unchanged, so its proof-only correction creates no interface event.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "def-saddle-point-for-convex-concave-lagrangian",
+      "claim": "Finite central saddle value with all quantified evaluations defined; restrictions require omitted left values <= central <= omitted right values.",
+      "dependencies": [
+        "def-extended-reals",
+        "def-euclidean-inner-product"
+      ],
+      "evidence": [
+        "items/def-saddle-point-for-convex-concave-lagrangian.md, Proof 1.1 and 2.1",
+        "research/numerical-optimization-dynamics-2026-10-16-batch-60.proof-contracts.json"
+      ],
+      "checks": [
+        "precheck: 1 checked, 0 failed",
+        "rendercheck: 1 checked, no errors/warnings",
+        "Owning proof-contract row synchronized under shared lock; strict selected contract check passed."
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Controller handoff; no independent acceptance of these repairs is claimed."
+    },
+    {
+      "id": "alg-naive-sequential-three-block-admm",
+      "claim": "The three exact sequential augmented-residual minimizations and dual residual update are unchanged; the finite wrapper is parameterized by executable input programs rather than a presumed generic optimizer.",
+      "dependencies": [
+        "def-proper-closed-convex-function-on-rn",
+        "def-euclidean-inner-product"
+      ],
+      "checks": [
+        "precheck: 1 checked, 0 failed",
+        "rendercheck: 1 checked, no errors/warnings",
+        "Owning proof-contract row synchronized under shared lock; strict selected contract check passed."
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Controller handoff; no independent acceptance of these repairs is claimed."
+    },
+    {
+      "id": "alg-two-block-admm-scaled",
+      "claim": "Retained exact two-block recurrence and conditional unique minimum-norm selection, including singleton zero-dimensional blocks. Supplied solver/checker input programs now define the finite wrapper.",
+      "dependencies": [
+        "def-proper-closed-convex-function-on-rn",
+        "def-saddle-point-for-convex-concave-lagrangian",
+        "def-euclidean-inner-product",
+        "thm-nearest-point-in-a-nonempty-closed-convex-set"
+      ],
+      "checks": [
+        "precheck: 1 checked, 0 failed",
+        "rendercheck: 1 checked, no errors/warnings",
+        "strict proof-contract: first three assigned items checked, no errors/warnings; lock acquired, rows reread/synchronized, check passed, lock released"
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Controller handoff; no independent acceptance of these repairs is claimed."
+    },
+    {
+      "id": "lem-fenchel-young-equality-characterizes-subgradients",
+      "claim": "Proper convex extended-real Fenchel-Young inequality and finite equality/subgradient equivalence; no closedness or choice hypothesis.",
+      "dependencies": [
+        "def-fenchel-conjugate-on-finite-dimensional-euclidean-space",
+        "def-extended-real-epsilon-subdifferential"
+      ],
+      "evidence": [
+        "items/def-proper-closed-convex-function-on-rn.md, Definition: proper/convex/closed are separate adjectives",
+        "items/def-extended-real-epsilon-subdifferential.md, Definition: proper and convex only",
+        "items/lem-fenchel-young-equality-characterizes-subgradients.md, Proof 1.1-2.1"
+      ],
+      "checks": [
+        "Read both actual supplier definitions and the full current equality proof; item unchanged."
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Controller handoff; no independent acceptance of these repairs is claimed."
+    },
+    {
+      "id": "alg-pdhg-primal-dual-hybrid-gradient",
+      "claim": "Retained exact dual-then-primal proximal recurrence and extrapolation, positive strict step condition and finite-domain saddle function, including K=0 and zero-dimensional singleton prox calls.",
+      "dependencies": [
+        "def-proper-closed-convex-function-on-rn",
+        "def-fenchel-conjugate-on-finite-dimensional-euclidean-space",
+        "lem-fenchel-conjugate-is-proper-closed-convex",
+        "def-saddle-point-for-convex-concave-lagrangian",
+        "def-proximal-mapping",
+        "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+        "def-induced-matrix-p-norm",
+        "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+        "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+        "def-euclidean-inner-product"
+      ],
+      "checks": [
+        "precheck: 1 checked, 0 failed",
+        "rendercheck: 1 checked, no errors/warnings",
+        "strict proof-contract: PDHG row checked, no errors/warnings; lock acquired, row reread/synchronized, check passed, lock released"
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Controller handoff; no independent acceptance of these repairs is claimed."
+    },
+    {
+      "checks": [
+        {
+          "command": "node tools/proof-layout.mjs items/def-saddle-point-for-convex-concave-lagrangian.md items/alg-naive-sequential-three-block-admm.md items/alg-two-block-admm-scaled.md items/alg-pdhg-primal-dual-hybrid-gradient.md",
+          "exit_code": 0,
+          "result": "4 items, 8 steps, 0 defects; run once after all final item edits."
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-60.proof-contracts.json --items def-saddle-point-for-convex-concave-lagrangian,alg-naive-sequential-three-block-admm,alg-two-block-admm-scaled,lem-fenchel-young-equality-characterizes-subgradients,alg-pdhg-primal-dual-hybrid-gradient --strict --json",
+          "exit_code": 0,
+          "result": "All five scoped contracts pass with zero errors and warnings."
+        },
+        {
+          "command": "Read-only native itemHashGuard, reviewMatchesCurrent and discoverDownstream validation",
+          "exit_code": 0,
+          "result": "All five recorded item guards/review contexts remain current; exactly all nine direct dependency/reference consumers are reported and all are draft frontier items. Stored review hashes were checked, never refreshed."
+        },
+        {
+          "command": "Exact original/current Statement/Definition section comparison and raw carrier comparison",
+          "exit_code": 0,
+          "result": "Only the three algorithm Definitions changed. The saddle Definition is unchanged and the false-positive Fenchel-Young item is byte-for-byte unchanged."
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Return this round evidence to the engine; no judges, stamps, certificates, state transitions, worker launches or shared-ledger writes were performed."
+    }
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "alg-naive-sequential-three-block-admm",
+      "id": "cex-naive-three-block-admm-divergence",
+      "path": "items/cex-naive-three-block-admm-divergence.md",
+      "affected_use": "Statement and F1 use the sequential exact recurrence; Proof 1.1 proves all three scalar block quadratics have positive coefficients 3,6,9, and 1.2 derives their unique exact minimizers.",
+      "invalidated_claim": "None: the defining exact block equations are unchanged; only execution of the supplied finite routines has been made explicit.",
+      "minimality": "No consumer edit is necessary: its counterexample concerns the exact recurrence, not success of arbitrary caps. The displayed rational block formulas themselves give finite exact solves.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-two-block-admm-scaled",
+      "id": "lem-admm-exact-subproblem-optimality-relations",
+      "path": "items/lem-admm-exact-subproblem-optimality-relations.md",
+      "affected_use": "Statement and F1 assume an exact attained sweep; Proof 1.1 uses exact block minimality and 2.1 uses y^{k+1}=y^k+rho*r^{k+1}. Both equations and hypotheses are unchanged.",
+      "invalidated_claim": "None: exact recurrence, Lagrangian and tie-break are unchanged; every convergence assertion remains conditional on exact attained sweeps.",
+      "minimality": "No item repair is necessary because no proof assumes that arbitrary finite caps certify exact optimizers. No consumer Statement/Definition changes, hence no additional hop.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-two-block-admm-scaled",
+      "id": "lem-two-block-admm-energy-and-objective-estimates",
+      "path": "items/lem-two-block-admm-energy-and-objective-estimates.md",
+      "affected_use": "Statement assumes a saddle and every exact subproblem attained; F1 and Proof 3.1 use the residual and unscaled dual updates, while Proof 1.1 uses prior exact z solves.",
+      "invalidated_claim": "None: exact recurrence, Lagrangian and tie-break are unchanged; every convergence assertion remains conditional on exact attained sweeps.",
+      "minimality": "No item repair is necessary because no proof assumes that arbitrary finite caps certify exact optimizers. No consumer Statement/Definition changes, hence no additional hop.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-two-block-admm-scaled",
+      "id": "thm-two-block-admm-residual-objective-and-dual-convergence",
+      "path": "items/thm-two-block-admm-residual-objective-and-dual-convergence.md",
+      "affected_use": "Statement explicitly uses the exact recurrence with every subproblem attained; F1, Proof 1.1 and 1.2 use its Lagrangian and residual/dual identities, not finite-cap success.",
+      "invalidated_claim": "None: exact recurrence, Lagrangian and tie-break are unchanged; every convergence assertion remains conditional on exact attained sweeps.",
+      "minimality": "No item repair is necessary because no proof assumes that arbitrary finite caps certify exact optimizers. No consumer Statement/Definition changes, hence no additional hop.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-two-block-admm-scaled",
+      "id": "ex-consensus-admm-least-squares",
+      "path": "items/ex-consensus-admm-least-squares.md",
+      "affected_use": "F1 and Proof 1.2/3.1 substitute the exact scalar block minimizers and dual update; strict convex quadratics have unique minimizers satisfying the retained minimum-norm tie-break.",
+      "invalidated_claim": "None: exact recurrence, Lagrangian and tie-break are unchanged; every convergence assertion remains conditional on exact attained sweeps.",
+      "minimality": "No item repair is necessary because no proof assumes that arbitrary finite caps certify exact optimizers. No consumer Statement/Definition changes, hence no additional hop.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-pdhg-primal-dual-hybrid-gradient",
+      "id": "lem-pdhg-one-step-gap-telescope",
+      "path": "items/lem-pdhg-one-step-gap-telescope.md",
+      "affected_use": "Statement and F1 use the exact proximal recurrence with bar x^0=x^0; Proof 1.1 uses its proximal optimality conditions and 2.1 uses its unchanged extrapolation identity.",
+      "invalidated_claim": "None: proximal equations, initialization, domain and norm bound are unchanged; finite capped execution does not replace the exact recurrence assumed here.",
+      "minimality": "No consumer repair is necessary: it uses an exact mathematical recurrence or only its step condition. No consumer Statement/Definition changes and no further hop is triggered.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-pdhg-primal-dual-hybrid-gradient",
+      "id": "thm-pdhg-ergodic-saddle-gap-o1k",
+      "path": "items/thm-pdhg-ergodic-saddle-gap-o1k.md",
+      "affected_use": "Given, A1 and F1 explicitly require the exact recurrence; Proof 1.1 uses exact proximal outputs lying in their domains and 2.1 averages their gap telescope, independently of finite cap success.",
+      "invalidated_claim": "None: proximal equations, initialization, domain and norm bound are unchanged; finite capped execution does not replace the exact recurrence assumed here.",
+      "minimality": "No consumer repair is necessary: it uses an exact mathematical recurrence or only its step condition. No consumer Statement/Definition changes and no further hop is triggered.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-pdhg-primal-dual-hybrid-gradient",
+      "id": "ex-lanczos-ritz-value-is-not-a-norm-certificate",
+      "path": "items/ex-lanczos-ritz-value-is-not-a-norm-certificate.md",
+      "affected_use": "F3 and Proof 2.1 use only the strict tau*sigma*||K||^2<1 condition to explain why Ritz value 1 cannot replace the true norm 2 for diag(1,2).",
+      "invalidated_claim": "None: proximal equations, initialization, domain and norm bound are unchanged; finite capped execution does not replace the exact recurrence assumed here.",
+      "minimality": "No consumer repair is necessary: it uses an exact mathematical recurrence or only its step condition. No consumer Statement/Definition changes and no further hop is triggered.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-pdhg-primal-dual-hybrid-gradient",
+      "id": "ex-two-pixel-pdhg-total-variation-step",
+      "path": "items/ex-two-pixel-pdhg-total-variation-step.md",
+      "affected_use": "F1 and Proof 1.2, 2.1 and 3.1 compute the exact prox of the interval indicator and a quadratic, then apply the unchanged updates and verify tau*sigma*||K||^2=1/2<1.",
+      "invalidated_claim": "None: proximal equations, initialization, domain and norm bound are unchanged; finite capped execution does not replace the exact recurrence assumed here.",
+      "minimality": "No consumer repair is necessary: it uses an exact mathematical recurrence or only its step condition. No consumer Statement/Definition changes and no further hop is triggered.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/operator-splitting-admm-and-primal-dual-methods.md",
+      "affected_use": "Defines naive three-block ADMM and separates its divergence example from the two-block theorem; calls finite capped solvers successful only on exact certificates.",
+      "disposition": "unaffected",
+      "reason": "The page describes the retained recurrences and conditional success; the explicit supplied-program wrapper preserves these claims."
+    }
+  ]
+}

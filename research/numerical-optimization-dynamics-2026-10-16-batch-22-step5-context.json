@@ -1,0 +1,269 @@
+{
+  "group": "b",
+  "batches": [
+    "22"
+  ],
+  "pages_read": [
+    "nonlinear-boundary-value-solvers",
+    "nonlinear-boundary-value-solvers-examples"
+  ],
+  "items_read": [
+    "def-nonlinear-two-point-bvp-and-boundary-residual",
+    "lem-c1-ode-flow-on-common-tube",
+    "def-certified-ivp-approximation-and-sensitivity-interface",
+    "def-linearized-two-point-bvp-operator-and-conditioning",
+    "def-midpoint-collocation-residual-for-bvps",
+    "prop-multiple-shooting-residual-zero-iff-bvp-solution",
+    "prop-shooting-residual-zero-iff-bvp-solution",
+    "alg-midpoint-collocation-for-nonlinear-bvps",
+    "lem-midpoint-bvp-discrete-linearized-inverse",
+    "prop-midpoint-residual-zero-is-collocation",
+    "prop-multiple-shooting-residual-block-jacobian",
+    "prop-shooting-residual-derivative",
+    "alg-multiple-shooting-for-nonlinear-bvps",
+    "alg-single-shooting-for-nonlinear-bvps",
+    "thm-midpoint-collocation-local-branch-and-error-budget",
+    "cor-local-newton-convergence-for-midpoint-bvp-collocation",
+    "cor-local-newton-convergence-for-shooting-bvp-residual",
+    "thm-shooting-residual-error-budget",
+    "ex-midpoint-collocation-has-two-branches",
+    "ex-unstable-single-shooting-amplifies-error",
+    "ex-newton-shooting-fails-from-singular-start"
+  ],
+  "conventions": [
+    {
+      "convention": "The interval satisfies a<b and the state dimension d≥1. A square BVP has exactly d scalar endpoint equations B(y(a),y(b))=0. Neither existence nor uniqueness is part of the definition.",
+      "fixed_by": "def-nonlinear-two-point-bvp-and-boundary-residual",
+      "matters_for": [
+        "prop-shooting-residual-zero-iff-bvp-solution",
+        "prop-multiple-shooting-residual-zero-iff-bvp-solution",
+        "def-midpoint-collocation-residual-for-bvps"
+      ]
+    },
+    {
+      "convention": "Multiple-shooting continuity rows are segment endpoint minus next segment start: φ_i(t_{i+1};s_i)−s_{i+1}. The final row is B(s_0,s_N).",
+      "fixed_by": "def-nonlinear-two-point-bvp-and-boundary-residual",
+      "matters_for": [
+        "prop-multiple-shooting-residual-block-jacobian",
+        "alg-multiple-shooting-for-nonlinear-bvps",
+        "prop-multiple-shooting-residual-zero-iff-bvp-solution"
+      ]
+    },
+    {
+      "convention": "Initial-state flow differentiability assumes an open initial-state set, whole-interval existence for every admitted state, and one compact convex state-time tube contained in the open field domain.",
+      "fixed_by": "lem-c1-ode-flow-on-common-tube",
+      "matters_for": [
+        "prop-shooting-residual-derivative",
+        "prop-multiple-shooting-residual-block-jacobian",
+        "thm-shooting-residual-error-budget"
+      ]
+    },
+    {
+      "convention": "A certified evaluator supplies a continuous approximate trajectory, a C1 endpoint map, its exact numerical-map derivative, and a uniform trajectory-error bound. This derivative need not equal the exact-flow derivative; failure supplies no bound.",
+      "fixed_by": "def-certified-ivp-approximation-and-sensitivity-interface",
+      "matters_for": [
+        "alg-single-shooting-for-nonlinear-bvps",
+        "alg-multiple-shooting-for-nonlinear-bvps",
+        "cor-local-newton-convergence-for-shooting-bvp-residual",
+        "thm-shooting-residual-error-budget"
+      ]
+    },
+    {
+      "convention": "The continuous linearization is L v=(v′−Av,B_1v(a)+B_2v(b)); its domain norm is ||v||∞+||v′||∞ and its range norm is max(||g||∞,||q||₂). Bounded invertibility means bijectivity with finite inverse norm.",
+      "fixed_by": "def-linearized-two-point-bvp-operator-and-conditioning",
+      "matters_for": [
+        "lem-midpoint-bvp-discrete-linearized-inverse",
+        "thm-midpoint-collocation-local-branch-and-error-budget"
+      ]
+    },
+    {
+      "convention": "Uniform meshes have N≥1 and h=(b−a)/N. Interior midpoint residuals are divided by h; node and residual norms are maxima of Euclidean block norms.",
+      "fixed_by": "def-midpoint-collocation-residual-for-bvps",
+      "matters_for": [
+        "prop-midpoint-residual-zero-is-collocation",
+        "lem-midpoint-bvp-discrete-linearized-inverse",
+        "thm-midpoint-collocation-local-branch-and-error-budget"
+      ]
+    },
+    {
+      "convention": "Single shooting checks evaluator success and endpoint-pair admissibility before evaluating the boundary residual, then checks residual tolerance before the update budget and Newton correction. Root-tolerance-met certifies only the computed residual bound.",
+      "fixed_by": "alg-single-shooting-for-nonlinear-bvps",
+      "matters_for": [
+        "cor-local-newton-convergence-for-shooting-bvp-residual",
+        "thm-shooting-residual-error-budget",
+        "ex-newton-shooting-fails-from-singular-start"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-nonlinear-two-point-bvp-and-boundary-residual",
+      "statement": "A square nonlinear two-point BVP is y′=f(t,y) on [a,b] with B(y(a),y(b))=0, for a C1 curve in the field domain and an admissible endpoint pair. Exact shooting and multiple-shooting residuals are defined only on their admissible IVP and boundary domains.",
+      "used_by": [
+        "def-certified-ivp-approximation-and-sensitivity-interface",
+        "def-linearized-two-point-bvp-operator-and-conditioning",
+        "def-midpoint-collocation-residual-for-bvps",
+        "prop-shooting-residual-zero-iff-bvp-solution",
+        "prop-multiple-shooting-residual-zero-iff-bvp-solution"
+      ]
+    },
+    {
+      "id": "lem-c1-ode-flow-on-common-tube",
+      "statement": "For a C1 field, an open initial-state set, and unique solutions existing throughout a<b in a common compact convex tube contained in the field domain, s↦φ(t;s) is C1. Its derivative S uniquely satisfies S(t;s)=I_d+∫_a^t D_yf(r,φ(r;s))S(r;s)dr.",
+      "used_by": [
+        "prop-shooting-residual-derivative",
+        "prop-multiple-shooting-residual-block-jacobian",
+        "thm-shooting-residual-error-budget"
+      ]
+    },
+    {
+      "id": "def-certified-ivp-approximation-and-sensitivity-interface",
+      "statement": "A certified differentiable IVP evaluator supplies continuous approximate trajectories, a C1 approximate endpoint map with its exact derivative, and δ_IVP≥0 bounding the trajectory error uniformly over the declared open initial-state set and time interval.",
+      "used_by": [
+        "alg-single-shooting-for-nonlinear-bvps",
+        "alg-multiple-shooting-for-nonlinear-bvps",
+        "prop-shooting-residual-derivative",
+        "thm-shooting-residual-error-budget"
+      ]
+    },
+    {
+      "id": "lem-midpoint-bvp-discrete-linearized-inverse",
+      "statement": "For C2 data near an exact C3 BVP solution with boundedly invertible continuous linearization, the normalized midpoint Jacobian J_h at the sampled exact solution is invertible for all sufficiently fine uniform meshes, with ||J_h⁻¹||∞→∞≤C independently of h.",
+      "used_by": [
+        "thm-midpoint-collocation-local-branch-and-error-budget"
+      ]
+    },
+    {
+      "id": "thm-midpoint-collocation-local-branch-and-error-budget",
+      "statement": "For C2 data near an exact C3 solution with boundedly invertible continuous linearization, sufficiently fine uniform midpoint systems have a unique zero in a fixed-radius block-maximum ball about the sampled solution and a uniformly bounded inverse Jacobian at that zero. Every candidate in that ball with residual at most ε_alg satisfies ||P_hY−y*||∞≤C(h²+ε_alg), with C independent of h and the candidate.",
+      "used_by": [
+        "cor-local-newton-convergence-for-midpoint-bvp-collocation"
+      ]
+    },
+    {
+      "id": "prop-shooting-residual-derivative",
+      "statement": "For a C1 endpoint map Ψ on an open set and a C1 boundary map near its endpoint graph, R_Ψ(s)=B(s,Ψ(s)) is C1 and DR_Ψ(s)=D_1B(s,Ψ(s))+D_2B(s,Ψ(s))DΨ(s).",
+      "used_by": [
+        "alg-single-shooting-for-nonlinear-bvps",
+        "cor-local-newton-convergence-for-shooting-bvp-residual",
+        "thm-shooting-residual-error-budget",
+        "ex-newton-shooting-fails-from-singular-start"
+      ]
+    },
+    {
+      "id": "thm-shooting-residual-error-budget",
+      "statement": "On the stated radius-r neighborhood of a simple C2 shooting root, with (L_R/2)r≤σ/2 and σ=||DR(s*)⁻¹||op⁻¹, a successful certified evaluator and computed residual at most τ_root imply ||ŝ−s*||₂≤(2/σ)(τ_root+L_Bδ_IVP). Under the additional common-tube and state-Lipschitz hypotheses, trajectory error is at most δ_IVP+exp(L(b−a))||ŝ−s*||₂.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-interval",
+      "used_for": "Interval and endpoint conventions underlying the positive-length BVP interval.",
+      "opened": true
+    },
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "IVP solution domains and one-sided endpoint derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "Fréchet remainder criterion for initial-state flow differentiability.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "C1 regularity conventions for fields, endpoint maps and residuals.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Coordinate Jacobian notation in sensitivity and shooting derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-picard-lindelof-local-existence-and-uniqueness",
+      "used_for": "Local existence and uniqueness for variational matrix IVPs and segment solution identification.",
+      "opened": true
+    },
+    {
+      "id": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+      "used_for": "Maximal solutions in the bounded-coefficient continuation arguments for fundamental matrices.",
+      "opened": true
+    },
+    {
+      "id": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+      "used_for": "Integral equations for flow differences and fundamental matrices on nondegenerate compact intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-gronwall-integral-inequality",
+      "used_for": "Flow sensitivity, linear-IVP bounds, and propagation of initial-state error.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-cantor-metric",
+      "used_for": "Uniform continuity of field derivatives on compact tubes.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-inequality-for-the-vector-valued-integral",
+      "used_for": "Vector and induced matrix integral estimates over increasing time intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-mean-value-inequality",
+      "used_for": "State-segment Lipschitz and derivative-remainder estimates without asserting a vector mean-value equality.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Flow remainders, endpoint residual derivatives, and midpoint Jacobian blocks.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-space-complete",
+      "used_for": "Completeness of finite-dimensional node spaces and closed contraction balls.",
+      "opened": true
+    },
+    {
+      "id": "thm-banach-fixed-point",
+      "used_for": "Existence and uniqueness of the local midpoint collocation branch.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "Coordinatewise midpoint consistency and local nonlinear residual remainder estimates.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "nonlinear-boundary-value-solvers",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "Read the correction algorithm, finite-budget Newton algorithm, Lipschitz-Jacobian remainder lemma and updated-Jacobian convergence theorem. Shooting and collocation preserve square-map, exact-derivative, domain and local-basin hypotheses. Finite budgets and residual-tolerance statuses are not promoted to exact-root or global-convergence guarantees."
+    },
+    {
+      "from": "periodic-orbit-shooting-collocation-and-floquet-error",
+      "to": "nonlinear-boundary-value-solvers",
+      "faithful": true,
+      "note": "Checked the augmented phase-period BVP, common-tube sensitivity uses, continuous inverse construction, multiple-shooting and normalized midpoint definitions, periodic midpoint estimate, and candidate-corrector interfaces. The explicit periodic midpoint theorem assumes its numerical inverse bound; it does not extract an explicit constant from the qualitative supplier. Interval jet enclosures are distinguished from certified differentiable point evaluators."
+    },
+    {
+      "from": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "to": "nonlinear-boundary-value-solvers",
+      "faithful": true,
+      "note": "The page preserves the distinction between derivatives of the numerical computational graph and derivatives of the exact flow. No direct citation of an assigned BVP item was found among its listed items. Its parameter-flow tangent lemma supplies an independent common-tube proof and explicitly handles zero horizon by initial evaluation."
+    },
+    {
+      "from": "direct-transcription-and-numerical-ode-optimal-control",
+      "to": "nonlinear-boundary-value-solvers",
+      "faithful": true,
+      "note": "The indirect shooting procedure constructs a square state-costate BVP on a supplied smooth interior feedback branch, requires a certified differentiable IVP evaluator, and calls single shooting with its original status meaning. It explicitly limits root-tolerance-met to the computed boundary residual and returns an inadmissible-branch status when tube membership cannot be certified."
+    }
+  ]
+}

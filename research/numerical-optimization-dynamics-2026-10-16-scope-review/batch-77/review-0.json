@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "77",
+  "round": 0,
+  "reviewed_items": [
+    "def-parareal-propagator-pair",
+    "alg-parareal-correction-sweeps",
+    "def-linear-all-at-once-time-operator",
+    "lem-parareal-first-k-nodes-are-fine-exact",
+    "thm-parareal-binomial-error-bound",
+    "lem-mgrit-exact-coarse-elimination",
+    "thm-parareal-inexact-sweep-error-ledger",
+    "alg-mgrit-two-level-cycle",
+    "cor-parareal-continuous-target-error-decomposition",
+    "thm-mgrit-contraction-implies-residual-and-error-decay",
+    "alg-mgrit-multilevel-recursive-cycle",
+    "ex-parareal-dissipative-scalar-heat-mode",
+    "ex-parareal-oscillatory-coarse-phase-error",
+    "ex-parareal-nonlinear-tube-escape",
+    "ex-mgrit-scalar-diffusion-two-grid-contraction"
+  ],
+  "reviewed_pages": [
+    "parallel-in-time-parareal-and-mgrit",
+    "parallel-in-time-parareal-and-mgrit-examples"
+  ],
+  "decision": "repair",
+  "reason": "The mathematical claims and supplier uses check out; the Parareal recurrence and exactness match [Gander’s analysis](https://conferences.math.mtu.edu/wp-content/uploads/2022/07/cbms-pint-day-2.pdf), and the MGRIT Schur-complement construction matches [Falgout et al.](https://www.math.mun.ca/smaclachlan/research/mgrit.pdf). Repair is needed for the two-level algorithm’s missing initial-iterate input and underspecified residual-stop branches.",
+  "findings": [
+    {
+      "id": "alg-mgrit-two-level-cycle",
+      "type": "local",
+      "reason": "The Definition starts from a “current iterate” without supplying an initial iterate. Specify it and explicit branches for an initially satisfied residual, post-cycle success, and budget exhaustion. Also distinguish cycle count J from the coarse-interval J, processor count P from interpolation P, and identify C-relaxation call costs."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-mgrit-contraction-implies-residual-and-error-decay",
+      "decision": "accept",
+      "reason": "It uses the fixed-cycle error matrix E; clarifying the initial iterate and stop branches leaves E unchanged."
+    },
+    {
+      "id": "alg-mgrit-multilevel-recursive-cycle",
+      "decision": "accept",
+      "reason": "It uses the same transfer and relaxation interfaces; the requested clarifications do not change them."
+    },
+    {
+      "id": "ex-mgrit-scalar-diffusion-two-grid-contraction",
+      "decision": "accept",
+      "reason": "Its single-cycle matrix and norm calculation remain unchanged."
+    },
+    {
+      "id": "parallel-in-time-parareal-and-mgrit",
+      "decision": "accept",
+      "reason": "The page summary remains accurate."
+    },
+    {
+      "id": "parallel-in-time-parareal-and-mgrit-examples",
+      "decision": "accept",
+      "reason": "The examples summary is unaffected."
+    }
+  ]
+}

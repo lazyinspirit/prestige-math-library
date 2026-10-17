@@ -1,0 +1,21 @@
+--- a/tools/step3-scope.mjs
++++ b/tools/step3-scope.mjs
+@@ -34,6 +34,7 @@
+ import { loadRequiredPageRoutes, requiredPageCarrier } from './step3-owner-required-page-routes.mjs';
+ import { loadDownstreamConsumerRoutes, downstreamConsumerRoute } from './step3-owner-downstream-consumer-routes.mjs';
+ import { sourceIdenticalAcceptanceContinuity } from './step3-owner-source-identical-continuity.mjs';
++import { stabilizedSourceIdenticalAcceptanceContinuity } from './step3-owner-stabilized-source-identical-continuity.mjs';
+ 
+ const argv = process.argv.slice(2);
+ const command = argv[0];
+@@ -1854,7 +1855,9 @@
+               if (decision.verdict === 'accepted_repair' && currentSha !== hashValue(postValue)
+                 && !riskReviewOnlyDelta(target, postValue, currentValue)
+                 && !(ownerEvidence?.source_identical_acceptance_continuities ?? []).some(entry =>
+-                  sourceIdenticalAcceptanceContinuity(ROOT, run, decision, target, postValue, currentValue, entry))) {
++                  sourceIdenticalAcceptanceContinuity(ROOT, run, decision, target, postValue, currentValue, entry))
++                && !(ownerEvidence?.stabilized_source_identical_acceptance_continuities ?? []).some(entry =>
++                  stabilizedSourceIdenticalAcceptanceContinuity(ROOT, run, decision, target, postValue, currentValue, entry))) {
+                 error('decision-not-applied', `[${target.id}] accepted_repair no longer matches the reader result`);
+               }
+               if (decision.verdict === 'reverted_change' && currentSha !== hashValue(preValue)) {

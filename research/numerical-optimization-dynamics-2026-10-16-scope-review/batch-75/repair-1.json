@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "75",
+  "round": 1,
+  "reviewed_items": [
+    "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+    "def-regular-differentiation-index",
+    "thm-index-one-dae-implicit-function-reduction",
+    "lem-index-one-dae-algebraic-residual-to-state-error",
+    "alg-index-one-dae-consistent-initialization",
+    "alg-index-one-dae-backward-euler-stepper",
+    "alg-index-one-dae-bdf2-stepper",
+    "lem-index-one-dae-backward-euler-local-branch",
+    "lem-index-one-dae-bdf2-local-branch",
+    "thm-index-one-dae-finite-budget-solvers-terminate",
+    "thm-index-one-dae-backward-euler-first-order-with-residuals",
+    "thm-index-one-dae-bdf2-second-order-with-residuals",
+    "ex-index-one-circuit-consistent-initialization-and-be-step",
+    "ex-index-two-dae-algebraic-residual-does-not-control-state",
+    "ex-index-three-pendulum-by-differentiation"
+  ],
+  "reviewed_pages": [
+    "differential-algebraic-equations-and-consistent-initialization",
+    "differential-algebraic-equations-and-consistent-initialization-examples"
+  ],
+  "decision": "accept",
+  "reason": "The approved scope and all 15 item identities are preserved. The prerequisite and work-count findings are repaired; no outside consumer repair is required. Source cross-checks support the local index-one reduction and high-index distinctions ([Atkinson et al., Chapter 10](https://homepage.math.uiowa.edu/~atkinson/papers/NAODE_Book.pdf); [Hairer–Wanner, §VI.1](https://isy.gitlab-pages.liu.se/fs/phd-courses/simulation/Papers/HairerWanner_VI_1_clean.pdf)).",
+  "findings": [
+    {
+      "id": "alg-index-one-dae-backward-euler-stepper",
+      "type": "prerequisite",
+      "reason": "Requires the initial pair in its starting tube slice and checks each time-shifted Newton seed against the step slice before calling Newton; an inadmissible seed returns invalid-trial."
+    },
+    {
+      "id": "alg-index-one-dae-bdf2-stepper",
+      "type": "prerequisite",
+      "reason": "Adds separate nonnegative bounds for both starting algebraic residuals, checks both starts, and checks the extrapolated seed against the step slice before Newton; an inadmissible seed returns invalid-trial."
+    },
+    {
+      "id": "thm-index-one-dae-finite-budget-solvers-terminate",
+      "type": "local",
+      "reason": "Includes the preliminary residual checks: backward Euler uses at most 1+S(B+2) evaluations, BDF2 at most 2+S(B+2), and initialization at most B+2."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-index-one-dae-backward-euler-local-branch",
+      "decision": "accept",
+      "reason": "Its IFT claim concerns the coupled root equations and is independent of the finite-budget seed check."
+    },
+    {
+      "id": "lem-index-one-dae-bdf2-local-branch",
+      "decision": "accept",
+      "reason": "Its IFT claim concerns the coupled root equations and is independent of the extrapolated Newton seed."
+    },
+    {
+      "id": "thm-index-one-dae-finite-budget-solvers-terminate",
+      "decision": "accept",
+      "reason": "Repaired in this round; its counts now include the starting residual checks."
+    },
+    {
+      "id": "thm-index-one-dae-backward-euler-first-order-with-residuals",
+      "decision": "accept",
+      "reason": "The estimate is conditional on the stated tube and residual bounds; it does not assert that the solver succeeds."
+    },
+    {
+      "id": "thm-index-one-dae-bdf2-second-order-with-residuals",
+      "decision": "accept",
+      "reason": "The estimate is conditional on both starting residuals and the step residuals; the solver's two supplied bounds can be set to the theorem's common starting bound."
+    },
+    {
+      "id": "differential-algebraic-equations-and-consistent-initialization",
+      "decision": "accept",
+      "reason": "Its procedure summary remains accurate with the explicit slice checks and starting-residual bounds."
+    },
+    {
+      "id": "differential-algebraic-equations-and-consistent-initialization-examples",
+      "decision": "accept",
+      "reason": "The examples use the unchanged DAE equations and do not claim finite-budget solver success."
+    }
+  ]
+}

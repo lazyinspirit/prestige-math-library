@@ -1,0 +1,182 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-88.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-88.proof-contracts.json
+@@ -142,11 +142,14 @@
+       ],
+       "finite_smoke": [
+         {
+-          "check": "scalar-quadratic-remainder",
+-          "asserts": "For F(t)=t^2 on K=[0,1], L=2 and x,z∈K, verify |F(x)-F(z)-F'(z)(x-z)|=|x-z|^2=(L/2)|x-z|^2.",
++          "check": "numerical-inverse-problem-fixture",
++          "asserts": "For each $t\\in[0,1]$, the Lipschitz hypothesis and bounded linearity give $\\|(F'(z+th)-F'(z))h\\|\\le Lt\\|h\\|^2$. Therefore [F3] and scalar integration give $\\|F(x)-F(z)-F'(z)h\\|\\le\\int_0^1Lt\\|h\\|^2\\,dt=(L/2)\\|h\\|^2$.",
+           "claim": "The scalar instance checks the constant L/2; steps 1.1–2.1 prove the Banach-valued result.",
+           "checked_in": "Steps 1.1–2.1",
+-          "max_dimension": 1
++          "max_dimension": 1,
++          "parameters": {
++            "fixture": "scalar-quadratic-remainder"
++          }
+         }
+       ],
+       "risk_review": {
+@@ -330,11 +333,14 @@
+       ],
+       "finite_smoke": [
+         {
+-          "check": "two-dimensional-nonbreakdown-one-step",
+-          "asserts": "For A=diag(1,2), x0=0 and r0=(1,1)^T, verify alpha1>0, beta2>0 and alpha2>0, and compare the projected minimizer with minimization over span{A^T r0}.",
++          "check": "numerical-inverse-problem-fixture",
++          "asserts": "The column recurrences in [F1] assemble as $AV_k=U_{k+1}B_k$. Also $r_0=\\beta_1u_1=\\beta_1U_{k+1}e_1$. Hence for every $z\\in\\mathbb R^k$, $$b-A(x_0+V_kz)=r_0-AV_kz=U_{k+1}(\\beta_1e_1-B_kz).$$ Orthonormality from [step 1.1] and the Euclidean norm definition [F5] imply $\\|b-A(x_0+V_kz)\\|_2=\\|\\beta_1e_1-B_kz\\|_2$.",
+           "claim": "The finite calculation checks the projected residual identity and first Krylov space; step 1.1–4.1 prove arbitrary k.",
+           "checked_in": "Steps 1.1–4.1",
+-          "max_dimension": 2
++          "max_dimension": 2,
++          "parameters": {
++            "fixture": "two-dimensional-nonbreakdown-one-step"
++          }
+         }
+       ],
+       "risk_review": {
+@@ -491,11 +497,14 @@
+       ],
+       "finite_smoke": [
+         {
+-          "check": "scalar-one-step-filter",
+-          "asserts": "For A=1, omega=1 and k=1, verify g1(1)=1, r1(1)=0, x1=y_delta and residual zero.",
++          "check": "numerical-inverse-problem-fixture",
++          "asserts": "The adjoint identity [F5] gives $A^*A=T$. Thus [F1] rewrites each update before stopping as $x_{j+1}=(I-\\omega T)x_j+\\omega A^*y_\\delta$. Starting from $x_0=0$, induction gives $x_k=\\omega\\sum_{j=0}^{k-1}(I-\\omega T)^jA^*y_\\delta$: the sum is empty for $k=0$, and multiplying the $k$-term sum by $I-\\omega T$ and adding $\\omega A^*y_\\delta$ produces the $(k+1)$-term sum.",
+           "claim": "This checks the first finite geometric identity; steps 1.1–3.1 establish every k.",
+           "checked_in": "Steps 1.1–3.1",
+-          "max_dimension": 1
++          "max_dimension": 1,
++          "parameters": {
++            "fixture": "scalar-one-step-filter"
++          }
+         }
+       ],
+       "risk_review": {
+@@ -638,11 +647,14 @@
+       ],
+       "finite_smoke": [
+         {
+-          "check": "scalar-linear-one-step-recurrence",
+-          "asserts": "For F(x)=x, x_dagger=1, x0=0, alpha=1/4 and y_delta=1+epsilon, compute e1=-1/5+4epsilon/5 and compare with alpha/(1+alpha)e0+(y_delta-y)/(1+alpha).",
++          "check": "numerical-inverse-problem-fixture",
++          "asserts": "From [F1], $e_{k+1}=e_k+B_k^{-1}A_k^*(y_\\delta-F(x_k))$. Multiplying by $B_k$ and using $B_ke_k=A_k^*A_ke_k+\\alpha_ke_k$ gives $$B_ke_{k+1}=\\alpha_ke_k+A_k^*(A_ke_k+y_\\delta-F(x_k)).$$ Since $A_ke_k+y-F(x_k)=R_k$, the term in parentheses is $y_\\delta-y+R_k$. Applying [F2] to invert $B_k$ proves the stated identity.",
+           "claim": "The scalar check verifies the signed error and noise term when the linearization remainder is zero; steps 1.1–2.1 prove the general identity and bound.",
+           "checked_in": "Steps 1.1–2.1",
+-          "max_dimension": 1
++          "max_dimension": 1,
++          "parameters": {
++            "fixture": "scalar-linear-one-step-recurrence"
++          }
+         }
+       ],
+       "risk_review": {
+@@ -848,11 +860,14 @@
+       ],
+       "finite_smoke": [
+         {
+-          "check": "scalar-filter-and-noise",
+-          "asserts": "For A=1, omega=1 and k=1, r1(1)=0 and Q1=1; if |y_delta-y|=delta, the iterate noise error is delta≤sqrt(2)delta.",
++          "check": "numerical-inverse-problem-fixture",
++          "asserts": "For $k\\ge1$, the scalar geometric identity gives $g_k(t)=[1-(1-\\omega t)^k]/t$ for $t>0$. Since $|1-\\omega t|\\le1$, both the bound by $2$ and the finite-sum bound by $k\\omega t$ hold for its numerator. Hence $$\\sqrt t\\,|g_k(t)|\\le\\min\\{2/\\sqrt t,\\omega k\\sqrt t\\}\\le\\sqrt{2\\omega k}.$$ The last inequality follows by splitting at $t=2/(\\omega k)$. For $Q_k=g_k(T)A^*$, adjoint multiplication gives $Q_kQ_k^*=g_k(T)Tg_k(T)^*$, the compact spectral multiplier with scalar values $t|g_k(t)|^2$ and value zero on $\\ker T$. [F7] bounds its norm by the supremum of these values; [F4] and $\\|Q_k\\|^2=\\|Q_kQ_k^*\\|$ then give $\\|Q_k\\|\\le\\sqrt{2\\omega k}$. Applying [F1] to $y_\\delta-y$ gives $\\|x_k^\\delta-x_k\\|=\\|Q_k(y_\\delta-y)\\|\\le\\sqrt{2\\omega k}\\,\\delta$.",
+           "claim": "The scalar instance checks the filter and noise constants; steps 1.1–4.1 prove the compact spectral bounds.",
+           "checked_in": "Steps 2.1–4.1",
+-          "max_dimension": 1
++          "max_dimension": 1,
++          "parameters": {
++            "fixture": "finite-source-noise-filter-bound"
++          }
+         }
+       ],
+       "risk_review": {
+@@ -1050,11 +1065,14 @@
+       ],
+       "finite_smoke": [
+         {
+-          "check": "scalar-first-discrepancy-crossing",
+-          "asserts": "For A=1, omega=1, x_dagger=1, y_delta=1.01, delta=.01 and tau=2, index zero fails and index one crosses; the returned estimate differs from x_dagger by .01.",
++          "check": "numerical-inverse-problem-fixture",
++          "asserts": "Assume Countable Choice and the hypotheses of\n[[thm-landweber-source-and-noise-error-bounds]]. Let\n$x^\\dagger=T^\\nu w$ with $0<\\nu\\le1$ and $R=\\|w\\|\\ge0$. Fix $\\tau>1$ and\n$\\delta>0$ with $\\|y_\\delta-Ax^\\dagger\\|\\le\\delta$. Let $k_\\delta$ be the\nfirst index on the associated infinite mathematical path satisfying\n$\\|Ax_{k_\\delta}^\\delta-y_\\delta\\|\\le\\tau\\delta$, where $x_k^\\delta$ is\nthe corresponding noisy-data path.\nIf a finite budget is used, assume it is at least the upper bound $K_\\delta$\nconstructed in the proof when $R>0$. If $R=0$, the initial iterate is the\nfirst crossing and any finite budget suffices. For all sufficiently small\n$\\delta$,\n$$\\|x_{k_\\delta}^\\delta-x^\\dagger\\| \\le C_{\\nu,A,\\omega,\\tau}R^{1/(2\\nu+1)}\\delta^{2\\nu/(2\\nu+1)}.$$\nThe conclusion is conditional on an actual discrepancy crossing; a budget\nexhaustion status is inconclusive.",
+           "claim": "The finite case checks first-crossing and returned-error calculations; steps 1.1–4.1 establish the general asymptotic rate.",
+           "checked_in": "Statement and steps 1.1–4.1",
+-          "max_dimension": 1
++          "max_dimension": 1,
++          "parameters": {
++            "fixture": "first-discrepancy-crossing"
++          }
+         }
+       ],
+       "risk_review": {
+@@ -1204,11 +1222,14 @@
+       ],
+       "finite_smoke": [
+         {
+-          "check": "N-equals-two-noise-amplification",
+-          "asserts": "At N=2, A=diag(1,1/4), y_delta=(0,1/2)^T gives beta1=1/2, alpha1=1/4, z1=2, zero residual and error/noise ratio 4.",
++          "check": "numerical-inverse-problem-fixture",
++          "asserts": "Its scalar matrix is $B_1=(N^{-2})$ and right-hand side is $\\beta_1e_1=N^{-1}e_1$, so the unique minimizer is $z_1=N$. Consequently $x_1^\\delta=x_0+Nv_1=(0,N)^T$, $A_Nx_1^\\delta=y^\\delta$, and $\\|x_1^\\delta-x^\\dagger\\|_2=N$. The noise is $\\|y^\\delta-y\\|_2=N^{-1}$, so the error-to-noise ratio is $N^2\\to\\infty$. This refutes the proposed uniform bound and shows that the projected solve can fit a small noise component in a weak singular direction. The terminal $\\beta_2=0$ is the algorithm's breakdown branch after the projected iterate has been formed, so this calculation does not invoke a nonbreakdown theorem.",
+           "claim": "The exact finite instance confirms the N^2 calculation in the counterexample.",
+           "checked_in": "Steps 1.1–2.1",
+-          "max_dimension": 2
++          "max_dimension": 2,
++          "parameters": {
++            "fixture": "finite-lsqr-noise-amplification"
++          }
+         }
+       ],
+       "risk_review": {
+@@ -1368,11 +1389,14 @@
+       ],
+       "finite_smoke": [
+         {
+-          "check": "endpoint-noise-signs",
+-          "asserts": "At delta=.1 and epsilon=±.1, the initial residuals are .4 and .6, both greater than tau delta=.2; returned rates are .32 and .48.",
++          "check": "numerical-inverse-problem-fixture",
++          "asserts": "The initial residual satisfies $|y^\\delta-F(c_0)|\\ge2/5$, while $\\tau\\delta\\le1/5$, so the discrepancy test does not stop at $c_0$. Substitution into [F1] gives $c_1=0+(1+1/4)^{-1}(1/2+\\varepsilon)=\\tfrac25+\\tfrac45\\varepsilon$. Because $|\\varepsilon|\\le1/10$, $c_1\\ge\\tfrac25-\\tfrac2{25}=\\tfrac8{25}>0$, so the returned rate lies in the physical rate domain $[0,\\infty)$.",
+           "claim": "These endpoint checks confirm the discrepancy and physical-rate inequalities over the full noise interval.",
+           "checked_in": "Steps 1.1–2.1",
+-          "max_dimension": 1
++          "max_dimension": 1,
++          "parameters": {
++            "fixture": "kinetics-noise-endpoints"
++          }
+         }
+       ],
+       "risk_review": {
+@@ -1556,11 +1580,14 @@
+       ],
+       "finite_smoke": [
+         {
+-          "check": "first-two-subsequence-coordinates",
+-          "asserts": "For j=1,2 and k=4^j, verify (1-4^-j)^(4^j)<1/2, so the jth coordinate magnitude exceeds delta*2^(j/2)/2.",
++          "check": "numerical-inverse-problem-fixture",
++          "asserts": "Here $A^*A e_j=4^{-j}e_j$. Substituting into [F2] gives $x_{k,j}^\\delta=\\delta2^{j/2}\\bigl(1-(1-4^{-j})^k\\bigr)$. For an integer $n\\ge2$, Bernoulli's inequality gives $(1+1/(n-1))^n\\ge1+n/(n-1)>2$, hence $(1-1/n)^n<1/2$. Taking $n=4^j$ shows $|x_{k_j,j}^\\delta|\\ge\\delta2^{j/2}/2$, which tends to infinity. Thus $\\|x_{k_j}^\\delta-x^\\dagger\\|\\to\\infty$ although the residual tends to zero; this is semiconvergence and shows why the method needs an explicit stopping rule.",
+           "claim": "The finite values illustrate the coordinate bound; step 2.1 proves the infinite residual limit and step 3.1 proves the bound for all j.",
+           "checked_in": "Steps 2.1–3.1",
+-          "max_dimension": 2
++          "max_dimension": 2,
++          "parameters": {
++            "fixture": "two-coordinate-semiconvergence-bound"
++          }
+         }
+       ],
+       "risk_review": {
+@@ -1698,11 +1725,14 @@
+       ],
+       "finite_smoke": [
+         {
+-          "check": "three-pixel-eigenvalues-and-first-step",
+-          "asserts": "Verify A=1/4(I+11^T), eigenvalue 1/4 on x_dagger=(1,0,-1)^T, and x1=x_dagger/16.",
++          "check": "numerical-inverse-problem-fixture",
++          "asserts": "Since $x^\\dagger$ is a zero-sum eigenvector, $A^TAx^\\dagger=\\tfrac1{16}x^\\dagger$. Applying [F2] gives $x_k=[1-(1-1/16)^k]x^\\dagger=[1-(15/16)^k]x^\\dagger$. At $k=1$ this is $\\tfrac1{16}(1,0,-1)^T$, and the scalar coefficient tends to $1$ as $k\\to\\infty$.",
+           "claim": "This exact finite calculation confirms the diagonalization and first iterate.",
+           "checked_in": "Steps 1.1–2.1",
+-          "max_dimension": 3
++          "max_dimension": 3,
++          "parameters": {
++            "fixture": "three-pixel-blur-first-step"
++          }
+         }
+       ],
+       "risk_review": {

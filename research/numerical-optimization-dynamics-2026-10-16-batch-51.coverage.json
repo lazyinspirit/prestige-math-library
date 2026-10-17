@@ -1,0 +1,319 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": 51,
+  "status": "authored-awaiting-independent-review",
+  "pages": [
+    {
+      "page": "adaptive-quadrature-and-error-indicators",
+      "proof_contracts_file": "research/numerical-optimization-dynamics-2026-10-16-batch-51.proof-contracts.json",
+      "sources": [
+        {
+          "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples",
+          "kind": "textbook",
+          "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf",
+          "locator": "Chapter 7, §7.2, printed pp. 7–8; the three-point and composite Simpson formulas, exactness statement, and fourth-derivative error statement.",
+          "reading_evidence": "A browser PDF parse returned an internal error; a direct full PDF download then returned HTTP 200 and 400,979 bytes. MuPDF text extraction was inspected for the complete Simpson section. Owen states the rule and error result but does not supply its full Peano proof; the local Simpson-kernel supplier proof is the logical route.",
+          "contents": [
+            {
+              "name": "§7.2, three-point Simpson formula (7.5) and composite weights (7.6)",
+              "disposition": "included",
+              "item": "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+              "proof_mapping": "The adaptive carrier uses this exact local Simpson supplier formula; the rule itself is not duplicated."
+            },
+            {
+              "name": "§7.2, cubic exactness and fourth-derivative error statement following (7.6)",
+              "disposition": "deferred",
+              "destination": "composite-quadrature-rules",
+              "reason": "These base Simpson exactness and derivative-error results are assigned to the separate composite-quadrature pair, which supplies the actual in-run carriers consumed by the certified branch."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://artowen.su.domains/mc/Ch-quadrature.pdf",
+              "at": "2026-10-16T01:02:25.475Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-16T01:02:25.495Z",
+            "bytes": 400979,
+            "sha256_16": "fccee8176c06d673",
+            "kind": "pdf",
+            "pages": 36
+          }
+        },
+        {
+          "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.7",
+          "kind": "textbook",
+          "url": "https://fncbook.com/adaptive/",
+          "locator": "§§5.7.1–5.7.3 and Example 5.7.2; Simpson refinement formula, recursive bisection, and observed true error exceeding the requested tolerance.",
+          "reading_evidence": "The complete adaptive-integration page was opened and the derivation, stopping discussion, code path, and tolerance-failure example were inspected. The reported numerical run is not used as a proof; this pair supplies an exact polynomial counterexample.",
+          "contents": [
+            {
+              "name": "§5.7.1, Simpson difference divided by 15 as an estimated fine-rule error (5.7.4)",
+              "disposition": "included",
+              "item": "def-adaptive-simpson-refinement-indicator",
+              "proof_mapping": "The definition records the estimator and the local theorem proves precisely when its asymptotic ratio tends to one."
+            },
+            {
+              "name": "§5.7.2–§5.7.3, recursive adaptive Simpson acceptance and bisection procedure",
+              "disposition": "included",
+              "item": "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+              "proof_mapping": "The local algorithm includes the recursive accept/reject structure and explicitly adds the approved finite depth and panel-call caps."
+            },
+            {
+              "name": "Example 5.7.2, true error larger than requested tolerance",
+              "disposition": "included",
+              "item": "ex-adaptive-simpson-misses-narrow-feature",
+              "proof_mapping": "The local example verifies an exact witness with zero indicator and positive integral, replacing the source’s numerical experiment with a complete proof."
+            },
+            {
+              "name": "§5.7.2, relative-plus-absolute stopping criterion",
+              "disposition": "out-of-scope",
+              "reason": "The approved pair specifies an absolute tolerance allocation and status returns; a relative stopping contract is not claimed or needed for either local procedure."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://fncbook.com/adaptive/",
+              "at": "2026-10-16T01:02:26.067Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-16T01:02:26.067Z",
+            "bytes": 723629,
+            "sha256_16": "9ad2855679b6d517",
+            "kind": "html",
+            "text_chars": 25448
+          }
+        },
+        {
+          "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §5.6",
+          "kind": "textbook",
+          "url": "https://fncbook.com/integration/",
+          "locator": "§§5.6.2–5.6.3, especially equations (5.6.10)–(5.6.18); even-power trapezoid expansion, Simpson extrapolation, Richardson correction, and nested-node reuse.",
+          "reading_evidence": "The full relevant extrapolation and node-doubling subsections were opened and inspected, including the exact error-expansion premise used before the Simpson /15 relation.",
+          "contents": [
+            {
+              "name": "§5.6.2, even-power composite trapezoid expansion (5.6.11)–(5.6.13)",
+              "disposition": "deferred",
+              "destination": "clenshaw-curtis-and-extrapolation-quadrature",
+              "reason": "This is a trapezoid-specific even-power expansion. Batch43 supplies its Romberg treatment under the stated smoothness hypotheses; the adaptive Simpson proof does not transfer it."
+            },
+            {
+              "name": "§5.6.2, Simpson formula and fourth-order expansion from first extrapolation (5.6.14)–(5.6.15)",
+              "disposition": "included",
+              "item": "lem-composite-simpson-asymptotic-error-expansion",
+              "proof_mapping": "The local lemma independently derives the Simpson-specific leading coefficient from the actual Peano kernel supplier."
+            },
+            {
+              "name": "§5.6.2, second Richardson correction and sixth-order expansion (5.6.16)–(5.6.17)",
+              "disposition": "out-of-scope",
+              "reason": "Under the local C4 hypotheses the pair proves only an o(h^4) corrected error; it does not assert the stronger sixth-order expansion or its additional regularity."
+            },
+            {
+              "name": "§5.6.3, reuse of nested trapezoid nodes (5.6.18)",
+              "disposition": "out-of-scope",
+              "reason": "The authored adaptive procedure bounds recursive calls and evaluation requests but makes no caching or operation-cost claim."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://fncbook.com/integration/",
+              "at": "2026-10-16T01:02:26.566Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-16T01:02:26.566Z",
+            "bytes": 1484630,
+            "sha256_16": "81e26b4895d123fa",
+            "kind": "html",
+            "text_chars": 36879
+          }
+        },
+        {
+          "title": "L. Ridgway Scott, Numerical Analysis, 2nd ed., Chapter 13, §13.2",
+          "kind": "textbook",
+          "url": "https://www.math.utah.edu/~feldman/teaching_files/F18/natwo.pdf",
+          "locator": "§13.2, Theorem 13.5 and the Peano representation/L1 error bound, printed pp. 223–224.",
+          "reading_evidence": "The complete 363-page PDF was opened and the Taylor-integral-remainder route, Peano kernel representation, regularity condition, and L1 error estimate in §13.2 were inspected. No external theorem is substituted for the local proof.",
+          "contents": [
+            {
+              "name": "§13.2, Theorem 13.5: Peano representation and L1 quadrature-error bound",
+              "disposition": "inline",
+              "item": "lem-composite-simpson-asymptotic-error-expansion",
+              "proof_mapping": "The local asymptotic proof uses the explicit Simpson kernel body from batch20 and proves the Riemann-sum limit directly; the general Scott theorem is supporting treatment, not a logical premise."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://www.math.utah.edu/~feldman/teaching_files/F18/natwo.pdf",
+              "at": "2026-10-16T01:02:31.327Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-16T01:02:31.327Z",
+            "bytes": 1751336,
+            "sha256_16": "116f2641babdfe16",
+            "kind": "pdf",
+            "pages": 363
+          }
+        },
+        {
+          "title": "R. B. Kearfott, Interval Computations: Introduction, Uses, and Resources",
+          "kind": "survey",
+          "url": "https://interval.louisiana.edu/preprints/survey.pdf",
+          "locator": "§1 elementary interval operations and directed rounding; §3.3 verified quadrature.",
+          "reading_evidence": "The full 23-page PDF was retrieved directly and the definitions of interval range, outward rounding, operation composition, and the Simpson quadrature enclosure discussion in §§1 and 3.3 were inspected.",
+          "contents": [
+            {
+              "name": "§1, interval operation ranges and outward-rounded inclusion",
+              "disposition": "included",
+              "item": "alg-certified-adaptive-simpson",
+              "proof_mapping": "The algorithm specifies finite interval arithmetic and treats invalid or overflow results as failure."
+            },
+            {
+              "name": "§3.3, replacing heuristic quadrature estimates by interval remainder enclosures",
+              "disposition": "included",
+              "item": "thm-certified-adaptive-simpson-enclosure",
+              "proof_mapping": "The local proof uses the exact Simpson derivative-norm remainder and proves the interval enclosure and status claims."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://interval.louisiana.edu/preprints/survey.pdf",
+              "at": "2026-10-16T01:02:33.466Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-16T01:02:33.466Z",
+            "bytes": 241189,
+            "sha256_16": "7dbb06589b763522",
+            "kind": "pdf",
+            "pages": 23
+          }
+        },
+        {
+          "title": "S. M. Rump, Verification methods: Rigorous results using floating-point arithmetic",
+          "kind": "paper",
+          "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf",
+          "locator": "§4 directed roundings; §8 interval range enclosures; §12, Theorem 12.1 and Algorithm 12.2 for verified Simpson quadrature.",
+          "reading_evidence": "The complete 163-page Acta Numerica PDF was opened. The directed-rounding inequalities in §4, range-inclusion discussion in §8, and Simpson remainder/Taylor-enclosure algorithm in §12 were inspected.",
+          "contents": [
+            {
+              "name": "§4, directed downward/upward rounding encloses exact operations including overflow",
+              "disposition": "included",
+              "item": "alg-certified-adaptive-simpson",
+              "proof_mapping": "The local algorithm uses the repo’s explicit directed-rounding supplier and fails closed on non-finite statuses."
+            },
+            {
+              "name": "§8, interval evaluation encloses the range of an expression",
+              "disposition": "included",
+              "item": "thm-certified-adaptive-simpson-enclosure",
+              "proof_mapping": "The proof invokes the actual in-run DAG soundness theorem for all finite interval operations."
+            },
+            {
+              "name": "§12, Theorem 12.1 and Algorithm 12.2, Simpson derivative remainder with interval Taylor data",
+              "disposition": "included",
+              "item": "thm-certified-adaptive-simpson-enclosure",
+              "proof_mapping": "The local proof uses the in-run composite Simpson error theorem at n=2, then adds sound value intervals and the outward-rounded per-panel remainder."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://www.tuhh.de/ti3/rump/intlab/ActaNumerica2010.pdf",
+              "at": "2026-10-16T01:02:38.971Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-16T01:02:38.971Z",
+            "bytes": 3104170,
+            "sha256_16": "6d4d2eaa2dd40389",
+            "kind": "pdf",
+            "pages": 163
+          }
+        }
+      ]
+    }
+  ],
+  "history": [
+    "The batch inventory was fixed in the scaffold manifest before item carriers. The batch-level dependency artifact input hash is 1abea6443c3532c0d0dd6716027d13701671f13ed52e434cfb52b7a38390868a; batch 51 is level 4 with prerequisite batches 14, 20, and 43.",
+    "The Owen browser PDF parser initially returned an internal error; a direct full-PDF download succeeded (HTTP 200, 400,979 bytes), and MuPDF text extraction was used to inspect the complete relevant Simpson section. No proof is attributed to its statement of the Simpson error formula.",
+    "The independent FNC adaptive section and integration extrapolation section, Scott textbook Peano-kernel treatment, Kearfott interval survey, and Rump Acta Numerica treatment were inspected at the exact ranges recorded above.",
+    "No failed or unavailable source is marked dropped. The owner amendment’s Davis–Rabinowitz and Moore–Kearfott–Cloud references were not represented as read; accessible full-text Scott, Kearfott, and Rump sources cover the same local proof routes.",
+    "Proof review added the direct Simpson-rule supplier to the asymptotic expansion and both finite Simpson examples, and added integral additivity and the constant-integral bound to the narrow-feature example. The item-level labels remain 1,2,3,2,3,5,6,3,4,3. The old design summaries and current plan requirements were reconciled in the batch notes; no shared plan or run-wide dependency artifact was changed.",
+    "A final proof pass also made the Richardson absolute-value limit explicit through the reverse triangle inequality; the dependency and proof contract cite the exact published corollary.",
+    "The dispatch names scheduling input 6dfd0c45f2a8223c7d6f772198513d38987ad90fa865c52f24f2241dd5c6d510, matching the shared batch-dependency artifact before these assigned manifest corrections; the earlier 1abea6443c3532c0d0dd6716027d13701671f13ed52e434cfb52b7a38390868a value in prior coverage history is preserved as historical evidence. Because current manifest bytes changed, the owner must recompute the shared input after all authors drain.",
+    "After the assigned manifest corrections, read-only run batch-level recomputation returns batch 51 level 4 / requires 14,20,43 and digest 7e6c3eaa9a589fe5215cdbd5e0e05d20e7896b165568831410efff7b987dd71b. The shared artifact check fails only because the recorded dispatch input digest 6dfd0c45f2a8223c7d6f772198513d38987ad90fa865c52f24f2241dd5c6d510 is stale; the owner-controlled file was not rewritten.",
+    "The final read-only batch-level command currently fails before computing a digest because items/alg-adam-update.md (batch 73, not a batch-51 supplier) has an unquoted colon in its frontmatter source title at line 18. The prior successful current-manifest recomputation digest 7e6c3eaa9a589fe5215cdbd5e0e05d20e7896b165568831410efff7b987dd71b is preserved as the earlier observation; no batch-73 or shared artifact file was edited."
+  ],
+  "open_obligations": [
+    {
+      "item": "adaptive-quadrature-and-error-indicators",
+      "supplier": "clenshaw-curtis-and-extrapolation-quadrature",
+      "issue": "The current all-nonempty-manifest dependencyLevels recomputation finds four stored batch-43 item levels stale: thm-na-clenshaw-curtis-interpolation-coefficients 4 vs 5, def-na-clenshaw-curtis-quadrature 5 vs 6, thm-na-clenshaw-curtis-exactness-and-near-best-error 6 vs 7, and ex-na-clenshaw-curtis-integrates-quadratics 6 vs 7. The page-level edge is preserved; no item-level logical premise is imported from those carriers. Owner reconciliation is required for the run-wide manifest check.",
+      "affected_claims": [
+        "page-level prerequisite closure for the A page; no local item proof depends on these four items"
+      ]
+    }
+  ],
+  "authoring": {
+    "inventory": [
+      "def-adaptive-simpson-refinement-indicator",
+      "lem-composite-simpson-asymptotic-error-expansion",
+      "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+      "thm-simpson-richardson-error-estimator-asymptotic",
+      "thm-adaptive-simpson-cap-termination-and-indicator-budget",
+      "ex-adaptive-simpson-misses-narrow-feature",
+      "ex-adaptive-simpson-cap-reached",
+      "ex-adaptive-simpson-leading-error-cancellation",
+      "alg-certified-adaptive-simpson",
+      "thm-certified-adaptive-simpson-enclosure"
+    ],
+    "dependency_levels": {
+      "0": [],
+      "1": [
+        "def-adaptive-simpson-refinement-indicator"
+      ],
+      "2": [
+        "lem-composite-simpson-asymptotic-error-expansion",
+        "alg-adaptive-simpson-with-finite-depth-and-panel-cap"
+      ],
+      "3": [
+        "thm-simpson-richardson-error-estimator-asymptotic",
+        "thm-adaptive-simpson-cap-termination-and-indicator-budget",
+        "ex-adaptive-simpson-misses-narrow-feature",
+        "ex-adaptive-simpson-cap-reached"
+      ],
+      "4": [
+        "ex-adaptive-simpson-leading-error-cancellation"
+      ],
+      "5": [
+        "alg-certified-adaptive-simpson"
+      ],
+      "6": [
+        "thm-certified-adaptive-simpson-enclosure"
+      ]
+    },
+    "axioms": "No choice principle is used. The certified procedure is conditional on sound point-value and fourth-derivative enclosure oracles."
+  },
+  "owner_planning_reconciliation": {
+    "controlling_design": "research/plan-numerical-linear-track.md §NA-14 plus the incorporated NA-14 appendix in research/numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md. The owner direction routes the numerical-linear-algebra-and-approximation category to this plan; the older numerical-analysis-track excerpt is provenance, not controlling text.",
+    "conflicts": [
+      {
+        "issue": "The older plan-numerical-analysis-track NA-14 summary lists only NA-12 in Requires and says a certificate is optional/outside promised scope until its premises are supplied. The controlling linear plan’s later namespace-normalized interface table lists NA-12, QUAD-EXTRAP, and VAL-INTERVAL; plan-spec.json and the generated batch manifest have the same three page requirements. The controlling page also preserves the owner-approved certified-integration amendment.",
+        "resolution": "Retained all three page requirements. Implemented the approved certificate branch using the stated C4 regularity, caller-supplied sound point-value and fourth-derivative enclosures, the actual Simpson remainder theorem, and outward-rounded interval operations. The /15 estimator remains non-certified and has exact failure/cancellation examples."
+      },
+      {
+        "issue": "The dependency-overrides.json file has no NA-14 override entry; the applicable corrected interface is the later NA-14 normalized table in the controlling linear plan.",
+        "resolution": "The dependency-overrides.json file has no NA-14 entry, so it remains unchanged. The assigned item deps are complete and the page requires array is the original three-page array. An earlier read-only recomputation after these manifest edits returned batch 51 level 4 / prerequisites 14,20,43 and input hash 7e6c3eaa9a589fe5215cdbd5e0e05d20e7896b165568831410efff7b987dd71b. The latest recomputation/check is blocked while parsing the unrelated batch-73 carrier items/alg-adam-update.md:18, whose unquoted source-title colon makes YAML invalid. The shared artifact has not been rewritten; the owner must repair that separate carrier and then recompute the current run-wide input after writers drain."
+      }
+    ],
+    "no_external_published_supplier_claim": "The only logical premises are actual batch20 Simpson items, actual batch14 interval items, and published analysis/integration suppliers. The batch43 page requirement is retained as page-level context; its trapezoid-specific Romberg theorem is not misapplied to Simpson."
+  }
+}

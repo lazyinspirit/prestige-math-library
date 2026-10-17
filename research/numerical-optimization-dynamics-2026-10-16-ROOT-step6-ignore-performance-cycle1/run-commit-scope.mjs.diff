@@ -1,0 +1,72 @@
+--- tools/run-commit-scope.mjs
++++ tools/run-commit-scope.mjs
+@@ -120,8 +120,57 @@
+   if (index !== rows.length || before !== after) throw Error('closeout: index changed while reading preservation state');
+   if (rows.some(row => row.stage !== 0)) throw Error('closeout: unresolved index conflicts; preserve them and resolve before closeout');
+   if (rows.some(row => row.mode === '160000')) throw Error('closeout: submodule index preservation is not supported');
++  Object.defineProperty(rows, 'indexSnapshot', { value: { path, sha256: after } });
+   return rows;
+ }
++// Preserve check-ignore's tracked-path exclusion without its per-stdin-path
++// full index scan. Unusual pathspec/case/sparse/index states retain native Git.
++export function ignoredOwnedPaths(root, paths, index) {
++  const original = () => nul(git(root, ['check-ignore', '-z', '--stdin'], {
++    input: pathsInput(paths), optional: true, literalPathspecs: false,
++  }) || Buffer.alloc(0));
++  const literal = path => {
++    try { safePath(path); return true; } catch { return false; }
++  };
++  if (!Array.isArray(index) || !index.indexSnapshot || !paths.length
++    || paths.some(path => !literal(path))
++    || ['GIT_LITERAL_PATHSPECS', 'GIT_GLOB_PATHSPECS', 'GIT_NOGLOB_PATHSPECS', 'GIT_ICASE_PATHSPECS']
++      .some(key => process.env[key] !== undefined)
++    || index.some(row => row.stage !== 0 || row.flags !== '0'
++      || !['100644', '100755', '120000'].includes(row.mode))) return original();
++  const config = () => ['core.ignorecase', 'core.sparsecheckout', 'core.sparsecheckoutcone', 'index.sparse']
++    .map(key => textGit(root, ['config', '--type=bool', '--get', key], { optional: true }));
++  const beforeConfig = config();
++  if (beforeConfig.some(value => value !== null && value !== 'false')) return original();
++  const snapshot = index.indexSnapshot;
++  const currentIndex = () => {
++    const path = gitPath(root, 'index');
++    return { path, sha256: existsSync(path) ? sha256(readFileSync(path)) : null };
++  };
++  const requireCurrent = () => {
++    if (JSON.stringify(currentIndex()) !== JSON.stringify(snapshot)
++      || JSON.stringify(config()) !== JSON.stringify(beforeConfig))
++      throw Error('closeout: index or ignore matching configuration changed during ignore check');
++  };
++  requireCurrent();
++  const names = index.map(row => row.path).sort();
++  const lowerBound = value => {
++    let lo = 0, hi = names.length;
++    while (lo < hi) { const mid = (lo + hi) >>> 1; if (names[mid] < value) lo = mid + 1; else hi = mid; }
++    return lo;
++  };
++  const tracked = path => names[lowerBound(path)] === path
++    || names[lowerBound(path + '/')]?.startsWith(path + '/') === true;
++  // Git also excludes a literal parent path when an indexed descendant matches.
++  // Every other exact original path still receives Git's real ignore evaluation.
++  const remaining = paths.filter(path => !tracked(path));
++  const ignored = remaining.length ? nul(git(root, ['check-ignore', '--no-index', '-z', '--stdin'], {
++    input: pathsInput(remaining), optional: true, literalPathspecs: false,
++  }) || Buffer.alloc(0)) : [];
++  requireCurrent();
++  return ignored;
++}
++
+ export function fileState(root, path) {
+   const full = join(root, path);
+   if (!existsSync(full) && !lstatExists(full)) return { path, kind: 'missing' };
+@@ -538,10 +587,7 @@
+     if (!owns(path)) throw Error('closeout: recorded path no longer belongs to this run: ' + path);
+     regularPath(root, path, pending(path) || !required.has(path) || allowMissingReceipt && path === finalReceipt);
+   }
+-  // check-ignore reads exact filenames and rejects literal pathspec magic.
+-  const ignored = nul(git(root, ['check-ignore', '-z', '--stdin'], {
+-    input: pathsInput(paths), optional: true, literalPathspecs: false,
+-  }) || Buffer.alloc(0));
++  const ignored = ignoredOwnedPaths(root, paths, index);
+   if (ignored.length) throw Error('closeout: required/authorized artifact is ignored by Git: ' + ignored[0]);
+   return { policyPath, policySha256: sha256(policyText), paths, owns, inventory, reviewedHook, fragments,
+     contextSha256: sha256(JSON.stringify({ ...(physics ? { domain: 'physics' } : {}), selected, required: [...required].sort(),

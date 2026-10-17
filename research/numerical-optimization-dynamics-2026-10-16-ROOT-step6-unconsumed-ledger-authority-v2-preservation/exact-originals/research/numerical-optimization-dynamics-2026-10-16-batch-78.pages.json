@@ -1,0 +1,284 @@
+[
+  {
+    "order": 2440,
+    "id": "positive-conservative-production-destruction-integrators",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Positive conservative production destruction integrators",
+    "companion": "positive-conservative-production-destruction-integrators-examples",
+    "requires": [
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "finite-precision-direct-factorizations",
+      "one-step-ode-consistency-and-local-error",
+      "global-ode-and-density-error",
+      "runge-kutta-methods-and-order",
+      "finite-generator-master-equations-and-uniformization",
+      "stability-regions-and-stiff-equations"
+    ],
+    "items": [
+      {
+        "id": "def-finite-conservative-production-destruction-system",
+        "kind": "definition",
+        "title": "Finite conservative production destruction systems",
+        "deps": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-strict-column-dominance-implies-nonnegative-inverse",
+        "kind": "lemma",
+        "title": "Strict column dominance gives an entrywise nonnegative inverse",
+        "deps": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-modified-patankar-euler",
+        "kind": "algorithm",
+        "title": "Modified Patankar Euler for conservative transfer systems",
+        "deps": [
+          "def-finite-conservative-production-destruction-system",
+          "lem-strict-column-dominance-implies-nonnegative-inverse"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-source-factored-production-destruction-rates",
+        "kind": "definition",
+        "title": "Source-factored transfer rates for zero compartments",
+        "deps": [
+          "def-finite-conservative-production-destruction-system",
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-zero-compatible-modified-patankar-euler",
+        "kind": "algorithm",
+        "title": "Zero-compatible modified Patankar Euler in rate-factor form",
+        "deps": [
+          "def-source-factored-production-destruction-rates",
+          "lem-strict-column-dominance-implies-nonnegative-inverse"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-mprk22-1",
+        "kind": "algorithm",
+        "title": "The positive-interior MPRK22(1) step",
+        "deps": [
+          "alg-modified-patankar-euler",
+          "def-finite-conservative-production-destruction-system",
+          "lem-strict-column-dominance-implies-nonnegative-inverse"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-modified-patankar-euler-positive-conservative",
+        "kind": "theorem",
+        "title": "Modified Patankar Euler preserves positivity and total mass",
+        "deps": [
+          "alg-modified-patankar-euler",
+          "def-finite-conservative-production-destruction-system",
+          "lem-strict-column-dominance-implies-nonnegative-inverse"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-modified-patankar-euler-positive-tube-local-error-and-stability",
+        "kind": "lemma",
+        "title": "Modified Patankar Euler has a uniform first-order defect and one-step bound on positive tubes",
+        "deps": [
+          "alg-modified-patankar-euler",
+          "def-finite-conservative-production-destruction-system",
+          "lem-strict-column-dominance-implies-nonnegative-inverse",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-one-step-ode-method-local-defect-order-and-stability",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "def-euclidean-inner-product",
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-mean-value-inequality-for-total-derivatives",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $F$ be the vector field of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] on a bounded open convex set $U\\subset\\Omega\\cap\\mathbb R_{>0}^m$ with $\\overline U\\subset\\mathbb R_{>0}^m$. Suppose there is an open set $V$ with $\\overline U\\subset V\\subset\\Omega\\cap\\mathbb R_{>0}^m$ on which the transfer rates are multivariable $C^2$ and their derivatives through order two are bounded. For $y\\in U$, let $\\Phi_h(y)$ be [[alg-modified-patankar-euler]] with the standard denominators $\\sigma_i=y_i$. Then there are constants $C,L,h_0>0$ such that, for $0<h\\le h_0$:\n\n1. for every exact solution $y(t)$ whose segment and the method states under consideration remain in a compact subset of $U$, the exact-start local defect satisfies $\\|\\Phi_h(y(t))-y(t+h)\\|_2\\le Ch^2$; and\n2. for all $u,v\\in U$, $\\|\\Phi_h(u)-\\Phi_h(v)\\|_2\\le(1+Lh)\\|u-v\\|_2$.\n\nThe defect is the method output minus the exact next state and the second inequality is one-step Lipschitz stability in the convention of [[def-one-step-ode-method-local-defect-order-and-stability]]. This result is restricted to a compact positive tube; it does not define the standard ratio formula at zero compartments.\n\n"
+      },
+      {
+        "id": "thm-zero-compatible-modified-patankar-euler-admissibility",
+        "kind": "theorem",
+        "title": "The factorized zero-state step is well-defined, nonnegative, conservative, and locally first order",
+        "deps": [
+          "alg-zero-compatible-modified-patankar-euler",
+          "def-source-factored-production-destruction-rates",
+          "def-finite-conservative-production-destruction-system",
+          "lem-strict-column-dominance-implies-nonnegative-inverse",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-one-step-ode-method-local-defect-order-and-stability",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-mprk22-1-positive-conservative",
+        "kind": "theorem",
+        "title": "MPRK22(1) preserves positivity and total mass on positive inputs",
+        "deps": [
+          "alg-mprk22-1",
+          "def-finite-conservative-production-destruction-system",
+          "lem-strict-column-dominance-implies-nonnegative-inverse"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-mprk22-1-positive-tube-local-error-and-stability",
+        "kind": "lemma",
+        "title": "MPRK22(1) has a uniform second-order defect and one-step bound on positive tubes",
+        "deps": [
+          "alg-mprk22-1",
+          "alg-modified-patankar-euler",
+          "def-finite-conservative-production-destruction-system",
+          "lem-strict-column-dominance-implies-nonnegative-inverse",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-one-step-ode-method-local-defect-order-and-stability",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "def-euclidean-inner-product",
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-mean-value-inequality-for-total-derivatives",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "cor-taylor-lagrange-and-cauchy-remainders"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $F$ be the vector field of a finite conservative PDS [[def-finite-conservative-production-destruction-system]] on a bounded open convex set $U\\subset\\Omega\\cap\\mathbb R_{>0}^m$ with $\\overline U\\subset\\mathbb R_{>0}^m$. Assume there is an open set $V$ with $\\overline U\\subset V\\subset\\Omega\\cap\\mathbb R_{>0}^m$ on which the transfer rates are multivariable $C^2$, with derivatives through order two bounded there. Let $\\Psi_h(y)$ be [[alg-mprk22-1]]. For sufficiently small $h>0$, there are constants $C,L,h_0>0$ such that:\n\n1. for every exact solution segment in a compact subset of $U$, the exact-start defect satisfies $\\|\\Psi_h(y(t))-y(t+h)\\|_2\\le Ch^3$; and\n2. for all $u,v\\in U$, $\\|\\Psi_h(u)-\\Psi_h(v)\\|_2\\le(1+Lh)\\|u-v\\|_2$.\n\nThe local order-two estimate requires the positive lower bound on the stage denominators and the stated smoothness. Positivity and conservation for every $h>0$ are separate preservation properties and are not used to claim the local error order.\n\n"
+      },
+      {
+        "id": "thm-modified-patankar-euler-global-first-order-error",
+        "kind": "theorem",
+        "title": "Modified Patankar Euler converges globally with first-order error on a positive tube",
+        "deps": [
+          "alg-modified-patankar-euler",
+          "def-finite-conservative-production-destruction-system",
+          "lem-modified-patankar-euler-positive-tube-local-error-and-stability",
+          "def-one-step-ode-method-local-defect-order-and-stability",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-euclidean-inner-product",
+          "thm-global-error-from-one-step-defect-and-stability"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-patankar-inexact-solve-residual-ledger",
+        "kind": "theorem",
+        "title": "Certified residuals bound mass drift and the exact-solve positivity margin",
+        "deps": [
+          "alg-modified-patankar-euler",
+          "alg-mprk22-1",
+          "def-finite-conservative-production-destruction-system",
+          "lem-strict-column-dominance-implies-nonnegative-inverse",
+          "lem-rounded-linear-and-normal-residual-certificates",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-mprk22-1-global-second-order-error",
+        "kind": "theorem",
+        "title": "MPRK22(1) has global second-order error on a compact positive tube",
+        "deps": [
+          "alg-mprk22-1",
+          "thm-mprk22-1-positive-conservative",
+          "lem-mprk22-1-positive-tube-local-error-and-stability",
+          "def-one-step-ode-method-local-defect-order-and-stability",
+          "def-finite-conservative-production-destruction-system",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-euclidean-inner-product",
+          "thm-global-error-from-one-step-defect-and-stability"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $T>0$, $N\\ge1$, $h=T/N$, and $t_n=nh$. Use sets $U,V$ satisfying the domain and regularity hypotheses of [[lem-mprk22-1-positive-tube-local-error-and-stability]], and let $K\\subset U$ be a compact positive tube. Let $y:[0,T]\\to U$ solve the finite conservative PDS [[def-finite-conservative-production-destruction-system]], set $y_0=y(0)$, and compute each step with [[alg-mprk22-1]]. Suppose the exact solution, all numerical states, and every MPRK22(1) stage remain in the common compact tube $K$, and $h\\le h_0$ for the local constants in that lemma. Then a constant $C_T$, independent of $N$, satisfies\n\n$$\\max_{0\\le n\\le N}\\|y_n-y(t_n)\\|_2\\le C_T h^2.$$\n\nThis is a fixed-time, compact-tube convergence result; it does not assert a uniform error constant as the tube approaches a zero denominator or as stiffness parameters vary.\n\n"
+      }
+    ]
+  },
+  {
+    "order": 2441,
+    "id": "positive-conservative-production-destruction-integrators-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Positive conservative production destruction integrators — Examples",
+    "companion": "positive-conservative-production-destruction-integrators",
+    "requires": [
+      "positive-conservative-production-destruction-integrators"
+    ],
+    "items": [
+      {
+        "id": "ex-two-compartment-stiff-reversible-transfer",
+        "kind": "example",
+        "title": "A stiff reversible two-compartment transfer",
+        "deps": [
+          "def-finite-conservative-production-destruction-system",
+          "alg-modified-patankar-euler",
+          "thm-modified-patankar-euler-positive-conservative",
+          "def-xd-finite-column-generator"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-three-species-weighted-stoichiometric-conservation",
+        "kind": "example",
+        "title": "Three species with weighted number-to-mass conservation",
+        "deps": [
+          "def-finite-conservative-production-destruction-system",
+          "def-source-factored-production-destruction-rates",
+          "alg-zero-compatible-modified-patankar-euler",
+          "thm-zero-compatible-modified-patankar-euler-admissibility"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-zero-denominator-corner-and-factorized-extension",
+        "kind": "example",
+        "title": "A zero compartment makes the standard ratio undefined",
+        "deps": [
+          "def-finite-conservative-production-destruction-system",
+          "alg-modified-patankar-euler",
+          "def-source-factored-production-destruction-rates",
+          "alg-zero-compatible-modified-patankar-euler",
+          "thm-zero-compatible-modified-patankar-euler-admissibility"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-small-residual-does-not-certify-positivity",
+        "kind": "counterexample",
+        "title": "An arbitrarily small residual does not certify the candidate's nonnegativity",
+        "deps": [
+          "def-finite-conservative-production-destruction-system",
+          "alg-modified-patankar-euler",
+          "thm-patankar-inexact-solve-residual-ledger"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "cex-forward-euler-negative-concentration-despite-stability",
+        "kind": "counterexample",
+        "title": "A stable forward Euler step can still make a concentration negative",
+        "deps": [
+          "def-finite-conservative-production-destruction-system",
+          "prop-euler-midpoint-rk4-orders-and-stability-functions",
+          "thm-explicit-euler-absolute-stability-disk"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  }
+]

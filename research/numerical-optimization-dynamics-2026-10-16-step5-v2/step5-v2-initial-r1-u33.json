@@ -1,0 +1,312 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "33",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-implicit-q-uniqueness-for-unreduced-hessenberg",
+      "model": "gpt-6-luna",
+      "context_sha256": "38b5511baf50b730545607ba759e5f71bde91e3ab2ba580a8baabf002b33f8be",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The statement already states uniqueness only up to diagonal column phases, and its proof is valid: GW=WF, We1=e1, nonzero f(j+1,j) gives the support induction, and upper triangular unitarity forces W diagonal. The title incorrectly implied exact uniqueness; adding “up to column phases” repairs that nonfatal title defect without changing the Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-real-conjugate-pair-schur-block",
+      "model": "gpt-6-luna",
+      "context_sha256": "77586d3cf03f02792f43b3df8107ed011d9c1bb25b7a35693106274e91ff6b51",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 incorrectly describes the real 2x2 blocks as nonreal and omits the full Schur-pair conditions. Verification 1.1 already checks Q^TQ=I, QTQ^T=T, the single real block, and discriminant -4b^2<0, so the mathematical conclusion is valid. Replaced F1 with the exact real-block and factorization conditions from the supplier Definition; no change to the example or verification is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-finite-budget-francis-schur-reduction",
+      "model": "gpt-6-luna",
+      "context_sha256": "869bb623b7e2adfca853fa10beff83a9b7856e9985c05f2563e0323d070242aa",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The full Hessenberg test is not an invariant of each initialization iteration: for A with rows (0,0,0,0),(1,0,0,0),(0,1,0,0),(0,1,1,0), the first exactly representable reflector is diag(1,-1,1,1) and leaves h42=-1, while correctly clearing column 1. The old procedure therefore reports an invariant failure on a valid unfinished reduction. Moved the full check after the entire initialization loop, including the empty-loop case; no arithmetic, certificate or status contract is weakened.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-complex-scaled-householder-step-termination-and-status",
+      "model": "gpt-6-luna",
+      "context_sha256": "3b31adb1e0b65fcf2cf94e0a6b968de231338c8e8e352938c334dbaaf6298355",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The title implies every terminating call has a unitary representative, whereas admitted nonzero calls can fail during norm/phase/update arithmetic before a nonzero stored vector is available. The Statement correctly distinguishes success, identity, breakdown and range-failure and proves unitarity only on success. Qualified the title by “on success”; the sound statement and proof are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-implicit-q-uniqueness-for-unreduced-hessenberg",
+      "disposition": "repaired",
+      "post_sha256": "cd819df5d4c903c043a3e251992092a98aad3d464756c38dad4513bf34570bc4",
+      "review_context_sha256": "1eb5d25167ee834aa74951d1155fb8c0e121cba16e3c0634366c760614496208",
+      "reason": "Title qualified by column phases. Checked all three proof steps, the n=1 boundary and real signs, the exact Hessenberg/unitary supplier Definitions, owning contract, and home-page double-shift interface. The statement and proof are unchanged; no consumer propagation is triggered. This is a repair review, not independent acceptance of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-real-conjugate-pair-schur-block",
+      "disposition": "repaired",
+      "post_sha256": "4d8bdc4e529c8b01b46a62487675c8ab8e77f3652bd76179e64ad157ecc103ea",
+      "review_context_sha256": "b9fa9221f730e3b4d25832010b4549c2dfe93c3418c0860f9f64d63940244d18",
+      "reason": "Corrected F1 to require real 2x2 blocks of negative discriminant and A=QTQ^T with block upper triangular T. Directly verified determinant (lambda-a)^2+b^2, discriminant -4b^2<0, and roots a±ib, under real a and b>0. Read the full Schur Definition, polynomial supplier proof, contract and example page. No Statement/Definition changed and no downstream propagation is triggered.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-finite-budget-francis-schur-reduction",
+      "disposition": "repaired",
+      "post_sha256": "ef88e312f5c2f1c53058dab22eacbdc97ba8a7d534cbb3854d166166da95b14c",
+      "review_context_sha256": "a51357c9e41030aa0abb0bffa7900b761c5daa563fa743f7ad53db0af64761eb",
+      "reason": "Moved the global zero-pattern test to the end of Hessenberg initialization. At stage k the explicit overwrite clears column k below k+1; earlier active-row column tails are zero, and right updates touch only columns greater than k. Thus all required zeros exist after the final stage. Checked n=1,2, identity targets, failures, finite bounds, exact stored factors, separate deflation and conditional certificates against actual prerequisite interfaces and owning contract/page. All seven direct item consumers remain mathematically sound; exact uses recorded below. No independent acceptance of this repair is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-complex-scaled-householder-step-termination-and-status",
+      "disposition": "repaired",
+      "post_sha256": "aa920de89610713039aec4d3d0214432e6d4c3a152d7d38eacc15c60f26d04d2",
+      "review_context_sha256": "f943e904bcc3702575ddb08057fd96ef188158b4838367800bc55003020f1dbf",
+      "reason": "Qualified the title by “on success”. Checked finite input-dimensional loops and first-failure returns against the full canonical procedure; v=0 contradicts positive successful stored norm, and K=vv*/(v*v) is Hermitian idempotent, so P is unitary. Identity returns copy B with zero error and avoid P(0), including m=1 and q=0. Read the complete local-error supplier and retain its hypotheses for bound invocation. Statement and proof unchanged; no propagation or independent acceptance claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-bartels-stewart-sylvester-equation",
+    "alg-schur-parlett-matrix-function",
+    "alg-principal-matrix-logarithm-and-square-root",
+    "ex-rotation-logarithm-branch-cut",
+    "thm-bartels-stewart-dense-operation-count",
+    "thm-computed-francis-schur-backward-error",
+    "thm-finite-budget-francis-schur-termination-and-status"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-implicit-q-uniqueness-for-unreduced-hessenberg",
+      "severity": "nonfatal",
+      "locus": "title",
+      "finding": "The statement already states uniqueness only up to diagonal column phases, and its proof is valid: GW=WF, We1=e1, nonzero f(j+1,j) gives the support induction, and upper triangular unitarity forces W diagonal. The title incorrectly implied exact uniqueness; adding “up to column phases” repairs that nonfatal title defect without changing the Statement.",
+      "repair": "Title qualified by column phases. Checked all three proof steps, the n=1 boundary and real signs, the exact Hessenberg/unitary supplier Definitions, owning contract, and home-page double-shift interface. The statement and proof are unchanged; no consumer propagation is triggered. This is a repair review, not independent acceptance of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-real-conjugate-pair-schur-block",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "finding": "F1 incorrectly describes the real 2x2 blocks as nonreal and omits the full Schur-pair conditions. Verification 1.1 already checks Q^TQ=I, QTQ^T=T, the single real block, and discriminant -4b^2<0, so the mathematical conclusion is valid. Replaced F1 with the exact real-block and factorization conditions from the supplier Definition; no change to the example or verification is needed.",
+      "repair": "Corrected F1 to require real 2x2 blocks of negative discriminant and A=QTQ^T with block upper triangular T. Directly verified determinant (lambda-a)^2+b^2, discriminant -4b^2<0, and roots a±ib, under real a and b>0. Read the full Schur Definition, polynomial supplier proof, contract and example page. No Statement/Definition changed and no downstream propagation is triggered.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-finite-budget-francis-schur-reduction",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "definition",
+      "finding": "The full Hessenberg test is not an invariant of each initialization iteration: for A with rows (0,0,0,0),(1,0,0,0),(0,1,0,0),(0,1,1,0), the first exactly representable reflector is diag(1,-1,1,1) and leaves h42=-1, while correctly clearing column 1. The old procedure therefore reports an invariant failure on a valid unfinished reduction. Moved the full check after the entire initialization loop, including the empty-loop case; no arithmetic, certificate or status contract is weakened.",
+      "repair": "Moved the global zero-pattern test to the end of Hessenberg initialization. At stage k the explicit overwrite clears column k below k+1; earlier active-row column tails are zero, and right updates touch only columns greater than k. Thus all required zeros exist after the final stage. Checked n=1,2, identity targets, failures, finite bounds, exact stored factors, separate deflation and conditional certificates against actual prerequisite interfaces and owning contract/page. All seven direct item consumers remain mathematically sound; exact uses recorded below. No independent acceptance of this repair is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-complex-scaled-householder-step-termination-and-status",
+      "severity": "nonfatal",
+      "locus": "title",
+      "finding": "The title implies every terminating call has a unitary representative, whereas admitted nonzero calls can fail during norm/phase/update arithmetic before a nonzero stored vector is available. The Statement correctly distinguishes success, identity, breakdown and range-failure and proves unitarity only on success. Qualified the title by “on success”; the sound statement and proof are preserved.",
+      "repair": "Qualified the title by “on success”. Checked finite input-dimensional loops and first-failure returns against the full canonical procedure; v=0 contradicts positive successful stored norm, and K=vv*/(v*v) is Hermitian idempotent, so P is unitary. Identity returns copy B with zero error and avoid P(0), including m=1 and q=0. Read the complete local-error supplier and retain its hypotheses for bound invocation. Statement and proof unchanged; no propagation or independent acceptance claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "record-no-published-consumer-impact",
+      "supplier_ids": [
+        "alg-finite-budget-francis-schur-reduction"
+      ],
+      "finding": "Exact-ID dependency/reference search in current items and library found seven direct item consumers, all draft members of the frozen frontier, and the owning draft page. Each affected use was examined and remains sound; no outside-frontier or published direct consumer was found. The other three repairs change no Statement/Definition. No published item was edited or adjudicated.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": [
+    "Completed implicit-Q review: unchanged Statement; no AC use. Dependencies def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices and def-linear-isometry-and-orthogonal-or-unitary-operator read directly; elementary support induction checked locally; no external source reading claimed. Validation pending final focused checks. Next: real conjugate-pair example, finite Francis procedure, complex wrapper lemma.",
+    "Completed conjugate-pair example: repaired only F1; proof already established every required condition for A=T. Exact supplier files items/def-real-and-complex-schur-forms.md and items/lem-real-francis-double-shift-polynomial.md read, no external source reading claimed. Checks pending. Next: finite Francis initialization.",
+    "Completed Francis review and Definition-only step-1 repair. Node exact-integer witness passed: first similarity has h42=-1 with column 1 cleared. Direct reference search over current items/library found seven item consumers and one home page; all uses examined above, no consumer edits or further-hop propagation necessary. Home page retains finite Hessenberg initialization and status/certificate descriptions. No published direct consumers found. Owning algorithm contract contains no current derivations/citations and needs no mathematical update. Validation pending final focused checks. Next: complex wrapper termination lemma.",
+    "Completed complex wrapper mathematical review. Read wrapper Definition, full canonical scalar-schedule Definition and complete local-error lemma. Finite loops terminate or fail; zero input copies B without P(0); successful positive w excludes v=0; Hermitian idempotent K proves exact P unitarity independently of roundoff hypotheses. The bounds remain conditional on F2 success/range, 0<u<1 and (m-1)u<1. Title-only change; Statement unchanged, no propagation. Review-context hashes to be copied from immediate tool result; final focused checks pending.",
+    "All assigned repairs complete; no unsatisfied prerequisites, new items, AC use, uncertainty, published-maintenance findings, or assigned gate diagnostics. Final precheck/rendercheck/strict proof-contract/proof-layout checks all passed. No source reading beyond repository carriers is claimed; all findings are checked by explicit elementary matrix algebra and finite-loop reasoning. The single confirmed-fatal item remains a round finding despite completed repair; engine rejudgment/certification is still required.",
+    "Final report checked for exact tuple coverage, frozen-frontier membership, current review guards captured immediately per item, seven direct consumers with literal source excerpts and minimality evidence, all required evidence fields, and valid JSON. No item edits followed the final batched proof-layout command. No shared metadata or ledger was edited; ledger_updates are proposals for controller merge. Handoff ready for engine collection.",
+    "Report-integrity validation passed: the task input_sha256 is the engine digest of JSON.stringify(pack), not the raw pretty-printed file bytes. All four exact tuples, four reviews, assigned/frontier membership and seven frontier consumer routes verified; JSON well formed."
+  ],
+  "downstream_reviews": [
+    {
+      "id": "alg-bartels-stewart-sylvester-equation",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "path": "items/alg-bartels-stewart-sylvester-equation.md",
+      "affected_use": "Definition step 1 runs Francis on A and B and propagates every non-Schur status; step 2 independently verifies exact Schur identities.",
+      "reason": "The final initialization check still establishes the same Hessenberg prerequisite; status propagation and independent exact certificates remain valid.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "source_excerpt": "1. Run [[alg-finite-budget-francis-schur-reduction]] on $A$ and $B$ with their supplied controls and budgets. If either call does not return `Schur-computed`, return `schur-failure` with the underlying status.",
+      "invalidated_claim": "None: the changed supplier moves its full zero-pattern test to the end of initialization; this consumer use remains valid for the reasons recorded here.",
+      "minimality": "No consumer edit is necessary: The final initialization check still establishes the same Hessenberg prerequisite; status propagation and independent exact certificates remain valid."
+    },
+    {
+      "id": "alg-schur-parlett-matrix-function",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "path": "items/alg-schur-parlett-matrix-function.md",
+      "affected_use": "Definition steps 1–2 call the complex Francis branch, propagate non-Schur statuses, then verify Q*Q=I, A=QTQ* and triangular T exactly.",
+      "reason": "Only a premature failure is removed; the accepted output pattern and independent exact-certificate test are unchanged.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "source_excerpt": "1. Call [[alg-finite-budget-francis-schur-reduction]] in its complex branch.\n   Propagate any non-Schur status. Treat its returned $Q,T$ as candidates.\n2. Verify by exact arithmetic that $Q^*Q=I$, $A=QTQ^*$, and $T$ is upper\n   triangular. If any identity fails, return schur-certificate-failure. The\n   computed Schur routine's residual diagnostic alone does not pass this test.\n3. Start from the supplied contiguous block partition of $T$. For each block\n   $T_{ii}$ call [[alg-exact-jordan-block-analytic-evaluation]] with its exact\n   Jordan certificate and return value $F_{ii}$. If a certificate or required\n   derivative is missing, return missing-jordan-data.\n4. Visit block pairs by increasing distance $j-i$. Form\n   $$C_{ij}=F_{ii}T_{ij}-T_{ij}F_{jj} +\\sum_{i<k<j}(F_{ik}T_{kj}-T_{ik}F_{kj}).$$\n   Call [[alg-bartels-stewart-sylvester-equation]] on\n   $T_{ii}F_{ij}+F_{ij}(-T_{jj})=C_{ij}$ with threshold $\\tau$. If it returns\n   `success`, store its exact solution as $F_{ij}$. If it returns `singular-pivot` or\n   `pivot-separation-failure` and the partition has multiple blocks, merge the\n   contiguous blocks from $i$ through $j$, discard their old diagonal data,\n   and restart step 3. Each merge reduces the block count, so there are at most\n   $n-1$ merges. Any other non-success status is returned as\n   inconclusive-sylvester with its underlying status.\n5. Return the factored value $QFQ^*$ with status parlett-success.",
+      "invalidated_claim": "None: the changed supplier moves its full zero-pattern test to the end of initialization; this consumer use remains valid for the reasons recorded here.",
+      "minimality": "No consumer edit is necessary: Only a premature failure is removed; the accepted output pattern and independent exact-certificate test are unchanged."
+    },
+    {
+      "id": "alg-principal-matrix-logarithm-and-square-root",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "path": "items/alg-principal-matrix-logarithm-and-square-root.md",
+      "affected_use": "Definition step 1 calls complex Francis, propagates non-Schur statuses, and verifies exact unitarity, reconstruction and triangularity before testing the branch domain.",
+      "reason": "The branch-domain argument still receives precisely the verified triangular candidate required by its existing test.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "source_excerpt": "1. Run [[alg-finite-budget-francis-schur-reduction]] in its complex branch.\n   Propagate any non-Schur status. Treat its returned $Q,T$ as candidates and\n   verify exactly that $Q^*Q=I$, $A=QTQ^*$, and $T$ is upper triangular. If a\n   check fails, return schur-certificate-failure.\n2. The diagonal entries of this exact upper-triangular $T$ are the eigenvalues\n   of $A$. Test each $\\lambda$. If $\\lambda\\in(-\\infty,0]$, return\n   branch-domain-failure; if an exact sign comparison is unavailable, return\n   branch-domain-undecided. This test occurs before any holomorphic matrix\n   evaluation.\n3. For the logarithm request, evaluate the scalar branch\n   $f(z)=\\operatorname{Log}z$. For the square-root request, use\n   $f(z)=z^{1/2}_{\\operatorname{Log}}$. Then call\n   [[alg-schur-parlett-matrix-function]] with $A$, $f$, its controls, the\n   supplied initial partition, and the Jordan-certificate table. Propagate any\n   Schur, Jordan-data, Sylvester, range, or budget status. On parlett-success,\n   return its factored primary value with status branch-aware-candidate.",
+      "invalidated_claim": "None: the changed supplier moves its full zero-pattern test to the end of initialization; this consumer use remains valid for the reasons recorded here.",
+      "minimality": "No consumer edit is necessary: The branch-domain argument still receives precisely the verified triangular candidate required by its existing test."
+    },
+    {
+      "id": "ex-rotation-logarithm-branch-cut",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "path": "items/ex-rotation-logarithm-branch-cut.md",
+      "affected_use": "F3 and Verification 2.1 use n=2, zero sweeps and no initialization reflectors to obtain Q=I2 and T=-I2.",
+      "reason": "The now explicit empty-loop pattern check is vacuous for n=2 and leaves the exact zero-sweep witness unchanged.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "source_excerpt": "[F3] With sweep budget $0$, a complex Francis reduction returns Schur-computed when the initialized matrix is already upper triangular; when $n=2$ its Hessenberg initialization has no reflector columns ([[alg-finite-budget-francis-schur-reduction]]).",
+      "invalidated_claim": "None: the changed supplier moves its full zero-pattern test to the end of initialization; this consumer use remains valid for the reasons recorded here.",
+      "minimality": "No consumer edit is necessary: The now explicit empty-loop pattern check is vacuous for n=2 and leaves the exact zero-sweep witness unchanged."
+    },
+    {
+      "id": "thm-bartels-stewart-dense-operation-count",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "path": "items/thm-bartels-stewart-dense-operation-count.md",
+      "affected_use": "F2 and Proof 1.1 count at most n-2 initialization reflectors and at most O(n^2) zero-pattern work per stage, hence O(n^3) total.",
+      "reason": "A single O(n^2) check after initialization is within this existing upper bound; sweep and certificate work are unchanged.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "source_excerpt": "1.1 Hessenberg reduction uses at most $\\max(n-2,0)$ reflector steps. For $n\\ge3$, forming one reflector costs $O(n)$ scalar operations, and applying its two-sided similarity to the remaining dense submatrix costs $O(n^2)$; summing over at most $n$ steps gives $O(n^3)$. Any full initialization zero-pattern checks also cost at most $O(n^2)$ per stage, hence at most $O(n^3)$ in total. For $n=1,2$, there are no such reflector stages and no below-subdiagonal entries. [F2, algebra]",
+      "invalidated_claim": "None: the changed supplier moves its full zero-pattern test to the end of initialization; this consumer use remains valid for the reasons recorded here.",
+      "minimality": "No consumer edit is necessary: A single O(n^2) check after initialization is within this existing upper bound; sweep and certificate work are unchanged."
+    },
+    {
+      "id": "thm-computed-francis-schur-backward-error",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "path": "items/thm-computed-francis-schur-backward-error.md",
+      "affected_use": "F1 and Proof 1.1–3.1 use the complete finite factor/error/deflation sequence and certified outward rho,C recurrence, including initialization.",
+      "reason": "The repair changes only the timing of a comparison test; it preserves every arithmetic update, local perturbation and accumulator stage.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "source_excerpt": "[F1] [[alg-finite-budget-francis-schur-reduction]] records all factors, target operations and signed additive deflation writes with finite controls and explicit statuses; on a certified return it supplies $C_{\\rm acc}$ and the $\\rho,C$ outward recurrence.",
+      "invalidated_claim": "None: the changed supplier moves its full zero-pattern test to the end of initialization; this consumer use remains valid for the reasons recorded here.",
+      "minimality": "No consumer edit is necessary: The repair changes only the timing of a comparison test; it preserves every arithmetic update, local perturbation and accumulator stage."
+    },
+    {
+      "id": "thm-finite-budget-francis-schur-termination-and-status",
+      "supplier": "alg-finite-budget-francis-schur-reduction",
+      "path": "items/thm-finite-budget-francis-schur-termination-and-status.md",
+      "affected_use": "Proof 1.1 bounds initialization by max(n-2,0) stages; Proof 3.1 starts with “After initialization’s full pattern check” and inducts over block checks.",
+      "reason": "The moved test now directly matches Proof 3.1; its finite cost and all termination/status claims remain sound.",
+      "disposition": "unaffected",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "source_excerpt": "3.1 After initialization's full pattern check, every position below the first subdiagonal is zero; for $n\\le2$ there is no such position. A block chase on $[a,b]$ changes matrix entries only in rows or columns of that interval: every left update and target overwrite has a row in it, and every right update has a column in it. Its complementary below-subdiagonal entries therefore stay unchanged and zero. The explicit row ranges in [F1] test every remaining below-subdiagonal position, without repetition and in row-major order. An accepted block check thus establishes the entire global Hessenberg pattern again; a rejected check detects exactly a nonzero entry that a full row-major pattern check would first detect at the same block boundary. Deflation writes are on the first subdiagonal, so preserve this invariant. Induction over all processed blocks and scans proves that the final target check starts from a globally verified Hessenberg matrix. [F1, step 1.1, step 2.1, given, algebra]",
+      "invalidated_claim": "None: the changed supplier moves its full zero-pattern test to the end of initialization; this consumer use remains valid for the reasons recorded here.",
+      "minimality": "No consumer edit is necessary: The moved test now directly matches Proof 3.1; its finite cost and all termination/status claims remain sound."
+    }
+  ],
+  "gate_resolutions": [],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-implicit-q-uniqueness-for-unreduced-hessenberg.md items/ex-real-conjugate-pair-schur-block.md items/alg-finite-budget-francis-schur-reduction.md items/lem-complex-scaled-householder-step-termination-and-status.md --json",
+      "exit_code": 0,
+      "result": "4 files; 3 proofs pass; algorithm not applicable; zero failures"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-implicit-q-uniqueness-for-unreduced-hessenberg.md items/ex-real-conjugate-pair-schur-block.md items/alg-finite-budget-francis-schur-reduction.md items/lem-complex-scaled-householder-step-termination-and-status.md --json",
+      "exit_code": 0,
+      "result": "4 files checked, zero errors and zero warnings"
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-33.proof-contracts.json --strict --items lem-implicit-q-uniqueness-for-unreduced-hessenberg,ex-real-conjugate-pair-schur-block,alg-finite-budget-francis-schur-reduction,lem-complex-scaled-householder-step-termination-and-status --json",
+      "exit_code": 0,
+      "result": "All 4 assigned contracts checked; ok=true, zero errors and warnings"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/lem-implicit-q-uniqueness-for-unreduced-hessenberg.md items/ex-real-conjugate-pair-schur-block.md items/alg-finite-budget-francis-schur-reduction.md items/lem-complex-scaled-householder-step-termination-and-status.md",
+      "exit_code": 0,
+      "result": "proof-layout: 4 items, 7 steps, 0 defects"
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/numerical-linear-algebra-and-approximation/computed-schur-decompositions-and-nonnormal-spectra.md",
+      "affected_use": "“This page defines real and complex Schur forms and a finite-budget Hessenberg QR procedure”; subsequent paragraphs describe the stored product, explicit statuses and conditional certificate accumulator.",
+      "disposition": "unaffected",
+      "reason": "Checking the full Hessenberg pattern after all initialization columns matches the existing finite Hessenberg procedure description. Shift sweeps, represented factors, statuses and certificate recurrence are unchanged.",
+      "uncertain": false
+    }
+  ]
+}

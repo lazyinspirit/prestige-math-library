@@ -1,0 +1,193 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "status": "research-only-independent-current-concern-cycle1",
+  "frozen_stage": "Step3 closed; native4-judge active/read-only; later native5 owner integrates",
+  "target": "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+  "source": "items/prop-local-leapfrog-and-symplectic-euler-are-symplectic.md",
+  "owner_batch": "54",
+  "source_kind_status": "draft proposition, origin pipeline; canonical batch54 manifest owns identity",
+  "confirmed_defect": "Only the extra regularity assertion C1 Jacobian is false under V in C2. The C1-map symplectic matrix conclusion is true.",
+  "counterexample": {
+    "data": "d=1,Q=R,M=1,h>0,V(q)=|q|^(5/2)",
+    "derivatives": "Vprime(q)=(5/2)q|q|^(1/2), Vsecond(q)=(15/4)|q|^(1/2), with both derivatives0at0. These formulas show V in C2; (Vsecond(t)-Vsecond(0))/t is unbounded as t tends0.",
+    "Euler_map": "pplus=p-hVprime(q),qplus=q+hp-h^2Vprime(q)",
+    "Jacobian": "[[1-h^2Vsecond(q),h],[-hVsecond(q),1]]",
+    "conclusion": "The lower-left entry is not differentiable at0 for h>0, while the determinant is exactly1 and the matrix is continuous. Thus this refutes only the old C1-Jacobian regularity, not symplecticity or C1-map regularity.",
+    "proof_basis": "Direct differentiation and the explicit exact algorithm; no numerical test or external reading claimed."
+  },
+  "minimal_source_change": {
+    "old": "has a $C^1$ Jacobian satisfying",
+    "proposed": "is a $C^1$ map with a continuous Jacobian satisfying",
+    "hypotheses_unchanged": true,
+    "full_symplectic_claim_unchanged": true,
+    "proof_bytes_unchanged": true,
+    "deps_provenance_metadata_unchanged": true
+  },
+  "true_proof_interface": "The actual shear supplier Statement already gives C1 kicks/drifts for V in C2. Their finite admitted compositions are C1; each derivative factor is continuous, and the chain rule gives a continuous Jacobian product. Existing Proof2.1 proves preservation of J by that product. No C3 hypothesis or derivative of Hessian is needed.",
+  "consumer_counts": {
+    "direct": 2,
+    "indirect": 4
+  },
+  "consumers": [
+    {
+      "id": "thm-separable-vortex-inspired-leapfrog-is-reversible-symplectic-volume-preserving-order-two",
+      "path": "items/thm-separable-vortex-inspired-leapfrog-is-reversible-symplectic-volume-preserving-order-two.md",
+      "status": "checked-unaffected",
+      "full_current_source_read": true,
+      "dependency_route": [
+        "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+        "thm-separable-vortex-inspired-leapfrog-is-reversible-symplectic-volume-preserving-order-two"
+      ],
+      "relation": "direct",
+      "uses": [
+        "Statement claims2/3/4 and supplier sentence",
+        "Facts F2",
+        "Proof1.2",
+        "Proof1.3"
+      ],
+      "reason": "F2 and1.2 need the valid symplectic identity under C2. The comparison potential is separately smooth on the collision-free domain. Volume preservation1.3 requires a C1 diffeomorphism and determinant1, not a C1 Jacobian, and keeps Countable Choice for measurable change of variables. Order2 has separate C3/tube hypotheses. Signed admitted domains, reversibility, local volume, exact initialization and the distinction from first-order Biot-Savart dynamics are unchanged."
+    },
+    {
+      "id": "lem-finite-modified-hamiltonian-exists",
+      "path": "items/lem-finite-modified-hamiltonian-exists.md",
+      "status": "checked-unaffected",
+      "full_current_source_read": true,
+      "dependency_route": [
+        "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+        "lem-finite-modified-hamiltonian-exists"
+      ],
+      "relation": "direct",
+      "uses": [
+        "Facts F1",
+        "Proof1.1",
+        "Proof2.2",
+        "Proof3.1"
+      ],
+      "reason": "F1 imports the symplectic matrix identity only. Its own Statement independently assumes V in C-infinity; Proof1.1 derives smooth method germs from the explicit kick/drift formulas (and the smooth implicit-function supplier for midpoint). The z-differentiated smooth expansions in2.2 are licensed by that independent smooth hypothesis, not by the false C1-Jacobian wording. Proof3.1 uses only D-Phi^T J D-Phi=J. Thus its full finite logarithm/Hamiltonian coefficient scope remains sound without source changes."
+    },
+    {
+      "id": "lem-finite-modified-hamiltonian-close-to-original",
+      "path": "items/lem-finite-modified-hamiltonian-close-to-original.md",
+      "status": "checked-unaffected",
+      "full_current_source_read": true,
+      "dependency_route": [
+        "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+        "lem-finite-modified-hamiltonian-exists",
+        "lem-finite-modified-hamiltonian-close-to-original"
+      ],
+      "relation": "indirect",
+      "uses": [
+        "Facts F1",
+        "Proof1.1",
+        "Proof2.1"
+      ],
+      "reason": "Uses only smooth coefficient functions and a finite coefficient sum; compact maxima and empty-set least-nonnegative-bound cases are unchanged. It never differentiates a Jacobian of the C2 step map."
+    },
+    {
+      "id": "lem-one-step-modified-energy-defect",
+      "path": "items/lem-one-step-modified-energy-defect.md",
+      "status": "checked-unaffected",
+      "full_current_source_read": true,
+      "dependency_route": [
+        "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+        "lem-finite-modified-hamiltonian-exists",
+        "lem-one-step-modified-energy-defect"
+      ],
+      "relation": "indirect",
+      "uses": [
+        "Facts F1/F4",
+        "Proof1.1",
+        "Proof2.1"
+      ],
+      "reason": "Uses the unchanged map-to-modified-flow comparison, smooth modified Hamiltonian derivative bounds, conservation by its own flow, and scalar mean-value estimate on a controlled segment. No C1 Jacobian of a merely C2-potential step is required."
+    },
+    {
+      "id": "thm-finite-order-modified-energy-bound",
+      "path": "items/thm-finite-order-modified-energy-bound.md",
+      "status": "checked-unaffected",
+      "full_current_source_read": true,
+      "dependency_route": [
+        "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+        "lem-finite-modified-hamiltonian-exists",
+        "thm-finite-order-modified-energy-bound"
+      ],
+      "relation": "indirect",
+      "uses": [
+        "Statement",
+        "Facts A1/F1/F2",
+        "Proof1.1",
+        "Proof2.1",
+        "Remarks"
+      ],
+      "reason": "Independently assumes V in C-infinity and the controlled compact tube; sums one-step energy defects and compares two endpoints. Uses no stronger regularity of the C2 symplecticity proposition. Fixed finite N, n=0, finite-time bound and non-transfer to splitting/RATTLE remain intact."
+    },
+    {
+      "id": "lem-truncated-modified-flow-matches-map",
+      "path": "items/lem-truncated-modified-flow-matches-map.md",
+      "status": "checked-unaffected",
+      "full_current_source_read": true,
+      "dependency_route": [
+        "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+        "lem-finite-modified-hamiltonian-exists",
+        "lem-truncated-modified-flow-matches-map"
+      ],
+      "relation": "indirect",
+      "uses": [
+        "Facts F1",
+        "Proof1.2",
+        "Proof1.3",
+        "Proof2.1"
+      ],
+      "reason": "Uses smooth finite coefficients/method germ supplied under V in C-infinity by the modified-Hamiltonian lemma. Its fixed-h time Taylor expansion and finite polynomial regrouping do not need any extra regularity from the C2 symplecticity proposition. Empty-K convention and signed-step bound are unchanged."
+    }
+  ],
+  "page_companion_dispositions": [
+    {
+      "path": "library/numerical-differential-equations-and-stochastic-dynamics/geometric-numerical-integration.md",
+      "status": "checked-unaffected",
+      "reason": "Current full page summary read. It asserts discrete symplectic Jacobian identity/geometric properties or its separate method-specific examples, without claiming a C1 Jacobian under only C2. No page prose or inventory change needed."
+    },
+    {
+      "path": "library/numerical-differential-equations-and-stochastic-dynamics/geometric-numerical-integration-examples.md",
+      "status": "checked-unaffected",
+      "reason": "Current full page summary read. It asserts discrete symplectic Jacobian identity/geometric properties or its separate method-specific examples, without claiming a C1 Jacobian under only C2. No page prose or inventory change needed."
+    },
+    {
+      "path": "library/numerical-pdes-and-spatial-discretization/interacting-particle-mean-field-and-vortex-blob-error.md",
+      "status": "checked-unaffected",
+      "reason": "Current full page summary read. It asserts discrete symplectic Jacobian identity/geometric properties or its separate method-specific examples, without claiming a C1 Jacobian under only C2. No page prose or inventory change needed."
+    },
+    {
+      "path": "library/numerical-pdes-and-spatial-discretization/interacting-particle-mean-field-and-vortex-blob-error-examples.md",
+      "status": "checked-unaffected",
+      "reason": "Current full page summary read. It asserts discrete symplectic Jacobian identity/geometric properties or its separate method-specific examples, without claiming a C1 Jacobian under only C2. No page prose or inventory change needed."
+    }
+  ],
+  "historical_status": {
+    "Luna_reader54": "Original gpt-6-luna-max reader completed2026-10-16T13:39:09.713Z with findings:[]. This is not a Step4 keep verdict and not approval of the proposed correction.",
+    "SOL_Alpha54": "Original gpt-6.1-sol Alpha report2026-10-16T13:58:30.888Z explicitly raised same untouched wording defect using V=|q|^3. It recorded no routed decision for this untouched carrier and left source unchanged. Preserve alert as history; do not invent prior repair/acceptance."
+  },
+  "original_step4_judge_status": "original-step4-judge-observation.json",
+  "future_mirrors": "future-quote-mirrors.json",
+  "unmet_prerequisites": [],
+  "source_guard": {
+    "full_preimage": "before/items/prop-local-leapfrog-and-symplectic-euler-are-symplectic.md",
+    "current_bytes_equal_before": true,
+    "no_hash_computed": true
+  },
+  "not_performed": [
+    "canonical source edits",
+    "canonical metadata/tool/ledger writes",
+    "hashes",
+    "checks/validators/gates",
+    "native dispatch",
+    "Step3 reseal",
+    "Step4 verdict overwrite"
+  ],
+  "future_owner_actions": [
+    "At paused5.1 read actual original Step4 judge keep flag; do not infer from historical reader/Alpha observations.",
+    "After proper later authorization/drain, guard full source preimage and apply exactly one wording replacement.",
+    "Refresh the two exact supplier-quote mirrors and any owner-required evidence bindings; leave historical observations intact.",
+    "Run required explicit final layout on changed source in that later repair cycle; none run now."
+  ]
+}

@@ -1,0 +1,578 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "53",
+  "purpose": "Read-only owner triage; no mathematical acceptance or native execution coverage",
+  "native_session_id": "01a143ce-e462-7d32-b904-15303bcf38b7",
+  "native_session_home": "research/numerical-optimization-dynamics-2026-10-16-scope-review/batch-53/scope-repairer-session",
+  "changed_interfaces": [
+    "lem-maximal-ode-solution-extends-from-compact-tube",
+    "alg-bounded-adaptive-runge-kutta-controller"
+  ],
+  "interface_deltas": [
+    {
+      "id": "lem-maximal-ode-solution-extends-from-compact-tube",
+      "before": [
+        "## Statement\n\nLet $d\\ge1$ and $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open and let $f:D\\to\\mathbb R^d$ be continuous and locally Lipschitz in the state variable. Let $x:I\\to\\mathbb R^d$ be a maximal solution of $x'=f(t,x)$ on an interval with finite right endpoint $b$, and fix $t_0\\in I$ with $t_0<b$. Suppose there is a compact set $C\\subseteq D$ containing $(t,x(t))$ for every $t\\in[t_0,b)$. Then $x$ has a solution extension to an interval containing $b$ and points larger than $b$. The compact set hypothesis is a tube condition: it supplies both boundedness of $f$ along the graph and a limit point inside the open domain."
+      ],
+      "current": [
+        "## Statement\n\nLet $d\\ge1$ and $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, and let $f:D\\to\\mathbb R^d$ be continuous and locally Lipschitz in the state variable. There is no maximal solution $x:I\\to\\mathbb R^d$ of $x'=f(t,x)$ whose interval has a finite right endpoint $b$ and for which some $t_0\\in I$, $t_0<b$, and compact set $C\\subseteq D$ satisfy $(t,x(t))\\in C$ for every $t\\in[t_0,b)$. The compact tube condition supplies boundedness of $f$ along the graph and a limit point inside the open domain."
+      ]
+    },
+    {
+      "id": "alg-bounded-adaptive-runge-kutta-controller",
+      "before": [
+        "## Definition\n\nInputs are an initial value problem on $[t_0,T]$ with $t_0\\le T$ and states in $\\mathbb R^d$ for an integer $d\\ge1$, an initial proposal $0<h_{\\rm init}\\le h_{\\max}$, an embedded pair with low order $p\\ge1$ as in [[def-embedded-runge-kutta-pair-and-error-estimator]], initial value $y_0$, tolerances $\\mathrm{atol}>0$ and $\\mathrm{rtol}\\ge0$, safety $0<\\sigma<1$, scale bounds $0<\\gamma_{\\min}\\le1\\le\\gamma_{\\max}$, step bounds $0<h_{\\min}\\le h_{\\max}$, and a positive integer attempt budget $N$.\n\nSet the first proposal to $h_0=h_{\\rm init}$. At an accepted-step state $(t_n,y_n)$, choose trial size $h=\\min(h_n,h_{\\max},T-t_n)$. If $T-t_n=0$, return `success`. If $h=0$ before reaching $T$, or any stage evaluation is undefined/nonfinite, return `failure`. Compute both pair outputs. Define the component scale $s_i=\\mathrm{atol}+\\mathrm{rtol}\\max(|(y_n)_i|,|Y_i|)$ and scaled norm $Q=\\max_i |(\\widehat Y-Y)_i|/s_i$. If $Q\\le1$, accept $Y$: set $t_{n+1}=t_n+h$, $y_{n+1}=Y$. Otherwise reject and retain $(t_n,y_n)$. In either case compute the model factor\n$$g=\\begin{cases}\\gamma_{\\max},&Q=0,\\\\ \\min(\\gamma_{\\max},\\max(\\gamma_{\\min},\\sigma /\\sqrt[p+1]{Q})),&Q>0.\\end{cases}$$\nSet next proposal to $\\min(h_{\\max},\\max(h_{\\min},g h))$. If an attempted step was rejected with $h\\le h_{\\min}$ (including a final clipped step shorter than $h_{\\min}$), return `minimum-step-rejected`; if the $N$th attempt ends without reaching $T$, return `attempt-budget-exhausted`. Before an accepted step, if its remaining distance to $T$ is smaller than $h_{\\min}$, the final clipped step is permitted. For $Q>0$, $\\sqrt[p+1]{Q}$ is the unique positive $(p+1)$st root supplied by [[thm-nth-roots-exist]]. The exponent $1/(p+1)$ is a leading-error model for step selection; neither acceptance nor this controller is a global error certificate or a stiffness test.\n\nThe mathematical specification evaluates each displayed operation, including maximum, minimum, absolute value, and positive-root evaluation, exactly. A rounded implementation instead applies its fixed finite-format rounding rule to every stage, output, scale, and controller-factor arithmetic operation and uses the resulting stored high and low values in the displayed difference and acceptance test; nonfinite or failed operations return `failure`. The finite termination theorem applies to either realization when each attempt has finite work. The rounded realization has no a posteriori guarantee: a tolerance below its resolution can be accepted because both stored values coincide."
+      ],
+      "current": [
+        "## Definition\n\nInputs are an IVP in the sense of [[def-first-order-ode-initial-value-problem-and-solution]], $y'=f(t,y)$ on an open domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$ with initial data $(t_0,y_0)\\in D$ and requested interval $[t_0,T]$, where $t_0\\le T$ and $d\\ge1$; an initial proposal $0<h_{\\rm init}\\le h_{\\max}$; an embedded pair with low order $p\\ge1$ as in [[def-embedded-runge-kutta-pair-and-error-estimator]]; tolerances $\\mathrm{atol}>0$ and $\\mathrm{rtol}\\ge0$; safety $0<\\sigma<1$; scale bounds $0<\\gamma_{\\min}\\le1\\le\\gamma_{\\max}$; step bounds $0<h_{\\min}\\le h_{\\max}$; and a positive integer attempt budget $N$.\n\n**Output.** Return a record consisting of one of `success`, `failure`, `minimum-step-rejected`, or `attempt-budget-exhausted`, together with the accepted mesh $\\mathcal A=((t_0,y_0),\\ldots,(t_m,y_m))$. The mesh always contains the initial pair and every accepted endpoint; on `success`, $t_m=T$ and $y_m$ is the returned endpoint approximation. On any other status, $\\mathcal A$ is the accepted prefix and $y_m$ is the last accepted approximation.\n\n**Procedure.** Initialize $t:=t_0$, $y:=y_0$, $\\mathcal A:=((t_0,y_0))$, and proposal $h_{\\rm prop}:=h_{\\rm init}$. If $t_0=T$, return `success` with $\\mathcal A$. For each attempt index $k=1,\\ldots,N$, perform exactly the following steps:\n\n1. Set $h:=\\min(h_{\\rm prop},h_{\\max},T-t)$. The last term permits a final clipped step shorter than $h_{\\min}$. If $h\\le0$ before reaching $T$, return `failure` with $\\mathcal A$.\n2. Evaluate the shared stages in tableau order, checking before each evaluation that its time-state input lies in $D$. If a stage input is outside $D$, its evaluation is undefined, or its value is nonfinite, return `failure` with $\\mathcal A$. Compute both pair outputs; if either output or any arithmetic needed to compute them is undefined, fails, or is nonfinite in the rounded realization, return `failure` with $\\mathcal A$.\n3. Define $s_i:=\\mathrm{atol}+\\mathrm{rtol}\\max(|(y)_i|,|(Y)_i|)$ and $Q:=\\max_i |(\\widehat Y-Y)_i|/s_i$, where $Y$ is the high-order value and $\\widehat Y$ the low-order value. If any scale or $Q$ operation fails or is nonfinite in the rounded realization, return `failure` with $\\mathcal A$. If $Q\\le1$, first check $(t+h,Y)\\in D$; if not, return `failure` with $\\mathcal A$. Otherwise accept: set $t:=t+h$, $y:=Y$, and append $(t,y)$ to $\\mathcal A$. If $Q>1$, reject and retain $t,y,\\mathcal A$.\n4. If the attempt was accepted and $t=T$, return `success` with $\\mathcal A$. Otherwise, if it was rejected and $h\\le h_{\\min}$, return `minimum-step-rejected` with $\\mathcal A$. These terminal checks precede the budget check, so a final accepted step that reaches $T$ succeeds and a rejection at the minimum step reports that safeguard.\n5. If $k=N$, return `attempt-budget-exhausted` with $\\mathcal A$. Otherwise compute\n$$g=\\begin{cases}\\gamma_{\\max},&Q=0,\\\\ \\min(\\gamma_{\\max},\\max(\\gamma_{\\min},\\sigma /\\sqrt[p+1]{Q})),&Q>0.\\end{cases}$$\nSet $h_{\\rm prop}:=\\min(h_{\\max},\\max(h_{\\min},gh))$ and continue to attempt $k+1$. A failed or nonfinite rounded computation of $g$ or $h_{\\rm prop}$ returns `failure` with $\\mathcal A$.\n\nFor $Q>0$, $\\sqrt[p+1]{Q}$ is the unique positive $(p+1)$st root supplied by [[thm-nth-roots-exist]]. The exponent $1/(p+1)$ is a leading-error model for step selection; neither acceptance nor this controller is a global error certificate or a stiffness test.\n\nThe mathematical specification evaluates each displayed operation, including maximum, minimum, absolute value, and positive-root evaluation, exactly. A rounded implementation instead applies its fixed finite-format rounding rule to every stage, output, scale, and controller-factor arithmetic operation and uses the resulting stored high and low values in the displayed difference and acceptance test; nonfinite or failed operations return `failure`. The finite termination theorem applies to either realization when each attempt has finite work. The rounded realization has no a posteriori guarantee: a tolerance below its resolution can be accepted because both stored values coincide."
+      ]
+    }
+  ],
+  "unchanged_interfaces": [
+    "thm-ode-residual-a-posteriori-error-bound",
+    "thm-piecewise-c1-ode-residual-a-posteriori-error-bound",
+    "def-embedded-runge-kutta-pair-and-error-estimator",
+    "def-heun-euler-embedded-runge-kutta-pair",
+    "prop-embedded-pair-estimator-asymptotics",
+    "def-heun-quadratic-dense-output",
+    "def-validated-residual-tube-certificate",
+    "rem-fixed-mesh-global-error-does-not-certify-adaptivity",
+    "thm-bounded-adaptive-runge-kutta-controller-terminates",
+    "thm-heun-euler-pair-local-orders-and-estimator",
+    "lem-rational-expression-derivative-recursion-correct",
+    "thm-heun-dense-output-local-order-two",
+    "alg-validated-residual-tube-certificate-checker",
+    "thm-validated-residual-tube-certificate-sound",
+    "thm-validated-residual-tube-checker-terminates",
+    "ex-below-roundoff-tolerance-breaks-embedded-estimate",
+    "ex-fast-decay-problem-rejects-at-minimum-step",
+    "ex-heun-euler-estimator-leading-term-vanishes"
+  ],
+  "actual_old_current_consumer_union": [
+    {
+      "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "alg-ctrl1-finite-budget-transcription-solver-dispatch"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "alg-ctrl1-finite-budget-transcription-solver-dispatch"
+        ]
+      ]
+    },
+    {
+      "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription"
+        ]
+      ]
+    },
+    {
+      "id": "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+      "path": [
+        "lem-maximal-ode-solution-extends-from-compact-tube",
+        "thm-validated-residual-tube-certificate-sound",
+        "def-certified-hybrid-event-enclosure",
+        "lem-transverse-hybrid-event-time-error",
+        "alg-event-driven-frictionless-sphere-contact-with-certified-events"
+      ],
+      "paths": [
+        [
+          "lem-maximal-ode-solution-extends-from-compact-tube",
+          "thm-validated-residual-tube-certificate-sound",
+          "def-certified-hybrid-event-enclosure",
+          "lem-transverse-hybrid-event-time-error",
+          "alg-event-driven-frictionless-sphere-contact-with-certified-events"
+        ]
+      ]
+    },
+    {
+      "id": "alg-safeguarded-hybrid-event-location-and-restart",
+      "path": [
+        "lem-maximal-ode-solution-extends-from-compact-tube",
+        "thm-validated-residual-tube-certificate-sound",
+        "def-certified-hybrid-event-enclosure",
+        "alg-safeguarded-hybrid-event-location-and-restart"
+      ],
+      "paths": [
+        [
+          "lem-maximal-ode-solution-extends-from-compact-tube",
+          "thm-validated-residual-tube-certificate-sound",
+          "def-certified-hybrid-event-enclosure",
+          "alg-safeguarded-hybrid-event-location-and-restart"
+        ]
+      ]
+    },
+    {
+      "id": "cex-grazing-event-time-error-is-not-linearly-bounded",
+      "path": [
+        "lem-maximal-ode-solution-extends-from-compact-tube",
+        "thm-validated-residual-tube-certificate-sound",
+        "def-certified-hybrid-event-enclosure",
+        "lem-transverse-hybrid-event-time-error",
+        "cex-grazing-event-time-error-is-not-linearly-bounded"
+      ],
+      "paths": [
+        [
+          "lem-maximal-ode-solution-extends-from-compact-tube",
+          "thm-validated-residual-tube-certificate-sound",
+          "def-certified-hybrid-event-enclosure",
+          "lem-transverse-hybrid-event-time-error",
+          "cex-grazing-event-time-error-is-not-linearly-bounded"
+        ]
+      ]
+    },
+    {
+      "id": "def-certified-hybrid-event-enclosure",
+      "path": [
+        "lem-maximal-ode-solution-extends-from-compact-tube",
+        "thm-validated-residual-tube-certificate-sound",
+        "def-certified-hybrid-event-enclosure"
+      ],
+      "paths": [
+        [
+          "lem-maximal-ode-solution-extends-from-compact-tube",
+          "thm-validated-residual-tube-certificate-sound",
+          "def-certified-hybrid-event-enclosure"
+        ]
+      ]
+    },
+    {
+      "id": "ex-below-roundoff-tolerance-breaks-embedded-estimate",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "ex-below-roundoff-tolerance-breaks-embedded-estimate"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "ex-below-roundoff-tolerance-breaks-embedded-estimate"
+        ]
+      ]
+    },
+    {
+      "id": "ex-bouncing-ball-transverse-event-error-and-reset",
+      "path": [
+        "lem-maximal-ode-solution-extends-from-compact-tube",
+        "thm-validated-residual-tube-certificate-sound",
+        "def-certified-hybrid-event-enclosure",
+        "lem-transverse-hybrid-event-time-error",
+        "ex-bouncing-ball-transverse-event-error-and-reset"
+      ],
+      "paths": [
+        [
+          "lem-maximal-ode-solution-extends-from-compact-tube",
+          "thm-validated-residual-tube-certificate-sound",
+          "def-certified-hybrid-event-enclosure",
+          "lem-transverse-hybrid-event-time-error",
+          "ex-bouncing-ball-transverse-event-error-and-reset"
+        ]
+      ]
+    },
+    {
+      "id": "ex-ctrl1-chemical-dosing-linear-model",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "ex-ctrl1-chemical-dosing-linear-model"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "ex-ctrl1-chemical-dosing-linear-model"
+        ]
+      ]
+    },
+    {
+      "id": "ex-ctrl1-single-versus-multiple-shooting-two-intervals",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "ex-ctrl1-single-versus-multiple-shooting-two-intervals"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "ex-ctrl1-single-versus-multiple-shooting-two-intervals"
+        ]
+      ]
+    },
+    {
+      "id": "ex-fast-decay-problem-rejects-at-minimum-step",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "ex-fast-decay-problem-rejects-at-minimum-step"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "ex-fast-decay-problem-rejects-at-minimum-step"
+        ]
+      ]
+    },
+    {
+      "id": "ex-two-events-between-endpoints-defeat-sign-screening",
+      "path": [
+        "lem-maximal-ode-solution-extends-from-compact-tube",
+        "thm-validated-residual-tube-certificate-sound",
+        "def-certified-hybrid-event-enclosure",
+        "alg-safeguarded-hybrid-event-location-and-restart",
+        "ex-two-events-between-endpoints-defeat-sign-screening"
+      ],
+      "paths": [
+        [
+          "lem-maximal-ode-solution-extends-from-compact-tube",
+          "thm-validated-residual-tube-certificate-sound",
+          "def-certified-hybrid-event-enclosure",
+          "alg-safeguarded-hybrid-event-location-and-restart",
+          "ex-two-events-between-endpoints-defeat-sign-screening"
+        ]
+      ]
+    },
+    {
+      "id": "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program"
+        ]
+      ]
+    },
+    {
+      "id": "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent"
+        ]
+      ]
+    },
+    {
+      "id": "lem-naive-all-pairs-collision-search-has-quadratic-work",
+      "path": [
+        "lem-maximal-ode-solution-extends-from-compact-tube",
+        "thm-validated-residual-tube-certificate-sound",
+        "def-certified-hybrid-event-enclosure",
+        "lem-transverse-hybrid-event-time-error",
+        "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+        "lem-naive-all-pairs-collision-search-has-quadratic-work"
+      ],
+      "paths": [
+        [
+          "lem-maximal-ode-solution-extends-from-compact-tube",
+          "thm-validated-residual-tube-certificate-sound",
+          "def-certified-hybrid-event-enclosure",
+          "lem-transverse-hybrid-event-time-error",
+          "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+          "lem-naive-all-pairs-collision-search-has-quadratic-work"
+        ]
+      ]
+    },
+    {
+      "id": "lem-transverse-hybrid-event-time-error",
+      "path": [
+        "lem-maximal-ode-solution-extends-from-compact-tube",
+        "thm-validated-residual-tube-certificate-sound",
+        "def-certified-hybrid-event-enclosure",
+        "lem-transverse-hybrid-event-time-error"
+      ],
+      "paths": [
+        [
+          "lem-maximal-ode-solution-extends-from-compact-tube",
+          "thm-validated-residual-tube-certificate-sound",
+          "def-certified-hybrid-event-enclosure",
+          "lem-transverse-hybrid-event-time-error"
+        ]
+      ]
+    },
+    {
+      "id": "rem-fixed-mesh-global-error-does-not-certify-adaptivity",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "rem-fixed-mesh-global-error-does-not-certify-adaptivity"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "rem-fixed-mesh-global-error-does-not-certify-adaptivity"
+        ]
+      ]
+    },
+    {
+      "id": "thm-bounded-adaptive-runge-kutta-controller-terminates",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "thm-bounded-adaptive-runge-kutta-controller-terminates"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "thm-bounded-adaptive-runge-kutta-controller-terminates"
+        ]
+      ]
+    },
+    {
+      "id": "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription"
+        ]
+      ]
+    },
+    {
+      "id": "thm-ctrl1-mesh-consistent-lqr-minimizers-converge",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "thm-ctrl1-mesh-consistent-lqr-minimizers-converge"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "thm-ctrl1-mesh-consistent-lqr-minimizers-converge"
+        ]
+      ]
+    },
+    {
+      "id": "thm-ctrl1-objective-and-control-error-from-consistency-bounds",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "thm-ctrl1-objective-and-control-error-from-consistency-bounds"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "thm-ctrl1-objective-and-control-error-from-consistency-bounds"
+        ]
+      ]
+    },
+    {
+      "id": "thm-finite-hybrid-trajectory-error-under-separated-events",
+      "path": [
+        "lem-maximal-ode-solution-extends-from-compact-tube",
+        "thm-validated-residual-tube-certificate-sound",
+        "thm-finite-hybrid-trajectory-error-under-separated-events"
+      ],
+      "paths": [
+        [
+          "lem-maximal-ode-solution-extends-from-compact-tube",
+          "thm-validated-residual-tube-certificate-sound",
+          "thm-finite-hybrid-trajectory-error-under-separated-events"
+        ]
+      ]
+    },
+    {
+      "id": "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+      "path": [
+        "lem-maximal-ode-solution-extends-from-compact-tube",
+        "thm-validated-residual-tube-certificate-sound",
+        "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted"
+      ],
+      "paths": [
+        [
+          "lem-maximal-ode-solution-extends-from-compact-tube",
+          "thm-validated-residual-tube-certificate-sound",
+          "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted"
+        ]
+      ]
+    },
+    {
+      "id": "thm-validated-residual-tube-certificate-sound",
+      "path": [
+        "lem-maximal-ode-solution-extends-from-compact-tube",
+        "thm-validated-residual-tube-certificate-sound"
+      ],
+      "paths": [
+        [
+          "lem-maximal-ode-solution-extends-from-compact-tube",
+          "thm-validated-residual-tube-certificate-sound"
+        ]
+      ]
+    }
+  ],
+  "missing_report_dispositions": [
+    {
+      "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "alg-ctrl1-finite-budget-transcription-solver-dispatch"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "alg-ctrl1-finite-budget-transcription-solver-dispatch"
+        ]
+      ]
+    },
+    {
+      "id": "ex-ctrl1-single-versus-multiple-shooting-two-intervals",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "ex-ctrl1-single-versus-multiple-shooting-two-intervals"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "ex-ctrl1-single-versus-multiple-shooting-two-intervals"
+        ]
+      ]
+    },
+    {
+      "id": "ex-two-events-between-endpoints-defeat-sign-screening",
+      "path": [
+        "lem-maximal-ode-solution-extends-from-compact-tube",
+        "thm-validated-residual-tube-certificate-sound",
+        "def-certified-hybrid-event-enclosure",
+        "alg-safeguarded-hybrid-event-location-and-restart",
+        "ex-two-events-between-endpoints-defeat-sign-screening"
+      ],
+      "paths": [
+        [
+          "lem-maximal-ode-solution-extends-from-compact-tube",
+          "thm-validated-residual-tube-certificate-sound",
+          "def-certified-hybrid-event-enclosure",
+          "alg-safeguarded-hybrid-event-location-and-restart",
+          "ex-two-events-between-endpoints-defeat-sign-screening"
+        ]
+      ]
+    },
+    {
+      "id": "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program"
+        ]
+      ]
+    },
+    {
+      "id": "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent"
+        ]
+      ]
+    },
+    {
+      "id": "lem-naive-all-pairs-collision-search-has-quadratic-work",
+      "path": [
+        "lem-maximal-ode-solution-extends-from-compact-tube",
+        "thm-validated-residual-tube-certificate-sound",
+        "def-certified-hybrid-event-enclosure",
+        "lem-transverse-hybrid-event-time-error",
+        "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+        "lem-naive-all-pairs-collision-search-has-quadratic-work"
+      ],
+      "paths": [
+        [
+          "lem-maximal-ode-solution-extends-from-compact-tube",
+          "thm-validated-residual-tube-certificate-sound",
+          "def-certified-hybrid-event-enclosure",
+          "lem-transverse-hybrid-event-time-error",
+          "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+          "lem-naive-all-pairs-collision-search-has-quadratic-work"
+        ]
+      ]
+    },
+    {
+      "id": "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription"
+        ]
+      ]
+    },
+    {
+      "id": "thm-ctrl1-mesh-consistent-lqr-minimizers-converge",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "thm-ctrl1-mesh-consistent-lqr-minimizers-converge"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "thm-ctrl1-mesh-consistent-lqr-minimizers-converge"
+        ]
+      ]
+    },
+    {
+      "id": "thm-ctrl1-objective-and-control-error-from-consistency-bounds",
+      "path": [
+        "alg-bounded-adaptive-runge-kutta-controller",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "thm-ctrl1-objective-and-control-error-from-consistency-bounds"
+      ],
+      "paths": [
+        [
+          "alg-bounded-adaptive-runge-kutta-controller",
+          "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+          "thm-ctrl1-objective-and-control-error-from-consistency-bounds"
+        ]
+      ]
+    }
+  ],
+  "old_only_additions": [],
+  "native_unresolved_findings": [],
+  "source_proposals": [],
+  "focused_source_observation": "Read complete current compact-tube lemma, direct validated-certificate soundness consumer and direct transcription algorithm. Soundness now cites the no-finite-endpoint obstruction explicitly and applies it to its certified compact union. Direct transcription uses adaptive controller only for a separate trajectory estimate and explicitly excludes it from the fixed smooth NLP map. This preliminary triage finds no new source proposal; same native repairer still owes substantive all-consumer checking, especially the nine report omissions.",
+  "historical_limit": "prepared.before_interfaces and consumer_scope preserve original native interfaces and old consumer paths; before/ contains actual CURRENT complete sources only, not claimed historical native pre-edit bodies."
+}

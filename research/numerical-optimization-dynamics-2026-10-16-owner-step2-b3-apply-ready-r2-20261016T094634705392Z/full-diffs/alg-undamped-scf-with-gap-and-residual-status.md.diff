@@ -1,0 +1,21 @@
+--- current/items/alg-undamped-scf-with-gap-and-residual-status.md
++++ proposed/items/alg-undamped-scf-with-gap-and-residual-status.md
+@@ -7,7 +7,7 @@
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+ dependency_level: 3
+ deps: [def-self-consistent-projector-response-map, lem-gapped-projector-map-well-defined, alg-fixed-point-iteration]
+-justified_by: []
++justified_by: [lem-finite-budget-scf-iteration-work]
+ provenance:
+   statement: ai-altered
+   proof: not-applicable
+@@ -34,7 +34,7 @@
+ 2. Set $P_{k+1}^{raw}=\Phi(P_k)$ and $\rho_k=\|P_k-P_{k+1}^{raw}\|_F$. If $\rho_k\le\varepsilon$, return $(P_k,\texttt{residual-tolerance-met},\rho_k,k)$.
+ 3. If $k=N$, return $(P_k,\texttt{iteration-budget-exhausted},\rho_k,k)$. Otherwise set $P_{k+1}=P_{k+1}^{raw}$ and continue.
+ 
+-The procedure uses at most $N$ updates. It reports a residual stopping status,
+-gap loss, eigensolver failure, or budget exhaustion separately. A finite budget
++It reports a residual stopping status, gap loss, eigensolver failure, or budget
++exhaustion separately. A finite budget
+ does not guarantee that the residual tolerance will be met, and the definition
+ asserts no convergence from damping or from a positive gap alone.

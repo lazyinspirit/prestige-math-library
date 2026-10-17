@@ -1,0 +1,440 @@
+{
+  "group": "u",
+  "batches": ["93"],
+  "pages_read": [
+    "sparse-grid-cubature-and-mixed-regularity",
+    "sparse-grid-cubature-and-mixed-regularity-examples"
+  ],
+  "items_read": [
+    "def-smolyak-univariate-level-hierarchy",
+    "def-smolyak-cubature",
+    "lem-smolyak-dyadic-tensor-simpson-convergence",
+    "alg-smolyak-node-deduplication",
+    "def-smolyak-absolute-detail-summability",
+    "lem-smolyak-mixed-simpson-detail-decay",
+    "lem-smolyak-rectangular-telescope",
+    "alg-dimension-adaptive-smolyak-surplus-selection",
+    "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+    "thm-smolyak-polynomial-multi-degree-exactness",
+    "lem-smolyak-adaptive-surplus-termination",
+    "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+    "ex-smolyak-diagonal-ridge-breaks-mixed-regularity",
+    "ex-smolyak-four-dimensional-product-integrand",
+    "ex-smolyak-signed-weights-polynomial-chaos-coefficient"
+  ],
+  "conventions": [
+    {
+      "convention": "Levels start at zero; Q_{-1}=0, Δ_0=Q_0, and Δ_l=Q_l−Q_{l−1}. The selected Simpson hierarchy uses 2^{l+1} panels on [0,1], with three baseline nodes.",
+      "fixed_by": "def-smolyak-univariate-level-hierarchy",
+      "matters_for": [
+        "lem-smolyak-dyadic-tensor-simpson-convergence",
+        "lem-smolyak-mixed-simpson-detail-decay",
+        "lem-smolyak-rectangular-telescope",
+        "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+        "ex-smolyak-signed-weights-polynomial-chaos-coefficient"
+      ]
+    },
+    {
+      "convention": "An admissible Smolyak set is finite, nonempty, downward closed, and contains zero; cubature sums its tensor details. Work counts the entire distinct node union.",
+      "fixed_by": "def-smolyak-cubature",
+      "matters_for": [
+        "alg-smolyak-node-deduplication",
+        "alg-dimension-adaptive-smolyak-surplus-selection",
+        "thm-smolyak-polynomial-multi-degree-exactness",
+        "thm-smolyak-isotropic-mixed-smoothness-work-error-rate"
+      ]
+    },
+    {
+      "convention": "Canonical node keys agree exactly iff the real node tuples agree. Nodes with zero combined weight are still evaluated and counted; arithmetic and comparisons are exact.",
+      "fixed_by": "alg-smolyak-node-deduplication",
+      "matters_for": [
+        "alg-dimension-adaptive-smolyak-surplus-selection",
+        "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+        "ex-smolyak-four-dimensional-product-integrand"
+      ]
+    },
+    {
+      "convention": "A nonnegative multi-index sum is the supremum of all finite subsums, provided those subsums are bounded above; no enumeration is required.",
+      "fixed_by": "def-smolyak-absolute-detail-summability",
+      "matters_for": [
+        "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+        "thm-smolyak-isotropic-mixed-smoothness-work-error-rate"
+      ]
+    },
+    {
+      "convention": "For S={j_1<…<j_k}, D_S applies fourth derivatives in increasing coordinate order. Every D_S, including D_empty=f, is continuous on the closed cube, with one-sided endpoint derivatives and finite bounds M_S.",
+      "fixed_by": "lem-smolyak-mixed-simpson-detail-decay",
+      "matters_for": [
+        "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+        "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+        "ex-smolyak-diagonal-ridge-breaks-mixed-regularity"
+      ]
+    },
+    {
+      "convention": "The adaptive budget counts distinct samples for both accepted and candidate surpluses. An undersized baseline budget returns an empty accepted set and no cubature value. Surpluses are indicators, without an error-certificate claim.",
+      "fixed_by": "alg-dimension-adaptive-smolyak-surplus-selection",
+      "matters_for": ["lem-smolyak-adaptive-surplus-termination"]
+    },
+    {
+      "convention": "Polynomial exactness uses supplied nondecreasing one-dimensional degree bounds and the least levels attaining the required degrees; node counts do not determine exactness.",
+      "fixed_by": "thm-smolyak-polynomial-multi-degree-exactness",
+      "matters_for": ["thm-smolyak-polynomial-multi-degree-exactness"]
+    },
+    {
+      "convention": "The explicit work/error theorem uses the Simpson hierarchy, d≥1 and n≥2d, natural logarithms, and dimension-dependent constants. The four-dimensional example instead uses Clenshaw–Curtis degrees one and two.",
+      "fixed_by": "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+      "matters_for": [
+        "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+        "ex-smolyak-four-dimensional-product-integrand"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-smolyak-univariate-level-hierarchy",
+      "statement": "A nested hierarchy has X_{l−1}⊆X_l, Q_{−1}=0, Δ_0=Q_0 and Δ_l=Q_l−Q_{l−1}; the selected dyadic Simpson rule is Q_l(g)=Q_S(g;0,1,2^{l+1}). Tensor functionals multiply coordinate weights.",
+      "used_by": [
+        "def-smolyak-cubature",
+        "lem-smolyak-dyadic-tensor-simpson-convergence",
+        "lem-smolyak-mixed-simpson-detail-decay",
+        "lem-smolyak-rectangular-telescope",
+        "thm-smolyak-polynomial-multi-degree-exactness",
+        "thm-smolyak-isotropic-mixed-smoothness-work-error-rate"
+      ]
+    },
+    {
+      "id": "def-smolyak-cubature",
+      "statement": "For an admissible finite downward-closed Λ, Q_Λ(f)=Σ_{l∈Λ}δ_l(f), and W(Λ) is the cardinality of the union of its tensor-level node sets; combined weights may be negative or zero.",
+      "used_by": [
+        "alg-smolyak-node-deduplication",
+        "def-smolyak-absolute-detail-summability",
+        "alg-dimension-adaptive-smolyak-surplus-selection",
+        "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+        "thm-smolyak-polynomial-multi-degree-exactness",
+        "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+        "ex-smolyak-four-dimensional-product-integrand",
+        "ex-smolyak-signed-weights-polynomial-chaos-coefficient"
+      ]
+    },
+    {
+      "id": "lem-smolyak-mixed-simpson-detail-decay",
+      "statement": "Under its continuous sequential mixed fourth-derivative hypotheses, |δ_l(f)|≤M_{S(l)}(17/2880)^{|S(l)|}16^{−Σ_{j∈S(l)}l_j}; every finite absolute-detail subsum is at most Σ_{S⊆[d]}M_S(17/43200)^{|S|}.",
+      "used_by": [
+        "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+        "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+        "ex-smolyak-diagonal-ridge-breaks-mixed-regularity",
+        "cor-smolyak-chaos-coefficient-error-bound"
+      ]
+    },
+    {
+      "id": "lem-smolyak-rectangular-telescope",
+      "statement": "For d≥1 and terminal levels m_j≥0, the sum of tensor details over 0≤l_j≤m_j equals Q_{m_1}⊗⋯⊗Q_{m_d}.",
+      "used_by": [
+        "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+        "thm-smolyak-polynomial-multi-degree-exactness"
+      ]
+    },
+    {
+      "id": "lem-smolyak-dyadic-tensor-simpson-convergence",
+      "statement": "For d≥1 and continuous f:[0,1]^d→R, the selected dyadic tensor composite-Simpson rules satisfy Q_L^{⊗d}(f)→I_d(f).",
+      "used_by": [
+        "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+        "thm-smolyak-isotropic-mixed-smoothness-work-error-rate"
+      ]
+    },
+    {
+      "id": "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+      "statement": "For continuous f, tensor-rule convergence to I_d(f) and absolute detail summability imply |I_d(f)−Q_Λ(f)|≤Σ_{l∉Λ}|δ_l(f)| for every finite downward-closed Λ containing zero.",
+      "used_by": ["thm-smolyak-isotropic-mixed-smoothness-work-error-rate"]
+    },
+    {
+      "id": "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+      "statement": "For the Simpson hierarchy, d≥1, n≥2d, and the stated mixed-derivative class, the exact minimal-level node count satisfies 2^n binom(n−1,d−1)≤W_{n,d}≤D_d2^n(n+1)^{d−1}; the error is at most T_d‖f‖_{mix,d}16^{−n}(n+1)^{d−1}≤C_d‖f‖_{mix,d}W_{n,d}^{−4}(log(2+W_{n,d}))^{5(d−1)}.",
+      "used_by": [
+        "ex-smolyak-diagonal-ridge-breaks-mixed-regularity",
+        "cor-smolyak-chaos-coefficient-error-bound"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-finite-sum",
+      "used_for": "Finite sums, products, and empty-sum conventions throughout the construction.",
+      "opened": true
+    },
+    {
+      "id": "def-monoid-finite-product",
+      "used_for": "Finite coordinate products in cubature and rectangular telescoping.",
+      "opened": true
+    },
+    {
+      "id": "def-complete-ordered-field",
+      "used_for": "Supremum definitions of absolute-detail sums and T_d.",
+      "opened": true
+    },
+    {
+      "id": "def-multidimensional-darboux-integral",
+      "used_for": "The multiple Riemann integral on the nondegenerate cube.",
+      "opened": true
+    },
+    {
+      "id": "def-multidimensional-grid-partition",
+      "used_for": "Uniform cells, coverage, and volume sums in tensor Simpson convergence.",
+      "opened": true
+    },
+    {
+      "id": "def-multidimensional-darboux-sums",
+      "used_for": "Cell extrema and the lower/upper sums sandwiching tensor Simpson values.",
+      "opened": true
+    },
+    {
+      "id": "thm-multidimensional-riemann-criterion",
+      "used_for": "Darboux integrability context in the tensor convergence lemma.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+      "used_for": "Integrability of continuous functions on the cube.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of the cube and its closed cells.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-cantor-metric",
+      "used_for": "Uniform continuity controlling cell oscillations.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Finite extrema of continuous functions on compact cells.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Finite distributivity, splitting, monotonicity, products, and telescoping.",
+      "opened": true
+    },
+    {
+      "id": "lem-geometric-sequence-null",
+      "used_for": "Decay of the dyadic cell width.",
+      "opened": true
+    },
+    {
+      "id": "lem-power-laws",
+      "used_for": "Dyadic power identities and geometric detail estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-real-limit",
+      "used_for": "Sequence convergence with positive rational tolerances.",
+      "opened": true
+    },
+    {
+      "id": "lem-rat-embeds-dense",
+      "used_for": "Choosing rational tolerances below positive real gaps.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "The positive square root of d in the cell-diameter estimate.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-naturals-positive",
+      "used_for": "Positivity of embedded positive dimensions and panel counts.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-inverse-positive",
+      "used_for": "Positive reciprocals and reciprocal order in convergence and rate estimates.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-sign-rules",
+      "used_for": "Positivity and sign calculations, including the nonnegative polynomial witness.",
+      "opened": true
+    },
+    {
+      "id": "def-higher-derivatives-and-smoothness",
+      "used_for": "C^4 section regularity and one-sided endpoint derivatives.",
+      "opened": true
+    },
+    {
+      "id": "lem-triangle-inequality-finite",
+      "used_for": "Bounds on detail differences and finite omitted-detail sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-geometric-series",
+      "used_for": "The positive-level sum Σ_{r≥1}16^{−r}=1/15 and geometric domination establishing finite T_d.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-triangle-inequality",
+      "used_for": "Passing the finite omitted-tail bound to the tensor-rule limit.",
+      "opened": true
+    },
+    {
+      "id": "cor-riemann-integral-of-a-product-function",
+      "used_for": "Factoring integrals of tensor polynomials and both product examples.",
+      "opened": true
+    },
+    {
+      "id": "thm-multidimensional-integral-properties",
+      "used_for": "Extending polynomial exactness by finite linearity.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "The logarithm used in the work/error conversion.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Monotonicity, log 1=0, and log(2^n)=n log 2.",
+      "opened": true
+    },
+    {
+      "id": "thm-stars-and-bars",
+      "used_for": "Counting nonnegative level vectors of a fixed total level.",
+      "opened": true
+    },
+    {
+      "id": "cor-compositions-with-k-parts-are-counted-by-binomial-coefficients",
+      "used_for": "Counting positive active-coordinate levels and the work lower bound.",
+      "opened": true
+    },
+    {
+      "id": "def-binomial-coefficient",
+      "used_for": "Subset interpretation and boundary values in composition-count estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-binomial-theorem",
+      "used_for": "Bounding the ratio of successive terms defining T_d.",
+      "opened": true
+    },
+    {
+      "id": "lem-power-monotone",
+      "used_for": "Power comparisons in the geometric-domination argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Choosing an explicit finite start for geometric domination.",
+      "opened": true
+    },
+    {
+      "id": "def-integer-power",
+      "used_for": "Natural and negative powers in the rate proof.",
+      "opened": true
+    },
+    {
+      "id": "cor-of-one-positive",
+      "used_for": "Strict positivity in the finite geometric-sum estimate.",
+      "opened": true
+    },
+    {
+      "id": "def-derivative",
+      "used_for": "Difference quotients and one-sided endpoint conventions in the ridge example.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-of-a-power",
+      "used_for": "Polynomial derivatives, elementary coordinate integrals, and the ridge calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Derivative arithmetic in the ridge example.",
+      "opened": true
+    },
+    {
+      "id": "thm-quarter-turn-values-and-shift-formulas",
+      "used_for": "Clenshaw–Curtis endpoint and midpoint node identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-derivatives",
+      "used_for": "The value cos(0)=1 in the Clenshaw–Curtis node calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "The integrals of x and x² on [0,1].",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of the polynomial witness φ.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "One-dimensional integrability of φ and its interval restrictions.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "A positive lower bound on the integral of φ near zero.",
+      "opened": true
+    },
+    {
+      "id": "thm-additivity-over-subintervals",
+      "used_for": "Combining the near-zero positive contribution with the nonnegative remainder.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-mult-neg",
+      "used_for": "Nonnegativity of squares in the signed-weight example.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-zero-mult",
+      "used_for": "Zero factors and the zero case of square nonnegativity.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-smolyak-univariate-level-hierarchy",
+      "concern": "The Definition begins 'Let Q:[0,1]→R be a finite quadrature functional' but immediately defines Q(g)=Σ_i w_i g(x_i). Its arguments are functions g:[0,1]→R, rather than points of [0,1]. The displayed domain has the wrong type; the subsequent formula makes the intended functional unambiguous.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-smolyak-diagonal-ridge-breaks-mixed-regularity",
+      "concern": "The Example says the pure fourth derivative 'fails to exist along the diagonal'. Under the stated one-sided endpoint convention this needs an interior qualifier: at (0,0), the fixed-y section is x³ on [0,1], and at (1,1) it is (1−x)³, so their fourth endpoint derivatives exist and equal zero. Step 1.1 correctly proves failure for y∈(0,1); the example's regularity counterexample remains valid.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "sparse-grid-cubature-and-mixed-regularity",
+      "to": "composite-quadrature-rules",
+      "faithful": true,
+      "note": "Read the composite Simpson algorithm, cubic exactness theorem, and C^4 error theorem. The hierarchy uses admissible even panel counts; the detail estimate correctly combines the two error bounds to obtain (17/2880)16^{−l}. The exactness theorem uses cubic exactness without asserting increasing Simpson polynomial degree."
+    },
+    {
+      "from": "sparse-grid-cubature-and-mixed-regularity",
+      "to": "clenshaw-curtis-and-extrapolation-quadrature",
+      "faithful": true,
+      "note": "Read the quadrature definition and exactness statement. The four-dimensional example explicitly selects Clenshaw–Curtis polynomial degrees one and two, obtains endpoint and midpoint node sets, and uses only the supplied degree exactness. Its 48-node union and value 1/24 agree with the finite calculation."
+    },
+    {
+      "from": "sparse-grid-cubature-and-mixed-regularity",
+      "to": "gaussian-quadrature",
+      "faithful": true,
+      "note": "Read the Gaussian-rule and tensor-rule definitions and the exactness/positive-weights theorem. The signed-weight example uses positivity only for valid positive-measure moment data and explicitly disclaims Gaussian exactness for its high-degree polynomial."
+    },
+    {
+      "from": "polynomial-chaos-stochastic-collocation-and-galerkin-uq",
+      "to": "sparse-grid-cubature-and-mixed-regularity",
+      "faithful": true,
+      "note": "Read the downstream page and cor-smolyak-chaos-coefficient-error-bound. They retain the uniform cube law, n≥2d, the selected Simpson hierarchy, and the exact sequential mixed fourth-derivative and endpoint hypotheses for each coefficient integrand. The corollary combines the scalar estimates by a finite Euclidean norm bound without claiming a general-law or arbitrary-regularity rate."
+    }
+  ]
+}

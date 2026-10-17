@@ -1,0 +1,266 @@
+{
+  "group": "w",
+  "batches": ["26"],
+  "pages_read": [
+    "revised-simplex-linear-programming-and-certificates",
+    "revised-simplex-linear-programming-and-certificates-examples"
+  ],
+  "items_read": [
+    "def-revised-simplex-standard-form-linear-program",
+    "def-revised-simplex-basis-dictionary",
+    "alg-revised-simplex-residual-audit",
+    "lem-revised-simplex-basic-feasible-extreme-point-equivalence",
+    "thm-revised-simplex-primal-pivot-objective-ray-optimality",
+    "alg-revised-primal-simplex-bland-rule",
+    "alg-revised-dual-simplex-with-finite-budget",
+    "prop-revised-simplex-sparse-pricing-operation-count",
+    "thm-revised-simplex-primal-dual-residual-gap",
+    "thm-revised-simplex-bland-rule-finite-termination",
+    "thm-revised-dual-simplex-invariant-and-farkas",
+    "alg-revised-simplex-phase-one",
+    "thm-revised-simplex-phase-one-extraction-and-farkas",
+    "alg-revised-simplex-qr-basis-recompute-and-audit",
+    "thm-revised-simplex-qr-basis-residual-status-sound",
+    "ex-revised-simplex-unbounded-ray",
+    "ex-revised-simplex-ill-conditioned-basis-residual",
+    "ex-revised-simplex-primal-dual-trace",
+    "ex-revised-simplex-degenerate-cycle-prevented-by-bland",
+    "ex-revised-simplex-phase-one-infeasible"
+  ],
+  "conventions": [
+    {
+      "convention": "The LP minimizes cᵀx subject to Ax=b and x≥0. A Farkas certificate satisfies Aᵀq≥0 and bᵀq<0. Basis algorithms require full row rank; zero-dimensional systems are included.",
+      "fixed_by": "def-revised-simplex-standard-form-linear-program",
+      "matters_for": [
+        "def-revised-simplex-basis-dictionary",
+        "thm-revised-simplex-primal-pivot-objective-ray-optimality",
+        "thm-revised-dual-simplex-invariant-and-farkas",
+        "thm-revised-simplex-phase-one-extraction-and-farkas",
+        "ex-revised-simplex-phase-one-infeasible"
+      ]
+    },
+    {
+      "convention": "B is an ordered list of distinct basis-column indices; y=A_B⁻ᵀc_B and reduced costs are c_j−a_jᵀy. Dual feasibility means nonnegative nonbasic reduced costs. When m=0, the basis and multiplier are empty.",
+      "fixed_by": "def-revised-simplex-basis-dictionary",
+      "matters_for": [
+        "lem-revised-simplex-basic-feasible-extreme-point-equivalence",
+        "thm-revised-simplex-primal-pivot-objective-ray-optimality",
+        "alg-revised-primal-simplex-bland-rule",
+        "alg-revised-dual-simplex-with-finite-budget",
+        "prop-revised-simplex-sparse-pricing-operation-count",
+        "alg-revised-simplex-qr-basis-recompute-and-audit"
+      ]
+    },
+    {
+      "convention": "Bland's primal rule chooses the least-index nonbasic variable with negative reduced cost and, among minimum-ratio rows, the least-index basic variable.",
+      "fixed_by": "alg-revised-primal-simplex-bland-rule",
+      "matters_for": [
+        "thm-revised-simplex-bland-rule-finite-termination",
+        "alg-revised-simplex-phase-one",
+        "alg-revised-simplex-qr-basis-recompute-and-audit",
+        "ex-revised-simplex-degenerate-cycle-prevented-by-bland"
+      ]
+    },
+    {
+      "convention": "The dual algorithm chooses the least-index negative basic variable and minimizes reduced cost divided by the negative transformed-row coefficient. Its nonnegative budget counts pivots; optimality and infeasibility tests precede budget exhaustion.",
+      "fixed_by": "alg-revised-dual-simplex-with-finite-budget",
+      "matters_for": [
+        "thm-revised-dual-simplex-invariant-and-farkas",
+        "alg-revised-simplex-qr-basis-recompute-and-audit",
+        "ex-revised-simplex-primal-dual-trace"
+      ]
+    },
+    {
+      "convention": "Finite binary inputs are interpreted as exact dyadic rationals. The audit uses r_p=Ax−b, r_d=c−Aᵀy and g=cᵀx−bᵀy; verified optimality requires x≥0, r_p=0, r_d≥0 and g=0 exactly. Empty-vector infinity norms are zero.",
+      "fixed_by": "alg-revised-simplex-residual-audit",
+      "matters_for": [
+        "thm-revised-simplex-primal-dual-residual-gap",
+        "alg-revised-simplex-qr-basis-recompute-and-audit",
+        "thm-revised-simplex-qr-basis-residual-status-sound",
+        "ex-revised-simplex-ill-conditioned-basis-residual"
+      ]
+    },
+    {
+      "convention": "Phase I first changes row signs to make Db≥0, then minimizes the sum of nonnegative artificial variables in DAx+u=Db. Zero-valued artificial basics may leave through either sign of nonzero pivot; redundant transformed equations are deleted.",
+      "fixed_by": "alg-revised-simplex-phase-one",
+      "matters_for": [
+        "thm-revised-simplex-phase-one-extraction-and-farkas",
+        "ex-revised-simplex-phase-one-infeasible"
+      ]
+    },
+    {
+      "convention": "Sparse pricing counts every stored CSR entry, including duplicates and explicit zeros, rather than counting mathematical nonzeros. Its arithmetic count assumes exact real operations.",
+      "fixed_by": "prop-revised-simplex-sparse-pricing-operation-count",
+      "matters_for": [
+        "prop-revised-simplex-sparse-pricing-operation-count"
+      ]
+    },
+    {
+      "convention": "The QR service budgets basis-evaluation attempts, requires checked rational nonsingularity witnesses, recomputes both current-basis factorizations after replacements, and admits transitions only through exact checks or certified enclosures. Certificate arithmetic is exact or certified upward; retained audits identify their associated basis.",
+      "fixed_by": "alg-revised-simplex-qr-basis-recompute-and-audit",
+      "matters_for": [
+        "thm-revised-simplex-qr-basis-residual-status-sound"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-revised-simplex-basis-dictionary",
+      "statement": "For full-row-rank A, an ordered basis B has invertible A_B; x_B(B)=A_B⁻¹b and nonbasic coordinates vanish. Its multiplier is y(B)=A_B⁻ᵀc_B, and reduced costs are c_j−a_jᵀy(B). Primal feasibility means x_B(B)≥0; dual feasibility means all nonbasic reduced costs are nonnegative.",
+      "used_by": [
+        "lem-revised-simplex-basic-feasible-extreme-point-equivalence",
+        "thm-revised-simplex-primal-pivot-objective-ray-optimality",
+        "alg-revised-primal-simplex-bland-rule",
+        "alg-revised-dual-simplex-with-finite-budget",
+        "thm-revised-simplex-bland-rule-finite-termination",
+        "thm-revised-dual-simplex-invariant-and-farkas",
+        "alg-revised-simplex-phase-one",
+        "alg-revised-simplex-qr-basis-recompute-and-audit"
+      ]
+    },
+    {
+      "id": "thm-revised-simplex-primal-pivot-objective-ray-optimality",
+      "statement": "At a primal-feasible basis, a negative reduced-cost entering column gives a negative-cost feasible ray if every component of d=A_B⁻¹a_j is nonpositive. Otherwise every minimum-ratio row gives a valid feasible pivot, with objective change θ times the entering reduced cost. A primal-feasible basis with all nonbasic reduced costs nonnegative is optimal.",
+      "used_by": [
+        "thm-revised-simplex-bland-rule-finite-termination",
+        "ex-revised-simplex-unbounded-ray",
+        "ex-revised-simplex-primal-dual-trace",
+        "ex-revised-simplex-degenerate-cycle-prevented-by-bland"
+      ]
+    },
+    {
+      "id": "thm-revised-simplex-bland-rule-finite-termination",
+      "statement": "For exact arithmetic and a finite standard-form LP with full-row-rank A, the primal Bland algorithm started from any primal-feasible basis terminates at an optimal basis or returns a strictly negative-cost feasible ray. If the feasible set is nonempty and the objective is bounded below, an optimal basis exists and is returned. The pivot count is at most the number of possible bases, hence at most binomial(n,m).",
+      "used_by": [
+        "alg-revised-simplex-phase-one",
+        "thm-revised-simplex-phase-one-extraction-and-farkas",
+        "ex-revised-simplex-degenerate-cycle-prevented-by-bland"
+      ]
+    },
+    {
+      "id": "lem-revised-simplex-basic-feasible-extreme-point-equivalence",
+      "statement": "For full-row-rank A and feasible x, x is extreme if and only if its positive-support columns are linearly independent, equivalently if and only if x is a basic feasible solution. Every nonempty P(A,b) has a basic feasible solution, including the empty-basis case m=0.",
+      "used_by": [
+        "thm-revised-simplex-bland-rule-finite-termination"
+      ]
+    },
+    {
+      "id": "thm-revised-simplex-primal-dual-residual-gap",
+      "statement": "For the exact audit residuals, g=xᵀr_d+yᵀr_p and |g|≤‖x‖₁‖r_d‖∞+‖y‖₁‖r_p‖∞. If Ax=b, x≥0, c−Aᵀy≥0 and g=0, then x is optimal. For infeasible candidates the bound does not bound distance to an optimal value.",
+      "used_by": [
+        "ex-revised-simplex-ill-conditioned-basis-residual",
+        "thm-revised-simplex-qr-basis-residual-status-sound"
+      ]
+    },
+    {
+      "id": "thm-revised-dual-simplex-invariant-and-farkas",
+      "statement": "A dual-simplex pivot from a negative basic row using the stated minimum ratio preserves dual feasibility. If that row has no negative nonbasic transformed coefficient, q=A_B⁻ᵀe_i satisfies Aᵀq≥0 and bᵀq<0. A basis that is both primal and dual feasible is optimal; budget exhaustion is inconclusive.",
+      "used_by": [
+        "ex-revised-simplex-primal-dual-trace"
+      ]
+    },
+    {
+      "id": "thm-revised-simplex-phase-one-extraction-and-farkas",
+      "statement": "For any exact system Ax=b, x≥0, Phase I terminates. Its minimum artificial-variable sum is zero if and only if the original system is feasible. A positive minimum yields a Farkas certificate; a zero minimum permits extraction of an equivalent full-row-rank reduced system with a basic feasible solution using only original columns.",
+      "used_by": [
+        "ex-revised-simplex-phase-one-infeasible"
+      ]
+    },
+    {
+      "id": "alg-revised-simplex-qr-basis-recompute-and-audit",
+      "statement": "The finite-budget basis service checks nonsingularity witnesses, computes fresh scaled-Householder QR for A_B and its transpose, certifies solve residuals, performs the exact stored-data audit, and checks requested primal or dual transitions by exact rational arithmetic or certified intervals before replacing a basis.",
+      "used_by": [
+        "thm-revised-simplex-qr-basis-residual-status-sound"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-standard-relative-floating-point-model-and-unit-roundoff",
+      "used_for": "Underlying relative-error and exact-zero conventions of the operationwise arithmetic supplier.",
+      "opened": true
+    },
+    {
+      "id": "lem-product-of-one-plus-deltas-gives-theta-n",
+      "used_for": "Product-of-rounding-factor bounds in the opened Householder, triangular-substitution and residual suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-householder-reflector",
+      "used_for": "Exact reflector convention underlying the scaled Householder procedure.",
+      "opened": true
+    },
+    {
+      "id": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+      "used_for": "Full and reduced QR dimensions and exact orthonormality conventions used by the numerical suppliers.",
+      "opened": true
+    },
+    {
+      "id": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+      "used_for": "Exact orthogonality and annihilation used in the local Householder-error supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+      "used_for": "Transformation-product and triangular-block conventions used by the QR aggregation supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+      "used_for": "Exact full-column-rank QR least-squares interpretation in the computed least-squares supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Dot-product, matrix-vector and rank-one norm bounds in the numerical residual and Householder suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-frobenius-matrix-norm",
+      "used_for": "Entrywise and columnwise norm identities used in QR residual bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Induced-norm convention, including zero domains, underlying conditioning and reflector estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-differentiable-convex-functions-and-gradient-inequality",
+      "used_for": "Gradient inequality used by the convex KKT sufficiency supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-nearest-point-in-a-nonempty-closed-convex-set",
+      "used_for": "Projection existence and uniqueness in the finite-system Farkas supplier; its positive-dimensional restriction is handled there.",
+      "opened": true
+    },
+    {
+      "id": "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+      "used_for": "Projection inequality and its sign orientation in the Farkas supplier.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "revised-simplex-linear-programming-and-certificates",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Checked the arithmetic definition, scaled Householder procedure and local bound, QR aggregation, rounded substitution, computed least-squares equations and rounded residual allowance against their consumer uses. The square-basis specialization preserves success, range and coefficient hypotheses. The status theorem uses perturbation equations without importing the supplier's additional perturbed-system nonsingularity premise for uniqueness."
+    },
+    {
+      "from": "revised-simplex-linear-programming-and-certificates",
+      "to": "sparse-matrix-models-and-kernel-costs",
+      "faithful": true,
+      "note": "The pricing proposition uses the supplier's zero-based CSR reconstruction, including duplicates, explicit zeros and empty streams. Its exact arithmetic count concerns stored entries and introduces no finite-precision, timing or fill claim."
+    },
+    {
+      "from": "revised-simplex-linear-programming-and-certificates",
+      "to": "inequality-kkt-duality-and-optimality-certificates",
+      "faithful": true,
+      "note": "The optimality proof instantiates g_j(z)=−z_j, equality multiplier −y and inequality multiplier c−Aᵀy, matching the supplier's signs and convex hypotheses; n=0 is handled separately. Phase I uses the Farkas orientation Aᵀq≥0, bᵀq<0 consistently, with q=−Dᵀy."
+    }
+  ]
+}

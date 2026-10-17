@@ -1,0 +1,160 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "status": "research-only-unexecuted-proposal",
+  "family": "numerical-implicit-rk-fixture",
+  "export": "numericalImplicitRKChecks",
+  "code": "research/numerical-optimization-dynamics-2026-10-16-owner-finite-smoke-range57-70/checks.mjs",
+  "helper_import": "research/numerical-optimization-dynamics-2026-10-16-owner-finite-smoke-core-rosenbrock/numerical-core.mjs",
+  "operations": [
+    {
+      "item": "prop-two-stage-sdirk-order-two-and-l-stability",
+      "json_pointer": "/contracts/prop-two-stage-sdirk-order-two-and-l-stability/finite_smoke/0",
+      "before": {
+        "case": "tableau order and scalar stability",
+        "check": "The two order moments are 1 and 1/2; the expanded modulus difference is a sum of nonnegative monomials for Re(z)<=0."
+      },
+      "proposed": {
+        "case": "tableau order and scalar stability",
+        "check": "numerical-implicit-rk-fixture",
+        "fixture": "sdirk-tableau-stability",
+        "asserts": "Since $\\sqrt2\\ge0$ and $(\\sqrt2)^2=2$ by [F3], [F4] rules out $\\sqrt2\\le1$ because that would imply $2\\le1$. Thus $\\sqrt2>1$, so $0<1/\\sqrt2<1$ and $0<\\gamma<1$. The row sums of $A$ are $c$, and $b^T$ is the last row of $A$, so the method is internally consistent and stiffly accurate by [F1] and [F2]. Also $\\sum_i b_i=1$ and $b^Tc=(1-\\gamma)\\gamma+\\gamma=2\\gamma-\\gamma^2=1/2$, since substituting $\\gamma=1-1/\\sqrt2$ gives $2\\gamma-\\gamma^2=1/2$."
+      },
+      "source_anchor": "items/prop-two-stage-sdirk-order-two-and-l-stability.md#step-1.1",
+      "limits": "Concrete bounded fixture only; source proof and theorem unchanged."
+    },
+    {
+      "item": "prop-two-stage-radau-iia-order-three-and-l-stability",
+      "json_pointer": "/contracts/prop-two-stage-radau-iia-order-three-and-l-stability/finite_smoke/0",
+      "before": {
+        "case": "Radau order moments",
+        "check": "The four moments are 1, 1/2, 1/3, and 1/6; the scalar modulus difference is nonnegative on the closed left half-plane."
+      },
+      "proposed": {
+        "case": "Radau order moments",
+        "check": "numerical-implicit-rk-fixture",
+        "fixture": "radau-tableau-stability",
+        "asserts": "The row sums of $A$ equal $c$, $b^T$ is the final row of $A$, and direct arithmetic gives $\\sum_i b_i=1,\\qquad b^Tc=\\frac34\\frac13+\\frac14=\\frac12,\\qquad b^Tc^2=\\frac34\\frac19+\\frac14=\\frac13.$ Also $Ac=(1/18,1/2)^T$, so $b^TAc=(3/4)(1/18)+(1/4)(1/2)=1/6$."
+      },
+      "source_anchor": "items/prop-two-stage-radau-iia-order-three-and-l-stability.md#step-1.1",
+      "limits": "Concrete bounded fixture only; source proof and theorem unchanged."
+    },
+    {
+      "item": "thm-implicit-rk-global-order-with-stage-residual-control",
+      "json_pointer": "/contracts/thm-implicit-rk-global-order-with-stage-residual-control/finite_smoke/0",
+      "before": {
+        "case": "residual rate",
+        "check": "An update residual bounded by D*h^(p+1) contributes at most 3D*h^(p+1) per step and preserves global order p."
+      },
+      "proposed": {
+        "case": "residual rate",
+        "check": "numerical-implicit-rk-fixture",
+        "fixture": "stage-residual-scaling",
+        "asserts": "For an approximate stage vector and the exact stages with the same input, [F2] and $q\\le1/2$ give $\\|\\widetilde Y_n-Y_n\\|_{\\infty,2}\\le2D h^{p+1}$. Stiff accuracy and the residual equation give the method output $\\widetilde y_{n+1}=\\widetilde Y_{n,s}-G_{n,s}(\\widetilde Y_n)$, whereas the exact output is $Y_{n,s}$. Since $\\|G_{n,s}\\|_2\\le\\|G_n\\|_{\\infty,2}\\le D h^{p+1}$, the output perturbation is at most $3D h^{p+1}$."
+      },
+      "source_anchor": "items/thm-implicit-rk-global-order-with-stage-residual-control.md#step-1.3",
+      "limits": "Concrete bounded fixture only; source proof and theorem unchanged."
+    },
+    {
+      "item": "cor-constant-step-bdf2-order-two-with-consistent-start",
+      "json_pointer": "/contracts/cor-constant-step-bdf2-order-two-with-consistent-start/finite_smoke/0",
+      "before": {
+        "case": "constant step ratio",
+        "check": "Every adjacent ratio equals 1, strictly below the BDF2 threshold 1+sqrt(2)."
+      },
+      "proposed": {
+        "case": "constant step ratio",
+        "check": "numerical-implicit-rk-fixture",
+        "fixture": "constant-bdf2-ratio",
+        "asserts": "Choose $\\varepsilon>0$ so that every closed max-norm $\\varepsilon$-ball about $y([0,T])$ lies in $K$; such a uniform $\\varepsilon$ exists by compactness and the interior assumption. Set $\\eta=\\varepsilon/10$. Taylor expansion and $y\\in C^3$ give $\\rho_n=3y(t_{n+1})-4y(t_n)+y(t_{n-1})-2h f(t_{n+1},y(t_{n+1}))$, with $\\|\\rho_n\\|_\\infty\\le C_\\rho h^3$ uniformly in $n$ and $h$. For any $U,V$ within $\\eta$ of $y(t_n),y(t_{n-1})$, respectively, $U,V\\in K$, so the assumed all-histories condition supplies the unique root $Z$ in $B_{n+1}\\subset K$. Subtracting the exact residual equation and using the common Lipschitz constant $L$ gives $$(3-2hL)\\|Z-y(t_{n+1})\\|_\\infty\\le4\\|U-y(t_n)\\|_\\infty+\\|V-y(t_{n-1})\\|_\\infty+C_\\rho h^3\\le5\\eta+C_\\rho h^3.$$ Choose $h$ uniformly small enough that $2hL\\le1$ and $C_\\rho h^3\\le\\varepsilon/2$. Then $\\|Z-y(t_{n+1})\\|_\\infty\\le\\varepsilon/2<\\varepsilon$. Any two roots $Z,W\\in K$ for the same history satisfy $3\\|Z-W\\|_\\infty\\le2hL\\|Z-W\\|_\\infty$, hence coincide. Therefore the $\\varepsilon$-ball contains exactly one root, and it is exactly the unique root in the prescribed $B_{n+1}$ selected by the algorithm. These $\\varepsilon,\\eta$ and the step threshold are independent of $n$ and $N$. On the constant grid choose $r_{\\min}=r_*=1$ and $H=h$. All premises of the full revised theorem [F2], including its uniform local branch and selection premise, now hold, so it yields the asserted $O(h^2)$ maximum error."
+      },
+      "source_anchor": "items/cor-constant-step-bdf2-order-two-with-consistent-start.md#step-1.1",
+      "limits": "Concrete bounded fixture only; source proof and theorem unchanged."
+    },
+    {
+      "item": "ex-newton-budget-exhaustion-with-a-unique-backward-euler-root",
+      "json_pointer": "/contracts/ex-newton-budget-exhaustion-with-a-unique-backward-euler-root/finite_smoke/0",
+      "before": {
+        "case": "zero correction budget",
+        "check": "Initial residual norm is 1, above tolerance 0.1, so the finite solver returns budget exhaustion."
+      },
+      "proposed": {
+        "case": "zero correction budget",
+        "check": "numerical-implicit-rk-fixture",
+        "fixture": "newton-zero-budget",
+        "asserts": "Since the current residual exceeds tolerance and the correction budget is already zero, the finite solver returns iteration-budget-exhausted, despite the unique BE root proved in step 2.1. No forward-error statement follows from this status."
+      },
+      "source_anchor": "items/ex-newton-budget-exhaustion-with-a-unique-backward-euler-root.md#step-3.1",
+      "limits": "Concrete bounded fixture only; source proof and theorem unchanged."
+    },
+    {
+      "item": "ex-stiff-scalar-decay-and-trapezoid-ringing",
+      "json_pointer": "/contracts/ex-stiff-scalar-decay-and-trapezoid-ringing/finite_smoke/0",
+      "before": {
+        "case": "lambda*h=100",
+        "check": "Exact factors: trapezoid -49/51, BE 1/101, SDIRK formula from exact gamma, and Radau formula from its rational function."
+      },
+      "proposed": {
+        "case": "lambda*h=100",
+        "check": "numerical-implicit-rk-fixture",
+        "fixture": "stiff-decay-factors",
+        "asserts": "Backward Euler gives $R_{\\mathrm{BE}}(-100)=1/101\\approx0.00990$. The proved scalar functions give $R_S(-100)=\\frac{1-100(1-2\\gamma)}{(1+100\\gamma)^2}\\approx-0.0441,\\qquad R_R(-100)=\\frac{1-100/3}{1+200/3+10000/6}\\approx-0.0186.$ Each L-stable method damps this stiff mode strongly at this step size; the trapezoidal factor instead changes sign and has magnitude near one. These are scalar linear-test calculations only and imply no nonlinear stability comparison."
+      },
+      "source_anchor": "items/ex-stiff-scalar-decay-and-trapezoid-ringing.md#step-2.1",
+      "limits": "Concrete bounded fixture only; source proof and theorem unchanged."
+    },
+    {
+      "item": "ex-dissipative-backward-euler-residual-contraction",
+      "json_pointer": "/contracts/ex-dissipative-backward-euler-residual-contraction/finite_smoke/0",
+      "before": {
+        "case": "h=2, mu=1",
+        "check": "Approximate endpoint 1/3 has update residual 2/27 and the theorem gives error bound 2/81."
+      },
+      "proposed": {
+        "case": "h=2, mu=1",
+        "check": "numerical-implicit-rk-fixture",
+        "fixture": "dissipative-be-residual",
+        "asserts": "At $\\widetilde u_1=1/3$, the left side of the root equation is $1+2/27$, so the update residual is $\\eta_0=2/27$ and the derivative residual is $\\eta_0/h=1/27$. Here $q=1/(1+2)=1/3$. Applying [F2] gives $|\\widetilde u_1-u_1|\\le q|\\eta_0|=\\frac13\\frac{2}{27}=\\frac{2}{81}.$"
+      },
+      "source_anchor": "items/ex-dissipative-backward-euler-residual-contraction.md#step-2.1",
+      "limits": "Concrete bounded fixture only; source proof and theorem unchanged."
+    },
+    {
+      "item": "ex-robertson-reaction-system-newton-work",
+      "json_pointer": "/contracts/ex-robertson-reaction-system-newton-work/finite_smoke/0",
+      "before": {
+        "case": "Newton, binary64, budget 12",
+        "check": "Starting residual 5.6568542494923805e-5; residual falls to 1.43041173542e-16 after five exact-Jacobian corrections, below 1e-12."
+      },
+      "proposed": {
+        "case": "Newton, binary64, budget 12",
+        "check": "numerical-implicit-rk-fixture",
+        "fixture": "robertson-newton",
+        "asserts": "Applying the stated Newton correction formula with the displayed Jacobian and binary64 partial-pivoting elimination gives the Newton residual sequence in the Numerical record. It first falls below $10^{-12}$ at count five; the residuals at counts zero through four exceed the tolerance. Since the budget is 12, this binary64 implementation returns `root` after five corrections. Each correction refreshes and factors one Jacobian, then solves once, giving five assemblies/factorizations and five solves."
+      },
+      "source_anchor": "items/ex-robertson-reaction-system-newton-work.md#step-2.1",
+      "limits": "Concrete bounded fixture only; source proof and theorem unchanged."
+    },
+    {
+      "item": "ex-robertson-reaction-system-newton-work",
+      "json_pointer": "/contracts/ex-robertson-reaction-system-newton-work/finite_smoke/1",
+      "before": {
+        "case": "chord, binary64, budget 8, refresh 8",
+        "check": "After eight frozen-Jacobian corrections residual is 6.19977506348e-5, above 1e-12; one factorization and eight solves."
+      },
+      "proposed": {
+        "case": "chord, binary64, budget 8, refresh 8",
+        "check": "numerical-implicit-rk-fixture",
+        "fixture": "robertson-chord",
+        "asserts": "With chord refresh period eight, [F2] refreshes at count zero and retains that factorization for corrections zero through seven. The residuals at counts zero through eight all exceed $10^{-12}$, and the budget is eight, so this binary64 implementation returns `iteration-budget-exhausted`. This uses one assembly/factorization and eight linear solves. The mode is unconstrained, so negative intermediate second components do not violate its domain $\\mathbb R^3$."
+      },
+      "source_anchor": "items/ex-robertson-reaction-system-newton-work.md#step-3.1",
+      "limits": "Concrete bounded fixture only; source proof and theorem unchanged."
+    }
+  ],
+  "fixture_count": 9,
+  "canonical_apply": false,
+  "execution": "Neither fixture/check/self-test, syntax execution nor gates were run. Root owns registry integration and actual execution.",
+  "bounded_models": "Tableau finite moments/left-half-plane grid; f=-y residual perturbations; finite constant-grid ratios; zero-correction cubic residual; scalar stiff factors; rational BE residual units; actual binary64 partial-pivot LU Newton/chord traces with real factorization reuse.",
+  "rounding_limits": "Robertson printed residual tolerances use 1e-13 absolute +2e-7 relative to printed residual; statuses and first crossing/counters checked separately. SDIRK irrational coefficients and finite grid use binary64 comparisons. This is not an exact-backend or general stability/order proof.",
+  "preservation": "Only nine finite_smoke entries changed in proposed batch65 carrier; all boundaries/citations/derivations/history remain byte-equivalent as parsed JSON. Source-exact asserts are copied whole current numbered proof paragraphs without trailing tags."
+}

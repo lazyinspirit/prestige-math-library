@@ -1,0 +1,189 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-49.pages.json
++++ r2proposed/research/numerical-optimization-dynamics-2026-10-16-batch-49.pages.json
+@@ -27,7 +27,10 @@
+         "deps": [
+           "def-frobenius-matrix-norm",
+           "thm-singular-value-decomposition",
+-          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
++          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
++          "thm-determinant-multiplicative",
++          "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus",
++          "thm-determinant-of-a-triangular-matrix"
+         ],
+         "dependency_level": 0
+       },
+@@ -48,6 +51,7 @@
+           "def-matrix-minors-cofactors-and-adjugate",
+           "thm-laplace-cofactor-expansion",
+           "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
++          "thm-determinant-of-transpose",
+           "thm-operator-invertible-iff-determinant-nonzero"
+         ],
+         "dependency_level": 0
+@@ -74,7 +78,8 @@
+           "thm-schur-triangularisation",
+           "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+           "def-linear-isometry-and-orthogonal-or-unitary-operator",
+-          "cor-operator-norm-submultiplicative-and-t-star-t-identity"
++          "cor-operator-norm-submultiplicative-and-t-star-t-identity",
++          "thm-the-complex-numbers-are-algebraically-closed"
+         ],
+         "dependency_level": 1
+       },
+@@ -83,7 +88,8 @@
+         "kind": "lemma",
+         "title": "A negative-real-part shift of a Hurwitz matrix is invertible",
+         "deps": [
+-          "def-hurwitz-matrix-and-continuous-lyapunov-equation"
++          "def-hurwitz-matrix-and-continuous-lyapunov-equation",
++          "cor-matrix-rank-nullity"
+         ],
+         "dependency_level": 1
+       },
+@@ -104,7 +110,13 @@
+           "def-sylvester-operator-and-separation-number",
+           "lem-sylvester-vectorization-isometry-and-kronecker-identity",
+           "thm-schur-triangularisation",
+-          "thm-singular-value-decomposition"
++          "thm-singular-value-decomposition",
++          "lem-characteristic-polynomial-of-block-triangular-matrix",
++          "def-characteristic-polynomial-of-a-matrix",
++          "def-determinant-of-a-square-matrix",
++          "thm-operator-invertible-iff-determinant-nonzero",
++          "thm-determinant-of-a-triangular-matrix",
++          "thm-the-complex-numbers-are-algebraically-closed"
+         ],
+         "dependency_level": 2
+       },
+@@ -132,7 +144,26 @@
+           "def-hurwitz-matrix-and-continuous-lyapunov-equation",
+           "lem-hurwitz-negative-shift-matrix-invertible"
+         ],
+-        "dependency_level": 2
++        "dependency_level": 2,
++        "provenance": {
++          "statement": "literature-derived",
++          "proof": "not-applicable"
++        },
++        "verification": {
++          "precheck": "n/a"
++        },
++        "sources": {
++          "references": [
++            {
++              "title": "Valeria Simoncini, Computational Methods for Linear Matrix Equations, SIAM Review 58(3), 2016",
++              "url": "https://www.dm.unibo.it/~simoncin/matrixeq.pdf"
++            },
++            {
++              "title": "Elias Jarlebring, Numerical Methods for Lyapunov Equations, lecture notes in numerical linear algebra, 2017",
++              "url": "https://people.kth.se/~eliasj/NLA/matrixeqs.pdf"
++            }
++          ]
++        }
+       },
+       {
+         "id": "thm-sylvester-residual-to-forward-error-bound",
+@@ -166,7 +197,11 @@
+           "thm-sylvester-unique-solvability-spectral-separation",
+           "thm-sylvester-residual-to-forward-error-bound",
+           "thm-continuous-lyapunov-integral-and-positivity",
+-          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
++          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
++          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
++          "thm-determinant-of-transpose",
++          "lem-complex-conjugation-and-modulus-laws",
++          "def-determinant-of-a-square-matrix"
+         ],
+         "dependency_level": 4
+       },
+@@ -185,7 +220,26 @@
+           "def-exact-real-2x2-discriminant-sign-predicate",
+           "lem-exact-rational-two-by-two-discriminant-sign"
+         ],
+-        "dependency_level": 5
++        "dependency_level": 5,
++        "provenance": {
++          "statement": "literature-derived",
++          "proof": "not-applicable"
++        },
++        "verification": {
++          "precheck": "n/a"
++        },
++        "sources": {
++          "references": [
++            {
++              "title": "Valeria Simoncini, Computational Methods for Linear Matrix Equations, SIAM Review 58(3), 2016",
++              "url": "https://www.dm.unibo.it/~simoncin/matrixeq.pdf"
++            },
++            {
++              "title": "Elias Jarlebring, Numerical Methods for Lyapunov Equations, lecture notes in numerical linear algebra, 2017",
++              "url": "https://people.kth.se/~eliasj/NLA/matrixeqs.pdf"
++            }
++          ]
++        }
+       },
+       {
+         "id": "thm-bartels-stewart-sylvester-exact-correctness",
+@@ -207,6 +261,62 @@
+           "alg-finite-budget-francis-schur-reduction"
+         ],
+         "dependency_level": 6
++      },
++      {
++        "id": "thm-bartels-stewart-finite-status-and-local-pivot-uniqueness",
++        "title": "Finite Bartels–Stewart statuses and successful-pivot uniqueness",
++        "kind": "theorem",
++        "deps": [
++          "alg-bartels-stewart-sylvester-equation",
++          "lem-adjugate-inverse-formula-over-a-field",
++          "thm-finite-budget-francis-schur-termination-and-status",
++          "thm-bartels-stewart-sylvester-exact-correctness"
++        ],
++        "proof_strategy": "direct",
++        "provenance": {
++          "statement": "ai-altered",
++          "proof": "ai-generated"
++        },
++        "sources": {
++          "references": [
++            {
++              "title": "Valeria Simoncini, Computational Methods for Linear Matrix Equations, SIAM Review 58(3), 2016",
++              "url": "https://www.dm.unibo.it/~simoncin/matrixeq.pdf",
++              "locator": "Adapted numerical-method setting; this finite termination/status and successful-pivot composition is proved locally using the named typed suppliers, not asserted as a verbatim external theorem. No new external full-text reading is claimed."
++            },
++            {
++              "title": "Elias Jarlebring, Numerical Methods for Lyapunov Equations, lecture notes in numerical linear algebra, 2017",
++              "url": "https://people.kth.se/~eliasj/NLA/matrixeqs.pdf"
++            }
++          ]
++        }
++      },
++      {
++        "id": "thm-low-rank-adi-finite-status-and-well-definedness",
++        "title": "Finite ADI shifts have well-defined solves and explicit statuses",
++        "kind": "theorem",
++        "deps": [
++          "alg-low-rank-alternating-direction-implicit-lyapunov",
++          "lem-hurwitz-negative-shift-matrix-invertible"
++        ],
++        "proof_strategy": "direct",
++        "provenance": {
++          "statement": "ai-altered",
++          "proof": "ai-generated"
++        },
++        "sources": {
++          "references": [
++            {
++              "title": "Valeria Simoncini, Computational Methods for Linear Matrix Equations, SIAM Review 58(3), 2016",
++              "url": "https://www.dm.unibo.it/~simoncin/matrixeq.pdf",
++              "locator": "Adapted numerical-method setting; this finite termination/status and successful-pivot composition is proved locally using the named typed suppliers, not asserted as a verbatim external theorem. No new external full-text reading is claimed."
++            },
++            {
++              "title": "Elias Jarlebring, Numerical Methods for Lyapunov Equations, lecture notes in numerical linear algebra, 2017",
++              "url": "https://people.kth.se/~eliasj/NLA/matrixeqs.pdf"
++            }
++          ]
++        }
+       }
+     ]
+   },

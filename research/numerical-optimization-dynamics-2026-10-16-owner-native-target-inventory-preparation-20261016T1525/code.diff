@@ -1,0 +1,216 @@
+--- tools/step3-scope.mjs (archived original)
++++ research-only owner-evidence-inventory.mjs
+@@ -16,27 +16,32 @@
+ import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+ import { dirname, join, resolve } from 'node:path';
+ import { fileURLToPath } from 'node:url';
+-import { split, yaml } from './pathway-lib.mjs';
+-import { itemHashGuard } from './item-hash.mjs';
+-import { step3Escalations, externalContextReceipt } from './step3-escalations.mjs';
+-import { step3Adjudicators } from './step3-adjudicators.mjs';
+-import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
+-import { loadOwnerIdMigrations } from './step3-owner-id-migrations.mjs';
+-import { loadStep3OwnerRehomes, projectOwnerRehomeBatches, ownerRehomeCarrierBatch } from './step3-owner-rehomes.mjs';
+-import { activeOwnershipRows } from './defect-ledger-ownership.mjs';
+-import { loadOwnerHistoricalRoutes } from './step3-owner-historical-routes.mjs';
+-import { isCertifiedOwnerContextAddition } from './step3-owner-context-addition.mjs';
+-import { isCertifiedOwnerCounterexampleAddition } from './step3-owner-counterexample-addition.mjs';
+-import { draftOwnerMatcher } from './run-draft-ownership.mjs';
+-import { partialReaderFindings } from './step3-owner-partial-reader-repairs.mjs';
+-import { unboundReaderObservations } from './step3-owner-unbound-reader-observations.mjs';
+-import { loadOwnerPageRepairs, ownerPageFindingRepair } from './step3-owner-post-reader-page-repairs.mjs';
+-import { loadRequiredPageRoutes, requiredPageCarrier } from './step3-owner-required-page-routes.mjs';
+-import { loadDownstreamConsumerRoutes, downstreamConsumerRoute } from './step3-owner-downstream-consumer-routes.mjs';
+-import { sourceIdenticalAcceptanceContinuity } from './step3-owner-source-identical-continuity.mjs';
++import { split, yaml } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/pathway-lib.mjs';
++import { itemHashGuard } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/item-hash.mjs';
++import { step3Escalations, externalContextReceipt } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/step3-escalations.mjs';
++import { step3Adjudicators } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/step3-adjudicators.mjs';
++import { loadAuditorCreatedCertifications } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/auditor-created-items.mjs';
++import { loadOwnerIdMigrations } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/step3-owner-id-migrations.mjs';
++import { loadStep3OwnerRehomes, projectOwnerRehomeBatches, ownerRehomeCarrierBatch } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/step3-owner-rehomes.mjs';
++import { activeOwnershipRows } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/defect-ledger-ownership.mjs';
++import { loadOwnerHistoricalRoutes } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/step3-owner-historical-routes.mjs';
++import { isCertifiedOwnerContextAddition } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/step3-owner-context-addition.mjs';
++import { isCertifiedOwnerCounterexampleAddition } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/step3-owner-counterexample-addition.mjs';
++import { draftOwnerMatcher } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/run-draft-ownership.mjs';
++import { partialReaderFindings } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/step3-owner-partial-reader-repairs.mjs';
++import { unboundReaderObservations } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/step3-owner-unbound-reader-observations.mjs';
++import { loadOwnerPageRepairs, ownerPageFindingRepair } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/step3-owner-post-reader-page-repairs.mjs';
++import { loadRequiredPageRoutes, requiredPageCarrier } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/step3-owner-required-page-routes.mjs';
++import { loadDownstreamConsumerRoutes, downstreamConsumerRoute } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/step3-owner-downstream-consumer-routes.mjs';
++import { sourceIdenticalAcceptanceContinuity } from 'file:///home/lazyinspirit/Projects/prestige-math-library/tools/step3-owner-source-identical-continuity.mjs';
+ 
+ const argv = process.argv.slice(2);
+ const command = argv[0];
++if (command !== 'owner-evidence-inventory') {
++  throw Error('Research copy supports only owner-evidence-inventory; native CLI branches are disabled');
++}
++if (!argv.includes('--root')) throw Error('Explicit --root is required for the isolated research copy');
++
+ const option = (name, fallback = null) => {
+   const at = argv.indexOf(`--${name}`);
+   return at >= 0 && argv[at + 1] && !argv[at + 1].startsWith('--') ? argv[at + 1] : fallback;
+@@ -45,6 +50,8 @@
+ const R = (...parts) => join(ROOT, ...parts);
+ const fail = (message, code = 2) => { console.error(message); process.exit(code); };
+ const run = option('run');
++if (ROOT !== "/home/lazyinspirit/Projects/prestige-math-library" || run !== 'numerical-optimization-dynamics-2026-10-16') throw Error('This prepared copy is restricted to the requested repository/run');
++
+ if (!run) fail('usage: step3-scope.mjs hash|post-reader|split|collect|post-3a|verify-post-3a|stamp|check --run <run> [--batch N] [--label pre|post|pre-3a|post-3a] [--phase adjudicate|final]');
+ const ownsDraft = draftOwnerMatcher(ROOT, run);
+ 
+@@ -1939,4 +1946,152 @@
+   process.exit(errors.length ? 1 : 0);
+ }
+ 
+-fail(`step3-scope: unknown command ${JSON.stringify(command)}`);
++
++// ROOT-ONLY read-only inventory: preparation does not execute this block.
++// All hash generation below occurs only if/when root executes this copy.
++if (command === 'owner-evidence-inventory') {
++  const assignment = groups();
++  const manifests = manifestItems();
++  const pages = manifestPages();
++  const phase = 'adjudicate';
++  const scopes = {};
++  const ownableSubjects = new Set();
++  const contractsByBatch = new Map();
++    const riskReviewOnlyDelta = (target, before, current) => {
++      if (target.route !== 'touched' || !before || !current
++        || before.item_sha256 !== current.item_sha256
++        || before.manifest_sha256 !== current.manifest_sha256) return false;
++      const currentBatch = ownerRehomeCarrierBatch(ownerRehomes(), target.id, target.batch);
++      if (!contractsByBatch.has(currentBatch)) {
++        contractsByBatch.set(currentBatch, readJson(R('research', `${run}-batch-${currentBatch}.proof-contracts.json`),
++          `batch ${currentBatch} proof contract`).contracts ?? {});
++      }
++      const entry = contractsByBatch.get(currentBatch)[target.id];
++      if (!entry || !Object.hasOwn(entry, 'risk_review')) return false;
++      const { risk_review: _riskReview, ...withoutReview } = entry;
++      return hashValue(withoutReview) === before.contract_sha256
++        && hashValue(entry) === current.contract_sha256;
++    };
++  const selectedGroups = step3Adjudicators(ROOT, run, assignment.rows);
++  const inventory = { version: 1, run, root: ROOT,
++    mode: 'read-only-owner-evidence-inventory',
++    warning: 'Diagnostic inputs only; no policy validation, mathematical acceptance, stamps or canonical writes',
++    expected_batch_ids: Array.from({length: 107}, (_, i) => String(i + 1)),
++    actual_batch_ids: [...new Set(selectedGroups.flatMap(group => group.covers))],
++    group_count: selectedGroups.length,
++    target_grammar: 'check_target is exact adjudicate/check assembly; stamp_target is separately preserved exact stamp assembly',
++    groups: [] };
++  for (const group of selectedGroups) {
++    const expected = new Map();
++    for (const batch of group.covers) {
++      const scope = readJson(scopePath(batch), `batch ${batch} scope`);
++      if (scope.version === 3) for (const target of directObligations(batch, scope)) expected.set(target.obligation, target);
++      for (const target of stabilizedObligations(batch, scope)) expected.set(target.obligation, target);
++      for (const id of scope.touched ?? []) expected.set(`touched:${batch}:${id}`, {
++        obligation: `touched:${batch}:${id}`, id, batch, route: 'touched', added: (scope.added ?? []).includes(id),
++      });
++      for (const id of scope.pages_touched ?? []) expected.set(`page:${batch}:${id}`, {
++        obligation: `page:${batch}:${id}`, id, batch, route: 'page',
++        order_anchor: scope.page_order_anchors?.[id] ?? [],
++      });
++      for (const finding of scope.reader_findings ?? []) expected.set(finding.obligation, { ...finding, batch, route: 'reader' });
++      for (const finding of scope.refuter_findings ?? []) expected.set(finding.obligation, { ...finding, batch, route: 'flagged' });
++    }
++    const path = decisionsPath(group.label);
++    const doc = readJson(path, `group ${group.label} decisions`);
++    if (!Array.isArray(doc.decisions)) fail(`group ${group.label} decisions must contain an array`, 1);
++    const live = new Map(group.covers.map((batch) => [batch, liveFingerprints(batch)]));
++
++      const owed = [];
++      for (const batch of group.covers) {
++        const scope = scopes[batch] ?? (existsSync(scopePath(batch)) ? readJson(scopePath(batch), `batch ${batch} scope`) : null);
++        if (!scope) continue;
++        if (scope.version === 3) owed.push(...directObligations(batch, scope, phase));
++        for (const id of scope.touched ?? []) owed.push({
++          obligation: `touched:${batch}:${id}`, id, batch, route: 'touched', added: (scope.added ?? []).includes(id),
++        });
++        for (const id of scope.pages_touched ?? []) owed.push({
++          obligation: `page:${batch}:${id}`, id, batch, route: 'page',
++          order_anchor: scope.page_order_anchors?.[id] ?? [],
++        });
++        owed.push(...stabilizedObligations(batch, scope));
++        for (const finding of scope.reader_findings ?? []) {
++          ownableSubjects.add(finding.id);
++          owed.push({ ...finding, route: 'reader' });
++        }
++        for (const finding of scope.refuter_findings ?? []) {
++          ownableSubjects.add(finding.id);
++          owed.push({ ...finding, route: 'flagged' });
++        }
++      }
++
++    const checkExpected = new Map(owed.map(row => [row.obligation, row]));
++    const groupOutput = { group: group.label, covers: group.covers,
++      decision_path: path, scopes: group.covers.map(batch => scopePath(batch)),
++      targets: [], extra_decisions: [] };
++    for (const [obligation, target] of checkExpected) {
++      const stampTarget = expected.get(obligation);
++      const decisions = doc.decisions.filter(decision => decision.obligation === obligation);
++      const row = { obligation, target, check_target: target, stamp_target: stampTarget,
++        check_target_sha256: hashValue(target), stamp_target_sha256: hashValue(stampTarget),
++        target_shapes_equal: hashValue(target) === hashValue(stampTarget),
++        decisions: [] };
++      for (const decision of decisions) {
++        const detail = { decision };
++        try {
++          const batch = target?.batch ?? group.covers.find(candidate =>
++            (manifests[candidate] ?? []).includes(currentItemId(decision.id, candidate))
++            || (pages[candidate] ?? []).some(page => page.id === decision.id));
++          const carrier = currentDecisionCarrier(decision, target, live.get(batch));
++          const currentSha = carrier === undefined ? null : hashValue(carrier);
++          detail.resolved_batch = batch ?? null;
++          detail.current_carrier = carrier ?? null;
++          detail.current_carrier_sha256 = currentSha;
++          detail.subject_hash_matches_current = currentSha !== null && decision.subject_sha256 === currentSha;
++          detail.current_equals_target_observation = currentSha !== null && Boolean(target?.observed_sha256)
++            && currentSha === target.observed_sha256;
++          detail.prior_applied_comparison_candidate_only = detail.current_equals_target_observation;
++          // No assertion that candidate passes other priorAppliedRepair predicates.
++          if (target && !target.direct && ['touched', 'page'].includes(target.route)) {
++              const pre = readJson(hashPath(target.batch, target.stabilized ? 'post' : 'pre'), `batch ${target.batch} earlier hash`);
++              const post = readJson(hashPath(target.batch, target.stabilized ? 'pre-3a' : 'post'), `batch ${target.batch} later hash`);
++              const preRaw = target.route === 'page' ? pre.page_hashes?.[target.id] : pre.hashes?.[target.id];
++              const postRaw = target.route === 'page' ? post.page_hashes?.[target.id] : post.hashes?.[target.id];
++              const preValue = target.route === 'page' ? pageCarrier(preRaw, target.order_anchor) : preRaw;
++              const postValue = target.route === 'page' ? pageCarrier(postRaw, target.order_anchor) : postRaw;
++
++            detail.native_pre_post = { pre_path: hashPath(target.batch, target.stabilized ? 'post' : 'pre'),
++              post_path: hashPath(target.batch, target.stabilized ? 'pre-3a' : 'post'),
++              pre_carrier: preValue ?? null, post_carrier: postValue ?? null,
++              pre_carrier_sha256: hashValue(preValue), post_carrier_sha256: hashValue(postValue),
++              current_equals_pre: currentSha === hashValue(preValue),
++              current_equals_post: currentSha === hashValue(postValue) };
++            if (decision.verdict === 'accepted_repair') {
++              const riskOnly = riskReviewOnlyDelta(target, postValue, carrier);
++              detail.accepted_repair_comparison = { current_equals_native_post: currentSha === hashValue(postValue),
++                native_risk_review_only_delta: riskOnly,
++                differs_beyond_native_risk_review_exception: currentSha !== hashValue(postValue) && !riskOnly,
++                note: 'Any separate supported source-identical continuity remains root-owned; this inventory does not approve or reject it' };
++            }
++          }
++        } catch (cause) { detail.inventory_error = String(cause?.message ?? cause); }
++        row.decisions.push(detail);
++      }
++      groupOutput.targets.push(row);
++    }
++    groupOutput.extra_decisions = doc.decisions.filter(decision => !checkExpected.has(decision.obligation));
++    inventory.groups.push(groupOutput);
++  }
++  inventory.summary = {
++    owed_targets: inventory.groups.reduce((n, group) => n + group.targets.length, 0),
++    targets_without_decisions: inventory.groups.flatMap(group => group.targets.filter(row => !row.decisions.length).map(row => ({group: group.group, obligation: row.obligation}))),
++    target_shape_differences: inventory.groups.flatMap(group => group.targets.filter(row => !row.target_shapes_equal).map(row => ({group: group.group, obligation: row.obligation}))),
++    observed_equality_candidates: inventory.groups.flatMap(group => group.targets.flatMap(row => row.decisions.filter(detail => detail.current_equals_target_observation).map(detail => ({group: group.group, obligation: row.obligation, id: detail.decision.id})))),
++    accepted_post_differences_beyond_risk_exception: inventory.groups.flatMap(group => group.targets.flatMap(row => row.decisions.filter(detail => detail.accepted_repair_comparison?.differs_beyond_native_risk_review_exception).map(detail => ({group: group.group, obligation: row.obligation, id: detail.decision.id})))),
++    inventory_errors: inventory.groups.flatMap(group => group.targets.flatMap(row => row.decisions.filter(detail => detail.inventory_error).map(detail => ({group: group.group, obligation: row.obligation, error: detail.inventory_error}))))
++  };
++  console.log(JSON.stringify(inventory, null, 2));
++  process.exit(0);
++}
++throw Error('Unreachable research inventory command');
++

@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "38",
+  "round": 1,
+  "reviewed_items": [
+    "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+    "thm-adjoint-problem-for-bounded-coercive-variational-forms",
+    "cor-poisson-adjoint-h2-estimate-from-global-regularity",
+    "lem-two-cell-hat-and-quadratic-functions-lie-in-h10",
+    "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+    "cor-symmetric-galerkin-best-approximation-in-energy-norm",
+    "thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity",
+    "cor-shape-regular-affine-fe-primal-energy-approximation",
+    "cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation",
+    "ex-nonsymmetric-coercive-form-attains-cea-factor",
+    "ex-symmetric-poisson-best-approximation-on-two-cell-mesh",
+    "cex-reentrant-corner-poisson-solution-not-h2"
+  ],
+  "reviewed_pages": [
+    "ceas-lemma-and-aubin-nitsche-error-estimates",
+    "ceas-lemma-and-aubin-nitsche-error-estimates-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Assigned-source repairs are complete. Escalation remains for the published bounded-direction Poincaré proof’s missing integral prerequisites; the assigned interval instance is proved locally. The earlier flag on thm-linear-change-of-variables-for-lebesgue-measure:step-3.1 was not retained: Littlewood condition 4 gives E=H∪W, which implies the inclusions used there.",
+  "findings": [
+    {
+      "id": "lem-galerkin-orthogonality-for-conforming-galerkin-approximations:F1",
+      "type": "prerequisite",
+      "reason": "The cited form definition requires a Hilbert space, but this lemma assumes only a vector space. Removed the unnecessary dependency; linearity is explicit in the statement."
+    },
+    {
+      "id": "cor-poisson-adjoint-h2-estimate-from-global-regularity:F3",
+      "type": "prerequisite",
+      "reason": "The real-valued Hölder supplier did not establish the complex L² pairing bound. Replaced it with the real-or-complex L² inner-product theorem."
+    },
+    {
+      "id": "lem-two-cell-hat-and-quadratic-functions-lie-in-h10:F6",
+      "type": "prerequisite",
+      "reason": "The cited measure-scaling theorem did not supply integrand substitution. Added the C¹ integral change-of-variables supplier and derived the signed reflection identity through positive and negative parts."
+    },
+    {
+      "id": "lem-two-cell-hat-and-quadratic-functions-lie-in-h10:step-2.2",
+      "type": "local",
+      "reason": "Defined ηε in step 2.2 before its first use; step 3.1 now reuses that cutoff."
+    },
+    {
+      "id": "thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity:F4",
+      "type": "prerequisite",
+      "reason": "Replaced the real-only Hölder citation with the real-or-complex L² pairing theorem and made the modulus step explicit."
+    },
+    {
+      "id": "ex-symmetric-poisson-best-approximation-on-two-cell-mesh:F3",
+      "type": "prerequisite",
+      "reason": "Proved the required interval Poincaré inequality locally with direction 1, bounds 0 and 1, and CP=1 before applying the weak-Poisson theorem."
+    },
+    {
+      "id": "ex-symmetric-poisson-best-approximation-on-two-cell-mesh:F6",
+      "type": "prerequisite",
+      "reason": "Replaced the real-only Hölder citation with the real-or-complex L² pairing bound for the datum."
+    },
+    {
+      "id": "thm-poincare-inequality-for-w-one-p-zero:step-1.1/F5",
+      "type": "outside-batch",
+      "reason": "Step 1.1 combines the Riemann FTC with Lebesgue Hölder without a Riemann–Lebesgue bridge. F5 and step 2.1 also claim integrand change of variables from a supplier proving only set-measure scaling. The missing prerequisites are a Riemann/Lebesgue integral bridge and an integrand-level change-of-variables result. This affects lem-coercivity-of-the-principal-dirichlet-form and thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem; the assigned interval use is proved independently."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+      "decision": "accept",
+      "reason": "Checked its use of the unchanged Galerkin-orthogonality statement; the repair only removed an unnecessary prerequisite."
+    },
+    {
+      "id": "cor-symmetric-galerkin-best-approximation-in-energy-norm",
+      "decision": "accept",
+      "reason": "Checked its orthogonality and Céa uses; neither supplier statement changed."
+    },
+    {
+      "id": "thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity",
+      "decision": "accept",
+      "reason": "Checked its use of the unchanged orthogonality statement and the repaired real-or-complex L² pairing premise."
+    },
+    {
+      "id": "cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation",
+      "decision": "accept",
+      "reason": "Its Aubin–Nitsche supplier statement is unchanged; the proof-premise repair preserves that interface."
+    },
+    {
+      "id": "cex-reentrant-corner-poisson-solution-not-h2",
+      "decision": "accept",
+      "reason": "Its conditional Aubin–Nitsche use is unchanged; the proof-premise repair preserves that interface."
+    },
+    {
+      "id": "ex-symmetric-poisson-best-approximation-on-two-cell-mesh",
+      "decision": "accept",
+      "reason": "The two-cell lemma interface is unchanged, and the weak-Poisson application now has a locally proved Poincaré constant."
+    },
+    {
+      "id": "lem-coercivity-of-the-principal-dirichlet-form",
+      "decision": "escalate",
+      "reason": "Outside the authorized source scope; its Poincaré prerequisite must be reconciled by the owner."
+    },
+    {
+      "id": "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+      "decision": "escalate",
+      "reason": "Outside the authorized source scope; its Poincaré prerequisite must be reconciled by the owner."
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+diff --git a/tools/autopilot/README.md b/tools/autopilot/README.md
+index 57d81df126..353001ae88 100644
+--- a/tools/autopilot/README.md
++++ b/tools/autopilot/README.md
+@@ -21,3 +21,11 @@ forced reports still recompute immediately. In coverage mode, stage status check
+ artifacts for effectively covered units and retains uncovered units as missing.
+ A successful worker still needs every declared artifact, including after it exits;
+ legacy count mode and all readiness, writer and gate checks retain their behavior.
++
++A run-local stage wrapper may opt priority `1-scaffold` into
++`deferConstructionArtifactsUntilDrain`. While any same-stage local or adopted
++writer remains, status withholds all completion credit and skips artifact-based
++stalemate detection. Initial priority dispatch and native refreshes continue;
++at the actual writer drain, the full artifact, readiness, stalemate and gate paths
++run normally. This defaults off and is invalid for other stage policies; common
++mathematics stages do not enable it.
+diff --git a/tools/autopilot/src/executor.mts b/tools/autopilot/src/executor.mts
+index 3fda5bccb4..f28c7de0a3 100644
+--- a/tools/autopilot/src/executor.mts
++++ b/tools/autopilot/src/executor.mts
+@@ -379,6 +379,15 @@ export class Executor {
+     return { stage: null, status: null };
+   }
+ 
++  /** Construction-only scheduling mode: no completion credit while any local
++   * or adopted writer still owns this stage. Other runs/stages keep full checks. */
++  constructionArtifactsDeferred(stage: Stage): boolean {
++    return stage.deferConstructionArtifactsUntilDrain === true
++      && stage.id === '1-scaffold' && stage.unitPrerequisitePolicy === 'priority'
++      && ([...this.inflight.values()].some(row => row.meta.stage === stage.id)
++        || this.adoptedDispatches().some(dispatch => this.dispatchBelongsToStage(dispatch, stage)));
++  }
++
+   /**
+    * A stage is finished when its units are covered AND its gates have passed.
+    *
+@@ -429,6 +438,11 @@ export class Executor {
+       units.why += `; native refresh pending for ${refreshes.map(r => r.unit).join(', ')}`;
+     }
+ 
++    if (this.constructionArtifactsDeferred(stage)) {
++      return { ...units, unitsDone: false, gatesPassed: false, done: false,
++        why: `${units.why}; artifact completion deferred until construction writers drain` };
++    }
++
+     // A RESULT IS NOT AN ARTIFACT. `ok:true` says the process exited zero; it
+     // says nothing about whether the work landed where it was supposed to.
+     //
+@@ -525,6 +539,7 @@ export class Executor {
+     // complete when it was stamped, and re-walking them re-pays their readiness
+     // hashing for a result already recorded.
+     if (this.state.data.stages[stage.id]?.doneAt) return new Set(owed);
++    if (this.constructionArtifactsDeferred(stage)) return new Set();
+     const cov = this.stageCoverage(stage, ctx);
+     if (stage.reviewCoverage && !this.stageStatus(stage, ctx).unitsDone) return new Set();
+     // A stage running in the legacy COUNT mode declares no coverage at all, so
+@@ -1577,7 +1592,9 @@ export class Executor {
+     // a VISIBLE blocker.
+     if (!unitsAllDone) {
+       for (const { s, st } of statuses) {
+-        if (st.unitsDone) continue;
++        // Deferred artifact evaluation is not evidence of abandoned output.
++        // The unchanged per-unit stalemate check resumes at the actual drain.
++        if (st.unitsDone || this.constructionArtifactsDeferred(s)) continue;
+         const owed = (s.units ? s.units(ctx) : []).map(String);
+         const cov = this.stageCoverage(s, ctx);
+         const complete = this.unitsComplete(s, ctx);
+diff --git a/tools/autopilot/src/spec.mts b/tools/autopilot/src/spec.mts
+index 8e8f49ba65..4f2d84c341 100644
+--- a/tools/autopilot/src/spec.mts
++++ b/tools/autopilot/src/spec.mts
+@@ -69,6 +69,12 @@ export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
+       P(s.id, '`unitPrerequisitePolicy` must be complete or priority');
+     if (s.unitPrerequisitePolicy === 'priority' && typeof s.unitPrerequisites !== 'function')
+       P(s.id, '`priority` requires a unit prerequisite graph');
++    if (s.deferConstructionArtifactsUntilDrain !== undefined
++      && typeof s.deferConstructionArtifactsUntilDrain !== 'boolean')
++      P(s.id, '`deferConstructionArtifactsUntilDrain` must be boolean');
++    if (s.deferConstructionArtifactsUntilDrain === true
++      && (s.id !== '1-scaffold' || s.unitPrerequisitePolicy !== 'priority'))
++      P(s.id, '`deferConstructionArtifactsUntilDrain` requires priority 1-scaffold');
+     if (typeof s.units === 'function' && typeof s.unitPrerequisites === 'function') {
+       try {
+         const units = s.units(ctx).map(String);
+diff --git a/tools/autopilot/src/types.mts b/tools/autopilot/src/types.mts
+index 67ec3a6c01..2fe2c48ce4 100644
+--- a/tools/autopilot/src/types.mts
++++ b/tools/autopilot/src/types.mts
+@@ -174,6 +174,9 @@ export interface Stage {
+   /** Initial dispatch may use the DAG only for priority. Completion, repair
+    * and review still require actual stable suppliers; default is complete. */
+   unitPrerequisitePolicy?: 'complete' | 'priority';
++  /** Opt-in only for priority construction: while same-stage writers are live,
++   * withhold all artifact-completion credit and check the full artifacts at drain. */
++  deferConstructionArtifactsUntilDrain?: boolean;
+   /** A temporary per-unit hold. The unit remains owed, and its consumers stay
+    * blocked, while other eligible units can use available dispatch slots. */
+   unitEligible?: (ctx: Ctx, u: Unit) => boolean;

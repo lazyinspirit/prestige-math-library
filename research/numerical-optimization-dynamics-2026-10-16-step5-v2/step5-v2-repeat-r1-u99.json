@@ -1,0 +1,139 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "99",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "def-chaos-quadrature-coefficient-estimator",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "241b9c315949a28bbf61c89f2bad476e1712854c39ce3e2652293a413202d7fe",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original Definition unconditionally assigns exact coefficients and an orthogonal projection to every evaluable real function, although its cited projection definition requires L2 membership. For uniform probability on [0,1], set u(0)=0 and u(y)=1/y for y>0, choose the admissible cutoff p=0 and Lambda={0}, and use one interior cubature node. The quadrature coefficient is finite but the exact constant coefficient integral diverges. This is a domain error, not a missing citation. Repaired by making only the exact-coefficient/projection sentence conditional on u representing an L2 class, preserving the estimator for all evaluable inputs.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-chaos-quadrature-coefficient-estimator",
+      "disposition": "repaired",
+      "post_sha256": "ef8f031eae9ffd8d81bb8ad4ce552ca948d43a822947cb53cb54b764e48322c2",
+      "review_context_sha256": "9f96bb8077a0a0dcdd1aa85f61e88dee8c8492ccccceecff3c7b11a7bada2b09",
+      "reason": "The finite weighted estimator remains defined by the supplied real node values, including empty index sets and signed or zero weights. Exact coefficients and the orthogonal projection are now invoked only for L2 inputs, where the existing projection supplier applies and Cauchy-Schwarz makes each coefficient integral finite. The added null-set caveat correctly distinguishes the quadrature input from its L2 equivalence class. No choice assumption, dependency, claimed accuracy, or estimator domain was added. This is review of my own repair, not independent acceptance. Inspected the owning page and all three direct item consumers; their uses remain sound. Refreshed exactly two full Definition quotations in the owning proof-contract file under the shared-write lock.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-chaos-quadrature-coefficient-error-split",
+    "cor-smolyak-chaos-coefficient-error-bound",
+    "cor-tensor-gauss-exact-chaos-coefficients"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-chaos-quadrature-coefficient-estimator",
+      "locus": "Definition",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "reason": "Evaluability at finitely many cubature nodes does not imply L2 membership or existence of exact integral coefficients: uniform [0,1] and u(y)=1/y for y>0, u(0)=0 gives a divergent constant coefficient. The exact-coefficient/projection sentence is now conditional on L2 membership; the finite estimator is preserved for all evaluable real inputs.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_files": [
+      "items/def-chaos-quadrature-coefficient-estimator.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-99.proof-contracts.json"
+    ],
+    "claim_and_conventions": "The cubature estimate is a finite weighted sum using specified node values. Only its comparison with exact L2 coefficients/projection requires an L2 input; quadrature is representative-dependent. No accuracy, completeness, positivity, or choice assertion is introduced.",
+    "dependency_ids": [
+      "def-finite-chaos-orthogonal-projection",
+      "def-chaos-orthonormal-tensor-basis"
+    ],
+    "local_evidence": [
+      "items/def-finite-chaos-orthogonal-projection.md, Definition: real u in L2(rho); integral pairing is finite by Cauchy-Schwarz and invariant under almost-everywhere equality.",
+      "items/def-chaos-orthonormal-tensor-basis.md, Definition; items/thm-independent-polynomial-chaos-tensors-are-orthonormal.md, Statement and proof: every admissible tensor basis function belongs to L2 and the zero mode is 1.",
+      "items/cor-cauchy-schwarz-inequality-for-l-two.md, Statement: integral |fg| is bounded by the product of L2 norms.",
+      "items/def-finite-product-chaos-input.md, Definition: for uniform [0,1], cutoff p=0 has moment and Gram matrix both equal to 1, so the counterexample meets the admissible-input conditions."
+    ],
+    "source_consultation": "The scalar integration, L2 pairing and finite quadrature mathematics are familiar. Consulted the listed local items; no external source was consulted or is claimed to have been read.",
+    "interface_change": {
+      "section": "Definition",
+      "before_excerpt": "The exact coefficients $c_\\alpha$ and projection $P_\\Lambda u$ are those of\n[[def-finite-chaos-orthogonal-projection]].",
+      "after_excerpt": "When $u$ represents an element of $L^2(\\rho)$, its exact coefficients\n$c_\\alpha$ and projection $P_\\Lambda u$ are those of\n[[def-finite-chaos-orthogonal-projection]].",
+      "additional_caveat": "The quadrature quantities use specified node values and need not be invariant under changes on null sets."
+    },
+    "consumer_examination": [
+      {
+        "id": "thm-chaos-quadrature-coefficient-error-split",
+        "path": "items/thm-chaos-quadrature-coefficient-error-split.md",
+        "disposition": "unchanged_sound",
+        "affected_use": "Statement uses exact and quadrature coefficients from the assigned definition; Facts F1 and proof step 1.1 use the finite basis expansion of the quadrature polynomial.",
+        "reason": "The Statement already assumes real u in L2 and fixes a representative defined at every cubature node. Its finite orthogonal decomposition therefore still applies. The finite-sum formula is unchanged; only its full supplier quotation in the owning contract was refreshed."
+      },
+      {
+        "id": "cor-smolyak-chaos-coefficient-error-bound",
+        "path": "items/cor-smolyak-chaos-coefficient-error-bound.md",
+        "disposition": "unchanged_sound",
+        "affected_use": "The dependency declaration and Statement coefficient-error expression use the quadrature estimator for g_alpha=tilde-u times psi_alpha; proof steps 1.1 and 3.1 compare it to the exact L2 coefficient.",
+        "reason": "The Statement already assumes real u in L2 and fixes an evaluable representative with the required mixed derivatives. Thus exact coefficients exist, and the unchanged finite quadrature formula satisfies its scalar cubature comparison."
+      },
+      {
+        "id": "cor-tensor-gauss-exact-chaos-coefficients",
+        "path": "items/cor-tensor-gauss-exact-chaos-coefficients.md",
+        "disposition": "unchanged_sound",
+        "affected_use": "Facts F7 and proof step 3.1 invoke the estimator coefficient and finite polynomial; the Statement identifies it with the integral coefficient for polynomial input u in P_Lambda.",
+        "reason": "The input is a finite chaos polynomial, explicitly expanded in proof step 1.1, so it belongs to L2 by the tensor basis supplier and is evaluable at all Gaussian nodes. The degree bound makes every product integrand exactly integrated. Its full supplier quotation in the owning contract was refreshed."
+      }
+    ],
+    "page_examination": {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/polynomial-chaos-stochastic-collocation-and-galerkin-uq.md",
+      "affected_use": "Projection and coefficient quadrature section describes the error split for a cubature estimator using a representative evaluable at its nodes.",
+      "disposition": "unchanged_sound",
+      "reason": "This summarizes the linked L2 projection/error-split result, which explicitly assumes L2 membership and an evaluable representative; it does not assert an exact projection for arbitrary evaluable inputs."
+    },
+    "published_or_outside_consumer_findings": [],
+    "validation": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-99.proof-contracts.json --strict --items def-chaos-quadrature-coefficient-estimator,thm-chaos-quadrature-coefficient-error-split,cor-tensor-gauss-exact-chaos-coefficients --json",
+        "exit_code": 0,
+        "result": "ok:true; three selected contracts checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-chaos-quadrature-coefficient-estimator.md --json",
+        "exit_code": 0,
+        "result": "One file checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-chaos-quadrature-coefficient-estimator.md --json",
+        "exit_code": 0,
+        "result": "Definition has no phase proof: not-applicable; zero checked proofs, zero failures."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-chaos-quadrature-coefficient-estimator.md",
+        "exit_code": 0,
+        "result": "1 items, 0 steps, 0 defects."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items def-chaos-quadrature-coefficient-estimator",
+        "exit_code": 0,
+        "result": "Post guard and review context copied into the review immediately after completing the repaired mathematical review."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this report, routes the declared direct-consumer inventory through its ordinary workflow, and obtains independent rejudgment/certification as required. No judges, certificates, stamps or round state were written."
+  }
+}

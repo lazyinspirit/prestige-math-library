@@ -1,0 +1,2536 @@
+{
+  "version": 1,
+  "level": "numerical-optimization-dynamics-2026-10-16",
+  "scope": [
+    "def-eigenspace-best-approximation-gap",
+    "thm-compact-coercive-form-spectrum-and-minmax",
+    "lem-finite-dimensional-galerkin-minmax",
+    "lem-compact-self-adjoint-residual-controls-invariant-subspace-gap",
+    "thm-finite-hermitian-ritz-residual-certifies-spectrum-and-eigendirection",
+    "prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil",
+    "lem-conforming-energy-projection-is-best-approximation",
+    "lem-conforming-galerkin-ritz-matrix-error-is-quadratic-in-gap",
+    "thm-conforming-galerkin-eigenvalue-upper-bound-quadratic-gap-error",
+    "thm-conforming-galerkin-eigenspace-gap-under-isolated-cluster",
+    "ex-nearly-dependent-overlap-matrix-whitening-and-conditioning",
+    "ex-nonconforming-broken-eigenvalue-below-dirichlet-ground-state",
+    "ex-dirichlet-square-conforming-p1-eigenvalue-upper-bound",
+    "ex-repeated-eigenvalue-subspace-stable-but-eigenvector-choice-unstable"
+  ],
+  "contracts": {
+    "def-eigenspace-best-approximation-gap": {
+      "risk": "high",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition assumes E nonzero, so its energy-unit sphere is nonempty. V_h may be the zero subspace but is not the empty set: 0 belongs to V_h, giving distance at most1 and a nonempty infimum set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: E\u2282V_h gives \u03b4_a(E,V_h)=0; V_h={0} attains the upper bound 1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the energy-unit sphere of a one-dimensional E is nonempty and the directed distance is defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The energy norm is induced by a positive coercive form."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: 0\u2264\u03b4_a(E,V_h)\u22641 includes both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This gap Definition does not select approximants attaining its infimum or unit vectors attaining its supremum. Its final bound uses the specified zero element of V_h; no choice from an arbitrary best-approximant family is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The directed-gap Definition assigns an infimum and supremum to the supplied subspaces and expressly disclaims a two-sided eigenspace gap. It states no iff between a numerical gap and eigenspace equality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The directed-gap Definition assigns an infimum and supremum to the supplied subspaces and expressly disclaims a two-sided eigenspace gap. It states no iff between a numerical gap and eigenspace equality."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "contained eigenspace and zero trial space",
+          "method": "exact definition check",
+          "input": {
+            "cases": [
+              "E contained in V_h",
+              "V_h={0}"
+            ]
+          },
+          "calculation": "The first case has every distance zero; in the second, each energy-unit vector has distance one.",
+          "expected": {
+            "gaps": [
+              0,
+              1
+            ]
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-compact-coercive-form-spectrum-and-minmax": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lax-milgram",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a real or complex Hilbert space, let $a$ be a bounded coercive sesquilinear form on $H$ with constants $M,\\alpha$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F:H\\to\\mathbb K$ be a bounded conjugate-linear functional with norm $\\|F\\|=\\sup_{\\|v\\|\\le1}|F(v)|$. Then there is a unique $u\\in H$ with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H,$$ and it satisfies $\\alpha\\|u\\|\\le\\|F\\|$, that is $\\|u\\|\\le\\|F\\|/\\alpha$. The real bilinear case is the same statement with $a$ symmetric or not, $F$ a bounded linear functional, and the conjugation read as the identity.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-compact-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A linear map $T:X\\to Y$\n([[def-linear-map]]) is a **compact operator** when the image of every bounded\nsubset of $X$ ([[def-metric-bounded-diameter]]) has compact closure in $Y$\n([[def-metric-compactness]]); explicitly, for every bounded $A\\subseteq X$ the\nclosure $\\overline{T(A)}$ in $Y$ is a compact subset of $Y$. The set of compact\noperators $X\\to Y$ is written $\\mathcal K(X,Y)$. The metric used here is $d(x,y)=\\|x-y\\|$, supplied over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[lem-complex-norm-realification-is-a-real-norm]].\n\n**The closed unit ball suffices.** Put\n$\\overline B_X:=\\{x\\in X:\\|x\\|\\le 1\\}$\n([[def-metric-ball]]). Then $T$ is compact if and only if\n$\\overline{T(\\overline B_X)}$ is a compact subset of $Y$.\n\nIndeed, if $T$ is compact then $\\overline B_X$ is bounded, because\n$\\overline B_X\\subseteq B(0,2)$ while $B(0,2)$ is bounded and a subset of a\nbounded set is bounded, so $T(\\overline B_X)$ has compact closure. Conversely\nassume $\\overline{T(\\overline B_X)}$ compact and let $A\\subseteq X$ be bounded.\nIf $A=\\varnothing$ then $T(A)=\\varnothing$, whose closure is empty and hence\ncompact. Otherwise $A\\subseteq B(x_0,r)$ for some $x_0\\in X$ and real $r>0$, so\nevery $x\\in A$ satisfies $\\|x\\|\\le\\|x_0\\|+r=:R$; if $R>0$ then\n$A\\subseteq R\\,\\overline B_X$ and if $R=0$ then $A\\subseteq\\{0\\}$, so in either\ncase $T(A)\\subseteq R\\,\\overline{T(\\overline B_X)}$. Scalar multiplication by\n$R$ is continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]),\nso $R\\,\\overline{T(\\overline B_X)}$ is a compact subset of $Y$\n([[thm-compactness-under-continuous-maps]]), hence closed\n([[thm-compact-subset-is-closed-and-bounded]]); therefore\n$\\overline{T(A)}\\subseteq R\\,\\overline{T(\\overline B_X)}$ is a closed subset of a\ncompact set, hence compact, and $T$ is compact.\n\n**A compact operator is bounded.** If $T$ is compact then the compact set\n$\\overline{T(\\overline B_X)}$ is bounded\n([[thm-compact-subset-is-closed-and-bounded]]), so there is a real $C\\ge0$ with\n$\\|Tx\\|\\le C$ for every $x\\in\\overline B_X$ and hence $\\|Tx\\|\\le C\\|x\\|$ for\nevery $x\\in X$; thus $T$ is a bounded linear operator\n([[def-bounded-linear-operator]]). This is a consequence of compactness, not a\nhypothesis of the definition.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-compositions-with-a-compact-operator-are-compact",
+          "source_section": "Statement",
+          "quote": "Let $W$, $X$, $Y$ and $Z$ be normed spaces over the same scalar field. If\n$T:X\\to Y$ is compact ([[def-compact-linear-operator]]) and $A:W\\to X$ and\n$B:Y\\to Z$ are bounded linear operators ([[def-bounded-linear-operator]]), then\nthe composites $TA:W\\to Y$ and $BT:X\\to Z$ are compact.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-spectral-theorem-for-compact-self-adjoint-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a\nreal or complex Hilbert space ([[def-hilbert-space]]) and let\n$T\\in\\mathcal B(H)$ be a compact self-adjoint operator\n([[def-compact-linear-operator]],\n[[def-self-adjoint-positive-unitary-and-normal-operator]],\n[[def-bounded-linear-operator]]). Let\n\n$$\\Sigma:=\\{\\lambda:\\lambda\\ \\text{is an eigenvalue of}\\ T,\\ \\lambda\\ne0\\}$$\n\nbe its set of nonzero eigenvalues\n([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]), with eigenspaces\n$E_\\lambda=\\ker(T-\\lambda I)$ for $\\lambda\\in\\Sigma$. Then:\n\n1. $\\Sigma$ is a finite or countably infinite set of **real** numbers, each\n   eigenvalue has finite multiplicity in the sense $\\dim E_\\lambda<+\\infty$, and\n   for every real $\\varepsilon>0$ there are only finitely many\n   $\\lambda\\in\\Sigma$ with $|\\lambda|\\ge\\varepsilon$; in particular every point\n   of $\\mathbb F\\setminus\\{0\\}$ has a neighbourhood containing only finitely\n   many elements of $\\Sigma$, so the only possible accumulation point of\n   $\\Sigma$ is $0$;\n2. the closed linear span $M$ of $\\bigcup_{\\lambda\\in\\Sigma}E_\\lambda$ satisfies\n   $$M=(\\ker T)^\\perp=\\overline{\\operatorname{ran}T}$$\n   ([[def-orthogonality-and-orthogonal-complement]]), and $H=M\\oplus M^\\perp$\n   with $M^\\perp\\subseteq\\ker T$;\n3. for every $x\\in H$ the finite-subset net of $\\sum_{\\lambda\\in\\Sigma}\\lambda P_\\lambda x$\n   over the orthogonal projections $P_\\lambda$ onto $E_\\lambda$ converges in\n   norm and\n   $$Tx=\\sum_{\\lambda\\in\\Sigma}\\lambda P_\\lambda x ;$$\n4. if in addition $H$ is a complex Hilbert space, then the nonzero spectrum\n   agrees with the nonzero eigenvalues,\n   $$\\sigma(T)\\cap\\{\\mu\\in\\mathbb C:\\mu\\ne0\\}=\\Sigma .$$\n\nNo Hilbert basis of $\\ker T$ is selected anywhere: only the orthonormal bases of\nthe finite-dimensional eigenspaces $E_\\lambda$, $\\lambda\\ne0$, are used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-hilbert-space-fourier-expansion",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(e_i)_{i\\in I}$ be a complete orthonormal family in a real or complex Hilbert\nspace $H$\n([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]) and\nlet $x\\in H$, with partial sums\n$P_Fx=\\sum_{i\\in F}\\langle x,e_i\\rangle e_i$ over finite $F\\subseteq I$. Then:\n\n1. $x$ is the norm limit of the finite-subset net $(P_Fx)$, that is\n   $$x=\\sum_{i\\in I}\\langle x,e_i\\rangle e_i$$\n   in the sense of convergence of the net of finite subsums;\n2. **the coefficients are unique**: if $(a_i)_{i\\in I}$ is a family in\n   $\\mathbb F$ whose finite-subset net $\\sum_{i\\in F}a_ie_i$ converges to $x$,\n   then $a_i=\\langle x,e_i\\rangle$ for every $i\\in I$;\n3. the support $\\{i : \\langle x,e_i\\rangle\\ne0\\}$ is at most countable, and the\n   expansion does not depend on an ordering: if $(i_k)_{k\\in\\mathbb N}$ is a\n   sequence of pairwise distinct elements of $I$ whose image contains the\n   support, then the sequence of partial sums\n   $\\sum_{k<n}\\langle x,e_{i_k}\\rangle e_{i_k}$ also converges to $x$.\n\nClaim 3 is the sense in which the expansion is **unconditional**: the sum is\nindependent of any ordering, because the finite-subset net converges and any\nenumeration of a set containing the support by pairwise distinct indices is\ncofinal in the squared mass.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(e_i)_{i\\in I}$ be an orthonormal family in a real or complex Hilbert space $H$\n([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]), and\nfor $x\\in H$ and finite $F\\subseteq I$ put\n\n$$P_Fx:=\\sum_{i\\in F}\\langle x,e_i\\rangle e_i .$$\n\nThen the following four assertions are equivalent:\n\n1. **(completeness)** the closed linear span of $(e_i)_{i\\in I}$ is $H$;\n2. **(zero complement)** the only vector orthogonal to every $e_i$ is $0$;\n3. **(Parseval)** $\\displaystyle\\sum_{i\\in I}|\\langle x,e_i\\rangle|^2=\\|x\\|^2$\n   for every $x\\in H$, the sum being the supremum of the finite subsums\n   ([[def-square-summable-family-on-an-arbitrary-index-set]]);\n4. **(net convergence)** the finite-subset net $(P_Fx)_{F\\in\\operatorname{Fin}(I)}$\n   converges to $x$ for every $x\\in H$.\n\nAssertion 2 is the statement\n$\\operatorname{span}\\{e_i : i\\in I\\}^\\perp=\\{0\\}$\n([[def-orthogonality-and-orthogonal-complement]]).",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $M$ be a closed linear subspace of a real or complex Hilbert space $H$. Then every $x\\in H$ has a unique decomposition\n\n$$x=m+n,\\qquad m\\in M,\\quad n\\in M^\\perp ,$$\n\nso that $H=M\\oplus M^\\perp$ as a direct sum of the subspace $M$ and its orthogonal complement.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "8.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $f\\in H$, the functional $v\\mapsto(f,Jv)_H$ is bounded on $V$ because $|(f,Jv)_H|\\le C_J\\|f\\|_H\\|v\\|_V$. Apply [F2] to obtain a unique $Sf\\in V$ satisfying $a(Sf,v)=(f,Jv)_H$ for every $v\\in V$. Uniqueness makes $S:H\\to V$ linear.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Testing with $v=Sf$ and using coercivity gives $\\alpha\\|Sf\\|_V^2\\le a(Sf,Sf)=\\operatorname{Re}(f,JSf)_H \\le |(f,JSf)_H|\\le C_J\\|f\\|_H\\|Sf\\|_V.$ If $Sf\\ne0$, divide by $\\alpha\\|Sf\\|_V$; if $Sf=0$ the same bound is immediate. Thus $S$ is bounded from $H$ to $V$ with $\\|Sf\\|_V\\le(C_J/\\alpha)\\|f\\|_H$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Set $T:=JS:H\\to H$. By [F3], $T$ is compact. For $f,g\\in H$, testing the defining equations for $Sf$ and $Sg$ at $Sg$ and $Sf$ respectively and using Hermitian symmetry gives $(Tf,g)_H=(f,Tg)_H$; hence $T$ is self-adjoint. Also $(f,Tf)_H=a(Sf,Sf)\\ge0$. If $Tf=0$, injectivity of $J$ gives $Sf=0$, so $(f,Jv)_H=0$ for every $v\\in V$ by step 1.1. Density of $J(V)$ then gives $f=0$. Thus $T$ is positive and injective.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F4] to $T$. Its nonzero eigenvalues are positive because $T$ is positive, and its kernel is zero by step 2.2; therefore the eigenspaces of its nonzero eigenvalues span $H$. There must be infinitely many eigenvalues, because each has finite multiplicity while $H$ is infinite-dimensional. Order them as $\\mu_1\\ge\\mu_2\\ge\\cdots>0$, repeated by multiplicity. Compactness gives $\\mu_j\\to0$; select an orthonormal basis $(f_j)$ of these eigenspaces using Countable Choice [F2, F4].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $Tf_j=J(Sf_j)=\\mu_j f_j$ and $J$ is injective, each $f_j$ belongs to the image $J(V)$. Identify it with its unique preimage $e_j\\in V$. The equation $a(Sf_j,v)=(f_j,Jv)_H$ and $Sf_j=\\mu_j e_j$ imply $a(e_j,v)=\\mu_j^{-1}(Je_j,Jv)_H\\qquad(v\\in V).$ Set $\\lambda_j:=\\mu_j^{-1}$. Then $0<\\lambda_1\\le\\lambda_2\\le\\cdots$, $\\lambda_j\\to+\\infty$, $\\|Je_j\\|_H=1$, and the displayed form eigenrelation holds.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F1], the energy norm induced by $a$ is equivalent to $\\|\\cdot\\|_V$, so $V$ is complete in that norm. Put $\\phi_j:=e_j/\\sqrt{\\lambda_j}$. The eigenrelation in step 4.1 gives $a(\\phi_i,\\phi_j)=\\delta_{ij}$, so $(\\phi_j)$ is an orthonormal family in $V$ with inner product $a$. If $v\\in V$ is $a$-orthogonal to every $\\phi_j$, the same eigenrelation gives $(Jv,Je_j)_H=0$ for every $j$. The vectors $(Je_j)$ are an orthonormal basis of $H$ by step 3.1, so $Jv=0$; injectivity of $J$ gives $v=0$. Thus the closed span of $(\\phi_j)$ has zero orthogonal complement in $V$, and [F6] implies it is all of $V$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 3.1",
+            "step 4.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Parseval in $H$ for $(Je_j)$ and in $V$ for $(\\phi_j)$ yields, for every $v\\in V$, $\\|Jv\\|_H^2=\\sum_j|(Jv,Je_j)_H|^2,\\qquad a(v,v)=\\sum_j|a(v,\\phi_j)|^2=\\sum_j\\lambda_j|(Jv,Je_j)_H|^2.$ For $v\\ne0$, $\\|Jv\\|_H>0$ by injectivity, so $R(v)$ is the weighted average of the $\\lambda_j$ with weights $|(Jv,Je_j)_H|^2$.",
+          "step": "6.1",
+          "inputs": [
+            "F5",
+            "step 4.1",
+            "step 5.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Let $E_m:=\\operatorname{span}\\{e_1,\\ldots,e_m\\}$. Step 6.1 shows $R(v)\\le\\lambda_m$ for every nonzero $v\\in E_m$, with equality at $e_m$; hence $\\max_{v\\in E_m\\setminus\\{0\\}}R(v)=\\lambda_m$. This gives one inequality in the min\u2013max identity, attained by $E_m$.",
+          "step": "7.1",
+          "inputs": [
+            "step 6.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "Let $S\\subseteq V$ have dimension $m$. The map $S\\to\\mathbb K^{m-1}$ taking $v$ to $((Jv,Je_1)_H,\\ldots,(Jv,Je_{m-1})_H)$ has a nonzero kernel by [F7]. For a nonzero vector $v$ in that kernel, the expansion of step 6.1 has no terms with index below $m$, so $R(v)\\ge\\lambda_m$. Thus the maximum Rayleigh quotient on every such $S$ is at least $\\lambda_m$. It is attained on the unit sphere by [F8], so the outer minimum is at least $\\lambda_m$ and equals the value from step 7.1.",
+          "step": "8.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 6.1",
+            "step 7.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes infinite-dimensional H and m>=1. Step 3.1 proves infinitely many positive-eigenvalue components, so the eigenfamily cannot be empty; step 8.1 also covers m=1, when its first m-1 coordinate list is empty but rank-nullity still yields a nonzero kernel. The sum identities in step 6.1 are over j>=1, not an unspecified empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 6.1 excludes v=0 from the Rayleigh quotient by injectivity of J."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 8.1 handles m=1 with a zero-dimensional target and nonzero kernel."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 uses injectivity to rule out a kernel and step 2.2 obtains positive eigenvalues."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 permits repeated eigenvalues and attains the min\u2013max value at \u03bb_m."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is used for Lax\u2013Milgram and the countable spectral eigenbasis in steps 1.1 and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The compact coercive-form theorem constructs its eigenbasis and attained minmax identity under compact injective dense inclusion. Proof7.1\u20138.1 establish the two minmax inequalities; they do not state a converse characterizing compactness, coercivity or the inclusion from that identity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The compact coercive-form theorem constructs its eigenbasis and attained minmax identity under compact injective dense inclusion. Proof7.1\u20138.1 establish the two minmax inequalities; they do not state a converse characterizing compactness, coercivity or the inclusion from that identity."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "reason": "Countable Choice is used for Lax\u2013Milgram and selecting countable spectral eigenspace bases."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two supported eigencoefficients",
+          "method": "exact finite coefficient calculation",
+          "input": {
+            "eigenvalues": [
+              2,
+              2
+            ],
+            "coefficients": [
+              "3/5",
+              "4/5"
+            ]
+          },
+          "calculation": "The squares sum to one and the Rayleigh quotient is 2((3/5)^2+(4/5)^2)=2.",
+          "expected": {
+            "rayleigh": "2"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-dimensional-galerkin-minmax": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A $\\mathbb K$-linear map\n$T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a\nreal constant $C \\ge 0$ such that\n\n$$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$\n\nAny such $C$ is called a **bound** for $T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-riesz-representation-for-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $H$ be a real or complex Hilbert space and let $f$ be a bounded linear functional on $H$ ([[def-dual-space-of-a-normed-space]]). Then there is a unique $y\\in H$ with\n\n$$f(x)=\\langle x,y\\rangle\\qquad\\text{for every }x\\in H,$$\n\nand $\\|f\\|=\\|y\\|$, where $\\|f\\|$ is the dual norm ([[def-operator-norm]]). Under the first-variable-linear convention the representing vector depends conjugate-linearly and isometrically on $f$: if $f_i$ is represented by $y_i$ and $a,b$ are scalars, then $af_1+bf_2$ is represented by $\\overline a\\,y_1+\\overline b\\,y_2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-spectral-theorem-for-compact-self-adjoint-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a\nreal or complex Hilbert space ([[def-hilbert-space]]) and let\n$T\\in\\mathcal B(H)$ be a compact self-adjoint operator\n([[def-compact-linear-operator]],\n[[def-self-adjoint-positive-unitary-and-normal-operator]],\n[[def-bounded-linear-operator]]). Let\n\n$$\\Sigma:=\\{\\lambda:\\lambda\\ \\text{is an eigenvalue of}\\ T,\\ \\lambda\\ne0\\}$$\n\nbe its set of nonzero eigenvalues\n([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]), with eigenspaces\n$E_\\lambda=\\ker(T-\\lambda I)$ for $\\lambda\\in\\Sigma$. Then:\n\n1. $\\Sigma$ is a finite or countably infinite set of **real** numbers, each\n   eigenvalue has finite multiplicity in the sense $\\dim E_\\lambda<+\\infty$, and\n   for every real $\\varepsilon>0$ there are only finitely many\n   $\\lambda\\in\\Sigma$ with $|\\lambda|\\ge\\varepsilon$; in particular every point\n   of $\\mathbb F\\setminus\\{0\\}$ has a neighbourhood containing only finitely\n   many elements of $\\Sigma$, so the only possible accumulation point of\n   $\\Sigma$ is $0$;\n2. the closed linear span $M$ of $\\bigcup_{\\lambda\\in\\Sigma}E_\\lambda$ satisfies\n   $$M=(\\ker T)^\\perp=\\overline{\\operatorname{ran}T}$$\n   ([[def-orthogonality-and-orthogonal-complement]]), and $H=M\\oplus M^\\perp$\n   with $M^\\perp\\subseteq\\ker T$;\n3. for every $x\\in H$ the finite-subset net of $\\sum_{\\lambda\\in\\Sigma}\\lambda P_\\lambda x$\n   over the orthogonal projections $P_\\lambda$ onto $E_\\lambda$ converges in\n   norm and\n   $$Tx=\\sum_{\\lambda\\in\\Sigma}\\lambda P_\\lambda x ;$$\n4. if in addition $H$ is a complex Hilbert space, then the nonzero spectrum\n   agrees with the nonzero eigenvalues,\n   $$\\sigma(T)\\cap\\{\\mu\\in\\mathbb C:\\mu\\ne0\\}=\\Sigma .$$\n\nNo Hilbert basis of $\\ker T$ is selected anywhere: only the orthonormal bases of\nthe finite-dimensional eigenspaces $E_\\lambda$, $\\lambda\\ne0$, are used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-compact-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A linear map $T:X\\to Y$\n([[def-linear-map]]) is a **compact operator** when the image of every bounded\nsubset of $X$ ([[def-metric-bounded-diameter]]) has compact closure in $Y$\n([[def-metric-compactness]]); explicitly, for every bounded $A\\subseteq X$ the\nclosure $\\overline{T(A)}$ in $Y$ is a compact subset of $Y$. The set of compact\noperators $X\\to Y$ is written $\\mathcal K(X,Y)$. The metric used here is $d(x,y)=\\|x-y\\|$, supplied over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[lem-complex-norm-realification-is-a-real-norm]].\n\n**The closed unit ball suffices.** Put\n$\\overline B_X:=\\{x\\in X:\\|x\\|\\le 1\\}$\n([[def-metric-ball]]). Then $T$ is compact if and only if\n$\\overline{T(\\overline B_X)}$ is a compact subset of $Y$.\n\nIndeed, if $T$ is compact then $\\overline B_X$ is bounded, because\n$\\overline B_X\\subseteq B(0,2)$ while $B(0,2)$ is bounded and a subset of a\nbounded set is bounded, so $T(\\overline B_X)$ has compact closure. Conversely\nassume $\\overline{T(\\overline B_X)}$ compact and let $A\\subseteq X$ be bounded.\nIf $A=\\varnothing$ then $T(A)=\\varnothing$, whose closure is empty and hence\ncompact. Otherwise $A\\subseteq B(x_0,r)$ for some $x_0\\in X$ and real $r>0$, so\nevery $x\\in A$ satisfies $\\|x\\|\\le\\|x_0\\|+r=:R$; if $R>0$ then\n$A\\subseteq R\\,\\overline B_X$ and if $R=0$ then $A\\subseteq\\{0\\}$, so in either\ncase $T(A)\\subseteq R\\,\\overline{T(\\overline B_X)}$. Scalar multiplication by\n$R$ is continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]),\nso $R\\,\\overline{T(\\overline B_X)}$ is a compact subset of $Y$\n([[thm-compactness-under-continuous-maps]]), hence closed\n([[thm-compact-subset-is-closed-and-bounded]]); therefore\n$\\overline{T(A)}\\subseteq R\\,\\overline{T(\\overline B_X)}$ is a closed subset of a\ncompact set, hence compact, and $T$ is compact.\n\n**A compact operator is bounded.** If $T$ is compact then the compact set\n$\\overline{T(\\overline B_X)}$ is bounded\n([[thm-compact-subset-is-closed-and-bounded]]), so there is a real $C\\ge0$ with\n$\\|Tx\\|\\le C$ for every $x\\in\\overline B_X$ and hence $\\|Tx\\|\\le C\\|x\\|$ for\nevery $x\\in X$; thus $T$ is a bounded linear operator\n([[def-bounded-linear-operator]]). This is a consequence of compactness, not a\nhypothesis of the definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For fixed $u_h\\in V_h$, the map $G_{u_h}(v_h):=\\overline{b(u_h,v_h)}$ is a bounded linear functional in $v_h$. Riesz representation [F3] for the inner product $a$ gives a unique $y_h\\in V_h$ with $G_{u_h}(v_h)=a(v_h,y_h)$. Conjugating this identity gives $b(u_h,v_h)=a(y_h,v_h)$ for all $v_h$. Set $K_hu_h:=y_h$. Uniqueness and linearity of $b$ in its first argument make $K_h$ linear.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $u_h,v_h\\in V_h$, $a(K_hu_h,v_h)=b(u_h,v_h)=\\overline{b(v_h,u_h)} =\\overline{a(K_hv_h,u_h)}=a(u_h,K_hv_h),$ so $K_h$ is self-adjoint in the energy inner product. Also $a(K_hu_h,u_h)=b(u_h,u_h)>0$ when $u_h\\ne0$, so $K_h$ is positive and injective. To verify compactness from the compact-closure definition, take a finite $a$-orthonormal basis $\\psi_1,\\ldots,\\psi_N$ of $V_h$, obtained by finite Gram--Schmidt. The matrix entries $m_{ij}:=a(K_h\\psi_j,\\psi_i)$ give, for $x=\\sum_j c_j\\psi_j$, $\\|K_hx\\|_a^2=\\sum_i|\\sum_jm_{ij}c_j|^2\\le(\\sum_{i,j}|m_{ij}|^2)\\sum_j|c_j|^2$, so $K_h$ is bounded. The coordinate map identifies $V_h$ isometrically with $\\mathbb R^N$ in the real case and $\\mathbb R^{2N}$ in the complex case. The closure of the image of its closed unit ball is therefore closed and bounded in finite-dimensional Euclidean coordinates, hence compact by Heine--Borel [F7]; the unit-ball criterion in [F7] makes $K_h$ compact.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], $K_h$ has an $a$-orthonormal eigenbasis $\\phi_{h,1},\\ldots,\\phi_{h,N}$ with positive eigenvalues ordered $\\mu_{h,1}\\ge\\cdots\\ge\\mu_{h,N}>0$. The equation $K_h\\phi_{h,j}=\\mu_{h,j}\\phi_{h,j}$ is equivalent to the Ritz equation with $\\lambda_{h,j}=\\mu_{h,j}^{-1}$, so these are the positive Ritz eigenvalues in increasing order. For $v_h=\\sum_{j=1}^N c_j\\phi_{h,j}$, $a(v_h,v_h)=\\sum_j|c_j|^2,\\qquad b(v_h,v_h)=a(K_hv_h,v_h)=\\sum_j\\mu_{h,j}|c_j|^2.$",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On $W_h:=\\operatorname{span}\\{\\phi_{h,1},\\ldots,\\phi_{h,m}\\}$, $\\sum_j\\mu_{h,j}|c_j|^2\\ge\\mu_{h,m}\\sum_j|c_j|^2$, with equality for $v_h=\\phi_{h,m}$. Thus $\\max_{v_h\\in W_h\\setminus\\{0\\}}a(v_h,v_h)/b(v_h,v_h)=\\mu_{h,m}^{-1}$, so the minimum in the statement is at most $\\lambda_{h,m}$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $W_h$ be any $m$-dimensional subspace of $V_h$. The linear map $v_h\\mapsto(a(v_h,\\phi_{h,1}),\\ldots,a(v_h,\\phi_{h,m-1}))$ has a nonzero kernel by [F5]; when $m=1$ its target is the zero-dimensional space and the kernel is all of $W_h$. A nonzero vector in that kernel has only coefficients $c_j$ with $j\\ge m$ in step 3.1. Since $\\mu_{h,j}\\le\\mu_{h,m}$ for those indices, its quotient is at least $\\mu_{h,m}^{-1}$. Hence the maximum on every $W_h$ is at least $\\lambda_{h,m}$. That maximum is attained by [F6], and the span in step 4.1 attains the outer minimum.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 3.1",
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires N>=1 and1<=m<=N, so the m-dimensional trial family and each nonzero trial sphere exist. Proof 5.1 explicitly covers m=1, when the m-1 coordinate target is zero-dimensional and the map kernel is all W_h."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 makes b positive on every nonzero vector; zero is excluded from Rayleigh quotients."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 treats m=1 with the zero-dimensional target."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Noninjective J or noncoercive a would make a defining inner product degenerate and is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 allows repeated Ritz values; min\u2013max remains valid at ties."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is used in the Riesz/spectral construction in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Finite Galerkin minmax gives positive Ritz values and an attained variational identity. Proof 3.1 identifies the Ritz relation through reciprocal eigenvalues, while 4.1\u20135.1 prove the two inequalities of that identity; there is no converse from an observed minimax number to coercivity or conformity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Finite Galerkin minmax gives positive Ritz values and an attained variational identity. Proof 3.1 identifies the Ritz relation through reciprocal eigenvalues, while 4.1\u20135.1 prove the two inequalities of that identity; there is no converse from an observed minimax number to coercivity or conformity."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "reason": "Countable Choice is used for the Riesz representative and compact spectral basis."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "diagonal two-dimensional Ritz pencil",
+          "method": "exact finite matrix calculation",
+          "input": {
+            "A": [
+              [
+                2,
+                0
+              ],
+              [
+                0,
+                5
+              ]
+            ],
+            "B": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ]
+          },
+          "calculation": "The Ritz values and the m=1,2 min\u2013max values are 2 and 5.",
+          "expected": {
+            "ritz_values": [
+              2,
+              5
+            ]
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-compact-self-adjoint-residual-controls-invariant-subspace-gap": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-spectral-theorem-for-compact-self-adjoint-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a\nreal or complex Hilbert space ([[def-hilbert-space]]) and let\n$T\\in\\mathcal B(H)$ be a compact self-adjoint operator\n([[def-compact-linear-operator]],\n[[def-self-adjoint-positive-unitary-and-normal-operator]],\n[[def-bounded-linear-operator]]). Let\n\n$$\\Sigma:=\\{\\lambda:\\lambda\\ \\text{is an eigenvalue of}\\ T,\\ \\lambda\\ne0\\}$$\n\nbe its set of nonzero eigenvalues\n([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]), with eigenspaces\n$E_\\lambda=\\ker(T-\\lambda I)$ for $\\lambda\\in\\Sigma$. Then:\n\n1. $\\Sigma$ is a finite or countably infinite set of **real** numbers, each\n   eigenvalue has finite multiplicity in the sense $\\dim E_\\lambda<+\\infty$, and\n   for every real $\\varepsilon>0$ there are only finitely many\n   $\\lambda\\in\\Sigma$ with $|\\lambda|\\ge\\varepsilon$; in particular every point\n   of $\\mathbb F\\setminus\\{0\\}$ has a neighbourhood containing only finitely\n   many elements of $\\Sigma$, so the only possible accumulation point of\n   $\\Sigma$ is $0$;\n2. the closed linear span $M$ of $\\bigcup_{\\lambda\\in\\Sigma}E_\\lambda$ satisfies\n   $$M=(\\ker T)^\\perp=\\overline{\\operatorname{ran}T}$$\n   ([[def-orthogonality-and-orthogonal-complement]]), and $H=M\\oplus M^\\perp$\n   with $M^\\perp\\subseteq\\ker T$;\n3. for every $x\\in H$ the finite-subset net of $\\sum_{\\lambda\\in\\Sigma}\\lambda P_\\lambda x$\n   over the orthogonal projections $P_\\lambda$ onto $E_\\lambda$ converges in\n   norm and\n   $$Tx=\\sum_{\\lambda\\in\\Sigma}\\lambda P_\\lambda x ;$$\n4. if in addition $H$ is a complex Hilbert space, then the nonzero spectrum\n   agrees with the nonzero eigenvalues,\n   $$\\sigma(T)\\cap\\{\\mu\\in\\mathbb C:\\mu\\ne0\\}=\\Sigma .$$\n\nNo Hilbert basis of $\\ker T$ is selected anywhere: only the orthonormal bases of\nthe finite-dimensional eigenspaces $E_\\lambda$, $\\lambda\\ne0$, are used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $M$ be a closed linear subspace of a real or complex Hilbert space $H$. Then every $x\\in H$ has a unique decomposition\n\n$$x=m+n,\\qquad m\\in M,\\quad n\\in M^\\perp ,$$\n\nso that $H=M\\oplus M^\\perp$ as a direct sum of the subspace $M$ and its orthogonal complement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $u\\in E$. Decompose $u=P_Fu+(I-P_F)u$ using [F2]. The spectral projection $P_F$ commutes with $B_h$ because $F$ is a sum of whole eigenspaces. By [F1], the orthogonal spectral expansion of $(B_h-\\mu I)u$ on $F^\\perp$ contains only nonzero eigenvalues outside $\\Lambda$ and the kernel component; all their multipliers belong to $\\Sigma_h\\setminus\\Lambda$ and are at distance at least $\\Delta$ from $\\mu$. Parseval therefore gives $\\|(B_h-\\mu I)u\\|^2\\ge \\Delta^2\\|(I-P_F)u\\|^2.$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $u\\ne0$, divide step 1.1 by $\\Delta^2\\|u\\|^2$ and take square roots to obtain $\\operatorname{dist}(u,F)/\\|u\\|\\le\\varepsilon/\\Delta$. The same bound is vacuous for $u=0$. Taking the supremum over nonzero $u\\in E$ proves the stated directed gap estimate.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes E nonzero, ensuring its unit sphere. A finite Lambda could be empty: then F={0}, P_F=0 in Proof1.1 and the same spectral lower bound controls all of u; Sigma_h includes0 so the complement remains nonempty. Proof2.1 divides only by positive Delta and nonzero u."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 with \u03b5=0 gives directed gap zero because \u0394>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The pointwise estimate in steps 1.1\u20132.1 applies to a one-dimensional E."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem explicitly requires \u0394>0; no estimate is claimed at zero separation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses |\u03bc\u2212\u03bd|\u2265\u0394, so equality at the separation boundary is allowed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is the spectral theorem hypothesis used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The compact residual lemma derives the directed gap upper bound from a residual and positive complement separation in Proof1.1\u20132.1. It neither selects vectors in a multiple eigenspace nor asserts the converse implication from a small gap to a residual bound."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The compact residual lemma derives the directed gap upper bound from a residual and positive complement separation in Proof1.1\u20132.1. It neither selects vectors in a multiple eigenspace nor asserts the converse implication from a small gap to a residual bound."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "Countable Choice is the explicit compact self-adjoint spectral theorem hypothesis."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "three-coordinate residual and cluster gap",
+          "method": "exact finite matrix calculation",
+          "input": {
+            "B": "diag(1,3,0)",
+            "cluster": [
+              1
+            ],
+            "mu": 1,
+            "u": [
+              "3/5",
+              "4/5",
+              0
+            ]
+          },
+          "calculation": "\u0394=1, residual=8/5, directed gap=4/5, hence 4/5\u2264(8/5)/1.",
+          "expected": {
+            "gap": "4/5",
+            "residual": "8/5",
+            "delta": 1
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-finite-hermitian-ritz-residual-certifies-spectrum-and-eigendirection": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-spectral-theorem-for-compact-self-adjoint-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a\nreal or complex Hilbert space ([[def-hilbert-space]]) and let\n$T\\in\\mathcal B(H)$ be a compact self-adjoint operator\n([[def-compact-linear-operator]],\n[[def-self-adjoint-positive-unitary-and-normal-operator]],\n[[def-bounded-linear-operator]]). Let\n\n$$\\Sigma:=\\{\\lambda:\\lambda\\ \\text{is an eigenvalue of}\\ T,\\ \\lambda\\ne0\\}$$\n\nbe its set of nonzero eigenvalues\n([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]), with eigenspaces\n$E_\\lambda=\\ker(T-\\lambda I)$ for $\\lambda\\in\\Sigma$. Then:\n\n1. $\\Sigma$ is a finite or countably infinite set of **real** numbers, each\n   eigenvalue has finite multiplicity in the sense $\\dim E_\\lambda<+\\infty$, and\n   for every real $\\varepsilon>0$ there are only finitely many\n   $\\lambda\\in\\Sigma$ with $|\\lambda|\\ge\\varepsilon$; in particular every point\n   of $\\mathbb F\\setminus\\{0\\}$ has a neighbourhood containing only finitely\n   many elements of $\\Sigma$, so the only possible accumulation point of\n   $\\Sigma$ is $0$;\n2. the closed linear span $M$ of $\\bigcup_{\\lambda\\in\\Sigma}E_\\lambda$ satisfies\n   $$M=(\\ker T)^\\perp=\\overline{\\operatorname{ran}T}$$\n   ([[def-orthogonality-and-orthogonal-complement]]), and $H=M\\oplus M^\\perp$\n   with $M^\\perp\\subseteq\\ker T$;\n3. for every $x\\in H$ the finite-subset net of $\\sum_{\\lambda\\in\\Sigma}\\lambda P_\\lambda x$\n   over the orthogonal projections $P_\\lambda$ onto $E_\\lambda$ converges in\n   norm and\n   $$Tx=\\sum_{\\lambda\\in\\Sigma}\\lambda P_\\lambda x ;$$\n4. if in addition $H$ is a complex Hilbert space, then the nonzero spectrum\n   agrees with the nonzero eigenvalues,\n   $$\\sigma(T)\\cap\\{\\mu\\in\\mathbb C:\\mu\\ne0\\}=\\Sigma .$$\n\nNo Hilbert basis of $\\ker T$ is selected anywhere: only the orthonormal bases of\nthe finite-dimensional eigenspaces $E_\\lambda$, $\\lambda\\ne0$, are used.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).\n\n**The completion convention is the Cauchy-sequence one.**\n[[def-banach-space]] defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness \u2014 the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-compact-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A linear map $T:X\\to Y$\n([[def-linear-map]]) is a **compact operator** when the image of every bounded\nsubset of $X$ ([[def-metric-bounded-diameter]]) has compact closure in $Y$\n([[def-metric-compactness]]); explicitly, for every bounded $A\\subseteq X$ the\nclosure $\\overline{T(A)}$ in $Y$ is a compact subset of $Y$. The set of compact\noperators $X\\to Y$ is written $\\mathcal K(X,Y)$. The metric used here is $d(x,y)=\\|x-y\\|$, supplied over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[lem-complex-norm-realification-is-a-real-norm]].\n\n**The closed unit ball suffices.** Put\n$\\overline B_X:=\\{x\\in X:\\|x\\|\\le 1\\}$\n([[def-metric-ball]]). Then $T$ is compact if and only if\n$\\overline{T(\\overline B_X)}$ is a compact subset of $Y$.\n\nIndeed, if $T$ is compact then $\\overline B_X$ is bounded, because\n$\\overline B_X\\subseteq B(0,2)$ while $B(0,2)$ is bounded and a subset of a\nbounded set is bounded, so $T(\\overline B_X)$ has compact closure. Conversely\nassume $\\overline{T(\\overline B_X)}$ compact and let $A\\subseteq X$ be bounded.\nIf $A=\\varnothing$ then $T(A)=\\varnothing$, whose closure is empty and hence\ncompact. Otherwise $A\\subseteq B(x_0,r)$ for some $x_0\\in X$ and real $r>0$, so\nevery $x\\in A$ satisfies $\\|x\\|\\le\\|x_0\\|+r=:R$; if $R>0$ then\n$A\\subseteq R\\,\\overline B_X$ and if $R=0$ then $A\\subseteq\\{0\\}$, so in either\ncase $T(A)\\subseteq R\\,\\overline{T(\\overline B_X)}$. Scalar multiplication by\n$R$ is continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]),\nso $R\\,\\overline{T(\\overline B_X)}$ is a compact subset of $Y$\n([[thm-compactness-under-continuous-maps]]), hence closed\n([[thm-compact-subset-is-closed-and-bounded]]); therefore\n$\\overline{T(A)}\\subseteq R\\,\\overline{T(\\overline B_X)}$ is a closed subset of a\ncompact set, hence compact, and $T$ is compact.\n\n**A compact operator is bounded.** If $T$ is compact then the compact set\n$\\overline{T(\\overline B_X)}$ is bounded\n([[thm-compact-subset-is-closed-and-bounded]]), so there is a real $C\\ge0$ with\n$\\|Tx\\|\\le C$ for every $x\\in\\overline B_X$ and hence $\\|Tx\\|\\le C\\|x\\|$ for\nevery $x\\in X$; thus $T$ is a bounded linear operator\n([[def-bounded-linear-operator]]). This is a consequence of compactness, not a\nhypothesis of the definition.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose an orthonormal basis $f_1,\\ldots,f_N$ by [F3]. For $x=\\sum_jc_jf_j$ with $\\|x\\|\\le1$, orthonormality gives $|c_j|\\le1$, so the triangle inequality yields $\\|Ax\\|\\le\\sum_j\\|Af_j\\|$. Thus $A$ maps the closed unit ball to a bounded set. Its closure is closed and bounded in finite-dimensional coordinates, hence compact by [F3]. The compact-operator unit-ball criterion in [F3] makes $A$ compact; Hermitian symmetry makes it self-adjoint.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F1] to the compact self-adjoint operator from step 1.1 to obtain an orthonormal eigenbasis $(e_j)_{j=1}^N$ with real eigenvalues $\\lambda_j$. Expand $u=\\sum_{j=1}^N c_je_j$, where $c_j=(u,e_j)$ and $\\sum_j|c_j|^2=\\|u\\|^2=1$ by [F2]. Hence $\\mu=\\sum_j\\lambda_j|c_j|^2\\in\\mathbb R$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Orthogonality gives $\\rho^2=\\|(A-\\mu I)u\\|^2=\\sum_{j=1}^N|\\lambda_j-\\mu|^2|c_j|^2\\ge\\operatorname{dist}(\\mu,\\Sigma(A))^2\\sum_j|c_j|^2$. Since the coefficient squares sum to one by step 2.1, taking nonnegative square roots proves the spectral-proximity bound.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If there is no eigenvalue other than the simple target, then $N=1$ and $u$ is a unit multiple of $e$, so the angle is zero. Otherwise choose the indexing so $e_k=e$ and $\\lambda_k=\\lambda$. The phase-invariant angle obeys $\\sin^2\\angle(u,e)=1-|c_k|^2=\\sum_{j\\ne k}|c_j|^2$. For each $j\\ne k$, $|\\lambda_j-\\mu|\\ge\\Delta$ by definition. Therefore $\\rho^2=\\sum_j|\\lambda_j-\\mu|^2|c_j|^2\\ge\\Delta^2\\sum_{j\\ne k}|c_j|^2=\\Delta^2\\sin^2\\angle(u,e)$. Taking square roots proves the directional estimate; if the target is the only eigenvalue, simplicity gives the zero-angle branch already handled.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The proximity estimate minimizes over the entire spectrum and contains no ordering or target label. It only says that some eigenvalue lies within $\\rho$ of $\\mu$; without an additional spectral-location certificate it does not identify that eigenvalue as the lowest one.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires a nonzero finite-dimensional Hilbert space and unit u; its spectrum is nonempty by Proof2.1. The complement of a simple target may be empty: Proof4.1 explicitly handles that N=1 case with angle0, without taking a minimum over an empty complement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives exact spectral proximity at zero residual; step 4.1 gives zero angle for a zero residual."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 handles a one-eigenvalue space and proves angle zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The directional branch requires a simple target and positive separation \u0394."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 proves the non-strict angle bound at the stated positive separation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice supplies the spectral eigenbasis used in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Hermitian residual theorem gives one-way proximity and angle upper bounds, derived in Proof3.1 and4.1. Proof5.1 explicitly explains that the residual does not identify the lowest or a specified eigenvalue, so no inverse characterization is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Hermitian residual theorem gives one-way proximity and angle upper bounds, derived in Proof3.1 and4.1. Proof5.1 explicitly explains that the residual does not identify the lowest or a specified eigenvalue, so no inverse characterization is asserted."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "Countable Choice supplies the compact self-adjoint spectral eigenbasis used in step 2.1."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-level residual and simple-target angle",
+          "method": "exact finite matrix calculation",
+          "input": {
+            "A": "diag(1,3)",
+            "u": [
+              "sqrt(3)/2",
+              "1/2"
+            ]
+          },
+          "calculation": "\u03bc=3/2, \u03c1=\u221a3/2, spectral distance=1/2, target gap \u0394=3/2, and sin(angle)=1/2\u22641/\u221a3.",
+          "expected": {
+            "mu": "3/2",
+            "rho": "sqrt(3)/2",
+            "distance": "1/2",
+            "angle_sine": "1/2"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil": {
+      "risk": "high",
+      "kind": "proposition",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The matrix $\\widetilde H=L^{-1}HL^{-*}$ is Hermitian, since $\\widetilde H^*=(L^{-*})^*H^*(L^{-1})^* =L^{-1}HL^{-*}=\\widetilde H.$ The coordinate map $c\\mapsto y=L^*c$ is invertible by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting $c=L^{-*}y$ into $Hc=\\lambda Sc$ and multiplying by $L^{-1}$ gives $L^{-1}HL^{-*}y=\\lambda L^{-1}LL^*L^{-*}y=\\lambda y.$ Every operation is reversible because $L$ is invertible, so the generalized and whitened eigenproblems have exactly the same eigenvalues, with eigenvectors related by $y=L^*c$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "With $c=L^{-*}y$, matrix multiplication gives $c^*Hc=y^*L^{-1}HL^{-*}y=y^*\\widetilde H y,\\qquad c^*Sc=y^*L^{-1}LL^*L^{-*}y=y^*y.$ Since $c\\ne0$ iff $y\\ne0$, division proves equality of the two Rayleigh quotients.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The whitening proposition compares Rayleigh quotients only for c!=0, implying a nonzero coefficient space for that branch. Positive-definite S and its invertible Cholesky factor map c bijectively to nonzero y in Proof1.1\u20133.1; no empty coefficient sphere is required."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 restricts quotients to c\u22600 and invertibility gives y\u22600."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: for n=1 the transformation is scalar Cholesky scaling."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "S>0 excludes singular overlap matrices and zero Cholesky pivots."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the positive Cholesky diagonal excludes the zero-pivot endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The supplied positive-definite overlap has its unique positive-diagonal Cholesky factor in F1. Proof1.1 fixes that invertible map and2.1 reverses the coordinate substitution; no arbitrary eigenbasis or choice across a family of pencils is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 sends every generalized eigenpair to a whitened eigenpair."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 reverses the transformation because L is invertible."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "scalar whitening",
+          "method": "exact scalar calculation",
+          "input": {
+            "H": 6,
+            "S": 2,
+            "L": "sqrt(2)"
+          },
+          "calculation": "H/S=3 equals L^{-1}HL^{-*}=3.",
+          "expected": {
+            "generalized": 3,
+            "whitened": 3
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-conforming-energy-projection-is-best-approximation": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space and let\n$a:V\\times V\\to\\mathbb K$ be linear in its first argument, conjugate-linear\nin its second, bounded by $M$, and coercive with constant $\\alpha>0$:\n$$|a(v,w)|\\le M\\|v\\|_V\\|w\\|_V,\\qquad \\operatorname{Re}a(v,v)\\ge\\alpha\\|v\\|_V^2.$$\nLet $F:V\\to\\mathbb K$ be bounded and conjugate-linear, and let $V_h\\subseteq V$\nbe finite-dimensional. Then there are unique $u\\in V$ and $u_h\\in V_h$ with\n$$a(u,v)=F(v)\\quad(v\\in V).$$\n$$a(u_h,v_h)=F(v_h)\\quad(v_h\\in V_h).$$\nThe solutions satisfy\n$$\\|u-u_h\\|_V\\le\\frac M\\alpha\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.$$\nThe real bilinear case uses linear functionals and reads $\\operatorname{Re}$ as\nthe identity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$V_h\\subseteq V$ be a subspace, let $a$ be linear in its first argument and\nconjugate-linear in its second, and let $F:V\\to\\mathbb K$ be conjugate-linear.\nIf $u\\in V$ and $u_h\\in V_h$ satisfy\n$$a(u,v)=F(v)\\quad(v\\in V),\\qquad a(u_h,v_h)=F(v_h)\\quad(v_h\\in V_h),$$\nthen\n$$a(u-u_h,v_h)=0\\qquad\\text{for every }v_h\\in V_h.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-symmetric-galerkin-best-approximation-in-energy-norm",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses and notation of\n[[thm-cea-quasi-optimality-for-conforming-galerkin-approximations]], and\nsuppose additionally that $a$ is Hermitian:\n$a(v,w)=\\overline{a(w,v)}$. Then\n$$\\|v\\|_a:=\\sqrt{a(v,v)}$$\nis the energy norm and the Galerkin solution is its best approximation:\n$$\\|u-u_h\\|_a=\\inf_{v_h\\in V_h}\\|u-v_h\\|_a.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-eigenspace-best-approximation-gap",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real or complex Hilbert space with a bounded, Hermitian,\ncoercive form $a$ as in [[def-bounded-coercive-and-symmetric-sesquilinear-forms]].\nIts energy norm is $\\|v\\|_a:=\\sqrt{a(v,v)}$. Let $E\\subseteq V$ be a\nnonzero finite-dimensional subspace and let $V_h\\subseteq V$ be a\nfinite-dimensional subspace. Define the directed energy distance and\nbest-approximation gap by\n$$d_a(v,V_h):=\\inf_{w_h\\in V_h}\\|v-w_h\\|_a,\\qquad \\delta_a(E,V_h):=\\sup_{\\substack{v\\in E\\\\\\|v\\|_a=1}}d_a(v,V_h).$$\nWhen $E=\\operatorname{span}\\{e_1,\\ldots,e_m\\}$ is the first $m$\ncontinuous eigenspace directions and $V_h$ is the conforming Galerkin space,\nwrite $\\delta_h:=\\delta_a(E,V_h)$. This is a directed gap from $E$ to $V_h$;\nit does not by itself assert a two-sided gap between two eigenspaces.\n\nThe quantity is finite and satisfies $0\\le\\delta_a(E,V_h)\\le1$, since\n$0\\in V_h$ gives $d_a(v,V_h)\\le\\|v\\|_a$ on the unit sphere.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For fixed $v$, the functional $w\\mapsto a(v,w)$ is bounded and conjugate-linear. Apply [F1] to the continuous datum $F(w)=a(v,w)$; its continuous solution is $v$, and the resulting discrete solution is the unique $P_hv\\in V_h$ in the statement. If $v_1,v_2\\in V$ and $c_1,c_2\\in\\mathbb K$, then $c_1P_hv_1+c_2P_hv_2$ satisfies the defining equation for $P_h(c_1v_1+c_2v_2)$, so uniqueness proves linearity.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The continuous equation for $v$ and the defining discrete equation for $P_hv$ agree on each $w_h\\in V_h$. By [F2], $a(v-P_hv,w_h)=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix any $w_h\\in V_h$. Since $v-w_h=(v-P_hv)+(P_hv-w_h)$ and $P_hv-w_h\\in V_h$, step 2.1 and Hermitian symmetry eliminate both cross terms in the squared energy norm. Therefore $\\|v-w_h\\|_a^2=\\|v-P_hv\\|_a^2+\\|P_hv-w_h\\|_a^2 \\ge\\|v-P_hv\\|_a^2.$ The choice $w_h=P_hv$ attains equality, proving the best-approximation identity (the exact supplier interface [F3]).",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $v\\in E$ is nonzero, put $\\widehat v=v/\\|v\\|_a$. By linearity in step 1.1 and the definition [F4], $\\|v-P_hv\\|_a=\\|v\\|_a\\|\\widehat v-P_h\\widehat v\\|_a\\le \\delta_a(E,V_h)\\|v\\|_a$; the same inequality is immediate for $v=0$. If $P_hv=0$, step 3.1 makes the left side $\\|v\\|_a$. Since $\\delta_a(E,V_h)<1$, this forces $v=0$. Thus $P_h|_E$ is injective.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "V_h may have dimension0 but still contains0; Proof1.1 supplies its unique discrete solution P_hv=0 and Proof3.1 attains the infimum at P_hv. The extra E is assumed nonzero; if V_h={0}, delta_a(E,V_h)=1, excluding the injectivity branch delta<1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 handles v=0 and gives exact projection on E when \u03b4=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 applies to a one-dimensional E."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The form is Hermitian and coercive, so the induced energy norm is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 requires the strict condition \u03b4_a(E,V_h)<1; equality is not covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is used by the C\u00e9a existence theorem in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The projection lemma asserts orthogonality, exact best-approximation identity and a sufficient small-gap condition for injectivity. Proof3.1 derives the identity and4.1 the injectivity implication; it does not characterize all projections by injectivity alone."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The projection lemma asserts orthogonality, exact best-approximation identity and a sufficient small-gap condition for injectivity. Proof3.1 derives the identity and4.1 the injectivity implication; it does not characterize all projections by injectivity alone."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "Countable Choice is used by the C\u00e9a existence theorem to construct the projection solutions."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "projection onto the trial eigenspace",
+          "method": "exact Hilbert projection check",
+          "input": {
+            "E": "span(e1)",
+            "V_h": "span(e1)",
+            "delta": 0
+          },
+          "calculation": "P_h is identity on E, so error is zero and the restriction is injective.",
+          "expected": {
+            "error": 0,
+            "injective": true
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-conforming-galerkin-ritz-matrix-error-is-quadratic-in-gap": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-compact-coercive-form-spectrum-and-minmax",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be an infinite-dimensional\nreal or complex Hilbert space, let $V$ be a real or complex Hilbert space over\nthe same field, and let $J:V\\to H$ be an injective, bounded, compact linear\nmap with dense range ([[def-compact-linear-operator]]). Let\n$a:V\\times V\\to\\mathbb K$ be bounded, Hermitian and coercive with constants\n$M,\\alpha>0$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]).\nThen there is a sequence of eigenpairs $(\\lambda_j,e_j)_{j\\ge1}$ such that\n$$0<\\lambda_1\\le\\lambda_2\\le\\cdots,\\qquad \\lambda_j\\longrightarrow+\\infty,$$\nwhere each eigenvalue is repeated according to multiplicity,\n$e_j\\in V$, $\\|Je_j\\|_H=1$, and\n$$a(e_j,v)=\\lambda_j(Je_j,Jv)_H\\qquad(v\\in V).$$\nThe vectors $Je_j$ form an orthonormal basis of $H$, and\n$e_j/\\sqrt{\\lambda_j}$ form an orthonormal basis of $V$ for the energy inner\nproduct $a$. In particular, for $v\\in V$,\n$$\\|Jv\\|_H^2=\\sum_{j\\ge1}|(Jv,Je_j)_H|^2,\\qquad a(v,v)=\\sum_{j\\ge1}\\lambda_j|(Jv,Je_j)_H|^2,$$\nand the Rayleigh quotient $R(v):=a(v,v)/\\|Jv\\|_H^2$ satisfies the attained\nmin\u2013max identity\n$$\\lambda_m=\\min_{\\substack{S\\subseteq V\\\\\\dim S=m}} \\max_{v\\in S\\setminus\\{0\\}}R(v)\\qquad(m\\ge1).$$\nThis is the abstract continuous spectral interface used below. The published\nelliptic suppliers on the Dirichlet branch have their own stated domain and\naxiom hypotheses; this theorem does not enlarge those imported interfaces.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-conforming-energy-projection-is-best-approximation",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a Hilbert space, let $a$ be a bounded,\nHermitian coercive form on $V$, and let $V_h\\subseteq V$ be finite-dimensional.\nWrite $\\|v\\|_a:=\\sqrt{a(v,v)}$ for the induced energy norm.\nFor each $v\\in V$, let $P_hv\\in V_h$ be the unique solution of\n$$a(P_hv,w_h)=a(v,w_h)\\qquad(w_h\\in V_h).$$\nThen $P_h:V\\to V_h$ is linear, $a(v-P_hv,w_h)=0$ for all $w_h\\in V_h$, and\n$$\\|v-P_hv\\|_a=\\inf_{w_h\\in V_h}\\|v-w_h\\|_a.$$\nIf $E\\subseteq V$ is a nonzero finite-dimensional subspace and\n$\\delta_a(E,V_h)<1$, then $P_h|_E$ is injective.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-eigenspace-best-approximation-gap",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real or complex Hilbert space with a bounded, Hermitian,\ncoercive form $a$ as in [[def-bounded-coercive-and-symmetric-sesquilinear-forms]].\nIts energy norm is $\\|v\\|_a:=\\sqrt{a(v,v)}$. Let $E\\subseteq V$ be a\nnonzero finite-dimensional subspace and let $V_h\\subseteq V$ be a\nfinite-dimensional subspace. Define the directed energy distance and\nbest-approximation gap by\n$$d_a(v,V_h):=\\inf_{w_h\\in V_h}\\|v-w_h\\|_a,\\qquad \\delta_a(E,V_h):=\\sup_{\\substack{v\\in E\\\\\\|v\\|_a=1}}d_a(v,V_h).$$\nWhen $E=\\operatorname{span}\\{e_1,\\ldots,e_m\\}$ is the first $m$\ncontinuous eigenspace directions and $V_h$ is the conforming Galerkin space,\nwrite $\\delta_h:=\\delta_a(E,V_h)$. This is a directed gap from $E$ to $V_h$;\nit does not by itself assert a two-sided gap between two eigenspaces.\n\nThe quantity is finite and satisfies $0\\le\\delta_a(E,V_h)\\le1$, since\n$0\\in V_h$ gives $d_a(v,V_h)\\le\\|v\\|_a$ on the unit sphere.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\phi_i:=e_i/\\sqrt{\\lambda_i}$, $p_i:=P_h\\phi_i$, and $r_i:=\\phi_i-p_i$. By [F1], the $\\phi_i$ are $a$-orthonormal. For any coefficient vector $c\\in\\mathbb K^m$, linearity of $P_h$ and [F2]\u2013[F3] give $\\left\\|\\sum_{i=1}^m c_i r_i\\right\\|_a =\\left\\|v-P_hv\\right\\|_a\\le\\delta_h\\|v\\|_a =\\delta_h\\|c\\|_2,\\qquad v:=\\sum_{i=1}^m c_i\\phi_i.$ In particular, the error Gram matrix $G_{ij}:=a(r_j,r_i)$ is positive semidefinite and $\\|G\\|_2\\le\\delta_h^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since each $r_i$ is energy-orthogonal to $V_h$, it is orthogonal to every $p_j$. Therefore the stiffness Gram matrix $(A_h)_{ij}:=a(p_j,p_i)$ satisfies $(A_h)_{ij}=a(\\phi_j-r_j,\\phi_i-r_i)=\\delta_{ij}-G_{ij}.$ It follows that $\\|A_h-I\\|_2=\\|G\\|_2\\le\\delta_h^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $b(u,v):=(Ju,Jv)_H$. The eigenrelation in [F1] gives $b(\\phi_j,r_i)=a(r_j,r_i)/\\lambda_j$ and $b(r_j,\\phi_i)=a(r_j,r_i)/\\lambda_i$; in each identity, the energy orthogonality of $r_i$ or $r_j$ removes the projected component. Also [F1] implies $\\|Jr_i\\|_H\\le\\|r_i\\|_a/\\sqrt{\\lambda_1}$. Thus every entry of the mass Gram error $(B_h-D_m)_{ij}:=b(p_j,p_i)-b(\\phi_j,\\phi_i)$ has absolute value at most $3\\delta_h^2/\\lambda_1$. For an $m\\times m$ matrix, its operator norm is at most $m$ times its largest absolute entry, so $\\|B_h-D_m\\|_2\\le3m\\delta_h^2/\\lambda_1$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The least diagonal entry of $D_m$ is $1/\\lambda_m$. The assumed bound on $\\delta_h$ and step 2.2 therefore give $c^*B_hc\\ge\\left(\\frac1{\\lambda_m}-\\frac{3m\\delta_h^2}{\\lambda_1}\\right)\\|c\\|_2^2 \\ge\\frac1{2\\lambda_m}\\|c\\|_2^2.$ In particular $B_h$ is positive definite and $P_h|_{E_m}$ has $m$-dimensional image $U_h$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Normalize $\\|c\\|_2=1$. The continuous quotient of $v=\\sum_i c_i\\phi_i$ is $R(v)=1/(c^*D_mc)\\le\\lambda_m$ by [F1]. The quotient of $w_h=P_hv=\\sum_i c_ip_i$ is $R_h(w_h)=c^*A_hc/(c^*B_hc)$. Steps 2.1 and 2.2\u20132.2 give $|R_h(w_h)-R(v)| \\le\\frac{\\delta_h^2}{1/(2\\lambda_m)} +\\frac{3m\\delta_h^2/\\lambda_1}{(1/(2\\lambda_m))(1/\\lambda_m)} =C_m\\delta_h^2.$ Thus $R_h(w_h)\\le\\lambda_m+C_m\\delta_h^2$. Homogeneity removes the normalization of $c$, proving the bound for every nonzero $w_h\\in U_h$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement fixes m>=1 and its first m eigenvectors. The small-gap assumption delta<=1/2 gives injectivity and an m-dimensional image in Proof3.1; thus no empty coefficient sphere or empty projected basis is used in Proof4.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At \u03b4_h=0, steps 1.1\u20132.2 give A_h=I and B_h=D_m exactly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the Gram bounds reduce to scalar inequalities when m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "\u03bb_1>0 and the denominator bound in step 2.2 exclude a degenerate mass matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The closed gap threshold \u03b4_h\u2264min{\u2026} still gives the positive lower bound in step 2.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is inherited from the compact spectrum used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Ritz-matrix lemma derives quadratic Gram and quotient bounds from its small gap. Proof2.1\u20132.2 expand the errors and3.1 gives positive mass; Proof4.1 bounds the quotient. No converse characterizing all small matrix errors by the approximation gap is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Ritz-matrix lemma derives quadratic Gram and quotient bounds from its small gap. Proof2.1\u20132.2 expand the errors and3.1 gives positive mass; Proof4.1 bounds the quotient. No converse characterizing all small matrix errors by the approximation gap is stated."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "Countable Choice is inherited from the compact-form spectrum supplying the eigendirections."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "m=1 constant and threshold",
+          "method": "exact constant calculation",
+          "input": {
+            "m": 1,
+            "lambda_1": 2,
+            "delta": "1/10"
+          },
+          "calculation": "The threshold is min(1/2,1/\u221a6); C_1=16 and C_1\u03b4\u00b2=4/25.",
+          "expected": {
+            "C_1": 16,
+            "error_bound": "4/25"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-conforming-galerkin-eigenvalue-upper-bound-quadratic-gap-error": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-compact-coercive-form-spectrum-and-minmax",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be an infinite-dimensional\nreal or complex Hilbert space, let $V$ be a real or complex Hilbert space over\nthe same field, and let $J:V\\to H$ be an injective, bounded, compact linear\nmap with dense range ([[def-compact-linear-operator]]). Let\n$a:V\\times V\\to\\mathbb K$ be bounded, Hermitian and coercive with constants\n$M,\\alpha>0$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]).\nThen there is a sequence of eigenpairs $(\\lambda_j,e_j)_{j\\ge1}$ such that\n$$0<\\lambda_1\\le\\lambda_2\\le\\cdots,\\qquad \\lambda_j\\longrightarrow+\\infty,$$\nwhere each eigenvalue is repeated according to multiplicity,\n$e_j\\in V$, $\\|Je_j\\|_H=1$, and\n$$a(e_j,v)=\\lambda_j(Je_j,Jv)_H\\qquad(v\\in V).$$\nThe vectors $Je_j$ form an orthonormal basis of $H$, and\n$e_j/\\sqrt{\\lambda_j}$ form an orthonormal basis of $V$ for the energy inner\nproduct $a$. In particular, for $v\\in V$,\n$$\\|Jv\\|_H^2=\\sum_{j\\ge1}|(Jv,Je_j)_H|^2,\\qquad a(v,v)=\\sum_{j\\ge1}\\lambda_j|(Jv,Je_j)_H|^2,$$\nand the Rayleigh quotient $R(v):=a(v,v)/\\|Jv\\|_H^2$ satisfies the attained\nmin\u2013max identity\n$$\\lambda_m=\\min_{\\substack{S\\subseteq V\\\\\\dim S=m}} \\max_{v\\in S\\setminus\\{0\\}}R(v)\\qquad(m\\ge1).$$\nThis is the abstract continuous spectral interface used below. The published\nelliptic suppliers on the Dirichlet branch have their own stated domain and\naxiom hypotheses; this theorem does not enlarge those imported interfaces.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-dimensional-galerkin-minmax",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $V_h$ be an\n$N$-dimensional subspace of a real or complex Hilbert space $V$, with\n$N\\ge1$. Let $a$ be a bounded Hermitian coercive form on $V$ and let\n$b(u,v):=(Ju,Jv)_H$ for a bounded injective linear map $J:V\\to H$ into a\nHilbert space. The generalized Ritz problem on $V_h$ is\n$$a(u_h,v_h)=\\lambda_h b(u_h,v_h)\\qquad(v_h\\in V_h).$$\nIts eigenvalues, listed with multiplicity in increasing order, are positive\nnumbers $\\lambda_{h,1}\\le\\cdots\\le\\lambda_{h,N}$. For every\n$1\\le m\\le N$,\n$$\\lambda_{h,m}=\\min_{\\substack{W_h\\subseteq V_h\\\\\\dim W_h=m}} \\max_{v_h\\in W_h\\setminus\\{0\\}} \\frac{a(v_h,v_h)}{b(v_h,v_h)}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-conforming-energy-projection-is-best-approximation",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a Hilbert space, let $a$ be a bounded,\nHermitian coercive form on $V$, and let $V_h\\subseteq V$ be finite-dimensional.\nWrite $\\|v\\|_a:=\\sqrt{a(v,v)}$ for the induced energy norm.\nFor each $v\\in V$, let $P_hv\\in V_h$ be the unique solution of\n$$a(P_hv,w_h)=a(v,w_h)\\qquad(w_h\\in V_h).$$\nThen $P_h:V\\to V_h$ is linear, $a(v-P_hv,w_h)=0$ for all $w_h\\in V_h$, and\n$$\\|v-P_hv\\|_a=\\inf_{w_h\\in V_h}\\|v-w_h\\|_a.$$\nIf $E\\subseteq V$ is a nonzero finite-dimensional subspace and\n$\\delta_a(E,V_h)<1$, then $P_h|_E$ is injective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-conforming-galerkin-ritz-matrix-error-is-quadratic-in-gap",
+          "source_section": "Statement",
+          "quote": "Assume the compact coercive form setting and notation of\n[[thm-compact-coercive-form-spectrum-and-minmax]]. Fix $m\\ge1$ and a\nfinite-dimensional conforming subspace $V_h\\subseteq V$. Let\n$E_m=\\operatorname{span}\\{e_1,\\ldots,e_m\\}$, let\n$\\delta_h=\\delta_a(E_m,V_h)$ from\n[[def-eigenspace-best-approximation-gap]], and let $P_h:V\\to V_h$ be the\nenergy projection of\n[[lem-conforming-energy-projection-is-best-approximation]]. For $c\\in\\mathbb K^m$\nwrite $\\|c\\|_2=(\\sum_i|c_i|^2)^{1/2}$, and for matrices use the induced\nEuclidean operator norm $\\|M\\|_2=\\sup_{\\|c\\|_2=1}\\|Mc\\|_2$\n([[def-operator-norm]]). If\n$$0\\le\\delta_h\\le\\min\\left\\{\\frac12,\\sqrt{\\frac{\\lambda_1}{6m\\lambda_m}}\\right\\},$$\nthen $P_h|_{E_m}$ is injective. Set $U_h:=P_h(E_m)$. The vectors\n$p_i:=P_h(e_i/\\sqrt{\\lambda_i})$, $1\\le i\\le m$, form a basis of $U_h$; they\nneed not be energy-orthonormal. Set\n$(A_h)_{ij}:=a(p_j,p_i)$ and $(B_h)_{ij}:=(Jp_j,Jp_i)_H$. With\n$D_m:=\\operatorname{diag}(1/\\lambda_1,\\ldots,1/\\lambda_m)$,\n$$\\|A_h-I\\|_2\\le\\delta_h^2,\\qquad \\|B_h-D_m\\|_2\\le\\frac{3m}{\\lambda_1}\\delta_h^2,$$\nand every nonzero $w_h\\in U_h$ satisfies\n$$\\frac{a(w_h,w_h)}{\\|Jw_h\\|_H^2} \\le\\lambda_m+C_m\\delta_h^2, \\qquad C_m:=2\\lambda_m+\\frac{6m\\lambda_m^2}{\\lambda_1}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $m$-dimensional subspace $W_h\\subseteq V_h$, conformity gives $W_h\\subseteq V$. The continuous min\u2013max principle [F1] therefore gives $\\max_{v\\in W_h\\setminus\\{0\\}}R(v)\\ge\\lambda_m$. Taking the minimum over such $W_h$ and applying [F2] yields $\\lambda_{h,m}\\ge\\lambda_m$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the shift branch, the form eigenrelation for $a_\\sigma$ is $a_0(e,v)+\\sigma(Je,Jv)_H=\\lambda^\\sigma(Je,Jv)_H,$ which is equivalent to the unshifted relation with eigenvalue $\\lambda^0=\\lambda^\\sigma-\\sigma$. The same equivalence holds on $V_h$, because the mass form is unchanged. Thus every continuous and discrete eigenvalue shifts by the same scalar, preserving the ordering and satisfying $(\\lambda^\\sigma_{h,m}-\\sigma)-(\\lambda^\\sigma_m-\\sigma) =\\lambda^\\sigma_{h,m}-\\lambda^\\sigma_m$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\delta_h\\le\\delta_0\\le1/2<1$, [F3] makes $U_h:=P_h(E_m)$ an $m$-dimensional subspace of $V_h$. The local Ritz-matrix estimate [F4] gives $\\max_{w_h\\in U_h\\setminus\\{0\\}}R(w_h)\\le\\lambda_m+C_m\\delta_h^2.$ By the discrete min\u2013max principle [F2], $\\lambda_{h,m}$ is no greater than this maximum. This proves the upper bound.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply steps 1.1\u20132.1 to the bounded, Hermitian, coercive shifted form $a_\\sigma$ using its own best-approximation gap $\\delta_h^\\sigma$. It gives $\\lambda^\\sigma_m\\le\\lambda^\\sigma_{h,m}\\le \\lambda^\\sigma_m+C_m^\\sigma(\\delta_h^\\sigma)^2$ under that gap's smallness condition. Step 1.2 subtracts $\\sigma$ from both eigenvalues, leaving the same ordering and error.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement has m>=1 and dim V_h>=m. Proof1.1 minimizes over nonempty m-dimensional trial subspaces;2.1 constructs one such space P_h(E_m). The shifted branch retains the same m and dimensions, not an empty-spectrum extension."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When \u03b4_h=0, step 2.1 gives the exact Ritz value \u03bb_{h,m}=\u03bb_m."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the fixed-index argument applies for m=1 without a lower Ritz index."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The compact coercive assumptions make the Rayleigh quotients and eigenvalues positive and defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the lower bound is unconditional and the upper estimate includes \u03b4_h\u2264\u03b4_0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is stated in the spectral interfaces used in steps 1.1 and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conforming eigenvalue theorem derives ordering and a small-gap error bound. Proof1.1 gives the unconditional lower inequality and2.1 the conditional upper one;3.1 transfers a specified coercive shift. It does not infer conformity or a small gap from an eigenvalue comparison."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conforming eigenvalue theorem derives ordering and a small-gap error bound. Proof1.1 gives the unconditional lower inequality and2.1 the conditional upper one;3.1 transfers a specified coercive shift. It does not infer conformity or a small gap from an eigenvalue comparison."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "reason": "Countable Choice is explicit in the continuous spectral and discrete Ritz min\u2013max interfaces."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero-gap fixed-index bound",
+          "method": "exact finite spectral calculation",
+          "input": {
+            "m": 1,
+            "lambda_1": 2,
+            "delta": 0,
+            "lambda_h_1": 2
+          },
+          "calculation": "The trial space contains the first eigendirection, so both bounds are equalities.",
+          "expected": {
+            "ritz_value": 2,
+            "error": 0
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-conforming-galerkin-eigenspace-gap-under-isolated-cluster": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-compact-coercive-form-spectrum-and-minmax",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be an infinite-dimensional\nreal or complex Hilbert space, let $V$ be a real or complex Hilbert space over\nthe same field, and let $J:V\\to H$ be an injective, bounded, compact linear\nmap with dense range ([[def-compact-linear-operator]]). Let\n$a:V\\times V\\to\\mathbb K$ be bounded, Hermitian and coercive with constants\n$M,\\alpha>0$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]).\nThen there is a sequence of eigenpairs $(\\lambda_j,e_j)_{j\\ge1}$ such that\n$$0<\\lambda_1\\le\\lambda_2\\le\\cdots,\\qquad \\lambda_j\\longrightarrow+\\infty,$$\nwhere each eigenvalue is repeated according to multiplicity,\n$e_j\\in V$, $\\|Je_j\\|_H=1$, and\n$$a(e_j,v)=\\lambda_j(Je_j,Jv)_H\\qquad(v\\in V).$$\nThe vectors $Je_j$ form an orthonormal basis of $H$, and\n$e_j/\\sqrt{\\lambda_j}$ form an orthonormal basis of $V$ for the energy inner\nproduct $a$. In particular, for $v\\in V$,\n$$\\|Jv\\|_H^2=\\sum_{j\\ge1}|(Jv,Je_j)_H|^2,\\qquad a(v,v)=\\sum_{j\\ge1}\\lambda_j|(Jv,Je_j)_H|^2,$$\nand the Rayleigh quotient $R(v):=a(v,v)/\\|Jv\\|_H^2$ satisfies the attained\nmin\u2013max identity\n$$\\lambda_m=\\min_{\\substack{S\\subseteq V\\\\\\dim S=m}} \\max_{v\\in S\\setminus\\{0\\}}R(v)\\qquad(m\\ge1).$$\nThis is the abstract continuous spectral interface used below. The published\nelliptic suppliers on the Dirichlet branch have their own stated domain and\naxiom hypotheses; this theorem does not enlarge those imported interfaces.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-dimensional-galerkin-minmax",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $V_h$ be an\n$N$-dimensional subspace of a real or complex Hilbert space $V$, with\n$N\\ge1$. Let $a$ be a bounded Hermitian coercive form on $V$ and let\n$b(u,v):=(Ju,Jv)_H$ for a bounded injective linear map $J:V\\to H$ into a\nHilbert space. The generalized Ritz problem on $V_h$ is\n$$a(u_h,v_h)=\\lambda_h b(u_h,v_h)\\qquad(v_h\\in V_h).$$\nIts eigenvalues, listed with multiplicity in increasing order, are positive\nnumbers $\\lambda_{h,1}\\le\\cdots\\le\\lambda_{h,N}$. For every\n$1\\le m\\le N$,\n$$\\lambda_{h,m}=\\min_{\\substack{W_h\\subseteq V_h\\\\\\dim W_h=m}} \\max_{v_h\\in W_h\\setminus\\{0\\}} \\frac{a(v_h,v_h)}{b(v_h,v_h)}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-conforming-galerkin-eigenvalue-upper-bound-quadratic-gap-error",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the compact coercive form setting of\n[[thm-compact-coercive-form-spectrum-and-minmax]]. Let $V_h\\subseteq V$ be\nfinite-dimensional, let $m\\ge1$ with $\\dim V_h\\ge m$, and let\n$E_m=\\operatorname{span}\\{e_1,\\ldots,e_m\\}$ be the first $m$ continuous\neigen-directions. Write $\\delta_h=\\delta_a(E_m,V_h)$ as in\n[[def-eigenspace-best-approximation-gap]]. There are $\\delta_0>0$ and\n$C_m<\\infty$, depending only on $m$ and the first $m$ continuous eigenvalues,\nsuch that if $\\delta_h\\le\\delta_0$, then the $m$th conforming Ritz value\n$\\lambda_{h,m}$ satisfies\n$$\\lambda_m\\le\\lambda_{h,m}\\le\\lambda_m+C_m\\delta_h^2.$$\nThe lower bound holds for every conforming $V_h$ of dimension at least $m$;\nthe upper error bound requires the stated small-gap condition. More generally,\nlet $a_0$ be a Hermitian lower-bounded form on the same $V$, and suppose a\nspecified shift $\\sigma$ makes\n$a_\\sigma(u,v):=a_0(u,v)+\\sigma(Ju,Jv)_H$ bounded, Hermitian and coercive,\nwith the same injective compact dense map $J$. Define $\\delta_h^\\sigma$ using\nthe energy norm $\\|v\\|_{a_\\sigma}:=\\sqrt{a_\\sigma(v,v)}$ and the first $m$\neigenspace directions for $a_\\sigma$. The theorem applies to the shifted\nproblem with $\\delta_h^\\sigma$; its continuous and discrete eigenvalues are\nthe corresponding unshifted eigenvalues plus $\\sigma$. Subtracting $\\sigma$\npreserves their ordering and the difference $\\lambda_{h,m}-\\lambda_m$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-conforming-energy-projection-is-best-approximation",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a Hilbert space, let $a$ be a bounded,\nHermitian coercive form on $V$, and let $V_h\\subseteq V$ be finite-dimensional.\nWrite $\\|v\\|_a:=\\sqrt{a(v,v)}$ for the induced energy norm.\nFor each $v\\in V$, let $P_hv\\in V_h$ be the unique solution of\n$$a(P_hv,w_h)=a(v,w_h)\\qquad(w_h\\in V_h).$$\nThen $P_h:V\\to V_h$ is linear, $a(v-P_hv,w_h)=0$ for all $w_h\\in V_h$, and\n$$\\|v-P_hv\\|_a=\\inf_{w_h\\in V_h}\\|v-w_h\\|_a.$$\nIf $E\\subseteq V$ is a nonzero finite-dimensional subspace and\n$\\delta_a(E,V_h)<1$, then $P_h|_E$ is injective.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-compact-self-adjoint-residual-controls-invariant-subspace-gap",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a real or\ncomplex Hilbert space and let $B_h:H\\to H$ be compact and self-adjoint. Put\n$$\\Sigma_h:=\\{0\\}\\cup\\{\\nu\\ne0:\\nu\\text{ is an eigenvalue of }B_h\\}.$$\nLet $\\Lambda\\subseteq\\Sigma_h\\setminus\\{0\\}$ be a finite cluster of\nnonzero eigenvalues, let $F$ be the sum of their eigenspaces, and assume\n$$\\Delta:=\\inf\\{|\\mu-\\nu|:\\nu\\in\\Sigma_h\\setminus\\Lambda\\}>0$$\nfor a real number $\\mu$. The compact spectral theorem makes $F$\nfinite-dimensional. Define the directed Hilbert-space gap by\n$$\\operatorname{gap}(E,F):=\\sup_{\\substack{u\\in E\\\\\\|u\\|=1}} \\inf_{v\\in F}\\|u-v\\|.$$\nIf $E\\subseteq H$ is a nonzero finite-dimensional subspace and\n$$\\|(B_h-\\mu I)u\\|\\le\\varepsilon\\|u\\|\\qquad(u\\in E),$$\nthen\n$$\\operatorname{gap}(E,F)\\le\\varepsilon/\\Delta.$$\nThe estimate compares subspaces and makes no choice of eigenvectors in a\nmultiple eigenspace.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-riesz-representation-for-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $H$ be a real or complex Hilbert space and let $f$ be a bounded linear functional on $H$ ([[def-dual-space-of-a-normed-space]]). Then there is a unique $y\\in H$ with\n\n$$f(x)=\\langle x,y\\rangle\\qquad\\text{for every }x\\in H,$$\n\nand $\\|f\\|=\\|y\\|$, where $\\|f\\|$ is the dual norm ([[def-operator-norm]]). Under the first-variable-linear convention the representing vector depends conjugate-linearly and isometrically on $f$: if $f_i$ is represented by $y_i$ and $a,b$ are scalars, then $af_1+bf_2$ is represented by $\\overline a\\,y_1+\\overline b\\,y_2$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-conforming-energy-projection-is-best-approximation",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a Hilbert space, let $a$ be a bounded,\nHermitian coercive form on $V$, and let $V_h\\subseteq V$ be finite-dimensional.\nWrite $\\|v\\|_a:=\\sqrt{a(v,v)}$ for the induced energy norm.\nFor each $v\\in V$, let $P_hv\\in V_h$ be the unique solution of\n$$a(P_hv,w_h)=a(v,w_h)\\qquad(w_h\\in V_h).$$\nThen $P_h:V\\to V_h$ is linear, $a(v-P_hv,w_h)=0$ for all $w_h\\in V_h$, and\n$$\\|v-P_hv\\|_a=\\inf_{w_h\\in V_h}\\|v-w_h\\|_a.$$\nIf $E\\subseteq V$ is a nonzero finite-dimensional subspace and\n$\\delta_a(E,V_h)<1$, then $P_h|_E$ is injective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-compact-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A linear map $T:X\\to Y$\n([[def-linear-map]]) is a **compact operator** when the image of every bounded\nsubset of $X$ ([[def-metric-bounded-diameter]]) has compact closure in $Y$\n([[def-metric-compactness]]); explicitly, for every bounded $A\\subseteq X$ the\nclosure $\\overline{T(A)}$ in $Y$ is a compact subset of $Y$. The set of compact\noperators $X\\to Y$ is written $\\mathcal K(X,Y)$. The metric used here is $d(x,y)=\\|x-y\\|$, supplied over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[lem-complex-norm-realification-is-a-real-norm]].\n\n**The closed unit ball suffices.** Put\n$\\overline B_X:=\\{x\\in X:\\|x\\|\\le 1\\}$\n([[def-metric-ball]]). Then $T$ is compact if and only if\n$\\overline{T(\\overline B_X)}$ is a compact subset of $Y$.\n\nIndeed, if $T$ is compact then $\\overline B_X$ is bounded, because\n$\\overline B_X\\subseteq B(0,2)$ while $B(0,2)$ is bounded and a subset of a\nbounded set is bounded, so $T(\\overline B_X)$ has compact closure. Conversely\nassume $\\overline{T(\\overline B_X)}$ compact and let $A\\subseteq X$ be bounded.\nIf $A=\\varnothing$ then $T(A)=\\varnothing$, whose closure is empty and hence\ncompact. Otherwise $A\\subseteq B(x_0,r)$ for some $x_0\\in X$ and real $r>0$, so\nevery $x\\in A$ satisfies $\\|x\\|\\le\\|x_0\\|+r=:R$; if $R>0$ then\n$A\\subseteq R\\,\\overline B_X$ and if $R=0$ then $A\\subseteq\\{0\\}$, so in either\ncase $T(A)\\subseteq R\\,\\overline{T(\\overline B_X)}$. Scalar multiplication by\n$R$ is continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]),\nso $R\\,\\overline{T(\\overline B_X)}$ is a compact subset of $Y$\n([[thm-compactness-under-continuous-maps]]), hence closed\n([[thm-compact-subset-is-closed-and-bounded]]); therefore\n$\\overline{T(A)}\\subseteq R\\,\\overline{T(\\overline B_X)}$ is a closed subset of a\ncompact set, hence compact, and $T$ is compact.\n\n**A compact operator is bounded.** If $T$ is compact then the compact set\n$\\overline{T(\\overline B_X)}$ is bounded\n([[thm-compact-subset-is-closed-and-bounded]]), so there is a real $C\\ge0$ with\n$\\|Tx\\|\\le C$ for every $x\\in\\overline B_X$ and hence $\\|Tx\\|\\le C\\|x\\|$ for\nevery $x\\in X$; thus $T$ is a bounded linear operator\n([[def-bounded-linear-operator]]). This is a consequence of compactness, not a\nhypothesis of the definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-compactness-is-intrinsic",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $A \\subseteq X$ and let\n$(A,d_A)$ be the metric subspace ([[def-isometry-and-metric-embedding]]). Then:\n\n1. **Relative openness is a trace.** A set $V \\subseteq A$ is open in $(A,d_A)$\n   ([[def-metric-topology]]) if and only if $V = U \\cap A$ for some $U$ open in\n   $(X,d)$.\n2. **Compactness read in the ambient space.** $A$ is a compact subset of $X$\n   ([[def-metric-compactness]]), that is $(A,d_A)$ is a compact metric space, if\n   and only if for every family $\\mathcal{U}$ of open subsets of $X$ with\n   $A \\subseteq \\bigcup \\mathcal{U}$ there are $n \\in \\mathbb{N}$ and\n   $U_0, \\dots, U_n \\in \\mathcal{U}$ with $A \\subseteq U_0 \\cup \\dots \\cup U_n$,\n   or else $A = \\emptyset$.\n3. **The same in indexed form.** $A$ is a compact subset of $X$ if and only if\n   for every set $I$ and every family $(U_i)_{i \\in I}$ of open subsets of $X$\n   with $A \\subseteq \\bigcup_{i \\in I} U_i$ there are $n \\in \\mathbb{N}$ and\n   indices $i_0, \\dots, i_n \\in I$ with\n   $A \\subseteq U_{i_0} \\cup \\dots \\cup U_{i_n}$, or else $A = \\emptyset$.\n\nClaim 3 is the form used by almost every later proof on this page, because a\ncover is usually produced by a rule that attaches an open set to each point or to\neach index, and a set of open sets forgets that rule. No choice principle is used\nanywhere below; the one place a selection is made is over a finite index set, and\n[[lem-finite-choice]] is a theorem of ZF.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-compact-subset-is-closed-and-bounded",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $K \\subseteq X$ be a\ncompact subset ([[def-metric-compactness]]). Then $K$ is closed in $X$\n([[def-metric-topology]]) and bounded ([[def-metric-bounded-diameter]]).\n\nNo choice principle is used: both covers below are given by a rule, and the\nindexed form of [[lem-compactness-is-intrinsic]] returns indices rather than\nsets.\n\n**The converse is false in general.** A closed and bounded subset of an arbitrary\nmetric space need not be compact\n([[fs-closed-and-bounded-implies-compact-in-every-metric-space]]); it is exactly\nin $\\mathbb{R}^n$ that the converse holds ([[thm-heine-borel-rn]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-closed-subset-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $F \\subseteq X$ be closed in $X$\n([[def-metric-topology]]). Then $F$ is a compact subset of $X$: the metric\nsubspace $(F, d_F)$ is a compact metric space\n([[def-isometry-and-metric-embedding]]).\n\nNo choice principle is used.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $E_{r-1}\\subseteq E_s$ when $r>1$, its directed best-approximation gap is at most $\\delta_s$. Choose $\\delta_s$ below the smallness thresholds for the upper eigenvalue theorem at $s$ and, if $r>1$, at $r-1$. At index $s$, [F2] gives $\\lambda_{h,s}\\le\\lambda+C_s\\delta_s^2$. For $r\\le j\\le s$, Ritz ordering gives $\\lambda_{h,j}\\le\\lambda_{h,s}$, while the conforming lower bound in [F2] gives $\\lambda_{h,j}\\ge\\lambda_j=\\lambda$. Hence $\\lambda\\le\\lambda_{h,j}\\le\\lambda+C_s\\delta_s^2$. When $r>1$, Ritz ordering and the upper bound at $r-1$ give $\\lambda_{h,j}\\le\\lambda_{r-1}+C_{r-1}\\delta_s^2<\\lambda-\\tfrac12(\\lambda-\\lambda_{r-1})$ for $j<r$. For each discrete index $j>s$ that exists, [F2] gives $\\lambda_{h,j}\\ge\\lambda_j\\ge\\lambda_{s+1}>\\lambda$. Thus exactly the $s-r+1$ indexed Ritz eigenvalues in the cluster are separated from all other discrete Ritz eigenvalues.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On the energy Hilbert space $(V,a)$, define $K:V\\to V$ by $a(Ku,v)=(Ju,Jv)_H\\qquad(u,v\\in V).$ For fixed $u$, the right side is a bounded functional of $v$, so [F5] gives existence and uniqueness. If $C_J=\\|J\\|_{V\\to H}$, then for every $v$ with $\\|v\\|_a=1$, coercivity and Cauchy\u2013Schwarz give $|a(Ku,v)|=|(Ju,Jv)_H|\\le(C_J^2/\\alpha)\\|u\\|_a$. Taking the supremum over such $v$ and using Riesz norm equality yields $\\|Ku\\|_a\\le(C_J^2/\\alpha)\\|u\\|_a$. Hermitian symmetry shows that $K$ is self-adjoint. The continuous eigenrelation in [F1] gives $Ke_j=\\lambda_j^{-1}e_j$ and $K(e_j/\\sqrt{\\lambda_j})=\\lambda_j^{-1}(e_j/\\sqrt{\\lambda_j})$. In particular, on $E$ the operator $K$ acts as $\\mu I$ for $\\mu:=1/\\lambda$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $P_h$ be the energy projection from [F3] and set $K_h:=P_hKP_h:V\\to V$. It is self-adjoint because $P_h$ is an orthogonal projection and $K$ is self-adjoint. It is bounded as a composition of bounded operators, and its range lies in the finite-dimensional space $V_h$. To check compactness under the actual compact-closure definition, the image $K_h(\\overline B_V)$ is bounded in $V_h$. Choose a finite $a$-orthonormal basis of $V_h$ by finite Gram--Schmidt and identify its real coordinates with $\\mathbb R^d$ or $\\mathbb R^{2d}$. The closure of this image in $V_h$ is closed and bounded in those coordinates, hence compact by Heine--Borel. Its inclusion into $V$ is isometric, so it is compact and closed in $V$; therefore the ambient closure of $K_h(\\overline B_V)$ is a closed subset of this compact set and is compact. The compact-operator definition now makes $K_h$ compact [F6]. It is positive because $a(K_hu,u)=a(KP_hu,P_hu)=\\|JP_hu\\|_H^2\\ge0$. For $u_h,v_h\\in V_h$, $a(K_hu_h,v_h)=a(Ku_h,v_h)=(Ju_h,Jv_h)_H.$ If $K_hu_h=0$, taking $v_h=u_h$ gives $\\|Ju_h\\|_H^2=0$, so injectivity of $J$ gives $u_h=0$. Thus $K_h|_{V_h}$ is positive definite. Moreover, $K_hu_h=\\mu_hu_h$ is equivalent by the displayed identity to $b(u_h,v_h)=\\mu_h a(u_h,v_h)$ for every $v_h\\in V_h$, the Ritz equation with $\\lambda_{h,j}=1/\\mu_h$. Conversely, the same identity and nondegeneracy of $a$ on $V_h$ show that every Ritz eigenvector is an eigenvector of $K_h$. Its positive eigenspaces are therefore exactly the conforming Ritz eigenspaces. Put $\\mu:=1/\\lambda$. If $r>1$, set $\\gamma_-:=\\lambda-\\lambda_{r-1}$; set $\\Delta_+:=1/\\lambda-1/\\lambda_{s+1}>0$. When $r>1$, put $\\Delta_-:=1/(\\lambda-\\gamma_-/2)-1/\\lambda>0$. Step 1.1 and smallness give a positive distance from $\\mu$ to all eigenvalues outside the $r,\\ldots,s$ Ritz cluster: lower-index reciprocal eigenvalues are at least $1/(\\lambda-\\gamma_-/2)$ when $r>1$, higher-index reciprocals are at most $1/\\lambda_{s+1}$ when present, and zero is separated by $\\mu$. Define $\\Delta_{r,s,\\lambda}:=\\min\\{\\mu,\\Delta_+\\}$ if $r=1$ and $\\Delta_{r,s,\\lambda}:=\\min\\{\\mu,\\Delta_+,\\Delta_-\\}$ if $r>1$. The cluster subspace $E_h$ of $K_h$ has dimension $s-r+1$ and this positive spectral separation from its complement.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $u\\in E$, the inclusion $E\\subseteq E_s$ and [F3] give $\\|P_hu-u\\|_a\\le\\delta_s\\|u\\|_a$. Since $Ku=\\mu u$, $K_hu-\\mu u=P_hK(P_hu-u)+\\mu(P_hu-u).$ The orthogonal projection $P_h$ has norm at most one, so $\\|(K_h-\\mu I)u\\|_a\\le(\\|K\\|+\\mu)\\delta_s\\|u\\|_a.$ The constant $\\Delta_{r,s,\\lambda}$ from step 2.1 is therefore independent of $\\delta_s$ under the chosen smallness bound.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply the residual subspace estimate [F4] to $K_h$, its separated cluster $E_h$, and the residual bound from step 3.1. It yields $\\delta_a(E,E_h)\\le \\frac{\\|K\\|+\\mu}{\\Delta_{r,s,\\lambda}}\\,\\delta_s,$ where $\\Delta_{r,s,\\lambda}>0$ is the uniform spectral separation obtained in step 2.1. This is the claimed invariant-subspace estimate, including the case of multiplicity greater than one.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The cluster indices satisfy1<=r<=s, so E has dimension s-r+1>=1 and dim V_h>=s. Proof1.1 treats absent lower indices when r=1 and only existing upper discrete indices; Proof2.1 defines the separation minimum without a nonexistent lower gap in that case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For \u03b4_s=0, step 3.1 has zero residual and step 4.1 gives zero subspace gap."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: r=s is a simple isolated eigenspace covered by the same proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem requires positive external gaps to neighboring eigenvalues."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict half-gap assumptions in step 1.1 give positive spectral separation in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is used in the compact spectrum and Riesz construction in steps 1.1 and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The isolated-cluster theorem gives a directed gap bound under separation and small approximation error. Proof2.1 identifies the full discrete cluster and4.1 invokes its residual estimate. It expressly makes no choice of individual eigenvectors and states no converse from a subspace gap to the spectral hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The isolated-cluster theorem gives a directed gap bound under separation and small approximation error. Proof2.1 identifies the full discrete cluster and4.1 invokes its residual estimate. It expressly makes no choice of individual eigenvectors and states no converse from a subspace gap to the spectral hypotheses."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "reason": "Countable Choice is inherited by the compact-form spectrum and Riesz operator construction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact double cluster",
+          "method": "exact finite spectral calculation",
+          "input": {
+            "eigenvalues": [
+              1,
+              1,
+              3
+            ],
+            "r": 1,
+            "s": 2,
+            "delta_s": 0
+          },
+          "calculation": "The cluster dimension is two, its external gap is 2, and the invariant-subspace gap is zero.",
+          "expected": {
+            "dimension": 2,
+            "gap": 2,
+            "subspace_gap": 0
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-nearly-dependent-overlap-matrix-whitening-and-conditioning": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-positive-definite-overlap-whitening-preserves-generalized-ritz-pencil",
+          "source_section": "Statement",
+          "quote": "Let $H=H^*\\in M_n(\\mathbb C)$ be a finite Hermitian stiffness matrix and\nlet $S=S^*>0$ be a positive-definite overlap or mass matrix. By Cholesky\nfactorization ([[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]),\nwrite $S=LL^*$ with $L$ invertible lower triangular and positive diagonal.\nDefine the whitened Hermitian matrix\n$$\\widetilde H:=L^{-1}HL^{-*},\\qquad L^{-*}:=(L^*)^{-1}.$$\nThe generalized Ritz equation $Hc=\\lambda Sc$ is equivalent under the\ninvertible change of coordinates $y=L^*c$ to\n$\\widetilde H y=\\lambda y$. The Rayleigh quotients agree:\n$$\\frac{c^*Hc}{c^*Sc}=\\frac{y^*\\widetilde H y}{y^*y}\\qquad(c\\ne0).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both vectors have norm one and $v_1^Tv_2=1-\\varepsilon$, so their Gram matrix is the displayed $S_\\varepsilon$. Its eigenvectors $(1,1)$ and $(1,-1)$ have eigenvalues $2-\\varepsilon$ and $\\varepsilon$, both positive. Thus $S_\\varepsilon$ is positive definite and its spectral condition number is $(2-\\varepsilon)/\\varepsilon$. Also $\\|v_1-v_2\\|^2=2\\varepsilon$, which tends to zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $H=I$, diagonalizing $S_\\varepsilon$ in the same two eigenvectors shows that $Hc=\\lambda S_\\varepsilon c$ has eigenvalues $\\lambda=(2-\\varepsilon)^{-1}$ and $\\lambda=\\varepsilon^{-1}$. The Cholesky factor is $L=\\begin{pmatrix}1&0\\\\1-\\varepsilon&\\sqrt{2\\varepsilon-\\varepsilon^2}\\end{pmatrix},$ so $S_\\varepsilon=LL^*$ and its positive diagonal makes it the factor in [F2]. By [F3], the whitened Hermitian problem has the same two eigenvalues. For example, at $\\varepsilon=1/N$ with integer $N\\ge2$, the condition number is $2N-1$, which grows without bound although whitening is an exact change of coordinates.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The overlap Example fixes exactly two explicit unit vectors and a2-by-2 Gram matrix. Proof1.1 computes its two positive eigenvalues for0<epsilon<1;2.1 whitens that same nonempty pencil."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes ||v_1\u2212v_2||\u00b2=2\u03b5, tending to zero as \u03b5 decreases."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the scalar one-dimensional Cholesky case remains invertible for positive overlap."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "\u03b5=0 is excluded because S_\u03b5 is singular."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: for 0<\u03b5<1 both overlap eigenvalues \u03b5 and 2\u2212\u03b5 are positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both overlap basis vectors and their Cholesky factor are explicit formulas. Proof2.1 identifies the positive-diagonal factor and preserves the two displayed eigenvalues; no family of arbitrary eigendirections or numerical solver output is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 maps generalized eigenvectors to whitened eigenvectors."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 reverses the eigenvector map using invertible L."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "epsilon one half",
+          "method": "exact finite matrix calculation",
+          "input": {
+            "epsilon": "1/2"
+          },
+          "calculation": "S eigenvalues are 3/2 and 1/2, condition number is 3, generalized eigenvalues are 2/3 and 2.",
+          "expected": {
+            "condition_number": 3,
+            "ritz_values": [
+              "2/3",
+              2
+            ]
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-nonconforming-broken-eigenvalue-below-dirichlet-ground-state": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.\n\nA **matching affine simplicial mesh** of a bounded polyhedral open set\n$\\Omega\\subset\\mathbb R^d$ is a finite set $\\mathcal T$ of closed,\nnondegenerate $d$-simplices such that their union is $\\overline\\Omega$,\ntheir interiors are pairwise disjoint, $\\Omega$ is the interior of their\nunion, and the intersection of two distinct cells is either empty or a\nwhole face of each. Thus no lower-dimensional crack is omitted from\n$\\Omega$ while its surrounding cells are retained. Every interior facet is\nincident to exactly two cells and every boundary facet to one. The faces of\na cell are the convex hulls of its vertex subsets. A facet means a face of\ndimension $d-1$.\n\nFor each cell $K\\in\\mathcal T$, an affine bijection\n$$F_K:\\overline{\\widehat S_d}\\to K,\\qquad F_K(\\widehat x)=b_K+A_K\\widehat x,$$\nwith invertible $A_K\\in\\mathbb R^{d\\times d}$ is a **reference map**.\nChoose the vertex order so $\\det A_K>0$; this is the orientation convention\nused for Piola formulas. Write $h_K:=\\operatorname{diam}(K)$ and let\n$\\rho_K$ be the radius of the largest Euclidean ball contained in $K$.\nA family $\\{\\mathcal T_h\\}_{h\\in H}$ is **shape regular** if there is a\nfinite $\\sigma$ such that $h_K/\\rho_K\\le\\sigma$ for every\n$h\\in H$ and $K\\in\\mathcal T_h$. This universal condition is vacuous for\nan empty family.\nThis definition uses radius; references using the diameter of the inscribed\nball differ by a factor of two.\n\nAn affine image of the reference square is a parallelogram. A general\nquadrilateral requires a nonaffine map and is outside this affine definition;\ncurved-cell approximation is not included here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-broken-and-conforming-polynomial-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal T$ be a matching affine simplicial mesh of $\\Omega$ as defined\nin [[def-matching-affine-simplicial-meshes]]. Fix $k\\in\\mathbb N_0$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and an integer $q\\ge1$. On each\ncell let $\\mathbb P_k(K;\\mathbb K^q)$ denote the\nrestrictions to $K$ of $\\mathbb K^q$-valued polynomials of total degree at\nmost $k$. The **broken polynomial space** is the finite product\n$$V_h^{\\mathrm{br}}:=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb K^q),$$\nviewed as functions defined almost everywhere cell by cell. For an interior\nfacet $F=K\\cap K'$, the **jump** is the difference of the two polynomial\ntraces, with either fixed ordering of $K,K'$; its vanishing is independent of\nthat ordering. The **conforming polynomial space** is\n$$V_h^{\\mathrm{conf}}:=\\{v\\in V_h^{\\mathrm{br}}:v|_{F,K}=v|_{F,K'}\\text{ on every interior facet }F\\}.$$\nThe **zero-boundary subspace** consists of those $v\\in V_h^{\\mathrm{conf}}$\nwhose polynomial trace is zero on every boundary facet. These are algebraic\ndefinitions. The Sobolev inclusions and the zero-boundary closure conclusion\nare proved separately in the corresponding local theorems on matching\npiecewise polynomials and zero-boundary values. If $\\mathcal T=\\varnothing$,\nthen $\\Omega=\\varnothing$ by the mesh definition; the empty product is the\nzero vector space consisting of the unique empty function, and the trace\nconditions are vacuous.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-poincare-constant-and-first-dirichlet-eigenvalue",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be nonempty bounded open and consider the Dirichlet Laplacian, i.e. the symmetric case with $a^{ij}=\\delta^{ij}$, $b=0$, $c=0$ ([[def-uniformly-elliptic-divergence-form-operator]]). Then its first eigenvalue satisfies $\\lambda_1>0$ and\n$$\\lambda_1=\\min_{u\\in H^1_0(\\Omega)\\setminus\\{0\\}}\\frac{\\|Du\\|_{L^2}^2}{\\|u\\|_{L^2}^2},\\qquad \\|u\\|_{L^2(\\Omega)}\\le\\lambda_1^{-1/2}\\|Du\\|_{L^2(\\Omega)}\\quad(u\\in H^1_0(\\Omega)),$$\nwith equality for nonzero $u$ exactly at the nonzero first eigenfunctions; $u=0$ is also the trivial equality case. Hence $\\lambda_1^{-1/2}$ is the optimal (smallest) constant in the $L^2$ zero-trace Poincare inequality on $\\Omega$: every constant $C$ with $\\|u\\|_{L^2}\\le C\\|Du\\|_{L^2}$ for all $u\\in H^1_0(\\Omega)$ satisfies $C\\ge\\lambda_1^{-1/2}$, and the positive admissible constant $C_P$ of [[thm-poincare-inequality-for-w-one-p-zero]] at $p=2$ therefore satisfies $C_P\\ge\\lambda_1^{-1/2}$. No numerical value or domain formula for $\\lambda_1$ is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each triangle has area $1/2$, so $b(w,w)=\\int_{K_1}1\\,dx=1/2>0$. The cellwise gradient of each constant restriction is zero. Hence $a_{\\mathrm{br}}(w,v)=0$ for every broken piecewise-constant $v$, and in particular $a_{\\mathrm{br}}(w,v)=0\\,b(w,v)$ for all such $v$. This is the generalized Ritz equation with eigenvalue zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The square is nonempty, open and bounded, so [F2] gives $\\lambda_1>0$. Therefore the broken Ritz eigenvalue $0$ is strictly less than $\\lambda_1$. The usual conforming min\u2013max conclusion does not apply: $w$ jumps across the diagonal and is not a member of $H^1_0(\\Omega)$; moreover the broken stiffness form is only a seminorm on this piecewise-constant trial space.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example uses the nonempty square and exactly two triangles. Proof1.1 gives the chosen broken function positive mass1/2; Proof2.1 invokes the nonempty-domain Dirichlet supplier. No empty mesh or zero trial vector is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes zero broken energy and positive mass 1/2 for w."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the local P0 restrictions are constants on each of the two cells."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the broken stiffness as a seminorm and its zero Ritz value."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example fixes two triangles and has no varying endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Choice and Countable Choice are explicit for the Dirichlet eigenvalue conclusion in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The broken-space Example supplies one eigenvalue0 below the positive Dirichlet ground state. Proof1.1 verifies that eigenpair and2.1 explains failed conformity/coercivity; it does not claim all nonconforming discretizations underestimate an eigenvalue."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The broken-space Example supplies one eigenvalue0 below the positive Dirichlet ground state. Proof1.1 verifies that eigenpair and2.1 explains failed conformity/coercivity; it does not claim all nonconforming discretizations underestimate an eigenvalue."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "The cited Dirichlet eigenvalue supplier explicitly assumes the Axiom of Choice."
+        },
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "The cited Dirichlet eigenvalue supplier explicitly assumes Countable Choice."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two equal-area triangles",
+          "method": "exact cell integral calculation",
+          "input": {
+            "cell_area": "1/2",
+            "w": "1 on K1 and 0 on K2"
+          },
+          "calculation": "Broken energy is zero, mass is 1/2, and the continuous \u03bb_1 is positive.",
+          "expected": {
+            "broken_ritz": 0,
+            "mass": "1/2",
+            "continuous_sign": "positive"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-dirichlet-square-conforming-p1-eigenvalue-upper-bound": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.\n\nA **matching affine simplicial mesh** of a bounded polyhedral open set\n$\\Omega\\subset\\mathbb R^d$ is a finite set $\\mathcal T$ of closed,\nnondegenerate $d$-simplices such that their union is $\\overline\\Omega$,\ntheir interiors are pairwise disjoint, $\\Omega$ is the interior of their\nunion, and the intersection of two distinct cells is either empty or a\nwhole face of each. Thus no lower-dimensional crack is omitted from\n$\\Omega$ while its surrounding cells are retained. Every interior facet is\nincident to exactly two cells and every boundary facet to one. The faces of\na cell are the convex hulls of its vertex subsets. A facet means a face of\ndimension $d-1$.\n\nFor each cell $K\\in\\mathcal T$, an affine bijection\n$$F_K:\\overline{\\widehat S_d}\\to K,\\qquad F_K(\\widehat x)=b_K+A_K\\widehat x,$$\nwith invertible $A_K\\in\\mathbb R^{d\\times d}$ is a **reference map**.\nChoose the vertex order so $\\det A_K>0$; this is the orientation convention\nused for Piola formulas. Write $h_K:=\\operatorname{diam}(K)$ and let\n$\\rho_K$ be the radius of the largest Euclidean ball contained in $K$.\nA family $\\{\\mathcal T_h\\}_{h\\in H}$ is **shape regular** if there is a\nfinite $\\sigma$ such that $h_K/\\rho_K\\le\\sigma$ for every\n$h\\in H$ and $K\\in\\mathcal T_h$. This universal condition is vacuous for\nan empty family.\nThis definition uses radius; references using the diameter of the inscribed\nball differ by a factor of two.\n\nAn affine image of the reference square is a parallelogram. A general\nquadrilateral requires a nonaffine map and is outside this affine definition;\ncurved-cell approximation is not included here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-broken-and-conforming-polynomial-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal T$ be a matching affine simplicial mesh of $\\Omega$ as defined\nin [[def-matching-affine-simplicial-meshes]]. Fix $k\\in\\mathbb N_0$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and an integer $q\\ge1$. On each\ncell let $\\mathbb P_k(K;\\mathbb K^q)$ denote the\nrestrictions to $K$ of $\\mathbb K^q$-valued polynomials of total degree at\nmost $k$. The **broken polynomial space** is the finite product\n$$V_h^{\\mathrm{br}}:=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb K^q),$$\nviewed as functions defined almost everywhere cell by cell. For an interior\nfacet $F=K\\cap K'$, the **jump** is the difference of the two polynomial\ntraces, with either fixed ordering of $K,K'$; its vanishing is independent of\nthat ordering. The **conforming polynomial space** is\n$$V_h^{\\mathrm{conf}}:=\\{v\\in V_h^{\\mathrm{br}}:v|_{F,K}=v|_{F,K'}\\text{ on every interior facet }F\\}.$$\nThe **zero-boundary subspace** consists of those $v\\in V_h^{\\mathrm{conf}}$\nwhose polynomial trace is zero on every boundary facet. These are algebraic\ndefinitions. The Sobolev inclusions and the zero-boundary closure conclusion\nare proved separately in the corresponding local theorems on matching\npiecewise polynomials and zero-boundary values. If $\\mathcal T=\\varnothing$,\nthen $\\Omega=\\varnothing$ by the mesh definition; the empty product is the\nzero vector space consisting of the unique empty function, and the trace\nconditions are vacuous.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega$ be a bounded polyhedral open set with a finite matching\naffine simplicial mesh, let $1\\le p<\\infty$, and let $v$ be a real-valued\nconforming piecewise polynomial whose polynomial trace vanishes on every boundary\nfacet. Then\n$$v\\in W^{1,p}_0(\\Omega),\\qquad \\|v\\|_{L^p(\\Omega)}\\le C_\\Omega\\|\\nabla v\\|_{L^p(\\Omega)}.$$\nHere $W^{1,p}_0$ is the norm closure of $C_c^\\infty(\\Omega)$; no C1\ntrace characterization is used.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. In the symmetric case of [[def-ltwo-operator-associated-with-a-symmetric-elliptic-form]], let $\\Omega\\subseteq\\mathbb R^n$ be nonempty, open and bounded, fix $\\mu\\ge\\beta$, and let $K_\\mu$ be the shifted solution operator of [[def-shifted-elliptic-solution-operator]] ([[lem-shifted-elliptic-solution-operator-is-compact-on-ltwo]]). Then the following hold.\n1. There are real numbers $\\lambda_1\\le\\lambda_2\\le\\cdots$ with $\\lambda_j\\to+\\infty$, each eigenvalue repeated according to its finite multiplicity, and an orthonormal basis $\\{e_j\\}_{j\\ge1}$ of $L^2(\\Omega)$ with $e_j\\in H^1_0(\\Omega)$ and\n$$a(e_j,v)=\\lambda_j(e_j,v)_{L^2}\\qquad\\text{for every }v\\in H^1_0(\\Omega),$$\nequivalently $e_j\\in D(L)$ and $Le_j=\\lambda_je_j$ in the sense of [[def-symmetric-elliptic-weak-eigenpair]]. Explicitly $\\lambda_j=\\nu_j^{-1}-\\mu$, where $\\nu_j>0$, $\\nu_j\\downarrow0$, are the nonzero eigenvalues of the compact self-adjoint positive operator $K_\\mu$ with $K_\\mu e_j=\\nu_je_j$ ([[lem-symmetric-shifted-solution-operator-is-positive-and-self-adjoint]]).\n2. Every weak eigenvalue of the Dirichlet problem occurs in the list, and each listed $\\lambda_j$ is a weak eigenvalue with finite-dimensional eigenspace; eigenspaces belonging to distinct eigenvalues are $L^2$-orthogonal.\n3. $\\lambda_j>-\\mu$ for every $j$, and $a(u,u)\\ge-\\beta\\|u\\|^2_{L^2}$ for every $u\\in H^1_0(\\Omega)$.\nThe proof applies the compact self-adjoint spectral theorem once to $K_\\mu$; since $\\ker K_\\mu=\\{0\\}$, no Hilbert basis of the kernel is ever selected, and the union of orthonormal bases of the nonzero eigenspaces of $K_\\mu$ is already a Hilbert basis of $L^2(\\Omega)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-courant-fischer-minimax-for-elliptic-eigenvalues",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Countable Choice. In the symmetric case of [[def-ltwo-operator-associated-with-a-symmetric-elliptic-form]] with $\\Omega$ nonempty bounded open, let $\\lambda_1\\le\\lambda_2\\le\\cdots$ be the eigenvalues of [[thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator]], repeated according to multiplicity. Then for every $k\\ge1$,\n$$\\lambda_k=\\min\\Big\\{\\max_{u\\in S\\setminus\\{0\\}}\\frac{a(u,u)}{\\|u\\|_{L^2}^2}:\\ S\\subseteq H^1_0(\\Omega),\\ \\dim S=k\\Big\\}=\\max\\Big\\{\\inf_{u\\in (H^1_0(\\Omega)\\cap T^{\\perp_{L^2}})\\setminus\\{0\\}}\\frac{a(u,u)}{\\|u\\|_{L^2}^2}:\\ T\\subseteq H^1_0(\\Omega),\\ \\dim T=k-1\\Big\\},$$\nwhere $T^{\\perp_{L^2}}$ is the orthogonal complement in $L^2(\\Omega)$, and for $k=1$ the maximum is over $T=\\{0\\}$, so $H^1_0(\\Omega)\\cap T^{\\perp_{L^2}}=H^1_0(\\Omega)$. Both outer extrema are attained: the first at $S=\\operatorname{span}\\{e_1,\\dots,e_k\\}$, and the second at $T=\\operatorname{span}\\{e_1,\\dots,e_{k-1}\\}$, where the inner infimum is attained at $e_k$. No smoothness of $\\partial\\Omega$ is required.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Adjacent triangles share the same endpoint values of $\\phi$, so their linear traces agree on each interior edge. The boundary edges have zero values at both endpoints, so their linear traces vanish identically. Thus [F1] places $\\phi$ in $H^1_0(\\Omega)$. It is nonzero because $\\phi(c)=1$. Each triangle has base length $1/2$, height $1/2$ and area $1/8$; the hat changes from $1$ at $c$ to $0$ across height $1/2$, so $|\\nabla\\phi|=2$ on each cell. Therefore $a(\\phi,\\phi)=8\\cdot\\frac18\\cdot 2^2=4.$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On a triangle, $\\phi$ is the barycentric coordinate of $c$. On the reference triangle $\\{(x,y):x>0,y>0,x+y<1\\}$, direct integration gives $\\int_0^1\\int_0^{1-x}x^2\\,dy\\,dx=\\frac1{12} =\\frac16\\left(\\frac12\\right).$ An affine change of variables preserves the ratio of this integral to the triangle area, so $\\int_{K_j}\\phi^2=|K_j|/6=1/48$. Summing the eight cells gives $b(\\phi,\\phi)=1/6$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $V_h$ is one-dimensional, its sole Ritz value is its Rayleigh quotient, $\\lambda_{h,1}=a(\\phi,\\phi)/b(\\phi,\\phi)=4/(1/6)=24$. By [F2], the continuous first eigenvalue minimizes the same quotient over all nonzero $H^1_0$ functions. Since $\\phi$ is an admissible nonzero function by step 1.1, $\\lambda_1\\le a(\\phi,\\phi)/b(\\phi,\\phi)=24=\\lambda_{h,1}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The square Example explicitly lists eight triangles and a hat with phi(c)=1. Proof1.1 supplies a nonzero conforming trial vector and stiffness4;1.2 sums its eight positive masses to1/6, leaving a one-dimensional rather than empty Ritz space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero trace on every boundary edge and \u03c6(c)=1, so \u03c6 is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the one-dimensional trial span to identify its unique Ritz value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 computes positive mass 1/6 and positive energy 4."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 sum all eight equal-area cells, including boundary edges."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is used for zero-boundary membership; Choice and Countable Choice enter Courant\u2013Fischer in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This P1 Example computes a single Ritz value24 and its conforming upper bound in Proof2.1. Its Remarks explicitly decline to verify the small-gap premise for a quadratic error rate; the example is not a biconditional test of conformity or an asymptotic estimate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This P1 Example computes a single Ritz value24 and its conforming upper bound in Proof2.1. Its Remarks explicitly decline to verify the small-gap premise for a quadratic error rate; the example is not a biconditional test of conformity or an asymptotic estimate."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "The elliptic Courant\u2013Fischer supplier explicitly assumes the Axiom of Choice."
+        },
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "reason": "The zero-boundary and elliptic min\u2013max suppliers explicitly assume Countable Choice."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "eight-triangle P1 fan",
+          "method": "exact cell integral calculation",
+          "input": {
+            "triangles": 8,
+            "area_each": "1/8",
+            "gradient_norm": 2
+          },
+          "calculation": "Stiffness=4, mass=1/6, quotient=24.",
+          "expected": {
+            "stiffness": 4,
+            "mass": "1/6",
+            "ritz_1": 24
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-repeated-eigenvalue-subspace-stable-but-eigenvector-choice-unstable": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).\n\n**The completion convention is the Cauchy-sequence one.**\n[[def-banach-space]] defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness \u2014 the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-compact-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A linear map $T:X\\to Y$\n([[def-linear-map]]) is a **compact operator** when the image of every bounded\nsubset of $X$ ([[def-metric-bounded-diameter]]) has compact closure in $Y$\n([[def-metric-compactness]]); explicitly, for every bounded $A\\subseteq X$ the\nclosure $\\overline{T(A)}$ in $Y$ is a compact subset of $Y$. The set of compact\noperators $X\\to Y$ is written $\\mathcal K(X,Y)$. The metric used here is $d(x,y)=\\|x-y\\|$, supplied over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[lem-complex-norm-realification-is-a-real-norm]].\n\n**The closed unit ball suffices.** Put\n$\\overline B_X:=\\{x\\in X:\\|x\\|\\le 1\\}$\n([[def-metric-ball]]). Then $T$ is compact if and only if\n$\\overline{T(\\overline B_X)}$ is a compact subset of $Y$.\n\nIndeed, if $T$ is compact then $\\overline B_X$ is bounded, because\n$\\overline B_X\\subseteq B(0,2)$ while $B(0,2)$ is bounded and a subset of a\nbounded set is bounded, so $T(\\overline B_X)$ has compact closure. Conversely\nassume $\\overline{T(\\overline B_X)}$ compact and let $A\\subseteq X$ be bounded.\nIf $A=\\varnothing$ then $T(A)=\\varnothing$, whose closure is empty and hence\ncompact. Otherwise $A\\subseteq B(x_0,r)$ for some $x_0\\in X$ and real $r>0$, so\nevery $x\\in A$ satisfies $\\|x\\|\\le\\|x_0\\|+r=:R$; if $R>0$ then\n$A\\subseteq R\\,\\overline B_X$ and if $R=0$ then $A\\subseteq\\{0\\}$, so in either\ncase $T(A)\\subseteq R\\,\\overline{T(\\overline B_X)}$. Scalar multiplication by\n$R$ is continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]),\nso $R\\,\\overline{T(\\overline B_X)}$ is a compact subset of $Y$\n([[thm-compactness-under-continuous-maps]]), hence closed\n([[thm-compact-subset-is-closed-and-bounded]]); therefore\n$\\overline{T(A)}\\subseteq R\\,\\overline{T(\\overline B_X)}$ is a closed subset of a\ncompact set, hence compact, and $T$ is compact.\n\n**A compact operator is bounded.** If $T$ is compact then the compact set\n$\\overline{T(\\overline B_X)}$ is bounded\n([[thm-compact-subset-is-closed-and-bounded]]), so there is a real $C\\ge0$ with\n$\\|Tx\\|\\le C$ for every $x\\in\\overline B_X$ and hence $\\|Tx\\|\\le C\\|x\\|$ for\nevery $x\\in X$; thus $T$ is a bounded linear operator\n([[def-bounded-linear-operator]]). This is a consequence of compactness, not a\nhypothesis of the definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-compact-coercive-form-spectrum-and-minmax",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be an infinite-dimensional\nreal or complex Hilbert space, let $V$ be a real or complex Hilbert space over\nthe same field, and let $J:V\\to H$ be an injective, bounded, compact linear\nmap with dense range ([[def-compact-linear-operator]]). Let\n$a:V\\times V\\to\\mathbb K$ be bounded, Hermitian and coercive with constants\n$M,\\alpha>0$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]).\nThen there is a sequence of eigenpairs $(\\lambda_j,e_j)_{j\\ge1}$ such that\n$$0<\\lambda_1\\le\\lambda_2\\le\\cdots,\\qquad \\lambda_j\\longrightarrow+\\infty,$$\nwhere each eigenvalue is repeated according to multiplicity,\n$e_j\\in V$, $\\|Je_j\\|_H=1$, and\n$$a(e_j,v)=\\lambda_j(Je_j,Jv)_H\\qquad(v\\in V).$$\nThe vectors $Je_j$ form an orthonormal basis of $H$, and\n$e_j/\\sqrt{\\lambda_j}$ form an orthonormal basis of $V$ for the energy inner\nproduct $a$. In particular, for $v\\in V$,\n$$\\|Jv\\|_H^2=\\sum_{j\\ge1}|(Jv,Je_j)_H|^2,\\qquad a(v,v)=\\sum_{j\\ge1}\\lambda_j|(Jv,Je_j)_H|^2,$$\nand the Rayleigh quotient $R(v):=a(v,v)/\\|Jv\\|_H^2$ satisfies the attained\nmin\u2013max identity\n$$\\lambda_m=\\min_{\\substack{S\\subseteq V\\\\\\dim S=m}} \\max_{v\\in S\\setminus\\{0\\}}R(v)\\qquad(m\\ge1).$$\nThis is the abstract continuous spectral interface used below. The published\nelliptic suppliers on the Dirichlet branch have their own stated domain and\naxiom hypotheses; this theorem does not enlarge those imported interfaces.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-eigenspace-best-approximation-gap",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real or complex Hilbert space with a bounded, Hermitian,\ncoercive form $a$ as in [[def-bounded-coercive-and-symmetric-sesquilinear-forms]].\nIts energy norm is $\\|v\\|_a:=\\sqrt{a(v,v)}$. Let $E\\subseteq V$ be a\nnonzero finite-dimensional subspace and let $V_h\\subseteq V$ be a\nfinite-dimensional subspace. Define the directed energy distance and\nbest-approximation gap by\n$$d_a(v,V_h):=\\inf_{w_h\\in V_h}\\|v-w_h\\|_a,\\qquad \\delta_a(E,V_h):=\\sup_{\\substack{v\\in E\\\\\\|v\\|_a=1}}d_a(v,V_h).$$\nWhen $E=\\operatorname{span}\\{e_1,\\ldots,e_m\\}$ is the first $m$\ncontinuous eigenspace directions and $V_h$ is the conforming Galerkin space,\nwrite $\\delta_h:=\\delta_a(E,V_h)$. This is a directed gap from $E$ to $V_h$;\nit does not by itself assert a two-sided gap between two eigenspaces.\n\nThe quantity is finite and satisfies $0\\le\\delta_a(E,V_h)\\le1$, since\n$0\\in V_h$ gives $d_a(v,V_h)\\le\\|v\\|_a$ on the unit sphere.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-conforming-galerkin-eigenspace-gap-under-isolated-cluster",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the compact coercive form setting of\n[[thm-compact-coercive-form-spectrum-and-minmax]]. Suppose a continuous\neigenvalue $\\lambda$ occupies the isolated cluster of indices\n$r,\\ldots,s$, so $\\lambda_r=\\cdots=\\lambda_s=\\lambda$ and\n$\\lambda_{s+1}>\\lambda$, with $\\lambda_{r-1}<\\lambda$ when $r>1$. Let\n$E:=\\operatorname{span}\\{e_r,\\ldots,e_s\\}$,\n$E_s:=\\operatorname{span}\\{e_1,\\ldots,e_s\\}$, and let\n$V_h\\subseteq V$ be conforming with $\\dim V_h\\ge s$. Put\n$\\delta_s:=\\delta_a(E_s,V_h)$ using\n[[def-eigenspace-best-approximation-gap]]. If $\\delta_s$ is sufficiently\nsmall that the eigenvalue theorem\n[[thm-conforming-galerkin-eigenvalue-upper-bound-quadratic-gap-error]] applies\nat index $s$ and, when $r>1$, at index $r-1$, and\n$C_s\\delta_s^2<\\tfrac12(\\lambda_{s+1}-\\lambda)$ and, when $r>1$,\n$C_{r-1}\\delta_s^2<\\tfrac12(\\lambda-\\lambda_{r-1})$, then\nthe discrete Ritz eigenspace $E_h$ associated with indices $r,\\ldots,s$ has\ndimension $s-r+1$ and\n$$\\delta_a(E,E_h)\\le C_{r,s,\\lambda}\\,\\delta_s.$$\nThis compares the invariant subspaces across the whole repeated eigenvalue;\nit does not select individual eigenvectors inside the cluster.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-totally-bounded",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $\\varepsilon$ be a\nreal with $\\varepsilon > 0$.\n\n- A **finite $\\varepsilon$-net** for $(X,d)$ is a finite subset $F \\subseteq X$\n  with\n  $$X = \\bigcup_{y \\in F} B(y, \\varepsilon) ,$$\n  the balls being those of $(X,d)$ ([[def-metric-ball]]). *Finite* is the\n  listing form fixed in [[def-metric-compactness]]: $F = \\emptyset$, or\n  $F = \\{y_0, \\dots, y_m\\}$ for some $m \\in \\mathbb{N}$ and points\n  $y_0, \\dots, y_m \\in X$.\n- $(X,d)$ is **totally bounded** when it has a finite $\\varepsilon$-net for every\n  real $\\varepsilon > 0$.\n- A subset $A \\subseteq X$ is **totally bounded** when the metric subspace\n  $(A,d_A)$ is ([[def-isometry-and-metric-embedding]]); its nets are then finite\n  subsets of $A$ and its balls are the balls $B_A(a,\\varepsilon)$ of the\n  subspace.\n\n**The empty space is totally bounded**, the empty net serving for every\n$\\varepsilon$, since a union over no indices is empty. Every space listed as\n$\\{x_0, \\dots, x_n\\}$ is totally bounded too, itself being an $\\varepsilon$-net\nfor every $\\varepsilon$.\n\n**The centres are required to lie in the space.** Writing the condition with\ncentres in $X$ and balls of $X$ is what makes total boundedness a property of the\nmetric space $(X,d)$ alone, matching the treatment of compactness in\n[[def-metric-compactness]]. For a subset $A$ this matters: the nets of $(A,d_A)$\nconsist of points of $A$, not of nearby points of the ambient space.\n\n**Total boundedness is stronger than boundedness and is not the same thing.**\nA totally bounded space is bounded in the sense of\n[[def-metric-bounded-diameter]] \u2014 that is claim 1 of\n[[lem-totally-bounded-basic]] \u2014 and the converse fails, as\n[[fs-bounded-implies-totally-bounded]] records. Boundedness asks for one ball\ncontaining the space; total boundedness asks for finitely many balls of *every*\nprescribed radius, and it is the second condition that controls how spread out\nthe space is at small scales.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complete-and-totally-bounded-implies-compact",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** ([[def-countable-choice]]). Let $(X,d)$\nbe a metric space ([[def-metric-space]]) that is complete\n([[def-complete-metric-space]]) and totally bounded ([[def-totally-bounded]]).\nThen $(X,d)$ is compact ([[def-metric-compactness]]).\n\n**Where the axiom is spent, and why the weaker principle suffices.**\n$\\mathrm{AC}_\\omega$ is used exactly once, at step 3.1, to fix one finite\n$1/(n+1)$-net **together with a listing of it** for every $n \\in \\mathbb{N}$ at\nonce. The family of sets being chosen from is written down before any selection\nis made and does not depend on the earlier selections, which is precisely the\nsituation countable choice covers and dependent choice\n([[def-dependent-choice]]) is not needed for. Everything after step 3.1 is\ncanonical: at each stage the construction takes the **least** admissible index in\nthe listing already fixed.\n\nAs always on this page, the claim is an upper bound on the cost of the proof\ngiven here, not an assertion that $\\mathrm{AC}_\\omega$ is necessary for the\ntheorem.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-compact-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A linear map $T:X\\to Y$\n([[def-linear-map]]) is a **compact operator** when the image of every bounded\nsubset of $X$ ([[def-metric-bounded-diameter]]) has compact closure in $Y$\n([[def-metric-compactness]]); explicitly, for every bounded $A\\subseteq X$ the\nclosure $\\overline{T(A)}$ in $Y$ is a compact subset of $Y$. The set of compact\noperators $X\\to Y$ is written $\\mathcal K(X,Y)$. The metric used here is $d(x,y)=\\|x-y\\|$, supplied over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[lem-complex-norm-realification-is-a-real-norm]].\n\n**The closed unit ball suffices.** Put\n$\\overline B_X:=\\{x\\in X:\\|x\\|\\le 1\\}$\n([[def-metric-ball]]). Then $T$ is compact if and only if\n$\\overline{T(\\overline B_X)}$ is a compact subset of $Y$.\n\nIndeed, if $T$ is compact then $\\overline B_X$ is bounded, because\n$\\overline B_X\\subseteq B(0,2)$ while $B(0,2)$ is bounded and a subset of a\nbounded set is bounded, so $T(\\overline B_X)$ has compact closure. Conversely\nassume $\\overline{T(\\overline B_X)}$ compact and let $A\\subseteq X$ be bounded.\nIf $A=\\varnothing$ then $T(A)=\\varnothing$, whose closure is empty and hence\ncompact. Otherwise $A\\subseteq B(x_0,r)$ for some $x_0\\in X$ and real $r>0$, so\nevery $x\\in A$ satisfies $\\|x\\|\\le\\|x_0\\|+r=:R$; if $R>0$ then\n$A\\subseteq R\\,\\overline B_X$ and if $R=0$ then $A\\subseteq\\{0\\}$, so in either\ncase $T(A)\\subseteq R\\,\\overline{T(\\overline B_X)}$. Scalar multiplication by\n$R$ is continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]),\nso $R\\,\\overline{T(\\overline B_X)}$ is a compact subset of $Y$\n([[thm-compactness-under-continuous-maps]]), hence closed\n([[thm-compact-subset-is-closed-and-bounded]]); therefore\n$\\overline{T(A)}\\subseteq R\\,\\overline{T(\\overline B_X)}$ is a closed subset of a\ncompact set, hence compact, and $T$ is compact.\n\n**A compact operator is bounded.** If $T$ is compact then the compact set\n$\\overline{T(\\overline B_X)}$ is bounded\n([[thm-compact-subset-is-closed-and-bounded]]), so there is a real $C\\ge0$ with\n$\\|Tx\\|\\le C$ for every $x\\in\\overline B_X$ and hence $\\|Tx\\|\\le C\\|x\\|$ for\nevery $x\\in X$; thus $T$ is a bounded linear operator\n([[def-bounded-linear-operator]]). This is a consequence of compactness, not a\nhypothesis of the definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $U:V\\to\\ell^2$ given by $(Uu)_j=\\sqrt{\\lambda_j}u_j$ is a surjective isometry, so $V$ is Hilbert and $a$ is its inner product. Since $\\lambda_j\\ge1$, $a(u,u)\\ge\\|Ju\\|_H^2$, and $a(u,u)=\\|u\\|_V^2$; hence the form is coercive and bounded. Finite sequences lie in $V$ and are dense in $H$, so $J$ is injective with dense range.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $B_V:=\\{u\\in V:\\|u\\|_V\\le1\\}$. For any $\\varepsilon>0$, choose $N$ so $1/\\sqrt{\\lambda_{N+1}}<\\varepsilon/2$. If $x=Ju$ with $u\\in B_V$, then $\\sum_{j>N}|x_j|^2=\\sum_{j>N}|u_j|^2\\le\\lambda_{N+1}^{-1}\\sum_{j>N}\\lambda_j|u_j|^2\\le\\lambda_{N+1}^{-1}$. The set $C_N:=\\{(z_1,\\ldots,z_N)\\in\\mathbb K^N:\\sum_{j\\le N}\\lambda_j|z_j|^2\\le1\\}$ is closed and bounded in $\\mathbb R^N$ (if $\\mathbb K=\\mathbb R$) or $\\mathbb R^{2N}$ (if $\\mathbb K=\\mathbb C$), so it is compact by Heine--Borel and has a finite $\\varepsilon/2$-net with centers in $C_N$. Each center $z$ lifts by zero padding to $\\widetilde z=(z_1,\\ldots,z_N,0,\\ldots)\\in J(B_V)$, because its weighted energy is at most one. For $x=Ju\\in J(B_V)$, the prefix $(x_1,\\ldots,x_N)$ belongs to $C_N$; the net and the tail bound therefore give $\\|x-\\widetilde z\\|_{\\ell^2}<\\varepsilon$ for one of these finitely many lifts. Thus $J(B_V)$ is totally bounded with centers in itself. Its closure $C:=\\overline{J(B_V)}$ is also totally bounded: a finite $\\varepsilon/2$-net for $J(B_V)$ is an $\\varepsilon$-net for $C$ by the triangle inequality and the definition of closure. The set $C$ is complete because it is closed in the complete Hilbert space $H$: every Cauchy sequence in $C$ converges in $H$, and closedness keeps its limit in $C$. By [F4], $C$ is compact. The unit-ball criterion in [[def-compact-linear-operator]] now shows that $J$ is compact.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Each coordinate vector $e_j$ satisfies $a(e_j,v)=\\lambda_j(Je_j,Jv)_H$. For any nonzero $u\\in V$, $\\frac{a(u,u)}{\\|Ju\\|_H^2} =\\frac{\\sum_j\\lambda_j|u_j|^2}{\\sum_j|u_j|^2}\\ge1,$ with equality exactly when $u_j=0$ for all $j\\ge3$. Therefore the first eigenvalue is $1$, its full eigenspace is $E$, and the next eigenvalue is $3$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The restriction of the continuous form to $V_h=E$ is the identity form, so both Ritz values are $1$ and the full cluster eigenspace is $E_h=E$. For every $u\\in E$, $u\\in V_h$, so the definition [F2] gives $\\delta_a(E,V_h)=0$; likewise the gap from $E$ to $E_h$ is zero. The cluster theorem [F3] therefore applies with $r=1,s=2$ and its gap conclusion is attained exactly.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each $h$, choose $u_h=e_1$ when $h$ is an even positive integer and $u_h=e_2$ when $h$ is odd. Both are unit Ritz eigenvectors for the same repeated eigenvalue $1$. Their successive energy distances are $\\|e_1-e_2\\|_a=\\sqrt2$, so $(u_h)$ is not Cauchy and cannot converge. This does not contradict step 2.1: the invariant subspace remains exactly $E$, while the repeated eigenspace supplies no preferred basis vector.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Its sequence space is indexed by j>=1 and its cluster is E=span(e_1,e_2). Proof1.2 includes finite prefixes plus infinite tails,3.1 uses the fixed two-dimensional trial space, and4.1 gives an explicitly nonempty positive-integer alternating sequence."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives \u03b4_a(E,V_h)=0 and E_h=E exactly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 gives two distinct unit eigenvector choices inside the double cluster."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 shows \u03bb_3=3 is separated from the double eigenvalue 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The tail estimate in step 1.2 tends to zero and step 2.1 permits \u03b4_s=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is used for the diagonal subsequence in step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The repeated-eigenvalue Example contrasts exact subspace agreement with a nonconvergent eigenvector sequence. Proof3.1 gives gap0 and4.1 alternates two distinct vectors; it does not assert gap0 iff every chosen eigenvector converges."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The repeated-eigenvalue Example contrasts exact subspace agreement with a nonconvergent eigenvector sequence. Proof3.1 gives gap0 and4.1 alternates two distinct vectors; it does not assert gap0 iff every chosen eigenvector converges."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "reason": "Countable Choice is explicit in the compact-form spectrum and used for diagonal subsequence selection."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "alternating unit vectors in a double eigenspace",
+          "method": "exact norm calculation",
+          "input": {
+            "eigenvectors": [
+              "e1",
+              "e2"
+            ],
+            "energy_orthonormal": true
+          },
+          "calculation": "Both have eigenvalue 1, their distance is \u221a2, and the subspace gap is zero.",
+          "expected": {
+            "gap": 0,
+            "distance": "sqrt(2)"
+          }
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

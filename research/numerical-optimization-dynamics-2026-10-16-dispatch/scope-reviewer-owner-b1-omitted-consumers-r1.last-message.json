@@ -1,0 +1,535 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "1",
+  "round": 1,
+  "reviewed_items": [
+    "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "alg-balanced-pairwise-summation",
+    "alg-two-sum-error-free-transform",
+    "alg-two-product-fma-error-free-transform",
+    "alg-kahan-compensated-summation",
+    "alg-neumaier-compensated-summation",
+    "alg-rounded-cholesky-with-failure-status",
+    "alg-scaled-householder-reflector-formation-and-application",
+    "alg-bounded-mixed-precision-iterative-refinement",
+    "thm-balanced-pairwise-summation-error-bound",
+    "lem-binary-rounding-grid-and-ordered-two-sum",
+    "thm-two-sum-error-free-transform",
+    "thm-two-product-fma-error-free-transform",
+    "thm-kahan-and-neumaier-finite-error-identities",
+    "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+    "lem-scaled-householder-step-meets-local-backward-error-premise",
+    "thm-mixed-precision-refinement-error-recurrence-and-floor",
+    "thm-scaled-householder-qr-backward-stability",
+    "thm-computed-full-rank-least-squares-backward-stability",
+    "lem-rounded-triangular-substitution-componentwise-backward-error",
+    "lem-rounded-linear-and-normal-residual-certificates",
+    "ex-subnormal-and-overflow-range-failure",
+    "ex-neumaier-recovers-low-order-term-after-cancellation",
+    "ex-rounded-cholesky-two-by-two-residual",
+    "ex-two-sum-recovers-a-rounded-away-low-part",
+    "ex-full-rank-least-squares-normal-equations-versus-qr",
+    "ex-ill-conditioned-design-stability-versus-forward-error"
+  ],
+  "reviewed_pages": [
+    "finite-precision-direct-factorizations",
+    "finite-precision-direct-factorizations-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Read-only external owner continuation: all 86 supplied actual-cone items received individual use dispositions below. The original inventory and both complete pages were reread. Correct prior dispositions are retained; identified incorrect dispositions are explicitly superseded. Additional checks preserve the prior residual-lemma/page dispositions and record the newly identified Neumaier consumer obligation. Excluded false-positive paths receive no mathematical acceptance. No files, native results, history, counters, metadata or controls were changed. This receipt completes the omitted-consumer diagnosis without constituting a new native engine round or final whole-batch acceptance. The following proposals require owner authorization and source-before-consumer reconciliation.",
+  "findings": [
+    {
+      "id": "alg-finite-budget-francis-schur-reduction",
+      "type": "prerequisite",
+      "reason": "Definition's common right-update paragraph and steps 1/4 append P(v)=I-2vv*/(v*v) without excluding an identity formation. A zero real target returns the identity marker with v=0; the complex wrapper also permits a zero-column identity return. Example: Hessenberg initialization of a diagonal 3-by-3 matrix encounters a zero target. Proposed repair: before each real/complex formation, including external polynomial vectors, branch on zero target; copy the affected matrix panels, skip both updates, append I, and record zero arithmetic coefficient. Only a nonidentity successful formation may evaluate P(v). Preserve deflation bookkeeping. Qualify alg-complex-scaled-householder-reflector-step Proof 1.2's nonzero-vector argument as applying to its nonzero formation branch. Then recheck the concrete Francis certificate, delegated Schur callers and operation-count theorem listed below."
+    },
+    {
+      "id": "thm-computed-full-rank-least-squares-backward-stability",
+      "type": "local",
+      "reason": "Statement's final 20gamma clause remains ambiguous, and Proof 3.1 proves only the explicit matrix coefficient beta_Q+gamma_(n+3)(1+beta_Q). Replacing gamma by 20gamma proves beta_Q+20gamma_(n+3)(1+beta_Q), not a raw total bound 20gamma_(n+3). The controlling NA-02 design in plan-numerical-linear-track.md and linear-audit.md specifies the beta_Q route and does not require a raw total 20gamma bound. Proposed repair: retain all explicit perturbation, alternative RHS-evaluation and nonsingularity conclusions; replace the ambiguous sentence by the explicitly weaker matrix coefficient beta_Q+20gamma_(n+3)(1+beta_Q), leaving the RHS coefficient beta_b explicit. If the owner instead intends a raw total 20gamma promise, it needs an additional proved inequality under stated hypotheses. No counterexample to that stronger mathematical claim is asserted here."
+    },
+    {
+      "id": "alg-bounded-mixed-precision-iterative-refinement",
+      "type": "scope",
+      "reason": "The counter initialization occurs after the 'For each k=0,...,N' residual paragraph and before the status tests, so the literal loop resets the preceding residual to undefined on every iteration. The successful-stagnation branch cannot then be reached. Proposed repair: move initialization of c_stag and preceding-residual storage before the iteration loop, explicitly retain them across iterations, and define c_stag as the number of consecutive equalities between adjacent computed residual vectors. This preserves the approved finite stagnation status and its limited certificate. The error recurrence remains conditional on accepted residual/update certificates and does not require stagnation."
+    },
+    {
+      "id": "thm-kahan-and-neumaier-finite-error-identities",
+      "type": "local",
+      "reason": "The Neumaier identity and Proof 1.2 incorrectly retain epsilon_i^t. Substitution gives t_i+a_i=s_(i-1)+x_i+epsilon_i^q+epsilon_i^a: the leading-sum rounding error cancels. The assigned binary64 example (1,2^-53,-1) has epsilon_2^t=-2^-53 and all other displayed local errors zero, yet returns the exact sum, contradicting the stated identity. Proposed repair: remove epsilon_i^t from the Neumaier exact identity and its telescoping proof. Preserve the Kahan identity and the existing conservative u sum P_i plus final-rounding bound; the latter still follows by bounding the remaining errors and retaining its extra nonnegative allowance. Recheck ex-neumaier-recovers-low-order-term-after-cancellation and the A-page summary; its numerical calculation remains valid."
+    },
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "type": "local",
+      "reason": "The augmented matrix construction and Gauss-Newton call precede the attempt loop, while rejection changes lambda and continues. The instructions do not explicitly recompute the step for the new damping, although the large-damping lemma and stationarity theorem require that solve on every trial. Proposed repair: put construction of A_lambda, s_lambda and the solver call at the beginning of each attempt using the current lambda. Also perform the predicted-decrease test for every returned candidate, including p=0; the present 'For a nonzero trial' wording leaves pred undefined for a zero computed candidate without a zero-gradient certificate. Keep exact-solve convergence separate from computed-candidate statuses. Recheck the large-damping lemma, global stationarity theorem and one-trial rank-deficient example afterward."
+    },
+    {
+      "id": "lem-rosenbrock-euler-local-defect",
+      "type": "prerequisite",
+      "reason": "This lemma's F1/Proof 1.1, lem-rosenbrock-euler-step-map-lipschitz F1, thm-rosenbrock-euler-global-first-order F1/F2, thm-rosenbrock-euler-a-l-stable F1, thm-rosenbrock-euler-one-newton-step-for-backward-euler F1, and ex-rosenbrock-euler-stiff-linear-damping F1 treat the rounded algorithm as an exact stage solve whenever the shifted matrix is invertible. Its current contract returns residual-certified approximations or representation/failure statuses; invertibility supplies neither an exact returned solve nor success. The complex scalar use in the older stability theorem also exceeds the real backend's domain. Proposed repair: route these exact-method claims through def-rosenbrock-euler-step-map with gamma=1, explicitly use exact stage equations, and prove the scalar complex extension algebraically. For thm-rosenbrock-euler-global-first-order's sharper C0=FL(B+1/2), use the autonomous specialization of lem-rosenbrock-euler-local-defect-and-residual-error with zero residual, delta=0 and M1=LF, or author the integral remainder giving LFh^2/2; its presently cited older lemma supplies only FL(B+1). Do not attach these exact conclusions to general rounded outputs. thm-rosenbrock-euler-scalar-a-and-l-stability's core proof already uses the exact definition, but its F2 also needs this qualification."
+    },
+    {
+      "id": "ex-two-stage-rosenbrock-factorization-reuse",
+      "type": "local",
+      "reason": "The prior acceptance is superseded. Proof 1.1's assertion that every nonzero intermediate belongs to the listed values through magnitude 4 is false during RHS replay: v=2 and RHS component -4 produce dot -8, and the update also uses magnitude 8. The stated format need not include 8 in its normal range. Proposed repair: explicitly require the displayed dyadic values through +/-8 to be normal and update the finite-intermediate verification. A sufficiently precise binary format with maximum binade [4,8) satisfies the current listed-value and roundoff hypotheses but rejects the exact intermediate -8, so unconditional success under the present hypotheses is unjustified. Recheck both RHS replays and residual allowances; the operation-count proposition remains conditional on success."
+    },
+    {
+      "id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+      "type": "prerequisite",
+      "reason": "The input declares arbitrary real K,b, but the invoked Householder procedure and residual certificate require stored entries. The rounded triangular factors and transformed RHS meet the repaired substitution lemma's stored-entry premise; the missing premise is at entry to the factorization and residual evaluation. Proposed repair preserving the intended-data certificate: add an exact storage-admissibility check for K,b before QR, returning numerical-failure when unavailable, so accepted stored values equal the intended K,b. Alternatively, a rounded conversion requires explicit matrix/RHS conversion-defect allowances before claiming the original-system residual bound. Recheck the SQP soundness theorem and both FE active-set consumers after this source repair."
+    },
+    {
+      "id": "ex-nonzero-residual-gauss-newton-is-only-linear",
+      "type": "local",
+      "reason": "Verification 1.1 contains the false intermediate equality J(x)^Tr(x)=x+3x/2+x^3/2=3x/2+x^3/2. Replace the middle expression by x+x/2+x^3/2. The final gradient, update formula, contraction calculation and linear-rate conclusion are otherwise consistent with the exact Gauss-Newton supplier."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-bartels-stewart-sylvester-equation",
+      "decision": "escalate",
+      "reason": "Definition step 1 delegates both reductions to Francis, so its executable route inherits the missing identity branch. Step 2's exact Schur checks correctly prevent a rounded candidate from becoming an exact factorization. Repair Francis first; preserve these checks."
+    },
+    {
+      "id": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+      "decision": "accept",
+      "reason": "Step 1 supplies real stored SPD B to the clarified Cholesky recurrence and propagates pivot/operation failure. The subsequent computed triangular direction carries no backward-error claim."
+    },
+    {
+      "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "decision": "accept",
+      "reason": "The convex-QP route delegates to the primal-dual algorithm and preserves its statuses. Only certified-gap is translated into an exact gap certificate; residual-candidate remains diagnostic."
+    },
+    {
+      "id": "alg-fem-control-active-set-sqp-with-finite-residual-status",
+      "decision": "escalate",
+      "reason": "Step 2 forms an intended KKT matrix/RHS and delegates to the SQP QR solver. Its stored-input admission gap must be repaired upstream. The Remarks correctly distinguish a linear step-equation residual from a nonlinear next-point KKT residual."
+    },
+    {
+      "id": "alg-finite-budget-francis-schur-reduction",
+      "decision": "escalate",
+      "reason": "The common update instructions and steps 1/4 evaluate the stored-vector representative without an identity guard. Zero targets require skipped left/right updates, factor I and zero arithmetic coefficient in both real and complex routes."
+    },
+    {
+      "id": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "decision": "accept",
+      "reason": "Rounded-Cholesky mode propagates factor/solve failure and checks descent before line search. Exact direction mode and exact BFGS updates are explicitly separated; no rounded-direction convergence theorem is imported."
+    },
+    {
+      "id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "decision": "accept",
+      "reason": "Computed QR passes stored J and -r as a combined panel, consumes returned C_+, and labels rank/solve failures or candidates separately. Its LS stability attachment explicitly requires all theorem hypotheses; no raw 20gamma coefficient is used."
+    },
+    {
+      "id": "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+      "decision": "accept",
+      "reason": "Newton coefficients/RHS are converted to stored values before QR. Successful substitution uses stored R and transformed RHS; zero pivots/range failures exit. The explicit inverse-norm test supplies perturbed-factor nonsingularity, and exact direction residuals/gap audits remain separate from numerical candidates."
+    },
+    {
+      "id": "alg-principal-matrix-logarithm-and-square-root",
+      "decision": "escalate",
+      "reason": "Step 1's complex Francis invocation inherits its zero-target execution gap. The subsequent exact Schur and branch-domain checks are sound and should be retained after the supplier repair."
+    },
+    {
+      "id": "alg-revised-simplex-qr-basis-recompute-and-audit",
+      "decision": "accept",
+      "reason": "Step 2 explicitly records/skips identity markers and follows the clarified reflector replay and descending solve. Step 3 uses beta+gamma(1+beta), certified bounds and current stored matrices; exact pivot/audit checks do not infer signs from unvalidated floating solves."
+    },
+    {
+      "id": "alg-riemannian-armijo-backtracking",
+      "decision": "accept",
+      "reason": "Trials use the exact QR/polar retraction definition and its first-order property. The path through the finite-precision QR theorem terminates at a contextual Remark; no rounded-Q orthogonality or retraction guarantee is transferred."
+    },
+    {
+      "id": "alg-riemannian-trust-region",
+      "decision": "accept",
+      "reason": "The retraction calls are exact manifold maps. Its Cauchy fallback, positive predicted decrease and finite-cap statuses do not depend on rounded Householder accuracy."
+    },
+    {
+      "id": "alg-rosenbrock-euler-step",
+      "decision": "accept",
+      "reason": "Steps 1/2 require exact store checks before using the real QR backend, preserve backend failure statuses and return a certified equation residual. Outer evaluation/update arithmetic is explicitly exact; the procedure does not assert an exact computed stage."
+    },
+    {
+      "id": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+      "decision": "accept",
+      "reason": "Stored M/RHS satisfy the Householder domain. A zero active column writes a zero diagonal, so step 2 returns singular-factor before a factor object can replay that identity tuple. Successful solves receive independent residual certificates."
+    },
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "decision": "escalate",
+      "reason": "The augmented QR supplier is used correctly for one fixed lambda, but the call is outside the rejection loop. Rebuild and resolve at each current damping, and define the predicted-decrease branch for zero computed candidates before applying repeated-trial results."
+    },
+    {
+      "id": "alg-schur-parlett-matrix-function",
+      "decision": "escalate",
+      "reason": "Step 1 and delegated Bartels-Stewart calls require the Francis identity repair. Exact Schur identities and exact successful block solves remain explicit admission conditions; no floating stability claim is transferred."
+    },
+    {
+      "id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+      "decision": "escalate",
+      "reason": "Its beta_K derivation uses the sound explicit LS equations, but K,b are not explicitly admitted as stored inputs for Householder/residual evaluation. Add exact storage admission or certified conversion allowances first; retain the minimum of the two residual upper bounds."
+    },
+    {
+      "id": "alg-two-stage-rosenbrock-w-method",
+      "decision": "accept",
+      "reason": "Every shifted matrix and RHS must pass exact store checks. Both solves reuse the same factor object and preserve residual/failure statuses; exact stage formulas and rounded solve errors are explicitly distinguished."
+    },
+    {
+      "id": "cex-approximate-jacobian-breaks-stiff-damping",
+      "decision": "accept",
+      "reason": "The counterexample explicitly evaluates exact stage equations with W=1. Its amplification 5 and exact-J comparison do not claim successful rounded execution or inherit a QR accuracy assertion."
+    },
+    {
+      "id": "cex-omitting-rosenbrock-stage-correction-loses-order-two",
+      "decision": "accept",
+      "reason": "The altered exact equations are defined independently and contrasted with the supplier's proper second-stage RHS/output formulas. The expansion does not assume a rounded solve is exact."
+    },
+    {
+      "id": "cor-l2-inverse-error-budget-and-cross-term-condition",
+      "decision": "accept",
+      "reason": "F1 uses only the exact finite Tikhonov decomposition. Measurability, L2 integrability and aggregate cross-term conditions are explicit; no QR coefficient or numerical-success premise is imported."
+    },
+    {
+      "id": "def-stiefel-grassmann-projected-vector-transport",
+      "decision": "accept",
+      "reason": "F2 consumes exact orthonormal retraction endpoints and polar equivariance. The projected tangent formulas do not apply the rounded Householder procedure or transfer its backward bound into exact orthogonality."
+    },
+    {
+      "id": "def-stiefel-qr-polar-retractions",
+      "decision": "accept",
+      "reason": "Definition/Proof use exact full-rank QR and positive square roots. The final Remark uses the rounded QR theorem only to delimit finite-precision claims; the exact represented versus rounded dense Q distinction is preserved."
+    },
+    {
+      "id": "ex-bfgs-powell-damping-after-negative-curvature",
+      "decision": "accept",
+      "reason": "F4 is used to explain why the displayed negative-curvature trial is rejected by strong Wolfe. The damping calculation is exact update algebra and does not invoke rounded Cholesky."
+    },
+    {
+      "id": "ex-bfgs-secant-on-a-strongly-convex-quadratic",
+      "decision": "accept",
+      "reason": "The example supplies an exact direction and exact admissible Wolfe step. Its explicit secant/SPD verification uses exact BFGS updates, with no assertion that a rounded direction or finite search returns that step."
+    },
+    {
+      "id": "ex-exponential-kinetics-gauss-newton-fit",
+      "decision": "accept",
+      "reason": "At the exact fit, the determinant is nonzero and the exact linearized minimizer is zero. F1 selects the exact full-rank branch; no computed QR success or coefficient is needed."
+    },
+    {
+      "id": "ex-finite-basis-projector-optimization-on-grassmann",
+      "decision": "accept",
+      "reason": "The example uses the exact complex polar retraction and Cauchy fallback. Its compact tangent-disk argument supplies pullback regularity; the real rounded-QR path is contextual and supplies no constraint-preservation claim."
+    },
+    {
+      "id": "ex-full-rank-least-squares-normal-equations-versus-qr",
+      "decision": "accept",
+      "reason": "The Gram rounding calculation is independent of QR. F2 invokes computed stability only conditionally and uses no disputed raw 20gamma bound."
+    },
+    {
+      "id": "ex-ill-conditioned-design-stability-versus-forward-error",
+      "decision": "accept",
+      "reason": "The diagonal inverse/condition and RHS sensitivity are verified exactly. F2 supplies only the qualitative conditional backward-error interpretation, without the ambiguous 20gamma clause."
+    },
+    {
+      "id": "ex-lbfgs-memory-dependent-cost",
+      "decision": "accept",
+      "reason": "F3 supplies the two dense BFGS matrices for the storage comparison. The example explicitly excludes operation-total and convergence-rate transfer; optional Cholesky execution is not used."
+    },
+    {
+      "id": "ex-lp-primal-dual-residual-and-gap",
+      "decision": "accept",
+      "reason": "F1 supplies residual formulas, not an algorithm-run claim. The boundary slack and rational candidate are checked directly for exact feasibility and gap; no strict-start or QR premise is needed for this calculation."
+    },
+    {
+      "id": "ex-nonzero-residual-gauss-newton-is-only-linear",
+      "decision": "escalate",
+      "reason": "The exact full-rank supplier supports the final scalar normal equation and update, but Verification 1.1 contains the false intermediate gradient equality identified above. Correct that expression; the linear-rate conclusion survives."
+    },
+    {
+      "id": "ex-quadrature-discretization-residual-before-inversion",
+      "decision": "accept",
+      "reason": "The exact scalar five-term chain sums to 81/461, with the forward residual counted once. It uses no computed augmented-QR guarantee or 20gamma clause."
+    },
+    {
+      "id": "ex-rank-deficient-identifiability-and-lm-step",
+      "decision": "accept",
+      "reason": "The rank-deficient exact Gauss-Newton status and one exact lambda=1 augmented LM trial are checked directly. The trial has positive predicted decrease, ratio 1 and an interior step; it does not require the defective repeated-rejection branch."
+    },
+    {
+      "id": "ex-rosenbrock-euler-stiff-decay-and-backward-euler",
+      "decision": "accept",
+      "reason": "The example explicitly declares exact arithmetic and uses def-rosenbrock-euler-step-map for 1/101. It does not claim that the rounded implementation returns this exact rational value."
+    },
+    {
+      "id": "ex-rosenbrock-euler-stiff-linear-damping",
+      "decision": "escalate",
+      "reason": "F1 attributes the exact stage -10/3 to the rounded algorithm, and F2 uses the older stability theorem with the same contract mismatch. Route this exact example through the gamma=1 mathematical step definition; retain its valid 1/3 calculation."
+    },
+    {
+      "id": "ex-rotation-logarithm-branch-cut",
+      "decision": "accept",
+      "reason": "The specific n=2, zero-sweep route has no Hessenberg reflectors and returns Q=I,T=-I exactly. Its branch-domain rejection does not encounter the Francis zero-reflector gap."
+    },
+    {
+      "id": "ex-rounded-cholesky-two-by-two-residual",
+      "decision": "accept",
+      "reason": "The clarified real recurrence still gives exact pivots 1 and 3/4, followed by the rounded irrational square root. The explicit nonzero residual and conditional Cholesky bound remain applicable."
+    },
+    {
+      "id": "ex-subnormal-and-overflow-range-failure",
+      "decision": "accept",
+      "reason": "Both examples have two leaves and one root operation. The deterministic padded-tree clarification preserves exactly the stated subnormal/overflow failure branches."
+    },
+    {
+      "id": "ex-tikhonov-bias-noise-tradeoff",
+      "decision": "accept",
+      "reason": "The scalar bias/noise values come from the exact finite Tikhonov identity. No backend solve or floating-point error claim is consumed."
+    },
+    {
+      "id": "ex-two-stage-rosenbrock-factorization-reuse",
+      "decision": "escalate",
+      "reason": "The factorization/RHS replay uses magnitude-8 intermediates absent from the format hypothesis. Require +/-8 normal and revise the finite-intermediate verification before claiming both solves succeed; the prior acceptance is superseded."
+    },
+    {
+      "id": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+      "decision": "accept",
+      "reason": "The backend uses stored real augmented data or norm-preserving realification. Its sufficient nonsingularity margin uses explicit beta_Q and triangular perturbation bounds. The output certificate independently bounds the intended normal residual and includes square-root/data-coordinate allowances."
+    },
+    {
+      "id": "lem-full-memory-bfgs-dennis-more-condition",
+      "decision": "accept",
+      "reason": "F2 and the Statement restrict the run to exact-undamped BFGS. The direction equation and potential argument do not consume the optional rounded-Cholesky direction contract."
+    },
+    {
+      "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+      "decision": "escalate",
+      "reason": "The single-trial inequalities assume the exact solve for its current lambda and remain valid. Proof 4.1 transfers them to successive algorithm attempts, requiring the missing rebuild/resolve after each damping increase. Repair the algorithm first."
+    },
+    {
+      "id": "lem-riemannian-trust-region-ratio-accuracy-for-small-radii",
+      "decision": "accept",
+      "reason": "F1 uses exact first-order retractions; F2 uses the exact model/Cauchy safeguard. The pullback ratio estimate does not depend on numerical QR or exact orthogonality of a rounded dense Q."
+    },
+    {
+      "id": "lem-rosenbrock-euler-local-defect",
+      "decision": "escalate",
+      "reason": "F1 and Proof 1.1 replace a successful rounded stage by M^-1 f without a zero-residual premise. Use the exact gamma=1 step definition for this exact-method defect bound."
+    },
+    {
+      "id": "lem-rosenbrock-euler-local-defect-and-residual-error",
+      "decision": "accept",
+      "reason": "The proof distinguishes the exact map from a computed stage and explicitly derives their difference as the shifted inverse times the stage residual. The inverse and Jacobian-approximation allowances cover the backend use."
+    },
+    {
+      "id": "lem-rosenbrock-euler-step-map-lipschitz",
+      "decision": "escalate",
+      "reason": "F1 identifies the algorithm's successful output with an exact inverse formula. The displayed Lipschitz proof is for the exact gamma=1 map; route it to that definition and do not infer this bound for arbitrary residual-certified outputs."
+    },
+    {
+      "id": "lem-scaled-householder-step-meets-local-backward-error-premise",
+      "decision": "accept",
+      "reason": "The current proof binds norm/dot/update counts to the repaired order, handles x=0 with H=I,E=0, and explicitly supplies Cauchy-Schwarz, normalization, rank-one and Frobenius arguments. Its kappa_r claim does not discharge the different published A1 premise."
+    },
+    {
+      "id": "lem-two-sided-scaled-householder-similarity-error",
+      "decision": "accept",
+      "reason": "Proof 1.1 explicitly skips both updates for identity formation. The real target coefficient kappa_m and separate-block coefficient compose with the specified right order to a+b+ab; the missing guard is in the Francis caller."
+    },
+    {
+      "id": "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+      "decision": "accept",
+      "reason": "Exact stage equations define the reference map, while Proof 1.2/6.1 explicitly propagate both computed residuals through the shifted inverse. Exact outer arithmetic and common-tube assumptions match the algorithm's contract."
+    },
+    {
+      "id": "prop-stiefel-grassmann-vector-transport-is-tangent",
+      "decision": "accept",
+      "reason": "The proof substitutes exact frame identities into the projection formulas and uses polar equivariance. No numerical QR orthogonality conclusion is required."
+    },
+    {
+      "id": "prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves",
+      "decision": "accept",
+      "reason": "The proposition counts one factor-object construction and two solve calls only on successful execution. Its proof neither guarantees success nor relies on the defective format hypothesis in the reuse example."
+    },
+    {
+      "id": "thm-balanced-pairwise-summation-error-bound",
+      "decision": "accept",
+      "reason": "The specified padded full tree has depth d and exact zero padding. Expansion gives at most d relative factors per original leaf, including the n=1 no-operation branch."
+    },
+    {
+      "id": "thm-bartels-stewart-dense-operation-count",
+      "decision": "escalate",
+      "reason": "The count follows the intended finite Francis kernels and bounded controllers, but the all-input executable claim inherits the undefined zero-reflector route. Repair Francis first; the identity skip adds bounded work and does not worsen the displayed asymptotic counts."
+    },
+    {
+      "id": "thm-bartels-stewart-sylvester-exact-correctness",
+      "decision": "accept",
+      "reason": "The theorem is conditional on success with verified exact Schur identities and exact local block solves. Its block-equation proof remains valid independently of whether a delegated rounded candidate can be generated on every input."
+    },
+    {
+      "id": "thm-computed-francis-schur-backward-error",
+      "decision": "escalate",
+      "reason": "The general local-relation accumulation and outward recurrence are sound conditionally. The claimed concrete realization uses identity stages with zero error, which Francis must actually implement before Proof 1.2 covers every successful route."
+    },
+    {
+      "id": "thm-computed-full-rank-least-squares-backward-stability",
+      "decision": "escalate",
+      "reason": "Computed R and transformed y satisfy the repaired substitution lemma's stored-entry/success premises. Proofs 1.1–3.1 establish the explicit beta bounds and conditional unique minimizer. Only the final ambiguous 20gamma consequence requires the formula repair specified above."
+    },
+    {
+      "id": "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+      "decision": "accept",
+      "reason": "The proof invokes the exact-Hessian active-set SQP theorem under local regularity assumptions. The primal-dual/QR path enters only through the dispatcher context and supplies no local convergence premise."
+    },
+    {
+      "id": "thm-fem-control-active-set-sqp-finite-budget-certificate",
+      "decision": "escalate",
+      "reason": "Proof 1.1 depends on an admitted SQP QR residual certificate; reconcile the solver's stored-input gap first. Its affine next-point identity and separate exact local-convergence claim are correctly distinguished."
+    },
+    {
+      "id": "thm-fraction-to-boundary-and-primal-dual-gap-certificates",
+      "decision": "accept",
+      "reason": "The proof consumes the algorithm's exact cone fractions and exact feasibility/stationarity audits. Rounded updates are audited before acceptance; no QR residual tolerance is converted into feasibility or an objective gap."
+    },
+    {
+      "id": "thm-full-memory-bfgs-global-linear-convergence",
+      "decision": "accept",
+      "reason": "The Statement and F1 require the exact undamped branch and successful Wolfe searches. The proof uses Bp=-g only there; it does not transfer the rounded Cholesky direction into the convergence argument."
+    },
+    {
+      "id": "thm-full-memory-bfgs-local-superlinear-convergence",
+      "decision": "accept",
+      "reason": "The exact-undamped restriction and Dennis-More premise are explicit. Its direction and eventual unit-step argument excludes rounded-direction and Powell variants."
+    },
+    {
+      "id": "thm-gauss-newton-local-linear-contraction",
+      "decision": "accept",
+      "reason": "The theorem defines the exact full-rank step directly and uses uniform singular-value/curvature bounds. The algorithm edge does not supply a numerical convergence guarantee or the disputed LS coefficient."
+    },
+    {
+      "id": "thm-gauss-newton-zero-residual-quadratic-convergence",
+      "decision": "accept",
+      "reason": "F2 selects the exact full-rank minimizer. The orthogonal residual argument uses exact minimality and the stated Jacobian lower bound; it explicitly excludes finite-precision rates."
+    },
+    {
+      "id": "thm-mixed-precision-refinement-error-recurrence-and-floor",
+      "decision": "accept",
+      "reason": "The recurrence follows from the exact residual-equivalent update identity and accepted defect certificates. Its geometric error bound applies to certified executed updates and does not rely on the currently defective stagnation counter."
+    },
+    {
+      "id": "thm-retraction-armijo-acceptance-and-step-lower-bound",
+      "decision": "accept",
+      "reason": "The supplier use is the exact retraction's identity differential and the exact Armijo acceptance test. No rounded Householder implementation or numerical-Q orthogonality claim is used."
+    },
+    {
+      "id": "thm-retraction-armijo-best-iterate-complexity",
+      "decision": "accept",
+      "reason": "The proof telescopes exact accepted Armijo decreases with a separately supplied step lower bound. The finite-precision QR edge is contextual through the exact retraction definition."
+    },
+    {
+      "id": "thm-revised-simplex-qr-basis-residual-status-sound",
+      "decision": "accept",
+      "reason": "F2/Proofs 1.1–3.1 use the explicit square QR perturbation equations and beta_D, without needing perturbed-factor uniqueness or raw 20gamma. Stored operands, identity skipping and exact/certified certificate evaluation match the repaired suppliers."
+    },
+    {
+      "id": "thm-riemannian-trust-region-first-order-complexity",
+      "decision": "accept",
+      "reason": "The count uses exact retracted trials, Cauchy decrease and the small-radius ratio lemma under explicit pullback/model hypotheses. It imports no floating-point method transfer from QR."
+    },
+    {
+      "id": "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+      "decision": "accept",
+      "reason": "The Householder calls and all replay/substitution loops remain finite with the clarified order. A zero factor diagonal exits before solve, and the theorem assumes termination of supplied evaluation/storage/norm routines without promising success."
+    },
+    {
+      "id": "thm-rosenbrock-euler-a-l-stable",
+      "decision": "escalate",
+      "reason": "F1 assigns an exact complex scalar stage to a real rounded backend, and the Statement omits the algorithm's gamma parameter. State the exact gamma=1 mathematical scalar method and prove its complex extension algebraically; retain the valid rational-function stability proof."
+    },
+    {
+      "id": "thm-rosenbrock-euler-global-first-order",
+      "decision": "escalate",
+      "reason": "F1 imports an exact map from the rounded algorithm, and F2 attributes FL(B+1/2) to a lemma proving FL(B+1). Route the exact map correctly and supply the half-factor integral remainder or the existing zero-residual autonomous specialization before retaining the stated constant."
+    },
+    {
+      "id": "thm-rosenbrock-euler-global-first-order-error",
+      "decision": "accept",
+      "reason": "Proof 1.2 explicitly compares the numerical stage with the exact shifted solve using its certified residual. Storage, inverse, tube and O(h) residual assumptions support the recurrence without assuming a rounded solve is exact."
+    },
+    {
+      "id": "thm-rosenbrock-euler-one-newton-step-for-backward-euler",
+      "decision": "escalate",
+      "reason": "The Newton correction algebra is exact, but F1 says the rounded algorithm returns the exact inverse formula whenever M is invertible. Replace that supplier use by the exact gamma=1 step definition; the identity then retains its full intended exact scope."
+    },
+    {
+      "id": "thm-rosenbrock-euler-scalar-a-and-l-stability",
+      "decision": "escalate",
+      "reason": "The rational-function proof correctly derives from def-rosenbrock-euler-step-map. F2 nevertheless claims every successful shifted solve returns that exact formula. Qualify/remove this false bridge and explicitly identify the exact scalar method; the gamma characterization remains sound."
+    },
+    {
+      "id": "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+      "decision": "accept",
+      "reason": "The off-diagonal proof uses the now-explicit conjugated product and component accumulation. The diagonal square/add sequence fits its conservative operation bounds; success, small-roundoff and additional relative-bound hypotheses remain explicit."
+    },
+    {
+      "id": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "decision": "escalate",
+      "reason": "The exact-solve convergence argument requires the damping-dependent trial solve supplied by the large-damping lemma. Reconcile the algorithm's per-attempt recomputation first; no computed-candidate convergence follows from the proof."
+    },
+    {
+      "id": "thm-scaled-householder-qr-backward-stability",
+      "decision": "accept",
+      "reason": "The aggregation embeds exact identity/nonidentity representatives and transports the proved local kappa bounds. The same bound controls separate RHS replay; no rounded dense Q is asserted exactly orthogonal."
+    },
+    {
+      "id": "thm-schur-parlett-recurrence-correctness",
+      "decision": "accept",
+      "reason": "The theorem assumes verified exact Schur factors, exact Jordan diagonal values and successful exact Sylvester solves. Its commutation/uniqueness induction does not turn a rounded Francis candidate into an exact factorization."
+    },
+    {
+      "id": "thm-sqp-finite-precision-kkt-residual-certificate-sound",
+      "decision": "escalate",
+      "reason": "The two explicit residual estimates and inverse conversion are valid for admitted stored inputs and use no raw 20gamma claim. The upstream algorithm must establish the stored K,b premises before its successful-return assertion covers its declared real-data domain."
+    },
+    {
+      "id": "thm-stiefel-retractions-are-first-order",
+      "decision": "accept",
+      "reason": "The proof differentiates exact QR/polar factorizations on their full-rank domains. The rounded-QR reference occurs only in the supplying definition's limiting Remark and is not a proof premise."
+    },
+    {
+      "id": "thm-tikhonov-error-chain-with-discretization-and-residual",
+      "decision": "accept",
+      "reason": "F10/Proof 4.2 use the concrete finite residual certificate only with stored coordinates or supplied isometries and explicit data/output allowances. The analytic chain and stopping/output split do not use the LS theorem's ambiguous coefficient."
+    },
+    {
+      "id": "thm-tikhonov-forward-discretization-and-stopping-coupling",
+      "decision": "accept",
+      "reason": "F1 supplies an exact five-term decomposition; the proof separately assumes operator, noise, residual and bias limits. Numerical residual-evaluation error remains an explicit additional allowance."
+    },
+    {
+      "id": "thm-two-stage-rosenbrock-global-order-two",
+      "decision": "accept",
+      "reason": "Proof 6.1 separates the exact reference map's defect from both computed residual perturbations. The successful exact-storage, common-tube, inverse and stage-residual budget assumptions support its conditional order-two conclusion."
+    },
+    {
+      "id": "thm-two-stage-rosenbrock-scalar-l-stability",
+      "decision": "accept",
+      "reason": "The proof evaluates the exact-J scalar stage equations algebraically and proves the rational stability function's bounds. It supplies no accuracy guarantee for the rounded backend or arbitrary approximate Jacobians."
+    },
+    {
+      "id": "ex-neumaier-recovers-low-order-term-after-cancellation",
+      "decision": "escalate",
+      "reason": "Additional consumer found during the complete assigned-batch reread: F2 cites the erroneous Neumaier identity. The numerical branch verification is correct and exposes the cancellation of epsilon_2^t. Repair the theorem first, then cite its corrected identity without changing this example's output."
+    },
+    {
+      "id": "lem-rounded-linear-and-normal-residual-certificates",
+      "decision": "accept",
+      "reason": "Retained prior explicit disposition outside the trimmed changed-interface cone: current deps/F3 include Cauchy-Schwarz, and Proofs 2.1/3.1 use it for row aggregation, adjoint transport and Frobenius bounds. Its stored-entry and certified-evaluation hypotheses remain necessary for callers."
+    },
+    {
+      "id": "finite-precision-direct-factorizations-examples",
+      "decision": "accept",
+      "reason": "Retained prior page disposition: all six promised examples remain present. Their concrete calculations survive the proposed source repairs; the Neumaier example's theorem citation must be reconciled as separately recorded, while the two LS examples use only conditional qualitative stability."
+    }
+  ]
+}

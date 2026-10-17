@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "73",
+  "round": 0,
+  "reviewed_items": [
+    "alg-adam-update",
+    "alg-amsgrad-update",
+    "lem-finite-sum-gradient-is-average",
+    "lem-positive-diagonal-map-preserves-closed-convexity",
+    "alg-saga-finite-sum-method",
+    "alg-svrg-finite-sum-method",
+    "cex-adam-periodic-linear-losses-force-divergence",
+    "lem-convex-smooth-component-gradient-cocoercivity",
+    "thm-independent-minibatch-conditional-variance",
+    "alg-diagonal-adagrad-online-regret",
+    "cex-saga-linear-factor-fails-under-standard-initialization",
+    "lem-saga-estimator-and-table-recurrence",
+    "lem-svrg-unbiasedness-and-variance-bound",
+    "lem-diagonal-adagrad-subproblem-well-defined",
+    "thm-saga-expected-linear-contraction",
+    "thm-svrg-epoch-expected-linear-contraction",
+    "lem-diagonal-adagrad-one-step-regret-bound",
+    "thm-diagonal-adagrad-regret-bound",
+    "thm-saga-constant-step-memory-capped-linear-contraction",
+    "ex-regularized-logistic-finite-sum",
+    "ex-svrg-saga-gradient-work-storage-comparison",
+    "ex-adam-adaptive-step-divergence"
+  ],
+  "reviewed_pages": [
+    "variance-reduced-finite-sum-and-adaptive-gradient-optimization",
+    "variance-reduced-finite-sum-and-adaptive-gradient-optimization-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full A/B batch and relevant supplier arguments were reviewed. The defects can be repaired within the assigned source scope; no owner escalation is required on this review.",
+  "findings": [
+    {
+      "id": "lem-power-monotone",
+      "type": "prerequisite",
+      "reason": "alg-adam-update and alg-amsgrad-update infer 1−β_j^t>0 from 0≤β_j<1 and t≥1, but def-integer-power only defines powers. Add/cite lem-power-monotone or prove this bound locally."
+    },
+    {
+      "id": "lem-of-square-positive",
+      "type": "prerequisite",
+      "reason": "alg-adam-update, alg-amsgrad-update, and alg-diagonal-adagrad-online-regret use nonnegativity or positivity of sums of squares. thm-of-square-roots requires a nonnegative radicand; make square positivity explicit alongside finite-sum nonnegativity."
+    },
+    {
+      "id": "lem-finite-set-has-max",
+      "type": "prerequisite",
+      "reason": "alg-amsgrad-update uses a coordinatewise binary maximum without a max supplier. Add/cite def-max-min and lem-finite-set-has-max for the two real values."
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "type": "prerequisite",
+      "reason": "These assigned items directly use finite-sum additivity, scaling, monotonicity, nonnegativity, or telescoping, while citing only recursion or gradient averaging: alg-diagonal-adagrad-online-regret, cex-saga-linear-factor-fails-under-standard-initialization, lem-positive-diagonal-map-preserves-closed-convexity, lem-convex-smooth-component-gradient-cocoercivity, thm-independent-minibatch-conditional-variance, lem-saga-estimator-and-table-recurrence, lem-svrg-unbiasedness-and-variance-bound, thm-saga-expected-linear-contraction, thm-svrg-epoch-expected-linear-contraction, thm-saga-constant-step-memory-capped-linear-contraction, thm-diagonal-adagrad-regret-bound, and ex-regularized-logistic-finite-sum. def-finite-sum defines recursion and explicitly assigns these laws to lem-finite-sum-laws; add/cite the relevant clauses."
+    },
+    {
+      "id": "lem-of-square-monotone",
+      "type": "prerequisite",
+      "reason": "cex-adam-periodic-linear-losses-force-divergence compares square roots with numerical bounds; lem-positive-diagonal-map-preserves-closed-convexity derives a norm bound from a squared bound; thm-diagonal-adagrad-regret-bound infers s_t≥s_{t−1}. thm-of-square-roots gives root existence and uniqueness, not these comparisons."
+    },
+    {
+      "id": "lem-of-inverse-positive",
+      "type": "prerequisite",
+      "reason": "lem-positive-diagonal-map-preserves-closed-convexity asserts M>0 for M=√(Σ_j d_j⁻²). The definition of integer powers does not establish positivity of negative powers; cite lem-of-inverse-positive (and square positivity for the squared inverse)."
+    },
+    {
+      "id": "def-complete-ordered-field",
+      "type": "prerequisite",
+      "reason": "thm-diagonal-adagrad-regret-bound defines D_j using a supremum but does not list the least-upper-bound property. Add/cite completeness and state why the nonempty, bounded coordinate-difference sets have suprema."
+    },
+    {
+      "id": "lem-saga-estimator-and-table-recurrence",
+      "type": "local",
+      "reason": "The proof treats the algorithm's stored bar-alpha_k as n⁻¹Σ_i alpha_i^k, but alg-saga-finite-sum-method updates that quantity recursively. Prove the maintained-mean invariant from the table replacement before using it in the unbiasedness and recurrence calculations."
+    },
+    {
+      "id": "thm-independent-minibatch-conditional-variance",
+      "type": "local",
+      "reason": "The without-replacement inclusion and pair-inclusion probabilities are asserted by binomial-coefficient ratios without a counting proof or supplier. Derive them locally, for example by symmetry and the fixed subset size."
+    },
+    {
+      "id": "lem-diagonal-adagrad-one-step-regret-bound",
+      "type": "local",
+      "reason": "The first-order condition follows from dividing by s and taking s↓0, but the proof supplies no limit justification. Replace this with a direct contradiction choosing 0<s≤1 small enough that the quadratic change is negative."
+    },
+    {
+      "id": "ex-adam-adaptive-step-divergence",
+      "type": "local",
+      "reason": "The cited counterexample statement refutes boundedness; its proof contains the cycle drift calculation. The example's lower bound does not finish the claimed limit to +∞. Cite or reproduce the drift calculation, add/cite thm-of-archimedean, and show that for every M all sufficiently late cycles exceed M."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "cex-adam-periodic-linear-losses-force-divergence",
+      "decision": "repair",
+      "reason": "Its numerical square-root comparisons need the square-monotonicity prerequisite; the Adam update formula itself remains unchanged."
+    },
+    {
+      "id": "ex-adam-adaptive-step-divergence",
+      "decision": "repair",
+      "reason": "The stated eventual divergence needs the explicit all-later-cycles threshold argument."
+    },
+    {
+      "id": "lem-diagonal-adagrad-subproblem-well-defined",
+      "decision": "accept",
+      "reason": "Its positive-diagonal transformation and proximal-minimizer use are sound; the positive-map statement remains unchanged."
+    },
+    {
+      "id": "lem-diagonal-adagrad-one-step-regret-bound",
+      "decision": "repair",
+      "reason": "Its defining update use is sound; repair the local small-step optimality argument."
+    },
+    {
+      "id": "thm-diagonal-adagrad-regret-bound",
+      "decision": "repair",
+      "reason": "Its telescoping use is sound, but its own supremum, square-monotonicity, and finite-sum prerequisites need to be explicit."
+    },
+    {
+      "id": "thm-saga-expected-linear-contraction",
+      "decision": "repair",
+      "reason": "The rate calculation uses the estimator statement correctly; make its finite-sum laws explicit."
+    },
+    {
+      "id": "thm-saga-constant-step-memory-capped-linear-contraction",
+      "decision": "repair",
+      "reason": "The capped-rate calculation is sound; make its finite-sum laws explicit."
+    },
+    {
+      "id": "thm-svrg-epoch-expected-linear-contraction",
+      "decision": "repair",
+      "reason": "The epoch telescope and q bound are sound; make its finite-sum averaging laws explicit."
+    },
+    {
+      "id": "ex-regularized-logistic-finite-sum",
+      "decision": "repair",
+      "reason": "The logistic estimates and SVRG constants check out; make the finite-sum averaging law explicit."
+    }
+  ]
+}

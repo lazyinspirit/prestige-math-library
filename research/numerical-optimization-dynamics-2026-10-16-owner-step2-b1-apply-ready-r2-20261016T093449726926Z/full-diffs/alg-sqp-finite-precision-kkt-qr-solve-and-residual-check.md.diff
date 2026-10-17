@@ -1,0 +1,26 @@
+--- current/items/alg-sqp-finite-precision-kkt-qr-solve-and-residual-check.md
++++ proposed/items/alg-sqp-finite-precision-kkt-qr-solve-and-residual-check.md
+@@ -32,7 +32,7 @@
+ be an active KKT matrix, where $A$ has full row rank and $H$ is positive
+ definite on $\ker A$, and let $b\in\mathbb R^N$. By
+ [[lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature]], $K$ is
+-nonsingular. Assume $Nu<1$, $\gamma_{N+3}<1/8$, and the successful-operation
++nonsingular. Also supply a terminating exact-storage routine which, for each requested real entry, either returns that same value with an exact representability certificate in the selected floating-point set or returns `unavailable`. Before QR, invoke this routine on every entry of the intended $K$ and $b$, in increasing row and column order for $K$ and increasing index for $b$. If any call is unavailable or its equality/representability certificate is not verified, return `numerical-failure` without a solve certificate. Otherwise use these unchanged stored values, still denoted $K,b$, for both the solve and residual evaluation. No rounded conversion is performed: every successful residual certificate below concerns the original intended data. Assume $Nu<1$, $\gamma_{N+3}<1/8$, and the successful-operation
+ hypotheses of
+ [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]],
+ run scaled Householder QR and rounded back substitution as in
+@@ -89,12 +89,12 @@
+ [F5] [[lem-scaled-householder-step-meets-local-backward-error-premise]]
+ defines the local coefficient $\kappa_N$ used in the QR backward bound.
+ 
+-[A1] $N\ge1$, $Nu<1$, $\gamma_{N+3}<1/8$, $(N-1)u<1$, all factorization
++[A1] The terminating exact-storage admission has succeeded and its stored $K,b$ equal the intended inputs entrywise. Also $N\ge1$, $Nu<1$, $\gamma_{N+3}<1/8$, $(N-1)u<1$, all factorization
+ and residual operations succeed under the operationwise model, and any norm
+ upper bounds used in $\eta$ are certified without overflow.
+ 
+ ## Proof
+ 
+-1.1 By [F4], $K$ is nonsingular and, being square, has full column rank, so [F2] applies under [A1]. Multiplying the triangular equation by $\widehat Q$ and using $\widehat Q\widehat Q^T=I$ gives $\widehat Q(\widehat R+\Delta_R)\widehat z=b+\delta b$. Substituting $\widehat Q\widehat R=K+\Delta_Q$ yields $(K+\Delta_K)\widehat z=b+\delta b$ for $\Delta_K=\Delta_Q+\widehat Q\Delta_R$. Orthogonality gives $\|\widehat Q\Delta_R\|_F=\|\Delta_R\|_F$, and $\|\widehat R\|_F=\|K+\Delta_Q\|_F\le(1+\beta_Q)\|K\|_F$. Hence $$\|\Delta_K\|_F\le \bigl(\beta_Q+\gamma_{N+3}(1+\beta_Q)\bigr)\|K\|_F =\beta_K\|K\|_F.$$ Rearrangement now gives $$\|K\widehat z-b\|_2\le \|\delta b\|_2+\|\Delta_K\|_F\|\widehat z\|_2 \le\beta_b\|b\|_2+\beta_K\|K\|_F\|\widehat z\|_2.$$ [given, A1, F1, F2, F4, F5, algebra]
++1.1 The admission in [A1] supplies stored $K,b$ equal to the intended data; the factorization and transformed right-hand side are therefore admissible stored operands. By [F4], $K$ is nonsingular and, being square, has full column rank, so the perturbation equations of [F2] apply under [A1]. Their additional perturbed-least-squares uniqueness condition is not needed for this residual calculation. Multiplying the triangular equation by $\widehat Q$ and using $\widehat Q\widehat Q^T=I$ gives $\widehat Q(\widehat R+\Delta_R)\widehat z=b+\delta b$. Substituting $\widehat Q\widehat R=K+\Delta_Q$ yields $(K+\Delta_K)\widehat z=b+\delta b$ for $\Delta_K=\Delta_Q+\widehat Q\Delta_R$. Orthogonality gives $\|\widehat Q\Delta_R\|_F=\|\Delta_R\|_F$, and $\|\widehat R\|_F=\|K+\Delta_Q\|_F\le(1+\beta_Q)\|K\|_F$. Hence $$\|\Delta_K\|_F\le \bigl(\beta_Q+\gamma_{N+3}(1+\beta_Q)\bigr)\|K\|_F =\beta_K\|K\|_F.$$ Rearrangement now gives $$\|K\widehat z-b\|_2\le \|\delta b\|_2+\|\Delta_K\|_F\|\widehat z\|_2 \le\beta_b\|b\|_2+\beta_K\|K\|_F\|\widehat z\|_2.$$ [given, A1, F1, F2, F4, F5, algebra]
+ 
+ 2.1 By [F3] and the triangle inequality, $$\|K\widehat z-b\|_2\le\|\widehat r\|_2+W.$$ Both entries in the returned minimum are upper bounds, so their minimum is also an upper bound. Failure of any required operation exits without a certificate. [given, A1, F1, F3, step 1.1, algebra] ∎

@@ -13,8 +13,8 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-07-31
   precheck: pass
+  repair: research/numerical-optimization-dynamics-2026-10-16-owner-step2-published-reapplication-ROOT-1035/lem-binomial-coefficients-symmetric-and-unimodal.repair.json
 sources:
   scraped: []
   references:
@@ -55,6 +55,6 @@ and at the two ranks $k=(n-1)/2$ and $k=(n+1)/2$ when $n$ is odd.
 
 1.2 For $k<n$, count pairs $(S,x)$ with $|S|=k$ and $x\notin S$ by first choosing $S$, or by first choosing the $(k+1)$-set $S\cup\{x\}$ and then the deleted element. This gives $\binom nk(n-k)=\binom n{k+1}(k+1)$, in agreement with [L1]. [F1, L1, L2]
 
-2.1 Since both $n-k$ and $k+1$ are positive, step 1.2 shows that $\binom n{k+1}\ge\binom nk$ exactly when $n-k\ge k+1$, with equality exactly when $n-k=k+1$. [step 1.2, algebra]
+2.1 For every $0\le k\le n$, the closed identity in [L1] gives $\binom nk\,k!\,(n-k)!=n!\ne0$. Thus $\binom nk\ne0$; it is a natural count by [F1], so $\binom nk>0$. For $k<n$, multiplying the comparison $\binom n{k+1}\ge\binom nk$ by the positive natural $k+1$ preserves and reflects it. Substitution from step 1.2 then gives $\binom nk(n-k)\ge\binom nk(k+1)$; cancellation of the positive natural $\binom nk$ preserves and reflects this comparison as well. Thus $\binom n{k+1}\ge\binom nk$ exactly when $n-k\ge k+1$, with equality exactly when $n-k=k+1$. [F1, L1, step 1.2, algebra]
 
 3.1 Reading step 2.1 as $k$ increases gives strict increase before the middle, equality between the two middle ranks only when $n$ is odd, and strict decrease afterward; symmetry from step 1.1 identifies the stated maximizing ranks. [step 1.1, step 2.1] ∎

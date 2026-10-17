@@ -1,0 +1,351 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "36",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-variable-step-bdf2-with-selected-implicit-branch",
+      "model": "gpt-6-luna",
+      "context_sha256": "00763751aff3bdb8eaed9b28cabd6bacfa2584335bc5e1bd66a38fe18d9178c3",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The original Definition branches on exact root cardinality for arbitrary f but supplies no decision or solving primitive. This is an incomplete procedure specification, rather than a false BDF2 identity or a missing citation. Repaired by an explicit returning exact branch oracle input, its domain/root/status contract, call arguments and response dispatch; the equation, positive-ratio scope and prefix outputs are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-dahlquist-equivalence-for-linear-multistep-methods",
+      "model": "gpt-6-luna",
+      "context_sha256": "99ece0c29fe3f1ab0c5947cd8ec040ca418449ac1dad83988340b41c26de6460",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original proof uses a two-coordinate real run for nonreal roots, which does not establish necessity at the allowed fixed dimension d=1. Repaired step 1.3 by choosing, separately for each N, the scalar real or imaginary projection with larger terminal magnitude; its starts are uniformly bounded and its terminal magnitude is at least |u_N|/sqrt(2). Scaling by sqrt(h) then contradicts convergence in every fixed d>=1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+      "model": "gpt-6-luna",
+      "context_sha256": "fb2b2ee6dc9306b15945353e7c11b191af8bab2f51d83d33348792e0bfa42229",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 omitted the theorem's starting-error hypothesis O(h^p), so its dependency restatement was too broad. The actual example already has exact starts, and all other order-two hypotheses hold, so the example conclusion was sound. Repaired F3 by stating the starter requirement explicitly, and retained the exact-start application.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-variable-step-bdf2-with-selected-implicit-branch",
+      "disposition": "repaired",
+      "post_sha256": "e650869adc15674acb3c14fb30ce13f4ab3274637a90cef69dbbdfe00b55f39f",
+      "review_context_sha256": "da61ea3aebbd95ab04843985fbd723bd0a1d30769b77b8265f7c2ca95751f9ba",
+      "reason": "Checked the quadratic-interpolation supplier, positive denominators, N=1 empty loop, oracle input contract and every output branch. The exact BDF2 update is now specified relative to an explicitly supplied returning oracle, with no claim of constructing such an oracle for arbitrary f. Contract boundaries and finite-fixture excerpt match the changed Definition. This is a repair review, not independent acceptance of my repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-dahlquist-equivalence-for-linear-multistep-methods",
+      "disposition": "repaired",
+      "post_sha256": "104128099e11234287d23221dc103763f156459c4753e93d9387a315c86666eb",
+      "review_context_sha256": "2df648d3d5fdd12999ed0f5c98d2b1d95d67a07c04ae68cc9008510f3dfba9ea",
+      "reason": "Checked the entire proof against the local moment, companion-power and IVP suppliers: the adapted norm and Lipschitz absorption give 1+Ch stability, O(h^(p+1)) residuals accumulate to O(h^p), and the first-exit argument keeps histories in the selected-root neighborhood. Both consistency necessity tests remain valid. The repaired scalar projection proves root necessity for fixed d=1 and embeds in any higher dimension; repeated-root modes are justified by finite differences. Also made the full-history grid inclusion explicit in 2.3 and corrected stale contract boundary locators. Statement unchanged; this is repair review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+      "disposition": "repaired",
+      "post_sha256": "45aacc205229cf48d2459f44ba844f65652a62ab192c2f4163c0d33dd6e082ee",
+      "review_context_sha256": "e3b88ee4ee8bb56023d56e376fef88693b15d0d493e9f242637d40d484d350a3",
+      "reason": "Verified coefficients (1,-4,3), beta2=2, the three zero order moments, simple roots 1 and 1/3, smooth exact path t^3/3, state-Lipschitz constant L=0, exact starts and unscaled defect -4h^3/3. Histories within 1/6 give root displacement at most 5/18+4h^3/9<1/2, proving the uniform local-branch condition. F3 now includes the starter hypothesis, and 1.3 supplies the revised algorithm's exact oracle using its affine root and ball membership. Example unchanged; owning citation quote and derivations updated. This is repair review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-implicit-stiff-time-stepper-with-consistent-starts",
+    "alg-index-one-dae-bdf2-stepper",
+    "cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error",
+    "cor-constant-step-bdf2-order-two-with-consistent-start",
+    "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+    "lem-bdf2-root-locus-location",
+    "lem-variable-step-bdf2-increment-ratio-recurrence",
+    "thm-index-one-dae-bdf2-second-order-with-residuals",
+    "thm-variable-step-bdf2-order-two-under-ratio-bound"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-variable-step-bdf2-with-selected-implicit-branch",
+      "severity": "fatal",
+      "defect_type": "other",
+      "locus": "definition",
+      "finding": "Exact root-counting and unique-root recovery were invoked without a supplied executable primitive.",
+      "correction": "Supply an exact returning branch oracle as an explicit input and dispatch on its specified statuses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-dahlquist-equivalence-for-linear-multistep-methods",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "proof-step",
+      "finding": "Step 1.3 constructed a two-dimensional real counterexample without covering the allowed fixed scalar dimension.",
+      "correction": "Use the larger terminal real/imaginary projection on each grid, scale its bounded starters by sqrt(h), and embed in the first coordinate. Added annihilator justification for the repeated-root mode; clarified N>=n+k-1 in 2.3. Contract boundary locators corrected.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "finding": "F3 omitted O(h^p) starting errors from the cited order estimate, despite the application using exact starts.",
+      "correction": "Added O(h^p) starters to F3; supplied the affine exact branch oracle in 1.3 and recorded smoothness/L=0 at application in 2.1. Claim unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+      "supplier": "alg-variable-step-bdf2-with-selected-implicit-branch",
+      "severity": "fatal",
+      "defect_type": "other",
+      "locus": "definition",
+      "affected_use": "items/alg-implicit-stiff-time-stepper-with-consistent-starts.md, Definition exact-root BDF2 paragraph: call [[alg-variable-step-bdf2-with-selected-implicit-branch]] on the starter pair ... with the supplied branch balls.",
+      "invalidated_claim": "This composed exact-root invocation lacks the newly explicit returning branch oracle input; the finite residual-solve modes and BDF2 formula are unaffected.",
+      "minimality": "Add the supplier-contract exact branch oracle to the exact-root BDF2 Inputs and pass it into the referenced call. This is a direct frontier consumer outside this assignment, so the engine must route it to its ordinary frontier owner; do not edit or adjudicate it in this unit. A necessary consumer Definition edit then requires that owner to examine its own direct consumers.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "action": "no-update",
+      "reason": "All nine direct item consumers of the changed BDF2 Definition are draft frozen-frontier items. No published or outside-frontier mathematical consumer was found in the current dependency/reference inventory, and no published repair or maintenance adjudication is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "alg-variable-step-bdf2-with-selected-implicit-branch",
+      "thm-dahlquist-equivalence-for-linear-multistep-methods",
+      "ex-uniform-step-bdf2-satisfies-dahlquist-conditions"
+    ],
+    "pending_items": [],
+    "source_reading": "Read current local supplier items and full assigned mathematical arguments. No external sources consulted or claimed.",
+    "checks": [
+      {
+        "item": "alg-variable-step-bdf2-with-selected-implicit-branch",
+        "precheck": "exit 0; not-applicable, 0 proofs, 0 failures",
+        "rendercheck": "exit 0; 1 checked, no errors or warnings",
+        "proof_contract": "exit 0; strict selected-item check passed",
+        "finite_smoke": "exit 0; uniform-bdf2-selected-step passed; finite fixture only",
+        "commands": [
+          "node tools/tsx-run.mjs tools/precheck.mts items/alg-variable-step-bdf2-with-selected-implicit-branch.md --json",
+          "node tools/rendercheck.mjs items/alg-variable-step-bdf2-with-selected-implicit-branch.md --json",
+          "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-36.proof-contracts.json --strict --items alg-variable-step-bdf2-with-selected-implicit-branch --json",
+          "node tools/finite-smoke.mjs research/numerical-optimization-dynamics-2026-10-16-batch-36.proof-contracts.json --items alg-variable-step-bdf2-with-selected-implicit-branch --json"
+        ]
+      },
+      {
+        "item": "thm-dahlquist-equivalence-for-linear-multistep-methods",
+        "precheck": "exit 0; 1 proof checked, 0 failures",
+        "rendercheck": "exit 0; 1 checked, no errors or warnings",
+        "proof_contract": "exit 0; strict selected-item check passed",
+        "finite_smoke": "exit 0; backward-euler-dahlquist-witness passed; finite fixture only",
+        "commands": [
+          "node tools/tsx-run.mjs tools/precheck.mts items/thm-dahlquist-equivalence-for-linear-multistep-methods.md --json",
+          "node tools/rendercheck.mjs items/thm-dahlquist-equivalence-for-linear-multistep-methods.md --json",
+          "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-36.proof-contracts.json --strict --items thm-dahlquist-equivalence-for-linear-multistep-methods --json",
+          "node tools/finite-smoke.mjs research/numerical-optimization-dynamics-2026-10-16-batch-36.proof-contracts.json --items thm-dahlquist-equivalence-for-linear-multistep-methods --json"
+        ]
+      },
+      {
+        "item": "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+        "precheck": "exit 0; 1 proof checked, 0 failures",
+        "rendercheck": "exit 0; 1 checked, no errors or warnings",
+        "proof_contract": "exit 0; strict selected-item check passed",
+        "finite_smoke": "exit 0; uniform-bdf2-order-moments-roots passed; finite fixture only",
+        "commands": [
+          "node tools/tsx-run.mjs tools/precheck.mts items/ex-uniform-step-bdf2-satisfies-dahlquist-conditions.md --json",
+          "node tools/rendercheck.mjs items/ex-uniform-step-bdf2-satisfies-dahlquist-conditions.md --json",
+          "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-36.proof-contracts.json --strict --items ex-uniform-step-bdf2-satisfies-dahlquist-conditions --json",
+          "node tools/finite-smoke.mjs research/numerical-optimization-dynamics-2026-10-16-batch-36.proof-contracts.json --items ex-uniform-step-bdf2-satisfies-dahlquist-conditions --json"
+        ]
+      }
+    ],
+    "interface_changes": [
+      {
+        "id": "alg-variable-step-bdf2-with-selected-implicit-branch",
+        "section": "Definition",
+        "change": "Added the returning exact branch oracle input and its call/status contract; BDF2 equation and branch root choice unchanged.",
+        "page_use": "library/numerical-differential-equations-and-stochastic-dynamics/linear-multistep-methods-and-dahlquist-equivalence.md lists the algorithm and describes formula derivation and conditional convergence; no claim of an executable general nonlinear solve, so page prose remains sound."
+      },
+      {
+        "id": "thm-dahlquist-equivalence-for-linear-multistep-methods",
+        "section": "Statement",
+        "change": "None: proof-only and owning-contract repairs. Direct Statement comparison unchanged, so no consumer propagation from this theorem."
+      },
+      {
+        "id": "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+        "section": "Example",
+        "change": "None: Facts and Verification repairs only. No Statement or Definition changed in this consumer, so no further hop is triggered."
+      }
+    ],
+    "downstream_reviews": [
+      {
+        "id": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+        "path": "items/alg-implicit-stiff-time-stepper-with-consistent-starts.md",
+        "supplier": "alg-variable-step-bdf2-with-selected-implicit-branch",
+        "affected_use": "Definition, exact-root BDF2 paragraph: calls the algorithm on the starter pair with supplied branch balls, but its Inputs do not supply an exact branch oracle.",
+        "disposition": "requires_frontier_owner_repair",
+        "reason": "Add the returning exact branch oracle to exact-root BDF2 inputs and pass it in this call. Preserve finite-solver modes, equation, statuses and accuracy caveats. This is an unassigned frontier algorithm, so route to the ordinary frontier-owner lane; do not edit here.",
+        "frontier": true,
+        "published": false,
+        "source_excerpt": "For an exact-root BDF2 run, call [[alg-variable-step-bdf2-with-selected-implicit-branch]] on the starter pair for steps $n=1,\\ldots,N-1$ with the supplied branch balls; it returns a computed prefix and `completed`, `no-root`, `ambiguous-branch`, or `evaluation-failure`."
+      },
+      {
+        "id": "alg-index-one-dae-bdf2-stepper",
+        "path": "items/alg-index-one-dae-bdf2-stepper.md",
+        "supplier": "alg-variable-step-bdf2-with-selected-implicit-branch",
+        "affected_use": "Definition forms the constant-step coupled residual 3X-4X_previous+X_older-2h f and calls its own finite-budget Newton solver. The BDF2 algorithm occurs only in deps.",
+        "disposition": "unchanged_sound",
+        "reason": "No call to the changed exact-root procedure occurs. The unchanged BDF2 coefficients suffice, so no oracle input or mathematical repair is needed.",
+        "frontier": true,
+        "published": false,
+        "source_excerpt": "R_n(X,Z)=\\bigl(3X-4X_{n-1}+X_{n-2}-2h f(t_n,X,Z),\\ g(t_n,X,Z)\\bigr)"
+      },
+      {
+        "id": "cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error",
+        "path": "items/cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error.md",
+        "supplier": "alg-variable-step-bdf2-with-selected-implicit-branch",
+        "affected_use": "Counterexample prescribes radius-two balls; step 2.1 uses f=0 and 1+2r>0 to obtain the unique root and completion.",
+        "disposition": "unchanged_sound",
+        "reason": "For f=0 an admissible oracle computes Z=((1+r)^2Y_n-r^2Y_previous)/(1+2r), tests membership in the supplied ball, and returns unique-root or no-root. The proof already establishes membership of every reached root and the field is everywhere defined. The same counterexample is therefore an instance of the revised procedure.",
+        "frontier": true,
+        "published": false,
+        "source_excerpt": "For the branch input in [[alg-variable-step-bdf2-with-selected-implicit-branch]], prescribe every ball to be the closed radius-two ball centered at zero."
+      },
+      {
+        "id": "cor-constant-step-bdf2-order-two-with-consistent-start",
+        "path": "items/cor-constant-step-bdf2-order-two-with-consistent-start.md",
+        "supplier": "alg-variable-step-bdf2-with-selected-implicit-branch",
+        "affected_use": "Statement starts the BDF2 branch algorithm and selects the unique root in each ball; F1 and proof 1.1 identify this root with the uniform local branch.",
+        "disposition": "unchanged_sound",
+        "reason": "An invocation of the referenced algorithm carries its new oracle input. The result concerns the exact selected sequence and assumes the root exists; it does not construct an oracle. f is defined on K and every branch ball lies in K, so the domain check cannot fail.",
+        "frontier": true,
+        "published": false,
+        "source_excerpt": "[F1] [[alg-variable-step-bdf2-with-selected-implicit-branch]]: BDF2 selects the unique root in each prescribed closed branch ball and makes no convergence assertion by itself."
+      },
+      {
+        "id": "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+        "path": "items/ex-uniform-step-bdf2-satisfies-dahlquist-conditions.md",
+        "supplier": "alg-variable-step-bdf2-with-selected-implicit-branch",
+        "affected_use": "F1 and Verification 1.1 use r=1; Verification 1.3 supplies the unique explicit scalar root for f=t^2 and the branch ball.",
+        "disposition": "repaired_in_assigned_review",
+        "reason": "Verification 1.3 now explicitly supplies the exact affine-root oracle and its membership test. It proves the root is in the branch ball for all sufficiently close histories; F3 and theorem hypotheses are checked in the assigned review. Example claim unchanged.",
+        "frontier": true,
+        "published": false,
+        "source_excerpt": "[F1] The BDF2 formula is the equation in [[alg-variable-step-bdf2-with-selected-implicit-branch]] with $r_n=1$."
+      },
+      {
+        "id": "lem-bdf2-root-locus-location",
+        "path": "items/lem-bdf2-root-locus-location.md",
+        "supplier": "alg-variable-step-bdf2-with-selected-implicit-branch",
+        "affected_use": "Statement and F1, Proof 1.1 specialize the unchanged BDF2 equation at r=1 and substitute f=lambda y to obtain (3-2z)zeta^2-4zeta+1.",
+        "disposition": "unchanged_sound",
+        "reason": "This is a polynomial calculation for the formula, with no invocation of an exact nonlinear solver. The coefficient interface is unchanged.",
+        "frontier": true,
+        "published": false,
+        "source_excerpt": "[F1] [[alg-variable-step-bdf2-with-selected-implicit-branch]]: when adjacent step ratios equal one, the update is $(3Y_{n+1}-4Y_n+Y_{n-1})/(2h)=f(t_{n+1},Y_{n+1})$."
+      },
+      {
+        "id": "lem-variable-step-bdf2-increment-ratio-recurrence",
+        "path": "items/lem-variable-step-bdf2-increment-ratio-recurrence.md",
+        "supplier": "alg-variable-step-bdf2-with-selected-implicit-branch",
+        "affected_use": "Statement, Given and proof 1.1 set f=0 in the BDF2 equation to obtain (1+2r)Delta_next=r^2 Delta.",
+        "disposition": "unchanged_sound",
+        "reason": "Only the unchanged equation and positive-ratio convention are used. No existence or computability assertion for arbitrary nonlinear roots is made.",
+        "frontier": true,
+        "published": false,
+        "source_excerpt": "For the homogeneous vector-valued variable-step BDF2 recurrence obtained from [[alg-variable-step-bdf2-with-selected-implicit-branch]] by setting $f=0$, let $\\Delta_n=Y_n-Y_{n-1}\\in\\mathbb R^d$. For every $r_n=h_n/h_{n-1}>0$,"
+      },
+      {
+        "id": "thm-index-one-dae-bdf2-second-order-with-residuals",
+        "path": "items/thm-index-one-dae-bdf2-second-order-with-residuals.md",
+        "supplier": "alg-variable-step-bdf2-with-selected-implicit-branch",
+        "affected_use": "F3 identifies the constant-step differential residual coefficients with the r=1 BDF2 case; proof 2.1 subtracts that residual equation.",
+        "disposition": "unchanged_sound",
+        "reason": "This conditional residual theorem uses the unchanged coefficients and its own finite-solver DAE procedure. It does not call the revised exact branch oracle procedure.",
+        "frontier": true,
+        "published": false,
+        "source_excerpt": "[F3] [[alg-index-one-dae-bdf2-stepper]]: the coupled differential residual is $r^d_n=(3X_n-4X_{n-1}+X_{n-2})/(2h)-f(t_n,X_n,Z_n)$. Its coefficients are the constant-step case $r_n=1$ of [[alg-variable-step-bdf2-with-selected-implicit-branch]]; on the exact selected branch, [F1] gives $f(t_n,X_n,\\psi(t_n,X_n))=F(t_n,X_n)$."
+      },
+      {
+        "id": "thm-variable-step-bdf2-order-two-under-ratio-bound",
+        "path": "items/thm-variable-step-bdf2-order-two-under-ratio-bound.md",
+        "supplier": "alg-variable-step-bdf2-with-selected-implicit-branch",
+        "affected_use": "Statement prescribes branch balls in K with the same unique local root; F1 and proofs 1.1 and 4.1 use that selected exact root.",
+        "disposition": "unchanged_sound",
+        "reason": "Every run of the referenced algorithm includes its oracle input. The theorem is conditional on selected roots, and f is defined throughout K, containing the balls, so its proof and existence bootstrap still apply. No construction of a general exact oracle is asserted.",
+        "frontier": true,
+        "published": false,
+        "source_excerpt": "[F1] [[alg-variable-step-bdf2-with-selected-implicit-branch]] defines the step equation and specifies that the unique root in the prescribed ball is the output."
+      }
+    ],
+    "repair_complete": true,
+    "proof_layout": {
+      "command": "node tools/proof-layout.mjs items/alg-variable-step-bdf2-with-selected-implicit-branch.md items/thm-dahlquist-equivalence-for-linear-multistep-methods.md items/ex-uniform-step-bdf2-satisfies-dahlquist-conditions.md",
+      "exit_code": 0,
+      "output": "proof-layout: 3 items, 13 steps, 0 defects",
+      "timing": "After all final item edits; one batched command."
+    },
+    "shared_metadata": "For each item, acquired the Step 5 shared-write lock, reread the current batch-36 contract, edited only the owning entry, ran its strict selected-item contract check and released. The assigned example's F1 quote was refreshed only during its own review. Other consumer quote mirrors are left to the engine's downstream owner work.",
+    "remaining_owner_work": [
+      {
+        "id": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+        "route": "ordinary frontier-owner lane",
+        "action": "Supply and pass the exact branch oracle in the composed exact-root BDF2 invocation. Examine one further hop only if its Definition changes."
+      }
+    ],
+    "unresolved_mathematics": [],
+    "certification_scope": "No judge, audit stamp, round state, central certificate, worker launch or independent acceptance was written. Fatal findings remain fatal for round convergence even after repair. Engine-owned downstream work and later certification remain required.",
+    "statement_hash_comparison": [
+      {
+        "id": "alg-variable-step-bdf2-with-selected-implicit-branch",
+        "before": "a236048fa64a1ccc80bf5280361706b4f8d5e5f77f0b191c8242b85b6d285bdc",
+        "after": "00ff86f646f23e633d88935345fc921f45a8010bb6ff6efb5b8fba4e4672a072",
+        "changed": true
+      },
+      {
+        "id": "thm-dahlquist-equivalence-for-linear-multistep-methods",
+        "before": "9c2f874224bebcbdf63665bd892ee3a70d98dc08091d577bbe933f83f9ff8b78",
+        "after": "9c2f874224bebcbdf63665bd892ee3a70d98dc08091d577bbe933f83f9ff8b78",
+        "changed": false
+      }
+    ],
+    "hash_guard_validation": "After final edits all three report post_sha256 values matched itemHashGuard of their current carriers. No earlier review hash was refreshed after a supplier change."
+  }
+}

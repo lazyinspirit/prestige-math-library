@@ -8,8 +8,11 @@ import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { itemHashGuard } from './item-hash.mjs';
 import { requiredPageClosureEvidence } from './step3-owner-required-page-routes.mjs';
+import { PRECLOSURE_MANIFEST_POLICY } from './step3-manifest-history.mjs';
 import { downstreamConsumerClosureEvidence } from './step3-owner-downstream-consumer-routes.mjs';
+import { closureEvidence, OBSERVATION_EVIDENCE_POLICY } from './step3-owner-unbound-reader-observations.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
+import { ownerRepairEvidenceClosure, OWNER_REPAIR_EVIDENCE_FREEZE_POLICY } from './step3-owner-stabilized-source-identical-continuity.mjs';
 
 const argv = process.argv.slice(2);
 const mode = argv[0];
@@ -39,12 +42,15 @@ const artifactNames = (version = 3) => researchNames().filter((name) =>
   || (name.startsWith(`${run}-alpha-`) && name.endsWith('-3a-decisions.json'))
   || version === 2 && [ `${run}-alpha-3b.md`, `${run}-cross-group-edges.json`,
     `${run}-3b-verdicts.jsonl` ].includes(name)).sort();
-const artifactHashes = (version = 3) => ({
+const artifactHashes = (version = 3, observationPolicy = null, manifestPolicy = null, repairEvidencePolicy = null, frozenManifestArtifacts = null) => ({
   ...Object.fromEntries(artifactNames(version).map((name) => [
     `research/${name}`, sha256(readFileSync(R('research', name))),
   ])),
   ...(version === 3 ? requiredPageClosureEvidence(root, run) : {}),
-  ...(version === 3 ? downstreamConsumerClosureEvidence(root, run) : {}),
+  ...(version === 3 ? downstreamConsumerClosureEvidence(root, run, manifestPolicy, { frozenArtifacts: frozenManifestArtifacts }) : {}),
+  ...(version === 3 && observationPolicy === OBSERVATION_EVIDENCE_POLICY ? closureEvidence(root, run) : {}),
+  ...(version === 3 && repairEvidencePolicy === OWNER_REPAIR_EVIDENCE_FREEZE_POLICY
+    ? ownerRepairEvidenceClosure(root, run, { required: true }) : {}),
 });
 const jsonl = (path) => existsSync(path)
   ? readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)) : [];
@@ -81,7 +87,22 @@ if (mode === 'verify') {
     || receipt.version === 3 && receipt.basis !== 'dependency-ordered-step3a') {
     errors.push('wrong version, run, or status');
   }
-  const currentArtifacts = artifactHashes(receipt.version);
+  if (Object.hasOwn(receipt, 'observation_evidence_policy')
+    && (receipt.version !== 3 || receipt.observation_evidence_policy !== OBSERVATION_EVIDENCE_POLICY)) {
+    fail('unknown or unsupported observation_evidence_policy');
+  }
+  if (Object.hasOwn(receipt, 'manifest_evidence_policy')
+    && (receipt.version !== 3 || receipt.manifest_evidence_policy !== PRECLOSURE_MANIFEST_POLICY)) {
+    fail('unknown or unsupported manifest_evidence_policy');
+  }
+  if (Object.hasOwn(receipt, 'owner_repair_evidence_policy')
+    && (receipt.version !== 3 || receipt.owner_repair_evidence_policy !== OWNER_REPAIR_EVIDENCE_FREEZE_POLICY)) {
+    fail('unknown or unsupported owner_repair_evidence_policy');
+  }
+  // Only verification authenticates closure-time manifest slots through their
+  // already sealed archives. Close/default calls retain live preclosure currency.
+  const currentArtifacts = artifactHashes(receipt.version, receipt.observation_evidence_policy, receipt.manifest_evidence_policy, receipt.owner_repair_evidence_policy,
+    receipt.manifest_evidence_policy === PRECLOSURE_MANIFEST_POLICY ? receipt.artifacts : null);
   if (JSON.stringify(Object.keys(currentArtifacts).sort()) !== JSON.stringify(Object.keys(receipt.artifacts ?? {}).sort())) {
     errors.push('the exact Step-3 artifact set changed');
   }
@@ -115,12 +136,17 @@ for (const [label, args] of checks) {
   if (result.error) fail(`${label} could not complete: ${result.error.message}`);
   if (result.status !== 0) fail(`${label} failed\n${result.stderr || result.stdout}`);
 }
-const artifacts = artifactHashes();
+const repairEvidencePolicy = existsSync(R('research', `${run}-step3-owner-repair-evidence.json`))
+  ? OWNER_REPAIR_EVIDENCE_FREEZE_POLICY : null;
+const artifacts = artifactHashes(3, OBSERVATION_EVIDENCE_POLICY, PRECLOSURE_MANIFEST_POLICY, repairEvidencePolicy);
 if (!Object.keys(artifacts).length) fail('no exact Step-3 artifacts exist');
 const ledgerRows = step3LedgerRows();
 writeFileSync(receiptPath, `${JSON.stringify({
   version: 3,
   basis: 'dependency-ordered-step3a',
+  observation_evidence_policy: OBSERVATION_EVIDENCE_POLICY,
+  ...(repairEvidencePolicy ? { owner_repair_evidence_policy: repairEvidencePolicy } : {}),
+  manifest_evidence_policy: PRECLOSURE_MANIFEST_POLICY,
   run,
   status: 'closed',
   closed_at: new Date().toISOString(),

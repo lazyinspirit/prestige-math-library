@@ -1,0 +1,143 @@
+[
+  {
+    "kind": "item",
+    "consumer": "ex-trust-region-newton-cauchy-truncated-cg",
+    "supplier": "alg-bracketing-zoom-strong-wolfe-search",
+    "consumer_batch": "72",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "Alpha independently checked Fact F7 and Proof 2.1: retained phi(0)=0, derivative -4, first t=1 evaluation has phi=-2<phi(0) and Armijo -2<=-2/5, then strong curvature 0<=1 returns 1 with E>=1. No zoom/domain-exit or global convergence premise used.",
+    "inspected_paths": [
+      "items/alg-bracketing-zoom-strong-wolfe-search.md#Definition",
+      "items/ex-trust-region-newton-cauchy-truncated-cg.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$,\nlet $x\\in D$, and let $p\\in\\mathbb R^n$ be arbitrary. Fix $0<c_1<c_2<1/2$ and finite\nbudgets $E,Z\\in\\mathbb N$ for expansion and zoom trials. After the direction check passes, use the functions\n$\\phi(t)=f(x+tp)$ and $\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$ from\n[[def-wolfe-and-strong-wolfe-conditions]]. **Output:** either a positive\nstrong Wolfe step, or one of `invalid-direction`, `domain-exit`, and\n`evaluation-budget-exhausted`.\n\n1. Evaluate and retain $f(x)$ and $\\nabla f(x)$, and set\n   $\\phi(0):=f(x)$ and $\\phi'(0):=\\langle\\nabla f(x),p\\rangle$.\n   If $\\phi'(0)\\ge0$, return `invalid-direction`.\n   Set $a:=0$ and $t:=1$. For at most $E$ expansion trials, in order:\n   - If $x+tp\\notin D$, return `domain-exit` without evaluating the trial.\n   - Evaluate $\\phi(t)$ and $\\phi'(t)$. If\n     $\\phi(t)>\\phi(0)+c_1t\\phi'(0)$ or $\\phi(t)\\ge\\phi(a)$, call the zoom\n     procedure below with the ordered endpoint pair $(a,t)$ and return its\n     output.\n   - If $|\\phi'(t)|\\le c_2|\\phi'(0)|$, return $t$ as a strong Wolfe step.\n   - If $\\phi'(t)\\ge0$, call zoom with the reversed endpoint pair $(t,a)$ and\n     return its output.\n   - Otherwise set $a:=t$ and $t:=2t$.\n2. If the expansion budget is exhausted, return `evaluation-budget-exhausted`.\n\nFor `zoom(a,b)`, preserve the endpoint order even when $b<a$. For at most\n$Z$ zoom trials, in order:\n\n1. Set $m:=(a+b)/2$. If $x+mp\\notin D$, return `domain-exit` without\n   evaluating the trial.\n2. Evaluate $\\phi(m)$ and $\\phi'(m)$. If\n   $\\phi(m)>\\phi(0)+c_1m\\phi'(0)$ or $\\phi(m)\\ge\\phi(a)$, set $b:=m$.\n   Otherwise, if $|\\phi'(m)|\\le c_2|\\phi'(0)|$, return $m$ as a strong Wolfe\n   step. In the remaining branch, if $\\phi'(m)(b-a)\\ge0$, first set\n   $b:=a$; then set $a:=m$.\n3. If the zoom budget is exhausted, return `evaluation-budget-exhausted`.\n\nThe procedure returns a step only after both strong Wolfe inequalities have\nbeen checked. Finite budgets and domain exits may return failure even when a\nstrong Wolfe step exists; no convergence claim follows from the procedure\nalone.",
+    "consumer_use_excerpts": [
+      "[F7] [[alg-bracketing-zoom-strong-wolfe-search]]: from a descent direction,\nthe first expansion trial is $t=1$ and it returns that point when both strong\nWolfe inequalities hold."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[328]",
+      "missing[7].currentDeclaredOwnedEdges[4]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-72.pages.json#deps",
+      "items/ex-trust-region-newton-cauchy-truncated-cg.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/40",
+    "alpha_review": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-72-3a.md"
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-trust-region-newton-cauchy-truncated-cg",
+    "supplier": "alg-inexact-newton-krylov-with-descent-safeguard",
+    "consumer_batch": "72",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "FactF5/proof1.1 construct an actual deterministic two-dimensional Galerkin Krylov candidate for the unshifted indefinite matrix, recompute residual0 and check -4<-(1/2)*5. Thus the supplied source forcing/descent tests accept the displayed Newton vector, without assuming it lies in the trust-region ball or borrowing global Newton convergence.",
+    "inspected_paths": [
+      "items/alg-inexact-newton-krylov-with-descent-safeguard.md#Definition",
+      "items/ex-trust-region-newton-cauchy-truncated-cg.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$\nbe twice continuously differentiable, meaning that $f$ is $C^1$ and its\ngradient is $C^1$.\nWrite $g(x):=\\nabla f(x)$ and $H(x):=\\nabla^2f(x)$ using\n[[def-jacobian-matrix-and-gradient]] and\n[[def-hessian-and-euclidean-critical-point]]. The identity matrix $I_n$ and\nmatrix-vector products have the convention of\n[[def-matrix-product-and-identity-matrix]]. Use the matrix-free access\nmodel of [[def-matrix-free-access-model-for-krylov-methods]] for products\n$v\\mapsto(H(x)+\\lambda I_n)v$.\n\n**Linear-solver input:** a fixed deterministic Krylov procedure $K$ which accepts a\nmatrix-free linear operator $A$, a right-hand side $b$, a tolerance $\\tau\\ge0$,\nand a finite inner-iteration budget $M\\in\\mathbb N_0$. It returns either\n`no-candidate` or `candidate` with a vector $p$ and an iteration count\n$m\\in\\{0,1,\\ldots,M\\}$ satisfying $p\\in K_m(A,b)$, where $K_m$ is as defined\nby [[def-krylov-subspace-of-a-matrix-and-start-vector]]. A candidate's residual\nstatus is never trusted: this algorithm recomputes\nthe requested residual using the supplied operator. **Other inputs:** $x_0\\in U$, outer update budget\n$N\\in\\mathbb N_0$, forcing values $\\eta_k\\in[0,\\bar\\eta]$ for a fixed\n$0\\le\\bar\\eta<1$, descent parameter $\\sigma\\in(0,1)$, regularization factor\n$\\gamma>1$, initial shift $\\lambda_0>0$, shift cap $\\lambda_{\\max}\\ge\\lambda_0$,\nregularized-attempt budget $J\\in\\mathbb N_0$, inner budget $M$, and the\nparameters and finite expansion/zoom budgets of\n[[alg-bracketing-zoom-strong-wolfe-search]]. **Output:** the last valid\niterate and one of `stationary`, `iteration-budget-exhausted`,\n`no-descent-direction`, or `line-search-failure`; in the last case also\nreturn the underlying line-search failure cause.\n\nAt iteration $k=0,1,\\ldots,N$:\n\n1. Compute $g_k:=g(x_k)$. If $g_k=0$, return $(x_k,\\texttt{stationary})$.\n   If $k=N$, return $(x_k,\\texttt{iteration-budget-exhausted})$.\n2. Set $\\lambda:=0$. For $j=0,1,\\ldots,J$, call $K$ on\n   $A_\\lambda v:=H(x_k)v+\\lambda I_nv$, right-hand side $-g_k$, tolerance\n   $\\eta_k\\|g_k\\|_2$, and budget $M$. A `no-candidate` result is a rejected\n   attempt. If it returns a candidate $p$, compute\n   $r:=(H(x_k)+\\lambda I_n)p+g_k$. Accept this linear solve only when\n   $\\|r\\|_2\\le\\eta_k\\|g_k\\|_2$ and\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$; otherwise reject it.\n   If the attempt is rejected and either $j=J$ or $\\lambda=\\lambda_{\\max}$, stop the\n   regularization loop. Otherwise set\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\lambda_0\\}$ when $\\lambda=0$, and\n   $\\lambda:=\\min\\{\\lambda_{\\max},\\gamma\\lambda\\}$ when $\\lambda>0$;\n   then continue with the next $j$.\n3. If no regularized attempt was accepted, set $p:=-g_k$ and check\n   $\\langle g_k,p\\rangle<-\\sigma\\|g_k\\|_2\\|p\\|_2$. If this check fails,\n   return `no-descent-direction`. For the stated $\\sigma$ and $g_k\\ne0$ it\n   passes, but the check remains part of the procedure.\n4. Call [[alg-bracketing-zoom-strong-wolfe-search]] at $x_k$ in direction $p$.\n   If it returns failure, return $(x_k,\\texttt{line-search-failure},s)$, where $s$ is\n   the returned line-search failure cause. Otherwise, for its returned strong Wolfe step $t_k$,\n   set $x_{k+1}:=x_k+t_kp$ and continue.\n\nThe first unregularized system uses the forcing residual\n$\\|H(x_k)p+g_k\\|_2\\le\\eta_k\\|g_k\\|_2$. A regularized attempt checks the\nresidual for the shifted system instead. Finite inner, regularization, and\nline-search budgets can return failure; the procedure makes no global\nconvergence claim. The local rate theorem applies only to an unshifted\n$\\lambda=0$ sequence taking full steps $t_k=1$ and remaining in its stated\nlocal tube. This algorithm does not assert that every run enters that branch.",
+    "consumer_use_excerpts": [
+      "[F5] [[alg-inexact-newton-krylov-with-descent-safeguard]]: with zero shift,\na candidate $p$ is accepted as a linear solve when\n$\\|Bp+g\\|_2\\le\\eta_k\\|g\\|_2$ and\n$g^Tp<-\\sigma\\|g\\|_2\\|p\\|_2$; the descent fallback is $p=-g$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[326]",
+      "missing[7].currentDeclaredOwnedEdges[2]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-72.pages.json#deps",
+      "items/ex-trust-region-newton-cauchy-truncated-cg.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/38",
+    "alpha_review": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-72-3a.md"
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-trust-region-newton-cauchy-truncated-cg",
+    "supplier": "def-wolfe-and-strong-wolfe-conditions",
+    "consumer_batch": "72",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "FactF6/proof1.2 choose c1=1/10,c2=1/4 and compute phi(t)=-4t+2t², phi(1)=-2≤-2/5 and |phi_prime(1)|=0≤1. This is precisely the source strong-Wolfe test on the displayed descent ray, independently of trust-region feasibility.",
+    "inspected_paths": [
+      "items/def-wolfe-and-strong-wolfe-conditions.md#Definition",
+      "items/ex-trust-region-newton-cauchy-truncated-cg.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$\n([[def-c-one-map-and-local-inverse]]), let $x\\in D$, and let\n$p\\in\\mathbb R^n\\setminus\\{0\\}$. Define the open parameter set $S_{x,p}:=\\{t\\in\\mathbb R:x+tp\\in D\\}$,\nwhich contains $0$, the feasible ray $T_{x,p}:=S_{x,p}\\cap[0,\\infty)$,\nand $\\phi(t):=f(x+tp)$ for $t\\in S_{x,p}$. At every $t\\in S_{x,p}$,\nincluding $0$, the chain rule gives $\\phi'(t)=Df(x+tp)p$.\nBy [[thm-total-derivative-computes-directional-and-partial-derivatives]],\nthe matrix of $Df$ is the Jacobian, whose scalar-field row is the transpose\nof the gradient. Hence\n$\\phi'(t)=\\langle\\nabla f(x+tp),p\\rangle$, using the gradient convention\nof [[def-jacobian-matrix-and-gradient]] and the Euclidean inner product of\n[[def-euclidean-inner-product]]. A direction is a **descent direction** at\n$x$ when $\\phi'(0)=\\langle\\nabla f(x),p\\rangle<0$.\n\nAssume for the line-search conditions below that $p$ is a descent direction\nat $x$.\nFix constants $0<c_1<c_2<1/2$. A feasible step $t>0$ is a **Wolfe step**\nwhen\n$$\n\\phi(t)\\le\\phi(0)+c_1t\\phi'(0),\\qquad \\phi'(t)\\ge c_2\\phi'(0).\n$$\nIt is a **strong Wolfe step** when it satisfies the first inequality and\n$$\n|\\phi'(t)|\\le c_2|\\phi'(0)|.\n$$\nThe first inequality is the Armijo sufficient-decrease condition. The second\nWolfe inequality is the curvature condition. Every strong Wolfe step is a\nWolfe step, because $\\phi'(0)<0$ and the strong curvature bound implies\n$\\phi'(t)\\ge-c_2|\\phi'(0)|=c_2\\phi'(0)$.\n\nFor a descent direction define its **descent angle** $\\theta\\in[0,\\pi/2)$ by\n$$\n\\cos\\theta:=-\\frac{\\langle\\nabla f(x),p\\rangle}{\\|\\nabla f(x)\\|_2\\|p\\|_2}.\n$$\nThe denominator is nonzero for a descent direction. The Cauchy–Schwarz\ninequality [[thm-cauchy-schwarz-and-the-euclidean-norm]] ensures $0<\\cos\\theta\\le1$.",
+    "consumer_use_excerpts": [
+      "[F6] [[def-wolfe-and-strong-wolfe-conditions]]: a strong Wolfe step obeys\n$\\phi(t)\\le\\phi(0)+c_1t\\phi'(0)$ and\n$|\\phi'(t)|\\le c_2|\\phi'(0)|$, with $0<c_1<c_2<1/2$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[327]",
+      "missing[7].currentDeclaredOwnedEdges[3]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-72.pages.json#deps",
+      "items/ex-trust-region-newton-cauchy-truncated-cg.md#deps"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/39",
+    "alpha_review": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-72-3a.md"
+  },
+  {
+    "kind": "page",
+    "consumer": "trust-region-and-cubic-regularization-methods",
+    "supplier": "krylov-methods-and-lanczos-convergence",
+    "consumer_batch": "72",
+    "supplier_batch": "34",
+    "status": "verified",
+    "evidence": "Declared Krylov context only. The trust-region page defines its own finite truncated-CG/boundary checks; its trust-region and cubic complexity arguments do not borrow a generic Krylov iteration convergence or wall-clock claim.",
+    "inspected_paths": [
+      "library/numerical-linear-algebra-and-approximation/krylov-methods-and-lanczos-convergence.md#body",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/trust-region-and-cubic-regularization-methods.md#body",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-72.pages.json#requires"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[324]",
+      "missing[7].currentDeclaredOwnedEdges[0]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-72.pages.json#requires"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/36",
+    "alpha_review": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-72-3a.md"
+  },
+  {
+    "kind": "page",
+    "consumer": "trust-region-and-cubic-regularization-methods",
+    "supplier": "nonconvex-line-search-and-inexact-newton-methods",
+    "consumer_batch": "72",
+    "supplier_batch": "58",
+    "status": "verified",
+    "evidence": "Context for the explicit comparison example: the source unshifted residual/descent safeguard and finite strong-Wolfe test are checked on a displayed quadratic. Trust-region/ARC convergence and radius rules remain local, with no transfer of an unconstrained globalization theorem.",
+    "inspected_paths": [
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/nonconvex-line-search-and-inexact-newton-methods.md#body",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/trust-region-and-cubic-regularization-methods.md#body",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-72.pages.json#requires"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "",
+    "consumer_use_excerpts": [],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[325]",
+      "missing[7].currentDeclaredOwnedEdges[1]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-72.pages.json#requires"
+    ],
+    "review_semantics": "Exact named source→consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/37",
+    "alpha_review": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-72-3a.md"
+  }
+]

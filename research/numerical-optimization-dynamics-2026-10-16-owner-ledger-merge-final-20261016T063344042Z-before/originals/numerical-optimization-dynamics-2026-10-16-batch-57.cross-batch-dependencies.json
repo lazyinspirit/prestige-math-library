@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "57",
+  "batch_dependency_level": 3,
+  "prerequisite_batches": [
+    "24",
+    "38"
+  ],
+  "scheduling_input_sha256": "ae8957b82a8ad2c9895cb3092af32195034be1b16610dd6fc6881d1df25039e0",
+  "suppliers": [
+    {
+      "supplier_batch": "24",
+      "supplier_pair": "NA-28",
+      "supplier_page": "finite-element-meshes-and-interpolation",
+      "status": "draft bodies and proofs inspected; Step 1 readiness records ready",
+      "required_interface": {
+        "mesh": "A finite matching affine simplicial mesh of a bounded polyhedral open set; cells are nondegenerate, cover the closure, have disjoint interiors, and intersect face-to-face.",
+        "broken_and_conforming_spaces": "The broken space is the finite product of cellwise polynomial spaces; conformity requires equal traces on interior facets; zero boundary means zero polynomial trace on every boundary facet.",
+        "sobolev_membership": "For real-valued conforming polynomials on a finite matching mesh, the cellwise gradient is the weak gradient. With zero boundary facet trace and Countable Choice, the function lies in W^{1,p}_0 for finite p and satisfies the stated Poincare estimate.",
+        "scope_used": "Batch 57 uses only mesh, P0 broken-space, continuous P1 conformity, and zero-boundary interfaces. It makes no interpolation-rate or shape-regularity claim."
+      },
+      "actual_supplier_item_ids": [
+        "def-matching-affine-simplicial-meshes",
+        "def-broken-and-conforming-polynomial-spaces",
+        "thm-matching-continuous-piecewise-polynomials-are-wkp",
+        "thm-zero-boundary-piecewise-polynomials-in-w10p"
+      ],
+      "source_excerpt": "def-matching-affine-simplicial-meshes, Definition: “A **matching affine simplicial mesh** of a bounded polyhedral open set\n$\\Omega\\subset\\mathbb R^d$ is a finite set of closed, nondegenerate $d$-simplices such that their union is $\\overline\\Omega$, their interiors are pairwise disjoint, $\\Omega$ is the interior of their union, and the intersection of two distinct cells is either empty or a whole face of each.”\n\ndef-broken-and-conforming-polynomial-spaces, Definition: “The **broken polynomial space** is the finite product\n$$V_h^{\\mathrm{br}}:=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb K^q),$$\nviewed as functions defined almost everywhere cell by cell.” The **conforming polynomial space** is\n$$V_h^{\\mathrm{conf}}:=\\{v\\in V_h^{\\mathrm{br}}:v|_{F,K}=v|_{F,K'}\\text{ on every interior facet }F\\}.$$”\n\nthm-matching-continuous-piecewise-polynomials-are-wkp, Statement: “Then $v\\in W^{1,p}(\\Omega)$. Its weak gradient agrees almost everywhere on each cell with the ordinary cellwise polynomial gradient.”\n\nthm-zero-boundary-piecewise-polynomials-in-w10p, Statement: “Then\n$$v\\in W^{1,p}_0(\\Omega),\\qquad \\|v\\|_{L^p(\\Omega)}\\le C_\\Omega\\|\\nabla v\\|_{L^p(\\Omega)}.$$”",
+      "readiness_claim": "The four actual item records are ready and the current statements and complete proofs were inspected. This records prerequisite-interface verification only, not independent approval.",
+      "affected_claims": [
+        "ex-nonconforming-broken-eigenvalue-below-dirichlet-ground-state: the square diagonal mesh and cellwise P0 trial function satisfy the matching-mesh and broken-space definitions.",
+        "ex-dirichlet-square-conforming-p1-eigenvalue-upper-bound: shared nodal values give matching P1 traces, and zero boundary vertex values give zero trace on every boundary edge; the actual zero-boundary theorem supplies H0^1 membership."
+      ],
+      "authoring_disposition": "Used the exact current supplier bodies and their recorded ready decisions. The square example checks the finite fan mesh and boundary traces directly; the broken example remains outside the conforming subspace. No Bramble–Hilbert, shape-regularity, or interpolation-rate claim is imported."
+    },
+    {
+      "supplier_batch": "38",
+      "supplier_pair": "NA-29",
+      "supplier_page": "ceas-lemma-and-aubin-nitsche-error-estimates",
+      "status": "draft bodies and proofs inspected; producer Step 1 readiness records missing",
+      "required_interface": {
+        "Galerkin_orthogonality": "For a common variational equation and its conforming Galerkin solution, a(u-u_h,v_h)=0 for every v_h in V_h.",
+        "Cea": "For Countable Choice, a bounded coercive form on a Hilbert space, bounded conjugate-linear data, and finite-dimensional V_h, continuous and discrete solutions exist uniquely and satisfy the M/alpha estimate.",
+        "symmetric_best_approximation": "Only when the form is Hermitian, the Galerkin solution is the exact best approximation in the induced energy norm.",
+        "scope_used": "Batch 57 uses the symmetric projection/best-approximation route. It does not use the nonsymmetric extension, Aubin–Nitsche duality, H2 regularity, or any interpolation rate."
+      },
+      "actual_supplier_item_ids": [
+        "lem-galerkin-orthogonality-for-conforming-galerkin-approximations",
+        "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+        "cor-symmetric-galerkin-best-approximation-in-energy-norm"
+      ],
+      "source_excerpt": "lem-galerkin-orthogonality-for-conforming-galerkin-approximations, Statement: “If $u\\in V$ and $u_h\\in V_h$ satisfy\n$$a(u,v)=F(v)\\quad(v\\in V),\\qquad a(u_h,v_h)=F(v_h)\\quad(v_h\\in V_h),$$\nthen\n$$a(u-u_h,v_h)=0\\qquad\\text{for every }v_h\\in V_h.$$”\n\nthm-cea-quasi-optimality-for-conforming-galerkin-approximations, Statement: “The solutions satisfy\n$$\\|u-u_h\\|_V\\le\\frac M\\alpha\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.$$”\n\ncor-symmetric-galerkin-best-approximation-in-energy-norm, Statement: “and suppose additionally that $a$ is Hermitian:\n$a(v,w)=\\overline{a(w,v)}$. Then\n$$\\|v\\|_a:=\\sqrt{a(v,v)}$$\nis the energy norm and the Galerkin solution is its best approximation:\n$$\\|u-u_h\\|_a=\\inf_{v_h\\in V_h}\\|u-v_h\\|_a.$$”",
+      "readiness_claim": "none; the three actual bodies and complete proofs were read and their interfaces checked, but the producer Step 1 readiness records are absent and no producer acceptance is claimed",
+      "affected_claims": [
+        "lem-conforming-energy-projection-is-best-approximation: existence/linearity of P_h, orthogonality, exact energy best approximation, and injectivity on E when δ_a(E,V_h)<1.",
+        "lem-conforming-galerkin-ritz-matrix-error-is-quadratic-in-gap: uses the verified projection property to control the stiffness and mass Gram errors.",
+        "thm-conforming-galerkin-eigenvalue-upper-bound-quadratic-gap-error: uses the exact projection image and Ritz min–max to prove the quadratic upper error.",
+        "thm-conforming-galerkin-eigenspace-gap-under-isolated-cluster: uses the energy projection to build the compact self-adjoint Galerkin solution operator and residual bound."
+      ],
+      "authoring_disposition": "Continue drafting from the complete actual statements and proofs, as required for cross-pair authoring. The direct interfaces and hypotheses were checked against the dependent arguments; the missing producer Step 1 records remain an owner reconciliation check. Do not interpret this consumer evidence as supplier readiness, mathematical approval, or a reason to omit the dependent claims."
+    }
+  ],
+  "outgoing_interfaces": []
+}

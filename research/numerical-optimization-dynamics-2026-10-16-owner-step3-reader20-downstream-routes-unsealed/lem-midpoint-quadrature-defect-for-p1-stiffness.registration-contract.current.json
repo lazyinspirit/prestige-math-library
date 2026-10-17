@@ -1,0 +1,145 @@
+{
+  "risk": "The defect is one-dimensional P1 with a C2 coefficient; it is an exact-arithmetic bound, not a roundoff estimate.",
+  "kind": "lemma",
+  "citations": [
+    {
+      "fact": "F1",
+      "source": "alg-composite-midpoint-rule",
+      "source_section": "Definition",
+      "quote": "Input real numbers $a<b$, an integer $n\\ge1$, and a real-valued function\n$f:[a,b]\\to\\mathbb R$ evaluable at every point of $[a,b]$. Put\n$h=(b-a)/n$ and $m_j=a+(j+\\tfrac12)h$ for $0\\le j<n$. The composite midpoint\nrule returns\n\n$$Q_M(f;a,b,n):=h\\sum_{j<n} f(m_j).$$\n\nThe sum is the finite sum of [[def-finite-sum]]. The admissibility conditions\n$a<b$ and $n\\ge1$ ensure $h>0$ and all $m_j\\in(a+jh,a+(j+1)h)$. If an input\nfails either condition, the procedure returns invalid-grid; it makes no\nquadrature claim for that input. The rule is an exact-real formula; floating\npoint evaluation and summation error are separate from its quadrature error.",
+      "uses": [
+        "1.1"
+      ]
+    },
+    {
+      "fact": "F2",
+      "source": "thm-composite-midpoint-error-bound",
+      "source_section": "Statement",
+      "quote": "Let $a<b$, let $n\\ge1$ be an integer, and put $h=(b-a)/n$. If\n$f\\in C^2([a,b])$, define $M_2=\\max_{x\\in[a,b]}|f''(x)|$. The composite\nmidpoint value $Q_M(f;a,b,n)$ of [[alg-composite-midpoint-rule]] satisfies\n\n$$\\left|\\int_a^b f(x)\\,dx-Q_M(f;a,b,n)\\right|\\le\\frac{(b-a)h^2}{24}M_2.$$\n\nThe integral is the Riemann integral. This is an exact-arithmetic quadrature\nbound; evaluation and summation roundoff are not included.",
+      "uses": [
+        "1.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "thm-additivity-over-subintervals",
+      "source_section": "Statement",
+      "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:\n\n1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of [[def-oriented-integral]],\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where [[def-oriented-integral]] earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+      "uses": [
+        "3.1"
+      ]
+    },
+    {
+      "fact": "F4",
+      "source": "lem-triangle-inequality-finite",
+      "source_section": "Statement",
+      "quote": "Let $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals and $n \\in \\mathbb{N}$,\nwith finite sums as in [[def-finite-sum]] and the absolute value as in\n[[def-abs-value]]. Then\n\n$$\\Big|\\sum_{k<n} a_k\\Big| \\le \\sum_{k<n} |a_k|.$$",
+      "uses": [
+        "3.1"
+      ]
+    },
+    {
+      "fact": "F5",
+      "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "source_section": "Statement",
+      "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+      "uses": [
+        "3.1"
+      ]
+    },
+    {
+      "fact": "F6",
+      "source": "thm-extreme-value-r",
+      "source_section": "Statement",
+      "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be **nonempty** and compact\n([[def-open-cover-r]]). Then $\\sup f[K]$ and $\\inf f[K]$ exist and are\n**attained**: there are $p, q \\in K$ with\n\n$$f(q) \\;=\\; \\inf f[K] \\;\\le\\; f(x) \\;\\le\\; \\sup f[K] \\;=\\; f(p) \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, the set $f[K]$ has a maximum and a minimum\n([[def-max-min]]), namely $\\max f[K] = f(p)$ and $\\min f[K] = f(q)$.\n\n**Nonemptiness of $K$ is a hypothesis, not an oversight.** For $K = \\varnothing$\nthe set $f[K]$ is empty, and neither a supremum nor a maximum of the empty set\nexists in this library ([[def-complete-ordered-field]] supplies suprema of\nnonempty sets bounded above only).\n\n**This theorem is stated twice in this library, on purpose.** Its metric-space\ntwin is [[thm-extreme-value-metric]], proved from the cover machinery of metric\nspaces; the proof below is $\\mathbb{R}$-native, running through Heine-Borel for\n$\\mathbb{R}$ and the order-completeness of $\\mathbb{R}$, and it uses no cover\nargument beyond the one already spent in\n[[thm-continuous-image-of-a-compact-set-r]]. That the two statements are the\nsame statement in two vocabularies is proved in\n[[lem-real-and-metric-notions-agree]], later on this page.",
+      "uses": [
+        "3.1"
+      ]
+    }
+  ],
+  "derivations": [
+    {
+      "id": "step-1-1",
+      "claim": "On a cell $K$, $v_h'|_K$ and $w_h'|_K$ are constants, so $g_K(x):=A(x)v_h'|_Kw_h'|_K$ is $C^2$; the discrete sample is the one-panel midpoint rule [F1]. Also $\\|g_K''\\|_\\infty\\le\\|A''\\|_\\infty|v_h'|_K|w_h'|_K$. Applying [F2] with $n=1$ bounds the cell error by $h_K^3\\|A''\\|_\\infty|v_h'|_K|w_h'|_K/24$.",
+      "step": "1.1",
+      "inputs": [
+        "given",
+        "F1",
+        "F2",
+        "construct"
+      ]
+    },
+    {
+      "id": "step-2-1",
+      "claim": "Since $\\|v_h'\\|_{L^2(K)}=\\sqrt{h_K}|v_h'|_K$ and similarly for $w_h$, step 1.1 equals at most $h_K^2\\|A''\\|_\\infty\\|v_h'\\|_{L^2(K)}\\|w_h'\\|_{L^2(K)}/24$.",
+      "step": "2.1",
+      "inputs": [
+        "step 1.1",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-3-1",
+      "claim": "Repeated application of [F3], by induction over the finite partition, expresses the total form difference as the sum of cell errors. Then [F4] and step 2.1 bound its absolute value by $h^2\\|A''\\|_\\infty/24$ times $\\sum_K\\|v_h'\\|_{L^2(K)}\\|w_h'\\|_{L^2(K)}$. Apply [F5] to these finite cell-norm lists; the result is the displayed global estimate.",
+      "step": "3.1",
+      "inputs": [
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "step 2.1",
+        "algebra"
+      ]
+    }
+  ],
+  "routine_steps": [],
+  "boundaries": [
+    {
+      "case": "empty",
+      "status": "not_applicable",
+      "reason": "Midpoint quadrature defect for one-dimensional P1 stiffness: The supplied-data/domain clause for the empty-input distinction is stated in Statement: Let $0=x_0<\\cdots<x_N=1$ be a finite partition with cell lengths $h_K$ and maximum $h$. Let $A\\in C^2([0,1])$, and let $v_h,w_h$ be continuous piecewise-linear functions. Define the exact and midpoint stiffness forms by"
+    },
+    {
+      "case": "zero",
+      "status": "checked",
+      "evidence": "Step 1.1 has zero cell error when either derivative is zero."
+    },
+    {
+      "case": "one",
+      "status": "checked",
+      "evidence": "Step 1.1 applies to one cell, and step 3.1 then has a one-term cell sum."
+    },
+    {
+      "case": "degenerate",
+      "status": "not_applicable",
+      "reason": "The source retains exactly the model, pairing, grid, or example displayed below. This row asserts no substitute construction for an undefined or collapsed model and does not exclude vanishing data already covered by its formulas. Actual Statement clause: Let $0=x_0<\\cdots<x_N=1$ be a finite partition with cell lengths $h_K$ and maximum $h$. Let $A\\in C^2([0,1])$, and let $v_h,w_h$ be continuous piecewise-linear functions. Define the exact and midpoint stiffness forms by\n\n$$a(v_h,w_h):=\\sum_K\\int_KA(x)v_h'(x)w_h'(x)\\,dx,\\qquad a_h(v_h,w_h):=\\sum_Kh_KA(m_K)v_h'|_Kw_h'|_K,$$\n\nwhere $m_K$ is the cell midpoint and the cell derivatives are constant. Then\n\n$$|a(v_h,w_h)-a_h(v_h,w_h)|\\le\\frac{h^2}{24}\\|A''\\|_{L^\\infty(0,1)}\\|v_h'\\|_{L^2(0,1)}\\|w_h'\\|_{L^2(0,1)}.$$\n\nThe midpoint rule is exact for this stiffness integrand when $A$ is affine; for a general $C^2$ coefficient the displayed defect is retained. The bound is exact-arithmetic quadrature error, separate from roundoff."
+    },
+    {
+      "case": "endpoints",
+      "status": "not_applicable",
+      "reason": "Midpoint quadrature defect for one-dimensional P1 stiffness: The actual endpoint/domain or finite stopping-boundary clause is stated in Statement: Let $0=x_0<\\cdots<x_N=1$ be a finite partition with cell lengths $h_K$ and maximum $h$. Let $A\\in C^2([0,1])$, and let $v_h,w_h$ be continuous piecewise-linear functions. Define the exact and midpoint stiffness forms by"
+    },
+    {
+      "case": "nonempty-choice",
+      "status": "not_applicable",
+      "reason": "Midpoint quadrature defect for one-dimensional P1 stiffness: The stated construction/selection regime, with all declared ambient axioms retained is stated in Statement: Let $0=x_0<\\cdots<x_N=1$ be a finite partition with cell lengths $h_K$ and maximum $h$. Let $A\\in C^2([0,1])$, and let $v_h,w_h$ be continuous piecewise-linear functions. Define the exact and midpoint stiffness forms by The existing argument records step 1.1: On a cell $K$, $v_h'|_K$ and $w_h'|_K$ are constants, so $g_K(x):=A(x)v_h'|_Kw_h'|_K$ is $C^2$; the discrete sample is the one-panel midpoint rule [F1]. Also $\\|g_K''\\|_\\infty\\le\\|A''\\|_\\infty|v_h'|_K|w_h'|_K$. Applying [F2] with $n=1$ bounds the cell error by $h_K^3\\|A''\\|_\\infty|v_h'|_K|w_h'|_K/24$. [given, F1, F2, construct]; step 3.1: Repeated application of [F3], by induction over the finite partition, expresses the total form difference as the sum of cell errors. Then [F4] and step 2.1 bound its absolute value by $h^2\\|A''\\|_\\infty/24$ times $\\sum_K\\|v_h'\\|_{L^2(K)}\\|w_h'\\|_{L^2(K)}$. Apply [F5] to these finite cell-norm lists; the result is the displayed global estimate. [F3, F4, F5, F6, step 2.1, algebra] ∎ This worksheet introduces no additional selection axiom and does not remove any choice assumption in the item or its suppliers."
+    },
+    {
+      "case": "iff-forward",
+      "status": "not_applicable",
+      "reason": "Midpoint quadrature defect for one-dimensional P1 stiffness: The asserted conclusion is a construction, estimate, or conditional assertion, rather than a forward half of an equivalence. The actual Statement conclusion is: The midpoint rule is exact for this stiffness integrand when $A$ is affine; for a general $C^2$ coefficient the displayed defect is retained. The bound is exact-arithmetic quadrature error, separate from roundoff."
+    },
+    {
+      "case": "iff-reverse",
+      "status": "not_applicable",
+      "reason": "Midpoint quadrature defect for one-dimensional P1 stiffness: The claim does not assert the converse obtained by turning its conclusion into sufficient hypotheses. The actual Statement conclusion is: The midpoint rule is exact for this stiffness integrand when $A$ is affine; for a general $C^2$ coefficient the displayed defect is retained. The bound is exact-arithmetic quadrature error, separate from roundoff."
+    }
+  ],
+  "axioms": [],
+  "finite_checks": [],
+  "finite_smoke": [],
+  "risk_review": {
+    "disposition": "author-review-required",
+    "evidence": "The defect is one-dimensional P1 with a C2 coefficient; it is an exact-arithmetic bound, not a roundoff estimate."
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "2",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "thm-csr-matvec-algorithm-terminates-with-status",
+      "model": "gpt-6-luna",
+      "context_sha256": "944ff86e237594c4eceba77fc357f8f41c135bff4d5481d6ef12aff6899c588a",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The original termination argument follows the algorithm Definition, but L1 omitted its dimension tests and L2 omitted endpoint, monotonicity and column-bound conditions used in the proof. This is a nonfatal incomplete dependency restatement: all conditions are explicitly present in the existing algorithm. Expanded L1-L3 and the proof to license finite scans, valid accesses, partitioning and field-valued outputs, including m=0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-ordered-elimination-creates-fill",
+      "model": "gpt-6-luna",
+      "context_sha256": "2710bc695fa3bd77e38c18764f854d77c896d86bf5b7ac9274b0589f48a451f1",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The original step 1.1 cites L3, whose explicit premise requires all pivots nonzero, while computing later pivots to establish that premise. The conditional supplier is not yet applicable at that use. Defined the recurrence locally in A1 and checked current pivots successively: 2, 3/2 and 4/3. Only after these computations is the support theorem L4 applied. The graph update adds exactly the absent edge {0,2}, whose Schur entry is -1/2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-csr-matvec-algorithm-terminates-with-status",
+      "disposition": "repaired",
+      "post_sha256": "61528ed8a6da02187ebf86f7817acfc76a63e45efc4ccf9788d4ccca781290c3",
+      "review_context_sha256": "f2be824853b2572751a88e661730e7bfdc5a9ca2ff56fc396408110737e5b7c5",
+      "reason": "The original termination argument follows the algorithm Definition, but L1 omitted its dimension tests and L2 omitted endpoint, monotonicity and column-bound conditions used in the proof. This is a nonfatal incomplete dependency restatement: all conditions are explicitly present in the existing algorithm. Expanded L1-L3 and the proof to license finite scans, valid accesses, partitioning and field-valued outputs, including m=0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-ordered-elimination-creates-fill",
+      "disposition": "repaired",
+      "post_sha256": "41a592679828d49f4addbaf43b88153c45c2de06f32a622a0306a0afe5b13048",
+      "review_context_sha256": "f966dbabf926604d2d3eb7a4b0b4d28d2adf70eaf6df4453016a23cd70b5c2d4",
+      "reason": "The original step 1.1 cites L3, whose explicit premise requires all pivots nonzero, while computing later pivots to establish that premise. The conditional supplier is not yet applicable at that use. Defined the recurrence locally in A1 and checked current pivots successively: 2, 3/2 and 4/3. Only after these computations is the support theorem L4 applied. The graph update adds exactly the absent edge {0,2}, whose Schur entry is -1/2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-resolved-finding",
+      "id": "thm-csr-matvec-algorithm-terminates-with-status",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "facts-block",
+      "reason": "The original termination argument follows the algorithm Definition, but L1 omitted its dimension tests and L2 omitted endpoint, monotonicity and column-bound conditions used in the proof. This is a nonfatal incomplete dependency restatement: all conditions are explicitly present in the existing algorithm. Expanded L1-L3 and the proof to license finite scans, valid accesses, partitioning and field-valued outputs, including m=0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-resolved-finding",
+      "id": "ex-ordered-elimination-creates-fill",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "locus": "proof-step",
+      "step": "1.1",
+      "reason": "The original step 1.1 cites L3, whose explicit premise requires all pivots nonzero, while computing later pivots to establish that premise. The conditional supplier is not yet applicable at that use. Defined the recurrence locally in A1 and checked current pivots successively: 2, 3/2 and 4/3. Only after these computations is the support theorem L4 applied. The graph update adds exactly the absent edge {0,2}, whose Schur entry is -1/2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "interface_comparison": "The original theorem Statement and example Example sections are unchanged; edits affect only Facts, Proof/Verification and their owning contract rows. No Statement or Definition changes, new interfaces, dependency edits or downstream propagation.",
+    "mathematical_evidence": [
+      "CSR: algorithm Definition steps 1-2 supply every omitted validation condition. Successful validation partitions stored indices by 0=r_0<=...<=r_m=s; zero rows force s=0. Finite loops and field closure prove termination and the output type without AC.",
+      "Elimination: local current-pivot checks yield 2, 3/2, 4/3; S^1 on labels (0,2) has diagonal 3/2 and off-diagonal -1/2. The sole missing pair {0,2} is added, and later stages have at most one remaining neighbor. The support theorem is used only after verifying symmetry, rational-field and nonzero-pivot hypotheses."
+    ],
+    "evidence_paths": [
+      "items/alg-csr-matrix-vector-product-with-validation.md#Definition",
+      "items/def-csr-matrix-with-stored-entry-semantics.md#Definition",
+      "items/def-symmetric-structural-elimination-graph-and-ordering.md#Definition",
+      "items/thm-filled-graph-contains-schur-complement-support.md#Statement",
+      "items/thm-rat-field.md#Statement",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-2.proof-contracts.json",
+      "library/numerical-linear-algebra-and-approximation/sparse-matrix-models-and-kernel-costs.md",
+      "library/numerical-linear-algebra-and-approximation/sparse-matrix-models-and-kernel-costs-examples.md"
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/thm-csr-matvec-algorithm-terminates-with-status.md items/ex-ordered-elimination-creates-fill.md",
+        "exit_code": 0,
+        "result": "2 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs --json items/thm-csr-matvec-algorithm-terminates-with-status.md items/ex-ordered-elimination-creates-fill.md",
+        "exit_code": 0,
+        "result": "2 checked, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-csr-matvec-algorithm-terminates-with-status.md items/ex-ordered-elimination-creates-fill.md",
+        "exit_code": 0,
+        "result": "2 items, 5 steps, 0 defects"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-2.proof-contracts.json --strict --items thm-csr-matvec-algorithm-terminates-with-status,ex-ordered-elimination-creates-fill --json",
+        "exit_code": 0,
+        "result": "Both contracts checked, no errors or warnings"
+      }
+    ],
+    "check_repair_history": "An intermediate contract check reported that an anticipatory prose reference to L4 in step 1.1 was unmapped. Removed that reference, synchronized the derivation under the shared lock, and obtained the successful scoped contract and final item checks above. The discarded intermediate review hashes are not used.",
+    "published_ledger": "No new published-item defect was found, and no published-ledger modification is proposed. The Step-4 digest already routes the outside-lane sparse-pricing initialization-order wording alert; it was not independently adjudicated here.",
+    "source_review": "These finite validation and rational-elimination arguments are familiar. Consulted the listed local suppliers and page interfaces; no external source reading or independent review of these repairs is claimed.",
+    "shared_metadata": "Acquired/reread/edited/checked/released tools/step5-shared-write-lock.mjs for each owning-contract update; no shared ledger was edited.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and independent current-context rejudgment; the repaired fatal finding still counts for this round."
+  }
+}

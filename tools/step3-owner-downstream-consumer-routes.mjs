@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, lstatSync } from 'node:fs';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { split, yaml } from './pathway-lib.mjs';
-import { historicalStep3Manifest } from './step3-manifest-history.mjs';
+import { historicalStep3Manifest, PRECLOSURE_MANIFEST_POLICY } from './step3-manifest-history.mjs';
 import { draftOwnerMatcher } from './run-draft-ownership.mjs';
 import { requiredPageHash as hash } from './step3-owner-required-page-routes.mjs';
 export const downstreamConsumerHash = hash;
@@ -87,9 +87,24 @@ export function validateDownstreamConsumerRoute(root,run,e,binding) {
   assert(front(before).id===e.supplier_id && front(after).id===e.supplier_id
     && sha(before)===pre.hashes?.[e.supplier_id]?.item_sha256
     && sha(after)===post.hashes?.[e.supplier_id]?.item_sha256 && sha(before)!==sha(after),'assigned supplier did not actually change pre/post');
+  // After genuine marked closure, route validation authenticates historical
+  // manifest evidence through the same sealed captures as step3-close verify.
+  // Before closure this remains strict live preclosure routing.
+  const closedPath=`research/${run}-step3-closure.json`;
+  const closed=existsSync(resolve(root,closedPath))?JSON.parse(bytes(root,closedPath)):null;
+  const frozenArtifacts=closed?.version===3&&closed.run===run&&closed.status==='closed'
+    &&closed.basis==='dependency-ordered-step3a'&&closed.manifest_evidence_policy===PRECLOSURE_MANIFEST_POLICY
+    &&closed.artifacts&&typeof closed.artifacts==='object'&&!Array.isArray(closed.artifacts)
+    ?closed.artifacts:null;
   for(const [key,batch,item] of [['manifest',e.batch,e.supplier_id],['consumer_manifest',e.consumer_batch,e.consumer_id]]) {
-    const manifest=JSON.parse(ref(root,e[key],`research/${run}-batch-${batch}.pages.json`));
-    assert(inventory(manifest).filter(x=>x===item).length===1,'subject absent or duplicated in assigned manifest');
+    assert(binding.path===`research/${run}-step3-owner-downstream-consumer-routes.json`,'wrong route binding');
+    const registry=JSON.parse(bytes(root,binding.path));
+    const index=registry.routes?.findIndex(candidate=>hash(candidate)===binding.entry_sha256);
+    assert(Number.isSafeInteger(index)&&index>=0&&hash(e)===binding.entry_sha256,'lost exact route index');
+    const manifest=historicalStep3Manifest(root,run,batch,e[key],
+      {kind:'downstream-consumer',registry:binding.path,index,field:key},{preclosure:true,frozenArtifacts});
+    for(const value of [manifest.historical,manifest.current])
+      assert(inventory(JSON.parse(value)).filter(x=>x===item).length===1,'subject absent or duplicated in historical/current manifest');
   }
   // This immutable owner capture establishes the routing edge, not what the
   // reader saw. Later genuine consumer repairs use their own current carrier.
@@ -150,7 +165,9 @@ export function downstreamConsumerRoute(root,run,batch,finding) {
   }
   return route;
 }
-export function downstreamConsumerClosureEvidence(root,run) {
+export function downstreamConsumerClosureEvidence(root,run,manifestPolicy=null,{frozenArtifacts=null}={}) {
+  assert(manifestPolicy===null||manifestPolicy===PRECLOSURE_MANIFEST_POLICY,'unknown manifest evidence policy');
+  assert(frozenArtifacts===null||manifestPolicy===PRECLOSURE_MANIFEST_POLICY,'frozen manifest verification requires the original marked policy');
   assert(safe(run),'invalid run');const p=`research/${run}-step3-owner-downstream-consumer-routes.json`;
   if(!existsSync(resolve(root,p)))return {};
   const raw=bytes(root,p),doc=JSON.parse(raw);
@@ -161,10 +178,20 @@ export function downstreamConsumerClosureEvidence(root,run) {
     const r=e[key];
     if(['manifest','consumer_manifest'].includes(key)){
       const batch=key==='manifest'?e.batch:e.consumer_batch,item=key==='manifest'?e.supplier_id:e.consumer_id;
-      const manifest=historicalStep3Manifest(root,run,batch,r,{kind:'downstream-consumer',registry:p,index,field:key});
+      const manifest=historicalStep3Manifest(root,run,batch,r,{kind:'downstream-consumer',registry:p,index,field:key},
+        {preclosure:manifestPolicy===PRECLOSURE_MANIFEST_POLICY,frozenArtifacts});
       for(const value of [manifest.historical,manifest.current])assert(inventory(JSON.parse(value)).filter(id=>id===item).length===1,
         'subject absent or duplicated in historical/current assigned manifest');
       if(manifest.archived)currentOwnership(root,run,e);
+      if(manifestPolicy===PRECLOSURE_MANIFEST_POLICY&&manifest.evidence){
+        for(const [path,digest] of Object.entries(manifest.evidence)){
+          assert(out[path]===undefined||out[path]===digest,'ambiguous current/historical evidence');out[path]=digest;
+        }
+        // Close binds live bytes. Verify reconstructs that exact original slot
+        // from the already sealed closureCapture; actual live ownership is
+        // checked independently above, without adopting current review coverage.
+        continue;
+      }
     }else ref(root,r);
     assert(out[r.path]===undefined || out[r.path]===r.sha256,'ambiguous historical reference');out[r.path]=r.sha256;
   }

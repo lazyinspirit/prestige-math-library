@@ -1,0 +1,1910 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "31",
+  "scope": [
+    "lem-shared-minimum-poisson-count-coupling",
+    "alg-explicit-poisson-tau-leaping",
+    "def-density-scaled-jump-and-chemical-langevin-generators",
+    "lem-bounded-rate-reaction-generator-dynkin-identity",
+    "lem-poisson-tau-leap-moment-and-covariance-identities",
+    "lem-poisson-tau-leap-one-step-weak-defect",
+    "thm-density-scaled-chemical-langevin-model-error",
+    "thm-minimum-intensity-tau-leap-level-variance",
+    "thm-poisson-tau-leap-weak-order-one-with-exit-bound",
+    "alg-critical-reaction-binomial-guarded-tau-leaping",
+    "cor-mlmc-complexity-for-poisson-tau-leaping",
+    "ex-minimum-intensity-coupling-reduces-one-step-variance",
+    "ex-poisson-tau-leap-negative-population-pure-death",
+    "ex-chemical-langevin-near-empty-poisson-birth",
+    "ex-stiff-reversible-explicit-leap-mean-amplification",
+    "ex-binomial-guard-prevents-invalid-counts-but-changes-noise"
+  ],
+  "contracts": {
+    "lem-shared-minimum-poisson-count-coupling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $A\\sim\\operatorname{Pois}(\\alpha)$ and $B\\sim\\operatorname{Pois}(\\beta)$ are independent, then for $\\alpha,\\beta>0$ and $n\\in\\mathbb N_0$ their convolution is $$\\mathbb P(A+B=n)=e^{-(\\alpha+\\beta)} \\sum_{k=0}^n\\frac{\\alpha^k\\beta^{n-k}}{k!(n-k)!} =e^{-(\\alpha+\\beta)}\\frac{(\\alpha+\\beta)^n}{n!},$$ by the binomial theorem. If either parameter is zero, the corresponding count is identically zero by [F1], and the same conclusion follows. Thus an independent sum has Poisson law with the sum of its parameters.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply step 1.1 to $C+R_1$ and $C+R_2$. Their parameters are respectively $h\\min(\\lambda_1,\\lambda_2)+h(\\lambda_1-\\lambda_2)^+=h\\lambda_1$ and $h\\min(\\lambda_1,\\lambda_2)+h(\\lambda_2-\\lambda_1)^+=h\\lambda_2$. This proves the marginal laws.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The shared count cancels in $K_1-K_2=R_1-R_2$. Independence and [F2] give its mean as $h(\\lambda_1-\\lambda_2)^+-h(\\lambda_2-\\lambda_1)^+=h(\\lambda_1-\\lambda_2)$ and its variance as $h(\\lambda_1-\\lambda_2)^++h(\\lambda_2-\\lambda_1)^+=h|\\lambda_1-\\lambda_2|$. Also, since $R_1,R_2$ are independent of $C$ and of each other, $$\\operatorname{Cov}(K_1,K_2) =\\operatorname{Var}(C)=h\\min(\\lambda_1,\\lambda_2)$$ by [F2]. This proves all identities.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The finite-rate statement covers zero rates and the proof treats zero Poisson parameters explicitly in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: When lambda1=lambda2, both residual parameters are zero and the correction is identically zero by step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The formula covers a single scalar channel; step 2.1 verifies each marginal."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: When one rate is zero, the corresponding count is zero and the other marginal is the residual Poisson count."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item selects no element from a nonempty family and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "lambda1=lambda2 gives Var(K1-K2)=0; (lambda1,lambda2,h)=(13.1,13,1) gives difference variance 0.1."
+      ],
+      "unresolved_suppliers": []
+    },
+    "alg-explicit-poisson-tau-leaping": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The fixed-grid procedure handles B=0 by returning an incomplete prefix and handles zero total propensity by absorbing through T."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: One reaction channel and one interval give exactly one scalar Poisson draw; the invalid-state branch is checked after that endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: An empty draw budget and an invalid endpoint have distinct statuses, and no terminal sample is claimed after budget exhaustion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The step grid includes t0=0 and tN=T; the procedure never advances beyond the supplied grid."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item selects no element from a nonempty family and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "B=0 returns budget-exhausted before the first draw; lambda(x)=0 returns absorbed; one valid step uses R draws."
+      ],
+      "unresolved_suppliers": []
+    },
+    "def-density-scaled-jump-and-chemical-langevin-generators": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This zero boundary case is outside the quantified claim and is not needed for its proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This one boundary case is outside the quantified claim and is not needed for its proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: For one channel the displayed generators reduce to one jump term and one rank-one covariance term."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This endpoints boundary case is outside the quantified claim and is not needed for its proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item selects no element from a nonempty family and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "With one channel and nu=0, both generator contributions vanish."
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-bounded-rate-reaction-generator-dynkin-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reaction-network-propensity-system-and-generator",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d$ and $R$. A **reaction propensity system** consists of a state set $E\\subseteq\\mathbb Z^d$ that is finite or countable, increments $\\nu_j\\in\\mathbb Z^d$ for $1\\le j\\le R$, and propensities $a_j:E\\to[0,\\infty)$. Here “countable” means finite or countably infinite, as in [[def-countable]]. The total propensity\n$$\\lambda(x):=\\sum_{j=1}^R a_j(x)$$\nis finite for every $x\\in E$, and $a_j(x)>0$ implies $x+\\nu_j\\in E$. Here $\\mathbb N$ and $\\mathbb Z$ have the meanings in [[def-natural-numbers]] and [[def-integers]], and addition in $\\mathbb Z^d$ is coordinatewise.\n\nA **reaction event** of channel $j$ at state $x$ records the marked transition $x\\mapsto x+\\nu_j$. The counting process $N_j(t)$ records the number of channel-$j$ events by time $t$. A zero increment $\\nu_j=0$ is allowed: it records a reaction event without changing the state.\n\nFor a time-homogeneous system, the **reaction generator operator** on bounded functions $f:E\\to\\mathbb R$ is\n$$(Qf)(x):=\\sum_{j:a_j(x)>0} a_j(x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nWhen $E$ is finite, $\\Lambda:=\\max_{x\\in E}\\lambda(x)<\\infty$. If no active reaction has zero increment, the corresponding matrix has off-diagonal entries $q_{xy}=\\sum_{j:x+\\nu_j=y}a_j(x)$ and diagonal $q_{xx}=-\\lambda(x)$. With zero-increment events, the operator formula remains valid and the matrix diagonal is instead minus the sum of state-changing rates; the zero-increment channels remain part of the marked event process.\n\nFor a finite horizon $T$, a **time-dependent propensity system** replaces $a_j(x)$ by functions $a_j:[0,T]\\times E\\to[0,\\infty)$ whose sections $t\\mapsto a_j(t,x)$ are measurable for the Borel sigma-algebra $\\mathcal B([0,T])$ of the usual topology on $[0,T]$ ([[def-borel-sigma-algebra]]). Require finite total rate $\\lambda(t,x):=\\sum_j a_j(t,x)$. Its time-dependent generator operator is\n$$(Q_t f)(x):=\\sum_{j:a_j(t,x)>0} a_j(t,x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nThis definition specifies a stochastic model. It does not assert that a physical chemical system follows that model.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-competing-exponential-race-for-reaction-channels",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $R\\ge1$, let $r_1,\\ldots,r_R\\ge0$, and set $r_0=\\sum_{j=1}^R r_j$. On a common probability space let $E_1,\\ldots,E_R$ be independent random variables, each with the unit exponential law $\\operatorname{Exp}(1)$, whose survival at $t\\ge0$ is $e^{-t}$. If $r_0>0$, define\n$$T_*:=\\min_{j:r_j>0}\\frac{E_j}{r_j},\\qquad J_*:=\\operatorname*{argmin}_{j:r_j>0}\\frac{E_j}{r_j}.$$\nThen ties have probability zero, $T_*\\sim\\operatorname{Exp}(r_0)$, $J_*$ is independent of $T_*$, and\n$$\\mathbb P(J_*=j)=\\frac{r_j}{r_0}.$$\nIf $r_0=0$, every $r_j=0$ and no finite reaction clock is active.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-state-gillespie-and-next-reaction-exactness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice, and let $E$ be finite with a reaction system from [[def-reaction-network-propensity-system-and-generator]]. Supply the independent random streams required by [[alg-gillespie-direct-method-for-reaction-networks]] and [[alg-next-reaction-random-time-change-method]]. Define the reference marked process recursively: at state $x$, if $\\lambda(x)>0$, its next reaction time has law $\\operatorname{Exp}(\\lambda(x))$ and its channel is independent of that time with probabilities $a_j(x)/\\lambda(x)$; if $\\lambda(x)=0$, it remains at $x$. Then both algorithms have the law of this reference process on every finite horizon. The process has generator operator\n$$(Qf)(x)=\\sum_{j:a_j(x)>0}a_j(x)\\bigl(f(x+\\nu_j)-f(x)\\bigr),$$\nabsorbing states are handled exactly, and for $\\Lambda=\\max_{x\\in E}\\lambda(x)$ the expected total reaction count on $[0,T]$ is at most $\\Lambda T$. A zero-increment channel is still a marked reaction event, but it contributes zero to the state generator.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Uniformly over $x\\in D\\cup F$, the no-event probability in a time interval of length $\\delta$ is $e^{-\\lambda(x)\\delta}$, where $\\lambda(x)=0$ on $F$ and $\\lambda(x)\\le A$ on $D$. Its difference from $1-\\lambda(x)\\delta$ is at most $A^2\\delta^2/2$. For a channel $j$ from $x\\in D$, the probability that it fires once at time $r\\in(0,\\delta)$ and no later event occurs is $$\\int_0^\\delta a_j(x)e^{-\\lambda(x)r} e^{-\\lambda(x+\\nu_j)(\\delta-r)}\\,dr.$$ Both rates in the exponent are at most $A$, so its difference from $a_j(x)\\delta$ is at most $a_j(x)A\\delta^2$. Summing over channels gives at most $\\lambda(x)A\\delta^2\\le A^2\\delta^2$. After the first event, the conditional probability of another before $\\delta$ is at most $A(\\delta-r)$; integrating against the first-event rate, at most $A$, shows that the probability of at least two events is at most $A^2\\delta^2/2$. These estimates are uniform on the finite state set.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $D\\cup F$ is finite and $\\partial_t v$ is continuous, uniformly in $s$ and $x$, $$v(s+\\delta,x)=v(s,x)+\\delta\\partial_s v(s,x)+o(\\delta).$$ The zero-event probability is $1-\\lambda(x)\\delta+O(\\delta^2)$; the single-channel probabilities are $a_j(x)\\delta+O(\\delta^2)$ by step 1.1; and the multiple-event probability is $O(\\delta^2)$. In the zero-event case, the contribution is $v(s,x)+\\delta(\\partial_s v(s,x)-\\lambda(x)v(s,x))+o(\\delta)$. The one-event channel contributions are $\\delta\\sum_j a_j(x)v(s,x+\\nu_j)+o(\\delta)$, because the time change in $v(s+\\delta,x+\\nu_j)$ is multiplied by an $O(\\delta)$ event probability. The multiple-event contribution is $O(\\delta^2)$. Adding the cases, the order-$\\delta$ terms are $$\\delta\\partial_s v(s,x)+\\delta\\sum_j a_j(x)(v(s,x+\\nu_j)-v(s,x)),$$ with a uniform $o(\\delta)$ remainder. This is $\\delta(\\partial_s v(s,x)+Qv(s,\\cdot)(x))+o(\\delta)$; for $x\\in F$ the chain is fixed and $Q=0$. Multiple-event payoffs contribute $O(\\delta^2)$ because $v$ is bounded on the finite set.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Sum the conditional identity in step 2.1 over a deterministic partition of $[0,t]$ and take expectations. The uniform $o(\\delta)$ remainders sum to $o(1)$. By [F3] the chain has finitely many jumps almost surely on $[0,t]$; therefore $s\\mapsto\\partial_s v(s,X_s)+Qv(s,\\cdot)(X_s)$ is bounded and piecewise continuous, so its Riemann sums converge pathwise. Boundedness and dominated convergence let expectations pass to the integral. The left side telescopes to $\\mathbb E[v(t,X_t)]-\\mathbb E[v(0,X_0)]$, proving the identity.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "A1",
+            "A2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: A stopped chain starting in the absorbing exit set F has Q=0 and the identity reduces to time integration of the test function."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: Zero total rate gives no event; this is included in the no-event expansion in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: A single reaction channel is covered by the same one-event expansion in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The finite D and F hypotheses make all rates and test-function values finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item selects no element from a nonempty family and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "For an absorbing exit state, Q=0 and the identity reduces to the fundamental theorem of calculus for v(t,x)."
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-poisson-tau-leap-moment-and-covariance-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-explicit-poisson-tau-leaping",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite-channel reaction propensity system\n[[def-reaction-network-propensity-system-and-generator]], an initial state\n$x_0\\in E$, a deterministic grid $0=t_0<t_1<\\cdots<t_N=T$ with finite $N$,\nand a draw budget $B\\in\\mathbb N\\cup\\{\\infty\\}$. Write\n$h_n=t_{n+1}-t_n$. At each step the count vector has the product law whose\n$j$th marginal is $\\operatorname{Pois}(a_j(x_n)h_n)$, as defined in\n[[def-scalar-poisson-count-law]]. The budget counts scalar Poisson draws.\n\n**Procedure.** Set $x=x_0$, grid index $n=0$, Poisson-draw counter $d=0$, and\nstatus **horizon**.\n\n1. If $n=N$, return the completed path with status **horizon**. If $x\\notin E$,\n   set status **invalid-state**, hold $x$ fixed to $T$, and return. If\n   $\\lambda(x)=0$, hold $x$ fixed to $T$ and return status\n   **absorbed**.\n2. If fewer than $R$ draws remain in budget $B$ (that is, $B-d<R$), return the path prefix with\n   status **budget-exhausted**; it does not define a terminal sample at $T$.\n3. Draw conditionally independent $K_{j,n}\\sim\\operatorname{Pois}(a_j(x)h_n)$,\n   $1\\le j\\le R$, and set $y=x+\\sum_{j=1}^R K_{j,n}\\nu_j$. Increase\n   $d\\leftarrow d+R$.\n4. Advance time to $t_{n+1}$. If $y\\notin E$, set $x=y$, set status\n   **invalid-state**, and keep $y$ fixed through all remaining grid times. If\n   $y\\in E$, set $x\\leftarrow y$, increment $n\\leftarrow n+1$, and continue.\n\nThe run has at most $N$ iterations. Each valid step uses exactly $R$ scalar\nPoisson draws, $R$ propensity evaluations, and one finite stoichiometric\nupdate. Under the unit-operation convention that each scalar draw,\npropensity evaluation, and stoichiometric update costs one unit, its work is\n$O(RN)$; the cost internal to a particular random-number generator is\nexcluded. Under the same convention, an event-count SSA implementation does\none exponential draw and one channel selection per simulated event, so its\nwork on a realized path is $O(M_T)$, where $M_T$ is that path's event count\nbefore $T$. This compares operation counts only; it does not compare\nparameter-dependent random-number costs. The method is approximate; its\nPoisson leap can leave the physical state set, and no error guarantee is\nasserted here for unbounded rates or the budget-exhausted prefix.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each parameter $a_j(x)h$ is finite, so [F1] defines the corresponding Poisson law and [F2] gives $\\mathbb E[K_j\\mid x]=a_j(x)h$. By [F3], conditional expectation is linear, hence $\\mathbb E[\\Delta Y\\mid x]=\\sum_j\\nu_j a_j(x)h$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conditional independence in [F3] makes cross-channel covariances zero. The covariance of $\\nu_jK_j$ is $\\nu_j\\nu_j^{\\mathsf T}\\operatorname{Var}(K_j\\mid x) =h a_j(x)\\nu_j\\nu_j^{\\mathsf T}$ by [F2]. Summing proves the covariance formula.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a square-integrable vector, $\\mathbb E\\|\\Delta Y\\|^2 =\\operatorname{tr}\\operatorname{Cov}(\\Delta Y)+\\|\\mathbb E\\Delta Y\\|^2$. Substitution of steps 1.1 and 1.2 gives the asserted identity.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: A state x and finite channel set are fixed; the lemma makes no empty-state-space assertion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: At h=0 every count is zero and all three identities reduce to zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: For one channel the covariance and second-moment formulas reduce to the scalar Poisson identities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: If all rates vanish, both the mean and covariance are zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item selects no element from a nonempty family and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "One channel gives E DeltaY=h a nu, Cov=h a nu nu^T, and E||DeltaY||^2=h a||nu||^2+h^2a^2||nu||^2."
+      ],
+      "unresolved_suppliers": []
+    },
+    "lem-poisson-tau-leap-one-step-weak-defect": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reaction-network-propensity-system-and-generator",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d$ and $R$. A **reaction propensity system** consists of a state set $E\\subseteq\\mathbb Z^d$ that is finite or countable, increments $\\nu_j\\in\\mathbb Z^d$ for $1\\le j\\le R$, and propensities $a_j:E\\to[0,\\infty)$. Here “countable” means finite or countably infinite, as in [[def-countable]]. The total propensity\n$$\\lambda(x):=\\sum_{j=1}^R a_j(x)$$\nis finite for every $x\\in E$, and $a_j(x)>0$ implies $x+\\nu_j\\in E$. Here $\\mathbb N$ and $\\mathbb Z$ have the meanings in [[def-natural-numbers]] and [[def-integers]], and addition in $\\mathbb Z^d$ is coordinatewise.\n\nA **reaction event** of channel $j$ at state $x$ records the marked transition $x\\mapsto x+\\nu_j$. The counting process $N_j(t)$ records the number of channel-$j$ events by time $t$. A zero increment $\\nu_j=0$ is allowed: it records a reaction event without changing the state.\n\nFor a time-homogeneous system, the **reaction generator operator** on bounded functions $f:E\\to\\mathbb R$ is\n$$(Qf)(x):=\\sum_{j:a_j(x)>0} a_j(x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nWhen $E$ is finite, $\\Lambda:=\\max_{x\\in E}\\lambda(x)<\\infty$. If no active reaction has zero increment, the corresponding matrix has off-diagonal entries $q_{xy}=\\sum_{j:x+\\nu_j=y}a_j(x)$ and diagonal $q_{xx}=-\\lambda(x)$. With zero-increment events, the operator formula remains valid and the matrix diagonal is instead minus the sum of state-changing rates; the zero-increment channels remain part of the marked event process.\n\nFor a finite horizon $T$, a **time-dependent propensity system** replaces $a_j(x)$ by functions $a_j:[0,T]\\times E\\to[0,\\infty)$ whose sections $t\\mapsto a_j(t,x)$ are measurable for the Borel sigma-algebra $\\mathcal B([0,T])$ of the usual topology on $[0,T]$ ([[def-borel-sigma-algebra]]). Require finite total rate $\\lambda(t,x):=\\sum_j a_j(t,x)$. Its time-dependent generator operator is\n$$(Q_t f)(x):=\\sum_{j:a_j(t,x)>0} a_j(t,x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nThis definition specifies a stochastic model. It does not assert that a physical chemical system follows that model.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-competing-exponential-race-for-reaction-channels",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $R\\ge1$, let $r_1,\\ldots,r_R\\ge0$, and set $r_0=\\sum_{j=1}^R r_j$. On a common probability space let $E_1,\\ldots,E_R$ be independent random variables, each with the unit exponential law $\\operatorname{Exp}(1)$, whose survival at $t\\ge0$ is $e^{-t}$. If $r_0>0$, define\n$$T_*:=\\min_{j:r_j>0}\\frac{E_j}{r_j},\\qquad J_*:=\\operatorname*{argmin}_{j:r_j>0}\\frac{E_j}{r_j}.$$\nThen ties have probability zero, $T_*\\sim\\operatorname{Exp}(r_0)$, $J_*$ is independent of $T_*$, and\n$$\\mathbb P(J_*=j)=\\frac{r_j}{r_0}.$$\nIf $r_0=0$, every $r_j=0$ and no finite reaction clock is active.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-explicit-poisson-tau-leaping",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite-channel reaction propensity system\n[[def-reaction-network-propensity-system-and-generator]], an initial state\n$x_0\\in E$, a deterministic grid $0=t_0<t_1<\\cdots<t_N=T$ with finite $N$,\nand a draw budget $B\\in\\mathbb N\\cup\\{\\infty\\}$. Write\n$h_n=t_{n+1}-t_n$. At each step the count vector has the product law whose\n$j$th marginal is $\\operatorname{Pois}(a_j(x_n)h_n)$, as defined in\n[[def-scalar-poisson-count-law]]. The budget counts scalar Poisson draws.\n\n**Procedure.** Set $x=x_0$, grid index $n=0$, Poisson-draw counter $d=0$, and\nstatus **horizon**.\n\n1. If $n=N$, return the completed path with status **horizon**. If $x\\notin E$,\n   set status **invalid-state**, hold $x$ fixed to $T$, and return. If\n   $\\lambda(x)=0$, hold $x$ fixed to $T$ and return status\n   **absorbed**.\n2. If fewer than $R$ draws remain in budget $B$ (that is, $B-d<R$), return the path prefix with\n   status **budget-exhausted**; it does not define a terminal sample at $T$.\n3. Draw conditionally independent $K_{j,n}\\sim\\operatorname{Pois}(a_j(x)h_n)$,\n   $1\\le j\\le R$, and set $y=x+\\sum_{j=1}^R K_{j,n}\\nu_j$. Increase\n   $d\\leftarrow d+R$.\n4. Advance time to $t_{n+1}$. If $y\\notin E$, set $x=y$, set status\n   **invalid-state**, and keep $y$ fixed through all remaining grid times. If\n   $y\\in E$, set $x\\leftarrow y$, increment $n\\leftarrow n+1$, and continue.\n\nThe run has at most $N$ iterations. Each valid step uses exactly $R$ scalar\nPoisson draws, $R$ propensity evaluations, and one finite stoichiometric\nupdate. Under the unit-operation convention that each scalar draw,\npropensity evaluation, and stoichiometric update costs one unit, its work is\n$O(RN)$; the cost internal to a particular random-number generator is\nexcluded. Under the same convention, an event-count SSA implementation does\none exponential draw and one channel selection per simulated event, so its\nwork on a realized path is $O(M_T)$, where $M_T$ is that path's event count\nbefore $T$. This compares operation counts only; it does not compare\nparameter-dependent random-number costs. The method is approximate; its\nPoisson leap can leave the physical state set, and no error guarantee is\nasserted here for unbounded rates or the budget-exhausted prefix.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-state-gillespie-and-next-reaction-exactness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice, and let $E$ be finite with a reaction system from [[def-reaction-network-propensity-system-and-generator]]. Supply the independent random streams required by [[alg-gillespie-direct-method-for-reaction-networks]] and [[alg-next-reaction-random-time-change-method]]. Define the reference marked process recursively: at state $x$, if $\\lambda(x)>0$, its next reaction time has law $\\operatorname{Exp}(\\lambda(x))$ and its channel is independent of that time with probabilities $a_j(x)/\\lambda(x)$; if $\\lambda(x)=0$, it remains at $x$. Then both algorithms have the law of this reference process on every finite horizon. The process has generator operator\n$$(Qf)(x)=\\sum_{j:a_j(x)>0}a_j(x)\\bigl(f(x+\\nu_j)-f(x)\\bigr),$$\nabsorbing states are handled exactly, and for $\\Lambda=\\max_{x\\in E}\\lambda(x)$ the expected total reaction count on $[0,T]$ is at most $\\Lambda T$. A zero-increment channel is still a marked reaction event, but it contributes zero to the state generator.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the Poisson leap, the probability of zero total counts is $e^{-\\lambda(x)h}$. The probability that exactly channel $j$ fires once is $a_j(x)h e^{-\\lambda(x)h}$, so its difference from $a_j(x)h$ is at most $a_j(x)\\lambda(x)h^2$. Summing these errors over $j$ gives at most $\\lambda(x)^2h^2\\le A^2h^2$. If $N=\\sum_jK_j$, independence and [F5] give $$\\mathbb E[N(N-1)\\mid x] =\\sum_j(a_j(x)h)^2+2\\sum_{i<j}a_i(x)a_j(x)h^2 =(\\lambda(x)h)^2,$$ hence $\\mathbb P(N\\ge2\\mid x)\\le(\\lambda(x)h)^2/2\\le A^2h^2/2$. The zero-count probability differs from $1-\\lambda(x)h$ by at most $A^2h^2/2$. A single allowed channel event remains in $E$ by [F1], so only the $N\\ge2$ part can trigger the invalid-state branch. The zero-count, total single-count, and multiple-count contributions are bounded respectively by $GA^2h^2/2$, $GA^2h^2$, and $GA^2h^2/2$. Thus $|(K_hg)(x)-g(x)-h(Qg)(x)|\\le2GA^2h^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the exact chain, the no-event probability is $e^{-\\lambda(x)h}$, which differs from $1-\\lambda(x)h$ by at most $A^2h^2/2$. The probability of one channel-$j$ event and no later event is $$\\int_0^h a_j(x)e^{-\\lambda(x)s} e^{-\\lambda(x+\\nu_j)(h-s)}\\,ds.$$ Its difference from $a_j(x)h$ is at most $a_j(x)Ah^2$, since all total rates on $E$ are at most $A$; summing over $j$ gives at most $\\lambda(x)Ah^2\\le A^2h^2$. The probability of two or more events is at most $A^2h^2/2$: conditional on a first event at time $s$, a later event has probability at most $A(h-s)$, and integration against the first-event rate bounded by $A$ gives the bound. The no-event, total single-event, and multiple-event contributions are bounded respectively by $GA^2h^2/2$, $GA^2h^2$, and $GA^2h^2/2$. Therefore $|(Q_hg)(x)-g(x)-h(Qg)(x)|\\le2GA^2h^2$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Subtract the two first-order expansions from steps 1.1 and 1.2 and use the triangle inequality. This gives $|(K_hg)(x)-(Q_hg)(x)|\\le4GA^2h^2$ for every $x\\in E$. Outside $E$ both kernels hold the state fixed, so the same bound holds there. Taking the supremum proves the final inequality.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The bounded-function statement applies on the specified finite state system and its absorbing extension."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: At h=0 both kernels are identity and the stated defect bounds are zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The zero/single/multiple count split explicitly isolates the one-event case in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The A=0 case makes both kernels absorbing and all remainders vanish."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item selects no element from a nonempty family and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "A=0 or h=0 makes both kernel defects and the invalid-step bound zero."
+      ],
+      "unresolved_suppliers": []
+    },
+    "thm-density-scaled-chemical-langevin-model-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-density-scaled-jump-and-chemical-langevin-generators",
+          "source_section": "Definition",
+          "quote": "Fix finitely many stoichiometric vectors $\\nu_1,\\ldots,\\nu_R\\in\\mathbb Z^d$,\nan open set $U\\subseteq\\mathbb R^d$, nonnegative propensity functions\n$a_j:U\\to[0,\\infty)$, and a volume parameter $V\\ge1$. At a density state\n$x\\in U$ for which every positive-rate destination $x+\\nu_j/V$ lies in $U$,\nthe density-scaled jump model has jump $\\nu_j/V$ at rate $Va_j(x)$. For a\ntwice differentiable test function $\\phi$ defined at those destinations, its\ngenerator is\n$$\\mathcal L_V\\phi(x)=V\\sum_{j:a_j(x)>0} a_j(x)\\bigl(\\phi(x+\\nu_j/V)-\\phi(x)\\bigr).$$\n\nPut $b(x)=\\sum_j\\nu_j a_j(x)$ and\n$C(x)=\\sum_j a_j(x)\\nu_j\\nu_j^{\\mathsf T}$. The associated\n**chemical Langevin diffusion generator** is\n$$\\mathcal G_V\\phi(x)=b(x)\\cdot\\nabla\\phi(x) +\\frac{1}{2V}\\sum_{j=1}^R a_j(x)\\, \\nu_j^{\\mathsf T}D^2\\phi(x)\\nu_j.$$\nA Markov diffusion with this generator is called the chemical Langevin\nmodel here. The definition does not assert existence, uniqueness, positivity,\nor approximation accuracy for either process. In an SDE representation the\ndrift is $b$ and the covariance matrix per unit time is $C/V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bounded-rate-reaction-generator-dynkin-identity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice. Let $D$ and $F$ be disjoint\nfinite sets of states, and let a finite-channel reaction chain move from a\nstate $x\\in D$ by channel $j$ to $x+\\nu_j\\in D\\cup F$ at rate $a_j(x)$.\nAssume its total rate is at most $A<\\infty$ on $D$, and make every state in\n$F$ absorbing. Let $v:[0,T]\\times(D\\cup F)\\to\\mathbb R$ have a continuously\ndifferentiable time section for each state, with $\\partial_t v$ continuous\nin time. Define\n$$Qf(x)=\\sum_j a_j(x)(f(x+\\nu_j)-f(x))\\quad(x\\in D),\\qquad Qf(x)=0\\quad(x\\in F).$$\nThen, for the stopped chain $X$ and $0\\le t\\le T$,\n$$\\mathbb E[v(t,X_t)] = \\mathbb E[v(0,X_0)] + \\mathbb E\\int_0^t(\\partial_s v(s,X_s)+Qv(s,\\cdot)(X_s))\\,ds.$$\nIn particular, $D$ may be the finite set of lattice states inside a compact\nstopping region, and $F$ the finite set of one-jump exit destinations.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix an interior lattice state $x$ and a time $s$. For channel $j$, apply one-variable Taylor's theorem to $r\\mapsto u(s,x+r\\nu_j/V)$ on $[0,1]$. Its third-order remainder has absolute value at most $M\\|\\nu_j\\|^3/(6V^3)$. Multiplying by $Va_j(x)$ and summing over channels gives $$\\mathcal L_Vu(s,x)= \\sum_j a_j(x)\\nu_j\\cdot\\nabla u(s,x) +\\frac1{2V}\\sum_j a_j(x)\\nu_j^{\\mathsf T}D^2u(s,x)\\nu_j+R_V(s,x),$$ where $$|R_V(s,x)|\\le \\frac{M}{6V^2}\\sum_jA_j\\|\\nu_j\\|^3.$$ The first two terms are exactly $\\mathcal G_Vu(s,x)$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply [F2] to $v=u$ along $\\bar X$. Before $\\tau_X$, the integrand is $\\partial_su+\\mathcal L_Vu=(\\mathcal L_V-\\mathcal G_V)u$ by the backward equation [A3]. After exit, $\\bar X$ is fixed at an exit destination where $u(s,\\bar X_s)=g(\\bar X_s)$ is independent of $s$, so both its time derivative and stopped generator vanish. At time $T$, $u(T,\\bar X_T)=g(\\bar X_T)$, and at time $0$, $u(0,x_0)=\\mathbb E g(\\bar Z_T)$. Therefore $$\\mathbb E g(\\bar X_T)-\\mathbb E g(\\bar Z_T) =\\mathbb E\\int_0^{T\\wedge\\tau_X} (\\mathcal L_V-\\mathcal G_V)u(s,X^V_s)\\,ds.$$",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "A1",
+            "A2",
+            "A3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Bound the integrand in step 1.2 by step 1.1 and use $T\\wedge\\tau_X\\le T$. This proves the stopped-process estimate. Under [A4], the stopped and original terminal payoffs agree unless their respective process exits by time $T$; on that event their difference is at most $2G$. The triangle inequality for the two expectations adds at most $2G\\mathbb P(\\tau_X\\le T)+2G\\mathbb P(\\tau_Z\\le T)$, which proves the unstopped bound.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "A4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The theorem assumes x0 in the interior of a bounded stopping region, so an empty state domain is outside scope."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: A zero propensity or zero jump contributes no generator remainder in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: A single channel is included termwise in the Taylor sum of step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The stopped and unstopped estimates are distinguished; no exit rate is inferred."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item selects no element from a nonempty family and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "A zero jump vector contributes exactly zero to the V^-2 sum."
+      ],
+      "unresolved_suppliers": []
+    },
+    "thm-minimum-intensity-tau-leap-level-variance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reaction-network-propensity-system-and-generator",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d$ and $R$. A **reaction propensity system** consists of a state set $E\\subseteq\\mathbb Z^d$ that is finite or countable, increments $\\nu_j\\in\\mathbb Z^d$ for $1\\le j\\le R$, and propensities $a_j:E\\to[0,\\infty)$. Here “countable” means finite or countably infinite, as in [[def-countable]]. The total propensity\n$$\\lambda(x):=\\sum_{j=1}^R a_j(x)$$\nis finite for every $x\\in E$, and $a_j(x)>0$ implies $x+\\nu_j\\in E$. Here $\\mathbb N$ and $\\mathbb Z$ have the meanings in [[def-natural-numbers]] and [[def-integers]], and addition in $\\mathbb Z^d$ is coordinatewise.\n\nA **reaction event** of channel $j$ at state $x$ records the marked transition $x\\mapsto x+\\nu_j$. The counting process $N_j(t)$ records the number of channel-$j$ events by time $t$. A zero increment $\\nu_j=0$ is allowed: it records a reaction event without changing the state.\n\nFor a time-homogeneous system, the **reaction generator operator** on bounded functions $f:E\\to\\mathbb R$ is\n$$(Qf)(x):=\\sum_{j:a_j(x)>0} a_j(x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nWhen $E$ is finite, $\\Lambda:=\\max_{x\\in E}\\lambda(x)<\\infty$. If no active reaction has zero increment, the corresponding matrix has off-diagonal entries $q_{xy}=\\sum_{j:x+\\nu_j=y}a_j(x)$ and diagonal $q_{xx}=-\\lambda(x)$. With zero-increment events, the operator formula remains valid and the matrix diagonal is instead minus the sum of state-changing rates; the zero-increment channels remain part of the marked event process.\n\nFor a finite horizon $T$, a **time-dependent propensity system** replaces $a_j(x)$ by functions $a_j:[0,T]\\times E\\to[0,\\infty)$ whose sections $t\\mapsto a_j(t,x)$ are measurable for the Borel sigma-algebra $\\mathcal B([0,T])$ of the usual topology on $[0,T]$ ([[def-borel-sigma-algebra]]). Require finite total rate $\\lambda(t,x):=\\sum_j a_j(t,x)$. Its time-dependent generator operator is\n$$(Q_t f)(x):=\\sum_{j:a_j(t,x)>0} a_j(t,x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nThis definition specifies a stochastic model. It does not assert that a physical chemical system follows that model.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-poisson-tau-leap-moment-and-covariance-identities",
+          "source_section": "Statement",
+          "quote": "Fix a state $x\\in E$ and step $h\\ge0$ in\n[[alg-explicit-poisson-tau-leaping]]. Let\n$\\Delta Y=\\sum_{j=1}^R\\nu_jK_j$, where conditionally independent\n$K_j\\sim\\operatorname{Pois}(a_j(x)h)$. Then\n$$\\mathbb E[\\Delta Y\\mid x]=h\\sum_{j=1}^R a_j(x)\\nu_j,$$\n$$\\operatorname{Cov}(\\Delta Y\\mid x)=h\\sum_{j=1}^R a_j(x)\\nu_j\\nu_j^{\\mathsf T},$$\nand\n$$\\mathbb E[\\|\\Delta Y\\|^2\\mid x] =h\\sum_{j=1}^R a_j(x)\\|\\nu_j\\|^2 +h^2\\left\\|\\sum_{j=1}^R a_j(x)\\nu_j\\right\\|^2.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-explicit-poisson-tau-leaping",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite-channel reaction propensity system\n[[def-reaction-network-propensity-system-and-generator]], an initial state\n$x_0\\in E$, a deterministic grid $0=t_0<t_1<\\cdots<t_N=T$ with finite $N$,\nand a draw budget $B\\in\\mathbb N\\cup\\{\\infty\\}$. Write\n$h_n=t_{n+1}-t_n$. At each step the count vector has the product law whose\n$j$th marginal is $\\operatorname{Pois}(a_j(x_n)h_n)$, as defined in\n[[def-scalar-poisson-count-law]]. The budget counts scalar Poisson draws.\n\n**Procedure.** Set $x=x_0$, grid index $n=0$, Poisson-draw counter $d=0$, and\nstatus **horizon**.\n\n1. If $n=N$, return the completed path with status **horizon**. If $x\\notin E$,\n   set status **invalid-state**, hold $x$ fixed to $T$, and return. If\n   $\\lambda(x)=0$, hold $x$ fixed to $T$ and return status\n   **absorbed**.\n2. If fewer than $R$ draws remain in budget $B$ (that is, $B-d<R$), return the path prefix with\n   status **budget-exhausted**; it does not define a terminal sample at $T$.\n3. Draw conditionally independent $K_{j,n}\\sim\\operatorname{Pois}(a_j(x)h_n)$,\n   $1\\le j\\le R$, and set $y=x+\\sum_{j=1}^R K_{j,n}\\nu_j$. Increase\n   $d\\leftarrow d+R$.\n4. Advance time to $t_{n+1}$. If $y\\notin E$, set $x=y$, set status\n   **invalid-state**, and keep $y$ fixed through all remaining grid times. If\n   $y\\in E$, set $x\\leftarrow y$, increment $n\\leftarrow n+1$, and continue.\n\nThe run has at most $N$ iterations. Each valid step uses exactly $R$ scalar\nPoisson draws, $R$ propensity evaluations, and one finite stoichiometric\nupdate. Under the unit-operation convention that each scalar draw,\npropensity evaluation, and stoichiometric update costs one unit, its work is\n$O(RN)$; the cost internal to a particular random-number generator is\nexcluded. Under the same convention, an event-count SSA implementation does\none exponential draw and one channel selection per simulated event, so its\nwork on a realized path is $O(M_T)$, where $M_T$ is that path's event count\nbefore $T$. This compares operation counts only; it does not compare\nparameter-dependent random-number costs. The method is approximate; its\nPoisson leap can leave the physical state set, and no error guarantee is\nasserted here for unbounded rates or the budget-exhausted prefix.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-shared-minimum-poisson-count-coupling",
+          "source_section": "Statement",
+          "quote": "Let $h\\ge0$ and let $\\lambda_1,\\lambda_2\\ge0$. Let $C,R_1,R_2$ be\nindependent counts with laws\n$$C\\sim\\operatorname{Pois}(h\\min(\\lambda_1,\\lambda_2)),\\quad R_1\\sim\\operatorname{Pois}(h(\\lambda_1-\\lambda_2)^+),\\quad R_2\\sim\\operatorname{Pois}(h(\\lambda_2-\\lambda_1)^+),$$\nand set $K_1=C+R_1$, $K_2=C+R_2$. Then $K_i\\sim\\operatorname{Pois}(h\\lambda_i)$,\n$$\\mathbb E(K_1-K_2)=h(\\lambda_1-\\lambda_2),\\qquad \\operatorname{Var}(K_1-K_2)=h|\\lambda_1-\\lambda_2|,$$\nand\n$$\\operatorname{Cov}(K_1,K_2)=h\\min(\\lambda_1,\\lambda_2).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For lattice states $x,z$, write $e=x-z$ and $\\delta_j=a_j(x)-a_j(z)$. Bounded rates and the integer lattice's minimum nonzero distance one imply $|\\delta_j|\\le L\\|e\\|$ for a constant $L$; this also holds when one state is outside $E$, where the extended rate is zero. In one half interval, shared counts cancel from the increment difference $\\eta$. The independent residual Poisson counts and [F5] give $$m:=\\mathbb E[\\eta\\mid x,z]=h\\sum_j\\nu_j\\delta_j,\\qquad \\mathbb E[\\|\\eta-m\\|^2\\mid x,z]=h\\sum_j|\\delta_j|\\|\\nu_j\\|^2.$$ Thus $\\|m\\|\\le Ch\\|e\\|$ and the centered second moment is at most $Ch\\|e\\|$. If $e=0$, then $\\eta=0$. Otherwise $\\|e\\|\\ge1$, so $h\\|e\\|\\le h\\|e\\|^2$. For $h\\le1$ this proves $$\\mathbb E[\\|\\eta\\|^2\\mid x,z]\\le Ch\\|e\\|^2.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $R$ be the fine-path increment on the first half interval from $x$. By [F3], [F4], and the triangle inequality, $$\\mathbb E\\|R\\|\\le\\sum_j\\|\\nu_j\\|\\,h a_j(x)\\le Ch.$$ By [F2] and bounded propensities, $\\mathbb E\\|R\\|^2\\le Ch$ for $h\\le1$. If $x'=x+R$, then $$\\mathbb E\\|x'-z\\|\\le\\|e\\|+Ch,\\qquad \\mathbb E\\|x'-z\\|^2\\le C(\\|e\\|^2+h).$$ For the second inequality, expand $\\|e+R\\|^2$ and use $\\|\\mathbb ER\\|\\le Ch$ and $\\mathbb E\\|R\\|^2\\le Ch$; the cross term is bounded by $Ch\\|e\\|\\le Ch\\|e\\|^2$ when $e\\ne0$, and is zero when $e=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write the two half-interval differences as $\\eta_i=m_i+\\xi_i$, where $m_i$ is the conditional mean and $\\xi_i$ is centered given the starting states of that half interval. Step 1.1 gives $$\\|m_1\\|\\le Ch\\|e\\|,\\qquad \\mathbb E\\|\\xi_1\\|^2\\le Ch\\|e\\|^2.$$ The second half starts at $x'$ and $z$, so $\\|m_2\\|\\le Ch\\|x'-z\\|$. Steps 1.1 and 1.2 therefore give $$\\mathbb E\\|m_2\\|^2\\le Ch^2(\\|e\\|^2+h),\\qquad \\mathbb E\\|\\xi_2\\|^2\\le Ch(\\|e\\|+h)\\le Ch\\|e\\|^2+Ch^2.$$ For the latter inequality, use $\\mathbb E\\|x'-z\\|\\le\\|e\\|+Ch$ and $\\|e\\|\\le\\|e\\|^2$ when $e\\ne0$. Fresh second-half residual counts are conditionally centered, hence $\\mathbb E[\\xi_1\\cdot\\xi_2]=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The endpoint error is $e'=e+m_1+\\xi_1+m_2+\\xi_2$. First, $$\\mathbb E\\|e+\\eta_1\\|^2 =\\|e+m_1\\|^2+\\mathbb E\\|\\xi_1\\|^2 \\le(1+Ch)\\|e\\|^2.$$ At the start of the second half, $e+m_1+\\xi_1+m_2$ is measurable and $\\mathbb E[\\xi_2\\mid x',z]=0$, so its expected inner product with $\\xi_2$ is zero. The remaining cross terms satisfy $$2|\\mathbb E(\\xi_1\\cdot m_2)| \\le2(\\mathbb E\\|\\xi_1\\|^2)^{1/2}(\\mathbb E\\|m_2\\|^2)^{1/2} \\le Ch^{3/2}\\|e\\|\\sqrt{\\|e\\|^2+h}\\le Ch\\|e\\|^2,$$ with value zero if $e=0$, and $$2|\\mathbb E((e+m_1)\\cdot m_2)| \\le h\\|e+m_1\\|^2+h^{-1}\\mathbb E\\|m_2\\|^2 \\le Ch\\|e\\|^2+Ch^2.$$ The additional terms satisfy $\\mathbb E\\|m_2\\|^2\\le Ch\\|e\\|^2+Ch^2$ and $\\mathbb E\\|\\xi_2\\|^2\\le Ch\\|e\\|^2+Ch^2$ by step 2.1. Combining these exact expansion terms proves $$\\mathbb E[\\|e'\\|^2\\mid e]\\le(1+Ch)\\|e\\|^2+Ch^2.$$",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $u_n=\\mathbb E\\|e_n\\|^2$ at coarse endpoints. Since $u_0=0$, step 3.1 gives $u_{n+1}\\le(1+Ch)u_n+Ch^2$. There are $N=T/(2h)$ coarse intervals, so iteration yields $$u_N\\le Ch^2\\sum_{r=0}^{N-1}(1+Ch)^r \\le Ch^2N e^{ChN}\\le C_T h.$$",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $e_N\\ne0$, its integer coordinates imply $\\|e_N\\|^2\\ge1$, hence $\\mathbb P(e_N\\ne0)\\le\\mathbb E\\|e_N\\|^2\\le C_T h$. The payoff difference is zero when $e_N=0$ and is at most $2G$ in absolute value otherwise. Its variance is at most its second moment, hence at most $4G^2\\mathbb P(e_N\\ne0)\\le Ch$. For $h>1$ the same conclusion follows directly from $\\operatorname{Var}\\le4G^2\\le4G^2h$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The common initial state gives e=0; step 1.1 shows the coupled half-step difference is then zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: Equal rates yield zero residual intensity and zero correction variance in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The bound includes the one-channel case, with constants depending on the finite network."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The h>1 levels use the direct bounded-payoff estimate in step 5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item selects no element from a nonempty family and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "Equal lattice states have zero coupled residuals; the payoff variance is bounded by 4||g||_infty^2 P(e_N!=0)."
+      ],
+      "unresolved_suppliers": []
+    },
+    "thm-poisson-tau-leap-weak-order-one-with-exit-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reaction-network-propensity-system-and-generator",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d$ and $R$. A **reaction propensity system** consists of a state set $E\\subseteq\\mathbb Z^d$ that is finite or countable, increments $\\nu_j\\in\\mathbb Z^d$ for $1\\le j\\le R$, and propensities $a_j:E\\to[0,\\infty)$. Here “countable” means finite or countably infinite, as in [[def-countable]]. The total propensity\n$$\\lambda(x):=\\sum_{j=1}^R a_j(x)$$\nis finite for every $x\\in E$, and $a_j(x)>0$ implies $x+\\nu_j\\in E$. Here $\\mathbb N$ and $\\mathbb Z$ have the meanings in [[def-natural-numbers]] and [[def-integers]], and addition in $\\mathbb Z^d$ is coordinatewise.\n\nA **reaction event** of channel $j$ at state $x$ records the marked transition $x\\mapsto x+\\nu_j$. The counting process $N_j(t)$ records the number of channel-$j$ events by time $t$. A zero increment $\\nu_j=0$ is allowed: it records a reaction event without changing the state.\n\nFor a time-homogeneous system, the **reaction generator operator** on bounded functions $f:E\\to\\mathbb R$ is\n$$(Qf)(x):=\\sum_{j:a_j(x)>0} a_j(x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nWhen $E$ is finite, $\\Lambda:=\\max_{x\\in E}\\lambda(x)<\\infty$. If no active reaction has zero increment, the corresponding matrix has off-diagonal entries $q_{xy}=\\sum_{j:x+\\nu_j=y}a_j(x)$ and diagonal $q_{xx}=-\\lambda(x)$. With zero-increment events, the operator formula remains valid and the matrix diagonal is instead minus the sum of state-changing rates; the zero-increment channels remain part of the marked event process.\n\nFor a finite horizon $T$, a **time-dependent propensity system** replaces $a_j(x)$ by functions $a_j:[0,T]\\times E\\to[0,\\infty)$ whose sections $t\\mapsto a_j(t,x)$ are measurable for the Borel sigma-algebra $\\mathcal B([0,T])$ of the usual topology on $[0,T]$ ([[def-borel-sigma-algebra]]). Require finite total rate $\\lambda(t,x):=\\sum_j a_j(t,x)$. Its time-dependent generator operator is\n$$(Q_t f)(x):=\\sum_{j:a_j(t,x)>0} a_j(t,x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nThis definition specifies a stochastic model. It does not assert that a physical chemical system follows that model.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-explicit-poisson-tau-leaping",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite-channel reaction propensity system\n[[def-reaction-network-propensity-system-and-generator]], an initial state\n$x_0\\in E$, a deterministic grid $0=t_0<t_1<\\cdots<t_N=T$ with finite $N$,\nand a draw budget $B\\in\\mathbb N\\cup\\{\\infty\\}$. Write\n$h_n=t_{n+1}-t_n$. At each step the count vector has the product law whose\n$j$th marginal is $\\operatorname{Pois}(a_j(x_n)h_n)$, as defined in\n[[def-scalar-poisson-count-law]]. The budget counts scalar Poisson draws.\n\n**Procedure.** Set $x=x_0$, grid index $n=0$, Poisson-draw counter $d=0$, and\nstatus **horizon**.\n\n1. If $n=N$, return the completed path with status **horizon**. If $x\\notin E$,\n   set status **invalid-state**, hold $x$ fixed to $T$, and return. If\n   $\\lambda(x)=0$, hold $x$ fixed to $T$ and return status\n   **absorbed**.\n2. If fewer than $R$ draws remain in budget $B$ (that is, $B-d<R$), return the path prefix with\n   status **budget-exhausted**; it does not define a terminal sample at $T$.\n3. Draw conditionally independent $K_{j,n}\\sim\\operatorname{Pois}(a_j(x)h_n)$,\n   $1\\le j\\le R$, and set $y=x+\\sum_{j=1}^R K_{j,n}\\nu_j$. Increase\n   $d\\leftarrow d+R$.\n4. Advance time to $t_{n+1}$. If $y\\notin E$, set $x=y$, set status\n   **invalid-state**, and keep $y$ fixed through all remaining grid times. If\n   $y\\in E$, set $x\\leftarrow y$, increment $n\\leftarrow n+1$, and continue.\n\nThe run has at most $N$ iterations. Each valid step uses exactly $R$ scalar\nPoisson draws, $R$ propensity evaluations, and one finite stoichiometric\nupdate. Under the unit-operation convention that each scalar draw,\npropensity evaluation, and stoichiometric update costs one unit, its work is\n$O(RN)$; the cost internal to a particular random-number generator is\nexcluded. Under the same convention, an event-count SSA implementation does\none exponential draw and one channel selection per simulated event, so its\nwork on a realized path is $O(M_T)$, where $M_T$ is that path's event count\nbefore $T$. This compares operation counts only; it does not compare\nparameter-dependent random-number costs. The method is approximate; its\nPoisson leap can leave the physical state set, and no error guarantee is\nasserted here for unbounded rates or the budget-exhausted prefix.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-poisson-tau-leap-one-step-weak-defect",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice. Let $E$ be finite, let\n$A=\\max_{x\\in E}\\sum_j a_j(x)$, and assume\n$a_j(x)=0$ whenever $x+\\nu_j\\notin E$. Extend every state outside $E$ as\nabsorbing, as in [[alg-explicit-poisson-tau-leaping]]. For $h\\ge0$, let\n$Q_h$ be the exact reaction-chain transition kernel and $K_h$ the Poisson\ntau-leap transition kernel. If $g:\\mathbb Z^d\\to\\mathbb R$ is bounded, then\n$$\\left|(K_hg)(x)-g(x)-h(Qg)(x)\\right| \\le2A^2h^2\\|g\\|_\\infty,$$\n$$\\left|(Q_hg)(x)-g(x)-h(Qg)(x)\\right| \\le2A^2h^2\\|g\\|_\\infty,$$\nand hence\n$$\\|K_hg-Q_hg\\|_\\infty\\le4A^2h^2\\|g\\|_\\infty.$$\nThe bounds include the multi-reaction leap probability that can trigger the\ninvalid-state branch.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-state-gillespie-and-next-reaction-exactness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice, and let $E$ be finite with a reaction system from [[def-reaction-network-propensity-system-and-generator]]. Supply the independent random streams required by [[alg-gillespie-direct-method-for-reaction-networks]] and [[alg-next-reaction-random-time-change-method]]. Define the reference marked process recursively: at state $x$, if $\\lambda(x)>0$, its next reaction time has law $\\operatorname{Exp}(\\lambda(x))$ and its channel is independent of that time with probabilities $a_j(x)/\\lambda(x)$; if $\\lambda(x)=0$, it remains at $x$. Then both algorithms have the law of this reference process on every finite horizon. The process has generator operator\n$$(Qf)(x)=\\sum_{j:a_j(x)>0}a_j(x)\\bigl(f(x+\\nu_j)-f(x)\\bigr),$$\nabsorbing states are handled exactly, and for $\\Lambda=\\max_{x\\in E}\\lambda(x)$ the expected total reaction count on $[0,T]$ is at most $\\Lambda T$. A zero-increment channel is still a marked reaction event, but it contributes zero to the state generator.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both $K_h$ and $Q_h$ are Markov kernels: they preserve nonnegative functions and constants, so each is a contraction in the supremum norm. Outside $E$, both hold the state fixed by the stated extension.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The finite algebraic identity $$K_h^N-Q_h^N=\\sum_{r=0}^{N-1}K_h^{N-1-r}(K_h-Q_h)Q_h^r$$ follows by cancellation of consecutive terms. Apply it to $g$, use the contraction from step 1.1 and the one-step bound [F3] to obtain $$\\|(K_h^N-Q_h^N)g\\|_\\infty \\le N\\,4A^2h^2\\|g\\|_\\infty=4A^2T h\\|g\\|_\\infty.$$ Evaluating at $x_0$ proves the weak-order bound.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "While the leap state is in $E$, any single channel count produces a state in $E$ by [F1]. Therefore an invalid endpoint requires at least two total channel firings in that step. If $M_n=\\sum_jK_{j,n}$, independence [F2] and the factorial moment [F4] give $$\\mathbb E[M_n(M_n-1)\\mid Y_n] =\\sum_j(a_j(Y_n)h)^2+2\\sum_{i<j}a_i(Y_n)a_j(Y_n)h^2 =(\\lambda(Y_n)h)^2\\le(Ah)^2.$$ Since $\\mathbf 1_{\\{M_n\\ge2\\}}\\le M_n(M_n-1)/2$, the conditional invalid-step probability is at most $A^2h^2/2$. A union bound over $N=T/h$ steps gives $\\mathbb P(\\text{invalid by }T)\\le A^2T h/2$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The initial state is in finite E; the proof also defines absorbing kernels outside E."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: If A=0, exact and leap kernels are both absorbing and the weak and exit bounds vanish."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: A one-channel valid transition stays in E by the network admissibility hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: Invalid multi-count exits are bounded separately in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item selects no element from a nonempty family and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "A=0 gives zero weak error and zero exit probability; N=T/h yields total bound 4A^2Th||g||_infty."
+      ],
+      "unresolved_suppliers": []
+    },
+    "alg-critical-reaction-binomial-guarded-tau-leaping": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The initial state is required to lie in the finite state set E, which is nonempty for the run."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: Zero total propensity returns an absorbed path; zero-capacity/zero-rate noncritical channels set K_j=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: A capacity-one channel uses a Bernoulli count and preserves state validity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: Step-size and interface failures return an inconclusive or infeasible prefix without claiming hybrid correctness."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The stated random-law interface declares its choice assumptions; see the definition and the cited choice dependency."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "For m=1 and p=1/2, K is Bernoulli and cannot exceed capacity; T-t caps the final leap."
+      ],
+      "unresolved_suppliers": []
+    },
+    "cor-mlmc-complexity-for-poisson-tau-leaping": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-poisson-tau-leap-weak-order-one-with-exit-bound",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice. Let\n$E\\subseteq\\mathbb Z_{\\ge0}^d$ be finite, let\n$A=\\max_{x\\in E}\\sum_j a_j(x)<\\infty$ for the system\n[[def-reaction-network-propensity-system-and-generator]], and assume\n$a_j(x)=0$ whenever $x+\\nu_j\\notin E$. Extend the exact chain by making every\nstate outside $E$ absorbing, and let $K_h$ be the tau-leap kernel in\n[[alg-explicit-poisson-tau-leaping]] with the same absorbing-invalid-state\nconvention. For $T=Nh$ with $N\\in\\mathbb N$, an initial state $x_0\\in E$, and\na bounded payoff $g:\\mathbb Z^d\\to\\mathbb R$, the leap satisfies\n$$\\left|\\mathbb E_{x_0}g(Y_N)-\\mathbb E_{x_0}g(X_T)\\right| \\le4A^2T h\\,\\|g\\|_\\infty.$$\nIts probability of ever entering an invalid state by $T$ is at most\n$\\tfrac12A^2T h$. This separately bounds the absorbing invalid-state branch;\nthe result makes no claim for unbounded rates.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-minimum-intensity-tau-leap-level-variance",
+          "source_section": "Statement",
+          "quote": "Assume the finite-state reaction system of\n[[def-reaction-network-propensity-system-and-generator]] has propensities\nbounded on $E$ and extended by zero to states outside $E$. Let\n$h_\\ell=T2^{-\\ell}$ for $\\ell\\ge1$, and couple a fine step $h=h_\\ell$ to a\ncoarse step $2h$ as follows. On each of the two half intervals, with fine\nstate $x$ and coarse state $z$, use for channel $j$ a shared\n$\\operatorname{Pois}(h\\min(a_j(x),a_j(z)))$ count and independent residual\ncounts of means $h(a_j(x)-a_j(z))^+$ and $h(a_j(z)-a_j(x))^+$ for the fine\nand coarse paths, as in\n[[lem-shared-minimum-poisson-count-coupling]]. Use independent copies across\nchannels and fresh copies on the two half intervals. Update the fine state after each half interval, and keep\nthe coarse propensities frozen at its state at the start of the coarse\ninterval. Then, for every bounded $g:\\mathbb Z^d\\to\\mathbb R$,\n$$\\operatorname{Var}\\!\\left(g(Y_{h_\\ell}(T))-g(Y_{h_{\\ell-1}}(T))\\right) \\le C h_\\ell,$$\nwhere $C$ depends on $T$, the finite network, and $\\|g\\|_\\infty$, but not\non $\\ell$. This is a variance bound for the stated coupled Poisson leap;\nindependent levels are not covered.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-mlmc-hierarchy-and-coupled-corrections",
+          "source_section": "Definition",
+          "quote": "Fix a refinement factor $M\\in\\mathbb N$ with $M\\ge2$, a base scale $T>0$, and a finite level $L\\in\\mathbb N\\cup\\{0\\}$. The geometric mesh widths are $h_\\ell=T M^{-\\ell}$ for $0\\le\\ell\\le L$. Let $P$ be a real random variable with $\\mathbb E|P|<\\infty$, and for each $\\ell$ let $P_\\ell$ be a real random variable with $\\mathbb E[P_\\ell^2]<\\infty$.\n\nAt level $0$, set $\\Delta_0=P_0$. At each level $\\ell\\ge1$, choose a joint law for a pair $(P_\\ell^{\\mathrm f},P_{\\ell-1}^{\\mathrm c})$ whose marginals are the laws of $P_\\ell$ and $P_{\\ell-1}$, respectively. Such a joint law is a coupling of the two levels. Define the correction $\\Delta_\\ell=P_\\ell^{\\mathrm f}-P_{\\ell-1}^{\\mathrm c}$. This construction gives $\\mathbb E\\Delta_\\ell=\\mathbb E P_\\ell-\\mathbb E P_{\\ell-1}$.\n\nFor each level choose a positive integer $N_\\ell$ and take $\\Delta_{\\ell,1},\\ldots,\\Delta_{\\ell,N_\\ell}$ to be independent copies of $\\Delta_\\ell$. Require the complete sample blocks from distinct levels to be independent. Write $\\bar\\Delta_\\ell=N_\\ell^{-1}\\sum_{i=1}^{N_\\ell}\\Delta_{\\ell,i}$. The finite-level multilevel Monte Carlo estimator is\n$$\\widehat\\mu_{L,\\mathbf N}=\\sum_{\\ell=0}^L\\bar\\Delta_\\ell.$$\nAll corrections have finite second moments because each level approximation does. The shared randomness inside one fine/coarse pair is what can reduce the correction variance; the estimator still uses independent sample blocks across levels.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-mlmc-estimator-moments-and-mse",
+          "source_section": "Statement",
+          "quote": "Use the finite hierarchy and estimator of [[def-mlmc-hierarchy-and-coupled-corrections]]. Put $V_\\ell=\\operatorname{Var}(\\Delta_\\ell)$. Then\n$$\\mathbb E\\widehat\\mu_{L,\\mathbf N}=\\mathbb E P_L,\\qquad \\operatorname{Var}(\\widehat\\mu_{L,\\mathbf N})=\\sum_{\\ell=0}^L\\frac{V_\\ell}{N_\\ell},$$\nand the mean square error for the target $\\mathbb E P$ is exactly\n$$\\mathbb E\\left[(\\widehat\\mu_{L,\\mathbf N}-\\mathbb E P)^2\\right] =\\sum_{\\ell=0}^L\\frac{V_\\ell}{N_\\ell}+(\\mathbb E P_L-\\mathbb E P)^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-mlmc-complexity-under-rate-assumptions",
+          "source_section": "Statement",
+          "quote": "Let $M\\ge2$ be an integer, $T>0$, and $h_\\ell=T M^{-\\ell}$. Let $P$ be an integrable real target. Suppose we are given an infinite compatible hierarchy: for every $\\ell\\ge0$ a square-integrable level approximation $P_\\ell$, and for every $\\ell\\ge1$ a fixed coupling of the laws of $P_\\ell$ and $P_{\\ell-1}$. Define $\\Delta_0=P_0$ and, under each coupling, $\\Delta_\\ell=P_\\ell^{\\mathrm f}-P_{\\ell-1}^{\\mathrm c}$. For each finite $L$, use the first $L+1$ levels and their couplings, with independent sample blocks across levels, as in [[def-mlmc-hierarchy-and-coupled-corrections]]. Suppose there are constants $C_b,C_v,C_c>0$ and exponents $\\alpha\\ge\\frac12$ and $\\beta>0$ such that, for every $\\ell\\ge0$,\n$$|\\mathbb E P_\\ell-\\mathbb E P|\\le C_b h_\\ell^\\alpha,\\qquad \\operatorname{Var}(\\Delta_\\ell)\\le C_v h_\\ell^\\beta,$$\nand the work for one level-$\\ell$ correction sample is at most $C_c h_\\ell^{-1}$. For every sufficiently small $\\epsilon>0$, there are a finite level $L$ and positive integer sample counts $N_0,\\ldots,N_L$ for which the estimator of [[def-mlmc-hierarchy-and-coupled-corrections]] satisfies\n$$\\mathbb E\\left[(\\widehat\\mu_{L,\\mathbf N}-\\mathbb E P)^2\\right]\\le\\epsilon^2$$\nand its total work has the following upper bounds, with constants independent of $\\epsilon$:\n$$\\begin{cases} O(\\epsilon^{-2}),&\\beta>1,\\\\ O\\!\\left(\\epsilon^{-2}(\\log\\epsilon^{-1})^2\\right),&\\beta=1,\\\\ O\\!\\left(\\epsilon^{-2-(1-\\beta)/\\alpha}\\right),&0<\\beta<1. \\end{cases}$$\nThis is an upper bound under the three rate assumptions; it does not assert a matching lower bound or that the rates hold for a particular discretization.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $\\ell\\ge1$, the fine and coarse paths use $T/h_\\ell$ and $T/h_{\\ell-1}$ steps, respectively; both ratios are integers on the dyadic hierarchy. Each step uses $R$ channel count draws and $O(R)$ propensity and update work, so the correction cost is $O(T R/h_\\ell)=O(h_\\ell^{-1})$ for fixed $T$. At level zero, a single path takes one step and uses $O(R)$ work; since $h_0=T>0$ is fixed, this is also $O(h_0^{-1})$ after changing the constant.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1] the bias exponent in [F4] is $\\alpha=1$. By [F2], every adjacent-level variance for $\\ell\\ge1$ is $O(h_\\ell)$. At level zero, $\\Delta_0=g(Y_T)$, so $\\operatorname{Var}(\\Delta_0)\\le\\mathbb E[g(Y_T)^2]\\le\\|g\\|_\\infty^2$; since $h_0=T>0$, increasing the variance constant gives the required $O(h_0)$ bound there as well. Thus the variance exponent for all levels is $\\beta=1$. Apply [F4] with refinement factor $2$ and these exponents. Its $\\beta=1$ case gives $O(\\epsilon^{-2}(\\log\\epsilon^{-1})^2)$ work while controlling the MSE by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "A1",
+            "A2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The finite hierarchy includes the base level and the proof bounds its variance separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The stated rates include the positive finite mesh widths h_l."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The adjacent-level correction uses the one-step coupled variance estimate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The β=1 branch and rounding terms are checked in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item selects no element from a nonempty family and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "For alpha=beta=gamma=1, the generic rate branch is epsilon^-2(log epsilon^-1)^2."
+      ],
+      "unresolved_suppliers": []
+    },
+    "ex-minimum-intensity-coupling-reduces-one-step-variance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-shared-minimum-poisson-count-coupling",
+          "source_section": "Statement",
+          "quote": "Let $h\\ge0$ and let $\\lambda_1,\\lambda_2\\ge0$. Let $C,R_1,R_2$ be\nindependent counts with laws\n$$C\\sim\\operatorname{Pois}(h\\min(\\lambda_1,\\lambda_2)),\\quad R_1\\sim\\operatorname{Pois}(h(\\lambda_1-\\lambda_2)^+),\\quad R_2\\sim\\operatorname{Pois}(h(\\lambda_2-\\lambda_1)^+),$$\nand set $K_1=C+R_1$, $K_2=C+R_2$. Then $K_i\\sim\\operatorname{Pois}(h\\lambda_i)$,\n$$\\mathbb E(K_1-K_2)=h(\\lambda_1-\\lambda_2),\\qquad \\operatorname{Var}(K_1-K_2)=h|\\lambda_1-\\lambda_2|,$$\nand\n$$\\operatorname{Cov}(K_1,K_2)=h\\min(\\lambda_1,\\lambda_2).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], the fine count is $P_c+P_f$ and the coarse count is $P_c$, where the three count components have the independent laws in the Example. Their marginals have parameters $13.1h$ and $13h$ because independent Poisson counts add; this also follows by convolving the masses in [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The coupled difference is exactly $P_f$, so its variance is $0.1h$ by [F2]. If the two counts were independent, their difference would have variance $13.1h+13h=26.1h$. Thus the shared minimum reduces the correction variance by a factor of $261$ in this one-step example.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This zero boundary case is outside the quantified claim and is not needed for its proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The displayed positive rates avoid a zero-parameter ambiguity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The one-channel coupling is exactly the scalar shared-minimum lemma."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The independent-rate comparison is computed in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item selects no element from a nonempty family and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "Fine-minus-coarse variance is 0.1h; independent counts give 26.1h; ratio 261."
+      ],
+      "unresolved_suppliers": []
+    },
+    "ex-poisson-tau-leap-negative-population-pure-death": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reaction-network-propensity-system-and-generator",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d$ and $R$. A **reaction propensity system** consists of a state set $E\\subseteq\\mathbb Z^d$ that is finite or countable, increments $\\nu_j\\in\\mathbb Z^d$ for $1\\le j\\le R$, and propensities $a_j:E\\to[0,\\infty)$. Here “countable” means finite or countably infinite, as in [[def-countable]]. The total propensity\n$$\\lambda(x):=\\sum_{j=1}^R a_j(x)$$\nis finite for every $x\\in E$, and $a_j(x)>0$ implies $x+\\nu_j\\in E$. Here $\\mathbb N$ and $\\mathbb Z$ have the meanings in [[def-natural-numbers]] and [[def-integers]], and addition in $\\mathbb Z^d$ is coordinatewise.\n\nA **reaction event** of channel $j$ at state $x$ records the marked transition $x\\mapsto x+\\nu_j$. The counting process $N_j(t)$ records the number of channel-$j$ events by time $t$. A zero increment $\\nu_j=0$ is allowed: it records a reaction event without changing the state.\n\nFor a time-homogeneous system, the **reaction generator operator** on bounded functions $f:E\\to\\mathbb R$ is\n$$(Qf)(x):=\\sum_{j:a_j(x)>0} a_j(x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nWhen $E$ is finite, $\\Lambda:=\\max_{x\\in E}\\lambda(x)<\\infty$. If no active reaction has zero increment, the corresponding matrix has off-diagonal entries $q_{xy}=\\sum_{j:x+\\nu_j=y}a_j(x)$ and diagonal $q_{xx}=-\\lambda(x)$. With zero-increment events, the operator formula remains valid and the matrix diagonal is instead minus the sum of state-changing rates; the zero-increment channels remain part of the marked event process.\n\nFor a finite horizon $T$, a **time-dependent propensity system** replaces $a_j(x)$ by functions $a_j:[0,T]\\times E\\to[0,\\infty)$ whose sections $t\\mapsto a_j(t,x)$ are measurable for the Borel sigma-algebra $\\mathcal B([0,T])$ of the usual topology on $[0,T]$ ([[def-borel-sigma-algebra]]). Require finite total rate $\\lambda(t,x):=\\sum_j a_j(t,x)$. Its time-dependent generator operator is\n$$(Q_t f)(x):=\\sum_{j:a_j(t,x)>0} a_j(t,x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nThis definition specifies a stochastic model. It does not assert that a physical chemical system follows that model.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-explicit-poisson-tau-leaping",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite-channel reaction propensity system\n[[def-reaction-network-propensity-system-and-generator]], an initial state\n$x_0\\in E$, a deterministic grid $0=t_0<t_1<\\cdots<t_N=T$ with finite $N$,\nand a draw budget $B\\in\\mathbb N\\cup\\{\\infty\\}$. Write\n$h_n=t_{n+1}-t_n$. At each step the count vector has the product law whose\n$j$th marginal is $\\operatorname{Pois}(a_j(x_n)h_n)$, as defined in\n[[def-scalar-poisson-count-law]]. The budget counts scalar Poisson draws.\n\n**Procedure.** Set $x=x_0$, grid index $n=0$, Poisson-draw counter $d=0$, and\nstatus **horizon**.\n\n1. If $n=N$, return the completed path with status **horizon**. If $x\\notin E$,\n   set status **invalid-state**, hold $x$ fixed to $T$, and return. If\n   $\\lambda(x)=0$, hold $x$ fixed to $T$ and return status\n   **absorbed**.\n2. If fewer than $R$ draws remain in budget $B$ (that is, $B-d<R$), return the path prefix with\n   status **budget-exhausted**; it does not define a terminal sample at $T$.\n3. Draw conditionally independent $K_{j,n}\\sim\\operatorname{Pois}(a_j(x)h_n)$,\n   $1\\le j\\le R$, and set $y=x+\\sum_{j=1}^R K_{j,n}\\nu_j$. Increase\n   $d\\leftarrow d+R$.\n4. Advance time to $t_{n+1}$. If $y\\notin E$, set $x=y$, set status\n   **invalid-state**, and keep $y$ fixed through all remaining grid times. If\n   $y\\in E$, set $x\\leftarrow y$, increment $n\\leftarrow n+1$, and continue.\n\nThe run has at most $N$ iterations. Each valid step uses exactly $R$ scalar\nPoisson draws, $R$ propensity evaluations, and one finite stoichiometric\nupdate. Under the unit-operation convention that each scalar draw,\npropensity evaluation, and stoichiometric update costs one unit, its work is\n$O(RN)$; the cost internal to a particular random-number generator is\nexcluded. Under the same convention, an event-count SSA implementation does\none exponential draw and one channel selection per simulated event, so its\nwork on a realized path is $O(M_T)$, where $M_T$ is that path's event count\nbefore $T$. This compares operation counts only; it does not compare\nparameter-dependent random-number costs. The method is approximate; its\nPoisson leap can leave the physical state set, and no error guarantee is\nasserted here for unbounded rates or the budget-exhausted prefix.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The leap state is negative exactly when $1-K<0$, equivalently $K\\ge2$. Using the masses in [F3], $$\\mathbb P(K\\ge2)=1-\\mathbb P(K=0)-\\mathbb P(K=1) =1-e^{-ch}(1+ch)>0.$$ The strict inequality follows from $e^{ch}>1+ch$ for $ch>0$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For small $h$, Taylor expansion of $e^{-ch}(1+ch)$ gives $\\mathbb P(K\\ge2)=\\tfrac12c^2h^2+O(h^3)$. The exact chain cannot become negative because its only positive-rate event sends $1$ to $0$, after which the rate is zero by [F1]. Thus the invalid tau-leap event is a distinct numerical exit from the physical state set.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The physical state set {0,1} is nonempty and explicitly stated."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: At the absorbing state 0 the death propensity vanishes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The initial population one is the one-molecule boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The event K>=2 is exactly the invalid-state event in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item selects no element from a nonempty family and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "For c h=1, P(K>=2)=1-2/e>0; as h->0 it is c^2h^2/2+O(h^3)."
+      ],
+      "unresolved_suppliers": []
+    },
+    "ex-chemical-langevin-near-empty-poisson-birth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-finite-intensity-poisson-process-existence-and-mixed-binomial-law",
+          "source_section": "Statement",
+          "quote": "Let $\\nu$ be a finite Borel measure on $S$\n([[def-finite-sigma-finite-and-semifinite-measures]]) and put $\\lambda=\\nu(S)$. A\nPoisson point process of intensity $\\nu$ exists. If $\\lambda=0$ it is the zero\nprocess. If $\\lambda>0$, its law is the push-forward of\n$$\\sum_{n=0}^\\infty e^{-\\lambda}\\frac{\\lambda^n}{n!}\\left(\\frac{\\nu}{\\lambda}\\right)^{\\otimes n}$$\non the disjoint union $\\coprod_{n\\ge0}S^n$ under\n$(x_1,\\ldots,x_n)\\mapsto\\sum_{i=1}^n\\delta_{x_i}$. Every Poisson point\nprocess of finite total intensity has this same law. This is the\n**mixed-binomial representation**: the total count is Poisson and, in the\nconstruction, the $n$ locations in component $S^n$ have product law\n$(\\nu/\\lambda)^{\\otimes n}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-poisson-and-cox-point-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be as in [[def-random-measure-and-locally-finite-point-process]]. A\n**Poisson point process with locally finite, sigma-finite intensity measure\n$\\nu$** is a point process $\\eta$ such that for every finite pairwise-disjoint\nfamily of Borel sets $B_1,\\ldots,B_m$, the counts $\\eta(B_i)$ are independent\nrandom elements ([[def-independent-random-elements]]) and $\\eta(B_i)$ has the\nscalar Poisson law of mean $\\nu(B_i)$\n([[def-scalar-poisson-count-law]],\n[[lem-poisson-count-law-normalization-and-moments]]). If $\\nu(B)=\\infty$,\nthe extended count convention is $\\eta(B)=+\\infty$ almost surely.\nHere sigma-finite means that $S$ is a countable union of Borel sets of finite\n$\\nu$-measure ([[def-finite-sigma-finite-and-semifinite-measures]]); for the\nstated $S$, local finiteness also implies sigma-finiteness by the compact\nexhaustion in\n[[lem-locally-compact-second-countable-spaces-have-compact-exhaustions]].\n\nLet $\\mathcal M_{\\mathrm{lf}}(S)$ be the evaluation-measurable space of locally\nfinite Borel measures. A **Cox point process directed by a random measure\n$\\xi$** consists of a point process $\\eta$, a random locally finite measure\n$\\xi$, and a supplied probability kernel $K$ from $\\mathcal M_{\\mathrm{lf}}(S)$\nto $\\mathcal N_{\\mathrm{lf}}(S)$ such that $K(\\xi,\\cdot)$ is a regular\nconditional law of $\\eta$ given $\\xi$\n([[def-conditional-law-given-a-random-element]]) and, for $P_\\xi$-almost every\n$\\mu$, $K(\\mu,\\cdot)$ is the law of a Poisson point process of intensity\n$\\mu$. The kernel is part of the model data; this definition does not assert\nthat such a kernel exists for every $(\\eta,\\xi)$. The mean measure of $\\xi$ is\n$\\nu(B)=\\mathbb E[\\xi(B)]$, a measure by\n[[lem-mean-measure-and-integrals-of-a-random-point-process]].\n\nBoth definitions permit multiplicities. They do not assert that diffuse\ndirecting measures yield simple processes or that a Cox law determines the law\nof its directing measure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-density-scaled-jump-and-chemical-langevin-generators",
+          "source_section": "Definition",
+          "quote": "Fix finitely many stoichiometric vectors $\\nu_1,\\ldots,\\nu_R\\in\\mathbb Z^d$,\nan open set $U\\subseteq\\mathbb R^d$, nonnegative propensity functions\n$a_j:U\\to[0,\\infty)$, and a volume parameter $V\\ge1$. At a density state\n$x\\in U$ for which every positive-rate destination $x+\\nu_j/V$ lies in $U$,\nthe density-scaled jump model has jump $\\nu_j/V$ at rate $Va_j(x)$. For a\ntwice differentiable test function $\\phi$ defined at those destinations, its\ngenerator is\n$$\\mathcal L_V\\phi(x)=V\\sum_{j:a_j(x)>0} a_j(x)\\bigl(\\phi(x+\\nu_j/V)-\\phi(x)\\bigr).$$\n\nPut $b(x)=\\sum_j\\nu_j a_j(x)$ and\n$C(x)=\\sum_j a_j(x)\\nu_j\\nu_j^{\\mathsf T}$. The associated\n**chemical Langevin diffusion generator** is\n$$\\mathcal G_V\\phi(x)=b(x)\\cdot\\nabla\\phi(x) +\\frac{1}{2V}\\sum_{j=1}^R a_j(x)\\, \\nu_j^{\\mathsf T}D^2\\phi(x)\\nu_j.$$\nA Markov diffusion with this generator is called the chemical Langevin\nmodel here. The definition does not assert existence, uniqueness, positivity,\nor approximation accuracy for either process. In an SDE representation the\ndrift is $b$ and the covariance matrix per unit time is $C/V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $N_T\\sim\\operatorname{Pois}(m)$, so $X_T=N_T/V\\ge0$ almost surely. The point-process counts on disjoint intervals are independent by [F2]. On an interval of length $h$, put $r=V\\lambda h$. By [F3], $\\mathbb P(K=0)=e^{-r}=1-r+O(r^2)$ and $\\mathbb P(K=1)=re^{-r}=r+O(r^2)$; also $\\mathbb P(K\\ge2)\\le\\mathbb E[K(K-1)]/2=r^2/2$. For bounded $f$, the multiple-count contribution to its expected increment is therefore $O(h^2)\\|f\\|_\\infty$. Dividing the zero/single-count expansion by $h$ gives the density-count generator $V\\lambda(f(x+1/V)-f(x))$, as in [F4].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The density $\\varphi$ in [F5] is even. The moments of orders one and three are absolutely integrable, as follows by substituting $v=u^2/2$ in the tail integrals, so symmetry gives $\\mathbb E G=\\mathbb E G^3=0$. Since $\\varphi'(u)=-u\\varphi(u)$ and $u\\varphi(u)\\to0$ at both infinities, integration by parts gives $$\\mathbb E[G^2]=\\int_{\\mathbb R}u^2\\varphi(u)\\,du =\\int_{\\mathbb R}\\varphi(u)\\,du=1.$$ Expanding the cube in [A2] now gives $$\\mathbb E[Z_T^3]=\\mu^3+3\\mu^2/V.$$",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Reindexing the nonnegative Poisson mass series gives $$\\mathbb E[N_T(N_T-1)(N_T-2)] =e^{-m}\\sum_{k=3}^\\infty\\frac{k(k-1)(k-2)m^k}{k!} =m^3e^{-m}\\sum_{r=0}^\\infty\\frac{m^r}{r!}=m^3.$$ Using [F3] and $N^3=N(N-1)(N-2)+3N(N-1)+N$ yields $$\\mathbb E[X_T^3]=\\mu^3+\\frac{3\\mu^2}{V}+\\frac{\\mu}{V^2}.$$",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Subtracting the two moments in steps 2.1 and 1.2 gives $$\\mathbb E[X_T^3]-\\mathbb E[Z_T^3]=\\mu/V^2>0.$$ Thus this exact marginal comparison has a weak discrepancy of order $V^{-2}$ for the cubic payoff.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The CLE value is negative exactly when $G<-\\sqrt{V\\mu}$. The normal density is strictly positive on every nonempty interval, so this event has positive probability. As $V\\mu\\downarrow0$, continuity of the normal distribution and symmetry give $$\\mathbb P(Z_T<0)=\\mathbb P(G<-\\sqrt{V\\mu})\\longrightarrow\\tfrac12.$$ The jump marginal remains nonnegative by step 1.1.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "A2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This zero boundary case is outside the quantified claim and is not needed for its proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The positive-rate assumptions are explicit; the limiting zero-intensity boundary is examined in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The one-channel immigration count law is used in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The Poisson and Gaussian laws are compared directly; the support mismatch is verified in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The stated random-law interface declares its choice assumptions; see the example and the cited choice dependency."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "The cubic marginal difference equals mu/V^2; P(Z_T<0)=Phi(-sqrt(V mu)) tends to 1/2 as V mu->0."
+      ],
+      "unresolved_suppliers": []
+    },
+    "ex-stiff-reversible-explicit-leap-mean-amplification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reaction-network-propensity-system-and-generator",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d$ and $R$. A **reaction propensity system** consists of a state set $E\\subseteq\\mathbb Z^d$ that is finite or countable, increments $\\nu_j\\in\\mathbb Z^d$ for $1\\le j\\le R$, and propensities $a_j:E\\to[0,\\infty)$. Here “countable” means finite or countably infinite, as in [[def-countable]]. The total propensity\n$$\\lambda(x):=\\sum_{j=1}^R a_j(x)$$\nis finite for every $x\\in E$, and $a_j(x)>0$ implies $x+\\nu_j\\in E$. Here $\\mathbb N$ and $\\mathbb Z$ have the meanings in [[def-natural-numbers]] and [[def-integers]], and addition in $\\mathbb Z^d$ is coordinatewise.\n\nA **reaction event** of channel $j$ at state $x$ records the marked transition $x\\mapsto x+\\nu_j$. The counting process $N_j(t)$ records the number of channel-$j$ events by time $t$. A zero increment $\\nu_j=0$ is allowed: it records a reaction event without changing the state.\n\nFor a time-homogeneous system, the **reaction generator operator** on bounded functions $f:E\\to\\mathbb R$ is\n$$(Qf)(x):=\\sum_{j:a_j(x)>0} a_j(x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nWhen $E$ is finite, $\\Lambda:=\\max_{x\\in E}\\lambda(x)<\\infty$. If no active reaction has zero increment, the corresponding matrix has off-diagonal entries $q_{xy}=\\sum_{j:x+\\nu_j=y}a_j(x)$ and diagonal $q_{xx}=-\\lambda(x)$. With zero-increment events, the operator formula remains valid and the matrix diagonal is instead minus the sum of state-changing rates; the zero-increment channels remain part of the marked event process.\n\nFor a finite horizon $T$, a **time-dependent propensity system** replaces $a_j(x)$ by functions $a_j:[0,T]\\times E\\to[0,\\infty)$ whose sections $t\\mapsto a_j(t,x)$ are measurable for the Borel sigma-algebra $\\mathcal B([0,T])$ of the usual topology on $[0,T]$ ([[def-borel-sigma-algebra]]). Require finite total rate $\\lambda(t,x):=\\sum_j a_j(t,x)$. Its time-dependent generator operator is\n$$(Q_t f)(x):=\\sum_{j:a_j(t,x)>0} a_j(t,x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nThis definition specifies a stochastic model. It does not assert that a physical chemical system follows that model.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bounded-rate-reaction-generator-dynkin-identity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice. Let $D$ and $F$ be disjoint\nfinite sets of states, and let a finite-channel reaction chain move from a\nstate $x\\in D$ by channel $j$ to $x+\\nu_j\\in D\\cup F$ at rate $a_j(x)$.\nAssume its total rate is at most $A<\\infty$ on $D$, and make every state in\n$F$ absorbing. Let $v:[0,T]\\times(D\\cup F)\\to\\mathbb R$ have a continuously\ndifferentiable time section for each state, with $\\partial_t v$ continuous\nin time. Define\n$$Qf(x)=\\sum_j a_j(x)(f(x+\\nu_j)-f(x))\\quad(x\\in D),\\qquad Qf(x)=0\\quad(x\\in F).$$\nThen, for the stopped chain $X$ and $0\\le t\\le T$,\n$$\\mathbb E[v(t,X_t)] = \\mathbb E[v(0,X_0)] + \\mathbb E\\int_0^t(\\partial_s v(s,X_s)+Qv(s,\\cdot)(X_s))\\,ds.$$\nIn particular, $D$ may be the finite set of lattice states inside a compact\nstopping region, and $F$ the finite set of one-jump exit destinations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-explicit-poisson-tau-leaping",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite-channel reaction propensity system\n[[def-reaction-network-propensity-system-and-generator]], an initial state\n$x_0\\in E$, a deterministic grid $0=t_0<t_1<\\cdots<t_N=T$ with finite $N$,\nand a draw budget $B\\in\\mathbb N\\cup\\{\\infty\\}$. Write\n$h_n=t_{n+1}-t_n$. At each step the count vector has the product law whose\n$j$th marginal is $\\operatorname{Pois}(a_j(x_n)h_n)$, as defined in\n[[def-scalar-poisson-count-law]]. The budget counts scalar Poisson draws.\n\n**Procedure.** Set $x=x_0$, grid index $n=0$, Poisson-draw counter $d=0$, and\nstatus **horizon**.\n\n1. If $n=N$, return the completed path with status **horizon**. If $x\\notin E$,\n   set status **invalid-state**, hold $x$ fixed to $T$, and return. If\n   $\\lambda(x)=0$, hold $x$ fixed to $T$ and return status\n   **absorbed**.\n2. If fewer than $R$ draws remain in budget $B$ (that is, $B-d<R$), return the path prefix with\n   status **budget-exhausted**; it does not define a terminal sample at $T$.\n3. Draw conditionally independent $K_{j,n}\\sim\\operatorname{Pois}(a_j(x)h_n)$,\n   $1\\le j\\le R$, and set $y=x+\\sum_{j=1}^R K_{j,n}\\nu_j$. Increase\n   $d\\leftarrow d+R$.\n4. Advance time to $t_{n+1}$. If $y\\notin E$, set $x=y$, set status\n   **invalid-state**, and keep $y$ fixed through all remaining grid times. If\n   $y\\in E$, set $x\\leftarrow y$, increment $n\\leftarrow n+1$, and continue.\n\nThe run has at most $N$ iterations. Each valid step uses exactly $R$ scalar\nPoisson draws, $R$ propensity evaluations, and one finite stoichiometric\nupdate. Under the unit-operation convention that each scalar draw,\npropensity evaluation, and stoichiometric update costs one unit, its work is\n$O(RN)$; the cost internal to a particular random-number generator is\nexcluded. Under the same convention, an event-count SSA implementation does\none exponential draw and one channel selection per simulated event, so its\nwork on a realized path is $O(M_T)$, where $M_T$ is that path's event count\nbefore $T$. This compares operation counts only; it does not compare\nparameter-dependent random-number costs. The method is approximate; its\nPoisson leap can leave the physical state set, and no error guarantee is\nasserted here for unbounded rates or the budget-exhausted prefix.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-poisson-tau-leap-moment-and-covariance-identities",
+          "source_section": "Statement",
+          "quote": "Fix a state $x\\in E$ and step $h\\ge0$ in\n[[alg-explicit-poisson-tau-leaping]]. Let\n$\\Delta Y=\\sum_{j=1}^R\\nu_jK_j$, where conditionally independent\n$K_j\\sim\\operatorname{Pois}(a_j(x)h)$. Then\n$$\\mathbb E[\\Delta Y\\mid x]=h\\sum_{j=1}^R a_j(x)\\nu_j,$$\n$$\\operatorname{Cov}(\\Delta Y\\mid x)=h\\sum_{j=1}^R a_j(x)\\nu_j\\nu_j^{\\mathsf T},$$\nand\n$$\\mathbb E[\\|\\Delta Y\\|^2\\mid x] =h\\sum_{j=1}^R a_j(x)\\|\\nu_j\\|^2 +h^2\\left\\|\\sum_{j=1}^R a_j(x)\\nu_j\\right\\|^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F2] to $v(t,x)=x$ and use [F1]. The exact mean $m(t)=\\mathbb E X_t$ satisfies $$m(t)=x_0+\\int_0^t(c_2M-\\lambda m(s))\\,ds.$$ This makes $m$ absolutely continuous; differentiating almost everywhere shows that the derivative of $e^{\\lambda t}(m(t)-c_2M/\\lambda)$ is zero almost everywhere. This product is absolutely continuous, so it is constant; its value at $t=0$ is $x_0-c_2M/\\lambda$. Rearranging gives $$m(t)=\\frac{c_2M}{\\lambda} +\\left(x_0-\\frac{c_2M}{\\lambda}\\right)e^{-\\lambda t}.$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], one Poisson leap has $\\mathbb E Y_1=(1-\\lambda h)x_0+c_2Mh$. Its linear mean amplification factor is $1-\\lambda h$, whose absolute value exceeds $1$ when $h>2/\\lambda$. For the symmetric case $c_1=c_2=r$ and initial state $x_0=0$, the choice $h=3/(2r)$ gives $\\mathbb E Y_1=3M/2$, outside the physical upper bound $M$, whereas the exact expectation from step 1.1 is $\\frac M2(1-e^{-3})<M/2$. This is a one-step comparison; it does not assume that invalid Poisson leaps remain in the physical state set.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This zero boundary case is outside the quantified claim and is not needed for its proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The positive rates c1,c2 and absorbing boundary rates are explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The symmetric one-step example with x0=0 is computed in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The exact mean remains in its physical bound while the leap mean can exceed it."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item selects no element from a nonempty family and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "With c1=c2=r, h=3/(2r), the explicit mean factor is -2 and E[Y1]=3M/2."
+      ],
+      "unresolved_suppliers": []
+    },
+    "ex-binomial-guard-prevents-invalid-counts-but-changes-noise": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-explicit-poisson-tau-leaping",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite-channel reaction propensity system\n[[def-reaction-network-propensity-system-and-generator]], an initial state\n$x_0\\in E$, a deterministic grid $0=t_0<t_1<\\cdots<t_N=T$ with finite $N$,\nand a draw budget $B\\in\\mathbb N\\cup\\{\\infty\\}$. Write\n$h_n=t_{n+1}-t_n$. At each step the count vector has the product law whose\n$j$th marginal is $\\operatorname{Pois}(a_j(x_n)h_n)$, as defined in\n[[def-scalar-poisson-count-law]]. The budget counts scalar Poisson draws.\n\n**Procedure.** Set $x=x_0$, grid index $n=0$, Poisson-draw counter $d=0$, and\nstatus **horizon**.\n\n1. If $n=N$, return the completed path with status **horizon**. If $x\\notin E$,\n   set status **invalid-state**, hold $x$ fixed to $T$, and return. If\n   $\\lambda(x)=0$, hold $x$ fixed to $T$ and return status\n   **absorbed**.\n2. If fewer than $R$ draws remain in budget $B$ (that is, $B-d<R$), return the path prefix with\n   status **budget-exhausted**; it does not define a terminal sample at $T$.\n3. Draw conditionally independent $K_{j,n}\\sim\\operatorname{Pois}(a_j(x)h_n)$,\n   $1\\le j\\le R$, and set $y=x+\\sum_{j=1}^R K_{j,n}\\nu_j$. Increase\n   $d\\leftarrow d+R$.\n4. Advance time to $t_{n+1}$. If $y\\notin E$, set $x=y$, set status\n   **invalid-state**, and keep $y$ fixed through all remaining grid times. If\n   $y\\in E$, set $x\\leftarrow y$, increment $n\\leftarrow n+1$, and continue.\n\nThe run has at most $N$ iterations. Each valid step uses exactly $R$ scalar\nPoisson draws, $R$ propensity evaluations, and one finite stoichiometric\nupdate. Under the unit-operation convention that each scalar draw,\npropensity evaluation, and stoichiometric update costs one unit, its work is\n$O(RN)$; the cost internal to a particular random-number generator is\nexcluded. Under the same convention, an event-count SSA implementation does\none exponential draw and one channel selection per simulated event, so its\nwork on a realized path is $O(M_T)$, where $M_T$ is that path's event count\nbefore $T$. This compares operation counts only; it does not compare\nparameter-dependent random-number costs. The method is approximate; its\nPoisson leap can leave the physical state set, and no error guarantee is\nasserted here for unbounded rates or the budget-exhausted prefix.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-critical-reaction-binomial-guarded-tau-leaping",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite state reaction system\n[[def-reaction-network-propensity-system-and-generator]] with nonzero jump\nvectors, initial state $x_0\\in E$, horizon $T>0$, maximum leap\n$\\tau_{\\max}>0$, critical threshold $n_c\\in\\mathbb N$, finite step budget\n$B$ that is a nonnegative integer, and the ideal random draws required by\nthe procedure. For a state $x$ and channel $j$, define its admissible firing\ncapacity\n$$\\mathbb N_0:=\\{0,1,2,\\ldots\\},\\qquad m_j(x):=\\max\\{m\\in\\mathbb N_0:x+r\\nu_j\\in E \\text{ for every integer }r\\in\\{0,\\ldots,m\\}\\}.$$\nFiniteness of $E$ and $\\nu_j\\ne0$ make this maximum finite. Let\n$C(x)=\\{j:m_j(x)\\le n_c\\}$ be the critical set. At each outer state $x$, hold\n$C(x)$ fixed and form the finite reaction system on $E$ using only those\nchannels, with their original propensities. The critical SSA subroutine runs\nthe direct Gillespie method on this restricted system with event budget one\nand horizon $\\tau$; it returns its first event $(s,j_*)$ if it occurs by\n$\\tau$, and otherwise returns no event. The restricted system remains\nadmissible because its positive-rate transitions are among those of the\noriginal system. The exactness theorem\n[[thm-finite-state-gillespie-and-next-reaction-exactness]] applies under\nCountable Choice and Dependent Choice, which are assumed for this subroutine.\nThat theorem's full-path law implies the one-event prefix law used here; the\nfinite event budget returns this first-event prefix only.\n\n**Procedure.** Set $t=0$, $x=x_0$, and status **completed**.\n\n1. If $t=T$, return the completed path. If $x\\notin E$, return the current\n   path prefix with status **invalid-state**. If the step budget is exhausted\n   before $T$, return the current path prefix with status **inconclusive**.\n   If $\\lambda(x)=0$, hold $x$ fixed through $T$ and return **absorbed**.\n2. Compute $C(x)$ and\n   $$\\tau=\\min\\!\\left(T-t,\\tau_{\\max}, \\min_{\\substack{j\\notin C(x)\\\\a_j(x)>0}}\\frac{m_j(x)}{a_j(x)}\\right),$$\n   where the inner minimum over an empty set is $+\\infty$. If $\\tau\\le0$,\n   return **step-size-infeasible** with the current path prefix. Call\n   critical SSA for horizon $\\tau$. It returns either no critical event\n   before $\\tau$, or a pair $(s,j_*)$ with $0<s\\le\\tau$ and $j_*\\in C(x)$.\n   Set $\\delta$ to $s$ in the event case and to $\\tau$ otherwise.\n3. Starting from $\\widetilde x=x$, process each noncritical channel in a\n   fixed order. Recompute $m_j(\\widetilde x)$. If $a_j(\\widetilde x)>0$ and\n   $m_j(\\widetilde x)=0$, return **critical-interface-required** with the\n   current path prefix. Otherwise\n   set $K_j=0$ when $m_j(\\widetilde x)=0=a_j(\\widetilde x)$. When\n   $m_j(\\widetilde x)>0$, set\n   $p_j=a_j(\\widetilde x)\\delta/m_j(\\widetilde x)$; if $p_j>1$, return\n   **step-size-infeasible** with the current path prefix and without rejecting\n   and resampling. Draw\n   $K_j\\sim\\operatorname{Binomial}(m_j,p_j)$ and update\n   $\\widetilde x\\leftarrow\\widetilde x+K_j\\nu_j$.\n4. If critical SSA returned $(s,j_*)$ but\n   $\\widetilde x+\\nu_{j_*}\\notin E$, return **inconclusive** with the current\n   path prefix. Otherwise apply\n   that one critical reaction. Set $x\\leftarrow\\widetilde x$ (after the\n   critical reaction, if present), set $t\\leftarrow t+\\delta$, increase the\n   step count, and repeat.\n\nAt every binomial update, $K_j\\le m_j(\\widetilde x)$, so each sequential\nintermediate state stays in $E$. The finite budget prevents an infinite run.\nEach loop processes at most $R$ noncritical channels and one first-event SSA\ncall over at most $R$ channels, so under a unit-operation convention its\nwork is $O(BR)$; random-number generation internals are excluded.\nThe direct-method random stream uses Countable Choice and Dependent Choice\nthrough [[thm-countable-product-of-probability-spaces]]; the exact event law\nuses them as stated in the cited exactness theorem.\nThis guarded procedure changes the Poisson count law: the binomial variance is\n$m_jp_j(1-p_j)$, not the Poisson variance $a_j\\delta$. The weak-order and MLMC\nclaims for explicit Poisson tau-leaping below do not transfer to this algorithm.\nNo correctness or convergence theorem for the guarded hybrid is claimed here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $n>n_c$, the death channel is noncritical, and $\\tau=\\min(T,\\tau_{\\max},m/a(n))=h$. The critical set is empty, hence the critical SSA call returns no event and $\\delta=h$. Thus $p=1/2$. The guarded count $K_B$ is a sum of $n$ Bernoulli variables, each in $\\{0,1\\}$ by [F3], so $0\\le K_B\\le n$ and the updated population $n-K_B$ is nonnegative. Its mean is $np=n/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Independence of the Bernoulli trials gives $\\operatorname{Var}(K_B)=\\sum_{i=1}^n p(1-p)=n/4$. In contrast, the Poisson count has mean $a(n)h=n/2$ and variance $n/2$ by [F1, F4]. Thus the binomial guard retains the mean but halves the count variance in this finite model; it is not the same Poisson leap law.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The unguarded Poisson count has $\\mathbb P(K_P>n)>0$, since every mass at $k>n$ is positive when its parameter $n/2$ is positive. Therefore its leap can overdraw the available molecules, while the guarded count cannot.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is stated for its specified nonempty channel or state input and makes no empty-object claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The finite pure-death state set {0,...,n} is nonempty for n>=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case n=0 is excluded because the example assumes n>=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The n=1 boundary gives a Bernoulli guarded count and is included by the formula."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement/definition evidence: The Poisson overdraw event and binomial capacity bound are compared in steps 1.1–1.3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item selects no element from a nonempty family and assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so there is no forward or reverse implication to check."
+        }
+      ],
+      "finite_checks": [
+        "For p=1/2, Var Binomial(n,1/2)=n/4 while Var Pois(n/2)=n/2."
+      ],
+      "unresolved_suppliers": []
+    }
+  }
+}

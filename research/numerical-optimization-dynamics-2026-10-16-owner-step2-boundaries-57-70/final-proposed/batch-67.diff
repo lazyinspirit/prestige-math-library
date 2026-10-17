@@ -1,0 +1,473 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-67.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-owner-step2-boundaries-57-70/final-proposed/batch-67.proof-contracts.json
+@@ -26,8 +26,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The finite-dimensional input has positive order; no empty matrix or vector domain is asserted."
++          "status": "checked",
++          "evidence": "The Definition fixes nonzero v and 1<=r<m<=n, so Arnoldi and retained target dimensions are positive and p=m-r>=1 shifts are required in implicit no-lock restart. It explicitly initializes no locked pairs and an empty orthonormal Q in step 3; these are valid empty accumulators. A zero residual-block range yields no F columns, while the queue/refill or invariant-subspace-breakdown branch determines continuation."
+         },
+         {
+           "case": "zero",
+@@ -37,7 +37,7 @@
+         {
+           "case": "one",
+           "status": "not_applicable",
+-          "reason": "The condition 1≤r<m≤n forces n≥2, so an order-one matrix is outside this algorithm input."
++          "reason": "The condition 1\u2264r<m\u2264n forces n\u22652, so an order-one matrix is outside this algorithm input."
+         },
+         {
+           "case": "degenerate",
+@@ -47,22 +47,22 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "There is no interval or endpoint parameter in this item."
++          "reason": "Its Definition retains the actual endpoints ||r_u||<=tau and c=Nmax and separates invariant-subspace-breakdown from unavailable shift/rank outputs. Zero tolerance and empty initial locked block are explicit."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument uses only finite-dimensional linear algebra and no arbitrary-family choice."
++          "reason": "The target rule is supplied and must return r-k independent current vectors or unavailable. Definition step3 uses finite pivot orthogonalization with original-index tie breaks; shift selection is a required finite-list input, not an unrestricted successful-choice assumption."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "reason": "The restarted-Arnoldi Definition prescribes rank-increasing lock tests, target-rule size/independence checks and exact QR restarts; it supplies no iff convergence theorem for arbitrary shifts."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "reason": "The restarted-Arnoldi Definition prescribes rank-increasing lock tests, target-rule size/independence checks and exact QR restarts; it supplies no iff convergence theorem for arbitrary shifts."
+         }
+       ],
+       "axioms": [],
+@@ -193,33 +193,33 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The finite-dimensional input has positive order; no empty matrix or vector domain is asserted."
++          "status": "checked",
++          "evidence": "The Statement assumes 1<=r<m, so p=m-r>=1 and q has a nonempty shift product; no-breakdown Arnoldi supplies its positive basis dimension. Step 2.1 explicitly initializes P_0=I for the empty cumulative rotation product. The requested retained Krylov space has dimension r by hypothesis, rather than an empty filtered space."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Statement: q(A)v_1≠0 is an explicit hypothesis; the g=0 case is included and yields an invariant retained subspace."
++          "evidence": "Statement: q(A)v_1\u22600 is an explicit hypothesis; the g=0 case is included and yields an invariant retained subspace."
+         },
+         {
+           "case": "one",
+           "status": "not_applicable",
+-          "reason": "The theorem assumes 1≤r<m, so m≥2 and the one-dimensional restart case is excluded."
++          "reason": "The theorem assumes 1\u2264r<m, so m\u22652 and the one-dimensional restart case is excluded."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Statement: rho≠0 and filtered Krylov dimension r are required; g=0 is separately covered."
++          "evidence": "Statement: rho\u22600 and filtered Krylov dimension r are required; g=0 is separately covered."
+         },
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "There is no interval or endpoint parameter in this item."
++          "reason": "The Statement fixes1<=r<m,p=m-r>=1, no Arnoldi breakdown and nonzero q(A)v_1 and rho. step 4.1 treats g=0 as exact invariance and otherwise normalizes g; neither zero branch is silently divided."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument uses only finite-dimensional linear algebra and no arbitrary-family choice."
++          "reason": "The exact shifts and Givens elimination order are supplied in the Statement. step 2.1 fixes cumulative products and3.2 their bandwidth, requiring no spectral-selection rule or arbitrary orthogonalization choice."
+         },
+         {
+           "case": "iff-forward",
+@@ -244,8 +244,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The finite-dimensional input has positive order; no empty matrix or vector domain is asserted."
++          "status": "checked",
++          "evidence": "The Definition has1<=q<=n and an initial full-rank B-orthonormal block. Its D_0 is explicitly empty, and step3 omits that block while keeping X; rank compression retains at least q directions before any successful projected solve."
+         },
+         {
+           "case": "zero",
+@@ -255,7 +255,7 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Definition: q=1 is permitted when n≥1 and all finite projected operations are defined."
++          "evidence": "Definition: q=1 is permitted when n\u22651 and all finite projected operations are defined."
+         },
+         {
+           "case": "degenerate",
+@@ -265,22 +265,22 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "There is no interval or endpoint parameter in this item."
++          "reason": "The Definition tests residual<=tau before k=Nmax, including tau=0 and zero update budget. Step3 discards dependent columns and returns rank-loss before a deficient projected solve; empty D_0 is omitted."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument uses only finite-dimensional linear algebra and no arbitrary-family choice."
++          "reason": "The Definition finite column-pivot procedure breaks norm ties by original order. Its Hermitian compression supplies a finite eigenbasis and chooses its q smallest values; arbitrary-basis ambiguity inside a cluster does not create a claimed canonical eigenvector."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "reason": "The LOBPCG Definition specifies its projected solve and status branches, not an iff characterization of accurate eigenpairs or convergence. It explicitly withholds accuracy on budget/rank-loss returns."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "reason": "The LOBPCG Definition specifies its projected solve and status branches, not an iff characterization of accurate eigenpairs or convergence. It explicitly withholds accuracy on budget/rank-loss returns."
+         }
+       ],
+       "axioms": [],
+@@ -347,8 +347,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The finite-dimensional input has positive order; no empty matrix or vector domain is asserted."
++          "status": "checked",
++          "evidence": "The Statement estimates only1<=j<=dim S. If S is zero-dimensional there is no j in that range, hence no minimum over a nonexisting j-dimensional family is requested; step1.1 applies when a positive indexed value is named."
+         },
+         {
+           "case": "zero",
+@@ -358,7 +358,7 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Statement: j=1 and a one-dimensional trial subspace are included by the range 1≤j≤dim S."
++          "evidence": "Statement: j=1 and a one-dimensional trial subspace are included by the range 1\u2264j\u2264dim S."
+         },
+         {
+           "case": "degenerate",
+@@ -368,22 +368,22 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "There is no interval or endpoint parameter in this item."
++          "reason": "The Statement only names theta_j when1<=j<=dim S. Thus S={0} gives no indexed inequality; positive j ensures a nonempty j-dimensional comparison family. Equal spaces are permitted and give equal spectra by step1.1."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument uses only finite-dimensional linear algebra and no arbitrary-family choice."
++          "reason": "Step1.1 chooses a finite Hermitian compression eigenbasis, with the final spectrum independent of that choice by unitary conjugation. Step2.1 uses finite dimension intersection; it does not assume a consistent eigenvector choice across a refinement family."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "reason": "The Ritz monotonicity lemma gives lower ambient bounds and one-way nonincrease on nested spaces. Step1.1 proves the minimax formula;2.1\u20133.1 compare available subspaces. It does not assert monotone Ritz values imply subspace inclusion."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "reason": "The Ritz monotonicity lemma gives lower ambient bounds and one-way nonincrease on nested spaces. Step1.1 proves the minimax formula;2.1\u20133.1 compare available subspaces. It does not assert monotone Ritz values imply subspace inclusion."
+         }
+       ],
+       "axioms": [],
+@@ -451,8 +451,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The finite-dimensional input has positive order; no empty matrix or vector domain is asserted."
++          "status": "checked",
++          "evidence": "The Statement fixes 1<=q<n and a q-dimensional trial space with B-orthonormal basis. Thus the eigenvector sum i=1,...,q and the trial B-unit sphere are nonempty; q<n also leaves an ambient complementary block. Step 1.1 allows the complementary component e=0, and the resulting angle contribution vanishes without requiring a nonempty set of nonzero error coefficients."
+         },
+         {
+           "case": "zero",
+@@ -472,22 +472,22 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "There is no interval or endpoint parameter in this item."
++          "reason": "The Statement requires1<=q<n and lambda_q<lambda_(q+1), excluding a missing complement or closed gap. Step1.1 permits sin(theta)=0, giving the limiting upper bound lambda_q; no division by the angle occurs."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument uses only finite-dimensional linear algebra and no arbitrary-family choice."
++          "reason": "Its finite B-orthonormal eigenbasis and supplied trial basis define P_U; the strict gap identifies the whole q-dimensional invariant sum uniquely. Step1.1 decomposes x in that sum and complement, without choosing a preferred vector in a repeated eigenspace."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "reason": "The block-angle lemma derives an upper Ritz enclosure from the B-principal angle and strict spectral gap, without asserting a converse angle estimate or iteration rate. Step1.1 bounds unit-vector quotients and2.1 takes their maximum."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "reason": "The block-angle lemma derives an upper Ritz enclosure from the B-principal angle and strict spectral gap, without asserting a converse angle estimate or iteration rate. Step1.1 bounds unit-vector quotients and2.1 takes their maximum."
+         }
+       ],
+       "axioms": [],
+@@ -552,8 +552,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The finite-dimensional input has positive order; no empty matrix or vector domain is asserted."
++          "status": "checked",
++          "evidence": "The Statement successful update starts from the q-dimensional old block with q>=1 supplied by LOBPCG. step 1.1 includes that block in S_k, so the trial space is nonempty even when W or previous D has no independent directions."
+         },
+         {
+           "case": "zero",
+@@ -573,12 +573,12 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "There is no interval or endpoint parameter in this item."
++          "reason": "The Statement is restricted to a successful projected update with positive q from its algorithm. step 1.1 retains range X in the trial space; rank-loss or exhausted-budget outputs explicitly make no update assertion."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument uses only finite-dimensional linear algebra and no arbitrary-family choice."
++          "reason": "step 1.1 identifies the selected q smallest Ritz values and step 2.1 compares their invariant spectra by nested-subspace minimax. Particular eigenvectors inside equal eigenvalues need not be chosen canonically."
+         },
+         {
+           "case": "iff-forward",
+@@ -603,8 +603,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The finite-dimensional input has positive order; no empty matrix or vector domain is asserted."
++          "status": "checked",
++          "evidence": "The Definition requires n>=1, nonzero start and1<=m<=n for shift-invert, and full-column-rank U with k>=1 for harmonic extraction. Empty candidate ledgers may accompany early solve failures; they are not finite approximate eigenvalue claims."
+         },
+         {
+           "case": "zero",
+@@ -624,22 +624,22 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "There is no interval or endpoint parameter in this item."
++          "reason": "The Definition gives separate theta=0, beta=0 and alpha=beta=0 statuses, preserves Arnoldi breakdown and unavailable solves, and retains the finite QZ budget/tolerance endpoints. No infinite harmonic value is divided into a finite one."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument uses only finite-dimensional linear algebra and no arbitrary-family choice."
++          "reason": "Shift, trial basis and solve routine are input data. Rank-deficient W produces an explicitly chosen finite null vector and returns unresolved; full-rank W admits a finite projected solve. No arbitrary backend is assumed to find an exact desired mode."
+         },
+         {
+           "case": "iff-forward",
+-          "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "status": "checked",
++          "evidence": "The Definition imports the characterization that M=A-sigma I is invertible exactly when sigma is not an eigenvalue, with its explicit supplier link. Its candidate-acceptance rule is defined in both directions by ||r_A||<=tau. The harmonic branch separately defines regularity from full rank of W and treats rank loss as unresolved; no generalized exact-root/convergence claim is inferred from these predicates."
+         },
+         {
+           "case": "iff-reverse",
+-          "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "status": "checked",
++          "evidence": "The Definition imports the characterization that M=A-sigma I is invertible exactly when sigma is not an eigenvalue, with its explicit supplier link. Its candidate-acceptance rule is defined in both directions by ||r_A||<=tau. The harmonic branch separately defines regularity from full rank of W and treats rank loss as unresolved; no generalized exact-root/convergence claim is inferred from these predicates."
+         }
+       ],
+       "axioms": [],
+@@ -703,8 +703,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The finite-dimensional input has positive order; no empty matrix or vector domain is asserted."
++          "status": "checked",
++          "evidence": "The Statement explicitly supplies a nonzero u for both eigenpair and candidate clauses, so its vector domain cannot be the zero space. Its step 1.1 preserves that nonzero vector through the invertible map; no empty spectrum is asserted to contain an eigenvalue."
+         },
+         {
+           "case": "zero",
+@@ -724,12 +724,12 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "There is no interval or endpoint parameter in this item."
++          "reason": "The Statement requires u!=0,theta!=0 and invertible M. step 1.1 excludes lambda=sigma before inversion, and1.2 retains s_0 and M*r_T independently; exact residual zeros are allowed without dividing by either residual."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument uses only finite-dimensional linear algebra and no arbitrary-family choice."
++          "reason": "The residual-transfer theorem takes the candidate u,y and nonzero theta as supplied data. step 1.1 proves both eigenpair-map directions by inverse multiplication, and1.2 is deterministic algebra, with no existence assertion for an arbitrary solve backend."
+         },
+         {
+           "case": "iff-forward",
+@@ -826,8 +826,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The finite-dimensional input has positive order; no empty matrix or vector domain is asserted."
++          "status": "checked",
++          "evidence": "The Example fixes a3-component nonzero start and a single shift per restart. step 3.1 proves all filtered coordinates stay nonzero for every finite t under29/10; even t=0 is the supplied initial vector, not an empty Krylov input."
+         },
+         {
+           "case": "zero",
+@@ -847,22 +847,22 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "There is no interval or endpoint parameter in this item."
++          "reason": "The Example fixes n=3,m=2,r=1 and budget at least the considered finite t. step 4.1 explicitly distinguishes q(3)=0 from filtered breakdown because the remaining vector is nonzero."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument uses only finite-dimensional linear algebra and no arbitrary-family choice."
++          "reason": "The fixed shift29/10 and the separate shift3 are supplied exact numbers. The retained one-dimensional filtered space follows from its proved restart supplier; no arbitrary shift rule is asserted to preserve the wanted component."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "reason": "This restart Example computes one unfavorable shift schedule. step 1.1\u20133.1 shows suppression and no accepted exact Ritz pair, and4.1 gives a separate exact-annihilation witness; no iff criterion for a good shift schedule is claimed."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "reason": "This restart Example computes one unfavorable shift schedule. step 1.1\u20133.1 shows suppression and no accepted exact Ritz pair, and4.1 gives a separate exact-annihilation witness; no iff criterion for a good shift schedule is claimed."
+         }
+       ],
+       "axioms": [],
+@@ -940,13 +940,13 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The finite-dimensional input has positive order; no empty matrix or vector domain is asserted."
++          "status": "checked",
++          "evidence": "The Example uses two explicit independent starting vectors in C^4. step 1.1 proves a4-dimensional first trial space, so its four Ritz values and selected2-mode block are not aggregates over an empty basis."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Example: step 2.1 computes exact zero residuals after the Rayleigh–Ritz update."
++          "evidence": "Example: step 2.1 computes exact zero residuals after the Rayleigh\u2013Ritz update."
+         },
+         {
+           "case": "one",
+@@ -961,22 +961,22 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "There is no interval or endpoint parameter in this item."
++          "reason": "The Example fixes q=2,Nmax=1,tau=0. step 1.1 proves rank[X,R]=4;2.1 reaches zero residual and converged after the one allowed update. Its strict cluster gap101/100<5 is verified in3.1."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument uses only finite-dimensional linear algebra and no arbitrary-family choice."
++          "reason": "The two initial vectors are explicit, and the successful trial space is all C^4. step 2.1 selects the first two diagonal modes as a subspace, without a unique ordering of arbitrary vectors inside a repeated eigenspace."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "reason": "The clustered-vibration Example exhibits one successful LOBPCG update and attained angle bound. step 2.1 computes the selected invariant subspace and3.1 its exact bound; it gives no converse characterization of all good initial blocks."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "reason": "The clustered-vibration Example exhibits one successful LOBPCG update and attained angle bound. step 2.1 computes the selected invariant subspace and3.1 its exact bound; it gives no converse characterization of all good initial blocks."
+         }
+       ],
+       "axioms": [],
+@@ -1052,8 +1052,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The finite-dimensional input has positive order; no empty matrix or vector domain is asserted."
++          "status": "checked",
++          "evidence": "Both Example calls supply nonzero e_2 in a3-mode problem, with m=1 or a one-column harmonic basis. step 1.1 forms a1-by-1 regular projected pencil; no empty harmonic trial space is used."
+         },
+         {
+           "case": "zero",
+@@ -1073,22 +1073,22 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "There is no interval or endpoint parameter in this item."
++          "reason": "Its shift19/5 differs from1,4,9; transformed theta=5 and harmonic beta=1/5 are nonzero. The separate one-by-one QZ call has budget1/tolerance0 and is already triangular, as checked in step 1.1."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument uses only finite-dimensional linear algebra and no arbitrary-family choice."
++          "reason": "Start v=e_2 and harmonic U=e_2 are explicit input vectors, with separately supplied computed y=(49/10)e_2 in step 2.1. No random mode selection or hidden exact-solve oracle is inferred."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "reason": "The interior-vibration Example computes particular exact and inexact inverse maps, with a separate harmonic call. step 1.1 and2.1 give those values and residual transfer; they are not an iff convergence criterion for general interior eigenvalue searches."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item does not assert an if-and-only-if statement."
++          "reason": "The interior-vibration Example computes particular exact and inexact inverse maps, with a separate harmonic call. step 1.1 and2.1 give those values and residual transfer; they are not an iff convergence criterion for general interior eigenvalue searches."
+         }
+       ],
+       "axioms": [],
+@@ -1187,12 +1187,12 @@
+         },
+         {
+           "status": "checked",
+-          "evidence": "Statement permits block width q=1 including n=1; restarted Arnoldi requires 1≤r<m, and steps 1.1–2.2 do not require larger block width.",
++          "evidence": "Statement permits block width q=1 including n=1; restarted Arnoldi requires 1\u2264r<m, and steps 1.1\u20132.2 do not require larger block width.",
+           "case": "one"
+         },
+         {
+           "status": "checked",
+-          "evidence": "Statement and steps 1.1–2.2 explicitly cover rank loss, invariant-subspace breakdown, unavailable shifts, zero residual acceptance, and exhausted budgets.",
++          "evidence": "Statement and steps 1.1\u20132.2 explicitly cover rank loss, invariant-subspace breakdown, unavailable shifts, zero residual acceptance, and exhausted budgets.",
+           "case": "degenerate"
+         },
+         {
+@@ -1301,7 +1301,7 @@
+       "boundaries": [
+         {
+           "status": "not_applicable",
+-          "reason": "The procedure requires n≥1, and each branch uses a positive Arnoldi dimension or trial-basis width.",
++          "reason": "The procedure requires n\u22651, and each branch uses a positive Arnoldi dimension or trial-basis width.",
+           "case": "empty"
+         },
+         {
+@@ -1311,12 +1311,12 @@
+         },
+         {
+           "status": "checked",
+-          "evidence": "Statement permits m=1 and k=1; steps 1.1–2.2 use finite loops and remain valid in those dimensions.",
++          "evidence": "Statement permits m=1 and k=1; steps 1.1\u20132.2 use finite loops and remain valid in those dimensions.",
+           "case": "one"
+         },
+         {
+           "status": "checked",
+-          "evidence": "Statement and steps 1.1–2.2 cover solve-unavailable, Arnoldi-breakdown, rank-deficient pencil, infinite value, and QZ failure statuses.",
++          "evidence": "Statement and steps 1.1\u20132.2 cover solve-unavailable, Arnoldi-breakdown, rank-deficient pencil, infinite value, and QZ failure statuses.",
+           "case": "degenerate"
+         },
+         {

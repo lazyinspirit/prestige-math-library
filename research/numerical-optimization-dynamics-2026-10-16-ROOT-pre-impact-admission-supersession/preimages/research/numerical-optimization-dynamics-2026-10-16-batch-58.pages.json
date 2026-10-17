@@ -1,0 +1,220 @@
+[
+  {
+    "order": 2400,
+    "id": "nonconvex-line-search-and-inexact-newton-methods",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Nonconvex line search and inexact newton methods",
+    "companion": "nonconvex-line-search-and-inexact-newton-methods-examples",
+    "requires": [
+      "nonlinear-equations-and-newton-methods",
+      "krylov-methods-and-lanczos-convergence",
+      "numerical-optimization-globalization-and-inexact-certificates"
+    ],
+    "items": [
+      {
+        "id": "def-wolfe-and-strong-wolfe-conditions",
+        "kind": "definition",
+        "title": "Wolfe and strong Wolfe line-search conditions",
+        "deps": [
+          "def-c-one-map-and-local-inverse",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-strong-wolfe-step-exists-on-a-bounded-below-ray",
+        "kind": "lemma",
+        "title": "A strong Wolfe step exists on a bounded-below descent ray",
+        "deps": [
+          "def-wolfe-and-strong-wolfe-conditions",
+          "def-c-one-map-and-local-inverse",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "thm-chain-rule-for-total-derivatives",
+          "def-derivative",
+          "cor-mean-value-theorem",
+          "thm-infimum-property"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $D\\subseteq\\mathbb R^n$ be open, let $f:D\\to\\mathbb R$ be $C^1$, and\nlet $x\\in D$ and $p\\ne0$ satisfy $x+tp\\in D$ for every $t\\ge0$. Let\n$\\phi(t)=f(x+tp)$ and suppose $\\phi'(0)<0$ and $\\phi$ is bounded below on\n$[0,\\infty)$. For the constants $0<c_1<c_2<1/2$ of\n[[def-wolfe-and-strong-wolfe-conditions]], the set of positive strong Wolfe\nsteps contains a nonempty open interval."
+      },
+      {
+        "id": "alg-bracketing-zoom-strong-wolfe-search",
+        "kind": "algorithm",
+        "title": "Finite-budget bracketing and zoom for a strong Wolfe step",
+        "deps": [
+          "def-wolfe-and-strong-wolfe-conditions",
+          "def-c-one-map-and-local-inverse",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-bracketing-zoom-finite-budget-checked-return",
+        "kind": "lemma",
+        "title": "Bracketing and zoom terminate with a checked step or a failure",
+        "deps": [
+          "alg-bracketing-zoom-strong-wolfe-search",
+          "def-wolfe-and-strong-wolfe-conditions"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-wolfe-step-lower-bound-from-the-descent-angle",
+        "kind": "lemma",
+        "title": "A Wolfe step has a lower bound from its descent angle",
+        "deps": [
+          "def-wolfe-and-strong-wolfe-conditions",
+          "def-c-one-map-and-local-inverse",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-zoutendijk-summability-for-wolfe-steps",
+        "kind": "theorem",
+        "title": "Wolfe steps imply the Zoutendijk summability condition",
+        "deps": [
+          "def-wolfe-and-strong-wolfe-conditions",
+          "lem-wolfe-step-lower-bound-from-the-descent-angle",
+          "def-c-one-map-and-local-inverse",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "cor-uniform-descent-angle-implies-gradient-vanishing",
+        "kind": "corollary",
+        "title": "A uniform descent angle makes the Wolfe gradient norms vanish",
+        "deps": [
+          "thm-zoutendijk-summability-for-wolfe-steps"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-inexact-newton-krylov-with-descent-safeguard",
+        "kind": "algorithm",
+        "title": "Finite-budget inexact Newton–Krylov with a descent safeguard",
+        "deps": [
+          "alg-bracketing-zoom-strong-wolfe-search",
+          "def-wolfe-and-strong-wolfe-conditions",
+          "def-c-one-map-and-local-inverse",
+          "def-jacobian-matrix-and-gradient",
+          "def-hessian-and-euclidean-critical-point",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "def-matrix-free-access-model-for-krylov-methods",
+          "def-krylov-subspace-of-a-matrix-and-start-vector"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-inexact-newton-krylov-finite-budget-checked-return",
+        "kind": "lemma",
+        "title": "Safeguarded inexact Newton has a finite checked-return bound",
+        "deps": [
+          "alg-inexact-newton-krylov-with-descent-safeguard",
+          "lem-bracketing-zoom-finite-budget-checked-return"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-inexact-newton-error-recurrence-under-lipschitz-jacobian",
+        "kind": "lemma",
+        "title": "An inexact Newton residual gives a local error recurrence",
+        "deps": [
+          "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+          "lem-newton-contraction-near-an-invertible-derivative",
+          "def-c-one-map-and-local-inverse",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "def-invertible-euclidean-linear-map"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-inexact-newton-local-forcing-rates",
+        "kind": "theorem",
+        "title": "Forcing residuals determine local inexact-Newton rates",
+        "deps": [
+          "lem-inexact-newton-error-recurrence-under-lipschitz-jacobian",
+          "lem-geometric-sequence-null",
+          "def-c-one-map-and-local-inverse",
+          "def-jacobian-matrix-and-gradient",
+          "def-hessian-and-euclidean-critical-point",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-symmetry-of-higher-mixed-partials"
+        ],
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 2401,
+    "id": "nonconvex-line-search-and-inexact-newton-methods-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Nonconvex line search and inexact newton methods — Examples",
+    "companion": "nonconvex-line-search-and-inexact-newton-methods",
+    "requires": [
+      "nonconvex-line-search-and-inexact-newton-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-rosenbrock-newton-step-satisfies-strong-wolfe",
+        "kind": "example",
+        "title": "The standard Rosenbrock start accepts a full Newton step",
+        "deps": [
+          "alg-inexact-newton-krylov-with-descent-safeguard",
+          "alg-bracketing-zoom-strong-wolfe-search",
+          "def-wolfe-and-strong-wolfe-conditions",
+          "def-jacobian-matrix-and-gradient",
+          "def-hessian-and-euclidean-critical-point",
+          "def-euclidean-inner-product",
+          "def-krylov-subspace-of-a-matrix-and-start-vector"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-rosenbrock-indefinite-hessian-requires-descent-safeguard",
+        "kind": "example",
+        "title": "An indefinite Rosenbrock Hessian makes the raw Newton direction ascend",
+        "deps": [
+          "alg-inexact-newton-krylov-with-descent-safeguard",
+          "lem-strong-wolfe-step-exists-on-a-bounded-below-ray",
+          "def-wolfe-and-strong-wolfe-conditions",
+          "def-jacobian-matrix-and-gradient",
+          "def-hessian-and-euclidean-critical-point",
+          "def-euclidean-inner-product",
+          "def-krylov-subspace-of-a-matrix-and-start-vector"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-inexact-newton-forcing-tolerance-cost-and-rate",
+        "kind": "example",
+        "title": "A scalar inexact Newton solve trades inner work for outer error",
+        "deps": [
+          "alg-inexact-newton-krylov-with-descent-safeguard",
+          "alg-bracketing-zoom-strong-wolfe-search",
+          "thm-inexact-newton-local-forcing-rates",
+          "lem-geometric-sequence-null",
+          "def-jacobian-matrix-and-gradient",
+          "def-hessian-and-euclidean-critical-point",
+          "def-krylov-subspace-of-a-matrix-and-start-vector"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  }
+]

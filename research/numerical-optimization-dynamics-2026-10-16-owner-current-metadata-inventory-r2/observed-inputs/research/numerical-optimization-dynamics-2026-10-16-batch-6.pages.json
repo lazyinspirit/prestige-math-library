@@ -1,0 +1,695 @@
+[
+  {
+    "order": 2296,
+    "id": "inequality-kkt-duality-and-optimality-certificates",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Inequality kkt duality and optimality certificates",
+    "companion": "inequality-kkt-duality-and-optimality-certificates-examples",
+    "requires": [
+      "constant-rank-submersions-and-regular-level-sets",
+      "locally-convex-spaces-and-continuous-separation",
+      "jacobi-fields-conjugate-points-and-the-cut-locus"
+    ],
+    "items": [
+      {
+        "id": "def-inequality-constrained-program-and-kkt-geometry",
+        "kind": "definition",
+        "title": "Inequality constrained programs, tangent cones, constraint qualifications, and KKT",
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-euclidean-inner-product",
+          "def-jacobian-matrix-and-gradient"
+        ],
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$\nbe $C^2$. Let $p,m\\in\\mathbb N$ with zero allowed; when the target\ndimension is positive, let $h:U\\to\\mathbb R^p$ and\n$g=(g_1,\\ldots,g_m):U\\to\\mathbb R^m$ be componentwise $C^2$, and when it\nis zero use the unique empty map. The $C^2$ convention for positive\ndimensions is [[def-ck-euclidean-maps-and-diffeomorphisms]].\nThe smooth inequality program is to minimize $f(x)$ subject to\n$h(x)=0$ and $g_i(x)\\le0$ for every $i$. Its feasible set is\n$C=\\{x\\in U:h(x)=0,\\ g_i(x)\\le0\\ (1\\le i\\le m)\\}$. A feasible point $x_*$ is\na local minimizer if some open neighborhood $V$ of $x_*$ satisfies\n$f(x_*)\\le f(y)$ for every $y\\in C\\cap V$.\n\nAt a feasible $x$, the active set is\n$I(x)=\\{i:g_i(x)=0\\}$. The Bouligand tangent cone and linearized cone are,\nrespectively,\n$$\nT_C(x)=\\{d:\\exists\\,t_k>0,\\ t_k\\downarrow0,\\ d_k\\to d,\\ x+t_kd_k\\in C\\},\n$$\nand\n$$\n\\mathcal L_C(x)=\\{d:Dh(x)d=0,\\ Dg_i(x)d\\le0\\text{ for every }i\\in I(x)\\}.\n$$\nGradients are column vectors and $Dg_i(x)d=\\nabla g_i(x)^Td$.\n\nThe linear independence constraint qualification (LICQ) holds at $x$ when the rows of $Dh(x)$ together with\n$\\{\\nabla g_i(x)^T:i\\in I(x)\\}$ are linearly independent. MFCQ holds at $x$\nwhen $Dh(x)$ has full row rank (its rows are linearly independent) and there is $w\\in\\ker Dh(x)$ with\n$Dg_i(x)w<0$ for every active $i$; the latter condition is vacuous if\n$I(x)=\\varnothing$. Here full row rank for a matrix with zero rows is\nunderstood vacuously.\n\nThe Mangasarian–Fromovitz constraint qualification (MFCQ) is the condition\njust stated. The Karush–Kuhn–Tucker (KKT) system is the stationarity,\nfeasibility, dual-feasibility, and complementarity system below.\n\nFor $\\nu\\in\\mathbb R^p$ and $\\lambda\\in\\mathbb R^m$, the Lagrangian and KKT\nsystem are\n$$\nL(x,\\nu,\\lambda)=f(x)+\\nu^Th(x)+\\lambda^Tg(x),\n$$\n$$\nh(x)=0,\\quad g(x)\\le0,\\quad \\lambda\\ge0,\\quad \\lambda_i g_i(x)=0\\ (1\\le i\\le m),\\quad \\nabla_xL(x,\\nu,\\lambda)=0.\n$$\nThe critical cone for a KKT tuple is\n$\\mathcal K(x,\\nu,\\lambda)=\\mathcal L_C(x)\\cap\n\\{d:\\nabla f(x)^Td=0\\}$. These definitions use the differentiability and\ngradient conventions of [[def-ck-euclidean-maps-and-diffeomorphisms]],\n[[def-euclidean-inner-product]], and [[def-jacobian-matrix-and-gradient]].",
+        "strategy": "Definition only; no phase proof is applicable.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Sections 12.1–12.3 and 12.5, printed pp. 317–341 and 351–353; conventions translated from constraints c_i(x) >= 0 to g_i(x) <= 0."
+            },
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 5, Sections 5.1–5.2, printed pp. 219–227."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-convex-program-duality-and-slater-condition",
+        "kind": "definition",
+        "title": "Finite-dimensional convex program, Lagrangian dual, and Slater condition",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-convex-subset-of-euclidean-space"
+        ],
+        "statement": "A subset is convex when it contains the segment joining each pair of its\npoints ([[def-convex-subset-of-euclidean-space]]). A function\n$F:\\mathbb R^n\\to(-\\infty,+\\infty]$ is proper if it never equals\n$-\\infty$ and is finite at at least one point. Its domain is\n$\\operatorname{dom}F=\\{x:F(x)<+\\infty\\}$. Its epigraph is\n$\\operatorname{epi}F=\\{(x,t):F(x)\\le t\\}$. It is closed convex when its\nepigraph is a closed convex set. For a nonempty convex set $S$,\n$\\operatorname{aff}S$ is its smallest containing affine subspace and\n$\\operatorname{ri}S$ is its interior relative to $\\operatorname{aff}S$.\n\nLet $n\\ge1$, let $m,p\\in\\mathbb N$ with zero allowed, let\n$f_0,g_1,\\ldots,g_m$ be proper closed convex functions on $\\mathbb R^n$,\nlet $A\\in\\mathbb R^{p\\times n}$ have full row rank, and let\n$b\\in\\mathbb R^p$. Full row rank means that the rows are linearly\nindependent, vacuously when $p=0$. The common domain is\n$D=\\operatorname{dom}f_0\\cap\\bigcap_{i=1}^m\\operatorname{dom}g_i$. The primal\nproblem is to minimize $f_0(x)$ over $x\\in D$ satisfying $Ax=b$ and\n$g_i(x)\\le0$. An inequality is removable if, with\n$D_{-i}=\\operatorname{dom}f_0\\cap\\bigcap_{j\\ne i}\\operatorname{dom}g_j$,\n$D_{-i}\\subseteq\\operatorname{dom}g_i$ and $g_i(x)\\le0$ for every $x\\in D_{-i}$.\nThen $D=D_{-i}$, so removing that function and its inequality leaves the\nfeasible set unchanged. Remove such inequalities one at a time, recomputing\n$D_{-i}$ after each deletion. An inequality that is nonpositive only on $D$\nbut whose function domain restricts $D$ is not removable. Unless stated\notherwise, the inequalities below are the remaining ones after only these\ndomain-preserving deletions. The primal value is\n$$\np^*=\\inf\\{f_0(x):x\\in D,\\ Ax=b,\\ g_i(x)\\le0\\text{ for all }i\\}.\n$$\n\nFor $\\lambda\\in\\mathbb R^m_+$ and $\\nu\\in\\mathbb R^p$, the extended\nLagrangian is\n$$\nL(x,\\lambda,\\nu)=\\begin{cases}f_0(x)+\\lambda^Tg(x)+\\nu^T(Ax-b),&x\\in D,\\\\+\\infty,&x\\notin D.\\end{cases}\n$$\nThe dual function and dual value are\n$$\nq(\\lambda,\\nu)=\\inf_{x\\in\\mathbb R^n}L(x,\\lambda,\\nu),\\qquad d^*=\\sup_{\\lambda\\ge0,\\ \\nu\\in\\mathbb R^p}q(\\lambda,\\nu).\n$$\nThe dual supremum is attained when some admissible $(\\lambda,\\nu)$ has\n$q(\\lambda,\\nu)=d^*$; the optimal duality gap is $p^*-d^*$ when both values\nare finite.\n\nSlater's condition means that there is\n$x_s\\in\\operatorname{ri}(\\operatorname{dom}f_0)\\cap\n\\bigcap_i\\operatorname{ri}(\\operatorname{dom}g_i)$ with $Ax_s=b$ and\n$g_i(x_s)<0$ for every remaining inequality. Relative interior is used in\nthe affine hull of each domain, so the domain need not have ambient interior.",
+        "strategy": "Definition only; no phase proof is applicable.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 5, Sections 5.1–5.3.2, printed pp. 215–236; primal and dual values, weak duality, relative-interior Slater condition and dual attainment."
+            },
+            {
+              "title": "Zhiyuan Li, Convex Optimization, Lecture 5: Lagrange Multipliers and KKT",
+              "url": "https://zhiyuanli.ttic.edu/convex-optimization-site/Lecture-5___-Lagrange-Multipliers-and-KKT/",
+              "locator": "Sections 5.1–5.2, Definitions 5.1 and 5.4 and Theorem 5.3 with its full perturbation-value-function proof."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-finitely-generated-euclidean-cones-are-closed",
+        "kind": "lemma",
+        "title": "A finitely generated cone in Euclidean space is closed",
+        "deps": [
+          "cor-finite-dimensional-subspaces-are-closed",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "statement": "For any finite list $a_1,\\ldots,a_m\\in\\mathbb R^n$, including the empty\nlist, the cone\n$$\nK=\\left\\{\\sum_{j=1}^m t_j a_j:t_j\\ge0\\right\\}\n$$\nis a closed convex subset of $\\mathbb R^n$.",
+        "strategy": "1.1 Every $y\\in K$ has a representation whose positive-coefficient vectors are linearly independent. Start with any nonnegative coefficient list and discard its zero coefficients. If its remaining vectors are dependent, take a nonzero relation $\\sum_j c_j a_j=0$ and change its sign so some $c_j>0$. For the current positive coefficients $t_j$, put $s=\\min_{c_j>0}t_j/c_j$. Replacing each $t_j$ by $t_j-sc_j$ preserves the represented vector, leaves every coefficient nonnegative, and makes at least one positive coefficient zero. Repeating at most $m$ times leaves an independent positive support. [given, choose, algebra]\n\n1.2 Fix an independent index set $J$ and let $A_J$ have columns $a_j$, $j\\in J$. Its Gram matrix $G_J=A_J^TA_J$ is invertible: for every nonzero $v$, $v^TG_Jv=\\|A_Jv\\|_2^2>0$ by independence. Put $B_J=G_J^{-1}A_J^T$, define $R_J(y)=B_Jy$ on $\\mathbb R^n$, and set $L_J=(\\sum_{r=1}^{|J|}\\sum_{s=1}^n(B_J)_{rs}^2)^{1/2}$. Applying [F2] to each row gives $\\|R_J(y)-R_J(y')\\|_2^2\\le L_J^2\\|y-y'\\|_2^2$, so $R_J$ is Lipschitz with finite constant $L_J$, hence continuous. On the closed subspace $S_J=\\operatorname{span}\\{a_j:j\\in J\\}$ it satisfies $A_JR_J(y)=y$. Hence $A_J(\\mathbb R_{\\ge0}^{|J|})= S_J\\cap R_J^{-1}(\\mathbb R_{\\ge0}^{|J|})$ is closed: $S_J$ is closed by [F1], the nonnegative orthant is closed, and $R_J$ is continuous. For $J=\\varnothing$ this cone is $\\{0\\}$, also closed. [given, F1, F2, algebra]\n\n2.1 By step 1.1, $K$ is the union of the cones in step 1.2 over independent subsets $J\\subseteq\\{1,\\ldots,m\\}$. There are only finitely many such subsets, so this union is closed. Each component is a convex cone, and directly taking nonnegative combinations shows $K$ is convex. [step 1.1, step 1.2, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Section 12.3, printed pp. 339–341; the KKT multiplier proof requires closedness of a finitely generated gradient cone."
+            },
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 2, Section 2.5.1, printed pp. 50–51; Euclidean projection and separation for closed convex sets."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-second-order-jet-on-a-regular-level-set",
+        "kind": "lemma",
+        "title": "A regular level set realizes every compatible second-order jet",
+        "deps": [
+          "thm-differential-rank-is-lower-semicontinuous",
+          "cor-regular-level-set-local-graph-theorem",
+          "cor-second-order-taylor-expansion-with-the-hessian"
+        ],
+        "statement": "Let $H:U\\subseteq\\mathbb R^n\\to\\mathbb R^q$ be $C^2$, let $x\\in U$, and\nsuppose $DH(x)$ is surjective. If $d\\in\\ker DH(x)$ and\n$$DH(x)z+D^2H(x)[d,d]=0,$$\nthen there is a $C^2$ curve $\\gamma$ on the level $H=H(x)$ near $0$ with\n$\\gamma(0)=x$, $\\gamma'(0)=d$, and $\\gamma''(0)=z$. For $q=0$ the level is\nall of $U$ and the statement is immediate.",
+        "strategy": "1.1 If $q=0$, then $H$ is the unique map into $\\mathbb R^0$ and the level is all of $U$. The curve $\\gamma(t)=x+td+\\tfrac12t^2z$ has the required value and first two derivatives. [given, construct]\n\n1.2 Now suppose $q>0$ and take the graph in [F1]. Put $v=D^2\\psi(0)[d,d]$. Since $H(x+td+\\psi(td))=H(x)$ for small $t$, [F2] and $\\psi(td)=\\tfrac12t^2v+o(t^2)$ give $DH(x)d=0$ and $DH(x)v+D^2H(x)[d,d]=0$. [F1, F2, given, algebra]\n\n2.1 The compatibility equation for $z$ and step 1.2 imply $e=z-v\\in\\ker DH(x)$. Define $u(t)=td+\\tfrac12t^2e$ and $\\gamma(t)=x+u(t)+\\psi(u(t))$. This curve stays on $H=H(x)$ by [F1]. Using [F2] and $D\\psi(0)=0$ gives $\\gamma(t)=x+td+\\tfrac12t^2(e+v)+o(t^2) =x+td+\\tfrac12t^2z+o(t^2)$, so its first two derivatives at $0$ are $d$ and $z$. [step 1.2, F1, F2, construct] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 2, Section 2.5.1, printed pp. 50–51; local Euclidean projection and regularity prerequisites."
+            },
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Section 12.4, printed pp. 343–344; the second-order necessary-condition proof constructs feasible sequences with a prescribed limiting direction."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-kkt-residual-and-normal-cone",
+        "kind": "definition",
+        "title": "Scaled KKT residual and convex normal cone",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "def-euclidean-inner-product"
+        ],
+        "statement": "Use the program and dimensions of\n[[def-inequality-constrained-program-and-kkt-geometry]]. For any $x\\in U$,\n$\\nu\\in\\mathbb R^p$, and $\\lambda\\in\\mathbb R^m$, define coordinatewise\n$[v]_i^+=\\max\\{v_i,0\\}$ and the scaled residual\n$$\nr_{\\mathrm{KKT}}(x,\\nu,\\lambda)=\\|\\nabla f(x)+Dh(x)^T\\nu+Dg(x)^T\\lambda\\|_2+\\|h(x)\\|_2+\\|[g(x)]^+\\|_2+\\|[-\\lambda]^+\\|_2+\\|\\lambda\\circ g(x)\\|_2.\n$$\nThe symbol $\\circ$ denotes coordinatewise multiplication. The norm is the\nEuclidean norm from [[def-euclidean-inner-product]], and the norm of the\nzero-dimensional vector is $0$.\n\nFor a convex set $C\\subseteq\\mathbb R^n$ and $x\\in C$, its (outward) normal\ncone is\n$$\nN_C(x)=\\{v\\in\\mathbb R^n:\\langle v,y-x\\rangle\\le0\\text{ for every }y\\in C\\}.\n$$\nThis definition applies in particular when $C$ is closed and convex.",
+        "strategy": "Definition only; no phase proof is applicable.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Sections 2.4–2.5 and 5.1, printed pp. 50–60 and 215–224; normal vectors, Lagrangian, and dual function conventions."
+            },
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Section 12.2, printed pp. 327–331; KKT residual components and complementarity convention."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-farkas-alternative-for-finite-linear-systems",
+        "kind": "theorem",
+        "title": "Farkas alternative for a finite linear system",
+        "deps": [
+          "lem-finitely-generated-euclidean-cones-are-closed",
+          "thm-nearest-point-in-a-nonempty-closed-convex-set",
+          "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+          "def-euclidean-inner-product"
+        ],
+        "statement": "Let $A\\in\\mathbb R^{r\\times n}$ and $b\\in\\mathbb R^r$. Exactly one of the\nfollowing holds:\n\n1. There is $x\\in\\mathbb R^n$ with $x\\ge0$ and $Ax=b$.\n2. There is $y\\in\\mathbb R^r$ with $A^Ty\\ge0$ and $b^Ty<0$.\n\nInequalities between vectors are coordinatewise.",
+        "strategy": "1.1 Let $C=\\{\\sum_{j=1}^n x_j A_j:x_j\\ge0\\}$, where $A_j$ are the columns of $A$. This is a nonempty convex cone and is closed by [F1]. If $b\\in C$, its nonnegative coefficients give alternative 1. If $b\\notin C$, let $p$ be its nearest point in $C$ by [F2] and put $z=b-p\\ne0$. [F1, F2, given, construct]\n\n2.1 Applying [F3] with $c=0$ and $c=2p$ gives both $\\langle z,p\\rangle\\ge0$ and $\\langle z,p\\rangle\\le0$, hence $\\langle z,p\\rangle=0$. Applying [F3] to arbitrary $c\\in C$ then gives $\\langle z,c\\rangle\\le0$. In particular $A_j^Tz\\le0$ for every column, and $\\langle z,b\\rangle=\\langle z,p+z\\rangle=\\|z\\|_2^2>0$. Thus $y=-z$ satisfies $A^Ty\\ge0$ and $b^Ty=-\\|z\\|_2^2<0$, which is alternative 2. [F3, step 1.1, algebra]\n\n3.1 The alternatives cannot both hold: if $Ax=b$ with $x\\ge0$ and $A^Ty\\ge0$, then $b^Ty=x^TA^Ty\\ge0$, contradicting $b^Ty<0$. Step 1.1 produces one alternative in every case, so exactly one holds. [step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 5, Section 5.8, Farkas' lemma and the theorem of alternatives; the present proof uses Euclidean projection and proves the stated orientation directly."
+            },
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Section 12.3, printed pp. 339–341; projection onto a closed gradient cone yields the multiplier alternative."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-mfcq-linearized-cone-equals-bouligand-tangent-cone",
+        "kind": "theorem",
+        "title": "MFCQ identifies the linearized and Bouligand tangent cones",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "thm-differential-rank-is-lower-semicontinuous",
+          "cor-regular-level-set-local-graph-theorem",
+          "cor-second-order-taylor-expansion-with-the-hessian"
+        ],
+        "statement": "For the $C^2$ program of\n[[def-inequality-constrained-program-and-kkt-geometry]], if MFCQ holds at a\nfeasible point $x$, then\n$$T_C(x)=\\mathcal L_C(x).$$",
+        "strategy": "1.1 Take $d\\in T_C(x)$ and use its defining feasible sequence $x+t_kd_k$, where $t_k\\downarrow0$ and $d_k\\to d$. For $h(x)=0$, Taylor expansion gives $0=h(x+t_kd_k)=t_kDh(x)d+o(t_k)$, hence $Dh(x)d=0$. For active $i$, feasibility gives $0\\ge g_i(x+t_kd_k)=t_kDg_i(x)d+o(t_k)$, hence $Dg_i(x)d\\le0$. Therefore $d\\in\\mathcal L_C(x)$. [given, F1, algebra]\n\n1.2 Now take $d\\in\\mathcal L_C(x)$. Let $w$ be the MFCQ direction; if no inequality is active set $w=0$. Both $d$ and $w$ lie in $\\ker Dh(x)$. When there are equality constraints, [F2] supplies a local graph $x+u+\\psi(u)$ over this kernel; with no equalities use $\\psi=0$. For $t>0$ small, define $u(t)=td+t^{3/2}w$ and $x(t)=x+u(t)+\\psi(u(t))$. Then $h(x(t))=0$ and [F3] yields $x(t)-x=td+t^{3/2}w+O(t^2)$, so $(x(t)-x)/t\\to d$. [given, F2, F3, construct]\n\n2.1 If $i$ is active, Taylor expansion gives $g_i(x(t))=tDg_i(x)d+t^{3/2}Dg_i(x)w+O(t^2)+o(t^2)$. When $Dg_i(x)d<0$, its order-$t$ term makes this negative for all sufficiently small $t>0$. When $Dg_i(x)d=0$, MFCQ gives $Dg_i(x)w<0$, and its order-$t^{3/2}$ term dominates the remainder of order $t^2$. Inactive inequalities remain strict by continuity. Since there are finitely many inequalities, one positive $\\tau$ works for all of them and every $0<t<\\tau$. Thus $x(t)$ is feasible for such $t$. [step 1.2, given, algebra]\n\n3.1 Taking $t_k=\\tau/2^{k+1}$ gives feasible points with $t_k\\downarrow0$ and $(x(t_k)-x)/t_k\\to d$, so $d\\in T_C(x)$. This proves $\\mathcal L_C(x)\\subseteq T_C(x)$; step 1.1 gives the reverse inclusion. [step 1.1, step 1.2, step 2.1, construct] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Sections 12.3 and 12.5, printed pp. 337–341 and 351–353; linearized feasible directions, LICQ and MFCQ convention."
+            },
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 2, Section 2.5.1, printed pp. 50–51; the Euclidean projection framework is used for finite-dimensional geometric certificates."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-critical-cone-equivalence-under-kkt",
+        "kind": "theorem",
+        "title": "Critical directions are tangent to every positively weighted active inequality",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry"
+        ],
+        "statement": "Let $(x,\\nu,\\lambda)$ satisfy the KKT conditions for the program of\n[[def-inequality-constrained-program-and-kkt-geometry]]. For every\n$d\\in\\mathcal L_C(x)$,\n$$\n\\nabla f(x)^Td=0\\quad\\Longleftrightarrow\\quad Dg_i(x)d=0\\text{ for every }i\\in I(x)\\text{ with }\\lambda_i>0.\n$$\nThus the critical cone is the linearized cone with equality imposed on each\npositively weighted active inequality.",
+        "strategy": "1.1 For $d\\in\\mathcal L_C(x)$, the equality term in stationarity vanishes, and inactive multipliers vanish by complementarity. Therefore $\\nabla f(x)^Td=-\\sum_{i\\in I(x)}\\lambda_iDg_i(x)d$. Every summand on the right is nonnegative because $\\lambda_i\\ge0$ and $Dg_i(x)d\\le0$. [given, F1, algebra]\n\n2.1 The sum in step 1.1 is zero exactly when each term with $\\lambda_i>0$ is zero; because each such term is nonnegative, this is equivalent to $Dg_i(x)d=0$ for every positively weighted active index. That is the claimed equivalence and critical-cone description. [step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Section 12.4, printed pp. 342–343, equations (12.52)–(12.54), the critical-cone characterization."
+            },
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 5, Section 5.5, complementary slackness and KKT conditions."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-lagrangian-weak-duality",
+        "kind": "theorem",
+        "title": "Every Lagrangian dual feasible pair is a lower-bound certificate",
+        "deps": [
+          "def-convex-program-duality-and-slater-condition"
+        ],
+        "statement": "For the convex program and Lagrangian dual of\n[[def-convex-program-duality-and-slater-condition]], every primal feasible\n$x$ and every dual feasible $(\\lambda,\\nu)$ satisfy\n$$q(\\lambda,\\nu)\\le f_0(x).$$\nConsequently, when the primal feasible set is nonempty, $d^*\\le p^*$.",
+        "strategy": "1.1 Since $x$ is feasible, $Ax-b=0$ and $g_i(x)\\le0$. Since $\\lambda_i\\ge0$, this gives $L(x,\\lambda,\\nu)=f_0(x)+\\sum_i\\lambda_i g_i(x)\\le f_0(x)$. The infimum defining $q$ is no larger than this particular Lagrangian value, so $q(\\lambda,\\nu)\\le f_0(x)$. [given, F1, algebra]\n\n2.1 The bound in step 1.1 holds for every primal feasible $x$ and every dual feasible pair. Taking the infimum over primal feasible $x$ and the supremum over dual feasible pairs gives $d^*\\le p^*$ when the primal set is nonempty. [step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 5, Section 5.1, printed pp. 215–221; the Lagrangian dual function and weak-duality lower bound."
+            },
+            {
+              "title": "Zhiyuan Li, Convex Optimization, Lecture 5: Lagrange Multipliers and KKT",
+              "url": "https://zhiyuanli.ttic.edu/convex-optimization-site/Lecture-5___-Lagrange-Multipliers-and-KKT/",
+              "locator": "Theorem 5.1 and complete proof in the weak-duality section."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-convex-value-function-support-at-relative-interior-domain-points",
+        "kind": "theorem",
+        "title": "A finite-dimensional convex value function has a support at relative-interior points",
+        "deps": [
+          "def-convex-program-duality-and-slater-condition",
+          "thm-convex-functions-on-open-convex-sets-are-locally-lipschitz",
+          "thm-nearest-point-in-a-nonempty-closed-convex-set",
+          "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+          "lem-finite-dimensional-unit-spheres-are-sequentially-compact"
+        ],
+        "statement": "Let $V$ be a finite-dimensional Euclidean space and let\n$p:V\\to(-\\infty,+\\infty]$ be convex, never $-\\infty$, and finite somewhere.\nIf $0\\in\\operatorname{ri}(\\operatorname{dom}p)$ and $p(0)\\in\\mathbb R$, then\nthere is a linear functional $\\ell:V\\to\\mathbb R$ such that\n$$p(z)\\ge p(0)+\\ell(z)\\qquad(z\\in V).$$",
+        "strategy": "1.1 Let $W=\\operatorname{aff}(\\operatorname{dom}p)$. Since $0$ belongs to the domain, $W$ is a linear subspace; relative interior gives a ball about $0$ in $W$ contained in $\\operatorname{dom}p$. If $W=\\{0\\}$, take $\\ell=0$. Otherwise identify $W$ with a Euclidean coordinate space. The restriction of $p$ to that open ball is finite and convex, so [F1] makes it continuous at $0$. [given, F1]\n\n2.1 In $W\\times\\mathbb R$, let $E=\\{(z,t):p(z)\\le t\\}$ and let $\\overline E$ be its closure. The set $E$ is convex, $(0,p(0))\\in E$, and $\\overline E$ is nonempty, closed and convex. Continuity from step 1.1 shows that $(0,p(0)-\\epsilon)\\notin\\overline E$ for every $\\epsilon>0$: choose $\\delta>0$ so $p(z)>p(0)-\\epsilon/3$ whenever $\\|z\\|<\\delta$, while a sufficiently small open ball about $(0,p(0)-\\epsilon)$ has $\\|z\\|<\\delta$ and $t<p(0)-2\\epsilon/3$, so it misses $E$. Thus $(0,p(0))$ is a boundary point of $\\overline E$. [step 1.1, given, algebra]\n\n3.1 For each positive integer $k$, project $z_k=(0,p(0)-1/k)$ onto $\\overline E$, obtaining $y_k$. Since $(0,p(0))\\in\\overline E$, the projection distance is at most $1/k$, so $y_k\\to(0,p(0))$. The unit vectors $a_k=(y_k-z_k)/\\|y_k-z_k\\|_2$ have a convergent subsequence by [F3], with unit limit $a=(s,\\alpha)\\in W\\times\\mathbb R$. For each $y\\in\\overline E$, [F2] gives $\\langle a_k,y-y_k\\rangle\\ge0$; passing along that subsequence gives $\\langle a,y-(0,p(0))\\rangle\\ge0$. [F2, F3, step 2.1, construct]\n\n4.1 The epigraph contains every upward vertical ray, so the support inequality forces $\\alpha\\ge0$. If $\\alpha=0$, points $(z,p(z))\\in E$ for all sufficiently small $z$ and $-z$ in the ball from step 1.1 force both $\\langle s,z\\rangle\\ge0$ and $\\langle s,-z\\rangle\\ge0$. Hence $s=0$, contradicting $\\|a\\|_2=1$. Therefore $\\alpha>0$. Setting $\\ell(z)=-\\langle s,z\\rangle/\\alpha$, the support inequality at $(z,p(z))$ yields $p(z)\\ge p(0)+\\ell(z)$ for $z$ in the domain; outside the domain the inequality is automatic because $p(z)=+\\infty$. [step 1.1, step 3.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 5, Section 5.3.2, printed pp. 235–236; the Slater proof obtains a supporting affine lower bound to the perturbation value function."
+            },
+            {
+              "title": "Zhiyuan Li, Convex Optimization, Lecture 5: Lagrange Multipliers and KKT",
+              "url": "https://zhiyuanli.ttic.edu/convex-optimization-site/Lecture-5___-Lagrange-Multipliers-and-KKT/",
+              "locator": "Theorem 5.3, full proof in the Slater and exactness section; it invokes a relative-interior subgradient theorem for the perturbation value function."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-first-order-kkt-necessity-under-mfcq",
+        "kind": "theorem",
+        "title": "MFCQ gives KKT multipliers at a smooth local minimizer",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "thm-mfcq-linearized-cone-equals-bouligand-tangent-cone",
+          "thm-farkas-alternative-for-finite-linear-systems"
+        ],
+        "statement": "For the $C^2$ problem of\n[[def-inequality-constrained-program-and-kkt-geometry]], if $x_*$ is a local\nminimizer and MFCQ holds at $x_*$, then there exist\n$\\nu\\in\\mathbb R^p$ and $\\lambda\\in\\mathbb R^m_+$ such that\n$(x_*,\\nu,\\lambda)$ satisfies the KKT system.",
+        "strategy": "1.1 Every $d\\in T_C(x_*)$ satisfies $\\nabla f(x_*)^Td\\ge0$. For $d=0$ this is immediate. Otherwise take a defining sequence $x_*+t_kd_k\\in C$, with $t_k\\downarrow0$ and $d_k\\to d$. For large $k$, local minimality gives $f(x_*+t_kd_k)-f(x_*)\\ge0$. Differentiability gives $f(x_*+t_kd_k)-f(x_*)=t_k\\nabla f(x_*)^Td_k+o(t_k)$; divide by $t_k$ and pass to the limit. [given, algebra]\n\n2.1 By [F1] and step 1.1, $\\nabla f(x_*)^Td\\ge0$ for every $d\\in\\mathcal L_C(x_*)$. Form a matrix $B$ with columns $\\nabla h_j(x_*),-\\nabla h_j(x_*)$ for each equality and $-\\nabla g_i(x_*)$ for each active inequality, and set $c=\\nabla f(x_*)$. If alternative 1 of [F2] failed, alternative 2 would give $B^Td\\ge0$ and $c^Td<0$. The paired equality columns force $Dh(x_*)d=0$, while the inequality columns force $Dg_i(x_*)d\\le0$ for every active $i$, so $d\\in\\mathcal L_C(x_*)$, contradicting step 1.1. Thus there are nonnegative coefficients representing $c$ as a combination of the columns of $B$. [F1, F2, step 1.1, construct]\n\n3.1 Write the equality-column coefficients as $\\alpha_j,\\beta_j\\ge0$ and the active inequality coefficients as $\\lambda_i\\ge0$. The representation from step 2.1 is $\\nabla f(x_*)=Dh(x_*)^T(\\alpha-\\beta)-Dg_{I(x_*)}(x_*)^T\\lambda_I$. Set $\\nu=-(\\alpha-\\beta)$ and set $\\lambda_i=0$ for inactive $i$. Then stationarity holds. Feasibility holds because $x_*\\in C$; dual feasibility holds by construction; and complementarity holds because active constraints vanish while inactive multipliers are zero. These are exactly the KKT conditions. [step 2.1, given, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Sections 12.2–12.5, printed pp. 327–353; KKT under LICQ and the statement that MFCQ also supplies first-order multipliers. The inequality sign convention is translated."
+            },
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 5, Farkas and duality sections; finite-dimensional alternatives are separated from the local nonlinear argument."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-convex-kkt-sufficiency-and-normal-cone-certificate",
+        "kind": "theorem",
+        "title": "Convex KKT conditions certify a global minimum and an outward normal",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "def-kkt-residual-and-normal-cone",
+          "thm-differentiable-convex-functions-and-gradient-inequality"
+        ],
+        "statement": "Let $m\\ge0$ be an integer. Let $U\\subseteq\\mathbb R^n$ be open and convex,\nand suppose the objective $f:U\\to\\mathbb R$ and inequalities\n$g_i:U\\to\\mathbb R$ $(1\\le i\\le m)$ are differentiable and convex.\nLet the equalities be $Ax=b$ and define the feasible set\n$C=\\{x\\in U:Ax=b,\\ g_i(x)\\le0\\ (1\\le i\\le m)\\}$. If a feasible tuple\n$(x_*,\\nu,\\lambda)$ satisfies the KKT conditions with $\\lambda\\ge0$, then\n$x_*$ is a global minimizer over the feasible set $C$. Moreover,\n$-\\nabla f(x_*)\\in N_C(x_*)$, where the normal cone has the convention of\n[[def-kkt-residual-and-normal-cone]].",
+        "strategy": "1.1 Fix any feasible $y$ and put $d=y-x_*$. Then $Ad=0$. KKT stationarity gives $\\nabla f(x_*)^Td=-\\sum_i\\lambda_i\\nabla g_i(x_*)^Td$. If $\\lambda_i=0$ its term is zero. If $\\lambda_i>0$, complementarity gives $g_i(x_*)=0$, and [F1] applied to $g_i$ gives $\\nabla g_i(x_*)^Td\\le g_i(y)\\le0$. Hence $\\nabla f(x_*)^Td\\ge0$. [given, F1, algebra]\n\n2.1 Applying [F1] to $f$ yields $f(y)\\ge f(x_*)+\\nabla f(x_*)^Td\\ge f(x_*)$. Since $y$ was arbitrary, $x_*$ is globally minimizing. Step 1.1 also gives $\\langle-\\nabla f(x_*),y-x_*\\rangle\\le0$ for every feasible $y$, which is exactly $-\\nabla f(x_*)\\in N_C(x_*)$ by [F2]. [step 1.1, F1, F2, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 5, Sections 5.1–5.2, printed pp. 215–227, weak duality and KKT certificates; Chapter 3, Section 3.1.3, convex gradient inequality."
+            },
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Section 12.4, printed pp. 348–350, convex programs and global optimality."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-kkt-residual-vanishes-exactly-on-kkt-tuples",
+        "kind": "theorem",
+        "title": "The scaled KKT residual vanishes exactly at KKT tuples",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "def-kkt-residual-and-normal-cone"
+        ],
+        "statement": "For the program of\n[[def-inequality-constrained-program-and-kkt-geometry]] and the residual\nof [[def-kkt-residual-and-normal-cone]],\n$r_{\\mathrm{KKT}}(x,\\nu,\\lambda)=0$ if and only if\n$(x,\\nu,\\lambda)$ satisfies every KKT condition.",
+        "strategy": "1.1 If the residual is zero, each summand in [F1] is nonnegative and their sum is zero, so each norm is zero. The stationarity and equality terms then give stationarity and $h(x)=0$. The positive-part term is zero exactly when $g_i(x)\\le0$ for every $i$, and the negative-multiplier term is zero exactly when $\\lambda_i\\ge0$ for every $i$. The last term gives $\\lambda_i g_i(x)=0$ coordinatewise. These are all conditions in [F2]. [given, F1, F2, algebra]\n\n2.1 Conversely, if the KKT conditions hold, every vector inside each norm in [F1] is zero: feasibility makes $h=0$ and $[g]^+=0$, dual feasibility makes $[-\\lambda]^+=0$, complementarity makes $\\lambda\\circ g=0$, and stationarity makes the first vector zero. Thus the residual is zero. [given, F1, F2, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Section 12.2, printed pp. 327–331; stationarity, primal and dual feasibility, and complementarity."
+            },
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 5, Sections 5.1–5.2, KKT and complementarity conventions."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-second-order-sufficient-condition-on-the-critical-cone",
+        "kind": "theorem",
+        "title": "Strict second-order positivity on the critical cone gives a strict local minimum",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "thm-critical-cone-equivalence-under-kkt",
+          "cor-second-order-taylor-expansion-with-the-hessian",
+          "thm-heine-borel-rn",
+          "thm-compact-iff-finite-intersection-property",
+          "thm-extreme-value-metric"
+        ],
+        "statement": "For the $C^2$ program of\n[[def-inequality-constrained-program-and-kkt-geometry]], suppose $x_*$ is\nfeasible and has KKT multipliers $(\\nu,\\lambda)$. If\n$$\nd^T\\nabla_{xx}^2L(x_*,\\nu,\\lambda)d>0\\quad\\text{for every nonzero }d\\in\\mathcal K(x_*,\\nu,\\lambda),\n$$\nthen $x_*$ is a strict local minimizer. The condition is vacuous when the\ncritical cone is $\\{0\\}$; no constraint qualification is assumed.",
+        "strategy": "1.1 Write $Q(d)=d^T\\nabla_{xx}^2L(x_*,\\nu,\\lambda)d$ and $S=\\{d:\\|d\\|_2=1\\}$. The critical cone intersected with $S$ is closed in $S$ by its linear equalities and inequalities. If this intersection is nonempty, it is compact by [F2], and [F2] gives a minimum $\\gamma=\\min Q(d)>0$ there. The relatively open set $N=\\{u\\in S:Q(u)>\\gamma/2\\}$ contains that intersection. If the intersection is empty, put $N=\\varnothing$. [given, F1, F2, algebra]\n\n1.2 For $k\\ge1$, let $D_k$ be the set of unit directions $u=(x-x_*)/\\|x-x_*\\|_2$ for feasible $x\\ne x_*$ with $\\|x-x_*\\|_2<1/k$ and $f(x)\\le f(x_*)$. If $D_k$ is empty for some $k$, there is no such point in that neighborhood and strict local minimality holds. Otherwise, if bad points occur arbitrarily close with directions outside $N$, the nonempty nested closed sets $\\overline{D_k\\setminus N}$ have the finite-intersection property in the compact sphere $S$. By [F3] choose $d\\in\\bigcap_k\\overline{D_k\\setminus N}$; since $N$ is relatively open, $d\\notin N$ and $\\|d\\|_2=1$. [F2, F3, construct]\n\n2.1 For each $k$, the closure property in step 1.2 supplies a direction $u$ with $\\|u-d\\|_2<1/k$ from a feasible bad point $x=x_*+tu$, where $0<t<1/k$ and $f(x)\\le f(x_*)$. Taylor expansion [F4] and equality feasibility imply $Dh(x_*)u=O(t)$; active inequality feasibility gives $Dg_i(x_*)u\\le O(t)$ for every active $i$. The objective inequality gives $\\nabla f(x_*)^Tu\\le O(t)$. Letting $k$ grow in these bounds, using $\\|u-d\\|_2<1/k$ and $t<1/k$, shows $Dh(x_*)d=0$, $Dg_i(x_*)d\\le0$ on the active set, and $\\nabla f(x_*)^Td\\le0$. KKT stationarity and [F1] also give $\\nabla f(x_*)^Td\\ge0$, so $d$ is a unit critical direction. This contradicts $d\\notin N$: if the critical unit set is empty there is no such $d$, and otherwise every such $d$ belongs to $N$. Hence for some $k_0$, every feasible bad point with $0<\\|x-x_*\\|_2<1/k_0$ has direction in $N$. [F1, F3, F4, step 1.2, algebra]\n\n3.1 If the critical unit set is empty, step 2.1 already excludes all bad points sufficiently near $x_*$, proving strict local minimality. Otherwise, let $\\gamma>0$ be as in step 1.1. At a feasible $x=x_*+tu$, KKT gives $L(x_*,\\nu,\\lambda)=f(x_*)$, $\\nabla_xL(x_*,\\nu,\\lambda)=0$, and $L(x,\\nu,\\lambda)\\le f(x)$. For bad points sufficiently close, step 2.1 gives $u\\in N$, so $Q(u)>\\gamma/2$. The Taylor expansion [F4] of the $C^2$ Lagrangian has a remainder $o(t^2)$, uniformly as $x\\to x_*$; after shrinking the neighborhood it yields $L(x,\\nu,\\lambda)>f(x_*)$. This contradicts $L(x,\\nu,\\lambda)\\le f(x)\\le f(x_*)$. Therefore no distinct feasible point sufficiently near $x_*$ has objective at most $f(x_*)$, proving that $x_*$ is a strict local minimizer. [F4, step 1.1, step 2.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Section 12.4, Theorem 12.6 and its full proof, printed pp. 345–346; strict positivity on the critical cone needs no constraint qualification."
+            },
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 3, Section 3.1.3, the second-order Taylor and convexity tools used in local optimality arguments."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-slater-strong-duality-and-dual-attainment",
+        "kind": "theorem",
+        "title": "Slater gives zero duality gap and an attained dual certificate",
+        "deps": [
+          "def-convex-program-duality-and-slater-condition",
+          "thm-lagrangian-weak-duality",
+          "thm-convex-value-function-support-at-relative-interior-domain-points",
+          "thm-convex-functions-on-open-convex-sets-are-locally-lipschitz"
+        ],
+        "statement": "Consider the finite-dimensional convex program of\n[[def-convex-program-duality-and-slater-condition]]. Assume its equality\nmatrix has independent rows, Slater's condition holds, and the finite primal\nvalue $p^*\\in\\mathbb R$ is attained at $x_*$. Then there are\n$\\lambda_*\\ge0$ and $\\nu_*$ such that\n$$q(\\lambda_*,\\nu_*)=d^*=p^*.$$\nMoreover, every inequality multiplier satisfies\n$\\lambda_{*,i}g_i(x_*)=0$. The Slater and attainment hypotheses do not assert\nthat a primal minimizer is unique.",
+        "strategy": "1.1 For perturbations $u\\in\\mathbb R^m$ and $v\\in\\mathbb R^p$, define $ P(u,v)=\\inf\\{f_0(x):x\\in D,\\ g_i(x)\\le u_i\\ (1\\le i\\le m),\\ Ax-b=v\\}. $ This value function is convex. Indeed, for two perturbations with finite values, choose feasible points with objective within $\\epsilon$ of their respective infima. A convex combination of those points lies in $D$, its inequalities and equality residual are bounded by the same convex combination of perturbations, and convexity of $f_0$ bounds its objective. Letting $\\epsilon\\downarrow0$ proves the convex inequality. If one perturbation value is $-\\infty$, arbitrarily low feasible objective values and the same convex-combination argument give value $-\\infty$ at each strict convex combination with another feasible perturbation. [given, F1, construct]\n\n1.2 Let $S=\\operatorname{aff}D$ and $Y=A(S)-b$. Since the Slater point $x_s$ lies in every relative-interior domain, $x_s$ has a relative neighborhood in $S$ contained in $D$. Each $g_i$ is finite and convex on its domain and continuous near $x_s$ in its affine hull by [F4]; after intersecting finitely many neighborhoods, there are a relative neighborhood $U_s\\subseteq D$ of $x_s$ and $\\eta>0$ with $g_i(y)<-\\eta$ on $U_s$ for every $i$ (take any $\\eta>0$ if $m=0$). The affine map $y\\mapsto Ay-b$ from $S$ onto $Y$ has a linear right inverse on its direction space: choose preimages of a finite basis of $Y$. Consequently, its image of $U_s$ contains a relative neighborhood $W$ of $0$ in $Y$. For every $v\\in W$, choose the corresponding $y\\in U_s$; for every $u\\in\\prod_i(-\\eta,\\infty)$, that $y$ satisfies $g_i(y)<u_i$ and $Ay-b=v$. Thus $P(u,v)<+\\infty$ on a relative neighborhood of $0$ in $Z=\\mathbb R^m\\times Y$. [given, F1, F4, construct]\n\n2.1 The value $P(0,0)=p^*$ is finite. The convexity from step 1.1 and the neighborhood from step 1.2 imply that $P$ never equals $-\\infty$: if $P(z)=-\\infty$ for some perturbation $z$, choose a small $\\theta>0$ so $-\\theta z/(1-\\theta)$ lies in that neighborhood. Convexity would give $P(0)\\le\\theta P(z)+(1-\\theta)P(-\\theta z/(1-\\theta))=-\\infty$, contrary to finiteness. Hence $P$ is proper and $0\\in\\operatorname{ri}(\\operatorname{dom}P)$ relative to $Z$. By [F3] there is a linear functional $\\ell(u,v)=a^Tu+c(v)$ on $Z$ such that $P(u,v)\\ge p^*+a^Tu+c(v)$. [F1, F3, step 1.1, step 1.2, algebra]\n\n3.1 Relaxing one inequality right-hand side cannot increase the infimum, so $P(te_i,0)\\le P(0,0)=p^*$ for small $t>0$. The support inequality in step 2.1 gives $P(te_i,0)\\ge p^*+t a_i$, hence $a_i\\le0$. Define $\\lambda_*=-a\\ge0$ and extend $c$ from the finite-dimensional subspace $Y$ to a linear functional on $\\mathbb R^p$ by extending a basis; write the negative of this extension as $\\nu_*^T$. For any $x\\in D$, the perturbation $(g(x),Ax-b)$ is feasible using $x$ itself, so $ f_0(x)\\ge P(g(x),Ax-b)\\ge p^*+a^Tg(x)+c(Ax-b). $ Thus $L(x,\\lambda_*,\\nu_*)\\ge p^*$ for all $x$, and $q(\\lambda_*,\\nu_*)\\ge p^*$. [F1, step 2.1, algebra, construct]\n\n4.1 At the primal minimizer, weak duality [F2] and feasibility give $ p^*\\le q(\\lambda_*,\\nu_*)\\le L(x_*,\\lambda_*,\\nu_*)= p^*+\\sum_i\\lambda_{*,i}g_i(x_*)\\le p^*. $ Every inequality is therefore equality. Since every summand $\\lambda_{*,i}g_i(x_*)$ is nonpositive, their sum being zero forces each one to be zero. Thus $q(\\lambda_*,\\nu_*)=p^*=d^*$, the dual supremum is attained, and complementarity holds. [F1, F2, step 3.1, given, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 5, Sections 5.2.3 and 5.3.2, printed pp. 226–227 and 235–236; Slater zero gap, dual attainment, and the perturbation-value proof."
+            },
+            {
+              "title": "Zhiyuan Li, Convex Optimization, Lecture 5: Lagrange Multipliers and KKT",
+              "url": "https://zhiyuanli.ttic.edu/convex-optimization-site/Lecture-5___-Lagrange-Multipliers-and-KKT/",
+              "locator": "Theorem 5.3 and its full proof, including the relative-interior perturbation domain and computation of the dual objective."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "prop-licq-implies-mfcq-and-unique-kkt-multipliers",
+        "kind": "proposition",
+        "title": "LICQ implies MFCQ and makes KKT multipliers unique",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "thm-first-order-kkt-necessity-under-mfcq"
+        ],
+        "statement": "For the $C^2$ program of\n[[def-inequality-constrained-program-and-kkt-geometry]], LICQ at a feasible\npoint $x$ implies MFCQ there. If $x$ is a local minimizer, its KKT\nmultipliers exist and are unique.",
+        "strategy": "1.1 Put the equality-gradient rows and all active inequality-gradient rows into a matrix $M$. By [F1], its rows are independent. If $M$ has no rows, take $w=0$. Otherwise $MM^T$ is invertible: for nonzero $\\eta$, $\\eta^TMM^T\\eta=\\|M^T\\eta\\|_2^2>0$ by row independence. For the target vector $r$ whose equality entries are $0$ and whose active inequality entries are $-1$, set $w=M^T(MM^T)^{-1}r$. Then $Mw=r$, so $Dh(x)w=0$ and $Dg_i(x)w=-1<0$ for every active $i$. This is MFCQ. [F1, given, construct, algebra]\n\n2.1 If $x$ is a local minimizer, [F2] now supplies at least one KKT pair $(\\nu,\\lambda)$. [F2, step 1.1, given]\n\n3.1 Suppose $(\\nu,\\lambda)$ and $(\\widehat\\nu,\\widehat\\lambda)$ are two KKT pairs at $x$. Complementarity and strict negativity of each inactive $g_i(x)$ force both corresponding multipliers to be $0$. Subtracting the two stationarity equations leaves a linear combination of the equality gradients and active inequality gradients equal to $0$. LICQ makes every coefficient zero, hence $\\nu=\\widehat\\nu$ and $\\lambda=\\widehat\\lambda$. [F1, step 2.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Sections 12.2 and 12.5, printed pp. 328–330 and 352–353; LICQ, MFCQ, and uniqueness of multipliers."
+            },
+            {
+              "title": "Zhiyuan Li, Convex Optimization, Lecture 5: Lagrange Multipliers and KKT",
+              "url": "https://zhiyuanli.ttic.edu/convex-optimization-site/Lecture-5___-Lagrange-Multipliers-and-KKT/",
+              "locator": "KKT definitions and multiplier discussion; the rank argument below is given locally."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-second-order-necessary-condition-on-the-critical-cone",
+        "kind": "theorem",
+        "title": "Second-order necessity on the critical cone under LICQ",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "prop-licq-implies-mfcq-and-unique-kkt-multipliers",
+          "thm-critical-cone-equivalence-under-kkt",
+          "lem-second-order-jet-on-a-regular-level-set",
+          "cor-second-order-taylor-expansion-with-the-hessian"
+        ],
+        "statement": "For the $C^2$ program of\n[[def-inequality-constrained-program-and-kkt-geometry]], let $x_*$ be a\nlocal minimizer satisfying LICQ, and let $(\\nu,\\lambda)$ be its KKT\nmultipliers. Then\n$$\nd^T\\nabla_{xx}^2L(x_*,\\nu,\\lambda)d\\ge0\\qquad\\text{for every }d\\in\\mathcal K(x_*,\\nu,\\lambda).\n$$",
+        "strategy": "1.1 If $d=0$ the result is immediate, so assume $d\\ne0$. Let $P=\\{i\\in I(x_*):\\lambda_i>0\\}$ and $Z=\\{i\\in I(x_*):\\lambda_i=0,\\ Dg_i(x_*)d=0\\}$. Put $H=(h,(g_i)_{i\\in P})$. By LICQ the rows of $DH(x_*)$, together with the rows $Dg_i(x_*)$ for $i\\in Z$, are independent. Thus the combined finite-dimensional linear map is onto. Choose $z$ solving $ Dh(x_*)z+D^2h(x_*)[d,d]=0,\\quad Dg_i(x_*)z+D^2g_i(x_*)[d,d]=0\\ (i\\in P), $ and $ Dg_i(x_*)z+D^2g_i(x_*)[d,d]=-1\\ (i\\in Z). $ The first two groups say $DH(x_*)z+D^2H(x_*)[d,d]=0$. [given, F1, F2, construct]\n\n2.1 By [F3] there is a $C^2$ curve $\\gamma$ with $H(\\gamma(t))=H(x_*)$, $\\gamma(0)=x_*$, $\\gamma'(0)=d$, and $\\gamma''(0)=z$. For $i\\in P$ the corresponding active inequality is exactly fixed at zero. An active $i\\notin P$ has $\\lambda_i=0$; by [F2], either $Dg_i(x_*)d<0$, giving $g_i(\\gamma(t))=tDg_i(x_*)d+O(t^2)<0$, or $i\\in Z$, giving $g_i(\\gamma(t))=-t^2/2+o(t^2)<0$. Inactive inequalities remain strict by continuity. Hence $\\gamma(t)$ is feasible for all sufficiently small $t>0$. [step 1.1, F2, F3, F4, algebra]\n\n2.2 Taylor expansion [F4], criticality $\\nabla f(x_*)^Td=0$, and $\\gamma(t)=x_*+td+\\tfrac12t^2z+o(t^2)$ give $ f(\\gamma(t))-f(x_*)= \\tfrac12t^2\\bigl(\\nabla f(x_*)^Tz+ d^T\\nabla^2 f(x_*)d\\bigr)+o(t^2). $ Stationarity gives $\\nabla f(x_*)^Tz=-\\nu^TDh(x_*)z-\\sum_{i\\in P}\\lambda_iDg_i(x_*)z$. The jet equations in step 1.1 therefore make the coefficient in parentheses equal to $d^T\\nabla_{xx}^2L(x_*,\\nu,\\lambda)d$. [F1, F2, step 1.1, F4, algebra]\n\n3.1 Local minimality gives $f(\\gamma(t))-f(x_*)\\ge0$ for small $t>0$. If the displayed Lagrangian quadratic form were negative, step 2.2 would make this difference negative for all sufficiently small positive $t$, a contradiction. Thus the quadratic form is nonnegative, as claimed. [step 2.1, step 2.2, given, assume-contra, discharge-contradiction] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Section 12.4, Theorem 12.5 and its full proof, printed pp. 343–344; LICQ and critical-cone second-order necessity."
+            },
+            {
+              "title": "J. M. Lee, Introduction to Smooth Manifolds",
+              "url": "https://math.mit.edu/~hrm/palestine/lee-smooth-manifolds.pdf",
+              "locator": "Regular-level local graph theorem, used to realize equality-feasible curves with a prescribed second-order jet."
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 2297,
+    "id": "inequality-kkt-duality-and-optimality-certificates-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Inequality kkt duality and optimality certificates — Examples",
+    "companion": "inequality-kkt-duality-and-optimality-certificates",
+    "requires": [
+      "inequality-kkt-duality-and-optimality-certificates"
+    ],
+    "items": [
+      {
+        "id": "ex-failed-constraint-qualification-blocks-kkt",
+        "kind": "example",
+        "title": "A true minimizer with no KKT multipliers when MFCQ fails",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "thm-first-order-kkt-necessity-under-mfcq"
+        ],
+        "statement": "Minimize $f(x,y)=x$ subject to\n$g(x,y)=y^2-x^3\\le0$. The origin is a global minimizer, but it has no KKT\nmultiplier because the active constraint gradient vanishes there.",
+        "strategy": "1.1 If $g(x,y)\\le0$, then $y^2\\le x^3$. Since $y^2\\ge0$, this forces $x^3\\ge0$, hence $x\\ge0$. The origin is feasible and has objective $0$, so it is a global minimizer. [given, algebra]\n\n1.2 At $(0,0)$ the constraint is active, $\\nabla f(0,0)=(1,0)$, and $\\nabla g(0,0)=(-3x^2,2y)|_{(0,0)}=(0,0)$. Thus $\\nabla f+\\lambda\\nabla g=(1,0)\\ne0$ for every $\\lambda\\ge0$; no KKT multiplier exists. MFCQ also fails because $Dg(0,0)w=0$ for every direction $w$, so no direction strictly decreases the active constraint. [given, F1, algebra]\n\n2.1 This does not contradict [F2]: the origin is a local and global minimizer, but the MFCQ hypothesis fails, and the direct stationarity calculation proves multiplier existence cannot be inferred here. [step 1.1, step 1.2, F2] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Sections 12.2 and 12.5, printed pp. 328–329 and 351–353; constraint qualifications are required for first-order multiplier existence."
+            },
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 5, Sections 5.2–5.3, printed pp. 221–236; constraints qualifications and the separate Slater branch."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-closed-convex-program-with-positive-duality-gap",
+        "kind": "example",
+        "title": "A closed convex program with a positive duality gap when Slater fails",
+        "deps": [
+          "def-convex-program-duality-and-slater-condition",
+          "thm-lagrangian-weak-duality",
+          "thm-slater-strong-duality-and-dual-attainment"
+        ],
+        "statement": "Define the extended-real perspective\n$$\n\\phi(x,y)=\\begin{cases}x^2/y,&y>0,\\\\0,&(x,y)=(0,0),\\\\+\\infty,&\\text{otherwise}.\\end{cases}\n$$\nMinimize $f_0(x,y)=e^{-x}$ subject to $\\phi(x,y)\\le0$. Both functions are\nproper closed convex, the primal minimum is $1$, Slater fails, and the\nLagrangian dual value is $0$.",
+        "strategy": "1.1 The epigraph of $\\phi$ is exactly $E=\\{(x,y,t):y\\ge0,\\ t\\ge0,\\ x^2\\le yt\\}$. For $y>0$ this is the inequality $t\\ge x^2/y$; when $y=0$ it forces $x=0$ and $t\\ge0$; for $y<0$ it is empty. Thus $E$ is closed, being defined by continuous non-strict inequalities. It is convex: if $|x_j|\\le\\sqrt{y_jt_j}$ for $j=1,2$, then for $0\\le\\theta\\le1$, $ |\\theta x_1+(1-\\theta)x_2| \\le\\theta\\sqrt{y_1t_1}+(1-\\theta)\\sqrt{y_2t_2} \\le\\sqrt{(\\theta y_1+(1-\\theta)y_2) (\\theta t_1+(1-\\theta)t_2)} $ by Cauchy–Schwarz. Therefore $\\phi$ is closed convex. The objective is continuous and has second derivative $e^{-x}>0$ in $x$, so it is closed convex and proper as well. [given, F1, algebra]\n\n2.1 On its domain $\\phi\\ge0$. If $y>0$, $\\phi(x,y)\\le0$ forces $x=0$; if $y=0$, finiteness already forces $x=0$. Hence the feasible set is $\\{(0,y):y\\ge0\\}$ and $f_0=1$ throughout it, so $p^*=1$ and the primal minimum is attained, for example at $(0,0)$. No point has $\\phi(x,y)<0$, so Slater fails. [given, step 1.1, algebra]\n\n3.1 For $\\lambda\\ge0$, every point in the Lagrangian domain has $e^{-x}+\\lambda\\phi(x,y)\\ge0$, so $q(\\lambda)\\ge0$. At $\\lambda=0$, taking $x\\to+\\infty$ gives $q(0)=0$. For $\\lambda>0$, take $(x_k,y_k)=(k,k^3)$; then $e^{-x_k}+\\lambda\\phi(x_k,y_k)=e^{-k}+\\lambda/k\\to0$, so again $q(\\lambda)=0$. Therefore $d^*=\\sup_{\\lambda\\ge0}q(\\lambda)=0$ and the positive duality gap is $p^*-d^*=1$. This does not contradict [F2], because its Slater hypothesis fails. [F1, F2, step 2.1, algebra]\n\n4.1 The calculation gives a closed convex primal problem with attained finite optimum and a strict gap; the missing strict-feasibility condition is exactly the boundary that blocks the Slater theorem's certificate. [step 1.1, step 2.1, step 3.1] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Zhiyuan Li, Convex Optimization, Lecture 5: Lagrange Multipliers and KKT",
+              "url": "https://zhiyuanli.ttic.edu/convex-optimization-site/Lecture-5___-Lagrange-Multipliers-and-KKT/",
+              "locator": "Example 5.5, lines 418–446; the source's open-domain perspective constraint has primal value 1 and dual value 0. This carrier adds its closed perspective boundary and verifies it independently."
+            },
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 5, Sections 5.2.3 and 5.3.2, printed pp. 226–236; Slater assumptions and strong-duality conclusion."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-active-set-quadratic-kkt-certificate",
+        "kind": "example",
+        "title": "Active-set quadratic with an exact KKT certificate",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "prop-licq-implies-mfcq-and-unique-kkt-multipliers",
+          "thm-convex-kkt-sufficiency-and-normal-cone-certificate"
+        ],
+        "statement": "Minimize\n$$f(x_1,x_2)=\\tfrac12\\bigl((x_1+1)^2+(x_2-2)^2\\bigr)$$\nsubject to $g(x_1,x_2)=-x_1\\le0$. The point $x_*=(0,2)$ has one active\nconstraint and multiplier $\\lambda_*=1$.",
+        "strategy": "1.1 The constraint is feasible exactly when $x_1\\ge0$. At $x_*=(0,2)$ it is active, and $\\nabla f(x_*)=(1,0)$ while $\\nabla g(x_*)=(-1,0)$. Therefore $\\nabla f(x_*)+\\lambda_*\\nabla g(x_*)=0$ for $\\lambda_*=1\\ge0$, and $\\lambda_*g(x_*)=0$. The active gradient is nonzero, so the one-row LICQ holds. [given, F1, algebra]\n\n2.1 The quadratic is convex and differentiable. Primal feasibility and the multiplier checks in step 1.1 satisfy the hypotheses of [F2], so $x_*$ is a global minimizer. Directly, for every feasible $x$, $ f(x)-f(x_*)=x_1+\\tfrac12x_1^2+\\tfrac12(x_2-2)^2\\ge0, $ with equality only when $x_1=0$ and $x_2=2$. Thus the minimizer is unique, and [F1] makes $\\lambda_*=1$ the unique multiplier. [step 1.1, F1, F2, algebra]\n\n3.1 The active-set KKT certificate is exact: it proves the unique global minimizer $x_*=(0,2)$ and its unique nonnegative multiplier $\\lambda_*=1$. [step 1.1, step 2.1] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Sections 12.1–12.2, printed pp. 317–331; active inequalities and first-order KKT certificates."
+            },
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 5, Sections 5.1 and 5.5, KKT and global convex optimality certificates."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-kkt-stationary-saddle-point",
+        "kind": "example",
+        "title": "An unconstrained KKT point that is a saddle",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "thm-critical-cone-equivalence-under-kkt",
+          "thm-second-order-necessary-condition-on-the-critical-cone",
+          "thm-second-order-sufficient-condition-on-the-critical-cone"
+        ],
+        "statement": "With no constraints, let $f(x_1,x_2)=x_1^2-x_2^2$. The origin satisfies\nthe KKT stationarity equation, but is a saddle point rather than a local\nminimum.",
+        "strategy": "1.1 The gradient is $\\nabla f(x_1,x_2)=(2x_1,-2x_2)$, so $\\nabla f(0,0)=0$ and the origin is KKT. With no constraints, $\\mathcal L_C(0)=\\mathbb R^2$ and $\\mathcal K(0)=\\mathbb R^2$. The Hessian is $\\begin{pmatrix}2&0\\\\0&-2\\end{pmatrix}$, whose quadratic form at $d=(0,1)$ is $-2$. [given, F1, algebra]\n\n2.1 For every $t\\ne0$, $f(t,0)=t^2>0=f(0,0)$, while $f(0,t)=-t^2<0=f(0,0)$. Both points approach the origin as $t\\to0$, so the origin is neither a local minimum nor a local maximum. The negative critical curvature also violates the necessary condition in [F2], and strict positivity required by its sufficient condition fails. [given, F2, step 1.1, algebra]\n\n3.1 Thus stationarity alone is not an optimality certificate: this KKT point is a saddle. [step 1.1, step 2.1] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nocedal and Wright, Numerical Optimization, second edition",
+              "url": "https://www.ime.unicamp.br/~pulino/MT404/TextosOnline/NocedalJ.pdf",
+              "locator": "Chapter 12, Section 12.4, printed pp. 342–346; KKT and critical-cone second-order conditions."
+            },
+            {
+              "title": "Boyd and Vandenberghe, Convex Optimization",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "Chapter 4, local and global optimality; this saddle is a direct finite-dimensional calculation."
+            }
+          ]
+        },
+        "dependency_level": 5
+      }
+    ]
+  }
+]

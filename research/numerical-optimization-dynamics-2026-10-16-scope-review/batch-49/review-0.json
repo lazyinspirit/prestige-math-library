@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "49",
+  "round": 0,
+  "reviewed_items": [
+    "lem-sylvester-vectorization-isometry-and-kronecker-identity",
+    "lem-small-block-determinant-separation-lower-bound",
+    "def-hurwitz-matrix-and-continuous-lyapunov-equation",
+    "lem-adjugate-inverse-formula-over-a-field",
+    "def-sylvester-operator-and-separation-number",
+    "lem-hurwitz-matrix-exponential-decay-bound",
+    "lem-hurwitz-negative-shift-matrix-invertible",
+    "lem-sylvester-separation-controls-the-frobenius-error",
+    "thm-sylvester-unique-solvability-spectral-separation",
+    "thm-continuous-lyapunov-integral-and-positivity",
+    "alg-low-rank-alternating-direction-implicit-lyapunov",
+    "thm-sylvester-residual-to-forward-error-bound",
+    "thm-low-rank-adi-exact-residual-factor-identity",
+    "thm-low-rank-adi-conditional-convergence-bound",
+    "alg-bartels-stewart-sylvester-equation",
+    "thm-bartels-stewart-sylvester-exact-correctness",
+    "thm-bartels-stewart-dense-operation-count",
+    "ex-stable-linear-noise-lyapunov-covariance",
+    "ex-nearly-colliding-sylvester-eigenvalue-sums",
+    "ex-low-rank-adi-residual-certificate"
+  ],
+  "reviewed_pages": [
+    "sylvester-and-lyapunov-matrix-equations",
+    "sylvester-and-lyapunov-matrix-equations-examples"
+  ],
+  "decision": "repair",
+  "reason": "The batch matches the approved LIN-SYL scope. Request one proof-repair pass for two local proof gaps; neither requires changing a Statement or Definition.",
+  "findings": [
+    {
+      "id": "lem-small-block-determinant-separation-lower-bound",
+      "type": "prerequisite",
+      "reason": "Proof 1.2 uses |det M|=∏s_i from the SVD, but [F1]–[F2] do not establish that identity. Supply it locally or add the determinant facts: thm-determinant-multiplicative, cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus, and thm-determinant-of-a-triangular-matrix. This establishes δ(M)≤σ_min(M), used by alg-bartels-stewart-sylvester-equation step 3 and proof step 1.3."
+    },
+    {
+      "id": "thm-sylvester-unique-solvability-spectral-separation",
+      "type": "local",
+      "reason": "Proof 1.2 asserts that the block lower-triangular Kronecker matrix is invertible iff each diagonal block is, then that each T+s_jj I is invertible iff all its diagonal entries are nonzero. This is the key spectral-equivalence step; add a short determinant-factorization or equivalent local justification. No Statement change is needed."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-bartels-stewart-sylvester-equation",
+      "decision": "accept",
+      "reason": "Its step 3 and proof 1.3 correctly use δ(M)>τ to infer σ_min(M)>τ and justify the local solve, conditional on the separation-bound proof repair; no consumer change is needed."
+    },
+    {
+      "id": "thm-sylvester-residual-to-forward-error-bound",
+      "decision": "accept",
+      "reason": "F3 is used for the stated unique-solution premise; the use is valid once the supplier proof gap is repaired."
+    },
+    {
+      "id": "thm-low-rank-adi-conditional-convergence-bound",
+      "decision": "accept",
+      "reason": "F3 correctly supplies positive separation from the disjoint Hurwitz spectra; no consumer change is needed."
+    },
+    {
+      "id": "thm-bartels-stewart-sylvester-exact-correctness",
+      "decision": "accept",
+      "reason": "F3 correctly supplies uniqueness under spectral disjointness; no consumer change is needed."
+    },
+    {
+      "id": "ex-nearly-colliding-sylvester-eigenvalue-sums",
+      "decision": "accept",
+      "reason": "F2 correctly applies the spectral criterion to the four nonzero eigenvalue sums; no consumer change is needed."
+    }
+  ]
+}

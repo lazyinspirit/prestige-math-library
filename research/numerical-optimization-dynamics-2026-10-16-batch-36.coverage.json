@@ -1,0 +1,443 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "36",
+  "pages": [
+    {
+      "page": "linear-multistep-methods-and-dahlquist-equivalence",
+      "kind": "A",
+      "order": 2356,
+      "canonical": [
+        {
+          "name": "Constant-step k-step recurrence, characteristic polynomials, unscaled local residual, order, consistency, root condition, and zero-stability definitions",
+          "disposition": "included",
+          "item": "def-linear-multistep-method-consistency-order-and-root-condition"
+        },
+        {
+          "name": "Moment conditions equivalent to local order p, including the two consistency identities",
+          "disposition": "included",
+          "item": "lem-linear-multistep-order-conditions-from-taylor"
+        },
+        {
+          "name": "Complete companion-power proof for repeated interior roots, simple unit roots, and failure modes",
+          "disposition": "included",
+          "item": "lem-companion-powers-bounded-under-root-condition"
+        },
+        {
+          "name": "Dahlquist consistency/zero-stability equivalence and global order-p error under explicit tube and implicit-branch hypotheses",
+          "disposition": "included",
+          "item": "thm-dahlquist-equivalence-for-linear-multistep-methods"
+        },
+        {
+          "name": "Variable-step BDF2 coefficients from endpoint quadratic interpolation and the O(h_n^3) unscaled local residual under bounded adjacent ratios",
+          "disposition": "included",
+          "item": "lem-variable-step-bdf2-interpolation-and-local-defect"
+        },
+        {
+          "name": "Variable-step BDF2 procedure with explicit invalid-grid, root, ambiguous-branch, and evaluation-failure statuses",
+          "disposition": "included",
+          "item": "alg-variable-step-bdf2-with-selected-implicit-branch"
+        },
+        {
+          "name": "Variable-step BDF2 first-difference multiplier q(r)=r^2/(1+2r) and strict contraction threshold",
+          "disposition": "included",
+          "item": "lem-variable-step-bdf2-increment-ratio-recurrence"
+        },
+        {
+          "name": "Second-order variable-step BDF2 convergence with 0<r_min<=r_n<=r_*<1+sqrt(2), exact branch, and O(H^2) starters",
+          "disposition": "included",
+          "item": "thm-variable-step-bdf2-order-two-under-ratio-bound"
+        },
+        {
+          "name": "Adams predictor and corrector weights as integrals of actual-node Lagrange bases",
+          "disposition": "included",
+          "item": "lem-variable-step-adams-lagrange-weights"
+        },
+        {
+          "name": "Finite PECE predictor-evaluate-correct-evaluate procedure, distinct from fully implicit Adams",
+          "disposition": "included",
+          "item": "alg-adams-pece-one-correction"
+        },
+        {
+          "name": "Uniform-step BDF2 with consistent starts and exact order/root checks",
+          "disposition": "included",
+          "item": "ex-uniform-step-bdf2-satisfies-dahlquist-conditions"
+        },
+        {
+          "name": "Repeated root strictly inside the disk with bounded powers",
+          "disposition": "included",
+          "item": "ex-repeated-interior-root-preserves-bounded-powers"
+        },
+        {
+          "name": "Simple unit-circle roots and bounded oscillatory modes",
+          "disposition": "included",
+          "item": "ex-simple-unit-circle-roots-give-bounded-oscillation"
+        },
+        {
+          "name": "Repeated unit root counterexample with linearly growing parasitic mode",
+          "disposition": "included",
+          "item": "cex-repeated-unit-root-causes-linear-parasitic-growth"
+        },
+        {
+          "name": "Unrestricted adjacent-ratio counterexample with H_m->0 and vanishing BDF2 starter error",
+          "disposition": "included",
+          "item": "cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error"
+        },
+        {
+          "name": "Exact scalar test-equation stability comparison of one-pass PECE and fully implicit trapezoidal Adams",
+          "disposition": "included",
+          "item": "ex-one-pass-pece-differs-from-implicit-adams-stability"
+        }
+      ],
+      "sources": [
+        {
+          "title": "Ernst Hairer, Syvert P. N\u00f8rsett, and Gerhard Wanner, Solving Ordinary Differential Equations I: Nonstiff Problems, 2nd ed., Springer (corrected printing)",
+          "kind": "textbook",
+          "url": "https://moodle.utc.fr/file.php/336/Hairer_Noersett_Wanner._Solving_ordinary_differential_equations_vol.1._Nonstiff_problems_2ed._revised_Springer_2008_ISBN_3540566708_593s_MNd_.pdf",
+          "locator": "Chapter III.5, Variable Step Size Multistep Methods, printed pp. 397\u2013409 (PDF pp. 408\u2013420), including actual-node Adams interpolation and variable-step BDF2 formula/stability/convergence; the PECE implementation passage is \u00a7III.7, printed pp. 423\u2013424 (PDF pp. 434\u2013435).",
+          "support": "This is the controlling textbook source specified by the plan amendment. Its variable-step BDF2 recurrence and ratio-stability conditions were checked against the local proofs; its PECE implementation confirms the exact predictor-evaluate-correct-evaluate stage order. No unstated global variable-step theorem or code behavior is imported.",
+          "supported_items": [
+            "lem-variable-step-adams-lagrange-weights",
+            "alg-adams-pece-one-correction",
+            "ex-one-pass-pece-differs-from-implicit-adams-stability",
+            "lem-variable-step-bdf2-interpolation-and-local-defect",
+            "alg-variable-step-bdf2-with-selected-implicit-branch",
+            "lem-variable-step-bdf2-increment-ratio-recurrence",
+            "thm-variable-step-bdf2-order-two-under-ratio-bound"
+          ],
+          "contents": [
+            {
+              "name": "\u00a7III.5, pp. 397\u2013400: variable-step Adams formulas from interpolation at actual nodes and integration",
+              "disposition": "included",
+              "item": "lem-variable-step-adams-lagrange-weights",
+              "support": "The source constructs variable-step Adams formulas by interpolating derivative values at the actual past nodes and integrating the polynomial; the carrier gives the complete Lagrange-basis formula and proof."
+            },
+            {
+              "name": "\u00a7III.5, pp. 400\u2013401: BDF derivative interpolation, variable-step BDF2 coefficients, and order convention",
+              "disposition": "included",
+              "item": "lem-variable-step-bdf2-interpolation-and-local-defect",
+              "support": "The source derives variable-step BDF by differentiating the solution interpolant and gives the BDF2 ratio formula; the carrier independently differentiates the quadratic Lagrange basis and proves its cubic residual."
+            },
+            {
+              "name": "\u00a7III.5, pp. 402\u2013406: variable-step BDF2 stability and the 1+sqrt(2) ratio boundary",
+              "disposition": "included",
+              "item": "lem-variable-step-bdf2-increment-ratio-recurrence",
+              "support": "The source identifies the BDF2 parasitic factor and its ratio threshold. The carrier derives q(r)=r^2/(1+2r) and proves the strict uniform contraction used downstream; the source\u2019s broader companion-product argument is not substituted for that local proof."
+            },
+            {
+              "name": "\u00a7III.5, pp. 407\u2013409: variable-step consistency, bounded coefficients, and convergence error propagation",
+              "disposition": "inline",
+              "item": "thm-variable-step-bdf2-order-two-under-ratio-bound",
+              "support": "The source derives global error propagation from stability, local defect, bounded coefficients, and accurate starts. The carrier supplies its own forced first-difference estimate, branch assumptions, and complete O(H^2) proof."
+            },
+            {
+              "name": "\u00a7III.7, pp. 423\u2013424: DEABM predictor-evaluate-correct-evaluate implementation",
+              "disposition": "included",
+              "item": "alg-adams-pece-one-correction",
+              "support": "The source explicitly gives P-E-C-E order and the final corrected-state evaluation for the next step; the local algorithm specifies these operations and its failure statuses."
+            },
+            {
+              "name": "\u00a7III.7, pp. 423\u2013424: one corrector iteration compared with solving the implicit Adams equation",
+              "disposition": "inline",
+              "item": "ex-one-pass-pece-differs-from-implicit-adams-stability",
+              "support": "The source describes one corrector iteration; the exact scalar stability-factor comparison is independently proved in the example."
+            }
+          ],
+          "full_text_read": {
+            "method": "Full PDF opened and relevant section text inspected through the source reader; equations and hypotheses checked against the local derivations.",
+            "date": "2026-10-16",
+            "scope": "Complete printed pp. 397\u2013409 / PDF pp. 408\u2013420 for \u00a7III.5 and printed pp. 423\u2013424 / PDF pp. 434\u2013435 for the PECE passage. Other chapters were not used."
+          },
+          "retrieval_history": {
+            "initial_attempt": "Located and opened the complete second-edition textbook PDF; inspected the whole assigned variable-step and PECE passages in the PDF text reader.",
+            "alternative_searches": [
+              "Searched the exact Hairer\u2013N\u00f8rsett\u2013Wanner title and the named Chapter III.5 variable-step BDF section; verified the printed section/page locator against the book contents."
+            ],
+            "recovery": "No failed retrieval attempt was required."
+          },
+          "recovery_attempts": [],
+          "fetch_verified": {
+            "at": "2026-10-16T06:21:20.154835+00:00",
+            "bytes": 6183372,
+            "kind": "pdf",
+            "sha256_16": "0e4cf5fc87bc5c08",
+            "pages": 539
+          }
+        },
+        {
+          "title": "Gustaf S\u00f6derlind, Imre Fekete, and Istv\u00e1n Farag\u00f3, On the zero-stability of multistep methods on smooth nonuniform grids, BIT Numerical Mathematics",
+          "kind": "paper",
+          "url": "https://real.mtak.hu/85237/1/B111_BIT.pdf",
+          "locator": "\u00a74 \u201cZero stability on nonuniform grids\u2014the BDF2 method,\u201d PDF pp. 12\u201313; equations (4.1)\u2013(4.6), especially the first-difference recursion and ratio inequality.",
+          "support": "Independent full-text treatment of variable-step BDF2. It confirms the recurrence and threshold; the manuscript does not supply the local vector-field error theorem authored here.",
+          "supported_items": [
+            "lem-variable-step-bdf2-interpolation-and-local-defect",
+            "lem-variable-step-bdf2-increment-ratio-recurrence",
+            "thm-variable-step-bdf2-order-two-under-ratio-bound",
+            "cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error"
+          ],
+          "contents": [
+            {
+              "name": "\u00a74, equations (4.1)\u2013(4.4): factorization of the homogeneous BDF2 difference equation",
+              "disposition": "included",
+              "item": "lem-variable-step-bdf2-increment-ratio-recurrence",
+              "support": "The source rewrites the formula as the scalar extraneous increment recursion; the carrier derives it directly for arbitrary positive ratios."
+            },
+            {
+              "name": "\u00a74, equations (4.4)\u2013(4.6): ratio inequality r^2/(1+2r) <= 1 and threshold 1+sqrt(2)",
+              "disposition": "included",
+              "item": "lem-variable-step-bdf2-increment-ratio-recurrence",
+              "support": "Used as an independent check of the exact threshold; strict uniform contraction and the vector-valued convergence argument are proved locally."
+            },
+            {
+              "name": "\u00a74, surrounding discussion: stability concerns products on nonuniform grids",
+              "disposition": "inline",
+              "item": "cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error",
+              "support": "Read to delimit the ratio claim. The item supplies a separate explicit mesh family and does not infer arbitrary-grid instability from individual factors alone."
+            }
+          ],
+          "full_text_read": {
+            "method": "Complete open-access PDF opened; full \u00a74 text and equations (4.1)\u2013(4.6) inspected.",
+            "date": "2026-10-16",
+            "scope": "PDF pp. 12\u201313, the complete BDF2 nonuniform-grid example and ratio analysis."
+          },
+          "retrieval_history": {
+            "initial_attempt": "Found and opened the author repository full PDF from the scholarly search results.",
+            "alternative_searches": [
+              "Searched for the Grigorieff/Hairer BDF2 ratio threshold and open full-text treatments; selected this complete BIT article as an independent treatment."
+            ],
+            "recovery": "No failed retrieval attempt was required."
+          },
+          "recovery_attempts": [],
+          "fetch_verified": {
+            "at": "2026-10-16T06:21:17.753714+00:00",
+            "bytes": 696732,
+            "kind": "pdf",
+            "sha256_16": "96f9c08fdec1a397",
+            "pages": 21
+          }
+        },
+        {
+          "title": "Ernst Hairer and Gerhard Wanner, Introduction \u00e0 l\u2019Analyse Num\u00e9rique, Chapter III: \u00c9quations Diff\u00e9rentielles Ordinaires, University of Geneva course notes (2005)",
+          "kind": "lecture-notes",
+          "url": "https://www.unige.ch/~hairer/poly/chap3.pdf",
+          "locator": "\u00a7\u00a7III.6\u2013III.8, PDF pp. 15\u201319 / printed pp. 71\u201375: order conditions, characteristic roots, root condition, and fixed-step convergence proof.",
+          "support": "Author-hosted full lecture-note treatment of constant-step LMM order, root stability, and convergence. Its fixed-step proof leaves the repeated-root power bound to a source reference; the repeated-root and companion-power argument is supplied locally here.",
+          "supported_items": [
+            "def-linear-multistep-method-consistency-order-and-root-condition",
+            "lem-linear-multistep-order-conditions-from-taylor",
+            "lem-companion-powers-bounded-under-root-condition",
+            "thm-dahlquist-equivalence-for-linear-multistep-methods"
+          ],
+          "contents": [
+            {
+              "name": "\u00a7III.6, Theorem 6.2: order conditions for multistep formulas",
+              "disposition": "included",
+              "item": "lem-linear-multistep-order-conditions-from-taylor",
+              "support": "The source\u2019s moment conditions were checked against the coefficient convention; the local proof derives necessity and sufficiency directly."
+            },
+            {
+              "name": "\u00a7III.7, Definition 7.1: root condition for fixed-step multistep methods",
+              "disposition": "included",
+              "item": "def-linear-multistep-method-consistency-order-and-root-condition",
+              "support": "The same simple-unit-root convention is used; repeated roots strictly inside the disk remain permitted."
+            },
+            {
+              "name": "\u00a7III.7, first Dahlquist barrier remark",
+              "disposition": "out-of-scope",
+              "reason": "The first stability barrier is not part of this pair\u2019s approved scope of methods, root conditions, and convergence equivalence; no barrier claim or consumer is authored here."
+            },
+            {
+              "name": "\u00a7III.8, Theorem 8.1 and proof: constant-step convergence of stable multistep methods",
+              "disposition": "included",
+              "item": "thm-dahlquist-equivalence-for-linear-multistep-methods",
+              "support": "The source confirms the companion-state and error-propagation route. The local proof supplies the repeated-root bound, explicit norm argument, and full converse."
+            },
+            {
+              "name": "\u00a7III.7\u2013III.8, source proof limits for repeated roots",
+              "disposition": "inline",
+              "item": "lem-companion-powers-bounded-under-root-condition",
+              "support": "Repeated-root terms are proved locally with Jordan blocks and explicit generalized recurrence modes; the incomplete source treatment is not used as a completed proof."
+            }
+          ],
+          "full_text_read": {
+            "method": "Retrieved course-note PDF; pages 15\u201319 were rendered/extracted and the complete mathematical reasoning inspected.",
+            "date": "2026-10-16",
+            "scope": "Complete \u00a7III.6\u2013III.8 argument range, PDF pp. 15\u201319 / printed pp. 71\u201375."
+          },
+          "retrieval_history": {
+            "initial_attempt": "Reused the prior local full-PDF cache and re-rendered the exact assigned pages with MuPDF; the full relevant text was read in this turn.",
+            "alternative_searches": [
+              "The same official PDF was checked through web search and web PDF retrieval."
+            ],
+            "recovery": "No failed retrieval attempt was required."
+          },
+          "recovery_attempts": [],
+          "fetch_verified": {
+            "at": "2026-10-16T06:21:24.197236+00:00",
+            "bytes": 2199218,
+            "kind": "pdf",
+            "sha256_16": "71cc972bcacf4d24",
+            "pages": 30
+          }
+        },
+        {
+          "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, Chapter 6: Initial-value problems for ODEs",
+          "kind": "textbook",
+          "url": "https://fncbook.com/multistep/",
+          "locator": "\u00a76.6, complete multistep methods section: method and generating-polynomial definitions, local residual/order convention, Adams interpolation derivation, and explicit/implicit distinction.",
+          "support": "Independent textbook treatment for constant-step LMM notation and Adams interpolation. Its zero-stability companion section is separately cited below. Its partial root proof and stated-without-proof Dahlquist theorem are not used as complete arguments.",
+          "supported_items": [
+            "def-linear-multistep-method-consistency-order-and-root-condition",
+            "lem-linear-multistep-order-conditions-from-taylor",
+            "lem-variable-step-adams-lagrange-weights",
+            "alg-adams-pece-one-correction"
+          ],
+          "contents": [
+            {
+              "name": "\u00a76.6, Definition 6.6.1: multistep method recurrence and implicit/explicit distinction",
+              "disposition": "included",
+              "item": "def-linear-multistep-method-consistency-order-and-root-condition",
+              "support": "The source convention was reconciled to the local alpha/beta equation, which states its index and residual conventions explicitly."
+            },
+            {
+              "name": "\u00a76.6, Definition 6.6.2 and Observation 6.6.1: generating polynomials",
+              "disposition": "included",
+              "item": "def-linear-multistep-method-consistency-order-and-root-condition",
+              "support": "The local definition gives the corresponding polynomials in ascending coefficient convention and their exact relation to the recurrence."
+            },
+            {
+              "name": "\u00a76.6, Definition 6.6.3: local truncation error and method order",
+              "disposition": "included",
+              "item": "lem-linear-multistep-order-conditions-from-taylor",
+              "support": "FNC scales its residual by 1/h; the local carrier explicitly uses the unscaled residual and proves the resulting p versus p+1 convention."
+            },
+            {
+              "name": "\u00a76.6, Examples 6.6.1\u20136.6.2: backward Euler and AB2 residual calculations",
+              "disposition": "inline",
+              "item": "lem-linear-multistep-order-conditions-from-taylor",
+              "support": "These source examples illustrate the Taylor-moment convention; the local lemma proves all moment conditions rather than importing the example calculations."
+            },
+            {
+              "name": "\u00a76.6, Observation 6.6.2: global error follows local order for stable methods",
+              "disposition": "inline",
+              "item": "thm-dahlquist-equivalence-for-linear-multistep-methods",
+              "support": "The observation is treated only as a scope pointer; the complete global argument and exact assumptions are supplied locally."
+            },
+            {
+              "name": "\u00a76.6.3, Adams formulas from integrating interpolating derivative values",
+              "disposition": "included",
+              "item": "lem-variable-step-adams-lagrange-weights",
+              "support": "The source confirms the integral-interpolant construction; the local lemma proves actual-node variable-step weights."
+            },
+            {
+              "name": "\u00a76.6.3, BDF2 as a derivative of an interpolating solution polynomial",
+              "disposition": "inline",
+              "item": "lem-variable-step-bdf2-interpolation-and-local-defect",
+              "support": "This constant-grid derivation is checked against the local variable-grid Lagrange calculation; no coefficient table replaces the local proof."
+            },
+            {
+              "name": "\u00a76.6 exercises on additional fixed-step Adams/BDF coefficients",
+              "disposition": "out-of-scope",
+              "reason": "The exercise set contains method-specific coefficient and local-error calculations beyond the approved BDF2 and generic actual-node Adams/PECE scope; no extra method order claim is imported."
+            }
+          ],
+          "full_text_read": {
+            "method": "Pinned author-source chapter text was read in full from the local checkout and cross-checked against the complete online section.",
+            "date": "2026-10-16",
+            "scope": "Complete \u00a76.6 page/file, including formulas, Adams derivation, examples, and exercises."
+          },
+          "retrieval_history": {
+            "initial_attempt": "Read the complete author-source chapter6/multistep.md from the cached commit and opened the public FNC section.",
+            "alternative_searches": [
+              "The pinned GitHub author-source version and current FNC online chapter page were both inspected."
+            ],
+            "recovery": "No failed retrieval attempt was required."
+          },
+          "recovery_attempts": [],
+          "fetch_verified": {
+            "at": "2026-10-16T06:21:15.141640+00:00",
+            "bytes": 1327751,
+            "kind": "html",
+            "sha256_16": "6329ee76bd2208a4",
+            "text_chars": 20895
+          }
+        },
+        {
+          "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, \u00a76.8: Zero-stability of multistep methods",
+          "kind": "textbook",
+          "url": "https://fncbook.com/zerostability/",
+          "locator": "\u00a76.8, complete section: root condition, repeated-root illustration, and Dahlquist equivalence statement.",
+          "support": "Independent treatment for the root-condition and Dahlquist scope. The published FNC proof explicitly omits repeated roots and the equivalence theorem is stated without proof; all required arguments are supplied in this batch.",
+          "supported_items": [
+            "lem-companion-powers-bounded-under-root-condition",
+            "thm-dahlquist-equivalence-for-linear-multistep-methods",
+            "cex-repeated-unit-root-causes-linear-parasitic-growth"
+          ],
+          "contents": [
+            {
+              "name": "\u00a76.8.1, Example 6.8.1: LIAF unstable exterior root",
+              "disposition": "inline",
+              "item": "lem-companion-powers-bounded-under-root-condition",
+              "support": "The exterior-root failure mode is included in the complete local root-condition converse; the source\u2019s particular LIAF coefficients are not imported."
+            },
+            {
+              "name": "\u00a76.8.1, Definition 6.8.1 and Theorem 6.8.1: zero-stability and root condition",
+              "disposition": "included",
+              "item": "lem-companion-powers-bounded-under-root-condition",
+              "support": "The source statement is used to cross-check the standard root condition; the local proof covers repeated roots and both directions."
+            },
+            {
+              "name": "\u00a76.8.1, Example 6.8.2: repeated interior root in Adams methods",
+              "disposition": "inline",
+              "item": "ex-repeated-interior-root-preserves-bounded-powers",
+              "support": "The local example verifies a repeated interior root with an exact cubic polynomial and bounded powers."
+            },
+            {
+              "name": "\u00a76.8.1, Example 6.8.3: double unit root and parasitic growth",
+              "disposition": "included",
+              "item": "cex-repeated-unit-root-causes-linear-parasitic-growth",
+              "support": "The source example is reverified with a vanishing O(h) starter perturbation and exact nonconvergence at the terminal time."
+            },
+            {
+              "name": "\u00a76.8.2, Theorem 6.8.2: Dahlquist equivalence statement",
+              "disposition": "included",
+              "item": "thm-dahlquist-equivalence-for-linear-multistep-methods",
+              "support": "The source states but does not prove the equivalence; the local theorem supplies the complete two-way proof."
+            },
+            {
+              "name": "\u00a76.8.2, Theorem 6.8.3: first Dahlquist stability barrier",
+              "disposition": "out-of-scope",
+              "reason": "The first stability barrier is not in the assigned contract and is not needed as a premise for the equivalence or variable-step BDF2 proof."
+            },
+            {
+              "name": "\u00a76.8 exercises on further root-condition classifications",
+              "disposition": "out-of-scope",
+              "reason": "The exercise-specific formulas are outside the approved examples; the carrier proves the general root-condition theorem and assigned boundary examples directly."
+            }
+          ],
+          "full_text_read": {
+            "method": "Complete section read from the author-source checkout and online rendered text.",
+            "date": "2026-10-16",
+            "scope": "Complete \u00a76.8, including examples, theorem statements, partial proof, and exercises."
+          },
+          "retrieval_history": {
+            "initial_attempt": "Read the complete author-source chapter6/zerostability.md from the cached commit and opened the online FNC section.",
+            "alternative_searches": [
+              "The pinned author-source repository and current online page were inspected."
+            ],
+            "recovery": "No failed retrieval attempt was required."
+          },
+          "recovery_attempts": [],
+          "fetch_verified": {
+            "at": "2026-10-16T06:21:15.132305+00:00",
+            "bytes": 640679,
+            "kind": "html",
+            "sha256_16": "0d2fdd65d822239b",
+            "text_chars": 13473
+          }
+        }
+      ]
+    }
+  ]
+}

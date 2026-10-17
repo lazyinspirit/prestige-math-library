@@ -29,6 +29,23 @@ bodies or discover the entire workspace. Identity/home inventories and Git tree
 metadata remain available to detect scope changes. Shared workflow code remains
 strict; unrelated shared-ledger records use their existing run projections.
 
+Mathematics tooling context retains the mathematics/shared tools and briefs,
+including their own regression-test bytes. The independent `tools/physics-autopilot/`
+and `tools/physics-support/` namespaces are excluded from the default mathematics
+walk. Actual shared physics helpers remain protected through a conservative
+source-literal dependency closure rooted in production mathematics tools. The
+closure follows exact relative source and JSON filenames, including static,
+export-from and literal dynamic references, without evaluating modules. A missing
+or non-file referenced physics helper blocks sealing. Conditional driver prefixes
+select the mathematics `./` branch; they do not introduce the unexecuted physics
+workflow. Computed imports outside this convention need an explicit selector
+update when introduced; this source-literal collector is not a JavaScript runtime
+resolver. A test that exercises both engines does not make the independent
+physics workflow a mathematics input. Explicit owned paths and native evidence
+remain protected regardless of namespace. Physics keeps its existing complete
+tooling selection. This changes neither commit ownership nor any gate.
+
+
 Metadata/render preparation is reused only for the exact unchanged inputs and
 repair round. Changed inputs or repairs require fresh preparation and the full
 battery. Quiet engine ticks neither launch renderers nor rehash the library.
@@ -98,3 +115,67 @@ original empty map, retaining genuine non-judge audit evidence. The stamper
 parses proposed frontmatter before writing and refuses unsupported complex flow
 updates rather than discarding audit fields or writing duplicate keys. These
 formatting protections grant no verdict or currency beyond the native ledger.
+
+
+### Replacement-only plan ownership
+
+Mathematics v3 closeout can bind one separate `plan_projection` object in its
+run-local closeout scope policy: `{path: "research/plan-spec.json", authority:
+"research/RUN-step6-plan-projection.json", sha256: "..."}`. This is page-record
+commit authority. It does not grant ownership of the complete shared working
+plan. The existing addition-only published-ledger fragment API is unchanged.
+Mixed owned and foreign raw plan changes without this exact authority fail
+closed. A foreign-only plan change still stays outside the commit when the
+native run-relevant projection is unchanged.
+
+The authority has version 1 and kind `plan-page-replacement-projection`. It
+records `run`, the fixed plan `path`, `authorized_by: owner`, a concrete owner
+`authorization`, immutable Git `original_head` and `original_index_blob`, ordered
+`page_ids`, `base_head_owned_rows`, `base_index_owned_rows`, `target_owned_rows`,
+and `evidence`. Each row is `{id, raw}`, where `raw` is the exact JSON page-object
+token, including its internal whitespace. `evidence` contains exactly the scope
+ledger and every current batch manifest, each with its actual raw SHA-256.
+The three row inventories have exactly the same IDs and relative order; the
+IDs must equal both the scope-ledger/physical-home inventory and the manifest
+inventory. Target items/requires, page kind and category must agree with the
+actual current manifests and homes. Transitive prerequisite/context pages
+never enlarge this commit ownership set.
+
+This route supports existing page replacements only. Missing, duplicate,
+unknown or reordered owned IDs, duplicate JSON keys, malformed pages, scope
+additions/deletions and unmatched original/target rows are rejected. A strict
+JSON token scanner handles quoted strings/escapes, arrays, objects and
+primitive values and locates exact page spans. It preserves every foreign row,
+foreign relative order, array separator and top-level byte in each Git base.
+Each composition must reconstruct its entire original base by reversing its
+recorded replacements; the foreign raw residual and target row inventory are
+also compared after parsing the result.
+
+The current working plan must contain the exact authorized target row bytes.
+Root creates this authority only after real writers and native splice updates
+have drained and a stable late read establishes the target. The original Git
+objects bind the original HEAD and index owned rows separately. At preparation
+and again under the normal index lock, each current base's owned rows must be
+either its exact authorized original or the exact complete target; partial or
+conflicting owned integrations fail. Foreign changes in the current HEAD and
+index remain separate and are retained from each base, never copied from the
+working plan. The commit uses two composed blobs and preserves the full working
+file unchanged. Proposed/committed HEAD and index blobs, foreign residuals,
+authority and original outside index/HEAD conditions are asserted within the
+normal transaction and main-reference compare-and-swap. The receipt records the
+projection authority and separate base/result/foreign-residual bindings only
+when the policy explicitly opts into this feature. Without `plan_projection`,
+the scope-context JSON has no `planProjections` member and receipts have no
+`plan_projections` member; existing default mathematics, physics and legacy
+scope-context serialization and historical receipt shape are retained.
+
+The policy, authority, scope inputs and supporting code ownership must be
+sealed before the real metadata/render preparation and full native battery.
+Readiness keeps its existing broader scientific plan projection and additionally
+seals the exact authority/evidence; no gate or current-context requirement is
+waived. If installing this support changes an input bound by an existing
+unconsumed published-ledger authority, archive that original authority and its
+original evidence/policy before truthfully authorizing the current successor
+against the same original HEAD/index ledger bases. Do not relabel it consumed,
+rewrite historical receipts, or broaden ledger additions into replacements.
+Physics and legacy closeout do not acquire this plan-replacement route.

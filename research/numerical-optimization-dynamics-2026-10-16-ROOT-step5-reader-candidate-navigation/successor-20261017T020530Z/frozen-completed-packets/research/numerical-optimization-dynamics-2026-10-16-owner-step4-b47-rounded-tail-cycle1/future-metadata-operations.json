@@ -1,0 +1,956 @@
+[
+  {
+    "file": "research/numerical-optimization-dynamics-2026-10-16-batch-47.proof-contracts.json",
+    "path": [
+      "contracts",
+      "thm-xd-uniformization-truncation-and-error"
+    ],
+    "before": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-xd-uniformized-matrix-is-stochastic",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a finite column generator and let $\\nu\\ge\\max_{j<n}r_j$. If $\\nu>0$, then\n\n$$P:=I+Q/\\nu$$\n\nhas nonnegative entries and every column sums to one. If $\\nu=0$, then $Q=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-xd-finite-generator-master-equation-uniformization",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be an $n\\times n$ finite column generator, let $p_0$ be a column probability vector, and let $t\\ge0$. The unique differentiable solution of\n\n$$p'(t)=Qp(t),\\qquad p(0)=p_0,$$\n\nis $p(t)=e^{tQ}p_0$. If $\\nu>0$ and $\\nu\\ge\\max_jr_j$, put $P=I+Q/\\nu$; then\n\n$$p(t)=\\sum_{k=0}^{\\infty}e^{-\\nu t}\\frac{(\\nu t)^k}{k!}P^kp_0.$$\n\nEach term $P^kp_0$ is a probability vector, and the displayed Poisson mixture is a probability vector. If $\\nu=0$, then $Q=0$ and $p(t)=p_0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-xd-geometric-poisson-tail-bound",
+          "source_section": "Statement",
+          "quote": "For $N\\sim\\operatorname{Pois}(\\mu)$ with $\\mu\\ge0$ and integer $K\\ge0$, write $\\tau_K(\\mu):=\\mathbb P(N>K)$. If $\\mu=0$, then $\\tau_K(\\mu)=0$. If $\\mu>0$ and $\\mu<K+2$, then\n\n$$\\tau_K(\\mu)\\le \\frac{e^{-\\mu}\\mu^{K+1}}{(K+1)!\\left(1-\\mu/(K+2)\\right)}.$$\n\nThe right side is a geometric majorant computed from a Poisson mass, not a floating-point subtraction of a rounded partial sum from one.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-induced-matrix-p-norm",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is\n\n$$\\lVert A\\rVert_{p}\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_{p}\\;:\\;x\\in\\mathbb{R}^{n},\\ \\lVert x\\rVert_{p}\\le 1\\,\\Bigr\\}.$$\n\nWhen $n\\ge1$, the following three displayed quantities are the same number:\n\n$$\\lVert A\\rVert_p=\\sup_{\\lVert x\\rVert_p\\le 1}\\lVert Ax\\rVert_p=\\sup_{\\lVert x\\rVert_p=1}\\lVert Ax\\rVert_p=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_p}{\\lVert x\\rVert_p},$$\n\nthe equalities following from positive homogeneity of $\\lVert\\cdot\\rVert_p$\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]], axiom (N2)) and\nthe equality $\\lVert 0\\rVert_p=0$.\n\n**The value is a finite nonnegative real.** For $n\\ge 1$ the norms\n$\\lVert\\cdot\\rVert_p$ and $\\lVert\\cdot\\rVert_2$ are equivalent by\n[[thm-all-norms-on-rn-are-equivalent]], so there is $C>0$ with\n$\\lVert x\\rVert_\\infty\\le C\\lVert x\\rVert_p$ for every $x$. For every $i<m$,\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty\\le C\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_p$,\nso $\\lVert Ax\\rVert_p\\le \\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C\\lVert x\\rVert_p$;\nhence the supremum over the unit ball is at most the finite constant\n$\\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C$.\n\n**The induced infinity norm is a separate named case.** When $m,n\\ge1$, define\n\n$$\\lVert A\\rVert_\\infty\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_\\infty\\;:\\;x\\in\\mathbb R^n,\\ \\lVert x\\rVert_\\infty\\le 1\\,\\Bigr\\}.$$\n\nAs in the rational-$p$ case, positive homogeneity gives\n\n$$\\lVert A\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty\\le 1}\\lVert Ax\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty=1}\\lVert Ax\\rVert_\\infty=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_\\infty}{\\lVert x\\rVert_\\infty}.$$\n\nThe supremum is finite because for every $i<m$ one has\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty$,\nso\n\n$$\\lVert Ax\\rVert_\\infty\\le\\max_{i<m}\\sum_{j<n}|a_{ij}|\\,\\lVert x\\rVert_\\infty.$$\n\n**At $n=0$ the convention is explicit.** The only element of $\\mathbb{R}^{0}$\nis the zero vector, the only matrix $A\\in M_{m\\times 0}(\\mathbb{R})$ is the\nempty matrix, and the unit-ball definition gives $\\lVert A\\rVert_{p}=0$.\nThe unit sphere and the set of nonzero vectors are empty, so the two ratio\nformulas above are not asserted in this case.\n\nThe induced quantity is a norm on the matrix space $M_{m\\times n}(\\mathbb{R})$:\nfor each rational $p\\ge1$, and likewise for the separately named\n$\\infty$-case when $m,n\\ge1$, separation, absolute homogeneity and the triangle\ninequality follow from the same three axioms of the underlying vector norm\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]]) through the\ndefining supremum. The compatibility with matrix-vector multiplication, the\nsubmultiplicativity and the value on identity matrices are\n[[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]];\nthe explicit value at $p=1$ and the separate $\\infty$-formula are\n[[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\in\\mathbb{N}$ with $m\\ge 1$ and $n\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$, with the induced $1$-norm and the\nseparately defined induced $\\infty$-norm of\n[[def-induced-matrix-p-norm]].\n\n1. **Maximum column sum.** $\\lVert A\\rVert_1=\\max_{j<n}\\sum_{i<m}|a_{ij}|$.\n2. **Maximum row sum.** $\\lVert A\\rVert_\\infty=\\max_{i<m}\\sum_{j<n}|a_{ij}|$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb{Q}$ with $p\\ge 1$ and let $m,n,q\\in\\mathbb{N}$, with the\ninduced $p$-norms of [[def-induced-matrix-p-norm]].\n\n1. **Compatibility.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and every\n   $x\\in\\mathbb{R}^{n}$,\n   $$\\lVert Ax\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert x\\rVert_p.$$\n2. **Submultiplicativity.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and\n   $B\\in M_{n\\times q}(\\mathbb{R})$,\n   $$\\lVert AB\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert B\\rVert_p.$$\n3. **Normalisation.** For every $n\\ge 1$,\n   $$\\lVert I_n\\rVert_p=1,$$\n   where $I_n$ is the identity matrix of [[def-matrix-product-and-identity-matrix]];\n   at $n=0$ the unique empty matrix $I_0\\in M_0(\\mathbb{R})$ has\n   $\\lVert I_0\\rVert_p=0$, the convention of [[def-induced-matrix-p-norm]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-xd-budgeted-uniformization-accumulation",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite column generator $Q$, a column probability vector $p_0$, $t\\ge0$, an admissible rate $\\nu\\ge\\max_jr_j$, a positive tail budget $\\varepsilon$, a positive integer total-term cap $B$, and either exact real arithmetic or a validated arithmetic backend. In a rounded execution, the backend must certify the scalar control decisions defining $m$ and $\\mu$, each finite tail-budget comparison, and an outward upper bound $T\\ge mG_K(\\mu)$; it must also return a certified $\\ell^1$ error bound $E_{\\rm alg}:=\\|\\widehat p-R_{\\mu,K}^mp_0\\|_1$ for its computed vector. The vector bound includes any arithmetic error from the weights, time split, and matrix-free $P$ actions. If any scalar or vector certificate is unavailable, return `certificate-unavailable`.\n\n**Outputs.** Return $(p_0,0,0)$ when $\\nu=0$ or $t=0$. Otherwise return `budget-exhausted` or `certificate-unavailable`, or an approximate vector $\\widehat p$ and certified bounds $(T,E_{\\rm alg})$ for which $\\|p(t)-\\widehat p\\|_1\\le T+E_{\\rm alg}$. Here $T\\ge mG_K(\\mu)$ is an outward-certified Poisson-tail upper bound and $E_{\\rm alg}$ bounds the arithmetic/algebraic error relative to the exact truncated accumulation. In exact real arithmetic, $T=mG_K(\\mu)$ and $E_{\\rm alg}=0$.\n\n**Procedure.** For $\\nu t>0$, set $m=\\lceil\\nu t\\rceil$ and $\\mu=\\nu t/m$, so $0<\\mu\\le1$. A rounded backend must certify these values and inequalities; if it cannot, return `certificate-unavailable`. If $m>B$, return `budget-exhausted`. Set $K_{\\max}=\\lfloor B/m\\rfloor-1$. Search the finite list $K=0,1,\\ldots,K_{\\max}$ for a member satisfying\n\n$$G_K(\\mu):=\\frac{e^{-\\mu}\\mu^{K+1}}{(K+1)!\\left(1-\\mu/(K+2)\\right)}\\le\\varepsilon/m.$$\n\nIn rounded arithmetic, accept a candidate only when a validated upper enclosure proves the displayed inequality, and set $T$ to a validated upper bound for $mG_K(\\mu)$. If no candidate works, return `budget-exhausted` when the comparisons certify that every candidate fails, and `certificate-unavailable` when they do not decide the search. In exact arithmetic set $T=mG_K(\\mu)$. Set $P=I+Q/\\nu$ and $x_0=p_0$. For each substep $j=1,\\ldots,m$, initialize $v_0=x_{j-1}$, $w_0=e^{-\\mu}$, and $x_j=w_0v_0$. For $k=0,\\ldots,K-1$, update\n\n$$v_{k+1}=Pv_k,\\qquad w_{k+1}=w_k\\frac{\\mu}{k+1},\\qquad x_j\\leftarrow x_j+w_{k+1}v_{k+1}.$$\n\nThese $P$ actions use the exact operator-application interface of [[def-matrix-free-access-model-for-krylov-methods]]: the routine supplies $v\\mapsto Pv$ and vector additions and scalar multiples, without requiring stored matrix entries. No CSR representation, operation-count estimate, or convergence claim is part of this procedure. The exact term count is $m(K+1)\\le B$ and the certified tail bound satisfies $T\\le\\varepsilon$. Never replace a tail certificate by floating-point $1-\\sum_{k\\le K}w_k$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-xd-finite-matrix-exponential-series",
+          "source_section": "Statement",
+          "quote": "For a finite real square matrix $A$, define\n\n$$e^{tA}:=\\sum_{k=0}^{\\infty}\\frac{t^kA^k}{k!}.$$\n\nThis series converges absolutely and uniformly for $t$ in every bounded interval. It is differentiable with $\\frac{d}{dt}e^{tA}=Ae^{tA}=e^{tA}A$ and $e^{0A}=I$. If finite square matrices $A$ and $B$ commute, then $e^Ae^B=e^{A+B}$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For any $\\mu>0$, set $S_\\mu=e^{\\mu Q/\\nu}=e^{-\\mu}e^{\\mu P}$ and $R_{\\mu,K}=\\sum_{k=0}^K w_k(\\mu)P^k$. By [F1], each $P^k$ is nonnegative and column stochastic; [F2] and [F3] give $S_\\mu=\\sum_{k\\ge0}w_k(\\mu)P^k$ with nonnegative weights summing to one. Thus $R_{\\mu,K}$ is nonnegative with common column sum $s_K:=\\sum_{k=0}^K w_k(\\mu)\\le1$, and $S_\\mu-R_{\\mu,K}$ is nonnegative with common column sum $\\tau_K(\\mu)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The induced norm formula [F6] gives $\\|S_\\mu\\|_1=1$, $\\|R_{\\mu,K}\\|_1=s_K$, and $\\|S_\\mu-R_{\\mu,K}\\|_1=\\tau_K(\\mu)$. If $\\lambda=\\nu t=0$, only the $k=0$ Poisson weight is nonzero, so $p(t)=u_K(t)=p_0$ and the omitted mass is zero. If $\\lambda>0$, apply step 1.1 with $\\mu=\\lambda$: $(S_\\lambda-R_{\\lambda,K})p_0$ is nonnegative and its coordinate sum is $\\tau_K(\\lambda)$; by [F5], the exact one-series $\\ell^1$ omitted mass is therefore exactly the scalar Poisson tail.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the time-split algorithm, $0<\\mu\\le1$ and $K\\ge0$, so $\\mu<K+2$ and [F4] gives $\\tau_K(\\mu)\\le G_K(\\mu)$. For $m$ substeps the telescoping identity $S_\\mu^m-R_{\\mu,K}^m=\\sum_{j=0}^{m-1}S_\\mu^{m-1-j}(S_\\mu-R_{\\mu,K})R_{\\mu,K}^j$, [F5]\u2013[F6], and step 2.1 give $\\|S_\\mu^m-R_{\\mu,K}^m\\|_1\\le m\\tau_K(\\mu)\\le mG_K(\\mu)$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Every term in the telescoping identity is nonnegative, so the exact vector error on $p_0$ is nonnegative. Each column sum of $S_\\mu^m$ is one and each column sum of $R_{\\mu,K}^m$ is $s_K^m$; hence its $\\ell^1$ mass is exactly $1-s_K^m=1-(1-\\tau_K(\\mu))^m\\le m\\tau_K(\\mu)$. This proves the exact time-split lost-mass identity and the preceding error bound.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Since $m\\mu=\\nu t$, [F8] gives $S_\\mu^m=e^{tQ}$ and [F2] gives $S_\\mu^mp_0=p(t)$, while [F7] identifies the exact truncated output as $R_{\\mu,K}^mp_0$. The triangle inequality for the vector $1$-norm [F5] therefore yields $\\|p(t)-\\widehat u\\|_1\\le\\|p(t)-R_{\\mu,K}^mp_0\\|_1+\\|R_{\\mu,K}^mp_0-\\widehat u\\|_1\\le mG_K(\\mu)+E_{\\rm alg}\\le T+E_{\\rm alg}$ when the validated upper bound $T$ is supplied. If $\\nu t=0$, the algorithm returns $p_0$ and both error terms are zero.",
+          "inputs": [
+            "F2",
+            "F5",
+            "F7",
+            "F8",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement partial sums start at k=0 and K>=0, so K=0 retains one term. Proof step 2.1 handles lambda=nu*t=0 by p(t)=u_K=p0 and exactly zero omitted mass, before time splitting."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 handles \u03bb=\u03bdt=0; the algorithm and theorem return p\u2080 with zero error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The formulas include K=0 and m=1 without an extra-state assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If Q=0, P=I and all omitted mass is exactly the scalar Poisson tail stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Steps 2.1 and 5.1 handle \u03bb=0; for \u03bb>0 the split parameter satisfies 0<\u03bc\u22641."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every truncated stochastic polynomial and split power is explicitly specified; the proof's telescoping sum compares fixed finite operators and no selection among probability couplings is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The truncation theorem gives exact lost mass and an upper error bound with a separately supplied arithmetic certificate, not a completeness criterion for numerical certification."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A computed vector with small true error is not asserted to possess the specified certified arithmetic bound or to meet this geometric majorant's finite search condition."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-47",
+        "notes": "Read all five steps and all twelve exact prerequisites. P powers are nonnegative with column sums one; the partial matrix has common column sum s_K and its nonnegative complement has common column sum tau_K. For m>=1, the telescoping identity remains valid without any unmentioned commutation assumption and each term is nonnegative. The induced norm bound gives m*tau_K, while the exact common-column-sum calculation gives 1-s_K^m on a probability vector. The exponential semigroup identifies S_mu^m with exp(tQ); mu<=1<K+2 meets the geometric lemma hypotheses. Triangle inequality then adds the separately certified vector arithmetic error, and an outward T can enlarge the bound. Zero time is separately handled with the Poisson point mass and no time splitting; K=0 and singleton Q also work. No stability guarantee for unvalidated rounded sums is claimed. Whitt eq.(3.28), Fox-Glynn Proposition 1 and Sections 1-3 checked only as context; the exact unnormalized lost-mass identity is proved here. No defect or reader/refuter concern."
+      }
+    },
+    "after": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-xd-uniformized-matrix-is-stochastic",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a finite column generator and let $\\nu\\ge\\max_{j<n}r_j$. If $\\nu>0$, then\n\n$$P:=I+Q/\\nu$$\n\nhas nonnegative entries and every column sums to one. If $\\nu=0$, then $Q=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-xd-finite-generator-master-equation-uniformization",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be an $n\\times n$ finite column generator, let $p_0$ be a column probability vector, and let $t\\ge0$. The unique differentiable solution of\n\n$$p'(t)=Qp(t),\\qquad p(0)=p_0,$$\n\nis $p(t)=e^{tQ}p_0$. If $\\nu>0$ and $\\nu\\ge\\max_jr_j$, put $P=I+Q/\\nu$; then\n\n$$p(t)=\\sum_{k=0}^{\\infty}e^{-\\nu t}\\frac{(\\nu t)^k}{k!}P^kp_0.$$\n\nEach term $P^kp_0$ is a probability vector, and the displayed Poisson mixture is a probability vector. If $\\nu=0$, then $Q=0$ and $p(t)=p_0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-xd-geometric-poisson-tail-bound",
+          "source_section": "Statement",
+          "quote": "For $N\\sim\\operatorname{Pois}(\\mu)$ with $\\mu\\ge0$ and integer $K\\ge0$, write $\\tau_K(\\mu):=\\mathbb P(N>K)$. If $\\mu=0$, then $\\tau_K(\\mu)=0$. If $\\mu>0$ and $\\mu<K+2$, then\n\n$$\\tau_K(\\mu)\\le \\frac{e^{-\\mu}\\mu^{K+1}}{(K+1)!\\left(1-\\mu/(K+2)\\right)}.$$\n\nThe right side is a geometric majorant computed from a Poisson mass, not a floating-point subtraction of a rounded partial sum from one.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-induced-matrix-p-norm",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is\n\n$$\\lVert A\\rVert_{p}\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_{p}\\;:\\;x\\in\\mathbb{R}^{n},\\ \\lVert x\\rVert_{p}\\le 1\\,\\Bigr\\}.$$\n\nWhen $n\\ge1$, the following three displayed quantities are the same number:\n\n$$\\lVert A\\rVert_p=\\sup_{\\lVert x\\rVert_p\\le 1}\\lVert Ax\\rVert_p=\\sup_{\\lVert x\\rVert_p=1}\\lVert Ax\\rVert_p=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_p}{\\lVert x\\rVert_p},$$\n\nthe equalities following from positive homogeneity of $\\lVert\\cdot\\rVert_p$\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]], axiom (N2)) and\nthe equality $\\lVert 0\\rVert_p=0$.\n\n**The value is a finite nonnegative real.** For $n\\ge 1$ the norms\n$\\lVert\\cdot\\rVert_p$ and $\\lVert\\cdot\\rVert_2$ are equivalent by\n[[thm-all-norms-on-rn-are-equivalent]], so there is $C>0$ with\n$\\lVert x\\rVert_\\infty\\le C\\lVert x\\rVert_p$ for every $x$. For every $i<m$,\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty\\le C\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_p$,\nso $\\lVert Ax\\rVert_p\\le \\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C\\lVert x\\rVert_p$;\nhence the supremum over the unit ball is at most the finite constant\n$\\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C$.\n\n**The induced infinity norm is a separate named case.** When $m,n\\ge1$, define\n\n$$\\lVert A\\rVert_\\infty\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_\\infty\\;:\\;x\\in\\mathbb R^n,\\ \\lVert x\\rVert_\\infty\\le 1\\,\\Bigr\\}.$$\n\nAs in the rational-$p$ case, positive homogeneity gives\n\n$$\\lVert A\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty\\le 1}\\lVert Ax\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty=1}\\lVert Ax\\rVert_\\infty=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_\\infty}{\\lVert x\\rVert_\\infty}.$$\n\nThe supremum is finite because for every $i<m$ one has\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty$,\nso\n\n$$\\lVert Ax\\rVert_\\infty\\le\\max_{i<m}\\sum_{j<n}|a_{ij}|\\,\\lVert x\\rVert_\\infty.$$\n\n**At $n=0$ the convention is explicit.** The only element of $\\mathbb{R}^{0}$\nis the zero vector, the only matrix $A\\in M_{m\\times 0}(\\mathbb{R})$ is the\nempty matrix, and the unit-ball definition gives $\\lVert A\\rVert_{p}=0$.\nThe unit sphere and the set of nonzero vectors are empty, so the two ratio\nformulas above are not asserted in this case.\n\nThe induced quantity is a norm on the matrix space $M_{m\\times n}(\\mathbb{R})$:\nfor each rational $p\\ge1$, and likewise for the separately named\n$\\infty$-case when $m,n\\ge1$, separation, absolute homogeneity and the triangle\ninequality follow from the same three axioms of the underlying vector norm\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]]) through the\ndefining supremum. The compatibility with matrix-vector multiplication, the\nsubmultiplicativity and the value on identity matrices are\n[[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]];\nthe explicit value at $p=1$ and the separate $\\infty$-formula are\n[[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\in\\mathbb{N}$ with $m\\ge 1$ and $n\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$, with the induced $1$-norm and the\nseparately defined induced $\\infty$-norm of\n[[def-induced-matrix-p-norm]].\n\n1. **Maximum column sum.** $\\lVert A\\rVert_1=\\max_{j<n}\\sum_{i<m}|a_{ij}|$.\n2. **Maximum row sum.** $\\lVert A\\rVert_\\infty=\\max_{i<m}\\sum_{j<n}|a_{ij}|$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb{Q}$ with $p\\ge 1$ and let $m,n,q\\in\\mathbb{N}$, with the\ninduced $p$-norms of [[def-induced-matrix-p-norm]].\n\n1. **Compatibility.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and every\n   $x\\in\\mathbb{R}^{n}$,\n   $$\\lVert Ax\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert x\\rVert_p.$$\n2. **Submultiplicativity.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and\n   $B\\in M_{n\\times q}(\\mathbb{R})$,\n   $$\\lVert AB\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert B\\rVert_p.$$\n3. **Normalisation.** For every $n\\ge 1$,\n   $$\\lVert I_n\\rVert_p=1,$$\n   where $I_n$ is the identity matrix of [[def-matrix-product-and-identity-matrix]];\n   at $n=0$ the unique empty matrix $I_0\\in M_0(\\mathbb{R})$ has\n   $\\lVert I_0\\rVert_p=0$, the convention of [[def-induced-matrix-p-norm]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-xd-budgeted-uniformization-accumulation",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite column generator $Q$, a column probability vector $p_0$, $t\\ge0$, an admissible rate $\\nu\\ge\\max_jr_j$, a positive tail budget $\\varepsilon$, a positive integer total-term cap $B$, and either exact real arithmetic or a validated arithmetic backend. In a rounded execution, the backend must certify the scalar control decisions defining $m$ and $\\mu$, each finite tail-budget comparison, and an outward upper bound $U\\ge mG_K(\\mu)$; this backend bound may be arbitrarily loose. The returned tail certificate $T$ is chosen below from the already certified tail-budget comparison. The backend must also return a certified $\\ell^1$ error bound $E_{\\rm alg}:=\\|\\widehat p-R_{\\mu,K}^mp_0\\|_1$ for its computed vector. The vector bound includes any arithmetic error from the weights, time split, and matrix-free $P$ actions. If any scalar or vector certificate is unavailable, return `certificate-unavailable`.\n\n**Outputs.** Return $(p_0,0,0)$ when $\\nu=0$ or $t=0$. Otherwise return `budget-exhausted` or `certificate-unavailable`, or an approximate vector $\\widehat p$ and certified bounds $(T,E_{\\rm alg})$ for which $\\|p(t)-\\widehat p\\|_1\\le T+E_{\\rm alg}$. Here $mG_K(\\mu)\\le T\\le\\varepsilon$ is certified: in rounded arithmetic return the supplied budget $T:=\\varepsilon$, while in exact arithmetic return $T:=mG_K(\\mu)$. The quantity $E_{\\rm alg}$ bounds the arithmetic/algebraic error relative to the exact truncated accumulation. In exact real arithmetic, $T=mG_K(\\mu)$ and $E_{\\rm alg}=0$.\n\n**Procedure.** For $\\nu t>0$, set $m=\\lceil\\nu t\\rceil$ and $\\mu=\\nu t/m$, so $0<\\mu\\le1$. A rounded backend must certify these values and inequalities; if it cannot, return `certificate-unavailable`. If $m>B$, return `budget-exhausted`. Set $K_{\\max}=\\lfloor B/m\\rfloor-1$. Search the finite list $K=0,1,\\ldots,K_{\\max}$ for a member satisfying\n\n$$G_K(\\mu):=\\frac{e^{-\\mu}\\mu^{K+1}}{(K+1)!\\left(1-\\mu/(K+2)\\right)}\\le\\varepsilon/m.$$\n\nIn rounded arithmetic, accept a candidate only when a validated upper enclosure proves the displayed inequality. Obtain the backend's validated upper bound $U\\ge mG_K(\\mu)$ as required by the input contract, and set the returned certificate $T:=\\varepsilon$ by copying the supplied budget; the accepted comparison certifies $mG_K(\\mu)\\le T$. No comparison or sharper enclosure of $U$ is required. If no candidate works, return `budget-exhausted` when the comparisons certify that every candidate fails, and `certificate-unavailable` when they do not decide the search. In exact arithmetic set $T=mG_K(\\mu)$. Set $P=I+Q/\\nu$ and $x_0=p_0$. For each substep $j=1,\\ldots,m$, initialize $v_0=x_{j-1}$, $w_0=e^{-\\mu}$, and $x_j=w_0v_0$. For $k=0,\\ldots,K-1$, update\n\n$$v_{k+1}=Pv_k,\\qquad w_{k+1}=w_k\\frac{\\mu}{k+1},\\qquad x_j\\leftarrow x_j+w_{k+1}v_{k+1}.$$\n\nThese $P$ actions use the exact operator-application interface of [[def-matrix-free-access-model-for-krylov-methods]]: the routine supplies $v\\mapsto Pv$ and vector additions and scalar multiples, without requiring stored matrix entries. No CSR representation, operation-count estimate, or convergence claim is part of this procedure. The exact term count is $m(K+1)\\le B$ and the certified tail bound satisfies $T\\le\\varepsilon$. Never replace a tail certificate by floating-point $1-\\sum_{k\\le K}w_k$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-xd-finite-matrix-exponential-series",
+          "source_section": "Statement",
+          "quote": "For a finite real square matrix $A$, define\n\n$$e^{tA}:=\\sum_{k=0}^{\\infty}\\frac{t^kA^k}{k!}.$$\n\nThis series converges absolutely and uniformly for $t$ in every bounded interval. It is differentiable with $\\frac{d}{dt}e^{tA}=Ae^{tA}=e^{tA}A$ and $e^{0A}=I$. If finite square matrices $A$ and $B$ commute, then $e^Ae^B=e^{A+B}$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For any $\\mu>0$, set $S_\\mu=e^{\\mu Q/\\nu}=e^{-\\mu}e^{\\mu P}$ and $R_{\\mu,K}=\\sum_{k=0}^K w_k(\\mu)P^k$. By [F1], each $P^k$ is nonnegative and column stochastic; [F2] and [F3] give $S_\\mu=\\sum_{k\\ge0}w_k(\\mu)P^k$ with nonnegative weights summing to one. Thus $R_{\\mu,K}$ is nonnegative with common column sum $s_K:=\\sum_{k=0}^K w_k(\\mu)\\le1$, and $S_\\mu-R_{\\mu,K}$ is nonnegative with common column sum $\\tau_K(\\mu)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The induced norm formula [F6] gives $\\|S_\\mu\\|_1=1$, $\\|R_{\\mu,K}\\|_1=s_K$, and $\\|S_\\mu-R_{\\mu,K}\\|_1=\\tau_K(\\mu)$. If $\\lambda=\\nu t=0$, only the $k=0$ Poisson weight is nonzero, so $p(t)=u_K(t)=p_0$ and the omitted mass is zero. If $\\lambda>0$, apply step 1.1 with $\\mu=\\lambda$: $(S_\\lambda-R_{\\lambda,K})p_0$ is nonnegative and its coordinate sum is $\\tau_K(\\lambda)$; by [F5], the exact one-series $\\ell^1$ omitted mass is therefore exactly the scalar Poisson tail.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the time-split algorithm, $0<\\mu\\le1$ and $K\\ge0$, so $\\mu<K+2$ and [F4] gives $\\tau_K(\\mu)\\le G_K(\\mu)$. For $m$ substeps the telescoping identity $S_\\mu^m-R_{\\mu,K}^m=\\sum_{j=0}^{m-1}S_\\mu^{m-1-j}(S_\\mu-R_{\\mu,K})R_{\\mu,K}^j$, [F5]\u2013[F6], and step 2.1 give $\\|S_\\mu^m-R_{\\mu,K}^m\\|_1\\le m\\tau_K(\\mu)\\le mG_K(\\mu)$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Every term in the telescoping identity is nonnegative, so the exact vector error on $p_0$ is nonnegative. Each column sum of $S_\\mu^m$ is one and each column sum of $R_{\\mu,K}^m$ is $s_K^m$; hence its $\\ell^1$ mass is exactly $1-s_K^m=1-(1-\\tau_K(\\mu))^m\\le m\\tau_K(\\mu)$. This proves the exact time-split lost-mass identity and the preceding error bound.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Since $m\\mu=\\nu t$, [F8] gives $S_\\mu^m=e^{tQ}$ and [F2] gives $S_\\mu^mp_0=p(t)$, while [F7] identifies the exact truncated output as $R_{\\mu,K}^mp_0$. The triangle inequality for the vector $1$-norm [F5] therefore yields $\\|p(t)-\\widehat u\\|_1\\le\\|p(t)-R_{\\mu,K}^mp_0\\|_1+\\|R_{\\mu,K}^mp_0-\\widehat u\\|_1\\le mG_K(\\mu)+E_{\\rm alg}\\le T+E_{\\rm alg}$ when the validated upper bound $T$ is supplied. On a successful rounded execution, the validated acceptance test gives $G_K(\\mu)\\le\\varepsilon/m$ with $m\\ge1$, so $mG_K(\\mu)\\le\\varepsilon=T$ for the algorithm's returned choice, irrespective of how loose its separately supplied backend bound $U$ is. In exact arithmetic the choice $T=mG_K(\\mu)$ satisfies $T\\le\\varepsilon$ by the same acceptance test. If $\\nu t=0$, the algorithm returns $p_0$ and both error terms are zero.",
+          "inputs": [
+            "F2",
+            "F5",
+            "F7",
+            "F8",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement partial sums start at k=0 and K>=0, so K=0 retains one term. Proof step 2.1 handles lambda=nu*t=0 by p(t)=u_K=p0 and exactly zero omitted mass, before time splitting."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 handles \u03bb=\u03bdt=0; the algorithm and theorem return p\u2080 with zero error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The formulas include K=0 and m=1 without an extra-state assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If Q=0, P=I and all omitted mass is exactly the scalar Poisson tail stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Steps 2.1 and 5.1 handle \u03bb=0; for \u03bb>0 the split parameter satisfies 0<\u03bc\u22641."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every truncated stochastic polynomial and split power is explicitly specified; the proof's telescoping sum compares fixed finite operators and no selection among probability couplings is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The truncation theorem gives exact lost mass and an upper error bound with a separately supplied arithmetic certificate, not a completeness criterion for numerical certification."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A computed vector with small true error is not asserted to possess the specified certified arithmetic bound or to meet this geometric majorant's finite search condition."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-47",
+        "notes": "Read all five steps and all twelve exact prerequisites. P powers are nonnegative with column sums one; the partial matrix has common column sum s_K and its nonnegative complement has common column sum tau_K. For m>=1, the telescoping identity remains valid without any unmentioned commutation assumption and each term is nonnegative. The induced norm bound gives m*tau_K, while the exact common-column-sum calculation gives 1-s_K^m on a probability vector. The exponential semigroup identifies S_mu^m with exp(tQ); mu<=1<K+2 meets the geometric lemma hypotheses. Triangle inequality then adds the separately certified vector arithmetic error, and an outward T can enlarge the bound. Zero time is separately handled with the Poisson point mass and no time splitting; K=0 and singleton Q also work. No stability guarantee for unvalidated rounded sums is claimed. Whitt eq.(3.28), Fox-Glynn Proposition 1 and Sections 1-3 checked only as context; the exact unnormalized lost-mass identity is proved here. No defect or reader/refuter concern."
+      }
+    }
+  },
+  {
+    "file": "research/numerical-optimization-dynamics-2026-10-16-proof-contracts.json",
+    "path": [
+      "contracts",
+      "thm-xd-uniformization-truncation-and-error"
+    ],
+    "before": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-xd-uniformized-matrix-is-stochastic",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a finite column generator and let $\\nu\\ge\\max_{j<n}r_j$. If $\\nu>0$, then\n\n$$P:=I+Q/\\nu$$\n\nhas nonnegative entries and every column sums to one. If $\\nu=0$, then $Q=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-xd-finite-generator-master-equation-uniformization",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be an $n\\times n$ finite column generator, let $p_0$ be a column probability vector, and let $t\\ge0$. The unique differentiable solution of\n\n$$p'(t)=Qp(t),\\qquad p(0)=p_0,$$\n\nis $p(t)=e^{tQ}p_0$. If $\\nu>0$ and $\\nu\\ge\\max_jr_j$, put $P=I+Q/\\nu$; then\n\n$$p(t)=\\sum_{k=0}^{\\infty}e^{-\\nu t}\\frac{(\\nu t)^k}{k!}P^kp_0.$$\n\nEach term $P^kp_0$ is a probability vector, and the displayed Poisson mixture is a probability vector. If $\\nu=0$, then $Q=0$ and $p(t)=p_0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-xd-geometric-poisson-tail-bound",
+          "source_section": "Statement",
+          "quote": "For $N\\sim\\operatorname{Pois}(\\mu)$ with $\\mu\\ge0$ and integer $K\\ge0$, write $\\tau_K(\\mu):=\\mathbb P(N>K)$. If $\\mu=0$, then $\\tau_K(\\mu)=0$. If $\\mu>0$ and $\\mu<K+2$, then\n\n$$\\tau_K(\\mu)\\le \\frac{e^{-\\mu}\\mu^{K+1}}{(K+1)!\\left(1-\\mu/(K+2)\\right)}.$$\n\nThe right side is a geometric majorant computed from a Poisson mass, not a floating-point subtraction of a rounded partial sum from one.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-induced-matrix-p-norm",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is\n\n$$\\lVert A\\rVert_{p}\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_{p}\\;:\\;x\\in\\mathbb{R}^{n},\\ \\lVert x\\rVert_{p}\\le 1\\,\\Bigr\\}.$$\n\nWhen $n\\ge1$, the following three displayed quantities are the same number:\n\n$$\\lVert A\\rVert_p=\\sup_{\\lVert x\\rVert_p\\le 1}\\lVert Ax\\rVert_p=\\sup_{\\lVert x\\rVert_p=1}\\lVert Ax\\rVert_p=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_p}{\\lVert x\\rVert_p},$$\n\nthe equalities following from positive homogeneity of $\\lVert\\cdot\\rVert_p$\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]], axiom (N2)) and\nthe equality $\\lVert 0\\rVert_p=0$.\n\n**The value is a finite nonnegative real.** For $n\\ge 1$ the norms\n$\\lVert\\cdot\\rVert_p$ and $\\lVert\\cdot\\rVert_2$ are equivalent by\n[[thm-all-norms-on-rn-are-equivalent]], so there is $C>0$ with\n$\\lVert x\\rVert_\\infty\\le C\\lVert x\\rVert_p$ for every $x$. For every $i<m$,\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty\\le C\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_p$,\nso $\\lVert Ax\\rVert_p\\le \\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C\\lVert x\\rVert_p$;\nhence the supremum over the unit ball is at most the finite constant\n$\\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C$.\n\n**The induced infinity norm is a separate named case.** When $m,n\\ge1$, define\n\n$$\\lVert A\\rVert_\\infty\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_\\infty\\;:\\;x\\in\\mathbb R^n,\\ \\lVert x\\rVert_\\infty\\le 1\\,\\Bigr\\}.$$\n\nAs in the rational-$p$ case, positive homogeneity gives\n\n$$\\lVert A\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty\\le 1}\\lVert Ax\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty=1}\\lVert Ax\\rVert_\\infty=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_\\infty}{\\lVert x\\rVert_\\infty}.$$\n\nThe supremum is finite because for every $i<m$ one has\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty$,\nso\n\n$$\\lVert Ax\\rVert_\\infty\\le\\max_{i<m}\\sum_{j<n}|a_{ij}|\\,\\lVert x\\rVert_\\infty.$$\n\n**At $n=0$ the convention is explicit.** The only element of $\\mathbb{R}^{0}$\nis the zero vector, the only matrix $A\\in M_{m\\times 0}(\\mathbb{R})$ is the\nempty matrix, and the unit-ball definition gives $\\lVert A\\rVert_{p}=0$.\nThe unit sphere and the set of nonzero vectors are empty, so the two ratio\nformulas above are not asserted in this case.\n\nThe induced quantity is a norm on the matrix space $M_{m\\times n}(\\mathbb{R})$:\nfor each rational $p\\ge1$, and likewise for the separately named\n$\\infty$-case when $m,n\\ge1$, separation, absolute homogeneity and the triangle\ninequality follow from the same three axioms of the underlying vector norm\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]]) through the\ndefining supremum. The compatibility with matrix-vector multiplication, the\nsubmultiplicativity and the value on identity matrices are\n[[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]];\nthe explicit value at $p=1$ and the separate $\\infty$-formula are\n[[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\in\\mathbb{N}$ with $m\\ge 1$ and $n\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$, with the induced $1$-norm and the\nseparately defined induced $\\infty$-norm of\n[[def-induced-matrix-p-norm]].\n\n1. **Maximum column sum.** $\\lVert A\\rVert_1=\\max_{j<n}\\sum_{i<m}|a_{ij}|$.\n2. **Maximum row sum.** $\\lVert A\\rVert_\\infty=\\max_{i<m}\\sum_{j<n}|a_{ij}|$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb{Q}$ with $p\\ge 1$ and let $m,n,q\\in\\mathbb{N}$, with the\ninduced $p$-norms of [[def-induced-matrix-p-norm]].\n\n1. **Compatibility.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and every\n   $x\\in\\mathbb{R}^{n}$,\n   $$\\lVert Ax\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert x\\rVert_p.$$\n2. **Submultiplicativity.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and\n   $B\\in M_{n\\times q}(\\mathbb{R})$,\n   $$\\lVert AB\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert B\\rVert_p.$$\n3. **Normalisation.** For every $n\\ge 1$,\n   $$\\lVert I_n\\rVert_p=1,$$\n   where $I_n$ is the identity matrix of [[def-matrix-product-and-identity-matrix]];\n   at $n=0$ the unique empty matrix $I_0\\in M_0(\\mathbb{R})$ has\n   $\\lVert I_0\\rVert_p=0$, the convention of [[def-induced-matrix-p-norm]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-xd-budgeted-uniformization-accumulation",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite column generator $Q$, a column probability vector $p_0$, $t\\ge0$, an admissible rate $\\nu\\ge\\max_jr_j$, a positive tail budget $\\varepsilon$, a positive integer total-term cap $B$, and either exact real arithmetic or a validated arithmetic backend. In a rounded execution, the backend must certify the scalar control decisions defining $m$ and $\\mu$, each finite tail-budget comparison, and an outward upper bound $T\\ge mG_K(\\mu)$; it must also return a certified $\\ell^1$ error bound $E_{\\rm alg}:=\\|\\widehat p-R_{\\mu,K}^mp_0\\|_1$ for its computed vector. The vector bound includes any arithmetic error from the weights, time split, and matrix-free $P$ actions. If any scalar or vector certificate is unavailable, return `certificate-unavailable`.\n\n**Outputs.** Return $(p_0,0,0)$ when $\\nu=0$ or $t=0$. Otherwise return `budget-exhausted` or `certificate-unavailable`, or an approximate vector $\\widehat p$ and certified bounds $(T,E_{\\rm alg})$ for which $\\|p(t)-\\widehat p\\|_1\\le T+E_{\\rm alg}$. Here $T\\ge mG_K(\\mu)$ is an outward-certified Poisson-tail upper bound and $E_{\\rm alg}$ bounds the arithmetic/algebraic error relative to the exact truncated accumulation. In exact real arithmetic, $T=mG_K(\\mu)$ and $E_{\\rm alg}=0$.\n\n**Procedure.** For $\\nu t>0$, set $m=\\lceil\\nu t\\rceil$ and $\\mu=\\nu t/m$, so $0<\\mu\\le1$. A rounded backend must certify these values and inequalities; if it cannot, return `certificate-unavailable`. If $m>B$, return `budget-exhausted`. Set $K_{\\max}=\\lfloor B/m\\rfloor-1$. Search the finite list $K=0,1,\\ldots,K_{\\max}$ for a member satisfying\n\n$$G_K(\\mu):=\\frac{e^{-\\mu}\\mu^{K+1}}{(K+1)!\\left(1-\\mu/(K+2)\\right)}\\le\\varepsilon/m.$$\n\nIn rounded arithmetic, accept a candidate only when a validated upper enclosure proves the displayed inequality, and set $T$ to a validated upper bound for $mG_K(\\mu)$. If no candidate works, return `budget-exhausted` when the comparisons certify that every candidate fails, and `certificate-unavailable` when they do not decide the search. In exact arithmetic set $T=mG_K(\\mu)$. Set $P=I+Q/\\nu$ and $x_0=p_0$. For each substep $j=1,\\ldots,m$, initialize $v_0=x_{j-1}$, $w_0=e^{-\\mu}$, and $x_j=w_0v_0$. For $k=0,\\ldots,K-1$, update\n\n$$v_{k+1}=Pv_k,\\qquad w_{k+1}=w_k\\frac{\\mu}{k+1},\\qquad x_j\\leftarrow x_j+w_{k+1}v_{k+1}.$$\n\nThese $P$ actions use the exact operator-application interface of [[def-matrix-free-access-model-for-krylov-methods]]: the routine supplies $v\\mapsto Pv$ and vector additions and scalar multiples, without requiring stored matrix entries. No CSR representation, operation-count estimate, or convergence claim is part of this procedure. The exact term count is $m(K+1)\\le B$ and the certified tail bound satisfies $T\\le\\varepsilon$. Never replace a tail certificate by floating-point $1-\\sum_{k\\le K}w_k$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-xd-finite-matrix-exponential-series",
+          "source_section": "Statement",
+          "quote": "For a finite real square matrix $A$, define\n\n$$e^{tA}:=\\sum_{k=0}^{\\infty}\\frac{t^kA^k}{k!}.$$\n\nThis series converges absolutely and uniformly for $t$ in every bounded interval. It is differentiable with $\\frac{d}{dt}e^{tA}=Ae^{tA}=e^{tA}A$ and $e^{0A}=I$. If finite square matrices $A$ and $B$ commute, then $e^Ae^B=e^{A+B}$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For any $\\mu>0$, set $S_\\mu=e^{\\mu Q/\\nu}=e^{-\\mu}e^{\\mu P}$ and $R_{\\mu,K}=\\sum_{k=0}^K w_k(\\mu)P^k$. By [F1], each $P^k$ is nonnegative and column stochastic; [F2] and [F3] give $S_\\mu=\\sum_{k\\ge0}w_k(\\mu)P^k$ with nonnegative weights summing to one. Thus $R_{\\mu,K}$ is nonnegative with common column sum $s_K:=\\sum_{k=0}^K w_k(\\mu)\\le1$, and $S_\\mu-R_{\\mu,K}$ is nonnegative with common column sum $\\tau_K(\\mu)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The induced norm formula [F6] gives $\\|S_\\mu\\|_1=1$, $\\|R_{\\mu,K}\\|_1=s_K$, and $\\|S_\\mu-R_{\\mu,K}\\|_1=\\tau_K(\\mu)$. If $\\lambda=\\nu t=0$, only the $k=0$ Poisson weight is nonzero, so $p(t)=u_K(t)=p_0$ and the omitted mass is zero. If $\\lambda>0$, apply step 1.1 with $\\mu=\\lambda$: $(S_\\lambda-R_{\\lambda,K})p_0$ is nonnegative and its coordinate sum is $\\tau_K(\\lambda)$; by [F5], the exact one-series $\\ell^1$ omitted mass is therefore exactly the scalar Poisson tail.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the time-split algorithm, $0<\\mu\\le1$ and $K\\ge0$, so $\\mu<K+2$ and [F4] gives $\\tau_K(\\mu)\\le G_K(\\mu)$. For $m$ substeps the telescoping identity $S_\\mu^m-R_{\\mu,K}^m=\\sum_{j=0}^{m-1}S_\\mu^{m-1-j}(S_\\mu-R_{\\mu,K})R_{\\mu,K}^j$, [F5]\u2013[F6], and step 2.1 give $\\|S_\\mu^m-R_{\\mu,K}^m\\|_1\\le m\\tau_K(\\mu)\\le mG_K(\\mu)$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Every term in the telescoping identity is nonnegative, so the exact vector error on $p_0$ is nonnegative. Each column sum of $S_\\mu^m$ is one and each column sum of $R_{\\mu,K}^m$ is $s_K^m$; hence its $\\ell^1$ mass is exactly $1-s_K^m=1-(1-\\tau_K(\\mu))^m\\le m\\tau_K(\\mu)$. This proves the exact time-split lost-mass identity and the preceding error bound.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Since $m\\mu=\\nu t$, [F8] gives $S_\\mu^m=e^{tQ}$ and [F2] gives $S_\\mu^mp_0=p(t)$, while [F7] identifies the exact truncated output as $R_{\\mu,K}^mp_0$. The triangle inequality for the vector $1$-norm [F5] therefore yields $\\|p(t)-\\widehat u\\|_1\\le\\|p(t)-R_{\\mu,K}^mp_0\\|_1+\\|R_{\\mu,K}^mp_0-\\widehat u\\|_1\\le mG_K(\\mu)+E_{\\rm alg}\\le T+E_{\\rm alg}$ when the validated upper bound $T$ is supplied. If $\\nu t=0$, the algorithm returns $p_0$ and both error terms are zero.",
+          "inputs": [
+            "F2",
+            "F5",
+            "F7",
+            "F8",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement partial sums start at k=0 and K>=0, so K=0 retains one term. Proof step 2.1 handles lambda=nu*t=0 by p(t)=u_K=p0 and exactly zero omitted mass, before time splitting."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 handles \u03bb=\u03bdt=0; the algorithm and theorem return p\u2080 with zero error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The formulas include K=0 and m=1 without an extra-state assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If Q=0, P=I and all omitted mass is exactly the scalar Poisson tail stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Steps 2.1 and 5.1 handle \u03bb=0; for \u03bb>0 the split parameter satisfies 0<\u03bc\u22641."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every truncated stochastic polynomial and split power is explicitly specified; the proof's telescoping sum compares fixed finite operators and no selection among probability couplings is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The truncation theorem gives exact lost mass and an upper error bound with a separately supplied arithmetic certificate, not a completeness criterion for numerical certification."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A computed vector with small true error is not asserted to possess the specified certified arithmetic bound or to meet this geometric majorant's finite search condition."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-47",
+        "notes": "Read all five steps and all twelve exact prerequisites. P powers are nonnegative with column sums one; the partial matrix has common column sum s_K and its nonnegative complement has common column sum tau_K. For m>=1, the telescoping identity remains valid without any unmentioned commutation assumption and each term is nonnegative. The induced norm bound gives m*tau_K, while the exact common-column-sum calculation gives 1-s_K^m on a probability vector. The exponential semigroup identifies S_mu^m with exp(tQ); mu<=1<K+2 meets the geometric lemma hypotheses. Triangle inequality then adds the separately certified vector arithmetic error, and an outward T can enlarge the bound. Zero time is separately handled with the Poisson point mass and no time splitting; K=0 and singleton Q also work. No stability guarantee for unvalidated rounded sums is claimed. Whitt eq.(3.28), Fox-Glynn Proposition 1 and Sections 1-3 checked only as context; the exact unnormalized lost-mass identity is proved here. No defect or reader/refuter concern."
+      }
+    },
+    "after": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-xd-uniformized-matrix-is-stochastic",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a finite column generator and let $\\nu\\ge\\max_{j<n}r_j$. If $\\nu>0$, then\n\n$$P:=I+Q/\\nu$$\n\nhas nonnegative entries and every column sums to one. If $\\nu=0$, then $Q=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-xd-finite-generator-master-equation-uniformization",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be an $n\\times n$ finite column generator, let $p_0$ be a column probability vector, and let $t\\ge0$. The unique differentiable solution of\n\n$$p'(t)=Qp(t),\\qquad p(0)=p_0,$$\n\nis $p(t)=e^{tQ}p_0$. If $\\nu>0$ and $\\nu\\ge\\max_jr_j$, put $P=I+Q/\\nu$; then\n\n$$p(t)=\\sum_{k=0}^{\\infty}e^{-\\nu t}\\frac{(\\nu t)^k}{k!}P^kp_0.$$\n\nEach term $P^kp_0$ is a probability vector, and the displayed Poisson mixture is a probability vector. If $\\nu=0$, then $Q=0$ and $p(t)=p_0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-xd-geometric-poisson-tail-bound",
+          "source_section": "Statement",
+          "quote": "For $N\\sim\\operatorname{Pois}(\\mu)$ with $\\mu\\ge0$ and integer $K\\ge0$, write $\\tau_K(\\mu):=\\mathbb P(N>K)$. If $\\mu=0$, then $\\tau_K(\\mu)=0$. If $\\mu>0$ and $\\mu<K+2$, then\n\n$$\\tau_K(\\mu)\\le \\frac{e^{-\\mu}\\mu^{K+1}}{(K+1)!\\left(1-\\mu/(K+2)\\right)}.$$\n\nThe right side is a geometric majorant computed from a Poisson mass, not a floating-point subtraction of a rounded partial sum from one.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-induced-matrix-p-norm",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is\n\n$$\\lVert A\\rVert_{p}\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_{p}\\;:\\;x\\in\\mathbb{R}^{n},\\ \\lVert x\\rVert_{p}\\le 1\\,\\Bigr\\}.$$\n\nWhen $n\\ge1$, the following three displayed quantities are the same number:\n\n$$\\lVert A\\rVert_p=\\sup_{\\lVert x\\rVert_p\\le 1}\\lVert Ax\\rVert_p=\\sup_{\\lVert x\\rVert_p=1}\\lVert Ax\\rVert_p=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_p}{\\lVert x\\rVert_p},$$\n\nthe equalities following from positive homogeneity of $\\lVert\\cdot\\rVert_p$\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]], axiom (N2)) and\nthe equality $\\lVert 0\\rVert_p=0$.\n\n**The value is a finite nonnegative real.** For $n\\ge 1$ the norms\n$\\lVert\\cdot\\rVert_p$ and $\\lVert\\cdot\\rVert_2$ are equivalent by\n[[thm-all-norms-on-rn-are-equivalent]], so there is $C>0$ with\n$\\lVert x\\rVert_\\infty\\le C\\lVert x\\rVert_p$ for every $x$. For every $i<m$,\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty\\le C\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_p$,\nso $\\lVert Ax\\rVert_p\\le \\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C\\lVert x\\rVert_p$;\nhence the supremum over the unit ball is at most the finite constant\n$\\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C$.\n\n**The induced infinity norm is a separate named case.** When $m,n\\ge1$, define\n\n$$\\lVert A\\rVert_\\infty\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_\\infty\\;:\\;x\\in\\mathbb R^n,\\ \\lVert x\\rVert_\\infty\\le 1\\,\\Bigr\\}.$$\n\nAs in the rational-$p$ case, positive homogeneity gives\n\n$$\\lVert A\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty\\le 1}\\lVert Ax\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty=1}\\lVert Ax\\rVert_\\infty=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_\\infty}{\\lVert x\\rVert_\\infty}.$$\n\nThe supremum is finite because for every $i<m$ one has\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty$,\nso\n\n$$\\lVert Ax\\rVert_\\infty\\le\\max_{i<m}\\sum_{j<n}|a_{ij}|\\,\\lVert x\\rVert_\\infty.$$\n\n**At $n=0$ the convention is explicit.** The only element of $\\mathbb{R}^{0}$\nis the zero vector, the only matrix $A\\in M_{m\\times 0}(\\mathbb{R})$ is the\nempty matrix, and the unit-ball definition gives $\\lVert A\\rVert_{p}=0$.\nThe unit sphere and the set of nonzero vectors are empty, so the two ratio\nformulas above are not asserted in this case.\n\nThe induced quantity is a norm on the matrix space $M_{m\\times n}(\\mathbb{R})$:\nfor each rational $p\\ge1$, and likewise for the separately named\n$\\infty$-case when $m,n\\ge1$, separation, absolute homogeneity and the triangle\ninequality follow from the same three axioms of the underlying vector norm\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]]) through the\ndefining supremum. The compatibility with matrix-vector multiplication, the\nsubmultiplicativity and the value on identity matrices are\n[[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]];\nthe explicit value at $p=1$ and the separate $\\infty$-formula are\n[[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\in\\mathbb{N}$ with $m\\ge 1$ and $n\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$, with the induced $1$-norm and the\nseparately defined induced $\\infty$-norm of\n[[def-induced-matrix-p-norm]].\n\n1. **Maximum column sum.** $\\lVert A\\rVert_1=\\max_{j<n}\\sum_{i<m}|a_{ij}|$.\n2. **Maximum row sum.** $\\lVert A\\rVert_\\infty=\\max_{i<m}\\sum_{j<n}|a_{ij}|$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb{Q}$ with $p\\ge 1$ and let $m,n,q\\in\\mathbb{N}$, with the\ninduced $p$-norms of [[def-induced-matrix-p-norm]].\n\n1. **Compatibility.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and every\n   $x\\in\\mathbb{R}^{n}$,\n   $$\\lVert Ax\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert x\\rVert_p.$$\n2. **Submultiplicativity.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and\n   $B\\in M_{n\\times q}(\\mathbb{R})$,\n   $$\\lVert AB\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert B\\rVert_p.$$\n3. **Normalisation.** For every $n\\ge 1$,\n   $$\\lVert I_n\\rVert_p=1,$$\n   where $I_n$ is the identity matrix of [[def-matrix-product-and-identity-matrix]];\n   at $n=0$ the unique empty matrix $I_0\\in M_0(\\mathbb{R})$ has\n   $\\lVert I_0\\rVert_p=0$, the convention of [[def-induced-matrix-p-norm]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-xd-budgeted-uniformization-accumulation",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite column generator $Q$, a column probability vector $p_0$, $t\\ge0$, an admissible rate $\\nu\\ge\\max_jr_j$, a positive tail budget $\\varepsilon$, a positive integer total-term cap $B$, and either exact real arithmetic or a validated arithmetic backend. In a rounded execution, the backend must certify the scalar control decisions defining $m$ and $\\mu$, each finite tail-budget comparison, and an outward upper bound $U\\ge mG_K(\\mu)$; this backend bound may be arbitrarily loose. The returned tail certificate $T$ is chosen below from the already certified tail-budget comparison. The backend must also return a certified $\\ell^1$ error bound $E_{\\rm alg}:=\\|\\widehat p-R_{\\mu,K}^mp_0\\|_1$ for its computed vector. The vector bound includes any arithmetic error from the weights, time split, and matrix-free $P$ actions. If any scalar or vector certificate is unavailable, return `certificate-unavailable`.\n\n**Outputs.** Return $(p_0,0,0)$ when $\\nu=0$ or $t=0$. Otherwise return `budget-exhausted` or `certificate-unavailable`, or an approximate vector $\\widehat p$ and certified bounds $(T,E_{\\rm alg})$ for which $\\|p(t)-\\widehat p\\|_1\\le T+E_{\\rm alg}$. Here $mG_K(\\mu)\\le T\\le\\varepsilon$ is certified: in rounded arithmetic return the supplied budget $T:=\\varepsilon$, while in exact arithmetic return $T:=mG_K(\\mu)$. The quantity $E_{\\rm alg}$ bounds the arithmetic/algebraic error relative to the exact truncated accumulation. In exact real arithmetic, $T=mG_K(\\mu)$ and $E_{\\rm alg}=0$.\n\n**Procedure.** For $\\nu t>0$, set $m=\\lceil\\nu t\\rceil$ and $\\mu=\\nu t/m$, so $0<\\mu\\le1$. A rounded backend must certify these values and inequalities; if it cannot, return `certificate-unavailable`. If $m>B$, return `budget-exhausted`. Set $K_{\\max}=\\lfloor B/m\\rfloor-1$. Search the finite list $K=0,1,\\ldots,K_{\\max}$ for a member satisfying\n\n$$G_K(\\mu):=\\frac{e^{-\\mu}\\mu^{K+1}}{(K+1)!\\left(1-\\mu/(K+2)\\right)}\\le\\varepsilon/m.$$\n\nIn rounded arithmetic, accept a candidate only when a validated upper enclosure proves the displayed inequality. Obtain the backend's validated upper bound $U\\ge mG_K(\\mu)$ as required by the input contract, and set the returned certificate $T:=\\varepsilon$ by copying the supplied budget; the accepted comparison certifies $mG_K(\\mu)\\le T$. No comparison or sharper enclosure of $U$ is required. If no candidate works, return `budget-exhausted` when the comparisons certify that every candidate fails, and `certificate-unavailable` when they do not decide the search. In exact arithmetic set $T=mG_K(\\mu)$. Set $P=I+Q/\\nu$ and $x_0=p_0$. For each substep $j=1,\\ldots,m$, initialize $v_0=x_{j-1}$, $w_0=e^{-\\mu}$, and $x_j=w_0v_0$. For $k=0,\\ldots,K-1$, update\n\n$$v_{k+1}=Pv_k,\\qquad w_{k+1}=w_k\\frac{\\mu}{k+1},\\qquad x_j\\leftarrow x_j+w_{k+1}v_{k+1}.$$\n\nThese $P$ actions use the exact operator-application interface of [[def-matrix-free-access-model-for-krylov-methods]]: the routine supplies $v\\mapsto Pv$ and vector additions and scalar multiples, without requiring stored matrix entries. No CSR representation, operation-count estimate, or convergence claim is part of this procedure. The exact term count is $m(K+1)\\le B$ and the certified tail bound satisfies $T\\le\\varepsilon$. Never replace a tail certificate by floating-point $1-\\sum_{k\\le K}w_k$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-xd-finite-matrix-exponential-series",
+          "source_section": "Statement",
+          "quote": "For a finite real square matrix $A$, define\n\n$$e^{tA}:=\\sum_{k=0}^{\\infty}\\frac{t^kA^k}{k!}.$$\n\nThis series converges absolutely and uniformly for $t$ in every bounded interval. It is differentiable with $\\frac{d}{dt}e^{tA}=Ae^{tA}=e^{tA}A$ and $e^{0A}=I$. If finite square matrices $A$ and $B$ commute, then $e^Ae^B=e^{A+B}$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For any $\\mu>0$, set $S_\\mu=e^{\\mu Q/\\nu}=e^{-\\mu}e^{\\mu P}$ and $R_{\\mu,K}=\\sum_{k=0}^K w_k(\\mu)P^k$. By [F1], each $P^k$ is nonnegative and column stochastic; [F2] and [F3] give $S_\\mu=\\sum_{k\\ge0}w_k(\\mu)P^k$ with nonnegative weights summing to one. Thus $R_{\\mu,K}$ is nonnegative with common column sum $s_K:=\\sum_{k=0}^K w_k(\\mu)\\le1$, and $S_\\mu-R_{\\mu,K}$ is nonnegative with common column sum $\\tau_K(\\mu)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The induced norm formula [F6] gives $\\|S_\\mu\\|_1=1$, $\\|R_{\\mu,K}\\|_1=s_K$, and $\\|S_\\mu-R_{\\mu,K}\\|_1=\\tau_K(\\mu)$. If $\\lambda=\\nu t=0$, only the $k=0$ Poisson weight is nonzero, so $p(t)=u_K(t)=p_0$ and the omitted mass is zero. If $\\lambda>0$, apply step 1.1 with $\\mu=\\lambda$: $(S_\\lambda-R_{\\lambda,K})p_0$ is nonnegative and its coordinate sum is $\\tau_K(\\lambda)$; by [F5], the exact one-series $\\ell^1$ omitted mass is therefore exactly the scalar Poisson tail.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the time-split algorithm, $0<\\mu\\le1$ and $K\\ge0$, so $\\mu<K+2$ and [F4] gives $\\tau_K(\\mu)\\le G_K(\\mu)$. For $m$ substeps the telescoping identity $S_\\mu^m-R_{\\mu,K}^m=\\sum_{j=0}^{m-1}S_\\mu^{m-1-j}(S_\\mu-R_{\\mu,K})R_{\\mu,K}^j$, [F5]\u2013[F6], and step 2.1 give $\\|S_\\mu^m-R_{\\mu,K}^m\\|_1\\le m\\tau_K(\\mu)\\le mG_K(\\mu)$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Every term in the telescoping identity is nonnegative, so the exact vector error on $p_0$ is nonnegative. Each column sum of $S_\\mu^m$ is one and each column sum of $R_{\\mu,K}^m$ is $s_K^m$; hence its $\\ell^1$ mass is exactly $1-s_K^m=1-(1-\\tau_K(\\mu))^m\\le m\\tau_K(\\mu)$. This proves the exact time-split lost-mass identity and the preceding error bound.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Since $m\\mu=\\nu t$, [F8] gives $S_\\mu^m=e^{tQ}$ and [F2] gives $S_\\mu^mp_0=p(t)$, while [F7] identifies the exact truncated output as $R_{\\mu,K}^mp_0$. The triangle inequality for the vector $1$-norm [F5] therefore yields $\\|p(t)-\\widehat u\\|_1\\le\\|p(t)-R_{\\mu,K}^mp_0\\|_1+\\|R_{\\mu,K}^mp_0-\\widehat u\\|_1\\le mG_K(\\mu)+E_{\\rm alg}\\le T+E_{\\rm alg}$ when the validated upper bound $T$ is supplied. On a successful rounded execution, the validated acceptance test gives $G_K(\\mu)\\le\\varepsilon/m$ with $m\\ge1$, so $mG_K(\\mu)\\le\\varepsilon=T$ for the algorithm's returned choice, irrespective of how loose its separately supplied backend bound $U$ is. In exact arithmetic the choice $T=mG_K(\\mu)$ satisfies $T\\le\\varepsilon$ by the same acceptance test. If $\\nu t=0$, the algorithm returns $p_0$ and both error terms are zero.",
+          "inputs": [
+            "F2",
+            "F5",
+            "F7",
+            "F8",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement partial sums start at k=0 and K>=0, so K=0 retains one term. Proof step 2.1 handles lambda=nu*t=0 by p(t)=u_K=p0 and exactly zero omitted mass, before time splitting."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 handles \u03bb=\u03bdt=0; the algorithm and theorem return p\u2080 with zero error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The formulas include K=0 and m=1 without an extra-state assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If Q=0, P=I and all omitted mass is exactly the scalar Poisson tail stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Steps 2.1 and 5.1 handle \u03bb=0; for \u03bb>0 the split parameter satisfies 0<\u03bc\u22641."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every truncated stochastic polynomial and split power is explicitly specified; the proof's telescoping sum compares fixed finite operators and no selection among probability couplings is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The truncation theorem gives exact lost mass and an upper error bound with a separately supplied arithmetic certificate, not a completeness criterion for numerical certification."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A computed vector with small true error is not asserted to possess the specified certified arithmetic bound or to meet this geometric majorant's finite search condition."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-47",
+        "notes": "Read all five steps and all twelve exact prerequisites. P powers are nonnegative with column sums one; the partial matrix has common column sum s_K and its nonnegative complement has common column sum tau_K. For m>=1, the telescoping identity remains valid without any unmentioned commutation assumption and each term is nonnegative. The induced norm bound gives m*tau_K, while the exact common-column-sum calculation gives 1-s_K^m on a probability vector. The exponential semigroup identifies S_mu^m with exp(tQ); mu<=1<K+2 meets the geometric lemma hypotheses. Triangle inequality then adds the separately certified vector arithmetic error, and an outward T can enlarge the bound. Zero time is separately handled with the Poisson point mass and no time splitting; K=0 and singleton Q also work. No stability guarantee for unvalidated rounded sums is claimed. Whitt eq.(3.28), Fox-Glynn Proposition 1 and Sections 1-3 checked only as context; the exact unnormalized lost-mass identity is proved here. No defect or reader/refuter concern."
+      }
+    }
+  }
+]

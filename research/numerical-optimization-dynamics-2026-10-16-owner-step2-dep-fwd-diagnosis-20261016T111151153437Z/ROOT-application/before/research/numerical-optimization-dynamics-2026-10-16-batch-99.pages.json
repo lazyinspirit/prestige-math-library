@@ -1,0 +1,448 @@
+[
+  {
+    "order": 2482,
+    "id": "polynomial-chaos-stochastic-collocation-and-galerkin-uq",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Polynomial chaos stochastic collocation and galerkin uq",
+    "companion": "polynomial-chaos-stochastic-collocation-and-galerkin-uq-examples",
+    "requires": [
+      "finite-element-meshes-and-interpolation",
+      "ceas-lemma-and-aubin-nitsche-error-estimates",
+      "gaussian-quadrature",
+      "spectral-collocation-and-galerkin-methods",
+      "sparse-grid-cubature-and-mixed-regularity",
+      "robust-covariance-and-high-dimensional-stability",
+      "gaussian-process-support-and-concentration",
+      "parabolic-finite-element-methods"
+    ],
+    "items": [
+      {
+        "id": "def-finite-product-chaos-input",
+        "kind": "definition",
+        "title": "Finite product-law polynomial-chaos input data",
+        "deps": [
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law"
+        ],
+        "dependency_level": 0,
+        "strategy": "Fix finitely many independent real inputs with product law, moment cutoffs, and positive-definite monomial Gram matrices; distinguish the finite construction from any completeness claim."
+      },
+      {
+        "id": "rem-chaos-completeness-and-spectral-rate-caveats",
+        "kind": "remark",
+        "title": "Completeness and spectral rates require law-specific hypotheses",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Record the scope boundary: finite orthogonality follows from moments, while completeness and rates require separately proved density or mixed-regularity assumptions."
+      },
+      {
+        "id": "def-chaos-total-degree-and-hyperbolic-cross-index-sets",
+        "kind": "definition",
+        "title": "Total-degree and hyperbolic-cross chaos index sets",
+        "deps": [
+          "def-finite-product-chaos-input"
+        ],
+        "dependency_level": 1,
+        "strategy": "Define the total-degree and product hyperbolic-cross conventions explicitly, with the zero multi-index included.",
+        "justified_by": [
+          "lem-chaos-index-sets-are-finite"
+        ]
+      },
+      {
+        "id": "def-finite-input-bochner-l2-space",
+        "kind": "definition",
+        "title": "Bochner L2 space for a finite product-law input",
+        "deps": [
+          "def-finite-product-chaos-input",
+          "def-strongly-measurable-banach-valued-function",
+          "def-hilbert-space"
+        ],
+        "dependency_level": 1,
+        "strategy": "Define the strongly measurable, square-integrable V-valued equivalence classes and their integral inner product.",
+        "justified_by": [
+          "thm-finite-input-bochner-l2-is-hilbert"
+        ]
+      },
+      {
+        "id": "lem-positive-moment-gram-produces-univariate-chaos-polynomials",
+        "kind": "lemma",
+        "title": "Positive moment Gram matrices produce orthonormal polynomial families",
+        "deps": [
+          "def-finite-product-chaos-input",
+          "thm-gram-schmidt-orthonormalisation",
+          "def-inner-product-norm",
+          "def-linear-independence",
+          "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "def-real-polynomial-degree-leading-coefficient-and-monic"
+        ],
+        "dependency_level": 1,
+        "strategy": "Use the positive monomial Gram matrix to prove independence in L2, then apply the finite Gram–Schmidt recursion and retain the leading-degree term."
+      },
+      {
+        "id": "def-chaos-orthonormal-tensor-basis",
+        "kind": "definition",
+        "title": "Finite orthonormal polynomial tensor basis",
+        "deps": [
+          "def-finite-product-chaos-input",
+          "def-chaos-total-degree-and-hyperbolic-cross-index-sets",
+          "lem-positive-moment-gram-produces-univariate-chaos-polynomials"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define each multivariate basis function as the product of the normalized one-dimensional polynomials indexed by the chosen finite set.",
+        "justified_by": [
+          "thm-independent-polynomial-chaos-tensors-are-orthonormal"
+        ]
+      },
+      {
+        "id": "def-uniformly-elliptic-affine-random-diffusion",
+        "kind": "definition",
+        "title": "Uniformly elliptic affine random diffusion model",
+        "deps": [
+          "def-finite-product-chaos-input",
+          "def-finite-input-bochner-l2-space",
+          "lem-parabolic-zero-boundary-sobolev-space-is-separable",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2,
+        "strategy": "Specify the finite bounded input, measurable affine coefficient, uniform lower and upper bounds, conforming energy space, and square-integrable affine forcing.",
+        "justified_by": [
+          "lem-affine-form-integrable-on-bochner-l2"
+        ]
+      },
+      {
+        "id": "lem-chaos-index-sets-are-finite",
+        "kind": "lemma",
+        "title": "The stated chaos index sets are finite and contain zero",
+        "deps": [
+          "def-chaos-total-degree-and-hyperbolic-cross-index-sets"
+        ],
+        "dependency_level": 2,
+        "strategy": "Bound each coordinate of a multi-index by the declared total-degree or product threshold."
+      },
+      {
+        "id": "thm-finite-input-bochner-l2-is-hilbert",
+        "kind": "theorem",
+        "title": "Finite-input Bochner L2 of a separable Hilbert space is Hilbert",
+        "deps": [
+          "def-finite-input-bochner-l2-space",
+          "def-hilbert-space",
+          "def-countable-choice",
+          "lem-borel-map-into-separable-banach-is-strongly-measurable",
+          "thm-minkowski-inequality-for-integrals",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 2,
+        "strategy": "Verify the integral pairing and prove completeness by selecting a summably Cauchy subsequence, taking its almost-everywhere Hilbert limit, and returning to L2 convergence."
+      },
+      {
+        "id": "alg-christoffel-weighted-least-squares-collocation",
+        "kind": "algorithm",
+        "title": "Christoffel-weighted least-squares polynomial collocation",
+        "deps": [
+          "def-chaos-orthonormal-tensor-basis",
+          "def-chaos-total-degree-and-hyperbolic-cross-index-sets"
+        ],
+        "dependency_level": 3,
+        "strategy": "Specify the leverage density, reciprocal leverage weights, empirical Gram acceptance test, unique normal-equation solve, and unstable-sample status.",
+        "justified_by": [
+          "lem-christoffel-sampling-law-and-gram-mean"
+        ]
+      },
+      {
+        "id": "def-finite-chaos-orthogonal-projection",
+        "kind": "definition",
+        "title": "Finite polynomial-chaos orthogonal projection",
+        "deps": [
+          "def-chaos-orthonormal-tensor-basis",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "dependency_level": 3,
+        "strategy": "Define each coefficient by the L2 pairing and the finite projection by the corresponding basis sum.",
+        "justified_by": [
+          "thm-finite-chaos-projection-parseval-and-moments"
+        ]
+      },
+      {
+        "id": "lem-affine-form-integrable-on-bochner-l2",
+        "kind": "lemma",
+        "title": "Affine diffusion forms are well-defined on Bochner L2",
+        "deps": [
+          "def-uniformly-elliptic-affine-random-diffusion",
+          "def-finite-input-bochner-l2-space",
+          "thm-finite-input-bochner-l2-is-hilbert",
+          "def-strongly-measurable-banach-valued-function",
+          "cor-cauchy-schwarz-inequality-for-l-two"
+        ],
+        "dependency_level": 3,
+        "strategy": "Prove measurability by simple-function approximation, establish L1 integrability by the uniform coefficient bound and Cauchy–Schwarz, and derive global boundedness and coercivity."
+      },
+      {
+        "id": "thm-independent-polynomial-chaos-tensors-are-orthonormal",
+        "kind": "theorem",
+        "title": "Independent polynomial-chaos tensor products are orthonormal",
+        "deps": [
+          "def-chaos-orthonormal-tensor-basis",
+          "lem-positive-moment-gram-produces-univariate-chaos-polynomials",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-independent-random-elements-have-product-joint-law"
+        ],
+        "dependency_level": 3,
+        "strategy": "Factor each tensor inner product under the product law and use the one-dimensional orthonormality identities."
+      },
+      {
+        "id": "def-chaos-quadrature-coefficient-estimator",
+        "kind": "definition",
+        "title": "Quadrature estimates of polynomial-chaos coefficients",
+        "deps": [
+          "def-finite-chaos-orthogonal-projection",
+          "def-chaos-orthonormal-tensor-basis"
+        ],
+        "dependency_level": 4,
+        "strategy": "Define estimated coefficients by applying a declared cubature functional to each integrand u times its basis function."
+      },
+      {
+        "id": "lem-christoffel-sampling-law-and-gram-mean",
+        "kind": "lemma",
+        "title": "Christoffel sampling is normalized and its weighted Gram has mean identity",
+        "deps": [
+          "alg-christoffel-weighted-least-squares-collocation",
+          "thm-independent-polynomial-chaos-tensors-are-orthonormal",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "dependency_level": 4,
+        "strategy": "Integrate the Christoffel kernel to the basis dimension, then compute the weighted rank-one matrix expectation and its leverage norm."
+      },
+      {
+        "id": "thm-affine-random-diffusion-solution-is-bochner",
+        "kind": "theorem",
+        "title": "Affine random diffusion has a measurable Bochner solution",
+        "deps": [
+          "def-uniformly-elliptic-affine-random-diffusion",
+          "lem-affine-form-integrable-on-bochner-l2",
+          "thm-finite-input-bochner-l2-is-hilbert",
+          "thm-lax-milgram",
+          "def-countable-choice",
+          "lem-borel-map-into-separable-banach-is-strongly-measurable",
+          "lem-parabolic-zero-boundary-sobolev-space-is-separable"
+        ],
+        "dependency_level": 4,
+        "strategy": "Apply pointwise Lax–Milgram, prove Lipschitz dependence by subtracting the affine variational equations, use the local Bochner form lemma, and extend the pointwise identity from dense simple tests."
+      },
+      {
+        "id": "thm-finite-chaos-projection-parseval-and-moments",
+        "kind": "theorem",
+        "title": "Finite chaos projection, Parseval identity, mean, and variance",
+        "deps": [
+          "def-finite-chaos-orthogonal-projection",
+          "thm-independent-polynomial-chaos-tensors-are-orthonormal"
+        ],
+        "dependency_level": 4,
+        "strategy": "Prove residual orthogonality directly, apply Pythagoras, and separate the constant coefficient from the residual when computing variance."
+      },
+      {
+        "id": "thm-product-chaos-and-spatial-density-in-bochner-l2",
+        "kind": "theorem",
+        "title": "Tensor products are dense in Bochner L2 under scalar and spatial density",
+        "deps": [
+          "def-finite-input-bochner-l2-space",
+          "def-chaos-orthonormal-tensor-basis",
+          "thm-independent-polynomial-chaos-tensors-are-orthonormal",
+          "thm-finite-input-bochner-l2-is-hilbert",
+          "def-strongly-measurable-banach-valued-function"
+        ],
+        "dependency_level": 4,
+        "strategy": "Approximate by finite-valued simple functions, then approximate each scalar indicator in L2 by the assumed dense chaos span and each vector value by the assumed dense spatial subspace."
+      },
+      {
+        "id": "thm-chaos-quadrature-coefficient-error-split",
+        "kind": "theorem",
+        "title": "Projection and quadrature errors split in L2",
+        "deps": [
+          "def-finite-chaos-orthogonal-projection",
+          "def-chaos-quadrature-coefficient-estimator",
+          "thm-finite-chaos-projection-parseval-and-moments",
+          "thm-independent-polynomial-chaos-tensors-are-orthonormal",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-integral-triangle-inequality"
+        ],
+        "dependency_level": 5,
+        "strategy": "Use residual orthogonality and Pythagoras to obtain the exact squared decomposition, then use the triangle inequality for the additive projection-plus-quadrature bound."
+      },
+      {
+        "id": "thm-christoffel-gram-concentration-bound",
+        "kind": "theorem",
+        "title": "Bounded-Christoffel sampling stabilizes the empirical Gram matrix",
+        "deps": [
+          "lem-christoffel-sampling-law-and-gram-mean",
+          "alg-christoffel-weighted-least-squares-collocation",
+          "lem-bounded-independent-matrix-bernstein-via-trace-exponential"
+        ],
+        "dependency_level": 5,
+        "strategy": "Center the independent rank-one Gram summands, bound their norm and variance, apply the proved matrix Bernstein supplier, and simplify the constants to the declared sample budget."
+      },
+      {
+        "id": "thm-stochastic-galerkin-coercivity-and-cea",
+        "kind": "theorem",
+        "title": "Stochastic Galerkin coercivity and Cea quasi-optimality",
+        "deps": [
+          "def-uniformly-elliptic-affine-random-diffusion",
+          "lem-affine-form-integrable-on-bochner-l2",
+          "thm-affine-random-diffusion-solution-is-bochner",
+          "thm-finite-input-bochner-l2-is-hilbert",
+          "def-strongly-measurable-banach-valued-function",
+          "def-chaos-orthonormal-tensor-basis",
+          "thm-independent-polynomial-chaos-tensors-are-orthonormal",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Integrate the pointwise symmetric diffusion form over the product law, establish its exact coercivity and continuity constants, and apply the proved conforming Cea theorem on the finite tensor subspace."
+      },
+      {
+        "id": "cor-smolyak-chaos-coefficient-error-bound",
+        "kind": "corollary",
+        "title": "Smolyak mixed-regularity bounds control chaos coefficient error",
+        "deps": [
+          "thm-chaos-quadrature-coefficient-error-split",
+          "def-chaos-quadrature-coefficient-estimator",
+          "def-chaos-orthonormal-tensor-basis",
+          "def-smolyak-cubature",
+          "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+          "lem-smolyak-mixed-simpson-detail-decay"
+        ],
+        "dependency_level": 6,
+        "strategy": "Apply the sparse-grid theorem separately to each coefficient integrand under its exact uniform-cube mixed-derivative assumptions, then combine the finite coefficient bounds in Euclidean norm."
+      },
+      {
+        "id": "cor-stochastic-galerkin-fe-interpolation-rate",
+        "kind": "corollary",
+        "title": "Conditional spatial finite-element rate for stochastic Galerkin",
+        "deps": [
+          "thm-stochastic-galerkin-coercivity-and-cea",
+          "thm-local-finite-element-interpolation-estimates",
+          "def-matching-affine-simplicial-meshes",
+          "thm-independent-polynomial-chaos-tensors-are-orthonormal",
+          "def-uniformly-elliptic-affine-random-diffusion",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Assume an exact finite chaos expansion with spatially regular coefficients; interpolate each coefficient conformingly, sum local H1 estimates by orthonormality, and apply stochastic Galerkin Céa."
+      },
+      {
+        "id": "thm-weighted-least-squares-stability-and-error",
+        "kind": "theorem",
+        "title": "Weighted least squares is stable on the good Gram event",
+        "deps": [
+          "alg-christoffel-weighted-least-squares-collocation",
+          "thm-christoffel-gram-concentration-bound",
+          "def-finite-chaos-orthogonal-projection",
+          "thm-finite-chaos-projection-parseval-and-moments",
+          "thm-independent-polynomial-chaos-tensors-are-orthonormal"
+        ],
+        "dependency_level": 6,
+        "strategy": "Use the Gram eigenvalue interval to bound the pseudoinverse design map, then compare the fit with the L2 projection and the weighted sampled residual."
+      },
+      {
+        "id": "cor-tensor-gauss-exact-chaos-coefficients",
+        "kind": "corollary",
+        "title": "Tensor Gaussian rules recover polynomial-chaos coefficients exactly",
+        "deps": [
+          "lem-tensor-product-moment-functional-equals-product-measure-integral",
+          "thm-chaos-quadrature-coefficient-error-split",
+          "def-chaos-quadrature-coefficient-estimator",
+          "def-chaos-orthonormal-tensor-basis",
+          "thm-independent-polynomial-chaos-tensors-are-orthonormal",
+          "def-coordinatewise-product-moment-functional",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-tensor-product-gauss-exactness-and-exponential-node-count",
+          "def-tensor-product-gauss-rule",
+          "def-finite-product-chaos-input"
+        ],
+        "dependency_level": 9,
+        "strategy": "Check the coordinatewise degree of each product integrand and apply the actual tensor Gaussian exactness theorem."
+      }
+    ]
+  },
+  {
+    "order": 2483,
+    "id": "polynomial-chaos-stochastic-collocation-and-galerkin-uq-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Polynomial chaos stochastic collocation and galerkin uq — Examples",
+    "companion": "polynomial-chaos-stochastic-collocation-and-galerkin-uq",
+    "requires": [
+      "polynomial-chaos-stochastic-collocation-and-galerkin-uq"
+    ],
+    "items": [
+      {
+        "id": "cex-cauchy-input-has-no-degree-one-chaos",
+        "kind": "counterexample",
+        "title": "A Cauchy input has no L2 degree-one polynomial chaos",
+        "deps": [
+          "def-finite-product-chaos-input",
+          "lem-positive-moment-gram-produces-univariate-chaos-polynomials"
+        ],
+        "dependency_level": 2,
+        "strategy": "Compute the divergent second moment of the standard Cauchy law and show the monomial Gram entry required for degree one is not finite."
+      },
+      {
+        "id": "cex-finite-support-makes-high-degree-moment-gram-singular",
+        "kind": "counterexample",
+        "title": "Finite support can make a higher-degree moment Gram matrix singular",
+        "deps": [
+          "def-finite-product-chaos-input",
+          "lem-positive-moment-gram-produces-univariate-chaos-polynomials"
+        ],
+        "dependency_level": 2,
+        "strategy": "Use a nonzero polynomial vanishing on every support point to exhibit a nonzero coefficient vector in the Gram matrix kernel."
+      },
+      {
+        "id": "ex-affine-random-diffusion-uniform-coercivity",
+        "kind": "example",
+        "title": "A bounded random diffusion coefficient remains uniformly coercive",
+        "deps": [
+          "def-finite-product-chaos-input",
+          "def-uniformly-elliptic-affine-random-diffusion",
+          "thm-affine-random-diffusion-solution-is-bochner"
+        ],
+        "dependency_level": 5,
+        "strategy": "For a uniform scalar input and an explicit affine positive coefficient, verify the pointwise bounds and the resulting energy coercivity."
+      },
+      {
+        "id": "ex-two-state-reaction-rate-chaos",
+        "kind": "example",
+        "title": "A two-state uncertain reaction rate has an exact degree-one chaos expansion",
+        "deps": [
+          "def-finite-product-chaos-input",
+          "lem-positive-moment-gram-produces-univariate-chaos-polynomials",
+          "def-chaos-orthonormal-tensor-basis",
+          "thm-finite-chaos-projection-parseval-and-moments"
+        ],
+        "dependency_level": 5,
+        "strategy": "Compute the two orthonormal modes on the symmetric two-point law, expand an affine reaction rate, and verify its mean, variance, and completeness on the two-point support."
+      },
+      {
+        "id": "ex-total-degree-versus-tensor-product-work",
+        "kind": "example",
+        "title": "Total-degree chaos uses fewer modes than a tensor product",
+        "deps": [
+          "def-finite-product-chaos-input",
+          "def-chaos-total-degree-and-hyperbolic-cross-index-sets",
+          "lem-chaos-index-sets-are-finite",
+          "thm-tensor-product-gauss-exactness-and-exponential-node-count"
+        ],
+        "dependency_level": 9,
+        "strategy": "Enumerate the three-dimensional degree-two multi-indices and compare the ten chaos modes with a three-by-three-by-three tensor Gaussian node count."
+      }
+    ]
+  }
+]

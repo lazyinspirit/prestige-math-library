@@ -1,0 +1,260 @@
+[
+  {
+    "order": 2470,
+    "id": "sparse-grid-cubature-and-mixed-regularity",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Sparse grid cubature and mixed regularity",
+    "companion": "sparse-grid-cubature-and-mixed-regularity-examples",
+    "requires": [
+      "composite-quadrature-rules",
+      "clenshaw-curtis-and-extrapolation-quadrature",
+      "gaussian-quadrature"
+    ],
+    "items": [
+      {
+        "id": "def-smolyak-univariate-level-hierarchy",
+        "kind": "definition",
+        "title": "Nested one-dimensional quadrature levels and differences",
+        "statement": "A finite weighted quadrature hierarchy Q_l on [0,1] has nested node sets X_l, Q_-1=0, and details Delta_l=Q_l-Q_{l-1}; the selected hierarchy is composite Simpson with 2^{l+1} equal panels at level l.",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "def-finite-sum",
+          "def-multidimensional-darboux-integral"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-smolyak-cubature",
+        "kind": "definition",
+        "title": "Smolyak cubature on a finite downward-closed index set",
+        "statement": "For a finite downward-closed Lambda subset of N_0^d containing zero, define Q_Lambda as the sum over ell in Lambda of tensor products of one-dimensional details, with its node union and signed combined weights.",
+        "deps": [
+          "def-smolyak-univariate-level-hierarchy",
+          "def-finite-sum",
+          "def-monoid-finite-product"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-smolyak-dyadic-tensor-simpson-convergence",
+        "kind": "lemma",
+        "title": "Convergence of dyadic tensor composite-Simpson rules",
+        "statement": "For continuous f on [0,1]^d, the tensor product of d copies of the level-L composite-Simpson rule converges to the multiple Riemann integral.",
+        "deps": [
+          "def-smolyak-univariate-level-hierarchy",
+          "alg-composite-simpson-rule",
+          "def-multidimensional-darboux-integral",
+          "def-multidimensional-grid-partition",
+          "def-multidimensional-darboux-sums",
+          "thm-multidimensional-riemann-criterion",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-heine-borel-rn",
+          "thm-heine-cantor-metric",
+          "thm-extreme-value-metric",
+          "lem-finite-sum-laws"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-smolyak-node-deduplication",
+        "kind": "algorithm",
+        "title": "Deterministic node merging for Smolyak cubature",
+        "statement": "Expand each finite tensor detail into signed weighted node tuples, merge equal exact canonical node keys by finite addition in lexicographic order, evaluate the actual distinct node union once, and return the combined signed weight map and cubature value.",
+        "deps": [
+          "def-smolyak-univariate-level-hierarchy",
+          "def-smolyak-cubature",
+          "def-finite-sum"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-smolyak-absolute-detail-summability",
+        "kind": "definition",
+        "title": "Absolute summability of a multi-index detail family",
+        "statement": "A nonnegative family indexed by a subset of N_0^d is summable when all finite subsums have a common finite upper bound; its sum is their supremum, and absolute detail summability means this for the absolute tensor details.",
+        "deps": [
+          "def-smolyak-cubature",
+          "def-finite-sum",
+          "def-complete-ordered-field"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-smolyak-mixed-simpson-detail-decay",
+        "kind": "lemma",
+        "title": "Mixed-derivative bounds for dyadic Simpson details",
+        "statement": "If every mixed partial with fourth derivatives in each coordinate of a subset S is continuous and bounded, then tensor details obey the bound M_S(17/2880)^|S| 16^{-sum ell_j}; all finite absolute-detail subsums share the bound sum_S M_S(17/43200)^|S|.",
+        "deps": [
+          "def-smolyak-univariate-level-hierarchy",
+          "alg-composite-simpson-rule",
+          "thm-composite-simpson-error-bound",
+          "def-higher-derivatives-and-smoothness",
+          "lem-triangle-inequality-finite",
+          "lem-finite-sum-laws",
+          "thm-geometric-series"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-smolyak-rectangular-telescope",
+        "kind": "lemma",
+        "title": "Rectangular telescoping of tensor details",
+        "statement": "For any finite rectangular index box 0<=ell_j<=m_j, the sum of its tensor details equals the tensor product of the terminal one-dimensional rules.",
+        "deps": [
+          "def-smolyak-univariate-level-hierarchy",
+          "def-smolyak-cubature",
+          "lem-finite-sum-laws",
+          "def-monoid-finite-product"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-dimension-adaptive-smolyak-surplus-selection",
+        "kind": "algorithm",
+        "title": "Finite-budget dimension-adaptive Smolyak surplus selection",
+        "statement": "On a finite downward-closed candidate cap Gamma, add admissible indices by largest computed detail surplus with deterministic tie-breaking, count actual distinct sampled node keys against a finite budget, and return an explicit complete-frontier, indicator-threshold, or budget-exhausted status without treating surpluses as certified tails.",
+        "deps": [
+          "def-smolyak-cubature",
+          "alg-smolyak-node-deduplication",
+          "def-finite-sum"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+        "kind": "theorem",
+        "title": "Absolute detail reconstruction and omitted-tail error bound",
+        "statement": "If the tensor detail series is absolutely summable and tensor terminal rules converge to the multiple integral, then the full detail series reconstructs the integral and every finite Smolyak set has error at most the sum of omitted absolute details.",
+        "deps": [
+          "def-smolyak-cubature",
+          "def-smolyak-absolute-detail-summability",
+          "lem-smolyak-dyadic-tensor-simpson-convergence",
+          "lem-smolyak-mixed-simpson-detail-decay",
+          "lem-smolyak-rectangular-telescope",
+          "lem-triangle-inequality-finite",
+          "lem-finite-sum-laws",
+          "lem-of-triangle-inequality",
+          "def-real-limit"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-smolyak-polynomial-multi-degree-exactness",
+        "kind": "theorem",
+        "title": "Smolyak polynomial exactness from actual one-dimensional levels",
+        "statement": "If Q_l is exact through nondecreasing degree m_l and Lambda contains the rectangular detail support determined by coordinate degrees, then Q_Lambda exactly integrates every tensor polynomial with those coordinate degrees; for the isotropic simplex, sum of the minimal exactness levels at most n is sufficient.",
+        "deps": [
+          "def-smolyak-univariate-level-hierarchy",
+          "def-smolyak-cubature",
+          "lem-smolyak-rectangular-telescope",
+          "cor-riemann-integral-of-a-product-function",
+          "thm-multidimensional-integral-properties",
+          "lem-finite-sum-laws",
+          "thm-composite-simpson-exact-through-degree-three"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-smolyak-adaptive-surplus-termination",
+        "kind": "lemma",
+        "title": "Termination of finite-cap surplus selection",
+        "statement": "The dimension-adaptive selection procedure terminates after finitely many candidate inspections and at most |Gamma| accepted index additions, returning one of its declared explicit statuses.",
+        "deps": [
+          "alg-dimension-adaptive-smolyak-surplus-selection",
+          "def-smolyak-cubature"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+        "kind": "theorem",
+        "title": "Explicit work and error rate for dyadic Simpson Smolyak cubature",
+        "statement": "For fixed d and continuous mixed fourth partials, the isotropic level set has an exact node-union count comparable to 2^n(n+1)^{d-1} and error at most an explicit dimension-dependent constant times M_mix 16^{-n}(n+1)^{d-1}, hence O_d(M_mix W^{-4}(log W)^{5(d-1)}).",
+        "deps": [
+          "def-smolyak-cubature",
+          "alg-smolyak-node-deduplication",
+          "lem-smolyak-mixed-simpson-detail-decay",
+          "thm-smolyak-absolute-detail-reconstruction-and-tail-error",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "thm-geometric-series",
+          "def-complete-ordered-field",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-stars-and-bars",
+          "cor-compositions-with-k-parts-are-counted-by-binomial-coefficients",
+          "def-binomial-coefficient",
+          "thm-binomial-theorem"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 2471,
+    "id": "sparse-grid-cubature-and-mixed-regularity-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Sparse grid cubature and mixed regularity — Examples",
+    "companion": "sparse-grid-cubature-and-mixed-regularity",
+    "requires": [
+      "sparse-grid-cubature-and-mixed-regularity"
+    ],
+    "items": [
+      {
+        "id": "ex-smolyak-diagonal-ridge-breaks-mixed-regularity",
+        "kind": "example",
+        "title": "A diagonal ridge fails the mixed fourth-derivative hypothesis",
+        "statement": "The ridge |x-y|^3 has continuous bounded pure second partials, but its pure fourth x derivative does not exist on the diagonal, so it fails the mixed fourth-derivative hypothesis of the Simpson rate theorem.",
+        "deps": [
+          "thm-smolyak-isotropic-mixed-smoothness-work-error-rate",
+          "lem-smolyak-mixed-simpson-detail-decay",
+          "def-derivative",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-smolyak-four-dimensional-product-integrand",
+        "kind": "example",
+        "title": "A four-dimensional product exactly integrated on a sparse node union",
+        "statement": "The two-level Clenshaw-Curtis hierarchy on [0,1] with Lambda_1 in four dimensions exactly integrates x_1^2 x_2 x_3 x_4 using 48 distinct nodes, while the full tensor level-one grid has 81 nodes.",
+        "deps": [
+          "def-smolyak-cubature",
+          "alg-smolyak-node-deduplication",
+          "def-na-clenshaw-curtis-quadrature",
+          "thm-na-clenshaw-curtis-exactness-and-near-best-error",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "lem-derivative-of-a-power",
+          "thm-ftc-second-part",
+          "cor-riemann-integral-of-a-product-function"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-smolyak-signed-weights-polynomial-chaos-coefficient",
+        "kind": "example",
+        "title": "A signed Simpson-Smolyak weight makes a nonnegative chaos coefficient estimate negative",
+        "statement": "There is an explicit nonnegative polynomial whose constant polynomial-chaos coefficient under uniform measure is positive while its level-two composite-Simpson Smolyak estimate is negative; tensor products of Gaussian rules with positive coordinate weights preserve nonnegativity.",
+        "deps": [
+          "def-smolyak-cubature",
+          "def-smolyak-univariate-level-hierarchy",
+          "alg-composite-simpson-rule",
+          "def-gauss-quadrature-rule",
+          "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+          "def-tensor-product-gauss-rule",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "thm-algebra-of-continuous-functions",
+          "thm-continuous-implies-integrable",
+          "thm-monotonicity-of-the-integral",
+          "thm-additivity-over-subintervals",
+          "cor-riemann-integral-of-a-product-function"
+        ],
+        "dependency_level": 8
+      }
+    ]
+  }
+]

@@ -1,0 +1,376 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "1",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-balanced-pairwise-summation",
+      "model": "gpt-6-luna",
+      "context_sha256": "5c6e3a773af4f198e4bdc44ed2df4b9d3a4d1cd359db393450f48517f0fbbce1",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "For n=4, the first pair (N_max,N_max) fails at level 1, node 1 after one attempted addition; the original unconditional count is 2^2-1=3. Thus the claim is false, not merely unproved. The unchanged schedule now has its finite-execution and conditional full-count argument in a separate lemma: success uses 2^d-1, and arbitrary execution uses at most that number.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-bounded-mixed-precision-iterative-refinement",
+      "model": "gpt-6-luna",
+      "context_sha256": "1a5152715ff2e382e92757a4e080987b0b1a3a7041fb2aa4cbedb3bf9f1bd229",
+      "outcome": "false_positive",
+      "reason": "The test asserts q<=q_cert for the explicitly displayed linear error coefficient, not ||e_(k+1)||<=q||e_k|| without an additive term. Writing rho_*=xi_r+eta_r(||A||2||x_*||2+||b||2) gives ||delta_r||<=eta_r||A||2||e_k||+rho_* and ||delta_w||<=eta_w(1+eta_r)||A||2||e_k||+eta_w*rho_*+xi_w. Thus ||e_(k+1)||<=q||e_k||+||Ahat^-1||2*((1+eta_w)*rho_*+xi_w), exactly as proved in thm-mixed-precision-refinement-error-recurrence-and-floor. q=0 with nonzero next error is allowed by this floor and refutes no assertion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-rounded-cholesky-with-failure-status",
+      "model": "gpt-6-luna",
+      "context_sha256": "2e17f9028a22654edcead6be69397ee644591700feebb0710b20f48864950dee",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The finite-loop proof is mathematically correct, but the algorithm carrier states/proves termination locally instead of consuming a separate proved result as SCHEMA.md Algorithms requires. This is a nonfatal property-placement defect, not a failure of the rounded Cholesky recurrence. Removed the local property Proof and finite-loop assertion, preserved every instruction and failure test, and added the separate finite-schedule lemma as an acyclic prerequisite.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-two-sum-error-free-transform",
+      "model": "gpt-6-luna",
+      "context_sha256": "cb3bf75a1f2f69c5bb442eb6454f0ae6b43eadd0667074ff91d8f1338132fc0c",
+      "outcome": "false_positive",
+      "reason": "The supposedly missing result exists as thm-two-sum-error-free-transform on the same owning page and explicitly depends on this algorithm. Its Statement proves e=(a+b)-s and s+e=a+b for every successful binary nearest-even call at p>=2. Its Proof 1.1 transfers successful bounded arithmetic to the unbounded grid, 2.1 handles |a|>=|b|, and 2.2-3.1 handle the remaining magnitude/sign cases via the local ordered transform and Sterbenz subtraction; 4.1 concludes exact recovery. The algorithm title names the procedure, and its Definition explicitly defers exactness to the separate result. Omitting a reverse deps edge to that theorem avoids a cycle and is not an unsupported correctness assertion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-finite-arithmetic-schedule-termination-and-count",
+      "disposition": "authored",
+      "post_sha256": "897905949a4ba917596ae3637bc91b41b55f751e57d8e46b0059b02f757fcd13",
+      "review_context_sha256": "6696a1aca602873139c08fa3cb47ed6837ae6e3b8fd6aac7da626c914fc28c55",
+      "reason": "Author check, not independent approval: induction on the finite instruction list proves the first-return bound; finite counted-loop unrolling preserves order, and S_0=0, S_(d+1)=2S_d+1 gives the successful full-tree count. No arithmetic-success, accuracy or choice assumption is inferred.",
+      "uncertain": false,
+      "source_urls": [
+        "https://fncbook.com/floating-point/"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "alg-balanced-pairwise-summation",
+      "disposition": "repaired",
+      "post_sha256": "28f5845ff3edf85fba5eedb2e62e8aee5f57e7361d86b8d058522ad02cd183b7",
+      "review_context_sha256": "6c37a4a218c6462f0b87d63609dbb6dcca3ee41221db25997da7e2d2cc739789",
+      "reason": "Kept all inputs, zero padding, level/node order, first-failure return and d=0 output unchanged. Removed the false unconditional count and local property Proof; the new independent finite-schedule lemma supplies termination and the successful exact count. No reverse justified_by edge applies because that lemma assumes an arbitrary supplied finite schedule rather than depending on this algorithm. Author check of repair only; no independent approval claimed. Precheck is not-applicable (zero proofs); rendering passes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-bounded-mixed-precision-iterative-refinement",
+      "disposition": "unaffected",
+      "post_sha256": "aee0d264a59c24fc42e73f55061c2e1cc832230fa2f363afa310904d697b2cc2",
+      "review_context_sha256": "e85743c8c65330df3f93a80dcd29c3d16d4717329c24003c4156b1426aa6bd74",
+      "reason": "The test asserts q<=q_cert for the explicitly displayed linear error coefficient, not ||e_(k+1)||<=q||e_k|| without an additive term. Writing rho_*=xi_r+eta_r(||A||2||x_*||2+||b||2) gives ||delta_r||<=eta_r||A||2||e_k||+rho_* and ||delta_w||<=eta_w(1+eta_r)||A||2||e_k||+eta_w*rho_*+xi_w. Thus ||e_(k+1)||<=q||e_k||+||Ahat^-1||2*((1+eta_w)*rho_*+xi_w), exactly as proved in thm-mixed-precision-refinement-error-recurrence-and-floor. q=0 with nonzero next error is allowed by this floor and refutes no assertion. Checked exact B*Ahat=I, a_minus<=||A||2<=a_plus, h and d Frobenius upper bounds, fixed certificate arrays, positive substitution denominators, N=0, tolerance/stagnation precedence and the finite exact-real-verifier caveat. All remain valid. Per the dispatch, a false-positive carrier is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-rounded-cholesky-with-failure-status",
+      "disposition": "repaired",
+      "post_sha256": "91cfcc5722b29ce3476d4ebcaeae86227a28638db526de56d932a3bf1c1e8a54",
+      "review_context_sha256": "6c2485b3bc3bb7dcf3be4b0884869e52f2a09a6b95e1c0e57a71613ad3bc84d5",
+      "reason": "The finite-loop proof is mathematically correct, but the algorithm carrier states/proves termination locally instead of consuming a separate proved result as SCHEMA.md Algorithms requires. This is a nonfatal property-placement defect, not a failure of the rounded Cholesky recurrence. Removed the local property Proof and finite-loop assertion, preserved every instruction and failure test, and added the separate finite-schedule lemma as an acyclic prerequisite. Checked initialization, j=1 empty dots, diagonal four-operation accumulation, six-real-operation complex products, ordered component updates, positive-normal pivot/root tests and positive-real division. Finite prescribed loops instantiate the helper; exact positive definiteness still does not imply rounded success. Direct theorem/example/BFGS uses retain identical operands, statuses and arithmetic, so no consumer repair is needed. Author check of the repair only.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-two-sum-error-free-transform",
+      "disposition": "unaffected",
+      "post_sha256": "ed0a46b28e75d46aca39f0dd1589770f668b6b50901a085f825b87013d507099",
+      "review_context_sha256": "c8f429cdf03e2339a4e1efb4b7502974777ce950914892cd5d1141ac938136d1",
+      "reason": "The supposedly missing result exists as thm-two-sum-error-free-transform on the same owning page and explicitly depends on this algorithm. Its Statement proves e=(a+b)-s and s+e=a+b for every successful binary nearest-even call at p>=2. Its Proof 1.1 transfers successful bounded arithmetic to the unbounded grid, 2.1 handles |a|>=|b|, and 2.2-3.1 handle the remaining magnitude/sign cases via the local ordered transform and Sterbenz subtraction; 4.1 concludes exact recovery. The algorithm title names the procedure, and its Definition explicitly defers exactness to the separate result. Omitting a reverse deps edge to that theorem avoids a cycle and is not an unsupported correctness assertion. Checked the six separately rounded scalar operations, exact-zero/normal-range success rule, the full local binary-grid supplier, and same-page theorem placement. Per the dispatch, the false-positive carrier is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [
+    {
+      "id": "lem-finite-arithmetic-schedule-termination-and-count",
+      "kind": "lemma",
+      "home_page": "finite-precision-direct-factorizations",
+      "batch": "1",
+      "consumers": [
+        "alg-balanced-pairwise-summation",
+        "alg-rounded-cholesky-with-failure-status"
+      ],
+      "reason": "Missing common prerequisite is a separately proved finite-schedule termination/status result. The two original algorithm Proof steps 1.1/2.1 establish finite execution locally, which the algorithm convention forbids; the assigned pairwise repair also needs to distinguish a full successful count from a failed initial segment. Existing Householder termination is procedure-specific and the C1 straight-line lemma concerns differentiability rather than failure-aware schedules. This independent lemma has no algorithm dependency, so consuming it through deps creates no cycle and requires no reverse justified_by edge. FNC supplies arithmetic background only; the finite induction and count are proved locally.",
+      "uncertain": false,
+      "source_urls": [
+        "https://fncbook.com/floating-point/"
+      ],
+      "familiar": true
+    }
+  ],
+  "downstream": [
+    "alg-balanced-pairwise-summation",
+    "alg-rounded-cholesky-with-failure-status",
+    "thm-balanced-pairwise-summation-error-bound",
+    "ex-subnormal-and-overflow-range-failure",
+    "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+    "ex-rounded-cholesky-two-by-two-residual",
+    "alg-bfgs-hessian-direction-with-rounded-cholesky"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-balanced-pairwise-summation",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "before_excerpt": "The tree is fully specified, terminates after $2^d-1$ additions, and its accuracy is asserted only on success.",
+      "finding": "For n=4, the first pair (N_max,N_max) fails at level 1, node 1 after one attempted addition; the original unconditional count is 2^2-1=3. Thus the claim is false, not merely unproved. The unchanged schedule now has its finite-execution and conditional full-count argument in a separate lemma: success uses 2^d-1, and arbitrary execution uses at most that number.",
+      "repair": "Kept the prescribed tree; moved termination/count to a separately proved supplier that distinguishes successful full traversal from early failure.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-rounded-cholesky-with-failure-status",
+      "severity": "nonfatal",
+      "locus": "proof-step",
+      "finding": "The finite-loop proof is mathematically correct, but the algorithm carrier states/proves termination locally instead of consuming a separate proved result as SCHEMA.md Algorithms requires. This is a nonfatal property-placement defect, not a failure of the rounded Cholesky recurrence. Removed the local property Proof and finite-loop assertion, preserved every instruction and failure test, and added the separate finite-schedule lemma as an acyclic prerequisite.",
+      "repair": "Removed the local Facts/Proof, declared the independent finite-schedule prerequisite and placed the well-definedness explanation in Remarks.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "alg-bounded-mixed-precision-iterative-refinement",
+      "finding": "The test asserts q<=q_cert for the explicitly displayed linear error coefficient, not ||e_(k+1)||<=q||e_k|| without an additive term. Writing rho_*=xi_r+eta_r(||A||2||x_*||2+||b||2) gives ||delta_r||<=eta_r||A||2||e_k||+rho_* and ||delta_w||<=eta_w(1+eta_r)||A||2||e_k||+eta_w*rho_*+xi_w. Thus ||e_(k+1)||<=q||e_k||+||Ahat^-1||2*((1+eta_w)*rho_*+xi_w), exactly as proved in thm-mixed-precision-refinement-error-recurrence-and-floor. q=0 with nonzero next error is allowed by this floor and refutes no assertion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "alg-two-sum-error-free-transform",
+      "finding": "The supposedly missing result exists as thm-two-sum-error-free-transform on the same owning page and explicitly depends on this algorithm. Its Statement proves e=(a+b)-s and s+e=a+b for every successful binary nearest-even call at p>=2. Its Proof 1.1 transfers successful bounded arithmetic to the unbounded grid, 2.1 handles |a|>=|b|, and 2.2-3.1 handle the remaining magnitude/sign cases via the local ordered transform and Sterbenz subtraction; 4.1 concludes exact recovery. The algorithm title names the procedure, and its Definition explicitly defers exactness to the separate result. Omitting a reverse deps edge to that theorem avoids a cycle and is not an unsupported correctness assertion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "owner-reconcile-presentation-concern",
+      "ids": [
+        "alg-bounded-mixed-precision-iterative-refinement",
+        "alg-two-sum-error-free-transform"
+      ],
+      "finding": "The rejection-blind Step-4 digest separately flags local termination Proof sections in these two carriers. Their assigned mathematical rejections are false positives, and this dispatch explicitly prohibits editing false-positive carriers. Their unchanged Proof 1.1/2.1 placement therefore remains an owner-directed schema follow-up; no mathematical uncertainty or missing correctness theorem is inferred.",
+      "minimality": "If the owner admits these separate nonfatal findings, consume the new finite-schedule lemma and remove only local termination Facts/Proof and termination assertions, preserving each entire defining procedure. Do not alter q or remove its additive-floor theorem, and do not weaken the TwoSum exact-recovery theorem.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "record-no-published-consumer-impact",
+      "supplier_ids": [
+        "alg-balanced-pairwise-summation",
+        "alg-rounded-cholesky-with-failure-status",
+        "lem-finite-arithmetic-schedule-termination-and-count"
+      ],
+      "finding": "Exact-ID dependency/reference searches over current items and library pages found only the seven recorded supplier/consumer uses (including the helper consumers), all draft frontier targets, plus the owning pages. No published or outside-frontier item requires maintenance for these interface events. No published item was edited or adjudicated.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed all four assigned tuple reviews in their supplied order, capturing each review-context pair before advancing. Authored and registered one independent finite-schedule supplier before its consumers. Its source/alias uniqueness was checked against current files and frozen inventory; its statement is outside the frozen frontier and it has no assumed independent acceptance.",
+    "Pairwise Definition changed only by removing the false unconditional count sentence. Cholesky Definition changed only by removing All loops are finite. The original procedures, hypotheses, input/output statuses and arithmetic are intact. Local property Proof sections were replaced by references to the separately proved finite-schedule prerequisite; manifests and the two owning contracts were updated under acquire/reread/edit/check/release.",
+    "The helper has no algorithm-specific premise or logical dependency: its finite-instruction-return hypothesis is instantiated using each algorithm's operationwise model. Thus ordinary deps, rather than a cyclic reverse edge or justified_by, is correct. Its addition-level specialization retains the exact successful full-tree count and supplies a non-strict bound for failure, including d=0 and failure at the last slot.",
+    "FNC floating-point section actually consulted: nearest rounding and grid discussion, exponent-range discussion and its denormalized-number footnote, and elementary machine-operation discussion. This is arithmetic background only. The local helper proves its own finite-schedule argument; the stricter local no-subnormal policy is not attributed to FNC.",
+    "All seven supplier/consumer uses and both owning page interfaces were examined. Five existing direct consumers remain sound without edits. Newly supplied helper interfaces are consumed only by the two repaired assigned algorithms. No published/outside consumer maintenance is required for these events; the proposed published-consumer ledger update records this finding without adjudicating a published item.",
+    "The two assigned numerical/correctness rejections were false positives, so their carriers and contracts were left unchanged. Separate Step-4 presentation concerns about their local termination Proof sections are explicitly routed to the owner under the no-false-positive-edit instruction; this report does not certify those concerns as resolved. There is no unresolved mathematical uncertainty.",
+    "Initial helper precheck requested phase renumbering; adopted 1.1/2.1 and reran successfully. Initial helper contract check found two unanchored boundary-evidence rows; added their actual Proof step 1.1 anchors, and the final strict three-item contract check has no errors or warnings.",
+    "Final proof-layout was run once on all three changed item paths after their final source edits: 3 items, 2 steps, 0 defects. No item source or formatter change followed it. No judges, stamps, central certificates, round transitions, other workers or publication actions were launched."
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "lem-finite-arithmetic-schedule-termination-and-count",
+      "id": "alg-balanced-pairwise-summation",
+      "path": "items/alg-balanced-pairwise-summation.md",
+      "scope": "frontier",
+      "affected_use": "Remarks: apply the lemma to the prescribed levels; each addition has a finite value-or-failure return.",
+      "disposition": "new prerequisite used by repaired assigned algorithm",
+      "reason": "The unchanged indexed tree unrolls to the lemma schedule; the new result retains the full successful count and corrects failure to an upper bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "lem-finite-arithmetic-schedule-termination-and-count",
+      "id": "alg-rounded-cholesky-with-failure-status",
+      "path": "items/alg-rounded-cholesky-with-failure-status.md",
+      "scope": "frontier",
+      "affected_use": "Remarks: the initialized column/row/inner loops unroll to the lemma schedule, with primitive value/failure and pivot-test returns.",
+      "disposition": "new prerequisite used by repaired assigned algorithm",
+      "reason": "All data are initialized before use, each primitive returns under the model, and positivity tests are finite comparisons; the helper does not assume Cholesky success.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-balanced-pairwise-summation",
+      "id": "thm-balanced-pairwise-summation-error-bound",
+      "path": "items/thm-balanced-pairwise-summation-error-bound.md",
+      "scope": "frontier",
+      "affected_use": "Statement and F1; Proof 1.1 expands each original leaf along at most d rounded additions.",
+      "disposition": "unchanged and sound",
+      "reason": "Success-only depth and rounding schedule are unchanged; the removed unconditional execution count is unused.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-balanced-pairwise-summation",
+      "id": "ex-subnormal-and-overflow-range-failure",
+      "path": "items/ex-subnormal-and-overflow-range-failure.md",
+      "scope": "frontier",
+      "affected_use": "F2; Proof 1.1-2.1 use the first failing pairwise sum in the two-leaf binary64 tree.",
+      "disposition": "unchanged and sound",
+      "reason": "The first-failure policy and two-leaf schedule are unchanged; the example does not rely on completing a failed tree.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-rounded-cholesky-with-failure-status",
+      "id": "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+      "path": "items/thm-rounded-cholesky-componentwise-and-normwise-backward-error.md",
+      "scope": "frontier",
+      "affected_use": "F1; Proof 1.1 uses six-real-operation products and diagonal accumulation; Proof 2.1-2.2 uses rounded subtraction, division and square roots.",
+      "disposition": "unchanged and sound",
+      "reason": "All successful arithmetic recurrences, positivity tests and operand conventions are unchanged; moving termination does not alter the backward-error proof.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-rounded-cholesky-with-failure-status",
+      "id": "ex-rounded-cholesky-two-by-two-residual",
+      "path": "items/ex-rounded-cholesky-two-by-two-residual.md",
+      "scope": "frontier",
+      "affected_use": "F1; Proof 1.1-2.1 uses l11=1, l21=1/2, p2=3/4 and the rounded sqrt(3/4).",
+      "disposition": "unchanged and sound",
+      "reason": "Identical successful pivots and stored factor are produced; the nonzero residual and conditional backward bound are unaffected.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-rounded-cholesky-with-failure-status",
+      "id": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+      "path": "items/alg-bfgs-hessian-direction-with-rounded-cholesky.md",
+      "scope": "frontier",
+      "affected_use": "Definition instruction 1 calls rounded Cholesky and returns factorization-failure with pivot/location; instruction 2 uses its positive-normal-diagonal factor.",
+      "disposition": "unchanged and sound",
+      "reason": "No instruction, failure status, pivot location or factor output changed; the BFGS branch and subsequent triangular solves retain the same preconditions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "interface_changes": [
+    {
+      "id": "alg-balanced-pairwise-summation",
+      "section": "Definition",
+      "before_excerpt": "The tree is fully specified, terminates after $2^d-1$ additions, and its accuracy is asserted only on success.",
+      "after_excerpt": "",
+      "reason": "Removed the false unconditional count; the separately proved generic level-schedule result retains exact count on success and a non-strict bound on failure."
+    },
+    {
+      "id": "alg-rounded-cholesky-with-failure-status",
+      "section": "Definition",
+      "before_excerpt": "All loops are finite.",
+      "after_excerpt": "",
+      "reason": "Moved algorithmic termination to the independent generic result; all procedure instructions are identical."
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/numerical-linear-algebra-and-approximation/finite-precision-direct-factorizations.md",
+      "affected_use": "Frontmatter homes both assigned procedures; the summary describes failure-aware Cholesky and conditional summation accuracy without an unconditional execution count.",
+      "disposition": "summary unchanged and sound; registered the new prerequisite before its consumers"
+    },
+    {
+      "path": "library/numerical-linear-algebra-and-approximation/finite-precision-direct-factorizations-examples.md",
+      "affected_use": "Frontmatter/summary home the two examined examples and describe explicit range failures and nonzero Cholesky residuals.",
+      "disposition": "unchanged and sound"
+    }
+  ],
+  "focused_checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-finite-arithmetic-schedule-termination-and-count.md --json",
+      "exit_code": 0,
+      "result": "1 checked proof, 0 failures; pass after adopting the proposed phase numbering."
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-balanced-pairwise-summation.md --json",
+      "exit_code": 0,
+      "result": "not-applicable; 0 checked proofs, 0 failures."
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-rounded-cholesky-with-failure-status.md --json",
+      "exit_code": 0,
+      "result": "not-applicable; 0 checked proofs, 0 failures."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-balanced-pairwise-summation.md --json",
+      "exit_code": 0,
+      "result": "1 checked file, no errors or warnings."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/alg-rounded-cholesky-with-failure-status.md items/lem-finite-arithmetic-schedule-termination-and-count.md library/numerical-linear-algebra-and-approximation/finite-precision-direct-factorizations.md --json",
+      "exit_code": 0,
+      "result": "3 checked files, no errors or warnings."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-1.proof-contracts.json --strict --items alg-balanced-pairwise-summation,alg-rounded-cholesky-with-failure-status,lem-finite-arithmetic-schedule-termination-and-count --json",
+      "exit_code": 0,
+      "result": "ok:true; all three selected entries checked, no errors or warnings."
+    },
+    {
+      "command": "node tools/depcheck.mjs --items-file /tmp/prestige-step5-u1-items.json --json",
+      "exit_code": 0,
+      "result": "Explicit selection: both repaired algorithms and helper; focused item/page checks and 251-item prerequisite closure cycle checks passed with 0 errors and 0 warnings."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/alg-balanced-pairwise-summation.md items/alg-rounded-cholesky-with-failure-status.md items/lem-finite-arithmetic-schedule-termination-and-count.md",
+      "exit_code": 0,
+      "result": "3 items, 2 steps, 0 defects."
+    },
+    {
+      "command": "Focused manifest/source dependency and unique page/contract registration comparison for both repaired algorithms and the helper",
+      "exit_code": 0,
+      "result": "All three dependency mirrors match; each has exactly one owning manifest row, page placement and contract entry."
+    }
+  ],
+  "blockers": []
+}

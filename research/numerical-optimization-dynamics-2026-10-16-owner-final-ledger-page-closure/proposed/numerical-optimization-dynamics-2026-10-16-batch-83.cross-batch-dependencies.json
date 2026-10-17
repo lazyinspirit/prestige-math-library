@@ -1,0 +1,207 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-riemannian-armijo-backtracking",
+    "supplier": "alg-bracketing-zoom-strong-wolfe-search",
+    "status": "verified",
+    "evidence": "The supplier was examined and is deliberately not a logical premise: it defines Euclidean x+tp strong-Wolfe conditions, whereas this consumer tests f(R_x(-tg)) with an Armijo sufficient-decrease condition. The local theorem proves acceptance separately and imports no strong-Wolfe existence claim."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-riemannian-trust-region",
+    "supplier": "alg-trust-region-cauchy-step",
+    "status": "verified",
+    "evidence": "The current supplier explicitly returns the negative-gradient segment minimizer, with the stationary zero-gradient branch and no iteration loop. The local algorithm can use this finite formula as its Cauchy-decrease candidate; the zero-model convention is preserved by lem-trust-region-cauchy-decrease."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-riemannian-trust-region",
+    "supplier": "alg-trust-region-method",
+    "status": "verified",
+    "evidence": "The current 69-line supplier body was inspected in full. It defines a finite outer cap, stationary/target/cap statuses, a Cauchy step, acceptance of a solver candidate only when feasible and at least theta_C times Cauchy decrease, a small-radius Cauchy override, rho<eta_1 rejection with gamma_dec shrink, and rho>=eta_2 boundary growth with gamma_inc. The local Riemannian algorithm preserves these exact branches and adds retraction evaluation on the tangent/horizontal model. The supplier comparison verifies the declared interface only."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-riemannian-trust-region",
+    "supplier": "def-trust-region-quadratic-model-and-ratio",
+    "status": "verified",
+    "evidence": "The current supplier definition states the quadratic model, trust-region feasible ball, predicted decrease m(0)-m(p), actual decrease f(x)-f(x+p), and ratio only when predicted decrease is positive. The local Riemannian algorithm preserves that positive-denominator guard and evaluates actual decrease at the retracted point. This is interface verification, not approval of the supplier draft."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-riemannian-trust-region",
+    "supplier": "lem-trust-region-cauchy-decrease",
+    "status": "verified",
+    "evidence": "The current supplier proves pred(p_C)>=0.5||g|| min(Delta,||g||/||B||), with min(Delta,infinity)=Delta for B=0, and proves segment minimization. This is the explicit subproblem decrease condition used by alg-riemannian-trust-region and thm-riemannian-trust-region-first-order-complexity. Supplier proof audit remains separate."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-stiefel-qr-polar-retractions",
+    "supplier": "thm-scaled-householder-qr-backward-stability",
+    "status": "verified",
+    "evidence": "Required interface: successful computed Householder QR admits a backward perturbation bound under the stated operationwise/no-underflow assumptions, while the item explicitly does not prove computed-Q exact orthogonality. Use: Remark in def-stiefel-qr-polar-retractions, solely to delimit finite-precision scope. The exact QR and polar retraction proof does not cite this numerical theorem as a premise."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-trace-eigenspace-optimization-with-lanczos-start-angle",
+    "supplier": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+    "status": "verified",
+    "evidence": "Required hypotheses checked: A=diag(5,2,0) is real symmetric; lambda1=5>lambda2=2>lambda3=0; r=1; b is unit and Pb is nonzero; lambda2>lambda3; m=2; b and Ab are independent. The item statement defines theta2 as the maximum Rayleigh quotient on K2, and the local candidate p(A)b belongs to K2 with quotient 41/9. Thus theta2>=41/9 before the supplier's 5/8 upper bound is compared."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-riemannian-trust-region-ratio-accuracy-for-small-radii",
+    "supplier": "alg-trust-region-cauchy-step",
+    "consumer_batch": "83",
+    "status": "verified",
+    "evidence": "Checked finite real tangent/horizontal coordinates with Frobenius metric: g!=0, Delta>0, self-adjoint B and its norm bound permit the Euclidean Cauchy step/decrease. Retraction/pullback accuracy is local. The logarithm bound is used at1/epsilon>=1, with0<epsilon<=1. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/alg-trust-region-cauchy-step.md",
+      "items/lem-riemannian-trust-region-ratio-accuracy-for-small-radii.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-83.pages.json#deps",
+      "items/lem-riemannian-trust-region-ratio-accuracy-for-small-radii.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Definition\n\nInput a model of [[def-trust-region-quadratic-model-and-ratio]] with gradient\n$g$, symmetric model matrix $B$, and\nradius $\\Delta>0$. If $g=0$, return $p_C=0$ with status `stationary`. If\n$g\\ne0$, set $c:=g^TBg$ and define\n$$\\tau:=\\begin{cases}\n\\Delta/\\|g\\|_2,&c\\le0,\\\\\n\\min\\{\\|g\\|_2^2/c,\\ \\Delta/\\|g\\|_2\\},&c>0.\n\\end{cases}$$\nReturn $p_C:=-\\tau g$ with status `step`. The procedure uses no matrix\nfactorization and has no iteration loop.\n",
+    "consumer_use_anchors": "[F3] The negative-gradient Cauchy step is the segment minimizer with the formula stated in [[alg-trust-region-cauchy-step]].",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/35"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-riemannian-trust-region-ratio-accuracy-for-small-radii",
+    "supplier": "lem-trust-region-cauchy-decrease",
+    "consumer_batch": "83",
+    "status": "verified",
+    "evidence": "Checked finite real tangent/horizontal coordinates with Frobenius metric: g!=0, Delta>0, self-adjoint B and its norm bound permit the Euclidean Cauchy step/decrease. Retraction/pullback accuracy is local. The logarithm bound is used at1/epsilon>=1, with0<epsilon<=1. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/lem-trust-region-cauchy-decrease.md",
+      "items/lem-riemannian-trust-region-ratio-accuracy-for-small-radii.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-83.pages.json#deps",
+      "items/lem-riemannian-trust-region-ratio-accuracy-for-small-radii.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nIn the quadratic model of [[def-trust-region-quadratic-model-and-ratio]],\nlet $g\\ne0$, let $B$ be symmetric, and let $\\Delta>0$. Write\n$M:=\\|B\\|_2$ for the induced Euclidean matrix norm, with the convention\n$\\min\\{\\Delta,\\|g\\|_2/M\\}=\\Delta$ when $M=0$. The Cauchy step\n$p_C$ of [[alg-trust-region-cauchy-step]] minimizes the model on the\nnegative-gradient segment $\\{-tg:0\\le t\\le\\Delta/\\|g\\|_2\\}$ and satisfies\n$$m(0)-m(p_C)\\ge\\tfrac12\\|g\\|_2\n\\min\\{\\Delta,\\|g\\|_2/M\\}.$$\n",
+    "consumer_use_anchors": "[F4] Its decrease is at least $\\tfrac12\\|g\\|\\min\\{\\Delta,\\|g\\|/\\|B_x\\|\\}$, using the zero-operator convention ([[lem-trust-region-cauchy-decrease]]).",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/36"
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-riemannian-trust-region-ratio-accuracy-for-small-radii",
+    "supplier": "lem-trust-region-ratio-accuracy-for-small-radii",
+    "status": "verified",
+    "evidence": "The complete Euclidean supplier proof was read. It bounds the actual/model error by (L+M_B)||p||^2 and the Cauchy-fraction model decrease below by theta_C||g||Delta/2, then derives a ratio error O(Delta/||g||). The batch-83 lemma proves the retraction analogue from pullback-gradient Lipschitzness, the exact retraction derivative, and the same small-radius Cauchy safeguard; it does not use the Euclidean straight-segment theorem as an unproved premise."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-riemannian-trust-region-first-order-complexity",
+    "supplier": "lem-natural-logarithm-bounded-by-argument",
+    "consumer_batch": "83",
+    "status": "verified",
+    "evidence": "Checked finite real tangent/horizontal coordinates with Frobenius metric: g!=0, Delta>0, self-adjoint B and its norm bound permit the Euclidean Cauchy step/decrease. Retraction/pullback accuracy is local. The logarithm bound is used at1/epsilon>=1, with0<epsilon<=1. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/lem-natural-logarithm-bounded-by-argument.md",
+      "items/thm-riemannian-trust-region-first-order-complexity.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-83.pages.json#deps",
+      "items/thm-riemannian-trust-region-first-order-complexity.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nFor every real $x\\ge1$, the natural logarithm of\n[[def-natural-logarithm]] satisfies\n$$0\\le\\log x\\le x-1\\le x.$$\n",
+    "consumer_use_anchors": "[F6] For $y\\ge1$, $0\\le\\log y\\le y$ ([[lem-natural-logarithm-bounded-by-argument]]).",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/38"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-riemannian-trust-region-first-order-complexity",
+    "supplier": "lem-trust-region-cauchy-decrease",
+    "consumer_batch": "83",
+    "status": "verified",
+    "evidence": "Checked finite real tangent/horizontal coordinates with Frobenius metric: g!=0, Delta>0, self-adjoint B and its norm bound permit the Euclidean Cauchy step/decrease. Retraction/pullback accuracy is local. The logarithm bound is used at1/epsilon>=1, with0<epsilon<=1. Exact supplier and consumer anchors are attached below.",
+    "inspected_paths": [
+      "items/lem-trust-region-cauchy-decrease.md",
+      "items/thm-riemannian-trust-region-first-order-complexity.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-83.pages.json#deps",
+      "items/thm-riemannian-trust-region-first-order-complexity.md#deps"
+    ],
+    "supplier_statement_or_definition": "\n## Statement\n\nIn the quadratic model of [[def-trust-region-quadratic-model-and-ratio]],\nlet $g\\ne0$, let $B$ be symmetric, and let $\\Delta>0$. Write\n$M:=\\|B\\|_2$ for the induced Euclidean matrix norm, with the convention\n$\\min\\{\\Delta,\\|g\\|_2/M\\}=\\Delta$ when $M=0$. The Cauchy step\n$p_C$ of [[alg-trust-region-cauchy-step]] minimizes the model on the\nnegative-gradient segment $\\{-tg:0\\le t\\le\\Delta/\\|g\\|_2\\}$ and satisfies\n$$m(0)-m(p_C)\\ge\\tfrac12\\|g\\|_2\n\\min\\{\\Delta,\\|g\\|_2/M\\}.$$\n",
+    "consumer_use_anchors": "[F3] The Cauchy step decrease is at least $\\tfrac12\\|g\\|\\min\\{\\Delta,\\|g\\|/\\|B\\|\\}$, with the zero-operator convention ([[lem-trust-region-cauchy-decrease]]).",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/37"
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-riemannian-trust-region-first-order-complexity",
+    "supplier": "thm-trust-region-epsilon-iteration-complexity",
+    "status": "verified",
+    "evidence": "The complete batch-72 proof was read, including successful-decrease, rejected-radius-count, logarithmic, and finite-cap steps. Its Euclidean model theorem supplies the counting structure and exact parameter interface. Batch 83 independently rederives those counts using its local retraction ratio-accuracy lemma; it does not cite the Euclidean theorem as if it applied directly to Stiefel or Grassmann."
+  },
+  {
+    "kind": "page",
+    "consumer": "riemannian-optimization-on-stiefel-and-grassmann-manifolds-examples",
+    "supplier": "krylov-methods-and-lanczos-convergence",
+    "status": "verified",
+    "evidence": "The complete batch-34 carrier thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases and its proof were inspected. Its simple-top-eigenvalue bound requires a real symmetric matrix, a unit start vector with nonzero top-eigenspace projection, a separated top eigenvalue, and a noncollapsed unwanted spectral interval for the Chebyshev branch. ex-trace-eigenspace-optimization-with-lanczos-start-angle checks these hypotheses for diag(5,2,0), b=(1,1,1)/sqrt(3), and m=2, and proves the candidate-versus-Ritz comparison. Supplier draft status is not independent approval."
+  },
+  {
+    "kind": "page",
+    "consumer": "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+    "supplier": "finite-precision-direct-factorizations",
+    "status": "verified",
+    "evidence": "The batch-1 item thm-scaled-householder-qr-backward-stability was read in full. Its backward-error theorem assumes successful rounded Householder QR with operationwise bounds and does not assert exact orthogonality of the computed Q. Batch 83 adds this as a limitation note in def-stiefel-qr-polar-retractions; the retraction formulas and first-order derivatives remain exact-arithmetic claims."
+  },
+  {
+    "kind": "page",
+    "consumer": "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+    "supplier": "gradient-like-vector-fields-and-morse-trajectories",
+    "status": "verified",
+    "evidence": "The published interfaces def-riemannian-gradient-of-a-smooth-function and lem-riemannian-gradient-vanishes-exactly-at-critical-points were read. The first gives the metric-dual convention and the second gives zero-gradient iff criticality, used in prop-stiefel-grassmann-riemannian-gradient-formulas. This verifies the consumed statements only and does not add an independent acceptance."
+  },
+  {
+    "kind": "page",
+    "consumer": "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+    "supplier": "krylov-methods-and-lanczos-convergence",
+    "consumer_batch": "83",
+    "status": "verified",
+    "evidence": "Actual use is ex-trace-eigenspace-optimization-with-lanczos-start-angle. Its real diag(5,2,0), unit start(1,1,1)/sqrt3 has nonzero top component, tau=sqrt2 and separated unwanted interval. Proof3.1 substitutes m=2 into supplier Chebyshev bound yielding5/8 and compares locally calculated candidate gap4/9; no manifold convergence is transferred.",
+    "inspected_paths": [
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/riemannian-optimization-on-stiefel-and-grassmann-manifolds.md",
+      "library/numerical-linear-algebra-and-approximation/krylov-methods-and-lanczos-convergence.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-83.pages.json",
+      "items/ex-trace-eigenspace-optimization-with-lanczos-start-angle.md",
+      "items/thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases.md"
+    ],
+    "basis": "newfocusedcheck",
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-83.pages.json#requires"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-82-90.json#rows/34"
+  },
+  {
+    "kind": "page",
+    "consumer": "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+    "supplier": "nonconvex-line-search-and-inexact-newton-methods",
+    "status": "verified",
+    "evidence": "The full body of batch-58 alg-bracketing-zoom-strong-wolfe-search was read. It is a Euclidean straight-line strong-Wolfe search with explicit domain and budget statuses. Batch 83 uses its page only as assigned context: the retraction Armijo method has a different path, and its acceptance theorem is proved from the pullback-gradient Lipschitz assumption rather than transferred from the Wolfe item."
+  },
+  {
+    "kind": "page",
+    "consumer": "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+    "supplier": "riemannian-metrics-length-distance-and-volume",
+    "status": "verified",
+    "evidence": "The published def-riemannian-metric-and-riemannian-manifold, def-euclidean-inner-product, and def-riemannian-gradient-of-a-smooth-function bodies were read. They support the induced Frobenius metric and metric-dual gradient convention used by the local projections. The finite-dimensional formulas are proved in batch 83; no geodesic length or volume claim is imported."
+  },
+  {
+    "kind": "page",
+    "consumer": "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+    "supplier": "trust-region-and-cubic-regularization-methods",
+    "status": "verified",
+    "evidence": "Batch 72 bodies for def-trust-region-quadratic-model-and-ratio, alg-trust-region-cauchy-step, lem-trust-region-cauchy-decrease, alg-trust-region-method, lem-trust-region-ratio-accuracy-for-small-radii, thm-trust-region-global-liminf-gradient, and thm-trust-region-epsilon-iteration-complexity are present and were read in full where proof-bearing. The local algorithm matches the actual OPT3 eta_1/eta_2 thresholds, gamma_dec/gamma_inc updates, Cauchy-fraction acceptance safeguard, small-radius p_C override, finite statuses, and positive-ratio denominator guard. The local retraction accuracy and count proof are proved separately on the manifold; Euclidean supplier theorems are not asserted to transfer automatically. This verifies interface use only, not independent approval of batch-72 drafts."
+  }
+]

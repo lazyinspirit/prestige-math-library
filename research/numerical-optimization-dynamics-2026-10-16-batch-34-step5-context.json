@@ -1,0 +1,313 @@
+{
+  "group": "q",
+  "batches": [
+    "34"
+  ],
+  "pages_read": [
+    "krylov-methods-and-lanczos-convergence",
+    "krylov-methods-and-lanczos-convergence-examples"
+  ],
+  "items_read": [
+    "lem-scaled-chebyshev-filter-bound-on-a-separated-interval",
+    "thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound",
+    "thm-cg-recursive-residual-gap-and-attainable-accuracy",
+    "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+    "thm-gmres-true-residual-gap-from-computed-arnoldi-relation",
+    "prop-sparse-unrestarted-gmres-work-and-storage",
+    "ex-unrestarted-and-restarted-gmres-on-a-diagonal-system",
+    "ex-cg-denominator-failure-and-minres-on-an-indefinite-system",
+    "ex-lanczos-poorly-aligned-start-vector-delays-the-largest-ritz-value",
+    "ex-lanczos-repeated-top-zero-component-and-invariant-breakdown"
+  ],
+  "conventions": [
+    {
+      "convention": "The scaled Chebyshev filter assumes a>b>c and integer k≥0; T₀=1, and its positive exterior normalization gives a polynomial of degree exactly k.",
+      "fixed_by": "lem-scaled-chebyshev-filter-bound-on-a-separated-interval",
+      "matters_for": [
+        "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases"
+      ]
+    },
+    {
+      "convention": "Finite-precision statements concern successful real operationwise arithmetic: exact-zero operations are permitted, nonzero exact intermediates must be normal-range, and γk=ku/(1−ku) requires ku<1.",
+      "fixed_by": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+      "matters_for": [
+        "thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound",
+        "thm-cg-recursive-residual-gap-and-attainable-accuracy",
+        "thm-gmres-true-residual-gap-from-computed-arnoldi-relation"
+      ]
+    },
+    {
+      "convention": "Two-pass MGS uses two complete sequential passes; vector updates use a rounded product followed by a rounded subtraction. Positive normalization and successful operations are hypotheses, and the orthogonality conclusion is an explicit a posteriori recurrence rather than an unconditional small-error guarantee.",
+      "fixed_by": "thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound",
+      "matters_for": [
+        "thm-gmres-true-residual-gap-from-computed-arnoldi-relation"
+      ]
+    },
+    {
+      "convention": "The CG gap is stored recursive residual minus exact true residual, gⱼ=r̂ⱼ−(b−Ax̂ⱼ); its bounds use actual stored αk and include the initial gap.",
+      "fixed_by": "thm-cg-recursive-residual-gap-and-attainable-accuracy",
+      "matters_for": [
+        "thm-cg-recursive-residual-gap-and-attainable-accuracy",
+        "ex-cg-denominator-failure-and-minres-on-an-indefinite-system"
+      ]
+    },
+    {
+      "convention": "Lanczos eigenvalues are ordered decreasingly; r is the full top-eigenvalue multiplicity, P projects onto that eigenspace, and θm is defined variationally for every m≥1, including after exact breakdown. All convergence and breakdown conclusions are exact-arithmetic statements.",
+      "fixed_by": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+      "matters_for": [
+        "ex-lanczos-poorly-aligned-start-vector-delays-the-largest-ritz-value",
+        "ex-lanczos-repeated-top-zero-component-and-invariant-breakdown",
+        "ex-lanczos-ritz-value-is-not-a-norm-certificate",
+        "ex-trace-eigenspace-optimization-with-lanczos-start-angle"
+      ]
+    },
+    {
+      "convention": "The GMRES coordinate residual g is evaluated from stored coefficients; no least-squares accuracy is assumed. The true-residual bound includes initial-vector, Arnoldi-relation, and final-update errors.",
+      "fixed_by": "thm-gmres-true-residual-gap-from-computed-arnoldi-relation",
+      "matters_for": [
+        "thm-gmres-true-residual-gap-from-computed-arnoldi-relation"
+      ]
+    },
+    {
+      "convention": "The GMRES cost bound assumes canonical square CSR with every row nonempty, s=nnz(A), exact arithmetic and 1≤m≤n; it excludes input-matrix storage and an earlier-breakdown fallback solve.",
+      "fixed_by": "prop-sparse-unrestarted-gmres-work-and-storage",
+      "matters_for": [
+        "prop-sparse-unrestarted-gmres-work-and-storage"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+      "statement": "For real symmetric A, unit b, top-eigenspace projection P and largest Rayleigh–Ritz value θm: if Pb=0, θm≤λr+1; if Pb≠0 and λr+1>λn, 0≤λ1−θm≤(λ1−λn)τ²/Tm−1(1+2(λ1−λr+1)/(λr+1−λn))², where τ=‖(I−P)b‖₂/‖Pb‖₂. Separate clauses handle scalar matrices, a collapsed unwanted interval, and exact invariant-subspace breakdown.",
+      "used_by": [
+        "ex-lanczos-poorly-aligned-start-vector-delays-the-largest-ritz-value",
+        "ex-lanczos-repeated-top-zero-component-and-invariant-breakdown",
+        "ex-lanczos-ritz-value-is-not-a-norm-certificate",
+        "ex-trace-eigenspace-optimization-with-lanczos-start-angle"
+      ]
+    },
+    {
+      "id": "thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound",
+      "statement": "Under the specified successful real two-pass MGS operations, nu<1, γn<1, 2u<1 and tⱼ>0, Aqⱼ=Σi≤j hᵢⱼqᵢ+βⱼ₊₁qⱼ₊₁+eⱼ, with explicit operation-error bounds. For full-column-rank generated vectors, the displayed recurrence bounds their off-diagonal inner products and Frobenius Gram defect.",
+      "used_by": [
+        "thm-gmres-true-residual-gap-from-computed-arnoldi-relation"
+      ]
+    },
+    {
+      "id": "lem-scaled-chebyshev-filter-bound-on-a-separated-interval",
+      "statement": "For a>b>c and integer k≥0, pₖ(x)=Tₖ((2x−b−c)/(b−c))/Tₖ((2a−b−c)/(b−c)) has degree exactly k, pₖ(a)=1, and maxx∈[c,b]|pₖ(x)|=1/Tₖ((2a−b−c)/(b−c)).",
+      "used_by": [
+        "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases"
+      ]
+    },
+    {
+      "id": "thm-cg-recursive-residual-gap-and-attainable-accuracy",
+      "statement": "For the stated successful computed CG steps on a real SPD system, ‖gⱼ‖₂≤Γⱼ and ‖b−Ax̂ⱼ‖₂≤‖r̂ⱼ‖₂+Γⱼ; consequently ‖x*−x̂ⱼ‖A≤(‖r̂ⱼ‖₂+Γⱼ)/√λmin. The statement supplies explicit matvec and update error bounds and asserts neither exact-grade termination nor true-residual monotonicity.",
+      "used_by": [
+        "ex-cg-denominator-failure-and-minres-on-an-indefinite-system"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-real-polynomial-degree-leading-coefficient-and-monic",
+      "used_for": "Formal polynomial degree and leading-coefficient conventions in the Chebyshev filter proof.",
+      "opened": true
+    },
+    {
+      "id": "def-chebyshev-polynomials-first-and-second-kind",
+      "used_for": "The T₀, T₁ and three-term recurrence used to prove the interval and exterior-point bounds locally.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "The nonnegative square root in the elementary proof of |Tₖ(t)|≤1 on [−1,1].",
+      "opened": true
+    },
+    {
+      "id": "def-standard-relative-floating-point-model-and-unit-roundoff",
+      "used_for": "Underlying relative-error and exact-zero conventions of the operationwise model and rounding suppliers.",
+      "opened": true
+    },
+    {
+      "id": "lem-product-of-one-plus-deltas-gives-theta-n",
+      "used_for": "Products of relative-error factors, including padding with factors 1 for exact-zero operations.",
+      "opened": true
+    },
+    {
+      "id": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+      "used_for": "The narrower normal-range dot-product estimate; all three owned floating-point proofs explicitly extend its factor argument to exact-zero operations.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Inner-product bounds, Gram-defect estimates, and the poorly aligned Lanczos example.",
+      "opened": true
+    },
+    {
+      "id": "def-induced-matrix-p-norm",
+      "used_for": "Induced Euclidean matrix norm and matrix-vector compatibility in residual bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-krylov-subspace-of-a-matrix-and-start-vector",
+      "used_for": "Polynomial-vector membership, nested Krylov spaces, and explicit example spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-arnoldi-process",
+      "used_for": "Exact projection, normalization and breakdown conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-lanczos-process-as-hermitian-arnoldi",
+      "used_for": "The exact symmetric specialization of Arnoldi and nonnegative subdiagonal convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+      "used_for": "The no-breakdown orthonormal basis and rectangular Hessenberg relation in the Lanczos and GMRES cost proofs.",
+      "opened": true
+    },
+    {
+      "id": "def-ritz-values-and-ritz-vectors-from-arnoldi",
+      "used_for": "Ritz values as eigenvalues of the orthonormal compression.",
+      "opened": true
+    },
+    {
+      "id": "prop-ritz-residual-formula-for-an-arnoldi-ritz-pair",
+      "used_for": "Ritz-pair interpretation before breakdown; the owned theorem retains the supplier's no-breakdown restriction.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Real orthonormal eigenbasis in the Lanczos filter proof and CG energy-error bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-courant-fischer-min-max-principle",
+      "used_for": "Attainment and characterization of the largest Rayleigh quotient of a symmetric compression.",
+      "opened": true
+    },
+    {
+      "id": "def-conjugate-gradient-recurrence",
+      "used_for": "CG vector-update structure and the first-step denominator calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+      "used_for": "The energy norm and its real SPD specialization.",
+      "opened": true
+    },
+    {
+      "id": "def-minres-iterate-from-the-lanczos-tridiagonalization",
+      "used_for": "The one-column MINRES least-squares problem after explicitly verifying no first-column breakdown.",
+      "opened": true
+    },
+    {
+      "id": "def-gmres-iterate",
+      "used_for": "Exact residual minimization over the affine Krylov space.",
+      "opened": true
+    },
+    {
+      "id": "def-restarted-gmres-m",
+      "used_for": "The first GMRES(1) cycle and restart timing in the diagonal-system example.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-unrestarted-and-restarted-gmres-on-a-diagonal-system",
+      "concern": "The title says “Unrestarted GMRES solves a two-dimensional diagonal system before GMRES(1) restarts”. The verification instead shows that the first GMRES step has nonzero residual, GMRES(1) then restarts, and unrestarted GMRES solves at step 2. The phrase “before GMRES(1) restarts” misstates that timing; the Example and calculations themselves are correct.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "ex-trace-eigenspace-optimization-with-lanczos-start-angle",
+      "finding": "In ex-trace-eigenspace-optimization-with-lanczos-start-angle, the Example says: “The Chebyshev start-angle bound gives an upper bound $5/8$ for the same Rayleigh quotient gap, so this explicit candidate satisfies it.” The cited thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases bounds λ1−θ2, where θ2 is the maximum quotient on K2, rather than the gap of an arbitrary candidate in K2. Proof 3.1 correctly applies the theorem to θ2. The candidate inequality is independently true because Proof 2.1 computes its gap as 4/9≤5/8, but the Example's attribution conflates these two gaps.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "krylov-methods-and-lanczos-convergence",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "The actual transfer is the operationwise arithmetic definition. The three owned finite-precision proofs impose success and relevant γ-domain hypotheses and explicitly derive the extension to exact-zero operations; no direct-factorization stability theorem is imported."
+    },
+    {
+      "from": "krylov-methods-and-lanczos-convergence",
+      "to": "sparse-matrix-models-and-kernel-costs",
+      "faithful": true,
+      "note": "The cost proposition uses the opened CSR definition, validated matvec algorithm and cost theorem. Canonical storage and nonempty square rows justify s=nnz(A), s≥n and O(s) work per matvec."
+    },
+    {
+      "from": "krylov-methods-and-lanczos-convergence",
+      "to": "stationary-iterations-and-relaxation",
+      "faithful": true,
+      "note": "Contextual prerequisite: no owned item invokes a stationary-iteration convergence result or transfers a Richardson, Jacobi, Gauss–Seidel or SOR hypothesis."
+    },
+    {
+      "from": "certified-stationary-distribution-and-hitting-statistic-numerics",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "No direct invocation of an owned theorem was found. The page explicitly disclaims convergence of an arbitrary direct or Krylov solver; its residual certificates do not rely on such convergence."
+    },
+    {
+      "from": "preconditioner-algorithms-and-residual-metrics",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "Contextual interface. No owned result is cited directly, and the page separates actual-span residual minimization from preconditioner quality and Krylov convergence."
+    },
+    {
+      "from": "restarted-and-block-eigensolvers",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "No direct use of the owned Chebyshev theorem was found. The page supplies separate restart and block results and makes no convergence claim for arbitrary shifts."
+    },
+    {
+      "from": "matrix-exponential-and-phi-function-actions",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "The declared interface is contextual rather than a direct owned-item citation. The page retains explicit Arnoldi, initialization, reduced-action and projection errors and distinguishes numerical from happy breakdown."
+    },
+    {
+      "from": "nonconvex-line-search-and-inexact-newton-methods",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "No direct owned-item citation was found. Recomputed residual checks and conditional local inexact-Newton rates do not assert unconditional Krylov convergence."
+    },
+    {
+      "from": "operator-splitting-admm-and-primal-dual-methods",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "The companion ex-lanczos-ritz-value-is-not-a-norm-certificate faithfully uses the zero-top-component branch: K=diag(1,2), b=e1 yields Ritz value 1 despite operator norm 2."
+    },
+    {
+      "from": "nonlinear-conjugate-gradient-methods",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "Contextual prerequisite with no direct owned-item citation. Exact linear-CG equivalence is restricted to exact arithmetic and SPD quadratics, consistent with the owned finite-precision caveats."
+    },
+    {
+      "from": "trust-region-and-cubic-regularization-methods",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "No direct owned-item citation was found. The page uses its own truncated-CG and model-decrease interfaces and does not transfer the SPD finite-precision CG theorem to indefinite model Hessians."
+    },
+    {
+      "from": "riemannian-optimization-on-stiefel-and-grassmann-manifolds",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": false,
+      "note": "The companion trace-eigenspace example's Proof 3.1 correctly bounds the optimal Ritz gap by 5/8, but its Example prose attributes that bound to the explicit candidate's gap. The candidate gap is separately computed correctly as 4/9; see the presentation alert."
+    },
+    {
+      "from": "iterative-regularization-and-early-stopping",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "No direct owned-item citation was found. LSQR is explicitly exact-arithmetic, and the separate regularization conclusions do not invoke the owned finite-precision CG or GMRES bounds."
+    }
+  ]
+}

@@ -1,0 +1,1190 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-composite-simpson-asymptotic-error-expansion",
+    "thm-simpson-richardson-error-estimator-asymptotic",
+    "thm-adaptive-simpson-cap-termination-and-indicator-budget",
+    "ex-adaptive-simpson-misses-narrow-feature",
+    "ex-adaptive-simpson-cap-reached",
+    "ex-adaptive-simpson-leading-error-cancellation",
+    "thm-certified-adaptive-simpson-enclosure"
+  ],
+  "contracts": {
+    "lem-composite-simpson-asymptotic-error-expansion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-simpson-panel-peano-kernel",
+          "source_section": "Statement",
+          "quote": "Let $a<b$, put $L=b-a$ and $m=(a+b)/2$, and let $f\\in C^4([a,b])$. Define\nthe one-block Simpson value and its kernel by\n\n$$S(f;a,b):=\\frac{L}{6}\\bigl(f(a)+4f(m)+f(b)\\bigr),\\qquad K_{a,b}(x):=\\begin{cases}\\frac{(x-a)^3(3(x-a)-2L)}{72},&a\\le x\\le m,\\\\\\frac{(b-x)^3(3(b-x)-2L)}{72},&m\\le x\\le b.\\end{cases}$$\n\nThen\n\n$$\\int_a^b f(x)\\,dx-S(f;a,b)=\\int_a^bK_{a,b}(x)f^{(4)}(x)\\,dx,$$\n\nand $K_{a,b}\\le0$ with\n$\\int_a^b|K_{a,b}(x)|\\,dx=L^5/2880$. The value $S(f;a,b)$ is the one-block\nspecialization of [[alg-composite-simpson-rule]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-borel-r",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$. Then the closed bounded interval\n$[a,b]$ ([[def-interval]]) is compact ([[def-open-cover-r]]): every family of\nopen subsets of $\\mathbb{R}$ whose union contains $[a,b]$ has a finite subfamily\nwhose union already contains $[a,b]$.\n\nThe proof is by repeated bisection. Supposing some open cover admits no finite\nsubcover, one halves the interval, keeps a half that still admits none, and\niterates; the halves shrink to a point, which the cover does reach, and a single\nmember of the cover then swallows a whole late-stage half. **The halving rule is\ncanonical**, taking the left half whenever the left half works, so the recursion\nuses [[thm-recursion]] and no choice principle.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a closed nondegenerate rectangle $Q\\subseteq\\mathbb R^m$, $m\\ge1$, is Riemann integrable.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:\n\n1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of [[def-oriented-integral]],\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where [[def-oriented-integral]] earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. $f + g$ is integrable on $[a,b]$ and\n   $\\int_a^b (f+g) = \\int_a^b f + \\int_a^b g$;\n2. for every real $\\lambda$, $\\lambda f$ is integrable on $[a,b]$ and\n   $\\int_a^b \\lambda f = \\lambda \\int_a^b f$;\n3. consequently, for all reals $\\lambda, \\mu$ the function $\\lambda f + \\mu g$ is\n   integrable and\n   $$\\int_a^b(\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f \\;+\\; \\mu\\int_a^b g ;$$\n4. the same identity holds with oriented limits: if $u, v \\in [a,b]$ and $f, g$\n   are integrable between $u$ and $v$ ([[def-oriented-integral]]), then\n   $\\int_u^v(\\lambda f + \\mu g) = \\lambda\\int_u^v f + \\mu\\int_u^v g$.\n\n**Linearity of the integral is not linearity of the Darboux sums**, and the\nproof of claim 1 has to squeeze rather than compute. On a subinterval the\ninequality $\\sup(f+g) \\le \\sup f + \\sup g$ can be strict — take $f(x) = x$ and\n$g(x) = -x$ on $[0,1]$, where the left side is $0$ and the right side is $1$ —\nso $U(f+g,P)$ is in general strictly below $U(f,P) + U(g,P)$ and no identity\nbetween upper sums is available. Claim 2, by contrast, is an identity at the\nlevel of the sums, with the roles of $\\sup$ and $\\inf$ exchanged when\n$\\lambda < 0$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-integral-elementary-bounds",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ satisfy\n\n$$m \\;\\le\\; f(x) \\;\\le\\; M \\qquad \\text{for every } x \\in [a,b],$$\n\nwith $m, M$ real. Then $f$ is bounded ([[def-bounded-set]]), so its Darboux sums\nand integrals are defined ([[def-darboux-sums]], [[def-darboux-integral]]), and\nfor **every** partition $P$ of $[a,b]$ ([[def-partition-and-refinement]])\n\n$$m(b-a) \\;\\le\\; L(f,P) \\;\\le\\; \\underline{\\int_a^b} f \\;\\le\\; \\overline{\\int_a^b} f \\;\\le\\; U(f,P) \\;\\le\\; M(b-a) .$$\n\nIn particular, taking $f$ to be the constant function with value $c$:\n\n$$\\int_a^b c \\;=\\; c\\,(b-a) ,$$\n\nthe constant function being integrable, with $L(f,P) = U(f,P) = c(b-a)$ for\nevery partition $P$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "alg-composite-simpson-rule",
+          "source_section": "Definition",
+          "quote": "Input real endpoints $a,b$, an integer $n$, and an evaluation function $f$.\nIf $a\\ge b$ or $n<2$, return invalid-grid without evaluating $f$. For the\nremaining inputs require $f:[a,b]\\to\\mathbb R$ to be evaluable at every\npoint of $[a,b]$. If $n$ is odd, the procedure returns\ninvalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-bernoulli-inequality",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{R}$ be an ordered field ([[def-ordered-field]]), let\n$x \\in \\mathbb{R}$ with $x \\ge -1$, and let $n \\in \\mathbb{N}$, with powers as in\n[[def-integer-power]] and with $n$ also denoting the canonical field image\n$n\\cdot1_{\\mathbb{R}}$ of the natural number n ([[lem-of-naturals-positive]], [[lem-of-q-embeds]]).\nThen\n\n$$(1+x)^n \\ge 1 + nx,$$\n\nand equality holds if and only if $n \\le 1$ or $x = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-0-1",
+          "claim": "Let $\\delta>0$ and put $R=(b-a)/\\delta$. By [F11] choose $N\\ge1$ with $R<N$. For every $k\\ge N$, [F12] with $x=1$ gives $2^k\\ge1+k\\ge1+N>R$, so $h_k=(b-a)/2^k<\\delta$. Since $\\delta>0$ was arbitrary, $h_k\\to0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F11",
+            "F12",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-1",
+          "step": "1.2",
+          "claim": "Put $g=f^{(4)}$. By [F2] and [F5], both $f$ and $g$ are integrable. By [F3]–[F4], $g$ is uniformly continuous on the compact interval. The two formulas for $K_j$ in [F1] agree at their shared midpoint, so $K_j$ is continuous; [F9] makes $K_j(g-g(c_j))$ continuous and [F5] makes it integrable. Fix $\\varepsilon>0$; choose $\\delta>0$ so that $|g(x)-g(y)|<\\varepsilon$ whenever $x,y\\in[a,b]$ and $|x-y|<\\delta$. For $h_k<\\delta$, write each Simpson block as $P_j=[c_j-h_k,c_j+h_k]$ with midpoint $c_j$. By [F1] and linearity, its error minus $-((2h_k)^5/2880)g(c_j)$ is $\\int_{P_j}K_j(x)(g(x)-g(c_j))\\,dx$. Since $K_j\\le0$ and $|g(x)-g(c_j)|<\\varepsilon$, [F7] bounds the absolute value of this difference by $\\varepsilon(2h_k)^5/2880$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The $\\delta$ chosen in step 1.2 is positive, so step 1.1 gives an index after which $h_k<\\delta$; hence the panel estimate of step 1.2 holds for all sufficiently large $k$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "3.1",
+          "claim": "There are $n_k/2=(b-a)/(2h_k)$ blocks. By [F10], $Q_k$ is the sum of their one-block Simpson values; repeated application of additivity [F6] sums their integrals to $I$. Hence their local errors sum to $I-Q_k$. If $J_k=-((2h_k)^5/2880)\\sum_j g(c_j)$, step 1.2 gives $|(I-Q_k)-J_k|\\le (b-a)h_k^4\\varepsilon/180$. Also, on each block the uniform-continuity bound gives $g(c_j)-\\varepsilon\\le g(x)\\le g(c_j)+\\varepsilon$. By [F7] and [F8], integrating these constant bounds gives $2h_k(g(c_j)\\pm\\varepsilon)$, so $|\\int_{P_j}g-2h_k g(c_j)|\\le2h_k\\varepsilon$. Repeated additivity [F6] then yields $|2h_k\\sum_jg(c_j)-\\int_a^b g|\\le(b-a)\\varepsilon$.",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F10",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "4.1",
+          "claim": "Since $J_k/h_k^4=-(2h_k\\sum_jg(c_j))/180$, step 3.1 shows that $|(I-Q_k)/h_k^4+(1/180)\\int_a^b g|\\le(b-a)\\varepsilon/90$ for all sufficiently large $k$. As $\\varepsilon>0$ was arbitrary, the displayed limit follows.",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes a<b and k>=1, hence n_k=2^k>=2 and at least one Simpson block. Proof step 3.1 sums exactly n_k/2 blocks rather than an empty interval partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 yields the leading coefficient zero when f^(4) vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to the minimum grid n_1=2, a single Simpson block."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 4.1 is an absolute little-o expansion and does not divide by the integral of the fourth derivative; a zero leading coefficient still gives the displayed remainder conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 applies the Simpson kernel identity on each closed block."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Simpson blocks and midpoint Riemann sum are fixed by the dyadic mesh. Proof step 1.1 chooses one sufficiently large integer by the Archimedean property, and the finite sum argument does not require a choice function for a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The composite Simpson lemma proves a signed leading-error expansion along a prescribed dyadic sequence, not a characterization of C4 regularity by an asymptotic rate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Neither a fourth-order observed rate nor a vanishing leading coefficient is asserted to imply the C4 hypothesis or identify the fourth derivative integral."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "axioms": "No choice principle is used; the proof uses finite arithmetic and ordinary real limits.",
+        "numerical_error": "The result is asymptotic; no finite-level true-error bound follows from the indicator."
+      }
+    },
+    "thm-simpson-richardson-error-estimator-asymptotic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-composite-simpson-asymptotic-error-expansion",
+          "source_section": "Statement",
+          "quote": "Let $a<b$, let $k\\ge1$ be an integer, set $n_k=2^k$ and\n$h_k=(b-a)/n_k$, and let $Q_k=Q_S(f;a,b,n_k)$ for $f\\in C^4([a,b])$. With\n$I=\\int_a^b f(x)\\,dx$, one has\n$$I-Q_k=-\\frac{h_k^4}{180}\\int_a^b f^{(4)}(x)\\,dx+o(h_k^4)\\qquad(k\\to\\infty).$$\nHere $r_k=o(h_k^4)$ means $r_k/h_k^4\\to0$ along this sequence. The\nintegral is the Riemann integral.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-adaptive-simpson-refinement-indicator",
+          "source_section": "Definition",
+          "quote": "Let $a<b$, let $n\\ge2$ be even, and let $f$ be real-valued at the nodes of\nthe uniform grids with $n$ and $2n$ subintervals. The **coarse Simpson value**\nis $S_0=Q_S(f;a,b,n)$ and the **refined value** is\n$S_1=Q_S(f;a,b,2n)$, using [[alg-composite-simpson-rule]]. The signed\n**refinement indicator** is $(S_1-S_0)/15$ and its magnitude is\n$$\\eta_n(f;a,b):=\\frac{|S_1-S_0|}{15}.$$\n\nFor the local two-panel case $n=2$, $S_1$ is also the sum of the two\none-block Simpson values on the halves of $[a,b]$.\n\nThis definition alone is not a bound on the true error.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-of-reverse-triangle",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$\\bigl| |x| - |y| \\bigr| \\le |x - y|.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F3], the regularity hypothesis is $f\\in C^4([a,b])$. By [F1], write $E_k:=I-Q_k=ch_k^4+r_k$ where $r_k=o(h_k^4)$. Since $h_{k+1}=h_k/2$, $E_{k+1}=ch_k^4/16+o(h_k^4)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The signed difference $Q_{k+1}-Q_k=E_k-E_{k+1}$. Therefore [F2] and step 1.1 give $(Q_{k+1}-Q_k)/15=ch_k^4/16+s_k$ for some $s_k=o(h_k^4)$. By [F4], the difference between $\\eta_k=|(Q_{k+1}-Q_k)/15|$ and $|c|h_k^4/16$ is at most $|s_k|=o(h_k^4)$, so $\\eta_k=|c|h_k^4/16+o(h_k^4)$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $c\\ne0$, step 1.1 and [F4] give $|E_{k+1}|/h_k^4\\to|c|/16>0$, so $E_{k+1}\\ne0$ for all sufficiently large $k$; dividing the step 2.1 relation by $|E_{k+1}|$ then gives $\\eta_k/|E_{k+1}|\\to1$. Also $I-R_{k+1}=(16E_{k+1}-E_k)/15$, whose order-$h_k^4$ terms cancel by step 1.1, leaving $o(h_k^4)$. If $c=0$, both leading terms vanish, and these asymptotic formulas do not give a relative-error conclusion. The limit statements do not bound any finite-level error.",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement uses the nonempty interval a<b and n_k=2^k with k>=1; proof step 1.1 compares two existing adjacent dyadic levels, not an absent refinement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats c=0 and makes no relative-error claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 starts at n_1=2 and compares its n=4 refinement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 3.1 divides by the refined error only after c!=0 gives a positive scaled limit and eventual nonzero denominator; when c=0 it explicitly withholds a relative-error conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use composite Simpson rules on the closed interval [a,b], including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Richardson correction is the fixed linear combination of Q_k and Q_(k+1); its scalar little-o algebra and norm limit select no arbitrary quadrature sequence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Simpson Richardson theorem gives ratio one under a nonzero leading coefficient and explicitly denies a finite-level certificate; it does not characterize all reliable error indicators."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A ratio approaching one is not asserted to recover a nonzero fourth-derivative integral or the assumed C4 expansion, and c=0 has no converse reliability claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "axioms": "No choice principle is used; the proof uses finite arithmetic and ordinary real limits.",
+        "numerical_error": "The result is asymptotic; no finite-level true-error bound follows from the indicator."
+      }
+    },
+    "thm-adaptive-simpson-cap-termination-and-indicator-budget": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+          "source_section": "Definition",
+          "quote": "Input $a<b$, an absolute indicator tolerance $\\tau>0$, a remaining depth\n$D\\in\\mathbb N$ and a positive panel-call budget $P\\in\\mathbb N$, and a\ndeterministic evaluation routine $\\operatorname{Eval}$ that returns a finite\nreal value at a requested node or reports failure. It reports failure when a\nrequired node cannot be evaluated, including when its midpoint is\nunrepresentable in the evaluator's arithmetic. Apply the exact-real Simpson\nformulas of [[alg-composite-simpson-rule]] to the returned values;\nfloating-point rounding accuracy is not asserted.\n\nDefine the recursive call $A(u,v,d,p,t)$ for $u<v$, $d\\ge0$, $p\\ge1$ and\n$t>0$ as follows.\n\n1. Compute $m=(u+v)/2$ and the five values of $\\operatorname{Eval}$ at\n   $u,(3u+v)/4,m,(u+3v)/4,v$. On failure, return `failure` with no estimate.\n2. Compute $S_0=Q_S(f;u,v,2)$ and $S_1=Q_S(f;u,v,4)$ from the two nested\n   grids of [[def-adaptive-simpson-refinement-indicator]], and put\n   $\\eta=\\eta_2(f;u,v)=|S_1-S_0|/15$.\n3. If $\\eta\\le t$, return (`accepted`, estimate $S_1$, indicator $\\eta$).\n4. If $\\eta>t$ and either $d=0$ or $p<3$, return (`cap-reached`, estimate\n   $S_1$, indicator $\\eta$).\n5. Otherwise put $p_L=\\lfloor(p-1)/2\\rfloor$ and\n   $p_R=\\lceil(p-1)/2\\rceil$. Recursively call\n   $A(u,m,d-1,p_L,t/2)$ and $A(m,v,d-1,p_R,t/2)$. If either returns failure,\n   return failure. Otherwise return the sum of their estimates and indicators,\n   with status `cap-reached` if either child has that status and `accepted`\n   otherwise.\n\nThe public call is $A(a,b,D,P,\\tau)$. The budget counts recursive panel calls;\neach call uses at most five point evaluations. `accepted` means that the\nreturned leaf indicators sum to at most $\\tau$. Neither that status nor the\nindicator is a certified true-error statement. A cap result is an estimate\nwith explicit `cap-reached` status, not a successful tolerance claim.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-adaptive-simpson-refinement-indicator",
+          "source_section": "Definition",
+          "quote": "Let $a<b$, let $n\\ge2$ be even, and let $f$ be real-valued at the nodes of\nthe uniform grids with $n$ and $2n$ subintervals. The **coarse Simpson value**\nis $S_0=Q_S(f;a,b,n)$ and the **refined value** is\n$S_1=Q_S(f;a,b,2n)$, using [[alg-composite-simpson-rule]]. The signed\n**refinement indicator** is $(S_1-S_0)/15$ and its magnitude is\n$$\\eta_n(f;a,b):=\\frac{|S_1-S_0|}{15}.$$\n\nFor the local two-panel case $n=2$, $S_1$ is also the sum of the two\none-block Simpson values on the halves of $[a,b]$.\n\nThis definition alone is not a bound on the true error.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If $d=0$ or $p<3$, the call cannot split by [F1]. It requests at most five values and either returns failure immediately on a failed evaluation or returns its finite refined value and indicator as an accepted or cap-reached leaf. The leaf estimate is its refined Simpson value and its indicator is nonnegative by [F2]; if accepted, its indicator is at most $t$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "base",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For strong induction on positive $p$, assume [IH] the claims hold for every smaller positive panel budget. If $d>0$ and $p$ is at least $3$, [F1] gives two positive child budgets, each smaller than $p$, whose sum is $p-1$. The induction hypothesis applies to both recursive calls, so they terminate and together use at most $p-1$ panel calls; adding the parent gives at most $p$. Each call uses at most five requests, so the total is at most $5p$.",
+          "inputs": [
+            "given",
+            "F1",
+            "ih",
+            "induction",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If the call does not split, its output is a single leaf and step 1.1 gives the leaf-sum representation and, when accepted, its indicator is at most $t$. If it splits, the child panels partition the parent and [F1] adds their estimates and nonnegative indicators, so the induction hypothesis gives the leaf-sum representation. The parent is accepted in this branch only when both child results are accepted; their indicator totals are each at most $t/2$ by induction, hence their sum is at most $t$. By [F1], a cap result is either returned at a rejected terminal leaf or propagated from a child; because the tree is finite by step 2.1, following such propagation reaches a rejected leaf whose depth or panel-call cap prevents another split. No implication to true error is in [F1] or [F2].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "ih",
+            "induction",
+            "step 1.1",
+            "step 2.1",
+            "discharge-induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 has a single root leaf when the depth is zero or p<3. Statement valid inputs have P>=1, so even a nonsplitting returned tree contains its root call."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the terminal zero-indicator case for a positive local tolerance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers a single recursive panel call."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.1 permits D=0 and panel budgets1 or2, returning accepted or cap-reached after finite evaluation; any failed value request instead returns failure with no estimate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The algorithm definition queries both panel endpoints at every call."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The capped Simpson proof uses strong integer induction on the positive panel budget and prescribed left/right child budgets; its axiom-use field explicitly says no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Accepted status implies an indicator sum at most tolerance, not a necessary-and-sufficient true quadrature-error criterion; proof3.1 keeps that distinction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A true integral error below tolerance is not claimed to force accepted status; a rejected leaf may hit a cap and a failed evaluator may return no estimate."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "axioms": "No choice principle is used; the proof uses finite arithmetic and ordinary real limits.",
+        "numerical_error": "The /15 indicator is heuristic and the cap status withholds an accuracy claim."
+      }
+    },
+    "ex-adaptive-simpson-misses-narrow-feature": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+          "source_section": "Definition",
+          "quote": "Input $a<b$, an absolute indicator tolerance $\\tau>0$, a remaining depth\n$D\\in\\mathbb N$ and a positive panel-call budget $P\\in\\mathbb N$, and a\ndeterministic evaluation routine $\\operatorname{Eval}$ that returns a finite\nreal value at a requested node or reports failure. It reports failure when a\nrequired node cannot be evaluated, including when its midpoint is\nunrepresentable in the evaluator's arithmetic. Apply the exact-real Simpson\nformulas of [[alg-composite-simpson-rule]] to the returned values;\nfloating-point rounding accuracy is not asserted.\n\nDefine the recursive call $A(u,v,d,p,t)$ for $u<v$, $d\\ge0$, $p\\ge1$ and\n$t>0$ as follows.\n\n1. Compute $m=(u+v)/2$ and the five values of $\\operatorname{Eval}$ at\n   $u,(3u+v)/4,m,(u+3v)/4,v$. On failure, return `failure` with no estimate.\n2. Compute $S_0=Q_S(f;u,v,2)$ and $S_1=Q_S(f;u,v,4)$ from the two nested\n   grids of [[def-adaptive-simpson-refinement-indicator]], and put\n   $\\eta=\\eta_2(f;u,v)=|S_1-S_0|/15$.\n3. If $\\eta\\le t$, return (`accepted`, estimate $S_1$, indicator $\\eta$).\n4. If $\\eta>t$ and either $d=0$ or $p<3$, return (`cap-reached`, estimate\n   $S_1$, indicator $\\eta$).\n5. Otherwise put $p_L=\\lfloor(p-1)/2\\rfloor$ and\n   $p_R=\\lceil(p-1)/2\\rceil$. Recursively call\n   $A(u,m,d-1,p_L,t/2)$ and $A(m,v,d-1,p_R,t/2)$. If either returns failure,\n   return failure. Otherwise return the sum of their estimates and indicators,\n   with status `cap-reached` if either child has that status and `accepted`\n   otherwise.\n\nThe public call is $A(a,b,D,P,\\tau)$. The budget counts recursive panel calls;\neach call uses at most five point evaluations. `accepted` means that the\nreturned leaf indicators sum to at most $\\tau$. Neither that status nor the\nindicator is a certified true-error statement. A cap result is an estimate\nwith explicit `cap-reached` status, not a successful tolerance claim.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-adaptive-simpson-refinement-indicator",
+          "source_section": "Definition",
+          "quote": "Let $a<b$, let $n\\ge2$ be even, and let $f$ be real-valued at the nodes of\nthe uniform grids with $n$ and $2n$ subintervals. The **coarse Simpson value**\nis $S_0=Q_S(f;a,b,n)$ and the **refined value** is\n$S_1=Q_S(f;a,b,2n)$, using [[alg-composite-simpson-rule]]. The signed\n**refinement indicator** is $(S_1-S_0)/15$ and its magnitude is\n$$\\eta_n(f;a,b):=\\frac{|S_1-S_0|}{15}.$$\n\nFor the local two-panel case $n=2$, $S_1$ is also the sum of the two\none-block Simpson values on the halves of $[a,b]$.\n\nThis definition alone is not a bound on the true error.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a closed nondegenerate rectangle $Q\\subseteq\\mathbb R^m$, $m\\ge1$, is Riemann integrable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-composite-simpson-rule",
+          "source_section": "Definition",
+          "quote": "Input real endpoints $a,b$, an integer $n$, and an evaluation function $f$.\nIf $a\\ge b$ or $n<2$, return invalid-grid without evaluating $f$. For the\nremaining inputs require $f:[a,b]\\to\\mathbb R$ to be evaluable at every\npoint of $[a,b]$. If $n$ is odd, the procedure returns\ninvalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:\n\n1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of [[def-oriented-integral]],\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where [[def-oriented-integral]] earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-integral-elementary-bounds",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ satisfy\n\n$$m \\;\\le\\; f(x) \\;\\le\\; M \\qquad \\text{for every } x \\in [a,b],$$\n\nwith $m, M$ real. Then $f$ is bounded ([[def-bounded-set]]), so its Darboux sums\nand integrals are defined ([[def-darboux-sums]], [[def-darboux-integral]]), and\nfor **every** partition $P$ of $[a,b]$ ([[def-partition-and-refinement]])\n\n$$m(b-a) \\;\\le\\; L(f,P) \\;\\le\\; \\underline{\\int_a^b} f \\;\\le\\; \\overline{\\int_a^b} f \\;\\le\\; U(f,P) \\;\\le\\; M(b-a) .$$\n\nIn particular, taking $f$ to be the constant function with value $c$:\n\n$$\\int_a^b c \\;=\\; c\\,(b-a) ,$$\n\nthe constant function being integrable, with $L(f,P) = U(f,P) = c(b-a)$ for\nevery partition $P$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Every parent and child sample node is in $\\{0,1/4,1/2,3/4,1\\}$. Each node makes one factor of $f$ zero, so [F6] gives $S_0=S_1=0$ and [F2] gives indicator $0$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $0\\le\\tau$, [F1] accepts immediately, before the depth cap is relevant, and returns $S_1=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "On $[1/8,3/16]$, the five absolute factors are at least $1/8,1/16,5/16,9/16,13/16$, respectively, so $f\\ge C$ there. Since $f$ is a product of squares, $f\\ge0$ on all of $[0,1]$; each factor has absolute value at most $1$ there, so $f\\le1$ and is bounded. By [F3]–[F4], its restrictions to the three adjacent intervals determined by $1/8$ and $3/16$ are integrable. Monotonicity [F5] and the constant integral [F8] give $\\int_{1/8}^{3/16}f\\ge C/16$; monotonicity [F5] gives nonnegative integrals on the two outer intervals. Applying the two-piece identity [F7] twice therefore yields $\\int_0^1f\\ge C/16=2\\tau$. Step 2.1 gives returned estimate $0$, so the returned error satisfies $|\\int_0^1f-0|\\ge2\\tau>\\tau$, despite the accepted status.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example uses five prescribed polynomial factors and a root panel[0,1] with P=1; verification step 1.1 computes all five sample values, so zero indicator is not absence of samples."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The fixed polynomial is positive on [1/8,3/16], as proved in step 1.3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses one root call with D=0 and P=1; steps 1.1–2.1 verify it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 1.1 makes every sampled value and both Simpson estimates zero; step 3.1 still proves the exact integral is at least2tau>tau from the positive between-node interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the root endpoints among the five sampled nodes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The narrow-feature witness fixes the polynomial, exact five nodes, D=0,P=1 and explicit positive C/32 tolerance; its three-interval integral comparison introduces no selector."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This accepted but inaccurate Simpson witness refutes indicator-as-certificate, without asserting a characterization of every function missed by the five nodes."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not claim that every accepted zero-indicator panel has positive true error; the displayed polynomial and between-node lower bound supply this particular counterexample."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "axioms": "No choice principle is used; the proof uses finite arithmetic and ordinary real limits.",
+        "numerical_error": "The /15 indicator is heuristic and the cap status withholds an accuracy claim."
+      }
+    },
+    "ex-adaptive-simpson-cap-reached": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+          "source_section": "Definition",
+          "quote": "Input $a<b$, an absolute indicator tolerance $\\tau>0$, a remaining depth\n$D\\in\\mathbb N$ and a positive panel-call budget $P\\in\\mathbb N$, and a\ndeterministic evaluation routine $\\operatorname{Eval}$ that returns a finite\nreal value at a requested node or reports failure. It reports failure when a\nrequired node cannot be evaluated, including when its midpoint is\nunrepresentable in the evaluator's arithmetic. Apply the exact-real Simpson\nformulas of [[alg-composite-simpson-rule]] to the returned values;\nfloating-point rounding accuracy is not asserted.\n\nDefine the recursive call $A(u,v,d,p,t)$ for $u<v$, $d\\ge0$, $p\\ge1$ and\n$t>0$ as follows.\n\n1. Compute $m=(u+v)/2$ and the five values of $\\operatorname{Eval}$ at\n   $u,(3u+v)/4,m,(u+3v)/4,v$. On failure, return `failure` with no estimate.\n2. Compute $S_0=Q_S(f;u,v,2)$ and $S_1=Q_S(f;u,v,4)$ from the two nested\n   grids of [[def-adaptive-simpson-refinement-indicator]], and put\n   $\\eta=\\eta_2(f;u,v)=|S_1-S_0|/15$.\n3. If $\\eta\\le t$, return (`accepted`, estimate $S_1$, indicator $\\eta$).\n4. If $\\eta>t$ and either $d=0$ or $p<3$, return (`cap-reached`, estimate\n   $S_1$, indicator $\\eta$).\n5. Otherwise put $p_L=\\lfloor(p-1)/2\\rfloor$ and\n   $p_R=\\lceil(p-1)/2\\rceil$. Recursively call\n   $A(u,m,d-1,p_L,t/2)$ and $A(m,v,d-1,p_R,t/2)$. If either returns failure,\n   return failure. Otherwise return the sum of their estimates and indicators,\n   with status `cap-reached` if either child has that status and `accepted`\n   otherwise.\n\nThe public call is $A(a,b,D,P,\\tau)$. The budget counts recursive panel calls;\neach call uses at most five point evaluations. `accepted` means that the\nreturned leaf indicators sum to at most $\\tau$. Neither that status nor the\nindicator is a certified true-error statement. A cap result is an estimate\nwith explicit `cap-reached` status, not a successful tolerance claim.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-adaptive-simpson-refinement-indicator",
+          "source_section": "Definition",
+          "quote": "Let $a<b$, let $n\\ge2$ be even, and let $f$ be real-valued at the nodes of\nthe uniform grids with $n$ and $2n$ subintervals. The **coarse Simpson value**\nis $S_0=Q_S(f;a,b,n)$ and the **refined value** is\n$S_1=Q_S(f;a,b,2n)$, using [[alg-composite-simpson-rule]]. The signed\n**refinement indicator** is $(S_1-S_0)/15$ and its magnitude is\n$$\\eta_n(f;a,b):=\\frac{|S_1-S_0|}{15}.$$\n\nFor the local two-panel case $n=2$, $S_1$ is also the sum of the two\none-block Simpson values on the halves of $[a,b]$.\n\nThis definition alone is not a bound on the true error.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-composite-simpson-rule",
+          "source_section": "Definition",
+          "quote": "Input real endpoints $a,b$, an integer $n$, and an evaluation function $f$.\nIf $a\\ge b$ or $n<2$, return invalid-grid without evaluating $f$. For the\nremaining inputs require $f:[a,b]\\to\\mathbb R$ to be evaluable at every\npoint of $[a,b]$. If $n$ is odd, the procedure returns\ninvalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The endpoint values are $f(0)=f(1)=1/2501$, the midpoint value is $f(1/2)=1$, and the quarter-point values are $f(1/4)=f(3/4)=1/626$. The composite rule [F3] gives $S_0=2/3+1/7503$ and $S_1=(1/12)(2+8/626+2/2501)$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $8/626=4/313<1/75$ and $2/2501<1/1000$, $S_1<6043/36000$, while $S_0>2/3$. Therefore $S_0-S_1>17957/36000$, and the indicator exceeds $17957/540000>1/1000=\\tau$.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The indicator rejects the root, and $D=0$ prevents subdivision. By [F1], the procedure returns the refined estimate with `cap-reached` status; it makes no tolerance-success claim.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example supplies one root panel[0,1] and P=1; verification step 1.1 evaluates endpoints, midpoint and quarter points before a cap status is returned."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the indicator exceeds the positive tolerance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the single root call with D=0 and P=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 2.1 proves the indicator exceeds tau=1/1000 and step 3.1 applies D=0, so the refined value is returned as cap-reached rather than mislabeled accepted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates the endpoints, midpoint, and two quarter points."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The rational peak, exact five values, zero depth and single-call cap fully determine the finite witness; no adaptive mesh selector remains unspecified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example proves cap-reached for one fixed rational peak and budget, not an equivalence between a narrow peak and exhaustion of Simpson refinement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Cap-reached is not asserted to imply a true integral error exceeding tau; the calculation concerns the sampled indicator and the actual cap branch only."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "axioms": "No choice principle is used; the proof uses finite arithmetic and ordinary real limits.",
+        "numerical_error": "The /15 indicator is heuristic and the cap status withholds an accuracy claim."
+      }
+    },
+    "ex-adaptive-simpson-leading-error-cancellation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-composite-simpson-rule",
+          "source_section": "Definition",
+          "quote": "Input real endpoints $a,b$, an integer $n$, and an evaluation function $f$.\nIf $a\\ge b$ or $n<2$, return invalid-grid without evaluating $f$. For the\nremaining inputs require $f:[a,b]\\to\\mathbb R$ to be evaluable at every\npoint of $[a,b]$. If $n$ is odd, the procedure returns\ninvalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-adaptive-simpson-refinement-indicator",
+          "source_section": "Definition",
+          "quote": "Let $a<b$, let $n\\ge2$ be even, and let $f$ be real-valued at the nodes of\nthe uniform grids with $n$ and $2n$ subintervals. The **coarse Simpson value**\nis $S_0=Q_S(f;a,b,n)$ and the **refined value** is\n$S_1=Q_S(f;a,b,2n)$, using [[alg-composite-simpson-rule]]. The signed\n**refinement indicator** is $(S_1-S_0)/15$ and its magnitude is\n$$\\eta_n(f;a,b):=\\frac{|S_1-S_0|}{15}.$$\n\nFor the local two-panel case $n=2$, $S_1$ is also the sum of the two\none-block Simpson values on the halves of $[a,b]$.\n\nThis definition alone is not a bound on the true error.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-simpson-richardson-error-estimator-asymptotic",
+          "source_section": "Statement",
+          "quote": "Let $a<b$, $f\\in C^4([a,b])$, $n_k=2^k$ for $k\\ge1$,\n$h_k=(b-a)/n_k$, $Q_k=Q_S(f;a,b,n_k)$, and\n$c=-(1/180)\\int_a^b f^{(4)}(x)\\,dx$. Let $I=\\int_a^b f$. Then the\nrefinement indicator\n$$\\eta_k=\\frac{|Q_{k+1}-Q_k|}{15}$$\nsatisfies $\\eta_k=|c|h_k^4/16+o(h_k^4)$. If $c\\ne0$, then\n$\\eta_k/|I-Q_{k+1}|\\to1$. The Richardson-corrected value\n$R_{k+1}=Q_{k+1}+(Q_{k+1}-Q_k)/15$ satisfies\n$I-R_{k+1}=o(h_k^4)$. When $c=0$, these statements give no relative\nerror estimate for $\\eta_k$; at no finite level does $\\eta_k$ alone certify\nthe true error.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a closed nondegenerate rectangle $Q\\subseteq\\mathbb R^m$, $m\\ge1$, is Riemann integrable.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F4] and [F5], $f^{(4)}(x)=360x^2-120$ and this derivative is continuous. An antiderivative is $120x^3-120x$, so [F6]–[F7] give $\\int_0^1 f^{(4)}(x)\\,dx=0$. Hence $f\\in C^4([0,1])$ by [F8], and the leading coefficient in [F3] is zero.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "By [F4]–[F5], $x^7/7-x^5$ has derivative $f$ and $f$ is continuous, so [F6]–[F7] give the exact integral $1/7-1=-6/7$. Also $f(0)=0$, $f(1/2)=-19/64$, and $f(1)=-4$; substitution in [F1] gives $Q_{n=2}=-83/96$. The quarter-point values are $f(1/4)=-79/4096$ and $f(3/4)=-5751/4096$, so [F1] also gives $Q_{n=4}=\\frac1{12}\\left(4\\left(-\\frac{79}{4096}\\right)+2\\left(-\\frac{19}{64}\\right)+4\\left(-\\frac{5751}{4096}\\right)-4\\right)=-\\frac{5267}{6144}.$ Thus the refined error is $-6/7-Q_{n=4}=5/43008$, and the coarse error is $-6/7-Q_{n=2}=5/672$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "From [F2], $\\eta=|Q_{n=4}-Q_{n=2}|/15=1/2048$. Hence $\\eta/(5/43008)=21/5$. The nonzero refined error and zero leading coefficient show why the asymptotic /15 relation supplies no relative finite-level guarantee in the cancelled case.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Verification step 1.2 evaluates the actual n=2 and n=4 Simpson meshes on[0,1]; the zero fourth-derivative integral comes from cancellation, not an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the leading coefficient as zero exactly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 compares the first two nested grids, n=2 and n=4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 1.1 proves the leading coefficient is zero, while step 1.2 gives positive refined error5/43008; step 2.1 obtains the nonunit ratio21/5 with a nonzero denominator."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 evaluates both endpoints and every interior node in the two rules."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The polynomial x^6-5x^4 and its exact rational two-level quadrature values fix the cancellation witness; polynomial integration and finite arithmetic need no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The polynomial example exhibits one zero-leading-coefficient case with nonzero refined error; it asserts no biconditional description of leading-term cancellation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A nonunit finite-level indicator ratio is not claimed to force the leading coefficient to vanish; this witness establishes only the stated exact values."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "axioms": "No choice principle is used; the proof uses finite arithmetic and ordinary real limits.",
+        "numerical_error": "The result is asymptotic; no finite-level true-error bound follows from the indicator."
+      }
+    },
+    "thm-certified-adaptive-simpson-enclosure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-composite-simpson-rule",
+          "source_section": "Definition",
+          "quote": "Input real endpoints $a,b$, an integer $n$, and an evaluation function $f$.\nIf $a\\ge b$ or $n<2$, return invalid-grid without evaluating $f$. For the\nremaining inputs require $f:[a,b]\\to\\mathbb R$ to be evaluable at every\npoint of $[a,b]$. If $n$ is odd, the procedure returns\ninvalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-composite-simpson-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $a<b$, let $n\\ge2$ be an even integer, and put $h=(b-a)/n$. If\n$f\\in C^4([a,b])$, set $M_4=\\max_{x\\in[a,b]}|f^{(4)}(x)|$. Then the value\n$Q_S(f;a,b,n)$ of [[alg-composite-simpson-rule]] satisfies\n\n$$\\left|\\int_a^b f(x)\\,dx-Q_S(f;a,b,n)\\right|\\le\\frac{(b-a)h^4}{180}M_4.$$\n\nThe integral is the Riemann integral. This is an exact-arithmetic quadrature\nbound; evaluation and summation roundoff are not included.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "source_section": "Statement",
+          "quote": "For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosure is asserted.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-outward-rounded-interval-and-ball-operations",
+          "source_section": "Definition",
+          "quote": "For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.\n\nIf $0\\in Y$ for division, return `split-domain` with the two subdomains\n$Y\\cap(-\\infty,0)$ and $Y\\cap(0,\\infty)$, or `entire` when the caller does not\nrequest subdivision. No finite quotient interval is returned in this case.\nAn invalid square-root domain returns `domain-error` or an explicitly\nrestricted nonnegative subdomain.\n\nComplex-rectangle addition, subtraction and multiplication use\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$, applying the real interval operations to\neach component. For a rectangle $X+iY$ excluding $0$, define its reciprocal by\n$(X-iY)/(X^2+Y^2)$; the denominator interval is strictly positive because at\nleast one coordinate interval excludes zero. Division multiplies by this\nreciprocal.\n\nFor a ball $B(c,r)$, let $X_B=[\\Re c-r,\\Re c+r]$ and\n$Y_B=[\\Im c-r,\\Im c+r]$ be its coordinate projection intervals. For a real\ninterval $J$, let $M(J)=\\max(|\\inf J|,|\\sup J|)$ and let $d(J)=0$ if\n$0\\in J$, otherwise $d(J)=\\min(|\\inf J|,|\\sup J|)$. Put\n$M_B=M(X_B)+M(Y_B)$ and $m_B=\\max(d(X_B),d(Y_B))$. Then\n$|z|\\le M_B$ for every $z\\in B(c,r)$ and $|z|\\ge m_B$ for every such $z$.\nDefine ball addition and subtraction as\n$B(0,\\operatorname{ru}(M_{B_1}+M_{B_2}))$, multiplication as\n$B(0,\\operatorname{ru}(M_{B_1}M_{B_2}))$, and division as\n$B(0,\\operatorname{ru}(M_{B_1}/m_{B_2}))$ only when $m_{B_2}>0$. These\norigin-centered output balls are conservative but inclusion-isotone. If\n$m_{B_2}=0$, return `split-domain`, `entire`, or `inconclusive`; if a radius\noverlows, return `overflow`.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-intervals-rectangles-and-complex-balls",
+          "source_section": "Definition",
+          "quote": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.\n\nA **complex rectangle** is $X+iY=\\{x+iy:x\\in X,\\ y\\in Y\\}$ for real intervals\n$X,Y$. Complex addition and multiplication use\n$(x+iy)+(u+iv)=(x+u)+i(y+v)$ and\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$. For $z=x+iy$, its complex modulus is\n$|z|=\\sqrt{x^2+y^2}$, and for $z\\ne0$ its reciprocal is\n$1/z=(x-iy)/(x^2+y^2)$. A\n**complex ball** $B(c,r)$ is\n$\\{z\\in\\mathbb C:|z-c|\\le r\\}$ with dyadic complex center $c$ and dyadic\n$r\\ge0$. For any two represented sets $S,T$, the inclusion order is\n$S\\sqsubseteq T$ iff $S\\subseteq T$.\n\nThe width of a complex rectangle with coordinate widths $w_X,w_Y$ is its\nEuclidean diameter $\\sqrt{w_X^2+w_Y^2}$; the width of a ball $B(c,r)$ is its\ndiameter $2r$. Width comparisons against a dyadic tolerance can be decided by\nexact rational comparisons after squaring the nonnegative quantities.\n\nThe **range** of a real or complex function $f$ on a set $S$ is\n$f(S)=\\{f(x):x\\in S\\cap\\operatorname{dom}(f)\\}$. A finite expression DAG is a\nfinite directed acyclic graph with input nodes, constant nodes, and operation\nnodes; constants are exact dyadics or are supplied with certified enclosing\nintervals. Sharing a node means the exact same intermediate value is reused.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-dyadic-floating-point-format-and-directed-rounding",
+          "source_section": "Definition",
+          "quote": "An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.\n\nFor a real $x$ with $|x|\\le N_{\\max}$, define $\\operatorname{rd}(x)$ as the\ngreatest member of $\\mathbb F$ not exceeding $x$, and $\\operatorname{ru}(x)$ as\nthe least member of $\\mathbb F$ not less than $x$. Define\n$\\rho(x)=\\operatorname{ru}(x)-\\operatorname{rd}(x)$. For nonzero $x$ in the\nsubnormal range, define the absolute-error bound $\\epsilon_{\\rm abs}(x)=\\eta$;\nfor $2^e\\le |x|<2^{e+1}$ in the normal range, define\n$\\epsilon_{\\rm abs}(x)=2^{e-p+2}$. At finite overflow, a directed result is\nthe corresponding infinite sentinel and its error bound is $+\\infty$; the\nstatus is `overflow`. The rounding procedure reports `finite`, `subnormal`, or\n`overflow`, so no relative-error assumption is implicit.\n\nAn exact rational intermediate may be converted by comparing integer\nnumerators and denominators after clearing powers of two. A directed interval\nendpoint is the resulting greatest lower or least upper member of $\\mathbb F$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval and $f:I\\to\\mathbb R$. Put $f^{(0)}:=f$. Recursively, wherever $f^{(j)}$ is differentiable, put $f^{(j+1)}:=(f^{(j)})'$, with derivatives at endpoints understood in the one-sided sense fixed by [[def-derivative]] and [[def-one-sided-limits]].\n\nFor $k\\in\\mathbb N$, the function is **$k$-times differentiable** on $I$ if $f^{(j)}$ exists on $I$ for every $j\\le k$. It is of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on $I$ ([[def-continuity-real]]). It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.\n\nSince $0\\in\\mathbb N$ ([[def-natural-numbers]]), $C^0$ means continuity. The definitions also give $C^{k+1}\\subseteq C^k$. Existence of $f^{(k)}$ alone does not assert that $f^{(k)}$ is continuous.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:\n\n1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its\n   restrictions to $[a,c]$ and to $[c,b]$ are integrable;\n2. and in that case\n   $$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$\n3. **Oriented form.** Let $\\alpha < \\beta$ be reals, let $f : [\\alpha,\\beta] \\to\n   \\mathbb{R}$ be integrable, and let $u, v, w \\in [\\alpha,\\beta]$ be arbitrary.\n   Then, with the convention of [[def-oriented-integral]],\n   $$\\int_u^v f \\;+\\; \\int_v^w f \\;=\\; \\int_u^w f .$$\n\nClaim 3 is where [[def-oriented-integral]] earns its place: it holds for every\narrangement of the three points, including the degenerate ones, and it is the\nform used everywhere below.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "alg-certified-adaptive-simpson",
+          "source_section": "Definition",
+          "quote": "Input finite dyadic endpoints $a<b$, a positive dyadic tolerance $\\tau$, integers $D\\ge0$ and\n$P\\ge1$, and a function $f\\in C^4([a,b])$. Also supply two validated\nenclosure routines:\n\n- $V(x)$ returns a finite real interval containing the exact value $f(x)$;\n- $Y([u,v])$ returns a finite real interval containing every\n  $f^{(4)}(x)$ for $x\\in[u,v]$.\n\nIf either routine does not meet its enclosure contract, this algorithm makes\nno certification claim; soundness is a mathematical caller precondition and\ncannot be detected from samples. An explicit oracle failure or malformed or\nnon-finite interval result returns `failure`. The intervals and operations are those of\n[[def-intervals-rectangles-and-complex-balls]] and\n[[def-outward-rounded-interval-and-ball-operations]]. The function\n$\\operatorname{ru}$ is upward directed rounding from\n[[def-dyadic-floating-point-format-and-directed-rounding]]. A midpoint that is not\nexactly representable or a non-finite interval operation returns `failure`\nwith no enclosure; malformed or non-finite oracle results are covered by the\nexplicit failure rule above.\n\nDefine $A([u,v],d,p,t)$ recursively. Form the exact midpoint $m=(u+v)/2$; if\nit is not representable in the format, return `failure`. Query $V(u),V(m),V(v)$\nand let $Y([u,v])=[y_-,y_+]$. Put $M=\\max(|y_-|,|y_+|)$ and let $L=v-u$\nbe the exact difference of the dyadic endpoints. Form an outward-rounded\ninterval $W=[v,v]-[u,u]$ by interval subtraction, and compute\n$S_P:=(W/[6,6])\\bigl(V(u)+4V(m)+V(v)\\bigr)$ using outward interval\noperations. Compute $B_P=\\operatorname{ru}(ML^5/2880)$ by upward rounding the\nexact real expression; if it overflows, return `failure`. Set\n$C_P=S_P+[-B_P,B_P]$ by outward interval addition. If any interval operation\nhas a non-finite status, return `failure`. Treat the endpoints of $C_P$ as exact\ndyadic rationals and report their exact rational midpoint $q_P$ and half-width\n$r_P$; compare $r_P$ with $t$ exactly.\n\n1. If $r_P\\le t$, return (`certified`, enclosure $C_P$, estimate $q_P$,\n   error bound $r_P$).\n2. If $r_P>t$ and either $d=0$ or $p<3$, return\n   (`inconclusive`, enclosure $C_P$, estimate $q_P$, error bound $r_P$).\n3. Otherwise split at $m$, allocate\n   $p_L=\\lfloor(p-1)/2\\rfloor$ and $p_R=\\lceil(p-1)/2\\rceil$, and recurse\n   with depth $d-1$ and tolerance $t/2$ on each half. A failed child or\n   non-finite interval sum returns `failure`. Otherwise outward-add the child\n   enclosures to obtain $C$, with exact midpoint $q$ and half-width $r$;\n   return `certified` if $r\\le t$, and `inconclusive` otherwise.\n\nThe public call is $A([a,b],D,P,\\tau)$. `certified` asserts an error at most\n$r\\le\\tau$; `inconclusive` still returns a valid enclosure and bound but does\nnot assert the requested tolerance was met. The derivative enclosure routine\nis an explicit mathematical precondition, not something inferred from\nsampled values or the Simpson indicator. Outward rounding of all interval\noperations, and the separate Peano remainder bound, are essential.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-heine-borel-r",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$. Then the closed bounded interval\n$[a,b]$ ([[def-interval]]) is compact ([[def-open-cover-r]]): every family of\nopen subsets of $\\mathbb{R}$ whose union contains $[a,b]$ has a finite subfamily\nwhose union already contains $[a,b]$.\n\nThe proof is by repeated bisection. Supposing some open cover admits no finite\nsubcover, one halves the interval, keeps a half that still admits none, and\niterates; the halves shrink to a point, which the cover does reach, and a single\nmember of the cover then swallows a whole late-stage half. **The halving rule is\ncanonical**, taking the left half whenever the left half works, so the recursion\nuses [[thm-recursion]] and no choice principle.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-extreme-value-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be **nonempty** and compact\n([[def-open-cover-r]]). Then $\\sup f[K]$ and $\\inf f[K]$ exist and are\n**attained**: there are $p, q \\in K$ with\n\n$$f(q) \\;=\\; \\inf f[K] \\;\\le\\; f(x) \\;\\le\\; \\sup f[K] \\;=\\; f(p) \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, the set $f[K]$ has a maximum and a minimum\n([[def-max-min]]), namely $\\max f[K] = f(p)$ and $\\min f[K] = f(q)$.\n\n**Nonemptiness of $K$ is a hypothesis, not an oversight.** For $K = \\varnothing$\nthe set $f[K]$ is empty, and neither a supremum nor a maximum of the empty set\nexists in this library ([[def-complete-ordered-field]] supplies suprema of\nnonempty sets bounded above only).\n\n**This theorem is stated twice in this library, on purpose.** Its metric-space\ntwin is [[thm-extreme-value-metric]], proved from the cover machinery of metric\nspaces; the proof below is $\\mathbb{R}$-native, running through Heine-Borel for\n$\\mathbb{R}$ and the order-completeness of $\\mathbb{R}$, and it uses no cover\nargument beyond the one already spent in\n[[thm-continuous-image-of-a-compact-set-r]]. That the two statements are the\nsame statement in two vocabularies is proved in\n[[lem-real-and-metric-notions-agree]], later on this page.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-of-reverse-triangle",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$\\bigl| |x| - |y| \\bigr| \\le |x - y|.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix a recursive panel $[u,v]$ of length $L$ with finite oracle results. By [A1], the exact values $f(u),f((u+v)/2),f(v)$ belong to their returned intervals. The interval $W=[v,v]-[u,u]$ in [F4] contains $L=v-u$, and $[6,6]$ is an exact positive divisor. Thus the expression DAG for $S_P$ in the algorithm contains the exact $L(f)$ expression of [F1]; by [F3]–[F4], $S_P$ contains the exact Simpson value $S$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "By [A1], every value of $f^{(4)}$ on $[u,v]$ lies between $y_-$ and $y_+$; ordered endpoints [F4] imply its absolute value is at most $M=\\max(|y_-|,|y_+|)$. This $M$ is nonnegative. By [F6], the restriction of $f$ to $[u,v]$ is $C^4$ and $g:=f^{(4)}$ is continuous. For any $x,y\\in[u,v]$, [F11] gives $\\bigl||g(x)|-|g(y)|\\bigr|\\le|g(x)-g(y)|$. Fix $x_0\\in[u,v]$ and let $\\varepsilon>0$. Continuity of $g$ at $x_0$ supplies $\\delta>0$ such that $x\\in[u,v]$ and $|x-x_0|<\\delta$ imply $|g(x)-g(x_0)|<\\varepsilon$. Then [F11] gives $\\bigl||g(x)|-|g(x_0)|\\bigr|<\\varepsilon$, so $|g|$ is continuous at $x_0$. Since $x_0$ was arbitrary, $|g|$ is continuous on $[u,v]$. By [F9], $[u,v]$ is compact, and [F10] gives $M_4=\\max_{x\\in[u,v]}|g(x)|$. Since every $|g(x)|\\le M$ by [A1] and [F4], $M_4\\le M$. Applying [F2] with $n=2$ and step $h=L/2$ gives $|\\int_u^v f-S|\\le M_4L^5/2880\\le ML^5/2880$. The directed upward rounding in the algorithm makes $B_P\\ge ML^5/2880$ by [F5]. Thus the exact panel integral belongs to $S+[-B_P,B_P]$. Outward interval addition and [F3] show that it belongs to $C_P$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "F10",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "For $p=1$ or $p=2$, [F8] forbids a split, so after the finite panel calculation the call returns. For $p\\ge3$, a call either returns without splitting or splits into two adjacent halves with positive budgets $p_L,p_R<p$ and $p_L+p_R=p-1$, by [F8]. Strong induction on $p$ therefore proves termination; a split tree uses at most $1+p_L+p_R=p$ calls, so the public call uses at most $P$.",
+          "inputs": [
+            "given",
+            "F8",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The returned panels form a finite partition of $[a,b]$. Each leaf interval contains its exact panel integral by step 1.2; [F7] adds those integrals to $I$. At each internal node the outward interval sum contains the exact sum of its child interval values by [F3] and [F8]. Induction up the finite tree proves $I\\in C$.",
+          "inputs": [
+            "given",
+            "F3",
+            "F7",
+            "F8",
+            "step 1.2",
+            "step 1.3",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Since $C=[L,U]$ contains $I$, its midpoint and half-width satisfy $|I-(L+U)/2|\\le(U-L)/2$. By [F8], the algorithm returns `certified` only after the exact comparison $r\\le\\tau$; otherwise it returns `inconclusive`. An explicit oracle failure, malformed or non-finite oracle interval, or non-finite interval operation returns no finite enclosure by definition. The truth of the oracle's enclosure contract remains a hypothesis, not a runtime test.",
+          "inputs": [
+            "given",
+            "F3",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.3 treats p=1 or2 as nonsplitting root calls and every split uses positive child budgets. Proof step 2.1 therefore sums a genuine finite leaf partition, not an empty accepted tree."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 gives zero analytic Simpson remainder when the fourth-derivative bound is zero; sample enclosure widths may remain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 apply to n=2, the minimum one-panel Simpson rule."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 3.1 retains finite enclosures for both certified and inconclusive statuses but withholds any enclosure for malformed/nonfinite/failed oracle results; enclosure-oracle truth remains an input hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 encloses both endpoints and the midpoint used by the Simpson panel."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The certified Simpson result assumes supplied sound value/derivative enclosure oracles and deterministic finite budgets; its induction does not assert a choice of a successful oracle for an arbitrary integrand."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Certified status implies a sound enclosure with half-width within tau, but the theorem is not a completeness equivalence between accurate integrability and this finite interval algorithm."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Failure of a supplied oracle or an inconclusive finite enclosure is not said to disprove existence of the integral or success of another certificate."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "axioms": "No choice principle is used. The certification conclusion is conditional on sound point-value and fourth-derivative enclosure oracles.",
+        "numerical_error": "A finite enclosure is guaranteed only when both oracles are sound and all interval operations are finite. Inconclusive is not a tolerance success."
+      }
+    }
+  }
+}

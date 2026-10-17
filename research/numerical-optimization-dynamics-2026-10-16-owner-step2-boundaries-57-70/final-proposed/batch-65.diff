@@ -1,0 +1,954 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-65.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-owner-step2-boundaries-57-70/final-proposed/batch-65.proof-contracts.json
+@@ -30,8 +30,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The def-implicit-residual-and-algebraic-error-units item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "status": "checked",
++          "evidence": "The Definition forms its s-stage residual only for an actual stage vector whose component evaluation points belong to D. Its displayed stage sum is the finite tableau aggregate; the separate BE branch supplies (t,y) in D and evaluates only admissible endpoints. It asserts no existence of an admissible vector or root when that stage-domain set is empty, and no forward-error conclusion from residual size alone."
+         },
+         {
+           "case": "zero",
+@@ -56,17 +56,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The def-implicit-residual-and-algebraic-error-units item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The residual-units Definition evaluates a supplied admissible ztilde and, for stages, its supplied finite vector Y. It selects no root or member of an arbitrary family; absence of an exact root is explicitly compatible with its warning that residual size is not forward error."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The def-implicit-residual-and-algebraic-error-units item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The residual-units Definition identifies G(ztilde) as update residual and G(ztilde)/sigma for sigma>0 as derivative residual; multiplication by sigma reverses that conversion. It states no residual-to-error characterization and explicitly requires a separate inverse/stability estimate."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The def-implicit-residual-and-algebraic-error-units item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The residual-units Definition identifies G(ztilde) as update residual and G(ztilde)/sigma for sigma>0 as derivative residual; multiplication by sigma reverses that conversion. It states no residual-to-error characterization and explicitly requires a separate inverse/stability estimate."
+         }
+       ],
+       "finite_smoke": [],
+@@ -74,7 +74,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -162,7 +162,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The lem-strongly-monotone-continuous-map-is-bijective item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The strongly monotone map Statement fixes d>=1 and H on all R^d. Step 1.1 chooses a positive ball for any supplied b, and step 1.2 applies Brouwer on that nonempty closed ball. Its full-space domain cannot be empty."
+         },
+         {
+           "case": "zero",
+@@ -182,7 +182,7 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "The lem-strongly-monotone-continuous-map-is-bijective item makes no separate claim requiring a endpoints boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "Step 1.2 defines the radial projection by agreeing formulas on ||v||=R. Step 2.1 explicitly excludes a fixed point on ||x||=R using the strictly positive outward product from step 1.1; the obtained solution is interior."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -192,12 +192,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The lem-strongly-monotone-continuous-map-is-bijective item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "Strong monotonicity is a sufficient hypothesis for bijectivity and inverse Lipschitz control: step 2.1 proves onto and step 3.1 one-to-one. The Statement does not claim bijectivity implies strong monotonicity."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The lem-strongly-monotone-continuous-map-is-bijective item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "Strong monotonicity is a sufficient hypothesis for bijectivity and inverse Lipschitz control: step 2.1 proves onto and step 3.1 one-to-one. The Statement does not claim bijectivity implies strong monotonicity."
+         }
+       ],
+       "finite_smoke": [],
+@@ -205,7 +205,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -217,12 +217,12 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The def-backward-euler-step-equation item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The BE Definition supplies (t_n,y_n) in the open domain and h_n>0. An endpoint is admitted only if its evaluation point remains in D; the final sentence explicitly permits no roots on a proposed restricted branch. It does not infer an endpoint from an empty branch."
+         },
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "The def-backward-euler-step-equation item makes no separate claim requiring a zero boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The BE derivative residual divides only by h_n, assumed positive in the Definition. A zero update residual is precisely the displayed endpoint equation; no division by that residual is performed."
+         },
+         {
+           "case": "one",
+@@ -242,17 +242,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The def-backward-euler-step-equation item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The BE Definition specifies any admitted endpoint satisfying its equation and explicitly allows zero/one/several branch roots. It supplies no arbitrary simultaneous root choice and no solver selection mechanism."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The def-backward-euler-step-equation item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The BE equation and its zero update-residual form are equivalent by rearranging the Definition displayed formula G_n(z)=z-y_n-h_n f(...). This algebraic equivalence asserts no existence or uniqueness on a restricted branch."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The def-backward-euler-step-equation item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The BE equation and its zero update-residual form are equivalent by rearranging the Definition displayed formula G_n(z)=z-y_n-h_n f(...). This algebraic equivalence asserts no existence or uniqueness on a restricted branch."
+         }
+       ],
+       "finite_smoke": [],
+@@ -260,7 +260,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -271,13 +271,13 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The def-implicit-runge-kutta-stage-equations item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "status": "checked",
++          "evidence": "The Definition requires d,s>=1 and an initial (t,y) in D; therefore its tableau sums range over s>=1 stages. If the admissible stage set is empty, there is no selected solution and the conditional update is not formed. The final Definition sentence explicitly allows no, one or several solutions rather than asserting solvability."
+         },
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "The def-implicit-runge-kutta-stage-equations item makes no separate claim requiring a zero boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The implicit-RK Definition assumes h>0 before defining G(Y)/h, while zero a_ij or weights are allowed in the finite equations. A zero stage residual means the supplied admissible stage vector solves those equations; no inverse residual or coefficient is required."
+         },
+         {
+           "case": "one",
+@@ -297,17 +297,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The def-implicit-runge-kutta-stage-equations item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The RK stage Definition forms its update only when an admissible solution is selected and expressly allows no/one/several solutions. Its finite coordinate equations require no simultaneous choice from a family of branch sets."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The def-implicit-runge-kutta-stage-equations item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "For the implicit-RK Definition, G_i(Y)=0 is the same displayed stage equation after rearrangement. Stiff accuracy is a named coefficient convention, b_j=a_sj and c_s=1, not an assertion that arbitrary equations are solvable."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The def-implicit-runge-kutta-stage-equations item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "For the implicit-RK Definition, G_i(Y)=0 is the same displayed stage equation after rearrangement. Stiff accuracy is a named coefficient convention, b_j=a_sj and c_s=1, not an assertion that arbitrary equations are solvable."
+         }
+       ],
+       "finite_smoke": [],
+@@ -315,7 +315,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -327,17 +327,17 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The def-two-stage-sdirk-tableau item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The SDIRK Definition explicitly displays two rows, two weights and two abscissae; the stage family has size two and is never empty."
+         },
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "The def-two-stage-sdirk-tableau item makes no separate claim requiring a zero boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The SDIRK tableau allows its displayed a_12=0. The coefficient gamma=1-1/sqrt2 is positive as proved by the corresponding SDIRK proposition step 1.1, so the selected diagonal is not a zero-pivot assertion."
+         },
+         {
+           "case": "one",
+           "status": "not_applicable",
+-          "reason": "The def-two-stage-sdirk-tableau item makes no separate claim requiring a one boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The SDIRK Definition fixes two stages and c_2=1; a one-stage tableau is outside this named method. It still applies to a scalar vector field through the imported stage equations."
+         },
+         {
+           "case": "degenerate",
+@@ -347,22 +347,22 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "The def-two-stage-sdirk-tableau item makes no separate claim requiring a endpoints boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The SDIRK abscissae are gamma and 1, so the last stage uses the step endpoint; its final row equals b^T in the Definition. No additional stage at c=0 is required."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The def-two-stage-sdirk-tableau item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "All SDIRK coefficients are explicit algebraic values from the selected nonnegative sqrt2. The Definition makes no arbitrary tableau or nonlinear-root choice; its stage-solution semantics are delegated explicitly."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The def-two-stage-sdirk-tableau item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The SDIRK Definition lists one fixed tableau and its row-sum/final-row identities. It asserts no biconditional characterization of all order-two or L-stable methods; those properties are proved separately."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The def-two-stage-sdirk-tableau item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The SDIRK Definition lists one fixed tableau and its row-sum/final-row identities. It asserts no biconditional characterization of all order-two or L-stable methods; those properties are proved separately."
+         }
+       ],
+       "finite_smoke": [],
+@@ -370,7 +370,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -382,17 +382,17 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The def-two-stage-radau-iia-tableau item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The Radau IIA Definition supplies an explicit two-by-two A and two-element b,c; its stage index set has two members."
+         },
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "The def-two-stage-radau-iia-tableau item makes no separate claim requiring a zero boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The selected Radau entries are fixed rationals with nonzero numerical denominators 12,4,3. No division by the vector field or stage values occurs in this coefficient Definition."
+         },
+         {
+           "case": "one",
+           "status": "not_applicable",
+-          "reason": "The def-two-stage-radau-iia-tableau item makes no separate claim requiring a one boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "Radau here has exactly two stages, with last abscissa c_2=1. Scalar state dimension is allowed by the imported stage equations, but a one-stage tableau is a different method."
+         },
+         {
+           "case": "degenerate",
+@@ -402,22 +402,22 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "The def-two-stage-radau-iia-tableau item makes no separate claim requiring a endpoints boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The displayed Radau abscissae are 1/3 and 1; the final row of A equals b^T, explicitly including the endpoint stage."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The def-two-stage-radau-iia-tableau item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The Radau coefficient arrays are fixed rational tables, with no family selection. Only the imported stage Definition discusses a conditionally selected solution, and makes no solvability claim."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The def-two-stage-radau-iia-tableau item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "This Radau Definition records rational coefficients and internal/stiff-accuracy identities. It does not characterize order-three or scalar stability by an iff; those are separate proposition conclusions."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The def-two-stage-radau-iia-tableau item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "This Radau Definition records rational coefficients and internal/stiff-accuracy identities. It does not characterize order-three or scalar stability by an iff; those are separate proposition conclusions."
+         }
+       ],
+       "finite_smoke": [],
+@@ -425,7 +425,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -437,7 +437,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The def-scalar-rk-a-and-l-stability item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The scalar stability Definition uses the actual finite tableau and its identity vector; a proposed empty stage interpretation is not supplied. Its stability region may be empty for a different tableau without asserting any successful step there."
+         },
+         {
+           "case": "zero",
+@@ -447,7 +447,7 @@
+         {
+           "case": "one",
+           "status": "not_applicable",
+-          "reason": "The def-scalar-rk-a-and-l-stability item makes no separate claim requiring a one boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The stability Definition is for the scalar test equation yprime=lambda*y irrespective of tableau size. A one-stage A,b,c is included when I-zA is invertible, and no nonlinear multidimensional conclusion is stated."
+         },
+         {
+           "case": "degenerate",
+@@ -462,17 +462,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The def-scalar-rk-a-and-l-stability item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "R(z) is formed from the unique inverse of I-zA whenever invertible. No eigenvector or branch-root selection enters this scalar rational-function Definition."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The def-scalar-rk-a-and-l-stability item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The scalar Definition names A-stability by two joint predicates, no poles and |R|<=1 on the closed left half-plane; L-stability adds the specified limit. These are definitions in both readings, not an implication from a finite sample or from nonlinear contractivity."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The def-scalar-rk-a-and-l-stability item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The scalar Definition names A-stability by two joint predicates, no poles and |R|<=1 on the closed left half-plane; L-stability adds the specified limit. These are definitions in both readings, not an implication from a finite sample or from nonlinear contractivity."
+         }
+       ],
+       "finite_smoke": [],
+@@ -480,7 +480,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -596,8 +596,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The lem-small-step-implicit-rk-branch-and-residual-error item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "status": "checked",
++          "evidence": "The Statement has m,d>=1 and a closed product ball of radius R>0 about c. Step 1.1 proves that ball nonempty because c belongs to it, and completeness coordinatewise. Step 1.2 keeps the fixed-point map in that ball; step 2.1 then invokes the nonempty complete-space theorem. The displayed finite block sums are not over an empty stage list."
+         },
+         {
+           "case": "zero",
+@@ -617,7 +617,7 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "The lem-small-step-implicit-rk-branch-and-residual-error item makes no separate claim requiring a endpoints boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The local stage Statement uses a closed radius-R product ball and permits q<1 but not q=1. Step 1.2 includes equality in h||A||M<=R, while step 3.1 divides by positive 1-q. Thus the ball boundary is admitted and the contraction endpoint is excluded."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -627,12 +627,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The lem-small-step-implicit-rk-branch-and-residual-error item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "Step 2.1 explicitly states Phi(Y*)=Y* iff G(Y*)=0, by G=Y-Phi(Y). The fixed-point theorem also gives uniqueness on the stated ball. This does not characterize global solvability outside that ball."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The lem-small-step-implicit-rk-branch-and-residual-error item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "Step 2.1 explicitly states Phi(Y*)=Y* iff G(Y*)=0, by G=Y-Phi(Y). The fixed-point theorem also gives uniqueness on the stated ball. This does not characterize global solvability outside that ball."
+         }
+       ],
+       "finite_smoke": [],
+@@ -640,7 +640,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -652,7 +652,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The alg-newton-chord-implicit-residual-with-factorization-reuse item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The Newton/chord Definition requires m>=1 and an initial z_0 in U. With N=0 the correction list is empty, but chord first evaluates its residual and returns root or iteration-budget-exhausted at k=0; no factor is requested."
+         },
+         {
+           "case": "zero",
+@@ -672,22 +672,22 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "The alg-newton-chord-implicit-residual-with-factorization-reuse item makes no separate claim requiring a endpoints boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The chord Procedure compares r_k<=epsilon before the k=N budget check, so equality of residual tolerance returns root even at the cap. A correction leaving U returns invalid-trial with the last valid iterate; epsilon=0 is admitted."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The alg-newton-chord-implicit-residual-with-factorization-reuse item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "Chord factors are retained objects supplied by the terminating exact backend and reused until the scheduled refresh. The Definition prescribes each solve and status rather than making an unspecified choice among numerical corrections."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The alg-newton-chord-implicit-residual-with-factorization-reuse item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "Newton/chord status root is defined by its finite residual test; it is not an iff characterization of zero forward error or convergence. The Definition explicitly disclaims that a finite budget reaches an exact root."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The alg-newton-chord-implicit-residual-with-factorization-reuse item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "Newton/chord status root is defined by its finite residual test; it is not an iff characterization of zero forward error or convergence. The Definition explicitly disclaims that a finite budget reaches an exact root."
+         }
+       ],
+       "finite_smoke": [],
+@@ -695,7 +695,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -758,7 +758,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The thm-backward-euler-dissipative-resolvent-contraction item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The dissipative BE Statement fixes d>=1 and a continuous field on all real time-state space. Step 2.1 uses the full-space strongly-monotone supplier to give a root for every input; this differs from an empty restricted branch."
+         },
+         {
+           "case": "zero",
+@@ -783,17 +783,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The thm-backward-euler-dissipative-resolvent-contraction item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "Step 2.1 obtains the unique inverse image for each given u from a bijective map, not arbitrary root selection. The global inverse is determined pointwise by uniqueness."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The thm-backward-euler-dissipative-resolvent-contraction item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The BE resolvent theorem derives bijectivity and its 1/(1+h*mu) bound from global dissipativity. Step 1.1 establishes strong monotonicity; step 2.1 invokes its supplier. It makes no converse claiming all bijective BE maps arise from that hypothesis."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The thm-backward-euler-dissipative-resolvent-contraction item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The BE resolvent theorem derives bijectivity and its 1/(1+h*mu) bound from global dissipativity. Step 1.1 establishes strong monotonicity; step 2.1 invokes its supplier. It makes no converse claiming all bijective BE maps arise from that hypothesis."
+         }
+       ],
+       "finite_smoke": [],
+@@ -801,7 +801,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -813,12 +813,12 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The alg-implicit-stiff-time-stepper-with-consistent-starts item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The stiff-stepper Inputs require a strictly increasing grid with N>=1 and each residual solve has m_n>=1 and z_n0 in U_n. In BDF2 mode N=1 gives no later n=1,...,N-1 steps, retaining the supplied or startup-computed starter pair."
+         },
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "The alg-implicit-stiff-time-stepper-with-consistent-starts item makes no separate claim requiring a zero boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The stiff-stepper permits M_n=0 and epsilon_n=0 for a solve. Its Procedure propagates every non-root status immediately with the computed prefix, and calls a successful finite tolerance completed-with-residual-tolerances rather than exact-root completion."
+         },
+         {
+           "case": "one",
+@@ -838,17 +838,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The alg-implicit-stiff-time-stepper-with-consistent-starts item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The stiff-stepper requires domains, initial iterates, branch balls and backends as inputs. It either follows their deterministic finite solve or invokes the exact unique-root BDF2 selector; it supplies no arbitrary choice of a successful branch."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The alg-implicit-stiff-time-stepper-with-consistent-starts item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The stiff-stepper Definition specifies branches and status propagation for BE/RK/BDF2. Its order paragraph states extra theorem hypotheses and excludes inferring accuracy from root status; there is no biconditional between completed status and convergence."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The alg-implicit-stiff-time-stepper-with-consistent-starts item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The stiff-stepper Definition specifies branches and status propagation for BE/RK/BDF2. Its order paragraph states extra theorem hypotheses and excludes inferring accuracy from root status; there is no biconditional between completed status and convergence."
+         }
+       ],
+       "finite_smoke": [],
+@@ -856,7 +856,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -866,7 +866,7 @@
+           "fact": "F1",
+           "source": "def-two-stage-sdirk-tableau",
+           "source_section": "Definition",
+-          "quote": "Let $\\gamma=1-1/\\sqrt2$. The selected two-stage singly diagonally implicit Runge–Kutta method has\n\n$$A=\\begin{pmatrix}\\gamma&0\\\\1-\\gamma&\\gamma\\end{pmatrix},\\qquad b=\\begin{pmatrix}1-\\gamma\\\\\\gamma\\end{pmatrix},\\qquad c=\\begin{pmatrix}\\gamma\\\\1\\end{pmatrix}.$$\n\nApplied to $y'=f(t,y)$, its stages and update are those of [[def-implicit-runge-kutta-stage-equations]]. Both diagonal entries of $A$ equal $\\gamma$, the row sums are $c$, and the final row of $A$ is $b^\\mathsf T$.",
++          "quote": "Let $\\gamma=1-1/\\sqrt2$. The selected two-stage singly diagonally implicit Runge\u2013Kutta method has\n\n$$A=\\begin{pmatrix}\\gamma&0\\\\1-\\gamma&\\gamma\\end{pmatrix},\\qquad b=\\begin{pmatrix}1-\\gamma\\\\\\gamma\\end{pmatrix},\\qquad c=\\begin{pmatrix}\\gamma\\\\1\\end{pmatrix}.$$\n\nApplied to $y'=f(t,y)$, its stages and update are those of [[def-implicit-runge-kutta-stage-equations]]. Both diagonal entries of $A$ equal $\\gamma$, the row sums are $c$, and the final row of $A$ is $b^\\mathsf T$.",
+           "uses": [
+             "1.1",
+             "2.1",
+@@ -938,7 +938,7 @@
+         },
+         {
+           "id": "step-2-1",
+-          "claim": "To check order, augment the nonautonomous equation by the clock variable and write $X'=Q(X)$, $Q(t,y)=(1,f(t,y))$. The row-sum condition in step 1.1 makes its Runge–Kutta stage time coordinates $t+c_i h$. Writing $K_i=Q(X_i)$, the stage bound [F5] gives $X_i-X=O(h)$. The componentwise Taylor bound [F6] and the bounded derivatives [A1] then give $K_i=Q+h c_iQ'Q+O(h^2)$: indeed $X_i-X=h\\sum_j a_{ij}K_j=h c_iQ+O(h^2)$. Thus the update is $X+h(\\sum_i b_i)Q+h^2(\\sum_i b_i c_i)Q'Q+O(h^3)=X+hQ+\\frac{h^2}{2}Q'Q+O(h^3)$, which agrees with the exact Taylor expansion through degree two. Its local defect is therefore $O(h^3)$.",
++          "claim": "To check order, augment the nonautonomous equation by the clock variable and write $X'=Q(X)$, $Q(t,y)=(1,f(t,y))$. The row-sum condition in step 1.1 makes its Runge\u2013Kutta stage time coordinates $t+c_i h$. Writing $K_i=Q(X_i)$, the stage bound [F5] gives $X_i-X=O(h)$. The componentwise Taylor bound [F6] and the bounded derivatives [A1] then give $K_i=Q+h c_iQ'Q+O(h^2)$: indeed $X_i-X=h\\sum_j a_{ij}K_j=h c_iQ+O(h^2)$. Thus the update is $X+h(\\sum_i b_i)Q+h^2(\\sum_i b_i c_i)Q'Q+O(h^3)=X+hQ+\\frac{h^2}{2}Q'Q+O(h^3)$, which agrees with the exact Taylor expansion through degree two. Its local defect is therefore $O(h^3)$.",
+           "step": "2.1",
+           "inputs": [
+             "A1",
+@@ -979,7 +979,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The prop-two-stage-sdirk-order-two-and-l-stability item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The SDIRK proposition fixes its two-stage tableau and a local solution segment with an invariant stage ball. Proof 2.1 uses both stages and their row sums; its scalar rational function is independent of a possibly empty ensemble."
+         },
+         {
+           "case": "zero",
+@@ -1004,17 +1004,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The prop-two-stage-sdirk-order-two-and-l-stability item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The SDIRK local stage is the unique fixed point in the prescribed invariant ball supplied in Facts F5. Proof 2.1 computes its expansion, and no choice of another nonlinear branch is implicit."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The prop-two-stage-sdirk-order-two-and-l-stability item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The SDIRK proposition concludes order at least two and scalar L-stability for its selected gamma. Proof 2.1 derives its local defect and 3.1 its rational modulus inequality; neither conclusion is a converse characterization of all admissible tableaux."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The prop-two-stage-sdirk-order-two-and-l-stability item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The SDIRK proposition concludes order at least two and scalar L-stability for its selected gamma. Proof 2.1 derives its local defect and 3.1 its rational modulus inequality; neither conclusion is a converse characterization of all admissible tableaux."
+         }
+       ],
+       "finite_smoke": [
+@@ -1027,7 +1027,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -1138,7 +1138,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The prop-two-stage-radau-iia-order-three-and-l-stability item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The Radau proposition uses its two stated stages and a supplied local invariant-ball solution branch. Proof 1.1 checks four moments over those two entries; there is no unspecified empty stage sum."
+         },
+         {
+           "case": "zero",
+@@ -1163,17 +1163,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The prop-two-stage-radau-iia-order-three-and-l-stability item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The Radau stages are the unique fixed point from its local contraction supplier F3 in the prescribed ball. The expansion in Proof 1.2 uses that branch rather than arbitrary root selection."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The prop-two-stage-radau-iia-order-three-and-l-stability item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The Radau proposition proves its selected tableau has order at least three and scalar L-stability, through Proof 2.1 and 3.1. It does not claim those properties imply this particular tableau or a nonlinear contractivity result."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The prop-two-stage-radau-iia-order-three-and-l-stability item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The Radau proposition proves its selected tableau has order at least three and scalar L-stability, through Proof 2.1 and 3.1. It does not claim those properties imply this particular tableau or a nonlinear contractivity result."
+         }
+       ],
+       "finite_smoke": [
+@@ -1186,7 +1186,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -1206,7 +1206,7 @@
+           "fact": "F2",
+           "source": "def-implicit-residual-and-algebraic-error-units",
+           "source_section": "Definition",
+-          "quote": "Let $G:U\\to\\mathbb R^m$ be the residual map of an implicit equation, where $U\\subseteq\\mathbb R^m$ is the admissible set for the unknown vector. An exact solution is a point $z^*\\in U$ with $G(z^*)=0$.\n\nThe **update residual** at an approximate solution $\\widetilde z\\in U$ is the vector $G(\\widetilde z)$, measured in the same units as $z$. If the original equation was divided by a positive step scale $\\sigma$, then the **derivative residual** is $G(\\widetilde z)/\\sigma$, and the corresponding update residual is $\\sigma$ times that derivative residual. A residual norm is not a forward-error bound unless a separate inverse or stability estimate converts it to $\\|\\widetilde z-z^*\\|$.\n\nFor a first-order vector field $f:D\\to\\mathbb R^d$ on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$ ([[def-first-order-ode-initial-value-problem-and-solution]]), take a time $t$, input $y\\in\\mathbb R^d$, and step $h>0$ with $(t,y)\\in D$. For backward Euler, an endpoint $z$ is admissible only when $(t+h,z)\\in D$, and its update residual is\n\n$$G_{\\rm BE}(z)=z-y-hf(t+h,z),$$\n\nso the derivative residual is $G_{\\rm BE}(z)/h$.\n\nFor an $s$-stage implicit Runge–Kutta tableau $(A,b,c)$, a stage vector $Y=(Y_1,\\ldots,Y_s)$ is admissible only when $(t+c_jh,Y_j)\\in D$ for every $j$. On that admissible set, its stage update residual has blocks\n\n$$G_i(Y)=Y_i-y-h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j),\\qquad i=1,\\ldots,s.$$\n\nThe stage derivative residual is $G(Y)/h$. These conventions distinguish an equation residual from the distance to its exact root.",
++          "quote": "Let $G:U\\to\\mathbb R^m$ be the residual map of an implicit equation, where $U\\subseteq\\mathbb R^m$ is the admissible set for the unknown vector. An exact solution is a point $z^*\\in U$ with $G(z^*)=0$.\n\nThe **update residual** at an approximate solution $\\widetilde z\\in U$ is the vector $G(\\widetilde z)$, measured in the same units as $z$. If the original equation was divided by a positive step scale $\\sigma$, then the **derivative residual** is $G(\\widetilde z)/\\sigma$, and the corresponding update residual is $\\sigma$ times that derivative residual. A residual norm is not a forward-error bound unless a separate inverse or stability estimate converts it to $\\|\\widetilde z-z^*\\|$.\n\nFor a first-order vector field $f:D\\to\\mathbb R^d$ on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$ ([[def-first-order-ode-initial-value-problem-and-solution]]), take a time $t$, input $y\\in\\mathbb R^d$, and step $h>0$ with $(t,y)\\in D$. For backward Euler, an endpoint $z$ is admissible only when $(t+h,z)\\in D$, and its update residual is\n\n$$G_{\\rm BE}(z)=z-y-hf(t+h,z),$$\n\nso the derivative residual is $G_{\\rm BE}(z)/h$.\n\nFor an $s$-stage implicit Runge\u2013Kutta tableau $(A,b,c)$, a stage vector $Y=(Y_1,\\ldots,Y_s)$ is admissible only when $(t+c_jh,Y_j)\\in D$ for every $j$. On that admissible set, its stage update residual has blocks\n\n$$G_i(Y)=Y_i-y-h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j),\\qquad i=1,\\ldots,s.$$\n\nThe stage derivative residual is $G(Y)/h$. These conventions distinguish an equation residual from the distance to its exact root.",
+           "uses": [
+             "1.1",
+             "3.1"
+@@ -1261,8 +1261,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The thm-backward-euler-algebraic-update-residual-error-budget item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "status": "checked",
++          "evidence": "The Statement admits N=0. Step 3.1 explicitly establishes the base equality e_0=q^0 e_0+sum_{j=0}^{-1}q^{-j}||eta_j||=e_0, with zero residual sum and no update. Its induction then appends one residual for each positive horizon. This replaces the prior incorrect no-empty-case rationale."
+         },
+         {
+           "case": "zero",
+@@ -1287,17 +1287,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The thm-backward-euler-algebraic-update-residual-error-budget item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The exact BE path in this theorem is obtained by the unique global resolvent at each specified time, as used in step 1.1. Approximate endpoints are supplied inputs, not selections from arbitrary nonempty root families."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The thm-backward-euler-algebraic-update-residual-error-budget item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The BE residual budget theorem is an upper error inequality from the inverse Lipschitz recurrence in step 2.1, proved by induction in step 3.1. It does not characterize actual endpoint error exactly by residual magnitude."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The thm-backward-euler-algebraic-update-residual-error-budget item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The BE residual budget theorem is an upper error inequality from the inverse Lipschitz recurrence in step 2.1, proved by induction in step 3.1. It does not characterize actual endpoint error exactly by residual magnitude."
+         }
+       ],
+       "finite_smoke": [],
+@@ -1305,7 +1305,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -1455,7 +1455,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The thm-implicit-rk-global-order-with-stage-residual-control item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The implicit-RK order Statement fixes T>0,N>=1 and actual method stages in a common tube; its maximum includes n=0. Proof 3.1 starts its perturbation recurrence at d_0=0, not an empty trajectory."
+         },
+         {
+           "case": "zero",
+@@ -1470,7 +1470,7 @@
+         {
+           "case": "degenerate",
+           "status": "not_applicable",
+-          "reason": "The thm-implicit-rk-global-order-with-stage-residual-control item makes no separate claim requiring a degenerate boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "Proof 1.3 allows D=0 and obtains zero output perturbation for exact stages. The Statement retains positive h and requires hL<=1/2, same-ball exact/approximate stages and a uniform smooth tube; singular/unselected outside branches are not certified."
+         },
+         {
+           "case": "endpoints",
+@@ -1485,12 +1485,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The thm-implicit-rk-global-order-with-stage-residual-control item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The RK order theorem gives a sufficient residual/tube condition for O(h^p) error. Proof 3.1 combines stability and accumulated residual allowance; it expressly says a fixed absolute tolerance alone does not imply order, rather than asserting a converse characterization."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The thm-implicit-rk-global-order-with-stage-residual-control item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The RK order theorem gives a sufficient residual/tube condition for O(h^p) error. Proof 3.1 combines stability and accumulated residual allowance; it expressly says a fixed absolute tolerance alone does not imply order, rather than asserting a converse characterization."
+         }
+       ],
+       "finite_smoke": [
+@@ -1503,7 +1503,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -1628,13 +1628,13 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The cor-constant-step-bdf2-order-two-with-consistent-start item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "status": "checked",
++          "evidence": "The Statement family has T>0 and N>=2, with two specified starting states and a branch ball for each BDF2 step. The exact solution image y([0,T]) is nonempty. Step 1.1 sets the positive-grid ratios to one and establishes the uniform branch neighborhood; there is no empty grid or omitted startup instance."
+         },
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "The cor-constant-step-bdf2-order-two-with-consistent-start item makes no separate claim requiring a zero boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The BDF2 corollary has h=T/N>0,N>=2, so its constant step ratios are defined. Proof 2.1 allows an exact-start zero residual but divides only by positive 1-q with q<=1/2; zero starting error is covered by the O(h^2) premise."
+         },
+         {
+           "case": "one",
+@@ -1654,17 +1654,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The cor-constant-step-bdf2-order-two-with-consistent-start item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "Each BDF2 branch ball is supplied and assumed to contain a unique root for every preceding history; Proof 1.1 identifies exactly that root with its local branch. The BE startup uses its own supplied invariant ball, so no arbitrary competing-root choice is concealed."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The cor-constant-step-bdf2-order-two-with-consistent-start item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The constant-step BDF2 corollary is a sufficient convergence implication under all-history unique-root and starter bounds. Proof 1.1 specializes the variable-grid theorem to ratio one; it gives no converse from observed second-order error to branch uniqueness."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The cor-constant-step-bdf2-order-two-with-consistent-start item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The constant-step BDF2 corollary is a sufficient convergence implication under all-history unique-root and starter bounds. Proof 1.1 specializes the variable-grid theorem to ratio one; it gives no converse from observed second-order error to branch uniqueness."
+         }
+       ],
+       "finite_smoke": [
+@@ -1677,7 +1677,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -1749,7 +1749,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The ex-newton-budget-exhaustion-with-a-unique-backward-euler-root item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The zero-budget Example supplies scalar x_0=0 and its unique BE equation. Proof 2.1 evaluates G(0)=-1 before Proof 3.1 returns without corrections; the empty correction list is the exhibited boundary, not an empty initial point."
+         },
+         {
+           "case": "zero",
+@@ -1764,27 +1764,27 @@
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "The root is unique although the initial residual misses tolerance in steps 2.1–2.1."
++          "evidence": "The root is unique although the initial residual misses tolerance in steps 2.1\u20132.1."
+         },
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "The ex-newton-budget-exhaustion-with-a-unique-backward-euler-root item makes no separate claim requiring a endpoints boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "With tolerance 0.1 and N=0, Proof 2.1 obtains residual norm 1>0.1; Proof 3.1 therefore takes exhaustion rather than equality acceptance. The example does not claim what a different tolerance branch would do."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The ex-newton-budget-exhaustion-with-a-unique-backward-euler-root item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The scalar Example fixes field, start and zero budget. Unique BE existence follows from its dissipativity supplier, while no Newton correction or arbitrary root choice is made."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The ex-newton-budget-exhaustion-with-a-unique-backward-euler-root item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "This Example shows unique exact BE solvability does not force finite Newton success. Proof 2.1 proves the root and nonzero residual separately and 3.1 exhibits the failed finite status, without an iff criterion for convergence."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The ex-newton-budget-exhaustion-with-a-unique-backward-euler-root item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "This Example shows unique exact BE solvability does not force finite Newton success. Proof 2.1 proves the root and nonzero residual separately and 3.1 exhibits the failed finite status, without an iff criterion for convergence."
+         }
+       ],
+       "finite_smoke": [
+@@ -1797,7 +1797,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -1807,7 +1807,7 @@
+           "fact": "F1",
+           "source": "def-scalar-rk-a-and-l-stability",
+           "source_section": "Definition",
+-          "quote": "For a Runge–Kutta tableau $(A,b,c)$, apply its stage equations to the scalar test equation $y'=\\lambda y$, with $z=h\\lambda$. Whenever $I-zA$ is invertible, the stages satisfy $Y=(I-zA)^{-1}\\mathbf 1\\,y$, and the **scalar stability function** is\n\n$$R(z)=1+z\\,b^\\mathsf T(I-zA)^{-1}\\mathbf 1.$$\n\nThe **scalar stability region** is the set of $z\\in\\mathbb C$ for which the scalar update has $|R(z)|\\le1$. The method is **A-stable** when its rational stability function has no pole in $\\{\\operatorname{Re}z\\le0\\}$ and $|R(z)|\\le1$ throughout that closed half-plane. It is **L-stable** when it is A-stable and $R(z)\\to0$ as $|z|\\to\\infty$ with $\\operatorname{Re}z\\le0$.\n\nThese are properties of the scalar linear test equation and the tableau's rational function. They do not assert nonlinear contractivity or control of nonnormal matrix growth.",
++          "quote": "For a Runge\u2013Kutta tableau $(A,b,c)$, apply its stage equations to the scalar test equation $y'=\\lambda y$, with $z=h\\lambda$. Whenever $I-zA$ is invertible, the stages satisfy $Y=(I-zA)^{-1}\\mathbf 1\\,y$, and the **scalar stability function** is\n\n$$R(z)=1+z\\,b^\\mathsf T(I-zA)^{-1}\\mathbf 1.$$\n\nThe **scalar stability region** is the set of $z\\in\\mathbb C$ for which the scalar update has $|R(z)|\\le1$. The method is **A-stable** when its rational stability function has no pole in $\\{\\operatorname{Re}z\\le0\\}$ and $|R(z)|\\le1$ throughout that closed half-plane. It is **L-stable** when it is A-stable and $R(z)\\to0$ as $|z|\\to\\infty$ with $\\operatorname{Re}z\\le0$.\n\nThese are properties of the scalar linear test equation and the tableau's rational function. They do not assert nonlinear contractivity or control of nonnormal matrix growth.",
+           "uses": [
+             "1.1"
+           ]
+@@ -1867,7 +1867,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The ex-stiff-scalar-decay-and-trapezoid-ringing item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The ringing Example fixes one scalar mode with lambda>0 and h=100/lambda. Proof 1.1 and 2.1 evaluate four concrete factors; no average or product over an unspecified possibly empty mode family is taken."
+         },
+         {
+           "case": "zero",
+@@ -1887,22 +1887,22 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "The ex-stiff-scalar-decay-and-trapezoid-ringing item makes no separate claim requiring a endpoints boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The test point is z=-100 strictly in the left half-plane; Proof 1.1 gives trap=-49/51 and 2.1 gives the BE/SDIRK/Radau factors there. The statements remain scalar one-step calculations and do not introduce a time-endpoint or nonlinear-bound assertion."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The ex-stiff-scalar-decay-and-trapezoid-ringing item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "All factors in the ringing Example are explicit scalar rational functions at a fixed test point, with the selected fixed gamma. No eigenbasis or solution-branch selection is required."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The ex-stiff-scalar-decay-and-trapezoid-ringing item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The stiff decay Example compares particular amplification factors at z=-100. Proof 2.1 explicitly excludes a nonlinear stability comparison, so these finite values are not asserted as an iff test for L-stability."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The ex-stiff-scalar-decay-and-trapezoid-ringing item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The stiff decay Example compares particular amplification factors at z=-100. Proof 2.1 explicitly excludes a nonlinear stability comparison, so these finite values are not asserted as an iff test for L-stability."
+         }
+       ],
+       "finite_smoke": [
+@@ -1915,7 +1915,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -1976,7 +1976,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The ex-dissipative-backward-euler-residual-contraction item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The dissipative residual Example fixes scalar input1, h=2 and approximate endpoint1/3. Proof 1.1 supplies its unique full-space BE root and 2.1 computes one residual allowance; there is no absent initial or empty update sequence."
+         },
+         {
+           "case": "zero",
+@@ -2001,17 +2001,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The ex-dissipative-backward-euler-residual-contraction item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The exact scalar BE root in Proof 1.1 is unique by the global dissipativity supplier; approximate endpoint1/3 is given, not selected from a family. Proof 2.1 needs no explicit choice of that root to compute its bound."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The ex-dissipative-backward-euler-residual-contraction item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The Example derives the one-sided error allowance2/81 from residual2/27 and q=1/3 in Proof 2.1. It does not equate the allowance with actual error or claim a converse residual criterion."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The ex-dissipative-backward-euler-residual-contraction item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The Example derives the one-sided error allowance2/81 from residual2/27 and q=1/3 in Proof 2.1. It does not equate the allowance with actual error or claim a converse residual criterion."
+         }
+       ],
+       "finite_smoke": [
+@@ -2024,7 +2024,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     },
+@@ -2034,7 +2034,7 @@
+           "fact": "F1",
+           "source": "def-implicit-residual-and-algebraic-error-units",
+           "source_section": "Definition",
+-          "quote": "Let $G:U\\to\\mathbb R^m$ be the residual map of an implicit equation, where $U\\subseteq\\mathbb R^m$ is the admissible set for the unknown vector. An exact solution is a point $z^*\\in U$ with $G(z^*)=0$.\n\nThe **update residual** at an approximate solution $\\widetilde z\\in U$ is the vector $G(\\widetilde z)$, measured in the same units as $z$. If the original equation was divided by a positive step scale $\\sigma$, then the **derivative residual** is $G(\\widetilde z)/\\sigma$, and the corresponding update residual is $\\sigma$ times that derivative residual. A residual norm is not a forward-error bound unless a separate inverse or stability estimate converts it to $\\|\\widetilde z-z^*\\|$.\n\nFor a first-order vector field $f:D\\to\\mathbb R^d$ on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$ ([[def-first-order-ode-initial-value-problem-and-solution]]), take a time $t$, input $y\\in\\mathbb R^d$, and step $h>0$ with $(t,y)\\in D$. For backward Euler, an endpoint $z$ is admissible only when $(t+h,z)\\in D$, and its update residual is\n\n$$G_{\\rm BE}(z)=z-y-hf(t+h,z),$$\n\nso the derivative residual is $G_{\\rm BE}(z)/h$.\n\nFor an $s$-stage implicit Runge–Kutta tableau $(A,b,c)$, a stage vector $Y=(Y_1,\\ldots,Y_s)$ is admissible only when $(t+c_jh,Y_j)\\in D$ for every $j$. On that admissible set, its stage update residual has blocks\n\n$$G_i(Y)=Y_i-y-h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j),\\qquad i=1,\\ldots,s.$$\n\nThe stage derivative residual is $G(Y)/h$. These conventions distinguish an equation residual from the distance to its exact root.",
++          "quote": "Let $G:U\\to\\mathbb R^m$ be the residual map of an implicit equation, where $U\\subseteq\\mathbb R^m$ is the admissible set for the unknown vector. An exact solution is a point $z^*\\in U$ with $G(z^*)=0$.\n\nThe **update residual** at an approximate solution $\\widetilde z\\in U$ is the vector $G(\\widetilde z)$, measured in the same units as $z$. If the original equation was divided by a positive step scale $\\sigma$, then the **derivative residual** is $G(\\widetilde z)/\\sigma$, and the corresponding update residual is $\\sigma$ times that derivative residual. A residual norm is not a forward-error bound unless a separate inverse or stability estimate converts it to $\\|\\widetilde z-z^*\\|$.\n\nFor a first-order vector field $f:D\\to\\mathbb R^d$ on an open time-state domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$ ([[def-first-order-ode-initial-value-problem-and-solution]]), take a time $t$, input $y\\in\\mathbb R^d$, and step $h>0$ with $(t,y)\\in D$. For backward Euler, an endpoint $z$ is admissible only when $(t+h,z)\\in D$, and its update residual is\n\n$$G_{\\rm BE}(z)=z-y-hf(t+h,z),$$\n\nso the derivative residual is $G_{\\rm BE}(z)/h$.\n\nFor an $s$-stage implicit Runge\u2013Kutta tableau $(A,b,c)$, a stage vector $Y=(Y_1,\\ldots,Y_s)$ is admissible only when $(t+c_jh,Y_j)\\in D$ for every $j$. On that admissible set, its stage update residual has blocks\n\n$$G_i(Y)=Y_i-y-h\\sum_{j=1}^s a_{ij}f(t+c_jh,Y_j),\\qquad i=1,\\ldots,s.$$\n\nThe stage derivative residual is $G(Y)/h$. These conventions distinguish an equation residual from the distance to its exact root.",
+           "uses": [
+             "1.1",
+             "1.2"
+@@ -2055,7 +2055,7 @@
+           "fact": "F3",
+           "source": "alg-implicit-stiff-time-stepper-with-consistent-starts",
+           "source_section": "Definition",
+-          "quote": "**Inputs.** Take a finite strictly increasing time grid $t_0<\\cdots<t_N$, $N\\ge1$, a vector field $f$ defined at every attempted evaluation, a method selector in {BE, the selected two-stage SDIRK, two-stage Radau IIA, variable-step BDF2}, and an initial state $Y_0$. For every finite residual solve, including each BE startup, Runge–Kutta stage solve and finite-solve BDF2 step, require that its residual is $C^1$ in the sense of [[def-c-one-map-and-local-inverse]] and supply an admissible open residual domain $U_n\\subseteq\\mathbb R^{m_n}$ with $m_n\\ge1$, an initial iterate $z_{n,0}\\in U_n$, tolerance $\\varepsilon_n\\ge0$, correction budget $M_n\\in\\mathbb N_0$, Newton or chord mode, refresh period $q_n\\ge1$, and a terminating linear-system backend. Supply the exact residual derivative matrix whenever the selected solver requests a Jacobian; residual/Jacobian evaluations and domain tests are returning primitives. These per-call open domains are distinct from closed BDF2 root-selection balls; if a finite-solve BDF2 iterate is to remain on the selected branch, require its open residual domain to be contained in that branch ball. In chord mode that backend must satisfy the exact-solve interface of [[alg-newton-chord-implicit-residual-with-factorization-reuse]]. For BDF2 supply $Y_1$, or select a BE startup and give that solve its own domain, initial iterate, tolerance, budget, mode, refresh period, and admissible backend. Also supply a closed BDF2 branch ball for each later BDF2 step.\n\n**Procedure.** For BE, form the endpoint residual of [[def-backward-euler-step-equation]]. For SDIRK or Radau IIA, form the stage residual of [[def-implicit-runge-kutta-stage-equations]] with the selected tableau and update by its formula. Call [[alg-newton-chord-implicit-residual-with-factorization-reuse]] for each finite solve. If it returns `root`, store the returned endpoint or stages, update the state, and record the returned residual norm and solver work; this status means only that the tolerance was met. On any other status, return immediately with the computed prefix, residual norm when available, and work log. An evaluation failure, singular Jacobian, invalid trial, or exhausted correction budget therefore cannot be reported as a successful step.\n\nFor an exact-root BDF2 run, call [[alg-variable-step-bdf2-with-selected-implicit-branch]] on the supplied starter pair for steps $n=1,\\ldots,N-1$ with the supplied branch balls; it returns a computed prefix and `completed`, `no-root`, `ambiguous-branch`, or `evaluation-failure`. In a finite-solve BDF2 run, use the same branch balls for steps $n=1,\\ldots,N-1$ and form the unscaled residual\n$$G_n(Z)=(1+2r_n)Z-(1+r_n)^2Y_n+r_n^2Y_{n-1}-h_n(1+r_n)f(t_{n+1},Z),\\qquad r_n=h_n/h_{n-1}.$$\nCall the finite solver with this $C^1$ residual $G_n$, its supplied open domain $U_n$, initial iterate $z_{n,0}$, tolerance $\\varepsilon_n$, correction budget $M_n$, mode, refresh period $q_n$, and backend; after a `root` status, store its approximate iterate and continue, labelling the run `completed-with-residual-tolerances` only after every requested step returns `root`. A finite residual status does not establish the exact-root completion of the BDF2 branch algorithm.\n\nFor BDF2, the order guarantee in [[thm-variable-step-bdf2-order-two-under-ratio-bound]] requires its smoothness, ratio, tube, unique-root, and $O(H^2)$ starter hypotheses. The exact-start BE estimate and branch conditions are proved in [[cor-constant-step-bdf2-order-two-with-consistent-start]]; a finite-tolerance startup must separately meet that result's starter error budget. For any method, a forward-error claim requires a separate residual-to-error estimate such as [[lem-small-step-implicit-rk-branch-and-residual-error]], [[thm-backward-euler-algebraic-update-residual-error-budget]] for BE/RK. The BDF2 order theorem concerns exact selected roots; it is not a residual-to-error bound for finite-solve BDF2 output, which requires its own additional stability and accumulated residual-error analysis.\n\n**Work record.** Count every Jacobian assembly and factorization attempt at a refresh, every linear solve, and, for dense LU, each correction's forward and backward triangular solve. Reuse a chord factorization only for its declared refresh period. Sparse cost depends on the actual stage matrix and backend; this procedure assigns no sparse complexity bound. No general Newton convergence or forward-accuracy claim is part of the algorithm.",
++          "quote": "**Inputs.** Take a finite strictly increasing time grid $t_0<\\cdots<t_N$, $N\\ge1$, a vector field $f$ defined at every attempted evaluation, a method selector in {BE, the selected two-stage SDIRK, two-stage Radau IIA, variable-step BDF2}, and an initial state $Y_0$. For every finite residual solve, including each BE startup, Runge\u2013Kutta stage solve and finite-solve BDF2 step, require that its residual is $C^1$ in the sense of [[def-c-one-map-and-local-inverse]] and supply an admissible open residual domain $U_n\\subseteq\\mathbb R^{m_n}$ with $m_n\\ge1$, an initial iterate $z_{n,0}\\in U_n$, tolerance $\\varepsilon_n\\ge0$, correction budget $M_n\\in\\mathbb N_0$, Newton or chord mode, refresh period $q_n\\ge1$, and a terminating linear-system backend. Supply the exact residual derivative matrix whenever the selected solver requests a Jacobian; residual/Jacobian evaluations and domain tests are returning primitives. These per-call open domains are distinct from closed BDF2 root-selection balls; if a finite-solve BDF2 iterate is to remain on the selected branch, require its open residual domain to be contained in that branch ball. In chord mode that backend must satisfy the exact-solve interface of [[alg-newton-chord-implicit-residual-with-factorization-reuse]]. For BDF2 supply $Y_1$, or select a BE startup and give that solve its own domain, initial iterate, tolerance, budget, mode, refresh period, and admissible backend. Also supply a closed BDF2 branch ball for each later BDF2 step.\n\n**Procedure.** For BE, form the endpoint residual of [[def-backward-euler-step-equation]]. For SDIRK or Radau IIA, form the stage residual of [[def-implicit-runge-kutta-stage-equations]] with the selected tableau and update by its formula. Call [[alg-newton-chord-implicit-residual-with-factorization-reuse]] for each finite solve. If it returns `root`, store the returned endpoint or stages, update the state, and record the returned residual norm and solver work; this status means only that the tolerance was met. On any other status, return immediately with the computed prefix, residual norm when available, and work log. An evaluation failure, singular Jacobian, invalid trial, or exhausted correction budget therefore cannot be reported as a successful step.\n\nFor an exact-root BDF2 run, call [[alg-variable-step-bdf2-with-selected-implicit-branch]] on the supplied starter pair for steps $n=1,\\ldots,N-1$ with the supplied branch balls; it returns a computed prefix and `completed`, `no-root`, `ambiguous-branch`, or `evaluation-failure`. In a finite-solve BDF2 run, use the same branch balls for steps $n=1,\\ldots,N-1$ and form the unscaled residual\n$$G_n(Z)=(1+2r_n)Z-(1+r_n)^2Y_n+r_n^2Y_{n-1}-h_n(1+r_n)f(t_{n+1},Z),\\qquad r_n=h_n/h_{n-1}.$$\nCall the finite solver with this $C^1$ residual $G_n$, its supplied open domain $U_n$, initial iterate $z_{n,0}$, tolerance $\\varepsilon_n$, correction budget $M_n$, mode, refresh period $q_n$, and backend; after a `root` status, store its approximate iterate and continue, labelling the run `completed-with-residual-tolerances` only after every requested step returns `root`. A finite residual status does not establish the exact-root completion of the BDF2 branch algorithm.\n\nFor BDF2, the order guarantee in [[thm-variable-step-bdf2-order-two-under-ratio-bound]] requires its smoothness, ratio, tube, unique-root, and $O(H^2)$ starter hypotheses. The exact-start BE estimate and branch conditions are proved in [[cor-constant-step-bdf2-order-two-with-consistent-start]]; a finite-tolerance startup must separately meet that result's starter error budget. For any method, a forward-error claim requires a separate residual-to-error estimate such as [[lem-small-step-implicit-rk-branch-and-residual-error]], [[thm-backward-euler-algebraic-update-residual-error-budget]] for BE/RK. The BDF2 order theorem concerns exact selected roots; it is not a residual-to-error bound for finite-solve BDF2 output, which requires its own additional stability and accumulated residual-error analysis.\n\n**Work record.** Count every Jacobian assembly and factorization attempt at a refresh, every linear solve, and, for dense LU, each correction's forward and backward triangular solve. Reuse a chord factorization only for its declared refresh period. Sparse cost depends on the actual stage matrix and backend; this procedure assigns no sparse complexity bound. No general Newton convergence or forward-accuracy claim is part of the algorithm.",
+           "uses": [
+             "2.1",
+             "3.1"
+@@ -2140,12 +2140,12 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The ex-robertson-reaction-system-newton-work item makes no separate claim requiring a empty boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The Robertson Example supplies three species and an initial vector, with positive Newton/chord budgets12 and8. Verification 1.2 evaluates the initial residual before any correction, and 2.1\u20133.1 record nonempty correction traces."
+         },
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "The ex-robertson-reaction-system-newton-work item makes no separate claim requiring a zero boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "Verification 1.2 explicitly has initial third coordinate zero and residual third coordinate zero, while the full Euclidean residual exceeds tolerance. Verification 3.1 permits negative intermediate species because its numerical domain is R^3, not a positivity-constrained chemistry branch."
+         },
+         {
+           "case": "one",
+@@ -2165,17 +2165,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The ex-robertson-reaction-system-newton-work item makes no separate claim requiring a nonempty-choice boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "Robertson uses the prescribed refreshed/frozen Jacobians and partial-pivot binary64 elimination, with declared work counts. The numerical record is not a selection theorem for exact roots, chemical invariants or arbitrary correction backends."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The ex-robertson-reaction-system-newton-work item makes no separate claim requiring a iff-forward boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The Robertson record states finite implementation-only statuses and work counts, not a mathematical solver equivalence: its Example explicitly says binary64 elimination does not meet the exact-solve backend contract. Verification 2.1 and 3.1 support only those recorded traces."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The ex-robertson-reaction-system-newton-work item makes no separate claim requiring a iff-reverse boundary argument; its stated domain and conclusions are unchanged at that boundary."
++          "reason": "The Robertson record states finite implementation-only statuses and work counts, not a mathematical solver equivalence: its Example explicitly says binary64 elimination does not meet the exact-solve backend contract. Verification 2.1 and 3.1 support only those recorded traces."
+         }
+       ],
+       "finite_smoke": [
+@@ -2192,7 +2192,7 @@
+       "axiom_note": "No choice principle or additional axiom is used. Each invoked theorem is a declared dependency and is cited at the proof step where it is used.",
+       "risk_review": {
+         "status": "complete",
+-        "reviewer": "batch 65 author — not independent approval",
++        "reviewer": "batch 65 author \u2014 not independent approval",
+         "notes": "Author pass checked scope, declared hypotheses, supplier links, exact proof-step mappings, and standard boundary dispositions."
+       }
+     }

@@ -1,0 +1,310 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "85",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-sqp-second-order-correction",
+      "model": "gpt-6-luna",
+      "context_sha256": "21648779b10543458e5a13ad2494eee7dcfd05beaf0c2c10ee45e2b03ff92607",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The correction formula is mathematically sound, but its general minimum-norm justification was embedded in the algorithm; the later residual-order theorem cites that embedded proof and adds smoothness hypotheses. Removed the algorithm proof and declared the existing published full-row-rank pseudoinverse formula and minimum-norm least-squares theorem as suppliers. For d=-c_A(x+p), AA^T is invertible, A(A^T(AA^T)^-1 d)=d and the supplied pseudoinverse theorem gives the unique minimum-norm solution. The r=0 branch remains the zero correction. No Definition text changed and no new prerequisite is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-sqp-l1-exact-penalty-merit",
+      "model": "gpt-6-luna",
+      "context_sha256": "4b17768c8069d75c865cdf218755c315877e195853934192acd4cab9da1f76e2",
+      "outcome": "false_positive",
+      "reason": "The Definition calls this the nondifferentiable L1 merit function for rho>0 and explicitly disclaims positivity, acceptance and convergence. It asserts no local or global exactness theorem and no equivalence of minimizers for arbitrary rho. The witness f(x)=-x, h(x)=x, 0<rho<1 correctly disproves such an additional theorem, but contradicts none of the displayed definitions. D_rho is exactly the negative linear objective-plus-penalty model change, with the g<=0 positive-part convention. The title names the standard exact-penalty family, not an unconditional exactness assertion; the item is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+      "model": "gpt-6-luna",
+      "context_sha256": "d1dbf347ed36703aabd6a6df75c10994db4bc07d8c97c2b099d2496589fe26a3",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The supplier defines row order but does not assert independence. Corrected F1 to attribute independence to the explicit full-row-rank hypothesis A1. The kernel proof already uses precisely the Statement hypotheses: Az=0 and z^THz=0 force z=0, then injectivity of A^T forces mu=0. The r=0 case reduces to positive definite H, and a zero-dimensional matrix has trivial kernel. This was a nonfatal citation-description defect, with unchanged Statement and proof.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-sqp-merit-globalization-with-finite-budgets",
+      "model": "gpt-6-luna",
+      "context_sha256": "190fd6de4957237c4a49edd273afcf5f67610c4c22b956a0fbe4d0c4584ee52c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The SOC supplier returns displacement d=p+w, not correction w. The caller previously tested x+p+d, adding p twice. For h(z)=z-1, f(z)=z^2/2, x=0, B=1, rho=2 and sigma=1/4, p=1 and w=0; intended merit at 1 is 1/2<=3/2, whereas the literal old candidate 2 has merit 4. Definition step 2 now tests and returns x+d, and F3 accurately names the returned displacement. Rank, domain, predicted decrease, multiplier records, finite caps and failure branches are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+      "model": "gpt-6-luna",
+      "context_sha256": "81441c150f46123e667f2d230f51ce243a23467f553cc6edcf4ddae6f6268c17",
+      "outcome": "false_positive",
+      "reason": "The current computed-QR theorem no longer assumes the distinct conditional-QR premise named in the rejection. Its actual supplier thm-scaled-householder-qr-backward-stability proves QR and stored-reflector-vector bounds directly from the local kappa_r lemma by norm induction and orthogonal transport. The KKT procedure calls exactly those real active-column steps and separate-vector updates; full rank, Nu<1 and gamma_(N+3)<1/8 meet the current theorem hypotheses. Successful back substitution supplies nonzero pivots and the triangular perturbation. With square orthogonal Q, Delta_K=Delta_Q+Q Delta_R gives the second residual bound; the rounded-residual lemma gives the first for the same exactly admitted K,b. Their minimum is valid; no perturbed-system uniqueness assumption is needed. The old conditional-premise objection does not apply to the current supplier chain, and this item is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-sqp-merit-globalization-finite-budget-status",
+      "model": "gpt-6-luna",
+      "context_sha256": "c67637368c928217d6f87e18b387da50fc9a65b10eb70c2b754bb5ff82bddd59",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Proof 1.1 attributed a 2^m subset bound to F1, although F1 describes only globalization loops and never defines m. The finite QP theorem already exists locally and proves termination of the exact initial call; added that theorem as dep/F2 and cited it at the actual use, eliminating the undefined m. Also declared SOC as dep/F3 and checked that each call is a single residual evaluation with finite-dimensional rank/solve operations or a failure/zero-row branch. The remaining R(1+J_max) bound, mutually exclusive flags, accepted points and full multiplier records are correct. This is a nonfatal missing direct citation, repaired without changing the Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-sqp-second-order-correction",
+      "disposition": "repaired",
+      "post_sha256": "872bf3bf8c0686424eb6891a79086277c13ba28c21bd1443dff0ac7163f291f3",
+      "review_context_sha256": "1ccad012711c2417e42e179af83b3abfe59b5f0ce896974d5d7a96d510b349d0",
+      "reason": "Removed the embedded minimum-norm proof, retained the identical Definition and declared the published full-row-rank pseudoinverse formula and minimum-norm least-squares theorem. These establish the correction characterization for d=-c_A(x+p); the zero-row branch is explicit. No new item is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-sqp-l1-exact-penalty-merit",
+      "disposition": "unaffected",
+      "post_sha256": "cffb3cc4f85ae88a3bf9c1a79fdd551e2db1d4a00a1e76c20c3f8c14badb72a2",
+      "review_context_sha256": "d42566e6a1ed7e93fb9ff5863754b220b92000c6e3eddaeb2caa4b6e8e45dce2",
+      "reason": "Unchanged: the Definition specifies the L1 merit family and predicted-decrease/Armijo formulas, without claiming exactness for every positive penalty. The proposed small-penalty counterexample does not refute any stated claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+      "disposition": "repaired",
+      "post_sha256": "076545deab14c3a763b796881fcc9c96ab1a93ee5f27188be9252fcadc83891d",
+      "review_context_sha256": "8e1e124ab094a426b2cfae9c96c21f27d9b25bc921d117b6e66b6b7203c7666c",
+      "reason": "Corrected F1 to distinguish the supplier row-order convention from the Statement full-row-rank assumption. The unchanged kernel proof establishes nonsingularity, including r=0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-sqp-merit-globalization-with-finite-budgets",
+      "disposition": "repaired",
+      "post_sha256": "4a5dbf487b1fca782b7d37b38a26f6fe5f9abca3e68949631f0f1fd5dfe7cb6c",
+      "review_context_sha256": "d2d66f5fd30adc307d142419efc513b888328e2a753497f04e15c3fe559548ff",
+      "reason": "Definition step 2 now interprets the SOC return as displacement d=p+w and tests/returns x+d. Checked independent selected rows, domain guards, flags, finite loops and full multiplier records. The exact-rational witness distinguishes this from the former double addition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+      "disposition": "unaffected",
+      "post_sha256": "28aefe0a671edd8e4cbba8b0dac66f9379071318b4c4456957283eefb54765c3",
+      "review_context_sha256": "2660107c4cbbb0725a8d1884553f4952542a3ea1af7ea2c12117824c953de8df",
+      "reason": "Unchanged: the current scaled-QR theorem proves the needed matrix and stored-reflector-vector perturbation bounds directly from kappa_r. The actual calls meet those hypotheses. Square orthogonality and rounded triangular substitution yield the second residual bound, and the rounded-residual lemma yields the first.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-sqp-merit-globalization-finite-budget-status",
+      "disposition": "repaired",
+      "post_sha256": "95fc072ee3309e61717d744d3e596edf74d34b2c48e10ddd7d93ce50f62bfe45",
+      "review_context_sha256": "980f3ada4505e8a287812e7eac9e124388b7b8c0fd05a1ad1fbc81520721a0b1",
+      "reason": "Added the existing finite exact-QP theorem as F2 and the SOC procedure as F3, with direct deps, eliminating the undefined subset-count parameter and misattributed premise. Checked termination of subcalls, the R(1+J_max) test bound, flag exclusivity and accepted-record fields. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-sqp-merit-globalization-finite-budget-status",
+    "ex-sqp-maratos-effect-and-second-order-correction",
+    "alg-ctrl1-finite-budget-transcription-solver-dispatch"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-sqp-second-order-correction",
+      "severity": "nonfatal",
+      "locus": "proof-step",
+      "finding": "Removed the embedded minimum-norm proof, retained the identical Definition and declared the published full-row-rank pseudoinverse formula and minimum-norm least-squares theorem. These establish the correction characterization for d=-c_A(x+p); the zero-row branch is explicit. No new item is needed.",
+      "status": "fixed",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u85.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "finding": "Corrected F1 to distinguish the supplier row-order convention from the Statement full-row-rank assumption. The unchanged kernel proof establishes nonsingularity, including r=0.",
+      "status": "fixed",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u85.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-sqp-merit-globalization-with-finite-budgets",
+      "severity": "fatal",
+      "locus": "statement",
+      "finding": "Definition step 2 now interprets the SOC return as displacement d=p+w and tests/returns x+d. Checked independent selected rows, domain guards, flags, finite loops and full multiplier records. The exact-rational witness distinguishes this from the former double addition.",
+      "status": "fixed",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u85.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-sqp-merit-globalization-finite-budget-status",
+      "severity": "nonfatal",
+      "locus": "proof-step",
+      "finding": "Added the existing finite exact-QP theorem as F2 and the SOC procedure as F3, with direct deps, eliminating the undefined subset-count parameter and misattributed premise. Checked termination of subcalls, the R(1+J_max) test bound, flag exclusivity and accepted-record fields. Statement unchanged.",
+      "status": "fixed",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u85.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "scope": "All six assigned draft items belong to the frozen frontier and current batch-85 manifest. Four item guards changed; the L1 and QR items are unchanged. No items were created, no published items or shared ledgers were edited, and no judgments or certificates were written.",
+    "property_suppliers": [
+      "items/prop-full-row-rank-pseudoinverse-formula.md: Statement and complete Proof",
+      "items/thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution.md: Statement and complete Proof"
+    ],
+    "qr_supplier_chain": [
+      "items/lem-scaled-householder-step-meets-local-backward-error-premise.md: complete Statement, Proof and final Remarks",
+      "items/thm-scaled-householder-qr-backward-stability.md: complete Statement and Proof",
+      "items/thm-computed-full-rank-least-squares-backward-stability.md: complete Statement and Proof",
+      "items/lem-rounded-linear-and-normal-residual-certificates.md: complete Statement and Proof",
+      "items/alg-scaled-householder-reflector-formation-and-application.md: exact Definition",
+      "items/lem-rounded-triangular-substitution-componentwise-backward-error.md: Statement"
+    ],
+    "interface_comparison": [
+      {
+        "id": "alg-sqp-second-order-correction",
+        "item_changed": true,
+        "statement_or_definition_changed": false
+      },
+      {
+        "id": "def-sqp-l1-exact-penalty-merit",
+        "item_changed": false,
+        "statement_or_definition_changed": false
+      },
+      {
+        "id": "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+        "item_changed": true,
+        "statement_or_definition_changed": false
+      },
+      {
+        "id": "alg-sqp-merit-globalization-with-finite-budgets",
+        "item_changed": true,
+        "statement_or_definition_changed": true
+      },
+      {
+        "id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+        "item_changed": false,
+        "statement_or_definition_changed": false
+      },
+      {
+        "id": "thm-sqp-merit-globalization-finite-budget-status",
+        "item_changed": true,
+        "statement_or_definition_changed": false
+      }
+    ],
+    "interface_event": {
+      "id": "alg-sqp-merit-globalization-with-finite-budgets",
+      "interface_changed": true,
+      "definition_change": "Definition step 2 replaces the returned correction w with corrected displacement d, and every SOC candidate x+p+w with x+d.",
+      "consumer_uses": [
+        {
+          "id": "thm-sqp-merit-globalization-finite-budget-status",
+          "path": "items/thm-sqp-merit-globalization-finite-budget-status.md",
+          "affected_use": "F1 and proof 2.1 count one optional SOC test per positive-prediction attempt, and the Statement describes accepted points and multiplier records.",
+          "disposition": "The candidate formula repair preserves those counts and record fields. Assigned proof citation repair and current F1 contract quote synchronization are complete; Statement remains unchanged."
+        },
+        {
+          "id": "ex-sqp-maratos-effect-and-second-order-correction",
+          "path": "items/ex-sqp-maratos-effect-and-second-order-correction.md",
+          "affected_use": "F5 and proof 3.1 invoke the full SOC Armijo test on the point x+p+w explicitly computed in proof 1.2.",
+          "disposition": "Unchanged and sound: the returned displacement d=p+w now makes the caller test exactly the point used in the example. No consumer edit necessary.",
+          "metadata_followup": {
+            "path": "research/numerical-optimization-dynamics-2026-10-16-batch-85.proof-contracts.json",
+            "affected_use": "contracts.ex-sqp-maratos-effect-and-second-order-correction.citations fact F5 quotes the supplier Definition in full and still contains its prior correction-vector caller text.",
+            "minimality": "Refresh only this exact citation quote to the current supplier Definition in the ordinary frontier consumer-owner pass; the example Statement and proof are already mathematically sound. This unassigned consumer entry was not edited."
+          }
+        },
+        {
+          "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+          "path": "items/alg-ctrl1-finite-budget-transcription-solver-dispatch.md",
+          "affected_use": "Definition SQP merit branch uses the actual returned accepted point z^+, including SOC, and full QP multipliers to update the entire state.",
+          "disposition": "Unchanged and sound: the consumer uses the returned point directly and does not reconstruct it or add p. No consumer edit necessary."
+        }
+      ],
+      "page_use": {
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/sqp-active-set-and-augmented-lagrangian-methods.md",
+        "affected_use": "Globalization summary describes finite penalty/backtracking budgets, retained row support, accepted trial points and QP multipliers.",
+        "disposition": "All remain accurate after the SOC candidate repair."
+      }
+    },
+    "metadata": "Under step5-shared-write-lock, reread and synchronized only assigned source dependency mirrors in batch-85.pages.json, assigned SOC/status contract rows in batch-85.proof-contracts.json, and added the two read-only published SOC prerequisite-use records in batch-85.cross-batch-dependencies.json. Regenerated the KKT lemma and status theorem citation/derivation mirrors, checked all six assigned contracts, then released the lock.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-sqp-second-order-correction.md items/def-sqp-l1-exact-penalty-merit.md items/lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature.md items/alg-sqp-merit-globalization-with-finite-budgets.md items/alg-sqp-finite-precision-kkt-qr-solve-and-residual-check.md items/thm-sqp-merit-globalization-finite-budget-status.md --json",
+        "exit_code": 0,
+        "result": "6 files; 5 proof bodies checked, 0 failures; SOC not-applicable after property-proof relocation to existing suppliers."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-sqp-second-order-correction.md items/def-sqp-l1-exact-penalty-merit.md items/lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature.md items/alg-sqp-merit-globalization-with-finite-budgets.md items/alg-sqp-finite-precision-kkt-qr-solve-and-residual-check.md items/thm-sqp-merit-globalization-finite-budget-status.md --json",
+        "exit_code": 0,
+        "result": "6 files checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-sqp-second-order-correction.md items/lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature.md items/alg-sqp-merit-globalization-with-finite-budgets.md items/thm-sqp-merit-globalization-finite-budget-status.md",
+        "exit_code": 0,
+        "result": "4 changed items; 6 numbered steps; 0 defects."
+      },
+      {
+        "command": "node tools/depcheck.mjs --items-file /tmp/step5-u85-items.json --json",
+        "exit_code": 0,
+        "result": "All six assigned current-manifest items and their prerequisite closure checked; 0 errors, 0 warnings, 933 prerequisite items and 235 prerequisite pages in cycle checks."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-85.proof-contracts.json --strict --items alg-sqp-second-order-correction,def-sqp-l1-exact-penalty-merit,lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature,alg-sqp-merit-globalization-with-finite-budgets,alg-sqp-finite-precision-kkt-qr-solve-and-residual-check,thm-sqp-merit-globalization-finite-budget-status --json",
+        "exit_code": 0,
+        "result": "All six assigned contracts checked after locked synchronization; ok:true, no errors or warnings."
+      },
+      {
+        "command": "Exact-rational Python Fraction calculation of the h(z)=z-1, f(z)=z^2/2 SOC witness",
+        "exit_code": 0,
+        "result": "Correct point 1 has merit 1/2 <= 3/2; old double-addition point 2 has merit 4 > 3/2."
+      }
+    ],
+    "closure": "All assigned confirmed defects are repaired; no unresolved mathematical uncertainty. Every direct consumer of the changed Definition is inventoried and its actual use examined. All three are frontier items; no outside-frontier maintenance subject or potentially defective published consumer was identified. The unassigned example contract-only quote refresh is routed in interface_event.consumer_uses. These are repair checks, not independent judgments of the repairs. Finite formulas, finite enumeration and unique solves introduce no new choice assumption."
+  }
+}

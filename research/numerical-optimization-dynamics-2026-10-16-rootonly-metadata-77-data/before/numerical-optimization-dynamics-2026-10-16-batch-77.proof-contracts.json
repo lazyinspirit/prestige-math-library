@@ -1,0 +1,1564 @@
+{
+  "version": 1,
+  "scope": [
+    "def-parareal-propagator-pair",
+    "alg-parareal-correction-sweeps",
+    "def-linear-all-at-once-time-operator",
+    "lem-parareal-first-k-nodes-are-fine-exact",
+    "thm-parareal-binomial-error-bound",
+    "lem-mgrit-exact-coarse-elimination",
+    "thm-parareal-inexact-sweep-error-ledger",
+    "alg-mgrit-two-level-cycle",
+    "cor-parareal-continuous-target-error-decomposition",
+    "thm-mgrit-contraction-implies-residual-and-error-decay",
+    "alg-mgrit-multilevel-recursive-cycle",
+    "ex-parareal-dissipative-scalar-heat-mode",
+    "ex-parareal-oscillatory-coarse-phase-error",
+    "ex-parareal-nonlinear-tube-escape",
+    "ex-mgrit-scalar-diffusion-two-grid-contraction"
+  ],
+  "contracts": {
+    "def-parareal-propagator-pair": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition permits an empty admitted set D_n; any attempted call there is unavailable and is reported as propagation failure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition allows x_0=0 and imposes no preservation-of-zero property on either map."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows d=1 and N=1; the pair then contains a single scalar interval map."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits F_n=G_n and explicitly allows the selected backward-Euler branch to be unavailable or nonunique before a selector is supplied."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition states the map domain [t_n,t_{n+1}] and the trajectory from x_0 through x_N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The coarse branch selector is an explicit input and must return its selected root; no simultaneous root choices are constructed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The propagator-pair entry specifies map domains and failure behavior; it states no equivalence whose forward direction is a claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization is stated for the role labels fine and coarse; they assert no accuracy property."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for def-parareal-propagator-pair: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    },
+    "alg-parareal-correction-sweeps": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition inherits N≥1 from the propagator pair; the initial coarse row and each requested correction have a nonempty interval index."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition explicitly accepts K=0 and τ=0; with K=0 it returns the initialized coarse row, and absent a verified certificate its status is budget-exhausted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition’s recurrence at N=1 consists of one coarse initialization and one fine evaluation per requested sweep."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits F_n=G_n, zero call costs, and a zero time budget; these cases do not make the recurrence undefined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition initializes U_0^k=x_0 and returns the completed endpoint U_N^k in each completed row."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Each map call returns its deterministic value or a failure status; no choice principle is used to select among values."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines an iteration and its statuses; it does not state a biconditional stopping criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The finite-budget status rule is one-way and does not characterize convergence by an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for alg-parareal-correction-sweeps: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    },
+    "def-linear-all-at-once-time-operator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition assumes d,N≥1, so neither the state block nor the time recurrence has an empty index range."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits u_0=0 and g_i=0; the all-at-once right-hand side is then zero while the operator remains defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits N=1, in which case A_t has only the first identity row."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition allows singular or zero Φ_i; each diagonal block of A_t remains the identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition includes the known initial-state contribution in b_1 and the final row (A_tv)_N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All Φ_i and g_i are supplied as finite input data; the definition constructs no selected element from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The recurrence A_tv=b is an equality representation, not an iff theorem about solvability or stability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse characterization is claimed beyond the displayed algebraic definition of A_t."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for def-linear-all-at-once-time-operator: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    },
+    "lem-parareal-first-k-nodes-are-fine-exact": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parareal-propagator-pair",
+          "source_section": "Definition",
+          "quote": "For an initial state $x_0\\in X$, whenever every call succeeds, the **sequential fine trajectory** is the finite sequence $x_{n+1}=F_n(x_n)$, and the **sequential coarse trajectory** is defined by replacing each $F_n$ with $G_n$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-parareal-correction-sweeps",
+          "source_section": "Definition",
+          "quote": "Then, in increasing order of $n$, compute $G_n(U_n^{k+1})$ and set $$U_{n+1}^{k+1}=G_n(U_n^{k+1})+F_n(U_n^k)-G_n(U_n^k).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At sweep $k=0$, the only claimed node is $n=0$, and $U_0^0=x_0=x_0$ by initialization and the definition of the fine trajectory [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose the claim holds at sweep $k$. At sweep $k+1$, $U_0^{k+1}=x_0$ by [F2]. Induct on $n$ from $0$ to $\\min\\{k,N-1\\}$; if $U_n^{k+1}=x_n$, then $n\\le k$ also gives $U_n^k=x_n$, so [F2] yields $U_{n+1}^{k+1}=G_n(x_n)+F_n(x_n)-G_n(x_n)=F_n(x_n)=x_{n+1}$ by [F1]. Thus the claim holds through node $\\min\\{k+1,N\\}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Induction on $k$ proves the first assertion, and taking $k=K\\ge N$ includes every node $0\\le n\\le N$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The inherited grid has N≥1; the statement’s node range begins at n=0 and never quantifies over an empty grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the base case k=0 and n=0 directly from initialization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 covers the first corrected node n=1 whenever N≥1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2’s cancellation G_n(x_n)-G_n(x_n) remains valid when F_n=G_n."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes n=0 and, when k≥N, the final node n=N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The induction uses only the fixed maps and their successful evaluations; it selects no witness from an indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a finite-step equality implication and has no reverse direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives no characterization of when arbitrary iterates equal the fine trajectory."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for lem-parareal-first-k-nodes-are-fine-exact: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    },
+    "thm-parareal-binomial-error-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parareal-propagator-pair",
+          "source_section": "Definition",
+          "quote": "For an initial state $x_0\\in X$, whenever every call succeeds, the **sequential fine trajectory** is the finite sequence $x_{n+1}=F_n(x_n)$, and the **sequential coarse trajectory** is defined by replacing each $F_n$ with $G_n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-parareal-correction-sweeps",
+          "source_section": "Definition",
+          "quote": "Then, in increasing order of $n$, compute $G_n(U_n^{k+1})$ and set $$U_{n+1}^{k+1}=G_n(U_n^{k+1})+F_n(U_n^k)-G_n(U_n^k).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "- **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$. - **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute value being that of [[def-abs-value]]. - **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $$1+x\\le\\exp(x).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$, $$\\exp(x+y)=\\exp(x)\\exp(y).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$ provided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $e_n^k=U_n^k-x_n$. Subtract $x_{n+1}=F_n(x_n)$ from the recurrence in [F2] and add and subtract $G_n(x_n)$; this gives $e_{n+1}^{k+1}=G_n(U_n^{k+1})-G_n(x_n)+(F_n-G_n)(U_n^k)-(F_n-G_n)(x_n)$. By [A1] and the triangle inequality in [F3], $E_{n+1}^{k+1}\\le aE_n^{k+1}+bE_n^k$, where $E_n^k=\\|e_n^k\\|$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At node $0$, $E_0^k=0$ for every $k$ by [F2]. At sweep $k=0$, [A1] gives $E_n^0\\le M\\le MA^n$. These are the initial cases for induction on the node, simultaneously over all completed sweeps.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "A1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume the bound holds at node $n$. For the level-zero row at node $n+1$, [A1] gives $E_{n+1}^0\\le M\\le MA^{n+1}$. For each $k\\ge0$, [step 1.1] gives $E_{n+1}^{k+1}\\le MA^n b^{k+1}\\left(a\\binom n{k+1}+\\binom nk\\right)\\le MA^{n+1}b^{k+1}\\left(\\binom n{k+1}+\\binom nk\\right)$. The last inequality uses $a\\le A$ and $1\\le A$. Partitioning the $(k+1)$-element subsets of an $(n+1)$-element set according to whether they contain its final element gives $\\binom n{k+1}+\\binom nk=\\binom{n+1}{k+1}$, including the zero convention. Thus the bound holds at node $n+1$, and induction proves the first estimate.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "A1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the fixed-horizon branch, $A\\le1+C_aH\\le\\exp(C_aH)$ by [A2], [F4], and the definition of $\\exp$ in [F6]. Repeated use of [F5] gives $A^N\\le\\exp(C_aNH)=\\exp(C_aT)$. Each $k$-element subset of an $N$-element set has a unique increasing $k$-tuple, so $\\binom Nk\\le N^k$. Substituting these bounds and $b\\le C_bH^{q+1}$ into the first estimate gives $\\|U_N^k-x_N\\|\\le M N^k\\exp(C_aT)(C_bH^{q+1})^k=M(C_bT)^k\\exp(C_aT)H^{qk}$. For fixed $T,k$ and uniform $M$, this is $O(H^{qk})$.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the propagator pair has N≥1; the theorem includes all nodes 0≤n≤N on that nonempty grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 uses E_0^k=0 and the k=0 envelope; the statement separately fixes b^0=1, so b=0 is covered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses Pascal’s identity including the zero convention, which covers the first interval and k=0 or k=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses A=max{1,a} so a=0 is allowed, and the induction remains valid when b or M vanishes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 treats node 0, while the fixed-horizon branch in step 3.1 treats the final node N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The subset-counting argument in step 2.1 is finite and uses no selection principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem supplies a one-way conditional norm bound and states no equivalent condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse to the common-set Lipschitz hypotheses is asserted."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for thm-parareal-binomial-error-bound: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    },
+    "lem-mgrit-exact-coarse-elimination": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-linear-all-at-once-time-operator",
+          "source_section": "Definition",
+          "quote": "On the unknown vector $v=(v_1,\\ldots,v_N)\\in(\\mathbb R^d)^N$, define $A_t$ by $(A_tv)_1=v_1$ and $(A_tv)_i=v_i-\\Phi_i v_{i-1}$ for $2\\le i\\le N$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any right-hand side, solve the fine equations in increasing index: the first unknown is determined by its identity diagonal block, and each later unknown is uniquely $u_i=r_i+\\Phi_i u_{i-1}$. This proves $A_t$ is invertible. Holding all C-values fixed, the F-equations in each interval between consecutive C-points have the same forward-substitution form with identity diagonal blocks, so they uniquely determine the F-values; hence $A_{FF}$ is invertible.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the reordered block system, the F rows give $u_F=A_{FF}^{-1}(b_F-A_{FC}u_C)$. Substituting this expression in the C rows gives $(A_{CC}-A_{CF}A_{FF}^{-1}A_{FC})u_C=b_C-A_{CF}A_{FF}^{-1}b_F$. Conversely, any solution $u_C$ of this coarse system, together with the displayed formula for $u_F$, satisfies both the F and C rows. Thus elimination preserves exactly the solution set.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Repeated substitution in $u_i=\\Phi_i u_{i-1}+g_i$, for $i=(j-1)m+1,\\ldots,jm$, gives $u_{jm}=(\\Phi_{jm}\\cdots\\Phi_{(j-1)m+1})u_{(j-1)m}+\\sum_{s=1}^{m}(\\Phi_{jm}\\cdots\\Phi_{(j-1)m+s+1})g_{(j-1)m+s}$. For $s=m$ the product is empty and equals $I$. This is exactly the coarse recurrence in the Statement; the coefficient product reduces to $\\Phi^m$ when every $\\Phi_i=\\Phi$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: N=Jm and m≥2 force J≥1, so at least one coarse interval is present."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves invertibility for arbitrary right-hand sides, including the zero right-hand side."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For J=1, step 3.1 still applies; its terminal s=m factor is the empty product I."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only identity diagonal blocks, so singular Φ_i do not affect A_t or A_FF invertibility."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the first known value u_0 and the final C-point u_{jm}; its terminal empty product is I."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite forward substitutions determine each unknown uniquely and use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves exact elimination and an operator formula; it states no biconditional criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of the Schur complement is included in the statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for lem-mgrit-exact-coarse-elimination: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    },
+    "thm-parareal-inexact-sweep-error-ledger": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-parareal-binomial-error-bound",
+          "source_section": "Statement",
+          "quote": "$$\\|U_n^k-x_n\\|\\le M\\binom nk A^n b^k,$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $e_n^k=\\|V_n^k-x_n\\|$. Subtracting $x_{n+1}=F_n(x_n)$ from the computed recurrence, splitting off the update defect, and applying the two Lipschitz inequalities gives $e_{n+1}^{k+1}\\le a e_n^{k+1}+b e_n^k+\\eta\\le A e_n^{k+1}+b e_n^k+\\eta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At node $0$, $e_0^k=0$, $P_0^k=0$ for $k>0$, and $R_0^k=0$; at $k=0$, the base coarse-error assumption gives $e_n^0\\le M\\le P_n^0+R_n^0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume $e_n^k\\le P_n^k+R_n^k$ at node $n$ for every completed sweep. For $k\\ge0$, step 1.1 gives $e_{n+1}^{k+1}\\le A(P_n^{k+1}+R_n^{k+1})+b(P_n^k+R_n^k)+\\eta$. The $P$ terms satisfy $A P_n^{k+1}+bP_n^k=MA^n b^{k+1}\\left(A\\binom n{k+1}+\\binom nk\\right)\\le MA^{n+1}b^{k+1}\\left(\\binom n{k+1}+\\binom nk\\right)=P_{n+1}^{k+1}$ because $A\\ge1$ and Pascal's identity holds. The remaining terms equal $R_{n+1}^{k+1}$ by definition. Therefore the bound holds at node $n+1$; induction proves it for all nodes and sweeps.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the inherited Parareal grid has N≥1 and the ledger is asserted for its completed nodes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly checks the zero node errors; it also covers η=0 and vanishing initial error through the base envelopes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the same recurrence when only one interval is present."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses A≥1 and no division, so zero b, η, or M causes no singular case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 treats node 0 and step 2.1 propagates the bound through the final node."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The computed values and defect bound are inputs; the induction uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The error ledger is a one-way upper bound and not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not infer an update defect bound from its resulting error estimate."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for thm-parareal-inexact-sweep-error-ledger: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    },
+    "alg-mgrit-two-level-cycle": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition inherits N=Jm with J≥1 and m≥2; both the fine and coarse level contain indexed unknowns."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits J=0 cycles and ε=0; the returned iterate is checked against the selected residual criterion or marked budget-exhausted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: when J=1, the coarse forward solve still has one identity diagonal block and is well-defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits singular Ψ_j; A_c remains invertible by its identity diagonal blocks, as stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the F/C partition keeps C={m,2m,…,N}, including the final time point N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "P, R, relaxations, and coarse matrices are fixed inputs, so no axiom is used to choose transfers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The cycle definition specifies updates but makes no equivalence claim about convergence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse characterization of convergence from an MGRIT cycle is asserted."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for alg-mgrit-two-level-cycle: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    },
+    "cor-parareal-continuous-target-error-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "A **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-parareal-propagator-pair",
+          "source_section": "Definition",
+          "quote": "For an initial state $x_0\\in X$, whenever every call succeeds, the **sequential fine trajectory** is the finite sequence $x_{n+1}=F_n(x_n)$, and the **sequential coarse trajectory** is defined by replacing each $F_n$ with $G_n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-parareal-inexact-sweep-error-ledger",
+          "source_section": "Statement",
+          "quote": "Then $\\|V_n^k-x_n\\|\\le P_n^k+R_n^k$ for every completed node and sweep.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $x_n$ is the sequential fine node; since $t_n\\in[0,T]$, [F1] gives the solution value $y(t_n)$. Insert and subtract $x_n$ and apply the norm triangle inequality: $\\|V_n^K-y(t_n)\\|\\le\\|V_n^K-x_n\\|+\\|x_n-y(t_n)\\|$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute the two given bounds from [A1] and [F3]. This gives the displayed conclusion, while leaving $\\delta_F$ as a separate fine-method obligation.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement fixes 0=t_0<…<t_N=T, so the grid contains both endpoints and is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 remains valid when δ_F=0 or the ledger bound is zero; both terms are still bounded by the stated nonnegative quantities."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a single grid interval, step 2.1 substitutes the same two bounds at its sole corrected endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the triangle inequality only and has no division by P_n^K, R_n^K, or δ_F."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the separate fine-method hypothesis is uniform for every n, including n=0 and n=N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The continuous solution and fine trajectory are fixed functions/sequences in the hypotheses; no witness is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is an additive upper bound, not an equivalence between errors."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse estimate recovering either error component from the sum is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for cor-parareal-continuous-target-error-decomposition: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    },
+    "thm-mgrit-contraction-implies-residual-and-error-decay": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-mgrit-two-level-cycle",
+          "source_section": "Definition",
+          "quote": "In F/C ordering define ideal interpolation and restriction by $$P=\\begin{bmatrix}-A_{FF}^{-1}A_{FC}\\\\ I_C\\end{bmatrix}, \\qquad R=\\begin{bmatrix}-A_{CF}A_{FF}^{-1}&I_C\\end{bmatrix}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-mgrit-exact-coarse-elimination",
+          "source_section": "Statement",
+          "quote": "Both $A_t$ and $A_{FF}$ are invertible. Eliminating the F unknowns from $A_tv=b$ gives the coarse system with Schur complement $$S=A_{CC}-A_{CF}A_{FF}^{-1}A_{FC}.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "- **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$. - **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute value being that of [[def-abs-value]]. - **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], one cycle sends the current error to $e^{(r+1)}=Ee^{(r)}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $r=0$ the claimed inequality is equality. If the bound holds at $r$ and $e^{(r)}=0$, [F3] gives $Ee^{(r)}=0$ and the next bound follows. If $e^{(r)}\\ne0$, the induced-norm definition in the Statement and [A1] give $\\|e^{(r+1)}\\|=\\|Ee^{(r)}\\|\\le\\|E\\|\\,\\|e^{(r)}\\|\\le q^{r+1}\\|e^{(0)}\\|$. Induction proves the error bound for every $r\\ge0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "A1",
+            "step 1.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $A_tu_*=b$, subtraction gives $s^{(r)}=A_t(u_*-u^{(r)})=A_te^{(r)}$. If $e^{(r)}=0$, [F3] gives $s^{(r)}=0$. Otherwise the induced-norm definition in the Statement and [A2] give $\\|s^{(r)}\\|\\le\\|A_t\\|\\|e^{(r)}\\|$, and step 2.1 yields the displayed residual estimate.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "A2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For any error/residual pair, $s=A_te$ and [F2] gives $e=A_t^{-1}s$. If $e=0$, then $s=0$ and [F3] gives both inequalities. If $e\\ne0$, invertibility forces $s\\ne0$, so the induced-norm definition in the Statement and [A2] give both $\\|s\\|\\le\\|A_t\\|\\|e\\|$ and $\\|e\\|\\le\\|A_t^{-1}\\|\\|s\\|$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "A2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite system has d,N≥1 under its all-at-once definition, so the product space is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 starts with r=0, where the bound is equality; the q=0 case then contracts to zero after one cycle."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the first-cycle estimate r=1 directly from the induced norm bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement allows q=0 and zero initial error; step 2.1 uses no division by q."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 converts the error at each cycle into the residual for the same full fine-grid system."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The norm, fixed cycle, and exact matrix E are explicit inputs; the proof selects no norm or operator from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves a conditional contraction implication and does not state its converse as a characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Residual and error norm equivalence up to operator norms is not asserted as an iff between convergence claims."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for thm-mgrit-contraction-implies-residual-and-error-decay: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    },
+    "alg-mgrit-multilevel-recursive-cycle": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires L≥1 and positive interval counts at every level; the coarsest solve is therefore present."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition allows an outer cycle budget of zero; the unchanged initial iterate is returned with budget-exhausted unless its residual certificate passes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a one-interval coarsest level is solved by the exact forward substitution at level L."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition excludes singular hierarchy matrices explicitly; singular propagator factors remain compatible with identity-diagonal all-at-once matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the hierarchy terminates at level L, whose exact solve is the final recursive boundary case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The level matrices, transfer operators, relaxation schedule, and visit counts are explicit finite inputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a recursive procedure and explicitly supplies no convergence equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse multilevel convergence criterion is included."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for alg-mgrit-multilevel-recursive-cycle: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    },
+    "ex-parareal-dissipative-scalar-heat-mode": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euler-midpoint-rk4-tableaus",
+          "source_section": "Definition",
+          "quote": "Forward Euler has $s=1$, $A=(0)$, $b=(1)$, and $c=(0)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-backward-euler-step-equation",
+          "source_section": "Definition",
+          "quote": "The backward Euler endpoint is any such $y_{n+1}$ satisfying $$y_{n+1}=y_n+h_n f(t_n+h_n,y_{n+1}).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-parareal-correction-sweeps",
+          "source_section": "Definition",
+          "quote": "Then, in increasing order of $n$, compute $G_n(U_n^{k+1})$ and set $$U_{n+1}^{k+1}=G_n(U_n^{k+1})+F_n(U_n^k)-G_n(U_n^k).$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], one fine microstep maps $x$ to $x-\\frac14x=\\frac34x$, so the two-step fine macro map is $F(x)=\\frac9{16}x$. By [F2], the coarse backward-Euler equation is $z=x-\\frac12z$, whose unique solution is $G(x)=\\frac23x$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The sequential fine values are $x_1=\\frac9{16}$ and $x_2=\\frac{81}{256}$, while coarse initialization gives $U_1^0=\\frac23$ and $U_2^0=\\frac49$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The first correction has $U_1^1=F(1)=\\frac9{16}$. Using [F3], $U_2^1=G(\\frac9{16})+(F-G)(\\frac23)=\\frac38+(\\frac9{16}-\\frac23)\\frac23=\\frac{11}{36}$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Direct subtraction gives $|U_2^0-x_2|=|\\frac49-\\frac{81}{256}|=\\frac{295}{2304}$ and $|U_2^1-x_2|=|\\frac{11}{36}-\\frac{81}{256}|=\\frac{25}{2304}$. Thus the error decreases for these parameters; the calculation does not assert monotone decrease for other propagators.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: verification fixes N=3; the error comparison concerns a nonempty finite grid."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The worked trajectory fixes x_0=1, so this numerical example makes no claim for zero initial data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 solves the scalar one-step FE and BE equations for each macro map."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes distinct multipliers 9/16 and 2/3 and makes no claim in a zero-step or coincident-map limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The computed error is at the stated node t=1 inside the N=3 grid; the example makes no final-horizon endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All scalar coefficients and the initial value are fixed explicitly; no root or trajectory is selected from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The finite arithmetic comparison says only that this selected error decreases once."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No general condition equivalent to error decrease is claimed."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "two-microstep-FE-and-single-BE-finite-Parareal-step",
+          "asserts": "F(x)=9x/16, G(x)=2x/3, U_2^1=11/36, and the coarse/fine errors are 295/2304 and 25/2304.",
+          "claim": "N=3, x_0=1, H=1/2, h=1/4; compare only with the sequential fine trajectory.",
+          "checked_in": "Verification steps 1.1–1.4"
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for ex-parareal-dissipative-scalar-heat-mode: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    },
+    "ex-parareal-oscillatory-coarse-phase-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-parareal-correction-sweeps",
+          "source_section": "Definition",
+          "quote": "Then, in increasing order of $n$, compute $G_n(U_n^{k+1})$ and set $$U_{n+1}^{k+1}=G_n(U_n^{k+1})+F_n(U_n^k)-G_n(U_n^k).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-parareal-first-k-nodes-are-fine-exact",
+          "source_section": "Statement",
+          "quote": "For every completed sweep $k$ and every $0\\le n\\le\\min\\{k,N\\}$, $U_n^k=x_n$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The coarse initialization is $U_1^0=-x_0$ and $U_2^0=x_0$, while the sequential fine endpoint is $x_2=F^2x_0=x_0$. Both maps preserve the Euclidean norm because $\\|Ix\\|_2=\\|-Ix\\|_2=\\|x\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $U_1^1=Gx_0+(F-G)x_0=-x_0+2x_0=x_0$, and $U_2^1=Gx_0+(F-G)(-x_0)=-x_0-2x_0=-3x_0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore $\\|U_2^1-x_2\\|_2=\\|-4x_0\\|_2=4$. Since $K=N=2$, [F2] gives $U_2^2=x_2$. The error growth at the first sweep is transient and does not contradict finite-step exactness.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example fixes N=2, so its two-interval recurrence is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonzero vector x_0=(1,0); it does not report the zero-vector trajectory."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the action on the single nonzero coordinate of x_0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The selected maps I and -I are distinct; the example makes no assertion when fine and coarse maps coincide."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the sequential final node x_2 and step 3.1 compares the corrected value at that endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "F and G are fixed linear maps and the finite sweep uses their explicit values."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example exhibits one transient error increase and makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The finite counterexample does not characterize all phase mismatches."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "two-interval-identity-versus-minus-identity",
+          "asserts": "U_2^0=x_0, U_2^1=-3x_0, the one-sweep endpoint error is 4, and U_2^2=x_2.",
+          "claim": "N=2, x_0=(1,0), F=I, G=-I.",
+          "checked_in": "Verification steps 1.1–1.3"
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for ex-parareal-oscillatory-coarse-phase-error: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    },
+    "ex-parareal-nonlinear-tube-escape": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-parareal-correction-sweeps",
+          "source_section": "Definition",
+          "quote": "Then, in increasing order of $n$, compute $G_n(U_n^{k+1})$ and set $$U_{n+1}^{k+1}=G_n(U_n^{k+1})+F_n(U_n^k)-G_n(U_n^k).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-parareal-binomial-error-bound",
+          "source_section": "Statement",
+          "quote": "$$\\|U_n^k-x_n\\|\\le M\\binom nk A^n b^k,$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $x,y\\in D$, $|G(x)-G(y)|=|x-y|$. Also $(F-G)(x)-(F-G)(y)=(x-y)(x+y-1)$, and $|x+y-1|\\le1$ on $D$, so $F-G$ is $1$-Lipschitz there. Both maps take $D$ into $D$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Coarse initialization gives $U_1^0=U_2^0=1/4$, while the first corrected node is $U_1^1=F(1/4)=1/16$. Applying [F1] again, $U_2^1=G(1/16)+F(1/4)-G(1/4)=1/16+1/16-1/4=-1/8$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $-1/8\\notin D$, the first corrected table already leaves the set on which the Lipschitz bounds were verified. Thus [F2] cannot be invoked for a sweep whose comparisons use that value; no divergence conclusion follows.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example fixes two macro intervals and a nonempty state tube D=[0,1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the Lipschitz estimate for every x,y∈[0,1], including the boundary value zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The state space is scalar and step 2.1 evaluates the first corrected node directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example uses the fixed nonlinear pair x² and x and does not assert behavior in a limiting parameter family."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes x,y at both closed endpoints of D=[0,1] in the Lipschitz and invariance checks."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both maps and x_0 are explicitly specified; there is no root-selection or choice step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives a one-way counterexample to map invariance implying corrected-iterate invariance."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse relationship between tube invariance and Lipschitz bounds is claimed."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "quadratic-map-lipschitz-tube-and-first-correction",
+          "asserts": "F and G preserve [0,1], both Lipschitz constants are 1, and U_2^1=-1/8 lies outside the tube.",
+          "claim": "N=2, x_0=1/4, F(x)=x^2, G(x)=x.",
+          "checked_in": "Verification steps 1.1–1.3"
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for ex-parareal-nonlinear-tube-escape: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    },
+    "ex-mgrit-scalar-diffusion-two-grid-contraction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euler-midpoint-rk4-tableaus",
+          "source_section": "Definition",
+          "quote": "Forward Euler has $s=1$, $A=(0)$, $b=(1)$, and $c=(0)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-backward-euler-step-equation",
+          "source_section": "Definition",
+          "quote": "The backward Euler endpoint is any such $y_{n+1}$ satisfying $$y_{n+1}=y_n+h_n f(t_n+h_n,y_{n+1}).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-linear-all-at-once-time-operator",
+          "source_section": "Definition",
+          "quote": "On the unknown vector $v=(v_1,\\ldots,v_N)\\in(\\mathbb R^d)^N$, define $A_t$ by $(A_tv)_1=v_1$ and $(A_tv)_i=v_i-\\Phi_i v_{i-1}$ for $2\\le i\\le N$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-mgrit-exact-coarse-elimination",
+          "source_section": "Statement",
+          "quote": "Both $A_t$ and $A_{FF}$ are invertible. Eliminating the F unknowns from $A_tv=b$ gives the coarse system with Schur complement $$S=A_{CC}-A_{CF}A_{FF}^{-1}A_{FC}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-mgrit-two-level-cycle",
+          "source_section": "Definition",
+          "quote": "In F/C ordering define ideal interpolation and restriction by $$P=\\begin{bmatrix}-A_{FF}^{-1}A_{FC}\\\\ I_C\\end{bmatrix}, \\qquad R=\\begin{bmatrix}-A_{CF}A_{FF}^{-1}&I_C\\end{bmatrix}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-mgrit-contraction-implies-residual-and-error-decay",
+          "source_section": "Statement",
+          "quote": "Assume $\\|A_t\\|$ and $\\|A_t^{-1}\\|$ are finite for this norm. If a direct calculation or other proof establishes $\\|E\\|\\le q<1$, then after $r\\ge0$ cycles the error satisfies $\\|e^{(r)}\\|\\le q^r\\|e^{(0)}\\|$, with the convention $q^0=1$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "- **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$. - **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute value being that of [[def-abs-value]]. - **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], each fine Euler step for $\\dot y=-y$ multiplies by $\\alpha=1-h=3/4$. By [F2], a backward-Euler macro step solves $z=x-\\frac12z$, so its multiplier is $\\psi=2/3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In fine order the error operator is $A_t=\\begin{pmatrix}1&0&0&0\\\\-\\alpha&1&0&0\\\\0&-\\alpha&1&0\\\\0&0&-\\alpha&1\\end{pmatrix}$. In F/C order $F=(1,3)$, $C=(2,4)$, its blocks are $A_{FF}=I$, $A_{FC}=\\begin{pmatrix}0&0\\\\-\\alpha&0\\end{pmatrix}$, $A_{CF}=\\begin{pmatrix}-\\alpha&0\\\\0&-\\alpha\\end{pmatrix}$, and $A_{CC}=I$. Hence [F4] gives $S=\\begin{pmatrix}1&0\\\\-\\alpha^2&1\\end{pmatrix}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "F-relaxation maps an error $(e_1,e_2,e_3,e_4)$ to $(0,e_2,\\alpha e_2,e_4)$, so the F-row residuals vanish and the ideal restriction in [F5] reduces to the C residual $(e_2,e_4-\\alpha^2e_2)$. Solving the practical coarse system $\\begin{pmatrix}1&0\\\\-\\psi&1\\end{pmatrix}z=(e_2,e_4-\\alpha^2e_2)$ gives $z_1=e_2$, $z_2=e_4+(\\psi-\\alpha^2)e_2$. Subtracting the ideal interpolation [F5] leaves $(0,0,0,(\\alpha^2-\\psi)e_2)$; post-F-relaxation leaves this vector unchanged.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Therefore $E$ has its only nonzero entry in row $4$, column $2$, equal to $\\alpha^2-\\psi=\\frac9{16}-\\frac23=-\\frac5{48}$. For the norm in [A1], $\\|Ee\\|_\\infty=\\frac5{48}|e_2|\\le\\frac5{48}\\|e\\|_\\infty$, with equality when $e=(0,1,0,0)$. Thus $\\|E\\|_\\infty=5/48<1$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For every $e\\in\\mathbb R^4$, $\\|e\\|_\\infty=\\max_i|e_i|$ is nonnegative and vanishes only when every coordinate is zero; $\\|\\lambda e\\|_\\infty=|\\lambda|\\|e\\|_\\infty$; and $\\|e+f\\|_\\infty\\le\\|e\\|_\\infty+\\|f\\|_\\infty$. Thus the norm in [A1] satisfies [F7]. For any matrix $B$, $\\|Bv\\|_\\infty\\le(\\max_i\\sum_j|B_{ij}|)\\|v\\|_\\infty$ by applying the finite triangle inequality to each row. The row sums of $A_t$ are at most $1+\\alpha=7/4$. If $A_tu=w$, forward substitution gives $u_1=w_1$ and $u_i=w_i+\\alpha u_{i-1}$, hence by induction $u_i=\\sum_{j=1}^{i}\\alpha^{i-j}w_j$. Therefore $A_t^{-1}$ has entries $\\alpha^{i-j}$ for $i\\ge j$ and zero otherwise, with row sums at most $1+\\alpha+\\alpha^2+\\alpha^3=175/64$. Thus $\\|A_t\\|_\\infty\\le7/4$ and $\\|A_t^{-1}\\|_\\infty\\le175/64$. All hypotheses of [F6] hold with $q=5/48$, so the error after $r$ cycles is at most $(5/48)^r$ times its initial value.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example fixes four fine steps and two coarse intervals, excluding an empty grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 proves the induced-norm inequality for every error, including zero, and exhibits a nonzero vector attaining the norm."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the scalar (one-dimensional) diffusion mode."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes h=1/4 and H=1/2 and makes no zero-step or mesh-limit assertion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1–4.1 form the operator over all four fine nodes and identify its final-row action."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The scalar matrices, transfer operators, relaxation schedule, and norm are all fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The computation proves contraction for one specified cycle and norm only."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example does not give a necessary condition for two-grid contraction."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "four-step-scalar-two-grid-error-matrix-and-operator-bounds",
+          "asserts": "E has the single nonzero entry E_{4,2}=-5/48, its induced infinity norm is 5/48, and the fine operator/inverse norms are bounded by 7/4 and 175/64.",
+          "claim": "Four FE steps with alpha=3/4, two-step BE coarse multiplier psi=2/3, ideal transfer, pre/post F-relaxation.",
+          "checked_in": "Verification steps 1.1, 2.1, 3.1, 4.1, and 5.1"
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle or additional axiom is used. Every supplier fact invoked in a proof step is a declared dependency and cited where it is used.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta",
+        "notes": "Authoring check for ex-mgrit-scalar-diffusion-two-grid-contraction: numbered proof steps, fact labels, supplier excerpts, and boundary dispositions were mapped against the current item body. This record is not independent mathematical acceptance."
+      }
+    }
+  }
+}

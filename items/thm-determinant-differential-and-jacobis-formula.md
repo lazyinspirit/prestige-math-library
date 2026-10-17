@@ -26,8 +26,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  repair: research/statistical-models-experiments-62-published-jacobi-repair.json
+  repair: research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-published-matrix-calculus/application-2/repair.json
 sources:
   scraped: []
   references:
@@ -65,7 +64,7 @@ $$D\det(A)[H]=\det(A)\operatorname{tr}(A^{-1}H).$$
 
 [L7] Scalar modulus is multiplicative and satisfies the triangle inequality, including for real scalars. [[lem-complex-conjugation-and-modulus-laws]]
 
-[L8] The Frobenius norm is $\|H\|_F=(\sum_{i,j}|h_{ij}|^2)^{1/2}$, and the real Fréchet criterion is that the remainder after a bounded real-linear map, divided by $\|H\|_F$, tends to zero as $H\to0$, $H\ne0$. [[def-frobenius-matrix-norm]], [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]]
+[L8] The Frobenius norm is $\|H\|_F=(\sum_{i,j}|h_{ij}|^2)^{1/2}$. The real Fréchet criterion is the normwise first-order remainder estimate; in a positive-dimensional source this is equivalently that the remainder after a bounded real-linear map, divided by $\|H\|_F$, tends to zero as $H\to0$, $H\ne0$. [[def-frobenius-matrix-norm]], [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]]
 
 [L9] Trace is the sum of the diagonal entries. [[def-trace-of-a-square-matrix]]
 

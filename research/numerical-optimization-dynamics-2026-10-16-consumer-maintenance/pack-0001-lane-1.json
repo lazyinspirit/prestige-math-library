@@ -1,0 +1,86 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "pack": "pack-0001",
+  "lane": 1,
+  "ids": [
+    "lem-rosenbrock-euler-local-defect",
+    "lem-rosenbrock-euler-step-map-lipschitz",
+    "thm-rosenbrock-euler-global-first-order"
+  ],
+  "assignment": "research/numerical-optimization-dynamics-2026-10-16-consumer-maintenance/pack-0001-lane-1.json",
+  "task": "research/numerical-optimization-dynamics-2026-10-16-consumer-maintenance/pack-0001-lane-1.md",
+  "report": "research/numerical-optimization-dynamics-2026-10-16-consumer-maintenance/pack-0001-lane-1-report.json",
+  "before": {
+    "lem-rosenbrock-euler-local-defect": {
+      "sha256": "9b1c49ac93203ad0ddefeefb969674a6d83ed975e86ea2fb129c3c0c66dc1249",
+      "guard_sha256": "2002589e7929a2f9672d15d93a185dbe1b9c46ce18007eb24a200aa43938202d",
+      "statement_sha256": "c32f176c9a737576eaa97daf81e07d61adddf541a1d2e5c18edb11d939fc6c6b",
+      "text": "---\nid: lem-rosenbrock-euler-local-defect\nkind: lemma\ntitle: Rosenbrock-Euler local defect bound\nstatus: draft\norigin: pipeline\npipeline_run: numerical-optimization-dynamics-2026-10-16\ndeps: [def-rosenbrock-euler-step-map, cor-mean-value-theorem, def-first-order-ode-initial-value-problem-and-solution, thm-chain-rule-for-total-derivatives]\ndependency_level: 1\nproof_strategy: direct\nprovenance:\n  statement: ai-altered\n  proof: ai-generated\nsources:\n  references:\n    - title: \"Ralf Kornhuber, Notes on Numerical Methods for ODEs and Numerical Linear Algebra, §1.8, pp. 33–34\"\n      url: \"https://numerik.mi.fu-berlin.de/wiki/WS_2021/NumericsII_Dokumente/NumericsIIKornhuber_rev5.pdf\"\n    - title: \"Peter Benner and Hermann Mena, Rosenbrock methods for solving differential Riccati equations, §II, pp. 2–4\"\n      url: \"https://cscproxy.mpi-magdeburg.mpg.de/preprints/2011/MPIMD11-06.pdf\"\nverification:\n  precheck: pending\n---\n\n## Statement\n\nLet $K\\subset U\\subset\\mathbb R^d$ be compact and convex, let $f:U\\to\\mathbb R^d$ be continuously differentiable, and suppose $\\|f(y)\\|\\le F$ and $\\|Df(y)\\|\\le L$ on $K$. For $0<h\\le h_0$, assume $I-hDf(y)$ is invertible for every $y\\in K$ with inverse norm at most $B$. If the exact solution starting at $y$ stays in $K$ on $[t,t+h]$, the exact-arithmetic step $\\Phi_h(y)$ of [[def-rosenbrock-euler-step-map]], with $\\gamma=1$, autonomous field $f$ and exact Jacobian $Df(y)$, satisfies\n$$\n\\|\\Phi_h(y)-y(t+h)\\|\\le FL(B+1)h^2.\n$$\nThe claim is a local defect bound; it does not by itself assert global convergence.\n\n## Facts & Assumptions\n\n**Given:** The compact convex set, vector field, bounds, exact solution segment, and uniform inverse bound in the statement.\n\n[F1] [[def-rosenbrock-euler-step-map]]: for the autonomous exact-Jacobian branch with $\\gamma=1$, the exact stage solves $(I-hDf(y))k=f(y)$ and the exact-method update is $\\Phi_h(y)=y+hk$. No finite-precision execution or success status is used.\n\n[F2] [[thm-chain-rule-for-total-derivatives]]: for differentiable maps, the derivative of a composition is the derivative of the outer map composed with the derivative of the inner map.\n\n[F3] [[cor-mean-value-theorem]]: if a real function is continuous on a closed interval and differentiable on its interior, its endpoint difference equals its derivative at some interior point times the interval length.\n\n[F4] [[def-first-order-ode-initial-value-problem-and-solution]]: a solution curve is differentiable and satisfies $y'=f(y)$ on its interval.\n\n## Proof\n\n1.1 Write $J=Df(y)$ and $M=I-hJ$. By [F1], $k=M^{-1}f(y)$; hence $\\|k\\|\\le BF$. Since $M^{-1}-I=M^{-1}(I-M)=hM^{-1}J$, $\\|k-f(y)\\|\\le hBLF$. [given, F1, algebra]\n\n1.2 By [F4], $y'(t+s)=f(y(t+s))$. Put $g(s)=f(y(t+s))$. By [F2], $g'(s)=Df(y(t+s))f(y(t+s))$, so $\\|g'(s)\\|\\le LF$. For any continuously differentiable vector curve $g$ with this derivative bound, the scalar mean-value theorem [F3] implies $\\|g(s)-g(0)\\|\\le LFs$: if the difference is nonzero, take its unit direction $u$, apply [F3] to $r\\mapsto u\\cdot g(r)$, and use $|u\\cdot g'(r)|\\le\\|g'(r)\\|$. Thus $q(s):=y(t+s)-y-sf(y)$ has $q'(s)=g(s)-g(0)$ with $\\|q'(s)\\|\\le LFs$. Applying the same vector-curve bound to $q$ on $[0,h]$ yields $\\|y(t+h)-y-hf(y)\\|=\\|q(h)\\|\\le LFh^2$. [given, F2, F3, F4, choose]\n\n2.1 The numerical increment differs from forward Euler by $h(k-f(y))$, bounded by $BLFh^2$ in step 1.1. The triangle inequality with step 1.2 proves the stated local defect bound with $C_0:=FL(B+1)$. [step 1.1, step 1.2, algebra] ∎\n"
+    },
+    "lem-rosenbrock-euler-step-map-lipschitz": {
+      "sha256": "164fdbb2c452c8c9080dbe64501f91bb74535ac77a824416c74ecf99b8887dae",
+      "guard_sha256": "73f3661b156e18edd7fa11a974c684f0c4f5904c4a04b8de4f12b91b944e5288",
+      "statement_sha256": "47902db731c11e50214b1e5bd119c1798dd7d56e55e0df1baa46a81f8fdb5f82",
+      "text": "---\nid: lem-rosenbrock-euler-step-map-lipschitz\nkind: lemma\ntitle: Rosenbrock-Euler step stability on a compact convex set\nstatus: draft\norigin: pipeline\npipeline_run: numerical-optimization-dynamics-2026-10-16\ndeps: [def-rosenbrock-euler-step-map, cor-mean-value-theorem, lem-rosenbrock-matrix-inverse-perturbation, thm-chain-rule-for-total-derivatives]\ndependency_level: 1\nproof_strategy: direct\nprovenance:\n  statement: ai-altered\n  proof: ai-generated\nsources:\n  references:\n    - title: \"Ralf Kornhuber, Notes on Numerical Methods for ODEs and Numerical Linear Algebra, §1.8, pp. 33–37\"\n      url: \"https://numerik.mi.fu-berlin.de/wiki/WS_2021/NumericsII_Dokumente/NumericsIIKornhuber_rev5.pdf\"\n    - title: \"Luca Bonaventura, Lecture Notes on Numerical Methods for Large ODE Systems, §§2.3 and 5.3, pp. 44–47, 90–92\"\n      url: \"https://www.researchgate.net/publication/386290653_LECTURE_NOTES_ON_NUMERICAL_METHODS_FOR_LARGE_ODE_SYSTEMS\"\nverification:\n  precheck: pending\n---\n\n## Statement\n\nLet $K\\subset U\\subset\\mathbb R^d$ be compact and convex, let $f\\in C^2(U,\\mathbb R^d)$, and suppose on $K$ that $\\|f\\|\\le F$, $\\|Df\\|\\le L$, and $\\|D^2f\\|\\le H$. For $0<h\\le h_0$, assume $M_h(y):=I-hDf(y)$ is invertible for every $y\\in K$ with $\\|M_h(y)^{-1}\\|\\le B$. The exact-arithmetic autonomous exact-Jacobian Rosenbrock-Euler map $\\Phi_h(y)=y+hM_h(y)^{-1}f(y)$ of [[def-rosenbrock-euler-step-map]], with $\\gamma=1$, then satisfies\n$$\n\\|\\Phi_h(u)-\\Phi_h(v)\\|\\le(1+L_*h)\\|u-v\\|,\\qquad L_*:=BL+h_0B^2HF,\n$$\nfor all $u,v\\in K$.\n\n## Facts & Assumptions\n\n**Given:** The sets, derivative bounds, and uniform inverse bound in the statement.\n\n[F1] [[def-rosenbrock-euler-step-map]]: in the autonomous exact-Jacobian branch with $\\gamma=1$, the exact-method map is $\\Phi_h(y)=y+hM_h(y)^{-1}f(y)$ when $M_h(y)$ is invertible.\n\n[F2] [[lem-rosenbrock-matrix-inverse-perturbation]]: for invertible $P,Q$, $\\|P^{-1}-Q^{-1}\\|\\le\\|P^{-1}\\|\\,\\|Q-P\\|\\,\\|Q^{-1}\\|$.\n\n[F3] [[thm-chain-rule-for-total-derivatives]]: differentiating a composition gives the product of the outer derivative and the inner derivative.\n\n[F4] [[cor-mean-value-theorem]]: a differentiable real function continuous on a closed interval has an interior derivative equal to its endpoint difference divided by the interval length.\n\n## Proof\n\n1.1 The segment from $v$ to $u$ lies in $K$. For any unit vector $a$, the scalar function $s\\mapsto a\\cdot f(v+s(u-v))$ has derivative bounded by $L\\|u-v\\|$ by [F3]; [F4] therefore gives $|a\\cdot(f(u)-f(v))|\\le L\\|u-v\\|$. Taking the supremum over unit $a$ yields $\\|f(u)-f(v)\\|\\le L\\|u-v\\|$. Applying the same argument to $s\\mapsto a\\cdot Df(v+s(u-v))b$ for unit $a,b$, with [F3] and the Hessian bound $H$, gives $\\|Df(u)-Df(v)\\|\\le H\\|u-v\\|$. [given, F3, F4, choose]\n\n2.1 Put $M_u=M_h(u)$ and $M_v=M_h(v)$. Then $\\|M_v-M_u\\|=h\\|Df(u)-Df(v)\\|\\le hH\\|u-v\\|$. By [F2], $\\|M_u^{-1}-M_v^{-1}\\|\\le B^2hH\\|u-v\\|$. [given, F2, step 1.1, algebra]\n\n3.1 Let $K_h(y)=M_h(y)^{-1}f(y)$. Adding and subtracting $M_u^{-1}f(v)$ and using steps 1.1 and 2.1 gives $\\|K_h(u)-K_h(v)\\|\\le(BL+B^2hHF)\\|u-v\\|$. [F1, step 1.1, step 2.1, algebra]\n\n4.1 By [F1], $\\|\\Phi_h(u)-\\Phi_h(v)\\|\\le[1+hBL+h^2B^2HF]\\|u-v\\|\\le(1+L_*h)\\|u-v\\|$, since $h\\le h_0$. [F1, step 3.1, algebra] ∎\n"
+    },
+    "thm-rosenbrock-euler-global-first-order": {
+      "sha256": "fd52179111993eecc67cfeaec4e792674d867346bb1acb45ed31689625decf0b",
+      "guard_sha256": "43aa9ae4efabdfffc0dc74a14ab52e276317529d9c42352bc09956346c8d8642",
+      "statement_sha256": "583752f65eaadd6352ef13594c425d258ed612364a657f57dff885d34db54bc1",
+      "text": "---\nid: thm-rosenbrock-euler-global-first-order\nkind: theorem\ntitle: First-order global error for Rosenbrock-Euler\nstatus: draft\norigin: pipeline\npipeline_run: numerical-optimization-dynamics-2026-10-16\ndeps: [def-rosenbrock-euler-step-map, lem-rosenbrock-euler-local-defect, lem-rosenbrock-euler-step-map-lipschitz, lem-rosenbrock-euler-local-defect-and-residual-error]\ndependency_level: 2\nproof_strategy: direct\nprovenance:\n  statement: ai-altered\n  proof: ai-generated\nsources:\n  references:\n    - title: \"Ralf Kornhuber, Notes on Numerical Methods for ODEs and Numerical Linear Algebra, §1.8, pp. 33–37\"\n      url: \"https://numerik.mi.fu-berlin.de/wiki/WS_2021/NumericsII_Dokumente/NumericsIIKornhuber_rev5.pdf\"\n    - title: \"Luca Bonaventura, Lecture Notes on Numerical Methods for Large ODE Systems, §2.3, pp. 43–47\"\n      url: \"https://www.researchgate.net/publication/386290653_LECTURE_NOTES_ON_NUMERICAL_METHODS_FOR_LARGE_ODE_SYSTEMS\"\nverification:\n  precheck: pending\n---\n\n## Statement\n\nLet $K\\subset U\\subset\\mathbb R^d$ be compact and convex, let $f\\in C^2(U,\\mathbb R^d)$, and assume the bounds and uniform inverse hypothesis of [[lem-rosenbrock-euler-local-defect]] and [[lem-rosenbrock-euler-step-map-lipschitz]] hold with constants $F,L,H,B,h_0$. Let an exact solution $y(t)$ and the exact-method iterates $Y_{n+1}=\\Phi_h(Y_n)$ of the autonomous exact-Jacobian map [[def-rosenbrock-euler-step-map]] with $\\gamma=1$ stay in $K$ for $0\\le t_n=nh\\le T$, with $Y_0=y(0)$ and $0<h\\le h_0$. Define $C_0:=FL(B+1/2)$ and $L_*:=BL+h_0B^2HF$. Then\n$$\n\\|Y_n-y(t_n)\\|\\le C_0T e^{L_*T}h\\qquad(0\\le t_n\\le T).\n$$\nThus this exact-J method has global order at least one on the stated compact tube. The theorem is conditional on the iterates remaining in that tube.\n\n## Facts & Assumptions\n\n**Given:** A $C^2$ autonomous vector field and the exact and numerical trajectories satisfying the compact-tube and inverse hypotheses in the statement.\n\n[F1] [[def-rosenbrock-euler-step-map]] defines the autonomous exact-Jacobian map with $\\gamma=1$ by the exact solve $(I-hDf(y))k=f(y)$ and $\\Phi_h(y)=y+hk$.\n\n[F2] Apply [[lem-rosenbrock-euler-local-defect-and-residual-error]] to the autonomous extension $\\bar f(t,y)=f(y)$, with $\\gamma=1$, $\\widetilde J=J=Df(y(t_j))$, $\\delta=0$, $\\kappa_0=\\kappa_1=B$, and the exact stage, whose residual is zero. The $C^2$ hypothesis supplies that lemma's regularity, and along the solution $\\bar f_t=0$ and $\\|D_y\\bar f\\,\\bar f\\|\\le LF$, so take $M_1=LF$. Its bound gives $\\|\\Phi_h(y(t_j))-y(t_{j+1})\\|\\le FL(B+1/2)h^2=C_0h^2$.\n\n[F3] [[lem-rosenbrock-euler-step-map-lipschitz]] gives $\\|\\Phi_h(u)-\\Phi_h(v)\\|\\le(1+L_*h)\\|u-v\\|$ on $K$.\n\n## Proof\n\n1.1 Set $e_j=\\|Y_j-y(t_j)\\|$. Since $Y_{j+1}=\\Phi_h(Y_j)$, insert $\\Phi_h(y(t_j))$ and apply [F2] and [F3] to obtain $e_{j+1}\\le(1+L_*h)e_j+C_0h^2$. [given, F1, F2, F3, algebra]\n\n2.1 Starting with $e_0=0$, induction on $n$ in the recurrence of step 1.1 gives $e_n\\le C_0h^2\\sum_{j=0}^{n-1}(1+L_*h)^j\\le C_0n h^2e^{L_*nh}$; the last inequality follows from $1+x\\le e^x$ for $x\\ge0$. [given, step 1.1, algebra]\n\n3.1 Since $nh=t_n\\le T$, step 2.1 yields $e_n\\le C_0T e^{L_*T}h$. [given, step 2.1, algebra] ∎\n"
+    }
+  },
+  "obligations": [
+    {
+      "key": "70f330cacd3b3f1cee8a743684efe735d1fee65b99bed66391c69146dd6dc24e",
+      "id": "lem-rosenbrock-euler-local-defect",
+      "event_key": "5fd633f11bdcb624dad3219a063ffbaa4fba0b2b5466b4f8d24f860e5cce0521",
+      "status": "pending",
+      "paths": [
+        [
+          "def-rosenbrock-euler-step-map",
+          "lem-rosenbrock-euler-local-defect"
+        ]
+      ],
+      "event": {
+        "id": "def-rosenbrock-euler-step-map",
+        "before_statement_sha256": "001e4d260a39c14e47c1de4735fe8afe4bceee1f68f5741f82ec52d0242cb6eb",
+        "after_statement_sha256": "91fd0ae85e9eeccad279bc84331107a2c9cd6b30cbd9e9d2f4653751e7746cf7"
+      }
+    },
+    {
+      "key": "37361452f2b4bbd49f0c43c19811cb999d1d006a7ef3310cd6fb99a18b2c333a",
+      "id": "lem-rosenbrock-euler-step-map-lipschitz",
+      "event_key": "5fd633f11bdcb624dad3219a063ffbaa4fba0b2b5466b4f8d24f860e5cce0521",
+      "status": "pending",
+      "paths": [
+        [
+          "def-rosenbrock-euler-step-map",
+          "lem-rosenbrock-euler-step-map-lipschitz"
+        ]
+      ],
+      "event": {
+        "id": "def-rosenbrock-euler-step-map",
+        "before_statement_sha256": "001e4d260a39c14e47c1de4735fe8afe4bceee1f68f5741f82ec52d0242cb6eb",
+        "after_statement_sha256": "91fd0ae85e9eeccad279bc84331107a2c9cd6b30cbd9e9d2f4653751e7746cf7"
+      }
+    },
+    {
+      "key": "836ccba09aef9b1fbfbb844bc61d97bc56ff6ffafd92869fb43a4168ac3a2048",
+      "id": "thm-rosenbrock-euler-global-first-order",
+      "event_key": "5fd633f11bdcb624dad3219a063ffbaa4fba0b2b5466b4f8d24f860e5cce0521",
+      "status": "pending",
+      "paths": [
+        [
+          "def-rosenbrock-euler-step-map",
+          "thm-rosenbrock-euler-global-first-order"
+        ]
+      ],
+      "event": {
+        "id": "def-rosenbrock-euler-step-map",
+        "before_statement_sha256": "001e4d260a39c14e47c1de4735fe8afe4bceee1f68f5741f82ec52d0242cb6eb",
+        "after_statement_sha256": "91fd0ae85e9eeccad279bc84331107a2c9cd6b30cbd9e9d2f4653751e7746cf7"
+      }
+    }
+  ]
+}

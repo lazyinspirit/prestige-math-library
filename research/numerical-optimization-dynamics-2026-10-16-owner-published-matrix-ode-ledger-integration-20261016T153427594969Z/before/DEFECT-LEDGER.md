@@ -1,0 +1,1483 @@
+# Defect ledger — generated view
+
+> GENERATED from `research/defect-ledger.jsonl` @ 94c61ef28695 by `tools/defect-ledger.mjs render` — do not edit.
+
+## What the numbers mean, first
+
+| | |
+|---|---|
+| defects caught before publication | 18998 |
+| now mechanically prevented | 380 |
+| escaped to publication | 7 |
+| still open | 107 |
+
+## bayesian-computational-statistics-62 — 219 row(s)
+
+| subclass | 3a-adjudicate | 4-judge | 5-adjudicate | 5.2-impact | owner |
+|---|---|---|---|---|---|
+| missing-hypothesis | 19 |  | 20 | 1 |  |
+| citation-inaccurate | 33 |  | 1 |  | 1 |
+| unsupported-inference | 24 | 2 |  |  |  |
+| citation-missing | 16 |  | 5 |  |  |
+| citation-inflated | 4 |  | 14 | 2 |  |
+| false-or-overstrong-statement | 9 |  | 4 | 1 |  |
+| invalid-inference | 4 |  | 3 | 2 |  |
+| ill-typed-claim | 3 |  | 4 |  |  |
+| unlicensed-inference | 7 |  |  |  |  |
+| ill-formed | 6 |  |  |  |  |
+| ill-typed-construction | 2 |  | 4 |  |  |
+| undefined-notation | 5 |  |  |  |  |
+| missing-choice-scope | 3 |  | 1 |  |  |
+| false-or-overstrong-title | 3 |  | 1 |  |  |
+| missing-case | 3 |  |  |  |  |
+| false-claim | 3 |  |  |  |  |
+| citation-misattributed | 2 |  |  |  |  |
+| citation-truncated | 2 |  |  |  |  |
+| arithmetic-error | 1 |  |  |  |  |
+| contract-mismatch | 1 |  |  |  |  |
+| invalid-witness | 1 |  |  |  |  |
+| typing | 1 |  |  |  |  |
+| incorrect-step-reference | 1 |  |  |  |  |
+
+## frontier-11 — 4 row(s)
+
+| subclass | post-publication | 3-review | 4-baseline | 7-judge |
+|---|---|---|---|---|
+| other | 1 | 1 |  | 1 |
+| gate-wrong-signature |  |  | 1 |  |
+
+## frontier-12 — 8 row(s)
+
+| subclass | 9-receipt | 9-scope | 3-fix | 10-report | 5-author | 6b-adjudicate |
+|---|---|---|---|---|---|---|
+| other | 2 | 1 | 1 | 1 |  | 1 |
+| stage-unowned |  |  |  |  | 1 |  |
+| gate-vacuous | 1 |  |  |  |  |  |
+
+## frontier-13 — 54 row(s)
+
+| subclass | 9-scope | 9-receipt | unknown | 3-fix | 10-report | 6b-adjudicate | 7-judge | 8-adjudicate |
+|---|---|---|---|---|---|---|---|---|
+| citation-inflated |  |  | 3 |  |  |  |  | 7 |
+| false-or-overstrong-statement |  |  | 2 |  |  |  |  | 6 |
+| other |  |  | 2 | 1 |  | 4 |  |  |
+| invalid-inference |  |  | 4 |  |  |  |  | 1 |
+| gate-vacuous |  | 4 |  |  |  |  |  | 1 |
+| false-or-overstrong-title |  |  | 1 |  |  |  |  | 2 |
+| missing-hypothesis |  |  | 1 |  |  |  |  | 1 |
+| citation-missing |  |  | 1 |  |  |  |  | 1 |
+| citation-misattributed |  |  | 2 |  |  |  |  |  |
+| false-decline | 2 |  |  |  |  |  |  |  |
+| invalid-witness |  |  |  |  |  |  |  | 1 |
+| arithmetic-error |  |  |  |  |  |  |  | 1 |
+| ill-typed-construction |  |  |  |  |  |  |  | 1 |
+| false-boundary-disposition |  |  | 1 |  |  |  |  |  |
+| deferral-without-destination |  |  | 1 |  |  |  |  |  |
+| stage-unowned |  |  |  |  | 1 |  |  |  |
+| liveness-false-positive |  |  |  |  |  |  | 1 |  |
+| dispatch-lost |  |  |  |  |  | 1 |  |  |
+
+## frontier-14 — 438 row(s)
+
+| subclass | 9-scope | 9-receipt | 1-scaffold | 3-review | 6c-cross | 4-splice | 6a-read | 6b-adjudicate | 7-judge | 8-adjudicate |
+|---|---|---|---|---|---|---|---|---|---|---|
+| citation-missing |  |  |  |  |  |  | 37 | 1 |  | 120 |
+| other |  |  |  | 1 | 3 |  |  | 31 | 2 | 1 |
+| citation-inflated |  |  |  |  |  |  | 17 | 5 |  | 10 |
+| missing-choice-scope |  |  |  |  |  |  | 23 | 2 |  | 7 |
+| citation-misattributed |  |  |  |  |  |  | 17 | 4 |  | 3 |
+| invalid-inference | 1 |  |  |  |  |  | 7 | 5 |  | 9 |
+| citation-truncated | 1 |  |  |  | 1 |  | 10 | 5 |  | 1 |
+| false-boundary-disposition |  |  |  |  |  |  | 7 | 10 |  |  |
+| false-or-overstrong-title |  |  |  |  |  |  | 6 | 5 |  | 2 |
+| undefined-notation |  |  |  |  |  |  | 9 | 1 |  | 2 |
+| false-or-overstrong-statement |  |  |  |  |  |  | 7 | 2 |  | 2 |
+| missing-hypothesis |  |  |  |  |  |  | 3 | 3 |  | 5 |
+| ill-typed-construction |  |  |  |  |  |  |  | 7 |  | 2 |
+| false-decline | 7 |  |  |  |  |  |  |  |  |  |
+| prompt-transcription |  |  |  |  | 1 |  |  | 4 |  |  |
+| unsourced-locator | 1 |  |  |  | 1 |  |  | 2 |  |  |
+| gate-vacuous |  | 1 | 1 |  |  |  |  | 2 |  |  |
+| invalid-witness |  |  |  |  |  |  |  | 1 |  | 2 |
+| deferral-without-destination | 3 |  |  |  |  |  |  |  |  |  |
+| citation-corrupted |  |  |  |  | 2 |  |  |  |  |  |
+| artifact-overwritten |  |  |  |  |  |  | 1 |  |  | 1 |
+| dispatch-lost |  |  |  |  |  | 1 |  | 1 |  |  |
+| gate-wrong-signature |  |  | 1 |  | 1 |  |  |  |  |  |
+| arithmetic-error |  |  |  |  |  |  | 1 |  |  |  |
+| thin-harvest |  |  |  |  |  |  |  | 1 |  |  |
+| scope-drop | 1 |  |  |  |  |  |  |  |  |  |
+| scheduler-race |  |  |  |  |  |  |  |  |  | 1 |
+| stage-unowned |  | 1 |  |  |  |  |  |  |  |  |
+| read-only-role-asked-to-write |  |  |  |  |  |  |  | 1 |  |  |
+| scope-loss |  |  |  |  |  | 1 |  |  |  |  |
+
+## frontier-15 — 91 row(s)
+
+| subclass | 9-scope | 6c-cross | 6a-read | 6b-adjudicate | 7-judge | 8-adjudicate |
+|---|---|---|---|---|---|---|
+| false-boundary-disposition | 1 |  | 12 | 3 |  |  |
+| citation-missing |  |  | 10 | 6 |  |  |
+| citation-inflated |  | 4 | 7 | 1 |  |  |
+| citation-misattributed | 1 |  | 4 | 4 |  |  |
+| false-or-overstrong-statement |  |  | 2 | 3 |  | 2 |
+| invalid-inference |  |  | 2 | 2 |  | 1 |
+| false-decline | 4 |  |  |  |  |  |
+| undefined-notation |  |  | 2 | 1 |  |  |
+| other |  |  | 1 | 1 | 1 |  |
+| missing-hypothesis |  | 1 | 1 | 1 |  |  |
+| false-or-overstrong-title |  |  | 1 | 1 |  | 1 |
+| unsourced-locator |  |  |  | 2 |  |  |
+| missing-choice-scope |  |  |  | 2 |  |  |
+| gate-vacuous |  |  |  | 2 |  |  |
+| ill-typed-construction |  |  | 1 |  |  |  |
+| citation-corrupted |  |  | 1 |  |  |  |
+| citation-truncated |  | 1 |  |  |  |  |
+| invalid-witness |  |  |  |  |  | 1 |
+
+## frontier-16 — 273 row(s)
+
+| subclass | 9-scope | 6c-cross | 5-author | 6a-read | 6b-adjudicate | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|---|---|
+| citation-missing |  | 2 |  | 42 | 7 |  | 2 |
+| citation-inflated |  |  |  | 10 | 2 | 37 | 2 |
+| citation-truncated |  |  |  | 15 | 7 | 4 | 11 |
+| invalid-inference |  |  |  | 15 | 1 | 7 | 2 |
+| missing-hypothesis |  |  |  | 17 | 1 | 3 |  |
+| false-boundary-disposition |  |  | 2 | 10 | 2 |  |  |
+| ill-typed-construction |  |  |  | 1 |  | 12 | 1 |
+| undefined-notation |  |  |  | 5 |  | 5 | 2 |
+| false-or-overstrong-title |  |  |  | 9 |  | 2 |  |
+| false-or-overstrong-statement | 1 |  |  | 4 |  | 3 |  |
+| citation-misattributed |  |  |  | 6 | 2 |  |  |
+| missing-choice-scope |  |  |  | 2 | 4 |  |  |
+| invalid-witness |  |  |  | 2 |  | 2 |  |
+| other |  |  |  | 2 |  |  |  |
+| arithmetic-error |  |  |  | 2 |  |  |  |
+| citation-corrupted |  |  |  | 1 |  |  |  |
+| thin-harvest |  |  |  |  | 1 |  |  |
+| gate-vacuous |  |  | 1 |  |  |  |  |
+| deferral-without-destination | 1 |  |  |  |  |  |  |
+| false-decline | 1 |  |  |  |  |  |  |
+
+## frontier-17 — 333 row(s)
+
+| subclass | 9-scope | 6c-cross | 6a-read | 6b-adjudicate | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|---|
+| citation-missing |  |  | 24 | 3 | 80 | 6 |
+| citation-truncated |  | 1 | 29 | 3 | 18 | 1 |
+| other |  | 2 | 6 | 14 | 11 |  |
+| invalid-inference |  |  | 16 | 6 | 5 | 1 |
+| missing-hypothesis |  |  | 7 | 5 | 8 | 2 |
+| citation-inflated | 1 | 1 | 4 | 4 | 8 | 2 |
+| citation-misattributed |  |  | 15 | 2 | 3 |  |
+| false-or-overstrong-title |  |  | 8 | 3 |  |  |
+| missing-choice-scope |  |  | 1 | 7 |  |  |
+| false-or-overstrong-statement |  |  | 2 | 1 | 4 |  |
+| false-boundary-disposition |  |  | 6 |  |  |  |
+| ill-typed-construction |  |  | 1 | 2 | 1 |  |
+| citation-corrupted |  |  | 2 |  |  |  |
+| undefined-notation |  |  | 1 | 1 |  |  |
+| gate-vacuous |  | 1 |  | 1 |  |  |
+| invalid-witness |  |  | 1 |  |  |  |
+| artifact-overwritten |  | 1 |  |  |  |  |
+| arithmetic-error |  |  |  |  | 1 |  |
+
+## frontier-18 — 419 row(s)
+
+| subclass | 6a-read | 6b-adjudicate | 8-adjudicate |
+|---|---|---|---|
+| citation-inflated | 2 | 5 | 131 |
+| false-or-overstrong-statement | 3 | 4 | 60 |
+| invalid-inference | 7 | 7 | 45 |
+| citation-missing | 2 | 3 | 28 |
+| missing-hypothesis |  | 2 | 17 |
+| citation-truncated | 1 | 1 | 16 |
+| ill-typed-construction |  |  | 17 |
+| undefined-notation |  |  | 12 |
+| citation-misattributed | 2 | 5 | 4 |
+| invalid-witness | 1 | 1 | 8 |
+| false-or-overstrong-title | 1 | 2 | 6 |
+| missing-choice-scope | 2 |  | 7 |
+| citation-corrupted | 2 | 3 |  |
+| arithmetic-error |  | 2 | 2 |
+| other |  | 4 |  |
+| false-boundary-disposition | 2 | 1 |  |
+| liveness-false-positive |  | 1 |  |
+
+## frontier-19 — 196 row(s)
+
+| subclass | 6a-read | 6b-adjudicate | 7-judge | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|
+| invalid-inference | 16 | 1 | 6 | 4 |  |
+| missing-hypothesis | 6 | 9 | 1 | 8 | 1 |
+| citation-missing | 4 |  | 5 | 8 | 4 |
+| ill-typed-construction | 10 | 1 | 1 | 4 | 2 |
+| false-or-overstrong-statement | 3 | 1 | 2 | 8 | 1 |
+| citation-misattributed | 7 | 4 |  | 2 |  |
+| missing-choice-scope | 7 |  | 3 | 1 | 1 |
+| citation-inflated | 1 | 2 | 1 | 8 |  |
+| citation-corrupted | 6 | 1 | 2 |  | 1 |
+| other | 1 | 7 |  |  |  |
+| false-or-overstrong-title | 1 | 1 | 1 | 4 |  |
+| invalid-witness | 3 | 1 | 1 |  | 2 |
+| citation-truncated |  |  | 1 | 4 | 1 |
+| arithmetic-error | 3 |  |  | 1 | 1 |
+| false-boundary-disposition | 3 | 1 |  |  | 1 |
+| undefined-notation | 1 | 1 |  | 2 |  |
+| gate-vacuous |  | 1 |  |  |  |
+
+## frontier-20 — 348 row(s)
+
+| subclass | 6c-cross | 6a-read | 6b-adjudicate | 7-judge | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|---|
+| other | 4 | 15 | 55 |  |  |  |
+| invalid-inference | 2 | 16 | 17 | 7 | 7 | 6 |
+| false-or-overstrong-statement |  | 2 | 13 | 2 | 10 |  |
+| citation-corrupted |  | 26 |  | 1 |  |  |
+| missing-hypothesis | 2 | 4 | 2 | 3 | 12 | 3 |
+| missing-choice-scope |  |  | 1 | 2 | 17 | 1 |
+| citation-missing |  | 5 |  |  | 8 | 6 |
+| ill-typed-construction |  |  | 1 | 1 | 15 | 2 |
+| undefined-notation |  | 3 | 1 | 1 | 10 | 2 |
+| invalid-witness |  | 1 | 1 | 2 | 10 |  |
+| false-boundary-disposition |  | 5 | 1 | 1 | 5 | 1 |
+| citation-inflated |  |  | 1 | 2 | 4 | 5 |
+| citation-misattributed |  | 3 | 3 |  | 1 | 2 |
+| citation-truncated |  |  |  | 3 | 2 | 2 |
+| arithmetic-error |  | 1 | 1 |  | 4 |  |
+| false-or-overstrong-title |  | 1 |  |  |  | 1 |
+
+## frontier-21 — 260 row(s)
+
+| subclass | 6a-read | 6b-adjudicate | 7-judge | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|
+| scope-drop |  | 62 |  |  |  |
+| other | 22 | 28 |  |  |  |
+| missing-choice-scope | 23 | 3 |  |  |  |
+| invalid-inference | 14 | 1 | 4 | 4 | 2 |
+| false-or-overstrong-statement | 4 | 8 | 5 | 2 |  |
+| citation-missing | 7 | 9 |  |  |  |
+| missing-hypothesis |  | 6 | 4 |  | 1 |
+| undefined-notation | 3 | 1 | 5 |  |  |
+| invalid-witness | 2 | 1 | 4 | 1 | 1 |
+| citation-inflated | 4 | 2 |  | 1 | 1 |
+| false-boundary-disposition | 1 | 5 | 1 |  |  |
+| ill-typed-construction |  |  | 2 | 1 | 4 |
+| false-or-overstrong-title | 4 |  | 1 | 1 |  |
+| arithmetic-error |  | 1 | 2 | 1 |  |
+| citation-misattributed |  | 1 |  |  |  |
+
+## frontier-22 — 338 row(s)
+
+| subclass | 6c-cross | 10-report | 6a-read | 6b-adjudicate | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|---|
+| other | 14 |  | 85 | 38 |  |  |
+| invalid-inference |  | 1 | 13 | 6 | 13 | 2 |
+| missing-hypothesis |  | 5 | 7 | 8 | 5 |  |
+| citation-corrupted |  |  | 23 |  |  |  |
+| false-or-overstrong-statement |  |  | 7 | 5 | 7 | 1 |
+| ill-typed-construction |  | 2 | 1 | 5 | 9 |  |
+| citation-missing |  | 1 | 4 | 8 |  | 2 |
+| missing-choice-scope |  | 3 | 2 | 6 | 4 |  |
+| false-boundary-disposition |  | 1 |  | 8 | 2 |  |
+| citation-truncated |  | 7 |  | 2 |  | 2 |
+| undefined-notation |  | 1 | 1 | 1 | 7 |  |
+| invalid-witness |  |  |  |  | 8 |  |
+| citation-misattributed |  | 2 | 1 |  | 1 | 1 |
+| citation-inflated |  | 2 |  | 1 |  |  |
+| arithmetic-error |  |  | 2 |  |  |  |
+| gate-vacuous |  |  |  | 1 |  |  |
+
+## frontier-23 — 348 row(s)
+
+| subclass | 6c-cross | 6a-read | 6b-adjudicate | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|
+| other | 14 | 103 | 92 |  |  |
+| invalid-inference | 2 | 4 | 19 | 5 | 3 |
+| false-or-overstrong-statement |  | 1 |  | 12 | 2 |
+| ill-typed-construction |  | 1 | 1 | 4 | 4 |
+| missing-hypothesis |  |  | 3 | 6 | 1 |
+| missing-choice-scope |  |  |  | 10 |  |
+| undefined-notation |  |  | 2 | 6 | 1 |
+| invalid-witness |  |  |  | 8 | 1 |
+| missing-case |  | 2 |  | 5 |  |
+| citation-missing |  | 4 |  | 1 | 2 |
+| false-or-overstrong-title |  |  |  | 4 | 1 |
+| false-boundary-disposition |  | 1 |  | 2 | 1 |
+| citation-inflated |  |  |  | 2 | 2 |
+| false-computation |  | 1 |  | 2 |  |
+| invalid-refutation |  | 1 |  | 1 |  |
+| missing-map |  | 1 |  | 1 |  |
+| false-claim |  |  | 1 | 1 |  |
+| citation-truncated |  |  |  | 2 |  |
+| arithmetic-error |  |  |  | 2 |  |
+| overstrong-title-or-statement |  | 1 |  |  |  |
+| ill-formed |  |  | 1 |  |  |
+| citation-misattributed |  |  |  | 1 |  |
+
+## frontier-24 — 226 row(s)
+
+| subclass | 6c-cross | 6a-read | 6b-adjudicate | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|
+| other | 9 | 41 | 39 |  |  |
+| invalid-inference |  | 6 | 8 | 18 | 4 |
+| missing-hypothesis |  | 2 | 6 | 10 | 5 |
+| invalid-witness |  |  |  | 12 |  |
+| ill-typed-construction |  |  |  | 8 |  |
+| ill-formed |  | 2 | 4 | 1 |  |
+| false-or-overstrong-statement |  | 1 | 2 | 3 |  |
+| undefined-notation |  |  |  | 6 |  |
+| false-boundary-disposition |  | 3 | 1 | 1 |  |
+| false-claim |  |  | 4 |  | 1 |
+| citation-inflated |  | 1 | 2 |  | 1 |
+| citation-corrupted |  | 4 |  |  |  |
+| citation-truncated |  |  |  |  | 4 |
+| arithmetic-error |  | 3 |  |  |  |
+| missing-case |  |  |  | 3 |  |
+| false-computation |  |  |  | 3 |  |
+| citation-misattributed |  |  | 1 | 1 |  |
+| citation-missing |  |  |  | 1 | 1 |
+| missing-choice-scope |  |  |  |  | 2 |
+| false-or-overstrong-title |  |  | 1 |  |  |
+| prompt-transcription |  |  |  | 1 |  |
+
+## frontier-25 — 308 row(s)
+
+| subclass | 6c-cross | 6a-read | 6b-adjudicate | 7-judge | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|---|
+| invalid-inference |  | 15 | 15 | 22 | 3 | 5 |
+| citation-inflated |  |  | 3 | 25 | 1 | 23 |
+| other | 3 | 24 | 7 |  |  |  |
+| missing-hypothesis |  | 1 | 9 | 4 | 7 | 9 |
+| ill-typed-construction |  | 1 | 3 | 11 | 5 | 2 |
+| undefined-notation |  | 1 |  |  | 3 | 14 |
+| false-or-overstrong-statement |  | 3 |  | 6 | 6 | 1 |
+| false-claim |  |  | 8 |  | 3 |  |
+| citation-misattributed |  | 8 | 2 |  |  |  |
+| citation-corrupted |  | 8 | 1 |  |  |  |
+| citation-missing |  | 2 |  |  |  | 7 |
+| citation-truncated |  |  |  |  |  | 8 |
+| false-computation |  | 2 |  |  | 3 |  |
+| ill-formed |  | 2 | 1 |  | 2 |  |
+| arithmetic-error |  |  | 2 |  |  | 2 |
+| missing-case |  |  |  |  |  | 4 |
+| false-or-overstrong-title |  |  |  |  | 3 |  |
+| invalid-refutation |  |  |  |  | 2 | 1 |
+| missing-map |  |  |  |  | 2 |  |
+| overstrong-title-or-statement |  |  | 1 |  |  |  |
+| false-boundary-disposition |  | 1 |  |  |  |  |
+| invalid-witness |  |  |  |  | 1 |  |
+
+## frontier-26 — 334 row(s)
+
+| subclass | 6c-cross | 6a-read | 6b-adjudicate | 7-judge | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|---|
+| other | 28 | 9 | 12 | 24 |  |  |
+| invalid-inference |  | 23 | 16 | 20 | 5 | 4 |
+| false-claim |  | 5 | 11 |  | 4 |  |
+| missing-choice-scope |  | 4 |  |  | 16 |  |
+| contract-mismatch |  | 19 |  |  |  |  |
+| missing-hypothesis |  | 1 | 9 |  | 5 | 3 |
+| ill-typed-construction |  | 2 | 1 | 7 | 1 | 4 |
+| ill-formed |  | 1 | 8 |  | 6 |  |
+| citation-inaccurate |  |  |  | 9 | 1 | 4 |
+| undefined-notation |  | 1 |  | 1 | 7 | 3 |
+| false-or-overstrong-statement |  | 2 |  |  | 8 |  |
+| ill-typed-claim |  | 1 |  | 3 | 5 |  |
+| false-computation |  | 1 |  |  | 6 | 1 |
+| invalid-witness |  | 3 |  |  | 2 |  |
+| citation-misattributed |  |  | 5 |  |  |  |
+| citation-missing |  | 3 |  |  | 2 |  |
+| invalid-refutation |  |  |  |  | 4 |  |
+| citation-inflated |  |  |  |  | 1 | 2 |
+| false-boundary-disposition |  | 1 | 1 |  |  |  |
+| unsupported-inference |  | 1 |  |  |  |  |
+| unsupported-universal-property |  | 1 |  |  |  |  |
+| arithmetic-error |  | 1 |  |  |  |  |
+| unlicensed-inference |  |  | 1 |  |  |  |
+| overstrong-title-or-statement |  |  | 1 |  |  |  |
+| missing-case |  | 1 |  |  |  |  |
+| false-or-overstrong-title |  |  |  |  | 1 |  |
+| citation-truncated |  |  |  |  |  | 1 |
+| missing-map |  |  |  |  |  | 1 |
+
+## frontier-27 — 298 row(s)
+
+| subclass | 6c-cross | 6a-read | 6b-adjudicate | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|
+| other | 21 | 18 | 11 |  |  |
+| missing-hypothesis |  | 11 | 5 | 19 | 1 |
+| unlicensed-inference |  | 4 | 25 |  |  |
+| ill-formed |  |  | 23 |  |  |
+| invalid-inference |  | 3 | 2 | 14 | 2 |
+| citation-inaccurate |  | 2 | 7 | 5 | 4 |
+| false-claim |  |  | 14 | 1 | 2 |
+| reader-repair |  | 14 |  |  |  |
+| undefined-notation |  | 2 |  | 9 | 2 |
+| false-or-overstrong-statement |  | 2 |  | 8 | 2 |
+| ill-typed-claim |  |  |  | 11 |  |
+| citation-missing |  | 1 |  | 6 | 3 |
+| invalid-witness |  | 1 |  | 4 | 2 |
+| ill-typed-construction |  |  | 1 | 5 | 1 |
+| missing-case |  | 2 | 2 |  |  |
+| false-computation |  | 1 |  | 2 | 1 |
+| citation-truncated |  |  |  | 3 | 1 |
+| risk-review |  |  | 3 |  |  |
+| invalid-refutation |  |  |  | 2 | 1 |
+| unsupported-inference |  |  |  | 1 | 2 |
+| overstrong-title-or-statement |  |  | 2 |  |  |
+| false-boundary-disposition |  | 1 |  | 1 |  |
+| citation-misattributed |  |  |  | 2 |  |
+| false-or-overstrong-title |  |  |  | 1 |  |
+| arithmetic-error |  |  |  | 1 |  |
+| missing-map |  |  |  | 1 |  |
+
+## frontier-28 — 396 row(s)
+
+| subclass | 6c-cross | 6a-read | 6b-adjudicate | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|
+| invalid-inference |  | 6 | 4 | 58 | 7 |
+| citation-missing |  | 5 |  | 35 | 16 |
+| reader-repair |  | 51 | 5 |  |  |
+| other | 24 |  | 10 |  |  |
+| ill-formed |  | 5 | 5 | 14 | 1 |
+| unlicensed-inference |  | 4 | 20 |  |  |
+| missing-hypothesis |  | 11 | 7 | 1 | 3 |
+| ill-typed-claim |  | 2 |  | 17 | 1 |
+| false-claim |  | 6 | 9 |  | 1 |
+| missing-choice-scope |  | 3 | 7 | 3 | 1 |
+| false-computation |  |  |  | 13 |  |
+| citation-inaccurate | 1 | 2 | 3 | 1 | 1 |
+| false-or-overstrong-statement |  | 3 | 1 | 1 |  |
+| contract-mismatch |  | 1 | 4 |  |  |
+| unsupported-inference |  |  |  | 4 |  |
+| invalid-refutation |  |  | 1 | 2 |  |
+| ill-typed-construction |  | 1 |  |  | 2 |
+| citation-truncated |  |  |  | 3 |  |
+| undefined-notation |  |  |  | 1 | 2 |
+| overstrong-title-or-statement |  |  | 2 |  |  |
+| false-or-overstrong-title |  |  |  | 2 |  |
+| false-boundary-disposition |  | 1 |  |  |  |
+| citation-inflated |  | 1 |  |  |  |
+| risk-review |  |  | 1 |  |  |
+
+## frontier-29 — 498 row(s)
+
+| subclass | 6a-read | 6b-adjudicate | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|
+| reader-repair | 38 | 37 |  |  |
+| missing-hypothesis | 24 | 13 | 28 | 4 |
+| other |  | 57 |  |  |
+| unlicensed-inference | 18 | 21 |  |  |
+| false-claim | 6 | 24 | 4 |  |
+| contract-mismatch | 31 |  |  |  |
+| invalid-inference | 8 | 4 | 11 | 1 |
+| ill-typed-claim |  |  | 17 | 3 |
+| ill-formed | 7 | 9 | 2 | 1 |
+| citation-inaccurate | 9 | 3 | 4 | 3 |
+| false-or-overstrong-statement | 2 |  | 11 | 1 |
+| frontmatter-schema | 12 |  |  |  |
+| ill-typed-construction | 2 |  | 9 | 1 |
+| citation-corrupted | 9 |  | 1 |  |
+| citation-missing | 5 |  | 4 | 1 |
+| invalid-refutation |  | 1 | 8 |  |
+| undefined-notation | 1 |  | 5 | 2 |
+| false-or-overstrong-title |  |  | 5 | 2 |
+| missing-choice-scope | 1 |  | 3 | 1 |
+| invalid-witness |  |  | 5 |  |
+| citation-truncated |  |  | 4 |  |
+| false-boundary-disposition | 2 | 1 |  |  |
+| overstrong-title-or-statement | 1 | 2 |  |  |
+| missing-case | 1 |  | 1 | 1 |
+| citation-inflated |  |  | 2 | 1 |
+| unsupported-inference |  |  | 2 |  |
+| arithmetic-error | 1 |  |  |  |
+
+## frontier-30 — 543 row(s)
+
+| subclass | 9-scope | 6c-cross | 6a-read | 6b-adjudicate | 8-adjudicate | 8-rejudge |
+|---|---|---|---|---|---|---|
+| invalid-inference |  |  | 5 | 9 | 48 | 5 |
+| missing-hypothesis |  |  | 4 | 10 | 36 | 5 |
+| unlicensed-inference |  |  | 10 | 32 | 1 |  |
+| ill-formed |  |  | 30 | 8 |  |  |
+| citation-inaccurate |  |  | 7 | 6 | 18 | 7 |
+| other |  |  | 6 | 32 |  |  |
+| reader-repair |  |  |  | 37 |  |  |
+| false-claim |  |  | 11 | 16 | 7 | 2 |
+| false-or-overstrong-statement | 1 |  | 4 | 3 | 14 | 5 |
+| ill-typed-claim |  |  | 8 | 1 | 16 | 1 |
+| contract-mismatch |  | 1 | 22 |  |  |  |
+| unsupported-inference |  |  |  |  | 13 | 2 |
+| invalid-witness |  |  | 7 | 1 | 5 |  |
+| citation-missing |  |  | 1 | 1 | 7 | 3 |
+| false-or-overstrong-title |  |  |  | 1 | 7 | 3 |
+| false-boundary-disposition |  |  | 3 |  | 5 |  |
+| ill-typed-construction |  |  | 2 |  | 4 | 2 |
+| missing-choice-scope |  |  | 1 |  | 7 |  |
+| missing-case |  |  | 5 |  |  | 2 |
+| false-computation |  |  | 1 | 2 | 4 |  |
+| citation-inflated |  |  |  |  | 2 | 5 |
+| undefined-notation |  |  | 3 |  | 2 | 1 |
+| invalid-refutation |  |  |  |  | 3 |  |
+| citation-misattributed |  |  | 1 |  |  | 1 |
+| frontmatter-schema |  |  | 2 |  |  |  |
+| arithmetic-error |  |  |  |  | 1 | 1 |
+| risk-review |  |  |  | 1 |  |  |
+| artifact-overwritten |  | 1 |  |  |  |  |
+| citation-truncated |  |  |  |  | 1 |  |
+| unsupported-universal-property |  |  |  |  | 1 |  |
+
+## frontier-31a — 708 row(s)
+
+| subclass | 6c-cross | 6a-read | 6b-adjudicate | 7-judge | 8-adjudicate |
+|---|---|---|---|---|---|
+| ill-formed |  | 5 | 77 |  |  |
+| other | 5 | 2 | 59 |  |  |
+| reader-repair |  |  | 60 |  |  |
+| invalid-inference |  | 7 | 14 |  | 35 |
+| missing-hypothesis | 1 | 4 | 13 | 1 | 34 |
+| citation-missing |  | 2 | 4 |  | 30 |
+| scheduler-race |  | 33 |  |  |  |
+| unsupported-inference |  | 17 | 8 |  | 4 |
+| unlicensed-inference |  | 3 | 26 |  |  |
+| citation-inaccurate | 3 | 4 | 7 |  | 13 |
+| invalid-witness | 2 | 12 | 1 |  | 9 |
+| false-or-overstrong-statement |  | 3 | 6 | 1 | 13 |
+| missing-choice-scope |  | 1 | 6 |  | 16 |
+| undefined-notation |  | 3 | 2 |  | 17 |
+| invalid-refutation | 2 | 12 | 4 |  | 2 |
+| ill-typed-construction |  | 1 | 5 |  | 13 |
+| ill-typed-claim |  | 3 | 1 |  | 14 |
+| scope-loss |  |  | 16 |  |  |
+| contract-mismatch | 2 | 12 | 1 |  |  |
+| missing-case |  | 2 | 6 |  | 2 |
+| false-or-overstrong-title |  |  | 2 |  | 7 |
+| false-claim |  | 1 | 5 |  | 2 |
+| citation-inflated |  |  | 1 |  | 6 |
+| false-computation |  |  | 2 |  | 4 |
+| false-boundary-disposition |  |  | 4 |  | 1 |
+| missing-map |  |  |  |  | 5 |
+| artifact-overwritten |  |  | 4 |  |  |
+| arithmetic-error |  |  | 1 |  |  |
+| frontmatter-schema |  |  | 1 |  |  |
+| citation-misattributed |  |  |  |  | 1 |
+
+## frontier-32 — 599 row(s)
+
+| subclass | 9-scope | 6c-cross | 6a-read | 6b-adjudicate | 8-adjudicate |
+|---|---|---|---|---|---|
+| ill-formed |  |  | 51 | 68 |  |
+| invalid-inference |  |  | 20 | 1 | 31 |
+| reader-repair |  |  | 49 |  |  |
+| citation-missing |  |  |  |  | 49 |
+| contract-mismatch |  | 1 | 38 | 1 | 1 |
+| missing-hypothesis |  |  | 10 | 1 | 27 |
+| other |  | 9 |  | 29 |  |
+| unlicensed-inference |  |  | 25 | 1 |  |
+| citation-inaccurate |  |  | 20 | 1 | 4 |
+| frontmatter-schema |  |  | 20 |  |  |
+| false-or-overstrong-statement |  |  | 5 | 2 | 11 |
+| ill-typed-construction |  |  |  |  | 18 |
+| missing-choice-scope |  |  | 2 | 7 | 7 |
+| ill-typed-claim |  |  | 2 | 2 | 10 |
+| unsupported-inference |  |  | 7 | 1 | 4 |
+| missing-case |  |  | 9 |  | 2 |
+| undefined-notation |  |  | 4 |  | 6 |
+| false-claim |  |  | 8 | 1 | 1 |
+| citation-inflated | 1 |  |  |  | 6 |
+| invalid-witness |  |  | 1 | 1 | 4 |
+| false-or-overstrong-title |  |  |  | 1 | 4 |
+| arithmetic-error |  |  |  | 1 | 2 |
+| false-computation |  | 1 | 1 | 1 |  |
+| overstrong-title-or-statement |  |  |  | 2 |  |
+| citation-truncated |  |  |  |  | 2 |
+| unsupported-universal-property |  |  |  |  | 2 |
+| false-boundary-disposition |  |  | 1 |  |  |
+| artifact-overwritten |  | 1 |  |  |  |
+| citation-corrupted |  |  |  |  | 1 |
+
+## frontier-33 — 673 row(s)
+
+| subclass | 6c-cross | 6a-read | 6b-adjudicate | 8-adjudicate |
+|---|---|---|---|---|
+| contract-mismatch |  | 6 | 561 |  |
+| missing-hypothesis |  | 1 | 1 | 23 |
+| citation-missing |  |  |  | 22 |
+| frontmatter-schema | 1 | 2 | 8 |  |
+| citation-inaccurate |  | 7 |  |  |
+| ill-typed-claim |  |  |  | 6 |
+| invalid-inference |  |  |  | 6 |
+| undefined-notation |  |  |  | 5 |
+| false-or-overstrong-title |  |  |  | 4 |
+| reader-repair |  |  | 3 |  |
+| false-or-overstrong-statement |  |  |  | 3 |
+| unlicensed-inference |  | 2 |  |  |
+| false-boundary-disposition |  |  | 2 |  |
+| arithmetic-error |  |  |  | 2 |
+| citation-inflated |  |  |  | 2 |
+| ill-formed |  | 1 |  |  |
+| overstrong-title-or-statement |  | 1 |  |  |
+| ill-typed-construction |  | 1 |  |  |
+| false-claim |  | 1 |  |  |
+| missing-map |  |  |  | 1 |
+| unsupported-inference |  |  |  | 1 |
+
+## frontier-35-ten-categories — 317 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 7-adjudicate |
+|---|---|---|---|
+| false-or-overstrong-statement | 37 | 1 | 49 |
+| invalid-inference | 20 | 1 | 32 |
+| other | 44 |  |  |
+| citation-inaccurate | 6 | 6 | 28 |
+| unlicensed-inference | 16 |  |  |
+| missing-choice-scope | 1 | 11 |  |
+| false-claim | 9 | 2 |  |
+| unsupported-inference |  | 8 |  |
+| arithmetic-error | 6 | 1 |  |
+| ill-typed-claim | 5 | 2 |  |
+| undefined-notation |  | 7 |  |
+| ill-typed-construction | 2 | 3 |  |
+| missing-hypothesis | 3 | 1 |  |
+| ill-formed | 2 |  |  |
+| citation-inflated | 1 | 1 |  |
+| citation-misattributed |  | 2 |  |
+| citation-missing |  | 2 |  |
+| false-or-overstrong-title |  | 2 |  |
+| missing-case |  | 2 |  |
+| overstrong-title-or-statement | 1 |  |  |
+| invalid-witness | 1 |  |  |
+| invalid-refutation | 1 |  |  |
+| false-computation |  | 1 |  |
+
+## frontier-36-complete — 233 row(s)
+
+| subclass | owner | 5a-adjudicate | 5b-cross | 7-adjudicate |
+|---|---|---|---|---|
+| missing-hypothesis |  | 9 | 20 | 13 |
+| invalid-inference |  | 8 |  | 24 |
+| missing-choice-scope | 2 | 3 | 22 | 3 |
+| citation-inaccurate |  | 10 |  | 16 |
+| reader-repair |  | 14 |  |  |
+| unlicensed-inference |  | 12 |  |  |
+| ill-typed-construction |  | 2 |  | 10 |
+| false-claim |  | 9 | 1 |  |
+| false-or-overstrong-statement |  | 3 |  | 5 |
+| ill-formed |  | 5 | 1 |  |
+| other |  | 5 | 1 |  |
+| citation-misattributed |  |  | 6 |  |
+| false-computation |  | 5 |  |  |
+| citation-missing |  | 3 |  | 1 |
+| arithmetic-error |  | 3 |  |  |
+| missing-case |  | 2 |  | 1 |
+| unsupported-inference |  |  | 3 |  |
+| invalid-witness |  | 1 |  | 1 |
+| undefined-notation |  | 1 |  | 1 |
+| invalid-refutation |  | 2 |  |  |
+| frontmatter-schema |  | 1 |  |  |
+| ill-typed-claim |  | 1 |  |  |
+| false-boundary-disposition |  | 1 |  |  |
+| risk-review |  |  | 1 |  |
+| citation-truncated |  |  |  | 1 |
+
+## frontier-37-owner-30 — 538 row(s)
+
+| subclass | owner | 5a-adjudicate | 5b-cross | 7-adjudicate |
+|---|---|---|---|---|
+| other |  | 5 | 13 | 149 |
+| reader-repair |  | 88 |  |  |
+| false-claim |  | 62 |  |  |
+| unlicensed-inference |  | 48 | 6 |  |
+| citation-inaccurate |  | 32 |  |  |
+| ill-formed |  | 22 |  |  |
+| missing-map |  |  | 17 |  |
+| contract-mismatch |  | 16 |  |  |
+| invalid-inference |  | 14 |  |  |
+| missing-hypothesis |  | 14 |  |  |
+| false-or-overstrong-statement |  | 12 |  |  |
+| arithmetic-error |  | 10 |  |  |
+| ill-typed-construction |  | 4 |  |  |
+| undefined-notation |  | 4 |  |  |
+| ill-typed-claim |  | 1 | 3 |  |
+| false-computation |  | 3 |  | 1 |
+| citation-truncated | 1 | 1 |  | 2 |
+| citation-missing |  | 2 |  |  |
+| missing-case |  | 2 |  |  |
+| false-boundary-disposition |  | 1 | 1 |  |
+| missing-choice-scope |  | 1 |  |  |
+| false-or-overstrong-title |  | 1 |  |  |
+| invalid-refutation |  | 1 |  |  |
+| invalid-witness |  |  | 1 |  |
+
+## frontier-38-owner-30 — 644 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 7-adjudicate | 8-scope |
+|---|---|---|---|---|
+| citation-inaccurate | 57 | 1 | 27 |  |
+| invalid-inference | 66 |  | 13 |  |
+| false-or-overstrong-statement | 73 |  | 3 |  |
+| missing-hypothesis | 57 |  | 1 |  |
+| missing-choice-scope | 45 |  | 1 |  |
+| citation-inflated | 40 |  |  |  |
+| false-boundary-disposition | 36 |  |  |  |
+| false-computation | 28 |  |  |  |
+| ill-typed-construction | 27 |  | 1 |  |
+| ill-typed-claim | 26 |  | 1 |  |
+| false-claim | 18 |  |  |  |
+| unlicensed-inference | 15 |  |  |  |
+| arithmetic-error | 14 |  |  |  |
+| reader-repair | 14 |  |  |  |
+| missing-case | 9 |  | 1 |  |
+| citation-misattributed | 10 |  |  |  |
+| ill-formed | 8 |  |  |  |
+| false-or-overstrong-title | 7 |  | 1 |  |
+| invalid-witness | 7 |  |  |  |
+| citation-truncated | 7 |  |  |  |
+| undefined-notation | 6 |  |  |  |
+| citation-missing | 5 |  |  |  |
+| citation-corrupted | 5 |  |  |  |
+| scope-loss | 4 |  |  |  |
+| missing-map | 3 |  |  |  |
+| unsupported-inference | 2 |  |  |  |
+| contract-mismatch | 1 |  |  |  |
+| unsourced-locator | 1 |  |  |  |
+| invalid-refutation | 1 |  |  |  |
+| other | 1 |  |  |  |
+| false-decline |  |  |  | 1 |
+
+## frontier-39-analysis-30 — 1132 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 7-adjudicate | 7-rejudge | 7.2-impact |
+|---|---|---|---|---|---|
+| false-or-overstrong-statement | 161 |  | 12 | 1 |  |
+| citation-inaccurate | 128 |  | 14 |  | 4 |
+| invalid-inference | 137 |  | 5 | 1 |  |
+| missing-hypothesis | 120 |  | 14 |  |  |
+| citation-inflated | 70 |  | 9 |  | 2 |
+| missing-choice-scope | 72 | 1 | 1 |  |  |
+| arithmetic-error | 46 |  |  |  |  |
+| citation-missing | 38 |  | 5 |  |  |
+| false-claim | 36 |  |  |  |  |
+| unlicensed-inference | 33 |  |  |  |  |
+| ill-typed-claim | 24 |  | 4 |  |  |
+| reader-repair | 28 |  |  |  |  |
+| false-computation | 24 |  | 1 |  |  |
+| ill-typed-construction | 19 |  | 3 | 1 |  |
+| unsupported-inference | 22 |  |  |  |  |
+| undefined-notation | 13 |  | 4 | 2 |  |
+| citation-truncated | 9 |  | 4 |  |  |
+| invalid-witness | 10 |  | 1 |  |  |
+| citation-misattributed | 10 |  |  |  |  |
+| ill-formed | 9 |  |  |  |  |
+| false-or-overstrong-title | 6 |  |  |  |  |
+| false-boundary-disposition | 5 |  |  |  |  |
+| missing-case | 4 |  |  |  |  |
+| source-locator | 4 |  |  |  |  |
+| overstrong-title-or-statement | 3 |  |  |  |  |
+| other | 1 | 2 |  |  |  |
+| invalid-refutation | 2 |  |  |  |  |
+| contract-mismatch | 2 |  |  |  |  |
+| coordinate-typing | 2 |  |  |  |  |
+| missing-map | 1 |  |  |  |  |
+| compact-increment-domain | 1 |  |  |  |  |
+| citation-corrupted | 1 |  |  |  |  |
+
+## frontier-40-geometry-braids-rep-27 — 816 row(s)
+
+| subclass | owner | 5a-adjudicate | 5b-cross | 7-adjudicate |
+|---|---|---|---|---|
+| citation-inaccurate |  | 89 |  | 41 |
+| invalid-inference |  | 71 | 1 | 51 |
+| reader-repair |  | 89 |  |  |
+| false-or-overstrong-statement |  | 74 |  | 2 |
+| missing-hypothesis |  | 60 | 1 | 7 |
+| unsupported-inference |  | 44 |  |  |
+| citation-inflated |  | 35 |  | 2 |
+| unlicensed-inference |  | 32 |  |  |
+| ill-typed-construction |  | 31 |  |  |
+| missing-choice-scope | 1 | 30 |  |  |
+| citation-missing |  | 29 |  |  |
+| ill-typed-claim |  | 27 |  |  |
+| undefined-notation |  | 16 |  | 1 |
+| false-or-overstrong-title |  | 16 |  |  |
+| false-boundary-disposition |  | 16 |  |  |
+| missing-case |  | 11 |  |  |
+| false-claim |  | 10 |  |  |
+| citation-misattributed |  | 8 |  |  |
+| citation-truncated |  | 5 |  |  |
+| ill-formed |  | 5 |  |  |
+| invalid-witness |  | 2 |  |  |
+| false-computation |  | 2 |  |  |
+| missing-map |  | 2 |  |  |
+| citation-corrupted |  | 1 |  |  |
+| contract-mismatch |  | 1 |  |  |
+| arithmetic-error |  | 1 |  |  |
+| invalid-refutation |  | 1 |  |  |
+| overstrong-title-or-statement |  | 1 |  |  |
+
+## frontier-41-ha-dt-29 — 1065 row(s)
+
+| subclass | owner | 5a-adjudicate | 5b-cross | 7-adjudicate |
+|---|---|---|---|---|
+| invalid-inference |  | 157 |  |  |
+| reader-repair |  | 126 |  |  |
+| missing-hypothesis | 5 | 116 | 1 | 3 |
+| other |  | 11 |  | 100 |
+| false-or-overstrong-statement |  | 70 |  |  |
+| citation-inaccurate |  | 62 | 1 |  |
+| ill-typed-claim | 1 | 56 |  |  |
+| ill-typed-construction |  | 52 | 1 |  |
+| missing-choice-scope | 5 | 39 | 2 |  |
+| false-boundary-disposition |  | 35 |  |  |
+| unlicensed-inference |  | 32 |  |  |
+| citation-inflated | 4 | 23 | 1 |  |
+| false-claim |  | 26 |  |  |
+| false-computation |  | 21 |  |  |
+| invalid-witness |  | 20 |  |  |
+| ill-formed |  | 17 |  |  |
+| citation-missing |  | 11 | 4 |  |
+| undefined-notation |  | 13 |  |  |
+| unsupported-inference | 1 | 10 |  | 1 |
+| false-or-overstrong-title |  | 8 |  |  |
+| citation-misattributed |  | 4 | 2 |  |
+| missing-case |  | 6 |  |  |
+| arithmetic-error |  | 6 |  |  |
+| missing-map |  | 4 |  |  |
+| contract-mismatch | 2 | 1 |  |  |
+| scope-drop |  | 2 |  |  |
+| frontmatter-schema |  | 2 |  |  |
+| invalid-refutation |  | 1 |  |  |
+
+## frontier-42-coxeter-32 — 540 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 7-adjudicate | 8-scope |
+|---|---|---|---|---|
+| invalid-inference | 87 |  | 6 |  |
+| false-or-overstrong-statement | 56 | 1 | 4 |  |
+| citation-inaccurate | 54 | 3 |  |  |
+| citation-missing | 45 | 2 |  |  |
+| ill-typed-claim | 37 |  |  |  |
+| missing-hypothesis | 25 | 1 | 2 |  |
+| citation-inflated | 21 | 1 | 2 |  |
+| ill-formed | 22 |  |  |  |
+| arithmetic-error | 21 |  |  |  |
+| false-claim | 20 |  |  |  |
+| unsupported-inference | 17 |  |  |  |
+| ill-typed-construction | 16 |  |  |  |
+| citation-misattributed | 15 | 1 |  |  |
+| missing-case | 15 |  |  |  |
+| undefined-notation | 12 |  |  | 1 |
+| false-boundary-disposition | 11 |  |  |  |
+| false-computation | 8 |  |  |  |
+| unlicensed-inference | 7 |  |  |  |
+| missing-choice-scope | 6 |  |  |  |
+| contract-mismatch | 3 |  |  |  |
+| incorrect-claim | 3 |  |  |  |
+| false-or-overstrong-title | 2 |  |  |  |
+| citation-corrupted | 2 |  |  |  |
+| citation-truncated | 2 |  |  |  |
+| unsupported-universal-property | 1 |  |  |  |
+| invalid-witness | 1 |  |  |  |
+| proof-gap | 1 |  |  |  |
+| incorrect-step | 1 |  |  |  |
+| invalid-refutation | 1 |  |  |  |
+| missing-justification | 1 |  |  |  |
+| reader-repair | 1 |  |  |  |
+| typing | 1 |  |  |  |
+| hypothesis-mismatch | 1 |  |  |  |
+
+## frontier-43-complex-representation-15 — 202 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 7-adjudicate | 7-rejudge |
+|---|---|---|---|---|
+| citation-inaccurate | 35 |  |  |  |
+| unlicensed-inference | 24 |  |  |  |
+| citation-inflated | 18 |  | 3 |  |
+| citation-missing | 17 | 1 | 3 |  |
+| invalid-inference | 13 |  | 1 |  |
+| false-or-overstrong-statement | 11 |  | 2 |  |
+| missing-hypothesis | 7 |  | 4 | 1 |
+| ill-typed-claim | 10 |  | 1 |  |
+| ill-formed | 8 |  |  |  |
+| undefined-notation | 6 |  | 1 |  |
+| false-or-overstrong-title | 6 |  |  |  |
+| false-computation | 5 |  |  |  |
+| ill-typed-construction | 4 |  |  |  |
+| arithmetic-error | 4 |  |  |  |
+| false-claim | 3 |  |  |  |
+| citation-misattributed | 3 |  |  |  |
+| missing-case | 2 |  |  |  |
+| invalid-witness | 2 |  |  |  |
+| contract-mismatch | 1 |  |  |  |
+| unsupported-inference | 1 |  |  |  |
+| false-boundary-disposition | 1 |  |  |  |
+| missing-choice-scope | 1 |  |  |  |
+| missing-map | 1 |  |  |  |
+| citation-corrupted | 1 |  |  |  |
+| citation-truncated | 1 |  |  |  |
+
+## frontier-44-special-representation-examples-28-six-step — 1471 row(s)
+
+| subclass | 3a-adjudicate | 5-adjudicate | 5.2-impact | owner |
+|---|---|---|---|---|
+| invalid-inference | 213 |  |  | 2 |
+| unsupported-inference | 163 |  |  | 7 |
+| false-claim | 131 |  |  |  |
+| false-or-overstrong-statement | 128 |  |  |  |
+| other |  | 89 | 26 | 7 |
+| citation-inaccurate | 107 |  |  |  |
+| unlicensed-inference | 102 |  |  | 2 |
+| ill-typed-construction | 65 |  |  |  |
+| missing-hypothesis | 54 |  |  |  |
+| ill-typed-claim | 54 |  |  |  |
+| citation-inflated | 52 |  |  |  |
+| false-computation | 48 |  |  |  |
+| citation-missing | 30 |  |  |  |
+| arithmetic-error | 26 |  |  |  |
+| false-boundary-disposition | 24 |  |  |  |
+| undefined-notation | 23 |  |  |  |
+| reader-repair | 21 |  |  |  |
+| missing-case | 17 |  |  |  |
+| missing-choice-scope | 11 |  |  | 4 |
+| ill-formed | 14 |  |  |  |
+| invalid-witness | 10 |  |  |  |
+| citation-misattributed | 7 |  |  | 1 |
+| proof-gap | 7 |  |  |  |
+| false-or-overstrong-title | 7 |  |  |  |
+| overstrong-title-or-statement | 5 |  |  |  |
+| citation-corrupted | 4 |  |  |  |
+| invalid-refutation | 2 |  |  |  |
+| missing-map | 2 |  |  |  |
+| missing-local-derivation | 2 |  |  |  |
+| citation-truncated | 1 |  |  |  |
+| unsupported-universal-property | 1 |  |  |  |
+| unsupported-field-claim | 1 |  |  |  |
+| invalid-inference-and-target-type | 1 |  |  |  |
+
+## hopf-hecke-unfinished-15-2026-10-15 — 53 row(s)
+
+| subclass | 3a-adjudicate | 5.2-impact |
+|---|---|---|
+| citation-inaccurate | 19 | 1 |
+| citation-misattributed | 6 |  |
+| citation-inflated | 4 |  |
+| unsupported-inference | 4 |  |
+| ill-formed | 4 |  |
+| false-claim | 3 |  |
+| ill-typed-construction | 2 |  |
+| false-or-overstrong-title | 2 |  |
+| ill-typed-claim | 1 | 1 |
+| undefined-notation | 1 |  |
+| reader-repair | 1 |  |
+| missing-hypothesis | 1 |  |
+| frontmatter-schema | 1 |  |
+| invalid-inference | 1 |  |
+| citation-missing | 1 |  |
+
+## mathematical-statistics-foundations-37 — 177 row(s)
+
+| subclass | 3a-adjudicate | 5-adjudicate | 5.2-impact |
+|---|---|---|---|
+| citation-inaccurate | 42 | 10 |  |
+| unsupported-inference | 22 |  |  |
+| reader-repair | 16 |  |  |
+| missing-hypothesis | 12 |  |  |
+| invalid-inference |  | 12 |  |
+| citation-missing | 8 |  |  |
+| ill-formed | 6 |  |  |
+| ill-typed-claim | 4 | 1 |  |
+| undefined-notation | 4 | 1 |  |
+| citation-inflated | 5 |  |  |
+| missing-choice-scope |  |  | 5 |
+| arithmetic-error | 4 |  |  |
+| false-or-overstrong-title | 4 |  |  |
+| frontmatter-schema | 4 |  |  |
+| citation-truncated | 2 |  |  |
+| unlicensed-inference | 2 |  |  |
+| ill-typed-construction | 2 |  |  |
+| false-or-overstrong-statement | 1 | 1 |  |
+| overstrong-title-or-statement | 2 |  |  |
+| proof-step-overstatement | 1 |  |  |
+| citation-misattributed | 1 |  |  |
+| false-claim | 1 |  |  |
+| invalid-witness | 1 |  |  |
+| false-computation | 1 |  |  |
+| contract-mismatch | 1 |  |  |
+| missing-case | 1 |  |  |
+
+## numerical-optimization-dynamics-2026-10-16 — 688 row(s)
+
+| subclass | 3a-adjudicate |
+|---|---|
+| missing-hypothesis | 109 |
+| citation-inaccurate | 77 |
+| unsupported-inference | 64 |
+| ill-formed | 53 |
+| citation-misattributed | 50 |
+| unlicensed-inference | 46 |
+| false-or-overstrong-statement | 41 |
+| undefined-notation | 37 |
+| ill-typed-construction | 31 |
+| citation-missing | 29 |
+| ill-typed-claim | 24 |
+| invalid-inference | 21 |
+| citation-inflated | 19 |
+| false-or-overstrong-title | 17 |
+| reader-repair | 15 |
+| missing-case | 14 |
+| missing-choice-scope | 10 |
+| overstrong-title-or-statement | 4 |
+| arithmetic-error | 4 |
+| citation-truncated | 4 |
+| false-claim | 3 |
+| other | 3 |
+| citation-corrupted | 2 |
+| frontmatter-schema | 2 |
+| false-boundary-disposition | 2 |
+| contract-mismatch | 1 |
+| invalid-witness | 1 |
+| missing-map | 1 |
+| scope-loss | 1 |
+| scope-drop | 1 |
+| citation-mismatch | 1 |
+| boundary-case | 1 |
+
+## phase-2-catchup-24 — 14 row(s)
+
+| subclass | 6b-adjudicate |
+|---|---|
+| contract-mismatch | 2 |
+| invalid-witness | 2 |
+| false-or-overstrong-statement | 2 |
+| risk-review | 2 |
+| invalid-inference | 1 |
+| citation-missing | 1 |
+| other | 1 |
+| ill-typed-construction | 1 |
+| ill-typed-claim | 1 |
+| citation-inaccurate | 1 |
+
+## phase-2-fourier-support-2 — 4 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross |
+|---|---|---|
+| stage-unowned | 1 | 1 |
+| citation-inaccurate | 1 |  |
+| other | 1 |  |
+
+## phase-2-hg-prerequisite — 7 row(s)
+
+| subclass | 6c-cross | 6a-read | 6b-adjudicate |
+|---|---|---|---|
+| missing-hypothesis |  | 1 | 1 |
+| invalid-inference | 2 |  |  |
+| ill-typed-construction |  |  | 1 |
+| missing-choice-scope | 1 |  |  |
+| false-or-overstrong-statement | 1 |  |  |
+
+## phase-2-merged-25 — 23 row(s)
+
+| subclass | 6c-cross | 6a-read | 6b-adjudicate |
+|---|---|---|---|
+| invalid-inference | 2 |  | 1 |
+| false-or-overstrong-statement | 1 |  | 2 |
+| contract-mismatch |  |  | 2 |
+| invalid-witness |  |  | 2 |
+| other |  |  | 2 |
+| ill-typed-construction |  |  | 2 |
+| risk-review |  |  | 2 |
+| missing-hypothesis |  | 1 | 1 |
+| citation-missing |  |  | 1 |
+| ill-typed-claim |  |  | 1 |
+| citation-inaccurate |  |  | 1 |
+| missing-choice-scope | 1 |  |  |
+| false-boundary-disposition |  |  | 1 |
+
+## phase-2-next-17 — 157 row(s)
+
+| subclass | 5a-adjudicate | 6-judge | 7-adjudicate |
+|---|---|---|---|
+| citation-inflated |  | 53 | 2 |
+| citation-misattributed | 1 | 28 |  |
+| citation-missing |  | 16 | 7 |
+| missing-hypothesis |  | 10 | 5 |
+| ill-typed-construction |  | 6 | 2 |
+| false-or-overstrong-statement |  | 7 |  |
+| false-claim |  | 5 |  |
+| invalid-inference | 2 | 1 |  |
+| undefined-notation |  | 3 |  |
+| ill-typed-claim |  | 2 | 1 |
+| false-or-overstrong-title |  | 3 |  |
+| unsupported-inference |  | 1 |  |
+| citation-inaccurate |  | 1 |  |
+| contract-mismatch |  |  | 1 |
+
+## phase-2-next-18 — 317 row(s)
+
+| subclass | owner | 5a-adjudicate | 5b-cross | 6-judge | 7-adjudicate | 7-rejudge |
+|---|---|---|---|---|---|---|
+| citation-inflated | 1 |  |  | 2 | 46 | 9 |
+| citation-missing | 4 | 1 | 10 | 6 | 5 | 9 |
+| invalid-inference | 4 | 2 |  | 4 | 17 | 3 |
+| citation-inaccurate | 1 |  |  | 9 | 15 | 3 |
+| undefined-notation | 4 | 13 |  | 1 | 3 | 2 |
+| missing-hypothesis |  |  |  | 2 | 11 | 10 |
+| ill-typed-claim |  |  |  | 7 | 6 | 4 |
+| false-claim |  | 1 |  | 1 | 14 |  |
+| unsupported-inference |  |  |  | 1 | 10 | 5 |
+| ill-typed-construction |  |  |  | 2 | 9 | 2 |
+| false-or-overstrong-statement | 1 | 1 |  |  | 3 | 6 |
+| ill-formed | 3 | 4 |  |  |  | 1 |
+| unlicensed-inference | 1 | 1 |  |  |  | 5 |
+| missing-case |  | 3 |  | 1 |  | 2 |
+| citation-misattributed |  |  |  |  | 3 | 2 |
+| false-or-overstrong-title |  |  |  |  | 4 |  |
+| false-boundary-disposition |  | 3 |  |  |  |  |
+| citation-truncated |  |  |  | 1 | 1 | 1 |
+| missing-choice-scope |  |  |  |  | 2 | 1 |
+| arithmetic-error |  | 1 |  |  |  | 1 |
+| other |  | 1 |  |  |  |  |
+| false-computation |  |  |  | 1 |  |  |
+| citation-corrupted |  |  |  |  | 1 |  |
+| contract-mismatch |  |  |  |  | 1 |  |
+| frontmatter-schema |  |  |  |  | 1 |  |
+| unsupported-universal-property |  |  |  |  |  | 1 |
+
+## phase-2-next-20 — 132 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 6-judge | 7-adjudicate | 8-receipt |
+|---|---|---|---|---|---|
+| citation-inflated | 4 |  | 33 | 2 | 21 |
+| missing-hypothesis |  |  | 4 | 6 |  |
+| ill-typed-construction |  |  | 2 | 6 |  |
+| other | 7 |  |  |  |  |
+| invalid-inference | 5 |  | 1 |  |  |
+| citation-missing |  |  | 5 | 1 |  |
+| contract-mismatch |  | 5 |  |  |  |
+| undefined-notation |  |  | 4 |  | 1 |
+| false-or-overstrong-title |  |  | 3 | 1 | 1 |
+| citation-truncated |  |  |  |  | 5 |
+| ill-typed-claim |  |  | 2 | 2 |  |
+| false-claim |  |  | 1 | 2 |  |
+| unsupported-inference |  |  |  | 2 |  |
+| arithmetic-error | 1 |  |  |  |  |
+| citation-inaccurate |  |  | 1 |  |  |
+| missing-case |  |  | 1 |  |  |
+| false-computation |  |  | 1 |  |  |
+| citation-misattributed |  |  | 1 |  |  |
+| invalid-refutation |  |  |  | 1 |  |
+
+## phase-2-next-21 — 262 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 6-judge | 7-adjudicate |
+|---|---|---|---|---|
+| citation-inflated |  | 7 | 4 | 68 |
+| invalid-inference | 8 | 4 | 1 | 30 |
+| citation-inaccurate | 17 |  |  | 14 |
+| missing-hypothesis |  | 1 |  | 22 |
+| citation-missing |  | 8 | 4 | 7 |
+| other |  | 1 |  | 9 |
+| citation-truncated |  |  |  | 9 |
+| ill-formed |  |  |  | 7 |
+| missing-choice-scope | 2 | 3 |  | 1 |
+| false-claim |  |  | 1 | 5 |
+| false-or-overstrong-statement |  | 2 | 1 | 2 |
+| missing-case |  |  |  | 5 |
+| ill-typed-construction | 2 |  |  | 2 |
+| undefined-notation |  |  | 1 | 3 |
+| ill-typed-claim |  |  | 2 | 1 |
+| false-or-overstrong-title |  |  |  | 2 |
+| unsupported-inference |  |  |  | 2 |
+| false-boundary-disposition |  |  |  | 1 |
+| invalid-witness |  |  |  | 1 |
+| citation-misattributed |  |  |  | 1 |
+| scope-loss |  |  |  | 1 |
+
+## phase-2-nine-step-25 — 105 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 6-judge | 7-adjudicate |
+|---|---|---|---|---|
+| ill-typed-construction | 2 |  | 10 | 6 |
+| citation-inflated |  |  | 2 | 13 |
+| citation-inaccurate | 1 |  | 1 | 11 |
+| citation-missing | 1 | 1 |  | 10 |
+| missing-hypothesis | 2 |  | 2 | 6 |
+| false-or-overstrong-statement | 2 | 1 | 2 |  |
+| false-or-overstrong-title |  |  | 1 | 4 |
+| invalid-inference | 1 | 2 |  | 1 |
+| invalid-witness | 2 |  |  | 2 |
+| ill-typed-claim | 1 |  | 1 | 2 |
+| contract-mismatch | 2 |  |  |  |
+| other | 2 |  |  |  |
+| risk-review | 2 |  |  |  |
+| undefined-notation |  |  |  | 2 |
+| missing-case |  |  | 1 | 1 |
+| missing-choice-scope |  | 1 |  |  |
+| false-boundary-disposition | 1 |  |  |  |
+| ill-formed |  |  |  | 1 |
+| citation-misattributed |  |  |  | 1 |
+| citation-truncated |  |  |  | 1 |
+
+## phase-2-remaining-27 — 1322 row(s)
+
+| subclass | owner | 5a-adjudicate | 5b-cross | 7-adjudicate | 7-rejudge | 8-scope |
+|---|---|---|---|---|---|---|
+| invalid-inference |  | 7 |  | 341 | 2 |  |
+| citation-inaccurate | 1 | 28 |  | 311 | 2 |  |
+| false-claim |  | 72 |  | 43 |  |  |
+| false-or-overstrong-statement | 2 | 7 |  | 44 | 9 | 3 |
+| missing-hypothesis | 1 | 8 |  | 48 | 5 |  |
+| citation-missing |  | 5 | 16 | 38 |  |  |
+| citation-inflated |  |  | 15 | 37 |  |  |
+| ill-typed-construction |  |  |  | 49 | 1 |  |
+| arithmetic-error |  | 8 |  | 22 | 1 |  |
+| unlicensed-inference |  | 28 |  |  |  |  |
+| false-computation |  | 13 |  | 11 |  |  |
+| missing-choice-scope |  | 1 |  | 20 |  |  |
+| ill-formed |  | 20 |  |  |  |  |
+| contract-mismatch | 7 | 3 |  | 7 | 2 |  |
+| ill-typed-claim |  | 1 |  | 13 | 5 |  |
+| missing-case |  |  |  | 18 |  |  |
+| unsupported-inference |  | 4 |  | 3 | 2 |  |
+| false-boundary-disposition |  |  |  | 6 | 2 |  |
+| false-or-overstrong-title |  |  |  | 8 |  |  |
+| invalid-witness |  | 2 |  | 3 | 1 |  |
+| undefined-notation |  | 3 |  |  |  |  |
+| other |  | 2 |  | 1 |  |  |
+| citation-truncated |  |  |  | 3 |  |  |
+| missing-map |  |  |  |  | 2 |  |
+| reader-repair |  | 1 |  |  |  |  |
+| citation-misattributed |  |  |  | 1 |  |  |
+| invalid-refutation |  |  |  | 1 |  |  |
+| unsupported-universal-property |  |  |  | 1 |  |  |
+| frontmatter-schema |  |  |  | 1 |  |  |
+
+## phase-2-wave-1 — 74 row(s)
+
+| subclass | 9-receipt | 3-review | 3-recheck | 6a-read | 6b-adjudicate | 7-judge | 8-adjudicate |
+|---|---|---|---|---|---|---|---|
+| contract-mismatch |  |  |  |  | 9 |  |  |
+| citation-missing |  | 1 |  | 1 | 3 |  | 2 |
+| missing-choice-scope | 2 |  | 5 |  |  |  |  |
+| citation-inaccurate |  |  |  |  | 2 | 2 | 3 |
+| missing-case |  |  |  |  | 6 |  |  |
+| citation-inflated |  |  |  |  |  |  | 6 |
+| false-or-overstrong-statement |  |  |  |  | 2 |  | 3 |
+| citation-misattributed |  |  |  |  | 3 |  | 2 |
+| ill-typed-claim |  |  |  |  | 1 |  | 4 |
+| ill-typed-construction |  | 1 |  |  | 1 |  | 1 |
+| false-or-overstrong-title |  |  |  |  |  |  | 3 |
+| invalid-inference |  | 1 | 1 |  |  |  |  |
+| citation-corrupted |  |  |  | 2 |  |  |  |
+| undefined-notation |  |  |  | 1 | 1 |  |  |
+| false-boundary-disposition |  |  |  |  | 2 |  |  |
+| reader-repair |  |  |  |  | 2 |  |  |
+| frontmatter-schema |  |  |  |  | 1 |  |  |
+
+## pre-frontier-13 — 3 row(s)
+
+| subclass | A10 | owner | unknown |
+|---|---|---|---|
+| other | 1 | 1 | 1 |
+
+## quantum-computing-algorithms-60-2026-10-15 — 360 row(s)
+
+| subclass | 3a-adjudicate | 5-adjudicate | 5-rejudge | owner |
+|---|---|---|---|---|
+| citation-inaccurate | 69 |  |  | 1 |
+| invalid-inference | 5 | 26 | 11 |  |
+| missing-hypothesis | 40 |  |  | 1 |
+| unsupported-inference | 13 | 18 | 7 | 1 |
+| false-or-overstrong-statement | 19 |  | 2 |  |
+| ill-formed | 20 |  |  |  |
+| undefined-notation | 14 |  |  |  |
+| unlicensed-inference | 12 |  |  | 2 |
+| ill-typed-construction | 10 | 4 |  |  |
+| reader-repair | 11 |  |  |  |
+| false-claim | 8 |  |  | 2 |
+| ill-typed-claim | 8 |  |  |  |
+| missing-case | 4 |  |  | 2 |
+| citation-inflated | 6 |  |  |  |
+| invalid-witness | 3 |  |  | 2 |
+| false-computation | 5 |  |  |  |
+| citation-missing | 4 |  |  |  |
+| contract-mismatch |  |  |  | 4 |
+| arithmetic-error | 3 |  |  |  |
+| citation-misattributed | 2 |  |  | 1 |
+| false-or-overstrong-title | 3 |  |  |  |
+| incomplete-procedure | 2 |  |  |  |
+| false-boundary-disposition | 1 |  |  | 1 |
+| overstrong-title-or-statement | 2 |  |  |  |
+| citation-truncated | 1 |  | 1 |  |
+| unjustified-identification | 1 |  |  |  |
+| false-intermediate-claim | 1 |  |  |  |
+| external-proof-gap | 1 |  |  |  |
+| missing-cost-convention | 1 |  |  |  |
+| unlicensed-cost-inference | 1 |  |  |  |
+| false-status-caption | 1 |  |  |  |
+| invalid-refutation | 1 |  |  |  |
+| gate-wrong-signature |  |  |  | 1 |
+| artifact-overwritten |  |  |  | 1 |
+
+## quantum-prerequisites-4-2026-10-15 — 11 row(s)
+
+| subclass | 3a-adjudicate |
+|---|---|
+| unsupported-inference | 7 |
+| undefined-notation | 3 |
+| ill-typed-construction | 1 |
+
+## ra-enrich-01 — 2 row(s)
+
+| subclass | unknown | 8-rejudge |
+|---|---|---|
+| other | 1 | 1 |
+
+## statistical-models-experiments-62 — 417 row(s)
+
+| subclass | 1-scaffold | 2-scope-review | 3a-adjudicate | 5-adjudicate | 5.2-impact | 6-scope | owner | post-publication | 3-review |
+|---|---|---|---|---|---|---|---|---|---|
+| citation-missing | 6 | 60 | 7 | 2 |  |  | 1 |  |  |
+| contract-mismatch | 1 | 61 |  |  |  | 1 | 4 |  |  |
+| citation-inaccurate | 1 | 4 | 34 | 2 |  |  |  |  | 5 |
+| false-boundary-disposition | 1 | 42 | 1 |  |  |  | 1 |  |  |
+| missing-hypothesis | 2 | 2 | 29 | 5 |  |  |  |  |  |
+| unsupported-inference | 5 | 12 | 12 |  |  |  | 1 |  |  |
+| false-or-overstrong-statement | 6 | 2 | 9 | 4 |  |  |  |  |  |
+| invalid-inference | 2 | 1 | 7 | 1 |  |  | 1 | 1 |  |
+| undefined-notation | 2 | 1 | 8 | 1 |  |  |  |  |  |
+| unlicensed-inference |  |  | 7 |  |  |  | 1 | 2 |  |
+| other |  | 3 |  | 1 |  |  | 4 |  |  |
+| citation-misattributed |  | 3 | 2 | 3 |  |  |  |  |  |
+| ill-typed-construction | 1 |  | 1 | 3 | 1 |  |  |  |  |
+| citation-inflated |  |  | 2 | 4 |  |  |  |  |  |
+| ill-formed |  |  | 3 |  |  |  | 1 | 2 |  |
+| frontmatter-schema | 1 | 1 | 2 |  |  |  |  | 1 |  |
+| missing-choice-scope |  | 2 | 1 | 1 |  |  |  |  |  |
+| false-or-overstrong-title |  |  | 3 |  |  |  |  |  |  |
+| scope-loss |  | 2 |  |  |  |  |  |  |  |
+| gate-wrong-signature |  | 2 |  |  |  |  |  |  |  |
+| ill-typed-claim |  |  | 1 | 1 |  |  |  |  |  |
+| missing-case |  |  | 1 |  |  |  | 1 |  |  |
+| citation-corrupted |  |  | 1 |  |  |  |  |  | 1 |
+| scope-drop | 1 |  |  |  |  |  |  |  |  |
+| arithmetic-error |  | 1 |  |  |  |  |  |  |  |
+| false-claim |  |  | 1 |  |  |  |  |  |  |
+
+## subjects-01 — 7 row(s)
+
+| subclass | unknown |
+|---|---|
+| other | 7 |
+
+## Open
+
+- `frontier-13-D036` frontier-13 · false-boundary-disposition · class:2169-items
+- `frontier-14-D356` frontier-14 · false-or-overstrong-title · cor-functor-categories-inherit-completeness-and-cocompleteness
+- `frontier-14-D392` frontier-14 · undefined-notation · thm-frolik-internal-characterisation-of-cech-completeness
+- `frontier-14-D395` frontier-14 · false-decline · class:1-item
+- `frontier-14-D396` frontier-14 · deferral-without-destination · class:36-items
+- `frontier-14-D397` frontier-14 · deferral-without-destination · class:16-items
+- `frontier-14-D398` frontier-14 · scope-drop · class:5-items
+- `frontier-14-D401` frontier-14 · deferral-without-destination · class:3-items
+- `frontier-14-D404` frontier-14 · unsourced-locator · class:1-item
+- `frontier-14-D409` frontier-14 · false-boundary-disposition · class:240-items
+- `frontier-14-D413` frontier-14 · unsourced-locator · research/frontier-14-batch-6.coverage.json
+- `frontier-14-D414` frontier-14 · other · class:16-items
+- `frontier-13-D044` frontier-13 · gate-vacuous · tools/proof-contract.mjs
+- `frontier-14-D417` frontier-14 · other · tools/url-sweep.mjs
+- `frontier-14-D419` frontier-14 · artifact-overwritten · tools/regen-contract-entries.mjs
+- `frontier-14-D420` frontier-14 · scheduler-race · 7-judge
+- `frontier-14-D421` frontier-14 · stage-unowned · 8-rejudge
+- `frontier-14-D425` frontier-14 · gate-vacuous · tools/finite-smoke.mjs
+- `frontier-14-D426` frontier-14 · gate-vacuous · tools/citation-fidelity.mjs
+- `frontier-14-D427` frontier-14 · gate-vacuous · tools/boundary-audit.mjs
+- `frontier-14-D428` frontier-14 · gate-wrong-signature · research/frontier-14-alpha-6c.task.md
+- `frontier-14-D429` frontier-14 · prompt-transcription · research/frontier-14-brief-alpha-6c.md
+- `frontier-13-D051` frontier-13 · gate-vacuous · research/frontier-13-spine-audit.json
+- `frontier-14-D430` frontier-14 · other · covering-spaces-and-lifting
+- `frontier-12-D008` frontier-12 · other · spine-audit receipt
+- `frontier-13-D053` frontier-13 · other · tools/precheck.mts
+- `pre-frontier-13-D003` pre-frontier-13 · other · tools/run-wave.test.mjs
+- `research/frontier-40-geometry-braids-rep-27-B11-crossing-locator-open` frontier-40-geometry-braids-rep-27 · citation-inaccurate · def-positive-and-negative-khovanov-rozansky-crossing-complexes
+- `frontier-39-analysis-30-5a-b11-poincare-cc-owner-held` frontier-39-analysis-30 · missing-hypothesis · thm-poincare-inequality-for-w-one-p-zero
+- `f39-b16-poincare-choice-open` frontier-39-analysis-30 · missing-choice-scope · thm-poincare-inequality-for-w-one-p-zero
+- `f39-analysis-b10-5a-poincare-choice-statement` frontier-39-analysis-30 · missing-hypothesis · thm-poincare-inequality-for-w-one-p-zero
+- `f39-a6-grand-kernel-open` frontier-39-analysis-30 · ill-formed · lem-grand-maximal-function-is-dominated-by-the-tangential-maximal-function
+- `f39a30-b9-5a-053` frontier-39-analysis-30 · missing-hypothesis · thm-gagliardo-nirenberg-sobolev-inequality-for-p-one
+- `f39a30-b9-5a-056` frontier-39-analysis-30 · missing-hypothesis · lem-weak-partial-derivatives-lower-sobolev-order
+- `f39a30-b9-5a-061` frontier-39-analysis-30 · citation-inaccurate · thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n
+- `f39a30-b9-5a-063` frontier-39-analysis-30 · overstrong-title-or-statement · rellich-kondrachov-and-sobolev-compactness-examples
+- `f39-b13-higher-sobolev-u-scope` frontier-39-analysis-30 · missing-hypothesis · thm-higher-order-sobolev-embedding
+- `frontier-40-geometry-braids-rep-27-step7-owner-chern-character-rank-open` frontier-40-geometry-braids-rep-27 · missing-hypothesis · def-chern-character-and-todd-class
+- `f43-b4-published-compact-stage-product` frontier-43-complex-representation-15 · unlicensed-inference · lem-weak-containment-of-the-trivial-representation-and-almost-invariant-vectors
+- `f43-b11-5a-pentagon-witness` frontier-43-complex-representation-15 · invalid-witness · ex-period-matrix-and-jacobian-of-the-pentagon-curve
+- `f43-b11-5a-pentagon-consumer` frontier-43-complex-representation-15 · citation-inflated · ex-abel-image-in-its-jacobian
+- `f43-b11-5a-pentagon-page` frontier-43-complex-representation-15 · citation-inflated · periods-jacobians-and-abel-jacobi-theory-examples
+- `frontier-43-complex-representation-15-B14-bishop-proof` frontier-43-complex-representation-15 · unlicensed-inference · cex-every-compact-set-is-conformally-removable
+- `f44-six-b3-cauchy-lub-bridge` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · thm-reals-cauchy-complete
+- `f44-six-step-b15-3a-jm-block` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · def-generalized-jm-primary-idempotents-and-residue-summand-functors
+- `f44-six-step-b15-3a-q-schur-foundation` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · def-type-a-q-schur-algebra-and-weyl-modules
+- `f44-six-step-b15-3a-label-comparison` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · rem-the-crystal-identification-does-not-elementarily-identify-cellular-simple-labels
+- `f44-six-step-b15-3a-large-hecke-prerequisite` frontier-44-special-representation-examples-28-six-step · missing-hypothesis · ex-normal-and-good-nodes-for-a-large-partition
+- `f44-six-b14-3a-schur-cellularity` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · def-type-a-q-schur-algebra-and-weyl-modules
+- `f44-six-b14-3a-schur-weight-norm` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · thm-q-schur-weyl-weight-space-gram-determinant-hook-product
+- `frontier-44-special-representation-examples-28-six-step-3a-batch-8-open-tensor-action` frontier-44-special-representation-examples-28-six-step · unsupported-inference · lem-quasi-r-divided-power-integrality-on-based-lattices
+- `frontier-44-special-representation-examples-28-six-step-3a-batch-8-open-tensor-bar` frontier-44-special-representation-examples-28-six-step · unsupported-inference · thm-quasi-r-tensor-bars-on-finite-products-of-based-integrable-modules
+- `f44-six-step-b23-linkage-bridge` frontier-44-special-representation-examples-28-six-step · invalid-inference · lem-type-a-tableau-central-summands-are-single-linkage-blocks
+- `f44-six-step-b23-kl-coefficient-bridge` frontier-44-special-representation-examples-28-six-step · invalid-inference · thm-parabolic-kl-polynomials-give-the-dual-canonical-transition-matrix
+- `f44six-b21-central-translation` frontier-44-special-representation-examples-28-six-step · false-claim · lem-the-central-action-on-the-deformed-antidominant-projective
+- `f44six-b21-central-fiber` frontier-44-special-representation-examples-28-six-step · false-claim · lem-the-central-action-on-the-deformed-antidominant-projective
+- `f44six-b21-hodge-lifting` frontier-44-special-representation-examples-28-six-step · false-claim · thm-hodge-riemann-for-indecomposable-soergel-bimodules
+- `f44six-b21-wall-prerequisite` frontier-44-special-representation-examples-28-six-step · false-claim · thm-wall-crossing-under-the-soergel-functor-is-tensoring-with-the-coinvariant-soergel-bimodule
+- `f44-six-step-3a-batch32-connected-strata` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · lem-complex-algebraic-morphisms-admit-compatible-finite-smooth-stratifications
+- `f44-six-step-3a-batch32-cech-refinement` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent
+- `f44-six-step-3a-batch32-page-refinement` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · constructible-incidence-and-cochain-models
+- `f44-six-step-b23-upper-crystal-labels` frontier-44-special-representation-examples-28-six-step · invalid-inference · lem-the-local-affine-hecke-socle-argument-for-residue-translations
+- `f44-six-b37-acyclic-5` frontier-44-special-representation-examples-28-six-step · unsupported-inference · lem-locally-trivial-acyclic-fibers-give-bounded-derived-pullback-equivalences
+- `f44-six-b37-stiefel-7` frontier-44-special-representation-examples-28-six-step · unsupported-inference · lem-product-general-linear-stiefel-approximations-stabilize-bounded-constructible-hom
+- `f44-six-b37-cartesian-3` frontier-44-special-representation-examples-28-six-step · unsupported-inference · lem-cartesian-simplicial-sheaves-model-equivariant-constructible-derived-hom
+- `f44-six-b37-six-3` frontier-44-special-representation-examples-28-six-step · unsupported-inference · thm-constructible-six-functors-proper-base-change-and-verdier-duality
+- `f44-six-b37-perversebridge-3` frontier-44-special-representation-examples-28-six-step · unsupported-inference · lem-general-linear-stiefel-perverse-normalization-is-exact-and-conservative
+- `f44-six-b37-perverse-3` frontier-44-special-representation-examples-28-six-step · unsupported-inference · thm-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes
+- `f44-six-b37-ext-3` frontier-44-special-representation-examples-28-six-step · unsupported-inference · thm-equivariant-constructible-ext-is-degreewise-finite-and-compatible-with-characteristic-zero-scalars
+- `f44-six-step-alpha-batch20-open-nilcone-formulas` frontier-44-special-representation-examples-28-six-step · false-or-overstrong-statement · lem-the-nilpotent-central-fiber-is-a-reduced-integral-domain
+- `f44-six-step-alpha-batch20-open-nilcone-prerequisites` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · lem-the-nilpotent-central-fiber-is-a-reduced-integral-domain
+- `f44-six-step-alpha-batch20-open-deformed-lifting` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · thm-lifting-of-indecomposable-projectives-to-the-deformed-family
+- `f44-six-step-alpha-batch20-open-central-order-formulas` frontier-44-special-representation-examples-28-six-step · false-or-overstrong-statement · lem-the-central-action-on-the-deformed-antidominant-projective
+- `f44-six-step-alpha-batch20-open-central-order-prerequisites` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · lem-the-central-action-on-the-deformed-antidominant-projective
+- `f44-six-step-alpha-batch20-open-projective-polynomial-comparison` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · thm-indecomposable-projectives-correspond-to-indecomposable-soergel-modules
+- `f44-six-step-alpha-batch20-open-standard-rank-comparison` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · prop-verma-flag-multiplicities-are-standard-filtration-ranks-under-v
+- `f44-six-step-alpha-batch20-open-producer-character-circularity` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · lem-rational-and-real-type-a-soergel-characters-and-indecomposable-labels-agree
+- `f44-six-step-alpha-batch20-open-duflo-domain-use` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · thm-duflo-joseph-g-finite-endomorphisms-of-verma-modules
+- `f44-six-step-alpha-batch20-open-endomorphism-central-order-use` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · thm-endomorphisms-of-the-antidominant-projective-are-the-coinvariant-algebra
+- `f44-six-step-alpha-batch20-open-endomorphism-scalar-slip` frontier-44-special-representation-examples-28-six-step · ill-typed-claim · thm-endomorphisms-of-the-antidominant-projective-are-the-coinvariant-algebra
+- `f44-six-b13-3a-finding-def-type-a-q-schur-algebra-and-weyl-modules` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · def-type-a-q-schur-algebra-and-weyl-modules
+- `f44-six-b13-3a-finding-thm-simple-type-a-hecke-modules-are-indexed-by-e-regular-partitions` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · thm-simple-type-a-hecke-modules-are-indexed-by-e-regular-partitions
+- `f44-six-3a-b33-analytic-connectedness` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · thm-complex-algebraic-varieties-and-maps-admit-compatible-finite-stratifications
+- `f44-six-3a-b33-triangulation-refinement` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · thm-constructible-sheaves-admit-finite-stratified-triangulations-and-finite-local-cohomology
+- `f44-six-3a-b33-cochain-refinement` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · lem-complex-algebraic-stratifications-have-finite-conical-cochain-models
+- `f44-six-b13-3a-finding-thm-q-schur-weyl-weight-space-gram-determinant-hook-product` frontier-44-special-representation-examples-28-six-step · unlicensed-inference · thm-q-schur-weyl-weight-space-gram-determinant-hook-product
+- `f44-six-b47-diagram-presentation` frontier-44-special-representation-examples-28-six-step · ill-typed-construction · def-minimal-parabolic-klr-diagram-proof-category
+- `f44-six-b47-flag-comparison` frontier-44-special-representation-examples-28-six-step · invalid-inference · lem-minimal-parabolic-polynomial-flag-model-realizes-the-graded-diagram-relations
+- `f44-six-b47-flag-relative-cap` frontier-44-special-representation-examples-28-six-step · invalid-inference · lem-minimal-parabolic-polynomial-flag-model-realizes-the-graded-diagram-relations
+- `f44-six-b47-diagram-normal-form` frontier-44-special-representation-examples-28-six-step · invalid-inference · lem-minimal-parabolic-diagrams-have-pbw-bubble-normal-form
+- `f44-six-b47-cap-off-intersection` frontier-44-special-representation-examples-28-six-step · invalid-inference · lem-cyclotomic-cap-off-quotient-has-no-extra-downward-relations
+- `f44-six-b47-jump-prerequisites` frontier-44-special-representation-examples-28-six-step · invalid-inference · lem-klr-two-color-jump-formula-and-strict-elementary-embeddings
+- `f44-six-b47-biadjunction-transport` frontier-44-special-representation-examples-28-six-step · invalid-inference · lem-cyclotomic-klr-coherent-graded-biadjunction-and-crossing-mates
+- `f44-six-b47-symmetry-adjunction-premise` frontier-44-special-representation-examples-28-six-step · invalid-inference · thm-cyclotomic-klr-algebras-are-finite-dimensional-graded-symmetric
+- `f44-six-b47-canonical-right-string` frontier-44-special-representation-examples-28-six-step · invalid-inference · lem-canonical-elementary-crystal-extraction-and-highest-weight-survivors
+- `f44-six-b47-canonical-unsigned-star` frontier-44-special-representation-examples-28-six-step · invalid-inference · lem-canonical-elementary-crystal-extraction-and-highest-weight-survivors
+- `f44-six-b47-canonical-path-independence` frontier-44-special-representation-examples-28-six-step · invalid-inference · lem-canonical-elementary-crystal-extraction-and-highest-weight-survivors
+- `f44-six-b47-crystal-recognition-premise` frontier-44-special-representation-examples-28-six-step · invalid-inference · thm-simple-and-indecomposable-projective-crystals-agree-with-b-lambda
+- `f44-six-b47-based-quotient-labels` frontier-44-special-representation-examples-28-six-step · invalid-inference · lem-cyclotomic-extension-of-scalars-respects-the-based-quotient
+- `f44-six-b47-lower-global-label-premise` frontier-44-special-representation-examples-28-six-step · invalid-inference · thm-self-dual-indecomposable-cyclotomic-klr-projectives-give-the-lower-global-basis
+- `f44-six-b47-upper-global-label-premise` frontier-44-special-representation-examples-28-six-step · invalid-inference · thm-self-dual-simple-cyclotomic-klr-modules-give-the-upper-global-basis
+- `f44-six-b47-page-foundation-overclaim` frontier-44-special-representation-examples-28-six-step · overstrong-title-or-statement · cyclotomic-klr-algebras-and-highest-weight-categorification
+- `msf37-step5-impact-initial-r1-u3-thm-huber-sparse-covariance-upper-and-lower-risk-ac-route` mathematical-statistics-foundations-37 · missing-choice-scope · thm-huber-sparse-covariance-upper-and-lower-risk
+- `quantum-computing-algorithms-60-2026-10-15-b29-3a-05` quantum-computing-algorithms-60-2026-10-15 · citation-inaccurate · thm-qa-finite-abelian-hidden-subgroup-sample-law
+- `nod-b49-3a-cost-title` numerical-optimization-dynamics-2026-10-16 · false-or-overstrong-title · thm-bartels-stewart-dense-operation-count
+- `nod-b49-3a-cost-invariant-scans` numerical-optimization-dynamics-2026-10-16 · unsupported-inference · thm-bartels-stewart-dense-operation-count
+- `nod-b101-3a-aubin-nitsche-endpoint` numerical-optimization-dynamics-2026-10-16 · false-or-overstrong-statement · thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity

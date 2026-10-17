@@ -6,6 +6,7 @@ import { spawnSync } from 'node:child_process';
 import { preflightCloseoutScope, regularPath, treeEntries, indexEntries, textGit, git } from './run-commit-scope.mjs';
 import { runScope, splitFrontmatter } from './step6-lib.mjs';
 import { scopedReadinessTree } from './step6-scoped-tree.mjs';
+import { planForeignResidual } from './step6-plan-projection.mjs';
 import { recordedPublishedRepair, unchangedPublishedClaim } from './published-repair-policy.mjs';
 import { recordedPublishedRepair as recordedPhysicsRepair } from './physics-support/published-repair-policy.mjs';
 
@@ -15,7 +16,7 @@ export function step6OwnedInputs(run, root, { physics = false } = {}) {
   if (existsSync(join(root, `research/${run}-closeout-scope.json`))) {
     const authority = preflightCloseoutScope(root, run, finalReceipt, { physics });
     const selected = new Set(authority.paths);
-    return selectSharedOwnership(run, root, { physics, scope: runScope(run, root), selected, policy: true, fragments: authority.fragments });
+    return selectSharedOwnership(run, root, { physics, scope: runScope(run, root), selected, policy: true, fragments: authority.fragments, planProjections: authority.planProjections });
   }
   const scope = runScope(run, root);
   if (!scope.items.length || !scope.pages.length) throw Error('empty closeout source frontier');
@@ -93,7 +94,7 @@ function publishedOwnershipParts(text, run, ownedIds) {
   return Object.fromEntries(Object.entries(parts).map(([key, rows]) => [key, JSON.stringify(rows)]));
 }
 
-function selectSharedOwnership(run, root, { physics, scope, selected, policy, fragments = [] }) {
+function selectSharedOwnership(run, root, { physics, scope, selected, policy, fragments = [], planProjections = [] }) {
   // Preserve unchanged and foreign-only shared edits outside the commit.
   // Reuse precisely the native scientific projections, not a filename-prefix
   // approximation or a whole-ledger object hash. A relevant change still
@@ -125,7 +126,7 @@ function selectSharedOwnership(run, root, { physics, scope, selected, policy, fr
     if (policy && !selected.has(path)) continue;
     // Explicit fragment authority remains stable after commit/retry; the v3
     // transaction validates and composes only its exact owned-record additions.
-    if (fragments.some(fragment => fragment.path === path)) continue;
+    if (fragments.some(fragment => fragment.path === path) || planProjections.some(row => row.path === path)) continue;
     if (policy && path === 'research/published-consumer-supplier-ledger.md') {
       const ownedIds = new Set([...scope.items.map(row => row.id), ...scope.pages.map(row => row.id),
         ...[...selected].flatMap(file => /^items\/([^/]+)\.md$/.exec(file)?.slice(1) ?? [])]);
@@ -143,6 +144,13 @@ function selectSharedOwnership(run, root, { physics, scope, selected, policy, fr
     const relevantChange = (current[path] ?? '') !== (committed[path] ?? '')
       || (staged[path] ?? '') !== (committed[path] ?? '');
     if (relevantChange) {
+      if (policy && path === 'research/plan-spec.json') {
+        const ids = scope.pages.map(row => row.id);
+        const beforeForeign = planForeignResidual(headSources[path], ids);
+        if (planForeignResidual(workingSources[path], ids) !== beforeForeign
+          || planForeignResidual(indexSources[path], ids) !== beforeForeign)
+          throw Error('mixed owned and foreign plan bytes require exact native plan-projection authority');
+      }
       if (!policy)
         throw Error(`changed run-relevant shared input requires an exact owner closeout policy: ${path}`);
     } else if (workingSources[path] !== headSources[path] || indexSources[path] !== headSources[path]) {

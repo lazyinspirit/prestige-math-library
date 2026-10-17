@@ -1,0 +1,174 @@
+[
+  {
+    "order": 2386,
+    "id": "adaptive-quadrature-and-error-indicators",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Adaptive quadrature and error indicators",
+    "companion": "adaptive-quadrature-and-error-indicators-examples",
+    "requires": [
+      "composite-quadrature-rules",
+      "outward-rounded-interval-and-ball-arithmetic",
+      "clenshaw-curtis-and-extrapolation-quadrature"
+    ],
+    "items": [
+      {
+        "id": "def-adaptive-simpson-refinement-indicator",
+        "kind": "definition",
+        "title": "Embedded Simpson refinement indicator",
+        "deps": [
+          "alg-composite-simpson-rule"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-composite-simpson-asymptotic-error-expansion",
+        "kind": "lemma",
+        "title": "Leading composite Simpson error coefficient",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "lem-simpson-panel-peano-kernel",
+          "def-higher-derivatives-and-smoothness",
+          "thm-heine-borel-r",
+          "thm-additivity-over-subintervals",
+          "thm-heine-cantor-metric",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-monotonicity-of-the-integral",
+          "thm-linearity-of-the-integral",
+          "lem-integral-elementary-bounds",
+          "thm-algebra-of-continuous-functions"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+        "kind": "algorithm",
+        "title": "Finite-depth adaptive Simpson with an indicator",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "def-adaptive-simpson-refinement-indicator"
+        ],
+        "justified_by": [
+          "thm-adaptive-simpson-cap-termination-and-indicator-budget"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-simpson-richardson-error-estimator-asymptotic",
+        "kind": "theorem",
+        "title": "Conditional asymptotic validity of the Simpson /15 indicator",
+        "deps": [
+          "def-adaptive-simpson-refinement-indicator",
+          "lem-composite-simpson-asymptotic-error-expansion",
+          "def-higher-derivatives-and-smoothness",
+          "cor-of-reverse-triangle"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-adaptive-simpson-cap-termination-and-indicator-budget",
+        "kind": "theorem",
+        "title": "Termination and indicator bookkeeping for capped adaptive Simpson",
+        "deps": [
+          "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+          "def-adaptive-simpson-refinement-indicator"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-certified-adaptive-simpson",
+        "kind": "algorithm",
+        "title": "Certified adaptive Simpson from derivative enclosures",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "def-higher-derivatives-and-smoothness",
+          "thm-composite-simpson-error-bound",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+        ],
+        "justified_by": [
+          "thm-certified-adaptive-simpson-enclosure"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-certified-adaptive-simpson-enclosure",
+        "kind": "theorem",
+        "title": "Sound integral enclosure from certified adaptive Simpson",
+        "deps": [
+          "alg-certified-adaptive-simpson",
+          "alg-composite-simpson-rule",
+          "def-higher-derivatives-and-smoothness",
+          "thm-composite-simpson-error-bound",
+          "def-intervals-rectangles-and-complex-balls",
+          "def-dyadic-floating-point-format-and-directed-rounding",
+          "def-outward-rounded-interval-and-ball-operations",
+          "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+          "thm-additivity-over-subintervals",
+          "thm-heine-borel-r",
+          "thm-extreme-value-r"
+        ],
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 2387,
+    "id": "adaptive-quadrature-and-error-indicators-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Adaptive quadrature and error indicators — Examples",
+    "companion": "adaptive-quadrature-and-error-indicators",
+    "requires": [
+      "adaptive-quadrature-and-error-indicators"
+    ],
+    "items": [
+      {
+        "id": "ex-adaptive-simpson-misses-narrow-feature",
+        "kind": "example",
+        "title": "The Simpson indicator misses a feature between its sample nodes",
+        "deps": [
+          "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+          "def-adaptive-simpson-refinement-indicator",
+          "thm-algebra-of-continuous-functions",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-monotonicity-of-the-integral",
+          "alg-composite-simpson-rule",
+          "thm-additivity-over-subintervals",
+          "lem-integral-elementary-bounds"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-adaptive-simpson-cap-reached",
+        "kind": "example",
+        "title": "A narrow peak reaches the adaptive Simpson depth cap",
+        "deps": [
+          "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+          "def-adaptive-simpson-refinement-indicator",
+          "alg-composite-simpson-rule"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-adaptive-simpson-leading-error-cancellation",
+        "kind": "example",
+        "title": "Cancellation of the leading Simpson error coefficient",
+        "deps": [
+          "alg-composite-simpson-rule",
+          "def-adaptive-simpson-refinement-indicator",
+          "thm-simpson-richardson-error-estimator-asymptotic",
+          "def-higher-derivatives-and-smoothness",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "thm-algebra-of-continuous-functions",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  }
+]

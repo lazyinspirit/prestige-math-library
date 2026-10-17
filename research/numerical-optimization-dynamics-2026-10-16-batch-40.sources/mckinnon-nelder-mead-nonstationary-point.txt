@@ -1,0 +1,911 @@
+CONVERGENCE OF THE NELDER–MEAD SIMPLEX METHOD TO
+A NONSTATIONARY POINT∗
+
+K. I. M. MCKINNON†
+
+SIAM J. OPTIM.
+c
+⃝1998 Society for Industrial and Applied Mathematics
+Vol. 9, No. 1, pp. 148–158
+
+Abstract. This paper analyzes the behavior of the Nelder–Mead simplex method for a family
+of examples which cause the method to converge to a nonstationary point. All the examples use
+continuous functions of two variables.
+The family of functions contains strictly convex functions
+with up to three continuous derivatives. In all the examples the method repeatedly applies the inside
+contraction step with the best vertex remaining fixed. The simplices tend to a straight line which is
+orthogonal to the steepest descent direction. It is shown that this behavior cannot occur for functions
+with more than three continuous derivatives. The stability of the examples is analyzed.
+
+Key words. Nelder–Mead method, direct search, simplex, unconstrained optimization
+
+AMS subject classification. 65K05
+
+PII. S1052623496303482
+
+1. Introduction. Direct search methods are very widely used in chemical en-
+gineering, chemistry, and medicine. They are a class of optimization methods which
+are easy to program, do not require derivatives, and are often claimed to be robust
+for problems with discontinuities or where the function values are noisy.
+In [12, 13]
+Torczon produced convergence results for a class of methods called pattern search
+methods. This class includes several well-known direct search methods such as the
+two-dimensional case of the Spendley, Hext, and Himsworth simplex method [8] but
+does not include the most widely used method, the Nelder–Mead simplex method [4].
+In the Nelder–Mead method the simplex can vary in shape from iteration to iteration.
+Nelder and Mead introduced this feature to allow the simplex to adapt its shape to
+the local contours of the function, and for many problems this is effective. However,
+it is this change of shape which excludes the Nelder–Mead method from the class of
+methods covered by the convergence results of Torczon [13], which rely on the vertices
+of the simplices lying on a lattice of points.
+The Nelder–Mead method uses a small number of function evaluations per itera-
+tion, and for many functions of low dimension its rules for adapting the simplex shape
+lead to low iteration counts. In [11, 1], however, Torczon and Dennis report results
+from tests in which the Nelder–Mead method frequently failed to converge to a local
+minimum of smooth functions of low dimension: it was observed even for functions
+with as few as eight variables. In the cases where failure occurred, the search line
+defined by the method became orthogonal to the gradient direction; however, the rea-
+sons for this behavior were not fully understood. Some theoretical results about the
+convergence of a modified version of the Nelder–Mead method are given by Woods
+[15]. In a recent paper, Lagarias et al. [3] derive a range of convergence results which
+apply to the original Nelder–Mead method. Among these results is a proof that the
+method converges to a minimizer for strictly convex functions of one variable and
+also a proof that for strictly convex functions of two variables the simplex diameters
+converge to zero. However, it is not yet known even for the function x2 + y2, the sim-
+
+∗Received by the editors May 13, 1996; accepted for publication (in revised form) November 12,
+1997; published electronically December 2, 1998.
+http://www.siam.org/journals/siopt/9-1/30348.html
+†Department of Mathematics and Statistics, The University of Edinburgh, King’s Buildings,
+Edinburgh EH9 3JZ, UK (ken@maths.ed.ac.uk).
+
+148
+
+Downloaded 09/26/13 to 143.106.96.183. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+NELDER–MEAD AT A NONSTATIONARY POINT
+149
+
+plest strictly convex quadratic functions of two variables, whether the method always
+converges to the minimizer, or indeed whether it always converges to a single point.
+The current paper presents a family of examples of functions of two variables,
+where convergence occurs to a nonstationary point for a range of starting simplices.
+Some examples have a discontinuous first derivative and others are strictly convex
+with between one and three continuous derivatives. The simplices converge to a line
+which is orthogonal to the steepest descent direction and have interior angles which
+tend to zero.
+We assume that the problem to be solved is
+
+min
+v∈R2 f(v).
+
+For functions defined over R2 (i.e., functions of two variables) the Nelder–Mead
+method operates with a simplex in R2, which is specified by its three vertices. The
+Nelder–Mead method is described below for the two-variable case and without the
+termination test. The settings for the parameter ρ in L(ρ) are the most commonly
+used values. A fuller description of the method can be found in the papers by Lagarias
+et al. [3] and Nelder and Mead [4].
+
+The Nelder–Mead method.
+
+order: Label the three vertices of the current simplex b, s, and w so that their
+corresponding function values fb, fs, and fw satisfy fb ≤fs ≤fw.
+m := (b + s)/2, {the midpoint of the best and second worst points}.
+Let L(ρ) denote the function L(ρ) = m + ρ(m −w), {L is the search line}.
+r := L(1); fr := f(r).
+If fr < fb then
+e := L(2); fe := f(e).
+If fe < fb then accept e {Expand} else accept r {Reflect}.
+else {fb ≤fr} if fr < fs then
+Accept r {Reflect}.
+else {fs ≤fr} if fr < fw then
+c := L(0.5); fc := f(c).
+If fc ≤fr then accept c {Outside Contract} else →shrink.
+else {fw ≤fr}
+c := L(−0.5); fc := f(c).
+If fc < fw then accept c {Inside Contract} else →shrink.
+Replace w by the accepted point; →order.
+shrink: Replace s by (s + b)/2 and w by (w + b)/2; →order.
+
+The examples in this paper cause the Nelder–Mead method to apply the inside
+contraction step repeatedly with the best vertex remaining fixed. This behavior will
+be referred to as repeated focused inside contraction (rfic). No other type of step
+occurs for these examples, and this greatly simplifies their analysis. The examples are
+very simple and highlight a serious deficiency in the method: the simplices collapse
+along the steepest descent direction, a direction along which we would like them to
+enlarge.
+It should be noted that it is now common to use a variant of the original Nelder–
+Mead algorithm in which the expand step is accepted if fe < fr, which is a more
+restrictive condition. Since the examples in this paper are constructed so that fr > fb,
+i.e., the reflected point is never an improvement on the best point, the expand step
+
+Downloaded 09/26/13 to 143.106.96.183. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+150
+K. I. M. MCKINNON
+
+is never considered. Hence this common variant of the Nelder–Mead method behaves
+in an identical manner to the original algorithm for the examples in this paper.
+Other examples are known where the Nelder–Mead method or its variants fail. In
+[2], Dennis and Woods give a strictly convex example, where a variant of the Nelder–
+Mead method performs an unbroken sequence of shrink steps toward a single point
+which is at a discontinuity of the gradient and at which there is no zero subgradient.
+In their variant the condition for accepting a contraction step is that fc < fs, which
+is more stringent than the original Nelder–Mead method, so more shrink steps are
+performed. This behavior cannot occur for the original version of the Nelder–Mead
+method as this method never performs shrink steps on strictly convex functions (see
+Lagarias et al. [3]). In [15] Woods also gives a sketch of a differentiable nonconvex
+function for which the Nelder–Mead method converges to a nonminimizing point by
+a sequence of repeated shrinks. However, it can be shown that for this behavior to
+occur with the original form of the Nelder–Mead method, the point to which the
+simplex shrinks must be a stationary point. It is also possible to construct examples
+of nonconvex differentiable functions for which the original form of the Nelder–Mead
+method in exact arithmetic converges by repeated contractions to a degenerate simplex
+of finite length, none of whose vertices are stationary points [9, 10]. An example of
+this case is the function f(x, y) = x2 −y(y −2) with initial simplex (1,0), (0,-3), (0,3),
+which tends in the limit to (0,0), (0,-3), (0,3). The examples given in this paper are,
+however, the first examples known where the Nelder–Mead method fails to converge
+to a minimizer of a strictly convex differentiable function.
+A wide variety of simplex methods which allow the simplex to vary in shape
+in a similar manner to the Nelder–Mead method has been proposed and analyzed
+by, among others, Rykov [5, 6, 7] and more recently by Tseng [14]. These methods
+accept certain trial steps only if there is a sufficient decrease in an objective function.
+In this they differ from the Nelder–Mead method and the methods of Torczon [12]
+which require only strict decrease and whose behavior depends only on the order of
+the function values at the trial points, not on the actual values. Convergence results
+for the methods of Rykov and Tseng rely on this sufficient decrease.
+One of the
+variants of Tseng’s method is the same as the Nelder–Mead method except for the
+sufficient decrease condition and a condition which bounds the simplex interior angles
+away from zero. Because of this, when Tseng’s variant is applied to the examples
+in this paper, it eventually performs shrink steps instead of the inside contraction
+steps performed by the original Nelder–Mead method. This allows it to escape from
+the nonstationary point which is the focus of the rfic in the original Nelder–Mead
+method.
+The structure of this paper is as follows. In section 2 the sequence of simplices
+is derived corresponding to rfic. In section 3 a family of functions are given which
+produce this behavior and result in the method converging to a nonstationary point.
+In section 4 the range of functions which can give the rfic behavior is derived.
+Section 5 contains an analysis of how perturbations of the initial simplex affect the
+rfic behavior of the examples in section 3.
+
+2. Analysis of the repeated inside contraction behavior. Consider a sim-
+plex in two dimensions with vertices at 0 (i.e., the origin), v(n+1), and v(n). Assume
+that
+
+f(0) < f(v(n+1)) < f(v(n)).
+(2.1)
+
+Downloaded 09/26/13 to 143.106.96.183. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+NELDER–MEAD AT A NONSTATIONARY POINT
+151
+
+After the order step of the algorithm, b = 0, s = v(n+1), and w = v(n).
+The
+Nelder–Mead method calculates m(n) = v(n+1)/2, the midpoint of the line joining the
+best and second worst points, and then reflects the worst point, v(n), in m(n) with a
+reflection factor of ρ = 1 to give the point
+
+r(n) = m(n) + ρ(m(n) −v(n)) = v(n+1) −v(n).
+(2.2)
+
+Assume that
+
+f(v(n)) < f(r(n)).
+(2.3)
+
+In this case the point r(n) is rejected and the point v(n+2) is calculated using a
+reflection factor ρ = −0.5 in
+
+v(n+2) = m(n) + ρ(m(n) −v(n)) = 1
+
+4v(n+1) + 1
+
+2v(n).
+
+v(n+2) is the midpoint of the line joining m(n) and v(n).
+Provided f(v(n+2)) <
+f(v(n+1)), i.e., (2.1) holds with n replaced by n+1, the Nelder–Mead method does the
+inside contraction step rather than a shrink step. The inside contraction step replaces
+v(n) with the point v(n+2), so that the new simplex consists of v(n+1), v(n+2), and the
+origin. Provided this pattern repeats, the successive simplex vertices will satisfy the
+linear recurrence relation
+
+4v(n+2) −v(n+1) −2v(n) = 0.
+
+This has the general solution
+
+v(n) = A1λn
+1 + A2λn
+2,
+(2.4)
+
+where Ai ∈R2 and
+
+λ1 = 1 +
+√
+
+33
+8
+,
+λ2 = 1 −
+√
+
+33
+8
+.
+(2.5)
+
+Hence λ1 ∼= 0.84307 and λ2 ∼= −0.59307. It follows from (2.2) and (2.4) that
+
+r(n) = −A1λn
+1(1 −λ1) −A2λn
+2(1 −λ2).
+(2.6)
+
+It is this repeated inside contraction toward the same fixed vertex which is being
+referred to as repeated focused inside contraction (rfic). In [3] Lagarias et al. formally
+prove that no step of the Nelder–Mead method can transform a nondegenerate simplex
+to a degenerate simplex. In the two-dimensional case this corresponds to the fact that
+the area of the simplex either increases by a factor of 2, stays the same, or decreases
+by a factor of 2 or 4. Hence, provided the Nelder–Mead method is started from a
+nondegenerate initial simplex, then no later simplex can be degenerate and if rfic
+occurs, then the initial simplex for rfic is nondegenerate. This implies that A1 and
+A2 in (2.4) are linearly independent.
+Consider now the initial simplex with vertices v(0) = (1, 1), v(1) = (λ1, λ2), and
+(0, 0). Substituting into (2.4) yields A1 = (1, 0) and A2 = (0, 1). It follows that
+the particular solution for these initial conditions is v(n) = (λn
+1, λn
+2). This solution is
+
+Downloaded 09/26/13 to 143.106.96.183. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+152
+K. I. M. MCKINNON
+
+x
+
+y
+v
+(0)
+
+v
+(1)
+
+v
+(2)
+
+v
+(3)
+
+Fig. 2.1. Successive simplices with rfics.
+
+shown in Figure 2.1. The general form of the three points needed at one step of the
+Nelder–Mead method is therefore
+
+v(n) = (λn
+1, λn
+2),
+(2.7)
+v(n+1) = (λn+1
+1
+, λn+1
+2
+),
+(2.8)
+
+r(n) = (−λn
+1(1 −λ1), −λn
+2(1 −λ2)).
+(2.9)
+
+Provided (2.1) and (2.3) hold at these points, the simplex method will take the
+inside contraction step assumed above.
+Note that the x coordinates of v(n) and v(n+1) are positive and the x coordinate
+of r(n) is negative.
+
+3. Functions which cause RFIC. Consider the function f(x, y) given by
+
+f(x, y) = θφ|x|τ + y + y2,
+x ≤0,
+(3.1)
+=
+θxτ + y + y2,
+x ≥0,
+
+where θ and φ are positive constants. Note that (0,-1) is a descent direction from
+the origin (0,0) and that f is strictly convex provided τ > 1. f has continuous first
+derivatives if τ > 1, continuous second derivatives if τ > 2, and continuous third
+derivatives if τ > 3. Figure 2.2 shows the contour plot of this function and the first
+two steps of the Nelder–Mead method for the case τ = 2, θ = 6, and φ = 60. Both
+steps are inside contractions.
+
+Downloaded 09/26/13 to 143.106.96.183. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+NELDER–MEAD AT A NONSTATIONARY POINT
+153
+
+x
+
+y
+
+v(0)
+
+v(1)
+
+v(2)
+
+m(0)
+
+r (0)
+
+m(1)
+
+r (1)
+
+Fig. 2.2. f(x, y) = 360x2 + y + y2 if x ≤0 and f(x, y) = 6x2 + y + y2 if x ≥0, i.e., function
+(3.1) for case τ = 2, θ = 6, φ = 60.
+
+Define ˆτ to be such that
+
+λˆτ
+1 = |λ2|,
+(3.2)
+
+so ˆτ is given by
+
+ˆτ = ln |λ2|
+
+ln λ1
+∼= 3.0605.
+(3.3)
+
+In what follows assume that τ satisfies
+
+0 < τ < ˆτ.
+(3.4)
+
+Since 0 < λ1 < 1, it therefore follows that
+
+λτ
+1 > λˆτ
+1 = |λ2|.
+(3.5)
+
+Using (2.7) and (2.9) it follows that
+
+f(v(n))= θλτn
+1
++ λn
+2 + λ2n
+2
+and f(r(n))= φθ(λτn
+1 (1 −λ1)τ) −λn
+2(1 −λ2) + λ2n
+2 (1 −λ2)2.
+
+Hence f(v(n)) > f(v(n+1)) iff
+
+θλτn
+1 (1 −λτ
+1) > λn
+2(λ2 −1) + λ2n
+2 (λ2
+2 −1).
+
+Downloaded 09/26/13 to 143.106.96.183. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+154
+K. I. M. MCKINNON
+
+Since λτ
+1 > |λ2| and λ2
+2 −1 < 0, this is true for all n ≥0 if θ is such that
+
+θ(1 −λτ
+1) > |λ2 −1|.
+(3.6)
+
+Also f(v(n+1)) > f(0) iff
+
+θλτ(n+1)
+1
++ λn+1
+2
++ λ2(n+1)
+2
+> 0.
+
+Since λτ
+1 > |λ2|, this is true for all n ≥0 if
+
+θ > 1.
+(3.7)
+
+Also f(r(n)) > f(v(n)) iff
+
+φθ(λτn
+1 (1 −λ1)τ) −λn
+2(1 −λ2) + λ2n
+2 (1 −λ2)2 > θλτn
+1
++ λn
+2 + λ2n
+2 ,
+
+⇐⇒θλτn
+1 (φ(1 −λ1)τ −1) > λn
+2(2 −λ2) −λ2n
+2 ((1 −λ2)2 −1).
+
+Since λ2 < 0 and λτ
+1 > |λ2|, this is true for all n ≥0 if θ and φ are such that
+
+θ(φ(1 −λ1)τ −1) > (2 −λ2).
+(3.8)
+
+For any τ in the range given by (3.4), θ can be chosen so that (3.6) and (3.7) hold and
+then φ can be chosen so that (3.8) holds. It then follows that (2.1) and (2.3) will hold,
+so the inside contraction step will be taken at every iteration and the simplices will
+be as derived in section 2. The method will therefore converge to the origin, which is
+not a stationary point. Examples of values of θ and φ which make (3.6), (3.7), and
+(3.8) hold are as follows: for τ = 1, θ = 15 and φ=10; for τ = 2, θ = 6 and φ = 60;
+for τ = 3, θ = 6 and φ = 400.
+
+4. Necessary conditions for RFIC to occur. In this section we will derive
+necessary conditions for rfic to occur. For notational convenience the results are
+given for rfic with the origin as focus, but by change of origin they can be applied
+to any point.
+It follows from the description of the algorithm that a necessary condition for
+rfic to occur is
+
+f0 = f(0) ≤f(v(n+1)) ≤f(v(n)) ≤f(r(n)).
+(4.1)
+
+(The examples in section 3 satisfy the strict form of the (4.1) relations as given in
+(2.1) and (2.3).)
+If f is s times differentiable at the origin, then f can be written in the form f(v) =
+ps(v) + o(∥v∥s), where ps is a polynomial of degree at most s, and Dif(0) = Dips(0)
+for i = 0, ..., s, i.e., the derivatives of f and ps agree. Making a change of variable to
+z-space using v = A1z1 + A2z2, f and ps can be viewed as functions of (z1, z2) ∈R2.
+When the necessary derivatives exist, define
+
+f0 = f(0),
+gi = ∂f
+
+∂zi
+(0),
+h = 1
+
+2
+∂2f
+∂z2
+1
+(0), and k = 1
+
+6
+∂3f
+∂z3
+1
+(0).
+
+Then (g1, g2) is the gradient of f in z-space, and gi, h, and k are the zi, z2
+1, and z3
+1
+coefficients in the Taylor expansion of f in z-space. Since |λ2| < λ1 and (2.4) holds,
+∥v(n)∥= O(λn
+1), so
+
+f(v(n)) = ps(v(n)) + o(λsn
+1 ).
+(4.2)
+
+Downloaded 09/26/13 to 143.106.96.183. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+NELDER–MEAD AT A NONSTATIONARY POINT
+155
+
+Theorem 4.1. If the origin is the focus of repeated inside contraction starting
+from a simplex with limiting direction A1, then
+(a) if f is differentiable at the origin, then g1 = 0;
+(b) if f is 2 times differentiable at the origin, then h = 0;
+(c) if f is 3 times differentiable at the origin, then k = 0.
+Proof. (a) From (4.1) it follows that a necessary condition for rfic to occur is
+that f0 ≤f(v(n)) and f0 ≤f(r(n)). This is true iff
+
+f0 ≤f0 + g1λn
+1 + g2λn
+2 + o(λn
+1),
+
+and
+f0 ≤f0 −g1λn
+1(1 −λ1) −g2λn
+2(1 −λ2) + o(λn
+1).
+
+Since |λ2| < λ1 < 1, this cannot occur for all n unless g1 = 0.
+(b) Since f is 2 times differentiable at the origin, part (a) holds, so g1 = 0. Hence
+p2(v(n)) −(f0 + g2λn
+2 + hλ2n
+1 ) = O(|λ1λ2|n) = o(λ4n
+1 ), since |λ2| < λ3
+1. From this and
+(4.2) it follows that
+
+f(v(n)) = f0 + g2λn
+2 + hλ2n
+1 + o(λ2n
+1 ).
+
+From (4.1) it follows that a necessary condition for rfic to occur is that f0 ≤f(v(n))
+and f(v(n)) ≤f(r(n)). This is true iff
+
+f0 ≤f0 + g2λn
+2 + hλ2n
+1 + o(λ2n
+1 )
+and
+0 ≤−g2λn
+2(2 −λ2) −hλ2n+1
+1
+(2 −λ1) + o(λ2n
+1 ).
+
+Since |λ2| < λ2
+1 < 1, this cannot occur for all n unless h = 0.
+(c) Since f is 3 times differentiable at the origin, parts (a) and (b) hold, so g1 = 0
+and h = 0. Hence p3(v(n)) −(f0 + g2λn
+2 + kλ3n
+1 ) = O(|λ1λ2|n) = o(λ4n
+1 ). From this
+and (4.2) it follows that
+
+f(v(n)) = f0 + g2λn
+2 + kλ3n
+1 + o(λ3n
+1 ).
+
+From (4.1) it follows that a necessary condition for rfic to occur is that f0 ≤f(v(n))
+and f0 ≤f(r(n)). This is true iff
+
+f0 ≤f0 + g2λn
+2 + kλ3n
+1 + o(λ3n
+1 )
+and
+f0 ≤f0 −g2λn
+2(1 −λ2) −kλ3n
+1 (1 −λ1)3 + o(λ3n
+1 ).
+
+Since λ3
+1 > |λ2|, this cannot occur for all n unless k = 0.
+Theorem 4.2. If f has a nonzero gradient at the origin and in a neighborhood
+of the origin can be expressed in the form
+
+f(v) = p4(v) + o(∥v∥ˆτ),
+(4.3)
+
+where p4 is at least 4 times differentiable at the origin, and if the initial simplex is
+not degenerate, then the origin cannot be the focus of repeated inside contractions.
+Proof. Assume that the origin is the focus of repeated contractions.
+The first three derivatives of f and p4 at the origin are the same. Theorem 4.1
+shows that g1 = h = k = 0. Hence p4(v(n)) −(f0 + g2λn
+2) = O(|λ1λ2|n) = o(λ4n).
+Since ˆτ < 4 and o(∥v(n)∥ˆτ) = o(λˆτn
+1 ) and λˆτ
+1 = |λ2| (by the definition of ˆτ), it follows
+that
+
+f(v(n)) = f0 + g2λn
+2 + o(|λ2|n).
+
+Downloaded 09/26/13 to 143.106.96.183. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+156
+K. I. M. MCKINNON
+
+From (4.1) it follows that a necessary condition for rfic to occur is that f0 ≤f(v(n))
+and f0 ≤f(v(n+1)). Since λ2 < 0, this cannot occur for all n unless g2 = 0. However,
+since a condition of the theorem is that the gradient is nonzero at the origin and since
+g1 = 0, it is not possible that g2 = 0. This contradicts the original assumption and
+so proves that the origin cannot be the focus of repeated contractions.
+
+Theorem 4.2 shows that rfic cannot occur for sufficiently smooth functions, the
+limit being slightly more than 3 times differentiable. The examples in section 3 show
+that if the conditions of Theorem 4.2 do not hold, then rfic is possible.
+
+5. Perturbations of the initial simplex. In this section the behavior of the
+examples is analyzed for perturbations of the starting simplex. The perturbed position
+for the vertex at the origin must be on the y axis; otherwise the contracting simplex
+will eventually lie within a region where all derivatives of the function exist, and
+Theorems 4.1 and 4.2 show that a nonstationary point cannot be the focus of rfic
+in such a region. Also if τ > 1, the gradient exists where x = 0 and its direction
+is parallel to the y axis. It follows from Theorem 4.1 that the only initial simplices
+which can yield rfic are those with the dominant eigenvector A1 perpendicular to
+the y axis. We therefore consider only perturbations where the vertex at the origin is
+perturbed to (0, y0) giving the general form
+
+v(n) =
+�0
+y0
+
+�
++
+�x1
+y1
+
+�
+λn
+1 +
+�x2
+y2
+
+�
+λn
+2,
+(5.1)
+
+and when τ > 1 we take y1 = 0. The reflected point is then given by
+
+r(n) =
+�0
+y0
+
+�
+−
+�x1
+y1
+
+�
+λn
+1(1 −λ1) −
+�x2
+y2
+
+�
+λn
+2(1 −λ2).
+(5.2)
+
+We are considering y0, x1 −1, y1, x2, and y2 −1 to be close to zero.
+Repeating the analysis of section 3 gives f(v(n)) > f(v(n+1)) iff
+
+θλτn
+1 xτ
+1
+
+��
+1 + x2
+
+x1
+
+�λ2
+
+λ1
+
+�n�τ
+−
+
+�
+
+1 + x2
+
+x1
+
+�λ2
+
+λ1
+
+�n+1�τ
+
+λτ
+1
+
+�
+
++λn
+1(1 −λ1)y1(1 + 2y0 + λn
+1(1 + λ1)y1 + λn
+2(1 + λ2)y2)
+> λn
+2(1 −λ2)y2(1 + 2y0 + λn
+1(1 + λ1)y1) + λ2n
+2 (λ2
+2 −1)y2
+2.
+
+Also f(v(n)) > f(0, y0) iff
+
+θλτ(n+1)
+1
+xτ
+1
+
+�
+
+1 + x2
+
+x1
+
+�λ2
+
+λ1
+
+�n+1�τ
+
++ y1λn+1
+1
+(1 + 2y0 + y1λn+1
+1
++ y2λn+1
+2
+)
+
++y2λn+1
+2
+(1 + 2y0 + y1λn+1
+1
+) + y2
+2λn+1
+2
+> 0.
+(5.3)
+
+Note that for x1 −1 and x2 sufficiently close to zero, the x coordinate of r(n) is
+negative, so the negative x case for the form of f holds. Hence f(r(n)) > f(v(n)) iff
+
+θλτn
+1 xτ
+1
+
+�
+φ
+�
+1 −λ1 −x2
+
+x1
+
+�λ2
+
+λ1
+
+�n
+(1 −λ2)
+�τ
+−
+�
+1 + x2
+
+x1
+
+�λ2
+
+λ1
+
+�n�τ�
+
+−y1λn
+1(2 −λ1)(1 + 2y0 + y1λn+1
+1
++ y2λn+1
+2
+)
+
+> y2λn
+2(2 −λ2)(1 + 2y0 + y1λn+1
+1
+) + y2
+2λn
+2(2 −λ2).
+
+Downloaded 09/26/13 to 143.106.96.183. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+NELDER–MEAD AT A NONSTATIONARY POINT
+157
+
+Since the corresponding inequalities are strict in section 3 and all the functions are
+continuous, it follows that there exists a symmetric neighborhood of y0 = 0, x1 = 1,
+y1 = 0, x2 = 0, and y2 = 1 in which the above three relations hold for n = 0. Since
+|λ1| < 1 and |λ2| < 1, it follows that if τ ≤1, the inequalities still hold for all n ≥0.
+If τ > 1, then the rfic behavior will not change in the neighborhood provided y1 = 0.
+The set of possible perturbations which maintain the rfic behavior is therefore of
+dimension 4 for τ > 1 and of dimension 5 for τ ≤1.
+Because of this we would expect the behavior of the examples to be stable against
+small numerical perturbations caused by rounding error when τ ≤1 and not to be
+stable when τ > 1. This behavior is confirmed by numerical tests. Rounding error
+introduces a component of the larger eigenvector in the y direction and this is enough
+to prevent the algorithm converging to the origin when τ > 1, but is not enough to
+disturb the convergence to the origin when τ ≤1. Note, however, that in the τ > 1
+case the behavior is very sensitive to the representation of the problem and to the
+details of the implementation of the Nelder–Mead method and of the function. For
+example, a translation or rotation of the axes can affect whether or not the method
+converges to the minimizer. The example with τ = 1 is not strictly convex; however,
+a strictly convex example which is numerically stable can be constructed by taking
+the average of examples with τ = 1 and with τ = 2.
+
+6. Conclusions. A family of functions of two variables has been presented which
+cause the Nelder–Mead method to converge to a nonstationary point. Members of the
+family are strictly convex with up to three continuous derivatives. The examples cause
+the Nelder–Mead method to perform the inside contraction step repeatedly with the
+best vertex remaining fixed. It has been shown that this behavior cannot occur for
+smoother functions. These examples are the best behaved functions currently known
+which cause the Nelder–Mead method to converge to a nonstationary point. They
+provide a limit to what can be proved about the convergence of the Nelder–Mead
+method.
+There are six values necessary to specify the initial simplex for functions of two
+variables. It has been shown that for examples in the family which have a discon-
+tinuous first derivative, there is a neighborhood of the initial simplex of dimension
+5 in which all the simplices exhibit the same behavior. These examples appear to
+be numerically stable. For those examples in the family where the gradient exists,
+the dimension of the neighborhood is only 4. These examples are often numerically
+unstable and so are less likely to occur in practice due to rounding errors, even for
+starting simplices within the neighborhood. However, even in cases where numerical
+errors eventually perturb the simplex enough to escape from the nonstationary focus
+point, the method can spend a very large number of steps close to this point before
+escaping. These results highlight the need for variants of the original Nelder–Mead
+method which have guaranteed convergence properties.
+
+Acknowledgments. The author would like to thank Margaret Wright and Tony
+Gilbert for help in clarifying the problem and for valuable suggestions, and a referee
+for very detailed and helpful comments.
+
+REFERENCES
+
+[1] J. E. Dennis, jr. and V. Torczon, Direct search methods on parallel machines, SIAM J.
+Optim., 1 (1991), pp. 448–474.
+
+Downloaded 09/26/13 to 143.106.96.183. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+158
+K. I. M. MCKINNON
+
+[2] J. E. Dennis, jr. and D. J. Woods, Optimization on microcomputers: The Nelder-Mead sim-
+plex algorithm, in New Computing Environments: Microcomputers in Large-Scale Com-
+puting, A. Wouk, ed., SIAM, Philadelphia, PA, 1987, pp. 116–122.
+[3] J. C. Lagarias, J. A. Reeds, M. H. Wright, and P. E. Wright, Convergence properties of
+the Nelder–Mead simplex algorithm in low dimensions, SIAM J. Optim., 9 (1998), pp. 112–
+147.
+[4] J. A. Nelder and R. Mead, A simplex method for function minimization, Comput. J., 7
+(1965), pp. 308–313.
+[5] A. S. Rykov, Simplex direct search algorithms, Automat. Remote Control, 41 (1980), pp. 784–
+793.
+[6] A. S. Rykov, Simplex methods of direct search, Engrg. Cyber., 18 (1980), pp. 12–18.
+[7] A. S. Rykov, Simplex algorithms for unconstrained optimization, Prob. Control Inform. The-
+ory, 12 (1983), pp. 195–208.
+[8] W. Spendley, G. R. Hext, and F. R. Himsworth, Sequential applications of simplex designs
+in optimization and evolutionary operation, Technometrics, 4 (1962), pp. 441–461.
+[9] M. Straßer,
+¨Ubertrangung des Optimierungsverfahrens von Nelder und Mead auf re-
+stringierte Probleme, Diploma thesis, Numerical Mathematics Group, Technical University
+of Darmstadt, Germany, 1994.
+[10] P. D. Surry, Convergence Results for the Nelder–Mead Method, private communication, De-
+partment of Mathematics and Statistics, University of Edinburgh, Edinburgh, UK, 1995.
+[11] V. J. Torczon, Multi-Directional Search: A Direct Search Algorithm for Parallel Machines,
+Ph.D. thesis, Tech. Report TR90-7, Department of Computational and Applied Mathe-
+matics, Rice University, Houston, TX, 1990.
+[12] V. Torczon, On the convergence of the multidirectional search algorithm, SIAM J. Optim., 1
+(1991), pp. 123–145.
+[13] V. Torczon, On the convergence of pattern search algorithms, SIAM J. Optim., 7 (1997),
+pp. 1–25.
+[14] P. Tseng, Fortified-descent simplicial search method: A general approach, SIAM J. Optim.,
+to appear.
+[15] D. J. Woods, An Interactive Approach for Solving Multi-Objective Optimization Problems,
+Ph.D. thesis, Tech. Report TR85-5, Department of Computational and Applied Mathe-
+matics, Rice University, Houston, TX, 1985.
+
+Downloaded 09/26/13 to 143.106.96.183. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+

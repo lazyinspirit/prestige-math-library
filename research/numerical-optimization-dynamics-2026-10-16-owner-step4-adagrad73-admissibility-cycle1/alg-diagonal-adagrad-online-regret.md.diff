@@ -1,0 +1,20 @@
+--- items/alg-diagonal-adagrad-online-regret.md
++++ items/alg-diagonal-adagrad-online-regret.md FUTURE STEP5 proposal
+@@ -36,7 +36,7 @@
+ 
+ ## Definition
+ 
+-Let d>=1 and let C be a nonempty closed convex subset of R^d, closed in the standard Euclidean metric topology of [[lem-metrics-on-rn]] and convex as in [[def-convex-subset-of-euclidean-space]]. Fix x_1 in C, a constant eta>0, and epsilon>0. On round t, after observing a convex loss ell_t:C->R, choose a subgradient g_t in partial ell_t(x_t), with subgradient convention [[def-subgradient-and-subdifferential]]. For j=1,...,d set
++Let d>=1 and let C be a nonempty closed convex subset of R^d, closed in the standard Euclidean metric topology of [[lem-metrics-on-rn]] and convex as in [[def-convex-subset-of-euclidean-space]]. Fix x_1 in C, a constant eta>0, and epsilon>0. On round t, after observing a convex loss ell_t:C->R, take as supplied input a finite vector g_t in R^d satisfying g_t in partial ell_t(x_t), with subgradient convention [[def-subgradient-and-subdifferential]]. Availability of such a subgradient at every queried iterate is an admissibility requirement; convexity alone on C does not guarantee it. For j=1,...,d set
+ 
+ $$s_{t,j}=\sqrt{\epsilon^2+\sum_{k=1}^t g_{k,j}^2},\qquad A_t=\operatorname{diag}(s_{t,1},...,s_{t,d}).$$
+ 
+@@ -44,7 +44,7 @@
+ 
+ $$x_{t+1}=\operatorname*{argmin}_{x\in C}\{\eta\langle g_t,x\rangle+\tfrac12\|x-x_t\|_{A_t}^2\}.$$
+ 
+-Because epsilon>0, every diagonal entry s_{t,j} is positive. The displayed minimizer exists and is unique by [[lem-diagonal-adagrad-subproblem-well-defined]], so the procedure is defined at each finite round. This is the proximal update in the diagonal metric A_t; after the coordinate scaling A_t^{1/2}, its subproblem is an ordinary Euclidean proximal problem in the sense of [[def-proximal-mapping]].
++Because epsilon>0, every diagonal entry s_{t,j} is positive. Given the supplied subgradients at the queried iterates, the displayed minimizer exists and is unique by [[lem-diagonal-adagrad-subproblem-well-defined]], so the update is defined at each finite round. This is the proximal update in the diagonal metric A_t; after the coordinate scaling A_t^{1/2}, its subproblem is an ordinary Euclidean proximal problem in the sense of [[def-proximal-mapping]].
+ 
+ ## Remarks
+ 

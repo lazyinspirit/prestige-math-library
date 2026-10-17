@@ -1,0 +1,338 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "source_guard": {
+    "file": "items/thm-nearest-neighbor-cfl-domain-condition.md",
+    "bytes": "---\nid: thm-nearest-neighbor-cfl-domain-condition\nkind: theorem\ntitle: The nearest-neighbor CFL condition is necessary but not sufficient\nstatus: draft\norigin: pipeline\npipeline_run: numerical-optimization-dynamics-2026-10-16\ndependency_level: 4\ndeps: [def-periodic-one-way-advection-schemes, def-uniform-grid-and-difference-operators, def-operator-norm, lem-periodic-advection-amplification-symbols, def-linear-transport-equation-and-its-characteristic-flow, cor-mean-value-theorem, thm-induction-principle, lem-schwartz-cutoffs-from-the-standard-smooth-step, lem-integer-part, def-test-function-space-d-of-an-open-set, def-ck-and-multi-index-notation-in-several-variables]\njustified_by: []\naliases: []\nlandmark: false\nproof_strategy: direct\nverification:\n  precheck: pass\nprovenance:\n  statement: ai-altered\n  proof: ai-generated\nsources:\n  references:\n    - title: \"Endre Süli, B6.1 Numerical Solution of Partial Differential Equations\"\n      url: \"https://people.maths.ox.ac.uk/suli/nspdes.pdf\"\n      locator: \"§6.6, PDF pp. 99–104: the finite-stencil inflow scheme and its CFL/domain-of-dependence discussion.\"\n    - title: \"Benjamin Seibold, MIT 18.336 Lecture 15, Finite Difference Methods for the One-Way Wave Equation\"\n      url: \"https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/286be9198204bea2f7e7d77f88e7b061_MIT18_336S09_lec15.pdf\"\n      locator: \"Complete PDF pp. 1–2: characteristic direction, the upwind CFL condition, and centered instability.\"\n---\n\n## Statement\n\nFix $a,T>0$. The following two claims hold.\n\n**Strict domain-of-dependence obstruction.** Suppose $h_m,k_m\\to0$ and along a subsequence $ak_m/h_m\\ge1+\\varepsilon$ for some fixed $\\varepsilon>0$, and put $R=aT\\varepsilon/(4(1+\\varepsilon))$. Consider any homogeneous linear nearest-neighbor explicit update on the infinite grid whose value after $n$ steps depends only on initial indices $j-n,\\ldots,j+n$. Fix a real-valued datum $u_0\\in C_c^\\infty((-R,R);\\mathbb R)$ with $u_0(0)=1$ and initialize each mesh by $U_j^0=u_0(jh_m)$. The exact samples $u_0(jh_m-at_m)$ and numerical values fail to converge in the sampled maximum error\n$$\\sup_{j\\in\\mathbb Z}|U_j^{n_m}-u_0(jh_m-at_m)|$$\nat $t_m=n_mk_m\\to T$, where $n_m=\\lfloor T/k_m\\rfloor$.\n\n**CFL insufficiency for centered advection.** For any fixed period $P>0$, set $N_q=4q$, $h_q=P/N_q$, and $k_q=h_q/(2a)$ for $q\\ge1$. Let $Q_q$ be the centered advection update on this periodic grid and $r_q=\\lfloor T/k_q\\rfloor$. Then $0<ak_q/h_q=1/2<1$, but\n$$\\max_{\\substack{r\\in\\mathbb N\\\\0\\le r k_q\\le T}}\\|Q_q^r\\|_{2,h_q\\to2,h_q}\\ge\\|Q_q^{r_q}\\|_{2,h_q\\to2,h_q}\\ge(\\sqrt5/2)^{r_q}\\longrightarrow\\infty.$$\nThus a fixed strict violation of $ak/h\\le1$ prevents convergence for the nearest-neighbor family, while the domain-of-dependence bound does not suffice for uniform finite-time power stability of every periodic nearest-neighbor scheme.\n\n## Facts & Assumptions\n\n**Given:** Fixed $a,T>0$; for the first claim, an infinite-grid homogeneous linear nearest-neighbor update and a mesh subsequence with $ak/h\\ge1+\\varepsilon$; and, independently, for the second claim, the fixed-period centered periodic family with $N_q=4q$.\n\n[F1] The centered advection stencil in [[def-periodic-one-way-advection-schemes]] is a homogeneous explicit nearest-neighbor update.\n\n[F2] For a real-valued $C^1$ function on an open subset of $\\mathbb R^2$, the first coordinate partial derivatives exist and are continuous; a classical solution on a neighborhood of a characteristic segment is continuous on that segment ([[def-ck-and-multi-index-notation-in-several-variables]]).\n\n[F3] Finite induction on the natural-number step count is valid ([[thm-induction-principle]]).\n\n[F4] There is a real cutoff $\\chi\\in C_c^\\infty(\\mathbb R)$ with $\\chi=1$ for $|x|\\le1$ and $\\chi=0$ for $|x|\\ge2$ ([[lem-schwartz-cutoffs-from-the-standard-smooth-step]]).\n\n[F5] For constant velocity $a$, the characteristic ODE is $X'(s)=a$ with terminal value $X(t)=x$, and the transport equation is $u_t+a u_x=0$ ([[def-linear-transport-equation-and-its-characteristic-flow]]).\n\n[F6] A real differentiable function with zero derivative on an interval is constant there, by the mean value theorem ([[cor-mean-value-theorem]]).\n\n[F7] For every real $y$ there is a unique integer $m=\\lfloor y\\rfloor$ with $m\\le y<m+1$ ([[lem-integer-part]]).\n\n[F8] For an open interval $I$, $C_c^\\infty(I;\\mathbb C)$ consists of smooth functions whose support is a compact subset of $I$; its real-valued functions form the real test-function subspace ([[def-test-function-space-d-of-an-open-set]]).\n\n[F9] On a periodic grid, the centered advection factor is $g_{\\rm centered}=1-i\\nu S_\\ell$, where $z_\\ell=e^{2\\pi i\\ell/N}$ and $S_\\ell=\\operatorname{Im}z_\\ell$; the modes form an orthogonal basis ([[lem-periodic-advection-amplification-symbols]]).\n\n[F10] The operator norm is the supremum of $\\|Qv\\|$ over the unit ball in the given norm ([[def-operator-norm]]).\n\n[F11] The periodic grid has indices modulo $N$ and norm $\\|v\\|_{2,h}^2=h\\sum_{j=0}^{N-1}|v_j|^2$ ([[def-uniform-grid-and-difference-operators]]).\n\n## Proof\n\n1.1 Put $R=aT\\varepsilon/(4(1+\\varepsilon))$ and take $\\chi$ from [F4]. Set $u_0(x)=\\chi(3x/R)$. Then $u_0$ is smooth, equals $1$ at zero, and is supported in $[-2R/3,2R/3]$, a compact subset of $(-R,R)$; by [F8] it is an admissible real-valued datum. [given, F4, F8, algebra]\n\n1.2 By finite induction [F3], the value at index $j$ after zero steps depends only on $j$. If every value after $n$ steps depends only on initial indices $j-n,\\ldots,j+n$, then the next update reads indices $j-1,j,j+1$ at time $n$, whose initial dependence intervals have union $[j-(n+1),j+(n+1)]$. Thus after $n$ steps only initial indices $j-n,\\ldots,j+n$ can affect the value. [given, F3, induction]\n\n2.1 Along the violating subsequence put $n_m=\\lfloor T/k_m\\rfloor$ and $j_m=\\lfloor aT/h_m+1/2\\rfloor$. By [F7], $j_m\\le aT/h_m+1/2<j_m+1$, so $|j_mh_m-aT|\\le h_m/2$. Since $n_mh_m\\le T h_m/k_m\\le aT/(1+\\varepsilon)$, the left edge of the numerical dependence interval obeys $$ j_mh_m-n_mh_m\\ge\\frac{aT\\varepsilon}{1+\\varepsilon}-\\frac{h_m}{2}. $$ For all sufficiently large $m$, this exceeds $R$. Hence every sampled initial value on which $U_{j_m}^{n_m}$ depends is zero, so $U_{j_m}^{n_m}=0$. [given, F7, step 1.1, step 1.2, algebra]\n\n3.1 The constant-velocity characteristic is $X(s;t,x)=x+a(s-t)$: it has derivative $a$ and terminal value $x$, and any other solution agrees by [F6] applied to its difference from $X$.\nThe explicit function $u^*(y,s)=u_0(y-as)$ has partial derivatives $u^*_y=u_0'(y-as)$ and $u^*_s=-a u_0'(y-as)$ by one-variable difference quotients, so it solves $u_t+a u_x=0$ with initial data $u_0$.\nTo verify uniqueness, let $u$ be any classical solution on an open neighborhood of this characteristic segment with the same initial data, fix $(x,t)$, and set $v(s)=u(x+a(s-t),s)$ on $[0,t]$.\nFor interior $s$ and small nonzero $\\delta$ whose coordinate segments remain in the solution domain, applying [F6] separately in the first and second coordinates gives $$\\frac{v(s+\\delta)-v(s)}{\\delta}=a u_x(\\xi_\\delta,s+\\delta)+u_t(x+a(s-t),\\eta_\\delta),$$ where $\\xi_\\delta$ lies between $x+a(s-t)$ and $x+a(s+\\delta-t)$, and $\\eta_\\delta$ lies between $s$ and $s+\\delta$.\nAs $\\delta\\to0$, these intermediate points tend to $(x+a(s-t),s)$, so continuity of the partials in [F2] yields $v'(s)=a u_x(x+a(s-t),s)+u_t(x+a(s-t),s)=0$.\nThen [F6] makes $v$ constant, hence $u(x,t)=u_0(x-at)$. Since $0\\le T-n_mk_m<k_m$ and $k_m\\to0$, the exact characteristic foot $j_mh_m-a n_mk_m$ tends to $aT-aT=0$. By continuity and $u_0(0)=1$, the exact sample tends to $1$, while step 2.1 gives numerical value zero. Thus the sampled maximum error does not tend to zero. [F2, F5, F6, step 1.1, step 2.1, algebra]\n\n4.1 For the separate centered-family claim, fix $P>0$ and use $N_q=4q$, $h_q=P/(4q)$, $k_q=h_q/(2a)$, and $r_q=\\lfloor T/k_q\\rfloor$. Then [F1] gives the centered update with $ak_q/h_q=1/2$, and the Fourier index $\\ell=q$ is admissible with $z_\\ell=\\exp(2\\pi i q/(4q))=i$. By [F9] its multiplier is $g=1-i/2$, so $|g|=\\sqrt5/2>1$. Repeated application gives $Q_q^{r_q}\\phi_q=g^{r_q}\\phi_q$. The mode is nonzero, and the finite Fourier basis in [F9] diagonalizes $Q_q^{r_q}$ with finitely many finite multipliers, so this operator is bounded. By [F10] its norm is at least $|g|^{r_q}$. Since [F7] gives $r_q\\ge T/k_q-1=8aTq/P-1\\to\\infty$, these norms are unbounded while all time levels satisfy $r_qk_q\\le T$. Thus the domain-of-dependence bound is not sufficient for uniform finite-time power stability. [given, F1, F7, F9, F10, F11, algebra] ∎\n"
+  },
+  "operations": [
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-55.pages.json",
+      "path": [
+        0,
+        "items",
+        10,
+        "deps"
+      ],
+      "before": [
+        "def-periodic-one-way-advection-schemes",
+        "def-uniform-grid-and-difference-operators",
+        "def-operator-norm",
+        "lem-periodic-advection-amplification-symbols",
+        "def-linear-transport-equation-and-its-characteristic-flow",
+        "thm-homogeneous-linear-transport-by-the-flow",
+        "cor-mean-value-theorem",
+        "thm-induction-principle",
+        "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+        "lem-integer-part",
+        "def-test-function-space-d-of-an-open-set"
+      ],
+      "after": [
+        "def-periodic-one-way-advection-schemes",
+        "def-uniform-grid-and-difference-operators",
+        "def-operator-norm",
+        "lem-periodic-advection-amplification-symbols",
+        "def-linear-transport-equation-and-its-characteristic-flow",
+        "cor-mean-value-theorem",
+        "thm-induction-principle",
+        "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+        "lem-integer-part",
+        "def-test-function-space-d-of-an-open-set",
+        "def-ck-and-multi-index-notation-in-several-variables"
+      ]
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-55.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-nearest-neighbor-cfl-domain-condition",
+        "citations"
+      ],
+      "before": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-one-way-advection-schemes",
+          "source_section": "Definition",
+          "quote": "\\text{centered: }&U_j^{n+1}=U_j^n-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n),",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-homogeneous-linear-transport-by-the-flow",
+          "source_section": "Statement",
+          "quote": "u(x,t)=u_0(X(0;t,x)).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "source_section": "Statement",
+          "quote": "there exists $\\chi\\in C_c^\\infty(\\mathbb R^n)$ with $0\\le\\chi\\le1$, $\\chi=1$ on $|x|\\le1$, and $\\chi=0$ on $|x|\\ge2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-transport-equation-and-its-characteristic-flow",
+          "source_section": "Definition",
+          "quote": "A **characteristic through $(x_0,t_0)$**",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Then there is $c \\in (a,b)$ with",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-integer-part",
+          "source_section": "Statement",
+          "quote": "there is **exactly one** integer $m$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-test-function-space-d-of-an-open-set",
+          "source_section": "Definition",
+          "quote": "The **test-function space** is $\\mathcal D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb C)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-periodic-advection-amplification-symbols",
+          "source_section": "Statement",
+          "quote": "g_{\\rm centered}=1-i\\nu S_\\ell",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "\\|v\\|_{2,h}=\\left(h\\sum_{j=0}^{N-1}|v_j|^2\\right)^{1/2}.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "after": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-one-way-advection-schemes",
+          "source_section": "Definition",
+          "quote": "\\text{centered: }&U_j^{n+1}=U_j^n-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n),",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put\n\n$$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$\n\nHere $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of [[def-nat-finite-sum-and-product]], and $n!$ is the factorial of [[def-factorial-and-falling-factorial]]. By contrast, $h^\\alpha$ is the finite product in $\\mathbb R$ of [[def-finite-sum]], with the natural exponents interpreted by [[def-integer-power]]. For the zero multi-index $0$, set $D^0f:=f$. For nonzero $\\alpha$, write\n\n$$D^\\alpha f:=\\partial_0^{\\alpha_0}\\cdots\\partial_{m-1}^{\\alpha_{m-1}}f$$\n\nfor this displayed, canonical order whenever it exists. Coordinate partial derivatives have the meaning fixed in [[def-directional-and-partial-derivatives]].\n\nFor $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$. Thus this definition does **not** presuppose that differently ordered derivatives are equal. Equality of their values is a later theorem under these regularity hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "source_section": "Statement",
+          "quote": "there exists $\\chi\\in C_c^\\infty(\\mathbb R^n)$ with $0\\le\\chi\\le1$, $\\chi=1$ on $|x|\\le1$, and $\\chi=0$ on $|x|\\ge2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-transport-equation-and-its-characteristic-flow",
+          "source_section": "Definition",
+          "quote": "A **characteristic through $(x_0,t_0)$**",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Then there is $c \\in (a,b)$ with",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-integer-part",
+          "source_section": "Statement",
+          "quote": "there is **exactly one** integer $m$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-test-function-space-d-of-an-open-set",
+          "source_section": "Definition",
+          "quote": "The **test-function space** is $\\mathcal D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb C)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-periodic-advection-amplification-symbols",
+          "source_section": "Statement",
+          "quote": "g_{\\rm centered}=1-i\\nu S_\\ell",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "\\|v\\|_{2,h}=\\left(h\\sum_{j=0}^{N-1}|v_j|^2\\right)^{1/2}.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-55.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-nearest-neighbor-cfl-domain-condition",
+        "derivations",
+        3,
+        "claim"
+      ],
+      "before": "The exact characteristic foot tends to zero while the computed value is zero, so a sampled error tends to one.",
+      "after": "The constant-velocity characteristic is $X(s;t,x)=x+a(s-t)$: it has derivative $a$ and terminal value $x$, and any other solution agrees by [F6] applied to its difference from $X$.\nThe explicit function $u^*(y,s)=u_0(y-as)$ has partial derivatives $u^*_y=u_0'(y-as)$ and $u^*_s=-a u_0'(y-as)$ by one-variable difference quotients, so it solves $u_t+a u_x=0$ with initial data $u_0$.\nTo verify uniqueness, let $u$ be any classical solution on an open neighborhood of this characteristic segment with the same initial data, fix $(x,t)$, and set $v(s)=u(x+a(s-t),s)$ on $[0,t]$.\nFor interior $s$ and small nonzero $\\delta$ whose coordinate segments remain in the solution domain, applying [F6] separately in the first and second coordinates gives $$\\frac{v(s+\\delta)-v(s)}{\\delta}=a u_x(\\xi_\\delta,s+\\delta)+u_t(x+a(s-t),\\eta_\\delta),$$ where $\\xi_\\delta$ lies between $x+a(s-t)$ and $x+a(s+\\delta-t)$, and $\\eta_\\delta$ lies between $s$ and $s+\\delta$.\nAs $\\delta\\to0$, these intermediate points tend to $(x+a(s-t),s)$, so continuity of the partials in [F2] yields $v'(s)=a u_x(x+a(s-t),s)+u_t(x+a(s-t),s)=0$.\nThen [F6] makes $v$ constant, hence $u(x,t)=u_0(x-at)$. Since $0\\le T-n_mk_m<k_m$ and $k_m\\to0$, the exact characteristic foot $j_mh_m-a n_mk_m$ tends to $aT-aT=0$. By continuity and $u_0(0)=1$, the exact sample tends to $1$, while step 2.1 gives numerical value zero. Thus the sampled maximum error does not tend to zero."
+    }
+  ],
+  "unchanged_published_quotes": [
+    {
+      "item": "lem-transport-equation-along-a-characteristic",
+      "section": "Statement",
+      "full_quote": "Let $u\\in C^1(\\Omega)$ satisfy\n\n$$u_t+a\\cdot\\nabla_x u+c\\,u=f,$$\n\nand let $X$ be a characteristic solving $X'(s)=a(X(s),s)$. Then\n\n$$\\frac{d}{ds}u(X(s),s)+c(X(s),s)u(X(s),s)=f(X(s),s).$$",
+      "unchanged": true
+    },
+    {
+      "item": "thm-homogeneous-linear-transport-by-the-flow",
+      "section": "Statement",
+      "full_quote": "Assume $a$ is regular enough that for each $(x,t)$ in a region $U$ the unique\ncharacteristic $s\\mapsto(X(s;t,x),s)$ is defined from $s=t$ to $s=0$ and its\nwhole segment remains in $U$, and assume these characteristics have the usual\nflow consistency. If $u\\in C^1(U)$ solves\n\n$$u_t+a\\cdot\\nabla_xu=0,\\qquad u(x,0)=u_0(x),$$\n\nthen\n\n$$u(x,t)=u_0(X(0;t,x)).$$\n\nHence there is at most one classical solution on $U$. Conversely, any $C^1$\nfunction on $U$ satisfying this formula is that unique classical solution.",
+      "unchanged": true
+    },
+    {
+      "item": "thm-inhomogeneous-linear-transport-formula",
+      "section": "Statement",
+      "full_quote": "Let $U\\subseteq\\mathbb R^n\\times\\mathbb R$ be a region. Assume\n$a\\in C^1(U;\\mathbb R^n)$ and $c,f\\in C(U)$, and assume that for each\n$(x,t)\\in U$ there is a unique characteristic $X(s;t,x)$ on the closed\ninterval with endpoints $0$ and $t$, its space-time graph remains in $U$, and\nthe characteristic family has the usual flow consistency. If $u\\in C^1(U)$\nsolves\n\n$$u_t+a\\cdot\\nabla_xu+c\\,u=f,\\qquad u(x,0)=u_0(x),$$\n\nthen\n\n$$u(x,t)=e^{-\\int_0^t c(X(\\tau;t,x),\\tau)\\,d\\tau}u_0(X(0;t,x))+\\int_0^t e^{-\\int_s^t c(X(\\tau;t,x),\\tau)\\,d\\tau}f(X(s;t,x),s)\\,ds.$$\n\nConversely, any $C^1$ function satisfying this formula solves the transport\nequation on $U$.",
+      "unchanged": true
+    },
+    {
+      "item": "prop-characteristics-for-a-one-dimensional-scalar-conservation-law",
+      "section": "Statement",
+      "full_quote": "Let $T>0$, $f\\in C^2(\\mathbb R)$, and let $u\\in C^1(\\mathbb R\\times(0,T))$ be a\nclassical solution of $u_t+f(u)_x=0$\n([[def-scalar-conservation-law-and-flux]],\n[[def-ck-and-multi-index-notation-in-several-variables]]).\n\n(i) Along every characteristic $x(t)$ solving\n$\\dot x=f'(u(x(t),t))$, the value $u(x(t),t)$ is constant.\n\n(ii) If in addition $u\\in C^2(\\mathbb R\\times(0,T))$, then\n$p(t)=u_x(x(t),t)$ satisfies along each characteristic\n$$\\dot p(t)=-f''(u(x(t),t))p(t)^2.$$\nConsequently, if $f''\\ge0$ on the range of $u$, then $p$ is nonincreasing along\ncharacteristics. More precisely, fix $t_0\\in(0,T)$ and a characteristic through\n$(x_0,t_0)$, and set $p_0=u_x(x_0,t_0)$. If $p_0<0$ and\n$f''(u(x_0,t_0))\\ge\\kappa>0$, then, as long as the classical solution exists\nalong that characteristic,\n$$p(t)=\\frac{p_0}{1+f''(u(x_0,t_0))p_0(t-t_0)}.$$\nIf the solution exists along this characteristic up to that time, its derivative tends to $-\\infty$ at\n$t_*=t_0+1/(f''(u(x_0,t_0))|p_0|)\\le t_0+1/(\\kappa|p_0|)$; hence a $C^2$\nsolution cannot persist through $t_*$ along this characteristic\n([[def-total-derivative-in-euclidean-space]], [[thm-chain-rule]],\n[[thm-algebra-of-derivatives]],\n[[def-linear-transport-equation-and-its-characteristic-flow]]).",
+      "unchanged": true
+    },
+    {
+      "item": "ex-radial-transport-flow",
+      "section": "Example",
+      "full_quote": "On $\\mathbb R^n\\setminus\\{0\\}$, the stationary first-order equation\n\n$$x\\cdot\\nabla u(x)=u(x)$$\n\nhas precisely the $C^1$ solutions of the form\n\n$$u(r\\omega)=r\\,g(\\omega),\\qquad r>0,\\ \\omega\\in S^{n-1},$$\n\nwith arbitrary $C^1$ data $g$ on the unit sphere.",
+      "unchanged": true
+    }
+  ],
+  "new_source_prerequisite_navigation": [
+    {
+      "supplier": "thm-continuous-partial-derivatives-imply-total-differentiability",
+      "actual_declared_published_homes": [
+        "library/real-analysis/the-total-derivative.md"
+      ],
+      "disposition": "Published source frontmatter now declares actual proof bridge. Root owns any page closure projection; no published item invented in runmanifest."
+    },
+    {
+      "supplier": "cor-zero-derivative-implies-constant",
+      "actual_declared_published_homes": [
+        "library/real-analysis/the-derivative-and-mean-value-theorems.md"
+      ],
+      "disposition": "Published source frontmatter now declares actual proof bridge. Root owns any page closure projection; no published item invented in runmanifest."
+    },
+    {
+      "supplier": "cor-mean-value-theorem",
+      "actual_declared_published_homes": [
+        "library/real-analysis/the-derivative-and-mean-value-theorems.md"
+      ],
+      "disposition": "Published source frontmatter now declares actual proof bridge. Root owns any page closure projection; no published item invented in runmanifest."
+    },
+    {
+      "supplier": "thm-first-order-linear-ode-integrating-factor",
+      "actual_declared_published_homes": [
+        "library/real-analysis/picard-lindelof-and-first-order-odes.md"
+      ],
+      "disposition": "Published source frontmatter now declares actual proof bridge. Root owns any page closure projection; no published item invented in runmanifest."
+    }
+  ],
+  "crossledger_disposition_proposal": {
+    "kind": "item",
+    "consumer": "thm-nearest-neighbor-cfl-domain-condition",
+    "supplier": "thm-homogeneous-linear-transport-by-the-flow",
+    "status": "removed",
+    "evidence": "Actual currentCFLdeps/F2/Proof3.1 replaced the homogeneous transport premise by localconstant-speedproof using C1continuouspartials and MVT. Keep originalreviewhistory; no need infer remaining transportuse from stale contract/manifest. PublishedtransportDefinition F5 remains logical for PDE/characteristicnotation."
+  },
+  "limits": "Only listedJSONfieldmirrors may apply; no ledger/page route/readiness/level/hash/native changes. Existing published Statement quotations unchanged and fullcurrentquotes recorded."
+}

@@ -1,0 +1,45 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "at": "2026-10-16T06:34:56.535039+00:00",
+  "proposal": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-merge-final-20261016T063344042Z.json",
+  "supersedesIntermediateProposal": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-merge-final-20261016T063338746Z.json",
+  "utility": "/tmp/na-apply-final-ledgers.mjs",
+  "utilitySource": "#!/usr/bin/env node\n// Root-executed metadata application only. Never invokes hashes, gates or runtime controls.\nimport fs from 'node:fs';\nimport path from 'node:path';\nconst args=process.argv.slice(2),allowed=new Set(['--run','--proposal','--apply']);\nfor(let i=0;i<args.length;i++){if(!allowed.has(args[i]))throw Error('Unknown argument '+args[i]);if(args[i]!=='--apply')i++;}\nconst value=f=>args[args.indexOf(f)+1],run=value('--run'),proposal=value('--proposal');\nif(!args.includes('--apply')||!args.includes('--run')||!args.includes('--proposal')||!run||!proposal)throw Error('Usage: node /tmp/na-apply-final-ledgers.mjs --run RUN --proposal research/FINAL.json --apply');\nconst read=p=>fs.readFileSync(p,'utf8'),doc=JSON.parse(read(proposal));\nif(doc.run!==run||doc.version!==2||doc.status!=='FINAL guarded proposal; root execution still required')throw Error('Not this run final proposal');\nif(doc.alerts.length||doc.conflicts.length||doc.retainedOpen.length||doc.uncovered.length||doc.counts.uncoveredDeclaredEdges||doc.counts.historicalRowsRequiringRootTriage)throw Error('Proposal has unresolved holds');\nif(doc.proposedInputs.length!==107||doc.counts.items!==2012||doc.currentDeclaredEdges.length!==1199)throw Error('Unexpected approved frontier size');\nconst guard=(includeLedgers=true)=>{for(const [group,files]of Object.entries(doc.applyGuards)){if(!includeLedgers&&group==='ledgerRawPreimages')continue;for(const [p,raw]of Object.entries(files)){if((fs.existsSync(p)?read(p):null)!==raw)throw Error('Guard changed '+p);}}};\nguard();\nconst owns=new Map();for(const [p,raw]of Object.entries(doc.applyGuards.ownedManifestRawPreimages)){const batch=p.match(/-batch-(\\d+)\\.pages\\.json$/)?.[1];for(const page of JSON.parse(raw)){owns.set('page:'+page.id,batch);for(const it of page.items)owns.set('item:'+(typeof it==='string'?it:it.id),batch);}}\nconst keys=new Map(),changes=[];\nfor(const input of doc.proposedInputs){if(!/^\\d+$/.test(input.batch)||input.file!==`research/${run}-batch-${input.batch}.cross-batch-dependencies.json`||!Object.hasOwn(doc.applyGuards.ledgerRawPreimages,input.file))throw Error('Unapproved write target');const seen=new Set();for(const row of input.rows){const k=JSON.stringify([row.kind,row.consumer,row.supplier]);if(!['item','page'].includes(row.kind)||!['verified','removed'].includes(row.status)||owns.get(row.kind+':'+row.consumer)!==input.batch||typeof row.supplier!=='string'||!row.supplier||typeof row.evidence!=='string'||!row.evidence.trim()||seen.has(k))throw Error('Invalid projected row '+k);seen.add(k);keys.set(k,row);}const text=JSON.stringify(input.rows,null,2)+'\\n';if(text!==doc.applyGuards.ledgerRawPreimages[input.file])changes.push({...input,text});}\nfor(const edge of doc.currentDeclaredEdges)if(keys.get(JSON.stringify([edge.kind,edge.consumer,edge.supplier]))?.status!=='verified')throw Error('Unclosed declared edge');\nconst archive=proposal.replace(/\\.json$/,'')+'-before';if(fs.existsSync(archive))throw Error('Archive already exists; do not overwrite historical application');\nfs.mkdirSync(archive);fs.mkdirSync(path.join(archive,'originals'));fs.mkdirSync(path.join(archive,'prepared'));\nfs.writeFileSync(path.join(archive,'proposal.json'),read(proposal));\nfor(const [p,raw]of Object.entries(doc.applyGuards.ledgerRawPreimages))if(raw!==null)fs.writeFileSync(path.join(archive,'originals',path.basename(p)),raw);\nfs.writeFileSync(path.join(archive,'original-absence.json'),JSON.stringify(Object.entries(doc.applyGuards.ledgerRawPreimages).filter(([,raw])=>raw===null).map(([p])=>p),null,2)+'\\n');\nfor(const change of changes)fs.writeFileSync(path.join(archive,'prepared',path.basename(change.file)),change.text);\nguard();\nconst applied=[];try{for(const change of changes){const raw=fs.existsSync(change.file)?read(change.file):null;if(raw!==doc.applyGuards.ledgerRawPreimages[change.file])throw Error('Ledger changed before write '+change.file);fs.renameSync(path.join(archive,'prepared',path.basename(change.file)),change.file);applied.push(change.file);}guard(false);for(const change of changes)if(read(change.file)!==change.text)throw Error('Post-write content mismatch '+change.file);const result={run,proposal,archive,at:new Date().toISOString(),status:'applied-current-owner-review-metadata-only',changed:applied,counts:doc.counts,notPerformed:['hashes','readiness','gates','runtime controls','native verdict mutation']};fs.writeFileSync(path.join(archive,'application.json'),JSON.stringify(result,null,2)+'\\n');console.log(JSON.stringify(result,null,2));}catch(error){fs.writeFileSync(path.join(archive,'application-failure.json'),JSON.stringify({run,proposal,at:new Date().toISOString(),applied,error:String(error),historyPreserved:true},null,2)+'\\n');throw error;}\n",
+  "actualChecks": [
+    "node --check /tmp/na-build-final-ledger-proposal.mjs passed",
+    "node --check /tmp/na-apply-final-ledgers.mjs passed",
+    "All99 old ledger preimages compared byte-for-byte with disk; unchanged",
+    "Current raw manifest+carrier graph projection has1199cross-run-internal owneredges/2012items/214pages",
+    "Proposal native kind/status/evidence/currentconsumerownership/key uniqueness reviewed; no violations; all1199declarededges verified"
+  ],
+  "counts": {
+    "batches": 107,
+    "declaredEdges": 1199,
+    "existingValidOriginalKeys": 882,
+    "receipts": 17,
+    "rangesReceived": 12,
+    "requiredNewReviewKeys": 502,
+    "requiredKeysWithReceipt": 502,
+    "unreceivedRequiredKeys": 0,
+    "canonicalRows": 1442,
+    "uncoveredDeclaredEdges": 0,
+    "retainedOpenRows": 0,
+    "conflicts": 0,
+    "alerts": 0,
+    "historicalRowsWithLinkedDisposition": 418,
+    "historicalRowsRequiringRootTriage": 0,
+    "items": 2012,
+    "newDeclaredEdges": 7,
+    "explicitCurrentOverrideRows": 11
+  },
+  "canonicalWritesPerformed": [],
+  "applicationAuthorized": false,
+  "flowReview": [
+    "Explicit current26eight+101three closure rows override only corresponding prior rows; original records are embedded/preserved.",
+    "24/88 independent local defects have NEW closure records linked to actual same-owner completion+root acceptance, no historical receipt edits.",
+    "Utility refuses unresolved holds, stale raw guards, wrong frontier size/ownership, duplicate keys or unverified declared edges.",
+    "Before canonical writes utility archives all99originalfiles,8missingidentities and full finalproposal; stages data then rechecks allguards, eachtarget, postwritecontent and nonledger guard currency.",
+    "Only107exactownledger targets may be written. No source/manifest/plan/nativeverdict/readiness/runtime changes."
+  ],
+  "rootRemaining": "Review finalarrays and execute utility if accepted, then native root protocol. No tests or gate executions by this agent."
+}

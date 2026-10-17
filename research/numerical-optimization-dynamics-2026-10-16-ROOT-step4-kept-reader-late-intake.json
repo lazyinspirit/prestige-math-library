@@ -1,0 +1,106 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "research_only": true,
+  "entries": [
+    {
+      "id": "cor-constant-step-bdf2-order-two-with-consistent-start",
+      "batch": 65,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-65-step5-context.json",
+      "pointer": "/concerns/0",
+      "finding": {
+        "id": "cor-constant-step-bdf2-order-two-with-consistent-start",
+        "concern": "Clarify the scope of the Statement's sentence beginning \u201cA sufficient condition is that B_BE is centered at y(0)\u201d. Its endpoint-time bound \u2016f(h,z)\u2016\u2082\u2264M, hM\u2264rad(B_BE), and state Lipschitz bound establish invariance and contraction, but do not themselves establish the preceding requirement y(h)\u2208B_BE. For example, y'=1\u22122t, y(0)=0, h=1/2, and B_BE=[\u22120.01,0.01] satisfy those listed conditions with M=L\u2082=0; the BE root is zero but y(h)=1/4 is outside the ball. The proof explicitly retains endpoint inclusion, so the main startup conclusion remains supported under its actual assumptions; the sufficient-condition wording should retain that requirement explicitly.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "cor-constant-step-bdf2-order-two-with-consistent-start",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The proof establishes F2\u2019s uniform local-root and branch-selection hypotheses from the stated all-histories root condition; the BE startup correctly applies the one-stage residual bound to its invariant contractive ball.",
+        "context_sha256": "8ddb034db783fc181bdf098ebe6d1093d8e6cdc93d4457dbad69e19a28a6818a",
+        "item_sha256": "819700d9262cf10d34661e92ef3eccdbaf0a55ea7168b4de595ceaba7fcd546a",
+        "at": "2026-10-17T01:46:25.754Z"
+      }
+    },
+    {
+      "id": "alg-principal-matrix-logarithm-and-square-root",
+      "batch": 68,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-68-step5-context.json",
+      "pointer": "/concerns/0",
+      "finding": {
+        "id": "alg-principal-matrix-logarithm-and-square-root",
+        "concern": "The exact scalar-data interface is unclear. The inputs list a branch request, finite Schur and Schur\u2013Parlett controls, a partition and Jordan certificates. Step 3 says to 'evaluate the scalar branch' and call Schur\u2013Parlett, whose own input requires finite derivative data and whose Jordan evaluator uses supplied exact derivatives. This wrapper does not explicitly supply those jets or a terminating evaluator, nor prescribe a missing-jet return here. Clarify whether the inherited controls include exact branch jets; finite exact evaluation of logarithms should not be inferred from field arithmetic alone. The seven-procedure termination theorem relies on this interface.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_row": {
+        "id": "alg-principal-matrix-logarithm-and-square-root",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The exact Schur check certifies the eigenvalues used for the branch test; avoiding the closed negative real axis makes each selected scalar branch holomorphic near the spectrum. The subsequent Schur\u2013Parlett call and propagated statuses match its interface.",
+        "context_sha256": "3cfad2792115f3723a7f9fb0d4a1e97688c5ac1a9d5aed64fefbac14cafcce7b",
+        "item_sha256": "1aa9b33085151709516a30f1a0ebdd0033ecb49d88c83e86e893aa48539db03e",
+        "at": "2026-10-17T01:47:01.929Z"
+      }
+    },
+    {
+      "id": "thm-pade-scaling-and-squaring-error-bound",
+      "batch": 68,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-68-step5-context.json",
+      "pointer": "/concerns/1",
+      "finding": {
+        "id": "thm-pade-scaling-and-squaring-error-bound",
+        "concern": "The proof conflates the initial candidate and exact reference. Step 1.3 calls the candidate X\u2080 = r_m(B); step 2.1 then defines X_j = exp(2^j B), including X\u2080 = exp(B). Step 2.2 consequently writes norm(X\u2080 \u2212 exp(B)) \u2264 E\u2080 rather than the required initial candidate bound norm(X\u0302\u2080 \u2212 exp(B)) \u2264 E\u2080. The contour argument establishes the intended bound, but the notation as written does not state the induction base used in step 3.1.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_row": {
+        "id": "thm-pade-scaling-and-squaring-error-bound",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The denominator is nonzero on a neighborhood of the contour and spectrum, so the contour estimate gives E\u2080; the stated norm bounds and squaring recurrence propagate it to E\u209b. No defect found.",
+        "context_sha256": "b46870ca4547e9549c1532e4c6f1401c776dfadfa8e54103cf03209cae7ce2ba",
+        "item_sha256": "f87d538746535ec3b5a4b42ed1a26c4e4eb5282783c06179271d03cd6dc8296a",
+        "at": "2026-10-17T01:47:20.845Z"
+      }
+    },
+    {
+      "id": "ex-nonnormal-exponential-large-transient-norm",
+      "batch": 68,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-68-step5-context.json",
+      "pointer": "/concerns/2",
+      "finding": {
+        "id": "ex-nonnormal-exponential-large-transient-norm",
+        "concern": "Verification 1.1 says 'This is a single Jordan block at \u22121' for A = [[\u22121,10],[0,\u22121]]. Under the batch's Jordan convention, a canonical Jordan block has superdiagonal entry 1. This A is similar to that block, rather than literally that block. The displayed exponential is correct, but invoking the Jordan formula requires that similarity or a direct nilpotent-series argument.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_row": {
+        "id": "ex-nonnormal-exponential-large-transient-norm",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The Jordan formula gives the stated exponential; its row-sum norm is 11/e>1 since e<3, while its spectral radius is e^{-1}<1. The displayed products also establish nonnormality.",
+        "context_sha256": "34e03320b1d22d875984f5ee3291cf8a326a42853d9421e98e2714353bd8e9f8",
+        "item_sha256": "39051e9dcbbaf7225a2690f2975804f3ecd14dea535f24b4e769c93f143616bb",
+        "at": "2026-10-17T01:47:16.494Z"
+      }
+    },
+    {
+      "id": "alg-nonlinear-conjugate-gradient-methods",
+      "batch": 70,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-70-step5-context.json",
+      "pointer": "/concerns/0",
+      "finding": {
+        "id": "alg-nonlinear-conjugate-gradient-methods",
+        "concern": "Definition step 2 says \u201cFor k=0, use d_0 above,\u201d whereas step 3 tests or assigns d_k^{cand}, which has only been explicitly formed for k\u22651. The intended initialization d_0^{cand}=d_0=\u2212g_0 is immediately recoverable, but should be explicit for the procedure's first iteration. A first-iteration restart also assigns \u03b2_{\u22121}, although no such coefficient is otherwise needed.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "alg-nonlinear-conjugate-gradient-methods",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The recurrences, safeguards, line-search calls, and exact quadratic step are consistently typed and justified by the supplied interfaces. The stated parameter ranges and edge cases introduce no fatal defect.",
+        "context_sha256": "9235ce4ef54964ebd36bdc20536883122565a868bf2c7a5cf04ac00fb2e7ec2d",
+        "item_sha256": "f4a516eb8a093cf65b5426ab86ee3782373455084671853032e084ce7f0a5768",
+        "at": "2026-10-17T01:47:53.654Z"
+      }
+    }
+  ]
+}

@@ -10,14 +10,14 @@ provenance:
 deps: [def-linear-transport-equation-and-its-characteristic-flow,
        lem-transport-equation-along-a-characteristic,
        thm-chain-rule-for-total-derivatives,
-       thm-first-order-linear-ode-integrating-factor]
+       thm-first-order-linear-ode-integrating-factor, thm-continuous-partial-derivatives-imply-total-differentiability]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
   precheck: pass
+  repair: research/numerical-optimization-dynamics-2026-10-16-owner-step2-preclaimed-published-receipts-ROOT-1035/thm-inhomogeneous-linear-transport-formula.repair.json
 sources:
   scraped: []
   references:
@@ -47,7 +47,7 @@ equation on $U$.
 
 **Given:** A $C^1$ transport field $a$, continuous coefficients $c,f$, a classical transport solution, and a unique flow-consistent characteristic through each $(x,t)\in U$ whose whole segment to time $0$ remains in $U$.
 
-[L1] The chain rule computes the derivative of a $C^1$ function along a $C^1$ curve ([[thm-chain-rule-for-total-derivatives]]).
+[L1] [[thm-continuous-partial-derivatives-imply-total-differentiability]] makes the stated $C^1$ function totally differentiable on the open region; [[thm-chain-rule-for-total-derivatives]] then computes its derivative along a differentiable characteristic curve, whose space-time derivative is $(X'(s),1)$.
 
 [L2] Along a characteristic, the PDE becomes the scalar linear ODE $v'+cv=f$ ([[lem-transport-equation-along-a-characteristic]]).
 

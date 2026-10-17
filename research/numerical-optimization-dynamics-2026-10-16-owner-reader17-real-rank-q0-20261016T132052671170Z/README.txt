@@ -1,0 +1,1 @@
+ROOT integration only. Exact published proof1.2 missing-q0 guard; full before/proposed/diff. Statement/Facts/frontmatter/other proofsteps/tags unchanged. Actual direct/indirect cited uses and current draft independent proof checked as recorded in assessment.json. No canonical edits, hashes, checks/gates/tests, metadata or published claims.

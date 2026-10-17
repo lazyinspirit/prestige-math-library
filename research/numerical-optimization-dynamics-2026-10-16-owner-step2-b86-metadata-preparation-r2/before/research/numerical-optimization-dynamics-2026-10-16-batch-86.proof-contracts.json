@@ -1,0 +1,2018 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "86",
+  "scope": [
+    "def-regular-holonomic-phase-space-and-dynamics",
+    "lem-smooth-residual-quotient-extension",
+    "lem-regular-holonomic-phase-space-is-symplectic-cotangent",
+    "lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold",
+    "def-regular-classical-rattle-step-map",
+    "thm-local-holonomic-constrained-hamiltonian-flow",
+    "lem-rattle-scaled-position-and-momentum-branches",
+    "alg-finite-budget-rattle-step-with-scaled-residuals",
+    "thm-rattle-exact-constraint-preservation-and-reversibility",
+    "thm-rattle-symplecticity-on-regular-constraint-phase-space",
+    "thm-finite-budget-rattle-solver-returns-status",
+    "thm-rattle-second-order-global-accuracy-on-compact-tubes",
+    "thm-rattle-scaled-solve-residual-error-budget",
+    "ex-constrained-pendulum-equations-and-multiplier",
+    "ex-rigid-bond-rattle-free-rotor",
+    "ex-nearly-dependent-constraints-amplify-rattle-residuals",
+    "ex-rattle-residual-budget-and-global-trajectory-drift"
+  ],
+  "contracts": {
+    "def-regular-holonomic-phase-space-and-dynamics": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement excludes h=0 or makes no zero-step or zero-data boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a regular full-rank chart and an invertible multiplier matrix; singular cases are excluded or returned as failures."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement makes no claim about extending to a boundary outside its stated open local domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement defines only a unique local branch or a finite deterministic procedure; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "lem-smooth-residual-quotient-extension": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies $$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then $$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 For each parameter multi-index $\\beta$, differentiate the identities $\\partial_h^j f(0,\\alpha)=0$ in $\\alpha$ using [F2]; thus every $\\partial_\\alpha^\\beta f$ also vanishes to order $r$ in $h$ at zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 For each parameter multi-index $\\beta$ with $|\\beta|\\le k$, put $k_\\beta=k-|\\beta|$, $N=r+k_\\beta$, and $g_\\beta(h)=\\partial_\\alpha^\\beta f(h,\\alpha)$. For every $s\\le k_\\beta$, put $m=N-s$. If $m\\ge2$, apply [F1] componentwise to $g_\\beta^{(s)}$ through degree $m-1$; continuity of its highest derivative lets us replace the Lagrange coefficient at $\\theta h$ by its value at zero plus $o(1)$. If $m=1$, subtract the linear Taylor polynomial: the derivative of the remainder is $o(1)$ by continuity, so [F3] gives a remainder $o(|h|)$. Thus in every case $g_\\beta^{(s)}(h)$ equals its Taylor polynomial through degree $m$ plus $o(|h|^m)$. By step 1.1 all coefficients of degrees below $r$ vanish. For $h\\ne0$, the quotient rule expresses the $\\ell$th derivative of $g_\\beta/h^r$ as a finite linear combination of $h^{-r-\\ell+s}g_\\beta^{(s)}(h)$, $0\\le s\\le\\ell$. Substituting the expansions shows that the remainder terms are $o(|h|^{k_\\beta-\\ell})$; the polynomial part has a continuous extension whose $\\ell$th derivative at zero is $\\ell!\\partial_h^{r+\\ell}\\partial_\\alpha^\\beta f(0,\\alpha)/(r+\\ell)!$. Continuity of the derivatives on compact parameter neighborhoods makes these limits locally uniform in $\\alpha$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 Define the value at $h=0$ by the displayed limit formula. For each $|\\beta|+\\ell\\le k$, step 2.1 gives a locally uniform limit for the corresponding derivative as $h\\to0$; at $h=0$ these formulas are differentiable in $\\alpha$ because $f$ is $C^{k+r}$, and their $h$-derivatives agree with the next displayed coefficient. Induction on total derivative order therefore shows that all mixed partial derivatives through order $k$ exist and are continuous across $h=0$. The extension is $C^k$ with the asserted formula.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement defines the h=0 extension and its Taylor-coefficient value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires vanishing through order r-1; Proof step 1.1 identifies that hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement makes no claim about extending to a boundary outside its stated open local domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement defines only a unique local branch or a finite deterministic procedure; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "lem-regular-holonomic-phase-space-is-symplectic-cotangent": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-holonomic-phase-space-and-dynamics",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open, let $c:U\\to\\mathbb R^m$ be smooth (that is, $C^\\infty$) with $1\\le m<d$, let $M$ be a constant symmetric positive-definite $d\\times d$ matrix, and let $V:U\\to\\mathbb R$ be smooth. A **holonomic constraint** is the position condition $c(q)=0$. Write $J(q)=Dc(q)$ and let $Q=\\{q\\in U:c(q)=0\\}$. On a compact regular chart $K\\subset Q$, assume $J(q)$ has full row rank and $A(q)=J(q)M^{-1}J(q)^T$ satisfies $\\sup_{q\\in K}\\|A(q)^{-1}\\|_{\\mathrm{op}}<\\infty$. A position-momentum pair $(q,p)$ is **consistent** when $q\\in Q$ and $J(q)M^{-1}p=0$. The **constrained phase manifold** is $$\\mathcal M=\\{(q,p)\\in U\\times\\mathbb R^d:c(q)=0,\\ J(q)M^{-1}p=0\\}.$$ The ambient canonical two-form is $\\omega_0=\\sum_{i=1}^d dq_i\\wedge dp_i$; its restriction to $\\mathcal M$ is denoted $\\omega_{\\mathcal M}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let $F:U\\to\\mathbb R^n$ be $C^1$. Suppose $(a,b)\\in U$, $F(a,b)=0$, and the **partial derivative in the second block** $$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$ is invertible. Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$. Then there are open neighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map $\\varphi:P\\to Q$, such that $$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$ After shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and $$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-symplectic-form-and-symplectic-manifold",
+          "source_section": "Definition",
+          "quote": "A **symplectic form** on a smooth manifold $M$ is a smooth two-form $\\omega$ such that",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 At any $q\\in Q$, full row rank of $J(q)$ gives a permutation of coordinates $q=(x,y)$ for which the $m\\times m$ block $D_yc(q)$ is invertible. Apply [F2] to $c(x,y)=0$: locally $Q$ is the graph $y=\\psi(x)$, so $\\phi(x)=(x,\\psi(x))$ parametrizes $Q$ and $D\\phi$ has rank $d-m$ with image $\\ker J$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 Define $G(x)=D\\phi(x)^TMD\\phi(x)$. For every nonzero $\\xi$, $D\\phi\\,\\xi\\ne0$ and $\\xi^TG(x)\\xi=(D\\phi\\,\\xi)^TM(D\\phi\\,\\xi)>0$, so $G$ is invertible. For a cotangent coordinate $\\pi\\in\\mathbb R^{d-m}$, put $p=MD\\phi\\,G^{-1}\\pi$. Then $JM^{-1}p=JD\\phi\\,G^{-1}\\pi=0$ and $D\\phi^Tp=G G^{-1}\\pi=\\pi$. Conversely, if $JM^{-1}p=0$, then $M^{-1}p=D\\phi\\,\\xi$ for a unique $\\xi$, and $D\\phi^Tp=G\\xi$; hence the displayed formula gives the unique ambient $p$ representing $\\pi$. Thus $(x,\\pi)\\mapsto(\\phi(x),p)$ is a local diffeomorphism from $T^*Q$ onto $\\mathcal M$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 Let $\\theta_0=p^Tdq$ be the ambient canonical one-form. Under the chart just constructed, $dq=D\\phi\\,dx$ and $D\\phi^Tp=\\pi$, so its pullback is $\\pi^Tdx$. Therefore the pullback of $\\omega_0=-d\\theta_0$ is $\\sum_{j=1}^{d-m}dx_j\\wedge d\\pi_j$, which is closed and nondegenerate.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "4.1 Every point of $\\mathcal M$ has a chart of this form; the local calculation proves the restricted two-form is closed and nondegenerate everywhere. By [F3] it is symplectic, as claimed.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement excludes h=0 or makes no zero-step or zero-data boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a regular full-rank chart and an invertible multiplier matrix; singular cases are excluded or returned as failures."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement makes no claim about extending to a boundary outside its stated open local domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement defines only a unique local branch or a finite deterministic procedure; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-holonomic-phase-space-and-dynamics",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open, let $c:U\\to\\mathbb R^m$ be smooth (that is, $C^\\infty$) with $1\\le m<d$, let $M$ be a constant symmetric positive-definite $d\\times d$ matrix, and let $V:U\\to\\mathbb R$ be smooth. A **holonomic constraint** is the position condition $c(q)=0$. Write $J(q)=Dc(q)$ and let $Q=\\{q\\in U:c(q)=0\\}$. On a compact regular chart $K\\subset Q$, assume $J(q)$ has full row rank and $A(q)=J(q)M^{-1}J(q)^T$ satisfies $\\sup_{q\\in K}\\|A(q)^{-1}\\|_{\\mathrm{op}}<\\infty$. A position-momentum pair $(q,p)$ is **consistent** when $q\\in Q$ and $J(q)M^{-1}p=0$. The **constrained phase manifold** is $$\\mathcal M=\\{(q,p)\\in U\\times\\mathbb R^d:c(q)=0,\\ J(q)M^{-1}p=0\\}.$$ The ambient canonical two-form is $\\omega_0=\\sum_{i=1}^d dq_i\\wedge dp_i$; its restriction to $\\mathcal M$ is denoted $\\omega_{\\mathcal M}$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let $F:U\\to\\mathbb R^n$ be $C^1$. Suppose $(a,b)\\in U$, $F(a,b)=0$, and the **partial derivative in the second block** $$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$ is invertible. Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$. Then there are open neighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map $\\varphi:P\\to Q$, such that $$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$ After shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and $$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then $$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 At a point of $Q$, permute coordinates as $q=(x,y)$ so $D_yc$ is an invertible $m\\times m$ block. By [F2], locally $Q$ is $y=\\psi(x)$; write $\\phi(x)=(x,\\psi(x))$ and $T(x)=D\\phi(x)$. Since $J(\\phi(x))T(x)=0$ and both kernels have dimension $d-m$, $\\operatorname{im}T=\\ker J$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 After shrinking to a convex coordinate neighborhood, $B(x)=D_yc(x,\\psi(x))$ remains invertible and $\\|B(x)^{-1}(D_yc(x,y)-B(x))\\|\\le\\frac12$. Set $R_x(y)=c(x,y)-B(x)(y-\\psi(x))$. Then $R_x(\\psi(x))=0$ and the derivative of $B(x)^{-1}R_x$ has norm at most $\\frac12$. The mean-value inequality [F4] gives $\\|B(x)^{-1}R_x(y)\\|\\le\\frac12\\|y-\\psi(x)\\|$. Since $B^{-1}c=(y-\\psi)+B^{-1}R_x(y)$, it follows that $\\|q-\\phi(x)\\|=\\|y-\\psi(x)\\|\\le 2\\|B(x)^{-1}\\|\\,\\|c(q)\\|$. Compactness makes the constant uniform on a finite chart cover.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "2.2 For $\\bar q=\\phi(x)$, put $G=T^TMT$ and define $\\bar p=MTG^{-1}T^Tp$. Positive definiteness of $M$ and injectivity of $T$ make $G$ invertible. Then $J(\\bar q)M^{-1}\\bar p=0$ and $T^T(p-\\bar p)=0$. Since $\\ker T^T$ and $\\operatorname{im}J(\\bar q)^T$ both have dimension $m$ and the latter is contained in the former, $p-\\bar p=J(\\bar q)^T\\eta$ for a unique $\\eta$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 The identity $J(\\bar q)M^{-1}(p-\\bar p)=A(\\bar q)\\eta$ and [F1] imply $\\|p-\\bar p\\|\\le C\\|A(\\bar q)^{-1}\\|\\bigl(\\|J(q)M^{-1}p\\|+\\|J(\\bar q)-J(q)\\|\\,\\|M^{-1}p\\|\\bigr)$. The momentum set is bounded and $J$ is locally Lipschitz, so step 2.1 bounds the right side by $C(\\|J(q)M^{-1}p\\|+\\|c(q)\\|)$. Thus $\\Pi(q,p)=(\\bar q,\\bar p)$ has the asserted distance bound and lies in $\\mathcal M$. If $(q,p)\\in\\mathcal M$, then $\\bar q=q$ and the formula for $\\bar p$ returns $p$, so $\\Pi$ is the identity there. By [F3] the coordinate formula is smooth, and it is the identity on the consistent phase set in this neighborhood. Shrink the finitely many neighborhoods so their closures lie in an open regular set; continuity keeps $A^{-1}$ and the required derivatives uniformly bounded there. A finite subcover gives finitely many such local retractions and a uniform constant.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement excludes h=0 or makes no zero-step or zero-data boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a regular full-rank chart and an invertible multiplier matrix; singular cases are excluded or returned as failures."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement makes no claim about extending to a boundary outside its stated open local domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 3.1 uses only the stated unique branches or a finite cover; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is used; local uniqueness and finite covers suffice.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the statement, proof steps and tags, direct dependencies, exact supplier excerpts, and applicable boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "def-regular-classical-rattle-step-map": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement defines the zero-step map as the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a regular full-rank chart and an invertible multiplier matrix; singular cases are excluded or returned as failures."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement includes h=0 as the identity endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement defines only a unique local branch or a finite deterministic procedure; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "thm-local-holonomic-constrained-hamiltonian-flow": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-holonomic-phase-space-and-dynamics",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open, let $c:U\\to\\mathbb R^m$ be smooth (that is, $C^\\infty$) with $1\\le m<d$, let $M$ be a constant symmetric positive-definite $d\\times d$ matrix, and let $V:U\\to\\mathbb R$ be smooth. A **holonomic constraint** is the position condition $c(q)=0$. Write $J(q)=Dc(q)$ and let $Q=\\{q\\in U:c(q)=0\\}$. On a compact regular chart $K\\subset Q$, assume $J(q)$ has full row rank and $A(q)=J(q)M^{-1}J(q)^T$ satisfies $\\sup_{q\\in K}\\|A(q)^{-1}\\|_{\\mathrm{op}}<\\infty$. A position-momentum pair $(q,p)$ is **consistent** when $q\\in Q$ and $J(q)M^{-1}p=0$. The **constrained phase manifold** is $$\\mathcal M=\\{(q,p)\\in U\\times\\mathbb R^d:c(q)=0,\\ J(q)M^{-1}p=0\\}.$$ The ambient canonical two-form is $\\omega_0=\\sum_{i=1}^d dq_i\\wedge dp_i$; its restriction to $\\mathcal M$ is denoted $\\omega_{\\mathcal M}$. For $v=M^{-1}p$, the constrained Hamilton equations are $$\\dot q=v,\\qquad \\dot p=-\\nabla V(q)-J(q)^T\\lambda,$$ with multiplier $$\\lambda=A(q)^{-1}\\bigl(D^2c(q)[v,v]-J(q)M^{-1}\\nabla V(q)\\bigr).$$ Here $D^2c(q)[v,v]\\in\\mathbb R^m$ has components $v^TD^2c_j(q)v$. This multiplier is the one that keeps both $c(q)=0$ and $J(q)M^{-1}p=0$ satisfied.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-regular-holonomic-phase-space-is-symplectic-cotangent",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[def-regular-holonomic-phase-space-and-dynamics]], choose a local configuration chart $\\phi:O\\subseteq\\mathbb R^{d-m}\\to Q$ and write $T=D\\phi$, $G=T^TMT$. Then $Q$ is a smooth manifold of dimension $d-m$, and the cotangent coordinates $\\pi=T^Tp$ identify $\\mathcal M$ locally with $T^*Q$: the unique consistent ambient momentum representing $\\pi$ is $p=MTG^{-1}\\pi$. In these coordinates the restricted canonical one-form $p^Tdq$ is $\\pi^Tdx$, so the restricted two-form is $\\omega_{\\mathcal M}=\\sum_{j=1}^{d-m}dx_j\\wedge d\\pi_j$. It is closed and nondegenerate, hence is a symplectic form on $\\mathcal M$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Then a unique local solution of the IVP exists on some interval around the initial time.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 Since $J(q)$ has full row rank and $M^{-1}$ is SPD, for every nonzero $\\eta\\in\\mathbb R^m$ we have $\\eta^TA(q)\\eta=(J(q)^T\\eta)^TM^{-1}(J(q)^T\\eta)>0$. Thus $A(q)$ is invertible; its inverse and the displayed multiplier are smooth on a neighborhood of the chart.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "1.2 Extend the formula in [F1] to that open neighborhood and define the ambient vector field $(q,p)\\mapsto(M^{-1}p,-\\nabla V(q)-J(q)^T\\lambda(q,p))$. It is smooth, hence locally Lipschitz, so [F3] gives a unique local solution through $(q_0,p_0)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "1.3 Along this solution, the chain rule gives $\\frac d{dt}c(q)=J(q)M^{-1}p$ and $\\frac d{dt}(J(q)M^{-1}p)=D^2c(q)[v,v]-J(q)M^{-1}\\nabla V(q)-A(q)\\lambda(q,p)=0$, where $v=M^{-1}p$. Since the second constraint starts at zero, it remains zero; the first derivative is therefore zero and $c(q)$ also remains zero. By [F2], this invariant set is the smooth phase manifold, so the solution stays in $\\mathcal M$ and satisfies the constrained equations.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 The local uniqueness from [F3] applies to every solution of the same ambient extension, so in particular the constrained solution is unique.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement excludes h=0 or makes no zero-step or zero-data boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a regular full-rank chart and an invertible multiplier matrix; singular cases are excluded or returned as failures."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement makes no claim about extending to a boundary outside its stated open local domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.2 uses only the stated unique branches or a finite cover; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "lem-rattle-scaled-position-and-momentum-branches": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-classical-rattle-step-map",
+          "source_section": "Definition",
+          "quote": "For such a selected pair $\\lambda,\\mu\\in\\mathbb R^m$, define $$p_{1/2}=p-\\frac h2\\nabla V(q)-hJ(q)^T\\lambda,\\qquad q_1=q+hM^{-1}p_{1/2},$$ $$p_1=p_{1/2}-\\frac h2\\nabla V(q_1)-hJ(q_1)^T\\mu.$$ The position and momentum equations are respectively $c(q_1)=0$ and $J(q_1)M^{-1}p_1=0$. At $h=0$ define the step to be the identity.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-regular-holonomic-phase-space-is-symplectic-cotangent",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[def-regular-holonomic-phase-space-and-dynamics]], choose a local configuration chart $\\phi:O\\subseteq\\mathbb R^{d-m}\\to Q$ and write $T=D\\phi$, $G=T^TMT$. Then $Q$ is a smooth manifold of dimension $d-m$, and the cotangent coordinates $\\pi=T^Tp$ identify $\\mathcal M$ locally with $T^*Q$: the unique consistent ambient momentum representing $\\pi$ is $p=MTG^{-1}\\pi$. In these coordinates the restricted canonical one-form $p^Tdq$ is $\\pi^Tdx$, so the restricted two-form is $\\omega_{\\mathcal M}=\\sum_{j=1}^{d-m}dx_j\\wedge d\\pi_j$. It is closed and nondegenerate, hence is a symplectic form on $\\mathcal M$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-smooth-residual-quotient-extension",
+          "source_section": "Statement",
+          "quote": "Let $P\\subseteq\\mathbb R^n$ be open, let $r\\in\\{1,2\\}$ and $k\\ge1$, and let $f:(-\\delta,\\delta)\\times P\\to\\mathbb R^m$ be $C^{k+r}$. Suppose $\\partial_h^j f(0,\\alpha)=0$ for every $\\alpha\\in P$ and $0\\le j<r$. Then $f(h,\\alpha)/h^r$, initially defined for $h\\ne0$, has a $C^k$ extension $F$ to $(-\\delta,\\delta)\\times P$. Its mixed derivatives at zero satisfy $$\\partial_h^\\ell\\partial_\\alpha^\\beta F(0,\\alpha)=\\frac{\\ell!}{(r+\\ell)!}\\partial_h^{r+\\ell}\\partial_\\alpha^\\beta f(0,\\alpha)\\qquad(\\ell+|\\beta|\\le k).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "source_section": "Statement",
+          "quote": "Let $k,m,n\\ge1$ and $p\\in\\mathbb N$, let $U\\subseteq\\mathbb R^{m+n+p}$ be open, and let $F:U\\to\\mathbb R^n$ be $C^k$. Suppose $F(a,b,\\lambda_0)=0$ and $D_yF(a,b,\\lambda_0)$ is invertible. Then there are neighbourhoods and a unique $C^k$ map $\\varphi$ solving $F(x,\\varphi(x,\\lambda),\\lambda)=0$. More precisely, on suitable open neighbourhoods $P$ of $(a,\\lambda_0)$ and $Q$ of $b$, $$F(x,y,\\lambda)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x,\\lambda),$$ and $$D\\varphi(x,\\lambda)=-D_yF(x,\\varphi(x,\\lambda),\\lambda)^{-1}D_{(x,\\lambda)}F(x,\\varphi(x,\\lambda),\\lambda).$$ When no parameter block is present, this is the ordinary $C^k$ implicit function theorem.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 Put $v=M^{-1}p$ and $w(\\lambda)=-M^{-1}(\\frac12\\nabla V(q)+J(q)^T\\lambda)$. Then $q_1=q+hv+h^2w(\\lambda)$. Since $c(q)=0$ and $J(q)v=0$, [F3] extends $h^{-2}c(q_1)$ smoothly, with value $F_q(0,q,p,\\lambda)=\\frac12D^2c(q)[v,v]-\\frac12J(q)M^{-1}\\nabla V(q)-A(q)\\lambda$. Its $\\lambda$ derivative is $-A(q)$, which is invertible. Thus [F4] gives the unique local position multiplier branch and the root $\\lambda_0$ in the Statement.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 Let $G(h,q,p,\\lambda,\\mu)=J(q_1)M^{-1}p_1$. Consistency gives $G(0,q,p,\\lambda,\\mu)=0$, and [F3] extends $h^{-1}G$ smoothly. By [F5], its value at zero is $F_p(0,q,p,\\lambda,\\mu)=D^2c(q)[v,v]-J(q)M^{-1}\\nabla V(q)-A(q)(\\lambda+\\mu)$. Its $\\mu$ derivative is $-A(q)$. At $\\lambda=\\lambda_0$, the unique zero is $\\mu=\\lambda_0$, so [F4] gives a unique local momentum branch.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 The branch equations are smooth in the local phase coordinates and $A^{-1}$ is uniformly bounded on the compact chart. Their pointwise neighborhoods therefore admit a finite subcover. On an overlap, both position branches agree at $h=0$ with the same smooth center $\\lambda_*$, and both momentum branches agree there with the same center $\\mu_*$; after shrinking the parameter neighborhoods and $h_0$, their values remain inside the same IFT uniqueness neighborhoods. Thus the local branches agree on overlaps and give the claimed uniform selected branches.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement includes the h=0 multiplier roots and residual Jacobians."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a regular full-rank chart and an invertible multiplier matrix; singular cases are excluded or returned as failures."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement makes no claim about extending to a boundary outside its stated open local domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.1 uses only the stated unique branches or a finite cover; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "alg-finite-budget-rattle-step-with-scaled-residuals": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement returns the exact identity at h=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a regular full-rank chart and an invertible multiplier matrix; singular cases are excluded or returned as failures."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement specifies the h=0 identity branch and finite budget endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement defines only a unique local branch or a finite deterministic procedure; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "thm-rattle-exact-constraint-preservation-and-reversibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-holonomic-phase-space-and-dynamics",
+          "source_section": "Definition",
+          "quote": "A position-momentum pair $(q,p)$ is **consistent** when $q\\in Q$ and $J(q)M^{-1}p=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-regular-classical-rattle-step-map",
+          "source_section": "Definition",
+          "quote": "The position and momentum equations are respectively $c(q_1)=0$ and $J(q_1)M^{-1}p_1=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-rattle-scaled-position-and-momentum-branches",
+          "source_section": "Statement",
+          "quote": "For consistent inputs in a compact regular chart, there is a uniform $h_0>0$ such that for $|h|<h_0$ the two scaled RATTLE equations in [[def-regular-classical-rattle-step-map]] have unique roots in neighborhoods of $$\\lambda_0=\\mu_0=\\frac12A(q)^{-1}\\bigl(D^2c(q)[v,v]-J(q)M^{-1}\\nabla V(q)\\bigr),\\qquad v=M^{-1}p.$$ The position root depends smoothly on $(h,q,p)$, and the momentum root depends smoothly on $(h,q,p,\\lambda)$ when the position multiplier is treated as a parameter. At $h=0$ the derivatives of the two scaled residuals with respect to their own multiplier variables equal $-A(q)$; they remain uniformly invertible for small $|h|$ on a compact regular chart. The branch derivatives are uniformly bounded there, and the roots define the selected local branches.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 The exact first constraint equation gives $c(q_1)=0$, and the exact final projection equation gives $J(q_1)M^{-1}p_1=0$. By [F1], this is exactly $(q_1,p_1)\\in\\mathcal M$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "1.2 Starting from the forward equations, use the reverse step size $-h$ and choose its first multiplier to be the forward $\\mu$. Its first half-momentum is then $p_1+\\frac h2\\nabla V(q_1)+hJ(q_1)^T\\mu=p_{1/2}$, so its next position is $q_1-hM^{-1}p_{1/2}=q$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 Choose the reverse step's final multiplier to be the forward $\\lambda$. Its final momentum is then $p_{1/2}+\\frac h2\\nabla V(q)+hJ(q)^T\\lambda=p$. The reverse constraint equations hold because the endpoints are the forward consistent states. As $h\\to0$, the swapped multipliers and the reverse input converge to the same regular-chart branch centers; after shrinking $h_0$, both multipliers lie in the reverse IFT neighborhoods. By uniqueness of the selected branches [F3], this reverse solve is the defined $-h$ step. Thus $\\Psi_{-h}\\Psi_h=\\mathrm{id}$; interchanging the endpoints and the multipliers proves $\\Psi_h\\Psi_{-h}=\\mathrm{id}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1 includes the identity endpoint when h=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a regular full-rank chart and an invertible multiplier matrix; singular cases are excluded or returned as failures."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement makes no claim about extending to a boundary outside its stated open local domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 2.1 uses only the stated unique branches or a finite cover; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "thm-rattle-symplecticity-on-regular-constraint-phase-space": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-holonomic-phase-space-and-dynamics",
+          "source_section": "Definition",
+          "quote": "The ambient canonical two-form is $\\omega_0=\\sum_{i=1}^d dq_i\\wedge dp_i$; its restriction to $\\mathcal M$ is denoted $\\omega_{\\mathcal M}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-regular-holonomic-phase-space-is-symplectic-cotangent",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[def-regular-holonomic-phase-space-and-dynamics]], choose a local configuration chart $\\phi:O\\subseteq\\mathbb R^{d-m}\\to Q$ and write $T=D\\phi$, $G=T^TMT$. Then $Q$ is a smooth manifold of dimension $d-m$, and the cotangent coordinates $\\pi=T^Tp$ identify $\\mathcal M$ locally with $T^*Q$: the unique consistent ambient momentum representing $\\pi$ is $p=MTG^{-1}\\pi$. In these coordinates the restricted canonical one-form $p^Tdq$ is $\\pi^Tdx$, so the restricted two-form is $\\omega_{\\mathcal M}=\\sum_{j=1}^{d-m}dx_j\\wedge d\\pi_j$. It is closed and nondegenerate, hence is a symplectic form on $\\mathcal M$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-regular-classical-rattle-step-map",
+          "source_section": "Definition",
+          "quote": "For such a selected pair $\\lambda,\\mu\\in\\mathbb R^m$, define $$p_{1/2}=p-\\frac h2\\nabla V(q)-hJ(q)^T\\lambda,\\qquad q_1=q+hM^{-1}p_{1/2},$$ $$p_1=p_{1/2}-\\frac h2\\nabla V(q_1)-hJ(q_1)^T\\mu.$$ The position and momentum equations are respectively $c(q_1)=0$ and $J(q_1)M^{-1}p_1=0$. At $h=0$ define the step to be the identity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-rattle-scaled-position-and-momentum-branches",
+          "source_section": "Statement",
+          "quote": "For consistent inputs in a compact regular chart, there is a uniform $h_0>0$ such that for $|h|<h_0$ the two scaled RATTLE equations in [[def-regular-classical-rattle-step-map]] have unique roots in neighborhoods of $$\\lambda_0=\\mu_0=\\frac12A(q)^{-1}\\bigl(D^2c(q)[v,v]-J(q)M^{-1}\\nabla V(q)\\bigr),\\qquad v=M^{-1}p.$$ The position root depends smoothly on $(h,q,p)$, and the momentum root depends smoothly on $(h,q,p,\\lambda)$ when the position multiplier is treated as a parameter. At $h=0$ the derivatives of the two scaled residuals with respect to their own multiplier variables equal $-A(q)$; they remain uniformly invertible for small $|h|$ on a compact regular chart. The branch derivatives are uniformly bounded there, and the roots define the selected local branches.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-symplectic-form-and-symplectic-manifold",
+          "source_section": "Definition",
+          "quote": "A **symplectic form** on a smooth manifold $M$ is a smooth two-form $\\omega$ such that",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-rattle-exact-constraint-preservation-and-reversibility",
+          "source_section": "Statement",
+          "quote": "On the local branch of [[def-regular-classical-rattle-step-map]], an exact solve sends every consistent $(q,p)\\in\\mathcal M$ to a consistent $(q_1,p_1)\\in\\mathcal M$. The signed-step maps satisfy $\\Psi_{-h}\\circ\\Psi_h=\\mathrm{id}$ and $\\Psi_h\\circ\\Psi_{-h}=\\mathrm{id}$ whenever both branch steps remain in the regular chart.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 If $h=0$, then $\\Psi_0$ is the identity and preserves $\\omega_{\\mathcal M}$. Assume $h\\ne0$. On a local configuration chart define $L_h(q,q_1)=\\frac{1}{2h}(q_1-q)^TM(q_1-q)-\\frac h2(V(q)+V(q_1))$. Differentiating gives $-D_1L_h=p_{1/2}+\\frac h2\\nabla V(q)$ and $D_2L_h=p_{1/2}-\\frac h2\\nabla V(q_1)$. By [F3], the first expression differs from $p$ by the normal vector $-hJ(q)^T\\lambda$, and the second differs from $p_1$ by $hJ(q_1)^T\\mu$. Each normal vector vanishes on tangent variations of $Q$, so the restricted cotangent covectors satisfy $p|_{T_qQ}=-D_1L_h|_{T_qQ}$ and $p_1|_{T_{q_1}Q}=D_2L_h|_{T_{q_1}Q}$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 Let $\\theta$ be the canonical one-form on $T^*Q$, $\\theta_{(q,\\pi)}(\\delta q,\\delta\\pi)=\\pi(\\delta q)$. The identities in step 1.1 give $\\Psi_h^*\\theta-\\theta=d(L_h(q,q_1(q,p)))$ on the input chart, because both sides applied to an input variation equal $D_1L_h\\,\\delta q+D_2L_h\\,\\delta q_1$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 Taking the exterior derivative of step 2.1 yields $\\Psi_h^*d\\theta=d\\theta$. By [F1], $\\omega_{\\mathcal M}$ is the restriction of the ambient canonical form; [F2] identifies it as $-d\\theta$ in cotangent coordinates. Hence this is $\\Psi_h^*\\omega_{\\mathcal M}=\\omega_{\\mathcal M}$. The branch map is smooth by [F4] and locally invertible by [F6]. By [F2] and [F5], the preserved form is the symplectic form on $\\mathcal M$; this proves the stated symplecticity.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement includes h=0 and Proof step 2.1 preserves the identity pullback."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a regular full-rank chart and an invertible multiplier matrix; singular cases are excluded or returned as failures."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement makes no claim about extending to a boundary outside its stated open local domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement defines only a unique local branch or a finite deterministic procedure; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "thm-finite-budget-rattle-solver-returns-status": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-budget-rattle-step-with-scaled-residuals",
+          "source_section": "Definition",
+          "quote": "The routine returns either an approximate state and both scaled residual norms, or a failure status and the last valid iterate.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+          "source_section": "Definition",
+          "quote": "In **chord mode**, for $k=0,1,\\ldots,N$, first evaluate $G(z_k)$ and put $r_k=\\|G(z_k)\\|_2$. If $r_k\\le\\varepsilon$, return $(z_k,\\texttt{root},r_k)$; this status means only that the residual tolerance was met. If $k=N$, return $(z_k,\\texttt{iteration-budget-exhausted},r_k)$. Otherwise, at $k=0,q,2q,\\ldots$, refresh by forming $J_k=DG(z_k)$, attempting to factor it, and retaining the factorization until the next scheduled refresh. The factorization backend must either report singularity or return a factor object whose solve operation gives the exact unique solution of $J_k s=-G(z_k)$. If it reports singularity, return $(z_k,\\texttt{singular-jacobian},r_k)$. At each correction call [[alg-newton-correction-for-vector-residuals]] with the retained $J_k$ and current residual. If that procedure reports a singular Jacobian, return $(z_k,\\texttt{singular-jacobian},r_k)$. If its correction $s_k$ has $z_k+s_k\\notin U$, return $(z_k,\\texttt{invalid-trial},r_k)$; otherwise set $z_{k+1}=z_k+s_k$ and continue. A refresh period $q=1$ updates the Jacobian every correction; $q>1$ is a chord iteration.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 The position call in [F1] is the finite-budget supplier call in [F2], so it terminates after at most $N_q+1$ residual checks and $N_q$ corrections. If it returns any non-success status, the RATTLE routine returns immediately after finitely many further arithmetic operations.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 If the position call succeeds, the algorithm makes the single momentum call in [F1], which by [F2] terminates after at most $N_p+1$ residual checks and $N_p$ corrections; the remaining assignment and status return are finite. Therefore every execution terminates and returns one of the specified statuses.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits zero correction budgets N_q,N_p in N_0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a regular full-rank chart and an invertible multiplier matrix; singular cases are excluded or returned as failures."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement makes no claim about extending to a boundary outside its stated open local domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement defines only a unique local branch or a finite deterministic procedure; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "thm-rattle-second-order-global-accuracy-on-compact-tubes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-local-holonomic-constrained-hamiltonian-flow",
+          "source_section": "Statement",
+          "quote": "For every consistent initial pair $(q_0,p_0)\\in\\mathcal M$ there is a unique local solution",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-rattle-scaled-position-and-momentum-branches",
+          "source_section": "Statement",
+          "quote": "For consistent inputs in a compact regular chart, there is a uniform $h_0>0$ such that for $|h|<h_0$ the two scaled RATTLE equations in [[def-regular-classical-rattle-step-map]] have unique roots in neighborhoods of $$\\lambda_0=\\mu_0=\\frac12A(q)^{-1}\\bigl(D^2c(q)[v,v]-J(q)M^{-1}\\nabla V(q)\\bigr),\\qquad v=M^{-1}p.$$ The position root depends smoothly on $(h,q,p)$, and the momentum root depends smoothly on $(h,q,p,\\lambda)$ when the position multiplier is treated as a parameter. At $h=0$ the derivatives of the two scaled residuals with respect to their own multiplier variables equal $-A(q)$; they remain uniformly invertible for small $|h|$ on a compact regular chart. The branch derivatives are uniformly bounded there, and the roots define the selected local branches.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rattle-exact-constraint-preservation-and-reversibility",
+          "source_section": "Statement",
+          "quote": "On the local branch of [[def-regular-classical-rattle-step-map]], an exact solve sends every consistent $(q,p)\\in\\mathcal M$ to a consistent $(q_1,p_1)\\in\\mathcal M$. The signed-step maps satisfy $\\Psi_{-h}\\circ\\Psi_h=\\mathrm{id}$ and $\\Psi_h\\circ\\Psi_{-h}=\\mathrm{id}$ whenever both branch steps remain in the regular chart.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies $$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then $$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 By [F1] and [F2], differentiating the RATTLE equations at $h=0$ gives $D_h\\Psi_0(z)=X(z)$: the position derivative is $M^{-1}p$, and the momentum derivative is $-\\nabla V-J^T(\\Lambda/2+\\Lambda/2)$. The selected map is $C^3$ in $(h,z)$ by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "1.2 In chart coordinates write $\\Psi_h(z)=z+hX(z)+h^2a(z)+O(h^3)$ uniformly on a slightly larger compact neighborhood. Substitution into the inverse equation gives $\\Psi_h^{-1}(z)=z-hX(z)+h^2(DX(z)X(z)-a(z))+O(h^3)$. By [F3], this equals $\\Psi_{-h}(z)=z-hX(z)+h^2a(z)+O(h^3)$. Comparing quadratic coefficients yields $a(z)=\\frac12DX(z)X(z)$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "1.3 Since $\\Psi_0$ is the identity and $\\Psi_h$ is $C^3$, its state derivative is $D_z\\Psi_h=I+O(h)$ uniformly on the larger compact chart. Thus $\\|D_z\\Psi_h\\|\\le1+Lh$ for some $L\\ge0$ and small $h>0$. Applying [F5] in the convex chart gives $\\|\\Psi_h(x)-\\Psi_h(y)\\|\\le(1+Lh)\\|x-y\\|$ there.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 The exact flow satisfies $\\dot z=X(z)$ and hence $\\ddot z=DX(z)X(z)$. Its third time derivative is bounded on the compact tube. Taylor's theorem [F4] therefore gives $z(t+h)=z(t)+hX(z(t))+\\frac12h^2DX(z(t))X(z(t))+O(h^3)$. Comparing with step 1.2 proves the local defect $\\|\\Psi_h(z(t))-z(t+h)\\|\\le C h^3$ uniformly in $t$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 Until a numerical state leaves the larger chart, steps 2.1 and 1.3 give $e_{n+1}\\le(1+Lh)e_n+C h^3$, where $e_n=\\|z_n^h-z(t_n)\\|$. Induction yields $e_n\\le(1+Lh)^ne_0+C h^3\\sum_{j=0}^{n-1}(1+Lh)^j\\le e^{LT}(C_0+CT)h^2$. For sufficiently small $h$, this bound is less than the positive distance from the exact compact path to the boundary of the larger chart, so a first-exit index cannot exist. The estimate therefore holds for every $n\\le N$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement excludes h=0 or makes no zero-step or zero-data boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a regular full-rank chart and an invertible multiplier matrix; singular cases are excluded or returned as failures."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 3.1 includes both grid endpoints n=0 and n=N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement defines only a unique local branch or a finite deterministic procedure; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "thm-rattle-scaled-solve-residual-error-budget": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-classical-rattle-step-map",
+          "source_section": "Definition",
+          "quote": "For such a selected pair $\\lambda,\\mu\\in\\mathbb R^m$, define $$p_{1/2}=p-\\frac h2\\nabla V(q)-hJ(q)^T\\lambda,\\qquad q_1=q+hM^{-1}p_{1/2},$$ $$p_1=p_{1/2}-\\frac h2\\nabla V(q_1)-hJ(q_1)^T\\mu.$$ The position and momentum equations are respectively $c(q_1)=0$ and $J(q_1)M^{-1}p_1=0$. At $h=0$ define the step to be the identity.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-rattle-scaled-position-and-momentum-branches",
+          "source_section": "Statement",
+          "quote": "For consistent inputs in a compact regular chart, there is a uniform $h_0>0$ such that for $|h|<h_0$ the two scaled RATTLE equations in [[def-regular-classical-rattle-step-map]] have unique roots in neighborhoods of $$\\lambda_0=\\mu_0=\\frac12A(q)^{-1}\\bigl(D^2c(q)[v,v]-J(q)M^{-1}\\nabla V(q)\\bigr),\\qquad v=M^{-1}p.$$ The position root depends smoothly on $(h,q,p)$, and the momentum root depends smoothly on $(h,q,p,\\lambda)$ when the position multiplier is treated as a parameter. At $h=0$ the derivatives of the two scaled residuals with respect to their own multiplier variables equal $-A(q)$; they remain uniformly invertible for small $|h|$ on a compact regular chart. The branch derivatives are uniformly bounded there, and the roots define the selected local branches.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-finite-budget-rattle-step-with-scaled-residuals",
+          "source_section": "Definition",
+          "quote": "Fix a compact regular chart and an input $(q,p)\\in\\mathcal M$, a signed $h$ with $0<|h|<h_0$, local branch balls $U_q,U_p$ from [[lem-rattle-scaled-position-and-momentum-branches]], initial multiplier guesses $\\lambda_{\\mathrm{init}}\\in U_q$, $\\mu_{\\mathrm{init}}\\in U_p$, tolerances $\\varepsilon_q,\\varepsilon_p\\ge0$, and finite correction budgets $N_q,N_p\\in\\mathbb N_0$. The routine returns either an approximate state and both scaled residual norms, or a failure status and the last valid iterate. 1. Form $$F_q(\\lambda)=h^{-2}c\\!\\left(q+hM^{-1}\\left(p-\\frac h2\\nabla V(q)-hJ(q)^T\\lambda\\right)\\right).$$ Run [[alg-newton-chord-implicit-residual-with-factorization-reuse]] on $F_q$ in chord mode with refresh period $1$, domain $U_q$, initial value $\\lambda_{\\mathrm{init}}$, tolerance $\\varepsilon_q$, and budget $N_q$. If it does not return its residual-tolerance status, return that status with the actual scaled residual and do not continue. 2. For its returned $\\widetilde\\lambda$, compute $\\widetilde p_{1/2}=p-\\frac h2\\nabla V(q)-hJ(q)^T\\widetilde\\lambda$ and $\\widetilde q_1=q+hM^{-1}\\widetilde p_{1/2}$. Form $$F_p(\\mu)=h^{-1}J(\\widetilde q_1)M^{-1}\\left(\\widetilde p_{1/2}-\\frac h2\\nabla V(\\widetilde q_1)-hJ(\\widetilde q_1)^T\\mu\\right).$$ Run the same supplier procedure on $F_p$ in chord mode with refresh period $1$, domain $U_p$, initial value $\\mu_{\\mathrm{init}}$, tolerance $\\varepsilon_p$, and budget $N_p$. On any non-success status, return it with the actual scaled tangency residual. 3. If both calls meet their residual tolerances, set $$\\widetilde p_1=\\widetilde p_{1/2}-\\frac h2\\nabla V(\\widetilde q_1)-hJ(\\widetilde q_1)^T\\widetilde\\mu$$ and return $(\\widetilde q_1,\\widetilde p_1)$, the norms $\\|F_q(\\widetilde\\lambda)\\|_2$, $\\|F_p(\\widetilde\\mu)\\|_2$, and status “residual tolerances met”. For $h=0$, return $(q,p)$ with status “exact identity”. If the input is inconsistent, a branch ball is not supplied, an evaluation is undefined, a trial leaves its branch ball, a Jacobian factorization fails, or either budget expires, return the corresponding failure status and do not claim a RATTLE step. A successful output with nonzero residuals need not lie in $\\mathcal M$; applying the routine again requires a consistent input, for example one restored by [[lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold]]. The supplier status “root” means only that its stated residual tolerance was met; it does not certify an exact root or a forward-error bound. No finite budget is claimed to succeed on every input.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-implicit-residual-and-algebraic-error-units",
+          "source_section": "Definition",
+          "quote": "A residual norm is not a forward-error bound unless a separate inverse or stability estimate converts it to $\\|\\widetilde z-z^*\\|$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then $$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "1.1",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold",
+          "source_section": "Statement",
+          "quote": "Fix a compact regular configuration chart from [[def-regular-holonomic-phase-space-and-dynamics]] and a compact momentum set. Use the Euclidean norm on $\\mathbb R^{2d}$ for phase-state differences. Each point of its consistent phase set has a neighborhood $U_j$ with a smooth retraction $\\Pi_j:U_j\\to\\mathcal M$ such that $\\Pi_j$ is the identity on $U_j\\cap\\mathcal M$ and $$\\|\\Pi_j(q,p)-(q,p)\\|\\le C_j\\bigl(\\|c(q)\\|_2+\\|J(q)M^{-1}p\\|_2\\bigr).$$ A finite number of these neighborhoods cover the compact phase set, so one constant works for all of them. In particular, residuals of sizes $O(h^4)$ and $O(h^3)$ admit a consistent restoration at distance $O(h^3)$, uniformly on the chart.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 For $F_q(\\lambda)=h^{-2}c(q_1(\\lambda))$, [F2] gives $D_\\lambda F_q=-A(q)+o(1)$ uniformly on the branch ball. Shrink it so $\\|A(q)^{-1}(D_\\lambda F_q+A(q))\\|\\le\\frac12$. The derivative of $G(\\lambda)=A(q)^{-1}F_q(\\lambda)+\\lambda$ is then bounded by $1/2$. Since $F_q(\\lambda)=0$ at the exact root $\\lambda$, [F5] along the segment to $\\widetilde\\lambda$ gives $\\|G(\\widetilde\\lambda)-G(\\lambda)\\|\\le\\frac12\\|\\widetilde\\lambda-\\lambda\\|$. As $A^{-1}F_q(\\widetilde\\lambda)=G(\\widetilde\\lambda)-G(\\lambda)-(\\widetilde\\lambda-\\lambda)$, it follows that $\\|\\widetilde\\lambda-\\lambda\\|\\le2\\|A(q)^{-1}\\|\\varepsilon_q$. This inverse estimate is needed because [F4] alone does not convert residual size to state error.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 The position formula gives $\\widetilde q_1-q_1=-h^2M^{-1}J(q)^T(\\widetilde\\lambda-\\lambda)$ and $\\widetilde p_{1/2}-p_{1/2}=-hJ(q)^T(\\widetilde\\lambda-\\lambda)$. The uniform matrix bounds and step 1.1 yield $\\|\\widetilde q_1-q_1\\|\\le Ch^2\\varepsilon_q$ and $\\|\\widetilde p_{1/2}-p_{1/2}\\|\\le C|h|\\varepsilon_q$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "2.2 For fixed $\\widetilde\\lambda$, the final scaled tangency residual is affine in $\\mu$ with derivative exactly $-A(\\widetilde q_1)$. Uniform invertibility bounds the distance from $\\widetilde\\mu$ to the exact momentum root for this $\\widetilde\\lambda$ by $C\\varepsilon_p$. The smooth momentum branch in [F2] changes that exact root by at most $C\\varepsilon_q$ when $\\widetilde\\lambda$ replaces $\\lambda$, using step 1.1 and the uniform branch derivative bound.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 In the final momentum formula, the initial half-momentum difference contributes $O(|h|\\varepsilon_q)$ by step 2.1; changing the position in the smooth force and constraint Jacobian contributes $O(|h|^3\\varepsilon_q)$; changing the final multiplier contributes $O(|h|(\\varepsilon_q+\\varepsilon_p))$ by step 2.2. Their sum proves $\\|\\widetilde p_1-p_1\\|\\le C|h|(\\varepsilon_q+\\varepsilon_p)$ and hence the one-step estimates.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "4.1 The residual definitions give $\\|c(\\widetilde q_1)\\|=|h|^2\\varepsilon_q$ and $\\|J(\\widetilde q_1)M^{-1}\\widetilde p_1\\|=|h|\\varepsilon_p$. Choose a neighborhood $U_j$ from [F6] containing the output, using a fixed ordering of the finite cover to make the selection definite. Its local retraction changes the output by at most $C(|h|^2\\varepsilon_q+|h|\\varepsilon_p)\\le C|h|(\\varepsilon_q+\\varepsilon_p)$ for $|h|\\le1$. Together with step 3.1, the restored update from a consistent state differs from its exact RATTLE update by at most $C|h|(\\varepsilon_q+\\varepsilon_p)$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "5.1 The selected exact RATTLE map is smooth in state and equals the identity at $h=0$ by [F2], so on a compact convex chart its derivative is bounded by $1+Lh$ for small positive $h$. By [F5] it is Lipschitz with that factor. Therefore the error against the exact-solve RATTLE trajectory obeys $e_{n+1}\\le(1+Lh)e_n+C h(\\varepsilon_q+\\varepsilon_p)$. Iterating the geometric sum gives $e_N\\le C_T\\varepsilon$ for fixed residual bound $\\varepsilon$, and $e_N\\le C_T h^2$ when each residual is at most $C_0h^2$. In the latter case the unscaled residuals are exactly $h^2\\varepsilon_q$ and $h\\varepsilon_p$, hence $O(h^4)$ and $O(h^3)$.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement excludes h=0 or makes no zero-step or zero-data boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a regular full-rank chart and an invertible multiplier matrix; singular cases are excluded or returned as failures."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 5.1 iterates the error estimate through the final fixed-time grid endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement defines only a unique local branch or a finite deterministic procedure; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "ex-constrained-pendulum-equations-and-multiplier": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-holonomic-phase-space-and-dynamics",
+          "source_section": "Definition",
+          "quote": "For $v=M^{-1}p$, the constrained Hamilton equations are $$\\dot q=v,\\qquad \\dot p=-\\nabla V(q)-J(q)^T\\lambda,$$ with multiplier $$\\lambda=A(q)^{-1}\\bigl(D^2c(q)[v,v]-J(q)M^{-1}\\nabla V(q)\\bigr).$$ Here $D^2c(q)[v,v]\\in\\mathbb R^m$ has components $v^TD^2c_j(q)v$. This multiplier is the one that keeps both $c(q)=0$ and $J(q)M^{-1}p=0$ satisfied.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-local-holonomic-constrained-hamiltonian-flow",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of [[def-regular-holonomic-phase-space-and-dynamics]] on a compact regular chart. For every consistent initial pair $(q_0,p_0)\\in\\mathcal M$ there is a unique local solution of $$\\dot q=M^{-1}p,\\qquad \\dot p=-\\nabla V(q)-J(q)^T\\lambda(q,p),$$ with $\\lambda$ as defined there. The solution remains in $\\mathcal M$ throughout its local interval.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 Here $J(q)=q^T$, $A(q)=q^Tq/m=\\ell^2/m$, $D^2c[v,v]=\\|p\\|_2^2/m^2$, and $JM^{-1}\\nabla V=gq_2$. Substitution into [F1] gives $\\lambda=(\\|p\\|_2^2/m-mgq_2)/\\ell^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 At $q=(0,-\\ell)$ and $p=0$, the multiplier is $mg/\\ell$. The acceleration is $\\dot p=-mg(0,1)-\\lambda(0,-\\ell)=(0,0)$; moreover $c(q)=0$ and $q^Tp=0$, so this is a consistent equilibrium of the local flow [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 2.1 checks the zero-momentum equilibrium."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 1.1 computes A=ell^2/m>0 on the constraint circle."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement makes no claim about extending to a boundary outside its stated open local domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement defines only a unique local branch or a finite deterministic procedure; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "ex-rigid-bond-rattle-free-rotor": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-holonomic-phase-space-and-dynamics",
+          "source_section": "Definition",
+          "quote": "A position-momentum pair $(q,p)$ is **consistent** when $q\\in Q$ and $J(q)M^{-1}p=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-regular-classical-rattle-step-map",
+          "source_section": "Definition",
+          "quote": "The position and momentum equations are respectively $c(q_1)=0$ and $J(q_1)M^{-1}p_1=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-local-holonomic-constrained-hamiltonian-flow",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of [[def-regular-holonomic-phase-space-and-dynamics]] on a compact regular chart. For every consistent initial pair $(q_0,p_0)\\in\\mathcal M$ there is a unique local solution of $$\\dot q=M^{-1}p,\\qquad \\dot p=-\\nabla V(q)-J(q)^T\\lambda(q,p),$$ with $\\lambda$ as defined there. The solution remains in $\\mathcal M$ throughout its local interval.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies $$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 The initial data are consistent because $\\|q_0\\|_2=\\ell$ and $q_0^Tp_0=0$. The position multiplier equation gives $q_1=q_0+\\frac hm(p_0-h\\lambda q_0)$; choosing $\\lambda=m(1-\\sqrt{1-h^2\\omega^2})/h^2=m\\omega^2/(1+\\sqrt{1-h^2\\omega^2})$ yields the stated $q_1$, whose squared norm is $\\ell^2$. This multiplier tends to $m\\omega^2/2$, the position branch center.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 With $\\mu=\\lambda$, the final RATTLE equation gives the stated $p_1$; $\\mu$ has the same limit $m\\omega^2/2$, so the unique local branch selects this root. Direct multiplication gives $q_1^Tp_1=0$ and $\\|p_1\\|_2=m\\omega\\ell$, so both exact constraints hold.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 The continuous multiplier is $\\lambda_c=m\\omega^2$, hence the exact flow is $q(t)=\\ell(\\cos\\omega t,\\sin\\omega t)$ and $p(t)=m\\omega\\ell(-\\sin\\omega t,\\cos\\omega t)$. This solves [F3] and agrees with the initial data. The RATTLE position angle is $\\theta_h=\\arcsin(h\\omega)$. Taylor's theorem [F4] on $0\\le h\\omega\\le1/2$ gives $\\arcsin(h\\omega)-h\\omega=O((h\\omega)^3)$. Since $\\omega$ is fixed, the angle defect is $O(h^3)$ as stated.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement excludes h=0 or makes no zero-step or zero-data boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 1.1 enforces the regular circle constraint and obtains the unique local multiplier root."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement includes the closed step endpoint h omega=1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 2.1 uses only the stated unique branches or a finite cover; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "ex-nearly-dependent-constraints-amplify-rattle-residuals": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-holonomic-phase-space-and-dynamics",
+          "source_section": "Definition",
+          "quote": "On a compact regular chart $K\\subset Q$, assume $J(q)$ has full row rank and $A(q)=J(q)M^{-1}J(q)^T$ satisfies $\\sup_{q\\in K}\\|A(q)^{-1}\\|_{\\mathrm{op}}<\\infty$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rattle-scaled-solve-residual-error-budget",
+          "source_section": "Statement",
+          "quote": "On a compact regular chart, let $(q_1,p_1)$ be the exact RATTLE step from a consistent input $(q,p)\\in\\mathcal M$, and let $(\\widetilde q_1,\\widetilde p_1)$ be a successful output of [[alg-finite-budget-rattle-step-with-scaled-residuals]] whose branch iterates remain in the neighborhoods of [[lem-rattle-scaled-position-and-momentum-branches]]. Define $$\\varepsilon_q=\\|h^{-2}c(\\widetilde q_1)\\|_2,\\qquad \\varepsilon_p=\\|h^{-1}J(\\widetilde q_1)M^{-1}\\widetilde p_1\\|_2.$$ For sufficiently small $0<|h|$, there is a chart-uniform constant $C$ such that $$\\|\\widetilde q_1-q_1\\|\\le Ch^2\\varepsilon_q,\\qquad \\|\\widetilde p_1-p_1\\|\\le C|h|(\\varepsilon_q+\\varepsilon_p).$$ For a repeated finite-solve trajectory, restore each successful output using a local retraction from [[lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold]] before using it as the next input. If the two scaled residuals are bounded by a fixed sufficiently small $\\varepsilon$ at each step on a fixed-time grid, the restored trajectory differs from the exact-solve RATTLE trajectory by $O(\\varepsilon)$ uniformly on the grid. If instead both residuals are at most $C_0h^2$, the difference is $O(h^2)$, and the unscaled position and tangency residuals of each unprojected solver output are respectively $O(h^4)$ and $O(h^3)$. The finite solver's raw output need not be consistent, so this global statement is specifically for the restored trajectory.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 The two rows $(0,0,1)$ and $(0,\\epsilon,1)$ of $J_\\epsilon$ are linearly independent exactly when $\\epsilon>0$. Their Gram matrix is the displayed $A_\\epsilon$, whose trace is $2+\\epsilon^2$ and determinant is $\\epsilon^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 The quadratic formula gives its eigenvalues $(2+\\epsilon^2\\pm\\sqrt{4+\\epsilon^4})/2$. Rationalizing the smaller one gives $2\\epsilon^2/(2+\\epsilon^2+\\sqrt{4+\\epsilon^4})$, so $\\epsilon^{-2}\\lambda_{\\min}(A_\\epsilon)\\to1/2$ and $\\|A_\\epsilon^{-1}\\|_2\\to\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 Consequently no single residual-to-multiplier constant works for this family as $\\epsilon\\downarrow0$; this is consistent with [F2], whose uniform estimates assume a fixed compact chart with uniformly bounded $A^{-1}$. At $\\epsilon=0$ the two rows coincide, so [F1]'s full-rank hypothesis fails.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement excludes h=0 or makes no zero-step or zero-data boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example fixes two constraints and makes no one-constraint comparison."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 2.1 shows rank loss at epsilon=0 and loss of a uniform inverse bound as epsilon tends to zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement includes epsilon=1 and treats epsilon=0 as the rank-loss limit in Verification step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement defines only a unique local branch or a finite deterministic procedure; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    },
+    "ex-rattle-residual-budget-and-global-trajectory-drift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-rattle-scaled-solve-residual-error-budget",
+          "source_section": "Statement",
+          "quote": "On a compact regular chart, let $(q_1,p_1)$ be the exact RATTLE step from a consistent input $(q,p)\\in\\mathcal M$, and let $(\\widetilde q_1,\\widetilde p_1)$ be a successful output of [[alg-finite-budget-rattle-step-with-scaled-residuals]] whose branch iterates remain in the neighborhoods of [[lem-rattle-scaled-position-and-momentum-branches]]. Define $$\\varepsilon_q=\\|h^{-2}c(\\widetilde q_1)\\|_2,\\qquad \\varepsilon_p=\\|h^{-1}J(\\widetilde q_1)M^{-1}\\widetilde p_1\\|_2.$$ For sufficiently small $0<|h|$, there is a chart-uniform constant $C$ such that $$\\|\\widetilde q_1-q_1\\|\\le Ch^2\\varepsilon_q,\\qquad \\|\\widetilde p_1-p_1\\|\\le C|h|(\\varepsilon_q+\\varepsilon_p).$$ For a repeated finite-solve trajectory, restore each successful output using a local retraction from [[lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold]] before using it as the next input. If the two scaled residuals are bounded by a fixed sufficiently small $\\varepsilon$ at each step on a fixed-time grid, the restored trajectory differs from the exact-solve RATTLE trajectory by $O(\\varepsilon)$ uniformly on the grid. If instead both residuals are at most $C_0h^2$, the difference is $O(h^2)$, and the unscaled position and tangency residuals of each unprojected solver output are respectively $O(h^4)$ and $O(h^3)$. The finite solver's raw output need not be consistent, so this global statement is specifically for the restored trajectory.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-rattle-scaled-position-and-momentum-branches",
+          "source_section": "Statement",
+          "quote": "For consistent inputs in a compact regular chart, there is a uniform $h_0>0$ such that for $|h|<h_0$ the two scaled RATTLE equations in [[def-regular-classical-rattle-step-map]] have unique roots in neighborhoods of $$\\lambda_0=\\mu_0=\\frac12A(q)^{-1}\\bigl(D^2c(q)[v,v]-J(q)M^{-1}\\nabla V(q)\\bigr),\\qquad v=M^{-1}p.$$ The position root depends smoothly on $(h,q,p)$, and the momentum root depends smoothly on $(h,q,p,\\lambda)$ when the position multiplier is treated as a parameter. At $h=0$ the derivatives of the two scaled residuals with respect to their own multiplier variables equal $-A(q)$; they remain uniformly invertible for small $|h|$ on a compact regular chart. The branch derivatives are uniformly bounded there, and the roots define the selected local branches.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then $$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-implicit-residual-and-algebraic-error-units",
+          "source_section": "Definition",
+          "quote": "A residual norm is not a forward-error bound unless a separate inverse or stability estimate converts it to $\\|\\widetilde z-z^*\\|$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 For $\\varepsilon_q,\\varepsilon_p\\le\\varepsilon$ at every step, [F1] gives the recurrence $e_{n+1}\\le(1+Lh)e_n+2Ch\\varepsilon$ for the restored trajectory. Iteration yields $e_N\\le2Ch\\varepsilon\\sum_{j=0}^{N-1}(1+Lh)^j\\le2CTe^{LT}\\varepsilon$. This is a uniform upper-bound envelope and need not shrink as $h\\to0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 If instead $\\varepsilon_q,\\varepsilon_p\\le Kh^2$, [F1] makes each additive perturbation at most $2CKh^3$, and the same sum gives global error $O(h^2)$. The unscaled residuals are $h^2\\varepsilon_q=O(h^4)$ and $h\\varepsilon_p=O(h^3)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 These bounds rely on the inverse and stability estimates in [F1]. As [F4] states, the residual-tolerance status alone is not a forward-error certificate; the explicit consistency restoration is also part of this repeated-step example.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes finite-dimensional regular data or a concrete nonempty model; it makes no empty-dimensional case claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement excludes h=0 or makes no zero-step or zero-data boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement covers the scalar constraint case m=1, or this example explicitly uses one constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes a regular full-rank chart and an invertible multiplier matrix; singular cases are excluded or returned as failures."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 1.1 sums through n=N at the fixed-time endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement defines only a unique local branch or a finite deterministic procedure; no arbitrary-index selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No form of Choice is used; compactness is used only through finite subcovers.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 86 author — not independent approval",
+        "notes": "Author checked the current statement, every proof step and tag, direct dependencies, exact supplier excerpts, branch and residual hypotheses, and boundary cases. This is not independent mathematical approval."
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# ROOT ONLY: prepared, not launched. Requires fresh root write declaration.
+set -euo pipefail
+cd /home/lazyinspirit/Projects/prestige-math-library
+node tools/dispatch.mjs --role scope-repairer --brief /home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-owner-step2-b72-continuation/final-approved3/research.brief.md --task /home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-owner-step2-b72-continuation/final-approved3/research.task.md --label owner-step2-b72-original-approved3-final-cycle2 --run numerical-optimization-dynamics-2026-10-16 --covers 72 --profile gpt-6.1-sol-medium --session-home research/numerical-optimization-dynamics-2026-10-16-scope-review/batch-72/scope-repairer-session --resume-session 01a143e1-3fab-7793-bdfc-cf6f9ff755f2 --output-schema briefs/schemas/batch-scope-review.json --result-artifact /home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-owner-step2-b72-continuation/final-approved3/final-apply.result.json --timeout 14400 --attempt 1 --json

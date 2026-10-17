@@ -1,0 +1,103 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-72.pages.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-72.pages.json
+@@ -76,20 +76,24 @@
+       {
+         "id": "lem-positive-definite-model-has-unique-newton-step",
+         "kind": "lemma",
+-        "title": "A positive-definite trust-region model has a unique unconstrained Newton step",
++        "title": "Positive-definite Newton and dogleg steps are well-defined",
+         "statement": "For a symmetric positive-definite model matrix B, prove that B is invertible and that Bp=−g has a unique solution p for every g.",
+         "deps": [
+           "def-trust-region-quadratic-model-and-ratio",
+           "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+           "def-definite-and-indefinite-hessian-quadratic-forms",
+-          "def-invertible-euclidean-linear-map"
++          "def-invertible-euclidean-linear-map",
++          "alg-dogleg-trust-region-step",
++          "alg-trust-region-cauchy-step",
++          "thm-intermediate-value",
++          "thm-algebra-of-continuous-functions"
+         ],
+         "dependency_level": 1
+       },
+       {
+         "id": "lem-global-cubic-model-minimizer-decrease",
+         "kind": "lemma",
+-        "title": "A global cubic-model minimizer exists and has a cubic decrease bound",
++        "title": "Global cubic minimizers, admissible inexact steps, and cubic Cauchy decrease",
+         "statement": "For σ>0 and symmetric B, prove that the cubic model attains a global minimum and every nonstationary global minimizer s satisfies m(0)−m(s)≥σ||s||₂³/6.",
+         "deps": [
+           "def-adaptive-cubic-regularization-model",
+@@ -97,7 +101,9 @@
+           "thm-cauchy-schwarz-and-the-euclidean-norm",
+           "thm-real-power-continuity-and-derivatives",
+           "cor-euclidean-closed-balls-and-spheres-are-compact",
+-          "thm-extreme-value-metric"
++          "thm-extreme-value-metric",
++          "cor-mean-value-theorem",
++          "alg-adaptive-cubic-regularization"
+         ],
+         "dependency_level": 1
+       },
+@@ -122,8 +128,7 @@
+         "deps": [
+           "def-trust-region-quadratic-model-and-ratio",
+           "alg-trust-region-cauchy-step",
+-          "def-definite-and-indefinite-hessian-quadratic-forms",
+-          "lem-positive-definite-model-has-unique-newton-step"
++          "def-definite-and-indefinite-hessian-quadratic-forms"
+         ],
+         "dependency_level": 2
+       },
+@@ -144,18 +149,20 @@
+         "title": "Finite-budget adaptive regularization using cubic models",
+         "deps": [
+           "def-adaptive-cubic-regularization-model",
+-          "lem-global-cubic-model-minimizer-decrease"
++          "cor-hessian-is-symmetric"
+         ],
+         "dependency_level": 2
+       },
+       {
+         "id": "lem-truncated-cg-iterates-are-krylov-vectors",
+         "kind": "lemma",
+-        "title": "Interior truncated-CG iterates lie in their generated Krylov subspaces",
++        "title": "Truncated-CG iterates are feasible and lie in generated Krylov subspaces",
+         "statement": "Before a boundary or curvature exit, prove z_j∈K_j(B,−g) and r_j,d_j∈K_{j+1}(B,−g) for the stated truncated-CG recurrence.",
+         "deps": [
+           "alg-truncated-cg-trust-region-step",
+-          "def-krylov-subspace-of-a-matrix-and-start-vector"
++          "def-krylov-subspace-of-a-matrix-and-start-vector",
++          "def-trust-region-quadratic-model-and-ratio",
++          "alg-trust-region-cauchy-step"
+         ],
+         "dependency_level": 3
+       },
+@@ -194,6 +201,7 @@
+           "alg-adaptive-cubic-regularization",
+           "def-adaptive-cubic-regularization-model",
+           "def-hessian-and-euclidean-critical-point",
++          "cor-hessian-is-symmetric",
+           "lem-global-cubic-model-minimizer-decrease",
+           "def-induced-matrix-p-norm",
+           "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+@@ -245,7 +253,11 @@
+           "alg-adaptive-cubic-regularization",
+           "def-adaptive-cubic-regularization-model",
+           "def-hessian-and-euclidean-critical-point",
++          "cor-hessian-is-symmetric",
++          "def-euclidean-inner-product",
+           "def-induced-matrix-p-norm",
++          "thm-cauchy-schwarz-and-the-euclidean-norm",
++          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+           "lem-global-cubic-model-minimizer-decrease",
+           "lem-adaptive-cubic-unsuccessful-iteration-count",
+           "cor-mean-value-theorem"
+@@ -298,6 +310,7 @@
+           "lem-trust-region-subproblem-optimality-and-hard-case",
+           "alg-trust-region-cauchy-step",
+           "alg-truncated-cg-trust-region-step",
++          "lem-truncated-cg-iterates-are-krylov-vectors",
+           "alg-inexact-newton-krylov-with-descent-safeguard",
+           "def-krylov-subspace-of-a-matrix-and-start-vector",
+           "def-wolfe-and-strong-wolfe-conditions",

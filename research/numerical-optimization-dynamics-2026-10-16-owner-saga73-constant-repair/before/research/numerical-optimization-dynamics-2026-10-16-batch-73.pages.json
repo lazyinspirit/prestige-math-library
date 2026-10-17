@@ -1,0 +1,816 @@
+[
+  {
+    "order": 2430,
+    "id": "variance-reduced-finite-sum-and-adaptive-gradient-optimization",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Variance reduced finite sum and adaptive gradient optimization",
+    "companion": "variance-reduced-finite-sum-and-adaptive-gradient-optimization-examples",
+    "requires": [
+      "variance-reduction-and-randomized-integration",
+      "proximal-gradient-and-accelerated-composite-optimization",
+      "stochastic-approximation-and-stochastic-gradient-methods"
+    ],
+    "items": [
+      {
+        "id": "alg-adam-update",
+        "kind": "algorithm",
+        "title": "Bias-corrected Adam update",
+        "statement": "Fix a dimension d at least 1, an initial point x_1 in R^d, a constant step size eta>0, a denominator constant epsilon>0, and parameters beta_1,beta_2 in [0,1). Set m_0=v_0=0. Given a gradient g_t in R^d at each integer time t>=1, calculate\n\n$$\nm_t=\\beta_1m_{t-1}+(1-\\beta_1)g_t,\\qquad\nv_t=\\beta_2v_{t-1}+(1-\\beta_2)(g_t\\odot g_t),\n$$\n\nwhere \\odot denotes coordinatewise multiplication. Define the bias-corrected moments\n\n$$\n\\widehat m_t=\\frac{m_t}{1-\\beta_1^t},\\qquad\n\\widehat v_t=\\frac{v_t}{1-\\beta_2^t},\n$$\n\nand update, coordinatewise,\n\n$$\nx_{t+1}=x_t-\\eta\\frac{\\widehat m_t}{\\sqrt{\\widehat v_t}+\\epsilon}.\n$$\n\nAll operations involving vectors in the update are coordinatewise except the ordinary vector addition in the moment recurrences. Since 1-\\beta_j^t>0 for t>=1 and v_t has nonnegative coordinates, every denominator is positive; the procedure is defined at every finite step for every finite gradient sequence.\n\nThis item defines the update only. It makes no convergence or regret claim.\n",
+        "deps": [
+          "def-natural-numbers",
+          "def-integer-power",
+          "thm-of-square-roots"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Diederik P. Kingma and Jimmy Ba, Adam: A Method for Stochastic Optimization, ICLR 2015",
+              "url": "https://arxiv.org/pdf/1412.6980",
+              "locator": "Section 2, Algorithm 1 and bias-correction equations (2)–(5)."
+            },
+            {
+              "title": "Sashank J. Reddi, Satyen Kale, and Sanjiv Kumar, On the Convergence of Adam and Beyond, ICLR 2018, full text",
+              "url": "https://arxiv.org/pdf/1904.09237",
+              "locator": "Section 2, generic adaptive methods and the Adam recurrence; Appendix F, Theorem 6 for the epsilon-denominator variant."
+            },
+            {
+              "title": "John Duchi, Elad Hazan, and Yoram Singer, Adaptive Subgradient Methods for Online Learning and Stochastic Optimization, JMLR 12 (2011)",
+              "url": "https://jmlr.org/papers/volume12/duchi11a/duchi11a.pdf",
+              "locator": "Sections 1–3, adaptive online gradient methods and regret analysis."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-amsgrad-update",
+        "kind": "algorithm",
+        "title": "Bias-corrected AMSGrad update",
+        "statement": "Fix a dimension d at least 1, an initial point x_1 in R^d, a constant step size eta>0, a denominator constant epsilon>0, and parameters beta_1,beta_2 in [0,1). Set m_0=v_0=\\widehat v^{\\max}_0=0. Given a gradient g_t in R^d at each integer time t>=1, calculate\n\n$$\nm_t=\\beta_1m_{t-1}+(1-\\beta_1)g_t,\\qquad\nv_t=\\beta_2v_{t-1}+(1-\\beta_2)(g_t\\odot g_t),\n$$\n\n$$\n\\widehat m_t=\\frac{m_t}{1-\\beta_1^t},\\qquad\n\\widehat v_t=\\frac{v_t}{1-\\beta_2^t},\\qquad\n\\widehat v^{\\max}_t=\\max(\\widehat v^{\\max}_{t-1},\\widehat v_t),\n$$\n\nwhere \\odot and max are coordinatewise. Update\n\n$$\nx_{t+1}=x_t-\\eta\\frac{\\widehat m_t}{\\sqrt{\\widehat v^{\\max}_t}+\\epsilon}\n$$\n\ncoordinatewise. Each coordinate of v_t and \\widehat v^{\\max}_t is nonnegative, and the denominator is at least epsilon>0, so every finite update is defined.\n\nThis carrier follows the assigned bias-corrected denominator convention. Reddi–Kale–Kumar's Algorithm 2 takes its running maximum before bias correction. The two recurrences are not identified here. No AMSGrad convergence theorem is claimed.\n",
+        "deps": [
+          "def-natural-numbers",
+          "def-integer-power",
+          "thm-of-square-roots"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sashank J. Reddi, Satyen Kale, and Sanjiv Kumar, On the Convergence of Adam and Beyond, ICLR 2018, full text",
+              "url": "https://arxiv.org/pdf/1904.09237",
+              "locator": "Section 4, AMSGrad discussion and Algorithm 2."
+            },
+            {
+              "title": "John Duchi, Elad Hazan, and Yoram Singer, Adaptive Subgradient Methods for Online Learning and Stochastic Optimization, JMLR 12 (2011)",
+              "url": "https://jmlr.org/papers/volume12/duchi11a/duchi11a.pdf",
+              "locator": "Sections 1–3, adaptive online gradient methods and regret analysis."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-finite-sum-gradient-is-average",
+        "kind": "lemma",
+        "title": "Gradient of a finite sum is the finite sum of gradients",
+        "statement": "Let U be open in R^d, let x in U, let n>=1, and let f_1,...,f_n:U->R be totally differentiable at x. Put F=n^{-1}sum_{i=1}^n f_i. Then F is totally differentiable at x and\n\n$$\n\\nabla F(x)=\\frac1n\\sum_{i=1}^n\\nabla f_i(x).\n$$\n\n",
+        "deps": [
+          "def-finite-sum",
+          "def-total-derivative-in-euclidean-space",
+          "thm-algebra-of-total-derivatives",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Lebl, Basic Analysis I, Section 8.3, The Derivative",
+              "url": "https://www.jirka.org/ra/html/sec_svtheder.html",
+              "locator": "Proposition 8.3.6, sum/scalar rules for total derivatives; Subsection 8.3.3, gradient representation."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-positive-diagonal-map-preserves-closed-convexity",
+        "kind": "lemma",
+        "title": "Positive diagonal maps preserve closed convex sets",
+        "statement": "Let d>=1, let C be a nonempty closed convex subset of R^d, and let D=diag(d_1,...,d_d) with every d_j>0. Then DC={Dx:x in C} is nonempty, closed, and convex.\n\n",
+        "deps": [
+          "def-convex-subset-of-euclidean-space",
+          "def-metric-topology",
+          "def-metric-space",
+          "def-metric-ball",
+          "def-euclidean-inner-product",
+          "def-finite-sum",
+          "def-integer-power",
+          "thm-of-square-roots"
+        ],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph",
+              "url": "https://arxiv.org/pdf/1405.4980",
+              "locator": "Section 6.3, finite-dimensional convex optimization context; this elementary set-transform claim is proved locally."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-saga-finite-sum-method",
+        "kind": "algorithm",
+        "title": "Finite-sum SAGA",
+        "statement": "Let n,d>=1, let f_1,...,f_n:R^d->R be continuously differentiable, and set F(x)=n^{-1}sum_i f_i(x), with \\nabla F(x)=n^{-1}sum_i\\nabla f_i(x) by [[lem-finite-sum-gradient-is-average]] and [[def-finite-sum]]. Given a deterministic initial point x_0 and step size \\eta>0, initialize a table \\alpha_i^0=\\nabla f_i(x_0) and its mean \\bar\\alpha_0=n^{-1}sum_i\\alpha_i^0. At iteration k:\n\n1. Draw I_k uniformly from {1,...,n}, independently of the history \\mathcal F_k.\n2. Using the old table, form\n   $$\n   v_k=\\nabla f_{I_k}(x_k)-\\alpha_{I_k}^k+\\bar\\alpha_k,\\qquad x_{k+1}=x_k-\\eta v_k.\n   $$\n3. Replace only the sampled table entry, using the pre-update point:\n   $$\n   \\alpha_{I_k}^{k+1}=\\nabla f_{I_k}(x_k),\\qquad \\alpha_i^{k+1}=\\alpha_i^k\\quad(i\\ne I_k),\n   $$\n   and set\n   $$\n   \\bar\\alpha_{k+1}=\\bar\\alpha_k+\\frac1n\\big(\\nabla f_{I_k}(x_k)-\\alpha_{I_k}^k\\big).\n   $$\n\nInitialization uses n component-gradient evaluations. Each later iteration uses one new component gradient and O(d) arithmetic if the running table mean is maintained. The table stores n gradients, so storage is O(nd). For each fixed history the correction is a finite control-variate estimator of the form in [[def-control-variate-estimator]]; the conditional claims are proved locally. The conditional-expectation convention inherits [[def-axiom-of-choice]] from [[def-stochastic-gradient-oracle-and-unconstrained-update]].\n",
+        "deps": [
+          "def-finite-sum",
+          "def-control-variate-estimator",
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "def-axiom-of-choice",
+          "lem-finite-sum-gradient-is-average"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aaron Defazio, Francis Bach, and Simon Lacoste-Julien, SAGA: A Fast Incremental Gradient Method With Support for Non-Strongly Convex Composite Objectives, NeurIPS 2014",
+              "url": "https://proceedings.neurips.cc/paper_files/paper/2014/file/937964195d6fb3a55cd7cc578165f058-Paper.pdf",
+              "locator": "Section 2, SAGA algorithm and Theorem 1."
+            },
+            {
+              "title": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018)",
+              "url": "https://leon.bottou.org/publications/pdf/tr-optml-2016.pdf",
+              "locator": "Section 5.3.2, Algorithm 5.2, estimator and storage discussion."
+            },
+            {
+              "title": "Robert M. Gower and Alexandre Gramfort, Optimization for Data Science: Stochastic Variance Reduced Gradient Methods, lecture notes",
+              "url": "https://gowerrobert.github.io/pdf/M2_statistique_optimisation/optimization_IV_variance_reduced-expanded.pdf",
+              "locator": "Slides 57–59, SAGA convergence and comparison with SAG."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-svrg-finite-sum-method",
+        "kind": "algorithm",
+        "title": "Finite-sum SVRG",
+        "statement": "Let n,d>=1 and let f_1,...,f_n:R^d->R be continuously differentiable convex functions. Define the finite-sum objective\n\n$$\nF(x)=\\frac1n\\sum_{i=1}^n f_i(x),\\qquad \\nabla F(x)=\\frac1n\\sum_{i=1}^n\\nabla f_i(x),\n$$\n\nwhere the gradient identity follows from [[lem-finite-sum-gradient-is-average]] and the sums use [[def-finite-sum]]. Suppose each component gradient is L-Lipschitz for a common L>0. An SVRG epoch with snapshot \\tilde x and inner length m>=1 is:\n\n1. Compute the full gradient \\nabla F(\\tilde x), set x_0=\\tilde x.\n2. For t=0,...,m-1, draw I_t uniformly from {1,...,n}, independently of the past, and set\n   $$\n   v_t=\\nabla f_{I_t}(x_t)-\\nabla f_{I_t}(\\tilde x)+\\nabla F(\\tilde x),\\qquad x_{t+1}=x_t-\\eta v_t\n   $$\n   for a selected step size \\eta>0.\n3. Independently draw J uniformly from {0,...,m-1} and return x_J as the next snapshot.\n\nWithout caching component gradients at \\tilde x, one epoch uses n+2m component-gradient evaluations: n for the full gradient and two for each inner update. It stores a constant number of d-vectors and so uses O(d) working memory. The correction has the control-variate form of [[def-control-variate-estimator]] with coefficient one and the known finite-sum reference mean; the conditional properties needed here are proved in local results on this page. Conditional-expectation notation inherits the [[def-axiom-of-choice]] assumption from [[def-stochastic-gradient-oracle-and-unconstrained-update]].\n",
+        "deps": [
+          "def-finite-sum",
+          "def-control-variate-estimator",
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "def-axiom-of-choice",
+          "lem-finite-sum-gradient-is-average"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rie Johnson and Tong Zhang, Accelerating Stochastic Gradient Descent using Predictive Variance Reduction, NeurIPS 2013",
+              "url": "https://proceedings.neurips.cc/paper_files/paper/2013/file/ac1dd209cbcc5e5d1c6e28598e8cbbe8-Paper.pdf",
+              "locator": "Sections 2–3, Figure 1 and Theorem 1."
+            },
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph",
+              "url": "https://arxiv.org/pdf/1405.4980",
+              "locator": "Section 6.3, SVRG estimator, Lemma 6.4 and Theorem 6.5."
+            },
+            {
+              "title": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018)",
+              "url": "https://leon.bottou.org/publications/pdf/tr-optml-2016.pdf",
+              "locator": "Section 5.3.1, Algorithm 5.1 and its gradient-work discussion."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "cex-adam-periodic-linear-losses-force-divergence",
+        "kind": "counterexample",
+        "title": "Adam diverges on a periodic bounded-gradient loss sequence",
+        "statement": "The claim that bounded gradients alone keep every bias-corrected Adam iterate bounded is false, even in one dimension with fixed parameters beta_1=0, beta_2=1/2, eta=1, and epsilon=1/100.\n\n",
+        "deps": [
+          "alg-adam-update",
+          "thm-induction-principle",
+          "def-complete-ordered-field",
+          "thm-of-square-roots",
+          "def-natural-numbers",
+          "def-integer-power",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "thm-of-archimedean"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sashank J. Reddi, Satyen Kale, and Sanjiv Kumar, On the Convergence of Adam and Beyond, ICLR 2018",
+              "url": "https://arxiv.org/pdf/1904.09237",
+              "locator": "Section 2, Theorem 1; Appendix F, Theorem 6, which treats an epsilon-denominator projected variant."
+            },
+            {
+              "title": "Diederik P. Kingma and Jimmy Ba, Adam: A Method for Stochastic Optimization, ICLR 2015",
+              "url": "https://arxiv.org/pdf/1412.6980",
+              "locator": "Section 2, Algorithm 1 and bias-correction equations (2)–(5)."
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-convex-smooth-component-gradient-cocoercivity",
+        "kind": "lemma",
+        "title": "Cocoercive gradient bound for a convex smooth finite sum",
+        "statement": "Let n,d>=1, L>0, and let f_i:R^d->R be continuously differentiable, convex, with L-Lipschitz gradients. Put F=n^{-1}sum_i f_i. For all x,y in R^d,\n\n$$\n\\frac1n\\sum_{i=1}^n\\|\\nabla f_i(x)-\\nabla f_i(y)\\|_2^2\n\\le 2L\\big(F(x)-F(y)-\\langle\\nabla F(y),x-y\\rangle\\big).\n$$\n\n",
+        "deps": [
+          "def-finite-sum",
+          "def-euclidean-inner-product",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-lipschitz-holder-contraction",
+          "lem-l-smoothness-descent-inequality",
+          "thm-differentiable-convex-functions-and-gradient-inequality",
+          "lem-finite-sum-gradient-is-average"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rie Johnson and Tong Zhang, Accelerating Stochastic Gradient Descent using Predictive Variance Reduction, NeurIPS 2013",
+              "url": "https://proceedings.neurips.cc/paper_files/paper/2013/file/ac1dd209cbcc5e5d1c6e28598e8cbbe8-Paper.pdf",
+              "locator": "Section 3, inequality (8) and the proof of Theorem 1."
+            },
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph",
+              "url": "https://arxiv.org/pdf/1405.4980",
+              "locator": "Section 6.3, Lemma 6.4 and its complete proof."
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-independent-minibatch-conditional-variance",
+        "kind": "theorem",
+        "title": "Conditional variance of independent and without-replacement minibatches",
+        "statement": "Let $n,d\\ge1$, let $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ be a discrete filtered probability space, and fix $k$. Let $f_i:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable, let $x:\\Omega\\to\\mathbb R^d$ be $\\mathcal F_k$-measurable, and suppose each $g_i=\\nabla f_i(x)$ is square-integrable. Define $F=n^{-1}\\sum_i f_i$, $\\bar g=n^{-1}\\sum_i g_i=\\nabla F(x)$ by [[lem-finite-sum-gradient-is-average]], and\n\n$$\n\\sigma^2(x)=\\frac1n\\sum_{i=1}^n\\|g_i-\\bar g\\|_2^2.\n$$\n\nFor an integer $b\\ge1$, draw $I_1,\\ldots,I_b$ as mutually independent uniform indices from $\\{1,\\ldots,n\\}$, with the whole index vector independent of $\\mathcal F_k$, and set $G_b=b^{-1}\\sum_{j=1}^b g_{I_j}$. Then\n\n$$\n\\mathbb E[G_b\\mid\\mathcal F_k]=\\bar g,\\qquad\n\\mathbb E[\\|G_b-\\bar g\\|_2^2\\mid\\mathcal F_k]=\\frac{\\sigma^2(x)}b.\n$$\n\nFor sampling without replacement, let $S$ be a uniform subset of $\\{1,\\ldots,n\\}$ of size $b$, independent of $\\mathcal F_k$, and set $G_S=b^{-1}\\sum_{i\\in S}g_i$. If $n>1$ and $1\\le b\\le n$, then\n\n$$\n\\mathbb E[G_S\\mid\\mathcal F_k]=\\bar g,\\qquad\n\\mathbb E[\\|G_S-\\bar g\\|_2^2\\mid\\mathcal F_k]\n=\\frac{n-b}{b(n-1)}\\sigma^2(x).\n$$\n\nWhen $n=1$, the without-replacement case requires $b=1$; both estimators equal $\\bar g$ and both errors are zero.\n\n",
+        "deps": [
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-axiom-of-choice",
+          "def-finite-sum",
+          "def-natural-numbers",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "thm-taking-out-what-is-known",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "def-euclidean-inner-product",
+          "lem-finite-sum-gradient-is-average"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gower and Alexandre Gramfort, Optimization for Data Science: Stochastic Variance Reduced Gradient Methods, lecture notes",
+              "url": "https://gowerrobert.github.io/pdf/M2_statistique_optimisation/optimization_IV_variance_reduced-expanded.pdf",
+              "locator": "Slides 5–14 on minibatches and variance reduction; full 81-slide deck."
+            },
+            {
+              "title": "John Duchi, Elad Hazan, and Yoram Singer, Adaptive Subgradient Methods for Online Learning and Stochastic Optimization, JMLR 12 (2011)",
+              "url": "https://jmlr.org/papers/volume12/duchi11a/duchi11a.pdf",
+              "locator": "Section 2, online stochastic gradients and conditional expectations."
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-diagonal-adagrad-online-regret",
+        "kind": "algorithm",
+        "title": "Diagonal AdaGrad for online convex losses",
+        "statement": "Let d>=1 and let C be a nonempty closed convex subset of R^d, closed in the standard Euclidean metric topology of [[lem-metrics-on-rn]] and convex as in [[def-convex-subset-of-euclidean-space]]. Fix x_1 in C, a constant eta>0, and epsilon>0. On round t, after observing a convex loss ell_t:C->R, choose a subgradient g_t in partial ell_t(x_t), with subgradient convention [[def-subgradient-and-subdifferential]]. For j=1,...,d set\n\n$$\ns_{t,j}=\\sqrt{\\epsilon^2+\\sum_{k=1}^t g_{k,j}^2},\\qquad\nA_t=\\operatorname{diag}(s_{t,1},...,s_{t,d}).\n$$\n\nFor a positive diagonal matrix A, write ||z||_A^2=z^TAz. Set x_{t+1} to the unique minimizer\n\n$$x_{t+1}=\\operatorname*{argmin}_{x\\in C}\\{\\eta\\langle g_t,x\\rangle+\\tfrac12\\|x-x_t\\|_{A_t}^2\\}.$$\n\nBecause epsilon>0, every diagonal entry s_{t,j} is positive. The displayed minimizer exists and is unique by [[lem-diagonal-adagrad-subproblem-well-defined]], so the procedure is defined at each finite round. This is the proximal update in the diagonal metric A_t; after the coordinate scaling A_t^{1/2}, its subproblem is an ordinary Euclidean proximal problem in the sense of [[def-proximal-mapping]].\n",
+        "deps": [
+          "def-subgradient-and-subdifferential",
+          "def-euclidean-inner-product",
+          "def-proximal-mapping",
+          "def-finite-sum",
+          "thm-of-square-roots",
+          "def-convex-subset-of-euclidean-space",
+          "def-metric-topology",
+          "lem-metrics-on-rn"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Duchi, Elad Hazan, and Yoram Singer, Adaptive Subgradient Methods for Online Learning and Stochastic Optimization, JMLR 12 (2011)",
+              "url": "https://jmlr.org/papers/volume12/duchi11a/duchi11a.pdf",
+              "locator": "Sections 2–3, Algorithm 1 and the composite mirror-descent update."
+            },
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph",
+              "url": "https://arxiv.org/pdf/1405.4980",
+              "locator": "Sections 3.1–3.3, projected convex optimization and online gradient bounds."
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-diagonal-adagrad-subproblem-well-defined"
+        ]
+      },
+      {
+        "id": "cex-saga-linear-factor-fails-under-standard-initialization",
+        "kind": "counterexample",
+        "title": "The assigned SAGA Lyapunov factor fails under standard initialization",
+        "statement": "The contract-required one-step bound $\\mathbb E[\\mathcal L_{k+1}]\\le(1-\\mu\\eta)\\mathbb E[\\mathcal L_k]$ need not hold for the prescribed SAGA initialization, even when $\\eta\\le\\min\\{1/(3L),\\mu/(13L^2)\\}$. The following finite instance has $n=100$, $L=\\mu=1$, $x_0=1$, and $\\eta=1/13$, but $\\mathcal L_1/\\mathcal L_0=844/869>12/13=1-\\mu\\eta$.\n\n",
+        "deps": [
+          "alg-saga-finite-sum-method",
+          "def-strong-convex-composite-objective",
+          "def-lipschitz-holder-contraction",
+          "def-euclidean-inner-product",
+          "def-complete-ordered-field"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Aaron Defazio, Francis Bach, and Simon Lacoste-Julien, SAGA: A Fast Incremental Gradient Method With Support for Non-Strongly Convex Composite Objectives, NeurIPS 2014",
+              "url": "https://proceedings.neurips.cc/paper_files/paper/2014/file/937964195d6fb3a55cd7cc578165f058-Paper.pdf",
+              "locator": "§2, SAGA algorithm initialization, estimator, update, and table replacement."
+            },
+            {
+              "title": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018)",
+              "url": "https://leon.bottou.org/publications/pdf/tr-optml-2016.pdf",
+              "locator": "§5.3.2, Algorithm 5.2 and the stored-gradient SAGA update."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-saga-estimator-and-table-recurrence",
+        "kind": "lemma",
+        "title": "SAGA conditional estimator, variance, and table recurrence",
+        "statement": "Let f_i:R^d->R be convex and continuously differentiable with L-Lipschitz gradients, set F=n^{-1}sum_i f_i, and let x* satisfy grad F(x*)=0. Conditional on the current iterate x_k and table alpha_i^k, assume an independent uniform index I_k and finite second moments. Put\n\n$$\nS_k=\\frac1n\\sum_{i=1}^n\\|\\alpha_i^k-\\nabla f_i(x^*)\\|_2^2,\\quad\n\\bar\\alpha_k=\\frac1n\\sum_i\\alpha_i^k,\\quad\nv_k=\\nabla f_{I_k}(x_k)-\\alpha_{I_k}^k+\\bar\\alpha_k.\n$$\n\nThen\n\n$$\n\\mathbb E[v_k\\mid\\mathcal F_k]=\\nabla F(x_k),\\qquad\n\\mathbb E[\\|v_k\\|_2^2\\mid\\mathcal F_k]\\le6L(F(x_k)-F(x^*))+6S_k,\n$$\n\nand, for the SAGA table replacement in [[alg-saga-finite-sum-method]],\n\n$$\n\\mathbb E[S_{k+1}\\mid\\mathcal F_k]\\le(1-1/n)S_k+\\frac{2L}{n}(F(x_k)-F(x^*)).\n$$\n\n",
+        "deps": [
+          "alg-saga-finite-sum-method",
+          "lem-convex-smooth-component-gradient-cocoercivity",
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-axiom-of-choice",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "thm-taking-out-what-is-known",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "lem-finite-sum-gradient-is-average"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aaron Defazio, Francis Bach, and Simon Lacoste-Julien, SAGA: A Fast Incremental Gradient Method With Support for Non-Strongly Convex Composite Objectives, NeurIPS 2014",
+              "url": "https://proceedings.neurips.cc/paper_files/paper/2014/file/937964195d6fb3a55cd7cc578165f058-Paper.pdf",
+              "locator": "Section 2, unbiased SAGA estimator and Theorem 1 proof."
+            },
+            {
+              "title": "Léon Bottou, Frank E. Curtis, and Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning, SIAM Review 60(2) (2018)",
+              "url": "https://leon.bottou.org/publications/pdf/tr-optml-2016.pdf",
+              "locator": "Section 5.3.2, equation (5.14) and Algorithm 5.2."
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-svrg-unbiasedness-and-variance-bound",
+        "kind": "lemma",
+        "title": "SVRG conditional unbiasedness and variance bound",
+        "statement": "Let f_i:R^d->R be convex and continuously differentiable with L-Lipschitz gradients, set F=n^{-1}sum_i f_i, and let x* satisfy grad F(x*)=0. Conditional on a filtration \\mathcal F_t, suppose x_t and the snapshot \\tilde x are measurable, the uniform index I_t is independent of \\mathcal F_t, and the relevant second moments are finite. For\n\n$$\nv_t=\\nabla f_{I_t}(x_t)-\\nabla f_{I_t}(\\tilde x)+\\nabla F(\\tilde x),\n$$\n\none has\n\n$$\n\\mathbb E[v_t\\mid\\mathcal F_t]=\\nabla F(x_t),\\qquad\n\\mathbb E[\\|v_t\\|_2^2\\mid\\mathcal F_t]\n\\le4L(F(x_t)-F(x^*))+4L(F(\\tilde x)-F(x^*)).\n$$\n\n",
+        "deps": [
+          "alg-svrg-finite-sum-method",
+          "lem-convex-smooth-component-gradient-cocoercivity",
+          "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-axiom-of-choice",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "thm-taking-out-what-is-known",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "lem-finite-sum-gradient-is-average"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rie Johnson and Tong Zhang, Accelerating Stochastic Gradient Descent using Predictive Variance Reduction, NeurIPS 2013",
+              "url": "https://proceedings.neurips.cc/paper_files/paper/2013/file/ac1dd209cbcc5e5d1c6e28598e8cbbe8-Paper.pdf",
+              "locator": "Section 3, Theorem 1 proof and the conditional estimator variance inequality."
+            },
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph",
+              "url": "https://arxiv.org/pdf/1405.4980",
+              "locator": "Section 6.3, Lemma 6.4 and the full variance calculation in Theorem 6.5."
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-diagonal-adagrad-subproblem-well-defined",
+        "kind": "lemma",
+        "title": "Diagonal AdaGrad subproblem has a unique minimizer",
+        "statement": "Let C be a nonempty closed convex subset of R^d, let A=diag(a_1,...,a_d) with every a_j>0, and let eta>0 and x,g in R^d. Then the minimizer set\n\n$$\\operatorname*{argmin}_{z\\in C}\\{\\eta\\langle g,z\\rangle+\\tfrac12\\|z-x\\|_A^2\\}$$\n\ncontains exactly one point.\n\n",
+        "deps": [
+          "alg-diagonal-adagrad-online-regret",
+          "def-proximal-mapping",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "def-proper-closed-convex-function-on-rn",
+          "def-indicator-function-of-closed-convex-set",
+          "lem-prox-indicator-is-euclidean-projection",
+          "def-convex-subset-of-euclidean-space",
+          "def-euclidean-inner-product",
+          "lem-positive-diagonal-map-preserves-closed-convexity",
+          "thm-of-square-roots"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Duchi, Elad Hazan, and Yoram Singer, Adaptive Subgradient Methods for Online Learning and Stochastic Optimization, JMLR 12 (2011)",
+              "url": "https://jmlr.org/papers/volume12/duchi11a/duchi11a.pdf",
+              "locator": "Section 2, composite mirror-descent minimization update and its diagonal scaling."
+            },
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph",
+              "url": "https://arxiv.org/pdf/1405.4980",
+              "locator": "Sections 3.1–3.3, Euclidean projection and proximal-gradient facts."
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-saga-expected-linear-contraction",
+        "kind": "theorem",
+        "title": "SAGA expected linear contraction with a memory-scaled step size",
+        "statement": "Let $n,d\\ge1$, and let $f_i:\\mathbb R^d\\to\\mathbb R$ be convex, continuously differentiable, with $L$-Lipschitz gradients for a common $L>0$. Put $F=n^{-1}\\sum_i f_i$, assume $F$ is $\\mu$-strongly convex with $\\mu>0$, and let $x^*$ satisfy $\\nabla F(x^*)=0$. Run SAGA [[alg-saga-finite-sum-method]] from a deterministic $x_0$ and its stated initialized gradient table. For\n\n$$0<\\eta\\le\\min\\left\\{\\frac1{3L},\\frac{\\mu}{13L^2},\\frac1{7\\mu n}\\right\\},$$\n\ndefine $V_k=\\|x_k-x^*\\|_2^2$, $S_k=n^{-1}\\sum_i\\|\\alpha_i^k-\\nabla f_i(x^*)\\|_2^2$, and $\\mathcal L_k=V_k+7\\eta^2nS_k$. Then for every $k\\ge0$,\n\n$$\\mathbb E[\\mathcal L_{k+1}]\\le(1-\\mu\\eta)\\mathbb E[\\mathcal L_k].$$\n\n**Contract discrepancy:** the controlling STO2 contract omits an $n$-dependent step-size restriction while requiring this same Lyapunov function and factor. For the standard SAGA initialization with $n=100$, $L=\\mu=1$, $x_0=1$, and $\\eta=1/13$, one obtains $\\mathcal L_1/\\mathcal L_0=844/869>12/13$, refuting that unamended claim. The added condition $\\eta\\le1/(7\\mu n)$ is sufficient for this local proof; it is not claimed necessary or optimal. This corrected local theorem is not represented as proof of the unamended contract.\n\n",
+        "deps": [
+          "alg-saga-finite-sum-method",
+          "lem-saga-estimator-and-table-recurrence",
+          "lem-finite-sum-gradient-is-average",
+          "def-finite-sum",
+          "def-lipschitz-holder-contraction",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "lem-l-smoothness-descent-inequality",
+          "def-strong-convex-composite-objective",
+          "lem-strong-convexity-implies-strong-monotonicity-of-gradient",
+          "def-euclidean-inner-product",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aaron Defazio, Francis Bach, and Simon Lacoste-Julien, SAGA: A Fast Incremental Gradient Method With Support for Non-Strongly Convex Composite Objectives, NeurIPS 2014",
+              "url": "https://proceedings.neurips.cc/paper_files/paper/2014/file/937964195d6fb3a55cd7cc578165f058-Paper.pdf",
+              "locator": "Section 2, Theorem 1 and its complete Lyapunov proof."
+            },
+            {
+              "title": "Robert M. Gower and Alexandre Gramfort, Optimization for Data Science: Stochastic Variance Reduced Gradient Methods, complete lecture-note deck",
+              "url": "https://gowerrobert.github.io/pdf/M2_statistique_optimisation/optimization_IV_variance_reduced-expanded.pdf",
+              "locator": "Slides 57–59, SAGA estimator and convergence comparison."
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-svrg-epoch-expected-linear-contraction",
+        "kind": "theorem",
+        "title": "Expected linear contraction of an SVRG epoch",
+        "statement": "Let $n,d\\ge1$, and let $f_i:\\mathbb R^d\\to\\mathbb R$ be convex, continuously differentiable, with $L$-Lipschitz gradients for a common $L>0$. Put $F=n^{-1}\\sum_{i=1}^n f_i$, assume $F$ is $\\mu$-strongly convex for $\\mu>0$, and let $x^*$ satisfy $\\nabla F(x^*)=0$. In one SVRG epoch [[alg-svrg-finite-sum-method]], take a deterministic snapshot $\\widetilde x$, set $x_0=\\widetilde x$, choose\n\n$$\\eta=\\frac1{10L},\\qquad m=2n,$$\n\nand choose each uniform inner index independently of the past. Assume $n\\ge10L/\\mu$. Choose the output index $J$ independently and uniformly from $\\{0,\\ldots,m-1\\}$. Then\n\n$$\\mathbb E[F(x_J)-F(x^*)]\\le q\\bigl(F(\\widetilde x)-F(x^*)\\bigr),\\qquad\nq=\\frac{1}{\\mu\\eta(1-2L\\eta)m}+\\frac{2L\\eta}{1-2L\\eta}\\le\\frac78.$$\n\nThe expectation is over the inner indices and $J$; this is an epoch expectation bound and asserts no almost-sure convergence.\n\n",
+        "deps": [
+          "alg-svrg-finite-sum-method",
+          "lem-svrg-unbiasedness-and-variance-bound",
+          "lem-finite-sum-gradient-is-average",
+          "lem-l-smoothness-descent-inequality",
+          "def-strong-convex-composite-objective",
+          "lem-strong-convexity-implies-strong-monotonicity-of-gradient",
+          "thm-differentiable-convex-functions-and-gradient-inequality",
+          "def-euclidean-inner-product",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rie Johnson and Tong Zhang, Accelerating Stochastic Gradient Descent using Predictive Variance Reduction, NeurIPS 2013",
+              "url": "https://proceedings.neurips.cc/paper_files/paper/2013/file/ac1dd209cbcc5e5d1c6e28598e8cbbe8-Paper.pdf",
+              "locator": "Sections 2–3, Theorem 1 proof, especially inequality (8) and the epoch telescope."
+            },
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph",
+              "url": "https://arxiv.org/pdf/1405.4980",
+              "locator": "Section 6.3, Lemma 6.4 and the complete proof of Theorem 6.5."
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-diagonal-adagrad-one-step-regret-bound",
+        "kind": "lemma",
+        "title": "One-step diagonal AdaGrad regret inequality",
+        "statement": "Let $A=\\operatorname{diag}(a_1,\\ldots,a_d)$ with $a_j>0$, let $C\\subseteq\\mathbb R^d$ be nonempty, closed, and convex, and let $x,x^+,u\\in C$ where $x^+$ minimizes $\\eta\\langle g,z\\rangle+\\tfrac12\\|z-x\\|_A^2$ over $z\\in C$, for $\\eta>0$ and $g\\in\\mathbb R^d$. With $\\|w\\|_A^2=w^TAw$, $A^{-1}=\\operatorname{diag}(1/a_1,\\ldots,1/a_d)$, and $\\|g\\|_{A^{-1}}^2=g^TA^{-1}g$,\n\n$$\\langle g,x-u\\rangle\\le\\frac{\\|x-u\\|_A^2-\\|x^+-u\\|_A^2}{2\\eta}+\\frac{\\eta}{2}\\|g\\|_{A^{-1}}^2.$$\n\n",
+        "deps": [
+          "alg-diagonal-adagrad-online-regret",
+          "lem-diagonal-adagrad-subproblem-well-defined",
+          "def-convex-subset-of-euclidean-space",
+          "def-metric-topology",
+          "def-euclidean-inner-product",
+          "thm-of-square-roots"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Duchi, Elad Hazan, and Yoram Singer, Adaptive Subgradient Methods for Online Learning and Stochastic Optimization, JMLR 12 (2011)",
+              "url": "https://jmlr.org/papers/volume12/duchi11a/duchi11a.pdf",
+              "locator": "Section 2, mirror-descent one-step bound and composite update."
+            },
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph",
+              "url": "https://arxiv.org/pdf/1405.4980",
+              "locator": "Sections 3.1–3.3, Euclidean projection variational inequality and telescoping argument."
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-diagonal-adagrad-regret-bound",
+        "kind": "theorem",
+        "title": "Diagonal AdaGrad regret bound",
+        "statement": "Let $C\\subseteq\\mathbb R^d$ be nonempty, closed, and convex, and suppose its coordinate diameters\n$$D_j=\\sup\\{|x_j-u_j|:x,u\\in C\\}$$\nare finite. Run diagonal AdaGrad [[alg-diagonal-adagrad-online-regret]] for $T\\ge1$ rounds on convex losses $\\ell_t:C\\to\\mathbb R$, with $g_t\\in\\partial\\ell_t(x_t)$, step size $\\eta>0$, and accumulator $s_{t,j}=\\sqrt{\\epsilon^2+\\sum_{k=1}^t g_{k,j}^2}$ for $\\epsilon>0$. For every comparator $u\\in C$,\n\n$$\\sum_{t=1}^T(\\ell_t(x_t)-\\ell_t(u))\\le\\sum_{j=1}^d\\left(\\frac{D_j^2}{2\\eta}+\\eta\\right)s_{T,j}.$$\n\n",
+        "deps": [
+          "alg-diagonal-adagrad-online-regret",
+          "lem-diagonal-adagrad-one-step-regret-bound",
+          "def-subgradient-and-subdifferential",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-finite-sum",
+          "def-euclidean-inner-product",
+          "thm-of-square-roots"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Duchi, Elad Hazan, and Yoram Singer, Adaptive Subgradient Methods for Online Learning and Stochastic Optimization, JMLR 12 (2011)",
+              "url": "https://jmlr.org/papers/volume12/duchi11a/duchi11a.pdf",
+              "locator": "Section 2, Theorem 5, composite mirror-descent update, and the complete Appendix C proof of the diagonal cumulative-gradient inequality in Lemma 4."
+            },
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph",
+              "url": "https://arxiv.org/pdf/1405.4980",
+              "locator": "Sections 3.1–3.3, projection inequality and online-gradient telescoping."
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2431,
+    "id": "variance-reduced-finite-sum-and-adaptive-gradient-optimization-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Variance reduced finite sum and adaptive gradient optimization — Examples",
+    "companion": "variance-reduced-finite-sum-and-adaptive-gradient-optimization",
+    "requires": [
+      "variance-reduced-finite-sum-and-adaptive-gradient-optimization"
+    ],
+    "items": [
+      {
+        "id": "ex-regularized-logistic-finite-sum",
+        "kind": "example",
+        "title": "A regularized logistic finite sum with an exact minimizer",
+        "statement": "Consider $n=14$ one-dimensional examples, seven with feature $a_i=1$ and label $y_i=1$, and seven with $a_i=1$ and $y_i=-1$. With unit $\\ell_2$ regularization, define\n\n$f_i(w)=\\log(1+\\exp(-y_iw))+\\frac12w^2,\\qquad F(w)=\\frac1{14}\\sum_{i=1}^{14}f_i(w).$\nHere $\\log$ denotes the natural logarithm.\n\nThen each component is convex with $5/4$-Lipschitz gradient, $F$ is $1$-strongly convex, and its unique minimizer is $w^*=0$. An SVRG epoch from snapshot $\\widetilde w=1$ with $\\eta=2/25$ and $m=28$ therefore satisfies\n\n$$\\mathbb E[F(w_J)-F(0)]\\le\\frac{181}{224}\\,[F(1)-F(0)],\\qquad\nF(1)-F(0)=\\frac12\\log(2+e+e^{-1})+\\frac12-\\log 2.$$\n\n",
+        "deps": [
+          "alg-svrg-finite-sum-method",
+          "thm-svrg-epoch-expected-linear-contraction",
+          "lem-finite-sum-gradient-is-average",
+          "def-finite-sum",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-strong-convex-composite-objective",
+          "def-lipschitz-holder-contraction",
+          "def-real-exponential-function-and-e",
+          "def-natural-logarithm",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-natural-logarithm-laws",
+          "thm-derivative-of-exponential",
+          "thm-logarithm-derivative-and-integral",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-total-derivatives",
+          "cor-mean-value-theorem",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "def-euclidean-inner-product",
+          "def-axiom-of-choice",
+          "def-complete-ordered-field"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rie Johnson and Tong Zhang, Accelerating Stochastic Gradient Descent using Predictive Variance Reduction, NeurIPS 2013",
+              "url": "https://proceedings.neurips.cc/paper_files/paper/2013/file/ac1dd209cbcc5e5d1c6e28598e8cbbe8-Paper.pdf",
+              "locator": "Sections 2–3, finite-sum objective and SVRG Theorem 1."
+            },
+            {
+              "title": "Sébastien Bubeck, Convex Optimization: Algorithms and Complexity, complete monograph",
+              "url": "https://arxiv.org/pdf/1405.4980",
+              "locator": "Sections 3.1–3.4 and 6.3, smooth convex objectives and SVRG."
+            },
+            {
+              "title": "John Lebl, Basic Analysis I, Section 8.3",
+              "url": "https://www.jirka.org/ra/html/sec_svtheder.html",
+              "locator": "Sum, scalar multiple, and chain rules used in the local finite-dimensional gradient calculations."
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-svrg-saga-gradient-work-storage-comparison",
+        "kind": "example",
+        "title": "SVRG and SAGA gradient-work and storage ledger",
+        "statement": "For a finite sum with $n=1000$ components in dimension $d=20$, compare SVRG and SAGA over $m=2n=2000$ inner updates, with no caching of SVRG snapshot gradients. SVRG uses $n+2m=5000$ component-gradient evaluations per epoch and $O(d)$ working storage. SAGA uses $n+m=3000$ evaluations during its initial 2000-step block, then $m=2000$ new component-gradient evaluations in each later block; its table stores $nd=20{,}000$ scalar gradient coordinates, for $O(nd)$ storage.\n\n",
+        "deps": [
+          "alg-svrg-finite-sum-method",
+          "alg-saga-finite-sum-method",
+          "def-finite-sum"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rie Johnson and Tong Zhang, Accelerating Stochastic Gradient Descent using Predictive Variance Reduction, NeurIPS 2013",
+              "url": "https://proceedings.neurips.cc/paper_files/paper/2013/file/ac1dd209cbcc5e5d1c6e28598e8cbbe8-Paper.pdf",
+              "locator": "Section 2, SVRG work and storage."
+            },
+            {
+              "title": "Aaron Defazio, Francis Bach, and Simon Lacoste-Julien, SAGA: A Fast Incremental Gradient Method With Support for Non-Strongly Convex Composite Objectives, NeurIPS 2014",
+              "url": "https://proceedings.neurips.cc/paper_files/paper/2014/file/937964195d6fb3a55cd7cc578165f058-Paper.pdf",
+              "locator": "Sections 2–3, SAGA stored-gradient work and memory comparison."
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-adam-adaptive-step-divergence",
+        "kind": "example",
+        "title": "A bounded periodic gradient sequence with divergent Adam iterates",
+        "statement": "For Adam with $\\beta_1=0$, $\\beta_2=1/2$, $\\eta=1$, and $\\epsilon=1/100$, feed the repeated affine losses $5x/2,-x,-x$ from $x_1=0$. Every gradient has magnitude at most $5/2$, but the terminal subsequence $x_{3k+1}$ tends to $+\\infty$; for every $k\\ge2$, its cycle drift is at least $7295/90804$.\n\n",
+        "deps": [
+          "alg-adam-update",
+          "cex-adam-periodic-linear-losses-force-divergence",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sashank J. Reddi, Satyen Kale, and Sanjiv Kumar, On the Convergence of Adam and Beyond, ICLR 2018, full arXiv text",
+              "url": "https://arxiv.org/pdf/1904.09237",
+              "locator": "Section 2 and Appendix F, Theorem 6 counterexample."
+            },
+            {
+              "title": "Diederik P. Kingma and Jimmy Ba, Adam: A Method for Stochastic Optimization, ICLR 2015",
+              "url": "https://arxiv.org/pdf/1412.6980",
+              "locator": "Section 2, Algorithm 1 and bias-correction equations."
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

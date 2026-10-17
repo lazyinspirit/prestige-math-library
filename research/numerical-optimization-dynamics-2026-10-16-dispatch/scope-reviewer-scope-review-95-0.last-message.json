@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "95",
+  "round": 0,
+  "reviewed_items": [
+    "lem-continuous-riemann-lebesgue-agreement",
+    "lem-unit-interval-lebesgue-gauss-data-valid",
+    "def-collocation-quadrature-tableau",
+    "lem-collocation-quadrature-matrix-well-defined",
+    "alg-explicit-left-euler-sdc-sweep",
+    "lem-sdc-fixed-point-is-collocation-stage",
+    "lem-one-node-gauss-data-is-midpoint",
+    "lem-sdc-scalar-linear-iteration-matrix",
+    "thm-sdc-sweep-contraction-and-error-bound",
+    "lem-collocation-polynomial-scaled-derivatives",
+    "thm-collocation-local-defect-order-m",
+    "thm-collocation-one-step-stability",
+    "lem-gauss-collocation-weighted-defect-bound",
+    "prop-one-node-gauss-collocation-order-two",
+    "thm-collocation-global-order-m",
+    "thm-sdc-finite-sweeps-raise-order",
+    "thm-sdc-residual-tolerance-preserves-order",
+    "thm-gauss-collocation-local-defect-order-2m",
+    "thm-gauss-collocation-global-order-2m",
+    "ex-sdc-cost-accounting-per-sweep",
+    "ex-sdc-one-node-gauss-stiff-iteration-diverges",
+    "ex-sdc-two-node-gauss-nonstiff-cubic-ivp",
+    "ex-sdc-constant-predictor-too-few-sweeps",
+    "ex-sdc-inexact-midpoint-stage-residual"
+  ],
+  "reviewed_pages": [
+    "deferred-correction-and-collocation-iterations",
+    "deferred-correction-and-collocation-iterations-examples"
+  ],
+  "decision": "repair",
+  "reason": "Both pages and all assigned items were reviewed against the approved T20 scope and actual supplier claims. The claims preserve the approved scope, but the first review found local proof and prerequisite gaps that can be resolved within the assigned pages. One consolidated local repair is requested; no content was edited.",
+  "findings": [
+    {
+      "id": "alg-explicit-left-euler-sdc-sweep",
+      "type": "local",
+      "reason": "The input contract says t,u,h>0, which is ill-typed for vector u and excludes valid IVPs. State t∈R, u∈R^d, (t,u)∈D and h>0, and spell out initialization, the finite sweep loop, residual branch and K=0 return behavior."
+    },
+    {
+      "id": "thm-sdc-sweep-contraction-and-error-bound",
+      "type": "prerequisite",
+      "reason": "The geometric iterate bound requires U^0∈C; invariance only preserves membership for a starting point already in C. Add this premise to the iterate clause, require the algorithm’s residual-certified predictor to lie in C, and check the constant-predictor consumers listed below."
+    },
+    {
+      "id": "lem-unit-interval-lebesgue-gauss-data-valid",
+      "type": "local",
+      "reason": "Fact F2 claims boundedness alone makes a function integrable, but the nonnegative integral rules require measurability. Establish that each moment function x↦|x|^k is Borel on relative [0,1] before applying those rules."
+    },
+    {
+      "id": "lem-continuous-riemann-lebesgue-agreement",
+      "type": "local",
+      "reason": "F6 omits measurability as a condition for bounded-function Lebesgue integrability, and the proof does not establish the measurability of g−φ_N. Also justify the left tagged sum’s placement between the Darboux sums by the termwise bounds."
+    },
+    {
+      "id": "lem-one-node-gauss-data-is-midpoint",
+      "type": "prerequisite",
+      "reason": "The Statement and proof identify Q_11 as a collocation-tableau coefficient, but def-collocation-quadrature-tableau is absent from deps. Add that supplier or state and prove the coefficient formula directly without the tableau claim."
+    },
+    {
+      "id": "lem-collocation-polynomial-scaled-derivatives",
+      "type": "local",
+      "reason": "Fact F2 invokes the SDC contraction theorem to supply the branch without assuming that theorem’s invariant-set contraction hypotheses. The Statement already assumes a locally unique branch, so use that premise directly or state the missing conditions."
+    },
+    {
+      "id": "thm-collocation-one-step-stability",
+      "type": "local",
+      "reason": "The proof invokes the SDC contraction theorem under hypotheses absent from the Statement. The inequality follows by subtracting the equations for the two given branches; remove the unnecessary supplier reliance and its unsupported Fact A1 clause."
+    },
+    {
+      "id": "prop-one-node-gauss-collocation-order-two",
+      "type": "local",
+      "reason": "Fact F3 invokes the SDC contraction theorem to supply a branch, although the Statement already assumes the unique branch. Use the stated branch premise directly or include the contraction hypotheses."
+    },
+    {
+      "id": "thm-collocation-local-defect-order-m",
+      "type": "prerequisite",
+      "reason": "The C^k and Taylor premises concern vector fields R×R^d→R^d, while the cited smoothness definition and multivariable Taylor theorem are scalar-valued. State componentwise smoothness and apply Taylor coordinatewise; carry this convention through lem-collocation-polynomial-scaled-derivatives, lem-gauss-collocation-weighted-defect-bound, prop-one-node-gauss-collocation-order-two, and thm-gauss-collocation-local-defect-order-2m."
+    },
+    {
+      "id": "lem-gauss-collocation-weighted-defect-bound",
+      "type": "local",
+      "reason": "Step 1.1 asserts that the averaged Jacobian has induced operator norm at most L, but the supplied integral inequality is for vector integrals. Show the bound by applying it to D_yf(·)v for each unit vector v; use the same operator-norm argument for the matrix integral contraction."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-sdc-fixed-point-is-collocation-stage",
+      "decision": "accept",
+      "reason": "Its fixed-point identity uses the sweep formula, which is unchanged by the requested input clarification."
+    },
+    {
+      "id": "lem-sdc-scalar-linear-iteration-matrix",
+      "decision": "accept",
+      "reason": "Its iteration-matrix formula and triangular solve remain valid for admissible vector IVP inputs."
+    },
+    {
+      "id": "thm-sdc-sweep-contraction-and-error-bound",
+      "decision": "repair",
+      "reason": "Add U^0∈C for the geometric iterate bound; the fixed-point and residual clauses remain valid for V∈C."
+    },
+    {
+      "id": "ex-sdc-cost-accounting-per-sweep",
+      "decision": "accept",
+      "reason": "Its counted stage calls and storage remain valid under the clarified finite loop."
+    },
+    {
+      "id": "ex-sdc-one-node-gauss-stiff-iteration-diverges",
+      "decision": "accept",
+      "reason": "Its scalar recurrence and divergence calculation do not rely on the omitted input notation."
+    },
+    {
+      "id": "thm-sdc-finite-sweeps-raise-order",
+      "decision": "repair",
+      "reason": "Make explicit that the constant predictor U^0 lies in the invariant stage set used by the iterate bound."
+    },
+    {
+      "id": "ex-sdc-constant-predictor-too-few-sweeps",
+      "decision": "repair",
+      "reason": "Specify and verify an invariant stage set containing the constant predictor for the residual-certified first sweep."
+    },
+    {
+      "id": "lem-collocation-polynomial-scaled-derivatives",
+      "decision": "repair",
+      "reason": "Use its stated locally unique branch directly instead of the SDC theorem under unstated hypotheses, and state the vector-valued smoothness convention."
+    },
+    {
+      "id": "thm-collocation-local-defect-order-m",
+      "decision": "repair",
+      "reason": "State componentwise C^M regularity and coordinatewise use of the scalar Taylor supplier."
+    },
+    {
+      "id": "thm-collocation-one-step-stability",
+      "decision": "repair",
+      "reason": "Remove the unsupported SDC-contraction use; the supplied branches suffice for the estimate."
+    },
+    {
+      "id": "lem-gauss-collocation-weighted-defect-bound",
+      "decision": "repair",
+      "reason": "Supply the induced-operator-norm bound for the averaged Jacobian and matrix integral."
+    },
+    {
+      "id": "prop-one-node-gauss-collocation-order-two",
+      "decision": "repair",
+      "reason": "Use the branch already assumed in its Statement rather than invoking the SDC theorem without its hypotheses."
+    },
+    {
+      "id": "thm-collocation-global-order-m",
+      "decision": "accept",
+      "reason": "Its global-error argument remains valid after the cited local theorem and stability proof are clarified."
+    },
+    {
+      "id": "thm-sdc-residual-tolerance-preserves-order",
+      "decision": "accept",
+      "reason": "It explicitly places each V_n in the common stage set required by the residual estimate."
+    },
+    {
+      "id": "thm-gauss-collocation-local-defect-order-2m",
+      "decision": "repair",
+      "reason": "Carry the explicit componentwise smoothness convention through its weighted-defect supplier."
+    },
+    {
+      "id": "thm-gauss-collocation-global-order-2m",
+      "decision": "accept",
+      "reason": "Its global propagation argument remains valid after the local Gauss-defect premise is clarified."
+    },
+    {
+      "id": "ex-sdc-inexact-midpoint-stage-residual",
+      "decision": "accept",
+      "reason": "It supplies an invariant ball containing V and verifies the residual-to-stage hypotheses."
+    },
+    {
+      "id": "deferred-correction-and-collocation-iterations",
+      "decision": "accept",
+      "reason": "Its summary remains accurate after the algorithm input and invariant-set conditions are made explicit."
+    },
+    {
+      "id": "deferred-correction-and-collocation-iterations-examples",
+      "decision": "accept",
+      "reason": "Its examples summary remains accurate after the required invariant-set conditions are supplied."
+    }
+  ]
+}

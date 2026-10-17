@@ -1,0 +1,100 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "84",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "6f765023caca7cf7f9cc63a7dbb701c0dc7f883c4e73cc620b18969a484bd0b5",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 omitted the supplier hypothesis J(x)^T r(x) != 0. In step 5.1, r(t)=(t,1) and x0=0 give gradient zero; the algorithm returns stationary before solving or evaluating a ratio. Even a hypothetical exact damped solve has p=0 and pred=0, so the unqualified F2 was false. This is nonfatal because step 1.1 explicitly assumes a nonstationary iterate and step 2.1 concerns its trials; neither uses the false stationary extension. Added precisely the missing nonzero-gradient restriction to F2. The theorem and all proof steps remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "disposition": "repaired",
+      "post_sha256": "1bca054eb90a1fcf1c1ed8a00966ad455f68af933ff7802a1718976e75342dc4",
+      "review_context_sha256": "0b66382f12bf70acae73fee04aa6c56f46c4342c75e317b0a1469e54df9eac67",
+      "reason": "Checked the complete theorem, the large-damping and scaled-model lemmas, actual exact-algorithm branches, owning proof contract and home-page interface. The repaired F2 now retains the nonstationarity hypothesis. At nonstationary iterates, exact supplied QR solves and positive prediction permit finite acceptance. Large damping gives ||Dp|| <= Delta/2 and acceptance without a boundary damping decrease; rejections cross Lambda below gamma*Lambda, giving the asserted uniform damping bound. The normal equation bounds ||g|| by (M^2+lambda_max*d_+^2)||p||, and pred >= lambda_min*d^2*||p||^2 yields the stated c. Telescoping nonnegative objective decreases implies square-gradient summability; continuity gives stationarity of accumulation points in compact S. The stationary nonzero-residual example has P=1/2, Lambda=2*sqrt(2), N=3 and returns before any ratio. No new prerequisite or AC use is needed. This is a repair review, not independent acceptance of my edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "severity": "nonfatal",
+      "location": "facts-block",
+      "fact": "F2",
+      "disposition": "fixed",
+      "reason": "The large-damping citation omitted J(x)^T r(x) != 0, falsely promising a positive-prediction trial even at a stationary point. Restored that exact supplier hypothesis. The proof already limits its uses to nonstationary iterations, so its convergence argument requires no change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "changed_paths": [
+      "items/thm-safeguarded-levenberg-marquardt-global-stationarity.md"
+    ],
+    "claim_and_conventions": "C1 residual least squares phi=||r||_2^2/2; fixed nonsingular D; exact arithmetic, supplied exact augmented QR, at least N trials, no evaluation failures. Finite stationary termination or uniform sufficient decrease and gradient convergence; residual convergence is not asserted.",
+    "local_evidence": [
+      "items/thm-safeguarded-levenberg-marquardt-global-stationarity.md: F2 and proof steps 1.1-5.1",
+      "items/lem-levenberg-marquardt-large-damping-forces-sufficient-decrease.md: complete Statement and Proof, especially the explicit g != 0 hypothesis and Delta/2 bound",
+      "items/lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer.md: complete Statement and Proof, nonzero gradient and positive prediction",
+      "items/alg-safeguarded-levenberg-marquardt.md: Definition instructions 1-5 and Proof; stationary branch precedes all solves and ratios",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-84.proof-contracts.json: assigned theorem contract, F1-F9 citations, five derivations and boundary cases",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/gauss-newton-and-levenberg-marquardt-methods.md: global first-order stationarity interface"
+    ],
+    "before_statement_raw_sha256": "164f38fa39323a3a4985607de9b49b91a9ac3a42ccba5fe5e9f58a6f6dddab22",
+    "propagation": "Only F2 changes. Original Statement and Definition interfaces, dependencies, proof steps and source quotations are unchanged; no downstream examination is triggered and no contract/page edit is required.",
+    "published_ledger_updates": "None: this assignment changes no interface and discovers no new published-item defect. The digest alert about a different Hessian remark remains outside this assigned lane; no adjudication or source edit of that item is claimed.",
+    "source_consultation": "No external source was consulted in this review; the elementary differentiation, positive-definite quadratic, norm and summability arguments are familiar and checked directly against local arguments.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-safeguarded-levenberg-marquardt-global-stationarity.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 checked proof, 0 failures; direct strategy passes."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-safeguarded-levenberg-marquardt-global-stationarity.md --json",
+        "exit_code": 0,
+        "result": "1 file checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-84.proof-contracts.json --strict --items thm-safeguarded-levenberg-marquardt-global-stationarity --json",
+        "exit_code": 0,
+        "result": "ok:true; exact assigned item scope; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-safeguarded-levenberg-marquardt-global-stationarity.md",
+        "exit_code": 0,
+        "result": "1 item, 5 steps, 0 defects; run once after final item edit."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items thm-safeguarded-levenberg-marquardt-global-stationarity",
+        "exit_code": 0,
+        "result": "Captured the review hashes immediately after the completed repair review, before any further item edit."
+      }
+    ],
+    "unresolved_mathematics": [],
+    "next_action": "Handoff to the controller for ordinary collection and any required independent rejudgment; no unresolved mathematical repair obligation remains in this unit.",
+    "repair_complete": true,
+    "after_statement_raw_sha256": "164f38fa39323a3a4985607de9b49b91a9ac3a42ccba5fe5e9f58a6f6dddab22",
+    "only_change_verified": "Removing the added F2 qualification reproduces the exact assigned pre-edit raw SHA-256 e78e0559bb42b74c1492c2b3f0214ebb52d0dc1a09fc259732fd490ca5b6472f; all other bytes, including proof steps and Statement, are unchanged."
+  }
+}

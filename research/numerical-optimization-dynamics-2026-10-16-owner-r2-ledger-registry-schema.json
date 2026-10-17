@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "R2 exact current ledger review registry; root supplies confirmations",
+  "type": "object",
+  "required": [
+    "version",
+    "run",
+    "reviews",
+    "controls"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "run": {
+      "const": "numerical-optimization-dynamics-2026-10-16"
+    },
+    "review_receipts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "consumer",
+          "supplier",
+          "status",
+          "root_confirmed",
+          "evidence",
+          "receipt_refs"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "item",
+              "page"
+            ]
+          },
+          "consumer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "supplier": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "verified",
+              "removed"
+            ]
+          },
+          "root_confirmed": {
+            "const": true
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1
+          },
+          "receipt_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "file",
+                "pointer"
+              ],
+              "properties": {
+                "file": {
+                  "type": "string"
+                },
+                "pointer": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "controls": {
+      "type": "object",
+      "properties": {
+        "writer_drain_receipt": {
+          "type": "object",
+          "required": [
+            "file"
+          ],
+          "properties": {
+            "file": {
+              "type": "string"
+            }
+          }
+        },
+        "scheduler_final_receipt": {
+          "type": "object",
+          "required": [
+            "file"
+          ],
+          "properties": {
+            "file": {
+              "type": "string"
+            }
+          }
+        },
+        "root_confirms_final_routes_and_drained": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "description": "Exact native in-run ledger additions only; reviewed source currency/repair closure retained in actual evidence refs, with no extra hash audit requirement."
+}

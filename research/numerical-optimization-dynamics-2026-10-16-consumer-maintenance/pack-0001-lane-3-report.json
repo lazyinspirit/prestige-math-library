@@ -1,0 +1,57 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "pack": "pack-0001",
+  "lane": 3,
+  "input_sha256": "fe548ab66e838ab116f09ef303aadbe0e66aae3120ca827c93d8d6f254f843fe",
+  "decisions": [
+    {
+      "id": "cor-sqp-augmented-lagrangian-finite-budget-status",
+      "disposition": "sound",
+      "reason": "The supplier changes specify the C^2 program and positive integer caps already assumed here, and move algorithmic properties to this corollary without changing any operational branch. A successful call supplies a domain point; componentwise projection preserves nonnegative multipliers; at most K calls of at most M iterations give the stated bounds and return data. The consumer remains byte-for-byte unchanged.",
+      "understanding": {
+        "basis": "familiarity",
+        "evidence": "Read this consumer's Statement, F1-F3, A1 and all three proof steps; read both changed suppliers completely and their archived preimages in research/numerical-optimization-dynamics-2026-10-16-step5-v2/initial-metadata-history/sources/. Also read def-kkt-residual-and-normal-cone and def-inequality-constrained-program-and-kkt-geometry. The argument uses finite-loop counting and induction, not a convergence theorem: the inner contract supplies x_k^+ in U and an achieved residual, projection max(z,0) preserves lambda >= 0, and C^2 evaluations on U give finite update and KKT data under A1. Positive K ensures the last residual exists on outer-budget exhaustion, including empty constraint spaces. No external source was read or needed for this direct argument. Validation: exact byte comparison against the frozen assignment passed; report identity, assigned item coverage, exact supplier-event coverage, required fields and explanation lengths passed. No item changed, so there are no changed paths for proof-layout. No shared metadata changed and no unresolved mathematical obligations remain; next action is controller collection of this report.",
+        "uncertainty": false,
+        "sources": []
+      },
+      "event_uses": [
+        {
+          "event_key": "5f24d2f47b1356c2a1f491eefeb37d01c4e92ba772b898e7ce31785db6a19d76",
+          "affected_use": "Statement, F1 and proof steps 1.1-3.1 use the inner report contract, one-call-per-index loop, success check, multiplier update, KKT test and all four terminal statuses of alg-sqp-augmented-lagrangian-multiplier-method.",
+          "reason": "The current Definition retains all these instructions and residual reports. It makes C^2 regularity and positive integer K,M explicit, exactly as this corollary already requires. Removing the algorithm's property proof and pointing justified_by to this result introduces no proof premise: F1 reads the defining instructions, and A1 supplies the finite evaluation contract. Thus the induction, KM and K bounds, and last-residual assertions still follow."
+        },
+        {
+          "event_key": "25317ba1f172ef609eaa010369ee869ad6c25a9b163f4ecfc34524ad166531af",
+          "affected_use": "F2 and proof steps 1.1-2.1 use nu^+ = nu + rho h(x^+) and lambda^+ = [lambda + rho g(x^+)]_+ from def-sqp-augmented-lagrangian-equality-and-inequality; the inner residual uses its augmented Lagrangian gradient.",
+          "reason": "The changed Definition replaces the smooth-program wording with the explicit C^2 program already admitted by this consumer; both multiplier formulas and the declared stationarity residual are unchanged. Since s -> max(s,0)^2 is differentiable also at s=0, the augmented Lagrangian gradient exists on U. Finite domain evaluations and projection therefore still justify the updates and nonnegative multipliers."
+        }
+      ],
+      "affected_use": "The corollary consumes the algorithm's exact finite inner-call and return instructions and the definition's projected multiplier update, rather than relying on any removed algorithmic property assertion.",
+      "invalidated_claim": "No claim is invalidated: C^2 regularity, positive integer caps, domain-valued successful reports and nonnegative initial multipliers are already explicit hypotheses, and all update and return formulas are preserved.",
+      "minimality": "No item edit is necessary because direct induction and finite counting establish every conclusion from the current supplier Definitions and the consumer's existing evaluation assumption A1; edits would change an already valid consumer.",
+      "edits": []
+    },
+    {
+      "id": "lem-neutral-delay-euler-finite-execution-and-storage-counts",
+      "disposition": "sound",
+      "reason": "The changed algorithm removes explanatory property assertions but preserves initialization, the pre-update budget test, the delayed-derivative branches and each Euler update. These exact instructions still yield M=min(B,N) field calls (or N without a budget), the two statuses, valid indices, conditional V_0 compatibility and 2m+2M+1 retained array entries. The consumer remains byte-for-byte unchanged.",
+      "understanding": {
+        "basis": "familiarity",
+        "evidence": "Read this consumer's complete Statement, F1-F2 and both proof steps; read alg-neutral-delay-euler-compatible-grid and its archived preimage at research/numerical-optimization-dynamics-2026-10-16-step5-v2/initial-metadata-history/sources/alg-neutral-delay-euler-compatible-grid.md, and read def-scalar-neutral-delay-equation-and-segment-shift completely. Direct index induction gives Y_{-m},...,Y_n and V_{-m},...,V_{n-1} before update n. For n<m the derivative-history argument lies in [-tau,0), and otherwise 0<=n-m<=n-1. The field domain contains every scalar state at t_n<T. Initialization stores m+(m+1) entries and every accepted update adds two. B=0 performs no update and makes no claim about V_0; B>=N and no-budget executions complete. No stability, convergence, or solution-existence theorem is used, and no external source was read. Validation: exact byte comparison against the frozen assignment passed; report identity, assigned item coverage, exact supplier-event coverage, required fields and explanation lengths passed. No item changed, so there are no changed paths for proof-layout. No shared metadata changed and no unresolved mathematical obligations remain; next action is controller collection of this report.",
+        "uncertainty": false,
+        "sources": []
+      },
+      "event_uses": [
+        {
+          "event_key": "968e5715664f5aafaa1f4c28ad445eb032798073cd860fe0f09614bb87f7bef8",
+          "affected_use": "Statement, F1 and proof steps 1.1-2.1 use alg-neutral-delay-euler-compatible-grid initialization, its n>=B check before the field call, the two definitions of D_n, the V_n and Y_{n+1} updates, and completed/budget-exhausted return branches.",
+          "reason": "Every instruction used in the proof is unchanged. Removing the algorithm's claims about defined evaluations, V_0 compatibility and storage does not remove any premise needed here: step 1.1 proves admission by index induction and obtains V_0 from F2 only if M>=1; step 2.1 counts the accepted iterations and array entries directly. The added justified_by reference to this lemma is not used as a proof premise. B=0 still initializes 2m+1 entries and returns budget-exhausted before calling f; B=N completes with N calls."
+        }
+      ],
+      "affected_use": "The lemma analyzes the exact operational recurrence and storage in the algorithm, using the neutral-problem domain and zero-time compatibility identity from its other dependency to justify each evaluation and the first computed derivative.",
+      "invalidated_claim": "No claim is invalidated: the removed supplier property sentences are independently proved here, and the unchanged budget placement, recurrence and retained-history convention still establish all counts and status assertions.",
+      "minimality": "No item edit is necessary because the existing proof already treats the zero-budget boundary, bounds all delayed indices, conditions the V_0 identity on an accepted update and counts retained history explicitly. Changing its text would not repair an invalidated use.",
+      "edits": []
+    }
+  ]
+}

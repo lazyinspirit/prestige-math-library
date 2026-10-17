@@ -1,0 +1,150 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-97.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-97.proof-contracts.json
+@@ -19,7 +19,8 @@
+     "ex-affine-contractive-response-and-residual-error",
+     "ex-density-mixture-leaves-projector-manifold",
+     "ex-diis-singular-gram-fallback",
+-    "ex-additive-eigensolve-tolerance-residual-certificate"
++    "ex-additive-eigensolve-tolerance-residual-certificate",
++    "lem-finite-budget-scf-iteration-work"
+   ],
+   "contracts": {
+     "lem-capped-diis-coefficient-minimizer-exists": {
+@@ -2164,7 +2165,7 @@
+           "fact": "F3",
+           "source": "alg-undamped-scf-with-gap-and-residual-status",
+           "source_section": "Definition",
+-          "quote": "Input: $n,r$, a response map $F:U\\to\\mathbb H_n$ and its occupied projector\nmap $\\Phi$ from [[def-self-consistent-projector-response-map]], an initial\nprojector $P_0\\in\\mathcal P_r$, a required gap $g_{min}>0$, residual tolerance\n$\\varepsilon\\ge0$, and update budget $N\\in\\mathbb N_0$. Assume each iterate\nbelongs to a declared invariant input set $K\\subseteq U$. Use the Frobenius\nmetric and the fixed-point interface of [[alg-fixed-point-iteration]].\n\nFor $k=0,1,\\ldots,N$:\n\n1. Compute the ordered eigenvalues of $F(P_k)$. If the eigensolver fails with no certified ordered spectrum, return $(P_k,\\texttt{eigensolve-failure},\\varnothing,k)$. If $\\lambda_{r+1}(F(P_k))-\\lambda_r(F(P_k))<g_{min}$, return $(P_k,\\texttt{gap-loss},\\varnothing,k)$.\n2. Set $P_{k+1}^{raw}=\\Phi(P_k)$ and $\\rho_k=\\|P_k-P_{k+1}^{raw}\\|_F$. If $\\rho_k\\le\\varepsilon$, return $(P_k,\\texttt{residual-tolerance-met},\\rho_k,k)$.\n3. If $k=N$, return $(P_k,\\texttt{iteration-budget-exhausted},\\rho_k,k)$. Otherwise set $P_{k+1}=P_{k+1}^{raw}$ and continue.\n\nThe procedure uses at most $N$ updates. It reports a residual stopping status,\ngap loss, eigensolver failure, or budget exhaustion separately. A finite budget\ndoes not guarantee that the residual tolerance will be met, and the definition\nasserts no convergence from damping or from a positive gap alone.",
++          "quote": "Input: $n,r$, a response map $F:U\\to\\mathbb H_n$ and its occupied projector\nmap $\\Phi$ from [[def-self-consistent-projector-response-map]], an initial\nprojector $P_0\\in\\mathcal P_r$, a required gap $g_{min}>0$, residual tolerance\n$\\varepsilon\\ge0$, and update budget $N\\in\\mathbb N_0$. Assume each iterate\nbelongs to a declared invariant input set $K\\subseteq U$. Use the Frobenius\nmetric and the fixed-point interface of [[alg-fixed-point-iteration]].\n\nFor $k=0,1,\\ldots,N$:\n\n1. Compute the ordered eigenvalues of $F(P_k)$. If the eigensolver fails with no certified ordered spectrum, return $(P_k,\\texttt{eigensolve-failure},\\varnothing,k)$. If $\\lambda_{r+1}(F(P_k))-\\lambda_r(F(P_k))<g_{min}$, return $(P_k,\\texttt{gap-loss},\\varnothing,k)$.\n2. Set $P_{k+1}^{raw}=\\Phi(P_k)$ and $\\rho_k=\\|P_k-P_{k+1}^{raw}\\|_F$. If $\\rho_k\\le\\varepsilon$, return $(P_k,\\texttt{residual-tolerance-met},\\rho_k,k)$.\n3. If $k=N$, return $(P_k,\\texttt{iteration-budget-exhausted},\\rho_k,k)$. Otherwise set $P_{k+1}=P_{k+1}^{raw}$ and continue.\n\nIt reports a residual stopping status, gap loss, eigensolver failure, or budget\nexhaustion separately. A finite budget\ndoes not guarantee that the residual tolerance will be met, and the definition\nasserts no convergence from damping or from a positive gap alone.",
+           "uses": [
+             "2.1"
+           ]
+@@ -2819,6 +2820,128 @@
+         "used": [],
+         "reason": "No axiom of choice or dependent choice is used; finite witnesses and explicit recurrences are constructed locally."
+       }
++    },
++    "lem-finite-budget-scf-iteration-work": {
++      "citations": [
++        {
++          "fact": "F1",
++          "source": "alg-undamped-scf-with-gap-and-residual-status",
++          "source_section": "Definition",
++          "quote": "Input: $n,r$, a response map $F:U\\to\\mathbb H_n$ and its occupied projector\nmap $\\Phi$ from [[def-self-consistent-projector-response-map]], an initial\nprojector $P_0\\in\\mathcal P_r$, a required gap $g_{min}>0$, residual tolerance\n$\\varepsilon\\ge0$, and update budget $N\\in\\mathbb N_0$. Assume each iterate\nbelongs to a declared invariant input set $K\\subseteq U$. Use the Frobenius\nmetric and the fixed-point interface of [[alg-fixed-point-iteration]].\n\nFor $k=0,1,\\ldots,N$:\n\n1. Compute the ordered eigenvalues of $F(P_k)$. If the eigensolver fails with no certified ordered spectrum, return $(P_k,\\texttt{eigensolve-failure},\\varnothing,k)$. If $\\lambda_{r+1}(F(P_k))-\\lambda_r(F(P_k))<g_{min}$, return $(P_k,\\texttt{gap-loss},\\varnothing,k)$.\n2. Set $P_{k+1}^{raw}=\\Phi(P_k)$ and $\\rho_k=\\|P_k-P_{k+1}^{raw}\\|_F$. If $\\rho_k\\le\\varepsilon$, return $(P_k,\\texttt{residual-tolerance-met},\\rho_k,k)$.\n3. If $k=N$, return $(P_k,\\texttt{iteration-budget-exhausted},\\rho_k,k)$. Otherwise set $P_{k+1}=P_{k+1}^{raw}$ and continue.\n\nIt reports a residual stopping status, gap loss, eigensolver failure, or budget\nexhaustion separately. A finite budget\ndoes not guarantee that the residual tolerance will be met, and the definition\nasserts no convergence from damping or from a positive gap alone.",
++          "uses": [
++            "1.1",
++            "2.1",
++            "3.1"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "alg-relaxed-density-mixing-with-finite-budget",
++          "source_section": "Definition",
++          "quote": "Input: $D_0\\in\\mathcal D_r$ from\n[[def-admissible-hermitian-density-domain]], a response map $\\Phi$ defined at\neach required iterate, a fixed mixing parameter $\\alpha\\in[0,1]$, a fixed-point\nresidual tolerance $\\varepsilon\\ge0$, and a finite update budget\n$N\\in\\mathbb N_0$. For $k=0,\\ldots,N$, first certify that the occupied gap at\n$D_k$ is positive. If the eigensolver fails, return\n$(D_k,\\texttt{eigensolve-failure},\\varnothing,k)$; if the gap is absent, return\n$(D_k,\\texttt{gap-loss},\\varnothing,k)$. Otherwise evaluate $\\Phi(D_k)$ and\n$$r_k=\\|D_k-((1-\\alpha)D_k+\\alpha\\Phi(D_k))\\|_F.$$\nIf $r_k\\le\\varepsilon$, return\n$(D_k,\\texttt{residual-tolerance-met},r_k,k)$. If $k=N$, return\n$(D_k,\\texttt{iteration-budget-exhausted},r_k,k)$. Otherwise update\n$$D_{k+1}=(1-\\alpha)D_k+\\alpha\\Phi(D_k)$$\nand continue.\n\nBy [[lem-density-mixing-preserves-domain-but-not-projectors]], each successful\nupdate stays in $\\mathcal D_r$; it need not be idempotent. This algorithm is the\nfixed-point iteration of [[alg-fixed-point-iteration]] applied to the relaxed\nmap. It makes no convergence claim unless the derivative-bound and invariance\nhypotheses in [[thm-density-mixing-contracts-under-jacobian-certificate]] are\nverified. If $\\alpha=0$, then the relaxed residual is identically zero and the\nupdate does not move; that stop status alone says nothing about the unmixed\nresponse residual.",
++          "uses": [
++            "1.1",
++            "2.1",
++            "3.1"
++          ]
++        }
++      ],
++      "derivations": [
++        {
++          "id": "step-1.1",
++          "claim": "At the initial entered index $0$, no update has occurred, and the pass permits at most one residual test after its spectrum and gap checks.",
++          "step": "1.1",
++          "inputs": [
++            "given",
++            "F1",
++            "F2",
++            "base"
++          ]
++        },
++        {
++          "id": "step-1.2",
++          "claim": "For an entered index $k\\le N$, assume its preceding entered indices are exactly $0,\\ldots,k-1$, with at most $k$ preceding residual tests and $k$ updates.",
++          "step": "1.2",
++          "inputs": [
++            "IH"
++          ]
++        },
++        {
++          "id": "step-2.1",
++          "claim": "Pass $k$ permits at most one residual test. A continuing pass requires $k<N$ and makes one update before entering $k+1$. The counts before that next pass are therefore at most $k+1$ residual tests and updates, proving the assertion of step 1.2 at the next index. An earlier gap, eigensolver, residual or budget return creates no further pass.",
++          "step": "2.1",
++          "inputs": [
++            "given",
++            "F1",
++            "F2",
++            "step 1.2",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-3.1",
++          "claim": "The base and induction step show that entered indices form an initial segment of $0,\\ldots,N$, with at most $N+1$ residual tests and $N$ updates. Index $N$ returns before any update. Every entered pass contains finitely many returning primitives, so the procedure terminates with a stated status, including when $N=0$. These are only outer-work and status bounds.",
++          "step": "3.1",
++          "inputs": [
++            "given",
++            "F1",
++            "F2",
++            "step 1.1",
++            "step 1.2",
++            "step 2.1",
++            "discharge-induction"
++          ]
++        }
++      ],
++      "routine_steps": [],
++      "boundaries": [
++        {
++          "case": "empty",
++          "status": "not_applicable",
++          "reason": "Admissible inputs specify an initial point, so an empty input domain is excluded; zero update budget is treated separately."
++        },
++        {
++          "case": "zero",
++          "status": "checked",
++          "evidence": "Proof 3.1 explicitly includes N=0: at most one entered pass, with no update. Earlier failure or tolerance returns remain stated statuses."
++        },
++        {
++          "case": "one",
++          "status": "checked",
++          "evidence": "Proof 1.1 initializes the first pass and Proof 2.1 covers its only possible update when N=1; Proof 3.1 bounds the two entered passes."
++        },
++        {
++          "case": "degenerate",
++          "status": "checked",
++          "evidence": "Proof 2.1 and 3.1 allow an immediate early return, which only shortens the finite index segment; no tolerance attainment is assumed."
++        },
++        {
++          "case": "endpoints",
++          "status": "checked",
++          "evidence": "Proof 3.1 returns at entered index N before another update; the index-zero endpoint is initialized in Proof 1.1."
++        },
++        {
++          "case": "nonempty-choice",
++          "status": "not_applicable",
++          "reason": "The procedures have supplied initial data and returning primitives; the finite counter proof selects no arbitrary family of witnesses."
++        },
++        {
++          "case": "iff-forward",
++          "status": "not_applicable",
++          "reason": "This is a conditional work/status implication, not an equivalence."
++        },
++        {
++          "case": "iff-reverse",
++          "status": "not_applicable",
++          "reason": "This is a conditional work/status implication, not an equivalence."
++        }
++      ],
++      "finite_smoke": [],
++      "risk_review": {
++        "status": "complete",
++        "reviewer": "original3 same-session completion",
++        "notes": "Exact local induction and returning-primitive qualifications accepted in the original-owner final result; no convergence, success, backend-cost or independently read external proof is asserted."
++      }
+     }
+   }
+ }

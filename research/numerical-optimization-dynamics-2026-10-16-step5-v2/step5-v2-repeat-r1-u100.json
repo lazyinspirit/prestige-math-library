@@ -1,0 +1,268 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "100",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "6b216d018763c195a95295fb56cb166b2379a48763391d036e46bd4d96e57efc",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The cited explicit stage-map requires an open time-state domain containing its base point, which the supplied f on [0,T] does not provide at t=0. Replaced the invalid invocation by the finite lower-triangular recursion with the existing finite-horizon membership and failure checks. No extension or choice principle is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "33f076c2c9f31999b3d236e161f191eeaf4d7d43f9acb282d00bf76a944ffb06",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Defining defects without imposing d_j=0 leaves independent node states unconstrained: for f=0, x0=0, N=1, and an admissible X_{1,0}=1, the old exhaustive constraint list admits a spurious feasible tuple. Both multiple shooting and collocation now impose every continuity equality, and the complete constraint list and KKT equality residual explicitly include them. The existing independent terminal-node domain check already resolves the Step-4 concern and was preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+      "disposition": "repaired",
+      "post_sha256": "4640aec1223a599588de021ef2c3a41c752d3a65830351d972db4d9564c7727b",
+      "review_context_sha256": "d76c39ea955a19afe7491690157501e221907b83981892f396f5263bdac2330c",
+      "reason": "The cited explicit stage-map requires an open time-state domain containing its base point, which the supplied f on [0,T] does not provide at t=0. Replaced the invalid invocation by the finite lower-triangular recursion with the existing finite-horizon membership and failure checks. No extension or choice principle is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "disposition": "repaired",
+      "post_sha256": "d159bd9c0355686a794591b41850e2d56b3a7e5397db5a26b909bd9bdd594a87",
+      "review_context_sha256": "ccd4ba0e3faf44a24123354145cb0ad3037b488b7356bcc572272e6f7dd81806",
+      "reason": "Defining defects without imposing d_j=0 leaves independent node states unconstrained: for f=0, x0=0, N=1, and an admissible X_{1,0}=1, the old exhaustive constraint list admits a spurious feasible tuple. Both multiple shooting and collocation now impose every continuity equality, and the complete constraint list and KKT equality residual explicitly include them. The existing independent terminal-node domain check already resolves the Step-4 concern and was preserved. Reviewed the fixed-time open stage domain, seed validation, exact linear solve, finite-iteration versus implicit-branch derivative conditions, and separate sampled-feasibility/error statuses against their actual supplier interfaces. No additional prerequisite or choice assumption is required.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+    "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+    "ex-ctrl1-chemical-dosing-linear-model",
+    "ex-ctrl1-single-versus-multiple-shooting-two-intervals",
+    "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+    "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent",
+    "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+    "thm-ctrl1-mesh-consistent-lqr-minimizers-converge",
+    "thm-ctrl1-objective-and-control-error-from-consistency-bounds"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "location": "Definition",
+      "reason": "The cited explicit stage-map requires an open time-state domain containing its base point, which the supplied f on [0,T] does not provide at t=0. Replaced the invalid invocation by the finite lower-triangular recursion with the existing finite-horizon membership and failure checks. No extension or choice principle is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "location": "Definition",
+      "reason": "Defining defects without imposing d_j=0 leaves independent node states unconstrained: for f=0, x0=0, N=1, and an admissible X_{1,0}=1, the old exhaustive constraint list admits a spurious feasible tuple. Both multiple shooting and collocation now impose every continuity equality, and the complete constraint list and KKT equality residual explicitly include them. The existing independent terminal-node domain check already resolves the Step-4 concern and was preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "evidence": [
+      "items/def-explicit-runge-kutta-tableau-and-stage-map.md: Definition requires open D and base pair in D",
+      "items/def-ctrl1-smooth-transcription-data.md: f is supplied only on [0,T] times open state/control domains",
+      "items/lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program.md: F1 and proof 1.1 use only the unchanged finite affine recursion"
+    ],
+    "source_reading": "No external sources consulted; familiar algebraic recursion and NLP constraints.",
+    "dependencies_unchanged": true,
+    "unresolved_obligations": [],
+    "next_action": "Controller-owned collection and current independent rejudgment; no worker judgment or certification written.",
+    "completed_items": [
+      "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+      "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription"
+    ],
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-ctrl1-runge-kutta-tableau-and-stage-collocation.md items/alg-ctrl1-runge-kutta-shooting-and-collocation-transcription.md --json",
+        "exit_code": 0,
+        "result": "2 files, 0 applicable proofs, 0 failures; both not-applicable"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-ctrl1-runge-kutta-tableau-and-stage-collocation.md items/alg-ctrl1-runge-kutta-shooting-and-collocation-transcription.md --json",
+        "exit_code": 0,
+        "result": "2 checked, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-100.proof-contracts.json --items def-ctrl1-runge-kutta-tableau-and-stage-collocation,alg-ctrl1-runge-kutta-shooting-and-collocation-transcription --strict --json",
+        "exit_code": 0,
+        "result": "both assigned contracts pass, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-ctrl1-runge-kutta-tableau-and-stage-collocation.md items/alg-ctrl1-runge-kutta-shooting-and-collocation-transcription.md",
+        "exit_code": 0,
+        "result": "2 items, 0 steps, 0 defects; run once after the final item edits"
+      }
+    ],
+    "repair_complete": true,
+    "consumer_examination": [
+      {
+        "supplier": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+        "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "path": "items/alg-ctrl1-runge-kutta-shooting-and-collocation-transcription.md",
+        "locator": "Definition / Inputs and Stage evaluation",
+        "source_excerpt": "an explicit tableau from [[def-explicit-runge-kutta-tableau-and-stage-map]] or a possibly implicit tableau from [[def-ctrl1-runge-kutta-tableau-and-stage-collocation]]",
+        "affected_use": "The consumer already spells out the explicit finite-horizon recursion and checks [0,T] before each query; it uses only the tableau coefficients and stage equations.",
+        "disposition": "repaired_for_separate_assigned_defect",
+        "minimality": "No consumer edit required for this supplier event; its own Statement/Definition is unchanged, except for the separately assigned algorithm repair.",
+        "route": "assigned-unit"
+      },
+      {
+        "supplier": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+        "id": "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+        "path": "items/lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program.md",
+        "locator": "F1 and proof 1.1",
+        "source_excerpt": "An explicit RK stage is a finite affine recursion in prior stages.",
+        "affected_use": "Only lower-triangular affine recursion and nonsingular implicit linear elimination are used. The replacement retains both equations, so the QP argument remains valid.",
+        "disposition": "unaffected",
+        "minimality": "The cited use remains valid; no consumer edit or further-hop propagation is necessary.",
+        "route": "ordinary-frontier-owner-accounting"
+      },
+      {
+        "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "id": "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent",
+        "path": "items/lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent.md",
+        "locator": "Statement, F2, proof 2.1",
+        "source_excerpt": "In the multiple-shooting NLP, impose the same initial state and continuity equations.",
+        "affected_use": "The proof explicitly assumes every continuity equality and uses induction to force the recursive states. The repaired algorithm now supplies those equalities.",
+        "disposition": "unaffected",
+        "minimality": "The cited use remains valid; no consumer edit or further-hop propagation is necessary.",
+        "route": "ordinary-frontier-owner-accounting"
+      },
+      {
+        "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "id": "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+        "path": "items/lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program.md",
+        "locator": "Statement, F2, proof 1.1",
+        "source_excerpt": "Thus the endpoint/defect equations and any retained stage equations are affine.",
+        "affected_use": "With linear dynamics each imposed defect is affine in the retained nodes and controls. Adding the missing equality to the supplier preserves the stated affine-constraint QP structure.",
+        "disposition": "unaffected",
+        "minimality": "The cited use remains valid; no consumer edit or further-hop propagation is necessary.",
+        "route": "ordinary-frontier-owner-accounting"
+      },
+      {
+        "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "id": "thm-ctrl1-mesh-consistent-lqr-minimizers-converge",
+        "path": "items/thm-ctrl1-mesh-consistent-lqr-minimizers-converge.md",
+        "locator": "Statement / discrete objectives and feasible sets",
+        "source_excerpt": "For each mesh index $N$, let $\\mathcal F_N\\subseteq\\mathcal F$ be nonempty, and let $J_N$ be the discrete transcription objective.",
+        "affected_use": "The theorem assumes nonempty feasible sets, continuous feasibility, uniform objective consistency and recovery separately. Imposing continuity changes the model but invalidates none of this conditional proof.",
+        "disposition": "unaffected",
+        "minimality": "The cited use remains valid; no consumer edit or further-hop propagation is necessary.",
+        "route": "ordinary-frontier-owner-accounting"
+      },
+      {
+        "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "id": "thm-ctrl1-objective-and-control-error-from-consistency-bounds",
+        "path": "items/thm-ctrl1-objective-and-control-error-from-consistency-bounds.md",
+        "locator": "Statement / finite objective comparison",
+        "source_excerpt": "Suppose the computed objective $J_N$ satisfies $|J_N(w)-J(w)|\\le\\delta_N$ for $w=u_N,v_N$",
+        "affected_use": "The bound assumes feasibility and the two objective comparisons, and its explicit estimate assumes state and quadrature errors. No proof step relies on unconstrained shooting nodes.",
+        "disposition": "unaffected",
+        "minimality": "The cited use remains valid; no consumer edit or further-hop propagation is necessary.",
+        "route": "ordinary-frontier-owner-accounting"
+      },
+      {
+        "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+        "path": "items/alg-ctrl1-finite-budget-transcription-solver-dispatch.md",
+        "locator": "Definition / constraint ordering, canonicalization and KKT residuals",
+        "source_excerpt": "retain existing equalities; and transform the quadratic objective by substitution.",
+        "affected_use": "The dispatcher consumes the full equality residual and matching multiplier ordering, retains all affine equalities in QP conversion and uses h,Dh in SQP. Thus the newly explicit defects are included without a consumer edit.",
+        "disposition": "unaffected",
+        "minimality": "The cited use remains valid; no consumer edit or further-hop propagation is necessary.",
+        "route": "ordinary-frontier-owner-accounting"
+      },
+      {
+        "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "id": "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+        "path": "items/thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription.md",
+        "locator": "F1 and proof 1.1",
+        "source_excerpt": "The transcription is a finite NLP with the objective and constraints returned by [[alg-ctrl1-runge-kutta-shooting-and-collocation-transcription]].",
+        "affected_use": "The local theorem separately assumes C3 regularity, a KKT pair, LICQ, strict complementarity and SOSC for the actual returned NLP; its mesh branch assumes residual consistency and sensitivity bounds. The added equalities do not bypass any hypothesis.",
+        "disposition": "unaffected",
+        "minimality": "The cited use remains valid; no consumer edit or further-hop propagation is necessary.",
+        "route": "ordinary-frontier-owner-accounting"
+      },
+      {
+        "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "id": "ex-ctrl1-single-versus-multiple-shooting-two-intervals",
+        "path": "items/ex-ctrl1-single-versus-multiple-shooting-two-intervals.md",
+        "locator": "Example and verification 2.1",
+        "source_excerpt": "Multiple shooting retains $x_1,x_2$ and imposes $x_1-v_0/2=0$, $x_2-x_1-v_1/2=0$.",
+        "affected_use": "The example already imposes exactly both continuity defects and substitutes them to obtain the reduced objective. The repaired algorithm agrees with this calculation.",
+        "disposition": "unaffected",
+        "minimality": "The cited use remains valid; no consumer edit or further-hop propagation is necessary.",
+        "route": "ordinary-frontier-owner-accounting"
+      },
+      {
+        "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "id": "ex-ctrl1-chemical-dosing-linear-model",
+        "path": "items/ex-ctrl1-chemical-dosing-linear-model.md",
+        "locator": "dependency declaration; Example and verification 2.1",
+        "source_excerpt": "The output is $x_1=x_0+K_2=\\frac12$ by [F2]",
+        "affected_use": "The actual use is a one-cell explicit-midpoint state update with zero costs; no independent shooting nodes or outer continuity constraints are used. Its computed value and error comparison are unchanged.",
+        "disposition": "unaffected",
+        "minimality": "The cited use remains valid; no consumer edit or further-hop propagation is necessary.",
+        "route": "ordinary-frontier-owner-accounting"
+      }
+    ],
+    "page_examination": {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/direct-transcription-and-numerical-ode-optimal-control.md",
+      "source_excerpt": "Exact single/multiple shooting equivalence is finite-dimensional, and convex quadratic transcriptions reduce to QPs when sampled weights and constraints meet the stated assumptions.",
+      "affected_use": "The page promises shooting/collocation transcriptions and continuity-based finite equivalence; the repaired constraints and finite-horizon recursion support the existing summary. No page repair is needed."
+    },
+    "published_consumers": {
+      "discovered": [],
+      "proposed_ledger_updates": [],
+      "reason": "Both suppliers have no aliases and all nine distinct direct item/reference consumers are draft members of the frozen frontier. No outside or published consumer was found; no maintenance edit or published-ledger change is proposed."
+    },
+    "contract_and_manifest": "Read both assigned contracts and the owning A/B page interfaces. Existing boundary claims still hold; item IDs, kinds, titles, dependencies and levels are unchanged, so no shared metadata edit is required.",
+    "interface_changes": [
+      {
+        "id": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+        "before_statement_sha256": "afe3055cbf8803267dd6d91138033f2f2acee5d3d5d6892cf809bda567ea2c89",
+        "after_statement_sha256": "61b63abf4ea8c5c61307a5107a52f4544c75a2f10ca92c4a14f7abeec3194901",
+        "change": "The final Definition sentence invoking the open-domain stage map was replaced by an explicit ordered recursion with finite-horizon checks."
+      },
+      {
+        "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "before_statement_sha256": "7e140f4eab09727d4e515636a11b60f056db9449a2c2dcac9cdaea380ead5921",
+        "after_statement_sha256": "0ad2ca3c211be329e016209dbf2dcccd366fa8af3f83cab7b335f934f4bae97c",
+        "change": "Definition / Transcription modes now imposes continuity equalities in both node-state modes and includes them in the complete constraint list and KKT equality residual."
+      }
+    ]
+  }
+}

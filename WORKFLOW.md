@@ -171,6 +171,8 @@ work.
 
 Finite-smoke obligations use named deterministic computations in `tools/finite-smoke.mjs` and exact source assertion excerpts in proof contracts. The registry includes finite covariance/rank, scalar Lasso and collinear-design witnesses, robust-estimator partition/rank/zero-data boundaries, deterministic replacement counterexamples, log-space binomial witnesses, bounded log-series checks for numerical constants, exact Rademacher and four-row regression witnesses, and finite Poisson-window and Strauss likelihood comparisons. Parameter values describe the finite model and must satisfy the check's domain. A finite-smoke pass checks only that model, not the general proof; a counterexample obligation passes when its stated false-claim witness is verified. Unknown names and stale assertion excerpts fail explicitly. Registry changes are validated by the authorized full gate battery; do not substitute an empty selection or fabricate success for an unsupported name.
 
+Numerical finite-smoke families are composed by `tools/finite-smoke-numerical.mjs` from domain modules and the shared `tools/finite-smoke-numerical-core.mjs`. They independently recompute bounded, fixed finite models using their authored selectors and input restrictions; these checks do not establish asymptotic rates or general convergence, stability, or existence theorems. Each contract row must name a registered check and include an exact assertion excerpt from the current item source. Duplicate numerical check names are rejected. Integrate row changes with their current per-row guards so concurrent boundary metadata is preserved, and validate the installed registry through the authorized native scoped full battery; do not run unrelated registry self-tests.
+
 Four finite Gaussian checks cover normal-normal posterior moments, working-normal coverage calibration, a truncated-normal support/TV witness, and one Gaussian-sequence coordinate's posterior and predictive law. `normal-normal-finite-n-posterior` uses n=1,2,5, tau=1/2,1,2 and sample means -2,0,3; `normal-working-model-calibration-boundary` uses z=1,2 and sigma=1/2,1,2, with alpha defined by the quantile relation; `boundary-posterior-support-and-tv-witness` uses n=1,4,16 and Delta=-2,0,2; `gaussian-sequence-one-coordinate-posterior` uses n=i=alpha=kappa_i=1 and observations -2,0,3. These fixed models use independent numerical integration of original Gaussian density products or interval probabilities, 4,096-panel Simpson quadrature, ten-standard-deviation moment windows and tolerance 1e-8. They do not verify CLTs, asymptotic posterior convergence, infinite products, or square-summable support. Their contract assertions must be exact source excerpts; fixture lists are fixed by the registry rather than contract parameters.
 
 The `anisotropic-real-norm-complex-homogeneity-witness` check uses exact Gaussian-integer pairs `[real, imaginary]`, positive integer weights `[1,2]`, vector `[1,0]` and scalar `[0,1]` to recompute `N(1)=1`, `N(i)=2` and `|i|=1`. It rejects a witness satisfying complex homogeneity, a different source normalization, or incorrect claimed values. This is finite counterexample sanity evidence; it does not verify the real norm axioms for all real coordinates.
@@ -239,6 +241,21 @@ An unknown source delta is never classified as metadata from hashes alone.
 A definition, algorithm or remark with no numbered proof may retain the exact
 original/current null contract; proof-bearing missing contracts remain errors.
 
+Stabilized `post-reader` acceptance may separately use
+`stabilized_source_identical_acceptance_continuities`, as specified in
+[tools/step3-owner-stabilized-source-identical-continuity.md](tools/step3-owner-stabilized-source-identical-continuity.md).
+Raw source bytes and per-item manifest carriers must match the authenticated pre-3a
+input; only preserved review metadata and explicitly authenticated supplier
+quotations may differ in the contract. Genuine successful native proof review remains the acceptance source;
+retained original proof reading and current focused acceptance are attributed
+separately when no fresh proof reread occurred. Added helpers require actual creator
+provenance, later independent native review and current native creation
+certification; a typed requirement for that certification is not evidence that
+it already exists. The ordinary battery produces the real certificate before
+closure freezes it. Marked `owner_repair_evidence_policy` receipts freeze the
+canonical owner registry and its explicit own-run evidence; old unmarked
+receipts retain their original artifact sets. No new coverage is supplied.
+
 For a validated same-ID prerequisite rehome, native assignment and reader-post
 snapshot bindings retain their original batch. Only current manifest and
 contract lookups use the authenticated current home. Mechanical source-level
@@ -293,6 +310,28 @@ naming that changed downstream manifest. The original closure path/hash remains;
 no prior certificate binding, native observation or mathematical acceptance is
 invented. Missing or changed evidence fails closed; other historical references
 stay strict and all gates retain their ordinary current inputs.
+
+Before the first Step-3 closure, authenticated full original downstream
+manifests may instead use the strict preclosure policy in
+[tools/step3-preclosure-manifest-continuity.md](tools/step3-preclosure-manifest-continuity.md).
+Original route entries and finding bindings remain unchanged. Exact original
+archives, current manifests, successful immutable native Alpha completions and
+truthfully dated root metadata reconciliation are bound separately. Historical
+and current page IDs, categories, kinds and per-page item inventories must
+agree; current ownership and direct dependencies remain checked. Only the
+explicit `manifest_evidence_policy` marker opts a new receipt into freezing
+both histories. No prior closure, reader observation or acceptance is invented;
+unmarked historical receipts keep their existing verification rules.
+
+An unchanged page may meet only the narrow `decision-not-applied` exception
+in [tools/step3-owner-unchanged-page-repairs.md](tools/step3-owner-unchanged-page-repairs.md)
+when its existing budget-status summary becomes true through its genuinely
+changed owned procedure. Successful native Alpha must independently confirm
+both separate fatal findings, explicitly review the unchanged page and causal
+repair, and retain both active fixed ledger rows. Exact original/current
+carriers, native results, prompt, report, decisions and causal literals remain
+bound. This grants no staleness, scope, acceptance or source-edit exception;
+marked owner-repair evidence closure freezes the complete supporting record.
 
 When a reader repairs some defects but cannot resolve another in the same
 draft, the owner may retain its original open finding through
@@ -428,6 +467,65 @@ collection already exists. Preparation accepts only that boundary or drained 5.2
 before owner dispatch; stale guards, missing individual confirmation, malformed or
 foreign subjects, duplicate entries, or a late admission fail closed.
 
+Version 2 is an explicit opt-in under the same admission kind and retains every
+version-1 frozen-frontier, original accepted-Luna, baseline/current-draft,
+initial-native-handoff, owner-confirmation, proposed-edit and pre-impact guard.
+Creation requires the actual paused, drained native 5.1 owner hold after every
+genuine initial unit completes and before the first impact pack freezes. The
+envelope adds `creation_state: {file, captured_at}` and
+`owner_gate_request: {file, id}` pointing to exact research archives of that
+native state and matching request, both raw-SHA256-bound in `bindings`.
+The request must name the same run, group and sole stage `5.1-adjudicate`;
+the archived state must be paused and drained. Its dispatch rows must match
+every successful initial native result and unit coverage, including genuine
+mechanical zero-work completions; worker results also retain exact immutable
+attempt and successful terminal execution checks. The root records the truthful
+archive capture time in `captured_at`, after the native request's `at`, and
+`recorded_at` must follow that capture. The native request must follow all
+completed initial dispatches. The native state has no update-time field;
+filesystem modification times confer no historical authority. Capture exact
+native bytes at this real hold; no synthetic paused state is permitted.
+Read-only validation still requires live paused, drained 5.1. Native impact
+preparation actually runs in drained, unpaused 5.2 before owner dispatch and
+authenticates these paused-creation archives while rechecking all original
+reports, current manifests and unchanged kept-item guards. It does not require
+or imply a new 5.2 pause. All current run manifests remain bound and each item
+must have a unique current owner. Version-1 behavior is unchanged.
+Each entry supplies typed `source_kind: concern` or
+`source_kind: alert` and `reader_batch` separately from owning `batch`.
+Concern entries retain the version-1 `concern_index`/`concern` fields and must
+come from the owning batch with actual `items_read` membership. Alert entries
+must come from a different genuine frozen reader batch, retain zero-based
+`alert_index` and the exact original `alert` object with `item: id`, and must
+not also supply concern fields. They never imply or alter `items_read`.
+
+The narrow alert route requires the successful original Sol 6.1 medium stable
+result to match its immutable attempt, its exact structured output to match the
+actual source digest, and a complete unaborted successful terminal result.
+`source_observation` records a bound native log/prompt and an exact
+`command_output_prefix` for a successful original `cat items/ID.md` read whose
+full returned source carrier occurs literally in that log. Its `source_excerpt`
+must be a literal quoted passage in the original alert finding and occur in both
+that archived source and the unchanged current source. Nonquoting or incomplete
+observations do not qualify for this narrow route. `source_continuity.source_file`
+is that exact full source archive, bound in the admission; its raw hash must match
+the owning batch's original post-3a snapshot. The bound original version-3
+Step-3 closure must seal that snapshot, predate the reader, and bind the same
+canonical guard as the archive, frozen Step-5 baseline and unchanged current
+source. These checks authenticate an actual observation; they invent no past
+read, cross-batch coverage or mathematical acceptance. Original alerts stay in
+their actual source digest and are never cloned into an owning digest.
+
+Native impact targets and same-reviewer ownership remain keyed only by `id`;
+the preserved typed finding and actual `reader_batch` travel in the ordinary
+owner pack. Owner repairs, any consequent supplier/consumer duties, current
+certification and judgments, source currency and every ordinary gate remain owed.
+When installing this adapter at a drained paused boundary, restart the native
+controller and any workflow host in fresh processes before resuming: the workflow
+statically imports this module, so reloading only a queried workflow URL cannot
+invalidate its already cached reader-admission dependency. Do not rewrite frozen
+packs or native history to load new code.
+
 The first ordinary 5.2 pack unions these explicit concern subjects with real
 consumer impacts and records their distinct origin. Mutable manifest preimages
 are archived by the existing supporting-evidence mechanism. The admission grants
@@ -466,6 +564,23 @@ and evidence are sealed before preparation, while separate current HEAD/index
 foreign residuals and all working bytes are preserved at the actual ref boundary.
 They grant record-level commit authority only, without mathematical acceptance
 or ownership of the entire shared carrier. Conflicts fail closed.
+Exact native v3 packaging preflight may observe the two future-derived
+`RUN-pathway-closure.json` and `RUN-judge-closure.json` carriers as absent before
+preparation/gates produce them. Every present carrier remains subject to the
+same regular-file and symlink checks. This grants no closure or gate credit:
+the actual final transaction requires both products, and ordinary native pathway
+and current-judge closure gates remain mandatory. Legacy preflight and final
+scope loading retain their existing strict closure requirements.
+
+Closeout ignore checks reuse the genuine parsed index for a bounded fast path:
+case-sensitive, nonsparse configuration, default ordinary index flags, safe
+literal subjects and no pathspec environment overrides. Exact indexed filenames
+and literal parent paths with indexed descendants retain native tracked-path
+exclusion; every remaining selected path receives actual Git ignore evaluation
+with `--no-index`. The parsed index's original raw snapshot and matching
+configuration must remain current around the check. Ambiguous states retain the
+original native command, including sparse/index-backed ignore handling. No path,
+ignore rule, scope/ref guard or present-carrier requirement is waived.
 
 Readiness and closeout treat both `ENOENT` and `ENOTDIR` as an absent path:
 a regular file cannot contain child evidence files. Readiness follows existing
@@ -591,6 +706,8 @@ Preserve historical run evidence rather than relabeling it. The retained authori
 
 Guarded same-ID relocation of proved prerequisites uses [tools/step3-owner-rehomes.md](tools/step3-owner-rehomes.md). It preserves the original Step-3a obligation batches while hashing actual current homes; it grants no new review coverage.
 
+Native auditor-created certification considers genuine successful immutable dispatch attempts as historical authoring windows, alongside the stable aliases retained for existing receipts. An immutable attempt must match its run, allowed role/label, attempt/replay filename and evidence tag, complete unaborted successful terminal result, and exact dispatched prompt identity. Identical stable/immutable observations count as one candidate window, preferring the immutable filename; new immutable links freeze the result and prompt bytes. A newer annotation-only dispatch does not erase an earlier authentic carrier-write window or supply coverage outside its own interval. Baseline exclusion, actual carrier time bounds, current carrier hashes and independent-review obligations remain unchanged.
+
 Current Step-3 owner repair helpers use `tools/auditor-created-items.mjs
 owner-create --run RUN --step 3 --id ITEM --evidence research/JSON` after
 stable source, manifest and proof-contract integration. Immutable origins bind
@@ -674,12 +791,139 @@ premises, including alias-resolved or indirect uses. Source/status review
 does not certify a solution. Keep established results awaiting local authoring
 as separate proof obligations, and preserve physical postulates/observations.
 
+The optional [initial metadata-history adapter](tools/step5-initial-metadata-history.md)
+preserves authenticated original Step5.1 handoffs when source-backed manifest
+title/dependency/level mirrors and the single declared source level label must
+be corrected before collection. Root records exact before/after archives at the
+actual paused, drained5.1 hold. Historical source reviews remain historical;
+the collection retains actual current hashes and explicitly queues the changed
+source for genuine Step5.2 review before certification. Later live repairs do
+not rewrite the archived repair-time graph. This grants no current review,
+judge credit, mathematical acceptance or gate exemption.
+
 Native Step 5 initial collection may preserve exact historical supporting proof-contract bytes through `tools/step5-quote-history.mjs`. The owner records the immutable `research/R-step5-v2/initial-1-owner-quote-history.json` only at a paused, drained 5.1 boundary. It binds the original successful native pack/report/dispatch and exact before/current archives, permits only citation quote mirrors verified against current source sections, and rejects every other metadata change. Collection freezes the original bytes using its existing content-addressed evidence path. This grants historical byte continuity only; current review, source currency, execution coverage, and every native gate remain required.
 
 Certified Step 5 rejudgment explicitly uses `judge-sweep.mjs --currency exact-context`: reusable verdicts must match both the current item and frozen context hashes, exactly as required by the round receipt. The ordinary sweep default remains `context-or-item`. Native retry preserves completed exact-context verdicts and calls only targets still owed; it never rewrites prior verdicts or adopts old-context consumer reviews.
+
+An optional owner-confirmed original Step5.1 open-finding registry routes explicit
+current repair requests for existing draft original-frontier items through
+[the native initial-scope finding adapter](tools/step5-initial-scope-findings.md).
+Creation requires paused, drained5.1 before the first impact freeze/dispatch and
+archives the actual runtime state and exact owner request. Actual drained5.2
+planning may be unpaused; it binds the authentic initial collection, all original
+handoffs, exact native findings, current source guards and individual root work
+instructions. These requests remain separate from Step4 reader concerns and
+adjudication decisions, preserve genuine same-reviewer origins and frozen input
+evidence, and grant no review coverage or exemption from ordinary certification,
+rejudgment, thresholds or gates. After impact freeze the registry is immutable.
 
 In centralized Step 5 mode, deletion protection covers the frozen frontier and its current transitive `deps`/`justified_by` suppliers, with canonical IDs taking precedence over the original native pack aliases. Missing protected inputs fail closed; absent original alias context retains strict global deletion rejection. Foreign deletions remain visible as `excluded.deleted` observations, excluded and not passed. Legacy mode retains its global deletion policy.
 
 Step 5 library inventory tolerates short concurrent-authoring read races with six bounded attempts for missing files, frontmatter, or matching IDs (five waits totaling at most 3.1 seconds per affected file). Persistent invalid inputs and other errors still fail; no item is skipped. Raw, guard and statement hashes come from the same successfully read source text. This provides per-item read consistency, not an atomic corpus snapshot; native frontier currency and certification checks remain mandatory.
 
 Step 5 inventory accepts explicit run context to keep frozen/current frontier items, explicit maintenance subjects and their transitive suppliers strict, with canonical IDs before current and historical aliases. Only after bounded read retries may an unavailable unrelated authoring carrier be excluded: its exact manifest ownership and active native author dispatch must be established, and it must be outside the required closure and declared frontier consumers. Valid outside items remain available for discovery. Content-addressed run-local observations bind the manifest, state and dispatch evidence and explicitly grant no mathematical review or certification coverage. Unowned, ambiguous or required unavailable inputs still fail. No other run is modified or controlled; unscoped callers retain strict inventory behavior.
+
+Explicit native owner `downstream_pending` entries are bounded unique frontier
+IDs already present in the same report's ordinary `downstream` and collected
+inventory. Continuation authenticates the unchanged original collected report,
+pack and successful Sol6.1/high dispatch against its immutable attempt.
+Native base-wave coverage is the bare lane; continuation coverage is the exact
+`phase:lane` stage unit, while reports retain the decoded bare lane. Initial
+adjudicator report handling is unchanged; the owner-wave helper alone validates
+the bounded pending extension against the actual frontier. A genuine
+current same-wave sibling review or later owner-pass review can discharge this
+work; an initial adjudicator review or earlier pass cannot. Only missing current
+work enters the next ordinary pass, defaulting to the actual declaring owner and
+its genuine persistent session. Existing stricter same-reviewer duties remain.
+New packs retain exact origin report paths and original affected-use text as
+`native_downstream_pending`, with bound report/result/attempt evidence; only new
+ordinary task files show that context. Existing packs, reports, admissions,
+receipts and task/prompt files are never rewritten. Closure recomputes genuine
+current coverage, and ordinary certification, judging and all gates remain owed.
+
+After active writers drain at an owner hold, the existing native `advance-impact`
+command may create the next real pass before gate permission/resume. This uses
+ordinary collection/progress transitions, grants no gate waiver and supplies no
+mathematical acceptance or refreshed old review. Workflow installation/reload
+still occurs only at the actual paused, drained boundary.
+
+An opt-in version-4 `step5-owner-current-repair-supplement` at the existing
+`repeat-N-owner-current-repairs.json` path resolves separately confirmed scope defects
+before the actual paused/drained 5.5 owner boundary passes its native gate. Its
+separate path coexists with versions 1–3 at the original supplement path;
+overlapping current review/decision rows must be exactly identical.
+It admits only typed entries: a genuine completed assigned confirmed-fatal
+repair that narrowed a frozen approved clause, or an exact original successful
+native `repair_notes` outside-lane alert about an unassigned unchanged draft
+frontier definition. Entries retain original report/result/attempt/prompt,
+frozen approved and native-post source archives, actual creation state/request,
+separate root finding, real repair attribution and actual current root reviews.
+The assigned branch preserves original outcome/type and fatal counts; the
+outside-alert branch supplies no rejection, decision or native full-reading
+claim. Only source-backed actual root defining-clause repairs qualify.
+
+The bounded existing-frontier scope includes all affected old/current direct
+consumers, propagating further only through actual defining-clause changes.
+No new native execution, fake open finding, native report rewrite or changed
+verdict is supplied. Collection preserves original native rows and separately
+attributes current root reviews/repairs; ordinary interface propagation,
+outside maintenance, ordinary 5.6 consumer work, 5.7 certification, current Sol judgment and every gate
+remain mandatory. Versions 1–3/default behavior are unchanged. Creation must
+precede the first 5.6 pack/dispatch; native collection consumes the authenticated
+paused creation after ordinary permission/resume in the same drained 5.5 stage.
+
+
+A completed native consumer-maintenance proof repair of an already certified
+run-created draft helper outside the immutable frontier may supply a separate
+`native-consumer-maintenance` certification basis. It is not a frontier review,
+new creation, adjudication decision or judgment. Certification authenticates the
+current closed wave's selected pack and collection, frozen assignments/tasks,
+original report, successful immutable native attempt and actual prompt, exact
+surgical reconstruction whose guard and `itemHashJudge` match the prior certified
+helper (raw maintenance hashes are distinct), unchanged metadata and
+Statement, current source bytes, and unchanged dependency/reference supplier
+source snapshots since the maintenance pack. Missing or stale evidence fails;
+Statement/Definition changes and ordinary outside items do not use this bridge.
+The certificate separately records this maintenance basis and centrally computes
+its actual current certification context. Original creation provenance, native
+reports, fatal counts, frozen frontier, consumer duties, Sol judgment scope and
+all ordinary gates remain unchanged. Still-current authenticated prior maintenance
+bases carry forward by helper ID on later waves; a genuine newer basis supersedes
+them, while stale source/supplier evidence fails rather than disappearing.
+Saved certification reuse also checks the
+current source and context of these maintained helpers. Install/reload changes
+only at an actual paused, drained boundary.
+
+
+A failed current native Step-6 v3 finalization, including a run that entered v3
+without an earlier cutover, may use mathematics `cutover-step6 --refresh` with
+its existing inspected owner-sealed authorization. It requires the stopped,
+paused/drained unfinished finalizer and genuine completed preceding battery.
+The transition does not reuse that battery: archive its actual history, reset
+only Step-6 dispatch/results/state through the native transition, then execute
+fresh preparation and every final gate before report/commit. Steps 1–5 and
+original Step-3 closure remain unchanged.
+
+The failed-refresh inspector authenticates actual completed failed dispatches
+and event pairs with the supported pre-ref source-change refusal messages.
+Success, unknown/pending transactions, commit-bearing or commit-landed results
+require separate recovery. The original Git base comes from an authenticated
+previous cutover, or, for a fresh v3 run, the already sealed native plan-projection
+original HEAD; no guessed base or current-HEAD shortcut is accepted. Independent
+foreign commits are allowed only when that base is an ancestor and every
+intervening commit has the identical exact owned HEAD projection. Current owned
+index rows must equal their authenticated bases with ordinary flags: separately
+sealed original index rows for shared plan/ledger projections, and the original
+HEAD for ordinary owned files. Absent original ordinary index evidence is not
+invented to admit staged owned differences. Shared foreign records retain their
+separate HEAD/index bytes. Any owned integration, movement, conflicting index,
+missing authority or race fails closed without resetting a ref or index.
+
+The exact current HEAD, raw index, owned projections, scope, source, state/events
+and failed-attempt basis are sealed in the refresh guards and rechecked before
+the one atomic native state swap. Original state/events, preparation, reports,
+results and authorization remain in the cutover archive/receipt chain; the event
+stream remains append-only. Neither code installation, inspection nor refresh
+creates coverage, changes foreign working/index/HEAD carriers, or authorizes
+publication/push. Tests for this repair were explicitly waived by the owner;
+that does not waive the fresh actual native Step-6 preparation and full battery.

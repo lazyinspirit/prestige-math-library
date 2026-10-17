@@ -1,0 +1,287 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-8.proof-contracts.json
++++ proposed/research/numerical-optimization-dynamics-2026-10-16-batch-8.proof-contracts.json
+@@ -400,10 +400,11 @@
+       "routine_steps": [],
+       "finite_smoke": [
+         {
+-          "check": "one-proposal-bernoulli-update",
+-          "asserts": "With z=1, N=1, and G(Y)f(Y) Bernoulli(1/2), the update has mean 1/2 and variance 1/4, equal to the bound z^2/(4N).",
++          "check": "numerical-particles-fixture",
++          "asserts": "Let $\\nu$ be a probability measure on $(E,\\mathcal E)$, $M$ a probability kernel on $E$, $G,f:E\\to[0,1]$ measurable, $z\\in[0,1]$, and $N\\ge1$. Draw $Y_1,\\ldots,Y_N$ IID from the probability law $\\nu M$. Put $a=N^{-1}\\sum_{i=1}^NG(Y_i)$. If $a>0$, set\n$\n\\eta^N=\\frac{\\sum_{i=1}^NG(Y_i)\\delta_{Y_i}}{Na};\n$\nif $a=0$, let $\\eta^N$ be any probability measure. Define the one-step unnormalized estimate $\\Gamma^N(f)=za\\,\\eta^N(f)$. Then\n$\n\\mathbb E[\\Gamma^N(f)]=z\\,\\nu M(Gf),\n\\qquad\n\\operatorname{Var}(\\Gamma^N(f))\\le\\frac{z^2}{4N}.\n$\nThe estimate is the normalizer update $za$ multiplied by the weighted empirical mean of $f$. The zero-weight fallback does not affect $\\Gamma^N$.",
+           "claim": "The one-step mean and variance formulas at a finite endpoint case.",
+-          "checked_in": "Step 2.1"
++          "checked_in": "Step 2.1",
++          "fixture": "one-proposal-bernoulli-update"
+         }
+       ],
+       "boundaries": [
+@@ -999,7 +1000,7 @@
+         {
+           "id": "def-axiom-of-choice",
+           "uses": [],
+-          "reason": "AC is inherited through the finite Feynman–Kac path-law and SIR suppliers. The finite event sequence and kernel conditions add no further selection."
++          "reason": "AC is inherited through the finite Feynman\u2013Kac path-law and SIR suppliers. The finite event sequence and kernel conditions add no further selection."
+         }
+       ],
+       "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+@@ -1049,7 +1050,7 @@
+           "fact": "F4",
+           "source": "def-feynman-kac-path-targets-and-normalizers",
+           "source_section": "Definition",
+-          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu–Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman–Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman–Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman–Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
++          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu\u2013Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman\u2013Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman\u2013Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman\u2013Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
+           "uses": [
+             "3.1"
+           ]
+@@ -1089,7 +1090,7 @@
+         },
+         {
+           "id": "derivation-3-1",
+-          "claim": "In the one-step Feynman–Kac model, the product of potentials is $\\mathbf1_{\\{\\mathtt{hit}\\}}$; [F4] therefore gives normalizer $\\int\\mathbf1_{\\{\\mathtt{hit}\\}}\\,d(\\mu\\kappa_m)=p_m$. The success events by budgets $m$ increase to $\\{\\tau_T<\\tau_R\\}$; countable additivity gives the limit identity.",
++          "claim": "In the one-step Feynman\u2013Kac model, the product of potentials is $\\mathbf1_{\\{\\mathtt{hit}\\}}$; [F4] therefore gives normalizer $\\int\\mathbf1_{\\{\\mathtt{hit}\\}}\\,d(\\mu\\kappa_m)=p_m$. The success events by budgets $m$ increase to $\\{\\tau_T<\\tau_R\\}$; countable additivity gives the limit identity.",
+           "step": "3.1",
+           "inputs": [
+             "A1",
+@@ -1150,7 +1151,7 @@
+           "uses": [
+             "3.1"
+           ],
+-          "reason": "AC is inherited only through the finite Markov path-law and Feynman–Kac suppliers; the measurable finite-status recursion uses no additional choice."
++          "reason": "AC is inherited only through the finite Markov path-law and Feynman\u2013Kac suppliers; the measurable finite-status recursion uses no additional choice."
+         }
+       ],
+       "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+@@ -1190,7 +1191,7 @@
+           "fact": "F4",
+           "source": "lem-finite-budget-stopped-normalizer",
+           "source_section": "Statement",
+-          "quote": "Under the hypotheses of [[def-finite-budget-stopped-event-kernel]], every $\\kappa_m$ is a measurable probability kernel from $E$ to $C$. For an initial probability law $\\mu$, let\n$\np_m=\\int_E\\kappa_m(x,\\{\\mathtt{hit}\\})\\,\\mu(dx).\n$\nThen $p_m=P_\\mu(\\tau_T<\\tau_R,\\ \\tau_T\\le m)$. In the one-step Feynman–Kac model with initial law $\\mu$, transition $\\kappa_m$, initial potential $1$, and terminal potential $\\mathbf1_{\\{\\mathtt{hit}\\}}$, the normalizer is exactly $p_m$. The limit $\\lim_{m\\to\\infty}p_m=P_\\mu(\\tau_T<\\tau_R)$ is the exact-hitting normalizer; an exact simulator with finite expected work requires a separate termination-cost bound.",
++          "quote": "Under the hypotheses of [[def-finite-budget-stopped-event-kernel]], every $\\kappa_m$ is a measurable probability kernel from $E$ to $C$. For an initial probability law $\\mu$, let\n$\np_m=\\int_E\\kappa_m(x,\\{\\mathtt{hit}\\})\\,\\mu(dx).\n$\nThen $p_m=P_\\mu(\\tau_T<\\tau_R,\\ \\tau_T\\le m)$. In the one-step Feynman\u2013Kac model with initial law $\\mu$, transition $\\kappa_m$, initial potential $1$, and terminal potential $\\mathbf1_{\\{\\mathtt{hit}\\}}$, the normalizer is exactly $p_m$. The limit $\\lim_{m\\to\\infty}p_m=P_\\mu(\\tau_T<\\tau_R)$ is the exact-hitting normalizer; an exact simulator with finite expected work requires a separate termination-cost bound.",
+           "uses": [
+             "1.1"
+           ]
+@@ -1208,7 +1209,7 @@
+           "fact": "F6",
+           "source": "def-feynman-kac-path-targets-and-normalizers",
+           "source_section": "Definition",
+-          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu–Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman–Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman–Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman–Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
++          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu\u2013Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman\u2013Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman\u2013Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman\u2013Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
+           "uses": [
+             "1.2"
+           ]
+@@ -1453,7 +1454,7 @@
+           "fact": "F2",
+           "source": "alg-fixed-level-sir-splitting",
+           "source_section": "Definition",
+-          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman–Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon–Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
++          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman\u2013Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon\u2013Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
+           "uses": [
+             "1.1",
+             "3.1"
+@@ -1566,7 +1567,7 @@
+             "1.1",
+             "3.1"
+           ],
+-          "reason": "AC is inherited through the Feynman–Kac finite path laws and the canonical particle-unbiasedness theorem. The finite level-recursion calculation adds no choice."
++          "reason": "AC is inherited through the Feynman\u2013Kac finite path laws and the canonical particle-unbiasedness theorem. The finite level-recursion calculation adds no choice."
+         }
+       ],
+       "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+@@ -1598,7 +1599,7 @@
+           "fact": "F2",
+           "source": "alg-fixed-level-sir-splitting",
+           "source_section": "Definition",
+-          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman–Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon–Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
++          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman\u2013Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon\u2013Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
+           "uses": [
+             "1.2",
+             "2.1",
+@@ -1618,7 +1619,7 @@
+           "fact": "F4",
+           "source": "thm-fixed-level-sir-estimator-unbiased",
+           "source_section": "Statement",
+-          "quote": "Use the full-resampling SIR model in [[alg-fixed-level-sir-splitting]] with $N\\ge1$, positive level probabilities, and each $K_\\ell$ supported on $A_\\ell$ and invariant for $\\pi_\\ell=P(\\,\\cdot\\mid A_\\ell)$. Then every prefix Feynman–Kac normalizer is $Z_\\ell=P(A_\\ell)$, and the product normalizer estimate $\\widehat p$ is unbiased:\n$\n\\mathbb E[\\widehat p]=P(A_L).\n$\nThis conclusion asserts no finite-$N$ variance bound, accuracy guarantee, or uniform-in-rarity efficiency.",
++          "quote": "Use the full-resampling SIR model in [[alg-fixed-level-sir-splitting]] with $N\\ge1$, positive level probabilities, and each $K_\\ell$ supported on $A_\\ell$ and invariant for $\\pi_\\ell=P(\\,\\cdot\\mid A_\\ell)$. Then every prefix Feynman\u2013Kac normalizer is $Z_\\ell=P(A_\\ell)$, and the product normalizer estimate $\\widehat p$ is unbiased:\n$\n\\mathbb E[\\widehat p]=P(A_L).\n$\nThis conclusion asserts no finite-$N$ variance bound, accuracy guarantee, or uniform-in-rarity efficiency.",
+           "uses": [
+             "1.1",
+             "4.1"
+@@ -1628,7 +1629,7 @@
+           "fact": "F5",
+           "source": "def-feynman-kac-path-targets-and-normalizers",
+           "source_section": "Definition",
+-          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu–Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman–Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman–Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman–Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
++          "quote": "Assume AC and fix a finite horizon $T\\in\\mathbb N_0$. For each $0\\le k\\le T$, let $(\\mathsf X_k,\\mathcal X_k)$ be a standard Borel space. Let $\\mu_0$ be a probability measure on $\\mathsf X_0$, and for $1\\le k\\le T$ let $M_k:\\mathsf X_{k-1}\\rightsquigarrow\\mathsf X_k$ be a probability kernel. A **potential** at time $k$ is a finite-valued nonnegative measurable function $G_k:\\mathsf X_k\\to[0,\\infty)$. Write $\\mathsf X_{0:t}=\\prod_{k=0}^t\\mathsf X_k$ with its finite-product sigma-algebra.\n\nFor each $0\\le t\\le T$, let $P_t^M$ be the finite path law with ordered kernel integral $\\mu_0(dx_0)\\prod_{k=1}^tM_k(x_{k-1},dx_k)$, supplied by Ionescu\u2013Tulcea ([[thm-ionescu-tulcea-construction-of-a-markov-chain]]). The **unnormalized Feynman\u2013Kac path measure** is\n$$\\gamma_t(A)=\\int_{\\mathsf X_{0:t}}\\mathbf 1_A(x_{0:t})\\prod_{k=0}^tG_k(x_k)\\,P_t^M(dx_{0:t}),\\qquad A\\in\\bigotimes_{k=0}^t\\mathcal X_k.$$\nIts **normalizer** is $Z_t=\\gamma_t(\\mathsf X_{0:t})=\\gamma_t(1)\\in[0,\\infty]$. Only when $0<Z_t<\\infty$ define the normalized path target $\\pi_t^{\\mathrm{FK}}=\\gamma_t/Z_t$. The sequence $(\\gamma_t)$ with its kernels and potentials is the Feynman\u2013Kac flow.\n\nState-space filtering kernels are conditional-law versions as in [[def-state-space-filtering-laws]]. A Feynman\u2013Kac path target is not by itself an assertion that a pointwise conditional version has been selected at observation-null histories.",
+           "uses": [
+             "1.2"
+           ]
+@@ -1728,10 +1729,11 @@
+       "routine_steps": [],
+       "finite_smoke": [
+         {
+-          "check": "one-level-one-particle-event-model",
+-          "asserts": "For L=1, N=1, P uniform on {0,1}, and A1={0}, the estimate is Bernoulli(1/2), with exact MSE 1/4 below the bound (L+1)/(4N)=1/2.",
++          "check": "numerical-particles-fixture",
++          "asserts": "Use the full-resampling fixed-level SIR model of [[alg-fixed-level-sir-splitting]] on nested levels $A_0\\supseteq\\cdots\\supseteq A_L$, with $N\\ge1$ particles and positive finite prefixes $Z_p=P(A_p)>0$. Its event potentials satisfy $0\\le G_p\\le1$. Then\n$\n\\mathbb E[\\widehat p]=P(A_L),\\qquad\n\\mathbb E[(\\widehat p-P(A_L))^2]\n=\\operatorname{Var}(\\widehat p)\n\\le\\frac{L+1}{4N}.\n$\nThe bound is an absolute mean-square error bound for fixed $L$; it is not a relative-efficiency claim.",
+           "claim": "The absolute SIR MSE bound in a one-level finite model.",
+-          "checked_in": "Steps 1.1 and 2.2"
++          "checked_in": "Proof steps 1.1, 2.1, 3.1, and 4.1; fixed L=N=1 model only",
++          "fixture": "one-level-one-particle-event-model"
+         }
+       ],
+       "boundaries": [
+@@ -1784,7 +1786,7 @@
+             "2.1",
+             "3.1"
+           ],
+-          "reason": "AC is inherited through the Feynman–Kac, canonical SIR unbiasedness, and conditional-variance suppliers. The bounded-potential recursion adds no further choice."
++          "reason": "AC is inherited through the Feynman\u2013Kac, canonical SIR unbiasedness, and conditional-variance suppliers. The bounded-potential recursion adds no further choice."
+         }
+       ],
+       "supplier_observations": "Inspected the complete current Statement/Definition and Proof sections of every direct supplier in deps. Exact excerpts and each proof-step use are recorded above; no absent supplier or acceptance is assumed."
+@@ -1814,7 +1816,7 @@
+           "fact": "F2",
+           "source": "alg-fixed-level-sir-splitting",
+           "source_section": "Definition",
+-          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman–Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon–Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
++          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman\u2013Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon\u2013Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
+           "uses": [
+             "1.1",
+             "1.2",
+@@ -2025,10 +2027,11 @@
+       "routine_steps": [],
+       "finite_smoke": [
+         {
+-          "check": "barrier-two-moment-substitution",
+-          "asserts": "At a=2 the proposal is N(2,1), the event contribution is 1_{X>=2} exp(-2X+2), its mean is barPhi(2), and its second moment is e^4 barPhi(4).",
++          "check": "numerical-particles-fixture",
++          "asserts": "Take $P=N(0,1)$, target $A=[2,\\infty)$, and proposal $Q=N(2,1)$. The likelihood contribution is $Z=\\mathbf1_{\\{X\\ge2\\}}\\exp(-2X+2)$. The one-draw estimator is unbiased with finite second moment, with $\\mathbb E_Q Z=\\bar\\Phi(2)$ and $\\mathbb E_Q Z^2=e^4\\bar\\Phi(4)$.",
+           "claim": "The stated Gaussian contribution and moments at the fixed barrier.",
+-          "checked_in": "Steps 1.1 and 1.2"
++          "checked_in": "Verification steps 1.1 and 2.1; fixed bounded numerical moment evaluation only",
++          "fixture": "barrier-two-moment-substitution"
+         }
+       ],
+       "boundaries": [
+@@ -2143,10 +2146,11 @@
+       "routine_steps": [],
+       "finite_smoke": [
+         {
+-          "check": "equal-work-two-versus-four-levels",
+-          "asserts": "The four queue outcomes give p1=3/4 and p2=1/3; N=2,L=2 has work 4 and relative variance 4/3, while the augmented N=1,L=4 design has work 4 and relative variance 3.",
++          "check": "numerical-particles-fixture",
++          "asserts": "Consider a two-period single-server queue with no service during these two periods and independent Bernoulli arrivals $B_1,B_2$, each with probability $1/2$. Capacity is one, so overflow occurs when both arrivals occur. Let $A_1=\\{B_1+B_2\\ge1\\}$ and $A_2=\\{B_1+B_2=2\\}$. Then $P(A_1)=3/4$, $P(A_2\\mid A_1)=1/3$, and $P(A_2)=1/4$.\n\nUnder unit cost per conditional draw, use two draws at each of the two levels for work $4$. Compare with an augmented chain having two repeated $A_1$ levels before $A_2$, and one draw at each of four levels, also work $4$. The added levels have conditional probability one but the estimator has larger relative variance.",
+           "claim": "The redundant equal-work allocation has larger relative variance.",
+-          "checked_in": "Steps 1.1, 1.2, 2.1, and 2.2"
++          "checked_in": "Verification steps 1.1, 2.1, 2.2, and 3.1",
++          "fixture": "equal-work-two-versus-four-levels"
+         }
+       ],
+       "boundaries": [
+@@ -2352,10 +2356,11 @@
+       "routine_steps": [],
+       "finite_smoke": [
+         {
+-          "check": "four-point-dependent-level-coupling",
+-          "asserts": "For uniform Omega={1,2,3,4}, the constructed level indicators are both U, so E[H1 H2]=1/2 while P(A2)=1/4.",
++          "check": "numerical-particles-fixture",
++          "asserts": "1.1 Let $U,V$ be independent Bernoulli$(1/2)$. Construct the level-one sample by $X_1=1+V$ if $U=1$, and $X_1=3+V$ if $U=0$; then $X_1\\sim P$. Construct $X_2=1$ if $U=1$, and $X_2=2$ if $U=0$; then $X_2\\sim P(\\cdot\\mid A_1)$. [F1, given, construct]\n\n2.1 The correct marginal success probabilities are $P(X_1\\in A_1)=1/2$ and $P(X_2\\in A_2)=1/2$. But the two indicators both equal $U$, so their product has expectation $1/2$, while $P(A_2)=1/4$. Thus dependence biases the product despite both correct marginals, and it violates the independence condition in [F2]. [F1, F2, step 1.1, algebra]\n\n3.1 The unbiasedness conclusion in [F3] has the stated independence hypothesis; it cannot be applied to this coupling. The target counterexample refutes the proposed implication. [F2, F3, step 2.1] \u220e",
+           "claim": "Correct level marginals under dependent sampling do not imply an unbiased product.",
+-          "checked_in": "Steps 1.1 and 1.2"
++          "checked_in": "Counterexample steps 1.1, 2.1, and 3.1",
++          "fixture": "four-point-dependent-level-coupling"
+         }
+       ],
+       "boundaries": [
+@@ -2418,7 +2423,7 @@
+           "fact": "F2",
+           "source": "alg-fixed-level-sir-splitting",
+           "source_section": "Definition",
+-          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman–Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon–Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
++          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman\u2013Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon\u2013Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
+           "uses": [
+             "2.1"
+           ]
+@@ -2427,7 +2432,7 @@
+           "fact": "F3",
+           "source": "thm-fixed-level-sir-estimator-unbiased",
+           "source_section": "Statement",
+-          "quote": "Use the full-resampling SIR model in [[alg-fixed-level-sir-splitting]] with $N\\ge1$, positive level probabilities, and each $K_\\ell$ supported on $A_\\ell$ and invariant for $\\pi_\\ell=P(\\,\\cdot\\mid A_\\ell)$. Then every prefix Feynman–Kac normalizer is $Z_\\ell=P(A_\\ell)$, and the product normalizer estimate $\\widehat p$ is unbiased:\n$\n\\mathbb E[\\widehat p]=P(A_L).\n$\nThis conclusion asserts no finite-$N$ variance bound, accuracy guarantee, or uniform-in-rarity efficiency.",
++          "quote": "Use the full-resampling SIR model in [[alg-fixed-level-sir-splitting]] with $N\\ge1$, positive level probabilities, and each $K_\\ell$ supported on $A_\\ell$ and invariant for $\\pi_\\ell=P(\\,\\cdot\\mid A_\\ell)$. Then every prefix Feynman\u2013Kac normalizer is $Z_\\ell=P(A_\\ell)$, and the product normalizer estimate $\\widehat p$ is unbiased:\n$\n\\mathbb E[\\widehat p]=P(A_L).\n$\nThis conclusion asserts no finite-$N$ variance bound, accuracy guarantee, or uniform-in-rarity efficiency.",
+           "uses": [
+             "2.1"
+           ]
+@@ -2459,10 +2464,11 @@
+       "routine_steps": [],
+       "finite_smoke": [
+         {
+-          "check": "two-particle-zero-prefix-branch",
+-          "asserts": "For two IID uniform particles and A1={0}, P(both miss A1)=1/4 while P(A1)=1/2.",
++          "check": "numerical-particles-fixture",
++          "asserts": "Take $\\Omega=\\{0,1\\}$ with uniform law, a single level $A_1=\\{0\\}$, and $N=2$ SIR particles. The event probability is positive, but the all-zero initial potential branch has positive probability and returns the zero estimate.",
+           "claim": "A zero SIR prefix has positive probability even for a positive event.",
+-          "checked_in": "Step 1.1"
++          "checked_in": "Step 1.1",
++          "fixture": "two-particle-zero-prefix-branch"
+         }
+       ],
+       "boundaries": [
+@@ -2525,7 +2531,7 @@
+           "fact": "F2",
+           "source": "lem-finite-budget-stopped-normalizer",
+           "source_section": "Statement",
+-          "quote": "Under the hypotheses of [[def-finite-budget-stopped-event-kernel]], every $\\kappa_m$ is a measurable probability kernel from $E$ to $C$. For an initial probability law $\\mu$, let\n$\np_m=\\int_E\\kappa_m(x,\\{\\mathtt{hit}\\})\\,\\mu(dx).\n$\nThen $p_m=P_\\mu(\\tau_T<\\tau_R,\\ \\tau_T\\le m)$. In the one-step Feynman–Kac model with initial law $\\mu$, transition $\\kappa_m$, initial potential $1$, and terminal potential $\\mathbf1_{\\{\\mathtt{hit}\\}}$, the normalizer is exactly $p_m$. The limit $\\lim_{m\\to\\infty}p_m=P_\\mu(\\tau_T<\\tau_R)$ is the exact-hitting normalizer; an exact simulator with finite expected work requires a separate termination-cost bound.",
++          "quote": "Under the hypotheses of [[def-finite-budget-stopped-event-kernel]], every $\\kappa_m$ is a measurable probability kernel from $E$ to $C$. For an initial probability law $\\mu$, let\n$\np_m=\\int_E\\kappa_m(x,\\{\\mathtt{hit}\\})\\,\\mu(dx).\n$\nThen $p_m=P_\\mu(\\tau_T<\\tau_R,\\ \\tau_T\\le m)$. In the one-step Feynman\u2013Kac model with initial law $\\mu$, transition $\\kappa_m$, initial potential $1$, and terminal potential $\\mathbf1_{\\{\\mathtt{hit}\\}}$, the normalizer is exactly $p_m$. The limit $\\lim_{m\\to\\infty}p_m=P_\\mu(\\tau_T<\\tau_R)$ is the exact-hitting normalizer; an exact simulator with finite expected work requires a separate termination-cost bound.",
+           "uses": [
+             "2.1"
+           ]
+@@ -2534,7 +2540,7 @@
+           "fact": "F3",
+           "source": "lem-stopped-kernel-discretization-bias",
+           "source_section": "Statement",
+-          "quote": "Assume AC. In the stopped-event setup of [[def-finite-budget-stopped-event-kernel]], with $(E,\\mathcal E)$ standard Borel and initial probability law $\\mu$, let $p=P_\\mu(\\tau_T<\\tau_R)$ and let $p_m$ be the finite-budget normalizer of [[lem-finite-budget-stopped-normalizer]]. Then\n$\n0\\le p-p_m=P_\\mu(\\tau_T<\\tau_R,\\tau_T>m)\\le P_\\mu(\\tau_T\\wedge\\tau_R>m).\n$\nThus the finite-budget stopped normalizer estimates the truncated event; a rate for its bias requires a tail bound for the stopping time. Separately, assume AC and let both finite-horizon Feynman–Kac models have the same finite horizon $H\\in\\mathbb N_0$, the same standard Borel state spaces $(\\mathsf X_j,\\mathcal X_j)$ for $0\\le j\\le H$, the same initial law $\\mu_0$, and the same potentials $G_j:\\mathsf X_j\\to[0,1]$ for $0\\le j\\le H$. Let their transition kernels be $M_j,\\widetilde M_j:\\mathsf X_{j-1}\\rightsquigarrow\\mathsf X_j$ for $1\\le j\\le H$, and suppose\n$$\n\\sup_x\\|M_j(x,\\cdot)-\\widetilde M_j(x,\\cdot)\\|_{\\rm TV}\\le\\epsilon_j,\\qquad \\epsilon_j\\ge0,\n$$\nwhere $\\|\\nu-\\nu'\\|_{\\rm TV}=\\sup_B|\\nu(B)-\\nu'(B)|$. If $Z_H^M$ and $Z_H^{\\widetilde M}$ are the normalizers in the common Feynman–Kac setup of [[def-feynman-kac-path-targets-and-normalizers]], then $|Z_H^M-Z_H^{\\widetilde M}|\\le\\sum_{j=1}^H\\epsilon_j$. If a grid-detected crossing event $A_h$ is contained in a continuous-time target event $A$, its probability bias is exactly $P(A\\setminus A_h)$; no grid-error rate follows without a separate path regularity or crossing-probability bound.",
++          "quote": "Assume AC. In the stopped-event setup of [[def-finite-budget-stopped-event-kernel]], with $(E,\\mathcal E)$ standard Borel and initial probability law $\\mu$, let $p=P_\\mu(\\tau_T<\\tau_R)$ and let $p_m$ be the finite-budget normalizer of [[lem-finite-budget-stopped-normalizer]]. Then\n$\n0\\le p-p_m=P_\\mu(\\tau_T<\\tau_R,\\tau_T>m)\\le P_\\mu(\\tau_T\\wedge\\tau_R>m).\n$\nThus the finite-budget stopped normalizer estimates the truncated event; a rate for its bias requires a tail bound for the stopping time. Separately, assume AC and let both finite-horizon Feynman\u2013Kac models have the same finite horizon $H\\in\\mathbb N_0$, the same standard Borel state spaces $(\\mathsf X_j,\\mathcal X_j)$ for $0\\le j\\le H$, the same initial law $\\mu_0$, and the same potentials $G_j:\\mathsf X_j\\to[0,1]$ for $0\\le j\\le H$. Let their transition kernels be $M_j,\\widetilde M_j:\\mathsf X_{j-1}\\rightsquigarrow\\mathsf X_j$ for $1\\le j\\le H$, and suppose\n$$\n\\sup_x\\|M_j(x,\\cdot)-\\widetilde M_j(x,\\cdot)\\|_{\\rm TV}\\le\\epsilon_j,\\qquad \\epsilon_j\\ge0,\n$$\nwhere $\\|\\nu-\\nu'\\|_{\\rm TV}=\\sup_B|\\nu(B)-\\nu'(B)|$. If $Z_H^M$ and $Z_H^{\\widetilde M}$ are the normalizers in the common Feynman\u2013Kac setup of [[def-feynman-kac-path-targets-and-normalizers]], then $|Z_H^M-Z_H^{\\widetilde M}|\\le\\sum_{j=1}^H\\epsilon_j$. If a grid-detected crossing event $A_h$ is contained in a continuous-time target event $A$, its probability bias is exactly $P(A\\setminus A_h)$; no grid-error rate follows without a separate path regularity or crossing-probability bound.",
+           "uses": [
+             "2.1"
+           ]
+@@ -2566,10 +2572,11 @@
+       "routine_steps": [],
+       "finite_smoke": [
+         {
+-          "check": "deterministic-endpoint-grid-miss",
+-          "asserts": "For x(t)=1-2|t-1/2|, the continuous target probability is 1 and the endpoint-grid target probability is 0 at threshold 3/4.",
++          "check": "numerical-particles-fixture",
++          "asserts": "On $[0,1]$, let the deterministic continuous path be $x(t)=1-2|t-1/2|$, and define the target crossing event as $\\{\\sup_{0\\le t\\le1}x(t)\\ge3/4\\}$. Sampling only at grid times $\\{0,1\\}$ misses the crossing.",
+           "claim": "Finite grid detection can miss a continuous-time crossing.",
+-          "checked_in": "Steps 1.1 and 1.2"
++          "checked_in": "Steps 1.1 and 1.2",
++          "fixture": "deterministic-endpoint-grid-miss"
+         }
+       ],
+       "boundaries": [
+@@ -2751,7 +2758,7 @@
+           "fact": "F1",
+           "source": "alg-fixed-level-sir-splitting",
+           "source_section": "Definition",
+-          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman–Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon–Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
++          "quote": "Input the nested levels of [[def-nested-rare-event-levels]] on a standard Borel state space $(\\Omega,\\mathcal F)$, a particle count $N\\ge1$, and probability kernels $K_\\ell$ for $1\\le\\ell<L$. Each mutation kernel must satisfy\n$\nK_\\ell(x,A_\\ell)=1\\quad(x\\in A_\\ell),\\qquad \\pi_\\ell K_\\ell=\\pi_\\ell.\n$\nIf a required kernel is unavailable or violates its declared conditions, return mutation-kernel-unavailable.\n\nApply the canonical full-resampling sequential importance-resampling procedure of [[alg-sequential-importance-resampling]] to the following finite Feynman\u2013Kac model: initial law $P$, initial potential $G_0\\equiv1$, identity transition $M_1$, event potential $G_1=\\mathbf1_{A_1}$, and, for $2\\le\\ell\\le L$, transition $M_\\ell=K_{\\ell-1}$ and potential $G_\\ell=\\mathbf1_{A_\\ell}$. Use multinomial full resampling at every selection and proposal kernels equal to the target transitions, so each Radon\u2013Nikodym correction is one.\n\nReturn the SIR normalizer estimate $\\widehat p$ and the full particle output. If any incremental average event weight is zero, report status zero-particle-prefix and $\\widehat p=0$, as in the canonical SIR procedure. This status does not assert that the target probability is zero. The exact conditional level sampler is not inferred from the existence of an invariant kernel; kernel accessibility is an input requirement.",
+           "uses": [
+             "1.1",
+             "1.2"
+@@ -2814,7 +2821,7 @@
+           "fact": "F4",
+           "source": "thm-fixed-level-sir-estimator-unbiased",
+           "source_section": "Statement",
+-          "quote": "Use the full-resampling SIR model in [[alg-fixed-level-sir-splitting]] with $N\\ge1$, positive level probabilities, and each $K_\\ell$ supported on $A_\\ell$ and invariant for $\\pi_\\ell=P(\\,\\cdot\\mid A_\\ell)$. Then every prefix Feynman–Kac normalizer is $Z_\\ell=P(A_\\ell)$, and the product normalizer estimate $\\widehat p$ is unbiased:\n$\n\\mathbb E[\\widehat p]=P(A_L).\n$\nThis conclusion asserts no finite-$N$ variance bound, accuracy guarantee, or uniform-in-rarity efficiency.",
++          "quote": "Use the full-resampling SIR model in [[alg-fixed-level-sir-splitting]] with $N\\ge1$, positive level probabilities, and each $K_\\ell$ supported on $A_\\ell$ and invariant for $\\pi_\\ell=P(\\,\\cdot\\mid A_\\ell)$. Then every prefix Feynman\u2013Kac normalizer is $Z_\\ell=P(A_\\ell)$, and the product normalizer estimate $\\widehat p$ is unbiased:\n$\n\\mathbb E[\\widehat p]=P(A_L).\n$\nThis conclusion asserts no finite-$N$ variance bound, accuracy guarantee, or uniform-in-rarity efficiency.",
+           "uses": [
+             "2.1"
+           ]
+@@ -2910,7 +2917,7 @@
+           "uses": [
+             "1.1"
+           ],
+-          "reason": "Inherited through canonical SIR/Feynman–Kac and conditional-variance suppliers as declared in A1 and source axiom_use; no additional choice in the finite recursion."
++          "reason": "Inherited through canonical SIR/Feynman\u2013Kac and conditional-variance suppliers as declared in A1 and source axiom_use; no additional choice in the finite recursion."
+         }
+       ],
+       "supplier_observations": "Local-composition review only. Exact valid Statement/Definition quotes retained above. F2 cites the absolute-MSE theorem: its Statement supplies the bounded event model and its actual Proof 1.2/2.1 supplies the backward functions and conditional martingale identity used here; these helper facts are not quoted as though they occur in its Statement. The proof-section dependency was actually inspected. No new external reading, whole-supplier audit, native acceptance or historical review coverage claimed."

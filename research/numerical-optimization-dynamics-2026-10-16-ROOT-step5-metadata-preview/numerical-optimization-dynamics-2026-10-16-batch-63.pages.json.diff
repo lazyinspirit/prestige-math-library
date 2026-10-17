@@ -1,0 +1,213 @@
+--- a/research/numerical-optimization-dynamics-2026-10-16-batch-63.pages.json
++++ b/research/numerical-optimization-dynamics-2026-10-16-batch-63.pages.json
+@@ -106,7 +106,20 @@
+         "id": "lem-phase-bordered-shooting-jacobian-invertibility",
+         "kind": "lemma",
+         "title": "A simple neutral multiplier and transverse phase make the shooting Jacobian invertible",
+-        "deps": [],
++        "deps": [
++          "def-phase-bordered-periodic-orbit-bvp",
++          "def-local-periodic-orbit-poincare-and-floquet-data",
++          "lem-autonomous-periodic-orbit-has-neutral-floquet-multiplier",
++          "prop-simple-eigenvalues-admit-left-right-normalization",
++          "def-compatible-left-and-right-eigenvectors-for-a-simple-eigenvalue",
++          "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
++          "def-characteristic-polynomial-of-a-matrix",
++          "thm-jordan-form-exists-iff-the-characteristic-polynomial-splits",
++          "thm-complex-polynomial-has-exactly-degree-many-roots-counted-with-multiplicity",
++          "thm-rank-nullity",
++          "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
++          "thm-chain-rule-for-total-derivatives"
++        ],
+         "dependency_level": 2
+       },
+       {
+@@ -125,7 +138,16 @@
+         "id": "thm-validated-euler-flow-and-monodromy-enclosure-soundness",
+         "kind": "theorem",
+         "title": "The validated Euler tube encloses the exact periodic flow and monodromy matrix",
+-        "deps": [],
++        "deps": [
++          "alg-validated-euler-flow-and-monodromy-enclosure",
++          "def-verified-flow-variational-range-oracle",
++          "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
++          "thm-picard-lindelof-local-existence-and-uniqueness",
++          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
++          "thm-ftc-second-part",
++          "thm-continuous-implies-integrable",
++          "thm-monotonicity-of-the-integral"
++        ],
+         "dependency_level": 2,
+         "statement": "Let $H$, $K$, the range provider, $L,M$, and the initial box $Y_0=X_0\\times\\{I_d\\}\\times\\Theta$ satisfy [[def-verified-flow-variational-range-oracle]] and [[alg-validated-euler-flow-and-monodromy-enclosure]]. If that procedure returns success with boxes $Q_0,\\ldots,Q_{N-1}$ and $Y_N$, then for every $(x_0,\\theta)\\in X_0\\times\\Theta$ the unique solution of $y'=H(y)$ from $(x_0,I_d,\\theta)$ exists through time $1$, its trajectory on $[n/N,(n+1)/N]$ lies in $Q_n$, and its terminal state lies in $Y_N$. Consequently the endpoint state encloses $\\phi_\\theta(x_0)$ and the matrix block encloses $D_x\\phi_\\theta(x_0)$.\n\n"
+       },
+@@ -133,7 +155,20 @@
+         "id": "lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse",
+         "kind": "lemma",
+         "title": "A transverse phase border makes the periodic BVP linearization boundedly invertible",
+-        "deps": [],
++        "deps": [
++          "def-phase-bordered-periodic-orbit-bvp",
++          "lem-phase-bordered-shooting-jacobian-invertibility",
++          "def-linearized-two-point-bvp-operator-and-conditioning",
++          "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
++          "thm-gronwall-integral-inequality",
++          "thm-picard-lindelof-local-existence-and-uniqueness",
++          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
++          "thm-ftc-second-part",
++          "thm-chain-rule-for-total-derivatives",
++          "thm-norm-inequality-for-the-vector-valued-integral",
++          "thm-continuous-implies-integrable",
++          "thm-monotonicity-of-the-integral"
++        ],
+         "dependency_level": 3,
+         "statement": "Let $u_*(s)=(\\gamma(Ts),T)$, $0\\le s\\le1$, be the augmented solution from [[def-phase-bordered-periodic-orbit-bvp]] for a nonconstant $C^2$ autonomous periodic orbit of period $T>0$. Assume its phase multiplier $1$ is algebraically simple and its affine phase covector $c$ satisfies $c^\\top f(\\gamma(0))\\ne0$. For the continuous linearized BVP operator $\\mathcal L:X\\to Z$ of [[def-linearized-two-point-bvp-operator-and-conditioning]], define\n$$ A(s)=D\\widetilde f(u_*(s)),\\quad a_0=\\sup_{0\\le s\\le1}\\|A(s)\\|_2, \\quad B_2=D_2B(u_*(0),u_*(1)),\\quad K_J\\ge\\|J^{-1}\\|_{2\\to2}, $$\nwhere $J=\\begin{bmatrix}M-I&f(\\gamma(0))\\\\c^\\top&0\\end{bmatrix}$ and $M=D\\phi_T(\\gamma(0))$. Put $E=e^{a_0}$ and\n$$ K_{\\mathcal L}:=(1+a_0)\\left[E K_J(1+\\|B_2\\|_2E)+E\\right]+1. $$\nThen $\\mathcal L$ is bijective and $\\|\\mathcal L^{-1}\\|_{Z\\to X}\\le K_{\\mathcal L}$, with the spaces and norms defined in [[def-linearized-two-point-bvp-operator-and-conditioning]]. All constants are finite and explicit once the stated coefficient and shooting-inverse bounds are supplied.\n\n"
+       },
+@@ -154,7 +189,17 @@
+         "id": "def-validated-periodic-shooting-jet-enclosure",
+         "kind": "definition",
+         "title": "Certified residual, Jacobian, trajectory, and monodromy enclosures for periodic shooting",
+-        "deps": [],
++        "deps": [
++          "def-phase-bordered-periodic-orbit-bvp",
++          "def-verified-flow-variational-range-oracle",
++          "def-real-boxes-and-interval-jacobian-enclosures",
++          "alg-validated-euler-flow-and-monodromy-enclosure",
++          "thm-validated-euler-flow-and-monodromy-enclosure-soundness",
++          "lem-c1-ode-flow-on-common-tube",
++          "prop-shooting-residual-derivative",
++          "lem-real-interval-arithmetic-preserves-enclosure",
++          "lem-directed-dyadic-rounding-enclosure-and-error"
++        ],
+         "dependency_level": 5
+       },
+       {
+@@ -183,7 +228,21 @@
+         "id": "alg-validated-periodic-orbit-corrector",
+         "kind": "algorithm",
+         "title": "Finite-budget phase-fixed periodic-orbit correction and validation",
+-        "deps": [],
++        "deps": [
++          "alg-newton-correction-for-vector-residuals",
++          "def-certified-ivp-approximation-and-sensitivity-interface",
++          "def-phase-bordered-periodic-orbit-bvp",
++          "def-phase-bordered-multiple-shooting-and-midpoint-collocation",
++          "def-validated-periodic-shooting-jet-enclosure",
++          "alg-single-shooting-for-nonlinear-bvps",
++          "alg-multiple-shooting-for-nonlinear-bvps",
++          "alg-midpoint-collocation-for-nonlinear-bvps",
++          "alg-finite-budget-newton-for-vector-residuals",
++          "alg-krawczyk-root-certification",
++          "def-real-boxes-and-interval-jacobian-enclosures",
++          "def-verified-flow-variational-range-oracle",
++          "lem-real-interval-arithmetic-preserves-enclosure"
++        ],
+         "dependency_level": 6,
+         "justified_by": [
+           "thm-validated-periodic-orbit-certificate-soundness"
+@@ -193,7 +252,15 @@
+         "id": "lem-separated-simple-floquet-multiplier-perturbation-bound",
+         "kind": "lemma",
+         "title": "A separated simple Floquet multiplier has a left/right-conditioned finite enclosure",
+-        "deps": [],
++        "deps": [
++          "def-local-periodic-orbit-poincare-and-floquet-data",
++          "def-validated-periodic-shooting-jet-enclosure",
++          "thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x",
++          "prop-simple-eigenvalues-admit-left-right-normalization",
++          "def-compatible-left-and-right-eigenvectors-for-a-simple-eigenvalue",
++          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
++          "thm-jordan-form-exists-iff-the-characteristic-polynomial-splits"
++        ],
+         "dependency_level": 6
+       },
+       {
+@@ -242,28 +309,70 @@
+         "id": "alg-periodic-orbit-pseudoarclength-continuation",
+         "kind": "algorithm",
+         "title": "Finite pseudo-arclength continuation of phase-fixed periodic orbits",
+-        "deps": [],
++        "deps": [
++          "alg-validated-periodic-orbit-corrector",
++          "alg-pseudo-arclength-continuation-with-certified-local-corrector",
++          "lem-phase-bordered-shooting-jacobian-invertibility",
++          "thm-pseudo-arclength-local-newton-correction",
++          "thm-c2-ode-flow-on-common-tube",
++          "def-validated-periodic-shooting-jet-enclosure",
++          "def-ck-euclidean-maps-and-diffeomorphisms"
++        ],
+         "dependency_level": 7
+       },
+       {
+         "id": "thm-floquet-multiplier-cluster-certificate-soundness",
+         "kind": "theorem",
+         "title": "A verified contour count encloses every Floquet multiplier in a cluster",
+-        "deps": [],
++        "deps": [
++          "alg-floquet-multiplier-cluster-certifier",
++          "thm-complex-resolvent-cover-validator-soundness",
++          "thm-argument-principle-null-homologous-cycle",
++          "lem-positive-convex-polygon-winding-index",
++          "thm-determinant-differential-and-jacobis-formula",
++          "thm-principal-inverse-tangent-calculus",
++          "thm-alternating-series-test",
++          "thm-complex-polynomial-has-exactly-degree-many-roots-counted-with-multiplicity",
++          "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
++          "lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients",
++          "lem-complex-infinity-matrix-norm-submultiplicative",
++          "thm-mean-value-inequality"
++        ],
+         "dependency_level": 8
+       },
+       {
+         "id": "thm-validated-periodic-orbit-certificate-soundness",
+         "kind": "theorem",
+         "title": "A Krawczyk inclusion certifies a unique phase-fixed nonconstant periodic orbit",
+-        "deps": [],
++        "deps": [
++          "alg-validated-periodic-orbit-corrector",
++          "thm-krawczyk-inclusion-exclusion-and-uniqueness",
++          "prop-phase-bordered-bvp-root-equivalence",
++          "thm-validated-euler-flow-and-monodromy-enclosure-soundness"
++        ],
+         "dependency_level": 9
+       },
+       {
+         "id": "thm-orbital-stability-from-certified-floquet-multipliers",
+         "kind": "theorem",
+         "title": "Strict Floquet cluster enclosures certify orbital asymptotic stability",
+-        "deps": [],
++        "deps": [
++          "thm-floquet-multiplier-cluster-certificate-soundness",
++          "thm-validated-periodic-orbit-certificate-soundness",
++          "lem-periodic-poincare-spectrum-matches-transverse-monodromy",
++          "thm-poincare-map-stability-implies-orbital-stability",
++          "lem-autonomous-periodic-orbit-has-neutral-floquet-multiplier",
++          "lem-phase-bordered-shooting-jacobian-invertibility",
++          "alg-krawczyk-root-certification",
++          "lem-complex-infinity-neumann-inverse-norm-bound",
++          "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
++          "thm-chain-rule-for-total-derivatives",
++          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
++          "thm-jordan-form-exists-iff-the-characteristic-polynomial-splits",
++          "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
++          "lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients",
++          "thm-complex-polynomial-has-exactly-degree-many-roots-counted-with-multiplicity"
++        ],
+         "dependency_level": 10
+       }
+     ]
+@@ -315,7 +424,13 @@
+         "id": "ex-van-der-pol-stability-conditional-on-validated-enclosure",
+         "kind": "example",
+         "title": "Conditional van der Pol stability from a validated enclosure",
+-        "deps": [],
++        "deps": [
++          "alg-validated-periodic-orbit-corrector",
++          "thm-validated-periodic-orbit-certificate-soundness",
++          "alg-floquet-multiplier-cluster-certifier",
++          "thm-floquet-multiplier-cluster-certificate-soundness",
++          "thm-orbital-stability-from-certified-floquet-multipliers"
++        ],
+         "dependency_level": 11
+       }
+     ]

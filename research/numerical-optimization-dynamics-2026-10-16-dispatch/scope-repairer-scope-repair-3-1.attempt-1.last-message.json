@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "3",
+  "round": 1,
+  "reviewed_items": [
+    "alg-fixed-point-iteration",
+    "alg-newton-correction-for-vector-residuals",
+    "alg-forward-difference-jacobian",
+    "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+    "lem-forward-difference-jacobian-error-bound",
+    "alg-finite-budget-newton-for-vector-residuals",
+    "alg-damped-newton-for-vector-residuals",
+    "alg-finite-difference-newton-for-vector-residuals",
+    "thm-updated-jacobian-newton-local-quadratic-convergence",
+    "thm-damped-newton-vector-residual-accepted-merit-decrease",
+    "ex-nonlinear-equations-and-newton-methods-boundary-cases"
+  ],
+  "reviewed_pages": [
+    "nonlinear-equations-and-newton-methods",
+    "nonlinear-equations-and-newton-methods-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The Jacobian prerequisites, zero-based indexing, A-page hypotheses and attribution, and double-root neighborhood repair are complete. Escalation remains because the two algorithm Definitions still state properties that must live in separate proved result items, but no such items are in the authorized inventory; adding them requires owner scope expansion. The updated-Newton theorem’s Fact F4 now describes only the loop instructions. I also report a proof gap in a published prerequisite that does not affect these consumers’ standard-basis uses. The cited treatments likewise state local Newton behavior conditionally ([Hairer, Chapter VI](https://www.unige.ch/~hairer/poly/chap6.pdf), [FNC §4.5.2](https://fncbook.github.io/v1.0/nonlineqn/newtonsys.html)).",
+  "findings": [
+    {
+      "id": "jacobian-identity-prerequisite",
+      "type": "local",
+      "reason": "Added thm-total-derivative-computes-directional-and-partial-derivatives as a direct dependency and explicit premise at the assigned uses in the forward-difference algorithm and lemma, vector Newton remainder lemma, exact and damped Newton algorithms, and updated-Newton theorem."
+    },
+    {
+      "id": "forward-difference-indexing",
+      "type": "local",
+      "reason": "Reindexed the procedure, error bound, and finite-difference Newton input to 0≤i<n and stated n≥1. The lemma and algorithm consumers now match the corrected interface."
+    },
+    {
+      "id": "algorithm-property-placement",
+      "type": "scope",
+      "reason": "alg-fixed-point-iteration still places termination and operation counts in its Definition; alg-finite-budget-newton-for-vector-residuals still states its correction count there. Separate proved result items are required, but none are assigned and adding IDs would expand this inventory. The outside consumer thm-index-one-dae-finite-budget-solvers-terminate repeats the at-most-B claim in Fact F1 and uses it in Proof 1.1; the owner must reconcile that use if the property is relocated."
+    },
+    {
+      "id": "page-a-hypotheses",
+      "type": "local",
+      "reason": "The A-page now states the finite-difference result’s componentwise C², nonzero-increment, in-domain segment, and second-partial-bound hypotheses; it states the local Newton theorem’s C², simple-root, closed-ball, and Lipschitz-Jacobian assumptions; and it attributes accepted merit decrease to its theorem."
+    },
+    {
+      "id": "double-root-order-proof",
+      "type": "local",
+      "reason": "Step 2.2 now introduces a radius δ for the proposed local bound and chooses e<min{δ,1/(2C)} when C>0, or any 0<e<δ when C=0."
+    },
+    {
+      "id": "thm-total-derivative-zero-direction-proof",
+      "type": "outside-batch",
+      "reason": "In the published theorem, Proof steps 1.1–2.1 divide by ||tv|| and do not handle v=0, for which that denominator is always zero. The zero-direction claim is directly true, and assigned consumers use v=e_j with n≥1, so the matrix-identification subargument they need remains valid. The published proof needs owner repair."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-forward-difference-jacobian",
+      "decision": "accept",
+      "reason": "Its C¹-to-Jacobian use is now explicit and its standard-basis indices follow the library convention."
+    },
+    {
+      "id": "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+      "decision": "accept",
+      "reason": "The DF-to-Jacobian identity is now an explicit prerequisite for the chain-rule use."
+    },
+    {
+      "id": "lem-forward-difference-jacobian-error-bound",
+      "decision": "accept",
+      "reason": "The statement, proof, and dependency now use the zero-based coordinates and the declared DF-to-Jacobian result."
+    },
+    {
+      "id": "alg-finite-budget-newton-for-vector-residuals",
+      "decision": "accept",
+      "reason": "The C¹ Jacobian identification is now an explicit prerequisite; the theorem’s Fact F4 no longer relies on the misplaced count claim."
+    },
+    {
+      "id": "alg-damped-newton-for-vector-residuals",
+      "decision": "accept",
+      "reason": "The C¹ Jacobian identification is now explicit in its Definition and dependencies."
+    },
+    {
+      "id": "alg-finite-difference-newton-for-vector-residuals",
+      "decision": "accept",
+      "reason": "Its increment-vector input now matches the corrected forward-difference interface."
+    },
+    {
+      "id": "thm-updated-jacobian-newton-local-quadratic-convergence",
+      "decision": "accept",
+      "reason": "The DF-to-Jacobian premise is explicit; Fact F4 now records the procedure’s instructions without asserting an operation count."
+    },
+    {
+      "id": "thm-damped-newton-vector-residual-accepted-merit-decrease",
+      "decision": "accept",
+      "reason": "Its accepted-step proof follows the algorithm’s explicit acceptance condition; the A-page now attributes the result to this theorem."
+    },
+    {
+      "id": "ex-nonlinear-equations-and-newton-methods-boundary-cases",
+      "decision": "accept",
+      "reason": "The double-root argument now restricts its counterexample to the neighborhood of any proposed local bound."
+    },
+    {
+      "id": "nonlinear-equations-and-newton-methods",
+      "decision": "accept",
+      "reason": "The A-page now states the material hypotheses and attributes the accepted merit decrease correctly."
+    },
+    {
+      "id": "nonlinear-equations-and-newton-methods-examples",
+      "decision": "accept",
+      "reason": "The B-page inventory and summary remain consistent with the reviewed example."
+    },
+    {
+      "id": "thm-index-one-dae-finite-budget-solvers-terminate",
+      "decision": "escalate",
+      "reason": "Outside the authorized write scope; its Fact F1 repeats the at-most-B claim and Proof 1.1 uses it. The owner must reconcile this consumer if the algorithm property is relocated."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+[
+  {
+    "argv": [
+      "node",
+      "tools/tsx-run.mjs",
+      "tools/precheck.mts",
+      "items/alg-finite-budget-rattle-step-with-scaled-residuals.md",
+      "items/thm-finite-budget-rattle-solver-returns-status.md",
+      "items/thm-rattle-scaled-solve-residual-error-budget.md"
+    ],
+    "started_at": "2026-10-16T09:55:39.159899+00:00",
+    "ended_at": "2026-10-16T09:55:39.384617+00:00",
+    "exit_code": 1,
+    "stdout": "REPAIR items/thm-finite-budget-rattle-solver-returns-status.md: passes only after auto-repair \u2014 adopt the canonical form:\n  | **Given:** Finite nonnegative budgets $N_q,N_p$, a consistent input, and the algorithm in the Statement; for nonzero $h$, also its supplied open branch balls, $C^1$ residual maps defined on those balls, returning evaluation/arithmetic/norm/domain-test primitives, and terminating exact factorization and retained-factor solve backends.\n  | \n  | [F1] [[alg-finite-budget-rattle-step-with-scaled-residuals]]: for nonzero $h$ the procedure makes at most one position solve and, only if that returns `root`, one momentum solve; for $h=0$ it immediately returns `exact-identity`. Every failure status and returned last valid iterate is specified by the procedure.\n  | \n  | [F2] [[alg-newton-chord-implicit-residual-with-factorization-reuse]]: chord mode enters successive indices $k=0,\\ldots,N$. At each index it evaluates the residual and tests its norm; it returns `root` when the tolerance is met, and at $k=N$ otherwise returns `iteration-budget-exhausted` before another correction. At a continuing index it refreshes on schedule, returns `singular-jacobian` for a singular factorization, obtains a correction from the retained factor solve, returns `invalid-trial` if the trial leaves the open domain, and otherwise advances to $k+1$. Its admitted primitives and exact backend operations terminate.\n  | \n  | \n  | \n  | 1.1 If $h=0$, [F1] returns `exact-identity` immediately. For nonzero $h$, consider either chord call with budget $N$ and refresh period $1$. Its initial iterate lies in its open domain. At index $k$, its residual evaluation and norm comparison terminate by the admitted primitive contract. The tolerance and budget branches return the current valid iterate and its actual residual norm. If neither branch returns, then $k<N$; one terminating Jacobian evaluation and factorization attempt either return `singular-jacobian` with this same data or supply a retained factor. Its terminating exact solve produces the correction. The returning domain test either returns `invalid-trial` with the old valid iterate and evaluated residual or admits the new iterate and increments the index. Thus induction preserves domain membership and validity of all returned residual data. [F1, F2, given, induction]\n  | \n  | 2.1 Every continuing pass strictly increments $k$, and an entered pass $k=N$ returns before a factorization or correction. Consequently there are at most $N+1$ residual checks and at most $N$ correction attempts, Jacobian assemblies, factorization attempts, and retained-factor solves. Each pass consists of finitely many returning operations by step 1.1, so the call terminates, including when $N=0$. These are counts of loop operations, not a uniform bound on the internal cost of a supplied evaluation or backend. [F2, step 1.1, induction]\n  | \n  | 3.1 Apply step 2.1 first with $N=N_q$. A non-root position status is returned immediately with its last valid multiplier and actual residual, without a momentum call. On position success the finite assignments in [F1] form the momentum residual. The all-$\\lambda\\in U_q$ admissibility condition ensures that even this approximate returned position multiplier supplies a $C^1$ momentum residual on the whole open $U_p$ with returning evaluations. Apply step 2.1 with $N=N_p$ to the second call. Any failure returns the last valid momentum multiplier and actual tangency residual together with the successful position-stage values. If it succeeds, the remaining assignments and output norms terminate and return the prescribed state, both multipliers, residual norms, and success status. There are at most two calls, at most $N_q+N_p+2$ loop residual checks, and at most $N_q+N_p$ correction/factorization/solve attempts in total. No branch or count asserts success for every finite budget, an exact zero from a positive tolerance, or a forward-error certificate. [F1, F2, given, step 1.1, step 2.1, algebra] \u220e\nPASS items/thm-rattle-scaled-solve-residual-error-budget.md (direct)\n\n2 checked, 1 failing\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "node",
+      "tools/proof-layout.mjs",
+      "items/alg-finite-budget-rattle-step-with-scaled-residuals.md",
+      "items/thm-finite-budget-rattle-solver-returns-status.md",
+      "items/thm-rattle-scaled-solve-residual-error-budget.md"
+    ],
+    "started_at": "2026-10-16T09:55:39.384881+00:00",
+    "ended_at": "2026-10-16T09:55:40.055079+00:00",
+    "exit_code": 0,
+    "stdout": "proof-layout: 3 items, 9 steps, 0 defects\n",
+    "stderr": ""
+  }
+]

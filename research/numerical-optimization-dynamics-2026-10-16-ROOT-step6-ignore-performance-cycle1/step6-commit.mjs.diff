@@ -1,0 +1,23 @@
+--- tools/step6-commit.mjs
++++ tools/step6-commit.mjs
+@@ -7,7 +7,7 @@
+ import { tmpdir } from 'node:os';
+ import { ownedStep6Paths } from './step6-owned-inputs.mjs';
+ import { preflightCloseoutScope, git, textGit, gitPath, regularPath,
+-  treeEntries, indexEntries, fileState, refuseGitSideEffects, verifiedInertHook } from './run-commit-scope.mjs';
++  treeEntries, indexEntries, ignoredOwnedPaths, fileState, refuseGitSideEffects, verifiedInertHook } from './run-commit-scope.mjs';
+ import { runScope, sha256 } from './step6-lib.mjs';
+ 
+ const equal = (a, b, what) => {
+@@ -57,9 +57,8 @@
+     regularPath(root, row.file);
+   }
+   for (const path of localPaths) regularPath(root, path, true);
+-  const ignored = git(gitRoot, ['check-ignore', '-z', '--stdin'],
+-    { input: nul(paths), optional: true, literalPathspecs: false });
+-  if (ignored?.length) throw Error('step6 commit: an owned artifact is ignored');
++  const ignored = ignoredOwnedPaths(gitRoot, paths, preflightIndex);
++  if (ignored.length) throw Error('step6 commit: an owned artifact is ignored');
+   return { root, gitRoot, prefix, localPaths, paths, finalReceipt, policy, fragments: policy?.fragments ?? [],
+     owns: path => paths.includes(path) };
+ }

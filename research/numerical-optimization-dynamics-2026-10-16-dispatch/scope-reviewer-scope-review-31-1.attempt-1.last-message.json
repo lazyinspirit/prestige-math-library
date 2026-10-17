@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "31",
+  "round": 1,
+  "reviewed_items": [
+    "lem-shared-minimum-poisson-count-coupling",
+    "alg-explicit-poisson-tau-leaping",
+    "def-density-scaled-jump-and-chemical-langevin-generators",
+    "lem-poisson-tau-leap-moment-and-covariance-identities",
+    "thm-minimum-intensity-tau-leap-level-variance",
+    "alg-critical-reaction-binomial-guarded-tau-leaping",
+    "lem-bounded-rate-reaction-generator-dynkin-identity",
+    "lem-poisson-tau-leap-one-step-weak-defect",
+    "thm-density-scaled-chemical-langevin-model-error",
+    "thm-poisson-tau-leap-weak-order-one-with-exit-bound",
+    "cor-mlmc-complexity-for-poisson-tau-leaping",
+    "ex-minimum-intensity-coupling-reduces-one-step-variance",
+    "ex-chemical-langevin-near-empty-poisson-birth",
+    "ex-poisson-tau-leap-negative-population-pure-death",
+    "ex-binomial-guard-prevents-invalid-counts-but-changes-noise",
+    "ex-stiff-reversible-explicit-leap-mean-amplification"
+  ],
+  "reviewed_pages": [
+    "tau-leaping-and-reaction-diffusion-model-error",
+    "tau-leaping-and-reaction-diffusion-model-error-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The three earlier findings are resolved, and both recorded consumers were rechecked. The example still misstates the repaired empty-critical-set behavior; as this is the second review, escalate to the owner.",
+  "findings": [
+    {
+      "id": "ex-binomial-guard-prevents-invalid-counts-but-changes-noise",
+      "type": "local",
+      "reason": "Facts [A1] says the critical SSA subroutine returns no event when the critical set is empty, but the repaired algorithm explicitly skips the call and defines the result as no event. Align [A1] and its step-1.1 citation with the actual branch."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-binomial-guard-prevents-invalid-counts-but-changes-noise",
+      "decision": "escalate",
+      "reason": "Its proof now follows the skip branch, but [A1] retains the stale subroutine-return description."
+    },
+    {
+      "id": "cor-mlmc-complexity-for-poisson-tau-leaping",
+      "decision": "accept",
+      "reason": "Its algorithm reference only limits transfer of the Poisson guarantee; the MLMC proof is unaffected by the empty-set branch."
+    }
+  ]
+}

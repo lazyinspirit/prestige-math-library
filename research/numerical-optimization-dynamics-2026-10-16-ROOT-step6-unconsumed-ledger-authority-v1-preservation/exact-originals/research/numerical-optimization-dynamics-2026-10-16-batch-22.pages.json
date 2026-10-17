@@ -1,0 +1,697 @@
+[
+  {
+    "order": 2328,
+    "id": "nonlinear-boundary-value-solvers",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Nonlinear boundary-value solvers",
+    "companion": "nonlinear-boundary-value-solvers-examples",
+    "requires": [
+      "picard-lindelof-and-first-order-odes",
+      "nonlinear-equations-and-newton-methods"
+    ],
+    "items": [
+      {
+        "id": "def-nonlinear-two-point-bvp-and-boundary-residual",
+        "kind": "definition",
+        "title": "Square nonlinear two-point boundary-value problems and endpoint residuals",
+        "deps": [
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-interval"
+        ],
+        "justified_by": [],
+        "statement": "Define a d-dimensional first-order BVP on [a,b] by y'=f(t,y) and a square endpoint residual B(y(a),y(b))=0, with exactly d scalar boundary equations. A solution is a C1 IVP solution satisfying that endpoint equation. Define the shooting residual and the multiple-shooting continuity residuals on their admissible IVP domains; do not assert a solution exists or is unique.",
+        "strategy": "Fix the endpoint residual convention and state dimensions before constructing shooting or collocation systems.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes, Chapter I, §I.3.1 and §§I.4.1–I.4.3",
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "locator": "Full 107-page notes; BVP form and shooting/multiple-shooting definitions, printed pp. 17–24 (PDF pp. 18–25)."
+            },
+            {
+              "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10",
+              "url": "https://fncbook.com/tpbvp/",
+              "locator": "§10.1.1, Definition 10.1.1, PDF-free full web text, lines 54–108; endpoint boundary residuals and multiple BVP solutions."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-c1-ode-flow-on-common-tube",
+        "kind": "lemma",
+        "title": "Initial-data sensitivity of an ODE flow on a common compact tube",
+        "deps": [
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "thm-gronwall-integral-inequality",
+          "thm-heine-cantor-metric",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "thm-mean-value-inequality",
+          "thm-chain-rule-for-total-derivatives",
+          "def-c-one-map-and-local-inverse",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient"
+        ],
+        "justified_by": [],
+        "statement": "For a C1 vector field on a finite interval, assume the IVP solutions for initial states in an open neighborhood exist on that whole interval and remain in one compact convex tube contained in the field domain. Prove that the flow is C1 in the initial state and its derivative solves the variational integral equation S'=D_y f(t,phi)S, S(a)=I. The common-tube and existence assumptions are explicit; this is not a global differentiability claim.",
+        "strategy": "Use the Volterra equations, uniform continuity of D_y f on the compact tube, difference quotients, and Gronwall; prove Frechet differentiability rather than relying on continuous dependence alone.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes",
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "locator": "§I.1.3, printed p. 9 / PDF p. 10; sensitivity statement and variational equation. The note states the result but does not provide the difference-quotient proof authored here."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "def-certified-ivp-approximation-and-sensitivity-interface",
+        "kind": "definition",
+        "title": "Certified differentiable IVP approximation interface for shooting",
+        "deps": [
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "def-c-one-map-and-local-inverse",
+          "def-total-derivative-in-euclidean-space"
+        ],
+        "justified_by": [],
+        "statement": "Fix an interval $[a,b]$ and an open set $U\\subseteq\\mathbb R^d$ on which each exact IVP flow $\\phi(t;s)$ exists for all $t\\in[a,b]$. A **certified differentiable IVP evaluator** on $U$ declares a $C^1$ approximate endpoint map (here $C^1$ means total differentiability with continuous derivative entries) $\\widetilde\\Phi:U\\to\\mathbb R^d$ and a stated number $\\delta_{\\rm IVP}\\ge0$. A call at $s\\in U$ either returns failure or supplies a continuous approximate trajectory $\\widetilde\\phi(\\cdot;s)$, the endpoint $\\widetilde\\Phi(s)$ and the exact derivative $D\\widetilde\\Phi(s)$ for that numerical map, satisfying\n\n$$\\sup_{t\\in[a,b]}\\|\\widetilde\\phi(t;s)-\\phi(t;s)\\|_2\\le\\delta_{\\rm IVP},\\qquad \\widetilde\\Phi(s)=\\widetilde\\phi(b;s).$$\n\nThe same $\\delta_{\\rm IVP}$ bounds every successful call, uniformly in its initial state; no approximate trajectory or error bound is required at a failed call. The declared endpoint map remains $C^1$ on $U$ even when some calls fail. The returned derivative is not asserted to equal the derivative of the exact flow. This is an interface contract for a supplied method; it does not assert that any particular integrator satisfies the contract.",
+        "strategy": "Name the differentiability and certified trajectory-error outputs required to keep numerical IVP error separate from root residual error.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes",
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "locator": "§I.4.1, printed pp. 19–21 / PDF pp. 20–22; the shooting procedure evaluates the IVP and variational system separately."
+            },
+            {
+              "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10",
+              "url": "https://fncbook.com/shooting/",
+              "locator": "§10.2.1, Algorithm 10.2.1 and accompanying text, lines 168–250; IVP/root-solver composition and integration tolerance caveat."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-linearized-two-point-bvp-operator-and-conditioning",
+        "kind": "definition",
+        "title": "Continuous linearized BVP operator and its conditioning",
+        "deps": [
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "def-total-derivative-in-euclidean-space",
+          "def-c-one-map-and-local-inverse"
+        ],
+        "justified_by": [],
+        "statement": "Let y*∈C1([a,b],R^d) solve y′=f(t,y) and B(y(a),y(b))=0, with f and B C1 on open neighborhoods of the trajectory and endpoint pair. Put A(t)=D_y f(t,y*(t)), B₁=D₁B(y*(a),y*(b)), and B₂=D₂B(y*(a),y*(b)). On X=C1([a,b],R^d), with ||v||_X=||v||∞+||v′||∞, and Z=C([a,b],R^d)×R^d, with ||(g,q)||_Z=max(||g||∞,||q||₂), define the bounded linearized BVP operator L:X→Z by L v=(v′−A v, B₁v(a)+B₂v(b)). “Boundedly invertible” means bijective and its inverse L⁻¹:Z→X has finite operator norm; its value is the BVP conditioning constant used below.",
+        "strategy": "Define the exact linearization and its operator norm before invoking a continuous or discrete inverse bound.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes",
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "locator": "§I.3, printed pp. 17–19 / PDF pp. 18–20; BVP boundary maps and the distinction between existence/uniqueness and conditioning."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-midpoint-collocation-residual-for-bvps",
+        "kind": "definition",
+        "title": "Normalized implicit-midpoint collocation residual for a two-point BVP",
+        "deps": [
+          "def-nonlinear-two-point-bvp-and-boundary-residual"
+        ],
+        "justified_by": [],
+        "statement": "For a d-dimensional BVP on [a,b], an integer N≥1, h=(b−a)/N, t_i=a+ih, and nodes Y=(Y₀,…,Y_N) in the open set where f and B are defined at all evaluation points, define G_h(Y)∈R^{d(N+1)} by G_{h,i}(Y)=(Y_(i+1)−Y_i)/h−f(t_i+h/2,(Y_i+Y_(i+1))/2), i=0,…,N−1, and G_{h,N}(Y)=B(Y₀,Y_N). Use the maximum norm on node and residual blocks. A zero is intended to encode the implicit-midpoint equations and the boundary condition; the equivalence is proved separately. The normalization by h makes the algebraic residual scale explicit.",
+        "strategy": "Fix the mesh, average state, boundary row, and residual scaling so the discrete inverse and algebraic-error constants are uniform in h.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10",
+              "url": "https://fncbook.com/nonlinear/",
+              "locator": "§10.5, equations (10.5.1)–(10.5.4), lines 54–90; finite-dimensional nonlinear residual systems with boundary rows. Their discretization is not this midpoint scheme."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "prop-multiple-shooting-residual-zero-iff-bvp-solution",
+        "kind": "proposition",
+        "title": "Zeros of the exact multiple-shooting residual are exactly BVP solutions",
+        "deps": [
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "thm-picard-lindelof-local-existence-and-uniqueness"
+        ],
+        "justified_by": [],
+        "statement": "Fix a mesh $a=t_0<\\cdots<t_N=b$ and states $s_0,\\ldots,s_N$. Suppose the unique IVP solution from each segment start $s_i$ exists as a $C^1$ curve on $[t_i,t_{i+1}]$ for $0\\le i<N$, and $(s_0,s_N)\\in D_B$. The exact multiple-shooting residual has rows $\\phi_i(t_{i+1};s_i)-s_{i+1}$ and $B(s_0,s_N)$. For this fixed tuple, it vanishes exactly when there is a BVP solution $y$ with $y(t_i)=s_i$ for every $0\\le i\\le N$; that solution restricts to the given segment solutions on all mesh intervals.",
+        "strategy": "Vanishing continuity rows join endpoint and next initial values; uniqueness identifies every segment with the corresponding restriction of the global solution.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes",
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "locator": "§I.4.3, printed pp. 22–24 / PDF pp. 23–25; multiple-shooting continuity residuals."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "prop-shooting-residual-zero-iff-bvp-solution",
+        "kind": "proposition",
+        "title": "Zeros of the exact shooting residual are exactly BVP solutions",
+        "deps": [
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "thm-picard-lindelof-local-existence-and-uniqueness"
+        ],
+        "justified_by": [],
+        "statement": "On an open set $U$ of initial states, suppose each IVP has a unique solution $\\phi(\\cdot;s)$ on $[a,b]$ that is a $C^1$ curve, and $(s,\\phi(b;s))\\in D_B$ for every $s\\in U$. Define the exact shooting residual by $R(s)=B(s,\\phi(b;s))$. Then $R(s)=0$ if and only if $\\phi(\\cdot;s)$ is a BVP solution. Any BVP solution with initial state $s$ equals this shot.",
+        "strategy": "Use the endpoint-residual definition in both directions and IVP uniqueness to identify any BVP trajectory with its shot.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes",
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "locator": "§I.4.1, printed pp. 19–21 / PDF pp. 20–22; exact shooting residual construction."
+            },
+            {
+              "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10",
+              "url": "https://fncbook.com/shooting/",
+              "locator": "§10.2.1, Algorithm 10.2.1 and lines 151–250; shooting as a scalar/vector endpoint residual root problem."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "alg-midpoint-collocation-for-nonlinear-bvps",
+        "kind": "algorithm",
+        "title": "Finite-budget implicit-midpoint collocation for a nonlinear BVP",
+        "deps": [
+          "def-midpoint-collocation-residual-for-bvps",
+          "alg-finite-budget-newton-for-vector-residuals"
+        ],
+        "justified_by": [],
+        "statement": "Given a fixed uniform mesh, the open nodal domain and normalized residual G_h from [[def-midpoint-collocation-residual-for-bvps]], an initial node vector in that domain, residual tolerance τ≥0, and budget M∈N₀, apply [[alg-finite-budget-newton-for-vector-residuals]] to G_h using its exact Jacobian. Return the last node vector and root-tolerance, singular-Jacobian, invalid-trial, or budget-exhausted status. The algorithm itself asserts no convergence, branch choice, or discretization-error bound.",
+        "strategy": "Use the exact finite-dimensional residual and the current finite-budget Newton supplier; keep domain, singular, and budget statuses explicit.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10",
+              "url": "https://fncbook.com/nonlinear/",
+              "locator": "§10.5.1, Algorithm 10.5.1, lines 136–187; a nonlinear BVP discretization assembled as a finite system and solved with a finite numerical method."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-midpoint-bvp-discrete-linearized-inverse",
+        "kind": "lemma",
+        "title": "Uniform inverse bound for the sampled midpoint linearized BVP",
+        "deps": [
+          "def-midpoint-collocation-residual-for-bvps",
+          "def-linearized-two-point-bvp-operator-and-conditioning",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "thm-gronwall-integral-inequality",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-euclidean-space-complete",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "thm-norm-inequality-for-the-vector-valued-integral"
+        ],
+        "justified_by": [],
+        "statement": "Let f,B be C2 near an exact solution y*∈C3 of the square BVP, and suppose the continuous linearized operator L in [[def-linearized-two-point-bvp-operator-and-conditioning]] is boundedly invertible. For uniform meshes with h=(b−a)/N, let Y*_i=y*(t_i), and let J_h=D G_h(Y*) be the Jacobian of the normalized midpoint residual. Then there are h₀>0 and C<∞ such that for every 0<h≤h₀, J_h is invertible and ||J_h⁻¹||_{∞→∞}≤C, where the finite-dimensional maximum norms use the node and residual blocks. This is a local inverse statement at the sampled exact solution, not a nonlinear convergence theorem.",
+        "strategy": "Write the linearized collocation equations as a transfer recurrence, prove its fundamental matrix converges to the continuous one, and perturb the invertible boundary Schur complement.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter10: Nonlinearity and boundary conditions",
+              "url": "https://fncbook.com/nonlinear/",
+              "locator": "§10.5, nonlinear collocation residual and boundary rows, equations(10.5.1)–(10.5.4), and the Newton/quasi-Newton solution setting. This supplies discretization context only; its scheme is not the normalized implicit-midpoint scheme. The mesh-uniform midpoint Jacobian inverse bound is proved locally below, not imported from Gaussian collocation."
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, author-source revision2025.01.27, Chapter10, Collocation for linear problems",
+              "url": "https://raw.githubusercontent.com/fncbook/fnc/a280ed1a013393ee0a184dcbaa866522f35a3516/chapter10/linear.md",
+              "locator": "§10.4, Collocation and Accuracy and stability: exact endpoint rows, residual-to-error identity e=A^{-1}tau, and the explicitly stated need for a mesh-uniform inverse bound. The source omits the stability proof. The present normalized implicit-midpoint inverse proof is supplied locally using transfer convergence and the continuous boundary Schur complement; no Gaussian-collocation theorem is transferred."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "prop-midpoint-residual-zero-is-collocation",
+        "kind": "proposition",
+        "title": "Zeros of the normalized midpoint residual are precisely midpoint collocation solutions",
+        "deps": [
+          "def-midpoint-collocation-residual-for-bvps",
+          "def-nonlinear-two-point-bvp-and-boundary-residual"
+        ],
+        "justified_by": [],
+        "statement": "For any admissible node vector Y, G_h(Y)=0 if and only if each segment satisfies Y_(i+1)−Y_i=h f(t_i+h/2,(Y_i+Y_(i+1))/2) and B(Y₀,Y_N)=0. Equivalently, the piecewise-linear interpolant has slope equal to f at each segment midpoint state and satisfies the endpoint residual.",
+        "strategy": "Multiply each normalized interior residual row by the positive mesh width and read the boundary block unchanged.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10",
+              "url": "https://fncbook.com/nonlinear/",
+              "locator": "§10.5, equations (10.5.1)–(10.5.4), lines 54–90; finite nonlinear BVP residual system."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "prop-multiple-shooting-residual-block-jacobian",
+        "kind": "proposition",
+        "title": "The multiple-shooting Jacobian is bordered block-bidiagonal",
+        "deps": [
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "def-certified-ivp-approximation-and-sensitivity-interface",
+          "lem-c1-ode-flow-on-common-tube",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "justified_by": [],
+        "statement": "On an open product set where B and every exact or certified approximate segment endpoint map Ψ_i are C1, let F have rows Ψ_i(s_i)−s_(i+1), i=0,…,N−1, and final row B(s₀,s_N). Its derivative block row i has DΨ_i(s_i) in column i, −I_d in column i+1, and zero elsewhere; the boundary row has D_1B and D_2B in columns 0 and N and zero elsewhere (when N=1 these are the two distinct endpoint columns).",
+        "strategy": "Differentiate each residual row with respect to every segment-start block and use the variational equation for the one nontrivial derivative.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes",
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "locator": "§I.4.3, printed pp. 22–23 / PDF pp. 23–24; displayed block Jacobian and elimination."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "prop-shooting-residual-derivative",
+        "kind": "proposition",
+        "title": "Derivative of the nonlinear shooting residual",
+        "deps": [
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "def-certified-ivp-approximation-and-sensitivity-interface",
+          "lem-c1-ode-flow-on-common-tube",
+          "thm-chain-rule-for-total-derivatives",
+          "def-jacobian-matrix-and-gradient"
+        ],
+        "justified_by": [],
+        "statement": "Let Ψ:U→R^d be a C1 endpoint map on an open set U⊆R^d and let B be C1 on an open neighborhood of {(s,Ψ(s)):s∈U}. For R_Ψ(s)=B(s,Ψ(s)), R_Ψ is C1 and D R_Ψ(s)=D_1B(s,Ψ(s))+D_2B(s,Ψ(s))DΨ(s). In particular this applies to the exact flow endpoint map under the common-tube lemma and to the approximate endpoint map in the certified evaluator interface; the latter derivative is for that numerical map.",
+        "strategy": "Apply the total-derivative chain rule to the endpoint map and substitute the locally proved variational sensitivity.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes",
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "locator": "§I.4.1, printed p. 20 / PDF p. 21; the displayed shooting Jacobian formula."
+            },
+            {
+              "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10",
+              "url": "https://fncbook.com/shooting/",
+              "locator": "§10.2.1, equations (10.2.1)–(10.2.2), lines 151–170; endpoint residual formulation. The derivative formula is proved locally here."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "alg-multiple-shooting-for-nonlinear-bvps",
+        "kind": "algorithm",
+        "title": "Finite-budget multiple shooting for a nonlinear two-point BVP",
+        "deps": [
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "def-certified-ivp-approximation-and-sensitivity-interface",
+          "prop-multiple-shooting-residual-block-jacobian",
+          "alg-finite-budget-newton-for-vector-residuals",
+          "alg-newton-correction-for-vector-residuals"
+        ],
+        "justified_by": [],
+        "statement": "For a mesh a=t₀<⋯<t_N=b and segment starts s₀,…,s_N, define exact continuity rows Φ_i(s_i)−s_(i+1) and boundary row B(s₀,s_N). When certified evaluators are available on every segment, replace Φ_i by its approximate endpoint map Φ̃_i and use the resulting approximate residual and its exact derivative, whose block form is given by [[prop-multiple-shooting-residual-block-jacobian]]. Apply [[alg-finite-budget-newton-for-vector-residuals]] to this square d(N+1)-dimensional map and return the last segment starts, evaluator trajectories, and status. A residual-tolerance status concerns the map actually evaluated; it does not certify an exact BVP solution or global convergence.",
+        "strategy": "Use independent short-interval IVP flows and their variational matrices; couple them only through continuity and boundary residual equations.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes",
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "locator": "§I.4.3, printed pp. 22–24 / PDF pp. 23–25; segment continuity residuals, variational blocks, bordered block-bidiagonal Jacobian, and finite Newton loop."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-single-shooting-for-nonlinear-bvps",
+        "kind": "algorithm",
+        "title": "Finite-budget single shooting for a nonlinear two-point BVP",
+        "deps": [
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "def-certified-ivp-approximation-and-sensitivity-interface",
+          "prop-shooting-residual-derivative",
+          "alg-finite-budget-newton-for-vector-residuals",
+          "alg-newton-correction-for-vector-residuals"
+        ],
+        "justified_by": [],
+        "statement": "On an open set U of initial states, define the exact residual R(s)=B(s,Φ(s)) and, when the certified evaluator is available, the computed residual R̃(s)=B(s,Φ̃(s)). Run [[alg-finite-budget-newton-for-vector-residuals]] on R̃ with its exact derivative D R̃ supplied by [[prop-shooting-residual-derivative]]. Return the last initial state, its approximate trajectory, and the root-tolerance, singular-Jacobian, invalid-trial, evaluator-failure, or budget-exhausted status. A root status means only ||R̃||≤τ. It does not certify R=0 or global convergence.",
+        "strategy": "Compose the exact ODE flow and its locally proved sensitivity with the actual finite-budget square-residual Newton interface; keep domain and finite-budget failures visible.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes",
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "locator": "§I.4.1, printed pp. 19–21 / PDF pp. 20–22; shooting residual, variational sensitivity, Newton correction and status/tolerance loop."
+            },
+            {
+              "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10",
+              "url": "https://fncbook.com/shooting/",
+              "locator": "§§10.2.1–10.2.2, lines 151–250 and 508–623; terminal residual root formulation, IVP/root solver composition, and sensitivity-driven shooting instability. The local proofs here are complete and do not import the source code's guarantees."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-midpoint-collocation-local-branch-and-error-budget",
+        "kind": "theorem",
+        "title": "Local second-order midpoint collocation error with an algebraic residual budget",
+        "deps": [
+          "def-midpoint-collocation-residual-for-bvps",
+          "def-linearized-two-point-bvp-operator-and-conditioning",
+          "lem-midpoint-bvp-discrete-linearized-inverse",
+          "thm-banach-fixed-point",
+          "thm-euclidean-space-complete",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "justified_by": [],
+        "statement": "Let f,B be C2 near an exact solution y*∈C3 of the square BVP on [a,b], and suppose its continuous linearized BVP operator is boundedly invertible. For all sufficiently fine uniform meshes, the normalized midpoint residual G_h has a unique zero Y_h in a fixed-radius max-norm ball about the sampled vector Y*=(y*(t_i)); its Jacobian at Y_h is invertible with a bound independent of h. If P_hY denotes the piecewise-linear interpolant and a candidate Y in that ball satisfies ||G_h(Y)||∞≤ε_alg, then ||P_hY−y*||∞≤C(h²+ε_alg), with C independent of h. This is a local branch result only; it asserts no branch selection outside the ball or global Newton convergence.",
+        "strategy": "Bound the exact-sample midpoint residual by Ch2, use the uniform discrete inverse and a uniform second-derivative bound for a contraction, then convert the normalized residual into a solution error locally.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10",
+              "url": "https://fncbook.com/nonlinear/",
+              "locator": "§10.5, equations (10.5.1)–(10.5.4), lines 54–90; nonlinear finite residual systems with boundary equations, but no general convergence theorem."
+            }
+          ]
+        },
+        "proof_strategy": "contraction",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "cor-local-newton-convergence-for-midpoint-bvp-collocation",
+        "kind": "corollary",
+        "title": "Local Newton convergence on the selected midpoint collocation branch",
+        "deps": [
+          "def-midpoint-collocation-residual-for-bvps",
+          "alg-midpoint-collocation-for-nonlinear-bvps",
+          "thm-midpoint-collocation-local-branch-and-error-budget",
+          "thm-updated-jacobian-newton-local-quadratic-convergence"
+        ],
+        "justified_by": [],
+        "statement": "For each sufficiently fine mesh, let Y_h be the local midpoint residual root from [[thm-midpoint-collocation-local-branch-and-error-budget]]. The exact-Jacobian finite-budget Newton procedure applied to G_h has a positive-radius basin about Y_h on which each attempted update is defined and quadratic, because G_h is C2 and DG_h(Y_h) is invertible. The radius may depend on h unless uniform higher derivative bounds are separately established. A finite budget and arbitrary initial node vector receive no convergence guarantee.",
+        "strategy": "Transfer the discrete inverse and smooth residual bounds to the selected branch, then apply the verified exact Newton supplier under its explicit basin hypothesis.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer and G. Wanner, Solving Ordinary Differential Equations II, Chapter VI: Iterative Methods—Nonlinear Equations",
+              "url": "https://www.unige.ch/~hairer/poly/chap6.pdf",
+              "locator": "§VI.3, printed pp. 138–140 / PDF pp. 5–6; exact-Jacobian Newton correction and local theorem, mediated by the current local supplier item."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "cor-local-newton-convergence-for-shooting-bvp-residual",
+        "kind": "corollary",
+        "title": "Local Newton convergence for a simple nonlinear shooting root",
+        "deps": [
+          "alg-single-shooting-for-nonlinear-bvps",
+          "def-certified-ivp-approximation-and-sensitivity-interface",
+          "prop-shooting-residual-derivative",
+          "thm-updated-jacobian-newton-local-quadratic-convergence"
+        ],
+        "justified_by": [],
+        "statement": "Here $C^2$ means twice continuously differentiable. Let the exact shooting residual $R(s)=B(s,\\phi(b;s))$ be $C^2$ on an open neighborhood of a root $s^*$, with $R(s^*)=0$, $DR(s^*)$ invertible, and $DR$ Lipschitz on a closed ball about $s^*$. Assume there is an open neighborhood $U$ of $s^*$ on which the exact IVP flow is an evaluator satisfying [[def-certified-ivp-approximation-and-sensitivity-interface]] with $\\widetilde\\phi(\\cdot;s)=\\phi(\\cdot;s)$, $\\widetilde\\Phi(s)=\\phi(b;s)$, and $\\delta_{\\rm IVP}=0$. Also assume $B$ is $C^1$ on an open neighborhood of $\\{(s,\\phi(b;s)):s\\in U\\}$, as required by [[alg-single-shooting-for-nonlinear-bvps]]. Then there are $\\rho>0$ and $C>0$ such that, for every initial trial $s_0\\in\\overline B_2(s^*,\\rho)$, every attempted exact-Jacobian Newton update is defined, remains in this ball, and satisfies\n\n$$\\|s_{k+1}-s^*\\|_2\\le C\\|s_k-s^*\\|_2^2.$$\n\nA finite budget may stop before the residual tolerance is met. No arbitrary-start or global-convergence guarantee follows.",
+        "strategy": "Verify the exact Newton supplier's square-map, simple-root, Lipschitz-Jacobian, domain and basin hypotheses for the shooting residual; make no claim outside its local ball.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes",
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "locator": "§I.4.1, printed pp. 19–21 / PDF pp. 20–22; simple shooting residual, variational Jacobian, and Newton update."
+            },
+            {
+              "title": "E. Hairer and G. Wanner, Solving Ordinary Differential Equations II, Chapter VI: Iterative Methods—Nonlinear Equations",
+              "url": "https://www.unige.ch/~hairer/poly/chap6.pdf",
+              "locator": "§VI.3, printed pp. 138–140 / PDF pp. 5–6; exact-Jacobian Newton correction and local theorem, mediated by the current local supplier item."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-shooting-residual-error-budget",
+        "kind": "theorem",
+        "title": "Shooting error separates IVP integration and nonlinear residual error",
+        "deps": [
+          "lem-vector-newton-correction-error-under-lipschitz-jacobian",
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "def-certified-ivp-approximation-and-sensitivity-interface",
+          "alg-single-shooting-for-nonlinear-bvps",
+          "lem-c1-ode-flow-on-common-tube",
+          "prop-shooting-residual-derivative",
+          "prop-shooting-residual-zero-iff-bvp-solution",
+          "thm-gronwall-integral-inequality",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "justified_by": [],
+        "statement": "Let the exact shooting residual $R(s)=B(s,\\phi(b;s))$ have a root $s^*$ whose trajectory is a BVP solution. For some $r>0$, suppose $R$ is $C^2$ on an open neighborhood of $\\overline B_2(s^*,r)$ (twice continuously differentiable), $DR(s^*)$ is invertible, and $DR$ is $L_R$-Lipschitz on this ball, where $\\sigma:=\\|DR(s^*)^{-1}\\|_{\\rm op}^{-1}>0$ and $(L_R/2)r\\le\\sigma/2$. Assume a certified evaluator from [[def-certified-ivp-approximation-and-sensitivity-interface]] succeeds on this ball with uniform trajectory error $\\delta_{\\rm IVP}$, and that $B$ is $L_B$-Lipschitz in its terminal-state argument between the exact and approximate endpoints there. For any candidate $\\widehat s\\in\\overline B_2(s^*,r)$ with computed residual $\\|B(\\widehat s,\\widetilde\\Phi(\\widehat s))\\|_2\\le\\tau_{\\rm root}$,\n\n$$\\|\\widehat s-s^*\\|_2\\le\\frac{2}{\\sigma}(\\tau_{\\rm root}+L_B\\delta_{\\rm IVP}).$$\n\nIf, in addition, $f$ is $C^1$ on an open field domain $\\Omega$, and there are an open neighborhood $U\\supseteq\\overline B_2(s^*,r)$ and a compact convex $K\\subseteq\\Omega$ such that for every $s\\in U$ the IVP has a unique solution $\\phi(\\cdot;s)$ on $[a,b]$ with graph in $K$, and\n\n$\\|f(t,y)-f(t,z)\\|_2\\le L\\|y-z\\|_2\\quad\\text{whenever }(t,y),(t,z)\\in K,$\n\nthen the approximate trajectory from $\\widehat s$ differs uniformly from the exact BVP trajectory by at most\n\n$$\\delta_{\\rm IVP}+e^{L(b-a)}\\|\\widehat s-s^*\\|_2.$$\n\nThe integration and root-residual terms remain separate; the theorem makes no global solver-success claim.",
+        "strategy": "Use invertibility of DR(s*) to derive a local residual lower bound, compare the approximate and exact shooting residuals, and propagate initial-state error by Gronwall.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes",
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "locator": "§I.4.1 and §I.4.2, printed pp. 19–21 / PDF pp. 20–22; shooting residual, numerical IVP call, and sensitivity-driven ill-conditioning warning."
+            },
+            {
+              "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10",
+              "url": "https://fncbook.com/shooting/",
+              "locator": "§10.2.2, lines 508–623; explicit unstable shooting example and endpoint amplification. The residual-to-solution estimate is proved locally here."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2329,
+    "id": "nonlinear-boundary-value-solvers-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Nonlinear boundary-value solvers — Examples",
+    "companion": "nonlinear-boundary-value-solvers",
+    "requires": [
+      "nonlinear-boundary-value-solvers"
+    ],
+    "items": [
+      {
+        "id": "ex-midpoint-collocation-has-two-branches",
+        "kind": "example",
+        "title": "A midpoint BVP residual can have two simple solution branches",
+        "deps": [
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "def-midpoint-collocation-residual-for-bvps",
+          "prop-midpoint-residual-zero-is-collocation",
+          "alg-midpoint-collocation-for-nonlinear-bvps"
+        ],
+        "justified_by": [],
+        "statement": "For y'=0 on [0,1] with B(y(0),y(1))=y(0)^2-1, both constant solutions y=1 and y=-1 satisfy the exact BVP and every uniform midpoint collocation system; each discrete root is simple.",
+        "strategy": "Solve the continuity rows first, then the endpoint polynomial, and check the discrete Jacobian kernel at each root.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10",
+              "url": "https://fncbook.com/tpbvp/",
+              "locator": "§10.1.1, Example 10.1.1, lines 103–108; a boundary-value problem with multiple solutions. The scalar midpoint roots are verified directly here."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-unstable-single-shooting-amplifies-error",
+        "kind": "example",
+        "title": "Single shooting amplifies an initial-slope error on a decaying-mode BVP",
+        "deps": [
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "def-certified-ivp-approximation-and-sensitivity-interface",
+          "alg-single-shooting-for-nonlinear-bvps"
+        ],
+        "justified_by": [],
+        "statement": "For u''=lambda^2(u+1) on [0,1] with u(0)=-1 and u(1)=0, the scalar solution component remains bounded in [-1,0], while a perturbation of the unknown initial slope changes the terminal boundary residual component by delta*sinh(lambda)/lambda, an unbounded amplification as lambda increases.",
+        "strategy": "Solve the IVP family in closed form, compute its terminal residual and sensitivity exactly, and compare the bounded BVP solution to the perturbed shot.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "T. A. Driscoll and R. J. Braun, Fundamentals of Numerical Computation, Chapter 10",
+              "url": "https://fncbook.com/shooting/",
+              "locator": "§10.2.2, equations (10.2.3)–(10.2.6), lines 508–623; decaying-mode BVP and exponential endpoint sensitivity."
+            },
+            {
+              "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes",
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "locator": "§I.4.2, Example I.4.2, printed pp. 21–22 / PDF pp. 22–23; an unstable shooting warning example and exact amplification."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-newton-shooting-fails-from-singular-start",
+        "kind": "example",
+        "title": "A valid shooting BVP can fail Newton at a singular initial guess",
+        "deps": [
+          "def-nonlinear-two-point-bvp-and-boundary-residual",
+          "def-certified-ivp-approximation-and-sensitivity-interface",
+          "alg-single-shooting-for-nonlinear-bvps",
+          "prop-shooting-residual-derivative",
+          "cor-local-newton-convergence-for-shooting-bvp-residual"
+        ],
+        "justified_by": [],
+        "statement": "For y'=0 with endpoint residual B(y(0),y(1))=y(0)^2-1, roots exist at s=±1, but exact-Jacobian Newton started at s=0 returns singular-jacobian because R'(0)=0; local convergence near a simple root does not imply global convergence.",
+        "strategy": "Compute the exact shooting residual and its derivative, verify both roots and the singular initial Jacobian, then compare with the local theorem's simple-root basin.",
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Verfürth, Numerical Methods and Stochastics, Part I: Numerical Methods, Lecture Notes",
+              "url": "https://homepages.rub.de/ruediger.verfuerth/files/lectures/NMS.pdf",
+              "locator": "§I.3.3 and §I.4.1, printed pp. 19–20 / PDF pp. 20–21; BVP existence/branch dependence and Newton shooting formulation."
+            },
+            {
+              "title": "E. Hairer and G. Wanner, Solving Ordinary Differential Equations II, Chapter VI: Iterative Methods—Nonlinear Equations",
+              "url": "https://www.unige.ch/~hairer/poly/chap6.pdf",
+              "locator": "§VI.3, printed pp. 138–140 / PDF pp. 5–6; local Newton assumptions and basin distinction, mediated by the current local supplier item."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

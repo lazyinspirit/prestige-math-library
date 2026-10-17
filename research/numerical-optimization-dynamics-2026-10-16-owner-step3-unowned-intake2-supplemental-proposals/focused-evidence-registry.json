@@ -1,0 +1,192 @@
+[
+  {
+    "group": "batch-8",
+    "id": "thm-fixed-level-sir-estimator-unbiased",
+    "defect_id": "nod-b8-3a-unbiased-ac",
+    "status": "supported-owner-proposal",
+    "native_report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-8-3a.md",
+    "native_report_anchor": "Independent mathematical review / thm-fixed-level-sir-estimator-unbiased; Decisions and repairs",
+    "native_acceptance_basis": "Native Alpha8 explicitly reports independently repairing the unbiasedness Statement AC omission as nod-b8-3a-unbiased-ac, distinguishes it from the original refuter claims, and reviews its actual consumers. Its current six-entry decisions file never references this additional fixed row.",
+    "focused_evidence": "The current Statement begins Assume AC; A1 identifies the inherited Feynman–Kac/SIR axiom. Current Proof1.1/2.1 establishes positive event-prefix normalizers by invariant-law induction and3.1 invokes canonical particle unbiasedness. The actual thm-sequential-particle-estimator-is-unbiased Statement begins Assume AC, so the explicit addition meets that prerequisite without changing the probability formula or promising variance.",
+    "actual_source_sections": {
+      "Statement": "Assume AC. Use the full-resampling SIR model in [[alg-fixed-level-sir-splitting]] with $N\\ge1$, positive level probabilities, and each $K_\\ell$ supported on $A_\\ell$ and invariant for $\\pi_\\ell=P(\\,\\cdot\\mid A_\\ell)$. Then every prefix Feynman–Kac normalizer is $Z_\\ell=P(A_\\ell)$, and the product normalizer estimate $\\widehat p$ is unbiased:\n$\n\\mathbb E[\\widehat p]=P(A_L).\n$\nThis conclusion asserts no finite-$N$ variance bound, accuracy guarantee, or uniform-in-rarity efficiency.",
+      "Facts & Assumptions": "**Given:** The nested events, positive level probabilities, mutation kernels, full multinomial resampling, and finite particle count in [[alg-fixed-level-sir-splitting]].\n\n[A1] [[def-axiom-of-choice]]: AC is inherited through the Feynman–Kac path-law and SIR unbiasedness suppliers.\n\n[F1] [[def-nested-rare-event-levels]]: $\\pi_\\ell=P(\\,\\cdot\\mid A_\\ell)$ and $p_\\ell=P(A_\\ell)/P(A_{\\ell-1})>0$.\n\n[F2] [[alg-fixed-level-sir-splitting]]: $G_1=\\mathbf1_{A_1}$, $M_1$ is the identity, and $G_{\\ell+1}=\\mathbf1_{A_{\\ell+1}}$ follows mutation $K_\\ell$.\n\n[F3] [[lem-feynman-kac-path-measures-satisfy-forward-recursion]]: The next normalizer is obtained by integrating the next potential against the preceding normalized target and its transition kernel.\n\n[F4] [[thm-sequential-particle-estimator-is-unbiased]]: Full-resampling SIR estimates each nonnegative Feynman–Kac normalizer without bias when every prefix normalizer is finite and positive.",
+      "focused_proof_steps": [
+        "1.1 The initial law is $P$, $G_0\\equiv1$, and $M_1$ is the identity. Therefore the first weighted normalizer is $Z_1=P(A_1)$, and the normalized state law after the event potential is $\\pi_1$. [A1, F1, F2, given]",
+        "2.1 Suppose the normalized law after level $\\ell$ is $\\pi_\\ell$ and $Z_\\ell=P(A_\\ell)$. The mutation $K_\\ell$ preserves $\\pi_\\ell$, so [F3] gives $ Z_{\\ell+1}=Z_\\ell\\int\\mathbf1_{A_{\\ell+1}}\\,d\\pi_\\ell =P(A_\\ell)p_{\\ell+1}=P(A_{\\ell+1}). $ The normalized next law is $P(\\,\\cdot\\mid A_{\\ell+1})=\\pi_{\\ell+1}$; induction proves all prefix normalizers are finite and positive. [F1, F3, step 1.1, given, induction]",
+        "3.1 Apply [F4] to the SIR model with all prefix normalizers from step 2.1 and the nonnegative terminal test $1$. It yields $\\mathbb E[\\widehat p]=Z_L=P(A_L)$. The conclusion is only unbiasedness; no second moment was estimated. [A1, F2, F4, step 2.1, given] ∎\n"
+      ]
+    },
+    "inspected_paths": [
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-8-3a.md",
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-8-3a-decisions.json",
+      "items/thm-fixed-level-sir-estimator-unbiased.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-8.pages.json"
+    ],
+    "limits": "No whole-proof rereview or fresh external-source reading claimed. Native report describes its actual prior review; supplemental proposal is owner-attributed."
+  },
+  {
+    "group": "batch-34",
+    "id": "thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases",
+    "defect_id": "numerical-optimization-dynamics-2026-10-16-b34-3a-collapsed-interval-top-component",
+    "status": "supported-owner-proposal",
+    "native_report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-34-3a.md",
+    "native_report_anchor": "Lanczos risk review; Decisions",
+    "native_acceptance_basis": "Native Alpha34 identifies exactly the collapsed-interval omission and its A=diag(2,1),b=e2 counterexample, adds Pb!=0 already used in Proof1.5, checks all direct item/reference consumers and synchronizes the manifest/contract. Its nine original routed decisions omit this separately discovered risk row.",
+    "focused_evidence": "Current Statement branch3 explicitly requires Pb!=0 when lambda_(r+1)=lambda_n. Current Proof1.5 uses that nonzero top component to place Pb in K2 with top Rayleigh quotient; the missing-component case remains covered by branch1. For the historical diag(2,1),e2 witness, Pb=0, so the formerly false branch is now excluded while the zero-top-component branch remains applicable.",
+    "actual_source_sections": {
+      "Statement": "Let $A\\in\\mathbb R^{n\\times n}$, $n\\ge1$, be symmetric with ordered eigenvalues\n$\\lambda_1\\ge\\cdots\\ge\\lambda_n$. Let $r$ be the multiplicity of $\\lambda_1$.\nIf $r<n$, assume $\\lambda_1>\\lambda_{r+1}$, and let $P$ be the orthogonal\nprojection onto the $\\lambda_1$-eigenspace. Let $b\\in\\mathbb R^n$ be a unit\nvector and, for $m\\ge1$, define\n\n$$K_m:=\\operatorname{span}\\{b,Ab,\\ldots,A^{m-1}b\\},\\qquad \\theta_m:=\\max_{0\\ne x\\in K_m}\\frac{x^{\\mathsf T}Ax}{x^{\\mathsf T}x}.$$\n\nThus $\\theta_m$ is the largest Rayleigh–Ritz value on $K_m$; if Lanczos runs\nthrough step $m$ without breakdown, it is the largest Ritz value of\n$Q_m^{\\mathsf T}AQ_m$. If $r=n$, then $A=\\lambda_1I$ and $\\theta_m=\\lambda_1$\nfor every $m\\ge1$. Suppose $r<n$.\n\n1. If $Pb=0$, then $\\theta_m\\le\\lambda_{r+1}$ for every $m$; no convergence\n   to $\\lambda_1$ is asserted.\n\n2. If $Pb\\ne0$, put\n   $$\\tau:=\\frac{\\|(I-P)b\\|_2}{\\|Pb\\|_2}.$$\n   If $\\lambda_{r+1}>\\lambda_n$, then for every $m\\ge1$,\n   $$0\\le\\lambda_1-\\theta_m\\le \\frac{(\\lambda_1-\\lambda_n)\\tau^2} {T_{m-1}\\!\\left(1+2\\frac{\\lambda_1-\\lambda_{r+1}} {\\lambda_{r+1}-\\lambda_n}\\right)^2}.$$\n   For a simple top eigenvalue ($r=1$), $\\tau$ is the tangent of the angle\n   between $b$ and a unit top eigenvector, so the starting-angle denominator\n   is explicit.\n\n3. If $Pb\\ne0$ and $\\lambda_{r+1}=\\lambda_n$, then\n   $$\\lambda_1-\\theta_1=(\\lambda_1-\\lambda_n) \\frac{\\|(I-P)b\\|_2^2}{\\|b\\|_2^2},\\qquad \\theta_m=\\lambda_1\\quad(m\\ge2).$$\n\nWhen $r<n$, $Pb\\ne0$, and exact Lanczos breakdown occurs at dimension $d$, then\n$\\theta_d=\\lambda_1$ and $K_m=K_d$ for all $m\\ge d$. These are exact-arithmetic\nclaims; they give no finite-precision grade-termination guarantee.",
+      "focused_proof_steps": [
+        "1.5 Assume $Pb\\ne0$ and $\\lambda_{r+1}=\\lambda_n$. The spectral decomposition gives $A=\\lambda_n I+(\\lambda_1-\\lambda_n)P$. Hence $Ab=\\lambda_n b+(\\lambda_1-\\lambda_n)Pb$, so [F7] gives $Pb\\in K_2$ and it has Rayleigh quotient $\\lambda_1$; this proves $\\theta_m=\\lambda_1$ for $m\\ge2$. For $m=1$, [F7] gives $K_1=\\operatorname{span}\\{b\\}$, and the same decomposition gives the displayed exact formula for $\\lambda_1-\\theta_1$. [given, F4, F7, algebra]"
+      ]
+    },
+    "inspected_paths": [
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-34-3a.md",
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-34-3a-decisions.json",
+      "items/thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-34.pages.json"
+    ],
+    "limits": "No whole-proof rereview or fresh external-source reading claimed. Native report describes its actual prior review; supplemental proposal is owner-attributed."
+  },
+  {
+    "group": "batch-40",
+    "id": "thm-projected-subgradient-best-and-average-bound",
+    "defect_id": "nod-b40-3a-subgradient-gap-order",
+    "status": "supported-owner-proposal",
+    "native_report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-40-3a.md",
+    "native_report_anchor": "thm-projected-subgradient-best-and-average-bound; Additional confirmed defects and consumer closure; Ledger and owner handoff",
+    "native_acceptance_basis": "Native Alpha40 confirms the false best-gap/average-gap ordering, records the exact |x| two-step witness and accepts the max-of-two-gaps repair with confidence1. It also corrects the fixed-step corollary and checks actual summary/consumer uses. The report explicitly requests owner supplemental routing; the sole original JSON decision is the unrelated Nelder–Mead finding.",
+    "focused_evidence": "Current Statement bounds max{minimum observed gap,averaged-point gap} by the existing telescoping upper bound. Proof1.1 bounds the weighted mean of gaps; Proof2.1 separately puts both the minimum and Jensen averaged-point gap below that mean. In the recorded x0=1,x1=-1,alpha0=alpha1=2 witness for |x|, best gap1 and average gap0 have no claimed ordering; both are licensed by the corrected maximum bound.",
+    "actual_source_sections": {
+      "Statement": "Let $C\\subseteq\\mathbb R^n$ be nonempty, closed, and convex, let $f:C\\to\\mathbb R$ be convex, and run [[alg-projected-subgradient-method]] for $N\\ge1$ steps with positive $\\alpha_k$. Assume all $N$ oracle calls return valid pairs. Suppose a global minimizer $x^*\\in C$ exists and the oracle vectors obey $\\|g_k\\|_2\\le G$; let $R\\ge\\|x_0-x^*\\|_2$. Set $A_N=\\sum_{k<N}\\alpha_k>0$ and $\\bar x_N=A_N^{-1}\\sum_{k<N}\\alpha_kx_k$. Then\n$$\\max\\left\\{\\min_{0\\le k<N}\\bigl(f(x_k)-f(x^*)\\bigr),\\ f(\\bar x_N)-f(x^*)\\right\\}\\le\\frac{R^2+G^2\\sum_{k<N}\\alpha_k^2}{2A_N}.$$",
+      "focused_proof_steps": [
+        "1.1 Rearrange [F1] and sum over $k=0,\\ldots,N-1$. The squared-distance terms telescope, giving $2\\sum_{k<N}\\alpha_k(f(x_k)-f(x^*))\\le\\|x_0-x^*\\|_2^2-\\|x_N-x^*\\|_2^2+\\sum_{k<N}\\alpha_k^2\\|g_k\\|_2^2\\le R^2+G^2\\sum_{k<N}\\alpha_k^2$, since the last squared distance is nonnegative. Divide by $2A_N>0$ using [F4] to bound the weighted average of the objective gaps. [F1, F4, given, algebra]",
+        "2.1 By [F3] the iterates lie in $C$, and by [F4] the normalized positive weights sum to one. Apply [F2] to get $f(\\bar x_N)-f(x^*)\\le A_N^{-1}\\sum_{k<N}\\alpha_k(f(x_k)-f(x^*))$. By [F5], the minimum gap is attained; since a positive weighted average with weights summing to one is at least the minimum term, both the minimum gap and the gap at $\\bar x_N$ are bounded above by the weighted average of the gaps. Step 1.1 therefore bounds their maximum as asserted. [F2, F3, F4, F5, step 1.1, algebra] ∎"
+      ]
+    },
+    "inspected_paths": [
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-40-3a.md",
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-40-3a-decisions.json",
+      "items/thm-projected-subgradient-best-and-average-bound.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-40.pages.json"
+    ],
+    "limits": "No whole-proof rereview or fresh external-source reading claimed. Native report describes its actual prior review; supplemental proposal is owner-attributed."
+  },
+  {
+    "group": "batch-71",
+    "id": "lem-full-memory-bfgs-dennis-more-condition",
+    "defect_id": "nod-b71-3a-inverse-root-norm",
+    "status": "supported-owner-proposal",
+    "native_report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-71-3a.md",
+    "native_report_anchor": "Level5: lem-full-memory-bfgs-dennis-more-condition; Local validation and handoff",
+    "native_acceptance_basis": "Native Alpha71 independently reviews all seven Dennis–More steps, explicitly corrects the nonfatal false inverse-root norm equality, checks unchanged local-superlinear use, and records nod-b71-3a-inverse-root-norm as an additional risk-only repair with confidence1. Its original six routed decisions do not reference that risk-only row.",
+    "focused_evidence": "Current Proof3.1 uses ||G_*^(-1/2)||<=1/sqrt(mu), not equality, and explicitly writes s=G_*^(-1/2)stilde. Combining this identity with the existing transformed gradient remainder gives the retained coefficient L_G||G_*^(-1/2)||^2. For G*=4I,mu=1 the norm is1/2<=1, confirming why equality was false; no Statement or downstream Dennis–More limit changed.",
+    "actual_source_sections": {
+      "Statement": "Assume the hypotheses of [[thm-full-memory-bfgs-global-linear-convergence]] and consider an infinite, nonstationary exact-undamped BFGS run with successful strong Wolfe searches. Suppose $G(x)=\\nabla^2 f(x)$ is $L_G$-Lipschitz in operator norm on a neighborhood of $x_*$. With $B_k:=H_k^{-1}$ and $s_k:=x_{k+1}-x_k$, the iterates satisfy\n$$ \\frac{\\|(B_k-G_*)s_k\\|_2}{\\|s_k\\|_2}\\longrightarrow0,\\qquad G_*:=G(x_*). $$\nSince $s_k=\\alpha_kp_k$ with $\\alpha_k>0$, the same limit holds with $p_k$ in place of $s_k$. This is the Dennis–Moré condition used by the local full-memory superlinear convergence result.",
+      "focused_proof_steps": [
+        "3.1 By [F8], choose an orthonormal eigenbasis of $G_*$ with eigenvalues $\\lambda_i$. The lower Hessian bound and the operator-norm bound give $\\mu\\le\\lambda_i\\le\\Lambda$. Define $G_*^{1/2}$ and $G_*^{-1/2}$ in that basis using diagonal entries $\\sqrt{\\lambda_i}$ and $1/\\sqrt{\\lambda_i}$, respectively; [F9] supplies the positive roots. Then $(G_*^{1/2})^2=G_*$ and $G_*^{1/2}G_*^{-1/2}=I$. Set $$ \\widetilde s_k:=G_*^{1/2}s_k,\\quad \\widetilde y_k:=G_*^{-1/2}y_k,\\quad \\widetilde B_k:=G_*^{-1/2}B_kG_*^{-1/2}. $$ The update for $\\widetilde B_k$ has the same BFGS form with pair $(\\widetilde s_k,\\widetilde y_k)$: $\\widetilde B_k\\widetilde s_k=G_*^{-1/2}B_ks_k$, $\\widetilde s_k^T\\widetilde B_k\\widetilde s_k=s_k^TB_ks_k$, and $\\widetilde s_k^T\\widetilde y_k=s_k^Ty_k$. Substitution in [F3] gives $\\widetilde B_{k+1}=G_*^{-1/2}B_{k+1}G_*^{-1/2}$. By step 2.1, $\\widetilde y_k-\\widetilde s_k=G_*^{-1/2}(y_k-G_*s_k)$. Since $\\|G_*^{-1/2}\\|_2\\le1/\\sqrt\\mu$ and $s_k=G_*^{-1/2}\\widetilde s_k$, we have $\\|s_k\\|_2\\le\\|G_*^{-1/2}\\|_2\\|\\widetilde s_k\\|_2$, and hence $$ \\|\\widetilde y_k-\\widetilde s_k\\|_2\\le L_G\\|G_*^{-1/2}\\|_2^2\\varepsilon_k\\|\\widetilde s_k\\|_2. $$ Put $\\delta_k:=L_G\\|G_*^{-1/2}\\|_2^2\\varepsilon_k$; then $\\sum_k\\delta_k<\\infty$, so eventually $\\delta_k\\le1/2$. Congruence preserves SPD, so $\\widetilde B_k$ is SPD. [given, F1, F3, F8, F9, step 1.2, step 2.1, algebra]"
+      ]
+    },
+    "inspected_paths": [
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-71-3a.md",
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-71-3a-decisions.json",
+      "items/lem-full-memory-bfgs-dennis-more-condition.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-71.pages.json"
+    ],
+    "limits": "No whole-proof rereview or fresh external-source reading claimed. Native report describes its actual prior review; supplemental proposal is owner-attributed."
+  },
+  {
+    "group": "batch-74",
+    "id": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+    "defect_id": "numerical-optimization-dynamics-2026-10-16-3a-batch-74-locator-2",
+    "status": "supported-owner-proposal",
+    "native_report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-74-3a.md",
+    "native_report_anchor": "Citation evidence and metadata reconciliation / two additional nonfatal citation-locator defects",
+    "native_acceptance_basis": "Native Alpha74 records independently inspecting the Cornell lecture and finding the actual headings Dot products and Beyond first order, with no Residual-based bounds heading. It corrects the two locators and expressly accepts locator-2 with confidence1; the five original JSON decisions concern other URL findings, not this locator row.",
+    "focused_evidence": "Current algorithm frontmatter locator for the Cornell2025-09-10 lecture reads Lecture4, Dot products and Beyond first order. It matches the exact sections described by the genuine native inspection. The algorithm Definition and mathematical interfaces are unchanged. This owner proposal confirms the retained locator correction from that evidence; no fresh external lecture fetch or independent whole-algorithm review is asserted.",
+    "actual_source_sections": {
+      "focused_proof_steps": [],
+      "frontmatter": "---\nid: alg-rosenbrock-shifted-qr-solver-with-residual-certificate\ntitle: \"Reusable Householder QR solve for a shifted matrix with residual status\"\nkind: algorithm\nstatus: draft\norigin: pipeline\npipeline_run: numerical-optimization-dynamics-2026-10-16\ndependency_level: 2\ndeps:\n  - def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma\n  - alg-scaled-householder-reflector-formation-and-application\n  - lem-rosenbrock-stage-residual-certificate\n  - def-forward-and-back-substitution-for-triangular-systems\n  - def-full-reduced-and-column-pivoted-computational-qr-factorisations\n  - def-householder-reflector\njustified_by: []\naliases: []\nforward_refs: []\nprovenance:\n  statement: ai-altered\n  proof: not-applicable\nverification:\n  precheck: n/a\nsources:\n  references:\n    - title: \"Daniel Kressner, Advanced Numerical Analysis, §3.5 Rosenbrock methods\"\n      url: \"https://www.epfl.ch/labs/anchp/wp-content/uploads/2018/05/AdvancedNA2015.pdf\"\n      locator: \"§3.5, printed pp. 42–44: one common direct factorization reused across Rosenbrock stages\"\n    - title: \"David Bindel, CS 6210 Matrix Computations, Lecture 4: Dot products and residual-based bounds\"\n      url: \"https://www.cs.cornell.edu/courses/cs6210/2025fa/lec/2025-09-10.html\"\n      locator: \"Lecture 4, ‘Dot products’ and ‘Beyond first order’\"\n---"
+    },
+    "inspected_paths": [
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-74-3a.md",
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-74-3a-decisions.json",
+      "items/alg-rosenbrock-shifted-qr-solver-with-residual-certificate.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-74.pages.json"
+    ],
+    "limits": "No whole-proof rereview or fresh external-source reading claimed. Native report describes its actual prior review; supplemental proposal is owner-attributed."
+  },
+  {
+    "group": "batch-95",
+    "id": "lem-gauss-collocation-weighted-defect-bound",
+    "defect_id": "nod-b95-3a-ftc-first-part-citation",
+    "status": "supported-owner-proposal",
+    "native_report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-95-3a.md",
+    "native_report_anchor": "nod-b95-3a-ftc-first-part-citation; lem-gauss-collocation-weighted-defect-bound; Routed decisions and audit maintenance",
+    "native_acceptance_basis": "Native Alpha95 explicitly accepts the nonfatal F6 attribution repair with confidence1, reviews all eight weighted-defect steps and says its three risk discoveries require owner/engine supplemental routing. Its three original JSON decisions are audit-enrichment carriers and do not reference this row.",
+    "focused_evidence": "Current F6 separately cites thm-ftc-first-part for differentiating a continuous-integrand integral and thm-ftc-second-part for endpoint differences. In actual Proof2.1, continuity of P and B makes PB continuous; differentiating P(s)=I+integral_s^1 P(tau)B(tau)dt entrywise gives P-prime=-PB and P(1)=I. The actual first-part supplier Statement gives differentiation for continuous integrands including one-sided endpoints, matching this direction.",
+    "actual_source_sections": {
+      "Facts & Assumptions": "**Given:** The IVP and exact path, its $M$-node Gauss collocation polynomial, the common convex tube, and the uniform smoothness hypotheses in the Statement.\n\n[F1] [[def-collocation-quadrature-tableau]]: $u_h(0)=y(t)$, $u_h'(s)=hI_Mg_h(s)$, and $u_h(1)$ is the collocation endpoint.\n\n[F2] [[lem-collocation-polynomial-scaled-derivatives]]: $g_h^{(j)}=O(h^j)$ for $0\\le j\\le2M$, and the collocation defect $r_h=u_h'-hg_h$ satisfies $r_h=O(h^{M+1})$.\n\n[F3] [[thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights]] and [[thm-gauss-hermite-mean-value-remainder]]: the Gauss rule is exact through degree $2M-1$; for each $C^{2M}$ scalar coordinate function $v$ its quadrature error is bounded by $\\|v^{(2M)}\\|_\\infty\\int_0^1p_M(s)^2ds/(2M)!$.\n\n[F4] [[thm-multivariable-taylor-formula-with-lagrange-remainder]]: the scalar Taylor supplier applies to each coordinate or matrix entry, with remainders bounded by the corresponding uniform derivative bound.\n\n[F5] [[thm-chain-sum-product-and-composition-rules-for-banach-derivatives]]: derivatives of finite products and compositions satisfy the chain and Leibniz rules.\n\n[F6] [[thm-ftc-first-part]]: an integral with continuous integrand differentiates to that integrand, including one-sided endpoint derivatives. [[thm-ftc-second-part]]: endpoint differences are integrals of integrable derivatives.\n\n[F7] [[thm-uniform-limit-continuous-real-functions]]: a uniform limit of continuous real functions is continuous, entrywise for finite-dimensional matrix functions.\n\n[F8] [[thm-norm-inequality-for-the-vector-valued-integral]], [[def-vector-valued-derivative-and-integral]], and [[thm-cauchy-schwarz-and-the-euclidean-norm]]: vector integrals are componentwise and obey $\\|\\int v\\|_2\\le\\int\\|v\\|_2$, and finite-dimensional norms satisfy the triangle inequality.\n\n[F9] [[thm-euclidean-space-complete]]: every Cauchy sequence in the finite-dimensional matrix space, identified with a Euclidean space of entries, converges there.\n\n[F10] [[def-cardinal-polynomial-interpolation]] and [[lem-cardinal-basis-degree-and-values]]: $I_Mg_h$ is the cardinal polynomial sum of degree at most $M-1$ and matches $g_h$ at every Gauss node.\n\n[F11] [[def-gauss-quadrature-rule]] and [[lem-unit-interval-lebesgue-gauss-data-valid]]: the Gauss weights are $w_j=\\int\\ell_j\\,d\\lambda$ for valid order-$2M$ Lebesgue moment data on $[0,1]$; that same measure also meets the lower order-$2M-1$ moment branch because its moments through degree $2M-1$ are finite.\n\n[F12] [[lem-continuous-riemann-lebesgue-agreement]]: continuous node polynomials have equal Riemann and Lebesgue integrals on $[0,1]$.\n\n[F13] [[def-first-order-ode-initial-value-problem-and-solution]]: the exact path satisfies $y'=f(t,y)$.\n\n[F14] [[thm-monic-gauss-orthogonal-polynomials-exist-uniquely]]: the monic degree-$M$ orthogonal polynomial is uniquely determined by the same moments in either moment-data branch.\n\n[F15] [[def-higher-derivatives-and-smoothness]]: the one-variable coordinate paths and composites use the scalar $C^k$ convention; the multivariable smoothness of each component of $f$ is the partial-derivative assumption in the Statement.\n\n[A2] Countable Choice, through the Lebesgue interval-measure formula needed to identify the Gauss measure and its moments.\n\n[A1] All partial derivatives of $f$ through order $2M+1$ are bounded on the compact tube. The induced Euclidean operator norm is submultiplicative by its definition.",
+      "focused_proof_steps": [
+        "2.1 For a continuous matrix function $X$ set $\\|X\\|_\\infty:=\\sup_{s\\in[0,1]}\\|X(s)\\|_{op}$. Define $(TX)(s)=\\int_s^1X(\\tau)B(\\tau)\\,d\\tau$ entrywise. For any unit vector $v$, the vector integral inequality [F8] and submultiplicativity in [A1] give $$\\|(TX-TY)(s)v\\|_2\\le\\int_s^1\\|(X-Y)(\\tau)B(\\tau)v\\|_2\\,d\\tau\\le hL\\|X-Y\\|_\\infty.$$ Taking the supremum over unit $v$ and $s$ proves $\\|TX-TY\\|_\\infty\\le hL\\|X-Y\\|_\\infty$. For $hL\\le1/2$, $T$ is a contraction. Starting with $P_0=I$, set $P_{n+1}=I+TP_n$. Successive differences are bounded by $2^{-n}\\|TP_0\\|_\\infty$, so their entries are uniformly Cauchy; [F9] gives an entrywise limit and the geometric tail bound makes convergence uniform. Each iterate is continuous and [F7] makes the limit $P$ continuous. Passing to the limit in $P_{n+1}=I+TP_n$ gives $P=I+TP$, hence $P'=-PB$ and $P(1)=I$ by applying [F6] to each matrix entry. If $P$ and $\\widetilde P$ both solve it, $D=P-\\widetilde P=TD$ implies $\\|D\\|_\\infty\\le\\frac12\\|D\\|_\\infty$, so $D=0$; also $P=I+TP$ gives $\\|P\\|_\\infty\\le2$. [A1, F6, F7, F8, F9, step 1.1, induction, construct, algebra]"
+      ]
+    },
+    "inspected_paths": [
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-95-3a.md",
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-95-3a-decisions.json",
+      "items/lem-gauss-collocation-weighted-defect-bound.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-95.pages.json"
+    ],
+    "limits": "No whole-proof rereview or fresh external-source reading claimed. Native report describes its actual prior review; supplemental proposal is owner-attributed."
+  },
+  {
+    "group": "batch-83",
+    "id": "thm-retraction-armijo-acceptance-and-step-lower-bound",
+    "defect_id": "numopt-3a-b83-armijo-ball-qualifier",
+    "status": "supported-owner-proposal",
+    "native_report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-83-3a.md",
+    "native_report_anchor": "thm-retraction-armijo-acceptance-and-step-lower-bound; Engine handoff and routing blocker",
+    "native_acceptance_basis": "Native Alpha83 reviews the three acceptance steps, gives the unit-circle counterexample to unrestricted tangent-ball wording, accepts the trial-size qualifier with confidence1 and checks the actual complexity consumer. Its final handoff explicitly requests routing this extra repaired carrier; the ten original decisions do not bind its risk-only row.",
+    "focused_evidence": "Current Statement confines t||grad f||<=1/2 to0<t<=delta and explicitly permits an earlier accepted trial to be larger. Current Proof1.1 uses exactly that range, Proof2.1 proves sufficient decrease only there, and3.1 derives first accepted t>=beta delta regardless of earlier acceptance. The recorded polar-retraction witness f=-2x1 at e2 with t=1 has norm2 and may pass Armijo, so it no longer contradicts the qualified claim.",
+    "actual_source_sections": {
+      "Statement": "Let $M=\\operatorname{St}(n,r)$ or $\\operatorname{Gr}(r,n)$ be compact, let\n$f:M\\to\\mathbb R$ be smooth, and let $R$ be a QR or polar retraction with the\nfirst-order property of [[thm-stiefel-retractions-are-first-order]]. Write\n$\\widehat f_x(\\eta)=f(R_x(\\eta))$. Assume a uniform bound\n$\\|\\operatorname{grad}f(x)\\|\\le G$ and a constant $L_R\\ge0$ such that, for\nevery $x$ and $\\|\\eta\\|\\le1$,\n$$\\|\\operatorname{grad}\\widehat f_x(\\eta)-\\operatorname{grad}\\widehat f_x(0)\\|\\le L_R\\|\\eta\\|.$$\nFor $a\\in(0,1)$ and a nonstationary iterate, set\n$$\\delta=\\min\\{1,(2G)^{-1},2(1-a)/L_R\\},$$\nwhere a reciprocal of zero is interpreted as $+\\infty$. If the finite\nbacktracking budget tests some $t_j=\\beta^j\\le\\delta$, then it accepts a step;\nthe first accepted step obeys $t\\ge\\beta\\delta$. For $0<t\\le\\delta$, the bound\n$t\\|\\operatorname{grad}f(x)\\|\\le1/2$ keeps the pullback argument inside its\nassumed unit tangent ball; an earlier accepted trial may be larger.",
+      "focused_proof_steps": [
+        "1.1 Since $g\\ne0$ and $\\|g\\|\\le G$, we have $G>0$. For $0<t\\le\\delta$, $\\eta=-tg$ has norm $t\\|g\\|\\le tG\\le1/2$, so the entire segment $s\\eta$, $0\\le s\\le1$, lies in the unit ball. [given, algebra]",
+        "2.1 By [F1] and [F2], $D\\widehat f_x(0)[\\eta]=\\langle g,\\eta\\rangle=-t\\|g\\|^2$. The fundamental theorem of calculus along $s\\mapsto s\\eta$ and the assumed Lipschitz bound give $$\\widehat f_x(\\eta)\\le f(x)-t\\|g\\|^2+\\int_0^1 L_R s\\|\\eta\\|^2\\,ds =f(x)-t\\|g\\|^2+\\tfrac12L_Rt^2\\|g\\|^2.$$ The integral bound uses [F4] to estimate the inner product of the gradient difference with $\\eta$. If $L_R=0$ the last error is zero; otherwise $t\\le2(1-a)/L_R$ makes the right side at most $f(x)-a t\\|g\\|^2$. Thus every tested $t\\le\\delta$ satisfies the Armijo test in [F3]. [F1, F2, F3, F4, given, step 1.1, algebra]",
+        "3.1 Let $j$ be the first tested index with $\\beta^j\\le\\delta$. By step 2.1 this trial passes, so the algorithm stops no later than $j$. If $j=0$, then $t=1\\ge\\beta\\delta$ because $\\delta\\le1$. If $j>0$, minimality gives $\\beta^{j-1}>\\delta$, hence $\\beta^j>\\beta\\delta$. Any earlier accepted grid point is larger still. [F3, given, step 2.1, algebra] ∎\n"
+      ]
+    },
+    "inspected_paths": [
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-83-3a.md",
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-83-3a-decisions.json",
+      "items/thm-retraction-armijo-acceptance-and-step-lower-bound.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-83.pages.json"
+    ],
+    "limits": "No whole-proof rereview or fresh external-source reading claimed. Native report describes its actual prior review; supplemental proposal is owner-attributed."
+  },
+  {
+    "group": "batch-101",
+    "id": "thm-variational-fem-control-o-h2-error",
+    "defect_id": "nod-b101-3a-variational-choice",
+    "status": "supported-owner-proposal",
+    "native_report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-101-3a.md",
+    "native_report_anchor": "Level7 checkpoint / thm-variational-fem-control-o-h2-error; Additional local repairs",
+    "native_acceptance_basis": "Native Alpha101 explicitly reports adding Countable Choice to this Statement, reviewing the actual VI/error proof and direct/reference consumers, and recording the separate nonfatal missing-choice-scope row. Its14 original decisions cover other touched/findings and do not reference this additional repaired carrier.",
+    "focused_evidence": "Current Statement begins Assume Countable Choice and still requires the explicit uniform O(h^2) state/adjoint L2 bound and matching regularity/defect conditions. Current F1/F5 and Proof1.1/2.1 invoke the reduced-gradient identity and strong monotonicity; the actual thm-linear-elliptic-reduced-control-gradient-and-hessian Statement assumes Countable Choice. The addition supplies that actual axiom while the paired VI and e=0/division branches remain the retained argument.",
+    "actual_source_sections": {
+      "Statement": "Assume Countable Choice. Let $q_*$ minimize the continuous distributed-control objective of [[def-linear-elliptic-pde-constrained-control-problem]] with $E=\\Omega$, $U=H=L^2(\\Omega)$, $Bq(v)=(q,v)_{L^2}$, and observation $J=I$. Assume exact affine geometry and conforming P1 Galerkin state and adjoint spaces on a shape-regular mesh family. Let $u_h:U\\to V_h$ be the affine finite-element state map and define the finite-element reduced objective on $U$ by\n$$\n\\widehat J_h(q)=\\frac12\\|u_h(q)-u_d\\|_{L^2(\\Omega)}^2+\\frac\\alpha2\\|q\\|_{L^2(\\Omega)}^2.\n$$\nLet $p_h(q)\\in V_h$ be the associated discrete adjoint. Require adjoint consistency for this same state map and objective, namely\n$$\nD\\widehat J_h(q)[r]=(p_h(q)+\\alpha q,r)_{L^2(\\Omega)}\\qquad(q,r\\in U).\n$$\nThis identity is the condition that the discrete adjoint represents the derivative of the stated objective; it must be checked for any perturbed state, form, or load implementation. Set $g_h(q)=p_h(q)+\\alpha q$ and $g(q)=\\nabla\\widehat J(q)$, and let $q_h^v$ minimize $\\widehat J_h$ over the same infinite-dimensional box $Q_{ad}$ (variational control discretization). Assume the actual primal and adjoint problems have uniform $H^2$ regularity and the matching primal and dual interpolation bounds of\n[[cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation]] with $r=s=1$. Assume also that the full state and adjoint error bounds, including every Strang form/load defect and the state-error contribution to the adjoint load, satisfy\n$$\n\\sup_{q\\in Q_{ad}}\\bigl(\\|u_h(q)-u(q)\\|_{L^2}+\\|p_h(q)-p(q)\\|_{L^2}\\bigr)\\le C h^2.\n$$\nThe displayed uniform $L^2$ state/adjoint estimate is an explicit hypothesis here; a concrete PDE family must verify it from its actual $H^2$ regularity, matching dual approximation, and complete Strang/geometry/quadrature/load ledger. An energy error of order $h$ alone does not imply this $L^2$ bound. Then\n$$\n\\|q_h^v-q_*\\|_{L^2(E)}\\le C h^2,\n$$\nwhere $C$ is independent of $h$. No such rate is asserted on a domain or coefficient class lacking the stated primal, adjoint, and defect estimates.",
+      "Facts & Assumptions": "**Given:** The continuous minimizer and variational inequality; the finite-element reduced objective, its adjoint-consistency identity and its minimizer on $Q_{ad}$; uniform control bounds; the P1 shape-regular mesh; primal and adjoint $H^2$ regularity; the matching Aubin–Nitsche hypotheses; and the full Strang defect estimates.\n\n[F1] The continuous gradient is $g(q)=p(q)+\\alpha q$; the stated adjoint-consistency identity gives $g_h(q)=p_h(q)+\\alpha q$, so $g_h(q)-g(q)=p_h(q)-p(q)$. The uniform state/adjoint $L^2$ premise therefore supplies $\\sup_{q\\in Q_{ad}}\\|g_h(q)-g(q)\\|_{L^2}\\le Ch^2$ ([[thm-linear-elliptic-reduced-control-gradient-and-hessian]], with the explicit error assumption in the Statement).\n\n[F5] The continuous reduced gradient is strongly monotone with constant $\\alpha$ ([[thm-linear-elliptic-reduced-control-gradient-and-hessian]]).\n\n[A1] The primal and adjoint $L^2$ errors are $O(h^2)$ uniformly over $Q_{ad}$, including the adjoint-load perturbation caused by the primal state error.",
+      "focused_proof_steps": [
+        "1.1 The adjoint-consistency identity and the continuous gradient formula give $g_h(q)-g(q)=p_h(q)-p(q)$. The explicit uniform $L^2$ premise [A1], including the state-error contribution to the adjoint load and every form/load defect, therefore gives $\\sup_{q\\in Q_{ad}}\\|g_h(q)-g(q)\\|_U\\le C_g h^2.$ The actual $H^2$, dual-approximation, and defect hypotheses must be used to verify [A1] for the PDE family; this proof does not infer it from an energy estimate of order $h$ alone. [A1, F1, given, algebra]",
+        "2.1 Put $e=q_h^v-q_*$. Strong monotonicity [F5] gives $\\alpha\\|e\\|_U^2\\le(g(q_h^v)-g(q_*),e)_U.$ The continuous variational inequality gives $(g(q_*),e)_U\\ge0$. Since $q_h^v$ minimizes the differentiable $\\widehat J_h$ on the convex set $Q_{ad}$, its derivative identity gives $(g_h(q_h^v),e)_U\\le0$ along the feasible segment toward $q_*$. Replacing $g(q_h^v)$ by $g_h(q_h^v)$ costs at most $C_g h^2\\|e\\|_U$ by step 1.1. Thus $\\alpha\\|e\\|_U^2\\le C_g h^2\\|e\\|_U$. If $e=0$ the claim is immediate; otherwise divide by $\\alpha\\|e\\|_U$ to get $\\|e\\|_U\\le(C_g/\\alpha)h^2$. [F5, step 1.1, given, algebra] ∎"
+      ]
+    },
+    "inspected_paths": [
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-101-3a.md",
+      "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-101-3a-decisions.json",
+      "items/thm-variational-fem-control-o-h2-error.md",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-101.pages.json"
+    ],
+    "limits": "No whole-proof rereview or fresh external-source reading claimed. Native report describes its actual prior review; supplemental proposal is owner-attributed."
+  }
+]

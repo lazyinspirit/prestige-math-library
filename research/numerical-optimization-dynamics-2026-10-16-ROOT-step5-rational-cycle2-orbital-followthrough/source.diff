@@ -1,0 +1,37 @@
+--- items/thm-orbital-stability-from-certified-floquet-multipliers.md
++++ items/thm-orbital-stability-from-certified-floquet-multipliers.md
+@@ -13,6 +13,8 @@
+   - thm-poincare-map-stability-implies-orbital-stability
+   - lem-autonomous-periodic-orbit-has-neutral-floquet-multiplier
+   - lem-phase-bordered-shooting-jacobian-invertibility
++  - alg-validated-periodic-orbit-corrector
++  - lem-rational-box-affine-chart-and-dyadic-enclosure
+   - alg-krawczyk-root-certification
+   - lem-complex-infinity-neumann-inverse-norm-bound
+   - lem-c1-euclidean-maximal-flow-with-c2-upgrade
+@@ -25,7 +27,7 @@
+ proof_strategy: direct
+ provenance:
+   statement: ai-altered
+-  proof: ai-generated
++  proof: ai-altered
+ verification:
+   precheck: pass
+ sources:
+@@ -58,7 +60,7 @@
+ 
+ [F6] The $C^2$ autonomous field supplied by the orbit certificate has a unique maximal $C^2$ flow with time derivative $f(\phi_t(x))$ ([[lem-c1-euclidean-maximal-flow-with-c2-upgrade]]). Uniqueness identifies a shifted trajectory with the solution from its shifted initial state, giving the flow law on the common domain. Composition derivatives obey the chain rule ([[thm-chain-rule-for-total-derivatives]]). Eigenvectors have the meaning of [[def-eigenvalue-eigenvector-eigenspace-and-spectrum]], and generalized vectors are supplied by [[thm-jordan-form-exists-iff-the-characteristic-polynomial-splits]]. Algebraic multiplicity means characteristic-polynomial root multiplicity.
+ 
+-[F7] The corrector's Krawczyk record uses a nonsingular preconditioner $C$ and a verified bound $\|I-CJ\|_\infty\le q<1$ for every Jacobian $J$ in the box ([[alg-krawczyk-root-certification]]).
++[F7] The corrector's Krawczyk record is for the normalized residual $F\circ T$, where $T(u)=a+Du$ and $D$ is its known positive diagonal box scale. Thus a physical shooting Jacobian $J$ corresponds to the normalized derivative $JD$, and the verified nonsingular preconditioner $C$ satisfies $\|I-CJD\|_\infty\le q<1$ on the physical image box. The derivative scaling and inverse transfer are proved by the affine-chart lemma ([[alg-validated-periodic-orbit-corrector]], [[alg-krawczyk-root-certification]], [[lem-rational-box-affine-chart-and-dyadic-enclosure]]).
+ 
+ [F8] A complex square matrix $E$ with $\|E\|_{\infty,\mathbb C}<1$ has $I-E$ invertible ([[lem-complex-infinity-neumann-inverse-norm-bound]]); the phase-bordered Jacobian criterion identifies nonsingularity with a simple neutral multiplier and transverse phase ([[lem-phase-bordered-shooting-jacobian-invertibility]]).
+ 
+@@ -71,6 +73,6 @@
+ 
+ 3.1 Let $M_S$ be the monodromy over $S$. By flow composition and the chain rule [F6], $M_*=M_S^k$. The phase tangent is a $1$ eigenvector of $M_S$ by [F2]. If $M_Sv=\alpha v$ with $\alpha^k\ne1$, then $M_*v=\alpha^kv$ is a non-phase eigenvalue of $M_*$, so step 1.1 gives $|\alpha|^k<1$ and $|\alpha|<1$. If $\alpha^k=1$ and $\alpha\ne1$, then $v$ and the phase tangent are independent eigenvectors of $M_*$ for eigenvalue $1$, contradicting its algebraic simplicity. If $\alpha=1$ and there were an eigenvector independent of the phase tangent, the same contradiction follows. If the eigenvalue $1$ of $M_S$ had a nontrivial Jordan chain, [F6] gives a generalized vector $v$ with $(M_S-I)v=f(\gamma(0))$ after rescaling. Then $(M_* - I)v=(M_S^k-I)v=k f(\gamma(0))\ne0$, contradicting the algebraic simplicity of $1$ for $M_*$. Hence $1$ is simple for $M_S$ and every other eigenvalue of $M_S$ is strictly inside the unit circle. [F2, F6, step 1.1, step 2.1, algebra]
+ 
+-4.1 The orbit with period $S$ is least-period by step 2.1. The certificate [F1] validates the phase-bordered shooting Jacobian for the possibly repeated period $T$, and that is the Jacobian used in the following nonsingularity check. For the exact real Jacobian $J$ at that root, [F7] gives $\|I-CJ\|_\infty<1$. Regard $I-CJ$ as a complex matrix; [F8] makes $CJ$ invertible over $\mathbb C$, so its real determinant is nonzero and $CJ$, then $J$, is invertible over $\mathbb R$. Step 1.1 gives a simple phase multiplier, so the bordered criterion in [F8] implies $c^\top f(\gamma(0))\ne0$. The same affine phase is therefore transverse for the least-period orbit. Apply [F4] to identify the Poincare derivative eigenvalues with all non-phase eigenvalues of $M_S$; step 3.1 places them strictly inside the unit circle. [F1, F4, F7, F8, step 1.1, step 2.1, step 3.1]
++4.1 The orbit with period $S$ is least-period by step 2.1. The certificate [F1] validates the phase-bordered shooting Jacobian for the possibly repeated period $T$, and that is the Jacobian used in the following nonsingularity check. For the exact real physical Jacobian $J$ at that root, put $A:=CJD$. By [F7], $\|I-A\|_\infty<1$. Regard $I-A$ as a complex matrix; [F8] makes $A$ invertible over $\mathbb C$, hence over $\mathbb R$. Since $C$ is nonsingular and $D$ has positive diagonal, [F7] gives $J^{-1}=D A^{-1}C$. Step 1.1 gives a simple phase multiplier, so the bordered criterion in [F8] implies $c^\top f(\gamma(0))\ne0$. The same affine phase is therefore transverse for the least-period orbit. Apply [F4] to identify the Poincare derivative eigenvalues with all non-phase eigenvalues of $M_S$; step 3.1 places them strictly inside the unit circle. [F1, F4, F7, F8, step 1.1, step 2.1, step 3.1]
+ 
+ 5.1 The certificate field is $C^2$ and its affine phase section is smooth; [F4]'s hypotheses therefore give a $C^1$ Poincare return map. Its derivative has no unit-circle multiplier, and all its eigenvalues are strictly inside by step 4.1. Shrink the section to a relatively compact patch whose closure meets the orbit only at $\gamma(0)$: transversality isolates that intersection along a short orbit arc, and the remaining compact arc stays away from $\gamma(0)$ by the least-period property. Apply the $C^1$ theorem [F5] on this patch to conclude orbital asymptotic stability. [F4, F5, F6, step 2.1, step 4.1] ∎

@@ -1,0 +1,307 @@
+{
+  "group": "h",
+  "batches": [
+    "65"
+  ],
+  "pages_read": [
+    "implicit-stiff-time-stepping-and-algebraic-error",
+    "implicit-stiff-time-stepping-and-algebraic-error-examples"
+  ],
+  "items_read": [
+    "def-implicit-residual-and-algebraic-error-units",
+    "lem-strongly-monotone-continuous-map-is-bijective",
+    "def-backward-euler-step-equation",
+    "def-implicit-runge-kutta-stage-equations",
+    "def-two-stage-sdirk-tableau",
+    "def-two-stage-radau-iia-tableau",
+    "def-scalar-rk-a-and-l-stability",
+    "lem-small-step-implicit-rk-branch-and-residual-error",
+    "alg-newton-chord-implicit-residual-with-factorization-reuse",
+    "thm-backward-euler-dissipative-resolvent-contraction",
+    "prop-two-stage-sdirk-order-two-and-l-stability",
+    "prop-two-stage-radau-iia-order-three-and-l-stability",
+    "thm-backward-euler-algebraic-update-residual-error-budget",
+    "thm-implicit-rk-global-order-with-stage-residual-control",
+    "cor-constant-step-bdf2-order-two-with-consistent-start",
+    "alg-implicit-stiff-time-stepper-with-consistent-starts",
+    "ex-newton-budget-exhaustion-with-a-unique-backward-euler-root",
+    "ex-stiff-scalar-decay-and-trapezoid-ringing",
+    "ex-dissipative-backward-euler-residual-contraction",
+    "ex-robertson-reaction-system-newton-work"
+  ],
+  "conventions": [
+    {
+      "convention": "An update residual is the unscaled equation residual; its derivative-scaled counterpart is obtained by dividing by the positive step scale. A residual norm alone is not a forward-error bound.",
+      "fixed_by": "def-implicit-residual-and-algebraic-error-units",
+      "matters_for": [
+        "thm-backward-euler-algebraic-update-residual-error-budget",
+        "thm-implicit-rk-global-order-with-stage-residual-control",
+        "alg-implicit-stiff-time-stepper-with-consistent-starts",
+        "ex-dissipative-backward-euler-residual-contraction",
+        "ex-robertson-reaction-system-newton-work"
+      ]
+    },
+    {
+      "convention": "Backward Euler uses the endpoint field evaluation: G(z)=z-y-hf(t+h,z), with h>0 and the endpoint in the field domain. Its definition asserts neither existence nor uniqueness.",
+      "fixed_by": "def-backward-euler-step-equation",
+      "matters_for": [
+        "thm-backward-euler-dissipative-resolvent-contraction",
+        "cor-constant-step-bdf2-order-two-with-consistent-start",
+        "alg-implicit-stiff-time-stepper-with-consistent-starts"
+      ]
+    },
+    {
+      "convention": "Runge–Kutta stages satisfy Y_i=y+hΣ_j a_ij f(t+c_jh,Y_j), and the update is y+hΣ_i b_i f(t+c_ih,Y_i). Stiff accuracy identifies the last stage with the update only for exact stage roots.",
+      "fixed_by": "def-implicit-runge-kutta-stage-equations",
+      "matters_for": [
+        "prop-two-stage-sdirk-order-two-and-l-stability",
+        "prop-two-stage-radau-iia-order-three-and-l-stability",
+        "thm-implicit-rk-global-order-with-stage-residual-control"
+      ]
+    },
+    {
+      "convention": "Stage estimates use the maximum of the Euclidean block norms and the absolute matrix row-sum norm. Uniqueness and residual conversion hold within the prescribed invariant closed product ball, with q=h‖A‖∞L<1.",
+      "fixed_by": "lem-small-step-implicit-rk-branch-and-residual-error",
+      "matters_for": [
+        "thm-implicit-rk-global-order-with-stage-residual-control",
+        "cor-constant-step-bdf2-order-two-with-consistent-start",
+        "alg-implicit-stiff-time-stepper-with-consistent-starts"
+      ]
+    },
+    {
+      "convention": "A-stability concerns the rational scalar amplification function on the closed left half-plane; L-stability additionally requires decay to zero at infinity there. Neither property asserts nonlinear contractivity.",
+      "fixed_by": "def-scalar-rk-a-and-l-stability",
+      "matters_for": [
+        "prop-two-stage-sdirk-order-two-and-l-stability",
+        "prop-two-stage-radau-iia-order-three-and-l-stability",
+        "ex-stiff-scalar-decay-and-trapezoid-ringing"
+      ]
+    },
+    {
+      "convention": "The finite solver checks residual tolerance before budget exhaustion and before attempting another correction. A root status means tolerance satisfaction. Chord mode retains a factorization between scheduled refreshes and assumes terminating exact factorization and solve primitives.",
+      "fixed_by": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+      "matters_for": [
+        "alg-implicit-stiff-time-stepper-with-consistent-starts",
+        "ex-newton-budget-exhaustion-with-a-unique-backward-euler-root",
+        "ex-robertson-reaction-system-newton-work"
+      ]
+    },
+    {
+      "convention": "The Robertson numerical trace uses binary64 partial-pivoting elimination and is explicitly an implementation-level approximation, rather than an execution satisfying the mathematical solver's exact-backend contract.",
+      "fixed_by": "ex-robertson-reaction-system-newton-work",
+      "matters_for": [
+        "ex-robertson-reaction-system-newton-work"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-small-step-implicit-rk-branch-and-residual-error",
+      "statement": "For F bounded by M and L-Lipschitz on the closed product ball B centered at c with radius R>0, if h‖A‖∞M≤R and q=h‖A‖∞L<1, then Φ(Y)=c+h(A⊗I)F(Y) has exactly one fixed point Y* in B, and every approximate vector in B satisfies ‖Ỹ−Y*‖∞,2≤‖G(Ỹ)‖∞,2/(1−q), where G=I−Φ.",
+      "used_by": [
+        "prop-two-stage-sdirk-order-two-and-l-stability",
+        "prop-two-stage-radau-iia-order-three-and-l-stability",
+        "thm-implicit-rk-global-order-with-stage-residual-control",
+        "cor-constant-step-bdf2-order-two-with-consistent-start",
+        "alg-implicit-stiff-time-stepper-with-consistent-starts"
+      ]
+    },
+    {
+      "id": "thm-backward-euler-dissipative-resolvent-contraction",
+      "statement": "For continuous f on all of R×R^d, d≥1, satisfying ⟨f(t,x)−f(t,y),x−y⟩≤−μ‖x−y‖₂² with μ≥0, H(t,h)(x)=x−hf(t,x) is bijective for every h>0, and its inverse is (1+hμ)⁻¹-Lipschitz.",
+      "used_by": [
+        "thm-backward-euler-algebraic-update-residual-error-budget",
+        "alg-implicit-stiff-time-stepper-with-consistent-starts",
+        "ex-newton-budget-exhaustion-with-a-unique-backward-euler-root",
+        "ex-dissipative-backward-euler-residual-contraction"
+      ]
+    },
+    {
+      "id": "lem-strongly-monotone-continuous-map-is-bijective",
+      "statement": "Let d≥1, κ>0, and H:R^d→R^d be continuous with ⟨H(x)−H(y),x−y⟩≥κ‖x−y‖₂² for all x,y. Then H is bijective and its inverse is κ⁻¹-Lipschitz.",
+      "used_by": [
+        "thm-backward-euler-dissipative-resolvent-contraction"
+      ]
+    },
+    {
+      "id": "thm-backward-euler-algebraic-update-residual-error-budget",
+      "statement": "Under the dissipative-resolvent theorem's hypotheses, on a constant positive-step grid with N≥0 and q=(1+hμ)⁻¹, an approximate BE sequence with update residuals η_j satisfies ‖ũ_N−u_N‖₂≤q^N‖ũ_0−u_0‖₂+Σ_{j=0}^{N−1}q^{N−j}‖η_j‖₂, where u is the exact discrete BE sequence.",
+      "used_by": [
+        "alg-implicit-stiff-time-stepper-with-consistent-starts",
+        "ex-dissipative-backward-euler-residual-contraction"
+      ]
+    },
+    {
+      "id": "alg-newton-chord-implicit-residual-with-factorization-reuse",
+      "statement": "For a C¹ square residual on an open domain, a valid initial iterate, nonnegative tolerance, finite correction budget, and the stated returning primitives, updated Newton invokes the finite-budget Newton procedure. Chord mode checks residual then budget, refreshes the Jacobian factorization at scheduled indices, solves with the retained factors, and returns root, iteration-budget-exhausted, singular-jacobian, or invalid-trial with the last valid iterate and actual residual norm.",
+      "used_by": [
+        "alg-implicit-stiff-time-stepper-with-consistent-starts",
+        "ex-newton-budget-exhaustion-with-a-unique-backward-euler-root",
+        "ex-robertson-reaction-system-newton-work"
+      ]
+    },
+    {
+      "id": "thm-implicit-rk-global-order-with-stage-residual-control",
+      "statement": "For BE, the selected SDIRK, or two-stage Radau IIA with p=1,2,3 respectively, the stated common compact tube, C³ field, uniform invariant-ball, same-ball comparison, and hL≤1/2 hypotheses imply maximum grid error O(h^p) when each stage update residual is bounded by D h^(p+1) and the initial error is O(h^p). BE additionally requires the exact ODE endpoint in its comparison ball.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "Open time-state domains, admissible states, and the exact ODE solution convention.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Euclidean inner products, norms, dissipativity, and coordinate norm comparisons.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Cauchy–Schwarz and the Euclidean triangle inequality in inverse, residual, and stage estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-brouwer-fixed-point-theorem",
+      "used_for": "The closed-ball fixed point in the proof that a continuous strongly monotone map is onto.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "The positive square root of two defining the SDIRK coefficient.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-square-monotone",
+      "used_for": "Coefficient inequalities and transfer from Euclidean to maximum norm.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-numbers-and-arithmetic",
+      "used_for": "The complex scalar test equation and rational amplification functions.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-conjugate-real-imaginary-part-and-modulus",
+      "used_for": "Real and imaginary coordinates and modulus in the half-plane stability calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-space",
+      "used_for": "The block maximum metric on the stage product ball.",
+      "opened": true
+    },
+    {
+      "id": "def-complete-metric-space",
+      "used_for": "Completeness of the invariant stage ball.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-space-complete",
+      "used_for": "Coordinatewise completeness of finite-dimensional stage vectors.",
+      "opened": true
+    },
+    {
+      "id": "thm-banach-fixed-point",
+      "used_for": "Existence and uniqueness of the local implicit stage root after proving ball invariance and contraction.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "C¹ admissibility of finite residual solves and the Robertson residual.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "The coordinate Jacobian convention for Newton and chord corrections.",
+      "opened": true
+    },
+    {
+      "id": "thm-total-derivative-computes-directional-and-partial-derivatives",
+      "used_for": "Identification of the residual derivative matrix with its Jacobian.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "Componentwise Taylor estimates for RK local defects, BE startup, and BDF2 residuals; no common vector-valued intermediate point is assumed.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "cor-constant-step-bdf2-order-two-with-consistent-start",
+      "concern": "Clarify the scope of the Statement's sentence beginning “A sufficient condition is that B_BE is centered at y(0)”. Its endpoint-time bound ‖f(h,z)‖₂≤M, hM≤rad(B_BE), and state Lipschitz bound establish invariance and contraction, but do not themselves establish the preceding requirement y(h)∈B_BE. For example, y'=1−2t, y(0)=0, h=1/2, and B_BE=[−0.01,0.01] satisfy those listed conditions with M=L₂=0; the BE root is zero but y(h)=1/4 is outside the ball. The proof explicitly retains endpoint inclusion, so the main startup conclusion remains supported under its actual assumptions; the sufficient-condition wording should retain that requirement explicitly.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "implicit-stiff-time-stepping-and-algebraic-error",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "Checked the finite-budget Newton and correction procedures against the wrapper. Residual testing precedes budget exhaustion, failure statuses are preserved, and no arbitrary-start Newton convergence is imported."
+    },
+    {
+      "from": "implicit-stiff-time-stepping-and-algebraic-error",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "Checked the one-step global theorem and finite recurrence lemma against their uses. The owned convergence argument retains uniform local defects, stability constants, common-tube conditions, initial-error budgets, and accumulated algebraic perturbations."
+    },
+    {
+      "from": "implicit-stiff-time-stepping-and-algebraic-error",
+      "to": "linear-multistep-methods-and-dahlquist-equivalence",
+      "faithful": true,
+      "note": "Read the variable-step BDF2 algorithm, local residual and increment lemmas, and convergence theorem. The constant-step corollary sets both ratio bounds to one and derives the supplier's uniform local-root selection premise from its stronger all-histories assumption. Finite-solve BDF2 output is explicitly excluded from the exact-root theorem."
+    },
+    {
+      "from": "rosenbrock-and-linearly-implicit-methods",
+      "to": "implicit-stiff-time-stepping-and-algebraic-error",
+      "faithful": true,
+      "note": "The BE comparison proves one Newton correction rather than a BE root. Linear-stage residual uses retain separate inverse bounds, and scalar stability results explicitly use rational-function criteria without importing nonlinear contractivity."
+    },
+    {
+      "from": "differential-algebraic-equations-and-consistent-initialization",
+      "to": "implicit-stiff-time-stepping-and-algebraic-error",
+      "faithful": true,
+      "note": "The coupled BE and BDF2 procedures distinguish derivative residuals from unscaled differential-equation residuals and algebraic constraint residuals. The BE accuracy theorem derives its reduced-ODE recurrence separately."
+    },
+    {
+      "from": "stable-sde-schemes-for-superlinear-drift",
+      "to": "implicit-stiff-time-stepping-and-algebraic-error",
+      "faithful": true,
+      "note": "The drift-implicit algorithm and theorem impose continuous globally dissipative drift on the full state space before using the globally defined resolvent. Diffusion stability is handled separately and is not called strict resolvent contraction."
+    },
+    {
+      "from": "parallel-in-time-parareal-and-mgrit",
+      "to": "implicit-stiff-time-stepping-and-algebraic-error",
+      "faithful": true,
+      "note": "The canonical coarse BE map expressly requires a supplied selector choosing one admissible root for every admitted input. It does not infer existence or uniqueness from the BE definition."
+    },
+    {
+      "from": "constrained-dynamics-shake-and-rattle",
+      "to": "implicit-stiff-time-stepping-and-algebraic-error",
+      "faithful": true,
+      "note": "The RATTLE procedure supplies open multiplier domains, C¹ residuals, finite budgets, and terminating exact retained-factor backends. Its termination proof follows the actual chord-loop ordering, and its residual-error theorem supplies an independent inverse estimate."
+    },
+    {
+      "from": "deferred-correction-and-collocation-iterations",
+      "to": "implicit-stiff-time-stepping-and-algebraic-error",
+      "faithful": true,
+      "note": "The collocation definition identifies A=Q and the quadrature weights with the IRK equations and update. It explicitly leaves branch existence and uniqueness to separate results."
+    },
+    {
+      "from": "imex-and-operator-splitting-methods",
+      "to": "implicit-stiff-time-stepping-and-algebraic-error",
+      "faithful": true,
+      "note": "The IMEX and ARS residuals use update units. The ARS branch lemma applies the stage supplier separately with A=[γ], checking each centered invariant ball and contraction margin. Its tolerance theorem keeps the distinct second-stage and final-stage budgets."
+    },
+    {
+      "from": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "to": "implicit-stiff-time-stepping-and-algebraic-error",
+      "faithful": true,
+      "note": "The stage-Jacobian lemma derives the Lipschitz premise from its derivative bound on a convex product ball, verifies invariance, and proves nonsingularity separately. The sensitivity theorem differentiates the selected exact algebraic branch and expressly excludes stopped stage iterations."
+    }
+  ]
+}

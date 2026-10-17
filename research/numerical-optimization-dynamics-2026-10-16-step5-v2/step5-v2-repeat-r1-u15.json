@@ -1,0 +1,42 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "15",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "d4c201ab64bea5b18e853c06044e23d19f84290b0661a93eb48a74d0e2563564",
+      "outcome": "false_positive",
+      "reason": "The missing hypothesis is already implied by the stated successful execution. The first paragraph of alg-na-computed-unitary-radix-two-fft's Definition fixes an instance of def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma and requires the same instance throughout recursion. Its final paragraph propagates arithmetic range failures. The model's Definition explicitly says every nonzero subnormal exact result returns range-failure and, separately, 'A procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite'. This concerns exact intermediates, not merely rounded outputs. Consequently every successful recursive butterfly satisfies the normal-intermediate premise of lem-na-computed-unitary-butterfly-error-bound, so F2 and step 2.1 apply. No additional hypothesis or carrier edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+      "disposition": "unaffected",
+      "post_sha256": "a639619e99db122b489d2eecdd439ac9f528da95a39ef6771365530622fbea22",
+      "review_context_sha256": "16b8067f9bad35b8e0da2c3f027e4727a43b66f341530f93415199884b864810",
+      "reason": "Reviewed the full assigned theorem, defining FFT algorithm, operationwise success model, butterfly statement and proof, owning contract, page interface, and relevant Fourier inversion, Parseval, complex-product and exponential suppliers. Successful execution supplies the exact zero-or-normal intermediate condition for every recursive call and butterfly. The exact normalized block 2^(-1/2)(a+wb,a-wb) is unitary when |w|=1. Disjoint even/odd coordinates therefore give stacked child error at most rho_(m-1)||x|| and computed child norm at most (1+rho_(m-1))||x||; summing squared pair bounds and applying the triangle inequality yields rho_m=rho_(m-1)+eta(1+rho_(m-1))=(1+eta)^m-1. The N=1 case is exact, inverse conjugation preserves errors, and the exponential-series estimate gives rho_m<=2m eta for m eta<=1. The page explicitly retains normal-range successful operations and the contract quotes the butterfly's complete hypothesis. No confirmed defect, uncertainty, new prerequisite, choice assumption, metadata repair or interface change was found. This is an adjudication of the unchanged carrier, not an independent review of an authored repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "The Step-4 digest's normal-intermediate convention was verified against the actual current operationwise Definition, rather than treated as authority. The reported rejection is false positive; assigned item, contract and page are unchanged. No Statement/Definition change occurred, so no downstream propagation or published-consumer maintenance event is triggered.",
+    "Immediately after mathematical review, ran node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items thm-na-computed-unitary-radix-two-fft-error-bound; exit 0. Copied both returned hashes into the review. The post guard equals the frozen assignment's before guard.",
+    "Focused format check: node tools/tsx-run.mjs tools/precheck.mts items/thm-na-computed-unitary-radix-two-fft-error-bound.md --json; exit 0, one proof checked, zero failures. Focused rendering check: node tools/rendercheck.mjs items/thm-na-computed-unitary-radix-two-fft-error-bound.md --json; exit 0, one file checked, zero errors and zero warnings.",
+    "Local report validation passed: identity and input_sha256 match the frozen pack's JSON digest; the exact rejected model/context tuple is covered; the current itemHashGuard equals both the frozen before guard and review post_sha256. No item was changed, so the changed-item proof-layout command has no subjects.",
+    "No external source was needed or consulted: the disputed implication is explicit in the local defining interface, and the norm recurrence is familiar. No judges, stamps, certificates, round-state transitions or other workers were launched. No outstanding mathematical obligation remains in this assignment; subsequent collection and certification belong to the engine."
+  ]
+}

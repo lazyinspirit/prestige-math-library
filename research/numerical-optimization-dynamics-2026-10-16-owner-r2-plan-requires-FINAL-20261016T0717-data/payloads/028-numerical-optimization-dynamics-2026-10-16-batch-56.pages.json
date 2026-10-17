@@ -1,0 +1,399 @@
+[
+  {
+    "order": 2396,
+    "id": "parabolic-finite-element-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Parabolic finite-element methods",
+    "companion": "parabolic-finite-element-methods-examples",
+    "requires": [
+      "finite-element-meshes-and-interpolation",
+      "ceas-lemma-and-aubin-nitsche-error-estimates",
+      "the-direct-method-and-euler-lagrange-equations"
+    ],
+    "items": [
+      {
+        "id": "def-parabolic-evolution-triple-and-energy-space",
+        "kind": "definition",
+        "title": "Evolution triples and the parabolic energy space",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "Define the dense continuous Hilbert triple, its dual embeddings, Bochner L2 spaces, the weak time derivative, and W(0,T;V)."
+      },
+      {
+        "id": "lem-parabolic-bochner-l2-approximate-identity",
+        "kind": "lemma",
+        "title": "Smooth mollifiers approximate Bochner L² functions",
+        "deps": [
+          "def-bochner-integrable-function",
+          "def-countable-choice",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "def-strongly-measurable-banach-valued-function",
+          "def-translation-of-a-function-on-rn",
+          "lem-bochner-integral-norm-inequality",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-bochner-integrability-criterion",
+          "thm-dominated-convergence",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity"
+        ],
+        "dependency_level": 0,
+        "strategy": "Prove translation continuity for Bochner L² by simple approximation, then bound the mollification error by the weighted mean of translation errors."
+      },
+      {
+        "id": "lem-parabolic-discrete-energy-identity",
+        "kind": "lemma",
+        "title": "The Hilbert-space discrete energy identity",
+        "deps": [
+          "def-hilbert-space"
+        ],
+        "dependency_level": 0,
+        "strategy": "Expand the inner product to prove 2(x-y,x)=||x||^2-||y||^2+||x-y||^2."
+      },
+      {
+        "id": "lem-parabolic-hilbert-bnb-criterion",
+        "kind": "lemma",
+        "title": "The Hilbert-space Babuška–Nečas–Babuška criterion",
+        "deps": [
+          "def-countable-choice",
+          "def-hilbert-space",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "thm-riesz-representation-for-hilbert-space"
+        ],
+        "dependency_level": 0,
+        "strategy": "Represent the bounded bilinear form by a Hilbert-space map, use the inf-sup bound for closed range, and use the trivial right kernel for density and surjectivity."
+      },
+      {
+        "id": "alg-parabolic-backward-euler-averaged-forms",
+        "kind": "algorithm",
+        "title": "Backward Euler FEM with interval-averaged forms and load",
+        "deps": [
+          "def-parabolic-evolution-triple-and-energy-space",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms"
+        ],
+        "justified_by": [
+          "thm-parabolic-backward-euler-error-and-reconstruction"
+        ],
+        "dependency_level": 1,
+        "strategy": "On each time interval solve the coercive variational step using the Bochner averages of the measurable form and load; record the piecewise-constant solution, affine reconstruction, and jump convention."
+      },
+      {
+        "id": "alg-parabolic-crank-nicolson-cg1",
+        "kind": "algorithm",
+        "title": "Crank–Nicolson and cG(1) for an autonomous parabolic form",
+        "deps": [
+          "def-parabolic-evolution-triple-and-energy-space",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms"
+        ],
+        "justified_by": [
+          "thm-parabolic-crank-nicolson-second-order"
+        ],
+        "dependency_level": 1,
+        "strategy": "Use the time-independent form at the step midpoint and the exact interval-average load; state the continuous piecewise-linear cG(1) equivalence and initial value."
+      },
+      {
+        "id": "lem-parabolic-bochner-time-mollification",
+        "kind": "lemma",
+        "title": "Time mollification preserves the evolution-space derivative",
+        "deps": [
+          "def-bochner-integrable-function",
+          "def-countable-choice",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "def-parabolic-evolution-triple-and-energy-space",
+          "lem-bochner-integral-norm-inequality",
+          "lem-parabolic-bochner-l2-approximate-identity",
+          "thm-bochner-integrability-criterion",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "dependency_level": 1,
+        "strategy": "Reflect a W-function at both endpoints in V*, convolve in time, and prove strong L2 convergence in V and V*."
+      },
+      {
+        "id": "lem-parabolic-measurable-form-operators-and-inverse",
+        "kind": "lemma",
+        "title": "Measurable actions and inverse actions of parabolic forms",
+        "deps": [
+          "def-parabolic-evolution-triple-and-energy-space",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-countable-choice",
+          "thm-continuity-from-above-for-measures",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-lax-milgram",
+          "thm-riesz-representation-for-hilbert-space"
+        ],
+        "dependency_level": 1,
+        "strategy": "Use separable duals to prove measurable form actions, then approximate the pointwise Lax–Milgram and adjoint solutions by measurable finite-dimensional Galerkin systems."
+      },
+      {
+        "id": "lem-parabolic-projection-time-product-rule",
+        "kind": "lemma",
+        "title": "Time derivatives of fixed and differentiable comparison projections",
+        "deps": [
+          "def-bochner-integrable-function",
+          "def-countable-choice",
+          "def-parabolic-evolution-triple-and-energy-space",
+          "lem-parabolic-bochner-l2-approximate-identity",
+          "thm-bochner-integrability-criterion",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-holder-inequality-for-integrals",
+          "thm-bounded-linear-maps-commute-with-bochner-integration"
+        ],
+        "dependency_level": 1,
+        "strategy": "Test the weak derivative against bounded linear functionals and use the scalar product rule for an operator-norm C1 family."
+      },
+      {
+        "id": "lem-parabolic-weak-compactness-separable-bochner-hilbert",
+        "kind": "lemma",
+        "title": "Bounded sequences in a separable Hilbert space have weakly convergent subsequences",
+        "deps": [
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-separable-space",
+          "def-parabolic-evolution-triple-and-energy-space",
+          "thm-dominated-convergence",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-holder-inequality-for-integrals",
+          "thm-minkowski-inequality-for-integrals",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "thm-riesz-representation-for-hilbert-space",
+          "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn",
+          "thm-continuity-from-below-for-measures"
+        ],
+        "dependency_level": 1,
+        "strategy": "Choose a countable orthonormal basis, diagonalize the bounded scalar coordinate sequences, and reconstruct the weak limit by its square-summable coordinates."
+      },
+      {
+        "id": "lem-parabolic-zero-boundary-sobolev-space-is-separable",
+        "title": "The zero-boundary Sobolev energy space is a separable Hilbert space",
+        "kind": "lemma",
+        "deps": [
+          "def-countable-choice",
+          "def-parabolic-evolution-triple-and-energy-space",
+          "def-separable-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn"
+        ],
+        "dependency_level": 1,
+        "strategy": "Prove the Sobolev graph is a closed Hilbert subspace of a finite product of separable L² spaces; use Poincare to identify the gradient norm and prove density of the zero-boundary space in L²."
+      },
+      {
+        "id": "thm-parabolic-finite-dimensional-measurable-ode",
+        "kind": "theorem",
+        "title": "Finite-dimensional parabolic Galerkin ODEs with measurable coefficients",
+        "deps": [
+          "def-parabolic-evolution-triple-and-energy-space"
+        ],
+        "dependency_level": 1,
+        "strategy": "Use short-interval Picard contractions for the mass-matrix ODE, concatenate the solutions, and test by the solution for energy stability."
+      },
+      {
+        "id": "def-parabolic-ritz-projection",
+        "kind": "definition",
+        "title": "The elliptic Ritz projection for a conforming finite-element space",
+        "deps": [
+          "def-parabolic-evolution-triple-and-energy-space",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-broken-and-conforming-polynomial-spaces"
+        ],
+        "justified_by": [
+          "lem-parabolic-ritz-projection-well-defined"
+        ],
+        "dependency_level": 2,
+        "strategy": "Define the unique R_h u in V_h satisfying a(R_hu,v_h)=a(u,v_h) for every v_h in V_h."
+      },
+      {
+        "id": "lem-parabolic-energy-pairing-and-trace",
+        "kind": "lemma",
+        "title": "The evolution-space energy identity and continuous H trace",
+        "deps": [
+          "def-countable-choice",
+          "def-parabolic-evolution-triple-and-energy-space",
+          "lem-parabolic-bochner-time-mollification"
+        ],
+        "dependency_level": 2,
+        "strategy": "Pass the smooth energy identity through the proved time-mollification approximation and use polarization for integration by parts."
+      },
+      {
+        "id": "thm-parabolic-backward-euler-error-and-reconstruction",
+        "kind": "theorem",
+        "title": "Backward Euler stability, first-order error, and reconstruction bounds",
+        "deps": [
+          "alg-parabolic-backward-euler-averaged-forms",
+          "lem-parabolic-discrete-energy-identity",
+          "thm-parabolic-finite-dimensional-measurable-ode",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms"
+        ],
+        "dependency_level": 2,
+        "strategy": "Solve each averaged coercive step, test with U^j, use the discrete energy identity, and bound the consistency residual by tau times the L2(V) time derivative."
+      },
+      {
+        "id": "thm-parabolic-crank-nicolson-second-order",
+        "kind": "theorem",
+        "title": "Second-order nodal error for Crank–Nicolson under H2 time regularity",
+        "deps": [
+          "alg-parabolic-crank-nicolson-cg1",
+          "lem-parabolic-discrete-energy-identity",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "thm-parabolic-finite-dimensional-measurable-ode"
+        ],
+        "dependency_level": 2,
+        "strategy": "Subtract the exact interval-integrated equation from the CN step, test by the midpoint error, and bound the trapezoidal average defect using u in H2(0,T;V_h)."
+      },
+      {
+        "id": "lem-parabolic-ritz-projection-well-defined",
+        "kind": "lemma",
+        "title": "Existence, uniqueness, linearity, and boundedness of the Ritz projection",
+        "deps": [
+          "def-parabolic-ritz-projection",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms"
+        ],
+        "dependency_level": 3,
+        "strategy": "Apply Lax–Milgram on the finite-dimensional closed Hilbert subspace and prove linearity and the M/alpha operator bound by uniqueness and coercivity."
+      },
+      {
+        "id": "thm-parabolic-variational-wellposedness-and-energy-stability",
+        "kind": "theorem",
+        "title": "Well-posedness for measurable coercive parabolic forms",
+        "deps": [
+          "def-countable-choice",
+          "def-parabolic-evolution-triple-and-energy-space",
+          "lem-fundamental-lemma-of-the-calculus-of-variations",
+          "lem-parabolic-energy-pairing-and-trace",
+          "lem-parabolic-hilbert-bnb-criterion",
+          "lem-parabolic-measurable-form-operators-and-inverse",
+          "lem-parabolic-weak-compactness-separable-bochner-hilbert",
+          "thm-finite-and-countable-subadditivity-of-measures"
+        ],
+        "dependency_level": 3,
+        "strategy": "Apply BNB on the zero-trace space-time space after proving inverse-action measurability; approximate arbitrary H initial data by V data, then use the energy estimate and weak compactness."
+      },
+      {
+        "id": "thm-parabolic-fem-semidiscrete-existence-energy",
+        "kind": "theorem",
+        "title": "Well-posedness and energy stability of the semidiscrete FEM system",
+        "deps": [
+          "def-parabolic-evolution-triple-and-energy-space",
+          "lem-parabolic-zero-boundary-sobolev-space-is-separable",
+          "thm-parabolic-finite-dimensional-measurable-ode",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-broken-and-conforming-polynomial-spaces",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-countable-choice",
+          "def-matching-affine-simplicial-meshes"
+        ],
+        "dependency_level": 4,
+        "strategy": "Identify the finite-dimensional mass and stiffness system, apply the measurable-coefficient ODE lemma, and test the variational equation by the discrete solution."
+      },
+      {
+        "id": "thm-parabolic-semidiscrete-ritz-error-splitting-and-energy-bound",
+        "kind": "theorem",
+        "title": "Semidiscrete Ritz error splitting and energy estimate",
+        "deps": [
+          "def-parabolic-evolution-triple-and-energy-space",
+          "lem-parabolic-energy-pairing-and-trace",
+          "lem-parabolic-discrete-energy-identity",
+          "lem-parabolic-projection-time-product-rule",
+          "thm-parabolic-variational-wellposedness-and-energy-stability",
+          "thm-parabolic-fem-semidiscrete-existence-energy",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-parabolic-ritz-projection",
+          "lem-parabolic-ritz-projection-well-defined",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "strategy": "Set rho=R_hu-u and theta=u_h-R_hu, derive the full residual identity, and test by theta; specialize to the time-independent Ritz projection and retain initial error."
+      },
+      {
+        "id": "cor-parabolic-semidiscrete-spatial-error-rates",
+        "kind": "corollary",
+        "title": "Semidiscrete parabolic energy and L2 rates from elliptic approximation",
+        "deps": [
+          "lem-parabolic-zero-boundary-sobolev-space-is-separable",
+          "thm-parabolic-semidiscrete-ritz-error-splitting-and-energy-bound",
+          "def-parabolic-ritz-projection",
+          "lem-parabolic-ritz-projection-well-defined",
+          "lem-parabolic-projection-time-product-rule",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "cor-shape-regular-affine-fe-primal-energy-approximation",
+          "cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "strategy": "Apply the primal and dual elliptic approximation estimates to rho and rho_t, then insert those bounds into the semidiscrete residual energy inequality."
+      }
+    ]
+  },
+  {
+    "order": 2397,
+    "id": "parabolic-finite-element-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Parabolic finite-element methods — Examples",
+    "companion": "parabolic-finite-element-methods",
+    "requires": [
+      "parabolic-finite-element-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-parabolic-crank-nicolson-time-regularity-order-loss",
+        "kind": "example",
+        "title": "A solution with only H1 time regularity loses CN second order",
+        "deps": [
+          "alg-parabolic-crank-nicolson-cg1",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-parabolic-evolution-triple-and-energy-space"
+        ],
+        "dependency_level": 2,
+        "strategy": "For u(t)=t^(3/4) in the scalar equation u'+u=f, compute the first CN nodal error exactly as tau^(7/4)/(14(1+tau/2))."
+      },
+      {
+        "id": "ex-parabolic-heat-initial-projection-error",
+        "kind": "example",
+        "title": "The L2 projection and Ritz projection give different initial data",
+        "deps": [
+          "def-parabolic-ritz-projection",
+          "lem-parabolic-ritz-projection-well-defined",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "strategy": "On the four-triangle unit-square fan mesh, compute the L2 projection of the squared center hat as 3/5 times the hat and its Ritz projection as 2/3 times the hat."
+      },
+      {
+        "id": "ex-parabolic-semidiscrete-ritz-error-identity",
+        "kind": "example",
+        "title": "Direct derivation of the semidiscrete Ritz residual",
+        "deps": [
+          "lem-parabolic-zero-boundary-sobolev-space-is-separable",
+          "thm-parabolic-semidiscrete-ritz-error-splitting-and-energy-bound",
+          "thm-parabolic-fem-semidiscrete-existence-energy",
+          "def-parabolic-ritz-projection",
+          "lem-parabolic-ritz-projection-well-defined",
+          "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "def-sobolev-space-wkp-and-its-norm",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "def-matching-affine-simplicial-meshes",
+          "def-broken-and-conforming-polynomial-spaces",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "def-countable-choice"
+        ],
+        "dependency_level": 6,
+        "strategy": "Subtract the continuous and semidiscrete heat equations and use Ritz orthogonality to isolate the time derivative of the projection residual."
+      }
+    ]
+  }
+]

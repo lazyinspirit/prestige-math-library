@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-16T11:11:32.418178+00:00",
+  "changes": "Only research reconciler/verifier derivation-input semantics plus explanatory comment; finaltags retained and native explicitTokens(step.text,stepMap) fact/known-step refs covered. Existing wholequote/citationuses/classification/history semantics preserved.",
+  "canonical_writes": false,
+  "preparation_or_gate_execution": false,
+  "before_files": [
+    "reconcile.mjs.before-native-inputs-r4",
+    "verify-projected.mjs.before-native-inputs-r4"
+  ],
+  "diff": "native-derivation-inputs-r4.diff",
+  "native_input_rule": "inputs.has(token) || inputs.has(`step ${token}`) for every exact explicitTokens result; generator appends absent facts verbatim and step references with step prefix, preserving existing finaltag spelling/order.",
+  "independent_verifier_rule": "Repositoryparser final tags retained; independently requires same native token coverage, no citation or statement changes.",
+  "code_only_checks": [
+    {
+      "command": "node --check reconcile.mjs",
+      "exit_code": 0
+    },
+    {
+      "command": "node --check verify-projected.mjs",
+      "exit_code": 0
+    },
+    {
+      "check": "Both explicitTokens helper bodies byteequal native tools/proof-contract.mjs; native input acceptable rule preserved verbatim in verifier coverage condition",
+      "pass": true
+    }
+  ]
+}

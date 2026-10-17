@@ -2,7 +2,7 @@
 // Inventories resolve identities/homes; only selected carriers, actual supplier
 // closure, relevant evidence and workflow implementation inputs are hashed.
 import { existsSync, lstatSync, readFileSync, readdirSync } from 'node:fs';
-import { dirname, join, relative } from 'node:path';
+import { dirname, join, normalize, relative } from 'node:path';
 import { protectedEntryHash, runScope, sha256, splitFrontmatter } from './step6-lib.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { originalImportPath } from './physics-support/physics-imports.mjs';
@@ -24,13 +24,13 @@ export function scopedReadinessTree(run, root, { scope = runScope(run, root), in
   const dispatchPrefix = `research/${run}-dispatch/`;
   const files = new Set();
   const projections = new Map();
-  const walk = (dir, accept = () => true) => {
+  const walk = (dir, accept = () => true, descend = () => true) => {
     if (!existsSync(dir)) return;
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
       const absolute = join(dir, entry.name);
       const rel = relative(root, absolute).replaceAll('\\', '/');
       if (mutableAfterReadiness.has(rel) || rel.startsWith(dispatchPrefix)) continue;
-      if (entry.isDirectory()) walk(absolute, accept);
+      if (entry.isDirectory() && descend(rel)) walk(absolute, accept, descend);
       else if ((entry.isFile() || entry.isSymbolicLink()) && accept(rel)) files.add(rel);
     }
   };
@@ -172,7 +172,44 @@ export function scopedReadinessTree(run, root, { scope = runScope(run, root), in
   for (const id of manifestItems) for (const stage of ['3a', '3b']) for (const role of ['owner', 'review'])
     add(`research/${run}-step${stage}-${role}-${id}.json`);
   walk(join(root, 'research', `${run}-step5-v2`));
-  for (const dir of ['tools', 'briefs']) walk(join(root, dir));
+  if (physics) {
+    // Preserve the physics workflow's existing complete tooling selection.
+    for (const dir of ['tools', 'briefs']) walk(join(root, dir));
+  } else {
+    const physicsTool = file => ['tools/physics-autopilot', 'tools/physics-support']
+      .some(dir => file === dir || file.startsWith(`${dir}/`));
+    walk(join(root, 'tools'), file => !physicsTool(file), dir => !physicsTool(dir));
+    walk(join(root, 'briefs'));
+    // A cross-domain regression test is not a production mathematics entrypoint.
+    // Keep its own bytes above, without importing the independent physics engine
+    // into mathematics readiness merely because the test exercises both engines.
+    const productionSource = file => /\.[cm]?[jt]s$/.test(file)
+      && !file.split('/').some(part => ['node_modules', 'test', 'tests', '__tests__', 'fixtures'].includes(part))
+      && !/\.(?:test|spec)\.[cm]?[jt]s$/.test(file);
+    const pending = [...files].filter(file => file.startsWith('tools/') && productionSource(file));
+    const visited = new Set();
+    for (let i = 0; i < pending.length; i++) {
+      const file = pending[i];
+      if (visited.has(file)) continue;
+      visited.add(file);
+      // Conservatively retain every literal relative source/JSON reference,
+      // including static imports, export-from and literal dynamic imports.
+      // Comments may over-select; modules are never evaluated for discovery.
+      // Computed domain prefixes in the shared drivers choose ./ for math;
+      // their unexecuted physics branch is not a mathematics entrypoint.
+      const references = readSource(file).matchAll(/(['"`])(\.{1,2}\/[^'"`\r\n\\]*\.(?:[cm]?[jt]s|json))\1/g);
+      for (const match of references) {
+        if (match[2].includes('${')) continue;
+        const dependency = normalize(join(dirname(file), match[2])).replaceAll('\\', '/');
+        if (!physicsTool(dependency)) continue;
+        const absolute = join(root, dependency);
+        if (!existsSync(absolute) || !lstatSync(absolute).isFile())
+          throw Error(`unresolved mathematics shared-tool dependency: ${file} -> ${dependency}`);
+        add(dependency);
+        if (/\.[cm]?[jt]s$/.test(dependency)) pending.push(dependency);
+      }
+    }
+  }
   for (const file of ownedPaths) add(file);
   const policyFile = `research/${run}-closeout-scope.json`;
   if (existsSync(join(root, policyFile))) {
@@ -189,6 +226,19 @@ export function scopedReadinessTree(run, root, { scope = runScope(run, root), in
       for (const evidence of fragment.evidence ?? []) {
         if (typeof evidence.path !== 'string' || !evidence.path.startsWith(`research/${run}-`)
           || evidence.path.split('/').includes('..')) throw Error('invalid shared-fragment evidence path');
+        add(evidence.path);
+      }
+    }
+    if (policy.plan_projection !== undefined) {
+      const row = policy.plan_projection;
+      if (!row || row.path !== 'research/plan-spec.json'
+        || typeof row.authority !== 'string' || !row.authority.startsWith(`research/${run}-`)
+        || row.authority.split('/').includes('..')) throw Error('invalid plan-projection ownership path');
+      add(row.authority);
+      const spec = JSON.parse(readSource(row.authority));
+      for (const evidence of spec.evidence ?? []) {
+        if (typeof evidence.path !== 'string' || !evidence.path.startsWith(`research/${run}-`)
+          || evidence.path.split('/').includes('..')) throw Error('invalid plan-projection evidence path');
         add(evidence.path);
       }
     }

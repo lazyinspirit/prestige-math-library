@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "97",
+  "round": 0,
+  "reviewed_items": [
+    "lem-capped-diis-coefficient-minimizer-exists",
+    "def-self-consistent-projector-response-map",
+    "def-admissible-hermitian-density-domain",
+    "lem-spectral-gap-persistence-and-uniform-resolvent-bound",
+    "lem-gapped-projector-map-well-defined",
+    "lem-projector-is-admissible-density",
+    "lem-admissible-density-domain-is-closed-convex-complete",
+    "thm-block-projector-frechet-derivative-and-bound",
+    "thm-contractive-scf-convergence-and-inexact-error-bound",
+    "thm-level-shift-fixed-projector-equivalence",
+    "alg-undamped-scf-with-gap-and-residual-status",
+    "alg-capped-diis-projector-proposal",
+    "lem-density-mixing-preserves-domain-but-not-projectors",
+    "thm-gapped-response-projector-lipschitz-certificate",
+    "cor-finite-basis-energy-model-has-c1-response",
+    "thm-density-mixing-contracts-under-jacobian-certificate",
+    "alg-certified-scf-with-diis-safeguard",
+    "thm-certified-diis-error-inheritance",
+    "alg-relaxed-density-mixing-with-finite-budget",
+    "ex-occupied-projector-discontinuity-at-zero-gap",
+    "ex-self-consistent-projector-two-cycle-with-gap",
+    "ex-affine-contractive-response-and-residual-error",
+    "ex-density-mixture-leaves-projector-manifold",
+    "ex-diis-singular-gram-fallback",
+    "ex-additive-eigensolve-tolerance-residual-certificate"
+  ],
+  "reviewed_pages": [
+    "self-consistent-projector-iterations-and-certified-mixing",
+    "self-consistent-projector-iterations-and-certified-mixing-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The assigned scope is represented, but batch-92 prerequisite proofs have undeclared trace-invariance uses. I also request one local repair covering three A-page defects.",
+  "findings": [
+    {
+      "id": "lem-capped-diis-coefficient-minimizer-exists",
+      "type": "local",
+      "reason": "Proof step 3.1 asserts that the capped coefficient set is convex without showing it. Prove the affine constraint is preserved and use the ℓ1 triangle inequality for the cap; convexity is needed to establish convexity of the minimizer set and uniqueness of its minimum-norm selection."
+    },
+    {
+      "id": "lem-gapped-projector-map-well-defined",
+      "type": "local",
+      "reason": "Proof step 2.1 asserts tr(P)=r for P=∑_{j=1}^r u_j u_j*, but does not show the trace calculation. Add the direct calculation that each orthonormal rank-one term has trace 1; this establishes membership in P_r."
+    },
+    {
+      "id": "alg-certified-scf-with-diis-safeguard",
+      "type": "local",
+      "reason": "Definition step 1 computes the residual and stopping test only inside the no-cache branch, although step 5 caches an accepted candidate for the next iteration. Compute the residual bound and test it for cached and newly evaluated responses. Step 4 also omits fallback handling for coefficient-cap failure and candidate membership or eigensolver-certificate failure; route every failed DIIS proposal or candidate certificate to the baseline update."
+    },
+    {
+      "id": "lem-hermitian-idempotent-trace-equals-rank",
+      "type": "prerequisite",
+      "reason": "Supplier proof step 2.1 changes to an eigenbasis and asserts that the trace is the sum of eigenvalues without a trace-invariance argument or dependency. The smallest missing prerequisite is trace invariance under unitary similarity; the available cor-trace-is-invariant-under-similarity (via thm-trace-of-ab-equals-trace-of-ba) is not declared. This supports def-rank-r-orthogonal-projector-domain and affects its batch-97 consumers, especially def-self-consistent-projector-response-map and thm-level-shift-fixed-projector-equivalence (step 2.1 uses dim ran(P)=r). Owner reconciliation is required outside this batch."
+    },
+    {
+      "id": "prop-finite-projector-energy-reality-and-gradient",
+      "type": "prerequisite",
+      "reason": "Supplier proof step 1.1 uses trace cyclicity in tr(BA)=tr(AB) without a declared dependency or fact. The smallest missing prerequisite is thm-trace-of-ab-equals-trace-of-ba. This proposition justifies def-finite-basis-projector-energy-model and reaches cor-finite-basis-energy-model-has-c1-response and the finite-model examples; owner reconciliation is required outside this batch."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-certified-diis-error-inheritance",
+      "decision": "accept",
+      "reason": "Checked against the proposed algorithm repair: its proof uses the accepted-candidate residual bound and baseline recurrence, which remain unchanged."
+    },
+    {
+      "id": "self-consistent-projector-iterations-and-certified-mixing",
+      "decision": "escalate",
+      "reason": "The page summary remains consistent with the algorithm repair, but the rank-projector and finite-model prerequisite findings still require owner reconciliation."
+    },
+    {
+      "id": "self-consistent-projector-iterations-and-certified-mixing-examples",
+      "decision": "escalate",
+      "reason": "The examples remain consistent with the algorithm repair; the A-page prerequisite escalations require owner reconciliation for this dependent page."
+    },
+    {
+      "id": "def-self-consistent-projector-response-map",
+      "decision": "escalate",
+      "reason": "Its response-map interface relies on the rank-r projector definition whose justified_by proof omits trace invariance."
+    },
+    {
+      "id": "thm-level-shift-fixed-projector-equivalence",
+      "decision": "escalate",
+      "reason": "Proof step 2.1 identifies the occupied block as an r-dimensional block using P∈P_r; the rank-r supplier proof needs the missing trace-invariance step."
+    },
+    {
+      "id": "cor-finite-basis-energy-model-has-c1-response",
+      "decision": "escalate",
+      "reason": "Its finite-model prerequisite chain includes the gradient proposition with the undeclared trace-cyclicity use."
+    }
+  ]
+}

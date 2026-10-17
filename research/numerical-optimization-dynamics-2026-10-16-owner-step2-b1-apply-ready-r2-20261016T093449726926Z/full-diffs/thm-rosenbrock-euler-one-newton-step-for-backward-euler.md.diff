@@ -1,0 +1,27 @@
+--- current/items/thm-rosenbrock-euler-one-newton-step-for-backward-euler.md
++++ proposed/items/thm-rosenbrock-euler-one-newton-step-for-backward-euler.md
+@@ -5,7 +5,7 @@
+ status: draft
+ origin: pipeline
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+-deps: [alg-rosenbrock-euler-step]
++deps: [def-rosenbrock-euler-step-map]
+ dependency_level: 1
+ proof_strategy: direct
+ provenance:
+@@ -23,13 +23,13 @@
+ 
+ ## Statement
+ 
+-Let $f:U\to\mathbb R^d$ be continuously differentiable, $y\in U$, $h>0$, and suppose $M:=I-hDf(y)$ is invertible. The backward-Euler increment equation is $G(s):=s-hf(y+s)=0$. A Newton correction for $G$ at $s_0=0$, defined by $s_1=s_0-DG(s_0)^{-1}G(s_0)$, is $s_1=hM^{-1}f(y)$. Consequently, the state $y+s_1$ equals the Rosenbrock-Euler output. This identity concerns one Newton correction only; it asserts neither convergence of Newton iteration nor that the corrected increment solves $G(s)=0$.
++Let $f:U\to\mathbb R^d$ be continuously differentiable, $y\in U$, $h>0$, and suppose $M:=I-hDf(y)$ is invertible. The backward-Euler increment equation is $G(s):=s-hf(y+s)=0$. A Newton correction for $G$ at $s_0=0$, defined by $s_1=s_0-DG(s_0)^{-1}G(s_0)$, is $s_1=hM^{-1}f(y)$. Consequently, the state $y+s_1$ equals the exact-arithmetic autonomous exact-Jacobian Rosenbrock-Euler map [[def-rosenbrock-euler-step-map]] with $\gamma=1$. This identity concerns one Newton correction only; it asserts neither convergence of Newton iteration nor that the corrected increment solves $G(s)=0$.
+ 
+ ## Facts & Assumptions
+ 
+ **Given:** The differentiable vector field, state, positive step, and invertible matrix in the statement.
+ 
+-[F1] [[alg-rosenbrock-euler-step]] returns $y+h(I-hDf(y))^{-1}f(y)$ whenever the stage matrix is invertible.
++[F1] [[def-rosenbrock-euler-step-map]]: the exact-arithmetic autonomous exact-Jacobian map at $\gamma=1$ is $y+h(I-hDf(y))^{-1}f(y)$ whenever the stage matrix is invertible.
+ 
+ ## Proof
+ 

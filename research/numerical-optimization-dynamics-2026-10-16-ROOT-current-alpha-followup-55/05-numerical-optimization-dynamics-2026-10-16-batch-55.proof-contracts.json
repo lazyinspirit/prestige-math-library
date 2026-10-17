@@ -1,0 +1,1869 @@
+{
+  "version": 1,
+  "scope": [
+    "def-uniform-grid-and-difference-operators",
+    "def-periodic-one-way-advection-schemes",
+    "def-centered-leapfrog-wave-scheme",
+    "lem-dirichlet-grid-summation-by-parts",
+    "lem-dirichlet-grid-poincare-inequality",
+    "thm-smooth-advection-stencils-consistent",
+    "thm-dirichlet-leapfrog-discrete-energy",
+    "lem-periodic-advection-amplification-symbols",
+    "thm-periodic-centered-wave-amplification-and-endpoint",
+    "thm-periodic-advection-power-stability",
+    "thm-nearest-neighbor-cfl-domain-condition",
+    "ex-wave-cfl-endpoint-and-energy-breakdown",
+    "ex-upwind-versus-downwind-advection",
+    "ex-centered-advection-consistent-but-unstable",
+    "ex-grid-fourier-stability-needs-a-common-space-lift"
+  ],
+  "contracts": {
+    "def-uniform-grid-and-difference-operators": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition N>=2 gives a nonempty periodic set J_N and at least one finite-interval interior node. The infinite-grid alternative is indexed by the nonempty integers; none of these specified grid sums is over an unprovided empty grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Definition: zero grid values are permitted and have zero weighted norm."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Definition: the grid is one-dimensional, with the scalar field and index set stated explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition requires N>=2 and h,k>0, so a zero-width spatial cell or zero time step is not an admitted grid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Definition: finite-interval endpoints and periodic wraparound are specified."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "J_N, the integer-grid nodes and interval edges are explicitly indexed; modulo reduction supplies periodic neighbours without boundary-value choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The grid item defines distinct periodic, infinite and Dirichlet index sets and norms; it asserts no iff stability theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The grid item defines distinct periodic, infinite and Dirichlet index sets and norms; it asserts no iff stability theorem."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Checked the entire Definition and its four scalar/index suppliers. N>=2 and positive h,k exclude empty interiors and zero spacing. Periodic modulo-N neighbors, the integer grid, and N+1 Dirichlet nodes are kept distinct; weighted sums use the conjugate in the second entry. For N=2 both periodic neighbors coincide and are correctly counted twice. Zero states have zero norm; Dirichlet interior norm is used with prescribed endpoints. All constructions are explicit and choice-free. No mathematical defect; reader/refuter report no owned finding."
+      }
+    },
+    "def-periodic-one-way-advection-schemes": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Periodic rows use N>=2 from the grid supplier, and infinite-grid rows use Z; neither spatial index set is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Definition: zero initial data are permitted by all homogeneous stencil rows."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The grid convention assumes N\u22652; no N=1 result is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The initial branch requires a>0 and h,k>0; a<0 uses the specified reflected stencil, while a=0 is not part of either stated branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Definition: the finite-interval initial row and positive-speed inflow boundary row are stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All stencil values are explicit neighbours; finite-interval upwind fixes only its inflow data and computes the outflow value."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The advection item defines five updates and the separate inflow upwind branch; it does not characterize convergence by an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The advection item defines five updates and the separate inflow upwind branch; it does not characterize convergence by an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "def-centered-leapfrog-wave-scheme": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N>=2 gives at least one interior Dirichlet node and a nonempty periodic node set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Definition: the zero starting rows satisfy the homogeneous recurrence."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The grid convention assumes N\u22652; no N=1 result is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition assumes c>0,h>0,k>0 and a positive interval length L=Nh."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: displacement and discrete initial velocity determine the start row; zero Dirichlet endpoints are imposed at every time level."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The supplied rows U^0,V^0 fix U^1=U^0+kV^0; the recurrence then determines every later row."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The wave item defines the prescribed two starting rows and leapfrog recurrence, not an iff initialization or convergence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The wave item defines the prescribed two starting rows and leapfrog recurrence, not an iff initialization or convergence theorem."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "lem-dirichlet-grid-summation-by-parts": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "Use $\\mathbb N$ for the natural-number index set (including zero) ([[def-natural-numbers]]), $\\mathbb R$ for the real scalar field ([[def-real-numbers]]), and $\\mathbb C$ with its real embedding and modulus ([[def-complex-numbers-and-arithmetic]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]).\n\nLet $N\\ge2$, $h>0$, $k>0$, and $t_n=nk$. For the finite periodic grid put $J_N=\\{0,\\ldots,N-1\\}$ and reduce every shifted index modulo $N$. A periodic grid function is a map $v:J_N\\to\\mathbb C$, with weighted norm\n$$ \\|v\\|_{2,h}=\\left(h\\sum_{j=0}^{N-1}|v_j|^2\\right)^{1/2}. $$\nThe infinite uniform grid has indices $j\\in\\mathbb Z$ and positions $x_j=jh$. On the periodic and infinite grids define\n$$ (D_+v)_j=\\frac{v_{j+1}-v_j}{h},\\qquad (D_-v)_j=\\frac{v_j-v_{j-1}}{h},\\qquad (D_0v)_j=\\frac{v_{j+1}-v_{j-1}}{2h},\\qquad (\\Delta_hv)_j=\\frac{v_{j+1}-2v_j+v_{j-1}}{h^2}. $$\nUse the inner product linear in its first entry,\n$$ \\langle p,q\\rangle_{2,h}=h\\sum_{j=0}^{N-1}p_j\\overline{q_j},\\qquad \\langle D_+p,D_+q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}, $$\nwhere the indices in $D_+$ are reduced periodically, and set $\\|D_+p\\|_{e,h}^2=\\langle D_+p,D_+p\\rangle_{e,h}$. The same definitions apply to real-valued grid functions.\n\nFor a finite interval of length $L=Nh$, use physical nodes $x_j=jh$ with indices $j=0,\\ldots,N$. On its edges $j=0,\\ldots,N-1$ define $(D_+v)_j=(v_{j+1}-v_j)/h$, and on interior nodes $j=1,\\ldots,N-1$ use $(\\Delta_hv)_j=(v_{j+1}-2v_j+v_{j-1})/h^2$. At the right endpoint define $(D_-v)_N=(v_N-v_{N-1})/h$. The interior inner product, norm, and edge inner product are\n$$ \\langle p,q\\rangle_h=h\\sum_{j=1}^{N-1}p_j\\overline{q_j},\\qquad \\|v\\|_h^2=\\langle v,v\\rangle_h,\\qquad \\langle p,q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}. $$\nDirichlet grid functions have prescribed endpoint values; when they are zero, the interior norm and edge inner product above are the ones used for the wave energy.\n\nAll statements below distinguish these periodic, infinite, and finite-interval index sets. Periodic Fourier calculations are not boundary estimates for the finite-interval grid.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-telescope",
+          "claim": "Put $d_j=v_j-v_{j-1}$ for $j=1,\\ldots,N$. Expanding the second difference gives $$ \\langle u,-\\Delta_hv\\rangle_h=-\\frac1h\\sum_{j=1}^{N-1}u_j\\overline{(d_{j+1}-d_j)}. $$ Shift the index in the $d_{j+1}$ sum and telescope: $$ -\\sum_{j=1}^{N-1}u_j\\overline{(d_{j+1}-d_j)} =\\sum_{j=1}^{N}(u_j-u_{j-1})\\overline{d_j}+u_0\\overline{d_1}-u_N\\overline{d_N}. $$ Dividing by $h$ identifies the edge sum and boundary terms in the displayed identity.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-boundary-specialization",
+          "claim": "When $u_0=u_N=0$, step 1.1 reduces to $\\langle u,-\\Delta_hv\\rangle_h=\\langle D_+u,D_+v\\rangle_{e,h}$. Applying this identity after exchanging $u,v$ and taking complex conjugates gives $\\langle-\\Delta_hu,v\\rangle_h=\\langle u,-\\Delta_hv\\rangle_h$, so $-\\Delta_h$ is self-adjoint on the zero-endpoint subspace. Setting $u=v$ gives $\\langle u,-\\Delta_hu\\rangle_h=\\|D_+u\\|_{e,h}^2\\ge0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires N\u22652 and a finite nonempty interval grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 sets u=v=0 and verifies both sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is valid for N=2, the one-interior-node case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 keeps both endpoint terms for N=2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 displays the two boundary terms explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only finite sums and no selection principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Summation by parts is an algebraic identity with a zero-boundary consequence; it does not equate arbitrary boundary conditions with stability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Summation by parts is an algebraic identity with a zero-boundary consequence; it does not equate arbitrary boundary conditions with stability."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "lem-dirichlet-grid-poincare-inequality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "Use $\\mathbb N$ for the natural-number index set (including zero) ([[def-natural-numbers]]), $\\mathbb R$ for the real scalar field ([[def-real-numbers]]), and $\\mathbb C$ with its real embedding and modulus ([[def-complex-numbers-and-arithmetic]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]).\n\nLet $N\\ge2$, $h>0$, $k>0$, and $t_n=nk$. For the finite periodic grid put $J_N=\\{0,\\ldots,N-1\\}$ and reduce every shifted index modulo $N$. A periodic grid function is a map $v:J_N\\to\\mathbb C$, with weighted norm\n$$ \\|v\\|_{2,h}=\\left(h\\sum_{j=0}^{N-1}|v_j|^2\\right)^{1/2}. $$\nThe infinite uniform grid has indices $j\\in\\mathbb Z$ and positions $x_j=jh$. On the periodic and infinite grids define\n$$ (D_+v)_j=\\frac{v_{j+1}-v_j}{h},\\qquad (D_-v)_j=\\frac{v_j-v_{j-1}}{h},\\qquad (D_0v)_j=\\frac{v_{j+1}-v_{j-1}}{2h},\\qquad (\\Delta_hv)_j=\\frac{v_{j+1}-2v_j+v_{j-1}}{h^2}. $$\nUse the inner product linear in its first entry,\n$$ \\langle p,q\\rangle_{2,h}=h\\sum_{j=0}^{N-1}p_j\\overline{q_j},\\qquad \\langle D_+p,D_+q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}, $$\nwhere the indices in $D_+$ are reduced periodically, and set $\\|D_+p\\|_{e,h}^2=\\langle D_+p,D_+p\\rangle_{e,h}$. The same definitions apply to real-valued grid functions.\n\nFor a finite interval of length $L=Nh$, use physical nodes $x_j=jh$ with indices $j=0,\\ldots,N$. On its edges $j=0,\\ldots,N-1$ define $(D_+v)_j=(v_{j+1}-v_j)/h$, and on interior nodes $j=1,\\ldots,N-1$ use $(\\Delta_hv)_j=(v_{j+1}-2v_j+v_{j-1})/h^2$. At the right endpoint define $(D_-v)_N=(v_N-v_{N-1})/h$. The interior inner product, norm, and edge inner product are\n$$ \\langle p,q\\rangle_h=h\\sum_{j=1}^{N-1}p_j\\overline{q_j},\\qquad \\|v\\|_h^2=\\langle v,v\\rangle_h,\\qquad \\langle p,q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}. $$\nDirichlet grid functions have prescribed endpoint values; when they are zero, the interior norm and edge inner product above are the ones used for the wave energy.\n\nAll statements below distinguish these periodic, infinite, and finite-interval index sets. Periodic Fourier calculations are not boundary estimates for the finite-interval grid.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "telescoping-bound",
+          "claim": "For each $1\\le j\\le N-1$, put $d_i=w_{i+1}-w_i$ for $i=0,\\ldots,j-1$. Expanding both expressions shows $$ j\\sum_{i=0}^{j-1}|d_i|^2-\\left|\\sum_{i=0}^{j-1}d_i\\right|^2 =\\sum_{0\\le i<r<j}|d_i-d_r|^2, $$ since each side equals $(j-1)\\sum_i|d_i|^2-\\sum_{i<r}(d_i\\overline{d_r}+d_r\\overline{d_i})$. The right side is nonnegative. Since $w_0=0$, $w_j=\\sum_{i=0}^{j-1}d_i$, so $$ |w_j|^2\\le j\\sum_{i=0}^{j-1}|w_{i+1}-w_i|^2 \\le N\\sum_{i=0}^{N-1}|w_{i+1}-w_i|^2. $$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weighted-sum",
+          "claim": "Sum the step 1.1 bound over $j=1,\\ldots,N-1$ and multiply by $h$. Since $(N-1)N h\\le N^2h$ and $\\|D_+w\\|_{e,h}^2=h^{-1}\\sum_{i=0}^{N-1}|w_{i+1}-w_i|^2$, we obtain $\\|w\\|_h^2\\le N^2h^2\\|D_+w\\|_{e,h}^2=L^2\\|D_+w\\|_{e,h}^2$. Taking nonnegative square roots proves the claim.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires N\u22652 and a finite interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 give equality for w=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers N=2, with one interior value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The N=2 one-interior-node case is included in steps 1.1\u20132.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The zero endpoint hypotheses are used in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The proof uses finite sums and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The grid Poincare lemma derives an inequality for zero-endpoint arrays; it does not state a converse characterization of those arrays."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The grid Poincare lemma derives an inequality for zero-endpoint arrays; it does not state a converse characterization of those arrays."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "thm-smooth-advection-stencils-consistent": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-one-way-advection-schemes",
+          "source_section": "Definition",
+          "quote": "Use the index sets and uniform spacings of [[def-uniform-grid-and-difference-operators]]: $x_j=jh$, $j\\in\\mathbb Z$, or $j$ reduced modulo $N$ in the periodic case. Fix $a>0$, $h,k>0$, and $\\nu=ak/h$. The target equation is the one-dimensional constant-velocity transport equation $u_t+a u_x=0$, the constant-coefficient case of [[def-linear-transport-equation-and-its-characteristic-flow]]. Set $U_j^0=u_0(jh)$ and define, for $n\\ge0$,\n$$ \\begin{aligned} \\text{upwind: }&U_j^{n+1}=U_j^n-\\nu(U_j^n-U_{j-1}^n),\\\\ \\text{downwind: }&U_j^{n+1}=U_j^n-\\nu(U_{j+1}^n-U_j^n),\\\\ \\text{centered: }&U_j^{n+1}=U_j^n-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n),\\\\ \\text{Lax--Friedrichs: }&U_j^{n+1}=\\frac{U_{j-1}^n+U_{j+1}^n}{2}-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n),\\\\ \\text{Lax--Wendroff: }&U_j^{n+1}=U_j^n-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n)+\\frac{\\nu^2}{2}(U_{j+1}^n-2U_j^n+U_{j-1}^n). \\end{aligned} $$\nOn a periodic grid, every index in these formulas is reduced modulo $N$; no physical boundary data are present. For $a<0$, reflect the stencil by $j\\mapsto-j$ and replace $\\nu$ by $|a|k/h$.\n\nFor a finite interval $[0,L]$ with $a>0$, the inflow boundary is $x=0$. The upwind initial/boundary rows are $U_j^0=u_0(jh)$ for $j=0,\\ldots,N$, $U_0^n=g(t_n)$ with $u_0(0)=g(0)$, and\n$$ U_j^{n+1}=(1-\\nu)U_j^n+\\nu U_{j-1}^n,\\qquad j=1,\\ldots,N,\\quad n\\ge0. $$\nThe outflow node $j=N$ is computed by this row and receives no prescribed value. This item supplies no finite-interval boundary closure or stability statement for centered, Lax--Friedrichs, or Lax--Wendroff updates.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-taylor-remainder-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, and suppose $f$ has derivatives through order $n+1$ on the closed interval between $a$ and $x$, with the usual endpoint continuity. If $|f^{(n+1)}(t)|\\le M$ throughout that interval, then\n$$|R_{n,a}f(x)|\\le \\frac{M}{\\iota((n+1)!)}|x-a|^{n+1}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put\n\n$$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$\n\nHere $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of [[def-nat-finite-sum-and-product]], and $n!$ is the factorial of [[def-factorial-and-falling-factorial]]. By contrast, $h^\\alpha$ is the finite product in $\\mathbb R$ of [[def-finite-sum]], with the natural exponents interpreted by [[def-integer-power]]. For the zero multi-index $0$, set $D^0f:=f$. For nonzero $\\alpha$, write\n\n$$D^\\alpha f:=\\partial_0^{\\alpha_0}\\cdots\\partial_{m-1}^{\\alpha_{m-1}}f$$\n\nfor this displayed, canonical order whenever it exists. Coordinate partial derivatives have the meaning fixed in [[def-directional-and-partial-derivatives]].\n\nFor $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$. Thus this definition does **not** presuppose that differently ordered derivatives are equal. Equality of their values is a later theorem under these regularity hypotheses.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-symmetry-of-higher-mixed-partials",
+          "source_section": "Statement",
+          "quote": "Let $k\\ge2$. If $f\\in C^k(U)$ for an open $U\\subseteq\\mathbb R^m$, then every iterated derivative of $f$ of order $k$ is unchanged by any permutation of its coordinate differentiations.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "velocity-sign-reflection",
+          "claim": "If $a<0$, set $A=-a>0$ and $\\widetilde u(x,t)=u(-x,t)$. For fixed $x$, its time difference quotient is that of $u$ at $(-x,t)$, so $\\widetilde u_t(x,t)=u_t(-x,t)$. In its spatial difference quotient, substitute $s=-h$ to get $\\widetilde u_x(x,t)=-u_x(-x,t)$. Repeating these coordinate calculations gives $\\partial_x^p\\partial_t^q\\widetilde u(x,t)=(-1)^p(\\partial_x^p\\partial_t^q u)(-x,t)$, so the period and derivative bounds are preserved. The PDE gives $\\widetilde u_t+A\\widetilde u_x=u_t(-x,t)-A u_x(-x,t)=0$. The definition's reflection $j\\mapsto-j$ identifies each negative-speed stencil residual with the corresponding positive-speed residual of $\\widetilde u$ at the reflected point. If $a>0$, take $A=a$ and $\\widetilde u=u$. It is therefore enough to derive the estimates for positive speed $A$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "transport-derivatives",
+          "claim": "For this positive-speed solution, differentiating $\\widetilde u_t=-A\\widetilde u_x$ in $t$ and $x$, then using [F4] to commute the order-two mixed partials, gives $\\widetilde u_{tt}=-A\\widetilde u_{xt}=-A\\widetilde u_{tx}=A^2\\widetilde u_{xx}$. Differentiating this identity in $t$ and the PDE twice in $x$, then using [F4] to commute the order-three partials, gives $\\widetilde u_{ttt}=A^2\\widetilde u_{xxt}=A^2\\widetilde u_{txx}=-A^3\\widetilde u_{xxx}$. By [F3] these derivatives exist, and the bounded derivatives in the hypotheses make the Taylor remainders uniform. Taylor's formula from [F2] yields $$ \\frac{\\widetilde u(x,t+k)-\\widetilde u(x,t)}{k}=\\widetilde u_t+\\frac{k}{2}\\widetilde u_{tt}+\\frac{k^2}{6}\\widetilde u_{ttt}+O(k^3), $$ $$ \\frac{\\widetilde u(x+h,t)-\\widetilde u(x-h,t)}{2h}=\\widetilde u_x+\\frac{h^2}{6}\\widetilde u_{xxx}+O(h^4),\\qquad \\frac{\\widetilde u(x+h,t)-2\\widetilde u(x,t)+\\widetilde u(x-h,t)}{h^2}=\\widetilde u_{xx}+\\frac{h^2}{12}\\widetilde u_{xxxx}+O(h^4). $$ The one-sided expansions are $(\\widetilde u(x,t)-\\widetilde u(x-h,t))/h=\\widetilde u_x-\\frac h2\\widetilde u_{xx}+O(h^2)$ and $(\\widetilde u(x+h,t)-\\widetilde u(x,t))/h=\\widetilde u_x+\\frac h2\\widetilde u_{xx}+O(h^2)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "residual-expansions",
+          "claim": "Substituting the step 2.1 expansions into [F1] with speed $A=|a|$ and using $\\widetilde u_t+A\\widetilde u_x=0$ gives $$ \\tau_{\\rm up}=\\frac{k}{2}\\widetilde u_{tt}-\\frac{Ah}{2}\\widetilde u_{xx}+O(k^2+h^2),\\quad \\tau_{\\rm down}=\\frac{k}{2}\\widetilde u_{tt}+\\frac{Ah}{2}\\widetilde u_{xx}+O(k^2+h^2),\\quad \\tau_{\\rm centered}=\\frac{k}{2}\\widetilde u_{tt}+O(k^2+h^2). $$ For Lax--Friedrichs the symmetric average contributes $-h^2\\widetilde u_{xx}/(2k)$ to the residual, so $\\tau_{\\rm LF}=\\frac{k}{2}\\widetilde u_{tt}-\\frac{h^2}{2k}\\widetilde u_{xx}+O(k^2+h^2+h^4/k)$. For Lax--Wendroff the $k\\widetilde u_{tt}/2$ term cancels the second-difference term by $\\widetilde u_{tt}=A^2\\widetilde u_{xx}$, leaving $\\tau_{\\rm LW}=\\frac{k^2}{6}\\widetilde u_{ttt}+\\frac{Ah^2}{6}\\widetilde u_{xxx}+O(k^3+h^4+kh^2)$. Reflection in step 1.1 transfers these residual bounds to the negative-speed branch.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "mesh-scaling",
+          "claim": "The mesh ratio bounds imply $k=O(h)$ and $h^2/k=O(h)$. Thus the first four residuals are uniformly $O(h)$, and every displayed Lax--Wendroff term is $O(h^2)$ or smaller. By step 1.1 the same estimates hold for either velocity sign. The conclusion concerns only the sampled smooth solution in the stated periodic setting.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a periodic refining mesh family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero solution has zero residual in every stencil."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the target equation is explicitly one-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "N=2 is a coarse grid and is not a separate refining-limit case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The positive lower mesh-ratio bound excludes the zero-ratio endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses bounded derivatives and deterministic Taylor expansions; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The consistency theorem bounds residuals of supplied C6 periodic solutions under mesh-ratio control; it explicitly makes no converse or discontinuous-data convergence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The consistency theorem bounds residuals of supplied C6 periodic solutions under mesh-ratio control; it explicitly makes no converse or discontinuous-data convergence claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Checked Proof 1.1-4.1 against the actual stencil Definition, Taylor remainder, C6 convention and mixed-partial symmetry. Reflection changes negative velocity to positive without changing bounds. Differentiating the PDE gives utt=a\u00b2uxx and uttt=-a\u00b3uxxx; C6 supplies the centered second-difference O(h4) remainder. Residual signs match all five updates; Lax-Friedrichs requires h\u00b2/k=O(h), supplied by the lower ratio bound; Lax-Wendroff cancels the k utt/2 term and leaves O(h\u00b2). Uniform derivative bounds supply uniform constants; no discontinuous-data claim or choice use. No owned finding."
+      }
+    },
+    "thm-dirichlet-leapfrog-discrete-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-centered-leapfrog-wave-scheme",
+          "source_section": "Definition",
+          "quote": "Use the uniform-grid indices, physical nodes, and spacings of [[def-uniform-grid-and-difference-operators]]. Fix a wave speed $c>0$, an interval length $L=Nh$ with $N\\ge2$, and a time step $k>0$. Write $\\nu=ck/h$. The target model is the real scalar wave equation $u_{tt}=c^2u_{xx}$, and grid states are real-valued. Prescribe a real initial displacement row $U^0$ and discrete initial-velocity row $V^0$, and set $U^1=U^0+kV^0$. For smooth Dirichlet data $u_0,u_1:[0,L]\\to\\mathbb R$ with $u_0(0)=u_0(L)=u_1(0)=u_1(L)=0$, the corresponding sample rows are $U_j^0=u_0(x_j)$ and $V_j^0=u_1(x_j)$; for smooth periodic data, take real $L$-periodic $u_0,u_1$ and sample them at $x_j$. In both cases the discrete initial velocity equals the sampled $u_1$. The centered leapfrog recurrence is\n$$ U_j^{n+1}-2U_j^n+U_j^{n-1}=\\nu^2(U_{j+1}^n-2U_j^n+U_{j-1}^n),\\qquad n\\ge1. $$\nFor the finite Dirichlet interval, require $U_0^0=U_N^0=V_0^0=V_N^0=0$ and impose the recurrence for $j=1,\\ldots,N-1$, with $U_0^n=U_N^n=0$ for every $n\\ge0$. For the periodic branch, use $j=0,\\ldots,N-1$, reduce indices modulo $N$, and impose the recurrence at every node. Fourier analysis of this real periodic update uses its complex-linear extension to the complexified grid space. No convergence order for a particular initialization formula is asserted here.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-dirichlet-grid-summation-by-parts",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge2$, $h>0$, and let $u=(u_0,\\ldots,u_N)$ and $v=(v_0,\\ldots,v_N)$ be complex grid functions. With the finite-interval inner products and differences of [[def-uniform-grid-and-difference-operators]],\n$$ \\langle u,-\\Delta_hv\\rangle_h =\\langle D_+u,D_+v\\rangle_{e,h}+u_0\\overline{(D_+v)_0}-u_N\\overline{(D_-v)_N}. $$\nIn particular, if $u_0=u_N=0$, the two boundary terms vanish. On the subspace of grid functions with zero endpoints, $-\\Delta_h$ is self-adjoint and nonnegative in the interior grid inner product, with $\\langle u,-\\Delta_hu\\rangle_h=\\|D_+u\\|_{e,h}^2$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-dirichlet-grid-poincare-inequality",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge2$, $h>0$, $L=Nh$, and let $w=(w_0,\\ldots,w_N)$ be a complex grid function with $w_0=w_N=0$. Then\n$$ \\|w\\|_h\\le L\\|D_+w\\|_{e,h}. $$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "energy-rewrite",
+          "claim": "In the quadratic term, $D_+U^{n+1}=D_+\\bar U^n+\\frac{k}{2}D_+V^n$ and $D_+U^n=D_+\\bar U^n-\\frac{k}{2}D_+V^n$. Expanding their real edge inner product gives $$ E^{n+1/2}=\\frac12\\|V^n\\|_h^2+\\frac{c^2}{2}\\|D_+\\bar U^n\\|_{e,h}^2-\\frac{c^2k^2}{8}\\|D_+V^n\\|_{e,h}^2. $$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "coercive-bound",
+          "claim": "For any zero-endpoint grid function $v$, $(v_{j+1}-v_j)^2\\le2v_{j+1}^2+2v_j^2$ and summing over edges gives $$ \\|D_+v\\|_{e,h}^2=\\frac1h\\sum_{j=0}^{N-1}(v_{j+1}-v_j)^2\\le\\frac4{h^2}\\|v\\|_h^2. $$ Apply this to $V^n$, and use $\\nu=ck/h$, in step 1.1 to obtain the asserted lower bound. Since $1-\\nu^2>0$, zero energy forces $V^n=0$ and $D_+\\bar U^n=0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "state-control",
+          "claim": "A zero-endpoint grid function with $D_+w=0$ is constant across all edges and therefore zero. Hence step 2.1 shows $E^{n+1/2}=0$ only when $V^n=0$ and $\\bar U^n=0$, equivalently $U^{n+1}=U^n=0$. For uniform state control, [F3] bounds $\\|\\bar U^n\\|_h$ by $L\\|D_+\\bar U^n\\|_{e,h}$, and $U^{n+1},U^n=\\bar U^n\\pm(k/2)V^n$; when $\\nu\\le\\nu_0<1$, the lower-bound coefficients and $k\\le\\nu_0L/(Nc)\\le\\nu_0L/c$ are uniform in the mesh.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "energy-conservation",
+          "claim": "Let $\\delta_t^0U^n=(U^{n+1}-U^{n-1})/(2k)$. Taking the interior inner product of $\\delta_t^2U^n+c^2(-\\Delta_h)U^n=0$ with $\\delta_t^0U^n$, the first term is $(\\|V^n\\|_h^2-\\|V^{n-1}\\|_h^2)/(2k)$. By [F2], the second is $$ \\frac{c^2}{2k}\\left(\\langle D_+U^{n+1},D_+U^n\\rangle_{e,h}-\\langle D_+U^n,D_+U^{n-1}\\rangle_{e,h}\\right). $$ Their sum is $(E^{n+1/2}-E^{n-1/2})/k=0$. Thus the energy is conserved.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a finite nonempty Dirichlet grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero energy for zero starting rows."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The N=2 interval grid with one interior value is covered by the finite identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.1 cover N=2 without a dimension restriction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the lower-bound coefficient is 1\u2212nu\u00b2 and strict 0<nu<1 is assumed; equality nu=1 is treated separately on the periodic endpoint branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The proof uses finite grid sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts an energy estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts an energy estimate, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": []
+    },
+    "lem-periodic-advection-amplification-symbols": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-one-way-advection-schemes",
+          "source_section": "Definition",
+          "quote": "Use the index sets and uniform spacings of [[def-uniform-grid-and-difference-operators]]: $x_j=jh$, $j\\in\\mathbb Z$, or $j$ reduced modulo $N$ in the periodic case. Fix $a>0$, $h,k>0$, and $\\nu=ak/h$. The target equation is the one-dimensional constant-velocity transport equation $u_t+a u_x=0$, the constant-coefficient case of [[def-linear-transport-equation-and-its-characteristic-flow]]. Set $U_j^0=u_0(jh)$ and define, for $n\\ge0$,\n$$ \\begin{aligned} \\text{upwind: }&U_j^{n+1}=U_j^n-\\nu(U_j^n-U_{j-1}^n),\\\\ \\text{downwind: }&U_j^{n+1}=U_j^n-\\nu(U_{j+1}^n-U_j^n),\\\\ \\text{centered: }&U_j^{n+1}=U_j^n-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n),\\\\ \\text{Lax--Friedrichs: }&U_j^{n+1}=\\frac{U_{j-1}^n+U_{j+1}^n}{2}-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n),\\\\ \\text{Lax--Wendroff: }&U_j^{n+1}=U_j^n-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n)+\\frac{\\nu^2}{2}(U_{j+1}^n-2U_j^n+U_{j-1}^n). \\end{aligned} $$\nOn a periodic grid, every index in these formulas is reduced modulo $N$; no physical boundary data are present. For $a<0$, reflect the stencil by $j\\mapsto-j$ and replace $\\nu$ by $|a|k/h$.\n\nFor a finite interval $[0,L]$ with $a>0$, the inflow boundary is $x=0$. The upwind initial/boundary rows are $U_j^0=u_0(jh)$ for $j=0,\\ldots,N$, $U_0^n=g(t_n)$ with $u_0(0)=g(0)$, and\n$$ U_j^{n+1}=(1-\\nu)U_j^n+\\nu U_{j-1}^n,\\qquad j=1,\\ldots,N,\\quad n\\ge0. $$\nThe outflow node $j=N$ is computed by this row and receives no prescribed value. This item supplies no finite-interval boundary closure or stability statement for centered, Lax--Friedrichs, or Lax--Wendroff updates.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ and let $k,\\ell\\in\\mathbb Z$. Then\n\n$$\\sum_{x=0}^{N-1}e^{2\\pi i(k-\\ell)x/N}=\\begin{cases}N,&k\\equiv\\ell\\pmod N,\\\\\\\\ 0,&k\\not\\equiv\\ell\\pmod N.\\end{cases}$$\n\nAt $N=1$ the congruence holds for all $k,\\ell$ and the sum is $1$. The sum is the finite sum of the complex family $x\\mapsto e^{2\\pi i(k-\\ell)x/N}$ over the von Neumann natural $N=\\{0,\\dots,N-1\\}$ ([[def-finite-sum-in-a-commutative-monoid]]), and $N$ on the right is the natural number $N$ read in $\\mathbb C$ as the additive multiple $N\\cdot1_{\\mathbb C}$, that is, the value at $N$ of the canonical embedding $\\mathbb N\\to\\mathbb C$ ([[def-canonical-natural]], [[lem-integer-multiples-agree-with-canonical-natural]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "On the finite periodic rectangular $d$-grid of [[def-parabolic-theta-finite-difference-scheme]], let $\\ell_j\\in\\{0,\\ldots,N_j-1\\}$ and\n$$\n\\phi_\\ell(i)=\\exp\\left(2\\pi\\mathrm i\\sum_{j=1}^d\\frac{\\ell_ji_j}{N_j}\\right).\n$$\nThen $\\phi_\\ell$ is an eigenvector of $A_h^{\\rm per}$ with eigenvalue\n$$\n\\lambda_\\ell=4\\sum_{j=1}^d\\frac{\\kappa_j}{h_j^2}\\sin^2\\left(\\frac{\\pi\\ell_j}{N_j}\\right)\\ge0.\n$$\nFor zero source, the $\\theta$ update multiplies this mode at each step by\n$$\ng_\\theta(\\ell)=\\frac{1-(1-\\theta)\\Delta t\\lambda_\\ell}{1+\\theta\\Delta t\\lambda_\\ell}.\n$$\nThe displayed modes form a basis of the complexified grid space, so this factor describes the full periodic update.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "Use $\\mathbb N$ for the natural-number index set (including zero) ([[def-natural-numbers]]), $\\mathbb R$ for the real scalar field ([[def-real-numbers]]), and $\\mathbb C$ with its real embedding and modulus ([[def-complex-numbers-and-arithmetic]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]).\n\nLet $N\\ge2$, $h>0$, $k>0$, and $t_n=nk$. For the finite periodic grid put $J_N=\\{0,\\ldots,N-1\\}$ and reduce every shifted index modulo $N$. A periodic grid function is a map $v:J_N\\to\\mathbb C$, with weighted norm\n$$ \\|v\\|_{2,h}=\\left(h\\sum_{j=0}^{N-1}|v_j|^2\\right)^{1/2}. $$\nThe infinite uniform grid has indices $j\\in\\mathbb Z$ and positions $x_j=jh$. On the periodic and infinite grids define\n$$ (D_+v)_j=\\frac{v_{j+1}-v_j}{h},\\qquad (D_-v)_j=\\frac{v_j-v_{j-1}}{h},\\qquad (D_0v)_j=\\frac{v_{j+1}-v_{j-1}}{2h},\\qquad (\\Delta_hv)_j=\\frac{v_{j+1}-2v_j+v_{j-1}}{h^2}. $$\nUse the inner product linear in its first entry,\n$$ \\langle p,q\\rangle_{2,h}=h\\sum_{j=0}^{N-1}p_j\\overline{q_j},\\qquad \\langle D_+p,D_+q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}, $$\nwhere the indices in $D_+$ are reduced periodically, and set $\\|D_+p\\|_{e,h}^2=\\langle D_+p,D_+p\\rangle_{e,h}$. The same definitions apply to real-valued grid functions.\n\nFor a finite interval of length $L=Nh$, use physical nodes $x_j=jh$ with indices $j=0,\\ldots,N$. On its edges $j=0,\\ldots,N-1$ define $(D_+v)_j=(v_{j+1}-v_j)/h$, and on interior nodes $j=1,\\ldots,N-1$ use $(\\Delta_hv)_j=(v_{j+1}-2v_j+v_{j-1})/h^2$. At the right endpoint define $(D_-v)_N=(v_N-v_{N-1})/h$. The interior inner product, norm, and edge inner product are\n$$ \\langle p,q\\rangle_h=h\\sum_{j=1}^{N-1}p_j\\overline{q_j},\\qquad \\|v\\|_h^2=\\langle v,v\\rangle_h,\\qquad \\langle p,q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}. $$\nDirichlet grid functions have prescribed endpoint values; when they are zero, the interior norm and edge inner product above are the ones used for the wave energy.\n\nAll statements below distinguish these periodic, infinite, and finite-interval index sets. Periodic Fourier calculations are not boundary estimates for the finite-interval grid.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "mode-substitution",
+          "claim": "Write $\\phi_j=z_\\ell^j$. Then $\\phi_{j+1}=z_\\ell\\phi_j$, $\\phi_{j-1}=z_\\ell^{-1}\\phi_j$, and $z_\\ell^{-1}=\\bar z_\\ell$. Substitution into each update in [F1] gives, respectively, $$ 1-\\nu+\\nu z_\\ell^{-1},\\quad 1+\\nu-\\nu z_\\ell,\\quad 1-\\frac{\\nu}{2}(z_\\ell-z_\\ell^{-1}),\\quad \\frac{z_\\ell+z_\\ell^{-1}}2-\\frac{\\nu}{2}(z_\\ell-z_\\ell^{-1}),\\quad 1-\\frac{\\nu}{2}(z_\\ell-z_\\ell^{-1})+\\frac{\\nu^2}{2}(z_\\ell+z_\\ell^{-1}-2). $$ Since $z_\\ell^{-1}=C_\\ell-iS_\\ell$, these are the displayed factors.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "modulus-identities",
+          "claim": "The identity $|z_\\ell|=1$ gives $C_\\ell^2+S_\\ell^2=1$. Multiplying each factor in step 1.1 by its conjugate and simplifying with this identity gives the five displayed squared-modulus formulas.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "full-grid-basis",
+          "claim": "By [F2] the distinct Fourier modes are mutually orthogonal; by [F3] they form a basis. By [F5], each has squared norm $Nh$, so the normalized modes are an orthonormal basis. Every update is diagonal in this basis with the factors from step 1.1, which therefore describe the full periodic updates.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires N\u22652."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the constant Fourier mode z=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The calculation is the explicitly one-dimensional periodic case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The N=2 Fourier basis and aliased stencils remain valid in steps 1.1\u20132.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The symbols are valid at \u03bd=0 and \u03bd=1; no range is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 enumerate a finite Fourier basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts formulas, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts formulas, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Checked all five factors by substitution of z^j into the actual update, then multiplied by their conjugates using C\u00b2+S\u00b2=1. The Lax-Wendroff quartic term is -nu\u00b2(1-nu\u00b2)(1-C)\u00b2. Character orthogonality gives squared norm Nh and N independent nonzero modes; N=2 centered/LF aliasing is retained. Read the heat supplier current proof, contract and manifest: its Euler/geometric-sum omissions are nonfatal and routed read-only to batch 37; the elementary identities and finite basis argument are independently valid. No false formula, lost endpoint or choice assumption."
+      }
+    },
+    "thm-periodic-centered-wave-amplification-and-endpoint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-centered-leapfrog-wave-scheme",
+          "source_section": "Definition",
+          "quote": "Use the uniform-grid indices, physical nodes, and spacings of [[def-uniform-grid-and-difference-operators]]. Fix a wave speed $c>0$, an interval length $L=Nh$ with $N\\ge2$, and a time step $k>0$. Write $\\nu=ck/h$. The target model is the real scalar wave equation $u_{tt}=c^2u_{xx}$, and grid states are real-valued. Prescribe a real initial displacement row $U^0$ and discrete initial-velocity row $V^0$, and set $U^1=U^0+kV^0$. For smooth Dirichlet data $u_0,u_1:[0,L]\\to\\mathbb R$ with $u_0(0)=u_0(L)=u_1(0)=u_1(L)=0$, the corresponding sample rows are $U_j^0=u_0(x_j)$ and $V_j^0=u_1(x_j)$; for smooth periodic data, take real $L$-periodic $u_0,u_1$ and sample them at $x_j$. In both cases the discrete initial velocity equals the sampled $u_1$. The centered leapfrog recurrence is\n$$ U_j^{n+1}-2U_j^n+U_j^{n-1}=\\nu^2(U_{j+1}^n-2U_j^n+U_{j-1}^n),\\qquad n\\ge1. $$\nFor the finite Dirichlet interval, require $U_0^0=U_N^0=V_0^0=V_N^0=0$ and impose the recurrence for $j=1,\\ldots,N-1$, with $U_0^n=U_N^n=0$ for every $n\\ge0$. For the periodic branch, use $j=0,\\ldots,N-1$, reduce indices modulo $N$, and impose the recurrence at every node. Fourier analysis of this real periodic update uses its complex-linear extension to the complexified grid space. No convergence order for a particular initialization formula is asserted here.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "On the finite periodic rectangular $d$-grid of [[def-parabolic-theta-finite-difference-scheme]], let $\\ell_j\\in\\{0,\\ldots,N_j-1\\}$ and\n$$\n\\phi_\\ell(i)=\\exp\\left(2\\pi\\mathrm i\\sum_{j=1}^d\\frac{\\ell_ji_j}{N_j}\\right).\n$$\nThen $\\phi_\\ell$ is an eigenvector of $A_h^{\\rm per}$ with eigenvalue\n$$\n\\lambda_\\ell=4\\sum_{j=1}^d\\frac{\\kappa_j}{h_j^2}\\sin^2\\left(\\frac{\\pi\\ell_j}{N_j}\\right)\\ge0.\n$$\nFor zero source, the $\\theta$ update multiplies this mode at each step by\n$$\ng_\\theta(\\ell)=\\frac{1-(1-\\theta)\\Delta t\\lambda_\\ell}{1+\\theta\\Delta t\\lambda_\\ell}.\n$$\nThe displayed modes form a basis of the complexified grid space, so this factor describes the full periodic update.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "On the finite periodic rectangular $d$-grid of [[def-parabolic-theta-finite-difference-scheme]], let $\\ell_j\\in\\{0,\\ldots,N_j-1\\}$ and\n$$\n\\phi_\\ell(i)=\\exp\\left(2\\pi\\mathrm i\\sum_{j=1}^d\\frac{\\ell_ji_j}{N_j}\\right).\n$$\nThen $\\phi_\\ell$ is an eigenvector of $A_h^{\\rm per}$ with eigenvalue\n$$\n\\lambda_\\ell=4\\sum_{j=1}^d\\frac{\\kappa_j}{h_j^2}\\sin^2\\left(\\frac{\\pi\\ell_j}{N_j}\\right)\\ge0.\n$$\nFor zero source, the $\\theta$ update multiplies this mode at each step by\n$$\ng_\\theta(\\ell)=\\frac{1-(1-\\theta)\\Delta t\\lambda_\\ell}{1+\\theta\\Delta t\\lambda_\\ell}.\n$$\nThe displayed modes form a basis of the complexified grid space, so this factor describes the full periodic update.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ and let $k,\\ell\\in\\mathbb Z$. Then\n\n$$\\sum_{x=0}^{N-1}e^{2\\pi i(k-\\ell)x/N}=\\begin{cases}N,&k\\equiv\\ell\\pmod N,\\\\\\\\ 0,&k\\not\\equiv\\ell\\pmod N.\\end{cases}$$\n\nAt $N=1$ the congruence holds for all $k,\\ell$ and the sum is $1$. The sum is the finite sum of the complex family $x\\mapsto e^{2\\pi i(k-\\ell)x/N}$ over the von Neumann natural $N=\\{0,\\dots,N-1\\}$ ([[def-finite-sum-in-a-commutative-monoid]]), and $N$ on the right is the natural number $N$ read in $\\mathbb C$ as the additive multiple $N\\cdot1_{\\mathbb C}$, that is, the value at $N$ of the canonical embedding $\\mathbb N\\to\\mathbb C$ ([[def-canonical-natural]], [[lem-integer-multiples-agree-with-canonical-natural]]).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "Use $\\mathbb N$ for the natural-number index set (including zero) ([[def-natural-numbers]]), $\\mathbb R$ for the real scalar field ([[def-real-numbers]]), and $\\mathbb C$ with its real embedding and modulus ([[def-complex-numbers-and-arithmetic]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]).\n\nLet $N\\ge2$, $h>0$, $k>0$, and $t_n=nk$. For the finite periodic grid put $J_N=\\{0,\\ldots,N-1\\}$ and reduce every shifted index modulo $N$. A periodic grid function is a map $v:J_N\\to\\mathbb C$, with weighted norm\n$$ \\|v\\|_{2,h}=\\left(h\\sum_{j=0}^{N-1}|v_j|^2\\right)^{1/2}. $$\nThe infinite uniform grid has indices $j\\in\\mathbb Z$ and positions $x_j=jh$. On the periodic and infinite grids define\n$$ (D_+v)_j=\\frac{v_{j+1}-v_j}{h},\\qquad (D_-v)_j=\\frac{v_j-v_{j-1}}{h},\\qquad (D_0v)_j=\\frac{v_{j+1}-v_{j-1}}{2h},\\qquad (\\Delta_hv)_j=\\frac{v_{j+1}-2v_j+v_{j-1}}{h^2}. $$\nUse the inner product linear in its first entry,\n$$ \\langle p,q\\rangle_{2,h}=h\\sum_{j=0}^{N-1}p_j\\overline{q_j},\\qquad \\langle D_+p,D_+q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}, $$\nwhere the indices in $D_+$ are reduced periodically, and set $\\|D_+p\\|_{e,h}^2=\\langle D_+p,D_+p\\rangle_{e,h}$. The same definitions apply to real-valued grid functions.\n\nFor a finite interval of length $L=Nh$, use physical nodes $x_j=jh$ with indices $j=0,\\ldots,N$. On its edges $j=0,\\ldots,N-1$ define $(D_+v)_j=(v_{j+1}-v_j)/h$, and on interior nodes $j=1,\\ldots,N-1$ use $(\\Delta_hv)_j=(v_{j+1}-2v_j+v_{j-1})/h^2$. At the right endpoint define $(D_-v)_N=(v_N-v_{N-1})/h$. The interior inner product, norm, and edge inner product are\n$$ \\langle p,q\\rangle_h=h\\sum_{j=1}^{N-1}p_j\\overline{q_j},\\qquad \\|v\\|_h^2=\\langle v,v\\rangle_h,\\qquad \\langle p,q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}. $$\nDirichlet grid functions have prescribed endpoint values; when they are zero, the interior norm and edge inner product above are the ones used for the wave energy.\n\nAll statements below distinguish these periodic, infinite, and finite-interval index sets. Periodic Fourier calculations are not boundary estimates for the finite-interval grid.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "modal-recurrence",
+          "claim": "Substituting one mode from [F2] into [F1] uses $-\\Delta_h\\phi_\\ell=4h^{-2}s_\\ell\\phi_\\ell$ and gives the displayed scalar recurrence, whose characteristic polynomial is $$ p_\\ell(r)=r^2-2(1-2\\nu^2s_\\ell)r+1. $$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "root-branches",
+          "claim": "For $\\ell=0$, $s_0=0$, so successive first differences are constant and $w_0^n=w_0^0+n(w_0^1-w_0^0)=w_0^0+t_n\\widehat V_0^0$. For $\\ell\\ne0$ and $\\nu<1$, put $q=1-2\\nu^2s_\\ell$; then $-1<q<1$, and $\\rho=q+i\\sqrt{1-q^2}$ and $\\bar\\rho$ are distinct roots with modulus one.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "modal-solution-bound",
+          "claim": "For a nonconstant mode the recurrence solution matching $w_\\ell^0,w_\\ell^1$ is $$ w_\\ell^n=w_\\ell^0\\frac{\\rho^n+\\bar\\rho^n}{2}+(w_\\ell^1-qw_\\ell^0)\\frac{\\rho^n-\\bar\\rho^n}{\\rho-\\bar\\rho}. $$ Indeed both sequences solve the recurrence and the right side equals $w_\\ell^0,w_\\ell^1$ at $n=0,1$. The quotient is $\\sum_{r=0}^{n-1}\\rho^{n-1-r}\\bar\\rho^r$, so its modulus is at most $n$. Also $|(\\rho^n-\\bar\\rho^n)/(\\rho-\\bar\\rho)|\\le1/\\sqrt{1-q^2}$ since $|\\rho^n-\\bar\\rho^n|\\le2$ and $|\\rho-\\bar\\rho|=2\\sqrt{1-q^2}$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "mean-mode-solution",
+          "claim": "Since $w_\\ell^1-qw_\\ell^0=k\\widehat V_\\ell^0+(1-q)w_\\ell^0$ and $$ \\frac{1-q}{\\sqrt{1-q^2}}=\\frac{\\nu\\sqrt{s_\\ell}}{\\sqrt{1-\\nu^2s_\\ell}}\\le\\frac{\\nu_0}{\\sqrt{1-\\nu_0^2}}, $$ step 2.2 gives $|w_\\ell^n|\\le(1+\\nu_0/\\sqrt{1-\\nu_0^2})|w_\\ell^0|+t_n|\\widehat V_\\ell^0|$. The same bound holds for the mean mode.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "grid-norm-bound",
+          "claim": "The modes are a basis by [F3] and orthogonal by [F4]. By [F6], each has squared norm $Nh$, so Parseval's identity holds in $\\|\\cdot\\|_{2,h}$. Squaring the coefficient bounds, summing, and using $$ \\left(\\sum_\\ell a_\\ell b_\\ell\\right)^2\\le\\left(\\sum_\\ell a_\\ell^2\\right)\\left(\\sum_\\ell b_\\ell^2\\right), $$ which follows by expanding $\\sum_{\\ell<r}(a_\\ell b_r-a_rb_\\ell)^2\\ge0$, yields the stated weighted-grid norm estimate.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nyquist-endpoint",
+          "claim": "If $\\nu=1$, $N$ is even, and $\\ell=N/2$, then $s_\\ell=1$ and $p_\\ell(r)=(r+1)^2$. Its solutions are $(-1)^n(A+nB)$; the initial values give $B=-w_\\ell^1-w_\\ell^0$, so $B=0$ exactly when $w_\\ell^1=-w_\\ell^0$. For $B\\ne0$ the mode grows linearly in $n$, proving the endpoint caveat.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement uses N>=2 periodic grids, so Fourier modes0,...,N-1 form a nonempty basis and there is a nonconstant mode. The Nyquist caveat is separately conditional on even N, rather than inventing a Nyquist index for an odd grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The zero Fourier coefficient data give the zero recurrence solution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The result is explicitly for one spatial dimension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: N=2 is included; its nonconstant mode is exactly the Nyquist mode."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The \u03bd=1 Nyquist root and compatibility are handled in step 5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The Fourier basis is finite and explicitly indexed; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Proof step 5.1 gives the endpoint solution(-1)^n(A+nB) and B=-w1-w0; absence of the parasitic coefficient B therefore implies w1=-w0, proving the stated necessary compatibility condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Proof step 5.1's explicit coefficient B=-w1-w0 also shows w1=-w0 makes B=0, leaving the bounded alternating solution(-1)^nA; both directions of the exactly-when endpoint clause are retained."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "numerical-periodic-grid-fixture",
+          "asserts": "If $\\nu=1$, $N$ is even, and $\\ell=N/2$, then $s_\\ell=1$ and $p_\\ell(r)=(r+1)^2$.",
+          "claim": "N=2: independently derive the cyclic wave recurrence; test strict-CFL roots at nu=1/sqrt(2), endpoint repeated root and compatible versus parasitic starts through12levels.",
+          "checked_in": "Proof5.1",
+          "fixture_version": 2,
+          "parameters": {
+            "fixture": "n2-wave-root-boundary"
+          }
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Checked Proof 1.1-5.1 against actual leapfrog Definition, grid norm, heat symbol and character orthogonality. Mean recurrence is affine and handled separately; for each nonconstant mode 0<nu<=nu0<1 gives -1<q<1 and distinct conjugate unit roots. The divided difference is a sum of n unit terms and also bounded by 1/sqrt(1-q\u00b2); splitting w1-qw0=kVhat+(1-q)w0 proves the stated uniform bound. Finite Parseval and the displayed sum-of-squares Cauchy inequality justify the norm step. At even-N nu=1, B=-w1-w0, so arbitrary pairs have the claimed endpoint growth. Heat-supplier nonfatal citation omissions remain routed to batch 37; no substantial prerequisite is missing and no AC used."
+      }
+    },
+    "thm-periodic-advection-power-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-periodic-advection-amplification-symbols",
+          "source_section": "Statement",
+          "quote": "On an $N$-point periodic grid let $z_\\ell=\\exp(2\\pi i\\ell/N)$, $C_\\ell=\\operatorname{Re}z_\\ell$, $S_\\ell=\\operatorname{Im}z_\\ell$, and $\\nu=ak/h$ with $a>0$. The Fourier vector $j\\mapsto z_\\ell^j$ is multiplied in one step by\n$$ g_{\\rm up}=1-\\nu+\\nu z_\\ell^{-1},\\quad g_{\\rm down}=1+\\nu-\\nu z_\\ell,\\quad g_{\\rm centered}=1-i\\nu S_\\ell,\\quad g_{\\rm LF}=C_\\ell-i\\nu S_\\ell,\\quad g_{\\rm LW}=1-\\nu^2(1-C_\\ell)-i\\nu S_\\ell. $$\nTheir squared moduli, in the same order, are\n$$ 1-2\\nu(1-\\nu)(1-C_\\ell),\\quad 1+2\\nu(1+\\nu)(1-C_\\ell),\\quad 1+\\nu^2S_\\ell^2,\\quad 1-(1-\\nu^2)S_\\ell^2,\\quad 1-\\nu^2(1-\\nu^2)(1-C_\\ell)^2. $$\nThe $N$ Fourier vectors form an orthogonal basis under the periodic inner product of [[def-uniform-grid-and-difference-operators]], and each has squared norm $Nh$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-advection-amplification-symbols",
+          "source_section": "Statement",
+          "quote": "On an $N$-point periodic grid let $z_\\ell=\\exp(2\\pi i\\ell/N)$, $C_\\ell=\\operatorname{Re}z_\\ell$, $S_\\ell=\\operatorname{Im}z_\\ell$, and $\\nu=ak/h$ with $a>0$. The Fourier vector $j\\mapsto z_\\ell^j$ is multiplied in one step by\n$$ g_{\\rm up}=1-\\nu+\\nu z_\\ell^{-1},\\quad g_{\\rm down}=1+\\nu-\\nu z_\\ell,\\quad g_{\\rm centered}=1-i\\nu S_\\ell,\\quad g_{\\rm LF}=C_\\ell-i\\nu S_\\ell,\\quad g_{\\rm LW}=1-\\nu^2(1-C_\\ell)-i\\nu S_\\ell. $$\nTheir squared moduli, in the same order, are\n$$ 1-2\\nu(1-\\nu)(1-C_\\ell),\\quad 1+2\\nu(1+\\nu)(1-C_\\ell),\\quad 1+\\nu^2S_\\ell^2,\\quad 1-(1-\\nu^2)S_\\ell^2,\\quad 1-\\nu^2(1-\\nu^2)(1-C_\\ell)^2. $$\nThe $N$ Fourier vectors form an orthogonal basis under the periodic inner product of [[def-uniform-grid-and-difference-operators]], and each has squared norm $Nh$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-periodic-one-way-advection-schemes",
+          "source_section": "Definition",
+          "quote": "Use the index sets and uniform spacings of [[def-uniform-grid-and-difference-operators]]: $x_j=jh$, $j\\in\\mathbb Z$, or $j$ reduced modulo $N$ in the periodic case. Fix $a>0$, $h,k>0$, and $\\nu=ak/h$. The target equation is the one-dimensional constant-velocity transport equation $u_t+a u_x=0$, the constant-coefficient case of [[def-linear-transport-equation-and-its-characteristic-flow]]. Set $U_j^0=u_0(jh)$ and define, for $n\\ge0$,\n$$ \\begin{aligned} \\text{upwind: }&U_j^{n+1}=U_j^n-\\nu(U_j^n-U_{j-1}^n),\\\\ \\text{downwind: }&U_j^{n+1}=U_j^n-\\nu(U_{j+1}^n-U_j^n),\\\\ \\text{centered: }&U_j^{n+1}=U_j^n-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n),\\\\ \\text{Lax--Friedrichs: }&U_j^{n+1}=\\frac{U_{j-1}^n+U_{j+1}^n}{2}-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n),\\\\ \\text{Lax--Wendroff: }&U_j^{n+1}=U_j^n-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n)+\\frac{\\nu^2}{2}(U_{j+1}^n-2U_j^n+U_{j-1}^n). \\end{aligned} $$\nOn a periodic grid, every index in these formulas is reduced modulo $N$; no physical boundary data are present. For $a<0$, reflect the stencil by $j\\mapsto-j$ and replace $\\nu$ by $|a|k/h$.\n\nFor a finite interval $[0,L]$ with $a>0$, the inflow boundary is $x=0$. The upwind initial/boundary rows are $U_j^0=u_0(jh)$ for $j=0,\\ldots,N$, $U_0^n=g(t_n)$ with $u_0(0)=g(0)$, and\n$$ U_j^{n+1}=(1-\\nu)U_j^n+\\nu U_{j-1}^n,\\qquad j=1,\\ldots,N,\\quad n\\ge0. $$\nThe outflow node $j=N$ is computed by this row and receives no prescribed value. This item supplies no finite-interval boundary closure or stability statement for centered, Lax--Friedrichs, or Lax--Wendroff updates.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "stable-symbol-ranges",
+          "claim": "By [F5], $1-C_\\ell\\ge0$ and $0\\le S_\\ell^2\\le1$. Thus for $0\\le\\nu\\le1$, the upwind formula gives $|g_{\\rm up}|^2\\le1$; for $|\\nu|\\le1$, the Lax--Friedrichs formula gives $|g_{\\rm LF}|^2\\le1$, and the Lax--Wendroff formula gives $|g_{\\rm LW}|^2\\le1$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unstable-symbol-ranges",
+          "claim": "If $\\nu>1$, every nonconstant mode has $C_\\ell<1$, so $|g_{\\rm up}|^2=1+2\\nu(\\nu-1)(1-C_\\ell)>1$. If $|\\nu|>1$ and $N\\ge2$, the Lax--Wendroff mode $\\ell=1$ has $C_\\ell<1$ and $|g_{\\rm LW}|^2=1+\\nu^2(\\nu^2-1)(1-C_\\ell)^2>1$. For Lax--Friedrichs with $|\\nu|>1$ and $N\\ge3$, some mode has $S_\\ell\\ne0$, so $|g_{\\rm LF}|^2=1+(\\nu^2-1)S_\\ell^2>1$. Downwind has $|g_{\\rm down}|^2>1$ for each nonconstant mode whenever $\\nu>0$. Centered has $|g_{\\rm centered}|^2>1$ on any mode with $S_\\ell\\ne0$, which exists exactly when $N\\ge3$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "power-operator-norm",
+          "claim": "Write an arbitrary vector as $v=\\sum_\\ell c_\\ell\\psi_\\ell$ in the orthonormal Fourier basis [F1]. The $m$-step update sends it to $\\sum_\\ell c_\\ell g_\\ell^m\\psi_\\ell$, so $\\|T^mv\\|_{2,h}^2=\\sum_\\ell|c_\\ell|^2|g_\\ell|^{2m}\\le(\\max_\\ell|g_\\ell|^m)^2\\|v\\|_{2,h}^2$. Since the finite set of modes has an index attaining this maximum and its basis vector is nonzero, equality is attained there; [F4] therefore gives $\\|T^m\\|=\\max_\\ell|g_\\ell|^m$. The bounds and growing modes in steps 1.1 and 1.2 now give the claimed contraction and instability statements, including the $N=2$ aliasing cases.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a finite periodic grid with N\u22652."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: At \u03bd=0 the upwind, LF, and LW updates are the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The theorem is explicitly one-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: The N=2 centered and Lax--Friedrichs alias cases are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The \u03bd=0 and |\u03bd|=1 endpoints are included in the statement and step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The proof uses the explicit finite Fourier basis only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states stability ranges, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states stability ranges, not an equivalence."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "numerical-periodic-grid-fixture",
+          "asserts": "while the $N=2$ centered stencil aliases to the identity.",
+          "claim": "N=2: six fixed Courant values give centered identity and Lax-Friedrichs unit-modulus alias, with separate super-CFL upwind/Lax-Wendroff growth witnesses.",
+          "checked_in": "Statement and Proof1.2/2.1",
+          "fixture_version": 2,
+          "parameters": {
+            "fixture": "n2-periodic-alias-boundary"
+          }
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Read Proof 1.1-2.1 and all five actual dependencies. Conjugate modulus formulas give contraction on each asserted interval, including nu=1. For growing powers, l=1 supplies C<1 for N>=2 and nonzero S for N>=3; N=2 centered is identity and Lax-Friedrichs is the swap independently of nu, correctly excepted. Finite normalized Fourier expansion proves the operator norm equals max |g|^m with an attained maximum, hence boundedness is established before norm use. Reflection swaps indices unitarily and preserves all claims for the sign-selected negative-speed branch. Zero data/m=0 and mean multiplier 1 cause no exception. No AC used; no new defect beyond routed supplier citation polish."
+      }
+    },
+    "thm-nearest-neighbor-cfl-domain-condition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-periodic-one-way-advection-schemes",
+          "source_section": "Definition",
+          "quote": "Use the index sets and uniform spacings of [[def-uniform-grid-and-difference-operators]]: $x_j=jh$, $j\\in\\mathbb Z$, or $j$ reduced modulo $N$ in the periodic case. Fix $a>0$, $h,k>0$, and $\\nu=ak/h$. The target equation is the one-dimensional constant-velocity transport equation $u_t+a u_x=0$, the constant-coefficient case of [[def-linear-transport-equation-and-its-characteristic-flow]]. Set $U_j^0=u_0(jh)$ and define, for $n\\ge0$,\n$$ \\begin{aligned} \\text{upwind: }&U_j^{n+1}=U_j^n-\\nu(U_j^n-U_{j-1}^n),\\\\ \\text{downwind: }&U_j^{n+1}=U_j^n-\\nu(U_{j+1}^n-U_j^n),\\\\ \\text{centered: }&U_j^{n+1}=U_j^n-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n),\\\\ \\text{Lax--Friedrichs: }&U_j^{n+1}=\\frac{U_{j-1}^n+U_{j+1}^n}{2}-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n),\\\\ \\text{Lax--Wendroff: }&U_j^{n+1}=U_j^n-\\frac{\\nu}{2}(U_{j+1}^n-U_{j-1}^n)+\\frac{\\nu^2}{2}(U_{j+1}^n-2U_j^n+U_{j-1}^n). \\end{aligned} $$\nOn a periodic grid, every index in these formulas is reduced modulo $N$; no physical boundary data are present. For $a<0$, reflect the stencil by $j\\mapsto-j$ and replace $\\nu$ by $|a|k/h$.\n\nFor a finite interval $[0,L]$ with $a>0$, the inflow boundary is $x=0$. The upwind initial/boundary rows are $U_j^0=u_0(jh)$ for $j=0,\\ldots,N$, $U_0^n=g(t_n)$ with $u_0(0)=g(0)$, and\n$$ U_j^{n+1}=(1-\\nu)U_j^n+\\nu U_{j-1}^n,\\qquad j=1,\\ldots,N,\\quad n\\ge0. $$\nThe outflow node $j=N$ is computed by this row and receives no prescribed value. This item supplies no finite-interval boundary closure or stability statement for centered, Lax--Friedrichs, or Lax--Wendroff updates.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put\n\n$$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$\n\nHere $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of [[def-nat-finite-sum-and-product]], and $n!$ is the factorial of [[def-factorial-and-falling-factorial]]. By contrast, $h^\\alpha$ is the finite product in $\\mathbb R$ of [[def-finite-sum]], with the natural exponents interpreted by [[def-integer-power]]. For the zero multi-index $0$, set $D^0f:=f$. For nonzero $\\alpha$, write\n\n$$D^\\alpha f:=\\partial_0^{\\alpha_0}\\cdots\\partial_{m-1}^{\\alpha_{m-1}}f$$\n\nfor this displayed, canonical order whenever it exists. Coordinate partial derivatives have the meaning fixed in [[def-directional-and-partial-derivatives]].\n\nFor $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$. Thus this definition does **not** presuppose that differently ordered derivatives are equal. Equality of their values is a later theorem under these regularity hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, there exists $\\chi\\in C_c^\\infty(\\mathbb R^n)$ with $0\\le\\chi\\le1$, $\\chi=1$ on $|x|\\le1$, and $\\chi=0$ on $|x|\\ge2$. For $R>0$, $\\chi_R(x)=\\chi(x/R)$ satisfies $\\partial^\\beta\\chi_R(x)=R^{-|\\beta|}(\\partial^\\beta\\chi)(x/R)$. The construction requires no choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-transport-equation-and-its-characteristic-flow",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n\\times\\mathbb R$ be open and let\n$a:\\Omega\\to\\mathbb R^n$, $c:\\Omega\\to\\mathbb R$, and $f:\\Omega\\to\\mathbb R$.\nThe scalar first-order equation\n\n$$u_t(x,t)+a(x,t)\\cdot\\nabla_x u(x,t)+c(x,t)u(x,t)=f(x,t)$$\n\nis a **linear transport equation**.\n\nFix $(x_0,t_0)\\in\\Omega$. A **characteristic through $(x_0,t_0)$** is a\nsolution $X(\\cdot)$ of the ODE\n\n$$X'(s)=a(X(s),s),\\qquad X(t_0)=x_0,$$\n\non an interval containing $t_0$. The corresponding space-time curve is\n$s\\mapsto (X(s),s)$. If these initial-value problems have unique solutions for\nvarying initial data, write $X(s;t_0,x_0)$ for the solution through\n$(x_0,t_0)$. The resulting maps $x_0\\mapsto X(s;t_0,x_0)$, on the domains\nwhere they are defined, form the **characteristic flow** of the transport\nfield. Without uniqueness there are characteristics, but no single-valued\ncharacteristic flow.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-integer-part",
+          "source_section": "Statement",
+          "quote": "Identify $\\mathbb{Z}$ with its canonical copy inside $\\mathbb{R}$, along the\nembeddings $\\mathbb{N} \\to \\mathbb{Z} \\to \\mathbb{Q} \\to \\mathbb{R}$\n([[lem-nat-embeds-int]], [[lem-int-embeds-rat]], [[lem-rat-embeds-dense]],\n[[def-integers]]). Then for every real $x$ there is **exactly one** integer $m$\nwith\n\n$$m \\;\\le\\; x \\;<\\; m + 1 .$$\n\nIt is written $\\lfloor x \\rfloor$ and called the **integer part**, or **floor**,\nof $x$.\n\n**Two independent ingredients are needed and neither may be dropped.** Existence\nis the Archimedean property ([[thm-of-archimedean]]) together with the\nwell-ordering of $\\mathbb{N}$ ([[thm-well-ordering-principle]]): the first says\nthat $x$ is caught between two integers at all, the second picks the *least*\ninteger above $x$. Uniqueness is the discreteness of $\\mathbb{Z}$: no integer\nlies strictly between $m$ and $m+1$.\n\nThis lemma is stated once here and reused. It is what turns \"the nearest integer\nto $x$\" from a picture into an object, and the companion page's oscillator\n$\\psi(x) = \\inf_{n \\in \\mathbb{Z}} |x - n|$ is computed from it in one line.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-test-function-space-d-of-an-open-set",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n$ be open, with $n\\ge1$. A complex-valued function is smooth if its real and imaginary parts are $C^k$ for every finite $k$, in the sense of [[def-ck-and-multi-index-notation-in-several-variables]]. Coordinate derivatives act on these two parts separately. We write $\\partial^\\alpha$ for the multi-index convention there, and $\\partial^0\\varphi=\\varphi$.\n\nThe **test-function space** is $\\mathcal D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb C)$: its members are smooth functions whose support, the closure in $\\Omega$ of their nonzero set, is a compact subset of $\\Omega$. Equivalently, the zero extension to $\\mathbb R^n$ is smooth with compact support contained in $\\Omega$: compactness gives a neighborhood of every boundary point disjoint from the support, where that extension vanishes. Functions are actual functions, not equivalence classes.\n\nPointwise addition and scalar multiplication make this a complex vector space; the support of a sum lies in the union of the two compact supports. The zero function has empty support. If $\\Omega=\\varnothing$ there is just the empty function, which is the zero vector. The topology is specified in subsequent definitions. Distribution pairings throughout this page are complex bilinear, with no conjugation on test functions. One may restrict all constructions to real scalars.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-periodic-advection-amplification-symbols",
+          "source_section": "Statement",
+          "quote": "On an $N$-point periodic grid let $z_\\ell=\\exp(2\\pi i\\ell/N)$, $C_\\ell=\\operatorname{Re}z_\\ell$, $S_\\ell=\\operatorname{Im}z_\\ell$, and $\\nu=ak/h$ with $a>0$. The Fourier vector $j\\mapsto z_\\ell^j$ is multiplied in one step by\n$$ g_{\\rm up}=1-\\nu+\\nu z_\\ell^{-1},\\quad g_{\\rm down}=1+\\nu-\\nu z_\\ell,\\quad g_{\\rm centered}=1-i\\nu S_\\ell,\\quad g_{\\rm LF}=C_\\ell-i\\nu S_\\ell,\\quad g_{\\rm LW}=1-\\nu^2(1-C_\\ell)-i\\nu S_\\ell. $$\nTheir squared moduli, in the same order, are\n$$ 1-2\\nu(1-\\nu)(1-C_\\ell),\\quad 1+2\\nu(1+\\nu)(1-C_\\ell),\\quad 1+\\nu^2S_\\ell^2,\\quad 1-(1-\\nu^2)S_\\ell^2,\\quad 1-\\nu^2(1-\\nu^2)(1-C_\\ell)^2. $$\nThe $N$ Fourier vectors form an orthogonal basis under the periodic inner product of [[def-uniform-grid-and-difference-operators]], and each has squared norm $Nh$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "Use $\\mathbb N$ for the natural-number index set (including zero) ([[def-natural-numbers]]), $\\mathbb R$ for the real scalar field ([[def-real-numbers]]), and $\\mathbb C$ with its real embedding and modulus ([[def-complex-numbers-and-arithmetic]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]).\n\nLet $N\\ge2$, $h>0$, $k>0$, and $t_n=nk$. For the finite periodic grid put $J_N=\\{0,\\ldots,N-1\\}$ and reduce every shifted index modulo $N$. A periodic grid function is a map $v:J_N\\to\\mathbb C$, with weighted norm\n$$ \\|v\\|_{2,h}=\\left(h\\sum_{j=0}^{N-1}|v_j|^2\\right)^{1/2}. $$\nThe infinite uniform grid has indices $j\\in\\mathbb Z$ and positions $x_j=jh$. On the periodic and infinite grids define\n$$ (D_+v)_j=\\frac{v_{j+1}-v_j}{h},\\qquad (D_-v)_j=\\frac{v_j-v_{j-1}}{h},\\qquad (D_0v)_j=\\frac{v_{j+1}-v_{j-1}}{2h},\\qquad (\\Delta_hv)_j=\\frac{v_{j+1}-2v_j+v_{j-1}}{h^2}. $$\nUse the inner product linear in its first entry,\n$$ \\langle p,q\\rangle_{2,h}=h\\sum_{j=0}^{N-1}p_j\\overline{q_j},\\qquad \\langle D_+p,D_+q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}, $$\nwhere the indices in $D_+$ are reduced periodically, and set $\\|D_+p\\|_{e,h}^2=\\langle D_+p,D_+p\\rangle_{e,h}$. The same definitions apply to real-valued grid functions.\n\nFor a finite interval of length $L=Nh$, use physical nodes $x_j=jh$ with indices $j=0,\\ldots,N$. On its edges $j=0,\\ldots,N-1$ define $(D_+v)_j=(v_{j+1}-v_j)/h$, and on interior nodes $j=1,\\ldots,N-1$ use $(\\Delta_hv)_j=(v_{j+1}-2v_j+v_{j-1})/h^2$. At the right endpoint define $(D_-v)_N=(v_N-v_{N-1})/h$. The interior inner product, norm, and edge inner product are\n$$ \\langle p,q\\rangle_h=h\\sum_{j=1}^{N-1}p_j\\overline{q_j},\\qquad \\|v\\|_h^2=\\langle v,v\\rangle_h,\\qquad \\langle p,q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}. $$\nDirichlet grid functions have prescribed endpoint values; when they are zero, the interior norm and edge inner product above are the ones used for the wave energy.\n\nAll statements below distinguish these periodic, infinite, and finite-interval index sets. Periodic Fourier calculations are not boundary estimates for the finite-interval grid.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "smooth-datum",
+          "claim": "Put $R=aT\\varepsilon/(4(1+\\varepsilon))$ and take $\\chi$ from [F4]. Set $u_0(x)=\\chi(3x/R)$. Then $u_0$ is smooth, equals $1$ at zero, and is supported in $[-2R/3,2R/3]$, a compact subset of $(-R,R)$; by [F8] it is an admissible real-valued datum.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stencil-dependence",
+          "claim": "By finite induction [F3], the value at index $j$ after zero steps depends only on $j$. If every value after $n$ steps depends only on initial indices $j-n,\\ldots,j+n$, then the next update reads indices $j-1,j,j+1$ at time $n$, whose initial dependence intervals have union $[j-(n+1),j+(n+1)]$. Thus after $n$ steps only initial indices $j-n,\\ldots,j+n$ can affect the value.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "induction"
+          ]
+        },
+        {
+          "id": "strict-cfl-separation",
+          "claim": "Along the violating subsequence put $n_m=\\lfloor T/k_m\\rfloor$ and $j_m=\\lfloor aT/h_m+1/2\\rfloor$. By [F7], $j_m\\le aT/h_m+1/2<j_m+1$, so $|j_mh_m-aT|\\le h_m/2$. Since $n_mh_m\\le T h_m/k_m\\le aT/(1+\\varepsilon)$, the left edge of the numerical dependence interval obeys $$ j_mh_m-n_mh_m\\ge\\frac{aT\\varepsilon}{1+\\varepsilon}-\\frac{h_m}{2}. $$ For all sufficiently large $m$, this exceeds $R$. Hence every sampled initial value on which $U_{j_m}^{n_m}$ depends is zero, so $U_{j_m}^{n_m}=0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-characteristic-error",
+          "claim": "The constant-velocity characteristic is $X(s;t,x)=x+a(s-t)$: it has derivative $a$ and terminal value $x$, and any other solution agrees by [F6] applied to its difference from $X$. The explicit function $u^*(y,s)=u_0(y-as)$ has partial derivatives $u^*_y=u_0'(y-as)$ and $u^*_s=-a u_0'(y-as)$ by one-variable difference quotients, so it solves $u_t+a u_x=0$ with initial data $u_0$. To verify uniqueness, let $u$ be any classical solution on an open neighborhood of this characteristic segment with the same initial data, fix $(x,t)$, and set $v(s)=u(x+a(s-t),s)$ on $[0,t]$. For interior $s$ and small nonzero $\\delta$ whose coordinate segments remain in the solution domain, applying [F6] separately in the first and second coordinates gives $$\\frac{v(s+\\delta)-v(s)}{\\delta}=a u_x(\\xi_\\delta,s+\\delta)+u_t(x+a(s-t),\\eta_\\delta),$$ where $\\xi_\\delta$ lies between $x+a(s-t)$ and $x+a(s+\\delta-t)$, and $\\eta_\\delta$ lies between $s$ and $s+\\delta$. As $\\delta\\to0$, these intermediate points tend to $(x+a(s-t),s)$, so continuity of the partials in [F2] yields $v'(s)=a u_x(x+a(s-t),s)+u_t(x+a(s-t),s)=0$. Then [F6] makes $v$ constant, hence $u(x,t)=u_0(x-at)$. Since $0\\le T-n_mk_m<k_m$ and $k_m\\to0$, the exact characteristic foot $j_mh_m-a n_mk_m$ tends to $aT-aT=0$. By continuity and $u_0(0)=1$, the exact sample tends to $1$, while step 2.1 gives numerical value zero. Thus the sampled maximum error does not tend to zero.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fixed-period-centered-instability",
+          "claim": "For the separate centered-family claim, fix $P>0$ and use $N_q=4q$, $h_q=P/(4q)$, $k_q=h_q/(2a)$, and $r_q=\\lfloor T/k_q\\rfloor$. Then [F1] gives the centered update with $ak_q/h_q=1/2$, and the Fourier index $\\ell=q$ is admissible with $z_\\ell=\\exp(2\\pi i q/(4q))=i$. By [F9] its multiplier is $g=1-i/2$, so $|g|=\\sqrt5/2>1$. Repeated application gives $Q_q^{r_q}\\phi_q=g^{r_q}\\phi_q$. The mode is nonzero, and the finite Fourier basis in [F9] diagonalizes $Q_q^{r_q}$ with finitely many finite multipliers, so this operator is bounded. By [F10] its norm is at least $|g|^{r_q}$. Since [F7] gives $r_q\\ge T/k_q-1=8aTq/P-1\\to\\infty$, these norms are unbounded while all time levels satisfy $r_qk_q\\le T$. Thus the domain-of-dependence bound is not sufficient for uniform finite-time power stability.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F7",
+            "F9",
+            "F10",
+            "F11",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement's first branch uses the infinite integer grid and a mesh subsequence; the centered branch explicitly indexes q>=1 with N_q=4q. Its maximum over allowed time levels always includes r=0, so the family detector identifies actual nonempty ranges, not a missing empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement a,T,epsilon>0 makes R>0 and1+epsilon>0 before proof steps 1.1\u20132.1 divide by them. Step3.1's delta is a nonzero difference-quotient increment while taking its limit; it is not evaluated at delta=0. The centered branch likewise has positive P,a and grid spacings."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The transport equation and stencil are explicitly one-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The argument uses the infinite grid and has no finite periodic alias case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The convergence obstruction assumes \u03bd\u22651+\u03b5; equality is not the strict-violation case.",
+          "evidence": "Statement: the infinite-grid obstruction assumes nu>=1+epsilon, while the separate centered family has strict interior nu=1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: The nearest grid index is chosen by rounding, and the cutoff is fixed explicitly; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way necessity statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way necessity statement."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Checked all Proof 1.1-4.1 and eleven actual cited interfaces, including current repaired cutoff and its eight suppliers. The constructed cutoff has compact support [-2R/3,2R/3] inside (-R,R); the later support/continuity argument works for every stipulated datum. Nearest-neighbor finite induction and homogeneous linearity force zero when jh-nh>R. With floors, |jh-aT|<=h/2, nh<=aT/(1+epsilon), and 0<=T-nk<k prove exact sample tends to 1 at a numerical zero. The coordinate mean-value calculation establishes characteristic transport without assuming an unstated flow theorem. The independent periodic family has N=4q, nu=1/2, z_q=i and norm lower bound (sqrt5/2)^floor(T/k); time rounding and fixed period are explicit. No zero-width, missing support endpoint, AC, or stronger sufficiency assertion. Historical published findings 3/4 are confirmed nonfatal but repaired by owner, independently checked here."
+      }
+    },
+    "ex-wave-cfl-endpoint-and-energy-breakdown": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-centered-leapfrog-wave-scheme",
+          "source_section": "Definition",
+          "quote": "Use the uniform-grid indices, physical nodes, and spacings of [[def-uniform-grid-and-difference-operators]]. Fix a wave speed $c>0$, an interval length $L=Nh$ with $N\\ge2$, and a time step $k>0$. Write $\\nu=ck/h$. The target model is the real scalar wave equation $u_{tt}=c^2u_{xx}$, and grid states are real-valued. Prescribe a real initial displacement row $U^0$ and discrete initial-velocity row $V^0$, and set $U^1=U^0+kV^0$. For smooth Dirichlet data $u_0,u_1:[0,L]\\to\\mathbb R$ with $u_0(0)=u_0(L)=u_1(0)=u_1(L)=0$, the corresponding sample rows are $U_j^0=u_0(x_j)$ and $V_j^0=u_1(x_j)$; for smooth periodic data, take real $L$-periodic $u_0,u_1$ and sample them at $x_j$. In both cases the discrete initial velocity equals the sampled $u_1$. The centered leapfrog recurrence is\n$$ U_j^{n+1}-2U_j^n+U_j^{n-1}=\\nu^2(U_{j+1}^n-2U_j^n+U_{j-1}^n),\\qquad n\\ge1. $$\nFor the finite Dirichlet interval, require $U_0^0=U_N^0=V_0^0=V_N^0=0$ and impose the recurrence for $j=1,\\ldots,N-1$, with $U_0^n=U_N^n=0$ for every $n\\ge0$. For the periodic branch, use $j=0,\\ldots,N-1$, reduce indices modulo $N$, and impose the recurrence at every node. Fourier analysis of this real periodic update uses its complex-linear extension to the complexified grid space. No convergence order for a particular initialization formula is asserted here.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-centered-wave-amplification-and-endpoint",
+          "source_section": "Statement",
+          "quote": "On a periodic grid of length $L=Nh$, let $\\nu=ck/h>0$, $V^0=(U^1-U^0)/k$, and write $U^n=\\sum_{\\ell=0}^{N-1}w_\\ell^n\\phi_\\ell$ in the discrete Fourier basis; write $\\widehat V_\\ell^0$ for the coefficient of $V^0$ in the same basis. Then\n$$ w_\\ell^{n+1}-2(1-2\\nu^2s_\\ell)w_\\ell^n+w_\\ell^{n-1}=0,\\qquad s_\\ell=\\sin^2(\\pi\\ell/N). $$\nFor $0<\\nu\\le\\nu_0<1$, the nonconstant roots are distinct and have modulus one, and\n$$ \\|U^n\\|_{2,h}\\le\\left(1+\\frac{\\nu_0}{\\sqrt{1-\\nu_0^2}}\\right)\\|U^0\\|_{2,h}+t_n\\|V^0\\|_{2,h}. $$\nThe mean mode is $w_0^n=w_0^0+t_n\\widehat V_0^0$. At $\\nu=1$ and even $N$, the Nyquist mode has the repeated root $-1$ and solution $w_{N/2}^n=(-1)^n(A+nB)$, where $B=0$ exactly when $w_{N/2}^1=-w_{N/2}^0$. Thus arbitrary starting pairs do not have a uniform endpoint power bound.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "On the finite periodic rectangular $d$-grid of [[def-parabolic-theta-finite-difference-scheme]], let $\\ell_j\\in\\{0,\\ldots,N_j-1\\}$ and\n$$\n\\phi_\\ell(i)=\\exp\\left(2\\pi\\mathrm i\\sum_{j=1}^d\\frac{\\ell_ji_j}{N_j}\\right).\n$$\nThen $\\phi_\\ell$ is an eigenvector of $A_h^{\\rm per}$ with eigenvalue\n$$\n\\lambda_\\ell=4\\sum_{j=1}^d\\frac{\\kappa_j}{h_j^2}\\sin^2\\left(\\frac{\\pi\\ell_j}{N_j}\\right)\\ge0.\n$$\nFor zero source, the $\\theta$ update multiplies this mode at each step by\n$$\ng_\\theta(\\ell)=\\frac{1-(1-\\theta)\\Delta t\\lambda_\\ell}{1+\\theta\\Delta t\\lambda_\\ell}.\n$$\nThe displayed modes form a basis of the complexified grid space, so this factor describes the full periodic update.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$ and let $k,\\ell\\in\\mathbb Z$. Then\n\n$$\\sum_{x=0}^{N-1}e^{2\\pi i(k-\\ell)x/N}=\\begin{cases}N,&k\\equiv\\ell\\pmod N,\\\\\\\\ 0,&k\\not\\equiv\\ell\\pmod N.\\end{cases}$$\n\nAt $N=1$ the congruence holds for all $k,\\ell$ and the sum is $1$. The sum is the finite sum of the complex family $x\\mapsto e^{2\\pi i(k-\\ell)x/N}$ over the von Neumann natural $N=\\{0,\\dots,N-1\\}$ ([[def-finite-sum-in-a-commutative-monoid]]), and $N$ on the right is the natural number $N$ read in $\\mathbb C$ as the additive multiple $N\\cdot1_{\\mathbb C}$, that is, the value at $N$ of the canonical embedding $\\mathbb N\\to\\mathbb C$ ([[def-canonical-natural]], [[lem-integer-multiples-agree-with-canonical-natural]]).",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "Use $\\mathbb N$ for the natural-number index set (including zero) ([[def-natural-numbers]]), $\\mathbb R$ for the real scalar field ([[def-real-numbers]]), and $\\mathbb C$ with its real embedding and modulus ([[def-complex-numbers-and-arithmetic]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]).\n\nLet $N\\ge2$, $h>0$, $k>0$, and $t_n=nk$. For the finite periodic grid put $J_N=\\{0,\\ldots,N-1\\}$ and reduce every shifted index modulo $N$. A periodic grid function is a map $v:J_N\\to\\mathbb C$, with weighted norm\n$$ \\|v\\|_{2,h}=\\left(h\\sum_{j=0}^{N-1}|v_j|^2\\right)^{1/2}. $$\nThe infinite uniform grid has indices $j\\in\\mathbb Z$ and positions $x_j=jh$. On the periodic and infinite grids define\n$$ (D_+v)_j=\\frac{v_{j+1}-v_j}{h},\\qquad (D_-v)_j=\\frac{v_j-v_{j-1}}{h},\\qquad (D_0v)_j=\\frac{v_{j+1}-v_{j-1}}{2h},\\qquad (\\Delta_hv)_j=\\frac{v_{j+1}-2v_j+v_{j-1}}{h^2}. $$\nUse the inner product linear in its first entry,\n$$ \\langle p,q\\rangle_{2,h}=h\\sum_{j=0}^{N-1}p_j\\overline{q_j},\\qquad \\langle D_+p,D_+q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}, $$\nwhere the indices in $D_+$ are reduced periodically, and set $\\|D_+p\\|_{e,h}^2=\\langle D_+p,D_+p\\rangle_{e,h}$. The same definitions apply to real-valued grid functions.\n\nFor a finite interval of length $L=Nh$, use physical nodes $x_j=jh$ with indices $j=0,\\ldots,N$. On its edges $j=0,\\ldots,N-1$ define $(D_+v)_j=(v_{j+1}-v_j)/h$, and on interior nodes $j=1,\\ldots,N-1$ use $(\\Delta_hv)_j=(v_{j+1}-2v_j+v_{j-1})/h^2$. At the right endpoint define $(D_-v)_N=(v_N-v_{N-1})/h$. The interior inner product, norm, and edge inner product are\n$$ \\langle p,q\\rangle_h=h\\sum_{j=1}^{N-1}p_j\\overline{q_j},\\qquad \\|v\\|_h^2=\\langle v,v\\rangle_h,\\qquad \\langle p,q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}. $$\nDirichlet grid functions have prescribed endpoint values; when they are zero, the interior norm and edge inner product above are the ones used for the wave energy.\n\nAll statements below distinguish these periodic, infinite, and finite-interval index sets. Periodic Fourier calculations are not boundary estimates for the finite-interval grid.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-uniform-grid-and-difference-operators",
+          "source_section": "Definition",
+          "quote": "Use $\\mathbb N$ for the natural-number index set (including zero) ([[def-natural-numbers]]), $\\mathbb R$ for the real scalar field ([[def-real-numbers]]), and $\\mathbb C$ with its real embedding and modulus ([[def-complex-numbers-and-arithmetic]], [[def-complex-conjugate-real-imaginary-part-and-modulus]]).\n\nLet $N\\ge2$, $h>0$, $k>0$, and $t_n=nk$. For the finite periodic grid put $J_N=\\{0,\\ldots,N-1\\}$ and reduce every shifted index modulo $N$. A periodic grid function is a map $v:J_N\\to\\mathbb C$, with weighted norm\n$$ \\|v\\|_{2,h}=\\left(h\\sum_{j=0}^{N-1}|v_j|^2\\right)^{1/2}. $$\nThe infinite uniform grid has indices $j\\in\\mathbb Z$ and positions $x_j=jh$. On the periodic and infinite grids define\n$$ (D_+v)_j=\\frac{v_{j+1}-v_j}{h},\\qquad (D_-v)_j=\\frac{v_j-v_{j-1}}{h},\\qquad (D_0v)_j=\\frac{v_{j+1}-v_{j-1}}{2h},\\qquad (\\Delta_hv)_j=\\frac{v_{j+1}-2v_j+v_{j-1}}{h^2}. $$\nUse the inner product linear in its first entry,\n$$ \\langle p,q\\rangle_{2,h}=h\\sum_{j=0}^{N-1}p_j\\overline{q_j},\\qquad \\langle D_+p,D_+q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}, $$\nwhere the indices in $D_+$ are reduced periodically, and set $\\|D_+p\\|_{e,h}^2=\\langle D_+p,D_+p\\rangle_{e,h}$. The same definitions apply to real-valued grid functions.\n\nFor a finite interval of length $L=Nh$, use physical nodes $x_j=jh$ with indices $j=0,\\ldots,N$. On its edges $j=0,\\ldots,N-1$ define $(D_+v)_j=(v_{j+1}-v_j)/h$, and on interior nodes $j=1,\\ldots,N-1$ use $(\\Delta_hv)_j=(v_{j+1}-2v_j+v_{j-1})/h^2$. At the right endpoint define $(D_-v)_N=(v_N-v_{N-1})/h$. The interior inner product, norm, and edge inner product are\n$$ \\langle p,q\\rangle_h=h\\sum_{j=1}^{N-1}p_j\\overline{q_j},\\qquad \\|v\\|_h^2=\\langle v,v\\rangle_h,\\qquad \\langle p,q\\rangle_{e,h}=h\\sum_{j=0}^{N-1}(D_+p)_j\\overline{(D_+q)_j}. $$\nDirichlet grid functions have prescribed endpoint values; when they are zero, the interior norm and edge inner product above are the ones used for the wave energy.\n\nAll statements below distinguish these periodic, infinite, and finite-interval index sets. Periodic Fourier calculations are not boundary estimates for the finite-interval grid.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "endpoint-root",
+          "claim": "For the Nyquist mode, $s_{N/2}=1$, so the recurrence polynomial is $r^2-2(1-2\\nu^2)r+1$. At $\\nu=1$ this is $(r+1)^2$, with solution $w_n=(-1)^n(A+nB)$; the coefficient $B$ vanishes exactly when $w^1=-w^0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "supercfl-root",
+          "claim": "If $\\nu>1$, then $q=1-2\\nu^2<-1$. The roots of $r^2-2qr+1$ are real and negative because the discriminant is $4(q^2-1)>0$, their product is $1$, and their sum is $2q<-2$. Hence one root has modulus greater than one.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "endpoint-energy-semidefinite",
+          "claim": "Define the periodic modified energy of adjacent states $X=U^n$, $Y=U^{n+1}$ by $$ \\mathcal E_{\\rm per}(Y,X)=\\frac{1}{2k^2}\\|Y-X\\|_{2,h}^2+\\frac{c^2}{2}\\operatorname{Re}\\langle D_+Y,D_+X\\rangle_{e,h}. $$ For one normalized Fourier mode $\\psi_\\ell=\\phi_\\ell/\\sqrt L$ with coefficients $x,y$, put $m=(x+y)/2$ and $v=(y-x)/k$. Reindexing the finite periodic sum gives $\\langle D_+p,D_+q\\rangle_{e,h}=\\langle-\\Delta_hp,q\\rangle_{2,h}$. Thus [F3] gives $\\|D_+\\psi_\\ell\\|_{e,h}^2=4h^{-2}s_\\ell$, while [F4] gives orthogonality; the $N$ nonzero orthogonal vectors form a basis of the $N$-dimensional space $\\mathbb C^{J_N}$. By [F5] they are normalized by $\\sqrt L$. Since $x=m-kv/2$ and $y=m+kv/2$, $\\operatorname{Re}(y\\overline{x})=|m|^2-k^2|v|^2/4$. Summing these diagonal contributions using [F6] gives the modal energy $$ \\frac12(1-\\nu^2s_\\ell)|v|^2+2c^2h^{-2}s_\\ell|m|^2. $$ At $\\nu=1$, $0\\le s_\\ell\\le1$, so every modal term is nonnegative, while the Nyquist velocity coefficient is zero. Orthogonal Fourier decomposition makes $\\mathcal E_{\\rm per}$ semidefinite.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "supercfl-energy-negative",
+          "claim": "Set the real amplitude $A=1$ and take $X=A\\phi_{N/2}$ and $Y=-X$. Then $X\\ne0$, $\\|Y-X\\|^2=4\\|X\\|^2$, and $\\langle D_+Y,D_+X\\rangle_{e,h}=-4h^{-2}\\|X\\|^2$, so $$ \\mathcal E_{\\rm per}(-X,X)=\\frac{2}{k^2}(1-\\nu^2)\\|X\\|_{2,h}^2. $$ It is zero at $\\nu=1$ and negative at $\\nu>1$.",
+          "step": "1.4",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "indefiniteness",
+          "claim": "The state $(Y,X)=(0,X)$ has $\\mathcal E_{\\rm per}(0,X)=\\|X\\|_{2,h}^2/(2k^2)>0$. Together with step 1.4, this shows that the form is indefinite for $\\nu>1$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires an even periodic grid with N\u22652."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example inherits h,k>0 from the grid/scheme definitions. Verification steps 1.3\u20131.4 therefore divide by2k^2 and k^2 only when positive; the zero endpoint quantity is instead the energy coefficient1-nu^2 at nu=1, evaluated explicitly without division by that coefficient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The spatial model is one-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "N=2 is even and its nonconstant mode is the Nyquist mode in steps 1.1\u20132.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition supplies both displacement and discrete initial velocity; the example separately verifies nu=1 and nu>1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The Nyquist mode is explicitly defined; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Verification 1.1 writes w_n=(-1)^n(A+nB); its initial values give B=0 exactly when w^1=-w^0. This directly checks both directions of that particular no-growth condition, without asserting an iff stability theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Verification 1.1 writes w_n=(-1)^n(A+nB); its initial values give B=0 exactly when w^1=-w^0. This directly checks both directions of that particular no-growth condition, without asserting an iff stability theorem."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "numerical-periodic-grid-fixture",
+          "asserts": "It is zero at $\\nu=1$ and negative at $\\nu>1$.",
+          "claim": "N=2: compute modified energy from cyclic differences, obtaining zero at nu1 and negative -6||X||^2 at nu2, with a separate positive witness; check super-CFL characteristic roots.",
+          "checked_in": "Verification1.1/1.2/1.4/2.1",
+          "fixture_version": 2,
+          "parameters": {
+            "fixture": "n2-wave-nyquist-endpoint-and-supercfl"
+          }
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Read complete Verification 1.1-2.1 against five actual deps and the six cited facts. Even N gives the real alternating mode including N=2. Nyquist polynomial has double -1 at nu=1 and two negative reciprocal roots for nu>1, one outside the unit circle. Reindexed periodic summation by parts and finite Fourier orthogonality give each modal energy (1-nu\u00b2s)|v|\u00b2/2+2c\u00b2s|m|\u00b2/h\u00b2. All terms are nonnegative at endpoint; Nyquist antisymmetric adjacent states give zero there and negative energy above it, while (Y,X)=(0,X) gives strictly positive energy. Thus semidefinite/indefinite assertions are sound without a Dirichlet/periodic conflation or choice. Read-only heat citation omissions are routed to batch 37."
+      }
+    },
+    "ex-upwind-versus-downwind-advection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-periodic-advection-amplification-symbols",
+          "source_section": "Statement",
+          "quote": "On an $N$-point periodic grid let $z_\\ell=\\exp(2\\pi i\\ell/N)$, $C_\\ell=\\operatorname{Re}z_\\ell$, $S_\\ell=\\operatorname{Im}z_\\ell$, and $\\nu=ak/h$ with $a>0$. The Fourier vector $j\\mapsto z_\\ell^j$ is multiplied in one step by\n$$ g_{\\rm up}=1-\\nu+\\nu z_\\ell^{-1},\\quad g_{\\rm down}=1+\\nu-\\nu z_\\ell,\\quad g_{\\rm centered}=1-i\\nu S_\\ell,\\quad g_{\\rm LF}=C_\\ell-i\\nu S_\\ell,\\quad g_{\\rm LW}=1-\\nu^2(1-C_\\ell)-i\\nu S_\\ell. $$\nTheir squared moduli, in the same order, are\n$$ 1-2\\nu(1-\\nu)(1-C_\\ell),\\quad 1+2\\nu(1+\\nu)(1-C_\\ell),\\quad 1+\\nu^2S_\\ell^2,\\quad 1-(1-\\nu^2)S_\\ell^2,\\quad 1-\\nu^2(1-\\nu^2)(1-C_\\ell)^2. $$\nThe $N$ Fourier vectors form an orthogonal basis under the periodic inner product of [[def-uniform-grid-and-difference-operators]], and each has squared norm $Nh$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-periodic-advection-power-stability",
+          "source_section": "Statement",
+          "quote": "For the periodic schemes of [[def-periodic-one-way-advection-schemes]] with $a>0$, upwind powers are contractions in $\\|\\cdot\\|_{2,h}$ for $0\\le\\nu\\le1$ and grow for $\\nu>1$. Lax--Friedrichs and Lax--Wendroff powers are contractions for $|\\nu|\\le1$; when $|\\nu|>1$, Lax--Wendroff grows for $N\\ge2$ and Lax--Friedrichs grows for $N\\ge3$ (the $N=2$ Lax--Friedrichs stencil aliases its nonconstant mode). Downwind powers grow for every $\\nu>0$ and $N\\ge2$. Centered powers grow for every $\\nu\\ne0$ when $N\\ge3$, while the $N=2$ centered stencil aliases to the identity. Reflection gives the same assertions for $a<0$ with $|\\nu|$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "upwind-evaluation",
+          "claim": "Since $z^{-1}=-i$, the upwind factor is $(1-i)/2$, whose squared modulus is $((1)^2+(-1)^2)/4=1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "downwind-evaluation",
+          "claim": "The downwind factor is $3/2-i/2$, whose squared modulus is $(9+1)/4=5/2$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "power-comparison",
+          "claim": "Taking powers multiplies this mode by the corresponding factor to the same power. Thus the upwind component decays and the downwind component grows geometrically.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a four-point nonempty periodic grid."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonzero Fourier mode."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes N=4 and has no N=1 case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example is specifically the N=4 grid."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example fixes \u03bd=1/2, away from the CFL endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The mode z=i is explicitly selected from the finite Fourier basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The four-point advection example calculates two multiplier moduli and their powers; it does not assert an iff classification for every grid."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The four-point advection example calculates two multiplier moduli and their powers; it does not assert an iff classification for every grid."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "numerical-periodic-grid-fixture",
+          "asserts": "Since $z^{-1}=-i$, the upwind factor is $(1-i)/2$, whose squared modulus is $((1)^2+(-1)^2)/4=1/2$.",
+          "claim": "N=4,z=i,nu1/2: apply original up/down cyclic stencils independently, compare squared norm ratios1/2 and5/2 and eight powers.",
+          "checked_in": "Verification1.1/1.2/2.1",
+          "fixture_version": 2,
+          "parameters": {
+            "fixture": "n4-z-i-upwind-downwind"
+          }
+        }
+      ],
+      "axioms": []
+    },
+    "ex-centered-advection-consistent-but-unstable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-smooth-advection-stencils-consistent",
+          "source_section": "Statement",
+          "quote": "Fix $a\\in\\mathbb R\\setminus\\{0\\}$. Let $u:\\mathbb R^2\\to\\mathbb R$ be a $C^6$ solution of $u_t+a u_x=0$ that is periodic in $x$ with period $P>0$, so $u(x+P,t)=u(x,t)$, and whose derivatives through order six are bounded. Let $h,k\\to0$ with $0<c_-\\le k/h\\le c_+<\\infty$, and put $\\nu=|a|k/h$. For a stencil $S$, define its local residual by\n$$ \\tau_S(x,t)=\\frac{u(x,t+k)-S(u(\\cdot,t))(x)}{k}. $$\nThen, for the sign-selected stencils of [[def-periodic-one-way-advection-schemes]], the upwind, downwind, centered, and Lax--Friedrichs residuals are $O(h)$ uniformly in $(x,t)$, while the Lax--Wendroff residual is $O(h^2)$. Here a remainder $R=O(\\eta(h,k))$ uniformly means $|R(x,t;h,k)|\\le C\\eta(h,k)$ for all $x,t$ and sufficiently small $h,k$, with $C$ independent of $x,t,h,k$ under the stated ratio bounds. These are smooth-solution consistency statements and imply no convergence result at discontinuities.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-advection-amplification-symbols",
+          "source_section": "Statement",
+          "quote": "On an $N$-point periodic grid let $z_\\ell=\\exp(2\\pi i\\ell/N)$, $C_\\ell=\\operatorname{Re}z_\\ell$, $S_\\ell=\\operatorname{Im}z_\\ell$, and $\\nu=ak/h$ with $a>0$. The Fourier vector $j\\mapsto z_\\ell^j$ is multiplied in one step by\n$$ g_{\\rm up}=1-\\nu+\\nu z_\\ell^{-1},\\quad g_{\\rm down}=1+\\nu-\\nu z_\\ell,\\quad g_{\\rm centered}=1-i\\nu S_\\ell,\\quad g_{\\rm LF}=C_\\ell-i\\nu S_\\ell,\\quad g_{\\rm LW}=1-\\nu^2(1-C_\\ell)-i\\nu S_\\ell. $$\nTheir squared moduli, in the same order, are\n$$ 1-2\\nu(1-\\nu)(1-C_\\ell),\\quad 1+2\\nu(1+\\nu)(1-C_\\ell),\\quad 1+\\nu^2S_\\ell^2,\\quad 1-(1-\\nu^2)S_\\ell^2,\\quad 1-\\nu^2(1-\\nu^2)(1-C_\\ell)^2. $$\nThe $N$ Fourier vectors form an orthogonal basis under the periodic inner product of [[def-uniform-grid-and-difference-operators]], and each has squared norm $Nh$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nearest-neighbor-cfl-domain-condition",
+          "source_section": "Statement",
+          "quote": "Fix $a,T>0$. The following two claims hold.\n\n**Strict domain-of-dependence obstruction.** Suppose $h_m,k_m\\to0$ and along a subsequence $ak_m/h_m\\ge1+\\varepsilon$ for some fixed $\\varepsilon>0$, and put $R=aT\\varepsilon/(4(1+\\varepsilon))$. Consider any homogeneous linear nearest-neighbor explicit update on the infinite grid whose value after $n$ steps depends only on initial indices $j-n,\\ldots,j+n$. Fix a real-valued datum $u_0\\in C_c^\\infty((-R,R);\\mathbb R)$ with $u_0(0)=1$ and initialize each mesh by $U_j^0=u_0(jh_m)$. The exact samples $u_0(jh_m-at_m)$ and numerical values fail to converge in the sampled maximum error\n$$\\sup_{j\\in\\mathbb Z}|U_j^{n_m}-u_0(jh_m-at_m)|$$\nat $t_m=n_mk_m\\to T$, where $n_m=\\lfloor T/k_m\\rfloor$.\n\n**CFL insufficiency for centered advection.** For any fixed period $P>0$, set $N_q=4q$, $h_q=P/N_q$, and $k_q=h_q/(2a)$ for $q\\ge1$. Let $Q_q$ be the centered advection update on this periodic grid and $r_q=\\lfloor T/k_q\\rfloor$. Then $0<ak_q/h_q=1/2<1$, but\n$$\\max_{\\substack{r\\in\\mathbb N\\\\0\\le r k_q\\le T}}\\|Q_q^r\\|_{2,h_q\\to2,h_q}\\ge\\|Q_q^{r_q}\\|_{2,h_q\\to2,h_q}\\ge(\\sqrt5/2)^{r_q}\\longrightarrow\\infty.$$\nThus a fixed strict violation of $ak/h\\le1$ prevents convergence for the nearest-neighbor family, while the domain-of-dependence bound does not suffice for uniform finite-time power stability of every periodic nearest-neighbor scheme.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "centered-factor",
+          "claim": "Since $z_\\ell=i$, $S_\\ell=1$, and the centered factor is $1-i/2$. Its squared modulus is $1+1/4=5/4>1$, while $k_q/h_q=1/(2a)$ is constant and $h_q,k_q\\to0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "consistency-and-uniform-instability",
+          "claim": "By [F1], each fixed smooth solution satisfying the theorem's regularity and periodicity hypotheses has residual $O(h_q)$. By [F3], for every fixed $T>0$ the centered update powers are not uniformly bounded over time levels $rk_q\\le T$. Thus this family is consistent on fixed smooth data but fails finite-time power stability because of mesh-dependent high-frequency modes.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a nonempty periodic grid."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonzero Fourier mode z=i."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is one-dimensional and fixes N=4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: q=1 gives N=4, and the fixed-period family uses the same z=i mode for every q."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: every mesh has the strict interior ratio nu=1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The Fourier mode is explicitly fixed as z=i."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The centered-advection example exhibits one consistent but unbounded-power family at Courant number1/2; it is a counterexample, not an equivalence criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The centered-advection example exhibits one consistent but unbounded-power family at Courant number1/2; it is a counterexample, not an equivalence criterion."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "numerical-periodic-grid-fixture",
+          "asserts": "Since $z_\\ell=i$, $S_\\ell=1$, and the centered factor is $1-i/2$.",
+          "claim": "N=4,z=i,nu1/2: direct centered stencil gives squared modulus5/4 and eight growing powers; does not prove consistency or a refining-family nonuniform-power theorem.",
+          "checked_in": "Verification1.1",
+          "fixture_version": 2,
+          "parameters": {
+            "fixture": "n4-centered-cfl-half"
+          }
+        }
+      ],
+      "axioms": []
+    },
+    "ex-grid-fourier-stability-needs-a-common-space-lift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-common-space-linear-scheme-interface",
+          "source_section": "Definition",
+          "quote": "Fix a scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. A **common-space\nlinear IVP interface** consists of a Banach space $X$ over $\\mathbb K$ and a\nstrongly continuous semigroup $U(t)\\in\\mathcal B(X)$, $t\\ge0$, as defined in\n[[def-strongly-continuous-semigroup]], together with a finite-time bound: for\neach $T>0$ there is $M_T<\\infty$ such that\n$$\\sup_{0\\le t\\le T}\\|U(t)\\|\\le M_T.$$\nThe solution with initial value $x\\in X$ is $u(t)=U(t)x$. This definition\nrecords the solution operators and their continuous dependence in the same\nnorm; it makes no claim about a generator domain.\n\nA **consistency subspace** is a dense linear subspace $D\\subseteq X$ satisfying\n$U(t)D\\subseteq D$ for every $t\\ge0$. Here dense means\n$\\overline D^{\\,X}=X$, and invariant means the displayed inclusion. It need\nnot be the domain of a differential generator.\n\nA **common-space time-scheme family** is a sequence of positive time steps\n$(\\tau_\\nu)_{\\nu\\in\\mathbb N}$ with $\\tau_\\nu\\to0$ and bounded linear maps\n$S_\\nu:X\\to X$ in the sense of [[def-bounded-linear-operator]]. Write\n$S_\\nu^0=I_X$ and recursively set $S_\\nu^{n+1}=S_\\nu S_\\nu^n$ for\n$n\\in\\mathbb N$. These powers are uniquely defined by the recursion theorem\n([[thm-recursion]]) on the set $\\mathcal B(X)$ of bounded linear operators\n([[def-space-of-bounded-linear-operators]]): for fixed $S_\\nu$, the map\n$T\\mapsto S_\\nu T$ preserves $\\mathcal B(X)$ because composition preserves\nlinearity and multiplies operator bounds, and $I_X\\in\\mathcal B(X)$ with bound\n$1$. All scheme and solution errors below\nuse the norm of this same space $X$; write $\\|\\cdot\\|$ for that norm and\n$\\|\\cdot\\|_{\\mathrm{op}}$ for the operator norm of [[def-operator-norm]].\n\nThe family is **consistent on $D$** when for every $x\\in D$ and $T>0$,\n$$\\lim_{\\nu\\to\\infty}\\max_{\\substack{r\\in\\mathbb N\\\\r\\tau_\\nu\\le T}}\\frac{\\|(S_\\nu-U(\\tau_\\nu))U(r\\tau_\\nu)x\\|}{\\tau_\\nu}=0.$$\nThe maximum is over a nonempty finite set because it includes $r=0$. This is\nthe local defect divided by one time step, uniformly over the exact orbit on\nthe finite time interval.\n\nThe family is **stable on finite time intervals** when for every $T>0$ there\nis $C_T<\\infty$ such that\n$$\\|S_\\nu^n\\|_{\\mathrm{op}}\\le C_T\\quad\\text{whenever }\\nu,n\\in\\mathbb N\\text{ and }n\\tau_\\nu\\le T.$$\nIt is **convergent on finite time intervals** when for every $x\\in X$ and\n$T>0$,\n$$\\lim_{\\nu\\to\\infty}\\max_{\\substack{n\\in\\mathbb N\\\\n\\tau_\\nu\\le T}}\\|S_\\nu^n x-U(n\\tau_\\nu)x\\|=0.$$\nThe maximum convention includes time zero. This locally uniform-in-grid-time\nconvergence is the hypothesis used for the reverse implication in the\nequivalence theorem below.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-common-space-linear-scheme-interface",
+          "source_section": "Definition",
+          "quote": "Fix a scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. A **common-space\nlinear IVP interface** consists of a Banach space $X$ over $\\mathbb K$ and a\nstrongly continuous semigroup $U(t)\\in\\mathcal B(X)$, $t\\ge0$, as defined in\n[[def-strongly-continuous-semigroup]], together with a finite-time bound: for\neach $T>0$ there is $M_T<\\infty$ such that\n$$\\sup_{0\\le t\\le T}\\|U(t)\\|\\le M_T.$$\nThe solution with initial value $x\\in X$ is $u(t)=U(t)x$. This definition\nrecords the solution operators and their continuous dependence in the same\nnorm; it makes no claim about a generator domain.\n\nA **consistency subspace** is a dense linear subspace $D\\subseteq X$ satisfying\n$U(t)D\\subseteq D$ for every $t\\ge0$. Here dense means\n$\\overline D^{\\,X}=X$, and invariant means the displayed inclusion. It need\nnot be the domain of a differential generator.\n\nA **common-space time-scheme family** is a sequence of positive time steps\n$(\\tau_\\nu)_{\\nu\\in\\mathbb N}$ with $\\tau_\\nu\\to0$ and bounded linear maps\n$S_\\nu:X\\to X$ in the sense of [[def-bounded-linear-operator]]. Write\n$S_\\nu^0=I_X$ and recursively set $S_\\nu^{n+1}=S_\\nu S_\\nu^n$ for\n$n\\in\\mathbb N$. These powers are uniquely defined by the recursion theorem\n([[thm-recursion]]) on the set $\\mathcal B(X)$ of bounded linear operators\n([[def-space-of-bounded-linear-operators]]): for fixed $S_\\nu$, the map\n$T\\mapsto S_\\nu T$ preserves $\\mathcal B(X)$ because composition preserves\nlinearity and multiplies operator bounds, and $I_X\\in\\mathcal B(X)$ with bound\n$1$. All scheme and solution errors below\nuse the norm of this same space $X$; write $\\|\\cdot\\|$ for that norm and\n$\\|\\cdot\\|_{\\mathrm{op}}$ for the operator norm of [[def-operator-norm]].\n\nThe family is **consistent on $D$** when for every $x\\in D$ and $T>0$,\n$$\\lim_{\\nu\\to\\infty}\\max_{\\substack{r\\in\\mathbb N\\\\r\\tau_\\nu\\le T}}\\frac{\\|(S_\\nu-U(\\tau_\\nu))U(r\\tau_\\nu)x\\|}{\\tau_\\nu}=0.$$\nThe maximum is over a nonempty finite set because it includes $r=0$. This is\nthe local defect divided by one time step, uniformly over the exact orbit on\nthe finite time interval.\n\nThe family is **stable on finite time intervals** when for every $T>0$ there\nis $C_T<\\infty$ such that\n$$\\|S_\\nu^n\\|_{\\mathrm{op}}\\le C_T\\quad\\text{whenever }\\nu,n\\in\\mathbb N\\text{ and }n\\tau_\\nu\\le T.$$\nIt is **convergent on finite time intervals** when for every $x\\in X$ and\n$T>0$,\n$$\\lim_{\\nu\\to\\infty}\\max_{\\substack{n\\in\\mathbb N\\\\n\\tau_\\nu\\le T}}\\|S_\\nu^n x-U(n\\tau_\\nu)x\\|=0.$$\nThe maximum convention includes time zero. This locally uniform-in-grid-time\nconvergence is the hypothesis used for the reverse implication in the\nequivalence theorem below.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lax-equivalence-for-common-banach-space-schemes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice ($\\mathrm{DC}$). Let a common-space IVP\ninterface and bounded time-scheme family be given as in\n[[def-common-space-linear-scheme-interface]]. If\nthe scheme is consistent on its dense invariant subspace, then it is\nconvergent on every finite time interval if and only if it is stable there,\nwith stability, consistency, and convergence all measured in the same norm\nof $X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-periodic-advection-power-stability",
+          "source_section": "Statement",
+          "quote": "For the periodic schemes of [[def-periodic-one-way-advection-schemes]] with $a>0$, upwind powers are contractions in $\\|\\cdot\\|_{2,h}$ for $0\\le\\nu\\le1$ and grow for $\\nu>1$. Lax--Friedrichs and Lax--Wendroff powers are contractions for $|\\nu|\\le1$; when $|\\nu|>1$, Lax--Wendroff grows for $N\\ge2$ and Lax--Friedrichs grows for $N\\ge3$ (the $N=2$ Lax--Friedrichs stencil aliases its nonconstant mode). Downwind powers grow for every $\\nu>0$ and $N\\ge2$. Centered powers grow for every $\\nu\\ne0$ when $N\\ge3$, while the $N=2$ centered stencil aliases to the identity. Reflection gives the same assertions for $a<0$ with $|\\nu|$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ \u2014 for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ \u2014 is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "grid-power-bound",
+          "claim": "By [F4], each N-point upwind update has $\\|T_N^m\\|_{2,h\\to2,h}\\le1$ for all $m\\ge0$ when $0<\\nu<1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4"
+          ]
+        },
+        {
+          "id": "missing-common-space",
+          "claim": "The declared operators have domains and codomains $G_N=\\mathbb C^N$, which vary with N; no fixed Banach space or projection/reconstruction lift is supplied in this example. Thus they do not meet [F1]'s fixed-space interface, and no same-space norm for comparing their errors is supplied under [F2].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "lax-hypothesis-check",
+          "claim": "The theorem [F3] has the common-space interface and consistency among its hypotheses. Since step 1.2 shows that this example supplies no such interface, the grid power bounds alone do not imply convergence by [F3]. A separate common-space lift and its norm/consistency checks would be needed; this example makes no claim that such a lift cannot be constructed.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns the nonempty family N\u22652."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The upwind update is homogeneous, so zero data remain zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "N=1 is outside the periodic grid convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The varying family includes N\u22652; the fixed-X mismatch remains for every N."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example fixes 0<\u03bd<1 and does not analyze endpoint stability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: Dependent Choice is declared as A1; the finite grid calculation is deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no iff claim of its own."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no iff claim of its own."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "numerical-periodic-grid-fixture",
+          "asserts": "$\\|T_N^m\\|_{2,h\\to2,h}\\le1$",
+          "claim": "N=4,nu1/2: all four discrete Fourier columns and eight powers satisfy the finite upwind contraction calculation. This finite check neither supplies nor decides a common Banach-space lift or consistency.",
+          "checked_in": "Verification1.1; scope limitation in1.2/2.1",
+          "fixture_version": 2,
+          "parameters": {
+            "fixture": "n4-upwind-grid-mode-not-common-space-lift"
+          }
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "Dependent Choice (DC)",
+          "declaration": "A1",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "The cited Lax-equivalence supplier assumes DC; the grid stability computation itself is choice-free."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Read Verification 1.1-2.1 and the complete actual common-space Definition, Lax theorem Statement and DC Definition. The finite-grid upwind contraction holds uniformly at fixed 0<nu<1, but varying C^N domains alone do not supply X, semigroup, dense invariant subspace or same-norm consistency. The example only rejects direct instantiation of the conditional Lax theorem and explicitly permits a future lift. Its quoted iff retains consistency and DC and is not used to infer convergence. No empty maximum issue (time zero included), no asserted impossibility of a lift, and no hidden choice beyond the stated conditional DC theorem."
+      }
+    }
+  }
+}

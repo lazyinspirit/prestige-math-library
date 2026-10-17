@@ -1,0 +1,2143 @@
+{
+  "version": 1,
+  "scope": [
+    "def-revised-simplex-standard-form-linear-program",
+    "def-revised-simplex-basis-dictionary",
+    "alg-revised-simplex-residual-audit",
+    "lem-revised-simplex-basic-feasible-extreme-point-equivalence",
+    "thm-revised-simplex-primal-pivot-objective-ray-optimality",
+    "alg-revised-primal-simplex-bland-rule",
+    "alg-revised-dual-simplex-with-finite-budget",
+    "prop-revised-simplex-sparse-pricing-operation-count",
+    "thm-revised-simplex-primal-dual-residual-gap",
+    "thm-revised-simplex-bland-rule-finite-termination",
+    "thm-revised-dual-simplex-invariant-and-farkas",
+    "alg-revised-simplex-phase-one",
+    "thm-revised-simplex-phase-one-extraction-and-farkas",
+    "ex-revised-simplex-unbounded-ray",
+    "ex-revised-simplex-ill-conditioned-basis-residual",
+    "ex-revised-simplex-primal-dual-trace",
+    "ex-revised-simplex-degenerate-cycle-prevented-by-bland",
+    "ex-revised-simplex-phase-one-infeasible",
+    "alg-revised-simplex-qr-basis-recompute-and-audit",
+    "thm-revised-simplex-qr-basis-residual-status-sound"
+  ],
+  "contracts": {
+    "def-revised-simplex-standard-form-linear-program": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition explicitly includes m=0 and the empty zero-dimensional system."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition includes b=0 and x=0 as a possible feasible point."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition includes one-row and one-column finite systems."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition fixes the standard-form feasible set Ax=b,x>=0 and the stored sign convention for a Farkas vector. Definition explicitly allows nonnegative m,n, including m=0 with its empty equality system. It requires exact row reduction of rank-deficient raw systems before a basis algorithm, reporting inconsistent rows as infeasible."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition fixes the standard-form feasible set Ax=b,x>=0 and the stored sign convention for a Farkas vector. This Definition has no time/mesh interval or limiting step-size endpoint: its admissibility conditions are finite equalities and componentwise signs on fixed LP data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition selects no element from any indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition fixes the standard-form feasible set Ax=b,x>=0 and the stored sign convention for a Farkas vector. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition fixes the standard-form feasible set Ax=b,x>=0 and the stored sign convention for a Farkas vector. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ]
+    },
+    "def-revised-simplex-basis-dictionary": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition gives the empty basis and empty multiplier when m=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition allows zero basic coordinates in a feasible basis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition includes a 1 by 1 invertible basis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition calls a feasible basis degenerate when a basic coordinate is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition gives x_B=A_B^{-1}b, y=A_B^{-T}c_B and reduced costs for an admitted ordered invertible basis. The basis dictionary has a finite index complement N and no interval endpoint; primal/dual sign boundaries are part of the explicit feasible/degenerate predicates, not endpoint evaluation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition requires only a finite ordered list of basis indices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition declares a basis primal feasible exactly when its basic coordinate vector A_B^{-1}b is nonnegative; nonbasic entries are fixed0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition makes x(B) a basic feasible solution precisely through A_B^{-1}b>=0, with the empty basis and multiplier explicitly retained for m=0."
+        }
+      ]
+    },
+    "alg-revised-simplex-residual-audit": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition sets the infinity norm of an empty residual vector to zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition uses exact equality to decide whether a residual is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition applies to a one-coordinate residual and gap."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition computes exact dyadic primal/dual residuals and the objective gap before its four-test stored-data optimality status. Definition assigns zero norm to an empty residual vector, rejects nonfinite/dimension-invalid data, and never rounds a small residual to zero. Degenerate candidate data therefore retain exact tests rather than a hidden tolerance exemption."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition computes exact dyadic primal/dual residuals and the objective gap before its four-test stored-data optimality status. The audit is a finite exact arithmetic predicate on stored vectors, with no parameter interval or trajectory endpoint; equality g=0 is one of its explicit status tests."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses exact arithmetic and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition issues verified-optimal-for-stored-data only after all four exact tests xhat>=0,r_p=0,r_d>=0,g=0 pass."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition returns that status whenever all four tests pass; every other finite-input case is candidate-only. Empty-vector max is0 and nonfinite inputs are rejected before this predicate."
+        }
+      ]
+    },
+    "lem-revised-simplex-basic-feasible-extreme-point-equivalence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-revised-simplex-standard-form-linear-program",
+          "source_section": "Definition",
+          "quote": "Let $m,n$ be nonnegative integers, $A\\in\\mathbb R^{m\\times n}$, $b\\in\\mathbb R^m$, and $c\\in\\mathbb R^n$. The standard-form minimization linear program with data $(A,b,c)$ is\n$$\\min\\{c^{\\mathsf T}x:Ax=b,\\ x\\ge0\\}.$$\nIts feasible set is $P(A,b)=\\{x\\in\\mathbb R^n:Ax=b,\\ x_j\\ge0\\text{ for every }j\\}$, and a feasible $x$ is optimal if $c^{\\mathsf T}x\\le c^{\\mathsf T}z$ for every $z\\in P(A,b)$. The notation $x\\ge0$ is componentwise. The revised-simplex basis algorithms on this page require a full-row-rank matrix, meaning $\\operatorname{rank}(A)=m$; a rank-deficient raw system must first be reduced by exact row operations, with inconsistent rows reported as infeasible. For $m=0$, the empty system has its usual zero-dimensional interpretation.\n\nA vector $q\\in\\mathbb R^m$ satisfying $A^{\\mathsf T}q\\ge0$ and $b^{\\mathsf T}q<0$ is called a **Farkas infeasibility certificate** for this sign convention. Indeed, any feasible $x\\ge0$ would give $b^{\\mathsf T}q=x^{\\mathsf T}A^{\\mathsf T}q\\ge0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-revised-simplex-basis-dictionary",
+          "source_section": "Definition",
+          "quote": "Use the standard-form problem of [[def-revised-simplex-standard-form-linear-program]]. Assume $A$ has full row rank $m$. An ordered basis is a list $B=(B_1,\\ldots,B_m)$ of distinct column indices for which the square matrix $A_B=[a_{B_1}\\ \\cdots\\ a_{B_m}]$ is invertible. Write $N=\\{1,\\ldots,n\\}\\setminus\\{B_1,\\ldots,B_m\\}$ and $c_B=(c_{B_1},\\ldots,c_{B_m})^{\\mathsf T}$. The basic vector $x(B)$ is defined by $x_B(B)=A_B^{-1}b$ and $x_j(B)=0$ for $j\\in N$; the basis is primal feasible, and $x(B)$ is a basic feasible solution, exactly when $A_B^{-1}b\\ge0$.\n\nThe basis multiplier is $y(B)=A_B^{-\\mathsf T}c_B$. For every column $j$, its reduced cost is $\\bar c_j=c_j-a_j^{\\mathsf T}y(B)$. In particular, $\\bar c_{B_i}=0$ for each basic index. The basis is dual feasible when $\\bar c_j\\ge0$ for every $j\\in N$. When $m=0$, take the empty basis and the empty multiplier; these formulas remain meaningful.\n\nA primal-feasible basis is **degenerate** if some basic coordinate is zero. A simplex pivot is **degenerate** if its ratio-test step length is zero.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "If the support columns indexed by $S(x)$ are dependent, choose a nonzero vector $d$ supported on $S(x)$ with $Ad=0$. Since each $x_j>0$ on this finite support, choose $\\varepsilon>0$ smaller than $x_j/|d_j|$ for every nonzero $d_j$. Then $x+\\varepsilon d$ and $x-\\varepsilon d$ are distinct nonnegative solutions of $Az=b$, and their midpoint is $x$; hence $x$ is not extreme.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "Suppose the support columns are independent and $x=tu+(1-t)v$ for feasible $u,v$ and $0<t<1$. For $j\\notin S(x)$, nonnegativity and $x_j=0$ force $u_j=v_j=0$. Thus $u-v$ is supported on $S(x)$ and $A(u-v)=0$; independence forces $u=v$, and the convex-combination identity then gives $u=v=x$. This proves extremality under its stated definition.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "If the support columns of a feasible point are dependent, take $d$ as in step 1.1 and choose its sign so some $d_j<0$. With $t=\\min_{d_j<0}x_j/(-d_j)>0$, the point $x+td$ remains feasible, remains nonnegative, and has strictly fewer positive coordinates. Repeating this support reduction at most $n$ times gives a feasible point whose support columns are independent.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Because $A$ has rank $m$, its columns span $\\mathbb R^m$. Extend the independent support columns from step 2.1 to $m$ independent columns of $A$ by repeatedly taking the least-index column outside their current span; assigning zero to each added coordinate makes the reduced point the basic vector of that basis. It is therefore a basic feasible solution. When $m=0$, support reduction gives the zero vector and the empty list is the required basis.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "A basic feasible solution has support contained in an independent basis, so its support columns are independent and step 1.2 makes it extreme. Conversely, an extreme feasible point has independent support by step 1.1 and extends to a basis by step 3.1. Thus the three stated conditions are equivalent, and step 3.1 proves existence whenever $P(A,b)$ is nonempty.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 3.1 explicitly handle m=0 with the empty basis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 reduces support to the empty set when the feasible point is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 apply to a single independent support column."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 include feasible points with zero basic coordinates."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement characterizes extreme points by independent support columns and basic feasibility, including the empty-basis m=0 case. Proof step 1.2 treats convex weights0<t<1 in the extreme-point definition. Proof step 2.1 reaches the support-reduction ratio boundary where at least one coordinate becomes0, retaining feasibility; step 3.1 explicitly includes m=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 extends the support by least-index columns; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement is an equivalence; step 4.1 proves the basic-feasible direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 prove support independence iff extremality; steps 3.1–4.1 extend independent support to a basis and prove the BFS equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read Proof 1.1–4.1 and F1/F2 Definitions. Dependent positive support gives two distinct feasible perturbations with finite epsilon; independent support forces every convex decomposition to be trivial. Support reduction loses a positive coordinate at each iteration and never adds one. Full row rank extends any independent support by least-index columns. Both iff directions, empty support, m=0, n=0, b=0 and degeneracy checked; no AC or missing substantial prerequisite."
+      }
+    },
+    "thm-revised-simplex-primal-pivot-objective-ray-optimality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-revised-simplex-standard-form-linear-program",
+          "source_section": "Definition",
+          "quote": "Let $m,n$ be nonnegative integers, $A\\in\\mathbb R^{m\\times n}$, $b\\in\\mathbb R^m$, and $c\\in\\mathbb R^n$. The standard-form minimization linear program with data $(A,b,c)$ is\n$$\\min\\{c^{\\mathsf T}x:Ax=b,\\ x\\ge0\\}.$$\nIts feasible set is $P(A,b)=\\{x\\in\\mathbb R^n:Ax=b,\\ x_j\\ge0\\text{ for every }j\\}$, and a feasible $x$ is optimal if $c^{\\mathsf T}x\\le c^{\\mathsf T}z$ for every $z\\in P(A,b)$. The notation $x\\ge0$ is componentwise. The revised-simplex basis algorithms on this page require a full-row-rank matrix, meaning $\\operatorname{rank}(A)=m$; a rank-deficient raw system must first be reduced by exact row operations, with inconsistent rows reported as infeasible. For $m=0$, the empty system has its usual zero-dimensional interpretation.\n\nA vector $q\\in\\mathbb R^m$ satisfying $A^{\\mathsf T}q\\ge0$ and $b^{\\mathsf T}q<0$ is called a **Farkas infeasibility certificate** for this sign convention. Indeed, any feasible $x\\ge0$ would give $b^{\\mathsf T}q=x^{\\mathsf T}A^{\\mathsf T}q\\ge0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-revised-simplex-basis-dictionary",
+          "source_section": "Definition",
+          "quote": "Use the standard-form problem of [[def-revised-simplex-standard-form-linear-program]]. Assume $A$ has full row rank $m$. An ordered basis is a list $B=(B_1,\\ldots,B_m)$ of distinct column indices for which the square matrix $A_B=[a_{B_1}\\ \\cdots\\ a_{B_m}]$ is invertible. Write $N=\\{1,\\ldots,n\\}\\setminus\\{B_1,\\ldots,B_m\\}$ and $c_B=(c_{B_1},\\ldots,c_{B_m})^{\\mathsf T}$. The basic vector $x(B)$ is defined by $x_B(B)=A_B^{-1}b$ and $x_j(B)=0$ for $j\\in N$; the basis is primal feasible, and $x(B)$ is a basic feasible solution, exactly when $A_B^{-1}b\\ge0$.\n\nThe basis multiplier is $y(B)=A_B^{-\\mathsf T}c_B$. For every column $j$, its reduced cost is $\\bar c_j=c_j-a_j^{\\mathsf T}y(B)$. In particular, $\\bar c_{B_i}=0$ for each basic index. The basis is dual feasible when $\\bar c_j\\ge0$ for every $j\\in N$. When $m=0$, take the empty basis and the empty multiplier; these formulas remain meaningful.\n\nA primal-feasible basis is **degenerate** if some basic coordinate is zero. A simplex pivot is **degenerate** if its ratio-test step length is zero.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-inequality-constrained-program-and-kkt-geometry",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$\nbe $C^2$. Let $p,m\\in\\mathbb N$ with zero allowed; when the target\ndimension is positive, let $h:U\\to\\mathbb R^p$ and\n$g=(g_1,\\ldots,g_m):U\\to\\mathbb R^m$ be componentwise $C^2$, and when it\nis zero use the unique empty map. The $C^2$ convention for positive\ndimensions is [[def-ck-euclidean-maps-and-diffeomorphisms]].\nThe $C^2$ inequality program is to minimize $f(x)$ subject to\n$h(x)=0$ and $g_i(x)\\le0$ for every $i$. Its feasible set is\n$C=\\{x\\in U:h(x)=0,\\ g_i(x)\\le0\\ (1\\le i\\le m)\\}$. A feasible point $x_*$ is\na local minimizer if some open neighborhood $V$ of $x_*$ satisfies\n$f(x_*)\\le f(y)$ for every $y\\in C\\cap V$.\n\nAt a feasible $x$, the active set is\n$I(x)=\\{i:g_i(x)=0\\}$. The Bouligand tangent cone and linearized cone are,\nrespectively,\n$$\nT_C(x)=\\{d:\\exists\\,t_k>0,\\ t_k\\downarrow0,\\ d_k\\to d,\\ x+t_kd_k\\in C\\},\n$$\nand\n$$\n\\mathcal L_C(x)=\\{d:Dh(x)d=0,\\ Dg_i(x)d\\le0\\text{ for every }i\\in I(x)\\}.\n$$\nGradients are column vectors and $Dg_i(x)d=\\nabla g_i(x)^Td$.\n\nThe linear independence constraint qualification (LICQ) holds at $x$ when the rows of $Dh(x)$ together with\n$\\{\\nabla g_i(x)^T:i\\in I(x)\\}$ are linearly independent. MFCQ holds at $x$\nwhen $Dh(x)$ has full row rank (its rows are linearly independent) and there is $w\\in\\ker Dh(x)$ with\n$Dg_i(x)w<0$ for every active $i$; the latter condition is vacuous if\n$I(x)=\\varnothing$. Here full row rank for a matrix with zero rows is\nunderstood vacuously.\n\nThe Mangasarian–Fromovitz constraint qualification (MFCQ) is the condition\njust stated. The Karush–Kuhn–Tucker (KKT) system is the stationarity,\nfeasibility, dual-feasibility, and complementarity system below.\n\nFor $\\nu\\in\\mathbb R^p$ and $\\lambda\\in\\mathbb R^m$, the Lagrangian and KKT\nsystem are\n$$\nL(x,\\nu,\\lambda)=f(x)+\\nu^Th(x)+\\lambda^Tg(x),\n$$\n$$\nh(x)=0,\\quad g(x)\\le0,\\quad \\lambda\\ge0,\\quad \\lambda_i g_i(x)=0\\ (1\\le i\\le m),\\quad \\nabla_xL(x,\\nu,\\lambda)=0.\n$$\nThe critical cone for a KKT tuple is\n$\\mathcal K(x,\\nu,\\lambda)=\\mathcal L_C(x)\\cap\n\\{d:\\nabla f(x)^Td=0\\}$. These definitions use the differentiability and\ngradient conventions of [[def-ck-euclidean-maps-and-diffeomorphisms]],\n[[def-euclidean-inner-product]], and [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-convex-kkt-sufficiency-and-normal-cone-certificate",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge0$ be an integer. Let $U\\subseteq\\mathbb R^n$ be open and convex,\nand suppose the objective $f:U\\to\\mathbb R$ and inequalities\n$g_i:U\\to\\mathbb R$ $(1\\le i\\le m)$ are differentiable and convex.\nLet the equalities be $Ax=b$ and define the feasible set\n$C=\\{x\\in U:Ax=b,\\ g_i(x)\\le0\\ (1\\le i\\le m)\\}$. If a feasible tuple\n$(x_*,\\nu,\\lambda)$ satisfies the KKT conditions with $\\lambda\\ge0$, then\n$x_*$ is a global minimizer over the feasible set $C$. Moreover,\n$-\\nabla f(x_*)\\in N_C(x_*)$, where the normal cone has the convention of\n[[def-kkt-residual-and-normal-cone]].",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Define $r_j=1$, $r_B=-d$, and all other nonbasic components of $r$ to be zero. Since $A_Bd=a_j$, we have $Ar=a_j-A_Bd=0$; also $c^{\\mathsf T}r=c_j-c_B^{\\mathsf T}A_B^{-1}a_j=\\bar c_j$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "If every $d_i\\le0$, then $r\\ge0$, so $x+\\lambda r$ is feasible for every $\\lambda\\ge0$. Its cost is $c^{\\mathsf T}x+\\lambda\\bar c_j$, which tends to $-\\infty$ as $\\lambda\\to\\infty$; this proves the ray branch.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "claim": "If some $d_i>0$, set $\\theta=\\min_{d_i>0}x_{B_i}/d_i$. Each ratio is nonnegative, the finite nonempty index set has a minimum, and $x_B-\\theta d\\ge0$: rows with $d_i>0$ satisfy the ratio bound, while rows with $d_i\\le0$ do not decrease. The entering component is $\\theta\\ge0$, so $x+\\theta r$ is feasible.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "For any minimizing row $i$, replacing column $B_i$ by $a_j$ gives a basis: in coordinates of $A_B$, the replacement column is $d$, whose $i$th entry is positive, so expansion along that column gives a nonzero determinant. The unique basic vector of the new basis is $x+\\theta r$, because that vector satisfies the constraints and has zero on the remaining nonbasic variables.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "claim": "The objective change is $c^{\\mathsf T}(x+\\theta r)-c^{\\mathsf T}x=\\theta c^{\\mathsf T}r=\\theta\\bar c_j$. Since $\\theta\\ge0$ and $\\bar c_j<0$, it is nonpositive and is zero exactly when $\\theta=0$, the degenerate-pivot case.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "If $n=0$, the feasible set contains only the empty vector, so its feasible basic vector is optimal. Suppose $n\\ge1$. Set $U=\\mathbb R^n$, $f(z)=c^{\\mathsf T}z$, $h(z)=Az-b$, $g_j(z)=-z_j$, $\\nu=-y(B)$, and $\\lambda=c-A^{\\mathsf T}y(B)$. The open convex domain is $U=\\mathbb R^n$, and the affine functions are differentiable and convex. The vector $\\lambda$ is the reduced-cost vector, including zero basic coordinates by [F2], so it is nonnegative; $x$ is feasible by hypothesis. For each $j$, either $j$ is nonbasic and $x_j=0$, or $j$ is basic and $\\lambda_j=0$, so $\\lambda_jg_j(x)=0$. Since $Dg=-I$, the stationarity expression is $\\nabla f(x)+A^{\\mathsf T}\\nu+Dg(x)^{\\mathsf T}\\lambda=c-A^{\\mathsf T}y(B)-\\lambda=0$. These are precisely the KKT conditions of [F3], and [F4] proves that $x$ globally minimizes $c^{\\mathsf T}z$ over $P(A,b)$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof allow the empty basis; with no positive direction row the ray branch applies."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.2 proves equality of cost change when theta=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The basis and ratio formulas apply to a single basic row."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.2 explicitly includes a zero-length degenerate pivot."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement separates a negative-cost feasible ray, a nonnegative ratio pivot and optimality from nonnegative reduced costs. Proof step 2.2 includes the ratio-test boundary theta=0, and step 3.2 explicitly identifies zero objective change at that boundary as a degenerate pivot; strict decrease requires theta>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 takes a minimum over a finite nonempty set of positive-direction rows."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement says objective decrease is strictly negative exactly when theta>0. Proof step 3.2 writes it as theta*cbar_j with cbar_j<0, so theta>0 gives strict negativity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Proof step 3.2 has theta>=0 and cbar_j<0; if the objective change is strictly negative then theta cannot be0. It explicitly identifies theta=0 with the degenerate-pivot zero-change case."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Proof 1.1–4.1 independently checked. Direction satisfies Ar=0 and c^Tr=negative reduced cost. All-nonpositive d gives an infinite feasible decreasing ray; otherwise finite nonempty ratio minimum gives nonnegative point and nonzero replacement determinant, even at theta=0. KKT suppliers read: for n>=1, affine C2 functions on open convex R^n, g=-z, nu=-y, lambda=c-A^Ty satisfy all feasibility/stationarity/complementarity hypotheses. n=0 handled directly. Zero/degenerate/tied ratios and no nonbasic columns checked; no AC."
+      }
+    },
+    "alg-revised-primal-simplex-bland-rule": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition handles an empty row set through the no-blocking-row ray branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits a zero ratio and repeats with the changed basis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition basis solves and ratio tests include a one-row basis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition includes zero-step pivots and least-index leaving ties."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition picks the least-index negative reduced cost, returns a ray if no positive direction exists, and otherwise applies the ratio/tie rule. Definition Step4 takes its minimum only over d_i>0, including a zero basic value and thus theta=0; ties leave the least basic-variable index. No positivity of the step length is silently imposed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses least indices and finite minimum-ratio sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition picks the least-index negative reduced cost, returns a ray if no positive direction exists, and otherwise applies the ratio/tie rule. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition picks the least-index negative reduced cost, returns a ray if no positive direction exists, and otherwise applies the ratio/tie rule. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ]
+    },
+    "alg-revised-dual-simplex-with-finite-budget": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "With no basic rows, Definition reaches its primal-feasible terminal branch immediately."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits zero reduced costs and resolves ties by least index."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition applies to a one-row basis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition preserves a finite-budget inconclusive status for degenerate pivots."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition checks primal feasibility of its dual-feasible basis before its eligible-negative-row pivot and finite budget exit. Definition permits K=0. Steps1–2 can already return optimal or an exact Farkas certificate before Step3 exhausts the pivot budget; exhaustion itself is inconclusive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition selects from finite row and column index sets by least-index rules."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition checks primal feasibility of its dual-feasible basis before its eligible-negative-row pivot and finite budget exit. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition checks primal feasibility of its dual-feasible basis before its eligible-negative-row pivot and finite budget exit. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ]
+    },
+    "prop-revised-simplex-sparse-pricing-operation-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-revised-simplex-basis-dictionary",
+          "source_section": "Definition",
+          "quote": "Use the standard-form problem of [[def-revised-simplex-standard-form-linear-program]]. Assume $A$ has full row rank $m$. An ordered basis is a list $B=(B_1,\\ldots,B_m)$ of distinct column indices for which the square matrix $A_B=[a_{B_1}\\ \\cdots\\ a_{B_m}]$ is invertible. Write $N=\\{1,\\ldots,n\\}\\setminus\\{B_1,\\ldots,B_m\\}$ and $c_B=(c_{B_1},\\ldots,c_{B_m})^{\\mathsf T}$. The basic vector $x(B)$ is defined by $x_B(B)=A_B^{-1}b$ and $x_j(B)=0$ for $j\\in N$; the basis is primal feasible, and $x(B)$ is a basic feasible solution, exactly when $A_B^{-1}b\\ge0$.\n\nThe basis multiplier is $y(B)=A_B^{-\\mathsf T}c_B$. For every column $j$, its reduced cost is $\\bar c_j=c_j-a_j^{\\mathsf T}y(B)$. In particular, $\\bar c_{B_i}=0$ for each basic index. The basis is dual feasible when $\\bar c_j\\ge0$ for every $j\\in N$. When $m=0$, take the empty basis and the empty multiplier; these formulas remain meaningful.\n\nA primal-feasible basis is **degenerate** if some basic coordinate is zero. A simplex pivot is **degenerate** if its ratio-test step length is zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-csr-matrix-with-stored-entry-semantics",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, and let $m,n,s\\in\\mathbb N$, where $\\mathbb N$ includes\n$0$. A **compressed sparse row (CSR) record** for an $m$ by $n$ matrix over\n$F$ consists of integer arrays $r=(r_0,\\ldots,r_m)$ and\n$c=(c_0,\\ldots,c_{s-1})$, and a value array $v=(v_0,\\ldots,v_{s-1})\\in F^s$,\nsatisfying\n\n$$r_0=0,\\qquad 0=r_0\\le r_1\\le\\cdots\\le r_m=s,\\qquad 0\\le c_t<n\\quad(0\\le t<s).$$\n\nFor each row $i<m$, its **stored entries** are the indices\n$t$ with $r_i\\le t<r_{i+1}$. The row is empty exactly when\n$r_i=r_{i+1}$. Repeated column indices within one row and stored values\n$v_t=0_F$ are permitted; each such entry remains a separate stored entry.\n\nThe represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by\n\n$$A_{ij}:=\\sum_{r_i\\le t<r_{i+1}}\\mathbf 1_{c_t=j}v_t\\qquad(0\\le i<m,\\ 0\\le j<n),$$\n\nwhere $\\mathbf 1_{c_t=j}$ is $1_F$ when $c_t=j$ and $0_F$ otherwise, and an\nempty sum is $0_F$. Repeated entries in column $j$ are therefore added. The\nnumber $s$ is the **stored-entry count**; it is not in general the number of\nnonzero entries of $A$.\n\nA CSR record is **canonical** when no row repeats a column and no stored value\nis zero. In that case every nonzero matrix entry is stored exactly once and\n$s=\\operatorname{nnz}(A)$, where $\\operatorname{nnz}(A)$ denotes the number of\nnonzero entries of $A$. If $m=0$, the endpoint conditions force $s=0$ and the\nrow-pointer array has its single entry $r_0=0$. If $n=0$, the column-index\ncondition forces $s=0$ as well.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "The intervals $[r_i,r_{i+1})$ are disjoint and, because $r_0=0$ and $r_m=s$, their union is $[0,s)$. Thus each stored index has exactly one row $i(t)$, including the empty-stream case $s=0$. After processing the first $k$ stored indices, the accumulator satisfies $w_j=\\sum_{0\\le t<k,\\ c_t=j}v_ty_{i(t)}$: this holds at $k=0$, and the next update adds exactly its one summand to component $c_k$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "A1",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "At $k=s$, for each column $j$ the CSR reconstruction in [F2] gives $(A^{\\mathsf T}y)_j=\\sum_{i=0}^{m-1}A_{ij}y_i=\\sum_{i=0}^{m-1}\\sum_{r_i\\le t<r_{i+1}}\\mathbf1_{c_t=j}v_ty_i=\\sum_{0\\le t<s,\\ c_t=j}v_ty_{i(t)}=w_j$. The finite row intervals partition the stored indices, so the reindexing counts every stored term once; real multiplication distributes over finite sums. By [F1], $c-w$ is the reduced-cost vector when $y=y(B)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Each of the $s$ updates performs one multiplication and one addition, and initialization and final subtraction each touch exactly $n$ coordinates. The count follows the stated loop, so duplicate indices and zero-valued entries still contribute one multiplication and one addition each; no timing, bandwidth, or factorization conclusion follows.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement allows s=0; the initialized accumulator is the zero transpose product."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement explicitly counts stored zero entries in the loop."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For s=1 the same single update and exact count apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement counts every stored CSR contribution, including duplicates and zero values, when accumulating A transpose times y. Proof step 1.1 includes s=0 with empty row intervals and a zero initialized accumulator; step 3.1 still charges every explicitly stored zero or duplicate term when s>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement counts every stored CSR contribution, including duplicates and zero values, when accumulating A transpose times y. Proof step 1.1 uses r_0=0 and r_m=s to partition the half-open stored stream [0,s), and its invariant starts at k=0 and ends at k=s; no first/last stored entry is omitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The stream order is fixed and the loop makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement counts every stored CSR contribution, including duplicates and zero values, when accumulating A transpose times y. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement counts every stored CSR contribution, including duplicates and zero values, when accumulating A transpose times y. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read Proof 1.1–3.1 and actual CSR Definition. Nondecreasing row pointers partition every stored index uniquely, even with empty rows. The accumulator induction proves A^T y using the exact stored-entry sum, including duplicates and explicit zeros. Count is s multiplications, s additions, n initializations and n subtractions; s=0 and zero dimensions checked. No runtime bound, factorization bound or AC use."
+      }
+    },
+    "thm-revised-simplex-primal-dual-residual-gap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-revised-simplex-standard-form-linear-program",
+          "source_section": "Definition",
+          "quote": "Let $m,n$ be nonnegative integers, $A\\in\\mathbb R^{m\\times n}$, $b\\in\\mathbb R^m$, and $c\\in\\mathbb R^n$. The standard-form minimization linear program with data $(A,b,c)$ is\n$$\\min\\{c^{\\mathsf T}x:Ax=b,\\ x\\ge0\\}.$$\nIts feasible set is $P(A,b)=\\{x\\in\\mathbb R^n:Ax=b,\\ x_j\\ge0\\text{ for every }j\\}$, and a feasible $x$ is optimal if $c^{\\mathsf T}x\\le c^{\\mathsf T}z$ for every $z\\in P(A,b)$. The notation $x\\ge0$ is componentwise. The revised-simplex basis algorithms on this page require a full-row-rank matrix, meaning $\\operatorname{rank}(A)=m$; a rank-deficient raw system must first be reduced by exact row operations, with inconsistent rows reported as infeasible. For $m=0$, the empty system has its usual zero-dimensional interpretation.\n\nA vector $q\\in\\mathbb R^m$ satisfying $A^{\\mathsf T}q\\ge0$ and $b^{\\mathsf T}q<0$ is called a **Farkas infeasibility certificate** for this sign convention. Indeed, any feasible $x\\ge0$ would give $b^{\\mathsf T}q=x^{\\mathsf T}A^{\\mathsf T}q\\ge0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-revised-simplex-residual-audit",
+          "source_section": "Definition",
+          "quote": "Input a standard-form problem as in [[def-revised-simplex-standard-form-linear-program]], whose stored matrix, right-hand side, and cost entries are finite binary floating-point values, together with finite stored candidate vectors $\\hat x\\in\\mathbb R^n$ and $\\hat y\\in\\mathbb R^m$. A finite binary value is interpreted as its exact dyadic rational (an integer times an integer power of $2$). If a dimension is wrong or any value is NaN or infinite, return `invalid-input`. Otherwise use exact integer/rational arithmetic to compute $r_p=A\\hat x-b$, $r_d=c-A^{\\mathsf T}\\hat y$, $g=c^{\\mathsf T}\\hat x-b^{\\mathsf T}\\hat y$, $\\rho_p=\\|r_p\\|_\\infty$, and $\\rho_d=\\|r_d\\|_\\infty$, where $\\|z\\|_\\infty=\\max_i|z_i|$ and the empty-vector value is zero. Return these exact values and $|g|$ as the exact primal-dual objective difference for the stored data. Return `verified-optimal-for-stored-data` exactly when $\\hat x\\ge0$, $r_p=0$, $r_d\\ge0$, and $g=0$. In every other finite-input case return `candidate-only` with the residuals and gap; a nonzero or small residual is never rounded to zero and does not certify infeasibility.\n\nThe exact arithmetic is a verification procedure for a candidate produced by a floating-point solver; it does not define a basis factorization or bound uncertainty in data before they were stored. If a statement about pre-rounded data is required, separate certified input intervals must be supplied and propagated. The procedure makes no operation-count or runtime claim.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Expanding the right-hand side and cancelling the two equal scalar products gives $x^{\\mathsf T}(c-A^{\\mathsf T}y)+y^{\\mathsf T}(Ax-b)=c^{\\mathsf T}x-b^{\\mathsf T}y=g$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The triangle inequality and $|x^{\\mathsf T}r_d|\\le\\sum_i|x_i|\\|r_d\\|_\\infty$ give $|g|\\le\\|x\\|_1\\|r_d\\|_\\infty+\\|y\\|_1\\|r_p\\|_\\infty$. The same calculation holds for empty vectors with the stated zero norms.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $x$ is primal feasible and $y$ has $A^{\\mathsf T}y\\le c$, then every feasible $z$ satisfies $c^{\\mathsf T}z\\ge y^{\\mathsf T}Az=y^{\\mathsf T}b$. The stated $g=0$ makes $c^{\\mathsf T}x=y^{\\mathsf T}b$, so $x$ attains this lower bound and is optimal. In particular, every `verified-optimal-for-stored-data` output of the audit certifies optimality for its stored data, because its exact tests are these hypotheses.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement defines both norms to be zero for empty vectors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 remain valid when either residual or the gap is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The norm and scalar-product identities hold in one coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement proves the exact gap identity x transpose r_d+y transpose r_p and a norm bound for arbitrary stored candidates. Statement assigns both norms the value0 on an empty vector. Proof step 1.1 is finite scalar-product cancellation and step 2.1 uses no inverse, so singular/rank-deficient candidate matrices do not invalidate the identity; optimality remains separately conditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement proves the exact gap identity x transpose r_d+y transpose r_p and a norm bound for arbitrary stored candidates. There is no trajectory or mesh endpoint in the gap identity. The relevant zero-gap sign boundary is explicitly in the optimality premise and discharged in proof step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses finite sums and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement proves the exact gap identity x transpose r_d+y transpose r_p and a norm bound for arbitrary stored candidates. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement proves the exact gap identity x transpose r_d+y transpose r_p and a norm bound for arbitrary stored candidates. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ]
+    },
+    "thm-revised-simplex-bland-rule-finite-termination": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-revised-simplex-basis-dictionary",
+          "source_section": "Definition",
+          "quote": "Use the standard-form problem of [[def-revised-simplex-standard-form-linear-program]]. Assume $A$ has full row rank $m$. An ordered basis is a list $B=(B_1,\\ldots,B_m)$ of distinct column indices for which the square matrix $A_B=[a_{B_1}\\ \\cdots\\ a_{B_m}]$ is invertible. Write $N=\\{1,\\ldots,n\\}\\setminus\\{B_1,\\ldots,B_m\\}$ and $c_B=(c_{B_1},\\ldots,c_{B_m})^{\\mathsf T}$. The basic vector $x(B)$ is defined by $x_B(B)=A_B^{-1}b$ and $x_j(B)=0$ for $j\\in N$; the basis is primal feasible, and $x(B)$ is a basic feasible solution, exactly when $A_B^{-1}b\\ge0$.\n\nThe basis multiplier is $y(B)=A_B^{-\\mathsf T}c_B$. For every column $j$, its reduced cost is $\\bar c_j=c_j-a_j^{\\mathsf T}y(B)$. In particular, $\\bar c_{B_i}=0$ for each basic index. The basis is dual feasible when $\\bar c_j\\ge0$ for every $j\\in N$. When $m=0$, take the empty basis and the empty multiplier; these formulas remain meaningful.\n\nA primal-feasible basis is **degenerate** if some basic coordinate is zero. A simplex pivot is **degenerate** if its ratio-test step length is zero.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-revised-simplex-primal-pivot-objective-ray-optimality",
+          "source_section": "Statement",
+          "quote": "Let $B$ be a primal-feasible basis for the standard-form problem of [[def-revised-simplex-standard-form-linear-program]] and [[def-revised-simplex-basis-dictionary]], and let $j$ be a nonbasic index with reduced cost $\\bar c_j<0$. Put $d=A_B^{-1}a_j$. If $d_i\\le0$ for every basic row $i$, then $r_j=1$, $r_B=-d$, and $r_k=0$ for the other nonbasic indices define a feasible ray with $Ar=0$ and $c^{\\mathsf T}r=\\bar c_j<0$; the LP is unbounded below. If some $d_i>0$, the step $\\theta=\\min_{d_i>0}(x_{B_i}/d_i)$ is finite and nonnegative, every minimizing row gives a valid pivot, the new basic vector is feasible, and the objective change is $\\theta\\bar c_j\\le0$, strictly negative exactly when $\\theta>0$. Finally, if all nonbasic reduced costs are nonnegative at a primal-feasible basis, its basic vector is optimal.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-revised-primal-simplex-bland-rule",
+          "source_section": "Definition",
+          "quote": "Input the exact standard-form data of [[def-revised-simplex-standard-form-linear-program]] with full-row-rank $A$ and a primal-feasible basis $B$ as in [[def-revised-simplex-basis-dictionary]]. Use exact arithmetic. At each iteration compute $x_B=A_B^{-1}b$, $y=A_B^{-\\mathsf T}c_B$, and all nonbasic reduced costs $\\bar c_j=c_j-a_j^{\\mathsf T}y$.\n\n1. If every nonbasic $\\bar c_j\\ge0$, return `optimal` with $x(B)$ and $y$.\n2. Otherwise choose the least index $j\\notin B$ with $\\bar c_j<0$ and solve $A_Bd=a_j$.\n3. If no component $d_i$ is positive, return `unbounded` with the ray whose $j$th component is $1$, whose basic components are $-d$, and whose other nonbasic components are $0$.\n4. Otherwise compute $\\theta=\\min_{d_i>0}x_{B_i}/d_i$. Among minimizing rows, leave the basic variable of least index. Replace its basis column by $a_j$ and repeat.\n\nThe algorithm assumes an exact initial feasible basis. It makes no iteration bound polynomial in $m$ or $n$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-revised-simplex-basic-feasible-extreme-point-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{m\\times n}$ have full row rank and let $P(A,b)$ be the feasible set of [[def-revised-simplex-standard-form-linear-program]]. For a feasible $x$, define its support by $S(x)=\\{j:x_j>0\\}$. A set $C$ is **convex** if $tu+(1-t)v\\in C$ for all $u,v\\in C$ and $0<t<1$. A point $x\\in C$ is an **extreme point** if every representation $x=tu+(1-t)v$ with $u,v\\in C$ and $0<t<1$ forces $u=v=x$. Then $x$ is an extreme point of $P(A,b)$ if and only if the columns $\\{a_j:j\\in S(x)\\}$ are linearly independent. This is equivalent to $x$ being a basic feasible solution for [[def-revised-simplex-basis-dictionary]]. In particular, every nonempty $P(A,b)$ has a basic feasible solution. The statement includes $m=0$ using the empty-basis convention.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Every pivot in [F3] uses a negative reduced cost and a nonnegative ratio, so [F2] makes the objective nonincreasing. If a basis repeats, the deterministic rule repeats the same future pivots and produces a cycle; the objective returns to its initial value, forcing every pivot decrease to be zero. Since each entering reduced cost is strictly negative, every pivot in the cycle has $\\theta=0$, so the represented feasible vector stays fixed throughout the cycle.",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Let $T$ be the indices that enter in this cycle and let $q=\\max T$. Because the basis returns, $q$ also leaves. Choose a tableau $P$ where $q$ enters and a tableau $Q$ where $q$ leaves. At $P$, its reduced cost $r_q^P<0$ and $r_j^P\\ge0$ for every $j<q$: a basic reduced cost is zero, and a lower-index eligible nonbasic variable would have been chosen instead. At $Q$, the entering variable $t$ is in $T$, is not the basic variable $q$, and therefore satisfies $t<q$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "At $Q$, put $d=A_{B_Q}^{-1}a_t$ and define the entering direction $z_t=1$, $z_{B_Q}=-d$, with other nonbasic coordinates zero. Then $Az=0$, $c^{\\mathsf T}z=r_t^Q<0$, and $z_q<0$ because $q$ leaves through a row with positive pivot coefficient. If $r^P=c-A^{\\mathsf T}y^P$ is the reduced-cost vector at $P$, then $r^P\\cdot z=c^{\\mathsf T}z<0$ since $Az=0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "For every $j>q$, $r_j^Pz_j=0$: if $j$ is basic at $P$ then $r_j^P=0$, while if it is nonbasic at $P$, maximality of $q$ means it never enters during the cycle and it is nonbasic at $Q$, where $z_j=0$. Also $r_q^Pz_q>0$. Thus the negative sum $r^P\\cdot z$ forces some $j<q$ with $r_j^Pz_j<0$; because $r_j^P\\ge0$, this gives $r_j^P>0$ and $z_j<0$. Such a $j$ is nonbasic at $P$, basic at $Q$, and has $d_j>0$. Its value is zero at $P$ and stays zero during the degenerate cycle, so at $Q$ it ties with $q$ at ratio zero.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Since $j<q$ is an eligible leaving variable with the same minimum ratio as $q$, [F3] would choose $j$ to leave at $Q$, contradicting the choice of $q$. Therefore no basis repeats.",
+          "inputs": [
+            "F3",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "There are at most $\\binom{n}{m}$ possible column bases, so the algorithm terminates after at most that many visited bases. At termination [F2] gives either an optimal basis or an unbounded ray. If the objective is bounded below, the ray branch is impossible. If the feasible set is nonempty, [F4] supplies a starting basis; hence a finite optimum is attained at an optimal basis found by the algorithm. The combinatorial bound does not imply polynomial-time complexity.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement allows m=0; there is at most one empty basis and the algorithm terminates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats zero objective changes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The finite-basis count includes the one-basis case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–5.1 prove termination when pivots are degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement bounds exact Bland pivots by the finite number of possible bases while permitting zero-step degeneracy at every pivot. Proof step 1.1 reduces a repeated-basis cycle to theta=0 pivots; steps 2.1–5.1 apply the least-index tie rule to that exact zero-ratio boundary, excluding a cycle without requiring strict objective decrease each time."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses least-index selections from finite sets only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement bounds exact Bland pivots by the finite number of possible bases while permitting zero-step degeneracy at every pivot. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement bounds exact Bland pivots by the finite number of possible bases while permitting zero-step degeneracy at every pivot. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read Proof 1.1–6.1 and all F1–F4, independently checked against Bland (1977), Theorem 1.1, printed pp.103–104. Repeated underlying basis set implies identical point/reduced costs/pivot variable choices despite basis ordering. Constant cycle objective forces every step length zero. Largest fickle q, entering t<q and r^P dot z<0 force j<q with positive r_j^P and negative z_j; j has zero value and ties the leaving q, contradicting the least-variable-index rule. Finite set of column subsets bounds pivots; bounded objective excludes rays; BFS supplier provides initialization. Empty basis and all-degenerate cycles checked. Reordered the direction paragraph after P,Q,q,t are introduced; no mathematical claim changed."
+      }
+    },
+    "thm-revised-dual-simplex-invariant-and-farkas": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-revised-simplex-basis-dictionary",
+          "source_section": "Definition",
+          "quote": "Use the standard-form problem of [[def-revised-simplex-standard-form-linear-program]]. Assume $A$ has full row rank $m$. An ordered basis is a list $B=(B_1,\\ldots,B_m)$ of distinct column indices for which the square matrix $A_B=[a_{B_1}\\ \\cdots\\ a_{B_m}]$ is invertible. Write $N=\\{1,\\ldots,n\\}\\setminus\\{B_1,\\ldots,B_m\\}$ and $c_B=(c_{B_1},\\ldots,c_{B_m})^{\\mathsf T}$. The basic vector $x(B)$ is defined by $x_B(B)=A_B^{-1}b$ and $x_j(B)=0$ for $j\\in N$; the basis is primal feasible, and $x(B)$ is a basic feasible solution, exactly when $A_B^{-1}b\\ge0$.\n\nThe basis multiplier is $y(B)=A_B^{-\\mathsf T}c_B$. For every column $j$, its reduced cost is $\\bar c_j=c_j-a_j^{\\mathsf T}y(B)$. In particular, $\\bar c_{B_i}=0$ for each basic index. The basis is dual feasible when $\\bar c_j\\ge0$ for every $j\\in N$. When $m=0$, take the empty basis and the empty multiplier; these formulas remain meaningful.\n\nA primal-feasible basis is **degenerate** if some basic coordinate is zero. A simplex pivot is **degenerate** if its ratio-test step length is zero.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-revised-dual-simplex-with-finite-budget",
+          "source_section": "Definition",
+          "quote": "Input the exact standard-form data and a basis $B$ for which every nonbasic reduced cost is nonnegative, as in [[def-revised-simplex-standard-form-linear-program]] and [[def-revised-simplex-basis-dictionary]]. Also input a nonnegative integer pivot budget $K$. Set $k=0$ and repeat:\n\n1. Compute $x_B=A_B^{-1}b$ and $y=A_B^{-\\mathsf T}c_B$. If $x_B\\ge0$, return `optimal` with the primal basic vector and $y$.\n2. Otherwise choose the least-index basic variable $B_i$ with $x_{B_i}<0$. For each nonbasic $j$ compute $d_{ij}=(A_B^{-1}a_j)_i$. If no $d_{ij}<0$, return `infeasible` with $q=A_B^{-\\mathsf T}e_i$.\n3. If $k=K$, return `pivot-budget-exhausted` with the current basis and multiplier $y=A_B^{-\\mathsf T}c_B$.\n4. Among $j$ with $d_{ij}<0$, choose one minimizing $\\bar c_j/(-d_{ij})$, with least variable index among ties. Replace $B_i$ by $j$, set $k\\leftarrow k+1$, and repeat.\n\nThe `pivot-budget-exhausted` status is inconclusive. No finite-success or anti-cycling claim is part of this definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-revised-simplex-standard-form-linear-program",
+          "source_section": "Definition",
+          "quote": "Let $m,n$ be nonnegative integers, $A\\in\\mathbb R^{m\\times n}$, $b\\in\\mathbb R^m$, and $c\\in\\mathbb R^n$. The standard-form minimization linear program with data $(A,b,c)$ is\n$$\\min\\{c^{\\mathsf T}x:Ax=b,\\ x\\ge0\\}.$$\nIts feasible set is $P(A,b)=\\{x\\in\\mathbb R^n:Ax=b,\\ x_j\\ge0\\text{ for every }j\\}$, and a feasible $x$ is optimal if $c^{\\mathsf T}x\\le c^{\\mathsf T}z$ for every $z\\in P(A,b)$. The notation $x\\ge0$ is componentwise. The revised-simplex basis algorithms on this page require a full-row-rank matrix, meaning $\\operatorname{rank}(A)=m$; a rank-deficient raw system must first be reduced by exact row operations, with inconsistent rows reported as infeasible. For $m=0$, the empty system has its usual zero-dimensional interpretation.\n\nA vector $q\\in\\mathbb R^m$ satisfying $A^{\\mathsf T}q\\ge0$ and $b^{\\mathsf T}q<0$ is called a **Farkas infeasibility certificate** for this sign convention. Indeed, any feasible $x\\ge0$ would give $b^{\\mathsf T}q=x^{\\mathsf T}A^{\\mathsf T}q\\ge0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Fix an eligible pivot $(i,j)$ and put $q=A_B^{-\\mathsf T}e_i$. With $\\alpha=\\bar c_j/d_{ij}\\le0$, the vector $y'=y+\\alpha q$ satisfies $a_j^{\\mathsf T}y'=c_j$, so the entering column has new reduced cost zero. The leaving basic column $a_{B_i}$ has $q^{\\mathsf T}a_{B_i}=1$, hence its new reduced cost is $-\\alpha\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "If no nonbasic column has $d_{ij}<0$, then $A^{\\mathsf T}q\\ge0$: the basic columns give the coordinates of $e_i$, and every nonbasic column has nonnegative $i$th transformed entry. Also $b^{\\mathsf T}q=e_i^{\\mathsf T}A_B^{-1}b=x_{B_i}<0$. By [F3], $q$ is a Farkas infeasibility certificate; any feasible $x\\ge0$ would give $b^{\\mathsf T}q=x^{\\mathsf T}A^{\\mathsf T}q\\ge0$, a contradiction.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "For any other nonbasic $k$, write $d_{ik}=q^{\\mathsf T}a_k$. Its new reduced cost is $\\bar c'_k=\\bar c_k-\\alpha d_{ik}$. If $d_{ik}\\ge0$, this is nonnegative because $\\alpha\\le0$. If $d_{ik}<0$, the ratio rule gives $\\bar c_j/(-d_{ij})\\le\\bar c_k/(-d_{ik})$, so $\\bar c'_k=(-d_{ik})(\\bar c_k/(-d_{ik})-\\bar c_j/(-d_{ij}))\\ge0$. Thus every new nonbasic reduced cost is nonnegative.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "If the basis is primal feasible, its basic vector $x$ and dual-feasible $y$ satisfy $c^{\\mathsf T}x=b^{\\mathsf T}y$, because $c_B^{\\mathsf T}A_B^{-1}b=y^{\\mathsf T}b$. For every feasible $z$, $A^{\\mathsf T}y\\le c$ and $z\\ge0$ imply $c^{\\mathsf T}z\\ge b^{\\mathsf T}y=c^{\\mathsf T}x$, so $x$ is optimal. The algorithm's budget-exhausted branch asserts no further mathematical conclusion.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: With no basic row there is no negative basic component, so the certificate branch is not entered."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 allow zero reduced costs and ties."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The multiplier and ratio formulas apply to a one-row basis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The theorem leaves dual-degenerate success inconclusive under its finite budget."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement preserves nonnegative reduced costs under eligible dual pivots and returns a Farkas certificate when no negative transformed coefficient exists. Proof step 2.1 allows a zero reduced cost and a tied minimum ratio, yielding a new reduced cost equal0. Step 3.1 explicitly leaves finite-budget exhaustion inconclusive rather than identifying it with infeasibility."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The row and entering-column choices are least-index choices from finite sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement preserves nonnegative reduced costs under eligible dual pivots and returns a Farkas certificate when no negative transformed coefficient exists. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement preserves nonnegative reduced costs under eligible dual pivots and returns a Farkas certificate when no negative transformed coefficient exists. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Proof 1.1–3.1 checked with actual basis Definition and finite-budget algorithm. For alpha=rc_j/d_ij<=0, new multiplier has zero costs on the replacement basis; d_ij<0 makes replacement invertible. Nonnegative transformed coefficients cannot lose nonnegative costs, negative ones use the minimum ratio inequality. No eligible column gives A^Tq>=0 and b^Tq=x_Bi<0. Primal/dual feasibility gives equality of objectives and weak duality. Empty m/n cases and K=0 do not assert convergence; no AC."
+      }
+    },
+    "alg-revised-simplex-phase-one": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition covers m=0 with the empty artificial basis and zero Phase I objective."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition distinguishes exact zero from positive Phase I optimum."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition applies to one equation and one artificial variable."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition pivots zero-valued artificial basics or removes redundant rows."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition starts with the artificial identity basis, then removes zero-valued artificial basic variables by exact pivot or redundant-row deletion. Definition tests the PhaseI optimum exactly at0 versus strictly positive. At0 it permits pivots of either sign because the leaving artificial value is0, and deletes a row only when its transformed equation is exactly0=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition selects the least-index eligible original column."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition starts with the artificial identity basis, then removes zero-valued artificial basic variables by exact pivot or redundant-row deletion. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition starts with the artificial identity basis, then removes zero-valued artificial basic variables by exact pivot or redundant-row deletion. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read complete Definition and earlier Bland theorem/procedure. [DA I] has full row rank for arbitrary input rank, nonnegative Db gives the artificial feasible start and objective bounded below by zero. Positive minimum branch returns Phase I multiplier (conversion to original Farkas vector is proved in extraction theorem). Zero-minimum extraction removes one zero artificial basic each time by a nonzero pivot of either sign or a redundant transformed row. Original basic columns have identity coefficients, so no original coefficient in that row means original equation 0=0. Empty dimensions, b=0 and rank-deficient/inconsistent raw inputs checked. No AC; this procedure calls a supplier repeatedly without a self-edge."
+      }
+    },
+    "thm-revised-simplex-phase-one-extraction-and-farkas": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-revised-simplex-phase-one",
+          "source_section": "Definition",
+          "quote": "Input any exact equality system $Ax=b$ with $x\\ge0$, including a rank-deficient raw system. Let $D$ be diagonal with $D_{ii}=-1$ when $b_i<0$ and $D_{ii}=1$ otherwise; set $\\widetilde A=DA$ and $\\widetilde b=Db\\ge0$. Add artificial variables $u\\in\\mathbb R^m$ and solve the Phase I problem $\\min\\mathbf1^{\\mathsf T}u$ subject to $\\widetilde A x+u=\\widetilde b$, $x,u\\ge0$, starting at $x=0,u=\\widetilde b$ with artificial basis $I_m$. Use the exact primal algorithm of [[alg-revised-primal-simplex-bland-rule]] and its finite-termination result [[thm-revised-simplex-bland-rule-finite-termination]].\n\nAt a terminal optimum, if $\\mathbf1^{\\mathsf T}u>0$, return `infeasible` and the basis multiplier $y$ for the Phase I objective. If the optimum is zero, set every artificial variable to zero and remove artificial basic variables as follows. For a zero-valued artificial basic variable, inspect its row in $B^{-1}\\widetilde A$. If some original nonbasic column has a nonzero coefficient there, pivot the least-index such column into the basis; the pivot may have either sign because the leaving basic value is zero. If no such coefficient exists, and the transformed right-hand-side entry is zero, delete that redundant equation and its zero artificial basic variable. Repeat until all remaining basic columns are original; return the row-reduced equivalent system and its original feasible basis. A zero row with nonzero transformed right-hand side returns `inconsistent-row`. All tests are exact; a finite-precision near-zero objective is not treated as zero.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-revised-simplex-bland-rule-finite-termination",
+          "source_section": "Statement",
+          "quote": "For exact arithmetic and a finite standard-form LP with full-row-rank $A$, the primal algorithm of [[alg-revised-primal-simplex-bland-rule]], started from any primal-feasible basis, terminates after finitely many pivots at an optimal basis or returns a feasible ray of strictly negative cost. If the feasible set is nonempty and the objective is bounded below, an optimal basis exists and is returned. The number of pivots is at most the number of possible bases, hence at most $\\binom{n}{m}$; this is a finiteness bound, not a polynomial-time claim. Every pivot may be degenerate, so the objective need not decrease strictly at each step.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-revised-simplex-basis-dictionary",
+          "source_section": "Definition",
+          "quote": "Use the standard-form problem of [[def-revised-simplex-standard-form-linear-program]]. Assume $A$ has full row rank $m$. An ordered basis is a list $B=(B_1,\\ldots,B_m)$ of distinct column indices for which the square matrix $A_B=[a_{B_1}\\ \\cdots\\ a_{B_m}]$ is invertible. Write $N=\\{1,\\ldots,n\\}\\setminus\\{B_1,\\ldots,B_m\\}$ and $c_B=(c_{B_1},\\ldots,c_{B_m})^{\\mathsf T}$. The basic vector $x(B)$ is defined by $x_B(B)=A_B^{-1}b$ and $x_j(B)=0$ for $j\\in N$; the basis is primal feasible, and $x(B)$ is a basic feasible solution, exactly when $A_B^{-1}b\\ge0$.\n\nThe basis multiplier is $y(B)=A_B^{-\\mathsf T}c_B$. For every column $j$, its reduced cost is $\\bar c_j=c_j-a_j^{\\mathsf T}y(B)$. In particular, $\\bar c_{B_i}=0$ for each basic index. The basis is dual feasible when $\\bar c_j\\ge0$ for every $j\\in N$. When $m=0$, take the empty basis and the empty multiplier; these formulas remain meaningful.\n\nA primal-feasible basis is **degenerate** if some basic coordinate is zero. A simplex pivot is **degenerate** if its ratio-test step length is zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-revised-simplex-standard-form-linear-program",
+          "source_section": "Definition",
+          "quote": "Let $m,n$ be nonnegative integers, $A\\in\\mathbb R^{m\\times n}$, $b\\in\\mathbb R^m$, and $c\\in\\mathbb R^n$. The standard-form minimization linear program with data $(A,b,c)$ is\n$$\\min\\{c^{\\mathsf T}x:Ax=b,\\ x\\ge0\\}.$$\nIts feasible set is $P(A,b)=\\{x\\in\\mathbb R^n:Ax=b,\\ x_j\\ge0\\text{ for every }j\\}$, and a feasible $x$ is optimal if $c^{\\mathsf T}x\\le c^{\\mathsf T}z$ for every $z\\in P(A,b)$. The notation $x\\ge0$ is componentwise. The revised-simplex basis algorithms on this page require a full-row-rank matrix, meaning $\\operatorname{rank}(A)=m$; a rank-deficient raw system must first be reduced by exact row operations, with inconsistent rows reported as infeasible. For $m=0$, the empty system has its usual zero-dimensional interpretation.\n\nA vector $q\\in\\mathbb R^m$ satisfying $A^{\\mathsf T}q\\ge0$ and $b^{\\mathsf T}q<0$ is called a **Farkas infeasibility certificate** for this sign convention. Indeed, any feasible $x\\ge0$ would give $b^{\\mathsf T}q=x^{\\mathsf T}A^{\\mathsf T}q\\ge0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-farkas-alternative-for-finite-linear-systems",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{r\\times n}$ and $b\\in\\mathbb R^r$. Exactly one of the\nfollowing holds:\n\n1. There is $x\\in\\mathbb R^n$ with $x\\ge0$ and $Ax=b$.\n2. There is $y\\in\\mathbb R^r$ with $A^Ty\\ge0$ and $b^Ty<0$.\n\nInequalities between vectors are coordinatewise.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Let $D_{ii}=-1$ when $b_i<0$ and $D_{ii}=1$ otherwise. Since $D$ is invertible and $D^{-1}=D$, $Ax=b$ is equivalent to $DAx=Db$, and $Db\\ge0$. The augmented matrix $[DA\\ I]$ has full row rank because it contains the identity columns; $x=0,u=Db$ is feasible for the Phase I problem and has objective $\\mathbf1^{\\mathsf T}Db\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "By [F2] the Phase I primal algorithm terminates at an optimum or an unbounded ray. Its objective is $\\sum_i u_i\\ge0$ at every feasible point, so a negative-cost ray is impossible; it terminates at a minimum with nonnegative reduced costs.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Suppose the minimum $w^*>0$. Any feasible original $x$ would give a Phase I feasible point $(x,u=0)$ of objective zero, contradicting minimality. Let $y$ be the terminal basis multiplier for the Phase I objective $(0,\\mathbf1)$. Nonnegative reduced costs on the original columns, using [F3], give $(DA)^{\\mathsf T}y\\le0$, and the basic-vector identity gives $(Db)^{\\mathsf T}y=w^*>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "claim": "Suppose instead that $w^*=0$. Since every artificial variable is nonnegative and their sum is zero, each artificial variable has value zero, and the original coordinates satisfy $DAx=Db$. If an artificial variable is basic at tableau row $k$ and some original nonbasic column has a nonzero coefficient in row $k$ of $B^{-1}DA$, pivot that column in. The pivot is nonzero, and the entering variable and leaving artificial variable both have value zero, so the represented feasible point is unchanged and one artificial basic variable is removed.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Set $q=-D^{\\mathsf T}y$. Then $A^{\\mathsf T}q=-(DA)^{\\mathsf T}y\\ge0$ and $b^{\\mathsf T}q=-(Db)^{\\mathsf T}y<0$, so [F4] identifies it as a Farkas certificate. The finite-system alternative [F5] says exactly one of feasibility and such a certificate holds; because this $q$ satisfies the certificate branch, the original system is infeasible.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "algebra",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "claim": "If no original nonbasic column has a nonzero coefficient in row $k$, every original basic column has a unit column there at a different row, so the entire row $k$ of $B^{-1}DA$ is zero. Every nonbasic artificial variable is zero, every other basic artificial column has zero in row $k$, and the basic artificial value at row $k$ is zero; hence row $k$ of $B^{-1}Db$ is also zero. The transformed equation is $0=0$ and may be deleted without changing the feasible set; deleting that row and its artificial basis column leaves an invertible identity submatrix for the remaining basis.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "Each pivot or row deletion removes one artificial basic variable, so after at most $m$ such operations no artificial variable remains basic. The remaining basis consists of original columns and is invertible for the retained row-reduced system; its basic vector is feasible because the represented point never changed. The retained equations are equivalent to the original system by the invertible row operations and deletion only of $0=0$ rows. This proves the zero-optimum extraction claim, including redundant-row removal.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "step 3.2",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 include the zero-row system."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.2–4.1 handle zero artificial variables and zero rows."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The construction and certificate work for one equality row."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.2–4.1 handle zero-valued artificial basic variables."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement characterizes zero PhaseI minimum by original feasibility and proves finite removal of zero artificial basics or redundant equations. Proof step 2.2 treats the exact optimum w star=0 and zero-valued artificial pivots, while step 3.2 deletes exactly a0=0 row. Proof step 2.1 handles the separate strict-positive minimum before its Farkas vector is formed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Every pivot or row operation selects from a finite set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement is an equivalence; steps 2.1–2.2 prove feasibility forces zero optimum."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement is an equivalence; steps 2.2–4.1 extract a feasible basis at zero optimum."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read Proof 1.1–4.1 and F1–F5, including actual finite-system Farkas proof. Full-row-rank augmented matrix and nonnegative artificial objective establish finite optimum via Bland, even if original rank deficient. Original feasibility gives artificial objective zero and conversely zero sum forces every artificial zero. Positive optimum gives (DA)^Ty<=0 and (Db)^Ty=w*>0, hence q=-D^Ty has required original signs. At zero optimum a nonzero pivot of either sign preserves represented zero artificial value; row deletion applies only to transformed original 0=0 and keeps remaining identity basis invertible. Each operation removes one artificial basic, at most m. Empty m/n, b=0, redundant equations and infeasible data checked; no AC."
+      }
+    },
+    "ex-revised-simplex-unbounded-ray": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-revised-simplex-primal-pivot-objective-ray-optimality",
+          "source_section": "Statement",
+          "quote": "Let $B$ be a primal-feasible basis for the standard-form problem of [[def-revised-simplex-standard-form-linear-program]] and [[def-revised-simplex-basis-dictionary]], and let $j$ be a nonbasic index with reduced cost $\\bar c_j<0$. Put $d=A_B^{-1}a_j$. If $d_i\\le0$ for every basic row $i$, then $r_j=1$, $r_B=-d$, and $r_k=0$ for the other nonbasic indices define a feasible ray with $Ar=0$ and $c^{\\mathsf T}r=\\bar c_j<0$; the LP is unbounded below. If some $d_i>0$, the step $\\theta=\\min_{d_i>0}(x_{B_i}/d_i)$ is finite and nonnegative, every minimizing row gives a valid pivot, the new basic vector is feasible, and the objective change is $\\theta\\bar c_j\\le0$, strictly negative exactly when $\\theta>0$. Finally, if all nonbasic reduced costs are nonnegative at a primal-feasible basis, its basic vector is optimal.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "The basis matrix is $A_B=-1$, so $x_2=(-1)^{-1}0=0$. The multiplier is $y=(-1)^{-1}c_2=0$, and the nonbasic reduced cost is $\\bar c_1=-1-1\\cdot0=-1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "The entering direction coefficient is $d=A_B^{-1}a_1=-1$. There is no row with $d_i>0$, so the ray has $r_1=1$ and $r_2=-d=1$. Then $Ar=1-1=0$, $r\\ge0$, and $c^{\\mathsf T}r=-1<0$; [F1] gives unboundedness below.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example uses A=(1,-1), b=0 and basis(2) to construct the explicit feasible ray(1,1) of cost-1. The fixed witness has one equality and two nonnegative variables, with the concrete nonempty initial feasible point(0,0). It is not a family allowing an empty LP."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The initial basic value is zero and the ray starts at that feasible point."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses a one-row basis and a single entering column."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example uses A=(1,-1), b=0 and basis(2) to construct the explicit feasible ray(1,1) of cost-1. Verification step 1.1 has the zero basic value, while step 2.1 finds no positive entering coefficient and returns the ray rather than dividing by an empty positive-ratio minimum."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example uses A=(1,-1), b=0 and basis(2) to construct the explicit feasible ray(1,1) of cost-1. The Example has no interval parameter or terminal time; its ray is defined algebraically by Ar=0,r>=0 and negative cost in Verification step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The no-blocking-row branch has an empty eligible ratio set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example uses A=(1,-1), b=0 and basis(2) to construct the explicit feasible ray(1,1) of cost-1. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example uses A=(1,-1), b=0 and basis(2) to construct the explicit feasible ray(1,1) of cost-1. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact-ray-check",
+          "method": "Exact rational substitution in the displayed one-row system.",
+          "result": "r=(1,1) satisfies Ar=0, r>=0, and c^T r=-1."
+        }
+      ]
+    },
+    "ex-revised-simplex-ill-conditioned-basis-residual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-revised-simplex-residual-audit",
+          "source_section": "Definition",
+          "quote": "Input a standard-form problem as in [[def-revised-simplex-standard-form-linear-program]], whose stored matrix, right-hand side, and cost entries are finite binary floating-point values, together with finite stored candidate vectors $\\hat x\\in\\mathbb R^n$ and $\\hat y\\in\\mathbb R^m$. A finite binary value is interpreted as its exact dyadic rational (an integer times an integer power of $2$). If a dimension is wrong or any value is NaN or infinite, return `invalid-input`. Otherwise use exact integer/rational arithmetic to compute $r_p=A\\hat x-b$, $r_d=c-A^{\\mathsf T}\\hat y$, $g=c^{\\mathsf T}\\hat x-b^{\\mathsf T}\\hat y$, $\\rho_p=\\|r_p\\|_\\infty$, and $\\rho_d=\\|r_d\\|_\\infty$, where $\\|z\\|_\\infty=\\max_i|z_i|$ and the empty-vector value is zero. Return these exact values and $|g|$ as the exact primal-dual objective difference for the stored data. Return `verified-optimal-for-stored-data` exactly when $\\hat x\\ge0$, $r_p=0$, $r_d\\ge0$, and $g=0$. In every other finite-input case return `candidate-only` with the residuals and gap; a nonzero or small residual is never rounded to zero and does not certify infeasibility.\n\nThe exact arithmetic is a verification procedure for a candidate produced by a floating-point solver; it does not define a basis factorization or bound uncertainty in data before they were stored. If a statement about pre-rounded data is required, separate certified input intervals must be supplied and propagated. The procedure makes no operation-count or runtime claim.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-revised-simplex-primal-dual-residual-gap",
+          "source_section": "Statement",
+          "quote": "For a real standard-form problem with $A\\in\\mathbb R^{m\\times n}$ and candidate vectors $x\\in\\mathbb R^n$, $y\\in\\mathbb R^m$, define $r_p=Ax-b$, $r_d=c-A^{\\mathsf T}y$, and $g=c^{\\mathsf T}x-b^{\\mathsf T}y$. When the data and candidates are finite stored binary floating-point values, [[alg-revised-simplex-residual-audit]] computes precisely these quantities, interpreting the stored values as exact dyadic rationals. For all the stated real data,\n$$g=x^{\\mathsf T}r_d+y^{\\mathsf T}r_p,$$\nand consequently\n$$|g|\\le \\|x\\|_1\\|r_d\\|_\\infty+\\|y\\|_1\\|r_p\\|_\\infty.$$\nHere $\\|z\\|_1=\\sum_i|z_i|$ and $\\|z\\|_\\infty=\\max_i|z_i|$, with both norms equal to zero on the empty vector. This bounds the primal-dual objective difference; when either vector is infeasible it does not bound distance to an optimal value. If $Ax=b$, $x\\ge0$, $c-A^{\\mathsf T}y\\ge0$, and $g=0$, then $x$ is optimal.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "The basis matrix has $\\|A\\|_2=1$ and $\\|A^{-1}\\|_2=\\delta^{-1}=2^{27}$, so its 2-norm condition number is $2^{27}$. The exact solution is $(1,1)$, while the candidate has forward error $\\hat x-x^*=(0,\\delta)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Exact multiplication gives $r_p=(0,\\delta^2)=(0,2^{-54})$, $r_d=(0,0)$, and $g=\\delta=2^{-27}$. Thus the residual norm is $2^{-54}$ although the absolute forward error is $2^{-27}$, larger by the condition factor.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Here $\\|\\hat x\\|_1=2+\\delta$, $\\|y\\|_1=1+\\delta^{-1}$, so [F2] gives $|g|\\le(1+\\delta^{-1})\\delta^2=\\delta+\\delta^2$. The candidate is not exactly primal feasible and has a positive gap; the small residual alone therefore does not certify exact optimality or infeasibility.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes delta=2^-27 and compares residual2^-54 with forward error2^-27 for a diagonal stored basis. The witness fixes a two-by-two diagonal basis and two finite candidate coordinates; no empty norm or absent basis is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The exact dual residual is zero while the primal residual is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: The diagonal basis contains a unit-scale coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Example fixes delta=2^-27 and compares residual2^-54 with forward error2^-27 for a diagonal stored basis. The fixed delta=2^-27 is positive, so the basis is nonsingular although ill-conditioned. Verification step 1.1 explicitly gives its inverse norm rather than taking a singular delta=0 limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example fixes delta=2^-27 and compares residual2^-54 with forward error2^-27 for a diagonal stored basis. Delta is fixed exactly as2^-27, not varied over a closed parameter interval. Verification step 2.1 computes its exact binary residual and gap without a limiting endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example contains no selection or choice step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example fixes delta=2^-27 and compares residual2^-54 with forward error2^-27 for a diagonal stored basis. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example fixes delta=2^-27 and compares residual2^-54 with forward error2^-27 for a diagonal stored basis. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact-dyadic-residual-check",
+          "method": "Exact powers-of-two arithmetic on delta=2^-27.",
+          "result": "The candidate has primal residual (0,2^-54), exact gap 2^-27, and basis condition number 2^27."
+        }
+      ]
+    },
+    "ex-revised-simplex-primal-dual-trace": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-revised-simplex-basis-dictionary",
+          "source_section": "Definition",
+          "quote": "Use the standard-form problem of [[def-revised-simplex-standard-form-linear-program]]. Assume $A$ has full row rank $m$. An ordered basis is a list $B=(B_1,\\ldots,B_m)$ of distinct column indices for which the square matrix $A_B=[a_{B_1}\\ \\cdots\\ a_{B_m}]$ is invertible. Write $N=\\{1,\\ldots,n\\}\\setminus\\{B_1,\\ldots,B_m\\}$ and $c_B=(c_{B_1},\\ldots,c_{B_m})^{\\mathsf T}$. The basic vector $x(B)$ is defined by $x_B(B)=A_B^{-1}b$ and $x_j(B)=0$ for $j\\in N$; the basis is primal feasible, and $x(B)$ is a basic feasible solution, exactly when $A_B^{-1}b\\ge0$.\n\nThe basis multiplier is $y(B)=A_B^{-\\mathsf T}c_B$. For every column $j$, its reduced cost is $\\bar c_j=c_j-a_j^{\\mathsf T}y(B)$. In particular, $\\bar c_{B_i}=0$ for each basic index. The basis is dual feasible when $\\bar c_j\\ge0$ for every $j\\in N$. When $m=0$, take the empty basis and the empty multiplier; these formulas remain meaningful.\n\nA primal-feasible basis is **degenerate** if some basic coordinate is zero. A simplex pivot is **degenerate** if its ratio-test step length is zero.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-revised-simplex-primal-pivot-objective-ray-optimality",
+          "source_section": "Statement",
+          "quote": "Let $B$ be a primal-feasible basis for the standard-form problem of [[def-revised-simplex-standard-form-linear-program]] and [[def-revised-simplex-basis-dictionary]], and let $j$ be a nonbasic index with reduced cost $\\bar c_j<0$. Put $d=A_B^{-1}a_j$. If $d_i\\le0$ for every basic row $i$, then $r_j=1$, $r_B=-d$, and $r_k=0$ for the other nonbasic indices define a feasible ray with $Ar=0$ and $c^{\\mathsf T}r=\\bar c_j<0$; the LP is unbounded below. If some $d_i>0$, the step $\\theta=\\min_{d_i>0}(x_{B_i}/d_i)$ is finite and nonnegative, every minimizing row gives a valid pivot, the new basic vector is feasible, and the objective change is $\\theta\\bar c_j\\le0$, strictly negative exactly when $\\theta>0$. Finally, if all nonbasic reduced costs are nonnegative at a primal-feasible basis, its basic vector is optimal.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-revised-dual-simplex-invariant-and-farkas",
+          "source_section": "Statement",
+          "quote": "Let $B$ be a basis of the minimization problem for which all nonbasic reduced costs are nonnegative. At an iteration of [[alg-revised-dual-simplex-with-finite-budget]], a pivot chosen from a row $i$ with $x_{B_i}<0$ and a column $j$ with $d_{ij}=(A_B^{-1}a_j)_i<0$ minimizing $\\bar c_j/(-d_{ij})$ preserves dual feasibility. If there is no nonbasic $j$ with $d_{ij}<0$, then $q=A_B^{-\\mathsf T}e_i$ satisfies $A^{\\mathsf T}q\\ge0$ and $b^{\\mathsf T}q<0$, so $q$ is a Farkas infeasibility certificate as defined in [[def-revised-simplex-standard-form-linear-program]] and the primal problem is infeasible. If the current basis is both primal and dual feasible, it is optimal. A finite pivot-budget exhaustion is inconclusive and does not assert infeasibility or convergence.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "With $B=(2)$, $A_B=1$, $x_2=1$, and $y=c_2=2$. Thus $\\bar c_1=1-2=-1$, so $x_1$ is a valid entering variable.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "For the changed right-hand side $b=-1$ and basis $B=(1)$, $x_1=-1$ while $y=1$ and $\\bar c_2=1\\ge0$, so the basis is dual feasible and primal infeasible. Its only nonbasic coefficient is $d_{12}=A_B^{-1}a_2=1\\ge0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "The direction coefficient is $d=A_B^{-1}a_1=1$ and the ratio is $x_2/d=1$. The pivot yields $x_1=1,x_2=0$ and changes cost by $1\\cdot(-1)=-1$, from $2$ to $1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "At the new basis $B=(1)$, $y=c_1=1$ and $\\bar c_2=2-1=1\\ge0$. The vector is feasible, so [F2] proves it is optimal; the primal and dual objective values are both $1$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "There is no eligible negative coefficient. The certificate from [F3] is $q=1$, for which $A^{\\mathsf T}q=(1,1)\\ge0$ and $b^{\\mathsf T}q=-1<0$. Thus the modified system has no nonnegative feasible vector.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example computes one feasible primal pivot for b=1 and a dual/Farkas trace for the same row with b=-1. Both fixed traces have the nonempty one-row/two-variable matrix A=(1,1), with concrete bases(2) and(1); neither trace uses an empty basis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification steps 1.1–2.1 show zero nonbasic coordinates and the one-pivot update."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: The primal trace contains one pivot and a one-row basis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example computes one feasible primal pivot for b=1 and a dual/Farkas trace for the same row with b=-1. Verification step 2.1 has the positive primal ratio1. In the changed-data branch step 1.2 finds no eligible negative transformed coefficient, and step 4.1 returns q=1 rather than an attempted dual pivot."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example computes one feasible primal pivot for b=1 and a dual/Farkas trace for the same row with b=-1. This Example compares two separate exact right-hand sides1 and-1, not endpoints of a parameterized interval; all primal/dual trace values are explicit finite data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The ratio test has a finite singleton candidate set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example computes one feasible primal pivot for b=1 and a dual/Farkas trace for the same row with b=-1. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example computes one feasible primal pivot for b=1 and a dual/Farkas trace for the same row with b=-1. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-pivot-primal-and-dual-exact-check",
+          "method": "Exact scalar basis algebra shown in Verification steps 1.1–4.1.",
+          "result": "The primal basis changes from x2 to x1 at theta=1 with objective 1; the changed-RHS dual row returns q=1 and b^Tq=-1."
+        }
+      ]
+    },
+    "ex-revised-simplex-degenerate-cycle-prevented-by-bland": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-revised-primal-simplex-bland-rule",
+          "source_section": "Definition",
+          "quote": "Input the exact standard-form data of [[def-revised-simplex-standard-form-linear-program]] with full-row-rank $A$ and a primal-feasible basis $B$ as in [[def-revised-simplex-basis-dictionary]]. Use exact arithmetic. At each iteration compute $x_B=A_B^{-1}b$, $y=A_B^{-\\mathsf T}c_B$, and all nonbasic reduced costs $\\bar c_j=c_j-a_j^{\\mathsf T}y$.\n\n1. If every nonbasic $\\bar c_j\\ge0$, return `optimal` with $x(B)$ and $y$.\n2. Otherwise choose the least index $j\\notin B$ with $\\bar c_j<0$ and solve $A_Bd=a_j$.\n3. If no component $d_i$ is positive, return `unbounded` with the ray whose $j$th component is $1$, whose basic components are $-d$, and whose other nonbasic components are $0$.\n4. Otherwise compute $\\theta=\\min_{d_i>0}x_{B_i}/d_i$. Among minimizing rows, leave the basic variable of least index. Replace its basis column by $a_j$ and repeat.\n\nThe algorithm assumes an exact initial feasible basis. It makes no iteration bound polynomial in $m$ or $n$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.2",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-revised-simplex-primal-pivot-objective-ray-optimality",
+          "source_section": "Statement",
+          "quote": "Let $B$ be a primal-feasible basis for the standard-form problem of [[def-revised-simplex-standard-form-linear-program]] and [[def-revised-simplex-basis-dictionary]], and let $j$ be a nonbasic index with reduced cost $\\bar c_j<0$. Put $d=A_B^{-1}a_j$. If $d_i\\le0$ for every basic row $i$, then $r_j=1$, $r_B=-d$, and $r_k=0$ for the other nonbasic indices define a feasible ray with $Ar=0$ and $c^{\\mathsf T}r=\\bar c_j<0$; the LP is unbounded below. If some $d_i>0$, the step $\\theta=\\min_{d_i>0}(x_{B_i}/d_i)$ is finite and nonnegative, every minimizing row gives a valid pivot, the new basic vector is feasible, and the objective change is $\\theta\\bar c_j\\le0$, strictly negative exactly when $\\theta>0$. Finally, if all nonbasic reduced costs are nonnegative at a primal-feasible basis, its basic vector is optimal.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "6.2",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-revised-simplex-bland-rule-finite-termination",
+          "source_section": "Statement",
+          "quote": "For exact arithmetic and a finite standard-form LP with full-row-rank $A$, the primal algorithm of [[alg-revised-primal-simplex-bland-rule]], started from any primal-feasible basis, terminates after finitely many pivots at an optimal basis or returns a feasible ray of strictly negative cost. If the feasible set is nonempty and the objective is bounded below, an optimal basis exists and is returned. The number of pivots is at most the number of possible bases, hence at most $\\binom{n}{m}$; this is a finiteness bound, not a polynomial-time claim. Every pivot may be degenerate, so the objective need not decrease strictly at each step.",
+          "uses": [
+            "8.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Initially $B=(5,6,7)$, $x_B=(0,0,1)$, and the only negative reduced cost is $\\bar c_1=-10$. For entering $x_1$, $d=(1/2,1/2,1)$ gives ratios $(0,0,1)$ for $(x_5,x_6,x_7)$, so the least-index leaving tie is $x_5$ and $\\theta=0$. The next basis is $(1,6,7)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $B=(1,6,7)$ the negative reduced costs are $\\bar c_2=-53$ and $\\bar c_3=-41$. Both rules choose $x_2$. Its direction is $d=(-11,4,11)$; the eligible ratios for $(x_6,x_7)$ are $(0,1/11)$, so $x_6$ leaves at $\\theta=0$ and the basis becomes $(1,2,7)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At $B=(1,2,7)$ the negative reduced cost is $\\bar c_3=-29/2$. Its direction is $d=(1/2,1/2,-1/2)$, so the eligible ratios for $(x_1,x_2)$ are $(0,0)$; the least-index leaving variable is $x_1$, giving $\\theta=0$ and basis $(3,2,7)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "At $B=(3,2,7)$ the negative reduced costs are $\\bar c_4=-18$ and $\\bar c_5=-15$, so both rules choose $x_4$. Its direction is $d=(-8,2,0)$; the only eligible ratio is $0$ for $x_2$, which leaves and gives basis $(3,4,7)$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "At $B=(3,4,7)$ the only negative reduced cost is $\\bar c_5=-21/2$. Its direction is $d=(1/2,1/4,0)$; the eligible ratios for $(x_3,x_4)$ are $(0,0)$, so $x_3$ leaves at $\\theta=0$ and the basis becomes $(5,4,7)$. Thus the first five pivots agree under both rules.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "At $B=(5,4,7)$, $\\bar c_1=-22$ and $\\bar c_6=-24$. The most-negative rule chooses $x_6$, whose direction $d=(-9,1,0)$ has only the eligible ratio $0$ for $x_4$. The pivot leaves $x_4$ and returns to $(5,6,7)$ with the same basic vector and objective $0$; repeating the deterministic choices cycles.",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-2",
+          "claim": "At the same basis $(5,4,7)$, Bland chooses $x_1$ because $1<6$. Its direction is $d=(-4,1/2,1)$; the eligible ratios for $(x_4,x_7)$ are $(0,1)$, so $x_4$ leaves and the next basis is $(5,1,7)$, still with $\\theta=0$.",
+          "step": "6.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "At $B=(5,1,7)$ the only negative reduced cost is $\\bar c_3=-1$. Its direction is $d=(-2,-1,1)$, so only $x_7$ is eligible and its ratio is $1$. The pivot gives basis $(5,1,3)$ and basic values $(2,1,1)$, hence the full vector is $x=(1,0,1,0,2,0,0)$.",
+          "step": "7.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 6.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "At this final basis the objective is $-10+9=-1$ and the remaining reduced costs for $(x_2,x_4,x_6,x_7)$ are $(30,42,18,1)$, all nonnegative. The basic vector is feasible, so [F2] proves it optimal; [F3] also confirms finite termination. The six-pivot most-negative cycle and Bland's terminating branch are thereby checked with exact rational pivots.",
+          "step": "8.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 7.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example traces an exact six-pivot most-negative cycle and the different least-index Bland exit on a fixed three-row/seven-variable LP. The prescribed witness has three equations, seven variables and an explicit three-column starting basis; all ratio tie sets used in Verification are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification steps 1.1–6.1 display zero step lengths and constant objective."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-dimensional or one-term boundary is asserted by this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The six-pivot cycle consists entirely of degenerate pivots; the Bland branch exits it."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example traces an exact six-pivot most-negative cycle and the different least-index Bland exit on a fixed three-row/seven-variable LP. Verification steps 1.1–6.2 repeatedly use the zero ratio theta=0 without removing those degenerate pivots; step 7.1 reaches the positive ratio1 and step 8.1 checks exact nonnegative reduced costs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: All entering and leaving choices compare finite index sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example traces an exact six-pivot most-negative cycle and the different least-index Bland exit on a fixed three-row/seven-variable LP. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example traces an exact six-pivot most-negative cycle and the different least-index Bland exit on a fixed three-row/seven-variable LP. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact-rational-pivot-trace",
+          "method": "Inline Python Fraction Gaussian elimination recomputed each basis multiplier, reduced cost, direction, eligible ratio, and leaving index.",
+          "result": "Most-negative entering visits (5,6,7)->(1,6,7)->(1,2,7)->(3,2,7)->(3,4,7)->(5,4,7)->(5,6,7), all at theta=0 and objective 0. Bland shares the first five pivots, then enters x1, pivots x3 at theta=1, and terminates at basis (5,1,3), objective -1, with remaining reduced costs 30, 42, 18, 1."
+        }
+      ]
+    },
+    "ex-revised-simplex-phase-one-infeasible": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-revised-simplex-phase-one",
+          "source_section": "Definition",
+          "quote": "Input any exact equality system $Ax=b$ with $x\\ge0$, including a rank-deficient raw system. Let $D$ be diagonal with $D_{ii}=-1$ when $b_i<0$ and $D_{ii}=1$ otherwise; set $\\widetilde A=DA$ and $\\widetilde b=Db\\ge0$. Add artificial variables $u\\in\\mathbb R^m$ and solve the Phase I problem $\\min\\mathbf1^{\\mathsf T}u$ subject to $\\widetilde A x+u=\\widetilde b$, $x,u\\ge0$, starting at $x=0,u=\\widetilde b$ with artificial basis $I_m$. Use the exact primal algorithm of [[alg-revised-primal-simplex-bland-rule]] and its finite-termination result [[thm-revised-simplex-bland-rule-finite-termination]].\n\nAt a terminal optimum, if $\\mathbf1^{\\mathsf T}u>0$, return `infeasible` and the basis multiplier $y$ for the Phase I objective. If the optimum is zero, set every artificial variable to zero and remove artificial basic variables as follows. For a zero-valued artificial basic variable, inspect its row in $B^{-1}\\widetilde A$. If some original nonbasic column has a nonzero coefficient there, pivot the least-index such column into the basis; the pivot may have either sign because the leaving basic value is zero. If no such coefficient exists, and the transformed right-hand-side entry is zero, delete that redundant equation and its zero artificial basic variable. Repeat until all remaining basic columns are original; return the row-reduced equivalent system and its original feasible basis. A zero row with nonzero transformed right-hand side returns `inconsistent-row`. All tests are exact; a finite-precision near-zero objective is not treated as zero.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-revised-simplex-phase-one-extraction-and-farkas",
+          "source_section": "Statement",
+          "quote": "For any exact system $Ax=b$, $x\\ge0$, the Phase I procedure of [[alg-revised-simplex-phase-one]] terminates. Its minimum artificial-variable sum is zero if and only if the original system is feasible. If the minimum is positive, its returned vector yields a Farkas infeasibility certificate, as defined in [[def-revised-simplex-standard-form-linear-program]], with $A^{\\mathsf T}q\\ge0$ and $b^{\\mathsf T}q<0$. If the minimum is zero, the extraction procedure returns an equivalent full-row-rank reduced system with a basic feasible solution using only original columns; zero-valued artificial basic variables are either pivoted out or their redundant equations are removed.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "The third right-hand side is negative, so $D=\\operatorname{diag}(1,1,-1)$ gives $\\widetilde A=DA=\\begin{bmatrix}1&0&0\\\\0&1&0\\\\1&1&-1\\end{bmatrix}$ and $\\widetilde b=Db=(1,1,3)^{\\mathsf T}$. The Phase I point $x=(1,1,0)$, $u=(0,0,1)$ satisfies $\\widetilde A x+u=\\widetilde b$ and has objective $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "The Phase I dual vector $y=(-1,-1,1)$ satisfies $\\widetilde A^{\\mathsf T}y=(0,0,-1)^{\\mathsf T}\\le0$ and $\\widetilde b^{\\mathsf T}y=1$. For any Phase I feasible $(x,u)$, its objective $\\mathbf1^{\\mathsf T}u$ is at least $\\widetilde b^{\\mathsf T}y=1$ by multiplying the constraints by $y$ and using $\\widetilde A^{\\mathsf T}y\\le0$, $u\\ge0$, and $y\\le\\mathbf1$. Thus the displayed feasible point attains the Phase I optimum $1>0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "The original Farkas vector is $q=-D^{\\mathsf T}y=(1,1,1)$. Direct calculation gives $A^{\\mathsf T}q=(0,0,1)^{\\mathsf T}\\ge0$ and $b^{\\mathsf T}q=1+1-3=-1<0$. Hence no $x\\ge0$ can satisfy $Ax=b$, as also follows from [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example proves the fixed PhaseI optimum is1 and gives q=(1,1,1) with A transpose q>=0 and b transpose q=-1. The witness fixes three equations and three original nonnegative variables, with the displayed augmented feasible point(x,u); its infeasible ORIGINAL set is the conclusion, not an assumed nonempty feasible input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The displayed Phase I feasible point has two zero artificial coordinates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example has three finite equations and exact rational data."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example proves the fixed PhaseI optimum is1 and gives q=(1,1,1) with A transpose q>=0 and b transpose q=-1. Verification step 1.2 proves a strictly positive PhaseI minimum1. Step 2.1 then yields a strict negative Farkas product-1, so no near-zero numerical value is treated as an exact certificate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example proves the fixed PhaseI optimum is1 and gives q=(1,1,1) with A transpose q>=0 and b transpose q=-1. The artificial objective is exactly1 in this fixed witness, so there is no unexamined zero-optimum extraction or parameter endpoint branch; Verification step 2.1 handles its positive optimum."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The certificate is computed directly; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example proves the fixed PhaseI optimum is1 and gives q=(1,1,1) with A transpose q>=0 and b transpose q=-1. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example proves the fixed PhaseI optimum is1 and gives q=(1,1,1) with A transpose q>=0 and b transpose q=-1. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact-phase-one-primal-dual-check",
+          "method": "Exact rational multiplication of the displayed matrices and vectors.",
+          "result": "The Phase I point has objective 1 and y=(-1,-1,1) has dual value 1; q=(1,1,1) satisfies A^Tq=(0,0,1)>=0 and b^Tq=-1."
+        }
+      ]
+    },
+    "alg-revised-simplex-qr-basis-recompute-and-audit": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition empty-basis m=0 branch; theorem step1.1 handles zero-dimensional residuals directly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition budgetK=0 returns budget-exhausted before factorization; zero RHS/solution and exact-zero audit follow the source zero conventions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits m=1 and sourcegamma_(m+3) bounds; theorem steps1.1–3.1 apply with a1by1exact orthogonal representative."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition never treats unresolved zero signs/ratio ties as valid floating pivots; exact existing driver transitions remain admissible, with pivot-inconclusive otherwise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition enclosure paragraph and Step 5: Closed rational interval endpoint operations enclose exact coordinates/reduced costs/ratios. Denominators containing zero are rejected; endpoint signs/order establish admission, unresolved comparisons stop or use exact inverse ratios; q=1 is excluded and q=0 permitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition gives finite basis/RHS loops, exact rational interval endpoint operations, finite comparisons, and bounded basis-evaluation attempts; no infinite choice or unbounded norm oracle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition admits an exact-witness primal record only after primal feasibility, least-index negative reduced cost, positive eligible direction and the ratio/tie tests all hold; it explicitly lists the corresponding dual predicate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition makes those exact-witness predicates the admission rule in both modes; enclosure mode admits only when every required sign/comparison/tie is proved. Failed or unresolved predicates retain the current basis and return inconclusive, as Step5 specifies."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read entire current Definition, exact primal/dual drivers, arithmetic model, scaled reflector procedure/local coefficient, computed least-squares and rounded-residual suppliers. Real square D and transpose satisfy source dimensions; all gamma denominators positive under stated success restrictions. Reflector order, column overwrite, separate RHS replay and descending substitution match actual suppliers. Exact G or row-sum H,q witness establishes validity; M_D>=||H_D||inf/(1-q_D) yields inverse bound. Rational L1 norm upper bounds and monotone enlarged kappa give a finite certificate. Intervals divide only away from zero and establish every sign/order/tie or stop; exact fallback checks current basis. K=0, m=0, invalid input, numerical failure, ambiguous signs and fresh validity witnesses checked. Sole direct theorem consumer reviewed; no other actual references found needing repair. No rounded dense Q, unbounded refinement oracle, forward accuracy or false infeasibility imported."
+      }
+    },
+    "thm-revised-simplex-qr-basis-residual-status-sound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-revised-simplex-qr-basis-recompute-and-audit",
+          "source_section": "Definition",
+          "quote": "Input finite stored binary data for the standard-form LP of [[def-revised-simplex-basis-dictionary]], with full-row-rank $A\\in\\mathbb R^{m\\times n}$, a candidate ordered basis $B$ of $m$ distinct in-range indices, and a nonnegative integer budget $K$ of basis evaluations. Stored values represent their exact dyadic rationals. Invalid dimensions, nonfinite inputs or repeated/out-of-range basis indices return `invalid-input`. Nonsingularity of $C=A_B$ must be established as part of an admitted basis input; a numerical rank threshold is not such an establishment. A basis whose validity is unavailable returns `basis-validity-inconclusive`.\n\nA caller may request a primal or dual simplex transition after an audit, or only an audit. It may supply a finite sequence of transition records, one for each requested basis replacement, from [[alg-revised-primal-simplex-bland-rule]] or [[alg-revised-dual-simplex-with-finite-budget]]. A transition record has fields `mode` (primal or dual), `basis_before` (the ordered current basis, with its validity witness), `leaving_position` $i$, and `entering_index` $j$; it is checked rather than trusted as already verified. The initial basis and each record's `basis_before` must carry the validity witness described here. After a replacement, its checked nonzero pivot coefficient establishes the new basis; any next transition record must carry its own checked validity witness.\n\nAn admitted basis input includes either an exact rational inverse witness $G$ with $CG=GC=I_m$, checked exactly, or a rational matrix $H$ and rational $q$ with $0\\le q<1$ and $\\|I_m-HC\\|_\\infty\\le q$, also checked exactly. For matrices with at least one row, $\\|M\\|_\\infty=\\max_i\\sum_j|M_{ij}|$; the empty matrix has norm $0$. For vectors it is the maximum absolute coordinate, with empty value $0$. For $m=0$, the empty inverse witness satisfies the identities. If neither validity certificate is verified, return `basis-validity-inconclusive` before factorization. A numerical rank threshold is never a validity certificate.\n\nWith an exact inverse witness, first compare `basis_before` with the current ordered basis exactly. Then check a transition by exact rational arithmetic: compute $x_B=Gb$, $y=G^{\\mathsf T}c_B$, $d_k=Ga_k$ for every nonbasic $k$, and $\\bar c_k=c_k-a_k^{\\mathsf T}y$. A primal record is admissible exactly when $x_B\\ge0$, $j$ is the least-index nonbasic column with $\\bar c_j<0$, some $d_{rj}>0$, and $i$ minimizes $x_{B_r}/d_{rj}$ over rows with $d_{rj}>0$, with ties resolved by least basic-variable index. A dual record is admissible exactly when every nonbasic $\\bar c_k\\ge0$, $B_i$ is the least-index basic variable with $x_{B_i}<0$, $d_{ij}<0$, and $j$ minimizes $\\bar c_k/(-d_{ik})$ over nonbasic $k$ with $d_{ik}<0$, with ties resolved by least variable index. In either case, the checked nonzero pivot coefficient proves the replacement basis nonsingular.\n\nCertified rational enclosures may instead establish a transition. For each current $D=C$ and $D=C^{\\mathsf T}$, provide rational $H_D,q_D,M_D$ with $0\\le q_D<1$, $\\|I_m-H_DD\\|_\\infty\\le q_D$, and $M_D\\ge\\|H_D\\|_\\infty/(1-q_D)$; verify these inequalities exactly. For each solve $Dz=r$, combine its returned candidate $\\widehat z$ and a rational upper bound $\\eta$ for its Step 3 residual bound to form the coordinate intervals $[\\widehat z_\\ell-M_D\\eta,\\widehat z_\\ell+M_D\\eta]$. For closed rational intervals $I=[a,b]$ and $J=[c,d]$, use $I+J=[a+c,b+d]$, $I-J=[a-d,b-c]$, $IJ=[\\min\\{ac,ad,bc,bd\\},\\max\\{ac,ad,bc,bd\\}]$, and $I/J=I\\cdot[\\min\\{1/c,1/d\\},\\max\\{1/c,1/d\\}]$ when $0\\notin J$; division is undefined otherwise. Evaluate dot products, reduced costs, and ratio expressions with these exact rational endpoint operations. First compare `basis_before` with the current ordered basis exactly. An interval proves a sign or order only when its endpoints imply that relation. If a ratio comparison is not decided by interval endpoints, return `pivot-inconclusive` unless an exact inverse witness $G$ is supplied for the current basis; with $G$, compute the exact rational ratios and compare them exactly, resolving equality by the least-index rule. Admit the record only when the required signs and comparisons, including all least-index rules, are proved. If a needed sign, ratio comparison, or basis match is not established, return `pivot-inconclusive` with the current basis and its last completed audit, without changing the basis.\n\nFor $m\\ge1$, use the operationwise arithmetic of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], with $0<u<1$, $mu<1$, $(m+3)u<1$, and $\\gamma_{m+3}<1/8$. All nonzero exact intermediates must be normal. Norms and certificate expressions below are evaluated exactly or by certified upward bounds; failure to obtain a finite valid bound is a numerical failure. Process the following loop:\n\n1. Maintain an attempt counter $t$, initially $0$. If $t=K$, return `budget-exhausted` with the current basis, the last completed audit if any, and the basis to which that audit belongs. Otherwise set $t\\leftarrow t+1$ before starting this basis evaluation. Every budget, numerical-failure, basis-validity-inconclusive, or pivot-inconclusive return includes the current basis and identifies the basis associated with any retained audit; state explicitly when no audit exists.\n2. Separately for $D=C=A_B$ and $D=C^{\\mathsf T}$, copy the current stored entries into a working matrix $W$. For $k=1,\\ldots,m$, set $r=m-k+1$, take the active column $x=W_{k:m,k}$ and trailing block $T=W_{k:m,k+1:m}$, and call [[alg-scaled-householder-reflector-formation-and-application]] once on $(x,T)$. On success, save its reflector data and replace the active block $W_{k:m,k:m}$ by its returned output, which writes the new diagonal entry and exact zeros below it; leave earlier rows and columns unchanged. If $x=0$, save an identity marker and leave the trailing block unchanged. Stop with `numerical-failure` at the first failed call, recording the factorization, column $k$, and failure stage. The final $W$ is the computed upper-triangular factor $\\widehat R_D$.\n\n   To apply these stored reflectors to any right-hand side $s$, start with $z=s$ and visit $k=1,\\ldots,m$ in that same order. Skip an identity marker. Otherwise, on the active suffix $z_{k:m}$ compute the sequential rounded dot $d=\\operatorname{fl}(v_k^{\\mathsf T}z_{k:m})$, then $p=\\operatorname{fl}(\\widehat\\tau_k v_k)$, $u=\\operatorname{fl}(p\\,d)$ componentwise, and $z_{k:m}=\\operatorname{fl}(z_{k:m}-u)$ componentwise, using the operation order of [[alg-scaled-householder-reflector-formation-and-application]] without a column overwrite. Stop at the first failure and record the right-hand side, reflector index, and failure stage. For $Dz=s$, apply this replay to obtain the transformed right-hand side and solve $\\widehat R_D\\widehat z=z$ by descending substitution: for $i=m,\\ldots,1$, sequentially compute $t_i=\\operatorname{fl}(\\sum_{j=i+1}^m(\\widehat R_D)_{ij}\\widehat z_j)$, $h_i=\\operatorname{fl}(z_i-t_i)$, and $\\widehat z_i=\\operatorname{fl}(h_i/(\\widehat R_D)_{ii})$. A zero diagonal or any failed operation returns `numerical-failure` with the solve and row index. Reuse the $C$ factorization for $\\widehat x_B$ and every nonbasic direction $\\widehat d_j$; reuse the $C^{\\mathsf T}$ factorization for $\\widehat y$. Never substitute a rounded dense orthogonal product for the exact orthogonal representative in the proof. After every admitted basis replacement discard both factorizations and recompute; no rank-one factorization-update implementation is claimed.\n3. Independently certify each returned solve for its actual current matrix $D=C$ or $C^{\\mathsf T}$ and right-hand side $r$. Compute $\\widehat v=\\operatorname{fl}(D\\widehat z)$ and $\\widehat w=\\operatorname{fl}(\\widehat v-r)$ by the sequential products/subtraction of [[lem-rounded-linear-and-normal-residual-certificates]]. Put\n$$g_m=\\frac{1+6u}{1-(m-1)u}-1,\\qquad W=g_m\\|D\\|_F\\|\\widehat z\\|_2+u(\\|\\widehat v\\|_2+\\|r\\|_2).$$\nWith the local coefficient $\\kappa_m$ of [[lem-scaled-householder-step-meets-local-backward-error-premise]], put\n$$\\beta=(1+\\kappa_m)^m-1,\\qquad \\beta_D=\\beta+\\gamma_{m+3}(1+\\beta),$$\nand report the valid upper bound\n$$\\eta(D,r,\\widehat z)=\\min\\{\\|\\widehat w\\|_2+W,\\ \\beta_D\\|D\\|_F\\|\\widehat z\\|_2+\\beta\\|r\\|_2\\}.$$\nA finite concrete certificate option uses exact rational arithmetic on the stored dyadic entries and a rational upper bound for $u$ satisfying all displayed admissibility inequalities. Use $\\|v\\|_2\\le\\sum_i|v_i|$ and $\\|D\\|_F\\le\\sum_{i,j}|D_{ij}|$ as rational upper bounds for every norm in the two nonnegative expressions. For the local coefficient, substitute $\\bar e_m=(1+u)^{m+3}-1$ for $e_m=(1+u)^{m/2+3}-1$ in the source formula: put $\\bar d_m=\\bar e_m+u(2+\\bar e_m)$, $a_m=(1+u)/(1-u)^m-1$, $g_m^{\\rm QR}=mu/(1-mu)$, $c_m=2((1+a_m)(1+u)^2(1+g_m^{\\rm QR})-1)$, and $\\bar\\kappa_m=\\max\\{\\bar e_m+8\\bar d_m,(1+u)c_m+3u\\}$. These are rational upper bounds because $m+3\\ge m/2+3$ and all constituent nonnegative formulas increase in their arguments. Then $\\bar\\beta=(1+\\bar\\kappa_m)^m-1$ and $\\bar\\beta_D=\\bar\\beta+\\gamma_{m+3}(1+\\bar\\beta)$ are rational upper bounds for the QR coefficients. Compute both candidate bounds by finite exact rational sums/products/powers and take their minimum as the returned $\\eta$. This implements the certificate without a norm oracle; other finite certified upper-bound procedures are allowed. Any factorization, substitution, dot, subtraction, range or certificate failure returns `numerical-failure`, with its stage and the last completed audit; it returns no certificate for the failed solve.\n4. Embed $\\widehat x_B$ in $\\widehat x\\in\\mathbb R^n$ with zero nonbasic entries, and call [[alg-revised-simplex-residual-audit]] on these actual stored $\\widehat x,\\widehat y$. Retain its exact $r_p=A\\widehat x-b$, $r_d=c-A^{\\mathsf T}\\widehat y$, objective difference $g$, and audit status together with all solve residual bounds. `basis-solves-residual-certified` means only that the returned bounds certify those linear equations; any requested thresholds must also be checked before declaring them met. `verified-optimal-for-stored-data` is issued only by the exact audit's primal/sign/zero-gap checks. Other completed candidates remain `candidate-only`; small residuals or a failed/ambiguous pivot never certify infeasibility.\n5. Return if audit-only mode or the caller has no further transition. Otherwise compare the next record with the current basis and apply the exact or enclosure admission predicate above. A failed or unresolved predicate returns `pivot-inconclusive` or `basis-validity-inconclusive`, retaining the current basis and last completed audit. On admission, replace position $i$ by $j$, discard both factorizations, and continue at Step 1. Exact driver invariants remain those of the existing driver, not consequences of successful floating solves.\n\nFor $m=0$, skip QR and substitution: the basis and multiplier are empty, every direction is the empty vector, and their basis-equation residuals and solve bounds $\\eta$ are zero. Evaluate the existing exact audit with $\\widehat x=0$; no basis replacement is possible. The budget and invalid-input branches remain in force.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1",
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-computed-full-rank-least-squares-backward-stability",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{m\\times n}$, $m\\ge n\\ge1$, have full column rank. Successful scaled Householder QR gives the exactly orthonormal reduced representative $\\widehat Q$ and computed triangular $\\widehat R$ with\n$$A+\\Delta_Q=\\widehat Q\\widehat R,\\qquad \\|\\Delta_Q\\|_F\\le\\beta_Q\\|A\\|_F,\\qquad \\beta_Q=(1+\\kappa_m)^n-1,$$\nwhere $\\kappa_m$ is the proved local-step coefficient. Apply the stored reflectors to $b$ by rounded rank-one updates and let $\\widehat y$ be the first $n$ coordinates. Set $\\beta_b=\\beta_Q$. Alternatively, if an explicitly supplied exactly orthonormal $\\widehat Q$ has entries admissible as arithmetic inputs and $\\widehat y=\\operatorname{fl}(\\widehat Q^Tb)$ uses sequential rounded dots, set $\\beta_b=\\sqrt n\\,\\gamma_m$. Solve $\\widehat R\\widehat x=\\widehat y$ by successful rounded back substitution. Suppose $mu<1$ and $\\gamma_{n+3}<1/8$. There exist $\\delta b$ and upper triangular $\\Delta R$ with\n$$(\\widehat R+\\Delta R)\\widehat x=\\widehat Q^T(b+\\delta b),\\qquad \\|\\delta b\\|_2\\le\\beta_b\\|b\\|_2,\\qquad \\|\\Delta R\\|_F\\le\\gamma_{n+3}\\|\\widehat R\\|_F.$$\nIf $\\widehat R+\\Delta R$ is nonsingular, $\\widehat x$ is the unique least-squares solution for $\\widetilde A=\\widehat Q(\\widehat R+\\Delta R)$ and $\\widetilde b=b+\\delta b$. The relative matrix perturbation is at most $\\beta_Q+\\gamma_{n+3}(1+\\beta_Q)$; the right-hand perturbation is at most $\\beta_b$. For fixed $m,n$, both perturbation coefficients are $O(u)$. If additionally $\\beta_Q\\le19\\gamma_{n+3}/(1+\\gamma_{n+3})$ and $\\beta_b\\le20\\gamma_{n+3}$, both relative data perturbation bounds are at most $20\\gamma_{n+3}$. These two coefficient comparisons are additional checks; they do not follow from $mu<1$ and $\\gamma_{n+3}<1/8$ alone. Success and nonsingularity are explicit hypotheses.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-rounded-linear-and-normal-residual-certificates",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, $x\\in\\mathbb F^n$, $y\\in\\mathbb F^m$ have stored real or complex entries, with $m,n\\ge1$. Use the operationwise arithmetic model, successful sequential dot products, and $0<u<1$ with $(\\max(m,n)-1)u<1$. Define\n$$g_k=\\frac{1+6u}{1-(k-1)u}-1,\\qquad F=\\|A\\|_F,\\quad X=\\|x\\|_2,\\quad Y=\\|y\\|_2.$$\nFor $\\widehat v=\\operatorname{fl}(Ax)$ and $\\widehat w=\\operatorname{fl}(\\widehat v-y)$, put $V=g_nFX$ and $W=V+u(\\|\\widehat v\\|_2+Y)$. Then\n$$\\|\\widehat w-(Ax-y)\\|_2\\le W.$$\nFor a stored real $\\lambda>0$, also compute $\\widehat z=\\operatorname{fl}(A^*\\widehat w)$, $\\widehat l=\\operatorname{fl}(\\lambda x)$ and $\\widehat r=\\operatorname{fl}(\\widehat z+\\widehat l)$, rounding scalar multiplication componentwise. The exact intended normal residual $r=A^*(Ax-y)+\\lambda x$ satisfies\n$$\\|\\widehat r-r\\|_2\\le\\rho:=FW+g_mF\\|\\widehat w\\|_2+u\\lambda X+u(\\|\\widehat z\\|_2+\\|\\widehat l\\|_2).$$\nNorms in these certificates mean exact norms or certified upper bounds. Uncontrolled rounding of the certificate itself is not authorized. The linear bound applies columnwise to certify $\\|I-AB\\|_2\\le\\|I-AB\\|_F$ from stored basis-solve columns $B$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-revised-simplex-primal-dual-residual-gap",
+          "source_section": "Statement",
+          "quote": "For a real standard-form problem with $A\\in\\mathbb R^{m\\times n}$ and candidate vectors $x\\in\\mathbb R^n$, $y\\in\\mathbb R^m$, define $r_p=Ax-b$, $r_d=c-A^{\\mathsf T}y$, and $g=c^{\\mathsf T}x-b^{\\mathsf T}y$. When the data and candidates are finite stored binary floating-point values, [[alg-revised-simplex-residual-audit]] computes precisely these quantities, interpreting the stored values as exact dyadic rationals. For all the stated real data,\n$$g=x^{\\mathsf T}r_d+y^{\\mathsf T}r_p,$$\nand consequently\n$$|g|\\le \\|x\\|_1\\|r_d\\|_\\infty+\\|y\\|_1\\|r_p\\|_\\infty.$$\nHere $\\|z\\|_1=\\sum_i|z_i|$ and $\\|z\\|_\\infty=\\max_i|z_i|$, with both norms equal to zero on the empty vector. This bounds the primal-dual objective difference; when either vector is infeasible it does not bound distance to an optimal value. If $Ax=b$, $x\\ge0$, $c-A^{\\mathsf T}y\\ge0$, and $g=0$, then $x$ is optimal.",
+          "uses": [
+            "5.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "For m=0 the empty basis is nonsingular. For m>=1, an exact inverse witness proves C nonsingular; otherwise ||I-HC||_infinity<=q<1 gives (1-q)||v||_infinity<=||HCv||_infinity, hence HC and C are nonsingular. If M>=||H||_infinity/(1-q), then ||(HC)^-1||_infinity<=1/(1-q) and C^-1=(HC)^-1 H gives ||C^-1||_infinity<=M. The same argument applies to each separately checked D=C or C^T witness.",
+          "inputs": [
+            "F1",
+            "given",
+            "cases",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For m>=1, step 1.1 makes D nonsingular and full column rank. The computed least-squares stability theorem supplies a square orthogonal representative and triangular perturbation equations. Since Qhat Qhat^T=I, multiplication gives (D+Delta_D) zhat=r+delta r with Delta_D=Delta_Q+Qhat Delta_R; no perturbed triangular nonsingularity is needed.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "cases",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Orthogonal invariance gives ||Rhat||_F=||D+Delta_Q||_F<=(1+beta)||D||_F, hence ||Delta_D||_F<=beta_D||D||_F. Rearranging the perturbed equation bounds ||D zhat-r||_2 by beta||r||_2+beta_D||D||_F||zhat||_2.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "The rounded-residual allowance gives an independent upper bound ||D zhat-r||_2<=||what||_2+W. Both terms in eta are therefore upper bounds, as is their minimum. The induced-norm inequality gives the conditional forward bound. In interval mode, ||D^-1||_infinity<=M_D and ||residual||_infinity<=||residual||_2<=eta imply each exact coordinate lies within M_D eta of zhat.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "The exact rational interval endpoint rules enclose sums, differences, products, and quotients with denominator intervals avoiding zero, so finite expressions enclose their exact reduced costs and ratios. A sign/order established by endpoints is true of the enclosed values; unresolved ratios require an exact inverse comparison or return inconclusive. Each admitted record thus satisfies its exact pivot rule. Replacing column i by a_j gives C^-1 A_Bprime equal to the identity with column i replaced by d, so det(A_Bprime)=det(C)d_i is nonzero.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.2",
+          "step": "5.2",
+          "claim": "The completed audit uses the actual stored candidate and LP data. The primal-dual gap theorem gives its identity, norm bound, and conditional optimality; no other status certifies optimality or infeasibility.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "All QR, solve, residual, exact audit, and transition-verification loops have finite ranges. Before each attempt the counter increases and the algorithm stops at K attempts; unresolved conditions return inconclusive. Therefore it terminates with the defined current-basis result or failure status.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 5.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition empty-basis m=0 branch; proof steps1.1–2.1 handle zero-dimensional basis validity and solve residuals."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition budgetK=0 returns budget-exhausted before factorization; zero RHS/solution and exact-zero audit follow the source zero conventions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits m=1 and sourcegamma_(m+3) bounds; theorem steps1.1–3.1 apply with a1by1exact orthogonal representative."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition never treats unresolved zero signs/ratio ties as valid floating pivots; exact existing driver transitions remain admissible, with pivot-inconclusive otherwise."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or biconditional claim is made in the Statement/Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition has finite basis/RHS requests, exact rational interval operations, and a finite attempt budget; proof step6.1 establishes termination."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or biconditional claim is made in the Statement/Definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or biconditional claim is made in the Statement/Definition."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read all seven current steps and every F1–F4 supplier. H,q contraction gives injectivity and square inverse with induced infinity bound. Exact square orthogonal QR representative transports triangular perturbation without assuming perturbed R nonsingular; beta_D and independent rounded residual allowance both bound actual current solve residual, hence their minimum does. Inverse norm gives conditional forward bound and M_D eta gives coordinate enclosures. Rational interval induction, exact tie fallback and det(A_Bprime)=det(C)d_i prove every admitted transition; unresolved cases stop. Audit gap/optimality use actual stored data. Attempt counter bounds all finite loops by K evaluations including failures. m=0/K=0 and zero candidate branches checked; no conditioning or optimum-success claim."
+      }
+    }
+  }
+}

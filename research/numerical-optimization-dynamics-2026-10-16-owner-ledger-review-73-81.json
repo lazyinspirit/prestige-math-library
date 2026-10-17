@@ -1,0 +1,1001 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "reviewer": "/root/num_ledger_73_81",
+  "recorded_at": "2026-10-16T06:10:43.636313+00:00",
+  "scope_batches": [
+    "73",
+    "74",
+    "75",
+    "76",
+    "77",
+    "78",
+    "79",
+    "80",
+    "81"
+  ],
+  "mode": "Read-only focused interface checks; new research evidence only; no whole-proof audit or canonical-ledger mutation",
+  "intake": "research/numerical-optimization-dynamics-2026-10-16-owner-cross-batch-ledger-intake-20261016T060507927Z.json",
+  "counts": {
+    "owed_declared_edges": 33,
+    "verified": 33,
+    "open": 0,
+    "original_context_dispositions": 1,
+    "bad_original_rows_mapped": 3
+  },
+  "reviews": [
+    {
+      "kind": "item",
+      "consumer": "cex-saga-linear-factor-fails-under-standard-initialization",
+      "supplier": "def-strong-convex-composite-objective",
+      "consumer_batch": "73",
+      "supplier_batch": "27",
+      "status": "verified",
+      "evidence": "Supplier Definition requires proper convex F and strong Jensen decrement mu/2. Consumer F2 and counterexample step 1.1 expand x^2/2 exactly to theta(1-theta)(x-y)^2/2, establishing mu=1 on all R; the finite quadratic is proper with full domain. No differentiable-gradient equivalence is imported.",
+      "inspected_paths": [
+        "items/cex-saga-linear-factor-fails-under-standard-initialization.md",
+        "items/def-strong-convex-composite-objective.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[329]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "item",
+      "consumer": "alg-index-one-dae-consistent-initialization",
+      "supplier": "alg-finite-budget-newton-for-vector-residuals",
+      "consumer_batch": "75",
+      "supplier_batch": "3",
+      "status": "verified",
+      "evidence": "Newton Definition accepts a C1 square residual on an open domain, checks residual before budget and returns last valid iterate/status. Initialization Definition calls it on G(z)=g(t0,x0,z) in the open branch chart with tolerance epsilon_a and finite N; it preserves failure statuses and separately reevaluates exact consistency. Tolerance-root is never promoted to exact zero.",
+      "inspected_paths": [
+        "items/alg-index-one-dae-consistent-initialization.md",
+        "items/alg-finite-budget-newton-for-vector-residuals.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[330]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[0]",
+          "consumers": [
+            "alg-index-one-dae-consistent-initialization",
+            "alg-index-one-dae-backward-euler-stepper",
+            "alg-index-one-dae-bdf2-stepper",
+            "thm-index-one-dae-finite-budget-solvers-terminate"
+          ],
+          "suppliers": [
+            "alg-finite-budget-newton-for-vector-residuals",
+            "alg-newton-correction-for-vector-residuals"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read the complete current batch-3 Definitions of alg-finite-budget-newton-for-vector-residuals and alg-newton-correction-for-vector-residuals. The DAE wrappers retain their residual-first budget/status semantics and exact block correction; no convergence theorem is imported.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "alg-index-one-dae-backward-euler-stepper",
+      "supplier": "def-backward-euler-step-equation",
+      "consumer_batch": "75",
+      "supplier_batch": "65",
+      "status": "verified",
+      "evidence": "Backward Euler Definition is endpoint z=y+h f(t+h,z), with no existence/uniqueness promise. DAE stepper Definition uses the same endpoint time and differential block X-Xprev-h f(tn,X,Z), then adds g(tn,X,Z) and explicit Newton status. Coupled root solvability is not inferred from the ODE definition.",
+      "inspected_paths": [
+        "items/alg-index-one-dae-backward-euler-stepper.md",
+        "items/def-backward-euler-step-equation.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[331]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[1]",
+          "consumers": [
+            "alg-index-one-dae-backward-euler-stepper",
+            "alg-index-one-dae-bdf2-stepper",
+            "thm-index-one-dae-backward-euler-first-order-with-residuals",
+            "ex-index-one-circuit-consistent-initialization-and-be-step"
+          ],
+          "suppliers": [
+            "def-backward-euler-step-equation",
+            "def-implicit-residual-and-algebraic-error-units"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read the complete Definitions of def-backward-euler-step-equation and def-implicit-residual-and-algebraic-error-units. The DAE carriers use the same update/derivative units and enforce g=0 separately; their local residual-to-state estimate is proved in batch 75.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "alg-index-one-dae-backward-euler-stepper",
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "consumer_batch": "75",
+      "supplier_batch": "65",
+      "status": "verified",
+      "evidence": "Residual-units Definition distinguishes update G and derivative G/h and denies residual-to-forward-error without inverse estimates. DAE stepper Definition divides its differential update block by h eta_d, algebraic block by eta_a, so concatenated norm <=1 implies derivative norm <=eta_d and algebraic norm <=eta_a. It makes no accuracy or exact-root promise.",
+      "inspected_paths": [
+        "items/alg-index-one-dae-backward-euler-stepper.md",
+        "items/def-implicit-residual-and-algebraic-error-units.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[332]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[1]",
+          "consumers": [
+            "alg-index-one-dae-backward-euler-stepper",
+            "alg-index-one-dae-bdf2-stepper",
+            "thm-index-one-dae-backward-euler-first-order-with-residuals",
+            "ex-index-one-circuit-consistent-initialization-and-be-step"
+          ],
+          "suppliers": [
+            "def-backward-euler-step-equation",
+            "def-implicit-residual-and-algebraic-error-units"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read the complete Definitions of def-backward-euler-step-equation and def-implicit-residual-and-algebraic-error-units. The DAE carriers use the same update/derivative units and enforce g=0 separately; their local residual-to-state estimate is proved in batch 75.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "alg-index-one-dae-backward-euler-stepper",
+      "supplier": "alg-finite-budget-newton-for-vector-residuals",
+      "consumer_batch": "75",
+      "supplier_batch": "3",
+      "status": "verified",
+      "evidence": "Newton Definition residual-first finite budget B, tolerance root, singular/domain/budget exits are retained in the BE stepper call on the (d+m)-square scaled residual in an open selected tube. The wrapper uses tolerance 1, records both residual blocks only after root status and stops on failure; it does not assert arbitrary-seed convergence.",
+      "inspected_paths": [
+        "items/alg-index-one-dae-backward-euler-stepper.md",
+        "items/alg-finite-budget-newton-for-vector-residuals.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[333]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[0]",
+          "consumers": [
+            "alg-index-one-dae-consistent-initialization",
+            "alg-index-one-dae-backward-euler-stepper",
+            "alg-index-one-dae-bdf2-stepper",
+            "thm-index-one-dae-finite-budget-solvers-terminate"
+          ],
+          "suppliers": [
+            "alg-finite-budget-newton-for-vector-residuals",
+            "alg-newton-correction-for-vector-residuals"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read the complete current batch-3 Definitions of alg-finite-budget-newton-for-vector-residuals and alg-newton-correction-for-vector-residuals. The DAE wrappers retain their residual-first budget/status semantics and exact block correction; no convergence theorem is imported.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "alg-index-one-dae-bdf2-stepper",
+      "supplier": "alg-variable-step-bdf2-with-selected-implicit-branch",
+      "consumer_batch": "75",
+      "supplier_batch": "36",
+      "status": "verified",
+      "evidence": "Variable-step BDF2 Definition at ratio r=1 has numerator 3X-4Xprev+Xprevprev and denominator 2h. DAE BDF2 Definition uses exactly those coefficients and adds the algebraic equation. It explicitly disclaims finding the exact selected branch root: finite Newton acceptance is residual-only, so the supplier exact-root branch rule is not silently claimed.",
+      "inspected_paths": [
+        "items/alg-index-one-dae-bdf2-stepper.md",
+        "items/alg-variable-step-bdf2-with-selected-implicit-branch.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[334]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[2]",
+          "consumers": [
+            "alg-index-one-dae-bdf2-stepper",
+            "lem-index-one-dae-bdf2-local-branch",
+            "thm-index-one-dae-bdf2-second-order-with-residuals"
+          ],
+          "suppliers": [
+            "alg-variable-step-bdf2-with-selected-implicit-branch",
+            "lem-variable-step-bdf2-interpolation-and-local-defect"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read both actual batch-36 bodies and their complete arguments. Batch 75 uses the ratio-one coefficient/local-defect interface and separately proves the DAE branch, residual perturbation, and error recurrence.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "alg-index-one-dae-bdf2-stepper",
+      "supplier": "lem-variable-step-bdf2-interpolation-and-local-defect",
+      "consumer_batch": "75",
+      "supplier_batch": "36",
+      "status": "verified",
+      "evidence": "Interpolation supplier Statement gives denominator h(1+r) and coefficients (1+2r),-(1+r)^2,r^2. At ratio one these are 2h and 3,-4,1, precisely the DAE stepper differential residual. The procedural definition imports coefficients only, not a variable-ratio convergence theorem or cubic-error success guarantee.",
+      "inspected_paths": [
+        "items/alg-index-one-dae-bdf2-stepper.md",
+        "items/lem-variable-step-bdf2-interpolation-and-local-defect.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[335]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[2]",
+          "consumers": [
+            "alg-index-one-dae-bdf2-stepper",
+            "lem-index-one-dae-bdf2-local-branch",
+            "thm-index-one-dae-bdf2-second-order-with-residuals"
+          ],
+          "suppliers": [
+            "alg-variable-step-bdf2-with-selected-implicit-branch",
+            "lem-variable-step-bdf2-interpolation-and-local-defect"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read both actual batch-36 bodies and their complete arguments. Batch 75 uses the ratio-one coefficient/local-defect interface and separately proves the DAE branch, residual perturbation, and error recurrence.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "alg-index-one-dae-bdf2-stepper",
+      "supplier": "def-implicit-residual-and-algebraic-error-units",
+      "consumer_batch": "75",
+      "supplier_batch": "65",
+      "status": "verified",
+      "evidence": "Residual-units Definition scales update residual by a positive step scale and requires a separate inverse/stability estimate for forward error. DAE BDF2 Definition explicitly divides its numerator by 2h eta_d, separately scales g by eta_a and labels accepted residual bounds only; the scale is 2h, not h.",
+      "inspected_paths": [
+        "items/alg-index-one-dae-bdf2-stepper.md",
+        "items/def-implicit-residual-and-algebraic-error-units.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[336]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[1]",
+          "consumers": [
+            "alg-index-one-dae-backward-euler-stepper",
+            "alg-index-one-dae-bdf2-stepper",
+            "thm-index-one-dae-backward-euler-first-order-with-residuals",
+            "ex-index-one-circuit-consistent-initialization-and-be-step"
+          ],
+          "suppliers": [
+            "def-backward-euler-step-equation",
+            "def-implicit-residual-and-algebraic-error-units"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read the complete Definitions of def-backward-euler-step-equation and def-implicit-residual-and-algebraic-error-units. The DAE carriers use the same update/derivative units and enforce g=0 separately; their local residual-to-state estimate is proved in batch 75.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "alg-index-one-dae-bdf2-stepper",
+      "supplier": "alg-finite-budget-newton-for-vector-residuals",
+      "consumer_batch": "75",
+      "supplier_batch": "3",
+      "status": "verified",
+      "evidence": "Newton Definition permits finite B and residual-first loop with at most B corrections and B+1 evaluations. DAE BDF2 Definition calls the supplier on the scaled square coupled residual with tolerance 1 in a selected open tube, preserves singular/invalid/budget statuses, and records one additional evaluation on root. No exact-root or convergence claim is imported.",
+      "inspected_paths": [
+        "items/alg-index-one-dae-bdf2-stepper.md",
+        "items/alg-finite-budget-newton-for-vector-residuals.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[337]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[0]",
+          "consumers": [
+            "alg-index-one-dae-consistent-initialization",
+            "alg-index-one-dae-backward-euler-stepper",
+            "alg-index-one-dae-bdf2-stepper",
+            "thm-index-one-dae-finite-budget-solvers-terminate"
+          ],
+          "suppliers": [
+            "alg-finite-budget-newton-for-vector-residuals",
+            "alg-newton-correction-for-vector-residuals"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read the complete current batch-3 Definitions of alg-finite-budget-newton-for-vector-residuals and alg-newton-correction-for-vector-residuals. The DAE wrappers retain their residual-first budget/status semantics and exact block correction; no convergence theorem is imported.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-index-one-dae-finite-budget-solvers-terminate",
+      "supplier": "alg-finite-budget-newton-for-vector-residuals",
+      "consumer_batch": "75",
+      "supplier_batch": "3",
+      "status": "verified",
+      "evidence": "Termination consumer F1 and proof 1.1 use exactly Newton evaluation indices 0,...,B and budget exit at B, yielding B+1 residual evaluations and B corrections. Consumer 2.1\u20132.2 accounts separately for one recording reevaluation per root wrapper and finite attempted steps. Supplier termination is finite exact procedure work, not tolerance attainment.",
+      "inspected_paths": [
+        "items/thm-index-one-dae-finite-budget-solvers-terminate.md",
+        "items/alg-finite-budget-newton-for-vector-residuals.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[338]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[0]",
+          "consumers": [
+            "alg-index-one-dae-consistent-initialization",
+            "alg-index-one-dae-backward-euler-stepper",
+            "alg-index-one-dae-bdf2-stepper",
+            "thm-index-one-dae-finite-budget-solvers-terminate"
+          ],
+          "suppliers": [
+            "alg-finite-budget-newton-for-vector-residuals",
+            "alg-newton-correction-for-vector-residuals"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read the complete current batch-3 Definitions of alg-finite-budget-newton-for-vector-residuals and alg-newton-correction-for-vector-residuals. The DAE wrappers retain their residual-first budget/status semantics and exact block correction; no convergence theorem is imported.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-index-one-dae-backward-euler-first-order-with-residuals",
+      "supplier": "def-backward-euler-step-equation",
+      "consumer_batch": "75",
+      "supplier_batch": "65",
+      "status": "verified",
+      "evidence": "Consumer F5 uses endpoint BE Xn=Xprev+h f(tn,Xn), adding the DAE algebraic constraint locally. Proof 3.1 uses the explicitly allowed derivative residual in this endpoint equation, subtracts the exact endpoint defect and derives (1-hL)||e_n|| bound. It does not invoke root existence from the defining supplier.",
+      "inspected_paths": [
+        "items/thm-index-one-dae-backward-euler-first-order-with-residuals.md",
+        "items/def-backward-euler-step-equation.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[339]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[1]",
+          "consumers": [
+            "alg-index-one-dae-backward-euler-stepper",
+            "alg-index-one-dae-bdf2-stepper",
+            "thm-index-one-dae-backward-euler-first-order-with-residuals",
+            "ex-index-one-circuit-consistent-initialization-and-be-step"
+          ],
+          "suppliers": [
+            "def-backward-euler-step-equation",
+            "def-implicit-residual-and-algebraic-error-units"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read the complete Definitions of def-backward-euler-step-equation and def-implicit-residual-and-algebraic-error-units. The DAE carriers use the same update/derivative units and enforce g=0 separately; their local residual-to-state estimate is proved in batch 75.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-index-one-dae-backward-euler-first-order-with-residuals",
+      "supplier": "lem-discrete-one-step-error-recurrence-bound",
+      "consumer_batch": "75",
+      "supplier_batch": "28",
+      "status": "verified",
+      "evidence": "Recurrence lemma requires nonnegative e_n, h=T/N, initial O(h^p), recurrence (1+Lh)e+C h^(p+1). BE proof 3.1 produces this with e_n=||Xn-xbar_n||, p=1, L0=2L, C2 and hL<=1/2; step 4.1 applies it with initial C0 h. Both zero and positive Lipschitz cases are supported.",
+      "inspected_paths": [
+        "items/thm-index-one-dae-backward-euler-first-order-with-residuals.md",
+        "items/lem-discrete-one-step-error-recurrence-bound.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[340]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[3]",
+          "consumers": [
+            "thm-index-one-dae-backward-euler-first-order-with-residuals",
+            "thm-index-one-dae-bdf2-second-order-with-residuals"
+          ],
+          "suppliers": [
+            "lem-discrete-one-step-error-recurrence-bound"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read the complete current batch-28 lemma Statement and Proof. The BE theorem establishes the recurrence locally; the BDF2 theorem first derives its weighted recurrence and then applies the supplier to N-1 steps over interval (N-1)h.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-index-one-dae-bdf2-second-order-with-residuals",
+      "supplier": "alg-variable-step-bdf2-with-selected-implicit-branch",
+      "consumer_batch": "75",
+      "supplier_batch": "36",
+      "status": "verified",
+      "evidence": "BDF2 algorithm at ratio one supplies 3,-4,1 and denominator 2h, used by consumer F3 and proof 2.1 to obtain 3d_n-d_(n-1)=2h(field difference+w_n). The theorem independently assumes accepted residuals/branch and derives stability; it does not assume a finite Newton call meets the exact selected-root rule.",
+      "inspected_paths": [
+        "items/thm-index-one-dae-bdf2-second-order-with-residuals.md",
+        "items/alg-variable-step-bdf2-with-selected-implicit-branch.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[341]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[2]",
+          "consumers": [
+            "alg-index-one-dae-bdf2-stepper",
+            "lem-index-one-dae-bdf2-local-branch",
+            "thm-index-one-dae-bdf2-second-order-with-residuals"
+          ],
+          "suppliers": [
+            "alg-variable-step-bdf2-with-selected-implicit-branch",
+            "lem-variable-step-bdf2-interpolation-and-local-defect"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read both actual batch-36 bodies and their complete arguments. Batch 75 uses the ratio-one coefficient/local-defect interface and separately proves the DAE branch, residual perturbation, and error recurrence.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-index-one-dae-bdf2-second-order-with-residuals",
+      "supplier": "lem-variable-step-bdf2-interpolation-and-local-defect",
+      "consumer_batch": "75",
+      "supplier_batch": "36",
+      "status": "verified",
+      "evidence": "Interpolation lemma assumes C3 solution and ratios in a compact positive interval, yields unscaled O(h^3). Consumer assumes C3 exact solution on finite tube, fixes ratio 1, and proof 1.2 divides that unscaled residual by 2h to get O(h^2) derivative defect. Fixed finite dimension converts its componentwise/infinity-norm bound to Euclidean with a constant.",
+      "inspected_paths": [
+        "items/thm-index-one-dae-bdf2-second-order-with-residuals.md",
+        "items/lem-variable-step-bdf2-interpolation-and-local-defect.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[342]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[2]",
+          "consumers": [
+            "alg-index-one-dae-bdf2-stepper",
+            "lem-index-one-dae-bdf2-local-branch",
+            "thm-index-one-dae-bdf2-second-order-with-residuals"
+          ],
+          "suppliers": [
+            "alg-variable-step-bdf2-with-selected-implicit-branch",
+            "lem-variable-step-bdf2-interpolation-and-local-defect"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read both actual batch-36 bodies and their complete arguments. Batch 75 uses the ratio-one coefficient/local-defect interface and separately proves the DAE branch, residual perturbation, and error recurrence.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-index-one-dae-bdf2-second-order-with-residuals",
+      "supplier": "lem-discrete-one-step-error-recurrence-bound",
+      "consumer_batch": "75",
+      "supplier_batch": "28",
+      "status": "verified",
+      "evidence": "BDF2 proof 3.1 establishes nonnegative E_n=||e_n||+2||e_n-e_(n-1)|| with E_n<=(1+4Lh)E_(n-1)+4Cq h^3; step 4.1 has E_1=O(h^2). Apply recurrence lemma p=2 after reindexing the N-1 steps, with horizon Tprime=(N-1)h>0 (N>=2) and h=Tprime/(N-1); Tprime<=T bounds constants uniformly.",
+      "inspected_paths": [
+        "items/thm-index-one-dae-bdf2-second-order-with-residuals.md",
+        "items/lem-discrete-one-step-error-recurrence-bound.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[343]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[3]",
+          "consumers": [
+            "thm-index-one-dae-backward-euler-first-order-with-residuals",
+            "thm-index-one-dae-bdf2-second-order-with-residuals"
+          ],
+          "suppliers": [
+            "lem-discrete-one-step-error-recurrence-bound"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read the complete current batch-28 lemma Statement and Proof. The BE theorem establishes the recurrence locally; the BDF2 theorem first derives its weighted recurrence and then applies the supplier to N-1 steps over interval (N-1)h.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "ex-index-one-circuit-consistent-initialization-and-be-step",
+      "supplier": "def-backward-euler-step-equation",
+      "consumer_batch": "75",
+      "supplier_batch": "65",
+      "status": "verified",
+      "evidence": "Circuit example F2 and Verification 1.3 apply BE at endpoint to vprime=i: v1=v0+h i1, with separately enforced i1+v1=1. Solving gives i1=1/(1+h), v1=h/(1+h), precisely the endpoint convention of the supplier; local circuit algebra, not the definition, gives the unique solution.",
+      "inspected_paths": [
+        "items/ex-index-one-circuit-consistent-initialization-and-be-step.md",
+        "items/def-backward-euler-step-equation.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[344]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-75.cross-batch-dependencies.json",
+          "path": "$[1]",
+          "consumers": [
+            "alg-index-one-dae-backward-euler-stepper",
+            "alg-index-one-dae-bdf2-stepper",
+            "thm-index-one-dae-backward-euler-first-order-with-residuals",
+            "ex-index-one-circuit-consistent-initialization-and-be-step"
+          ],
+          "suppliers": [
+            "def-backward-euler-step-equation",
+            "def-implicit-residual-and-algebraic-error-units"
+          ],
+          "originalStatus": "verified",
+          "evidence": "Read the complete Definitions of def-backward-euler-step-equation and def-implicit-residual-and-algebraic-error-units. The DAE carriers use the same update/derivative units and enforce g=0 separately; their local residual-to-state estimate is proved in batch 75.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "page",
+      "consumer": "stable-sde-schemes-for-superlinear-drift",
+      "supplier": "milstein-stochastic-taylor-and-iterated-integrals",
+      "consumer_batch": "76",
+      "supplier_batch": "9",
+      "status": "verified",
+      "evidence": "Context disposition: supplier page develops Milstein order one; its actual local-to-global lemma requires drift defect O(h^2) and centered defect variance O(h^3), yielding mean-square O(h^2). Consumer page describes different tamed/resolvent/CIR methods. The two actual half-order theorem Facts/Proofs use their own moment/It\u00f4/BDG recurrences, never this lemma; scanned all 13 A-page item texts for Milstein/lemma identifiers with no hits. This requires edge is preparatory comparison context only and transfers no order-one estimate. No compatible additional logical supplier is needed for the declared contextual edge.",
+      "inspected_paths": [
+        "library/numerical-differential-equations-and-stochastic-dynamics/stable-sde-schemes-for-superlinear-drift.md",
+        "library/numerical-differential-equations-and-stochastic-dynamics/milstein-stochastic-taylor-and-iterated-integrals.md",
+        "items/lem-stochastic-local-to-global-rms-bound.md",
+        "items/thm-tamed-euler-strong-order-half.md",
+        "items/thm-drift-implicit-euler-sde-strong-order-half.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[345]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "page",
+      "consumer": "stable-sde-schemes-for-superlinear-drift",
+      "supplier": "implicit-stiff-time-stepping-and-algebraic-error",
+      "consumer_batch": "76",
+      "supplier_batch": "65",
+      "status": "verified",
+      "evidence": "Consumer page second paragraph invokes the backward resolvent on Yn+sigma(Yn) DeltaW. Supplier page lists thm-backward-euler-dissipative-resolvent-contraction; its actual Statement gives global bijective resolvent for continuous full-space dissipative drift and Lipschitz factor (1+h mu)^-1. Consumer algorithm Definition and theorem F1/proof 1.1\u20131.2 use precisely that interface. Finite solve failure remains failure; no scalar L-stability or solver residual guarantee is imported.",
+      "inspected_paths": [
+        "library/numerical-differential-equations-and-stochastic-dynamics/stable-sde-schemes-for-superlinear-drift.md",
+        "library/numerical-differential-equations-and-stochastic-dynamics/implicit-stiff-time-stepping-and-algebraic-error.md",
+        "items/thm-backward-euler-dissipative-resolvent-contraction.md",
+        "items/alg-drift-implicit-euler-sde.md",
+        "items/thm-drift-implicit-euler-sde-strong-order-half.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[346]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "item",
+      "consumer": "alg-drift-implicit-euler-sde",
+      "supplier": "thm-backward-euler-dissipative-resolvent-contraction",
+      "consumer_batch": "76",
+      "supplier_batch": "65",
+      "status": "verified",
+      "evidence": "Supplier Statement assumes continuous full-space f(t,x), global dissipativity with mu>=0 and h>0, giving a unique global inverse and factor (1+h mu)^-1. Consumer algorithm Definition has autonomous continuous b on R^d, exactly the same global inequality, h=T/N>0; take f(t,x)=b(x). It uses the exact inverse and distinguishes unsuccessful numerical solves from nonexistent roots.",
+      "inspected_paths": [
+        "items/alg-drift-implicit-euler-sde.md",
+        "items/thm-backward-euler-dissipative-resolvent-contraction.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[347]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-76.cross-batch-dependencies.json",
+          "path": "$[2]",
+          "consumers": [
+            "alg-drift-implicit-euler-sde",
+            "thm-drift-implicit-euler-sde-strong-order-half"
+          ],
+          "suppliers": [
+            "thm-backward-euler-dissipative-resolvent-contraction",
+            "def-backward-euler-step-equation",
+            "lem-strongly-monotone-continuous-map-is-bijective"
+          ],
+          "originalStatus": "inspected-interface-draft",
+          "evidence": "The complete actual supplier statement and its two-step proof body were inspected. For the autonomous T14 drift, b is C^1 and hence continuous; the displayed global dissipativity assumption with mu>=0 exactly supplies the supplier hypothesis. The supplier is a draft item from batch 65, and this record verifies its body and interface only; it does not claim independent approval.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-drift-implicit-euler-sde-strong-order-half",
+      "supplier": "thm-backward-euler-dissipative-resolvent-contraction",
+      "consumer_batch": "76",
+      "supplier_batch": "65",
+      "status": "verified",
+      "evidence": "Supplier global resolvent hypotheses are supplied by consumer b in C1(R^d), its displayed global dissipativity with mu>=0 and h=T/N>0. F1 and proof 1.1 use its inverse Lipschitz factor for the shared-noise stability estimate, while 1.2 uses it for error propagation. Stochastic moments/BDG estimates are separate local steps; no mean-square strict contraction is inferred from deterministic contraction.",
+      "inspected_paths": [
+        "items/thm-drift-implicit-euler-sde-strong-order-half.md",
+        "items/thm-backward-euler-dissipative-resolvent-contraction.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[348]",
+      "existing_evidence_context": [
+        {
+          "file": "research/numerical-optimization-dynamics-2026-10-16-batch-76.cross-batch-dependencies.json",
+          "path": "$[2]",
+          "consumers": [
+            "alg-drift-implicit-euler-sde",
+            "thm-drift-implicit-euler-sde-strong-order-half"
+          ],
+          "suppliers": [
+            "thm-backward-euler-dissipative-resolvent-contraction",
+            "def-backward-euler-step-equation",
+            "lem-strongly-monotone-continuous-map-is-bijective"
+          ],
+          "originalStatus": "inspected-interface-draft",
+          "evidence": "The complete actual supplier statement and its two-step proof body were inspected. For the autonomous T14 drift, b is C^1 and hence continuous; the displayed global dissipativity assumption with mu>=0 exactly supplies the supplier hypothesis. The supplier is a draft item from batch 65, and this record verifies its body and interface only; it does not claim independent approval.",
+          "requiresFocusedSourceInterfaceConfirmation": true
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "consumer": "alg-tensor-simpson-force-evaluator",
+      "supplier": "alg-composite-simpson-rule",
+      "consumer_batch": "80",
+      "supplier_batch": "20",
+      "status": "verified",
+      "evidence": "Supplier Definition requires increasing interval and even n>=2 and returns exact-real Simpson weights. Tensor evaluator Definition enforces a<b,c<d and both even counts>=2, applies this scalar rule componentwise in x then y and explicitly reports unavailable evaluations. Finite sum use imports no roundoff or force-accuracy guarantee.",
+      "inspected_paths": [
+        "items/alg-tensor-simpson-force-evaluator.md",
+        "items/alg-composite-simpson-rule.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[349]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "item",
+      "consumer": "def-separable-regularized-vortex-interaction-hamiltonian",
+      "supplier": "def-local-leapfrog-domain-on-an-open-configuration-set",
+      "consumer_batch": "80",
+      "supplier_batch": "54",
+      "status": "verified",
+      "evidence": "Local leapfrog Definition allows open Q, C1 potential and SPD M and admits only kick/drift stages in Q. Consumer Hamiltonian Definition sets open collision-free Qcf, smooth regularized pair potential and kinetic energy with M=I; it explicitly restricts the existing partial map by the supplier domain and distinguishes this canonical second-order model from first-order Biot\u2013Savart dynamics.",
+      "inspected_paths": [
+        "items/def-separable-regularized-vortex-interaction-hamiltonian.md",
+        "items/def-local-leapfrog-domain-on-an-open-configuration-set.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[350]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "item",
+      "consumer": "lem-classical-rk4-map-is-lipschitz-on-a-controlled-tube",
+      "supplier": "def-explicit-runge-kutta-tableau-and-stage-map",
+      "consumer_batch": "80",
+      "supplier_batch": "35",
+      "status": "verified",
+      "evidence": "Supplier stage-map Definition gives strictly lower-triangular explicit stages and weighted output with admitted evaluations. Consumer F1 and proof 1.1 compare slopes at identical base/stage times and bound each successive difference using the stated common state-Lipschitz set. Consumer assumes stage evaluations defined, so it uses the success map only, without claiming domain invariance.",
+      "inspected_paths": [
+        "items/lem-classical-rk4-map-is-lipschitz-on-a-controlled-tube.md",
+        "items/def-explicit-runge-kutta-tableau-and-stage-map.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[351]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "item",
+      "consumer": "lem-classical-rk4-map-is-lipschitz-on-a-controlled-tube",
+      "supplier": "def-euler-midpoint-rk4-tableaus",
+      "consumer_batch": "80",
+      "supplier_batch": "35",
+      "status": "verified",
+      "evidence": "Classical RK4 tableau supplier coefficients are row entries 1/2,1/2,1 and output weights 1/6,1/3,1/3,1/6. Consumer F2/proof 1.1 uses these exact four stage recursions; proof 2.1 weights their bounds to obtain 1+hL+(hL)^2/2+(hL)^3/6+(hL)^4/24, hence <=1+Le^(Lh0)h. No scalar stability-region implication is used.",
+      "inspected_paths": [
+        "items/lem-classical-rk4-map-is-lipschitz-on-a-controlled-tube.md",
+        "items/def-euler-midpoint-rk4-tableaus.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[352]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-separable-vortex-inspired-leapfrog-is-reversible-symplectic-volume-preserving-order-two",
+      "supplier": "def-local-leapfrog-domain-on-an-open-configuration-set",
+      "consumer_batch": "80",
+      "supplier_batch": "54",
+      "status": "verified",
+      "evidence": "Consumer F1/proof 1.1 uses exactly the admitted half-kick/full-drift/half-kick composition of the local-domain supplier and inverts each signed stage. Its Statement explicitly restricts all stages to the open collision-free set; reversing the admitted path gives the admitted -h step on the image. No completeness of the partial map is asserted.",
+      "inspected_paths": [
+        "items/thm-separable-vortex-inspired-leapfrog-is-reversible-symplectic-volume-preserving-order-two.md",
+        "items/def-local-leapfrog-domain-on-an-open-configuration-set.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[353]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-separable-vortex-inspired-leapfrog-is-reversible-symplectic-volume-preserving-order-two",
+      "supplier": "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+      "consumer_batch": "80",
+      "supplier_batch": "54",
+      "status": "verified",
+      "evidence": "Symplecticity supplier requires V in C2(Q), SPD M and admitted open-domain stages. Consumer smooth regularized V on Qcf and kinetic mass I meet these, and F2/proof 1.2 invokes only symplecticity. Volume preservation is proved separately via determinant-one shears/change of variables, not inferred as energy conservation.",
+      "inspected_paths": [
+        "items/thm-separable-vortex-inspired-leapfrog-is-reversible-symplectic-volume-preserving-order-two.md",
+        "items/prop-local-leapfrog-and-symplectic-euler-are-symplectic.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[354]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-separable-vortex-inspired-leapfrog-is-reversible-symplectic-volume-preserving-order-two",
+      "supplier": "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+      "consumer_batch": "80",
+      "supplier_batch": "54",
+      "status": "verified",
+      "evidence": "Trajectory-error supplier requires V in C3, SPD M, positive h=T/N, exact/numerical/intermediate states and comparison segments in one compact convex tube, derivatives through order two bounded. Consumer Statement claim4 explicitly carries this entire tube/derivative hypothesis, M=I and V in C3; F3/proof 1.2 applies e_n<=e^(LT)e0+Cv T e^(LT)h^2 at exact initialization e0=0. It asserts neither invariance nor energy conservation.",
+      "inspected_paths": [
+        "items/thm-separable-vortex-inspired-leapfrog-is-reversible-symplectic-volume-preserving-order-two.md",
+        "items/thm-local-symplectic-euler-and-leapfrog-trajectory-errors.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[355]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-tensor-simpson-force-error",
+      "supplier": "alg-composite-simpson-rule",
+      "consumer_batch": "80",
+      "supplier_batch": "20",
+      "status": "verified",
+      "evidence": "Simpson algorithm weights 1,4,2,...,4,1 are nonnegative and their block sums equal interval length (each constant block gives 2h). Consumer F3/proof 2.1 uses exactly positivity and sum b-a to sum fixed-x y-error estimates. Both panel counts are even>=2 by Statement, and all arithmetic remains exact.",
+      "inspected_paths": [
+        "items/thm-tensor-simpson-force-error.md",
+        "items/alg-composite-simpson-rule.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[356]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-tensor-simpson-force-error",
+      "supplier": "thm-composite-simpson-error-bound",
+      "consumer_batch": "80",
+      "supplier_batch": "20",
+      "status": "verified",
+      "evidence": "Scalar Simpson error theorem requires a<b, even n>=2, scalar C4 and max fourth derivative, and bounds by length*h^4*M4/180. Tensor consumer Statement gives C4 vector F on nondegenerate rectangle and both even counts. Proof 1.1 applies componentwise at fixed y and integrates; 2.1 applies y errors at fixed x and positive x weights; 3.1 adds sqrt2 to turn coordinate bounds into Euclidean error. No mixed eighth derivative or roundoff bound is assumed.",
+      "inspected_paths": [
+        "items/thm-tensor-simpson-force-error.md",
+        "items/thm-composite-simpson-error-bound.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[357]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-rk4-global-error-for-regularized-vortex-particles",
+      "supplier": "def-one-step-ode-method-local-defect-order-and-stability",
+      "consumer_batch": "80",
+      "supplier_batch": "7",
+      "status": "verified",
+      "evidence": "One-step Definition identifies exact-start defect as Psi_h(t,y(t))-y(t+h), order4 as uniform O(h^5), and separate (1+Lh) stability. Consumer F2/proof 1.1 uses precisely that convention; its Statement explicitly bounds defect by C4h^5 on admitted compact tube. No scalar absolute-stability statement substitutes for this definition.",
+      "inspected_paths": [
+        "items/thm-rk4-global-error-for-regularized-vortex-particles.md",
+        "items/def-one-step-ode-method-local-defect-order-and-stability.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[358]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-rk4-global-error-for-regularized-vortex-particles",
+      "supplier": "def-euler-midpoint-rk4-tableaus",
+      "consumer_batch": "80",
+      "supplier_batch": "35",
+      "status": "verified",
+      "evidence": "Classical four-stage tableau is the RK4 method used throughout consumer Statement/F1/proof 1.1. Its weights sum to one, so augmenting (t,X)prime=(1,f(t,X)) advances time exactly and row-sum stage times agree with nonautonomous stages. This imports a concrete tableau, not a different fourth-order scheme.",
+      "inspected_paths": [
+        "items/thm-rk4-global-error-for-regularized-vortex-particles.md",
+        "items/def-euler-midpoint-rk4-tableaus.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[359]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-rk4-global-error-for-regularized-vortex-particles",
+      "supplier": "prop-euler-midpoint-rk4-orders-and-stability-functions",
+      "consumer_batch": "80",
+      "supplier_batch": "35",
+      "status": "verified",
+      "evidence": "Order/stability proposition grants classical RK4 local order>=4 under its referenced C4 autonomous compact-convex-tube hypotheses. Consumer assumes jointly C4 nonautonomous f with bounded derivatives through four and admitted stages, augments time in proof1.1 (as permitted in order-condition supplier Remarks), and obtains uniform C4h^5. Scalar stability polynomial/negative-axis intervals are not used for nonlinear state stability.",
+      "inspected_paths": [
+        "items/thm-rk4-global-error-for-regularized-vortex-particles.md",
+        "items/prop-euler-midpoint-rk4-orders-and-stability-functions.md",
+        "items/prop-explicit-rk-order-conditions-through-four.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[360]",
+      "existing_evidence_context": []
+    },
+    {
+      "kind": "item",
+      "consumer": "thm-rk4-global-error-for-regularized-vortex-particles",
+      "supplier": "thm-global-error-from-one-step-defect-and-stability",
+      "consumer_batch": "80",
+      "supplier_batch": "28",
+      "status": "verified",
+      "evidence": "Global-error theorem requires h=T/N, common compact positive-margin tube, local defect C h^(p+1), initial C0h^p and one-step factor 1+Lh. Consumer Statement supplies compactly-contained tube/admitted stages, exact initialization and C4h^5; F3 supplies RK4 stability with L*. Proof2.1 sets p=4,C=C4,C0=0,L=L* and retains both L*>0 and L*=0 formulas. The result is conditional on the tube, with no invariance claim.",
+      "inspected_paths": [
+        "items/thm-rk4-global-error-for-regularized-vortex-particles.md",
+        "items/thm-global-error-from-one-step-defect-and-stability.md"
+      ],
+      "basis": "newfocusedcheck",
+      "intake_gap_path": "$.currentDeclaredEdgeReviewGaps[361]",
+      "existing_evidence_context": []
+    }
+  ],
+  "original_row_mappings": [
+    {
+      "source_file": "research/numerical-optimization-dynamics-2026-10-16-batch-76.cross-batch-dependencies.json",
+      "source_path": "$[0]",
+      "original": {
+        "kind": "page",
+        "consumer": "stable-sde-schemes-for-superlinear-drift",
+        "supplier": "euler-maruyama-convergence",
+        "status": "reviewed-context-only",
+        "evidence": "The published prerequisite page and its actual item thm-euler-maruyama-strong-rate-under-higham-mao-stuart-hypotheses were inspected. That theorem assumes uniform all-finite-moment bounds for the exact solution and the ordinary Euler step and continuous processes. The cubic explicit-Euler companion proves those moments diverge, while tamed, drift-implicit, and CIR paths are distinct schemes. No batch-76 proof cites this Euler rate theorem; the declared page edge is retained as context and no claim transfers its conclusion.",
+        "examined_supplier_items": [
+          "alg-euler-maruyama-autonomous",
+          "thm-euler-maruyama-strong-rate-under-higham-mao-stuart-hypotheses"
+        ],
+        "required_hypotheses": "The published strong-rate item requires uniform finite moments of every order for the exact process and the ordinary Euler grid, step, and continuous interpolation. Its all-moment premise is not supplied for a superlinear explicit Euler drift.",
+        "affected_claims": [
+          "cex-euler-moments-diverge-for-cubic-dissipative-sde: explicitly exhibits why the ordinary-Euler moment premise can fail",
+          "thm-tamed-euler-strong-order-half: proves the distinct tamed method using lem-tamed-euler-uniform-moment-bounds",
+          "thm-drift-implicit-euler-sde-strong-order-half: proves the distinct backward-resolvent method"
+        ],
+        "local_route": "The canonical Euler algorithm is used only for the assigned counterexample and the noise-stability example. Tamed moments and both new strong-rate results are proved locally under their method-specific hypotheses. The published all-moment theorem is not cited as a mathematical supplier.",
+        "supplier_excerpts": [
+          {
+            "item": "thm-euler-maruyama-strong-rate-under-higham-mao-stuart-hypotheses",
+            "section": "Statement",
+            "excerpt": "Assume AC. Let $d,m\\ge1$ be finite, fix $T>0$, and work on a complete filtered\nprobability space whose filtration is right-continuous and contains every\n$P$-null subset of $\\mathcal F$ in $\\mathcal F_0$. Let $W=(W_t)_{0\\le t\\le T}$\nbe an adapted standard $m$-dimensional Brownian motion whose increments are\nindependent of the current filtration. Let\n$X_0$ be finite and $\\mathcal F_0$-measurable, independent of\n$\\sigma(W_t-W_0:0\\le t\\le T)$. Use Euclidean state norms and the Frobenius\nmatrix norm. Consider\nthe autonomous SDE\n$$X_t=X_0+\\int_0^t f(X_s)\\,ds+\\int_0^t g(X_s)\\,dW_s, \\qquad X_t\\in\\mathbb R^d,$$\nwhere $f:\\mathbb R^d\\to\\mathbb R^d$ and\n$g:\\mathbb R^d\\to\\mathbb R^{d\\times m}$ are $C^1$. Assume that constants\n$\\mu,c,D\\ge0$ and an integer $q\\ge1$ satisfy, for all $x,y\\in\\mathbb R^d$,\n$$\\langle x-y,f(x)-f(y)\\rangle\\le\\mu|x-y|^2, \\qquad \\|g(x)-g(y)\\|_F^2\\le c|x-y|^2,$$\nand\n$$|f(x)-f(y)|^2\\le D(1+|x|^q+|y|^q)|x-y|^2.$$\nFor each $0<h\\le1$ with $N=T/h\\in\\mathbb N$, let $Y^h$ be the continuous\nEuler\u2013Maruyama interpolation and $\\bar Y^h$ its left-endpoint step process\nfrom [[alg-euler-maruyama-autonomous]]. Assume\nthat an exact strong solution $X$ and these exact, step and continuous Euler\nprocesses have uniformly bounded moments of every finite order on $[0,T]$:\nfor every $p\\ge1$,\n$$\\mathbb E\\sup_{t\\le T}|X_t|^p+ \\sup_{0<h\\le1,\\ T/h\\in\\mathbb N}\\left( \\mathbb E\\sup_{t\\le T}|Y_t^h|^p+ \\mathbb E\\sup_{t\\le T}|\\bar Y_t^h|^p\\right)<\\infty.$$\nThen a constant $C$, independent of $h$, satisfies\n$$\\mathbb E\\sup_{0\\le t\\le T}|X_t-Y_t^h|^2\\le Ch.$$\nIn particular the grid-point root-mean-square error is $O(h^{1/2})$.\nThe all-moment premise is part of this source contract; $X_0\\in L^2$ alone\ndoes not imply it."
+          }
+        ]
+      },
+      "original_issues": [
+        "invalid-status"
+      ],
+      "disposition": "context-only retained with original caveats",
+      "review_edge": {
+        "kind": "page",
+        "consumer": "stable-sde-schemes-for-superlinear-drift",
+        "supplier": "euler-maruyama-convergence"
+      }
+    },
+    {
+      "source_file": "research/numerical-optimization-dynamics-2026-10-16-batch-76.cross-batch-dependencies.json",
+      "source_path": "$[1]",
+      "original": {
+        "kind": "page",
+        "consumer": "stable-sde-schemes-for-superlinear-drift",
+        "supplier": "milstein-stochastic-taylor-and-iterated-integrals",
+        "status": "open-page-interface-reconciliation",
+        "evidence": "The declared T13 page and its current item lem-stochastic-local-to-global-rms-bound were inspected. The lemma proves an order-one RMS recurrence only when the drift defect is O(h^2), the centered leading error has variance O(h E|e_n|^2), and the remaining centered defect has variance O(h^3). T14 methods here have order-one-half local errors, so that lemma's variance order is not the interface for either new half-order theorem. No batch-76 carrier lists the T13 lemma as an item dependency. The A page remains linked to T13 as assigned context, but the owner should reconcile whether that page edge is navigational or requires a separate compatible supplier.",
+        "examined_supplier_items": [
+          "def-milstein-scheme-and-iterated-integrals",
+          "lem-stochastic-local-to-global-rms-bound",
+          "thm-commutative-milstein-strong-order-one"
+        ],
+        "required_hypotheses": "The T13 recurrence requires |r_n|<=C_0 h^2, orthogonal centered M_(n+1),Q_(n+1), E|M_(n+1)|^2<=C_1 h E|e_n|^2, and E|Q_(n+1)|^2<=C_1 h^3. It yields E|e_N|^2=O(h^2), an order-one RMS conclusion.",
+        "affected_claims": [
+          "thm-tamed-euler-strong-order-half: the assigned proof has its own path-supremum It\u00f4 error recurrence and order-half tamed moment supplier",
+          "thm-drift-implicit-euler-sde-strong-order-half: the assigned proof has its own resolvent inequality, local defects, and discrete error recurrence"
+        ],
+        "local_route": "Both half-order results carry complete local recurrences with the actual method-specific defect orders. No T13 fact, proof excerpt, or acceptance is imported. The unresolved issue is the declared page-level edge only; it does not block the independently proved item arguments.",
+        "supplier_excerpts": [
+          {
+            "item": "lem-stochastic-local-to-global-rms-bound",
+            "section": "Statement",
+            "excerpt": "Let $N\\ge1$, $0<h\\le1$, and $Nh\\le T$. Let $(\\mathcal F_n)_{n=0}^N$ be a filtration as in [[def-filtration-and-filtered-probability-space]]. For every $n$, let $e_n,u_n,r_n$ be square-integrable $\\mathbb R^d$-valued, $\\mathcal F_n$-measurable random vectors; let $M_{n+1},Q_{n+1}$ be square-integrable and $\\mathcal F_{n+1}$-measurable. Say $Z$ is orthogonal to $\\mathcal F_n$ if $\\mathbb E\\langle H,Z\\rangle=0$ for every square-integrable $\\mathcal F_n$-measurable vector $H$. Suppose\n$$e_0=0,\\quad e_{n+1}=e_n+hu_n+r_n+M_{n+1}+Q_{n+1},$$\n$$|u_n|\\le L|e_n|,\\qquad |r_n|\\le C_0h^2,$$\nand $M_{n+1},Q_{n+1}$ are orthogonal to $\\mathcal F_n$, with\n$$\\mathbb E|M_{n+1}|^2\\le C_1h\\,\\mathbb E|e_n|^2,\\qquad \\mathbb E|Q_{n+1}|^2\\le C_1h^3.$$\nThen $\\mathbb E|e_N|^2\\le C_T h^2$, where $C_T$ depends only on $T,L,C_0,C_1$ and not on $h$ or $N$. This is a local-to-global estimate for an order-one grid RMS error when the drift error is Lipschitz and the centered one-step defect has second moment $O(h^3)$."
+          }
+        ]
+      },
+      "original_issues": [
+        "invalid-status"
+      ],
+      "disposition": "current interface focused check completed",
+      "review_edge": {
+        "kind": "page",
+        "consumer": "stable-sde-schemes-for-superlinear-drift",
+        "supplier": "milstein-stochastic-taylor-and-iterated-integrals"
+      }
+    },
+    {
+      "source_file": "research/numerical-optimization-dynamics-2026-10-16-batch-76.cross-batch-dependencies.json",
+      "source_path": "$[2]",
+      "original": {
+        "kind": "item",
+        "consumer": "alg-drift-implicit-euler-sde",
+        "supplier": "thm-backward-euler-dissipative-resolvent-contraction",
+        "status": "inspected-interface-draft",
+        "evidence": "The complete actual supplier statement and its two-step proof body were inspected. For the autonomous T14 drift, b is C^1 and hence continuous; the displayed global dissipativity assumption with mu>=0 exactly supplies the supplier hypothesis. The supplier is a draft item from batch 65, and this record verifies its body and interface only; it does not claim independent approval.",
+        "examined_supplier_items": [
+          "thm-backward-euler-dissipative-resolvent-contraction",
+          "def-backward-euler-step-equation",
+          "lem-strongly-monotone-continuous-map-is-bijective"
+        ],
+        "required_hypotheses": "A continuous vector field on the full Euclidean state space and one global constant mu>=0 such that <b(x)-b(y),x-y><=-mu|x-y|^2 for every x,y. Then x-hb(x) is bijective and its inverse has Lipschitz constant (1+h mu)^(-1).",
+        "affected_claims": [
+          "alg-drift-implicit-euler-sde: each exact-real update has a unique finite resolvent root",
+          "thm-drift-implicit-euler-sde-strong-order-half: uses the resolvent contraction in its stability and local-error inequalities"
+        ],
+        "local_route": "The algorithm restricts the supplier to the autonomous continuous dissipative drift. The strong-rate proof states the same dissipativity inequality and otherwise proves its stochastic estimates locally. The supplier proof body establishes strong monotonicity of x-hb(x), then invokes the stated continuous-map bijection theorem.",
+        "supplier_excerpts": [
+          {
+            "item": "thm-backward-euler-dissipative-resolvent-contraction",
+            "section": "Statement",
+            "excerpt": "Let $d\\ge1$, let $f:\\mathbb R\\times\\mathbb R^d\\to\\mathbb R^d$ be continuous, and suppose for every fixed $t$ and all $x,y\\in\\mathbb R^d$,"
+          }
+        ]
+      },
+      "original_issues": [
+        "invalid-status"
+      ],
+      "disposition": "current interface focused check completed",
+      "review_edge": {
+        "kind": "item",
+        "consumer": "alg-drift-implicit-euler-sde",
+        "supplier": "thm-backward-euler-dissipative-resolvent-contraction"
+      }
+    }
+  ],
+  "context_dispositions": [
+    {
+      "kind": "page",
+      "consumer": "stable-sde-schemes-for-superlinear-drift",
+      "supplier": "euler-maruyama-convergence",
+      "status": "verified",
+      "basis": "exactexistingevidence",
+      "evidence": "Original batch76 row $[0] is a completed actual-interface inspection, backed by genuine native successful beta-batch-76.attempt-1.replay-2 result per intake nativeAuthorEvidence. Preserve its exact evidence/excerpt/hypothesis caveats in original_row_mappings: Euler strong-rate all-finite-moments is contextual and is not transferred to tamed/implicit/CIR methods. This records existing focused evidence, not new inspection of the Euler supplier. The intake current-owned projection omits this published-page edge; it remains original contextual evidence.",
+      "inspected_paths": [
+        "research/numerical-optimization-dynamics-2026-10-16-batch-76.cross-batch-dependencies.json",
+        "research/numerical-optimization-dynamics-2026-10-16-owner-cross-batch-ledger-intake-20261016T060507927Z.json"
+      ],
+      "existing_evidence_path": "research/numerical-optimization-dynamics-2026-10-16-batch-76.cross-batch-dependencies.json#$[0]",
+      "native_author_evidence": {
+        "result": "research/numerical-optimization-dynamics-2026-10-16-dispatch/beta-batch-76.result.json",
+        "immutable": "research/numerical-optimization-dynamics-2026-10-16-dispatch/beta-batch-76.attempt-1.replay-2.result.json",
+        "ended_at": "2026-10-16T03:42:52.727Z",
+        "evidence_tag": ".attempt-1.replay-2",
+        "genuineSuccessful": true
+      }
+    }
+  ],
+  "gaps": [],
+  "limits": [
+    "verified means the named current interface use matches supplier hypotheses, not independent acceptance of entire supplier or consumer proof",
+    "No source, page, manifest, contract, level, hash, canonical ledger, native evidence, runtime control, gate, test or commit changed.",
+    "Batches74,77,78,79,81 have no entries in the intake bad/missing/currentDeclaredEdgeReviewGaps slice."
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "research_only": true,
+  "applied": false,
+  "cycle": 2,
+  "new_module": {
+    "path": "tools/step5-owner-current-repairs.mjs",
+    "proposed_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-current-repair-supplement-cycle2/proposed/tools/step5-owner-current-repairs.mjs",
+    "guard": "Canonical module must be absent before exclusive installation."
+  },
+  "workflow": {
+    "path": "tools/step5-workflow.mjs",
+    "before_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-current-repair-supplement-cycle2/before/tools/step5-workflow.mjs",
+    "proposed_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-current-repair-supplement-cycle2/proposed/tools/step5-workflow.mjs",
+    "replacements": [
+      {
+        "source_excerpt": "import { loadInitialMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';",
+        "proposed_replacement": "import { loadInitialMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';\nimport { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';"
+      },
+      {
+        "source_excerpt": "export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,operationalSupplement=null,supplierRepairs=null}={}) {",
+        "proposed_replacement": "export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,currentRepairs=null,operationalSupplement=null,supplierRepairs=null}={}) {"
+      },
+      {
+        "source_excerpt": "  const ownerReviews=new Map((ownerSupplement?.reviews??[]).map(row=>[row.id,row]));\n  const ownerDecisions=new Map((ownerSupplement?.decisions??[]).map(row=>[key(row),row]));",
+        "proposed_replacement": "  requireValue(!currentRepairs||(root&&currentRepairs[ownerSupplementSeal]===true\n    &&currentRepairs.pack_sha256===digest(pack)),'unvalidated current-root repair supplement');\n  const ownerReviews=new Map(),ownerDecisions=new Map();\n  for(const row of [...(ownerSupplement?.reviews??[]),...(currentRepairs?.reviews??[])]){\n    requireValue(!ownerReviews.has(row.id)||digest(ownerReviews.get(row.id))===digest(row),'conflicting coexisting current root reviews');ownerReviews.set(row.id,row);\n  }\n  for(const row of [...(ownerSupplement?.decisions??[]),...(currentRepairs?.decisions??[])]){\n    requireValue(!ownerDecisions.has(key(row))||digest(ownerDecisions.get(key(row)))===digest(row),'conflicting coexisting original-classification decisions');ownerDecisions.set(key(row),row);\n  }"
+      },
+      {
+        "source_excerpt": "  const ownerSupplement=loadOwnerSupplement(root,pack,reports,current,items);",
+        "proposed_replacement": "  const ownerSupplement=loadOwnerSupplement(root,pack,reports,current,items);\n  const currentRepairPath=join(workflowDir(root,run),`${phase}-${round}-owner-current-repairs.json`);\n  const currentRepairs=existsSync(currentRepairPath)?{\n    ...loadOwnerCurrentRepairs(root,pack,reports,current,items,read(currentRepairPath),{matchesReview:review=>reviewContexts(items).matches(review,current)}),\n    [ownerSupplementSeal]:true,\n  }:null;"
+      },
+      {
+        "source_excerpt": "  const result=validateReports(pack,reports,reported,{root,ownerSupplement,operationalSupplement,supplierRepairs});",
+        "proposed_replacement": "  const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs});"
+      },
+      {
+        "source_excerpt": "  Object.assign(evidence,ownerSupplement?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{});",
+        "proposed_replacement": "  Object.assign(evidence,ownerSupplement?.evidence??{},currentRepairs?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{});"
+      },
+      {
+        "source_excerpt": "  receipt.restated=restatedIds(pack,result.changed,statementHashes(root,run));",
+        "proposed_replacement": "  if(currentRepairs){\n    receipt.owner_current_repairs=currentRepairs.path;\n    receipt.native_current_repair_reviews=reports.flatMap(report=>report.reviews).filter(review=>currentRepairs.ids.has(review.id));\n    receipt.native_current_repair_decisions=reports.flatMap(report=>report.decisions).filter(decision=>currentRepairs.rejections.some(rejected=>key(decision)===key(rejected)));\n    receipt.native_current_repair_origins=currentRepairs.origin_rows;\n    receipt.root_current_reviews=currentRepairs.reviews;\n    receipt.root_current_repair_resolution={reviewed_by:'root',ids:currentRepairs.entries.map(entry=>entry.id),\n      repairer_identity:currentRepairs.repairer_identity,repair_evidence:currentRepairs.repair_evidence,completed_at:currentRepairs.completed_at,\n      root_interface_changes:currentRepairs.root_interface_changes,examined_ids:[...currentRepairs.ids],\n      native_execution_coverage_adopted:false,native_finding_synthesized:false};\n  }\n  receipt.restated=restatedIds(pack,result.changed,statementHashes(root,run));"
+      },
+      {
+        "source_excerpt": "  const discoveries=receipt.downstream.filter(id=>!frontier.has(id)&&!direct.some(row=>row.id===id)&&!receipt.restated.includes(id));",
+        "proposed_replacement": "  if(currentRepairs){\n    const primary=new Set(currentRepairs.entries.map(entry=>entry.id));\n    receipt.root_current_downstream=[...currentRepairs.ids].filter(id=>!primary.has(id));\n    receipt.downstream=[...new Set([...receipt.downstream,...receipt.root_current_downstream])];\n  }\n  const discoveries=receipt.downstream.filter(id=>!frontier.has(id)&&!direct.some(row=>row.id===id)&&!receipt.restated.includes(id));"
+      }
+    ]
+  },
+  "documentation": {
+    "path": "WORKFLOW.md",
+    "before_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-current-repair-supplement-cycle2/before/WORKFLOW.md",
+    "proposed_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-current-repair-supplement-cycle2/proposed/WORKFLOW.md",
+    "guard": "Require complete exact preimage before append",
+    "append": "An opt-in version-4 `step5-owner-current-repair-supplement` at the existing\n`repeat-N-owner-current-repairs.json` path resolves separately confirmed scope defects\nbefore the actual paused/drained 5.5 owner boundary passes its native gate. Its\nseparate path coexists with versions 1\u20133 at the original supplement path;\noverlapping current review/decision rows must be exactly identical.\nIt admits only typed entries: a genuine completed assigned confirmed-fatal\nrepair that narrowed a frozen approved clause, or an exact original successful\nnative `repair_notes` outside-lane alert about an unassigned unchanged draft\nfrontier definition. Entries retain original report/result/attempt/prompt,\nfrozen approved and native-post source archives, actual creation state/request,\nseparate root finding, real repair attribution and actual current root reviews.\nThe assigned branch preserves original outcome/type and fatal counts; the\noutside-alert branch supplies no rejection, decision or native full-reading\nclaim. Only source-backed actual root defining-clause repairs qualify.\n\nThe bounded existing-frontier scope includes all affected old/current direct\nconsumers, propagating further only through actual defining-clause changes.\nNo new native execution, fake open finding, native report rewrite or changed\nverdict is supplied. Collection preserves original native rows and separately\nattributes current root reviews/repairs; ordinary interface propagation,\noutside maintenance, ordinary 5.6 consumer work, 5.7 certification, current Sol judgment and every gate\nremain mandatory. Versions 1\u20133/default behavior are unchanged. Creation must\nprecede the first 5.6 pack/dispatch; native collection consumes the authenticated\npaused creation after ordinary permission/resume in the same drained 5.5 stage.\n"
+  },
+  "final_focused_cycle": true,
+  "supersedes_proposal_only": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-current-repair-supplement-cycle1/guarded-successor.json",
+  "only_module_delta": {
+    "before_proposal": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-current-repair-supplement-cycle1/proposed/tools/step5-owner-current-repairs.mjs",
+    "source_excerpt": "need(beforeMeta.kind==='definition'&&!Object.values(pack.assignments).flat().some(x=>x.id===id)",
+    "proposed_replacement": "need(beforeMeta.kind==='definition'&&source(after,id).kind==='definition'&&!Object.values(pack.assignments).flat().some(x=>x.id===id)",
+    "reviewed_url_guard": "Already present in cycle1 and unchanged: review.source_urls.every(url=>reviewedUrls.has(url))."
+  }
+}

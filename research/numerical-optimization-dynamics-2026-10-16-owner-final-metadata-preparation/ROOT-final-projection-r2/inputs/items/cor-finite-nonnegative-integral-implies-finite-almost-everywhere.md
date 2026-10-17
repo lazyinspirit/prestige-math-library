@@ -1,0 +1,44 @@
+---
+id: cor-finite-nonnegative-integral-implies-finite-almost-everywhere
+kind: corollary
+title: "A nonnegative measurable function with finite integral is finite almost everywhere"
+status: published
+origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+deps: [cor-cauchy-reals-lub-complete, thm-reals-ordered-field, thm-of-archimedean, prop-the-nonnegative-integral-agrees-with-the-simple-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral]
+proof_strategy: direct
+verification:
+  repair: research/bayesian-computational-statistics-62-owner-step2-b30-cor-finite-nonnegative-integral-implies-finite-almost-everywhere-published-repair.json
+sources:
+  scraped: []
+  references:
+    - title: "John K. Hunter, Measure Theory Notes, Proposition 4.14"
+      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes_ch4.pdf"
+    - title: "Gerald B. Folland, Real Analysis, 2nd ed., Proposition 2.20"
+      url: "https://djvu.online/file/NPF4BEtSuqdFA"
+---
+
+## Statement
+
+If $f:X\to[0,+\infty]$ is measurable and $\int f\,d\mu<+\infty$, then
+$f(x)<+\infty$ for almost every $x$.
+
+## Facts & Assumptions
+
+**Given:** A nonnegative measurable function $f$ with finite integral.
+
+[L1] The nonnegative integral is monotone and homogeneous ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]).
+
+[L2] The nonnegative integral of the simple function $n\chi_F$ equals its simple integral $n\mu(F)$ ([[prop-the-nonnegative-integral-agrees-with-the-simple-integral]]).
+
+[L3] The real numbers form a complete ordered field, and for every real $x$ there is a positive integer $m>x$ ([[cor-cauchy-reals-lub-complete]], [[thm-reals-ordered-field]], [[thm-of-archimedean]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Let $F:=\{f=+\infty\}$, which is measurable. For every positive integer $n$, $n\chi_F\le f$. By [L1] and [L2], $n\mu(F)=\int n\chi_F\,d\mu\le\int f\,d\mu<+\infty$. [L1, L2, given]
+
+2.1 Put $J=\int f\,d\mu<+\infty$. If $\mu(F)=+\infty$, step 1.1 fails already for $n=1$. If $0<\mu(F)<+\infty$, choose a positive integer $n>J/\mu(F)$ by [L3]. Multiplication by the positive finite number $\mu(F)$ gives $n\mu(F)>J$, contradicting step 1.1. Thus $\mu(F)=0$, so the exceptional set where $f$ is infinite is null. Equivalently, $f<+\infty$ almost everywhere. [step 1.1, L3, algebra, choose] ∎

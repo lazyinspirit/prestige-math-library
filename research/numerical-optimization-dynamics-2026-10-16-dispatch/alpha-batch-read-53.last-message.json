@@ -1,0 +1,413 @@
+{
+  "group": "g",
+  "batches": ["53"],
+  "pages_read": [
+    "adaptive-ode-solvers-and-error-estimation",
+    "adaptive-ode-solvers-and-error-estimation-examples"
+  ],
+  "items_read": [
+    "lem-maximal-ode-solution-extends-from-compact-tube",
+    "thm-ode-residual-a-posteriori-error-bound",
+    "thm-piecewise-c1-ode-residual-a-posteriori-error-bound",
+    "def-embedded-runge-kutta-pair-and-error-estimator",
+    "alg-bounded-adaptive-runge-kutta-controller",
+    "def-heun-euler-embedded-runge-kutta-pair",
+    "prop-embedded-pair-estimator-asymptotics",
+    "def-heun-quadratic-dense-output",
+    "def-validated-residual-tube-certificate",
+    "rem-fixed-mesh-global-error-does-not-certify-adaptivity",
+    "thm-bounded-adaptive-runge-kutta-controller-terminates",
+    "thm-heun-euler-pair-local-orders-and-estimator",
+    "lem-rational-expression-derivative-recursion-correct",
+    "thm-heun-dense-output-local-order-two",
+    "alg-validated-residual-tube-certificate-checker",
+    "thm-validated-residual-tube-certificate-sound",
+    "thm-validated-residual-tube-checker-terminates",
+    "ex-below-roundoff-tolerance-breaks-embedded-estimate",
+    "ex-fast-decay-problem-rejects-at-minimum-step",
+    "ex-heun-euler-estimator-leading-term-vanishes"
+  ],
+  "conventions": [
+    {
+      "convention": "Local defects are numerical output minus exact endpoint. The high and low members share stages; E is the Euclidean norm of low output minus high output.",
+      "fixed_by": "def-embedded-runge-kutta-pair-and-error-estimator",
+      "matters_for": [
+        "prop-embedded-pair-estimator-asymptotics",
+        "thm-heun-euler-pair-local-orders-and-estimator",
+        "ex-heun-euler-estimator-leading-term-vanishes"
+      ]
+    },
+    {
+      "convention": "Controller acceptance uses the maximum componentwise scaled difference Q, with strictly positive absolute tolerance, rather than the unscaled Euclidean estimator E.",
+      "fixed_by": "alg-bounded-adaptive-runge-kutta-controller",
+      "matters_for": [
+        "thm-bounded-adaptive-runge-kutta-controller-terminates",
+        "ex-fast-decay-problem-rejects-at-minimum-step",
+        "ex-below-roundoff-tolerance-breaks-embedded-estimate"
+      ]
+    },
+    {
+      "convention": "A final clipped trial may be shorter than h_min. Success at T and rejection at or below h_min take precedence over attempt-budget exhaustion. An initially zero horizon succeeds without a trial.",
+      "fixed_by": "alg-bounded-adaptive-runge-kutta-controller",
+      "matters_for": [
+        "thm-bounded-adaptive-runge-kutta-controller-terminates",
+        "ex-fast-decay-problem-rejects-at-minimum-step"
+      ]
+    },
+    {
+      "convention": "The general residual theorem assumes Countable Choice and Dependent Choice; its integrable one-sided Lipschitz coefficient may have either sign.",
+      "fixed_by": "thm-ode-residual-a-posteriori-error-bound",
+      "matters_for": [
+        "thm-ode-residual-a-posteriori-error-bound"
+      ]
+    },
+    {
+      "convention": "The choice-free residual theorem uses a finite partition, continuous reconstruction, C1 closed-panel restrictions with one-sided endpoint derivatives, and nonnegative piecewise-continuous coefficients and residual envelopes.",
+      "fixed_by": "thm-piecewise-c1-ode-residual-a-posteriori-error-bound",
+      "matters_for": [
+        "thm-validated-residual-tube-certificate-sound"
+      ]
+    },
+    {
+      "convention": "Certificates concern finite rational expression DAGs using only addition, subtraction, multiplication and division; reconstruction coefficients are stored dyadics. Rational constants and cell endpoints receive outward dyadic enclosures.",
+      "fixed_by": "def-validated-residual-tube-certificate",
+      "matters_for": [
+        "lem-rational-expression-derivative-recursion-correct",
+        "alg-validated-residual-tube-certificate-checker",
+        "thm-validated-residual-tube-certificate-sound",
+        "thm-validated-residual-tube-checker-terminates"
+      ]
+    },
+    {
+      "convention": "Certificate radii and supersolution margins are strictly positive, the initial error satisfies error ≤ d0 < R0(a), and adjacent reconstruction and radius endpoint values agree exactly. Residual and Jacobian bounds use sums of squared component enclosure bounds.",
+      "fixed_by": "def-validated-residual-tube-certificate",
+      "matters_for": [
+        "alg-validated-residual-tube-certificate-checker",
+        "thm-validated-residual-tube-certificate-sound"
+      ]
+    },
+    {
+      "convention": "Heun dense output is parameterized by θ ∈ [0,1] and has endpoint values equal to the starting state and Heun output. Its local error comparison uses an exact initial value.",
+      "fixed_by": "def-heun-quadratic-dense-output",
+      "matters_for": [
+        "thm-heun-dense-output-local-order-two"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-validated-residual-tube-certificate-sound",
+      "statement": "If alg-validated-residual-tube-certificate-checker returns certified on a finite rational residual-tube certificate for the rational ODE field f and initial value y0, then the IVP has a unique exact solution y on the entire interval [a,T]. On every panel, ||y(t)−U_j(t)||₂ < R_j(t) and y(t) ∈ X_j.",
+      "used_by": [
+        "def-certified-hybrid-event-enclosure",
+        "thm-finite-hybrid-trajectory-error-under-separated-events",
+        "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted"
+      ]
+    },
+    {
+      "id": "thm-piecewise-c1-ode-residual-a-posteriori-error-bound",
+      "statement": "For d ≥ 1, a < T, continuous f on an open time-state domain, an exact solution y on [a,T], and a continuous closed-panel piecewise-C1 reconstruction U with graph in the domain, suppose nonnegative piecewise-continuous ℓ and ρ satisfy ⟨U−y,f(t,U)−f(t,y)⟩ ≤ ℓ||U−y||₂² and ||U′−f(t,U)||₂ ≤ ρ on every open panel. Then ||U(t)−y(t)||₂ ≤ exp(∫_a^t ℓ)||U(a)−y(a)||₂ + ∫_a^t exp(∫_s^t ℓ)ρ(s) ds for every t ∈ [a,T], without a choice axiom.",
+      "used_by": [
+        "thm-validated-residual-tube-certificate-sound"
+      ]
+    },
+    {
+      "id": "lem-maximal-ode-solution-extends-from-compact-tube",
+      "statement": "Let d ≥ 1, D ⊆ R × R^d be open, and f:D→R^d be continuous and locally Lipschitz in the state variable. There is no maximal solution x:I→R^d whose interval has a finite right endpoint b and for which some t0 ∈ I, t0 < b, and compact C ⊆ D satisfy (t,x(t)) ∈ C for every t ∈ [t0,b).",
+      "used_by": [
+        "thm-validated-residual-tube-certificate-sound"
+      ]
+    },
+    {
+      "id": "lem-rational-expression-derivative-recursion-correct",
+      "statement": "For a finite rational expression DAG of def-validated-residual-tube-certificate, at every input point where each division denominator is nonzero, the DAG evaluates to a continuously differentiable function of time and state. The stated constant, coordinate, sum, difference, product and quotient derivative recursion computes its actual total derivative. On any open neighborhood where all denominators stay nonzero, the represented field is locally Lipschitz.",
+      "used_by": [
+        "alg-validated-residual-tube-certificate-checker",
+        "thm-validated-residual-tube-certificate-sound"
+      ]
+    },
+    {
+      "id": "thm-heun-euler-pair-local-orders-and-estimator",
+      "statement": "Under the stated C2 neighborhood, compact convex set, bounded-derivative and admitted short-segment hypotheses, with g = ∂_t f + D_y f f at the exact starting point, Y_E−y(t+h) = −h²g/2 + O(h³), Y_H−y(t+h) = O(h³), and Y_H−Y_E = h²g/2 + O(h³). The corresponding exact-path expansion is uniform for θ ∈ [0,1]. Family estimates are uniform under the stated common-neighborhood and common-h0 condition. If g ≠ 0, the estimator-to-Euler-defect norm ratio tends to one.",
+      "used_by": [
+        "thm-heun-dense-output-local-order-two",
+        "ex-below-roundoff-tolerance-breaks-embedded-estimate",
+        "ex-fast-decay-problem-rejects-at-minimum-step",
+        "ex-heun-euler-estimator-leading-term-vanishes"
+      ]
+    },
+    {
+      "id": "prop-embedded-pair-estimator-asymptotics",
+      "statement": "For fixed IVP and exact starting state, if D_p(h) = a h^(p+1) + O(h^(p+2)) and D_(p+1)(h) = O(h^(p+2)), then low output minus high output equals a h^(p+1) + O(h^(p+2)). If a ≠ 0, E(h)/||D_p(h)||₂ tends to one. If a = 0, these hypotheses imply neither ratio one nor a nonzero estimator.",
+      "used_by": [
+        "thm-heun-euler-pair-local-orders-and-estimator",
+        "ex-heun-euler-estimator-leading-term-vanishes"
+      ]
+    },
+    {
+      "id": "thm-bounded-adaptive-runge-kutta-controller-terminates",
+      "statement": "For finite-dimensional states and the finite-budget procedure in alg-bounded-adaptive-runge-kutta-controller, the controller returns success, failure, minimum-step-rejected, or attempt-budget-exhausted after at most N trial attempts. Each individual attempt uses finitely many stage evaluations and arithmetic operations.",
+      "used_by": [
+        "ex-fast-decay-problem-rejects-at-minimum-step",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "ex-ctrl1-chemical-dosing-linear-model"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Coordinate increment bounds, endpoint extension, scalar Taylor remainders and segmentwise Jacobian estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "Open time-state domain, solution equation and domain-relative endpoint derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-maximal-ode-solution",
+      "used_for": "Meaning of maximality and proper solution extension.",
+      "opened": true
+    },
+    {
+      "id": "lem-locally-unique-ode-solutions-agree-and-glue-on-overlaps",
+      "used_for": "Gluing the finite-endpoint extension to a local solution.",
+      "opened": true
+    },
+    {
+      "id": "thm-compact-subset-of-a-hausdorff-space-is-closed",
+      "used_for": "Keeping the limiting endpoint inside the compact tube.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Bounding field components on a nonempty compact tube.",
+      "opened": true
+    },
+    {
+      "id": "thm-picard-lindelof-local-existence-and-uniqueness",
+      "used_for": "Local existence and uniqueness at the limiting endpoint.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-cauchy-complete",
+      "used_for": "Coordinate limits of the explicit endpoint-approaching sequence.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positive integrating factors and exponential reciprocals.",
+      "opened": true
+    },
+    {
+      "id": "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+      "used_for": "Absolute continuity of the integrated one-sided Lipschitz coefficient.",
+      "opened": true
+    },
+    {
+      "id": "def-absolutely-continuous-function",
+      "used_for": "Finite disjoint-interval proof that the vector-error norm is absolutely continuous.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Explicit choice assumption in the general residual theorem.",
+      "opened": true
+    },
+    {
+      "id": "def-dependent-choice",
+      "used_for": "Explicit choice assumption inherited from the absolutely-continuous fundamental theorem.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Inner-product algebra, Euclidean norm and squared-component comparisons.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Integrability and positive-part arguments in the general residual proof.",
+      "opened": true
+    },
+    {
+      "id": "def-l-one-of-a-measure",
+      "used_for": "L1 representatives and finite absolute integrals.",
+      "opened": true
+    },
+    {
+      "id": "lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous",
+      "used_for": "Absolute continuity of the integrating factor times the error norm.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Integrability domination and integration of a nonnegative differential-inequality remainder.",
+      "opened": true
+    },
+    {
+      "id": "thm-a-lipschitz-function-after-an-absolutely-continuous-function-is-absolutely-continuous",
+      "used_for": "Absolute continuity of the exponential integrating factor.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Differentiation of squared norms and integrating-factor products.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of products and positive parts in the general residual proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Norm continuity, residual pairing bounds and Frobenius-to-operator estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Scalar composition derivatives in residual estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Differentiation of integrating factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-first-fundamental-theorem-of-calculus-for-l-one",
+      "used_for": "Almost-everywhere derivative of the integrated coefficient under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+      "used_for": "Almost-everywhere differentiation and integral reconstruction under Countable Choice and Dependent Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-integral-triangle-inequality",
+      "used_for": "Uniform bound on the integrated coefficient.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Integrating differences of L1 functions.",
+      "opened": true
+    },
+    {
+      "id": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+      "used_for": "Replacing a nonnegative-almost-everywhere remainder by its positive part.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-first-part",
+      "used_for": "Classical panelwise derivative of the integrated coefficient.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Finite-panel integrating-factor arguments and strict radius comparison.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-an-inverse",
+      "used_for": "Derivative of the positive square root in the regularized norm proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Positive square roots and regularized error norms.",
+      "opened": true
+    },
+    {
+      "id": "def-abs-value",
+      "used_for": "Controller component magnitudes.",
+      "opened": true
+    },
+    {
+      "id": "def-max-min",
+      "used_for": "Controller scaling and clipping conventions.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-set-has-max",
+      "used_for": "Existence of maxima and minima over the controller's nonempty finite lists.",
+      "opened": true
+    },
+    {
+      "id": "thm-nth-roots-exist",
+      "used_for": "The positive root in the controller's step-size factor.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiation along exact solution curves and rational-DAG compositions.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "Componentwise stage expansion along the Euler-stage segment.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "First-order remainder convention in the rational quotient derivative proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+      "used_for": "Sum and bounded-bilinear product differentiation in the DAG recursion.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-square-monotone",
+      "used_for": "Passing from certified squared bounds to nonnegative norm bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+      "used_for": "The maximal exact solution used in certificate continuation.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of the finite-dimensional closed panel boxes.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "adaptive-ode-solvers-and-error-estimation",
+      "to": "one-step-ode-consistency-and-local-error",
+      "faithful": true,
+      "note": "The embedded-pair and local-order items preserve the supplier's numerical-minus-exact defect convention and uniform admitted-step meaning. No adaptive global bound is inferred from local order."
+    },
+    {
+      "from": "adaptive-ode-solvers-and-error-estimation",
+      "to": "outward-rounded-interval-and-ball-arithmetic",
+      "faithful": true,
+      "note": "The certificate branch uses supported real interval operations, outward conversion of rational inputs, finite DAG enclosure soundness and explicit rejection of nonfinite statuses. It does not invoke unsupported transcendental or complex evaluation."
+    },
+    {
+      "from": "adaptive-ode-solvers-and-error-estimation",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "The common explicit stage recursion and tableau conventions agree with the supplier. Controller stage-domain and evaluation failures are explicit, and accepted high outputs receive an endpoint-domain check."
+    },
+    {
+      "from": "event-location-and-hybrid-trajectory-error",
+      "to": "adaptive-ode-solvers-and-error-estimation",
+      "faithful": true,
+      "note": "The enclosure definition and trajectory/locator theorems use rational residual certification only as a sufficient local-error provider. They require a uniform bound on panel radii and separately account for prior reset-state error. Heun dense output alone is explicitly insufficient."
+    },
+    {
+      "from": "direct-transcription-and-numerical-ode-optimal-control",
+      "to": "adaptive-ode-solvers-and-error-estimation",
+      "faithful": true,
+      "note": "The transcription procedure supplies the optional controller's inputs and reports its finite status separately from the NLP. The page and procedure explicitly avoid treating an embedded difference or controller termination as a certified global error bound."
+    }
+  ]
+}

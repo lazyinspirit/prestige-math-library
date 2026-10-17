@@ -1,0 +1,151 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "4",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-polynomial-highest-derivative",
+      "model": "gpt-6-luna",
+      "context_sha256": "1f5c73b2d17c88216ce261e17e3b25b2daad7ecf115e46db574ef3db9a305845",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal misdescription in F1: the published definition makes zero a separate formal object, whereas the Statement already specifies its all-zero evaluation vector. Corrected F1 and separated the zero-function case in step 1.1. Termwise differentiation gives Q_(r+1), the bounded induction gives Q_m, and factorial clauses (a),(d) plus the natural-real bridge give a_m m!_R. Also corrected the base-case reference in step 3.1 to step 2.1. The Statement and dependencies are unchanged; no choice is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-finite-barycentric-interpolation-evaluator-returns-status",
+      "model": "gpt-6-luna",
+      "context_sha256": "54df711f2714c642062e46411468f908d4fe63ac8e7bd71fad190150e6573197",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed nonfatal overstatement in step 3.1: an arithmetic failure can terminate evaluation before all n+1 terms, but early exits already prove termination. Replaced exactly by at most, restricted the denominator branch to completed loops, and made the zero-accumulator domain explicit. Checked all five procedure branches: invalid lengths/membership/order return their declared status; node queries return validated data; the one guard makes weight operands valid; checked results stay in F; zero D and final division have explicit outcomes. No accuracy assertion or choice is introduced; Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-polynomial-highest-derivative",
+      "disposition": "repaired",
+      "post_sha256": "7df007c5c2608f5c661c85293f9a62d53f5f70eef03482a095c2ce9dccf873c1",
+      "review_context_sha256": "21ffbbc02152b8a1bd9094a62f29ca595275195320f7835f7c4efa98abd1aa41",
+      "reason": "Confirmed nonfatal misdescription in F1: the published definition makes zero a separate formal object, whereas the Statement already specifies its all-zero evaluation vector. Corrected F1 and separated the zero-function case in step 1.1. Termwise differentiation gives Q_(r+1), the bounded induction gives Q_m, and factorial clauses (a),(d) plus the natural-real bridge give a_m m!_R. Also corrected the base-case reference in step 3.1 to step 2.1. The Statement and dependencies are unchanged; no choice is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "prop-finite-barycentric-interpolation-evaluator-returns-status",
+      "disposition": "repaired",
+      "post_sha256": "bea68c14c8de4898b8ea0c4612b74e86adbdae1b41312eb11276485e01e88fbf",
+      "review_context_sha256": "d41a569c298ea5cd5350614b018eeb02862eec7b74e465dff644c02304885e74",
+      "reason": "Confirmed nonfatal overstatement in step 3.1: an arithmetic failure can terminate evaluation before all n+1 terms, but early exits already prove termination. Replaced exactly by at most, restricted the denominator branch to completed loops, and made the zero-accumulator domain explicit. Checked all five procedure branches: invalid lengths/membership/order return their declared status; node queries return validated data; the one guard makes weight operands valid; checked results stay in F; zero D and final division have explicit outcomes. No accuracy assertion or choice is introduced; Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-polynomial-highest-derivative",
+      "severity": "nonfatal",
+      "location": "facts-block",
+      "source_location": "F1 and proof step 1.1",
+      "disposition": "fixed",
+      "reason": "F1 incorrectly called every formal polynomial a finite coefficient list. The Statement already prescribed an all-zero evaluation vector for formal zero, so the derivative claim and its induction remain valid. F1 now distinguishes formal zero, and step 1.1 treats its zero evaluation explicitly.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-polynomial-highest-derivative",
+      "severity": "nonfatal",
+      "location": "proof-step",
+      "source_location": "3.1",
+      "disposition": "fixed",
+      "reason": "The base Q_0=p=p^(0) is proved explicitly in step 2.1, although step 3.1 originally pointed to step 1.1. Corrected the reference to step 2.1; no missing argument or new prerequisite was needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "prop-finite-barycentric-interpolation-evaluator-returns-status",
+      "severity": "nonfatal",
+      "location": "proof-step",
+      "source_location": "3.1",
+      "disposition": "fixed",
+      "reason": "An early checked-operation failure can stop evaluation before n+1 terms. Replaced the exact count by an upper bound and made post-loop branches conditional on completion. Early exits already establish termination, and all successful arithmetic values stay in F.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "lem-polynomial-highest-derivative",
+      "claim": "For m>=1, the mth derivative of a padded polynomial evaluation equals a_m m!_R, including the zero evaluation; formal zero is not a coefficient list.",
+      "evidence": [
+        "items/def-real-polynomial-degree-leading-coefficient-and-monic.md#Definition",
+        "items/lem-derivative-of-a-power.md#Statement (claims 1,2,4)",
+        "items/def-factorial-and-falling-factorial.md#Definition (a),(d)",
+        "items/lem-nat-finite-sum-laws-and-the-canonical-embedding.md#Statement (6)"
+      ],
+      "validation": [
+        "node tools/tsx-run.mjs tools/precheck.mts items/lem-polynomial-highest-derivative.md --json: exit 0, one checked proof, zero failures.",
+        "node tools/rendercheck.mjs items/lem-polynomial-highest-derivative.md --json: exit 0, one checked item, no errors or warnings.",
+        "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-4.proof-contracts.json --items lem-polynomial-highest-derivative,prop-finite-barycentric-interpolation-evaluator-returns-status --strict --json: exit 0, both checked, no errors or warnings.",
+        "node tools/proof-layout.mjs items/lem-polynomial-highest-derivative.md items/prop-finite-barycentric-interpolation-evaluator-returns-status.md: exit 0, 2 items, 8 steps, 0 defects."
+      ],
+      "remaining": "None. No unresolved mathematics, new prerequisite, interface change, or downstream obligation.",
+      "dependencies": [
+        "def-real-polynomial-degree-leading-coefficient-and-monic",
+        "def-higher-derivatives-and-smoothness",
+        "lem-derivative-of-a-power",
+        "thm-induction-principle",
+        "def-canonical-natural",
+        "def-factorial-and-falling-factorial",
+        "lem-nat-finite-sum-laws-and-the-canonical-embedding"
+      ],
+      "contract_repair": "Under step5-shared-write-lock, reread the owning contract and synchronized only changed derivation claim text; strict focused contract check passed before release. Original independent review metadata was preserved."
+    },
+    {
+      "id": "prop-finite-barycentric-interpolation-evaluator-returns-status",
+      "claim": "Every admissible finite candidate input terminates with a declared status; success returns an element of F without an accuracy guarantee.",
+      "evidence": [
+        "items/alg-finite-barycentric-interpolation-evaluator.md#Definition (checked operations and procedure 1-5)",
+        "items/def-standard-relative-floating-point-model-and-unit-roundoff.md#Definition (finite F, zero membership, rounding domain and range)"
+      ],
+      "remaining": "None. No unresolved mathematics, new prerequisite, interface change, or downstream obligation.",
+      "dependencies": [
+        "alg-finite-barycentric-interpolation-evaluator"
+      ],
+      "validation": [
+        "node tools/tsx-run.mjs tools/precheck.mts items/prop-finite-barycentric-interpolation-evaluator-returns-status.md --json: exit 0, one checked proof, zero failures.",
+        "node tools/rendercheck.mjs items/prop-finite-barycentric-interpolation-evaluator-returns-status.md --json: exit 0, one checked item, no errors or warnings.",
+        "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-4.proof-contracts.json --items lem-polynomial-highest-derivative,prop-finite-barycentric-interpolation-evaluator-returns-status --strict --json: exit 0, both checked, no errors or warnings.",
+        "node tools/proof-layout.mjs items/lem-polynomial-highest-derivative.md items/prop-finite-barycentric-interpolation-evaluator-returns-status.md: exit 0, 2 items, 8 steps, 0 defects."
+      ],
+      "contract_repair": "Under step5-shared-write-lock, reread the owning contract and synchronized only changed derivation claim text; strict focused contract check passed before release. Original independent review metadata was preserved."
+    },
+    {
+      "scope": "batch",
+      "interface_comparison": "The original and current Statement sections of both items are unchanged; changes are confined to the Given/F1/proof text and owning derivation mirrors. No Statement or Definition change triggers consumer propagation.",
+      "page_interface": "Both draft owning pages retain their original interpolation, remainder, checked-evaluator and no-accuracy-guarantee descriptions; no page edit is needed.",
+      "published_ledger": "No potentially defective published consumer or outside-frontier consumer was discovered; no published-ledger update is proposed.",
+      "source_review": "Elementary polynomial differentiation and finite procedural termination were familiar. Consulted the exact local prerequisites and contract citations listed above; no external source reading or independent review of these repairs is claimed.",
+      "review_contexts": "Captured immediately after each mathematical item review, before editing the next item; after contract-only synchronization, rechecked the exact edited derivations and recaptured both identical context hashes."
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+[
+  {
+    "order": 2392,
+    "id": "geometric-numerical-integration",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Geometric numerical integration",
+    "companion": "geometric-numerical-integration-examples",
+    "requires": [
+      "hamiltonian-mechanics-and-completely-integrable-systems",
+      "symplectic-manifolds-moser-stability-and-darboux-weinstein-theory",
+      "runge-kutta-methods-and-order",
+      "hamiltonian-monte-carlo-and-leapfrog"
+    ],
+    "items": [
+      {
+        "id": "def-local-leapfrog-domain-on-an-open-configuration-set",
+        "deps": [
+          "def-leapfrog-step-map"
+        ],
+        "dependency_level": 0,
+        "title": "Local domain restriction for kick, drift, and leapfrog maps",
+        "kind": "definition"
+      },
+      {
+        "id": "lem-local-hamiltonian-flow-preserves-symplectic-matrix",
+        "deps": [
+          "def-hamiltonian-vector-field-and-hamiltonian-function",
+          "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+          "thm-symmetry-of-higher-mixed-partials"
+        ],
+        "dependency_level": 0,
+        "title": "A smooth local Hamiltonian flow preserves the canonical symplectic matrix",
+        "kind": "lemma"
+      },
+      {
+        "id": "alg-local-symplectic-euler-step",
+        "deps": [
+          "def-local-leapfrog-domain-on-an-open-configuration-set"
+        ],
+        "dependency_level": 1,
+        "title": "Local kick-then-drift symplectic Euler step",
+        "kind": "algorithm"
+      },
+      {
+        "id": "alg-implicit-midpoint-hamiltonian-step",
+        "deps": [
+          "def-local-leapfrog-domain-on-an-open-configuration-set"
+        ],
+        "dependency_level": 1,
+        "title": "Local implicit midpoint step for a Hamiltonian vector field",
+        "kind": "algorithm",
+        "justified_by": [
+          "thm-implicit-midpoint-branch-symplectic-order-and-error"
+        ]
+      },
+      {
+        "id": "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians",
+        "deps": [
+          "def-leapfrog-step-map",
+          "def-local-leapfrog-domain-on-an-open-configuration-set",
+          "def-symplectic-form-and-symplectic-manifold",
+          "thm-symmetry-of-higher-mixed-partials"
+        ],
+        "dependency_level": 1,
+        "title": "Canonical kick and drift shears satisfy the symplectic Jacobian identity",
+        "kind": "lemma"
+      },
+      {
+        "id": "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+        "deps": [
+          "def-local-leapfrog-domain-on-an-open-configuration-set",
+          "alg-local-symplectic-euler-step",
+          "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians",
+          "def-symplectic-form-and-symplectic-manifold",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 2,
+        "title": "Local leapfrog and kick-then-drift symplectic Euler are symplectic",
+        "kind": "proposition"
+      },
+      {
+        "id": "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+        "deps": [
+          "def-banach-space",
+          "def-norm-and-normed-space",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "thm-euclidean-space-complete",
+          "lem-mean-value-inequality-for-a-differentiable-banach-valued-curve",
+          "def-local-leapfrog-domain-on-an-open-configuration-set",
+          "alg-local-symplectic-euler-step",
+          "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "dependency_level": 2,
+        "title": "Local and finite-time trajectory error for symplectic Euler and leapfrog",
+        "kind": "theorem",
+        "statement": "Let $d\\ge1$, $Q\\subseteq\\mathbb R^d$ be open, $V\\in C^3(Q)$, and $M$ symmetric positive definite. Set $H(q,p)=\\tfrac12p^TM^{-1}p+V(q)$ and $F(q,p)=(M^{-1}p,-\\nabla V(q))$. Fix $T>0$ and $h=T/N$ with $N\\ge1$. Suppose the exact solution, numerical states, all kick/drift intermediate states, and every line segment used below lie in one compact convex tube $K\\Subset Q\\times\\mathbb R^d$, with the derivatives of $F$ through order two bounded there. For $z_0$ in that tube, write $e_n^E$ for the error of iterated kick-then-drift symplectic Euler and $e_n^V$ for the error of iterated local leapfrog relative to the exact solution at $t_n=nh$. Write $\\Psi_h^E$ and $\\Psi_h^V$ for their admitted one-step maps and $\\varphi_h$ for the exact flow. For sufficiently small $h$, constants $C_E,C_V,L$ independent of $h,N,n$ satisfy\n$$\\|\\Psi_h^E(z)-\\varphi_h(z)\\|\\le C_Eh^2,\\qquad \\|\\Psi_h^V(z)-\\varphi_h(z)\\|\\le C_Vh^3$$\nfor admitted $z\\in K$, and whenever $nh\\le T$,\n$$e_n^E\\le e^{LT}e_0+C_ETe^{LT}h,\\qquad e_n^V\\le e^{LT}e_0+C_VTe^{LT}h^2.$$\nThus symplectic Euler has global order one and leapfrog has global order two on the stated controlled tube. No unconditional domain-admissibility claim is made.\n\n"
+      },
+      {
+        "id": "thm-implicit-midpoint-branch-symplectic-order-and-error",
+        "deps": [
+          "def-banach-space",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "thm-euclidean-space-complete",
+          "cor-bolzano-weierstrass-in-rn",
+          "lem-mean-value-inequality-for-a-differentiable-banach-valued-curve",
+          "alg-implicit-midpoint-hamiltonian-step",
+          "thm-banach-fixed-point",
+          "thm-euclidean-implicit-function-theorem",
+          "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "thm-symmetry-of-higher-mixed-partials"
+        ],
+        "dependency_level": 2,
+        "title": "The admitted implicit midpoint branch is symplectic and second order",
+        "kind": "theorem"
+      },
+      {
+        "id": "lem-finite-modified-hamiltonian-exists",
+        "deps": [
+          "def-local-leapfrog-domain-on-an-open-configuration-set",
+          "def-hamiltonian-vector-field-and-hamiltonian-function",
+          "alg-local-symplectic-euler-step",
+          "alg-implicit-midpoint-hamiltonian-step",
+          "thm-implicit-midpoint-branch-symplectic-order-and-error",
+          "prop-local-leapfrog-and-symplectic-euler-are-symplectic",
+          "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+          "lem-local-hamiltonian-flow-preserves-symplectic-matrix",
+          "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "dependency_level": 3,
+        "title": "A finite formal logarithm has Hamiltonian coefficients on a star-shaped domain",
+        "kind": "lemma",
+        "statement": "Let $Q\\subseteq\\mathbb R^d$ be open and star-shaped about a point $q_*\\in Q$, meaning $q_*+t(q-q_*)\\in Q$ for every $q\\in Q$ and $t\\in[0,1]$. Let $M$ be real symmetric positive-definite, $U=Q\\times\\mathbb R^d$, and equip $U$ with the canonical form $\\omega=\\sum_{i=1}^d dq_i\\wedge dp_i$ and matrix $J=\\begin{pmatrix}0&I\\\\-I&0\\end{pmatrix}$. Set $H(q,p)=\\tfrac12p^TM^{-1}p+V(q)$ with $V\\in C^\\infty(Q)$. Let $\\Phi_h$ be the kick-then-drift symplectic-Euler map, the local leapfrog map, or an admitted implicit-midpoint branch, on a compact subset where the chosen map is defined. Write $r=1$ for the kick-then-drift symplectic-Euler map and $r=2$ for leapfrog or implicit midpoint, as proved in [[thm-local-symplectic-euler-and-leapfrog-trajectory-errors]] and [[thm-implicit-midpoint-branch-symplectic-order-and-error]]. For a smooth test function $f$, define the pullback $P_hf=f\\circ\\Phi_h$ by its Taylor coefficients at $h=0$. For fixed finite $N\\ge r$, its truncated logarithm is the polynomial\n$$\\log_N(P_h)=\\sum_{k=1}^{N+1}\\frac{(-1)^{k+1}}{k}(P_h-I)^k,$$\ncomputed modulo terms of order $h^{N+2}$. There are smooth vector fields $X_r,\\ldots,X_N$ and globally defined functions $H_r,\\ldots,H_N$ on $U$ such that\n$$h^{-1}\\log_N(P_h)=\\mathcal L_{X_H}+\\sum_{j=r}^Nh^j\\mathcal L_{X_j}\\pmod{h^{N+1}},\\qquad \\iota_{X_j}\\omega=dH_j,$$\nwhere $\\mathcal L_Xf:=Df[X]$. Thus $H_h^{[N]}=H+\\sum_{j=r}^Nh^jH_j$ is a globally defined finite modified Hamiltonian. The logarithm is a finite formal polynomial for each fixed $N$; no convergence of an infinite series is asserted.\n\n"
+      },
+      {
+        "id": "lem-truncated-modified-flow-matches-map",
+        "deps": [
+          "lem-finite-modified-hamiltonian-exists",
+          "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "lem-c1-euclidean-maximal-flow-with-c2-upgrade",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "thm-extreme-value-metric"
+        ],
+        "dependency_level": 4,
+        "title": "A fixed finite modified flow matches its method map to the stated Taylor order",
+        "kind": "lemma"
+      },
+      {
+        "id": "lem-finite-modified-hamiltonian-close-to-original",
+        "deps": [
+          "lem-finite-modified-hamiltonian-exists",
+          "thm-extreme-value-metric"
+        ],
+        "dependency_level": 4,
+        "title": "A fixed finite modified Hamiltonian is close to the original energy",
+        "kind": "lemma"
+      },
+      {
+        "id": "lem-one-step-modified-energy-defect",
+        "deps": [
+          "thm-extreme-value-metric",
+          "cor-mean-value-theorem",
+          "thm-chain-rule-for-total-derivatives",
+          "lem-finite-modified-hamiltonian-exists",
+          "lem-truncated-modified-flow-matches-map",
+          "def-hamiltonian-vector-field-and-hamiltonian-function",
+          "prop-a-hamiltonian-is-conserved-along-its-own-flow",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "lem-c1-euclidean-maximal-flow-with-c2-upgrade"
+        ],
+        "dependency_level": 5,
+        "title": "The finite modified Hamiltonian has a bounded one-step defect",
+        "kind": "lemma",
+        "statement": "Fix $N\\ge r$ and a compact comparison tube $K'\\Subset U$. Let $H_h^{[N]}$ be the finite modified Hamiltonian from [[lem-finite-modified-hamiltonian-exists]]. Suppose $z$, $\\Phi_h(z)$, the exact time-$h$ flow of $X_{H_h^{[N]}}$ from $z$, and the line segment joining those two endpoints all lie in $K'$. For sufficiently small $0<h\\le1$, there is a constant $C_1$ independent of $z,h$ such that\n$$|H_h^{[N]}(\\Phi_h(z))-H_h^{[N]}(z)|\\le C_1h^{N+1}.$$\n\n"
+      },
+      {
+        "id": "thm-finite-order-modified-energy-bound",
+        "deps": [
+          "lem-finite-modified-hamiltonian-exists",
+          "lem-finite-modified-hamiltonian-close-to-original",
+          "lem-one-step-modified-energy-defect",
+          "thm-local-symplectic-euler-and-leapfrog-trajectory-errors",
+          "thm-implicit-midpoint-branch-symplectic-order-and-error"
+        ],
+        "dependency_level": 6,
+        "title": "Finite-order modified energy control on a compact tube",
+        "kind": "theorem",
+        "statement": "Let $Q\\subseteq\\mathbb R^d$ be open and star-shaped about a point $q_*\\in Q$, meaning $q_*+t(q-q_*)\\in Q$ for every $q\\in Q$ and $t\\in[0,1]$. Let $M$ be real symmetric positive-definite, $U=Q\\times\\mathbb R^d$, and $H(q,p)=\\tfrac12p^TM^{-1}p+V(q)$ with $V\\in C^\\infty(Q)$. Choose one of this page's fixed-step methods: kick-then-drift symplectic Euler with $r=1$, or local leapfrog or an admitted implicit midpoint branch with $r=2$. Fix a finite truncation order $N\\ge r$ and choose $h_0\\in(0,1]$ small enough for the selected map and comparison flow branches. For one step size $0<h\\le h_0$, let $z_{k+1}=\\Phi_h(z_k)$ for $k=0,\\ldots,n-1$, with $n\\in\\mathbb N_0$. Assume every numerical endpoint, every method stage, every truncated modified-flow comparison segment, and every segment used to compare $H$ with $H_h^{[N]}$ lies in one compact tube $K\\Subset U$. Then there are constants $C_0,C_1$, independent of $h,n$, such that\n$$|H(z_n)-H(z_0)|\\le 2C_0h^r+C_1n h^{N+1}.$$\nThe bound holds only while the stated compact-tube and domain hypotheses hold; if $nh\\le T$, its accumulated defect term is at most $C_1T h^N$. It asserts neither exact conservation of $H$ by the numerical method nor convergence of an infinite modified series.\n\n"
+      }
+    ]
+  },
+  {
+    "order": 2393,
+    "id": "geometric-numerical-integration-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Geometric numerical integration — Examples",
+    "companion": "geometric-numerical-integration",
+    "requires": [
+      "geometric-numerical-integration"
+    ],
+    "items": [
+      {
+        "id": "ex-backward-euler-is-a-stable-but-not-symplectic",
+        "deps": [
+          "def-symplectic-form-and-symplectic-manifold"
+        ],
+        "dependency_level": 0,
+        "title": "Backward Euler is A-stable but not symplectic",
+        "kind": "example"
+      },
+      {
+        "id": "ex-stoermer-verlet-bounded-harmonic-oscillator-energy",
+        "deps": [
+          "def-leapfrog-step-map"
+        ],
+        "dependency_level": 0,
+        "title": "Störmer–Verlet has bounded oscillatory energy error on the harmonic oscillator",
+        "kind": "example"
+      },
+      {
+        "id": "ex-symplectic-euler-harmonic-oscillator",
+        "deps": [
+          "alg-local-symplectic-euler-step",
+          "def-symplectic-form-and-symplectic-manifold"
+        ],
+        "dependency_level": 2,
+        "title": "Kick-then-drift symplectic Euler on the harmonic oscillator",
+        "kind": "example"
+      }
+    ]
+  }
+]

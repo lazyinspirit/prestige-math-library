@@ -1,0 +1,2095 @@
+{
+  "version": 1,
+  "level": "numerical-optimization-dynamics-2026-10-16-batch-62",
+  "scope": [
+    "lem-polynomial-squarefree-decomposition-and-multiplicity",
+    "thm-sturm-sign-variation-counts-distinct-roots",
+    "lem-squarefree-integer-polynomial-root-separation-bound",
+    "thm-rational-polynomial-root-isolation-is-sound-and-finite",
+    "lem-brouwer-fixed-point-for-closed-box",
+    "lem-real-interval-arithmetic-preserves-enclosure",
+    "lem-interval-jacobian-mean-value-enclosure",
+    "thm-scalar-interval-newton-exclusion-and-inclusion",
+    "thm-smooth-function-root-isolation-soundness",
+    "thm-krawczyk-inclusion-exclusion-and-uniqueness",
+    "ex-double-polynomial-root-has-no-sign-change",
+    "ex-validated-mass-action-equilibrium-root",
+    "ex-event-root-with-derivative-separated-from-zero"
+  ],
+  "contracts": {
+    "lem-polynomial-squarefree-decomposition-and-multiplicity": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-rat-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-rat-order]] is well defined and makes the field\n$\\mathbb{Q}$ ([[thm-rat-field]]) a totally ordered field: the order is total,\n$x \\le y$ implies $x + z \\le y + z$, and $0 < x$, $0 < y$ imply\n$0 < xy$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-polynomial-division-algorithm-over-a-field",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $f\\in F[x]$, and let $0\\ne g\\in F[x]$. There are unique polynomials $q,r\\in F[x]$ such that",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-formal-derivative-laws",
+          "source_section": "Statement",
+          "quote": "For a commutative ring $R$, polynomials $f,g\\in R[x]$, and $c\\in R$:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fundamental-theorem-of-algebra-liouville-proof",
+          "source_section": "Statement",
+          "quote": "Every nonconstant complex polynomial has a complex root.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-factor-theorem-over-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring, $a\\in R$, and $f\\in R[x]$. Then $f(a)=0$ if and only if $x-a$ divides $f$ in $R[x]$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-polynomial-degree-of-a-product-over-a-domain",
+          "source_section": "Statement",
+          "quote": "If $R$ is an integral domain and $f,g\\in R[x]$ are nonzero, then $fg\\ne0$ and",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Euclidean divisions in the gcd of any two polynomials over $\\mathbb Q$ terminate: each nonzero remainder has smaller nonnegative integer degree than the divisor by [F2]. The same argument defines $p_k$; if $\\deg p_{k-1}>0$, then $p_{k-1}'\\ne0$ and has smaller degree by [F3] and characteristic zero, so $\\deg p_k<\\deg p_{k-1}$. Thus $p_d=1$, and each $s_k=p_{k-1}/p_k$ is a polynomial.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F4], repeated application of [F5] factors $f$ over $\\mathbb C$: $f(x)=\\prod_{\\alpha}(x-\\alpha)^{m_\\alpha}$, where the finite list contains each distinct root once and $m_\\alpha\\ge1$. The induction is finite because each division by $x-\\alpha$ lowers degree by one by [F6].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix a current polynomial $p$ in the gcd chain and a root $\\alpha$ of multiplicity $m>0$, so $p=(x-\\alpha)^m u$ with $u(\\alpha)\\ne0$. The product rule [F3] gives $p'=(x-\\alpha)^{m-1}\\bigl(mu+(x-\\alpha)u'\\bigr)$, whose parenthesized factor is nonzero at $\\alpha$ because the field has characteristic zero. Hence the gcd of $p$ and $p'$ has multiplicity exactly $m-1$ at $\\alpha$; a root absent from $p$ is absent from their gcd. The Euclidean divisions over $\\mathbb Q$ remain valid over $\\mathbb C$, so this root-multiplicity computation applies to each $p_k$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F3",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Induction on $k$ now shows that the multiplicity of $\\alpha$ in $p_k$ is $\\max(m_\\alpha-k,0)$. Therefore $\\alpha$ occurs once in $s_k=p_{k-1}/p_k$ exactly when $k\\le m_\\alpha$, and it occurs in $s_k/s_{k+1}$ exactly when $k=m_\\alpha$. This root factorization proves $s_{k+1}$ divides $s_k$ over $\\mathbb C[x]$; division over $\\mathbb Q[x]$ has the same zero remainder, so $q_k=s_k/s_{k+1}$ lies in $\\mathbb Q[x]$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F7",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Each complex root of $f$ occurs in exactly one $q_k$, with exponent one there and exponent $k$ in $q_k^k$. The factorization in [F1] therefore gives $f=\\prod_{k=1}^d q_k^k$; it also proves that each $q_k$ is squarefree and that distinct $q_k$ have no common root, hence are pairwise coprime. The degree-zero case has $f=1$ and an empty root list.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 3.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes P is nonzero; degree zero is separately covered with an empty product and no roots."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero polynomial is excluded; the degree-zero nonzero constant case is handled in the Statement and step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The degree-one case is included by the same gcd chain and multiplicity argument in steps 1.1 and 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Degree zero is the degenerate boundary; step 4.1 gives f=1 and an empty root list."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "No interval endpoints occur in this factorization statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The factorization has finitely many roots; all choices in steps 1.2–4.1 are over a finite list, with no global choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Step 3.1 assigns a root to q_k only at multiplicity k; step 4.1 proves the converse and exact factorization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Step 3.1 assigns a root to q_k only at multiplicity k; step 4.1 proves the converse and exact factorization."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "mixed simple and double roots",
+          "method": "exact rational factorization and gcd",
+          "input": {
+            "P": "(x-1)^2(x+2)"
+          },
+          "calculation": "The gcd chain gives p1=(x-1), p2=1; s1=(x-1)(x+2), s2=(x-1), so q1=x+2 and q2=x-1.",
+          "expected": {
+            "q1": "x+2",
+            "q2": "x-1",
+            "multiplicity_at_1": 2,
+            "multiplicity_at_minus_2": 1
+          }
+        }
+      ]
+    },
+    "thm-sturm-sign-variation-counts-distinct-roots": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-polynomial-division-algorithm-over-a-field",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $f\\in F[x]$, and let $0\\ne g\\in F[x]$. There are unique polynomials $q,r\\in F[x]$ such that",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-formal-derivative-laws",
+          "source_section": "Statement",
+          "quote": "For a commutative ring $R$, polynomials $f,g\\in R[x]$, and $c\\in R$:",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-factor-theorem-over-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring, $a\\in R$, and $f\\in R[x]$. Then $f(a)=0$ if and only if $x-a$ divides $f$ in $R[x]$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-polynomial-degree-of-a-product-over-a-domain",
+          "source_section": "Statement",
+          "quote": "If $R$ is an integral domain and $f,g\\in R[x]$ are nonzero, then $fg\\ne0$ and",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The degrees of nonzero Euclidean remainders strictly decrease by [F1], so the sequence terminates. Since the stated gcd is $1$, the last nonzero remainder is a nonzero constant $c$. Backward substitution in the division equations gives $A,B\\in\\mathbb Q[x]$ with $AP_0+BP_1=c$; dividing by $c$ gives a Bezout identity with right side $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Between zeros of the sequence, every polynomial keeps its sign: a sign change would give a zero by [F3] and [F4]. Each term has finitely many zeros by [F5], so it suffices to compute how $V$ changes when a real point crosses a zero of one or more sequence terms.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "No two consecutive terms can vanish at the same real $c$. By step 1.1 there are $A,B\\in\\mathbb Q[x]$ with $AP_0+BP_1=1$; evaluating at $c$ rules out a common zero of $P_0,P_1$ even over $\\mathbb C$. For $1\\le j<s$, the recurrence $P_{j-1}=Q_jP_j-P_{j+1}$ propagates simultaneous zeros of $P_j,P_{j+1}$ backward to $P_0,P_1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose $P_j(c)=0$ for an internal index $1\\le j<s$. The no-adjacent-zero property in [step 2.1] makes $P_{j-1}(c)$ and $P_{j+1}(c)$ nonzero, and the recurrence gives $P_{j-1}(c)=-P_{j+1}(c)$. They have opposite signs. On either side of $c$, the signs of these neighbors are fixed; after zero entries are deleted, the adjacent nonzero neighbors of each internal zero contribute exactly one sign change. If several internal terms vanish at $c$, their indices are nonconsecutive, so these adjacent-pair contributions may share an endpoint but remain distinct terms in the total variation. Thus internal zeros do not change $V$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $P_0(c)=0$, then squarefreeness gives $P_1(c)=P_0'(c)\\ne0$. Factor $P_0(x)=(x-c)u(x)$ by [F5]; the product rule gives $u(c)=P_1(c)$, so near $c$ the sign of $P_0(x)P_1(x)$ is the sign of $x-c$. Thus the initial pair contributes one sign change just to the left and none just to the right. Any simultaneous internal zeros contribute no net change by [step 3.1], so $V$ decreases by exactly one as $c$ is crossed from left to right.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The endpoints are not roots of $P$ by hypothesis. As one moves from $a$ to $b$, $V$ is constant except at the finitely many roots of sequence terms; by [step 3.1] internal zeros do not change it and by [step 4.1] each distinct root of $P$ lowers it by one. Therefore $V(a)-V(b)$ is exactly the number of distinct roots in $(a,b)$.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires a nonconstant polynomial and finite real endpoints; the zero polynomial is excluded by the nonconstant hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The gcd hypothesis is exactly one and the endpoint values of P are nonzero, so excluded zero cases are explicit in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The count formula includes the case of one distinct root; step 4.1 proves a unit drop at each simple root."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The polynomial is squarefree and nonconstant; repeated roots are excluded by gcd(P,P′)=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement requires P(a)P(b)≠0; roots at endpoints are excluded from the open-interval count."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The proof uses only finite Euclidean divisions and local sign analysis; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way root-count formula, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way root-count formula, not a biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-squarefree-integer-polynomial-root-separation-bound": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fundamental-theorem-of-algebra-liouville-proof",
+          "source_section": "Statement",
+          "quote": "Every nonconstant complex polynomial has a complex root.",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-formal-derivative-laws",
+          "source_section": "Statement",
+          "quote": "For a commutative ring $R$, polynomials $f,g\\in R[x]$, and $c\\in R$:",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-determinant-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$\nThe sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-determinant-is-invariant-under-similarity",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. If $A,B\\in M_n(R)$ are similar over a commutative ring, then $\\det(B)=\\det(A)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-polynomial-division-algorithm-over-a-field",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $f\\in F[x]$, and let $0\\ne g\\in F[x]$. There are unique polynomials $q,r\\in F[x]$ such that",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-factor-theorem-over-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring, $a\\in R$, and $f\\in R[x]$. Then $f(a)=0$ if and only if $x-a$ divides $f$ in $R[x]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-rat-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-rat-order]] is well defined and makes the field\n$\\mathbb{Q}$ ([[thm-rat-field]]) a totally ordered field: the order is total,\n$x \\le y$ implies $x + z \\le y + z$, and $0 < x$, $0 < y$ imply\n$0 < xy$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-polynomial-degree-of-a-product-over-a-domain",
+          "source_section": "Statement",
+          "quote": "If $R$ is an integral domain and $f,g\\in R[x]$ are nonzero, then $fg\\ne0$ and",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $P(z)=0$ and $|z|>1+H$, then $|a_d||z|^d\\le H\\sum_{j=0}^{d-1}|z|^j < H|z|^d/(|z|-1)<|z|^d\\le |a_d||z|^d$, because $|a_d|\\ge1$ and $|z|-1>H$. This contradiction proves $|z|\\le R$ for every root.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $\\alpha_1,\\ldots,\\alpha_d$ be the distinct roots from [F1] and set $D=a_d^{2d-2}\\prod_{i<j}(\\alpha_i-\\alpha_j)^2$. Form the coefficient map $\\Phi(u,v)=uP+vP'$ from pairs with $\\deg u\\le d-2$, $\\deg v\\le d-1$ to polynomials of degree at most $2d-2$. Its square coefficient matrix $S$ has integer entries, so $\\det S$ is an integer-coefficient polynomial in $a_d,\\ldots,a_0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Divide each output polynomial by $P$ and record its quotient and remainder. In coefficient order from highest degree down, the map $(q,r)\\mapsto qP+r$ has triangular diagonal consisting of $d-1$ copies of $a_d$ and $d$ copies of $1$, so the inverse coordinate change has determinant $\\pm a_d^{-(d-1)}$. Under this change, $\\Phi$ has block form $\\begin{pmatrix}I&*\\\\0&M\\end{pmatrix}$, where $M$ is multiplication by $P'$ on $\\mathbb C[x]/(P)$. Hence $\\det S=\\pm a_d^{d-1}\\det M$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each $i$ define $L_i(x)=\\prod_{j\\ne i}(x-\\alpha_j)/(\\alpha_i-\\alpha_j)$. These degree-$(d-1)$ polynomials satisfy $L_i(\\alpha_j)=1$ when $i=j$ and $0$ otherwise. For every degree-$<d$ representative $q$, the difference $q-\\sum_iq(\\alpha_i)L_i$ has degree $<d$ and vanishes at all $d$ distinct roots; [F7] and [F9] force this difference to be zero. Thus evaluation is an isomorphism $\\mathbb C[x]/(P)\\to\\mathbb C^d$. It conjugates $M$ to the diagonal matrix with entries $P'(\\alpha_i)$, so [F4] gives $\\det M=\\prod_iP'(\\alpha_i)$. By [F2], $P'(\\alpha_i)=a_d\\prod_{j\\ne i}(\\alpha_i-\\alpha_j)$; pairing the two factors for each $i<j$ yields $\\det S=\\pm a_d^{2d-1}\\prod_{i<j}(\\alpha_i-\\alpha_j)^2=\\pm a_dD$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F4",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Set the variable $a_d$ to zero in the integer-coefficient polynomial $\\det S$. Then $\\deg P\\le d-1$ and $\\deg P'\\le d-2$, so every $uP+vP'$ has degree at most $2d-3$; the coefficient map misses the $x^{2d-2}$ coordinate and its determinant is zero. Therefore the constant term in $a_d$ of $\\det S$ is zero, so $a_d$ divides $\\det S$ as an integer-coefficient polynomial. At the given integer coefficients, $\\det S/a_d$ is an integer, and [step 3.1] shows that $D$ is an integer up to sign.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 3.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Squarefreeness makes every root distinct, so every factor in $D$ is nonzero and $|D|\\ge1$.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "step 4.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Let $\\delta=\\min_{i<j}|\\alpha_i-\\alpha_j|$ and choose a pair attaining it. Every other pairwise distance is at most $2R$ by [step 1.1] and the triangle inequality [F5]. Thus $1\\le |D|\\le H^{2d-2}\\delta^2(2R)^{d(d-1)-2}$. Rearranging gives $\\delta\\ge H^{-(d-1)}(2R)^{-(d(d-1)-2)/2}=\\sigma(P)$.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 5.1",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires degree d≥2, a nonzero leading coefficient, and H≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The leading coefficient is a nonzero integer and H≥1; the zero polynomial is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Degree one is explicitly separated in the Statement: it has at most one root and needs no pairwise bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Squarefreeness ensures all listed complex roots are distinct; step 5.1 gives a nonzero integer discriminant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The claim is about complex roots and has no interval endpoint convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The minimum pairwise distance is attained over a finite set of root pairs; this uses finite choice only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives root bounds, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives root bounds, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "degree-two squarefree polynomial",
+          "method": "exact bound evaluation",
+          "input": {
+            "P": "x^2-1",
+            "d": 2,
+            "H": 1
+          },
+          "calculation": "R=2 and sigma=1^(-1)*(2*2)^0=1; the two roots −1 and 1 have distance 2.",
+          "expected": {
+            "root_bound": 2,
+            "sigma": "1",
+            "root_distance": "2",
+            "inequality_holds": true
+          }
+        }
+      ]
+    },
+    "thm-rational-polynomial-root-isolation-is-sound-and-finite": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-polynomial-squarefree-decomposition-and-multiplicity",
+          "source_section": "Statement",
+          "quote": "Let $P\\in\\mathbb Q[x]$ be nonzero of degree $d$, and put $f=P/\\operatorname{lc}(P)$, so $f$ is monic. Set $p_0=f$ and, recursively, let $p_k$ be the monic greatest common divisor of $p_{k-1}$ and $p_{k-1}'$ for $k\\ge1$, with $\\gcd(1,0)=1$. For $1\\le k\\le d$, put $s_k=p_{k-1}/p_k$ and put $s_{d+1}=1$. Then each $q_k=s_k/s_{k+1}$ is a monic polynomial in $\\mathbb Q[x]$, the $q_k$ are squarefree and pairwise coprime, and\n$$\nf=\\prod_{k=1}^{d}q_k^k.\n$$\nThe complex roots of $q_k$ are exactly the roots of $P$ having multiplicity $k$. In particular, $\\prod_{k=1}^{d}q_k$ is squarefree and has exactly the distinct roots of $P$. For $d=0$, the product is empty and $P$ has no roots.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sturm-sign-variation-counts-distinct-roots",
+          "source_section": "Statement",
+          "quote": "Let $P\\in\\mathbb Q[x]$ be nonconstant with $\\gcd(P,P')=1$. Define $P_0=P$, $P_1=P'$, and recursively\n$$\nP_{j+1}=-\\operatorname{rem}(P_{j-1},P_j)\n$$\nuntil the final nonzero term $P_s$, which is constant. For a real $t$ that is not a root of $P$, let $V(t)$ be the number of sign changes in $P_0(t),\\ldots,P_s(t)$ after zero entries are deleted. If $a<b$ and $P(a)P(b)\\ne0$, then the number of distinct real roots of $P$ in $(a,b)$ is\n$$\nV(a)-V(b).\n$$\n---",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-squarefree-integer-polynomial-root-separation-bound",
+          "source_section": "Statement",
+          "quote": "Let $P(x)=a_dx^d+\\cdots+a_0\\in\\mathbb Z[x]$ be primitive and squarefree, with $d\\ge2$, $a_d\\ne0$, and coefficient height $H=\\max_j|a_j|\\ge1$. Put $R=1+H$ and\n$$\n\\sigma(P)=H^{-(d-1)}(2R)^{-(d(d-1)-2)/2}.\n$$\nEvery complex root $\\alpha$ of $P$ satisfies $|\\alpha|\\le R$, and any two distinct complex roots satisfy $|\\alpha-\\beta|\\ge\\sigma(P)$. For $d=1$, $P$ has at most one root, so no pairwise separation bound is needed.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-rational-polynomial-root-isolation",
+          "source_section": "Definition",
+          "quote": "Input a rational polynomial $p\\in\\mathbb Q[x]$. Arithmetic on coefficients and endpoints is exact.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Clearing denominators and dividing by the nonzero integer content preserves every root and its multiplicity. By [F1], the active squarefree product has exactly the distinct roots of $p$, and its factors assign each such root its unique multiplicity label.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The coefficient-height bound in [F3] places every root of the initial squarefree polynomial strictly inside $(-B,B)$ because $B=H+2>H+1$. Thus the initial endpoints are nonroots. Bisection endpoints are midpoints tested exactly: a root midpoint is recorded and removed before its open halves are queued, while a nonroot midpoint leaves both endpoints nonroots for the active product.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In each queued interval with nonroot endpoints, [F2] makes the computed variation difference exactly its number of active roots. A zero count safely discards the interval. A count of one gives an isolating interval; the Sturm counts of the pairwise coprime $Q_k$ identify exactly one factor and hence the multiplicity label. If a midpoint is a root, exact division by $x-m$ removes it from that factor and the singleton record carries its multiplicity; otherwise the two open halves partition the parent interval.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Whenever an interval has at least two distinct active roots, their separation [F3] forces its width to be at least $\\sigma$. At bisection depth $n$ the width is $2B(1/2)^n$. Since $(1/2)^n\\to0$ by [F4], some finite depth has width below $\\sigma/4$; such an interval cannot still contain two roots, so each branch stops with count zero or one. The branching factor is at most two and the depth is bounded, so the entire queue tree is finite. For degree one, the initial Sturm count is already zero or one.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At each split, the roots in the parent are partitioned between the open children and, when the midpoint is a root, its exact singleton; a nonroot midpoint contributes no root. Every discarded interval is root-free, and every one-root interval is emitted once. The finite tree therefore accounts for every real root exactly once with the correct multiplicity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "F1",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement distinguishes nonzero p from p=0, for which the algorithm returns identically zero rather than a finite root list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero polynomial branch is explicit in the Statement and algorithm; it makes no finite-isolation claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Degree one is explicitly handled in step 2.2; an initial Sturm count is already zero or one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Exact dyadic roots are emitted as singleton records and removed from active factors by the algorithm."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Step 1.2 proves the initial endpoints are nonroots; the algorithm removes exact endpoint or midpoint roots before counting open intervals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The queue uses deterministic dyadic bisection and exact tests; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a soundness and coverage assertion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a soundness and coverage assertion, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "linear polynomial with exact dyadic root",
+          "method": "exact Sturm count",
+          "input": {
+            "p": "x-1"
+          },
+          "calculation": "The squarefree polynomial has H=1, so B=3; its Sturm sequence (x-1,1) has V(-3)-V(3)=1, and the algorithm emits (-3,3) labelled multiplicity 1.",
+          "expected": {
+            "status": "complete",
+            "interval": "(-3,3)",
+            "multiplicity": 1
+          }
+        }
+      ]
+    },
+    "lem-brouwer-fixed-point-for-closed-box": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-brouwer-fixed-point-theorem",
+          "source_section": "Statement",
+          "quote": "Every continuous map $f:D^n\\to D^n$ of the closed unit ball has a fixed point, for every integer $n\\ge0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-boxes-and-interval-jacobian-enclosures",
+          "source_section": "Definition",
+          "quote": "For an integer $n\\ge1$, a **real box** is a nonempty product\n$X=\\prod_{j=1}^n[a_j,b_j]\\subset\\mathbb R^n$ of closed real intervals with finite dyadic endpoints $a_j\\le b_j$, using the interval convention of [[def-intervals-rectangles-and-complex-balls]]. Its interior is $\\operatorname{int}X=\\prod_{j=1}^n(a_j,b_j)$; it is empty if any side is degenerate.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $J=\\{j:a_j<b_j\\}$ and $m=|J|$. If $m=0$, $X$ is a singleton, so its sole point is fixed. If $m>0$, deleting the fixed coordinates identifies $X$ with a box $X_J$ whose side lengths are positive. The coordinatewise affine map $T:[-1,1]^m\\to X_J$, with $T(u)_j=(a_j+b_j)/2+(b_j-a_j)u_j/2$, is a homeomorphism. Reinserting the fixed coordinate values defines $\\iota:X_J\\to X$, and projection onto the free coordinates defines $\\pi_J:X\\to X_J$; since the fixed output coordinates of $f$ equal their singleton values, $f_J=\\pi_J\\circ f\\circ\\iota$ is a continuous self-map of $X_J$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $\\|u\\|_2=(\\sum_j|u_j|^2)^{1/2}$ and $\\|u\\|_\\infty=\\max_j|u_j|$, let $D^m=\\{u:\\|u\\|_2\\le1\\}$, and put $C_m=[-1,1]^m$. For $u\\ne0$ set $h(u)=(\\|u\\|_2/\\|u\\|_\\infty)u$, and set $h(0)=0$. Then $\\|h(u)\\|_\\infty=\\|u\\|_2\\le1$. For $y\\ne0$ in $C_m$, set $h^{-1}(y)=(\\|y\\|_\\infty/\\|y\\|_2)y$, and set $h^{-1}(0)=0$. For $u\\ne0$, $\\|h(u)\\|_2=\\|u\\|_2^2/\\|u\\|_\\infty$ and $\\|h(u)\\|_\\infty=\\|u\\|_2$, so substituting in $h^{-1}$ gives $h^{-1}(h(u))=u$; the same norm calculation gives $h(h^{-1}(y))=y$ for $y\\ne0$. Both maps are continuous away from zero. At zero, $\\|h(u)\\|_2\\le\\sqrt m\\,\\|u\\|_2$ and $\\|h^{-1}(y)\\|_2\\le\\|y\\|_2$, so both are continuous there. Thus $h$ is a homeomorphism $D^m\\to C_m$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $m>0$, $T\\circ h$ is a homeomorphism from $D^m$ to $X_J$. The conjugate map $g=(T\\circ h)^{-1}\\circ f_J\\circ(T\\circ h):D^m\\to D^m$ is continuous. By [F1], $g$ has a fixed point; mapping it back gives a fixed point of $f_J$, and applying $\\iota$ gives a fixed point of $f$ in $X$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes a nonempty closed box; the empty set is not a self-map domain covered by this claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: A singleton box with all sides degenerate is handled directly in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The free-coordinate dimension m=1 is included in the ball-to-cube homeomorphism and Brouwer application."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Degenerate sides are allowed; step 1.1 removes fixed coordinates and handles the all-degenerate singleton."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The domain is a closed box, including all faces; the homeomorphism maps the closed cube onto it."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Only finitely many free coordinates and coordinate maps are selected; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a fixed-point existence implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a fixed-point existence implication, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-dimensional affine self-map",
+          "method": "exact fixed point calculation",
+          "input": {
+            "X": "[0,1]",
+            "f": "f(x)=1-x"
+          },
+          "calculation": "The equation x=1-x has the solution x=1/2 in the closed interval.",
+          "expected": {
+            "fixed_point": "1/2"
+          }
+        }
+      ]
+    },
+    "lem-real-interval-arithmetic-preserves-enclosure": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-outward-rounded-interval-and-ball-operations",
+          "source_section": "Definition",
+          "quote": "For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-directed-dyadic-rounding-enclosure-and-error",
+          "source_section": "Statement",
+          "quote": "For finite $x$ with $|x|\\le N_{\\max}$, the directed roundings defined in\n[[def-dyadic-floating-point-format-and-directed-rounding]] satisfy\n$\\operatorname{rd}(x)\\le x\\le\\operatorname{ru}(x)$ and each endpoint error is\nat most the stated $\\epsilon_{\\rm abs}(x)$ (with zero error when $x$ is\nrepresentable). For $x>N_{\\max}$ the pair $(N_{\\max},+\\infty)$ encloses $x$;\nfor $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has\nerror bound $+\\infty$ and cannot be reported as a finite-error result.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-intervals-rectangles-and-complex-balls",
+          "source_section": "Definition",
+          "quote": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For intervals $X=[a,b]$ and $Y=[c,d]$, addition and subtraction have exact endpoint ranges $[a+c,b+d]$ and $[a-d,b-c]$. For multiplication, the function $xy$ is affine in either variable with the other fixed, so its extrema on the rectangle $X\\times Y$ occur at one of the four corners. If $0\\notin Y$, reciprocal is monotone on $Y$, and division is multiplication by the exact reciprocal interval; squaring has lower endpoint $0$ when $0\\in X$ and otherwise its endpoint minimum, with endpoint maximum in both cases.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each exact lower and upper endpoint in step 1.1 is expanded outward by the downward and upward roundings in [F1]; [F2] puts the exact endpoint between those rounded values. Thus every finite interval-operation result contains its exact operation range. If an endpoint overflows or a domain restriction fails, the operation reports a non-finite status and the Statement asserts no finite enclosure.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Order the nodes of the finite acyclic graph topologically. Input and constant nodes lie in their declared enclosures by [F3]. Inductively, if an operation node has predecessor values in their computed intervals, step 2.1 shows that its exact output belongs to the computed output interval. The induction reaches every node and therefore the root, for every admissible assignment.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "induction",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement is conditional on finite intervals and finite results; invalid domains and non-finite statuses make no finite claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Zero is allowed in addition, subtraction, multiplication, and squaring; division separately requires a divisor interval avoiding zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The operation formulas include point intervals and exact singleton inputs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singleton intervals are admitted by the interval definition and the endpoint formulas in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Closed interval endpoint extrema are included in the exact hulls and outward rounded endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The proof uses a finite topological ordering of the DAG and induction; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way enclosure theorem, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way enclosure theorem, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "exact dyadic endpoint addition",
+          "method": "exact interval operation",
+          "input": {
+            "X": "[1,2]",
+            "Y": "[3,4]"
+          },
+          "calculation": "[1,2]+[3,4]=[4,6]; all endpoints are exactly representable dyadics, so outward rounding leaves them unchanged.",
+          "expected": {
+            "sum": "[4,6]"
+          }
+        }
+      ]
+    },
+    "lem-interval-jacobian-mean-value-enclosure": {
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a\\in U$, then some $C,\\delta>0$ satisfy $\\|f(a+h)-f(a)\\|_2\\le C\\|h\\|_2$ whenever $\\|h\\|_2<\\delta$ and $a+h\\in U$. In particular $f$ is continuous at $a$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-mean-value-theorem-on-closed-interval",
+          "source_section": "Statement",
+          "quote": "Let $f:[a,b]\\to\\mathbb R$ be continuous on $[a,b]$ and differentiable on\n$(a,b)$, with $a<b$. Then there is $c\\in(a,b)$ such that\n$$\nf(b)-f(a)=f'(c)(b-a).\n$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-boxes-and-interval-jacobian-enclosures",
+          "source_section": "Definition",
+          "quote": "For an integer $n\\ge1$, a **real box** is a nonempty product\n$X=\\prod_{j=1}^n[a_j,b_j]\\subset\\mathbb R^n$ of closed real intervals with finite dyadic endpoints $a_j\\le b_j$, using the interval convention of [[def-intervals-rectangles-and-complex-balls]]. Its interior is $\\operatorname{int}X=\\prod_{j=1}^n(a_j,b_j)$; it is empty if any side is degenerate.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a row index $i$ and define $\\phi_i(t)=F_i(y+t(x-y))$ on $[0,1]$. Convexity keeps the segment in $U$. By [F1], $F_i$ is continuous there; by [F2] and [F3], $\\phi_i$ is differentiable on $(0,1)$ with $\\phi_i'(t)=\\sum_{j=1}^n\\partial_jF_i(y+t(x-y))(x_j-y_j)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F4] to $\\phi_i$ to obtain $t_i\\in(0,1)$ with $F_i(x)-F_i(y)=\\sum_{j=1}^n\\partial_jF_i(z_i)(x_j-y_j)$, where $z_i=y+t_i(x-y)\\in X$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each of the finitely many rows choose the point $z_i$ from step 2.1 and form $A$ whose $i$th row is $\\nabla F_i(z_i)$. By [F5], every entry $A_{ij}$ lies in $J_{ij}(X)$, so $A\\in\\mathcal J(X)$; the row identities in step 2.1 give $F(x)-F(y)=A(x-y)$. This uses only finite choice.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes an open convex U, a box X⊂U, and x,y∈X; no empty-domain assertion is made."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The coincident-point case x=y is included; every row identity then has both sides zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Dimension n=1 is included by the same scalar mean-value argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The argument permits x=y and box coordinates with equal endpoints."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The points x and y may lie on the boundary of X; convexity keeps the whole segment in X⊂U."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Step 3.1 chooses one mean-value point for each of finitely many rows; this is finite choice only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an existence implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an existence implication, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "scalar quadratic difference",
+          "method": "exact mean-value identity",
+          "input": {
+            "F": "F(t)=t^2",
+            "X": "[0,1]",
+            "x": "1",
+            "y": "0",
+            "J": "[0,2]"
+          },
+          "calculation": "At z=1/2, F(1)-F(0)=1 and F′(z)(1-0)=1; the derivative 1 belongs to [0,2].",
+          "expected": {
+            "A": "1",
+            "identity_holds": true
+          }
+        }
+      ]
+    },
+    "thm-scalar-interval-newton-exclusion-and-inclusion": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-real-interval-arithmetic-preserves-enclosure",
+          "source_section": "Statement",
+          "quote": "For finite real intervals on which the operation is defined, each finite result of addition, subtraction, multiplication, division, and squaring in [[def-outward-rounded-interval-and-ball-operations]] contains the exact set of values of the corresponding real operation. For a finite expression directed acyclic graph whose real-operation nodes all return finite interval results, the interval computed at every node contains its exact value for every admissible input assignment; in particular, the root interval contains the exact range. A non-finite status makes no finite enclosure claim.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-mean-value-theorem-on-closed-interval",
+          "source_section": "Statement",
+          "quote": "Let $f:[a,b]\\to\\mathbb R$ be continuous on $[a,b]$ and differentiable on\n$(a,b)$, with $a<b$. Then there is $c\\in(a,b)$ such that\n$$\nf(b)-f(a)=f'(c)(b-a).\n$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-continuity-and-derivative-on-real-interval",
+          "source_section": "Definition",
+          "quote": "For $f:[a,b]\\to\\mathbb R$, continuity at $x\\in[a,b]$ means that for every\n$\\varepsilon>0$ there is $\\delta>0$ such that\n$|f(t)-f(x)|<\\varepsilon$ whenever $t\\in[a,b]$ and $|t-x|<\\delta$.\nDifferentiability at an interior point $c$ means that the two-sided limit\n$$\nf'(c)=\\lim_{h\\to0}\\frac{f(c+h)-f(c)}{h}\n$$\nexists in the real field; differentiability on $(a,b)$ means this holds at\nevery interior point. For higher derivatives, define recursively\n$f^{(j+1)}=(f^{(j)})'$ on the points where the derivative exists. The class\n$C^{n+1}$ on an open interval means that these derivatives through order\n$n+1$ exist and are continuous there.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-scalar-interval-newton-certification",
+          "source_section": "Definition",
+          "quote": "Input a $C^1$ function $f:U\\to\\mathbb R$ on an open interval $U$, a nonempty finite dyadic interval $X_0=[a,b]\\subset U$, an integer update budget $N\\ge0$, and interval evaluators $E_f(I)$ and $E_{f'}(I)$ for every queried subinterval $I\\subseteq U$. Their admissibility condition is $f(I)\\subseteq E_f(I)$ and $f'(I)\\subseteq E_{f'}(I)$; a non-finite evaluator result is not an enclosure usable for certification.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $r\\in X$ is a root and $r=m$, then $0=f(m)\\in F_m$, so $m\\in N$. If $r\\ne m$, the mean value theorem on the segment between $m$ and $r$ gives $\\xi\\in X$ with $f(m)=f'(\\xi)(m-r)$. Since $f'(\\xi)\\in D$ and $f(m)\\in F_m$, interval enclosure [F1] gives $r=m-f(m)/f'(\\xi)\\in N$. Hence every root in $X$ lies in $N\\cap X$, and an empty intersection excludes all roots.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $0\\notin E_f(X)$ and the range enclosure is valid, no $x\\in X$ can satisfy $f(x)=0$, because $f(X)\\subseteq E_f(X)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Suppose $N\\subset\\operatorname{int}X$. Since $0\\notin D$ and $D$ is an interval, every value of $f'$ on $X$ has one fixed strict sign. Let $\\xi_a\\in(a,m)$ and $\\xi_b\\in(m,b)$ be the mean-value points for $[a,m]$ and $[m,b]$, and put $d_a=f'(\\xi_a)$ and $d_b=f'(\\xi_b)$. The exact Newton points $n_a=m-f(m)/d_a$ and $n_b=m-f(m)/d_b$ lie in $N$, so $a<n_a$ and $n_b<b$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At each strict interval update, every root of the current interval belongs to $N\\cap I$ by step 1.1, so induction shows that no root of the original box is lost. If the current interval is a singleton $\\{x\\}$ and the algorithm returns \"unique-root\", then $E_f(\\{x\\})=\\{0\\}$ implies $f(x)=0$; root preservation shows this is the only root of the original box.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $d_a,d_b>0$, the inequality $a<n_a$ gives $f(a)=f(m)-d_a(m-a)<0$, and $n_b<b$ gives $f(b)=f(m)+d_b(b-m)>0$. If $d_a,d_b<0$, multiplying the same inequalities by the negative derivatives reverses them and gives $f(a)>0>f(b)$. In either case [F3] supplies a root in $(a,b)$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.3",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any $x<y$ in $X$, [F2] gives $f(y)-f(x)=f'(\\zeta)(y-x)$ for some $\\zeta\\in(x,y)$. The derivative has the same strict sign throughout $X$, so $f$ is strictly monotone there and has at most one root. Together with step 2.2, the root is unique.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If no exclusion or strict-inclusion test succeeds before the update budget ends, the algorithm's final branch returns \"inconclusive\" by [F5]; this branch supplies no root-absence conclusion.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes a nondegenerate closed interval X=[a,b] with a<b and finite enclosures."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Zero is the target root value; the root inclusion and range-exclusion branches explicitly test whether zero is enclosed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Strict inclusion proves one root and derivative sign proves at most one; the theorem explicitly concludes exactly one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The main strict-inclusion theorem assumes a<b; the algorithm separately handles singleton intervals by exact enclosure."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The interval is closed; the proof uses endpoint signs and the intermediate-value theorem on [a,b]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The mean-value points in the endpoint argument are finitely many witnesses; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives one-way certification implications, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives one-way certification implications, not a biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-smooth-function-root-isolation-soundness": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-smooth-function-root-isolation",
+          "source_section": "Definition",
+          "quote": "Input a $C^1$ function $f:U\\to\\mathbb R$ on an open interval $U$, a nonempty finite dyadic interval $X_0\\subset U$, valid interval range and derivative enclosures on every queried subinterval, a minimum width $\\eta>0$, and a box budget $B\\ge0$. The two enclosure evaluators must contain $f(I)$ and $f'(I)$, respectively; non-finite results cannot certify a root or its absence.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-scalar-interval-newton-exclusion-and-inclusion",
+          "source_section": "Statement",
+          "quote": "Let $f$ be $C^1$ on an open interval containing $X=[a,b]$, with $a<b$. Let $F_m$ enclose $f(m)$, let $D$ enclose $f'(X)$ with $0\\notin D$, and let $N=m-F_m/D$ be the finite outward interval Newton image, where $m=(a+b)/2$. Every root of $f$ in $X$ belongs to $N\\cap X$. Consequently, $0\\notin E_f(X)$ for a valid range enclosure $E_f(X)$, or $N\\cap X=\\varnothing$, certifies that $X$ has no root. If $N\\subset\\operatorname{int}X$, then $f$ has exactly one root in $X$. When the finite update budget ends without one of these certificates, the algorithm returns \"inconclusive\" and proves no absence claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Initially the queue contains the initial interval. Each processed box is either certified root-free, certified to contain one root, recorded unresolved at the width threshold, or replaced by its two closed halves. Those halves cover their parent, so by induction every root not already certified remains in a queued or unresolved interval.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Each processing removes one queued box and adds at most two; after at most $B$ processed boxes the queue is finite with at most $B+1$ entries. The algorithm then records the entire remainder as unresolved, so it terminates for every finite budget.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], no root lies in an excluded box and each certified box has exactly one root. The queue-coverage invariant from step 1.1 places every other root in an unresolved box. Strict-inclusion certificates put their roots in the interiors of the scalar call's boxes; if the scalar procedure certifies after contraction to a singleton, the recorded smooth box is the original processed interval and can contain the root at an endpoint. Therefore unresolved output blocks any claim that all roots have been isolated; it is not evidence of absence.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The algorithm starts from a nonempty compact dyadic interval and finite nonnegative budget and width threshold."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Root tests are for f(x)=0; non-finite or inconclusive results are retained without an absence conclusion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: A certified box contains exactly one root; no claim of global uniqueness across the initial interval is made unless all boxes are certified."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: A singleton initial interval is handled by the scalar procedure; degenerate child intervals are not created by positive-width bisection."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Closed bisection halves cover their parent including the split point; step 1.1 preserves root coverage."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The queue order and midpoint bisection are deterministic; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives one-way soundness and coverage claims, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives one-way soundness and coverage claims, not a biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-krawczyk-inclusion-exclusion-and-uniqueness": {
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-brouwer-fixed-point-for-closed-box",
+          "source_section": "Statement",
+          "quote": "Let $X=\\prod_{j=1}^n[a_j,b_j]\\subset\\mathbb R^n$ be a nonempty real box, allowing $a_j=b_j$. Every continuous map $f:X\\to X$ has a fixed point.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-interval-jacobian-mean-value-enclosure",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^n$ be open and convex, let $X\\subset U$ be a real box, and let $F:U\\to\\mathbb R^n$ be $C^1$. Let $J(X)$ be an interval Jacobian enclosure. For any $x,y\\in X$, there is a point matrix $A\\in\\mathcal J(X)$ such that\n$$\nF(x)-F(y)=A(x-y).\n$$\nThe rows of $A$ may come from different intermediate points; the claim does not assert one common Jacobian value.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-real-interval-arithmetic-preserves-enclosure",
+          "source_section": "Statement",
+          "quote": "For finite real intervals on which the operation is defined, each finite result of addition, subtraction, multiplication, division, and squaring in [[def-outward-rounded-interval-and-ball-operations]] contains the exact set of values of the corresponding real operation. For a finite expression directed acyclic graph whose real-operation nodes all return finite interval results, the interval computed at every node contains its exact value for every admissible input assignment; in particular, the root interval contains the exact range. A non-finite status makes no finite enclosure claim.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a\\in U$, then some $C,\\delta>0$ satisfy $\\|f(a+h)-f(a)\\|_2\\le C\\|h\\|_2$ whenever $\\|h\\|_2<\\delta$ and $a+h\\in U$. In particular $f$ is continuous at $a$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-krawczyk-root-certification",
+          "source_section": "Definition",
+          "quote": "Input $F:U\\to\\mathbb R^n$ of class $C^1$ on an open convex $U$, a nonempty initial real box $X_0\\subset U$, interval evaluators whose returned $F(x_0)$ and $J(Y)$ enclose the exact values at each processed box $Y$, a dyadic point matrix $C$, a rational matrix $W$, a minimum side width $\\eta>0$, and a box budget $B\\ge0$. Check the inverse witness exactly by computing $WC$ and testing $WC=I$. If this test fails, return \"inconclusive: preconditioner not certified nonsingular\". For square matrices, a left inverse implies nonsingularity by rank-nullity ([[thm-rank-nullity]]).",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-boxes-and-interval-jacobian-enclosures",
+          "source_section": "Definition",
+          "quote": "For an integer $n\\ge1$, a **real box** is a nonempty product\n$X=\\prod_{j=1}^n[a_j,b_j]\\subset\\mathbb R^n$ of closed real intervals with finite dyadic endpoints $a_j\\le b_j$, using the interval convention of [[def-intervals-rectangles-and-complex-balls]]. Its interior is $\\operatorname{int}X=\\prod_{j=1}^n(a_j,b_j)$; it is empty if any side is degenerate.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a root $z\\in Y$. By [F2], choose $A\\in\\mathcal J(Y)$ with $F(z)-F(x_0)=A(z-x_0)$. Since $F(z)=0$, rearrangement gives $z=x_0-CF(x_0)+(I-CA)(z-x_0)$. The enclosure conditions on $F_0,J(Y)$ and the finite interval operations [F3] place this exact value in $K$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F6",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus any root in $Y$ belongs to $K\\cap Y$; if that intersection is empty, no root lies in $Y$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Define $g:Y\\to\\mathbb R^n$ by $g(x)=x-CF(x)$. It is continuous by [F4]. For every $x\\in Y$, [F2] applied to $x$ and $x_0$ gives a matrix in $\\mathcal J(Y)$, and the same enclosure argument as in step 1.1 gives $g(x)\\in K$. If $K\\subset\\operatorname{int}Y$, then $g(Y)\\subseteq Y$; [F1] gives $x\\in Y$ with $g(x)=x$. Since $C$ is nonsingular, this identity implies $F(x)=0$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Suppose $x,y\\in Y$ are both roots. Choose $A\\in\\mathcal J(Y)$ from [F2]. By [F3], every entry of $I-CA$ lies in the corresponding interval $E_{ij}$, so $|(I-CA)_{ij}|\\le\\max(|\\inf E_{ij}|,|\\sup E_{ij}|)$ and $\\|I-CA\\|_\\infty\\le\\bar q$. The rowwise identity gives $F(x)-F(y)=A(x-y)=0$, so $(I-CA)(x-y)=x-y$. The row-sum definition of the induced infinity norm gives $\\|(I-CA)(x-y)\\|_\\infty\\le\\bar q\\|x-y\\|_\\infty$. Since $\\bar q<1$, $x=y$.",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Strict inclusion supplies existence by step 2.2, and the certified contraction bound supplies at most one root by step 2.3. Thus \"unique-root\" is sound only in this combined case; with strict inclusion but no contraction bound, the algorithm reports \"existence-only\" by [F5]. Root-free output is justified by step 2.1, and unresolved output makes no claim.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The algorithm processes at most the finite budget $B$. A non-finite evaluation marks its current box unresolved and leaves the remaining queue to be processed; every other inconclusive box is either marked unresolved or replaced by two closed halves whose union is the parent. Thus the bisection and queue rules preserve coverage of the initial box. Together with the sound terminal statuses in step 3.1, this proves that every initial root lies in a unique-root, existence-only, or unresolved output box. If an existence-only or unresolved box remains, no all-roots conclusion is made.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F5",
+            "induction",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes an open convex U, a nonempty box, and a verified nonsingular preconditioner."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Roots are zeros of F; the operator includes exact zero values and returns root-free only after a disjointness check."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Dimension n=1 is included in the box and induced infinity-norm arguments."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: Degenerate processed boxes cannot satisfy strict inclusion into their empty Euclidean interior and remain unresolved or are split when possible."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The boxes are closed; strict inclusion targets their Euclidean interior and bisection children cover the parent faces."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The vector mean-value step selects one point per finitely many rows; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives one-way inclusion, exclusion, and contraction implications, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives one-way inclusion, exclusion, and contraction implications, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "identity map with exact preconditioner",
+          "method": "exact interval calculation",
+          "input": {
+            "F": "F(x)=x",
+            "Y": "[-1,1]",
+            "x0": "0",
+            "C": "1",
+            "W": "1",
+            "J": "[1,1]"
+          },
+          "calculation": "F0={0}, K={0}, E=1-CJ(Y)={0}, and q=0<1; strict inclusion and contraction certify the unique root 0.",
+          "expected": {
+            "K": "{0}",
+            "q": "0",
+            "roots": "0"
+          }
+        }
+      ]
+    },
+    "ex-double-polynomial-root-has-no-sign-change": {
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-polynomial-squarefree-decomposition-and-multiplicity",
+          "source_section": "Statement",
+          "quote": "Let $P\\in\\mathbb Q[x]$ be nonzero of degree $d$, and put $f=P/\\operatorname{lc}(P)$, so $f$ is monic. Set $p_0=f$ and, recursively, let $p_k$ be the monic greatest common divisor of $p_{k-1}$ and $p_{k-1}'$ for $k\\ge1$, with $\\gcd(1,0)=1$. For $1\\le k\\le d$, put $s_k=p_{k-1}/p_k$ and put $s_{d+1}=1$. Then each $q_k=s_k/s_{k+1}$ is a monic polynomial in $\\mathbb Q[x]$, the $q_k$ are squarefree and pairwise coprime, and\n$$\nf=\\prod_{k=1}^{d}q_k^k.\n$$\nThe complex roots of $q_k$ are exactly the roots of $P$ having multiplicity $k$. In particular, $\\prod_{k=1}^{d}q_k$ is squarefree and has exactly the distinct roots of $P$. For $d=0$, the product is empty and $P$ has no roots.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sturm-sign-variation-counts-distinct-roots",
+          "source_section": "Statement",
+          "quote": "Let $P\\in\\mathbb Q[x]$ be nonconstant with $\\gcd(P,P')=1$. Define $P_0=P$, $P_1=P'$, and recursively\n$$\nP_{j+1}=-\\operatorname{rem}(P_{j-1},P_j)\n$$\nuntil the final nonzero term $P_s$, which is constant. For a real $t$ that is not a root of $P$, let $V(t)$ be the number of sign changes in $P_0(t),\\ldots,P_s(t)$ after zero entries are deleted. If $a<b$ and $P(a)P(b)\\ne0$, then the number of distinct real roots of $P$ in $(a,b)$ is\n$$\nV(a)-V(b).\n$$\n---",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rational-polynomial-root-isolation-is-sound-and-finite",
+          "source_section": "Statement",
+          "quote": "For every nonzero $p\\in\\mathbb Q[x]$, the algorithm [[alg-rational-polynomial-root-isolation]] terminates with status \"complete\". Each output singleton is an exact real root with its correct multiplicity; each output open dyadic interval contains exactly one distinct real root of $p$ in its interior and is labelled with that root's multiplicity. Every distinct real root occurs in exactly one output record. For $p=0$ the algorithm returns \"identically zero\", not a finite isolation list.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct calculation gives $p'(x)=2x-2$ and $\\gcd(p,p')=x-1$ after monic normalization. Thus $q_2=x-1$ and $q_1=1$ in [F1], so $1$ is a double root. Also $p(0)=p(2)=1>0$, and $p(x)=(x-1)^2\\ge0$, so there is no sign change across the root.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The squarefree part is $S=x-1$ with Sturm sequence $(S,S')=(x-1,1)$. At endpoints $-3$ and $3$, the sign lists are $(-,+)$ and $(+,+)$, so $V(-3)-V(3)=1-0=1$ by [F2]. The coefficient height of $S$ is $1$, hence the algorithm starts on $(-3,3)$; its single Sturm count is one and the factor count assigns multiplicity $2$. By [F3], this is a complete isolating record.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example uses a nonzero quadratic polynomial and explicitly computes its root set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The zero of p at x=1 is the boundary-sensitive root; p(0)=p(2)=1 and there is no sign change."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The squarefree factor has one distinct root; the Sturm count is one in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The root has multiplicity two; step 1.1 computes the exact gcd squarefree decomposition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The exact endpoints −3 and 3 are nonroots; step 2.1 checks their Sturm signs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: All polynomial and endpoint calculations are exact finite arithmetic; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is a computation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is a computation, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "double root without sign change",
+          "method": "exact polynomial and Sturm calculation",
+          "input": {
+            "p": "x^2-2x+1",
+            "interval": "(-3,3)"
+          },
+          "calculation": "p(0)=p(2)=1; gcd(p,p′)=x-1; S=x-1 has variations 1 at −3 and 0 at 3, so it has one distinct root with multiplicity 2.",
+          "expected": {
+            "distinct_roots": 1,
+            "root": "1",
+            "multiplicity": 2,
+            "endpoint_sign_changes": false
+          }
+        }
+      ]
+    },
+    "ex-validated-mass-action-equilibrium-root": {
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-scalar-interval-newton-certification",
+          "source_section": "Definition",
+          "quote": "Input a $C^1$ function $f:U\\to\\mathbb R$ on an open interval $U$, a nonempty finite dyadic interval $X_0=[a,b]\\subset U$, an integer update budget $N\\ge0$, and interval evaluators $E_f(I)$ and $E_{f'}(I)$ for every queried subinterval $I\\subseteq U$. Their admissibility condition is $f(I)\\subseteq E_f(I)$ and $f'(I)\\subseteq E_{f'}(I)$; a non-finite evaluator result is not an enclosure usable for certification.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-scalar-interval-newton-exclusion-and-inclusion",
+          "source_section": "Statement",
+          "quote": "Let $f$ be $C^1$ on an open interval containing $X=[a,b]$, with $a<b$. Let $F_m$ enclose $f(m)$, let $D$ enclose $f'(X)$ with $0\\notin D$, and let $N=m-F_m/D$ be the finite outward interval Newton image, where $m=(a+b)/2$. Every root of $f$ in $X$ belongs to $N\\cap X$. Consequently, $0\\notin E_f(X)$ for a valid range enclosure $E_f(X)$, or $N\\cap X=\\varnothing$, certifies that $X$ has no root. If $N\\subset\\operatorname{int}X$, then $f$ has exactly one root in $X$. When the finite update budget ends without one of these certificates, the algorithm returns \"inconclusive\" and proves no absence claim.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-real-interval-arithmetic-preserves-enclosure",
+          "source_section": "Statement",
+          "quote": "For finite real intervals on which the operation is defined, each finite result of addition, subtraction, multiplication, division, and squaring in [[def-outward-rounded-interval-and-ball-operations]] contains the exact set of values of the corresponding real operation. For a finite expression directed acyclic graph whose real-operation nodes all return finite interval results, the interval computed at every node contains its exact value for every admissible input assignment; in particular, the root interval contains the exact range. A non-finite status makes no finite enclosure claim.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-continuity-and-derivative-on-real-interval",
+          "source_section": "Definition",
+          "quote": "For $f:[a,b]\\to\\mathbb R$, continuity at $x\\in[a,b]$ means that for every\n$\\varepsilon>0$ there is $\\delta>0$ such that\n$|f(t)-f(x)|<\\varepsilon$ whenever $t\\in[a,b]$ and $|t-x|<\\delta$.\nDifferentiability at an interior point $c$ means that the two-sided limit\n$$\nf'(c)=\\lim_{h\\to0}\\frac{f(c+h)-f(c)}{h}\n$$\nexists in the real field; differentiability on $(a,b)$ means this holds at\nevery interior point. For higher derivatives, define recursively\n$f^{(j+1)}=(f^{(j)})'$ on the points where the derivative exists. The class\n$C^{n+1}$ on an open interval means that these derivatives through order\n$n+1$ exist and are continuous there.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The conservation law and $[B]=a^2$ reduce to $f(a)=a+2a^2-1=0$. At $a=1/2$, $[B]=1/4$, so $[B]=a^2$ and $a+2[B]=1/2+1/2=1$; both concentrations are positive.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Natural interval evaluation gives $E_f(X)=2[3/8,5/8]^2+[3/8,5/8]-1=[-11/32,13/32]$, which contains zero. The difference quotient gives $f'(a)=\\lim_{h\\to0}(4ah+2h^2+h)/h=4a+1$. The midpoint of $X$ is $m=1/2$, with $f(m)=0$ and $f'(X)=4[3/8,5/8]+1=[5/2,7/2]$, which excludes zero.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The interval Newton image is $N=m-[0,0]/[5/2,7/2]=\\{1/2\\}$ by exact interval arithmetic [F3]. Since $\\{1/2\\}\\subset(3/8,5/8)$, the algorithm returns \"unique-root\" by [F1], and [F2] proves that this is the only root in the box. The box therefore certifies the stated positive equilibrium.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example uses a nonempty positive concentration interval X=[3/8,5/8]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The exact residual vanishes at a=1/2; step 1.1 verifies the equilibrium and step 2.1 gives the certificate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The strict Newton image certifies exactly one root in X in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The equilibrium concentrations are finite and positive; no zero or negative concentration is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The closed interval endpoints 3/8 and 5/8 are used in the exact range and derivative enclosures."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example is exact rational arithmetic with no selected witnesses or choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example verifies one certificate, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example verifies one certificate, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "mass-action equilibrium certificate",
+          "method": "exact rational interval arithmetic",
+          "input": {
+            "f": "2a^2+a-1",
+            "X": "[3/8,5/8]"
+          },
+          "calculation": "At m=1/2, f(m)=0 and f′(X)=[5/2,7/2]; N={1/2} is strictly inside X.",
+          "expected": {
+            "N": "{1/2}",
+            "status": "unique-root",
+            "equilibrium": {
+              "A": "1/2",
+              "B": "1/4"
+            }
+          }
+        }
+      ]
+    },
+    "ex-event-root-with-derivative-separated-from-zero": {
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-smooth-function-root-isolation",
+          "source_section": "Definition",
+          "quote": "Input a $C^1$ function $f:U\\to\\mathbb R$ on an open interval $U$, a nonempty finite dyadic interval $X_0\\subset U$, valid interval range and derivative enclosures on every queried subinterval, a minimum width $\\eta>0$, and a box budget $B\\ge0$. The two enclosure evaluators must contain $f(I)$ and $f'(I)$, respectively; non-finite results cannot certify a root or its absence.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-scalar-interval-newton-exclusion-and-inclusion",
+          "source_section": "Statement",
+          "quote": "Let $f$ be $C^1$ on an open interval containing $X=[a,b]$, with $a<b$. Let $F_m$ enclose $f(m)$, let $D$ enclose $f'(X)$ with $0\\notin D$, and let $N=m-F_m/D$ be the finite outward interval Newton image, where $m=(a+b)/2$. Every root of $f$ in $X$ belongs to $N\\cap X$. Consequently, $0\\notin E_f(X)$ for a valid range enclosure $E_f(X)$, or $N\\cap X=\\varnothing$, certifies that $X$ has no root. If $N\\subset\\operatorname{int}X$, then $f$ has exactly one root in $X$. When the finite update budget ends without one of these certificates, the algorithm returns \"inconclusive\" and proves no absence claim.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-real-interval-arithmetic-preserves-enclosure",
+          "source_section": "Statement",
+          "quote": "For finite real intervals on which the operation is defined, each finite result of addition, subtraction, multiplication, division, and squaring in [[def-outward-rounded-interval-and-ball-operations]] contains the exact set of values of the corresponding real operation. For a finite expression directed acyclic graph whose real-operation nodes all return finite interval results, the interval computed at every node contains its exact value for every admissible input assignment; in particular, the root interval contains the exact range. A non-finite status makes no finite enclosure claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-continuity-and-derivative-on-real-interval",
+          "source_section": "Definition",
+          "quote": "For $f:[a,b]\\to\\mathbb R$, continuity at $x\\in[a,b]$ means that for every\n$\\varepsilon>0$ there is $\\delta>0$ such that\n$|f(t)-f(x)|<\\varepsilon$ whenever $t\\in[a,b]$ and $|t-x|<\\delta$.\nDifferentiability at an interior point $c$ means that the two-sided limit\n$$\nf'(c)=\\lim_{h\\to0}\\frac{f(c+h)-f(c)}{h}\n$$\nexists in the real field; differentiability on $(a,b)$ means this holds at\nevery interior point. For higher derivatives, define recursively\n$f^{(j+1)}=(f^{(j)})'$ on the points where the derivative exists. The class\n$C^{n+1}$ on an open interval means that these derivatives through order\n$n+1$ exist and are continuous there.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Natural interval evaluation gives $E_g([1,2])=[1,4]-2=[-1,2]$, which contains zero. For $t\\in[1,2]$, the difference quotient gives $g'(t)=2t\\in[2,4]$, so the derivative enclosure excludes zero with margin $2$. At the midpoint $m=3/2$, $g(m)=1/4$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The interval quotient is $[1/4]/[2,4]=[1/16,1/8]$, hence the Newton image is $N=3/2-[1/16,1/8]=[11/8,23/16]\\subset(1,2)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "With minimum width $1/2$ and box budget $1$, the smooth isolator makes one scalar call on $[1,2]$. The strict inclusion certifies exactly one root in this box by [F2], so the call returns \"unique-root\" and the isolator returns it as a certified event-time box. No conclusion is drawn about roots outside $[1,2]$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example uses the nonempty closed time interval [1,2]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The event equation has one root in [1,2]; the interval range encloses zero and Newton inclusion certifies it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The strict interval Newton inclusion certifies exactly one event root in the box."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The event derivative lies in [2,4], so the certificate stays away from a degenerate zero derivative."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof boundary review: The closed time endpoints 1 and 2 are included in the range and derivative enclosures."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example uses exact rational/dyadic arithmetic and deterministic scalar isolation; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example verifies one certificate, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example verifies one certificate, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "event-time interval Newton certificate",
+          "method": "exact rational interval arithmetic",
+          "input": {
+            "g": "t^2-2",
+            "X": "[1,2]"
+          },
+          "calculation": "E_g(X)=[-1,2], g′(X)=[2,4], m=3/2, and N=[11/8,23/16]⊂(1,2).",
+          "expected": {
+            "N": "[11/8,23/16]",
+            "status": "unique-root",
+            "derivative_separated_from_zero": true
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,2299 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "16",
+  "scope": [
+    "alg-threshold-partial-pivot-sparse-lu",
+    "def-hermitian-structural-graph-adapter",
+    "alg-nested-dissection-ordering-on-regular-grids",
+    "lem-filled-edge-path-characterisation",
+    "thm-threshold-sparse-lu-residual-with-growth",
+    "def-elimination-tree-and-column-reach",
+    "lem-nested-dissection-fronts-are-boundary-limited",
+    "lem-hermitian-schur-support-is-contained-in-structural-fill",
+    "alg-symmetric-indefinite-block-ldl-star",
+    "lem-elimination-tree-reach-contains-each-filled-neighbor",
+    "alg-sparse-cholesky-with-invalid-pivot-status",
+    "thm-block-ldl-star-residual-with-actual-growth",
+    "thm-sparse-cholesky-structural-pattern-without-cancellation",
+    "alg-multifrontal-cholesky-and-sparse-triangular-solves",
+    "thm-multifrontal-elimination-equivalence-and-sparse-costs",
+    "thm-nested-dissection-grid-work-and-storage-bounds",
+    "ex-star-orderings-produce-different-sparse-fill",
+    "ex-nonsingular-indefinite-requires-two-by-two-pivot",
+    "ex-two-dimensional-poisson-nested-dissection-cost",
+    "alg-certified-hermitian-one-and-two-by-two-ldl-kernel",
+    "lem-hermitian-block-ldl-kernel-roundoff-and-reconstruction-residual"
+  ],
+  "contracts": {
+    "alg-threshold-partial-pivot-sparse-lu": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in its Definition/Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate one branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [
+        {
+          "source": "def-permutation-matrix-partial-pivoting-and-pivot-growth",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$, let $F=\\mathbb R$ or $\\mathbb C$, and let $\\sigma$ be a permutation of\n$\\{0,\\ldots,n-1\\}$. The corresponding **permutation matrix** $P_\\sigma$ is the\nmatrix whose $i$-th row is the $\\sigma(i)$-th row of $I_n$. Thus left\nmultiplication by $P_\\sigma$ permutes the rows of a matrix.\n\nIn **Gaussian elimination with partial pivoting**, ties are resolved by a fixed\ndeterministic rule. At stage $k$ one inspects the\nentries in column $k$ from rows $k$ through $n-1$, swaps a row with maximal\nentry modulus into row $k$, and then eliminates the entries below that pivot.\n\nIf $PA=LU$ is the resulting factorisation, its **pivot-growth factor** is\n\n$$\\rho(A):=\\frac{\\max_{i,j}|u_{ij}|}{\\max_{i,j}|a_{ij}|},$$\n\nprovided $A\\ne 0$; when $A=0$ one declares $\\rho(A)=1$. The absolute value or\nmodulus is the one from [[def-abs-value]] on real entries and its standard\ncomplex analogue on complex entries.",
+          "consumer_use": "Input a nonsingular real matrix $A\\in\\mathbb R^{n\\times n}$, an initial simultaneous row-and-column permutation matrix $P$ under the row-action convention of [[def-permutation-matrix-partial-pivoting-and-pivot-growth]], and a threshold $\\theta\\in(0,1]$. Start from $S^{(0)}=PAP^T$. Maintain a row permutation $Q$, a unit lower-triangular factor $L$, and the current active matrix. Every real scalar operation uses [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]; if an exact intermediate is nonzero and subnormal, overflows, or the operation reports range failure, return **range-failure** at its stage. The pivot tests and tie-breaking comparisons are exact guards on the current stored values. For $k=0,\\ldots,n-1$, ties for a maximum are resolved by choosing the smallest current row index."
+        },
+        {
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "consumer_use": "Input a nonsingular real matrix $A\\in\\mathbb R^{n\\times n}$, an initial simultaneous row-and-column permutation matrix $P$ under the row-action convention of [[def-permutation-matrix-partial-pivoting-and-pivot-growth]], and a threshold $\\theta\\in(0,1]$. Start from $S^{(0)}=PAP^T$. Maintain a row permutation $Q$, a unit lower-triangular factor $L$, and the current active matrix. Every real scalar operation uses [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]; if an exact intermediate is nonzero and subnormal, overflows, or the operation reports range failure, return **range-failure** at its stage. The pivot tests and tie-breaking comparisons are exact guards on the current stored values. For $k=0,\\ldots,n-1$, ties for a maximum are resolved by choosing the smallest current row index."
+        }
+      ],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "def-hermitian-structural-graph-adapter": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in its Definition/Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition has no separate one branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [
+        {
+          "source": "def-symmetric-structural-elimination-graph-and-ordering",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\in\\mathbb N$ (including $0$), and let $A\\in M_{n\\times n}(F)$ satisfy\n$A_{ij}=A_{ji}$ for every $i,j<n$ (that is, $A$ is symmetric). Its\n**structural graph** is\nthe simple undirected graph $G_0=(V,E_0)$ with vertex set\n$V=\\{0,\\ldots,n-1\\}$ and edge set\n\n$$E_0:=\\bigl\\{\\{i,j\\}:0\\le i<j<n,\\ A_{ij}\\ne0\\bigr\\}.$$\n\nAn **elimination ordering** is a listing $v_0,\\ldots,v_{n-1}$ in which every\nvertex of $V$ occurs exactly once. Define the current vertex set by\n$V_k=\\{v_\\ell:k\\le\\ell<n\\}$, starting with the structural graph $G_0$. At\nstep $k$, the **later neighbors** of $v_k$ are\n\n$$N_k(v_k):=\\{u\\in V_k\\setminus\\{v_k\\}:\\{u,v_k\\}\\in E_k\\}.$$\n\nThe filled graph $G_{k+1}=(V_{k+1},E_{k+1})$ is obtained by deleting $v_k$ and\nits incident edges, retaining all edges between remaining vertices, and adding\nevery edge between two distinct vertices of $N_k(v_k)$. An edge added at step\n$k$ that was not already in $E_k$ is a **fill edge**. Repeating this rule\ndefines the symbolic elimination pattern for the ordering; it is defined from\nthe initial graph and ordering alone, without numerical pivot values.\n\nIf $N_k(v_k)$ is nonempty, the **parent** of $v_k$ is the later neighbor\n$v_\\ell$ with least position $\\ell>k$ in the ordering. If $N_k(v_k)$ is\nempty, $v_k$ is a root. Each non-root has a unique parent, and positions strictly increase along parent edges, so there is no directed cycle. If the underlying undirected graph had a cycle, its least-position vertex would be a child of both adjacent later vertices, contradicting uniqueness. Thus the parent relation is an elimination forest.",
+          "consumer_use": "Apply the graph and elimination-ordering convention of [[def-symmetric-structural-elimination-graph-and-ordering]] to $H$. Its structural graph is the **Hermitian structural graph** of $A$, and its filled graphs are the symbolic pattern used for Hermitian elimination. The real matrix $H$ records only support; numerical Schur complements are formed from $A$.\n"
+        }
+      ],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "alg-nested-dissection-ordering-on-regular-grids": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in its Definition/Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate one branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [
+        {
+          "source": "def-symmetric-structural-elimination-graph-and-ordering",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\in\\mathbb N$ (including $0$), and let $A\\in M_{n\\times n}(F)$ satisfy\n$A_{ij}=A_{ji}$ for every $i,j<n$ (that is, $A$ is symmetric). Its\n**structural graph** is\nthe simple undirected graph $G_0=(V,E_0)$ with vertex set\n$V=\\{0,\\ldots,n-1\\}$ and edge set\n\n$$E_0:=\\bigl\\{\\{i,j\\}:0\\le i<j<n,\\ A_{ij}\\ne0\\bigr\\}.$$\n\nAn **elimination ordering** is a listing $v_0,\\ldots,v_{n-1}$ in which every\nvertex of $V$ occurs exactly once. Define the current vertex set by\n$V_k=\\{v_\\ell:k\\le\\ell<n\\}$, starting with the structural graph $G_0$. At\nstep $k$, the **later neighbors** of $v_k$ are\n\n$$N_k(v_k):=\\{u\\in V_k\\setminus\\{v_k\\}:\\{u,v_k\\}\\in E_k\\}.$$\n\nThe filled graph $G_{k+1}=(V_{k+1},E_{k+1})$ is obtained by deleting $v_k$ and\nits incident edges, retaining all edges between remaining vertices, and adding\nevery edge between two distinct vertices of $N_k(v_k)$. An edge added at step\n$k$ that was not already in $E_k$ is a **fill edge**. Repeating this rule\ndefines the symbolic elimination pattern for the ordering; it is defined from\nthe initial graph and ordering alone, without numerical pivot values.\n\nIf $N_k(v_k)$ is nonempty, the **parent** of $v_k$ is the later neighbor\n$v_\\ell$ with least position $\\ell>k$ in the ordering. If $N_k(v_k)$ is\nempty, $v_k$ is a root. Each non-root has a unique parent, and positions strictly increase along parent edges, so there is no directed cycle. If the underlying undirected graph had a cycle, its least-position vertex would be a child of both adjacent later vertices, contradicting uniqueness. Thus the parent relation is an elimination forest.",
+          "consumer_use": "Input an integer $k\\ge1$ and dimension $d\\in\\{2,3\\}$. The coordinate vertices are $\\{0,\\ldots,k-1\\}^d$. Identify them with the zero-based matrix indices $0,\\ldots,k^d-1$ by the lexicographic bijection $q(i_1,\\ldots,i_d)=\\sum_{a=1}^d i_a k^{d-a}$. The grid graph has an edge between two coordinate vertices exactly when they differ by $1$ in one coordinate and agree in all others. Use the graph and ordering conventions of [[def-symmetric-structural-elimination-graph-and-ordering]] on these indices. Thus $d=2$ gives the five-point graph and $d=3$ the seven-point graph."
+        }
+      ],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "lem-filled-edge-path-characterisation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-symmetric-structural-elimination-graph-and-ordering",
+          "source_section": "Definition",
+          "quote": "The filled graph $G_{k+1}=(V_{k+1},E_{k+1})$ is obtained by deleting $v_k$ and\nits incident edges, retaining all edges between remaining vertices, and adding\nevery edge between two distinct vertices of $N_k(v_k)$. An edge added at step\n$k$ that was not already in $E_k$ is a **fill edge**. Repeating this rule\ndefines the symbolic elimination pattern for the ordering; it is defined from\nthe initial graph and ordering alone, without numerical pivot values.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "At $k=0$, a walk with no internal vertices consists of one edge, so the claimed equivalence is exactly the definition of $G_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "base",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "Suppose the equivalence holds at stage $k$. A retained edge in $G_{k+1}$ already has a witnessing walk whose internal vertices are among $v_0,\\ldots,v_{k-1}$. An edge newly added at step $k$ joins two vertices $x,y$ that are each adjacent to $v_k$ in $G_k$. The induction hypothesis gives walks from $x$ to $v_k$ and from $v_k$ to $y$ with internal vertices among $v_0,\\ldots,v_{k-1}$; concatenating them gives the required walk with the additional internal vertex $v_k$. This proves the forward implication at stage $k+1$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "IH",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Conversely, let a witnessing walk from $x$ to $y$ have internal vertices among $v_0,\\ldots,v_k$. If it has no internal occurrence of $v_k$, the induction hypothesis gives an edge in $G_k$, which is retained. Otherwise take the first and last internal occurrences of $v_k$. The initial subwalk from $x$ to the first occurrence and the terminal subwalk from the last occurrence to $y$ have all internal vertices among $v_0,\\ldots,v_{k-1}$. By induction, $x$ and $y$ are both later neighbors of $v_k$ in $G_k$. Since $x\\ne y$, the update inserts $\\{x,y\\}$ in $G_{k+1}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "IH",
+            "step 1.2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "The base case and steps 1.2 and 2.1 prove both implications for every stage by induction on $k$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate one branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "thm-threshold-sparse-lu-residual-with-growth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-threshold-partial-pivot-sparse-lu",
+          "source_section": "Definition",
+          "quote": "Input a nonsingular real matrix $A\\in\\mathbb R^{n\\times n}$, an initial simultaneous row-and-column permutation matrix $P$ under the row-action convention of [[def-permutation-matrix-partial-pivoting-and-pivot-growth]], and a threshold $\\theta\\in(0,1]$. Start from $S^{(0)}=PAP^T$. Maintain a row permutation $Q$, a unit lower-triangular factor $L$, and the current active matrix. Every real scalar operation uses [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]; if an exact intermediate is nonzero and subnormal, overflows, or the operation reports range failure, return **range-failure** at its stage. The pivot tests and tie-breaking comparisons are exact guards on the current stored values. For $k=0,\\ldots,n-1$, ties for a maximum are resolved by choosing the smallest current row index.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The initial active matrix is $PAP^T$, whose entrywise maximum is $M$ because $P$ only permutes rows and columns; hence $\\rho\\ge1$. Let $c=S^{(k)}_{ik}$ and $p=S^{(k)}_{kk}$ at a successful pivot. If the diagonal is accepted, [F1] gives $|c/p|\\le\\theta^{-1}$. If a maximum-modulus entry is selected, $|c/p|\\le1\\le\\theta^{-1}$. The rounded division therefore gives $|\\widehat l_{ik}|\\le(1+u)/\\theta\\le2/\\theta$. Also every pivot-row entry and every active entry has modulus at most $\\rho M$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "For a trailing update, write $p_{ij}=\\operatorname{fl}(\\widehat l_{ik}\\widehat u_{kj})$ and $S^{(k+1)}_{ij}=\\operatorname{fl}(S^{(k)}_{ij}-p_{ij})$. Define $e_{ijk}=S^{(k+1)}_{ij}-(S^{(k)}_{ij}-\\widehat l_{ik}\\widehat u_{kj})$. By [F2].\n$$\n|p_{ij}-\\widehat l_{ik}\\widehat u_{kj}|\\le u|\\widehat l_{ik}\\widehat u_{kj}|,\n\\quad\n|S^{(k+1)}_{ij}-(S^{(k)}_{ij}-p_{ij})|\\le u|S^{(k)}_{ij}-p_{ij}|.\n$$\nThe triangle inequality and $|p_{ij}|\\le(1+u)|\\widehat l_{ik}\\widehat u_{kj}|$ yield\n$$\n|e_{ijk}|\\le u|S^{(k)}_{ij}|+u(2+u)|\\widehat l_{ik}\\widehat u_{kj}|\n\\le u\\rho M\\left(1+\\frac{(2+u)(1+u)}{\\theta}\\right)\n\\le \\frac{7u\\rho M}{\\theta},\n$$\nusing $u<1$ and $\\theta\\le1$.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "For a computed multiplier, $\\widehat l_{ik}=\\operatorname{fl}(c/p)$, so [F2] gives a division residual $e^{\\rm div}_{ik}:=c-\\widehat l_{ik}p$ with $|e^{\\rm div}_{ik}|\\le u|c|\\le u\\rho M$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "Track each active row together with its previously stored entries of $\\widehat L$ and its accumulated update residuals. Before stage $k$, for every active row $i$ and active column $j\\ge k$, maintain\n$$\n(Q_k P A P^T)_{ij}=\\sum_{r<k}\\widehat l_{ir}\\widehat u_{rj}+S^{(k)}_{ij}-\\sum_{r<k}e_{ijr},\n$$\nwhere $Q_k$ is the row permutation accumulated so far. At $k=0$ this is $S^{(0)}=PAP^T$. Swapping two active rows also swaps their earlier $L$ entries and residual histories, so it preserves the invariant. After the pivot, $\\widehat u_{kj}=S^{(k)}_{kj}$; each lower-row update is $S^{(k+1)}_{ij}=S^{(k)}_{ij}-\\widehat l_{ik}\\widehat u_{kj}+e_{ijk}$, so substitution gives the same invariant at stage $k+1$. For the pivot column, $S^{(k)}_{ik}=\\widehat l_{ik}\\widehat u_{kk}+e^{\\rm div}_{ik}$ by definition of the division residual. Thus after all stages, for $i\\le j$,\n$$\n(\\widehat QPA P^T)_{ij}-(\\widehat L\\widehat U)_{ij}=-\\sum_{k<i}e_{ijk},\n$$\nand for $i>j$,\n$$\n(\\widehat QPA P^T)_{ij}-(\\widehat L\\widehat U)_{ij}\n=e^{\\rm div}_{ij}-\\sum_{k<j}e_{ijk}.\n$$\nThese identities define $\\Delta A=\\widehat L\\widehat U-\\widehat QPA P^T$. Each entry contains at most $n$ update residuals and at most one division residual.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 2.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "claim": "By steps 1.2–2.1, every residual entry is bounded by\n$$\nn\\frac{7u\\rho M}{\\theta}+u\\rho M\n\\le \\frac{8nu}{\\theta}\\rho M,\n$$\nsince $n\\ge1$ and $\\theta\\le1$. Summing at most $n$ such bounds in any row gives $\\|\\Delta A\\|_\\infty\\le8n^2u\\rho M/\\theta$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5-1",
+          "claim": "The definition of $\\Delta A$ in step 3.1 gives the displayed nearby-factorization identity, and step 4.1 gives both residual bounds. The only growth quantity in the estimate is the maximum active-entry magnitude of this executed run.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate one branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "def-elimination-tree-and-column-reach": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition has no separate zero branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition has no separate one branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [
+        {
+          "source": "def-hermitian-structural-graph-adapter",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$ satisfy $A=A^*$, where $A^*=\\overline A^{\\,T}$. Define a real symmetric pattern matrix $H\\in\\{0,1\\}^{n\\times n}$ by $H_{ii}=0$ and, for $i<j$, set $H_{ij}=H_{ji}=1$ exactly when $A_{ij}\\ne0$; otherwise set both entries to zero. Since $A_{ji}=\\overline{A_{ij}}$, this pattern records exactly the undirected off-diagonal support of $A$.\n\nApply the graph and elimination-ordering convention of [[def-symmetric-structural-elimination-graph-and-ordering]] to $H$. Its structural graph is the **Hermitian structural graph** of $A$, and its filled graphs are the symbolic pattern used for Hermitian elimination. The real matrix $H$ records only support; numerical Schur complements are formed from $A$.",
+          "consumer_use": "Let $A=A^*$ and use the Hermitian structural graph of [[def-hermitian-structural-graph-adapter]]. The graph definition [[def-symmetric-structural-elimination-graph-and-ordering]] supplies the ordering $v_0,\\ldots,v_{n-1}$, filled graphs, parent map, and elimination forest. For each $k$, let $N_k(v_k)$ be the later-neighbor set at elimination of $v_k$, and define its structural column set\n$$\\mathcal C_k=\\{v_k\\}\\cup N_k(v_k).$$\nIts off-diagonal size is the column count $\\ell_k=|N_k(v_k)|$. An **ancestor** of $v_k$ is obtained by following one or more supplied parent edges; a **descendant** is the inverse relation. The **reach** of $v_k$ is the set of vertices visited by following its parent path, including $v_k$.\n"
+        },
+        {
+          "source": "def-symmetric-structural-elimination-graph-and-ordering",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\in\\mathbb N$ (including $0$), and let $A\\in M_{n\\times n}(F)$ satisfy\n$A_{ij}=A_{ji}$ for every $i,j<n$ (that is, $A$ is symmetric). Its\n**structural graph** is\nthe simple undirected graph $G_0=(V,E_0)$ with vertex set\n$V=\\{0,\\ldots,n-1\\}$ and edge set\n\n$$E_0:=\\bigl\\{\\{i,j\\}:0\\le i<j<n,\\ A_{ij}\\ne0\\bigr\\}.$$\n\nAn **elimination ordering** is a listing $v_0,\\ldots,v_{n-1}$ in which every\nvertex of $V$ occurs exactly once. Define the current vertex set by\n$V_k=\\{v_\\ell:k\\le\\ell<n\\}$, starting with the structural graph $G_0$. At\nstep $k$, the **later neighbors** of $v_k$ are\n\n$$N_k(v_k):=\\{u\\in V_k\\setminus\\{v_k\\}:\\{u,v_k\\}\\in E_k\\}.$$\n\nThe filled graph $G_{k+1}=(V_{k+1},E_{k+1})$ is obtained by deleting $v_k$ and\nits incident edges, retaining all edges between remaining vertices, and adding\nevery edge between two distinct vertices of $N_k(v_k)$. An edge added at step\n$k$ that was not already in $E_k$ is a **fill edge**. Repeating this rule\ndefines the symbolic elimination pattern for the ordering; it is defined from\nthe initial graph and ordering alone, without numerical pivot values.\n\nIf $N_k(v_k)$ is nonempty, the **parent** of $v_k$ is the later neighbor\n$v_\\ell$ with least position $\\ell>k$ in the ordering. If $N_k(v_k)$ is\nempty, $v_k$ is a root. Each non-root has a unique parent, and positions strictly increase along parent edges, so there is no directed cycle. If the underlying undirected graph had a cycle, its least-position vertex would be a child of both adjacent later vertices, contradicting uniqueness. Thus the parent relation is an elimination forest.",
+          "consumer_use": "Let $A=A^*$ and use the Hermitian structural graph of [[def-hermitian-structural-graph-adapter]]. The graph definition [[def-symmetric-structural-elimination-graph-and-ordering]] supplies the ordering $v_0,\\ldots,v_{n-1}$, filled graphs, parent map, and elimination forest. For each $k$, let $N_k(v_k)$ be the later-neighbor set at elimination of $v_k$, and define its structural column set\n$$\\mathcal C_k=\\{v_k\\}\\cup N_k(v_k).$$\nIts off-diagonal size is the column count $\\ell_k=|N_k(v_k)|$. An **ancestor** of $v_k$ is obtained by following one or more supplied parent edges; a **descendant** is the inverse relation. The **reach** of $v_k$ is the set of vertices visited by following its parent path, including $v_k$.\n"
+        }
+      ],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "lem-nested-dissection-fronts-are-boundary-limited": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nested-dissection-ordering-on-regular-grids",
+          "source_section": "Definition",
+          "quote": "Order a rectangular coordinate subbox recursively as follows. For each coordinate whose side length is at least $2$, choose its lower median coordinate, namely the coordinate with $\\lfloor(m-1)/2\\rfloor$ positions below it in a side of length $m$. Let $S$ be the union of the coordinate hyperplanes at those selected medians. Delete $S$, obtaining at most $2^d$ nonempty rectangular child boxes. Recursively order the child boxes in lexicographic order of their lower corners, then append the vertices of $S$ in lexicographic order. If no coordinate has side length at least $2$, append the remaining vertex as a terminal separator. Apply this rule first to the whole grid. The resulting order is the **coordinate nested-dissection ordering**.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-filled-edge-path-characterisation",
+          "source_section": "Statement",
+          "quote": "Use the zero-based graph and ordering of [[def-symmetric-structural-elimination-graph-and-ordering]]. For distinct remaining vertices $x,y\\in V_k$, the pair $\\{x,y\\}$ is an edge of $G_k$ if and only if the original graph $G_0$ contains a finite walk from $x$ to $y$ all of whose internal vertices belong to $\\{v_0,\\ldots,v_{k-1}\\}$. A walk may repeat vertices; its internal vertices are the entries other than its two endpoints.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-symmetric-structural-elimination-graph-and-ordering",
+          "source_section": "Definition",
+          "quote": "If $N_k(v_k)$ is nonempty, the **parent** of $v_k$ is the later neighbor\n$v_\\ell$ with least position $\\ell>k$ in the ordering. If $N_k(v_k)$ is\nempty, $v_k$ is a root. Each non-root has a unique parent, and positions strictly increase along parent edges, so there is no directed cycle. If the underlying undirected graph had a cycle, its least-position vertex would be a child of both adjacent later vertices, contradicting uniqueness. Thus the parent relation is an elimination forest.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The root box has empty exterior boundary. If $B$ is a child of a box $C$, every grid neighbor just outside $B$ is either in $S_C$ or just outside $C$: distinct child boxes are separated by the removed coordinate hyperplanes. Thus $\\partial^+B\\subseteq S_C\\cup\\partial^+C$. Induction up the finite recursion tree, using that each ancestor separator is ordered after all vertices in its child boxes by [F1], shows that every vertex of $\\partial^+B$ is ordered after every vertex of $B$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Fix $v\\in S_B$ and a later filled neighbor $w$. If $w\\in B$, then $w$ cannot lie in a child box because every child is ordered before $S_B$; hence $w\\in S_B$. If $w\\notin B$, [F2] gives an original grid walk from $v$ to $w$ whose internal vertices were eliminated before $v$. The first vertex of this walk outside $B$ lies in $\\partial^+B$ and, by step 1.1, is ordered after $v$. It therefore cannot be an internal vertex of the walk, so it must be its endpoint $w$. Hence $w\\in\\partial^+B$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "If the side lengths of $B$ are $m_1,\\ldots,m_d\\le s$, each of its at most $d$ coordinate hyperplanes contains at most $s^{d-1}$ vertices, so $|S_B|\\le d s^{d-1}$. The exterior grid neighbors lie across the $2d$ faces, each with at most $s^{d-1}$ vertices, so $|\\partial^+B|\\le2d s^{d-1}$. The containment in step 2.1 therefore gives the stated column-size bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "claim": "Steps 2.1 and 3.1 establish both the filled-neighbor containment and its numerical bound for every separator vertex, including the terminal one-vertex case.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate zero branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "lem-hermitian-schur-support-is-contained-in-structural-fill": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hermitian-structural-graph-adapter",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$ satisfy $A=A^*$, where $A^*=\\overline A^{\\,T}$. Define a real symmetric pattern matrix $H\\in\\{0,1\\}^{n\\times n}$ by $H_{ii}=0$ and, for $i<j$, set $H_{ij}=H_{ji}=1$ exactly when $A_{ij}\\ne0$; otherwise set both entries to zero. Since $A_{ji}=\\overline{A_{ij}}$, this pattern records exactly the undirected off-diagonal support of $A$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-symmetric-structural-elimination-graph-and-ordering",
+          "source_section": "Definition",
+          "quote": "The filled graph $G_{k+1}=(V_{k+1},E_{k+1})$ is obtained by deleting $v_k$ and\nits incident edges, retaining all edges between remaining vertices, and adding\nevery edge between two distinct vertices of $N_k(v_k)$. An edge added at step\n$k$ that was not already in $E_k$ is a **fill edge**. Repeating this rule\ndefines the symbolic elimination pattern for the ordering; it is defined from\nthe initial graph and ordering alone, without numerical pivot values.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-of-no-zero-divisors",
+          "source_section": "Statement",
+          "quote": "In any field $F$ ([[def-field]]), if $a, b \\in F$ satisfy $ab = 0$, then $a = 0$ or $b = 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "At stage $0$, $S^0=A$ is Hermitian. If $S^k$ is Hermitian, then its diagonal pivot $p_k$ is real. Since it is nonzero, substituting $a=p_k,b=0$ in [F4] gives $p_k^{-1}=p_k/p_k^2=1/p_k\\in\\mathbb R$; the denominator is nonzero by [F3]. For remaining $i,j$,\n$$\\overline{S^{k+1}_{ji}}=\\overline{S^k_{ji}-S^k_{jv_k}p_k^{-1}S^k_{v_ki}}\n=S^k_{ij}-S^k_{iv_k}p_k^{-1}S^k_{v_kj}=S^{k+1}_{ij}.$$\nThus the update preserves Hermitian symmetry.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "base",
+            "IH",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "By [F2], the graph update itself joins every pair of distinct later neighbors of $v_k$. Thus each such later-neighbor set is a clique in the next filled graph.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Induct on the elimination stage for support. Initially every nonzero upper-triangular entry is an edge by [F1]. Suppose the inclusion holds at stage $k$ and $S^{k+1}_{ij}\\ne0$ for $i<j$. If $S^k_{ij}\\ne0$, its edge is retained by [F2]. Otherwise the correction term is nonzero. Since $\\mathbb C$ is a field by [F4], applying [F3] to $(S^k_{iv_k}p_k^{-1})S^k_{v_kj}$ and then to $S^k_{iv_k}p_k^{-1}$ shows that $S^k_{iv_k}\\ne0$ and $S^k_{v_kj}\\ne0$. Hermitian symmetry from step 1.1 gives the undirected edges from $i$ to $v_k$ and from $v_k$ to $j$ in the active graph. Hence both vertices are later neighbors of $v_k$, and [F2] inserts $\\{i,j\\}$. This proves the support inclusion at stage $k+1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "base",
+            "IH",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "The base case and step 2.1 prove the support inclusion at every stage; step 1.2 proves the clique property. The proof uses conjugate symmetry for Hermitian matrices and therefore supplies the complex-Hermitian extension beyond the real-symmetric supplier theorem.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 1.2",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate one branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "alg-symmetric-indefinite-block-ldl-star": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "lem-elimination-tree-reach-contains-each-filled-neighbor": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-elimination-tree-and-column-reach",
+          "source_section": "Definition",
+          "quote": "Let $A=A^*$ and use the Hermitian structural graph of [[def-hermitian-structural-graph-adapter]]. The graph definition [[def-symmetric-structural-elimination-graph-and-ordering]] supplies the ordering $v_0,\\ldots,v_{n-1}$, filled graphs, parent map, and elimination forest. For each $k$, let $N_k(v_k)$ be the later-neighbor set at elimination of $v_k$, and define its structural column set\n$$\\mathcal C_k=\\{v_k\\}\\cup N_k(v_k).$$\nIts off-diagonal size is the column count $\\ell_k=|N_k(v_k)|$. An **ancestor** of $v_k$ is obtained by following one or more supplied parent edges; a **descendant** is the inverse relation. The **reach** of $v_k$ is the set of vertices visited by following its parent path, including $v_k$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-symmetric-structural-elimination-graph-and-ordering",
+          "source_section": "Definition",
+          "quote": "If $N_k(v_k)$ is nonempty, the **parent** of $v_k$ is the later neighbor\n$v_\\ell$ with least position $\\ell>k$ in the ordering. If $N_k(v_k)$ is\nempty, $v_k$ is a root. Each non-root has a unique parent, and positions strictly increase along parent edges, so there is no directed cycle. If the underlying undirected graph had a cycle, its least-position vertex would be a child of both adjacent later vertices, contradicting uniqueness. Thus the parent relation is an elimination forest.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-symmetric-structural-elimination-graph-and-ordering",
+          "source_section": "Definition",
+          "quote": "The filled graph $G_{k+1}=(V_{k+1},E_{k+1})$ is obtained by deleting $v_k$ and\nits incident edges, retaining all edges between remaining vertices, and adding\nevery edge between two distinct vertices of $N_k(v_k)$. An edge added at step\n$k$ that was not already in $E_k$ is a **fill edge**. Repeating this rule\ndefines the symbolic elimination pattern for the ordering; it is defined from\nthe initial graph and ordering alone, without numerical pivot values.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Fix $v_k$ and a later filled neighbor $v_t$. If $v_t$ is the parent, it is an ancestor by definition. Otherwise let $v_s$ be the parent. By [F2], $k<s<t$. Since $v_s$ and $v_t$ are both later neighbors of $v_k$, [F3] inserts $\\{v_s,v_t\\}$ when $v_k$ is eliminated. Thus $v_t$ remains a later neighbor of $v_s$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "Now let $v_s$ be a child of $v_k$. Every later neighbor $v_t$ of $v_s$ is either $v_k$ or is later than $v_k$. In the latter case both $v_k$ and $v_t$ are later neighbors of $v_s$, so [F3] joins them in the filled graph. Thus every element of $\\mathcal C_s\\setminus\\{v_s\\}$ belongs to $\\mathcal C_k$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "If $v_t$ is not the parent of $v_s$, replace $v_k$ by $v_s$ and repeat. At each repetition the ordering position strictly increases and is at most $t$, because the current vertex remains adjacent to $v_t$ and its parent is the earliest later neighbor. The finite increasing sequence must reach position $t$; it cannot stop earlier at a root while still having later neighbor $v_t$. Hence $v_t$ lies on the parent path from $v_k$ and is an ancestor.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "Step 2.1 proves the ancestor assertion, and step 1.2 gives the child-column containment used to assemble fronts.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate one branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "alg-sparse-cholesky-with-invalid-pivot-status": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in its Definition/Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in its Definition/Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate one branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [
+        {
+          "source": "def-hermitian-structural-graph-adapter",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$ satisfy $A=A^*$, where $A^*=\\overline A^{\\,T}$. Define a real symmetric pattern matrix $H\\in\\{0,1\\}^{n\\times n}$ by $H_{ii}=0$ and, for $i<j$, set $H_{ij}=H_{ji}=1$ exactly when $A_{ij}\\ne0$; otherwise set both entries to zero. Since $A_{ji}=\\overline{A_{ij}}$, this pattern records exactly the undirected off-diagonal support of $A$.\n\nApply the graph and elimination-ordering convention of [[def-symmetric-structural-elimination-graph-and-ordering]] to $H$. Its structural graph is the **Hermitian structural graph** of $A$, and its filled graphs are the symbolic pattern used for Hermitian elimination. The real matrix $H$ records only support; numerical Schur complements are formed from $A$.",
+          "consumer_use": "Input a Hermitian positive-definite $A\\in\\mathbb C^{n\\times n}$ in the convention of [[def-cholesky-factorisation-with-positive-diagonal]], its Hermitian structural graph from [[def-hermitian-structural-graph-adapter]], and an ordering $\\pi=(v_0,\\ldots,v_{n-1})$. Use the operation model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. Let $P$ be the permutation matrix whose row $j$ is row $v_j$ of $I_n$, so the ordered matrix is $B=PAP^*$ and $B_{ij}=A_{v_i v_j}$. Relabel the filled graph on the original vertices by positions: $\\{i,j\\}\\in E^+_\\pi$ exactly when $\\{v_i,v_j\\}$ is an edge of the filled graph. In every displayed sum, accumulate in increasing $k$ from left to right."
+        },
+        {
+          "source": "lem-hermitian-schur-support-is-contained-in-structural-fill",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$ be Hermitian and use the Hermitian structural graph adapter of [[def-hermitian-structural-graph-adapter]]. Fix an ordering and suppose each scalar pivot $p_k=S^k_{v_kv_k}$ is nonzero. Form the Hermitian Schur updates\n$$S^{k+1}_{ij}=S^k_{ij}-S^k_{iv_k}p_k^{-1}S^k_{v_kj}.$$\nThen every $S^k$ is Hermitian, every nonzero off-diagonal entry of $S^k$ is an edge of the corresponding filled graph, and the later neighbors of every eliminated vertex form a clique in the next filled graph.",
+          "consumer_use": "Preallocate only the diagonal and lower-triangular positions permitted by $E^+_\\pi$. The support guarantee for complex Hermitian Schur complements is proved in [[lem-hermitian-schur-support-is-contained-in-structural-fill]]. Initialize those positions from the lower triangle of $B$, using zero where a position is not present in the original pattern. For $j=0,\\ldots,n-1$, perform these instructions:"
+        },
+        {
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].",
+          "consumer_use": "Input a Hermitian positive-definite $A\\in\\mathbb C^{n\\times n}$ in the convention of [[def-cholesky-factorisation-with-positive-diagonal]], its Hermitian structural graph from [[def-hermitian-structural-graph-adapter]], and an ordering $\\pi=(v_0,\\ldots,v_{n-1})$. Use the operation model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. Let $P$ be the permutation matrix whose row $j$ is row $v_j$ of $I_n$, so the ordered matrix is $B=PAP^*$ and $B_{ij}=A_{v_i v_j}$. Relabel the filled graph on the original vertices by positions: $\\{i,j\\}\\in E^+_\\pi$ exactly when $\\{v_i,v_j\\}$ is an edge of the filled graph. In every displayed sum, accumulate in increasing $k$ from left to right."
+        },
+        {
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "consumer_use": "Input a Hermitian positive-definite $A\\in\\mathbb C^{n\\times n}$ in the convention of [[def-cholesky-factorisation-with-positive-diagonal]], its Hermitian structural graph from [[def-hermitian-structural-graph-adapter]], and an ordering $\\pi=(v_0,\\ldots,v_{n-1})$. Use the operation model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. Let $P$ be the permutation matrix whose row $j$ is row $v_j$ of $I_n$, so the ordered matrix is $B=PAP^*$ and $B_{ij}=A_{v_i v_j}$. Relabel the filled graph on the original vertices by positions: $\\{i,j\\}\\in E^+_\\pi$ exactly when $\\{v_i,v_j\\}$ is an edge of the filled graph. In every displayed sum, accumulate in increasing $k$ from left to right."
+        }
+      ],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "thm-block-ldl-star-residual-with-actual-growth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-symmetric-indefinite-block-ldl-star",
+          "source_section": "Definition",
+          "quote": "The exact-arithmetic branch is specified first; the finite-precision branch below implements the same declared pivots by certified real-component kernels. Input a Hermitian $A\\in\\mathbb C^{n\\times n}$, an ordering $\\pi=(v_0,\\ldots,v_{n-1})$ and its simultaneous permutation matrix $P$ in the convention of [[def-permutation-matrix-partial-pivoting-and-pivot-growth]], an ordered partition of the permuted positions into consecutive blocks of size $1$ or $2$, and a threshold $\\theta\\in(0,1]$. Apply $P$ once and maintain the Hermitian active Schur complement of $B=PAP^*$. Form the structural graph from [[def-hermitian-structural-graph-adapter]], then relabel its vertex $v_i$ by ordered position $i$; use the graph and fill convention of [[def-symmetric-structural-elimination-graph-and-ordering]] on this position-labeled graph. At stage $r$, the next declared block is the leading active block. For a $1\\times1$ block at index $t$, require $d=a_{tt}\\ne0$ and\n$$\\max_{i\\ne t,\\ i\\text{ active}}|a_{it}|\\le\\theta^{-1}|d|.$$\nFor a declared $2\\times2$ pair $(s,t)$, form the Hermitian principal block\n$$D=\\begin{pmatrix}a_{ss}&a_{st}\\\\\\overline{a_{st}}&a_{tt}\\end{pmatrix}.$$\nRequire $\\det D\\ne0$, and let $c_1=\\max_{i\\notin\\{s,t\\}}|a_{is}|$ and $c_2=\\max_{i\\notin\\{s,t\\}}|a_{it}|$, with an empty maximum equal to zero. Accept the pair only if\n$$|D^{-1}|\\begin{pmatrix}c_1\\\\c_2\\end{pmatrix}\n\\le\\theta^{-1}\\begin{pmatrix}1\\\\1\\end{pmatrix}$$\ncomponentwise. If the declared block fails its test, return **pivot-failure**$(r)$.\n\nWrite the active matrix as\n$$\\begin{pmatrix}D&B^*\\\\B&C\\end{pmatrix}.$$\nCompute the block multiplier $M=BD^{-1}$ and the trailing update $C-BD^{-1}B^*$, retaining all positions allowed by the symbolic graph even when their current numerical value is zero. Symbolically, for the pivot-block index set $J$, let $N(J)$ be the union of its active graph neighbors; remove $J$ and connect every pair of distinct vertices in $N(J)$. Store $D$ as the next diagonal block and continue on the trailing matrix. On completion return $(P,L,D_{\\rm blk})$, where $L$ is unit lower block-triangular and $D_{\\rm blk}$ is block diagonal. The method may return **pivot-failure**$(r)$ on a nonsingular input when the declared pivot sequence contains a block that fails its test; it asserts no universal growth bound.\n\nIn the finite-precision branch, at each declared block use [[alg-certified-hermitian-one-and-two-by-two-ldl-kernel]] with the same threshold, permutation and symbolic block-neighbor clique. Store its returned $D_r,\\widehat M_r$ in $D_{\\rm blk},\\widehat L$, and continue on its Hermitian $\\widehat S_{r+1}$. Return `range-failure`, `pivot-failure` or `pivot-inconclusive` with stage index and partial factors as specified by the kernel. A successful run returns $(P,\\widehat L,D_{\\rm blk})$ together with its pivot certificates. Exact test semantics are retained: only certified admissible blocks are accepted; an unresolved determinant or threshold is inconclusive. No general complex division, automatic pivot existence or universal factor-growth guarantee is assumed.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "3.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hermitian-block-ldl-kernel-roundoff-and-reconstruction-residual",
+          "source_section": "Statement",
+          "quote": "For a successful [[alg-certified-hermitian-one-and-two-by-two-ldl-kernel]], let $k\\in\\{1,2\\}$ and $t$ be its trailing dimension. Every accepted $D$ is nonsingular and satisfies the original exact componentwise threshold test. For either size put $g_j=(1+6u)/(1-(j-1)u)-1$ for $j=1,2$. For $k=1$ put $\\omega_1=u$. For $k=2$ put\n$$\\mu=\\frac{\\epsilon_d}{|\\widehat d|}<1,\\quad \\nu=\\sqrt2u(1+\\mu)+\\mu,$$\n$$\\chi=u+(1+u)(\\sqrt2g_2(1+u)+u),\\qquad \\omega_2=\\nu+\\chi(1+\\nu).$$\nFor either size define\n$$q_k=(1+u)(1+g_k)(1+\\omega_k)-1,\\quad e_M=\\omega_k\\|B\\|_F\\|D^{-1}\\|_2,$$\n$$\\beta=\\sqrt2\\bigl(u\\|C\\|_F+q_k\\|B\\|_F^2\\|D^{-1}\\|_2\\bigr),\\qquad \\eta_{k,t}=\\sqrt2\\max\\{u\\sqrt t,kq_k\\}.$$\nThen, writing $M=BD^{-1}$ and $\\Delta=\\widehat S-(C-BD^{-1}B^*)$,\n$$\\|\\widehat M-M\\|_F\\le e_M,\\qquad \\|\\Delta\\|_2\\le\\beta\\le\\eta_{k,t}(\\|C\\|_2+\\|B\\|_2^2\\|D^{-1}\\|_2).$$\nFor $t=0$ all residuals are zero and use $e_M=\\beta=\\eta_{k,0}=0$. The coefficients are explicit unit-roundoff bounds, $O(u)$ at fixed nonzero normalized determinant as $u\\to0$; near-singular scaled pivots have no uniform smallness guarantee.\n\nThe actual stored multipliers also have coupling residual $N=\\widehat MD-B$. Set $\\widehat T=\\begin{pmatrix}I&0\\\\\\widehat M&I\\end{pmatrix}$. The full reconstruction residual satisfies\n$$F=\\begin{pmatrix}D&B^*\\\\B&C\\end{pmatrix}-\\widehat T\\operatorname{diag}(D,\\widehat S)\\widehat T^*=\\begin{pmatrix}0&-N^*\\\\-N&-\\Delta-(\\widehat M-M)B^*-\\widehat MN^*\\end{pmatrix},$$\n$$\\|F\\|_2\\le f:=\\beta+e_M\\|B\\|_2+(1+\\|\\widehat M\\|_2)e_M\\|D\\|_2.$$\nThis additional residual is necessary for actual rounded output factors; the trailing-only residual applies to conceptual exact multipliers.",
+          "uses": [
+            "5.1",
+            "5.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "For each accepted block, $D_r$ is invertible by its pivot test. Direct block multiplication gives [given, F1, algebra]\n$$\\begin{pmatrix}D_r&B_r^*\\\\B_r&C_r\\end{pmatrix}\n=\\begin{pmatrix}I&0\\\\B_rD_r^{-1}&I\\end{pmatrix}\n\\begin{pmatrix}D_r&0\\\\0&C_r-B_rD_r^{-1}B_r^*\\end{pmatrix}\n\\begin{pmatrix}I&D_r^{-1}B_r^*\\\\0&I\\end{pmatrix},$$\nwith the right-hand side an ordinary matrix product. Thus in exact arithmetic each elimination step is a valid Hermitian congruence and, when all stages finish, their product is $PAP^*=LD_{\\rm blk}L^*$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "With a computed update, the middle trailing block differs by $\\Delta_r$. Hence the reconstructed active matrix at stage $r$ differs from the block factorization with $\\widehat S_{r+1}$ by the embedded matrix whose only nonzero block is $-\\Delta_r$ in the trailing coordinates.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "base",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Substitute the next-stage factorization into the trailing block of step 1.2. The local residual from stage $r+1$ is conjugated by the padded stage-$r$ lower elimination transformation. Repeated substitution therefore yields [step 1.2, F1, IH, induction, algebra]\n$$PAP^*-L_{\\rm ex}D_{\\rm blk}L_{\\rm ex}^*=-\\sum_r W_r E_r W_r^*.$$\nAfter one stage this is step 1.2. Replacing the next trailing block adds $-T_1E_2T_1^*$; each later substitution adds the next embedded residual conjugated by all preceding $T_h$. Induction on the number of processed pivot blocks gives exactly $W_r=T_1\\cdots T_{r-1}$ and the displayed identity.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "For any compatible maps $X,Y$, [F2] gives $\\|XYv\\|_2\\le\\|X\\|_2\\|Yv\\|_2\\le\\|X\\|_2\\|Y\\|_2\\|v\\|_2$, so $\\|XY\\|_2\\le\\|X\\|_2\\|Y\\|_2$. If $E_r$ is the zero-padded trailing block $\\Delta_r$, then $\\|E_r x\\|_2=\\|\\Delta_r x_{\\rm tail}\\|_2\\le\\|\\Delta_r\\|_2\\|x_{\\rm tail}\\|_2\\le\\|\\Delta_r\\|_2\\|x\\|_2$, hence $\\|E_r\\|_2\\le\\|\\Delta_r\\|_2$. Also $\\|X^*\\|_2=\\|X\\|_2$: express the Euclidean norm as $\\sup_{\\|v\\|=1}|\\langle v,w\\rangle|$ by Cauchy-Schwarz and take the two finite unit-vector suprema in either order. These inequalities and the triangle inequality bound each summand in step 2.1 by $\\|W_r\\|_2^2\\|\\Delta_r\\|_2$ and give the first asserted bound.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "Apply [A1] to each $\\Delta_r$ in step 3.1 and use $\\|W_r\\|_2^2\\le\\rho_{\\rm blk}$. Summing gives the second bound. Since every $D_r$ is invertible but may be ill-conditioned and the transformation products may grow, no universal stability constant follows.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "A1",
+            "discharge-induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "claim": "For each accepted concrete kernel apply [F3]. Its $\\eta_{k_r,t_r}$ supplies [A1], so steps 1.1–4.1 give the claimed trailing-only estimate for the conceptual $L_{\\rm ex}$. For actual stored multipliers, [F3] instead gives the active identity $A_r=\\widehat T_r\\operatorname{diag}(D_r,\\widehat S_{r+1})\\widehat T_r^*+F_r$, including the off-diagonal residual $N_r=\\widehat M_rD_r-B_r$.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.2",
+          "claim": "Substitute the next active identity into the previous trailing block. After one stage the reconstruction residual is $F_1$; each additional stage adds its padded $F_r$ conjugated by all preceding stored-multiplier transformations. Induction gives $PAP^*-\\widehat LD_{\\rm blk}\\widehat L^*=\\sum_r\\widehat W_rF_r\\widehat W_r^*$. The same submultiplicativity from step 3.1 and [F3] give the actual-growth bound. In exact arithmetic every local multiplier and Schur residual is zero, recovering the original exact factorization.",
+          "step": "5.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "step 5.1",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "thm-sparse-cholesky-structural-pattern-without-cancellation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-sparse-cholesky-with-invalid-pivot-status",
+          "source_section": "Definition",
+          "quote": "Input a Hermitian positive-definite $A\\in\\mathbb C^{n\\times n}$ in the convention of [[def-cholesky-factorisation-with-positive-diagonal]], its Hermitian structural graph from [[def-hermitian-structural-graph-adapter]], and an ordering $\\pi=(v_0,\\ldots,v_{n-1})$. Use the operation model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. Let $P$ be the permutation matrix whose row $j$ is row $v_j$ of $I_n$, so the ordered matrix is $B=PAP^*$ and $B_{ij}=A_{v_i v_j}$. Relabel the filled graph on the original vertices by positions: $\\{i,j\\}\\in E^+_\\pi$ exactly when $\\{v_i,v_j\\}$ is an edge of the filled graph. In every displayed sum, accumulate in increasing $k$ from left to right.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hermitian-schur-support-is-contained-in-structural-fill",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$ be Hermitian and use the Hermitian structural graph adapter of [[def-hermitian-structural-graph-adapter]]. Fix an ordering and suppose each scalar pivot $p_k=S^k_{v_kv_k}$ is nonzero. Form the Hermitian Schur updates\n$$S^{k+1}_{ij}=S^k_{ij}-S^k_{iv_k}p_k^{-1}S^k_{v_kj}.$$\nThen every $S^k$ is Hermitian, every nonzero off-diagonal entry of $S^k$ is an edge of the corresponding filled graph, and the later neighbors of every eliminated vertex form a clique in the next filled graph.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "A permutation preserves positive definiteness: for $x\\ne0$, $P^*x\\ne0$ and $x^*Bx=(P^*x)^*A(P^*x)>0$. Thus [F3] gives a unique exact Cholesky factor $R$ of $B$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "We show the recurrence in [F1] recovers $R$ column by column, beginning with $j=0$ where the sum is empty. From $B=RR^*$, its $(j,j)$ entry is $B_{jj}=\\sum_{k<j}|r_{jk}|^2+|r_{jj}|^2$; since $r_{jj}>0$, the computed exact pivot is $d_j=|r_{jj}|^2>0$ and its positive square root is $r_{jj}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3",
+            "base",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "For $i>j$, the $(i,j)$ entry of $B=RR^*$ is $B_{ij}=\\sum_{k<j}r_{ik}\\overline{r_{jk}}+r_{ij}\\overline{r_{jj}}$. Because $r_{jj}>0$, solving this identity for $r_{ij}$ gives exactly the recurrence in [F1]. Induction on $j$ therefore makes every computed column equal to the corresponding column of $R$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "IH",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "claim": "Let $S^j$ be the exact Schur complement after eliminating positions $0,\\ldots,j-1$ from $B$. Initially $S^0=B$. If the first $j$ columns equal those of $R$, then\n$$S^j_{ab}=B_{ab}-\\sum_{k<j}r_{ak}\\overline{r_{bk}}.$$\nThis identity holds at $j=0$; eliminating pivot $j$ subtracts $r_{aj}\\overline{r_{bj}}$ because $S^j_{jj}=r_{jj}^2$ and $S^j_{aj}=r_{aj}r_{jj}$, so it holds at $j+1$. In particular the recurrence numerator at position $(i,j)$ is $S^j_{ij}$. By [F2], a nonzero such entry can occur only on an edge of the filled graph. Therefore every structurally absent position has zero numerator and is correctly omitted, proving the factor support inclusion.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "F2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5-1",
+          "claim": "At each permitted strict-lower position, the recurrence gives $l_{ij}=\\nu_{ij}/l_{jj}$ and step 2.1 gives $l_{jj}>0$. Hence $\\nu_{ij}\\ne0$ implies $l_{ij}\\ne0$. Under the stated no-cancellation condition every permitted position is nonzero; together with step 4.1 this gives equality of patterns.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 4.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-6-1",
+          "claim": "Steps 2.1 and 3.1 establish that the exact algorithm returns the unique Cholesky factor; step 4.1 proves the structural upper pattern in the complex Hermitian case; step 5.1 proves equality precisely under the no-cancellation hypothesis. No finite-precision success or stability claim follows from this exact-arithmetic theorem.",
+          "step": "6.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate one branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "alg-multifrontal-cholesky-and-sparse-triangular-solves": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in its Definition/Statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate zero branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate one branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The algorithm has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [
+        {
+          "source": "def-hermitian-structural-graph-adapter",
+          "source_section": "Definition",
+          "quote": "Let $A\\in\\mathbb C^{n\\times n}$ satisfy $A=A^*$, where $A^*=\\overline A^{\\,T}$. Define a real symmetric pattern matrix $H\\in\\{0,1\\}^{n\\times n}$ by $H_{ii}=0$ and, for $i<j$, set $H_{ij}=H_{ji}=1$ exactly when $A_{ij}\\ne0$; otherwise set both entries to zero. Since $A_{ji}=\\overline{A_{ij}}$, this pattern records exactly the undirected off-diagonal support of $A$.\n\nApply the graph and elimination-ordering convention of [[def-symmetric-structural-elimination-graph-and-ordering]] to $H$. Its structural graph is the **Hermitian structural graph** of $A$, and its filled graphs are the symbolic pattern used for Hermitian elimination. The real matrix $H$ records only support; numerical Schur complements are formed from $A$.",
+          "consumer_use": "Input a Hermitian positive-definite matrix $A$, its Hermitian structural graph from [[def-hermitian-structural-graph-adapter]], and an ordering $\\pi=(v_0,\\ldots,v_{n-1})$. Let $P$ be the permutation matrix whose row $r$ is row $v_r$ of $I_n$, and put $B=PAP^*$. Use the filled graph and parent forest of [[def-symmetric-structural-elimination-graph-and-ordering]] and the column patterns of [[def-elimination-tree-and-column-reach]]. For each original vertex $v_r$, let its front index set be\n$$F_r=\\{v_r\\}\\cup N_r^+,$$\nwhere $N_r^+$ is its later-neighbor set in the filled graph. Assign each original matrix entry $A_{pq}$ to the front of the endpoint eliminated first (to their common endpoint for a diagonal entry)."
+        },
+        {
+          "source": "def-symmetric-structural-elimination-graph-and-ordering",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\in\\mathbb N$ (including $0$), and let $A\\in M_{n\\times n}(F)$ satisfy\n$A_{ij}=A_{ji}$ for every $i,j<n$ (that is, $A$ is symmetric). Its\n**structural graph** is\nthe simple undirected graph $G_0=(V,E_0)$ with vertex set\n$V=\\{0,\\ldots,n-1\\}$ and edge set\n\n$$E_0:=\\bigl\\{\\{i,j\\}:0\\le i<j<n,\\ A_{ij}\\ne0\\bigr\\}.$$\n\nAn **elimination ordering** is a listing $v_0,\\ldots,v_{n-1}$ in which every\nvertex of $V$ occurs exactly once. Define the current vertex set by\n$V_k=\\{v_\\ell:k\\le\\ell<n\\}$, starting with the structural graph $G_0$. At\nstep $k$, the **later neighbors** of $v_k$ are\n\n$$N_k(v_k):=\\{u\\in V_k\\setminus\\{v_k\\}:\\{u,v_k\\}\\in E_k\\}.$$\n\nThe filled graph $G_{k+1}=(V_{k+1},E_{k+1})$ is obtained by deleting $v_k$ and\nits incident edges, retaining all edges between remaining vertices, and adding\nevery edge between two distinct vertices of $N_k(v_k)$. An edge added at step\n$k$ that was not already in $E_k$ is a **fill edge**. Repeating this rule\ndefines the symbolic elimination pattern for the ordering; it is defined from\nthe initial graph and ordering alone, without numerical pivot values.\n\nIf $N_k(v_k)$ is nonempty, the **parent** of $v_k$ is the later neighbor\n$v_\\ell$ with least position $\\ell>k$ in the ordering. If $N_k(v_k)$ is\nempty, $v_k$ is a root. Each non-root has a unique parent, and positions strictly increase along parent edges, so there is no directed cycle. If the underlying undirected graph had a cycle, its least-position vertex would be a child of both adjacent later vertices, contradicting uniqueness. Thus the parent relation is an elimination forest.",
+          "consumer_use": "Input a Hermitian positive-definite matrix $A$, its Hermitian structural graph from [[def-hermitian-structural-graph-adapter]], and an ordering $\\pi=(v_0,\\ldots,v_{n-1})$. Let $P$ be the permutation matrix whose row $r$ is row $v_r$ of $I_n$, and put $B=PAP^*$. Use the filled graph and parent forest of [[def-symmetric-structural-elimination-graph-and-ordering]] and the column patterns of [[def-elimination-tree-and-column-reach]]. For each original vertex $v_r$, let its front index set be\n$$F_r=\\{v_r\\}\\cup N_r^+,$$\nwhere $N_r^+$ is its later-neighbor set in the filled graph. Assign each original matrix entry $A_{pq}$ to the front of the endpoint eliminated first (to their common endpoint for a diagonal entry)."
+        },
+        {
+          "source": "def-elimination-tree-and-column-reach",
+          "source_section": "Definition",
+          "quote": "Let $A=A^*$ and use the Hermitian structural graph of [[def-hermitian-structural-graph-adapter]]. The graph definition [[def-symmetric-structural-elimination-graph-and-ordering]] supplies the ordering $v_0,\\ldots,v_{n-1}$, filled graphs, parent map, and elimination forest. For each $k$, let $N_k(v_k)$ be the later-neighbor set at elimination of $v_k$, and define its structural column set\n$$\\mathcal C_k=\\{v_k\\}\\cup N_k(v_k).$$\nIts off-diagonal size is the column count $\\ell_k=|N_k(v_k)|$. An **ancestor** of $v_k$ is obtained by following one or more supplied parent edges; a **descendant** is the inverse relation. The **reach** of $v_k$ is the set of vertices visited by following its parent path, including $v_k$.",
+          "consumer_use": "Input a Hermitian positive-definite matrix $A$, its Hermitian structural graph from [[def-hermitian-structural-graph-adapter]], and an ordering $\\pi=(v_0,\\ldots,v_{n-1})$. Let $P$ be the permutation matrix whose row $r$ is row $v_r$ of $I_n$, and put $B=PAP^*$. Use the filled graph and parent forest of [[def-symmetric-structural-elimination-graph-and-ordering]] and the column patterns of [[def-elimination-tree-and-column-reach]]. For each original vertex $v_r$, let its front index set be\n$$F_r=\\{v_r\\}\\cup N_r^+,$$\nwhere $N_r^+$ is its later-neighbor set in the filled graph. Assign each original matrix entry $A_{pq}$ to the front of the endpoint eliminated first (to their common endpoint for a diagonal entry)."
+        },
+        {
+          "source": "lem-elimination-tree-reach-contains-each-filled-neighbor",
+          "source_section": "Statement",
+          "quote": "Let $v_k$ be a vertex in the elimination forest supplied by [[def-elimination-tree-and-column-reach]]. Every later filled neighbor of $v_k$ lies on its parent path and is therefore an ancestor. Consequently, if $v_s$ is a child of $v_k$, then every later neighbor of $v_s$ other than $v_k$ is a later neighbor of $v_k$; equivalently,\n$$\\mathcal C_s\\setminus\\{v_s\\}\\subseteq\\mathcal C_k.$$",
+          "consumer_use": "Process the elimination forest from leaves to roots. At front $r$, initialize a dense Hermitian array indexed by $F_r$ with the entries assigned to $v_r$. For each child $s$, add its stored contribution array to the entries whose indices lie in $F_s\\setminus\\{v_s\\}$, using the common original-vertex labels. The inclusion needed for this addition is supplied by [[lem-elimination-tree-reach-contains-each-filled-neighbor]]. Apply the pivot, range, and invalid-pivot instructions of [[alg-sparse-cholesky-with-invalid-pivot-status]] to the scalar pivot $v_r$: store factor entries $L_{q r}$ for later vertices $v_q$ in the front and replace the trailing front block $C$ by its Schur update $C-bb^*/d$. Send this trailing contribution array to the parent; at a root discard only the empty final remainder. A failed pivot or range operation returns the same indexed status and stops the factorization."
+        },
+        {
+          "source": "alg-sparse-cholesky-with-invalid-pivot-status",
+          "source_section": "Definition",
+          "quote": "Input a Hermitian positive-definite $A\\in\\mathbb C^{n\\times n}$ in the convention of [[def-cholesky-factorisation-with-positive-diagonal]], its Hermitian structural graph from [[def-hermitian-structural-graph-adapter]], and an ordering $\\pi=(v_0,\\ldots,v_{n-1})$. Use the operation model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. Let $P$ be the permutation matrix whose row $j$ is row $v_j$ of $I_n$, so the ordered matrix is $B=PAP^*$ and $B_{ij}=A_{v_i v_j}$. Relabel the filled graph on the original vertices by positions: $\\{i,j\\}\\in E^+_\\pi$ exactly when $\\{v_i,v_j\\}$ is an edge of the filled graph. In every displayed sum, accumulate in increasing $k$ from left to right.\n\nPreallocate only the diagonal and lower-triangular positions permitted by $E^+_\\pi$. The support guarantee for complex Hermitian Schur complements is proved in [[lem-hermitian-schur-support-is-contained-in-structural-fill]]. Initialize those positions from the lower triangle of $B$, using zero where a position is not present in the original pattern. For $j=0,\\ldots,n-1$, perform these instructions:\n\n1. Compute $d_j=B_{jj}-\\sum_{k<j}l_{jk}\\overline{l_{jk}}$ using only already computed entries, with an empty sum equal to zero. If an operation reports range failure, return **range-failure**$(j)$. If $d_j$ is not a finite positive real number, return **invalid-pivot**$(j,d_j)$.\n2. Set $l_{jj}=\\sqrt{d_j}$. If the square root is not finite and positive, return **range-failure**$(j)$.\n3. For each $i>j$ such that $\\{i,j\\}\\in E^+_\\pi$, compute\n$$l_{ij}=\\frac{B_{ij}-\\sum_{k<j}l_{ik}\\overline{l_{jk}}}{l_{jj}}.$$\nIf an operation reports range failure, return **range-failure**$(j)$. Set structurally absent entries to zero.\n\nIf all columns finish, return **success**$(P,L)$. In exact arithmetic, the intended factor convention is $PAP^*=LL^*$ with $L$ lower triangular and positive real diagonal. The finite-arithmetic procedure makes no claim that every positive-definite input returns success: a rounded pivot can fail the stated test.",
+          "consumer_use": "Process the elimination forest from leaves to roots. At front $r$, initialize a dense Hermitian array indexed by $F_r$ with the entries assigned to $v_r$. For each child $s$, add its stored contribution array to the entries whose indices lie in $F_s\\setminus\\{v_s\\}$, using the common original-vertex labels. The inclusion needed for this addition is supplied by [[lem-elimination-tree-reach-contains-each-filled-neighbor]]. Apply the pivot, range, and invalid-pivot instructions of [[alg-sparse-cholesky-with-invalid-pivot-status]] to the scalar pivot $v_r$: store factor entries $L_{q r}$ for later vertices $v_q$ in the front and replace the trailing front block $C$ by its Schur update $C-bb^*/d$. Send this trailing contribution array to the parent; at a root discard only the empty final remainder. A failed pivot or range operation returns the same indexed status and stops the factorization."
+        },
+        {
+          "source": "def-forward-and-back-substitution-for-triangular-systems",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\nIf $L=(\\ell_{ij})\\in M_n(F)$ is lower triangular with every diagonal entry\n$\\ell_{ii}\\ne 0$, the **forward substitution solve** of $Lx=b$ is the recursive\nconstruction\n\n$$x_i:=\\frac{1}{\\ell_{ii}}\\left(b_i-\\sum_{j<i}\\ell_{ij}x_j\\right)\\qquad(0\\le i<n).$$If $U=(u_{ij})\\in M_n(F)$ is upper triangular with every diagonal entry $u_{ii}\\ne 0$, the **backward substitution solve** of $Ux=b$ is the recursive construction$$x_i:=\\frac{1}{u_{ii}}\\left(b_i-\\sum_{j>i}u_{ij}x_j\\right)\\qquad(n-1\\ge i\\ge 0).$$\n\nThe triangular vocabulary is from\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]. The matrix\nproduct convention from [[def-matrix-product-and-identity-matrix]] is the one\nused when later items rewrite these recursions as matrix equations.",
+          "consumer_use": "1. Set $x=Pb$.\n2. For $j=0,\\ldots,n-1$, divide $x_j$ by $l_{jj}$, then for every stored $l_{ij}$ with $i>j$ set $x_i\\leftarrow x_i-l_{ij}x_j$.\n3. For $j=n-1,\\ldots,0$, set $x_j\\leftarrow (x_j-\\sum_{i>j}\\overline{l_{ij}}x_i)/\\overline{l_{jj}}$, using the backward-substitution convention of [[def-forward-and-back-substitution-for-triangular-systems]].\n4. Return $P^*x$."
+        }
+      ],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "thm-multifrontal-elimination-equivalence-and-sparse-costs": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-multifrontal-cholesky-and-sparse-triangular-solves",
+          "source_section": "Definition",
+          "quote": "Process the elimination forest from leaves to roots. At front $r$, initialize a dense Hermitian array indexed by $F_r$ with the entries assigned to $v_r$. For each child $s$, add its stored contribution array to the entries whose indices lie in $F_s\\setminus\\{v_s\\}$, using the common original-vertex labels. The inclusion needed for this addition is supplied by [[lem-elimination-tree-reach-contains-each-filled-neighbor]]. Apply the pivot, range, and invalid-pivot instructions of [[alg-sparse-cholesky-with-invalid-pivot-status]] to the scalar pivot $v_r$: store factor entries $L_{q r}$ for later vertices $v_q$ in the front and replace the trailing front block $C$ by its Schur update $C-bb^*/d$. Send this trailing contribution array to the parent; at a root discard only the empty final remainder. A failed pivot or range operation returns the same indexed status and stops the factorization.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-elimination-tree-reach-contains-each-filled-neighbor",
+          "source_section": "Statement",
+          "quote": "Let $v_k$ be a vertex in the elimination forest supplied by [[def-elimination-tree-and-column-reach]]. Every later filled neighbor of $v_k$ lies on its parent path and is therefore an ancestor. Consequently, if $v_s$ is a child of $v_k$, then every later neighbor of $v_s$ other than $v_k$ is a later neighbor of $v_k$; equivalently,\n$$\\mathcal C_s\\setminus\\{v_s\\}\\subseteq\\mathcal C_k.$$",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-elimination-tree-reach-contains-each-filled-neighbor",
+          "source_section": "Statement",
+          "quote": "Let $v_k$ be a vertex in the elimination forest supplied by [[def-elimination-tree-and-column-reach]]. Every later filled neighbor of $v_k$ lies on its parent path and is therefore an ancestor. Consequently, if $v_s$ is a child of $v_k$, then every later neighbor of $v_s$ other than $v_k$ is a later neighbor of $v_k$; equivalently,\n$$\\mathcal C_s\\setminus\\{v_s\\}\\subseteq\\mathcal C_k.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "1. If $L\\in M_n(F)$ is lower triangular with nonzero diagonal, the forward\n   substitution recursion of\n   [[def-forward-and-back-substitution-for-triangular-systems]] produces the\n   unique solution of $Lx=b$.\n2. If $U\\in M_n(F)$ is upper triangular with nonzero diagonal, the backward\n   substitution recursion produces the unique solution of $Ux=b$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "We prove by induction from leaves to roots that the contribution returned from the subtree at $v_r$ is the Schur complement on $F_r\\setminus\\{v_r\\}$ obtained by eliminating exactly that subtree's vertices from the corresponding principal block. At a leaf, the front consists of its assigned original entries; the scalar Schur update $C-bb^*/d$ is precisely the result of eliminating its one pivot.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "base",
+            "induction"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Let $v_r$ have children. By [F2], each child update is indexed inside $F_r$, so every extend-add is defined. By [F3], distinct child subtrees have no matrix coupling between their eliminated interiors: an edge between two such interiors would make the later endpoint a filled neighbor outside the earlier endpoint's parent path. Thus the combined child pivot block is block diagonal, $D=\\operatorname{diag}(D_1,\\ldots,D_q)$, and is coupled to the shared front by a block column $B=[B_1\\ \\cdots\\ B_q]$ partitioned by child subtree. Each $D_h$ is nonsingular by the subtree induction hypothesis: its exact scalar factor has a unit lower-triangular factor and positive, hence nonzero, pivots. The resulting Schur update is $C-BD^{-1}B^*=C-\\sum_hB_hD_h^{-1}B_h^*$, exactly the sum of the child contributions. Direct block multiplication verifies\n$$\n\\begin{pmatrix}D&B^*\\\\B&C\\end{pmatrix}\n=\n\\begin{pmatrix}I&0\\\\BD^{-1}&I\\end{pmatrix}\n\\begin{pmatrix}D&0\\\\0&C-BD^{-1}B^*\\end{pmatrix}\n\\begin{pmatrix}I&D^{-1}B^*\\\\0&I\\end{pmatrix}.\n$$\nFor this front's scalar pivot $D=[d]$, the trailing block is $C-bb^*/d$. Thus the subtree Schur invariant holds at $v_r$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "IH",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "The invariant at each root eliminates all vertices. Each pivot column is therefore computed from the same exact Schur complement as scalar elimination in $\\pi$, so the multifrontal factors equal the scalar Cholesky factors.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-2",
+          "claim": "Front $r$ has $d_r=\\ell_r+1$ indices. Its dense scalar pivot update uses at most a constant multiple of $d_r^2$ multiplications and additions. Embedding and adding a child contribution touches at most that child's dense trailing block, whose entries are already counted by the child's $d_s^2$ bound. Summing over fronts gives $O(\\sum_r d_r^2)$ arithmetic work. Each factor column stores one diagonal and $\\ell_r$ lower entries, so the symbolic factor storage is exactly $\\sum_r d_r$.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "claim": "The forward column updates in [F1] solve $Lx=Pb$: after column $j$ is processed, row $j$ satisfies its equation, and the pivot contribution has been subtracted from each later row. This is the unique solution in [F4]. The descending conjugate updates solve $L^*y=x$ by the backward recurrence in [F4]. Since $PAP^*=LL^*$, these equations imply $PAP^*y=Pb$; multiplying by $P^*$ gives $A(P^*y)=b$. Thus $P^*y$ is the unique solution of $Az=b$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5-1",
+          "claim": "Each stored off-diagonal factor entry is visited once in each triangular solve, with one multiply and one subtraction; each diagonal contributes one division. Hence the two solves use $O(n+\\sum_r\\ell_r)=O(\\sum_r d_r)$ operations, separate from the factorization work in step 3.2.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.2",
+            "step 4.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-6-1",
+          "claim": "Step 3.1 gives scalar equivalence, step 3.2 gives factorization work and factor storage, and steps 4.1–5.1 give solve correctness and work.",
+          "step": "6.1",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "step 4.1",
+            "step 5.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate zero branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate one branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "thm-nested-dissection-grid-work-and-storage-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nested-dissection-ordering-on-regular-grids",
+          "source_section": "Definition",
+          "quote": "Order a rectangular coordinate subbox recursively as follows. For each coordinate whose side length is at least $2$, choose its lower median coordinate, namely the coordinate with $\\lfloor(m-1)/2\\rfloor$ positions below it in a side of length $m$. Let $S$ be the union of the coordinate hyperplanes at those selected medians. Delete $S$, obtaining at most $2^d$ nonempty rectangular child boxes. Recursively order the child boxes in lexicographic order of their lower corners, then append the vertices of $S$ in lexicographic order. If no coordinate has side length at least $2$, append the remaining vertex as a terminal separator. Apply this rule first to the whole grid. The resulting order is the **coordinate nested-dissection ordering**.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nested-dissection-fronts-are-boundary-limited",
+          "source_section": "Statement",
+          "quote": "Let $d\\in\\{2,3\\}$ and use the coordinate grid and recursive ordering of [[alg-nested-dissection-ordering-on-regular-grids]]. For a recursion box $B$, let $S_B$ be its median separator; for the terminal one-vertex box take $S_B=B$. Let $\\partial^+B$ be the set of grid vertices outside $B$ adjacent to some vertex of $B$. If $v\\in S_B$, then every later filled neighbor of $v$ lies in $S_B\\cup\\partial^+B$. If every side of $B$ has length at most $s$, then\n$$\n|\\{v\\}\\cup N^+_\\pi(v)|\\le |S_B|+|\\partial^+B|\\le 3d\\,s^{d-1}.\n$$",
+          "uses": [
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-multifrontal-elimination-equivalence-and-sparse-costs",
+          "source_section": "Statement",
+          "quote": "Assume exact arithmetic, a Hermitian positive-definite $A$, and a successful ordered factorization using [[alg-multifrontal-cholesky-and-sparse-triangular-solves]]. The fronts and contribution arrays give the same Cholesky factor as scalar elimination in ordering $\\pi$. With $d_r=\\ell_r+1=|F_r|$, the arithmetic work for assembly and scalar front updates is\n$$O\\!\\left(\\sum_{r=1}^n d_r^2\\right),$$\nthe symbolic factor allocation has exactly $\\sum_{r=1}^n d_r$ positions, and each forward/back substitution solve uses $O(\\sum_r d_r)$ scalar operations. These are arithmetic and factor-storage counts; they are not wall-clock or total workspace bounds.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "If a box side has length $m\\ge2$, the median rule leaves each child side with length at most $\\lceil m/2\\rceil$; a side of length $1$ stays $1$. Iterating gives side lengths at depth $r$ at most $s_r=\\lceil k/2^r\\rceil$. There are at most $2^{dr}$ boxes at that depth because each box has at most $2^d$ children. By depth $R=\\lceil\\log_2 k\\rceil$, every side has length $1$, so all remaining boxes are terminal. For $0\\le r\\le R$, $k/2^r\\ge1/2$, hence $s_r\\le2k/2^r$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "If $k=1$, the grid and its ordering contain one terminal pivot and its factor column contains only the diagonal. Hence $d_v=1$ for its unique vertex, and [F3] gives $O(1)$ work and exactly one stored factor entry.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "Fix a box at depth $r$. Its separator has at most $d s_r^{d-1}$ vertices by the union bound over its at most $d$ median hyperplanes; the terminal singleton satisfies the same bound. By [F2], each such pivot has $d_v\\le3d s_r^{d-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "The factorization work contributed by one depth-$r$ box is therefore at most a constant depending only on $d$ times $s_r^{d-1}s_r^{2(d-1)}=s_r^{3(d-1)}$, using [F3]. Summing over at most $2^{dr}$ boxes at each depth and using $s_r\\le2k/2^r$ gives\n$$\nO\\!\\left(k^{3(d-1)}\\sum_{r=0}^{R}2^{-r(2d-3)}\\right).\n$$\nFor $d=2$, the geometric ratio is $2^{-1}$, so this is $O(k^3)$. For $d=3$, the ratio is $2^{-3}$, so it is $O(k^6)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-2",
+          "claim": "The storage contributed by one depth-$r$ box is at most a constant times $s_r^{d-1}s_r^{d-1}=s_r^{2(d-1)}$, again by [F2] and [F3]. Summing over boxes and using $s_r\\le2k/2^r$ gives\n$$\nO\\!\\left(k^{2(d-1)}\\sum_{r=0}^{R}2^{-r(d-2)}\\right).\n$$\nFor $d=2$, there are $O(\\log k)$ equal-order terms, giving $O(k^2\\log k)$. For $d=3$, the series is bounded by $\\sum_{r\\ge0}2^{-r}=2$, giving $O(k^4)$.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4-1",
+          "claim": "When $d=2$, $n=k^2$ gives $k^3=n^{3/2}$ and $k^2\\log k=O(n\\log n)$ for $k\\ge2$. When $d=3$, $n=k^3$ gives $k^6=n^2$ and $k^4=n^{4/3}$. Thus steps 1.2, 3.1 and 3.2 give the displayed rates and the $k=1$ case. The proof used the coordinate-box and grid-boundary counts in [F1]–[F2], so it does not imply a bound for arbitrary graphs.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 3.1",
+            "step 3.2",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the one-vertex k=1 case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "ex-star-orderings-produce-different-sparse-fill": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-symmetric-structural-elimination-graph-and-ordering",
+          "source_section": "Definition",
+          "quote": "An **elimination ordering** is a listing $v_0,\\ldots,v_{n-1}$ in which every\nvertex of $V$ occurs exactly once. Define the current vertex set by\n$V_k=\\{v_\\ell:k\\le\\ell<n\\}$, starting with the structural graph $G_0$. At\nstep $k$, the **later neighbors** of $v_k$ are",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "Write a vector as $x=(x_0,y_1,\\ldots,y_m)$. The quadratic form is $x^TAx=x_0^2+\\sum_i y_i^2+2t x_0\\sum_i y_i$. Since $m\\sum_i y_i^2-(\\sum_i y_i)^2=\\sum_{i<j}(y_i-y_j)^2\\ge0$, we have $|\\sum_i y_i|\\le\\sqrt m\\,\\|y\\|_2$. Therefore\n$$2t|x_0|\\left|\\sum_i y_i\\right|\\le 2t\\sqrt m\\,|x_0|\\|y\\|_2\\le t\\sqrt m(x_0^2+\\|y\\|_2^2)=\\tfrac12\\|x\\|_2^2.$$\nIt follows that $x^TAx\\ge\\tfrac12\\|x\\|_2^2>0$ for $x\\ne0$, so $A$ is positive definite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "In leaf-first order, each leaf has exactly one later neighbor, the center. By [F1] no pair of distinct remaining neighbors exists, so eliminating that leaf adds no edge. This holds for every leaf; eliminating the last center also adds no edge.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-3",
+          "claim": "In center-first order, the center's later-neighbor set is all $m$ leaves. By [F1], the graph update inserts every pair of distinct leaves, so it has $\\binom m2$ leaf-to-leaf fill edges not in the original star.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The pivot at the center is $1$. Its Schur complement on the leaves is $I_m-t^2\\mathbf1\\mathbf1^T$, whose off-diagonal entries are $-t^2\\ne0$. Thus the symbolic fill edges from step 1.3 are also numerical nonzeros for this matrix, while step 1.2 gives no fill in the other order.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "Steps 1.2 and 2.1 exhibit respectively $0$ and $\\binom m2$ fill edges for two orderings of the same positive-definite sparse matrix.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "three-leaf-star-ordering-fill",
+          "parameters": {
+            "m": 3,
+            "t": "1/(2 sqrt(3))"
+          },
+          "asserts": "Leaf-first ordering inserts 0 fill edges; center-first inserts binom(3,2)=3, and the center Schur complement has off-diagonal entries -t^2=-1/12 != 0.",
+          "claim": "Direct finite count for the smallest allowed star verifies the ordering-dependent symbolic fill and a nonzero numerical Schur pattern.",
+          "checked_in": "steps 1.2-2.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has no separate one branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "ex-nonsingular-indefinite-requires-two-by-two-pivot": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-symmetric-indefinite-block-ldl-star",
+          "source_section": "Definition",
+          "quote": "The exact-arithmetic branch is specified first; the finite-precision branch below implements the same declared pivots by certified real-component kernels. Input a Hermitian $A\\in\\mathbb C^{n\\times n}$, an ordering $\\pi=(v_0,\\ldots,v_{n-1})$ and its simultaneous permutation matrix $P$ in the convention of [[def-permutation-matrix-partial-pivoting-and-pivot-growth]], an ordered partition of the permuted positions into consecutive blocks of size $1$ or $2$, and a threshold $\\theta\\in(0,1]$. Apply $P$ once and maintain the Hermitian active Schur complement of $B=PAP^*$. Form the structural graph from [[def-hermitian-structural-graph-adapter]], then relabel its vertex $v_i$ by ordered position $i$; use the graph and fill convention of [[def-symmetric-structural-elimination-graph-and-ordering]] on this position-labeled graph. At stage $r$, the next declared block is the leading active block. For a $1\\times1$ block at index $t$, require $d=a_{tt}\\ne0$ and\n$$\\max_{i\\ne t,\\ i\\text{ active}}|a_{it}|\\le\\theta^{-1}|d|.$$\nFor a declared $2\\times2$ pair $(s,t)$, form the Hermitian principal block\n$$D=\\begin{pmatrix}a_{ss}&a_{st}\\\\\\overline{a_{st}}&a_{tt}\\end{pmatrix}.$$\nRequire $\\det D\\ne0$, and let $c_1=\\max_{i\\notin\\{s,t\\}}|a_{is}|$ and $c_2=\\max_{i\\notin\\{s,t\\}}|a_{it}|$, with an empty maximum equal to zero. Accept the pair only if\n$$|D^{-1}|\\begin{pmatrix}c_1\\\\c_2\\end{pmatrix}\n\\le\\theta^{-1}\\begin{pmatrix}1\\\\1\\end{pmatrix}$$\ncomponentwise. If the declared block fails its test, return **pivot-failure**$(r)$.\n\nWrite the active matrix as\n$$\\begin{pmatrix}D&B^*\\\\B&C\\end{pmatrix}.$$\nCompute the block multiplier $M=BD^{-1}$ and the trailing update $C-BD^{-1}B^*$, retaining all positions allowed by the symbolic graph even when their current numerical value is zero. Symbolically, for the pivot-block index set $J$, let $N(J)$ be the union of its active graph neighbors; remove $J$ and connect every pair of distinct vertices in $N(J)$. Store $D$ as the next diagonal block and continue on the trailing matrix. On completion return $(P,L,D_{\\rm blk})$, where $L$ is unit lower block-triangular and $D_{\\rm blk}$ is block diagonal. The method may return **pivot-failure**$(r)$ on a nonsingular input when the declared pivot sequence contains a block that fails its test; it asserts no universal growth bound.\n\nIn the finite-precision branch, at each declared block use [[alg-certified-hermitian-one-and-two-by-two-ldl-kernel]] with the same threshold, permutation and symbolic block-neighbor clique. Store its returned $D_r,\\widehat M_r$ in $D_{\\rm blk},\\widehat L$, and continue on its Hermitian $\\widehat S_{r+1}$. Return `range-failure`, `pivot-failure` or `pivot-inconclusive` with stage index and partial factors as specified by the kernel. A successful run returns $(P,\\widehat L,D_{\\rm blk})$ together with its pivot certificates. Exact test semantics are retained: only certified admissible blocks are accepted; an unresolved determinant or threshold is inconclusive. No general complex division, automatic pivot existence or universal factor-growth guarantee is assumed.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "The determinant of $A$ is $-1$, so $A$ is nonsingular. Its eigenvectors $(1,1)^T$ and $(1,-1)^T$ have eigenvalues $1$ and $-1$, respectively; therefore $A$ is indefinite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-2",
+          "claim": "Both diagonal candidates have pivot $0$, while the other entry in each column has modulus $1$. Since $\\theta^{-1}|0|=0$, neither one-by-one test in [F1] passes.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1-3",
+          "claim": "For the declared block $D=A$, $\\det D=-1\\ne0$ and $D^{-1}=A$. There are no external indices, so $c_1=c_2=0$ and the two-by-two threshold left side is zero; the test in [F1] passes.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "The algorithm therefore returns $P=I$, $L=I$, and $D_{\\rm blk}=A$. Direct multiplication gives $A=LD_{\\rm blk}L^*$. Thus the block pivot succeeds where every one-by-one diagonal pivot fails.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "two-by-two-pivot-example",
+          "parameters": {
+            "dimension": 2,
+            "theta": "any value in (0,1]"
+          },
+          "asserts": "det(A)=-1, A has eigenvalues 1 and -1, both scalar diagonal pivots are 0, and for D=A the inverse-block threshold left side is the zero vector.",
+          "claim": "Exact 2x2 arithmetic verifies nonsingularity, indefiniteness, rejection of both 1x1 pivots, and acceptance of the declared 2x2 pivot.",
+          "checked_in": "steps 1.1-2.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "ex-two-dimensional-poisson-nested-dissection-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-nested-dissection-ordering-on-regular-grids",
+          "source_section": "Definition",
+          "quote": "Order a rectangular coordinate subbox recursively as follows. For each coordinate whose side length is at least $2$, choose its lower median coordinate, namely the coordinate with $\\lfloor(m-1)/2\\rfloor$ positions below it in a side of length $m$. Let $S$ be the union of the coordinate hyperplanes at those selected medians. Delete $S$, obtaining at most $2^d$ nonempty rectangular child boxes. Recursively order the child boxes in lexicographic order of their lower corners, then append the vertices of $S$ in lexicographic order. If no coordinate has side length at least $2$, append the remaining vertex as a terminal separator. Apply this rule first to the whole grid. The resulting order is the **coordinate nested-dissection ordering**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nested-dissection-grid-work-and-storage-bounds",
+          "source_section": "Statement",
+          "quote": "Let $d\\in\\{2,3\\}$, $k\\ge2$, and $n=k^d$. Identify the coordinate grid $\\{0,\\ldots,k-1\\}^d$ with the zero-based matrix indices by the lexicographic bijection in [[alg-nested-dissection-ordering-on-regular-grids]]. Let $A\\in\\mathbb R^{n\\times n}$ be symmetric positive definite, with structural graph a subgraph of the $d$-dimensional nearest-neighbor grid. Under the coordinate nested-dissection ordering, exact scalar multifrontal Cholesky has\n$$\n\\begin{array}{c|c|c}\nd&\\text{arithmetic work}&\\text{symbolic factor storage}\\\\\n2&O(n^{3/2})&O(n\\log n)\\\\\n3&O(n^2)&O(n^{4/3}).\n\\end{array}\n$$\nThe storage is the number of allocated factor entries, including structural zeros, and excludes temporary contribution arrays. The bounds use the stated grid geometry; they assert no general-graph bound. For $k=1$, there is one pivot and both work and factor storage are $O(1)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "claim": "For every grid vertex $v$, let $b(v)=4-\\deg_{G_k}(v)$ be its number of missing boundary neighbors. Expanding squares gives\n$$x^TA_kx=\\sum_{\\{v,w\\}\\in E(G_k)}(x_v-x_w)^2+\\sum_{v\\in G_k}b(v)x_v^2.$$\nThe right side is nonnegative. If it is zero, every adjacent pair has equal coordinates and every boundary vertex with $b(v)>0$ has value zero. The grid is connected and has a boundary vertex, so all coordinates are equal to zero. Hence $A_k$ is positive definite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "claim": "By [F1], the order is the coordinate nested-dissection order on the five-point grid. The matrix is symmetric positive definite by step 1.1 and its off-diagonal pattern is exactly $G_k$. For $k\\ge2$, applying [F2] with $n=k^2$ gives work $O((k^2)^{3/2})=O(k^3)$ and factor storage $O(k^2\\log(k^2))=O(k^2\\log k)$. For $k=1$, the matrix and factor each have one entry.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "claim": "Step 1.1 verifies the matrix hypothesis and step 2.1 gives the nested-dissection cost specialization.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "one-vertex-dirichlet-poisson-grid",
+          "parameters": {
+            "k": 1
+          },
+          "asserts": "The grid has one vertex and no edges, so A_1=[4] and x^T A_1 x=4x^2; the ordering and Cholesky factor each have one entry.",
+          "claim": "The smallest grid checks the positive-definite energy identity and the separately stated one-pivot cost case.",
+          "checked_in": "steps 1.1-2.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has no separate empty branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item explicitly specifies this boundary branch in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example has no separate degenerate branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no separate endpoints branch beyond the explicit input and conclusion stated in the item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only the displayed finite index sets and deterministic ordering/pivot rules; it makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim."
+        }
+      ],
+      "axioms": [],
+      "supplier_excerpts": [],
+      "supplier_observations": "Actual direct supplier bodies were inspected. Fact-linked suppliers have exact excerpts and proof-step uses under citations; remaining direct dependencies have exact source sections and the consumer paragraphs that invoke them under supplier_excerpts."
+    },
+    "alg-certified-hermitian-one-and-two-by-two-ldl-kernel": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "lem-hermitian-block-ldl-kernel-roundoff-and-reconstruction-residual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-certified-hermitian-one-and-two-by-two-ldl-kernel",
+          "source_section": "Definition",
+          "quote": "Input stored Hermitian $D\\in\\mathbb C^{k\\times k}$, $B\\in\\mathbb C^{t\\times k}$ and $C\\in\\mathbb C^{t\\times t}$, with $k\\in\\{1,2\\}$, $t\\ge0$, threshold $0<\\theta\\le1$, unit roundoff $0<u<1$, and a finite certificate budget. Use [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. Divide complex values by a nonzero real denominator by separately dividing their real and imaginary components, using the model's real operations; no complex division is used. Any invalid operation, nonfinite output or nonzero exact intermediate outside the normal range returns `range-failure`. Hermitian counterparts, sign changes and conjugation are exact copies.\n\nThe pivot controller uses exact real-RAM arithmetic on the stored real components and the supplied exact $u,\\theta$, separately from the rounded numerical kernel. Its allowed operations are real addition, subtraction, multiplication, division by a certified nonzero real denominator, fixed nonnegative integer powers, and comparisons. Each field operation or comparison consumes one unit of the nonnegative integer controller budget; a fixed power is expanded into its stated finite chain of multiplications. Before any controller operation, if no unit remains, return `pivot-inconclusive`. Exact sign/absolute-value and maximum decisions use comparisons and conditional sign changes. For binary/rational stored values and rational $u,\\theta$, exact rational arithmetic implements this controller with finite integers; no bit-complexity bound is claimed. There is no optional unspecified certifier or sign oracle. For complex modulus guards, a successful two-component scaled norm first scales by the larger absolute real component, then rounds both divisions, squares, sum, positive square root and rescaling. Its returned $h$ gives bounds $h/(1+u)^4\\le|z|\\le h/(1-u)^4$; zero is exact. Maxima use the corresponding lower/upper bounds and an empty maximum is zero. Evaluate modulus guards once per distinct stored complex value in row-major order, using only the displayed rounded scaled norm; its finite floating operations carry their own range status. No exact square root or additional modulus operation is used by the controller. Evaluate each displayed rational bound left to right, entrywise in row-major order; evaluate column maxima in increasing row order, then the at-most-two-term matrix-vector bounds in increasing column order, and finally the acceptance comparisons in row order. Compute each of $(1-u)^4,(1+u)^4,(1+u)^5$ by left-associated repeated multiplication. These prescribed finite expression trees and finite input loops fix the guard procedure and its budget count. If acceptance is not established, evaluate the stated lower-bound failure comparisons; if neither conclusion follows, return `pivot-inconclusive` without refinement.\n\nFor $k=1$, write $D=[d]$, $d$ real. If $d=0$ return `pivot-failure`. Certify $\\max_i|B_{i1}|\\le|d|/\\theta$ using the guard bounds. A rigorous lower maximum exceeding $|d|/\\theta$ returns `pivot-failure`; an unresolved comparison returns `pivot-inconclusive`. Set $\\widehat M_{i1}$ by rounded real-component divisions of $B_{i1}$ by $d$.\n\nFor $k=2$, write $D=\\begin{pmatrix}a&z\\\\\\overline z&c\\end{pmatrix}$ with real $a,c$, and set $s=\\max(|a|,|c|,|\\operatorname{Re}z|,|\\operatorname{Im}z|)$. If $s=0$ return `pivot-failure`. Compute the four real entries of $\\widehat E=\\operatorname{fl}(D/s)$ and the conjugate counterpart by copying. In order compute\n$$p=\\operatorname{fl}(\\widehat a\\widehat c),\\quad q_1=\\operatorname{fl}((\\operatorname{Re}\\widehat z)^2),\\quad q_2=\\operatorname{fl}((\\operatorname{Im}\\widehat z)^2),\\quad q=\\operatorname{fl}(q_1+q_2),\\quad \\widehat d=\\operatorname{fl}(p-q).$$\nPut $\\epsilon_d=3((1+u)^5-1)$ and $\\widehat J=\\operatorname{adj}(\\widehat E)=\\begin{pmatrix}\\widehat c&-\\widehat z\\\\-\\overline{\\widehat z}&\\widehat a\\end{pmatrix}$ by copies. Unless $|\\widehat d|>\\epsilon_d$ is certified, return `pivot-inconclusive`. For each entry obtain rigorous modulus bounds $j^-_{ij}\\le|\\widehat J_{ij}|\\le j^+_{ij}$ and set\n$$U_{ij}=\\frac{j^+_{ij}}{s(1-u)(|\\widehat d|-\\epsilon_d)},\\qquad V_{ij}=\\frac{j^-_{ij}}{s(1+u)(|\\widehat d|+\\epsilon_d)}.$$\nLet $c_j^-,c_j^+$ bound $\\max_i|B_{ij}|$. Accept only if $U c^+\\le\\theta^{-1}(1,1)^T$ componentwise. If any coordinate of $V c^-$ exceeds $\\theta^{-1}$ return `pivot-failure`; otherwise an unresolved test returns `pivot-inconclusive`. On acceptance compute $\\widehat B_s=\\operatorname{fl}(B/s)$, $K=\\operatorname{fl}(\\widehat B_s\\widehat J)$ by sequential two-term complex dots, then $\\widehat M=\\operatorname{fl}(K/\\widehat d)$ by real-component divisions. No explicit reciprocal $1/s$ is formed.\n\nFor either block size, compute each allocated lower-triangle entry of $\\widehat Z=\\operatorname{fl}(\\widehat M B^*)$ by sequential $k$-term dots. Compute $\\operatorname{fl}(C-\\widehat Z)$ there, retain only its real component on the diagonal, and obtain upper entries by exact conjugation. Return `success` with stored $D,\\widehat M,\\widehat S$ and the pivot certificates. An empty trailing block returns empty $\\widehat M,\\widehat S$. In the sparse application, allocate the original block-neighbor clique and retain positions even when their numerical value is zero. Additional sparsity drops must be recorded separately as additive perturbations.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-rounded-linear-and-normal-residual-certificates",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, $x\\in\\mathbb F^n$, $y\\in\\mathbb F^m$ have stored real or complex entries, with $m,n\\ge1$. Use the operationwise arithmetic model, successful sequential dot products, and $0<u<1$ with $(\\max(m,n)-1)u<1$. Define\n$$g_k=\\frac{1+6u}{1-(k-1)u}-1,\\qquad F=\\|A\\|_F,\\quad X=\\|x\\|_2,\\quad Y=\\|y\\|_2.$$\nFor $\\widehat v=\\operatorname{fl}(Ax)$ and $\\widehat w=\\operatorname{fl}(\\widehat v-y)$, put $V=g_nFX$ and $W=V+u(\\|\\widehat v\\|_2+Y)$. Then\n$$\\|\\widehat w-(Ax-y)\\|_2\\le W.$$\nFor a stored real $\\lambda>0$, also compute $\\widehat z=\\operatorname{fl}(A^*\\widehat w)$, $\\widehat l=\\operatorname{fl}(\\lambda x)$ and $\\widehat r=\\operatorname{fl}(\\widehat z+\\widehat l)$, rounding scalar multiplication componentwise. The exact intended normal residual $r=A^*(Ax-y)+\\lambda x$ satisfies\n$$\\|\\widehat r-r\\|_2\\le\\rho:=FW+g_mF\\|\\widehat w\\|_2+u\\lambda X+u(\\|\\widehat z\\|_2+\\|\\widehat l\\|_2).$$\nNorms in these certificates mean exact norms or certified upper bounds. Uncontrolled rounding of the certificate itself is not authorized. The linear bound applies columnwise to certify $\\|I-AB\\|_2\\le\\|I-AB\\|_F$ from stored basis-solve columns $B$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "For two-by-two $D$, put $E=D/s$ and $J=\\operatorname{adj}(E)$. Each real component of $E$ has magnitude at most one. Expansion of the determinant computation multiplies each of its three quadratic terms by at most five factors $1+\\delta_i$, $|\\delta_i|\\le u$, including scaling. For $0<u<1$, the coefficient deviation is at most $(1+u)^5-1$, since the lower deviation $1-(1-u)^5$ is no greater. Also $|E_{11}E_{22}|+(\\operatorname{Re}E_{12})^2+(\\operatorname{Im}E_{12})^2\\le3$. Thus $|\\widehat d-\\det E|\\le\\epsilon_d$. Acceptance gives $\\det E\\ne0$. The entrywise scaling bound $|J-\\widehat J|\\le u|J|$ implies $|J|\\le|\\widehat J|/(1-u)$ and $|J|\\ge|\\widehat J|/(1+u)$. The algorithm's $U,V$ therefore bound $|D^{-1}|$ above and below. The modulus guard follows by expanding its scaled sum, square root and rescaling, giving relative factors between $(1-u)^4$ and $(1+u)^4$. The resulting maximum/product interval tests prove exact acceptance or definite threshold failure; unresolved cases are explicitly inconclusive. Scalar pivots satisfy the same scalar threshold argument.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "Define $R=\\widehat J/(s\\widehat d)$ for analysis only. Scaling gives $\\|\\widehat J-J\\|_F\\le u\\|J\\|_F\\le\\sqrt2u\\|J\\|_2$. The inverse formula gives $\\|D^{-1}\\|_2=\\|J\\|_2/(s|\\det E|)$, and step 1.1 gives $|\\det E|/|\\widehat d|\\le1+\\mu$. Subtract the two inverse expressions to obtain $\\|R-D^{-1}\\|_2\\le\\nu\\|D^{-1}\\|_2$ and $\\|R\\|_2\\le(1+\\nu)\\|D^{-1}\\|_2$. This retains the actual scaled-determinant sensitivity.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "The computed $B/s$ has Frobenius error at most $u\\|B\\|_F/s$. By [F2], its product with $\\widehat J$ adds at most $g_2(1+u)\\|B\\|_F\\|\\widehat J\\|_F/s$. Since $\\|\\widehat J\\|_F\\le\\sqrt2\\|\\widehat J\\|_2$, the product discrepancy relative to $B\\widehat J/s$ is at most $(\\sqrt2g_2(1+u)+u)\\|B\\|_F\\|\\widehat J\\|_2/s$. Final real-component division adds the factor $1+u$ to that error and at most $u\\|BR\\|_F$. Thus $\\|\\widehat M-BR\\|_F\\le\\chi\\|B\\|_F\\|R\\|_2$. Step 1.2 proves the stated $e_M$ and $\\|\\widehat M\\|_F\\le(1+\\omega_2)\\|B\\|_F\\|D^{-1}\\|_2$. For a scalar pivot the direct real-component divisions instead give these bounds with $\\omega_1=u$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "claim": "The update dot bound [F2] gives $\\|\\widehat Z-\\widehat MB^*\\|_F\\le g_k\\|\\widehat M\\|_F\\|B\\|_F$. Replacing $\\widehat M$ by $M$ adds at most $e_M\\|B\\|_2$. Final subtraction adds at most $u(\\|C\\|_F+\\|\\widehat Z\\|_F)$. Combining these with step 2.1 gives raw Schur error at most $u\\|C\\|_F+q_k\\|B\\|_F^2\\|D^{-1}\\|_2$. The exact Schur complement is Hermitian. Copying one chosen computed triangle doubles at most the squared Frobenius error; projecting the diagonal to its real part decreases error. Thus $\\|\\Delta\\|_2\\le\\beta$. Finally $\\|C\\|_F\\le\\sqrt t\\|C\\|_2$ and $\\|B\\|_F^2\\le k\\|B\\|_2^2$, proving the stated $\\eta_{k,t}$ bound. Empty trailing arrays have zero residual.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Put $H=\\widehat M-M$. Direct block multiplication gives the displayed full residual, because $N=HD$ and $\\widehat MD\\widehat M^*-MB^*=HB^*+\\widehat MN^*$. The Hermitian off-diagonal matrix $\\begin{pmatrix}0&N^*\\\\N&0\\end{pmatrix}$ has norm $\\|N\\|_2$: its square is block diagonal with $N^*N,NN^*$, or equivalently use the defining singular-value maximum. Also $\\|N\\|_2\\le e_M\\|D\\|_2$. Triangle inequality and step 2.2 therefore give $\\|F\\|_2\\le f$. Every coefficient is an explicit finite function under successful certification, and tends to zero linearly for a fixed nonsingular normalized pivot as $u\\to0$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,62 @@
+# Batch 29 authoring notes — Pseudo arclength continuation and fold certificates
+
+## Scope and controlling plan
+
+The binding direction is `research/numerical-optimization-dynamics-2026-10-16-owner-authoring-direction.md`, together with the PC-CONT section and incorporated mathematical contract in `research/plan-numerical-dynamics-track.md` (design lines 322–335 and appendix contract). The matching `research/plan-spec.json` rows assign the same A/B IDs, titles, category and `requires` pages. There is no material plan/plan-spec conflict to record. The owner direction supersedes the copied design's earlier “Reading pending” line; full-text reading and source evidence are recorded below.
+
+The A-page requires `the-inverse-function-theorem-completed` and `nonlinear-equations-and-newton-methods`; the B-page requires the A-page. The current assigned scope is nine A items and four B examples (13 items total), below the 100-item page cap. The A page owns the bordered inverse estimate, regular curve/predictor result, local transverse-section result, complement splitting/isomorphism, contraction certificate, fold reduction, exact local Newton theorem, and finite-budget continuation algorithm. The B page covers the four specified examples.
+
+## Inventory and dependency levels
+
+Levels were recomputed after adding the transverse-section lemma and updating the algorithm/theorem edges. In-run edges only determine `dependency_level`; published suppliers and other-batch suppliers do not silently change local labels. The dispatch specified batch level 1, prerequisite batch 3, and scheduling input SHA-256 `ca41fcdd6d4a40fbd61e4921a8bfdd410bd704a05c937a5f709843ed28d2e97d`. At final inspection the shared current dependency-level artifact had input SHA-256 `7feab71278a6cf5fc9513d25514ffc7397bdc4421f8c0fa99e7485d2c1d3041a`; its batch-29 row remains level 1 with `requires: ["3"]`. The shared scheduling artifact was left untouched.
+
+| Item | Direct logical dependencies | Level |
+|---|---|---:|
+| `lem-pseudo-arclength-border-matrix-invertibility-and-inverse-bound` | rank and nullity definition/theorem, orthogonal complement, dimension/injectivity, standard basis, bounded linear maps, Cauchy–Schwarz | 0 |
+| `def-simple-fold-complement-splitting-and-projection` | orthogonal complement, kernel/image, linear map, rank and nullity definition, total derivative convention | 0 |
+| `thm-augmented-residual-contraction-certificate` | C¹ and total derivative definitions, Banach fixed point, Euclidean completeness, Cauchy–Schwarz, chain rule, mean-value inequality, geometric sequence and power factorization | 0 |
+| `lem-regular-curve-chart-and-pseudo-arclength-predictor-defect` | bordered inverse lemma; rank definition; C² and total derivative definitions; parameterized IFT; chain rule; Newton–Leibniz; continuous integrability; integral monotonicity; Cauchy–Schwarz; Euclidean inverse theorem | 1 |
+| `lem-simple-fold-complement-restriction-is-an-isomorphism` | fold complement definition; rank definition/theorem; double orthogonal complement; subspace dimension; kernel/image/injectivity; standard basis; basis/independence/dimension definitions | 1 |
+| `lem-transverse-hyperplane-selects-unique-local-branch-point` | regular curve chart; chain rule; continuous integrability; Newton–Leibniz; integral monotonicity; intermediate value theorem | 2 |
+| `thm-simple-fold-lyapunov-schmidt-parameterization` | bordered/curve results; fold complement definition and isomorphism; parameterized IFT; rank definition/theorem and dimension; C³ and total derivative definitions; chain rule; Newton–Leibniz; extreme value | 2 |
+| `thm-pseudo-arclength-local-newton-correction` | bordered inverse; regular curve and transverse section; contraction certificate; finite-budget Newton; updated-Jacobian Newton theorem; rank definition; C² and total derivative definitions; chain rule | 3 |
+| `alg-pseudo-arclength-continuation-with-certified-local-corrector` | Newton correction and finite-budget Newton; C²/C³, total derivative and rank definitions; bordered inverse; curve/predictor and transverse section; contraction certificate; fold theorem; local Newton theorem | 4 |
+| `ex-zero-tangent-angle-makes-bordered-corrector-singular` | bordered inverse lemma | 1 |
+| `ex-natural-parameterization-fails-at-x-squared-fold` | simple-fold theorem | 3 |
+| `ex-local-trace-misses-disconnected-branch` | continuation algorithm; contraction certificate | 5 |
+| `ex-pseudo-arclength-crosses-x-squared-fold` | continuation algorithm; local Newton theorem; simple-fold theorem; contraction certificate | 5 |
+
+The scaffold manifest is sorted by item level and each carrier's frontmatter matches its manifest edge list and label. There is no dependency cycle. The local Newton theorem does not depend on the algorithm; the algorithm consumes that theorem, avoiding a circular proof dependency.
+
+## Mathematical construction and source disposition
+
+The bordered matrix proof decomposes any vector as $e+\alpha t$ with $e\in t^\perp$ and solves both row equations explicitly. It proves both directions of the singular-angle criterion and the stated inverse bound. The regular-curve result first uses the parameterized IFT, then reparameterizes by arclength, identifies every nearby zero with that chart, and bounds the exact-tangent predictor residual on a stated convex tube. The transverse-section lemma proves existence and uniqueness of the plane intersection on a two-sided chart interval; the derivative margin also excludes a second intersection just behind the current point. The fold complement definition and isomorphism are authored before the consumer; the fold theorem handles $n=1$ separately and uses the complement solve plus a scalar IFT for $n\ge2$. Its curve parameter is fixed by $v^T(x(s)-x_0)=s$, which makes the local uniqueness claim well-posed.
+
+The augmented residual certificate proves a root enclosure from certified residual and Jacobian errors using an explicit Neumann perturbation, a contraction map, and Banach's theorem. The exact local Newton theorem transfers the current batch-3 Newton theorem to the bordered augmented residual and keeps its residual-tolerance and finite-budget qualifications. The algorithm distinguishes an underdetermined solution curve from an isolated square-system root: its seed and accepted outputs are certified hyperplane-section roots. It checks rank/tangent error, orientation/angle, a two-sided isolating chart, predictor-section geometry, tube/domain, finite budgets, and a separate contraction certificate. Exact-evaluation Newton updates receive a quadratic guarantee only inside the verified invariant ball; bounded-error updates are candidate generators. No finite trace or local certificate implies global branch completeness.
+
+Two complete full-text treatments were inspected and stamped:
+
+1. Allgower–Georg, *Numerical Continuation Methods: An Introduction* (1990), full 397-page PDF at `http://lib.ysu.am/disciplines_bk/080dea8526183abcce1135f2a4460625.pdf`. Inspected Chapter 2 §§2.1–2.2 (printed pp. 7–16), Chapter 3 §§3.1–3.3 (printed pp. 17–21), and Chapter 11 §§11.1–11.2 (printed pp. 112–121). The full-text retrieval history and exact stamped hash/page count are in `research/numerical-optimization-dynamics-2026-10-16-batch-29.coverage.json`. An earlier author-host attempt was reported as HTTP 404 and the YSU HTTPS mirror had weak TLS; the successful full text was recovered over HTTP. The exact failed author URL and its timestamps were not retained and are not invented. The current source fetch made two recorded timeouts before succeeding.
+2. Cliffe–Spence–Tavener, “The numerical analysis of bifurcation problems with application to fluid mechanics,” *Acta Numerica* 9 (2000), 39–131, full 93-page author-hosted PDF at `https://www.math.colostate.edu/~tavener/manuscripts/cliffe/acta-numerica-2000.pdf`. Inspected §§3.1–3.2 (printed pp. 51–55) and §7.1 (printed pp. 92–94); current fetch evidence is recorded in the same coverage file.
+
+The coverage entries map each harvested treatment to its disposition and supported items. The sources provide continuation/fold-method context; the exact matrix estimates, contraction constants, finite statuses, and local proofs in these carriers are derived locally. Neither source is used as a substitute for a missing proof. No source was dropped; the unresolved-source decision mechanism was not invoked.
+
+## Cross-batch and published prerequisites
+
+The published `the-inverse-function-theorem-completed` page and its current parameterized IFT item were inspected. The current batch-3 draft page `nonlinear-equations-and-newton-methods` and its three used carriers were also inspected in full: `alg-newton-correction-for-vector-residuals`, `alg-finite-budget-newton-for-vector-residuals`, and `thm-updated-jacobian-newton-local-quadratic-convergence`. Their batch-3 manifest is now populated and matches their page/carriers; all three have current Step 1 `ready`, `owner:false` records. Those records express authoring readiness only, not independent approval. Exact consuming claims, uses and status qualifications are recorded in `research/numerical-optimization-dynamics-2026-10-16-batch-29.cross-batch-dependencies.json`.
+
+The batch-3 exact Newton theorem assumes a square $C^2$ residual, an exact root, invertible derivative there, and a Lipschitz Jacobian on a closed ball. The bordered augmented map meets these hypotheses by the rank/angle lemma and the affine last row; its finite-budget `root` result remains only a residual-tolerance result. The two Newton algorithms preserve their singular, invalid-trial and budget statuses. The parameterized IFT's exact uniqueness and regularity clauses are matched to the complement equations. No absent supplier body or acceptance is inferred.
+
+## Proof contracts and scoped checks
+
+All 13 items have entries in `research/numerical-optimization-dynamics-2026-10-16-batch-29.proof-contracts.json`. Each proof-bearing item records exact current supplier excerpts, every numbered-step claim and its inputs, all eight standard boundary worksheets, and applicable exact hand checks. Definition/procedure items have no fabricated proof steps. Hand matrix/algebra checks are recorded as hand calculations; no test suite was added or run.
+
+- `node tools/tsx-run.mjs tools/author-check.mts numerical-optimization-dynamics-2026-10-16 29`: pass. Its precheck, rendercheck, authored-item content-policy and strict proof-contract subchecks all exit 0. The receipt is `research/numerical-optimization-dynamics-2026-10-16-author-check-29.json`.
+- `node tools/proof-layout.mjs` on all 13 explicitly changed item paths: pass, 13 items, 50 phase steps, 0 defects.
+- `node tools/manifest-deps.mjs research/numerical-optimization-dynamics-2026-10-16-batch-29.pages.json`: pass, 13 items, 0 errors. Scoped `dependencyLevels` over the full current run graph gives every batch-29 label exactly as listed above; the full values are in `research/numerical-optimization-dynamics-2026-10-16-batch-29.dependency-level-check.json`.
+- Scoped `depcheck`: pass, 13 item subjects and 2 page subjects, closure of 561 items and 75 pages, 0 errors/warnings. `fwdcheck`: 0 forward references and 0 errors/warnings. `extcheck`: 13 items, 0 unproved/open-problem items, 0 errors/warnings. `proof-contract.mjs --strict`: 13/13 checked, 0 errors/warnings.
+- `source-fetch-check --stamp`: 2/2 sources fetch-verified and resolved, 0 drops. Allgower's current fetch succeeded after its two recorded timeouts; Cliffe–Spence–Tavener fetched successfully.
+- The run-wide `item-dependency-levels.mjs check` remains open outside this assignment: 179 errors, consisting of 142 empty scaffold inventories, 31 computed-level mismatches, and 6 invalid or unset level labels. The exact IDs for all three categories are preserved in the dependency-level evidence file; none is a batch-29 item. Batch 29 has 0 level errors.
+- A focused current Step 1 hash check shows all 13 batch-29 readiness records `ready`, `owner:false`, current against their carriers and direct suppliers. The run-wide Step 1 view currently has 603 items, 316 ready, and 427 empty page inventories; all batch-29 items are closed in that check. Completion records are authoring readiness only and do not approve the mathematics.
+
+No tests were added or run. Published items, shared plans, owner verdicts and engine state were not modified.

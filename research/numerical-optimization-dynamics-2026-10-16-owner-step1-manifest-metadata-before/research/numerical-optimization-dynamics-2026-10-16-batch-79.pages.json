@@ -1,0 +1,275 @@
+[
+  {
+    "order": 2442,
+    "id": "renewal-age-and-size-structured-numerical-methods",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Renewal age and size structured numerical methods",
+    "companion": "renewal-age-and-size-structured-numerical-methods-examples",
+    "requires": [
+      "picard-lindelof-and-first-order-odes",
+      "one-step-ode-consistency-and-local-error",
+      "composite-quadrature-rules",
+      "global-ode-and-density-error",
+      "adaptive-quadrature-and-error-indicators",
+      "hyperbolic-finite-difference-methods"
+    ],
+    "items": [
+      {
+        "id": "def-age-structured-renewal-transport-problem",
+        "kind": "definition",
+        "title": "Linear age-structured renewal transport problem",
+        "statement": "Fix a finite horizon and nonnegative bounded Lipschitz mortality and fertility rates. The density solves n_t+n_a=-mu(a)n on a>0 with renewal inflow n(t,0)=integral beta(a)n(t,a) da and nonnegative L1 initial density.",
+        "deps": [
+          "def-first-order-ode-initial-value-problem-and-solution"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-size-structured-transport-and-division-kernel",
+        "kind": "definition",
+        "title": "Size transport with nonlocal division kernel",
+        "statement": "On size x>=0, specify nonnegative bounded Lipschitz growth g with g>=g_min>0, mortality mu, division-removal rate gamma, and a finite positive daughter-size kernel K_y supported on [0,y]; define the transport, absorbing upper outflow and exact zeroth/first kernel moments.",
+        "deps": [
+          "def-first-order-ode-initial-value-problem-and-solution"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-age-structured-renewal-characteristic-solution",
+        "kind": "theorem",
+        "title": "Characteristic formula and Volterra solution for age renewal transport",
+        "statement": "Construct the unique nonnegative L1 mild solution by the characteristic formula and its scalar Volterra birth-rate equation on every bounded time interval.",
+        "deps": [
+          "def-age-structured-renewal-transport-problem",
+          "def-first-order-ode-initial-value-problem-and-solution"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-size-structured-finite-volume-flux-and-kernel-quadrature",
+        "kind": "algorithm",
+        "title": "Finite-volume size transport with positive division quadrature",
+        "statement": "Advance cell masses with positive upwind size fluxes, total loss mu+gamma and a nonnegative discrete daughter-kernel matrix whose column moments are recorded; use an absorbing upper boundary and the variable-speed transport-plus-loss CFL.",
+        "deps": [
+          "def-size-structured-transport-and-division-kernel",
+          "alg-composite-midpoint-rule"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-age-cohort-characteristic-quadrature",
+        "kind": "algorithm",
+        "title": "Age-cohort quadrature along exact characteristics",
+        "statement": "Approximate the initial age density by positive midpoint cohorts, transport cohort ages exactly, update cohort survival by forward Euler, and insert each time-step birth quadrature as a new age-zero cohort with explicit CFL and cutoff statuses.",
+        "deps": [
+          "def-age-structured-renewal-transport-problem",
+          "alg-composite-midpoint-rule",
+          "def-one-step-ode-method-local-defect-order-and-stability"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-age-structured-renewal-finite-cutoff-model",
+        "kind": "definition",
+        "title": "Finite-age renewal model with absorbing outflow",
+        "statement": "Restrict the age renewal transport model to [0,A], retain mortality and renewal births over [0,A], and absorb each cohort reaching age A; for A>T no birth cohort reaches the cutoff during the horizon.",
+        "deps": [
+          "def-age-structured-renewal-transport-problem"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-age-structured-renewal-semigroup-growth-and-data-stability",
+        "kind": "theorem",
+        "title": "Positive age-renewal evolution and L1 data stability",
+        "statement": "The linear renewal solution operator is positive and has L1 norm at most exp(beta_max t); differences in initial densities and bounded mortality/fertility perturbations satisfy an explicit finite-horizon L1 bound.",
+        "deps": [
+          "def-age-structured-renewal-transport-problem",
+          "thm-age-structured-renewal-characteristic-solution",
+          "thm-gronwall-integral-inequality"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-size-structured-positivity-number-and-weighted-moment-identities",
+        "kind": "theorem",
+        "title": "Positivity and discrete number and size-moment balances",
+        "statement": "Under the size transport-plus-loss CFL and nonnegative kernel quadrature, cell masses stay nonnegative and satisfy exact discrete number and weighted-size balance identities, including growth, mortality, parent removal, division and boundary outflow terms.",
+        "deps": [
+          "def-size-structured-transport-and-division-kernel",
+          "alg-size-structured-finite-volume-flux-and-kernel-quadrature"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-age-structured-renewal-finite-cutoff-characteristic-solution",
+        "kind": "theorem",
+        "title": "Characteristic solution and mass bound for the finite-age renewal model",
+        "statement": "The absorbing finite-age model has a unique characteristic/Volterra solution, exponential mass bound, and explicit cumulative initial-cohort outflow.",
+        "deps": [
+          "def-age-structured-renewal-finite-cutoff-model",
+          "thm-gronwall-integral-inequality"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-age-structured-positive-birth-quadrature",
+        "kind": "algorithm",
+        "title": "Positive composite or capped-adaptive quadrature for renewal births",
+        "statement": "On each age cell, evaluate the nonnegative fertility times piecewise-constant density with positive composite-midpoint weights or capped adaptive-Simpson weights; return the estimate, indicator and explicit failure/cap status.",
+        "deps": [
+          "def-age-structured-renewal-transport-problem",
+          "alg-composite-midpoint-rule",
+          "alg-adaptive-simpson-with-finite-depth-and-panel-cap"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-age-cohort-quadrature-weak-consistency",
+        "kind": "theorem",
+        "title": "Weak consistency of age-cohort characteristic quadrature",
+        "statement": "For C1 bounded rates and finite-horizon data with a bounded-Lipschitz initial quadrature defect, the cohort measure converges in bounded-Lipschitz distance at O(dt+initial-quadrature-defect), with birth-time quadrature, Euler survival and age-tail errors kept separate.",
+        "deps": [
+          "def-age-structured-renewal-transport-problem",
+          "thm-age-structured-renewal-characteristic-solution",
+          "alg-age-cohort-characteristic-quadrature",
+          "thm-age-structured-renewal-semigroup-growth-and-data-stability",
+          "thm-forward-euler-one-step-consistency-and-local-error",
+          "lem-discrete-one-step-error-recurrence-bound"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-age-structured-renewal-upwind-finite-volume",
+        "kind": "algorithm",
+        "title": "Finite-volume upwind scheme for age renewal transport",
+        "statement": "For a finite age cutoff, uniform age cells, a positive birth quadrature and the transport-plus-loss CFL, update cell masses by explicit upwind flux, mortality and a specified absorbing right outflow.",
+        "deps": [
+          "def-age-structured-renewal-transport-problem",
+          "alg-age-structured-positive-birth-quadrature",
+          "def-uniform-grid-and-difference-operators"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-age-structured-renewal-upwind-positivity-mass-bound-and-stability",
+        "kind": "theorem",
+        "title": "Positivity, L1 growth and data stability of the renewal finite-volume step",
+        "statement": "Under the transport-plus-loss CFL, the upwind mass update is nonnegative, grows by at most 1+dt beta_max per step, and is L1 stable for two data sets with a forcing term for coefficient or quadrature perturbations.",
+        "deps": [
+          "def-age-structured-renewal-transport-problem",
+          "alg-age-structured-positive-birth-quadrature",
+          "alg-age-structured-renewal-upwind-finite-volume"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-age-structured-renewal-smooth-first-order-convergence",
+        "kind": "theorem",
+        "title": "First-order finite-volume convergence for compatible smooth renewal data",
+        "statement": "On a bounded horizon, for a C2 characteristic solution with compatible inflow data, comparable time and age steps satisfying the CFL, and true birth-quadrature defect O(da), the L1 cell-mass error is O(da+dt).",
+        "deps": [
+          "def-age-structured-renewal-transport-problem",
+          "def-age-structured-renewal-finite-cutoff-model",
+          "thm-age-structured-renewal-finite-cutoff-characteristic-solution",
+          "alg-age-structured-positive-birth-quadrature",
+          "alg-age-structured-renewal-upwind-finite-volume",
+          "thm-age-structured-renewal-upwind-positivity-mass-bound-and-stability",
+          "thm-composite-midpoint-error-bound",
+          "lem-discrete-one-step-error-recurrence-bound"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-age-structured-renewal-bv-l1-convergence",
+        "kind": "theorem",
+        "title": "L1 convergence for BV data without renewal-boundary compatibility",
+        "statement": "For nonnegative BV intersect L1 initial data and bounded Lipschitz nonnegative rates, the positive upwind scheme converges in L1 on every bounded horizon without imposing corner compatibility; this is a convergence result, with no smooth Taylor rate claimed.",
+        "deps": [
+          "def-age-structured-renewal-transport-problem",
+          "thm-age-structured-renewal-characteristic-solution",
+          "alg-age-structured-renewal-upwind-finite-volume",
+          "thm-age-structured-renewal-upwind-positivity-mass-bound-and-stability"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-age-structured-renewal-cutoff-tail-and-outflow-bound",
+        "kind": "theorem",
+        "title": "Age-cutoff survival, outflow and infinite-age tail bounds",
+        "statement": "For A>T, newborn cohorts do not reach the cutoff during [0,T]; outflow is bounded by the initial tail above A-T, and the finite-cutoff model differs from the infinite-age solution by at most 2 exp(beta_max T) times that tail, separately from discretization error.",
+        "deps": [
+          "def-age-structured-renewal-transport-problem",
+          "thm-age-structured-renewal-characteristic-solution",
+          "thm-age-structured-renewal-semigroup-growth-and-data-stability",
+          "thm-age-structured-renewal-finite-cutoff-characteristic-solution",
+          "alg-age-structured-renewal-upwind-finite-volume",
+          "thm-age-structured-renewal-smooth-first-order-convergence"
+        ],
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 2443,
+    "id": "renewal-age-and-size-structured-numerical-methods-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Renewal age and size structured numerical methods — Examples",
+    "companion": "renewal-age-and-size-structured-numerical-methods",
+    "requires": [
+      "renewal-age-and-size-structured-numerical-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-narrow-maturation-kernel-delay-approximation",
+        "kind": "example",
+        "title": "A narrow maturation kernel approaches a delayed birth term",
+        "statement": "For a normalized triangular fertility kernel centered at a positive age, prove an O(epsilon) convolution-to-delay bound for Lipschitz birth histories and state explicitly why finite width is not an exact delay equation.",
+        "deps": [
+          "def-age-structured-renewal-transport-problem",
+          "thm-age-structured-renewal-characteristic-solution"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-half-size-division-numerical-moment-budget",
+        "kind": "example",
+        "title": "Half-size division preserves the discrete biomass budget",
+        "statement": "For three parent cohorts of size 2, remove each parent and create two daughters of size 1 in one exact division step; verify the number increase and exact weighted-size conservation.",
+        "deps": [
+          "def-size-structured-transport-and-division-kernel",
+          "alg-size-structured-finite-volume-flux-and-kernel-quadrature",
+          "thm-size-structured-positivity-number-and-weighted-moment-identities"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-constant-mortality-and-age-localized-fertility",
+        "kind": "example",
+        "title": "Constant mortality with age-localized fertility",
+        "statement": "For constant mortality, a triangular fertility profile supported on ages [1,2], and initial density 1 on [1,2], compute the birth trace, the initial compatibility defect and the first positive finite-volume birth update.",
+        "deps": [
+          "def-age-structured-renewal-transport-problem",
+          "thm-age-structured-renewal-characteristic-solution",
+          "alg-age-structured-renewal-upwind-finite-volume",
+          "thm-age-structured-renewal-upwind-positivity-mass-bound-and-stability"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-age-cutoff-versus-outflow-tail-error",
+        "kind": "example",
+        "title": "A longer run exposes age-cutoff outflow error",
+        "statement": "For zero mortality and fertility with initial density exp(-a), compute exact cutoff and outflow losses on a unit upwind grid and show how the tail error grows as the simulated horizon approaches the finite cutoff.",
+        "deps": [
+          "def-age-structured-renewal-transport-problem",
+          "alg-age-structured-renewal-upwind-finite-volume",
+          "thm-age-structured-renewal-cutoff-tail-and-outflow-bound"
+        ],
+        "dependency_level": 8
+      }
+    ]
+  }
+]

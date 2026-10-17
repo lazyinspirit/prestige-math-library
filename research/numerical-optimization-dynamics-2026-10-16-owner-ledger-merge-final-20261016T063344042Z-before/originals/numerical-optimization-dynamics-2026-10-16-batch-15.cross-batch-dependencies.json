@@ -1,0 +1,209 @@
+[
+  {
+    "kind": "page",
+    "consumer": "computed-fast-transforms-and-convolution",
+    "supplier": "finite-fourier-analysis-and-the-fast-fourier-transform",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Published Fourier conventions and exact finite-transform, radix-two, inversion, Parseval and cyclic-convolution results used by the assigned formulae.",
+    "supplier_item_ids": [
+      "def-unitary-discrete-fourier-transform-on-z-mod-n",
+      "thm-radix-two-fft-correctness",
+      "thm-radix-two-fft-arithmetic-complexity",
+      "thm-finite-fourier-inversion",
+      "thm-finite-parseval-and-plancherel",
+      "lem-finite-fourier-transform-converts-cyclic-convolution-to-scaled-product"
+    ],
+    "affected_claims": [
+      "Exact transform conventions and identities used in mixed-radix/Bluestein formulae, unitary FFT bounds, and convolution bounds."
+    ],
+    "evidence": "Read the published page and the listed supplier statements/proofs. Their signs, normalizations, domains, and exact hypotheses were checked against the assigned definitions. This records page context and existing published sources, not new approval."
+  },
+  {
+    "kind": "page",
+    "consumer": "computed-fast-transforms-and-convolution",
+    "supplier": "matrix-norms-condition-numbers-and-numerical-stability",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Page-level context retained by the current plan-spec; no matrix condition-number theorem is used as a local proof premise.",
+    "supplier_item_ids": [],
+    "affected_claims": [
+      "Page context only; the local error proofs use explicitly cited counting norms, Parseval, Cauchy–Schwarz, and the operationwise model."
+    ],
+    "evidence": "Read the published page inventory and prose and checked the local item dependency lists. No unstated matrix-norm or conditioning claim is imported."
+  },
+  {
+    "kind": "page",
+    "consumer": "computed-fast-transforms-and-convolution",
+    "supplier": "finite-precision-direct-factorizations",
+    "status": "owner-escalation",
+    "batch": "1",
+    "required_interface": "The page-level requirement remains for owner reconciliation. The assigned complex-product estimate specifically requires the successful-operation, round-to-nearest, normal-range model and its six-real-operation complex multiplication convention.",
+    "supplier_item_ids": [
+      "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+    ],
+    "affected_claims": [
+      "Page-level NA-02 requirement; the direct complex-product estimate depends on def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma."
+    ],
+    "evidence": "The assigned model body was inspected. Its direct item currently has a Step 1 readiness record with decision ready and owner true; this supports the direct item edge below. I did not verify readiness of the entire required page, so its page edge remains open."
+  },
+  {
+    "kind": "page",
+    "consumer": "computed-fast-transforms-and-convolution",
+    "supplier": "outward-rounded-interval-and-ball-arithmetic",
+    "status": "owner-escalation",
+    "batch": "14",
+    "required_interface": "Sound finite elementary-function enclosures, directed interval operations, fixed-budget failure statuses, and the exact pi convention needed by certified unit-circle phase evaluation.",
+    "supplier_item_ids": [
+      "def-dyadic-floating-point-format-and-directed-rounding",
+      "def-intervals-rectangles-and-complex-balls",
+      "def-outward-rounded-interval-and-ball-operations",
+      "def-real-elementary-functions-and-domains",
+      "alg-certified-elementary-range-evaluation",
+      "thm-real-elementary-range-enclosures",
+      "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+    ],
+    "affected_claims": [
+      "Certified phase algorithm and phase enclosure; all downstream computed radix-two, convolution, arbitrary-length, and Bluestein-phase claims that call the certified phase procedure."
+    ],
+    "evidence": "Actual current supplier definitions/proofs and full relevant FFT consumer bodies inspected in this focused family repair. Present source interfaces are mathematically reconciled; original native missing-readiness escalation remains historical evidence. Current native readiness must be supplied by root after source/metadata integration.",
+    "owner_resolution": "Actual drained supplier bodies and phase/FFT consumer chain checked by the supplier repair owner. VAL trig tails/guard now allow |r|<=1, successful trig enclosures are clipped to[-1,1], and sqrt endpoint calls use n=p. The complete existing FFT pi bridge is retained; phase soundness and all conditional downstream FFT/convolution/chirp results retain their statements. Native readiness/bindings remain root-owned and pending; this is no acceptance stamp."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-na-complex-product-six-operation-roundoff-bound",
+    "supplier": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "status": "verified",
+    "batch": "1",
+    "required_interface": "Successful real operations use round-to-nearest, ties-to-even with zero/normal intermediate conditions; a complex product is the stated four products, subtraction, and addition (six operations).",
+    "supplier_item_ids": [
+      "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+        "section": "Definition",
+        "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model."
+      }
+    ],
+    "affected_claims": [
+      "The bound |fl_C(zw)-zw| <= 3u|z||w| in lem-na-complex-product-six-operation-roundoff-bound, used by the butterfly, convolution and chirp-phase estimates."
+    ],
+    "evidence": "Read the actual Definition and its model prerequisites. The current Step 1 record for this supplier is ready, owner true, with a current hash. No independent approval is claimed."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-na-interval-pi-matches-canonical-fourier-pi",
+    "supplier": "def-real-elementary-functions-and-domains",
+    "status": "owner-escalation",
+    "batch": "14",
+    "required_interface": "The supplier defines arctan x as the integral from 0 to x of 1/(1+t^2) and states pi=4 arctan(1). The new local proof identifies that value with the canonical pi used by the published finite Fourier transform.",
+    "supplier_item_ids": [
+      "def-real-elementary-functions-and-domains"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-real-elementary-functions-and-domains",
+        "section": "Definition",
+        "quote": "Every integral below is the oriented Riemann integral constructed from upper\nand lower Darboux sums in\n[[lem-continuous-functions-riemann-integrable]]. It exists for each displayed\ncontinuous integrand on the finite interval between its endpoints, is additive\nin intervals, reverses sign when the endpoints are reversed, is monotone in\nthe integrand, and satisfies\n$|\\int_a^b g(t)\\,dt|\\le|b-a|\\max_{t\\text{ between }a\\text{ and }b}|g(t)|$.\nThese properties also\ngive constant comparison bounds and the average-value difference quotient\nused to differentiate the integral-defined functions.\n\nThe exponential is $\\exp(x)=\\sum_{k=0}^{\\infty}x^k/k!$ for $x\\in\\mathbb R$.\nThe sine and cosine are the everywhere-convergent power series\n$\\sin x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k+1}/(2k+1)!$ and\n$\\cos x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k}/(2k)!$. Define\n$\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$. The natural\nlogarithm $\\ln$ is defined on $(0,\\infty)$ by $\\ln x=\\int_1^x dt/t$.\n\nThe square root is the unique nonnegative real $y$ with $y^2=x$ for $x\\ge0$;\nexistence and uniqueness follow from\n[[lem-nonnegative-square-root-exists-and-unique]]. The tangent is\n$\\tan x=\\sin x/\\cos x$ on the set where $\\cos x\\ne0$.\n\nFor complex $z=x+iy$, the modulus $|z|=\\sqrt{x^2+y^2}$ is defined in\n[[def-intervals-rectangles-and-complex-balls]]. The complex exponential is\n$\\exp(x+iy)=\\exp(x)(\\cos y+i\\sin y)$. The principal complex logarithm is\n$\\operatorname{Log}(z)=\\ln|z|+i\\operatorname{Arg}(z)$ on\n$\\mathbb C\\setminus(-\\infty,0]$. For $z=x+iy$ in this domain, define\n$$\n\\operatorname{Arg}(x+iy)=\n\\begin{cases}\n\\arctan(y/x),&x>0,\\\\\n\\pi/2,&x=0,\\ y>0,\\\\\n-\\pi/2,&x=0,\\ y<0,\\\\\n\\pi-\\arctan(y/(-x)),&x<0,\\ y>0,\\\\\n-\\pi+\\arctan((-y)/(-x)),&x<0,\\ y<0.\n\\end{cases}\n$$\nThe excluded negative real axis is the remaining case $x<0,y=0$; zero is\nalso excluded.\n\nThese are point functions. An interval extension must separately enclose their\nexact ranges, test the stated domains, and return a non-finite status when its\nfinite budget cannot certify a reduction or endpoint."
+      }
+    ],
+    "affected_claims": [
+      "The canonical-constant bridge required by alg-na-certified-unit-circle-phase and thm-na-certified-unit-circle-phase-enclosure."
+    ],
+    "evidence": "Actual current supplier definitions/proofs and full relevant FFT consumer bodies inspected in this focused family repair. Present source interfaces are mathematically reconciled; original native missing-readiness escalation remains historical evidence. Current native readiness must be supplied by root after source/metadata integration.",
+    "owner_resolution": "Actual drained supplier bodies and phase/FFT consumer chain checked by the supplier repair owner. VAL trig tails/guard now allow |r|<=1, successful trig enclosures are clipped to[-1,1], and sqrt endpoint calls use n=p. The complete existing FFT pi bridge is retained; phase soundness and all conditional downstream FFT/convolution/chirp results retain their statements. Native readiness/bindings remain root-owned and pending; this is no acceptance stamp."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-na-certified-unit-circle-phase",
+    "supplier": "batch-14-elementary-range-suppliers",
+    "status": "owner-escalation",
+    "batch": "14",
+    "required_interface": "For the exact rational phase input q, finite range evaluation must enclose cos(pi q) and sin(pi q), use outward-rounded arithmetic and Machin pi enclosures, and return a non-finite status instead of an uncertified finite value when a domain, width, or budget check fails.",
+    "supplier_item_ids": [
+      "def-dyadic-floating-point-format-and-directed-rounding",
+      "def-intervals-rectangles-and-complex-balls",
+      "def-outward-rounded-interval-and-ball-operations",
+      "def-real-elementary-functions-and-domains",
+      "alg-certified-elementary-range-evaluation",
+      "thm-real-elementary-range-enclosures",
+      "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-dyadic-floating-point-format-and-directed-rounding",
+        "section": "Definition",
+        "quote": "An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.\n\nFor a real $x$ with $|x|\\le N_{\\max}$, define $\\operatorname{rd}(x)$ as the\ngreatest member of $\\mathbb F$ not exceeding $x$, and $\\operatorname{ru}(x)$ as\nthe least member of $\\mathbb F$ not less than $x$. Define\n$\\rho(x)=\\operatorname{ru}(x)-\\operatorname{rd}(x)$. For nonzero $x$ in the\nsubnormal range, define the absolute-error bound $\\epsilon_{\\rm abs}(x)=\\eta$;\nfor $2^e\\le |x|<2^{e+1}$ in the normal range, define\n$\\epsilon_{\\rm abs}(x)=2^{e-p+2}$. At finite overflow, a directed result is\nthe corresponding infinite sentinel and its error bound is $+\\infty$; the\nstatus is `overflow`. The rounding procedure reports `finite`, `subnormal`, or\n`overflow`, so no relative-error assumption is implicit.\n\nAn exact rational intermediate may be converted by comparing integer\nnumerators and denominators after clearing powers of two. A directed interval\nendpoint is the resulting greatest lower or least upper member of $\\mathbb F$."
+      },
+      {
+        "item": "def-intervals-rectangles-and-complex-balls",
+        "section": "Definition",
+        "quote": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.\n\nA **complex rectangle** is $X+iY=\\{x+iy:x\\in X,\\ y\\in Y\\}$ for real intervals\n$X,Y$. Complex addition and multiplication use\n$(x+iy)+(u+iv)=(x+u)+i(y+v)$ and\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$. For $z=x+iy$, its complex modulus is\n$|z|=\\sqrt{x^2+y^2}$, and for $z\\ne0$ its reciprocal is\n$1/z=(x-iy)/(x^2+y^2)$. A\n**complex ball** $B(c,r)$ is\n$\\{z\\in\\mathbb C:|z-c|\\le r\\}$ with dyadic complex center $c$ and dyadic\n$r\\ge0$. For any two represented sets $S,T$, the inclusion order is\n$S\\sqsubseteq T$ iff $S\\subseteq T$.\n\nThe width of a complex rectangle with coordinate widths $w_X,w_Y$ is its\nEuclidean diameter $\\sqrt{w_X^2+w_Y^2}$; the width of a ball $B(c,r)$ is its\ndiameter $2r$. Width comparisons against a dyadic tolerance can be decided by\nexact rational comparisons after squaring the nonnegative quantities.\n\nThe **range** of a real or complex function $f$ on a set $S$ is\n$f(S)=\\{f(x):x\\in S\\cap\\operatorname{dom}(f)\\}$. A finite expression DAG is a\nfinite directed acyclic graph with input nodes, constant nodes, and operation\nnodes; constants are exact dyadics or are supplied with certified enclosing\nintervals. Sharing a node means the exact same intermediate value is reused."
+      },
+      {
+        "item": "def-outward-rounded-interval-and-ball-operations",
+        "section": "Definition",
+        "quote": "For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.\n\nIf $0\\in Y$ for division, return `split-domain` with the two subdomains\n$Y\\cap(-\\infty,0)$ and $Y\\cap(0,\\infty)$, or `entire` when the caller does not\nrequest subdivision. No finite quotient interval is returned in this case.\nAn invalid square-root domain returns `domain-error` or an explicitly\nrestricted nonnegative subdomain.\n\nComplex-rectangle addition, subtraction and multiplication use\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$, applying the real interval operations to\neach component. For a rectangle $X+iY$ excluding $0$, define its reciprocal by\n$(X-iY)/(X^2+Y^2)$; the denominator interval is strictly positive because at\nleast one coordinate interval excludes zero. Division multiplies by this\nreciprocal.\n\nFor a ball $B(c,r)$, let $X_B=[\\Re c-r,\\Re c+r]$ and\n$Y_B=[\\Im c-r,\\Im c+r]$ be its coordinate projection intervals. For a real\ninterval $J$, let $M(J)=\\max(|\\inf J|,|\\sup J|)$ and let $d(J)=0$ if\n$0\\in J$, otherwise $d(J)=\\min(|\\inf J|,|\\sup J|)$. Put\n$M_B=M(X_B)+M(Y_B)$ and $m_B=\\max(d(X_B),d(Y_B))$. Then\n$|z|\\le M_B$ for every $z\\in B(c,r)$ and $|z|\\ge m_B$ for every such $z$.\nDefine ball addition and subtraction as\n$B(0,\\operatorname{ru}(M_{B_1}+M_{B_2}))$, multiplication as\n$B(0,\\operatorname{ru}(M_{B_1}M_{B_2}))$, and division as\n$B(0,\\operatorname{ru}(M_{B_1}/m_{B_2}))$ only when $m_{B_2}>0$. These\norigin-centered output balls are conservative but inclusion-isotone. If\n$m_{B_2}=0$, return `split-domain`, `entire`, or `inconclusive`; if a radius\noverlows, return `overflow`."
+      },
+      {
+        "item": "def-real-elementary-functions-and-domains",
+        "section": "Definition",
+        "quote": "Every integral below is the oriented Riemann integral constructed from upper\nand lower Darboux sums in\n[[lem-continuous-functions-riemann-integrable]]. It exists for each displayed\ncontinuous integrand on the finite interval between its endpoints, is additive\nin intervals, reverses sign when the endpoints are reversed, is monotone in\nthe integrand, and satisfies\n$|\\int_a^b g(t)\\,dt|\\le|b-a|\\max_{t\\text{ between }a\\text{ and }b}|g(t)|$.\nThese properties also\ngive constant comparison bounds and the average-value difference quotient\nused to differentiate the integral-defined functions.\n\nThe exponential is $\\exp(x)=\\sum_{k=0}^{\\infty}x^k/k!$ for $x\\in\\mathbb R$.\nThe sine and cosine are the everywhere-convergent power series\n$\\sin x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k+1}/(2k+1)!$ and\n$\\cos x=\\sum_{k=0}^{\\infty}(-1)^k x^{2k}/(2k)!$. Define\n$\\arctan x=\\int_0^x dt/(1+t^2)$ and set $\\pi=4\\arctan1$. The natural\nlogarithm $\\ln$ is defined on $(0,\\infty)$ by $\\ln x=\\int_1^x dt/t$.\n\nThe square root is the unique nonnegative real $y$ with $y^2=x$ for $x\\ge0$;\nexistence and uniqueness follow from\n[[lem-nonnegative-square-root-exists-and-unique]]. The tangent is\n$\\tan x=\\sin x/\\cos x$ on the set where $\\cos x\\ne0$.\n\nFor complex $z=x+iy$, the modulus $|z|=\\sqrt{x^2+y^2}$ is defined in\n[[def-intervals-rectangles-and-complex-balls]]. The complex exponential is\n$\\exp(x+iy)=\\exp(x)(\\cos y+i\\sin y)$. The principal complex logarithm is\n$\\operatorname{Log}(z)=\\ln|z|+i\\operatorname{Arg}(z)$ on\n$\\mathbb C\\setminus(-\\infty,0]$. For $z=x+iy$ in this domain, define\n$$\n\\operatorname{Arg}(x+iy)=\n\\begin{cases}\n\\arctan(y/x),&x>0,\\\\\n\\pi/2,&x=0,\\ y>0,\\\\\n-\\pi/2,&x=0,\\ y<0,\\\\\n\\pi-\\arctan(y/(-x)),&x<0,\\ y>0,\\\\\n-\\pi+\\arctan((-y)/(-x)),&x<0,\\ y<0.\n\\end{cases}\n$$\nThe excluded negative real axis is the remaining case $x<0,y=0$; zero is\nalso excluded.\n\nThese are point functions. An interval extension must separately enclose their\nexact ranges, test the stated domains, and return a non-finite status when its\nfinite budget cannot certify a reduction or endpoint."
+      },
+      {
+        "item": "alg-certified-elementary-range-evaluation",
+        "section": "Definition",
+        "quote": "Input: a finite expression DAG with real interval or complex rectangle input,\na finite dyadic format and an integer truncation index $N\\ge1$. All constants,\nincluding the Machin enclosure of $\\pi$, use the same fixed $N$ and format\nthroughout a call. Output: a finite interval/rectangle enclosure, or one of\n`empty`, `domain-error`, `split-domain`, `overflow`, or `inconclusive` with the\nunresolved domain piece. No value from a system `libm` routine is treated as a\ncertified endpoint.\n\n1. Evaluate arithmetic nodes by\n[[def-outward-rounded-interval-and-ball-operations]]. On an invalid divisor\nreturn its declared status. For $\\sqrt{X}$ require $X\\subseteq[0,\\infty)$; for\n$\\ln X$ require $X\\subseteq(0,\\infty)$. If an input is not wholly in the\nstated domain, return `domain-error` rather than silently discarding points.\n\n2. Set $s=\\max(0,e_{\\max}+2)$, using the exponent in\n[[def-dyadic-floating-point-format-and-directed-rounding]]. Since\n$N_{\\max}<2^{e_{\\max}+1}$, exact dyadic comparison gives\n$N_{\\max}/2^s<1/2$. For an\ninterval $X$, evaluate the truncated exponential polynomial on $U=X/2^s$ by\ninterval arithmetic, add the symmetric tail using $\\max_{u\\in U}|u|$, then\nsquare the resulting interval $s$ times. If its lower endpoint is not\npositive or an endpoint overflows, return `inconclusive` or `overflow`. For\n$\\ln$, split $X\\subset(0,\\infty)$ into its intersections with the fixed\ndyadic bins $[2^j,2^{j+1}]$. On each nonempty piece set\n$Y=2^{-j}X_j\\subseteq[1,2]$, $V=(Y-1)/(Y+1)$, evaluate the positive logarithm\nseries on $V$ with its tail determined by $\\max|V|$, and combine\n$j\\ln2+\\ln Y$ by outward arithmetic. Take the hull over all intersected\nbins.\n\n3. Partition $\\arctan$ input at the fixed real breakpoints\n$-3,-1/2,1/2,3$. On pieces within $[-1/2,1/2]$, use its alternating power\nseries interval evaluation. For $t\\in[1/2,1]$, use\n$\\arctan t=\\pi/4-\\arctan((1-t)/(1+t))$; for $t\\in[1,3]$, use\n$\\arctan t=\\pi/4+\\arctan((t-1)/(t+1))$; for $t>3$, use\n$\\arctan t=\\pi/2-\\arctan(1/t)$. Use odd symmetry on negative pieces.\nEnclose $\\pi$ by Machin's identity and the alternating series at $1/5$ and\n$1/239$, forming their rational partial sums and tail endpoints exactly\nbefore the final outward conversion. If any branch test is unresolved, return\n`inconclusive`.\n\n4. For sine and cosine, first compute one outward Machin interval $P_N$ for\n$\\pi$ using the same $N$ and format, with the rational series endpoints\ncombined exactly before final outward conversion. If $P_N$ is non-finite or\nits lower endpoint is not positive, return `inconclusive`. For finite input\n$X=[a,b]$, put $M_X=\\max(|a|,|b|)$, $p_-:=\\inf(P_N)>0$, and\n$K=\\lceil2M_X/p_-\\rceil+1$, with the ceiling computed by exact rational\ncomparisons. For $k>K$, the outward lower endpoint of cell $k$ is\n$(2k-1)p_-/4>M_X$; for $k<-K$, its outward upper endpoint is\n$-(2|k|-1)p_-/4<-M_X$. Thus every cell enclosure that can intersect $X$ is\nin the finite candidate list $-K,\\ldots,K$. Use the fixed canonical cells\n$[k\\pi/2-\\pi/4,k\\pi/2+\\pi/4]$, $k\\in\\mathbb Z$. Enclose each cell using\nexact rational expressions from $P_N$ and let $X_k$ be the interval hull of\nits intersection with $X$; do not round candidate-cell or residual endpoints.\nInclude every cell whose $P_N$ enclosure cannot be ruled out as intersecting\n$X$. Certify the residual enclosure $R=X_k-kP_N/2$ satisfies\n$R\\subseteq[-1,1]$, evaluate the corresponding power\npolynomial and add the explicit geometric tail by exact rational interval\narithmetic, then round the final endpoints outward. The tail comes from\n[[lem-trigonometric-identities-machin-and-range-reduction]], and map by the\nquarter-period identities. Intersect every finite sine/cosine enclosure\nwith $[-1,1]$, including after the sign and coordinate swaps; the exact\nvalues satisfy these bounds. If the input width is at least $2\\sup(P_N)$,\nreturn $[-1,1]$. If a cell cannot be certified in the reduced interval or the\nfinite candidate list cannot be resolved, return `inconclusive`. For tangent,\ndivide the sine enclosure by the cosine enclosure only on canonical pieces\nwhere the latter excludes zero; otherwise return `split-domain` or\n`inconclusive`.\n\n5. For complex exponential, evaluate real $\\exp(X)$, $\\cos(Y)$ and\n$\\sin(Y)$ and combine them by rectangle operations. For principal\n$\\operatorname{Log}$, require a rectangle excluding zero and every point of\nthe negative real branch cut; otherwise return `domain-error`. Subdivide into\nsign-stable quadrants and axis pieces; on the quadrants use\n$$\n\\operatorname{Arg}(x+iy)=\n\\begin{cases}\n\\arctan(y/x),&x>0,\\ y>0,\\\\\n-\\arctan((-y)/x),&x>0,\\ y<0,\\\\\n\\pi-\\arctan(y/(-x)),&x<0,\\ y>0,\\\\\n-\\pi+\\arctan((-y)/(-x)),&x<0,\\ y<0.\n\\end{cases}\n$$\nFor $x=0,y>0$ set $\\operatorname{Arg}(iy)=\\pi/2$, for $x=0,y<0$ set it to\n$-\\pi/2$, and on the positive real axis set it to zero. Enclose\n$\\ln\\sqrt{X^2+Y^2}$ by the real operations and elementary evaluators. If the\nbranch or sign cannot be certified, return `inconclusive`.\n\n6. Each displayed series uses indices $0,\\ldots,N$, hence at most $N+1$\nterms; $N$ is the truncation index. Branch breakpoints, dyadic scales and\n$P_N$ are fixed by the call parameters, independent of the input box; no\nadaptive subdivision or precision refinement is hidden inside this evaluator."
+      },
+      {
+        "item": "thm-real-elementary-range-enclosures",
+        "section": "Statement",
+        "quote": "Every finite enclosure returned by\n[[alg-certified-elementary-range-evaluation]] for a real interval in the\ndomain of $\\exp$, $\\ln$, $\\sqrt{\\phantom{x}}$, $\\arctan$, $\\sin$, $\\cos$, or\n$\\tan$ contains the exact range of that function on the represented domain.\nIf two input intervals are nested and both calls return finite enclosures,\nthe canonical branch-cell and fixed-term construction in the algorithm makes\nthe smaller interval's computed enclosure a subset of the larger one's.\nAn unresolved fixed branch, pole, invalid domain or overflow returns its\nstated non-finite status and carries no finite success claim."
+      },
+      {
+        "item": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+        "section": "Statement",
+        "quote": "For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosure is asserted."
+      }
+    ],
+    "affected_claims": [],
+    "evidence": "Actual current supplier definitions/proofs and full relevant FFT consumer bodies inspected in this focused family repair. Present source interfaces are mathematically reconciled; original native missing-readiness escalation remains historical evidence. Current native readiness must be supplied by root after source/metadata integration.",
+    "owner_resolution": "Actual drained supplier bodies and phase/FFT consumer chain checked by the supplier repair owner. VAL trig tails/guard now allow |r|<=1, successful trig enclosures are clipped to[-1,1], and sqrt endpoint calls use n=p. The complete existing FFT pi bridge is retained; phase soundness and all conditional downstream FFT/convolution/chirp results retain their statements. Native readiness/bindings remain root-owned and pending; this is no acceptance stamp."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-na-certified-unit-circle-phase-enclosure",
+    "supplier": "batch-14-range-and-rectangle-soundness",
+    "status": "owner-escalation",
+    "batch": "14",
+    "required_interface": "A finite real range enclosure contains the exact sine/cosine values; the complex rectangle representation and outward width arithmetic preserve those component enclosures.",
+    "supplier_item_ids": [
+      "def-intervals-rectangles-and-complex-balls",
+      "thm-real-elementary-range-enclosures",
+      "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-intervals-rectangles-and-complex-balls",
+        "section": "Definition",
+        "quote": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.\n\nA **complex rectangle** is $X+iY=\\{x+iy:x\\in X,\\ y\\in Y\\}$ for real intervals\n$X,Y$. Complex addition and multiplication use\n$(x+iy)+(u+iv)=(x+u)+i(y+v)$ and\n$(x+iy)(u+iv)=(xu-yv)+i(xv+yu)$. For $z=x+iy$, its complex modulus is\n$|z|=\\sqrt{x^2+y^2}$, and for $z\\ne0$ its reciprocal is\n$1/z=(x-iy)/(x^2+y^2)$. A\n**complex ball** $B(c,r)$ is\n$\\{z\\in\\mathbb C:|z-c|\\le r\\}$ with dyadic complex center $c$ and dyadic\n$r\\ge0$. For any two represented sets $S,T$, the inclusion order is\n$S\\sqsubseteq T$ iff $S\\subseteq T$.\n\nThe width of a complex rectangle with coordinate widths $w_X,w_Y$ is its\nEuclidean diameter $\\sqrt{w_X^2+w_Y^2}$; the width of a ball $B(c,r)$ is its\ndiameter $2r$. Width comparisons against a dyadic tolerance can be decided by\nexact rational comparisons after squaring the nonnegative quantities.\n\nThe **range** of a real or complex function $f$ on a set $S$ is\n$f(S)=\\{f(x):x\\in S\\cap\\operatorname{dom}(f)\\}$. A finite expression DAG is a\nfinite directed acyclic graph with input nodes, constant nodes, and operation\nnodes; constants are exact dyadics or are supplied with certified enclosing\nintervals. Sharing a node means the exact same intermediate value is reused."
+      },
+      {
+        "item": "thm-real-elementary-range-enclosures",
+        "section": "Statement",
+        "quote": "Every finite enclosure returned by\n[[alg-certified-elementary-range-evaluation]] for a real interval in the\ndomain of $\\exp$, $\\ln$, $\\sqrt{\\phantom{x}}$, $\\arctan$, $\\sin$, $\\cos$, or\n$\\tan$ contains the exact range of that function on the represented domain.\nIf two input intervals are nested and both calls return finite enclosures,\nthe canonical branch-cell and fixed-term construction in the algorithm makes\nthe smaller interval's computed enclosure a subset of the larger one's.\nAn unresolved fixed branch, pole, invalid domain or overflow returns its\nstated non-finite status and carries no finite success claim."
+      },
+      {
+        "item": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+        "section": "Statement",
+        "quote": "For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosure is asserted."
+      }
+    ],
+    "affected_claims": [
+      "The theorem that a certified complex phase output is within epsilon<=tau of the canonical Fourier phase, and every downstream phase-dependent error claim."
+    ],
+    "evidence": "Actual current supplier definitions/proofs and full relevant FFT consumer bodies inspected in this focused family repair. Present source interfaces are mathematically reconciled; original native missing-readiness escalation remains historical evidence. Current native readiness must be supplied by root after source/metadata integration.",
+    "owner_resolution": "Actual drained supplier bodies and phase/FFT consumer chain checked by the supplier repair owner. VAL trig tails/guard now allow |r|<=1, successful trig enclosures are clipped to[-1,1], and sqrt endpoint calls use n=p. The complete existing FFT pi bridge is retained; phase soundness and all conditional downstream FFT/convolution/chirp results retain their statements. Native readiness/bindings remain root-owned and pending; this is no acceptance stamp."
+  }
+]

@@ -1,0 +1,542 @@
+[
+  {
+    "kind": "page",
+    "consumer": "spectral-collocation-and-galerkin-methods",
+    "supplier": "polynomial-interpolation-and-remainder",
+    "supplier_batch": "4",
+    "status": "verified",
+    "required_interface": "Distinct increasing real nodes; the cardinal formula, unique degree-at-most-n interpolant, and C^(n+1) pointwise Lagrange remainder under their stated hypotheses.",
+    "affected_items": [
+      "def-chebyshev-gauss-lobatto-collocation-grid",
+      "lem-chebyshev-lobatto-mode-aliasing",
+      "alg-chebyshev-gauss-lobatto-differentiation-matrix",
+      "thm-chebyshev-gauss-lobatto-differentiation-is-exact",
+      "thm-chebyshev-lobatto-interpolation-rate-under-spectral-sobolev-regularity",
+      "thm-chebyshev-lobatto-pointwise-remainder-bound"
+    ],
+    "evidence": "The actual current supplier item bodies and proof contracts were inspected; the cited interface hypotheses match the consumers. The stored supplier Step 1 records are present as ready but currently hash-stale after dependency changes. This is a consumer-side interface verification only, not supplier acceptance; owner reconciliation should refresh those records."
+  },
+  {
+    "kind": "page",
+    "consumer": "spectral-collocation-and-galerkin-methods",
+    "supplier": "polynomial-approximation-and-chebyshev-interpolation",
+    "supplier_batch": "19",
+    "status": "verified",
+    "required_interface": "The named Chebyshev root/Lobatto nodes, best uniform error and Lebesgue constant definitions, and the near-best interpolation estimate for continuous data.",
+    "affected_items": [
+      "thm-chebyshev-lobatto-interpolation-near-best-weighted-error"
+    ],
+    "evidence": "The actual current supplier item bodies and proof contracts were inspected; the cited interface hypotheses match the consumers. The stored supplier Step 1 records are present as ready but currently hash-stale after dependency changes. This is a consumer-side interface verification only, not supplier acceptance; owner reconciliation should refresh those records."
+  },
+  {
+    "kind": "page",
+    "consumer": "spectral-collocation-and-galerkin-methods",
+    "supplier": "composite-quadrature-rules",
+    "supplier_batch": "20",
+    "status": "verified",
+    "required_interface": "The even-panel composite Simpson finite weighted sum and the C^4 error estimate (b-a)h^4 max|f^(4)|/180.",
+    "affected_items": [
+      "alg-chebyshev-composite-simpson-weighted-mass-matrix",
+      "thm-composite-simpson-error-for-chebyshev-weighted-mass-matrix"
+    ],
+    "evidence": "The actual current supplier item bodies and proof contracts were inspected; the cited interface hypotheses match the consumers. The stored supplier Step 1 records are present as ready but currently hash-stale after dependency changes. This is a consumer-side interface verification only, not supplier acceptance; owner reconciliation should refresh those records."
+  },
+  {
+    "kind": "page",
+    "consumer": "spectral-collocation-and-galerkin-methods",
+    "supplier": "gaussian-quadrature",
+    "supplier_batch": "82",
+    "status": "verified",
+    "required_interface": "Finite positive-measure moment data, the matching monic orthogonal basis and Gaussian rule, exactness through degree 2m-1 and positive weights under the supplier hypotheses.",
+    "affected_items": [
+      "def-weighted-orthogonal-polynomial-galerkin-space",
+      "thm-weighted-orthogonal-polynomial-galerkin-projection-is-well-defined",
+      "alg-gaussian-orthogonal-polynomial-galerkin-mass-matrix",
+      "thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact"
+    ],
+    "evidence": "The actual current supplier bodies, proof contracts and source coverage were inspected; the consumed hypotheses match the consumers. Supplier author readiness is recorded separately and is not independent acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-chebyshev-gauss-lobatto-collocation-grid",
+    "supplier": "def-cardinal-polynomial-interpolation",
+    "supplier_batch": "4",
+    "status": "verified",
+    "required_hypotheses": [
+      "Strictly increasing distinct real nodes; the node polynomial, cardinal functions, barycentric weights and finite interpolation sum."
+    ],
+    "affected_items": [
+      "def-chebyshev-gauss-lobatto-collocation-grid"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "def-cardinal-polynomial-interpolation",
+        "section": "Definition",
+        "quote": "Let $n\\in\\mathbb N$ with $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\left(\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}(x_j-x_k)\\right)^{-1}\\quad(0\\le j\\le n).$$\nAn empty product is $1$, so $w_0=1$ when $n=0$.\n\nIn these formulas, $X$ is a real argument, and for real $a$ and nonzero real $b$, $a/b$ denotes $ab^{-1}$ in the field $\\mathbb R$ ([[def-field]]).\n\nFor each $j$, the cardinal function is\n$$\\ell_j(X)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{X-x_k}{x_j-x_k}.$$\nThe interpolation function for the data $y=(y_0,\\ldots,y_n)$ is\n$$I_n y(X)=\\sum_{j=0}^{n}y_j\\ell_j(X).$$\nFor a real function $f$ defined at the nodes, write $I_n f:=I_n(f(x_0),\\ldots,f(x_n))$.\n\nFor products indexed by $k\\ne j$, use the length-$n$ list $\\widehat x_{j,k}$ ($0\\le k<n$), where $\\widehat x_{j,k}=x_k$ for $k<j$ and $\\widehat x_{j,k}=x_{k+1}$ for $k\\ge j$; the product is in this order and is empty when $n=0$. Strict ordering gives $x_j-\\widehat x_{j,k}\\ne0$ for every factor, so [[lem-finite-product-of-nonzero-reals-is-nonzero]] and the field inverse law make each $w_j$ well defined."
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-chebyshev-gauss-lobatto-collocation-grid",
+    "supplier": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+    "supplier_batch": "4",
+    "status": "verified",
+    "required_hypotheses": [
+      "n+1 distinct increasing real nodes; the cardinal sum is the unique polynomial of degree at most n with the prescribed values."
+    ],
+    "affected_items": [
+      "def-chebyshev-gauss-lobatto-collocation-grid"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+        "section": "Statement",
+        "quote": "Let $n\\in\\mathbb N$, $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Then $I_n y$ from [[def-cardinal-polynomial-interpolation]] is the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$."
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-chebyshev-lobatto-mode-aliasing",
+    "supplier": "def-cardinal-polynomial-interpolation",
+    "supplier_batch": "4",
+    "status": "verified",
+    "required_hypotheses": [
+      "Strictly increasing distinct real nodes; the node polynomial, cardinal functions, barycentric weights and finite interpolation sum."
+    ],
+    "affected_items": [
+      "lem-chebyshev-lobatto-mode-aliasing"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "def-cardinal-polynomial-interpolation",
+        "section": "Definition",
+        "quote": "Let $n\\in\\mathbb N$ with $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\left(\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}(x_j-x_k)\\right)^{-1}\\quad(0\\le j\\le n).$$\nAn empty product is $1$, so $w_0=1$ when $n=0$.\n\nIn these formulas, $X$ is a real argument, and for real $a$ and nonzero real $b$, $a/b$ denotes $ab^{-1}$ in the field $\\mathbb R$ ([[def-field]]).\n\nFor each $j$, the cardinal function is\n$$\\ell_j(X)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{X-x_k}{x_j-x_k}.$$\nThe interpolation function for the data $y=(y_0,\\ldots,y_n)$ is\n$$I_n y(X)=\\sum_{j=0}^{n}y_j\\ell_j(X).$$\nFor a real function $f$ defined at the nodes, write $I_n f:=I_n(f(x_0),\\ldots,f(x_n))$.\n\nFor products indexed by $k\\ne j$, use the length-$n$ list $\\widehat x_{j,k}$ ($0\\le k<n$), where $\\widehat x_{j,k}=x_k$ for $k<j$ and $\\widehat x_{j,k}=x_{k+1}$ for $k\\ge j$; the product is in this order and is empty when $n=0$. Strict ordering gives $x_j-\\widehat x_{j,k}\\ne0$ for every factor, so [[lem-finite-product-of-nonzero-reals-is-nonzero]] and the field inverse law make each $w_j$ well defined."
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-chebyshev-lobatto-mode-aliasing",
+    "supplier": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+    "supplier_batch": "4",
+    "status": "verified",
+    "required_hypotheses": [
+      "n+1 distinct increasing real nodes; the cardinal sum is the unique polynomial of degree at most n with the prescribed values."
+    ],
+    "affected_items": [
+      "lem-chebyshev-lobatto-mode-aliasing"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+        "section": "Statement",
+        "quote": "Let $n\\in\\mathbb N$, $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Then $I_n y$ from [[def-cardinal-polynomial-interpolation]] is the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$."
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-chebyshev-gauss-lobatto-differentiation-matrix",
+    "supplier": "def-cardinal-polynomial-interpolation",
+    "supplier_batch": "4",
+    "status": "verified",
+    "required_hypotheses": [
+      "Strictly increasing distinct real nodes; the node polynomial, cardinal functions, barycentric weights and finite interpolation sum."
+    ],
+    "affected_items": [
+      "alg-chebyshev-gauss-lobatto-differentiation-matrix"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "def-cardinal-polynomial-interpolation",
+        "section": "Definition",
+        "quote": "Let $n\\in\\mathbb N$ with $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\left(\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}(x_j-x_k)\\right)^{-1}\\quad(0\\le j\\le n).$$\nAn empty product is $1$, so $w_0=1$ when $n=0$.\n\nIn these formulas, $X$ is a real argument, and for real $a$ and nonzero real $b$, $a/b$ denotes $ab^{-1}$ in the field $\\mathbb R$ ([[def-field]]).\n\nFor each $j$, the cardinal function is\n$$\\ell_j(X)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{X-x_k}{x_j-x_k}.$$\nThe interpolation function for the data $y=(y_0,\\ldots,y_n)$ is\n$$I_n y(X)=\\sum_{j=0}^{n}y_j\\ell_j(X).$$\nFor a real function $f$ defined at the nodes, write $I_n f:=I_n(f(x_0),\\ldots,f(x_n))$.\n\nFor products indexed by $k\\ne j$, use the length-$n$ list $\\widehat x_{j,k}$ ($0\\le k<n$), where $\\widehat x_{j,k}=x_k$ for $k<j$ and $\\widehat x_{j,k}=x_{k+1}$ for $k\\ge j$; the product is in this order and is empty when $n=0$. Strict ordering gives $x_j-\\widehat x_{j,k}\\ne0$ for every factor, so [[lem-finite-product-of-nonzero-reals-is-nonzero]] and the field inverse law make each $w_j$ well defined."
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-chebyshev-gauss-lobatto-differentiation-matrix",
+    "supplier": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+    "supplier_batch": "4",
+    "status": "verified",
+    "required_hypotheses": [
+      "n+1 distinct increasing real nodes; the cardinal sum is the unique polynomial of degree at most n with the prescribed values."
+    ],
+    "affected_items": [
+      "alg-chebyshev-gauss-lobatto-differentiation-matrix"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+        "section": "Statement",
+        "quote": "Let $n\\in\\mathbb N$, $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Then $I_n y$ from [[def-cardinal-polynomial-interpolation]] is the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$."
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-chebyshev-gauss-lobatto-differentiation-is-exact",
+    "supplier": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+    "supplier_batch": "4",
+    "status": "verified",
+    "required_hypotheses": [
+      "n+1 distinct increasing real nodes; the cardinal sum is the unique polynomial of degree at most n with the prescribed values."
+    ],
+    "affected_items": [
+      "thm-chebyshev-gauss-lobatto-differentiation-is-exact"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+        "section": "Statement",
+        "quote": "Let $n\\in\\mathbb N$, $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Then $I_n y$ from [[def-cardinal-polynomial-interpolation]] is the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$."
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-chebyshev-lobatto-interpolation-near-best-weighted-error",
+    "supplier": "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+    "supplier_batch": "19",
+    "status": "verified",
+    "required_hypotheses": [
+      "Continuous f on [-1,1]; definitions of E_n, I_n^L and the Lobatto Lebesgue operator norm, including n=0."
+    ],
+    "affected_items": [
+      "thm-chebyshev-lobatto-interpolation-near-best-weighted-error"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+        "section": "Definition",
+        "quote": "Let $C[-1,1]$ be the real continuous functions on $[-1,1]$, with\n$\\|f\\|_\\infty:=\\sup_{x\\in[-1,1]}|f(x)|$. Let $\\mathcal P_n$ be the\nrestrictions to $[-1,1]$ of real polynomials of degree at most $n$, including\nthe zero polynomial. Interval notation is that of [[def-interval]]. Continuity and polynomial degree have the conventions of\n[[def-continuity-real]] and\n[[def-real-polynomial-degree-leading-coefficient-and-monic]].\n\nFor each $n\\in\\mathbb N$ (with naturals in real expressions interpreted by\ntheir canonical real images), the first-kind Chebyshev root angles and nodes are\n$$\\theta_j^{R,n}=\\frac{(2j+1)\\pi}{2n+2},\\qquad x_j^{R,n}=\\cos\\theta_j^{R,n},\\qquad 0\\leq j\\leq n.$$\nThey are the roots of $T_{n+1}$ by\n[[thm-chebyshev-multiple-angle-identities]]. For $n\\geq1$, the\nChebyshev–Lobatto angles and nodes are\n$$\\theta_j^{L,n}=\\frac{j\\pi}{n},\\qquad x_j^{L,n}=\\cos\\theta_j^{L,n},\\qquad 0\\leq j\\leq n.$$\nThey include both endpoints and are the extrema of $T_n$ by the same\nidentity. At $n=0$, define the Lobatto node to be $x_0^{L,0}=0$. The\ncosine is strictly decreasing on $[0,\\pi]$, so each listed family has\ndistinct nodes; the root family at $n=0$ also consists of $0$.\n\nFor either family $\\sigma\\in\\{R,L\\}$, write its nodes as\n$x_0,\\ldots,x_n$ and define\n$$\\ell_{j,n}^{\\sigma}(x)= \\prod_{\\substack{0\\leq k\\leq n\\\\k\\ne j}} \\frac{x-x_k}{x_j-x_k},\\qquad I_n^\\sigma f=\\sum_{j=0}^n f(x_j)\\ell_{j,n}^{\\sigma}.$$\nThese are the cardinal formula and interpolation sum of\n[[def-cardinal-polynomial-interpolation]] specialized to this node family.\nThe displayed cosine arrays decrease, whereas that supplier orders nodes\nincreasingly: use $z_i=x_{n-i}$ and data $y_i=f(z_i)$. Its cardinal\nfunction with index $n-j$ is exactly the displayed $\\ell_{j,n}^\\sigma$,\nby reindexing the finite product, and its interpolation sum is $I_n^\\sigma$.\nThe empty product at $n=0$ is $1$, so the same identification holds for the\nsingle node. Distinctness makes every denominator nonzero;\n[[lem-cardinal-basis-degree-and-values]] supplies the degree and cardinal\nvalues. The finite sum is linear in the data and maps $C[-1,1]$ into\n$\\mathcal P_n$. Its operator norm is\n$$\\Lambda_n^\\sigma:= \\sup\\{\\|I_n^\\sigma g\\|_\\infty:g\\in C[-1,1],\\ \\|g\\|_\\infty\\leq1\\}.$$\nIf $\\ell_{j,n}^\\sigma(x)=\\sum_{k=0}^n a_{jk}x^k$, then\n$|\\ell_{j,n}^\\sigma(x)|\\leq\\sum_{k=0}^n|a_{jk}|$ for $|x|\\leq1$; hence\n$\\|I_n^\\sigma g\\|_\\infty\\leq\\sum_{j,k}|a_{jk}|<\\infty$ whenever\n$\\|g\\|_\\infty\\leq1$. Define the best degree-$n$ uniform\napproximation error by\n$$E_n(f):=\\inf_{p\\in\\mathcal P_n}\\|f-p\\|_\\infty .$$\n\nThese quantities are real and well-defined. Polynomial functions are\ncontinuous, and sums and scalar multiples of continuous functions remain\ncontinuous by [[thm-algebra-of-continuous-functions]]. The interval\n$[-1,1]\\subset\\mathbb R$ is nonempty, closed, and bounded, so\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]] implies\nthat for every such continuous function $h$ there are finite minimum and\nmaximum values $m_h,M_h$. Since $m_h\\leq h(x)\\leq M_h$, one has\n$|h(x)|\\leq\\max(|m_h|,|M_h|)$, so each supremum norm above is finite. The set defining $\\Lambda_n^\\sigma$ contains\nthe zero function and is bounded above by the displayed finite coefficient\nsum. The set defining $E_n(f)$ contains the zero polynomial and is bounded\nbelow by zero. Completeness of $\\mathbb R$ ([[def-complete-ordered-field]])\ntherefore gives the stated finite supremum and infimum. Also, $n+1$ has\npositive real image by [[def-canonical-natural]] and\n[[lem-of-naturals-positive]], and $n$ has positive real image when $n\\geq1$;\nthus the root-angle denominator and the Lobatto denominator in its stated\nrange are nonzero."
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-chebyshev-lobatto-interpolation-near-best-weighted-error",
+    "supplier": "thm-chebyshev-interpolation-near-best-error-bound",
+    "supplier_batch": "19",
+    "status": "verified",
+    "required_hypotheses": [
+      "For continuous f on [-1,1], ||f-I_n^sigma f||_infty <= (1+Lambda_n^sigma) E_n(f)."
+    ],
+    "affected_items": [
+      "thm-chebyshev-lobatto-interpolation-near-best-weighted-error"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "thm-chebyshev-interpolation-near-best-error-bound",
+        "section": "Statement",
+        "quote": "For either Chebyshev node family, every $n\\geq0$, and every\n$f\\in C[-1,1]$,\n$$\\|f-I_n^\\sigma f\\|_\\infty \\leq (1+\\Lambda_n^\\sigma)E_n(f).$$\nHere $E_n$ is the best degree-$n$ uniform error and $\\Lambda_n^\\sigma$\nis the operator norm defined in\n[[def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants]]."
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-chebyshev-lobatto-interpolation-rate-under-spectral-sobolev-regularity",
+    "supplier": "def-cardinal-polynomial-interpolation",
+    "supplier_batch": "4",
+    "status": "verified",
+    "required_hypotheses": [
+      "Strictly increasing distinct real nodes; the node polynomial, cardinal functions, barycentric weights and finite interpolation sum."
+    ],
+    "affected_items": [
+      "thm-chebyshev-lobatto-interpolation-rate-under-spectral-sobolev-regularity"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "def-cardinal-polynomial-interpolation",
+        "section": "Definition",
+        "quote": "Let $n\\in\\mathbb N$ with $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\left(\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}(x_j-x_k)\\right)^{-1}\\quad(0\\le j\\le n).$$\nAn empty product is $1$, so $w_0=1$ when $n=0$.\n\nIn these formulas, $X$ is a real argument, and for real $a$ and nonzero real $b$, $a/b$ denotes $ab^{-1}$ in the field $\\mathbb R$ ([[def-field]]).\n\nFor each $j$, the cardinal function is\n$$\\ell_j(X)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{X-x_k}{x_j-x_k}.$$\nThe interpolation function for the data $y=(y_0,\\ldots,y_n)$ is\n$$I_n y(X)=\\sum_{j=0}^{n}y_j\\ell_j(X).$$\nFor a real function $f$ defined at the nodes, write $I_n f:=I_n(f(x_0),\\ldots,f(x_n))$.\n\nFor products indexed by $k\\ne j$, use the length-$n$ list $\\widehat x_{j,k}$ ($0\\le k<n$), where $\\widehat x_{j,k}=x_k$ for $k<j$ and $\\widehat x_{j,k}=x_{k+1}$ for $k\\ge j$; the product is in this order and is empty when $n=0$. Strict ordering gives $x_j-\\widehat x_{j,k}\\ne0$ for every factor, so [[lem-finite-product-of-nonzero-reals-is-nonzero]] and the field inverse law make each $w_j$ well defined."
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-chebyshev-lobatto-pointwise-remainder-bound",
+    "supplier": "def-cardinal-polynomial-interpolation",
+    "supplier_batch": "4",
+    "status": "verified",
+    "required_hypotheses": [
+      "Strictly increasing distinct real nodes; the node polynomial, cardinal functions, barycentric weights and finite interpolation sum."
+    ],
+    "affected_items": [
+      "thm-chebyshev-lobatto-pointwise-remainder-bound"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "def-cardinal-polynomial-interpolation",
+        "section": "Definition",
+        "quote": "Let $n\\in\\mathbb N$ with $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\left(\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}(x_j-x_k)\\right)^{-1}\\quad(0\\le j\\le n).$$\nAn empty product is $1$, so $w_0=1$ when $n=0$.\n\nIn these formulas, $X$ is a real argument, and for real $a$ and nonzero real $b$, $a/b$ denotes $ab^{-1}$ in the field $\\mathbb R$ ([[def-field]]).\n\nFor each $j$, the cardinal function is\n$$\\ell_j(X)=\\prod_{\\substack{0\\le k\\le n\\\\k\\ne j}}\\frac{X-x_k}{x_j-x_k}.$$\nThe interpolation function for the data $y=(y_0,\\ldots,y_n)$ is\n$$I_n y(X)=\\sum_{j=0}^{n}y_j\\ell_j(X).$$\nFor a real function $f$ defined at the nodes, write $I_n f:=I_n(f(x_0),\\ldots,f(x_n))$.\n\nFor products indexed by $k\\ne j$, use the length-$n$ list $\\widehat x_{j,k}$ ($0\\le k<n$), where $\\widehat x_{j,k}=x_k$ for $k<j$ and $\\widehat x_{j,k}=x_{k+1}$ for $k\\ge j$; the product is in this order and is empty when $n=0$. Strict ordering gives $x_j-\\widehat x_{j,k}\\ne0$ for every factor, so [[lem-finite-product-of-nonzero-reals-is-nonzero]] and the field inverse law make each $w_j$ well defined."
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-chebyshev-lobatto-pointwise-remainder-bound",
+    "supplier": "thm-lagrange-interpolation-remainder",
+    "supplier_batch": "4",
+    "status": "verified",
+    "required_hypotheses": [
+      "n+1 distinct ordered nodes in [a,b], f in C^(n+1), a query in the interval; the off-node derivative remainder and zero error at nodes."
+    ],
+    "affected_items": [
+      "thm-chebyshev-lobatto-pointwise-remainder-bound"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "thm-lagrange-interpolation-remainder",
+        "section": "Statement",
+        "quote": "Let $n\\in\\mathbb N$, $n\\ge0$, let $a<b$, let $x_0<\\cdots<x_n$ lie in $[a,b]$, and let $f\\in C^{n+1}([a,b],\\mathbb R)$ with the convention of [[def-higher-derivatives-and-smoothness]]. Put $p=I_n f$ and $\\omega_n(X)=\\prod_{j=0}^n(X-x_j)$ as in [[def-cardinal-polynomial-interpolation]]. If $x=x_j$ for a node, then $f(x)-p(x)=0$. If $x\\in[a,b]$ is not a node, there is\n$$\\xi\\in\\bigl(\\min\\{x,x_0\\},\\max\\{x,x_n\\}\\bigr)$$\nsuch that\n$$f(x)-p(x)=\\frac{f^{(n+1)}(\\xi)}{(n+1)!_{\\mathbb R}}\\,\\omega_n(x),$$\nwhere $(n+1)!_{\\mathbb R}:=\\prod_{j=1}^{n+1}j$, with each natural factor read as its canonical real image under [[def-canonical-natural]]."
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-chebyshev-composite-simpson-weighted-mass-matrix",
+    "supplier": "alg-composite-simpson-rule",
+    "supplier_batch": "20",
+    "status": "verified",
+    "required_hypotheses": [
+      "a<b and an even number n>=2 of uniform panels; exact-real finite composite Simpson sum."
+    ],
+    "affected_items": [
+      "alg-chebyshev-composite-simpson-weighted-mass-matrix"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "alg-composite-simpson-rule",
+        "section": "Definition",
+        "quote": "Input real numbers $a<b$, an integer $n\\ge2$, and a real-valued function\n$f:[a,b]\\to\\mathbb R$ evaluable at every point of $[a,b]$. If $n$ is odd, the\nprocedure returns invalid-Simpson-panel-count. If $n$ is even, put\n$h=(b-a)/n$ and $x_j=a+jh$ for $0\\le j\\le n$; return\n\n$$Q_S(f;a,b,n):=\\frac h3\\sum_{j<n/2}\\bigl(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})\\bigr).$$\n\nThe sum is a finite sum of [[def-finite-sum]]. Each two-panel block\n$[x_{2j},x_{2j+2}]$ uses its endpoints and midpoint. Expanding the block sum\ngives weights $1,4,2,\\ldots,4,1$. The even condition\n$n\\ge2$ makes the number of blocks a positive integer. If $a\\ge b$ or\n$n<2$, the procedure returns invalid-grid. The formula is an exact-real\nprocedure; floating point evaluation and summation error are separate from\nits quadrature error."
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-composite-simpson-error-for-chebyshev-weighted-mass-matrix",
+    "supplier": "thm-composite-simpson-error-bound",
+    "supplier_batch": "20",
+    "status": "verified",
+    "required_hypotheses": [
+      "a<b, n even and >=2, f in C^4([a,b]); absolute error <= (b-a)h^4 max|f^(4)|/180."
+    ],
+    "affected_items": [
+      "thm-composite-simpson-error-for-chebyshev-weighted-mass-matrix"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "thm-composite-simpson-error-bound",
+        "section": "Statement",
+        "quote": "Let $a<b$, let $n\\ge2$ be an even integer, and put $h=(b-a)/n$. If\n$f\\in C^4([a,b])$, set $M_4=\\max_{x\\in[a,b]}|f^{(4)}(x)|$. Then the value\n$Q_S(f;a,b,n)$ of [[alg-composite-simpson-rule]] satisfies\n\n$$\\left|\\int_a^b f(x)\\,dx-Q_S(f;a,b,n)\\right|\\le\\frac{(b-a)h^4}{180}M_4.$$\n\nThe integral is the Riemann integral. This is an exact-arithmetic quadrature\nbound; evaluation and summation roundoff are not included."
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-weighted-orthogonal-polynomial-galerkin-space",
+    "supplier": "def-gauss-moment-data",
+    "supplier_batch": "82",
+    "status": "verified",
+    "required_hypotheses": [
+      "a<b, a finite positive Borel measure on [a,b], positive total mass, relative support and the explicitly stated finite moment order."
+    ],
+    "affected_items": [
+      "def-weighted-orthogonal-polynomial-galerkin-space"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "def-gauss-moment-data",
+        "section": "Definition",
+        "quote": "Let $a<b$ be real numbers, let $m\\ge1$ be an integer, and let\n$r\\in\\{2m-1,2m\\}$. A **Gaussian quadrature moment datum of order $r$** is a\nfinite positive measure $\\mu$ on the relative Borel sigma-algebra\n$\\mathcal B([a,b])$ ([[def-borel-sigma-algebra]], [[def-measure-space]],\n[[def-measure]], [[def-finite-sigma-finite-and-semifinite-measures]]) such that\n$\\mu([a,b])>0$, and whose **relative support**\n$$ S_\\mu:=\\{x\\in[a,b]:\\mu(U)>0\\text{ for every relatively open }U\\subseteq[a,b]\\text{ with }x\\in U\\} $$\ncontains at least $m+1$ distinct points. For every integer $0\\le k\\le r$,\nrequire $x\\mapsto |x|^k$ to be integrable with respect to $\\mu$\n([[def-integrable-real-and-complex-functions-and-their-integrals]]) and put\n$M_k:=\\int_{[a,b]}x^k\\,d\\mu(x)$.\n\nThe branch $r=2m-1$ supplies all moments used to construct the monic\ndegree-$m$ orthogonal polynomial and prove rule exactness. The stronger branch\n$r=2m$ also defines its squared norm and is used for the remainder formula.\nBecause $[a,b]$ is bounded and $\\mu$ is finite, these absolute-moment\nintegrability conditions follow from finiteness; they are stated to make the\ntwo moment interfaces explicit."
+      }
+    ],
+    "evidence": "The current supplier statement and proof body were inspected. Its Step 1 readiness record is current and ready; its strict proof contract and fetched-source evidence are present. This verifies the consumed interface only, not independent acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-weighted-orthogonal-polynomial-galerkin-space",
+    "supplier": "def-gauss-polynomial-moment-inner-product",
+    "supplier_batch": "82",
+    "status": "verified",
+    "required_hypotheses": [
+      "The finite moment pairing and polynomial degree space under the declared moment data."
+    ],
+    "affected_items": [
+      "def-weighted-orthogonal-polynomial-galerkin-space"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "def-gauss-polynomial-moment-inner-product",
+        "section": "Definition",
+        "quote": "Fix moment data $(a,b,m,r,\\mu)$ as in\n[[def-gauss-moment-data]]. For an integer $k$ with $0\\le k\\le m$ and\n$2k\\le r$, let $V_k=\\mathbb R^{k+1}$ with its coordinatewise real vector-space\noperations. For $c=(c_0,\\ldots,c_k)\\in V_k$, let\n$P_c(x)=\\sum_{j=0}^{k}c_jx^j$, the evaluation of the formal polynomial with\nthat coefficient list ([[def-real-polynomial-degree-leading-coefficient-and-monic]]).\nDefine the **polynomial moment pairing** on $V_k$ by\n$$ \\langle c,d\\rangle_\\mu:=\\int_{[a,b]}P_c(x)P_d(x)\\,d\\mu(x). $$\nThis is a candidate real inner product in the sense of\n[[def-inner-product-space]]; its well-definedness and positive definiteness\nunder the stated support and moment hypotheses are proved in\n[[thm-gauss-polynomial-moment-pairing-is-an-inner-product]]."
+      }
+    ],
+    "evidence": "The current supplier statement and proof body were inspected. Its Step 1 readiness record is current and ready; its strict proof contract and fetched-source evidence are present. This verifies the consumed interface only, not independent acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-weighted-orthogonal-polynomial-galerkin-space",
+    "supplier": "thm-gauss-polynomial-moment-pairing-is-an-inner-product",
+    "supplier_batch": "82",
+    "status": "verified",
+    "required_hypotheses": [
+      "Positive measure moment data and polynomials in the declared finite-dimensional degree range; positive definiteness is proved for nonzero polynomials."
+    ],
+    "affected_items": [
+      "def-weighted-orthogonal-polynomial-galerkin-space"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "thm-gauss-polynomial-moment-pairing-is-an-inner-product",
+        "section": "Statement",
+        "quote": "Let $(a,b,m,r,\\mu)$ be moment data as in\n[[def-gauss-moment-data]]. For $0\\le k\\le m$ with $2k\\le r$, the pairing\n[[def-gauss-polynomial-moment-inner-product]] is a well-defined real inner\nproduct on $\\mathbb R^{k+1}$."
+      }
+    ],
+    "evidence": "The current supplier statement and proof body were inspected. Its Step 1 readiness record is current and ready; its strict proof contract and fetched-source evidence are present. This verifies the consumed interface only, not independent acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-weighted-orthogonal-polynomial-galerkin-space",
+    "supplier": "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+    "supplier_batch": "82",
+    "status": "verified",
+    "required_hypotheses": [
+      "Positive moment pairing and the stated order/support hypotheses; unique monic orthogonal polynomials through the permitted degree."
+    ],
+    "affected_items": [
+      "def-weighted-orthogonal-polynomial-galerkin-space"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+        "section": "Statement",
+        "quote": "Let $(a,b,m,r,\\mu)$ be moment data as in\n[[def-gauss-moment-data]], with $m\\ge1$ and $r\\ge2m-1$. For each\n$j=0,\\ldots,m$ there is a unique monic real polynomial $p_j$ of degree $j$\nsuch that\n$$ \\int_{[a,b]}p_j(x)q(x)\\,d\\mu(x)=0 $$\nfor every real polynomial $q$ of degree less than $j$. For $j=0$, this means\n$p_0=1$ and the orthogonality condition is vacuous. The $j=m$ polynomial uses\nmoments only through degree $2m-1$; its squared norm is asserted only when the\nmoment datum has order $2m$."
+      }
+    ],
+    "evidence": "The current supplier statement and proof body were inspected. Its Step 1 readiness record is current and ready; its strict proof contract and fetched-source evidence are present. This verifies the consumed interface only, not independent acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-weighted-orthogonal-polynomial-galerkin-projection-is-well-defined",
+    "supplier": "thm-gauss-polynomial-moment-pairing-is-an-inner-product",
+    "supplier_batch": "82",
+    "status": "verified",
+    "required_hypotheses": [
+      "Positive measure moment data and polynomials in the declared finite-dimensional degree range; positive definiteness is proved for nonzero polynomials."
+    ],
+    "affected_items": [
+      "thm-weighted-orthogonal-polynomial-galerkin-projection-is-well-defined"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "thm-gauss-polynomial-moment-pairing-is-an-inner-product",
+        "section": "Statement",
+        "quote": "Let $(a,b,m,r,\\mu)$ be moment data as in\n[[def-gauss-moment-data]]. For $0\\le k\\le m$ with $2k\\le r$, the pairing\n[[def-gauss-polynomial-moment-inner-product]] is a well-defined real inner\nproduct on $\\mathbb R^{k+1}$."
+      }
+    ],
+    "evidence": "The current supplier statement and proof body were inspected. Its Step 1 readiness record is current and ready; its strict proof contract and fetched-source evidence are present. This verifies the consumed interface only, not independent acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-gaussian-orthogonal-polynomial-galerkin-mass-matrix",
+    "supplier": "def-gauss-quadrature-rule",
+    "supplier_batch": "82",
+    "status": "verified",
+    "required_hypotheses": [
+      "Matching moment data and monic orthogonal polynomial with simple interior zeros; nodes, cardinal weights and rule use that same measure."
+    ],
+    "affected_items": [
+      "alg-gaussian-orthogonal-polynomial-galerkin-mass-matrix"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "def-gauss-quadrature-rule",
+        "section": "Definition",
+        "quote": "Let $(a,b,m,2m-1,\\mu)$ be moment data as in\n[[def-gauss-moment-data]]. Let $p_m$ be its monic degree-$m$ orthogonal\npolynomial and write its ordered roots as\n$a<x_1<\\cdots<x_m<b$, as established in\n[[thm-gauss-orthogonal-polynomial-has-simple-interior-zeros]]. For\n$i=1,\\ldots,m$, define the Lagrange cardinal polynomial\n$$ \\ell_i(X):=\\prod_{\\substack{1\\le j\\le m\\\\j\\ne i}}\\frac{X-x_j}{x_i-x_j} $$\nusing the convention of [[def-cardinal-polynomial-interpolation]]. Define\nthe **Gaussian quadrature weights** and the **m-node Gaussian rule** by\n$$ w_i:=\\int_{[a,b]}\\ell_i(x)\\,d\\mu(x),\\qquad Q_m(f):=\\sum_{i=1}^{m}w_i f(x_i) $$\nfor any real-valued function $f$ defined at the nodes. This definition\nasserts no accuracy; well-definedness of the nodes, cardinal polynomials,\nweights, and finite sum is proved in\n[[lem-gauss-quadrature-rule-data-well-defined]]."
+      }
+    ],
+    "evidence": "The current supplier statement and proof body were inspected. Its Step 1 readiness record is current and ready; its strict proof contract and fetched-source evidence are present. This verifies the consumed interface only, not independent acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact",
+    "supplier": "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+    "supplier_batch": "82",
+    "status": "verified",
+    "required_hypotheses": [
+      "The m-node Gaussian rule from its positive-measure moment data; all polynomials through degree 2m-1 integrate exactly and all weights are positive."
+    ],
+    "affected_items": [
+      "thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+        "section": "Statement",
+        "quote": "Let $(a,b,m,2m-1,\\mu)$ be moment data as in\n[[def-gauss-moment-data]], and let $Q_m$ and $w_i$ be the rule and weights of\n[[def-gauss-quadrature-rule]]. For every real polynomial $f$ of degree at most\n$2m-1$,\n$$ \\int_{[a,b]} f(x)\\,d\\mu(x)=Q_m(f)=\\sum_{i=1}^{m}w_if(x_i). $$\nMoreover, $w_i>0$ for every $i$ and $\\sum_iw_i=\\mu([a,b])$."
+      }
+    ],
+    "evidence": "The current supplier statement and proof body were inspected. Its Step 1 readiness record is current and ready; its strict proof contract and fetched-source evidence are present. This verifies the consumed interface only, not independent acceptance."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-chebyshev-lobatto-endpoint-clustering",
+    "supplier": "lem-sine-chord-and-lipschitz-bounds",
+    "supplier_batch": "19",
+    "status": "verified",
+    "required_hypotheses": [
+      "0<=u<=pi/2 for sin u>=2u/pi; all real u,v for the sine Lipschitz bound."
+    ],
+    "affected_items": [
+      "ex-chebyshev-lobatto-endpoint-clustering"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "lem-sine-chord-and-lipschitz-bounds",
+        "section": "Statement",
+        "quote": "For $0\\leq u\\leq\\pi/2$,\n$$\\sin u\\geq \\frac{2u}{\\pi}.$$\nFor all real $u,v$,\n$$|\\sin u-\\sin v|\\leq |u-v|.$$"
+      }
+    ],
+    "evidence": "The current supplier statement and full proof body were inspected, and the strict supplier proof-contract and source-fetch checks pass. Its stored Step 1 row still says ready but hash validation is stale after dependency changes. This consumer-side interface check is not supplier acceptance; owner reconciliation of the supplier row remains visible."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-gaussian-and-simpson-weighted-mass-matrix-check",
+    "supplier": "ex-two-node-gauss-legendre-exact-through-degree-three",
+    "supplier_batch": "82",
+    "status": "verified",
+    "required_hypotheses": [
+      "Countable Choice, Lebesgue measure on [-1,1], its order-three moments, and the explicit two-node Gaussian rule; exactness through degree three."
+    ],
+    "affected_items": [
+      "ex-gaussian-and-simpson-weighted-mass-matrix-check"
+    ],
+    "supplier_excerpts": [
+      {
+        "item_id": "ex-two-node-gauss-legendre-exact-through-degree-three",
+        "section": "Example",
+        "quote": "Assume the Axiom of Countable Choice and take Lebesgue measure restricted to\nthe relative Borel sets of $[-1,1]$. Its relative support is all of $[-1,1]$,\nso it gives order-three moment data for $m=2$. The moments are\n$\\mu_0=2$, $\\mu_1=0$, $\\mu_2=2/3$, and $\\mu_3=0$. The monic orthogonal\npolynomials through degree two are $p_0=1$, $p_1=X$, and\n$p_2=X^2-1/3$. Thus the Gaussian nodes are\n$x_1=-1/\\sqrt3$ and $x_2=1/\\sqrt3$.\n\nThe Jacobi matrix is\n$$ J_2=\\begin{pmatrix}0&1/\\sqrt3\\\\1/\\sqrt3&0\\end{pmatrix}. $$\nIts unit eigenvectors $(1,-1)/\\sqrt2$ and $(1,1)/\\sqrt2$ give weights\n$w_1=w_2=\\mu_0/2=1$. Therefore\n$$ Q_2(f)=f(-1/\\sqrt3)+f(1/\\sqrt3) $$\nis exact for every real polynomial of degree at most three."
+      }
+    ],
+    "evidence": "The current supplier statement and proof body were inspected. Its Step 1 readiness record is current and ready; its strict proof contract and fetched-source evidence are present. This verifies the consumed interface only, not independent acceptance."
+  }
+]

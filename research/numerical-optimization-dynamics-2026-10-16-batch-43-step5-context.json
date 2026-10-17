@@ -1,0 +1,489 @@
+{
+  "group": "q",
+  "batches": [
+    "43"
+  ],
+  "pages_read": [
+    "clenshaw-curtis-and-extrapolation-quadrature",
+    "clenshaw-curtis-and-extrapolation-quadrature-examples"
+  ],
+  "items_read": [
+    "alg-na-romberg-trapezoid-table",
+    "def-na-bernoulli-polynomials",
+    "def-na-clenshaw-curtis-dct-i",
+    "def-na-closed-newton-cotes-eight-panel-rule",
+    "def-na-peano-kernel",
+    "lem-na-chebyshev-degree-bound-from-recurrence",
+    "lem-na-chebyshev-recurrence-angle-identity",
+    "lem-na-bernoulli-polynomial-identities",
+    "lem-na-chebyshev-integral-moments",
+    "lem-na-clenshaw-curtis-dct-i-orthogonality",
+    "thm-na-peano-kernel-remainder-and-bound",
+    "thm-na-euler-maclaurin-composite-trapezoid-remainder",
+    "cor-na-composite-trapezoid-even-power-expansion",
+    "lem-na-closed-newton-cotes-eight-panel-weights-and-exactness",
+    "thm-na-romberg-even-power-cancellation",
+    "cor-na-closed-newton-cotes-eight-panel-peano-bound",
+    "thm-na-clenshaw-curtis-interpolation-coefficients",
+    "def-na-clenshaw-curtis-quadrature",
+    "thm-na-clenshaw-curtis-exactness-and-near-best-error",
+    "alg-na-computed-clenshaw-curtis-via-fast-dft",
+    "ex-na-square-root-endpoint-breaks-romberg-order",
+    "ex-na-eight-panel-newton-cotes-negative-weight-amplification",
+    "ex-na-clenshaw-curtis-integrates-quadratics"
+  ],
+  "conventions": [
+    {
+      "convention": "The DCT-I is unnormalised: X_k=y_0+(-1)^k y_n+2 sum_{j=1}^{n-1} y_j cos(jkπ/n), for n≥1. Samples run from the right endpoint to the left endpoint; interior sums are empty at n=1.",
+      "fixed_by": "def-na-clenshaw-curtis-dct-i",
+      "matters_for": [
+        "lem-na-clenshaw-curtis-dct-i-orthogonality",
+        "thm-na-clenshaw-curtis-interpolation-coefficients",
+        "alg-na-computed-clenshaw-curtis-via-fast-dft",
+        "ex-na-clenshaw-curtis-integrates-quadratics"
+      ]
+    },
+    {
+      "convention": "Chebyshev reconstruction uses a_0=X_0/(2n), a_n=X_n/(2n), and a_k=X_k/n for 1≤k<n.",
+      "fixed_by": "thm-na-clenshaw-curtis-interpolation-coefficients",
+      "matters_for": [
+        "def-na-clenshaw-curtis-quadrature",
+        "alg-na-computed-clenshaw-curtis-via-fast-dft",
+        "ex-na-clenshaw-curtis-integrates-quadratics"
+      ]
+    },
+    {
+      "convention": "For a<b, m=(a+b)/2 and d=(b-a)/2, quadrature is d times the integrated normalized interpolant. At n=0 it is explicitly (b-a)f(m), without calling the DCT-I.",
+      "fixed_by": "def-na-clenshaw-curtis-quadrature",
+      "matters_for": [
+        "thm-na-clenshaw-curtis-exactness-and-near-best-error",
+        "alg-na-computed-clenshaw-curtis-via-fast-dft",
+        "ex-na-clenshaw-curtis-integrates-quadratics"
+      ]
+    },
+    {
+      "convention": "The residual is integral minus quadrature. The Peano truncated power is zero when x≤t; at order one it is the indicator of x>t. Nodes may repeat, weights may be signed, and exactness explicitly includes the zero polynomial.",
+      "fixed_by": "def-na-peano-kernel",
+      "matters_for": [
+        "thm-na-peano-kernel-remainder-and-bound",
+        "cor-na-closed-newton-cotes-eight-panel-peano-bound"
+      ]
+    },
+    {
+      "convention": "Bernoulli polynomials have B_0=1 and the displayed normalized antiderivative recursion; B_m denotes B_m(0), so B_1(x)=x−1/2.",
+      "fixed_by": "def-na-bernoulli-polynomials",
+      "matters_for": [
+        "lem-na-bernoulli-polynomial-identities",
+        "thm-na-euler-maclaurin-composite-trapezoid-remainder",
+        "cor-na-composite-trapezoid-even-power-expansion"
+      ]
+    },
+    {
+      "convention": "Romberg levels start at ℓ=0 with 2^ℓ panels; columns satisfy 0≤j≤ℓ≤L and use denominator 4^j−1.",
+      "fixed_by": "alg-na-romberg-trapezoid-table",
+      "matters_for": [
+        "thm-na-romberg-even-power-cancellation",
+        "ex-na-square-root-endpoint-breaks-romberg-order"
+      ]
+    },
+    {
+      "convention": "The eight-panel Newton–Cotes rule is on [-1,1], with nodes −1+j/4 and weights (989,5888,−928,10496,−4540,10496,−928,5888,989)/14175.",
+      "fixed_by": "def-na-closed-newton-cotes-eight-panel-rule",
+      "matters_for": [
+        "lem-na-closed-newton-cotes-eight-panel-weights-and-exactness",
+        "cor-na-closed-newton-cotes-eight-panel-peano-bound",
+        "ex-na-eight-panel-newton-cotes-negative-weight-amplification"
+      ]
+    },
+    {
+      "convention": "The computed Clenshaw–Curtis procedure requires representable samples for n≥1, propagates the DFT supplier's failure statuses, and performs postprocessing in exact real arithmetic. It asserts no end-to-end floating-point accuracy or stability bound.",
+      "fixed_by": "alg-na-computed-clenshaw-curtis-via-fast-dft",
+      "matters_for": [
+        "alg-na-computed-clenshaw-curtis-via-fast-dft"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-na-clenshaw-curtis-interpolation-coefficients",
+      "statement": "For n≥1 and g∈C[-1,1], the stated DCT-I coefficients give p_n(t)=sum_{k=0}^n a_k T_k(t), the unique polynomial of degree at most n interpolating g at cos(jπ/n); in particular p_n=I_n^L g.",
+      "used_by": [
+        "def-na-clenshaw-curtis-quadrature",
+        "thm-na-clenshaw-curtis-exactness-and-near-best-error",
+        "ex-na-clenshaw-curtis-integrates-quadratics"
+      ]
+    },
+    {
+      "id": "thm-na-euler-maclaurin-composite-trapezoid-remainder",
+      "statement": "For a<b, integers N,p≥1, h=(b-a)/N and f∈C^{2p}([a,b]), T_N equals the integral plus the endpoint Bernoulli corrections through r=p minus h^{2p}/(2p)! times the sum of panel integrals of B_{2p}((x-x_i)/h)f^{(2p)}(x). The remainder has absolute value at most (b-a)M_{2p}h^{2p}||f^{(2p)}||∞/(2p)!.",
+      "used_by": [
+        "cor-na-composite-trapezoid-even-power-expansion",
+        "thm-na-romberg-even-power-cancellation"
+      ]
+    },
+    {
+      "id": "thm-na-peano-kernel-remainder-and-bound",
+      "statement": "For a<b, a finite real weighted quadrature, integer r≥1, exactness on the zero polynomial and all nonzero polynomials of degree at most r−1, and f∈C^r([a,b]), L(f)=∫_a^b K_r(t)f^{(r)}(t)dt and |L(f)|≤(∫_a^b |K_r(t)|dt)||f^{(r)}||∞.",
+      "used_by": [
+        "cor-na-closed-newton-cotes-eight-panel-peano-bound"
+      ]
+    },
+    {
+      "id": "lem-na-closed-newton-cotes-eight-panel-weights-and-exactness",
+      "statement": "For the nodes x_j=−1+j/4 and rule Q_8, the weights are the integrals of the degree-eight Lagrange cardinal polynomials. Interpreting polynomial inputs by their evaluation functions, the rule is exact for the zero polynomial and every nonzero formal polynomial of degree at most 9.",
+      "used_by": [
+        "cor-na-closed-newton-cotes-eight-panel-peano-bound",
+        "ex-na-eight-panel-newton-cotes-negative-weight-amplification"
+      ]
+    },
+    {
+      "id": "lem-na-clenshaw-curtis-dct-i-orthogonality",
+      "statement": "For n≥1 and 0≤k,ℓ≤n, the half-endpoint weighted cosine product sum is n at matching endpoint frequencies, n/2 at matching interior frequencies, and zero for k≠ℓ.",
+      "used_by": [
+        "thm-na-clenshaw-curtis-interpolation-coefficients"
+      ]
+    },
+    {
+      "id": "lem-na-chebyshev-integral-moments",
+      "statement": "For k≥0, μ_k=∫_{−1}^1 T_k(x)dx equals 2 for k=0, zero for odd k, and 2/(1−k²) for even k≥2.",
+      "used_by": [
+        "def-na-clenshaw-curtis-quadrature",
+        "thm-na-clenshaw-curtis-exactness-and-near-best-error",
+        "ex-na-clenshaw-curtis-integrates-quadratics"
+      ]
+    },
+    {
+      "id": "cor-na-composite-trapezoid-even-power-expansion",
+      "statement": "For a<b, j≥1 and f∈C^{2j+2}([a,b]), every N≥1 satisfies T_N(f)=I+sum_{r=1}^j c_r h^{2r}+ε_N with |ε_N|≤C_j h^{2j+2}, where the displayed finite C_j is independent of N.",
+      "used_by": [
+        "thm-na-romberg-even-power-cancellation"
+      ]
+    },
+    {
+      "id": "lem-na-bernoulli-polynomial-identities",
+      "statement": "For m≥1, B'_m=mB_{m−1} and ∫_0^1 B_m=0. Endpoint values agree for m≥2; B_m(1−x)=(−1)^mB_m(x) for m≥0; odd Bernoulli numbers vanish for m≥3; each B_m is bounded on [0,1].",
+      "used_by": [
+        "thm-na-euler-maclaurin-composite-trapezoid-remainder"
+      ]
+    },
+    {
+      "id": "thm-na-clenshaw-curtis-exactness-and-near-best-error",
+      "statement": "For a<b, n∈N and f∈C[a,b], Q_{n,[a,b]} is exact on zero and every nonzero formal polynomial of degree at most n, and |∫_a^b f−Q_{n,[a,b]}(f)|≤(b-a)(1+Λ_n^L)E_n(g), where g(t)=f(m+dt). Affine pullback identifies E_n(g) with the best degree-n uniform error on [a,b].",
+      "used_by": [
+        "clenshaw-curtis-and-extrapolation-quadrature"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-differentiable-implies-continuous",
+      "used_for": "Continuity of the square root on the positive half-line.",
+      "opened": true
+    },
+    {
+      "id": "cor-integrability-of-absolute-values-products-and-lattice-operations",
+      "used_for": "Integrability of kernel products and absolute values in the Peano argument.",
+      "opened": true
+    },
+    {
+      "id": "cor-repeated-riemann-integrals-on-rectangles",
+      "used_for": "Interchanging continuous rectangle integrals for Peano order r≥2.",
+      "opened": true
+    },
+    {
+      "id": "def-canonical-natural",
+      "used_for": "Interpreting natural indices, counts and factorials as real scalars.",
+      "opened": true
+    },
+    {
+      "id": "def-chebyshev-polynomials-first-and-second-kind",
+      "used_for": "Formal polynomial operations and the defining Chebyshev recurrence.",
+      "opened": true
+    },
+    {
+      "id": "def-composite-trapezoidal-rule",
+      "used_for": "Romberg initial values, Euler–Maclaurin notation and square-root panel decomposition.",
+      "opened": true
+    },
+    {
+      "id": "def-darboux-integral",
+      "used_for": "The Riemann-integral convention in the Peano functional.",
+      "opened": true
+    },
+    {
+      "id": "def-darboux-sums",
+      "used_for": "Integrability of the order-one truncated-power indicator.",
+      "opened": true
+    },
+    {
+      "id": "def-factorial-and-falling-factorial",
+      "used_for": "Factorial recursion, positivity and real-image denominators in integral remainders.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Finite quadrature and transform sums, including empty sums and products.",
+      "opened": true
+    },
+    {
+      "id": "def-higher-derivatives-and-smoothness",
+      "used_for": "C^r regularity with one-sided endpoint derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-integer-power",
+      "used_for": "Natural powers in kernels, polynomial formulas and trigonometric signs.",
+      "opened": true
+    },
+    {
+      "id": "def-nat-order",
+      "used_for": "Natural predecessor and positivity conventions for factorial denominators.",
+      "opened": true
+    },
+    {
+      "id": "def-nat-power",
+      "used_for": "Natural panel counts 2^ℓ and their bridge to real powers.",
+      "opened": true
+    },
+    {
+      "id": "def-partition-and-refinement",
+      "used_for": "Partitions used to establish integrability of the order-one Peano input.",
+      "opened": true
+    },
+    {
+      "id": "def-pi-via-first-positive-cosine-zero",
+      "used_for": "The canonical positive π in Lobatto angles.",
+      "opened": true
+    },
+    {
+      "id": "def-rational-power",
+      "used_for": "Square roots and positive rational powers, including the zero-base convention.",
+      "opened": true
+    },
+    {
+      "id": "def-real-polynomial-degree-leading-coefficient-and-monic",
+      "used_for": "Formal coefficient-list polynomials and the separate treatment of zero.",
+      "opened": true
+    },
+    {
+      "id": "def-sine-and-cosine-by-power-series",
+      "used_for": "The trigonometric functions used in the DCT-I definition.",
+      "opened": true
+    },
+    {
+      "id": "lem-changing-a-function-at-finitely-many-points",
+      "used_for": "Ignoring finitely many node values in the order-one Peano kernel integral.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-of-a-power",
+      "used_for": "Polynomial differentiation and antiderivatives throughout the remainder arguments.",
+      "opened": true
+    },
+    {
+      "id": "lem-nat-nonzero-is-successor",
+      "used_for": "Positivity of factorial real images.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-inverse-positive",
+      "used_for": "The inverse-order comparison in the square-root example's finite-sum bound.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-naturals-positive",
+      "used_for": "Nonzero real denominators in transforms and coefficient recursions.",
+      "opened": true
+    },
+    {
+      "id": "lem-power-monotone",
+      "used_for": "Positive Romberg denominators and square-root comparisons.",
+      "opened": true
+    },
+    {
+      "id": "lem-rational-power-laws",
+      "used_for": "Scaling square-root panel errors by h^{3/2}.",
+      "opened": true
+    },
+    {
+      "id": "lem-rational-power-monotone",
+      "used_for": "Bounding the finite sum of i^{−3/2} by an integral.",
+      "opened": true
+    },
+    {
+      "id": "lem-truncated-integrals-of-rational-powers",
+      "used_for": "Evaluating the positive-endpoint integral of x^{−3/2}.",
+      "opened": true
+    },
+    {
+      "id": "thm-additivity-over-subintervals",
+      "used_for": "Combining panel integrals and piecewise kernel integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of polynomial kernels and positive-denominator derivative expressions.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Product derivatives underlying integrations by parts.",
+      "opened": true
+    },
+    {
+      "id": "thm-binomial-theorem",
+      "used_for": "Affine pullback preserves polynomial degree bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Differentiating affine Bernoulli factors, reflected polynomials and remainder factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-composite-trapezoidal-rule-error-bound",
+      "used_for": "Panel errors for the square root only on panels bounded away from zero.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Integrability of continuous functions and polynomial pieces.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+      "used_for": "Finite derivative norms and Bernoulli maxima on compact nonempty intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Taylor integral remainder, integrations by parts and exact polynomial integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-cantor-metric",
+      "used_for": "Continuity of the integrated Peano kernel from uniform continuity on the square.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Chebyshev, Bernoulli, trigonometric, Taylor and Romberg inductions.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-integral",
+      "used_for": "Termwise integration of finite sums and linear residual identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-change-of-variable-for-riemann-integrals",
+      "used_for": "Cosine substitution, affine scaling and reflection of polynomial integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "Kernel norm bounds, integrated interpolation-error bounds and panel comparisons.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+      "used_for": "Uniqueness of interpolating polynomial evaluations.",
+      "opened": true
+    },
+    {
+      "id": "thm-nth-roots-exist",
+      "used_for": "The nonnegative square root and positivity in the endpoint example.",
+      "opened": true
+    },
+    {
+      "id": "thm-quarter-turn-values-and-shift-formulas",
+      "used_for": "Endpoint trigonometric values and integer-frequency signs.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-power-agrees-with-rational-exponent",
+      "used_for": "Matching real-power derivative formulas to rational square-root notation.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-power-continuity-and-derivatives",
+      "used_for": "Square-root derivatives on panels away from zero.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-field",
+      "used_for": "Real arithmetic and inversion of nonzero denominators.",
+      "opened": true
+    },
+    {
+      "id": "thm-riemann-criterion",
+      "used_for": "Integrability of the order-one truncated-power indicator.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-addition-formulas",
+      "used_for": "Chebyshev multiple-angle recurrence, product-to-sum and telescoping cosine sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-derivatives",
+      "used_for": "Cosine substitution and sine antiderivatives for Chebyshev moments.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-subtraction-formulas",
+      "used_for": "The sine-difference identity in weighted cosine orthogonality.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-cosine-signs-monotonicity-and-ranges",
+      "used_for": "Distinct Lobatto nodes and positivity of the telescoping denominator.",
+      "opened": true
+    },
+    {
+      "id": "thm-substitution",
+      "used_for": "Evaluating the square-root integral by x=t², including the zero endpoint.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "clenshaw-curtis-and-extrapolation-quadrature",
+      "to": "polynomial-interpolation-and-remainder",
+      "faithful": true,
+      "note": "Cardinal formulas, degree bounds and uniqueness are used on distinct increasing Newton–Cotes nodes. Decreasing Lobatto nodes are explicitly reordered before applying uniqueness."
+    },
+    {
+      "from": "clenshaw-curtis-and-extrapolation-quadrature",
+      "to": "computed-fast-transforms-and-convolution",
+      "faithful": true,
+      "note": "The consumer supplies representable complex input coordinates, length 2n≥2 and matching controls, uses the unnormalised DFT convention, and propagates statuses. It adds no stability guarantee."
+    },
+    {
+      "from": "clenshaw-curtis-and-extrapolation-quadrature",
+      "to": "polynomial-approximation-and-chebyshev-interpolation",
+      "faithful": true,
+      "note": "The consumer preserves the Lobatto midpoint convention at n=0, polynomial reproduction and the near-best interpolation bound. Integration introduces the physical interval-length factor b−a."
+    },
+    {
+      "from": "clenshaw-curtis-and-extrapolation-quadrature",
+      "to": "composite-quadrature-rules",
+      "faithful": true,
+      "note": "This is page prerequisite context. The actual trapezoid definition and error theorem are published suppliers linked by the composite-quadrature page; the square-root example applies the C² bound only away from zero."
+    },
+    {
+      "from": "adaptive-quadrature-and-error-indicators",
+      "to": "clenshaw-curtis-and-extrapolation-quadrature",
+      "faithful": true,
+      "note": "The listed task seam currently has no direct item citation or requires entry in the adaptive page. Its Simpson expansion and indicator discussion make no claim based on this batch's Romberg, Clenshaw–Curtis or Peano results."
+    },
+    {
+      "from": "sparse-grid-cubature-and-mixed-regularity",
+      "to": "clenshaw-curtis-and-extrapolation-quadrature",
+      "faithful": true,
+      "note": "The page retains the requires edge but its current hierarchy uses composite Simpson rules. No direct use of this batch's item results was found in the listed sparse-grid items, so no stronger quadrature guarantee is imported."
+    }
+  ]
+}

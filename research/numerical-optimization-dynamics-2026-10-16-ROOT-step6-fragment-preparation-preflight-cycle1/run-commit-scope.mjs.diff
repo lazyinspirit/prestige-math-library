@@ -1,0 +1,15 @@
+--- tools/run-commit-scope.mjs
++++ tools/run-commit-scope.mjs
+@@ -496,7 +496,11 @@
+   // may be absent here; authoritative sources and every present path stay strict.
+   const pending = path => preflight && (path === finalReceipt || ['proof-layout.json',
+     'publication-readiness.json', 'step6-report-integrity.json', 'step6-report.response.json',
+-    'step6-report.md', 'step6-evidence.json'].some(name => path === `research/${run}-${name}`));
++    'step6-report.md', 'step6-evidence.json'].some(name => path === `research/${run}-${name}`)
++    // Native v3 authority is sealed before preparation/gates derive closures.
++    // Present carriers stay strict; commitStep6 requires both actual products.
++    || finalReceipt === `research/${run}-dispatch/tool-step6-finalize-v3.result.json`
++      && ['pathway-closure.json', 'judge-closure.json'].some(name => path === `research/${run}-${name}`));
+   for (const path of required) regularPath(root, path, pending(path) || allowMissingReceipt && path === finalReceipt);
+   const index = indexEntries(root), rawTree = treeEntries(root);
+   // ls-tree --full-tree is repository-relative; local item/research selectors

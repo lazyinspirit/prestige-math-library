@@ -1,0 +1,9 @@
+# Batch75 current phase-label refresh (r2)
+
+This packet supersedes the old batch75 metadata proposal only. The parent packet is retained unchanged. Root reports its guarded application rejected safely with no writes after a source guard changed; this is expected guard behavior, not metadata acceptance. No local attempt to bypass that rejection was made.
+
+Root's current approved phase-only repair puts the accepted-residual conclusion at step4.1 instead of3.2. This r2 projection mirrors the complete current proof rows1.1,2.1,2.2,3.1,4.1, all current tags, and actual supplier sections. It captures every current cited supplier as a complete source guard, including changed proof bytes even when their cited Statement is unchanged. It makes no new mathematical claim or mathematical re-audit. The parent acceptance rationale supplies the unchanged count argument and original75 ownership.
+
+The new independent read-only verifier passed:15items,45derivations,32exactcitations,26completecurrentinputguards. Current step4.1 appears in both the proposed exact claim row and the F3/F4 citation-use lists. The termination F1 source is the actual Newton-work lemma; BDF2 is F4. Four quotes and one derivation collection differ from canonical metadata. The proposed pages mirror current source metadata.
+
+Root should review `batch75.diff` and run `python3 research/numerical-optimization-dynamics-2026-10-16-owner-remaining-escalations-triage/batch75-r2/apply75.py` for read-only verification. Only root may pass `--apply` after checking drained writer authority; that copies only batch75 contracts/pages after every complete input guard passes, then runs current-output exactness verification. Native acceptance, recertification and gates remain root-owned. No canonical writes were made while preparing this packet.

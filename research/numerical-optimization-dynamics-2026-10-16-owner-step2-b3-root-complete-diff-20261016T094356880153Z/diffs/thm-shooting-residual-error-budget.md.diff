@@ -1,0 +1,28 @@
+--- owner-before/items/thm-shooting-residual-error-budget.md
++++ owner-proposed/items/thm-shooting-residual-error-budget.md
+@@ -7,6 +7,7 @@
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+ dependency_level: 4
+ deps:
++  - lem-vector-newton-correction-error-under-lipschitz-jacobian
+   - def-nonlinear-two-point-bvp-and-boundary-residual
+   - def-certified-ivp-approximation-and-sensitivity-interface
+   - alg-single-shooting-for-nonlinear-bvps
+@@ -54,7 +55,7 @@
+ 
+ [F4] [[alg-single-shooting-for-nonlinear-bvps]]: the computed root-tolerance status is only the residual bound for $B(s,\widetilde\Phi(s))$.
+ 
+-[F5] [[thm-multivariable-taylor-formula-with-lagrange-remainder]]: the Taylor remainder for a C2 map with $L_R$-Lipschitz derivative has norm at most $(L_R/2)\|s-s^*\|_2^2$ on the ball.
++[F5] [[lem-vector-newton-correction-error-under-lipschitz-jacobian]]: apply its estimate on the convex ball with its evaluation point $x=s^*$ and its other point $x_*=s$. Since $R(s^*)=0$, this gives $R(s)=DR(s^*)(s-s^*)+q$ with $\|q\|_2\le(L_R/2)\|s-s^*\|_2^2$.
+ 
+ [F6] [[thm-gronwall-integral-inequality]]: a difference bound $u(t)\le u(a)+L\int_a^t u$ yields $u(t)\le e^{L(t-a)}u(a)$.
+ 
+@@ -62,7 +63,7 @@
+ 
+ ## Proof
+ 
+-1.1 Put $e=\widehat s-s^*$. Taylor's formula [F5] and $R(s^*)=0$ give $R(\widehat s)=DR(s^*)e+q$ with $\|q\|_2\le(L_R/2)\|e\|_2^2$. Since $\|e\|_2\le r$ and $\|DR(s^*)e\|_2\ge\sigma\|e\|_2$, the radius condition yields $\|R(\widehat s)\|_2\ge\sigma\|e\|_2-(\sigma/2)\|e\|_2=(\sigma/2)\|e\|_2$. [given, F1, F5, algebra]
++1.1 Put $e=\widehat s-s^*$. The vector remainder estimate [F5] and $R(s^*)=0$ give $R(\widehat s)=DR(s^*)e+q$ with $\|q\|_2\le(L_R/2)\|e\|_2^2$. Since $\|e\|_2\le r$ and $\|DR(s^*)e\|_2\ge\sigma\|e\|_2$, the radius condition yields $\|R(\widehat s)\|_2\ge\sigma\|e\|_2-(\sigma/2)\|e\|_2=(\sigma/2)\|e\|_2$. [given, F1, F5, algebra]
+ 
+ 2.1 The exact and computed residuals have the same first boundary argument. By the stated terminal-state Lipschitz bound and [F2], $\|R(\widehat s)-B(\widehat s,\widetilde\Phi(\widehat s))\|_2\le L_B\delta_{\rm IVP}$. The computed residual assumption therefore gives $\|R(\widehat s)\|_2\le\tau_{\rm root}+L_B\delta_{\rm IVP}$. Combining with step 1.1 proves the initial-state estimate. If the candidate is the algorithm's root-tolerance output, [F4] supplies exactly the needed residual premise; other statuses supply no such premise. [given, F2, F4, step 1.1, algebra]
+ 

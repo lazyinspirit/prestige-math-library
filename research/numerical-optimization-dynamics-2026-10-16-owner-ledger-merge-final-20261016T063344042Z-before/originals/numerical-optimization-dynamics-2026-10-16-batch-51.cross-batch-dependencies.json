@@ -1,0 +1,96 @@
+[
+  {
+    "kind": "page",
+    "consumer": "adaptive-quadrature-and-error-indicators",
+    "supplier": "composite-quadrature-rules",
+    "supplier_batch": "20",
+    "status": "verified",
+    "supplier_item_ids": [
+      "alg-composite-simpson-rule",
+      "lem-simpson-panel-peano-kernel",
+      "thm-composite-simpson-error-bound"
+    ],
+    "supplier_item_ids_status": "These actual draft bodies and the complete relevant proofs were inspected. No acceptance is claimed. The local item dependencies are listed in batch-51.pages.json and match the inspected interfaces.",
+    "required_interface": [
+      "alg-composite-simpson-rule: for even n>=2 on [a,b], h=(b-a)/n and Q_S=(h/3) sum_{j<n/2}(f(x_{2j})+4f(x_{2j+1})+f(x_{2j+2})); the formula is exact-real and roundoff is separate.",
+      "lem-simpson-panel-peano-kernel: for f in C^4 on a panel of length L, integral(f)-S(f)=integral(K f^(4)), K<=0, and integral |K|=L^5/2880.",
+      "thm-composite-simpson-error-bound: for even n>=2 and M4=max_[a,b]|f^(4)|, |integral f-Q_S|<=(b-a)h^4 M4/180. At n=2 this gives the one-panel bound L^5 M4/2880 used by the certified branch."
+    ],
+    "affected_items": [
+      "def-adaptive-simpson-refinement-indicator",
+      "lem-composite-simpson-asymptotic-error-expansion",
+      "alg-adaptive-simpson-with-finite-depth-and-panel-cap",
+      "alg-certified-adaptive-simpson",
+      "thm-certified-adaptive-simpson-enclosure",
+      "ex-adaptive-simpson-misses-narrow-feature",
+      "ex-adaptive-simpson-leading-error-cancellation",
+      "ex-adaptive-simpson-cap-reached"
+    ],
+    "evidence": "Inspected items/alg-composite-simpson-rule.md, items/lem-simpson-panel-peano-kernel.md, and items/thm-composite-simpson-error-bound.md, including their actual Facts & Assumptions and all numbered proof steps. The n=2 constant conversion is L*(L/2)^4/180=L^5/2880. The local /15 proof does not infer a Simpson expansion from a trapezoid theorem."
+  },
+  {
+    "kind": "page",
+    "consumer": "adaptive-quadrature-and-error-indicators",
+    "supplier": "outward-rounded-interval-and-ball-arithmetic",
+    "supplier_batch": "14",
+    "status": "verified",
+    "supplier_item_ids": [
+      "def-intervals-rectangles-and-complex-balls",
+      "def-dyadic-floating-point-format-and-directed-rounding",
+      "def-outward-rounded-interval-and-ball-operations",
+      "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+    ],
+    "supplier_item_ids_status": "The actual definitions and full DAG-soundness proof were inspected; carriers remain draft and no acceptance is claimed. The certified algorithm consumes only finite real intervals, directed upward rounding, and the finite-expression enclosure statement. The interval page's own matrix-norm and finite-factorization page requirements are page context; no item from either is used in this proof.",
+    "required_interface": [
+      "def-intervals-rectangles-and-complex-balls: finite real intervals have ordered dyadic endpoints; overflow and other non-finite statuses are not finite intervals.",
+      "def-dyadic-floating-point-format-and-directed-rounding: rd rounds down, ru rounds up, and overflow is explicitly reported.",
+      "def-outward-rounded-interval-and-ball-operations: finite interval operations use the displayed exact endpoint formulas followed by outward rounding.",
+      "thm-outward-rounded-operations-are-isotone-and-dag-sound: when every node is finite, each exact DAG node value lies in its computed interval; a non-finite status makes no finite enclosure claim.",
+      "Additional algorithm inputs: V(x) must enclose exact f(x), and Y([u,v]) must enclose the complete range f^(4)([u,v]); neither oracle's validity is inferred from samples."
+    ],
+    "affected_items": [
+      "alg-certified-adaptive-simpson",
+      "thm-certified-adaptive-simpson-enclosure"
+    ],
+    "evidence": "Inspected items/def-intervals-rectangles-and-complex-balls.md, items/def-dyadic-floating-point-format-and-directed-rounding.md, items/def-outward-rounded-interval-and-ball-operations.md, and items/thm-outward-rounded-operations-are-isotone-and-dag-sound.md. The algorithm returns failure when a midpoint, oracle result, or interval operation has no finite valid enclosure."
+  },
+  {
+    "kind": "page",
+    "consumer": "adaptive-quadrature-and-error-indicators",
+    "supplier": "clenshaw-curtis-and-extrapolation-quadrature",
+    "supplier_batch": "43",
+    "status": "verified",
+    "supplier_item_ids": [],
+    "reviewed_supplier_item_ids": [
+      "alg-na-romberg-trapezoid-table",
+      "thm-na-romberg-even-power-cancellation",
+      "def-na-peano-kernel",
+      "thm-na-peano-kernel-remainder-and-bound"
+    ],
+    "supplier_item_ids_status": "The required A page and these actual draft bodies were present and inspected; no acceptance is claimed. The page-level prerequisite edge is retained exactly as assigned. No batch-43 item is imported as an item-level proof premise: its Romberg theorem assumes a proved even-power expansion for nested trapezoid errors, while this pair proves the Simpson-specific expansion locally; its generic Peano theorem is unnecessary because batch20 supplies the exact Simpson-panel kernel and composite bound.",
+    "required_interface": [
+      "alg-na-romberg-trapezoid-table: the table recurrence is R_(ell,j)=R_(ell,j-1)+(R_(ell,j-1)-R_(ell-1,j-1))/(4^j-1).",
+      "thm-na-romberg-even-power-cancellation: cancellation is conditional on the supplied finite even-power expansion for trapezoid errors; it does not state a Simpson expansion.",
+      "def-na-peano-kernel and thm-na-peano-kernel-remainder-and-bound: define a finite quadrature functional's kernel and prove the generic representation/bound under exactness and C^r hypotheses; this pair does not use them because the Simpson-specific local kernel is already available."
+    ],
+    "affected_items": [],
+    "evidence": "Inspected the actual algorithm and theorem statements/proofs. This is a page-level plan dependency, not a fabricated item-level edge or a source excerpt. The Simpson Richardson argument in thm-simpson-richardson-error-estimator-asymptotic is proved from lem-composite-simpson-asymptotic-error-expansion."
+  },
+  {
+    "kind": "level-reconciliation",
+    "consumer": "batch-51 item-level check",
+    "supplier": "clenshaw-curtis-and-extrapolation-quadrature",
+    "supplier_batch": "43",
+    "status": "owner-reconciliation-required",
+    "supplier_item_ids": [
+      "thm-na-clenshaw-curtis-interpolation-coefficients",
+      "def-na-clenshaw-curtis-quadrature",
+      "thm-na-clenshaw-curtis-exactness-and-near-best-error",
+      "ex-na-clenshaw-curtis-integrates-quadratics"
+    ],
+    "supplier_item_ids_status": "A read-only dependencyLevels recomputation over all current nonempty manifests reports stored/computed levels 4/5, 5/6, 6/7, and 6/7 respectively. These files are outside batch 51 and were not edited.",
+    "required_interface": "The batch-43 page remains a declared page-level prerequisite. This report records the current mechanical level mismatch without altering its manifest or claiming its levels are reconciled.",
+    "affected_items": [],
+    "evidence": "The scoped in-run dependency recomputation over the current manifests gives batch-51 item levels 1,2,3,2,3,5,6,3,4,3, with no cycle in this pair dependency closure. The coverage open-obligation records four stale stored/computed levels in the separate batch-43 manifest. This pair leaves batch43 and the owner-controlled run-wide batch-dependency artifact unchanged."
+  }
+]

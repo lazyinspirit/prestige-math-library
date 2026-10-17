@@ -1,0 +1,1628 @@
+{
+  "version": 1,
+  "scope": [
+    "def-hybrid-mode-guard-reset-system",
+    "lem-hybrid-guard-derivative-along-mode",
+    "lem-ode-flow-lipschitz-on-a-tube",
+    "lem-reset-error-after-a-mistimed-hybrid-event",
+    "thm-saltation-matrix-for-a-transverse-hybrid-reset",
+    "def-certified-hybrid-event-enclosure",
+    "lem-transverse-hybrid-event-time-error",
+    "alg-safeguarded-hybrid-event-location-and-restart",
+    "thm-finite-hybrid-trajectory-error-under-separated-events",
+    "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+    "cex-inelastic-bouncing-ball-has-zeno-accumulation",
+    "ex-simultaneous-guards-require-deterministic-priority",
+    "cex-grazing-event-time-error-is-not-linearly-bounded",
+    "ex-bouncing-ball-transverse-event-error-and-reset",
+    "ex-two-events-between-endpoints-defeat-sign-screening"
+  ],
+  "contracts": {
+    "def-hybrid-mode-guard-reset-system": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the finite transition set and event list may be empty; no event is asserted by the definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a crossing margin is strictly positive and the orientation is restricted to ±1; zero is not treated as transverse."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a mode with one outgoing transition and one event is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: event times are required to satisfy 0<τ1<...<τN<T; the boundary times are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the event list is explicitly interior to the finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of def-hybrid-mode-guard-reset-system: Definition permits a finite mode/transition specification and fixes event orientation plus a total order on each finite outgoing set. A mode may have no outgoing transitions, whose priority order is the empty order; a trajectory requires an initial mode. The finite separated event list may have N=0 or N=1, making adjacent-gap conditions vacuous, while any listed event lies strictly between 0 and T. Zero guard derivative is a contact, not an enabled oriented event; equality of guard values is required at actual events. Existence of a trajectory or finite event list is expressly not asserted, and specifying a finite priority order does not require an unspecified infinite selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of def-hybrid-mode-guard-reset-system: Definition permits a finite mode/transition specification and fixes event orientation plus a total order on each finite outgoing set. A mode may have no outgoing transitions, whose priority order is the empty order; a trajectory requires an initial mode. The finite separated event list may have N=0 or N=1, making adjacent-gap conditions vacuous, while any listed event lies strictly between 0 and T. Zero guard derivative is a contact, not an enabled oriented event; equality of guard values is required at actual events. Existence of a trajectory or finite event list is expressly not asserted, and specifying a finite priority order does not require an unspecified infinite selection."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of def-hybrid-mode-guard-reset-system: Definition permits a finite mode/transition specification and fixes event orientation plus a total order on each finite outgoing set. A mode may have no outgoing transitions, whose priority order is the empty order; a trajectory requires an initial mode. The finite separated event list may have N=0 or N=1, making adjacent-gap conditions vacuous, while any listed event lies strictly between 0 and T. Zero guard derivative is a contact, not an enabled oriented event; equality of guard values is required at actual events. Existence of a trajectory or finite event list is expressly not asserted, and specifying a finite priority order does not require an unspecified infinite selection."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-hybrid-guard-derivative-along-mode": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hybrid-mode-guard-reset-system",
+          "source_section": "Definition",
+          "quote": "A **smooth hybrid ODE system** on a finite horizon $[0,T]$ consists of a finite mode set $M$, an open state-time domain $D_m\\subseteq\\mathbb R\\times\\mathbb R^d$ and a $C^1$ vector field $f_m:D_m\\to\\mathbb R^d$ for each $m\\in M$, a finite set of directed transitions $(m,n)$, and for each transition a $C^1$ scalar guard $g_{mn}$, a declared crossing orientation $\\sigma_{mn}\\in\\{-1,+1\\}$, and a $C^1$ reset map $R_{mn}$ defined on a neighborhood of the guard points and taking values in the next mode's state domain. In mode $m$, a trajectory is a solution of the first-order initial-value problem $y'=f_m(t,y)$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. It follows that mode only until the selected event time.\n\nAn **event time** for transition $(m,n)$ is a time $\\tau$ at which $g_{mn}(\\tau,y(\\tau))=0$ and the guard crosses in its declared direction, meaning $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))|_{t=\\tau}>0$. It is **transverse** with margin $\\nu>0$ on a bracket when $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))\\ge\\nu$ throughout that bracket. At an event, the state changes from $y(\\tau^-)$ to $R_{mn}(\\tau,y(\\tau^-))$ and the mode changes from $m$ to $n$. A **deterministic event-priority rule** is a fixed total order on the finite outgoing transition set of each mode; if several enabled guards vanish at exactly the same first time, the least transition in that order is selected.\n\nA hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\\tau_1<\\cdots<\\tau_N<T$ and some $\\delta>0$ with $\\tau_{j+1}-\\tau_j\\ge\\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Set $z(t)=(t,y(t))$. It is differentiable and $z'(t)=(1,y'(t))=(1,f_m(t,y(t)))$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Since $h=g\\circ z$, [F2] gives $h'(t)=Dg(t,y(t))(1,f_m(t,y(t)))$. Splitting the derivative into its time and state blocks gives the displayed formula.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim is a pointwise derivative identity along a given solution and does not quantify over an empty collection."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-value boundary is part of the derivative identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the identity is pointwise and applies in the one-dimensional state case as well."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The derivative identity is local on the given interval; no degenerate interval conclusion is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: derivatives at interval endpoints use the stated domain-relative convention inherited from the ODE solution."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of lem-hybrid-guard-derivative-along-mode: Statement takes a differentiable mode solution and a C1 scalar guard. Proof 1.1 constructs z(t)=(t,y(t)), and 2.1 applies the total chain rule and splits time/state blocks. A constant solution or zero guard derivative makes the corresponding factors zero with no division; dimension one uses the same row-times-column product. At an admitted interval endpoint differentiability is only the convention assumed for the supplied solution. This identity is conditional on that graph, does not choose a trajectory, and does not assert a converse event test."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of lem-hybrid-guard-derivative-along-mode: Statement takes a differentiable mode solution and a C1 scalar guard. Proof 1.1 constructs z(t)=(t,y(t)), and 2.1 applies the total chain rule and splits time/state blocks. A constant solution or zero guard derivative makes the corresponding factors zero with no division; dimension one uses the same row-times-column product. At an admitted interval endpoint differentiability is only the convention assumed for the supplied solution. This identity is conditional on that graph, does not choose a trajectory, and does not assert a converse event test."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of lem-hybrid-guard-derivative-along-mode: Statement takes a differentiable mode solution and a C1 scalar guard. Proof 1.1 constructs z(t)=(t,y(t)), and 2.1 applies the total chain rule and splits time/state blocks. A constant solution or zero guard derivative makes the corresponding factors zero with no division; dimension one uses the same row-times-column product. At an admitted interval endpoint differentiability is only the convention assumed for the supplied solution. This identity is conditional on that graph, does not choose a trajectory, and does not assert a converse event test."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-ode-flow-lipschitz-on-a-tube": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hybrid-mode-guard-reset-system",
+          "source_section": "Definition",
+          "quote": "A **smooth hybrid ODE system** on a finite horizon $[0,T]$ consists of a finite mode set $M$, an open state-time domain $D_m\\subseteq\\mathbb R\\times\\mathbb R^d$ and a $C^1$ vector field $f_m:D_m\\to\\mathbb R^d$ for each $m\\in M$, a finite set of directed transitions $(m,n)$, and for each transition a $C^1$ scalar guard $g_{mn}$, a declared crossing orientation $\\sigma_{mn}\\in\\{-1,+1\\}$, and a $C^1$ reset map $R_{mn}$ defined on a neighborhood of the guard points and taking values in the next mode's state domain. In mode $m$, a trajectory is a solution of the first-order initial-value problem $y'=f_m(t,y)$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. It follows that mode only until the selected event time.\n\nAn **event time** for transition $(m,n)$ is a time $\\tau$ at which $g_{mn}(\\tau,y(\\tau))=0$ and the guard crosses in its declared direction, meaning $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))|_{t=\\tau}>0$. It is **transverse** with margin $\\nu>0$ on a bracket when $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))\\ge\\nu$ throughout that bracket. At an event, the state changes from $y(\\tau^-)$ to $R_{mn}(\\tau,y(\\tau^-))$ and the mode changes from $m$ to $n$. A **deterministic event-priority rule** is a fixed total order on the finite outgoing transition set of each mode; if several enabled guards vanish at exactly the same first time, the least transition in that order is selected.\n\nA hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\\tau_1<\\cdots<\\tau_N<T$ and some $\\delta>0$ with $\\tau_{j+1}-\\tau_j\\ge\\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Subtract the two Volterra equations from [F2]. By [F3] and the state-Lipschitz hypothesis, $w(t):=\\|u(t)-v(t)\\|_2$ satisfies $w(t)\\le w(a)+L\\int_a^t w(s)\\,ds$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Apply [F4] with $A=w(a)$ to obtain $w(t)\\le e^{L(t-a)}w(a)$, which is the asserted estimate.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses specify two solutions on a common interval, not an empty family of solutions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: if the initial discrepancy is zero, the bound gives identical solutions."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality parameter occurs in the flow estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: at t=a the estimate is equality with factor e^0=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the estimate is stated for the closed interval a≤t≤T, including t=a and t=T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of lem-ode-flow-lipschitz-on-a-tube: Statement fixes a<=t<=T and two actual solutions in a common convex tube. Proof 1.1 subtracts their Volterra equations; 2.1 applies Gronwall with A=||u(a)-v(a)||>=0 and L>=0. Equal initial states give zero difference, L=0 gives factor one, and t=a (including a=T) gives the initial bound without division by time. Scalar state is permitted, and the supplied graphs rule out an empty comparison. This is a conditional estimate requiring no selection and no biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of lem-ode-flow-lipschitz-on-a-tube: Statement fixes a<=t<=T and two actual solutions in a common convex tube. Proof 1.1 subtracts their Volterra equations; 2.1 applies Gronwall with A=||u(a)-v(a)||>=0 and L>=0. Equal initial states give zero difference, L=0 gives factor one, and t=a (including a=T) gives the initial bound without division by time. Scalar state is permitted, and the supplied graphs rule out an empty comparison. This is a conditional estimate requiring no selection and no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of lem-ode-flow-lipschitz-on-a-tube: Statement fixes a<=t<=T and two actual solutions in a common convex tube. Proof 1.1 subtracts their Volterra equations; 2.1 applies Gronwall with A=||u(a)-v(a)||>=0 and L>=0. Equal initial states give zero difference, L=0 gives factor one, and t=a (including a=T) gives the initial bound without division by time. Scalar state is permitted, and the supplied graphs rule out an empty comparison. This is a conditional estimate requiring no selection and no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-reset-error-after-a-mistimed-hybrid-event": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hybrid-mode-guard-reset-system",
+          "source_section": "Definition",
+          "quote": "A **smooth hybrid ODE system** on a finite horizon $[0,T]$ consists of a finite mode set $M$, an open state-time domain $D_m\\subseteq\\mathbb R\\times\\mathbb R^d$ and a $C^1$ vector field $f_m:D_m\\to\\mathbb R^d$ for each $m\\in M$, a finite set of directed transitions $(m,n)$, and for each transition a $C^1$ scalar guard $g_{mn}$, a declared crossing orientation $\\sigma_{mn}\\in\\{-1,+1\\}$, and a $C^1$ reset map $R_{mn}$ defined on a neighborhood of the guard points and taking values in the next mode's state domain. In mode $m$, a trajectory is a solution of the first-order initial-value problem $y'=f_m(t,y)$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. It follows that mode only until the selected event time.\n\nAn **event time** for transition $(m,n)$ is a time $\\tau$ at which $g_{mn}(\\tau,y(\\tau))=0$ and the guard crosses in its declared direction, meaning $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))|_{t=\\tau}>0$. It is **transverse** with margin $\\nu>0$ on a bracket when $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))\\ge\\nu$ throughout that bracket. At an event, the state changes from $y(\\tau^-)$ to $R_{mn}(\\tau,y(\\tau^-))$ and the mode changes from $m$ to $n$. A **deterministic event-priority rule** is a fixed total order on the finite outgoing transition set of each mode; if several enabled guards vanish at exactly the same first time, the least transition in that order is selected.\n\nA hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\\tau_1<\\cdots<\\tau_N<T$ and some $\\delta>0$ with $\\tau_{j+1}-\\tau_j\\ge\\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ode-flow-lipschitz-on-a-tube",
+          "source_section": "Statement",
+          "quote": "Fix a mode $m$ and times $a\\le t\\le T$. Suppose $u,v:[a,T]\\to\\mathbb R^d$ solve $y'=f_m(s,y)$, both graphs stay in a convex tube on which $f_m$ is $L$-Lipschitz in the state, uniformly in time, and both solutions have initial values at $a$. Then\n$$\\|u(t)-v(t)\\|_2\\le e^{L(t-a)}\\|u(a)-v(a)\\|_2.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous, let $(t_0,x_0)\\in D$, let $I\\subseteq\\mathbb R$ be order-convex with at least two elements, and let $x:I\\to\\mathbb R^n$ be continuous with $t_0\\in I$ and $(t,x(t))\\in D$. A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$\n\nThe integral is oriented, so the assertion applies on either side of $t_0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$\nand let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable\n([[def-vector-valued-derivative-and-integral]]). Then:\n\n1. if $a < b$, the real-valued function $t \\mapsto \\lVert f(t)\\rVert_2$ is\n   integrable on $[a,b]$ ([[def-darboux-integral]], [[def-p-norms-on-rn]]);\n2. $$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$\n\n**The hypothesis $a \\le b$ is not decoration.** With the orientation convention\nof [[def-oriented-integral]] and\n[[def-vector-valued-derivative-and-integral]], interchanging the limits changes\nthe sign of the right-hand side but not of the left, so for $b < a$ the correct\nstatement is $\\bigl\\lVert\\int_a^b f\\bigr\\rVert_2 \\le \\bigl|\\int_a^b \\lVert f\\rVert_2\\bigr|$;\nthe displayed inequality as written is false in that case. This is the same trap\nthe scalar inequality of\n[[cor-integrability-of-absolute-values-products-and-lattice-operations]] carries.\n\n**Clause 1 is a genuine obligation and is discharged before the estimate.** That\neach $f_i$ is integrable does not by itself say that\n$\\sqrt{\\sum_{i<m} f_i^{2}}$ is; the square root has to be brought in through\n[[thm-composition-with-a-continuous-function]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The incoming mode extension satisfies $y^-(b)-y^-(a)=\\int_a^b f^-(t,y^-(t))\\,dt$ by [F3]. For either order of $a,b$, orientation and [F4] give $\\|y^-(b)-y^-(a)\\|_2\\le M^-|b-a|$. Hence\n$\\|U^-(\\widehat\\tau)-y^-(\\tau)\\|_2\\le\\|U^-(\\widehat\\tau)-y^-(\\widehat\\tau)\\|_2+\\|y^-(\\widehat\\tau)-y^-(\\tau)\\|_2\\le\\eta+M^-\\Delta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Apply the reset's state and time Lipschitz bounds to the two reset inputs in step 1.1. The reset states differ by at most $L_R\\eta+(L_RM^-+L_{R,t})\\Delta$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "At $t_0$, the trajectory that reset earlier has followed the outgoing field for at most $\\Delta$ time. By [F3] and [F4], its displacement is at most $M^+\\Delta$. Adding this to step 2.1 gives the first displayed inequality.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "From the common time $t_0$ onward, both curves solve the same outgoing mode ODE and remain in the common tube. Apply [F2] with the initial error from step 3.1 to obtain the second displayed inequality.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns one specified event and its two outgoing solutions, not an empty event family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 retain the bound when η=0 or Δ=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality claim is made; one event is fixed in the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero outgoing-flow lag when τ=τhat."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats either ordering of the event times by the oriented integral bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of lem-reset-error-after-a-mistimed-hybrid-event: Statement defines Delta=|tauhat-tau|>=0 and t_0=max(tau,tauhat). Proof 1.1 uses oriented integrals for either ordering, 2.1 compares reset states, 3.1 adds the earlier-reset outgoing displacement, and 4.1 propagates from t_0. When Delta=0 the lag terms vanish; when eta=0 as well the reset discrepancy is zero. Zero Lipschitz/field constants are harmless; scalar states use the same norms. Both supplied reset states make the comparison nonempty. The estimates include s=t_0, with no zero denominator, selection or converse assertion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of lem-reset-error-after-a-mistimed-hybrid-event: Statement defines Delta=|tauhat-tau|>=0 and t_0=max(tau,tauhat). Proof 1.1 uses oriented integrals for either ordering, 2.1 compares reset states, 3.1 adds the earlier-reset outgoing displacement, and 4.1 propagates from t_0. When Delta=0 the lag terms vanish; when eta=0 as well the reset discrepancy is zero. Zero Lipschitz/field constants are harmless; scalar states use the same norms. Both supplied reset states make the comparison nonempty. The estimates include s=t_0, with no zero denominator, selection or converse assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of lem-reset-error-after-a-mistimed-hybrid-event: Statement defines Delta=|tauhat-tau|>=0 and t_0=max(tau,tauhat). Proof 1.1 uses oriented integrals for either ordering, 2.1 compares reset states, 3.1 adds the earlier-reset outgoing displacement, and 4.1 propagates from t_0. When Delta=0 the lag terms vanish; when eta=0 as well the reset discrepancy is zero. Zero Lipschitz/field constants are harmless; scalar states use the same norms. Both supplied reset states make the comparison nonempty. The estimates include s=t_0, with no zero denominator, selection or converse assertion."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-saltation-matrix-for-a-transverse-hybrid-reset": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hybrid-mode-guard-reset-system",
+          "source_section": "Definition",
+          "quote": "A **smooth hybrid ODE system** on a finite horizon $[0,T]$ consists of a finite mode set $M$, an open state-time domain $D_m\\subseteq\\mathbb R\\times\\mathbb R^d$ and a $C^1$ vector field $f_m:D_m\\to\\mathbb R^d$ for each $m\\in M$, a finite set of directed transitions $(m,n)$, and for each transition a $C^1$ scalar guard $g_{mn}$, a declared crossing orientation $\\sigma_{mn}\\in\\{-1,+1\\}$, and a $C^1$ reset map $R_{mn}$ defined on a neighborhood of the guard points and taking values in the next mode's state domain. In mode $m$, a trajectory is a solution of the first-order initial-value problem $y'=f_m(t,y)$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. It follows that mode only until the selected event time.\n\nAn **event time** for transition $(m,n)$ is a time $\\tau$ at which $g_{mn}(\\tau,y(\\tau))=0$ and the guard crosses in its declared direction, meaning $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))|_{t=\\tau}>0$. It is **transverse** with margin $\\nu>0$ on a bracket when $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))\\ge\\nu$ throughout that bracket. At an event, the state changes from $y(\\tau^-)$ to $R_{mn}(\\tau,y(\\tau^-))$ and the mode changes from $m$ to $n$. A **deterministic event-priority rule** is a fixed total order on the finite outgoing transition set of each mode; if several enabled guards vanish at exactly the same first time, the least transition in that order is selected.\n\nA hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\\tau_1<\\cdots<\\tau_N<T$ and some $\\delta>0$ with $\\tau_{j+1}-\\tau_j\\ge\\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hybrid-guard-derivative-along-mode",
+          "source_section": "Statement",
+          "quote": "Let $y$ be a differentiable solution in mode $m$ on an interval $J$, with $y'(t)=f_m(t,y(t))$. Let $g(t,x)$ be $C^1$ on an open neighborhood of the graph of $y$, and define $h(t)=g(t,y(t))$. Then $h$ is differentiable on $J$ and\n$$h'(t)=\\partial_tg(t,y(t))+D_xg(t,y(t))f_m(t,y(t)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "source_section": "Statement",
+          "quote": "Let $k,m,n\\ge1$ and $p\\in\\mathbb N$, let $U\\subseteq\\mathbb R^{m+n+p}$ be open, and let $F:U\\to\\mathbb R^n$ be $C^k$. Suppose $F(a,b,\\lambda_0)=0$ and $D_yF(a,b,\\lambda_0)$ is invertible. Then there are neighbourhoods and a unique $C^k$ map $\\varphi$ solving $F(x,\\varphi(x,\\lambda),\\lambda)=0$. More precisely, on suitable open neighbourhoods $P$ of $(a,\\lambda_0)$ and $Q$ of $b$,\n\n$$F(x,y,\\lambda)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x,\\lambda),$$\n\nand\n\n$$D\\varphi(x,\\lambda)=-D_yF(x,\\varphi(x,\\lambda),\\lambda)^{-1}D_{(x,\\lambda)}F(x,\\varphi(x,\\lambda),\\lambda).$$\n\nWhen no parameter block is present, this is the ordinary $C^k$ implicit function theorem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-parameter-ode-flow-tangent-on-common-tube",
+          "source_section": "Statement",
+          "quote": "Let $\\Theta\\subseteq\\mathbb R^m$ and $D\\subseteq\\mathbb R\\times\\mathbb R^d\\times\\Theta$ be open, and let $f:D\\to\\mathbb R^d$ be continuously differentiable. Let $V_\\theta\\subseteq\\Theta$ be open and $u_0:V_\\theta\\to\\mathbb R^d$ be $C^1$. Assume there is a bounded convex open set $O\\subset D$ with compact closure in $D$ such that for every $\\theta\\in V_\\theta$ the unique solution of $u'=f(t,u,\\theta)$, $u(0)=u_0(\\theta)$, exists on $[0,T]$, and all triples $(t,u_\\theta(t),\\theta)$ lie in $O$. Then $\\theta\\mapsto u_\\theta$ is $C^1$ as a map to $C([0,T];\\mathbb R^d)$. For any $\\theta_0\\in V_\\theta$, its tangent matrix $S(t)=D_\\theta u_\\theta(t)|_{\\theta=\\theta_0}$ is the unique solution of\n$$S'(t)=D_u f(t,u_{\\theta_0}(t),\\theta_0)S(t)+D_\\theta f(t,u_{\\theta_0}(t),\\theta_0),\\qquad S(0)=D u_0(\\theta_0).$$\nThe result is local to the stated common compact tube and claims no differentiability outside it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Let $H(s,x)=g(s,\\phi^-(s;\\tau,x))$, where $\\phi^-$ is the incoming mode flow initialized at the nominal pre-event time. The stated common-tube hypothesis and [F4], applied to the field and to its time reversal on the left interval, give the required $C^1$ flow dependence near $(\\tau,x^-)$. By [F5], $H$ is $C^1$. At $(s,x)=(\\tau,x^-)$, [F2] gives $\\partial_sH=d\\ne0$. By [F3], the nearby event time $s=\\tau(x)$ is $C^1$. Since $\\phi^-(\\tau;\\tau,x)=x$, its initial-state derivative at $s=\\tau$ is the identity. Differentiating $H(\\tau(x),x)=0$ in the direction $\\delta x^-$ gives $0=D_xg\\,\\delta x^-+d\\,\\delta\\tau$, hence $\\delta\\tau=-D_xg\\,\\delta x^-/d$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "At the perturbed event, [F4] gives incoming state $x^-+\\delta x^-+f^-\\delta\\tau+o(\\|\\delta x^-\\|_2)$. By [F5], the reset-state variation is $D_xR\\,\\delta x^-+(D_xR f^-+\\partial_tR)\\delta\\tau+o(\\|\\delta x^-\\|_2)$. Compare at $t_0=\\max\\{\\tau,\\tau+\\delta\\tau\\}$. If $\\delta\\tau\\ge0$, the nominal outgoing state advances from $\\tau$ to $t_0$ by $f^+\\delta\\tau+o(|\\delta\\tau|)$, while the perturbed state has just reset. If $\\delta\\tau<0$, the perturbed outgoing state advances from its reset at $\\tau+\\delta\\tau$ to $t_0=\\tau$ by $f^+(-\\delta\\tau)+o(|\\delta\\tau|)$, while the nominal state has just reset. In both cases the same-clock difference is $D_xR\\,\\delta x^-+(D_xR f^-+\\partial_tR-f^+)\\delta\\tau+o(\\|\\delta x^-\\|_2)$, since step 1.1 gives $\\delta\\tau=O(\\|\\delta x^-\\|_2)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Substitute the expression for $\\delta\\tau$ from step 1.1 into step 2.1 and factor $\\delta x^-$. The resulting linear map is $D_xR+(f^+-D_xR f^- -\\partial_tR)D_xg/d$, which is the stated matrix $S$. The remainder remains $o(\\|\\delta x^-\\|_2)$ because the event-time variation is linear to first order by step 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns one specified transition and one nominal event."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement explicitly excludes a zero crossing derivative d=0; step 1.1 uses d≠0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the formula includes the one-dimensional state case without a dimension exception."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement excludes grazing and requires a nonzero derivative of the event equation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim compares variations at common pre-event and post-event times, not a closed interval endpoint problem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of thm-saltation-matrix-for-a-transverse-hybrid-reset: Statement assumes the selected transition is unchanged under the considered perturbations and d=partial_t g+D_x g fminus is nonzero. Proof 1.1 applies the implicit-function theorem and divides only by d; 2.1 treats delta_tau>=0 and delta_tau<0 separately at the common comparison time; 3.1 substitutes and gives the matrix. Zero incoming perturbation has zero linear variation; identity or singular reset derivatives remain allowed. Scalar state is admissible. Grazing d=0 and changes of transition are expressly excluded; the right limit after both resets is specified rather than a two-sided jump derivative. The theorem makes a one-way derivative statement, using actual common flows instead of choosing them."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of thm-saltation-matrix-for-a-transverse-hybrid-reset: Statement assumes the selected transition is unchanged under the considered perturbations and d=partial_t g+D_x g fminus is nonzero. Proof 1.1 applies the implicit-function theorem and divides only by d; 2.1 treats delta_tau>=0 and delta_tau<0 separately at the common comparison time; 3.1 substitutes and gives the matrix. Zero incoming perturbation has zero linear variation; identity or singular reset derivatives remain allowed. Scalar state is admissible. Grazing d=0 and changes of transition are expressly excluded; the right limit after both resets is specified rather than a two-sided jump derivative. The theorem makes a one-way derivative statement, using actual common flows instead of choosing them."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of thm-saltation-matrix-for-a-transverse-hybrid-reset: Statement assumes the selected transition is unchanged under the considered perturbations and d=partial_t g+D_x g fminus is nonzero. Proof 1.1 applies the implicit-function theorem and divides only by d; 2.1 treats delta_tau>=0 and delta_tau<0 separately at the common comparison time; 3.1 substitutes and gives the matrix. Zero incoming perturbation has zero linear variation; identity or singular reset derivatives remain allowed. Scalar state is admissible. Grazing d=0 and changes of transition are expressly excluded; the right limit after both resets is specified rather than a two-sided jump derivative. The theorem makes a one-way derivative statement, using actual common flows instead of choosing them."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-certified-hybrid-event-enclosure": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: an empty active-transition set makes the per-transition evaluator family empty; it supplies no event-absence claim by itself."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: ηloc, ηref, and E are nonnegative rational bounds, so zero error bounds are allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the evaluator requirements apply transition-by-transition and include a single active transition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the trial interval is now required to have positive length, a<b; a degenerate interval is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: each interval evaluator is required on closed subintervals, including the queried endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of def-certified-hybrid-event-enclosure: Definition requires a<b for every trial J, justified finite local/total tube bounds and a reference C1 continuation on an open interval containing J. Empty active transition sets need no guard evaluators; singleton root boxes are allowed, but every claimed enclosure must be justified. Zero local/residual/reset error is admissible; nu>0 and delta>0 protect divisions and the strict lag test. Initial E=0 does not excuse missing later total-reference bounds. The rational checker is one sufficient provider, not a universal existence assertion. These are certified-input requirements rather than an iff theorem or an arbitrary selection principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of def-certified-hybrid-event-enclosure: Definition requires a<b for every trial J, justified finite local/total tube bounds and a reference C1 continuation on an open interval containing J. Empty active transition sets need no guard evaluators; singleton root boxes are allowed, but every claimed enclosure must be justified. Zero local/residual/reset error is admissible; nu>0 and delta>0 protect divisions and the strict lag test. Initial E=0 does not excuse missing later total-reference bounds. The rational checker is one sufficient provider, not a universal existence assertion. These are certified-input requirements rather than an iff theorem or an arbitrary selection principle."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of def-certified-hybrid-event-enclosure: Definition requires a<b for every trial J, justified finite local/total tube bounds and a reference C1 continuation on an open interval containing J. Empty active transition sets need no guard evaluators; singleton root boxes are allowed, but every claimed enclosure must be justified. Zero local/residual/reset error is admissible; nu>0 and delta>0 protect divisions and the strict lag test. Initial E=0 does not excuse missing later total-reference bounds. The rational checker is one sufficient provider, not a universal existence assertion. These are certified-input requirements rather than an iff theorem or an arbitrary selection principle."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-transverse-hybrid-event-time-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hybrid-mode-guard-reset-system",
+          "source_section": "Definition",
+          "quote": "A **smooth hybrid ODE system** on a finite horizon $[0,T]$ consists of a finite mode set $M$, an open state-time domain $D_m\\subseteq\\mathbb R\\times\\mathbb R^d$ and a $C^1$ vector field $f_m:D_m\\to\\mathbb R^d$ for each $m\\in M$, a finite set of directed transitions $(m,n)$, and for each transition a $C^1$ scalar guard $g_{mn}$, a declared crossing orientation $\\sigma_{mn}\\in\\{-1,+1\\}$, and a $C^1$ reset map $R_{mn}$ defined on a neighborhood of the guard points and taking values in the next mode's state domain. In mode $m$, a trajectory is a solution of the first-order initial-value problem $y'=f_m(t,y)$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. It follows that mode only until the selected event time.\n\nAn **event time** for transition $(m,n)$ is a time $\\tau$ at which $g_{mn}(\\tau,y(\\tau))=0$ and the guard crosses in its declared direction, meaning $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))|_{t=\\tau}>0$. It is **transverse** with margin $\\nu>0$ on a bracket when $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))\\ge\\nu$ throughout that bracket. At an event, the state changes from $y(\\tau^-)$ to $R_{mn}(\\tau,y(\\tau^-))$ and the mode changes from $m$ to $n$. A **deterministic event-priority rule** is a fixed total order on the finite outgoing transition set of each mode; if several enabled guards vanish at exactly the same first time, the least transition in that order is selected.\n\nA hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\\tau_1<\\cdots<\\tau_N<T$ and some $\\delta>0$ with $\\tau_{j+1}-\\tau_j\\ge\\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-certified-hybrid-event-enclosure",
+          "source_section": "Definition",
+          "quote": "Fix one mode $m$ and a positive-length closed trial interval $J=[a,b]$ with $a<b$, contained in a finite accumulated prefix that starts at the last reported reset. **Certified hybrid event-enclosure data** consist of the following.\n\n1. A continuous piecewise-$C^1$ dense reconstruction $U$ on the accumulated prefix, the exact mode solution $y_{\\rm loc}$ launched from the last reported reset on that prefix, and a finite bound $\\eta_{\\rm loc}\\ge0$ justified to satisfy $\\|y_{\\rm loc}(t)-U(t)\\|_2\\le\\eta_{\\rm loc}$ throughout the prefix. The provider also supplies a finite bound $\\eta_{\\rm ref}\\ge0$ justified to satisfy $\\|y_{\\rm ref}(t)-U(t)\\|_2\\le\\eta_{\\rm ref}$ there, where $y_{\\rm ref}$ is the exact incoming-mode continuation of the reference hybrid trajectory. On an open interval containing each queried trial interval, this reference continuation exists and is $C^1$, so each exact reference guard is $C^1$ there. Its finite error ledger records the aligned mode-segment start and the discrepancy $E$ between the reported and reference states there. One sufficient ledger calculation, when both exact mode solutions remain in a common convex tube and the field is $L$-Lipschitz in state there for duration $H$, is $\\eta_{\\rm ref}=\\eta_{\\rm loc}+e^{LH}E$ by [[lem-ode-flow-lipschitz-on-a-tube]]. A provider may instead supply a separately justified total bound $\\eta_{\\rm ref}$ directly. The rational route in [[def-validated-residual-tube-certificate]], [[alg-validated-residual-tube-certificate-checker]], and [[thm-validated-residual-tube-certificate-sound]] is one sufficient provider for $\\eta_{\\rm loc}$: its panel-radius functions must be accompanied by a finite uniform upper bound on the whole prefix. It is restricted to the rational-expression fields and polynomial reconstructions stated there; it is not required. One concrete dense-output formula is [[def-heun-quadratic-dense-output]], which by itself is not an error certificate.\n2. For each active transition $(m,n)$, a state-Lipschitz constant $L_g$ for its guard on a tube containing the exact and reconstructed states, interval enclosures $G^U_{mn}(I)$ of $g_{mn}(t,U(t))$, and finite interval evaluators $E_{mn}(I),D_{mn}(I)$ for every queried closed subinterval $I\\subseteq J$. For every $t\\in I$, $E_{mn}(I)$ must contain $g_{mn}(t,y_{\\rm ref}(t))$, $D_{mn}(I)$ must contain $\\partial_tg_{mn}(t,y_{\\rm ref}(t))+D_yg_{mn}(t,y_{\\rm ref}(t))f_m(t,y_{\\rm ref}(t))$, and $G^U_{mn}(I)$ must contain $g_{mn}(t,U(t))$. By [[lem-hybrid-guard-derivative-along-mode]], the second enclosure is the derivative of the exact reference guard. For orientation $\\sigma_{mn}$, an interval has certified transverse margin $\\nu>0$ when $\\sigma_{mn}D_{mn}(I)\\subseteq[\\nu,\\infty)$. Reset data include state and time Lipschitz constants $L_R,L_{R,t}$ and bounds $M^-,M^+$ on the incoming and outgoing mode-field norms over the event-time bracket.\n3. A finite error-ledger update rule and a certified separation bound $\\delta>0$ between consecutive selected exact hybrid event times on the horizon. The provider must supply a finite sound justification or validation for every successor local or total error bound it returns. When a no-event trial is accepted, append its dense panel to $U$, retain the aligned-start discrepancy $E$, and certify valid local and total reference-error bounds over the enlarged prefix. When a prefix ends at a selected transverse event, let $\\tau$ be the unique selected exact event time in the certified physical-time bracket and let $\\widehat\\tau$ be the bracket's upper endpoint. Suppose the whole bracket has certified signed derivative margin $\\nu>0$, the dense guard residual at $\\widehat\\tau$ is bounded by $\\varepsilon$, the total reference error on the bracket is bounded by $\\eta_{\\rm ref}$, the reset has state and time Lipschitz constants $L_R,L_{R,t}$, and the incoming and outgoing fields have norm bounds $M^-,M^+$ on the intervals required for comparison. A sufficient conditional provider rule is to justify $0\\le\\widehat\\tau-\\tau\\le\\Delta_{\\rm next}$ with $\\Delta_{\\rm next}=(L_g\\eta_{\\rm ref}+\\varepsilon)/\\nu$, require $\\Delta_{\\rm next}<\\delta/3$, and set $E_{\\rm next}=L_R\\eta_{\\rm ref}+(L_RM^-+L_{R,t}+M^+)\\Delta_{\\rm next}$ for the exact reset evaluated at the reported state. If the reported reset is computed as $\\widehat R$ with a separately certified error $\\|\\widehat R-R\\|_2\\le\\varepsilon_R$, add $\\varepsilon_R$ to this $E_{\\rm next}$ bound; exact reset evaluation has $\\varepsilon_R=0$. The provider must validate the hypotheses and inequalities and certify the next prefix's total reference-error bound with this aligned-start discrepancy included (or provide another sound proof of that total bound). Since $\\widehat\\tau-\\tau\\le\\Delta_{\\rm next}<\\delta/3<\\delta$, the next selected exact event cannot precede $\\widehat\\tau$. These formulas are a sufficient provider-supplied rule, not inequalities proved by this definition itself. If any proof obligation, required bound, separation certificate, or strict lag test is missing or invalid, no restart ledger update is certified. A local error bound alone does not establish the total reference bound; prior reset-state errors must be included in $\\eta_{\\rm ref}$.\n\nThe provider may be any finite, sound method that supplies the stated bounds and interval inclusions; it returns `certified` with the data or `inconclusive` without them. Its checks may be provider-specific: a rational residual-tube checker is a sufficient concrete branch, not a universal evaluator for arbitrary $C^1$ fields or reset states. The bounds and enclosures are admissible only when their claimed inequalities and inclusions are justified. A dense-output point evaluation alone establishes none of them. If a required evaluator, ledger entry, bound, or inclusion is unavailable or nonfinite, the event data are uncertified and no event-absence conclusion is permitted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hybrid-guard-derivative-along-mode",
+          "source_section": "Statement",
+          "quote": "Let $y$ be a differentiable solution in mode $m$ on an interval $J$, with $y'(t)=f_m(t,y(t))$. Let $g(t,x)$ be $C^1$ on an open neighborhood of the graph of $y$, and define $h(t)=g(t,y(t))$. Then $h$ is differentiable on $J$ and\n$$h'(t)=\\partial_tg(t,y(t))+D_xg(t,y(t))f_m(t,y(t)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "By [F2] and the state-Lipschitz bound, $|h(\\widehat\\tau)-g(\\widehat\\tau,U(\\widehat\\tau))|\\le L_g\\eta$. The residual hypothesis therefore gives $|h(\\widehat\\tau)|\\le L_g\\eta+\\varepsilon$, since $h(\\tau)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "If $\\widehat\\tau=\\tau$ the desired bound is immediate. Otherwise apply [F4] to $h$ on the interval with endpoints $\\tau$ and $\\widehat\\tau$. Since $\\sigma h'\\ge\\nu$ throughout, the derivative has one fixed sign and magnitude at least $\\nu$, so $|h(\\widehat\\tau)-h(\\tau)|\\ge\\nu|\\widehat\\tau-\\tau|$. Using $h(\\tau)=0$ and step 1.1 proves $|\\widehat\\tau-\\tau|\\le(L_g\\eta+\\varepsilon)/\\nu$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Since $L_g\\eta+\\varepsilon\\le\\max\\{L_g,1\\}(\\eta+\\varepsilon)$, the second inequality follows with the stated $C$. For any $s<t$ in $J$, [F4] gives $h(t)-h(s)=h'(c)(t-s)$ for some interior $c$; the fixed sign of $h'$ makes this increment nonzero, so $h$ is strictly monotone and its root in $J$ is unique.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A root τ is explicitly supplied, so an empty root set is outside the statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 allow η=ε=0 and give zero event-time error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 proves strict monotonicity and uniqueness of the root on J."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the equality case τhat=τ before applying the mean value theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement permits τ and τhat in the closed bracket J; step 2.1 applies the mean value theorem between them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of lem-transverse-hybrid-event-time-error: Statement has nu>0, a matched bracket and h(tau)=0. Proof 2.1 explicitly handles tauhat=tau first, otherwise applies MVT in either endpoint order; 3.1 proves strict monotonicity and uniqueness using the fixed derivative sign. Zero eta and epsilon yield zero time error; L_g=0 is permitted and C=max(L_g,1)>=1. Scalar guards are already the object regardless of state dimension. A zero derivative/grazing bracket is excluded by nu>0. The supplied root makes the interval nonempty; no root is selected without a premise or reverse implication asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of lem-transverse-hybrid-event-time-error: Statement has nu>0, a matched bracket and h(tau)=0. Proof 2.1 explicitly handles tauhat=tau first, otherwise applies MVT in either endpoint order; 3.1 proves strict monotonicity and uniqueness using the fixed derivative sign. Zero eta and epsilon yield zero time error; L_g=0 is permitted and C=max(L_g,1)>=1. Scalar guards are already the object regardless of state dimension. A zero derivative/grazing bracket is excluded by nu>0. The supplied root makes the interval nonempty; no root is selected without a premise or reverse implication asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of lem-transverse-hybrid-event-time-error: Statement has nu>0, a matched bracket and h(tau)=0. Proof 2.1 explicitly handles tauhat=tau first, otherwise applies MVT in either endpoint order; 3.1 proves strict monotonicity and uniqueness using the fixed derivative sign. Zero eta and epsilon yield zero time error; L_g=0 is permitted and C=max(L_g,1)>=1. Scalar guards are already the object regardless of state dimension. A zero derivative/grazing bracket is excluded by nu>0. The supplied root makes the interval nonempty; no root is selected without a premise or reverse implication asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-safeguarded-hybrid-event-location-and-restart": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: if no active guards are present, the per-guard root-isolation loop is vacuous and no event can be returned."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero tolerances/budgets cannot certify an event unless their exact checks pass; an exhausted zero budget returns budget-exhausted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the procedure supports a single active guard and one accepted event."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: trial-step provider must supply a positive-length trial interval; degenerate steps are not accepted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: isolation runs on the whole closed trial interval and an upper root-box endpoint is reported."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of alg-safeguarded-hybrid-event-location-and-restart: Definition step 1 returns immediately for t_0=T and permits zero budgets; with no outgoing guards, step 6 accepts a no-event panel after the empty guard loop. Step 4/5 preserves singleton roots at dyadic endpoints; step 7 selects only a certified earliest root or exactly certified priority tie. Step 8 accepts zero residual, but nu>0 and delta>0 remain required in step 9, whose strict lag test rejects equality delta/3. A root at T is processed and output post-reset. Reset/domain/enclosure failures return explicit non-success status. Providers and fixed finite priority are inputs; no existence or biconditional is claimed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of alg-safeguarded-hybrid-event-location-and-restart: Definition step 1 returns immediately for t_0=T and permits zero budgets; with no outgoing guards, step 6 accepts a no-event panel after the empty guard loop. Step 4/5 preserves singleton roots at dyadic endpoints; step 7 selects only a certified earliest root or exactly certified priority tie. Step 8 accepts zero residual, but nu>0 and delta>0 remain required in step 9, whose strict lag test rejects equality delta/3. A root at T is processed and output post-reset. Reset/domain/enclosure failures return explicit non-success status. Providers and fixed finite priority are inputs; no existence or biconditional is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of alg-safeguarded-hybrid-event-location-and-restart: Definition step 1 returns immediately for t_0=T and permits zero budgets; with no outgoing guards, step 6 accepts a no-event panel after the empty guard loop. Step 4/5 preserves singleton roots at dyadic endpoints; step 7 selects only a certified earliest root or exactly certified priority tie. Step 8 accepts zero residual, but nu>0 and delta>0 remain required in step 9, whose strict lag test rejects equality delta/3. A root at T is processed and output post-reset. Reset/domain/enclosure failures return explicit non-success status. Providers and fixed finite priority are inputs; no existence or biconditional is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-finite-hybrid-trajectory-error-under-separated-events": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hybrid-mode-guard-reset-system",
+          "source_section": "Definition",
+          "quote": "A **smooth hybrid ODE system** on a finite horizon $[0,T]$ consists of a finite mode set $M$, an open state-time domain $D_m\\subseteq\\mathbb R\\times\\mathbb R^d$ and a $C^1$ vector field $f_m:D_m\\to\\mathbb R^d$ for each $m\\in M$, a finite set of directed transitions $(m,n)$, and for each transition a $C^1$ scalar guard $g_{mn}$, a declared crossing orientation $\\sigma_{mn}\\in\\{-1,+1\\}$, and a $C^1$ reset map $R_{mn}$ defined on a neighborhood of the guard points and taking values in the next mode's state domain. In mode $m$, a trajectory is a solution of the first-order initial-value problem $y'=f_m(t,y)$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. It follows that mode only until the selected event time.\n\nAn **event time** for transition $(m,n)$ is a time $\\tau$ at which $g_{mn}(\\tau,y(\\tau))=0$ and the guard crosses in its declared direction, meaning $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))|_{t=\\tau}>0$. It is **transverse** with margin $\\nu>0$ on a bracket when $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))\\ge\\nu$ throughout that bracket. At an event, the state changes from $y(\\tau^-)$ to $R_{mn}(\\tau,y(\\tau^-))$ and the mode changes from $m$ to $n$. A **deterministic event-priority rule** is a fixed total order on the finite outgoing transition set of each mode; if several enabled guards vanish at exactly the same first time, the least transition in that order is selected.\n\nA hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\\tau_1<\\cdots<\\tau_N<T$ and some $\\delta>0$ with $\\tau_{j+1}-\\tau_j\\ge\\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-validated-residual-tube-certificate-sound",
+          "source_section": "Statement",
+          "quote": "If [[alg-validated-residual-tube-certificate-checker]] returns `certified` on a finite rational residual-tube certificate for the rational ODE field $f$ and initial value $y_0$, then the IVP has a unique exact solution $y$ on the entire interval $[a,T]$. On every panel,\n$$\\|y(t)-U_j(t)\\|_2<R_j(t),\\qquad y(t)\\in X_j,$$\nwhere $U_j$, $R_j$, and $X_j$ are the certified reconstruction, positive radius, and state box. The residual is evaluated from the stored polynomial $U_j$ itself, so any interpolation, stage, or storage error already present in those coefficients is included.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-certified-hybrid-event-enclosure",
+          "source_section": "Definition",
+          "quote": "Fix one mode $m$ and a positive-length closed trial interval $J=[a,b]$ with $a<b$, contained in a finite accumulated prefix that starts at the last reported reset. **Certified hybrid event-enclosure data** consist of the following.\n\n1. A continuous piecewise-$C^1$ dense reconstruction $U$ on the accumulated prefix, the exact mode solution $y_{\\rm loc}$ launched from the last reported reset on that prefix, and a finite bound $\\eta_{\\rm loc}\\ge0$ justified to satisfy $\\|y_{\\rm loc}(t)-U(t)\\|_2\\le\\eta_{\\rm loc}$ throughout the prefix. The provider also supplies a finite bound $\\eta_{\\rm ref}\\ge0$ justified to satisfy $\\|y_{\\rm ref}(t)-U(t)\\|_2\\le\\eta_{\\rm ref}$ there, where $y_{\\rm ref}$ is the exact incoming-mode continuation of the reference hybrid trajectory. On an open interval containing each queried trial interval, this reference continuation exists and is $C^1$, so each exact reference guard is $C^1$ there. Its finite error ledger records the aligned mode-segment start and the discrepancy $E$ between the reported and reference states there. One sufficient ledger calculation, when both exact mode solutions remain in a common convex tube and the field is $L$-Lipschitz in state there for duration $H$, is $\\eta_{\\rm ref}=\\eta_{\\rm loc}+e^{LH}E$ by [[lem-ode-flow-lipschitz-on-a-tube]]. A provider may instead supply a separately justified total bound $\\eta_{\\rm ref}$ directly. The rational route in [[def-validated-residual-tube-certificate]], [[alg-validated-residual-tube-certificate-checker]], and [[thm-validated-residual-tube-certificate-sound]] is one sufficient provider for $\\eta_{\\rm loc}$: its panel-radius functions must be accompanied by a finite uniform upper bound on the whole prefix. It is restricted to the rational-expression fields and polynomial reconstructions stated there; it is not required. One concrete dense-output formula is [[def-heun-quadratic-dense-output]], which by itself is not an error certificate.\n2. For each active transition $(m,n)$, a state-Lipschitz constant $L_g$ for its guard on a tube containing the exact and reconstructed states, interval enclosures $G^U_{mn}(I)$ of $g_{mn}(t,U(t))$, and finite interval evaluators $E_{mn}(I),D_{mn}(I)$ for every queried closed subinterval $I\\subseteq J$. For every $t\\in I$, $E_{mn}(I)$ must contain $g_{mn}(t,y_{\\rm ref}(t))$, $D_{mn}(I)$ must contain $\\partial_tg_{mn}(t,y_{\\rm ref}(t))+D_yg_{mn}(t,y_{\\rm ref}(t))f_m(t,y_{\\rm ref}(t))$, and $G^U_{mn}(I)$ must contain $g_{mn}(t,U(t))$. By [[lem-hybrid-guard-derivative-along-mode]], the second enclosure is the derivative of the exact reference guard. For orientation $\\sigma_{mn}$, an interval has certified transverse margin $\\nu>0$ when $\\sigma_{mn}D_{mn}(I)\\subseteq[\\nu,\\infty)$. Reset data include state and time Lipschitz constants $L_R,L_{R,t}$ and bounds $M^-,M^+$ on the incoming and outgoing mode-field norms over the event-time bracket.\n3. A finite error-ledger update rule and a certified separation bound $\\delta>0$ between consecutive selected exact hybrid event times on the horizon. The provider must supply a finite sound justification or validation for every successor local or total error bound it returns. When a no-event trial is accepted, append its dense panel to $U$, retain the aligned-start discrepancy $E$, and certify valid local and total reference-error bounds over the enlarged prefix. When a prefix ends at a selected transverse event, let $\\tau$ be the unique selected exact event time in the certified physical-time bracket and let $\\widehat\\tau$ be the bracket's upper endpoint. Suppose the whole bracket has certified signed derivative margin $\\nu>0$, the dense guard residual at $\\widehat\\tau$ is bounded by $\\varepsilon$, the total reference error on the bracket is bounded by $\\eta_{\\rm ref}$, the reset has state and time Lipschitz constants $L_R,L_{R,t}$, and the incoming and outgoing fields have norm bounds $M^-,M^+$ on the intervals required for comparison. A sufficient conditional provider rule is to justify $0\\le\\widehat\\tau-\\tau\\le\\Delta_{\\rm next}$ with $\\Delta_{\\rm next}=(L_g\\eta_{\\rm ref}+\\varepsilon)/\\nu$, require $\\Delta_{\\rm next}<\\delta/3$, and set $E_{\\rm next}=L_R\\eta_{\\rm ref}+(L_RM^-+L_{R,t}+M^+)\\Delta_{\\rm next}$ for the exact reset evaluated at the reported state. If the reported reset is computed as $\\widehat R$ with a separately certified error $\\|\\widehat R-R\\|_2\\le\\varepsilon_R$, add $\\varepsilon_R$ to this $E_{\\rm next}$ bound; exact reset evaluation has $\\varepsilon_R=0$. The provider must validate the hypotheses and inequalities and certify the next prefix's total reference-error bound with this aligned-start discrepancy included (or provide another sound proof of that total bound). Since $\\widehat\\tau-\\tau\\le\\Delta_{\\rm next}<\\delta/3<\\delta$, the next selected exact event cannot precede $\\widehat\\tau$. These formulas are a sufficient provider-supplied rule, not inequalities proved by this definition itself. If any proof obligation, required bound, separation certificate, or strict lag test is missing or invalid, no restart ledger update is certified. A local error bound alone does not establish the total reference bound; prior reset-state errors must be included in $\\eta_{\\rm ref}$.\n\nThe provider may be any finite, sound method that supplies the stated bounds and interval inclusions; it returns `certified` with the data or `inconclusive` without them. Its checks may be provider-specific: a rational residual-tube checker is a sufficient concrete branch, not a universal evaluator for arbitrary $C^1$ fields or reset states. The bounds and enclosures are admissible only when their claimed inequalities and inclusions are justified. A dense-output point evaluation alone establishes none of them. If a required evaluator, ledger entry, bound, or inclusion is unavailable or nonfinite, the event data are uncertified and no event-absence conclusion is permitted.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "F2 supplies the interface explicitly cited by proof steps 1.1; source text is mirrored verbatim."
+        },
+        {
+          "fact": "F3",
+          "source": "def-certified-hybrid-event-enclosure",
+          "source_section": "Definition",
+          "quote": "Fix one mode $m$ and a positive-length closed trial interval $J=[a,b]$ with $a<b$, contained in a finite accumulated prefix that starts at the last reported reset. **Certified hybrid event-enclosure data** consist of the following.\n\n1. A continuous piecewise-$C^1$ dense reconstruction $U$ on the accumulated prefix, the exact mode solution $y_{\\rm loc}$ launched from the last reported reset on that prefix, and a finite bound $\\eta_{\\rm loc}\\ge0$ justified to satisfy $\\|y_{\\rm loc}(t)-U(t)\\|_2\\le\\eta_{\\rm loc}$ throughout the prefix. The provider also supplies a finite bound $\\eta_{\\rm ref}\\ge0$ justified to satisfy $\\|y_{\\rm ref}(t)-U(t)\\|_2\\le\\eta_{\\rm ref}$ there, where $y_{\\rm ref}$ is the exact incoming-mode continuation of the reference hybrid trajectory. On an open interval containing each queried trial interval, this reference continuation exists and is $C^1$, so each exact reference guard is $C^1$ there. Its finite error ledger records the aligned mode-segment start and the discrepancy $E$ between the reported and reference states there. One sufficient ledger calculation, when both exact mode solutions remain in a common convex tube and the field is $L$-Lipschitz in state there for duration $H$, is $\\eta_{\\rm ref}=\\eta_{\\rm loc}+e^{LH}E$ by [[lem-ode-flow-lipschitz-on-a-tube]]. A provider may instead supply a separately justified total bound $\\eta_{\\rm ref}$ directly. The rational route in [[def-validated-residual-tube-certificate]], [[alg-validated-residual-tube-certificate-checker]], and [[thm-validated-residual-tube-certificate-sound]] is one sufficient provider for $\\eta_{\\rm loc}$: its panel-radius functions must be accompanied by a finite uniform upper bound on the whole prefix. It is restricted to the rational-expression fields and polynomial reconstructions stated there; it is not required. One concrete dense-output formula is [[def-heun-quadratic-dense-output]], which by itself is not an error certificate.\n2. For each active transition $(m,n)$, a state-Lipschitz constant $L_g$ for its guard on a tube containing the exact and reconstructed states, interval enclosures $G^U_{mn}(I)$ of $g_{mn}(t,U(t))$, and finite interval evaluators $E_{mn}(I),D_{mn}(I)$ for every queried closed subinterval $I\\subseteq J$. For every $t\\in I$, $E_{mn}(I)$ must contain $g_{mn}(t,y_{\\rm ref}(t))$, $D_{mn}(I)$ must contain $\\partial_tg_{mn}(t,y_{\\rm ref}(t))+D_yg_{mn}(t,y_{\\rm ref}(t))f_m(t,y_{\\rm ref}(t))$, and $G^U_{mn}(I)$ must contain $g_{mn}(t,U(t))$. By [[lem-hybrid-guard-derivative-along-mode]], the second enclosure is the derivative of the exact reference guard. For orientation $\\sigma_{mn}$, an interval has certified transverse margin $\\nu>0$ when $\\sigma_{mn}D_{mn}(I)\\subseteq[\\nu,\\infty)$. Reset data include state and time Lipschitz constants $L_R,L_{R,t}$ and bounds $M^-,M^+$ on the incoming and outgoing mode-field norms over the event-time bracket.\n3. A finite error-ledger update rule and a certified separation bound $\\delta>0$ between consecutive selected exact hybrid event times on the horizon. The provider must supply a finite sound justification or validation for every successor local or total error bound it returns. When a no-event trial is accepted, append its dense panel to $U$, retain the aligned-start discrepancy $E$, and certify valid local and total reference-error bounds over the enlarged prefix. When a prefix ends at a selected transverse event, let $\\tau$ be the unique selected exact event time in the certified physical-time bracket and let $\\widehat\\tau$ be the bracket's upper endpoint. Suppose the whole bracket has certified signed derivative margin $\\nu>0$, the dense guard residual at $\\widehat\\tau$ is bounded by $\\varepsilon$, the total reference error on the bracket is bounded by $\\eta_{\\rm ref}$, the reset has state and time Lipschitz constants $L_R,L_{R,t}$, and the incoming and outgoing fields have norm bounds $M^-,M^+$ on the intervals required for comparison. A sufficient conditional provider rule is to justify $0\\le\\widehat\\tau-\\tau\\le\\Delta_{\\rm next}$ with $\\Delta_{\\rm next}=(L_g\\eta_{\\rm ref}+\\varepsilon)/\\nu$, require $\\Delta_{\\rm next}<\\delta/3$, and set $E_{\\rm next}=L_R\\eta_{\\rm ref}+(L_RM^-+L_{R,t}+M^+)\\Delta_{\\rm next}$ for the exact reset evaluated at the reported state. If the reported reset is computed as $\\widehat R$ with a separately certified error $\\|\\widehat R-R\\|_2\\le\\varepsilon_R$, add $\\varepsilon_R$ to this $E_{\\rm next}$ bound; exact reset evaluation has $\\varepsilon_R=0$. The provider must validate the hypotheses and inequalities and certify the next prefix's total reference-error bound with this aligned-start discrepancy included (or provide another sound proof of that total bound). Since $\\widehat\\tau-\\tau\\le\\Delta_{\\rm next}<\\delta/3<\\delta$, the next selected exact event cannot precede $\\widehat\\tau$. These formulas are a sufficient provider-supplied rule, not inequalities proved by this definition itself. If any proof obligation, required bound, separation certificate, or strict lag test is missing or invalid, no restart ledger update is certified. A local error bound alone does not establish the total reference bound; prior reset-state errors must be included in $\\eta_{\\rm ref}$.\n\nThe provider may be any finite, sound method that supplies the stated bounds and interval inclusions; it returns `certified` with the data or `inconclusive` without them. Its checks may be provider-specific: a rational residual-tube checker is a sufficient concrete branch, not a universal evaluator for arbitrary $C^1$ fields or reset states. The bounds and enclosures are admissible only when their claimed inequalities and inclusions are justified. A dense-output point evaluation alone establishes none of them. If a required evaluator, ledger entry, bound, or inclusion is unavailable or nonfinite, the event data are uncertified and no event-absence conclusion is permitted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-ode-flow-lipschitz-on-a-tube",
+          "source_section": "Statement",
+          "quote": "Fix a mode $m$ and times $a\\le t\\le T$. Suppose $u,v:[a,T]\\to\\mathbb R^d$ solve $y'=f_m(s,y)$, both graphs stay in a convex tube on which $f_m$ is $L$-Lipschitz in the state, uniformly in time, and both solutions have initial values at $a$. Then\n$$\\|u(t)-v(t)\\|_2\\le e^{L(t-a)}\\|u(a)-v(a)\\|_2.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-transverse-hybrid-event-time-error",
+          "source_section": "Statement",
+          "quote": "Let $y$ be an exact incoming mode trajectory on a closed interval $J$ and let $U$ be a dense reconstruction with $\\sup_{t\\in J}\\|y(t)-U(t)\\|_2\\le\\eta$. Let $g(t,x)$ be $L_g$-Lipschitz in $x$ on the certified tube, with declared crossing orientation $\\sigma\\in\\{-1,+1\\}$. Suppose $h(t)=g(t,y(t))$ has a root $\\tau\\in J$ and, throughout $J$, $\\sigma h'(t)\\ge\\nu$ for some $\\nu>0$. If a reported time $\\widehat\\tau\\in J$ satisfies $|g(\\widehat\\tau,U(\\widehat\\tau))|\\le\\varepsilon$, then\n$$|\\widehat\\tau-\\tau|\\le\\frac{L_g\\eta+\\varepsilon}{\\nu}\\le\\frac{C(\\eta+\\varepsilon)}{\\nu},\\qquad C:=\\max\\{L_g,1\\}.$$\nThe same-sign derivative condition makes $\\tau$ the unique guard root in $J$. The conclusion concerns a root matched to this transverse bracket; it gives no bound at grazing or across a change of event ordering.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-reset-error-after-a-mistimed-hybrid-event",
+          "source_section": "Statement",
+          "quote": "Let $\\tau$ be an exact event time and $\\widehat\\tau$ its reported time, with $\\Delta=|\\widehat\\tau-\\tau|$. Suppose the incoming exact mode extension $y^-$ and its dense reconstruction $U^-$ satisfy $\\|U^-(t)-y^-(t)\\|_2\\le\\eta$ on the interval between the two times, and $\\|f^-(t,y)\\|_2\\le M^-$ there. Suppose the reset is Lipschitz in state with constant $L_R$ and in time with constant $L_{R,t}$. Let $y^+$ start from $R(\\tau,y^-(\\tau))$ at time $\\tau$, and let $\\widetilde y^+$ start from $R(\\widehat\\tau,U^-(\\widehat\\tau))$ at time $\\widehat\\tau$. Assume the outgoing mode field is bounded by $M^+$ and $L^+$-Lipschitz in state on a common tube. At $t_0=\\max\\{\\tau,\\widehat\\tau\\}$,\n$$\\|\\widetilde y^+(t_0)-y^+(t_0)\\|_2\\le L_R\\eta+(L_RM^-+L_{R,t}+M^+)\\Delta.$$\nFor $s\\ge t_0$ while both outgoing solutions remain in the tube,\n$$\\|\\widetilde y^+(s)-y^+(s)\\|_2\\le e^{L^+(s-t_0)}\\bigl[L_R\\eta+(L_RM^-+L_{R,t}+M^+)\\Delta\\bigr].$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "At the aligned start of segment $j$, the two exact mode solutions have state discrepancy at most $E_j$ and the same initial time. When the total bound is formed by the sufficient ledger calculation, apply [F4] through duration $H_j$ to bound their discrepancy by $e^{L_jH_j}E_j$, then add the local reconstruction error $\\eta_j^{\\rm loc}$ from [F2] by the triangle inequality. If the provider supplies $D_j$ directly, [F3] states that this is already a valid total bound. In either case $D_j$ bounds the incoming reference error used below.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "On the certified event bracket, use [F5] with dense-state error $D_j$, guard residual $\\varepsilon_j$, and transverse margin $\\nu_{j+1}$. This gives $\\widehat\\tau_{j+1}-\\tau_{j+1}\\le\\Delta_{j+1}$; the left side is nonnegative because the reported time is the root-box upper endpoint.",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The exact incoming-mode continuation and reported reconstruction differ by at most $D_j$ on the event bracket by step 1.1 and [F3]. The report time is the root-box upper endpoint, so the lag satisfies $0\\le\\widehat\\tau_{j+1}-\\tau_{j+1}\\le\\Delta_{j+1}$ by step 2.1. Apply [F6]: reset-input errors contribute $L_{R,j+1}D_j+(L_{R,j+1}M^-_j+L_{R,t,j+1})\\Delta_{j+1}$, and the exact trajectory's outgoing flow from its earlier reset to the report time contributes at most $M^+_{j+1}\\Delta_{j+1}$. Adding these terms gives the stated $E_{j+1}$ at the aligned outgoing-mode start.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Since $N$ is finite, steps 1.1–3.1 give finite nonnegative bounds successively through all event segments. The terminal application of step 1.1 gives $D_N$. Write $\\ell_j:=\\widehat\\tau_j-\\tau_j$, so $0\\le\\ell_j\\le\\Delta_j$ by step 2.1. The given bound $\\Delta_j<\\delta/3$ places each reported event before the next exact event. Also $\\widehat\\tau_{j+1}-\\widehat\\tau_j=(\\tau_{j+1}-\\tau_j)+\\ell_{j+1}-\\ell_j\\ge\\delta-\\Delta_j>2\\delta/3$, so the reported event order is unchanged.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 covers N=0: the event induction is empty and the terminal segment follows from step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement sets E0=0 and the displayed recurrences remain valid when any local or residual bound is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 give the complete recurrence for a single event."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers zero event lag when the reported endpoint equals the exact event time."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement aligns both trajectories at each reported upper root-box endpoint; steps 2.1–3.1 handle the closed bracket."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of thm-finite-hybrid-trajectory-error-under-separated-events: Statement assumes a finite common event sequence with positive separation and positive transverse margins. Proof 1.1 supplies total prefix error; 2.1 bounds nonnegative report lag; 3.1 includes the exact outgoing displacement before alignment; 4.1 inducts over the finite list and gives the terminal segment. For N=0 there is only the terminal application of 1.1 with E_0=0, and for N=1 there is one reset. Zero local errors and zero lag make the corresponding ledger terms zero. Equality Delta=delta/3 is excluded, not passed through a reciprocal. The supplied trajectories make segments nonempty and the assertion is conditional, not a trajectory-selection or converse theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of thm-finite-hybrid-trajectory-error-under-separated-events: Statement assumes a finite common event sequence with positive separation and positive transverse margins. Proof 1.1 supplies total prefix error; 2.1 bounds nonnegative report lag; 3.1 includes the exact outgoing displacement before alignment; 4.1 inducts over the finite list and gives the terminal segment. For N=0 there is only the terminal application of 1.1 with E_0=0, and for N=1 there is one reset. Zero local errors and zero lag make the corresponding ledger terms zero. Equality Delta=delta/3 is excluded, not passed through a reciprocal. The supplied trajectories make segments nonempty and the assertion is conditional, not a trajectory-selection or converse theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of thm-finite-hybrid-trajectory-error-under-separated-events: Statement assumes a finite common event sequence with positive separation and positive transverse margins. Proof 1.1 supplies total prefix error; 2.1 bounds nonnegative report lag; 3.1 includes the exact outgoing displacement before alignment; 4.1 inducts over the finite list and gives the terminal segment. For N=0 there is only the terminal application of 1.1 with E_0=0, and for N=1 there is one reset. Zero local errors and zero lag make the corresponding ledger terms zero. Equality Delta=delta/3 is excluded, not passed through a reciprocal. The supplied trajectories make segments nonempty and the assertion is conditional, not a trajectory-selection or converse theorem."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-safeguarded-hybrid-event-location-and-restart",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A smooth hybrid ODE system with a fixed total event-priority order; an initial mode, time $t_0$, and state; a finite horizon $T\\ge t_0$; a finite trial-step provider; a finite enclosure provider satisfying [[def-certified-hybrid-event-enclosure]] for every accumulated mode prefix; a physical-time root-box width target $\\omega>0$; a separate guard-residual tolerance $\\epsilon>0$; and finite nonnegative integer limits $B_{\\mathrm{step}},B_{\\mathrm{root}},B_{\\mathrm{event}}$. Each provider or certificate-validation call returns data or a failure status in finite time. The trial provider returns a finite real interval $J=[a,b]$ with $a$ equal to the current reported time and $a<b\\le T$. For each trial interval use $\\theta=(t-a)/(b-a)$ and the transformed guard $\\widetilde h_{mn}(\\theta)=g_{mn}(a+(b-a)\\theta,y_{\\rm ref}(a+(b-a)\\theta))$. The root isolator then starts from the finite dyadic interval $[0,1]$, regardless of the physical-time endpoints. For $Q\\subseteq[0,1]$, write $J(Q)=[a+(b-a)\\inf Q,a+(b-a)\\sup Q]$. $B_{\\mathrm{root}}$ is the maximum number of root-isolator boxes processed for one guard on one trial interval, summed over initial isolation, root-box refinement, endpoint checks, and event-order refinement. The enclosure provider supplies justified local and total reference-error bounds, valid dense-guard, exact-guard, and exact-guard-derivative enclosures on every queried subinterval, and a certified positive separation bound $\\delta$ between consecutive selected exact event times on the horizon. It may use a rational residual-tube checker as one provider branch; no particular checker is required. A common-root certificate is a finite proof object with a finite sound validation procedure; it is admissible only when validated to certify that the unique exact roots in all named physical-time boxes occur at one common time. A certified exact singleton root is one such certificate. The error ledger $E$ is measured at the aligned mode-segment start, initially $E=0$. The provider accumulates a continuous piecewise-$C^1$ reconstruction $U$ from the last reported reset. The formula in [[def-heun-quadratic-dense-output]] is one possible reconstruction, not an error certificate.\n\n**Procedure.**\n\n1. Initialize the current reported time, mode, and state from the inputs; set the accepted-event count and trial-step count to zero; set $E=0$. If the current time is $T$, return the completed prefix. If the trial-step budget is exhausted before reaching $T$, return `budget-exhausted` with the certified prefix. Check the event budget only after a next enabled event has been certified, so it does not prevent a no-event step from reaching $T$.\n\n2. Increment the trial-step count and request the next interval $J=[a,b]$. If the increment exceeds $B_{\\rm step}$, return `budget-exhausted`. If $a$ is not the current reported time or $a<b\\le T$ fails, return `inconclusive`. Extend $U$ by the proposed panel. Obtain and validate the provider's data for the whole accumulated prefix, including a $C^1$ reference-mode continuation on an open interval containing $J$, the total bound $\\eta_{\\rm ref}$, and each active guard's interval evaluators. Continue only on a `certified` response under [[def-certified-hybrid-event-enclosure]]; if the provider returns `inconclusive` or any required bound, inclusion, reset datum, or evaluator is missing, unjustified, or nonfinite, return `inconclusive` with the certified prefix.\n\n3. For each outgoing transition in its fixed order, initialize a processed-box counter $c_{mn}=0$ and apply [[alg-smooth-function-root-isolation]] to $\\widetilde h_{mn}$ on $[0,1]$. On each queried local interval $Q$, use the exact-guard range enclosure $E_{mn}(J(Q))$ and the derivative enclosure $(b-a)D_{mn}(J(Q))$; these enclose $\\widetilde h_{mn}(Q)$ and $\\widetilde h'_{mn}(Q)$. Set the minimum width to $\\eta=\\omega/(b-a)$ and the box budget to $B_{\\rm root}$. Add the returned processed-box count to $c_{mn}$. If any result is `inconclusive` or contains unresolved boxes, return `inconclusive`. The result is usable only when it is `complete`, so all roots in the physical interval $J$ are covered by excluded or certified boxes.\n\n4. Classify each certified local-time root box $Q$ using $D_{mn}(J(Q))$. If $\\sigma_{mn}D_{mn}(J(Q))\\subseteq(-\\infty,-\\nu_Q]$ for some $\\nu_Q>0$, record that root as strictly opposite-oriented and nontriggering. If $\\sigma_{mn}D_{mn}(J(Q))\\subseteq[\\nu_Q,\\infty)$ for some $\\nu_Q>0$, it is an enabled candidate. If neither inclusion is proved and $(b-a)\\operatorname{width}(Q)=0$, return `inconclusive`; otherwise call the refinement procedure below with requested physical width $w=(b-a)\\operatorname{width}(Q)/2$, then repeat this classification on the returned smaller unique-root box. If refinement cannot certify one of the two strict signs within the remaining box budget, return `inconclusive`.\n\n   **Unique-root refinement.** This procedure is called only on a local-time box $Q$ already certified to contain exactly one root and with a positive requested physical width $w$. While $(b-a)\\operatorname{width}(Q)>w$, initialize a FIFO worklist with $Q$ and an empty set of certified subboxes. Remove the first local-time interval $I$ from the worklist. If $(b-a)\\operatorname{width}(I)=0$, return `inconclusive`; otherwise bisect $I$ at its dyadic midpoint into two closed halves. For each half $K$, call [[alg-smooth-function-root-isolation]] on $K$ with minimum width $\\eta_K=\\min\\{w/(b-a),\\operatorname{width}(K)/2\\}$ and the remaining per-guard budget; charge every processed box, including singleton calls, to $c_{mn}$. Add every certified root box returned to the set of certified subboxes, and append every unresolved box returned to the worklist; discard root-free boxes. Any certified subbox lies in $Q$, so the unique root of $Q$ is the root it certifies. If the certified set is nonempty, replace $Q$ by the intersection of its boxes; they all contain the same root, so the intersection is nonempty and contains exactly that root. If the new box is still too wide in physical time, repeat with worklist initialized to this smaller $Q$. If the certified set is empty, continue processing the worklist; root-isolation soundness ensures the root remains in its unresolved union. If the worklist empties without a certified subbox, or $c_{mn}=B_{\\rm root}$ while more work is required, return `inconclusive`. Closed halves include their shared midpoint, so an endpoint root cannot be dropped; if both halves certify it, their intersection records it once, possibly as a singleton.\n\n5. For each guard, sort its certified local-time root boxes by lower endpoint. Normalize adjacent boxes that share a bisection endpoint $m$ by calling the root isolator on $\\{m\\}$ for $\\widetilde h_{mn}$ with minimum width $\\omega/(b-a)$ and the remaining per-guard budget, charging its processed boxes to that guard's counter. If it certifies a root, replace all touching boxes by the singleton root. If it certifies that $m$ is root-free, keep the boxes as distinct roots on opposite sides of $m$. If it is inconclusive, refine the touching boxes using step 4; if their relation remains undecided or $c_{mn}=B_{\\rm root}$, return `inconclusive`.\n\n6. If every isolator is complete and every certified root is strictly opposite-oriented, accept the no-event panel. Set the current reported time to $b$ and state to $U(b)$, append the dense panel, and retain the aligned-start ledger $E$. Obtain updated certified local and total error bounds on the enlarged prefix; if the provider does not certify them, return `inconclusive`. A no-event decision is therefore based on complete root isolation and direction classification of the entire trial interval, not on endpoint signs or on the absence of guard roots.\n\n7. If enabled candidates remain, order their local-time root boxes. For boxes that are strictly disjoint, their interval order gives their physical root order. If two boxes meet only at a local-time endpoint $m$, query the root isolator on $\\{m\\}$ for each guard with minimum width $\\omega/(b-a)$ and the remaining budget, charging each call to that guard: two certified singleton roots give a common-root certificate at physical time $a+(b-a)m$ and a priority-selected tie; a singleton root-free result proves that guard's root is strictly to its box's side of $m$ and orders it against a root at $m$ or on the other side. If a singleton result is inconclusive, refine the boxes. For boxes with a nontrivial overlap, use a valid common-root certificate to establish exact simultaneity and apply the fixed priority among those enabled transitions; otherwise refine the overlapping boxes one bisection level at a time by requesting half their physical widths in step 4. If a box has zero physical width and still overlaps another candidate without a certified tie, return `inconclusive`. For same-guard boxes that touch at a bisection endpoint, the singleton check in step 5 either merges one root there or proves that the roots lie strictly on opposite sides. If the order is not certified before a box budget is exhausted, return `inconclusive`. Select the earliest enabled root or the priority-selected transition at a certified tie. Refine its box to physical width at most $\\omega$.\n\n8. Let $\\widehat\\tau=a+(b-a)\\sup Q$ be the physical upper endpoint of the selected local-time box $Q$, so the exact root $\\tau$ satisfies $\\tau\\le\\widehat\\tau$. From the dense-guard enclosure $G^U_{mn}(\\{\\widehat\\tau\\})$, take the maximum absolute endpoint as a certified upper bound $\\epsilon_{\\rm obs}$ for $|g_{mn}(\\widehat\\tau,U(\\widehat\\tau))|$. If the enclosure is nonfinite or $\\epsilon_{\\rm obs}>\\epsilon$, return `inconclusive` when $(b-a)\\operatorname{width}(Q)=0$; otherwise call unique-root refinement with requested physical width $w=(b-a)\\operatorname{width}(Q)/2$ and recompute. If the tolerance still cannot be certified within the remaining budget, return `inconclusive`.\n\n9. If the accepted-event count is already $B_{\\rm event}$, return `budget-exhausted` with the certified prefix without applying another reset. Otherwise let $\\nu>0$ be the certified signed derivative margin on the whole selected physical-time root box and compute $\\Delta=(L_g\\eta_{\\rm ref}+\\epsilon_{\\rm obs})/\\nu$ by [[lem-transverse-hybrid-event-time-error]]. The selected box contains its unique exact root $\\tau$, and step 8 sets $\\widehat\\tau$ to that box's upper endpoint, so $0\\le\\widehat\\tau-\\tau\\le\\Delta$. If the certified separation bound is missing or $\\Delta\\ge\\delta/3$, return `inconclusive` without restarting, since another selected exact event may occur before the reported time. Otherwise, separation by $\\delta$ ensures no next selected exact event occurs before $\\widehat\\tau$. Check that $(\\widehat\\tau,U(\\widehat\\tau))$ lies in the reset domain and that the reset value lies in the next mode's state domain; a failed check returns `domain-failure`. Otherwise apply the reset. A root at $T$ is processed by this same rule, and the output at $T$ is post-reset. The exact reference trajectory has reset at $\\tau$ and followed the outgoing field through the alignment time $\\widehat\\tau$; its flow over this lag contributes at most $M^+\\Delta$. By [[lem-reset-error-after-a-mistimed-hybrid-event]], set the next aligned-segment state-error bound to\n$$E\\leftarrow L_R\\eta_{\\rm ref}+(L_RM^-+L_{R,t}+M^+)\\Delta.$$\nThen discard the pre-reset reconstruction, set the current reported time and state to $\\widehat\\tau$ and the reset value, start a new accumulated reconstruction in the selected mode, append the event certificate, and increment the accepted-event count. Before processing any later trial interval, step 2 must obtain certified provider data whose total reference-error bound is valid on that whole accumulated prefix and includes this aligned-start discrepancy (or is independently justified on that full prefix); if the provider cannot certify it, return `inconclusive` with the certified prefix. Continue from step 1. Any exhausted step, root-box, or event budget returns `budget-exhausted` with the certified prefix.\n\n**Outputs.** A finite list of certified no-event panels and transverse event boxes with selected transitions, reset states, event-time bounds, and an updated state-error ledger; or an explicit `inconclusive`, `domain-failure`, or `budget-exhausted` status with the certified prefix. No no-event conclusion is drawn from endpoint signs alone.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-certified-hybrid-event-enclosure",
+          "source_section": "Definition",
+          "quote": "Fix one mode $m$ and a positive-length closed trial interval $J=[a,b]$ with $a<b$, contained in a finite accumulated prefix that starts at the last reported reset. **Certified hybrid event-enclosure data** consist of the following.\n\n1. A continuous piecewise-$C^1$ dense reconstruction $U$ on the accumulated prefix, the exact mode solution $y_{\\rm loc}$ launched from the last reported reset on that prefix, and a finite bound $\\eta_{\\rm loc}\\ge0$ justified to satisfy $\\|y_{\\rm loc}(t)-U(t)\\|_2\\le\\eta_{\\rm loc}$ throughout the prefix. The provider also supplies a finite bound $\\eta_{\\rm ref}\\ge0$ justified to satisfy $\\|y_{\\rm ref}(t)-U(t)\\|_2\\le\\eta_{\\rm ref}$ there, where $y_{\\rm ref}$ is the exact incoming-mode continuation of the reference hybrid trajectory. On an open interval containing each queried trial interval, this reference continuation exists and is $C^1$, so each exact reference guard is $C^1$ there. Its finite error ledger records the aligned mode-segment start and the discrepancy $E$ between the reported and reference states there. One sufficient ledger calculation, when both exact mode solutions remain in a common convex tube and the field is $L$-Lipschitz in state there for duration $H$, is $\\eta_{\\rm ref}=\\eta_{\\rm loc}+e^{LH}E$ by [[lem-ode-flow-lipschitz-on-a-tube]]. A provider may instead supply a separately justified total bound $\\eta_{\\rm ref}$ directly. The rational route in [[def-validated-residual-tube-certificate]], [[alg-validated-residual-tube-certificate-checker]], and [[thm-validated-residual-tube-certificate-sound]] is one sufficient provider for $\\eta_{\\rm loc}$: its panel-radius functions must be accompanied by a finite uniform upper bound on the whole prefix. It is restricted to the rational-expression fields and polynomial reconstructions stated there; it is not required. One concrete dense-output formula is [[def-heun-quadratic-dense-output]], which by itself is not an error certificate.\n2. For each active transition $(m,n)$, a state-Lipschitz constant $L_g$ for its guard on a tube containing the exact and reconstructed states, interval enclosures $G^U_{mn}(I)$ of $g_{mn}(t,U(t))$, and finite interval evaluators $E_{mn}(I),D_{mn}(I)$ for every queried closed subinterval $I\\subseteq J$. For every $t\\in I$, $E_{mn}(I)$ must contain $g_{mn}(t,y_{\\rm ref}(t))$, $D_{mn}(I)$ must contain $\\partial_tg_{mn}(t,y_{\\rm ref}(t))+D_yg_{mn}(t,y_{\\rm ref}(t))f_m(t,y_{\\rm ref}(t))$, and $G^U_{mn}(I)$ must contain $g_{mn}(t,U(t))$. By [[lem-hybrid-guard-derivative-along-mode]], the second enclosure is the derivative of the exact reference guard. For orientation $\\sigma_{mn}$, an interval has certified transverse margin $\\nu>0$ when $\\sigma_{mn}D_{mn}(I)\\subseteq[\\nu,\\infty)$. Reset data include state and time Lipschitz constants $L_R,L_{R,t}$ and bounds $M^-,M^+$ on the incoming and outgoing mode-field norms over the event-time bracket.\n3. A finite error-ledger update rule and a certified separation bound $\\delta>0$ between consecutive selected exact hybrid event times on the horizon. The provider must supply a finite sound justification or validation for every successor local or total error bound it returns. When a no-event trial is accepted, append its dense panel to $U$, retain the aligned-start discrepancy $E$, and certify valid local and total reference-error bounds over the enlarged prefix. When a prefix ends at a selected transverse event, let $\\tau$ be the unique selected exact event time in the certified physical-time bracket and let $\\widehat\\tau$ be the bracket's upper endpoint. Suppose the whole bracket has certified signed derivative margin $\\nu>0$, the dense guard residual at $\\widehat\\tau$ is bounded by $\\varepsilon$, the total reference error on the bracket is bounded by $\\eta_{\\rm ref}$, the reset has state and time Lipschitz constants $L_R,L_{R,t}$, and the incoming and outgoing fields have norm bounds $M^-,M^+$ on the intervals required for comparison. A sufficient conditional provider rule is to justify $0\\le\\widehat\\tau-\\tau\\le\\Delta_{\\rm next}$ with $\\Delta_{\\rm next}=(L_g\\eta_{\\rm ref}+\\varepsilon)/\\nu$, require $\\Delta_{\\rm next}<\\delta/3$, and set $E_{\\rm next}=L_R\\eta_{\\rm ref}+(L_RM^-+L_{R,t}+M^+)\\Delta_{\\rm next}$ for the exact reset evaluated at the reported state. If the reported reset is computed as $\\widehat R$ with a separately certified error $\\|\\widehat R-R\\|_2\\le\\varepsilon_R$, add $\\varepsilon_R$ to this $E_{\\rm next}$ bound; exact reset evaluation has $\\varepsilon_R=0$. The provider must validate the hypotheses and inequalities and certify the next prefix's total reference-error bound with this aligned-start discrepancy included (or provide another sound proof of that total bound). Since $\\widehat\\tau-\\tau\\le\\Delta_{\\rm next}<\\delta/3<\\delta$, the next selected exact event cannot precede $\\widehat\\tau$. These formulas are a sufficient provider-supplied rule, not inequalities proved by this definition itself. If any proof obligation, required bound, separation certificate, or strict lag test is missing or invalid, no restart ledger update is certified. A local error bound alone does not establish the total reference bound; prior reset-state errors must be included in $\\eta_{\\rm ref}$.\n\nThe provider may be any finite, sound method that supplies the stated bounds and interval inclusions; it returns `certified` with the data or `inconclusive` without them. Its checks may be provider-specific: a rational residual-tube checker is a sufficient concrete branch, not a universal evaluator for arbitrary $C^1$ fields or reset states. The bounds and enclosures are admissible only when their claimed inequalities and inclusions are justified. A dense-output point evaluation alone establishes none of them. If a required evaluator, ledger entry, bound, or inclusion is unavailable or nonfinite, the event data are uncertified and no event-absence conclusion is permitted.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-smooth-function-root-isolation-soundness",
+          "source_section": "Statement",
+          "quote": "For valid interval range and derivative enclosures on every queried box, each finite run of [[alg-smooth-function-root-isolation]] terminates. Every excluded box contains no root, every certified box contains exactly one root, and every root in the initial interval belongs to a certified box or an unresolved box. A strict interval-Newton inclusion places its root in the interior of the scalar call's box. If the scalar procedure certifies after contraction to an exact singleton, the smooth isolator records the original processed interval, whose root may be at an endpoint. An inconclusive status, including a width or box-budget stop, gives no all-roots conclusion.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-transverse-hybrid-event-time-error",
+          "source_section": "Statement",
+          "quote": "Let $y$ be an exact incoming mode trajectory on a closed interval $J$ and let $U$ be a dense reconstruction with $\\sup_{t\\in J}\\|y(t)-U(t)\\|_2\\le\\eta$. Let $g(t,x)$ be $L_g$-Lipschitz in $x$ on the certified tube, with declared crossing orientation $\\sigma\\in\\{-1,+1\\}$. Suppose $h(t)=g(t,y(t))$ has a root $\\tau\\in J$ and, throughout $J$, $\\sigma h'(t)\\ge\\nu$ for some $\\nu>0$. If a reported time $\\widehat\\tau\\in J$ satisfies $|g(\\widehat\\tau,U(\\widehat\\tau))|\\le\\varepsilon$, then\n$$|\\widehat\\tau-\\tau|\\le\\frac{L_g\\eta+\\varepsilon}{\\nu}\\le\\frac{C(\\eta+\\varepsilon)}{\\nu},\\qquad C:=\\max\\{L_g,1\\}.$$\nThe same-sign derivative condition makes $\\tau$ the unique guard root in $J$. The conclusion concerns a root matched to this transverse bracket; it gives no bound at grazing or across a change of event ordering.",
+          "uses": [
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-hybrid-mode-guard-reset-system",
+          "source_section": "Definition",
+          "quote": "A **smooth hybrid ODE system** on a finite horizon $[0,T]$ consists of a finite mode set $M$, an open state-time domain $D_m\\subseteq\\mathbb R\\times\\mathbb R^d$ and a $C^1$ vector field $f_m:D_m\\to\\mathbb R^d$ for each $m\\in M$, a finite set of directed transitions $(m,n)$, and for each transition a $C^1$ scalar guard $g_{mn}$, a declared crossing orientation $\\sigma_{mn}\\in\\{-1,+1\\}$, and a $C^1$ reset map $R_{mn}$ defined on a neighborhood of the guard points and taking values in the next mode's state domain. In mode $m$, a trajectory is a solution of the first-order initial-value problem $y'=f_m(t,y)$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. It follows that mode only until the selected event time.\n\nAn **event time** for transition $(m,n)$ is a time $\\tau$ at which $g_{mn}(\\tau,y(\\tau))=0$ and the guard crosses in its declared direction, meaning $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))|_{t=\\tau}>0$. It is **transverse** with margin $\\nu>0$ on a bracket when $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))\\ge\\nu$ throughout that bracket. At an event, the state changes from $y(\\tau^-)$ to $R_{mn}(\\tau,y(\\tau^-))$ and the mode changes from $m$ to $n$. A **deterministic event-priority rule** is a fixed total order on the finite outgoing transition set of each mode; if several enabled guards vanish at exactly the same first time, the least transition in that order is selected.\n\nA hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\\tau_1<\\cdots<\\tau_N<T$ and some $\\delta>0$ with $\\tau_{j+1}-\\tau_j\\ge\\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-validated-residual-tube-certificate-sound",
+          "source_section": "Statement",
+          "quote": "If [[alg-validated-residual-tube-certificate-checker]] returns `certified` on a finite rational residual-tube certificate for the rational ODE field $f$ and initial value $y_0$, then the IVP has a unique exact solution $y$ on the entire interval $[a,T]$. On every panel,\n$$\\|y(t)-U_j(t)\\|_2<R_j(t),\\qquad y(t)\\in X_j,$$\nwhere $U_j$, $R_j$, and $X_j$ are the certified reconstruction, positive radius, and state box. The residual is evaluated from the stored polynomial $U_j$ itself, so any interpolation, stage, or storage error already present in those coefficients is included.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-reset-error-after-a-mistimed-hybrid-event",
+          "source_section": "Statement",
+          "quote": "Let $\\tau$ be an exact event time and $\\widehat\\tau$ its reported time, with $\\Delta=|\\widehat\\tau-\\tau|$. Suppose the incoming exact mode extension $y^-$ and its dense reconstruction $U^-$ satisfy $\\|U^-(t)-y^-(t)\\|_2\\le\\eta$ on the interval between the two times, and $\\|f^-(t,y)\\|_2\\le M^-$ there. Suppose the reset is Lipschitz in state with constant $L_R$ and in time with constant $L_{R,t}$. Let $y^+$ start from $R(\\tau,y^-(\\tau))$ at time $\\tau$, and let $\\widetilde y^+$ start from $R(\\widehat\\tau,U^-(\\widehat\\tau))$ at time $\\widehat\\tau$. Assume the outgoing mode field is bounded by $M^+$ and $L^+$-Lipschitz in state on a common tube. At $t_0=\\max\\{\\tau,\\widehat\\tau\\}$,\n$$\\|\\widetilde y^+(t_0)-y^+(t_0)\\|_2\\le L_R\\eta+(L_RM^-+L_{R,t}+M^+)\\Delta.$$\nFor $s\\ge t_0$ while both outgoing solutions remain in the tube,\n$$\\|\\widetilde y^+(s)-y^+(s)\\|_2\\le e^{L^+(s-t_0)}\\bigl[L_R\\eta+(L_RM^-+L_{R,t}+M^+)\\Delta\\bigr].$$",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "F7 supplies the interface explicitly cited by proof steps 2.1; source text is mirrored verbatim."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "There are finitely many active guards. Each trial step processes at most $B_{\\mathrm{root}}$ boxes per guard, and the entire run processes at most $B_{\\mathrm{step}}$ trial steps and $B_{\\mathrm{event}}$ accepted events. The smooth isolator terminates at its finite box budget by [F3]. Hence every loop is finite and the procedure terminates.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Suppose the procedure accepts a `no event` step. For each active guard, [F1] requires a `complete` root-isolation result and either no certified roots or derivative enclosures that put every certified root strictly on the nontriggering side. By [F3], every exact root is in a certified or unresolved box; completeness removes the unresolved case, and [F5] makes each certified opposite-direction crossing nontriggering.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "claim": "Suppose an event box is returned. By [F3] it contains exactly one root of its exact guard, and [F1] certifies that the derivative has the declared crossing sign with positive margin. Every earlier enabled root in any active guard would also have to appear in a certified or unresolved box by [F3]. The procedure either separates all candidate intervals and chooses the earliest, applies the fixed priority from [F5] to an exactly certified simultaneous tie, or returns `inconclusive` when order remains ambiguous. Therefore every successful event record is the first enabled event.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.4",
+          "claim": "For a successful event result, [F1] reports the upper endpoint of the selected box mapped from local time to physical time; that mapped box contains the unique exact reference-guard root by [F3]. The admissible data in [F2] supply a valid total reference-mode error bound, a dense-guard enclosure at the reported endpoint, and the transverse derivative margin; in the finite-rational branch, [F6] justifies the local dense error and the provider's ledger must also include prior aligned reset-state errors. Thus the event record supplies the state error, guard residual, and positive margin required by [F4]. Applying [F4] gives the stated event-time bound.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Each remaining failure branch in [F1] returns `inconclusive`, `domain-failure`, or `budget-exhausted` with only the already certified prefix. By the procedure's stated output convention it asserts no absence of an event after the failed branch. Thus every successful certificate is sound and every incomplete branch makes no negative claim.",
+          "step": "1.5",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "new-derivation-2.1",
+          "step": "2.1",
+          "claim": "At each accepted event, the selected physical-time box contains its unique exact root $\\tau$ by [F3], and the algorithm reports its upper endpoint $\\widehat\\tau$ by [F1]. Step 1.4 and [F4] give $0\\le\\widehat\\tau-\\tau\\le\\Delta$. Since $\\Delta<\\delta/3$ and consecutive selected exact event times are separated by $\\delta$, the next selected exact event cannot occur before $\\widehat\\tau$. Thus, at the common reported time, the exact reference has reset at $\\tau$ and both compared states are in the outgoing mode. Apply [F7] with the provider's valid total incoming error and reset/field bounds to obtain the stated next aligned-start ledger value. Starting from the algorithm's initialization $E=0$, induction over accepted events proves every reported restart ledger bound. Before a later event can be certified, step 2 requires the provider to validate a total reference-error bound on the whole enlarged prefix; [F2] and the Definition reject missing or unjustified data, so no later event estimate uses an unvalidated ledger.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F7",
+            "step 1.4",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 is vacuous for an empty active guard set; the no-event result still requires the procedure’s complete guard loop."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 cover zero budgets: the procedure terminates and returns a non-success status rather than an unsupported no-event claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 establishes the returned event claim for a single certified guard/root as well as for the finite guard set."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: any unresolved, nontransverse or order-ambiguous box yields inconclusive; no degenerate-root claim is certified."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 use complete isolation on the closed interval and the selected root-box upper endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted: Proof 1.1 bounds the finite guard/step/event loops; 1.2 covers either zero certified roots or only opposite-oriented roots, so an empty active guard set is harmless. Step 1.3 uses complete coverage for the earliest enabled event; 1.4 gives the positive-nu lag bound; 1.5 preserves explicit failure statuses; 2.1 inducts the aligned restart ledger from E=0. Zero budgets terminate rather than fabricate a certificate; singleton/endpoint roots use the algorithm’s explicit rules, including a final root at T. Positive separation and strict lag remain premises. No choice of an uncertified event or equivalence of endpoint signs with event absence is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted: Proof 1.1 bounds the finite guard/step/event loops; 1.2 covers either zero certified roots or only opposite-oriented roots, so an empty active guard set is harmless. Step 1.3 uses complete coverage for the earliest enabled event; 1.4 gives the positive-nu lag bound; 1.5 preserves explicit failure statuses; 2.1 inducts the aligned restart ledger from E=0. Zero budgets terminate rather than fabricate a certificate; singleton/endpoint roots use the algorithm’s explicit rules, including a final root at T. Positive separation and strict lag remain premises. No choice of an uncertified event or equivalence of endpoint signs with event absence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted: Proof 1.1 bounds the finite guard/step/event loops; 1.2 covers either zero certified roots or only opposite-oriented roots, so an empty active guard set is harmless. Step 1.3 uses complete coverage for the earliest enabled event; 1.4 gives the positive-nu lag bound; 1.5 preserves explicit failure statuses; 2.1 inducts the aligned restart ledger from E=0. Zero budgets terminate rather than fabricate a certificate; singleton/endpoint roots use the algorithm’s explicit rules, including a final root at T. Positive separation and strict lag remain premises. No choice of an uncertified event or equivalence of endpoint signs with event absence is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-inelastic-bouncing-ball-has-zeno-accumulation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hybrid-mode-guard-reset-system",
+          "source_section": "Definition",
+          "quote": "A **smooth hybrid ODE system** on a finite horizon $[0,T]$ consists of a finite mode set $M$, an open state-time domain $D_m\\subseteq\\mathbb R\\times\\mathbb R^d$ and a $C^1$ vector field $f_m:D_m\\to\\mathbb R^d$ for each $m\\in M$, a finite set of directed transitions $(m,n)$, and for each transition a $C^1$ scalar guard $g_{mn}$, a declared crossing orientation $\\sigma_{mn}\\in\\{-1,+1\\}$, and a $C^1$ reset map $R_{mn}$ defined on a neighborhood of the guard points and taking values in the next mode's state domain. In mode $m$, a trajectory is a solution of the first-order initial-value problem $y'=f_m(t,y)$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. It follows that mode only until the selected event time.\n\nAn **event time** for transition $(m,n)$ is a time $\\tau$ at which $g_{mn}(\\tau,y(\\tau))=0$ and the guard crosses in its declared direction, meaning $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))|_{t=\\tau}>0$. It is **transverse** with margin $\\nu>0$ on a bracket when $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))\\ge\\nu$ throughout that bracket. At an event, the state changes from $y(\\tau^-)$ to $R_{mn}(\\tau,y(\\tau^-))$ and the mode changes from $m$ to $n$. A **deterministic event-priority rule** is a fixed total order on the finite outgoing transition set of each mode; if several enabled guards vanish at exactly the same first time, the least transition in that order is selected.\n\nA hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\\tau_1<\\cdots<\\tau_N<T$ and some $\\delta>0$ with $\\tau_{j+1}-\\tau_j\\ge\\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Start immediately after a bounce with upward velocity $v_0>0$. Under $q'=v$, $v'=-g$, the next impact occurs after $2v_0/g$, and the incoming impact velocity is $-v_0$. Its guard derivative is $q'=v^-=-v_0<0$, so it has the declared downward orientation; the reset produces upward velocity $e v_0$ and does not immediately re-trigger that oriented guard.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Repeating the calculation, the time between the $k$th and $(k+1)$st impacts is $2e^k v_0/g$ for $k=0,1,2,\\ldots$. Every such interval is positive, so the impacts are distinct; at each one the incoming guard derivative is $q'=v^-=-e^k v_0\\ne0$, so each crossing is transverse and has the declared orientation.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "The total time after the initial state to all subsequent impacts is $\\sum_{k=0}^{\\infty}2e^k v_0/g=2v_0/(g(1-e))<\\infty$. Thus infinitely many transverse events accumulate at a finite time, refuting the statement. The event separations tend to zero, so the finite separated-event theorem does not apply.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample has infinitely many impacts and does not use an empty event list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement assumes 0<e<1; step 1.1 shows why a zero restitution parameter is not the stated infinite-bounce case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the first impact; step 2.1 iterates the same formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 shows every flight time is positive while step 3.1 shows the limiting total is finite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies the finite accumulation time approached by the event sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of cex-inelastic-bouncing-ball-has-zeno-accumulation: Counterexample assumes g>0,v_0>0,0<e<1. Steps 1.1–2.1 construct each strictly positive flight duration 2 e^k v_0/g and nonzero downward velocity; 3.1 sums the geometric sequence to finite time 2v_0/[g(1-e)]. The event sequence is countably infinite and nonempty, its first flight is explicit, and separations tend to zero even though each crossing is transverse. Zero height at resets is allowed; e=0 or e=1 is outside this witness. No event at the accumulation endpoint is required. The explicit recurrence refutes a universal implication and uses no selected infinite family of alternative trajectories."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of cex-inelastic-bouncing-ball-has-zeno-accumulation: Counterexample assumes g>0,v_0>0,0<e<1. Steps 1.1–2.1 construct each strictly positive flight duration 2 e^k v_0/g and nonzero downward velocity; 3.1 sums the geometric sequence to finite time 2v_0/[g(1-e)]. The event sequence is countably infinite and nonempty, its first flight is explicit, and separations tend to zero even though each crossing is transverse. Zero height at resets is allowed; e=0 or e=1 is outside this witness. No event at the accumulation endpoint is required. The explicit recurrence refutes a universal implication and uses no selected infinite family of alternative trajectories."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of cex-inelastic-bouncing-ball-has-zeno-accumulation: Counterexample assumes g>0,v_0>0,0<e<1. Steps 1.1–2.1 construct each strictly positive flight duration 2 e^k v_0/g and nonzero downward velocity; 3.1 sums the geometric sequence to finite time 2v_0/[g(1-e)]. The event sequence is countably infinite and nonempty, its first flight is explicit, and separations tend to zero even though each crossing is transverse. Zero height at resets is allowed; e=0 or e=1 is outside this witness. No event at the accumulation endpoint is required. The explicit recurrence refutes a universal implication and uses no selected infinite family of alternative trajectories."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-simultaneous-guards-require-deterministic-priority": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hybrid-mode-guard-reset-system",
+          "source_section": "Definition",
+          "quote": "A **smooth hybrid ODE system** on a finite horizon $[0,T]$ consists of a finite mode set $M$, an open state-time domain $D_m\\subseteq\\mathbb R\\times\\mathbb R^d$ and a $C^1$ vector field $f_m:D_m\\to\\mathbb R^d$ for each $m\\in M$, a finite set of directed transitions $(m,n)$, and for each transition a $C^1$ scalar guard $g_{mn}$, a declared crossing orientation $\\sigma_{mn}\\in\\{-1,+1\\}$, and a $C^1$ reset map $R_{mn}$ defined on a neighborhood of the guard points and taking values in the next mode's state domain. In mode $m$, a trajectory is a solution of the first-order initial-value problem $y'=f_m(t,y)$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. It follows that mode only until the selected event time.\n\nAn **event time** for transition $(m,n)$ is a time $\\tau$ at which $g_{mn}(\\tau,y(\\tau))=0$ and the guard crosses in its declared direction, meaning $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))|_{t=\\tau}>0$. It is **transverse** with margin $\\nu>0$ on a bracket when $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))\\ge\\nu$ throughout that bracket. At an event, the state changes from $y(\\tau^-)$ to $R_{mn}(\\tau,y(\\tau^-))$ and the mode changes from $m$ to $n$. A **deterministic event-priority rule** is a fixed total order on the finite outgoing transition set of each mode; if several enabled guards vanish at exactly the same first time, the least transition in that order is selected.\n\nA hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\\tau_1<\\cdots<\\tau_N<T$ and some $\\delta>0$ with $\\tau_{j+1}-\\tau_j\\ge\\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "In mode $I$, the exact solution is $x(t)=-1+t$, so both guards first vanish at $t=1$ and have derivative $1>0$ there. Thus both transitions are enabled simultaneously.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Completing the specification with priority $g_1\\prec g_2$ selects transition $g_1$ and the continuation in mode $A$ is $x(t)=0$ for $t\\ge1$. Completing it instead with priority $g_2\\prec g_1$ selects transition $g_2$ and the continuation in mode $B$ is $x(t)=t-1$ for $t\\ge1$. Each completed system has a fixed priority and determines one continuation, but the incomplete specification alone does not determine which completion was intended.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is specifically about two simultaneous guards, so the empty-transition case is outside it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the event time t=1 rather than a zero-time event."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 contrasts the two single-transition continuations and fixed priority selects one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No limiting or degenerate transition is part of the example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 locates the event at t=1 within the stated trajectory interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of ex-simultaneous-guards-require-deterministic-priority: Example uses x(0)=-1,xprime=1 and two identical guards. Verification 1.1 gives their common first root at t=1 with derivative 1; 2.1 gives two different explicitly completed priority orders and continuations. Each reset state is zero, while terminal mode A has zero field and mode B field one. There is one scalar coordinate and exactly two guard candidates, not an empty guard family. Both continuations include t=1 and agree at that endpoint before separating. No choice axiom selects the missing priority: the uncompleted specification is declared incomplete. This example is not an iff theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of ex-simultaneous-guards-require-deterministic-priority: Example uses x(0)=-1,xprime=1 and two identical guards. Verification 1.1 gives their common first root at t=1 with derivative 1; 2.1 gives two different explicitly completed priority orders and continuations. Each reset state is zero, while terminal mode A has zero field and mode B field one. There is one scalar coordinate and exactly two guard candidates, not an empty guard family. Both continuations include t=1 and agree at that endpoint before separating. No choice axiom selects the missing priority: the uncompleted specification is declared incomplete. This example is not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of ex-simultaneous-guards-require-deterministic-priority: Example uses x(0)=-1,xprime=1 and two identical guards. Verification 1.1 gives their common first root at t=1 with derivative 1; 2.1 gives two different explicitly completed priority orders and continuations. Each reset state is zero, while terminal mode A has zero field and mode B field one. There is one scalar coordinate and exactly two guard candidates, not an empty guard family. Both continuations include t=1 and agree at that endpoint before separating. No choice axiom selects the missing priority: the uncompleted specification is declared incomplete. This example is not an iff theorem."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-grazing-event-time-error-is-not-linearly-bounded": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hybrid-mode-guard-reset-system",
+          "source_section": "Definition",
+          "quote": "A **smooth hybrid ODE system** on a finite horizon $[0,T]$ consists of a finite mode set $M$, an open state-time domain $D_m\\subseteq\\mathbb R\\times\\mathbb R^d$ and a $C^1$ vector field $f_m:D_m\\to\\mathbb R^d$ for each $m\\in M$, a finite set of directed transitions $(m,n)$, and for each transition a $C^1$ scalar guard $g_{mn}$, a declared crossing orientation $\\sigma_{mn}\\in\\{-1,+1\\}$, and a $C^1$ reset map $R_{mn}$ defined on a neighborhood of the guard points and taking values in the next mode's state domain. In mode $m$, a trajectory is a solution of the first-order initial-value problem $y'=f_m(t,y)$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. It follows that mode only until the selected event time.\n\nAn **event time** for transition $(m,n)$ is a time $\\tau$ at which $g_{mn}(\\tau,y(\\tau))=0$ and the guard crosses in its declared direction, meaning $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))|_{t=\\tau}>0$. It is **transverse** with margin $\\nu>0$ on a bracket when $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))\\ge\\nu$ throughout that bracket. At an event, the state changes from $y(\\tau^-)$ to $R_{mn}(\\tau,y(\\tau^-))$ and the mode changes from $m$ to $n$. A **deterministic event-priority rule** is a fixed total order on the finite outgoing transition set of each mode; if several enabled guards vanish at exactly the same first time, the least transition in that order is selected.\n\nA hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\\tau_1<\\cdots<\\tau_N<T$ and some $\\delta>0$ with $\\tau_{j+1}-\\tau_j\\ge\\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-transverse-hybrid-event-time-error",
+          "source_section": "Statement",
+          "quote": "Let $y$ be an exact incoming mode trajectory on a closed interval $J$ and let $U$ be a dense reconstruction with $\\sup_{t\\in J}\\|y(t)-U(t)\\|_2\\le\\eta$. Let $g(t,x)$ be $L_g$-Lipschitz in $x$ on the certified tube, with declared crossing orientation $\\sigma\\in\\{-1,+1\\}$. Suppose $h(t)=g(t,y(t))$ has a root $\\tau\\in J$ and, throughout $J$, $\\sigma h'(t)\\ge\\nu$ for some $\\nu>0$. If a reported time $\\widehat\\tau\\in J$ satisfies $|g(\\widehat\\tau,U(\\widehat\\tau))|\\le\\varepsilon$, then\n$$|\\widehat\\tau-\\tau|\\le\\frac{L_g\\eta+\\varepsilon}{\\nu}\\le\\frac{C(\\eta+\\varepsilon)}{\\nu},\\qquad C:=\\max\\{L_g,1\\}.$$\nThe same-sign derivative condition makes $\\tau$ the unique guard root in $J$. The conclusion concerns a root matched to this transverse bracket; it gives no bound at grazing or across a change of event ordering.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The exact trajectory is $x(t)=0$, so the exact guard is $h(t)=(t-1)^2$. It has an interior root at $\\tau=1$ and $h'(1)=0$. The guard does not cross either declared orientation, so this is a grazing guard contact, not an enabled hybrid event under [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For any $\\eta>0$, take the dense reconstruction $U_\\eta(t)=-\\eta$. Its uniform state error is $\\eta$, while its guard $g(t,U_\\eta(t))=(t-1)^2-\\eta$ has zero residual at $\\widehat\\tau=1+\\sqrt\\eta$. Thus $\\varepsilon=0$ and $|\\widehat\\tau-\\tau|=\\sqrt\\eta$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "If a fixed $C$ gave the refuted root-location bound, it would require $\\sqrt\\eta\\le C\\eta$ for every $\\eta>0$, equivalently $1/\\sqrt\\eta\\le C$. The left side is unbounded as $\\eta\\downarrow0$, so no such constant exists. Here $h'(1)=0$, so the positive derivative margin required by [F2] is absent; the calculation concerns sensitivity of a guard contact, not the time of an enabled event.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample supplies an exact root and its perturbed roots; no empty-root case is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 takes η>0; at η=0 the exact guard is recovered, so the counterexample requires positive arbitrarily small error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 has one exact grazing root, while step 2.1 explicitly computes the perturbed roots."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The grazing derivative is zero by step 1.1, which is the excluded transverse boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample is on the real line and asserts no finite-step endpoint sign test."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of cex-grazing-event-time-error-is-not-linearly-bounded: Counterexample 1.1 has scalar state x=0 and h(t)=(t-1)² with root tau=1 and zero derivative, explicitly a contact rather than an oriented event. Step 2.1 uses eta>0,U_eta=-eta and tauhat=1+sqrt(eta), giving zero residual; 3.1 sends eta down to zero to make 1/sqrt(eta) unbounded. Eta=0 gives the exact root but is not used for division. This single-root explicit family is nonempty; no positive transverse margin is claimed. The witness refutes a universal linear estimate, with no arbitrary selection or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of cex-grazing-event-time-error-is-not-linearly-bounded: Counterexample 1.1 has scalar state x=0 and h(t)=(t-1)² with root tau=1 and zero derivative, explicitly a contact rather than an oriented event. Step 2.1 uses eta>0,U_eta=-eta and tauhat=1+sqrt(eta), giving zero residual; 3.1 sends eta down to zero to make 1/sqrt(eta) unbounded. Eta=0 gives the exact root but is not used for division. This single-root explicit family is nonempty; no positive transverse margin is claimed. The witness refutes a universal linear estimate, with no arbitrary selection or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of cex-grazing-event-time-error-is-not-linearly-bounded: Counterexample 1.1 has scalar state x=0 and h(t)=(t-1)² with root tau=1 and zero derivative, explicitly a contact rather than an oriented event. Step 2.1 uses eta>0,U_eta=-eta and tauhat=1+sqrt(eta), giving zero residual; 3.1 sends eta down to zero to make 1/sqrt(eta) unbounded. Eta=0 gives the exact root but is not used for division. This single-root explicit family is nonempty; no positive transverse margin is claimed. The witness refutes a universal linear estimate, with no arbitrary selection or biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-bouncing-ball-transverse-event-error-and-reset": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hybrid-mode-guard-reset-system",
+          "source_section": "Definition",
+          "quote": "A **smooth hybrid ODE system** on a finite horizon $[0,T]$ consists of a finite mode set $M$, an open state-time domain $D_m\\subseteq\\mathbb R\\times\\mathbb R^d$ and a $C^1$ vector field $f_m:D_m\\to\\mathbb R^d$ for each $m\\in M$, a finite set of directed transitions $(m,n)$, and for each transition a $C^1$ scalar guard $g_{mn}$, a declared crossing orientation $\\sigma_{mn}\\in\\{-1,+1\\}$, and a $C^1$ reset map $R_{mn}$ defined on a neighborhood of the guard points and taking values in the next mode's state domain. In mode $m$, a trajectory is a solution of the first-order initial-value problem $y'=f_m(t,y)$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. It follows that mode only until the selected event time.\n\nAn **event time** for transition $(m,n)$ is a time $\\tau$ at which $g_{mn}(\\tau,y(\\tau))=0$ and the guard crosses in its declared direction, meaning $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))|_{t=\\tau}>0$. It is **transverse** with margin $\\nu>0$ on a bracket when $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))\\ge\\nu$ throughout that bracket. At an event, the state changes from $y(\\tau^-)$ to $R_{mn}(\\tau,y(\\tau^-))$ and the mode changes from $m$ to $n$. A **deterministic event-priority rule** is a fixed total order on the finite outgoing transition set of each mode; if several enabled guards vanish at exactly the same first time, the least transition in that order is selected.\n\nA hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\\tau_1<\\cdots<\\tau_N<T$ and some $\\delta>0$ with $\\tau_{j+1}-\\tau_j\\ge\\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-transverse-hybrid-event-time-error",
+          "source_section": "Statement",
+          "quote": "Let $y$ be an exact incoming mode trajectory on a closed interval $J$ and let $U$ be a dense reconstruction with $\\sup_{t\\in J}\\|y(t)-U(t)\\|_2\\le\\eta$. Let $g(t,x)$ be $L_g$-Lipschitz in $x$ on the certified tube, with declared crossing orientation $\\sigma\\in\\{-1,+1\\}$. Suppose $h(t)=g(t,y(t))$ has a root $\\tau\\in J$ and, throughout $J$, $\\sigma h'(t)\\ge\\nu$ for some $\\nu>0$. If a reported time $\\widehat\\tau\\in J$ satisfies $|g(\\widehat\\tau,U(\\widehat\\tau))|\\le\\varepsilon$, then\n$$|\\widehat\\tau-\\tau|\\le\\frac{L_g\\eta+\\varepsilon}{\\nu}\\le\\frac{C(\\eta+\\varepsilon)}{\\nu},\\qquad C:=\\max\\{L_g,1\\}.$$\nThe same-sign derivative condition makes $\\tau$ the unique guard root in $J$. The conclusion concerns a root matched to this transverse bracket; it gives no bound at grazing or across a change of event ordering.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-reset-error-after-a-mistimed-hybrid-event",
+          "source_section": "Statement",
+          "quote": "Let $\\tau$ be an exact event time and $\\widehat\\tau$ its reported time, with $\\Delta=|\\widehat\\tau-\\tau|$. Suppose the incoming exact mode extension $y^-$ and its dense reconstruction $U^-$ satisfy $\\|U^-(t)-y^-(t)\\|_2\\le\\eta$ on the interval between the two times, and $\\|f^-(t,y)\\|_2\\le M^-$ there. Suppose the reset is Lipschitz in state with constant $L_R$ and in time with constant $L_{R,t}$. Let $y^+$ start from $R(\\tau,y^-(\\tau))$ at time $\\tau$, and let $\\widetilde y^+$ start from $R(\\widehat\\tau,U^-(\\widehat\\tau))$ at time $\\widehat\\tau$. Assume the outgoing mode field is bounded by $M^+$ and $L^+$-Lipschitz in state on a common tube. At $t_0=\\max\\{\\tau,\\widehat\\tau\\}$,\n$$\\|\\widetilde y^+(t_0)-y^+(t_0)\\|_2\\le L_R\\eta+(L_RM^-+L_{R,t}+M^+)\\Delta.$$\nFor $s\\ge t_0$ while both outgoing solutions remain in the tube,\n$$\\|\\widetilde y^+(s)-y^+(s)\\|_2\\le e^{L^+(s-t_0)}\\bigl[L_R\\eta+(L_RM^-+L_{R,t}+M^+)\\Delta\\bigr].$$",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The exact incoming solution is $y(t)=(1-t^2,-2t)$, so its guard $h(t)=1-t^2$ has the unique root $\\tau=1$ on the bracket. For $t\\in[1,51/50]$, $-h'(t)=2t\\ge2$, so the downward crossing is transverse with margin $\\nu=2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The dense guard is $1-t^2+1/25$, whose root in the bracket is $\\widehat\\tau=\\sqrt{26/25}$ and whose residual there is $\\varepsilon=0$. For $x\\ge0$, both sides are nonnegative and $(1+x/2)^2-(1+x)=x^2/4\\ge0$, so $\\sqrt{1+x}\\le1+x/2$. Taking $x=1/25$ gives $0\\le\\widehat\\tau-\\tau\\le1/50$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "On the bracket, $\\|U(t)-y(t)\\|_2=1/25$. Since $g(q,v)=q$, $|g(q_1,v_1)-g(q_2,v_2)|=|q_1-q_2|\\le\\|(q_1,v_1)-(q_2,v_2)\\|_2$, so $L_g=1$; the reported guard residual is zero. Apply [F2] with $\\nu=2$ to obtain $|\\widehat\\tau-\\tau|\\le(1/25)/2=1/50$, agreeing with the explicit bound in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.2",
+          "claim": "The reset has $L_R=1/2$ and $L_{R,t}=0$. On the incoming bracket, $\\|f^-(t,y(t))\\|_2=\\sqrt{4t^2+4}<3$; the exact outgoing velocity after impact lies in $[24/25,1]$ before $\\widehat\\tau$, so its field norm is also less than $3$. Thus $M^-=M^+=3$ are valid bounds. By [F3], the aligned post-reset state error is at most $\\frac12\\cdot\\frac1{25}+(\\frac12\\cdot3+3)\\frac1{50}=11/100$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "Directly, the exact outgoing state at $\\widehat\\tau=1+\\Delta$ is $(\\Delta-\\Delta^2,1-2\\Delta)$ and the reported reset state is $(0,1+\\Delta)$. Their difference has components bounded by $1/50$ and $3/50$, so its Euclidean norm is at most $\\sqrt{(1/50)^2+(3/50)^2}<11/100$. This verifies the reset estimate for this instance.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes one incoming trajectory and one impact."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 2.1 and 3.1 use the zero reported guard residual ε=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the unique impact in the stated bracket."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This fixed example uses η=1/25 and has a strictly positive event lag by step 2.1; it makes no degenerate zero-lag claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement’s event bracket is closed and contains the exact and reported roots; step 1.1 checks its endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of ex-bouncing-ball-transverse-event-error-and-reset: Example fixes the bracket [1,51/50], eta=1/25 and a scalar guard on two state coordinates. Verification 1.1 includes the exact endpoint root tau=1 with margin 2; 2.1 computes tauhat=sqrt(26/25) within the bracket and lag<=1/50; 3.1 uses residual zero; 3.2 and 4.1 give the aligned reset bound 11/100 and verify it directly. Zero initial velocity and zero reset height are valid. The reset constants and field bounds are explicit; an empty bracket, grazing margin or different dimensional family is not asserted. This is one finite witness with no selection or equivalence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of ex-bouncing-ball-transverse-event-error-and-reset: Example fixes the bracket [1,51/50], eta=1/25 and a scalar guard on two state coordinates. Verification 1.1 includes the exact endpoint root tau=1 with margin 2; 2.1 computes tauhat=sqrt(26/25) within the bracket and lag<=1/50; 3.1 uses residual zero; 3.2 and 4.1 give the aligned reset bound 11/100 and verify it directly. Zero initial velocity and zero reset height are valid. The reset constants and field bounds are explicit; an empty bracket, grazing margin or different dimensional family is not asserted. This is one finite witness with no selection or equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of ex-bouncing-ball-transverse-event-error-and-reset: Example fixes the bracket [1,51/50], eta=1/25 and a scalar guard on two state coordinates. Verification 1.1 includes the exact endpoint root tau=1 with margin 2; 2.1 computes tauhat=sqrt(26/25) within the bracket and lag<=1/50; 3.1 uses residual zero; 3.2 and 4.1 give the aligned reset bound 11/100 and verify it directly. Zero initial velocity and zero reset height are valid. The reset constants and field bounds are explicit; an empty bracket, grazing margin or different dimensional family is not asserted. This is one finite witness with no selection or equivalence claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-two-events-between-endpoints-defeat-sign-screening": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hybrid-mode-guard-reset-system",
+          "source_section": "Definition",
+          "quote": "A **smooth hybrid ODE system** on a finite horizon $[0,T]$ consists of a finite mode set $M$, an open state-time domain $D_m\\subseteq\\mathbb R\\times\\mathbb R^d$ and a $C^1$ vector field $f_m:D_m\\to\\mathbb R^d$ for each $m\\in M$, a finite set of directed transitions $(m,n)$, and for each transition a $C^1$ scalar guard $g_{mn}$, a declared crossing orientation $\\sigma_{mn}\\in\\{-1,+1\\}$, and a $C^1$ reset map $R_{mn}$ defined on a neighborhood of the guard points and taking values in the next mode's state domain. In mode $m$, a trajectory is a solution of the first-order initial-value problem $y'=f_m(t,y)$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. It follows that mode only until the selected event time.\n\nAn **event time** for transition $(m,n)$ is a time $\\tau$ at which $g_{mn}(\\tau,y(\\tau))=0$ and the guard crosses in its declared direction, meaning $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))|_{t=\\tau}>0$. It is **transverse** with margin $\\nu>0$ on a bracket when $\\sigma_{mn}\\frac{d}{dt}g_{mn}(t,y(t))\\ge\\nu$ throughout that bracket. At an event, the state changes from $y(\\tau^-)$ to $R_{mn}(\\tau,y(\\tau^-))$ and the mode changes from $m$ to $n$. A **deterministic event-priority rule** is a fixed total order on the finite outgoing transition set of each mode; if several enabled guards vanish at exactly the same first time, the least transition in that order is selected.\n\nA hybrid trajectory has a **finite separated event list** on $[0,T]$ when it has finitely many event times $0<\\tau_1<\\cdots<\\tau_N<T$ and some $\\delta>0$ with $\\tau_{j+1}-\\tau_j\\ge\\delta$ for each adjacent pair. The definition does not assert that a solution exists, that an event is detected, or that the event list is finite. Those are separate hypotheses or conclusions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-safeguarded-hybrid-event-location-and-restart",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A smooth hybrid ODE system with a fixed total event-priority order; an initial mode, time $t_0$, and state; a finite horizon $T\\ge t_0$; a finite trial-step provider; a finite enclosure provider satisfying [[def-certified-hybrid-event-enclosure]] for every accumulated mode prefix; a physical-time root-box width target $\\omega>0$; a separate guard-residual tolerance $\\epsilon>0$; and finite nonnegative integer limits $B_{\\mathrm{step}},B_{\\mathrm{root}},B_{\\mathrm{event}}$. Each provider or certificate-validation call returns data or a failure status in finite time. The trial provider returns a finite real interval $J=[a,b]$ with $a$ equal to the current reported time and $a<b\\le T$. For each trial interval use $\\theta=(t-a)/(b-a)$ and the transformed guard $\\widetilde h_{mn}(\\theta)=g_{mn}(a+(b-a)\\theta,y_{\\rm ref}(a+(b-a)\\theta))$. The root isolator then starts from the finite dyadic interval $[0,1]$, regardless of the physical-time endpoints. For $Q\\subseteq[0,1]$, write $J(Q)=[a+(b-a)\\inf Q,a+(b-a)\\sup Q]$. $B_{\\mathrm{root}}$ is the maximum number of root-isolator boxes processed for one guard on one trial interval, summed over initial isolation, root-box refinement, endpoint checks, and event-order refinement. The enclosure provider supplies justified local and total reference-error bounds, valid dense-guard, exact-guard, and exact-guard-derivative enclosures on every queried subinterval, and a certified positive separation bound $\\delta$ between consecutive selected exact event times on the horizon. It may use a rational residual-tube checker as one provider branch; no particular checker is required. A common-root certificate is a finite proof object with a finite sound validation procedure; it is admissible only when validated to certify that the unique exact roots in all named physical-time boxes occur at one common time. A certified exact singleton root is one such certificate. The error ledger $E$ is measured at the aligned mode-segment start, initially $E=0$. The provider accumulates a continuous piecewise-$C^1$ reconstruction $U$ from the last reported reset. The formula in [[def-heun-quadratic-dense-output]] is one possible reconstruction, not an error certificate.\n\n**Procedure.**\n\n1. Initialize the current reported time, mode, and state from the inputs; set the accepted-event count and trial-step count to zero; set $E=0$. If the current time is $T$, return the completed prefix. If the trial-step budget is exhausted before reaching $T$, return `budget-exhausted` with the certified prefix. Check the event budget only after a next enabled event has been certified, so it does not prevent a no-event step from reaching $T$.\n\n2. Increment the trial-step count and request the next interval $J=[a,b]$. If the increment exceeds $B_{\\rm step}$, return `budget-exhausted`. If $a$ is not the current reported time or $a<b\\le T$ fails, return `inconclusive`. Extend $U$ by the proposed panel. Obtain and validate the provider's data for the whole accumulated prefix, including a $C^1$ reference-mode continuation on an open interval containing $J$, the total bound $\\eta_{\\rm ref}$, and each active guard's interval evaluators. Continue only on a `certified` response under [[def-certified-hybrid-event-enclosure]]; if the provider returns `inconclusive` or any required bound, inclusion, reset datum, or evaluator is missing, unjustified, or nonfinite, return `inconclusive` with the certified prefix.\n\n3. For each outgoing transition in its fixed order, initialize a processed-box counter $c_{mn}=0$ and apply [[alg-smooth-function-root-isolation]] to $\\widetilde h_{mn}$ on $[0,1]$. On each queried local interval $Q$, use the exact-guard range enclosure $E_{mn}(J(Q))$ and the derivative enclosure $(b-a)D_{mn}(J(Q))$; these enclose $\\widetilde h_{mn}(Q)$ and $\\widetilde h'_{mn}(Q)$. Set the minimum width to $\\eta=\\omega/(b-a)$ and the box budget to $B_{\\rm root}$. Add the returned processed-box count to $c_{mn}$. If any result is `inconclusive` or contains unresolved boxes, return `inconclusive`. The result is usable only when it is `complete`, so all roots in the physical interval $J$ are covered by excluded or certified boxes.\n\n4. Classify each certified local-time root box $Q$ using $D_{mn}(J(Q))$. If $\\sigma_{mn}D_{mn}(J(Q))\\subseteq(-\\infty,-\\nu_Q]$ for some $\\nu_Q>0$, record that root as strictly opposite-oriented and nontriggering. If $\\sigma_{mn}D_{mn}(J(Q))\\subseteq[\\nu_Q,\\infty)$ for some $\\nu_Q>0$, it is an enabled candidate. If neither inclusion is proved and $(b-a)\\operatorname{width}(Q)=0$, return `inconclusive`; otherwise call the refinement procedure below with requested physical width $w=(b-a)\\operatorname{width}(Q)/2$, then repeat this classification on the returned smaller unique-root box. If refinement cannot certify one of the two strict signs within the remaining box budget, return `inconclusive`.\n\n   **Unique-root refinement.** This procedure is called only on a local-time box $Q$ already certified to contain exactly one root and with a positive requested physical width $w$. While $(b-a)\\operatorname{width}(Q)>w$, initialize a FIFO worklist with $Q$ and an empty set of certified subboxes. Remove the first local-time interval $I$ from the worklist. If $(b-a)\\operatorname{width}(I)=0$, return `inconclusive`; otherwise bisect $I$ at its dyadic midpoint into two closed halves. For each half $K$, call [[alg-smooth-function-root-isolation]] on $K$ with minimum width $\\eta_K=\\min\\{w/(b-a),\\operatorname{width}(K)/2\\}$ and the remaining per-guard budget; charge every processed box, including singleton calls, to $c_{mn}$. Add every certified root box returned to the set of certified subboxes, and append every unresolved box returned to the worklist; discard root-free boxes. Any certified subbox lies in $Q$, so the unique root of $Q$ is the root it certifies. If the certified set is nonempty, replace $Q$ by the intersection of its boxes; they all contain the same root, so the intersection is nonempty and contains exactly that root. If the new box is still too wide in physical time, repeat with worklist initialized to this smaller $Q$. If the certified set is empty, continue processing the worklist; root-isolation soundness ensures the root remains in its unresolved union. If the worklist empties without a certified subbox, or $c_{mn}=B_{\\rm root}$ while more work is required, return `inconclusive`. Closed halves include their shared midpoint, so an endpoint root cannot be dropped; if both halves certify it, their intersection records it once, possibly as a singleton.\n\n5. For each guard, sort its certified local-time root boxes by lower endpoint. Normalize adjacent boxes that share a bisection endpoint $m$ by calling the root isolator on $\\{m\\}$ for $\\widetilde h_{mn}$ with minimum width $\\omega/(b-a)$ and the remaining per-guard budget, charging its processed boxes to that guard's counter. If it certifies a root, replace all touching boxes by the singleton root. If it certifies that $m$ is root-free, keep the boxes as distinct roots on opposite sides of $m$. If it is inconclusive, refine the touching boxes using step 4; if their relation remains undecided or $c_{mn}=B_{\\rm root}$, return `inconclusive`.\n\n6. If every isolator is complete and every certified root is strictly opposite-oriented, accept the no-event panel. Set the current reported time to $b$ and state to $U(b)$, append the dense panel, and retain the aligned-start ledger $E$. Obtain updated certified local and total error bounds on the enlarged prefix; if the provider does not certify them, return `inconclusive`. A no-event decision is therefore based on complete root isolation and direction classification of the entire trial interval, not on endpoint signs or on the absence of guard roots.\n\n7. If enabled candidates remain, order their local-time root boxes. For boxes that are strictly disjoint, their interval order gives their physical root order. If two boxes meet only at a local-time endpoint $m$, query the root isolator on $\\{m\\}$ for each guard with minimum width $\\omega/(b-a)$ and the remaining budget, charging each call to that guard: two certified singleton roots give a common-root certificate at physical time $a+(b-a)m$ and a priority-selected tie; a singleton root-free result proves that guard's root is strictly to its box's side of $m$ and orders it against a root at $m$ or on the other side. If a singleton result is inconclusive, refine the boxes. For boxes with a nontrivial overlap, use a valid common-root certificate to establish exact simultaneity and apply the fixed priority among those enabled transitions; otherwise refine the overlapping boxes one bisection level at a time by requesting half their physical widths in step 4. If a box has zero physical width and still overlaps another candidate without a certified tie, return `inconclusive`. For same-guard boxes that touch at a bisection endpoint, the singleton check in step 5 either merges one root there or proves that the roots lie strictly on opposite sides. If the order is not certified before a box budget is exhausted, return `inconclusive`. Select the earliest enabled root or the priority-selected transition at a certified tie. Refine its box to physical width at most $\\omega$.\n\n8. Let $\\widehat\\tau=a+(b-a)\\sup Q$ be the physical upper endpoint of the selected local-time box $Q$, so the exact root $\\tau$ satisfies $\\tau\\le\\widehat\\tau$. From the dense-guard enclosure $G^U_{mn}(\\{\\widehat\\tau\\})$, take the maximum absolute endpoint as a certified upper bound $\\epsilon_{\\rm obs}$ for $|g_{mn}(\\widehat\\tau,U(\\widehat\\tau))|$. If the enclosure is nonfinite or $\\epsilon_{\\rm obs}>\\epsilon$, return `inconclusive` when $(b-a)\\operatorname{width}(Q)=0$; otherwise call unique-root refinement with requested physical width $w=(b-a)\\operatorname{width}(Q)/2$ and recompute. If the tolerance still cannot be certified within the remaining budget, return `inconclusive`.\n\n9. If the accepted-event count is already $B_{\\rm event}$, return `budget-exhausted` with the certified prefix without applying another reset. Otherwise let $\\nu>0$ be the certified signed derivative margin on the whole selected physical-time root box and compute $\\Delta=(L_g\\eta_{\\rm ref}+\\epsilon_{\\rm obs})/\\nu$ by [[lem-transverse-hybrid-event-time-error]]. The selected box contains its unique exact root $\\tau$, and step 8 sets $\\widehat\\tau$ to that box's upper endpoint, so $0\\le\\widehat\\tau-\\tau\\le\\Delta$. If the certified separation bound is missing or $\\Delta\\ge\\delta/3$, return `inconclusive` without restarting, since another selected exact event may occur before the reported time. Otherwise, separation by $\\delta$ ensures no next selected exact event occurs before $\\widehat\\tau$. Check that $(\\widehat\\tau,U(\\widehat\\tau))$ lies in the reset domain and that the reset value lies in the next mode's state domain; a failed check returns `domain-failure`. Otherwise apply the reset. A root at $T$ is processed by this same rule, and the output at $T$ is post-reset. The exact reference trajectory has reset at $\\tau$ and followed the outgoing field through the alignment time $\\widehat\\tau$; its flow over this lag contributes at most $M^+\\Delta$. By [[lem-reset-error-after-a-mistimed-hybrid-event]], set the next aligned-segment state-error bound to\n$$E\\leftarrow L_R\\eta_{\\rm ref}+(L_RM^-+L_{R,t}+M^+)\\Delta.$$\nThen discard the pre-reset reconstruction, set the current reported time and state to $\\widehat\\tau$ and the reset value, start a new accumulated reconstruction in the selected mode, append the event certificate, and increment the accepted-event count. Before processing any later trial interval, step 2 must obtain certified provider data whose total reference-error bound is valid on that whole accumulated prefix and includes this aligned-start discrepancy (or is independently justified on that full prefix); if the provider cannot certify it, return `inconclusive` with the certified prefix. Continue from step 1. Any exhausted step, root-box, or event budget returns `budget-exhausted` with the certified prefix.\n\n**Outputs.** A finite list of certified no-event panels and transverse event boxes with selected transitions, reset states, event-time bounds, and an updated state-error ledger; or an explicit `inconclusive`, `domain-failure`, or `budget-exhausted` status with the certified prefix. No no-event conclusion is drawn from endpoint signs alone.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The trajectory is $x(t)=t$, but the guard is independent of $x$, so $h(t)=(t-1/3)(t-2/3)$. Its endpoint values are $h(0)=h(1)=2/9>0$. A rule that checks only endpoint signs therefore reports no crossing. The roots $1/3$ and $2/3$ are not dyadic, so neither lies on a midpoint boundary of the isolator's dyadic bisection of $[0,1]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The two roots are $1/3$ and $2/3$, and $h'(t)=2t-1$. Thus $h'(1/3)=-1/3$ is a downward crossing while $h'(2/3)=1/3$ is an upward crossing. Under the declared positive orientation, the first root is nontriggering and the second is enabled.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "With exact polynomial range and derivative enclosures and a finite box budget sufficient for a complete result, the interval isolator in [F2] finds both roots and classifies their derivative signs. It cannot certify `no event`, because the root at $2/3$ is enabled and is the earliest enabled event. Thus equal endpoint signs do not justify an event-absence conclusion, while complete root isolation and orientation classification do.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is about two interior roots, not an empty root set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both endpoint values are strictly positive and neither root is zero as a time."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 distinguishes the one enabled root from the one nontriggering root."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both roots are simple; no repeated or degenerate root occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 computes both endpoint guard values explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "nonempty-choice review of ex-two-events-between-endpoints-defeat-sign-screening: Example uses one scalar trajectory x=t on [0,1] and h(t)=(t-1/3)(t-2/3). Verification 1.1 computes equal positive endpoint values 2/9 and notes the two roots are not dyadic bisection endpoints; 2.1 gives derivatives -1/3,+1/3, so only the second root is enabled; 3.1 requires complete finite-budget polynomial isolation. There are exactly two nonempty root candidates and one enabled event; zero derivative is absent at both. The example is not a claim that every finite budget suffices, nor a root-selection axiom or biconditional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "iff-forward review of ex-two-events-between-endpoints-defeat-sign-screening: Example uses one scalar trajectory x=t on [0,1] and h(t)=(t-1/3)(t-2/3). Verification 1.1 computes equal positive endpoint values 2/9 and notes the two roots are not dyadic bisection endpoints; 2.1 gives derivatives -1/3,+1/3, so only the second root is enabled; 3.1 requires complete finite-budget polynomial isolation. There are exactly two nonempty root candidates and one enabled event; zero derivative is absent at both. The example is not a claim that every finite budget suffices, nor a root-selection axiom or biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "iff-reverse review of ex-two-events-between-endpoints-defeat-sign-screening: Example uses one scalar trajectory x=t on [0,1] and h(t)=(t-1/3)(t-2/3). Verification 1.1 computes equal positive endpoint values 2/9 and notes the two roots are not dyadic bisection endpoints; 2.1 gives derivatives -1/3,+1/3, so only the second root is enabled; 3.1 requires complete finite-budget polynomial isolation. There are exactly two nonempty root candidates and one enabled event; zero derivative is absent at both. The example is not a claim that every finite budget suffices, nor a root-selection axiom or biconditional."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

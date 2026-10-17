@@ -1,0 +1,125 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "18",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-gauss-seidel-stationary-iteration",
+      "model": "gpt-6-luna",
+      "context_sha256": "f173d5cfc629f27c8297b9e24431769112b235388de5fb6449e2452136f17139",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "For n=1, A=(0), b=(0), x^(0)=(1), and m=0, dimensions match but the pivot check returns pivot-failure(1), contradicting the unconditional zero-budget return assertion. This is a false output claim. Requiring successful dimension and pivot checks in that sentence resolves the contradiction while preserving every operational branch and update.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-gauss-seidel-stationary-iteration",
+      "disposition": "repaired",
+      "post_sha256": "6200128f039e8247922511defa1d9add6e6585ec96a6c4f4b85ee15f3ccd3008",
+      "review_context_sha256": "f89499fde1ff56ca1b8004fe7c4877adb2eb4609c10ea7aa30861433cd9211e7",
+      "reason": "Read the complete Definition, four direct suppliers, owning page, and contract. The signs A=D-L-U give exactly the displayed increasing-index forward substitution for (D-L)x_new=Ux_old+b. Nonzero pivots ensure every division and a unique solve. After validation, m=0 skips all sweeps and returns completed with x^(0), as the repaired sentence now states. For n=1 a positive budget gives b_1/a_11; singular A with nonzero diagonal is admissible. No convergence certificate or AC is needed. This records verification of this repair, not an independent review of it.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-strict-row-diagonal-dominance-implies-jacobi-and-gauss-seidel-convergence",
+    "thm-irreducibly-weakly-diagonally-dominant-jacobi-and-gauss-seidel-converge"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-gauss-seidel-stationary-iteration",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "locus": "Definition: final zero-budget sentence",
+      "finding": "A zero budget with a zero diagonal returns pivot-failure before the loop, contradicting the unconditional return assertion; n=1, A=(0), m=0 is a witness.",
+      "repair": "Qualify the zero-budget completed return by successful dimension and pivot checks.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "interface_change": {
+      "section": "Definition",
+      "before": "A zero budget returns $x^{(0)}$.",
+      "after": "After the dimension and pivot checks succeed, a zero budget returns\n`completed` with $x^{(0)}$.",
+      "scope": "The descriptive output assertion changed; all validation branches, sweep equations, admissible inputs, dependencies and conventions remain identical."
+    },
+    "metadata_repairs": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-18.pages.json: own Definition mirror.",
+      "research/numerical-optimization-dynamics-2026-10-16-batch-18.proof-contracts.json: own empty/endpoints boundary evidence and the two direct consumers' verbatim supplier quotations. No consumer mathematical content changed."
+    ],
+    "consumer_examinations": [
+      {
+        "id": "thm-strict-row-diagonal-dominance-implies-jacobi-and-gauss-seidel-convergence",
+        "path": "items/thm-strict-row-diagonal-dominance-implies-jacobi-and-gauss-seidel-convergence.md",
+        "affected_use": "Facts F2 uses (D-L)x^(k+1)=Ux^(k)+b; proof 1.1 proves every a_ii nonzero, and proof 2.1 identifies G_G=(D-L)^(-1)U.",
+        "disposition": "unchanged_sound",
+        "reason": "Strict row dominance gives |a_ii|>sum_{j!=i}|a_ij|>=0, so the pivot checks pass. The update and iteration matrix used by the proof are unchanged; the theorem never needs completion on a zero pivot.",
+        "invalidated_claim": "None: the changed zero-budget assertion is used only on successfully validated inputs, where its qualification already holds.",
+        "minimality": "Only its contract quotation needs mirroring; no item repair or further propagation is necessary."
+      },
+      {
+        "id": "thm-irreducibly-weakly-diagonally-dominant-jacobi-and-gauss-seidel-converge",
+        "path": "items/thm-irreducibly-weakly-diagonally-dominant-jacobi-and-gauss-seidel-converge.md",
+        "affected_use": "Facts F2 uses G_G=(D-L)^(-1)U; proof 1.1 proves nonzero pivots, and proof 4.1 expands this iteration matrix to establish the weighted contraction bound.",
+        "disposition": "unchanged_sound",
+        "reason": "For n>1 a zero diagonal plus weak row dominance forces an all-zero off-diagonal row, contradicting strong connectivity. For n=1 the strict-row hypothesis gives a nonzero diagonal. Validation therefore succeeds and the unchanged update supplies exactly the matrix used.",
+        "invalidated_claim": "None: all hypotheses needed for the newly qualified completion assertion are established in proof 1.1.",
+        "minimality": "Only its contract quotation needs mirroring; no item repair or further propagation is necessary."
+      }
+    ],
+    "page_examination": {
+      "path": "library/numerical-linear-algebra-and-approximation/stationary-iterations-and-relaxation.md",
+      "affected_use": "Zero pivots return explicit failure statuses; finite iteration budgets provide no convergence certificate.",
+      "disposition": "unchanged_sound",
+      "reason": "Pivot-failure priority is preserved, including zero budget; the page does not promise completion after failed checks. The companion page makes no use of this algorithm's zero-budget clause."
+    },
+    "discovery_scope": "Exact-ID dependency/reference search of items and library found precisely the two theorem consumers and the owning page. Both consumers are in the frozen frontier; no outside or published consumer is affected and no published-ledger update is proposed. No further hop through unchanged consumer Statements is needed.",
+    "sources": "Local supplier arguments were read directly. No external source consultation was needed for this familiar finite triangular recurrence. Historical source-reading statements retained in existing contracts are not new consultation claims by this adjudicator.",
+    "checks": [
+      {
+        "command": "node tools/proof-layout.mjs items/alg-gauss-seidel-stationary-iteration.md",
+        "exit_code": 0,
+        "result": "1 items, 0 steps, 0 defects"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-gauss-seidel-stationary-iteration.md --json",
+        "exit_code": 0,
+        "result": "checked 1; errors [], warnings []"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-gauss-seidel-stationary-iteration.md --json",
+        "exit_code": 0,
+        "result": "1 file; checked 0 proofs, failed 0; not-applicable"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-18.proof-contracts.json --strict --items alg-gauss-seidel-stationary-iteration --json",
+        "exit_code": 0,
+        "result": "ok true; errors [], warnings []"
+      },
+      {
+        "command": "Inline Python exact-source mirror assertions under shared write lock",
+        "exit_code": 0,
+        "result": "Own manifest Definition and both consumer supplier quotes equal the complete repaired Definition; boundary evidence agrees with branch priority."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and independent current-context rejudgment. No workers, judgments, certificates, or round transitions were launched."
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "85",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "def-sqp-l1-exact-penalty-merit",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "8778c347fab7db70f72ee2e37bd6bfc43087c0de89304cfd4a5b8cfb794222f2",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Proof step 2.1 falsely identifies the Armijo reference with the model at tp. For the assigned scalar QP witness, m(s)=2+2s+max(1+s,0), p=-2 is its feasible QP minimizer, D=5, m(0)-sigma*t*D=9/8, and m(tp)=-1. Repaired the invalid comparison by deriving the reference m(0)+sigma*t*(m(p)-m(0)); Definition and dependency interface remain identical.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-sqp-merit-globalization-with-finite-budgets",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "fbf48a90cbf4a092440c7f1f73b59cc5a6c09b487c9ece78c5dc13d66dc28947",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The SOC supplier requires the complete equality map of its input program. The original call named only h_E of the original program, without an auxiliary program; dependent Jacobian rows do not imply redundant nonlinear equalities. For example, at x=1, h=(z,z+(z-1)^2), f=0 and B=1 give h(x)=(1,1), Dh(x)=(1,1)^T, E={1}, p=-1 and h(x+p)=(0,1). Thus the retained row is corrected while the omitted nonlinear equality need not be. Repaired the call by explicitly supplying the auxiliary C2 program with equality map h_E and unchanged f,g,U,B. Consistent row reduction preserves its QP feasible set, so p remains an admissible SQP step and (h_E,g_J) meets the supplied rank and linearized-residual interface. Full original merit is retained.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-sqp-l1-exact-penalty-merit",
+      "disposition": "repaired",
+      "post_sha256": "588bb5ccd73d73417ed5b3973cb2d32d6fa3ec6269d4a1e5e4c7591ce901ed33",
+      "review_context_sha256": "86ec8c760c8db11b2256cc49a2bf7844118cced5b600a1d14aaeccc77913329b",
+      "reason": "Checked the finite-dimensional norm/positive-part definition against def-sqp-linearized-quadratic-subproblem and derived D=m(0)-m(p) directly. The corrected reference equals psi(x)-sigma*t*D, with no assertion of positivity or eventual acceptance. Empty constraint vectors cause no denominator or choice issue. Definition is unchanged; this is a local repair review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-sqp-merit-globalization-with-finite-budgets",
+      "disposition": "repaired",
+      "post_sha256": "148628eee1b673db20c3bebd3d6a355ddd21ff14d99a22aed867ccce99a7e9b7",
+      "review_context_sha256": "f53f40ea4fdb34c1e76565da5d78c82f640c79e73c1736803d1f1286c48db571",
+      "reason": "Reviewed exact QP solution(p,nu,lambda,E,J), the SOC Definition, the full-merit interface, finite loops and flags. The auxiliary program contains every equality supplied to SOC, preserves the QP optimizer and has independent selected rows with zero affine residual. x+p is checked before evaluation, r=0 returns p, failure falls through to ordinary trials, and every acceptance still tests the full original h,g. The returned vector is the corrected displacement d=p+w and the tested point is x+d. No residual-order guarantee is asserted for omitted nonlinear equality rows. This is a local repair review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-sqp-merit-globalization-finite-budget-status",
+    "ex-sqp-maratos-effect-and-second-order-correction",
+    "alg-ctrl1-finite-budget-transcription-solver-dispatch"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-sqp-l1-exact-penalty-merit",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "8778c347fab7db70f72ee2e37bd6bfc43087c0de89304cfd4a5b8cfb794222f2",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "location": "Proof 2.1",
+      "status": "fixed",
+      "reason": "Proof step 2.1 falsely identifies the Armijo reference with the model at tp. For the assigned scalar QP witness, m(s)=2+2s+max(1+s,0), p=-2 is its feasible QP minimizer, D=5, m(0)-sigma*t*D=9/8, and m(tp)=-1. Repaired the invalid comparison by deriving the reference m(0)+sigma*t*(m(p)-m(0)); Definition and dependency interface remain identical.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-sqp-merit-globalization-with-finite-budgets",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "fbf48a90cbf4a092440c7f1f73b59cc5a6c09b487c9ece78c5dc13d66dc28947",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "location": "Definition step 2; Facts F3; Proof 1.1",
+      "status": "fixed",
+      "reason": "The SOC supplier requires the complete equality map of its input program. The original call named only h_E of the original program, without an auxiliary program; dependent Jacobian rows do not imply redundant nonlinear equalities. For example, at x=1, h=(z,z+(z-1)^2), f=0 and B=1 give h(x)=(1,1), Dh(x)=(1,1)^T, E={1}, p=-1 and h(x+p)=(0,1). Thus the retained row is corrected while the omitted nonlinear equality need not be. Repaired the call by explicitly supplying the auxiliary C2 program with equality map h_E and unchanged f,g,U,B. Consistent row reduction preserves its QP feasible set, so p remains an admissible SQP step and (h_E,g_J) meets the supplied rank and linearized-residual interface. Full original merit is retained.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "def-sqp-l1-exact-penalty-merit",
+      "alg-sqp-merit-globalization-with-finite-budgets"
+    ],
+    "conventions": "g<=0, lambda>=0; full merit includes all original equality and inequality residuals. No AC use.",
+    "evidence_paths": [
+      "items/def-sqp-linearized-quadratic-subproblem.md",
+      "items/def-sqp-l1-exact-penalty-merit.md",
+      "items/alg-sqp-exhaustive-active-set-qp-solve.md",
+      "items/alg-sqp-second-order-correction.md",
+      "items/thm-sqp-exhaustive-active-set-qp-solve-correct-finite.md"
+    ],
+    "validation": [
+      {
+        "command": "python3 fractions.Fraction scalar witness computation",
+        "exit_code": 0,
+        "result": "D=5; Armijo=9/8; m(tp)=-1. This checks the witness, not a general theorem."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-85.proof-contracts.json --items def-sqp-l1-exact-penalty-merit,alg-sqp-merit-globalization-with-finite-budgets --strict",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 2/2 items checked."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-sqp-l1-exact-penalty-merit.md items/alg-sqp-merit-globalization-with-finite-budgets.md",
+        "exit_code": 0,
+        "result": "2 checked, 0 failing."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-sqp-l1-exact-penalty-merit.md items/alg-sqp-merit-globalization-with-finite-budgets.md",
+        "exit_code": 0,
+        "result": "2 files pass real KaTeX and renderer YAML parsing."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-sqp-l1-exact-penalty-merit.md items/alg-sqp-merit-globalization-with-finite-budgets.md",
+        "exit_code": 0,
+        "result": "2 items, 4 steps, 0 defects; run once after the final item edits."
+      }
+    ],
+    "remaining": [],
+    "repair_complete": true,
+    "sources_consulted": "Local item arguments only; no external text or source URL was consulted. Both repairs use familiar finite-dimensional algebra and direct checking of the supplied interfaces.",
+    "interface_comparison": {
+      "def-sqp-l1-exact-penalty-merit": {
+        "definition_changed": false,
+        "before_statement_sha256": "5fe5286b4b153ce19a0d0df5f5de4a1301d7f075515c1f699c05dfb1cf36dac2",
+        "after_statement_sha256": "5fe5286b4b153ce19a0d0df5f5de4a1301d7f075515c1f699c05dfb1cf36dac2",
+        "reason": "Only Proof 2.1 changed; the entire Definition is unchanged, so no propagation is triggered."
+      },
+      "alg-sqp-merit-globalization-with-finite-budgets": {
+        "definition_changed": true,
+        "before_statement_sha256": "6d85e08a37323b53b9029772352ffeab11d9280a84976ce98147bfc4d1f0e6b6",
+        "after_statement_sha256": "6b928910b017ccc94c72554e263b13945b4771ebe63c832dac79d6ce42d74368",
+        "reason": "Definition step 2 now explicitly passes an auxiliary C2 program with equality map h_E and unchanged f,g,U,B to SOC; it retains the original full-merit test, candidates, caps, flags and returned data."
+      }
+    },
+    "consumer_examinations": [
+      {
+        "id": "thm-sqp-merit-globalization-finite-budget-status",
+        "path": "items/thm-sqp-merit-globalization-finite-budget-status.md",
+        "frontier": true,
+        "disposition": "unaffected",
+        "source_excerpt": "Each optional SOC call consists of the finite operations in [F3], including its zero-row and failure branches, so it also terminates.",
+        "affected_use": "Statement and F1 count at most one SOC and Jmax ordinary tests per penalty; Proof 1.1 uses the finite rank/evaluation/solve structure of the SOC call.",
+        "invalidated_claim": "None: applying SOC to the explicitly reduced auxiliary program preserves one finite call, its zero-row/failure branches and all acceptance/status records.",
+        "minimality": "No mathematical source repair is necessary. Its owning proof-contract quotation of the algorithm Definition needs the ordinary owner metadata synchronization; no Statement changes, so no further hop."
+      },
+      {
+        "id": "ex-sqp-maratos-effect-and-second-order-correction",
+        "path": "items/ex-sqp-maratos-effect-and-second-order-correction.md",
+        "frontier": true,
+        "disposition": "unaffected",
+        "source_excerpt": "[F5] [[alg-sqp-merit-globalization-with-finite-budgets]] tests the full SOC\ncandidate against the Armijo threshold.",
+        "affected_use": "F5 and Proof 3.1 use the returned displacement p+w at the point x+p+w and the full-step threshold psi(x)-sigma*D; Proof 1.2 computes that candidate explicitly.",
+        "invalidated_claim": "None: Dh=2(c,s) is nonzero, so the sole equality is retained and the auxiliary program equals the original one. The repaired call returns the same d=p+w. Its merit change plus sigma*D, divided by s^2, still tends to -1/4.",
+        "minimality": "No mathematical source repair is necessary. Its owning proof-contract quotation of the algorithm Definition needs ordinary owner metadata synchronization; its Statement remains unchanged."
+      },
+      {
+        "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+        "path": "items/alg-ctrl1-finite-budget-transcription-solver-dispatch.md",
+        "frontier": true,
+        "disposition": "unaffected",
+        "source_excerpt": "On `accepted` or `accepted-soc`, use its actual returned accepted point $z^+$, including the SOC displacement when present, and full returned QP multipliers $(\\nu^{QP},\\lambda^{QP})$",
+        "affected_use": "The merit branch supplies an SPD W_k and the original NLP model, calls globalization with rho0,gamma,beta,sigma,R,Jmax, and advances using its actual accepted point and full QP multiplier vectors, retaining E and J.",
+        "invalidated_claim": "None: the auxiliary program is constructed inside globalization from its returned equality basis; it requires no extra builder input. Full original merit, accepted point, multiplier dimensions, E/J and statuses remain the same.",
+        "minimality": "No consumer source edit or additional prerequisite is necessary. Its Definition does not change, so propagation stops at this direct consumer."
+      }
+    ],
+    "page_examination": {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/sqp-active-set-and-augmented-lagrangian-methods.md",
+      "source_excerpt": "uses finite penalty and backtracking budgets with the retained equality basis\nand selected inequality support for the second-order correction.",
+      "disposition": "unaffected",
+      "reason": "The page describes the same selected-row correction and accepted/status records, without claiming omitted nonlinear equalities are corrected. The auxiliary-program clarification preserves that interface."
+    },
+    "published_ledger_updates": [],
+    "outside_consumer_maintenance": [],
+    "unresolved_uncertainty": [],
+    "integration": "Shared lock acquired, current batch-85 contracts reread, only the two assigned contract objects updated, strict selected check passed, lock released. No item statements, manifests, dependencies, pages, shared ledgers, stamps, certificates or round state were otherwise edited. Consumer quote mirrors are routed with the direct frontier effects.",
+    "review_hash_timing": "Each assigned item was mathematically reviewed and its hashes captured with the required review-contexts command before editing another supplier; later contract synchronization did not change either item or its supplier interfaces. Guards were verified without refreshing review-context hashes."
+  }
+}

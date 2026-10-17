@@ -1,0 +1,389 @@
+{
+  "group": "c",
+  "batches": ["28"],
+  "pages_read": [
+    "global-ode-and-density-error",
+    "global-ode-and-density-error-examples"
+  ],
+  "items_read": [
+    "lem-discrete-one-step-error-recurrence-bound",
+    "thm-continuous-flow-log-density-equation",
+    "thm-global-error-from-one-step-defect-and-stability",
+    "thm-divergence-integral-error-with-separate-quadrature",
+    "cor-global-log-density-error-from-state-and-quadrature",
+    "thm-euler-global-state-and-log-density-error",
+    "ex-euler-linear-flow-exact-log-density-update",
+    "ex-exact-state-with-inexact-log-density-quadrature"
+  ],
+  "conventions": [
+    {
+      "convention": "T>0, N≥1, h=T/N, and grid indices run from 0 through N. Empty sums at n=0 equal zero. The recurrence bound treats L=0 separately.",
+      "fixed_by": "lem-discrete-one-step-error-recurrence-bound",
+      "matters_for": [
+        "thm-global-error-from-one-step-defect-and-stability",
+        "thm-divergence-integral-error-with-separate-quadrature",
+        "thm-euler-global-state-and-log-density-error"
+      ]
+    },
+    {
+      "convention": "State errors use the Euclidean norm. Local defects and one-step stability constants are uniform in N and the step index; exact paths, numerical states, and method stages remain in a common compact tube with positive margin.",
+      "fixed_by": "thm-global-error-from-one-step-defect-and-stability",
+      "matters_for": [
+        "thm-divergence-integral-error-with-separate-quadrature",
+        "thm-euler-global-state-and-log-density-error"
+      ]
+    },
+    {
+      "convention": "The initial density is strictly positive and continuous on the open initial-state domain. Flow slices are C¹ diffeomorphisms, the transported density is zero outside their images, and the flow Jacobian determinant is positive.",
+      "fixed_by": "thm-continuous-flow-log-density-equation",
+      "matters_for": [
+        "cor-global-log-density-error-from-state-and-quadrature",
+        "thm-euler-global-state-and-log-density-error",
+        "ex-euler-linear-flow-exact-log-density-update",
+        "ex-exact-state-with-inexact-log-density-quadrature"
+      ]
+    },
+    {
+      "convention": "Along the exact flow, the log-density derivative is minus the state divergence. Endpoint derivatives are one-sided. Countable Choice is assumed for the measure change-of-variables argument.",
+      "fixed_by": "thm-continuous-flow-log-density-equation",
+      "matters_for": [
+        "cor-global-log-density-error-from-state-and-quadrature",
+        "thm-euler-global-state-and-log-density-error",
+        "ex-euler-linear-flow-exact-log-density-update",
+        "ex-exact-state-with-inexact-log-density-quadrature"
+      ]
+    },
+    {
+      "convention": "Q_h is a scalar increment, with state sensitivity bounded by hK_q and exact-start quadrature defect bounded by Dh^(m+1). The state order p and quadrature order m are separate.",
+      "fixed_by": "thm-divergence-integral-error-with-separate-quadrature",
+      "matters_for": [
+        "cor-global-log-density-error-from-state-and-quadrature",
+        "thm-euler-global-state-and-log-density-error"
+      ]
+    },
+    {
+      "convention": "The Euler result assumes a compact convex state set inside a bounded convex open C² domain with bounded derivatives; its conclusion concerns the continuous-flow density accumulator and asserts no adjoint-gradient bound.",
+      "fixed_by": "thm-euler-global-state-and-log-density-error",
+      "matters_for": [
+        "ex-euler-linear-flow-exact-log-density-update",
+        "ex-exact-state-with-inexact-log-density-quadrature"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-discrete-one-step-error-recurrence-bound",
+      "statement": "Let T>0, N∈ℕ with N≥1, h=T/N>0, p∈ℝ with p≥1, and C₀,C,L≥0. If nonnegative e₀,…,e_N satisfy e₀≤C₀h^p and e_(n+1)≤(1+Lh)e_n+Ch^(p+1), then max e_n≤[C₀exp(LT)+C(exp(LT)−1)/L]h^p for L>0, and max e_n≤(C₀+CT)h^p for L=0.",
+      "used_by": ["thm-global-error-from-one-step-defect-and-stability"]
+    },
+    {
+      "id": "thm-global-error-from-one-step-defect-and-stability",
+      "statement": "Under the stated uniform-grid, Euclidean-norm and common compact-tube hypotheses, initial error at most C₀h^p, exact-start defect at most Ch^(p+1), and fiberwise one-step Lipschitz factor 1+Lh imply maximum grid error at most [C₀exp(LT)+C(exp(LT)−1)/L]h^p for L>0, and (C₀+CT)h^p for L=0.",
+      "used_by": [
+        "thm-divergence-integral-error-with-separate-quadrature",
+        "thm-euler-global-state-and-log-density-error"
+      ]
+    },
+    {
+      "id": "thm-continuous-flow-log-density-equation",
+      "statement": "Assume Countable Choice, a jointly C¹ vector field with the stated common flow of C¹ diffeomorphisms, and a positive continuous initial probability density. The displayed transported p_t is a density of the pushforward, det DΦ_t>0, p_t(Φ_t(x₀))=p₀(x₀)/det DΦ_t(x₀)>0, and d/dt log p_t(x(t))=−div_x f(t,x(t)), with one-sided endpoint derivatives.",
+      "used_by": [
+        "cor-global-log-density-error-from-state-and-quadrature",
+        "thm-euler-global-state-and-log-density-error",
+        "ex-euler-linear-flow-exact-log-density-update",
+        "ex-exact-state-with-inexact-log-density-quadrature"
+      ]
+    },
+    {
+      "id": "thm-divergence-integral-error-with-separate-quadrature",
+      "statement": "Under its state-method hypotheses giving maximum state error K_xh^p, initial scalar error C_(ℓ,0)h^r, increment sensitivity hK_q and exact-start quadrature defect Dh^(m+1), the maximum scalar grid error is at most C_(ℓ,0)h^r+TK_qK_xh^p+DT h^m.",
+      "used_by": ["cor-global-log-density-error-from-state-and-quadrature"]
+    },
+    {
+      "id": "cor-global-log-density-error-from-state-and-quadrature",
+      "statement": "Assume Countable Choice and the flow-density hypotheses, set q=−div_x f, and satisfy the separate state and quadrature hypotheses with the stated initial log-density error. Then max_n |ℓ̂_n−log p_(t_n)(x(t_n))|≤C_(ℓ,0)h^r+TK_qK_xh^p+DT h^m.",
+      "used_by": [
+        "thm-euler-global-state-and-log-density-error",
+        "ex-exact-state-with-inexact-log-density-quadrature"
+      ]
+    },
+    {
+      "id": "thm-euler-global-state-and-log-density-error",
+      "statement": "Under Countable Choice, the flow-density hypotheses and the stated bounded C² convex-tube assumptions, Euler state and divergence updates with initial errors C_(x,0)h and C_(ℓ,0)h satisfy ||x_n−x(t_n)||₂≤K_xh and |ℓ̂_n−log p_(t_n)(x(t_n))|≤(C_(ℓ,0)+TL_qK_x+D_qT)h, with the displayed constants and separate L_f=0 branch.",
+      "used_by": [
+        "ex-euler-linear-flow-exact-log-density-update",
+        "ex-exact-state-with-inexact-log-density-quadrature"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+      "used_for": "Continuity of the determinant along the flow Jacobian.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Invertibility of the explicit scalar example flows and their density ratios.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Strict inequality exp(h)>1+h in the linear Euler example.",
+      "opened": true
+    },
+    {
+      "id": "cor-vector-valued-ftc-and-lipschitz-bound",
+      "used_for": "Bounds on variation along exact trajectories in the Euler error proof.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit axiom assumption inherited by the density interpretation.",
+      "opened": true
+    },
+    {
+      "id": "def-determinant-of-a-square-matrix",
+      "used_for": "Finite Leibniz expansion and differentiation of the flow Jacobian determinant.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "The Euclidean state norm.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Finite recurrence sums, including their empty-sum convention.",
+      "opened": true
+    },
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "Exact ODE solutions and one-sided endpoint derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-integer-power",
+      "used_for": "Natural powers in finite recurrence expansions and Euler iterates.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-with-density",
+      "used_for": "Identification of the transported probability measure.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Logarithms of positive densities and inverse-exponential identities.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Exponential notation in recurrence bounds and scalar flows.",
+      "opened": true
+    },
+    {
+      "id": "def-real-power",
+      "used_for": "Positive-step real powers in error estimates.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-of-a-power",
+      "used_for": "Differentiating t²/2 in the time-dependent scalar-flow example.",
+      "opened": true
+    },
+    {
+      "id": "lem-exponential-dominates-one-plus-x",
+      "used_for": "Bounding the recurrence factor 1+Lh by exp(Lh).",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Scaling, summation and telescoping of the geometric recurrence.",
+      "opened": true
+    },
+    {
+      "id": "lem-power-monotone",
+      "used_for": "Comparison of recurrence powers and strict positivity of the linear Euler state error.",
+      "opened": true
+    },
+    {
+      "id": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+      "used_for": "Integral representations of state and log-density increments.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of finite sums and products of Jacobian entries.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Finite product differentiation of determinants and explicit scalar flows.",
+      "opened": true
+    },
+    {
+      "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "used_for": "Identification of the displayed transported density with the pushforward measure under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-c1-dependence-of-solutions-on-initial-data",
+      "used_for": "The variational equation for the flow Jacobian, applied after recentering the common interval at T/2.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Euclidean triangle inequalities in state-error propagation.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Inverse-flow Jacobians, along-trajectory derivatives and explicit example flows.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Verification of the explicit scalar flow solutions.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Converting powers of exp(Lh) to exp(nLh) and computing the linear flow.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Uniform recurrence bounds and the strictly positive Euler state error.",
+      "opened": true
+    },
+    {
+      "id": "thm-intermediate-value",
+      "used_for": "Positivity of a continuous, nonvanishing Jacobian determinant starting at one.",
+      "opened": true
+    },
+    {
+      "id": "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+      "used_for": "The determinant derivative identity and det I=1.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Differentiation of log det DΦ_t.",
+      "opened": true
+    },
+    {
+      "id": "thm-mean-value-inequality-for-total-derivatives",
+      "used_for": "Fiberwise state Lipschitz bounds for f and the divergence integrand.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Converting explicit density ratios into log-density changes.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-inequality-for-the-vector-valued-integral",
+      "used_for": "Bounding Euler state and quadrature defects by integrated derivative bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-power-laws",
+      "used_for": "The identity h^(p+1)=h^p h in the recurrence estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+      "used_for": "Nonvanishing determinants of diffeomorphic flow Jacobians.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "global-ode-and-density-error",
+      "to": "one-step-ode-consistency-and-local-error",
+      "faithful": true,
+      "note": "The cited definition supplies exactly the exact-start defect and 1+Lh stability interface. The global theorem assumes these estimates rather than deriving global convergence from consistency alone."
+    },
+    {
+      "from": "runge-kutta-methods-and-order",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "The nonlinear RKC2 theorem supplies fixed-stage uniform local defect and stability on the stated common tube before applying the global theorem with p=2 and exact initialization."
+    },
+    {
+      "from": "delay-differential-equations-and-history-discretization",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "The retarded Euler proof constructs a fixed auxiliary ODE, establishes mesh-independent defect and stability bounds, and applies the theorem on the aligned horizon T_h; it retains the L_s=0 case."
+    },
+    {
+      "from": "finite-generator-master-equations-and-uniformization",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "The page prerequisite is contextual; its listed items do not directly cite the assigned recurrence or global-error results. The page makes no stronger claim on their authority."
+    },
+    {
+      "from": "implicit-stiff-time-stepping-and-algebraic-error",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "The implicit RK global-order proof separates exact-map local defect and stability from residual perturbations, then invokes the global theorem and finite recurrence with the appropriate order."
+    },
+    {
+      "from": "positive-conservative-production-destruction-integrators",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "Patankar Euler and MPRK22(1) invoke the global theorem conditionally on their positive common tubes and proved local defect/stability bounds, with both zero and positive stability branches retained."
+    },
+    {
+      "from": "renewal-age-and-size-structured-numerical-methods",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "Cohort survival uses the finite recurrence on T_h=NΔt and handles N=0 separately. The smooth finite-volume proof derives its recurrence and controls the mesh ratio before using the first-order specialization."
+    },
+    {
+      "from": "coagulation-fragmentation-and-sectional-population-balance-numerics",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "The finite sectional Euler theorem builds a compact tube containing exact-start Euler outputs, establishes uniform defect and stability, and applies the global theorem with exact initial data."
+    },
+    {
+      "from": "exponential-and-integrating-factor-integrators",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "The exponential-integrator theorem realifies the complex system, constructs the transformed compact tube, applies the global estimate in interaction coordinates, and separately propagates certified action errors."
+    },
+    {
+      "from": "deferred-correction-and-collocation-iterations",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "Collocation and Gauss global-order results use their uniform local defects and one-step stability; finite-sweep and residual-controlled SDC results apply the recurrence to explicitly derived errors."
+    },
+    {
+      "from": "imex-and-operator-splitting-methods",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "IMEX and splitting conclusions preserve selected-branch, common-tube, small-step and stability assumptions. Algebraic and subflow perturbation budgets enter the appropriate one-step recurrence."
+    },
+    {
+      "from": "multirate-and-partitioned-time-integration",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "Frozen-slow Euler and the conditional symmetric-composition result use the finite recurrence with their explicit defect and stability constants; symmetry is not claimed to imply a cubic defect."
+    },
+    {
+      "from": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "The local-C1 analysis applies the recurrence forward and in reversed finite indices. State-only estimates are explicitly distinguished from tangent, adjoint and gradient consistency requirements."
+    },
+    {
+      "from": "interacting-particle-mean-field-and-vortex-blob-error",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "The RK4 particle theorem derives the exact/numerical-start error recurrence under paired-stage tube assumptions and applies the recurrence lemma with p=4, retaining the zero-stability branch."
+    }
+  ]
+}

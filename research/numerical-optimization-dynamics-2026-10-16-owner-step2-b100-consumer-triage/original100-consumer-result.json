@@ -1,0 +1,354 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "100",
+  "role": "scope-reviewer",
+  "label": "owner-ctrl100-original-consumers-r1",
+  "decision": "escalate",
+  "reason": "Completed the omitted consumer checks and refreshed the current batch against the applied 85, 3 and 96 mathematical interfaces. Two substantive source gaps and one local proof clarification remain. No files were changed.",
+  "reviewed_items": [
+    "def-ctrl1-linear-lqr-control-problem",
+    "def-ctrl1-smooth-transcription-data",
+    "lem-ctrl1-measurable-linear-ode-state-map",
+    "lem-ctrl1-control-box-is-weakly-closed",
+    "def-ctrl1-control-mesh-and-piecewise-constant-parameterization",
+    "lem-ctrl1-weak-control-convergence-implies-uniform-state-convergence",
+    "lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence",
+    "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+    "def-ctrl1-lqr-adjoint-equation",
+    "lem-ctrl1-lqr-cost-is-weakly-lower-semicontinuous",
+    "lem-ctrl1-lqr-adjoint-exists-uniquely",
+    "thm-ctrl1-lqr-existence-and-unique-optimal-control",
+    "alg-ctrl1-indirect-shooting-for-the-ode-optimality-system",
+    "lem-ctrl1-lqr-adjoint-identity-and-gradient",
+    "thm-ctrl1-lqr-variational-inequality-and-pointwise-control-branch",
+    "cex-ctrl1-terminal-constraints-break-pointwise-control-vi",
+    "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+    "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent",
+    "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+    "thm-ctrl1-mesh-consistent-lqr-minimizers-converge",
+    "thm-ctrl1-objective-and-control-error-from-consistency-bounds",
+    "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+    "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+    "ex-ctrl1-bounded-actuator-lqr",
+    "ex-ctrl1-chemical-dosing-linear-model",
+    "ex-ctrl1-single-versus-multiple-shooting-two-intervals"
+  ],
+  "reviewed_pages": [
+    "direct-transcription-and-numerical-ode-optimal-control",
+    "direct-transcription-and-numerical-ode-optimal-control-examples"
+  ],
+  "findings": [
+    {
+      "id": "lem-ctrl1-lqr-adjoint-exists-uniquely",
+      "type": "prerequisite",
+      "location": "Facts F1 and proof steps 1.1, 3.1",
+      "reason": "The state supplier proves uniqueness of integral-equation solutions. Step 3.1 applies that uniqueness to an arbitrary absolutely continuous solution of the differential equation without establishing its integral equation. The available supplier thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions requires Countable Choice and Dependent Choice; this lemma assumes only Countable Choice.",
+      "remaining_prerequisite": "A proof under Countable Choice alone that every admitted absolutely continuous differential solution satisfies the integral equation, or an explicit Dependent Choice hypothesis for uniqueness.",
+      "qualification": "This identifies an unsupported inference in the present proof, not a refutation of uniqueness under Countable Choice alone.",
+      "affected_consumers": [
+        "def-ctrl1-lqr-adjoint-equation",
+        "lem-ctrl1-lqr-adjoint-identity-and-gradient",
+        "thm-ctrl1-lqr-variational-inequality-and-pointwise-control-branch",
+        "cex-ctrl1-terminal-constraints-break-pointwise-control-vi",
+        "ex-ctrl1-bounded-actuator-lqr",
+        "direct-transcription-and-numerical-ode-optimal-control"
+      ]
+    },
+    {
+      "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "type": "prerequisite",
+      "location": "Definition, Inputs: derivative evaluator",
+      "reason": "An exact residual at one returned stage vector does not make the stopped stage procedure equal to the implicit solution map on a neighborhood. Switching to implicit differentiation at that point can return a derivative different from the actual finite NLP derivative.",
+      "counterexample": {
+        "data": "One implicit-Euler cell with T=h=1/2, x0=0, f(t,x,u)=x+u, U_c=[-1,1], Omega_x=Omega_u=R, L=0, phi(x)=x, and tau_s>0.",
+        "calculation": "The prescribed seed is K^(0)=u and R(K;u)=K/2-u. For |u|<2 tau_s, Newton returns its initial seed, so the actual returned objective is J_N(u)=u/2 and J_N'(0)=1/2. At u=0 the stage residual is exactly zero and R_K=1/2 is nonsingular. Implicit differentiation instead gives K'(0)=2 and objective derivative 1.",
+        "consequence": "The current exact-root derivative branch can report an incorrect stationarity residual even on a locally constant stopping branch."
+      },
+      "remaining_prerequisite": "The derivative must belong to the actual returned stage map. Implicit differentiation requires neighborhood agreement with the selected exact solution branch.",
+      "affected_consumers": [
+        "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+        "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+        "direct-transcription-and-numerical-ode-optimal-control"
+      ]
+    },
+    {
+      "id": "lem-ctrl1-lqr-cost-is-weakly-lower-semicontinuous",
+      "type": "local",
+      "location": "Facts F2 and proof step 1.1",
+      "reason": "Its uniform-state-convergence supplier requires both the sequence and its weak limit to belong to U_c. The Statement assumes membership only for the sequence. The preceding weak-closedness lemma supplies the missing membership, but this use is absent from the current dependencies and proof.",
+      "remaining_prerequisite": "Invoke lem-ctrl1-control-box-is-weakly-closed before applying F2.",
+      "affected_consumers": [
+        "thm-ctrl1-lqr-existence-and-unique-optimal-control",
+        "thm-ctrl1-mesh-consistent-lqr-minimizers-converge"
+      ]
+    }
+  ],
+  "correction_proposals": [
+    {
+      "path": "items/lem-ctrl1-lqr-adjoint-exists-uniquely.md",
+      "status": "proposed-only",
+      "changes": [
+        {
+          "location": "deps",
+          "instruction": "Retain every existing dependency and add def-dependent-choice and thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions."
+        },
+        {
+          "location": "Statement",
+          "replacement": "Assume the Axiom of Countable Choice.\n\nFor every LQR data set in [[def-ctrl1-linear-lqr-control-problem]] and every admissible control $u$, an adjoint in [[def-ctrl1-lqr-adjoint-equation]] exists. If Dependent Choice is also assumed, this adjoint is unique."
+        },
+        {
+          "location": "Facts F1",
+          "replacement": "[F1] The linear state lemma supplies a unique absolutely continuous solution of its integral equation for $\\dot y=C(t)y+D(t)v(t)$ with $C,D\\in L^\\infty$ and $v\\in L^2$. Under Countable Choice that constructed solution satisfies the differential equation almost everywhere ([[lem-ctrl1-measurable-linear-ode-state-map]], [[def-countable-choice]])."
+        },
+        {
+          "location": "After Facts F2",
+          "replacement": "[F3] Under Countable Choice and Dependent Choice, an absolutely continuous scalar function equals its initial value plus the integral of its almost-everywhere derivative; apply this componentwise ([[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]]).\n\n[A1] Dependent Choice is assumed only for uniqueness ([[def-dependent-choice]])."
+        },
+        {
+          "location": "Proof step 1.1, final sentence",
+          "replacement": "Apply [F1] with $D(s)=I$ and initial value $q(0)=P(x_u(T)-x_T)$ to obtain the unique absolutely continuous integral-equation solution; under Countable Choice it satisfies $\\dot q=Cq+g$ almost everywhere. [F1, F2, given, construct]"
+        },
+        {
+          "location": "Proof step 3.1",
+          "replacement": "3.1 For uniqueness assume [A1]. If $\\widetilde p$ is another adjoint, $\\widetilde q(s)=\\widetilde p(T-s)$ is absolutely continuous, has the same initial value as $q$, and satisfies $\\dot{\\widetilde q}=C\\widetilde q+g$ almost everywhere. By [F3] componentwise, $\\widetilde q(s)=q(0)+\\int_0^s(C(a)\\widetilde q(a)+g(a))\\,da$. Thus it solves the same integral equation as $q$. Uniqueness of that integral equation in [F1] gives $\\widetilde q=q$, hence $\\widetilde p=p$. [A1, F1, F3, step 1.1, step 2.1] ∎"
+        }
+      ],
+      "reason": "Preserves existence under Countable Choice and supplies a complete uniqueness proof under the available stronger premise."
+    },
+    {
+      "path": "items/def-ctrl1-lqr-adjoint-equation.md",
+      "status": "proposed-only",
+      "changes": [
+        {
+          "location": "deps",
+          "instruction": "Retain every existing dependency and add def-dependent-choice."
+        },
+        {
+          "location": "Definition, existence sentence",
+          "replacement": "Existence for each admissible control is established under Countable Choice, and uniqueness under Countable Choice and Dependent Choice, by [[lem-ctrl1-lqr-adjoint-exists-uniquely]]."
+        }
+      ]
+    },
+    {
+      "path": "items/ex-ctrl1-bounded-actuator-lqr.md",
+      "status": "proposed-only",
+      "changes": [
+        {
+          "location": "Facts F2",
+          "replacement": "[F2] Under Countable Choice and Dependent Choice, the backward adjoint exists uniquely and satisfies $-\\dot p=0$ and $p(1)=x(1)-1$ ([[lem-ctrl1-lqr-adjoint-exists-uniquely]], [[def-ctrl1-lqr-adjoint-equation]])."
+        },
+        {
+          "location": "Assumption A1",
+          "replacement": "[A1] Countable Choice and Dependent Choice are assumed only for the adjoint and reduced-gradient verification in step 3.1 ([[def-countable-choice]], [[def-dependent-choice]])."
+        }
+      ]
+    },
+    {
+      "path": "items/alg-ctrl1-runge-kutta-shooting-and-collocation-transcription.md",
+      "status": "proposed-only",
+      "changes": [
+        {
+          "location": "Inputs, replace the three sentences beginning 'Supply a deterministic derivative evaluator' and ending 'neither derivative is available.'",
+          "replacement": "Supply a deterministic derivative evaluator for the actual returned stage maps and resulting finite NLP on an open neighborhood of the queried candidate. On a locally fixed strict stopping branch of the finite stage-iteration procedure, differentiate that finite graph, including when the residual happens to be exactly zero at the queried point. Implicit differentiation as in [[thm-implicit-differentiation-forward-and-adjoint-formulas]] is permitted only when the selected returned stage map is certified to agree on that neighborhood with the exact local solution branch and its residual Jacobian is nonsingular there; an exact residual at the queried point alone does not establish this agreement. Return `derivative-failure` when no derivative of the actual returned map is available."
+        }
+      ],
+      "consumer_disposition": "Preserve the applied seed-domain check, all stage values and statuses, and the AD13 distinction between a finite graph and an exact implicit branch. The dispatcher must consume actual NLP derivatives; the local theorem already assumes regularity of the actual reduced functions."
+    },
+    {
+      "path": "items/lem-ctrl1-lqr-cost-is-weakly-lower-semicontinuous.md",
+      "status": "proposed-only",
+      "changes": [
+        {
+          "location": "deps",
+          "instruction": "Retain every existing dependency and add lem-ctrl1-control-box-is-weakly-closed."
+        },
+        {
+          "location": "After Facts F3",
+          "replacement": "[F4] The pointwise admissible set $\\mathcal U_c$ is weakly sequentially closed ([[lem-ctrl1-control-box-is-weakly-closed]])."
+        },
+        {
+          "location": "Proof step 1.1, replace its first two sentences",
+          "replacement": "1.1 By [F4], the weak limit $u$ belongs to $\\mathcal U_c$, so [F2] applies. Put $e_k=x_{u_k}-x_d$ and $e=x_u-x_d$; their difference $e_k-e=x_{u_k}-x_u$ tends to zero uniformly."
+        },
+        {
+          "location": "Proof step 1.1, justification",
+          "replacement": "[F1, F2, F4, algebra]"
+        }
+      ],
+      "reason": "Leaves the Statement unchanged and explicitly discharges the supplier's limit-membership hypothesis."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-ctrl1-linear-lqr-control-problem",
+      "decision": "accept",
+      "reason": "Its justified_by use requires unique continuous integral-equation states, supplied without choice by the state lemma."
+    },
+    {
+      "id": "def-ctrl1-smooth-transcription-data",
+      "decision": "accept",
+      "reason": "Separates pointwise smooth inputs from equivalence classes and asserts no existence or numerical accuracy."
+    },
+    {
+      "id": "lem-ctrl1-measurable-linear-ode-state-map",
+      "omitted_disposition": true,
+      "decision": "accept",
+      "reason": "The finite contraction construction proves integral-equation existence and uniqueness without choice. The local Lebesgue norm estimate, bound and affine dependence are valid. Only the derivative conclusion invokes Countable Choice."
+    },
+    {
+      "id": "lem-ctrl1-control-box-is-weakly-closed",
+      "decision": "accept",
+      "reason": "Rational support tests and bounded L2 pairings prove closure without importing Hilbert completeness."
+    },
+    {
+      "id": "def-ctrl1-control-mesh-and-piecewise-constant-parameterization",
+      "omitted_disposition": true,
+      "decision": "accept",
+      "reason": "Uses the horizon, quotient controls and compact control set from the LQR definition. Its indirect state well-definedness context requires no a.e. derivative assertion."
+    },
+    {
+      "id": "lem-ctrl1-weak-control-convergence-implies-uniform-state-convergence",
+      "decision": "accept",
+      "reason": "Uses bounded linear integral states, point evaluations and integral-equation equicontinuity; no derivative or choice premise is imported."
+    },
+    {
+      "id": "lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence",
+      "omitted_disposition": true,
+      "decision": "accept",
+      "reason": "Countable Choice explicitly covers interval-step density. Nearest-point separation proves admissibility; the componentwise Lebesgue estimate proves the L2 contraction. The recovery claim excludes unproved preservation of additional constraints."
+    },
+    {
+      "id": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+      "decision": "accept",
+      "reason": "Stage-time admissibility and internal implicit solves are explicit. It promises no root existence, accuracy or derivative property."
+    },
+    {
+      "id": "def-ctrl1-lqr-adjoint-equation",
+      "decision": "escalate",
+      "reason": "The notion itself is valid; its Countable-Choice-only uniqueness sentence requires the proposed qualification or a new proof."
+    },
+    {
+      "id": "lem-ctrl1-lqr-cost-is-weakly-lower-semicontinuous",
+      "decision": "escalate",
+      "reason": "The quadratic argument is sound after explicitly invoking weak closedness before its uniform-state supplier."
+    },
+    {
+      "id": "lem-ctrl1-lqr-adjoint-exists-uniquely",
+      "decision": "escalate",
+      "reason": "Existence is established under Countable Choice. Uniqueness currently omits the differential-to-integral conversion identified above."
+    },
+    {
+      "id": "thm-ctrl1-lqr-existence-and-unique-optimal-control",
+      "decision": "accept",
+      "reason": "Dependent Choice supplies Countable Choice for Hilbert completeness and reflexivity. The lower-semicontinuity supplier needs the local proof clarification; no additional theorem hypothesis is required."
+    },
+    {
+      "id": "alg-ctrl1-indirect-shooting-for-the-ode-optimality-system",
+      "omitted_disposition": true,
+      "decision": "accept",
+      "reason": "Requires interior feedback throughout a certified trajectory tube, differentiates H in x holding control fixed, and supplies a square endpoint map. Its certified numerical endpoint derivative matches the current BVP shooting supplier. Failure and root-tolerance statuses retain their numerical meanings."
+    },
+    {
+      "id": "lem-ctrl1-lqr-adjoint-identity-and-gradient",
+      "decision": "accept",
+      "reason": "Its explicit Countable Choice and Dependent Choice premises cover state derivatives, integration by parts and the proposed adjoint uniqueness premise. No further consumer hypothesis is needed."
+    },
+    {
+      "id": "thm-ctrl1-lqr-variational-inequality-and-pointwise-control-branch",
+      "decision": "accept",
+      "reason": "Carries the gradient premises. The pointwise equivalence is restricted to control-only constraints and supplies its countable selections."
+    },
+    {
+      "id": "cex-ctrl1-terminal-constraints-break-pointwise-control-vi",
+      "decision": "accept",
+      "reason": "Explicit choice premises cover the gradient use; its singleton feasible set and negative pointwise gradient calculation are valid."
+    },
+    {
+      "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "decision": "escalate",
+      "reason": "The applied seed-domain safeguard, sampling, internal solves and separate statuses are present. The exact-root derivative switch remains defective as demonstrated above."
+    },
+    {
+      "id": "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent",
+      "decision": "accept",
+      "reason": "Uses only the same successful deterministic interval values. The derivative correction changes no value or projection argument."
+    },
+    {
+      "id": "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+      "decision": "accept",
+      "reason": "Chosen samples, nonnegative weights, affine constraints and nonsingular exact linear stage solves establish the finite algebraic QP claim. The nonlinear stopped-stage counterexample does not affect this exact linear branch."
+    },
+    {
+      "id": "thm-ctrl1-mesh-consistent-lqr-minimizers-converge",
+      "decision": "accept",
+      "reason": "Its axiom branch covers weak subsequences and recovery density. Uniform objective consistency, feasible recovery and global discrete minimality remain explicit assumptions; no solver status substitutes for them."
+    },
+    {
+      "id": "thm-ctrl1-objective-and-control-error-from-consistency-bounds",
+      "decision": "accept",
+      "reason": "The growth proof uses quadratic expansion and minimality, without adjoint axioms. The state/quadrature discrepancy estimate and recovery comparison constants are valid under their stated sampling and feasibility bounds. Countable Choice is confined to cell-average recovery."
+    },
+    {
+      "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "decision": "accept",
+      "reason": "Refreshed against the actual final 85 source. Both QP parameters are 1/2, the stored-QP certificate boundary is explicit, and SQP updates retain full multipliers and the actual accepted SOC point. Its model builder must receive derivatives of the actual NLP; the transcription supplier needs the proposed correction."
+    },
+    {
+      "id": "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+      "decision": "accept",
+      "reason": "Refreshed against the final dispatcher. Fixed-mesh convergence assumes actual reduced-function C3 regularity and exact full steps. The mesh-family contraction uses explicit residual, inverse, Lipschitz and reconstruction assumptions. Neither branch follows from finite residual stopping alone."
+    },
+    {
+      "id": "ex-ctrl1-bounded-actuator-lqr",
+      "decision": "escalate",
+      "reason": "The exact optimizer proof is choice-free and valid. Facts F2 and A1 need the proposed wording to distinguish adjoint uniqueness from existence; the existing step-3 choice premises already suffice."
+    },
+    {
+      "id": "ex-ctrl1-chemical-dosing-linear-model",
+      "decision": "accept",
+      "reason": "Uses integral-state uniqueness and a directly differentiated classical trajectory. Its midpoint calculation and adaptive-status qualification are valid."
+    },
+    {
+      "id": "ex-ctrl1-single-versus-multiple-shooting-two-intervals",
+      "decision": "accept",
+      "reason": "Compact control bounds, admissible stage times and tableau consistency support the exact interval updates and identical reduced objective."
+    },
+    {
+      "id": "direct-transcription-and-numerical-ode-optimal-control",
+      "decision": "accept",
+      "reason": "The complete page preserves the approved scope and conditional numerical meanings. Its referenced adjoint and transcription suppliers require the identified repairs; the summary itself needs no additional replacement."
+    },
+    {
+      "id": "direct-transcription-and-numerical-ode-optimal-control-examples",
+      "decision": "accept",
+      "reason": "The complete inventory and summary match the three examples; the bounded-actuator example needs only the identified axiom wording repair."
+    }
+  ],
+  "consumer_discovery": {
+    "basis": "Original before_interfaces, current source references, discovery closure, justified_by context and nonlogical links.",
+    "changed_interfaces_checked": 13,
+    "additional_outside_consumers_found": [],
+    "aliases_found_for_changed_interfaces": [],
+    "required_outside_scope_repairs": []
+  },
+  "current96_status": {
+    "mathematical_sources": "Read the canonical finite-graph definition, discrete reverse recursion, current gradient-error theorem, both new local-consistency lemmas and their relevant flow, pairing, recurrence and RK-order suppliers.",
+    "applied_accuracy_branch": "The local C1 and differentiated explicit-RK accuracy branch is present in canonical sources. It derives tangent, nodal-adjoint and gradient errors under its explicit local consistency, smoothness, tube, stability, initial and terminal hypotheses.",
+    "ctrl100_use": "The current transcription retains the narrower conditional weighted-gradient use. It does not infer these accuracy hypotheses from a stopped stage solve or a residual status.",
+    "unapplied_proposals_used_as_premises": false,
+    "mechanical_completion": "Not asserted."
+  },
+  "refresh85_status": {
+    "state": "completed-against-actual-final-source",
+    "checked": [
+      "Final dispatcher Definition",
+      "Current primal-dual supplier parameter ranges and gap conditions",
+      "Current SQP merit and exact-Hessian supplier interfaces",
+      "Local CTRL KKT theorem",
+      "A-page summary",
+      "Root QP-parameter application receipt"
+    ],
+    "outstanding85_refresh": false
+  },
+  "limitations": "The proposed repairs have not been applied. This result does not grant acceptance to the unresolved sources or alter the native review history."
+}

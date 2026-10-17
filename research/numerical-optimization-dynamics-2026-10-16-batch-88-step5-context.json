@@ -1,0 +1,437 @@
+{
+  "group": "ac",
+  "batches": [
+    "88"
+  ],
+  "pages_read": [
+    "iterative-regularization-and-early-stopping",
+    "iterative-regularization-and-early-stopping-examples"
+  ],
+  "items_read": [
+    "alg-landweber-iteration-with-discrepancy-stopping",
+    "alg-golub-kahan-lsqr-with-givens-and-status",
+    "lem-local-lipschitz-derivative-quadratic-remainder",
+    "alg-iteratively-regularized-gauss-newton-step",
+    "thm-lsqr-residual-minimizes-on-krylov-subspace",
+    "lem-landweber-filter-and-residual-identities",
+    "lem-irlgnm-one-step-error-recurrence",
+    "thm-landweber-source-and-noise-error-bounds",
+    "cor-landweber-discrepancy-stopped-convergence-rate",
+    "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+    "alg-anchored-irgnm-with-discrepancy-stopping",
+    "lem-anchored-irgnm-fixed-reference-error-and-residual",
+    "thm-irlgnm-local-source-condition-discrepancy-convergence",
+    "cex-full-lsqr-can-amplify-data-noise",
+    "ex-nonlinear-exponential-kinetics-one-step",
+    "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+    "ex-three-pixel-blur-landweber-reconstruction"
+  ],
+  "conventions": [
+    {
+      "convention": "Landweber starts at x₀=0, uses a nonzero compact operator and 0<ω<2/‖A‖², and tests discrepancy before budget exhaustion. Its infinite recurrence remains defined after a finite procedure returns.",
+      "fixed_by": "alg-landweber-iteration-with-discrepancy-stopping",
+      "matters_for": [
+        "lem-landweber-filter-and-residual-identities",
+        "thm-landweber-source-and-noise-error-bounds",
+        "cor-landweber-discrepancy-stopped-convergence-rate",
+        "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+        "ex-three-pixel-blur-landweber-reconstruction"
+      ]
+    },
+    {
+      "convention": "LSQR uses exact real arithmetic and the physical residual. A breakdown detected during bidiagonalization still permits the current projected solve before the final status tests.",
+      "fixed_by": "alg-golub-kahan-lsqr-with-givens-and-status",
+      "matters_for": [
+        "thm-lsqr-residual-minimizes-on-krylov-subspace",
+        "cex-full-lsqr-can-amplify-data-noise"
+      ]
+    },
+    {
+      "convention": "The retained unanchored update has no anchor penalty term and carries no stopped-convergence assertion.",
+      "fixed_by": "alg-iteratively-regularized-gauss-newton-step",
+      "matters_for": [
+        "lem-irlgnm-one-step-error-recurrence",
+        "ex-nonlinear-exponential-kinetics-one-step",
+        "thm-irlgnm-local-source-condition-discrepancy-convergence"
+      ]
+    },
+    {
+      "convention": "The anchored update includes αₖ(x₀−xₖ). Evaluation and solve failures are explicit outcomes; finite actual runs coincide with the theoretical exact extension only while calls succeed and no stopping test returns.",
+      "fixed_by": "alg-anchored-irgnm-with-discrepancy-stopping",
+      "matters_for": [
+        "lem-anchored-irgnm-fixed-reference-error-and-residual",
+        "thm-irlgnm-local-source-condition-discrepancy-convergence"
+      ]
+    },
+    {
+      "convention": "Complex nonlinear derivatives are complex-linear and use complex increments; segment derivatives use a real parameter.",
+      "fixed_by": "lem-local-lipschitz-derivative-quadratic-remainder",
+      "matters_for": [
+        "lem-irlgnm-one-step-error-recurrence",
+        "lem-anchored-irgnm-fixed-reference-error-and-residual",
+        "thm-irlgnm-local-source-condition-discrepancy-convergence"
+      ]
+    },
+    {
+      "convention": "The inner product is linear in its first argument. Countable Choice supports the adjoint and compact spectral arguments; the general continuous-calculus source-power arguments assume full AC.",
+      "fixed_by": "def-real-and-complex-inner-product-space",
+      "matters_for": [
+        "lem-landweber-filter-and-residual-identities",
+        "thm-landweber-source-and-noise-error-bounds",
+        "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+        "lem-anchored-irgnm-fixed-reference-error-and-residual",
+        "thm-irlgnm-local-source-condition-discrepancy-convergence"
+      ]
+    },
+    {
+      "convention": "Matrix coordinates in the cited matrix-space definition are indexed from zero.",
+      "fixed_by": "def-matrix-space",
+      "matters_for": [
+        "alg-golub-kahan-lsqr-with-givens-and-status"
+      ]
+    },
+    {
+      "convention": "The anchored theorem assumes reference factorization F′(x)=(I+Rₓ)A, κ<1/5, b<q^(ν+1/2), explicit source smallness and a sufficiently large discrepancy factor; it asserts convergence without a nonlinear rate.",
+      "fixed_by": "thm-irlgnm-local-source-condition-discrepancy-convergence",
+      "matters_for": [
+        "thm-irlgnm-local-source-condition-discrepancy-convergence"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds",
+      "statement": "Assume AC. For bounded A between real or complex Hilbert spaces, S=A*A and Tα=(S+αI)⁻¹: ‖αTαS^ν‖≤α^ν for 0<ν≤1; ‖AαTαS^ν‖≤α^(ν+1/2) for 0<ν≤1/2; ‖TαA*‖≤1/(2√α); ‖ATαA*‖≤1; and ‖S^ν‖≤‖A‖^(2ν). No compactness or lower singular-value bound is assumed.",
+      "used_by": [
+        "lem-anchored-irgnm-fixed-reference-error-and-residual",
+        "thm-irlgnm-local-source-condition-discrepancy-convergence"
+      ]
+    },
+    {
+      "id": "lem-anchored-irgnm-fixed-reference-error-and-residual",
+      "statement": "Under its AC, source and reference-factorization hypotheses, a single exact anchored step satisfies (S+αI)e₊=αe₀+A*z with ‖z‖≤c₀δ+d₀‖Ae‖+θ‖Ae₊‖, yielding the displayed residual and error inequalities. For x,u in B, (1−κ)‖A(x−u)‖≤‖F(x)−F(u)‖≤(1+κ)‖A(x−u)‖. The next state need not already lie in B.",
+      "used_by": [
+        "thm-irlgnm-local-source-condition-discrepancy-convergence"
+      ]
+    },
+    {
+      "id": "lem-landweber-filter-and-residual-identities",
+      "statement": "For the associated infinite Landweber path, xₖ=gₖ(T)A*yδ and yδ−Axₖ=rₖ(AA*)yδ, with g₀=0, gₖ(t)=ω∑ⱼ₌₀ᵏ⁻¹(1−ωt)^j and rₖ(t)=(1−ωt)^k. For exact data Ax†, x†−xₖ=rₖ(T)x†.",
+      "used_by": [
+        "thm-landweber-source-and-noise-error-bounds",
+        "cor-landweber-discrepancy-stopped-convergence-rate",
+        "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+        "ex-three-pixel-blur-landweber-reconstruction"
+      ]
+    },
+    {
+      "id": "thm-landweber-source-and-noise-error-bounds",
+      "statement": "Under Countable Choice, compact nonzero A, 0<ω<2/‖A‖² and exact solution x† perpendicular to ker A, exact-data Landweber errors decrease and converge to zero. A source x†=T^s w gives a k^(−s) bias bound for every s>0; noisy and exact paths differ by at most √(2ωk)δ.",
+      "used_by": [
+        "cor-landweber-discrepancy-stopped-convergence-rate"
+      ]
+    },
+    {
+      "id": "lem-local-lipschitz-derivative-quadratic-remainder",
+      "statement": "Assume Countable Choice. For a continuously same-field Fréchet differentiable map on an open subset of real or complex Banach spaces, if F′ is L-Lipschitz on convex K, then ‖F(x)−F(z)−F′(z)(x−z)‖≤(L/2)‖x−z‖² for x,z∈K.",
+      "used_by": [
+        "lem-irlgnm-one-step-error-recurrence"
+      ]
+    },
+    {
+      "id": "alg-golub-kahan-lsqr-with-givens-and-status",
+      "statement": "The exact-arithmetic procedure builds Golub–Kahan bidiagonal projected systems, solves them by Givens rotations and back substitution, and returns explicit discrepancy, budget, stationarity or breakdown statuses.",
+      "used_by": [
+        "thm-lsqr-residual-minimizes-on-krylov-subspace",
+        "cex-full-lsqr-can-amplify-data-noise"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Exponential kinetics model values and positivity.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Monotonicity of positive real powers in the source-power construction.",
+      "opened": true
+    },
+    {
+      "id": "cor-weierstrass-approximation-on-a-closed-interval",
+      "used_for": "Real polynomial approximation used to restrict the complex calculus to real Hilbert spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Choice hypothesis for general continuous-calculus source powers and anchored convergence.",
+      "opened": true
+    },
+    {
+      "id": "def-banach-valued-simple-function-and-integral",
+      "used_for": "Integral of a constant vector over the unit interval.",
+      "opened": true
+    },
+    {
+      "id": "def-bochner-integrable-function",
+      "used_for": "Meaning of the Banach-valued segment integral.",
+      "opened": true
+    },
+    {
+      "id": "def-bounded-linear-operator",
+      "used_for": "Admissible derivative and normal-equation operators.",
+      "opened": true
+    },
+    {
+      "id": "def-compact-linear-operator",
+      "used_for": "Landweber compactness assumptions and the diagonal example.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Explicit choice hypothesis for Hilbert adjoints, compact spectral multipliers and integral suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "LSQR residual norms, transpose identities and finite examples.",
+      "opened": true
+    },
+    {
+      "id": "def-frechet-derivative-between-banach-spaces",
+      "used_for": "Real derivative convention; owned statements explicitly extend the convention to complex-linear derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-hilbert-space",
+      "used_for": "Real and complex Hilbert spaces with Cauchy-sequence completeness.",
+      "opened": true
+    },
+    {
+      "id": "def-hilbert-space-adjoint",
+      "used_for": "Adjoints in iterative updates, normal equations and spectral identities.",
+      "opened": true
+    },
+    {
+      "id": "def-integer-power",
+      "used_for": "Geometric shift sequence in the unanchored algorithm.",
+      "opened": true
+    },
+    {
+      "id": "def-krylov-subspace-of-a-matrix-and-start-vector",
+      "used_for": "LSQR feasible Krylov space, including K₀={0}.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-combination-and-span",
+      "used_for": "Generated LSQR subspaces.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Finite matrix algebra in LSQR and examples.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-space",
+      "used_for": "Matrix domains and coordinate-index convention.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Exact kinetics solution c†=log 2.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Iteration indices and zero budgets.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm",
+      "used_for": "Step-size admissibility and operator bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Norm of the three-pixel blur.",
+      "opened": true
+    },
+    {
+      "id": "def-orthogonality-and-orthogonal-complement",
+      "used_for": "Minimum-norm exact solution and spectral kernel components.",
+      "opened": true
+    },
+    {
+      "id": "def-real-and-complex-inner-product-space",
+      "used_for": "First-slot linearity and complexification conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-real-power",
+      "used_for": "Positive source powers and their zero-base convention.",
+      "opened": true
+    },
+    {
+      "id": "def-square-summable-family-on-an-arbitrary-index-set",
+      "used_for": "Spectral sums and the diagonal ℓ² example.",
+      "opened": true
+    },
+    {
+      "id": "def-transpose-of-a-matrix",
+      "used_for": "Real transpose identities in LSQR.",
+      "opened": true
+    },
+    {
+      "id": "lem-bochner-integral-norm-inequality",
+      "used_for": "Quadratic remainder and fixed-reference residual comparison.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-rank-operators-are-compact",
+      "used_for": "Compactness of bounded diagonal truncations in the semiconvergence example.",
+      "opened": true
+    },
+    {
+      "id": "lem-geometric-sequence-null",
+      "used_for": "Existence of the anchored comparison index and decay of exact-data errors.",
+      "opened": true
+    },
+    {
+      "id": "lem-linearity-of-the-bochner-integral",
+      "used_for": "Subtracting reference linear terms from segment integrals.",
+      "opened": true
+    },
+    {
+      "id": "lem-span-is-the-set-of-linear-combinations",
+      "used_for": "LSQR span interpretation.",
+      "opened": true
+    },
+    {
+      "id": "lem-spectrum-of-a-positive-operator-is-nonnegative",
+      "used_for": "Nonnegative spectrum in the source-power filter proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-taylor-expansion-with-integral-remainder-for-banach-valued-curves",
+      "used_for": "Real-parameter fundamental theorem on a segment, including endpoint regularity.",
+      "opened": true
+    },
+    {
+      "id": "prop-krylov-subspace-is-the-polynomial-image-of-the-start-vector",
+      "used_for": "Identification of the Golub–Kahan span with the normal-equation Krylov space.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Scalar kinetics derivative.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Derivative of exp(−c).",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-functional-calculus-for-bounded-self-adjoint-operators",
+      "used_for": "Source powers and fixed-reference filters on nonzero complex Hilbert spaces; owned proof supplies real complexification and zero-space branches.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Scalar kinetics derivative.",
+      "opened": true
+    },
+    {
+      "id": "thm-hilbert-adjoint-properties",
+      "used_for": "Adjoint products, norm identities and continuity of normal operators.",
+      "opened": true
+    },
+    {
+      "id": "thm-least-squares-solutions-and-normal-equation",
+      "used_for": "Existence and uniqueness of the full-column-rank LSQR projected minimizer.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Lebesgue measure of [0,1] in the constant-vector integral.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-limit-of-compact-operators-is-compact",
+      "used_for": "Compactness of the diagonal forward operator.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-power-continuity-and-derivatives",
+      "used_for": "Positive-power monotonicity and continuity in the source-power lemma.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-power-laws",
+      "used_for": "Scaling of source-power filter bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-theorem-for-compact-self-adjoint-operators",
+      "used_for": "Landweber component expansions, exact-data convergence and discrepancy interpolation.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectrum-is-nonempty-compact-and-norm-bounded",
+      "used_for": "Compact bounded spectrum for the continuous-calculus source-power construction.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-landweber-semiconvergence-on-a-compact-diagonal-operator",
+      "concern": "F3 quotes lem-finite-rank-operators-are-compact as “Every finite-rank operator between Hilbert spaces is compact.” The supplier explicitly requires a bounded linear operator. Without boundedness this fact is false in infinite dimensions: an unbounded algebraic linear functional, followed by inclusion into a fixed one-dimensional subspace, gives a noncompact rank-one linear map. The particular diagonal truncations are bounded, so the example's compactness argument can be retained, but the stated fact overstates its source.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "alg-golub-kahan-lsqr-with-givens-and-status",
+      "concern": "Step 3 rotates matrix entries at positions “(i,i),(i+1,i)” for i=1,…,j, implicitly using one-based row and column labels. The cited def-matrix-space explicitly fixes zero-based coordinates. Declare the local one-based relabeling so these accesses, including the final row, are defined under the stated conventions.",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-golub-kahan-lsqr-with-givens-and-status",
+      "concern": "Step 3 updates x_best=x₀+Vⱼzⱼ before Step 4 defines Vⱼ=[v₁,…,vⱼ]. The intended matrix is immediate, but its definition should precede its first procedural use.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "iterative-regularization-and-early-stopping",
+      "to": "numerical-inverse-problems-and-regularization-error",
+      "faithful": true,
+      "note": "Opened both shifted-normal invertibility and noise-amplification suppliers. Owned uses preserve bounded-operator, common-field, positive-shift and Countable Choice hypotheses; no compactness restriction is incorrectly imposed on these suppliers."
+    },
+    {
+      "from": "iterative-regularization-and-early-stopping",
+      "to": "spectral-regularization-and-parameter-choice",
+      "faithful": true,
+      "note": "Opened the compact Gram, multiplier, filter-definition and ℓ²-completeness suppliers. Landweber uses their compact real/complex setting, kernel conventions and Countable Choice faithfully. The separate finite-rank citation concern is recorded on the owned example."
+    },
+    {
+      "from": "iterative-regularization-and-early-stopping",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "Checked the prerequisite page against the owned LSQR text. This is contextual: no owned item imports its finite-precision or Lanczos convergence conclusions. The LSQR proof instead uses opened published Krylov definitions and finite-dimensional least-squares results."
+    },
+    {
+      "from": "iterative-regularization-and-early-stopping",
+      "to": "preconditioner-algorithms-and-residual-metrics",
+      "faithful": true,
+      "note": "Checked the prerequisite page and owned residual statements in both directions. No preconditioner-quality or flexible-GMRES theorem is imported; LSQR explicitly measures the physical residual."
+    },
+    {
+      "from": "iterative-regularization-and-early-stopping",
+      "to": "gauss-newton-and-levenberg-marquardt-methods",
+      "faithful": true,
+      "note": "Checked the prerequisite page against both nonlinear procedures and the convergence theorem. The owned text does not transfer finite-dimensional stationarity or local Gauss–Newton convergence to the Hilbert-space unanchored step; anchored convergence has its own explicit factorization and smallness hypotheses."
+    }
+  ]
+}

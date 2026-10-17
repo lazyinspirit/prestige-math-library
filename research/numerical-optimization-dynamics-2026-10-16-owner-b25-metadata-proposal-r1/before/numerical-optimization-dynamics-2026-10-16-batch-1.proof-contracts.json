@@ -1,0 +1,2798 @@
+{
+  "version": 1,
+  "scope": [
+    "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "alg-balanced-pairwise-summation",
+    "alg-two-sum-error-free-transform",
+    "alg-two-product-fma-error-free-transform",
+    "alg-kahan-compensated-summation",
+    "alg-neumaier-compensated-summation",
+    "alg-rounded-cholesky-with-failure-status",
+    "alg-scaled-householder-reflector-formation-and-application",
+    "alg-bounded-mixed-precision-iterative-refinement",
+    "thm-balanced-pairwise-summation-error-bound",
+    "lem-binary-rounding-grid-and-ordered-two-sum",
+    "thm-two-sum-error-free-transform",
+    "thm-two-product-fma-error-free-transform",
+    "thm-kahan-and-neumaier-finite-error-identities",
+    "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+    "lem-scaled-householder-step-meets-local-backward-error-premise",
+    "thm-mixed-precision-refinement-error-recurrence-and-floor",
+    "thm-scaled-householder-qr-backward-stability",
+    "thm-computed-full-rank-least-squares-backward-stability",
+    "ex-subnormal-and-overflow-range-failure",
+    "ex-neumaier-recovers-low-order-term-after-cancellation",
+    "ex-rounded-cholesky-two-by-two-residual",
+    "ex-two-sum-recovers-a-rounded-away-low-part",
+    "ex-full-rank-least-squares-normal-equations-versus-qr",
+    "ex-ill-conditioned-design-stability-versus-forward-error",
+    "lem-rounded-triangular-substitution-componentwise-backward-error",
+    "lem-rounded-linear-and-normal-residual-certificates"
+  ],
+  "contracts": {
+    "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition fixes the zero representation and arithmetic behavior."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition applies to the first nonempty scalar operation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition states the range or exceptional-operation convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "alg-balanced-pairwise-summation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "routine-1.1",
+          "claim": "Every loop index ranges over the finite input length or matrix dimensions; any branch test in the definition is a comparison of already supplied finite values.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "routine-2.1",
+          "claim": "At each operation the model [F1] either returns a finite next value or the defined failure status, and every loop has its stated finite bound. Thus execution terminates with the specified output or first failure.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "alg-two-sum-error-free-transform": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "routine-1.1",
+          "claim": "Every loop index ranges over the finite input length or matrix dimensions; any branch test in the definition is a comparison of already supplied finite values.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "routine-2.1",
+          "claim": "At each operation the model [F1] either returns a finite next value or the defined failure status, and every loop has its stated finite bound. Thus execution terminates with the specified output or first failure.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "alg-two-product-fma-error-free-transform": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "routine-1.1",
+          "claim": "Every loop index ranges over the finite input length or matrix dimensions; any branch test in the definition is a comparison of already supplied finite values.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "routine-2.1",
+          "claim": "At each operation the model [F1] either returns a finite next value or the defined failure status, and every loop has its stated finite bound. Thus execution terminates with the specified output or first failure.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "alg-kahan-compensated-summation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "routine-1.1",
+          "claim": "Every loop index ranges over the finite input length or matrix dimensions; any branch test in the definition is a comparison of already supplied finite values.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "routine-2.1",
+          "claim": "At each operation the model [F1] either returns a finite next value or the defined failure status, and every loop has its stated finite bound. Thus execution terminates with the specified output or first failure.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "alg-neumaier-compensated-summation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "routine-1.1",
+          "claim": "Every loop index ranges over the finite input length or matrix dimensions; any branch test in the definition is a comparison of already supplied finite values.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "routine-2.1",
+          "claim": "At each operation the model [F1] either returns a finite next value or the defined failure status, and every loop has its stated finite bound. Thus execution terminates with the specified output or first failure.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "alg-rounded-cholesky-with-failure-status": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "routine-1.1",
+          "claim": "Every loop index ranges over the finite input length or matrix dimensions; any branch test in the definition is a comparison of already supplied finite values.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "routine-2.1",
+          "claim": "At each operation the model [F1] either returns a finite next value or the defined failure status, and every loop has its stated finite bound. Thus execution terminates with the specified output or first failure.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "alg-scaled-householder-reflector-formation-and-application": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Every loop index ranges over the finite input length or matrix dimensions; any branch test in the definition is a comparison of already supplied finite values.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "At each operation the model [F1] either returns a finite next value or the defined failure status, and every loop has its stated finite bound. Thus execution terminates with the specified output or first failure.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "alg-bounded-mixed-precision-iterative-refinement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "routine-1.1",
+          "claim": "Every loop index ranges over the finite input length or matrix dimensions; any branch test in the definition is a comparison of already supplied finite values.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "routine-2.1",
+          "claim": "At each operation the model [F1] either returns a finite next value or the defined failure status, and every loop has its stated finite bound. Thus execution terminates with the specified output or first failure.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "thm-balanced-pairwise-summation-error-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-balanced-pairwise-summation",
+          "source_section": "Definition",
+          "quote": "Input real floating-point x_1,...,x_n, n>=1. Set d=ceil(log_2 n), append 2^d-n exact zero leaves, and round the sum at each internal node of the balanced tree. An unmatched leaf may be copied. If a rounded node fails the operationwise range rule, return range-failure and its tree index; otherwise return the root s-hat. This finite tree terminates after 2^d-1 additions; accuracy is asserted only on success.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, let $u\\ge 0$, let\n$\\delta_0,\\dots,\\delta_{n-1}\\in\\mathbb{R}$ satisfy $|\\delta_i|\\le u$ for every\n$i<n$, and suppose $n u<1$. Then\n\n$$\\prod_{i<n}(1+\\delta_i)=1+\\theta_n\\qquad\\text{with}\\qquad|\\theta_n|\\le\\gamma_n:=\\frac{n u}{1-n u}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Each original leaf contributes along one path of at most d rounded additions; zero padding contributes zero. Expanding the additions by the relative model writes s-hat=sum_i x_i product_{r=1}^{k_i}(1+delta_ir), with k_i<=d and |delta_ir|<=u.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "For k_i=0 the product is 1. Otherwise [F2] bounds its difference from 1 by gamma_{k_i}<=gamma_d. Subtracting the exact sum and applying the triangle inequality proves the result; for d=0 every input is the sole exact leaf.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "thm-two-sum-error-free-transform": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-two-sum-error-free-transform",
+          "source_section": "Definition",
+          "quote": "For real floating-point a,b compute s=fl(a+b), z=fl(s-a), e=fl((a-(s-z))+(b-z)), with every operation separately rounded. Return the first range failure and operation index if an exact intermediate is nonzero subnormal, overflowed, or otherwise invalid; otherwise return (s,e). The fixed sequence terminates. Its general exact-transform claim is a separate theorem; this definition alone does not prove exact recovery.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-binary-rounding-grid-and-ordered-two-sum",
+          "source_section": "Statement",
+          "quote": "For an integer $p\\ge2$, let $\\mathbb B_p=\\{0\\}\\cup\\{\\pm m2^k: m,k\\in\\mathbb Z,\\ 2^{p-1}\\le m<2^p\\}$, with unbounded exponent. Let $R$ round a real number to its nearest member of $\\mathbb B_p$, breaking ties by the even normalized significand; set $R(0)=0$. For $x\\ne0$ put $E(x)$ be the unique integer with $2^{E(x)}\\le|x|<2^{E(x)+1}$, and set $q(x)=2^{E(x)-p+1}$. The following hold.\n\n- $R$ is monotone, odd, and fixes $\\mathbb B_p$. For $R(t)\\ne0$, $|R(t)-t|\\le q(R(t))/2$.\n- If $x,y\\in\\mathbb B_p$, then $\\rho=R(x+y)-(x+y)$ belongs to $\\mathbb B_p$ and $|\\rho|\\le\\min(|x|,|y|)$. If $|R(x+y)|<\\min(|x|,|y|)$, the sum is exact.\n- If $x,y\\in\\mathbb B_p$ have the same sign and $|x|/2\\le|y|\\le2|x|$, then $x-y\\in\\mathbb B_p$ (Sterbenz exact subtraction).\n- If $A,B\\in\\mathbb B_p$ and $|A|\\ge|B|$, then $S=R(A+B)$, $Z=R(S-A)$, $T=R(B-Z)$ satisfy $Z=S-A$ and $T=A+B-S$ exactly.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Let $R$ denote unbounded binary nearest-even rounding from [F3]. On the closed normal range, bounded-format rounding equals $R$: the normal grid is identical, its endpoints are representable, and a point beyond either endpoint cannot beat that endpoint for an exact argument inside the range. Additional subnormal values cannot alter a nearest choice there. At a boundary power of two the normalized even significand gives the same tie choice; zero is exact. All inputs belong to $\\mathbb B_p$. By [F2], induction over the six operations [F1] therefore identifies the actual successful computation with the same sequence using $R$. It suffices to prove its unbounded identity.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Put $\\rho=s-(a+b)$. If $|a|\\ge|b|$, the ordered transform [F3] gives $z=s-a$ and $R(b-z)=-\\rho$ exactly. Consequently $v=R(s-z)=a$, $w=0$, $t=-\\rho$, and $e=-\\rho$. This includes $a=b=0$.",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Suppose $|a|<|b|$. If $|s|<|a|$, the small-rounded-sum assertion [F3] makes $s=a+b$ exact. Then $z=b$, $v=a$, $w=t=e=0$ and $\\rho=0$. For the remaining case $|s|\\ge|a|$, apply the ordered transform to $(s,-a)$: it says $R(z-s)=z-s$ and $R(-a-(z-s))=(s-a)-z$. Oddness therefore gives $v=R(s-z)=s-z$ and $w=R(a-v)=z-(s-a)$ exactly. Writing $\\sigma=z-(s-a)$, we have $w=\\sigma$ and $z=b+\\rho+\\sigma$.",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "In this remaining case, oddness permits simultaneous sign reversal so that $b>0$. Since $|a|<b$, we have $0<a+b<2b$, and monotonicity gives $0<s\\le2b$. Thus $q(s)\\le q(2b)=2q(b)$ and the rounding bound yields $|\\rho|\\le q(b)\\le b/2$, since $p\\ge2$. Also $|\\rho|\\le|a|<b$ by the addition-error bound. Therefore $b/2\\le s-a=b+\\rho<2b$; monotonicity, fixing $b/2$ and $2b$, gives $b/2\\le z\\le2b$. Sterbenz [F3] makes $t=R(b-z)=b-z=-\\rho-\\sigma$ exact. Finally $w+t=-\\rho$ is representable by the addition-error assertion [F3], so $e=R(w+t)=-\\rho$ exactly. Oddness gives the same conclusion before sign reversal.",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The branches in steps 1.2, 2.1, and 2.2 cover every magnitude order and sign, and each gives $e=-\\rho=(a+b)-s$. Step 1.1 transfers this identity to every successful finite-range call, proving $s+e=a+b$. A nonzero subnormal exact intermediate or overflow returns failure under [F2] and is outside the success conclusion; no extra hidden range assumption is used in any successful boundary case.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns two real operands, not an empty indexed family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 includes a=b=0; step 2.1 with a=0 is covered by the ordered pair (s,-a)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no variable input count or dimension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Exact cancellation is in step 1.2 or the small-sum branch of step 2.1; both magnitude orders and all signs are exhausted in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 proves bounded/unbounded rounding agreement on the closed normal range. Step 2.2 uses p>=2, including equality at p=2. Step 3.1 retains the first range-failure exclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice axiom is required; nearest-even rounding is explicitly determined."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-two-product-fma-error-free-transform": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-two-product-fma-error-free-transform",
+          "source_section": "Definition",
+          "quote": "For real floating-point a,b compute p=fl(ab), then e=fma(a,b,-p). Return range-failure if the product overflows, the exact FMA residual is nonzero subnormal or overflow, or another operationwise range condition fails; otherwise return (p,e). The procedure uses one multiplication and one fused multiply-add and terminates. Exact recovery is claimed only if ab-p is representable as zero or a normal number.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "The exact value supplied to the FMA is ab-p. By the representability assumption and correct rounding in [F2], e=ab-p exactly.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Adding p gives p+e=ab. The addition here is in the real-number conclusion, not an extra rounded operation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "thm-kahan-and-neumaier-finite-error-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-kahan-compensated-summation",
+          "source_section": "Definition",
+          "quote": "For real floating-point inputs $x_1,\\ldots,x_n$, initialize s_0=c_0=0. For i=1,...,n compute y_i=fl(x_i-c_{i-1}), s_i=fl(s_{i-1}+y_i), d_i=fl(s_i-s_{i-1}), c_i=fl(d_i-y_i), in that order. Return s_n, or the first range-failure and its operation index. There are 4n rounded operations, so the finite loop terminates. Its data-dependent error identity is proved separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-neumaier-compensated-summation",
+          "source_section": "Definition",
+          "quote": "For real floating-point inputs $x_1,\\ldots,x_n$ initialize s_0=c_0=0. Set t_i=fl(s_{i-1}+x_i). If |s_{i-1}|>=|x_i| set q_i=fl(s_{i-1}-t_i), a_i=fl(q_i+x_i); otherwise set q_i=fl(x_i-t_i), a_i=fl(q_i+s_{i-1}). Then set c_i=fl(c_{i-1}+a_i), s_i=t_i. Return fl(s_n+c_n), or the first range-failure and operation index. The branch test is defined for all real inputs and the loop terminates.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "For Kahan write y_i=x_i-c_{i-1}+epsilon_i^y and s_i=s_{i-1}+y_i+epsilon_i^s. Then d_i=s_i-s_{i-1}+epsilon_i^d and c_i=d_i-y_i+epsilon_i^c=epsilon_i^s+epsilon_i^d+epsilon_i^c.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "In either Neumaier branch exact algebra gives t_i+a_i=s_{i-1}+x_i+epsilon_i^t+epsilon_i^q+epsilon_i^a: substitute q_i=s_{i-1}-t_i in the first branch or q_i=x_i-t_i in the second, including their signed rounding errors. The compensation update adds epsilon_i^c. Summing s_i+c_i-(s_{i-1}+c_{i-1}) telescopes, and the final rounded return adds epsilon^f.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Summing s_i-s_{i-1}=x_i-c_{i-1}+epsilon_i^y+epsilon_i^s and substituting the formula for c_{i-1} cancels epsilon_i^s for i<n and gives the displayed Kahan identity. Bounding the remaining local errors by [F3] yields its stated finite bound.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Taking absolute values and applying [F3] gives exactly uP_i for the four executed operations in iteration i; the final operation contributes u|s_n+c_n|. This proves the displayed Neumaier bound. No step divides by the exact sum, so no uniform relative bound follows.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "thm-rounded-cholesky-componentwise-and-normwise-backward-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-rounded-cholesky-with-failure-status",
+          "source_section": "Definition",
+          "quote": "Input a Hermitian positive-definite matrix $A\\in\\mathbb C^{n\\times n}$, $n\\ge1$, whose real and imaginary components are in the floating-point system, in the convention of [[def-cholesky-factorisation-with-positive-diagonal]]; real matrices are included. Set L-hat=0. For j=1,...,n, form the diagonal sum from rounded real squares of the real and imaginary components of l_jk and rounded additions, then p_j=fl(a_jj-sum_{k<j}|l_jk|^2). If an operation fails or p_j is not positive normal, return failure(j). Set l_jj=fl(sqrt(p_j)); unless this is positive normal return failure(j). For i>j, form c_ij by sequential complex products with six real operations each and componentwise rounded additions; form r_ij=fl(a_ij-c_ij) componentwise and divide each real component by positive l_jj with one rounded real division. Any range failure returns failure(j) with the operation index. If all columns finish, return success(L-hat). The loops are finite. By [[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]], exact positive definiteness ensures an exact factor exists, but does not ensure the rounded algorithm succeeds.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, let $u\\ge 0$, let\n$\\delta_0,\\dots,\\delta_{n-1}\\in\\mathbb{R}$ satisfy $|\\delta_i|\\le u$ for every\n$i<n$, and suppose $n u<1$. Then\n\n$$\\prod_{i<n}(1+\\delta_i)=1+\\theta_n\\qquad\\text{with}\\qquad|\\theta_n|\\le\\gamma_n:=\\frac{n u}{1-n u}.$$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "For one complex product $zw$, write its real exact products as $ac,bd,ad,bc$. Each rounded product has error at most $u$ times its operand product; each final rounded real sum or difference contributes at most $u$ times the sum of the two operand magnitudes. Hence the real-component error is at most $(2u+u^2)(|ac|+|bd|)$ and the imaginary-component error at most $(2u+u^2)(|ad|+|bc|)$. Since $u<1/200$, their Euclidean combination is at most $6u|z||w|$. A sequential sum of at most $n$ complex products contributes at most $\\gamma_n(1+6u)$ times the absolute product sum; adding product errors gives $6u+\\gamma_n(1+6u)=\\frac{(n+6)u}{1-nu}\\le\\gamma_{n+6}\\le g$. Each diagonal term $|\\widehat l_{jk}|^2$ uses two rounded squares and one rounded addition; sequentially summing at most $n$ terms uses at most $4n$ rounded real operations, so the same expansion bounds the diagonal sum error by $\\gamma_{4n}S_j\\le gS_j$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "For $i>j$, let $S_{ij}=\\sum_{k<j}\\widehat l_{ik}\\overline{\\widehat l_{jk}}$, $T_{ij}=\\sum_{k\\le j}|\\widehat l_{ik}||\\widehat l_{jk}|$, and $\\widehat S_{ij}$ be the computed dot product. Step 1.1 gives $|\\widehat S_{ij}-S_{ij}|\\le gT_{ij}$ and $|\\widehat S_{ij}|\\le(1+g)T_{ij}$. The subtraction error is at most $u(|a_{ij}|+|\\widehat S_{ij}|)$, and the two component divisions imply $|\\widehat l_{ij}\\widehat l_{jj}-\\widehat r_{ij}|\\le u|\\widehat r_{ij}|$; also $|\\widehat r_{ij}|\\le(1+u)(|a_{ij}|+|\\widehat S_{ij}|)$. Therefore $|E_{ij}|\\le gT_{ij}+u(2+u)(|a_{ij}|+(1+g)T_{ij})$. Since $|a_{ij}|\\le T_{ij}+|E_{ij}|$, moving $u(2+u)|E_{ij}|$ to the left gives $|E_{ij}|\\le\\frac{g+u(2+u)(2+g)}{1-u(2+u)}T_{ij}$. Here $u\\le g/m$, $g<1/4$, $m\\ge40$, and $u<1/200$, so the numerator coefficient is less than $1.12g$ and the denominator exceeds $0.989$. The quotient is less than $1.14g<100g$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "claim": "On the diagonal put $S_j=\\sum_{k<j}|\\widehat l_{jk}|^2$. Step 1.1 and the pivot subtraction give $p_j=a_{jj}-S_j+\\epsilon_j$ with $|\\epsilon_j|\\le u|a_{jj}|+(g+u(1+g))S_j\\le u|a_{jj}|+1.26gS_j$. The rounded square root has $\\widehat l_{jj}=\\sqrt{p_j}(1+\\delta_j)$, $|\\delta_j|\\le u$, so $|\\widehat l_{jj}^2-p_j|\\le(2u+u^2)p_j\\le3up_j$. From $|a_{jj}|\\le S_j+p_j+|\\epsilon_j|$ we get $(1-u)|a_{jj}|\\le(1+1.26g)S_j+p_j$. Since $u<1/200$ and $g<1/4$, this implies $|a_{jj}|\\le1.33S_j+1.01p_j\\le\\frac{21}{10}(S_j+p_j)$. Also $p_j=\\widehat l_{jj}^2/(1+\\delta_j)^2\\le1.011\\widehat l_{jj}^2$, so $\\frac{21}{10}(S_j+p_j)\\le\\frac{11}{5}(S_j+\\widehat l_{jj}^2)$. Thus $|E_{jj}|\\le u|a_{jj}|+1.26gS_j+3up_j\\le1.32gS_j+0.14g\\widehat l_{jj}^2\\le100g(S_j+\\widehat l_{jj}^2)$, using $u\\le g/40$. Hermitian symmetry gives the corresponding conjugate entries, proving the componentwise estimate.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "By [F5], Cauchy-Schwarz applied to each row-column inner product gives $\\||\\widehat L||\\widehat L|^*\\|_F^2\\le\\sum_{i,j}(\\sum_k|\\widehat l_{ik}|^2)(\\sum_k|\\widehat l_{jk}|^2)=\\|\\widehat L\\|_F^4$. The entrywise bound therefore yields $\\|E\\|_F\\le100g\\|\\widehat L\\|_F^2$, and [F4] gives the spectral bound. For the relative consequence, take traces in $\\widehat L\\widehat L^*=A+E$: $\\|\\widehat L\\|_F^2\\le\\sqrt n\\|A\\|_F+\\sqrt n\\|E\\|_F\\le\\sqrt n\\|A\\|_F+100\\sqrt n\\,g\\|\\widehat L\\|_F^2$. The additional condition gives $\\|\\widehat L\\|_F^2\\le2\\sqrt n\\|A\\|_F$, yielding both stated relative norm bounds.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "lem-scaled-householder-step-meets-local-backward-error-premise": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-scaled-householder-reflector-formation-and-application",
+          "source_section": "Definition",
+          "quote": "Input a real active column $x\\in\\mathbb F^r$ and trailing block $B\\in\\mathbb F^{r\\times q}$, with entries in the floating-point system, $r\\ge1$, and $q\\ge0$. If $x=0$, return the identity action and copy $B$. Otherwise let $s=\\max_i|x_i|>0$, compute $z_i=\\operatorname{fl}(x_i/s)$ and $t=\\operatorname{fl}(\\sum_i z_i^2)$ by sequential rounded operations, then $\\widehat r=\\operatorname{fl}(s\\operatorname{fl}(\\sqrt t))$. Set $\\sigma=1$ when $x_1=0$ and $\\sigma=\\operatorname{sign}(x_1)$ otherwise, $\\widehat\\alpha=-\\sigma\\widehat r$, $v_i=\\operatorname{fl}(x_i-\\widehat\\alpha\\,1_{i=1})$, $w=\\operatorname{fl}(v^Tv)$, and $\\widehat\\tau=\\operatorname{fl}(2/w)$. Compute $d=\\operatorname{fl}(v^TB)$ by sequential rounded products and additions, $p_i=\\operatorname{fl}(\\widehat\\tau v_i)$, $U_{ij}=\\operatorname{fl}(p_i d_j)$, and $\\widehat B_{ij}=\\operatorname{fl}(B_{ij}-U_{ij})$. The complete active output is $C_+=[\\widehat\\alpha e_1\\;\\widehat B]$: write exact zeros below its first diagonal entry. This fixes the multiplication order and includes the column overwrite in the analyzed step. Return the first range failure on any invalid or out-of-range operation; return failure if $t$, $\\widehat r$, or $w$ is not positive normal, or any intermediate is nonfinite. Otherwise return $(v,\\widehat\\tau,\\widehat\\alpha,C_+)$. Store these reflectors to represent the exact orthogonal product; a rounded explicit dense product is a separate output with its own arithmetic error. The exact reflector associated with nonzero stored $v$ is $H(v)=I-2vv^T/(v^Tv)$, using [[def-householder-reflector]] and the QR convention of [[def-full-reduced-and-column-pivoted-computational-qr-factorisations]]. This definition does not assert a local backward-error bound.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F=\\mathbb R$ or $\\mathbb C$.\n\n1. Every Householder reflector $H_v=I-2vv^*$ is orthogonal or unitary.\n2. For every nonzero $z\\in \\mathbb F^m$, there is a Householder reflector $H$\n   such that $Hz=\\alpha e_1$ with $|\\alpha|=\\|z\\|_2$.\n3. For every pair $(a,b)\\in \\mathbb F^2$ not both zero, there is a real or\n   complex Givens transformation $G$ such that\n   $$G\\binom{a}{b}=\\binom{\\alpha}{0}$$\n   with $|\\alpha|=(|a|^2+|b|^2)^{1/2}$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, let $u\\ge 0$, let\n$\\delta_0,\\dots,\\delta_{n-1}\\in\\mathbb{R}$ satisfy $|\\delta_i|\\le u$ for every\n$i<n$, and suppose $n u<1$. Then\n\n$$\\prod_{i<n}(1+\\delta_i)=1+\\theta_n\\qquad\\text{with}\\qquad|\\theta_n|\\le\\gamma_n:=\\frac{n u}{1-n u}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "If $x=0$, the algorithm copies $B$ and the zero column; take $H=I$ and $E=0$. Otherwise put $N=\\|x\\|_2$, $\\alpha_0=-\\sigma N$, $v_0=x-\\alpha_0e_1$ and $V_0=\\|v_0\\|_2\\ge N$. The nonnegative scaled squared-norm sum has each exact squared input multiplied by at most $r+2$ factors $1+\\delta$, $|\\delta|\\le u$: two from scaling and at most $r$ from squaring and subsequent additions. Thus the computed norm divided by $N$ lies between $(1-u)^{r/2+3}$ and $(1+u)^{r/2+3}$ after square root and rescaling. For exponent $p\\ge1$, convexity of $t^p$ on $t>0$ gives $1-(1-u)^p\\le(1+u)^p-1$. Hence $|\\widehat\\alpha-\\alpha_0|\\le e_rN$. Only the first stored coordinate can differ from $v_0$, and subtraction gives $\\|v-v_0\\|_2\\le(e_r+u(2+e_r))N=d_rN$. Success gives nonzero stored $v$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "For nonzero vectors $a,b$, adding and subtracting $a/\\|b\\|$ and using the reverse triangle inequality gives $\\|a/\\|a\\|-b/\\|b\\|\\|\\le2\\|a-b\\|/\\|b\\|$. For unit $z,w$, expanding $zz^T-ww^T=(z-w)z^T+w(z-w)^T$ gives norm at most $2\\|z-w\\|$. Consequently $\\|H(v)-H(v_0)\\|_2\\le8\\|v-v_0\\|/V_0\\le8d_r$. Since $H(v_0)x=\\alpha_0e_1$, the overwritten column differs from $H(v)x$ by at most $(e_r+8d_r)N$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Put $V=\\|v\\|_2$. The rounded positive dot product satisfies $(1-u)^r V^2\\le w\\le(1+u)^r V^2$ by expansion of its products and additions, including exact zeros. The division defining $\\widehat\\tau$ therefore gives $|\\widehat\\tau V^2/2-1|\\le a_r$; the upper deviation dominates the lower by multiplying the positive denominators. A sequential signed dot product differs from its exact value by at most $g_r\\sum_i|v_iB_{ij}|\\le g_rV\\|B_{:j}\\|_2$, by the same factor expansion and [F4].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "claim": "The exact rank-one update has norm at most $2\\|B\\|_F$. Replacing its coefficient by $\\widehat\\tau$, its dot by the computed dot, and its two multiplications by rounded multiplications bounds the update error by $c_r\\|B\\|_F$: successively the nonnegative majorants multiply by $1+a_r$, $1+g_r$, and $(1+u)^2$, then subtract the exact majorant $2$. Final subtraction adds at most $u(\\|B\\|_F+\\|U\\|_F)\\le u(3+c_r)\\|B\\|_F$. Thus $\\|\\widehat B-H(v)B\\|_F\\le((1+u)c_r+3u)\\|B\\|_F$. The same computation applies to any separate block $Y$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "The first-column and remaining-column errors occupy disjoint columns, so their squared Frobenius norms add. Steps 1.2 and 2.2 give $\\|C_+-H(v)C\\|_F\\le\\kappa_r\\|C\\|_F$. Choose $E=H(v)C_+-C$; orthogonality gives the claimed equation and equal error norm. Each displayed coefficient increases with $r$ and has zero constant term and finite first derivative at $u=0$, proving the stated asymptotics.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "thm-mixed-precision-refinement-error-recurrence-and-floor": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-bounded-mixed-precision-iterative-refinement",
+          "source_section": "Definition",
+          "quote": "Input nonsingular real $A\\in\\mathbb R^{n\\times n}$, $n\\ge1$, and $b,x_0\\in\\mathbb R^n$, nonsingular factor matrix $\\widehat A$ formed at factorization precision $u_f$, residual precision $u_r$, solve/update precision $u_w$, finite budget $N\\ge0$, tolerance $\\tau\\ge0$, certified nonnegative constants $\\eta_r,\\xi_r,\\eta_w,\\xi_w$, and a certified contraction upper bound $0\\le q_{\\mathrm{cert}}<1$. Let $x_*=A^{-1}b$ be the unique exact solution. Use the operationwise model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]] separately at $u_f,u_r,u_w$. The exact data $A,b$ are available to residual evaluation at $u_r$; stored iterates and correction updates use $u_w$. At iteration $k$, compute $\\widehat r_k=\\operatorname{fl}_{u_r}(b-Ax_k)$, solve for a correction using the supplied triangular factors of $\\widehat A$ and the recurrence in [[def-forward-and-back-substitution-for-triangular-systems]], then round $x_{k+1}=\\operatorname{fl}_{u_w}(x_k+\\widehat z_k)$. A certificate must bound the residual defect $\\widehat r_k=A(x_*-x_k)+\\delta_{r,k}$ by $\\|\\delta_{r,k}\\|_2\\le\\eta_r(\\|A\\|_2\\|x_k\\|_2+\\|b\\|_2)+\\xi_r$, and the combined solve/update residual-equivalent error is defined by\n$$x_{k+1}=x_k+\\widehat A^{-1}(\\widehat r_k+\\delta_{w,k}),\\qquad \\|\\delta_{w,k}\\|_2\\le\\eta_w\\|\\widehat r_k\\|_2+\\xi_w.$$\nThe certificate must verify that $q\\le q_{\\mathrm{cert}}$, where\n$$q=\\|I-\\widehat A^{-1}A\\|_2+ \\|\\widehat A^{-1}\\|_2((1+\\eta_w)\\eta_r+\\eta_w)\\|A\\|_2.$$\nIf a required range or nonsingularity check fails, a certificate is unavailable, or $q\\le q_{\\mathrm{cert}}<1$ is not certified, return inconclusive. Otherwise test the current residual, return residual-tolerance if its computed norm is at most $\\tau$, and update at most $N$ times; return budget-exhausted after $N$ unsuccessful updates. Return the current iterate with its status. The procedure is finite and does not claim exact termination or unconditional convergence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb{Q}$ with $p\\ge 1$ and let $m,n,q\\in\\mathbb{N}$, with the\ninduced $p$-norms of [[def-induced-matrix-p-norm]].\n\n1. **Compatibility.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and every\n   $x\\in\\mathbb{R}^{n}$,\n   $$\\lVert Ax\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert x\\rVert_p.$$\n2. **Submultiplicativity.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and\n   $B\\in M_{n\\times q}(\\mathbb{R})$,\n   $$\\lVert AB\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert B\\rVert_p.$$\n3. **Normalisation.** For every $n\\ge 1$,\n   $$\\lVert I_n\\rVert_p=1,$$\n   where $I_n$ is the identity matrix of [[def-matrix-product-and-identity-matrix]];\n   at $n=0$ the unique empty matrix $I_0\\in M_0(\\mathbb{R})$ has\n   $\\lVert I_0\\rVert_p=0$, the convention of [[def-induced-matrix-p-norm]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "By the residual-equivalent update certificate, e_{k+1}=e_k-A-hat^{-1}(r-hat_k+delta_w,k). Substituting r-hat_k=Ae_k+delta_r,k gives the exact recurrence.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Since ||x_k||_2<=||x_*||_2+||e_k||_2, the residual certificate yields ||delta_r,k||_2<=eta_r||A||_2||e_k||_2+rho_0 and ||r-hat_k||_2<= (1+eta_r)||A||_2||e_k||_2+rho_0. Therefore ||delta_w,k||_2<=eta_w(1+eta_r)||A||_2||e_k||_2+eta_w rho_0+xi_w.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Apply compatibility and the triangle inequality to the recurrence. The error coefficient is q because eta_r+eta_w(1+eta_r)=(1+eta_w)eta_r+eta_w; the additive term is eta. Thus ||e_{k+1}||_2<=q||e_k||_2+eta.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "If q<1, induction gives ||e_k||_2<=q^k||e_0||_2+eta sum_{j=0}^{k-1}q^j. The finite geometric sum is (1-q^k)/(1-q), proving the assertion.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "thm-scaled-householder-qr-backward-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-scaled-householder-step-meets-local-backward-error-premise",
+          "source_section": "Statement",
+          "quote": "Let $C=[x\\;B]\\in\\mathbb R^{r\\times(q+1)}$, $r\\ge1$, $q\\ge0$, undergo a successful step of [[alg-scaled-householder-reflector-formation-and-application]], with $0<u<1$ and $ru<1$. Define\n$$g_r=\\frac{ru}{1-ru},\\quad e_r=(1+u)^{r/2+3}-1,\\quad d_r=e_r+u(2+e_r),\\quad a_r=\\frac{1+u}{(1-u)^r}-1,$$\n$$c_r=2\\bigl((1+a_r)(1+u)^2(1+g_r)-1\\bigr),\\qquad \\kappa_r=\\max\\{e_r+8d_r,(1+u)c_r+3u\\}.$$\nThere is an exact orthogonal $H$, the identity when $x=0$ and $H(v)=I-2vv^T/(v^Tv)$ otherwise, and a perturbation $E$ such that\n$$H(C+E)=C_+,\\qquad \\|E\\|_F\\le\\kappa_r\\|C\\|_F.$$\nThe constants increase with $r$ and are $O(ru)$ for fixed $r$ as $u\\to0$. The column overwrite is included. For successful application of the same stored $(v,\\widehat\\tau)$ to a separate block $Y$ without an annihilation overwrite, the discrepancy from $H(v)Y$ is at most $((1+u)c_r+3u)\\|Y\\|_F$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb F)$ with $\\mathbb F=\\mathbb R$ or $\\mathbb C$\nand $m\\ge n$.\n\n1. Successive Householder reflectors or Givens transformations can zero the\n   subdiagonal entries column by column and produce a full QR factorisation\n   $A=QR$ and hence a reduced QR factorisation $A=\\widehat Q\\widehat R$.\n2. In dense real arithmetic, Householder QR uses\n   $$2mn^2-\\frac{2}{3}n^3+O(mn)$$\n   scalar operations, while dense Givens QR uses\n   $$3mn^2-n^3+O(mn)$$\n   scalar operations.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Embed each active orthogonal representative into the full row dimension and each local perturbation by zeros outside its active block. All active row counts are at most $m$, so [F1] bounds every local error by $\\kappa_m$ times the current active-block norm, hence by that times the current full-matrix norm. A completed full step therefore has norm at most $1+\\kappa_m$ times the preceding norm. Induction bounds the matrix before step $k$ by $(1+\\kappa_m)^k\\|A\\|_F$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "Transport each local error back through the preceding orthogonal factors. Orthogonal multiplication preserves Frobenius norm, as follows by summing the preserved squared column norms. The transported errors sum to $\\Delta A$, and exact column overwrites make the final lower block zero. Thus [F2] identifies $A+\\Delta A=\\widehat Q\\widehat R$, with $\\|\\Delta A\\|_F\\le\\kappa_m\\sum_{k=0}^{n-1}(1+\\kappa_m)^k\\|A\\|_F=\\beta_Q\\|A\\|_F$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "For the separate vector, [F1] bounds each update discrepancy by $\\kappa_m$ times its current norm. The identical norm induction and orthogonal transport argument bound its total discrepancy from the exact product by $\\kappa_m\\sum_{k=0}^{n-1}(1+\\kappa_m)^k\\|b\\|_2=\\beta_Q\\|b\\|_2$. Since $\\kappa_m=O(u)$ for fixed $m$, the claimed fixed-dimension backward and application bounds follow.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "thm-computed-full-rank-least-squares-backward-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-scaled-householder-qr-backward-stability",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{m\\times n}$, $m\\ge n\\ge1$, undergo successful QR steps of [[alg-scaled-householder-reflector-formation-and-application]], with $mu<1$. Use $\\kappa_m$ from [[lem-scaled-householder-step-meets-local-backward-error-premise]] and set $\\beta_Q=(1+\\kappa_m)^n-1$. The exact orthogonal product represented by the stored reflectors has reduced first $n$ columns $\\widehat Q$, and the computed triangular block is $\\widehat R$. Then\n$$A+\\Delta A=\\widehat Q\\widehat R,\\qquad \\|\\Delta A\\|_F\\le\\beta_Q\\|A\\|_F.$$\nApplying the stored reflectors in the same order to a separate vector $b$, by their rounded rank-one updates without column overwrites, gives a full vector $\\widehat c$ satisfying\n$$\\|\\widehat c-Q_{\\rm full}^Tb\\|_2\\le\\beta_Q\\|b\\|_2.$$\nThe bounds are $O(u)$ for fixed dimensions. An explicitly rounded dense product for $Q_{\\rm full}$ is not asserted exactly orthogonal.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-rounded-triangular-substitution-componentwise-backward-error",
+          "source_section": "Statement",
+          "quote": "Let $R\\in\\mathbb R^{n\\times n}$ be upper triangular with nonzero diagonal, $y\\in\\mathbb R^n$, $n\\ge1$, and $(n+3)u<1$. Compute descending substitution by the sequential rounded dot $s_i=\\operatorname{fl}(\\sum_{j>i}R_{ij}\\widehat x_j)$ (empty sum zero), $t_i=\\operatorname{fl}(y_i-s_i)$, and $\\widehat x_i=\\operatorname{fl}(t_i/R_{ii})$. If every operation succeeds, there is upper triangular $\\Delta R$ with\n$$(R+\\Delta R)\\widehat x=y,\\qquad |\\Delta R|\\le\\gamma_{n+3}|R|,\\qquad \\|\\Delta R\\|_F\\le\\gamma_{n+3}\\|R\\|_F.$$\nIn particular $\\widehat x=0$ forces $y=0$. Forward substitution has the transposed conclusion.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb R)$ with $m\\ge n\\ge 1$ and full column rank.\nLet\n\n$$A=\\widehat Q\\widehat R$$\n\nbe a reduced QR factorisation, with\n$$\\widehat Q^{\\mathsf T}\\widehat Q=I_n$$\nand\n$\\widehat R$ upper triangular. Then:\n\n1. The least-squares minimiser of $\\|Ax-b\\|_2$ is the unique solution of\n   $$\\widehat R x=\\widehat Q^{\\mathsf T}b.$$\n2. The spectral condition number of $\\widehat R$ equals that of $A$, whereas\n   the normal-equation matrix satisfies\n   $$\\kappa_2(A^{\\mathsf T}A)=\\kappa_2(A)^2.$$\n   Thus the QR route solves with a factor of condition $\\kappa_2(A)$ rather\n   than the squared factor $\\kappa_2(A)^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, let $u\\ge 0$, let\n$\\delta_0,\\dots,\\delta_{n-1}\\in\\mathbb{R}$ satisfy $|\\delta_i|\\le u$ for every\n$i<n$, and suppose $n u<1$. Then\n\n$$\\prod_{i<n}(1+\\delta_i)=1+\\theta_n\\qquad\\text{with}\\qquad|\\theta_n|\\le\\gamma_n:=\\frac{n u}{1-n u}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "For stored-reflector evaluation, [F1] bounds $\\|\\widehat y-\\widehat Q^Tb\\|_2$ by $\\beta_Q\\|b\\|_2$. In the explicit admissible-input alternative, dot expansion by [F4] gives coordinate errors at most $\\gamma_m\\sum_i|\\widehat q_{ij}b_i|\\le\\gamma_m\\|b\\|_2$ by Cauchy-Schwarz and unit column norms; combining coordinates gives $\\sqrt n\\gamma_m\\|b\\|_2$. In either case put $z=\\widehat y-\\widehat Q^Tb$ and $\\delta b=\\widehat Qz$. Exact orthonormality gives $\\widehat Q^T\\delta b=z$ and $\\|\\delta b\\|_2=\\|z\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "Apply [F2] to the actual rounded back substitution. It supplies upper triangular $\\Delta R$ with $(\\widehat R+\\Delta R)\\widehat x=\\widehat y$ and the displayed Frobenius estimate. This holds also when $\\widehat x=0$, since the same row identities force $\\widehat y=0$. Combined with step 1.1 this proves the perturbed normal-coordinate equation.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Under the stated nonsingularity hypothesis, $\\widetilde A=\\widehat Q(\\widehat R+\\Delta R)$ has full column rank, and [F3] identifies $\\widehat x$ as its unique least-squares minimizer for $b+\\delta b$. Finally $\\|\\widehat R\\|_F=\\|A+\\Delta_Q\\|_F\\le(1+\\beta_Q)\\|A\\|_F$, and $\\widetilde A-A=\\Delta_Q+\\widehat Q\\Delta R$ gives the stated relative matrix bound. Replacing $\\gamma_{n+3}$ by $20\\gamma_{n+3}$ weakens it.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "ex-subnormal-and-overflow-range-failure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-balanced-pairwise-summation",
+          "source_section": "Definition",
+          "quote": "Input real floating-point x_1,...,x_n, n>=1. Set d=ceil(log_2 n), append 2^d-n exact zero leaves, and round the sum at each internal node of the balanced tree. An unmatched leaf may be copied. If a rounded node fails the operationwise range rule, return range-failure and its tree index; otherwise return the root s-hat. This finite tree terminates after 2^d-1 additions; accuracy is asserted only on success.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "routine-1.1",
+          "claim": "The exact first sum is 2^-1022-(2^-1022+2^-1074)=-2^-1074, a nonzero subnormal; [F1] therefore returns range-failure.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "routine-2.1",
+          "claim": "The exact sum N_max+N_max exceeds the largest finite normal magnitude, so the root triggers the same status under [F2].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "ex-neumaier-recovers-low-order-term-after-cancellation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-neumaier-compensated-summation",
+          "source_section": "Definition",
+          "quote": "For real floating-point inputs $x_1,\\ldots,x_n$ initialize s_0=c_0=0. Set t_i=fl(s_{i-1}+x_i). If |s_{i-1}|>=|x_i| set q_i=fl(s_{i-1}-t_i), a_i=fl(q_i+x_i); otherwise set q_i=fl(x_i-t_i), a_i=fl(q_i+s_{i-1}). Then set c_i=fl(c_{i-1}+a_i), s_i=t_i. Return fl(s_n+c_n), or the first range-failure and operation index. The branch test is defined for all real inputs and the loop terminates.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-kahan-and-neumaier-finite-error-identities",
+          "source_section": "Statement",
+          "quote": "For successfully processed real inputs $x_1,\\ldots,x_n$, let $\\epsilon_i^y,\\epsilon_i^s,\\epsilon_i^d,\\epsilon_i^c$ be the signed errors in the four Kahan operations. Then\n$$s_n-\\sum_{i=1}^n x_i=\\sum_{i=1}^n\\epsilon_i^y+\\epsilon_n^s-\\sum_{i=1}^{n-1}(\\epsilon_i^d+\\epsilon_i^c),$$\nhence\n$$|s_n-\\sum_i x_i|\\le u\\sum_i|x_i-c_{i-1}|+u|s_{n-1}+y_n|+u\\sum_{i<n}(|s_i-s_{i-1}|+|d_i-y_i|).$$\nFor Neumaier, let $\\epsilon_i^t,\\epsilon_i^q,\\epsilon_i^a,\\epsilon_i^c$ be the signed errors at the actually executed operations and $\\epsilon^f$ the final rounding error. Then\n$$\\widehat s-\\sum_i x_i=\\sum_i(\\epsilon_i^t+\\epsilon_i^q+\\epsilon_i^a+\\epsilon_i^c)+\\epsilon^f.$$\nFor each $i$, define $P_i$ by the branch-specific expression below. Then\n$$|\\widehat s-\\sum_i x_i|\\le u\\sum_iP_i+u|s_n+c_n|,$$\nwhere the final term accounts for the last rounded addition. These are finite data-dependent bounds, not uniform relative-error claims.\n\n$$P_i=|s_{i-1}|+|x_i|+ \\begin{cases}|s_{i-1}|+|t_i|,&|s_{i-1}|\\ge|x_i|,\\\\|x_i|+|t_i|,&|s_{i-1}|<|x_i|\\end{cases} +\\begin{cases}|q_i|+|x_i|,&|s_{i-1}|\\ge|x_i|,\\\\|q_i|+|s_{i-1}|,&|s_{i-1}|<|x_i|\\end{cases} +|c_{i-1}|+|a_i|.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "routine-1.1",
+          "claim": "The value 2^-53 is half an ulp at 1, so 1+2^-53 rounds to 1. Ordinary summation then returns 0.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "routine-1.2",
+          "claim": "Neumaier step 2 selects |s_1|>=|x_2| and gives t_2=1,q_2=0,a_2=2^-53,c_2=2^-53; step 3 gives t_3=0,q_3=1,a_3=0,c_3=2^-53.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "routine-2.1",
+          "claim": "The final exact addition 0+2^-53 is 2^-53, which is the exact sum; [F2] records this correction without claiming uniform relative accuracy.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "ex-rounded-cholesky-two-by-two-residual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-rounded-cholesky-with-failure-status",
+          "source_section": "Definition",
+          "quote": "Input a Hermitian positive-definite matrix $A\\in\\mathbb C^{n\\times n}$, $n\\ge1$, whose real and imaginary components are in the floating-point system, in the convention of [[def-cholesky-factorisation-with-positive-diagonal]]; real matrices are included. Set L-hat=0. For j=1,...,n, form the diagonal sum from rounded real squares of the real and imaginary components of l_jk and rounded additions, then p_j=fl(a_jj-sum_{k<j}|l_jk|^2). If an operation fails or p_j is not positive normal, return failure(j). Set l_jj=fl(sqrt(p_j)); unless this is positive normal return failure(j). For i>j, form c_ij by sequential complex products with six real operations each and componentwise rounded additions; form r_ij=fl(a_ij-c_ij) componentwise and divide each real component by positive l_jj with one rounded real division. Any range failure returns failure(j) with the operation index. If all columns finish, return success(L-hat). The loops are finite. By [[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]], exact positive definiteness ensures an exact factor exists, but does not ensure the rounded algorithm succeeds.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A=A^*$ be positive definite in $\\mathbb C^{n\\times n}$. Suppose the rounded Cholesky algorithm succeeds with $\\widehat L$. Put $m=20n+20$ and $g=\\gamma_m=\\frac{m u}{1-m u}$; assume $m u<1/5$. For $E=\\widehat L\\widehat L^*-A$, which is Hermitian, and with $|M|$ denoting entrywise absolute value for matrices,\n$$|E|\\le100g\\,|\\widehat L|\\,|\\widehat L|^*\\quad\\hbox{entrywise},\\qquad \\|E\\|_F\\le100g\\|\\widehat L\\|_F^2,\\qquad \\|E\\|_2\\le100g\\|\\widehat L\\|_F^2.$$\nThus $c_n(u)u=\\frac{100m u}{1-m u}$. If also $100\\sqrt n\\,g\\le1/2$, then\n$$\\|E\\|_F\\le200\\sqrt n\\,g\\|A\\|_F,\\qquad \\|E\\|_2\\le200\\sqrt n\\,g\\|A\\|_F.$$\nThese bounds apply on success only; positive definiteness does not guarantee rounded success.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "routine-1.1",
+          "claim": "The displayed quadratic form proves positive definiteness. The first pivot is $1$, $\\widehat l_{21}=(1/2)/1=1/2$, and the second pivot is $1-(1/2)^2=3/4$ exactly, so the procedure succeeds through the square-root step.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "routine-2.1",
+          "claim": "Every binary64 value is rational, whereas sqrt(3/4)=sqrt(3)/2 is irrational; hence l-hat_22^2!=3/4. Multiplication of the displayed factor gives exactly the stated nonzero E, to which [F2] applies.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim scope, dependencies, step mappings, and boundary cases; this is not proof acceptance."
+      }
+    },
+    "ex-two-sum-recovers-a-rounded-away-low-part": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-two-sum-error-free-transform",
+          "source_section": "Definition",
+          "quote": "For real floating-point a,b compute s=fl(a+b), z=fl(s-a), e=fl((a-(s-z))+(b-z)), with every operation separately rounded. Return the first range failure and operation index if an exact intermediate is nonzero subnormal, overflowed, or otherwise invalid; otherwise return (s,e). The fixed sequence terminates. Its general exact-transform claim is a separate theorem; this definition alone does not prove exact recovery.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-two-sum-error-free-transform",
+          "source_section": "Statement",
+          "quote": "Use a binary floating-point format of precision $p\\ge2$: its normal positive values are $m2^{j-p+1}$ for integers $2^{p-1}\\le m<2^p$ and $e_{\\min}\\le j\\le e_{\\max}$, with their negatives and zero. Any additional representable values below the normal range must belong to the unbounded binary set $\\mathbb B_p$ of [[lem-binary-rounding-grid-and-ordered-two-sum]] (as ordinary binary subnormals do). Round each operation to nearest, ties to even, with the no-underflow success rule of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]].\n\nFor any representable real inputs $a,b$ for which [[alg-two-sum-error-free-transform]] succeeds, its output satisfies\n$$s=\\operatorname{fl}(a+b),\\qquad e=(a+b)-s,\\qquad s+e=a+b$$\nexactly in real arithmetic. No ordering or sign condition on the inputs is required; zeros, exact cancellation, and all successful calls at either normal-range boundary are included.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The spacing above $1$ is $2^{-52}$, so $1+2^{-53}$ is the midpoint between $1$ and $1+2^{-52}$. The even-significand endpoint is $1$; hence $s=1$. The next exact operands give $z=1-1=0$, $v=1-0=1$, $w=1-1=0$, and $t=2^{-53}-0=2^{-53}$. Each is representable, so each subtraction is exact.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The final exact intermediate is $w+t=2^{-53}$, hence $e=2^{-53}$. The first exact sum $1+2^{-53}$ and every later nonzero exact intermediate ($1$ or $2^{-53}$) are normal and within range; the zero intermediates are allowed by [F3]. Thus the call succeeds, its format satisfies [F2], and $s+e=1+2^{-53}=a+b$ exactly, also directly verified by these outputs.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns two real operands, not an empty indexed family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes z=w=0 and step 2.1 checks the exact-zero success rule."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The fixed leading operand a=1 is processed in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The first sum is an exact tie; step 1.1 chooses the even-significand endpoint."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies every nonzero exact intermediate is normal in binary64 and within the declared exponent range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice axiom is required; nearest-even rounding is explicitly determined."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "binary64 six-node TwoSum calculation",
+          "method": "exact finite calculation",
+          "calculation": "RN(1+2^-53)=1; z=0; v=1; w=0; t=2^-53; e=2^-53; all exact nonzero intermediates are normal.",
+          "expected": {
+            "s": "1",
+            "e": "2^-53",
+            "exact_sum": "1+2^-53"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-full-rank-least-squares-normal-equations-versus-qr": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb R)$ with $m\\ge n\\ge 1$ and full column rank.\nLet\n\n$$A=\\widehat Q\\widehat R$$\n\nbe a reduced QR factorisation, with\n$$\\widehat Q^{\\mathsf T}\\widehat Q=I_n$$\nand\n$\\widehat R$ upper triangular. Then:\n\n1. The least-squares minimiser of $\\|Ax-b\\|_2$ is the unique solution of\n   $$\\widehat R x=\\widehat Q^{\\mathsf T}b.$$\n2. The spectral condition number of $\\widehat R$ equals that of $A$, whereas\n   the normal-equation matrix satisfies\n   $$\\kappa_2(A^{\\mathsf T}A)=\\kappa_2(A)^2.$$\n   Thus the QR route solves with a factor of condition $\\kappa_2(A)$ rather\n   than the squared factor $\\kappa_2(A)^2$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-computed-full-rank-least-squares-backward-stability",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{m\\times n}$, $m\\ge n\\ge1$, have full column rank. Successful scaled Householder QR gives the exactly orthonormal reduced representative $\\widehat Q$ and computed triangular $\\widehat R$ with\n$$A+\\Delta_Q=\\widehat Q\\widehat R,\\qquad \\|\\Delta_Q\\|_F\\le\\beta_Q\\|A\\|_F,\\qquad \\beta_Q=(1+\\kappa_m)^n-1,$$\nwhere $\\kappa_m$ is the proved local-step coefficient. Apply the stored reflectors to $b$ by rounded rank-one updates and let $\\widehat y$ be the first $n$ coordinates. Set $\\beta_b=\\beta_Q$. Alternatively, if an explicitly supplied exactly orthonormal $\\widehat Q$ has entries admissible as arithmetic inputs and $\\widehat y=\\operatorname{fl}(\\widehat Q^Tb)$ uses sequential rounded dots, set $\\beta_b=\\sqrt n\\,\\gamma_m$. Solve $\\widehat R\\widehat x=\\widehat y$ by successful rounded back substitution. Suppose $mu<1$ and $\\gamma_{n+3}<1/8$. There exist $\\delta b$ and upper triangular $\\Delta R$ with\n$$(\\widehat R+\\Delta R)\\widehat x=\\widehat Q^T(b+\\delta b),\\qquad \\|\\delta b\\|_2\\le\\beta_b\\|b\\|_2,\\qquad \\|\\Delta R\\|_F\\le\\gamma_{n+3}\\|\\widehat R\\|_F.$$\nIf $\\widehat R+\\Delta R$ is nonsingular, $\\widehat x$ is the unique least-squares solution for $\\widetilde A=\\widehat Q(\\widehat R+\\Delta R)$ and $\\widetilde b=b+\\delta b$. The relative matrix perturbation is at most $\\beta_Q+\\gamma_{n+3}(1+\\beta_Q)$; the right-hand perturbation is at most $\\beta_b$. Consequently the formerly stated weaker factor $20\\gamma_{n+3}$ bound also holds. Success and nonsingularity are explicit hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "routine-1.1",
+          "claim": "The determinant is 2^-27, while direct multiplication gives (A^T A)_22=1+2^-54.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "routine-2.1",
+          "claim": "Since 2^-54<2^-53, the exact entry is strictly below the RNE midpoint above 1 and rounds to 1. The rounded Gram matrix has equal rows and is singular.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "routine-3.1",
+          "claim": "The exact result [F1] acts on the full-rank A without a Gram formation. The computed conclusion [F2] applies only if its separate successful-step hypotheses hold.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim, dependencies, and stated boundary cases. Readiness is escalated for the unresolved proof or supplier identified in the item and batch notes; this is not proof acceptance."
+      }
+    },
+    "ex-ill-conditioned-design-stability-versus-forward-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_{m\\times n}(\\mathbb R)$ with $m\\ge n\\ge 1$ and full column rank.\nLet\n\n$$A=\\widehat Q\\widehat R$$\n\nbe a reduced QR factorisation, with\n$$\\widehat Q^{\\mathsf T}\\widehat Q=I_n$$\nand\n$\\widehat R$ upper triangular. Then:\n\n1. The least-squares minimiser of $\\|Ax-b\\|_2$ is the unique solution of\n   $$\\widehat R x=\\widehat Q^{\\mathsf T}b.$$\n2. The spectral condition number of $\\widehat R$ equals that of $A$, whereas\n   the normal-equation matrix satisfies\n   $$\\kappa_2(A^{\\mathsf T}A)=\\kappa_2(A)^2.$$\n   Thus the QR route solves with a factor of condition $\\kappa_2(A)$ rather\n   than the squared factor $\\kappa_2(A)^2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-computed-full-rank-least-squares-backward-stability",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{m\\times n}$, $m\\ge n\\ge1$, have full column rank. Successful scaled Householder QR gives the exactly orthonormal reduced representative $\\widehat Q$ and computed triangular $\\widehat R$ with\n$$A+\\Delta_Q=\\widehat Q\\widehat R,\\qquad \\|\\Delta_Q\\|_F\\le\\beta_Q\\|A\\|_F,\\qquad \\beta_Q=(1+\\kappa_m)^n-1,$$\nwhere $\\kappa_m$ is the proved local-step coefficient. Apply the stored reflectors to $b$ by rounded rank-one updates and let $\\widehat y$ be the first $n$ coordinates. Set $\\beta_b=\\beta_Q$. Alternatively, if an explicitly supplied exactly orthonormal $\\widehat Q$ has entries admissible as arithmetic inputs and $\\widehat y=\\operatorname{fl}(\\widehat Q^Tb)$ uses sequential rounded dots, set $\\beta_b=\\sqrt n\\,\\gamma_m$. Solve $\\widehat R\\widehat x=\\widehat y$ by successful rounded back substitution. Suppose $mu<1$ and $\\gamma_{n+3}<1/8$. There exist $\\delta b$ and upper triangular $\\Delta R$ with\n$$(\\widehat R+\\Delta R)\\widehat x=\\widehat Q^T(b+\\delta b),\\qquad \\|\\delta b\\|_2\\le\\beta_b\\|b\\|_2,\\qquad \\|\\Delta R\\|_F\\le\\gamma_{n+3}\\|\\widehat R\\|_F.$$\nIf $\\widehat R+\\Delta R$ is nonsingular, $\\widehat x$ is the unique least-squares solution for $\\widetilde A=\\widehat Q(\\widehat R+\\Delta R)$ and $\\widetilde b=b+\\delta b$. The relative matrix perturbation is at most $\\beta_Q+\\gamma_{n+3}(1+\\beta_Q)$; the right-hand perturbation is at most $\\beta_b$. Consequently the formerly stated weaker factor $20\\gamma_{n+3}$ bound also holds. Success and nonsingularity are explicit hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-condition-number-of-a-nonsingular-linear-system",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, let either $p\\in\\mathbb{Q}$ with\n$p\\ge 1$ or $p=\\infty$, and let\n$A\\in\\operatorname{GL}_n(\\mathbb{R})$ be an invertible real matrix\n([[def-invertible-matrix-and-general-linear-group]]), so that the linear system\n$Ax=b$ has the unique solution $x=A^{-1}b$ for every right-hand side\n$b\\in\\mathbb{R}^{n}$. The **condition number of the linear system** (equivalently,\nof the matrix $A$) with respect to the induced $p$-norm of\n[[def-induced-matrix-p-norm]], using its separately defined infinity case when\n$p=\\infty$, is\n\n$$\\kappa_p(A)\\;:=\\;\\lVert A\\rVert_p\\,\\lVert A^{-1}\\rVert_p\\;\\in\\;[1,+\\infty).$$\n\n**The value is at least one and is never infinite.** The inverse $A^{-1}$ is the\nunique two-sided inverse of $A$ ([[def-invertible-matrix-and-general-linear-group]]),\nso $AA^{-1}=I_n$ and $A^{-1}A=I_n$. For rational finite $p$,\nsubmultiplicativity and normalisation are\n[[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]].\nFor $p=\\infty$, the same properties follow directly from the defining\nsupremum: $\\lVert Ax\\rVert_\\infty\\le\\lVert A\\rVert_\\infty\\lVert x\\rVert_\\infty$\nand applying this estimate twice gives submultiplicativity, while\n$I_nx=x$ gives $\\lVert I_n\\rVert_\\infty=1$. Hence in either case\n\n$$1=\\lVert I_n\\rVert_p=\\lVert AA^{-1}\\rVert_p\\le\\lVert A\\rVert_p\\,\\lVert A^{-1}\\rVert_p=\\kappa_p(A).$$\n\nEquivalently, $\\kappa_p(A)$ is the product of the largest factor by which $A$\nstretches a nonzero vector and the largest factor by which $A^{-1}$ stretches\none. Applying the same estimate to $A^{-1}$ in place of $A$ gives\n$\\kappa_p(A^{-1})=\\kappa_p(A)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-induced-matrix-p-norm",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is\n\n$$\\lVert A\\rVert_{p}\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_{p}\\;:\\;x\\in\\mathbb{R}^{n},\\ \\lVert x\\rVert_{p}\\le 1\\,\\Bigr\\}.$$\n\nWhen $n\\ge1$, the following three displayed quantities are the same number:\n\n$$\\lVert A\\rVert_p=\\sup_{\\lVert x\\rVert_p\\le 1}\\lVert Ax\\rVert_p=\\sup_{\\lVert x\\rVert_p=1}\\lVert Ax\\rVert_p=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_p}{\\lVert x\\rVert_p},$$\n\nthe equalities following from positive homogeneity of $\\lVert\\cdot\\rVert_p$\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]], axiom (N2)) and\nthe equality $\\lVert 0\\rVert_p=0$.\n\n**The value is a finite nonnegative real.** For $n\\ge 1$ the norms\n$\\lVert\\cdot\\rVert_p$ and $\\lVert\\cdot\\rVert_2$ are equivalent by\n[[thm-all-norms-on-rn-are-equivalent]], so there is $C>0$ with\n$\\lVert x\\rVert_\\infty\\le C\\lVert x\\rVert_p$ for every $x$. For every $i<m$,\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty\\le C\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_p$,\nso $\\lVert Ax\\rVert_p\\le \\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C\\lVert x\\rVert_p$;\nhence the supremum over the unit ball is at most the finite constant\n$\\bigl(\\sum_{i<m}(\\sum_{j<n}|a_{ij}|)^{p}\\bigr)^{1/p}C$.\n\n**The induced infinity norm is a separate named case.** When $m,n\\ge1$, define\n\n$$\\lVert A\\rVert_\\infty\\;:=\\;\\sup\\Bigl\\{\\,\\lVert Ax\\rVert_\\infty\\;:\\;x\\in\\mathbb R^n,\\ \\lVert x\\rVert_\\infty\\le 1\\,\\Bigr\\}.$$\n\nAs in the rational-$p$ case, positive homogeneity gives\n\n$$\\lVert A\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty\\le 1}\\lVert Ax\\rVert_\\infty=\\sup_{\\lVert x\\rVert_\\infty=1}\\lVert Ax\\rVert_\\infty=\\sup_{x\\ne 0}\\frac{\\lVert Ax\\rVert_\\infty}{\\lVert x\\rVert_\\infty}.$$\n\nThe supremum is finite because for every $i<m$ one has\n$|(Ax)_i|\\le\\sum_{j<n}|a_{ij}|\\,|x_j|\\le\\bigl(\\sum_{j<n}|a_{ij}|\\bigr)\\lVert x\\rVert_\\infty$,\nso\n\n$$\\lVert Ax\\rVert_\\infty\\le\\max_{i<m}\\sum_{j<n}|a_{ij}|\\,\\lVert x\\rVert_\\infty.$$\n\n**At $n=0$ the convention is explicit.** The only element of $\\mathbb{R}^{0}$\nis the zero vector, the only matrix $A\\in M_{m\\times 0}(\\mathbb{R})$ is the\nempty matrix, and the unit-ball definition gives $\\lVert A\\rVert_{p}=0$.\nThe unit sphere and the set of nonzero vectors are empty, so the two ratio\nformulas above are not asserted in this case.\n\nThe induced quantity is a norm on the matrix space $M_{m\\times n}(\\mathbb{R})$:\nfor each rational $p\\ge1$, and likewise for the separately named\n$\\infty$-case when $m,n\\ge1$, separation, absolute homogeneity and the triangle\ninequality follow from the same three axioms of the underlying vector norm\n([[lem-p-norms-are-norms-and-induce-the-published-metrics]]) through the\ndefining supremum. The compatibility with matrix-vector multiplication, the\nsubmultiplicativity and the value on identity matrices are\n[[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]];\nthe explicit value at $p=1$ and the separate $\\infty$-formula are\n[[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "routine-1.1",
+          "claim": "Direct multiplication by A^-1=diag(1,2^40) gives x=A^-1b=(1,0)^T and x-tilde=A^-1b-tilde=(1,1)^T; uniqueness follows from [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "routine-2.1",
+          "claim": "The input difference and x norm are both measured against unit vectors: ||b-tilde-b||_2/||b||_2=2^-40 and ||x-tilde-x||_2/||x||_2=1.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "routine-3.1",
+          "claim": "For every $z$, $\\|Az\\|_2^2=z_1^2+2^{-80}z_2^2\\le\\|z\\|_2^2$, with equality at $e_1$, so [F4] gives $\\|A\\|_2=1$. Likewise $\\|A^{-1}z\\|_2^2=z_1^2+2^{80}z_2^2\\le2^{80}\\|z\\|_2^2$, with equality at $e_2$, hence $\\|A^{-1}\\|_2=2^{40}$. Thus [F3] gives $\\kappa_2(A)=2^{40}$. The exact data calculation proves order-one forward change under a relative $2^{-40}$ right-hand-side perturbation; backward stability [F2] alone is not a forward-accuracy guarantee.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item fixes positive dimension or positive finite input count; an empty instance is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the item states its zero-value behavior or branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the one-dimensional or one-input case follows the stated recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Reviewed at step 1.1; the stated failure, zero, or limiting branch is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no real interval endpoint parameter; operation-range endpoints are handled by the stated range status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no selection from a nonempty set or family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 1 author — not independent approval",
+        "notes": "Author pass checked claim, dependencies, and stated boundary cases. Readiness is escalated for the unresolved proof or supplier identified in the item and batch notes; this is not proof acceptance."
+      }
+    },
+    "lem-rounded-triangular-substitution-componentwise-backward-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, let $u\\ge 0$, let\n$\\delta_0,\\dots,\\delta_{n-1}\\in\\mathbb{R}$ satisfy $|\\delta_i|\\le u$ for every\n$i<n$, and suppose $n u<1$. Then\n\n$$\\prod_{i<n}(1+\\delta_i)=1+\\theta_n\\qquad\\text{with}\\qquad|\\theta_n|\\le\\gamma_n:=\\frac{n u}{1-n u}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\n1. If $L\\in M_n(F)$ is lower triangular with nonzero diagonal, the forward\n   substitution recursion of\n   [[def-forward-and-back-substitution-for-triangular-systems]] produces the\n   unique solution of $Lx=b$.\n2. If $U\\in M_n(F)$ is upper triangular with nonzero diagonal, the backward\n   substitution recursion produces the unique solution of $Ux=b$.\n\nEach solve uses exactly $n$ divisions,\n$\\frac{n(n-1)}{2}$ multiplications, and $\\frac{n(n-1)}{2}$ additions or\nsubtractions, hence $O(n^2)$ scalar operations.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Expand the rounded dot to obtain $s_i=\\sum_{j>i}R_{ij}\\widehat x_j(1+\\theta_{ij})$, with $|\\theta_{ij}|\\le\\gamma_{n-i}$, and use $s_n=0$. Write subtraction and division errors as $\\alpha_i,\\beta_i\\in[-u,u]$. The computed row identity is then $R_{ii}\\widehat x_i/((1+\\alpha_i)(1+\\beta_i))+\\sum_{j>i}R_{ij}\\widehat x_j(1+\\theta_{ij})=y_i$. These identities also hold for zero intermediates by taking the corresponding error zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "Choose $\\Delta R_{ii}=R_{ii}(((1+\\alpha_i)(1+\\beta_i))^{-1}-1)$ and $\\Delta R_{ij}=R_{ij}\\theta_{ij}$ for $j>i$, with zeros below the diagonal. Since $u<1/(n+3)\\le1/4$, all denominators are positive and $|((1+\\alpha_i)(1+\\beta_i))^{-1}-1|\\le(1-u)^{-2}-1\\le3u/(1-3u)=\\gamma_3$; multiplying positive denominators verifies the last inequality. Thus every entry has the claimed bound.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Step 1.1 gives $(R+\\Delta R)\\widehat x=y$, and summing the squared entry bounds gives the Frobenius estimate. If $\\widehat x=0$, the same equation gives $y=0$, including dimension one without a division by $\\|\\widehat x\\|$. Reversing the row order proves the lower-triangular version.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "lem-rounded-linear-and-normal-residual-certificates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-product-of-one-plus-deltas-gives-theta-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb{N}$ with $n\\ge 1$, let $u\\ge 0$, let\n$\\delta_0,\\dots,\\delta_{n-1}\\in\\mathbb{R}$ satisfy $|\\delta_i|\\le u$ for every\n$i<n$, and suppose $n u<1$. Then\n\n$$\\prod_{i<n}(1+\\delta_i)=1+\\theta_n\\qquad\\text{with}\\qquad|\\theta_n|\\le\\gamma_n:=\\frac{n u}{1-n u}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1-1",
+          "step": "1.1",
+          "claim": "For $(a+ib)(c+id)$, each rounded real product has error at most $u$ times its absolute exact value. Each final real addition contributes at most $u(1+u)$ times the two corresponding product magnitudes. The Euclidean norm of the resulting real/imaginary error is at most $2(2u+u^2)|a+ib||c+id|\\le6u|a+ib||c+id|$, since $u<1$. Conjugation is exact. Real products obey this conservative bound as well.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2-1",
+          "step": "2.1",
+          "claim": "In a length-$k$ dot product, each product error from step 1.1 is propagated through at most $k-1$ additions. Expansion of each real component and [F2] bound the dot discrepancy by $[6u+\\gamma_{k-1}(1+6u)]\\sum_i|a_i||x_i|=g_k\\sum_i|a_i||x_i|$, with $\\gamma_0=0$. Combining rows and applying Cauchy-Schwarz gives $\\|\\widehat v-Ax\\|_2\\le g_nFX=V$. Componentwise subtraction has vector error at most $u(\\|\\widehat v\\|_2+Y)$, so the linear residual allowance is $W$. Zeros cause no difficulty in this expansion.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3-1",
+          "step": "3.1",
+          "claim": "Apply step 2.1 to $A^*\\widehat w$ to get $\\|\\widehat z-A^*\\widehat w\\|_2\\le g_mF\\|\\widehat w\\|_2$. Transporting the earlier error through $A^*$ adds at most $FW$. The scalar product error is at most $u\\lambda X$; the last addition adds at most $u(\\|\\widehat z\\|_2+\\|\\widehat l\\|_2)$. Their sum proves $\\rho$. For basis columns, the triangle inequality combines each computed linear residual with its allowance; summing the squared column bounds gives a Frobenius certificate for $I-AB$, which bounds its induced Euclidean norm by Cauchy-Schwarz.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimensions are stated; any empty internal sum is explicitly zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof retains exact zero operations and the stated zero input/cotangent/residual branch; no division by an output norm is used without a separate zero case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The displayed finite scalar recurrences include dimension one and empty inner sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Failure, nonpositive norm, nonsingularity, certificate and strict-branch hypotheses are retained explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no closed-interval parameter; strict arithmetic/certificate bounds and their excluded endpoints are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are finite explicit formulas; no set-theoretic selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No if-and-only-if assertion is made."
+        }
+      ]
+    },
+    "lem-binary-rounding-grid-and-ordered-two-sum": {
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Integer induction gives $2^n\\ge n+1$ for $n\\ge0$: the initial equality is immediate and $2^{n+1}\\ge2(n+1)\\ge n+2$. For $t>0$, [F1] supplies a natural $N>\\max(t,1/t,1)$, so $2^{-N}<t<2^N$. The finite set of integers $j\\in[-N,N]$ with $2^j\\le t$ is nonempty and has a largest element $E$; it satisfies $2^E\\le t<2^{E+1}$. Strict increase of powers of two makes $E$ unique. Thus the stated $E(x)$ exists for every $x\\ne0$. In its binade, the finitely many points $m2^{E-p+1}$, $2^{p-1}\\le m\\le2^p$, bracket $t$; their adjacent neighbors determine its nearest point. Points outside that bracket cannot be nearer, and zero is farther than a positive grid point; negative arguments follow by reflection. On a binade $[2^j,2^{j+1}]$, the nonnegative grid has spacing $2^{j-p+1}$. Its consecutive midpoints partition the real line into nearest-point cells, proving monotonicity and exactness on the grid; reflection preserves the even-significand tie rule, proving oddness. Every nonzero real number has two bracketing grid points, so a nearest point exists and is nonzero for a nonzero argument. The gaps on either side of a grid point $c\\ne0$ are at most $q(c)$, including the half-sized lower gap at a power of two. Its rounding cell therefore gives $|R(t)-t|\\le q(R(t))/2$. Also, for any power of two $h$, every integer multiple $nh$ with $|n|\\le2^p$ is in $\\mathbb B_p$: the integer has at most $p$ significant bits, except $|n|=2^p$, which is a power of two.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Suppose $x,y\\ne0$ and $|x|\\ge|y|$, and put $h=q(y)$. Both operands and their exact sum $t=x+y$ are integer multiples of $h$. Whenever $|t|\\le|y|$, step 1.1 makes $t$ representable because $|y|<2^p h$. In particular, if $|R(t)|<|y|$, monotonicity and the fixed grid points $\\pm|y|$ imply $|t|<|y|$, so $R(t)=t$. Otherwise $|R(t)|\\ge|y|$, hence its binade spacing is an integer multiple of $h$, so $\\rho=R(t)-t$ is an integer multiple of $h$. Since $x$ and $y$ themselves are candidate nearest points, $|\\rho|\\le\\min(|t-x|,|t-y|)=|y|<2^p h$; step 1.1 makes $\\rho$ representable. The zero-operand cases have $\\rho=0$, and interchange handles the other magnitude order. This proves the second assertion, including the strict small-rounded-sum case.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.3",
+          "step": "1.3",
+          "claim": "For the subtraction assertion, change both signs and interchange operands so that $x\\ge y>0$ and $x\\le2y$. Then $0\\le x-y\\le y$, and the grid argument in step 1.2, applied to $x$ and $-y$, shows that $x-y$ is representable. Reversing the transformations proves all same-sign cases; zero gives only the trivial zero pair.",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For the ordered transform, if $A=0$ then $B=0$ and all outputs vanish. Otherwise oddness allows $A>0$. Since $0\\le A+B\\le2A$ and $2A$ is representable, monotonicity gives $0\\le S\\le2A$. If $B\\ge-A/2$, it also gives $S\\ge A/2$; step 1.3 then makes $S-A$ exact. If $B<-A/2$, the operands $A$ and $-B$ meet step 1.3, so $S=A+B$ exactly and $S-A=B$ is exact as well. Thus always $Z=S-A=B+\\rho$, where $\\rho=S-(A+B)$. Step 1.2 makes $-\\rho$ representable, so $T=R(B-Z)=-\\rho=A+B-S$ exactly.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns two real operands, not an empty indexed family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 separately prove zero-operand and A=B=0 cases."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no variable input count or dimension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 includes equal operands and exact cancellation; step 2.1 includes B=-A."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats power-of-two binade endpoints and their half-sized lower gaps; exponents are unbounded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice axiom is required; nearest-even rounding is explicitly determined."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    }
+  }
+}

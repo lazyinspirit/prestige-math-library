@@ -1,0 +1,227 @@
+{
+  "group": "ac",
+  "batches": ["85"],
+  "pages_read": [
+    "sqp-active-set-and-augmented-lagrangian-methods",
+    "sqp-active-set-and-augmented-lagrangian-methods-examples"
+  ],
+  "items_read": [
+    "def-sqp-linearized-quadratic-subproblem",
+    "def-sqp-augmented-lagrangian-equality-and-inequality",
+    "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+    "def-sqp-l1-exact-penalty-merit",
+    "alg-sqp-augmented-lagrangian-multiplier-method",
+    "lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate",
+    "alg-sqp-exhaustive-active-set-qp-solve",
+    "alg-sqp-feasible-working-set-qp-solve",
+    "alg-sqp-second-order-correction",
+    "alg-sqp-exact-hessian-newton-step",
+    "alg-sqp-reduced-bfgs-kkt-step",
+    "alg-sqp-merit-globalization-with-finite-budgets",
+    "thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+    "thm-sqp-working-set-qp-terminates-under-nondegeneracy-anticycling",
+    "thm-sqp-second-order-correction-residual-order",
+    "thm-sqp-exact-hessian-local-quadratic-convergence",
+    "thm-sqp-reduced-bfgs-superlinear-under-dm",
+    "thm-sqp-augmented-lagrangian-local-convergence",
+    "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+    "thm-sqp-merit-globalization-finite-budget-status",
+    "thm-sqp-finite-precision-kkt-residual-certificate-sound",
+    "ex-sqp-engineering-design-active-inequality",
+    "ex-sqp-maratos-effect-and-second-order-correction",
+    "ex-sqp-augmented-lagrangian-penalty-conditioning"
+  ],
+  "conventions": [
+    {
+      "convention": "Inequalities use g_i ≤ 0, multipliers λ_i ≥ 0, and L = f + νᵀh + λᵀg. KKT rows stack equalities before selected inequalities.",
+      "fixed_by": "def-sqp-linearized-quadratic-subproblem",
+      "matters_for": [
+        "alg-sqp-exhaustive-active-set-qp-solve",
+        "alg-sqp-feasible-working-set-qp-solve",
+        "alg-sqp-exact-hessian-newton-step",
+        "ex-sqp-engineering-design-active-inequality"
+      ]
+    },
+    {
+      "convention": "The basic SQP quadratic model has a symmetric positive-definite B; the exact-Hessian active Newton branch instead permits positivity only on the active Jacobian's null space.",
+      "fixed_by": "alg-sqp-exact-hessian-newton-step",
+      "matters_for": [
+        "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+        "thm-sqp-exact-hessian-local-quadratic-convergence",
+        "alg-sqp-reduced-bfgs-kkt-step"
+      ]
+    },
+    {
+      "convention": "The exhaustive solver reduces consistent equality rows to a lexicographically selected independent basis E, enumerates inequality subsets by increasing bit mask, and expands returned multipliers to the original full dimensions.",
+      "fixed_by": "alg-sqp-exhaustive-active-set-qp-solve",
+      "matters_for": [
+        "thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+        "alg-sqp-merit-globalization-with-finite-budgets"
+      ]
+    },
+    {
+      "convention": "Dρ is the negative change in the linear objective-plus-penalty model, without a quadratic objective term. Ordinary Armijo acceptance requires ψρ(x+tp) ≤ ψρ(x) − σtDρ.",
+      "fixed_by": "def-sqp-l1-exact-penalty-merit",
+      "matters_for": [
+        "alg-sqp-merit-globalization-with-finite-budgets",
+        "ex-sqp-maratos-effect-and-second-order-correction"
+      ]
+    },
+    {
+      "convention": "The PHR update is ν⁺ = ν + ρh(x⁺), λ⁺ = [λ + ρg(x⁺)]₊; the inner residual is the norm of the augmented-Lagrangian x-gradient before the multiplier update.",
+      "fixed_by": "def-sqp-augmented-lagrangian-equality-and-inequality",
+      "matters_for": [
+        "alg-sqp-augmented-lagrangian-multiplier-method",
+        "thm-sqp-augmented-lagrangian-local-convergence",
+        "ex-sqp-augmented-lagrangian-penalty-conditioning"
+      ]
+    },
+    {
+      "convention": "Finite-precision certification first verifies exact representability of the intended K and b. Certificate norms use exact norms or certified upward bounds; arithmetic failure returns no certificate.",
+      "fixed_by": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+      "matters_for": [
+        "thm-sqp-finite-precision-kkt-residual-certificate-sound"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+      "statement": "Let A ∈ R^{r×n} have full row rank, where 0 ≤ r ≤ n, and let H ∈ R^{n×n} be symmetric and positive definite on ker A. Then K = [[H,Aᵀ],[A,0]] is nonsingular. The zero-row case r=0 is allowed.",
+      "used_by": [
+        "alg-sqp-exhaustive-active-set-qp-solve",
+        "alg-sqp-feasible-working-set-qp-solve",
+        "alg-sqp-exact-hessian-newton-step",
+        "alg-sqp-reduced-bfgs-kkt-step",
+        "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+        "thm-sqp-exact-hessian-local-quadratic-convergence",
+        "thm-sqp-reduced-bfgs-superlinear-under-dm"
+      ]
+    },
+    {
+      "id": "lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate",
+      "statement": "For a positive-definite quadratic objective on a nonempty polyhedron with independent equality rows, there is a unique minimizer and a KKT tuple whose equality rows together with active inequality rows having positive multipliers are linearly independent.",
+      "used_by": [
+        "thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+        "thm-sqp-working-set-qp-terminates-under-nondegeneracy-anticycling"
+      ]
+    },
+    {
+      "id": "thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+      "statement": "For the SQP subproblem with B symmetric positive definite, the exact exhaustive algorithm terminates after finitely many subset tests. It returns QP-infeasible exactly when the polyhedron is empty; otherwise it returns the unique global minimizer, full multiplier vectors, and retained equality basis E and inequality support J.",
+      "used_by": [
+        "ex-sqp-engineering-design-active-inequality",
+        "alg-sqp-merit-globalization-with-finite-budgets"
+      ]
+    },
+    {
+      "id": "alg-sqp-second-order-correction",
+      "statement": "For full-row-rank A = Dc_A(x) and c_A(x)+Ap=0, compute w = −Aᵀ(AAᵀ)⁻¹c_A(x+p) and return p+w as the corrected displacement. For zero rows, return p with w=0.",
+      "used_by": [
+        "alg-sqp-merit-globalization-with-finite-budgets",
+        "thm-sqp-second-order-correction-residual-order",
+        "ex-sqp-maratos-effect-and-second-order-correction"
+      ]
+    },
+    {
+      "id": "thm-sqp-exact-hessian-local-quadratic-convergence",
+      "statement": "At a C² KKT pair satisfying LICQ, strict complementarity, SOSC, and a locally Lipschitz active-KKT Jacobian, exact full steps with the correct active set, started sufficiently close, are well-defined and converge quadratically. This does not assert L1 merit-line-search acceptance.",
+      "used_by": [
+        "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+        "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+        "thm-fem-control-active-set-sqp-finite-budget-certificate"
+      ]
+    },
+    {
+      "id": "thm-sqp-finite-precision-kkt-residual-certificate-sound",
+      "statement": "A successful certified return satisfies ‖Kẑ−b‖₂ ≤ η, and for z_* = K⁻¹b also ‖ẑ−z_*‖₂ ≤ ‖K⁻¹‖₂η. Accuracy requires additional conditioning information and a small certificate.",
+      "used_by": [
+        "alg-fem-control-active-set-sqp-with-finite-residual-status",
+        "thm-fem-control-active-set-sqp-finite-budget-certificate"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of the positive-dimensional unit sphere and closed bounded feasible quadratic sublevels in the QP existence proof; the zero-dimensional case is handled separately.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Attainment of the positive quadratic-form minimum on the unit sphere and attainment of the objective minimum on a nonempty compact sublevel.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Euclidean inner products and norms, including the empty-vector convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "The linear-term bound establishing coercivity of the strictly convex quadratic objective.",
+      "opened": true
+    },
+    {
+      "id": "cor-second-order-taylor-expansion-with-the-hessian",
+      "used_for": "Componentwise second-order expansion in the SOC residual argument; the proof additionally derives uniform estimates from its explicit second-derivative bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-implicit-function-theorem",
+      "used_for": "The local C¹ augmented-Lagrangian stationary branch and its derivative. The application uses positive primal and multiplier dimensions; the zero-multiplier case is separated.",
+      "opened": true
+    },
+    {
+      "id": "def-forward-and-back-substitution-for-triangular-systems",
+      "used_for": "The descending triangular-solve recursion in the finite-precision KKT procedure.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-sqp-merit-globalization-with-finite-budgets",
+      "concern": "Definition step 2 says: “If it returns a correction w and x+p+w ∈ U” and tests that point. However, alg-sqp-second-order-correction explicitly returns “p+w as the corrected displacement,” rather than w. The caller therefore lacks the stated correction-vector return interface; interpreting its returned vector as w adds p twice. For h(z)=z−1, f(z)=z²/2, x=0 and B=1, the QP step is p=1 and the correction is zero, so SOC returns displacement 1. With ρ=2 and σ=1/4, Dρ=2: the intended candidate 1 has merit 1/2 and passes the threshold 3/2, whereas the caller's literal candidate 2 has merit 4 and fails. Specify whether the supplier returns the correction vector or the corrected displacement, and make the caller consistent. The Maratos example's F5 use also needs checking against that resolved interface.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "sqp-active-set-and-augmented-lagrangian-methods",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Read the page and the operationwise model, Householder procedure/local bound, computed QR least-squares theorem, and rounded-residual supplier. SQP retains arithmetic-success hypotheses, the explicit QR coefficients, certified bound evaluation, and the distinction between residual and forward error."
+    },
+    {
+      "from": "sqp-active-set-and-augmented-lagrangian-methods",
+      "to": "inequality-kkt-duality-and-optimality-certificates",
+      "faithful": true,
+      "note": "Read the page and actual geometry, residual, Farkas, and convex-KKT suppliers. Inequality signs, multiplier signs, Farkas orientation, and convex sufficiency hypotheses are preserved. The QP lemma independently proves existence of multipliers rather than inferring necessity from convex sufficiency."
+    },
+    {
+      "from": "sqp-active-set-and-augmented-lagrangian-methods",
+      "to": "nonconvex-line-search-and-inexact-newton-methods",
+      "faithful": true,
+      "note": "The exact and reduced-BFGS convergence proofs use the actual local forcing-rate theorem with an invertible root Jacobian and locally Lipschitz derivative. Reduced BFGS explicitly assumes the uniform forcing bound below one and proves forcing tends to zero; neither use claims eventual globalization acceptance."
+    },
+    {
+      "from": "sqp-active-set-and-augmented-lagrangian-methods",
+      "to": "bfgs-and-limited-memory-quasi-newton-methods",
+      "faithful": true,
+      "note": "The optional update uses the cited BFGS formula only for positive curvature and otherwise retains B. Its SPD argument matches the supplier. Reduced Dennis–Moré behavior and inverse bounds are explicit additional hypotheses, not consequences asserted from unconstrained BFGS convergence."
+    },
+    {
+      "from": "direct-transcription-and-numerical-ode-optimal-control",
+      "to": "sqp-active-set-and-augmented-lagrangian-methods",
+      "faithful": true,
+      "note": "Read the downstream page, finite dispatcher, and local transcription theorem. The dispatcher retains the actual accepted point and full QP multipliers. The local theorem supplies C³ regularity of the actual NLP functions, hence the required local Lipschitz Jacobian, together with LICQ, strict complementarity, SOSC, identified active set, and close start. The supplier's SOC interface concern is recorded separately."
+    },
+    {
+      "from": "finite-element-pde-constrained-optimization",
+      "to": "sqp-active-set-and-augmented-lagrangian-methods",
+      "faithful": true,
+      "note": "Read the downstream page, finite SQP wrapper, and certificate theorem. The wrapper forwards exact-storage admission and uses the QR vector itself. It distinguishes the linear step-equation residual from the nonlinear next-point residual, equating them only for affine KKT maps, and keeps exact local convergence conditional on the SQP hypotheses."
+    }
+  ]
+}

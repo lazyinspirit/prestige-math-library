@@ -1,0 +1,155 @@
+Bindel, Fall 2012
+Matrix Computations (CS 6210)
+
+Week 15: Monday, Nov 27–Wednesday, Nov 29
+
+Tridiagonal reduction redux
+
+Consider the problem of computing eigenvalues of a symmetric matrix A that
+is large and sparse. Using the “grail” code in LAPACK, we can compute all
+the eigenvalues of an n-by-n tridiagonal matrix in O(n) time; but the usual
+Householder-based algorithm to reduce A to tridiagonal form costs O(n3).
+Though it’s possible to maintain sparsity in some cases, it is not altogether
+straightforward. So let’s see if we can try something different.
+What we want is an orthogonal matrix Q such that AQ = QT, where
+
+T =
+
+
+
+
+
+α1
+β1
+β1
+α2
+β2
+β2
+α3
+...
+...
+...
+βn−1
+βn−1
+αn
+
+
+
+
+.
+
+Writing column j of this matrix equation gives us
+
+Aqj = βj−1qj−1 + αjqj + βjqj+1,
+
+where αj = qT
+j Aqj and βj−1 = qT
+j−1Aqj. If we rearrange this slightly, we have
+
+rj+1 = Aqj −qjαj −qj−1βj−1
+= Aqj −(qjqT
+j )Aqj −(qj−1qT
+j−1)Aqj
+qj+1 = rj+1/βj.
+
+That is, qj+1 is exactly what we compute if we orthogonalize Aqj against the
+vectors qj and qj−1. Note that Aqj is automatically orthogonal to q1, . . . , qj−2,
+since qT
+k Aqj = Tkj is zero for k < j −1.
+This process of incrementally producing an orthonormal basis by mul-
+tiplying the last vector by A and orthogonalizing the result against what
+came before gives us the basic Lanczos procedure. If we start with q1 = e1,
+the Lanczos procedure will give us the same T matrix1 as the Householder
+
+1 Well, almost the same T matrix. Note that the off-diagonal elements βj might be
+positive or negative in the Householder tridiagonalization, but they are always positive in
+the Lanczos algorithm. However, the two T matrices satisfy a similarity relation with a
+diagonal matrix whose diagonal entries are ±1.
+
+
+Bindel, Fall 2012
+Matrix Computations (CS 6210)
+
+algorithm, at least in exact arithmetic. But while a step in the Householder
+algorithm costs O(n2), the cost of a Lanczos step is a matrix-vector multiply
+(which may cost less than O(n2) if A is sparse) followed by O(n) work in dot
+products and gaxpy operations. Also, note that the Lanczos step requires
+only a few vectors of intermediate storage.
+In exact arithmetic, we could iterate until we found βk = 0, which would
+correspond to having an invariant subspace spanned by {q1, . . . , qk}. Except
+for very special choices of starting vectors, though, this would happen only
+for k = n.
+
+Partial tridiagonalization and Krylov subspaces
+
+What happens when we run only a few steps of the Lanczos iteration? After
+m steps, we have computed m columns of Q and m rows of T; and there is
+some hope that we might be able to use the leading m-by-m subblock of T
+(i.e. the block Rayleigh quotient with the first m columns of Q) in order to
+extract some useful information about the spectrum of A. The reason why we
+might have such a hope is that we notice that the Krylov subspace spanned
+by q1, . . . , qm is also spanned by the first m iterates of a power method:
+
+Km(A, q1) = span{q1, q2, . . . , qm} = span{q1, Aq1, . . . , Am−1q1}.
+
+As we have previously discussed, the power basis is not a particularly useful
+basis for numerical computations, but it is useful for thinking about Krylov
+subspaces. In particular, because it contains the mth vector produced by
+power iteration starting from q1, we expect that the largest Ritz value as-
+sociated with Km(A, q1) (i.e. the largest magnitude eigenvalue of the block
+Rayleigh quotient (Q:,1:m)TAQ:,1:m) will be at least as large as the Rayleigh
+quotient estimate produced by m steps of power iteration.
+Of course, the Krylov subspace Km(A, q1) has a lot more information
+than just the vector from step m of a power iteration. For example, notice
+that if σ is any shift, then Km(A −σI, q1) = Km(A, q1); that is, Krylov
+subspaces are shift invariant. This is relevant because adding a shift to A
+can change which of the exterior eigenvalues in the spectrum is dominant. So
+if λ1 ≥λ2 ≥. . . ≥λn, then we expect to be able to extract good estimates to
+λ1 and λn from a few steps of Lanczos iteration under the assumption that
+power iteration with certain shifted matrices converges sufficiently fast.
+
+
+Bindel, Fall 2012
+Matrix Computations (CS 6210)
+
+Lanczos in inexact arithmetic
+
+The observant reader will have noticed something unsettling about the ba-
+sic Lanczos iteration:
+at the heart of the Lanczos iteration is a Gram-
+Schmidt orthogonalization step, which we said in our discussion of QR fac-
+torizations could become numerically unstable. In particular, when rk+1 =
+(A −αk)qk + qk−1βk−1 is “small” (i.e. when βk is small relative to ∥A∥),
+cancellation may cause the computed vector to consisty mostly of roundoff,
+so that it is no longer orthogonal to the preceding vectors.
+But a small
+value of βk corresponds exactly to convergence to a good approximation to
+an invariant subspace! Thus, in floating point arithmetic, the basic Lanczos
+iteration tends to run reasonably well until convergence, at which point it ef-
+fectively restarts with a “random” starting vector which is made up primarily
+of roundoff error. So we get convergence of the Ritz values of the computed
+T to the first few exterior eigenvalues; and then more “ghost” Ritz values
+converge to the first few exterior eigenvalues; and we continue on in this fash-
+ion for as long as we are willing to let things run. This not state of affairs is
+not entirely satisfactory, but we can fix it by re-orthogonalization: that is, we
+improve the orthogonality of the computed basis by explicitly orthogonaliz-
+ing Aqk against vectors to which it should already be orthonormal in exact
+arithmetic. One approach is to use complete orthogonalization: compute Aqj
+and then orthogonalize against all previous vectors (e.g. by a sequence of
+Householder transformations). This is expensive in terms of storage (and
+data movement) and arithmetic, but it does work. A less expensive solution,
+selective orthogonalization, involves orthogonalizing against converged eigen-
+vector estimates (Ritz vectors). In the interest of time, we will not discuss
+reorthogonalization further. If you are interested, though — or if you are
+interested in any number of other aspects of Lanczos iteration that we skip
+over — I recommend looking at Parlett’s book The Symmetric Eigenvalue
+Problem. Stewart’s book Matrix Algorithms, Vol 2: Eigensystems also has a
+nice treatment.
+Why did numerical instability not arise when we discussed CG? It’s there
+behind the scenes, and it explains why running CG for n steps generally
+does not provide the exact answer to a linear system. But nobody sensible
+uses CG as a direct method anyhow; it is used as an iterative solver, and it
+turns out that the loss of orthogonality does not matter that much to the
+CG iteration continuing to make progress.
+
+

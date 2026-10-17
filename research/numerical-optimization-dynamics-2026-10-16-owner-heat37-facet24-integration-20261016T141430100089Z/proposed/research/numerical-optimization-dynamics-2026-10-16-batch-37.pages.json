@@ -1,0 +1,454 @@
+[
+  {
+    "order": 2358,
+    "id": "parabolic-finite-difference-methods",
+    "kind": "A",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Parabolic finite-difference methods",
+    "companion": "parabolic-finite-difference-methods-examples",
+    "requires": [
+      "heat-equation-maximum-principles-duhamel-and-smoothing",
+      "linear-scheme-stability-and-lax-equivalence",
+      "elliptic-finite-difference-methods"
+    ],
+    "items": [
+      {
+        "id": "def-parabolic-theta-finite-difference-scheme",
+        "kind": "definition",
+        "title": "Fully discrete θ heat finite-difference scheme",
+        "statement": "Define the centered heat operator and fully discrete θ update on finite periodic rectangular grids in any dimension and on two-dimensional rectangular Dirichlet grids, with positive directional diffusivities, finite time levels, exact initial data, and explicit boundary rows. The grid-norm stability convention is distinguished from common-space stability.",
+        "deps": [
+          "def-rectangular-grid-and-dirichlet-flux-stencil"
+        ],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations: A brief introduction to the theory of finite difference approximation of PDEs",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§5.1–§5.6.3, PDF pp. 54–75: heat model; θ-update, initial and Dirichlet rows; consistency residual; Fourier stability; θ-scheme L2 and maximum-principle conditions; global error identity. The note states the multidimensional maximum principle but omits its proof; that proof is supplied locally."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Numerical Methods for Partial Differential Equations, Lecture 14: Von Neumann Stability Analysis (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c7c12accea163007923288875bb42604_MIT18_336S09_lec14.pdf",
+              "locator": "Complete 3-page PDF, pp. 1–3: explicit heat amplification factor and sharp μ=1/2 condition, Crank–Nicolson amplification and unconditional Fourier stability, and the two-dimensional explicit heat CFL condition. This is a periodic/infinite-grid Fourier note, not a finite-boundary stability proof."
+            },
+            {
+              "title": "Martin Krosche, Hermann G. Matthies, and Oliver Kayser-Herold, Lecture Notes: Introduction to PDEs and Numerical Methods, Technical University Braunschweig, Revision 1.1 (2008), hosted by University of Jyväskylä",
+              "url": "https://users.jyu.fi/~rainom/pde/material/pde1en.pdf",
+              "locator": "Chapter 1 §§1.4.4–1.4.6, PDF pp. 21–29: θ time discretization, finite-grid matrix form, von Neumann stability, highest resolvable frequency, and separate stability/positivity conditions. The Fourier section assumes an infinite grid; no boundary claim is imported."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+        "kind": "lemma",
+        "title": "Symmetry and positivity of the rectangular Dirichlet heat operator",
+        "statement": "On a finite two-dimensional rectangular zero-Dirichlet grid, the centered heat operator with positive directional diffusivities is self-adjoint and positive semidefinite in the weighted grid L2 inner product; its quadratic form is the sum of the two directional edge energies.",
+        "deps": [
+          "def-parabolic-theta-finite-difference-scheme",
+          "def-rectangular-grid-and-dirichlet-flux-stencil",
+          "lem-discrete-summation-by-parts-poincare-and-inverse-bound"
+        ],
+        "dependency_level": 2,
+        "strategy": "Apply the actual rectangular summation-by-parts identity separately to the horizontal and vertical terms; zero boundary values remove every boundary term.",
+        "axiom_base": "No choice axiom is used; proofs use finite grid sums, finite-dimensional linear algebra, Fourier modes on finite periodic grids, and pointwise Taylor estimates.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations: A brief introduction to the theory of finite difference approximation of PDEs",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§5.1–§5.6.3, PDF pp. 54–75: heat model; θ-update, initial and Dirichlet rows; consistency residual; Fourier stability; θ-scheme L2 and maximum-principle conditions; global error identity. The note states the multidimensional maximum principle but omits its proof; that proof is supplied locally."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Numerical Methods for Partial Differential Equations, Lecture 14: Von Neumann Stability Analysis (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c7c12accea163007923288875bb42604_MIT18_336S09_lec14.pdf",
+              "locator": "Complete 3-page PDF, pp. 1–3: explicit heat amplification factor and sharp μ=1/2 condition, Crank–Nicolson amplification and unconditional Fourier stability, and the two-dimensional explicit heat CFL condition. This is a periodic/infinite-grid Fourier note, not a finite-boundary stability proof."
+            },
+            {
+              "title": "Martin Krosche, Hermann G. Matthies, and Oliver Kayser-Herold, Lecture Notes: Introduction to PDEs and Numerical Methods, Technical University Braunschweig, Revision 1.1 (2008), hosted by University of Jyväskylä",
+              "url": "https://users.jyu.fi/~rainom/pde/material/pde1en.pdf",
+              "locator": "Chapter 1 §§1.4.4–1.4.6, PDF pp. 21–29: θ time discretization, finite-grid matrix form, von Neumann stability, highest resolvable frequency, and separate stability/positivity conditions. The Fourier section assumes an infinite grid; no boundary claim is imported."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-periodic-heat-difference-amplification-symbol",
+        "kind": "lemma",
+        "title": "Periodic heat-stencil eigenvalues and θ amplification factor",
+        "statement": "On a finite periodic rectangular d-grid, each discrete Fourier mode has heat-operator eigenvalue 4Σ_j κ_j h_j^−2 sin^2(πℓ_j/N_j), and the homogeneous θ update multiplies that mode by (1−(1−θ)Δtλ)/(1+θΔtλ).",
+        "deps": [
+          "def-parabolic-theta-finite-difference-scheme",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-double-angle-and-power-reduction-identities",
+          "lem-orthogonality-of-characters-on-a-finite-cyclic-group",
+          "lem-finite-sum-reindexing-and-fubini",
+          "thm-finite-fourier-inversion"
+        ],
+        "dependency_level": 2,
+        "strategy": "Substitute each finite Fourier mode into the stencil and update, then verify that the finite Fourier modes form an orthogonal basis.",
+        "axiom_base": "No choice axiom is used; proofs use finite grid sums, finite-dimensional linear algebra, Fourier modes on finite periodic grids, and pointwise Taylor estimates.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations: A brief introduction to the theory of finite difference approximation of PDEs",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§5.1–§5.6.3, PDF pp. 54–75: heat model; θ-update, initial and Dirichlet rows; consistency residual; Fourier stability; θ-scheme L2 and maximum-principle conditions; global error identity. The note states the multidimensional maximum principle but omits its proof; that proof is supplied locally."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Numerical Methods for Partial Differential Equations, Lecture 14: Von Neumann Stability Analysis (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c7c12accea163007923288875bb42604_MIT18_336S09_lec14.pdf",
+              "locator": "Complete 3-page PDF, pp. 1–3: explicit heat amplification factor and sharp μ=1/2 condition, Crank–Nicolson amplification and unconditional Fourier stability, and the two-dimensional explicit heat CFL condition. This is a periodic/infinite-grid Fourier note, not a finite-boundary stability proof."
+            },
+            {
+              "title": "Martin Krosche, Hermann G. Matthies, and Oliver Kayser-Herold, Lecture Notes: Introduction to PDEs and Numerical Methods, Technical University Braunschweig, Revision 1.1 (2008), hosted by University of Jyväskylä",
+              "url": "https://users.jyu.fi/~rainom/pde/material/pde1en.pdf",
+              "locator": "Chapter 1 §§1.4.4–1.4.6, PDF pp. 21–29: θ time discretization, finite-grid matrix form, von Neumann stability, highest resolvable frequency, and separate stability/positivity conditions. The Fourier section assumes an infinite grid; no boundary claim is imported."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-parabolic-theta-scheme-local-truncation-error",
+        "kind": "theorem",
+        "title": "Local truncation residual for the θ heat scheme",
+        "statement": "For a smooth exact solution of u_t−κ_xu_xx−κ_yu_yy=f on a rectangle, with exact sampled initial and Dirichlet rows and endpoint-sampled source, the complete interior residual is bounded by (Δt||u_tt||∞ + (κ_x h_x^2||u_xxxx||∞+κ_y h_y^2||u_yyyy||∞)/12) for θ≠1/2, and by the same spatial term plus Δt^2||u_ttt||∞/12 for θ=1/2.",
+        "deps": [
+          "def-parabolic-theta-finite-difference-scheme"
+        ],
+        "dependency_level": 2,
+        "strategy": "Subtract the PDE at both time endpoints, bound the temporal endpoint quadrature defect, and apply the centered second-difference Taylor remainder in each coordinate, including the boundary-adjacent interior rows.",
+        "axiom_base": "No choice axiom is used; proofs use finite grid sums, finite-dimensional linear algebra, Fourier modes on finite periodic grids, and pointwise Taylor estimates.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations: A brief introduction to the theory of finite difference approximation of PDEs",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§5.1–§5.6.3, PDF pp. 54–75: heat model; θ-update, initial and Dirichlet rows; consistency residual; Fourier stability; θ-scheme L2 and maximum-principle conditions; global error identity. The note states the multidimensional maximum principle but omits its proof; that proof is supplied locally."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Numerical Methods for Partial Differential Equations, Lecture 14: Von Neumann Stability Analysis (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c7c12accea163007923288875bb42604_MIT18_336S09_lec14.pdf",
+              "locator": "Complete 3-page PDF, pp. 1–3: explicit heat amplification factor and sharp μ=1/2 condition, Crank–Nicolson amplification and unconditional Fourier stability, and the two-dimensional explicit heat CFL condition. This is a periodic/infinite-grid Fourier note, not a finite-boundary stability proof."
+            },
+            {
+              "title": "Martin Krosche, Hermann G. Matthies, and Oliver Kayser-Herold, Lecture Notes: Introduction to PDEs and Numerical Methods, Technical University Braunschweig, Revision 1.1 (2008), hosted by University of Jyväskylä",
+              "url": "https://users.jyu.fi/~rainom/pde/material/pde1en.pdf",
+              "locator": "Chapter 1 §§1.4.4–1.4.6, PDF pp. 21–29: θ time discretization, finite-grid matrix form, von Neumann stability, highest resolvable frequency, and separate stability/positivity conditions. The Fourier section assumes an infinite grid; no boundary claim is imported."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-parabolic-theta-step-exists-uniquely",
+        "kind": "lemma",
+        "title": "Unique solvability of an implicit θ heat step",
+        "statement": "For every finite rectangular Dirichlet grid, positive time step, θ in [0,1], and right-hand side including prescribed boundary contributions, the interior θ step has a unique solution because I+θΔt A_h is nonsingular.",
+        "deps": [
+          "def-parabolic-theta-finite-difference-scheme",
+          "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint"
+        ],
+        "dependency_level": 3,
+        "strategy": "For θ>0 use positive definiteness of I+θΔt A_h; for θ=0 the matrix is the identity; finite-dimensional injectivity gives surjectivity.",
+        "axiom_base": "No choice axiom is used; proofs use finite grid sums, finite-dimensional linear algebra, Fourier modes on finite periodic grids, and pointwise Taylor estimates.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations: A brief introduction to the theory of finite difference approximation of PDEs",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§5.1–§5.6.3, PDF pp. 54–75: heat model; θ-update, initial and Dirichlet rows; consistency residual; Fourier stability; θ-scheme L2 and maximum-principle conditions; global error identity. The note states the multidimensional maximum principle but omits its proof; that proof is supplied locally."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Numerical Methods for Partial Differential Equations, Lecture 14: Von Neumann Stability Analysis (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c7c12accea163007923288875bb42604_MIT18_336S09_lec14.pdf",
+              "locator": "Complete 3-page PDF, pp. 1–3: explicit heat amplification factor and sharp μ=1/2 condition, Crank–Nicolson amplification and unconditional Fourier stability, and the two-dimensional explicit heat CFL condition. This is a periodic/infinite-grid Fourier note, not a finite-boundary stability proof."
+            },
+            {
+              "title": "Martin Krosche, Hermann G. Matthies, and Oliver Kayser-Herold, Lecture Notes: Introduction to PDEs and Numerical Methods, Technical University Braunschweig, Revision 1.1 (2008), hosted by University of Jyväskylä",
+              "url": "https://users.jyu.fi/~rainom/pde/material/pde1en.pdf",
+              "locator": "Chapter 1 §§1.4.4–1.4.6, PDF pp. 21–29: θ time discretization, finite-grid matrix form, von Neumann stability, highest resolvable frequency, and separate stability/positivity conditions. The Fourier section assumes an infinite grid; no boundary claim is imported."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-forward-euler-heat-cfl-and-nyquist-instability",
+        "kind": "theorem",
+        "title": "Forward Euler heat CFL stability and sharp Nyquist instability",
+        "statement": "For the periodic d-dimensional centered heat stencil, ΔtΣ_j κ_j/h_j^2 ≤ 1/2 bounds every forward-Euler amplification factor in the unit disk. If every N_j is even, this condition is sharp: the joint Nyquist mode has amplification 1−4ΔtΣ_j κ_j/h_j^2 and grows when the sum exceeds 1/2.",
+        "deps": [
+          "def-parabolic-theta-finite-difference-scheme",
+          "lem-periodic-heat-difference-amplification-symbol"
+        ],
+        "dependency_level": 3,
+        "strategy": "Bound the discrete Laplacian eigenvalues by 4Σ_j κ_j/h_j^2 and check the scalar factors 1−Δtλ; the even-grid Nyquist mode attains the bound.",
+        "axiom_base": "No choice axiom is used; proofs use finite grid sums, finite-dimensional linear algebra, Fourier modes on finite periodic grids, and pointwise Taylor estimates.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations: A brief introduction to the theory of finite difference approximation of PDEs",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§5.1–§5.6.3, PDF pp. 54–75: heat model; θ-update, initial and Dirichlet rows; consistency residual; Fourier stability; θ-scheme L2 and maximum-principle conditions; global error identity. The note states the multidimensional maximum principle but omits its proof; that proof is supplied locally."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Numerical Methods for Partial Differential Equations, Lecture 14: Von Neumann Stability Analysis (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c7c12accea163007923288875bb42604_MIT18_336S09_lec14.pdf",
+              "locator": "Complete 3-page PDF, pp. 1–3: explicit heat amplification factor and sharp μ=1/2 condition, Crank–Nicolson amplification and unconditional Fourier stability, and the two-dimensional explicit heat CFL condition. This is a periodic/infinite-grid Fourier note, not a finite-boundary stability proof."
+            },
+            {
+              "title": "Martin Krosche, Hermann G. Matthies, and Oliver Kayser-Herold, Lecture Notes: Introduction to PDEs and Numerical Methods, Technical University Braunschweig, Revision 1.1 (2008), hosted by University of Jyväskylä",
+              "url": "https://users.jyu.fi/~rainom/pde/material/pde1en.pdf",
+              "locator": "Chapter 1 §§1.4.4–1.4.6, PDF pp. 21–29: θ time discretization, finite-grid matrix form, von Neumann stability, highest resolvable frequency, and separate stability/positivity conditions. The Fourier section assumes an infinite grid; no boundary claim is imported."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-parabolic-theta-l2-stability-for-half-theta",
+        "kind": "theorem",
+        "title": "Unconditional weighted L2 stability for θ at least one half",
+        "statement": "On a finite two-dimensional rectangular Dirichlet grid with zero boundary data, every θ in [1/2,1] gives a homogeneous one-step contraction in weighted grid L2, independent of mesh width and time step. With a grid source q^n, one step satisfies ||U^{n+1}||_h ≤ ||U^n||_h + 2Δt||q^n||_h.",
+        "deps": [
+          "def-parabolic-theta-finite-difference-scheme",
+          "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+          "lem-parabolic-theta-step-exists-uniquely"
+        ],
+        "dependency_level": 4,
+        "strategy": "Take the weighted inner product of the update with the θ-weighted state and use the exact polarization identity and nonnegativity of the discrete heat energy.",
+        "axiom_base": "No choice axiom is used; proofs use finite grid sums, finite-dimensional linear algebra, Fourier modes on finite periodic grids, and pointwise Taylor estimates.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations: A brief introduction to the theory of finite difference approximation of PDEs",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§5.1–§5.6.3, PDF pp. 54–75: heat model; θ-update, initial and Dirichlet rows; consistency residual; Fourier stability; θ-scheme L2 and maximum-principle conditions; global error identity. The note states the multidimensional maximum principle but omits its proof; that proof is supplied locally."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Numerical Methods for Partial Differential Equations, Lecture 14: Von Neumann Stability Analysis (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c7c12accea163007923288875bb42604_MIT18_336S09_lec14.pdf",
+              "locator": "Complete 3-page PDF, pp. 1–3: explicit heat amplification factor and sharp μ=1/2 condition, Crank–Nicolson amplification and unconditional Fourier stability, and the two-dimensional explicit heat CFL condition. This is a periodic/infinite-grid Fourier note, not a finite-boundary stability proof."
+            },
+            {
+              "title": "Martin Krosche, Hermann G. Matthies, and Oliver Kayser-Herold, Lecture Notes: Introduction to PDEs and Numerical Methods, Technical University Braunschweig, Revision 1.1 (2008), hosted by University of Jyväskylä",
+              "url": "https://users.jyu.fi/~rainom/pde/material/pde1en.pdf",
+              "locator": "Chapter 1 §§1.4.4–1.4.6, PDF pp. 21–29: θ time discretization, finite-grid matrix form, von Neumann stability, highest resolvable frequency, and separate stability/positivity conditions. The Fourier section assumes an infinite grid; no boundary claim is imported."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-parabolic-theta-scheme-global-error-bound",
+        "kind": "theorem",
+        "title": "Global weighted L2 error from the complete parabolic residual",
+        "statement": "Under the smoothness and exact boundary-row hypotheses of the local residual theorem, for θ in [1/2,1] and exact initial values the weighted grid L2 error is at most 2T√(L_xL_y) times the corresponding local residual bound: first order in Δt for θ≠1/2, second order in Δt for θ=1/2, and second order in each spatial mesh width.",
+        "deps": [
+          "def-parabolic-theta-finite-difference-scheme",
+          "thm-parabolic-theta-l2-stability-for-half-theta",
+          "thm-parabolic-theta-scheme-local-truncation-error"
+        ],
+        "dependency_level": 5,
+        "strategy": "Subtract the numerical update from the exact sampled equation, apply the forced one-step energy estimate to the complete residual, and sum over the finite time levels.",
+        "axiom_base": "No choice axiom is used; proofs use finite grid sums, finite-dimensional linear algebra, Fourier modes on finite periodic grids, and pointwise Taylor estimates.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations: A brief introduction to the theory of finite difference approximation of PDEs",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§5.1–§5.6.3, PDF pp. 54–75: heat model; θ-update, initial and Dirichlet rows; consistency residual; Fourier stability; θ-scheme L2 and maximum-principle conditions; global error identity. The note states the multidimensional maximum principle but omits its proof; that proof is supplied locally."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Numerical Methods for Partial Differential Equations, Lecture 14: Von Neumann Stability Analysis (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c7c12accea163007923288875bb42604_MIT18_336S09_lec14.pdf",
+              "locator": "Complete 3-page PDF, pp. 1–3: explicit heat amplification factor and sharp μ=1/2 condition, Crank–Nicolson amplification and unconditional Fourier stability, and the two-dimensional explicit heat CFL condition. This is a periodic/infinite-grid Fourier note, not a finite-boundary stability proof."
+            },
+            {
+              "title": "Martin Krosche, Hermann G. Matthies, and Oliver Kayser-Herold, Lecture Notes: Introduction to PDEs and Numerical Methods, Technical University Braunschweig, Revision 1.1 (2008), hosted by University of Jyväskylä",
+              "url": "https://users.jyu.fi/~rainom/pde/material/pde1en.pdf",
+              "locator": "Chapter 1 §§1.4.4–1.4.6, PDF pp. 21–29: θ time discretization, finite-grid matrix form, von Neumann stability, highest resolvable frequency, and separate stability/positivity conditions. The Fourier section assumes an infinite grid; no boundary claim is imported."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-theta-scheme-discrete-maximum-principle",
+        "kind": "theorem",
+        "title": "A boundary-aware discrete maximum principle for the θ scheme",
+        "statement": "On a finite two-dimensional rectangular Dirichlet grid with zero source and θ in [0,1], if Δt(1−θ)(κ_x/h_x^2+κ_y/h_y^2) ≤ 1/2, every numerical value lies between the minimum and maximum of the initial and prescribed boundary values. The restriction is sufficient for this maximum principle and is distinct from unconditional L2 stability for θ≥1/2.",
+        "deps": [
+          "def-parabolic-theta-finite-difference-scheme",
+          "lem-parabolic-theta-step-exists-uniquely",
+          "thm-parabolic-theta-l2-stability-for-half-theta"
+        ],
+        "dependency_level": 5,
+        "strategy": "Show the explicit-side stencil has nonnegative coefficients under the stated restriction, then apply the negative-minimum principle to the implicit M-matrix and compare with constant grid functions.",
+        "axiom_base": "No choice axiom is used; proofs use finite grid sums, finite-dimensional linear algebra, Fourier modes on finite periodic grids, and pointwise Taylor estimates.",
+        "sources": {
+          "references": [
+            {
+              "title": "Endre Süli, B6.1 Numerical Solution of Partial Differential Equations: A brief introduction to the theory of finite difference approximation of PDEs",
+              "url": "https://people.maths.ox.ac.uk/suli/nspdes.pdf",
+              "locator": "§5.1–§5.6.3, PDF pp. 54–75: heat model; θ-update, initial and Dirichlet rows; consistency residual; Fourier stability; θ-scheme L2 and maximum-principle conditions; global error identity. The note states the multidimensional maximum principle but omits its proof; that proof is supplied locally."
+            },
+            {
+              "title": "Benjamin Seibold, MIT 18.336 Numerical Methods for Partial Differential Equations, Lecture 14: Von Neumann Stability Analysis (Spring 2009)",
+              "url": "https://ocw.mit.edu/courses/18-336-numerical-methods-for-partial-differential-equations-spring-2009/c7c12accea163007923288875bb42604_MIT18_336S09_lec14.pdf",
+              "locator": "Complete 3-page PDF, pp. 1–3: explicit heat amplification factor and sharp μ=1/2 condition, Crank–Nicolson amplification and unconditional Fourier stability, and the two-dimensional explicit heat CFL condition. This is a periodic/infinite-grid Fourier note, not a finite-boundary stability proof."
+            },
+            {
+              "title": "Martin Krosche, Hermann G. Matthies, and Oliver Kayser-Herold, Lecture Notes: Introduction to PDEs and Numerical Methods, Technical University Braunschweig, Revision 1.1 (2008), hosted by University of Jyväskylä",
+              "url": "https://users.jyu.fi/~rainom/pde/material/pde1en.pdf",
+              "locator": "Chapter 1 §§1.4.4–1.4.6, PDF pp. 21–29: θ time discretization, finite-grid matrix form, von Neumann stability, highest resolvable frequency, and separate stability/positivity conditions. The Fourier section assumes an infinite grid; no boundary claim is imported."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2359,
+    "id": "parabolic-finite-difference-methods-examples",
+    "kind": "B",
+    "category": "numerical-pdes-and-spatial-discretization",
+    "title": "Parabolic finite-difference methods — Examples",
+    "companion": "parabolic-finite-difference-methods",
+    "requires": [
+      "parabolic-finite-difference-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-backward-euler-damps-high-frequencies",
+        "kind": "example",
+        "title": "Backward Euler strongly damps high periodic modes",
+        "statement": "For a sequence of even one-dimensional periodic grids with fixed Δt>0, the backward-Euler multiplier of the Nyquist mode tends to zero as h tends to zero.",
+        "deps": [
+          "def-parabolic-theta-finite-difference-scheme",
+          "lem-periodic-heat-difference-amplification-symbol"
+        ],
+        "dependency_level": 3,
+        "strategy": "Evaluate the θ=1 amplification factor at the Nyquist eigenvalue and take the mesh limit.",
+        "axiom_base": "No choice axiom is used; proofs use finite grid sums, finite-dimensional linear algebra, Fourier modes on finite periodic grids, and pointwise Taylor estimates.",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-crank-nicolson-preserves-high-frequency-amplitude",
+        "kind": "example",
+        "title": "Crank–Nicolson is stable but does not strongly damp the highest mode",
+        "statement": "For a sequence of even one-dimensional periodic grids with fixed Δt>0, the Crank–Nicolson Nyquist multiplier tends to −1, so its magnitude tends to one despite unconditional weighted L2 stability.",
+        "deps": [
+          "def-parabolic-theta-finite-difference-scheme",
+          "lem-periodic-heat-difference-amplification-symbol"
+        ],
+        "dependency_level": 3,
+        "strategy": "Evaluate the θ=1/2 amplification factor at the Nyquist eigenvalue and take the mesh limit.",
+        "axiom_base": "No choice axiom is used; proofs use finite grid sums, finite-dimensional linear algebra, Fourier modes on finite periodic grids, and pointwise Taylor estimates.",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-forward-euler-parabolic-cfl-threshold-and-nyquist-growth",
+        "kind": "example",
+        "title": "Forward Euler at and above the parabolic CFL threshold",
+        "statement": "On a one-dimensional periodic grid with even N, the alternating Nyquist data are unchanged in magnitude at μ=κΔt/h^2=1/2 and grow geometrically when μ>1/2.",
+        "deps": [
+          "def-parabolic-theta-finite-difference-scheme",
+          "lem-periodic-heat-difference-amplification-symbol",
+          "thm-forward-euler-heat-cfl-and-nyquist-instability"
+        ],
+        "dependency_level": 4,
+        "strategy": "Substitute the alternating grid mode into the exact forward-Euler update.",
+        "axiom_base": "No choice axiom is used; proofs use finite grid sums, finite-dimensional linear algebra, Fourier modes on finite periodic grids, and pointwise Taylor estimates.",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-continuous-and-discrete-heat-maximum-principles",
+        "kind": "example",
+        "title": "Continuous and discrete heat maximum bounds on sampled data",
+        "statement": "For u(x,y,t)=sin(πx)sin(πy)e^(−2π^2t) on the unit square, the continuous solution remains in [0,1]; on an equal-spacing Dirichlet grid the forward-Euler scheme also remains in [0,1] when 2Δt/h^2≤1/2.",
+        "deps": [
+          "def-parabolic-theta-finite-difference-scheme",
+          "thm-theta-scheme-discrete-maximum-principle"
+        ],
+        "dependency_level": 6,
+        "strategy": "Verify the exact heat solution and apply the continuous and discrete maximum principles under their stated hypotheses.",
+        "axiom_base": "No choice axiom is used; proofs use finite grid sums, finite-dimensional linear algebra, Fourier modes on finite periodic grids, and pointwise Taylor estimates.",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

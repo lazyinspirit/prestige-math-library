@@ -1,0 +1,52 @@
+--- a/research/numerical-optimization-dynamics-2026-10-16-batch-16.proof-contracts.json
++++ b/research/numerical-optimization-dynamics-2026-10-16-batch-16.proof-contracts.json
+@@ -1861,12 +1861,13 @@
+       "routine_steps": [],
+       "finite_smoke": [
+         {
+-          "check": "three-leaf-star-ordering-fill",
++          "check": "numerical-sparse-fixture",
+           "parameters": {
+             "m": 3,
+-            "t": "1/(2 sqrt(3))"
++            "t": "1/(2 sqrt(3))",
++            "fixture": "three-leaf-star-ordering-fill"
+           },
+-          "asserts": "Leaf-first ordering inserts 0 fill edges; center-first inserts binom(3,2)=3, and the center Schur complement has off-diagonal entries -t^2=-1/12 != 0.",
++          "asserts": "In leaf-first order, elimination adds no fill. In center-first order, symbolic elimination adds every edge between leaves, and the actual Cholesky Schur complement has all those entries nonzero.",
+           "claim": "Direct finite count for the smallest allowed star verifies the ordering-dependent symbolic fill and a nonzero numerical Schur pattern.",
+           "checked_in": "steps 1.2-2.1"
+         }
+@@ -1973,12 +1974,13 @@
+       "routine_steps": [],
+       "finite_smoke": [
+         {
+-          "check": "two-by-two-pivot-example",
++          "check": "numerical-sparse-fixture",
+           "parameters": {
+             "dimension": 2,
+-            "theta": "any value in (0,1]"
++            "theta": "any value in (0,1]",
++            "fixture": "two-by-two-pivot-example"
+           },
+-          "asserts": "det(A)=-1, A has eigenvalues 1 and -1, both scalar diagonal pivots are 0, and for D=A the inverse-block threshold left side is the zero vector.",
++          "asserts": "Every one-by-one diagonal pivot test fails, while the declared two-by-two pivot passes and gives an exact block $LDL^*$ factorization.",
+           "claim": "Exact 2x2 arithmetic verifies nonsingularity, indefiniteness, rejection of both 1x1 pivots, and acceptance of the declared 2x2 pivot.",
+           "checked_in": "steps 1.1-2.1"
+         }
+@@ -2084,11 +2086,12 @@
+       "routine_steps": [],
+       "finite_smoke": [
+         {
+-          "check": "one-vertex-dirichlet-poisson-grid",
++          "check": "numerical-sparse-fixture",
+           "parameters": {
+-            "k": 1
++            "k": 1,
++            "fixture": "one-vertex-dirichlet-poisson-grid"
+           },
+-          "asserts": "The grid has one vertex and no edges, so A_1=[4] and x^T A_1 x=4x^2; the ordering and Cholesky factor each have one entry.",
++          "asserts": "For $k=1$, the matrix and factor each have one entry.",
+           "claim": "The smallest grid checks the positive-definite energy identity and the separately stated one-pivot cost case.",
+           "checked_in": "steps 1.1-2.1"
+         }

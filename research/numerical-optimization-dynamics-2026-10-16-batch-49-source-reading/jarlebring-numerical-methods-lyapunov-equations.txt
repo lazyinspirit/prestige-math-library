@@ -1,0 +1,1056 @@
+
+===== PDF PAGE 1 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+Methods for Lyapunov equations
+This chapter is about numerical methods for a particular type of equa-
+tion expressed as a matrix equality.
+The Lyapunov equation is the most com-
+mon problem in the class of problems
+called matrix equations. Other examples
+of matrix equations: Sylvester equation,
+Stein equation, Riccati equation.
+Deﬁnition 4.0.1. Consider two square matrices A,W ∈Rn×n. The problem
+to ﬁnd a square matrix X ∈Rn×n such that
+AX + XAT = W
+(4.1)
+is called the Lyapunov equation.
+Traditionally driven by certain prob-
+lems in system and control, the Lya-
+punov equation now appears in very
+large number of ﬁelds.
+The develop-
+ments and improvements of numerical
+methods have (and continues to be) rec-
+ognized as important in numerical linear
+algebra.
+Different algorithms are suitable for different situations, depending
+on the properties of A and W, and we work out two algorithms. For
+dense A, the Bartels-Stewart algorithm is one of the most efﬁcient ap-
+proaches. The Bartels-Stewart algorithm is derived in Section 4.2. For
+sparse and large-scale A and if W is of low-rank, Krylov-type methods
+may be more efﬁcient (Section 4.3).
+In the ﬁeld of systems and control
+the equation (4.1) is sometimes called
+the continuous-time Lyapunov equation,
+for
+disambiguation
+with
+a
+different
+matrix equation called the discrete-time
+Lyapunov equation. Many of the algo-
+rithms we present here can be adapted
+for discrete-time Lyapunov equations.
+Some applications are given in Section 4.4 and in the exercises.
+A naive approach
+Equation (4.1) is a linear system of equations, expressed in a some-
+what unusual form. We will now see that (4.1) can be reformulated
+as a linear system of equations in standard form, by using techniques
+called vectorization and Kronecker products. If B ∈Rn×m with columns
+(b1, . . . , bm) = B, the vectorization operation is deﬁned as the stacking
+of the columns into a vector,
+vec(B) ∶=
+⎡⎢⎢⎢⎢⎢⎢⎣
+b1
+⋮
+bm
+⎤⎥⎥⎥⎥⎥⎥⎦
+∈Rnm.
+For two matrices A ∈Rn×m and B ∈Rj×k, the Kronecker product (⊗) is
+In matlab,
+the vec-operation can be
+computed with
+b=B(:)
+and the in-
+verse operation can be computed with
+B=reshape(b,n,length(b)/n). The Kro-
+necker
+product
+is
+implemented
+in
+kron(A,B).
+deﬁned as
+A ⊗B =
+⎡⎢⎢⎢⎢⎢⎢⎣
+a11B
+⋯
+a1mB
+⋮
+⋱
+⋮
+an1B
+⋯
+anmB
+⎤⎥⎥⎥⎥⎥⎥⎦
+∈Rnj×mk.
+Lecture notes - Elias Jarlebring - 2017
+1
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017
+
+
+===== PDF PAGE 2 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+With this notation we can derive a very useful identity. For matrices
+A, B, X of matching size, we have
+vec(AXB) = (BT ⊗A)vec(X)
+(4.2)
+By vectorizing the Lyapunov equation (4.1) we have
+Apply (4.2) twice, once with A =
+I
+and once with B = I.
+vec(AX + XAT)
+=
+vec(W)
+(I ⊗A + A ⊗I)vec(X)
+=
+vec(W)
+(4.3)
+The equation (4.3) is a linear system of equations on the standard
+matrix-times-vector form. The connection between (4.1) and (4.3) is
+useful, mostly for theoretical purposes. For instance, we can easily
+characterize the existance and uniqueness of a solution.
+Theorem 4.1.1 (Existance and uniqueness of solution). Let λi, i = 1, . . . , n
+be the eigenvalues of A.
+(i) The equation (4.1) has a unique solution X ∈Rn×n if and only if
+λi ≠−λj, for all i, j = 1, . . . , n.
+(ii) In particular, if A is strictly stable (that is λi < 0, for all i = 1, . . . , n),
+then (4.1) has a unique solution.
+The eigenvalues of a strictly stable ma-
+trix have negative real part.
+Proof. This is an exercise.
+A naive computational approach based on (4.3)
+It is tempting to approach the problem of solving the Lyapunov equa-
+tion (4.1) by applying a generic method for linear systems of equations
+Bz = w to (4.3),
+vec(X) = (I ⊗A + A ⊗I)−1 vec(W).
+(4.4)
+Suppose for simplicity that we have a numerical method that can
+solve a linear system of equations with N with O(N3) operations (such
+as a primitive implementation of Gaussian elimination). Since (4.3) is
+a linear system with N = n2, the computational complexity of such an
+approach is
+A generic method for linear systems ap-
+plied to (4.3), will have high computa-
+tional complexity.
+tnaive(n) = O(n6).
+(4.5)
+Some gains in complexity are feasable by using more advanced ver-
+sions of Gaussian elimination to solve (4.3), or exploiting sparsity in
+I ⊗A + A ⊗I. These improved variants will not be computationally
+competitive for large n in comparison to the algorithms in the follow-
+ing sections.
+Although this approach is not competitive for large n, it can be
+useful for small n, and (as we shall see below) as a component in a
+numerical method for large n.
+Lecture notes - Elias Jarlebring - 2017
+2
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017
+
+
+===== PDF PAGE 3 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+Bartels-Stewart algorithm
+The Bartels-Stewart algorithm, initially
+presented
+for
+slightly
+more
+general
+problems in [1] and is one of the lead-
+ing methods for dense Lyapunov equa-
+tions. It is implemented in matlab in the
+command lyap.
+From previous lectures we know that there are efﬁcient algorithms that
+can compute the Schur decomposition of a matrix. It turns out that
+this can be used as a precomputation such that we obtain a triangular
+Lyapunov equation. The resulting equation can be efﬁciently solved
+in direct way with a ﬁnite number of operations, by using a type of
+substitution.
+For efﬁciency reasons, we here work
+with the real Schur form, where in con-
+trast to the complex Schur form, the com-
+plex triangular matrix is replaced by a
+real block triangular matrix with blocks
+of size one or two as in (4.6)
+Recall that all real matrices have a real Schur decomposition: There
+exists matrices Q and T such that
+A = QTQT,
+where Q is an orthogonal matrix and T ∈Rn×n a block-triangular ma-
+trix, where
+T =
+⎡⎢⎢⎢⎢⎢⎢⎣
+T11
+⋯
+T1,r
+⋱
+⋮
+Tr,r
+⎤⎥⎥⎥⎥⎥⎥⎦
+(4.6)
+and Tjj ∈Rnj×nj, nj ∈{1,2}, j = 1, . . . , r and ∑r
+j=1 nj = n.
+We multiply the Lyapunov equation (4.1) from the right and left
+with Q and QT respectively,
+Use QQT = I.
+QTWQ
+=
+QTAXQ + QTXAQ =
+(4.7a)
+=
+QTAQQTXQ + QTXQQTAQ =
+(4.7b)
+=
+TY + YTT
+(4.7c)
+where Y = QTXQ. We introduce matrices and corresponding blocks
+such that
+QTWQ = [C11
+C12
+C21
+C22
+],Y = [Z11
+Z12
+Z21
+Z22
+], T = [R11
+R12
+0
+R22
+],
+(4.8)
+where the blocks are such that Z22, C22, Trr = R22 ∈Rnr×nr (the size of
+the last block of T). This triangularized problem can now be solved
+with (what we call) backward substitution, similar to backward sub-
+stitution in Gaussian elimination. By separating the four blocks in the
+equation (4.7), we have four equations
+General idea: Solve (4.9b)-(4.9d) explic-
+itly.
+Insert the solution into (4.9a) and
+repeat the process for the smaller equa-
+tion which is a Lyapunov equation with
+unknown Z11 ∈R(n−nr)×(n−nr).
+C11
+=
+R11Z11 + R12Z21 + Z11RT
+11 + Z12RT
+12
+(4.9a)
+C12
+=
+R11Z12 + R12Z22 + Z12RT
+22
+(4.9b)
+C21
+=
+R22Z21 + Z21RT
+11 + Z22RT
+12
+(4.9c)
+C22
+=
+R22Z22 + Z22RT
+22.
+(4.9d)
+Due to the choice of block sizes, the last equation of size nr × nr, which
+can be solved explicitly since nr ∈{1,2}:
+Lecture notes - Elias Jarlebring - 2017
+3
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017
+
+
+===== PDF PAGE 4 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+• If nr = 1, the equation (4.9d) is scalar and we obviously have
+Z22 = C22
+2R22
+.
+(4.10)
+The eigenvalues of R22 are eigenvalues
+of A.
+Therefore the small Lyapunov
+equation (4.9d) has a unique solution if
+(4.1) has a unique solution.
+• If nr = 2 we can still solve (4.9d) cheaply since it is a 2 × 2 Lyapunov
+equation. For instance, we can use the naive approach (4.4), i.e.,
+vec(Z22) = (I ⊗R22 + R22 ⊗I)−1 vec(C22).
+(4.11)
+Insert the now known matrix Z22 into (4.9b) and transposed (4.9c),
+yields
+˜C12 ∶= C12 −R12Z22
+=
+R11Z12 + Z12RT
+22
+(4.12a)
+˜C21 ∶= CT
+21 −R12ZT
+22
+=
+R11ZT
+21 + ZT
+21RT
+22.
+(4.12b)
+The equations (4.12) have a particular structure that can be used to
+directly compute the solutions Z12 and Z21. An explicit procedure for
+the construction of the solution (4.12) is given by the following result.
+Lemma 4.2.1. Consider two matrices C, D partitioned in blocks of size n1 ×
+np, n2 × np, . . ., np−1 × np according to
+X =
+⎡⎢⎢⎢⎢⎢⎢⎣
+X1
+⋮
+Xp−1
+⎤⎥⎥⎥⎥⎥⎥⎦
+∈RN×nr, D =
+⎡⎢⎢⎢⎢⎢⎢⎣
+D1
+⋮
+Dp−1
+⎤⎥⎥⎥⎥⎥⎥⎦
+∈RN×np
+where Cj, Dj ∈Rnj×np and N = ∑
+p−1
+j=1 nj. Let U ∈Rn×n be a block triangular
+The block triangular matrix U is
+U =
+⎡⎢⎢⎢⎢⎢⎣
+U11
+⋯
+U1,p−1
+⋱
+⋮
+Up−1,p−1
+⎤⎥⎥⎥⎥⎥⎦
+where Ui,j ∈Rni×nj.
+matrix partitioned as X and D. For any R22 ∈Rnp×np, we that if X satisﬁes
+the equation
+D = UX + XRT
+22,
+(4.13)
+then Xj, p −1, p −2, . . . ,1 satisfy
+UjjXj + XjRT
+22 = ˜Dj
+(4.14)
+where ˜Dj ∶= Dj −∑
+p−1
+i=j+1 UjiXi.
+Similar to the approach we used to compute Z22, Xj can expressed
+and computed explicitly from a small linear system
+vec(Xj) = (I ⊗Tjj + R22 ⊗I)−1 vec( ˜Wj)
+(4.15)
+By solving (4.15) for j = p −1, . . . ,1, for both equations (4.12)a and
+(4.12)b we obtain solutions Z12 and Z21. Insertion of (the now known
+solutions) Z12, Z21 and Z22 into (4.9a) gives a new Lyapunov equation
+of size n −np and the process can be repeated for the smaller matrix.
+Lecture notes - Elias Jarlebring - 2017
+4
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017
+
+
+===== PDF PAGE 5 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+Compute the real Schur decompositon [Q,T]=schur(A) and
+establish n1, . . . , nr, T11, T1r, . . . , Trr with partitioning according to
+(4.6)
+Set C = QTWQ.
+Set m = n.
+for k=r,. . . ,1 do
+Set m = m −nk
+Partition the matrix C with C11, C12, C21, C22 according to (4.8),
+with C22 ∈Rnk×nk.
+Set R22 = Tkk, and
+R11 =
+⎡⎢⎢⎢⎢⎢⎢⎣
+T11
+⋯
+T1,k−1
+⋱
+⋮
+Tk−1,k−1
+⎤⎥⎥⎥⎥⎥⎥⎦
+,
+R12 =
+⎡⎢⎢⎢⎢⎢⎢⎣
+T1,k
+⋮
+Tk−1,k
+⎤⎥⎥⎥⎥⎥⎥⎦
+Solve (4.9d) for Z22 ∈Rnk×nk using (4.11) or (4.10).
+Compute ˜C12, ˜C21 using (4.12)a and (4.12)b
+Solve (4.12)a and (4.12)b for Z12 ∈Rm×nk and Z21 ∈Rnk×m
+using equation (4.14) and (4.15) with p = k.
+Store Y(1 ∶m, m + (1 ∶nk)) = Z12
+Store Y(m + (1 ∶nk),1 ∶m) = Z21
+Store Y(m + (1 ∶nk), m + (1 ∶nk)) = Z22
+Set C ∶= C11 −R12Z21 −Z12RT
+12.
+end
+Return solution X = QYQT.
+Algorithm 1: The Bartels-Stewart algorithm for the Lyapunov
+equation
+Complexity of Bartels-Stewart algorithm
+Earlier in the course we learned that the QR-algorithm could be tuned
+to perform well. In practice the total complexity is usually roughly
+estimated by O(n3). Since the other parts of the algorithm (see ex-
+ercise) has complexity O(n3), the total complexity of Bartels-Stewart
+algorithm is
+tBartels−Stewart(n) = O(n3).
+This is a tremendous improvement in comparison to the naive ap-
+proach (4.5), estimated by O(n6).
+Low-rank methods for large and sparse problems
+Although the Bartels-Stewart is both efﬁcient and robust for large
+dense problems, there is very little room to use sparsity and other
+structures. We now discuss a class of approaches which are suitable
+Lecture notes - Elias Jarlebring - 2017
+5
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017
+
+
+===== PDF PAGE 6 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+for certain Lyapunov equations, under the condition that W = wwT and
+A is a stable matrix (and large and sparse). Under these conditions,
+we now show that the solution can be accurately approximated with a
+low-rank matrix.
+Low-rank approximability has been ex-
+tended to other conditions on the matri-
+ces, e.g., when W has a small rank.
+Low-rank approximability of solution
+In other parts of the course we have shown that if A is a stable matrix,
+we can express the solution to the Lyapunov equation with an integral
+of matrix exponentials
+X = −∫
+∞
+0
+exp(tA)W exp(tAT),.
+(4.16)
+The low-rank property of X is now illustrated by constructing an ex-
+Recall now that a Gauss-quadrature
+gives a way to approximate integrals by
+a weighted sum. For appropriately se-
+lected evaluation points t1, . . . , tm and
+weights ω1, . . . , ωm we can approximate
+∫
+∞
+0
+f(t) dt ≈
+m
+∑
+i=1
+ωi f(ti)
+plicit approximation of X by applying Gauss-quadrature to the indef-
+inite integral of the matrix in (4.16). More precisely, we now construct
+an approximation ˜X ≈X by setting
+˜X = −
+m
+∑
+i=1
+ωi exp(tiA)W exp(tiAT),
+(4.17)
+where (ω1, t1), . . . ,(ωm, tm) are appropriately selected points and weights.
+We have the following important observation if W = wwT: Every
+term in (4.17) is a rank-one matrix. Hence, a quadrature formula with
+m points results in an explicit way to construct an approximation ˜X
+which has
+rank( ˜X) ≤m.
+(4.18)
+The approximation ˜X is only accurate if the Gauss-quadrature ap-
+proximation is accurate. We know from the theory of Gauss-quadrature
+that weights and points can be selected to yield accurate approxima-
+tions for scalar-valued Gauss-quadrature. The following result show
+how the Gauss-quadrature error for the matrix function can be charac-
+terized.
+For simplicity assume A is symmetric such that A = VΛVT where
+V is an orthogonal matrix and Λ = diag(λ1, . . . , λn). We now get an
+explicit expression for the error
+X −˜X
+= V (∫
+∞
+0
+exp(tΛ) ˜w ˜wT exp(tΛ) dt −
+m
+∑
+i=1
+ωi exp(tiΛ) ˜w ˜wT exp(tiΛ)) VT
+= VZmVT
+where ˜w = VTw.
+Moreover, the individual elements in Zm can be
+bounded by
+∣(Zm)j,k∣≤∣∫
+∞
+0
+et(λj+λk) −
+m
+∑
+1
+ωiet(λj+λk)∣∣˜wj ˜wk∣
+(4.19)
+Lecture notes - Elias Jarlebring - 2017
+6
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017
+
+
+===== PDF PAGE 7 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+We immediately identify a condition which leads to a small approxi-
+mation error. The approximation error for ˜X is small if we simultane-
+ously approximate integrals
+∫
+∞
+0
+et(λj+λk) dt
+for all j and k. We summarize this in a theorem.
+Theorem 4.3.1. Suppose A is symmetric and stable and suppuse W is sym-
+metric and has rank one. Let (t1, ω1), . . . ,(tm, ωm) be a quadrature method
+and deﬁne
+εm ∶= max
+j,k ∣∫
+∞
+0
+et(λj+λk) dt −
+m
+∑
+1
+ωiet(λj+λk)∣.
+Then, there exists a matrix ˜X such that
+rank( ˜X)
+≤
+m
+∥X −˜X∥max
+≤
+εm∥w∥2
+A speciﬁc choice of a quadrature formulas leads to speciﬁc expres-
+sions for the error. One speciﬁc choice (used for instance by Grasedyck)
+leads to an error estimate of the type
+∥X −˜X∥≤αe−√m.
+Galerkin approach to the Lyapunov equation
+We saw above that there exists a low-rank approximation of X under
+certain conditions. Although we were able to derive explicit formulas
+for ˜X in the previous section, these formulas are typically not used
+in the computation. Rather than evaluating the formulas for the low-
+rank approximation, we say that we directly try to compute a low-rank
+solution by trying to determine U ∈Rn×m and P ∈Rm×m such that
+˜X = UPUT,
+where U is an orthogonal matrix.
+Hence, we wish to have,
+A ˜X + ˜XAT = AUPUT + UPUTAT ≈W.
+The most common procedure to ﬁnd (and compute) an approximation
+directly is by the application of a Galerkin condition. More precisely,
+given U we compute P by imposing the Galerkin condition and sim-
+plifying
+UT (A ˜X + ˜XAT)U
+=
+UTWU
+UTA ˜XU + U ˜XATU
+=
+UTWU
+UTAUPUTU + UTUPUTATU
+=
+UTWU
+UTAUP + PUTATU
+=
+UTWU
+˜AP + P ˜AT
+=
+˜W
+Lecture notes - Elias Jarlebring - 2017
+7
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017
+
+
+===== PDF PAGE 8 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+where ˜A = UTAU. This is a small dense Lyapunov equation which can
+be solved directly, for instance with the Bartels-Stewart method.
+The matrix U corresponds to a basis of a search subspace (or projec-
+tion space). The success of the approach highly depends on the choice
+of U and many different search subspaces have been proposed in the
+literature.
+In the paper by V. Simoncini [5] it is proposed to use a so called
+extended Krylov subspace. It illustrates the exploitation of low-rank
+in methods for matrix equations.
+Applications
+The research and developments on numerical methods for Lyapunov
+equations was initially driven by applications in the ﬁeld of systems
+and control.
+There are now applications appearing in many com-
+pletely different ﬁelds. Some speciﬁc applications are listed below.
+The so-called inﬁnite-time gramian of continuous time linear dy-
+namical system is the solution to a Lyapunov equation. They can be
+used
+• to study stability, controllability and observability;
+• to compute the H2-norm which is important in for instance con-
+troller design;
+• to solve PDEs on tensorized domains;
+• to compute bounds and characterisations of transient effects of ODEs;
+• to design an optimal control; and
+• to compute a reduced order model with balanced truncation.
+The Lyapunov equation also appears as a part in numerical methods
+for stability radius, and in the study of robust stability of large sparse
+time-delay systems.
+A discretization of Helmholtz equation ∆u = f on a square do-
+main with homogeneous boundary conditions using ﬁnite difference
+with uniform grid, leads to a linear system of equations (Dxx ⊗I + I ⊗
+Dxx)u = b. This is a vectorized Lyapunov equation. It can consequently
+be solved efﬁciently with, e.g., Bartels-Stewart method. A Lyapunov
+equation approach can be useful for more advanced discretizations of
+more complicated PDEs, by using a Lyapunov equation solver in the
+preconditioning.
+There are also applications in numerical methods for matrix func-
+tions, tensor approximation problems (used for instance in computa-
+tional methods for the electronic Schrödinger equation), . . .
+Lecture notes - Elias Jarlebring - 2017
+8
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017
+
+
+===== PDF PAGE 9 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+Lyapunov equations are used in various situations at KTH. They
+appear in the courses SF2842 - Geometric Control Theory, FEL3500 - In-
+troduction to Model Order Reduction (Dept. Automatic control) and EL2620
+- Nonlinear Control. It is also used in research, e.g., the research of the
+author of these lecture notes and researchers at KTH Mechanics de-
+partment use Lyapunov equations to carry out approximations of ﬂow
+ftp://www2.mech.kth.se/pub/shervin/review.pdf.
+Other matrix equations and other methods
+There are a considerable number of matrix equations appearing in
+various ﬁelds, which can often be considered extensions of the Ly-
+puanov equation, e.g., the discrete-time Lyapunov equation, Sylvester
+equation generalized Lyapunov equation [6], or Ricatti equation, delay
+Lyapunov equations or time-dependent Lyapunov equations (e.g. by
+KTH-researcher Henrik Sandberg [4]). There are many differende nu-
+merical methods apart from those mentioned here, e.g., Hammerlings
+method [3] (which attractive in combination with model order reduc-
+tion and was later improved by Sorensen). There are methods which
+consider the Lyapunov equation as optimization problem in a differ-
+ential geometric setting, more precisely optimization over Riemannian
+manifolds (in particular [7] which has been recognized with various
+prizes and award).
+For further reading see the survey paper
+http://www.dm.unibo.it/~simoncin/matrixeq.pdf
+and the wiki for model order reduction
+http://morwiki.mpi-magdeburg.mpg.de
+Lecture notes - Elias Jarlebring - 2017
+9
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017
+
+
+===== PDF PAGE 10 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+Exercises
+Skeleton code for the Bartels-Stewart
+method:
+http://www.math.kth.se/
+~eliasj/NLA/lyap0_skeleton.m
+1. Implement the naive approach as well as the Bartels-Stewart method
+based on the skeleton code on the course web page. Compare the
+methods by using simulations for random matrices. Illustrate (with
+ﬁgure) the dependence of the computation time on n. What is the
+observed complexity?
+2. Prove (4.2).
+3. Show that
+vec(uvT) = v ⊗u.
+for any u, v ∈Rn.
+4. Consider the problem
+A = [0
+a
+1
+0], W = [1
+2
+2
+1].
+For which values of a does the Lyapunov equation have a unique
+solution?
+Hint
+for
+a
+short
+proof:
+Let
+{Ai}, {Bj}, {Ck}, {Dℓ}
+form
+bases
+of the matrix spaces associated with
+A, B, C, D.
+A function f(A, B, C, D)
+which is linear in all parameters is
+f(A, B, C, D) ≡0, if f(Ai, Bj, Ck, Dℓ) = 0
+for all combinations of basis vectors.
+5. Prove the following identity: Any matrices A, B, C, D of compatible
+size satisfy
+(A ⊗B)(C ⊗D) = (AC) ⊗(BD).
+6. Prove Theorem 4.1.1.
+Hint: Use previous exercise to ﬁrst show that if vj, vi are two eigenvectors
+of A, then vj ⊗vi is an eigenvector of I ⊗A + A ⊗I.
+7. Prove Lemma 4.2.1.
+8. Derive the computational complexity of computing X1, . . . , Xp−1
+with Lemma 4.2.1. You may here assume that n1 = ⋯= np = 2.
+9. Show that if A and W are symmetric, then a solution X to (4.1) is
+symmetric, if (4.1) has a unique solution.
+10. Derive a more efﬁcient algorithm for the case when A and W are
+symmetric, by ﬁrst showing that (4.12)a and (4.12)b have the same
+solution. Illustrate that it works and that it is more efﬁcient using
+the code from exercise 1. (More difﬁcult optional: Also use that T
+in the Schur decomposition of A is a diagonal matrix.)
+11. Consider the following dynamical system
+In systems and control, this is called
+a single-input single-output (SISO) dy-
+namical system.
+˙x(t)
+=
+Ax(t) + bu(t)
+y(t)
+=
+cTx(t),
+where b, c ∈Rn. Suppose A is stable, i.e., λ(A) ∈C−.
+Lecture notes - Elias Jarlebring - 2017
+10
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017
+
+
+===== PDF PAGE 11 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+a) The observability gramian of this system is deﬁned as
+Pc(t) ∶= ∫
+t
+0 exp(ATt)ccT exp(At) dt
+and the observability gramian
+Po(t) ∶= ∫
+t
+0 exp(At)bbT exp(ATt) dt.
+Show that the limits
+Po(t)
+→
+Po,∞∈Rn×n as t →∞
+Pc(t)
+→
+Pc,∞∈Rn×n as t →∞
+exist and satisfy certain Lyapunov equations.
+b) The so-called H2-norm of the dynamical system is deﬁned as
+The H2-norm is a measure of sensitivity
+of the system, and can be used in con-
+troller synthesis when designing control
+systems which should be insensitive to
+additive (stochastic) white-noise.
+∥Σ∥H2 ∶=
+√
+1
+2π ∫
+∞
+−∞∣cT(iωI −A)−1b∣2 ds.
+Show that
+∥Σ∥2
+H2 = 1
+2π ∫
+∞
+0
+y(t)2 dt
+c) Show that the H2 norm can be computed from either controlla-
+bility or observability gramian by showing
+In the matlab control toolbox, in partic-
+ular in the function norm(sys,2), a Lya-
+punov equation is solved with Bartels-
+Stewart algorithm. The H2-norm is sub-
+sequently computed directly from the
+relation (4.20).
+∥Σ∥2
+H2
+=
+cTPo,∞c
+(4.20a)
+=
+bTPc,∞b
+(4.20b)
+12. Consider the partial differential-equation
+∆u + g(x, y)u
+=
+f(x, y) for (x, y) ∈Ω
+u(x, y)
+=
+0 for (x, y) ∈∂Ω,
+where Ω= [0,1] × [0,1].
+(a) Derive the (second order) ﬁnite-difference discretization for the
+grid xi = hi, i = 1, . . . , m, yj = hj, j = 1, . . . , m and h = 1/(m + 1).
+Derive matrices Dxx, G, F ∈Rn×n such that the discretization can
+be expressed as
+Here ○denotes the Hadamard product,
+also known as the direct or element-wise
+product, in matlab .*
+DxxU + UDxx + G ○U = F,
+(4.21)
+for Ui,j ≈u(xi, yj).
+(b) Derive explicit expression for the eigenvalues of I ⊗Dxx + Dxx ⊗
+I in the limit m →∞, and show that I ⊗Dxx + Dxx ⊗I is nonsin-
+gular in the limit.
+(Optional: The eigenvalues have closed forms also for ﬁnite m.
+Compute these and show that I ⊗Dxx + Dxx ⊗I is non-singular
+for any m.)
+Lecture notes - Elias Jarlebring - 2017
+11
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017
+
+
+===== PDF PAGE 12 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+(c) Let g(x, y) = α
+√
+(x −1
+2)2 + (y −1
+2)2 and f(x, y) = ∣x −y∣. Solve the
+problem in the following ways, and report computation time as
+a function of system size:
+Use only sparse matrices and do not
+store any matrices as full matrices. Use
+spdiags and see help spdiags.
+– For α = 0, solve the sparse linear system corresponding to the
+vectorization of (4.21) with the matlab command \
+– Compare with solving (4.21) with the matlab command lyap
+also with α = 0.
+– For α = 1, solve the sparse linear system corresponding to the
+vectorization of (4.21) with the matlab command \.
+– For α = 1, apply GMRES to solve the sparse linear system cor-
+responding to the vectorization of (4.21) (use matlab command
+gmres)
+– For α = 1, apply GMRES to solve, by using lyap as a left pre-
+conditioner.
+– For α = 0.1, apply GMRES to solve, by using lyap as a left
+preconditioner.
+This exercise has many solutions.
+(d) Explain the performance of the preconditioned GMRES in the
+previous sub-problem using the theory developed earlier in the
+course, preferably in terms explicit bounds involving the analytic
+expressions for the eigenvalues (in the limit or for ﬁnite n).
+Might be helpful: From theory of FrÃl’chet derivates of matrix func-
+tions we know that for sufﬁciently small ∥E∥, we have
+(A −E)−1 = A−1 −A−1EA−1 + O(∥E∥2).
+(e) Suppose all elements of G are zero except Gm/4,m/2 = 1/h and
+assume m ∈4Z.
+Solve the equation efﬁciently using lyap (or
+This choice of G corresponds to the reg-
+ularization of dirac impulse in the point
+(x, y) = ( 1
+4, 1
+2).
+your implementation of Bartels-Stewart). This problem can and
+should here be solved without using gmres or similar. Compare
+with a naive approach.
+Hint: Consider the problem as rank-one modiﬁcation and read about the
+Sherman-Morrison-Woodbury formula.
+13. This exercise is about K-PIK described in [5]. You will not need to
+read all the details of the paper to answer the questions.
+(a) Suppose Vk ∈Rn×k is an orthogonal matrix and that B ∈span(V1)
+where B ∈Rn. Prove that the approximation Xk = VkYkVT
+k gives a
+residual Rk = AXk + XkAT + BBT which satisﬁes
+Rk = Vk+1HkYkVT
+k + VkYkHT
+k VT
+k+1 + VkEETVk.
+under the conditions used to derive [5, Equation (2.3)]. What is
+Hk and E? What assumed about Vk?
+Lecture notes - Elias Jarlebring - 2017
+12
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017
+
+
+===== PDF PAGE 13 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+(b) Suppose Vk in (a) is known. Derive a formula for Yk, which
+gives X = Xk if the solution to the Lyapunov equation can be
+expressed as X = VkYkVT
+k .
+(c) The approximation Xk = VkYkVT
+k where Vk ∈Rn×k, k ≪n corre-
+sponds to assuming that the exact solution X can be well approx-
+imated with a matrix with low rank. Fortunately, it turns out that
+Recall the low-rank approximation prop-
+erty of singular values: For any matrix
+C ∈Rn×n,
+min
+Ck∈Rn×n
+rank(Ck)=k
+∥C −Ck∥2 = σk+1(C)
+where σk is the kth singular value, or-
+dered by decreasing magnitude.
+For
+more information about the decay of sin-
+gular values of the solution to Lyapunov
+equation see references in [2].
+the solution to the Lyapunov equation can be well approximated
+with a low-rank matrix in many cases. This can be precisely de-
+scribed theoretically by characterizing the singular values of X
+in terms of s and the eigenvalues of A.
+For instance, postive
+deﬁnite matrices and negative deﬁnite matrices result in a faster
+singular value decay than indeﬁnite matrices. We will in this ex-
+ercise only verify the decay of the singular values of the solution
+to Lyapunov numerically. Let A = A0 −tI be and B = b ∈Rn be
+generated as follows.
+>> rand(’seed’,0); nx=5;
+>> A0=-gallery(’wathen’,nx,nx);
+>> n=length(A0); A=A0-t*speye(n,n);
+>> b=eye(n,1);
+Generate the following ﬁgure, where X is the solution to the Lya-
+punov equation (computed with lyap or lyap0) and σk(X) can
+be computed with svd(X).
+0
+20
+40
+60
+80
+10
+−15
+10
+−10
+10
+−5
+10
+0
+k
+σk(X)
+ 
+ 
+t=−10
+t=−5
+t=0
+t=5
+t=10
+The matlab code for the K-PIK algorithm
+is available on http://www.dm.unibo.
+it/~simoncin/software.html The code
+is for a more general case. You can set
+E=LE=speye(n,n)
+(d) Run K-PIK on the problem in (c) for the different values of t,
+including the values of t in the ﬁgure. Interpret the observations
+in (c) and relate to how well K-PIK works, i.e., if it computes
+an accurate solution and how many iterations (length(er2)) are
+required to reach a speciﬁed tolerance. Increase the size of the
+problem by increasing nx. What is the largest problem you can
+solve with lyap and kpik with ﬁve seconds of computation time
+(and not running out of memory).
+Lecture notes - Elias Jarlebring - 2017
+13
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017
+
+
+===== PDF PAGE 14 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+14. This exercise concerns a primitive (non-optimized) variant of kpik.
+Let the matrix A ∈Rn×n be generated by
+julia> function spectral_abscissa(A);
+ev,xv=eigs(A,which=:LR);
+I=indmax(real(ev));
+return real(ev[I]);
+end
+julia> n=100; srand(0);
+# reset random seed
+julia> A=sprandn(n,n,0.1);
+julia> s=spectral_abscissa(A);
+julia> alpha=1;
+julia> A=A-speye(size(A,1))*(alpha+s);
+julia> new_s=spectral_abscissa(A)
+-1.0000000000000373
+julia> b=randn(n);
+A former student of SF2524 has made
+kpik and several other matrix equation
+methods available for julia:
+https:
+//github.com/garrettthomaskth/
+LargeMatrixEquations.jl
+(a) Plot the singular value decay of the solution to the Lyapunov
+equation with W = bbT for different α-values, and experimen-
+tially determine a sufﬁcient α such that there exists a rank 5 ap-
+proximation of the Lyapunov equation which which is of order
+of magnitude 10−10 from the exact solution. In other words, de-
+termine α such that there exists ˜X with rank( ˜X) ≤5 and
+∥X −˜X∥≤10−10.
+For this exercise you may use X=lyap(full(A),b*b’).
+(b) kpik corresponds to a projection on the subspace
+span(q1, . . . , qm)
+=
+Km+1(A, b)
+(4.22a)
+span(g1, . . . , gm)
+=
+Km+1(A−1, b)
+(4.22b)
+By computing the matrices Q = [q1, . . . , qm] and G = [g1, . . . , gm]
+Constructing two separate Krylov sub-
+spaces and subsequently merging them
+with an call to qr() as we do in this
+exercise, is in general not efﬁcient, but
+sufﬁcient to obtain understanding of the
+method in this case.
+separately (with code you have computed previously in the course)
+we can compute an orthogonal basis of span(u1, . . . , u2m−1) with
+the commands
+julia> P,H=arnoldi...
+julia> G,H=arnoldi..
+julia> U,R=qr(hcat(P,G));
+julia> U=U[:,find(abs(diag(R)) .> 100*eps())]; # remove duplicate b vector
+Construct an approximate solution ˜X = UPUT by using the Galerkin
+approach. Plot the approximation error ∥˜X −X∥as a function m
+for α = 1,2,....
+(c) Compare the CPU-time your approach in (b) with the lyap for
+different values of n:
+Lecture notes - Elias Jarlebring - 2017
+14
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017
+
+
+===== PDF PAGE 15 =====
+Lecture notes in numerical linear algebra
+Numerical methods for Lyapunov equations
+julia> @time lyap(full(A),b*b’);
+0.022112 seconds (57 allocations: 749.859 KB)
+For which parameter values α is the low-rank approach more
+efﬁcient? Can you beat lyap? (In a fully optimized version of
+kpik this is possible, but for this equivalent but primitive variant,
+it depends on implementation details and your computer)
+Project suggestions
+Graduate level projects related to Lyapunov equations:
+• Alternating Direction Implicit (ADI)
+• Bartels-Stewart algorithm for the Sylvester equation
+• Balancing and balanced trunctation: Use the Lyapunov equation for
+model order reduction
+• Efﬁcient algorithm for the discrete-time Lyapunov equation
+• Complex Bartels-Stewart algorithm, derive algorithm based on the
+complex Schur decomposition..
+References
+[1] R. Bartels and G. W. Stewart. Solution of the matrix equation AX +
+XB = C. Comm A.C.M., 15(9):820–826, 1972.
+[2] L. Grubiši´c and D. Kressner. On the eigenvalue decay of solutions
+to operator Lyapunov equations. Syst. Control Lett., 73:42–47, 2014.
+[3] S. J Hammarling. Numerical solution of the stable, non-negative
+deﬁnite lyapunov equation lyapunov equation. 2(3):303–323, 1982.
+[4] H. Sandberg. An extension to balanced truncation with applica-
+tion to structured model reduction. IEEE Trans. Autom. Control, 55,
+2010.
+[5] V. Simoncini. A new iterative method for solving large-scale Lya-
+punov matrix equations.
+SIAM J. Sci. Comput., 29(3):1268–1288,
+2007.
+[6] T. Stykel. Stability and inertia theorems for generalized Lyapunov
+equations. Linear Algebra Appl., 355:297–314, 2002.
+[7] B. Vandereycken and S. Vandewalle. A Riemannian optimization
+approach for computing low-rank solutions of Lyapunov equa-
+tions. SIAM J. Matrix Anal. Appl., 31(5):2553–2579, 2010.
+Lecture notes - Elias Jarlebring - 2017
+15
+version:2017-03-06, Elias Jarlebring - copyright 2015-2017

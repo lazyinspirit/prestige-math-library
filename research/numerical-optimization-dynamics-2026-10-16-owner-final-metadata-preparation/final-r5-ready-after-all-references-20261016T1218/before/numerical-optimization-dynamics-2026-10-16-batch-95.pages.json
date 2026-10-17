@@ -1,0 +1,436 @@
+[
+  {
+    "order": 2474,
+    "id": "deferred-correction-and-collocation-iterations",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Deferred correction and collocation iterations",
+    "companion": "deferred-correction-and-collocation-iterations-examples",
+    "requires": [
+      "polynomial-interpolation-and-remainder",
+      "global-ode-and-density-error",
+      "runge-kutta-methods-and-order",
+      "implicit-stiff-time-stepping-and-algebraic-error",
+      "gaussian-quadrature"
+    ],
+    "items": [
+      {
+        "id": "lem-continuous-riemann-lebesgue-agreement",
+        "kind": "lemma",
+        "title": "Riemann and Lebesgue integrals agree for continuous data on [0,1]",
+        "deps": [
+          "thm-continuous-implies-integrable",
+          "thm-heine-cantor-r",
+          "def-darboux-integral",
+          "def-darboux-sums",
+          "def-partition-and-refinement",
+          "def-continuity-real",
+          "def-borel-sigma-algebra",
+          "def-interval",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "thm-reals-ordered-field",
+          "def-countable-choice",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-unit-interval-lebesgue-gauss-data-valid",
+        "kind": "lemma",
+        "title": "Lebesgue measure on the unit interval supplies Gaussian moment data",
+        "deps": [
+          "def-gauss-moment-data",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-countable-choice",
+          "def-borel-sigma-algebra",
+          "def-continuity-real",
+          "thm-algebra-of-continuous-functions"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-collocation-quadrature-tableau",
+        "kind": "definition",
+        "title": "Collocation tableau from distinct quadrature nodes",
+        "deps": [
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-implicit-runge-kutta-stage-equations",
+          "def-oriented-integral",
+          "def-cardinal-polynomial-interpolation",
+          "lem-cardinal-basis-degree-and-values"
+        ],
+        "dependency_level": 3,
+        "justified_by": [
+          "lem-collocation-quadrature-matrix-well-defined"
+        ]
+      },
+      {
+        "id": "lem-collocation-quadrature-matrix-well-defined",
+        "kind": "lemma",
+        "title": "Collocation quadrature data are well defined",
+        "deps": [
+          "def-collocation-quadrature-tableau",
+          "def-cardinal-polynomial-interpolation",
+          "lem-cardinal-basis-degree-and-values",
+          "thm-continuous-implies-integrable",
+          "thm-algebra-of-continuous-functions",
+          "thm-extreme-value-r",
+          "def-oriented-integral"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "alg-explicit-left-euler-sdc-sweep",
+        "kind": "algorithm",
+        "title": "Finite explicit-left-Euler spectral deferred-correction sweep",
+        "deps": [
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-collocation-quadrature-tableau",
+          "lem-collocation-quadrature-matrix-well-defined"
+        ],
+        "dependency_level": 5,
+        "justified_by": [
+          "lem-sdc-sweep-work-and-storage-bound"
+        ]
+      },
+      {
+        "id": "lem-sdc-sweep-work-and-storage-bound",
+        "kind": "lemma",
+        "title": "Stage-call, storage and arithmetic bounds for a finite SDC execution",
+        "deps": [
+          "alg-explicit-left-euler-sdc-sweep"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathew F. Causley and David C. Seal, On the convergence of spectral deferred correction methods, section 1.1, explicit sweep equation (9); local finite-budget and cache accounting refinement",
+              "url": "https://arxiv.org/pdf/1706.06245"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sdc-fixed-point-is-collocation-stage",
+        "kind": "lemma",
+        "title": "Fixed points of the SDC sweep are collocation stages",
+        "deps": [
+          "alg-explicit-left-euler-sdc-sweep",
+          "def-collocation-quadrature-tableau"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-one-node-gauss-data-is-midpoint",
+        "kind": "lemma",
+        "title": "One-node Gauss data are midpoint data",
+        "deps": [
+          "def-gauss-moment-data",
+          "def-gauss-quadrature-rule",
+          "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+          "lem-gauss-quadrature-rule-data-well-defined",
+          "lem-unit-interval-lebesgue-gauss-data-valid",
+          "lem-continuous-riemann-lebesgue-agreement",
+          "thm-ftc-second-part",
+          "def-cardinal-polynomial-interpolation",
+          "def-collocation-quadrature-tableau",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-sdc-scalar-linear-iteration-matrix",
+        "kind": "lemma",
+        "title": "SDC iteration matrix for the scalar linear test equation",
+        "deps": [
+          "alg-explicit-left-euler-sdc-sweep",
+          "lem-sdc-fixed-point-is-collocation-stage",
+          "def-collocation-quadrature-tableau"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-sdc-sweep-contraction-and-error-bound",
+        "kind": "theorem",
+        "title": "Contraction and residual error bound for the SDC sweep",
+        "deps": [
+          "def-collocation-quadrature-tableau",
+          "alg-explicit-left-euler-sdc-sweep",
+          "lem-sdc-fixed-point-is-collocation-stage",
+          "thm-banach-fixed-point",
+          "thm-euclidean-space-complete",
+          "def-metric-space",
+          "def-complete-metric-space",
+          "def-cauchy-in-metric",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-collocation-polynomial-scaled-derivatives",
+        "kind": "lemma",
+        "title": "Collocation polynomial derivatives scale with the step size",
+        "deps": [
+          "def-collocation-quadrature-tableau",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "def-higher-derivatives-and-smoothness",
+          "lem-cardinal-basis-degree-and-values",
+          "thm-cardinal-polynomial-interpolant-exists-uniquely"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-collocation-local-defect-order-m",
+        "kind": "theorem",
+        "title": "M-node collocation has local defect order M",
+        "deps": [
+          "def-collocation-quadrature-tableau",
+          "lem-collocation-quadrature-matrix-well-defined",
+          "def-vector-valued-derivative-and-integral",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "def-higher-derivatives-and-smoothness",
+          "def-cardinal-polynomial-interpolation",
+          "lem-cardinal-basis-degree-and-values",
+          "thm-cardinal-polynomial-interpolant-exists-uniquely"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-collocation-one-step-stability",
+        "kind": "theorem",
+        "title": "Small-step collocation maps are Lipschitz stable",
+        "deps": [
+          "def-collocation-quadrature-tableau",
+          "lem-collocation-quadrature-matrix-well-defined",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-gauss-collocation-weighted-defect-bound",
+        "kind": "lemma",
+        "title": "A Gaussian collocation defect has a high-order weighted endpoint bound",
+        "deps": [
+          "def-collocation-quadrature-tableau",
+          "def-cardinal-polynomial-interpolation",
+          "lem-cardinal-basis-degree-and-values",
+          "lem-unit-interval-lebesgue-gauss-data-valid",
+          "def-gauss-quadrature-rule",
+          "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+          "lem-collocation-quadrature-matrix-well-defined",
+          "lem-collocation-polynomial-scaled-derivatives",
+          "thm-gauss-hermite-mean-value-remainder",
+          "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+          "lem-continuous-riemann-lebesgue-agreement",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "thm-ftc-second-part",
+          "thm-uniform-limit-continuous-real-functions",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "def-vector-valued-derivative-and-integral",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-euclidean-space-complete",
+          "def-higher-derivatives-and-smoothness",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9
+      },
+      {
+        "id": "prop-one-node-gauss-collocation-order-two",
+        "kind": "proposition",
+        "title": "One-node Gauss collocation is implicit midpoint of order two",
+        "deps": [
+          "def-collocation-quadrature-tableau",
+          "lem-one-node-gauss-data-is-midpoint",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-vector-valued-derivative-and-integral",
+          "thm-collocation-one-step-stability",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "def-higher-derivatives-and-smoothness",
+          "thm-global-error-from-one-step-defect-and-stability",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-collocation-global-order-m",
+        "kind": "theorem",
+        "title": "M-node collocation has global order M",
+        "deps": [
+          "thm-collocation-local-defect-order-m",
+          "thm-collocation-one-step-stability",
+          "thm-global-error-from-one-step-defect-and-stability"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-sdc-finite-sweeps-raise-order",
+        "kind": "theorem",
+        "title": "Each SDC sweep raises the order up to the collocation order",
+        "deps": [
+          "def-collocation-quadrature-tableau",
+          "alg-explicit-left-euler-sdc-sweep",
+          "thm-sdc-sweep-contraction-and-error-bound",
+          "thm-collocation-local-defect-order-m",
+          "lem-discrete-one-step-error-recurrence-bound"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-sdc-residual-tolerance-preserves-order",
+        "kind": "theorem",
+        "title": "A stage residual tolerance preserves collocation order",
+        "deps": [
+          "def-collocation-quadrature-tableau",
+          "thm-sdc-sweep-contraction-and-error-bound",
+          "thm-collocation-one-step-stability",
+          "thm-collocation-local-defect-order-m",
+          "lem-discrete-one-step-error-recurrence-bound"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-gauss-collocation-local-defect-order-2m",
+        "kind": "theorem",
+        "title": "M-node Gauss collocation has local defect order 2M",
+        "deps": [
+          "def-collocation-quadrature-tableau",
+          "def-gauss-moment-data",
+          "def-gauss-quadrature-rule",
+          "lem-unit-interval-lebesgue-gauss-data-valid",
+          "def-countable-choice",
+          "lem-continuous-riemann-lebesgue-agreement",
+          "def-vector-valued-derivative-and-integral",
+          "lem-collocation-quadrature-matrix-well-defined",
+          "lem-gauss-collocation-weighted-defect-bound"
+        ],
+        "dependency_level": 10
+      },
+      {
+        "id": "thm-gauss-collocation-global-order-2m",
+        "kind": "theorem",
+        "title": "M-node Gauss collocation has global order 2M",
+        "deps": [
+          "thm-gauss-collocation-local-defect-order-2m",
+          "thm-collocation-one-step-stability",
+          "thm-global-error-from-one-step-defect-and-stability"
+        ],
+        "dependency_level": 11
+      }
+    ]
+  },
+  {
+    "order": 2475,
+    "id": "deferred-correction-and-collocation-iterations-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Deferred correction and collocation iterations — Examples",
+    "companion": "deferred-correction-and-collocation-iterations",
+    "requires": [
+      "deferred-correction-and-collocation-iterations"
+    ],
+    "items": [
+      {
+        "id": "ex-sdc-cost-accounting-per-sweep",
+        "kind": "example",
+        "title": "Work and storage counts for an M-node SDC sweep",
+        "deps": [
+          "alg-explicit-left-euler-sdc-sweep",
+          "lem-sdc-sweep-work-and-storage-bound"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-sdc-one-node-gauss-stiff-iteration-diverges",
+        "kind": "example",
+        "title": "An explicit SDC sweep diverges on a stiff scalar mode",
+        "deps": [
+          "lem-sdc-scalar-linear-iteration-matrix",
+          "lem-one-node-gauss-data-is-midpoint",
+          "def-collocation-quadrature-tableau",
+          "alg-explicit-left-euler-sdc-sweep",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-sdc-two-node-gauss-nonstiff-cubic-ivp",
+        "kind": "example",
+        "title": "Two-node Gauss collocation exactly solves a nonstiff cubic IVP",
+        "deps": [
+          "def-collocation-quadrature-tableau",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "lem-collocation-quadrature-matrix-well-defined",
+          "lem-continuous-riemann-lebesgue-agreement",
+          "def-gauss-quadrature-rule",
+          "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+          "thm-ftc-second-part",
+          "lem-unit-interval-lebesgue-gauss-data-valid",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-sdc-constant-predictor-too-few-sweeps",
+        "kind": "example",
+        "title": "Too few sweeps lower the order from Gauss collocation",
+        "deps": [
+          "thm-sdc-finite-sweeps-raise-order",
+          "prop-one-node-gauss-collocation-order-two",
+          "thm-sdc-residual-tolerance-preserves-order",
+          "alg-explicit-left-euler-sdc-sweep",
+          "lem-one-node-gauss-data-is-midpoint",
+          "thm-sdc-sweep-contraction-and-error-bound",
+          "thm-collocation-local-defect-order-m",
+          "def-real-exponential-function-and-e",
+          "lem-exponential-dominates-one-plus-x",
+          "thm-binomial-theorem",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "thm-derivative-of-exponential",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "cor-mean-value-theorem",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9
+      },
+      {
+        "id": "ex-sdc-inexact-midpoint-stage-residual",
+        "kind": "example",
+        "title": "An inexact midpoint stage solve has a controlled update error",
+        "deps": [
+          "prop-one-node-gauss-collocation-order-two",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "thm-sdc-residual-tolerance-preserves-order",
+          "lem-small-step-implicit-rk-branch-and-residual-error",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9
+      }
+    ]
+  }
+]

@@ -1,0 +1,299 @@
+[
+  {
+    "order": 2454,
+    "id": "sqp-active-set-and-augmented-lagrangian-methods",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Sqp active set and augmented lagrangian methods",
+    "companion": "sqp-active-set-and-augmented-lagrangian-methods-examples",
+    "requires": [
+      "finite-precision-direct-factorizations",
+      "inequality-kkt-duality-and-optimality-certificates",
+      "nonconvex-line-search-and-inexact-newton-methods",
+      "bfgs-and-limited-memory-quasi-newton-methods"
+    ],
+    "items": [
+      {
+        "id": "def-sqp-linearized-quadratic-subproblem",
+        "kind": "definition",
+        "title": "The linearized quadratic subproblem in sequential quadratic programming",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-sqp-augmented-lagrangian-equality-and-inequality",
+        "kind": "definition",
+        "title": "Equality and inequality augmented Lagrangians and multiplier updates",
+        "deps": [
+          "def-inequality-constrained-program-and-kkt-geometry"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+        "kind": "lemma",
+        "title": "The SQP KKT matrix is nonsingular under positive reduced curvature",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "def-sqp-l1-exact-penalty-merit",
+        "kind": "definition",
+        "title": "L1 exact-penalty merit and predicted decrease for SQP",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-sqp-augmented-lagrangian-multiplier-method",
+        "kind": "algorithm",
+        "title": "Finite-budget augmented-Lagrangian multiplier method",
+        "deps": [
+          "def-sqp-augmented-lagrangian-equality-and-inequality",
+          "def-kkt-residual-and-normal-cone"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate",
+        "kind": "lemma",
+        "title": "A feasible strictly convex linear-constrained QP has a unique KKT minimizer with independent active support",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "thm-farkas-alternative-for-finite-linear-systems",
+          "thm-convex-kkt-sufficiency-and-normal-cone-certificate",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-sqp-exhaustive-active-set-qp-solve",
+        "kind": "algorithm",
+        "title": "Exact exhaustive active-set solve for the SQP quadratic subproblem",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-sqp-feasible-working-set-qp-solve",
+        "kind": "algorithm",
+        "title": "Feasible active-set QP solve with blocking constraints and a finite cap",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-sqp-second-order-correction",
+        "kind": "algorithm",
+        "title": "Minimum-norm second-order correction for identified active constraints",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-sqp-exact-hessian-newton-step",
+        "kind": "algorithm",
+        "title": "Full-step exact-Hessian SQP after active-set identification",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-sqp-reduced-bfgs-kkt-step",
+        "kind": "algorithm",
+        "title": "Reduced-BFGS SQP KKT step with projected Hessian error",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "alg-sqp-exact-hessian-newton-step",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+          "def-bfgs-curvature-pair-and-update-formulas",
+          "lem-bfgs-updates-preserve-secant-symmetry-and-spd"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "alg-sqp-merit-globalization-with-finite-budgets",
+        "kind": "algorithm",
+        "title": "L1 merit globalization with finite penalty and backtracking budgets",
+        "deps": [
+          "alg-sqp-exhaustive-active-set-qp-solve",
+          "def-sqp-l1-exact-penalty-merit",
+          "alg-sqp-second-order-correction"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+        "kind": "theorem",
+        "title": "The exhaustive active-set QP solve terminates with the unique minimizer exactly when feasible",
+        "deps": [
+          "lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate",
+          "alg-sqp-exhaustive-active-set-qp-solve",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+          "def-sqp-linearized-quadratic-subproblem"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-sqp-working-set-qp-terminates-under-nondegeneracy-anticycling",
+        "kind": "theorem",
+        "title": "A feasible working-set QP solve terminates under nondegenerate steps",
+        "deps": [
+          "lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate",
+          "alg-sqp-feasible-working-set-qp-solve",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-sqp-second-order-correction-residual-order",
+        "kind": "theorem",
+        "title": "Second-order correction reduces the active constraint residual to cubic order",
+        "deps": [
+          "alg-sqp-second-order-correction",
+          "def-sqp-linearized-quadratic-subproblem",
+          "cor-second-order-taylor-expansion-with-the-hessian"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-sqp-exact-hessian-local-quadratic-convergence",
+        "kind": "theorem",
+        "title": "Exact-Hessian SQP converges quadratically on the identified active KKT system",
+        "deps": [
+          "alg-sqp-exact-hessian-newton-step",
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+          "thm-inexact-newton-local-forcing-rates"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-sqp-reduced-bfgs-superlinear-under-dm",
+        "kind": "theorem",
+        "title": "Reduced-BFGS SQP is locally superlinear under reduced Dennis-More and inverse bounds",
+        "deps": [
+          "alg-sqp-reduced-bfgs-kkt-step",
+          "alg-sqp-exact-hessian-newton-step",
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+          "thm-inexact-newton-local-forcing-rates"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-sqp-augmented-lagrangian-local-convergence",
+        "kind": "theorem",
+        "title": "Augmented-Lagrangian multipliers converge locally with summable inner residuals",
+        "deps": [
+          "def-sqp-augmented-lagrangian-equality-and-inequality",
+          "def-inequality-constrained-program-and-kkt-geometry",
+          "alg-sqp-augmented-lagrangian-multiplier-method",
+          "thm-euclidean-implicit-function-theorem"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+        "kind": "algorithm",
+        "title": "Finite-precision reduced-QR KKT solve with certified residual status",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+          "lem-scaled-householder-step-meets-local-backward-error-premise",
+          "thm-computed-full-rank-least-squares-backward-stability",
+          "lem-rounded-linear-and-normal-residual-certificates"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-sqp-merit-globalization-finite-budget-status",
+        "kind": "theorem",
+        "title": "Finite merit-globalization budgets return a defined status",
+        "deps": [
+          "alg-sqp-merit-globalization-with-finite-budgets"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-sqp-finite-precision-kkt-residual-certificate-sound",
+        "kind": "theorem",
+        "title": "The computed KKT residual certificate bounds the exact linear-system residual",
+        "deps": [
+          "alg-sqp-finite-precision-kkt-qr-solve-and-residual-check",
+          "lem-rounded-linear-and-normal-residual-certificates",
+          "thm-computed-full-rank-least-squares-backward-stability",
+          "lem-sqp-kkt-matrix-nonsingularity-under-reduced-curvature",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 2455,
+    "id": "sqp-active-set-and-augmented-lagrangian-methods-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Sqp active set and augmented lagrangian methods — Examples",
+    "companion": "sqp-active-set-and-augmented-lagrangian-methods",
+    "requires": [
+      "sqp-active-set-and-augmented-lagrangian-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-sqp-engineering-design-active-inequality",
+        "kind": "example",
+        "title": "Two-component design with an active demand constraint",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "alg-sqp-exhaustive-active-set-qp-solve",
+          "thm-sqp-exhaustive-active-set-qp-solve-correct-finite",
+          "thm-convex-kkt-sufficiency-and-normal-cone-certificate"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-sqp-maratos-effect-and-second-order-correction",
+        "kind": "example",
+        "title": "A full SQP step is rejected by the L1 merit test and repaired by SOC",
+        "deps": [
+          "def-sqp-linearized-quadratic-subproblem",
+          "def-sqp-l1-exact-penalty-merit",
+          "alg-sqp-merit-globalization-with-finite-budgets",
+          "alg-sqp-second-order-correction",
+          "thm-sqp-second-order-correction-residual-order"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-sqp-augmented-lagrangian-penalty-conditioning",
+        "kind": "example",
+        "title": "A quadratic equality model shows the AL conditioning tradeoff",
+        "deps": [
+          "def-sqp-augmented-lagrangian-equality-and-inequality",
+          "alg-sqp-augmented-lagrangian-multiplier-method"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  }
+]

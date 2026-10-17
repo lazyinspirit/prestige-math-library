@@ -1,0 +1,52 @@
+{
+  "batch": "17",
+  "opened": [
+    "alg-householder-bidiagonalization",
+    "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+    "alg-rank-thresholded-least-squares-by-svd",
+    "alg-scaled-complex-householder-and-givens-updates",
+    "cex-classical-column-pivoted-qr-is-not-strong-with-factor-one",
+    "computed-singular-values-and-rank-revealing-factorizations",
+    "computed-singular-values-and-rank-revealing-factorizations-examples",
+    "cor-computed-singular-values-absolute-error-from-backward-stability",
+    "ex-absolute-versus-relative-singular-value-error",
+    "ex-nearly-rank-deficient-design-matrix",
+    "lem-exact-householder-bidiagonal-reduction",
+    "lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence",
+    "lem-scaled-complex-householder-and-givens-local-backward-error",
+    "lem-singular-value-product-bound",
+    "lem-singular-values-lipschitz-in-spectral-norm",
+    "lem-strong-rrqr-column-swap-volume-ratio",
+    "prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex",
+    "thm-bidiagonal-singular-values-relative-under-componentwise-perturbations",
+    "thm-bidiagonal-svd-backward-error-under-local-stability",
+    "thm-strong-rrqr-singular-value-comparisons",
+    "thm-strong-rrqr-swap-rule-terminates",
+    "thm-svd-thresholded-least-squares-minimum-norm-model"
+  ],
+  "not_opened": [],
+  "flagged": [
+    {
+      "id": "computed-singular-values-and-rank-revealing-factorizations",
+      "location": "Second paragraph, final sentence",
+      "defect": "false-claim",
+      "evidence": "The page says the solver is an original-matrix minimum-norm least-squares solution “only when all discarded singular values are zero.” Take A = I₂, τ = 1, and b = 0. The strict threshold discards both positive singular values, so Aτ = 0 and xτ = 0; nevertheless xτ is the unique minimum-norm least-squares solution of Ax = b. The only-if claim is false.",
+      "severity": "fatal"
+    },
+    {
+      "id": "cor-computed-singular-values-absolute-error-from-backward-stability",
+      "location": "Statement, definition of ε_read",
+      "defect": "ill-formed",
+      "evidence": "The Statement allows A ∈ F^{m×n} without requiring p = min(m,n) ≥ 1, then defines ε_read using max_i |d_i|. For a zero-sized matrix, the diagonal index set is empty and this maximum is undefined. Zero-sized shapes are explicitly included in the opened Frobenius-norm dependency. Add p ≥ 1 or define the empty-case allowance.",
+      "severity": "fatal"
+    },
+    {
+      "id": "cor-computed-singular-values-absolute-error-from-backward-stability",
+      "location": "Title",
+      "defect": "overstrong-title-or-statement",
+      "evidence": "The title says computed singular values have error bounded by “the perturbation.” The Statement gives that bound alone for exact singular values of B, but for actual rounded modulus readout it gives ||E||₂ + ε_read. Since the algorithm returns rounded modulus values, the title overstates the bound for the computed readout unless it is qualified.",
+      "severity": "fatal"
+    }
+  ],
+  "coverage_note": "Read all 22 scoped carriers once and checked the cited dependencies needed for their arguments. The historical numerical-rank citation finding is no longer present: the current definition qualifies its cited spectral specialization as real-only. I relied on local proofs and did not independently verify literature references against external source texts."
+}

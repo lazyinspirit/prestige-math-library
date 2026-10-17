@@ -1,0 +1,326 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-47.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-47.proof-contracts.json (proposed)
+@@ -81,41 +81,98 @@
+           "source_section": "Definition",
+           "quote": "Let $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is",
+           "uses": [
++            "1.2",
++            "1.3",
++            "2.1",
++            "3.2"
++          ]
++        },
++        {
++          "fact": "F1",
++          "source": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
++          "source_section": "Statement",
++          "quote": "Let $p\\in\\mathbb{Q}$ with $p\\ge 1$ and let $m,n,q\\in\\mathbb{N}$, with the\ninduced $p$-norms of [[def-induced-matrix-p-norm]].\n\n1. **Compatibility.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and every\n   $x\\in\\mathbb{R}^{n}$,\n   $$\\lVert Ax\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert x\\rVert_p.$$\n2. **Submultiplicativity.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and\n   $B\\in M_{n\\times q}(\\mathbb{R})$,\n   $$\\lVert AB\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert B\\rVert_p.$$\n3. **Normalisation.** For every $n\\ge 1$,\n   $$\\lVert I_n\\rVert_p=1,$$\n   where $I_n$ is the identity matrix of [[def-matrix-product-and-identity-matrix]];\n   at $n=0$ the unique empty matrix $I_0\\in M_0(\\mathbb{R})$ has\n   $\\lVert I_0\\rVert_p=0$, the convention of [[def-induced-matrix-p-norm]].",
++          "uses": [
++            "1.2",
++            "1.3",
++            "2.1",
++            "3.2"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "def-real-exponential-function-and-e",
++          "source_section": "Definition",
++          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].",
++          "uses": [
++            "1.2",
++            "1.3",
++            "3.2"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "lem-exponential-series-has-infinite-radius",
++          "source_section": "Statement",
++          "quote": "For every real $x$, the series $\\sum_{n\\ge0}x^n/\\iota(n!)$ converges absolutely. Its power-series radius is therefore $+\\infty$.",
++          "uses": [
++            "1.2",
++            "1.3",
++            "3.2"
++          ]
++        },
++        {
++          "fact": "F3",
++          "source": "thm-matrix-multiplication-laws",
++          "source_section": "Statement",
++          "quote": "Matrix multiplication over a field is associative and unital, distributes over\nentrywise addition on both sides, and is compatible with scalar multiplication.\nPrecisely, whenever the displayed products have compatible shapes,\n\n$$A(BC)=(AB)C,\\qquad I_mA=A=AI_n,$$\n\n$$(A+A')B=AB+A'B,\\qquad A(B+B')=AB+AB',$$\n\n$$0B=0=A0,\\qquad (\\lambda A)B=\\lambda(AB)=A(\\lambda B).$$\n\nThese identities include every zero-sized shape.",
++          "uses": [
++            "1.1",
++            "2.1",
++            "3.1",
++            "3.2"
++          ]
++        },
++        {
++          "fact": "F4",
++          "source": "def-group-power",
++          "source_section": "Definition",
++          "quote": "**Natural exponents, in a monoid.** Let $(M,\\cdot,e)$ be a monoid\n([[def-semigroup-and-monoid]]) and $g \\in M$. By the recursion theorem\n([[thm-recursion]]), applied with the set $M$, the element $e$ and the function\n$x \\mapsto x \\cdot g$ from $M$ to $M$, there is exactly one function\n$\\mathbb{N} \\to M$, written $n \\mapsto g^{n}$, with\n\n$$g^{0} = e, \\qquad g^{\\sigma(n)} = g^{n} \\cdot g \\quad (n \\in \\mathbb{N}).$$\n\nIn particular $g^{0} = e$ for **every** $g$, including $g = e$, and\n$g^{1} = g^{\\sigma(0)} = e \\cdot g = g$. Since $\\mathbb{N}$ contains $0$\n([[def-natural-numbers]]), the exponent $0$ is a genuine value of the definition\nand not a separate convention.\n\n**Integer exponents, in a group.** Let $G$ be a group ([[def-group]]) and\n$g \\in G$. Write $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ for the embedding\n$\\iota(k) = [(k,0)]$ of [[lem-nat-embeds-int]], which is injective, preserves\naddition, multiplication and order, and has as image exactly the nonnegative\nintegers. For $x \\in \\mathbb{Z}$ define\n\n- $g^{x} := g^{k}$, the natural power, when $0 \\le x$ and $x = \\iota(k)$;\n- $g^{x} := (g^{k})^{-1}$ when $x < 0$ and $-x = \\iota(k)$.\n\n**Why this is well defined.** The order on $\\mathbb{Z}$ is total and\nantisymmetric ([[thm-int-ordered-ring]], [[def-int-order]]), so exactly one of\n$0 \\le x$ and $x < 0$ holds and the two clauses never both apply. In the first\nclause $x$ is nonnegative, so $x = \\iota(k)$ for some $k \\in \\mathbb{N}$, and $k$\nis unique because $\\iota$ is injective. In the second clause $x < 0$ gives\n$0 = x + (-x) < 0 + (-x) = -x$ by compatibility of the order with addition\n([[thm-int-ordered-ring]], [[def-int-operations]]), so $-x$ is a positive integer\nand again $-x = \\iota(k)$ for a unique $k$. The inverse $(g^{k})^{-1}$ is a single\ndetermined element by [[lem-inverse-unique]] and [[def-invertible-element]].\nFinally the two readings of $g^{\\iota(k)}$, as a natural power and as an integer\npower, agree by construction, so no ambiguity is introduced.\n\n**Abbreviation.** In an exponent we write $k$ for the integer $\\iota(k)$ when a\nnatural number $k$ is used where an integer is expected; this is unambiguous\nbecause $\\iota$ is injective and preserves the arithmetic and the order, and\nbecause the two readings of $g^{k}$ agree as just noted.\n\n**Additive notation.** When the group is written additively the same object is\nwritten $n g$ or $n \\cdot g$ rather than $g^{n}$, with $0 g = 0$ and\n$\\sigma(n) g = n g + g$; the definitions are identical, only the symbols differ.",
++          "uses": [
+             "1.1",
+             "1.2",
++            "1.3",
++            "2.1",
++            "3.1",
++            "3.2"
++          ]
++        },
++        {
++          "fact": "F5",
++          "source": "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums",
++          "source_section": "Statement",
++          "quote": "Let $m,n\\in\\mathbb{N}$ with $m\\ge 1$ and $n\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$, with the induced $1$-norm and the\nseparately defined induced $\\infty$-norm of\n[[def-induced-matrix-p-norm]].\n\n1. **Maximum column sum.** $\\lVert A\\rVert_1=\\max_{j<n}\\sum_{i<m}|a_{ij}|$.\n2. **Maximum row sum.** $\\lVert A\\rVert_\\infty=\\max_{i<m}\\sum_{j<n}|a_{ij}|$.",
++          "uses": [
++            "1.2"
++          ]
++        },
++        {
++          "fact": "F6",
++          "source": "def-factorial-and-falling-factorial",
++          "source_section": "Definition",
++          "quote": "**The factorial.** By the recursion theorem ([[thm-recursion]]) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in [[def-nat-finite-sum-and-product]], there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with\n\n$$F(0) = 1, \\qquad F(\\sigma(n)) = F(n)\\cdot\\sigma(n) \\quad (n \\in \\mathbb{N}).$$\n\nWe write $n! := F(n)$. Thus $0! = 1$, $1! = 0!\\cdot 1 = 1$, $2! = 1!\\cdot 2 = 2$,\n$3! = 6$, $4! = 24$, $5! = 120$, $6! = 720$.\n\n**$0! = 1$ is the base clause of this recursion**, not a convention imported from\nelsewhere. Nothing about empty products is presupposed; the agreement with the\nempty product is proved below, in clause (a), rather than assumed.\n\n**Truncated difference.** Throughout, $n - k$ is the operation fixed in\n[[def-nat-finite-sum-and-product]]: the unique $j$ with $k + j = n$ when\n$k \\le n$, and $0$ when $n < k$.\n\n**The falling factorial.** For $n \\in \\mathbb{N}$ define $n^{\\underline{k}}$ by\nrecursion on $k$, by the recursion theorem applied to\n$\\mathbb{N}\\times\\mathbb{N}$ with starting element $(0,1)$ and\n$f(k, v) = (\\sigma(k),\\, v \\cdot (n-k))$:\n\n$$n^{\\underline{0}} = 1, \\qquad n^{\\underline{\\sigma(k)}} = n^{\\underline{k}}\\cdot(n-k) .$$\n\nSo $n^{\\underline{1}} = 1\\cdot(n-0) = n$ and $n^{\\underline{2}} = n\\,(n-1)$, and\nfor $k \\le n$ the value is the product $n(n-1)\\cdots(n-k+1)$ of the $k$ topmost\nfactors.\n\n**Four facts, proved here because the page uses each of them.**\n\n**(a) The factorial is the product of the first $n$ positive naturals.**\n$n! = \\prod_{j<n}\\sigma(j) = \\prod_{j<n}(j+1)$, the $\\mathbb{N}$-valued product of\n[[def-nat-finite-sum-and-product]]. Induction ([[thm-induction-principle]]): at\n$n = 0$ both sides are $1$, the empty product and the base clause agreeing; and\n$\\prod_{j<\\sigma(n)}\\sigma(j) = \\big(\\prod_{j<n}\\sigma(j)\\big)\\cdot\\sigma(n) = n!\\cdot\\sigma(n) = \\sigma(n)!$.\n**So the empty-product reading and the base-clause reading are the same reading**,\nand neither was assumed.\n\n**(b) $n! \\ne 0$, and $\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ ([[thm-omega-is-peano-system]]) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot y$\n([[lem-nat-mult-identity]]) and cancellation gives $x = 0$\n([[lem-nat-mult-cancellative]]). So $n! \\ne 0$ for every $n$ by induction. For the second, apply the bridge clause\n6 of that lemma to clause (a) above. This is what makes the factorial of this\npage and the real-valued product $\\prod_{j<n}(j+1)$ used elsewhere in the library\n**one object seen twice**, rather than two unrelated notions.\n\n**(c) $n^{\\underline{k}}\\cdot(n-k)! = n!$ for $k \\le n$.** Induction on $k$, for\nall $n$ at once. At $k = 0$ this reads $1 \\cdot n! = n!$. Assume it at $k$ and\nlet $\\sigma(k) \\le n$; then $k \\le n$, and writing $d := n - k$ we have\n$k + d = n$ and $d \\ne 0$, since $k + 0 = k \\ne n$; so $d = \\sigma(e)$ for a\nunique $e$ ([[lem-nat-nonzero-is-successor]]), and $\\sigma(k) + e = n$, that is\n$e = n - \\sigma(k)$ ([[lem-nat-add-cancellative]]). Therefore\n$n^{\\underline{\\sigma(k)}}\\cdot\\big(n-\\sigma(k)\\big)! = n^{\\underline{k}}\\cdot(n-k)\\cdot e! = n^{\\underline{k}}\\cdot\\big(e!\\cdot\\sigma(e)\\big) = n^{\\underline{k}}\\cdot\\sigma(e)! = n^{\\underline{k}}\\cdot(n-k)! = n!$,\nusing commutativity and associativity of multiplication\n([[lem-nat-mult-associative]], [[lem-nat-mult-commutative]]) and the recursion\nclause for the factorial.\n\n**(d) Boundary values.** $n^{\\underline{0}} = 1$ for every $n$, by the base\nclause; $n^{\\underline{n}} = n!$, since clause (c) at $k = n$ gives\n$n^{\\underline{n}}\\cdot 0! = n!$ and $0! = 1$; and\n$n^{\\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives\n$n^{\\underline{\\sigma(n)}} = n^{\\underline{n}}\\cdot 0 = 0$, the clause\n$x \\cdot 0 = 0$ being definitional ([[def-nat-multiplication]]), and if\n$n^{\\underline{k}} = 0$ then\n$n^{\\underline{\\sigma(k)}} = 0$ as well, so $n^{\\underline{k}} = 0$ for every\n$k \\ge \\sigma(n)$ by induction.",
++          "uses": [
++            "1.3",
+             "3.1"
+           ]
+         },
+         {
+-          "fact": "F1",
+-          "source": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+-          "source_section": "Statement",
+-          "quote": "Let $p\\in\\mathbb{Q}$ with $p\\ge 1$ and let $m,n,q\\in\\mathbb{N}$, with the\ninduced $p$-norms of [[def-induced-matrix-p-norm]].\n\n1. **Compatibility.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and every\n   $x\\in\\mathbb{R}^{n}$,\n   $$\\lVert Ax\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert x\\rVert_p.$$\n2. **Submultiplicativity.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and\n   $B\\in M_{n\\times q}(\\mathbb{R})$,\n   $$\\lVert AB\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert B\\rVert_p.$$\n3. **Normalisation.** For every $n\\ge 1$,\n   $$\\lVert I_n\\rVert_p=1,$$\n   where $I_n$ is the identity matrix of [[def-matrix-product-and-identity-matrix]];\n   at $n=0$ the unique empty matrix $I_0\\in M_0(\\mathbb{R})$ has\n   $\\lVert I_0\\rVert_p=0$, the convention of [[def-induced-matrix-p-norm]].",
+-          "uses": [
+-            "1.1",
+-            "1.2",
+-            "3.1"
+-          ]
+-        },
+-        {
+-          "fact": "F2",
++          "fact": "F6",
+           "source": "def-real-exponential-function-and-e",
+           "source_section": "Definition",
+-          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].",
+-          "uses": [
+-            "1.1",
+-            "1.2",
+-            "3.1"
+-          ]
+-        },
+-        {
+-          "fact": "F2",
+-          "source": "lem-exponential-series-has-infinite-radius",
+-          "source_section": "Statement",
+-          "quote": "For every real $x$, the series $\\sum_{n\\ge0}x^n/\\iota(n!)$ converges absolutely. Its power-series radius is therefore $+\\infty$.",
+-          "uses": [
+-            "1.1",
+-            "1.2",
++          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
++          "uses": [
++            "1.3",
+             "3.1"
+           ]
+         }
+@@ -124,43 +181,95 @@
+         {
+           "id": "step-1-1",
+           "step": "1.1",
+-          "claim": "Put $M=\\|A\\|_1$. For any $T>0$ and $|t|\\le T$, [F1] gives $\\|t^kA^k/k!\\|_1\\le (TM)^k/k!$. The majorant series converges by [F2], so the matrix series is absolutely and uniformly Cauchy on $[-T,T]$ and defines $e^{tA}$. Since $T$ was arbitrary, it converges locally uniformly.",
+-          "inputs": [
+-            "given",
+-            "F1",
+-            "F2",
++          "claim": "If $A$ has size $0\\times0$, the matrix space has one element, which is both $0$ and $I_0$; every partial sum in the definition is this same matrix. Thus $e^{tA}=I_0$ for every $t$, its derivative is the zero matrix, and the derivative identities, initial value, and commuting-product identity all hold because every product and sum is the unique empty matrix. Hence assume below that $A$ has size $n\\times n$ with $n\\ge1$.",
++          "inputs": [
++            "given",
++            "F3",
++            "F4",
+             "algebra"
+           ]
+         },
+         {
+           "id": "step-1-2",
+           "step": "1.2",
+-          "claim": "Fix $c\\in\\mathbb R$ and choose $R>|c|$. For $|h|<R-|c|$ and $k\\ge1$, the finite factorization $(c+h)^k-c^k=h\\sum_{j=0}^{k-1}(c+h)^{k-1-j}c^j$ bounds both the norm of the $k$th matrix-series difference quotient and the norm of the $k$th proposed derivative term by $M(MR)^{k-1}/(k-1)!$. The sum of these bounds converges by [F2], so both tails are uniformly small; each finite partial sum is a matrix polynomial whose difference quotient tends to its ordinary derivative. Taking first a sufficiently large partial sum and then $h\\to0$ proves differentiability and gives $\\frac{d}{dt}e^{tA}|_{t=c}=\\sum_{k\\ge1}A^kc^{k-1}/(k-1)!=Ae^{cA}$.",
+-          "inputs": [
+-            "given",
+-            "F1",
+-            "F2",
++          "claim": "Put $M=\\|A\\|_1$. By induction using [F1] and [F4], $\\|A^k\\|_1\\le M^k$ for every $k\\ge0$. For $|t|\\le T$, [F5] then bounds each entry of $t^kA^k/k!$ by $(TM)^k/k!$. The scalar majorant converges by [F2], so each entry series converges absolutely and uniformly on $[-T,T]$; its entrywise sums define a matrix $E(t)$. Each column has only $n$ entries, so the maximum-column-sum formula [F5] bounds the norm of a matrix tail by $n$ times the scalar majorant tail. Therefore the matrix series converges in induced $1$-norm uniformly on $[-T,T]$. Since $T$ was arbitrary, it converges locally uniformly and defines $e^{tA}=E(t)$.",
++          "inputs": [
++            "given",
++            "F1",
++            "F2",
++            "F4",
++            "F5",
++            "induction",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-1-3",
++          "step": "1.3",
++          "claim": "Fix $c\\in\\mathbb R$ and choose $R>|c|$. If $|h|<R-|c|$, then $|c|,|c+h|<R$; for $k\\ge1$, the factorization $(c+h)^k-c^k=h\\sum_{j=0}^{k-1}(c+h)^{k-1-j}c^j$ bounds the norm of the $k$th matrix-series difference quotient by $M^kR^{k-1}/(k-1)!$, and the same bound holds for the $k$th proposed derivative term $c^{k-1}A^k/(k-1)!$. The sum of these bounds is $M\\sum_{j\\ge0}(MR)^j/j!<\\infty$ by [F2]. For each finite partial sum, the factorization also shows that its difference quotient tends to the finite sum of the proposed derivative terms, using $(k+1)!=(k+1)k!$ from [F6]. For each fixed nonzero $h$, the full difference quotient is the limit of those of the finite partial sums by [step 1.2]; the two uniform tail bounds let us first choose a large partial sum and then take $h\\to0$. Consequently $E$ is differentiable at $c$ and $E'(c)=\\sum_{k\\ge1}c^{k-1}A^k/(k-1)!$.",
++          "inputs": [
++            "given",
++            "F1",
++            "F2",
++            "F4",
++            "F6",
++            "step 1.2",
+             "algebra"
+           ]
+         },
+         {
+           "id": "step-2-1",
+           "step": "2.1",
+-          "claim": "Every term in the derivative series commutes with $A$, so the same sum equals $e^{cA}A$. The $k=0$ term in the defining series gives $e^{0A}=I$.",
++          "claim": "From [F3] and the recursive power definition [F4], induction gives $A^k=AA^{k-1}=A^{k-1}A$ for every $k\\ge1$. Hence the derivative series in step 1.3 is the limit of both $A\\sum_{j=0}^{N}c^jA^j/j!$ and $\\bigl(\\sum_{j=0}^{N}c^jA^j/j!\\bigr)A$ as $N\\to\\infty$. Submultiplicativity [F1] makes multiplication by fixed $A$ continuous, so these limits are $AE(c)$ and $E(c)A$. At $c=0$, all positive-degree terms vanish and the constant term is $A^0=I_n$. Thus $E'(c)=AE(c)=E(c)A$ and $E(0)=I_n$.",
+           "inputs": [
+             "step 1.2",
++            "step 1.3",
++            "F1",
++            "F3",
++            "F4",
++            "induction",
+             "algebra"
+           ]
+         },
+         {
+           "id": "step-3-1",
+           "step": "3.1",
+-          "claim": "For commuting $A,B$, the double series for $e^Ae^B$ is absolutely convergent because its term norms are bounded by $\\|A\\|_1^m\\|B\\|_1^n/(m!n!)$, whose double sum is finite by [F2]. Regroup by $r=m+n$; commutation and the binomial formula give $\\sum_{m+n=r}A^mB^n/(m!n!)=(A+B)^r/r!$. Summing over $r$ proves $e^Ae^B=e^{A+B}$.",
+-          "inputs": [
+-            "given",
+-            "F1",
+-            "F2",
+-            "algebra"
++          "claim": "Suppose $A,B\\in M_n(\\mathbb R)$ commute. For each $r\\ge0$ set $D_r:=\\sum_{m=0}^r A^mB^{r-m}/(m!(r-m)!)$. Induction from $AB=BA$ and [F3] gives $B^sA=AB^s$ for every $s\\ge0$. Distributing $D_r(A+B)$ and using this commutation, the coefficient of $A^jB^{r+1-j}$ is $1/(j!(r-j)!)+1/((j-1)!(r+1-j)!)$ for $1\\le j\\le r$, which equals $(r+1)/(j!(r+1-j)!)$ by [F6]; for $j=0$ and $j=r+1$ the single endpoint coefficient has that same value by $(r+1)!=(r+1)r!$. Thus $D_r(A+B)=(r+1)D_{r+1}$. Since $D_0=I_n$, induction, the recursive power law [F4], and the nonzero factorial images in [F6] give $D_r=(A+B)^r/r!$ for every $r$.",
++          "inputs": [
++            "given",
++            "F3",
++            "F4",
++            "F6",
++            "induction",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-3-2",
++          "step": "3.2",
++          "claim": "Apply the power bound and convergence argument of step 1.2 to $B$ and $A+B$ as well. Put $a_m=\\|A\\|_1^m/m!$ and $b_n=\\|B\\|_1^n/n!$; both scalar series converge by [F2]. The finite product $E_N(A)E_N(B)$ expands by [F3] as the square sum over $0\\le m,n\\le N$ of $A^mB^n/(m!n!)$, whose term norms are at most $a_mb_n$ by [F1] and [F4]. Its difference from the triangular sum over $m+n\\le N$ has norm at most $(\\sum_{m>N/2}a_m)(\\sum_n b_n)+(\\sum_m a_m)(\\sum_{n>N/2}b_n)$, which tends to zero; every omitted pair has $m>N/2$ or $n>N/2$. By step 1.2, $E_N(A)E_N(B)\\to e^Ae^B$ (matrix multiplication is continuous by [F1]); by step 3.1 the triangular sum is $\\sum_{r=0}^N(A+B)^r/r!$, which converges to $e^{A+B}$. Therefore $e^Ae^B=e^{A+B}$.",
++          "inputs": [
++            "given",
++            "step 1.2",
++            "step 3.1",
++            "F1",
++            "F2",
++            "F3",
++            "F4",
++            "algebra"
++          ]
++        },
++        {
++          "id": "step-4-1",
++          "step": "4.1",
++          "claim": "Step 1.1 covers the zero-sized matrix case. For $n\\ge1$, steps 1.2 and 1.3 establish convergence and differentiation, step 2.1 gives the derivative identities and initial value, and steps 3.1–3.2 prove the commuting-product identity. Thus every claim in the Statement holds.",
++          "inputs": [
++            "step 1.1",
++            "step 1.2",
++            "step 1.3",
++            "step 2.1",
++            "step 3.1",
++            "step 3.2"
+           ]
+         }
+       ],
+@@ -169,7 +278,7 @@
+         {
+           "case": "empty",
+           "status": "checked",
+-          "evidence": "Statement: Steps 1.1–2.1 apply to n=0 because the empty matrix space has one element and induced 1-norm zero; the series, derivative and product identities are then the unique empty matrix identities."
++          "evidence": "Proof1.1 handles size0x0 directly: every partial sum and all identities are the unique empty matrix. The norm argument is used only after assuming n>=1."
+         },
+         {
+           "case": "zero",
+@@ -179,17 +288,17 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Statement: The proof uses finite matrix coordinates and the induced norm for every dimension, including n=1."
++          "evidence": "Proof1.1 separates dimension0; proofs1.2–3.2 apply to every positive dimension, including n=1."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Statement: Steps 1.1–2.1 allow zero matrices and commuting matrices without an invertibility hypothesis."
++          "evidence": "Proof1.1 handles the empty matrix; proofs1.2–3.2 allow zero matrices and commuting matrices without an invertibility hypothesis."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Statement: Step 1.2 proves differentiability at every real c; step 2.1 includes t=0."
++          "evidence": "Proof1.3 proves differentiability at every realc; proof2.1 gives the initial value atc=0."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -228,6 +337,7 @@
+           "source_section": "Definition",
+           "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+           "uses": [
++            "1.1",
+             "3.1"
+           ]
+         },
+@@ -237,6 +347,7 @@
+           "source_section": "Statement",
+           "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+           "uses": [
++            "1.1",
+             "3.1"
+           ]
+         },
+@@ -247,6 +358,15 @@
+           "quote": "**The factorial.** By the recursion theorem ([[thm-recursion]]) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in [[def-nat-finite-sum-and-product]], there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with\n\n$$F(0) = 1, \\qquad F(\\sigma(n)) = F(n)\\cdot\\sigma(n) \\quad (n \\in \\mathbb{N}).$$\n\nWe write $n! := F(n)$. Thus $0! = 1$, $1! = 0!\\cdot 1 = 1$, $2! = 1!\\cdot 2 = 2$,\n$3! = 6$, $4! = 24$, $5! = 120$, $6! = 720$.\n\n**$0! = 1$ is the base clause of this recursion**, not a convention imported from\nelsewhere. Nothing about empty products is presupposed; the agreement with the\nempty product is proved below, in clause (a), rather than assumed.\n\n**Truncated difference.** Throughout, $n - k$ is the operation fixed in\n[[def-nat-finite-sum-and-product]]: the unique $j$ with $k + j = n$ when\n$k \\le n$, and $0$ when $n < k$.\n\n**The falling factorial.** For $n \\in \\mathbb{N}$ define $n^{\\underline{k}}$ by\nrecursion on $k$, by the recursion theorem applied to\n$\\mathbb{N}\\times\\mathbb{N}$ with starting element $(0,1)$ and\n$f(k, v) = (\\sigma(k),\\, v \\cdot (n-k))$:\n\n$$n^{\\underline{0}} = 1, \\qquad n^{\\underline{\\sigma(k)}} = n^{\\underline{k}}\\cdot(n-k) .$$\n\nSo $n^{\\underline{1}} = 1\\cdot(n-0) = n$ and $n^{\\underline{2}} = n\\,(n-1)$, and\nfor $k \\le n$ the value is the product $n(n-1)\\cdots(n-k+1)$ of the $k$ topmost\nfactors.\n\n**Four facts, proved here because the page uses each of them.**\n\n**(a) The factorial is the product of the first $n$ positive naturals.**\n$n! = \\prod_{j<n}\\sigma(j) = \\prod_{j<n}(j+1)$, the $\\mathbb{N}$-valued product of\n[[def-nat-finite-sum-and-product]]. Induction ([[thm-induction-principle]]): at\n$n = 0$ both sides are $1$, the empty product and the base clause agreeing; and\n$\\prod_{j<\\sigma(n)}\\sigma(j) = \\big(\\prod_{j<n}\\sigma(j)\\big)\\cdot\\sigma(n) = n!\\cdot\\sigma(n) = \\sigma(n)!$.\n**So the empty-product reading and the base-clause reading are the same reading**,\nand neither was assumed.\n\n**(b) $n! \\ne 0$, and $\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ ([[thm-omega-is-peano-system]]) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot y$\n([[lem-nat-mult-identity]]) and cancellation gives $x = 0$\n([[lem-nat-mult-cancellative]]). So $n! \\ne 0$ for every $n$ by induction. For the second, apply the bridge clause\n6 of that lemma to clause (a) above. This is what makes the factorial of this\npage and the real-valued product $\\prod_{j<n}(j+1)$ used elsewhere in the library\n**one object seen twice**, rather than two unrelated notions.\n\n**(c) $n^{\\underline{k}}\\cdot(n-k)! = n!$ for $k \\le n$.** Induction on $k$, for\nall $n$ at once. At $k = 0$ this reads $1 \\cdot n! = n!$. Assume it at $k$ and\nlet $\\sigma(k) \\le n$; then $k \\le n$, and writing $d := n - k$ we have\n$k + d = n$ and $d \\ne 0$, since $k + 0 = k \\ne n$; so $d = \\sigma(e)$ for a\nunique $e$ ([[lem-nat-nonzero-is-successor]]), and $\\sigma(k) + e = n$, that is\n$e = n - \\sigma(k)$ ([[lem-nat-add-cancellative]]). Therefore\n$n^{\\underline{\\sigma(k)}}\\cdot\\big(n-\\sigma(k)\\big)! = n^{\\underline{k}}\\cdot(n-k)\\cdot e! = n^{\\underline{k}}\\cdot\\big(e!\\cdot\\sigma(e)\\big) = n^{\\underline{k}}\\cdot\\sigma(e)! = n^{\\underline{k}}\\cdot(n-k)! = n!$,\nusing commutativity and associativity of multiplication\n([[lem-nat-mult-associative]], [[lem-nat-mult-commutative]]) and the recursion\nclause for the factorial.\n\n**(d) Boundary values.** $n^{\\underline{0}} = 1$ for every $n$, by the base\nclause; $n^{\\underline{n}} = n!$, since clause (c) at $k = n$ gives\n$n^{\\underline{n}}\\cdot 0! = n!$ and $0! = 1$; and\n$n^{\\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives\n$n^{\\underline{\\sigma(n)}} = n^{\\underline{n}}\\cdot 0 = 0$, the clause\n$x \\cdot 0 = 0$ being definitional ([[def-nat-multiplication]]), and if\n$n^{\\underline{k}} = 0$ then\n$n^{\\underline{\\sigma(k)}} = 0$ as well, so $n^{\\underline{k}} = 0$ for every\n$k \\ge \\sigma(n)$ by induction.",
+           "uses": [
+             "1.1"
++          ]
++        },
++        {
++          "fact": "F4",
++          "source": "thm-geometric-series",
++          "source_section": "Statement",
++          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
++          "uses": [
++            "3.1"
+           ]
+         }
+       ],
+@@ -274,9 +394,10 @@
+         {
+           "id": "step-3-1",
+           "step": "3.1",
+-          "claim": "By [F2] and step 2.1, $\\tau_K(\\mu)=\\sum_{j\\ge0}w_{K+1+j}\\le w_{K+1}\\sum_{j\\ge0}\\rho^j=w_{K+1}/(1-\\rho)$; substituting the values of $w_{K+1}$ and $\\rho$ proves the stated bound.",
+-          "inputs": [
+-            "F2",
++          "claim": "By [F2] and step 2.1, $\\tau_K(\\mu)=\\sum_{j\\ge0}w_{K+1+j}\\le w_{K+1}\\sum_{j\\ge0}\\rho^j=w_{K+1}/(1-\\rho)$ by [F4]; substituting the values of $w_{K+1}$ and $\\rho$ proves the stated bound.",
++          "inputs": [
++            "F2",
++            "F4",
+             "step 2.1",
+             "algebra"
+           ]
+@@ -1287,7 +1408,7 @@
+           "fact": "F1",
+           "source": "alg-xd-finite-budget-adaptive-projection",
+           "source_section": "Definition",
+-          "quote": "**Inputs.** A given nonexplosive chain $X$ and initial law $p_0$; a finite positive integer $N$ and an explicitly supplied nested list of nonempty finite sets $F_1\\subseteq\\cdots\\subseteq F_N$; for each $F_i$, its exact finite cemetery-lift generator $\\widetilde Q_{F_i}$ and lifted initial vector from [[def-xd-finite-state-projection-and-cemetery-lift]]; final time $T\\ge0$; tolerance $\\varepsilon>0$; and a positive integer per-projection term cap $B$.\n\nThe supplied lift data must be the exact rates and initial masses of the given chain. An implementation may obtain the cemetery rate from the exact exit rate minus the finite sum of within-$F_i$ rates. The arithmetic backend must enclose each computed cemetery coordinate and provide the certified arithmetic/algebraic error required by [[thm-xd-uniformization-truncation-and-error]].\n\n**Procedure.** For $i=1,\\ldots,N$ in order:\n\n1. Apply [[alg-xd-budgeted-uniformization-accumulation]] to $(\\widetilde Q_{F_i},\\widetilde p_{F_i,0},T)$ with at most $B$ terms. If it returns `budget-exhausted`, `certificate-unavailable`, or the exact lift data are unavailable, return `inconclusive` with the statuses and all completed projection records; do not skip an uncertified projection.\n2. Let $\\widehat c_i$ be the computed cemetery coordinate and let $\\delta_i$ be the total certified $\\ell^1$ error bound (Poisson-tail plus arithmetic/algebraic error). Form the outward-certified interval\n   $$L_i=\\max(0,\\widehat c_i-\\delta_i),\\qquad U_i=\\min(1,\\widehat c_i+\\delta_i).$$\n   Record $F_i$, the computed vector, $\\widehat c_i$, $[L_i,U_i]$, its tail bound, and its arithmetic/algebraic error.\n3. If validated interval arithmetic certifies $U_i\\le\\varepsilon$, return `certified` with this projection and its record.\n\nIf all $N$ projections have valid records but none passes the tolerance, return `inconclusive` with every record. The algorithm uses at most $N$ projections and $NB$ uniformization terms. It makes no claim that some finite projection outside this supplied list meets $\\varepsilon$.",
++          "quote": "**Inputs.** A given nonexplosive chain $X$ and initial law $p_0$; a finite positive integer $N$ and an explicitly supplied nested list of nonempty finite sets $F_1\\subseteq\\cdots\\subseteq F_N$; for each $F_i$, its exact finite cemetery-lift generator $\\widetilde Q_{F_i}$ and lifted initial vector from [[def-xd-finite-state-projection-and-cemetery-lift]]; final time $T\\ge0$; tolerance $\\varepsilon>0$; a positive integer per-projection term cap $B$; and an arithmetic mode that is either exact real arithmetic or a validated arithmetic backend satisfying the requirements below and of [[alg-xd-budgeted-uniformization-accumulation]].\n\nThe supplied lift data must be the exact rates and initial masses of the given chain. An implementation may obtain the cemetery rate from the exact exit rate minus the finite sum of within-$F_i$ rates. A validated backend must certify the lift-rate calculation and its admissibility, the solver's scalar and vector certificates, and an outward enclosure of each computed cemetery coordinate, including the certified arithmetic/algebraic error required by [[thm-xd-uniformization-truncation-and-error]]; if any required certificate is unavailable, the corresponding projection is uncertified.\n\n**Procedure.** For $i=1,\\ldots,N$ in order:\n\n1. Let $r_{i,z}:=-(\\widetilde Q_{F_i})_{zz}$ for $z\\in F_i\\cup\\{\\dagger\\}$ and set $\\nu_i:=\\max_{z\\in F_i\\cup\\{\\dagger\\}}r_{i,z}=\\max_{x\\in F_i}\\lambda(x)$; this includes the cemetery state's zero exit rate. If a validated backend cannot certify $\\nu_i$ and its admissibility, treat the solver status as `certificate-unavailable`. Otherwise apply [[alg-xd-budgeted-uniformization-accumulation]] to $(\\widetilde Q_{F_i},\\widetilde p_{F_i,0},T)$ with admissible rate $\\nu_i$, positive tail budget $\\varepsilon$, term cap $B$, and the supplied arithmetic mode. If $\\nu_i=0$, use the solver's zero-rate branch. If the status is `budget-exhausted` or `certificate-unavailable`, or the exact lift data are unavailable, return `inconclusive` with the statuses and all completed projection records; do not skip an uncertified projection.\n2. Let $\\widehat c_i$ be the computed cemetery coordinate. If the solver returns tail and arithmetic/algebraic error bounds $T_i$ and $E_{{\\rm alg},i}$, put $\\delta_i:=T_i+E_{{\\rm alg},i}$, the total certified $\\ell^1$ error bound. Form the outward-certified interval\n   $$L_i=\\max(0,\\widehat c_i-\\delta_i),\\qquad U_i=\\min(1,\\widehat c_i+\\delta_i).$$\n   Record $F_i$, $\\nu_i$, the computed vector, $\\widehat c_i$, $[L_i,U_i]$, its tail bound $T_i$, and its arithmetic/algebraic error $E_{{\\rm alg},i}$.\n3. If exact comparison or validated interval arithmetic certifies $U_i\\le\\varepsilon$, return `certified` with this projection and its record.\n\nIf all $N$ projections have valid records but none passes the tolerance, return `inconclusive` with every record. The algorithm uses at most $N$ projections and $NB$ uniformization terms. It makes no claim that some finite projection outside this supplied list meets $\\varepsilon$.",
+           "uses": [
+             "1.1",
+             "1.2",

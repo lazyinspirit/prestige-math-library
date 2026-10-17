@@ -1,0 +1,34 @@
+{
+  "batch": "71",
+  "opened": [
+    "alg-bfgs-hessian-direction-with-rounded-cholesky",
+    "alg-full-memory-bfgs-with-curvature-safeguards",
+    "bfgs-and-limited-memory-quasi-newton-methods",
+    "bfgs-and-limited-memory-quasi-newton-methods-examples",
+    "def-bfgs-curvature-pair-and-update-formulas",
+    "ex-bfgs-powell-damping-after-negative-curvature",
+    "ex-bfgs-secant-on-a-strongly-convex-quadratic",
+    "ex-lbfgs-memory-dependent-cost",
+    "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+    "lem-bfgs-trace-determinant-potential-identities",
+    "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+    "lem-full-memory-bfgs-dennis-more-condition",
+    "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+    "lem-powell-damping-gives-positive-curvature",
+    "lem-wolfe-steps-give-positive-bfgs-curvature",
+    "thm-full-memory-bfgs-global-linear-convergence",
+    "thm-full-memory-bfgs-local-superlinear-convergence",
+    "thm-lbfgs-fixed-memory-linear-convergence"
+  ],
+  "not_opened": [],
+  "flagged": [
+    {
+      "id": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "location": "Definition, rounded-Cholesky mode call",
+      "defect": "missing-hypothesis",
+      "evidence": "The algorithm admits “consistent SPD matrices B₀,H₀” and says its matrix updates are interpreted over ℝ, then calls `alg-bfgs-hessian-direction-with-rounded-cholesky` on (Bₖ,gₖ). That procedure requires “representable finite entries” in its operationwise floating-point model. The admitted one-dimensional input B₀=√2, H₀=1/√2 is SPD and consistent but B₀ is not representable in any finite binary format, so a nonstationary rounded-mode run makes an undefined call immediately. Exact real updates also do not ensure later Bₖ remain representable.",
+      "severity": "fatal"
+    }
+  ],
+  "coverage_note": "Checked all 16 scoped items and both pages, including proofs, definitions, computations, remarks, and page summaries. I also checked relevant current supplier statements for Wolfe searches, floating-point calls, Hessian bounds, and matrix claims. I did not audit unrelated transitive dependencies or independently re-open linked literature."
+}

@@ -1,0 +1,336 @@
+[
+  {
+    "order": 2428,
+    "id": "trust-region-and-cubic-regularization-methods",
+    "kind": "A",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Trust region and cubic regularization methods",
+    "companion": "trust-region-and-cubic-regularization-methods-examples",
+    "requires": [
+      "krylov-methods-and-lanczos-convergence",
+      "nonconvex-line-search-and-inexact-newton-methods"
+    ],
+    "items": [
+      {
+        "id": "def-trust-region-quadratic-model-and-ratio",
+        "kind": "definition",
+        "title": "Quadratic trust-region models and the actual-to-predicted reduction ratio",
+        "statement": "Define the quadratic model m(p)=f(x)+gᵀp+½pᵀBp on the Euclidean ball ||p||₂≤Δ, its predicted and actual reductions, and their ratio when predicted reduction is positive.",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-jacobian-matrix-and-gradient",
+          "def-hessian-and-euclidean-critical-point",
+          "def-induced-matrix-p-norm",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-adaptive-cubic-regularization-model",
+        "kind": "definition",
+        "title": "The cubic-regularized quadratic model",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-jacobian-matrix-and-gradient",
+          "def-hessian-and-euclidean-critical-point",
+          "def-induced-matrix-p-norm"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-natural-logarithm-bounded-by-argument",
+        "kind": "lemma",
+        "title": "The natural logarithm is bounded above by its positive argument minus one",
+        "statement": "For every real x>=1, prove 0<=log x<=x-1<=x.",
+        "deps": [
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-trust-region-subproblem-optimality-and-hard-case",
+        "kind": "lemma",
+        "title": "Global trust-region minimizers satisfy the shifted-Hessian conditions, including the hard case",
+        "statement": "Let $n\\ge1$, let $B\\in\\mathbb R^{n\\times n}$ be symmetric, let $g\\in\\mathbb R^n$, and\nlet $\\Delta>0$. Every global minimizer $p_*$ of\n$$q(p):=\\langle g,p\\rangle+\\tfrac12p^TBp\\quad\\text{over }\\|p\\|_2\\le\\Delta$$\nhas a multiplier $\\lambda\\ge0$ such that\n$$(B+\\lambda I)p_*=-g,\\qquad B+\\lambda I\\succeq0,\\qquad \\lambda(\\Delta-\\|p_*\\|_2)=0.$$\nConversely, every feasible $p_*$ satisfying these conditions is a global\nminimizer. A global minimizer always exists.\n\nThe singular hard case is included as follows. Let $\\mu$ be the least\neigenvalue of $B$ and $E_\\mu$ its eigenspace. If $\\mu<0$, $g\\perp E_\\mu$,\nand the solution $p_0$ of\n$(B-\\mu I)p_0=-g$, $p_0\\perp E_\\mu$, has $\\|p_0\\|_2\\le\\Delta$, then\n$$p_*=p_0+z,\\qquad z\\in E_\\mu,\\qquad \\|z\\|_2^2=\\Delta^2-\\|p_0\\|_2^2$$\nis a global minimizer with the singular multiplier $\\lambda=-\\mu$. If\n$\\|p_0\\|_2<\\Delta$, both signs of any chosen nonzero $z$ of the required\nlength give distinct minimizers.\n\n",
+        "deps": [
+          "def-trust-region-quadratic-model-and-ratio",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-definite-and-indefinite-hessian-quadratic-forms",
+          "thm-intermediate-value",
+          "thm-algebra-of-continuous-functions"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-trust-region-cauchy-step",
+        "kind": "algorithm",
+        "title": "The Cauchy step for a quadratic trust-region model",
+        "deps": [
+          "def-trust-region-quadratic-model-and-ratio"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-positive-definite-model-has-unique-newton-step",
+        "kind": "lemma",
+        "title": "Positive-definite Newton and dogleg steps are well-defined",
+        "statement": "For a symmetric positive-definite model matrix B, prove that B is invertible and that Bp=−g has a unique solution p for every g.",
+        "deps": [
+          "def-trust-region-quadratic-model-and-ratio",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-definite-and-indefinite-hessian-quadratic-forms",
+          "def-invertible-euclidean-linear-map",
+          "alg-dogleg-trust-region-step",
+          "alg-trust-region-cauchy-step",
+          "thm-intermediate-value",
+          "thm-algebra-of-continuous-functions"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-global-cubic-model-minimizer-decrease",
+        "kind": "lemma",
+        "title": "Global cubic minimizers, admissible inexact steps, and cubic Cauchy decrease",
+        "statement": "For σ>0 and symmetric B, prove that the cubic model attains a global minimum and every nonstationary global minimizer s satisfies m(0)−m(s)≥σ||s||₂³/6.",
+        "deps": [
+          "def-adaptive-cubic-regularization-model",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-real-power-continuity-and-derivatives",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "thm-extreme-value-metric",
+          "cor-mean-value-theorem",
+          "alg-adaptive-cubic-regularization"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-trust-region-cauchy-decrease",
+        "kind": "lemma",
+        "title": "The Cauchy step gives a quantitative model decrease",
+        "statement": "For symmetric B, g≠0 and Δ>0, prove m(0)−m(p_C)≥½||g||₂ min{Δ,||g||₂/||B||₂}, with the zero-matrix convention stated explicitly.",
+        "deps": [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-trust-region-cauchy-step",
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-dogleg-trust-region-step",
+        "kind": "algorithm",
+        "title": "Dogleg steps for positive-definite trust-region models",
+        "deps": [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-trust-region-cauchy-step",
+          "def-definite-and-indefinite-hessian-quadratic-forms"
+        ],
+        "dependency_level": 2,
+        "justified_by": [
+          "lem-positive-definite-model-has-unique-newton-step"
+        ]
+      },
+      {
+        "id": "alg-truncated-cg-trust-region-step",
+        "kind": "algorithm",
+        "title": "Truncated conjugate gradients with boundary and negative-curvature exits",
+        "deps": [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-trust-region-cauchy-step",
+          "def-krylov-subspace-of-a-matrix-and-start-vector"
+        ],
+        "dependency_level": 2,
+        "justified_by": [
+          "lem-truncated-cg-iterates-are-krylov-vectors"
+        ]
+      },
+      {
+        "id": "alg-adaptive-cubic-regularization",
+        "kind": "algorithm",
+        "title": "Finite-budget adaptive regularization using cubic models",
+        "deps": [
+          "def-adaptive-cubic-regularization-model",
+          "cor-hessian-is-symmetric"
+        ],
+        "dependency_level": 1,
+        "justified_by": [
+          "lem-global-cubic-model-minimizer-decrease"
+        ]
+      },
+      {
+        "id": "lem-truncated-cg-iterates-are-krylov-vectors",
+        "kind": "lemma",
+        "title": "Truncated-CG iterates are feasible and lie in generated Krylov subspaces",
+        "statement": "Before a boundary or curvature exit, prove z_j∈K_j(B,−g) and r_j,d_j∈K_{j+1}(B,−g) for the stated truncated-CG recurrence.",
+        "deps": [
+          "alg-truncated-cg-trust-region-step",
+          "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-trust-region-cauchy-step"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-trust-region-method",
+        "kind": "algorithm",
+        "title": "A finite-budget trust-region method with ratio-based radius updates",
+        "deps": [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-trust-region-cauchy-step",
+          "lem-trust-region-cauchy-decrease"
+        ],
+        "dependency_level": 3,
+        "justified_by": [
+          "thm-trust-region-epsilon-iteration-complexity"
+        ]
+      },
+      {
+        "id": "lem-trust-region-ratio-accuracy-for-small-radii",
+        "kind": "lemma",
+        "title": "The actual-to-predicted ratio approaches one at small radii away from stationarity",
+        "statement": "Let $m$ be the model of\n[[def-trust-region-quadratic-model-and-ratio]], with $g\\ne0$, symmetric\n$B$, and radius $\\Delta>0$. Suppose $\\|B\\|_2\\le M_B$ for a declared\n$M_B\\ge0$, and $f$ is $C^1$ on an open set containing the segment from $x$\nto $x+p$. Suppose the gradient of $f$ is $L$-Lipschitz on that segment,\nmeaning\n$$\\|\\nabla f(u)-\\nabla f(v)\\|_2\\le L\\|u-v\\|_2$$\nthere. Let $0<\\theta\\le1$, let $p$ be feasible, and suppose\n$$m(0)-m(p)\\ge\\theta\\,[m(0)-m(p_C)]$$\nfor the Cauchy step $p_C$ of [[alg-trust-region-cauchy-step]]. Interpret\n$\\|g\\|_2/(2M_B)=+\\infty$ if $M_B=0$, and assume\n$\\Delta\\le\\|g\\|_2/(2M_B)$. Then the predicted reduction is positive and\n$$|\\rho(p)-1|\\le\\frac{2(L+M_B)\\Delta}{\\theta\\|g\\|_2}.$$\nConsequently, for $0<\\eta_2<1$, if $L+M_B>0$ and\n$$\\Delta\\le\\frac{\\theta(1-\\eta_2)\\|g\\|_2}{2(L+M_B)},$$\nthen $\\rho(p)\\ge\\eta_2$. If $L+M_B=0$, then $\\rho(p)=1$.\n\n",
+        "deps": [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-trust-region-cauchy-step",
+          "lem-trust-region-cauchy-decrease",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-adaptive-cubic-unsuccessful-iteration-count",
+        "kind": "lemma",
+        "title": "Cubic regularization bounds consecutive unsuccessful trials",
+        "statement": "Under the stated regularization floor and cap, exact-Hessian Lipschitz model, and multiplicative rejection update, bound rejected trials per successful trial by an explicit constant independent of ε.",
+        "deps": [
+          "alg-adaptive-cubic-regularization",
+          "def-adaptive-cubic-regularization-model",
+          "def-hessian-and-euclidean-critical-point",
+          "cor-hessian-is-symmetric",
+          "lem-global-cubic-model-minimizer-decrease",
+          "def-induced-matrix-p-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "cor-mean-value-theorem",
+          "lem-geometric-sequence-null"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-trust-region-global-liminf-gradient",
+        "kind": "theorem",
+        "title": "Cauchy-decrease trust-region iterations have liminf gradient norm zero",
+        "statement": "Let $f:\\mathbb R^n\\to\\mathbb R$ be $C^1$, bounded below, and have an\n$L$-Lipschitz gradient on every trial segment. At every iteration let $B_k$\nbe symmetric with $\\|B_k\\|_2\\le M_B$ for a fixed $M_B\\ge0$. Fix\n$0<\\eta_1<\\eta_2<1$, $0<\\gamma_{dec}<1<\\gamma_{inc}$, $0<\\theta_C\\le1$,\nand $0<\\Delta_0\\le\\Delta_{max}$. Start from any $x_0\\in\\mathbb R^n$ and\nconsider an infinite-horizon trajectory that at each nonstationary iteration\nfollows the model-formation, step-selection, ratio, and radius-update rules of\n[[alg-trust-region-method]], with target $0$ and its finite outer-cap return\nomitted. If this trajectory is infinite, then\n$$\\liminf_{k\\to\\infty}\\|\\nabla f(x_k)\\|_2=0.$$\n\n",
+        "deps": [
+          "alg-trust-region-method",
+          "lem-trust-region-ratio-accuracy-for-small-radii",
+          "lem-trust-region-cauchy-decrease",
+          "lem-geometric-sequence-null",
+          "def-limsup-liminf",
+          "lem-extended-reals-complete",
+          "def-upper-bound"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-trust-region-epsilon-iteration-complexity",
+        "kind": "theorem",
+        "title": "Trust-region first-order complexity counts both successful and unsuccessful trials",
+        "statement": "For every nonstationary trial of [[alg-trust-region-method]], the selected\npredicted reduction is positive, and every accepted trial strictly decreases\nthe objective.\n\nAssume the hypotheses and parameter ranges of\n[[thm-trust-region-global-liminf-gradient]], and let $f_{inf}$ be a lower\nbound for $f$. For each target $0<\\varepsilon\\le1$, consider the\ninfinite-horizon trajectory that follows the nonterminal transition rules of\n[[alg-trust-region-method]] with target $\\varepsilon$, omitting its finite\nouter-cap return, until its first iterate with\n$\\|\\nabla f(x_k)\\|_2\\le\\varepsilon$. Define\n$$c_\\delta:=\\min\\left\\{\\frac1{2M_B}, \\frac{\\theta_C(1-\\eta_2)}{2(L+M_B)}\\right\\},\\qquad c_R:=\\min\\{\\Delta_0,\\gamma_{dec}\\min\\{c_\\delta,\\Delta_{max}\\}\\},$$\nwhere a zero denominator means $+\\infty$, and put\n$$c_P:=\\min\\{c_R,1/M_B\\},\\qquad c_S:=\\tfrac12\\eta_1\\theta_Cc_P>0.$$\nThen the number $N_s$ of accepted steps before reaching the target and the\nnumber $N_u$ of rejected trials obey\n$$N_s\\le\\frac{f(x_0)-f_{inf}}{c_S\\varepsilon^2},$$\n$$N_u\\le\\frac{\\log(\\Delta_0/r_\\varepsilon)+N_s\\log\\gamma_{inc}} {|\\log\\gamma_{dec}|},\\qquad r_\\varepsilon:=\\min\\{\\Delta_0,\\gamma_{dec}\\min\\{c_\\delta\\varepsilon, \\Delta_{max}\\}\\}.$$\nHere $\\log$ denotes the natural logarithm of a positive real.\nConsequently, accepted steps and total trials $N_s+N_u$ are\n$O(\\varepsilon^{-2})$ as $\\varepsilon\\downarrow0$. An outer cap at least\nthe resulting total-trial bound suffices for the finite-budget algorithm to\nreturn `target-achieved` or `stationary`, with gradient norm at most\n$\\varepsilon$.\n\n",
+        "deps": [
+          "alg-trust-region-method",
+          "lem-trust-region-ratio-accuracy-for-small-radii",
+          "lem-trust-region-cauchy-decrease",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "lem-natural-logarithm-bounded-by-argument",
+          "thm-of-archimedean",
+          "lem-geometric-sequence-null",
+          "thm-trust-region-global-liminf-gradient"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-adaptive-cubic-regularization-epsilon-complexity",
+        "kind": "theorem",
+        "title": "Adaptive cubic regularization reaches first-order accuracy in O(ε⁻³ᐟ²) evaluations",
+        "statement": "Let $n\\ge1$, and let $f:\\mathbb R^n\\to\\mathbb R$ be $C^2$ and bounded\nbelow by $f_{inf}$.\nRun [[alg-adaptive-cubic-regularization]] with exact Hessians and parameters\n$0<\\eta_1<\\eta_2<1$, $\\gamma_{up}>1$, $0<\\gamma_{down}<1$,\n$0<\\kappa<1$, $0<\\kappa_\\theta<1$, and\n$0<\\sigma_{min}\\le\\sigma_k\\le\\sigma_{max}$ with $\\sigma_{max}\\ge3L$.\nSuppose the Hessian is $L$-Lipschitz on every trial segment, and let\n$0<\\varepsilon\\le1$. Let $R\\in\\mathbb N_0$ satisfy\n$\\gamma_{up}^R\\sigma_{min}\\ge3L$ (take $R=0$ if\n$\\sigma_{min}\\ge3L$).\n\nFor the counts below, use the trajectory that follows the trial,\nacceptance/rejection, and regularization-update rules of\n[[alg-adaptive-cubic-regularization]] with its finite outer-cap return\nomitted. The finite-cap conclusion then reinstates that return.\n\nThe algorithm has two complexity guarantees.\n\n1. **Exact model minimizers.** If every solver call returns an exact global\n   minimizer, define\n   $$C_g:=\\sigma_{max}+\\sqrt n\\,L,\\qquad c_g:=\\frac{\\eta_1\\sigma_{min}}{6C_g^{3/2}}.$$\n   Through the first iterate with gradient norm at most $\\varepsilon$, the\n   numbers $N_s$ of accepted steps and $N_u$ of rejected trials satisfy\n   $$N_s\\le [f(x_0)-f_{inf}]c_g^{-1}\\varepsilon^{-3/2}+1,\\qquad N_u\\le R N_s.$$\n\n2. **Admissible inexact model steps.** Suppose each solver-success candidate\n   passes the cubic solution, residual, and Cauchy-decrease checks in\n   [[alg-adaptive-cubic-regularization]], and $\\nabla f$ is $K$-Lipschitz\n   on every trial segment. If the solver succeeds at every nonterminal\n   trial, define\n   $$D_g:=\\frac{\\sigma_{max}+\\sqrt n\\,L+\\kappa_\\theta K} {1-\\kappa_\\theta},\\qquad c_a:=\\frac{\\eta_1\\sigma_{min}}{6D_g^{3/2}}.$$\n   Then the same counts satisfy\n   $$N_s\\le [f(x_0)-f_{inf}]c_a^{-1}\\varepsilon^{-3/2}+1,\\qquad N_u\\le R N_s.$$\n\nIn either case the uncapped process reaches a stationary or target-achieved\niterate with gradient norm at most $\\varepsilon$. For the finite-cap\nalgorithm, an outer cap at least\n$$(R+1)\\left(\\frac{f(x_0)-f_{inf}}{c\\,\\varepsilon^{3/2}}+1\\right)$$\nsuffices, where $c=c_g$ in case 1 and $c=c_a$ in case 2. The resulting\nnumber of outer trials, and their function, gradient, and Hessian evaluation\ncounts, are $O(\\varepsilon^{-3/2})$. These counts do not bound the internal\nwork of the model solver.\n\n",
+        "deps": [
+          "alg-adaptive-cubic-regularization",
+          "def-adaptive-cubic-regularization-model",
+          "def-hessian-and-euclidean-critical-point",
+          "cor-hessian-is-symmetric",
+          "def-euclidean-inner-product",
+          "def-induced-matrix-p-norm",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "lem-global-cubic-model-minimizer-decrease",
+          "lem-adaptive-cubic-unsuccessful-iteration-count",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 2429,
+    "id": "trust-region-and-cubic-regularization-methods-examples",
+    "kind": "B",
+    "category": "numerical-optimization-inverse-problems-and-uncertainty-quantification",
+    "title": "Trust region and cubic regularization methods — Examples",
+    "companion": "trust-region-and-cubic-regularization-methods",
+    "requires": [
+      "trust-region-and-cubic-regularization-methods"
+    ],
+    "items": [
+      {
+        "id": "ex-indefinite-trust-region-boundary-minimizer",
+        "kind": "example",
+        "title": "An indefinite quadratic has a unique boundary trust-region minimizer",
+        "statement": "Compute the global minimizer and multiplier for B=diag(−1,1), g=(−1,−3)/√2, and Δ=1; verify the shifted-Hessian conditions and compare its predicted decrease with the Cauchy step.",
+        "deps": [
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-trust-region-subproblem-optimality-and-hard-case",
+          "alg-trust-region-cauchy-step"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-trust-region-singular-hard-case",
+        "kind": "example",
+        "title": "A singular shifted Hessian produces two hard-case minimizers",
+        "statement": "For B=diag(−2,1), g=(0,1), and Δ=1, compute both global minimizers, their common model value, and the singular multiplier λ=2.",
+        "deps": [
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-trust-region-subproblem-optimality-and-hard-case"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-trust-region-newton-cauchy-truncated-cg",
+        "kind": "example",
+        "title": "Newton, Cauchy, and truncated-CG steps on one indefinite model",
+        "statement": "For B=diag(−1,1), g=(−1,−3)/√2, and Δ=1, compute the raw Newton direction, Cauchy step, and first truncated-CG boundary exit; verify model reductions and the exact descent safeguard imported from the inexact-Newton algorithm.",
+        "deps": [
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-trust-region-subproblem-optimality-and-hard-case",
+          "alg-trust-region-cauchy-step",
+          "alg-truncated-cg-trust-region-step",
+          "lem-truncated-cg-iterates-are-krylov-vectors",
+          "alg-inexact-newton-krylov-with-descent-safeguard",
+          "def-krylov-subspace-of-a-matrix-and-start-vector",
+          "def-wolfe-and-strong-wolfe-conditions",
+          "alg-bracketing-zoom-strong-wolfe-search"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  }
+]

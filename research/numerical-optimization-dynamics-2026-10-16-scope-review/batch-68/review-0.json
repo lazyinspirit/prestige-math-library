@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "68",
+  "round": 0,
+  "reviewed_items": [
+    "def-diagonal-pade-approximant-for-exponential",
+    "lem-finite-hermite-interpolation-for-jordan-data",
+    "lem-scaling-and-squaring-error-recurrence",
+    "def-analytic-primary-matrix-function",
+    "lem-diagonal-pade-remainder-bound",
+    "def-matrix-sign-for-spectrum-off-imaginary-axis",
+    "thm-analytic-primary-matrix-function-jordan-contour-agreement",
+    "alg-exact-jordan-block-analytic-evaluation",
+    "thm-exact-jordan-block-analytic-evaluation-correct",
+    "thm-principal-matrix-logarithm-and-square-root-exist",
+    "thm-frechet-exponential-integral-and-block-function-identity",
+    "thm-matrix-function-rational-contour-error-bound",
+    "alg-pade-denominator-solve-by-householder-qr",
+    "thm-pade-denominator-solve-verified-branch-correct",
+    "alg-pade-scaling-and-squaring-exponential",
+    "rem-matrix-function-condition-estimates-are-not-certified-bounds",
+    "alg-newton-polar-factor-iteration",
+    "alg-newton-matrix-sign-iteration",
+    "thm-pade-scaling-and-squaring-error-bound",
+    "thm-newton-polar-factor-quadratic-convergence",
+    "thm-newton-matrix-sign-convergence-and-quadratic-rate",
+    "alg-schur-parlett-matrix-function",
+    "thm-schur-parlett-recurrence-correctness",
+    "alg-principal-matrix-logarithm-and-square-root",
+    "ex-spd-square-root-and-polar-factor",
+    "ex-nonnormal-exponential-large-transient-norm",
+    "ex-rotation-logarithm-branch-cut"
+  ],
+  "reviewed_pages": [
+    "matrix-functions-and-scaling-squaring",
+    "matrix-functions-and-scaling-squaring-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The approved mathematical route and conditional claims are generally sound, but the denominator solver cannot enforce its stated primitive-operation budget through its unbudgeted Householder suppliers. The approved inventory also lacks separate termination results required for its algorithms. Local proof and interface repairs are listed for the owner.",
+  "findings": [
+    {
+      "id": "alg-pade-denominator-solve-by-householder-qr",
+      "type": "prerequisite",
+      "reason": "Steps 2 and 3 require stopping before each unaffordable rounded primitive, including work inside alg-complex-scaled-householder-reflector-step and alg-scaled-complex-householder-and-givens-updates. Neither supplier accepts a remaining budget or reports operation counts or interruption; their definitions only return breakdown/range failures after finite execution. The smallest missing prerequisite is a budget-aware or countable reflector and separate-block interface. Owner reconciliation is needed."
+    },
+    {
+      "id": "matrix-functions-and-scaling-squaring",
+      "type": "scope",
+      "reason": "The approved inventory has no separate termination result for alg-exact-jordan-block-analytic-evaluation, alg-pade-denominator-solve-by-householder-qr, alg-pade-scaling-and-squaring-exponential, alg-newton-polar-factor-iteration, alg-newton-matrix-sign-iteration, alg-schur-parlett-matrix-function, or alg-principal-matrix-logarithm-and-square-root. Definition text such as “all loops are finite” and “at most n−1 merges” is not a separate proved property under the algorithm instructions. The owner must reconcile or approve the needed result scope."
+    },
+    {
+      "id": "alg-pade-scaling-and-squaring-exponential",
+      "type": "local",
+      "reason": "Step 2 continues in candidate-only mode whenever the solver returns any candidate, but the solver may return a partial candidate on budget or range failure; Step 3 then attempts to square it. Require a complete n×n candidate before continuing and otherwise propagate the failure. Explicitly pass the declared Householder-candidate budget as well."
+    },
+    {
+      "id": "thm-pade-scaling-and-squaring-error-bound",
+      "type": "local",
+      "reason": "Fact F11 assumes U(x)≥e^x from the algorithm Definition, whose geometric-tail sentence is not a proof. Establish the ratio bound for the omitted exponential-series terms in this theorem or a separate result; Steps 1.3 and 2.1 require it."
+    },
+    {
+      "id": "thm-frechet-exponential-integral-and-block-function-identity",
+      "type": "local",
+      "reason": "Step 1.2 constructs index-one neighborhoods U1 but does not choose them inside Ω. Step 3.1 then applies f and the contour formula to A+H using spectrum containment in U1. Since Ω is open and σ(A) is finite, choose the neighborhoods within Ω."
+    },
+    {
+      "id": "thm-schur-parlett-recurrence-correctness",
+      "type": "local",
+      "reason": "Step 2.1 invokes uniqueness via F3, which only gives uniqueness when the block spectra are disjoint, but does not establish that condition. Make the success implication explicit: the local δ(Mij)>τ≥0 test gives an invertible Sylvester coefficient matrix, and the Sylvester criterion then gives disjoint spectra."
+    },
+    {
+      "id": "thm-matrix-function-rational-contour-error-bound",
+      "type": "local",
+      "reason": "Γ is an integer-weighted complex chain, but LΓ is not defined with respect to its coefficients. The integral estimate requires the coefficient-weighted length Σ|mk|L(γk). Define LΓ accordingly and have the Padé algorithm’s ℓ bound that same quantity."
+    },
+    {
+      "id": "alg-exact-jordan-block-analytic-evaluation",
+      "type": "local",
+      "reason": "Make the function domain explicit: require f:Ω→C holomorphic with σ(A)⊂Ω and supply the exact derivative data of that same f. The analytic-primary definition requires a common open neighborhood of the spectrum."
+    },
+    {
+      "id": "thm-analytic-primary-matrix-function-jordan-contour-agreement",
+      "type": "local",
+      "reason": "Step 1.3 uses the higher Leibniz rule for the jet product, but Facts & Assumptions do not supply it and the dependency list does not name its scalar derivative result. Cite the available product-rule supplier and justify the higher rule by induction, or include that short argument."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-pade-scaling-and-squaring-exponential",
+      "decision": "escalate",
+      "reason": "Direct consumer of the denominator solver’s budget contract; it must pass compatible controls. It also needs the complete-candidate branch and coefficient-weighted contour length repairs."
+    },
+    {
+      "id": "alg-newton-polar-factor-iteration",
+      "decision": "escalate",
+      "reason": "Direct consumer of the denominator solver; owner reconciliation of the lower-level budget interface is required."
+    },
+    {
+      "id": "alg-newton-matrix-sign-iteration",
+      "decision": "escalate",
+      "reason": "Direct consumer of the denominator solver; owner reconciliation of the lower-level budget interface is required."
+    },
+    {
+      "id": "thm-pade-denominator-solve-verified-branch-correct",
+      "decision": "accept",
+      "reason": "Its verified-solution conclusion follows from the exact residual audit and remains valid under the identified budget-interface issue."
+    },
+    {
+      "id": "thm-pade-scaling-and-squaring-error-bound",
+      "decision": "repair",
+      "reason": "Its conditional error argument also needs the scalar-tail proof and the coefficient-weighted contour-length convention."
+    },
+    {
+      "id": "thm-newton-polar-factor-quadratic-convergence",
+      "decision": "accept",
+      "reason": "The proof concerns the exact Newton sequence and is independent of the rounded candidate-budget interface."
+    },
+    {
+      "id": "thm-newton-matrix-sign-convergence-and-quadratic-rate",
+      "decision": "accept",
+      "reason": "The proof concerns the exact Newton sequence and is independent of the rounded candidate-budget interface."
+    },
+    {
+      "id": "thm-exact-jordan-block-analytic-evaluation-correct",
+      "decision": "accept",
+      "reason": "Its successful-output identity remains valid when the evaluator’s common holomorphic domain is stated explicitly."
+    },
+    {
+      "id": "alg-schur-parlett-matrix-function",
+      "decision": "escalate",
+      "reason": "Its Jordan evaluator use supplies a holomorphic function on a neighborhood of the matrix spectrum; the separate termination-result scope still needs owner reconciliation."
+    },
+    {
+      "id": "thm-schur-parlett-recurrence-correctness",
+      "decision": "repair",
+      "reason": "The recurrence comparison needs the explicit local-solve uniqueness bridge identified above."
+    },
+    {
+      "id": "alg-principal-matrix-logarithm-and-square-root",
+      "decision": "escalate",
+      "reason": "Its branch functions are defined on the required slit plane; the separate termination-result scope still needs owner reconciliation."
+    },
+    {
+      "id": "ex-rotation-logarithm-branch-cut",
+      "decision": "accept",
+      "reason": "The example’s exact Schur branch-failure path does not require Jordan derivative data."
+    },
+    {
+      "id": "rem-matrix-function-condition-estimates-are-not-certified-bounds",
+      "decision": "accept",
+      "reason": "Its qualitative distinction remains valid with coefficient-weighted contour length."
+    }
+  ]
+}

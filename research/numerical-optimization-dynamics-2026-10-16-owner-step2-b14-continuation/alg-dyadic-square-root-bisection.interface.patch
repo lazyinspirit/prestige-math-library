@@ -1,0 +1,26 @@
+--- retained native before_interfaces/alg-dyadic-square-root-bisection
++++ actual current public interface/alg-dyadic-square-root-bisection
+@@ -1,7 +1,8 @@
+ ## Definition
+ 
+ Input: a nonnegative exact dyadic rational $x$ and integer request $n\ge1$.
+-Return exact dyadic bounds for $\sqrt{x}$ as follows.
++Output: an exact dyadic lower and upper bound for $\sqrt{x}$; no finite
++storage format is needed by this procedure.
+ 
+ 1. If $x=0$, return $[0,0]$.
+ 2. Otherwise determine the unique integer $j$ with $2^j\le x<2^{j+1}$ from the
+@@ -10,9 +11,10 @@
+ 3. Set integer indices $L=0$ and $U=2^{n+1}$. While $U-L>1$, put
+    $Q=\lfloor(L+U)/2\rfloor$. If $(Q\delta)^2\le x$, replace $L$ by $Q$;
+    otherwise replace $U$ by $Q$.
+-4. Return $[L\delta,U\delta]$. To store the endpoints in a selected finite
+-   format, round the lower endpoint down and the upper endpoint up, reporting
+-   `subnormal` or `overflow` as required.
++4. Return the exact dyadic pair $[L\delta,U\delta]$. A caller that stores
++   these endpoints in a selected finite format must separately round the
++   lower endpoint down and the upper endpoint up, propagating the resulting
++   `subnormal` or `overflow` status.
+ 
+ All comparisons and multiplications in the loop are exact integer/dyadic
+ operations. The loop has at most $n+1$ iterations.

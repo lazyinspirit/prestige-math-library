@@ -1,0 +1,244 @@
+{
+  "group": "d",
+  "batches": ["36"],
+  "pages_read": [
+    "linear-multistep-methods-and-dahlquist-equivalence",
+    "linear-multistep-methods-and-dahlquist-equivalence-examples"
+  ],
+  "items_read": [
+    "def-linear-multistep-method-consistency-order-and-root-condition",
+    "lem-variable-step-adams-lagrange-weights",
+    "alg-adams-pece-one-correction",
+    "lem-companion-powers-bounded-under-root-condition",
+    "lem-linear-multistep-order-conditions-from-taylor",
+    "lem-variable-step-bdf2-interpolation-and-local-defect",
+    "alg-variable-step-bdf2-with-selected-implicit-branch",
+    "thm-dahlquist-equivalence-for-linear-multistep-methods",
+    "lem-variable-step-bdf2-increment-ratio-recurrence",
+    "thm-variable-step-bdf2-order-two-under-ratio-bound",
+    "cex-repeated-unit-root-causes-linear-parasitic-growth",
+    "ex-one-pass-pece-differs-from-implicit-adams-stability",
+    "ex-repeated-interior-root-preserves-bounded-powers",
+    "ex-simple-unit-circle-roots-give-bounded-oscillation",
+    "ex-uniform-step-bdf2-satisfies-dahlquist-conditions",
+    "cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error"
+  ],
+  "conventions": [
+    {
+      "convention": "Coefficients are indexed from the oldest value j=0 to the new value j=k, with α_k nonzero; ρ(ζ)=Σα_jζ^j and σ(ζ)=Σβ_jζ^j. The local residual is unscaled, so order p means residual O(h^(p+1)).",
+      "fixed_by": "def-linear-multistep-method-consistency-order-and-root-condition",
+      "matters_for": [
+        "lem-linear-multistep-order-conditions-from-taylor",
+        "lem-companion-powers-bounded-under-root-condition",
+        "thm-dahlquist-equivalence-for-linear-multistep-methods",
+        "ex-uniform-step-bdf2-satisfies-dahlquist-conditions"
+      ]
+    },
+    {
+      "convention": "The root condition permits repeated roots strictly inside the unit disk, but requires every unit-modulus root to be simple. Zero-stability bounds every homogeneous solution uniformly in the grid length by its starting values.",
+      "fixed_by": "def-linear-multistep-method-consistency-order-and-root-condition",
+      "matters_for": [
+        "lem-companion-powers-bounded-under-root-condition",
+        "thm-dahlquist-equivalence-for-linear-multistep-methods",
+        "cex-repeated-unit-root-causes-linear-parasitic-growth",
+        "ex-repeated-interior-root-preserves-bounded-powers",
+        "ex-simple-unit-circle-roots-give-bounded-oscillation"
+      ]
+    },
+    {
+      "convention": "Variable-step indexing is h_n=t_(n+1)-t_n and r_n=h_n/h_(n-1). The BDF2 residual includes the factor h_n(1+r_n) on the endpoint derivative.",
+      "fixed_by": "lem-variable-step-bdf2-interpolation-and-local-defect",
+      "matters_for": [
+        "alg-variable-step-bdf2-with-selected-implicit-branch",
+        "lem-variable-step-bdf2-increment-ratio-recurrence",
+        "thm-variable-step-bdf2-order-two-under-ratio-bound",
+        "cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error"
+      ]
+    },
+    {
+      "convention": "PECE performs exactly one correction using the predicted endpoint derivative, then stores the derivative at the corrected endpoint; it does not solve the implicit corrector equation.",
+      "fixed_by": "alg-adams-pece-one-correction",
+      "matters_for": ["ex-one-pass-pece-differs-from-implicit-adams-stability"]
+    },
+    {
+      "convention": "Implicit convergence estimates assume uniform local root existence and uniqueness for every sufficiently close history, and selection of that same root. Variable-step second-order convergence additionally assumes a positive lower ratio bound and an upper ratio bound strictly below 1+√2.",
+      "fixed_by": "thm-variable-step-bdf2-order-two-under-ratio-bound",
+      "matters_for": ["thm-variable-step-bdf2-order-two-under-ratio-bound"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-linear-multistep-method-consistency-order-and-root-condition",
+      "statement": "Consistency is order at least one; equivalently ρ(1)=0 and ρ′(1)=σ(1). The root condition requires all roots of ρ to have modulus at most one and all unit-modulus roots to have algebraic multiplicity one.",
+      "used_by": [
+        "lem-linear-multistep-order-conditions-from-taylor",
+        "lem-companion-powers-bounded-under-root-condition",
+        "thm-dahlquist-equivalence-for-linear-multistep-methods"
+      ]
+    },
+    {
+      "id": "lem-companion-powers-bounded-under-root-condition",
+      "statement": "For the row-shift companion matrix C of ρ/α_k, sup over n≥0 of ||C^n||∞ is finite if and only if ρ satisfies the root condition. Consequently the homogeneous recurrence is zero-stable exactly under that root condition.",
+      "used_by": [
+        "thm-dahlquist-equivalence-for-linear-multistep-methods",
+        "ex-repeated-interior-root-preserves-bounded-powers",
+        "ex-simple-unit-circle-roots-give-bounded-oscillation"
+      ]
+    },
+    {
+      "id": "lem-linear-multistep-order-conditions-from-taylor",
+      "statement": "For every integer p≥1, the method has order at least p if and only if μ_m=0 for each m=0,…,p, where μ_0=Σα_j and μ_m=Σα_j j^m−mΣβ_j j^(m−1).",
+      "used_by": [
+        "thm-dahlquist-equivalence-for-linear-multistep-methods",
+        "cex-repeated-unit-root-causes-linear-parasitic-growth",
+        "ex-repeated-interior-root-preserves-bounded-powers",
+        "ex-simple-unit-circle-roots-give-bounded-oscillation",
+        "ex-uniform-step-bdf2-satisfies-dahlquist-conditions"
+      ]
+    },
+    {
+      "id": "lem-variable-step-bdf2-interpolation-and-local-defect",
+      "statement": "Quadratic interpolation gives the BDF2 coefficients (1+2r_n), −(1+r_n)^2, r_n^2 and derivative denominator h_n(1+r_n). For an exact vector solution with bounded third derivative, its unscaled residual is O(h_n^3) uniformly when r_n stays in a fixed compact subinterval of (0,∞).",
+      "used_by": [
+        "alg-variable-step-bdf2-with-selected-implicit-branch",
+        "lem-variable-step-bdf2-increment-ratio-recurrence",
+        "thm-variable-step-bdf2-order-two-under-ratio-bound"
+      ]
+    },
+    {
+      "id": "lem-variable-step-bdf2-increment-ratio-recurrence",
+      "statement": "For homogeneous variable-step BDF2, Δ_(n+1)=q(r_n)Δ_n with q(r)=r²/(1+2r). For r>0, q(r)≤1 exactly when r≤1+√2; an upper ratio bound r_*<1+√2 gives a uniform contraction q_*<1.",
+      "used_by": [
+        "thm-variable-step-bdf2-order-two-under-ratio-bound",
+        "cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error"
+      ]
+    },
+    {
+      "id": "lem-variable-step-adams-lagrange-weights",
+      "statement": "The predictor weights are integrals over [t_n,t_(n+1)] of the Lagrange bases on the k known derivative nodes; the corrector weights integrate the bases on those nodes together with the new endpoint.",
+      "used_by": [
+        "alg-adams-pece-one-correction",
+        "ex-one-pass-pece-differs-from-implicit-adams-stability"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "Open time-state domain and interval-solution conventions; no existence theorem is imported.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-numbers-and-arithmetic",
+      "used_for": "Complex arithmetic and i²=−1.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-numbers-form-a-field",
+      "used_for": "Complex field structure and real embedding.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-conjugate-real-imaginary-part-and-modulus",
+      "used_for": "Complex coordinates and modulus in root and companion-power arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "Componentwise one-variable Taylor expansions for order moments and BDF2 residual bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-companion-matrix-of-a-linear-recurrence",
+      "used_for": "Row-shift companion signs and state ordering.",
+      "opened": true
+    },
+    {
+      "id": "prop-companion-matrix-iterates-a-linear-recurrence",
+      "used_for": "Identification of homogeneous states with companion iterates.",
+      "opened": true
+    },
+    {
+      "id": "thm-characteristic-polynomial-of-a-recurrence-companion-matrix",
+      "used_for": "Identification of the matrix characteristic polynomial with ρ/α_k.",
+      "opened": true
+    },
+    {
+      "id": "thm-fundamental-theorem-of-algebra-minimum-modulus-proof",
+      "used_for": "Algebraic closedness of the complex field.",
+      "opened": true
+    },
+    {
+      "id": "def-algebraically-closed-field",
+      "used_for": "Exact hypothesis needed for complex Jordan form.",
+      "opened": true
+    },
+    {
+      "id": "cor-endomorphisms-over-an-algebraically-closed-field-have-jordan-form",
+      "used_for": "Existence of Jordan form for the companion matrix.",
+      "opened": true
+    },
+    {
+      "id": "def-jordan-block-and-jordan-string",
+      "used_for": "Jordan-block orientation and nilpotent superdiagonal.",
+      "opened": true
+    },
+    {
+      "id": "def-jordan-canonical-form",
+      "used_for": "Block decomposition underlying the power bound.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-polynomial-of-block-triangular-matrix",
+      "used_for": "Relating root multiplicities to Jordan-block sizes.",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "used_for": "Euler representation and modulus of the oscillatory modes.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-exponential-addition-and-real-extension",
+      "used_for": "Identification i^n=exp(inπ/2).",
+      "opened": true
+    },
+    {
+      "id": "thm-quarter-turn-values-and-shift-formulas",
+      "used_for": "Quarter-turn values identifying i.",
+      "opened": true
+    },
+    {
+      "id": "lem-exponential-dominates-one-plus-x",
+      "used_for": "Bounding finite products in the variable-step error recurrence.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Combining exponential factors into a grid-independent bound.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "linear-multistep-methods-and-dahlquist-equivalence",
+      "to": "stationary-iterations-and-relaxation",
+      "faithful": true,
+      "note": "Checked both page contexts and the batch-36 dependency record. This is a retained page prerequisite; no assigned item imports a stationary-iteration proposition or convergence premise."
+    },
+    {
+      "from": "stability-regions-and-stiff-equations",
+      "to": "linear-multistep-methods-and-dahlquist-equivalence",
+      "faithful": true,
+      "note": "The absolute-stability definition preserves ρ−zσ, the nonzero leading-coefficient requirement, and the unit-root simplicity condition. The BDF2 root-locus lemma correctly specializes the branch equation to r_n=1."
+    },
+    {
+      "from": "implicit-stiff-time-stepping-and-algebraic-error",
+      "to": "linear-multistep-methods-and-dahlquist-equivalence",
+      "faithful": true,
+      "note": "The constant-step corollary explicitly derives the uniform local selected-root hypothesis before applying the variable-step theorem with r_min=r_*=1. The composed stepper distinguishes exact selected roots from finite residual solves and carries the starter, tube, smoothness, and ratio caveats."
+    }
+  ]
+}

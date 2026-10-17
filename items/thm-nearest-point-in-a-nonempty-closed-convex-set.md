@@ -14,7 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
-  audited: 2026-08-21
+  repair: research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-nearest-point-repair/repair.json
 sources:
   scraped: []
   references:
@@ -37,12 +37,12 @@ Let $n\ge1$, let $C\subseteq\mathbb R^n$ be nonempty, closed, and convex, and le
 
 [L2] A continuous real function on a nonempty compact metric space attains a maximum and a minimum ([[thm-extreme-value-metric]]).
 
-[L3] The Euclidean norm satisfies the parallelogram law ([[thm-cauchy-schwarz-and-the-euclidean-norm]]).
+[L3] The Euclidean norm satisfies the triangle inequality and the parallelogram law ([[thm-cauchy-schwarz-and-the-euclidean-norm]]).
 
 ## Proof
 
 **Proof technique:** contradiction.
 
-1.1 Choose $c_0\in C$ and put $R=\|x-c_0\|_2$. The set $K=C\cap\overline B(x,R)$ is nonempty, closed, and bounded, hence compact by [L1]. The continuous distance $z\mapsto\|x-z\|_2$ attains a minimum at some $p\in K$ by [L2]. Points of $C\setminus K$ have distance greater than $R$, so $p$ minimizes distance over all of $C$. [L1, L2, given, choose]
+1.1 Choose $c_0\in C$ and put $R=1+\|x-c_0\|_2>0$. Then $c_0\in K:=C\cap\overline B(x,R)$, so $K$ is nonempty and bounded. The triangle inequality gives $|\|x-z\|_2-\|x-w\|_2|\le\|z-w\|_2$, hence the distance function is continuous. To see that the ball is closed directly, if $\|z-x\|_2>R$, set $\delta=(\|z-x\|_2-R)/2>0$; whenever $\|w-z\|_2<\delta$, the triangle inequality gives $\|w-x\|_2\ge\|z-x\|_2-\|w-z\|_2>R$. Thus its complement is open. Since $C$ is closed, the complement of $K$ is the union of two open sets and is open: each point retains a contained open ball from one member. Therefore $K$ is closed, and [L1] makes it compact. By [L2], the continuous distance attains a minimum at some $p\in K$. Points of $C\setminus K$ have distance greater than $R$, while $\|x-p\|_2\le\|x-c_0\|_2<R$, so $p$ minimizes distance over all of $C$. [L1, L2, L3, given, choose, algebra]
 
 2.1 Suppose distinct $p,q\in C$ both minimize the squared distance at $d^2$. Convexity puts $(p+q)/2$ in $C$, while [L3] gives $$\left\|x-\frac{p+q}{2}\right\|_2^2=d^2-\frac14\|p-q\|_2^2<d^2,$$ contradicting minimality. Thus the nearest point is unique. [step 1.1, L3, given, assume-contra, algebra, discharge-contradiction] ∎

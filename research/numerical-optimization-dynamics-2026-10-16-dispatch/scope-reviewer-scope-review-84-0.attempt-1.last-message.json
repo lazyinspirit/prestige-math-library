@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "84",
+  "round": 0,
+  "reviewed_items": [
+    "thm-nonlinear-least-squares-gradient-and-hessian",
+    "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian",
+    "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+    "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+    "alg-safeguarded-levenberg-marquardt",
+    "thm-gauss-newton-local-linear-contraction",
+    "thm-gauss-newton-zero-residual-quadratic-convergence",
+    "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+    "thm-safeguarded-levenberg-marquardt-global-stationarity",
+    "ex-exponential-kinetics-gauss-newton-fit",
+    "ex-rank-deficient-identifiability-and-lm-step",
+    "ex-nonzero-residual-gauss-newton-is-only-linear"
+  ],
+  "reviewed_pages": [
+    "gauss-newton-and-levenberg-marquardt-methods",
+    "gauss-newton-and-levenberg-marquardt-methods-examples"
+  ],
+  "decision": "repair",
+  "reason": "The derivative, linearization, convergence, sufficient-decrease, stationarity, and example arguments match their hypotheses and approved scope. Two procedure definitions need local clarification so exact claims are not attached to computed paths and every computed LM status has a defined branch. No significant unresolved prerequisite gap was found.",
+  "findings": [
+    {
+      "id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "type": "local",
+      "reason": "The Definition permits computing QR with the rounded Householder procedure, then allows the exact-mode branch to return exact-step. That output is not justified by a computed factorization. Specify that exact-step requires an exact factorization, and that the computed Householder path returns only computed statuses."
+    },
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "type": "local",
+      "reason": "The computed QR call does not specify whether rank-unverified is a failure or a usable trial, nor how the required certificate for computed-candidate is supplied. The proof also uses the exact-step lemma to infer a nonzero, positive-prediction step for computed candidates; a computed candidate may instead be zero, while Step 2 only covers nonzero p. Define the status and zero-step branches, and distinguish the exact proof from the computed path."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "decision": "repair",
+      "reason": "Its computed QR call consumes the unresolved exact-versus-computed interface and also has the separate status and zero-step ambiguity reported above."
+    },
+    {
+      "id": "thm-gauss-newton-local-linear-contraction",
+      "decision": "accept",
+      "reason": "Uses the exact full-rank minimizer only; its contraction proof is supported by the stated local bounds."
+    },
+    {
+      "id": "thm-gauss-newton-zero-residual-quadratic-convergence",
+      "decision": "accept",
+      "reason": "Uses the exact full-rank minimizer only; the residual remainder and quadratic estimate are valid under the stated assumptions."
+    },
+    {
+      "id": "ex-exponential-kinetics-gauss-newton-fit",
+      "decision": "accept",
+      "reason": "Uses the exact full-rank branch; the Jacobian, determinant, and zero step are correctly computed."
+    },
+    {
+      "id": "ex-rank-deficient-identifiability-and-lm-step",
+      "decision": "accept",
+      "reason": "Uses exact rank and LM branches; the rank, damped step, predicted decrease, feasibility, and ratio are correctly computed."
+    },
+    {
+      "id": "ex-nonzero-residual-gauss-newton-is-only-linear",
+      "decision": "accept",
+      "reason": "Uses the exact full-rank branch; the update, limiting factor, and local-contraction constants check out."
+    },
+    {
+      "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+      "decision": "accept",
+      "reason": "Its claims explicitly assume exact solves and use the exact LM branch; the damping and ratio bounds are valid."
+    },
+    {
+      "id": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "decision": "accept",
+      "reason": "Its exact-arithmetic assumptions exclude the computed-status ambiguity; the decrease telescope and stationarity conclusion are valid."
+    },
+    {
+      "id": "gauss-newton-and-levenberg-marquardt-methods",
+      "decision": "accept",
+      "reason": "The page summary distinguishes exact GN claims and conditional computed QR stability; it remains accurate with the procedure clarifications."
+    },
+    {
+      "id": "gauss-newton-and-levenberg-marquardt-methods-examples",
+      "decision": "accept",
+      "reason": "The page describes exact examples and makes no computed-path convergence claim."
+    }
+  ]
+}

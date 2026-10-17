@@ -1,0 +1,369 @@
+{
+  "group": "w",
+  "batches": ["27"],
+  "pages_read": [
+    "proximal-gradient-and-accelerated-composite-optimization",
+    "proximal-gradient-and-accelerated-composite-optimization-examples"
+  ],
+  "items_read": [
+    "def-indicator-function-of-closed-convex-set",
+    "def-proper-closed-convex-function-on-rn",
+    "lem-l-smoothness-descent-inequality",
+    "def-extended-real-epsilon-subdifferential",
+    "def-proximal-mapping",
+    "def-strong-convex-composite-objective",
+    "lem-proper-closed-convex-function-affine-minorant",
+    "lem-smooth-composite-sum-preserves-proper-closed-convexity",
+    "lem-prox-indicator-is-euclidean-projection",
+    "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+    "def-proximal-gradient-mapping",
+    "lem-prox-l1-is-soft-thresholding",
+    "lem-proximal-three-point-inequality",
+    "alg-proximal-gradient-and-fista",
+    "lem-proximal-gradient-one-step-estimate",
+    "thm-projected-gradient-fixed-point-kkt-certificate",
+    "alg-certified-inexact-proximal-gradient-and-fista",
+    "lem-fista-energy-estimate-sequence",
+    "thm-proximal-gradient-o1k-objective-bound",
+    "lem-inexact-proximal-gradient-one-step-estimate",
+    "thm-fista-o1k2-objective-bound",
+    "lem-inexact-fista-energy-estimate",
+    "thm-inexact-proximal-gradient-summable-error-bound",
+    "thm-strong-convex-proximal-gradient-and-restarted-fista-rates",
+    "thm-inexact-fista-weighted-error-bound",
+    "ex-two-pixel-total-variation-proximal-map",
+    "ex-fista-objective-increases-on-a-quadratic",
+    "ex-nonorthogonal-lasso-proximal-gradient-step",
+    "ex-projected-gradient-on-nonnegative-orthant"
+  ],
+  "conventions": [
+    {
+      "convention": "Proper means nonempty finite effective domain; closed means closed epigraph in Euclidean space. Convex combinations use 0·(+∞)=0 at endpoints.",
+      "fixed_by": "def-proper-closed-convex-function-on-rn",
+      "matters_for": [
+        "lem-proper-closed-convex-function-affine-minorant",
+        "lem-smooth-composite-sum-preserves-proper-closed-convexity",
+        "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+        "lem-prox-indicator-is-euclidean-projection"
+      ]
+    },
+    {
+      "convention": "The proximal mapping initially denotes a minimizer set for parameter t>0; after singleton existence is proved, the same notation denotes its unique member.",
+      "fixed_by": "def-proximal-mapping",
+      "matters_for": [
+        "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+        "def-proximal-gradient-mapping",
+        "lem-prox-l1-is-soft-thresholding",
+        "ex-two-pixel-total-variation-proximal-map"
+      ]
+    },
+    {
+      "convention": "The η-subdifferential uses g(z)≥g(x)+〈p,z−x〉−η for every z, with η≥0; it is empty outside dom g.",
+      "fixed_by": "def-extended-real-epsilon-subdifferential",
+      "matters_for": [
+        "alg-certified-inexact-proximal-gradient-and-fista",
+        "lem-inexact-proximal-gradient-one-step-estimate",
+        "lem-inexact-fista-energy-estimate",
+        "thm-inexact-fista-weighted-error-bound"
+      ]
+    },
+    {
+      "convention": "Exact FISTA starts with t₁=1 and y₁=x₀, uses xₖ=T_L(yₖ), and extrapolates with coefficient (tₖ−1)/tₖ₊₁. Restart resets momentum and the previous iterate at each full block.",
+      "fixed_by": "alg-proximal-gradient-and-fista",
+      "matters_for": [
+        "lem-fista-energy-estimate-sequence",
+        "thm-fista-o1k2-objective-bound",
+        "thm-strong-convex-proximal-gradient-and-restarted-fista-rates",
+        "ex-fista-objective-increases-on-a-quadratic"
+      ]
+    },
+    {
+      "convention": "In the FISTA energy recurrence t₀=0, u₀=x₀−x*, and the k=1 previous objective term is interpreted as zero, including when F(x₀)=+∞.",
+      "fixed_by": "lem-fista-energy-estimate-sequence",
+      "matters_for": [
+        "thm-fista-o1k2-objective-bound",
+        "lem-inexact-fista-energy-estimate",
+        "thm-inexact-fista-weighted-error-bound"
+      ]
+    },
+    {
+      "convention": "An inexact call must return a finite-domain point with L(yₖ−xₖ)−∇f(yₖ)∈∂ηₖg(xₖ); failure to supply that certificate returns inconclusive.",
+      "fixed_by": "alg-certified-inexact-proximal-gradient-and-fista",
+      "matters_for": [
+        "thm-inexact-proximal-gradient-summable-error-bound",
+        "thm-inexact-fista-weighted-error-bound"
+      ]
+    },
+    {
+      "convention": "Strong convexity is the strong-Jensen inequality on finite-domain pairs for 0<θ<1 and μ>0.",
+      "fixed_by": "def-strong-convex-composite-objective",
+      "matters_for": [
+        "thm-strong-convex-proximal-gradient-and-restarted-fista-rates"
+      ]
+    },
+    {
+      "convention": "The normal cone is outward: 〈v,z−x〉≤0 for every z∈C. The projected-gradient theorem asserts fixed-point/normal-cone equivalence and KKT-multiplier sufficiency, without a multiplier converse.",
+      "fixed_by": "thm-projected-gradient-fixed-point-kkt-certificate",
+      "matters_for": [
+        "ex-projected-gradient-on-nonnegative-orthant"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+      "statement": "For proper closed convex g:Rⁿ→(−∞,+∞], every t>0 and v∈Rⁿ give a singleton prox_tg(v). Its member u satisfies u=prox_tg(v) iff (v−u)/t∈∂g(u). For uᵢ=prox_tg(vᵢ), ‖u₁−u₂‖²≤〈u₁−u₂,v₁−v₂〉; in particular the map is nonexpansive.",
+      "used_by": [
+        "def-proximal-gradient-mapping",
+        "lem-proximal-three-point-inequality",
+        "alg-proximal-gradient-and-fista",
+        "alg-certified-inexact-proximal-gradient-and-fista",
+        "thm-strong-convex-proximal-gradient-and-restarted-fista-rates"
+      ]
+    },
+    {
+      "id": "lem-proximal-gradient-one-step-estimate",
+      "statement": "For convex continuously differentiable f:Rⁿ→R with L-Lipschitz gradient, L>0, and proper closed convex g, put F=f+g and x⁺=T_L(y). For every z∈Rⁿ, F(z)≥F(x⁺)+(L/2)‖x⁺−y‖²+L〈y−z,x⁺−y〉.",
+      "used_by": [
+        "lem-fista-energy-estimate-sequence",
+        "thm-proximal-gradient-o1k-objective-bound",
+        "thm-strong-convex-proximal-gradient-and-restarted-fista-rates"
+      ]
+    },
+    {
+      "id": "lem-proper-closed-convex-function-affine-minorant",
+      "statement": "Let n∈N and let g:Rⁿ→(−∞,+∞] be proper, closed and convex in the epigraph convention. Then there are a∈Rⁿ and b∈R such that g(x)≥〈a,x〉+b for every x∈Rⁿ.",
+      "used_by": [
+        "thm-proximal-operator-existence-resolvent-firm-nonexpansive"
+      ]
+    },
+    {
+      "id": "lem-fista-energy-estimate-sequence",
+      "statement": "Under the exact FISTA hypotheses with minimizer x*, set t₀=0, u₀=x₀−x*, and uₖ=tₖxₖ−(tₖ−1)xₖ₋₁−x*. For every k≥1, (2tₖ²/L)(F(xₖ)−F(x*))+‖uₖ‖²≤(2tₖ₋₁²/L)(F(xₖ₋₁)−F(x*))+‖uₖ₋₁‖², with the k=1 previous objective term interpreted as zero.",
+      "used_by": [
+        "thm-fista-o1k2-objective-bound"
+      ]
+    },
+    {
+      "id": "lem-inexact-proximal-gradient-one-step-estimate",
+      "statement": "For convex continuously differentiable f with L-Lipschitz gradient, L>0, and proper closed convex g, suppose L(y−x⁺)−∇f(y)∈∂ηg(x⁺), η≥0. With F=f+g, every z∈Rⁿ satisfies F(z)≥F(x⁺)+(L/2)‖x⁺−y‖²+L〈y−z,x⁺−y〉−η.",
+      "used_by": [
+        "lem-inexact-fista-energy-estimate",
+        "thm-inexact-proximal-gradient-summable-error-bound"
+      ]
+    },
+    {
+      "id": "lem-inexact-fista-energy-estimate",
+      "statement": "For certified inexact FISTA with errors ηₖ≥0 and minimizer x*, the exact FISTA energy recurrence holds with the additional right-hand term 2tₖ²ηₖ/L, using t₀=0, u₀=x₀−x*, uₖ=tₖxₖ−(tₖ−1)xₖ₋₁−x*, and a zero previous objective term at k=1.",
+      "used_by": [
+        "thm-inexact-fista-weighted-error-bound"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-extended-reals",
+      "used_for": "Extended values, order and partial arithmetic.",
+      "opened": true
+    },
+    {
+      "id": "def-proper-coercive-and-weakly-lower-semicontinuous-functional",
+      "used_for": "Properness and effective-domain background.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+      "used_for": "Extended-real convexity and the endpoint convention.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-subset-of-euclidean-space",
+      "used_for": "Convex sets and indicator/projection inputs.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Euclidean algebra, scalar identification and zero-dimensional cases.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-space",
+      "used_for": "Topological background for closed epigraphs.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-topology",
+      "used_for": "Closedness through open complements.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-ball",
+      "used_for": "Neighborhood arguments and radius conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-subgradient-and-subdifferential",
+      "used_for": "Compatibility with the finite-valued subgradient convention.",
+      "opened": true
+    },
+    {
+      "id": "def-lipschitz-holder-contraction",
+      "used_for": "The gradient Lipschitz bound.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Finite-partition proof of the descent inequality.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiation along line segments.",
+      "opened": true
+    },
+    {
+      "id": "cor-archimedean-reciprocal",
+      "used_for": "Removing the finite-partition error in the descent inequality.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Telescoping and evaluating finite sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "The finite-sum identity in the descent proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Inner-product estimates, triangle inequality and quadratic identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-nearest-point-in-a-nonempty-closed-convex-set",
+      "used_for": "Epigraph projections in the affine-minorant proof and existence of Euclidean projection.",
+      "opened": true
+    },
+    {
+      "id": "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+      "used_for": "Supporting normals and projected-gradient certificates.",
+      "opened": true
+    },
+    {
+      "id": "cor-bolzano-weierstrass-in-rn",
+      "used_for": "A convergent subsequence of normalized epigraph projection normals.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of the bounded proximal-objective sublevel.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-semicontinuity-level-set-characterisations",
+      "used_for": "Lower semicontinuity of the real-valued objective restricted to its finite sublevel.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-semicontinuous-extreme-value-theorem",
+      "used_for": "Attainment on that nonempty compact finite sublevel.",
+      "opened": true
+    },
+    {
+      "id": "thm-differentiable-convex-functions-and-gradient-inequality",
+      "used_for": "Smooth convex lower bounds in exact, inexact and strongly convex estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-p-norms-on-rn",
+      "used_for": "Coordinate decomposition of the l1 proximal objective.",
+      "opened": true
+    },
+    {
+      "id": "lem-p-norms-are-norms-and-induce-the-published-metrics",
+      "used_for": "Convexity of the l1 penalty.",
+      "opened": true
+    },
+    {
+      "id": "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+      "used_for": "Continuity and closed epigraph of the l1 penalty.",
+      "opened": true
+    },
+    {
+      "id": "def-soft-thresholding-function",
+      "used_for": "The positive-threshold scalar map, including threshold endpoints.",
+      "opened": true
+    },
+    {
+      "id": "def-lasso-estimator",
+      "used_for": "The normalization n⁻¹‖y−Xθ‖²+2τ‖θ‖₁ in the nonorthogonal example.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "thm-nearest-point-in-a-nonempty-closed-convex-set",
+      "finding": "In thm-nearest-point-in-a-nonempty-closed-convex-set, Proof 1.1 says: “Choose c₀∈C and put R=‖x−c₀‖₂. The set K=C∩B̄(x,R) is nonempty, closed, and bounded”. The permitted choice c₀=x gives R=0, whereas def-metric-ball explicitly requires strictly positive radii and says “a ball of radius 0 or of negative radius is never written in this library.” The proof needs a separate R=0 case or a positive enclosing radius. This is an immediately closable boundary-case omission; the nearest-point statement remains sound.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "proximal-gradient-and-accelerated-composite-optimization",
+      "to": "inequality-kkt-duality-and-optimality-certificates",
+      "faithful": true,
+      "note": "The projected-gradient theorem preserves the outward normal sign, affine constraint setting, nonnegative multipliers and complementarity. It uses convex KKT sufficiency and explicitly declines a multiplier converse."
+    },
+    {
+      "from": "nonsmooth-contact-time-stepping-and-projections",
+      "to": "proximal-gradient-and-accelerated-composite-optimization",
+      "faithful": true,
+      "note": "The normal-cone/projection-resolvent lemma uses the indicator, exact subgradient definition and positive-parameter proximal resolvent with their stated hypotheses."
+    },
+    {
+      "from": "subgradient-bundle-and-derivative-free-optimization",
+      "to": "proximal-gradient-and-accelerated-composite-optimization",
+      "faithful": true,
+      "note": "The bundle consumers retain proper closed convex inputs and use exact proximal existence, nonexpansiveness and the zero-subgradient certificate. Their aggregate-model error argument is separate from the certified inexact FISTA model."
+    },
+    {
+      "from": "coordinate-and-block-descent-methods",
+      "to": "proximal-gradient-and-accelerated-composite-optimization",
+      "faithful": true,
+      "note": "Block proximal calls use positive majorizers and proper closed convex penalties. Closedness arguments use epigraphs; existence arguments apply the affine-minorant and continuous-sum lemmas within their domains."
+    },
+    {
+      "from": "operator-splitting-admm-and-primal-dual-methods",
+      "to": "proximal-gradient-and-accelerated-composite-optimization",
+      "faithful": true,
+      "note": "Conjugate properness uses the affine minorant; ADMM uses exact subgradient inequalities; PDHG uses positive-parameter proximal resolvents. General ADMM subproblem attainment is separately guarded rather than inferred from the proximal theorem."
+    },
+    {
+      "from": "stochastic-approximation-and-stochastic-gradient-methods",
+      "to": "proximal-gradient-and-accelerated-composite-optimization",
+      "faithful": true,
+      "note": "Smooth descent is used without adding a convexity requirement to that supplier. Projected SGD uses indicator projection and nonexpansiveness; strong-convexity consumers retain the strong-Jensen inequality on their stated domains."
+    },
+    {
+      "from": "variance-reduced-finite-sum-and-adaptive-gradient-optimization",
+      "to": "proximal-gradient-and-accelerated-composite-optimization",
+      "faithful": true,
+      "note": "Finite-sum proofs use the stated smooth descent inequality and strong-convexity convention. AdaGrad reduces its positive diagonal metric subproblem to an ordinary Euclidean proximal problem after scaling."
+    },
+    {
+      "from": "finite-element-pde-constrained-optimization",
+      "to": "proximal-gradient-and-accelerated-composite-optimization",
+      "faithful": true,
+      "note": "The PDE algorithm references the proximal-gradient procedure but supplies its own finite-dimensional projection and approximate-gradient certificate contract. It does not import exact PG/FISTA objective rates for its inexact backend."
+    },
+    {
+      "from": "numerical-identifiability-and-optimal-experiment-design",
+      "to": "proximal-gradient-and-accelerated-composite-optimization",
+      "faithful": true,
+      "note": "This is a contextual page prerequisite: no listed item directly cites or declares a dependency on a batch-27 item, and no proximal-gradient rate is claimed."
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "research_only": true,
+  "entries": [
+    {
+      "id": "thm-sdc-finite-sweeps-raise-order",
+      "batch": 95,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-95-step5-context.json",
+      "pointer": "/concerns/0",
+      "concern_index": 0,
+      "finding": {
+        "id": "thm-sdc-finite-sweeps-raise-order",
+        "concern": "The Statement concludes global order p = min(M,k+1) without explicitly specifying the numerical initial error. Proof 3.1 introduces 'The initial error is e_0=0' without a corresponding stated premise. Exact initialization is the natural intended convention, but it should be stated, or replaced by an O(h^p) initial-error assumption. If arbitrary numerical starting data are admitted literally, y'=0 with numerical initial value different from the exact initial value satisfies the tube and contraction conditions while retaining a nonvanishing grid error.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_row": {
+        "id": "thm-sdc-finite-sweeps-raise-order",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "For fixed M and k, the contraction bound gives stage error O(h^{k+1}), hence endpoint error O(h^{k+2}); adding the collocation defect and applying the stated recurrence yields global order min(M,k+1). I found no fatal defect.",
+        "context_sha256": "68a75dd2f33d75f26b810b9c7ae2110c3cb26af825dd460930694890d0168688",
+        "item_sha256": "30fe6c69e21870fd951af9a51c3635d15a4e5d79b889dac7d064b76faaecfb80",
+        "at": "2026-10-17T01:57:38.750Z"
+      },
+      "original_luna_evidence": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+        "line": 1839
+      }
+    },
+    {
+      "id": "thm-discrete-sde-adjoint-gradient-interchange",
+      "batch": 103,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-103-step5-context.json",
+      "pointer": "/concerns/1",
+      "concern_index": 1,
+      "finding": {
+        "id": "thm-discrete-sde-adjoint-gradient-interchange",
+        "concern": "Proof 1.1 says to apply the chain rule to 'u_{k+1}=\u03a8_k(u_k,\u03b8\u2080,\u03be_{k+1})' while deriving D\u03b8u_{k+1}=D_u\u03a8_k D\u03b8u_k + D\u03b8\u03a8_k. The parameter must remain variable in the composition before evaluating its derivative at \u03b8\u2080; freezing that argument literally removes the displayed direct parameter derivative. The intended composition is explicit in the Statement and the rest of the proof, so this is a local notation correction.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "thm-discrete-sde-adjoint-gradient-interchange",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The pathwise tangent and reverse recursions give the stated adjoint by telescoping, including N=0. The difference-quotient argument supplies gradient measurability for the domination theorem, and the L1 limit yields the claimed gradient convergence.",
+        "context_sha256": "2aa0312e45ce0c9b44b67262db633ccbf7259a522b10679b5c0e70206378a9c8",
+        "item_sha256": "2f9464fdb1389969ec7af88873bc087cd89cbe2c28152e1fb02b4b22a847d1c1",
+        "at": "2026-10-17T01:59:50.530Z"
+      },
+      "original_luna_evidence": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+        "line": 1986
+      }
+    },
+    {
+      "id": "ex-bouncing-ball-transverse-event-error-and-reset",
+      "batch": 105,
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-105-step5-context.json",
+      "pointer": "/concerns/1",
+      "concern_index": 1,
+      "finding": {
+        "id": "ex-bouncing-ball-transverse-event-error-and-reset",
+        "concern": "Verification step 3.2 repeats step 3.1's guard Lipschitz calculation and application of the event-time bound, beginning 'Since g(q,v)=q' and ending 'agreeing with the explicit bound in step 2.1'. This adds no argument to the reset estimate; step 3.2 can use step 3.1 directly.",
+        "severity": "presentation"
+      },
+      "original_luna_row": {
+        "id": "ex-bouncing-ball-transverse-event-error-and-reset",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The bracket is transverse with margin 2; the dense root and reset satisfy the cited estimates\u2019 hypotheses, and both stated error bounds follow. No fatal defect found.",
+        "context_sha256": "0b5657df3ba84e988190a21a058b09cd68beb3df1fc437aee8c3817ec5d3819e",
+        "item_sha256": "dd7ccd0622b1ec446037b53be315b52834ac8f34aba8d0f41408caad4e188224",
+        "at": "2026-10-17T01:59:57.989Z"
+      },
+      "original_luna_evidence": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+        "line": 1992
+      }
+    }
+  ],
+  "scope": "Only newly uncovered actual native findings with original Luna keep=true; excludes already-owned r3 and all earlier indexed proposals."
+}

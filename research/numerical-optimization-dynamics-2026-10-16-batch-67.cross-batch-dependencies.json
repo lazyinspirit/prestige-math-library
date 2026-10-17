@@ -1,0 +1,560 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-block-lobpcg-with-rank-loss-status",
+    "supplier": "def-b-inner-product-and-dual-norm-for-definite-pencil",
+    "status": "verified",
+    "batch": "48",
+    "required_interface": "For B=B*>0, <x,y>_B=y*Bx and ||x||_B^2=x*Bx; B-orthonormality is X*BX=I. The local procedure assumes this exact metric and does not infer SPD from an implementation.",
+    "supplier_item_ids": [
+      "def-b-inner-product-and-dual-norm-for-definite-pencil"
+    ],
+    "affected_claims": [
+      "B-QR rank handling and the LOBPCG trial block."
+    ],
+    "evidence": "The actual current definition and its Cholesky/inner-product prerequisites were inspected. The exact Hermitian positive-definite hypotheses match the local procedure; current page/manifest placement was checked.",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-block-lobpcg-with-rank-loss-status",
+    "supplier": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "A finite-dimensional Hermitian compression has an orthonormal eigenbasis and real eigenvalues.",
+    "supplier_item_ids": [
+      "thm-complex-spectral-theorem-for-normal-endomorphisms"
+    ],
+    "affected_claims": [
+      "Finite projected Rayleigh-Ritz solve in each LOBPCG iteration."
+    ],
+    "evidence": "The published theorem statement/proof and the exact normality condition on Q*AQ were inspected.",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-shift-invert-and-harmonic-ritz-extraction",
+    "supplier": "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+    "consumer_batch": "67",
+    "supplier_batch": "48",
+    "status": "verified",
+    "evidence": "The harmonic algorithm passes a regular finite projected pencil, finite QZ budget/tolerance and exact factor/local-update certificate requirements; formation errors must be in the ledger or it reports inconclusive. It preserves perturbed-pencil candidates and explicitly maps budget, certificate, range and singular statuses. The completed same-owner correction retained these source contracts.",
+    "inspected_paths": [
+      "items/alg-finite-budget-qz-iteration-with-deflation-and-residual.md#Definition",
+      "items/alg-shift-invert-and-harmonic-ritz-extraction.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Input a regular pencil $(A,B)$ with $A,B\\in\\mathbb C^{n\\times n}$,\n$n\\ge1$, a nonnegative integer sweep budget $N$, and a finite stored real tolerance\n$\\tau\\ge0$. Real input data are embedded in $\\mathbb C$. Scalar updates of the\nstored matrices use the operationwise model of\n[[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]].\nUse zero-based matrix indices throughout. Each active block $[a:b]$ includes\nboth endpoints; its relative coordinate $0$ is global index $a$.\nUse the canonical stored Givens generator and application order of\n[[alg-scaled-complex-householder-and-givens-updates]], with the common-pair\norientations and explicit coefficients $v,h,\\eta$ of\n[[lem-qz-two-sided-local-computed-update-bound]]. Generate each rotation ONCE\nand apply its same stored coefficients to BOTH matrices. Retain the exact\nnormalized unitary representatives as product records, never as purported\nstored dense unitary matrices. Left rotations annihilate a column's second\nentry; right rotations annihilating a row's first entry use the coordinate\nreversal/adjoint construction of that lemma. After each genuine matrix target\napplication write only its intended target to exact zero and include that\nwrite in the local coefficient $\\eta$. An external-vector application has\ncoefficient $v$ and no matrix-target overwrite. Local roundoff certification\nrequires $0<u<1$; otherwise retain diagnostics with `certificate-inconclusive`. Record each elementary\nrotation separately. If the source cannot produce its admissible factor,\nreturn `range-failure` or `certificate-inconclusive` with diagnostics.\n\n1. Execute the finite index loops of\n[[alg-generalized-hessenberg-triangular-reduction]] with these COMPUTED common\nrotations: triangularize $B$ with left targets $B_{i,j}$; then reduce $A$ with\nleft targets $A_{i,j}$ followed by right targets $B_{i,i-1}$. Every application\nupdates both whole arrays. The exact initializer and\n[[prop-generalized-hessenberg-triangular-reduction-preserves-form-and-equivalence]]\nsupply the index schedule and support induction, not exact rounded\nreconstruction. Retain each local factor and residual defined against its\nexact representative. Include structural target writes in that local\narithmetic residual. Record all OTHER explicit zero writes separately: their\npost-action perturbations are pulled back by the local factor adjoints before\nentering the pre-action $D_j^A,D_j^B$ ledger. A pure tolerance write is an\nidentity-factor stage. Never count a structural write twice.\n\nInitialize the sweep counter to zero. Process active blocks in increasing first\nindex, splitting them at exact zero subdiagonals of $H$. In each deflation\npass execute step 2, then repeat step 3 for the smallest available non-isolated\nzero diagonal of $T$ until none remains or a status exits. Then run step 5; if\nit returns a status, stop. Otherwise, if the sweep counter equals $N$, return\n`budget-exhausted`. If not, increment the counter, execute step 4 on all\nremaining active blocks, and repeat the deflation pass. In particular $N=0$\npermits initialization/deflation but no step-4 sweep.\n\n2. On each active block $H_{a:b,a:b},T_{a:b,a:b}$, apply the following deflation\ntests before a sweep. For $i=a,\\ldots,b-1$, set $H_{i+1,i}$ to zero when\n$$|H_{i+1,i}|\\le\\tau\\bigl(|H_{i,i}|+|H_{i+1,i+1}|\\bigr),$$\nand record the negative of its old value at that position in $D^A$, with\nall other entries zero. For $k=a,\\ldots,b$, set $T_{k,k}$ to zero when\n$$|T_{k,k}|\\le\\tau\\bigl(|T_{k-1,k}|+|T_{k,k+1}|\\bigr),$$\nusing zero for a missing boundary term outside the active block, and record the\nnegative of the old value at that position in $D^B$, with all other entries zero.\nTreat each write as a separate identity-factor stage, so the new matrix is\nthe old matrix plus its recorded perturbation.\nEvaluate each displayed modulus by the canonical rounded scaled two-component\nnorm; evaluate its additions and tolerance product with the declared rounded\nreal operations, then compare the stored finite values exactly. Excluded\noperations return `range-failure`. The tests mean these rounded comparisons,\nnot an assertion about exact moduli at the threshold. Save the actual old\nentries, so their deflation perturbations remain exact regardless of the test.\nA one-by-one diagonal pair at $k$ is isolated when $H_{k,k-1}=0$ and\n$H_{k+1,k}=0$, omitting a boundary entry when $k=a$ or $k=b$. If it has\n$T_{k,k}=0$ and $H_{k,k}\\ne0$, report an infinite candidate for the computed pencil and deflate it\nfrom the active block. If the isolated diagonal pair is $(0,0)$, return\n`singular-pencil-suspected` without assigning an eigenvalue.\n\n3. To move a non-isolated zero $T_{k,k}$ to the top of its active block, for\n$j=k-1,k-2,\\ldots,a$ generate a right factor from the row pair\n$(T_{j,j},T_{j,j+1})$ and apply it to columns $j,j+1$, setting $T_{j,j}$ to\nzero. Then, when $j+2\\le b$, generate a left factor from\n$(H_{j+1,j},H_{j+2,j})$ and apply it to rows $j+1,j+2$, setting the resulting\nbulge $H_{j+2,j}$ to zero. Finally, when $a<b$, generate a left factor from\n$(H_{a,a},H_{a+1,a})$ and apply it to rows $a,a+1$, setting $H_{a+1,a}$ to\nzero. Record all rounded update residuals and target writes. If this isolates\n$(H_{a,a},T_{a,a})=(h,0)$ with $h\\ne0$, report the infinite candidate and\nremove the first row/column from the active block.\nIf the isolated pair is $(0,0)$, return `singular-pencil-suspected`; if isolation\nfails, return `certificate-inconclusive`. Each successful isolation removes\none index, so at most $n$ such removals occur.\n\n4. For each remaining active block with more than one row in the current\nsweep, choose the homogeneous shift $[\\alpha:\\beta]=[H_{b,b}:T_{b,b}]$ if this pair is nonzero and\n$T_{b,b}\\ne0$; if $T_{b,b}=0$, use $[0:1]$. Write\n$\\widehat H=H_{a:b,a:b}$ and $\\widehat T=T_{a:b,a:b}$, with relative indices\n$0,\\ldots,b-a$, and form\n$$x=(\\beta\\widehat H-\\alpha\\widehat T)e_0.$$\nCompute $x_0,x_1$ using the declared rounded complex products/subtractions and\ngenerate a left factor from $(x_0,x_1)$. Apply it to relative rows $0,1$ of\nboth matrices without a matrix-target overwrite. Its rounding changes the\nselected factor, not its application certificate. Generate a right factor\nfrom the row pair $(\\widehat T_{1,0},\\widehat T_{1,1})$ and apply it to relative\ncolumns $0,1$, setting $\\widehat T_{1,0}$ to zero. For relative\n$j=1,\\ldots,b-a-1$, generate a left factor from\n$(\\widehat H_{j,j-1},\\widehat H_{j+1,j-1})$ and apply it to rows $j,j+1$,\nsetting the current Hessenberg bulge $\\widehat H_{j+1,j-1}$ to zero; then\ngenerate a right factor from $(\\widehat T_{j+1,j},\\widehat T_{j+1,j+1})$ and\napply it to columns $j,j+1$, setting $\\widehat T_{j+1,j}$ to zero. Update and\nretain the products $Q,Z$; record every local residual including its\nstructural target write. Apply the embedded transformations to the entire\npair, retaining the transformed off-block data. All divisions by a generalized\neigenvalue ratio are avoided.\n\n5. After each infinite isolation and before every successful return, scan all\nisolated diagonal pairs. Any $(0,0)$ pair returns `singular-pencil-suspected`\nwithout an eigenvalue. Stop with `qz-computed` only when $H$ is upper triangular\nand every diagonal pair is nonzero. Otherwise stop after $N$ sweeps with\n`budget-exhausted`. Range failures return `range-failure` with partial factors;\nunavailable local certificates return `certificate-inconclusive`. Neither a\nrounded diagnostic nor a tolerance-induced infinite candidate asserts an exact\ninfinite eigenvalue of the original pencil.\n\nFor local-accumulation bounds use $\\ell_j=\\eta$ for matrix-target actions and\n$\\ell_j=v$ for external-vector/raw actions, plus the separately saved actual\ntolerance perturbations. For an independent residual certificate execute the\nfactor-action/column procedure of\n[[lem-qz-two-sided-local-computed-update-bound]]: use stored raw kernels without\nzero overwrites, propagate their $v$ allowances, use\n[[lem-rounded-linear-and-normal-residual-certificates]] only on STORED matvec\ninputs, and include the final subtraction allowance. Exact normalized factor\nentries are not silently treated as stored inputs. Evaluate each certificate\nusing the finite exact real-controller expression trees/loops in the local\nlemma and component absolute sums as norm upper bounds. Controller operations\nare separate from rounded update arithmetic; for rational/binary stored data\nand rational $u$ this is exact rational computation. No opaque certification\noracle is used. Failure of this residual route's dimension/range hypotheses\nmakes that route inconclusive and does not invalidate a valid independent\nlocal-accumulation bound. Always retain available diagnostics.\n\nThe output is $(Q,S,T,Z,\\text{status})$, where $S$ is the current $H$ and $T$\nis the current second matrix, the exact factor products when available, the raw\nresiduals $R_A=Q^*AZ-S$ and $R_B=Q^*BZ-T$, and the recorded local arithmetic\nand deflation perturbations. The procedure asserts no\nunconditional convergence or small-roundoff bound.",
+    "consumer_use_excerpts": [
+      "Supply a finite QZ sweep budget $N\\ge0$ and tolerance $\\tau_{QZ}\\ge0$, and run\n[[alg-finite-budget-qz-iteration-with-deflation-and-residual]] on $(G,C)$.\nCompute $G,C$ exactly in the mathematical procedure; a finite implementation\nmust include their formation errors in the perturbation ledger or return\n`qz-certificate-inconclusive`. On `qz-computed`, require its exact-factor and\nlocal-update certificates; if either is unavailable, return\n`qz-certificate-inconclusive`. With these certificates,\n[[prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence]]\nthen records equivalence to a perturbed projected pencil. For each diagonal\nindex $i$, set $\\alpha_i=S_{ii}$ and $\\beta_i=T_{ii}$. If\n$(\\alpha_i,\\beta_i)=(0,0)$, return `projected-pencil-unresolved`; if\n$\\beta_i\\ne0$, report the computed harmonic Ritz value\n$\\lambda_i=\\sigma+\\alpha_i/\\beta_i$; if $\\beta_i=0$, mark that candidate\n`infinite-harmonic-value`. These are values of the computed perturbed\npencil, with the QZ residual and perturbation ledger retained; no exact-root,\neigenvector, or forward-error claim is made. After processing all diagonal\ncandidates, return `available` with the candidate list, its per-candidate\nmarks, and the residual and perturbation ledger. Map a QZ `budget-exhausted` status\nto `qz-budget-exhausted`; map a QZ `certificate-inconclusive` or `range-failure`\nto `qz-certificate-inconclusive`; map `singular-pencil-suspected` to\n`projected-pencil-unresolved`."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[300]",
+      "bad[19].currentDeclaredOwnedEdges[10]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-67.pages.json#deps",
+      "items/alg-shift-invert-and-harmonic-ritz-extraction.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-qz-consumer67-reconciliation.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-qz-local-interface-escalation.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-rounded-proof-numbering-repair.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/12",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-shift-invert-and-harmonic-ritz-extraction",
+    "supplier": "def-regular-generalized-eigenvalue-pencil",
+    "status": "verified",
+    "batch": "48",
+    "required_interface": "A generalized pencil is regular when det(A-eta B) is not identically zero; the local harmonic branch proves G positive definite before invoking this definition.",
+    "supplier_item_ids": [
+      "def-regular-generalized-eigenvalue-pencil"
+    ],
+    "affected_claims": [
+      "The full-column-rank harmonic projected pencil G-eta C is within the QZ procedure input domain."
+    ],
+    "evidence": "The exact definition was inspected and the local proof gives det(G-0C)=det(G)\u22600 under rank(W)=k.",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-shift-invert-and-harmonic-ritz-extraction",
+    "supplier": "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence",
+    "consumer_batch": "67",
+    "supplier_batch": "48",
+    "status": "verified",
+    "evidence": "The harmonic algorithm passes a regular finite projected pencil, finite QZ budget/tolerance and exact factor/local-update certificate requirements; formation errors must be in the ledger or it reports inconclusive. It preserves perturbed-pencil candidates and explicitly maps budget, certificate, range and singular statuses. The completed same-owner correction retained these source contracts.",
+    "inspected_paths": [
+      "items/prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence.md#Statement",
+      "items/alg-shift-invert-and-harmonic-ritz-extraction.md#Definition"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Every run of [[alg-finite-budget-qz-iteration-with-deflation-and-residual]]\nterminates with a declared status. After each successful initialization or\nQZ/infinite-deflation sweep, the stored pair is Hessenberg-triangular, except\nat explicitly isolated blocks. For any run with a certified exact-unitary\nfactor record and local update residuals, the returned pair $(S,T)$ satisfies\n$$S=Q^*(A+\\Delta_A)Z,\\qquad T=Q^*(B+\\Delta_B)Z,$$\nwhere $(\\Delta_A,\\Delta_B)$ is the accumulated arithmetic and explicit\ndeflation perturbation pair. This proposition gives no bound on its size.",
+    "consumer_use_excerpts": [
+      "Supply a finite QZ sweep budget $N\\ge0$ and tolerance $\\tau_{QZ}\\ge0$, and run\n[[alg-finite-budget-qz-iteration-with-deflation-and-residual]] on $(G,C)$.\nCompute $G,C$ exactly in the mathematical procedure; a finite implementation\nmust include their formation errors in the perturbation ledger or return\n`qz-certificate-inconclusive`. On `qz-computed`, require its exact-factor and\nlocal-update certificates; if either is unavailable, return\n`qz-certificate-inconclusive`. With these certificates,\n[[prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence]]\nthen records equivalence to a perturbed projected pencil. For each diagonal\nindex $i$, set $\\alpha_i=S_{ii}$ and $\\beta_i=T_{ii}$. If\n$(\\alpha_i,\\beta_i)=(0,0)$, return `projected-pencil-unresolved`; if\n$\\beta_i\\ne0$, report the computed harmonic Ritz value\n$\\lambda_i=\\sigma+\\alpha_i/\\beta_i$; if $\\beta_i=0$, mark that candidate\n`infinite-harmonic-value`. These are values of the computed perturbed\npencil, with the QZ residual and perturbation ledger retained; no exact-root,\neigenvector, or forward-error claim is made. After processing all diagonal\ncandidates, return `available` with the candidate list, its per-candidate\nmarks, and the residual and perturbation ledger. Map a QZ `budget-exhausted` status\nto `qz-budget-exhausted`; map a QZ `certificate-inconclusive` or `range-failure`\nto `qz-certificate-inconclusive`; map `singular-pencil-suspected` to\n`projected-pencil-unresolved`."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[301]",
+      "bad[19].currentDeclaredOwnedEdges[11]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-67.pages.json#deps",
+      "items/alg-shift-invert-and-harmonic-ritz-extraction.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-qz-consumer67-reconciliation.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-qz-local-interface-escalation.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-rounded-proof-numbering-repair.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/13",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-thick-and-implicitly-restarted-arnoldi-with-locking",
+    "supplier": "published Arnoldi/QR suppliers",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "The precise Arnoldi factorization, Ritz definition, residual identity, exact Givens/QR operations, and upper-Hessenberg support conditions listed in the algorithm deps.",
+    "supplier_item_ids": [
+      "def-arnoldi-process",
+      "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+      "def-ritz-values-and-ritz-vectors-from-arnoldi",
+      "prop-ritz-residual-formula-for-an-arnoldi-ritz-pair",
+      "def-real-and-complex-givens-transformations",
+      "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+      "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift",
+      "prop-shifted-qr-preserves-upper-hessenberg-form",
+      "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices"
+    ],
+    "affected_claims": [
+      "Exact restart operations and original residual acceptance."
+    ],
+    "evidence": "The full cited supplier statements/proofs were inspected for domains, orientation, normalization, exact arithmetic and residual hypotheses. This is interface reconciliation, not a new approval of published claims.",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-block-principal-angle-squared-ritz-enclosure",
+    "supplier": "B-inner-product and Hermitian-definite pencil items",
+    "status": "verified",
+    "batch": "48",
+    "required_interface": "The B-orthonormal eigenbasis and real ordered spectrum for A=A*, B=B*>0, with the declared finite-dimensional generalized Rayleigh quotient.",
+    "supplier_item_ids": [
+      "def-b-inner-product-and-dual-norm-for-definite-pencil",
+      "thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis"
+    ],
+    "affected_claims": [
+      "Principal-angle enclosure for the largest selected generalized Ritz value."
+    ],
+    "evidence": "The current supplier statements/proofs were inspected against the lemma\u2019s metric, gap and dimension conditions; no stronger spectral conclusion is imported.",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-block-principal-angle-squared-ritz-enclosure",
+    "supplier": "def-b-inner-product-and-dual-norm-for-definite-pencil",
+    "consumer_batch": "67",
+    "supplier_batch": "48",
+    "status": "verified",
+    "evidence": "FactsF1/proof1.1 use B-orthogonal spectral projection and ||x||B\u00b2=x*Bx for SPD B. The decomposition x=P_Ux+(I-P_U)x has the source metric, so the squared principal-angle/Rayleigh quotient comparison uses the permitted norm.",
+    "inspected_paths": [
+      "items/def-b-inner-product-and-dual-norm-for-definite-pencil.md#Definition",
+      "items/lem-block-principal-angle-squared-ritz-enclosure.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $B\\in\\mathbb F^{n\\times n}$, $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$,\nbe Hermitian positive definite, with Cholesky factor $B=LL^*$ and $L$ lower\ntriangular with positive diagonal. This factor exists and is unique by\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nDefine the linear-first **B-inner product** by\n$$\\langle x,y\\rangle_B:=y^*Bx,$$\nthe **B-norm** by\n$$\\|x\\|_B:=\\|L^*x\\|_2=\\sqrt{x^*Bx},$$\nand the **B-dual residual norm** by\n$$\\|r\\|_{B^{-1}}:=\\|L^{-1}r\\|_2 =\\sqrt{r^*B^{-1}r}.$$\nThe B-orthogonality condition is $x^*By=0$; since $B=B^*$ it is equivalent\nto $\\langle x,y\\rangle_B=0$.",
+    "consumer_use_excerpts": [
+      "[F1] [[def-b-inner-product-and-dual-norm-for-definite-pencil]]: $\\langle x,y\\rangle_B=y^*Bx$ and $\\|x\\|_B^2=x^*Bx$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[298]",
+      "bad[19].currentDeclaredOwnedEdges[7]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-67.pages.json#deps",
+      "items/lem-block-principal-angle-squared-ritz-enclosure.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/10",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-block-principal-angle-squared-ritz-enclosure",
+    "supplier": "thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis",
+    "consumer_batch": "67",
+    "supplier_batch": "48",
+    "status": "verified",
+    "evidence": "FactsF2/proof1.1 expand B-unit vectors in the supplied real-spectrum B-orthonormal eigenbasis, making cross terms vanish. The consumer separately assumes q<n and the strict gap and proves its one-shot squared-angle enclosure; no iteration rate is borrowed.",
+    "inspected_paths": [
+      "items/thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis.md#Statement",
+      "items/lem-block-principal-angle-squared-ritz-enclosure.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $A=A^*$ and let $B=B^*$ be positive definite in\n$\\mathbb F^{n\\times n}$, where $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$.\nIf $B=LL^*$ is its Cholesky factorisation, then\n$$C=L^{-1}AL^{-*}$$\nis self-adjoint and has an orthonormal eigenbasis with real eigenvalues\n$\\lambda_1,\\ldots,\\lambda_n$. The vectors\n$$x_i=L^{-*}y_i\\quad (i=1,\\ldots,n)$$\nform a basis satisfying $Ax_i=\\lambda_iBx_i$ and\n$x_i^*Bx_j=\\delta_{ij}$. The generalized eigenvalues of $(A,B)$ are exactly\n$[\\lambda_i:1]$; none is infinite.",
+    "consumer_use_excerpts": [
+      "[F2] [[thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis]]: $A$ and $B$ have a $B$-orthonormal generalized eigenbasis with real eigenvalues."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[299]",
+      "bad[19].currentDeclaredOwnedEdges[8]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-67.pages.json#deps",
+      "items/lem-block-principal-angle-squared-ritz-enclosure.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/11",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-generalized-ritz-values-monotone-under-nested-subspaces",
+    "supplier": "B-inner-product and Hermitian-definite pencil items",
+    "status": "verified",
+    "batch": "48",
+    "required_interface": "The B metric is induced by B=B*>0, and the Hermitian-definite pair has real eigenvalues and a B-orthonormal eigenbasis; all min-max indices and dimensions are finite.",
+    "supplier_item_ids": [
+      "def-b-inner-product-and-dual-norm-for-definite-pencil",
+      "thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis"
+    ],
+    "affected_claims": [
+      "Generalized Ritz min-max formula and monotonicity under nested spaces."
+    ],
+    "evidence": "The current supplier bodies and complete proof-relevant hypotheses were inspected. The theorem precheck currently passes; stale owner readiness hashes were not treated as approval.",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-generalized-ritz-values-monotone-under-nested-subspaces",
+    "supplier": "def-b-inner-product-and-dual-norm-for-definite-pencil",
+    "consumer_batch": "67",
+    "supplier_batch": "48",
+    "status": "verified",
+    "evidence": "FactsF1/proof1.1 use the source B norm x*Bx and B-orthonormal compression Q*AQ under Hermitian A, SPD B. Subspace min-max arguments retain full-rank B-orthonormal bases; no indefinite metric is introduced.",
+    "inspected_paths": [
+      "items/def-b-inner-product-and-dual-norm-for-definite-pencil.md#Definition",
+      "items/lem-generalized-ritz-values-monotone-under-nested-subspaces.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $B\\in\\mathbb F^{n\\times n}$, $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$,\nbe Hermitian positive definite, with Cholesky factor $B=LL^*$ and $L$ lower\ntriangular with positive diagonal. This factor exists and is unique by\n[[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]].\nDefine the linear-first **B-inner product** by\n$$\\langle x,y\\rangle_B:=y^*Bx,$$\nthe **B-norm** by\n$$\\|x\\|_B:=\\|L^*x\\|_2=\\sqrt{x^*Bx},$$\nand the **B-dual residual norm** by\n$$\\|r\\|_{B^{-1}}:=\\|L^{-1}r\\|_2 =\\sqrt{r^*B^{-1}r}.$$\nThe B-orthogonality condition is $x^*By=0$; since $B=B^*$ it is equivalent\nto $\\langle x,y\\rangle_B=0$.",
+    "consumer_use_excerpts": [
+      "[F1] [[def-b-inner-product-and-dual-norm-for-definite-pencil]]: $\\langle x,y\\rangle_B=y^*Bx$ and $\\|x\\|_B^2=x^*Bx$."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[296]",
+      "bad[19].currentDeclaredOwnedEdges[5]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-67.pages.json#deps",
+      "items/lem-generalized-ritz-values-monotone-under-nested-subspaces.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/8",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-generalized-ritz-values-monotone-under-nested-subspaces",
+    "supplier": "thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis",
+    "consumer_batch": "67",
+    "supplier_batch": "48",
+    "status": "verified",
+    "evidence": "FactsF2/proofs1.1\u20132.1 use a real ordered generalized spectrum and B-orthonormal ambient eigenbasis, also applying the Hermitian finite compression case with identity metric. A=A*, B>0 and positive dimensions match; min-max monotonicity is proved locally.",
+    "inspected_paths": [
+      "items/thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis.md#Statement",
+      "items/lem-generalized-ritz-values-monotone-under-nested-subspaces.md#Facts/Proof"
+    ],
+    "basis": "newfocusedcheck",
+    "source_section_excerpt": "Let $A=A^*$ and let $B=B^*$ be positive definite in\n$\\mathbb F^{n\\times n}$, where $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$.\nIf $B=LL^*$ is its Cholesky factorisation, then\n$$C=L^{-1}AL^{-*}$$\nis self-adjoint and has an orthonormal eigenbasis with real eigenvalues\n$\\lambda_1,\\ldots,\\lambda_n$. The vectors\n$$x_i=L^{-*}y_i\\quad (i=1,\\ldots,n)$$\nform a basis satisfying $Ax_i=\\lambda_iBx_i$ and\n$x_i^*Bx_j=\\delta_{ij}$. The generalized eigenvalues of $(A,B)$ are exactly\n$[\\lambda_i:1]$; none is infinite.",
+    "consumer_use_excerpts": [
+      "[F2] [[thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis]]: a Hermitian-definite pair $(A,B)$ has real generalized eigenvalues and a $B$-orthonormal eigenbasis."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[297]",
+      "bad[19].currentDeclaredOwnedEdges[6]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-67.pages.json#deps",
+      "items/lem-generalized-ritz-values-monotone-under-nested-subspaces.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/9",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status",
+    "supplier": "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+    "consumer_batch": "67",
+    "supplier_batch": "48",
+    "status": "verified",
+    "evidence": "The finite-status theorem assumes finite-return primitives and the exact source operationwise hypotheses; its FactsF3/F4 and proof1.2 use the finite QZ budget/status proposition, not convergence or a small residual implication.",
+    "inspected_paths": [
+      "items/alg-finite-budget-qz-iteration-with-deflation-and-residual.md#Definition",
+      "items/thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status.md#Facts/Proof"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Input a regular pencil $(A,B)$ with $A,B\\in\\mathbb C^{n\\times n}$,\n$n\\ge1$, a nonnegative integer sweep budget $N$, and a finite stored real tolerance\n$\\tau\\ge0$. Real input data are embedded in $\\mathbb C$. Scalar updates of the\nstored matrices use the operationwise model of\n[[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]].\nUse zero-based matrix indices throughout. Each active block $[a:b]$ includes\nboth endpoints; its relative coordinate $0$ is global index $a$.\nUse the canonical stored Givens generator and application order of\n[[alg-scaled-complex-householder-and-givens-updates]], with the common-pair\norientations and explicit coefficients $v,h,\\eta$ of\n[[lem-qz-two-sided-local-computed-update-bound]]. Generate each rotation ONCE\nand apply its same stored coefficients to BOTH matrices. Retain the exact\nnormalized unitary representatives as product records, never as purported\nstored dense unitary matrices. Left rotations annihilate a column's second\nentry; right rotations annihilating a row's first entry use the coordinate\nreversal/adjoint construction of that lemma. After each genuine matrix target\napplication write only its intended target to exact zero and include that\nwrite in the local coefficient $\\eta$. An external-vector application has\ncoefficient $v$ and no matrix-target overwrite. Local roundoff certification\nrequires $0<u<1$; otherwise retain diagnostics with `certificate-inconclusive`. Record each elementary\nrotation separately. If the source cannot produce its admissible factor,\nreturn `range-failure` or `certificate-inconclusive` with diagnostics.\n\n1. Execute the finite index loops of\n[[alg-generalized-hessenberg-triangular-reduction]] with these COMPUTED common\nrotations: triangularize $B$ with left targets $B_{i,j}$; then reduce $A$ with\nleft targets $A_{i,j}$ followed by right targets $B_{i,i-1}$. Every application\nupdates both whole arrays. The exact initializer and\n[[prop-generalized-hessenberg-triangular-reduction-preserves-form-and-equivalence]]\nsupply the index schedule and support induction, not exact rounded\nreconstruction. Retain each local factor and residual defined against its\nexact representative. Include structural target writes in that local\narithmetic residual. Record all OTHER explicit zero writes separately: their\npost-action perturbations are pulled back by the local factor adjoints before\nentering the pre-action $D_j^A,D_j^B$ ledger. A pure tolerance write is an\nidentity-factor stage. Never count a structural write twice.\n\nInitialize the sweep counter to zero. Process active blocks in increasing first\nindex, splitting them at exact zero subdiagonals of $H$. In each deflation\npass execute step 2, then repeat step 3 for the smallest available non-isolated\nzero diagonal of $T$ until none remains or a status exits. Then run step 5; if\nit returns a status, stop. Otherwise, if the sweep counter equals $N$, return\n`budget-exhausted`. If not, increment the counter, execute step 4 on all\nremaining active blocks, and repeat the deflation pass. In particular $N=0$\npermits initialization/deflation but no step-4 sweep.\n\n2. On each active block $H_{a:b,a:b},T_{a:b,a:b}$, apply the following deflation\ntests before a sweep. For $i=a,\\ldots,b-1$, set $H_{i+1,i}$ to zero when\n$$|H_{i+1,i}|\\le\\tau\\bigl(|H_{i,i}|+|H_{i+1,i+1}|\\bigr),$$\nand record the negative of its old value at that position in $D^A$, with\nall other entries zero. For $k=a,\\ldots,b$, set $T_{k,k}$ to zero when\n$$|T_{k,k}|\\le\\tau\\bigl(|T_{k-1,k}|+|T_{k,k+1}|\\bigr),$$\nusing zero for a missing boundary term outside the active block, and record the\nnegative of the old value at that position in $D^B$, with all other entries zero.\nTreat each write as a separate identity-factor stage, so the new matrix is\nthe old matrix plus its recorded perturbation.\nEvaluate each displayed modulus by the canonical rounded scaled two-component\nnorm; evaluate its additions and tolerance product with the declared rounded\nreal operations, then compare the stored finite values exactly. Excluded\noperations return `range-failure`. The tests mean these rounded comparisons,\nnot an assertion about exact moduli at the threshold. Save the actual old\nentries, so their deflation perturbations remain exact regardless of the test.\nA one-by-one diagonal pair at $k$ is isolated when $H_{k,k-1}=0$ and\n$H_{k+1,k}=0$, omitting a boundary entry when $k=a$ or $k=b$. If it has\n$T_{k,k}=0$ and $H_{k,k}\\ne0$, report an infinite candidate for the computed pencil and deflate it\nfrom the active block. If the isolated diagonal pair is $(0,0)$, return\n`singular-pencil-suspected` without assigning an eigenvalue.\n\n3. To move a non-isolated zero $T_{k,k}$ to the top of its active block, for\n$j=k-1,k-2,\\ldots,a$ generate a right factor from the row pair\n$(T_{j,j},T_{j,j+1})$ and apply it to columns $j,j+1$, setting $T_{j,j}$ to\nzero. Then, when $j+2\\le b$, generate a left factor from\n$(H_{j+1,j},H_{j+2,j})$ and apply it to rows $j+1,j+2$, setting the resulting\nbulge $H_{j+2,j}$ to zero. Finally, when $a<b$, generate a left factor from\n$(H_{a,a},H_{a+1,a})$ and apply it to rows $a,a+1$, setting $H_{a+1,a}$ to\nzero. Record all rounded update residuals and target writes. If this isolates\n$(H_{a,a},T_{a,a})=(h,0)$ with $h\\ne0$, report the infinite candidate and\nremove the first row/column from the active block.\nIf the isolated pair is $(0,0)$, return `singular-pencil-suspected`; if isolation\nfails, return `certificate-inconclusive`. Each successful isolation removes\none index, so at most $n$ such removals occur.\n\n4. For each remaining active block with more than one row in the current\nsweep, choose the homogeneous shift $[\\alpha:\\beta]=[H_{b,b}:T_{b,b}]$ if this pair is nonzero and\n$T_{b,b}\\ne0$; if $T_{b,b}=0$, use $[0:1]$. Write\n$\\widehat H=H_{a:b,a:b}$ and $\\widehat T=T_{a:b,a:b}$, with relative indices\n$0,\\ldots,b-a$, and form\n$$x=(\\beta\\widehat H-\\alpha\\widehat T)e_0.$$\nCompute $x_0,x_1$ using the declared rounded complex products/subtractions and\ngenerate a left factor from $(x_0,x_1)$. Apply it to relative rows $0,1$ of\nboth matrices without a matrix-target overwrite. Its rounding changes the\nselected factor, not its application certificate. Generate a right factor\nfrom the row pair $(\\widehat T_{1,0},\\widehat T_{1,1})$ and apply it to relative\ncolumns $0,1$, setting $\\widehat T_{1,0}$ to zero. For relative\n$j=1,\\ldots,b-a-1$, generate a left factor from\n$(\\widehat H_{j,j-1},\\widehat H_{j+1,j-1})$ and apply it to rows $j,j+1$,\nsetting the current Hessenberg bulge $\\widehat H_{j+1,j-1}$ to zero; then\ngenerate a right factor from $(\\widehat T_{j+1,j},\\widehat T_{j+1,j+1})$ and\napply it to columns $j,j+1$, setting $\\widehat T_{j+1,j}$ to zero. Update and\nretain the products $Q,Z$; record every local residual including its\nstructural target write. Apply the embedded transformations to the entire\npair, retaining the transformed off-block data. All divisions by a generalized\neigenvalue ratio are avoided.\n\n5. After each infinite isolation and before every successful return, scan all\nisolated diagonal pairs. Any $(0,0)$ pair returns `singular-pencil-suspected`\nwithout an eigenvalue. Stop with `qz-computed` only when $H$ is upper triangular\nand every diagonal pair is nonzero. Otherwise stop after $N$ sweeps with\n`budget-exhausted`. Range failures return `range-failure` with partial factors;\nunavailable local certificates return `certificate-inconclusive`. Neither a\nrounded diagnostic nor a tolerance-induced infinite candidate asserts an exact\ninfinite eigenvalue of the original pencil.\n\nFor local-accumulation bounds use $\\ell_j=\\eta$ for matrix-target actions and\n$\\ell_j=v$ for external-vector/raw actions, plus the separately saved actual\ntolerance perturbations. For an independent residual certificate execute the\nfactor-action/column procedure of\n[[lem-qz-two-sided-local-computed-update-bound]]: use stored raw kernels without\nzero overwrites, propagate their $v$ allowances, use\n[[lem-rounded-linear-and-normal-residual-certificates]] only on STORED matvec\ninputs, and include the final subtraction allowance. Exact normalized factor\nentries are not silently treated as stored inputs. Evaluate each certificate\nusing the finite exact real-controller expression trees/loops in the local\nlemma and component absolute sums as norm upper bounds. Controller operations\nare separate from rounded update arithmetic; for rational/binary stored data\nand rational $u$ this is exact rational computation. No opaque certification\noracle is used. Failure of this residual route's dimension/range hypotheses\nmakes that route inconclusive and does not invalidate a valid independent\nlocal-accumulation bound. Always retain available diagnostics.\n\nThe output is $(Q,S,T,Z,\\text{status})$, where $S$ is the current $H$ and $T$\nis the current second matrix, the exact factor products when available, the raw\nresiduals $R_A=Q^*AZ-S$ and $R_B=Q^*BZ-T$, and the recorded local arithmetic\nand deflation perturbations. The procedure asserts no\nunconditional convergence or small-roundoff bound.",
+    "consumer_use_excerpts": [
+      "[F3] [[alg-finite-budget-qz-iteration-with-deflation-and-residual]]: QZ takes\na finite sweep budget and processes finite-dimensional input using finite\nindex loops."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[302]",
+      "bad[19].currentDeclaredOwnedEdges[12]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-67.pages.json#deps",
+      "items/thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-qz-consumer67-reconciliation.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-qz-local-interface-escalation.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-rounded-proof-numbering-repair.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/14",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status",
+    "supplier": "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence",
+    "consumer_batch": "67",
+    "supplier_batch": "48",
+    "status": "verified",
+    "evidence": "The finite-status theorem assumes finite-return primitives and the exact source operationwise hypotheses; its FactsF3/F4 and proof1.2 use the finite QZ budget/status proposition, not convergence or a small residual implication.",
+    "inspected_paths": [
+      "items/prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence.md#Statement",
+      "items/thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status.md#Facts/Proof"
+    ],
+    "basis": "exactexisting",
+    "source_section_excerpt": "Every run of [[alg-finite-budget-qz-iteration-with-deflation-and-residual]]\nterminates with a declared status. After each successful initialization or\nQZ/infinite-deflation sweep, the stored pair is Hessenberg-triangular, except\nat explicitly isolated blocks. For any run with a certified exact-unitary\nfactor record and local update residuals, the returned pair $(S,T)$ satisfies\n$$S=Q^*(A+\\Delta_A)Z,\\qquad T=Q^*(B+\\Delta_B)Z,$$\nwhere $(\\Delta_A,\\Delta_B)$ is the accumulated arithmetic and explicit\ndeflation perturbation pair. This proposition gives no bound on its size.",
+    "consumer_use_excerpts": [
+      "Consider a valid shift-invert or harmonic-extraction execution of\n[[alg-shift-invert-and-harmonic-ritz-extraction]]. Assume each invoked solve,\nprojected eigensolve, finite-dimensional arithmetic, QR, and orthogonalization\noperation returns its value in finite work, except that a solve may return\n`unavailable` and a harmonic-branch QZ call may return one of its listed\nstatuses. On the harmonic branch, also assume the finite-budget QZ\nrun satisfies the operationwise arithmetic hypotheses of\n[[prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence]].\nThen the execution returns one of the statuses listed by the algorithm after\nfinitely many operations.",
+      "[F4] [[prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence]]:\nunder the QZ algorithm's stated operationwise arithmetic hypotheses, every\nfinite-budget QZ run returns a declared status."
+    ],
+    "master_owed_origins": [
+      "currentDeclaredEdgeReviewGaps[303]",
+      "bad[19].currentDeclaredOwnedEdges[13]"
+    ],
+    "declarations": [
+      "research/numerical-optimization-dynamics-2026-10-16-batch-67.pages.json#deps",
+      "items/thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status.md#deps"
+    ],
+    "review_semantics": "Exact named source\u2192consumer interface check; no independent supplier proof approval, hash/readiness acceptance, or page-context method transfer.",
+    "completed_evidence": [
+      "research/numerical-optimization-dynamics-2026-10-16-owner-qz-consumer67-reconciliation.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-qz-local-interface-escalation.json",
+      "research/numerical-optimization-dynamics-2026-10-16-owner-rounded-proof-numbering-repair.json"
+    ],
+    "owner_review_receipt": "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-review-64-72.json#rows/15",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "page",
+    "consumer": "restarted-and-block-eigensolvers",
+    "supplier": "computed-schur-decompositions-and-nonnormal-spectra",
+    "status": "verified",
+    "batch": "33",
+    "required_interface": "Plan-required reader context for Schur forms and nonnormal spectra; no Schur perturbation theorem is a premise of this assigned pair.",
+    "supplier_item_ids": [],
+    "affected_claims": [
+      "Page-level design context only."
+    ],
+    "evidence": "The current A/B page was inspected. No local proof cites a Schur decomposition or imports a nonnormal forward-error conclusion.",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "page",
+    "consumer": "restarted-and-block-eigensolvers",
+    "supplier": "eigenvalue-iterations-and-the-qr-algorithm",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Finite-dimensional eigenvalue and shifted-QR conventions used by the restarted Arnoldi algorithms and examples.",
+    "supplier_item_ids": [
+      "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+      "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift",
+      "prop-shifted-qr-preserves-upper-hessenberg-form"
+    ],
+    "affected_claims": [
+      "Arnoldi shift-polynomial identity and residual acceptance; no arbitrary-shift convergence claim."
+    ],
+    "evidence": "The published page and exact supplier bodies were inspected. The local algorithms state their finite dimensions, shift counts, residual tests and breakdown branches; the source is not used to infer convergence for an arbitrary shift list.",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "page",
+    "consumer": "restarted-and-block-eigensolvers",
+    "supplier": "generalized-eigenvalue-pencils-and-qz-methods",
+    "status": "verified",
+    "batch": "48",
+    "required_interface": "Hermitian-definite pencil conventions, regular-pencil definition, finite-budget QZ procedure, and its residual/equivalence certificate chain.",
+    "supplier_item_ids": [
+      "def-b-inner-product-and-dual-norm-for-definite-pencil",
+      "thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis",
+      "def-regular-generalized-eigenvalue-pencil",
+      "alg-finite-budget-qz-iteration-with-deflation-and-residual",
+      "prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence"
+    ],
+    "affected_claims": [
+      "LOBPCG metric and variational claims; harmonic Ritz projected-pencil definition and status return."
+    ],
+    "evidence": "The current page and relevant bodies were inspected. B-inner-product and Hermitian-definite interfaces were reconciled. The QZ item-level certificate chain has the unresolved checks listed below; page inspection does not certify those items.",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "page",
+    "consumer": "restarted-and-block-eigensolvers",
+    "supplier": "krylov-methods-and-lanczos-convergence",
+    "status": "verified",
+    "batch": "34",
+    "required_interface": "Plan-required context for Krylov methods and Lanczos convergence; no Lanczos convergence estimate is used by this pair.",
+    "supplier_item_ids": [],
+    "affected_claims": [
+      "Page-level design context only."
+    ],
+    "evidence": "The current A/B page was inspected. The assigned claims use explicit Arnoldi/Lanczos definitions and finite procedures and do not rely on an unlisted convergence theorem.",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "page",
+    "consumer": "restarted-and-block-eigensolvers",
+    "supplier": "krylov-subspaces-arnoldi-and-gmres",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Arnoldi process, orthonormal Krylov basis/Hessenberg relation, Ritz pair convention and the Arnoldi residual formula.",
+    "supplier_item_ids": [
+      "def-arnoldi-process",
+      "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+      "def-ritz-values-and-ritz-vectors-from-arnoldi",
+      "prop-ritz-residual-formula-for-an-arnoldi-ritz-pair"
+    ],
+    "affected_claims": [
+      "Thick/implicit restart definitions, exact restart identity, and shift-invert Arnoldi candidate construction."
+    ],
+    "evidence": "The full relevant current published statements/proofs were read. The local consumers require exactly the stated standard Arnoldi factorization and use original residuals; no GMRES convergence or stopping-error claim is imported.",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "page",
+    "consumer": "restarted-and-block-eigensolvers",
+    "supplier": "preconditioner-algorithms-and-residual-metrics",
+    "status": "verified",
+    "batch": "50",
+    "required_interface": "Plan-required preconditioning context only. The local LOBPCG definition explicitly assumes T=T*>0 and makes no ILU0, FGMRES, or preconditioner-construction claim.",
+    "supplier_item_ids": [],
+    "affected_claims": [
+      "Block LOBPCG recurrence and permitted preconditioner domain."
+    ],
+    "evidence": "The current A/B page was inspected. The assigned definition states the exact SPD hypothesis on T and imports no claim that incomplete-factorization or flexible-GMRES preconditioners satisfy it.",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current owned consumer use checked against the actual supplier interface. No supplier-induced consumer source repair is required; QZ grants perturbed-pencil candidates/status only, and LOBPCG assumes exact SPD metric/preconditioner. Historical owner evidence is retained."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-thick-and-implicitly-restarted-arnoldi-with-locking",
+    "supplier": "def-determinant-of-a-square-matrix",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "For d>=1, the determinant over the commutative coefficient ring is the finite sum over permutations sigma of sign(sigma) times product_i a[sigma(i),i], with sign given by inversion parity.",
+    "supplier_item_ids": [
+      "def-determinant-of-a-square-matrix"
+    ],
+    "affected_claims": [
+      "Finite exact characteristic-polynomial coefficient validation of S output."
+    ],
+    "evidence": "Read actual published determinant Definition. Arnoldi uses increasing column order and lexicographic permutation order with coefficient-array sums/convolutions, and tests all degrees0..d. It does not extract roots or promise polynomial-time arithmetic.",
+    "alpha_step3a_review": {
+      "report": "research/numerical-optimization-dynamics-2026-10-16-alpha-batch-67-3a.md",
+      "group": "batch-67",
+      "evidence": "Current exact supplier convention matches the new finite validation; no published edit required."
+    }
+  }
+]

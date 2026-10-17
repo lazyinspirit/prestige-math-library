@@ -1,0 +1,851 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-factorable-mccormick-box-relaxation",
+    "supplier": "def-outward-rounded-interval-and-ball-operations",
+    "status": "verified",
+    "batch": "14",
+    "required_interface": "Only the supplier’s declared outward-rounded real interval operations and their explicit domain/error statuses are used.",
+    "supplier_item_ids": [
+      "def-outward-rounded-interval-and-ball-operations"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.",
+    "required_hypotheses": "Only the supplier’s declared outward-rounded real interval operations and their explicit domain/error statuses are used.",
+    "affected_claims": [
+      "Manifest dependency of alg-factorable-mccormick-box-relaxation (Finite McCormick convex relaxation construction for factorable box problems); exact claim is described by the interface below."
+    ],
+    "evidence": "Read the current Definition section. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:true) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-finite-candidate-gp-acquisition-search",
+    "supplier": "def-axiom-of-choice",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "AC is stated as an ambient axiom for the GP existence/posterior interface; the finite ordered least-index argmax introduces no additional choice.",
+    "supplier_item_ids": [
+      "def-axiom-of-choice"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "The **Axiom of Choice** (AC) is the following statement.",
+    "required_hypotheses": "AC is stated as an ambient axiom for the GP existence/posterior interface; the finite ordered least-index argmax introduces no additional choice.",
+    "affected_claims": [
+      "Manifest dependency of alg-finite-candidate-gp-acquisition-search (Finite-candidate Gaussian-process acquisition search with explicit statuses); exact claim is described by the interface below."
+    ],
+    "evidence": "Read the current Definition section. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-finite-candidate-gp-acquisition-search",
+    "supplier": "def-cholesky-factorisation-with-positive-diagonal",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "The observed real covariance must be symmetric positive definite; the real Cholesky factor has positive diagonal and satisfies C=LLᵀ.",
+    "supplier_item_ids": [
+      "def-cholesky-factorisation-with-positive-diagonal"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.",
+    "required_hypotheses": "The observed real covariance must be symmetric positive definite; the real Cholesky factor has positive diagonal and satisfies C=LLᵀ.",
+    "affected_claims": [
+      "Write $X_t=(x_1,\\ldots,x_t)$, $y=(y_1,\\ldots,y_t)$, $m_{X_t}=(m(x_i))_{i\\le t}$, and $k_t(x)=(k(x_i,x))_{i\\le t}$. The initial data list has length $s$, so the current history length starts at $t=s$ and the procedure selects at stages $t=s,\\ldots,N-1$, stopping when the total history length reaches $N$. The output is the finite selected-site/observation trace, its current posterior state, and every verified acquisition error $\\delta_t$. For $t=0$, use prior mean $\\mu_0(x)=m(x)$ and variance $v_0(x)=k(x,x)$, with no matrix inverse. For $t\\ge1$, form $K_t=(k(x_i,x_j))_{i,j\\le t}$ and $C_t=K_t+\\sigma^2 I$. If $C_t$ is not certified positive definite, return posterior-solve-unavailable with the last valid state and no posterior or acquisition at stage $t$. If $C_t$ is positive definite, compute the required solves by a Cholesky factorization $C_t=L_tL_t^T$ and forward/back substitution as in [[def-cholesky-factorisation-with-positive-diagonal]] and [[def-forward-and-back-substitution-for-triangular-systems]]. If a factorization or solve is unavailable, return the same status; never use a pseudoinverse or clip a negative variance."
+    ],
+    "evidence": "Read the current Definition section. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-finite-candidate-gp-acquisition-search",
+    "supplier": "def-forward-and-back-substitution-for-triangular-systems",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "The posterior solve is evaluated using the supplier’s forward and backward triangular recursions with nonzero diagonals.",
+    "supplier_item_ids": [
+      "def-forward-and-back-substitution-for-triangular-systems"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.",
+    "required_hypotheses": "The posterior solve is evaluated using the supplier’s forward and backward triangular recursions with nonzero diagonals.",
+    "affected_claims": [
+      "Write $X_t=(x_1,\\ldots,x_t)$, $y=(y_1,\\ldots,y_t)$, $m_{X_t}=(m(x_i))_{i\\le t}$, and $k_t(x)=(k(x_i,x))_{i\\le t}$. The initial data list has length $s$, so the current history length starts at $t=s$ and the procedure selects at stages $t=s,\\ldots,N-1$, stopping when the total history length reaches $N$. The output is the finite selected-site/observation trace, its current posterior state, and every verified acquisition error $\\delta_t$. For $t=0$, use prior mean $\\mu_0(x)=m(x)$ and variance $v_0(x)=k(x,x)$, with no matrix inverse. For $t\\ge1$, form $K_t=(k(x_i,x_j))_{i,j\\le t}$ and $C_t=K_t+\\sigma^2 I$. If $C_t$ is not certified positive definite, return posterior-solve-unavailable with the last valid state and no posterior or acquisition at stage $t$. If $C_t$ is positive definite, compute the required solves by a Cholesky factorization $C_t=L_tL_t^T$ and forward/back substitution as in [[def-cholesky-factorisation-with-positive-diagonal]] and [[def-forward-and-back-substitution-for-triangular-systems]]. If a factorization or solve is unavailable, return the same status; never use a pseudoinverse or clip a negative variance."
+    ],
+    "evidence": "Read the current Definition section. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-finite-candidate-gp-acquisition-search",
+    "supplier": "def-gaussian-process",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Finite evaluations of the specified process have the supplier’s multivariate Gaussian law with mean and covariance induced by m and k.",
+    "supplier_item_ids": [
+      "def-gaussian-process"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A real stochastic process\n$X=(X_t)_{t\\in I}$ [[def-stochastic-process-and-finite-dimensional-distributions]]\nis a **Gaussian process** if, for every integer $n\\ge 1$, every time list\n$t_1,\\ldots,t_n\\in I$, and every $a_1,\\ldots,a_n\\in\\mathbb R$, the random\nvariable\n$$\n\\sum_{j=1}^n a_jX_{t_j}\n$$\nhas a normal law $N(m,\\sigma^2)$ for some $m\\in\\mathbb R$ and\n$\\sigma\\ge0$. Variance zero is allowed, so constant linear combinations are\nincluded.",
+    "required_hypotheses": "Finite evaluations of the specified process have the supplier’s multivariate Gaussian law with mean and covariance induced by m and k.",
+    "affected_claims": [
+      "Manifest dependency of alg-finite-candidate-gp-acquisition-search (Finite-candidate Gaussian-process acquisition search with explicit statuses); exact claim is described by the interface below."
+    ],
+    "evidence": "Read the current Definition section. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-finite-candidate-gp-acquisition-search",
+    "supplier": "def-independent-random-elements",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Observation errors are independent of the entire process and of one another in the sequential conditioning proof.",
+    "supplier_item_ids": [
+      "def-independent-random-elements"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write",
+    "required_hypotheses": "Observation errors are independent of the entire process and of one another in the sequential conditioning proof.",
+    "affected_claims": [
+      "Manifest dependency of alg-finite-candidate-gp-acquisition-search (Finite-candidate Gaussian-process acquisition search with explicit statuses); exact claim is described by the interface below."
+    ],
+    "evidence": "Read the current Definition section. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-finite-candidate-gp-acquisition-search",
+    "supplier": "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "For each observed SPD covariance, Cholesky plus triangular solves returns the unique exact linear-system solution; no inverse or pseudoinverse claim is needed.",
+    "supplier_item_ids": [
+      "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite and let\n$A=LL^*$ be its Cholesky factorisation with positive diagonal.",
+    "required_hypotheses": "For each observed SPD covariance, Cholesky plus triangular solves returns the unique exact linear-system solution; no inverse or pseudoinverse claim is needed.",
+    "affected_claims": [
+      "Manifest dependency of alg-finite-candidate-gp-acquisition-search (Finite-candidate Gaussian-process acquisition search with explicit statuses); exact claim is described by the interface below."
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-finite-candidate-gp-acquisition-search",
+    "supplier": "thm-finite-gaussian-process-posterior-and-predictive-laws",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Assume AC, a fixed GP, independent Gaussian observation noise, and positive-definite observed covariance C=K+R; repeated sites and singular prior/predictive covariance are allowed, but no singular observed solve is asserted.",
+    "supplier_item_ids": [
+      "thm-finite-gaussian-process-posterior-and-predictive-laws"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "Assume AC and let $f=(f_t)_{t\\in T}$ be a real Gaussian process with mean\n$m$ and covariance kernel $k$; when $m$ and $k$ are specified as a prior,\nthe canonical cylinder-space process exists by\n[[thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel]].\nLet $X=(x_1,\\ldots,x_n)\\in T^n$ and $X_*=(x_1^*,\\ldots,x_p^*)\\in T^p$,\nwhere $n,p\\ge1$ and repeated indices are allowed. Write\n$f_X=(f_{x_i})_{i=1}^n$, $f_{X_*}=(f_{x_j^*})_{j=1}^p$,\n$m_X=(m(x_i))_{i=1}^n$, and $m_*=(m(x_j^*))_{j=1}^p$. For finite lists\n$A=(a_i)$ and $B=(b_j)$, define\n$K_{AB}=(k(a_i,b_j))_{i,j}$.",
+    "required_hypotheses": "Assume AC, a fixed GP, independent Gaussian observation noise, and positive-definite observed covariance C=K+R; repeated sites and singular prior/predictive covariance are allowed, but no singular observed solve is asserted.",
+    "affected_claims": [
+      "Input a nonempty finite ordered candidate list $X=(x_1,\\ldots,x_M)$, a finite horizon $N\\ge0$ and an initial-list length $0\\le s\\le N$, a fixed real Gaussian-process prior with mean $m$ and symmetric positive-semidefinite kernel $k$ on $X$, observation variance $\\sigma^2\\ge0$, finite nonnegative acquisition coefficients $b_t$, and a finite initial data list $(x_i,y_i)_{i=1}^s$ with each $x_i\\in X$. Assume observation errors are independent centered Gaussian variables with variance $\\sigma^2$, independent of the entire process. The Axiom of Choice is included as required by [[thm-finite-gaussian-process-posterior-and-predictive-laws]].",
+      "where the observed covariance and solves satisfy the hypotheses of [[thm-finite-gaussian-process-posterior-and-predictive-laws]]. If nonnegativity of a computed $v_t(x)$ cannot be verified, return posterior-solve-unavailable. Form the acquisition value $a_t(x)=\\mu_t(x)+b_t s_t(x)$ and inspect all $M$ candidates. Return the exact least-index maximizer with $\\delta_t=0$, or a deterministic approximate maximizer $x_{j_t}$ only with a verified $\\delta_t\\ge0$ satisfying $a_t(x_{j_t})\\ge\\max_{x\\in X}a_t(x)-\\delta_t$. If no such comparison certificate is available, return acquisition-inconclusive. Record every $\\delta_t$."
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-interval-dag-box-enclosure-and-bound",
+    "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+    "status": "verified",
+    "batch": "14",
+    "required_interface": "Use the supplier’s finite dyadic format, directed lower/upper endpoints, fixed exponent range, and explicit overflow statuses; precision is raised only while staying in the declared range.",
+    "supplier_item_ids": [
+      "def-dyadic-floating-point-format-and-directed-rounding"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.",
+    "required_hypotheses": "Use the supplier’s finite dyadic format, directed lower/upper endpoints, fixed exponent range, and explicit overflow statuses; precision is raised only while staying in the declared range.",
+    "affected_claims": [
+      "Manifest dependency of alg-interval-dag-box-enclosure-and-bound (Outward-rounded interval enclosures for factorable expression DAGs on boxes); exact claim is described by the interface below."
+    ],
+    "evidence": "Read the current Definition section. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:true) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-interval-dag-box-enclosure-and-bound",
+    "supplier": "def-intervals-rectangles-and-complex-balls",
+    "status": "verified",
+    "batch": "14",
+    "required_interface": "The interval algorithm uses the supplier’s real closed-interval endpoints and inclusion order, with boxes as finite products.",
+    "supplier_item_ids": [
+      "def-intervals-rectangles-and-complex-balls"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.",
+    "required_hypotheses": "The interval algorithm uses the supplier’s real closed-interval endpoints and inclusion order, with boxes as finite products.",
+    "affected_claims": [
+      "Input a box $B\\subseteq D_0$, a finite real expression DAG from [[def-intervals-rectangles-and-complex-balls]] using addition, subtraction, multiplication, and division, a precision schedule $p\\ge2$, and a dyadic format with fixed exponent bounds. The DAG must define a real-valued function at every point of $B$; for each division node its denominator range on $B$ must exclude zero. Traverse the finite DAG in topological order. Enclose each input by its interval in $B$, each exact constant by a certified interval, and apply the corresponding outward-rounded operation from [[def-outward-rounded-interval-and-ball-operations]] at precision $p$. Return the root enclosure $I_p(B)=[a_-,a_+]$, its lower and upper endpoints, and the exact midpoint of $B$ as a candidate point. If any operation returns overflow, split-domain, domain-error, entire, or inconclusive, return that status with no finite bound claim."
+    ],
+    "evidence": "Read the current Definition section. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:true) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-interval-dag-box-enclosure-and-bound",
+    "supplier": "def-outward-rounded-interval-and-ball-operations",
+    "status": "verified",
+    "batch": "14",
+    "required_interface": "Only the supplier’s declared outward-rounded real interval operations and their explicit domain/error statuses are used.",
+    "supplier_item_ids": [
+      "def-outward-rounded-interval-and-ball-operations"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.",
+    "required_hypotheses": "Only the supplier’s declared outward-rounded real interval operations and their explicit domain/error statuses are used.",
+    "affected_claims": [
+      "Input a box $B\\subseteq D_0$, a finite real expression DAG from [[def-intervals-rectangles-and-complex-balls]] using addition, subtraction, multiplication, and division, a precision schedule $p\\ge2$, and a dyadic format with fixed exponent bounds. The DAG must define a real-valued function at every point of $B$; for each division node its denominator range on $B$ must exclude zero. Traverse the finite DAG in topological order. Enclose each input by its interval in $B$, each exact constant by a certified interval, and apply the corresponding outward-rounded operation from [[def-outward-rounded-interval-and-ball-operations]] at precision $p$. Return the root enclosure $I_p(B)=[a_-,a_+]$, its lower and upper endpoints, and the exact midpoint of $B$ as a candidate point. If any operation returns overflow, split-domain, domain-error, entire, or inconclusive, return that status with no finite bound claim."
+    ],
+    "evidence": "Read the current Definition section. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:true) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-interval-dag-box-enclosure-and-bound",
+    "supplier": "lem-directed-dyadic-rounding-enclosure-and-error",
+    "status": "verified",
+    "batch": "14",
+    "required_interface": "Exact endpoints are bracketed by downward/upward dyadic rounding; its absolute endpoint error tends to zero as precision increases in a fixed no-overflow range.",
+    "supplier_item_ids": [
+      "lem-directed-dyadic-rounding-enclosure-and-error"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "For finite $x$ with $|x|\\le N_{\\max}$, the directed roundings defined in\n[[def-dyadic-floating-point-format-and-directed-rounding]] satisfy\n$\\operatorname{rd}(x)\\le x\\le\\operatorname{ru}(x)$ and each endpoint error is\nat most the stated $\\epsilon_{\\rm abs}(x)$ (with zero error when $x$ is\nrepresentable). For $x>N_{\\max}$ the pair $(N_{\\max},+\\infty)$ encloses $x$;\nfor $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has\nerror bound $+\\infty$ and cannot be reported as a finite-error result.",
+    "required_hypotheses": "Exact endpoints are bracketed by downward/upward dyadic rounding; its absolute endpoint error tends to zero as precision increases in a fixed no-overflow range.",
+    "affected_claims": [
+      "Manifest dependency of alg-interval-dag-box-enclosure-and-bound (Outward-rounded interval enclosures for factorable expression DAGs on boxes); exact claim is described by the interface below."
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:true) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-factorable-box-convex-relaxation-interface",
+    "supplier": "def-convex-program-duality-and-slater-condition",
+    "status": "verified",
+    "batch": "6",
+    "required_interface": "The relaxation must be represented in the supplier’s finite-dimensional convex-program form with primal constraints, a Lagrangian, and its dual function q(λ,ν); no Slater or strong-duality conclusion is used.",
+    "supplier_item_ids": [
+      "def-convex-program-duality-and-slater-condition"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "A subset is convex when it contains the segment joining each pair of its\npoints ([[def-convex-subset-of-euclidean-space]]). A function\n$F:\\mathbb R^n\\to(-\\infty,+\\infty]$ is proper if it never equals\n$-\\infty$ and is finite at at least one point. Its domain is\n$\\operatorname{dom}F=\\{x:F(x)<+\\infty\\}$. Its epigraph is\n$\\operatorname{epi}F=\\{(x,t):F(x)\\le t\\}$. It is closed convex when its\nepigraph is a closed convex set. For a nonempty convex set $S$,\n$\\operatorname{aff}S$ is its smallest containing affine subspace and\n$\\operatorname{ri}S$ is its interior relative to $\\operatorname{aff}S$.",
+    "required_hypotheses": "The relaxation must be represented in the supplier’s finite-dimensional convex-program form with primal constraints, a Lagrangian, and its dual function q(λ,ν); no Slater or strong-duality conclusion is used.",
+    "affected_claims": [
+      "A finite **factorable expression DAG** on a box $B$ has input variables, certified constants, affine nodes, product nodes, and optional unary nonlinear nodes. A **certified convex relaxation** of its constrained minimization problem consists of a convex-program representation in the form of [[def-convex-program-duality-and-slater-condition]], with feasible set $R_B$ in lifted variables and convex objective $\\phi_B$ on $R_B$, and an exact-value embedding $\\iota_B$ with these properties:",
+      "For a convex program represented in [[def-convex-program-duality-and-slater-condition]], a dual certificate is a dual-feasible pair $(\\lambda,\\nu)$ together with a verified real lower bound $\\ell$ for its Lagrangian dual value $q(\\lambda,\\nu)$. The definition records a certificate interface only; it does not assert that a solver finds one."
+    ],
+    "evidence": "Read the current Definition section. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:false) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-factorable-box-convex-relaxation-interface",
+    "supplier": "def-intervals-rectangles-and-complex-balls",
+    "status": "verified",
+    "batch": "14",
+    "required_interface": "The interval algorithm uses the supplier’s real closed-interval endpoints and inclusion order, with boxes as finite products.",
+    "supplier_item_ids": [
+      "def-intervals-rectangles-and-complex-balls"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.",
+    "required_hypotheses": "The interval algorithm uses the supplier’s real closed-interval endpoints and inclusion order, with boxes as finite products.",
+    "affected_claims": [
+      "Manifest dependency of def-factorable-box-convex-relaxation-interface (Certified factorable convex relaxations on a box); exact claim is described by the interface below."
+    ],
+    "evidence": "Read the current Definition section. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:true) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-factorable-box-convex-relaxation-interface",
+    "supplier": "def-outward-rounded-interval-and-ball-operations",
+    "status": "verified",
+    "batch": "14",
+    "required_interface": "Only the supplier’s declared outward-rounded real interval operations and their explicit domain/error statuses are used.",
+    "supplier_item_ids": [
+      "def-outward-rounded-interval-and-ball-operations"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.",
+    "required_hypotheses": "Only the supplier’s declared outward-rounded real interval operations and their explicit domain/error statuses are used.",
+    "affected_claims": [
+      "4. Every interval bound and coefficient affected by finite precision carries an outward-rounded enclosure from [[def-outward-rounded-interval-and-ball-operations]]. A non-finite status or unverified coefficient makes the relaxation unavailable."
+    ],
+    "evidence": "Read the current Definition section. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:true) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-spatial-box-bound-certificate",
+    "supplier": "def-infimum",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "A lower-bound certificate is compared to the infimum of the stated nonempty feasible set; the definition’s order convention is used.",
+    "supplier_item_ids": [
+      "def-infimum"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "Let $S \\subseteq \\mathbb{R}$ and $\\ell \\in \\mathbb{R}$. Then $\\ell$ is a\n**greatest lower bound**, or **infimum**, of $S$ if both of the following hold:",
+    "required_hypotheses": "A lower-bound certificate is compared to the infimum of the stated nonempty feasible set; the definition’s order convention is used.",
+    "affected_claims": [
+      "Manifest dependency of def-spatial-box-bound-certificate (Certified lower, upper, and emptiness bounds on a box); exact claim is described by the interface below."
+    ],
+    "evidence": "Read the current Definition section. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-spatial-global-optimization-problem",
+    "supplier": "def-infimum",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "A lower-bound certificate is compared to the infimum of the stated nonempty feasible set; the definition’s order convention is used.",
+    "supplier_item_ids": [
+      "def-infimum"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "Let $S \\subseteq \\mathbb{R}$ and $\\ell \\in \\mathbb{R}$. Then $\\ell$ is a\n**greatest lower bound**, or **infimum**, of $S$ if both of the following hold:",
+    "required_hypotheses": "A lower-bound certificate is compared to the infimum of the stated nonempty feasible set; the definition’s order convention is used.",
+    "affected_claims": [
+      "When $C\\ne\\emptyset$, its global infimum is $f^*=\\inf_{x\\in C}f(x)$, using [[def-infimum]]. No attainment is assumed for a general $C$. Statements about finite empty-set detection require a separate constraint certificate or a stated separation margin; objective continuity alone does not certify infeasibility."
+    ],
+    "evidence": "Read the current Definition section. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-spatial-global-optimization-problem",
+    "supplier": "def-metric-continuity",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Continuity of the objective and constraint functions is with respect to the inherited Euclidean metric on the compact box.",
+    "supplier_item_ids": [
+      "def-metric-continuity"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces ([[def-metric-space]]), let\n$f : X \\to Y$ be a function and let $a \\in X$.",
+    "required_hypotheses": "Continuity of the objective and constraint functions is with respect to the inherited Euclidean metric on the compact box.",
+    "affected_claims": [
+      "A **box** in $\\mathbb R^n$ is $D_0=\\prod_{j=1}^n[a_j,b_j]$ with finite real endpoints $a_j\\le b_j$. Here $n\\ge1$. The box is closed and bounded, hence compact by [[thm-heine-borel-rn]]. An **optimization instance on a compact box** consists of this $D_0$, a continuous objective $f:D_0\\to\\mathbb R$ (continuity in the inherited Euclidean metric, as in [[def-metric-continuity]]), and a feasible set $C\\subseteq D_0$. The unconstrained instance has $C=D_0$. A constrained instance may specify $C=\\{x\\in D_0:g_i(x)\\le0,\\ 1\\le i\\le m\\}$ for a finite list of real functions $g_i$."
+    ],
+    "evidence": "Read the current Definition section. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-spatial-global-optimization-problem",
+    "supplier": "thm-heine-borel-rn",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Closed bounded finite boxes in ℝⁿ are compact; this supplies the compactness hypotheses in the spatial and constraint-margin arguments.",
+    "supplier_item_ids": [
+      "thm-heine-borel-rn"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:",
+    "required_hypotheses": "Closed bounded finite boxes in ℝⁿ are compact; this supplies the compactness hypotheses in the spatial and constraint-margin arguments.",
+    "affected_claims": [
+      "A **box** in $\\mathbb R^n$ is $D_0=\\prod_{j=1}^n[a_j,b_j]$ with finite real endpoints $a_j\\le b_j$. Here $n\\ge1$. The box is closed and bounded, hence compact by [[thm-heine-borel-rn]]. An **optimization instance on a compact box** consists of this $D_0$, a continuous objective $f:D_0\\to\\mathbb R$ (continuity in the inherited Euclidean metric, as in [[def-metric-continuity]]), and a feasible set $C\\subseteq D_0$. The unconstrained instance has $C=D_0$. A constrained instance may specify $C=\\{x\\in D_0:g_i(x)\\le0,\\ 1\\le i\\le m\\}$ for a finite list of real functions $g_i$."
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+    "supplier": "thm-of-square-roots",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Every nonnegative real has a nonnegative square root; used to locate the quartic minimizers in the example.",
+    "supplier_item_ids": [
+      "thm-of-square-roots"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+    "required_hypotheses": "Every nonnegative real has a nonnegative square root; used to locate the quartic minimizers in the example.",
+    "affected_claims": [
+      "[F2] Every nonnegative real has a nonnegative square root. [[thm-of-square-roots]]"
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-noisy-biological-simulator-finite-candidate-gp-acquisition",
+    "supplier": "thm-finite-gaussian-process-posterior-and-predictive-laws",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Assume AC, a fixed GP, independent Gaussian observation noise, and positive-definite observed covariance C=K+R; repeated sites and singular prior/predictive covariance are allowed, but no singular observed solve is asserted.",
+    "supplier_item_ids": [
+      "thm-finite-gaussian-process-posterior-and-predictive-laws"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "Assume AC and let $f=(f_t)_{t\\in T}$ be a real Gaussian process with mean\n$m$ and covariance kernel $k$; when $m$ and $k$ are specified as a prior,\nthe canonical cylinder-space process exists by\n[[thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel]].\nLet $X=(x_1,\\ldots,x_n)\\in T^n$ and $X_*=(x_1^*,\\ldots,x_p^*)\\in T^p$,\nwhere $n,p\\ge1$ and repeated indices are allowed. Write\n$f_X=(f_{x_i})_{i=1}^n$, $f_{X_*}=(f_{x_j^*})_{j=1}^p$,\n$m_X=(m(x_i))_{i=1}^n$, and $m_*=(m(x_j^*))_{j=1}^p$. For finite lists\n$A=(a_i)$ and $B=(b_j)$, define\n$K_{AB}=(k(a_i,b_j))_{i,j}$.",
+    "required_hypotheses": "Assume AC, a fixed GP, independent Gaussian observation noise, and positive-definite observed covariance C=K+R; repeated sites and singular prior/predictive covariance are allowed, but no singular observed solve is asserted.",
+    "affected_claims": [
+      "[F1] For an observed covariance $C\\succ0$, the finite GP posterior mean and covariance are the standard conditional-Gaussian formulas; the observed covariance is the only matrix inverted. [[thm-finite-gaussian-process-posterior-and-predictive-laws]]"
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-mccormick-envelope-equals-graph-convex-hull",
+    "supplier": "def-convex-subset-of-euclidean-space",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Convexity means that every segment between two points of the set remains in the set; used for the affine McCormick polytope.",
+    "supplier_item_ids": [
+      "def-convex-subset-of-euclidean-space"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+    "required_hypotheses": "Convexity means that every segment between two points of the set remains in the set; used for the affine McCormick polytope.",
+    "affected_claims": [
+      "[F2] A set is convex when it contains every line segment between two of its points. [[def-convex-subset-of-euclidean-space]]"
+    ],
+    "evidence": "Read the current Definition section. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "lem-positive-noise-regularizes-observed-covariance",
+    "supplier": "def-cholesky-factorisation-with-positive-diagonal",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "The observed real covariance must be symmetric positive definite; the real Cholesky factor has positive diagonal and satisfies C=LLᵀ.",
+    "supplier_item_ids": [
+      "def-cholesky-factorisation-with-positive-diagonal"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.",
+    "required_hypotheses": "The observed real covariance must be symmetric positive definite; the real Cholesky factor has positive diagonal and satisfies C=LLᵀ.",
+    "affected_claims": [
+      "[F1] A real matrix is positive definite when it is symmetric and $v^TAv>0$ for every nonzero $v$, as in [[def-cholesky-factorisation-with-positive-diagonal]]."
+    ],
+    "evidence": "Read the current Definition section. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-adaptive-finite-candidate-gp-search-posterior-correct",
+    "supplier": "def-axiom-of-choice",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "AC is stated as an ambient axiom for the GP existence/posterior interface; the finite ordered least-index argmax introduces no additional choice.",
+    "supplier_item_ids": [
+      "def-axiom-of-choice"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "The **Axiom of Choice** (AC) is the following statement.",
+    "required_hypotheses": "AC is stated as an ambient axiom for the GP existence/posterior interface; the finite ordered least-index argmax introduces no additional choice.",
+    "affected_claims": [
+      "[A1] AC is part of the Gaussian-process construction and posterior interfaces used here. [[def-axiom-of-choice]]"
+    ],
+    "evidence": "Read the current Definition section. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-adaptive-finite-candidate-gp-search-posterior-correct",
+    "supplier": "def-gaussian-process",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Finite evaluations of the specified process have the supplier’s multivariate Gaussian law with mean and covariance induced by m and k.",
+    "supplier_item_ids": [
+      "def-gaussian-process"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A real stochastic process\n$X=(X_t)_{t\\in I}$ [[def-stochastic-process-and-finite-dimensional-distributions]]\nis a **Gaussian process** if, for every integer $n\\ge 1$, every time list\n$t_1,\\ldots,t_n\\in I$, and every $a_1,\\ldots,a_n\\in\\mathbb R$, the random\nvariable\n$$\n\\sum_{j=1}^n a_jX_{t_j}\n$$\nhas a normal law $N(m,\\sigma^2)$ for some $m\\in\\mathbb R$ and\n$\\sigma\\ge0$. Variance zero is allowed, so constant linear combinations are\nincluded.",
+    "required_hypotheses": "Finite evaluations of the specified process have the supplier’s multivariate Gaussian law with mean and covariance induced by m and k.",
+    "affected_claims": [
+      "Manifest dependency of thm-adaptive-finite-candidate-gp-search-posterior-correct (Adaptive finite-candidate Gaussian-process search uses the correct sequential posterior); exact claim is described by the interface below."
+    ],
+    "evidence": "Read the current Definition section. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-adaptive-finite-candidate-gp-search-posterior-correct",
+    "supplier": "def-independent-random-elements",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Observation errors are independent of the entire process and of one another in the sequential conditioning proof.",
+    "supplier_item_ids": [
+      "def-independent-random-elements"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write",
+    "required_hypotheses": "Observation errors are independent of the entire process and of one another in the sequential conditioning proof.",
+    "affected_claims": [
+      "[A2] Observation errors are independent of the process and of one another. [[def-independent-random-elements]]"
+    ],
+    "evidence": "Read the current Definition section. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-adaptive-finite-candidate-gp-search-posterior-correct",
+    "supplier": "thm-finite-gaussian-process-posterior-and-predictive-laws",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Assume AC, a fixed GP, independent Gaussian observation noise, and positive-definite observed covariance C=K+R; repeated sites and singular prior/predictive covariance are allowed, but no singular observed solve is asserted.",
+    "supplier_item_ids": [
+      "thm-finite-gaussian-process-posterior-and-predictive-laws"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "Assume AC and let $f=(f_t)_{t\\in T}$ be a real Gaussian process with mean\n$m$ and covariance kernel $k$; when $m$ and $k$ are specified as a prior,\nthe canonical cylinder-space process exists by\n[[thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel]].\nLet $X=(x_1,\\ldots,x_n)\\in T^n$ and $X_*=(x_1^*,\\ldots,x_p^*)\\in T^p$,\nwhere $n,p\\ge1$ and repeated indices are allowed. Write\n$f_X=(f_{x_i})_{i=1}^n$, $f_{X_*}=(f_{x_j^*})_{j=1}^p$,\n$m_X=(m(x_i))_{i=1}^n$, and $m_*=(m(x_j^*))_{j=1}^p$. For finite lists\n$A=(a_i)$ and $B=(b_j)$, define\n$K_{AB}=(k(a_i,b_j))_{i,j}$.",
+    "required_hypotheses": "Assume AC, a fixed GP, independent Gaussian observation noise, and positive-definite observed covariance C=K+R; repeated sites and singular prior/predictive covariance are allowed, but no singular observed solve is asserted.",
+    "affected_claims": [
+      "[F1] For a fixed finite observation list with observed covariance positive definite, the posterior law is a Gaussian kernel defined for every data vector; repeated sites are allowed and posterior covariance may be singular. [[thm-finite-gaussian-process-posterior-and-predictive-laws]]",
+      "[F2] The posterior mean and covariance are the Schur-complement formulas, and its inverse systems can be evaluated by Cholesky plus triangular solves. [[thm-finite-gaussian-process-posterior-and-predictive-laws]]"
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-factorable-dual-certificate-is-valid-box-lower-bound",
+    "supplier": "def-convex-program-duality-and-slater-condition",
+    "status": "verified",
+    "batch": "6",
+    "required_interface": "The relaxation must be represented in the supplier’s finite-dimensional convex-program form with primal constraints, a Lagrangian, and its dual function q(λ,ν); no Slater or strong-duality conclusion is used.",
+    "supplier_item_ids": [
+      "def-convex-program-duality-and-slater-condition"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "A subset is convex when it contains the segment joining each pair of its\npoints ([[def-convex-subset-of-euclidean-space]]). A function\n$F:\\mathbb R^n\\to(-\\infty,+\\infty]$ is proper if it never equals\n$-\\infty$ and is finite at at least one point. Its domain is\n$\\operatorname{dom}F=\\{x:F(x)<+\\infty\\}$. Its epigraph is\n$\\operatorname{epi}F=\\{(x,t):F(x)\\le t\\}$. It is closed convex when its\nepigraph is a closed convex set. For a nonempty convex set $S$,\n$\\operatorname{aff}S$ is its smallest containing affine subspace and\n$\\operatorname{ri}S$ is its interior relative to $\\operatorname{aff}S$.",
+    "required_hypotheses": "The relaxation must be represented in the supplier’s finite-dimensional convex-program form with primal constraints, a Lagrangian, and its dual function q(λ,ν); no Slater or strong-duality conclusion is used.",
+    "affected_claims": [
+      "Manifest dependency of thm-factorable-dual-certificate-is-valid-box-lower-bound (A verified dual certificate for a McCormick relaxation is a valid global lower bound); exact claim is described by the interface below."
+    ],
+    "evidence": "Read the current Definition section. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:false) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-factorable-dual-certificate-is-valid-box-lower-bound",
+    "supplier": "thm-lagrangian-weak-duality",
+    "status": "verified",
+    "batch": "6",
+    "required_interface": "For a primal-feasible point and dual-feasible pair with nonnegative inequality multipliers, q(λ,ν)≤the relaxed primal objective; no strong-duality or Slater conclusion is used.",
+    "supplier_item_ids": [
+      "thm-lagrangian-weak-duality"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "For the convex program and Lagrangian dual of\n[[def-convex-program-duality-and-slater-condition]], every primal feasible\n$x$ and every dual feasible $(\\lambda,\\nu)$ satisfy\n$$q(\\lambda,\\nu)\\le f_0(x).$$\nConsequently, when the primal feasible set is nonempty, $d^*\\le p^*$.",
+    "required_hypotheses": "For a primal-feasible point and dual-feasible pair with nonnegative inequality multipliers, q(λ,ν)≤the relaxed primal objective; no strong-duality or Slater conclusion is used.",
+    "affected_claims": [
+      "[F4] For a primal-feasible point and dual-feasible pair, the Lagrangian dual value satisfies $q(\\lambda,\\nu)\\le f_0(y)$. [[thm-lagrangian-weak-duality]]"
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:false) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-factorable-dual-certificate-is-valid-box-lower-bound",
+    "supplier": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "status": "verified",
+    "batch": "14",
+    "required_interface": "Under its finite operation/domain hypotheses, every exact expression-DAG value is included in the computed outward-rounded interval; the local convergence theorem additionally requires precision→∞ and a fixed adequate exponent range.",
+    "supplier_item_ids": [
+      "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosure is asserted.",
+    "required_hypotheses": "Under its finite operation/domain hypotheses, every exact expression-DAG value is included in the computed outward-rounded interval; the local convergence theorem additionally requires precision→∞ and a fixed adequate exponent range.",
+    "affected_claims": [
+      "[F3] Every exact finite arithmetic-DAG node value lies in its finite outward-rounded enclosure; a non-finite status makes no enclosure claim. [[thm-outward-rounded-operations-are-isotone-and-dag-sound]]"
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:true) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-interval-lipschitz-bound-sound-consistent",
+    "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+    "status": "verified",
+    "batch": "14",
+    "required_interface": "Use the supplier’s finite dyadic format, directed lower/upper endpoints, fixed exponent range, and explicit overflow statuses; precision is raised only while staying in the declared range.",
+    "supplier_item_ids": [
+      "def-dyadic-floating-point-format-and-directed-rounding"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "An exact dyadic rational is a number $m2^q$ with integers $m,q$.\nFix integers $p\\ge2$ and $e_{\\min}\\le e_{\\max}$. Put\n$\\eta=2^{e_{\\min}-p+1}$ and\n$N_{\\max}=(2^p-1)2^{e_{\\max}-p+1}$. The finite representable set $\\mathbb F$\nconsists of zero, both signs of every normal number $k2^{e-p+1}$ with\n$e_{\\min}\\le e\\le e_{\\max}$ and $2^{p-1}\\le k<2^p$, and both signs of every\nsubnormal number $k\\eta$ with $1\\le k<2^{p-1}$. The smallest positive\nsubnormal is $\\eta$, the smallest positive normal is $2^{e_{\\min}}$, and the\nlargest finite magnitude is $N_{\\max}$. The extended endpoint set also contains\n$-\\infty$ and $+\\infty$ as enclosure sentinels; they are not finite machine\nnumbers.",
+    "required_hypotheses": "Use the supplier’s finite dyadic format, directed lower/upper endpoints, fixed exponent range, and explicit overflow statuses; precision is raised only while staying in the declared range.",
+    "affected_claims": [
+      "[F2] Directed lower and upper dyadic rounding enclose each exact endpoint, and the endpoint error tends to zero as precision increases on a fixed bounded range. [[lem-directed-dyadic-rounding-enclosure-and-error]], [[def-dyadic-floating-point-format-and-directed-rounding]]"
+    ],
+    "evidence": "Read the current Definition section. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:true) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-interval-lipschitz-bound-sound-consistent",
+    "supplier": "def-intervals-rectangles-and-complex-balls",
+    "status": "verified",
+    "batch": "14",
+    "required_interface": "The interval algorithm uses the supplier’s real closed-interval endpoints and inclusion order, with boxes as finite products.",
+    "supplier_item_ids": [
+      "def-intervals-rectangles-and-complex-balls"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "A **real interval** is a closed set $[a,b]\\subset\\mathbb R$ with finite dyadic\nendpoints $a\\le b$. Its width is $b-a$, midpoint is $(a+b)/2$, and its\nmidpoint-radius form is $m+[-r,r]$ with $m=(a+b)/2$ and $r=(b-a)/2$. The empty\nset is the status `empty`; the whole real line is `entire`. `overflow`,\n`domain-error`, `split-domain`, and `inconclusive` are computation statuses,\nnot finite intervals.",
+    "required_hypotheses": "The interval algorithm uses the supplier’s real closed-interval endpoints and inclusion order, with boxes as finite products.",
+    "affected_claims": [
+      "[F3] The interval endpoints, inclusion order, midpoint and width have the meanings in [[def-intervals-rectangles-and-complex-balls]]; each finite operation applies the displayed exact formula before outward rounding. [[def-outward-rounded-interval-and-ball-operations]]"
+    ],
+    "evidence": "Read the current Definition section. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:true) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-interval-lipschitz-bound-sound-consistent",
+    "supplier": "def-outward-rounded-interval-and-ball-operations",
+    "status": "verified",
+    "batch": "14",
+    "required_interface": "Only the supplier’s declared outward-rounded real interval operations and their explicit domain/error statuses are used.",
+    "supplier_item_ids": [
+      "def-outward-rounded-interval-and-ball-operations"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "For real intervals $X=[a,b]$ and $Y=[c,d]$, compute the displayed exact\nendpoint formulas and round the lower endpoint down and the upper endpoint up\nin the format of\n[[def-dyadic-floating-point-format-and-directed-rounding]]. If either exact\nendpoint overflows, return `overflow` with the outward extended endpoints;\nnever substitute a finite endpoint for an overflow sentinel. Addition is\n$[a+c,b+d]$, subtraction is $[a-d,b-c]$, and multiplication is\n$[\\min(ac,ad,bc,bd),\\max(ac,ad,bc,bd)]$. Division is defined only when\n$0\\notin Y$ and is $X[1/d,1/c]$, with reciprocal endpoints computed as exact\nrationals before outward rounding. Squaring is\n$[0,\\max(a^2,b^2)]$ when $0\\in X$ and\n$[\\min(a^2,b^2),\\max(a^2,b^2)]$ otherwise. Square root is defined only for\n$X\\subseteq[0,\\infty)$ and is enclosed by applying\n[[alg-dyadic-square-root-bisection]] to the exact dyadic endpoints with\nrequest $n=p$, where $p$ is the selected format precision, and rounding\noutward for storage.",
+    "required_hypotheses": "Only the supplier’s declared outward-rounded real interval operations and their explicit domain/error statuses are used.",
+    "affected_claims": [
+      "[F3] The interval endpoints, inclusion order, midpoint and width have the meanings in [[def-intervals-rectangles-and-complex-balls]]; each finite operation applies the displayed exact formula before outward rounding. [[def-outward-rounded-interval-and-ball-operations]]"
+    ],
+    "evidence": "Read the current Definition section. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:true) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-interval-lipschitz-bound-sound-consistent",
+    "supplier": "lem-directed-dyadic-rounding-enclosure-and-error",
+    "status": "verified",
+    "batch": "14",
+    "required_interface": "Exact endpoints are bracketed by downward/upward dyadic rounding; its absolute endpoint error tends to zero as precision increases in a fixed no-overflow range.",
+    "supplier_item_ids": [
+      "lem-directed-dyadic-rounding-enclosure-and-error"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "For finite $x$ with $|x|\\le N_{\\max}$, the directed roundings defined in\n[[def-dyadic-floating-point-format-and-directed-rounding]] satisfy\n$\\operatorname{rd}(x)\\le x\\le\\operatorname{ru}(x)$ and each endpoint error is\nat most the stated $\\epsilon_{\\rm abs}(x)$ (with zero error when $x$ is\nrepresentable). For $x>N_{\\max}$ the pair $(N_{\\max},+\\infty)$ encloses $x$;\nfor $x<-N_{\\max}$ the pair $(-\\infty,-N_{\\max})$ encloses $x$. Overflow has\nerror bound $+\\infty$ and cannot be reported as a finite-error result.",
+    "required_hypotheses": "Exact endpoints are bracketed by downward/upward dyadic rounding; its absolute endpoint error tends to zero as precision increases in a fixed no-overflow range.",
+    "affected_claims": [
+      "[F2] Directed lower and upper dyadic rounding enclose each exact endpoint, and the endpoint error tends to zero as precision increases on a fixed bounded range. [[lem-directed-dyadic-rounding-enclosure-and-error]], [[def-dyadic-floating-point-format-and-directed-rounding]]"
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:true) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-interval-lipschitz-bound-sound-consistent",
+    "supplier": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "status": "verified",
+    "batch": "14",
+    "required_interface": "Under its finite operation/domain hypotheses, every exact expression-DAG value is included in the computed outward-rounded interval; the local convergence theorem additionally requires precision→∞ and a fixed adequate exponent range.",
+    "supplier_item_ids": [
+      "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "For real intervals, complex rectangles or complex balls on which an operation\nis defined, enlarging either input enclosure cannot shrink the computed\nenclosure: for binary $\\circ\\in\\{+,-,\\times,\\div\\}$, if $X\\subseteq X'$ and\n$Y\\subseteq Y'$, then the computed set enclosure of $X\\circ Y$ is contained\nin that of $X'\\circ Y'$ whenever both are finite results and their domain\nrestrictions are preserved. The square-root enclosure is inclusion-isotone on\nnonnegative intervals. Each finite ball operation in\n[[def-outward-rounded-interval-and-ball-operations]] contains the exact ball\nimage. A `split-domain`, `entire`, `domain-error`, `overflow`, or\n`inconclusive` status makes no finite claim. For a finite expression DAG\nwhose operation nodes all return finite enclosures, every exact node value\nfrom every admissible input assignment belongs to its computed node\nenclosure; in particular, the root enclosure contains the exact range. If any\nnode returns a non-finite status, no finite DAG enclosure is asserted.",
+    "required_hypotheses": "Under its finite operation/domain hypotheses, every exact expression-DAG value is included in the computed outward-rounded interval; the local convergence theorem additionally requires precision→∞ and a fixed adequate exponent range.",
+    "affected_claims": [
+      "[F1] Every exact node value of a finite expression DAG belongs to its outward-rounded computed node enclosure; a non-finite node gives no finite enclosure claim. [[thm-outward-rounded-operations-are-isotone-and-dag-sound]]"
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. The current supplier body and complete proof were read directly. The prior Step-1 record is ready (owner:true) but its stored hash is stale, so it was not used as evidence; current-body verification is authorship work, not independent approval."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-spatial-bnb-eventual-epsilon-termination",
+    "supplier": "thm-extreme-value-metric",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "A continuous scalar function on a nonempty compact metric space attains its minimum; used only for the compact-box termination and separation-margin arguments.",
+    "supplier_item_ids": [
+      "thm-extreme-value-metric"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with",
+    "required_hypotheses": "A continuous scalar function on a nonempty compact metric space attains its minimum; used only for the compact-box termination and separation-margin arguments.",
+    "affected_claims": [
+      "[F2] A continuous real-valued function on a nonempty compact metric space attains a finite minimum. [[thm-extreme-value-metric]]"
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-spatial-bnb-eventual-epsilon-termination",
+    "supplier": "thm-heine-borel-rn",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Closed bounded finite boxes in ℝⁿ are compact; this supplies the compactness hypotheses in the spatial and constraint-margin arguments.",
+    "supplier_item_ids": [
+      "thm-heine-borel-rn"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:",
+    "required_hypotheses": "Closed bounded finite boxes in ℝⁿ are compact; this supplies the compactness hypotheses in the spatial and constraint-margin arguments.",
+    "affected_claims": [
+      "[F1] A closed finite box in $\\mathbb R^n$ is compact. [[thm-heine-borel-rn]]"
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-spatial-bnb-eventual-epsilon-termination",
+    "supplier": "thm-nested-interval-property",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Nested closed coordinate intervals with lengths tending to zero have a unique common point; applied coordinatewise to longest-side box branches.",
+    "supplier_item_ids": [
+      "thm-nested-interval-property"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "For each $k \\in \\mathbb{N}$ let $I_k = [a_k, b_k]$ be a closed bounded interval\nwith $a_k \\le b_k$ ([[def-interval]]), and suppose the family is **nested**:",
+    "required_hypotheses": "Nested closed coordinate intervals with lengths tending to zero have a unique common point; applied coordinatewise to longest-side box branches.",
+    "affected_claims": [
+      "[F5] Nested closed real intervals whose lengths tend to zero have a unique common point. [[thm-nested-interval-property]]"
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-uniform-constraint-margin-enables-empty-box-detection",
+    "supplier": "def-max-min",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "For a finite nonempty list of real constraint values, the maximum is attained by one of its entries; m≥1 is explicit.",
+    "supplier_item_ids": [
+      "def-max-min"
+    ],
+    "supplier_section": "Definition",
+    "supplier_excerpt": "Let $S \\subseteq \\mathbb{R}$ and $m \\in \\mathbb{R}$.",
+    "required_hypotheses": "For a finite nonempty list of real constraint values, the maximum is attained by one of its entries; m≥1 is explicit.",
+    "affected_claims": [
+      "[F3] The maximum of a finite nonempty list of real numbers is one of its entries. [[def-max-min]]"
+    ],
+    "evidence": "Read the current Definition section. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-uniform-constraint-margin-enables-empty-box-detection",
+    "supplier": "thm-extreme-value-metric",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "A continuous scalar function on a nonempty compact metric space attains its minimum; used only for the compact-box termination and separation-margin arguments.",
+    "supplier_item_ids": [
+      "thm-extreme-value-metric"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with",
+    "required_hypotheses": "A continuous scalar function on a nonempty compact metric space attains its minimum; used only for the compact-box termination and separation-margin arguments.",
+    "affected_claims": [
+      "[F2] A continuous real-valued function on a nonempty compact metric space attains its minimum. [[thm-extreme-value-metric]]"
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-uniform-constraint-margin-enables-empty-box-detection",
+    "supplier": "thm-heine-borel-rn",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Closed bounded finite boxes in ℝⁿ are compact; this supplies the compactness hypotheses in the spatial and constraint-margin arguments.",
+    "supplier_item_ids": [
+      "thm-heine-borel-rn"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:",
+    "required_hypotheses": "Closed bounded finite boxes in ℝⁿ are compact; this supplies the compactness hypotheses in the spatial and constraint-margin arguments.",
+    "affected_claims": [
+      "[F1] A closed bounded box in $\\mathbb R^n$ is compact. [[thm-heine-borel-rn]]"
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. Published supplier body read."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-uniform-constraint-margin-enables-empty-box-detection",
+    "supplier": "thm-nested-interval-property",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Nested closed coordinate intervals with lengths tending to zero have a unique common point; applied coordinatewise to longest-side box branches.",
+    "supplier_item_ids": [
+      "thm-nested-interval-property"
+    ],
+    "supplier_section": "Statement",
+    "supplier_excerpt": "For each $k \\in \\mathbb{N}$ let $I_k = [a_k, b_k]$ be a closed bounded interval\nwith $a_k \\le b_k$ ([[def-interval]]), and suppose the family is **nested**:",
+    "required_hypotheses": "Nested closed coordinate intervals with lengths tending to zero have a unique common point; applied coordinatewise to longest-side box branches.",
+    "affected_claims": [
+      "[F6] Nested closed intervals whose lengths tend to zero have a unique common point. [[thm-nested-interval-property]]"
+    ],
+    "evidence": "Read the current Statement section and the complete proof where the local use depends on it. Published supplier body read."
+  },
+  {
+    "kind": "page",
+    "consumer": "global-optimization-and-certified-branch-and-bound",
+    "supplier": "barrier-and-primal-dual-interior-point-methods",
+    "status": "verified",
+    "batch": "59",
+    "required_interface": "Page placement context only. No barrier, central-path, self-concordance, or primal-dual Newton algorithm is used; the dual lower-bound premise comes directly from batch 6 weak duality.",
+    "supplier_item_ids": [],
+    "affected_claims": [
+      "No barrier-method convergence or complexity claim is made."
+    ],
+    "evidence": "Read the current batch-59 A-page objective and manifest. It develops barrier and central-path methods; the assigned proof dependencies do not cite those methods, so this is navigation context only."
+  },
+  {
+    "kind": "page",
+    "consumer": "global-optimization-and-certified-branch-and-bound",
+    "supplier": "gaussian-process-priors-and-posterior-laws",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Assume AC, a specified real GP, independent Gaussian observation noise, and an SPD observed covariance; repeated sites and singular latent prior/predictive blocks are allowed. No pseudoinverse is used.",
+    "supplier_item_ids": [
+      "thm-finite-gaussian-process-posterior-and-predictive-laws"
+    ],
+    "affected_claims": [
+      "alg-finite-candidate-gp-acquisition-search and thm-adaptive-finite-candidate-gp-search-posterior-correct: posterior formulas are applied only at observed-SPD histories."
+    ],
+    "evidence": "Read the published page summary and the complete theorem statement/proof. Its all-y conditional-kernel version, AC use, independence hypothesis, and observed-SPD requirement match the local sequential proof."
+  },
+  {
+    "kind": "page",
+    "consumer": "global-optimization-and-certified-branch-and-bound",
+    "supplier": "inequality-kkt-duality-and-optimality-certificates",
+    "status": "verified",
+    "batch": "6",
+    "required_interface": "The exact convex-program Lagrangian and weak-duality lower-bound convention are used in factorable dual certificates; no KKT necessity, Slater sufficiency, or strong-duality result is assumed.",
+    "supplier_item_ids": [
+      "def-convex-program-duality-and-slater-condition",
+      "thm-lagrangian-weak-duality"
+    ],
+    "affected_claims": [
+      "thm-factorable-dual-certificate-is-valid-box-lower-bound: the verified dual value is no larger than the embedded relaxed feasible objective."
+    ],
+    "evidence": "Read the current batch-6 supplier Definition and complete weak-duality proof. Both current Step-1 item records are ready with owner:false; this is authorship readiness, not independent review."
+  },
+  {
+    "kind": "page",
+    "consumer": "global-optimization-and-certified-branch-and-bound",
+    "supplier": "matrix-norms-condition-numbers-and-numerical-stability",
+    "status": "verified",
+    "batch": "published",
+    "required_interface": "Page placement context only. No norm, condition-number, or floating-error theorem from this page is a proof premise in this pair.",
+    "supplier_item_ids": [],
+    "affected_claims": [
+      "No logical claim; matrix conditioning content is not consumed by the assigned carriers."
+    ],
+    "evidence": "Read the published page inventory and prose. The exact local item dependency lists contain no supplier item from this page; this is navigation context only."
+  },
+  {
+    "kind": "page",
+    "consumer": "global-optimization-and-certified-branch-and-bound",
+    "supplier": "nonlinear-equations-and-newton-methods",
+    "status": "verified",
+    "batch": "3",
+    "required_interface": "Page placement context only. This pair defines global search and does not duplicate or invoke Newton/root-solving algorithms.",
+    "supplier_item_ids": [],
+    "affected_claims": [
+      "No logical claim; no root-finding convergence or algorithm is imported."
+    ],
+    "evidence": "Read the current batch-3 A-page carrier. The assigned definitions and proofs have no item dependency on its Newton procedures; this is navigation context only."
+  },
+  {
+    "kind": "page",
+    "consumer": "global-optimization-and-certified-branch-and-bound",
+    "supplier": "outward-rounded-interval-and-ball-arithmetic",
+    "status": "verified",
+    "batch": "14",
+    "required_interface": "Use the exact finite interval formats, real interval operations, directed-rounding enclosure/error, and DAG soundness under the suppliers’ domain and no-overflow hypotheses.",
+    "supplier_item_ids": [
+      "def-dyadic-floating-point-format-and-directed-rounding",
+      "def-intervals-rectangles-and-complex-balls",
+      "def-outward-rounded-interval-and-ball-operations",
+      "lem-directed-dyadic-rounding-enclosure-and-error",
+      "thm-outward-rounded-operations-are-isotone-and-dag-sound"
+    ],
+    "affected_claims": [
+      "alg-interval-dag-box-enclosure-and-bound and thm-interval-lipschitz-bound-sound-consistent: finite exact DAG values are enclosed and refinement converges under increasing precision.",
+      "thm-factorable-dual-certificate-is-valid-box-lower-bound: only verified outward-rounded coefficients/domain ranges enter the relaxation."
+    ],
+    "evidence": "Read the current batch-14 definitions and full proofs for directed rounding and outward DAG soundness. Current Step-1 supplier records are ready with owner:true after owner repair; they are not independent approval."
+  }
+]

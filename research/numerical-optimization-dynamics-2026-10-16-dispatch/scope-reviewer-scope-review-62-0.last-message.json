@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "62",
+  "round": 0,
+  "reviewed_items": [
+    "lem-polynomial-squarefree-decomposition-and-multiplicity",
+    "thm-sturm-sign-variation-counts-distinct-roots",
+    "lem-squarefree-integer-polynomial-root-separation-bound",
+    "alg-rational-polynomial-root-isolation",
+    "thm-rational-polynomial-root-isolation-is-sound-and-finite",
+    "def-real-boxes-and-interval-jacobian-enclosures",
+    "lem-brouwer-fixed-point-for-closed-box",
+    "lem-real-interval-arithmetic-preserves-enclosure",
+    "alg-scalar-interval-newton-certification",
+    "alg-krawczyk-root-certification",
+    "alg-smooth-function-root-isolation",
+    "lem-interval-jacobian-mean-value-enclosure",
+    "thm-scalar-interval-newton-exclusion-and-inclusion",
+    "thm-smooth-function-root-isolation-soundness",
+    "thm-krawczyk-inclusion-exclusion-and-uniqueness",
+    "ex-double-polynomial-root-has-no-sign-change",
+    "ex-validated-mass-action-equilibrium-root",
+    "ex-event-root-with-derivative-separated-from-zero"
+  ],
+  "reviewed_pages": [
+    "interval-newton-krawczyk-and-polynomial-root-isolation",
+    "interval-newton-krawczyk-and-polynomial-root-isolation-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The complete batch review found local repairs and two owner-level obligations: the approved VAL-ROOT scope records conflict, and an outside-batch algorithm omits a required input to the smooth isolator.",
+  "findings": [
+    {
+      "id": "VAL-ROOT-approved-scope",
+      "type": "scope",
+      "reason": "The VAL-ROOT section of research/plan-numerical-linear-track.md lists three same-frontier page edges and says no external canonical item is a proof premise. research/plan-spec.json and the batch inventory add analyticity-liouville-and-morera, while assigned proofs explicitly use the published FTA theorem and other published premises. Owner reconciliation is needed on the approved reusable suppliers and page requirement."
+    },
+    {
+      "id": "lem-polynomial-squarefree-decomposition-and-multiplicity",
+      "type": "prerequisite",
+      "reason": "The proof uses monic gcds without citing their definition or Bezout construction, and Step 2.1 assumes a gcd over Q remains the gcd over C based only on division remaining valid. Cite lem-polynomial-gcd-is-stable-under-field-extension or prove the Bezout argument locally. Also, Step 4.1 calls the factorization in [F1], but [F1] is only the rational-field claim; the factorization is in Step 1.2."
+    },
+    {
+      "id": "thm-sturm-sign-variation-counts-distinct-roots",
+      "type": "prerequisite",
+      "reason": "Step 1.1 infers that the last Euclidean remainder is a nonzero constant and obtains a Bezout identity from gcd(P,P')=1, but only cites polynomial division. Cite def-monic-greatest-common-divisor-of-polynomials and thm-bezout-identity-for-polynomials, or supply the Euclidean gcd invariant locally."
+    },
+    {
+      "id": "alg-rational-polynomial-root-isolation",
+      "type": "local",
+      "reason": "After an exact midpoint root is removed, the active product S can become constant while child intervals remain queued. Step 5 then requests a Sturm sequence for a constant polynomial; Step 6's constant-product note cannot be reached until the queue empties. Add an immediate branch to clear the root-free queue and return complete."
+    },
+    {
+      "id": "thm-rational-polynomial-root-isolation-is-sound-and-finite",
+      "type": "local",
+      "reason": "Step 1.2 uses the root bound from the separation lemma to show the initial endpoints are nonroots, including when S has degree one. The lemma states that root bound only for degree at least two. Add the elementary linear-polynomial bound or a separate degree-one argument."
+    },
+    {
+      "id": "lem-brouwer-fixed-point-for-closed-box",
+      "type": "local",
+      "reason": "Step 2.1 asserts continuity of the cube-ball homeomorphism at zero using norm bounds that are not established: derive the Euclidean/infinity-norm inequalities and the stated bounds, or cite their prerequisites."
+    },
+    {
+      "id": "lem-interval-jacobian-mean-value-enclosure",
+      "type": "local",
+      "reason": "Step 2.1 asserts the MVT points z_i lie in X; state that a product of intervals is convex. The proof also indexes coordinates 1 through n while the Jacobian definition indexes from 0; standardize the convention."
+    },
+    {
+      "id": "alg-krawczyk-root-certification",
+      "type": "local",
+      "reason": "B counts processed boxes but is specified only as B≥0. State that the box budget is a nonnegative integer."
+    },
+    {
+      "id": "alg-smooth-function-root-isolation",
+      "type": "local",
+      "reason": "B counts processed boxes but is specified only as B≥0. State that the box budget is a nonnegative integer."
+    },
+    {
+      "id": "alg-safeguarded-hybrid-event-location-and-restart",
+      "type": "outside-batch",
+      "reason": "Its guard-isolation call supplies evaluators and B_root but omits the smooth isolator's required minimum-width input η. The caller has ω, which could be passed as η; owner repair is required outside this batch's source scope."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-rational-polynomial-root-isolation-is-sound-and-finite",
+      "decision": "repair",
+      "reason": "Its termination and coverage proof must handle the new constant-active-product return branch, and its degree-one endpoint argument needs the explicit root bound."
+    },
+    {
+      "id": "ex-double-polynomial-root-has-no-sign-change",
+      "decision": "accept",
+      "reason": "Its run has a Sturm count of one on the initial interval, so it does not enter the constant-active-product branch."
+    },
+    {
+      "id": "interval-newton-krawczyk-and-polynomial-root-isolation",
+      "decision": "accept",
+      "reason": "The page summary's distinction between exclusion, existence, uniqueness, and unresolved output remains accurate."
+    },
+    {
+      "id": "interval-newton-krawczyk-and-polynomial-root-isolation-examples",
+      "decision": "accept",
+      "reason": "The examples page summary is unchanged by the procedure clarifications."
+    },
+    {
+      "id": "thm-krawczyk-inclusion-exclusion-and-uniqueness",
+      "decision": "accept",
+      "reason": "The proof uses the same Krawczyk inclusion and contraction criteria; typing B as an integer does not change them."
+    },
+    {
+      "id": "alg-validated-periodic-orbit-corrector",
+      "decision": "accept",
+      "reason": "It supplies a positive rational minimum width and a finite box-count budget, compatible with the clarified Krawczyk inputs."
+    },
+    {
+      "id": "thm-orbital-stability-from-certified-floquet-multipliers",
+      "decision": "accept",
+      "reason": "Its Krawczyk use depends on the nonsingular preconditioner and contraction bound, which are unchanged."
+    },
+    {
+      "id": "thm-validated-periodic-orbit-certificate-soundness",
+      "decision": "accept",
+      "reason": "It consumes the corrector's validated record; the budget type clarification does not alter that record."
+    },
+    {
+      "id": "alg-periodic-orbit-pseudoarclength-continuation",
+      "decision": "accept",
+      "reason": "It forwards the corrector's finite box budget and minimum width."
+    },
+    {
+      "id": "ex-van-der-pol-stability-conditional-on-validated-enclosure",
+      "decision": "accept",
+      "reason": "Its conclusion is conditional on the unchanged validated-root record."
+    },
+    {
+      "id": "periodic-orbit-shooting-collocation-and-floquet-error",
+      "decision": "accept",
+      "reason": "The page summary already states that uniqueness requires a separate contraction bound."
+    },
+    {
+      "id": "thm-smooth-function-root-isolation-soundness",
+      "decision": "accept",
+      "reason": "Its finite-budget termination and coverage arguments remain valid with an integer box budget."
+    },
+    {
+      "id": "ex-event-root-with-derivative-separated-from-zero",
+      "decision": "accept",
+      "reason": "It supplies minimum width 1/2 and box budget 1, so its call is fully specified."
+    },
+    {
+      "id": "alg-safeguarded-hybrid-event-location-and-restart",
+      "decision": "escalate",
+      "reason": "The outside-batch call omits η; pass η=ω or add a separate minimum-width input."
+    },
+    {
+      "id": "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+      "decision": "accept",
+      "reason": "Its finite-budget coverage proof remains valid once the direct event algorithm supplies the required η."
+    },
+    {
+      "id": "ex-two-events-between-endpoints-defeat-sign-screening",
+      "decision": "accept",
+      "reason": "Its conclusion remains valid once the direct event algorithm call is fully specified."
+    },
+    {
+      "id": "event-location-and-hybrid-trajectory-error",
+      "decision": "accept",
+      "reason": "The page summary's complete-isolation condition remains accurate after the caller passes η."
+    }
+  ]
+}

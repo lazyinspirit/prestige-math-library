@@ -1,0 +1,194 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "55",
+  "input_sha256": "8d014d500e7675b2cac88cf1b1d36f0e37ee26eaa22d50539eb44512ecb68ecd",
+  "decisions": [
+    {
+      "id": "def-uniform-grid-and-difference-operators",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "c51bc6720fe9c90005f7ee226d8979781658835579a34dd11471327a99ac8804",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The stated edge-array domain contains p=(1,0,...,0), but h sum_{j=1}^{N-1}|p_j|^2=0, so the claimed interior inner product is not positive definite. This is a domain error in the mathematical definition, not a citation problem. Repair assigns that product to interior-node arrays and explicitly restricts nodal arguments; the edge product retains all N coordinates.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-uniform-grid-and-difference-operators",
+      "disposition": "repaired",
+      "post_sha256": "07973cbe79d29b9bf2ac1fe066dad3db7df68c752ecc33514ba69032c68530a6",
+      "review_context_sha256": "2be52de3e8695f2bad8b1be278fc31ca5951e616389c03134a3cf760f177b7ce",
+      "reason": "Reviewed the full Definition, its four scalar/index prerequisites, owning contract and page. With h>0, each product is positive definite on its declared coordinate space. Interior restriction is a norm on zero-endpoint nodal states and only a seminorm on unrestricted nodal states; the repair says so explicitly. D_+ maps N+1 nodal values to N edges and Delta_h maps them to N-1 interior values, matching the actual consumers. Periodic/infinite conventions, formulas, dependencies and choice-free contract remain unchanged. This is the repair author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-periodic-one-way-advection-schemes",
+    "def-centered-leapfrog-wave-scheme",
+    "lem-dirichlet-grid-summation-by-parts",
+    "lem-dirichlet-grid-poincare-inequality",
+    "lem-periodic-advection-amplification-symbols",
+    "thm-periodic-centered-wave-amplification-and-endpoint",
+    "ex-wave-cfl-endpoint-and-energy-breakdown",
+    "thm-nearest-neighbor-cfl-domain-condition",
+    "alg-age-structured-renewal-upwind-finite-volume",
+    "thm-dirichlet-leapfrog-discrete-energy"
+  ],
+  "downstream_uses": {
+    "thm-dirichlet-leapfrog-discrete-energy": "Statement energy E^{n+1/2}, proof steps 1.1, 2.1, 3.1 and 4.1: zero-endpoint interior velocity norm and all-edge forward-difference products."
+  },
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-uniform-grid-and-difference-operators",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "section": "Definition",
+      "reason": "Interior product was declared on edge arrays and annihilated the nonzero coordinate-zero vector. Corrected its domain to interior-node arrays, explicitly defined nodal restriction and the edge norm, and distinguished a full-nodal seminorm from the zero-endpoint norm. No formula or dependency was changed.",
+      "post_sha256": "07973cbe79d29b9bf2ac1fe066dad3db7df68c752ecc33514ba69032c68530a6",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_paths": [
+      "items/def-uniform-grid-and-difference-operators.md"
+    ],
+    "interface_change": {
+      "section": "Definition",
+      "before": "For edge arrays p,q indexed by j=0,...,N-1, the interior inner product, norm, and edge inner product are ...",
+      "after": "Interior product/norm on r,s indexed by j=1,...,N-1; edge product/norm on p,q indexed by j=0,...,N-1. Nodal interior expressions mean restriction, with the full-nodal seminorm caveat.",
+      "formulas_changed": false
+    },
+    "contract_and_page": "Existing batch-55 contract and owning page promise interior/edge products on their stated index sets. Both remain satisfied without edits; historical risk-review evidence is preserved.",
+    "step4_digest": "The digest describes an earlier derivative-pairing defect. The assigned current edge product is already h sum p_j conjugate(q_j), so that historical concern is absent from this carrier. The current rejected tuple instead correctly detects the interior-domain defect.",
+    "consumer_examination": {
+      "def-periodic-one-way-advection-schemes": {
+        "affected_use": "Definition opening: uses the uniform index sets, x_j=jh, spacings, periodic wraparound, and finite-interval inflow/outflow nodes.",
+        "reason": "All of those clauses are unchanged; no interior or edge inner product is used.",
+        "path": "items/def-periodic-one-way-advection-schemes.md",
+        "disposition": "unaffected",
+        "repair_required": false,
+        "route": "ordinary-frontier-owner"
+      },
+      "def-centered-leapfrog-wave-scheme": {
+        "affected_use": "Definition opening and Dirichlet branch: uses physical nodes, L=Nh, positive spacings, interior indices 1,...,N-1 and zero endpoints.",
+        "reason": "The recurrence and initial/boundary rows use unchanged grid and difference conventions; separating pairing domains does not change any update.",
+        "path": "items/def-centered-leapfrog-wave-scheme.md",
+        "disposition": "unaffected",
+        "repair_required": false,
+        "route": "ordinary-frontier-owner"
+      },
+      "lem-dirichlet-grid-summation-by-parts": {
+        "affected_use": "Statement, F1, and proof steps 1.1 and 2.1: pairs nodal u with interior -Delta_h v and pairs edge arrays D_+u,D_+v.",
+        "reason": "Restriction to interior nodes makes the left pairing well-typed even for nonzero boundary values. The right pairing includes every edge. Expanding -sum u_j conjugate(d_{j+1}-d_j) gives the stated boundary terms. On zero-endpoint states the restriction is injective, so self-adjoint nonnegativity is meaningful.",
+        "path": "items/lem-dirichlet-grid-summation-by-parts.md",
+        "disposition": "unaffected",
+        "repair_required": false,
+        "route": "ordinary-frontier-owner"
+      },
+      "lem-dirichlet-grid-poincare-inequality": {
+        "affected_use": "Statement, F1, and proof steps 1.1 and 2.1: interior norm of zero-endpoint w and the edge norm of D_+w.",
+        "reason": "The repaired domains agree exactly with the proof sums over interior nodes and all edges. Telescoping from w_0=0 and the finite-sum square identity give |w_j|^2 <= N sum_edges |w_{i+1}-w_i|^2 and hence the unchanged L bound.",
+        "path": "items/lem-dirichlet-grid-poincare-inequality.md",
+        "disposition": "unaffected",
+        "repair_required": false,
+        "route": "ordinary-frontier-owner"
+      },
+      "lem-periodic-advection-amplification-symbols": {
+        "affected_use": "Statement, F5, and step 3.1: periodic inner product h sum_{j=0}^{N-1} p_j conjugate(q_j) and Fourier squared norm Nh.",
+        "reason": "Only finite-interval domains changed; the periodic scalar product, index set, and Fourier normalization are byte-for-byte unchanged.",
+        "path": "items/lem-periodic-advection-amplification-symbols.md",
+        "disposition": "unaffected",
+        "repair_required": false,
+        "route": "ordinary-frontier-owner"
+      },
+      "thm-periodic-centered-wave-amplification-and-endpoint": {
+        "affected_use": "F6 and proof step 4.1: periodic weighted norm and the normalization Nh of Fourier vectors for the finite-time estimate.",
+        "reason": "The repair leaves all periodic norms, difference operators, and mode indices unchanged; the coefficient-to-norm calculation uses none of the corrected finite-interval domain wording.",
+        "path": "items/thm-periodic-centered-wave-amplification-and-endpoint.md",
+        "disposition": "unaffected",
+        "repair_required": false,
+        "route": "ordinary-frontier-owner"
+      },
+      "ex-wave-cfl-endpoint-and-energy-breakdown": {
+        "affected_use": "F5, F6, and Verification steps 1.3, 1.4, 2.1: periodic state norm and forward-difference pairing in the modified energy.",
+        "reason": "The periodic derivative pairing already sums all periodic edges and is unchanged. Thus the Fourier modal energy and endpoint signs retain the same meanings.",
+        "path": "items/ex-wave-cfl-endpoint-and-energy-breakdown.md",
+        "disposition": "unaffected",
+        "repair_required": false,
+        "route": "ordinary-frontier-owner"
+      },
+      "thm-nearest-neighbor-cfl-domain-condition": {
+        "affected_use": "F11 and proof step 4.1: periodic grid norm in the centered-family operator-norm lower bound; first claim uses infinite-grid physical nodes.",
+        "reason": "Both periodic norms and infinite-grid coordinates are unchanged. Neither the strict obstruction nor the centered-mode lower bound uses the finite-interval interior pairing.",
+        "path": "items/thm-nearest-neighbor-cfl-domain-condition.md",
+        "disposition": "unaffected",
+        "repair_required": false,
+        "route": "ordinary-frontier-owner"
+      },
+      "alg-age-structured-renewal-upwind-finite-volume": {
+        "affected_use": "deps names the supplier; Definition independently specifies a_j=j Delta a, cells, Delta t and transport-plus-loss CFL, with no interior pairing.",
+        "reason": "Its explicit cell-mass flux algorithm uses uniform spacings only. The interior-node/edge pairing correction changes no input, cell, flux, CFL condition, or output.",
+        "path": "items/alg-age-structured-renewal-upwind-finite-volume.md",
+        "disposition": "unaffected",
+        "repair_required": false,
+        "route": "ordinary-frontier-owner"
+      },
+      "thm-dirichlet-leapfrog-discrete-energy": {
+        "affected_use": "Statement energy E^{n+1/2}, proof steps 1.1, 2.1, 3.1 and 4.1: zero-endpoint interior velocity norm and all-edge forward-difference products.",
+        "reason": "This unlinked actual use is supplied through its declared wave/summation-by-parts/Poincare dependencies. The explicit restriction convention and edge norm now match every expanded finite sum; zero endpoints ensure the interior norm is definite and the bound sum_edges |v_{j+1}-v_j|^2 <= 4 sum_interior |v_j|^2 is unchanged.",
+        "path": "items/thm-dirichlet-leapfrog-discrete-energy.md",
+        "disposition": "unaffected",
+        "repair_required": false,
+        "route": "ordinary-frontier-owner"
+      }
+    },
+    "page_examination": {
+      "path": "library/numerical-pdes-and-spatial-discretization/hyperbolic-finite-difference-methods.md",
+      "affected_use": "Lists this definition and promises Dirichlet summation, coercive energy and periodic estimates.",
+      "disposition": "unaffected",
+      "reason": "The corrected finite-interval coordinate domains support those promises; no prose or inventory change is required."
+    },
+    "published_ledger": "No potentially defective published consumer or outside-frontier consumer was identified; no published-consumer ledger update is proposed. All ten inventoried item consumers are frozen-frontier items.",
+    "checks": [
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items def-uniform-grid-and-difference-operators",
+        "exit_code": 0,
+        "result": "Captured the review hashes immediately after completing the assigned mathematical repair; no later supplier edits."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-uniform-grid-and-difference-operators.md --json",
+        "exit_code": 0,
+        "result": "1 file, 0 checked proofs, 0 failures; definition status not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-uniform-grid-and-difference-operators.md --json",
+        "exit_code": 0,
+        "result": "1 file checked, no errors and no warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-uniform-grid-and-difference-operators.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects; run after the final item edit."
+      }
+    ],
+    "sources": "Elementary finite-coordinate inner products and restriction maps are familiar; no external source was consulted, and no source-reading claim is made.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collects the report and schedules ordinary frontier effects and independent rejudgment; this report grants no independent acceptance or certification."
+  }
+}

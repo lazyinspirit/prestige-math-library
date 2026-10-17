@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "kind": "focused-fft-normality-inheritance-research",
+  "research_only": true,
+  "reviewer": "/root/kept_low_editorial",
+  "cycle": 1,
+  "native_coverage_adopted": false,
+  "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+  "classification": "native-rejection-not-supported-as-a-mathematical-defect-by-current-source; optional-proof-interface-explication",
+  "finding": "The current algorithm imports the operationwise no-underflow model and uses the same instance throughout recursion. That model expressly defines success to require each exact intermediate zero or normal and every rounded output finite. Successful no-range-failure execution therefore entails every exact NONZERO real butterfly intermediate is normal. The cited butterfly hypothesis is already satisfied; no new normality assumption, lemma, procedure restriction or narrower theorem Statement is justified.",
+  "original_native_verdicts": {
+    "file": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+    "rows": [
+      {
+        "line": 260,
+        "original_row": {
+          "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+          "model": "gpt-6-luna",
+          "keep": false,
+          "reason": "F2 omits a necessary hypothesis of the butterfly lemma: every exact nonzero real intermediate must be normal. The theorem assumes only a successful run with no range failures, which does not establish normality, so the stage bound and induction are not justified.",
+          "context_sha256": "66ba4bfaf7b443a50824b80aa2993848d8f4f7b66a055006cf53e6012751806a",
+          "item_sha256": "ecc76ec96029ca0723d7fc0f804afe13e6024a143c706639c7990b52aae49350",
+          "at": "2026-10-16T17:51:21.481Z"
+        }
+      },
+      {
+        "line": 2426,
+        "original_row": {
+          "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+          "model": "gpt-6.1-sol",
+          "keep": false,
+          "reason": "F2 and step 2.1 omit the butterfly lemma's hypothesis that every exact nonzero real intermediate is normal. The supplied algorithm interface does not establish that successful execution without range failures implies this condition.",
+          "context_sha256": "d4c201ab64bea5b18e853c06044e23d19f84290b0661a93eb48a74d0e2563564",
+          "item_sha256": "85f8134df75ce4dc729c9cd52ac29f6dfabc1fc7d45e5c6b0b2d5db74a36a10f",
+          "at": "2026-10-17T05:16:40.988Z"
+        }
+      }
+    ],
+    "qualification": "Original rows preserved verbatim, including their recorded hashes; no hash recomputation or alteration and no claim to have reconstructed what the judge read."
+  },
+  "actual_source_evidence": [
+    {
+      "file": "items/def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma.md",
+      "excerpt": "A procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index.",
+      "implication": "Success is not merely absence of IEEE exceptional numeric values. It is the explicit no-underflow contract needed by the butterfly lemma."
+    },
+    {
+      "file": "items/def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma.md",
+      "excerpt": "On every real exact result that is zero or normal, $\\operatorname{fl}$ uses this rule; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure.",
+      "implication": "A nonzero subnormal exact operation cannot be silently accepted even when the rounded output happens to be finite."
+    },
+    {
+      "file": "items/alg-na-computed-unitary-radix-two-fft.md",
+      "excerpt": "Use the same floating-point model instance throughout the recursion.",
+      "implication": "The success rule applies to every child FFT and each top butterfly, not only the final output vector."
+    },
+    {
+      "file": "items/alg-na-computed-unitary-radix-two-fft.md",
+      "excerpt": "Propagate any failed phase certificate; on arithmetic failure return the operationwise range status and index.",
+      "implication": "Global success implies successful arithmetic at every recursive stage."
+    },
+    {
+      "file": "items/lem-na-computed-unitary-butterfly-error-bound.md",
+      "excerpt": "If each exact nonzero real intermediate is normal and every operation succeeds under the operationwise model",
+      "implication": "Exactly these local hypotheses follow from the already assumed global successful execution."
+    }
+  ],
+  "focused_proof_reasoning": [
+    "The butterfly is exactly the six-real-operation product, componentwise sums/differences and rounded real sqrt scale prescribed by the FFT algorithm and operationwise model. There is no switch to gradual-underflow hardware semantics.",
+    "The global twiddle bound gives epsilon_k<=epsilon_tw<=1/4 at every local invocation; exact phase w has modulus one. The global unit-roundoff bound is u<=1/16. Together with inherited normality/success these instantiate every local lemma hypothesis.",
+    "The recursive even/odd input arrays use the same model and every child operation is part of the successful parent execution. Applying the child induction hypothesis therefore requires no extra assumption.",
+    "The local pair-error bounds square and sum over disjoint butterfly pairs; exact normalized blocks preserve norm. The unchanged recurrence rho_m=(1+eta)rho_(m-1)+eta retains the full ((1+eta)^m-1) bound.",
+    "Exact zeros remain permitted. No all-intermediates-nonzero or all-input-coordinates-normal restriction is introduced. The N=1 base case remains exact, and inverse conjugation uses the identical successful forward routine."
+  ],
+  "minimal_proposal": {
+    "purpose": "Make the inherited hypothesis explicit in F2 and the exact step that invokes it, so the native repair lane can resolve the stated objection without changing approved scope. This is proof exposition, not a newly established prerequisite or a claim that the theorem is false.",
+    "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-sol54-fft-normality-cycle1/before/items/thm-na-computed-unitary-radix-two-fft-error-bound.md",
+    "proposal_file": "research/numerical-optimization-dynamics-2026-10-16-owner-sol54-fft-normality-cycle1/proposed-proof-explication/items/thm-na-computed-unitary-radix-two-fft-error-bound.md",
+    "candidate_patch_file": "research/numerical-optimization-dynamics-2026-10-16-owner-sol54-fft-normality-cycle1/thm-na-computed-unitary-radix-two-fft-error-bound.diff",
+    "apply_only_if": "Complete actual source bytes equal the before file; root/native owner supplies hash binding and all adoption.",
+    "proposed_edits": [
+      {
+        "source_excerpt": "[F2] Every computed normalized butterfly differs from its exact block by at most $\\eta$ times the pair input norm ([[lem-na-computed-unitary-butterfly-error-bound]]).",
+        "proposed_replacement": "[F2] In the given successful execution, [[alg-na-computed-unitary-radix-two-fft]] uses its fixed operationwise model throughout the recursion. Its success rule requires every exact real intermediate to be zero or normal. Thus each butterfly meets the normal-intermediate and success hypotheses of [[lem-na-computed-unitary-butterfly-error-bound]], and its error is at most $\\eta$ times the pair input norm."
+      },
+      {
+        "source_excerpt": "For each $k$, [F2] bounds the top butterfly error by $\\eta$ times the norm of its computed input pair.",
+        "proposed_replacement": "For each $k$, the operationwise success rule in [F2] makes every exact nonzero real intermediate of the top butterfly normal; hence [F2] bounds its error by $\\eta$ times the norm of its computed input pair."
+      }
+    ],
+    "statement_changed": false,
+    "definition_changed": false,
+    "frontmatter_changed": false,
+    "new_supplier_needed": false
+  },
+  "consumer_dispositions": {
+    "mandatory_statement_definition_propagation": false,
+    "reason": "Only Facts/proof exposition is proposed; the FFT theorem Statement and every algorithm Definition remain byte-identical. Do not invent a consumer repair cascade.",
+    "actual_direct_consumer_read": {
+      "id": "thm-na-computed-fft-convolution-error-bound",
+      "read_scope": "Entire actual source, focused use of FFT estimate and operationwise success assumptions; not fresh native acceptance.",
+      "disposition": "Unchanged. Its Statement assumes all operations succeed and uses the same operationwise model through the convolution algorithm. F1 invokes exactly the unchanged forward/inverse FFT bound. The convolution algorithm was also fully read and returns only if every phase, recursion budget and arithmetic operation succeeds."
+    },
+    "home_page": "Fully read. It already says radix-two stability assumes normal-range successful operations and the stated twiddle conditions; no edit needed.",
+    "indirect_consumers": "No Statement/Definition change and no independent contradiction found in inspected actual use, so unchanged theorem interface stops propagation. No new indirect proof reading or review coverage claimed."
+  },
+  "actual_full_source_reads": [
+    "items/thm-na-computed-unitary-radix-two-fft-error-bound.md",
+    "items/alg-na-computed-unitary-radix-two-fft.md",
+    "items/lem-na-computed-unitary-butterfly-error-bound.md",
+    "items/def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma.md",
+    "items/def-standard-relative-floating-point-model-and-unit-roundoff.md",
+    "items/lem-na-complex-product-six-operation-roundoff-bound.md",
+    "items/thm-na-certified-unit-circle-phase-enclosure.md",
+    "items/thm-na-computed-fft-convolution-error-bound.md",
+    "items/alg-na-computed-fft-cyclic-and-linear-convolution.md",
+    "library/numerical-linear-algebra-and-approximation/computed-fast-transforms-and-convolution.md"
+  ],
+  "future_metadata_note": "If native 5.5 adopts proof exposition, its owner refreshes only the affected F2 source/derivation mirrors. No metadata proposals or canonical metadata writes performed here.",
+  "limitations": "No canonical/source/metadata/ledger/runtime edits, hashes, checks, tests, gates, native controls, dispatches or commits. Source inspection establishes current logical inheritance only, not fresh native judgment coverage or historical context reconstruction."
+}

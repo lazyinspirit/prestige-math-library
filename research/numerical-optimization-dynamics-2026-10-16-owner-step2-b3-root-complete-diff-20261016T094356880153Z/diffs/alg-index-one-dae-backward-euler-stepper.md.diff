@@ -1,0 +1,11 @@
+--- owner-before/items/alg-index-one-dae-backward-euler-stepper.md
++++ owner-proposed/items/alg-index-one-dae-backward-euler-stepper.md
+@@ -49,6 +49,6 @@
+ 
+ Use $(X_{n-1},Z_{n-1})$ as the Newton seed. Before calling Newton, if $(X_{n-1},Z_{n-1})\notin\mathcal T_{t_n}$, return invalid-trial with the already computed prefix. Otherwise call [[alg-finite-budget-newton-for-vector-residuals]] on $\mathcal R_n$ with residual tolerance $1$, budget $B$, and $\mathcal T_{t_n}$ as its evaluation domain. If the returned status is root and the candidate lies in $\mathcal T_{t_n}$, reevaluate $R_n$ once to retain both unscaled residuals, then append the candidate. Otherwise return the corresponding singular-Jacobian, invalid-trial, or iteration-budget-exhausted status and the already computed prefix. The input functions are defined on the selected tube, so no separate evaluation-failure branch is needed. If every step is accepted, return completed and the state sequence.
+ 
+-An accepted step satisfies $\|r^d_n\|_2\le\eta_d$ for the derivative residual $r^d_n=(X_n-X_{n-1})/h-f(t_n,X_n,Z_n)$, and $\|r^a_n\|_2\le\eta_a$ for the algebraic residual $r^a_n=g(t_n,X_n,Z_n)$. This follows because each block norm is at most the norm of their concatenation. root means only that the scaled residual tolerance was met; it does not assert an exact zero, uniqueness, Newton convergence from an arbitrary seed, or a discretization error bound.
++For recording, define the derivative residual $r^d_n=(X_n-X_{n-1})/h-f(t_n,X_n,Z_n)$ and the algebraic residual $r^a_n=g(t_n,X_n,Z_n)$. root means only that the scaled residual tolerance was met; it does not assert an exact zero, uniqueness, Newton convergence from an arbitrary seed, or a discretization error bound.
+ 
+-Each step solves a coupled block system with $d+m$ unknowns. At most $B$ Newton corrections and $B+1$ Newton residual evaluations are made per attempted step, plus at most one residual reevaluation to record the unscaled blocks after a root status. Each correction uses one solve with the current $(d+m)$-dimensional block Jacobian. Work per residual, Jacobian assembly, and linear solve depends on the backend.
++Use the coupled $(d+m)$-dimensional residual and its current block Jacobian. Record residual queries, Jacobian assemblies and correction solves separately; backend costs are not specified.

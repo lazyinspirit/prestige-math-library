@@ -1,0 +1,278 @@
+{
+  "group": "m",
+  "batches": ["106"],
+  "pages_read": [
+    "langevin-splittings-and-invariant-measure-error",
+    "langevin-splittings-and-invariant-measure-error-examples"
+  ],
+  "items_read": [
+    "def-underdamped-langevin-equation-and-canonical-gibbs-density",
+    "alg-baoab-underdamped-langevin-splitting",
+    "lem-exact-ornstein-uhlenbeck-momentum-substep",
+    "lem-stable-gaussian-autoregression-invariant-law",
+    "thm-underdamped-langevin-canonical-measure-is-stationary",
+    "thm-harmonic-baoab-invariant-law-and-stability-limit",
+    "lem-baoab-one-step-error-moment-bounds",
+    "thm-baoab-finite-time-strong-order-one",
+    "lem-baoab-one-step-weak-expansion",
+    "thm-baoab-finite-time-weak-order-two",
+    "ex-harmonic-baoab-thermostat-covariance",
+    "ex-unstable-baoab-step-has-no-invariant-law",
+    "ex-constant-potential-has-no-canonical-gibbs-probability",
+    "ex-ula-and-baoab-have-distinct-harmonic-variance-bias"
+  ],
+  "conventions": [
+    {
+      "convention": "M is symmetric positive definite, β and γ are positive, friction is −γp, and momentum noise covariance is 2γβ⁻¹M. The canonical momentum covariance is β⁻¹M.",
+      "fixed_by": "def-underdamped-langevin-equation-and-canonical-gibbs-density",
+      "matters_for": [
+        "lem-exact-ornstein-uhlenbeck-momentum-substep",
+        "thm-underdamped-langevin-canonical-measure-is-stationary",
+        "thm-harmonic-baoab-invariant-law-and-stability-limit"
+      ]
+    },
+    {
+      "convention": "BAOAB executes B/2, A/2, O, A/2, B/2 with h>0 and a fresh standard Gaussian vector independent of the current state and earlier draws.",
+      "fixed_by": "alg-baoab-underdamped-langevin-splitting",
+      "matters_for": [
+        "thm-harmonic-baoab-invariant-law-and-stability-limit",
+        "lem-baoab-one-step-error-moment-bounds",
+        "lem-baoab-one-step-weak-expansion"
+      ]
+    },
+    {
+      "convention": "C_b^k includes boundedness of the function itself and every continuous derivative through order k; C_P^k allows polynomial growth for each such derivative.",
+      "fixed_by": "def-underdamped-langevin-equation-and-canonical-gibbs-density",
+      "matters_for": [
+        "lem-baoab-one-step-weak-expansion",
+        "thm-baoab-finite-time-weak-order-two"
+      ]
+    },
+    {
+      "convention": "Strong comparison uses a common initial state and standardizes the exact OU Brownian integral on each grid interval to obtain the BAOAB Gaussian draw. The conclusion is the maximum of grid-point mean-square errors, not the expectation of a pathwise maximum.",
+      "fixed_by": "thm-baoab-finite-time-strong-order-one",
+      "matters_for": [
+        "thm-baoab-finite-time-strong-order-one"
+      ]
+    },
+    {
+      "convention": "The harmonic stable range is strictly 0<h<2√(m/k). At equality the spectral radius is one; absence of any invariant probability is asserted only above the threshold.",
+      "fixed_by": "thm-harmonic-baoab-invariant-law-and-stability-limit",
+      "matters_for": [
+        "ex-harmonic-baoab-thermostat-covariance",
+        "ex-unstable-baoab-step-has-no-invariant-law",
+        "ex-ula-and-baoab-have-distinct-harmonic-variance-bias"
+      ]
+    },
+    {
+      "convention": "Canonical Gibbs probability is defined only when its phase-space normalizer is finite and positive. Its definition alone asserts no stationarity or ergodicity.",
+      "fixed_by": "def-underdamped-langevin-equation-and-canonical-gibbs-density",
+      "matters_for": [
+        "thm-underdamped-langevin-canonical-measure-is-stationary",
+        "ex-constant-potential-has-no-canonical-gibbs-probability"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-baoab-underdamped-langevin-splitting",
+      "statement": "Given valid model data, state (q_n,p_n), h>0 and a fresh independent ξ_n∼N_d(0,I_d), execute the specified B half kick, A half drift, exact O thermostat, A half drift and B half kick; output (q_{n+1},p_{n+1}).",
+      "used_by": [
+        "thm-harmonic-baoab-invariant-law-and-stability-limit",
+        "lem-baoab-one-step-error-moment-bounds",
+        "lem-baoab-one-step-weak-expansion",
+        "thm-baoab-finite-time-strong-order-one",
+        "thm-baoab-finite-time-weak-order-two"
+      ]
+    },
+    {
+      "id": "lem-exact-ornstein-uhlenbeck-momentum-substep",
+      "statement": "For h>0, the O transition has conditional mean e^(−γh)P_0 and covariance β⁻¹(1−e^(−2γh))M, with Gaussian innovation independent of the starting sigma algebra.",
+      "used_by": [
+        "thm-harmonic-baoab-invariant-law-and-stability-limit",
+        "lem-baoab-one-step-error-moment-bounds",
+        "thm-baoab-finite-time-strong-order-one",
+        "lem-baoab-one-step-weak-expansion"
+      ]
+    },
+    {
+      "id": "lem-stable-gaussian-autoregression-invariant-law",
+      "statement": "Assume AC and finite-dimensional matrices A,G with ||A^n||≤Cθ^n for all n≥0, where 0<θ<1. The Gaussian recursion Z_{n+1}=AZ_n+Gξ_{n+1} has unique invariant probability N_d(0,P), where P=Σ_{j≥0}A^jGGᵀ(Aᵀ)^j is also the unique finite matrix solution of P=APAᵀ+GGᵀ.",
+      "used_by": [
+        "thm-harmonic-baoab-invariant-law-and-stability-limit"
+      ]
+    },
+    {
+      "id": "thm-harmonic-baoab-invariant-law-and-stability-limit",
+      "statement": "For d=1, M=m>0, V(q)=kq²/2 with k>0, and β,γ,h>0, the strict stable range h<2√(m/k) has unique invariant Gaussian with position variance 1/(βk), momentum variance (m/β)(1−h²k/(4m)), and zero covariance. The spectral radius equals one at the threshold; above it no invariant probability exists.",
+      "used_by": [
+        "ex-harmonic-baoab-thermostat-covariance",
+        "ex-unstable-baoab-step-has-no-invariant-law",
+        "ex-ula-and-baoab-have-distinct-harmonic-variance-bias"
+      ]
+    },
+    {
+      "id": "lem-baoab-one-step-error-moment-bounds",
+      "statement": "For globally Lipschitz, linearly growing F=−∇V with bounded first and second derivatives, and 0<h≤1, exact and OU-coupled BAOAB residuals relative to z+hb(z)+GΔW have conditional means bounded by Ch²(1+|z|) and conditional second moments bounded by Ch³(1+|z|²). The same-noise BAOAB residual is Ch-Lipschitz in z.",
+      "used_by": [
+        "thm-baoab-finite-time-strong-order-one"
+      ]
+    },
+    {
+      "id": "lem-baoab-one-step-weak-expansion",
+      "statement": "For V∈C⁸ with linearly growing gradient and bounded D^jV for 2≤j≤8, and φ∈C_P⁶, |K_hφ(z)−P_hφ(z)|≤Ch³(1+|z|^r) for 0<h≤1. For a uniformly bounded C_b⁶ test family one may take r=3 with a uniform constant.",
+      "used_by": [
+        "thm-baoab-finite-time-weak-order-two"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Declared inherited choice assumptions for stochastic, Gaussian and measure interfaces.",
+      "opened": true
+    },
+    {
+      "id": "def-d-dimensional-brownian-motion",
+      "used_for": "Vector Brownian increments, coordinate independence and continuity conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-ito-sde-and-strong-solution",
+      "used_for": "Usual filtered space, finite-second-moment initial data and strong-solution interpretation.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Scalar normal inputs, including zero-variance laws.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian vector construction, singular covariances and projection characterization.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "used_for": "The positive square root of the mass matrix and Gaussian covariance factors.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Meaning of normalized Gibbs probability.",
+      "opened": true
+    },
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "used_for": "Reference measure for canonical Gibbs density.",
+      "opened": true
+    },
+    {
+      "id": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+      "used_for": "A nonnegative normalized density defines a probability measure.",
+      "opened": true
+    },
+    {
+      "id": "thm-multidimensional-ito-formula-for-brownian-driven-processes",
+      "used_for": "OU integrating factor, Langevin generator, localized moment estimates and repeated weak integral identities.",
+      "opened": true
+    },
+    {
+      "id": "cor-deterministic-ito-integrals-are-gaussian",
+      "used_for": "Gaussian OU innovations and covariance estimates for deterministic Brownian integrands.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independence conventions in the Gaussian autoregression.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Independent Gaussian and initial-state realizations on finite product spaces.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-function-of-a-multivariate-normal-law",
+      "used_for": "Gaussian transforms and uniqueness of a law having the displayed Gaussian vector transform.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+      "used_for": "Transform calculations through scalar projections of affine Gaussian updates.",
+      "opened": true
+    },
+    {
+      "id": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+      "used_for": "Scalar characteristic-function uniqueness.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Continuity of characteristic functions, cutoff limits and differentiation under bounded flow estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+      "used_for": "Identifying phase-space Lebesgue integrals with product integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Factoring the nonnegative Gibbs integrand and its moment integrals.",
+      "opened": true
+    },
+    {
+      "id": "lem-positive-definite-gaussian-integral",
+      "used_for": "Momentum normalizer and canonical harmonic Gaussian normalizers.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-by-parts",
+      "used_for": "Compact-coordinate integration by parts in stationarity and harmonic second-moment calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+      "used_for": "Strong existence, uniqueness and finite-second-moment bounds under globally Lipschitz, linearly growing coefficients.",
+      "opened": true
+    },
+    {
+      "id": "thm-cramer-wold-device",
+      "used_for": "Identifying finite-dimensional laws from their scalar projections in Gibbs stationarity; checking the vector uniqueness issue in the autoregression citation.",
+      "opened": true
+    },
+    {
+      "id": "thm-fatou-lemma",
+      "used_for": "Removing localization in polynomial Lyapunov moment estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-ula-gaussian-target-invariant-law-and-stationary-variance",
+      "used_for": "The comparison example uses its invariant variance 2/(2−η) for 0<η<2, without strengthening its uniqueness conclusion.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-stable-gaussian-autoregression-invariant-law",
+      "concern": "F4 attributes “equality of vector characteristic functions identifies the Borel probability law” to thm-uniqueness-of-a-law-from-its-characteristic-function, whose Statement covers laws on R only. The needed Gaussian-vector uniqueness is already available from the lemma cited in F1: lem-characteristic-function-of-a-multivariate-normal-law explicitly proves uniqueness among arbitrary laws with that Gaussian transform. Thus the argument is supported, but F4's attribution is stronger than its named supplier.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "langevin-splittings-and-invariant-measure-error",
+      "to": "milstein-stochastic-taylor-and-iterated-integrals",
+      "faithful": true,
+      "note": "Checked both page descriptions and the stochastic local-to-global RMS supplier. BAOAB proves its own moment-weighted recurrence rather than invoking the Milstein supplier's stronger pointwise residual hypothesis. No converse or stronger citation is asserted."
+    },
+    {
+      "from": "langevin-splittings-and-invariant-measure-error",
+      "to": "imex-and-operator-splitting-methods",
+      "faithful": true,
+      "note": "Checked both page descriptions and the Lie/Strang local expansion. The deterministic finite-dimensional splitting theorem is not applied to stochastic generators; BAOAB supplies its own three-generator weak expansion and moment justification. No reverse dependence or unsupported transfer of deterministic order is asserted."
+    }
+  ]
+}

@@ -1,0 +1,2051 @@
+{
+  "version": 1,
+  "level": 6,
+  "scope": [
+    "lem-one-dimensional-p1-interpolation-error",
+    "lem-one-dimensional-zero-boundary-poincare",
+    "lem-discrete-form-perturbation-preserves-coercivity",
+    "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+    "thm-second-strang-lemma-for-nonconforming-galerkin",
+    "lem-geometry-tensor-gap-bounds-cellwise-form-defect",
+    "lem-midpoint-quadrature-defect-for-p1-stiffness",
+    "cor-midpoint-quadrature-strang-error-for-p1",
+    "cor-perturbed-conforming-galerkin-bound-from-cea",
+    "cor-shape-regular-fe-strang-error-bound",
+    "ex-midpoint-underintegrated-p2-stiffness-loses-coercivity",
+    "ex-nonconforming-residual-breaks-galerkin-orthogonality",
+    "ex-two-node-gauss-polynomial-exactness-and-x4-error"
+  ],
+  "contracts": {
+    "lem-one-dimensional-p1-interpolation-error": {
+      "risk": "The bound is one-dimensional, uses C2 regularity and an L-infinity second-derivative bound; it is not a multidimensional Sobolev estimate.",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-extreme-value-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be **nonempty** and compact\n([[def-open-cover-r]]). Then $\\sup f[K]$ and $\\inf f[K]$ exist and are\n**attained**: there are $p, q \\in K$ with",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a cell $K=[a,b]=[x_j,x_{j+1}]$ of length $h_K$. Its interpolant slope is $s_K=(u(b)-u(a))/h_K=h_K^{-1}\\int_a^bu'(t)\\,dt$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $x\\in K$, $u'(x)-s_K=h_K^{-1}\\int_a^b(u'(x)-u'(t))\\,dt$. A second use of [F1] and then [F2] gives $|u'(x)-u'(t)|\\le\\|u''\\|_\\infty|x-t|\\le h_K\\|u''\\|_\\infty$, hence $|u'(x)-s_K|\\le h_K\\|u''\\|_\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The continuous function $|u''|$ has a finite maximum by [F4]. Integrating the squared pointwise bound from step 2.1 over $K$ gives $\\int_K|(u-I_hu)'|^2\\le h_K^3\\|u''\\|_\\infty^2$. Repeated application of [F3], by induction on the number of cells, sums the integrals over the finite partition. Using $h_K\\le h$ and $\\sum_Kh_K=1$ gives $\\|(u-I_hu)'\\|_2^2\\le h^2\\|u''\\|_\\infty^2$. Taking nonnegative square roots proves the estimate; endpoint values follow from the nodal definition.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-set premise or empty-set conclusion; this case is not part of its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the estimate is homogeneous and its proof also holds for u=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: a one-cell partition is allowed and the estimate remains the same."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement imposes no degeneracy case beyond the explicitly recorded zero and invertibility cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies that the interpolant takes the prescribed nodal endpoint values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice-dependent existence or selection branch is used in this proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "disposition": "author-review-required",
+        "evidence": "The bound is one-dimensional, uses C2 regularity and an L-infinity second-derivative bound; it is not a multidimensional Sobolev estimate."
+      }
+    },
+    "lem-one-dimensional-zero-boundary-poincare": {
+      "risk": "The sharp constant 1 is for the unit interval and the H0^1 closure; it is not a statement about arbitrary boundary traces or domains.",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $\\varphi\\in C_c^\\infty(0,1)$, [F2] gives $\\varphi(x)=\\int_0^x\\varphi'(t)\\,dt$. Hence $|\\varphi(x)|\\le\\int_0^1|\\varphi'(t)|\\,dt\\le\\|\\varphi'\\|_2$ by [F3]; integrating this pointwise bound over an interval of length one yields $\\|\\varphi\\|_2\\le\\|\\varphi'\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Given $\\varepsilon>0$, choose $\\varphi$ by [F1]. The triangle inequality and step 1.1 give $\\|v\\|_2\\le\\|\\varphi\\|_2+\\varepsilon\\le\\|\\varphi'\\|_2+\\varepsilon\\le\\|v'\\|_2+2\\varepsilon$. Since this holds for every positive $\\varepsilon$, $\\|v\\|_2\\le\\|v'\\|_2$. By [F4], squaring and adding the derivative norm proves the $H^1$ estimate.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-set premise or empty-set conclusion; this case is not part of its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the inequality for the zero smooth approximant; step 2.1 passes it to v=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies on the length-one interval."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers v=0 as an element of the closed Sobolev subspace."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the compact support condition; step 2.1 passes the estimate through the closure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice-dependent existence or selection branch is used in this proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "disposition": "author-review-required",
+        "evidence": "The sharp constant 1 is for the unit interval and the H0^1 closure; it is not a statement about arbitrary boundary traces or domains."
+      }
+    },
+    "lem-discrete-form-perturbation-preserves-coercivity": {
+      "risk": "Only a diagonal defect bound is assumed; no off-diagonal continuity or symmetry follows from it.",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $v_h\\in V_h$. By coercivity [F1] and the defect hypothesis [A1], $\\operatorname{Re}a_h(v_h,v_h)=\\operatorname{Re}a(v_h,v_h)+\\operatorname{Re}(a_h(v_h,v_h)-a(v_h,v_h))\\ge(\\alpha-\\eta_h)\\|v_h\\|_V^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\eta_h<\\alpha$, then $\\alpha-\\eta_h>0$, so the inequality in step 1.1 is precisely coercivity with that constant. If $\\eta_h\\le\\alpha/2$, then $\\alpha-\\eta_h\\ge\\alpha/2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-set premise or empty-set conclusion; this case is not part of its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 holds for vh=0, with both sides zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is valid for each vh, including a one-dimensional subspace."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement includes the zero vector, for which coercivity inequality is 0≥0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim makes no endpoint equivalence or endpoint trace assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice-dependent existence or selection branch is used in this proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "disposition": "author-review-required",
+        "evidence": "Only a diagonal defect bound is assumed; no off-diagonal continuity or symmetry follows from it."
+      }
+    },
+    "thm-first-strang-lemma-for-conforming-perturbed-galerkin": {
+      "risk": "The estimate retains the actual form and load defects and requires discrete coercivity; no mesh-uniform stability or data-oscillation rate is inferred.",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lax-milgram",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a real or complex Hilbert space, let $a$ be a bounded coercive sesquilinear form on $H$ with constants $M,\\alpha$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F:H\\to\\mathbb K$ be a bounded conjugate-linear functional with norm $\\|F\\|=\\sup_{\\|v\\|\\le1}|F(v)|$. Then there is a unique $u\\in H$ with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H,$$ and it satisfies $\\alpha\\|u\\|\\le\\|F\\|$, that is $\\|u\\|\\le\\|F\\|/\\alpha$. The real bilinear case is the same statement with $a$ symmetric or not, $F$ a bounded linear functional, and the conjugation read as the identity.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-dimensional-subspaces-are-closed",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and let\n$W\\subseteq V$ be a normed subspace over that same field: use [[def-normed-subspace]] for $\\mathbb R$ and [[def-complex-normed-subspace]] for $\\mathbb C$. If $W$ admits an ordered basis of finite\nlength, including length zero, then $W$ is closed in $V$. This holds in ZF,\nwithout a choice axiom; the ambient space need not be complete.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-variational-crime-error-framework",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. In the **exact variational problem**, $V$ is a Hilbert space, $a:V\\times V\\to\\mathbb K$ is a bounded coercive sesquilinear form (bilinear when $\\mathbb K=\\mathbb R$), linear in its first argument and conjugate-linear in its second when $\\mathbb K=\\mathbb C$, and $F:V\\to\\mathbb K$ is bounded and has the same linearity in its test argument as the second argument of $a$. Exact solutions satisfy $a(u,v)=F(v)$ for every $v\\in V$. Boundedness and coercivity have the meanings in [[def-bounded-coercive-and-symmetric-sesquilinear-forms]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The hypotheses on $V,a,F$ are exactly those of [F2], so [F2] gives a unique $u\\in V$ satisfying $a(u,v)=F(v)$ for every $v\\in V$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3], $V_h$ is closed in $V$, hence complete in its inherited Hilbert norm. The restriction of $a_h$ is bounded and coercive by [A1], and $F_h$ is bounded; applying [F2] on $V_h$ gives a unique $u_h\\in V_h$ with $a_h(u_h,w_h)=F_h(w_h)$ for every $w_h\\in V_h$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix any $v_h\\in V_h$ and put $e_h:=u_h-v_h$. Discrete coercivity and the discrete equation give $\\alpha_h\\|e_h\\|_V^2\\le\\operatorname{Re}a_h(e_h,e_h)=\\operatorname{Re}(F_h(e_h)-a_h(v_h,e_h))$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $e_h\\in V_h\\subseteq V$, the exact equation gives $F(e_h)=a(u,e_h)$, and $F_h(e_h)-a_h(v_h,e_h)=[F_h(e_h)-F(e_h)]+a(u-v_h,e_h)+[a(v_h,e_h)-a_h(v_h,e_h)]$. The boundedness of $a$ [F1] and the defect definitions [F4] therefore imply $\\alpha_h\\|e_h\\|_V^2\\le\\left(\\delta_{F,h}+M\\|u-v_h\\|_V+\\delta_{a,h}(v_h)\\right)\\|e_h\\|_V$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $e_h=0$ the comparison is immediate; otherwise divide step 3.1 by $\\alpha_h\\|e_h\\|_V$ and use $\\|u-u_h\\|_V\\le\\|u-v_h\\|_V+\\|e_h\\|_V$. This proves the displayed bound for each $v_h$, and taking the infimum proves the theorem.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-set premise or empty-set conclusion; this case is not part of its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: when Vh={0}, both defects are defined as zero; step 4.1 handles eh=0 before division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 treats any fixed comparison vh; the theorem has no mesh-count restriction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement explicitly defines defects as zero for the degenerate trial space Vh={0}."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim makes no endpoint equivalence or endpoint trace assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use Countable Choice only through the cited Lax–Milgram theorem; no choice over meshes or comparison functions is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "disposition": "author-review-required",
+        "evidence": "The estimate retains the actual form and load defects and requires discrete coercivity; no mesh-uniform stability or data-oscillation rate is inferred."
+      }
+    },
+    "thm-second-strang-lemma-for-nonconforming-galerkin": {
+      "risk": "The bounded extension on V+Vh is essential and is not supplied for every nonconforming, penalty, or DG method.",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-lax-milgram",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a real or complex Hilbert space, let $a$ be a bounded coercive sesquilinear form on $H$ with constants $M,\\alpha$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F:H\\to\\mathbb K$ be a bounded conjugate-linear functional with norm $\\|F\\|=\\sup_{\\|v\\|\\le1}|F(v)|$. Then there is a unique $u\\in H$ with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H,$$ and it satisfies $\\alpha\\|u\\|\\le\\|F\\|$, that is $\\|u\\|\\le\\|F\\|/\\alpha$. The real bilinear case is the same statement with $a$ symmetric or not, $F$ a bounded linear functional, and the conjugation read as the identity.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-variational-crime-error-framework",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. In the **exact variational problem**, $V$ is a Hilbert space, $a:V\\times V\\to\\mathbb K$ is a bounded coercive sesquilinear form (bilinear when $\\mathbb K=\\mathbb R$), linear in its first argument and conjugate-linear in its second when $\\mathbb K=\\mathbb C$, and $F:V\\to\\mathbb K$ is bounded and has the same linearity in its test argument as the second argument of $a$. Exact solutions satisfy $a(u,v)=F(v)$ for every $v\\in V$. Boundedness and coercivity have the meanings in [[def-bounded-coercive-and-symmetric-sesquilinear-forms]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-variational-crime-error-framework",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. In the **exact variational problem**, $V$ is a Hilbert space, $a:V\\times V\\to\\mathbb K$ is a bounded coercive sesquilinear form (bilinear when $\\mathbb K=\\mathbb R$), linear in its first argument and conjugate-linear in its second when $\\mathbb K=\\mathbb C$, and $F:V\\to\\mathbb K$ is bounded and has the same linearity in its test argument as the second argument of $a$. Exact solutions satisfy $a(u,v)=F(v)$ for every $v\\in V$. Boundedness and coercivity have the meanings in [[def-bounded-coercive-and-symmetric-sesquilinear-forms]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] on $V$ to obtain the unique exact solution $u$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The finite-dimensional Hilbert problem on $V_h$ has bounded coercive form $a_h$ and bounded load $F_h$, so the same Lax–Milgram theorem [F1] gives a unique $u_h\\in V_h$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $v_h\\in V_h$ and set $e_h:=u_h-v_h$. Then $e_h\\in V_h$, and [A1] gives $\\alpha_h\\|e_h\\|_h^2\\le\\operatorname{Re}a_h(e_h,e_h)=\\operatorname{Re}(F_h(e_h)-\\widetilde a_h(v_h,e_h))$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the discrete equation and extension identity, $a_h(e_h,e_h)=\\widetilde a_h(u-v_h,e_h)+F_h(e_h)-\\widetilde a_h(u,e_h)$. The extension bound [F2] and residual definition [A2] therefore give $\\alpha_h\\|e_h\\|_h^2\\le(M_h\\|u-v_h\\|_h+\\delta_h^{\\mathrm{nc}}(u))\\|e_h\\|_h$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "A1",
+            "A2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $e_h=0$ there is nothing to divide by; otherwise divide step 3.1 by $\\alpha_h\\|e_h\\|_h$. The triangle inequality gives $\\|u-u_h\\|_h\\le(1+M_h/\\alpha_h)\\|u-v_h\\|_h+\\delta_h^{\\mathrm{nc}}(u)/\\alpha_h$. Taking the infimum over $v_h$ proves the assertion.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-set premise or empty-set conclusion; this case is not part of its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the consistency defect is zero when Vh={0}; step 4.1 handles eh=0 before division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 treats any fixed comparison vh; the theorem has no mesh-count restriction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement explicitly defines the residual as zero for Vh={0}."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim makes no endpoint equivalence or endpoint trace assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use Countable Choice only through Lax–Milgram; the approximation bound fixes arbitrary vh."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "disposition": "author-review-required",
+        "evidence": "The bounded extension on V+Vh is essential and is not supplied for every nonconforming, penalty, or DG method."
+      }
+    },
+    "lem-geometry-tensor-gap-bounds-cellwise-form-defect": {
+      "risk": "The pullback is stated for real C1 physical functions with finite energy; the geometry rate is separately assumed and the stability threshold is conditional.",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-geometry-lift-and-tensor-discrepancy",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega_h,\\Omega\\subseteq\\mathbb R^d$ be open, and let $\\Phi_h:\\Omega_h\\to\\Omega$ be a $C^1$ diffeomorphism. Write $J_h(y):=|\\det D\\Phi_h(y)|>0$. Let $A:\\Omega\\to\\mathbb R^{d\\times d}$ be Lebesgue measurable, real symmetric almost everywhere, and satisfy $\\lambda I\\preceq A(x)\\preceq\\Lambda I$ almost everywhere, for constants $0<\\lambda\\le\\Lambda<\\infty$. The physical exact form on real-valued functions with square-integrable gradients is $a(U,W):=\\int_\\Omega\\nabla U(x)^TA(x)\\nabla W(x)\\,dx$. The pulled-back exact tensor and form are",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-discrete-form-perturbation-preserves-coercivity",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a Hilbert space and let $V_h\\subseteq V$ be a subspace. Suppose the exact form $a$ is coercive with constant $\\alpha>0$ in the norm $\\|\\cdot\\|_V$. Let $a_h$ be a discrete form on $V_h$ and suppose",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $v=U\\circ\\Phi_h$ and $w=W\\circ\\Phi_h$. By [F2], $\\nabla U\\circ\\Phi_h=D\\Phi_h^{-T}\\nabla v$ and likewise for $W$. Under the Countable Choice hypothesis [A3], apply [F3] to the nonnegative measurable energy density $\\nabla U^TA\\nabla U$ to obtain $a(U,U)=a_h^{\\mathrm{lift}}(v,v)$; the same applies to $W$ and $U+W$. Since $A$ and $B_h$ are symmetric, the real polarization identity $2a(U,W)=a(U+W,U+W)-a(U,U)-a(W,W)$ yields $a(U,W)=a_h^{\\mathrm{lift}}(v,w)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On each cell, the operator-norm definition and integral Cauchy–Schwarz [F4] give $|\\int_K\\nabla v^T(B_h-\\widetilde B_h)\\nabla w|\\le\\eta_{G,K}\\|\\nabla v\\|_{L^2(K)}\\|\\nabla w\\|_{L^2(K)}$. Summing over cells and using $\\eta_{G,K}\\le\\eta_G$ together with finite Cauchy–Schwarz [F4] proves both displayed form-defect bounds; under [A2], $\\eta_G\\le C_Gh^s$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For every vector $\\xi$, [A1] and $A\\succeq\\lambda I$ imply $\\xi^TB_h\\xi=J_h(D\\Phi_h^{-T}\\xi)^TA(\\Phi_h)(D\\Phi_h^{-T}\\xi)\\ge j_-\\lambda\\|D\\Phi_h^{-T}\\xi\\|^2\\ge(j_-\\lambda/L^2)\\|\\xi\\|^2$. Thus $B_h\\succeq\\beta I$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The diagonal estimate in step 1.2 has constant $\\eta_G$. On $Z_h$, the exact lifted form is coercive with constant $\\beta$ by step 1.3 and [F6]. Apply [F5] with $V=V_h=Z_h$ to obtain coercivity of the implemented form with constant at least $\\beta-\\eta_G\\ge\\beta/2$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "given",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-set premise or empty-set conclusion; this case is not part of its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 4.1 hold for a zero gradient and the coercivity estimate is a homogeneous inequality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 applies to a partition with one cell; the finite Cauchy–Schwarz inequality then has one term."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Assumption that Phi is a diffeomorphism excludes a singular Jacobian; step 1.3 uses only invertible derivatives."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim makes no endpoint equivalence or endpoint trace assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the stated Countable-Choice change-of-variables supplier; subsequent finite sums use no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "disposition": "author-review-required",
+        "evidence": "The pullback is stated for real C1 physical functions with finite energy; the geometry rate is separately assumed and the stability threshold is conditional."
+      }
+    },
+    "lem-midpoint-quadrature-defect-for-p1-stiffness": {
+      "risk": "The defect is one-dimensional P1 with a C2 coefficient; it is an exact-arithmetic bound, not a roundoff estimate.",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-composite-midpoint-rule",
+          "source_section": "Definition",
+          "quote": "Input real numbers $a<b$, an integer $n\\ge1$, and a real-valued function\n$f:[a,b]\\to\\mathbb R$ evaluable at every point of $[a,b]$. Put\n$h=(b-a)/n$ and $m_j=a+(j+\\tfrac12)h$ for $0\\le j<n$. The composite midpoint\nrule returns",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-composite-midpoint-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $a<b$, let $n\\ge1$ be an integer, and put $h=(b-a)/n$. If\n$f\\in C^2([a,b])$, define $M_2=\\max_{x\\in[a,b]}|f''(x)|$. The composite\nmidpoint value $Q_M(f;a,b,n)$ of [[alg-composite-midpoint-rule]] satisfies",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "Let $a < c < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded\n([[def-bounded-set]]). Then:",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-triangle-inequality-finite",
+          "source_section": "Statement",
+          "quote": "Let $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals and $n \\in \\mathbb{N}$,\nwith finite sums as in [[def-finite-sum]] and the absolute value as in\n[[def-abs-value]]. Then",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-extreme-value-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be **nonempty** and compact\n([[def-open-cover-r]]). Then $\\sup f[K]$ and $\\inf f[K]$ exist and are\n**attained**: there are $p, q \\in K$ with",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On a cell $K$, $v_h'|_K$ and $w_h'|_K$ are constants, so $g_K(x):=A(x)v_h'|_Kw_h'|_K$ is $C^2$; the discrete sample is the one-panel midpoint rule [F1]. Also $\\|g_K''\\|_\\infty\\le\\|A''\\|_\\infty|v_h'|_K|w_h'|_K$. Applying [F2] with $n=1$ bounds the cell error by $h_K^3\\|A''\\|_\\infty|v_h'|_K|w_h'|_K/24$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\|v_h'\\|_{L^2(K)}=\\sqrt{h_K}|v_h'|_K$ and similarly for $w_h$, step 1.1 equals at most $h_K^2\\|A''\\|_\\infty\\|v_h'\\|_{L^2(K)}\\|w_h'\\|_{L^2(K)}/24$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Repeated application of [F3], by induction over the finite partition, expresses the total form difference as the sum of cell errors. Then [F4] and step 2.1 bound its absolute value by $h^2\\|A''\\|_\\infty/24$ times $\\sum_K\\|v_h'\\|_{L^2(K)}\\|w_h'\\|_{L^2(K)}$. Apply [F5] to these finite cell-norm lists; the result is the displayed global estimate.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-set premise or empty-set conclusion; this case is not part of its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 has zero cell error when either derivative is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to one cell, and step 3.1 then has a one-term cell sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement imposes no degeneracy case beyond the explicitly recorded zero and invertibility cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim makes no endpoint equivalence or endpoint trace assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice-dependent existence or selection branch is used in this proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "disposition": "author-review-required",
+        "evidence": "The defect is one-dimensional P1 with a C2 coefficient; it is an exact-arithmetic bound, not a roundoff estimate."
+      }
+    },
+    "cor-midpoint-quadrature-strang-error-for-p1": {
+      "risk": "The rate requires the stated smooth exact solution and the full load defect remains; sampled positivity applies to this scalar P1 form only.",
+      "kind": "corollary",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-w-one-two-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. On $H^1(\\Omega)=W^{1,2}(\\Omega;\\mathbb K)$ ([[def-sobolev-space-wkp-and-its-norm]], [[def-hk-and-hk-zero-notation]]) define $$(u,v)_{H^1}:=(u,v)_{L^2}+\\sum_{i=1}^n(D_iu,D_iv)_{L^2},$$ with the $L^2$ inner product of [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. Then $(\\cdot,\\cdot)_{H^1}$ is an inner product on the Sobolev classes whose induced norm is the $W^{1,2}$ norm of [[def-sobolev-space-wkp-and-its-norm]], and $H^1(\\Omega)$ is a Hilbert space for it. The zero-boundary space $H^1_0(\\Omega)$ is a closed subspace of $H^1(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]]) and hence a Hilbert space for the restricted inner product. The pairing is linear in the first argument and conjugate-linear in the second, in the convention of [[def-real-and-complex-inner-product-space]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-wkp-zero-as-a-sobolev-closure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, let $1\\le p\\le\\infty$, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-one-dimensional-zero-boundary-poincare",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For every real $v\\in H^1_0(0,1)$,",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-one-dimensional-p1-interpolation-error",
+          "source_section": "Statement",
+          "quote": "Let $0=x_0<x_1<\\cdots<x_N=1$ be a finite interval partition, $h:=\\max_j(x_{j+1}-x_j)$, and $u\\in C^2([0,1])$. Let $I_hu$ be the continuous piecewise-linear function with nodal values $I_hu(x_j)=u(x_j)$. Then",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-midpoint-quadrature-defect-for-p1-stiffness",
+          "source_section": "Statement",
+          "quote": "Let $0=x_0<\\cdots<x_N=1$ be a finite partition with cell lengths $h_K$ and maximum $h$. Let $A\\in C^2([0,1])$, and let $v_h,w_h$ be continuous piecewise-linear functions. Define the exact and midpoint stiffness forms by",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space, $a:V\\times V\\to\\mathbb K$ a bounded coercive form with boundedness constant $M$ and coercivity constant $\\alpha>0$, and $F:V\\to\\mathbb K$ a bounded functional linear in the real case and conjugate-linear in the complex test argument. Let $V_h\\subseteq V$ be finite-dimensional, and let $a_h:V_h\\times V_h\\to\\mathbb K$ and $F_h:V_h\\to\\mathbb K$ be bounded, with $F_h$ having the same test-linearity as $F$, and $a_h$ coercive with constant $\\alpha_h>0$ in the inherited norm. There are unique exact and discrete solutions $u$ and $u_h$, and",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $\\|v\\|_{H^1}^2=\\|v\\|_2^2+\\|v'\\|_2^2\\le2\\|v'\\|_2^2$. Hence $a$ is bounded by $M$ in the $H^1$ norm and coercive with constant $\\alpha/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On each cell $K$, $A(m_K)\\ge\\alpha$, so $a_h(v_h,v_h)=\\sum_Kh_KA(m_K)|v_h'|_K^2\\ge\\alpha\\|v_h'\\|_2^2$. By [F2], $\\|v_h\\|_{H^1}^2\\le2\\|v_h'\\|_2^2$, hence $a_h(v_h,v_h)\\ge(\\alpha/2)\\|v_h\\|_{H^1}^2$ and $\\alpha_h\\ge\\alpha/2$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By [F3] and [F2], $\\|u-I_hu\\|_{H^1}\\le\\sqrt2\\|(u-I_hu)'\\|_2\\le\\sqrt2h\\|u''\\|_\\infty$. Also the triangle inequality gives $\\|(I_hu)'\\|_2\\le\\|u'\\|_2+h\\|u''\\|_\\infty$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F5] with comparison function $I_hu$. Its best-approximation term is bounded by step 1.3; [F4] bounds its form defect by $C_Ah^2(\\|u'\\|_2+h\\|u''\\|_\\infty)/24$ because $\\|w_h'\\|_2\\le\\|w_h\\|_{H^1}$. The load defect is exactly $\\delta_{F,h}$ by [A1].",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "A1",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitute $M$ from step 1.1 and $\\alpha_h\\ge\\alpha/2$ from step 1.2 into the first-Strang bound in step 2.1. This gives the displayed estimate and retains the full load defect.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-set premise or empty-set conclusion; this case is not part of its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 give the zero-function estimates; step 3.1 remains valid when u=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.2–3.1 allow a partition with one cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 remain valid for the zero trial vector and zero exact solution."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim makes no endpoint equivalence or endpoint trace assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses Countable Choice through the H0^1 Hilbert-space and Lax–Milgram suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "disposition": "author-review-required",
+        "evidence": "The rate requires the stated smooth exact solution and the full load defect remains; sampled positivity applies to this scalar P1 form only."
+      }
+    },
+    "cor-perturbed-conforming-galerkin-bound-from-cea": {
+      "risk": "The baseline requires a Hermitian exact conforming Galerkin problem; the residual is computed from the actual perturbed form and load.",
+      "kind": "corollary",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-symmetric-galerkin-best-approximation-in-energy-norm",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses and notation of\n[[thm-cea-quasi-optimality-for-conforming-galerkin-approximations]], and\nsuppose additionally that $a$ is Hermitian:\n$a(v,w)=\\overline{a(w,v)}$. Then\n$$\\|v\\|_a:=\\sqrt{a(v,v)}$$\nis the energy norm and the Galerkin solution is its best approximation:\n$$\\|u-u_h\\|_a=\\inf_{v_h\\in V_h}\\|u-v_h\\|_a.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lax-milgram",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a real or complex Hilbert space, let $a$ be a bounded coercive sesquilinear form on $H$ with constants $M,\\alpha$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F:H\\to\\mathbb K$ be a bounded conjugate-linear functional with norm $\\|F\\|=\\sup_{\\|v\\|\\le1}|F(v)|$. Then there is a unique $u\\in H$ with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H,$$ and it satisfies $\\alpha\\|u\\|\\le\\|F\\|$, that is $\\|u\\|\\le\\|F\\|/\\alpha$. The real bilinear case is the same statement with $a$ symmetric or not, $F$ a bounded linear functional, and the conjugation read as the identity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a real or complex Hilbert space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ with inner product $(\\cdot,\\cdot)$ linear in the first argument and conjugate-linear in the second ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]), and let $a:H\\times H\\to\\mathbb K$ be sesquilinear in the sense of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]: linear in the first argument and conjugate-linear in the second. The form $a$ is **bounded** with bound $M\\ge0$ when $$|a(u,v)|\\le M\\|u\\|\\,\\|v\\|\\qquad\\text{for all }u,v\\in H,$$ and **coercive** with constant $\\alpha>0$ when $$\\operatorname{Re}a(u,u)\\ge\\alpha\\|u\\|^2\\qquad\\text{for all }u\\in H .$$ It is **symmetric** (Hermitian) when $a(u,v)=\\overline{a(v,u)}$ for all $u,v$, over $\\mathbb C$ this is equivalent to $a(u,u)\\in\\mathbb R$ for every $u$. Indeed, writing $q(u)=a(u,u)$, sesquilinearity gives $4a(u,v)=q(u+v)-q(u-v)+i q(u+iv)-i q(u-iv)$, and real diagonal values make this identity conjugate-symmetric. Over $\\mathbb R$, symmetry means $a(u,v)=a(v,u)$; real diagonal values alone do not imply symmetry. The **adjoint form** is $a^*(u,v):=\\overline{a(v,u)}$, and $(a^*)^*=a$. **Real bilinear convention.** When $H$ is a real Hilbert space the same definitions apply with $a$ bilinear and coercive in the form $a(u,u)\\ge\\alpha\\|u\\|^2$; the conjugation in the second slot is then the identity. More generally, a real bilinear form may satisfy the boundedness and coercivity conditions without being symmetric; symmetry is an additional property, not part of either condition. When $H=\\{0\\}$ every form is bounded with bound $0$ and coercive with every $\\alpha>0$; this degenerate case is kept but is never load-bearing. All constants below are named and never silently improved. No choice principle is used in this definition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The perturbed form and load are bounded and coercive on $V_h$, so [F2] gives a unique $\\widetilde u_h\\in V_h$ satisfying $a_h(\\widetilde u_h,w_h)=F_h(w_h)$ for all $w_h\\in V_h$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $e_h:=\\widetilde u_h-u_h^G$. Use the discrete equation with test $e_h$ and the residual definition [A1] to obtain $\\alpha_h\\|e_h\\|_V^2\\le\\operatorname{Re}a_h(e_h,e_h)=\\operatorname{Re}(F_h(e_h)-a_h(u_h^G,e_h))\\le\\rho_h\\|e_h\\|_V$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $e_h=0$ the claim is immediate; otherwise divide step 2.1 by $\\alpha_h\\|e_h\\|_V$ and use [F3] to get $\\|e_h\\|_a\\le\\sqrt M\\rho_h/\\alpha_h$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The triangle inequality and [F1] now give $\\|u-\\widetilde u_h\\|_a\\le\\|u-u_h^G\\|_a+\\|e_h\\|_a\\le\\inf_{v_h\\in V_h}\\|u-v_h\\|_a+\\sqrt M\\rho_h/\\alpha_h$, as required.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-set premise or empty-set conclusion; this case is not part of its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles eh=0 before division; if rhoh=0 then step 3.1 gives eh=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement imposes no mesh-size condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the zero correction; step 3.1 separates it before division."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim makes no endpoint equivalence or endpoint trace assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses Countable Choice through Lax–Milgram for the perturbed solve."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "disposition": "author-review-required",
+        "evidence": "The baseline requires a Hermitian exact conforming Galerkin problem; the residual is computed from the actual perturbed form and load."
+      }
+    },
+    "cor-shape-regular-fe-strang-error-bound": {
+      "risk": "The approximation term is specific to affine shape-regular P1 Lagrange meshes in dimensions 2 and 3; geometry, quadrature and load defects remain separate.",
+      "kind": "corollary",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matching-affine-simplicial-meshes",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$. The **reference open simplex** is\n$$\\widehat S_d:=\\{\\widehat x\\in\\mathbb R^d:\\widehat x_i>0\\ (1\\le i\\le d),\\ \\sum_{i=1}^d\\widehat x_i<1\\},$$\nwith closure $\\overline{\\widehat S_d}=\\operatorname{conv}\\{0,e_1,\\ldots,e_d\\}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-reference-finite-element-and-unisolvent-dofs",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $\\widehat K\\subset\\mathbb R^d$ be a nonempty bounded open\nreference cell, let $q\\ge1$ be an integer, and let\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. A **reference finite element** is a\ntriple $(\\widehat K,\\widehat P,\\widehat\\Sigma)$ where $\\widehat P$ is an\n$N$-dimensional subspace of $[C(\\overline{\\widehat K};\\mathbb K)]^q$ for\n$N\\in\\mathbb N_0$ and\n$\\widehat\\Sigma=(\\widehat\\sigma_1,\\ldots,\\widehat\\sigma_N)$ is a list of\nlinear functionals on $\\widehat P$ for which\n$$J_{\\widehat\\Sigma}:\\widehat P\\to\\mathbb K^N,\\qquad J_{\\widehat\\Sigma}(p):=(\\widehat\\sigma_1(p),\\ldots,\\widehat\\sigma_N(p)),$$\nis bijective. The functionals are the **degrees of freedom** and the triple\nis **unisolvent**. Its **shape functions** are the unique dual basis\n$\\widehat\\phi_1,\\ldots,\\widehat\\phi_N\\in\\widehat P$ satisfying\n$\\widehat\\sigma_i(\\widehat\\phi_j)=\\delta_{ij}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-broken-and-conforming-polynomial-spaces",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal T$ be a matching affine simplicial mesh of $\\Omega$ as defined\nin [[def-matching-affine-simplicial-meshes]]. Fix $k\\in\\mathbb N_0$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and an integer $q\\ge1$. On each\ncell let $\\mathbb P_k(K;\\mathbb K^q)$ denote the\nrestrictions to $K$ of $\\mathbb K^q$-valued polynomials of total degree at\nmost $k$. The **broken polynomial space** is the finite product\n$$V_h^{\\mathrm{br}}:=\\prod_{K\\in\\mathcal T}\\mathbb P_k(K;\\mathbb K^q),$$\nviewed as functions defined almost everywhere cell by cell. For an interior\nfacet $F=K\\cap K'$, the **jump** is the difference of the two polynomial\ntraces, with either fixed ordering of $K,K'$; its vanishing is independent of\nthat ordering. The **conforming polynomial space** is\n$$V_h^{\\mathrm{conf}}:=\\{v\\in V_h^{\\mathrm{br}}:v|_{F,K}=v|_{F,K'}\\text{ on every interior facet }F\\}.$$\nThe **zero-boundary subspace** consists of those $v\\in V_h^{\\mathrm{conf}}$\nwhose polynomial trace is zero on every boundary facet. These are algebraic\ndefinitions. The Sobolev inclusions and the zero-boundary closure conclusion\nare proved separately in the corresponding local theorems on matching\npiecewise polynomials and zero-boundary values. If $\\mathcal T=\\varnothing$,\nthen $\\Omega=\\varnothing$ by the mesh definition; the empty product is the\nzero vector space consisting of the unique empty function, and the trace\nconditions are vacuous.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-local-finite-element-interpolation-estimates",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $k\\ge0$, $1\\le p<\\infty$, and let\n$(\\widehat S_d,\\widehat P,\\widehat\\Sigma)$ be a reference finite element\nwhose polynomial space contains $\\mathbb P_k$. Assume its degrees of\nfreedom are bounded on $W^{\\ell,p}(\\widehat S_d)$ for an integer\n$\\ell\\ge1$, let $r,m\\in\\mathbb N_0$, and let $\\widehat I$ be its\ninterpolant. Thus\n$\\widehat Iq=q$ for $q\\in\\mathbb P_k$. On a shape-regular affine mesh\nas in [[def-matching-affine-simplicial-meshes]], for each cell $K$ with its\norientation-preserving reference map $F_K$ define\n$$I_Kv=(\\widehat I(v\\circ F_K))\\circ F_K^{-1}.$$\nFor every such cell, if $\\ell\\le r\\le k+1$ and $0\\le m\\le r$, then for\n$v\\in W^{r,p}(K)$,\n$$|v-I_Kv|_{W^{m,p}(K)}\\le C h_K^{r-m}|v|_{W^{r,p}(K)}.$$\nIf $\\ell>k+1$ and $0\\le m\\le k+1$, then for $v\\in W^{\\ell,p}(K)$,\n$$|v-I_Kv|_{W^{m,p}(K)} \\le C\\sum_{n=k+1}^{\\ell}h_K^{n-m}|v|_{W^{n,p}(K)}.$$\nThe constants are uniform over the mesh family and depend on the stated\nreference element, exponents and shape-regularity bound. For Lagrange\nelements in the existing mesh dimension range $d\\ge2$, assume additionally\nthe Axiom of Choice for the automatic nodal-boundedness application. Then\n[[thm-lagrange-point-evaluation-threshold-on-reference-simplex]] supplies\nthe boundedness hypothesis when $\\ell>d/p$; unisolvence of a particular\nnode set remains a separate hypothesis.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space, $a:V\\times V\\to\\mathbb K$ a bounded coercive form with boundedness constant $M$ and coercivity constant $\\alpha>0$, and $F:V\\to\\mathbb K$ a bounded functional linear in the real case and conjugate-linear in the complex test argument. Let $V_h\\subseteq V$ be finite-dimensional, and let $a_h:V_h\\times V_h\\to\\mathbb K$ and $F_h:V_h\\to\\mathbb K$ be bounded, with $F_h$ having the same test-linearity as $F$, and $a_h$ coercive with constant $\\alpha_h>0$ in the inherited norm. There are unique exact and discrete solutions $u$ and $u_h$, and",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A2], the reference nodal degrees of freedom are bounded on $W^{2,2}$; together with unisolvence [F2], this gives the local Lagrange interpolants required by [F4]. Apply [F4] with $p=2$, $\\ell=r=2$, $m=1$, and $\\ell>d/p$ on every cell $K$.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On a shared facet, both neighboring P1 traces are affine and have the same values at every facet vertex, so the traces agree. Every boundary facet has zero values at all its vertices, so its affine trace is zero. Thus the assembled function has the conformity and boundary traces in [F3]; its membership in $V$ is the explicit hypothesis [A1].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Square the cell estimate in [F4] and sum over the cells. Their interiors are disjoint, $h_K\\le h$, and the sum of cellwise $H^2$ seminorm squares is $|u|_{H^2(\\Omega)}^2$, hence $|u-I_hu|_{H^1(\\Omega)}\\le C_Ih|u|_{H^2(\\Omega)}$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F5] with $v_h=I_hu$ and use $\\|u-I_hu\\|_V\\le C_V|u-I_hu|_{H^1}$ from the stated norm bound and step 1.3. This gives the displayed error estimate without absorbing the form, geometry, quadrature, or load defects.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-set premise or empty-set conclusion; this case is not part of its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 3.1 give zero interpolation and error contributions when u=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement applies to each matching shape-regular mesh in the family."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement imposes no degeneracy case beyond the explicitly recorded zero and invertibility cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 checks that boundary facet traces vanish from zero boundary nodal values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 invokes the first-Strang supplier, whose Lax–Milgram existence branch assumes Countable Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "disposition": "author-review-required",
+        "evidence": "The approximation term is specific to affine shape-regular P1 Lagrange meshes in dimensions 2 and 3; geometry, quadrature and load defects remain separate."
+      }
+    },
+    "ex-midpoint-underintegrated-p2-stiffness-loses-coercivity": {
+      "risk": "This is a single-interval P2 counterexample; it shows failure of stability, not a particular solution error or convergence rate.",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-composite-midpoint-rule",
+          "source_section": "Definition",
+          "quote": "Input real numbers $a<b$, an integer $n\\ge1$, and a real-valued function\n$f:[a,b]\\to\\mathbb R$ evaluable at every point of $[a,b]$. Put\n$h=(b-a)/n$ and $m_j=a+(j+\\tfrac12)h$ for $0\\le j<n$. The composite midpoint\nrule returns",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-first-strang-lemma-for-conforming-perturbed-galerkin",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space, $a:V\\times V\\to\\mathbb K$ a bounded coercive form with boundedness constant $M$ and coercivity constant $\\alpha>0$, and $F:V\\to\\mathbb K$ a bounded functional linear in the real case and conjugate-linear in the complex test argument. Let $V_h\\subseteq V$ be finite-dimensional, and let $a_h:V_h\\times V_h\\to\\mathbb K$ and $F_h:V_h\\to\\mathbb K$ be bounded, with $F_h$ having the same test-linearity as $F$, and $a_h$ coercive with constant $\\alpha_h>0$ in the inherited norm. There are unique exact and discrete solutions $u$ and $u_h$, and",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-finite-dimensional-normed-spaces-are-banach",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and assume\n$X$ admits an ordered basis of finite length. Then $X$ is a Banach space in the\nsense of [[def-banach-space]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The space $V$ has finite dimension, so [F4] makes it Banach and hence Hilbert for the stated inner product. By the power rule, $\\phi'(x)=1-2x$; the displayed polynomial is an antiderivative of $(1-2x)^2$ by the same rule, so [F3] gives $a(\\phi,\\phi)=\\int_0^1(1-2x)^2dx=[x-2x^2+\\tfrac43x^3]_0^1=1/3$. Bilinearity then gives $a(c\\phi,d\\phi)=cd/3=\\tfrac13(c\\phi,d\\phi)_V$, verifying boundedness and coercivity with constant $1/3$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The midpoint is $1/2$, where $\\phi'(1/2)=0$. Thus [F1] gives $a_h(\\phi,\\phi)=Q_M((\\phi')^2)=0$, although $\\phi\\ne0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The stated norm gives $\\|\\phi\\|_V=1$, so a coercivity constant $\\alpha_h>0$ would require $0=a_h(\\phi,\\phi)\\ge\\alpha_h$, contradicting step 2.1. Therefore the first-Strang stability hypothesis [F2] is absent; the calculation asserts no error rate for the unstable discrete problem.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-set premise or empty-set conclusion; this case is not part of its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The witness is explicitly nonzero in step 3.1; the zero vector does not affect the counterexample."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-panel case is the exact configuration in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample uses the explicitly nonzero phi in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim makes no endpoint equivalence or endpoint trace assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice-dependent existence or selection branch is used in this proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "single P2 basis function on [0,1]",
+          "calculation": "phi=x(1-x), phi'=1-2x; the coefficient norm gives ||phi||V=1, exact stiffness is 1/3, and the midpoint derivative sample is 0.",
+          "conclusion": "The discrete quadratic form has a nonzero null vector and no positive coercivity constant."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "disposition": "author-review-required",
+        "evidence": "This is a single-interval P2 counterexample; it shows failure of stability, not a particular solution error or convergence rate."
+      }
+    },
+    "ex-nonconforming-residual-breaks-galerkin-orthogonality": {
+      "risk": "The computed residual is for the stated two-cell broken test; it does not assert a generic residual size for all nonconforming spaces.",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Let $f,g\\in L^1(\\mu)$. Then the following are equivalent:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-and-fubini-for-completed-product-measures",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]), and let\n$\\overline{\\mu \\times \\nu}$ be the completed product of two sigma-finite\nmeasure spaces.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lax-milgram",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a real or complex Hilbert space, let $a$ be a bounded coercive sesquilinear form on $H$ with constants $M,\\alpha$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F:H\\to\\mathbb K$ be a bounded conjugate-linear functional with norm $\\|F\\|=\\sup_{\\|v\\|\\le1}|F(v)|$. Then there is a unique $u\\in H$ with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H,$$ and it satisfies $\\alpha\\|u\\|\\le\\|F\\|$, that is $\\|u\\|\\le\\|F\\|/\\alpha$. The real bilinear case is the same statement with $a$ symmetric or not, $F$ a bounded linear functional, and the conjugation read as the identity.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-second-strang-lemma-for-nonconforming-galerkin",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space, $a:V\\times V\\to\\mathbb K$ bounded and coercive, and $F$ a bounded functional with the test-linearity required by $a$. Let $V_h$ be a finite-dimensional Hilbert space with norm $\\|\\cdot\\|_h$, not necessarily a subspace of $V$. Suppose the algebraic sum $X_h=V+V_h$ is equipped with a norm extending these norms, and $\\widetilde a_h:X_h\\times V_h\\to\\mathbb K$ is a bounded extension of a discrete form $a_h$ with bound $M_h$. Assume $a_h$ is coercive on $V_h$ with constant $\\alpha_h>0$, and let $F_h$ be bounded on $V_h$ with the matching test-linearity. The exact and discrete equations have unique solutions $u$ and $u_h$, and",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cea-quasi-optimality-for-conforming-galerkin-approximations",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $V$ be a real or complex Hilbert space and let\n$a:V\\times V\\to\\mathbb K$ be linear in its first argument, conjugate-linear\nin its second, bounded by $M$, and coercive with constant $\\alpha>0$:\n$$|a(v,w)|\\le M\\|v\\|_V\\|w\\|_V,\\qquad \\operatorname{Re}a(v,v)\\ge\\alpha\\|v\\|_V^2.$$\nLet $F:V\\to\\mathbb K$ be bounded and conjugate-linear, and let $V_h\\subseteq V$\nbe finite-dimensional. Then there are unique $u\\in V$ and $u_h\\in V_h$ with\n$$a(u,v)=F(v)\\quad(v\\in V).$$\n$$a(u_h,v_h)=F(v_h)\\quad(v_h\\in V_h).$$\nThe solutions satisfy\n$$\\|u-u_h\\|_V\\le\\frac M\\alpha\\inf_{v_h\\in V_h}\\|u-v_h\\|_V.$$\nThe real bilinear case uses linear functionals and reads $\\operatorname{Re}$ as\nthe identity.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complete-ordered-field",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and $S \\subseteq F$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The functional $L(g):=\\int_0^1g$ is continuous by [F2]. If $(g_n)$ is Cauchy in $V$, then [F1] gives an $L^2$ limit $g$; since $|L(g)|=|L(g-g_n)|\\le\\|g-g_n\\|_2\\to0$, the limit lies in $V$. Thus $V$ is a Hilbert space as a closed subspace of $L^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $\\omega_h=c_L\\omega_L+c_R\\omega_R$, $\\|\\omega_h\\|_h^2=\\int_0^1|\\omega_h|^2=2(c_L^2+c_R^2)$. A Cauchy sequence in $V_h$ therefore has Cauchy coefficient sequences; [F8] gives their limits and the same norm formula gives convergence in $V_h$. Thus $V_h$ is a two-dimensional Hilbert space. Moreover, $\\omega_L+\\omega_R=2$ is constant, and every $g\\in L^2(0,1)$ decomposes as $g=(g-\\int_0^1g)+\\frac12(\\int_0^1g)(\\omega_L+\\omega_R)$; the first summand lies in $V$ and the second in $V_h$. Thus $X_h=V+V_h=L^2(0,1)$, with the common $L^2$ norm restricting to both spaces. The discrete form has coercivity constant $1$, and the extension $\\widetilde a_h(g,\\omega_h)=\\int g\\omega_h$ is bounded by [F2]. Also $\\|U_{\\omega_h}\\|_2^2=(c_L^2+c_R^2)/6=\\|\\omega_h\\|_h^2/12$, with the integrals evaluated by [F9], so $F_h$ is bounded. Hence the stability and bounded-extension hypotheses of [F6] hold.",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "F2",
+            "F6",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The polynomial $g_u=1-3x^2$ has integral zero by [F9], so $g_u\\in V$, and its primitive is $U_{g_u}=x-x^3$. For any $h\\in V$, $|U_h(x)|\\le\\|h\\|_2$ by [F2], whence $F$ is bounded; [F3] ensures the primitive is representative-independent. The function $(x,t)\\mapsto6x h(t)\\mathbf1_{0\\le t\\le x\\le1}$ is absolutely integrable, with absolute integral at most $6\\|h\\|_1\\le6\\|h\\|_2$. Fubini [F4] gives $F(h)=\\int_0^1h(t)3(1-t^2)dt=\\int_0^1h(t)(1-3t^2)dt=a(g_u,h)$, since $\\int h=0$. The form is the $L^2$ inner product, so [F5] confirms the unique exact solution is $g_u$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The associated broken function for $\\omega_L$ is $\\phi_L$. Thus $F_h(\\omega_L)=\\int_0^{1/2}12x^2dx=1/2$, whereas $\\widetilde a_h(g_u,\\omega_L)=\\int_0^{1/2}2(1-3x^2)dx=2[x-x^3]_0^{1/2}=3/4$, by [F9]. The residual is $-1/4$ and $\\|\\omega_L\\|_h=\\sqrt2$, so $\\delta_h^{\\mathrm{nc}}(g_u)\\ge1/(4\\sqrt2)>0$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "A2",
+            "F9",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The slope field $\\omega_L$ has integral $1$, so $\\omega_L\\notin V$ and $V_h\\nsubseteq V$. Thus the conforming hypothesis in [F7] fails; independently, step 2.2 shows that the exact solution does not satisfy the discrete equation on $V_h$. This is the consistency term retained by [F6].",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-set premise or empty-set conclusion; this case is not part of its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 uses a nonzero basis vector; the consistency supremum is defined separately for nonzero tests."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The two-cell mesh is specified in the Example and checked in step 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The nonzero basis vector in step 2.2 avoids a vacuous residual test."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim makes no endpoint equivalence or endpoint trace assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use Countable Choice through L2 completeness and Lax–Milgram; all finite residual computations are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "left broken basis function",
+          "calculation": "Fh(omegaL)=1/2, extension form(gu,omegaL)=3/4, residual=-1/4, norm(omegaL)=sqrt(2).",
+          "conclusion": "delta_nc(gu) is at least 1/(4 sqrt(2)) > 0."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "disposition": "author-review-required",
+        "evidence": "The computed residual is for the stated two-cell broken test; it does not assert a generic residual size for all nonconforming spaces."
+      }
+    },
+    "ex-two-node-gauss-polynomial-exactness-and-x4-error": {
+      "risk": "The exactness and error are for the two-node Gauss rule with Lebesgue measure on [-1,1]; no degree-four exactness is claimed.",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gauss-moment-data",
+          "source_section": "Definition",
+          "quote": "Let $a<b$ be real numbers, let $m\\ge1$ be an integer, and let\n$r\\in\\{2m-1,2m\\}$. A **Gaussian quadrature moment datum of order $r$** is a\nfinite positive measure $\\mu$ on the relative Borel sigma-algebra\n$\\mathcal B([a,b])$ ([[def-borel-sigma-algebra]], [[def-measure-space]],\n[[def-measure]], [[def-finite-sigma-finite-and-semifinite-measures]]) such that\n$\\mu([a,b])>0$, and whose **relative support**\n$$ S_\\mu:=\\{x\\in[a,b]:\\mu(U)>0\\text{ for every relatively open }U\\subseteq[a,b]\\text{ with }x\\in U\\} $$\ncontains at least $m+1$ distinct points. For every integer $0\\le k\\le r$,\nrequire $x\\mapsto |x|^k$ to be integrable with respect to $\\mu$\n([[def-integrable-real-and-complex-functions-and-their-integrals]]) and put\n$M_k:=\\int_{[a,b]}x^k\\,d\\mu(x)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-monic-gauss-orthogonal-polynomials-exist-uniquely",
+          "source_section": "Statement",
+          "quote": "Let $(a,b,m,r,\\mu)$ be moment data as in\n[[def-gauss-moment-data]], with $m\\ge1$ and $r\\ge2m-1$. For each\n$j=0,\\ldots,m$ there is a unique monic real polynomial $p_j$ of degree $j$\nsuch that\n$$ \\int_{[a,b]}p_j(x)q(x)\\,d\\mu(x)=0 $$\nfor every real polynomial $q$ of degree less than $j$. For $j=0$, this means\n$p_0=1$ and the orthogonality condition is vacuous. The $j=m$ polynomial uses\nmoments only through degree $2m-1$; its squared norm is asserted only when the\nmoment datum has order $2m$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gauss-quadrature-rule",
+          "source_section": "Definition",
+          "quote": "Let $(a,b,m,2m-1,\\mu)$ be moment data as in\n[[def-gauss-moment-data]]. Let $p_m$ be its monic degree-$m$ orthogonal\npolynomial and write its ordered roots as\n$a<x_1<\\cdots<x_m<b$, as established in\n[[thm-gauss-orthogonal-polynomial-has-simple-interior-zeros]]. For\n$i=1,\\ldots,m$, define the Lagrange cardinal polynomial\n$$ \\ell_i(X):=\\prod_{\\substack{1\\le j\\le m\\\\j\\ne i}}\\frac{X-x_j}{x_i-x_j} $$\nusing the convention of [[def-cardinal-polynomial-interpolation]]. Define\nthe **Gaussian quadrature weights** and the **m-node Gaussian rule** by\n$$ w_i:=\\int_{[a,b]}\\ell_i(x)\\,d\\mu(x),\\qquad Q_m(f):=\\sum_{i=1}^{m}w_i f(x_i) $$\nfor any real-valued function $f$ defined at the nodes. This definition\nasserts no accuracy; well-definedness of the nodes, cardinal polynomials,\nweights, and finite sum is proved in\n[[lem-gauss-quadrature-rule-data-well-defined]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights",
+          "source_section": "Statement",
+          "quote": "Let $(a,b,m,2m-1,\\mu)$ be moment data as in\n[[def-gauss-moment-data]], and let $Q_m$ and $w_i$ be the rule and weights of\n[[def-gauss-quadrature-rule]]. For every real polynomial $f$ of degree at most\n$2m-1$,\n$$ \\int_{[a,b]} f(x)\\,d\\mu(x)=Q_m(f)=\\sum_{i=1}^{m}w_if(x_i). $$\nMoreover, $w_i>0$ for every $i$ and $\\sum_iw_i=\\mu([a,b])$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Lebesgue measure is finite and positive on $[-1,1]$, every relative neighborhood of each point has positive measure, and all bounded-interval polynomial moments are finite. Thus [F1] holds.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $p_2(x)=x^2+bx+c$. Orthogonality [F2] to $1$ and $x$, using $\\int_{-1}^1 1=2$, $\\int x=0$, $\\int x^2=2/3$, and $\\int x^3=0$ as evaluated by [F5, F6], gives $2/3+2c=0$ and $2b/3=0$. Hence $p_2=x^2-1/3$, and [F3] gives nodes $\\pm1/\\sqrt3$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Using the nodes from step 1.2, the corresponding cardinal polynomials are $\\ell_+(x)=(x+1/\\sqrt3)/(2/\\sqrt3)=(1+\\sqrt3x)/2$ and $\\ell_-(x)=(1/\\sqrt3-x)/(2/\\sqrt3)=(1-\\sqrt3x)/2$. By [F5, F6], their odd terms integrate to zero and their constant terms integrate to one, so [F3] gives both weights equal to $1$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], this rule is exact for every polynomial of degree at most three. Using the nodes and weights from steps 1.2–1.3, its value on $x^4$ is $(1/\\sqrt3)^4+(-1/\\sqrt3)^4=2/9$, whereas [F5, F6] give $\\int_{-1}^1x^4dx=2/5$. The absolute error is $2/5-2/9=8/45$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-set premise or empty-set conclusion; this case is not part of its claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The degree-three exactness includes the zero polynomial by linearity; step 3.1 explicitly tests x4."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The two-node case is the fixed quadrature rule in steps 1.2–2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The positive Lebesgue measure in step 1.1 is nondegenerate, so the Gaussian moment datum is valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 evaluates the exact integral from the endpoint values of an antiderivative."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice-dependent existence or selection branch is used in this proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is one-way and contains no if-and-only-if implication."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "two-node Gauss for Lebesgue measure on [-1,1]",
+          "calculation": "p2=x^2-1/3, nodes=±1/sqrt(3), weights=1, Q(x^4)=2/9, integral(x^4)=2/5.",
+          "conclusion": "Absolute x^4 error is 8/45 while degree ≤3 is exact."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "disposition": "author-review-required",
+        "evidence": "The exactness and error are for the two-node Gauss rule with Lebesgue measure on [-1,1]; no degree-four exactness is claimed."
+      }
+    }
+  }
+}

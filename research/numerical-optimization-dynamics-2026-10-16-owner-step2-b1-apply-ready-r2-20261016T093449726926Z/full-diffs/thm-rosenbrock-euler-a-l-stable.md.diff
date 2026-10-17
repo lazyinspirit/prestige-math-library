@@ -1,0 +1,31 @@
+--- current/items/thm-rosenbrock-euler-a-l-stable.md
++++ proposed/items/thm-rosenbrock-euler-a-l-stable.md
+@@ -5,7 +5,7 @@
+ status: draft
+ origin: pipeline
+ pipeline_run: numerical-optimization-dynamics-2026-10-16
+-deps: [alg-rosenbrock-euler-step]
++deps: [def-rosenbrock-euler-step-map, thm-rosenbrock-euler-scalar-a-and-l-stability]
+ dependency_level: 1
+ proof_strategy: direct
+ provenance:
+@@ -23,16 +23,16 @@
+ 
+ ## Statement
+ 
+-Apply [[alg-rosenbrock-euler-step]] to $y'=\lambda y$ over $\mathbb C$, with exact Jacobian $J=\lambda$ and $z=h\lambda$. Its scalar amplification factor is $R(z)=(1-z)^{-1}$. For this statement, A-stability means $|R(z)|\le1$ for every $z$ with $\operatorname{Re}z\le0$, and L-stability means A-stability together with $R(z)\to0$ as real $z\to-\infty$. The method is both A-stable and L-stable, and its scalar amplification factor agrees with backward Euler.
++Consider the exact-arithmetic Rosenbrock-Euler map of [[def-rosenbrock-euler-step-map]] with $\gamma=1$, exact Jacobian, and its complex scalar test equation $y'=\lambda y$, $z=h\lambda$. The complexification is the real two-dimensional exact map under $(\operatorname{Re}y,\operatorname{Im}y)$, with multiplication by $\lambda$ represented by $C_\lambda=\begin{pmatrix}\operatorname{Re}\lambda&-\operatorname{Im}\lambda\\\operatorname{Im}\lambda&\operatorname{Re}\lambda\end{pmatrix}$. Thus its exact stage equation is $(I_2-hC_\lambda)k=C_\lambda y$, equivalently $(1-z)k=\lambda y$, and its update is $y+hk$. This is the $\gamma=1$ exact complexification used in [[thm-rosenbrock-euler-scalar-a-and-l-stability]], not execution of a real rounded solver. Its amplification factor is $R(z)=(1-z)^{-1}$. A-stability means no pole and $|R(z)|\le1$ throughout $\operatorname{Re}z\le0$; L-stability additionally means $R(z)\to0$ as $|z|\to\infty$ within that half-plane. The exact method is both A-stable and L-stable, and its amplification factor agrees with backward Euler.
+ 
+ ## Facts & Assumptions
+ 
+ **Given:** A scalar complex test equation, a step $h>0$, and $\operatorname{Re}\lambda\le0$ when stability is asserted.
+ 
+-[F1] [[alg-rosenbrock-euler-step]] gives $y^+=y+hk$ with $(1-h\lambda)k=\lambda y$.
++[F1] [[def-rosenbrock-euler-step-map]] gives the real exact-Jacobian equation and update at $\gamma=1$. Under the real two-dimensional representation in the Statement these are exactly $y^+=y+hk$ and $(1-h\lambda)k=\lambda y$; [[thm-rosenbrock-euler-scalar-a-and-l-stability]] uses the same exact complexification and rational-function stability criteria.
+ 
+ ## Proof
+ 
+ 1.1 If $\operatorname{Re}z\le0$, then $1-z\ne0$. Solving the stage equation in [F1] gives $y^+=y+h\lambda y/(1-z)=y/(1-z)$, so $R(z)=(1-z)^{-1}$; this is also the scalar backward-Euler update. [given, F1, algebra]
+ 
+-1.2 For $\operatorname{Re}z\le0$, $|1-z|^2=1-2\operatorname{Re}z+|z|^2\ge1$, whence $|R(z)|\le1$. For real $z\to-\infty$, $|(1-z)^{-1}|\to0$. These are exactly the stated A- and L-stability conditions. [given, step 1.1, algebra] ∎
++1.2 For $\operatorname{Re}z\le0$, $|1-z|^2=1-2\operatorname{Re}z+|z|^2\ge1+|z|^2>0$. Hence there is no pole there and $|R(z)|\le1/\sqrt{1+|z|^2}\le1$. The same bound tends to zero whenever $|z|\to\infty$ within the closed left half-plane. These prove the stated A- and full L-stability conditions. [given, F1, step 1.1, algebra] ∎

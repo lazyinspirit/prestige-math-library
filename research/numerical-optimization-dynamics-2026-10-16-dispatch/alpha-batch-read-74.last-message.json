@@ -1,0 +1,352 @@
+{
+  "group": "h",
+  "batches": ["74"],
+  "pages_read": [
+    "rosenbrock-and-linearly-implicit-methods",
+    "rosenbrock-and-linearly-implicit-methods-examples"
+  ],
+  "items_read": [
+    "def-rosenbrock-euler-step-map",
+    "lem-rosenbrock-shifted-matrix-invertibility-bound",
+    "lem-rosenbrock-shifted-inverse-perturbation",
+    "lem-rosenbrock-stage-residual-certificate",
+    "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+    "lem-rosenbrock-euler-jacobian-approximation-defect",
+    "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+    "alg-rosenbrock-euler-step",
+    "alg-two-stage-rosenbrock-w-method",
+    "lem-rosenbrock-euler-local-defect-and-residual-error",
+    "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+    "prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves",
+    "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+    "thm-rosenbrock-euler-scalar-a-and-l-stability",
+    "thm-two-stage-rosenbrock-scalar-l-stability",
+    "thm-rosenbrock-euler-global-first-order-error",
+    "thm-two-stage-rosenbrock-global-order-two",
+    "cex-omitting-rosenbrock-stage-correction-loses-order-two",
+    "ex-two-stage-rosenbrock-factorization-reuse",
+    "ex-rosenbrock-euler-stiff-decay-and-backward-euler",
+    "cex-approximate-jacobian-breaks-stiff-damping"
+  ],
+  "conventions": [
+    {
+      "convention": "Stages are slopes: (I−γhJ̃)k=f(t,y), followed by y+hk. The name Rosenbrock–Euler denotes γ=1; the exact-J branch uses the state Jacobian.",
+      "fixed_by": "def-rosenbrock-euler-step-map",
+      "matters_for": [
+        "prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler",
+        "lem-rosenbrock-euler-local-defect-and-residual-error",
+        "thm-rosenbrock-euler-scalar-a-and-l-stability",
+        "thm-rosenbrock-euler-global-first-order-error"
+      ]
+    },
+    {
+      "convention": "Matrix bounds use the induced Euclidean 2-norm; the residual certificate separately uses the Frobenius norm.",
+      "fixed_by": "lem-rosenbrock-shifted-matrix-invertibility-bound",
+      "matters_for": [
+        "lem-rosenbrock-shifted-inverse-perturbation",
+        "lem-rosenbrock-stage-residual-certificate",
+        "lem-two-stage-rosenbrock-local-defect-and-residual-error"
+      ]
+    },
+    {
+      "convention": "The selected two-stage method uses α=1−1/√2, Wk₁=f+αhT̃, Wq₂=F₁−k₁, k₂=q₂+k₁, and y₊=y+hk₂. Both solves use the same W.",
+      "fixed_by": "alg-two-stage-rosenbrock-w-method",
+      "matters_for": [
+        "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+        "prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves",
+        "thm-two-stage-rosenbrock-scalar-l-stability",
+        "thm-two-stage-rosenbrock-global-order-two",
+        "cex-omitting-rosenbrock-stage-correction-loses-order-two",
+        "cex-approximate-jacobian-breaks-stiff-damping"
+      ]
+    },
+    {
+      "convention": "Field evaluations and outer affine combinations are exact real operations. Matrices and right-hand sides must pass exact-storage checks before rounded solver calls; certificate evaluation supplies sound upper bounds or reports unavailable.",
+      "fixed_by": "alg-two-stage-rosenbrock-w-method",
+      "matters_for": [
+        "thm-rosenbrock-computational-steps-terminate-with-finite-work",
+        "thm-two-stage-rosenbrock-global-order-two",
+        "ex-two-stage-rosenbrock-factorization-reuse"
+      ]
+    },
+    {
+      "convention": "A solver certificate bounds the original equation residual, with no forward-error guarantee absent an inverse bound.",
+      "fixed_by": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+      "matters_for": [
+        "alg-rosenbrock-euler-step",
+        "alg-two-stage-rosenbrock-w-method",
+        "lem-rosenbrock-euler-local-defect-and-residual-error",
+        "lem-two-stage-rosenbrock-local-defect-and-residual-error"
+      ]
+    },
+    {
+      "convention": "Scalar A/L-stability concerns exact complexified equations with exact Jacobians, not finite-precision execution or arbitrary approximate Jacobians.",
+      "fixed_by": "thm-two-stage-rosenbrock-scalar-l-stability",
+      "matters_for": [
+        "cex-approximate-jacobian-breaks-stiff-damping",
+        "thm-two-stage-rosenbrock-global-order-two"
+      ]
+    },
+    {
+      "convention": "Global order two is conditional on a common compact convex tube, uniform derivative and inverse bounds, state-Lipschitz approximation data, successful calls, and residual budgets ρ₁≤R₁h and ρ₂≤R₂h².",
+      "fixed_by": "thm-two-stage-rosenbrock-global-order-two",
+      "matters_for": [
+        "thm-two-stage-rosenbrock-global-order-two"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-rosenbrock-shifted-matrix-invertibility-bound",
+      "statement": "If d≥1, B is a real d×d matrix, h,γ>0, and ‖γhB‖₂≤q<1 with q≥0, then A=I−γhB is invertible and ‖A⁻¹‖₂≤1/(1−q).",
+      "used_by": [
+        "lem-rosenbrock-shifted-inverse-perturbation",
+        "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+        "thm-two-stage-rosenbrock-global-order-two"
+      ]
+    },
+    {
+      "id": "lem-rosenbrock-stage-residual-certificate",
+      "statement": "For stored real M,x,b, successful sequential dot products and subtraction, u>0 and du<1, W=γ_d‖M‖F‖x‖₂+u(‖v̂‖₂+‖b‖₂) bounds ‖r̂−(Mx−b)‖₂, and ‖Mx−b‖₂≤‖r̂‖₂+W.",
+      "used_by": [
+        "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+        "lem-rosenbrock-euler-local-defect-and-residual-error",
+        "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+        "ex-two-stage-rosenbrock-factorization-reuse"
+      ]
+    },
+    {
+      "id": "alg-two-stage-rosenbrock-w-method",
+      "statement": "With α=1−1/√2 and W=I−αhJ̃, solve Wk₁=f(t,y)+αhT̃, evaluate F₁=f(t+h/2,y+hk₁/2), solve Wq₂=F₁−k₁, and return y+h(q₂+k₁), subject to the specified storage, domain, evaluation and certification branches.",
+      "used_by": [
+        "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+        "prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves",
+        "thm-two-stage-rosenbrock-scalar-l-stability",
+        "thm-two-stage-rosenbrock-global-order-two"
+      ]
+    },
+    {
+      "id": "lem-two-stage-rosenbrock-local-defect-and-residual-error",
+      "statement": "Under its C², compact convex tube, derivative, approximation-data and shifted-matrix smallness hypotheses, the exact defect is at most (C_K+M₂/6)h³; certified residuals add at most C_rh²ρ₁+κhρ₂. The same residual perturbation bound holds at any base point when both midpoint evaluations lie in Q.",
+      "used_by": [
+        "thm-two-stage-rosenbrock-global-order-two"
+      ]
+    },
+    {
+      "id": "lem-rosenbrock-shifted-inverse-perturbation",
+      "statement": "For invertible A=I−γhJ and Ã=I−γhJ̃, Ã⁻¹−A⁻¹=γhÃ⁻¹(J̃−J)A⁻¹, hence its norm is at most γhK K̃‖J̃−J‖₂ under the stated inverse bounds.",
+      "used_by": [
+        "lem-rosenbrock-euler-jacobian-approximation-defect",
+        "thm-rosenbrock-euler-global-first-order-error",
+        "thm-two-stage-rosenbrock-global-order-two"
+      ]
+    },
+    {
+      "id": "lem-rosenbrock-euler-local-defect-and-residual-error",
+      "statement": "Under the stated C² trajectory, field, derivative and inverse bounds, ‖ŷ₊−y(t+h)‖₂≤C_Eh²+κ₁hρ, where C_E=γκ₀LF+M₁/2+γκ₀κ₁δF.",
+      "used_by": [
+        "thm-rosenbrock-euler-global-first-order-error"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "Open time-state domains and exact solution conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "State Jacobian and partial derivative notation.",
+      "opened": true
+    },
+    {
+      "id": "def-invertible-euclidean-linear-map",
+      "used_for": "Two-sided inverse convention for shifted systems and Newton corrections.",
+      "opened": true
+    },
+    {
+      "id": "def-induced-matrix-p-norm",
+      "used_for": "Induced Euclidean matrix norm and supremum characterization.",
+      "opened": true
+    },
+    {
+      "id": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+      "used_for": "Matrix-vector compatibility, submultiplicativity and identity norm.",
+      "opened": true
+    },
+    {
+      "id": "thm-rank-nullity",
+      "used_for": "Injectivity implies surjectivity for a square finite-dimensional shifted matrix.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Euclidean vector norm.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Norm homogeneity, triangle inequality and Euclidean estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-forward-and-back-substitution-for-triangular-systems",
+      "used_for": "Descending triangular substitution recurrence.",
+      "opened": true
+    },
+    {
+      "id": "def-full-reduced-and-column-pivoted-computational-qr-factorisations",
+      "used_for": "QR and upper-triangular factor conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-householder-reflector",
+      "used_for": "Exact reflector associated with stored real reflector data.",
+      "opened": true
+    },
+    {
+      "id": "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+      "used_for": "Rowwise γ_d dot-product error estimate in the residual certificate; its normal-range hypothesis is narrower than the consumer's zero-or-normal success domain.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "Total differentiability of the autonomous field in the Newton-correction proposition.",
+      "opened": true
+    },
+    {
+      "id": "def-ck-euclidean-maps-and-diffeomorphisms",
+      "used_for": "Componentwise C² smoothness convention.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-valued-derivative-and-integral",
+      "used_for": "Componentwise vector integration and domain-relative derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Trajectory and segment derivatives in local defects and state stability.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-partial-derivatives-imply-total-differentiability",
+      "used_for": "Conversion of componentwise C² hypotheses into total differentiability.",
+      "opened": true
+    },
+    {
+      "id": "thm-total-derivative-computes-directional-and-partial-derivatives",
+      "used_for": "Identification of time and state derivative blocks.",
+      "opened": true
+    },
+    {
+      "id": "cor-vector-valued-ftc-and-lipschitz-bound",
+      "used_for": "Integral remainders, derivative variation and state-slice Lipschitz estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-inequality-for-the-vector-valued-integral",
+      "used_for": "Norm estimates for local Taylor remainders.",
+      "opened": true
+    },
+    {
+      "id": "def-abs-value",
+      "used_for": "Real absolute value in componentwise residual estimates.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-abs-value",
+      "used_for": "Multiplicativity and elementary absolute-value bounds.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-triangle-inequality",
+      "used_for": "Scalar residual and subtraction error estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-finite",
+      "used_for": "Conversion of rowwise absolute dot-product bounds into the Frobenius-norm allowance.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-conjugate-real-imaginary-part-and-modulus",
+      "used_for": "Complex coordinates and squared modulus in scalar stability proofs.",
+      "opened": true
+    },
+    {
+      "id": "lem-complex-conjugation-and-modulus-laws",
+      "used_for": "Modulus products, triangle inequality and rational stability estimates.",
+      "opened": true
+    },
+    {
+      "id": "lem-exponential-dominates-one-plus-x",
+      "used_for": "Exponential bounds on finite products in global error recurrences.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Coordinatewise product rules in the third trajectory derivative.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Integrability of continuous components in FTC remainders.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Third derivative and Taylor remainder in the omitted-correction counterexample.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Uniform exponential derivative bound on the short counterexample interval.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-ivp-uniqueness",
+      "used_for": "Identification of the exponential exact solution in the omitted-correction counterexample.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-two-stage-rosenbrock-factorization-reuse",
+      "concern": "The Statement specifies that the evaluator returns norm upper bounds '2 for ‖W‖F and 5 for each displayed vector norm', while requiring certified upper bounds at most 1/2 for the residual-bound expressions. The called solver requests bounds for x,b,v̂ and r̂, then a bound ρ≥r̄+W̄. With r̄=5, necessarily ρ≥5, contradicting both the required ρ≤1/2 and tolerance one. Proof 4.1 instead treats the computed residual's zero value as if its requested norm bound were zero. The arithmetic factorization trace checks out, but the evaluator as specified cannot witness the claimed successful call.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "lem-rosenbrock-stage-residual-certificate",
+      "concern": "F2 paraphrases the published dot-product theorem as applying whenever operations remain in range, and Proof 1.1 applies it to every successful operationwise dot product. The supplier's Statement explicitly requires every product, rounded product and intermediate sum to lie in the normal range. The consumer permits exact zeros, including zero rows and cancellation. Its bound remains obtainable by the same relative-error unrolling with zero operations assigned error zero, but this extension is not stated in the proof.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "alg-two-stage-rosenbrock-w-method",
+      "concern": "Instruction 3 calls the second solve and checks its status, but never explicitly assigns its returned vector to q₂ before instruction 4 uses q₂. The displayed stage equations make the intended assignment clear; the operational instructions should bind the returned vector explicitly.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "rosenbrock-and-linearly-implicit-methods",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Read the supplier page, operationwise arithmetic definition and Householder procedure. The consumer uses their real-column formation/replay instructions and failure statuses, supplies its own original-system residual certificate, and imports no unconditional backward-stability or range-success guarantee. The separate zero-operation citation gap concerns the published dot-product theorem."
+    },
+    {
+      "from": "rosenbrock-and-linearly-implicit-methods",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "Read the supplier page and exact Newton-correction algorithm. Substitution of residual −hf(y) and matrix I−hDf(y) gives correction hk. The consumer restricts the identification to autonomous γ=1 exact-J equations and makes no root or Newton-convergence claim."
+    },
+    {
+      "from": "rosenbrock-and-linearly-implicit-methods",
+      "to": "implicit-stiff-time-stepping-and-algebraic-error",
+      "faithful": true,
+      "note": "Read the supplier page and residual-units, backward-Euler and scalar-stability definitions. Consumers preserve equation-residual versus forward-error distinctions and the scalar-only A/L criteria. The autonomous backward-Euler identification and exact complexified stability analyses match the supplying interfaces."
+    }
+  ]
+}

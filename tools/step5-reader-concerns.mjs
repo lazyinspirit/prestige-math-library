@@ -27,7 +27,7 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
   need(!existsSync(join(dir,'impact-initial-1.json')),'first impact pack is already frozen');
   need(!readdirSync(dispatchDir).some(name=>/^alpha-repair-step5-v2-impact-initial(?:-pass-\d+)?-r1-u/.test(name)),
     'impact owner execution has already started');
-  need(row.version===1&&row.kind==='owner-confirmed-step4-reader-concerns'&&row.run===run
+  need([1,2].includes(row.version)&&row.kind==='owner-confirmed-step4-reader-concerns'&&row.run===run
     &&row.authorized_by==='owner'&&row.owner_identity==='/root'&&row.native_coverage_adopted===false
     &&date(row.recorded_at)&&row.bindings&&typeof row.bindings==='object'&&!Array.isArray(row.bindings),
     'invalid owner authority or admission envelope');
@@ -75,6 +75,62 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
   need(state.run===run&&((state.stage==='5.1-adjudicate'&&state.paused===true)||state.stage==='5.2-impact')
     &&Object.values(state.dispatches??{}).every(value=>!value.startedAt||Boolean(value.endedAt)),
     'requires drained initial workers before first impact dispatch');
+  // V2 is an explicit typed-source opt-in. V1 retains its original own-batch
+  // concern path and its exact checks below.
+  if(row.version===2){
+    // Creation authority belongs to the real paused 5.1 hold. Native planning
+    // later runs in drained, unpaused 5.2; it authenticates that creation rather
+    // than claiming another pause occurred at the planning boundary.
+    const creation=row.creation_state,requestRef=row.owner_gate_request;
+    need(creation&&typeof creation.file==='string'&&date(creation.captured_at)
+      &&requestRef&&typeof requestRef.file==='string'&&typeof requestRef.id==='string'
+      &&requestRef.id.length>0,'missing v2 paused-creation archives');
+    const creationPath=resolve(root,creation.file),requestPath=resolve(root,requestRef.file);
+    const created=bound(creationPath),request=bound(requestPath);
+    need(created.run===run&&created.stage==='5.1-adjudicate'&&created.paused===true
+      &&Object.values(created.dispatches??{}).every(value=>!value.startedAt||Boolean(value.endedAt))
+      &&request.version===1&&request.run===run&&request.id===requestRef.id
+      &&request.group==='5.1-adjudicate'
+      &&JSON.stringify(request.stages)===JSON.stringify(['5.1-adjudicate'])&&date(request.at),
+      'v2 creation must archive the actual paused, drained native 5.1 owner hold');
+    const captured=Date.parse(creation.captured_at),recorded=Date.parse(row.recorded_at);
+    need(Date.parse(request.at)<=captured&&captured<=recorded,
+      'v2 owner capture and recording must follow the native creation request');
+    need(Array.isArray(initial.units)&&initial.units.length>0
+      &&new Set(initial.units).size===initial.units.length,'invalid v2 initial unit inventory');
+    for(const unit of initial.units){
+      const label=`step5-v2-initial-r1-u${unit}`,report=bound(join(dir,`${label}.json`));
+      const mechanical=report.completion==='mechanical-zero-work';
+      const dispatchLabel=mechanical?`step5-v2-empty-initial-r1-u${unit}`:label;
+      const native=bound(join(dispatchDir,`${mechanical?'tool-':'alpha-adjudicate-'}${dispatchLabel}.result.json`));
+      const observed=created.dispatches?.[`5.1-adjudicate:${dispatchLabel}`];
+      need(observed?.stage==='5.1-adjudicate'&&observed.role===native.role
+        &&observed.label===native.label&&observed.lastExitOk===true
+        &&JSON.stringify(observed.covers)===JSON.stringify([unit])
+        &&JSON.stringify(native.covers)===JSON.stringify(observed.covers)
+        &&date(observed.startedAt)&&date(observed.endedAt)&&date(native.ended_at)
+        &&Date.parse(observed.startedAt)<=Date.parse(native.ended_at)
+        &&Date.parse(native.ended_at)<=Date.parse(observed.endedAt)
+        &&Date.parse(observed.endedAt)<=Date.parse(request.at),
+        'v2 creation archive lacks a matching successful actual initial unit');
+      if(!mechanical){
+        need(Number.isSafeInteger(native.attempt)&&native.attempt>0
+          &&observed.attempt===native.attempt&&native.evidence_tag===`.attempt-${native.attempt}`
+          &&date(native.started_at)&&Date.parse(observed.startedAt)<=Date.parse(native.started_at)
+          &&Date.parse(native.started_at)<=Date.parse(native.ended_at)
+          &&native.process_exit_code===0&&native.exit_code===0&&native.timed_out===false
+          &&native.terminal_summary?.task_completed===true&&native.terminal_summary.task_aborted===false
+          &&native.terminal_summary.final_response_present===true&&native.terminal_summary.error_events===0,
+          'incomplete v2 initial native execution');
+        const attempt=bound(join(dispatchDir,`alpha-adjudicate-${label}.attempt-${native.attempt}.result.json`));
+        need(hash(native)===hash(attempt),'v2 initial stable result differs from immutable attempt');
+      }
+    }
+    // The common guard above still requires a paused/drained live 5.1 state or
+    // a drained live 5.2 state. Only actual 5.2 preparation may use the latter.
+    need(state.stage==='5.1-adjudicate'||requireCollection===true,
+      'v2 read-only admission validation requires the paused native 5.1 hold');
+  }
   const ids=new Set(),entries=[];
   for(const entry of row.entries){
     const {id,batch,concern_index,owner_review:review}=entry;
@@ -85,24 +141,90 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
     const manifest=bound(join(root,'research',`${run}-batch-${batch}.pages.json`));
     need(Array.isArray(manifest)&&manifest.flatMap(page=>page.items??[]).filter(value=>value.id===id).length===1,
       'current owning manifest mismatch');
-    const digestPath=join(root,'research',`${run}-batch-${batch}-step5-context.json`),document=bound(digestPath);
-    const readerPath=join(dispatchDir,`alpha-batch-read-${batch}.result.json`),reader=bound(readerPath);
-    need(reader.run===run&&reader.role==='alpha-batch-read'&&reader.label===batch&&reader.ok===true
+    const v2=row.version===2,alert=v2&&entry.source_kind==='alert';
+    const readerBatch=v2?entry.reader_batch:batch;
+    if(v2){
+      need(['concern','alert'].includes(entry.source_kind)&&typeof readerBatch==='string'
+        &&frontier.batches.some(value=>value.id===readerBatch)
+        &&(alert?readerBatch!==batch:readerBatch===batch), 'invalid v2 reader source identity');
+      need(alert?!Object.hasOwn(entry,'concern')&&!Object.hasOwn(entry,'concern_index')
+        :!Object.hasOwn(entry,'alert')&&!Object.hasOwn(entry,'alert_index'), 'ambiguous v2 finding fields');
+      // A frozen owner alone is insufficient if current manifests duplicate it.
+      const prefix=`${run}-batch-`,owners=[];
+      for(const name of readdirSync(join(root,'research')).filter(name=>name.startsWith(prefix)
+        &&/^\d+\.pages\.json$/.test(name.slice(prefix.length)))){
+        const rows=bound(join(root,'research',name));
+        need(Array.isArray(rows),'invalid current run manifest');
+        for(const page of rows)for(const value of page.items??[])if(value.id===id)
+          owners.push(name.slice(prefix.length).split('.')[0]);
+      }
+      need(owners.length===1&&owners[0]===batch,'v2 current manifest ownership is not unique');
+    }
+    const digestPath=join(root,'research',`${run}-batch-${readerBatch}-step5-context.json`),document=bound(digestPath);
+    const readerPath=join(dispatchDir,`alpha-batch-read-${readerBatch}.result.json`),reader=bound(readerPath);
+    need(reader.run===run&&reader.role==='alpha-batch-read'&&reader.label===readerBatch&&reader.ok===true
       &&reader.model===MODELS.sol61.id&&reader.provider_effort==='medium'&&Number.isSafeInteger(reader.attempt)&&reader.attempt>0
-      &&reader.evidence_tag===`.attempt-${reader.attempt}`&&JSON.stringify(reader.covers)===JSON.stringify([batch]),
+      &&reader.evidence_tag===`.attempt-${reader.attempt}`&&JSON.stringify(reader.covers)===JSON.stringify([readerBatch]),
       'not a genuine successful Step-4 reader');
-    const stem=join(dispatchDir,`alpha-batch-read-${batch}.attempt-${reader.attempt}`);
+    const stem=join(dispatchDir,`alpha-batch-read-${readerBatch}.attempt-${reader.attempt}`);
     const attempt=bound(`${stem}.result.json`),output=bound(`${stem}.last-message.json`);
-    need(hash(reader)===hash(attempt)&&hash(document)===hash(output)&&document.batches?.includes(batch)
-      &&document.items_read?.includes(id)&&Number.isSafeInteger(concern_index)&&concern_index>=0
+    need(hash(reader)===hash(attempt)&&hash(document)===hash(output)&&document.batches?.includes(readerBatch),
+      'original structured reader output mismatch');
+    if(alert){
+      need(Number.isSafeInteger(entry.alert_index)&&entry.alert_index>=0
+        &&document.alerts?.[entry.alert_index]?.item===id
+        &&hash(document.alerts[entry.alert_index])===hash(entry.alert)
+        &&typeof entry.alert.finding==='string'&&entry.alert.finding.trim().length>0,
+        'original structured cross-batch alert mismatch');
+    }else need(document.items_read?.includes(id)&&Number.isSafeInteger(concern_index)&&concern_index>=0
       &&document.concerns?.[concern_index]?.id===id&&hash(document.concerns[concern_index])===hash(entry.concern),
       'original structured reader concern mismatch');
+    if(v2)need(date(reader.started_at)&&date(reader.ended_at)
+      &&Date.parse(reader.started_at)<=Date.parse(reader.ended_at)
+      &&reader.process_exit_code===0&&reader.exit_code===0&&reader.timed_out===false
+      &&reader.terminal_summary?.task_completed===true&&reader.terminal_summary.task_aborted===false
+      &&reader.terminal_summary.final_response_present===true&&reader.terminal_summary.error_events===0,
+      'incomplete v2 native reader execution');
     const text=readFileSync(join(root,'items',`${id}.md`),'utf8');
     need(/^status:\s*draft\s*$/m.test(text)&&entry.before_guard_sha256===baseline[id]
       &&initial.before[id]===baseline[id]&&itemHashGuard(text)===baseline[id]
       &&!initial.rejected.some(value=>value.id===id)
       &&verdicts.some(value=>value.id===id&&value.model===MODELS.luna.id&&value.keep===true),
       'requires unchanged draft original accepted Luna item');
+    if(alert){
+      const observation=entry.source_observation,continuity=entry.source_continuity;
+      need(observation&&continuity&&typeof observation.command_output_prefix==='string'
+        &&typeof observation.source_excerpt==='string'&&observation.source_excerpt.length>=20
+        &&typeof continuity.source_file==='string','missing actual cross-batch source observation');
+      const boundText=file=>{const p=resolve(root,file);need(Object.hasOwn(evidence,p),`missing binding: ${file}`);return readFileSync(p,'utf8');};
+      const original=boundText(continuity.source_file),logPath=`${stem}.log`,promptPath=`${stem}.prompt.md`;
+      need(resolve(root,reader.log??'')===logPath&&resolve(root,reader.prompt??'')===promptPath,
+        'wrong original reader log or prompt');
+      const log=boundText(logPath),prompt=boundText(promptPath),prefix=observation.command_output_prefix;
+      // Narrow route: a successful original cat read whose full returned carrier
+      // is actually in the native log, rather than inferred items_read coverage.
+      need(prefix.startsWith(`exec\n/bin/bash -lc "cat items/${id}.md`)
+        &&/\n succeeded in \d+ms:\n$/.test(prefix)&&log.includes(prefix+original.trimEnd())
+        &&prompt.includes('run: '+run+'\nrole: alpha-batch-read')&&prompt.includes('batch **'+readerBatch+'**, run'),
+        'missing literal successful source read in original native dispatch');
+      const excerpt=observation.source_excerpt;
+      need(original.includes(excerpt)&&text.includes(excerpt)
+        &&[["'","'"],['"','"'],['“','”'],['‘','’']].some(([a,b])=>entry.alert.finding.includes(a+excerpt+b)),
+        'alert must retain its original literal source quotation');
+      const snapshotRelative=`research/${run}-step3-hash-${batch}-post-3a.json`;
+      const snapshotPath=join(root,snapshotRelative),snapshot=bound(snapshotPath);
+      const closure=bound(join(root,'research',`${run}-step3-closure.json`));
+      need(snapshot.version===2&&snapshot.run===run&&snapshot.batch===batch&&snapshot.label==='post-3a'
+        &&snapshot.manifest?.filter(value=>value===id).length===1
+        &&snapshot.hashes?.[id]?.item_sha256===hash(original)
+        &&itemHashGuard(original)===baseline[id]
+        &&closure.version===3&&closure.basis==='dependency-ordered-step3a'
+        &&closure.run===run&&closure.status==='closed'&&date(closure.closed_at)
+        &&Date.parse(closure.closed_at)<=Date.parse(reader.started_at)
+        &&closure.artifacts?.[snapshotRelative]===evidence[snapshotPath]
+        &&closure.final_item_hashes?.[id]===baseline[id],
+        'cross-batch source lacks exact frozen Step-3-to-current continuity');
+    }
     need(review?.reviewed_by==='root'&&review.confirmed_defect===true&&date(review.reviewed_at)
       &&Date.parse(review.reviewed_at)>=Date.parse(reader.ended_at)
       &&typeof review.reason==='string'&&review.reason.trim().length>=40
@@ -118,7 +240,7 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
     const ownerEvidence=resolve(root,review.evidence_file);
     need(Object.hasOwn(evidence,ownerEvidence)&&readFileSync(ownerEvidence,'utf8').trim().length>=80,
       'missing bound root review evidence');
-    entries.push({...entry,digest_path:digestPath});
+    entries.push({...entry,...(v2?{source_kind:entry.source_kind,reader_batch:readerBatch}:{}),digest_path:digestPath});
   }
   return {path,entries,evidence};
 }

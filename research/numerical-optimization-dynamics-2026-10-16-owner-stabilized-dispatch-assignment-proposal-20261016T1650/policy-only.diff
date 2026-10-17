@@ -1,0 +1,28 @@
+--- before/step3-owner-stabilized-source-identical-continuity.mjs
++++ proposed/step3-owner-stabilized-source-identical-continuity.mjs
+@@ -73,14 +73,23 @@
+ }
+ function nativeReview(root, run, batch, id, evidence, verdicts, proofRequired = true) {
+   assert(evidence?.result?.path === `research/${run}-dispatch/alpha-3a-batch-${batch}.result.json`
+-    && evidence.report?.path === `research/${run}-alpha-batch-${batch}-3a.md`
+-    && evidence.assignment?.path === `research/${run}-alpha-batch-${batch}-3a-order.task.md`, 'Wrong current native review paths');
++    && evidence.report?.path === `research/${run}-alpha-batch-${batch}-3a.md`, 'Wrong current native review paths');
+   const stableText = textRef(root, run, evidence.result), result = JSON.parse(stableText);
+   assert(successful(result, run, batch), 'Native stable result is not genuine complete success');
+   assert(evidence.immutable_result?.path === `research/${run}-dispatch/alpha-3a-batch-${batch}${result.evidence_tag}.result.json`
+     && textRef(root, run, evidence.immutable_result) === stableText
+     && readFileSync(researchPath(root, run, evidence.immutable_result.path)).equals(
+       readFileSync(researchPath(root, run, evidence.result.path))), 'Stable alias differs from actual immutable attempt result');
++  const originalAssignmentPath = `research/${run}-alpha-batch-${batch}-3a-order.task.md`;
++  if (evidence.assignment_kind === 'native-dispatch-prompt') {
++    const promptPath = `research/${run}-dispatch/alpha-3a-batch-${batch}${result.evidence_tag}.prompt.md`;
++    assert(evidence.assignment?.path === promptPath && typeof result.prompt === 'string'
++      && [promptPath, resolve(root, promptPath)].includes(result.prompt)
++      && evidence.original_assignment?.path === originalAssignmentPath,
++      'Assignment is not the actual successful immutable native dispatch prompt');
++    textRef(root, run, evidence.original_assignment);
++  } else assert(evidence.assignment_kind === undefined && evidence.assignment?.path === originalAssignmentPath,
++    'Unsupported native assignment kind/path');
+   const report = textRef(root, run, evidence.report);
+   const assignment = textRef(root, run, evidence.assignment);
+   assert(successful(result, run, batch) && assignment.includes(id), 'Native review not genuine complete coverage');

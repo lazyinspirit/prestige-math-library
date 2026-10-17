@@ -1,0 +1,26 @@
+--- before/items/thm-variable-step-bdf2-order-two-under-ratio-bound.md
++++ proposed/items/thm-variable-step-bdf2-order-two-under-ratio-bound.md
+@@ -10,6 +10,8 @@
+   - lem-variable-step-bdf2-interpolation-and-local-defect
+   - lem-variable-step-bdf2-increment-ratio-recurrence
+   - def-first-order-ode-initial-value-problem-and-solution
++  - lem-exponential-dominates-one-plus-x
++  - thm-exponential-addition-formula
+ justified_by: []
+ aliases: []
+ proof_strategy: direct
+@@ -53,6 +55,8 @@
+ 
+ [F3] [[lem-variable-step-bdf2-increment-ratio-recurrence]] gives $q(r_n)=r_n^2/(1+2r_n)\le q_*<1$ under the stated upper ratio bound.
+ 
++[F4] [[lem-exponential-dominates-one-plus-x]] gives $1+x\le\exp(x)$, and [[thm-exponential-addition-formula]] gives $\exp(x+y)=\exp(x)\exp(y)$.
++
+ [A1] For every $t\in[0,T]$ and $u,v\in K$, $\|f(t,u)-f(t,v)\|_\infty\le L\|u-v\|_\infty$.
+ 
+ [A2] There are fixed radii $\eta,\varepsilon>0$ such that, for each sufficiently small grid and every step, each preceding pair within $\eta$ of its exact history gives exactly one root in $\overline B(y(t_{n+1}),\varepsilon)\subset K$; the prescribed ball $B_{n+1}$ also contains exactly one root, and it is this local root.
+@@ -65,4 +69,4 @@
+ 
+ 3.1 Choose $A>\max\{1,q_*/(1-q_*)\}$, so $(1+A)q_*<A$, and set $E_n=\|e_n\|_\infty+A\|d_n\|_\infty$. For sufficiently small $H$, $(1+A)(q_*+2Lq_*H)\le A$. Using $e_{n+1}=e_n+d_{n+1}$ in step 2.1 gives a coefficient at most $1+2L(1+A)h_n$ on $\|e_n\|_\infty$ and at most $A$ on $\|d_n\|_\infty$; hence $E_{n+1}\le(1+C_1h_n)E_n+C_2h_n^3$ for constants independent of the grid. [step 2.1, construct, algebra]
+ 
+-4.1 The starter hypothesis gives $E_1=O(H^2)$. Iterate step 3.1 only while the preceding pair is in the local neighborhood of [A2]. Using $\prod_n(1+C_1h_n)\le e^{C_1T}$ and $\sum_nh_n^3\le H^2\sum_nh_n=TH^2$ gives $\max_nE_n\le C H^2$ up to any first exit, with $C$ independent of the grid. Since $A\ge1$, $\|e_n\|_\infty\le E_n$ and $\|e_{n-1}\|_\infty\le\|e_n\|_\infty+\|d_n\|_\infty\le(1+1/A)E_n$. For sufficiently small $H$, this bound is strictly below $\eta$, so no first exit occurs. At each step [A2] therefore supplies the selected root in $K$, and induction continues through $N$. Finally $\|e_n\|_\infty\le E_n$ proves the claimed maximum error. [A2, step 3.1, algebra] ∎
++4.1 The starter hypothesis gives $E_1=O(H^2)$. Iterate step 3.1 only while the preceding pair is in the local neighborhood of [A2]. The coefficients $C_1=2L(1+A)$ and $C_2$ in step 3.1 can be taken nonnegative. For every subproduct, [F4] gives $\prod_{j=r}^{s}(1+C_1h_j)\le\prod_{j=r}^{s}\exp(C_1h_j)=\exp(C_1\sum_{j=r}^{s}h_j)\le e^{C_1T}$: the unused time $T-\sum_{j=r}^{s}h_j$ is nonnegative, and [F4] gives $\exp(C_1(T-\sum_{j=r}^{s}h_j))\ge1$, which with the addition law proves the last comparison. Expanding the finite recurrence by induction therefore gives $E_n\le e^{C_1T}(E_1+C_2\sum_{j=1}^{n-1}h_j^3)$; here $\sum_jh_j^3\le H^2\sum_jh_j\le TH^2$. These bounds give $\max_nE_n\le C H^2$ up to any first exit, with $C$ independent of the grid. Since $A\ge1$, $\|e_n\|_\infty\le E_n$ and $\|e_{n-1}\|_\infty\le\|e_n\|_\infty+\|d_n\|_\infty\le(1+1/A)E_n$. For sufficiently small $H$, this bound is strictly below $\eta$, so no first exit occurs. At each step [A2] therefore supplies the selected root in $K$, and induction continues through $N$. Finally $\|e_n\|_\infty\le E_n$ proves the claimed maximum error. [A2, F4, step 3.1, algebra] ∎

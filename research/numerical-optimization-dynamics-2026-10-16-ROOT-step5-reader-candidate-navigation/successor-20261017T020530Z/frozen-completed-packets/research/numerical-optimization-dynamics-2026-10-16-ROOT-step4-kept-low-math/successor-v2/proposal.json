@@ -1,0 +1,510 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "research_only": true,
+  "status": "proposed-not-applied",
+  "reviewer": "kept_low_math",
+  "scope_batches": [
+    13,
+    16,
+    17,
+    18,
+    38,
+    39
+  ],
+  "authority": "ROOT-assigned first-cycle kept-reader intake; no source/metadata/runtime/ledger changes or mechanical checks",
+  "admission": "Requires root formal kept-reader admission at paused/drained 5.1 before application if native routing requires it. Original keep=true Luna rows remain historical; proposal does not recertify them.",
+  "hashing": "No new hashes computed; root owns hashing, recertification, mirror maintenance and native transitions.",
+  "cases": [
+    {
+      "id": "thm-implicit-differentiation-forward-and-adjoint-formulas",
+      "batch": 13,
+      "assessment": "confirmed-defect",
+      "original_severity": "gap-a-reader-closes",
+      "intake_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-other_low-intake.json",
+      "digest_path": "research/numerical-optimization-dynamics-2026-10-16-batch-13-step5-context.json",
+      "concern_pointer": "/concerns/0",
+      "original_concern": "The Statement imposes no positivity restriction on p,m, but Proof 1.1 says the cited implicit-function theorem applies 'under exactly the nonsingularity hypothesis in the statement.' The opened supplier thm-euclidean-implicit-function-theorem explicitly requires both block dimensions \u22651. If zero dimensions are permitted, as elsewhere on this page, p=0 and m=0 require separate elementary constant/zero-space arguments. The formulas remain valid; this is a missing boundary-case justification.",
+      "original_luna_row": {
+        "id": "thm-implicit-differentiation-forward-and-adjoint-formulas",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The IFT hypotheses and derivative formula match the supplied interface; the chain rule yields the objective derivative, and transposing the adjoint equation gives \u03bb\u1d40 = J_z R_z\u207b\u00b9. No fatal defect found.",
+        "context_sha256": "953b0dee7550845950953d999149feee76a75b067969b131d4e684dc79a892a4",
+        "item_sha256": "da468272c2fd4214777152c838ab5e804512e1f866fb97721395da62df85b824",
+        "at": "2026-10-16T17:49:06.724Z"
+      },
+      "evidence": "Confirmed missing boundary justification: opened IFT Statement requires m,n>=1; original Proof 1.1 invokes it for p,m without positivity. Elementary singleton-state and isolated-zero arguments above prove the original full claim, and the current chain-rule supplier explicitly covers zero dimensions (Proof 1.1). No Statement change or consumer proof rereview.",
+      "canonical_path": "items/thm-implicit-differentiation-forward-and-adjoint-formulas.md",
+      "full_preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/preimages/thm-implicit-differentiation-forward-and-adjoint-formulas.md",
+      "full_proposal_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/proposed/thm-implicit-differentiation-forward-and-adjoint-formulas.md",
+      "guard": {
+        "mode": "exact-full-preimage-bytes",
+        "before_text": "---\nid: thm-implicit-differentiation-forward-and-adjoint-formulas\nkind: theorem\ntitle: \"Implicit differentiation and adjoint formulas under a nonsingular residual Jacobian\"\nstatus: draft\norigin: pipeline\npipeline_run: numerical-optimization-dynamics-2026-10-16\ndeps: [thm-euclidean-implicit-function-theorem, thm-chain-rule-for-total-derivatives]\njustified_by: []\nproof_strategy: direct\nverification:\n  precheck: pass\nprovenance:\n  statement: ai-altered\n  proof: ai-generated\nsources:\n  references:\n    - title: \"J. Lebl, Basic Analysis II, Theorem 8.5.6 and proof, \u00a78.5.1\"\n      url: \"https://www.jirka.org/ra/html/sec_svinvfuncthm.html\"\n    - title: \"J. Lebl, Basic Analysis I, Theorem 8.3.7 and proof, \u00a78.3.1\"\n      url: \"https://www.jirka.org/ra/html/sec_svtheder.html\"\ndependency_level: 0\n---\n\n## Statement\n\nLet $R:\\Theta\\times Z\\to\\mathbb R^m$ be $C^1$, where $\\Theta\\subseteq\\mathbb R^p$ and $Z\\subseteq\\mathbb R^m$ are open. Suppose $R(\\theta_0,z_0)=0$ and the state Jacobian $R_z(\\theta_0,z_0)$ is invertible. The Euclidean implicit function theorem gives a local $C^1$ solution branch $z=\\phi(\\theta)$, and\n$$D\\phi(\\theta_0)=-R_z(\\theta_0,z_0)^{-1}R_\\theta(\\theta_0,z_0).$$\nFor a scalar $C^1$ objective $J(\\theta,z)$, its derivative along that branch is\n$$D(J(\\theta,\\phi(\\theta)))|_{\\theta_0}=J_\\theta-J_zR_z^{-1}R_\\theta.$$\nEquivalently, if $\\lambda$ solves $R_z^T\\lambda=J_z^T$, this derivative is $J_\\theta-\\lambda^TR_\\theta$. These formulas concern the exact local solution branch; differentiating a stopped iteration is a separate finite-map derivative.\n\n## Facts & Assumptions\n\n**Given:** The residual equation, a $C^1$ residual, a square nonsingular state Jacobian, and a scalar $C^1$ objective.\n\n[F1] [[thm-euclidean-implicit-function-theorem]]: for a $C^1$ Euclidean residual with zero value and invertible state-block derivative, there is a unique local $C^1$ solution branch and $D\\phi=-R_z^{-1}R_\\theta$.\n\n[F2] [[thm-chain-rule-for-total-derivatives]]: for $C^1$ maps $g,f$, $D(g\\circ f)=Dg(f)Df$.\n\n## Proof\n\n**Proof technique:** differentiate the exact solution identity.\n\n1.1 Apply [F1] to $R$ with parameter block $\\theta$ and state block $z$. It provides the local $C^1$ branch $\\phi$ and the displayed formula $D\\phi=-R_z^{-1}R_\\theta$, under exactly the nonsingularity hypothesis in the statement. [F1, given]\n\n2.1 The map $\\theta\\mapsto J(\\theta,\\phi(\\theta))$ is $C^1$. By [F2], its derivative at $\\theta_0$ is $J_\\theta+J_zD\\phi$. Substituting step 1.1 yields $J_\\theta-J_zR_z^{-1}R_\\theta$. [F1, F2, step 1.1, algebra]\n\n3.1 Since $R_z$ is invertible, $R_z^T$ is invertible. The adjoint equation has the unique solution satisfying $\\lambda^T=J_zR_z^{-1}$, by transposing $R_z^T\\lambda=J_z^T$. Therefore $J_zR_z^{-1}R_\\theta=\\lambda^TR_\\theta$, giving the stated adjoint formula. [given, step 2.1, algebra] \u220e\n",
+        "edits": [
+          {
+            "old": "[F1] [[thm-euclidean-implicit-function-theorem]]: for a $C^1$ Euclidean residual",
+            "new": "[F1] [[thm-euclidean-implicit-function-theorem]]: when both parameter and state dimensions are positive, for a $C^1$ Euclidean residual",
+            "occurrences": 1
+          },
+          {
+            "old": "1.1 Apply [F1] to $R$ with parameter block $\\theta$ and state block $z$. It provides the local $C^1$ branch $\\phi$ and the displayed formula $D\\phi=-R_z^{-1}R_\\theta$, under exactly the nonsingularity hypothesis in the statement. [F1, given]",
+            "new": "1.1 If $m=0$, then $Z=\\mathbb R^0$ is a singleton and the unique branch is its constant map; the residual identity and derivative formula are identities of zero linear maps. If $p=0<m$, the parameter domain is a singleton. Write $A=R_z(\\theta_0,z_0)$. Differentiability gives $R(\\theta_0,z_0+h)=Ah+o(\\|h\\|_2)$; since $A$ is invertible, $\\|Ah\\|_2\\ge\\|h\\|_2/\\|A^{-1}\\|_{\\mathrm{op}}$. Thus sufficiently small nonzero $h$ cannot be another zero of the residual. The constant branch $\\phi(\\theta_0)=z_0$ is locally unique and $C^1$, and its derivative and $R_\\theta$ are the unique maps from the zero space, so the derivative formula again holds. For $p,m\\ge1$, apply [F1] to obtain the local $C^1$ branch and $D\\phi=-R_z^{-1}R_\\theta$. The $0\\times0$ linear map is its own inverse throughout these formulas. [F1, given, algebra]",
+            "occurrences": 1
+          }
+        ]
+      },
+      "statement_or_definition_changed": false,
+      "consumer_review_scope": "No Statement/Definition change; no consumer proof rereview triggered.",
+      "consumer_dispositions": [],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-13.proof-contracts.json",
+          "pointer": "/contracts/thm-implicit-differentiation-forward-and-adjoint-formulas",
+          "action": "Owner refresh changed step derivation text/inputs and boundary analysis against proposed source, preserving independent-review history; leave unchanged external supplier quotes intact.",
+          "specific": "Own derivations/0 (step1.1); boundary worksheet must cover p=0 and m=0."
+        }
+      ],
+      "actual_digest_concern": {
+        "id": "thm-implicit-differentiation-forward-and-adjoint-formulas",
+        "concern": "The Statement imposes no positivity restriction on p,m, but Proof 1.1 says the cited implicit-function theorem applies 'under exactly the nonsingularity hypothesis in the statement.' The opened supplier thm-euclidean-implicit-function-theorem explicitly requires both block dimensions \u22651. If zero dimensions are permitted, as elsewhere on this page, p=0 and m=0 require separate elementary constant/zero-space arguments. The formulas remain valid; this is a missing boundary-case justification.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_verified_against": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+        "line_numbers": [
+          186
+        ],
+        "matches_exact_row": true
+      }
+    },
+    {
+      "id": "thm-multifrontal-elimination-equivalence-and-sparse-costs",
+      "batch": 16,
+      "assessment": "confirmed-defect",
+      "original_severity": "presentation",
+      "intake_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-other_low-intake.json",
+      "digest_path": "research/numerical-optimization-dynamics-2026-10-16-batch-16-step5-context.json",
+      "concern_pointer": "/concerns/1",
+      "original_concern": "The Statement writes its work and exact allocation sums over r=1,...,n, although the supplying algorithm defines F_r and pivot position r over 0,...,n\u22121. Thus d_n is undefined and d_0 is omitted. Use the established zero-based range, or explicitly reindex the column sizes.",
+      "original_luna_row": {
+        "id": "thm-multifrontal-elimination-equivalence-and-sparse-costs",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The subtree Schur invariant is sound: reach containment captures each boundary, sibling interiors decouple, and positive-definite principal blocks justify the updates. The stated work and storage bounds follow from the front sizes and retained factor pattern.",
+        "context_sha256": "5c0a9ad282a594f450b8e94ea93cd2cc94c0ce1ba419e099df10946200684da4",
+        "item_sha256": "9627170dcc1e8a4660a85538455be335b5c9c523dae6c2812f464cf07ac0d847",
+        "at": "2026-10-16T17:52:55.014Z"
+      },
+      "evidence": "Confirmed indexing defect: algorithm input ordering is (v_0,...,v_{n-1}) and front F_r is attached to v_r. Thus d_n is undefined; d_0 is a genuine allocated column. Proof 3.2 counts every front and every retained factor slot once, and Proof 5.1 counts one visit per off-diagonal slot in each solve. Changing the two explicit Statement ranges preserves these exact claims.",
+      "canonical_path": "items/thm-multifrontal-elimination-equivalence-and-sparse-costs.md",
+      "full_preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/preimages/thm-multifrontal-elimination-equivalence-and-sparse-costs.md",
+      "full_proposal_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/proposed/thm-multifrontal-elimination-equivalence-and-sparse-costs.md",
+      "guard": {
+        "mode": "exact-full-preimage-bytes",
+        "before_text": "---\nid: thm-multifrontal-elimination-equivalence-and-sparse-costs\nkind: theorem\ntitle: Scalar multifrontal elimination is equivalent to sparse Cholesky with column-count costs\nstatus: draft\norigin: pipeline\npipeline_run: numerical-optimization-dynamics-2026-10-16\ndependency_level: 5\ndeps:\n  - alg-multifrontal-cholesky-and-sparse-triangular-solves\n  - lem-elimination-tree-reach-contains-each-filled-neighbor\n  - thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique\n  - thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost\njustified_by: []\nproof_strategy: induction\nprovenance:\n  statement: literature-derived\n  proof: ai-altered\nverification:\n  precheck: pending\nsources:\n  references:\n    - title: \"Jennifer Scott and Miroslav T\u016fma, Algorithms for Sparse Linear Systems, Chapter 5, \u00a75.4\"\n      url: \"https://library.oapen.org/bitstream/20.500.12657/62987/1/978-3-031-25820-6.pdf\"\n    - title: \"Timothy A. Davis, Siva Rajamanickam, and Wissam M. Sid-Lakhdar, A survey of direct methods for sparse linear systems, \u00a7\u00a73 and 11\"\n      url: \"https://people.engr.tamu.edu/davis/publications_files/survey_tech_report.pdf\"\n---\n\n## Statement\n\nAssume exact arithmetic, a Hermitian positive-definite $A$, and a successful ordered factorization using [[alg-multifrontal-cholesky-and-sparse-triangular-solves]]. The fronts and contribution arrays give the same Cholesky factor as scalar elimination in ordering $\\pi$. With $d_r=\\ell_r+1=|F_r|$, the arithmetic work for assembly and scalar front updates is\n$$O\\!\\left(\\sum_{r=1}^n d_r^2\\right),$$\nthe symbolic factor allocation has exactly $\\sum_{r=1}^n d_r$ positions, and each forward/back substitution solve uses $O(\\sum_r d_r)$ scalar operations. These are arithmetic and factor-storage counts; they are not wall-clock or total workspace bounds.\n\n## Facts & Assumptions\n\n\n\n**Given:** A Hermitian positive-definite matrix, an ordering, its filled graph and elimination forest, and exact-arithmetic multifrontal execution.\n\n[F1] [[alg-multifrontal-cholesky-and-sparse-triangular-solves]]: Each nonzero off-diagonal entry and each diagonal entry is assigned once to its earliest endpoint's front; each front adds child contribution arrays, eliminates its one pivot by a Schur update, and retains every permitted symbolic factor slot.\n\n[F2] [[lem-elimination-tree-reach-contains-each-filled-neighbor]]: For a child $s$ of $r$, $F_s\\setminus\\{v_s\\}\\subseteq F_r$.\n\n[F3] [[lem-elimination-tree-reach-contains-each-filled-neighbor]]: Every later filled neighbor of a vertex lies on its parent path, so vertices in distinct descendant branches cannot have a filled edge.\n\n[F4] [[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]]: Forward and backward substitution solve nonsingular triangular systems uniquely by the row recurrences stated in that theorem.\n\n[F5] [[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]: Every Hermitian positive-definite matrix has an exact Cholesky factor with positive diagonal, hence is nonsingular.\n\n## Proof\n\n\n1.1 For each vertex $v_r$, let $T_r$ be its subtree in the elimination forest and let $X_r=F_r\\setminus\\{v_r\\}$. Define the local matrix for $T_r$ on $T_r\\cup X_r$ to contain exactly the original entries assigned to fronts in $T_r$; its $X_r\\times X_r$ block is zero, since entries wholly within $X_r$ are assigned to later fronts. If $u\\in T_r$ and $w\\notin T_r\\cup X_r$ had an original edge, then either $w$ is earlier than $u$, making $u$ a later filled neighbor and ancestor of $w$, which would put $w$ in $T_r$, or $w$ is later than $u$, making $w$ a later filled neighbor and ancestor of $u$. In the latter case, repeated application of the child-column containment in [F2] from $u$ up to $v_r$ puts $w$ in $F_r$; since $w\\ne v_r$ and $w\\notin T_r$, it belongs to $X_r$. Both cases contradict the choice of $w$ by [F2,F3]. The induction invariant is that the returned array is the Schur contribution on $X_r$ after eliminating $T_r$ from this local matrix. If $v_r$ is a leaf, every entry assigned to its front has at least one endpoint $v_r$, so its initialized front is exactly this local matrix, with zero external-external block. The scalar update $C-bb^*/d$ therefore returns its Schur contribution. [given, F1, F2, F3, base, induction]\n\n2.1 Let $v_r$ have children $v_{s_1},\\ldots,v_{s_q}$. By [F2], each child interface $X_{s_h}$ lies in $F_r$, so every extend-add is defined. By [F3], there is no original matrix coupling between interiors of distinct child subtrees: such an edge would make its later endpoint a filled neighbor outside the earlier endpoint's parent path. Form the local matrix on the union of those child interiors and $F_r$, using only original entries assigned to these child subtrees or to $v_r$ and leaving entries wholly in $X_r$ zero. Its child-interior block is $D=\\operatorname{diag}(D_1,\\ldots,D_q)$, and its coupling to the current front is $B=[B_1\\ \\cdots\\ B_q]$ partitioned by child subtree. Each $D_h=A[T_{s_h},T_{s_h}]$ is a principal submatrix of the positive-definite $A$, so it is positive definite; [F5] gives a Cholesky factor with positive diagonal and therefore shows $D_h$ is nonsingular. Its Schur complement on the current front is $C-BD^{-1}B^*=C-\\sum_hB_hD_h^{-1}B_h^*$. The correction $-BD^{-1}B^*=-\\sum_hB_hD_h^{-1}B_h^*$ is exactly the sum of child contributions by the induction invariant; adding them to the entries assigned to $v_r$ assembles this same local Schur complement. The pivot update $C-bb^*/d$ then eliminates $v_r$ and proves the invariant for $T_r$. [step 1.1, F1, F2, F3, F5, IH, induction, algebra]\n\n3.1 The invariant at each root eliminates all vertices. Each pivot column is therefore computed from the same exact Schur complement as scalar elimination in $\\pi$, so the multifrontal factors equal the scalar Cholesky factors. [step 2.1, F1, algebra]\n\n3.2 Front $r$ has $d_r=\\ell_r+1$ indices. Its dense scalar pivot update and initialization from assigned entries use at most a constant multiple of $d_r^2$ arithmetic operations. Embedding and adding a child contribution touches at most that child's dense trailing block, whose entries are already counted by the child's $d_s^2$ bound. Summing over fronts gives $O(\\sum_r d_r^2)$ arithmetic work. By [F1], each factor column retains one diagonal slot and all $\\ell_r$ later-neighbor slots, including structural zeros, so symbolic factor storage is exactly $\\sum_r d_r$. [step 1.1, step 2.1, F1, F2, algebra]\n\n4.1 The forward column updates in [F1] solve $Lx=Pb$: after column $j$ is processed, row $j$ satisfies its equation, and the pivot contribution has been subtracted from each later row. This is the unique solution in [F4]. The descending conjugate updates solve $L^*y=x$ by the backward recurrence in [F4]. Since $PAP^*=LL^*$, these equations imply $PAP^*y=Pb$; multiplying by $P^*$ gives $A(P^*y)=b$. Thus $P^*y$ is the unique solution of $Az=b$. [step 3.1, F1, F4, algebra]\n\n5.1 Each stored off-diagonal factor entry is visited once in each triangular solve, with one multiply and one subtraction; each diagonal contributes one division. Hence the two solves use $O(n+\\sum_r\\ell_r)=O(\\sum_r d_r)$ operations, separate from the factorization work in step 3.2. [step 3.2, step 4.1, F1, algebra]\n\n6.1 Step 3.1 gives scalar equivalence, step 3.2 gives factorization work and factor storage, and steps 4.1\u20135.1 give solve correctness and work. [step 3.1, step 3.2, step 4.1, step 5.1, discharge-induction] \u220e\n",
+        "edits": [
+          {
+            "old": "\\sum_{r=1}^n d_r^2",
+            "new": "\\sum_{r=0}^{n-1} d_r^2",
+            "occurrences": 1
+          },
+          {
+            "old": "\\sum_{r=1}^n d_r",
+            "new": "\\sum_{r=0}^{n-1} d_r",
+            "occurrences": 1
+          }
+        ]
+      },
+      "statement_or_definition_changed": true,
+      "consumer_review_scope": "All actual direct/indirect deps consumers and source-text uses for changed Statement/Definition; no blanket rereview for Facts/Proof-only changes.",
+      "consumer_dispositions": [
+        {
+          "id": "thm-nested-dissection-grid-work-and-storage-bounds",
+          "path": "items/thm-nested-dissection-grid-work-and-storage-bounds.md",
+          "source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/consumer-context/thm-nested-dissection-grid-work-and-storage-bounds.md",
+          "assessment": "unaffected-no-edit",
+          "actual_use_evidence": "F4 uses sums over vertices, not the erroneous one-based positions. Proof 1.2 handles one pivot; Proof 2.1-2.2 sum each separator pivot once. Corrected zero-based front sums give exactly those same bounds; no repair."
+        },
+        {
+          "id": "ex-two-dimensional-poisson-nested-dissection-cost",
+          "path": "items/ex-two-dimensional-poisson-nested-dissection-cost.md",
+          "source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/consumer-context/ex-two-dimensional-poisson-nested-dissection-cost.md",
+          "assessment": "unaffected-no-edit",
+          "actual_use_evidence": "F2 and Verification 2.1 instantiate dimension-two grid bounds at k>=2; k=1 is handled directly. No use of an indexing endpoint; no repair."
+        }
+      ],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-16.proof-contracts.json",
+          "pointer": "/contracts/thm-multifrontal-elimination-equivalence-and-sparse-costs",
+          "action": "Owner refresh changed step derivation text/inputs and boundary analysis against proposed source, preserving independent-review history; leave unchanged external supplier quotes intact."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-16.pages.json",
+          "action": "Refresh only owning item Statement/Definition mirror against admitted source; root owns current raw/canonical hashes and manifest bindings."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-16.proof-contracts.json",
+          "pointer": "/contracts/thm-nested-dissection-grid-work-and-storage-bounds/citations/3",
+          "source_section": "Statement",
+          "action": "After formal admission only: mirror exact corrected source section if changed; preserve existing historical receipts and recertify current contexts natively."
+        }
+      ],
+      "actual_digest_concern": {
+        "id": "thm-multifrontal-elimination-equivalence-and-sparse-costs",
+        "concern": "The Statement writes its work and exact allocation sums over r=1,...,n, although the supplying algorithm defines F_r and pivot position r over 0,...,n\u22121. Thus d_n is undefined and d_0 is omitted. Use the established zero-based range, or explicitly reindex the column sizes.",
+        "severity": "presentation"
+      },
+      "original_luna_verified_against": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+        "line_numbers": [
+          306
+        ],
+        "matches_exact_row": true
+      }
+    },
+    {
+      "id": "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+      "batch": 17,
+      "assessment": "confirmed-defect",
+      "original_severity": "gap-a-reader-closes",
+      "intake_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-other_low-intake.json",
+      "digest_path": "research/numerical-optimization-dynamics-2026-10-16-batch-17-step5-context.json",
+      "concern_pointer": "/concerns/1",
+      "original_concern": "The finite-precision procedure says to 'form only the tridiagonal entries of T=B*B' and 'Choose mu to be the eigenvalue ... closest to T_rr', but does not specify the rounded scalar expression/order for forming that Hermitian block, evaluating its two eigenvalues, or evaluating the deflation comparisons. The helper supplies rotation arithmetic, not this shift calculation. Exact-arithmetic selection is well-defined, and the conditional backward argument does not need an accurate shift, but the finite-precision procedure needs a concrete evaluation/failure rule to determine its execution under the operationwise model.",
+      "original_luna_row": {
+        "id": "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The sweep rotations and accumulator updates have consistent orientations; the bidiagonal Gram entries, phase corrections, deflation records, and finite-budget estimate caveats are coherent.",
+        "context_sha256": "4d753a8b6944aee46e15efe1f7a504ad3b1bad98c32f646e3691547786abfe68",
+        "item_sha256": "d389bd14e3295501fbceda649fbbd87988f33ff62226b4f84de11a9ca0bd9fcc",
+        "at": "2026-10-16T17:53:57.317Z"
+      },
+      "evidence": "Confirmed finite-precision interface omission: the helper fixes rotation arithmetic, but original algorithm specifies mathematical eigenvalues and inequalities without their scalar arithmetic. Addition gives a deterministic formula for the rounded Gram entries, Hermitian 2x2 eigenvalue estimates, distances, deflation tests and small-pivot test. Eigenvalues are h +/- sqrt(delta^2+|z|^2), with h=(a+c)/2,delta=(a-c)/2; exact rule retained. Any overflow/cancellation range event returns the already-authorized range-failure. No accuracy or convergence premise is introduced; rounded shift only selects the rotation.",
+      "canonical_path": "items/alg-implicit-shifted-bidiagonal-qr-with-deflation.md",
+      "full_preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/preimages/alg-implicit-shifted-bidiagonal-qr-with-deflation.md",
+      "full_proposal_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/successor-v2/alg-implicit-shifted-bidiagonal-qr-with-deflation.md",
+      "guard": {
+        "mode": "exact-full-preimage-bytes",
+        "before_text": "---\nid: alg-implicit-shifted-bidiagonal-qr-with-deflation\nkind: algorithm\ntitle: \"Finite budget implicit shifted QR for bidiagonal singular values\"\nstatus: draft\norigin: pipeline\nprovenance:\n  statement: literature-derived\n  proof: not-applicable\ndeps: [alg-scaled-complex-householder-and-givens-updates, alg-householder-bidiagonalization, def-real-and-complex-givens-transformations, thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries, def-frobenius-matrix-norm, lem-exact-householder-bidiagonal-reduction]\njustified_by: [lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence]\ndependency_level: 4\nverification:\n  precheck: n/a\nsources:\n  references:\n    - title: \"Wen-Wei Lin, Lecture Notes of Matrix Computations, \u00a76.3\"\n      url: \"https://zhims.github.io/doc/note/computing/matrixComputations.pdf\"\n    - title: \"James Demmel and W. Kahan, Accurate Singular Values of Bidiagonal Matrices, \u00a7\u00a72\u20135\"\n      url: \"https://www.netlib.org/lapack/lawnspdf/lawn03.pdf\"\n---\n\n## Definition\n\nInput the original $A\\in\\mathbb F^{m\\times n}$, the successful output record of [[alg-householder-bidiagonalization]] for $C=A$ if $m\\ge n$ and $C=A^*$ otherwise, a deflation tolerance $\\tau\\ge0$, and a finite nonnegative integer sweep budget $N$. The reduction record supplies the upper bidiagonal work matrix $B_0$, dense accumulators $U_B,V_B$, and ordered stored local transformation data. Initialize $B=B_0$, the sweep accumulators $U_\\Sigma,V_\\Sigma$ to identities of order $p=\\min(m,n)$, empty ordered left/right transformation lists, an empty deflation record, a pass counter $t=0$, and a sweep counter $s=0$. Write the diagonal as $d_i$ and superdiagonal as $e_i$, and set $e_0=0$.\n\nAt the start of each pass, set $t\\leftarrow t+1$, set $e_i$ to zero and append $(t,i,e_i^{old})$ to the deflation record whenever $|e_i|\\le\\tau(|d_i|+|d_{i+1}|)$. The corresponding additive matrix change has entry $-e_i^{old}$ at $(i,i+1)$ and zero elsewhere. Record any later non-target sparsity cleanup the same way with its row, column, and old value. The zero entries split the active blocks. If every active block has size one, stop with `converged`. Otherwise process the active blocks in increasing order of $\\ell$, skipping singleton blocks. Before each block sweep, if $s=N$, stop with `budget-exhausted`; otherwise form only the tridiagonal entries of $T=B^*B$ on that block: $T_{ii}=|d_i|^2+|e_{i-1}|^2$ and $T_{i,i+1}=\\overline{d_i}e_i$. Choose $\\mu$ to be the eigenvalue of the trailing Hermitian block $\\begin{bmatrix}T_{r-1,r-1}&T_{r-1,r}\\\\T_{r,r-1}&T_{rr}\\end{bmatrix}$ closest to $T_{rr}$, resolving a tie by the smaller eigenvalue. If the leading pivot $d_\\ell$ is zero or has magnitude at most $\\tau\\max(|e_{\\ell-1}|,|e_\\ell|)$, use the zero-shift branch $\\mu=0$ and choose the initial right Givens factor $G_\\ell$ so that $(d_\\ell,e_\\ell)G_\\ell=(\\rho,0)$, avoiding division by the small or zero diagonal.\n\nIn the ordinary branch choose the first right Givens factor $G_\\ell$ so that $G_\\ell^*(T_{\\ell\\ell}-\\mu,T_{\\ell+1,\\ell})^T=(\\rho,0)^T$, where $T_{\\ell+1,\\ell}=\\overline{e_\\ell}d_\\ell$. In either branch, apply $B\\leftarrow BG_\\ell$, update columns $\\ell,\\ell+1$ of $V_\\Sigma$ by right multiplication by this same stored rotation, and append its exact unitary representative to the right list. For $j=\\ell,\\ldots,r-1$, choose a left Givens factor $H_j$ so that $H_j^*(B_{j,j},B_{j+1,j})^T=(\\rho,0)^T$; apply it to rows $j,j+1$, update columns $j,j+1$ of $U_\\Sigma$ by right multiplication by this same stored rotation, and append its exact unitary representative to the left list. If $j<r-1$, choose a right Givens factor $G_{j+1}$ so that $(B_{j,j+1},B_{j,j+2})G_{j+1}=(\\rho,0)$; apply it to columns $j+1,j+2$, update the corresponding columns of $V_\\Sigma$ by right multiplication by this same stored rotation, and append its exact unitary representative to the right list. Continue until the bulge reaches the active block endpoint. A zero annihilation vector uses the identity rotation. In finite precision each Givens formation/update uses [[alg-scaled-complex-householder-and-givens-updates]], conjugate-transposed as needed for the stated left/right orientation; accumulator multiplications use the same stored local data but omit all target-zero writes. The dense accumulator multiplications follow the operationwise arithmetic model, while the ordered lists retain the exact unitary representatives used in analysis. Target zero writes to $B$ are included in their local error bounds. The initial shift-vector rotation does not zero an unrelated entry of $B$. Each Givens factor is chosen using [[def-real-and-complex-givens-transformations]] and its annihilation guarantee in [[thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries]].\n\nAfter each processed block, increment $s$ by one. Once all current active blocks have been processed, start a new pass. If any operation, norm or pivot is invalid or nonfinite, or a nonzero exact intermediate is outside the normal range, return `range-failure` with the partial $B$, accumulators, transformation lists, deflation record, and available residual reports. On `budget-exhausted`, return the current $B$, accumulators, transformation lists, deflation record, triplet residuals, and orthogonality residuals. On `converged`, set $B_{\\mathrm{final}}=B$ and return it with both dense accumulators, both transformation lists, the deflation record, triplet/orthogonality residuals, and its tall embedding $\\overline B_{\\mathrm{final}}=\\begin{bmatrix}B_{\\mathrm{final}}\\\\0_{M-p,p}\\end{bmatrix}$.\n\nFor every exit other than `range-failure`, let $B_{\\mathrm{out}}$ be the current work matrix, and let $d_i=(B_{\\mathrm{out}})_{ii}$. Obtain each candidate value as $\\widehat\\sigma_i=|d_i|$ by the scaled two-component modulus evaluation (real absolute value is exact). On `converged`, the active-block condition makes $B_{\\mathrm{out}}=B_{\\mathrm{final}}$ diagonal; after `budget-exhausted`, the diagonal values are estimates only and carry no accuracy claim.\n\nLet $W_B=\\operatorname{diag}(U_\\Sigma,I_{M-p})$. In exact arithmetic the tall-orientation accumulated factors are $U_C=U_BW_B$ and $V_C=V_BV_\\Sigma$. In finite precision form each dense product by row-by-column multiplication, with six-real-operation complex products and sequential componentwise rounded additions under the operationwise model; return `range-failure` if any required intermediate is invalid, nonfinite, or outside the normal range. Their exact theoretical factors are the products represented by the ordered local transformation lists together with the bidiagonal-reduction lists. If $m\\ge n$, set $\\widehat U=U_C$ and $\\widehat V=V_C$; for each nonzero $d_i$, multiply column $i$ of $\\widehat U$ by $d_i/|d_i|$ in exact arithmetic, using componentwise division by the successful scaled modulus readout in finite precision. If $m<n$, set $\\widehat U=V_C$ and $\\widehat V=U_C$; in this wide orientation multiply column $i$ of $\\widehat V$ by $d_i/|d_i|$ instead. Sort the candidate values in nonincreasing order, breaking ties by their original diagonal index, and permute the corresponding columns of the returned triplet vectors in the same way; leave $B_{\\mathrm{out}}$ and the transformation lists in their algorithmic order. For every candidate triplet $(\\widehat\\sigma_i,\\widehat u_i,\\widehat v_i)$, report $\\|A\\widehat v_i-\\widehat\\sigma_i\\widehat u_i\\|_2$ and $\\|A^*\\widehat u_i-\\widehat\\sigma_i\\widehat v_i\\|_2$. Also report $\\|\\widehat U^*\\widehat U-I\\|_F$ and $\\|\\widehat V^*\\widehat V-I\\|_F$. The reports expose finite-budget and rounding behavior; they do not certify convergence by themselves. Matrix residuals use the Frobenius norm defined in [[def-frobenius-matrix-norm]]. Any additional sparsity cleanup is recorded separately in the deflation record with its discarded-entry perturbation.\n",
+        "edits": [
+          {
+            "old": "\nIn the ordinary branch choose the first right Givens factor",
+            "new": "\n\n**Finite-precision shift and comparison schedule.** The preceding exact-arithmetic formulas retain their exact meaning. For finite precision use the scalar order, six-real-operation complex product, scaled real-component norm, and first-failing-primitive range policy of [[alg-scaled-complex-householder-and-givens-updates]] also for the following stages. All assignments below are stored; do not fuse operations. Comparisons, maxima, copies, conjugations, sign changes, and real absolute values are exact operations on stored finite values. Evaluate each complex magnitude by that helper's scaled two-component norm, with zero magnitude returned exactly as zero. At each pass visit deflation indices increasingly; at index $i$ evaluate $a_i=|e_i|$, $b_i=|d_i|$, $c_i=|d_{i+1}|$ in that order, then $h_i=\\operatorname{fl}(b_i+c_i)$ and $k_i=\\operatorname{fl}(\\tau h_i)$, and deflate exactly when $a_i\\le k_i$.\n\nFor each nonsingleton block, form its Gram diagonal entries in increasing index order, followed by its upper off-diagonal entries in increasing index order. To form $T_{ii}$, square $\\Re d_i,\\Im d_i,\\Re e_{i-1},\\Im e_{i-1}$ separately with rounding, add the first two rounded squares, add the last two, and add these two rounded sums, rounding each addition. Form $T_{i,i+1}$ by the helper's complex product for $\\overline{d_i}e_i$ and copy its conjugate to the lower off-diagonal. No other Gram entries are formed. Write the stored trailing block as $\\begin{bmatrix}a&z\\\\\\overline z&c\\end{bmatrix}$. In this order compute $h=\\operatorname{fl}(\\operatorname{fl}(a+c)/2)$, $\\delta=\\operatorname{fl}(\\operatorname{fl}(a-c)/2)$, and $k$ by the helper's scaled norm on the ordered four-real-component list $(\\delta,0,\\Re z,\\Im z)$, corresponding to the complex vector $(\\delta,z)$, returning exact zero for the zero list. Then compute $\\mu_-=\\operatorname{fl}(h-k)$, $\\mu_+=\\operatorname{fl}(h+k)$, $q_-=|\\operatorname{fl}(\\mu_--c)|$, and $q_+=|\\operatorname{fl}(\\mu_+-c)|$. Choose $\\mu=\\mu_-$ if $q_-\\le q_+$ and $\\mu=\\mu_+$ otherwise. In exact arithmetic these are the two Hermitian eigenvalues and the stated nearest-eigenvalue/tie rule; in finite precision they specify the shift estimates without asserting their accuracy.\n\nNext evaluate $|d_\\ell|$, $|e_{\\ell-1}|$, and $|e_\\ell|$ in that order and form $w=\\operatorname{fl}(\\tau\\max(|e_{\\ell-1}|,|e_\\ell|))$. Use the zero-shift branch exactly when $d_\\ell=0$ or $|d_\\ell|\\le w$. In the ordinary branch form the first shift-vector entry as $\\operatorname{fl}(T_{\\ell\\ell}-\\mu)$ and use the stored lower Gram entry as its second entry. If any of these primitives fails the helper's normal-range/finite-value requirements, return the existing `range-failure` record immediately, before any sweep transformation for that block. This rule permits range failure in shift formation and makes no unconditional progress claim. For $p=0$ or only singleton active blocks none of the block stages is requested.\n\nIn the ordinary branch choose the first right Givens factor",
+            "occurrences": 1
+          }
+        ]
+      },
+      "statement_or_definition_changed": true,
+      "consumer_review_scope": "All actual direct/indirect deps consumers and source-text uses for changed Statement/Definition; no blanket rereview for Facts/Proof-only changes.",
+      "consumer_dispositions": [
+        {
+          "id": "lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence",
+          "path": "items/lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence.md",
+          "source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/consumer-context/lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence.md",
+          "assessment": "unaffected-no-edit",
+          "actual_use_evidence": "Statement is exact-arithmetic sweep; Definition addition explicitly preserves exact shift. Proof 1.1 is a structural bulge induction, 1.2 multiplies unitary factors, 2.1 records actual deflations. These do not depend on shift accuracy; no repair."
+        },
+        {
+          "id": "thm-bidiagonal-svd-backward-error-under-local-stability",
+          "path": "items/thm-bidiagonal-svd-backward-error-under-local-stability.md",
+          "source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/consumer-context/thm-bidiagonal-svd-backward-error-under-local-stability.md",
+          "assessment": "unaffected-no-edit",
+          "actual_use_evidence": "Statement assumes actual local unitary-update error bounds and recorded discarded entries. Proof 4.1 expressly says shift rounding affects which rotation is chosen, not its certificate. Every successful added schedule yields exactly that existing local rotation interface; range failures are outside successful guarantees. No repair."
+        },
+        {
+          "id": "cor-computed-singular-values-absolute-error-from-backward-stability",
+          "path": "items/cor-computed-singular-values-absolute-error-from-backward-stability.md",
+          "source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/consumer-context/cor-computed-singular-values-absolute-error-from-backward-stability.md",
+          "assessment": "unaffected-no-edit",
+          "actual_use_evidence": "Statement conditions on a successful diagonal final matrix and exact represented factors; Proof 1.1-2.1 uses nearby-factorization plus Lipschitz singular-value bound, Proof 3.1 handles separate modulus readout. Deflation/sweep schedule addition changes neither these hypotheses nor readout; no repair."
+        },
+        {
+          "id": "alg-rank-thresholded-least-squares-by-svd",
+          "path": "items/alg-rank-thresholded-least-squares-by-svd.md",
+          "source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/consumer-context/alg-rank-thresholded-least-squares-by-svd.md",
+          "assessment": "unaffected-no-edit",
+          "actual_use_evidence": "First Definition paragraph returns inconclusive on any QR failure or budget exhaustion. New shift-stage range failures go through this existing branch. Exact arithmetic branch is unchanged and finite precision remains an unverified candidate; no repair."
+        },
+        {
+          "id": "thm-svd-thresholded-least-squares-minimum-norm-model",
+          "path": "items/thm-svd-thresholded-least-squares-minimum-norm-model.md",
+          "source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/consumer-context/thm-svd-thresholded-least-squares-minimum-norm-model.md",
+          "assessment": "unaffected-no-edit",
+          "actual_use_evidence": "Statement assumes an exact SVD; Proof 1.1 and 2.1 use its truncated pseudoinverse. Supplier schedule preserves exact arithmetic and cannot turn an unsuccessful finite run into a certified SVD. No repair."
+        },
+        {
+          "id": "thm-computed-pseudospectrum-membership-enclosure",
+          "path": "items/thm-computed-pseudospectrum-membership-enclosure.md",
+          "source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/consumer-context/thm-computed-pseudospectrum-membership-enclosure.md",
+          "assessment": "unaffected-no-edit",
+          "actual_use_evidence": "Statement requires certified absolute-error pair; A1 explicitly requires all arithmetic/deflation/readout/input allowances and treats budget exhaustion or unavailable bounds as undecided. Proof 1.1-2.1 only uses the supplied interval. New finite shift selection/failure does not alter certificate conditions; no repair."
+        }
+      ],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-17.proof-contracts.json",
+          "pointer": "/contracts/alg-implicit-shifted-bidiagonal-qr-with-deflation",
+          "action": "Owner refresh changed step derivation text/inputs and boundary analysis against proposed source, preserving independent-review history; leave unchanged external supplier quotes intact."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-17.pages.json",
+          "action": "Refresh only owning item Statement/Definition mirror against admitted source; root owns current raw/canonical hashes and manifest bindings."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-17.proof-contracts.json",
+          "pointer": "/contracts/lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence/citations/0",
+          "source_section": "Definition",
+          "action": "After formal admission only: mirror exact corrected source section if changed; preserve existing historical receipts and recertify current contexts natively."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-17.proof-contracts.json",
+          "pointer": "/contracts/thm-bidiagonal-svd-backward-error-under-local-stability/citations/1",
+          "source_section": "Definition",
+          "action": "After formal admission only: mirror exact corrected source section if changed; preserve existing historical receipts and recertify current contexts natively."
+        }
+      ],
+      "actual_digest_concern": {
+        "id": "alg-implicit-shifted-bidiagonal-qr-with-deflation",
+        "concern": "The finite-precision procedure says to 'form only the tridiagonal entries of T=B*B' and 'Choose mu to be the eigenvalue ... closest to T_rr', but does not specify the rounded scalar expression/order for forming that Hermitian block, evaluating its two eigenvalues, or evaluating the deflation comparisons. The helper supplies rotation arithmetic, not this shift calculation. Exact-arithmetic selection is well-defined, and the conditional backward argument does not need an accurate shift, but the finite-precision procedure needs a concrete evaluation/failure rule to determine its execution under the operationwise model.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_verified_against": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+        "line_numbers": [
+          351
+        ],
+        "matches_exact_row": true
+      },
+      "successor_refinement": {
+        "original_proposal_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/proposed/alg-implicit-shifted-bidiagonal-qr-with-deflation.md",
+        "exact_candidate_delta": {
+          "old": "the helper's scaled norm on the ordered three-real-component list $(\\delta,\\Re z,\\Im z)$",
+          "new": "the helper's scaled norm on the ordered four-real-component list $(\\delta,0,\\Re z,\\Im z)$, corresponding to the complex vector $(\\delta,z)$",
+          "occurrences": 1
+        },
+        "reason": "Use the helper's actual complex-vector norm input interface. The four real components are the components of (delta,z), with zero imaginary part for delta. The inserted zero contributes only exact-zero square/add arithmetic; exact norm and existing successful local rotation/backward-error guarantees are unchanged.",
+        "consumer_disposition": "No new consumer rereview: the same guarantees and existing six QR consumer dispositions remain applicable. This correction neither changes any convergence/accuracy claim nor adds a certified shift-accuracy assumption."
+      }
+    },
+    {
+      "id": "thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two",
+      "batch": 18,
+      "assessment": "confirmed-defect",
+      "original_severity": "gap-a-reader-closes",
+      "intake_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-other_low-intake.json",
+      "digest_path": "research/numerical-optimization-dynamics-2026-10-16-batch-18-step5-context.json",
+      "concern_pointer": "/concerns/0",
+      "original_concern": "Proof step 2.2 introduces an arbitrary initial error, and step 3.1 then asserts \u201cMoreover \u03b4\u2080\u22600\u201d from invertibility of A. This needs the restriction e\u207d\u2070\u207e\u22600, stated only in the final conclusion of step 3.1: for e\u207d\u2070\u207e=0, \u03b4\u2080=0. Fixing an arbitrary nonzero initial error before this assertion closes the proof immediately; the theorem itself remains supported.",
+      "original_luna_row": {
+        "id": "thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The triangular splitting and determinant calculation are valid. The sufficiency eigenvalue identity and necessity energy identity are correct; convergence supplies invertibility, and the positive-diagonal energy sum proves A positive definite.",
+        "context_sha256": "282ed49db8273dd8f9f1cc04114c8ee12060f5a58a577bbc29aacf1a9ea54b7f",
+        "item_sha256": "4a5b4978f87c2a5bf2f4537eae81d90affe280e19557017a994a58bdebed602c",
+        "at": "2026-10-16T17:53:10.561Z"
+      },
+      "evidence": "Confirmed quantifier slip: original Proof 2.2 permits e0=0, for which delta0=0, contradicting the literal assertion in 3.1. For nonzero e0, delta0=0 and A e0+M delta0=0 imply A e0=0, impossible since A is invertible. Summed energy identity then has positive first term. This is sufficient to prove positive definiteness, which quantifies only nonzero vectors. Original theorem and supplier interfaces are unchanged.",
+      "canonical_path": "items/thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two.md",
+      "full_preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/preimages/thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two.md",
+      "full_proposal_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/proposed/thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two.md",
+      "guard": {
+        "mode": "exact-full-preimage-bytes",
+        "before_text": "---\nid: thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two\nkind: theorem\ntitle: \"SOR converges exactly for positive-definite A and relaxation parameter in (0, 2)\"\nstatus: draft\norigin: pipeline\nprovenance:\n  statement: literature-derived\n  proof: ai-altered\ndeps:\n  - def-diagonal-lower-upper-splitting-convention\n  - alg-sor-stationary-iteration\n  - def-stationary-iteration-from-a-matrix-splitting\n  - thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one\n  - def-cholesky-factorisation-with-positive-diagonal\n  - thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost\n  - thm-determinant-multiplicative\n  - thm-determinant-of-a-triangular-matrix\n  - thm-determinant-is-product-of-eigenvalues\n  - thm-the-complex-numbers-are-algebraically-closed\ndependency_level: 2\nproof_strategy: direct\nverification:\n  precheck: pass\nsources:\n  references:\n    - title: \"Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., \u00a74.2.4\"\n      url: \"https://www-users.cse.umn.edu/~saad/IterMethBook_2ndEd.pdf\"\n      locator: \"Printed p. 122, Theorem 4.10: for symmetric A with positive diagonal and 0<\u03c9<2, SOR converges for every start iff A is positive definite. The local proof below also verifies the Hermitian extension.\"\n    - title: \"Rutgers University MATH 574, Lecture Notes, \u00a73 Matrix iterative methods\"\n      url: \"https://sites.math.rutgers.edu/~falk/math574/lecture4.pdf\"\n      locator: \"PDF pp. 3\u20134, Theorems 10\u201311: the necessary relaxation range and the positive-definite sufficient condition.\"\n    - title: \"David Bindel, Matrix Computations (CS 6210), Cornell University, Fall 2012, Lecture 31\"\n      url: \"https://www.cs.cornell.edu/~bindel/class/cs6210-f12/notes/lec31.pdf\"\n      locator: \"PDF p. 5: SOR is defined as relaxation of the fixed-order Gauss\u2013Seidel sweep; this source is used for the recurrence, not the iff theorem.\"\n---\n\n## Statement\n\nLet $n\\ge1$, $A\\in M_n(\\mathbb C)$ be Hermitian with strictly positive\ndiagonal, and let $\\omega\\in\\mathbb R\\setminus\\{0\\}$. Write\n$A=D-L-L^*$ by [[def-diagonal-lower-upper-splitting-convention]], and define\n\n$$M_\\omega=\\omega^{-1}D-L,\\qquad N_\\omega=(\\omega^{-1}-1)D+L^*,\\qquad G_\\omega=M_\\omega^{-1}N_\\omega.$$\n\nThe SOR iteration is $x^{(k+1)}=G_\\omega x^{(k)}+M_\\omega^{-1}b$. It converges\nto the unique solution of $Ax=b$ for every $b,x^{(0)}\\in\\mathbb C^n$ if and\nonly if $A$ is positive definite (meaning $x^*Ax>0$ for every nonzero $x$)\nand $0<\\omega<2$.\n\n## Facts & Assumptions\n\n**Given:** $n\\ge1$, a Hermitian matrix $A$ with positive diagonal, a real\n$\\omega\\ne0$, and arbitrary $b,x^{(0)}\\in\\mathbb C^n$.\n\n[A1] $A=A^*$, $a_{ii}>0$, and $\\omega\\in\\mathbb R\\setminus\\{0\\}$.\n\n[F1] SOR uses $M_\\omega=\\omega^{-1}D-L$ and\n$N_\\omega=(\\omega^{-1}-1)D+L^*$\n([[alg-sor-stationary-iteration]]).\n\n[L1] The fixed diagonal/lower/upper convention gives $A=D-L-L^*$ for\nHermitian $A$ ([[def-diagonal-lower-upper-splitting-convention]]).\n\n[L2] For an invertible matrix $M$ and $A=M-N$, the stationary update is\n$x^{(k+1)}=M^{-1}Nx^{(k)}+M^{-1}b$\n([[def-stationary-iteration-from-a-matrix-splitting]]).\n\n[L3] This iteration converges to the unique solution for every right-hand\nside and every start exactly when $\\rho(M^{-1}N)<1$\n([[thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one]]).\n\n[L4] Hermitian positive definite means $A=A^*$ and $x^*Ax>0$ for every\nnonzero $x$ ([[def-cholesky-factorisation-with-positive-diagonal]]).\n\n[L5] A lower-triangular system with nonzero diagonal has a unique forward\nsubstitution solution ([[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]]).\n\n[L6] Determinants are multiplicative for same-sized square matrices over a\ncommutative ring ([[thm-determinant-multiplicative]]).\n\n[L7] The determinant of a triangular matrix is the product of its diagonal\nentries ([[thm-determinant-of-a-triangular-matrix]]).\n\n[L8] When the characteristic polynomial splits as $\\prod_i(t-\\lambda_i)$,\nthe determinant is $\\prod_i\\lambda_i$\n([[thm-determinant-is-product-of-eigenvalues]]).\n\n[L9] Every complex polynomial splits over $\\mathbb C$\n([[thm-the-complex-numbers-are-algebraically-closed]]).\n\n## Proof\n\n\n1.1 By [A1] and [F1], $M_\\omega$ is lower triangular with diagonal $a_{ii}/\\omega\\ne0$, hence invertible by [L5]. Also $A=M_\\omega-N_\\omega$ by [L1], so [L2] applies with iteration matrix $G_\\omega$. The matrix $N_\\omega$ is upper triangular with diagonal entries $(\\omega^{-1}-1)a_{ii}$. Thus [L6]\u2013[L7] give $\\det(M_\\omega)=\\omega^{-n}\\prod_i a_{ii}$ and $\\det(N_\\omega)=(\\omega^{-1}-1)^n\\prod_i a_{ii}$. From $M_\\omega G_\\omega=N_\\omega$ and multiplicativity, $\\det(G_\\omega)=\\det(N_\\omega)/\\det(M_\\omega)=(1-\\omega)^n$. [A1, F1, L1, L2, L5, L6, L7, algebra]\n\n1.2 For sufficiency, suppose $A$ is positive definite and $0<\\omega<2$. Then $Q:=M_\\omega+M_\\omega^*-A=(2/\\omega-1)D$ is positive definite. For an eigenpair $G_\\omega v=\\lambda v$ with $v\\ne0$, one has $\\lambda\\ne1$ since $Av=(1-\\lambda)M_\\omega v$ and $A$ is invertible. Put $a=v^*Av>0$. Then $v^*M_\\omega v=a/(1-\\lambda)$, so $v^*Qv=a\\left(2\\operatorname{Re}\\frac{1}{1-\\lambda}-1\\right) =a\\frac{1-|\\lambda|^2}{|1-\\lambda|^2}>0$. Therefore $|\\lambda|<1$ for every eigenvalue and $\\rho(G_\\omega)<1$. [A1, F1, L1, L2, L4, algebra]\n\n2.1 If SOR converges for every right-hand side and start, [L3] gives $\\rho(G_\\omega)<1$. By [L8]\u2013[L9], $|\\det(G_\\omega)|=\\prod_{j=1}^n|\\lambda_j|\\le\\rho(G_\\omega)^n<1$. Step 1.1 therefore gives $|1-\\omega|<1$, which for real $\\omega$ is equivalent to $0<\\omega<2$. [L3, L8, L9, step 1.1, algebra]\n\n2.2 Assume now that SOR converges for every right-hand side and start. Then $\\rho(G_\\omega)<1$ by [L3], so $1$ is not an eigenvalue of $G_\\omega$ and $I-G_\\omega$ is invertible. By [L2], $A=M_\\omega(I-G_\\omega)$ is invertible. For $b=0$, its unique solution is $x_*=0$. For arbitrary $e^{(0)}:=x^{(0)}$, set $e^{(k)}:=x^{(k)}-x_*=x^{(k)}$ and $\\delta_k=e^{(k+1)}-e^{(k)}$. The homogeneous SOR recurrence gives $M_\\omega e^{(k+1)}=N_\\omega e^{(k)}$, hence $Ae^{(k)}+M_\\omega\\delta_k=0$. Expanding the Hermitian quadratic form gives $(e^{(k)})^*Ae^{(k)}-(e^{(k+1)})^*Ae^{(k+1)} =\\delta_k^*(M_\\omega+M_\\omega^*-A)\\delta_k =(2/\\omega-1)\\delta_k^*D\\delta_k$. The last equality follows from [L1] and [F1]. [A1, F1, L1, L2, L3, step 1.1, algebra]\n\n3.1 By step 2.1, $c:=2/\\omega-1>0$. Summing the identity in step 2.2 from $k=0$ to $N-1$ and taking $N\\to\\infty$ (the error tends to $0$ by the assumed convergence) gives $(e^{(0)})^*Ae^{(0)}=c\\sum_{k=0}^{\\infty}\\delta_k^*D\\delta_k$. Moreover $\\delta_0\\ne0$: otherwise step 2.2 implies $Ae^{(0)}=0$, contrary to invertibility of $A$. Since $D$ has positive diagonal, the first summand is strictly positive and all others are nonnegative. Thus $(e^{(0)})^*Ae^{(0)}>0$ for every nonzero $e^{(0)}$, so [L4] gives that $A$ is positive definite. [A1, L3, L4, step 2.1, step 2.2, algebra]\n\n4.1 By [L3], $\\rho(G_\\omega)<1$ implies convergence to the unique solution for every right-hand side and every initial vector. Steps 2.1 and 3.1 prove the reverse implication. [L3, step 2.1, step 3.1, step 1.2] \u220e\n\n## Remarks\n\nThe conclusion is exact-arithmetic asymptotic convergence; it is not a\none-step error decrease or a finite-precision accuracy guarantee. No\noptimal-$\\omega$ formula is asserted.\n",
+        "edits": [
+          {
+            "old": "For arbitrary $e^{(0)}:=x^{(0)}$",
+            "new": "For arbitrary nonzero $e^{(0)}:=x^{(0)}$",
+            "occurrences": 1
+          }
+        ]
+      },
+      "statement_or_definition_changed": false,
+      "consumer_review_scope": "No Statement/Definition change; no consumer proof rereview triggered.",
+      "consumer_dispositions": [],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-18.proof-contracts.json",
+          "pointer": "/contracts/thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two",
+          "action": "Owner refresh changed step derivation text/inputs and boundary analysis against proposed source, preserving independent-review history; leave unchanged external supplier quotes intact.",
+          "specific": "Own derivation for step2.2 now quantifies nonzero e0; preserve zero initial-error stationary case as valid convergence input."
+        }
+      ],
+      "actual_digest_concern": {
+        "id": "thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two",
+        "concern": "Proof step 2.2 introduces an arbitrary initial error, and step 3.1 then asserts \u201cMoreover \u03b4\u2080\u22600\u201d from invertibility of A. This needs the restriction e\u207d\u2070\u207e\u22600, stated only in the final conclusion of step 3.1: for e\u207d\u2070\u207e=0, \u03b4\u2080=0. Fixing an arbitrary nonzero initial error before this assertion closes the proof immediately; the theorem itself remains supported.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_verified_against": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+        "line_numbers": [
+          316
+        ],
+        "matches_exact_row": true
+      }
+    },
+    {
+      "id": "cor-shape-regular-affine-fe-primal-energy-approximation",
+      "batch": 38,
+      "assessment": "confirmed-defect",
+      "original_severity": "gap-a-reader-closes",
+      "intake_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-other_low-intake.json",
+      "digest_path": "research/numerical-optimization-dynamics-2026-10-16-batch-38-step5-context.json",
+      "concern_pointer": "/concerns/0",
+      "original_concern": "Proof 2.1 uses [F2] to bound both terms from step 1.1, including \u2016w\u2212q\u2016_{W^{r+1,2}}, but the local formulation of [F2] records only m=0,1. The opened Bramble\u2013Hilbert supplier does provide the needed full W^{r+1,2} bound: apply it with polynomial parameter r+1 and s=r+1. The argument is sound after this immediate citation reconstruction; the local fact should include that case.",
+      "original_luna_row": {
+        "id": "cor-shape-regular-affine-fe-primal-energy-approximation",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "The reference Bramble\u2013Hilbert bound follows by instantiating the supplied theorem with order r+1, giving a polynomial in P_r; the interpolation stability and affine scaling then yield the stated local and global H\u00b9 estimate.",
+        "context_sha256": "49b906dc9e4ba20b4769d9d0039dc98dd8183e4dad171eae433be58c0a79c6f3",
+        "item_sha256": "e33ac9b4066e4b846ef5846c7c728054defcaf98f737e99d0837ad21700c2513",
+        "at": "2026-10-16T18:01:31.914Z"
+      },
+      "evidence": "Confirmed local-fact truncation: Proof 1.1 includes ||w-q||_{W^{r+1,2}}, but F2 records only m=0,1. Bramble-Hilbert Statement with polynomial order parameter r+1 and s=r+1 gives that missing norm estimate for its moment-matching q in P_r. The moment construction is independent of s (supplier Proof 1.1-3.1), so the same q simultaneously handles all 0<=m<=r+1. Full original H1 estimate preserved; Facts-only edit.",
+      "canonical_path": "items/cor-shape-regular-affine-fe-primal-energy-approximation.md",
+      "full_preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/preimages/cor-shape-regular-affine-fe-primal-energy-approximation.md",
+      "full_proposal_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/proposed/cor-shape-regular-affine-fe-primal-energy-approximation.md",
+      "guard": {
+        "mode": "exact-full-preimage-bytes",
+        "before_text": "---\nid: cor-shape-regular-affine-fe-primal-energy-approximation\nkind: corollary\ntitle: Primal H\u00b9 approximation on shape-regular affine finite-element meshes\nstatus: draft\norigin: pipeline\npipeline_run: numerical-optimization-dynamics-2026-10-16\ndependency_level: 5\ndeps:\n  - def-countable-choice\n  - def-lebesgue-outer-measure\n  - def-matching-affine-simplicial-meshes\n  - def-reference-finite-element-and-unisolvent-dofs\n  - def-sobolev-space-wkp-and-its-norm\n  - def-wkp-zero-as-a-sobolev-closure\n  - lem-affine-pullback-weak-derivatives-and-scaling\n  - lem-shape-regular-affine-simplex-scaling\n  - lem-unisolvent-dofs-define-reference-interpolant\n  - thm-bramble-hilbert-on-reference-simplex\n  - thm-lebesgue-measure-is-a-complete-measure\n  - thm-lebesgue-measure-of-a-box-of-every-kind\nproof_strategy: direct\nprovenance:\n  statement: literature-derived\n  proof: ai-altered\nsources:\n  references:\n    - title: Thomas Richter, Die Finite Elemente Methode f\u00fcr partielle Differentialgleichungen\n      url: https://numerics.ovgu.de/teaching/numpde/skript.pdf\n      locator: \"Chapter 3 \u00a7\u00a73.3.1\u20133.3, Lemmas 3.23\u20133.28, printed pp. 75\u201379: reference Bramble\u2013Hilbert, bounded interpolation, and affine scaling. Lemma 3.28 is stated with its proof assigned as an exercise; the present global estimate is proved below.\"\nverification: {}\n---\n\n## Statement\n\nAssume Countable Choice. Let $d\\ge2$, let $\\Omega\\subset\\mathbb R^d$ be a\nbounded polyhedral open set with a matching shape-regular affine simplicial\nmesh family $\\{\\mathcal T_h\\}$, and set $h:=\\max_{K\\in\\mathcal T_h}h_K\\le1$.\nFix an integer $r\\ge1$. On the reference simplex let\n$(\\widehat S_d,\\widehat P,\\widehat\\Sigma)$ be an unisolvent real scalar\nfinite element whose finite-dimensional local space $\\widehat P$ consists of\npolynomials and contains $\\mathbb P_r$. Assume each\ndegree of freedom has a bounded linear extension to\n$W^{r+1,2}(\\widehat S_d)$, and let $\\widehat I$ be its interpolant. Suppose\nthere is a global map $I_h$ whose restriction to each cell is the affine\npullback of $\\widehat I$, and that $I_hu\\in V_h$ for the conforming discrete\nspace $V_h\\subset H^1_0(\\Omega)$ whenever\n$u\\in W^{r+1,2}(\\Omega)\\cap H^1_0(\\Omega)$, where $H^1_0(\\Omega)$ is the\nclosure of $C_c^\\infty(\\Omega)$ in $W^{1,2}(\\Omega)$\n([[def-wkp-zero-as-a-sobolev-closure]]). Then a constant $C$ independent of\n$h$ and $u$ satisfies\n$$\\|u-I_hu\\|_{H^1(\\Omega)}\\le C h^r|u|_{W^{r+1,2}(\\Omega)}.$$\nThe global conformity and zero-boundary mapping property of $I_h$ are explicit\nhypotheses; this estimate does not assert them for arbitrary degrees of\nfreedom.\n\n## Facts & Assumptions\n\n**Given:** Countable Choice; the exact matching affine mesh convention; a reference element with $\\mathbb P_r\\subseteq\\widehat P$ and bounded degrees of freedom on $W^{r+1,2}$; the cellwise affine interpolation formula; and the stated global mapping property $I_hu\\in V_h$.\n\n[F1] An unisolvent reference element has a unique linear interpolation operator that reproduces every polynomial in its finite-element space ([[def-reference-finite-element-and-unisolvent-dofs]], [[lem-unisolvent-dofs-define-reference-interpolant]]).\n\n[F2] On the reference simplex, for real-valued $w\\in W^{r+1,2}$ there is $q\\in\\mathbb P_r$ with $\\|w-q\\|_{W^{m,2}}\\le C|w|_{W^{r+1,2}}$ for $m=0,1$ ([[thm-bramble-hilbert-on-reference-simplex]]).\n\n[F3] Affine pullback and pushforward transform order-$m$ Sobolev seminorms by the corresponding powers of $A$ and $A^{-1}$ and determinant factors ([[lem-affine-pullback-weak-derivatives-and-scaling]]).\n\n[F4] Shape regularity gives $\\|A_K\\|\\le Ch_K$, $\\|A_K^{-1}\\|\\le Ch_K^{-1}$, and $\\det A_K\\asymp h_K^d$ ([[lem-shape-regular-affine-simplex-scaling]]).\n\n[F5] Countable Choice is assumed by the Sobolev and affine-change suppliers used in [F2]\u2013[F4] and by the Lebesgue measure suppliers in [F6] ([[def-countable-choice]]).\n\n[F6] Lebesgue outer measure is defined by elementary-set covers; half-open boxes have their product volume, and every outer-null set is measurable and null ([[def-lebesgue-outer-measure]], [[thm-lebesgue-measure-is-a-complete-measure]], [[thm-lebesgue-measure-of-a-box-of-every-kind]]).\n\n## Proof\n\n1.1 On the reference cell write $\\widehat Iw=\\sum_{i=1}^N\\widehat\\sigma_i(w)\\widehat\\phi_i$. Each degree of freedom is bounded on $W^{r+1,2}$ by **Given**, and each fixed polynomial shape function has finite $W^{1,2}$ norm. Thus $\\|\\widehat Iw\\|_{W^{1,2}}\\le C\\|w\\|_{W^{r+1,2}}$. By [F1], $\\widehat Iq=q$ for every $q\\in\\mathbb P_r$. For such $q$, $w-\\widehat Iw=(w-q)-\\widehat I(w-q),$ so $\\|w-\\widehat Iw\\|_{W^{m,2}} \\le\\|w-q\\|_{W^{m,2}}+C\\|w-q\\|_{W^{r+1,2}}\\qquad(m=0,1).$ [F1, given, algebra]\n\n2.1 Choose the polynomial $q\\in\\mathbb P_r$ supplied by [F2]. Since $m\\le1\\le r+1$, [F2] bounds both terms in step 1.1 by $C|w|_{W^{r+1,2}}$. Hence the reference-cell interpolation error obeys $\\|w-\\widehat Iw\\|_{W^{m,2}}\\le C|w|_{W^{r+1,2}}$ for $m=0,1$. [F2, step 1.1]\n\n3.1 For a cell $K$ with affine matrix $A_K$, apply [F3] to transform the reference error and the order-$(r+1)$ derivative seminorm back to $K$. The determinant factors cancel; the remaining factor is bounded by $C\\|A_K^{-1}\\|^m\\|A_K\\|^{r+1}\\le C h_K^{r+1-m}$ by [F4]. Therefore $\\|u-I_Ku\\|_{L^2(K)}\\le C h_K^{r+1}|u|_{W^{r+1,2}(K)},\\qquad |u-I_Ku|_{W^{1,2}(K)}\\le C h_K^r|u|_{W^{r+1,2}(K)}.$ [F3, F4, F5, step 2.1, algebra]\n\n4.1 Let $E_h:=\\bigcup_{K\\in\\mathcal T_h}\\partial K$, a finite union of simplex facets. Each facet lies in a bounded affine hyperplane; choose a coordinate with nonzero normal component and write that hyperplane as the graph of an affine function over a bounded box in $\\mathbb R^{d-1}$. Partition the base box into at most $C_0N^{d-1}$ boxes of side $1/N$. The affine function varies by at most $C_1/N$ on each, so each graph piece lies in a slightly enlarged half-open $d$-box of volume at most $C_2N^{-d}$. These elementary-set cover members have total volume at most $C_0C_2/N$; the outer-measure definition and box-volume formula give outer measure zero for the facet, and completeness makes it Lebesgue-null. Thus $E_h$ is null, and $\\Omega\\setminus E_h$ is the disjoint union of the cell interiors by the mesh definition. Square and sum the estimates in step 3.1 over these interiors; the sums of squared Sobolev seminorms equal the corresponding global seminorms. Since $h_K\\le h\\le1$, the order-zero contribution $h_K^{r+1}$ is at most $h^r$. The global interpolation map in **Given** takes values in $V_h$, yielding $\\|u-I_hu\\|_{H^1(\\Omega)}\\le C h^r|u|_{W^{r+1,2}(\\Omega)}$. [given, F4, F5, F6, step 3.1, algebra] \u220e\n",
+        "edits": [
+          {
+            "old": "for $m=0,1$ ([[thm-bramble-hilbert-on-reference-simplex]]).",
+            "new": "for every integer $0\\le m\\le r+1$, using the same polynomial $q$ ([[thm-bramble-hilbert-on-reference-simplex]], with its polynomial parameter $r+1$, $p=2$, and $s=m$).",
+            "occurrences": 1
+          }
+        ]
+      },
+      "statement_or_definition_changed": false,
+      "consumer_review_scope": "No Statement/Definition change; no consumer proof rereview triggered.",
+      "consumer_dispositions": [],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-38.proof-contracts.json",
+          "pointer": "/contracts/cor-shape-regular-affine-fe-primal-energy-approximation",
+          "action": "Owner refresh changed step derivation text/inputs and boundary analysis against proposed source, preserving independent-review history; leave unchanged external supplier quotes intact.",
+          "specific": "F2 interpretation now includes m=r+1 for the same moment polynomial; no supplier quote alteration required because its Statement already has this range."
+        }
+      ],
+      "actual_digest_concern": {
+        "id": "cor-shape-regular-affine-fe-primal-energy-approximation",
+        "concern": "Proof 2.1 uses [F2] to bound both terms from step 1.1, including \u2016w\u2212q\u2016_{W^{r+1,2}}, but the local formulation of [F2] records only m=0,1. The opened Bramble\u2013Hilbert supplier does provide the needed full W^{r+1,2} bound: apply it with polynomial parameter r+1 and s=r+1. The argument is sound after this immediate citation reconstruction; the local fact should include that case.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_verified_against": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+        "line_numbers": [
+          628
+        ],
+        "matches_exact_row": true
+      }
+    },
+    {
+      "id": "thm-damped-newton-global-phase-and-local-quadratic-rate",
+      "batch": 39,
+      "assessment": "confirmed-defect",
+      "original_severity": "gap-a-reader-closes",
+      "intake_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-reader-other_low-intake.json",
+      "digest_path": "research/numerical-optimization-dynamics-2026-10-16-batch-39-step5-context.json",
+      "concern_pointer": "/concerns/0",
+      "original_concern": "The Statement does not impose d \u2265 1, but its cited local supplier thm-newton-local-quadratic-convergence-under-lipschitz-hessian explicitly assumes d \u2265 1. It also defines the operator norm as sup over \u2016v\u2016\u2082 = 1, whose indexing set is empty in dimension zero, without a zero-dimensional convention. The positive-dimensional argument is sound; explicitly requiring d \u2265 1, or supplying the zero-dimensional convention and stationary case, would close this boundary mismatch.",
+      "original_luna_row": {
+        "id": "thm-damped-newton-global-phase-and-local-quadratic-rate",
+        "model": "gpt-6-luna",
+        "keep": true,
+        "reason": "Accepted steps stay in K\u2282V, where the Hessian and gradient-gap bounds apply. The backtracking bound gives t\u2265\u03c4_N, yielding the stated contraction; the local theorem applies after entry into its ball.",
+        "context_sha256": "dede0db480bba308e1ce288ee7cf6e0f1b2f3fdeada862930ee11897b3ab4e24",
+        "item_sha256": "5aead9931a995ebb412b7693eec4be99eae69b25291e29bc94eb959bcdd3baba",
+        "at": "2026-10-16T18:02:02.591Z"
+      },
+      "evidence": "Confirmed zero-dimension interface defect in operator norm and local theorem; independent inspection also finds alg-damped-newton requires d>=1. Local theorem-only immediate stationary extension avoids modifying published suppliers. With d=0 the only point is both x0 and x*, gradient0, gap0, and there are no accepted updates. rho=R>0,C=0 fulfill every conditional local assertion. Original finite-entry disjunction omitted the canonical stationary exit, also corrected so x0=x* is covered in positive dimensions. All positive-dimensional Hessian assumptions, contraction constants and local conclusions remain identical.",
+      "canonical_path": "items/thm-damped-newton-global-phase-and-local-quadratic-rate.md",
+      "full_preimage_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/preimages/thm-damped-newton-global-phase-and-local-quadratic-rate.md",
+      "full_proposal_path": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/proposed/thm-damped-newton-global-phase-and-local-quadratic-rate.md",
+      "guard": {
+        "mode": "exact-full-preimage-bytes",
+        "before_text": "---\nid: thm-damped-newton-global-phase-and-local-quadratic-rate\nkind: theorem\ntitle: \"Damped Newton reaches its local quadratic phase in finitely many continued updates\"\nstatus: draft\norigin: pipeline\npipeline_run: numerical-optimization-dynamics-2026-10-16\ndependency_level: 1\ndeps:\n  - alg-damped-newton\n  - thm-newton-local-quadratic-convergence-under-lipschitz-hessian\n  - lem-geometric-sequence-null\n  - lem-hessian-lower-bound-strong-convexity-gradient-gap\n  - def-hessian-and-euclidean-critical-point\n  - def-jacobian-matrix-and-gradient\n  - thm-multivariable-taylor-formula-with-lagrange-remainder\n  - cor-real-spectral-theorem-for-self-adjoint-endomorphisms\n  - cor-hessian-is-symmetric\nproof_strategy: direct\nprovenance:\n  statement: ai-altered\n  proof: ai-altered\nsources:\n  references:\n    - title: \"Stephen Boyd and Lieven Vandenberghe, Convex Optimization\"\n      url: \"https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf\"\n    - title: \"Philip E. Gill and Margaret H. Wright, Math 171B Numerical Optimization Class Notes\"\n      url: \"https://mathweb.ucsd.edu/~njw/Teaching/Math171B/notes171B.pdf\"\n---\n\n## Statement\n\nLet $U\\subseteq\\mathbb R^d$ be open and convex, let $f\\in C^2(U,\\mathbb R)$ have an attained global minimum $f^*=f(x^*)$ at $x^*\\in U$, and fix $x_0\\in U$. Suppose $K:=\\{y\\in U:f(y)\\le f(x_0)\\}$ is compact and is contained in a convex open $V\\subseteq U$ that contains every Newton backtracking trial segment under consideration. For constants $0<m\\le M$, assume\n\n$$m\\|v\\|_2^2\\le v^TH_f(y)v\\le M\\|v\\|_2^2\\qquad(y\\in V,\\ v\\in\\mathbb R^d).$$\n\nAssume also that there are $R>0$ and $L_H\\ge0$ with $B(x^*,R)\\subseteq V$ and $\\|H_f(y)-H_f(z)\\|_{\\mathrm{op}}\\le L_H\\|y-z\\|_2$ for $y,z\\in B(x^*,R)$, where $\\|A\\|_{\\mathrm{op}}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$. Run [[alg-damped-newton]] with $a\\in(0,1/2)$, $b\\in(0,1)$, and positive decrement tolerance $\\varepsilon$. Let $\\rho>0$ and $C<\\infty$ be constants furnished by [[thm-newton-local-quadratic-convergence-under-lipschitz-hessian]] for these data, and set\n\n$$\\tau_N:=\\min\\left\\{1,\\frac{2b(1-a)m}{M}\\right\\},\\qquad q_N:=1-\\frac{2am\\tau_N}{M}.$$\n\nFor every accepted update before entry into $B(x^*,\\rho)$,\n\n$$f(x_{k+1})-f^*\\le q_N(f(x_k)-f^*),\\qquad 0<q_N<1.$$\n\nThus, after finitely many such updates the method either has stopped at its positive decrement test or has entered $B(x^*,\\rho)$. More explicitly, if $\\varepsilon<m^2\\rho^2/(2M)$, the decrement test cannot stop outside that ball, so the method reaches it after finitely many accepted updates. Once in this ball, every later attempted update has step $t_k=1$ and satisfies\n\n$$\\|x_{k+1}-x^*\\|_2\\le C\\|x_k-x^*\\|_2^2.$$\n\nThe last assertion is conditional on the decrement test not stopping first. No post-stop iterate or update is asserted. This is a strongly convex objective result; it does not apply to arbitrary vector roots or indefinite Hessians.\n\n## Facts & Assumptions\n\n**Given:** The hypotheses of the Statement, a generated iterate $x\\in K$, and the canonical damped-Newton line-search parameters and decrement test.\n\n[F1] [[alg-damped-newton]]: when $H_f(x)$ is positive definite it computes $p=-H_f(x)^{-1}\\nabla f(x)$ and $\\lambda^2=\\nabla f(x)^TH_f(x)^{-1}\\nabla f(x)$; if $\\lambda^2/2\\le\\varepsilon$ it stops before line search, and otherwise it backtracks from $t=1$ using the Armijo condition with parameter $a$ and factor $b$.\n\n[F2] [[thm-newton-local-quadratic-convergence-under-lipschitz-hessian]]: for a $C^2$ objective with a positive-definite critical Hessian and a Lipschitz Hessian on a ball, every generated iterate from a sufficiently small ball remains there; each attempted update whose decrement test does not stop has unit step and a quadratic error bound.\n\n[F3] [[lem-hessian-lower-bound-strong-convexity-gradient-gap]]: the Hessian lower bound gives $f(x)-f^*\\ge m\\|x-x^*\\|_2^2/2$ and $\\|\\nabla f(x)\\|_2^2\\ge2m(f(x)-f^*)$.\n\n[F4] [[thm-multivariable-taylor-formula-with-lagrange-remainder]]: on a segment in the convex domain, the second-order remainder is a Hessian quadratic form at an interior point.\n\n[F5] [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]]: a real symmetric Hessian has an orthonormal eigenbasis, so $mI\\preceq H\\preceq MI$ implies $M^{-1}I\\preceq H^{-1}\\preceq m^{-1}I$.\n\n[F6] [[cor-hessian-is-symmetric]] and [[def-hessian-and-euclidean-critical-point]]: the Hessian of a $C^2$ real scalar objective is symmetric and uses the second-partial convention.\n\n[F7] [[def-jacobian-matrix-and-gradient]]: $\\nabla f$ is the vector of first partial derivatives.\n\n[F8] [[lem-geometric-sequence-null]]: if $0<q_N<1$, then $q_N^k\\to0$.\n\n## Proof\n1.1 At a nonstationary iterate, $H:=H_f(x)$ is symmetric positive definite by [F6] and the lower bound. Put $g:=\\nabla f(x)$ and $p:=-H^{-1}g$. The Newton decrement is $\\lambda^2=g^TH^{-1}g=p^THp$, and [F5] gives $\\lambda^2\\ge\\|g\\|_2^2/M$ and $\\lambda^2\\ge m\\|p\\|_2^2$. [F1, F5, F6, F7, given, algebra]\n\n2.1 Set $T_N:=2m(1-a)/M$. For any trial $0<t\\le T_N$, [F4] and $H_f\\preceq MI$ on its segment give $f(x+tp)\\le f(x)-t\\lambda^2+(M/2)t^2\\|p\\|_2^2\\le f(x)-at\\lambda^2$, where the last inequality uses $\\lambda^2\\ge m\\|p\\|_2^2$. If $T_N\\ge1$, trial $t=1$ passes. If $T_N<1$, [F8] gives a least $j$ with $b^j\\le T_N$; then $b^j>bT_N$ and that candidate passes, so the first accepted step is at least $\\tau_N$. [F1, F4, F8, step 1.1, algebra, choose]\n\n3.1 For any accepted update before the local ball, $\\lambda^2\\ge\\|g\\|_2^2/M$ by step 1.1 and $t\\ge\\tau_N$ by step 2.1. Armijo acceptance and [F3] therefore give $f(x_+)-f^*\\le f(x)-f^*-(a\\tau_N/M)\\|g\\|_2^2\\le(1-2am\\tau_N/M)(f(x)-f^*)$. The coefficient is positive because $\\tau_N\\le2b(1-a)m/M$ implies $2am\\tau_N/M\\le4ab(1-a)(m/M)^2<1$; it is less than one because all factors in the subtracted term are positive. [F1, F3, step 1.1, step 2.1, algebra]\n\n4.1 If $x$ lies outside $B(x^*,\\rho)$, [F3] gives $f(x)-f^*\\ge m\\rho^2/2$. Step 1.1 then gives $\\lambda^2/2\\ge\\|g\\|_2^2/(2M)\\ge(m/M)(f(x)-f^*)\\ge m^2\\rho^2/(2M)$. Thus if $\\varepsilon<m^2\\rho^2/(2M)$ the decrement test cannot stop outside the ball. Repeating step 3.1 gives a gap bounded by $q_N^k(f(x_0)-f^*)$; choose $N$ with $q_N^N(f(x_0)-f^*)<m\\rho^2/2$, which exists by [F8]. If no earlier stop occurs, [F3] places the $N$th generated iterate inside $B(x^*,\\rho)$. For larger tolerances the method may stop before this finite entry, and no post-stop sequence is asserted. [F1, F3, F5, F8, step 1.1, step 3.1, given, choose]\n\n5.1 Starting the canonical local theorem [F2] at the first generated iterate in $B(x^*,\\rho)$ shows that every later generated iterate remains in that ball. Whenever its decrement test does not stop, [F2] gives $t_k=1$ and $\\|x_{k+1}-x^*\\|_2\\le C\\|x_k-x^*\\|_2^2$. If the decrement test stops, the algorithm returns there and no later update is asserted. [F1, F2, step 4.1] \u220e\n",
+        "edits": [
+          {
+            "old": "where $\\|A\\|_{\\mathrm{op}}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$.",
+            "new": "where $\\|A\\|_{\\mathrm{op}}:=\\sup_{\\|v\\|_2=1}\\|Av\\|_2$ for $d\\ge1$, and the unique operator on $\\mathbb R^0$ has norm zero.",
+            "occurrences": 1
+          },
+          {
+            "old": "Run [[alg-damped-newton]] with $a\\in(0,1/2)$, $b\\in(0,1)$, and positive decrement tolerance $\\varepsilon$. Let $\\rho>0$ and $C<\\infty$ be constants furnished by [[thm-newton-local-quadratic-convergence-under-lipschitz-hessian]] for these data, and set",
+            "new": "For $d\\ge1$, run [[alg-damped-newton]] with $a\\in(0,1/2)$, $b\\in(0,1)$, and positive decrement tolerance $\\varepsilon$, and let $\\rho>0$ and $C<\\infty$ be constants furnished by [[thm-newton-local-quadratic-convergence-under-lipschitz-hessian]] for these data. For $d=0$, interpret the procedure as the immediate return $(x_0,\\texttt{stationary})$, and set $\\rho=R$ and $C=0$. In either case set",
+            "occurrences": 1
+          },
+          {
+            "old": "the method either has stopped at its positive decrement test or has entered",
+            "new": "the method either has stopped at its stationary or positive decrement test or has entered",
+            "occurrences": 1
+          },
+          {
+            "old": "1.1 At a nonstationary iterate,",
+            "new": "1.1 If $d=0$, then $U=\\{x^*\\}=\\{x_0\\}$, $f(x_0)=f^*$, and the gradient is the unique zero vector. The stated extension returns `stationary` immediately; $x_0\\in B(x^*,R)$, so all update assertions are vacuous. The scalar constants still satisfy $0<q_N<1$: $0<2am\\tau_N/M\\le4ab(1-a)(m/M)^2<1$. For the remaining proof assume $d\\ge1$. At a nonstationary iterate,",
+            "occurrences": 1
+          }
+        ]
+      },
+      "statement_or_definition_changed": true,
+      "consumer_review_scope": "All actual direct/indirect deps consumers and source-text uses for changed Statement/Definition; no blanket rereview for Facts/Proof-only changes.",
+      "consumer_dispositions": [
+        {
+          "id": "ex-damped-newton-halves-step-before-local-phase",
+          "path": "items/ex-damped-newton-halves-step-before-local-phase.md",
+          "source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/consumer-context/ex-damped-newton-halves-step-before-local-phase.md",
+          "assessment": "unaffected-no-edit",
+          "actual_use_evidence": "Actual scalar dimension is d=1. Verification 1.1 supplies global bounds m=1,M=11; 2.1 directly verifies rho=10^-6,C=10; 3.1 checks epsilon below m^2 rho^2/(2M). Statement extension only adds d=0 convention and existing stationary exit; every invoked positive-dimensional bound remains identical. No repair."
+        }
+      ],
+      "future_mirrors": [
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-39.proof-contracts.json",
+          "pointer": "/contracts/thm-damped-newton-global-phase-and-local-quadratic-rate",
+          "action": "Owner refresh changed step derivation text/inputs and boundary analysis against proposed source, preserving independent-review history; leave unchanged external supplier quotes intact.",
+          "specific": "Step1.1 boundary branch and d=0 norm/rho/C/procedure conventions; external local theorem and algorithm quotes keep d>=1 and are only invoked in that branch."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-39.pages.json",
+          "action": "Refresh only owning item Statement/Definition mirror against admitted source; root owns current raw/canonical hashes and manifest bindings."
+        },
+        {
+          "path": "research/numerical-optimization-dynamics-2026-10-16-batch-39.proof-contracts.json",
+          "pointer": "/contracts/ex-damped-newton-halves-step-before-local-phase/citations/0",
+          "source_section": "Statement",
+          "action": "After formal admission only: mirror exact corrected source section if changed; preserve existing historical receipts and recertify current contexts natively."
+        }
+      ],
+      "actual_digest_concern": {
+        "id": "thm-damped-newton-global-phase-and-local-quadratic-rate",
+        "concern": "The Statement does not impose d \u2265 1, but its cited local supplier thm-newton-local-quadratic-convergence-under-lipschitz-hessian explicitly assumes d \u2265 1. It also defines the operator norm as sup over \u2016v\u2016\u2082 = 1, whose indexing set is empty in dimension zero, without a zero-dimensional convention. The positive-dimensional argument is sound; explicitly requiring d \u2265 1, or supplying the zero-dimensional convention and stationary case, would close this boundary mismatch.",
+        "severity": "gap-a-reader-closes"
+      },
+      "original_luna_verified_against": {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-judge.jsonl",
+        "line_numbers": [
+          644
+        ],
+        "matches_exact_row": true
+      }
+    }
+  ],
+  "consumer_discovery": {
+    "method": "Parsed current items frontmatter deps and followed transitive reverse edges; searched source text for changed suppliers and subsequent consumers. Changed roots have no aliases. Canonical IDs, direct and indirect consumers recorded above. This is source-interface review, not a validator or certification run.",
+    "logical_counts": {
+      "batch16": 2,
+      "batch17": 6,
+      "batch39": 1
+    },
+    "justified_by_note": "QR algorithm justified_by lemma is also direct deps consumer and is included; no reverse scheduling edge invented."
+  },
+  "execution": "Source/instruction/evidence reads and writes only under the named research directory. No canonical item, metadata, ledger, runtime, tool or native history edits. No new hash computation, tests, gates, formatting commands, native dispatch or commits. Historical hashes are copied unmodified from original Luna records.",
+  "supersedes_for_current_candidate": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step4-kept-low-math/proposal.json",
+  "history_preservation": "Original proposal.json, original proposed carriers, preimages, guards, consumer snapshots and historical Luna records remain unchanged. This successor replaces only the QR proposed norm-call phrase and its exact candidate operation; the other five proposals are retained verbatim by reference.",
+  "refinement_authority": "Root focused instruction: replace unsupported three-component helper call by four-component list (delta,0,Re z,Im z), equivalent to complex vector (delta,z). Research only; no canonical edits or rehashes."
+}

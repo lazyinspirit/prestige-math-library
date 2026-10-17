@@ -1,0 +1,66 @@
+--- cycle1/step5-created-maintenance-cert.mjs
++++ cycle2/step5-created-maintenance-cert.mjs
+@@ -4,7 +4,7 @@
+ import {readFileSync} from 'node:fs';
+ import {join,resolve} from 'node:path';
+ import {maintenanceStatus} from './consumer-maintenance.mjs';
+-import {itemHashGuard} from './item-hash.mjs';
++import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
+ import {statementHash} from './step5-statement.mjs';
+ 
+ const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
+@@ -19,12 +19,30 @@
+   const creations=new Map((prior?.creations??[]).map(x=>[x.id,x]));
+   const priorItems=new Map((prior?.items??[]).map(x=>[x.id,x]));
+   const targets=new Set([...creations.keys()].filter(id=>!eligible.has(id)&&priorItems.get(id)?.guard_sha256!==current[id]));
+-  if(!targets.size||!(result.maintenance_packs??[]).length)return {basis,evidence,records};
++  const byId=new Map(items.map(x=>[x.id,x]));
++  // Prior records are authenticated by verifyCertification before this call.
++  // Never drop them merely because this wave performed no maintenance.
++  const finish=()=>{
++    for(const entry of prior?.maintenance_certifications??[]){
++      if(basis.has(entry.id))continue; // Genuine newer maintenance supersedes it.
++      const item=byId.get(entry.id),old=priorItems.get(entry.id);
++      need(creations.has(entry.id)&&!eligible.has(entry.id)&&item&&!item.published&&old
++        &&entry.after_guard_sha256===current[entry.id]&&entry.after_sha256===item.sha256
++        &&entry.after_item_sha256===old.item_sha256&&entry.after_guard_sha256===old.guard_sha256
++        &&entry.statement_sha256===item.statement_sha256,'stale prior maintained-helper source');
++      const text=readFileSync(join(root,'items',`${entry.id}.md`),'utf8');
++      need(itemHashJudge(text)===entry.after_item_sha256&&Array.isArray(entry.suppliers)
++        &&entry.suppliers.every(x=>byId.get(x.id)?.sha256===x.sha256),'stale prior maintained-helper certification basis');
++      basis.set(entry.id,entry);records.push(entry);
++    }
++    return {basis,evidence,records};
++  };
++  if(!targets.size||!(result.maintenance_packs??[]).length)return finish();
+   need(progress.complete===true&&result.run===run&&result.phase===phase&&result.round===round,'not a closed current owner wave');
+   const status=maintenanceStatus(root,run); // Revalidates immutable inputs and collections.
+   need(status.complete===true,'maintenance is not complete');
+   const dir=join(root,'research',`${run}-consumer-maintenance`),state=read(join(dir,'state.json'));
+-  const byId=new Map(items.map(x=>[x.id,x])),aliases=new Map();
++  const aliases=new Map();
+   for(const item of items)for(const alias of item.aliases??[])if(!byId.has(alias)){
+     need(!aliases.has(alias)||aliases.get(alias)===item.id,'ambiguous current supplier alias');aliases.set(alias,item.id);
+   }
+@@ -82,7 +100,7 @@
+       const original=pack.carriers[target],before=pack.before[target],assigned=assignment.before?.[target];
+       need(typeof original==='string'&&assigned?.text===original&&same({...assigned,text:undefined},{...before,text:undefined})
+         &&hash(original)===before.sha256&&itemHashGuard(original)===before.guard_sha256&&statementHash(original)===before.statement_sha256
+-        &&old.item_sha256===before.sha256&&old.guard_sha256===before.guard_sha256,'maintenance preimage is not the certified created helper');
++        &&old.item_sha256===itemHashJudge(original)&&old.guard_sha256===before.guard_sha256,'maintenance preimage is not the certified created helper');
+       const text=readFileSync(join(root,'items',`${target}.md`),'utf8');let reconstructed=original;
+       need(Array.isArray(decision.edits)&&decision.edits.length>0,'missing exact surgical edits');
+       for(const edit of decision.edits){
+@@ -103,10 +121,10 @@
+       const suppliers=[...new Set([...(item.deps??[]),...(item.references??[])].map(x=>aliases.get(x)??x))].filter(x=>x!==target).sort();
+       for(const supplier of suppliers)need(byId.get(supplier)&&pack.before[supplier]?.sha256===byId.get(supplier).sha256,'supplier changed since genuine maintenance reading');
+       const record={id:target,basis:'native-consumer-maintenance',pack:id,lane:lane.lane,collection:collectionPath,report:reportPath,
+-        dispatch:attemptPath,prompt:promptPath,before_sha256:before.sha256,after_sha256:item.sha256,before_guard_sha256:before.guard_sha256,
++        dispatch:attemptPath,prompt:promptPath,before_sha256:before.sha256,after_sha256:item.sha256,after_item_sha256:itemHashJudge(text),before_guard_sha256:before.guard_sha256,
+         after_guard_sha256:current[target],statement_sha256:item.statement_sha256,suppliers:suppliers.map(id=>({id,sha256:byId.get(id).sha256})),reason:decision.reason};
+       basis.set(target,record);records.push(record);
+     }
+   }
+-  return {basis,evidence,records};
++  return finish();
+ }

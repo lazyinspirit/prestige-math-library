@@ -1,0 +1,573 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-97.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-97.proof-contracts.json
+@@ -150,12 +150,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "Capped DIIS least squares has a unique minimum-Euclidean-norm minimizer, even with singular Gram matrix; no converse characterization of residual matrices is asserted."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "Capped DIIS least squares has a unique minimum-Euclidean-norm minimizer, even with singular Gram matrix; no converse characterization of residual matrices is asserted."
+         }
+       ],
+       "finite_checks": [
+@@ -256,7 +256,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The item has no empty-domain branch beyond its explicitly stated finite or metric input domain."
++          "reason": "The ordered eigenvalues lambda_r and lambda_{r+1} in the Statement require 1<=r<n, so neither occupied nor virtual cluster is empty."
+         },
+         {
+           "case": "zero",
+@@ -286,12 +286,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "A positive occupied gap g and a perturbation of at most g/4 imply cluster separation and the resolvent bound4/g, without a converse perturbation threshold."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "A positive occupied gap g and a perturbation of at most g/4 imply cluster separation and the resolvent bound4/g, without a converse perturbation threshold."
+         }
+       ],
+       "finite_checks": [
+@@ -409,7 +409,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The item has no empty-domain branch beyond its explicitly stated finite or metric input domain."
++          "reason": "Its Statement uses the occupied projector domain1<=r<n, and Proof step 1.1 selects the first r eigenvectors in an existing finite Hermitian eigenbasis."
+         },
+         {
+           "case": "zero",
+@@ -429,7 +429,7 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "No closed interval endpoint or numerical threshold needs a separate branch in this item."
++          "reason": "The strict occupied/unoccupied gap is required at each inputX. No projector is asserted when that gap closes; repeated eigenvalues within either cluster are expressly handled by proof step 2.1."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -439,12 +439,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "The strict rth gap implies a unique occupied rank-r projector independently of within-cluster eigenbasis choices; uniqueness is not used to infer a gap."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "The strict rth gap implies a unique occupied rank-r projector independently of within-cluster eigenbasis choices; uniqueness is not used to infer a gap."
+         }
+       ],
+       "finite_checks": [],
+@@ -532,8 +532,8 @@
+         },
+         {
+           "case": "endpoints",
+-          "status": "not_applicable",
+-          "reason": "No closed interval endpoint or numerical threshold needs a separate branch in this item."
++          "status": "checked",
++          "evidence": "Proof step 1.1 gives every projector eigenvalue exactly0 or1; proof step 2.1 therefore includes both spectral endpoints in the semidefinite density inequalities."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -543,12 +543,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "Hermitian idempotence and trace r imply density admissibility; the converse is expressly not the claim."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "Hermitian idempotence and trace r imply density admissibility; the converse is expressly not the claim."
+         }
+       ],
+       "finite_checks": [
+@@ -676,8 +676,8 @@
+         },
+         {
+           "case": "degenerate",
+-          "status": "not_applicable",
+-          "reason": "The item does not require a separate degeneracy branch beyond its stated hypotheses."
++          "status": "checked",
++          "evidence": "Density eigenvalues0 and1 are admitted: proof step 1.1 constructs a projector in the domain and proof step 2.1 preserves the nonstrict semidefinite inequalities at limits. Strict positivity is not required."
+         },
+         {
+           "case": "endpoints",
+@@ -692,12 +692,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "The fixed-trace density domain is nonempty, closed, convex and Frobenius complete; these properties are not a characterization of other domains."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "The fixed-trace density domain is nonempty, closed, convex and Frobenius complete; these properties are not a characterization of other domains."
+         }
+       ],
+       "finite_checks": [],
+@@ -883,7 +883,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The item has no empty-domain branch beyond its explicitly stated finite or metric input domain."
++          "reason": "The two spectral clusters have dimensions r and n-r with1<=r<n; Proof step 2.1 integrates the full nonempty occupied cluster."
+         },
+         {
+           "case": "zero",
+@@ -913,12 +913,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "A strict occupied/virtual gap yields a C1 block-projector map and derivative estimate16R/g^2; no eigenvalue simplicity within a block is necessary."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "A strict occupied/virtual gap yields a C1 block-projector map and derivative estimate16R/g^2; no eigenvalue simplicity within a block is necessary."
+         }
+       ],
+       "finite_checks": [
+@@ -1083,8 +1083,8 @@
+         },
+         {
+           "case": "one",
+-          "status": "not_applicable",
+-          "reason": "No singleton or one-step case changes the argument; the proof covers all stated indices uniformly."
++          "status": "checked",
++          "evidence": "If K has one point, the self-map fixes it and all distances in Proof step 2.1 and2.2 are zero, so the same inequalities hold."
+         },
+         {
+           "case": "degenerate",
+@@ -1104,12 +1104,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "A contraction on a supplied nonempty complete invariant metric space gives fixed-point and residual/error estimates; a small residual alone is not asserted to imply contraction."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "A contraction on a supplied nonempty complete invariant metric space gives fixed-point and residual/error estimates; a small residual alone is not asserted to imply contraction."
+         }
+       ],
+       "finite_checks": [],
+@@ -1201,7 +1201,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The item has no empty-domain branch beyond its explicitly stated finite or metric input domain."
++          "reason": "Statement inherits1<=r<n, so both compressed blocks have positive dimension. The max and min eigenvalues are therefore taken over nonempty finite spectra."
+         },
+         {
+           "case": "zero",
+@@ -1220,8 +1220,8 @@
+         },
+         {
+           "case": "endpoints",
+-          "status": "not_applicable",
+-          "reason": "No closed interval endpoint or numerical threshold needs a separate branch in this item."
++          "status": "checked",
++          "evidence": "Proof step 3.1 explicitly excludes equality of the largest occupied and smallest shifted virtual eigenvalues: equality closes the rth gap, so the unique gapped projector is undefined there."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1331,7 +1331,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The item has no empty-domain branch beyond its explicitly stated finite or metric input domain."
++          "reason": "D and its defined response are supplied in the Statement, so both endpoints of the convex combination exist."
+         },
+         {
+           "case": "zero",
+@@ -1361,12 +1361,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "A convex mixture of an admissible density and response projector stays admissible, while idempotence may fail; it is not an equivalence with projector membership."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "A convex mixture of an admissible density and response projector stays admissible, while idempotence may fail; it is not an equivalence with projector membership."
+         }
+       ],
+       "finite_checks": [],
+@@ -1516,7 +1516,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The item has no empty-domain branch beyond its explicitly stated finite or metric input domain."
++          "reason": "The estimate is quantified over supplied X,Y in K. If K is empty there is no such pair and no fixed-point-existence assertion; its conditional contraction conclusion also requires a self-map."
+         },
+         {
+           "case": "zero",
+@@ -1546,12 +1546,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "A common positive-gap contour and an LF-Lipschitz field yield q=16R LF/g^2, with invariance additionally required for a contraction; gap alone is not sufficient."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "A common positive-gap contour and an LF-Lipschitz field yield q=16R LF/g^2, with invariance additionally required for a contraction; gap alone is not sufficient."
+         }
+       ],
+       "finite_checks": [],
+@@ -1707,7 +1707,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The item has no empty-domain branch beyond its explicitly stated finite or metric input domain."
++          "reason": "For the local occupied-projector assertion the Statement supplies P0; Proof step 2.1 chooses its gap-preserving neighborhood by continuity rather than a point from an empty model domain."
+         },
+         {
+           "case": "zero",
+@@ -1727,7 +1727,7 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "No closed interval endpoint or numerical threshold needs a separate branch in this item."
++          "reason": "The local C1 assertion is on an open neighborhood whose image stays strictly within the gap-preserving ball in proof step 2.1; it asserts no continuation to zero gap."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1737,12 +1737,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "C2 energy data make the Hermitian response C1; at a supplied gapped P0 its occupied projector is locally C1, with no converse regularity claim."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "C2 energy data make the Hermitian response C1; at a supplied gapped P0 its occupied projector is locally C1, with no converse regularity claim."
+         }
+       ],
+       "finite_checks": [],
+@@ -1877,8 +1877,8 @@
+         },
+         {
+           "case": "one",
+-          "status": "not_applicable",
+-          "reason": "No singleton or one-step case changes the argument; the proof covers all stated indices uniformly."
++          "status": "checked",
++          "evidence": "If K is a singleton, the segment in Proof step 1.1 is constant and Proof step 2.1 bounds zero distance by zero; invariance fixes its sole density."
+         },
+         {
+           "case": "degenerate",
+@@ -1898,12 +1898,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "An invariant relaxed response with an independently certified induced norm q<1 is contractive; positive mixing alpha alone is not a converse certificate."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "An invariant relaxed response with an independently certified induced norm q<1 is contractive; positive mixing alpha alone is not a converse certificate."
+         }
+       ],
+       "finite_checks": [],
+@@ -1995,8 +1995,8 @@
+         },
+         {
+           "case": "one",
+-          "status": "not_applicable",
+-          "reason": "No singleton or one-step case changes the argument; the proof covers all stated indices uniformly."
++          "status": "checked",
++          "evidence": "At k=1, the convolution bound in proof step 3.1 has just eta_0 and readsE_1<=qE_0+eta_0, matching the baseline branch in proof step 2.1 and the sharper accepted-candidate bound in proof step 1.1."
+         },
+         {
+           "case": "degenerate",
+@@ -2016,12 +2016,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "Certified candidate tests and baseline response errors propagate the scalar error enclosure; a commutator least-squares residual is not a converse error certificate."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "Certified candidate tests and baseline response errors propagate the scalar error enclosure; a commutator least-squares residual is not a converse error certificate."
+         }
+       ],
+       "finite_checks": [],
+@@ -2081,7 +2081,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The item has no empty-domain branch beyond its explicitly stated finite or metric input domain."
++          "reason": "The Example fixes n=2,r=1 and actual matricesH(t), so neither spectral cluster nor the one-sided families of nonzero real t is empty."
+         },
+         {
+           "case": "zero",
+@@ -2100,8 +2100,8 @@
+         },
+         {
+           "case": "endpoints",
+-          "status": "not_applicable",
+-          "reason": "No closed interval endpoint or numerical threshold needs a separate branch in this item."
++          "status": "checked",
++          "evidence": "Proof step 1.2 treats t=0 directly: both eigenvalues are zero and the lowest rank-one projector is nonunique. Proof step 2.1 computes the distinct one-sided limits."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -2111,12 +2111,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "The fixed2x2 diagonal family has different one-sided occupied-projector limits; it supplies a discontinuity example, not an equivalence for all gap closures."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "The fixed2x2 diagonal family has different one-sided occupied-projector limits; it supplies a discontinuity example, not an equivalence for all gap closures."
+         }
+       ],
+       "finite_checks": [
+@@ -2218,7 +2218,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The item has no empty-domain branch beyond its explicitly stated finite or metric input domain."
++          "reason": "Proof step 1.1 constructs both admissible projectors; Proof step 1.2 computes each unique occupied eigenspace. No unprovided state or empty spectral block is used."
+         },
+         {
+           "case": "zero",
+@@ -2238,7 +2238,7 @@
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "No closed interval endpoint or numerical threshold needs a separate branch in this item."
++          "reason": "The Example has the two specified projector iterates and no interval-valued relaxation parameter; Proof step 2.1 alternates these fixed matrices."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -2248,12 +2248,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "A concrete rank-one2x2 response cycles betweenP0 andP1 despite gap1; this refutes sufficiency of a gap rather than characterizing convergence."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "A concrete rank-one2x2 response cycles betweenP0 andP1 despite gap1; this refutes sufficiency of a gap rather than characterizing convergence."
+         }
+       ],
+       "finite_checks": [
+@@ -2347,8 +2347,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The item has no empty-domain branch beyond its explicitly stated finite or metric input domain."
++          "status": "checked",
++          "evidence": "The Example uses K=[0,1], which contains the fixed point1/2 explicitly found in Proof step 1.1."
+         },
+         {
+           "case": "zero",
+@@ -2362,8 +2362,8 @@
+         },
+         {
+           "case": "degenerate",
+-          "status": "not_applicable",
+-          "reason": "The item does not require a separate degeneracy branch beyond its stated hypotheses."
++          "status": "checked",
++          "evidence": "At x=1/2 both the fixed-point error and residual in Proof step 3.1 are zero; division is only by the constant1-1/2, which is positive."
+         },
+         {
+           "case": "endpoints",
+@@ -2378,12 +2378,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "The specified affine scalar response has fixed point1/2 and attains equality in the residual-error bound; it is one worked instance rather than a converse theorem."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "The specified affine scalar response has fixed point1/2 and attains equality in the residual-error bound; it is one worked instance rather than a converse theorem."
+         }
+       ],
+       "finite_checks": [
+@@ -2484,7 +2484,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The item has no empty-domain branch beyond its explicitly stated finite or metric input domain."
++          "reason": "The Example supplies the two complementary2x2 rank-one projectors; Proof step 2.1 computes their half-mixtureI2/2, an existing admissible density."
+         },
+         {
+           "case": "zero",
+@@ -2514,12 +2514,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "The specified half-mixture is admissible but not idempotent, disproving preservation of the projector manifold; no converse is asserted."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "The specified half-mixture is admissible but not idempotent, disproving preservation of the projector manifold; no converse is asserted."
+         }
+       ],
+       "finite_checks": [
+@@ -2630,7 +2630,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The item has no empty-domain branch beyond its explicitly stated finite or metric input domain."
++          "reason": "The two explicitly supplied residual matrices are equal and nonzero in Proof step 2.1. Proof step 3.1 exhibits the feasible coefficient pair(1/2,1/2), so no empty history or feasible coefficient set is involved."
+         },
+         {
+           "case": "zero",
+@@ -2660,12 +2660,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "Equal nonzero residuals produce a singular2x2 Gram matrix and configured fallback, even though a capped minimum-norm minimizer exists; not every DIIS input is claimed singular."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "Equal nonzero residuals produce a singular2x2 Gram matrix and configured fallback, even though a capped minimum-norm minimizer exists; not every DIIS input is claimed singular."
+         }
+       ],
+       "finite_checks": [
+@@ -2758,7 +2758,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The item has no empty-domain branch beyond its explicitly stated finite or metric input domain."
++          "reason": "The Example evaluates the existing scalar pointx=0 in[0,1] and the fixed affine map; no empty data or spectral selection is used."
+         },
+         {
+           "case": "zero",
+@@ -2773,12 +2773,12 @@
+         {
+           "case": "degenerate",
+           "status": "not_applicable",
+-          "reason": "The item does not require a separate degeneracy branch beyond its stated hypotheses."
++          "reason": "The calculation has fixed contractionq=1/2, so its residual denominator1-q=1/2 is nonzero. The response evaluation error is fixed positive1/100; no singular spectral problem is claimed."
+         },
+         {
+           "case": "endpoints",
+-          "status": "not_applicable",
+-          "reason": "No closed interval endpoint or numerical threshold needs a separate branch in this item."
++          "status": "checked",
++          "evidence": "The chosen inputx=0 is a domain endpoint; Proof step 1.1 evaluates its computed residual24/100 and Proof step 2.1 obtains the exact certified error1/2."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -2788,12 +2788,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "The scalar numerical response shows why the additive1/100 evaluation error belongs in the residual enclosure; it is not a characterization of all eigensolvers."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is one-way and contains no equivalence with forward or reverse directions."
++          "reason": "The scalar numerical response shows why the additive1/100 evaluation error belongs in the residual enclosure; it is not a characterization of all eigensolvers."
+         }
+       ],
+       "finite_checks": [
+@@ -2898,42 +2898,42 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "Admissible inputs specify an initial point, so an empty input domain is excluded; zero update budget is treated separately."
++          "reason": "The Statement concerns a supplied admissible initial iterate and returning primitives, not an empty input history; Proof step 1.1 begins at the actual index0."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Proof 3.1 explicitly includes N=0: at most one entered pass, with no update. Earlier failure or tolerance returns remain stated statuses."
++          "evidence": "Proof step 3.1 explicitly includesN=0: the initial entered index may test once and returns before any update."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Proof 1.1 initializes the first pass and Proof 2.1 covers its only possible update when N=1; Proof 3.1 bounds the two entered passes."
++          "evidence": "WithN=1, Proof step 2.1 permits at most one update from index0 to1; Proof step 3.1 returns at index1, giving at most two residual tests."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Proof 2.1 and 3.1 allow an immediate early return, which only shortens the finite index segment; no tolerance attainment is assumed."
++          "evidence": "Proof step 2.1 propagates an early gap or eigensolver failure without another pass, and Proof step 3.1 counts only the entered initial segment. Thus singular responses can shorten the work count without invalidating the bound or implying convergence."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Proof 3.1 returns at entered index N before another update; the index-zero endpoint is initialized in Proof 1.1."
++          "evidence": "Proof step 2.1 allows continuation only fork<N; Proof step 3.1 treats the terminal indexN as a return before an update, including zero cap."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The procedures have supplied initial data and returning primitives; the finite counter proof selects no arbitrary family of witnesses."
++          "reason": "The work proof uses the supplied initial point and returning spectrum/response/comparison services; its induction in Proof step 1.1 through3.1 makes no selection of an unspecified minimizer."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "This is a conditional work/status implication, not an equivalence."
++          "reason": "Returning primitives and a finite cap imply at mostN updates andN+1 residual tests; this does not characterize convergence or tolerance attainment."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "This is a conditional work/status implication, not an equivalence."
++          "reason": "Returning primitives and a finite cap imply at mostN updates andN+1 residual tests; this does not characterize convergence or tolerance attainment."
+         }
+       ],
+       "finite_smoke": [],

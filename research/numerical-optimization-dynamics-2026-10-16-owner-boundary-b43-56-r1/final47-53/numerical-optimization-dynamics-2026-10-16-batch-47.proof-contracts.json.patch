@@ -1,0 +1,671 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-47.proof-contracts.json
++++ /home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-owner-boundary-b43-56-r1/final47-53/proposed/numerical-optimization-dynamics-2026-10-16-batch-47.proof-contracts.json
+@@ -30,8 +30,8 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The definition assumes n≥1, so the state set is nonempty."
++          "status": "checked",
++          "evidence": "Definition fixes S={0,...,n-1} with n>=1, so the column-sum condition has actual state columns. For n=1 the off-diagonal exit-rate sum is empty and equals0, forcing the sole generator entry to0."
+         },
+         {
+           "case": "zero",
+@@ -56,17 +56,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
++          "reason": "The finite generator definition supplies its matrix and probability coordinates explicitly; column inequalities and finite sums impose predicates, not a selector from nonempty state subsets."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "This item defines a column generator and column probabilities by entry inequalities and column sums; it does not prove an additional equivalence theorem about transition processes."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The source-state column convention fixes notation and rates; no converse from an observed probability evolution to uniqueness of a generator is asserted."
+         }
+       ],
+       "finite_smoke": []
+@@ -262,7 +262,7 @@
+         {
+           "id": "step-4-1",
+           "step": "4.1",
+-          "claim": "Step 1.1 covers the zero-sized matrix case. For $n\\ge1$, steps 1.2 and 1.3 establish convergence and differentiation, step 2.1 gives the derivative identities and initial value, and steps 3.1–3.2 prove the commuting-product identity. Thus every claim in the Statement holds.",
++          "claim": "Step 1.1 covers the zero-sized matrix case. For $n\\ge1$, steps 1.2 and 1.3 establish convergence and differentiation, step 2.1 gives the derivative identities and initial value, and steps 3.1\u20133.2 prove the commuting-product identity. Thus every claim in the Statement holds.",
+           "inputs": [
+             "step 1.1",
+             "step 1.2",
+@@ -278,42 +278,42 @@
+         {
+           "case": "empty",
+           "status": "checked",
+-          "evidence": "Proof1.1 handles size0x0 directly: every partial sum and all identities are the unique empty matrix. The norm argument is used only after assuming n>=1."
++          "evidence": "Proof step 1.1 treats a zero-by-zero matrix separately: every partial sum is the unique empty matrix, equal to the empty identity; all derivative and product identities hold there."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Statement: Steps 1.1–1.3 include A=0 and t=0 in the convergence and derivative formulas."
++          "evidence": "Statement: Steps 1.1\u20131.3 include A=0 and t=0 in the convergence and derivative formulas."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Proof1.1 separates dimension0; proofs1.2–3.2 apply to every positive dimension, including n=1."
++          "evidence": "Proof1.1 separates dimension0; proofs1.2\u20133.2 apply to every positive dimension, including n=1."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Proof1.1 handles the empty matrix; proofs1.2–3.2 allow zero matrices and commuting matrices without an invertibility hypothesis."
++          "evidence": "Proof1.1 handles the empty matrix; proofs1.2\u20133.2 allow zero matrices and commuting matrices without an invertibility hypothesis."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Proof1.3 proves differentiability at every realc; proof2.1 gives the initial value atc=0."
++          "evidence": "Proof step 1.3 fixes an arbitrary real differentiation point c and chooses R>|c|, so negative, zero and positive c are covered without a time-domain endpoint restriction. Step 2.1 explicitly gives E(0)=I."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
++          "reason": "Entrywise exponential sums are uniquely defined limits of prescribed partial sums; the real local radius can be chosen explicitly larger than the fixed argument. No selector for a family of nonempty sets is required."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The exponential-series lemma asserts convergence, differentiation, an initial value and a commuting-product identity; it does not characterize any condition by a necessary implication."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "Commutation is an assumed input for the exponential product formula, not a conclusion recovered from that formula; no converse exponential characterization is asserted."
+         }
+       ],
+       "finite_smoke": []
+@@ -372,7 +372,7 @@
+         {
+           "id": "step-1-1",
+           "step": "1.1",
+-          "claim": "If $\\mu=0$, [F1] gives $N=0$ almost surely and $K\\ge0$, so the tail is zero. Now suppose $\\mu>0$ and put $w_k=e^{-\\mu}\\mu^k/k!$ and $\\rho=\\mu/(K+2)$. The hypothesis gives $0<\\rho<1$, and [F1]–[F3] yield $w_{k+1}/w_k=\\mu/(k+1)\\le\\rho$ for every $k\\ge K+1$.",
++          "claim": "If $\\mu=0$, [F1] gives $N=0$ almost surely and $K\\ge0$, so the tail is zero. Now suppose $\\mu>0$ and put $w_k=e^{-\\mu}\\mu^k/k!$ and $\\rho=\\mu/(K+2)$. The hypothesis gives $0<\\rho<1$, and [F1]\u2013[F3] yield $w_{k+1}/w_k=\\mu/(k+1)\\le\\rho$ for every $k\\ge K+1$.",
+           "inputs": [
+             "given",
+             "F1",
+@@ -406,17 +406,17 @@
+         {
+           "case": "empty",
+           "status": "checked",
+-          "evidence": "Statement: Statement requires integer K≥0 and does not use an empty state set."
++          "evidence": "Statement: Statement requires integer K\u22650 and does not use an empty state set."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Statement: Step 1.1 proves the μ=0 tail is zero."
++          "evidence": "Statement: Step 1.1 proves the \u03bc=0 tail is zero."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Statement: Steps 1.1–2.1 cover K=0 and all larger integers."
++          "evidence": "Statement: Steps 1.1\u20132.1 cover K=0 and all larger integers."
+         },
+         {
+           "case": "degenerate",
+@@ -426,22 +426,22 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Statement: Statement treats μ=0 and requires the strict bound μ<K+2 for the positive-μ branch."
++          "evidence": "Statement: Statement treats \u03bc=0 and requires the strict bound \u03bc<K+2 for the positive-\u03bc branch."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
++          "reason": "The Poisson tail bound uses the fixed ratio rho=mu/(K+2) and deterministic successive masses; the infinite geometric series has a uniquely specified sum, with no choice of a truncation family."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The tail lemma gives a sufficient geometric majorant when0<mu<K+2 and separately handles mu=0; it does not characterize all parameters admitting a tail bound."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "A small Poisson tail is not claimed to imply mu<K+2; the denominator condition belongs only to this particular geometric majorant."
+         }
+       ],
+       "finite_smoke": []
+@@ -455,13 +455,13 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "Definition requires a nonempty state space S."
++          "status": "checked",
++          "evidence": "Definition requires a nonempty at-most-countable state space. Its outgoing-rate sum may nevertheless be empty at a singleton state, giving lambda=0 and the expressly defined absorbing-state branch."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Definition: Definition specifies that λ(x)=0 means the chain stays at x."
++          "evidence": "Definition: Definition specifies that \u03bb(x)=0 means the chain stays at x."
+         },
+         {
+           "case": "one",
+@@ -476,22 +476,22 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Definition: Definition includes K₀=I and the holding law at elapsed time t=0."
++          "evidence": "Definition: Definition includes K\u2080=I and the holding law at elapsed time t=0."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
++          "reason": "The countable chain and its nonexplosion are given input hypotheses; this definition expressly does not construct a process from arbitrary rates or choose jump destinations when lambda=0."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The definition specifies the Markov and finite-jump path conventions and states nonexplosion as a predicate on a supplied process; it proves no rate-based equivalence criterion."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "Finite exit rates alone are expressly not asserted to construct or ensure nonexplosion of an arbitrary countable chain, so there is no converse existence claim."
+         }
+       ],
+       "finite_smoke": []
+@@ -506,7 +506,7 @@
+         {
+           "case": "empty",
+           "status": "checked",
+-          "evidence": "Definition: Definition permits S=∅; the sum over the empty set is zero."
++          "evidence": "Definition: Definition permits S=\u2205; the sum over the empty set is zero."
+         },
+         {
+           "case": "zero",
+@@ -531,17 +531,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
++          "reason": "The l1 distance is the supremum of all finite nonnegative subsums, a definition that does not require choosing an enumeration of the countable state set."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "This item defines a distance from finite-mass nonnegative functions and proves its elementary upper bound; it states no equivalence between equality of means and equality of distributions."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The finite-mass inequality is one-way and does not characterize the domain by distance finiteness or construct probability laws from a numerical distance."
+         }
+       ],
+       "finite_smoke": []
+@@ -599,17 +599,17 @@
+         {
+           "case": "empty",
+           "status": "checked",
+-          "evidence": "Statement: Its finite generator convention requires n≥1."
++          "evidence": "Statement: Its finite generator convention requires n\u22651."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Statement: Step 2.1 proves ν=0 forces Q=0."
++          "evidence": "Statement: Step 2.1 proves \u03bd=0 forces Q=0."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Statement: For n=1 the generator has Q=0 and P=[1] whenever ν>0."
++          "evidence": "Statement: For n=1 the generator has Q=0 and P=[1] whenever \u03bd>0."
+         },
+         {
+           "case": "degenerate",
+@@ -619,22 +619,22 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Statement: Step 1.1 allows ν equal to the maximal exit rate, including zero diagonal entries in P."
++          "evidence": "Statement: Step 1.1 allows \u03bd equal to the maximal exit rate, including zero diagonal entries in P."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
++          "reason": "Given nu and the finite generator, P=I+Q/nu is determined when nu>0; the nu=0 branch instead proves Q=0, without selecting a nonexistent inverse."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The uniformization lemma derives column stochasticity from an admitted positive rate and derives Q=0 at zero rate; it does not state a converse characterization of arbitrary stochastic matrices."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "A stochastic matrix is not claimed to determine the chosen nu uniquely, and stochasticity alone is not used to infer a specific continuous-time generator."
+         }
+       ],
+       "finite_smoke": []
+@@ -648,13 +648,13 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "Definition requires F to be finite and nonempty."
++          "status": "checked",
++          "evidence": "Definition requires finite nonempty F, while an empty outside-rate family contributes zero to the cemetery rate. The newly adjoined cemetery state remains present and absorbing even when no exit is possible."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Definition: Definition assigns τ_F=0 when X₀ is outside F and includes initial cemetery mass p₀(S\\F)."
++          "evidence": "Definition: Definition assigns \u03c4_F=0 when X\u2080 is outside F and includes initial cemetery mass p\u2080(S\\F)."
+         },
+         {
+           "case": "one",
+@@ -669,22 +669,22 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Definition: Definition specifies Y₀ and the initial killed and cemetery masses."
++          "evidence": "Definition: Definition specifies Y\u2080 and the initial killed and cemetery masses."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
++          "reason": "The original chain and initial law are supplied; killing at the first exit and adjoining one fixed cemetery symbol determine the lifted process and rates without a choice of trajectories."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The projection definition specifies a killed process and its finite cemetery generator; it does not identify a rate criterion equivalent to the original chain remaining in F forever."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "A returning path is expressly kept at the cemetery state after its first exit, so equality with a current marginal is not asserted as a converse description of pathwise retention."
+         }
+       ],
+       "finite_smoke": []
+@@ -836,13 +836,13 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The finite generator definition requires n≥1."
++          "status": "checked",
++          "evidence": "Statement uses a finite column generator with n>=1 inherited from its definition; the Poisson series includes its k=0 identity term, and proof step 3.1 handles the zero-rate process without an empty distribution."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Statement: Step 3.1 proves ν=0 implies Q=0 and p(t)=p₀."
++          "evidence": "Statement: Step 3.1 proves \u03bd=0 implies Q=0 and p(t)=p\u2080."
+         },
+         {
+           "case": "one",
+@@ -852,7 +852,7 @@
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Statement: Step 3.1 and the ν=0 clause cover the zero generator."
++          "evidence": "Statement: Step 3.1 and the \u03bd=0 clause cover the zero generator."
+         },
+         {
+           "case": "endpoints",
+@@ -862,17 +862,17 @@
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
++          "reason": "The master-equation proof prescribes matrix powers and the exponential solution, then proves uniqueness using an integrating factor; it makes no arbitrary selection among ODE solutions or sample paths."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The master-equation theorem proves a unique exponential solution and a uniformization representation under an admitted rate, not an equivalence between every stochastic matrix and a chosen generator."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The fact that a probability vector has a Poisson-mixture form is not used to infer a unique rate or recover the generator; the supplied Q and p0 remain hypotheses."
+         }
+       ],
+       "finite_smoke": []
+@@ -886,13 +886,13 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "Inputs include a finite generator with n≥1 and a probability vector."
++          "status": "checked",
++          "evidence": "Definition returns(p0,0,0) at nu=0 or t=0 before computing m. Otherwise m>=1; m>B returns budget-exhausted, and an admitted K=0 sum still contains the k=0 term."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Definition: Definition returns (p₀,0,0) when ν=0 or t=0."
++          "evidence": "Definition: Definition returns (p\u2080,0,0) when \u03bd=0 or t=0."
+         },
+         {
+           "case": "one",
+@@ -907,7 +907,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Definition: Procedure handles t=0, ν=0, and 0<μ≤1 after time splitting."
++          "evidence": "Definition: Procedure handles t=0, \u03bd=0, and 0<\u03bc\u22641 after time splitting."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -917,12 +917,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "This budgeted procedure uses certified scalar decisions and a positive geometric tail majorant to supply an error bound; it does not equate every small true error with a successful tail-budget search."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "Budget-exhausted or certificate-unavailable is not declared proof that the desired approximation is impossible; only the explicitly funded candidate list and arithmetic backend were examined."
+         }
+       ],
+       "finite_smoke": []
+@@ -1076,7 +1076,7 @@
+         {
+           "id": "step-3-1",
+           "step": "3.1",
+-          "claim": "In the time-split algorithm, $0<\\mu\\le1$ and $K\\ge0$, so $\\mu<K+2$ and [F4] gives $\\tau_K(\\mu)\\le G_K(\\mu)$. For $m$ substeps the telescoping identity $S_\\mu^m-R_{\\mu,K}^m=\\sum_{j=0}^{m-1}S_\\mu^{m-1-j}(S_\\mu-R_{\\mu,K})R_{\\mu,K}^j$, [F5]–[F6], and step 2.1 give $\\|S_\\mu^m-R_{\\mu,K}^m\\|_1\\le m\\tau_K(\\mu)\\le mG_K(\\mu)$.",
++          "claim": "In the time-split algorithm, $0<\\mu\\le1$ and $K\\ge0$, so $\\mu<K+2$ and [F4] gives $\\tau_K(\\mu)\\le G_K(\\mu)$. For $m$ substeps the telescoping identity $S_\\mu^m-R_{\\mu,K}^m=\\sum_{j=0}^{m-1}S_\\mu^{m-1-j}(S_\\mu-R_{\\mu,K})R_{\\mu,K}^j$, [F5]\u2013[F6], and step 2.1 give $\\|S_\\mu^m-R_{\\mu,K}^m\\|_1\\le m\\tau_K(\\mu)\\le mG_K(\\mu)$.",
+           "inputs": [
+             "F4",
+             "F5",
+@@ -1116,13 +1116,13 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "The finite generator definition requires n≥1."
++          "status": "checked",
++          "evidence": "Statement partial sums start at k=0 and K>=0, so K=0 retains one term. Proof step 2.1 handles lambda=nu*t=0 by p(t)=u_K=p0 and exactly zero omitted mass, before time splitting."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Statement: Step 2.1 handles λ=νt=0; the algorithm and theorem return p₀ with zero error."
++          "evidence": "Statement: Step 2.1 handles \u03bb=\u03bdt=0; the algorithm and theorem return p\u2080 with zero error."
+         },
+         {
+           "case": "one",
+@@ -1137,22 +1137,22 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Statement: Steps 2.1 and 5.1 handle λ=0; for λ>0 the split parameter satisfies 0<μ≤1."
++          "evidence": "Statement: Steps 2.1 and 5.1 handle \u03bb=0; for \u03bb>0 the split parameter satisfies 0<\u03bc\u22641."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
++          "reason": "Every truncated stochastic polynomial and split power is explicitly specified; the proof's telescoping sum compares fixed finite operators and no selection among probability couplings is needed."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The truncation theorem gives exact lost mass and an upper error bound with a separately supplied arithmetic certificate, not a completeness criterion for numerical certification."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "A computed vector with small true error is not asserted to possess the specified certified arithmetic bound or to meet this geometric majorant's finite search condition."
+         }
+       ],
+       "finite_smoke": []
+@@ -1338,12 +1338,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The killed-chain theorem proves an equality between lost mass and l1 error and an observable upper bound; equality of these quantities is not a biconditional existence or nonexplosion criterion."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "A small bounded-observable error is not claimed to recover a small killed mass or identify the complete probability law; the coupling and cemetery construction remain supplied."
+         }
+       ],
+       "finite_smoke": []
+@@ -1388,12 +1388,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The supplied finite nested projection list is tried in order and certification uses a validated cemetery upper bound; this algorithm does not state that a valid small-loss projection must be found."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "Inconclusive is expressly not a claim about finite projections outside the supplied list, so it cannot be the converse of existence of a satisfactory projection."
+         }
+       ],
+       "finite_smoke": []
+@@ -1483,7 +1483,7 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Statement: A zero true loss is enclosed by its certified interval and passes whenever the validated upper endpoint is at most ε."
++          "evidence": "Statement: A zero true loss is enclosed by its certified interval and passes whenever the validated upper endpoint is at most \u03b5."
+         },
+         {
+           "case": "one",
+@@ -1498,7 +1498,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Statement: The statement covers the algorithm’s finite stopping and inconclusive statuses at the supplied final time."
++          "evidence": "Statement: The statement covers the algorithm\u2019s finite stopping and inconclusive statuses at the supplied final time."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1508,12 +1508,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The projection soundness theorem gives finite N/NB limits and certified-implies-loss/error bounds; no equivalence between passing a finite list and existence of an accurate state truncation is claimed."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "An inconclusive execution is expressly allowed without ruling out another finite projection; a small exact loss outside the supplied records is not a premise forcing certification."
+         }
+       ],
+       "finite_smoke": []
+@@ -1620,22 +1620,22 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Example: Step 3.1 handles s=0, and step 2.1 gives no opening when α=0."
++          "evidence": "Example: Step 3.1 handles s=0, and step 2.1 gives no opening when \u03b1=0."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Example: At β=0 the gate is one-way and step 3.1 gives p_on(t)=1−e^(−αt)."
++          "evidence": "Example: At \u03b2=0 the gate is one-way and step 3.1 gives p_on(t)=1\u2212e^(\u2212\u03b1t)."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "Example: Step 3.1 handles the zero-rate gate; the two boundary-rate cases α=0 or β=0 are explicit."
++          "evidence": "Example: Step 3.1 handles the zero-rate gate; the two boundary-rate cases \u03b1=0 or \u03b2=0 are explicit."
+         },
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Example: The formula includes t=0 and the rate endpoints α=0 and β=0."
++          "evidence": "Example: The formula includes t=0 and the rate endpoints \u03b1=0 and \u03b2=0."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1645,12 +1645,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The two-state gate example computes the on-probability and separately treats alpha=0,beta=0 and zero total rate; it states no biconditional identification of rates from observed probabilities."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The explicit exponential probability formula is not claimed to determine both gate rates uniquely from a single time observation; only the supplied two-rate process is calculated."
+         }
+       ],
+       "finite_smoke": []
+@@ -1775,7 +1775,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Example: The fixed calculation uses t=1/2, ν=2 and K=4, and the proof separately identifies the exact omitted tail."
++          "evidence": "Example: The fixed calculation uses t=1/2, \u03bd=2 and K=4, and the proof separately identifies the exact omitted tail."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1785,12 +1785,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The three-state birth-death example computes five exact Poisson terms and a positive geometric tail bound, without an equivalence between that bound and actual finite-precision accuracy."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "A small omitted mass is not used to infer this particular K=4 prefix or rate2; the example's exact rational vector is a supplied concrete calculation."
+         }
+       ],
+       "finite_smoke": []
+@@ -1803,7 +1803,7 @@
+           "fact": "F1",
+           "source": "def-reaction-network-propensity-system-and-generator",
+           "source_section": "Definition",
+-          "quote": "Fix positive integers $d$ and $R$. A **reaction propensity system** consists of a state set $E\\subseteq\\mathbb Z^d$ that is finite or countable, increments $\\nu_j\\in\\mathbb Z^d$ for $1\\le j\\le R$, and propensities $a_j:E\\to[0,\\infty)$. Here “countable” means finite or countably infinite, as in [[def-countable]]. The total propensity\n$$\\lambda(x):=\\sum_{j=1}^R a_j(x)$$\nis finite for every $x\\in E$, and $a_j(x)>0$ implies $x+\\nu_j\\in E$. Here $\\mathbb N$ and $\\mathbb Z$ have the meanings in [[def-natural-numbers]] and [[def-integers]], and addition in $\\mathbb Z^d$ is coordinatewise.\n\nA **reaction event** of channel $j$ at state $x$ records the marked transition $x\\mapsto x+\\nu_j$. The counting process $N_j(t)$ records the number of channel-$j$ events by time $t$. A zero increment $\\nu_j=0$ is allowed: it records a reaction event without changing the state.\n\nFor a time-homogeneous system, the **reaction generator operator** on bounded functions $f:E\\to\\mathbb R$ is\n$$(Qf)(x):=\\sum_{j:a_j(x)>0} a_j(x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nWhen $E$ is finite, $\\Lambda:=\\max_{x\\in E}\\lambda(x)<\\infty$. If no active reaction has zero increment, the corresponding matrix has off-diagonal entries $q_{xy}=\\sum_{j:x+\\nu_j=y}a_j(x)$ and diagonal $q_{xx}=-\\lambda(x)$. With zero-increment events, the operator formula remains valid and the matrix diagonal is instead minus the sum of state-changing rates; the zero-increment channels remain part of the marked event process.\n\nFor a finite horizon $T$, a **time-dependent propensity system** replaces $a_j(x)$ by functions $a_j:[0,T]\\times E\\to[0,\\infty)$ whose sections $t\\mapsto a_j(t,x)$ are measurable for the Borel sigma-algebra $\\mathcal B([0,T])$ of the usual topology on $[0,T]$ ([[def-borel-sigma-algebra]]). Require finite total rate $\\lambda(t,x):=\\sum_j a_j(t,x)$. Its time-dependent generator operator is\n$$(Q_t f)(x):=\\sum_{j:a_j(t,x)>0} a_j(t,x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nThis definition specifies a stochastic model. It does not assert that a physical chemical system follows that model.",
++          "quote": "Fix positive integers $d$ and $R$. A **reaction propensity system** consists of a state set $E\\subseteq\\mathbb Z^d$ that is finite or countable, increments $\\nu_j\\in\\mathbb Z^d$ for $1\\le j\\le R$, and propensities $a_j:E\\to[0,\\infty)$. Here \u201ccountable\u201d means finite or countably infinite, as in [[def-countable]]. The total propensity\n$$\\lambda(x):=\\sum_{j=1}^R a_j(x)$$\nis finite for every $x\\in E$, and $a_j(x)>0$ implies $x+\\nu_j\\in E$. Here $\\mathbb N$ and $\\mathbb Z$ have the meanings in [[def-natural-numbers]] and [[def-integers]], and addition in $\\mathbb Z^d$ is coordinatewise.\n\nA **reaction event** of channel $j$ at state $x$ records the marked transition $x\\mapsto x+\\nu_j$. The counting process $N_j(t)$ records the number of channel-$j$ events by time $t$. A zero increment $\\nu_j=0$ is allowed: it records a reaction event without changing the state.\n\nFor a time-homogeneous system, the **reaction generator operator** on bounded functions $f:E\\to\\mathbb R$ is\n$$(Qf)(x):=\\sum_{j:a_j(x)>0} a_j(x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nWhen $E$ is finite, $\\Lambda:=\\max_{x\\in E}\\lambda(x)<\\infty$. If no active reaction has zero increment, the corresponding matrix has off-diagonal entries $q_{xy}=\\sum_{j:x+\\nu_j=y}a_j(x)$ and diagonal $q_{xx}=-\\lambda(x)$. With zero-increment events, the operator formula remains valid and the matrix diagonal is instead minus the sum of state-changing rates; the zero-increment channels remain part of the marked event process.\n\nFor a finite horizon $T$, a **time-dependent propensity system** replaces $a_j(x)$ by functions $a_j:[0,T]\\times E\\to[0,\\infty)$ whose sections $t\\mapsto a_j(t,x)$ are measurable for the Borel sigma-algebra $\\mathcal B([0,T])$ of the usual topology on $[0,T]$ ([[def-borel-sigma-algebra]]). Require finite total rate $\\lambda(t,x):=\\sum_j a_j(t,x)$. Its time-dependent generator operator is\n$$(Q_t f)(x):=\\sum_{j:a_j(t,x)>0} a_j(t,x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nThis definition specifies a stochastic model. It does not assert that a physical chemical system follows that model.",
+           "uses": [
+             "1.1",
+             "1.2",
+@@ -1871,7 +1871,7 @@
+           "fact": "A1",
+           "source": "def-dependent-choice",
+           "source_section": "Definition",
+-          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
++          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ \u2014 for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ \u2014 is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+           "uses": [
+             "1.2"
+           ]
+@@ -1950,7 +1950,7 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The example fixes E=ℕ₀ and F={0,1}."
++          "reason": "The example fixes E=\u2115\u2080 and F={0,1}."
+         },
+         {
+           "case": "zero",
+@@ -1970,7 +1970,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Example: The formula for c_F(t) is valid for t≥0 and step 3.1 verifies its value at t=0."
++          "evidence": "Example: The formula for c_F(t) is valid for t\u22650 and step 3.1 verifies its value at t=0."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1980,12 +1980,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The immigration-death witness proves nonexplosion under its stated Countable/Dependent Choice suppliers and calculates cemetery loss, not a biconditional characterization of all nonexplosive networks."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The positive exit-and-return path probability is a one-way witness separating killed and full marginals; it is not a criterion recovering all paths or process rates from cemetery loss."
+         }
+       ],
+       "finite_smoke": []
+@@ -2059,7 +2059,7 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Example: Q_A=0 is explicitly one of the two generators and its law remains e₁."
++          "evidence": "Example: Q_A=0 is explicitly one of the two generators and its law remains e\u2081."
+         },
+         {
+           "case": "one",
+@@ -2074,7 +2074,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Example: At t=0 both laws equal e₁; step 2.1 proves they differ for every t>0."
++          "evidence": "Example: At t=0 both laws equal e\u2081; step 2.1 proves they differ for every t>0."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -2084,12 +2084,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "The example supplies two explicit generators with the same constant mean and different positive-time laws, disproving determination of the law by its mean rather than claiming an equivalence."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
++          "reason": "It does not assert that every pair of distinct distributions has the same mean or that mean trajectories always fail to determine laws; only the two displayed finite chains are compared."
+         }
+       ],
+       "finite_smoke": []

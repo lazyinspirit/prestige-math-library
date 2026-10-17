@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /home/lazyinspirit/Projects/prestige-math-library
+node tools/dispatch.mjs --role scope-repairer --brief research/numerical-optimization-dynamics-2026-10-16-owner-step2-b72-continuation/research.brief.md --task research/numerical-optimization-dynamics-2026-10-16-owner-step2-b72-continuation/research.task.md --label owner-step2-b72-original-consumer-completion-cycle2 --run numerical-optimization-dynamics-2026-10-16 --covers 72 --profile gpt-6.1-sol-medium --session-home research/numerical-optimization-dynamics-2026-10-16-scope-review/batch-72/scope-repairer-session --resume-session 01a143e1-3fab-7793-bdfc-cf6f9ff755f2 --output-schema briefs/schemas/batch-scope-review.json --result-artifact research/numerical-optimization-dynamics-2026-10-16-owner-step2-b72-continuation/cycle2-research.result.json --timeout 14400 --attempt 1 --json

@@ -1,0 +1,228 @@
+{
+  "group": "j",
+  "batches": ["86"],
+  "pages_read": [
+    "constrained-dynamics-shake-and-rattle",
+    "constrained-dynamics-shake-and-rattle-examples"
+  ],
+  "items_read": [
+    "def-regular-holonomic-phase-space-and-dynamics",
+    "lem-smooth-residual-quotient-extension",
+    "lem-regular-holonomic-phase-space-is-symplectic-cotangent",
+    "lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold",
+    "def-regular-classical-rattle-step-map",
+    "thm-local-holonomic-constrained-hamiltonian-flow",
+    "lem-rattle-scaled-position-and-momentum-branches",
+    "alg-finite-budget-rattle-step-with-scaled-residuals",
+    "thm-rattle-exact-constraint-preservation-and-reversibility",
+    "thm-rattle-symplecticity-on-regular-constraint-phase-space",
+    "thm-finite-budget-rattle-solver-returns-status",
+    "thm-rattle-second-order-global-accuracy-on-compact-tubes",
+    "thm-rattle-scaled-solve-residual-error-budget",
+    "ex-constrained-pendulum-equations-and-multiplier",
+    "ex-rigid-bond-rattle-free-rotor",
+    "ex-nearly-dependent-constraints-amplify-rattle-residuals",
+    "ex-rattle-residual-budget-and-global-trajectory-drift"
+  ],
+  "conventions": [
+    {
+      "convention": "The mass matrix is constant SPD; c and V are smooth, 1 ≤ m < d, and regularity means rank Dc(q) = m. Consistency requires both c(q) = 0 and J(q)M⁻¹p = 0.",
+      "fixed_by": "def-regular-holonomic-phase-space-and-dynamics",
+      "matters_for": [
+        "lem-regular-holonomic-phase-space-is-symplectic-cotangent",
+        "lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold",
+        "thm-local-holonomic-constrained-hamiltonian-flow",
+        "lem-rattle-scaled-position-and-momentum-branches",
+        "ex-nearly-dependent-constraints-amplify-rattle-residuals"
+      ]
+    },
+    {
+      "convention": "The canonical form is ω₀ = Σ dqᵢ ∧ dpᵢ = −d(pᵀdq); constrained cotangent coordinates use π = Dφᵀp.",
+      "fixed_by": "def-regular-holonomic-phase-space-and-dynamics",
+      "matters_for": [
+        "lem-regular-holonomic-phase-space-is-symplectic-cotangent",
+        "thm-rattle-symplecticity-on-regular-constraint-phase-space"
+      ]
+    },
+    {
+      "convention": "RATTLE uses signed h, force-level multipliers with impulses hJᵀλ and hJᵀμ, position residual h⁻²c(q₁), and tangency residual h⁻¹J(q₁)M⁻¹p₁. Both selected multiplier limits equal half the continuous multiplier; the h = 0 map is the identity.",
+      "fixed_by": "def-regular-classical-rattle-step-map",
+      "matters_for": [
+        "lem-rattle-scaled-position-and-momentum-branches",
+        "alg-finite-budget-rattle-step-with-scaled-residuals",
+        "thm-rattle-exact-constraint-preservation-and-reversibility",
+        "thm-rattle-second-order-global-accuracy-on-compact-tubes",
+        "thm-rattle-scaled-solve-residual-error-budget",
+        "ex-rigid-bond-rattle-free-rotor"
+      ]
+    },
+    {
+      "convention": "Finite-solver success means only that both residual tolerances were met. Inputs must be consistent, branch domains must admit all evaluations, and evaluation primitives and exact factorization/solve backends must terminate.",
+      "fixed_by": "alg-finite-budget-rattle-step-with-scaled-residuals",
+      "matters_for": [
+        "thm-finite-budget-rattle-solver-returns-status",
+        "thm-rattle-scaled-solve-residual-error-budget",
+        "ex-rattle-residual-budget-and-global-trajectory-drift"
+      ]
+    },
+    {
+      "convention": "Repeated finite solves restore consistency using the local retractions before the next input. Their global error is measured against exact-solve RATTLE on fixed-time grids within nested compact phase tubes.",
+      "fixed_by": "thm-rattle-scaled-solve-residual-error-budget",
+      "matters_for": [
+        "ex-rattle-residual-budget-and-global-trajectory-drift",
+        "constrained-dynamics-shake-and-rattle",
+        "constrained-dynamics-shake-and-rattle-examples"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-rattle-scaled-position-and-momentum-branches",
+      "statement": "On each compact regular phase subset, the scaled RATTLE equations have unique smooth local multiplier branches with common sufficiently small signed-step range, uniformly bounded derivatives of each fixed finite order, and uniformly invertible multiplier Jacobians. At h = 0 both Jacobians equal −A(q).",
+      "used_by": [
+        "alg-finite-budget-rattle-step-with-scaled-residuals",
+        "thm-rattle-exact-constraint-preservation-and-reversibility",
+        "thm-rattle-symplecticity-on-regular-constraint-phase-space",
+        "thm-rattle-second-order-global-accuracy-on-compact-tubes",
+        "thm-rattle-scaled-solve-residual-error-budget",
+        "ex-rigid-bond-rattle-free-rotor",
+        "ex-rattle-residual-budget-and-global-trajectory-drift"
+      ]
+    },
+    {
+      "id": "lem-regular-holonomic-phase-space-is-symplectic-cotangent",
+      "statement": "The regular configuration manifold has dimension d−m. In a configuration chart with T = Dφ and G = TᵀMT, a cotangent coordinate π has unique consistent ambient representative p = MTG⁻¹π; the restricted canonical form is Σ dxⱼ ∧ dπⱼ and is symplectic.",
+      "used_by": [
+        "thm-local-holonomic-constrained-hamiltonian-flow",
+        "lem-rattle-scaled-position-and-momentum-branches",
+        "thm-rattle-symplecticity-on-regular-constraint-phase-space"
+      ]
+    },
+    {
+      "id": "lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold",
+      "statement": "On local neighborhoods covering a compact consistent phase set there are smooth retractions Πⱼ onto the phase manifold, identity on consistent inputs, satisfying ‖Πⱼ(q,p)−(q,p)‖ ≤ Cⱼ(‖c(q)‖₂ + ‖J(q)M⁻¹p‖₂), with a common constant on a finite cover.",
+      "used_by": [
+        "alg-finite-budget-rattle-step-with-scaled-residuals",
+        "thm-rattle-scaled-solve-residual-error-budget",
+        "ex-rattle-residual-budget-and-global-trajectory-drift"
+      ]
+    },
+    {
+      "id": "thm-rattle-exact-constraint-preservation-and-reversibility",
+      "statement": "On the selected local branch, exact RATTLE sends consistent states to consistent states and satisfies Ψ₋ₕ ∘ Ψₕ = id and Ψₕ ∘ Ψ₋ₕ = id whenever both branch steps remain in the regular chart.",
+      "used_by": [
+        "thm-rattle-symplecticity-on-regular-constraint-phase-space",
+        "thm-rattle-second-order-global-accuracy-on-compact-tubes",
+        "ex-rigid-bond-rattle-free-rotor"
+      ]
+    },
+    {
+      "id": "thm-rattle-scaled-solve-residual-error-budget",
+      "statement": "Successful branch-local finite solves satisfy position error ≤ Ch²εq and momentum error ≤ C|h|(εq+εp). Under the stated nested-tube and consistency-restoration hypotheses, sufficiently small fixed scaled residuals give O(ε) trajectory error relative to exact-solve RATTLE; O(h²) scaled residuals give O(h²) trajectory error and raw constraint residuals O(h⁴), O(h³).",
+      "used_by": [
+        "ex-nearly-dependent-constraints-amplify-rattle-residuals",
+        "ex-rattle-residual-budget-and-global-trajectory-drift",
+        "constrained-dynamics-shake-and-rattle"
+      ]
+    },
+    {
+      "id": "lem-smooth-residual-quotient-extension",
+      "statement": "For r ∈ {1,2}, a C^(k+r) residual whose h-derivatives through order r−1 vanish at h = 0 has a C^k extension after division by h^r, with the stated factorial formula for its mixed derivatives at zero.",
+      "used_by": [
+        "lem-rattle-scaled-position-and-momentum-branches"
+      ]
+    },
+    {
+      "id": "thm-rattle-second-order-global-accuracy-on-compact-tubes",
+      "statement": "Under the stated compact regular convex-coordinate tube hypothesis, selected exact RATTLE branches with O(h²) consistent initial error remain in the regular chart for sufficiently large N and have maximum fixed-time grid error ≤ C_T h².",
+      "used_by": [
+        "ex-rigid-bond-rattle-free-rotor",
+        "constrained-dynamics-shake-and-rattle"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "Componentwise Taylor expansions in the quotient-extension proof, cubic local accuracy, and the rotor phase-defect estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiation of phase charts, constraint residuals, and scaled multiplier equations.",
+      "opened": true
+    },
+    {
+      "id": "thm-mean-value-inequality-for-total-derivatives",
+      "used_for": "Local residual inverse estimates, restoration bounds, and step-map Lipschitz estimates on convex coordinate neighborhoods.",
+      "opened": true
+    },
+    {
+      "id": "def-symplectic-form-and-symplectic-manifold",
+      "used_for": "Closedness and nondegeneracy requirements for the restricted canonical form.",
+      "opened": true
+    },
+    {
+      "id": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+      "used_for": "Regular configuration graphs and smooth selected multiplier branches with local uniqueness.",
+      "opened": true
+    },
+    {
+      "id": "def-leapfrog-step-map",
+      "used_for": "The kick–drift–kick convention underlying the RATTLE definition.",
+      "opened": true
+    },
+    {
+      "id": "thm-picard-lindelof-local-existence-and-uniqueness",
+      "used_for": "Existence and uniqueness of the smooth ambient extension of the constrained vector field.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Jacobian and gradient conventions in the opened leapfrog and residual-solver suppliers.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "SPD matrix context declared by the published leapfrog supplier.",
+      "opened": true
+    },
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "ODE domain and solution conventions used by the residual-units and DAE context.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "Admissible C¹ residual domains in the finite Newton supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-total-derivative-computes-directional-and-partial-derivatives",
+      "used_for": "Identification of residual coordinate Jacobians with total derivative matrices in the solver suppliers.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "constrained-dynamics-shake-and-rattle",
+      "to": "implicit-stiff-time-stepping-and-algebraic-error",
+      "faithful": true,
+      "note": "The residual-units definition and finite Newton/chord procedure are used within their actual domains and backend contracts. RATTLE supplies its own scaled inverse estimates; neither solver success nor residual magnitude is treated as an independent forward-error certificate. No reverse RATTLE premise is imported by the inspected supplier text."
+    },
+    {
+      "from": "constrained-dynamics-shake-and-rattle",
+      "to": "differential-algebraic-equations-and-consistent-initialization",
+      "faithful": true,
+      "note": "The inspected DAE interface requires an invertible algebraic Jacobian and expressly excludes higher-index systems. RATTLE does not apply that index-one reduction to unreduced holonomic constraints: its flow, multiplier branches, and restoration estimates are proved locally. The prerequisite is contextual, and the inspected DAE statements do not depend on RATTLE."
+    },
+    {
+      "from": "constrained-dynamics-shake-and-rattle",
+      "to": "geometric-numerical-integration",
+      "faithful": true,
+      "note": "The inspected geometric suppliers establish the canonical Jacobian identity for admitted unconstrained shears and their compositions. RATTLE does not infer constrained symplecticity from those results; it proves the restricted cotangent pullback identity using its discrete Lagrangian. The inspected supplier arguments use no RATTLE premise."
+    }
+  ]
+}

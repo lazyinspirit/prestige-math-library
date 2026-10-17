@@ -1,0 +1,223 @@
+{
+  "group": "i",
+  "batches": ["77"],
+  "pages_read": [
+    "parallel-in-time-parareal-and-mgrit",
+    "parallel-in-time-parareal-and-mgrit-examples"
+  ],
+  "items_read": [
+    "def-parareal-propagator-pair",
+    "alg-parareal-correction-sweeps",
+    "def-linear-all-at-once-time-operator",
+    "lem-parareal-first-k-nodes-are-fine-exact",
+    "thm-parareal-binomial-error-bound",
+    "lem-mgrit-exact-coarse-elimination",
+    "thm-parareal-inexact-sweep-error-ledger",
+    "alg-mgrit-two-level-cycle",
+    "cor-parareal-continuous-target-error-decomposition",
+    "thm-mgrit-contraction-implies-residual-and-error-decay",
+    "alg-mgrit-multilevel-recursive-cycle",
+    "lem-parareal-sweep-work-and-span",
+    "lem-mgrit-two-level-call-counts",
+    "lem-mgrit-recursive-work-and-visits",
+    "ex-parareal-dissipative-scalar-heat-mode",
+    "ex-parareal-oscillatory-coarse-phase-error",
+    "ex-parareal-nonlinear-tube-escape",
+    "ex-mgrit-scalar-diffusion-two-grid-contraction"
+  ],
+  "conventions": [
+    {
+      "convention": "Fine and coarse maps are deterministic, possibly partial maps on R^d that advance across the same macro interval. Their names imply no accuracy or stability. A backward Euler branch selector must choose exactly one admissible root; root existence and uniqueness are not assumed.",
+      "fixed_by": "def-parareal-propagator-pair",
+      "matters_for": [
+        "alg-parareal-correction-sweeps",
+        "lem-parareal-first-k-nodes-are-fine-exact",
+        "thm-parareal-binomial-error-bound"
+      ]
+    },
+    {
+      "convention": "Row zero is the sequential coarse trajectory. Each correction uses the preceding row's stored coarse values. Only fully completed rows are iterates; completing the requested budget certifies convergence only if the supplied sound verifier accepts.",
+      "fixed_by": "alg-parareal-correction-sweeps",
+      "matters_for": [
+        "lem-parareal-first-k-nodes-are-fine-exact",
+        "lem-parareal-sweep-work-and-span",
+        "thm-parareal-inexact-sweep-error-ledger"
+      ]
+    },
+    {
+      "convention": "All fine nodes and corrected comparison points must lie in the common Lipschitz set. A=max(1,a), binomial(n,k)=0 for k>n, and b^0=1. The fixed-horizon estimate assumes T>0, H=T/N, fixed k, and a uniform initial-error envelope M.",
+      "fixed_by": "thm-parareal-binomial-error-bound",
+      "matters_for": [
+        "thm-parareal-inexact-sweep-error-ledger",
+        "ex-parareal-nonlinear-tube-escape"
+      ]
+    },
+    {
+      "convention": "The inexact ledger bounds the actual combined update defect by η; residual tolerances alone do not bound this forward defect. Coarse-initialization error is included in M.",
+      "fixed_by": "thm-parareal-inexact-sweep-error-ledger",
+      "matters_for": [
+        "cor-parareal-continuous-target-error-decomposition"
+      ]
+    },
+    {
+      "convention": "The initial state u0 is fixed and absorbed into b1=Φ1u0+g1. Unknowns are nodes 1 through N, so the first operator row is v1. Coarsening uses m≥2 dividing N, with C={m,2m,...,N} and all remaining unknowns F-points.",
+      "fixed_by": "def-linear-all-at-once-time-operator",
+      "matters_for": [
+        "lem-mgrit-exact-coarse-elimination",
+        "alg-mgrit-two-level-cycle",
+        "lem-mgrit-two-level-call-counts",
+        "ex-mgrit-scalar-diffusion-two-grid-contraction"
+      ]
+    },
+    {
+      "convention": "Elimination products follow time order Φjm Φ(jm−1) ... Φ((j−1)m+1); an empty product is the identity. The exact Schur operator need not equal the practical coarse operator.",
+      "fixed_by": "lem-mgrit-exact-coarse-elimination",
+      "matters_for": [
+        "alg-mgrit-two-level-cycle",
+        "alg-mgrit-multilevel-recursive-cycle",
+        "ex-mgrit-scalar-diffusion-two-grid-contraction"
+      ]
+    },
+    {
+      "convention": "The two-level cycle uses ideal P and R, exact practical coarse forward substitution with z0=0, and independently selected F or FCF pre/post relaxation. Its error matrix is E=Spost(I−P Ac^−1 R At)Spre.",
+      "fixed_by": "alg-mgrit-two-level-cycle",
+      "matters_for": [
+        "thm-mgrit-contraction-implies-residual-and-error-decay",
+        "alg-mgrit-multilevel-recursive-cycle",
+        "ex-mgrit-scalar-diffusion-two-grid-contraction"
+      ]
+    },
+    {
+      "convention": "Error is u*−u, residual is b−Atu=At e, and operator norms are induced by the declared real-valued product-space norm. Contraction requires a proved bound ||E||≤q<1 and finite norms of At and At^−1; q^0=1.",
+      "fixed_by": "thm-mgrit-contraction-implies-residual-and-error-decay",
+      "matters_for": [
+        "ex-mgrit-scalar-diffusion-two-grid-contraction"
+      ]
+    },
+    {
+      "convention": "Recursive coarse visits recompute the residual from the current accumulated correction, solve each child correction from zero, and accumulate it. The hierarchy is finite, visit counts are positive integers, and the coarsest solve is exact.",
+      "fixed_by": "alg-mgrit-multilevel-recursive-cycle",
+      "matters_for": [
+        "lem-mgrit-recursive-work-and-visits"
+      ]
+    },
+    {
+      "convention": "Literal propagator counts retain applications at zero inputs. The first F-update assigns u1=b1 without a propagator call. Residuals, transfers, stopping checks, communication and other work require their own accounting.",
+      "fixed_by": "lem-mgrit-two-level-call-counts",
+      "matters_for": [
+        "lem-mgrit-recursive-work-and-visits"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-parareal-correction-sweeps",
+      "statement": "Initialize U0^0=x0 and U(n+1)^0=Gn(Un^0). For k=0,...,K−1, set U0^(k+1)=x0 and U(n+1)^(k+1)=Gn(Un^(k+1))+Fn(Un^k)−Gn(Un^k), reusing stored preceding-row coarse values and returning completed rows.",
+      "used_by": [
+        "lem-parareal-first-k-nodes-are-fine-exact",
+        "thm-parareal-binomial-error-bound",
+        "lem-parareal-sweep-work-and-span",
+        "ex-parareal-dissipative-scalar-heat-mode",
+        "ex-parareal-oscillatory-coarse-phase-error",
+        "ex-parareal-nonlinear-tube-escape"
+      ]
+    },
+    {
+      "id": "lem-mgrit-exact-coarse-elimination",
+      "statement": "For N=Jm, m≥2 and the declared F/C partition, At and AFF are invertible. Eliminating F unknowns gives S=ACC−ACF AFF^−1 AFC, with exact coarse propagator Φjm Φ(jm−1) ... Φ((j−1)m+1), reducing to Φ^m for constant Φ.",
+      "used_by": [
+        "alg-mgrit-two-level-cycle",
+        "thm-mgrit-contraction-implies-residual-and-error-decay",
+        "alg-mgrit-multilevel-recursive-cycle",
+        "ex-mgrit-scalar-diffusion-two-grid-contraction"
+      ]
+    },
+    {
+      "id": "thm-parareal-binomial-error-bound",
+      "statement": "If the common-set Lipschitz bounds for Gn and Fn−Gn have constants a,b≥0 and all initial-row errors are at most M≥0, then every node and completed sweep satisfy ||Un^k−xn||≤M binomial(n,k) A^n b^k, A=max(1,a). Under the stated uniform fixed-horizon assumptions, ||UN^k−xN||≤M(Cb T)^k exp(Ca T) H^(qk) for each fixed k≤N.",
+      "used_by": [
+        "thm-parareal-inexact-sweep-error-ledger",
+        "ex-parareal-nonlinear-tube-escape"
+      ]
+    },
+    {
+      "id": "alg-mgrit-two-level-cycle",
+      "statement": "A cycle applies the selected pre-relaxation, forms r=b−Atu and ρ=Rr, solves Acz=ρ exactly, corrects u←u+Pz, and applies the selected post-relaxation. Its exact error matrix is E=Spost(I−P Ac^−1 R At)Spre.",
+      "used_by": [
+        "thm-mgrit-contraction-implies-residual-and-error-decay",
+        "alg-mgrit-multilevel-recursive-cycle",
+        "lem-mgrit-two-level-call-counts",
+        "ex-mgrit-scalar-diffusion-two-grid-contraction"
+      ]
+    },
+    {
+      "id": "thm-parareal-inexact-sweep-error-ledger",
+      "statement": "Under the inherited Lipschitz hypotheses, computed iterates with V0^k=x0, initial errors at most M and combined update defects at most η satisfy ||Vn^k−xn||≤Pn^k+Rn^k, where Pn^k=M binomial(n,k) A^n b^k, R0^k=Rn^0=0, and R(n+1)^(k+1)=A Rn^(k+1)+b Rn^k+η.",
+      "used_by": [
+        "cor-parareal-continuous-target-error-decomposition"
+      ]
+    },
+    {
+      "id": "thm-mgrit-contraction-implies-residual-and-error-decay",
+      "statement": "For the declared fixed exact two-level cycle and induced norm, if ||At|| and ||At^−1|| are finite and ||E||≤q<1, then ||e^(r)||≤q^r||e^(0)|| and ||s^(r)||≤||At||q^r||e^(0)||. Every error/residual pair satisfies ||s||≤||At||||e|| and ||e||≤||At^−1||||s||.",
+      "used_by": [
+        "ex-mgrit-scalar-diffusion-two-grid-contraction"
+      ]
+    },
+    {
+      "id": "alg-mgrit-multilevel-recursive-cycle",
+      "statement": "On each noncoarsest level, pre-relax, restrict the residual, initialize the coarse correction to zero, perform νℓ successive child correction cycles on recomputed coarse residuals, interpolate the accumulated correction, and post-relax; solve exactly at level L.",
+      "used_by": [
+        "lem-mgrit-recursive-work-and-visits"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-norm-and-normed-space",
+      "used_for": "Real-valued norm axioms, especially the triangle inequality for Parareal error recurrences and the declared vector norms in MGRIT. Operator norms are defined locally, rather than attributed to this supplier.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "The convergent real exponential series used in the conditional fixed-horizon Parareal estimate.",
+      "opened": true
+    },
+    {
+      "id": "lem-exponential-dominates-one-plus-x",
+      "used_for": "The inequality 1+Ca H≤exp(Ca H) in the fixed-horizon Parareal bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Combining N exponential factors into exp(Ca NH)=exp(Ca T).",
+      "opened": true
+    },
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "The continuous reference solution in the target-error decomposition and the IVP setting of the opened explicit and implicit propagator suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "The concrete Euclidean state-space conventions used by the opened Runge–Kutta prerequisite definitions.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "parallel-in-time-parareal-and-mgrit",
+      "to": "runge-kutta-methods-and-order",
+      "faithful": true,
+      "note": "Checked the supplier page and opened the explicit RK stage-map and Euler/midpoint/RK4 tableau definitions, together with their one-step-method context. The consumer composes successful explicit RK microsteps, retains domain/evaluation failures, and claims no inherited accuracy or stability. The examples derive their forward Euler multipliers directly from the tableau. Supplier qualifications and consumer uses agree in both directions."
+    },
+    {
+      "from": "parallel-in-time-parareal-and-mgrit",
+      "to": "implicit-stiff-time-stepping-and-algebraic-error",
+      "faithful": true,
+      "note": "Checked the supplier page and opened the backward Euler equation and residual-unit definitions. The consumer explicitly supplies a deterministic admissible-root selector and does not infer existence or uniqueness from the equation. Its inexact ledger requires an actual forward update-defect bound, preserving the supplier's warning that a residual alone is insufficient. The examples solve their scalar equations directly."
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+---
+id: lem-local-root-in-max-norm
+kind: lemma
+title: "A small residual gives a nearby root under a uniform inverse and Lipschitz bound in the maximum norm"
+status: draft
+origin: pipeline
+pipeline_run: numerical-optimization-dynamics-2026-10-16
+dependency_level: 0
+deps:
+  - def-c-one-map-and-local-inverse
+  - def-invertible-euclidean-linear-map
+  - def-metric-ball
+  - def-p-norms-on-rn
+  - lem-metrics-on-rn
+  - thm-metric-open-set-algebra
+  - thm-euclidean-space-complete
+  - thm-complete-subspace-iff-closed
+  - thm-banach-fixed-point
+  - cor-mean-value-theorem
+  - thm-chain-rule-for-total-derivatives
+proof_strategy: contraction
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+verification:
+  precheck: pending
+sources:
+  references:
+    - title: "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, version 1.0"
+      url: "https://fncbook.github.io/v1.0/nonlineqn/newtonsys.html"
+      locator: "Chapter 4.5.2, equations (90)–(93): vector Newton linearization; the maximum-norm contraction estimate is proved here"
+    - title: "E. Hairer and G. Wanner, Solving Ordinary Differential Equations II, Chapter VI: Iterative Methods—Nonlinear Equations"
+      url: "https://www.unige.ch/~hairer/poly/chap6.pdf"
+      locator: "§VI.3: local Newton error estimates for nonsingular vector roots; the maximum-norm contraction constants are proved here"
+---
+
+## Statement
+
+Let $n\ge1$, let $U\subseteq\mathbb R^n$ be open, and let $F:U\to\mathbb R^n$ be $C^1$. For $x\in\mathbb R^n$ define $\|x\|_\infty:=\max_{j<n}|x_j|$, and for a linear map $B:\mathbb R^n\to\mathbb R^n$ define its induced norm by $\|B\|_\infty:=\sup_{z\ne0}\|Bz\|_\infty/\|z\|_\infty$. Let $x_0\in U$, $A:=DF(x_0)$ be invertible, and suppose $\|A^{-1}\|_\infty\le\beta$ for some $\beta>0$. Put $\epsilon:=\|F(x_0)\|_\infty\ge0$, and choose $r>0$ with $\beta\epsilon\le r/2$. Assume $B_\infty(x_0,2r)\subset U$ and
+
+$$\|DF(x)-DF(y)\|_\infty\le L\|x-y\|_\infty\qquad(x,y\in B_\infty(x_0,2r))$$
+
+for some $L\ge0$ with $\beta Lr\le\tfrac12$. Then $F$ has exactly one zero $x_*$ in $\overline B_\infty(x_0,r)$, and
+
+$$\|x_*-x_0\|_\infty\le2\beta\|F(x_0)\|_\infty.$$
+
+In particular, when $F(x_0)=0$ the unique zero in this ball is $x_0$.
+
+## Facts & Assumptions
+
+**Given:** The open domain, $C^1$ map, point $x_0$, invertible derivative $A=DF(x_0)$, maximum-norm residual $\epsilon\ge0$, inverse bound $\|A^{-1}\|_\infty\le\beta$, chosen radius $r>0$ with $\beta\epsilon\le r/2$, and derivative-Lipschitz bound in the Statement.
+
+[F1] [[def-c-one-map-and-local-inverse]]: a $C^1$ map is totally differentiable everywhere on its open domain with continuous derivative.
+
+[F2] [[def-invertible-euclidean-linear-map]]: $A$ has a two-sided inverse $A^{-1}$.
+
+[F3] [[cor-mean-value-theorem]]: a scalar function continuous on a closed interval and differentiable on its interior has a point where its endpoint difference equals its derivative times the interval length.
+
+[F4] [[def-p-norms-on-rn]], [[lem-metrics-on-rn]], and [[thm-euclidean-space-complete]]: $\|\cdot\|_\infty$ induces the complete metric $d_\infty$ on $\mathbb R^n$ for $n\ge1$.
+
+[F5] [[def-metric-ball]], [[thm-metric-open-set-algebra]], and the choice-free closed-subspace direction of [[thm-complete-subspace-iff-closed]]: a closed maximum-norm ball is a nonempty complete metric space.
+
+[F6] [[thm-banach-fixed-point]]: a contraction from a nonempty complete metric space to itself has a unique fixed point.
+
+
+
+## Proof
+
+**Proof technique:** contraction.
+
+1.1 Define $\Phi(y):=y-A^{-1}F(y)$ on $B_\infty(x_0,2r)$. By [F1] and the chain rule, $D\Phi(y)=I-A^{-1}DF(y)=A^{-1}(A-DF(y))$. The induced maximum norm is submultiplicative directly from its definition, so for $y\in\overline B_\infty(x_0,r)$ the Lipschitz hypothesis gives $\|D\Phi(y)\|_\infty\le\beta L\|y-x_0\|_\infty\le\beta Lr\le\tfrac12$. [F1, F2, given, algebra]
+
+2.1 For any $y,z$ in the closed radius-$r$ ball, their joining segment lies in the open radius-$2r$ ball. For each coordinate $j$, the scalar function $t\mapsto\Phi_j(z+t(y-z))$ is continuous on $[0,1]$ and differentiable on $(0,1)$ by [F1] and the chain rule. Its derivative has absolute value at most $\|D\Phi(z+t(y-z))\|_\infty\|y-z\|_\infty\le\tfrac12\|y-z\|_\infty$. Applying [F3] coordinatewise and taking the maximum gives $\|\Phi(y)-\Phi(z)\|_\infty\le\tfrac12\|y-z\|_\infty$. [F1, F3, step 1.1, given]
+
+3.1 At the center, $\|\Phi(x_0)-x_0\|_\infty=\|A^{-1}F(x_0)\|_\infty\le\beta\epsilon\le r/2$. Thus for $y$ in the closed ball, step 2.1 gives $\|\Phi(y)-x_0\|_\infty\le\|\Phi(y)-\Phi(x_0)\|_\infty+\|\Phi(x_0)-x_0\|_\infty\le r/2+r/2=r$, so $\Phi$ maps the ball into itself. [F2, given, step 2.1, algebra]
+
+4.1 The closed ball is nonempty and complete by [F4] and [F5]. Hence [F6] gives a unique fixed point $x_*\in\overline B_\infty(x_0,r)$. Its fixed-point equation gives $A^{-1}F(x_*)=0$, and invertibility in [F2] yields $F(x_*)=0$. [F2, F4, F5, F6, step 3.1]
+
+5.1 By step 2.1, $\|\Phi(x_*)-\Phi(x_0)\|_\infty\le\tfrac12\|x_*-x_0\|_\infty$. The fixed-point identity $\Phi(x_*)=x_*$ and the center estimate in step 3.1 therefore give $\|x_*-x_0\|_\infty\le\tfrac12\|x_*-x_0\|_\infty+\beta\epsilon$, hence $\|x_*-x_0\|_\infty\le2\beta\epsilon$. Any zero in the ball is a fixed point of $\Phi$, hence equals $x_*$. [F6, step 2.1, step 3.1, step 4.1, algebra] ∎
+

@@ -1,0 +1,688 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "14",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-dyadic-floating-point-format-and-directed-rounding",
+      "model": "gpt-6-luna",
+      "context_sha256": "e45ebb7c6d93c5ec573f3923ab195bc939e0745a277c0f7f158e13bfba38e876",
+      "outcome": "confirmed_fatal",
+      "reason": "The bounded significand and exponent ranges did not explicitly require integer k and e. Real k makes the alleged finite set infinite and invalidates its adjacent-grid use. Both indices are now explicitly integral, preserving the intended normal and subnormal grids and all rounding formulas.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "other"
+    },
+    {
+      "id": "lem-real-and-complex-modulus-rules",
+      "model": "gpt-6-luna",
+      "context_sha256": "bff54b66216162f13258cb1c760f77756ed614db52c64209feb7cce079230bfc",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The final quotient argument uses x,y for z but must use u,v for the nonzero divisor w. Corrected the coordinates: |w|=0 implies u²+v²=0, hence u=v=0. The earlier identity |w||1/w|=1 also already implies positivity, so this local typo does not invalidate the established quotient conclusion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-dyadic-square-root-bisection-encloses",
+      "model": "gpt-6-luna",
+      "context_sha256": "e479b7ed63cc475f496456799bbe52fc59be6b7fd668ed56fab8a79a6fc1fe69",
+      "outcome": "false_positive",
+      "reason": "Step 4.1 expressly derives storage monotonicity from the greatest-lower/least-upper definitions, rather than claiming it as part of L2. Those actual definitions are linked in the Given supplier and are available through both dependencies. For x≤y the lower candidate sets nest forward and the upper candidate sets nest backward, so both extremal maps are nondecreasing, including the prescribed overflow sentinels. The bisection invariant and grid-transition argument are sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-absolutely-convergent-series-cauchy-product",
+      "model": "gpt-6-luna",
+      "context_sha256": "a08eb2ced5831a78c82071a4b99592d84813b7607cb966c1785a8c5302a9a91a",
+      "outcome": "confirmed_nonfatal",
+      "reason": "A_0 and B_0 denoted absolute sums in step 1.1 but are overwritten by the signed partial-sum notation at N=0 in step 2.1. Renamed the nonnegative absolute sums A_abs and B_abs throughout. The triangular-versus-square finite-sum bound is then bounded by two vanishing absolute tails with fixed nonnegative multipliers; the product-limit estimate completes the unchanged claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+      "model": "gpt-6-luna",
+      "context_sha256": "bd804f52833c1d3700338717b1c99a549d35945c26c35776ec9f82275c20c155",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The geometric derivative series was omitted from the majorant argument. Added the eventual-ratio bound v_(n+1)/v_n=r(1+1/n)≤q<1 for v_n=n r^(n−1), with r=0 handled separately. Geometric tails uniformly dominate the derivative terms on |x|≤r. The factorial and odd-series bounds already establish the remaining unchanged claims.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+      "model": "gpt-6-luna",
+      "context_sha256": "a6cb396cb0e18aca55a1dc81e71086051b352d60b7dadfe8cb245aea1e2e3845",
+      "outcome": "false_positive",
+      "reason": "The actual operation definition specifies extremal directed rounding through def-dyadic-floating-point-format-and-directed-rounding; enclosure alone is not the only available premise. Extremal lower and upper maps are nondecreasing by inclusion of their candidate sets. Thus outward conversion preserves inclusion of exact interval hulls; componentwise natural interval operations preserve rectangle inclusion, and the M_B,m_B bounds prove ball isotonicity. The DAG induction explicitly requires all nodes finite, so no missing soundness hypothesis is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-division-by-interval-containing-zero",
+      "model": "gpt-6-luna",
+      "context_sha256": "362566a5892fc34f223ccfd796338546ce5c8defd6f8f3ae444790c852713781",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The quotient set is unbounded in both directions by the exhibited reciprocal sequence. The example incorrectly listed inconclusive as a permitted real-division branch; the actual operation definition allows split-domain or entire here. Removed the extra status without changing the example or its unboundedness argument; inconclusive remains available only in other specified operation branches.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-certified-elementary-range-evaluation",
+      "model": "gpt-6-luna",
+      "context_sha256": "b85cc0278093b3b5bce9220b97ee518ae6ad22804f41360929ec4fa315c39d5a",
+      "outcome": "false_positive",
+      "reason": "The schema deliberately permits justified_by results to depend on the procedure they justify; those reverse links are not recursive procedure calls or logical premises of the instructions. The procedure is explicitly specified by finite DAG ordering, rational endpoint arithmetic, fixed series truncations, finite root bisection and finite canonical partitions, with failure statuses for unresolved domains. The cited theorems verify the finite outputs nodewise without assuming their soundness in the definition. No mathematical circularity occurs and no carrier edit is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-centered-taylor-model-encloses-function-range",
+      "model": "gpt-6-luna",
+      "context_sha256": "7c50aa26d404cc75ed5ea5db06058b4ca11780c1c5d6650c41f1cb16683f5e04",
+      "outcome": "confirmed_fatal",
+      "reason": "The original unconditional machine-enclosure assertion fails for p=2, emin=0, emax=2, f(t)=6t, X=[0,2], c=0, n=1, C0=[0,0], C1=[6,6], D=[0,0]: Nmax=6 and the polynomial product reaches 12 and overflows. Preserved the unconditional analytic Taylor remainder and exact n=0 set-sum claims, and explicitly conditioned the machine certificate on every operation and endpoint conversion being finite. L3 and step 2.1 now retain the actual DAG-soundness hypothesis.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "thm-real-elementary-range-enclosures",
+      "model": "gpt-6-luna",
+      "context_sha256": "b1b264cac59adcf3d6c8a223a8bd8a76bf33cd1573d3a9448e62f90ab7bbc481",
+      "outcome": "confirmed_nonfatal",
+      "reason": "L2 is the arithmetic soundness and isotonicity theorem, not the bisection procedure. Replaced the inaccurate bisection-supplier description with its actual square-root enclosure clause. That clause proves precisely the finite square-root-node inclusion and nesting used here; the local series bounds and canonical-cell arguments handle the other real primitives, and step 3.1 composes the primitive bounds in topological order.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-budgeted-range-evaluation-terminates-and-is-sound",
+      "model": "gpt-6-luna",
+      "context_sha256": "af7dca2ae4d847178facbfe9f8b8e0d38e4328323ff71ef07119cbd2f7176a0a",
+      "outcome": "confirmed_nonfatal",
+      "reason": "L2 and L3 were restated as generic whole-leaf results although their explicit interfaces name real elementary primitives and complex exp/Log. Replaced those restatements with their precise domains, added the arithmetic and square-root supplier L4, and supplied a topological induction for arbitrary admitted homogeneous typed DAGs, including arithmetic-only outputs. All intermediate results are finite in a successful call and all domain guards have passed. The queue cover, 2B+1 bound and final global-width test then prove the unchanged certificate claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-dyadic-floating-point-format-and-directed-rounding",
+      "disposition": "repaired",
+      "post_sha256": "73541501b3683dc0c55a7e98ef5a8c5f5f547a5178d4cf63d7f1378a11bbb01f",
+      "review_context_sha256": "8bfeaa5ba4554dd01e3fa7eb1fd634b2cc4c81cbbb7269ab42d832f9aa7ace4f",
+      "reason": "The bounded significand and exponent ranges did not explicitly require integer k and e. Real k makes the alleged finite set infinite and invalidates its adjacent-grid use. Both indices are now explicitly integral, preserving the intended normal and subnormal grids and all rounding formulas.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-real-and-complex-modulus-rules",
+      "disposition": "repaired",
+      "post_sha256": "fc65bca87b83af8e2d7a983adcf871ae922a52f38e0106bb6f079adf6eeea9c2",
+      "review_context_sha256": "d6c8dbb6d4165f101142342f536ce0d4a36329b03d13502f4859f51479f0c2ee",
+      "reason": "The final quotient argument uses x,y for z but must use u,v for the nonzero divisor w. Corrected the coordinates: |w|=0 implies u²+v²=0, hence u=v=0. The earlier identity |w||1/w|=1 also already implies positivity, so this local typo does not invalidate the established quotient conclusion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-dyadic-square-root-bisection-encloses",
+      "disposition": "unaffected",
+      "post_sha256": "a30af043b2e01e8ddf16bbc6802eacd0e7d38efe790ccaf0c9cf2040f1d2dc8f",
+      "review_context_sha256": "41a7fee55c302ee1e309534bcc2a7ab6921e9e24098f6c2f4c883fbf0a633177",
+      "reason": "Step 4.1 expressly derives storage monotonicity from the greatest-lower/least-upper definitions, rather than claiming it as part of L2. Those actual definitions are linked in the Given supplier and are available through both dependencies. For x≤y the lower candidate sets nest forward and the upper candidate sets nest backward, so both extremal maps are nondecreasing, including the prescribed overflow sentinels. The bisection invariant and grid-transition argument are sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-absolutely-convergent-series-cauchy-product",
+      "disposition": "repaired",
+      "post_sha256": "7bbdbbaaa0311d7eab21819cdf4a499a6d8a18f28931fba02811db3b1d46c6f4",
+      "review_context_sha256": "c2e4bf3ea00fd225c644d9b3b83a1921e152c4006c2a0b12d56535210db3e081",
+      "reason": "A_0 and B_0 denoted absolute sums in step 1.1 but are overwritten by the signed partial-sum notation at N=0 in step 2.1. Renamed the nonnegative absolute sums A_abs and B_abs throughout. The triangular-versus-square finite-sum bound is then bounded by two vanishing absolute tails with fixed nonnegative multipliers; the product-limit estimate completes the unchanged claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+      "disposition": "repaired",
+      "post_sha256": "275a6120cccbcdf644b5163804d525191b23d4228d26e52e945f8f321a45779a",
+      "review_context_sha256": "9a71e8703dc7d69ab65ce552ca0b6c1d22a5ec79ddc7e53f6b99ed2423bce9cf",
+      "reason": "The geometric derivative series was omitted from the majorant argument. Added the eventual-ratio bound v_(n+1)/v_n=r(1+1/n)≤q<1 for v_n=n r^(n−1), with r=0 handled separately. Geometric tails uniformly dominate the derivative terms on |x|≤r. The factorial and odd-series bounds already establish the remaining unchanged claims.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+      "disposition": "unaffected",
+      "post_sha256": "88b2c7b1a1e80d059a15f6dcc66a4db5e333a9f4f97e6a810a0450f692762bfc",
+      "review_context_sha256": "06f73f0c96e9cbd5f1cb447490acbea89f1ad67086da00bbb6a15c1d2adbd2ef",
+      "reason": "The actual operation definition specifies extremal directed rounding through def-dyadic-floating-point-format-and-directed-rounding; enclosure alone is not the only available premise. Extremal lower and upper maps are nondecreasing by inclusion of their candidate sets. Thus outward conversion preserves inclusion of exact interval hulls; componentwise natural interval operations preserve rectangle inclusion, and the M_B,m_B bounds prove ball isotonicity. The DAG induction explicitly requires all nodes finite, so no missing soundness hypothesis is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-division-by-interval-containing-zero",
+      "disposition": "repaired",
+      "post_sha256": "c774f9f005f03a042cf9aed9b48bc86116f99e52d5b9f49372bfcca806a49bf7",
+      "review_context_sha256": "28a58230737d3d414ac3c49718cb52572a25adddd4262c4a9eca088b6e269f30",
+      "reason": "The quotient set is unbounded in both directions by the exhibited reciprocal sequence. The example incorrectly listed inconclusive as a permitted real-division branch; the actual operation definition allows split-domain or entire here. Removed the extra status without changing the example or its unboundedness argument; inconclusive remains available only in other specified operation branches.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-certified-elementary-range-evaluation",
+      "disposition": "unaffected",
+      "post_sha256": "b2bc6d858386491d49d5423659e10cb106f7b5129a2ff182b0bbee5c6b83fc28",
+      "review_context_sha256": "fdb9163ec38d3addf593ea6defe344ef827d04847896f07be6a49f15cc7010d9",
+      "reason": "The schema deliberately permits justified_by results to depend on the procedure they justify; those reverse links are not recursive procedure calls or logical premises of the instructions. The procedure is explicitly specified by finite DAG ordering, rational endpoint arithmetic, fixed series truncations, finite root bisection and finite canonical partitions, with failure statuses for unresolved domains. The cited theorems verify the finite outputs nodewise without assuming their soundness in the definition. No mathematical circularity occurs and no carrier edit is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-centered-taylor-model-encloses-function-range",
+      "disposition": "repaired",
+      "post_sha256": "b3e4d4d0e9d14f32a8ca04299feb72b51d4e6d1c08228efaabb44f7793678e83",
+      "review_context_sha256": "0cde9caa4ba9e5bd7c4c8672c3e07e9f20aec5cb0f579b9a31637d0bc4a61d72",
+      "reason": "The original unconditional machine-enclosure assertion fails for p=2, emin=0, emax=2, f(t)=6t, X=[0,2], c=0, n=1, C0=[0,0], C1=[6,6], D=[0,0]: Nmax=6 and the polynomial product reaches 12 and overflows. Preserved the unconditional analytic Taylor remainder and exact n=0 set-sum claims, and explicitly conditioned the machine certificate on every operation and endpoint conversion being finite. L3 and step 2.1 now retain the actual DAG-soundness hypothesis.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-real-elementary-range-enclosures",
+      "disposition": "repaired",
+      "post_sha256": "3b04d6efff3b2a6c8c6b844c82b0306fe31d4a3cb39c275f5f2b01a10430b469",
+      "review_context_sha256": "6cee258d02f61203b8f3e2392e1a79b31bdac11562150989a53d62e9dfb26993",
+      "reason": "L2 is the arithmetic soundness and isotonicity theorem, not the bisection procedure. Replaced the inaccurate bisection-supplier description with its actual square-root enclosure clause. That clause proves precisely the finite square-root-node inclusion and nesting used here; the local series bounds and canonical-cell arguments handle the other real primitives, and step 3.1 composes the primitive bounds in topological order.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-budgeted-range-evaluation-terminates-and-is-sound",
+      "disposition": "repaired",
+      "post_sha256": "790c4c96a32f9cebaa1f43bcd0c9101e867383f0c297525af11cda5f0ddd4913",
+      "review_context_sha256": "2556987237486009df51c3a7d3983262419bc44b518eb0299a3e03a7115aaea7",
+      "reason": "L2 and L3 were restated as generic whole-leaf results although their explicit interfaces name real elementary primitives and complex exp/Log. Replaced those restatements with their precise domains, added the arithmetic and square-root supplier L4, and supplied a topological induction for arbitrary admitted homogeneous typed DAGs, including arithmetic-only outputs. All intermediate results are finite in a successful call and all domain guards have passed. The queue cover, 2B+1 bound and final global-width test then prove the unchanged certificate claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-budgeted-validated-range-evaluation",
+    "alg-certified-adaptive-simpson",
+    "alg-certified-elementary-range-evaluation",
+    "alg-dyadic-square-root-bisection",
+    "alg-golub-welsch-certified-node-and-weight-enclosures",
+    "alg-interval-dag-box-enclosure-and-bound",
+    "alg-na-certified-unit-circle-phase",
+    "def-centered-taylor-model-with-derivative-interval",
+    "def-outward-rounded-interval-and-ball-operations",
+    "lem-directed-dyadic-rounding-enclosure-and-error",
+    "thm-certified-adaptive-simpson-enclosure",
+    "thm-interval-lipschitz-bound-sound-consistent"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "def-dyadic-floating-point-format-and-directed-rounding",
+      "action": "record-fixed-finding",
+      "outcome": "confirmed_fatal",
+      "reason": "The bounded significand and exponent ranges did not explicitly require integer k and e. Real k makes the alleged finite set infinite and invalidates its adjacent-grid use. Both indices are now explicitly integral, preserving the intended normal and subnormal grids and all rounding formulas.",
+      "status": "fixed",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u14.json",
+      "defect_type": "other"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "lem-real-and-complex-modulus-rules",
+      "action": "record-fixed-finding",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The final quotient argument uses x,y for z but must use u,v for the nonzero divisor w. Corrected the coordinates: |w|=0 implies u²+v²=0, hence u=v=0. The earlier identity |w||1/w|=1 also already implies positivity, so this local typo does not invalidate the established quotient conclusion.",
+      "status": "fixed",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u14.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-dyadic-square-root-bisection-encloses",
+      "action": "record-false-positive",
+      "outcome": "false_positive",
+      "reason": "Step 4.1 expressly derives storage monotonicity from the greatest-lower/least-upper definitions, rather than claiming it as part of L2. Those actual definitions are linked in the Given supplier and are available through both dependencies. For x≤y the lower candidate sets nest forward and the upper candidate sets nest backward, so both extremal maps are nondecreasing, including the prescribed overflow sentinels. The bisection invariant and grid-transition argument are sound.",
+      "status": "rejected-finding",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u14.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "lem-absolutely-convergent-series-cauchy-product",
+      "action": "record-fixed-finding",
+      "outcome": "confirmed_nonfatal",
+      "reason": "A_0 and B_0 denoted absolute sums in step 1.1 but are overwritten by the signed partial-sum notation at N=0 in step 2.1. Renamed the nonnegative absolute sums A_abs and B_abs throughout. The triangular-versus-square finite-sum bound is then bounded by two vanishing absolute tails with fixed nonnegative multipliers; the product-limit estimate completes the unchanged claim.",
+      "status": "fixed",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u14.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+      "action": "record-fixed-finding",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The geometric derivative series was omitted from the majorant argument. Added the eventual-ratio bound v_(n+1)/v_n=r(1+1/n)≤q<1 for v_n=n r^(n−1), with r=0 handled separately. Geometric tails uniformly dominate the derivative terms on |x|≤r. The factorial and odd-series bounds already establish the remaining unchanged claims.",
+      "status": "fixed",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u14.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+      "action": "record-false-positive",
+      "outcome": "false_positive",
+      "reason": "The actual operation definition specifies extremal directed rounding through def-dyadic-floating-point-format-and-directed-rounding; enclosure alone is not the only available premise. Extremal lower and upper maps are nondecreasing by inclusion of their candidate sets. Thus outward conversion preserves inclusion of exact interval hulls; componentwise natural interval operations preserve rectangle inclusion, and the M_B,m_B bounds prove ball isotonicity. The DAG induction explicitly requires all nodes finite, so no missing soundness hypothesis is used.",
+      "status": "rejected-finding",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u14.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-division-by-interval-containing-zero",
+      "action": "record-fixed-finding",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The quotient set is unbounded in both directions by the exhibited reciprocal sequence. The example incorrectly listed inconclusive as a permitted real-division branch; the actual operation definition allows split-domain or entire here. Removed the extra status without changing the example or its unboundedness argument; inconclusive remains available only in other specified operation branches.",
+      "status": "fixed",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u14.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "alg-certified-elementary-range-evaluation",
+      "action": "record-false-positive",
+      "outcome": "false_positive",
+      "reason": "The schema deliberately permits justified_by results to depend on the procedure they justify; those reverse links are not recursive procedure calls or logical premises of the instructions. The procedure is explicitly specified by finite DAG ordering, rational endpoint arithmetic, fixed series truncations, finite root bisection and finite canonical partitions, with failure statuses for unresolved domains. The cited theorems verify the finite outputs nodewise without assuming their soundness in the definition. No mathematical circularity occurs and no carrier edit is warranted.",
+      "status": "rejected-finding",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u14.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-centered-taylor-model-encloses-function-range",
+      "action": "record-fixed-finding",
+      "outcome": "confirmed_fatal",
+      "reason": "The original unconditional machine-enclosure assertion fails for p=2, emin=0, emax=2, f(t)=6t, X=[0,2], c=0, n=1, C0=[0,0], C1=[6,6], D=[0,0]: Nmax=6 and the polynomial product reaches 12 and overflows. Preserved the unconditional analytic Taylor remainder and exact n=0 set-sum claims, and explicitly conditioned the machine certificate on every operation and endpoint conversion being finite. L3 and step 2.1 now retain the actual DAG-soundness hypothesis.",
+      "status": "fixed",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u14.json",
+      "defect_type": "logic"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-real-elementary-range-enclosures",
+      "action": "record-fixed-finding",
+      "outcome": "confirmed_nonfatal",
+      "reason": "L2 is the arithmetic soundness and isotonicity theorem, not the bisection procedure. Replaced the inaccurate bisection-supplier description with its actual square-root enclosure clause. That clause proves precisely the finite square-root-node inclusion and nesting used here; the local series bounds and canonical-cell arguments handle the other real primitives, and step 3.1 composes the primitive bounds in topological order.",
+      "status": "fixed",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u14.json"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-budgeted-range-evaluation-terminates-and-is-sound",
+      "action": "record-fixed-finding",
+      "outcome": "confirmed_nonfatal",
+      "reason": "L2 and L3 were restated as generic whole-leaf results although their explicit interfaces name real elementary primitives and complex exp/Log. Replaced those restatements with their precise domains, added the arithmetic and square-root supplier L4, and supplied a topological induction for arbitrary admitted homogeneous typed DAGs, including arithmetic-only outputs. All intermediate results are finite in a successful call and all domain guards have passed. The queue cover, 2B+1 bound and final global-width test then prove the unchanged certificate claim.",
+      "status": "fixed",
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u14.json"
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "action": "no-update",
+      "reason": "No assigned item or direct consumer of either changed interface is published. All twelve discovered consumer IDs lie in the frozen draft frontier; no published defect or outside-consumer maintenance finding was established."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "def-dyadic-floating-point-format-and-directed-rounding",
+      "status": "reviewed",
+      "evidence": "The bounded significand and exponent ranges did not explicitly require integer k and e. Real k makes the alleged finite set infinite and invalidates its adjacent-grid use. Both indices are now explicitly integral, preserving the intended normal and subnormal grids and all rounding formulas.",
+      "validation": "review-contexts exit 0 at review completion; final focused precheck, rendercheck, proof-contract, depcheck and batched proof-layout all pass.",
+      "next_action": "Controller collects this report and routes interface effects; no judge, stamp, gate transition, or independent review of these repairs was performed."
+    },
+    {
+      "id": "lem-real-and-complex-modulus-rules",
+      "status": "reviewed",
+      "evidence": "The final quotient argument uses x,y for z but must use u,v for the nonzero divisor w. Corrected the coordinates: |w|=0 implies u²+v²=0, hence u=v=0. The earlier identity |w||1/w|=1 also already implies positivity, so this local typo does not invalidate the established quotient conclusion.",
+      "validation": "review-contexts exit 0 at review completion; final focused precheck, rendercheck, proof-contract, depcheck and batched proof-layout all pass.",
+      "next_action": "Controller collects this report and routes interface effects; no judge, stamp, gate transition, or independent review of these repairs was performed."
+    },
+    {
+      "id": "thm-dyadic-square-root-bisection-encloses",
+      "status": "reviewed",
+      "evidence": "Step 4.1 expressly derives storage monotonicity from the greatest-lower/least-upper definitions, rather than claiming it as part of L2. Those actual definitions are linked in the Given supplier and are available through both dependencies. For x≤y the lower candidate sets nest forward and the upper candidate sets nest backward, so both extremal maps are nondecreasing, including the prescribed overflow sentinels. The bisection invariant and grid-transition argument are sound.",
+      "validation": "review-contexts exit 0 at review completion; final focused precheck, rendercheck, proof-contract, depcheck and batched proof-layout all pass.",
+      "next_action": "Controller collects this report and routes interface effects; no judge, stamp, gate transition, or independent review of these repairs was performed."
+    },
+    {
+      "id": "lem-absolutely-convergent-series-cauchy-product",
+      "status": "reviewed",
+      "evidence": "A_0 and B_0 denoted absolute sums in step 1.1 but are overwritten by the signed partial-sum notation at N=0 in step 2.1. Renamed the nonnegative absolute sums A_abs and B_abs throughout. The triangular-versus-square finite-sum bound is then bounded by two vanishing absolute tails with fixed nonnegative multipliers; the product-limit estimate completes the unchanged claim.",
+      "validation": "review-contexts exit 0 at review completion; final focused precheck, rendercheck, proof-contract, depcheck and batched proof-layout all pass.",
+      "next_action": "Controller collects this report and routes interface effects; no judge, stamp, gate transition, or independent review of these repairs was performed."
+    },
+    {
+      "id": "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+      "status": "reviewed",
+      "evidence": "The geometric derivative series was omitted from the majorant argument. Added the eventual-ratio bound v_(n+1)/v_n=r(1+1/n)≤q<1 for v_n=n r^(n−1), with r=0 handled separately. Geometric tails uniformly dominate the derivative terms on |x|≤r. The factorial and odd-series bounds already establish the remaining unchanged claims.",
+      "validation": "review-contexts exit 0 at review completion; final focused precheck, rendercheck, proof-contract, depcheck and batched proof-layout all pass.",
+      "next_action": "Controller collects this report and routes interface effects; no judge, stamp, gate transition, or independent review of these repairs was performed."
+    },
+    {
+      "id": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+      "status": "reviewed",
+      "evidence": "The actual operation definition specifies extremal directed rounding through def-dyadic-floating-point-format-and-directed-rounding; enclosure alone is not the only available premise. Extremal lower and upper maps are nondecreasing by inclusion of their candidate sets. Thus outward conversion preserves inclusion of exact interval hulls; componentwise natural interval operations preserve rectangle inclusion, and the M_B,m_B bounds prove ball isotonicity. The DAG induction explicitly requires all nodes finite, so no missing soundness hypothesis is used.",
+      "validation": "review-contexts exit 0 at review completion; final focused precheck, rendercheck, proof-contract, depcheck and batched proof-layout all pass.",
+      "next_action": "Controller collects this report and routes interface effects; no judge, stamp, gate transition, or independent review of these repairs was performed."
+    },
+    {
+      "id": "ex-division-by-interval-containing-zero",
+      "status": "reviewed",
+      "evidence": "The quotient set is unbounded in both directions by the exhibited reciprocal sequence. The example incorrectly listed inconclusive as a permitted real-division branch; the actual operation definition allows split-domain or entire here. Removed the extra status without changing the example or its unboundedness argument; inconclusive remains available only in other specified operation branches.",
+      "validation": "review-contexts exit 0 at review completion; final focused precheck, rendercheck, proof-contract, depcheck and batched proof-layout all pass.",
+      "next_action": "Controller collects this report and routes interface effects; no judge, stamp, gate transition, or independent review of these repairs was performed."
+    },
+    {
+      "id": "alg-certified-elementary-range-evaluation",
+      "status": "reviewed",
+      "evidence": "The schema deliberately permits justified_by results to depend on the procedure they justify; those reverse links are not recursive procedure calls or logical premises of the instructions. The procedure is explicitly specified by finite DAG ordering, rational endpoint arithmetic, fixed series truncations, finite root bisection and finite canonical partitions, with failure statuses for unresolved domains. The cited theorems verify the finite outputs nodewise without assuming their soundness in the definition. No mathematical circularity occurs and no carrier edit is warranted.",
+      "validation": "review-contexts exit 0 at review completion; final focused precheck, rendercheck, proof-contract, depcheck and batched proof-layout all pass.",
+      "next_action": "Controller collects this report and routes interface effects; no judge, stamp, gate transition, or independent review of these repairs was performed."
+    },
+    {
+      "id": "thm-centered-taylor-model-encloses-function-range",
+      "status": "reviewed",
+      "evidence": "The original unconditional machine-enclosure assertion fails for p=2, emin=0, emax=2, f(t)=6t, X=[0,2], c=0, n=1, C0=[0,0], C1=[6,6], D=[0,0]: Nmax=6 and the polynomial product reaches 12 and overflows. Preserved the unconditional analytic Taylor remainder and exact n=0 set-sum claims, and explicitly conditioned the machine certificate on every operation and endpoint conversion being finite. L3 and step 2.1 now retain the actual DAG-soundness hypothesis.",
+      "validation": "review-contexts exit 0 at review completion; final focused precheck, rendercheck, proof-contract, depcheck and batched proof-layout all pass.",
+      "next_action": "Controller collects this report and routes interface effects; no judge, stamp, gate transition, or independent review of these repairs was performed."
+    },
+    {
+      "id": "thm-real-elementary-range-enclosures",
+      "status": "reviewed",
+      "evidence": "L2 is the arithmetic soundness and isotonicity theorem, not the bisection procedure. Replaced the inaccurate bisection-supplier description with its actual square-root enclosure clause. That clause proves precisely the finite square-root-node inclusion and nesting used here; the local series bounds and canonical-cell arguments handle the other real primitives, and step 3.1 composes the primitive bounds in topological order.",
+      "validation": "review-contexts exit 0 at review completion; final focused precheck, rendercheck, proof-contract, depcheck and batched proof-layout all pass.",
+      "next_action": "Controller collects this report and routes interface effects; no judge, stamp, gate transition, or independent review of these repairs was performed."
+    },
+    {
+      "id": "thm-budgeted-range-evaluation-terminates-and-is-sound",
+      "status": "reviewed",
+      "evidence": "L2 and L3 were restated as generic whole-leaf results although their explicit interfaces name real elementary primitives and complex exp/Log. Replaced those restatements with their precise domains, added the arithmetic and square-root supplier L4, and supplied a topological induction for arbitrary admitted homogeneous typed DAGs, including arithmetic-only outputs. All intermediate results are finite in a successful call and all domain guards have passed. The queue cover, 2B+1 bound and final global-width test then prove the unchanged certificate claim.",
+      "validation": "review-contexts exit 0 at review completion; final focused precheck, rendercheck, proof-contract, depcheck and batched proof-layout all pass.",
+      "next_action": "Controller collects this report and routes interface effects; no judge, stamp, gate transition, or independent review of these repairs was performed."
+    },
+    {
+      "ids": [
+        "def-dyadic-floating-point-format-and-directed-rounding",
+        "lem-real-and-complex-modulus-rules",
+        "lem-absolutely-convergent-series-cauchy-product",
+        "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+        "ex-division-by-interval-containing-zero",
+        "thm-centered-taylor-model-encloses-function-range",
+        "thm-real-elementary-range-enclosures",
+        "thm-budgeted-range-evaluation-terminates-and-is-sound"
+      ],
+      "metadata": "Owning batch-14 contract derivations/citation uses mirror the repaired proofs; budgeted theorem has an exact L4 arithmetic-supplier quote. The owning manifest mirrors both changed interfaces, the example status correction, and the added budgeted-theorem dependency.",
+      "integration": "Shared lock acquired, current carriers reread, owned entries edited, strict focused contract check passed, lock released.",
+      "source_evidence": "Local assigned carriers and actual dependency clauses were consulted. All reviewed mathematics is familiar; no external source reading is claimed. Existing historical source_locators were preserved.",
+      "unresolved_obligations": [],
+      "next_action": "Engine-owned collection and any required frontier-owner review of interface effects."
+    }
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+      "id": "lem-directed-dyadic-rounding-enclosure-and-error",
+      "path": "items/lem-directed-dyadic-rounding-enclosure-and-error.md",
+      "locator": "L1 and Proof 1.1–1.2",
+      "source_excerpt": "subnormals are spaced by $\\eta$",
+      "affected_use": "The proof already uses integer lattice neighbors. Explicit integrality now supplies exactly those neighbors and preserves both endpoint error estimates.",
+      "invalidated_claim": "None after explicit integrality; all intended grid and extremal-rounding claims are preserved.",
+      "minimality": "No consumer edit is required; the supplier only makes the existing integer-grid convention explicit.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+      "id": "alg-dyadic-square-root-bisection",
+      "path": "items/alg-dyadic-square-root-bisection.md",
+      "locator": "Definition step 4",
+      "source_excerpt": "must separately round the\n   lower endpoint down and the upper endpoint up",
+      "affected_use": "The exact dyadic loop is unchanged; storage uses extremal rounding in the same intended finite integer grid.",
+      "invalidated_claim": "None after explicit integrality; all intended grid and extremal-rounding claims are preserved.",
+      "minimality": "No consumer edit is required; the supplier only makes the existing integer-grid convention explicit.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+      "id": "def-outward-rounded-interval-and-ball-operations",
+      "path": "items/def-outward-rounded-interval-and-ball-operations.md",
+      "locator": "Definition first paragraph",
+      "source_excerpt": "round the lower endpoint down and the upper endpoint up",
+      "affected_use": "Every endpoint formula is unchanged. The repaired finite integer grid makes the same directed conversions well-defined, including overflow statuses.",
+      "invalidated_claim": "None after explicit integrality; all intended grid and extremal-rounding claims are preserved.",
+      "minimality": "No consumer edit is required; the supplier only makes the existing integer-grid convention explicit.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+      "id": "alg-certified-elementary-range-evaluation",
+      "path": "items/alg-certified-elementary-range-evaluation.md",
+      "locator": "Definition input and step 2",
+      "source_excerpt": "a finite dyadic format $(p,e_{\\min},e_{\\max})$",
+      "affected_use": "The same integer format bounds govern all input endpoints and fixed reduction scale. Explicit significand integrality changes none of its intended branches.",
+      "invalidated_claim": "None after explicit integrality; all intended grid and extremal-rounding claims are preserved.",
+      "minimality": "No consumer edit is required; the supplier only makes the existing integer-grid convention explicit.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+      "id": "alg-budgeted-validated-range-evaluation",
+      "path": "items/alg-budgeted-validated-range-evaluation.md",
+      "locator": "Definition membership procedure",
+      "source_excerpt": "$k=2^{p-1},\\ldots,2^p-1$",
+      "affected_use": "Its finite enumeration explicitly uses integer e,k already, so the repaired definition now matches its endpoint and midpoint membership test exactly.",
+      "invalidated_claim": "None after explicit integrality; all intended grid and extremal-rounding claims are preserved.",
+      "minimality": "No consumer edit is required; the supplier only makes the existing integer-grid convention explicit.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+      "id": "alg-na-certified-unit-circle-phase",
+      "path": "items/alg-na-certified-unit-circle-phase.md",
+      "locator": "Definition first paragraph",
+      "source_excerpt": "round its endpoints down and up to obtain a dyadic input interval",
+      "affected_use": "Its precision loop and directed conversion already use integer-format endpoints and propagate overflow; the clarified grid preserves the phase certificate.",
+      "invalidated_claim": "None after explicit integrality; all intended grid and extremal-rounding claims are preserved.",
+      "minimality": "No consumer edit is required; the supplier only makes the existing integer-grid convention explicit.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+      "id": "alg-interval-dag-box-enclosure-and-bound",
+      "path": "items/alg-interval-dag-box-enclosure-and-bound.md",
+      "locator": "Definition first paragraph",
+      "source_excerpt": "Round each input endpoint outward at precision $p$",
+      "affected_use": "The procedure uses the same extremal endpoint grid and overflow branch. Explicit integer indices preserve enclosure of arbitrary real input endpoints.",
+      "invalidated_claim": "None after explicit integrality; all intended grid and extremal-rounding claims are preserved.",
+      "minimality": "No consumer edit is required; the supplier only makes the existing integer-grid convention explicit.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+      "id": "alg-golub-welsch-certified-node-and-weight-enclosures",
+      "path": "items/alg-golub-welsch-certified-node-and-weight-enclosures.md",
+      "locator": "Definition step 1",
+      "source_excerpt": "Round every\nproposal down to a finite dyadic in the selected format",
+      "affected_use": "Its proposed real coefficients and eigenvector entries are converted to the same integer dyadic grid; finite-result and failure qualifications remain sound.",
+      "invalidated_claim": "None after explicit integrality; all intended grid and extremal-rounding claims are preserved.",
+      "minimality": "No consumer edit is required; the supplier only makes the existing integer-grid convention explicit.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+      "id": "alg-certified-adaptive-simpson",
+      "path": "items/alg-certified-adaptive-simpson.md",
+      "locator": "Definition arithmetic conventions",
+      "source_excerpt": "A midpoint that is not\nexactly representable or a non-finite interval operation returns `failure`",
+      "affected_use": "Its representability guard and upward remainder rounding already use the integer grid, so the clarification preserves all admitted panel certificates.",
+      "invalidated_claim": "None after explicit integrality; all intended grid and extremal-rounding claims are preserved.",
+      "minimality": "No consumer edit is required; the supplier only makes the existing integer-grid convention explicit.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+      "id": "thm-certified-adaptive-simpson-enclosure",
+      "path": "items/thm-certified-adaptive-simpson-enclosure.md",
+      "locator": "Facts F5 and Proof 1.2",
+      "source_excerpt": "$\\operatorname{ru}(x)$ is the least representable number",
+      "affected_use": "Its only affected inference is upward rounding of the exact Simpson remainder. The extremal-rounding definition is unchanged and remains sufficient.",
+      "invalidated_claim": "None after explicit integrality; all intended grid and extremal-rounding claims are preserved.",
+      "minimality": "No consumer edit is required; the supplier only makes the existing integer-grid convention explicit.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "def-dyadic-floating-point-format-and-directed-rounding",
+      "id": "thm-interval-lipschitz-bound-sound-consistent",
+      "path": "items/thm-interval-lipschitz-bound-sound-consistent.md",
+      "locator": "Facts F2 and Proof 1.1–1.2",
+      "source_excerpt": "the endpoint error tends to zero as precision increases on a fixed bounded range",
+      "affected_use": "Its enclosure and increasing-precision error uses need the integer spacing already intended. Clarifying e,k restores that spacing without changing its overflow or constant-convergence hypotheses.",
+      "invalidated_claim": "None after explicit integrality; all intended grid and extremal-rounding claims are preserved.",
+      "minimality": "No consumer edit is required; the supplier only makes the existing integer-grid convention explicit.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    },
+    {
+      "supplier": "thm-centered-taylor-model-encloses-function-range",
+      "id": "def-centered-taylor-model-with-derivative-interval",
+      "path": "items/def-centered-taylor-model-with-derivative-interval.md",
+      "locator": "frontmatter justified_by and Definition displayed evaluation",
+      "source_excerpt": "where products, powers, sums, and the final sum are evaluated by\noutward-rounded interval operations.",
+      "affected_use": "The justified_by link validates the displayed Taylor evaluation. Its imported operations already return statuses on overflow; the corrected theorem now proves finite-result partial correctness and retains the unconditional analytic remainder.",
+      "invalidated_claim": "An unconditional finite machine certificate is unavailable on overflow; this definition imports the operation statuses and makes no separate termination or finite-success assertion.",
+      "minimality": "No consumer Statement/Definition change is required: its formula and imported failure semantics already agree with the corrected conditional enclosure theorem.",
+      "disposition": "unchanged_sound",
+      "route": "frontier-owner"
+    }
+  ],
+  "interface_changes": [
+    {
+      "id": "def-dyadic-floating-point-format-and-directed-rounding",
+      "before_clause": "normal number k2^(e-p+1) with bounded e,k; subnormal k eta with bounded k",
+      "after_clause": "normal indices e,k and subnormal index k are explicitly integers",
+      "propagation": "All eleven direct item consumers were examined; no necessary consumer interface repair."
+    },
+    {
+      "id": "thm-centered-taylor-model-encloses-function-range",
+      "before_clause": "Unconditional inclusion in the outward-rounded machine Taylor model",
+      "after_clause": "Unconditional analytic remainder and exact n=0 set-sum bounds; finite machine enclosure only when every operation and endpoint conversion is finite",
+      "propagation": "The definition linked through justified_by and the owning page were examined; neither asserts unconditional finite success."
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/numerical-linear-algebra-and-approximation/outward-rounded-interval-and-ball-arithmetic.md",
+      "affected_use": "The page develops finite dyadic formats and says it proves a centered Taylor-model enclosure while explicitly listing overflow as a non-finite status.",
+      "disposition": "unchanged_sound",
+      "reason": "Explicit integer indices implement the stated finite format. The conditional finite Taylor certificate matches the page’s explicit failure convention."
+    },
+    {
+      "path": "library/numerical-linear-algebra-and-approximation/outward-rounded-interval-and-ball-arithmetic-examples.md",
+      "affected_use": "The page says dividing [1,2] by [-1,1] has no finite sound hull.",
+      "disposition": "unchanged_sound",
+      "reason": "Unboundedness of the exact quotient remains unchanged; removing the extra status from the example does not alter this page claim."
+    }
+  ],
+  "checks": [
+    {
+      "check": "precheck",
+      "selection": "8 changed items; 7 proof-bearing items",
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-dyadic-floating-point-format-and-directed-rounding.md items/lem-real-and-complex-modulus-rules.md items/lem-absolutely-convergent-series-cauchy-product.md items/lem-elementary-power-series-converge-uniformly-on-bounded-sets.md items/ex-division-by-interval-containing-zero.md items/thm-centered-taylor-model-encloses-function-range.md items/thm-real-elementary-range-enclosures.md items/thm-budgeted-range-evaluation-terminates-and-is-sound.md --json",
+      "exit_code": 0,
+      "result": "7 checked proofs pass; definition not-applicable; zero failures."
+    },
+    {
+      "check": "rendercheck",
+      "selection": "8 changed items",
+      "command": "node tools/rendercheck.mjs items/def-dyadic-floating-point-format-and-directed-rounding.md items/lem-real-and-complex-modulus-rules.md items/lem-absolutely-convergent-series-cauchy-product.md items/lem-elementary-power-series-converge-uniformly-on-bounded-sets.md items/ex-division-by-interval-containing-zero.md items/thm-centered-taylor-model-encloses-function-range.md items/thm-real-elementary-range-enclosures.md items/thm-budgeted-range-evaluation-terminates-and-is-sound.md --json",
+      "exit_code": 0,
+      "result": "8 checked, zero errors and warnings."
+    },
+    {
+      "check": "proof-contract",
+      "selection": [
+        "def-dyadic-floating-point-format-and-directed-rounding",
+        "lem-real-and-complex-modulus-rules",
+        "thm-dyadic-square-root-bisection-encloses",
+        "lem-absolutely-convergent-series-cauchy-product",
+        "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+        "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+        "ex-division-by-interval-containing-zero",
+        "alg-certified-elementary-range-evaluation",
+        "thm-centered-taylor-model-encloses-function-range",
+        "thm-real-elementary-range-enclosures",
+        "thm-budgeted-range-evaluation-terminates-and-is-sound"
+      ],
+      "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-14.proof-contracts.json --strict --items def-dyadic-floating-point-format-and-directed-rounding,lem-real-and-complex-modulus-rules,thm-dyadic-square-root-bisection-encloses,lem-absolutely-convergent-series-cauchy-product,lem-elementary-power-series-converge-uniformly-on-bounded-sets,thm-outward-rounded-operations-are-isotone-and-dag-sound,ex-division-by-interval-containing-zero,alg-certified-elementary-range-evaluation,thm-centered-taylor-model-encloses-function-range,thm-real-elementary-range-enclosures,thm-budgeted-range-evaluation-terminates-and-is-sound --json",
+      "exit_code": 0,
+      "result": "11 selected contracts pass; zero errors and warnings."
+    },
+    {
+      "check": "depcheck",
+      "selection": [
+        "def-dyadic-floating-point-format-and-directed-rounding",
+        "lem-real-and-complex-modulus-rules",
+        "thm-dyadic-square-root-bisection-encloses",
+        "lem-absolutely-convergent-series-cauchy-product",
+        "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+        "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+        "ex-division-by-interval-containing-zero",
+        "alg-certified-elementary-range-evaluation",
+        "thm-centered-taylor-model-encloses-function-range",
+        "thm-real-elementary-range-enclosures",
+        "thm-budgeted-range-evaluation-terminates-and-is-sound"
+      ],
+      "command": "node tools/depcheck.mjs --items-file /tmp/u14-items.json --json",
+      "exit_code": 0,
+      "result": "Focused 11-item, 2-page check passes; 35 prerequisite-closure items; zero errors and warnings."
+    },
+    {
+      "check": "proof-layout",
+      "selection": "All 8 changed item paths, in one command after final item edits",
+      "command": "node tools/proof-layout.mjs items/def-dyadic-floating-point-format-and-directed-rounding.md items/lem-real-and-complex-modulus-rules.md items/lem-absolutely-convergent-series-cauchy-product.md items/lem-elementary-power-series-converge-uniformly-on-bounded-sets.md items/ex-division-by-interval-containing-zero.md items/thm-centered-taylor-model-encloses-function-range.md items/thm-real-elementary-range-enclosures.md items/thm-budgeted-range-evaluation-terminates-and-is-sound.md",
+      "exit_code": 0,
+      "result": "8 items, 21 steps, 0 defects."
+    }
+  ]
+}

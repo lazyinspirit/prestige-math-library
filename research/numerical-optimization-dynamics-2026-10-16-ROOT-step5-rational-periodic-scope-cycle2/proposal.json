@@ -1,0 +1,365 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "cycle": 2,
+  "research_only": true,
+  "status": "guarded-successor-proposals-not-applied",
+  "issue": "Distinct u63 scope-preservation regression: non-dyadic rational validation boxes rejected instead of using proved affine adapter; typed generic Euclidean-ball interface retained from first-cycle proof proposal.",
+  "original_research_packet": "research/numerical-optimization-dynamics-2026-10-16-owner-step5-rational-periodic-box-cycle1/ROOT-REVIEW.md",
+  "current_native_report": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u63.json",
+  "existing_source_successors": [
+    {
+      "id": "alg-validated-periodic-orbit-corrector",
+      "path": "items/alg-validated-periodic-orbit-corrector.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/preimages/items/alg-validated-periodic-orbit-corrector.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/proposed/items/alg-validated-periodic-orbit-corrector.md",
+      "guard": "Exact full canonical preimage bytes; refuse application on divergence. These are current-u63-based research projections, not old-source overwrites. Root owns hashes and integration.",
+      "operations": [
+        {
+          "before": "  - lem-real-interval-arithmetic-preserves-enclosure\n",
+          "after": "  - lem-real-interval-arithmetic-preserves-enclosure\n  - lem-rational-box-affine-chart-and-dyadic-enclosure\n  - def-dyadic-floating-point-format-and-directed-rounding\n",
+          "occurrences": 1
+        },
+        {
+          "before": "  statement: literature-derived\n",
+          "after": "  statement: ai-altered\n",
+          "occurrences": 1
+        },
+        {
+          "before": "For independent validation, $Z$ must be a real box with finite dyadic endpoints as in [[def-real-boxes-and-interval-jacobian-enclosures]]; an input with other rational endpoints returns inconclusive: non-dyadic validation box before calling Krawczyk. ",
+          "after": "Independent validation retains every admitted rational endpoint of $Z$ and uses the exact affine dyadic unit-box chart below; non-dyadic physical endpoints are not a failure condition. ",
+          "occurrences": 1
+        },
+        {
+          "before": "All rational point and matrix operations below are exact or return an explicit arithmetic-failure status within the supplied cap.",
+          "after": "All rational point, endpoint, interval and matrix operations below are exact or return an explicit arithmetic-failure status within the supplied cap.",
+          "occurrences": 1
+        },
+        {
+          "before": "**Independent validation:** run [[alg-krawczyk-root-certification]] on $F$ and $Z$ with $C,W,\\eta$ and the supplied box budget. First its exact check $WC=I$ must succeed. For every processed subbox $Y\\subseteq Z$, let $m_Y$ be its rational midpoint. The residual callback runs the validated shooting jet on $\\{m_Y\\}$ and returns its $F(m_Y)$ enclosure as $F_0$; the Jacobian callback runs it on $Y$ and returns its $DF(Y)$ enclosure as $J(Y)$. Both append the sound outward section-row enclosures in section mode. This uses the actual midpoint of the current Krawczyk box, even when it differs from the candidate center. A failed query or tube inclusion marks that box unresolved. All interval operations are outward under [[lem-real-interval-arithmetic-preserves-enclosure]]. Retain the complete Krawczyk output partition, including every terminal box and its status. Continue only if the overall Krawczyk status is `complete`, exactly one terminal box $Y$ has status `unique-root`, and every other terminal box has status `root-free`; if there is no such unique box, more than one, or any existence-only/unresolved box, return inconclusive. Let $X_Y$ and $\\Theta_Y$ be the physical-state and period projections of the unique-root box, and include $\\Lambda_Y$ in section mode. Form $Q_Y=(X_Y\\times\\Lambda_Y)\\times\\{I_{d+p}\\}\\times\\Theta_Y$ in section mode, or $Q_Y=X_Y\\times\\{I_d\\}\\times\\Theta_Y$ in fixed-parameter mode. Check $Q_Y$ is contained in the supplied augmented tube and query the same sound range provider for its augmented field enclosure. Divide the first $d$ coordinates outward by the positive interval $\\Theta_Y$ to obtain an interval box containing $f(X_Y,\\Lambda_Y)$ (or $f(X_Y)$ in fixed-parameter mode). Require at least one component interval to exclude zero; if inclusion, query or division fails, or no component excludes zero, return inconclusive. Finally require a successful full-box jet run on $Y$ to enclose the entire trajectory and monodromy; a failed query or tube check returns inconclusive.",
+          "after": "**Independent validation:** retain the exact rational candidate box $Z=\\prod_{j=1}^N[a_j,b_j]$ in the declared physical variable order, where $N=d+1$ or $d+2$. If any side is degenerate, return inconclusive for validation, retaining the candidate: a box with empty ambient interior cannot pass the strict-interior inclusion required for a `unique-root` return. Degenerate boxes remain admitted inputs, and candidate-generation queries may still use their rational singleton or lower-dimensional boxes. Otherwise put $D=\\operatorname{diag}(b_j-a_j)$, $T(u)=a+Du$, $B=[0,1]^N$ and $\\widehat F(u)=F(T(u))$. Use the supplied open convex shooting domain containing $Z$, where the exact residual is $C^1$; failure to certify that domain returns inconclusive. The chart has an open convex preimage domain, and $D\\widehat F(u)=DF(T(u))D$, by [[lem-rational-box-affine-chart-and-dyadic-enclosure]]. Run [[alg-krawczyk-root-certification]] on $\\widehat F$ and the finite dyadic box $B$, using the supplied dyadic $C$, rational $W$, box budget and normalized minimum width $\\widehat\\eta=\\eta/\\max_j(b_j-a_j)>0$. Here $C$ is used as a preconditioner for this normalized residual; no approximate-inverse quality was assumed of it. The witness check remains the exact check $WC=I$. A normalized terminal box of maximum width at most $\\widehat\\eta$ has physical image of maximum width at most $\\eta$; the budget still bounds all processed boxes. For every processed dyadic subbox $A\\subseteq B$, let $m_A$ be its dyadic midpoint and set $Y=T(A)$ and $m_Y=T(m_A)$, the exact rational physical midpoint. The residual callback runs the validated shooting jet on $\\{m_Y\\}$ and appends the section-row enclosure when present. The Jacobian callback runs it on the rational box $Y$, appends the physical affine section row when present, and multiplies column $j$ of this physical Jacobian enclosure by $D_{jj}$. Exact rational endpoint operations followed by outward dyadic hull conversion give finite dyadic enclosures $F_0\\supseteq\\widehat F(m_A)$ and $\\widehat J(A)\\supseteq D\\widehat F(A)$. A failed conversion or overflow marks $A$ unresolved; it is never supplied as a finite interval. This uses the actual midpoint of the current normalized box, whose image is the actual midpoint of $Y$, even when it differs from the candidate center. A failed query or tube inclusion marks that box unresolved. Normalized Krawczyk interval operations are outward under [[lem-real-interval-arithmetic-preserves-enclosure]]. Retain the complete normalized Krawczyk output partition, including every terminal box and its status, and its exact physical image partition under $T$. Status labels on physical images mean the corresponding root conclusions transferred by the affine bijection, not a Krawczyk computation with an unscaled physical Jacobian. Continue only if the overall Krawczyk status is `complete`, exactly one normalized terminal box $A_Y$ has status `unique-root`, and every other terminal box has status `root-free`; if there is no such unique box, more than one, or any existence-only/unresolved box, return inconclusive. Set $Y=T(A_Y)$. Let $X_Y$ and $\\Theta_Y$ be the physical-state and period projections of this rational unique-root image box, and include $\\Lambda_Y$ in section mode. Form $Q_Y=(X_Y\\times\\Lambda_Y)\\times\\{I_{d+p}\\}\\times\\Theta_Y$ in section mode, or $Q_Y=X_Y\\times\\{I_d\\}\\times\\Theta_Y$ in fixed-parameter mode. Check $Q_Y$ is contained in the supplied augmented tube and query the same sound range provider for its augmented field enclosure. Divide the first $d$ coordinates by the positive interval $\\Theta_Y$ with exact rational endpoint arithmetic to obtain an interval box containing $f(X_Y,\\Lambda_Y)$ (or $f(X_Y)$ in fixed-parameter mode). Require at least one component interval to exclude zero; if inclusion, query or division fails, or no component excludes zero, return inconclusive. Finally require a successful full-box jet run on $Y$ to enclose the entire trajectory and monodromy; a failed query or tube check returns inconclusive.",
+          "occurrences": 1
+        },
+        {
+          "before": "Return `validated-root` only for such a box $Y$, and report it as the output box together with the complete terminal partition, the actual midpoint residual enclosure, Jacobian enclosure, inverse witness, strict inequalities, field component excluding zero, trajectory tube and monodromy enclosure. The complete partition proves that $Y$ contains the only zero in the original box $Z$. If subdivision was used the output box is $Y$, not the original larger $Z$. Otherwise return inconclusive or the precise finite candidate failure status. Candidate midpoints and correction residuals never replace the independently validated callback enclosures.\n",
+          "after": "Return `validated-root` only for such a box $Y$, and report it as the output box together with the complete terminal partition, the affine chart $(a,D)$, unique normalized box $A_Y$, the actual physical midpoint residual enclosure, physical Jacobian enclosure, normalized Jacobian enclosure, inverse witness, normalized strict inclusion and contraction inequalities, field component excluding zero, trajectory tube and monodromy enclosure. The bijection and complete mapped partition prove that $Y$ contains the only zero in the original rational box $Z$. If subdivision was used the output box is $Y$, not the original larger $Z$. Otherwise return inconclusive or the precise finite candidate failure status. Candidate midpoints and correction residuals never replace the independently validated callback enclosures.\n",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "id": "alg-periodic-orbit-pseudoarclength-continuation",
+      "path": "items/alg-periodic-orbit-pseudoarclength-continuation.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/preimages/items/alg-periodic-orbit-pseudoarclength-continuation.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/proposed/items/alg-periodic-orbit-pseudoarclength-continuation.md",
+      "guard": "Exact full canonical preimage bytes; refuse application on divergence. These are current-u63-based research projections, not old-source overwrites. Root owns hashes and integration.",
+      "operations": [
+        {
+          "before": "  - def-ck-euclidean-maps-and-diffeomorphisms\n",
+          "after": "  - def-ck-euclidean-maps-and-diffeomorphisms\n  - thm-augmented-residual-contraction-certificate\n  - lem-rational-box-affine-chart-and-dyadic-enclosure\n",
+          "occurrences": 1
+        },
+        {
+          "before": "  statement: literature-derived\n",
+          "after": "  statement: ai-altered\n",
+          "occurrences": 1
+        },
+        {
+          "before": "A finite periodic-orbit continuation request supplies a validated seed section root,",
+          "after": "A finite periodic-orbit continuation request supplies a valid certified Euclidean seed section-root ball with its isolating curve-chart neighborhood and rank certificate, as required by [[alg-pseudo-arclength-continuation-with-certified-local-corrector]],",
+          "occurrences": 1
+        },
+        {
+          "before": "\n\nAt a certified root, a tangent routine must certify a unit vector in $\\ker DF$ and a rank-$d+1$ condition. The predictor is advanced along that tangent. The corrector is [[alg-validated-periodic-orbit-corrector]] in section mode, which appends the pseudo-arclength plane and validates the resulting square residual by Krawczyk inclusion. Forward its complete finite input package: the candidate mode and its required pointwise evaluators if that mode uses them (or choose its enclosure-guided mode), rational initial candidate, a validation box with finite dyadic endpoints and its open convex shooting domain, nonzero rational phase covector and rational reference point, validated-jet step counts and arithmetic caps, preconditioner and exact inverse witness, minimum Krawczyk box width, and box/update budgets. For possibly nonrational tangent/predictor data, forward certified outward rational enclosures of the affine section row and its derivative; unavailable row bounds return inconclusive. The arithmetic evaluator supplies exact or interval-enclosed $F$ and $DF$ from the validated shooting jet, with queries reordered to $(x,\\mu,T)$ and Jacobian columns returned to $(x,T,\\mu)$ before adjoining the section row. The local inverse and chart interfaces are [[lem-phase-bordered-shooting-jacobian-invertibility]] and [[thm-pseudo-arclength-local-newton-correction]]. Run [[alg-pseudo-arclength-continuation-with-certified-local-corrector]] with these callbacks and its chart, angle, inverse, and finite-budget checks.",
+          "after": "\n\nAt a certified root, a tangent routine must certify a unit vector in $\\ker DF$ and a rank-$d+1$ condition. The predictor is advanced along that tangent. The periodic procedure [[alg-validated-periodic-orbit-corrector]] in section mode supplies a separate Krawczyk certificate for the square shooting/section residual. Forward its complete finite input package: the candidate mode and any required differentiable pointwise/segment evaluators (or choose its enclosure-guided mode), rational initial candidate, arbitrary rational physical validation box and its open convex shooting domain, nonzero rational phase covector and rational reference point, validated-jet step counts and arithmetic caps, dyadic preconditioner and exact rational inverse witness for its normalized residual, physical minimum box width, and box/update budgets. It uses its affine dyadic unit-box chart for positive side lengths, retains the exact physical box and complete mapped partition, and returns inconclusive for validation on degenerate boxes while retaining their candidate use. For possibly nonrational tangent/predictor data, forward certified outward rational enclosures of the affine section row and its derivative; unavailable bounds return inconclusive. For every jet query reorder physical $(x,T,\\mu)$ to the jet's $(x,\\mu,T)$ coordinates, and return its Jacobian columns to $(x,T,\\mu)$ before appending a section row. Preserve this rule in candidate, Krawczyk and continuation-evaluator calls.\n\nRun [[alg-pseudo-arclength-continuation-with-certified-local-corrector]] using its actual exact-evaluation or bounded-error branch and its own certified Euclidean root balls. A periodic Krawczyk box alone is not its ball certificate. Use the generic exact-evaluation branch only with separately supplied exact physical point-evaluation data; interval jet enclosures alone use the bounded-error branch. The local inverse and chart suppliers remain [[lem-phase-bordered-shooting-jacobian-invertibility]] and [[thm-pseudo-arclength-local-newton-correction]], with every generic tangent, previous-normal, chart-angle, predictor-offset and finite-budget check retained. Supply the following finite-return evaluator and ball-certificate interfaces; an unavailable input returns the generic declared failure rather than an accepted step.\n\n**Physical evaluator bridge.** At each exact queried point $y=(x,T,\\mu)$, obtain a certified finite rational box containing $y$ within the shooting domain and the declared physical continuation tube; use its singleton when $y$ is rational. Every augmented range-provider tube inclusion required by the jet is checked separately in its own augmented coordinates. A nonrational query requires supplied certified coordinate enclosures, not substitution of a nearby rational point. Run the validated jet on that physical box with the stated coordinate/column permutation. Its residual and physical Jacobian intervals enclose $F(y)$ and $DF(y)$. Coordinatewise rational midpoints and the sums of the coordinate/entry radii give the generic evaluator's certified Euclidean residual error and operator-Jacobian error by [[lem-rational-box-affine-chart-and-dyadic-enclosure]]. For its current affine section form the square residual $\\mathcal G(y)=(F(y),\\tau_k^T(y-z_p))$ and its physical Jacobian, appending sound interval enclosures of the affine row and its constant term; include all row uncertainty in the square midpoint/error data $\\widehat g,\\widehat A,\\epsilon_g,\\epsilon_J$. These are derivatives in physical coordinates, not the normalized Krawczyk columns $DF\\,D$. If only normalized data are retained, undo their known positive diagonal chart exactly and enclose the physical columns before forming these bounds. Missing finite point/row/error enclosures returns `root-certificate-inconclusive`; a certified domain/tube exit keeps the generic `tube-exit` status.\n\n**Required Euclidean ball certificate.** At a generic candidate $y$, the callback supplies $R>0$, verifies that the whole $\\overline B_2(y,R)$ lies in the declared smooth shooting domain, physical continuation tube and current isolating chart neighborhood $V_k$, and supplies a sound finite $L\\ge0$ with $\\|D\\mathcal G(u)-D\\mathcal G(v)\\|_{\\rm op}\\le L\\|u-v\\|_2$ throughout that ball. This whole-ball bound is additional certified input, for example from a separately justified second-derivative bound on a covering tube. It is not inferred from first-derivative intervals, Krawczyk inclusion or the mere existence of a $C^2$ field. The callback supplies an exact rational inverse witness $V$ for the rational midpoint matrix $\\widehat A$, checked by both products $V\\widehat A=\\widehat A V=I$, or another sound inverse-bound certificate. For the exact witness take $\\widehat\\beta=\\sum_{i,j}|V_{ij}|$. Verify the actual tests of [[thm-augmented-residual-contraction-certificate]]:\n$$\\widehat\\beta\\epsilon_J<1,\\qquad \\beta=\\frac{\\widehat\\beta}{1-\\widehat\\beta\\epsilon_J},\\qquad \\rho=\\|\\widehat g\\|_2+\\epsilon_g,\\qquad q=\\beta L R<1,\\qquad \\beta\\rho\\le(1-q)R.$$\nA certified upper bound for $\\|\\widehat g\\|_2$ may replace the norm conservatively. Only a passing ball with the full chart/angle record can be appended by the generic algorithm. Missing witness, whole-ball Lipschitz, domain, chart or error data returns `root-certificate-inconclusive`; finite arithmetic failures and all generic budget/status distinctions remain explicit. A small residual, an exhausted Newton budget or a successful periodic Krawczyk call alone cannot append a continuation ball. If both a generic ball and a physical Krawczyk box are claimed to represent the same section root, additionally certify inclusion of the entire ball in that Krawczyk unique-root image box, or provide another sound common-root certificate; otherwise retain them as separate records without claiming coincidence.",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "id": "thm-validated-periodic-orbit-certificate-soundness",
+      "path": "items/thm-validated-periodic-orbit-certificate-soundness.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/preimages/items/thm-validated-periodic-orbit-certificate-soundness.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/proposed/items/thm-validated-periodic-orbit-certificate-soundness.md",
+      "guard": "Exact full canonical preimage bytes; refuse application on divergence. These are current-u63-based research projections, not old-source overwrites. Root owns hashes and integration.",
+      "operations": [
+        {
+          "before": "  - thm-validated-euler-flow-and-monodromy-enclosure-soundness\n",
+          "after": "  - thm-validated-euler-flow-and-monodromy-enclosure-soundness\n  - lem-rational-box-affine-chart-and-dyadic-enclosure\n",
+          "occurrences": 1
+        },
+        {
+          "before": "  proof: ai-generated\n",
+          "after": "  proof: ai-altered\n",
+          "occurrences": 1
+        },
+        {
+          "before": "[F3] The successful corrector returns a complete Krawczyk partition with one `unique-root` box and only `root-free` boxes otherwise; it also returns validated residual/Jacobian, trajectory, monodromy, and nonstationarity enclosures on the unique-root box ([[alg-validated-periodic-orbit-corrector]]).",
+          "after": "[F3] The successful corrector returns the exact chart $T(u)=a+Du$, a complete Krawczyk partition of $[0,1]^{d+1}$ and its mapped physical partition of $Z$, with one normalized `unique-root` box and root-free boxes otherwise; it also returns physical residual/Jacobian, trajectory, monodromy and nonstationarity enclosures on its unique-root image box $Y$ ([[alg-validated-periodic-orbit-corrector]]).",
+          "occurrences": 1
+        },
+        {
+          "before": "\n## Proof\n",
+          "after": "\n[F5] The positive-side rational affine chart transfers zeros, root-free/existence/uniqueness conclusions and complete partitions bijectively; its normalized derivative is $DF(T(u))D$ ([[lem-rational-box-affine-chart-and-dyadic-enclosure]]).\n\n## Proof\n",
+          "occurrences": 1
+        },
+        {
+          "before": "1.1 By [F3], the Krawczyk run covers $Z$ with one `unique-root` box $Y$ and root-free boxes otherwise. The interval residual and Jacobian enclosures on $Y$ meet [F1], so strict inclusion gives a zero in $Y$ and the separate contraction bound gives at most one there. The root-free boxes contain no zero, hence this is exactly one zero in all of $Z$. [F1, F3, given]",
+          "after": "1.1 By [F3], the actual Krawczyk run applies to $\\widehat F=F\\circ T$ on the dyadic unit box, with normalized Jacobian enclosure for $DF(T(u))D$. Its unique normalized box $A_Y$ satisfies [F1], so strict inclusion gives a zero and the separate contraction bound gives at most one there. Every other normalized terminal box is root-free. By [F5], $T$ sends this complete partition onto $Z$ and bijects the zeros, so $Y=T(A_Y)$ contains exactly one zero of the physical residual and every other physical image box is root-free. This is exactly one zero in all of $Z$. [F1, F3, F5, given]",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "id": "thm-orbital-stability-from-certified-floquet-multipliers",
+      "path": "items/thm-orbital-stability-from-certified-floquet-multipliers.md",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/preimages/items/thm-orbital-stability-from-certified-floquet-multipliers.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/proposed/items/thm-orbital-stability-from-certified-floquet-multipliers.md",
+      "guard": "Exact full canonical preimage bytes; refuse application on divergence. These are current-u63-based research projections, not old-source overwrites. Root owns hashes and integration.",
+      "operations": [
+        {
+          "before": "  - lem-phase-bordered-shooting-jacobian-invertibility\n",
+          "after": "  - lem-phase-bordered-shooting-jacobian-invertibility\n  - lem-rational-box-affine-chart-and-dyadic-enclosure\n",
+          "occurrences": 1
+        },
+        {
+          "before": "  proof: ai-generated\n",
+          "after": "  proof: ai-altered\n",
+          "occurrences": 1
+        },
+        {
+          "before": "[F7] The corrector's Krawczyk record uses a nonsingular preconditioner $C$ and a verified bound $\\|I-CJ\\|_\\infty\\le q<1$ for every Jacobian $J$ in the box ([[alg-krawczyk-root-certification]]).",
+          "after": "[F7] The corrector's normalized Krawczyk record uses a nonsingular preconditioner $C$, its known positive diagonal chart $D$, and a verified bound $\\|I-CJD\\|_\\infty\\le q<1$ for every physical shooting Jacobian $J$ in the image box. The normalized derivative is $JD$, and invertibility transfers back through $C,D$ ([[alg-krawczyk-root-certification]], [[lem-rational-box-affine-chart-and-dyadic-enclosure]]).",
+          "occurrences": 1
+        },
+        {
+          "before": "For the exact real Jacobian $J$ at that root, [F7] gives $\\|I-CJ\\|_\\infty<1$. Regard $I-CJ$ as a complex matrix; [F8] makes $CJ$ invertible over $\\mathbb C$, so its real determinant is nonzero and $CJ$, then $J$, is invertible over $\\mathbb R$.",
+          "after": "For the exact real physical Jacobian $J$ at that root, [F7] gives $\\|I-CJD\\|_\\infty<1$. Regard $I-CJD$ as a complex matrix; [F8] makes $CJD$ invertible over $\\mathbb C$, hence over $\\mathbb R$. The known nonsingular $C$ and positive diagonal $D$ then give an inverse $D(CJD)^{-1}C$ for the physical $J$ by [F7].",
+          "occurrences": 1
+        }
+      ]
+    }
+  ],
+  "new_result_proposal": {
+    "id": "lem-rational-box-affine-chart-and-dyadic-enclosure",
+    "source": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/proposed/items/lem-rational-box-affine-chart-and-dyadic-enclosure.md",
+    "prior_proved_research_source": "research/numerical-optimization-dynamics-2026-10-16-owner-step5-rational-periodic-box-cycle1/proposed/items/lem-rational-box-affine-chart-and-dyadic-enclosure.md",
+    "status": "Research proof reused verbatim; not canonical, natively authored, independently reviewed, registered or certified.",
+    "guard": "Canonical new item must remain absent; genuine native owner creates only for this assigned repair prerequisite."
+  },
+  "route": "Both algorithm IDs already occur in genuine u63.downstream; ordinary native5.2 assigned owners receive root context. No new kept admission, workflow extension, history rewrite or coverage adoption.",
+  "no_hashes_checks_tests_gates_native_dispatch_recertification_or_commits": true,
+  "root_owns_metadata_hashes_and_gates": true,
+  "native_origin_navigation": {
+    "report": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u63.json",
+    "report_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/native-context/step5-v2-initial-r1-u63.json",
+    "result": "research/numerical-optimization-dynamics-2026-10-16-dispatch/alpha-adjudicate-step5-v2-initial-r1-u63.result.json",
+    "result_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/native-context/alpha-adjudicate-step5-v2-initial-r1-u63.result.json",
+    "actual_identity": {
+      "run": "numerical-optimization-dynamics-2026-10-16",
+      "role": "alpha-adjudicate",
+      "label": "step5-v2-initial-r1-u63",
+      "covers": [
+        "63"
+      ],
+      "model": "gpt-6.1-sol",
+      "provider_effort": "high",
+      "ok": true,
+      "attempt": 1,
+      "ended_at": "2026-10-17T02:29:29.739Z"
+    },
+    "actual_downstream": [
+      "alg-floquet-multiplier-cluster-certifier",
+      "alg-periodic-orbit-pseudoarclength-continuation",
+      "alg-validated-periodic-orbit-corrector",
+      "ex-near-unit-floquet-multiplier-is-inconclusive",
+      "ex-van-der-pol-stability-conditional-on-validated-enclosure",
+      "lem-separated-simple-floquet-multiplier-perturbation-bound",
+      "thm-periodic-shooting-residual-to-orbit-error-budget",
+      "thm-validated-periodic-orbit-certificate-soundness"
+    ],
+    "two_algorithms_already_downstream": true,
+    "claim": "Copied actual native observations; no native report, coverage, review, hash or routing artifact authored."
+  },
+  "consumer_review": {
+    "reviewer": "Same cycle2 research reviewer of both changed Definitions and actual consumers",
+    "scope": "Current full sources of earlier ten-carrier cone plus exact native deltas and source-text searches for both changed algorithm IDs. No whole-batch review. No item source beyond the continuation itself uses its ID.",
+    "original_cone": "research/numerical-optimization-dynamics-2026-10-16-owner-step5-rational-periodic-box-cycle1/consumer-closure-and-future-mirrors.json",
+    "rows": [
+      {
+        "id": "alg-validated-periodic-orbit-corrector",
+        "relationship": "Changed root and current jet consumer",
+        "disposition": "Definition successor",
+        "evidence": "T maps every normalized dyadic subbox and midpoint to its exact rational physical image; normalized derivative is physical J times D, with finite outward hulls. Physical trajectory/monodromy and mapped complete partition are retained. Native section permutation, open convex domain and nonzero phase covector remain.",
+        "current_source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/current-consumer-context/items/alg-validated-periodic-orbit-corrector.md"
+      },
+      {
+        "id": "alg-periodic-orbit-pseudoarclength-continuation",
+        "relationship": "Actual direct corrector consumer; no further source-text item consumer found",
+        "disposition": "Definition successor",
+        "evidence": "Forward arbitrary rational physical boxes, both chart records and normalized preconditioner. Actual generic supplier requires a Euclidean seed/accepted root BALL, exact or bounded physical evaluator, checked inverse and whole-ball Lipschitz/domain/chart inputs. Successor supplies these explicitly without turning a Krawczyk box into a ball; native C3-only fold guard/permutation/nonzero-phase/domain remain.",
+        "current_source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/current-consumer-context/items/alg-periodic-orbit-pseudoarclength-continuation.md"
+      },
+      {
+        "id": "thm-validated-periodic-orbit-certificate-soundness",
+        "relationship": "Actual direct corrector consumer",
+        "disposition": "Facts/Proof-only successor; original Statement unchanged",
+        "evidence": "Current1.1 applies the dyadic Krawczyk theorem directly to physical Z. New F3/F5/1.1 apply it to F composed with T on unit box, then biject zeros/statuses/full partition to physical Z. Native F2 exact-flow premise and2.1 successful Euler existence before root-equivalence remain verbatim.",
+        "current_source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/current-consumer-context/items/thm-validated-periodic-orbit-certificate-soundness.md"
+      },
+      {
+        "id": "thm-orbital-stability-from-certified-floquet-multipliers",
+        "relationship": "Actual direct unlinked corrector-record use in F7/4.1, also orbit-theorem consumer",
+        "disposition": "Necessary Facts/Proof-only successor; original Statement unchanged",
+        "evidence": "Actual tested bound is ||I-CJD||<1. Neumann proves CJD invertible; J inverse is D(CJD)^(-1)C. Native F6 open maximal-flow, F9 multiplicity suppliers, repeated-period/Jordan-chain argument, and compact Poincare section patch remain.",
+        "current_source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/current-consumer-context/items/thm-orbital-stability-from-certified-floquet-multipliers.md"
+      },
+      {
+        "id": "ex-van-der-pol-stability-conditional-on-validated-enclosure",
+        "relationship": "Actual direct corrector and conditional orbit/stability consumer",
+        "disposition": "Current source unchanged",
+        "evidence": "Current u63 F1 explicitly contains the complete partition, independent contraction, nonsingular preconditioner, nonstationarity and full trajectory/monodromy record. Their physical meaning is preserved by exact chart mapping. Current2.1 polynomial regularity/neutral-interior/compact disk-margin fixes remain valid; no numerical orbit is claimed.",
+        "current_source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/current-consumer-context/items/ex-van-der-pol-stability-conditional-on-validated-enclosure.md"
+      },
+      {
+        "id": "ex-near-unit-floquet-multiplier-is-inconclusive",
+        "relationship": "Earlier cone context; stability Statement unchanged",
+        "disposition": "Current source unchanged; no propagated interface change",
+        "evidence": "F1/F2 use physical monodromy-family containment and strict unit-circle separation; the opposite scalar classifications and inconclusive verdict remain. No shooting-variable normalization is applied to physical monodromy.",
+        "current_source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/current-consumer-context/items/ex-near-unit-floquet-multiplier-is-inconclusive.md"
+      },
+      {
+        "id": "alg-floquet-multiplier-cluster-certifier",
+        "relationship": "Earlier jet-consumer context; jet unchanged in cycle2",
+        "disposition": "Current source unchanged",
+        "evidence": "Actual input requires finite dyadic complex matrix-family enclosure. Current native jet already returns outward dyadic monodromy enclosures for rational queries. No contour arithmetic/provider/matrix-family source change is proposed.",
+        "current_source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/current-consumer-context/items/alg-floquet-multiplier-cluster-certifier.md"
+      },
+      {
+        "id": "lem-separated-simple-floquet-multiplier-perturbation-bound",
+        "relationship": "Earlier jet-consumer context",
+        "disposition": "Current source unchanged",
+        "evidence": "F5 requires physical monodromy membership, not a scaled shooting derivative. Native restricted final separation wording and quantitative resolvent bound remain intact.",
+        "current_source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/current-consumer-context/items/lem-separated-simple-floquet-multiplier-perturbation-bound.md"
+      },
+      {
+        "id": "thm-periodic-shooting-residual-to-orbit-error-budget",
+        "relationship": "Earlier jet-consumer context; no corrector call",
+        "disposition": "Current source unchanged",
+        "evidence": "Statement/F2/1.1 require physical residual containment and separately given physical inverse/Lipschitz data. Successor distinguishes physical J from JD explicitly; no chart-scaled bound replaces K_J/L_J.",
+        "current_source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/current-consumer-context/items/thm-periodic-shooting-residual-to-orbit-error-budget.md"
+      },
+      {
+        "id": "thm-floquet-multiplier-cluster-certificate-soundness",
+        "relationship": "Earlier contour-consumer context",
+        "disposition": "Current source unchanged",
+        "evidence": "Universal count is for each physical monodromy in the family. No contour, resolvent or family data changes; native characteristic-polynomial/root-multiplicity F4 repair remains.",
+        "current_source_snapshot": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-rational-periodic-scope-cycle2/current-consumer-context/items/thm-floquet-multiplier-cluster-certificate-soundness.md"
+      }
+    ],
+    "unlinked_direct_use_to_report_natively": {
+      "id": "thm-orbital-stability-from-certified-floquet-multipliers",
+      "source_excerpt": "[F7] The corrector's Krawczyk record uses a nonsingular preconditioner $C$",
+      "future_action": "Actual5.2 corrector owner reports/repairs this real direct affected use through ordinary downstream/downstream_uses and same-reviewer continuation. This is not a claimed old u63.downstream row or a kept-admission request."
+    },
+    "pages": [
+      {
+        "path": "library/numerical-differential-equations-and-stochastic-dynamics/periodic-orbit-shooting-collocation-and-floquet-error.md",
+        "disposition": "Current synopsis remains sound; new lemma inventory is future native A-page registration only."
+      },
+      {
+        "path": "library/numerical-differential-equations-and-stochastic-dynamics/periodic-orbit-shooting-collocation-and-floquet-error-examples.md",
+        "disposition": "Current synopsis remains sound; new lemma inventory is future native A-page registration only."
+      }
+    ]
+  },
+  "preserved_native_repairs": [
+    "Corrector current section-query coordinate/Jacobian-column permutations remain in original paragraph.",
+    "Corrector current open convex shooting-domain and nonzero rational phase covector remain.",
+    "Jet remains outside edits: c!=0 identification, rational queries, finite outward dyadic returns and column-order convention retained.",
+    "Euler soundness and phase-BVP bounded-inverse current open-domain maximal-flow repairs are outside edits.",
+    "Continuation current verified C3-only fold requirement and inconclusive missing-evidence branch remain exactly; ordinary C2 continuation retained.",
+    "Certificate current Proof2.1 obtains Euler existence before root-equivalence.",
+    "Stability current F6 maximal-flow, F9 multiplicity, Jordan-chain/repeated-period argument and compact section patch remain outside surgical F7/4.1 edit."
+  ],
+  "future_native_creation_and_integration": {
+    "must_not_preapply": true,
+    "new_id": "lem-rational-box-affine-chart-and-dyadic-enclosure",
+    "genuine_author": "Actual genuinely assigned5.2 owner; this research is not native authorship",
+    "anchor": "Assigned corrector/continuation repair needs rational chart/rounding/error supplier",
+    "suggested_home": "periodic-orbit-shooting-collocation-and-floquet-error A page, batch63",
+    "created_item_navigation": {
+      "id": "lem-rational-box-affine-chart-and-dyadic-enclosure",
+      "kind": "lemma",
+      "home_page": "periodic-orbit-shooting-collocation-and-floquet-error",
+      "batch": "63",
+      "consumers": [
+        "alg-validated-periodic-orbit-corrector",
+        "alg-periodic-orbit-pseudoarclength-continuation",
+        "thm-validated-periodic-orbit-certificate-soundness",
+        "thm-orbital-stability-from-certified-floquet-multipliers"
+      ]
+    },
+    "obligations": [
+      "Native owner independently understands and genuinely fully authors/registers the lemma and full proof contract with truthful reading/current prerequisite interfaces.",
+      "Ordinary new-ID/alias/active-assignment checks before creation; truthful author origin/report and genuine review/certification. No authoring/review coverage is adopted from this proposal.",
+      "Shared-write lock for actual A-page inventory, batch manifest deps and source deps. Root owns levels, hashes, current bindings/quote mirrors and recertification.",
+      "Supplier-before-consumer repair; genuine downstream-use report/same-reviewer continuation for actual affected uses.",
+      "Root binds these current-based scope-preservation instructions as context for actual5.2 owners. No workflow extension/new kept admission/history rewrite.",
+      "Native stable collection, current certification/judgments and ordinary full gates remain owed; no success is asserted here."
+    ]
+  },
+  "future_mirrors": {
+    "source_quote_refs": [
+      {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-63.proof-contracts.json",
+        "pointer": "/contracts/thm-validated-periodic-orbit-certificate-soundness/citations/2",
+        "supplier": "alg-validated-periodic-orbit-corrector",
+        "source_section": "Definition",
+        "future_action": "After actual native authoring only, mirror final section if changed. Preserve u63 original report and frozen historical supporting bytes."
+      },
+      {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-63.proof-contracts.json",
+        "pointer": "/contracts/thm-orbital-stability-from-certified-floquet-multipliers/citations/0",
+        "supplier": "thm-validated-periodic-orbit-certificate-soundness",
+        "source_section": "Statement",
+        "future_action": "After actual native authoring only, mirror final section if changed. Preserve u63 original report and frozen historical supporting bytes."
+      },
+      {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-63.proof-contracts.json",
+        "pointer": "/contracts/ex-near-unit-floquet-multiplier-is-inconclusive/citations/3",
+        "supplier": "thm-orbital-stability-from-certified-floquet-multipliers",
+        "source_section": "Statement",
+        "future_action": "After actual native authoring only, mirror final section if changed. Preserve u63 original report and frozen historical supporting bytes."
+      },
+      {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-63.proof-contracts.json",
+        "pointer": "/contracts/ex-van-der-pol-stability-conditional-on-validated-enclosure/citations/0",
+        "supplier": "alg-validated-periodic-orbit-corrector",
+        "source_section": "Definition",
+        "future_action": "After actual native authoring only, mirror final section if changed. Preserve u63 original report and frozen historical supporting bytes."
+      },
+      {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-63.proof-contracts.json",
+        "pointer": "/contracts/ex-van-der-pol-stability-conditional-on-validated-enclosure/citations/1",
+        "supplier": "thm-validated-periodic-orbit-certificate-soundness",
+        "source_section": "Statement",
+        "future_action": "After actual native authoring only, mirror final section if changed. Preserve u63 original report and frozen historical supporting bytes."
+      },
+      {
+        "path": "research/numerical-optimization-dynamics-2026-10-16-batch-63.proof-contracts.json",
+        "pointer": "/contracts/ex-van-der-pol-stability-conditional-on-validated-enclosure/citations/4",
+        "supplier": "thm-orbital-stability-from-certified-floquet-multipliers",
+        "source_section": "Statement",
+        "future_action": "After actual native authoring only, mirror final section if changed. Preserve u63 original report and frozen historical supporting bytes."
+      }
+    ],
+    "own_proof_contracts": [
+      "thm-validated-periodic-orbit-certificate-soundness: F3/newF5/derivation1.1/inputs",
+      "thm-orbital-stability-from-certified-floquet-multipliers: F7/4.1/new bridge citation",
+      "lem-rational-box-affine-chart-and-dyadic-enclosure: genuinely authored full new proof contract"
+    ],
+    "no_canonical_contract_edits": true,
+    "history": "Do not replay old cycle1 quote replacements over u63. Mirror actual final source and preserve newer native fixes/history."
+  }
+}

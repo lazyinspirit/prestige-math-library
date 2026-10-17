@@ -1,0 +1,2284 @@
+{
+  "version": 1,
+  "scope": [
+    "def-age-structured-renewal-transport-problem",
+    "def-size-structured-transport-and-division-kernel",
+    "thm-age-structured-renewal-characteristic-solution",
+    "alg-size-structured-finite-volume-flux-and-kernel-quadrature",
+    "alg-age-cohort-characteristic-quadrature",
+    "def-age-structured-renewal-finite-cutoff-model",
+    "thm-age-structured-renewal-semigroup-growth-and-data-stability",
+    "thm-size-structured-positivity-number-and-weighted-moment-identities",
+    "thm-age-structured-renewal-finite-cutoff-characteristic-solution",
+    "alg-age-structured-positive-birth-quadrature",
+    "thm-age-cohort-quadrature-weak-consistency",
+    "alg-age-structured-renewal-upwind-finite-volume",
+    "thm-age-structured-renewal-upwind-positivity-mass-bound-and-stability",
+    "thm-age-structured-renewal-smooth-first-order-convergence",
+    "thm-age-structured-renewal-bv-l1-convergence",
+    "thm-age-structured-renewal-cutoff-tail-and-outflow-bound",
+    "ex-narrow-maturation-kernel-delay-approximation",
+    "ex-half-size-division-numerical-moment-budget",
+    "ex-constant-mortality-and-age-localized-fertility",
+    "ex-age-cutoff-versus-outflow-tail-error"
+  ],
+  "contracts": {
+    "def-age-structured-renewal-transport-problem": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition fixes T>0 and the half-line age domain; its initial L1 density may vanish, but the temporal and age domains are not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: n_0=0 is admitted and the prescribed inflow and weak integral equations have the zero solution. Survival at duration0 has integral0 and equals1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition is a scalar age-density equation with characteristic speed1; it does not require a multidimensional state or multiple age components."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: mu=0 gives survival S(a,s)=1 and beta=0 gives birth functional B=0; both are nonnegative bounded Lipschitz rates."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: n(0,a)=n_0, inflow at a=0 and test terminal condition phi(T,a)=0 are prescribed separately. The mild branches include a=t in the initial-cohort branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: a weak or mild solution is specified by its integral identities; this definition asserts no selection or existence of a solution family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The age renewal transport Definition states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The age renewal transport Definition makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is invoked; all computations are finite or follow from the stated real-analysis estimates.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "def-size-structured-transport-and-division-kernel": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition assumes X>0 and T>0, so its fixed size interval and time horizon are nonempty; each daughter measure can nevertheless be the zero measure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero mortality, zero division rates and zero daughter measures are admitted; the strictly positive growth lower bound is retained."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition specifies one scalar size variable and a scalar characteristic IVP, independently of any later finite-volume cell count."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: g>=g_min>0 excludes zero growth; its text expressly excludes moving boundaries, zero growth and discontinuous coefficients."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: incoming flux at0 is zero, flux atX is absorbing, and the characteristic includes its first hitting time atX before restriction ends."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the measurable kernel family K_y is supplied as input, while the particular characteristic is obtained uniquely from the extended IVP, not chosen independently for each y."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The fixed-interval size transport model states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The fixed-interval size transport model makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is invoked; all computations are finite or follow from the stated real-analysis estimates.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "thm-age-structured-renewal-characteristic-solution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-age-structured-renewal-transport-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$. Let mortality and fertility be bounded Lipschitz functions $\\mu,\\beta:[0,\\infty)\\to[0,\\infty)$, and let $n_0\\in L^1(0,\\infty)$ be nonnegative. The **linear age-structured renewal transport problem** is\n\n$$n_t(t,a)+n_a(t,a)=-\\mu(a)n(t,a),\\qquad a>0,\\quad 0<t\\le T,$$\n\nwith initial density $n(0,a)=n_0(a)$ and inflow condition\n\n$$n(t,0)=B(t),\\qquad B(t):=\\int_0^\\infty \\beta(a)n(t,a)\\,da.$$\n\nHere $a$ is age, $B$ is the birth rate, and the characteristic age path solves the first-order initial value problem $a'(s)=1$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]], hence $a(s)=a(0)+s$. Define survival from age $a$ over duration $s\\ge0$ by\n\n$$S(a,s):=\\exp\\!\\left(-\\int_a^{a+s}\\mu(r)\\,dr\\right).$$\n\nA **weak solution** on $[0,T]$ is a nonnegative $n\\in C([0,T];L^1(0,\\infty))$ with continuous $B:[0,T]\\to[0,\\infty)$ satisfying $B(t)=\\int_0^\\infty\\beta(a)n(t,a)\\,da$ and, for every $\\phi\\in C_c^1([0,T]\\times[0,\\infty))$ with $\\phi(T,a)=0$,\n\n$$-\\int_0^T\\!\\int_0^\\infty n(t,a)(\\phi_t+\\phi_a-\\mu(a)\\phi)\\,da\\,dt=\\int_0^\\infty n_0(a)\\phi(0,a)\\,da+\\int_0^T B(t)\\phi(t,0)\\,dt.$$\n\nA **mild solution** is a weak solution that also satisfies, for almost every $a\\ge0$,\n\n$$n(t,a)=\\begin{cases}n_0(a-t)S(a-t,t),&a\\ge t,\\\\B(t-a)S(0,a),&0\\le a<t,\\end{cases}$$\n\nThe formula follows the age characteristics $a'(s)=1$ and their mortality survival. No delay equation or finite-age cutoff is identified with this model by definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1",
+            "4.2",
+            "4.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The characteristic path through age $x$ at time $0$ is $a(s)=x+s$ by [F1] and [F2]. Along it the PDE gives $\\frac{d}{ds}n(s,x+s)=-\\mu(x+s)n(s,x+s)$, so integrating the scalar equation yields $n(t,x+t)=n_0(x)\\exp(-\\int_x^{x+t}\\mu)$. A characteristic entering at age $0$ at time $t-a$ instead starts with value $B(t-a)$ and is multiplied by $e^{-M(a)}$, giving the two branches in the Statement.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Substitute the two branches into $B(t)=\\int_0^\\infty\\beta(a)n(t,a)\\,da$ and split at $a=t$. In the old-cohort part set $x=a-t$; the result is exactly $G(t)+\\int_0^t\\beta(a)e^{-M(a)}B(t-a)\\,da$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The functions $K$ and $G$ are continuous. Indeed, $K$ is a product of Lipschitz functions; for $s,t\\in[0,T]$, the integrand multiplier in $G$ changes by at most $(\\operatorname{Lip}(\\beta)+\\|\\beta\\|_\\infty\\|\\mu\\|_\\infty)|t-s|$, since $|e^{-u}-e^{-v}|\\le|u-v|$ for $u,v\\ge0$. Multiplication by $n_0\\in L^1$ and integration gives continuity of $G$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "On any interval of length $\\tau$ with $\\tau\\|K\\|_\\infty<1$, the right side of the Volterra equation is a contraction in the sup norm on continuous birth-rate functions: the difference of two outputs is bounded by $\\tau\\|K\\|_\\infty$ times the input difference. If $\\|K\\|_\\infty=0$, the equation is simply $B=G$. Starting at time zero and then treating the already determined history as a fixed forcing term, finitely many such intervals cover $[0,T]$; each interval therefore has one continuous solution and the solutions agree at their shared endpoints.",
+          "step": "2.2",
+          "inputs": [
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "When $n_0\\ge0$, $G,K\\ge0$. Picard iteration from the zero function on the first interval preserves nonnegativity and converges to its unique fixed point; the same argument applies on each continuation interval because its known-history forcing is nonnegative. Thus $B\\ge0$, and the characteristic formula gives $n\\ge0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The formula has finite $L^1$ norm because its old-cohort contribution is at most $\\|n_0\\|_1$ and its newborn contribution is at most $\\int_0^t B(s)\\,ds$. On the old branch, continuity in time follows from translation continuity of $n_0$ in $L^1$ and dominated convergence for the survival multiplier. On the newborn branch, continuity follows from continuity and boundedness of $B$ and $S$, with the interval of newly entering cohorts having length tending to zero. Thus $n\\in C([0,T];L^1)$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $\\phi\\in C_c^1([0,T]\\times[0,\\infty))$ satisfy $\\phi(T,a)=0$. On an initial cohort with coordinate $x=a-t\\ge0$, the chain rule gives $\\frac{d}{dt}[n_0(x)S(x,t)\\phi(t,x+t)]=n(t,x+t)(\\phi_t+\\phi_a-\\mu\\phi)(t,x+t)$ for almost every $t$. Integrating from $0$ to $T$ makes the terminal term zero and leaves $-n_0(x)\\phi(0,x)$; integration over $x\\ge0$ gives the initial-data contribution to the weak identity.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "For a newborn cohort with birth time $s=t-a\\ge0$, the chain rule gives $\\frac{d}{da}[B(s)S(0,a)\\phi(s+a,a)]=n(s+a,a)(\\phi_t+\\phi_a-\\mu\\phi)(s+a,a)$. Integrating from $a=0$ to $T-s$ gives $-B(s)\\phi(s,0)$ because $\\phi(T,T-s)=0$; integrating over $s\\in[0,T]$ gives the renewal-boundary contribution.",
+          "step": "4.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-3",
+          "claim": "The old-cohort region $a\\ge t$ and newborn region $a<t$ partition the time-age domain up to a measure-zero diagonal. Adding their integrals from steps 4.1 and 4.2, then multiplying by $-1$, gives exactly the weak identity in [F1] with initial term $\\int n_0(x)\\phi(0,x)dx$ and boundary term $\\int_0^T B(s)\\phi(s,0)ds$. Step 1.2 gives $B(t)=\\int_0^\\infty\\beta(a)n(t,a)da$, and step 3.2 gives $n\\in C([0,T];L^1)$ and nonnegativity. Thus the characteristic formula is a weak, hence mild, solution.",
+          "step": "4.3",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 3.2",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Any mild solution has a birth rate satisfying the Volterra equation in step 1.2. Uniqueness from step 2.2 forces that same birth rate, and the characteristic formula in step 1.1 then forces the same density.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement inherits T>0 and the nonempty age half-line; its Volterra integral can have zero integration length at t=0, giving B(0)=G(0) rather than an absent equation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and1.2 give zero forcing G when n_0=0; uniqueness in step 2.2 then fixes B=0 and the displayed density is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.1 treats one scalar characteristic a(s)=x+s; no minimum number of cohorts or components is needed for this continuous representation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.2 explicitly treats ||K||_infinity=0 by B=G rather than dividing by its norm; zero mortality simply gives unit survival in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof steps 4.1 and4.2 evaluate the initial trace and birth-boundary trace and kill the terminal test value; step 4.3 joins the two regions up to their null diagonal."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 2.2 constructs a unique scalar Volterra fixed point on finitely many short intervals; step 5.1 makes every mild solution share that same birth rate and density."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The renewal characteristic existence and uniqueness theorem states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The renewal characteristic existence and uniqueness theorem makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice axiom is used; the characteristic paths and finite interval continuation are explicit.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "alg-size-structured-finite-volume-flux-and-kernel-quadrature": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty time horizon or interval and makes no claim about an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: nonnegative masses may all be zero, yielding zero fluxes and zero source contribution. Width divisors h_j stay positive; failed grid/coefficient evaluation yields failure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: J=1 has incoming F_0=0, one outgoing F_1 and one daughter coefficient; the finite update formula needs no internal cell interface."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The underlying size-model Definition retains g>=g_min>0; this procedure does not extend its admissible physical model to zero growth."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: F_0 is set to0 and F_J is the absorbing outflow. Each cell except the last is half-open, while C_J includesX to make the daughter cells disjoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: one midpoint evaluation per parent cell explicitly determines each daughter coefficient and finite arithmetic determines the update, with no arbitrary choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The size finite-volume update states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The size finite-volume update makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is invoked; all computations are finite or follow from the stated real-analysis estimates.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "alg-age-cohort-characteristic-quadrature": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: N=floor(T/Delta t) may be0, in which case its step loop is empty and it returns only the initialized level with empty birth/outflow records."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero cohort masses stay zero in the Euler survival update; beta=0 inserts newborns of mass0. Invalid-step is tested before any update."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a single initial cohort is a valid finite quadrature input and is advanced by the same explicit age-plus-Delta t and survival formulas."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: mu=0 leaves survival masses unchanged; beta=0 removes births but not the explicit age shift or outflow test."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: a cohort reaching age at leastA is recorded and discarded, newborn age0 is inserted after advancing older cohorts, and final returned time is N Delta t<=T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all cohorts are supplied finite data and each loop step is explicit; no independent selection of exact characteristics occurs because age advances exactly byDelta t."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The finite cohort characteristic quadrature states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The finite cohort characteristic quadrature makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is invoked; all computations are finite or follow from the stated real-analysis estimates.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "def-age-structured-renewal-finite-cutoff-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires0<T<A, so neither its time horizon nor age interval collapses; the admitted initial density can be zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero initial density and rates are admissible. The mild formula and renewal integral remain defined with zero values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "This Definition describes one scalar age transport equation; it does not assume multiple cohorts or a minimum finite-volume cell count."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: zero mortality gives unit survival and zero fertility gives zero renewal inflow; the strict inequality A>T still excludes a collapsed cutoff horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: ageA is absorbing, extension aboveA is zero, and A>T ensures no newborn reaches that boundary before final timeT."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: a mild solution is required to obey the given characteristic formula; existence is deferred to its theorem, so the Definition does not choose a family of solutions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The finite-age absorbing-cutoff Definition states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The finite-age absorbing-cutoff Definition makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is invoked; all computations are finite or follow from the stated real-analysis estimates.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "thm-age-structured-renewal-semigroup-growth-and-data-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-age-structured-renewal-transport-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$. Let mortality and fertility be bounded Lipschitz functions $\\mu,\\beta:[0,\\infty)\\to[0,\\infty)$, and let $n_0\\in L^1(0,\\infty)$ be nonnegative. The **linear age-structured renewal transport problem** is\n\n$$n_t(t,a)+n_a(t,a)=-\\mu(a)n(t,a),\\qquad a>0,\\quad 0<t\\le T,$$\n\nwith initial density $n(0,a)=n_0(a)$ and inflow condition\n\n$$n(t,0)=B(t),\\qquad B(t):=\\int_0^\\infty \\beta(a)n(t,a)\\,da.$$\n\nHere $a$ is age, $B$ is the birth rate, and the characteristic age path solves the first-order initial value problem $a'(s)=1$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]], hence $a(s)=a(0)+s$. Define survival from age $a$ over duration $s\\ge0$ by\n\n$$S(a,s):=\\exp\\!\\left(-\\int_a^{a+s}\\mu(r)\\,dr\\right).$$\n\nA **weak solution** on $[0,T]$ is a nonnegative $n\\in C([0,T];L^1(0,\\infty))$ with continuous $B:[0,T]\\to[0,\\infty)$ satisfying $B(t)=\\int_0^\\infty\\beta(a)n(t,a)\\,da$ and, for every $\\phi\\in C_c^1([0,T]\\times[0,\\infty))$ with $\\phi(T,a)=0$,\n\n$$-\\int_0^T\\!\\int_0^\\infty n(t,a)(\\phi_t+\\phi_a-\\mu(a)\\phi)\\,da\\,dt=\\int_0^\\infty n_0(a)\\phi(0,a)\\,da+\\int_0^T B(t)\\phi(t,0)\\,dt.$$\n\nA **mild solution** is a weak solution that also satisfies, for almost every $a\\ge0$,\n\n$$n(t,a)=\\begin{cases}n_0(a-t)S(a-t,t),&a\\ge t,\\\\B(t-a)S(0,a),&0\\le a<t,\\end{cases}$$\n\nThe formula follows the age characteristics $a'(s)=1$ and their mortality survival. No delay equation or finite-age cutoff is identified with this model by definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-age-structured-renewal-characteristic-solution",
+          "source_section": "Statement",
+          "quote": "For [[def-age-structured-renewal-transport-problem]], put $M(a)=\\int_0^a\\mu(r)\\,dr$, $K(a)=\\beta(a)e^{-M(a)}$, and\n\n$$G(t)=\\int_0^\\infty \\beta(x+t)\\exp\\!\\left(-\\int_x^{x+t}\\mu(r)\\,dr\\right)n_0(x)\\,dx.$$\n\nThere is a unique mild solution. Its birth rate is the unique continuous solution of\n\n$$B(t)=G(t)+\\int_0^t K(a)B(t-a)\\,da,$$\n\nand its density, for almost every $a\\ge0$, is\n\n$$n(t,a)=\\begin{cases}n_0(a-t)\\exp\\!\\left(-\\int_{a-t}^{a}\\mu(r)\\,dr\\right),&a\\ge t,\\\\ B(t-a)e^{-M(a)},&0\\le a<t.\\end{cases}$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The formula in [F2] is linear in $n_0$, and uniqueness in [F2] implies that the solution for a sum of two initial data is the sum of their solutions and that scalar multiples are preserved. Nonnegative $n_0$ gives nonnegative $G$, Volterra kernel and density by [F1]–[F2], so the solution operator is positive.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Integrating the two characteristic branches in [F2] gives $N(t)=\\int_0^\\infty n_0(x)S(x,t)\\,dx+\\int_0^t B(t-a)S(0,a)\\,da$. Bounded $\\mu$ and continuous $B$ permit differentiation under these integrals; using $\\partial_tS(x,t)=-\\mu(x+t)S(x,t)$ and $\\partial_aS(0,a)=-\\mu(a)S(0,a)$ yields $N'(t)=B(t)-\\int_0^\\infty\\mu(a)n(t,a)\\,da$ for almost every $t$. Since $0\\le B(t)\\le\\beta_\\infty N(t)$ and $\\mu n\\ge0$, we have $N'(t)\\le\\beta_\\infty N(t)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Integrating the differential inequality in step 1.2 gives $N(t)\\le N(0)+\\int_0^t\\beta_\\infty N(s)\\,ds$. Apply [F3] with $a(t)=N(0)$ and $b=\\beta_\\infty$ to obtain the asserted positive-semigroup bound.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Subtract the two transport equations and write $w=n-\\widetilde n$. Along characteristics, its interior forcing is $(\\widetilde\\mu-\\mu)\\widetilde n$ and its inflow forcing is $\\int\\beta w+\\int(\\beta-\\widetilde\\beta)\\widetilde n$. Taking absolute values in the characteristic integral formula, integrating over age, and using nonnegative survival factors gives $E(t)\\le E(0)+\\int_0^t[\\beta_\\infty E(s)+\\delta\\widetilde N(s)]\\,ds$, where $E=\\|w\\|_1$ and $\\widetilde N=\\|\\widetilde n\\|_1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By step 1.3 applied to $\\widetilde n$, $\\widetilde N(s)\\le e^{\\widetilde\\beta_\\infty s}\\|\\widetilde n_0\\|_1$. Thus the nondecreasing function $a(t)=E(0)+\\delta t e^{\\widetilde\\beta_\\infty t}\\|\\widetilde n_0\\|_1$ bounds the forcing integral in step 2.1, and [F3] yields the claimed coefficient-and-initial-data stability estimate.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement applies to the existing T>0 age model. Integrals over an initial zero-duration segment are zero and the stated estimates at t=0 reduce to initial-data identities."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1 gives linearity and positivity, so zero data map to zero. In step 2.2, delta=0 leaves only the initial-data difference term."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.1 concerns a single scalar linear solution operator, not a prescribed multi-cell discretization; its sum/scaling property holds for individual initial densities."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.3 uses the exponential Gronwall bound without division by beta_infinity; beta=0 and mu=0 are therefore permitted rate limits."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.2 computes the initial mass and birth-minus-loss derivative; step 1.3 integrates from0 to each t<=T, including the two temporal endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.1 invokes uniqueness of the scalar renewal solution to identify sums and scalar multiples; no independently chosen continuum of solutions is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The renewal semigroup growth and perturbation bound states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The renewal semigroup growth and perturbation bound makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice axiom is used; all estimates are scalar L1 inequalities.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "thm-size-structured-positivity-number-and-weighted-moment-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-size-structured-transport-and-division-kernel",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$ and a nondegenerate fixed size interval $[0,X]$ with $X>0$. Let $g,\\mu,\\gamma:[0,X]\\to[0,\\infty)$ be bounded Lipschitz functions, with $g(x)\\ge g_{\\min}>0$. Here $g$ is size growth, $\\mu$ is ordinary mortality, and $\\gamma$ is the rate at which a dividing parent is removed. For each parent size $y$, let $K_y$ be a finite nonnegative Borel measure of daughter sizes, supported on $[0,y]$. Assume $y\\mapsto K_y(E)$ is measurable for every Borel set $E\\subseteq[0,X]$, and that the number moment $k_0(y):=K_y([0,y])$ is uniformly bounded; the size moment $k_1(y):=\\int_{[0,y]}x\\,K_y(dx)$ is then finite. The **size-structured transport and division model** is\n\n$$\\partial_t n+\\partial_x(gn)=-(\\mu+\\gamma)n+\\int_{[0,X]}K_y(dx)n(t,y)\\,dy,\\qquad 0<x<X,$$\n\nwith zero incoming flux at $x=0$ and absorbing outflow $g(X)n(t,X)$ at $x=X$. Let $\\Pi_{[0,X]}(x):=\\min\\{X,\\max\\{0,x\\}\\}$ and extend the growth field to $\\widetilde g(x):=g(\\Pi_{[0,X]}(x))$ on $\\mathbb R$. This is a bounded Lipschitz vector field. By [[thm-size-structured-positivity-number-and-weighted-moment-identities]], its IVP has a unique solution on the finite time horizon; a model characteristic is this solution restricted to the interval from its initial size until its first hitting of $X$, including that hitting time when it occurs by $T$. On this restricted interval, $\\widetilde g=g$. The characteristic is understood as a first-order IVP solution in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. The weak equation is obtained by testing against $\\phi\\in C^1([0,X])$: transport contributes $\\int_0^Xg\\phi'n$, mortality and parent removal contribute $-\\int_0^X(\\mu+\\gamma)\\phi n$, division contributes $\\int_0^X\\int\\phi(x)K_y(dx)n(t,y)\\,dy$, and the upper boundary contributes $-\\phi(X)g(X)n(t,X)$. The interval is fixed; moving boundaries, zero growth and discontinuous coefficients are outside this definition.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-size-structured-finite-volume-flux-and-kernel-quadrature",
+          "source_section": "Definition",
+          "quote": "Input a partition $0=x_0<x_1<\\cdots<x_J=X$ with $J\\ge1$, a time step $\\Delta t>0$, a nonnegative current mass vector $M^k=(M_j^k)_{j=1}^J$, and the coefficients and kernel from [[def-size-structured-transport-and-division-kernel]]. Partition $[0,X]$ into disjoint cells $C_j=[x_{j-1},x_j)$ for $j<J$ and $C_J=[x_{J-1},X]$, with widths $h_j=x_j-x_{j-1}>0$ and centers $x_j^c=(x_{j-1}+x_j)/2$. Set $u_j^k=M_j^k/h_j$, the incoming flux $F_0^k=0$, the internal and outgoing upwind fluxes $F_j^k=g(x_j)u_j^k$ for $1\\le j\\le J$, and $d_j=\\mu(x_j^c)+\\gamma(x_j^c)$.\n\nFor each parent cell $C_\\ell$, form nonnegative daughter coefficients\n\n$$A_{j\\ell}=\\frac{1}{h_\\ell}\\,Q_M\\bigl(y\\mapsto K_y(C_j);x_{\\ell-1},x_\\ell,1\\bigr),$$\n\nusing [[alg-composite-midpoint-rule]] on the parent-size interval. Since the one-panel midpoint rule is $Q_M(f;x_{\\ell-1},x_\\ell,1)=h_\\ell f(x_\\ell^c)$, this gives $A_{j\\ell}=K_{x_\\ell^c}(C_j)\\ge0$. If $\\Delta t(g(x_j)/h_j+d_j)>1$ for any cell, return `invalid-cfl` without an update. Otherwise the finite-volume update is\n\n$$M_j^{k+1}=M_j^k-\\Delta t(F_j^k-F_{j-1}^k)-\\Delta t\\,d_jM_j^k+\\Delta t\\sum_{\\ell=1}^JA_{j\\ell}M_\\ell^k.$$\n\nThe flux $F_J^k$ is absorbing outflow. The admissible variable-width CFL is $\\Delta t(g(x_j)/h_j+d_j)\\le1$ for every cell. If a grid or any required coefficient/kernel evaluation fails, return failure without a partial update. Otherwise return $M^{k+1}$ together with the fluxes and daughter coefficients used in the step.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In [F2], the coefficient of $M_j^k$ outside the division source is $1-\\Delta t(g(x_j)/h_j+d_j)$, which is nonnegative by the CFL. For $j\\ge2$ the incoming transport term has coefficient $\\Delta t g(x_{j-1})/h_{j-1}\\ge0$; for $j=1$ the incoming flux is $F_0=0$. Every division term has coefficient $\\Delta t A_{j\\ell}\\ge0$. Hence each new mass is a sum of nonnegative terms when [A1] holds. Induction on $k$ proves $M_j^k\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Sum [F2] over $j$. The finite flux sum telescopes to $F_J-F_0=F_J$ because $F_0=0$. Interchanging the finite sums in the kernel source gives $\\sum_\\ell(\\sum_jA_{j\\ell})M_\\ell=\\sum_\\ell k_{0,\\ell}^hM_\\ell$. Subtracting $N_h^k$ yields the number identity.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Multiply [F2] by $x_j^c$ and sum over $j$. For the flux term, finite summation by parts gives $\\sum_jx_j^c(F_j-F_{j-1})=x_J^cF_J-\\sum_{j=1}^{J-1}(x_{j+1}^c-x_j^c)F_j$ since $F_0=0$. The loss term is $-\\sum_jx_j^cd_jM_j$, and the source term is $\\sum_\\ell(\\sum_jx_j^cA_{j\\ell})M_\\ell=\\sum_\\ell k_{1,\\ell}^hM_\\ell$. Rearranging proves the weighted-moment identity and the stated condition for cancellation.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $M=\\|g\\|_\\infty$ and let $L$ be a Lipschitz constant for $g$ on $[0,X]$. The projection $\\Pi_{[0,X]}$ is $1$-Lipschitz, so the extension $\\widetilde g=g\\circ\\Pi_{[0,X]}$ is globally bounded by $M$ and globally Lipschitz with constant $L$ on the open domain $\\mathbb R$. Since $g\\ge g_{\\min}>0$, choose $h_0>0$ with $h_0M\\le1$ and $Lh_0<1$. For every starting time $t_0\\in\\mathbb R$ and state $z\\in\\mathbb R$, the cylinder $[t_0-h_0,t_0+h_0]\\times[z-1,z+1]$ lies in $\\mathbb R\\times\\mathbb R$, and [F3] gives a unique solution through $(t_0,z)$ on that interval; the same bounds apply after every restart. Restricting and concatenating at most $\\lceil T/h_0\\rceil$ such forward segments gives a solution on $[0,T]$, and the uniqueness clause of [F3] makes it unique there. Along this solution $\\chi_y'(s)=\\widetilde g(\\chi_y(s))\\ge g_{\\min}$, so it is strictly increasing. Starting from $y\\in[0,X]$, it stays in $[0,X]$ through its first hitting of $X$, where $\\widetilde g=g$; that restricted segment is the model characteristic.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty time horizon or interval and makes no claim about an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1 allows zero masses and source coefficients because every update coefficient is nonnegative; no division by a mass is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.1 explicitly gives the first-cell incoming flux F_0=0, so a one-cell update is covered without an interior neighbor."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement inherits the strictly positive growth lower bound g_min from the size model; the characteristic continuation in step 3.1 uses it for strict increase."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 3.1 constructs the extended characteristic on[0,T] and restricts it through its first hit ofX. Steps 2.1 and2.2 retain the outgoing boundary fluxF_J."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 3.1 uses a single quantitative local IVP bound repeatedly on finitely many forward segments and uniqueness on overlaps; no free branch family is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The size positivity and number/weighted-moment identities states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The size positivity and number/weighted-moment identities makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice axiom is used; the proof is finite summation and positivity of the kernel quadrature.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "thm-age-structured-renewal-finite-cutoff-characteristic-solution": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-age-structured-renewal-finite-cutoff-model",
+          "source_section": "Definition",
+          "quote": "Fix $0<T<A$, bounded nonnegative Lipschitz rates $\\mu,\\beta:[0,A]\\to[0,\\infty)$, and initial density $n_0^A\\in L^1_+(0,A)$. The **finite-age renewal model with absorbing outflow** is the age transport problem on $0<a<A$ with the same renewal inflow $B_A(t)=\\int_0^A\\beta(a)n^A(t,a)\\,da$ as in [[def-age-structured-renewal-transport-problem]]. A cohort follows age speed $1$, retains its mortality survival $S(a,s)$ until it reaches $A$, and is then removed; no cohort enters from ages above $A$. The initial density is $n_0^A$ on $[0,A]$. A mild solution is the characteristic formula on $0<a<A$, with an initial-cohort branch for $a\\ge t$, a newborn branch for $a<t$, and zero extension to $a\\ge A$. Since $A>T$, no cohort born during $[0,T]$ reaches the outflow boundary.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The kernel $K$ is continuous on $[0,T]$. The moving-limit forcing $G_A$ is also continuous: on the common part of the integration intervals its integrand changes uniformly continuously with $t$, and the integral over the symmetric difference tends to zero by absolute continuity of the integral of $n_0^A$. It is nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On any interval of length $\\delta$ with $\\delta\\|K\\|_\\infty<1$, the map $b\\mapsto G_A(t)+\\int_0^tK(a)b(t-a)da$ is a contraction on the unknown continuous birth-rate segment, with contraction factor at most $\\delta\\|K\\|_\\infty$ after the already determined history is placed in the forcing. If $K=0$, the equation reduces to $B_A=G_A$. Finitely many such intervals cover $[0,T]$, and at each endpoint the defining equation fixes the same value from either adjacent interval; this constructs a unique continuous solution. Picard iteration from zero on each interval preserves nonnegativity because $G_A,K\\ge0$, so $B_A\\ge0$.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute the displayed density formula into $\\int_0^A\\beta(a)n^A(t,a)da$. On the initial-cohort part $t\\le a<A$, use $x=a-t$ to obtain $G_A(t)$. On the newborn part $0\\le a<t$, the integral is $\\int_0^t\\beta(a)S(0,a)B_A(t-a)da=\\int_0^tK(a)B_A(t-a)da$. The Volterra equation therefore gives exactly the renewal boundary relation. Both parts are nonnegative and have finite $L^1$ mass, bounded by $\\|n_0^A\\|_1+\\int_0^tB_A(s)ds$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Integrating the two characteristic branches gives $N_A(t)=\\int_0^{A-t}n_0^A(x)S(x,t)dx+\\int_0^tB_A(t-a)S(0,a)da$. This mass function is absolutely continuous; the moving-limit rule and $\\partial_tS(x,t)=-\\mu(x+t)S(x,t)$ show for almost every $t$ that $N_A'(t)=B_A(t)-\\int_0^A\\mu(a)n^A(t,a)da-n_0^A(A-t)S(A-t,t)$. The final term is nonnegative outflow, so $N_A'(t)\\le B_A(t)\\le\\beta_\\infty N_A(t)$. Integrating and applying [F2] yields $N_A(t)\\le e^{\\beta_\\infty t}N_A(0)$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $t\\le T<A$, newborn cohorts have age at most $T$ and cannot reach $A$. An initial cohort with age $x$ exits by time $t$ precisely when $A-t\\le x<A$; it survives until exit by $S(x,A-x)$. Integrating its initial density over those ages gives the stated $O_A(t)$. Any mild solution must follow these same characteristics and its birth rate must solve the Volterra equation from step 2.1, whose solution is unique by step 1.2. Thus the density and outflow are unique. Translation continuity in $L^1$, continuity of $B_A$ and of $S$, and the vanishing measure of the newly entering cohort region give continuity of $n^A$ in time with values in $L^1(0,A)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement inherits0<T<A; at t=0 its Volterra integral and outflow integral have length0 and give B_A(0)=G_A(0), O_A(0)=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–1.2 preserve zero G_A andK, with the explicit K=0 branch B_A=G_A. Zero initial data give zero density and outflow."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 3.1 follows each individual initial cohort until exit; the continuous solution theorem is scalar and needs no multiple-cell input."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.2 explicitly bypasses the contraction restriction whenK=0, so zero fertility is included without dividing by a kernel norm."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.2 matches adjacent continuation endpoint values; step 3.1 includes initial cohorts that reachA by t<=T while A>T excludes newborn outflow."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.2 constructs the unique continuous birth rate on finitely many contraction intervals and step 3.1 fixes the density from that rate."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The finite-cutoff characteristic solution theorem states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The finite-cutoff characteristic solution theorem makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice axiom is used; Volterra continuation uses finitely many contractions on bounded intervals.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "alg-age-structured-positive-birth-quadrature": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty time horizon or interval and makes no claim about an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero M_j makes its cell contribution zero and beta=0 gives B_h=0; all divisions use positive cell widths."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one age cell and one midpoint panel per cell are admitted, giving the displayed single-cell sum with q_1=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: zero fertility remains admissible and returns zero birth value after successful evaluations; a failed evaluation instead returns no estimate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: capped adaptive mode retains its accepted/cap-reached statuses and finite estimates, without declaring indicator control of true quadrature error."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: mode and panel/depth budgets are supplied finite inputs; the algorithm sums their returned cell estimates instead of choosing an arbitrary quadrature family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The positive birth-quadrature procedure states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The positive birth-quadrature procedure makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is invoked; all computations are finite or follow from the stated real-analysis estimates.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "thm-age-cohort-quadrature-weak-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-age-structured-renewal-transport-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$. Let mortality and fertility be bounded Lipschitz functions $\\mu,\\beta:[0,\\infty)\\to[0,\\infty)$, and let $n_0\\in L^1(0,\\infty)$ be nonnegative. The **linear age-structured renewal transport problem** is\n\n$$n_t(t,a)+n_a(t,a)=-\\mu(a)n(t,a),\\qquad a>0,\\quad 0<t\\le T,$$\n\nwith initial density $n(0,a)=n_0(a)$ and inflow condition\n\n$$n(t,0)=B(t),\\qquad B(t):=\\int_0^\\infty \\beta(a)n(t,a)\\,da.$$\n\nHere $a$ is age, $B$ is the birth rate, and the characteristic age path solves the first-order initial value problem $a'(s)=1$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]], hence $a(s)=a(0)+s$. Define survival from age $a$ over duration $s\\ge0$ by\n\n$$S(a,s):=\\exp\\!\\left(-\\int_a^{a+s}\\mu(r)\\,dr\\right).$$\n\nA **weak solution** on $[0,T]$ is a nonnegative $n\\in C([0,T];L^1(0,\\infty))$ with continuous $B:[0,T]\\to[0,\\infty)$ satisfying $B(t)=\\int_0^\\infty\\beta(a)n(t,a)\\,da$ and, for every $\\phi\\in C_c^1([0,T]\\times[0,\\infty))$ with $\\phi(T,a)=0$,\n\n$$-\\int_0^T\\!\\int_0^\\infty n(t,a)(\\phi_t+\\phi_a-\\mu(a)\\phi)\\,da\\,dt=\\int_0^\\infty n_0(a)\\phi(0,a)\\,da+\\int_0^T B(t)\\phi(t,0)\\,dt.$$\n\nA **mild solution** is a weak solution that also satisfies, for almost every $a\\ge0$,\n\n$$n(t,a)=\\begin{cases}n_0(a-t)S(a-t,t),&a\\ge t,\\\\B(t-a)S(0,a),&0\\le a<t,\\end{cases}$$\n\nThe formula follows the age characteristics $a'(s)=1$ and their mortality survival. No delay equation or finite-age cutoff is identified with this model by definition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-age-structured-renewal-characteristic-solution",
+          "source_section": "Statement",
+          "quote": "For [[def-age-structured-renewal-transport-problem]], put $M(a)=\\int_0^a\\mu(r)\\,dr$, $K(a)=\\beta(a)e^{-M(a)}$, and\n\n$$G(t)=\\int_0^\\infty \\beta(x+t)\\exp\\!\\left(-\\int_x^{x+t}\\mu(r)\\,dr\\right)n_0(x)\\,dx.$$\n\nThere is a unique mild solution. Its birth rate is the unique continuous solution of\n\n$$B(t)=G(t)+\\int_0^t K(a)B(t-a)\\,da,$$\n\nand its density, for almost every $a\\ge0$, is\n\n$$n(t,a)=\\begin{cases}n_0(a-t)\\exp\\!\\left(-\\int_{a-t}^{a}\\mu(r)\\,dr\\right),&a\\ge t,\\\\ B(t-a)e^{-M(a)},&0\\le a<t.\\end{cases}$$",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-age-cohort-characteristic-quadrature",
+          "source_section": "Definition",
+          "quote": "Input a finite horizon $T>0$, a time step $\\Delta t>0$, an age cutoff $A>0$, bounded nonnegative rates $\\mu,\\beta$ on $[0,A]$, and a finite positive initial quadrature $(a_i,m_i^0)_{i=1}^I$ supported in $[0,A)$ for the initial age measure on that interval. Set $N=\\lfloor T/\\Delta t\\rfloor$; the procedure returns levels at $t_k=k\\Delta t$ for $0\\le k\\le N$, with final time $N\\Delta t\\le T$. One option is the composite midpoint rule on a partition of $[0,A]$: for each panel midpoint $a_i$, set $m_i^0=\\Delta a\\,n_0(a_i)$. A cohort at age $a_i^k$ and mass $m_i^k$ follows the exact age characteristic\n\n$$a_i^{k+1}=a_i^k+\\Delta t$$\n\nand updates its survival mass by forward Euler,\n\n$$m_i^{k+1}=(1-\\Delta t\\,\\mu(a_i^k))m_i^k.$$\n\nIf $\\Delta t\\|\\mu\\|_\\infty>1$, return status invalid-step with no updates. Otherwise initialize the birth and outflow records as empty and set $\\nu_h^0=\\sum_i m_i^0\\delta_{a_i^0}$. For each $k=0,\\ldots,N-1$, first calculate $B_h^k=\\sum_i\\beta(a_i^k)m_i^k$. Advance every existing cohort by $a_i^{k+1}=a_i^k+\\Delta t$ and update its survival mass by $m_i^{k+1}=(1-\\Delta t\\mu(a_i^k))m_i^k$. If an updated age is at least $A$, record that updated mass as discrete outflow and discard the cohort; otherwise retain it. Then insert a newborn cohort of age $0$ and mass $\\Delta t B_h^k$ at time $t_{k+1}$. Record $B_h^k$ and the step's outflow, and form $\\nu_h^{k+1}$ from the retained cohorts and this newborn. A failed rate evaluation returns failure with no partial update. The procedure returns the finite sequence $(\\nu_h^k)_{k=0}^N$ and its birth/outflow records. The bounded-Lipschitz quadrature defect of the initial measure and the Euler survival error are separate inputs to any consistency claim.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-forward-euler-one-step-consistency-and-local-error",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $T>0$, and let $V\\subseteq\\mathbb R\\times\\mathbb R^d$ be an open time-state domain whose fibers $V_t:=\\{z:(t,z)\\in V\\}$ are open and convex. Let $K\\subset V$ be compact. Let $f:V\\to\\mathbb R^d$ have continuous first partial derivatives, and suppose $y$ is a solution of $y'=f(t,y)$, $y(0)=y_0$, on an open interval containing $[0,T]$, with graph on $[0,T]$ contained in $K$. For each local defect under consideration, require the Euler input and output time-state pairs to lie in $K$; the exact solution segment already lies in $K$.\n\nFor $1\\le i,j\\le d$, assume finite constants $F_j,M_{t,i},M_{ij},L\\ge0$ satisfy throughout $V$\n\n$$|f_j(t,z)|\\le F_j,\\qquad |\\partial_t f_i(t,z)|\\le M_{t,i},\\qquad |\\partial_{z_j}f_i(t,z)|\\le M_{ij},\\qquad \\|D_yf(t,z)w\\|_2\\le L\\|w\\|_2\\quad(w\\in\\mathbb R^d).$$\n\nHere $D_yf$ is the matrix with entries $\\partial_{z_j}f_i$, and the last inequality defines the operator bound used below. The forward Euler map is $\\Psi_h(t,v)=v+h f(t,v)$. Then, with $B_i:=M_{t,i}+\\sum_{j=1}^dM_{ij}F_j$, for every $t\\in[0,T)$ and $h>0$ with $t+h\\le T$ whose Euler input and output pairs lie in $K$, its local defect satisfies\n\n$$\\|\\delta_h(t;y)\\|_2\\le \\frac{h^2}{2}\\left(\\sum_{i=1}^d B_i^2\\right)^{1/2},$$\n\nso it has uniform local order one on $K$ along $y|_{[0,T]}$, with $h_0=T$. For every $t\\in[0,T]$, every admitted $h>0$, and every $u,v\\in V_t$,\n\n$$\\|\\Psi_h(t,u)-\\Psi_h(t,v)\\|_2\\le(1+Lh)\\|u-v\\|_2.$$\n\nThis is a local defect and one-step stability result. It does not assert a global error estimate or an order for any other named method.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-age-structured-renewal-semigroup-growth-and-data-stability",
+          "source_section": "Statement",
+          "quote": "For [[def-age-structured-renewal-transport-problem]], let $\\beta_\\infty=\\|\\beta\\|_\\infty$. The solution map $S_{\\mu,\\beta}(t):n_0\\mapsto n(t,\\cdot)$ is linear and positive, and\n\n$$\\|S_{\\mu,\\beta}(t)n_0\\|_1\\le e^{\\beta_\\infty t}\\|n_0\\|_1.$$\n\nIf $n,\\widetilde n$ use possibly different nonnegative bounded coefficients $(\\mu,\\beta)$ and $(\\widetilde\\mu,\\widetilde\\beta)$ and initial data $n_0,\\widetilde n_0$, put $\\delta=\\|\\mu-\\widetilde\\mu\\|_\\infty+\\|\\beta-\\widetilde\\beta\\|_\\infty$ and $\\widetilde\\beta_\\infty=\\|\\widetilde\\beta\\|_\\infty$. Then\n\n$$\\|n(t)-\\widetilde n(t)\\|_1\\le e^{\\beta_\\infty t}\\left(\\|n_0-\\widetilde n_0\\|_1+\\delta t e^{\\widetilde\\beta_\\infty t}\\|\\widetilde n_0\\|_1\\right).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-discrete-one-step-error-recurrence-bound",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\widehat n$ be the exact solution with initial density $\\widehat n_0$. Applying the characteristic formula [F2] and changing variables from age $a$ to birth time $s=t-a$ gives, for every bounded Lipschitz $\\phi$, $\\int\\phi(a)\\widehat n(t,a)da=\\int_0^{A-T}\\phi(x+t)S(x,t)n_0(x)dx+\\int_0^t\\phi(t-s)S(0,t-s)\\widehat B(s)ds$. The birth kernel $K(s)=\\beta(s)S(0,s)$ is bounded and Lipschitz, and $\\widehat G(t)=\\int_0^{A-T}\\beta(x+t)S(x,t)n_0(x)dx$ is bounded and Lipschitz because $\\beta,\\mu$ have bounded first derivatives and $n_0$ is integrable. The mass estimate [F5] bounds $\\widehat B$ by $\\beta_\\infty e^{\\beta_\\infty T}\\|n_0\\|_1$. Subtracting its Volterra equation at $t$ and $t+h$, the old-history kernel difference is at most $\\operatorname{Lip}(K)h\\int_0^T|\\widehat B|$ and the new interval at most $h\\|K\\|_\\infty\\|\\widehat B\\|_\\infty$. Thus $\\widehat B$ is Lipschitz on $[0,T]$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $N=0$, there are no time steps and the survival-error claim is zero. Suppose $N\\ge1$, and put $T_h=N\\Delta t>0$. A cohort born with mass $m_0$ and initial age $a_0$ has exact survival mass solving $m'(s)=-\\mu(a_0+s)m(s)$; let $q=m_0$ be its reference mass. To apply [F4] at $a_0=0$, define the extension $\\bar\\mu(r)=\\mu(r)$ for $r\\ge0$ and $\\bar\\mu(r)=\\mu(0)+\\mu'_+(0)r e^r$ for $r<0$. The one-sided derivative $\\mu'_+(0)$ exists; the two formulas and their first derivatives match at zero, and $\\bar\\mu$ and $\\bar\\mu'$ are bounded on $\\mathbb R$. For a cohort whose reference mass is $q>0$, the vector field $f(s,m)=-\\bar\\mu(a_0+s)m$ is $C^1$ on the open tube $V=(-1,T_h+1)\\times(-q,2q)$, where $T_h=N\\Delta t$, with all bounds required by [F4] uniform in $a_0$ and proportional to $q$ except for the state-Lipschitz constant, which is bounded by $\\|\\bar\\mu\\|_\\infty$. The exact continuation $m(s)=m_{\\mathrm{start}}\\exp(-\\int_0^s\\bar\\mu(a_0+r)\\,dr)$ exists on an open interval containing $[0,T_h]$; after shrinking that interval at the endpoints its graph lies in $V$. Its exact forward solution from any $m\\in[0,q]$ and its Euler input/output states lie in $K=[0,T_h]\\times[0,q]$: mortality is nonnegative for ages $a_0+s\\ge0$, and $\\Delta t\\|\\mu\\|_\\infty\\le1$. Thus [F4] gives one-step defect at most $C\\Delta t^2q$ and a stability factor $1+L\\Delta t$, with constants independent of $a_0$ and proportional to $q$. Applying [L1] on the aligned horizon $T_h=N\\Delta t$ gives survival-weight error at most $C_T\\Delta t q$ over the full run; the zero-mass case is exact. For the discrete total cohort mass $N_h^k$, positivity and $B_h^k\\le\\beta_\\infty N_h^k$ give $N_h^{k+1}\\le(1+\\Delta t\\beta_\\infty)N_h^k$, hence $N_h^k\\le e^{\\beta_\\infty T}N_h^0$. Since $N_h^0\\le\\|n_0\\|_1+\\epsilon_0$ (test the initial BL defect with $\\phi\\equiv1$), the sum of the initial cohort masses and all inserted newborn masses $\\sum_{j<k}\\Delta t B_h^j$ is at most $C_T(\\|n_0\\|_1+\\epsilon_0)$. Thus the sum of all cohort survival-weight errors is at most $C_T\\Delta t(\\|n_0\\|_1+\\epsilon_0)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Write $e_k=|B_h^k-\\widehat B(t_k)|$. The initial-cohort contribution is at most $C_T(\\epsilon_0+\\Delta t)$: the test $x\\mapsto\\beta(x+t_k)S(x,t_k)$ has bounded-Lipschitz norm at most $C_T$, and step 2.1 bounds the accumulated Euler survival error. Each cohort born during $[t_j,t_{j+1}]$ is inserted at $t_{j+1}$ with mass $\\Delta t B_h^j$, so at $t_k$ its age is $(k-j-1)\\Delta t$. The exact renewal convolution is the integral of $K(t_k-s)\\widehat B(s)$ over $s\\in[0,t_k]$. Since $K$ and $\\widehat B$ are Lipschitz, replacing this integral by the left-endpoint sum with age $(k-j-1)\\Delta t$ costs at most $C_T\\Delta t$ (the age sample differs from $t_k-t_j$ by one step). Replacing $\\widehat B(t_j)$ by $B_h^j$ contributes at most $\\|K\\|_\\infty\\Delta t\\sum_{j<k}e_j$, and replacing exact newborn survival by its Euler product contributes at most $C_T\\Delta t$ by step 2.1. Therefore $e_k\\le C_T(\\epsilon_0+\\Delta t)+\\|K\\|_\\infty\\Delta t\\sum_{j<k}e_j$. Set $r_k=C_T(\\epsilon_0+\\Delta t)+\\|K\\|_\\infty\\Delta t\\sum_{j<k}e_j$. Then $e_k\\le r_k$ and $r_{k+1}=r_k+\\|K\\|_\\infty\\Delta t e_k\\le(1+\\|K\\|_\\infty\\Delta t)r_k$, so $e_k\\le e^{\\|K\\|_\\infty T}C_T(\\epsilon_0+\\Delta t)$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any test function with $\\|\\phi\\|_\\infty+\\operatorname{Lip}(\\phi)\\le1$, the initial cohort pushforward differs from the first integral for $\\widehat n$ in step 1.1 by at most $C_T(\\epsilon_0+\\Delta t)$, using step 2.1 and the bounded-Lipschitz norm of $x\\mapsto\\phi(x+t)S(x,t)$. The newborn cohort sum differs from the second integral by its left-Riemann error $C_T\\Delta t$ plus $\\Delta t\\sum_{j<k}e_j\\le C_T(\\epsilon_0+\\Delta t)$ by step 2.2. Thus $\\|\\nu_h^k-\\widehat n(t_k,a)da\\|_{BL^*}\\le C_T(\\epsilon_0+\\Delta t)$. The initial data difference is $\\|n_0-\\widehat n_0\\|_1=\\tau_A$, so [F5] gives $\\|n(t_k)-\\widehat n(t_k)\\|_1\\le e^{\\beta_\\infty T}\\tau_A$. The inequality $\\|f(a)da\\|_{BL^*}\\le\\|f\\|_1$ and the triangle inequality prove the stated bound.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 2.1 explicitly treats N=0 as no time steps, with survival error0; only initialized quadrature and omitted initial-tail errors remain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1 treats a zero reference cohort mass exactly instead of using its positive-mass tube. Zero initial measure gives no birth mass by the same finite sum bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement fixes a finite positive initial cohort quadrature without requiring multiple atoms; proof step 2.1 bounds each cohort by its own reference mass before summing."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.1 uses the CFL even when mortality vanishes, and step 2.2 iterates the error recurrence without division by a positive birth-kernel norm."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1 uses the aligned horizon T_h=N Delta t and an endpoint C1 extension at initial age0. Step 3.1 controls every returned level k Delta t<=T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 2.1 analyzes supplied finite cohort masses and step 2.2 an explicit scalar recurrence; the exact comparison birth rate is unique from the characteristic theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The weak cohort consistency estimate states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The weak cohort consistency estimate makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice axiom is used; all cohort and birth sums are finite.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "alg-age-structured-renewal-upwind-finite-volume": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: J,N>=1, A>T>0 make positive space/time widths; only the initialized records are empty, not the cell grid or update loop."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero masses and zero beta give zero fluxes and preserved zero updates. The initial cumulative outflow is explicitlyO_h^0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: J=1 is permitted; its sole cell has inletF_0=B_h and absorbing outletF_1=M_1/Delta a, so no interior cell loop is required."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: mu=0 removes the loss term and beta=0 removes inflow, while equality in the remaining transport CFL is permitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: k=0 initializes mass/outflow records, each step discards the right-boundary flux, and k=N is included in the returned grid sequence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite grid, quadrature mode and coefficient evaluations determine every update and status; failed evaluation returns before a partial current step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The renewal upwind finite-volume algorithm states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The renewal upwind finite-volume algorithm makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice principle is invoked; all computations are finite or follow from the stated real-analysis estimates.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "thm-age-structured-renewal-upwind-positivity-mass-bound-and-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-age-structured-positive-birth-quadrature",
+          "source_section": "Definition",
+          "quote": "Input a uniform age partition $0=a_0<a_1<\\cdots<a_J=A$ with $\\Delta a=a_j-a_{j-1}$, nonnegative cell masses $M_j$, and a bounded nonnegative fertility function $\\beta:[0,A]\\to[0,\\beta_\\infty]$. In each cell $C_j=[a_{j-1},a_j]$, let $u_j=M_j/\\Delta a$ and approximate $\\int_{C_j}\\beta(a)u_j\\,da$ by one of these positive rules:\n\n1. **Midpoint mode:** choose an integer $q_j\\ge1$ and use $u_j Q_M(\\beta; a_{j-1},a_j,q_j)$ from [[alg-composite-midpoint-rule]].\n2. **Capped adaptive mode:** call [[alg-adaptive-simpson-with-finite-depth-and-panel-cap]] on $\\beta$ over $C_j$ with the requested finite depth, panel budget and indicator tolerance, then multiply its estimate by $u_j$.\n\nIf an evaluation fails, return `failure` and no birth rate. Otherwise return\n\n$$B_h=\\sum_{j=1}^J u_jQ_j(\\beta),$$\n\nthe per-cell statuses, and the sum of any reported adaptive indicators. Both rules have nonnegative quadrature weights summing to $\\Delta a$, so $0\\le B_h\\le\\beta_\\infty\\sum_jM_j$. An adaptive `accepted` status means only that its indicators meet the requested budget; neither that indicator nor a `cap-reached` estimate bounds the true quadrature error. Any convergence theorem using this procedure must separately assume or prove a true quadrature-defect bound.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-age-structured-renewal-upwind-finite-volume",
+          "source_section": "Definition",
+          "quote": "For [[def-age-structured-renewal-transport-problem]], input a finite horizon $T>0$, a cutoff $A>T$, integers $J,N\\ge1$, and use the uniform grid $a_j=j\\Delta a$ with $\\Delta a=A/J$ and cells $C_j=[a_{j-1},a_j]$. Set $\\Delta t=T/N$ and $t_k=k\\Delta t$ for $0\\le k\\le N$. Input nonnegative initial cell masses $M_j^0$ and evaluate $\\mu_j=\\mu((a_{j-1}+a_j)/2)$. Require the transport-plus-loss CFL\n\n$$\\lambda+\\Delta t\\,\\mu_\\infty\\le1,\\qquad \\lambda=\\Delta t/\\Delta a,\\quad\\mu_\\infty=\\|\\mu\\|_\\infty.$$\n\nIf the CFL inequality fails, return status `invalid-cfl` without an update.\n\nInitialize birth, quadrature-status, and outflow records as empty, and set cumulative outflow $O_h^0=0$. For each $k=0,\\ldots,N-1$, put $u_j^k=M_j^k/\\Delta a$, compute $B_h^k$ with [[alg-age-structured-positive-birth-quadrature]], and set the upwind fluxes $F_0^k=B_h^k$ and $F_j^k=u_j^k$ for $1\\le j\\le J$. Update, for $1\\le j\\le J$,\n\n$$M_j^{k+1}=M_j^k-\\Delta t(F_j^k-F_{j-1}^k)-\\Delta t\\,\\mu_jM_j^k.$$\n\nThe right flux $F_J^k$ is absorbing outflow: record and discard the step mass $\\Delta t F_J^k$, set $O_h^{k+1}=O_h^k+\\Delta t F_J^k$, and allow no inflow from ages above $A$. Append $B_h^k$, the quadrature status, and the step outflow record, then proceed to step $k+1$. Return $(M^k)_{k=0}^N$ with the birth, quadrature-status, step-outflow, and cumulative-outflow records. An invalid grid or failed rate/quadrature evaluation returns failure with no partial current step. A `cap-reached` adaptive quadrature estimate may be used for a finite step, but its status is retained and carries no accuracy claim.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In midpoint mode, each of the $q_j$ samples has weight $\\Delta a/q_j>0$, so the weights sum to the cell width. In capped-adaptive mode, every returned estimate is a finite sum of Simpson panel estimates on its leaf intervals; a two-panel Simpson block has weights proportional to $(1,4,1)$, all positive, and their sum is the block width. The leaf intervals partition the cell, so the combined weights are nonnegative and sum to its width, including when a cap is reached. Hence the cell contribution lies between $0$ and $u_j\\beta_\\infty\\Delta a=\\beta_\\infty M_j$, and summing over cells gives the stated birth bound. A failure returns no estimate.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Substituting $F_j^k=M_j^k/\\Delta a$ in [F2] gives $M_1^{k+1}=(1-\\lambda-\\Delta t\\mu_1)M_1^k+\\Delta t B_h^k$ and, for $j\\ge2$, $M_j^{k+1}=(1-\\lambda-\\Delta t\\mu_j)M_j^k+\\lambda M_{j-1}^k$. The CFL makes every displayed coefficient nonnegative, while [F1] makes $B_h^k\\ge0$; induction in $k$ proves nonnegativity.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Summing [F2] over cells telescopes the fluxes to $F_J^k-F_0^k$, hence $N_h^{k+1}=N_h^k-\\Delta t F_J^k+\\Delta t B_h^k-\\Delta t\\sum_j\\mu_jM_j^k$. Since $F_J^k,\\mu_j,M_j^k\\ge0$ and step 1.1 gives $B_h^k\\le\\beta_\\infty N_h^k$, the asserted mass-growth inequality follows.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The update is a linear matrix with nonnegative entries by step 1.2. In each column, transport and mortality leave total coefficient at most $1$, because outflow or mortality removes mass; the birth quadrature adds at most $\\Delta t\\beta_\\infty$ to that column by step 1.1. Thus its induced $\\ell^1$ norm is at most $1+\\Delta t\\beta_\\infty$. Applying this matrix to $M^k-\\widetilde M^k$ proves the difference estimate.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty time horizon or interval and makes no claim about an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.2 permits zero initial masses and gives nonnegative updates; step 3.1 includes zero differences between the two runs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.2 separates the first cell fromj>=2, so its positivity argument covers a single-cell grid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.1 permits beta_infinity=0 and the mass factor becomes1; zero mortality also simply removes a nonnegative loss term."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1 retains both inlet birth flux and absorbing outletF_J. Step 1.1 includes cap-reached quadrature estimates but no estimate on evaluation failure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 3.1 uses the fixed common quadrature/update matrix on two given mass vectors; no time-dependent selection of quadrature weights is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The renewal upwind positivity and l1-stability theorem states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The renewal upwind positivity and l1-stability theorem makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice axiom is used; the argument is finite-dimensional summation and matrix positivity.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "thm-age-structured-renewal-smooth-first-order-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-age-structured-renewal-finite-cutoff-model",
+          "source_section": "Definition",
+          "quote": "Fix $0<T<A$, bounded nonnegative Lipschitz rates $\\mu,\\beta:[0,A]\\to[0,\\infty)$, and initial density $n_0^A\\in L^1_+(0,A)$. The **finite-age renewal model with absorbing outflow** is the age transport problem on $0<a<A$ with the same renewal inflow $B_A(t)=\\int_0^A\\beta(a)n^A(t,a)\\,da$ as in [[def-age-structured-renewal-transport-problem]]. A cohort follows age speed $1$, retains its mortality survival $S(a,s)$ until it reaches $A$, and is then removed; no cohort enters from ages above $A$. The initial density is $n_0^A$ on $[0,A]$. A mild solution is the characteristic formula on $0<a<A$, with an initial-cohort branch for $a\\ge t$, a newborn branch for $a<t$, and zero extension to $a\\ge A$. Since $A>T$, no cohort born during $[0,T]$ reaches the outflow boundary.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-age-structured-renewal-finite-cutoff-characteristic-solution",
+          "source_section": "Statement",
+          "quote": "For [[def-age-structured-renewal-finite-cutoff-model]], define $K(a)=\\beta(a)S(0,a)$ and\n\n$$G_A(t)=\\int_0^{A-t}\\beta(x+t)S(x,t)n_0^A(x)\\,dx,\\qquad 0\\le t\\le T.$$\n\nThere is a unique continuous nonnegative birth rate satisfying\n\n$$B_A(t)=G_A(t)+\\int_0^tK(a)B_A(t-a)\\,da,$$\n\nand the finite-age density is, for almost every $0<a<A$,\n\n$$n^A(t,a)=\\begin{cases}n_0^A(a-t)S(a-t,t),&t\\le a<A,\\\\B_A(t-a)S(0,a),&0\\le a<t.\\end{cases}$$\n\nIt is the unique mild solution, has $B_A(t)=\\int_0^A\\beta(a)n^A(t,a)\\,da$, and obeys\n\n$$\\|n^A(t,\\cdot)\\|_1\\le e^{\\beta_\\infty t}\\|n_0^A\\|_1,\\qquad \\beta_\\infty=\\|\\beta\\|_\\infty.$$\n\nFor $t\\le T<A$, its exact cumulative number outflow is\n\n$$O_A(t)=\\int_{A-t}^{A}n_0^A(x)S(x,A-x)\\,dx.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-age-structured-renewal-upwind-finite-volume",
+          "source_section": "Definition",
+          "quote": "For [[def-age-structured-renewal-transport-problem]], input a finite horizon $T>0$, a cutoff $A>T$, integers $J,N\\ge1$, and use the uniform grid $a_j=j\\Delta a$ with $\\Delta a=A/J$ and cells $C_j=[a_{j-1},a_j]$. Set $\\Delta t=T/N$ and $t_k=k\\Delta t$ for $0\\le k\\le N$. Input nonnegative initial cell masses $M_j^0$ and evaluate $\\mu_j=\\mu((a_{j-1}+a_j)/2)$. Require the transport-plus-loss CFL\n\n$$\\lambda+\\Delta t\\,\\mu_\\infty\\le1,\\qquad \\lambda=\\Delta t/\\Delta a,\\quad\\mu_\\infty=\\|\\mu\\|_\\infty.$$\n\nIf the CFL inequality fails, return status `invalid-cfl` without an update.\n\nInitialize birth, quadrature-status, and outflow records as empty, and set cumulative outflow $O_h^0=0$. For each $k=0,\\ldots,N-1$, put $u_j^k=M_j^k/\\Delta a$, compute $B_h^k$ with [[alg-age-structured-positive-birth-quadrature]], and set the upwind fluxes $F_0^k=B_h^k$ and $F_j^k=u_j^k$ for $1\\le j\\le J$. Update, for $1\\le j\\le J$,\n\n$$M_j^{k+1}=M_j^k-\\Delta t(F_j^k-F_{j-1}^k)-\\Delta t\\,\\mu_jM_j^k.$$\n\nThe right flux $F_J^k$ is absorbing outflow: record and discard the step mass $\\Delta t F_J^k$, set $O_h^{k+1}=O_h^k+\\Delta t F_J^k$, and allow no inflow from ages above $A$. Append $B_h^k$, the quadrature status, and the step outflow record, then proceed to step $k+1$. Return $(M^k)_{k=0}^N$ with the birth, quadrature-status, step-outflow, and cumulative-outflow records. An invalid grid or failed rate/quadrature evaluation returns failure with no partial current step. A `cap-reached` adaptive quadrature estimate may be used for a finite step, but its status is retained and carries no accuracy claim.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-age-structured-renewal-upwind-positivity-mass-bound-and-stability",
+          "source_section": "Statement",
+          "quote": "For the bounded fertility rate in the age model, write $\\beta_\\infty:=\\|\\beta\\|_\\infty$. Whenever [[alg-age-structured-positive-birth-quadrature]] returns an estimate for nonnegative cell masses and a bounded nonnegative fertility rate with upper bound $\\beta_\\infty$, its birth value satisfies $0\\le B_h\\le\\beta_\\infty\\sum_jM_j$.\n\nIn the update of [[alg-age-structured-renewal-upwind-finite-volume]], suppose the initial masses are nonnegative, the CFL holds, and each cell quadrature has nonnegative weights summing to $\\Delta a$. Then all updated masses remain nonnegative and, with $N_h^k=\\sum_{j=1}^J M_j^k$,\n\n$$N_h^{k+1}\\le(1+\\Delta t\\,\\beta_\\infty)N_h^k.$$\n\nFor two runs with the same grid, rates and quadrature rule but different nonnegative initial mass vectors $M^0,\\widetilde M^0$, the one-step difference satisfies\n\n$$\\|M^{k+1}-\\widetilde M^{k+1}\\|_{\\ell^1}\\le(1+\\Delta t\\,\\beta_\\infty)\\|M^k-\\widetilde M^k\\|_{\\ell^1}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-composite-midpoint-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $a<b$, let $n\\ge1$ be an integer, and put $h=(b-a)/n$. If\n$f\\in C^2([a,b])$, define $M_2=\\max_{x\\in[a,b]}|f''(x)|$. The composite\nmidpoint value $Q_M(f;a,b,n)$ of [[alg-composite-midpoint-rule]] satisfies\n\n$$\\left|\\int_a^b f(x)\\,dx-Q_M(f;a,b,n)\\right|\\le\\frac{(b-a)h^2}{24}M_2.$$\n\nThe integral is the Riemann integral. This is an exact-arithmetic quadrature\nbound; evaluation and summation roundoff are not included.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-discrete-one-step-error-recurrence-bound",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\overline M_j(t)=\\int_{C_j}n^A(t,a)\\,da$ and $\\overline u_j(t)=\\overline M_j(t)/\\Delta a$. The smooth finite-age characteristic solution [F2] satisfies the transport equation and renewal boundary in [F1]. Integrating [F1] over one cell and one time step gives $\\overline M_j(t_{k+1})=\\overline M_j(t_k)-\\int_{t_k}^{t_{k+1}}[n^A(s,a_j)-n^A(s,a_{j-1})]ds-\\int_{t_k}^{t_{k+1}}\\int_{C_j}\\mu(a)n^A(s,a)\\,da\\,ds$, with $n^A(s,a_0)=B_A(s)$ and the outgoing trace at $a_J=A$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Taylor's formula in age gives $\\overline u_j(t)-n^A(t,a_j)=-\\frac{\\Delta a}{2}(n^A)_a(t,a_j)+O(\\Delta a^2)$ uniformly. For interior cells, subtracting adjacent face-flux errors cancels the leading term and leaves $O((\\Delta a)^2)$ per cell because $(n^A)_{aa}$ is bounded. In the first and last cells there is only one uncancelled endpoint face error, of size $O(\\Delta a)$; these two cells contribute $O(\\Delta t\\Delta a)$ in total. Taylor's formula in time gives a face-integral remainder $O(\\Delta t^2\\Delta a)$ per cell after adjacent differences, using bounded $(n^A)_{ta}$, hence $O(\\Delta t^2)$ after summing. At the inlet, the smooth trace gives $(n^A)_t(t,a_0)=B_A'(t)$, so the time derivative of $n^A(t,a_1)-B_A(t)$ is also bounded by $\\Delta a\\|(n^A)_{ta}\\|_\\infty$; thus the boundary birth flux has no additional O(\\Delta t^2) term beyond this face remainder and $\\Delta t\\epsilon_Q$. For the reaction term, first note that $\\overline u_j(t)=n^A(t,a_j^c)+O((\\Delta a)^2)$ by the symmetric cell average. Thus replacing $\\mu(a)n^A(t,a)$ by $\\mu(a_j^c)\\overline u_j(t)$ has per-cell error $O((\\Delta a)^3)$: the midpoint formula [F5] bounds the error for $\\mu n^A$, and the cell-average replacement changes the midpoint value by $O((\\Delta a)^2)$ times the cell width. Summing and multiplying by $\\Delta t$ gives $O(\\Delta t(\\Delta a)^2)$. Freezing the reaction term at $t_k$ instead of integrating in time contributes $O(\\Delta t^2)$ after summing cells, since $(\\mu n^A)_t$ is bounded. Therefore $\\|\\rho^k\\|_{\\ell^1}\\le C\\Delta t(\\Delta a+\\Delta t+\\epsilon_Q)$ for sufficiently fine meshes with $\\Delta a\\le1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $e_k=\\sum_j|M_j^k-\\overline M_j(t_k)|$. Apply the one-step stability [F4] to the numerical and exact cell-average states and add the local defect from step 1.2; this yields $e_{k+1}\\le(1+\\beta_\\infty\\Delta t)e_k+C\\Delta t(\\Delta a+\\Delta t+\\epsilon_Q)$, with $e_0=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Put $D=\\Delta a+\\Delta t+\\epsilon_Q$. Iterating the recurrence in step 2.1 gives $e_k\\le C\\Delta tD\\sum_{r=0}^{k-1}(1+\\beta_\\infty\\Delta t)^r\\le C_TD$, where the bound also holds when $\\beta_\\infty=0$, in which case the sum is $k\\le T/\\Delta t$. For the midpoint birth rule, split each cell defect into $\\overline u_j[Q_M(\\beta;C_j,1)-\\int_{C_j}\\beta]$ and $\\int_{C_j}\\beta(a)(\\overline u_j-n^A(t_k,a))\\,da$. The first term is $O((\\Delta a)^3)$ per cell by [F5] and bounded $n^A$; in the second, subtract $\\beta$ at the cell midpoint because $\\int_{C_j}(\\overline u_j-n^A)=0$, then use $|\\beta(a)-\\beta(a_j^c)|\\le\\operatorname{Lip}(\\beta)\\Delta a$ and $\\int_{C_j}|\\overline u_j-n^A|=O((\\Delta a)^2)$ from bounded $(n^A)_a$. Summing gives $\\epsilon_Q=O((\\Delta a)^2)$, hence in particular $O(\\Delta a)$. With the two-sided mesh ratio, $D=O(\\Delta t)$; the recurrence then has additive term $C'\\Delta t^2$, and [F6] gives the stated first-order estimate. Finally, on each cell $\\int_{C_j}|n^A(t_k,a)-\\overline u_j(t_k)|da\\le (\\Delta a)^2\\|(n^A)_a\\|_\\infty$; summing over $A/\\Delta a$ cells adds only $O(\\Delta a)$ to the cell-mass error, proving the reconstruction claim.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requiresJ,N>=1 with A>T>0; its initial error is0 on that nonempty grid, not an empty time or space discretization."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.2 explicitly covers beta_infinity=0 by bounding the finite geometric sum by k, avoiding division by beta_infinity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits positive integer grid counts but is an asymptotic sufficiently fine-mesh estimate; proof step 1.2 separately counts the first and last boundary cells instead of requiring an infinite cell family."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.2 handles the zero-birth coefficient case explicitly; the positive two-sided mesh ratio excludes a collapsed spatial or temporal step."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.1 retains the renewal inlet and absorbing outgoing trace; step 1.2 isolates the first/last face defects, and step 2.2 controls levels0 throughN."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 2.1–2.2 iterate one deterministic finite-grid error recurrence from exact cell masses; no arbitrary numerical solution branch is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The smooth first-order age-grid error theorem states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The smooth first-order age-grid error theorem makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice axiom is used; the proof uses cell integration, Taylor bounds and a finite error recurrence.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "thm-age-structured-renewal-bv-l1-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-age-structured-renewal-transport-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$. Let mortality and fertility be bounded Lipschitz functions $\\mu,\\beta:[0,\\infty)\\to[0,\\infty)$, and let $n_0\\in L^1(0,\\infty)$ be nonnegative. The **linear age-structured renewal transport problem** is\n\n$$n_t(t,a)+n_a(t,a)=-\\mu(a)n(t,a),\\qquad a>0,\\quad 0<t\\le T,$$\n\nwith initial density $n(0,a)=n_0(a)$ and inflow condition\n\n$$n(t,0)=B(t),\\qquad B(t):=\\int_0^\\infty \\beta(a)n(t,a)\\,da.$$\n\nHere $a$ is age, $B$ is the birth rate, and the characteristic age path solves the first-order initial value problem $a'(s)=1$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]], hence $a(s)=a(0)+s$. Define survival from age $a$ over duration $s\\ge0$ by\n\n$$S(a,s):=\\exp\\!\\left(-\\int_a^{a+s}\\mu(r)\\,dr\\right).$$\n\nA **weak solution** on $[0,T]$ is a nonnegative $n\\in C([0,T];L^1(0,\\infty))$ with continuous $B:[0,T]\\to[0,\\infty)$ satisfying $B(t)=\\int_0^\\infty\\beta(a)n(t,a)\\,da$ and, for every $\\phi\\in C_c^1([0,T]\\times[0,\\infty))$ with $\\phi(T,a)=0$,\n\n$$-\\int_0^T\\!\\int_0^\\infty n(t,a)(\\phi_t+\\phi_a-\\mu(a)\\phi)\\,da\\,dt=\\int_0^\\infty n_0(a)\\phi(0,a)\\,da+\\int_0^T B(t)\\phi(t,0)\\,dt.$$\n\nA **mild solution** is a weak solution that also satisfies, for almost every $a\\ge0$,\n\n$$n(t,a)=\\begin{cases}n_0(a-t)S(a-t,t),&a\\ge t,\\\\B(t-a)S(0,a),&0\\le a<t,\\end{cases}$$\n\nThe formula follows the age characteristics $a'(s)=1$ and their mortality survival. No delay equation or finite-age cutoff is identified with this model by definition.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-age-structured-renewal-characteristic-solution",
+          "source_section": "Statement",
+          "quote": "For [[def-age-structured-renewal-transport-problem]], put $M(a)=\\int_0^a\\mu(r)\\,dr$, $K(a)=\\beta(a)e^{-M(a)}$, and\n\n$$G(t)=\\int_0^\\infty \\beta(x+t)\\exp\\!\\left(-\\int_x^{x+t}\\mu(r)\\,dr\\right)n_0(x)\\,dx.$$\n\nThere is a unique mild solution. Its birth rate is the unique continuous solution of\n\n$$B(t)=G(t)+\\int_0^t K(a)B(t-a)\\,da,$$\n\nand its density, for almost every $a\\ge0$, is\n\n$$n(t,a)=\\begin{cases}n_0(a-t)\\exp\\!\\left(-\\int_{a-t}^{a}\\mu(r)\\,dr\\right),&a\\ge t,\\\\ B(t-a)e^{-M(a)},&0\\le a<t.\\end{cases}$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-age-structured-renewal-upwind-finite-volume",
+          "source_section": "Definition",
+          "quote": "For [[def-age-structured-renewal-transport-problem]], input a finite horizon $T>0$, a cutoff $A>T$, integers $J,N\\ge1$, and use the uniform grid $a_j=j\\Delta a$ with $\\Delta a=A/J$ and cells $C_j=[a_{j-1},a_j]$. Set $\\Delta t=T/N$ and $t_k=k\\Delta t$ for $0\\le k\\le N$. Input nonnegative initial cell masses $M_j^0$ and evaluate $\\mu_j=\\mu((a_{j-1}+a_j)/2)$. Require the transport-plus-loss CFL\n\n$$\\lambda+\\Delta t\\,\\mu_\\infty\\le1,\\qquad \\lambda=\\Delta t/\\Delta a,\\quad\\mu_\\infty=\\|\\mu\\|_\\infty.$$\n\nIf the CFL inequality fails, return status `invalid-cfl` without an update.\n\nInitialize birth, quadrature-status, and outflow records as empty, and set cumulative outflow $O_h^0=0$. For each $k=0,\\ldots,N-1$, put $u_j^k=M_j^k/\\Delta a$, compute $B_h^k$ with [[alg-age-structured-positive-birth-quadrature]], and set the upwind fluxes $F_0^k=B_h^k$ and $F_j^k=u_j^k$ for $1\\le j\\le J$. Update, for $1\\le j\\le J$,\n\n$$M_j^{k+1}=M_j^k-\\Delta t(F_j^k-F_{j-1}^k)-\\Delta t\\,\\mu_jM_j^k.$$\n\nThe right flux $F_J^k$ is absorbing outflow: record and discard the step mass $\\Delta t F_J^k$, set $O_h^{k+1}=O_h^k+\\Delta t F_J^k$, and allow no inflow from ages above $A$. Append $B_h^k$, the quadrature status, and the step outflow record, then proceed to step $k+1$. Return $(M^k)_{k=0}^N$ with the birth, quadrature-status, step-outflow, and cumulative-outflow records. An invalid grid or failed rate/quadrature evaluation returns failure with no partial current step. A `cap-reached` adaptive quadrature estimate may be used for a finite step, but its status is retained and carries no accuracy claim.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-age-structured-renewal-upwind-positivity-mass-bound-and-stability",
+          "source_section": "Statement",
+          "quote": "For the bounded fertility rate in the age model, write $\\beta_\\infty:=\\|\\beta\\|_\\infty$. Whenever [[alg-age-structured-positive-birth-quadrature]] returns an estimate for nonnegative cell masses and a bounded nonnegative fertility rate with upper bound $\\beta_\\infty$, its birth value satisfies $0\\le B_h\\le\\beta_\\infty\\sum_jM_j$.\n\nIn the update of [[alg-age-structured-renewal-upwind-finite-volume]], suppose the initial masses are nonnegative, the CFL holds, and each cell quadrature has nonnegative weights summing to $\\Delta a$. Then all updated masses remain nonnegative and, with $N_h^k=\\sum_{j=1}^J M_j^k$,\n\n$$N_h^{k+1}\\le(1+\\Delta t\\,\\beta_\\infty)N_h^k.$$\n\nFor two runs with the same grid, rates and quadrature rule but different nonnegative initial mass vectors $M^0,\\widetilde M^0$, the one-step difference satisfies\n\n$$\\|M^{k+1}-\\widetilde M^{k+1}\\|_{\\ell^1}\\le(1+\\Delta t\\,\\beta_\\infty)\\|M^k-\\widetilde M^k\\|_{\\ell^1}.$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $u_j^k=M_j^k/\\Delta a$, $B_k=B_h^k$, $\\lambda=\\Delta t/\\Delta a$, and $V_k=|u_1^k-B_k|+\\sum_{j=2}^{J}|u_j^k-u_{j-1}^k|$. The initial cell averages satisfy $V_0\\le\\operatorname{TV}(n_0)+\\|n_0\\|_\\infty+\\beta_\\infty\\|n_0\\|_1$, which is finite because an integrable function of finite total variation on the half-line has finite essential supremum; the first term bounds differences of adjacent cell averages by averaging the variation measure.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $d_1^k=u_1^k-B_k$ and $d_j^k=u_j^k-u_{j-1}^k$ for $2\\le j\\le J$. For $j\\ge2$, subtract adjacent updates from [F3] to obtain $u_j^{k+1}-u_{j-1}^{k+1}=(1-\\lambda-\\Delta t\\mu_j)(u_j^k-u_{j-1}^k)+\\lambda(u_{j-1}^k-u_{j-2}^k)+\\Delta t(\\mu_{j-1}-\\mu_j)u_{j-1}^k$. The CFL makes the first two coefficients nonnegative, and $|\\mu_j-\\mu_{j-1}|\\le\\operatorname{Lip}(\\mu)\\Delta a$. Summing their absolute-value bounds for $j=2,\\dots,J$ gives at most $\\sum_{j=2}^{J-1}|d_j^k|+(1-\\lambda)|d_J^k|+\\lambda|d_1^k|+\\Delta t\\operatorname{Lip}(\\mu)N_k$: for $2\\le j<J$ the two transport coefficients add to at most $1$, the last-cell coefficient is at most $1-\\lambda$, and the boundary difference contributes $\\lambda|d_1^k|$. The first-cell jump is $d_1^{k+1}=(1-\\lambda-\\Delta t\\mu_1)d_1^k+(1-\\Delta t\\mu_1)B_k-B_{k+1}$. The quadrature weights are fixed and nonnegative, so $|B_{k+1}-B_k|\\le\\beta_\\infty\\sum_j|M_j^{k+1}-M_j^k|$. The update and the definition of $V_k$ give $\\sum_j|M_j^{k+1}-M_j^k|\\le\\Delta t(V_k+\\mu_\\infty N_k)$. Also $|(1-\\Delta t\\mu_1)B_k-B_{k+1}|\\le |B_k-B_{k+1}|+\\Delta t\\mu_\\infty B_k$ and $B_k\\le\\beta_\\infty N_k$. Adding the first-cell bound to the preceding sum combines the $d_1^k$ coefficients as $(1-\\lambda-\\Delta t\\mu_1)+\\lambda\\le1$; all other variation coefficients are at most $1$. Therefore $V_{k+1}\\le(1+C\\Delta t)V_k+C\\Delta t N_k$, with $C$ depending only on the rate bounds and Lipschitz constants.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Iterating [F4] gives $N_k\\le(1+\\Delta t\\beta_\\infty)^kN_0\\le e^{k\\Delta t\\beta_\\infty}N_0\\le e^{\\beta_\\infty T}N_0$. Iterating the recurrence in step 1.2 gives $V_k\\le(1+C\\Delta t)^kV_0+C\\Delta t\\sum_{r=0}^{k-1}(1+C\\Delta t)^{k-1-r}N_r\\le e^{CT}(V_0+CTe^{\\beta_\\infty T}N_0)$. The same update gives $\\sum_j\\Delta a|u_j^{k+1}-u_j^k|\\le\\Delta t(V_k+\\mu_\\infty N_k)$; hence the linear time interpolation is uniformly Lipschitz into $L^1$.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On any fixed interval $[0,R]$, the uniform $L^1$ and variation bounds make the time slices precompact in $L^1$: replacing each slice by averages on blocks of width $\\rho$ changes its $L^1$ norm by at most $\\rho V_k$, while those block averages lie in a bounded finite-dimensional set. A diagonal extraction at rational times and the uniform time-Lipschitz bound from step 1.3 give a subsequence converging uniformly in time in $L^1$ on every bounded age interval. A newborn cohort has age at most $T$; under the upwind update it can move at most one cell per step, so all newborn mass lies below age $T/c_-+\\Delta a$. For $R>T/c_-+\\Delta a$, births therefore contribute nothing above $R$. An initial cell moves by at most $k$ cells, so any initial mass reconstructed above $R$ came from initial cells whose lower endpoint exceeds $R-k\\Delta a-\\Delta a\\ge R-T/c_- -\\Delta a$. Its mass is at most $\\int_{R-T/c_- -2\\Delta a}^\\infty n_0$ (extend $n_0$ by zero to negative ages); mortality and outflow only decrease that inherited mass. This tail tends to zero uniformly as $R\\to\\infty$. For the exact solution, [F2] shows that newborns have age at most $T$, while mass above $R>T$ comes only from initial ages above $R-T$ and is at most $\\int_{R-T}^\\infty n_0$. Hence the subsequence converges in $C([0,T];L^1(0,\\infty))$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $\\phi_j^k=\\phi(t_k,(a_{j-1}+a_j)/2)$ for a compactly supported $C^1$ test function with terminal value zero. Multiplying [F3] by $\\phi_j^{k+1}$ and summing by parts gives the exact discrete weak identity $-\\sum_{k,j}M_j^k(\\phi_j^{k+1}-\\phi_j^k)-\\Delta t\\sum_{k,j<J}F_j^k(\\phi_{j+1}^{k+1}-\\phi_j^{k+1})+\\Delta t\\sum_{k,j}\\mu_jM_j^k\\phi_j^{k+1}=\\sum_jM_j^0\\phi_j^0+\\Delta t\\sum_kB_k\\phi_1^{k+1}$; the outflow term vanishes because the test is supported below the cutoff. Uniform $L^1$ convergence, Lipschitz continuity of $\\mu,\\beta$, and mesh refinement make the sums converge to the weak transport/loss terms. Since each positive birth rule is supported in its cell and its weights sum to $\\Delta a$, $|B_k-\\int\\beta(a)u_h(t_k,a)da|\\le2\\operatorname{Lip}(\\beta)\\Delta a\\,N_k$, so the birth sum converges to the boundary term. The limit therefore satisfies [F1] with the given initial trace.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In characteristic coordinates $x=a-t$ on $a>t$, the weak identity [F1] becomes $\\partial_t v(t,x)=-\\mu(x+t)v(t,x)$ in distributions; multiplication by $\\exp(\\int_x^{x+t}\\mu)$ makes its distributional $t$-derivative zero, and the initial trace gives $v(t,x)=n_0(x)S(x,t)$. On $0<a<t$, use $s=t-a$ and obtain $\\partial_a w(s,a)=-\\mu(a)w(s,a)$ with trace $w(s,0)=B(s)$; the same integrating-factor argument gives $w(s,a)=B(s)S(0,a)$. Substitution into the renewal relation in [F1] yields the Volterra equation of [F2], whose solution is unique. Thus every subsequential limit equals the mild solution. Since every subsequence has a further subsequence with this same limit, the entire sequence converges.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires positive J_m,N_m on all admissible grids; newborn and initial-density regions may have zero mass without an empty grid domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–1.3 give zero initial variation/mass and zero updates for zero data; zero birth/mortality coefficients are allowed in the same nonnegative recurrence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each grid may have one cell, but the asserted sequence also has Delta a_m tending to0 and A_m tending toinfinity. Proof step 2.1 analyzes bounded age blocks rather than assuming a fixed multiple-cell count."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof steps 1.2 and1.3 use nonnegative transport/loss coefficients and exponential iteration without requiring strictly positive mortality or fertility."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.2 uses compactly supported tests with terminal value0 and explicitly drops the cutoff outflow only once the test support lies below it; the convergence is uniform over[0,T]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The countable diagonal extraction is made through sequential compactness at rational times; no arbitrary-family choice is used (step 3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The BV age-grid L1 convergence result states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The BV age-grid L1 convergence result makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice axiom is used; the compactness argument uses finite partitions, a diagonal subsequence and an explicit weak formulation.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "thm-age-structured-renewal-cutoff-tail-and-outflow-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-age-structured-renewal-transport-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$. Let mortality and fertility be bounded Lipschitz functions $\\mu,\\beta:[0,\\infty)\\to[0,\\infty)$, and let $n_0\\in L^1(0,\\infty)$ be nonnegative. The **linear age-structured renewal transport problem** is\n\n$$n_t(t,a)+n_a(t,a)=-\\mu(a)n(t,a),\\qquad a>0,\\quad 0<t\\le T,$$\n\nwith initial density $n(0,a)=n_0(a)$ and inflow condition\n\n$$n(t,0)=B(t),\\qquad B(t):=\\int_0^\\infty \\beta(a)n(t,a)\\,da.$$\n\nHere $a$ is age, $B$ is the birth rate, and the characteristic age path solves the first-order initial value problem $a'(s)=1$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]], hence $a(s)=a(0)+s$. Define survival from age $a$ over duration $s\\ge0$ by\n\n$$S(a,s):=\\exp\\!\\left(-\\int_a^{a+s}\\mu(r)\\,dr\\right).$$\n\nA **weak solution** on $[0,T]$ is a nonnegative $n\\in C([0,T];L^1(0,\\infty))$ with continuous $B:[0,T]\\to[0,\\infty)$ satisfying $B(t)=\\int_0^\\infty\\beta(a)n(t,a)\\,da$ and, for every $\\phi\\in C_c^1([0,T]\\times[0,\\infty))$ with $\\phi(T,a)=0$,\n\n$$-\\int_0^T\\!\\int_0^\\infty n(t,a)(\\phi_t+\\phi_a-\\mu(a)\\phi)\\,da\\,dt=\\int_0^\\infty n_0(a)\\phi(0,a)\\,da+\\int_0^T B(t)\\phi(t,0)\\,dt.$$\n\nA **mild solution** is a weak solution that also satisfies, for almost every $a\\ge0$,\n\n$$n(t,a)=\\begin{cases}n_0(a-t)S(a-t,t),&a\\ge t,\\\\B(t-a)S(0,a),&0\\le a<t,\\end{cases}$$\n\nThe formula follows the age characteristics $a'(s)=1$ and their mortality survival. No delay equation or finite-age cutoff is identified with this model by definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-age-structured-renewal-characteristic-solution",
+          "source_section": "Statement",
+          "quote": "For [[def-age-structured-renewal-transport-problem]], put $M(a)=\\int_0^a\\mu(r)\\,dr$, $K(a)=\\beta(a)e^{-M(a)}$, and\n\n$$G(t)=\\int_0^\\infty \\beta(x+t)\\exp\\!\\left(-\\int_x^{x+t}\\mu(r)\\,dr\\right)n_0(x)\\,dx.$$\n\nThere is a unique mild solution. Its birth rate is the unique continuous solution of\n\n$$B(t)=G(t)+\\int_0^t K(a)B(t-a)\\,da,$$\n\nand its density, for almost every $a\\ge0$, is\n\n$$n(t,a)=\\begin{cases}n_0(a-t)\\exp\\!\\left(-\\int_{a-t}^{a}\\mu(r)\\,dr\\right),&a\\ge t,\\\\ B(t-a)e^{-M(a)},&0\\le a<t.\\end{cases}$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-age-structured-renewal-finite-cutoff-characteristic-solution",
+          "source_section": "Statement",
+          "quote": "For [[def-age-structured-renewal-finite-cutoff-model]], define $K(a)=\\beta(a)S(0,a)$ and\n\n$$G_A(t)=\\int_0^{A-t}\\beta(x+t)S(x,t)n_0^A(x)\\,dx,\\qquad 0\\le t\\le T.$$\n\nThere is a unique continuous nonnegative birth rate satisfying\n\n$$B_A(t)=G_A(t)+\\int_0^tK(a)B_A(t-a)\\,da,$$\n\nand the finite-age density is, for almost every $0<a<A$,\n\n$$n^A(t,a)=\\begin{cases}n_0^A(a-t)S(a-t,t),&t\\le a<A,\\\\B_A(t-a)S(0,a),&0\\le a<t.\\end{cases}$$\n\nIt is the unique mild solution, has $B_A(t)=\\int_0^A\\beta(a)n^A(t,a)\\,da$, and obeys\n\n$$\\|n^A(t,\\cdot)\\|_1\\le e^{\\beta_\\infty t}\\|n_0^A\\|_1,\\qquad \\beta_\\infty=\\|\\beta\\|_\\infty.$$\n\nFor $t\\le T<A$, its exact cumulative number outflow is\n\n$$O_A(t)=\\int_{A-t}^{A}n_0^A(x)S(x,A-x)\\,dx.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-age-structured-renewal-semigroup-growth-and-data-stability",
+          "source_section": "Statement",
+          "quote": "For [[def-age-structured-renewal-transport-problem]], let $\\beta_\\infty=\\|\\beta\\|_\\infty$. The solution map $S_{\\mu,\\beta}(t):n_0\\mapsto n(t,\\cdot)$ is linear and positive, and\n\n$$\\|S_{\\mu,\\beta}(t)n_0\\|_1\\le e^{\\beta_\\infty t}\\|n_0\\|_1.$$\n\nIf $n,\\widetilde n$ use possibly different nonnegative bounded coefficients $(\\mu,\\beta)$ and $(\\widetilde\\mu,\\widetilde\\beta)$ and initial data $n_0,\\widetilde n_0$, put $\\delta=\\|\\mu-\\widetilde\\mu\\|_\\infty+\\|\\beta-\\widetilde\\beta\\|_\\infty$ and $\\widetilde\\beta_\\infty=\\|\\widetilde\\beta\\|_\\infty$. Then\n\n$$\\|n(t)-\\widetilde n(t)\\|_1\\le e^{\\beta_\\infty t}\\left(\\|n_0-\\widetilde n_0\\|_1+\\delta t e^{\\widetilde\\beta_\\infty t}\\|\\widetilde n_0\\|_1\\right).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-age-structured-renewal-smooth-first-order-convergence",
+          "source_section": "Statement",
+          "quote": "Fix $T>0$ and a cutoff $A>T$. Let $n^A$ be the finite-age solution from [[thm-age-structured-renewal-finite-cutoff-characteristic-solution]] with initial density $n_0^A\\in C^2([0,A])$ and assume $\\mu,\\beta\\in C^2([0,A])$ are nonnegative and bounded. Assume $n^A$ extends to $C^2([0,T]\\times[0,A])$. Its smoothness at the renewal corner includes $n_0^A(0)=B_A(0)$ and $-(n_0^A)'(0)-\\mu(0)n_0^A(0)=B_A'(0)$; no boundary value is imposed at the absorbing outflow. Take integers $J,N\\ge1$, set $\\Delta a=A/J$ and $\\Delta t=T/N$, and use the corresponding uniform age and time grids. Initialize with exact cell masses and use the one-panel midpoint rule in each cell from [[alg-age-structured-positive-birth-quadrature]]. Assume $\\Delta t/\\Delta a\\in[c_-,c_+]$ for fixed $0<c_-\\le c_+<\\infty$ and the transport-plus-loss CFL. Define\n\n$$\\epsilon_Q:=\\max_{0\\le k<N}\\left|B_h(\\overline M(t_k))-\\int_0^A\\beta(a)n^A(t_k,a)\\,da\\right|,$$\n\nwhere $B_h(\\overline M(t_k))$ is the birth-rate quadrature applied to the exact cell-average masses $\\overline M_j(t_k)=\\int_{C_j}n^A(t_k,a)\\,da$. Then the cell-mass error $E_k=\\sum_j|M_j^k-\\int_{C_j}n^A(t_k,a)\\,da|$ obeys\n\n$$\\max_{0\\le k\\le N}E_k\\le C_T(\\Delta a+\\Delta t+\\epsilon_Q).$$\n\nThe piecewise-constant reconstruction $u_h^k=M_j^k/\\Delta a$ on cell $C_j$ and zero above $A$ satisfies the same $L^1$ error order. For the midpoint rule, $\\epsilon_Q\\le C_T\\Delta a$ under the stated regularity, so the method is first order in age mesh and time step. If the capped adaptive rule is used instead, the estimate requires an independently established true $\\epsilon_Q$; its reported indicator is not substituted for that hypothesis.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For an initial cohort at age $a$, the survival factor is the exponential of minus the integrated mortality along $a(s)=a+s$ by [F1]. Since $\\mu_*\\le\\mu(r)\\le\\|\\mu\\|_\\infty$ almost everywhere, integrating these inequalities over $[a,a+s]$ and exponentiating proves the two survival bounds.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "A newborn has age at most $t\\le T<A$ by time $t$, so it cannot contribute to outflow at $A$. An initial individual of age $a$ exits by time $t$ exactly when $A-t\\le a\\le A$, and its survival to the exit age is $S(a,A-a)$. Integrating over those initial ages gives the formula for $O_A(t)$; using $S\\le1$ and $A-t\\ge A-T$ gives the stated upper bound.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Split $n_0=n_0\\mathbf 1_{[0,A-T]}+n_0\\mathbf 1_{(A-T,\\infty)}$. By linearity of the Volterra equations in [F2] and [F3], it suffices to compare the evolutions of these two parts. Every initial cohort in the first part remains below age $A$ through time $T$, and its newborn descendants have age at most $T<A$; the characteristic formulas therefore make the infinite-age and finite-age evolutions identical for this part. The infinite-age evolution of the second part has mass at most $e^{\\beta_\\infty T}\\int_{A-T}^\\infty n_0$ by [F4]. The finite-age model starts this part only with its restriction to $[0,A]$, whose mass is no larger than the same tail; its mass is at most that same exponential factor by [F3]. The triangle inequality gives the factor-two bound in the Statement.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Under the smooth hypotheses of [F5], the piecewise-constant reconstruction differs in $L^1$ from the finite-age solution by at most $C_T(\\Delta a+\\Delta t+\\epsilon_Q)$ at each time level. Add this to the infinite-versus-cutoff error from step 2.1 by the triangle inequality. This is the displayed fully discrete bound, with the mesh/time/quadrature and age-tail contributions separate.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumesA>T and compares positive-duration age models; the tail integral can vanish for compactly supported initial data, without an empty age interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1 permits mu_*=0 and mu_infinity=0, giving survival1; step 2.1 gives a zero cutoff error when the displayed initial tail iszero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The comparison is for one scalar age population; any later finite-volume grid count comes from the separate smooth theorem in proof step 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.1 allows identically zero mortality and fertility, while A>T prevents newborn cohorts from degenerately reaching the cutoff in the horizon."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.2 includes initial cohorts exiting by t<=T and excludes newborn outflow becauseT<A; step 2.2 compares errors at each actual grid level."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 2.1 splits the given density into two explicitly specified tail/head functions; linear unique solution maps determine their evolutions without arbitrary choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The cutoff-tail and outflow estimate states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The cutoff-tail and outflow estimate makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms": [],
+      "axiom_note": "No choice axiom is used; the bounds follow by splitting the initial density into cohorts.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "ex-narrow-maturation-kernel-delay-approximation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-age-structured-renewal-transport-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$. Let mortality and fertility be bounded Lipschitz functions $\\mu,\\beta:[0,\\infty)\\to[0,\\infty)$, and let $n_0\\in L^1(0,\\infty)$ be nonnegative. The **linear age-structured renewal transport problem** is\n\n$$n_t(t,a)+n_a(t,a)=-\\mu(a)n(t,a),\\qquad a>0,\\quad 0<t\\le T,$$\n\nwith initial density $n(0,a)=n_0(a)$ and inflow condition\n\n$$n(t,0)=B(t),\\qquad B(t):=\\int_0^\\infty \\beta(a)n(t,a)\\,da.$$\n\nHere $a$ is age, $B$ is the birth rate, and the characteristic age path solves the first-order initial value problem $a'(s)=1$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]], hence $a(s)=a(0)+s$. Define survival from age $a$ over duration $s\\ge0$ by\n\n$$S(a,s):=\\exp\\!\\left(-\\int_a^{a+s}\\mu(r)\\,dr\\right).$$\n\nA **weak solution** on $[0,T]$ is a nonnegative $n\\in C([0,T];L^1(0,\\infty))$ with continuous $B:[0,T]\\to[0,\\infty)$ satisfying $B(t)=\\int_0^\\infty\\beta(a)n(t,a)\\,da$ and, for every $\\phi\\in C_c^1([0,T]\\times[0,\\infty))$ with $\\phi(T,a)=0$,\n\n$$-\\int_0^T\\!\\int_0^\\infty n(t,a)(\\phi_t+\\phi_a-\\mu(a)\\phi)\\,da\\,dt=\\int_0^\\infty n_0(a)\\phi(0,a)\\,da+\\int_0^T B(t)\\phi(t,0)\\,dt.$$\n\nA **mild solution** is a weak solution that also satisfies, for almost every $a\\ge0$,\n\n$$n(t,a)=\\begin{cases}n_0(a-t)S(a-t,t),&a\\ge t,\\\\B(t-a)S(0,a),&0\\le a<t,\\end{cases}$$\n\nThe formula follows the age characteristics $a'(s)=1$ and their mortality survival. No delay equation or finite-age cutoff is identified with this model by definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-age-structured-renewal-characteristic-solution",
+          "source_section": "Statement",
+          "quote": "For [[def-age-structured-renewal-transport-problem]], put $M(a)=\\int_0^a\\mu(r)\\,dr$, $K(a)=\\beta(a)e^{-M(a)}$, and\n\n$$G(t)=\\int_0^\\infty \\beta(x+t)\\exp\\!\\left(-\\int_x^{x+t}\\mu(r)\\,dr\\right)n_0(x)\\,dx.$$\n\nThere is a unique mild solution. Its birth rate is the unique continuous solution of\n\n$$B(t)=G(t)+\\int_0^t K(a)B(t-a)\\,da,$$\n\nand its density, for almost every $a\\ge0$, is\n\n$$n(t,a)=\\begin{cases}n_0(a-t)\\exp\\!\\left(-\\int_{a-t}^{a}\\mu(r)\\,dr\\right),&a\\ge t,\\\\ B(t-a)e^{-M(a)},&0\\le a<t.\\end{cases}$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct integration gives $\\int\\rho_\\varepsilon(a)\\,da=1$ and symmetry about $a_*$ gives $\\int a\\rho_\\varepsilon(a)\\,da=a_*$. Its second centered moment is $\\int(a-a_*)^2\\rho_\\varepsilon(a)\\,da=\\varepsilon^2/6$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $b$ be Lipschitz on $[0,T]$ and take $t\\ge a_*+\\varepsilon$. The support of $\\rho_\\varepsilon$ is contained in $[0,t]$, so the convolution in [F2] is $H_\\varepsilon(t)=R\\int\\rho_\\varepsilon(a)e^{-ma}b(t-a)\\,da$. For each supported $a$, $|e^{-ma}b(t-a)-e^{-ma_*}b(t-a_*)|\\le(\\operatorname{Lip}(b)+m\\|b\\|_\\infty)|a-a_*|$. Since $|a-a_*|\\le\\varepsilon$ and the kernel has unit mass, $|H_\\varepsilon(t)-Re^{-ma_*}b(t-a_*)|\\le R\\varepsilon(\\operatorname{Lip}(b)+m\\|b\\|_\\infty)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A finite-width fertility is not an exact delay: set $m=0$ and $b(s)=s^2$ on the relevant nonnegative interval. By step 1.1, $H_\\varepsilon(t)=R((t-a_*)^2+\\varepsilon^2/6)$, while the point-delay term is $Rb(t-a_*)=R(t-a_*)^2$; their difference is $R\\varepsilon^2/6>0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example assumesa_*>0, R>0 and0<epsilon<a_*, giving a nonempty triangular support and unit total mass, verified in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The m=0 specialization gives the exact positive finite-width discrepancy (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This Example compares a triangular distributed fertility with a point delay; it has no one-cell numerical-grid claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-mortality specialization m=0 is explicitly evaluated (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 1.2 assumes t>=a_*+epsilon, including equality, so the full triangular support lies in the convolution interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification steps 1.1 and2.1 integrate the fixed triangle and the fixed quadratic history explicitly; no independent kernel or history selection is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The triangular maturation-delay example states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The triangular maturation-delay example makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "triangular-kernel-delay-and-finite-width-witness",
+          "parameters": {
+            "epsilon": "epsilon in (0,a*)",
+            "mortality": "m=0 for witness"
+          },
+          "asserts": "The triangular density has mass 1, mean a*, and centered second moment epsilon^2/6; for b(s)=s^2 the convolution differs from the point-delay term by R epsilon^2/6.",
+          "claim": "Direct integration verifies normalization, the mean and variance, then gives a strict nonzero finite-width discrepancy.",
+          "checked_in": "steps 1.1 and 2.1"
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle is invoked; all computations are finite or follow from the stated real-analysis estimates.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "ex-half-size-division-numerical-moment-budget": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-size-structured-transport-and-division-kernel",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$ and a nondegenerate fixed size interval $[0,X]$ with $X>0$. Let $g,\\mu,\\gamma:[0,X]\\to[0,\\infty)$ be bounded Lipschitz functions, with $g(x)\\ge g_{\\min}>0$. Here $g$ is size growth, $\\mu$ is ordinary mortality, and $\\gamma$ is the rate at which a dividing parent is removed. For each parent size $y$, let $K_y$ be a finite nonnegative Borel measure of daughter sizes, supported on $[0,y]$. Assume $y\\mapsto K_y(E)$ is measurable for every Borel set $E\\subseteq[0,X]$, and that the number moment $k_0(y):=K_y([0,y])$ is uniformly bounded; the size moment $k_1(y):=\\int_{[0,y]}x\\,K_y(dx)$ is then finite. The **size-structured transport and division model** is\n\n$$\\partial_t n+\\partial_x(gn)=-(\\mu+\\gamma)n+\\int_{[0,X]}K_y(dx)n(t,y)\\,dy,\\qquad 0<x<X,$$\n\nwith zero incoming flux at $x=0$ and absorbing outflow $g(X)n(t,X)$ at $x=X$. Let $\\Pi_{[0,X]}(x):=\\min\\{X,\\max\\{0,x\\}\\}$ and extend the growth field to $\\widetilde g(x):=g(\\Pi_{[0,X]}(x))$ on $\\mathbb R$. This is a bounded Lipschitz vector field. By [[thm-size-structured-positivity-number-and-weighted-moment-identities]], its IVP has a unique solution on the finite time horizon; a model characteristic is this solution restricted to the interval from its initial size until its first hitting of $X$, including that hitting time when it occurs by $T$. On this restricted interval, $\\widetilde g=g$. The characteristic is understood as a first-order IVP solution in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. The weak equation is obtained by testing against $\\phi\\in C^1([0,X])$: transport contributes $\\int_0^Xg\\phi'n$, mortality and parent removal contribute $-\\int_0^X(\\mu+\\gamma)\\phi n$, division contributes $\\int_0^X\\int\\phi(x)K_y(dx)n(t,y)\\,dy$, and the upper boundary contributes $-\\phi(X)g(X)n(t,X)$. The interval is fixed; moving boundaries, zero growth and discontinuous coefficients are outside this definition.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-size-structured-finite-volume-flux-and-kernel-quadrature",
+          "source_section": "Definition",
+          "quote": "Input a partition $0=x_0<x_1<\\cdots<x_J=X$ with $J\\ge1$, a time step $\\Delta t>0$, a nonnegative current mass vector $M^k=(M_j^k)_{j=1}^J$, and the coefficients and kernel from [[def-size-structured-transport-and-division-kernel]]. Partition $[0,X]$ into disjoint cells $C_j=[x_{j-1},x_j)$ for $j<J$ and $C_J=[x_{J-1},X]$, with widths $h_j=x_j-x_{j-1}>0$ and centers $x_j^c=(x_{j-1}+x_j)/2$. Set $u_j^k=M_j^k/h_j$, the incoming flux $F_0^k=0$, the internal and outgoing upwind fluxes $F_j^k=g(x_j)u_j^k$ for $1\\le j\\le J$, and $d_j=\\mu(x_j^c)+\\gamma(x_j^c)$.\n\nFor each parent cell $C_\\ell$, form nonnegative daughter coefficients\n\n$$A_{j\\ell}=\\frac{1}{h_\\ell}\\,Q_M\\bigl(y\\mapsto K_y(C_j);x_{\\ell-1},x_\\ell,1\\bigr),$$\n\nusing [[alg-composite-midpoint-rule]] on the parent-size interval. Since the one-panel midpoint rule is $Q_M(f;x_{\\ell-1},x_\\ell,1)=h_\\ell f(x_\\ell^c)$, this gives $A_{j\\ell}=K_{x_\\ell^c}(C_j)\\ge0$. If $\\Delta t(g(x_j)/h_j+d_j)>1$ for any cell, return `invalid-cfl` without an update. Otherwise the finite-volume update is\n\n$$M_j^{k+1}=M_j^k-\\Delta t(F_j^k-F_{j-1}^k)-\\Delta t\\,d_jM_j^k+\\Delta t\\sum_{\\ell=1}^JA_{j\\ell}M_\\ell^k.$$\n\nThe flux $F_J^k$ is absorbing outflow. The admissible variable-width CFL is $\\Delta t(g(x_j)/h_j+d_j)\\le1$ for every cell. If a grid or any required coefficient/kernel evaluation fails, return failure without a partial update. Otherwise return $M^{k+1}$ together with the fluxes and daughter coefficients used in the step.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-size-structured-positivity-number-and-weighted-moment-identities",
+          "source_section": "Statement",
+          "quote": "Under [[def-size-structured-transport-and-division-kernel]], for every initial size $y\\in[0,X]$ the extended IVP specified there has a unique solution $\\chi_y$ on $[0,T]$. The solution is strictly increasing and agrees with the original growth field until it first reaches $X$, so its restriction through that first hit is the model characteristic.\n\nFor [[alg-size-structured-finite-volume-flux-and-kernel-quadrature]], assume nonnegative initial masses, nonnegative quadrature coefficients $A_{j\\ell}$, and the stated CFL. Then all $M_j^k$ remain nonnegative. Define the cell number and center-weighted size moment by $N_h^k=\\sum_jM_j^k$ and $W_h^k=\\sum_jx_j^cM_j^k$. With $k_{0,\\ell}^h=\\sum_jA_{j\\ell}$ and $k_{1,\\ell}^h=\\sum_jx_j^cA_{j\\ell}$, the exact balances are\n\n$$N_h^{k+1}-N_h^k=\\Delta t\\left(-F_J^k-\\sum_jd_jM_j^k+\\sum_\\ell k_{0,\\ell}^hM_\\ell^k\\right),$$\n\n$$W_h^{k+1}-W_h^k=\\Delta t\\left(\\sum_{j=1}^{J-1}(x_{j+1}^c-x_j^c)F_j^k-x_J^cF_J^k-\\sum_jx_j^cd_jM_j^k+\\sum_\\ell k_{1,\\ell}^hM_\\ell^k\\right).$$\n\nThus a division kernel preserves the discrete size moment only when its first-moment production cancels the parent-removal term; this identity is not automatic for an arbitrary kernel.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The parent center $2$ lies in the third cell and its daughters have size $1$, exactly the second cell center. Thus the positive midpoint kernel quadrature gives $A_{2,3}=2$ and all other daughter coefficients for the occupied parent column vanish. The CFL number is $0.1(0.1/0.5+1)=0.12$ in cell 1 and $0.1(0.1/1+1)=0.11$ in each of cells 2–4, so the global maximum is $0.12\\le1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The rightward internal flux from cell $C_3$ into $C_4$ is $F_3=gM_3/h_3=0.3$; the absorbing boundary flux is $F_4=0$. The daughter source is $\\Delta t A_{2,3}M_3=0.6$, and parent removal is $\\Delta t\\gamma M_3=0.3$. Therefore the updated cell masses are $M_2'=0.6$, $M_3'=3-0.03-0.3=2.67$, and $M_4'=0.03$, with $M_1'=0$; they are all nonnegative.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The discrete number changes from $3$ to $0.6+2.67+0.03=3.3$, an increase $0.3$ equal to $\\Delta t(2-1)\\gamma M_3$. The weighted-size total changes from $2\\cdot3=6$ to $1\\cdot0.6+2\\cdot2.67+3\\cdot0.03=6.03$. Formula [F3] gives the same $0.03$ increase from transport, while division contributes $\\Delta t(2\\cdot1-2\\cdot1)M_3=0$. Thus the first moment is conserved by division and changes only by the size-growth flux in this step.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes its displayed four disjoint cells and one occupied parent cell; no empty-grid variant is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero masses in the unoccupied cells stay nonnegative under the update (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes four cells with a parent at center2 and daughter at center1, not a one-cell theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example has g=0.1 and the size-model positive-growth convention; it does not vary the fixed growth tozero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 2.1 explicitly hasF_4=0 at the absorbing boundary, and step 2.2 retains this zero outflow in the number and weighted-moment budgets."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification step 1.1 fixes daughter coefficientA_2,3=2; step 2.1 computes the vector directly from the supplied four-cell data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The four-cell half-size division budget states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The four-cell half-size division budget makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "half-size-division-one-step",
+          "parameters": {
+            "g": 0.1,
+            "mu": 0,
+            "gamma": 1,
+            "dt": 0.1,
+            "parent_mass": 3,
+            "parent_center": 2
+          },
+          "asserts": "The daughter coefficient is A_2,3=2; the global CFL maximum is 0.12 (cell 1); updated masses are (0,0.6,2.67,0.03), so number rises 3 to 3.3 and center-weighted size rises 6 to 6.03 solely from transport.",
+          "claim": "Exact finite arithmetic checks positivity and the separate division and transport moment contributions.",
+          "checked_in": "steps 1.1, 2.1, and 2.2"
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle is invoked; all computations are finite or follow from the stated real-analysis estimates.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "ex-constant-mortality-and-age-localized-fertility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-age-structured-renewal-transport-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$. Let mortality and fertility be bounded Lipschitz functions $\\mu,\\beta:[0,\\infty)\\to[0,\\infty)$, and let $n_0\\in L^1(0,\\infty)$ be nonnegative. The **linear age-structured renewal transport problem** is\n\n$$n_t(t,a)+n_a(t,a)=-\\mu(a)n(t,a),\\qquad a>0,\\quad 0<t\\le T,$$\n\nwith initial density $n(0,a)=n_0(a)$ and inflow condition\n\n$$n(t,0)=B(t),\\qquad B(t):=\\int_0^\\infty \\beta(a)n(t,a)\\,da.$$\n\nHere $a$ is age, $B$ is the birth rate, and the characteristic age path solves the first-order initial value problem $a'(s)=1$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]], hence $a(s)=a(0)+s$. Define survival from age $a$ over duration $s\\ge0$ by\n\n$$S(a,s):=\\exp\\!\\left(-\\int_a^{a+s}\\mu(r)\\,dr\\right).$$\n\nA **weak solution** on $[0,T]$ is a nonnegative $n\\in C([0,T];L^1(0,\\infty))$ with continuous $B:[0,T]\\to[0,\\infty)$ satisfying $B(t)=\\int_0^\\infty\\beta(a)n(t,a)\\,da$ and, for every $\\phi\\in C_c^1([0,T]\\times[0,\\infty))$ with $\\phi(T,a)=0$,\n\n$$-\\int_0^T\\!\\int_0^\\infty n(t,a)(\\phi_t+\\phi_a-\\mu(a)\\phi)\\,da\\,dt=\\int_0^\\infty n_0(a)\\phi(0,a)\\,da+\\int_0^T B(t)\\phi(t,0)\\,dt.$$\n\nA **mild solution** is a weak solution that also satisfies, for almost every $a\\ge0$,\n\n$$n(t,a)=\\begin{cases}n_0(a-t)S(a-t,t),&a\\ge t,\\\\B(t-a)S(0,a),&0\\le a<t,\\end{cases}$$\n\nThe formula follows the age characteristics $a'(s)=1$ and their mortality survival. No delay equation or finite-age cutoff is identified with this model by definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-age-structured-renewal-characteristic-solution",
+          "source_section": "Statement",
+          "quote": "For [[def-age-structured-renewal-transport-problem]], put $M(a)=\\int_0^a\\mu(r)\\,dr$, $K(a)=\\beta(a)e^{-M(a)}$, and\n\n$$G(t)=\\int_0^\\infty \\beta(x+t)\\exp\\!\\left(-\\int_x^{x+t}\\mu(r)\\,dr\\right)n_0(x)\\,dx.$$\n\nThere is a unique mild solution. Its birth rate is the unique continuous solution of\n\n$$B(t)=G(t)+\\int_0^t K(a)B(t-a)\\,da,$$\n\nand its density, for almost every $a\\ge0$, is\n\n$$n(t,a)=\\begin{cases}n_0(a-t)\\exp\\!\\left(-\\int_{a-t}^{a}\\mu(r)\\,dr\\right),&a\\ge t,\\\\ B(t-a)e^{-M(a)},&0\\le a<t.\\end{cases}$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-age-structured-renewal-upwind-finite-volume",
+          "source_section": "Definition",
+          "quote": "For [[def-age-structured-renewal-transport-problem]], input a finite horizon $T>0$, a cutoff $A>T$, integers $J,N\\ge1$, and use the uniform grid $a_j=j\\Delta a$ with $\\Delta a=A/J$ and cells $C_j=[a_{j-1},a_j]$. Set $\\Delta t=T/N$ and $t_k=k\\Delta t$ for $0\\le k\\le N$. Input nonnegative initial cell masses $M_j^0$ and evaluate $\\mu_j=\\mu((a_{j-1}+a_j)/2)$. Require the transport-plus-loss CFL\n\n$$\\lambda+\\Delta t\\,\\mu_\\infty\\le1,\\qquad \\lambda=\\Delta t/\\Delta a,\\quad\\mu_\\infty=\\|\\mu\\|_\\infty.$$\n\nIf the CFL inequality fails, return status `invalid-cfl` without an update.\n\nInitialize birth, quadrature-status, and outflow records as empty, and set cumulative outflow $O_h^0=0$. For each $k=0,\\ldots,N-1$, put $u_j^k=M_j^k/\\Delta a$, compute $B_h^k$ with [[alg-age-structured-positive-birth-quadrature]], and set the upwind fluxes $F_0^k=B_h^k$ and $F_j^k=u_j^k$ for $1\\le j\\le J$. Update, for $1\\le j\\le J$,\n\n$$M_j^{k+1}=M_j^k-\\Delta t(F_j^k-F_{j-1}^k)-\\Delta t\\,\\mu_jM_j^k.$$\n\nThe right flux $F_J^k$ is absorbing outflow: record and discard the step mass $\\Delta t F_J^k$, set $O_h^{k+1}=O_h^k+\\Delta t F_J^k$, and allow no inflow from ages above $A$. Append $B_h^k$, the quadrature status, and the step outflow record, then proceed to step $k+1$. Return $(M^k)_{k=0}^N$ with the birth, quadrature-status, step-outflow, and cumulative-outflow records. An invalid grid or failed rate/quadrature evaluation returns failure with no partial current step. A `cap-reached` adaptive quadrature estimate may be used for a finite step, but its status is retained and carries no accuracy claim.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-age-structured-renewal-upwind-positivity-mass-bound-and-stability",
+          "source_section": "Statement",
+          "quote": "For the bounded fertility rate in the age model, write $\\beta_\\infty:=\\|\\beta\\|_\\infty$. Whenever [[alg-age-structured-positive-birth-quadrature]] returns an estimate for nonnegative cell masses and a bounded nonnegative fertility rate with upper bound $\\beta_\\infty$, its birth value satisfies $0\\le B_h\\le\\beta_\\infty\\sum_jM_j$.\n\nIn the update of [[alg-age-structured-renewal-upwind-finite-volume]], suppose the initial masses are nonnegative, the CFL holds, and each cell quadrature has nonnegative weights summing to $\\Delta a$. Then all updated masses remain nonnegative and, with $N_h^k=\\sum_{j=1}^J M_j^k$,\n\n$$N_h^{k+1}\\le(1+\\Delta t\\,\\beta_\\infty)N_h^k.$$\n\nFor two runs with the same grid, rates and quadrature rule but different nonnegative initial mass vectors $M^0,\\widetilde M^0$, the one-step difference satisfies\n\n$$\\|M^{k+1}-\\widetilde M^{k+1}\\|_{\\ell^1}\\le(1+\\Delta t\\,\\beta_\\infty)\\|M^k-\\widetilde M^k\\|_{\\ell^1}.$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The triangle has base length $1$ and height $1$, so $B(0)=\\int_1^2\\beta(a)\\,da=1/2$. The chosen initial density has right-hand trace $n_0(0+)=0$, which differs from $B(0)$; hence smooth renewal-corner compatibility fails. The example uses the characteristic/weak formulation rather than assuming that compatibility.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Here $S(x,t)=e^{-t}$, so [F2] gives $G(t)=e^{-t}\\int_1^2\\beta(x+t)\\,dx$ and $B(t)=G(t)+\\int_0^t\\beta(a)e^{-a}B(t-a)\\,da$. The first formula records the initially present age cohort; the second is the renewal feedback term.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use cells $[0,1],[1,2],[2,3],[3,4]$, each of width $1$, and initial masses $(0,1,0,0)$. Four-panel composite midpoint quadrature on the second cell samples fertility values $1/4,3/4,3/4,1/4$, so $B_h^0=(1/4)(1/4+3/4+3/4+1/4)=1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "With $\\lambda=\\Delta t/\\Delta a=1/4$ and $\\mu_j\\Delta t=1/4$, the CFL sum is $1/2$. The fluxes are $F_0=1/2,F_1=0,F_2=1,F_3=0,F_4=0$, so the first updated mass vector is $(1/8,1/2,1/4,0)$. Every entry is nonnegative, in agreement with [F4].",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes four unit-width age cells and initial mass(0,1,0,0), so an empty grid is outside this witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Unoccupied cells have zero initial mass and their resulting entries are computed (step 2.2)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes four cells and a four-panel birth quadrature, not a one-cell or one-panel specialization."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example fixes mortality1 and a nonzero triangular fertility. Its fertility vanishes off[1,2], but no zero-mortality parameter family is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 1.1 exhibits the initial-corner mismatch n_0(0+)=0 versusB(0)=1/2; the example does not assert smooth-corner convergence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification step 2.1 supplies all four midpoint samples and step 2.2 computes the flux vector explicitly, so no birth-rate choice is hidden."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The localized-fertility one-step example states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The localized-fertility one-step example makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "localized-fertility-upwind-step",
+          "parameters": {
+            "mu": 1,
+            "dt": 0.25,
+            "da": 1,
+            "initial_masses": [
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          "asserts": "The initial exact birth rate and four-panel midpoint birth rate are both 1/2; CFL sum is 1/2; the updated vector is (1/8,1/2,1/4,0).",
+          "claim": "Finite quadrature and flux arithmetic check the birth rate, CFL and nonnegative first update at an incompatible initial corner.",
+          "checked_in": "steps 1.1, 2.1, and 2.2"
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle is invoked; all computations are finite or follow from the stated real-analysis estimates.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    },
+    "ex-age-cutoff-versus-outflow-tail-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-age-structured-renewal-transport-problem",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $T>0$. Let mortality and fertility be bounded Lipschitz functions $\\mu,\\beta:[0,\\infty)\\to[0,\\infty)$, and let $n_0\\in L^1(0,\\infty)$ be nonnegative. The **linear age-structured renewal transport problem** is\n\n$$n_t(t,a)+n_a(t,a)=-\\mu(a)n(t,a),\\qquad a>0,\\quad 0<t\\le T,$$\n\nwith initial density $n(0,a)=n_0(a)$ and inflow condition\n\n$$n(t,0)=B(t),\\qquad B(t):=\\int_0^\\infty \\beta(a)n(t,a)\\,da.$$\n\nHere $a$ is age, $B$ is the birth rate, and the characteristic age path solves the first-order initial value problem $a'(s)=1$ in the sense of [[def-first-order-ode-initial-value-problem-and-solution]], hence $a(s)=a(0)+s$. Define survival from age $a$ over duration $s\\ge0$ by\n\n$$S(a,s):=\\exp\\!\\left(-\\int_a^{a+s}\\mu(r)\\,dr\\right).$$\n\nA **weak solution** on $[0,T]$ is a nonnegative $n\\in C([0,T];L^1(0,\\infty))$ with continuous $B:[0,T]\\to[0,\\infty)$ satisfying $B(t)=\\int_0^\\infty\\beta(a)n(t,a)\\,da$ and, for every $\\phi\\in C_c^1([0,T]\\times[0,\\infty))$ with $\\phi(T,a)=0$,\n\n$$-\\int_0^T\\!\\int_0^\\infty n(t,a)(\\phi_t+\\phi_a-\\mu(a)\\phi)\\,da\\,dt=\\int_0^\\infty n_0(a)\\phi(0,a)\\,da+\\int_0^T B(t)\\phi(t,0)\\,dt.$$\n\nA **mild solution** is a weak solution that also satisfies, for almost every $a\\ge0$,\n\n$$n(t,a)=\\begin{cases}n_0(a-t)S(a-t,t),&a\\ge t,\\\\B(t-a)S(0,a),&0\\le a<t,\\end{cases}$$\n\nThe formula follows the age characteristics $a'(s)=1$ and their mortality survival. No delay equation or finite-age cutoff is identified with this model by definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-age-structured-renewal-upwind-finite-volume",
+          "source_section": "Definition",
+          "quote": "For [[def-age-structured-renewal-transport-problem]], input a finite horizon $T>0$, a cutoff $A>T$, integers $J,N\\ge1$, and use the uniform grid $a_j=j\\Delta a$ with $\\Delta a=A/J$ and cells $C_j=[a_{j-1},a_j]$. Set $\\Delta t=T/N$ and $t_k=k\\Delta t$ for $0\\le k\\le N$. Input nonnegative initial cell masses $M_j^0$ and evaluate $\\mu_j=\\mu((a_{j-1}+a_j)/2)$. Require the transport-plus-loss CFL\n\n$$\\lambda+\\Delta t\\,\\mu_\\infty\\le1,\\qquad \\lambda=\\Delta t/\\Delta a,\\quad\\mu_\\infty=\\|\\mu\\|_\\infty.$$\n\nIf the CFL inequality fails, return status `invalid-cfl` without an update.\n\nInitialize birth, quadrature-status, and outflow records as empty, and set cumulative outflow $O_h^0=0$. For each $k=0,\\ldots,N-1$, put $u_j^k=M_j^k/\\Delta a$, compute $B_h^k$ with [[alg-age-structured-positive-birth-quadrature]], and set the upwind fluxes $F_0^k=B_h^k$ and $F_j^k=u_j^k$ for $1\\le j\\le J$. Update, for $1\\le j\\le J$,\n\n$$M_j^{k+1}=M_j^k-\\Delta t(F_j^k-F_{j-1}^k)-\\Delta t\\,\\mu_jM_j^k.$$\n\nThe right flux $F_J^k$ is absorbing outflow: record and discard the step mass $\\Delta t F_J^k$, set $O_h^{k+1}=O_h^k+\\Delta t F_J^k$, and allow no inflow from ages above $A$. Append $B_h^k$, the quadrature status, and the step outflow record, then proceed to step $k+1$. Return $(M^k)_{k=0}^N$ with the birth, quadrature-status, step-outflow, and cumulative-outflow records. An invalid grid or failed rate/quadrature evaluation returns failure with no partial current step. A `cap-reached` adaptive quadrature estimate may be used for a finite step, but its status is retained and carries no accuracy claim.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-age-structured-renewal-cutoff-tail-and-outflow-bound",
+          "source_section": "Statement",
+          "quote": "Let $A>T$ and let $n_0\\ge0$ be integrable. For an initial cohort of age $a$, its survival through duration $s$ satisfies\n\n$$e^{-\\|\\mu\\|_\\infty s}\\le S(a,s)\\le e^{-\\mu_*s},\\qquad \\mu_*:=\\operatorname*{ess\\,inf}_{r\\ge0}\\mu(r).$$\n\nNo cohort born during $[0,T]$ reaches age $A$. The exact number of initial individuals that exits through age $A$ by time $t\\le T$ is\n\n$$O_A(t)=\\int_{A-t}^{A}n_0(a)S(a,A-a)\\,da\\le\\int_{A-T}^{\\infty}n_0(a)\\,da.$$\n\nLet $n^A$ be the finite-age solution from [[thm-age-structured-renewal-finite-cutoff-characteristic-solution]] with initial data $n_0^A=n_0\\mathbf 1_{[0,A]}$, extended by zero above $A$. Then\n\n$$\\sup_{0\\le t\\le T}\\|n(t)-n^A(t)\\|_1\\le2e^{\\beta_\\infty T}\\int_{A-T}^{\\infty}n_0(a)\\,da.$$\n\nUnder the smooth discretization hypotheses of [[thm-age-structured-renewal-smooth-first-order-convergence]], let $u_h^k$ be its piecewise-constant reconstruction, extended by zero above $A$. At every time level,\n\n$$\\|u_h^k-n(t_k,\\cdot)\\|_1\\le2e^{\\beta_\\infty T}\\int_{A-T}^{\\infty}n_0(a)\\,da+C_T(\\Delta a+\\Delta t+\\epsilon_Q).$$\n\nThe cutoff term and the mesh/time/quadrature term are separately displayed.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The exact solution in [F1] has total mass $\\int_t^\\infty e^{-(a-t)}da=1$ at every $t$. The exact initial cell masses are $M_j^0=e^{-(j-1)}-e^{-j}$ for $1\\le j\\le4$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $\\lambda=1$ and $\\mu=0$, [F2] gives $M_1^{k+1}=0$ and $M_j^{k+1}=M_{j-1}^k$ for $2\\le j\\le4$. After $k$ steps, the retained total is $\\sum_{j=1}^{4-k}M_j^0=1-e^{-(4-k)}$, so the error from total mass $1$ is $e^{-(4-k)}$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $T=k=1,2,3$, the errors are respectively $e^{-3},e^{-2},e^{-1}$. The cumulative outflow is $\\sum_{r=0}^{k-1}M_{4-r}^0=e^{-(4-k)}-e^{-4}$, and the initial mass omitted above $A$ is $e^{-4}$. Their sum equals the exact tail $\\int_{4-k}^\\infty e^{-a}da=e^{-(4-k)}$ in [F3]. The larger error at the longer horizon is the age-cutoff tail, not a time-discretization defect.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes cutoff4 and four initial age cells; its three tested horizons1,2,3 are nonempty and below the cutoff."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-mortality and zero-fertility branch is computed exactly (step 1.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes four cells with unit CFL and one to three shifts, not a single-cell update theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-mortality and zero-fertility shift case is explicitly evaluated (step 1.2)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 2.1 compares horizons1,2,3 and includes cumulative discarded last-cell mass plus the initial tail above cutoff4."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification steps 1.1–2.1 specify each initial cell mass and each shifted output exactly; no choice of a solution trajectory is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The zero-rate cutoff shift example states its model, estimate or worked calculation in one direction; it does not assert an equivalence whose forward direction is missing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The zero-rate cutoff shift example makes no converse characterization from its output or bound back to the input hypotheses; there is no reverse biconditional claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "zero-rate-cutoff-shift",
+          "parameters": {
+            "A": 4,
+            "da": 1,
+            "dt": 1,
+            "horizons": [
+              1,
+              2,
+              3
+            ]
+          },
+          "asserts": "Exact mass is 1; retained masses are 1-e^(-3), 1-e^(-2), and 1-e^(-1), with tail errors e^(-3), e^(-2), and e^(-1). Cumulative discarded outflow plus omitted initial mass equals the corresponding tail.",
+          "claim": "Exact cell-mass shifts separate age-cutoff loss from any time-stepping defect.",
+          "checked_in": "steps 1.1, 1.2, and 2.1"
+        }
+      ],
+      "axioms": [],
+      "axiom_note": "No choice principle is invoked; all computations are finite or follow from the stated real-analysis estimates.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 79 author — not independent approval",
+        "notes": "Author pass checked the full current argument against the actual supplier bodies and exact source excerpts, mapped every proof step and input, and recorded the relevant boundary and finite-check evidence. This is not independent mathematical approval."
+      }
+    }
+  }
+}

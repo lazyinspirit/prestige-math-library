@@ -1,0 +1,348 @@
+{
+  "group": "c",
+  "batches": ["29"],
+  "pages_read": [
+    "pseudo-arclength-continuation-and-fold-certificates",
+    "pseudo-arclength-continuation-and-fold-certificates-examples"
+  ],
+  "items_read": [
+    "def-simple-fold-complement-splitting-and-projection",
+    "lem-pseudo-arclength-border-matrix-invertibility-and-inverse-bound",
+    "thm-augmented-residual-contraction-certificate",
+    "lem-regular-curve-chart-and-pseudo-arclength-predictor-defect",
+    "lem-simple-fold-complement-restriction-is-an-isomorphism",
+    "lem-transverse-hyperplane-selects-unique-local-branch-point",
+    "thm-simple-fold-lyapunov-schmidt-parameterization",
+    "thm-pseudo-arclength-local-newton-correction",
+    "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+    "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination",
+    "ex-zero-tangent-angle-makes-bordered-corrector-singular",
+    "ex-natural-parameterization-fails-at-x-squared-fold",
+    "ex-local-trace-misses-disconnected-branch",
+    "ex-pseudo-arclength-crosses-x-squared-fold"
+  ],
+  "conventions": [
+    {
+      "convention": "All quantitative vector bounds use the Euclidean norm and its induced operator norm. The bordered matrix stacks A above the row τᵀ; its angular factor is τᵀt.",
+      "fixed_by": "lem-pseudo-arclength-border-matrix-invertibility-and-inverse-bound",
+      "matters_for": [
+        "thm-pseudo-arclength-local-newton-correction",
+        "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+        "ex-zero-tangent-angle-makes-bordered-corrector-singular"
+      ]
+    },
+    {
+      "convention": "The fold right nullvector v is unit, the left nullvector w need only be nonzero, X=v⊥, Y=ker(wᵀ), q=b/(wᵀb), and P=I−qwᵀ.",
+      "fixed_by": "def-simple-fold-complement-splitting-and-projection",
+      "matters_for": [
+        "lem-simple-fold-complement-restriction-is-an-isomorphism",
+        "thm-simple-fold-lyapunov-schmidt-parameterization"
+      ]
+    },
+    {
+      "convention": "The fold parameter s is fixed by vᵀ(x(s)−x₀)=s; it is not asserted to be Euclidean arclength. With a=wᵀFλ and b=wᵀFxx[v,v], the curvature is λ″(0)=−b/a. The fold theorem assumes C³.",
+      "fixed_by": "thm-simple-fold-lyapunov-schmidt-parameterization",
+      "matters_for": [
+        "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+        "ex-natural-parameterization-fails-at-x-squared-fold",
+        "ex-pseudo-arclength-crosses-x-squared-fold"
+      ]
+    },
+    {
+      "convention": "The normalized regular chart uses tᵀ(γ(r)−z₀)=r. Its subsequent arclength representation is unit speed. The predictor-defect estimate assumes an exact root and exact unit kernel tangent on the stated convex tube.",
+      "fixed_by": "lem-regular-curve-chart-and-pseudo-arclength-predictor-defect",
+      "matters_for": [
+        "lem-transverse-hyperplane-selects-unique-local-branch-point",
+        "thm-pseudo-arclength-local-newton-correction",
+        "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination"
+      ]
+    },
+    {
+      "convention": "During an attempt the previous unit orientation remains the section normal, while the current tangent candidate supplies the predictor. Accepted and attempted counts start at zero; the seed is not an appended step. Zero requested steps return the seed, and continuation budgets cap attempts.",
+      "fixed_by": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+      "matters_for": [
+        "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination",
+        "ex-local-trace-misses-disconnected-branch",
+        "ex-pseudo-arclength-crosses-x-squared-fold"
+      ]
+    },
+    {
+      "convention": "Acceptance requires the explicit contraction certificate on a closed ball contained wholly in the isolating chart neighborhood. Residual tolerance alone is not a root certificate, and termination assumes every invoked callback returns in finite time.",
+      "fixed_by": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+      "matters_for": [
+        "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination",
+        "ex-local-trace-misses-disconnected-branch",
+        "ex-pseudo-arclength-crosses-x-squared-fold"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-augmented-residual-contraction-certificate",
+      "statement": "For the stated C¹ square residual and certified residual/Jacobian errors, set β=β̂/(1−β̂εJ), ρ=‖ĝ‖₂+εg, and q=βLR. If β̂εJ<1, q<1, and βρ≤(1−q)R, then G has exactly one zero y* in the closed radius-R ball and ‖y*−y‖₂≤βρ/(1−q).",
+      "used_by": [
+        "thm-pseudo-arclength-local-newton-correction",
+        "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+        "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination",
+        "ex-local-trace-misses-disconnected-branch",
+        "ex-pseudo-arclength-crosses-x-squared-fold"
+      ]
+    },
+    {
+      "id": "lem-pseudo-arclength-border-matrix-invertibility-and-inverse-bound",
+      "statement": "For rank-n A: R^(n+1)→R^n, a unit kernel vector t, Q=(A restricted to t⊥)⁻¹, and unit τ, B=[A;τᵀ] is invertible exactly when τᵀt≠0. If |τᵀt|≥c>0 and ‖Qu‖₂≤KA‖u‖₂, then ‖B⁻¹‖op≤sqrt(KA²(1+c⁻¹)²+c⁻²).",
+      "used_by": [
+        "lem-regular-curve-chart-and-pseudo-arclength-predictor-defect",
+        "thm-simple-fold-lyapunov-schmidt-parameterization",
+        "thm-pseudo-arclength-local-newton-correction",
+        "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+        "ex-zero-tangent-angle-makes-bordered-corrector-singular"
+      ]
+    },
+    {
+      "id": "lem-regular-curve-chart-and-pseudo-arclength-predictor-defect",
+      "statement": "A C² residual at a rank-n zero has a unique local C² chart normalized by tᵀ(γ(r)−z₀)=r, containing every nearby zero, and a C¹ unit-speed reparameterization. On the stated convex tube with L-Lipschitz DF, the exact tangent predictor has augmented residual at most sqrt(n)Lh²/2.",
+      "used_by": [
+        "lem-transverse-hyperplane-selects-unique-local-branch-point",
+        "thm-simple-fold-lyapunov-schmidt-parameterization",
+        "thm-pseudo-arclength-local-newton-correction",
+        "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+        "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination"
+      ]
+    },
+    {
+      "id": "lem-transverse-hyperplane-selects-unique-local-branch-point",
+      "statement": "If τᵀc′(s)≥κ>0 on the supplied two-sided chart interval and d=τᵀ(zp−z₀) satisfies 0≤d≤κr+, exactly one chart parameter in [−r−,r+] satisfies τᵀ(c(s*)−zp)=0.",
+      "used_by": [
+        "thm-pseudo-arclength-local-newton-correction",
+        "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+        "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination"
+      ]
+    },
+    {
+      "id": "thm-simple-fold-lyapunov-schmidt-parameterization",
+      "statement": "Under the stated C³, rank-(n−1), nullvector, and nonzero a=wᵀFλ and b=wᵀFxx[v,v] hypotheses, there is a unique local normalized C³ solution curve with x′(0)=v, λ′(0)=0, λ″(0)=−b/a≠0, and a bounded cubic parameter remainder. The full derivative has rank n, and a unit section normal transverse to (v,0) gives an invertible augmented derivative.",
+      "used_by": [
+        "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+        "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination",
+        "ex-natural-parameterization-fails-at-x-squared-fold",
+        "ex-pseudo-arclength-crosses-x-squared-fold"
+      ]
+    },
+    {
+      "id": "alg-pseudo-arclength-continuation-with-certified-local-corrector",
+      "statement": "The finite-budget procedure generates candidates for previous-normal sections, appends a ball only after the explicit contraction and whole-ball chart checks pass, preserves a certified prefix on failure, and separately finalizes any requested local fold certificate.",
+      "used_by": [
+        "thm-pseudo-arclength-finite-trace-partial-correctness-and-termination",
+        "ex-local-trace-misses-disconnected-branch",
+        "ex-pseudo-arclength-crosses-x-squared-fold"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-orthogonal-complement",
+      "used_for": "The state and kernel complements in the fold splitting and bordered inverse.",
+      "opened": true
+    },
+    {
+      "id": "def-kernel-and-image-of-a-linear-map",
+      "used_for": "Kernel and image notation in the fold splitting.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-map",
+      "used_for": "Linearity of the fold data.",
+      "opened": true
+    },
+    {
+      "id": "def-rank-and-nullity",
+      "used_for": "Rank is image dimension, including the scalar fold's rank-zero state derivative.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "Total derivatives, state/parameter restrictions, and first-order approximations.",
+      "opened": true
+    },
+    {
+      "id": "thm-rank-nullity",
+      "used_for": "One-dimensional branch kernels and dimensions of complement restrictions.",
+      "opened": true
+    },
+    {
+      "id": "cor-double-orthogonal-complement-and-dimension",
+      "used_for": "Dimensions of t⊥ and v⊥.",
+      "opened": true
+    },
+    {
+      "id": "thm-dimension-of-a-linear-subspace",
+      "used_for": "Equal-dimension subspace equality and finite-dimensional complement coordinates.",
+      "opened": true
+    },
+    {
+      "id": "thm-linear-kernel-image-and-injectivity",
+      "used_for": "Trivial kernels imply injectivity of complement restrictions.",
+      "opened": true
+    },
+    {
+      "id": "lem-standard-basis-of-f-n",
+      "used_for": "Dimensions of coordinate spaces and standard coordinate vectors.",
+      "opened": true
+    },
+    {
+      "id": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+      "used_for": "Finite matrix representations and finite operator bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Angular, coordinate, seed-offset, and inverse-norm estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "C¹ regularity and local inverse conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-banach-fixed-point",
+      "used_for": "Existence and uniqueness of the contraction-certified root.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-space-complete",
+      "used_for": "Completeness of closed Euclidean balls and entrywise matrix limits.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Chart differentiation, residual derivatives, and fold curvature computations.",
+      "opened": true
+    },
+    {
+      "id": "thm-mean-value-inequality-for-total-derivatives",
+      "used_for": "Contraction estimates on open convex balls and the error-aware predictor bound.",
+      "opened": true
+    },
+    {
+      "id": "lem-geometric-sequence-null",
+      "used_for": "Convergence of the Neumann-series tails and infinite Newton error bounds.",
+      "opened": true
+    },
+    {
+      "id": "lem-power-difference-factorisation",
+      "used_for": "Finite geometric-sum identity in the approximate-Jacobian inverse estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-first-part",
+      "used_for": "Differentiating the arclength integral.",
+      "opened": true
+    },
+    {
+      "id": "thm-additivity-over-subintervals",
+      "used_for": "Oriented arclength integral identities on both sides of zero.",
+      "opened": true
+    },
+    {
+      "id": "def-oriented-integral",
+      "used_for": "Integral notation for negative chart parameters and zero endpoints.",
+      "opened": true
+    },
+    {
+      "id": "def-ck-euclidean-maps-and-diffeomorphisms",
+      "used_for": "Componentwise C² and C³ regularity conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+      "used_for": "Regular normalized charts, complement solves, and scalar fold parameter solves.",
+      "opened": true
+    },
+    {
+      "id": "thm-newton-leibniz-with-interior-derivative",
+      "used_for": "Predictor remainders, monotone section increments, and cubic fold remainders.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Integrability of chart speeds and continuous derivative integrands.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "Quadratic predictor estimates and positive section-derivative bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-inverse-function-theorem",
+      "used_for": "Local inversion of the arclength coordinate.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-basis",
+      "used_for": "One-vector bases and finite-dimensional complement coordinates.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-independence",
+      "used_for": "Independence of the unit nullvector.",
+      "opened": true
+    },
+    {
+      "id": "def-dimension",
+      "used_for": "Dimensions of the nullvector span and zero-dimensional complements.",
+      "opened": true
+    },
+    {
+      "id": "thm-intermediate-value",
+      "used_for": "Existence of the selected transverse section intersection.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "A finite bound on the third parameter derivative on a compact chart interval.",
+      "opened": true
+    },
+    {
+      "id": "lem-newton-contraction-near-an-invertible-derivative",
+      "used_for": "The outside Newton supplier uses its uniform nearby inverse bound, rather than its fixed-inverse contraction as an updated-Newton convergence argument.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-augmented-residual-contraction-certificate",
+      "concern": "The final Remarks sentence says: “a finite Newton budget alone proves no root exists.” Read literally, this asserts a nonexistence conclusion, contradicting both the theorem and the algorithm's careful inconclusive-status convention. A finite Newton budget alone supplies neither existence nor nonexistence evidence. This appears to be a wording error.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "alg-periodic-orbit-pseudoarclength-continuation",
+      "finding": "alg-periodic-orbit-pseudoarclength-continuation states: “The corrector is [[alg-validated-periodic-orbit-corrector]] in section mode, which appends the pseudo-arclength plane and validates the resulting square residual by Krawczyk inclusion,” followed by “Run [[alg-pseudo-arclength-continuation-with-certified-local-corrector]] with these callbacks and its chart, angle, inverse, and finite-budget checks.” The generic supplier does not have a pluggable Krawczyk acceptance branch: its steps 4–5 require thm-augmented-residual-contraction-certificate, including a Euclidean root ball, approximate-Jacobian inverse bound, a Jacobian-Lipschitz constant on that whole ball, and the specific contraction inequalities. The opened periodic corrector instead returns a Krawczyk-certified rational box, terminal partition, residual/Jacobian enclosures and inverse witness; it does not return that ball/Lipschitz/contraction package. A successful Krawczyk box is not automatically a successful instance of the supplier's particular ball test. The composition therefore lacks an explicit adapter or additional input interface establishing the generic acceptance requirements.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "pseudo-arclength-continuation-and-fold-certificates",
+      "to": "nonlinear-equations-and-newton-methods",
+      "faithful": true,
+      "note": "The local corrector applies the square updated-Jacobian Newton theorem to the augmented residual with the same closed-ball Lipschitz hypothesis, simple-root condition, smaller invariant ball, and KL/2 recurrence. The continuation procedure preserves the finite Newton supplier's residual-stop, singularity, domain and update-budget conventions."
+    },
+    {
+      "from": "local-bifurcation-normal-forms-and-numerical-certificates",
+      "to": "pseudo-arclength-continuation-and-fold-certificates",
+      "faithful": true,
+      "note": "The scalar normal-form theorem specializes the fold supplier with n=1 and v=w=1, retains its normalized curvature sign and local uniqueness, and separately proves the two/one/zero equilibrium count by monotonicity and the intermediate value theorem."
+    },
+    {
+      "from": "periodic-orbit-shooting-collocation-and-floquet-error",
+      "to": "pseudo-arclength-continuation-and-fold-certificates",
+      "faithful": false,
+      "note": "The periodic continuation consumer correctly retains the previous normal, current tangent predictor, rank, angle, chart-offset and conditional-termination qualifications. Its asserted composition substitutes a Krawczyk box corrector without specifying the ball contraction-certificate interface required by the generic supplier; the exact finding is recorded in alerts."
+    }
+  ]
+}

@@ -1,0 +1,1426 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "25",
+  "note": "Contracts reflect the final authored proof steps; finite-precision application remains explicitly conditional on the unresolved batch-1 supplier recorded in batch notes.",
+  "scope": [
+    "lem-hilbert-tikhonov-normal-operator-invertible",
+    "lem-truncated-svd-bias-and-data-noise-decomposition",
+    "lem-hilbert-tikhonov-noise-amplification-bound",
+    "thm-tikhonov-error-chain-with-discretization-and-residual",
+    "cor-l2-inverse-error-budget-and-cross-term-condition",
+    "ex-tikhonov-normal-equation-residual-bound",
+    "ex-diagonal-inverse-noise-amplification",
+    "ex-tikhonov-bias-noise-tradeoff",
+    "ex-quadrature-discretization-residual-before-inversion",
+    "lem-computed-augmented-tikhonov-solve-residual-and-output-error"
+  ],
+  "contracts": {
+    "lem-hilbert-tikhonov-normal-operator-invertible": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).\n\n**The completion convention is the Cauchy-sequence one.**\n[[def-banach-space]] defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness — the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $H$ and $K$ be real or complex Hilbert spaces and let $T\\in\\mathcal B(H,K)$ be a bounded linear operator ([[def-bounded-linear-operator]], [[def-space-of-bounded-linear-operators]]). For fixed $y\\in K$ the map\n\n$$x\\longmapsto\\langle Tx,y\\rangle_K$$\n\nis a bounded linear functional on $H$: it is linear in $x$ because $T$ is linear and the pairing is linear in its first argument, and $|\\langle Tx,y\\rangle_K|\\le\\|Tx\\|\\,\\|y\\|\\le\\|T\\|\\,\\|x\\|\\,\\|y\\|$ by Cauchy–Schwarz and the operator-norm inequality ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-operator-norm]]). By Riesz representation ([[thm-riesz-representation-for-hilbert-space]]) there is therefore a unique vector $T^*y\\in H$ with\n\n$$\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H .$$\n\nThe **Hilbert adjoint** of $T$ is the map\n\n$$T^*:K\\longrightarrow H,\\qquad y\\longmapsto T^*y .$$\n\nIt is the unique map $K\\to H$ satisfying the displayed identity, since two such maps have $\\langle x,(T^*_1-T^*_2)y\\rangle=0$ for all $x$ and hence $(T^*_1-T^*_2)y=0$ by positive definiteness.\n\n**The dictionary with the Banach transpose.** Write $R_H:H\\to H^*$ and $R_K:K\\to K^*$ for the Riesz maps $R_H(x)=\\langle\\,\\cdot\\,,x\\rangle_H$ and $R_K(y)=\\langle\\,\\cdot\\,,y\\rangle_K$, and let $T'\\in\\mathcal B(K^*,H^*)$ be the transpose of $T$, $(T'g)(x)=g(Tx)$ ([[def-transpose-of-a-bounded-operator]]). Then for all $y\\in K$ and $x\\in H$,\n\n$$\\bigl(R_H(T^*y)\\bigr)(x)=\\langle x,T^*y\\rangle_H=\\langle Tx,y\\rangle_K=(R_Ky)(Tx)=\\bigl(T'(R_Ky)\\bigr)(x),$$\n\nso $R_H\\,T^*=T'\\,R_K$. The Hilbert adjoint is thus the Banach transpose conjugated by the Riesz identifications of $H$ and $K$ with their duals; it is a different operator from $T'$ whenever the Riesz maps are conjugate-linear.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A $\\mathbb K$-linear map\n$T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a\nreal constant $C \\ge 0$ such that\n\n$$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$\n\nAny such $C$ is called a **bound** for $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $M$ be a closed linear subspace of a real or complex Hilbert space $H$. Then every $x\\in H$ has a unique decomposition\n\n$$x=m+n,\\qquad m\\in M,\\quad n\\in M^\\perp ,$$\n\nso that $H=M\\oplus M^\\perp$ as a direct sum of the subspace $M$ and its orthogonal complement.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-orthogonality-and-orthogonal-complement",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real or complex inner-product space. Vectors $x,y\\in V$ are\n**orthogonal**, written $x\\perp y$, when\n\n$$\\langle x,y\\rangle=0 .$$\n\nFor a subset $S\\subseteq V$ the **orthogonal complement** of $S$ is\n\n$$S^\\perp:=\\{\\,v\\in V : \\langle v,s\\rangle=0 \\text{ for every } s\\in S\\,\\}.$$\n\n**Orthogonality is symmetric.** If $\\langle x,y\\rangle=0$, then\n$\\langle y,x\\rangle=\\overline{\\langle x,y\\rangle}=0$, so $x\\perp y$ exactly\nwhen $y\\perp x$; in particular the condition defining $S^\\perp$ is symmetric in\nits two arguments.\n\n**$S^\\perp$ is a linear subspace.** Let $s\\in S$ and scalars $a,b$; then\n$\\langle 0,s\\rangle=0$, and if $u,v\\in S^\\perp$ then\n$\\langle au+bv,s\\rangle=a\\langle u,s\\rangle+b\\langle v,s\\rangle=0$ by linearity\nin the first argument, so $au+bv\\in S^\\perp$. Thus $S^\\perp$ is a linear\nsubspace of $V$ ([[def-linear-subspace]]) for every subset $S$, whether or not\n$S$ is a subspace. Moreover $0\\in S^\\perp$ always, and $v\\in V$ lies in\n$\\{0\\}^\\perp$ for every $v$, so $\\{0\\}^\\perp=V$.\n\n**Monotonicity.** If $S\\subseteq T\\subseteq V$, then every vector orthogonal to\nall of $T$ is orthogonal to all of $S$, so $T^\\perp\\subseteq S^\\perp$.\n\n**Nontriviality of orthogonality.** By positive definiteness\n$\\langle v,v\\rangle=\\|v\\|^2=0$ exactly for $v=0$ ([[cor-inner-product-induces-a-norm]]),\nso a vector orthogonal to itself is zero, and $\\{0\\}^\\perp=V$, $V^\\perp=\\{0\\}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Uniqueness in [F2] gives linearity of $A^*$: for scalars $a,b$ and $y_1,y_2\\in Y$, conjugate-linearity of the second slot shows that $aA^*y_1+bA^*y_2$ satisfies the defining identity for $ay_1+by_2$, so it equals $A^*(ay_1+by_2)$. For $w=A^*y$, [F2], [F4] and [F7] give $\\|w\\|^2=\\langle Aw,y\\rangle\\le|\\langle Aw,y\\rangle|\\le\\|A\\|\\|w\\|\\|y\\|$. Dividing when $w\\ne0$, and treating $w=0$ directly, proves $\\|A^*y\\|\\le\\|A\\|\\|y\\|$. Thus $A^*$ is bounded, and composition and addition make $B_\\lambda$ linear and bounded with $\\|B_\\lambda x\\|\\le(\\|A\\|^2+\\lambda)\\|x\\|$. The adjoint identity and conjugate symmetry [F6] give $\\langle B_\\lambda x,z\\rangle=\\langle Ax,Az\\rangle+\\lambda\\langle x,z\\rangle=\\langle x,B_\\lambda z\\rangle$ for all $x,z\\in X$. In particular, $\\langle B_\\lambda x,x\\rangle=\\|Ax\\|^2+\\lambda\\|x\\|^2\\ge\\lambda\\|x\\|^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4], $\\|B_\\lambda x\\|\\,\\|x\\|\\ge |\\langle B_\\lambda x,x\\rangle|=\\langle B_\\lambda x,x\\rangle\\ge \\lambda\\|x\\|^2$. Thus $\\|B_\\lambda x\\|\\ge\\lambda\\|x\\|$ for $x\\ne0$; the same inequality is trivial for $x=0$. Hence $B_\\lambda$ is injective. If $B_\\lambda x_n$ converges, this inequality applied to $x_n-x_m$ makes $(x_n)$ Cauchy; completeness of $X$ and boundedness of $B_\\lambda$ show its limit lies in $\\operatorname{ran}B_\\lambda$. Therefore the range is closed.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $z\\in(\\operatorname{ran}B_\\lambda)^\\perp$, [F8] gives $\\langle z,B_\\lambda x\\rangle=0$ for every $x\\in X$. By conjugate symmetry [F6] this is $\\langle B_\\lambda x,z\\rangle=0$, and the symmetry identity from step 1.1 gives $\\langle x,B_\\lambda z\\rangle=0$ for every $x\\in X$. Taking $x=B_\\lambda z$ and using positive definiteness [F6] yields $B_\\lambda z=0$; injectivity from step 2.1 then gives $z=0$. Thus the closed range has zero orthogonal complement.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F5] and the Countable Choice assumption [A1], a closed subspace with zero orthogonal complement is all of $X$; so $B_\\lambda$ is surjective as well as injective. For $y=B_\\lambda x$, step 2.1 gives $\\|B_\\lambda^{-1}y\\|=\\|x\\|\\le\\|y\\|/\\lambda$, proving $\\|B_\\lambda^{-1}\\|\\le1/\\lambda$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns operators on Hilbert spaces; the zero-space case is covered under degenerate."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the zero adjoint image without division. Step 2.1 explicitly covers x=0; when A=0, B_lambda=lambda I and steps 3.1–4.1 still give the inverse bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1–4.1 apply to one-dimensional Hilbert spaces; step 1.1 explicitly proves adjoint linearity and boundedness."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For the zero Hilbert space, the unique endomorphism is bijective; step 2.1 and step 4.1 remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The endpoint $\\lambda=0$ is excluded by the stated hypothesis $\\lambda>0$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 invokes the orthogonal-decomposition theorem under exactly Countable Choice [A1,F5]; no full Choice is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Independently checked steps 1.1–4.1 and all ten direct suppliers. Linear-first complex adjoint identities and boundedness are correct; coercivity gives injectivity and a Cauchy preimage for a convergent image sequence. Closed range plus zero orthogonal complement gives surjectivity under the explicitly assumed Countable Choice. Unit-ball operator norm handles X=0 and A=0, and lambda>0 excludes division by zero. No compactness or rate premise is imported. Fresh focused continuation: rechecked current Proof 1.1–4.1 and exact supplier Statements/Definitions; Countable Choice, linear-first complex adjoint, coercive closed range and zero orthogonal complement still justify the complete claim, including X=0 and A=0. Original review above remains historical evidence."
+      }
+    },
+    "lem-hilbert-tikhonov-noise-amplification-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hilbert-tikhonov-normal-operator-invertible",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ and $Y$ be real or complex\nHilbert spaces and let $A:X\\to Y$ be bounded, with Hilbert adjoint $A^*$. For\n$\\lambda>0$, define\n\n$$B_\\lambda:=A^*A+\\lambda I_X.$$\n\nThen $B_\\lambda:X\\to X$ is bijective and\n\n$$\\|B_\\lambda^{-1}\\|\\le\\frac1\\lambda.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $H$ and $K$ be real or complex Hilbert spaces and let $T\\in\\mathcal B(H,K)$ be a bounded linear operator ([[def-bounded-linear-operator]], [[def-space-of-bounded-linear-operators]]). For fixed $y\\in K$ the map\n\n$$x\\longmapsto\\langle Tx,y\\rangle_K$$\n\nis a bounded linear functional on $H$: it is linear in $x$ because $T$ is linear and the pairing is linear in its first argument, and $|\\langle Tx,y\\rangle_K|\\le\\|Tx\\|\\,\\|y\\|\\le\\|T\\|\\,\\|x\\|\\,\\|y\\|$ by Cauchy–Schwarz and the operator-norm inequality ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-operator-norm]]). By Riesz representation ([[thm-riesz-representation-for-hilbert-space]]) there is therefore a unique vector $T^*y\\in H$ with\n\n$$\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H .$$\n\nThe **Hilbert adjoint** of $T$ is the map\n\n$$T^*:K\\longrightarrow H,\\qquad y\\longmapsto T^*y .$$\n\nIt is the unique map $K\\to H$ satisfying the displayed identity, since two such maps have $\\langle x,(T^*_1-T^*_2)y\\rangle=0$ for all $x$ and hence $(T^*_1-T^*_2)y=0$ by positive definiteness.\n\n**The dictionary with the Banach transpose.** Write $R_H:H\\to H^*$ and $R_K:K\\to K^*$ for the Riesz maps $R_H(x)=\\langle\\,\\cdot\\,,x\\rangle_H$ and $R_K(y)=\\langle\\,\\cdot\\,,y\\rangle_K$, and let $T'\\in\\mathcal B(K^*,H^*)$ be the transpose of $T$, $(T'g)(x)=g(Tx)$ ([[def-transpose-of-a-bounded-operator]]). Then for all $y\\in K$ and $x\\in H$,\n\n$$\\bigl(R_H(T^*y)\\bigr)(x)=\\langle x,T^*y\\rangle_H=\\langle Tx,y\\rangle_K=(R_Ky)(Tx)=\\bigl(T'(R_Ky)\\bigr)(x),$$\n\nso $R_H\\,T^*=T'\\,R_K$. The Hilbert adjoint is thus the Banach transpose conjugated by the Riesz identifications of $H$ and $K$ with their duals; it is a different operator from $T'$ whenever the Riesz maps are conjugate-linear.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $x=R_\\lambda g$. Under [A1], [F2] gives the Hilbert adjoint used in the definition of $R_\\lambda$. By [F1], $(A^*A+\\lambda I_X)x=A^*g$. Pairing with $x$ and using [F2] gives $\\langle A^*Ax,x\\rangle_X=\\langle Ax,Ax\\rangle_Y=\\|Ax\\|^2$ and $\\langle A^*g,x\\rangle_X=\\langle g,Ax\\rangle_Y$ by [F2]–[F4]. Hence $\\|Ax\\|^2+\\lambda\\|x\\|^2=\\langle g,Ax\\rangle_Y$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The left side of step 1.1 is real and nonnegative. By [F5], with $s=\\|Ax\\|$ and $t=\\|g\\|$, step 1.1 gives $\\lambda\\|x\\|^2=\\langle g,Ax\\rangle-s^2\\le |\\langle g,Ax\\rangle|-s^2\\le ts-s^2$. Completing the square gives $ts-s^2=\\frac{t^2}{4}-(s-t/2)^2\\le t^2/4$. Since $\\lambda>0$, taking nonnegative square roots yields $\\|R_\\lambda g\\|=\\|x\\|\\le\\|g\\|/(2\\sqrt\\lambda)$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The pointwise inequality of step 2.1 holds for every $g\\in Y$. Taking the supremum over the unit ball in [F6] gives $\\|R_\\lambda\\|\\le1/(2\\sqrt\\lambda)$.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is pointwise for a vector $g$; zero data is handled in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "With $g=0$, step 1.1 forces $x=0$ and the estimate in step 2.1 is equality at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The energy proof is dimension-free and therefore includes one-dimensional Hilbert spaces (Statement)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For $A=0$, $R_lambda=0$ and the claimed bound holds (Statement)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The case $\\lambda=0$ is excluded; invertibility is asserted only for $\\lambda>0$. "
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The adjoint definition is used under the stated Countable Choice assumption [A1]; no full Choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-sided operator norm bound and contains no biconditional implication to split."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-sided operator norm bound and contains no biconditional implication to split."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Checked steps 1.1–3.1 and all seven direct suppliers. The normal equation paired with x has real nonnegative energy even over C with the linear-first convention. Cauchy–Schwarz and ts-s^2<=t^2/4 prove the pointwise estimate, then the unit-ball supremum gives the operator bound. Countable Choice matches the inverse and adjoint prerequisites; lambda>0, g=0, A=0 and zero Hilbert spaces cause no division issue. No compactness or source condition is needed. Reader/refuter raise no defect here. Fresh focused continuation: rechecked all three current steps and actual supplier hypotheses. Complex energy is real nonnegative; completing the square gives the sharp constant, including g=0 and zero spaces, with Countable Choice retained."
+      }
+    },
+    "thm-tikhonov-error-chain-with-discretization-and-residual": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-hilbert-tikhonov-normal-operator-invertible",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ and $Y$ be real or complex\nHilbert spaces and let $A:X\\to Y$ be bounded, with Hilbert adjoint $A^*$. For\n$\\lambda>0$, define\n\n$$B_\\lambda:=A^*A+\\lambda I_X.$$\n\nThen $B_\\lambda:X\\to X$ is bijective and\n\n$$\\|B_\\lambda^{-1}\\|\\le\\frac1\\lambda.$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hilbert-tikhonov-noise-amplification-bound",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be bounded, with Hilbert adjoint $A^*$. For $\\lambda>0$, put\n$R_\\lambda=(A^*A+\\lambda I_X)^{-1}A^*$, which is well-defined by\n[[lem-hilbert-tikhonov-normal-operator-invertible]]. Then for every $g\\in Y$,\n\n$$\\|R_\\lambda g\\|\\le\\frac{\\|g\\|}{2\\sqrt\\lambda},\\qquad \\|R_\\lambda\\|\\le\\frac1{2\\sqrt\\lambda}.$$\n\nThe proof uses the normal equation and the Hilbert-space inner product; it\ndoes not use a compact-operator convergence rate or a source condition.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $H$ and $K$ be real or complex Hilbert spaces and let $T\\in\\mathcal B(H,K)$ be a bounded linear operator ([[def-bounded-linear-operator]], [[def-space-of-bounded-linear-operators]]). For fixed $y\\in K$ the map\n\n$$x\\longmapsto\\langle Tx,y\\rangle_K$$\n\nis a bounded linear functional on $H$: it is linear in $x$ because $T$ is linear and the pairing is linear in its first argument, and $|\\langle Tx,y\\rangle_K|\\le\\|Tx\\|\\,\\|y\\|\\le\\|T\\|\\,\\|x\\|\\,\\|y\\|$ by Cauchy–Schwarz and the operator-norm inequality ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-operator-norm]]). By Riesz representation ([[thm-riesz-representation-for-hilbert-space]]) there is therefore a unique vector $T^*y\\in H$ with\n\n$$\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H .$$\n\nThe **Hilbert adjoint** of $T$ is the map\n\n$$T^*:K\\longrightarrow H,\\qquad y\\longmapsto T^*y .$$\n\nIt is the unique map $K\\to H$ satisfying the displayed identity, since two such maps have $\\langle x,(T^*_1-T^*_2)y\\rangle=0$ for all $x$ and hence $(T^*_1-T^*_2)y=0$ by positive definiteness.\n\n**The dictionary with the Banach transpose.** Write $R_H:H\\to H^*$ and $R_K:K\\to K^*$ for the Riesz maps $R_H(x)=\\langle\\,\\cdot\\,,x\\rangle_H$ and $R_K(y)=\\langle\\,\\cdot\\,,y\\rangle_K$, and let $T'\\in\\mathcal B(K^*,H^*)$ be the transpose of $T$, $(T'g)(x)=g(Tx)$ ([[def-transpose-of-a-bounded-operator]]). Then for all $y\\in K$ and $x\\in H$,\n\n$$\\bigl(R_H(T^*y)\\bigr)(x)=\\langle x,T^*y\\rangle_H=\\langle Tx,y\\rangle_K=(R_Ky)(Tx)=\\bigl(T'(R_Ky)\\bigr)(x),$$\n\nso $R_H\\,T^*=T'\\,R_K$. The Hilbert adjoint is thus the Banach transpose conjugated by the Riesz identifications of $H$ and $K$ with their duals; it is a different operator from $T'$ whenever the Riesz maps are conjugate-linear.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-tikhonov-regularised-least-squares",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$, let $b\\in\\mathbb F^m$, and let\n$\\lambda\\in\\mathbb R$ satisfy $\\lambda>0$. The **Tikhonov regularised\nleast-squares objective** is the map\n\n$$ J_\\lambda(x):=\\|Ax-b\\|_2^2+\\lambda\\|x\\|_2^2 \\qquad(x\\in\\mathbb F^n), $$\n\nwhere $\\|\\cdot\\|_2$ is the Euclidean norm induced by the standard inner product\n([[def-inner-product-norm]]).\n\nThe parameter $\\lambda$ is part of the problem data. The second term penalises\nlarge norms of $x$, so the regularised problem is not the same optimisation\nproblem as the unregularised least-squares problem.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$, let $b\\in\\mathbb F^m$, and let\n$\\lambda\\in\\mathbb R$ satisfy $\\lambda>0$. Then\nthe Tikhonov objective\n\n$$J_\\lambda(x)=\\|Ax-b\\|_2^2+\\lambda\\|x\\|_2^2$$\n\nis strictly convex and has the unique minimiser\n\n$$x_\\lambda=(A^*A+\\lambda I)^{-1}A^*b.$$",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-compact-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A linear map $T:X\\to Y$\n([[def-linear-map]]) is a **compact operator** when the image of every bounded\nsubset of $X$ ([[def-metric-bounded-diameter]]) has compact closure in $Y$\n([[def-metric-compactness]]); explicitly, for every bounded $A\\subseteq X$ the\nclosure $\\overline{T(A)}$ in $Y$ is a compact subset of $Y$. The set of compact\noperators $X\\to Y$ is written $\\mathcal K(X,Y)$. The metric used here is $d(x,y)=\\|x-y\\|$, supplied over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[lem-complex-norm-realification-is-a-real-norm]].\n\n**The closed unit ball suffices.** Put\n$\\overline B_X:=\\{x\\in X:\\|x\\|\\le 1\\}$\n([[def-metric-ball]]). Then $T$ is compact if and only if\n$\\overline{T(\\overline B_X)}$ is a compact subset of $Y$.\n\nIndeed, if $T$ is compact then $\\overline B_X$ is bounded, because\n$\\overline B_X\\subseteq B(0,2)$ while $B(0,2)$ is bounded and a subset of a\nbounded set is bounded, so $T(\\overline B_X)$ has compact closure. Conversely\nassume $\\overline{T(\\overline B_X)}$ compact and let $A\\subseteq X$ be bounded.\nIf $A=\\varnothing$ then $T(A)=\\varnothing$, whose closure is empty and hence\ncompact. Otherwise $A\\subseteq B(x_0,r)$ for some $x_0\\in X$ and real $r>0$, so\nevery $x\\in A$ satisfies $\\|x\\|\\le\\|x_0\\|+r=:R$; if $R>0$ then\n$A\\subseteq R\\,\\overline B_X$ and if $R=0$ then $A\\subseteq\\{0\\}$, so in either\ncase $T(A)\\subseteq R\\,\\overline{T(\\overline B_X)}$. Scalar multiplication by\n$R$ is continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]),\nso $R\\,\\overline{T(\\overline B_X)}$ is a compact subset of $Y$\n([[thm-compactness-under-continuous-maps]]), hence closed\n([[thm-compact-subset-is-closed-and-bounded]]); therefore\n$\\overline{T(A)}\\subseteq R\\,\\overline{T(\\overline B_X)}$ is a closed subset of a\ncompact set, hence compact, and $T$ is compact.\n\n**A compact operator is bounded.** If $T$ is compact then the compact set\n$\\overline{T(\\overline B_X)}$ is bounded\n([[thm-compact-subset-is-closed-and-bounded]]), so there is a real $C\\ge0$ with\n$\\|Tx\\|\\le C$ for every $x\\in\\overline B_X$ and hence $\\|Tx\\|\\le C\\|x\\|$ for\nevery $x\\in X$; thus $T$ is a bounded linear operator\n([[def-bounded-linear-operator]]). This is a consequence of compactness, not a\nhypothesis of the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).\n\n**The completion convention is the Cauchy-sequence one.**\n[[def-banach-space]] defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness — the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-computed-augmented-tikhonov-solve-residual-and-output-error",
+          "source_section": "Statement",
+          "quote": "Let stored $A\\in\\mathbb F^{m\\times n}$ and $y\\in\\mathbb F^m$ be real or complex, $m,n\\ge1$, and let stored real $\\lambda>0$. Let $x_\\lambda=(A^*A+\\lambda I)^{-1}A^*y$. Compute $\\alpha=\\operatorname{fl}(\\sqrt\\lambda)>0$ under the successful normal-range square-root model, and solve the stored augmented problem $\\min_x\\|[A;\\alpha I]x-[y;0]\\|_2$ by scaled Householder QR and rounded substitution. For complex inputs use the realification described below, so the backend uses only real triangular divisions. Every operation must succeed; failed pivots, invalid operations and out-of-range nonzero intermediates return range-failure.\n\nFor any returned $\\widehat x$, evaluate $\\widehat r$ and its certified allowance $\\rho$ by [[lem-rounded-linear-and-normal-residual-certificates]] for the intended residual $r=(A^*A+\\lambda I)\\widehat x-A^*y$. Then\n$$\\|\\widehat x-x_\\lambda\\|_2\\le\\frac{\\|\\widehat r\\|_2+\\rho}{\\lambda}.$$\nThis bounds returned-output roundoff relative to the exact direct-solve target $x_{\\rm stop}=x_\\lambda$. It also certifies the solve term in any larger analytic error chain, irrespective of the backend. The representation of $\\sqrt\\lambda$ contributes no hidden change of target: $|\\alpha^2-\\lambda|\\le(2u+u^2)\\lambda$. If residual evaluation instead uses exact $\\alpha^2$, add $|\\alpha^2-\\lambda|\\|\\widehat x\\|_2$ to its allowance; rounding a computed $\\alpha^2$ needs its own scalar error as well.\n\nThe backend's nearby least-squares conclusion holds under the completed QR/solve hypotheses and nonsingularity condition. In real dimension, write $C=[A;\\alpha I]$ and $\\epsilon_Q=\\beta_Q\\|C\\|_F$. A sufficient check is $\\epsilon_Q<\\alpha$ and $\\|\\Delta R\\|_F<\\alpha-\\epsilon_Q$. An explicit certified nonsingularity check may replace this sufficient margin.\n\nFor a Hilbert-space discrete operator, supply isometries $U:\\mathbb F^n\\to X$ and $V:\\mathbb F^m\\to Y$ with $A_h=VAU^*$, and return $U\\widehat x$. With coefficient datum $y_c=V^*y_\\delta$, the exact normal solution lies in $\\operatorname{ran}U$ and the coefficient residual lifts isometrically, so the same certificate applies to $r_h$; likewise use $V^*y_{h,\\delta}$ for $r_{h,h}$. If a stored coefficient datum $\\widehat y_c$ differs from $V^*y$ by at most $\\epsilon_y$, add $\\|A\\|_2\\epsilon_y$ to the residual allowance. If the returned output also has an orthogonal component $z\\perp\\operatorname{ran}U$ of norm at most $\\epsilon_\\perp$, add $\\lambda\\epsilon_\\perp$. Finite rank alone does not supply these coordinate or output certificates.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "By [F7], $A$ is bounded, and [F8] supplies the Hilbert-space hypotheses. By [F1], both shifted normal operators are invertible, so the displayed $R_\\lambda$ and $R_{\\lambda,h}$ are defined. Multiplying their definitions by their normal operators gives $(A^*A+\\lambda I)R_\\lambda=A^*$ and $(A_h^*A_h+\\lambda I)R_{\\lambda,h}=A_h^*$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "Adding and subtracting the intermediate vectors $R_\\lambda y$, $R_\\lambda y_\\delta$, and $R_{\\lambda,h}y_\\delta$ cancels the intervening terms and proves the stated four-term identity. Since $y_\\delta=y+e$, [F2] gives $\\|R_\\lambda y-R_\\lambda y_\\delta\\|=\\|R_\\lambda e\\| \\le\\delta/(2\\sqrt\\lambda)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.3",
+          "claim": "Adding and subtracting $x_{\\mathrm{stop}}$ gives the optional stopping/roundoff identity. The normal equation for $R_{\\lambda,h}y_\\delta$ and the definition of $r_{\\mathrm{stop}}$ imply $(A_h^*A_h+\\lambda I)(x_{\\mathrm{stop}}-R_{\\lambda,h}y_\\delta) =r_{\\mathrm{stop}}$. By [F1], the stopping term is at most $\\|r_{\\mathrm{stop}}\\|/\\lambda$; the other term is exactly the stated roundoff difference.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.4",
+          "claim": "In the refined datum case, $y_\\delta-y_{h,\\delta}=(Ax^\\dagger+e)-(A_hx^\\dagger+e)=d_h$. Inserting $R_\\lambda y_{h,\\delta}$ and $R_{\\lambda,h}y_{h,\\delta}$ into the chain therefore gives the displayed five-term identity by cancellation.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Let $z=R_{\\lambda,h}y_\\delta$. The normal equation in step 1.1 gives $(A_h^*A_h+\\lambda I)(\\widetilde x-z)=r_h$. By [F1], $\\|\\widetilde x-z\\|\\le\\|r_h\\|/\\lambda$. The triangle inequality [F9] applied to the four-term identity, using step 1.2 for its noise term, proves the stated total error bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F9",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "claim": "Applying [F2] to $d_h$ bounds its pre-inversion contribution by $\\|R_\\lambda d_h\\|\\le\\|d_h\\|/(2\\sqrt\\lambda)$. Applying [F1] to $r_{h,h}=(A_h^*A_h+\\lambda I)(\\widetilde x_h-R_{\\lambda,h}y_{h,\\delta})$ gives the stated refined solve-residual bound. Under the residual-evaluation hypothesis, the triangle inequality [F9] gives $\\|r_{h,h}\\|\\le\\|\\widehat r_{h,h}\\|+\\rho_{h,h}$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F9",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "In the finite-matrix case with $A_h=A$ and the exact regularized output $\\widetilde x=R_\\lambda y_\\delta$, [F5]–[F6] identify $R_\\lambda$ with the canonical Tikhonov minimizer. The baseline identity from step 1.2 then reduces to the displayed finite-matrix bias/noise formula.",
+          "step": "2.3",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "By [F4], an assumed operator-norm bound $\\|R_\\lambda-R_{\\lambda,h}\\|\\le\\eta_{\\lambda,h}$ gives $\\|(R_\\lambda-R_{\\lambda,h})y_\\delta\\| \\le\\eta_{\\lambda,h}\\|y_\\delta\\|$. Also, the triangle inequality [F9] gives $\\|r_h\\|\\le\\|\\widehat r_h\\|+\\|r_h-\\widehat r_h\\| \\le\\|\\widehat r_h\\|+\\rho_h$ under the stated residual-evaluation hypothesis. These are conditional estimates, not automatic stability claims.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.2",
+          "claim": "For stored finite data, or for supplied isometric coordinates $A_h=VMU^*$ and returned output $U\\widehat x$, apply [F10] to the coefficient matrix $M$ (the matrix case uses identity embeddings) and datum $g=y_\\delta$ or $g=y_{h,\\delta}$. The exact normal residual lifts isometrically to $r_h$ or $r_{h,h}$, with any certified coordinate-data and orthogonal-output allowances from [F10]. Hence steps 2.2 and 3.1 apply. For the exact direct augmented solve, $x_{\\mathrm{stop}}=R_{\\lambda,h}g$, and [F10] bounds the returned-output term by $(\\|\\widehat r\\|+\\rho)/\\lambda$. The analytic identity and its independent bias, noise and discretization terms are unchanged.",
+          "step": "4.1",
+          "inputs": [
+            "F10",
+            "step 1.3",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement decomposes Tikhonov error into bias, noise, operator discretization and certified solve terms, with a separate refined datum chain. Proof step 1.1 applies the positive shift lambda I on the Hilbert spaces, which always contain their zero vectors. A zero-dimensional X or zero-rank A_h is not excluded by an invented positive-dimension condition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement assumes lambda>0 but permits delta=0 and exact zero residuals. Proof steps 1.2, 2.1 and 2.2 set the corresponding noise and solve contributions to zero without dividing by delta, r_h or the unknown error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 2.3 specializes the Hilbert identity to finite matrices without a dimension lower bound beyond the matrix convention; for a scalar A the same normal inverse and residual division by lambda>0 apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.1 uses the positive shifted normal operator, so A may be rank deficient or zero without making the regularized inverse singular. The excluded lambda=0 limit is not claimed; arithmetic bounds in step 4.1 remain conditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement decomposes Tikhonov error into bias, noise, operator discretization and certified solve terms, with a separate refined datum chain. The chain assumes lambda>0 and certified nonnegative error allowances; it makes no lambda=0 inversion or closed-interval regularization-endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit in the analytic Hilbert statement and original adjoint/projection suppliers. The finite-coordinate arithmetic application uses no additional choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement decomposes Tikhonov error into bias, noise, operator discretization and certified solve terms, with a separate refined datum chain. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement decomposes Tikhonov error into bias, noise, operator discretization and certified solve terms, with a separate refined datum chain. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Read all nine proof steps and twelve direct suppliers. Both normal inverses exist under explicit Countable Choice, boundedness and lambda>0. Four-term and refined five-term identities telescope with the correct sign R_lambda d_h; the same noise e is used in both data. Coercivity bounds each exact residual/lambda, while computed residuals, operator perturbations and stopping-output errors retain separate conditional certificates. Finite matrix minimizer convention is penalty coefficient lambda (Hansen square convention is explicitly distinguished). Finite-rank alone does not imply a numerical realization; step 4.1 uses supplied isometric coordinates and the reviewed computed-solve lemma. Zero noise, exact solve, A=A_h, zero spaces and no discretization all specialize consistently. No rate, automatic success or RSS claim is inferred. Fresh focused continuation: rechecked all nine current steps, actual inverse/noise/computed-solve interfaces and finite minimizer convention. Shared e gives positive R_lambda d_h in the five-term identity; exact residual, certified evaluation, stopping/output, discretization and operator perturbation remain distinct conditional terms. Producer extraction changes no backend hypothesis or analytic conclusion."
+      }
+    },
+    "lem-truncated-svd-bias-and-data-noise-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$ have singular value decomposition\n$A=U\\Sigma V^*$, and let $\\tau\\ge0$ be a declared threshold. The\n**truncated singular-value pseudoinverse at threshold $\\tau$** is\n\n$$ A_\\tau^+ := V\\Sigma_\\tau^+U^*, $$\n\nwhere $\\Sigma_\\tau^+\\in M_{n\\times m}(\\mathbb F)$ is the transposed-shape\ndiagonal matrix whose $i$th diagonal entry is $\\sigma_i^{-1}$ when\n$\\sigma_i>\\tau$ and is $0$ when $\\sigma_i\\le\\tau$; every off-diagonal entry is\n$0$.\n\nThe threshold is part of the definition, exactly as in\n[[def-numerical-rank-relative-to-a-norm-scale-and-tolerance]]: changing\n$\\tau$ changes which singular directions are retained.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By linearity and $b=Ax^\\dagger+e$, $x^\\dagger-A_\\tau^+b=(I-A_\\tau^+A)x^\\dagger-A_\\tau^+e$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The definition in [F2] and the SVD in [F1] give $A_\\tau^+A x^\\dagger=\\sum_{i\\in I_\\tau}\\langle x^\\dagger,v_i\\rangle v_i$; expanding $x^\\dagger$ in the full orthonormal basis $(v_i)$ therefore makes $(I-A_\\tau^+A)x^\\dagger=\\sum_{i\\in J_\\tau}\\langle x^\\dagger,v_i\\rangle v_i$. Likewise, $A_\\tau^+e=\\sum_{i\\in I_\\tau} \\sigma_i^{-1}\\langle e,u_i\\rangle v_i$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $I_\\tau$ is empty, [F2] makes $A_\\tau^+=0$. Otherwise orthonormality of the retained $v_i$ and [F1] give $\\|A_\\tau^+e\\|^2=\\sum_{i\\in I_\\tau} |\\langle e,u_i\\rangle|^2/\\sigma_i^2\\le (\\max_{i\\in I_\\tau}\\sigma_i^{-1})^2\\sum_{i\\in I_\\tau}|\\langle e,u_i\\rangle|^2$. Since $(u_1,\\ldots,u_m)$ is an orthonormal basis of $\\mathbb F^m$, write $e=\\sum_{i=1}^m\\langle e,u_i\\rangle u_i$; conjugate symmetry and orthonormality give $\\|e\\|^2=\\sum_{i=1}^m|\\langle e,u_i\\rangle|^2$. Consequently $\\sum_{i\\in I_\\tau}|\\langle e,u_i\\rangle|^2\\le\\|e\\|^2$. Taking nonnegative square roots proves the noise bound and the stated bias/noise split.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty retained set $I_\tau=\u000barnothing$ is handled explicitly in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When $e=0$, step 1.1 leaves only the truncation-bias term."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a single positive singular value, the sums in the Statement reduce to one retained or discarded coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For $A=0$, $I_\tau=\u000barnothing$, $A_\tau^+=0$, and the entire target is bias (step 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At $sigma_i=\tau$, the strict rule $sigma_i>\tau$ discards that direction (F2, step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite-dimensional SVD supplier uses finite orthonormal bases; this proof requires no arbitrary-family choice (Statement)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a decomposition and bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a decomposition and bound, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Independently checked steps 1.1–3.1 and the SVD, threshold definition and inner-product suppliers. Strict sigma>tau matches the definition; full right-basis expansion includes kernel bias. Orthonormal expansion of e proves the noise estimate without a missing Bessel premise. Empty retained set, rank zero, zero noise, tau=0 and equality at the threshold are covered; complex coefficients use the linear-first convention. No defect found. Fresh focused continuation: full current proof and exact SVD/filter statements rechecked; tau=0, sigma=tau, rank zero and empty retained set respect the strict filter, and full finite orthonormal expansions justify both terms without extra choice."
+      }
+    },
+    "cor-l2-inverse-error-budget-and-cross-term-condition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-tikhonov-error-chain-with-discretization-and-residual",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces, let\n$A:X\\to Y$ be compact (hence bounded), and let $A_h:X\\to Y$ be a bounded\ndiscrete operator whose range is a finite-dimensional subspace of $Y$. For\n$\\lambda>0$,\ndefine\n\n$$R_\\lambda=(A^*A+\\lambda I_X)^{-1}A^*,\\qquad R_{\\lambda,h}=(A_h^*A_h+\\lambda I_X)^{-1}A_h^*.$$\n\nThese maps are well-defined by [[lem-hilbert-tikhonov-normal-operator-invertible]]. Let $x^\\dagger\\in X$, $y=Ax^\\dagger$, $y_\\delta=y+e$ with $\\|e\\|\\le\\delta$ and $\\delta\\ge0$, and let $\\widetilde x\\in X$. Define the exact discrete normal-equation residual\n\n$$r_h=(A_h^*A_h+\\lambda I_X)\\widetilde x-A_h^*y_\\delta.$$\n\nThen the following chain is exact:\n\n$$x^\\dagger-\\widetilde x=(x^\\dagger-R_\\lambda y) +(R_\\lambda y-R_\\lambda y_\\delta) +(R_\\lambda y_\\delta-R_{\\lambda,h}y_\\delta) +(R_{\\lambda,h}y_\\delta-\\widetilde x).$$\n\nIts norm satisfies\n\n$$\\|x^\\dagger-\\widetilde x\\|\\le \\|x^\\dagger-R_\\lambda y\\|+\\frac{\\delta}{2\\sqrt\\lambda} +\\|(R_\\lambda-R_{\\lambda,h})y_\\delta\\|+\\frac{\\|r_h\\|}{\\lambda}.$$\n\nThe first term is regularization bias, the second is data noise, the third is the regularized-operator discretization difference, and the fourth is the solve residual. The third term receives a numerical bound only when an operator-perturbation bound is supplied: if $\\|R_\\lambda-R_{\\lambda,h}\\|\\le\\eta_{\\lambda,h}$, it is at most $\\eta_{\\lambda,h}\\|y_\\delta\\|$. If residual evaluation returns $\\widehat r_h$ with a certified $\\|r_h-\\widehat r_h\\|\\le\\rho_h$, the last term is at most $(\\|\\widehat r_h\\|+\\rho_h)/\\lambda$. If an algorithm has a specified exact-arithmetic stopping output $x_{\\mathrm{stop}}$ and returns a computed output $\\widetilde x$, the last difference can further split as\n\n$$R_{\\lambda,h}y_\\delta-\\widetilde x= (R_{\\lambda,h}y_\\delta-x_{\\mathrm{stop}}) +(x_{\\mathrm{stop}}-\\widetilde x).$$\n\nWriting $r_{\\mathrm{stop}}=(A_h^*A_h+\\lambda I_X)x_{\\mathrm{stop}} -A_h^*y_\\delta$, the first term is at most $\\|r_{\\mathrm{stop}}\\|/\\lambda$; the second is the separate returned-output roundoff term. Any bound on that roundoff or on residual-evaluation error requires its own arithmetic hypotheses. For a discretized datum $y_{h,\\delta}=A_hx^\\dagger+e$ formed before inversion, put $d_h=(A-A_h)x^\\dagger=y_\\delta-y_{h,\\delta}$. Let $\\widetilde x_h\\in X$ be a computed discrete output. The corresponding exact refinement is\n\n$$x^\\dagger-\\widetilde x_h=(x^\\dagger-R_\\lambda y) +(R_\\lambda y-R_\\lambda y_\\delta) +R_\\lambda d_h+(R_\\lambda-R_{\\lambda,h})y_{h,\\delta} +(R_{\\lambda,h}y_{h,\\delta}-\\widetilde x_h),$$\n\nso the forward residual discarded by quadrature or collocation is counted before inversion as $R_\\lambda d_h$, with $\\|R_\\lambda d_h\\|\\le\\|d_h\\|/(2\\sqrt\\lambda)$. The separate operator discretization and solve terms remain. For this refined chain, define $r_{h,h}=(A_h^*A_h+\\lambda I_X)\\widetilde x_h-A_h^*y_{h,\\delta}$; then $\\|R_{\\lambda,h}y_{h,\\delta}-\\widetilde x_h\\|\\le\\|r_{h,h}\\|/\\lambda$. If its evaluation returns $\\widehat r_{h,h}$ with a certified $\\|r_{h,h}-\\widehat r_{h,h}\\|\\le\\rho_{h,h}$, the last term is at most $(\\|\\widehat r_{h,h}\\|+\\rho_{h,h})/\\lambda$. No rate for $d_h$, no operator perturbation estimate, and no floating-point residual bound is implicit. When $X,Y$ are finite-dimensional and $b=Ax^\\dagger+e$, the same identity is the canonical Tikhonov bias/noise formula\n\n$$x^\\dagger-A^\\#_\\lambda b=(I-A^\\#_\\lambda A)x^\\dagger-A^\\#_\\lambda e, \\qquad A^\\#_\\lambda=(A^*A+\\lambda I)^{-1}A^*.$$\n\nHere $\\lambda$ is the coefficient of $\\|x\\|^2$ in\n$\\|Ax-b\\|^2+\\lambda\\|x\\|^2$.\n\nFor stored finite matrices, [[lem-computed-augmented-tikhonov-solve-residual-and-output-error]] supplies the concrete augmented-QR or independently certified-residual application: take its $\\rho$ as $\\rho_h$ with datum $y_\\delta$, or as $\\rho_{h,h}$ with datum $y_{h,\\delta}$. It bounds returned-output roundoff for the exact direct-solve target and retains explicit real/complex realization, square-root representation, successful-operation and nonsingularity conditions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-calligraphic-l-p-on-a-measure-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $p$ be a real number with\n$0<p<\\infty$. Write $\\mathcal M(X,\\mu)$ for the measurable functions\n$f:X\\to\\mathbb R$. For $f\\in\\mathcal M(X,\\mu)$ define the extended-valued\n$p$-functional\n\n$$\\|f\\|_p:=\\begin{cases}\\left(\\int |f|^p\\,d\\mu\\right)^{1/p},&\\displaystyle\\int |f|^p\\,d\\mu<\\infty,\\\\+\\infty,&\\displaystyle\\int |f|^p\\,d\\mu=+\\infty.\\end{cases}$$\n\nThe finite power uses [[def-real-power]], while the second clause avoids\napplying real powers to the extended value $+\\infty$. The integral is the\nnonnegative Lebesgue integral of [[def-nonnegative-lebesgue-integral]].\n\nThe class\n\n$$\\mathcal L^p(\\mu):=\\{f\\in\\mathcal M(X,\\mu): \\|f\\|_p<\\infty\\}$$\n\nis the measurable-function space used on this page before passing to\nalmost-everywhere equivalence classes.\n\nFor $1\\le p<\\infty$, the pointwise operations make $\\mathcal L^p(\\mu)$ a real\nvector space by\n[[thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-minkowski-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $1\\le p<\\infty$ and $f,g\\in\\mathcal L^p(\\mu)$, then\n   $$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p.$$\n2. If $f,g\\in L^\\infty(\\mu)$, then\n   $$\\|f+g\\|_\\infty\\le\\|f\\|_\\infty+\\|g\\|_\\infty.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], each realization's inverse-problem error is the sum of its finite chain increments. Put $F_k=\\sum_{j=1}^k f_j$. Since $F_1=f_1\\in\\mathcal L^2$, induction using [F3] shows $F_k\\in\\mathcal L^2$ and $\\|F_k\\|_2\\le\\sum_{j=1}^k\\|f_j\\|_2$ for every $k\\le N$. The pointwise triangle inequality [F10] gives $0\\le g\\le F_N$, hence [F4] applied to their squares gives $\\|g\\|_2\\le\\|F_N\\|_2\\le\\sum_j\\|f_j\\|_2$. This is the claimed $L^2$ error bound by the definition of $\\|\\cdot\\|_{2,H}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F10",
+            "algebra",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At each $\\omega$, expanding the squared Hilbert norm and pairing the two cross terms gives $g(\\omega)^2=\\sum_j f_j(\\omega)^2+ 2\\sum_{i<j}\\operatorname{Re}\\langle d_i(\\omega),d_j(\\omega)\\rangle_H$. By [F5], $|\\langle d_i,d_j\\rangle_H|\\le f_i f_j$, and $(f_i-f_j)^2\\ge0$ gives $2f_if_j\\le f_i^2+f_j^2$. Thus each cross term is integrable: [F2] makes each $f_i^2$ integrable, [F7] makes their finite sum integrable, and [F4] bounds the integral of the absolute cross term by that sum. All squared-norm terms are integrable by [F2]. The expansion uses [F9] and [F8]. Integrating the finite identity and using [F6]–[F7] gives the displayed cross-term formula; the formula gives exact root-sum-square if and only if the finite sum of cross integrals is zero. Separate vanishing is sufficient, but nonzero cross integrals may cancel.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes a list of N>=1 increments, so the main chain is nonempty. Proof step 2.1 also covers N=1, when the pair-index cross sum is empty and zero, yielding exact root-sum-square for the sole increment."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If all increments vanish, step 2.1 gives both sides zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For $N=1$ the Minkowski inequality is equality and the cross sum in step 2.1 is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "On a measure-zero space the displayed $L^2$ norms and cross integrals vanish (step 2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or parameter endpoint is part of this measure-space statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Proof 1.1: Countable Choice is assumed only for the cited inverse-error-chain application [A1,F1]; the L^2 inequality and cross-term identity use no further Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "By the exact squared-norm identity in step 2.1, root-sum-square equality forces the aggregate finite sum of integrated real cross terms to be zero."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "In step 2.1, a zero aggregate cross-integral sum reduces the squared norm to the sum of squared component norms; taking nonnegative square roots gives equality, including N=1 and zero norms."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Read both proof steps and all ten direct dependency statements. For generic inner-product-valued increments, only scalar norms/sum norm/pairings need be measurable; completeness of H is unused. Scalar Minkowski induction and g<=sum f_j put the sum in L2. Cross terms are absolutely integrable by 2 f_i f_j<=f_i^2+f_j^2; linearity then integrates the finite norm-square identity. Nonnegative square roots give both directions of RSS iff aggregate cross integrals vanish. Individual vanishing is not necessary: on a one-point measure space take real increments 1,1,-1/2, whose cross products 1,-1/2,-1/2 sum to zero. N=1, zero increments, zero measure and arbitrary non-sigma-finite measure spaces are covered; no independence or centering is assumed. Reader correctly localizes Countable Choice to the inverse-chain application. Repaired corrupted Hunter URL after inspecting the actual Golse PDF and Hunter Section7.2 Theorem7.5 (printed80/PDF84), which states Minkowski without proof; the proof supplier remains the local proved theorem. Fresh focused continuation: rechecked both current proof steps and all direct supplier statements. Generic scalar measurability and L2 hypotheses suffice without completeness or Choice; inverse-chain specialization retains Countable Choice. Cross-integral absolute domination justifies finite integration and both RSS directions; N=1, zero measure and cancelling nonzero cross terms remain valid. The original external Hunter/Golse inspection above is retained as prior-session evidence, not a new external reading claim."
+      }
+    },
+    "ex-diagonal-inverse-noise-amplification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hilbert-tikhonov-noise-amplification-bound",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be bounded, with Hilbert adjoint $A^*$. For $\\lambda>0$, put\n$R_\\lambda=(A^*A+\\lambda I_X)^{-1}A^*$, which is well-defined by\n[[lem-hilbert-tikhonov-normal-operator-invertible]]. Then for every $g\\in Y$,\n\n$$\\|R_\\lambda g\\|\\le\\frac{\\|g\\|}{2\\sqrt\\lambda},\\qquad \\|R_\\lambda\\|\\le\\frac1{2\\sqrt\\lambda}.$$\n\nThe proof uses the normal equation and the Hilbert-space inner product; it\ndoes not use a compact-operator convergence rate or a source condition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $A^*A+\\lambda I=\\operatorname{diag}(1+10^{-6},2\\cdot10^{-6})$ and $A^*e=(0,10^{-9})$, so $R_\\lambda e=(0,5\\cdot10^{-4})$ and $\\|e\\|=10^{-6}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\sqrt\\lambda=10^{-3}$, [F1] gives the upper bound $10^{-6}/(2\\cdot10^{-3})=5\\cdot10^{-4}$, equal to the computed output norm. Thus the constant is attained in this example.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty two-dimensional space and nonempty diagonal matrix."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes nonzero noise; zero noise would be a different input."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes two diagonal coordinates rather than a one-dimensional problem."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both diagonal entries are positive, so a rank-degenerate matrix is not this example."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The displayed parameter is the fixed positive value $10^{-6}$; no endpoint choice is studied."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example and Given assume Countable Choice for the Hilbert noise-amplification supplier [F1]. Verification step 1.1 computes the two specified diagonal components directly, and step 2.1 applies that supplier at lambda=10^-6 to obtain the attained gain bound 5*10^-4. The noise vector is fixed, so this sharpness calculation needs no selection of an extremizing family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies an equality case, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies an equality case, not a biconditional."
+        }
+      ]
+    },
+    "ex-tikhonov-bias-noise-tradeoff": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-tikhonov-error-chain-with-discretization-and-residual",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces, let\n$A:X\\to Y$ be compact (hence bounded), and let $A_h:X\\to Y$ be a bounded\ndiscrete operator whose range is a finite-dimensional subspace of $Y$. For\n$\\lambda>0$,\ndefine\n\n$$R_\\lambda=(A^*A+\\lambda I_X)^{-1}A^*,\\qquad R_{\\lambda,h}=(A_h^*A_h+\\lambda I_X)^{-1}A_h^*.$$\n\nThese maps are well-defined by [[lem-hilbert-tikhonov-normal-operator-invertible]]. Let $x^\\dagger\\in X$, $y=Ax^\\dagger$, $y_\\delta=y+e$ with $\\|e\\|\\le\\delta$ and $\\delta\\ge0$, and let $\\widetilde x\\in X$. Define the exact discrete normal-equation residual\n\n$$r_h=(A_h^*A_h+\\lambda I_X)\\widetilde x-A_h^*y_\\delta.$$\n\nThen the following chain is exact:\n\n$$x^\\dagger-\\widetilde x=(x^\\dagger-R_\\lambda y) +(R_\\lambda y-R_\\lambda y_\\delta) +(R_\\lambda y_\\delta-R_{\\lambda,h}y_\\delta) +(R_{\\lambda,h}y_\\delta-\\widetilde x).$$\n\nIts norm satisfies\n\n$$\\|x^\\dagger-\\widetilde x\\|\\le \\|x^\\dagger-R_\\lambda y\\|+\\frac{\\delta}{2\\sqrt\\lambda} +\\|(R_\\lambda-R_{\\lambda,h})y_\\delta\\|+\\frac{\\|r_h\\|}{\\lambda}.$$\n\nThe first term is regularization bias, the second is data noise, the third is the regularized-operator discretization difference, and the fourth is the solve residual. The third term receives a numerical bound only when an operator-perturbation bound is supplied: if $\\|R_\\lambda-R_{\\lambda,h}\\|\\le\\eta_{\\lambda,h}$, it is at most $\\eta_{\\lambda,h}\\|y_\\delta\\|$. If residual evaluation returns $\\widehat r_h$ with a certified $\\|r_h-\\widehat r_h\\|\\le\\rho_h$, the last term is at most $(\\|\\widehat r_h\\|+\\rho_h)/\\lambda$. If an algorithm has a specified exact-arithmetic stopping output $x_{\\mathrm{stop}}$ and returns a computed output $\\widetilde x$, the last difference can further split as\n\n$$R_{\\lambda,h}y_\\delta-\\widetilde x= (R_{\\lambda,h}y_\\delta-x_{\\mathrm{stop}}) +(x_{\\mathrm{stop}}-\\widetilde x).$$\n\nWriting $r_{\\mathrm{stop}}=(A_h^*A_h+\\lambda I_X)x_{\\mathrm{stop}} -A_h^*y_\\delta$, the first term is at most $\\|r_{\\mathrm{stop}}\\|/\\lambda$; the second is the separate returned-output roundoff term. Any bound on that roundoff or on residual-evaluation error requires its own arithmetic hypotheses. For a discretized datum $y_{h,\\delta}=A_hx^\\dagger+e$ formed before inversion, put $d_h=(A-A_h)x^\\dagger=y_\\delta-y_{h,\\delta}$. Let $\\widetilde x_h\\in X$ be a computed discrete output. The corresponding exact refinement is\n\n$$x^\\dagger-\\widetilde x_h=(x^\\dagger-R_\\lambda y) +(R_\\lambda y-R_\\lambda y_\\delta) +R_\\lambda d_h+(R_\\lambda-R_{\\lambda,h})y_{h,\\delta} +(R_{\\lambda,h}y_{h,\\delta}-\\widetilde x_h),$$\n\nso the forward residual discarded by quadrature or collocation is counted before inversion as $R_\\lambda d_h$, with $\\|R_\\lambda d_h\\|\\le\\|d_h\\|/(2\\sqrt\\lambda)$. The separate operator discretization and solve terms remain. For this refined chain, define $r_{h,h}=(A_h^*A_h+\\lambda I_X)\\widetilde x_h-A_h^*y_{h,\\delta}$; then $\\|R_{\\lambda,h}y_{h,\\delta}-\\widetilde x_h\\|\\le\\|r_{h,h}\\|/\\lambda$. If its evaluation returns $\\widehat r_{h,h}$ with a certified $\\|r_{h,h}-\\widehat r_{h,h}\\|\\le\\rho_{h,h}$, the last term is at most $(\\|\\widehat r_{h,h}\\|+\\rho_{h,h})/\\lambda$. No rate for $d_h$, no operator perturbation estimate, and no floating-point residual bound is implicit. When $X,Y$ are finite-dimensional and $b=Ax^\\dagger+e$, the same identity is the canonical Tikhonov bias/noise formula\n\n$$x^\\dagger-A^\\#_\\lambda b=(I-A^\\#_\\lambda A)x^\\dagger-A^\\#_\\lambda e, \\qquad A^\\#_\\lambda=(A^*A+\\lambda I)^{-1}A^*.$$\n\nHere $\\lambda$ is the coefficient of $\\|x\\|^2$ in\n$\\|Ax-b\\|^2+\\lambda\\|x\\|^2$.\n\nFor stored finite matrices, [[lem-computed-augmented-tikhonov-solve-residual-and-output-error]] supplies the concrete augmented-QR or independently certified-residual application: take its $\\rho$ as $\\rho_h$ with datum $y_\\delta$, or as $\\rho_{h,h}$ with datum $y_{h,\\delta}$. It bounds returned-output roundoff for the exact direct-solve target and retains explicit real/complex realization, square-root representation, successful-operation and nonsingularity conditions.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In this scalar case $A^\\#_\\lambda=1/(1+\\lambda)$, so the bias magnitude is $|1-A^\\#_\\lambda A|=\\lambda/(1+\\lambda)$ and the noise magnitude is $|A^\\#_\\lambda e|=0.1/(1+\\lambda)$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $\\lambda=0.01$ these values are $0.01/1.01=1/101$ and $0.1/1.01=10/101$; at $\\lambda=1$ they are $1/2$ and $0.1/2=1/20$. The two components move in opposite directions for these choices, with no parameter-choice guarantee asserted.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has one scalar unknown and two explicit nonempty parameter choices."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes nonzero noise $e=0.1$; the zero-noise case is not compared."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is explicitly the one-dimensional scalar operator $A=1$ (Statement)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed scalar operator is $A=1$, not a degenerate zero operator."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both displayed parameter values satisfy $lambda>0$ as required (step 2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The scalar tradeoff Example assumes Countable Choice, matching the error-chain theorem quoted as [F1]. Verification step 1.1 specializes its identity to the explicit inverse 1/(1+lambda), and step 2.1 evaluates the two given positive parameters 0.01 and 1. No optimal parameter, infimum-attaining point or other unprovided object is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives two computations, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives two computations, not a biconditional."
+        }
+      ]
+    },
+    "ex-quadrature-discretization-residual-before-inversion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-tikhonov-error-chain-with-discretization-and-residual",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces, let\n$A:X\\to Y$ be compact (hence bounded), and let $A_h:X\\to Y$ be a bounded\ndiscrete operator whose range is a finite-dimensional subspace of $Y$. For\n$\\lambda>0$,\ndefine\n\n$$R_\\lambda=(A^*A+\\lambda I_X)^{-1}A^*,\\qquad R_{\\lambda,h}=(A_h^*A_h+\\lambda I_X)^{-1}A_h^*.$$\n\nThese maps are well-defined by [[lem-hilbert-tikhonov-normal-operator-invertible]]. Let $x^\\dagger\\in X$, $y=Ax^\\dagger$, $y_\\delta=y+e$ with $\\|e\\|\\le\\delta$ and $\\delta\\ge0$, and let $\\widetilde x\\in X$. Define the exact discrete normal-equation residual\n\n$$r_h=(A_h^*A_h+\\lambda I_X)\\widetilde x-A_h^*y_\\delta.$$\n\nThen the following chain is exact:\n\n$$x^\\dagger-\\widetilde x=(x^\\dagger-R_\\lambda y) +(R_\\lambda y-R_\\lambda y_\\delta) +(R_\\lambda y_\\delta-R_{\\lambda,h}y_\\delta) +(R_{\\lambda,h}y_\\delta-\\widetilde x).$$\n\nIts norm satisfies\n\n$$\\|x^\\dagger-\\widetilde x\\|\\le \\|x^\\dagger-R_\\lambda y\\|+\\frac{\\delta}{2\\sqrt\\lambda} +\\|(R_\\lambda-R_{\\lambda,h})y_\\delta\\|+\\frac{\\|r_h\\|}{\\lambda}.$$\n\nThe first term is regularization bias, the second is data noise, the third is the regularized-operator discretization difference, and the fourth is the solve residual. The third term receives a numerical bound only when an operator-perturbation bound is supplied: if $\\|R_\\lambda-R_{\\lambda,h}\\|\\le\\eta_{\\lambda,h}$, it is at most $\\eta_{\\lambda,h}\\|y_\\delta\\|$. If residual evaluation returns $\\widehat r_h$ with a certified $\\|r_h-\\widehat r_h\\|\\le\\rho_h$, the last term is at most $(\\|\\widehat r_h\\|+\\rho_h)/\\lambda$. If an algorithm has a specified exact-arithmetic stopping output $x_{\\mathrm{stop}}$ and returns a computed output $\\widetilde x$, the last difference can further split as\n\n$$R_{\\lambda,h}y_\\delta-\\widetilde x= (R_{\\lambda,h}y_\\delta-x_{\\mathrm{stop}}) +(x_{\\mathrm{stop}}-\\widetilde x).$$\n\nWriting $r_{\\mathrm{stop}}=(A_h^*A_h+\\lambda I_X)x_{\\mathrm{stop}} -A_h^*y_\\delta$, the first term is at most $\\|r_{\\mathrm{stop}}\\|/\\lambda$; the second is the separate returned-output roundoff term. Any bound on that roundoff or on residual-evaluation error requires its own arithmetic hypotheses. For a discretized datum $y_{h,\\delta}=A_hx^\\dagger+e$ formed before inversion, put $d_h=(A-A_h)x^\\dagger=y_\\delta-y_{h,\\delta}$. Let $\\widetilde x_h\\in X$ be a computed discrete output. The corresponding exact refinement is\n\n$$x^\\dagger-\\widetilde x_h=(x^\\dagger-R_\\lambda y) +(R_\\lambda y-R_\\lambda y_\\delta) +R_\\lambda d_h+(R_\\lambda-R_{\\lambda,h})y_{h,\\delta} +(R_{\\lambda,h}y_{h,\\delta}-\\widetilde x_h),$$\n\nso the forward residual discarded by quadrature or collocation is counted before inversion as $R_\\lambda d_h$, with $\\|R_\\lambda d_h\\|\\le\\|d_h\\|/(2\\sqrt\\lambda)$. The separate operator discretization and solve terms remain. For this refined chain, define $r_{h,h}=(A_h^*A_h+\\lambda I_X)\\widetilde x_h-A_h^*y_{h,\\delta}$; then $\\|R_{\\lambda,h}y_{h,\\delta}-\\widetilde x_h\\|\\le\\|r_{h,h}\\|/\\lambda$. If its evaluation returns $\\widehat r_{h,h}$ with a certified $\\|r_{h,h}-\\widehat r_{h,h}\\|\\le\\rho_{h,h}$, the last term is at most $(\\|\\widehat r_{h,h}\\|+\\rho_{h,h})/\\lambda$. No rate for $d_h$, no operator perturbation estimate, and no floating-point residual bound is implicit. When $X,Y$ are finite-dimensional and $b=Ax^\\dagger+e$, the same identity is the canonical Tikhonov bias/noise formula\n\n$$x^\\dagger-A^\\#_\\lambda b=(I-A^\\#_\\lambda A)x^\\dagger-A^\\#_\\lambda e, \\qquad A^\\#_\\lambda=(A^*A+\\lambda I)^{-1}A^*.$$\n\nHere $\\lambda$ is the coefficient of $\\|x\\|^2$ in\n$\\|Ax-b\\|^2+\\lambda\\|x\\|^2$.\n\nFor stored finite matrices, [[lem-computed-augmented-tikhonov-solve-residual-and-output-error]] supplies the concrete augmented-QR or independently certified-residual application: take its $\\rho$ as $\\rho_h$ with datum $y_\\delta$, or as $\\rho_{h,h}$ with datum $y_{h,\\delta}$. It bounds returned-output roundoff for the exact direct-solve target and retains explicit real/complex realization, square-root representation, successful-operation and nonsingularity conditions.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The scalar regularized maps are $R_\\lambda=2/(2^2+1)=2/5$ and $R_{\\lambda,h}=(19/10)/((19/10)^2+1)=190/461$. Also $d_h=2-1.9=1/10$, so [F1] gives the propagated pre-inversion residual $R_\\lambda d_h=(2/5)(1/10)=1/25$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With the exact discrete solve $\\widetilde x_h=R_{\\lambda,h}y_{h,\\delta} =380/461$, the five chain terms are respectively $1/5$, $-1/25$, $1/25$, $4/5-380/461=-56/2305$, and $0$. Their sum is $461/2305-56/2305=405/2305=81/461=1-\\widetilde x_h$, verifying the telescoping identity with the forward residual counted once.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses nonempty scalar spaces and a specified discrete operator."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The chosen forward residual and noise are nonzero; zero-error inputs are not the example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is a one-dimensional scalar forward model (Statement)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The exact and discrete scalar operators are both nonzero and distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The fixed parameter is $lambda=1>0$, within the theorem hypotheses (Statement)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The quadrature-residual Example assumes Countable Choice before using the refined error-chain supplier [F1]. Verification step 1.1 constructs the explicit scalar maps 2/5 and 190/461 and propagates the supplied forward residual 1/10 to 1/25. Step 2.1 then computes the exact discrete output 380/461 and its five-term identity; there is no choice of a quadrature rule or optimizer beyond those fixed scalar data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies an exact decomposition, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies an exact decomposition, not a biconditional."
+        }
+      ]
+    },
+    "ex-tikhonov-normal-equation-residual-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hilbert-tikhonov-normal-operator-invertible",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ and $Y$ be real or complex\nHilbert spaces and let $A:X\\to Y$ be bounded, with Hilbert adjoint $A^*$. For\n$\\lambda>0$, define\n\n$$B_\\lambda:=A^*A+\\lambda I_X.$$\n\nThen $B_\\lambda:X\\to X$ is bijective and\n\n$$\\|B_\\lambda^{-1}\\|\\le\\frac1\\lambda.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $A^*A+\\lambda I=4+1/2=9/2$, while the exact regularized solution is $A^*y_\\delta/(A^*A+\\lambda I)=2/(9/2)=4/9$. Thus $|\\widetilde x-4/9|=1/100$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The exact residual is $r=(9/2)(4/9+1/100)-2=9/200$. Since $\\widetilde x-4/9=(9/2)^{-1}r$, [F1] bounds the error by $|r|/\\lambda=(9/200)/(1/2)=9/100\\ge1/100$. The residual here is exact, not a floating-point evaluation certificate.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a scalar unknown and a nonempty residual calculation."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The chosen approximation has nonzero residual; the exact-solve case is not this example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is a one-dimensional normal equation (Statement)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The scalar forward coefficient $A=2$ is nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The fixed parameter $lambda=1/2$ is positive as required (Statement)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example and Given expressly assume Countable Choice. Verification step 2.1 applies the Countable-Choice Hilbert normal-operator inverse supplier [F1] to the scalar normal coefficient 9/2, obtaining the residual bound (9/200)/(1/2)=9/100. The approximate value and exact residual are explicitly supplied; no additional selection of a minimizer is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a one-sided residual bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a one-sided residual bound, not a biconditional."
+        }
+      ]
+    },
+    "lem-computed-augmented-tikhonov-solve-residual-and-output-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-rounded-linear-and-normal-residual-certificates",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb F^{m\\times n}$, $x\\in\\mathbb F^n$, $y\\in\\mathbb F^m$ have stored real or complex entries, with $m,n\\ge1$. Use the operationwise arithmetic model, successful sequential dot products, and $0<u<1$ with $(\\max(m,n)-1)u<1$. Define\n$$g_k=\\frac{1+6u}{1-(k-1)u}-1,\\qquad F=\\|A\\|_F,\\quad X=\\|x\\|_2,\\quad Y=\\|y\\|_2.$$\nFor $\\widehat v=\\operatorname{fl}(Ax)$ and $\\widehat w=\\operatorname{fl}(\\widehat v-y)$, put $V=g_nFX$ and $W=V+u(\\|\\widehat v\\|_2+Y)$. Then\n$$\\|\\widehat w-(Ax-y)\\|_2\\le W.$$\nFor a stored real $\\lambda>0$, also compute $\\widehat z=\\operatorname{fl}(A^*\\widehat w)$, $\\widehat l=\\operatorname{fl}(\\lambda x)$ and $\\widehat r=\\operatorname{fl}(\\widehat z+\\widehat l)$, rounding scalar multiplication componentwise. The exact intended normal residual $r=A^*(Ax-y)+\\lambda x$ satisfies\n$$\\|\\widehat r-r\\|_2\\le\\rho:=FW+g_mF\\|\\widehat w\\|_2+u\\lambda X+u(\\|\\widehat z\\|_2+\\|\\widehat l\\|_2).$$\nNorms in these certificates mean exact norms or certified upper bounds. Uncontrolled rounding of the certificate itself is not authorized. The linear bound applies columnwise to certify $\\|I-AB\\|_2\\le\\|I-AB\\|_F$ from stored basis-solve columns $B$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-computed-full-rank-least-squares-backward-stability",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{m\\times n}$, $m\\ge n\\ge1$, have full column rank. Successful scaled Householder QR gives the exactly orthonormal reduced representative $\\widehat Q$ and computed triangular $\\widehat R$ with\n$$A+\\Delta_Q=\\widehat Q\\widehat R,\\qquad \\|\\Delta_Q\\|_F\\le\\beta_Q\\|A\\|_F,\\qquad \\beta_Q=(1+\\kappa_m)^n-1,$$\nwhere $\\kappa_m$ is the proved local-step coefficient. Apply the stored reflectors to $b$ by rounded rank-one updates and let $\\widehat y$ be the first $n$ coordinates. Set $\\beta_b=\\beta_Q$. Alternatively, if an explicitly supplied exactly orthonormal $\\widehat Q$ has entries admissible as arithmetic inputs and $\\widehat y=\\operatorname{fl}(\\widehat Q^Tb)$ uses sequential rounded dots, set $\\beta_b=\\sqrt n\\,\\gamma_m$. Solve $\\widehat R\\widehat x=\\widehat y$ by successful rounded back substitution. Suppose $mu<1$ and $\\gamma_{n+3}<1/8$. There exist $\\delta b$ and upper triangular $\\Delta R$ with\n$$(\\widehat R+\\Delta R)\\widehat x=\\widehat Q^T(b+\\delta b),\\qquad \\|\\delta b\\|_2\\le\\beta_b\\|b\\|_2,\\qquad \\|\\Delta R\\|_F\\le\\gamma_{n+3}\\|\\widehat R\\|_F.$$\nIf $\\widehat R+\\Delta R$ is nonsingular, $\\widehat x$ is the unique least-squares solution for $\\widetilde A=\\widehat Q(\\widehat R+\\Delta R)$ and $\\widetilde b=b+\\delta b$. The relative matrix perturbation is at most $\\beta_Q+\\gamma_{n+3}(1+\\beta_Q)$; the right-hand perturbation is at most $\\beta_b$. For fixed $m,n$, both perturbation coefficients are $O(u)$. If additionally $\\beta_Q\\le19\\gamma_{n+3}/(1+\\gamma_{n+3})$ and $\\beta_b\\le20\\gamma_{n+3}$, both relative data perturbation bounds are at most $20\\gamma_{n+3}$. These two coefficient comparisons are additional checks; they do not follow from $mu<1$ and $\\gamma_{n+3}<1/8$ alone. Success and nonsingularity are explicit hypotheses.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "source_section": "Definition",
+          "quote": "At each precision, let the representable set, normal range, and unit roundoff be an instance of [[def-standard-relative-floating-point-model-and-unit-roundoff]] specialized to a finite binary format of integer precision $p\\ge2$ and integer normal-exponent bounds $j_{\\min}\\le j\\le j_{\\max}$. Its normal values are $\\pm m2^{j-p+1}$ for integers $2^{p-1}\\le m<2^p$ and $j_{\\min}\\le j\\le j_{\\max}$, with $N_{\\min}=2^{j_{\\min}}$ and $N_{\\max}=(2^p-1)2^{j_{\\max}-p+1}$. The rounding rule is round-to-nearest, ties-to-even by the parity of the normalized significand. Each precision in a mixed-precision procedure has its own format, range, and valid unit-roundoff bound. On every real exact result that is zero or normal, $\\operatorname{fl}$ uses this rule; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range $x$, $\\operatorname{fl}(\\sqrt{x})$ is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression $ab+c$; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$, let $b\\in\\mathbb F^m$, and let\n$\\lambda\\in\\mathbb R$ satisfy $\\lambda>0$. Then\nthe Tikhonov objective\n\n$$J_\\lambda(x)=\\|Ax-b\\|_2^2+\\lambda\\|x\\|_2^2$$\n\nis strictly convex and has the unique minimiser\n\n$$x_\\lambda=(A^*A+\\lambda I)^{-1}A^*b.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "The stored augmented matrix has full column rank, since $\\|[A;\\alpha I]z\\|_2^2=\\|Az\\|_2^2+\\alpha^2\\|z\\|_2^2\\ge\\alpha^2\\|z\\|_2^2$. If $C+\\Delta_Q=\\widehat Q\\widehat R$, then $\\|\\widehat Rz\\|=\\|(C+\\Delta_Q)z\\|\\ge(\\alpha-\\epsilon_Q)\\|z\\|$. Under the sufficient margin, the further triangular perturbation preserves a positive lower bound. Thus the nonsingularity premise in [F2] holds under the stated check. The theorem still explicitly requires successful arithmetic; exact full rank alone does not ensure rounded success.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "By [F3], $\\alpha=\\sqrt\\lambda(1+\\delta)$, $|\\delta|\\le u$, whence $|\\alpha^2-\\lambda|\\le(2u+u^2)\\lambda$. For any $z$, Cauchy-Schwarz gives $\\|(A^*A+\\lambda I)z\\|\\|z\\|\\ge\\langle(A^*A+\\lambda I)z,z\\rangle=\\|Az\\|^2+\\lambda\\|z\\|^2\\ge\\lambda\\|z\\|^2$. The normal equation [F4] therefore implies $\\|\\widehat x-x_\\lambda\\|\\le\\|r\\|/\\lambda\\le(\\|\\widehat r\\|+\\rho)/\\lambda$ using the assumed residual certificate, supplied by [F1] under the stated evaluation hypotheses. Replacing the coefficient in a residual by $\\alpha^2$ changes that exact residual by $(\\alpha^2-\\lambda)\\widehat x$, giving the stated additional allowance.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "For complex inputs identify $z=z_R+iz_I$ with $(z_R,z_I)\\in\\mathbb R^{2n}$. The real matrix $A_R=\\begin{pmatrix}\\operatorname{Re}A&-\\operatorname{Im}A\\\\\\operatorname{Im}A&\\operatorname{Re}A\\end{pmatrix}$ represents exactly the same linear map, preserves vector norms, and satisfies $\\|A_R\\|_2=\\|A\\|_2$, $\\|A_R\\|_F=\\sqrt2\\|A\\|_F$ by direct component sums. Apply [F2] to $[A_R;\\alpha I_{2n}]$ and datum $((\\operatorname{Re}y,\\operatorname{Im}y),0)$; this is exactly the original complex objective. Mapping its output back needs only component pairing, so introduces no arithmetic error or unmodeled complex division.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "In exact arithmetic with the intended $\\sqrt\\lambda$, full-rank augmented QR returns the unique minimizer in [F4], hence $x_{\\rm stop}=x_\\lambda$. Step 1.2 bounds the returned computed output's difference from that target, including square-root representation and all solve error through its certified residual. For an iterative stopping target different from $x_\\lambda$, retain separate stopping and output terms rather than calling their sum pure roundoff.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "In the supplied Hilbert representation, $U^*U=I$, $V^*V=I$, and $A_h^*=UA^*V^*$. The subspaces $\\operatorname{ran}U$ and its orthogonal complement are invariant under $A_h^*A_h+\\lambda I$; on the complement that operator is $\\lambda I$ and its right-hand side $A_h^*y$ has zero component. Thus the exact normal solution is $Ux_\\lambda$, with coefficient datum $V^*y$. Direct substitution gives $r_h=U((A^*A+\\lambda I)\\widehat x-A^*V^*y)$, and isometry preserves its norm. For every coefficient vector $e$, put $w=A^*e$. Then $\\|w\\|_2^2=\\langle Aw,e\\rangle\\le|\\langle Aw,e\\rangle|\\le\\|A\\|_2\\|w\\|_2\\|e\\|_2$ by [F5]–[F6]; dividing for $w\\ne0$ (and checking $w=0$ directly) gives $\\|A^*e\\|_2\\le\\|A\\|_2\\|e\\|_2$. Perturbing the datum therefore adds $UA^*(\\widehat y_c-V^*y)$ of norm at most $\\|A\\|_2\\epsilon_y$; an orthogonal output component adds $\\lambda z$. Triangle inequality gives the stated allowances. These explicit coordinate hypotheses preserve the general Hilbert theorem while justifying its concrete finite solve.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement certifies a successful stored augmented-QR Tikhonov output through the intended normal residual and its explicit allowance. Statement requires m,n>=1 for the finite stored matrix and datum. An empty trailing QR block is an internal finite kernel case, not an admitted zero-size input solve."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.2 bounds error by the certified residual divided by lambda>0, so zero residual and zero allowance give exact output. Step 4.1 checks w=0 directly before dividing by its norm."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits m=n=1. Proof step 1.1 uses the positive alpha lower bound on the augmented matrix, and step 1.2 uses the scalar normal equation in the same dimensions without an extra size restriction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires lambda>0, successful normal-range alpha, successful QR/solve and a certified nonsingularity margin. Proof step 1.1 explicitly distinguishes exact full rank from rounded arithmetic success; no bound is assigned to a failed pivot."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement certifies a successful stored augmented-QR Tikhonov output through the intended normal residual and its explicit allowance. The parameter lambda and its successful stored square root are strictly positive; the lemma does not assert a zero-regularization endpoint or a limiting interval theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Statement certifies a successful stored augmented-QR Tikhonov output through the intended normal residual and its explicit allowance. The finite input matrices, returned vector, isometries U,V and residual certificates are supplied data. The lemma does not choose a Hilbert coordinate basis or an uncertified solver output."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement certifies a successful stored augmented-QR Tikhonov output through the intended normal residual and its explicit allowance. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement certifies a successful stored augmented-QR Tikhonov output through the intended normal residual and its explicit allowance. It asserts this formula or one-way conclusion, not a logical equivalence with a separately owed reverse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Read all six steps and all six direct suppliers, plus the current algorithm/local-step/QR chain. Coercivity bounds output error by intended normal residual/lambda for any returned vector, independent of backend stability. Rounded sqrt allowance includes (2u+u^2)lambda and a separately rounded alpha^2 needs another allowance. Positive alpha gives augmented full rank; explicit perturbation margin supplies nonsingularity but does not imply arithmetic success. Realification doubles dimensions, preserves vector/operator norms and multiplies Frobenius norm by sqrt(2); backend hypotheses apply in those real dimensions. Supplied U,V are isometries, giving A_h*=UA*V*, invariant complement and exact lifted residual; data and orthogonal-output errors are separately bounded. m,n>=1, A=0 and zero residual are safe. Batch-1 algorithm termination-placement finding is nonfatal and recorded; no missing mathematical premise blocks this lemma. Fresh focused continuation after native producer extraction: independently reviewed complete current algorithm, new lem-scaled-real-householder-step-termination-and-status, arithmetic model and local-step/QR/least-squares chain. The active fixed successor nod-b1-3a-householder-termination-placement-resolved closes historical placement only. Finite output-or-failure semantics and exact H(v) are sound; neither arithmetic success nor local error is inferred from termination. Current six-step consumer proof preserves intended-lambda residual coercivity, certified rho, rounded sqrt allowance, explicit completed backend hypotheses/nonsingularity, realification dimensions and isometric coordinate/output allowances. No source change or missing prerequisite. Step-5 initial round 1 unit 25 repair: the general bound assumes an independently certified residual pair; the concrete F1 evaluation now explicitly requires (max(m,n)-1)u<1, successful sequential dots and certified norms. Original complex dimensions apply unless evaluating the realified residual. Backend real dimensions and precision hypotheses are explicit. Coercivity, target and Hilbert allowances are unchanged. This repair assessment is not independent review."
+      }
+    }
+  }
+}

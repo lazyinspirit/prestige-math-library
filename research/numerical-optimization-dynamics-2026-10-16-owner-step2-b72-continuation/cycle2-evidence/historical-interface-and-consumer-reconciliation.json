@@ -1,0 +1,1110 @@
+{
+  "identity": "01a143e1-3fab-7793-bdfc-cf6f9ff755f2",
+  "before_interfaces": {
+    "def-trust-region-quadratic-model-and-ratio": [
+      "## Definition\n\nLet $n\\ge1$, let $f:\\mathbb R^n\\to\\mathbb R$ be differentiable at\n$x\\in\\mathbb R^n$, and put $g:=\\nabla f(x)$ using the gradient convention of\n[[def-jacobian-matrix-and-gradient]]. Let $B\\in\\mathbb R^{n\\times n}$ be a\nsymmetric matrix and let $\\Delta>0$. A quadratic model at $x$ is\n\n$$m(p):=f(x)+\\langle g,p\\rangle+\\tfrac12 p^TBp,\\qquad p\\in\\mathbb R^n,$$\n\nwith the Euclidean inner product and norm of [[def-euclidean-inner-product]]\nand matrix products as in [[def-matrix-product-and-identity-matrix]]. The\ntrust-region ball is $\\mathcal B_\\Delta:=\\{p:\\|p\\|_2\\le\\Delta\\}$. The\npredicted reduction of a feasible step $p\\in\\mathcal B_\\Delta$ is\n$\\operatorname{pred}(p):=m(0)-m(p)$. Its actual reduction is\n$\\operatorname{ared}(p):=f(x)-f(x+p)$. When $\\operatorname{pred}(p)>0$, the\nactual-to-predicted reduction ratio is\n\n$$\\rho(p):=\\frac{\\operatorname{ared}(p)}{\\operatorname{pred}(p)}.$$\n\nThe quantity $\\|B\\|_2$ means the matrix norm induced by the Euclidean vector\nnorm, namely the $p=2$ case of [[def-induced-matrix-p-norm]]. It is not required\nthat $B=\\nabla^2f(x)$ in this definition; exact Hessians and symmetric model\napproximations are both admitted. The ratio is undefined when predicted\nreduction is nonpositive, so an algorithm must use a separately justified\nfallback or return a failure status in that case."
+    ],
+    "def-adaptive-cubic-regularization-model": [
+      "## Definition\n\nLet $f:\\mathbb R^n\\to\\mathbb R$ be twice differentiable at $x$, let\n$g:=\\nabla f(x)$, let $B\\in\\mathbb R^{n\\times n}$ be symmetric, and let\n$\\sigma>0$. The cubic-regularized quadratic model is\n\n$$m_\\sigma(s):=f(x)+\\langle g,s\\rangle+\\tfrac12s^TBs+\\tfrac{\\sigma}{3}\\|s\\|_2^3,\\qquad s\\in\\mathbb R^n,$$\n\nusing the Euclidean conventions of [[def-euclidean-inner-product]], the\ngradient and Hessian conventions of [[def-jacobian-matrix-and-gradient]] and\n[[def-hessian-and-euclidean-critical-point]], and the induced matrix norm of\n[[def-induced-matrix-p-norm]]. Its predicted reduction is\n$m_\\sigma(0)-m_\\sigma(s)$. Define the actual reduction by\n$\\operatorname{ared}(s):=f(x)-f(x+s)$ and, when the predicted reduction is\npositive, define the ratio\n$$\\rho_\\sigma(s):=\\frac{\\operatorname{ared}(s)}\n{m_\\sigma(0)-m_\\sigma(s)}.$$\nWhen $B=\\nabla^2f(x)$, this is the exact-Hessian ARC model; approximation\nerror in a different $B$ requires separate bounds. The definition alone\ngives no convergence or evaluation-complexity guarantee."
+    ],
+    "lem-natural-logarithm-bounded-by-argument": [
+      "## Statement\n\nFor every real $x\\ge1$, the natural logarithm of\n[[def-natural-logarithm]] satisfies\n$$0\\le\\log x\\le x-1\\le x.$$"
+    ],
+    "lem-trust-region-subproblem-optimality-and-hard-case": [
+      "## Statement\n\nLet $B\\in\\mathbb R^{n\\times n}$ be symmetric, let $g\\in\\mathbb R^n$, and\nlet $\\Delta>0$. Every global minimizer $p_*$ of\n$$q(p):=\\langle g,p\\rangle+\\tfrac12p^TBp\\quad\\text{over }\\|p\\|_2\\le\\Delta$$\nhas a multiplier $\\lambda\\ge0$ such that\n$$ (B+\\lambda I)p_*=-g,\\qquad B+\\lambda I\\succeq0,\\qquad\n\\lambda(\\Delta-\\|p_*\\|_2)=0. $$\nConversely, every feasible $p_*$ satisfying these conditions is a global\nminimizer. A global minimizer always exists.\n\nThe singular hard case is included as follows. Let $\\mu$ be the least\neigenvalue of $B$ and $E_\\mu$ its eigenspace. If $\\mu<0$, $g\\perp E_\\mu$,\nand the solution $p_0$ of\n$(B-\\mu I)p_0=-g$, $p_0\\perp E_\\mu$, has $\\|p_0\\|_2\\le\\Delta$, then\n$$p_*=p_0+z,\\qquad z\\in E_\\mu,\\qquad\n\\|z\\|_2^2=\\Delta^2-\\|p_0\\|_2^2$$\nis a global minimizer with the singular multiplier $\\lambda=-\\mu$. If\n$\\|p_0\\|_2<\\Delta$, both signs of any chosen nonzero $z$ of the required\nlength give distinct minimizers."
+    ],
+    "alg-trust-region-cauchy-step": [
+      "## Definition\n\nInput a model of [[def-trust-region-quadratic-model-and-ratio]] with gradient\n$g$, symmetric model matrix $B$, and\nradius $\\Delta>0$. If $g=0$, return $p_C=0$ with status `stationary`. If\n$g\\ne0$, set $c:=g^TBg$ and define\n$$\\tau:=\\begin{cases}\n\\Delta/\\|g\\|_2,&c\\le0,\\\\\n\\min\\{\\|g\\|_2^2/c,\\ \\Delta/\\|g\\|_2\\},&c>0.\n\\end{cases}$$\nReturn $p_C:=-\\tau g$ with status `step`. The procedure uses no matrix\nfactorization and has no iteration loop."
+    ],
+    "lem-positive-definite-model-has-unique-newton-step": [
+      "## Statement\n\nLet $B$ be the real symmetric positive-definite model matrix of\n[[def-trust-region-quadratic-model-and-ratio]], with $n\\ge1$ and\n$g\\in\\mathbb R^n$. Positive definiteness and invertibility use\n[[def-definite-and-indefinite-hessian-quadratic-forms]] and\n[[def-invertible-euclidean-linear-map]]. Then there is a unique\n$p_N\\in\\mathbb R^n$ satisfying $Bp_N=-g$."
+    ],
+    "lem-global-cubic-model-minimizer-decrease": [
+      "## Statement\n\nFor the cubic model $m_\\sigma$ of [[def-adaptive-cubic-regularization-model]],\nwith $\\sigma>0$ and symmetric $B$, a global minimizer exists. If $g\\ne0$ and\n$s_*$ is any global minimizer, then $s_*\\ne0$ and\n$$g+Bs_*+\\sigma\\|s_*\\|_2s_*=0,$$\n$$m_\\sigma(0)-m_\\sigma(s_*)\\ge\\frac{\\sigma}{6}\\|s_*\\|_2^3.$$"
+    ],
+    "lem-trust-region-cauchy-decrease": [
+      "## Statement\n\nIn the quadratic model of [[def-trust-region-quadratic-model-and-ratio]],\nlet $g\\ne0$, let $B$ be symmetric, and let $\\Delta>0$. Write\n$M:=\\|B\\|_2$ for the induced Euclidean matrix norm, with the convention\n$\\min\\{\\Delta,\\|g\\|_2/M\\}=\\Delta$ when $M=0$. The Cauchy step\n$p_C$ of [[alg-trust-region-cauchy-step]] minimizes the model on the\nnegative-gradient segment $\\{-tg:0\\le t\\le\\Delta/\\|g\\|_2\\}$ and satisfies\n$$m(0)-m(p_C)\\ge\\tfrac12\\|g\\|_2\n\\min\\{\\Delta,\\|g\\|_2/M\\}.$$"
+    ],
+    "alg-dogleg-trust-region-step": [
+      "## Definition\n\nInput a quadratic trust-region model of\n[[def-trust-region-quadratic-model-and-ratio]] with positive-definite $B$\n([[def-definite-and-indefinite-hessian-quadratic-forms]]) and radius\n$\\Delta>0$. If $g=0$, return $p=0$ with status `stationary`. Otherwise\ncompute the Cauchy step $p_C$ by [[alg-trust-region-cauchy-step]] and the\nunique Newton-model step $p_N$ solving $Bp_N=-g$, whose existence and\nuniqueness are established in\n[[lem-positive-definite-model-has-unique-newton-step]].\n\n1. If $\\|p_N\\|_2\\le\\Delta$, return $p_N$.\n2. If $\\|p_C\\|_2=\\Delta$, return $p_C$.\n3. Otherwise put $d:=p_N-p_C$, $a:=\\|d\\|_2^2$,\n   $b:=2\\langle p_C,d\\rangle$, and $c:=\\|p_C\\|_2^2-\\Delta^2<0$. Compute\n   $$t:=\\frac{-b+\\sqrt{b^2-4ac}}{2a}.$$\n   Here $a>0$ because $p_N\\ne p_C$, and the polynomial\n   $\\|p_C+td\\|_2^2-\\Delta^2$ is negative at $t=0$ and positive at $t=1$.\n   Its two roots have product $c/a<0$, so exactly one is positive and it\n   lies in $(0,1)$. Set $p_D:=p_C+td$, the boundary intersection on the\n   segment from the Cauchy step to the Newton-model step.\n4. Compare the two model values. Return $p_D$ if $m(p_D)\\le m(p_C)$ and\n   return $p_C$ otherwise.\n\nThe status is `step` in the nonstationary branches. The procedure uses one\nlinear solve and a scalar quadratic root; it has no iteration loop."
+    ],
+    "alg-truncated-cg-trust-region-step": [
+      "## Definition\n\nInput a model of [[def-trust-region-quadratic-model-and-ratio]], a finite\ninner cap $J\\in\\mathbb N_0$, and a\nresidual tolerance $\\tau_{tol}\\ge0$. If $g=0$, return $0$ with status\n`stationary`. Otherwise initialize $z_0=0$, $r_0=g$, $d_0=-r_0$, and $j=0$.\nFor at most $J$ inner iterations:\n\n1. If $\\|r_j\\|_2\\le\\tau_{tol}$, take $z_j$ as the candidate and stop.\n2. If $d_j=0$, take $z_j$ as the candidate and stop; the final comparison\n   below then returns $p_C$ whenever $z_j$ does not give at least its model\n   decrease.\n3. Put $c_j:=d_j^TBd_j$. If $c_j\\le0$, set\n   $$t_j:=\\frac{-\\langle z_j,d_j\\rangle+\n   \\sqrt{\\langle z_j,d_j\\rangle^2+\\|d_j\\|_2^2(\\Delta^2-\\|z_j\\|_2^2)}}\n   {\\|d_j\\|_2^2},$$\n   take $z_j+t_jd_j$ as the candidate, and stop. This is the nonpositive\n   curvature boundary exit.\n4. Otherwise put $\\alpha_j:=\\|r_j\\|_2^2/c_j$ and\n   $\\widehat z:=z_j+\\alpha_jd_j$.\n   If $\\|\\widehat z\\|_2\\ge\\Delta$, use the same positive-root formula in\n   step 3, take $z_j+t_jd_j$ as the candidate, and stop at the trust boundary.\n5. Set $r_{j+1}:=r_j+\\alpha_jBd_j$ and $z_{j+1}:=\\widehat z$. If\n   $\\|r_{j+1}\\|_2\\le\\tau_{tol}$, take $z_{j+1}$ as the candidate and stop.\n   Otherwise set\n   $$\\beta_{j+1}:=\\frac{\\|r_{j+1}\\|_2^2}{\\|r_j\\|_2^2},\\qquad\n   d_{j+1}:=-r_{j+1}+\\beta_{j+1}d_j,$$\n   and increase $j$ by one.\n\nIf the cap is reached, take the current feasible $z_j$ as the candidate. In\nall nonstationary cases compute the Cauchy step $p_C$ and compare model values:\nreturn the candidate if its model value is no greater than $m(p_C)$, and\notherwise return $p_C$. Thus a capped or unhelpful inner recurrence still\nreturns an explicit feasible step. A positive boundary root exists in steps 3\nand 4 because every non-exit iterate is strictly inside the ball, the\ndirection is nonzero after the zero-direction guard, and\n$\\|z_j+td_j\\|_2^2-\\Delta^2$ is negative at $t=0$ and tends to $+\\infty$ as\n$t\\to+\\infty$.\nEvery recurrence vector $z_j$ lies in the Krylov subspace\n$K_j(B,-g)$ of [[def-krylov-subspace-of-a-matrix-and-start-vector]]."
+    ],
+    "alg-adaptive-cubic-regularization": [
+      "## Definition\n\nInput an open set $U\\subseteq\\mathbb R^n$, a twice continuously\ndifferentiable $f:U\\to\\mathbb R$, an initial point $x_0\\in U$, target\n$\\varepsilon\\ge0$, outer trial cap $N\\in\\mathbb N_0$, and an exact-Hessian\ncubic-model solver $S$. On an input model and finite inner cap $J\\in\\mathbb N$,\n$S$ returns either `no-candidate` or a global minimizer of that model; the\nsolver is permitted to return `no-candidate` if it cannot certify a minimizer\nwithin its cap. Other inputs are $0<\\eta_1<\\eta_2<1$,\n$\\gamma_{up}>1$, $0<\\gamma_{down}<1$, $0<\\kappa<1$,\n$0<\\sigma_{min}\\le\\sigma_0\\le\\sigma_{max}$, and the inner cap $J$.\nThe output is the last accepted iterate and one of `stationary`,\n`target-achieved`, `outer-budget-exhausted`, `model-solver-failure`,\n`inconsistent-model-solver`, or `regularization-cap-exhausted`.\n\nFor $k=0,1,\\ldots,N$, in order:\n\n1. Compute $g_k:=\\nabla f(x_k)$. If $g_k=0$, return $(x_k,\\texttt{stationary})$.\n   If $\\|g_k\\|_2\\le\\varepsilon$, return $(x_k,\\texttt{target-achieved})$.\n   If $k=N$, return $(x_k,\\texttt{outer-budget-exhausted})$.\n2. Set $B_k:=\\nabla^2 f(x_k)$ and form the model\n   $m_k(s)=f(x_k)+\\langle g_k,s\\rangle+\\tfrac12s^TB_ks+\n   \\tfrac{\\sigma_k}{3}\\|s\\|_2^3$ of\n   [[def-adaptive-cubic-regularization-model]]. Call $S(m_k,J)$. If it returns\n   `no-candidate`, return $(x_k,\\texttt{model-solver-failure})$. For a\n   returned $s_k$, recompute $\\operatorname{pred}_k:=m_k(0)-m_k(s_k)$. If\n   $s_k=0$ or $\\operatorname{pred}_k\\le0$ while $g_k\\ne0$, return\n   `inconsistent-model-solver`.\n3. Evaluate $f(x_k+s_k)$ and set\n   $\\rho_k:=[f(x_k)-f(x_k+s_k)]/\\operatorname{pred}_k$.\n   If $\\rho_k<\\eta_1$, reject the step and keep $x_{k+1}:=x_k$. If\n   $\\sigma_k=\\sigma_{max}$, return\n   $(x_k,\\texttt{regularization-cap-exhausted})$; otherwise set\n   $\\sigma_{k+1}:=\\min\\{\\gamma_{up}\\sigma_k,\\sigma_{max}\\}$ and continue.\n4. If $\\rho_k\\ge\\eta_1$, accept and set $x_{k+1}:=x_k+s_k$. If\n   $\\rho_k>\\eta_2$ and\n   $\\|s_k\\|_2\\ge\\kappa\\|g_k\\|_2/\\sigma_k$, set\n   $\\sigma_{k+1}:=\\max\\{\\sigma_{min},\\gamma_{down}\\sigma_k\\}$;\n   otherwise set $\\sigma_{k+1}:=\\sigma_k$.\n\nThe model solver is an explicit subroutine input, not a claim that its finite\nbudget always succeeds. The global-minimizer decrease estimate is supplied by\n[[lem-global-cubic-model-minimizer-decrease]]. This procedure alone makes no\nunconditional convergence or evaluation-complexity claim."
+    ],
+    "lem-truncated-cg-iterates-are-krylov-vectors": [
+      "## Statement\n\nFor the interior recurrence of [[alg-truncated-cg-trust-region-step]], before\nit exits at the boundary, nonpositive curvature, residual tolerance, or inner\ncap, its vectors satisfy\n$$z_j\\in K_j(B,-g),\\qquad r_j,d_j\\in K_{j+1}(B,-g),$$\nwhere $K_j$ is the Krylov subspace of\n[[def-krylov-subspace-of-a-matrix-and-start-vector]]."
+    ],
+    "alg-trust-region-method": [
+      "## Definition\n\nInput $f:\\mathbb R^n\\to\\mathbb R$ of class $C^1$, an initial point $x_0$,\nan initial radius $0<\\Delta_0\\le\\Delta_{max}$, a trial cap\n$N\\in\\mathbb N_0$, a target $\\varepsilon\\ge0$, constants\n$0<\\eta_1<\\eta_2<1$, $0<\\gamma_{dec}<1<\\gamma_{inc}$,\n$0<\\theta_C\\le1$, and a declared model-Hessian bound $M_B\\ge0$. At each\ntrial $k$, the supplied symmetric model matrix $B_k$ must satisfy\n$\\|B_k\\|_2\\le M_B$. A finite-budget subproblem routine $S$ returns either a\nvector or `failure`; its output is treated only as a candidate and is not\nassumed to minimize the trust-region model. The output is the last accepted\npoint and one of `stationary`, `target-achieved`, `outer-budget-exhausted`,\nor `model-evaluation-failure`.\n\nFor $k=0,1,\\ldots,N$, in order:\n\n1. Set $g_k:=\\nabla f(x_k)$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$. If $\\|g_k\\|_2\\le\\varepsilon$, return\n   $(x_k,\\texttt{target-achieved})$. If $k=N$, return\n   $(x_k,\\texttt{outer-budget-exhausted})$.\n2. Form $m_k$ from [[def-trust-region-quadratic-model-and-ratio]], compute\n   the Cauchy step $p_C$ from [[alg-trust-region-cauchy-step]], and set\n   $P_C:=m_k(0)-m_k(p_C)>0$. Query $S$ with this model and radius. Use its\n   candidate $q$ only if it is feasible and\n   $m_k(0)-m_k(q)\\ge\\theta_C P_C$; otherwise set $p:=p_C$. If it qualifies,\n   set $p:=q$. If $M_B=0$, interpret $\\|g_k\\|_2/(2M_B)=+\\infty$. Whenever\n   $\\Delta_k\\le\\|g_k\\|_2/(2M_B)$, replace the candidate by $p:=p_C$.\n3. Recompute $P_k:=m_k(0)-m_k(p)$. The selection rule ensures\n   $P_k\\ge\\theta_C P_C>0$. Evaluate\n   $\\rho_k:=[f(x_k)-f(x_k+p)]/P_k$. If this evaluation is unavailable,\n   return $(x_k,\\texttt{model-evaluation-failure})$.\n4. If $\\rho_k<\\eta_1$, reject: set $x_{k+1}:=x_k$ and\n   $\\Delta_{k+1}:=\\gamma_{dec}\\Delta_k$. Otherwise accept and set\n   $x_{k+1}:=x_k+p$. If $\\rho_k\\ge\\eta_2$ and $\\|p\\|_2=\\Delta_k$, set\n   $\\Delta_{k+1}:=\\min\\{\\gamma_{inc}\\Delta_k,\\Delta_{max}\\}$; in every\n   other accepted case set $\\Delta_{k+1}:=\\Delta_k$.\n\nEvery trial ratio has a positive denominator. The method retains the last\naccepted point; because accepted trials have $\\rho_k\\ge\\eta_1>0$, its\nobjective value is no greater than any earlier accepted value. The finite\nsubproblem budget alone does not imply convergence or a complexity bound."
+    ],
+    "lem-trust-region-ratio-accuracy-for-small-radii": [
+      "## Statement\n\nLet $m$ be the model of\n[[def-trust-region-quadratic-model-and-ratio]], with $g\\ne0$, symmetric\n$B$, and radius $\\Delta>0$. Suppose $\\|B\\|_2\\le M_B$ for a declared\n$M_B\\ge0$, and $f$ is $C^1$ on an open set containing the segment from $x$\nto $x+p$. Suppose the gradient of $f$ is $L$-Lipschitz on that segment,\nmeaning\n$$\\|\\nabla f(u)-\\nabla f(v)\\|_2\\le L\\|u-v\\|_2$$\nthere. Let $0<\\theta\\le1$, let $p$ be feasible, and suppose\n$$m(0)-m(p)\\ge\\theta\\,[m(0)-m(p_C)]$$\nfor the Cauchy step $p_C$ of [[alg-trust-region-cauchy-step]]. Interpret\n$\\|g\\|_2/(2M_B)=+\\infty$ if $M_B=0$, and assume\n$\\Delta\\le\\|g\\|_2/(2M_B)$. Then the predicted reduction is positive and\n$$|\\rho(p)-1|\\le\\frac{2(L+M_B)\\Delta}{\\theta\\|g\\|_2}.$$\nConsequently, for $0<\\eta_2<1$, if $L+M_B>0$ and\n$$\\Delta\\le\\frac{\\theta(1-\\eta_2)\\|g\\|_2}{2(L+M_B)},$$\nthen $\\rho(p)\\ge\\eta_2$. If $L+M_B=0$, then $\\rho(p)=1$."
+    ],
+    "lem-adaptive-cubic-unsuccessful-iteration-count": [
+      "## Statement\n\nSuppose $f$ is $C^2$ and its Hessian is $L$-Lipschitz on each trial segment,\nmeaning\n$$\\|\\nabla^2f(u)-\\nabla^2f(v)\\|_2\\le L\\|u-v\\|_2.$$\nRun [[alg-adaptive-cubic-regularization]] with exact Hessians, an exact global\nminimizer of each cubic model on every solver-success trial,\n$0<\\sigma_{min}\\le\\sigma_k\\le\\sigma_{max}$, and $\\sigma_{max}\\ge3L$.\nThen no ratio-based rejection occurs when $\\sigma_k\\ge3L$. If\n$\\gamma_{up}>1$, let $R\\in\\mathbb N_0$ satisfy\n$\\gamma_{up}^R\\sigma_{min}\\ge3L$; such an $R$ exists. Every block of\nconsecutive ratio-based rejected trials has length at most $R$."
+    ],
+    "thm-trust-region-global-liminf-gradient": [
+      "## Statement\n\nLet $f:\\mathbb R^n\\to\\mathbb R$ be $C^1$, bounded below, and have an\n$L$-Lipschitz gradient on every trial segment. At every iteration let $B_k$\nbe symmetric with $\\|B_k\\|_2\\le M_B$ for a fixed $M_B\\ge0$. Run an infinite\ntrust-region process of [[alg-trust-region-method]] with no positive target\nand no outer cap, fixed $0<\\eta_1<\\eta_2<1$,\n$0<\\gamma_{dec}<1<\\gamma_{inc}$, $0<\\theta_C\\le1$, and\n$0<\\Delta_0\\le\\Delta_{max}$. If it does not terminate at a stationary\npoint, then\n$$\\liminf_{k\\to\\infty}\\|\\nabla f(x_k)\\|_2=0.$$"
+    ],
+    "thm-trust-region-epsilon-iteration-complexity": [
+      "## Statement\n\nAssume the hypotheses and parameter ranges of\n[[thm-trust-region-global-liminf-gradient]], and let $f_{inf}$ be a lower\nbound for $f$. For each target $0<\\varepsilon\\le1$, run\n[[alg-trust-region-method]] until its first iterate with\n$\\|\\nabla f(x_k)\\|_2\\le\\varepsilon$. Define\n$$c_\\delta:=\\min\\left\\{\\frac1{2M_B},\n\\frac{\\theta_C(1-\\eta_2)}{2(L+M_B)}\\right\\},\\qquad\nc_R:=\\min\\{\\Delta_0,\\gamma_{dec}\\min\\{c_\\delta,\\Delta_{max}\\}\\},$$\nwhere a zero denominator means $+\\infty$, and put\n$$c_P:=\\min\\{c_R,1/M_B\\},\\qquad\nc_S:=\\tfrac12\\eta_1\\theta_Cc_P>0.$$\nThen the number $N_s$ of accepted steps before reaching the target and the\nnumber $N_u$ of rejected trials obey\n$$N_s\\le\\frac{f(x_0)-f_{inf}}{c_S\\varepsilon^2},$$\n$$N_u\\le\\frac{\\log(\\Delta_0/r_\\varepsilon)+N_s\\log\\gamma_{inc}}\n{|\\log\\gamma_{dec}|},\\qquad\nr_\\varepsilon:=\\min\\{\\Delta_0,\\gamma_{dec}\\min\\{c_\\delta\\varepsilon,\n\\Delta_{max}\\}\\}.$$\nHere $\\log$ denotes the natural logarithm of a positive real.\nConsequently, accepted steps and total trials $N_s+N_u$ are\n$O(\\varepsilon^{-2})$ as $\\varepsilon\\downarrow0$. An outer cap at least\nthe resulting total-trial bound suffices for the finite-budget algorithm to\nreturn `target-achieved`."
+    ],
+    "thm-adaptive-cubic-regularization-epsilon-complexity": [
+      "## Statement\n\nLet $f:\\mathbb R^n\\to\\mathbb R$ be $C^2$, bounded below by $f_{inf}$, and\nhave an $L$-Lipschitz Hessian on every trial segment in induced Euclidean\nmatrix norm. Run [[alg-adaptive-cubic-regularization]] with exact Hessians,\nand suppose every model call returns an exact global minimizer. Let\n$0<\\eta_1<\\eta_2<1$, $\\gamma_{up}>1$, $0<\\gamma_{down}<1$,\n$0<\\kappa<1$, and $0<\\sigma_{min}\\le\\sigma_k\\le\\sigma_{max}$ with\n$\\sigma_{max}\\ge3L$. For any target $0<\\varepsilon\\le1$, the process\nreaches an iterate with $\\|\\nabla f(x_k)\\|_2\\le\\varepsilon$. Let\n$R\\in\\mathbb N_0$ satisfy $\\gamma_{up}^R\\sigma_{min}\\ge3L$ (take $R=0$\nif $\\sigma_{min}\\ge3L$), and put\n$$C_g:=\\sigma_{max}+\\sqrt n\\,L,\\qquad\nc:=\\frac{\\eta_1\\sigma_{min}}{6C_g^{3/2}}.$$\nThen the numbers of accepted steps $N_s$ and rejected trials $N_u$ through\nthe first target iterate obey\n$$N_s\\le [f(x_0)-f_{inf}]c^{-1}\\varepsilon^{-3/2}+1,\\qquad\nN_u\\le R N_s.$$\nThus the number of trials and each of the function, gradient, and Hessian\nevaluation counts are $O(\\varepsilon^{-3/2})$. A finite outer cap at least\nthe resulting trial count suffices for the algorithm to return\n`target-achieved`."
+    ],
+    "ex-indefinite-trust-region-boundary-minimizer": [],
+    "ex-trust-region-singular-hard-case": [],
+    "ex-trust-region-newton-cauchy-truncated-cg": []
+  },
+  "historical_consumer_scope": [
+    {
+      "id": "alg-adaptive-cubic-regularization",
+      "path": [
+        "def-adaptive-cubic-regularization-model",
+        "alg-adaptive-cubic-regularization"
+      ],
+      "paths": [
+        [
+          "def-adaptive-cubic-regularization-model",
+          "alg-adaptive-cubic-regularization"
+        ],
+        [
+          "lem-global-cubic-model-minimizer-decrease",
+          "alg-adaptive-cubic-regularization"
+        ]
+      ]
+    },
+    {
+      "id": "alg-dogleg-trust-region-step",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-dogleg-trust-region-step"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-dogleg-trust-region-step"
+        ],
+        [
+          "alg-trust-region-cauchy-step",
+          "alg-dogleg-trust-region-step"
+        ],
+        [
+          "lem-positive-definite-model-has-unique-newton-step",
+          "alg-dogleg-trust-region-step"
+        ]
+      ]
+    },
+    {
+      "id": "alg-riemannian-trust-region",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-riemannian-trust-region"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-riemannian-trust-region"
+        ],
+        [
+          "alg-trust-region-cauchy-step",
+          "alg-riemannian-trust-region"
+        ],
+        [
+          "lem-trust-region-cauchy-decrease",
+          "alg-riemannian-trust-region"
+        ],
+        [
+          "alg-trust-region-method",
+          "alg-riemannian-trust-region"
+        ]
+      ]
+    },
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-safeguarded-levenberg-marquardt"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-safeguarded-levenberg-marquardt"
+        ],
+        [
+          "lem-positive-definite-model-has-unique-newton-step",
+          "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+          "alg-safeguarded-levenberg-marquardt"
+        ]
+      ]
+    },
+    {
+      "id": "alg-truncated-cg-trust-region-step",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-truncated-cg-trust-region-step"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-truncated-cg-trust-region-step"
+        ],
+        [
+          "alg-trust-region-cauchy-step",
+          "alg-truncated-cg-trust-region-step"
+        ]
+      ]
+    },
+    {
+      "id": "alg-trust-region-cauchy-step",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-trust-region-cauchy-step"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-trust-region-cauchy-step"
+        ]
+      ]
+    },
+    {
+      "id": "alg-trust-region-method",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-trust-region-method"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-trust-region-method"
+        ],
+        [
+          "alg-trust-region-cauchy-step",
+          "alg-trust-region-method"
+        ],
+        [
+          "lem-trust-region-cauchy-decrease",
+          "alg-trust-region-method"
+        ]
+      ]
+    },
+    {
+      "id": "ex-finite-basis-projector-optimization-on-grassmann",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-riemannian-trust-region",
+        "ex-finite-basis-projector-optimization-on-grassmann"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-riemannian-trust-region",
+          "ex-finite-basis-projector-optimization-on-grassmann"
+        ],
+        [
+          "lem-natural-logarithm-bounded-by-argument",
+          "thm-riemannian-trust-region-first-order-complexity",
+          "ex-finite-basis-projector-optimization-on-grassmann"
+        ],
+        [
+          "alg-trust-region-cauchy-step",
+          "alg-riemannian-trust-region",
+          "ex-finite-basis-projector-optimization-on-grassmann"
+        ],
+        [
+          "lem-trust-region-cauchy-decrease",
+          "alg-riemannian-trust-region",
+          "ex-finite-basis-projector-optimization-on-grassmann"
+        ],
+        [
+          "alg-trust-region-method",
+          "alg-riemannian-trust-region",
+          "ex-finite-basis-projector-optimization-on-grassmann"
+        ]
+      ]
+    },
+    {
+      "id": "ex-indefinite-trust-region-boundary-minimizer",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "ex-indefinite-trust-region-boundary-minimizer"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "ex-indefinite-trust-region-boundary-minimizer"
+        ],
+        [
+          "lem-trust-region-subproblem-optimality-and-hard-case",
+          "ex-indefinite-trust-region-boundary-minimizer"
+        ],
+        [
+          "alg-trust-region-cauchy-step",
+          "ex-indefinite-trust-region-boundary-minimizer"
+        ]
+      ]
+    },
+    {
+      "id": "ex-rank-deficient-identifiability-and-lm-step",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-safeguarded-levenberg-marquardt",
+        "ex-rank-deficient-identifiability-and-lm-step"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-safeguarded-levenberg-marquardt",
+          "ex-rank-deficient-identifiability-and-lm-step"
+        ],
+        [
+          "lem-positive-definite-model-has-unique-newton-step",
+          "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+          "ex-rank-deficient-identifiability-and-lm-step"
+        ]
+      ]
+    },
+    {
+      "id": "ex-trust-region-newton-cauchy-truncated-cg",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "ex-trust-region-newton-cauchy-truncated-cg"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "ex-trust-region-newton-cauchy-truncated-cg"
+        ],
+        [
+          "lem-trust-region-subproblem-optimality-and-hard-case",
+          "ex-trust-region-newton-cauchy-truncated-cg"
+        ],
+        [
+          "alg-trust-region-cauchy-step",
+          "ex-trust-region-newton-cauchy-truncated-cg"
+        ],
+        [
+          "alg-truncated-cg-trust-region-step",
+          "ex-trust-region-newton-cauchy-truncated-cg"
+        ]
+      ]
+    },
+    {
+      "id": "ex-trust-region-singular-hard-case",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "ex-trust-region-singular-hard-case"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "ex-trust-region-singular-hard-case"
+        ],
+        [
+          "lem-trust-region-subproblem-optimality-and-hard-case",
+          "ex-trust-region-singular-hard-case"
+        ]
+      ]
+    },
+    {
+      "id": "lem-adaptive-cubic-unsuccessful-iteration-count",
+      "path": [
+        "def-adaptive-cubic-regularization-model",
+        "lem-adaptive-cubic-unsuccessful-iteration-count"
+      ],
+      "paths": [
+        [
+          "def-adaptive-cubic-regularization-model",
+          "lem-adaptive-cubic-unsuccessful-iteration-count"
+        ],
+        [
+          "lem-global-cubic-model-minimizer-decrease",
+          "lem-adaptive-cubic-unsuccessful-iteration-count"
+        ],
+        [
+          "alg-adaptive-cubic-regularization",
+          "lem-adaptive-cubic-unsuccessful-iteration-count"
+        ]
+      ]
+    },
+    {
+      "id": "lem-global-cubic-model-minimizer-decrease",
+      "path": [
+        "def-adaptive-cubic-regularization-model",
+        "lem-global-cubic-model-minimizer-decrease"
+      ],
+      "paths": [
+        [
+          "def-adaptive-cubic-regularization-model",
+          "lem-global-cubic-model-minimizer-decrease"
+        ]
+      ]
+    },
+    {
+      "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease"
+        ],
+        [
+          "lem-positive-definite-model-has-unique-newton-step",
+          "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+          "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease"
+        ]
+      ]
+    },
+    {
+      "id": "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer"
+        ],
+        [
+          "lem-positive-definite-model-has-unique-newton-step",
+          "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer"
+        ]
+      ]
+    },
+    {
+      "id": "lem-positive-definite-model-has-unique-newton-step",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "lem-positive-definite-model-has-unique-newton-step"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-positive-definite-model-has-unique-newton-step"
+        ]
+      ]
+    },
+    {
+      "id": "lem-riemannian-trust-region-ratio-accuracy-for-small-radii",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-riemannian-trust-region",
+        "lem-riemannian-trust-region-ratio-accuracy-for-small-radii"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-riemannian-trust-region",
+          "lem-riemannian-trust-region-ratio-accuracy-for-small-radii"
+        ],
+        [
+          "alg-trust-region-cauchy-step",
+          "lem-riemannian-trust-region-ratio-accuracy-for-small-radii"
+        ],
+        [
+          "lem-trust-region-cauchy-decrease",
+          "lem-riemannian-trust-region-ratio-accuracy-for-small-radii"
+        ],
+        [
+          "alg-trust-region-method",
+          "alg-riemannian-trust-region",
+          "lem-riemannian-trust-region-ratio-accuracy-for-small-radii"
+        ]
+      ]
+    },
+    {
+      "id": "lem-truncated-cg-iterates-are-krylov-vectors",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-truncated-cg-trust-region-step",
+        "lem-truncated-cg-iterates-are-krylov-vectors"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-truncated-cg-trust-region-step",
+          "lem-truncated-cg-iterates-are-krylov-vectors"
+        ],
+        [
+          "alg-trust-region-cauchy-step",
+          "alg-truncated-cg-trust-region-step",
+          "lem-truncated-cg-iterates-are-krylov-vectors"
+        ],
+        [
+          "alg-truncated-cg-trust-region-step",
+          "lem-truncated-cg-iterates-are-krylov-vectors"
+        ]
+      ]
+    },
+    {
+      "id": "lem-trust-region-cauchy-decrease",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "lem-trust-region-cauchy-decrease"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-trust-region-cauchy-decrease"
+        ],
+        [
+          "alg-trust-region-cauchy-step",
+          "lem-trust-region-cauchy-decrease"
+        ]
+      ]
+    },
+    {
+      "id": "lem-trust-region-ratio-accuracy-for-small-radii",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "lem-trust-region-ratio-accuracy-for-small-radii"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-trust-region-ratio-accuracy-for-small-radii"
+        ],
+        [
+          "alg-trust-region-cauchy-step",
+          "lem-trust-region-ratio-accuracy-for-small-radii"
+        ],
+        [
+          "lem-trust-region-cauchy-decrease",
+          "lem-trust-region-ratio-accuracy-for-small-radii"
+        ]
+      ]
+    },
+    {
+      "id": "lem-trust-region-subproblem-optimality-and-hard-case",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "lem-trust-region-subproblem-optimality-and-hard-case"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "lem-trust-region-subproblem-optimality-and-hard-case"
+        ]
+      ]
+    },
+    {
+      "id": "thm-adaptive-cubic-regularization-epsilon-complexity",
+      "path": [
+        "def-adaptive-cubic-regularization-model",
+        "thm-adaptive-cubic-regularization-epsilon-complexity"
+      ],
+      "paths": [
+        [
+          "def-adaptive-cubic-regularization-model",
+          "thm-adaptive-cubic-regularization-epsilon-complexity"
+        ],
+        [
+          "lem-global-cubic-model-minimizer-decrease",
+          "thm-adaptive-cubic-regularization-epsilon-complexity"
+        ],
+        [
+          "alg-adaptive-cubic-regularization",
+          "thm-adaptive-cubic-regularization-epsilon-complexity"
+        ],
+        [
+          "lem-adaptive-cubic-unsuccessful-iteration-count",
+          "thm-adaptive-cubic-regularization-epsilon-complexity"
+        ]
+      ]
+    },
+    {
+      "id": "thm-riemannian-trust-region-first-order-complexity",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-riemannian-trust-region",
+        "thm-riemannian-trust-region-first-order-complexity"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-riemannian-trust-region",
+          "thm-riemannian-trust-region-first-order-complexity"
+        ],
+        [
+          "lem-natural-logarithm-bounded-by-argument",
+          "thm-riemannian-trust-region-first-order-complexity"
+        ],
+        [
+          "alg-trust-region-cauchy-step",
+          "alg-riemannian-trust-region",
+          "thm-riemannian-trust-region-first-order-complexity"
+        ],
+        [
+          "lem-trust-region-cauchy-decrease",
+          "thm-riemannian-trust-region-first-order-complexity"
+        ],
+        [
+          "alg-trust-region-method",
+          "alg-riemannian-trust-region",
+          "thm-riemannian-trust-region-first-order-complexity"
+        ]
+      ]
+    },
+    {
+      "id": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-safeguarded-levenberg-marquardt",
+        "thm-safeguarded-levenberg-marquardt-global-stationarity"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-safeguarded-levenberg-marquardt",
+          "thm-safeguarded-levenberg-marquardt-global-stationarity"
+        ],
+        [
+          "lem-positive-definite-model-has-unique-newton-step",
+          "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+          "thm-safeguarded-levenberg-marquardt-global-stationarity"
+        ]
+      ]
+    },
+    {
+      "id": "thm-trust-region-epsilon-iteration-complexity",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-trust-region-method",
+        "thm-trust-region-epsilon-iteration-complexity"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-trust-region-method",
+          "thm-trust-region-epsilon-iteration-complexity"
+        ],
+        [
+          "lem-natural-logarithm-bounded-by-argument",
+          "thm-trust-region-epsilon-iteration-complexity"
+        ],
+        [
+          "alg-trust-region-cauchy-step",
+          "alg-trust-region-method",
+          "thm-trust-region-epsilon-iteration-complexity"
+        ],
+        [
+          "lem-trust-region-cauchy-decrease",
+          "thm-trust-region-epsilon-iteration-complexity"
+        ],
+        [
+          "alg-trust-region-method",
+          "thm-trust-region-epsilon-iteration-complexity"
+        ],
+        [
+          "lem-trust-region-ratio-accuracy-for-small-radii",
+          "thm-trust-region-epsilon-iteration-complexity"
+        ],
+        [
+          "thm-trust-region-global-liminf-gradient",
+          "thm-trust-region-epsilon-iteration-complexity"
+        ]
+      ]
+    },
+    {
+      "id": "thm-trust-region-global-liminf-gradient",
+      "path": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-trust-region-method",
+        "thm-trust-region-global-liminf-gradient"
+      ],
+      "paths": [
+        [
+          "def-trust-region-quadratic-model-and-ratio",
+          "alg-trust-region-method",
+          "thm-trust-region-global-liminf-gradient"
+        ],
+        [
+          "alg-trust-region-cauchy-step",
+          "alg-trust-region-method",
+          "thm-trust-region-global-liminf-gradient"
+        ],
+        [
+          "lem-trust-region-cauchy-decrease",
+          "thm-trust-region-global-liminf-gradient"
+        ],
+        [
+          "alg-trust-region-method",
+          "thm-trust-region-global-liminf-gradient"
+        ],
+        [
+          "lem-trust-region-ratio-accuracy-for-small-radii",
+          "thm-trust-region-global-liminf-gradient"
+        ]
+      ]
+    }
+  ],
+  "union": [
+    {
+      "id": "alg-adaptive-cubic-regularization",
+      "path": "items/alg-adaptive-cubic-regularization.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-adaptive-cubic-regularization-model",
+        "cor-hessian-is-symmetric"
+      ]
+    },
+    {
+      "id": "alg-dogleg-trust-region-step",
+      "path": "items/alg-dogleg-trust-region-step.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-trust-region-cauchy-step",
+        "def-definite-and-indefinite-hessian-quadratic-forms"
+      ]
+    },
+    {
+      "id": "alg-riemannian-trust-region",
+      "path": "items/alg-riemannian-trust-region.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": false,
+      "in_assigned_batch_inventory": false,
+      "current_deps": [
+        "def-stiefel-grassmann-optimization-conventions",
+        "def-complex-stiefel-grassmann-optimization-conventions",
+        "def-riemannian-gradient-of-a-smooth-function",
+        "def-stiefel-qr-polar-retractions",
+        "thm-stiefel-retractions-are-first-order",
+        "def-complex-grassmann-polar-retraction",
+        "thm-complex-grassmann-polar-retraction-is-first-order"
+      ]
+    },
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "path": "items/alg-safeguarded-levenberg-marquardt.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": false,
+      "current_deps": [
+        "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+        "def-euclidean-inner-product",
+        "def-matrix-product-and-identity-matrix",
+        "def-trust-region-quadratic-model-and-ratio",
+        "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+        "thm-nonlinear-least-squares-gradient-and-hessian",
+        "thm-of-square-roots"
+      ]
+    },
+    {
+      "id": "alg-truncated-cg-trust-region-step",
+      "path": "items/alg-truncated-cg-trust-region-step.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-trust-region-cauchy-step",
+        "def-krylov-subspace-of-a-matrix-and-start-vector"
+      ]
+    },
+    {
+      "id": "alg-trust-region-cauchy-step",
+      "path": "items/alg-trust-region-cauchy-step.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-trust-region-quadratic-model-and-ratio"
+      ]
+    },
+    {
+      "id": "alg-trust-region-method",
+      "path": "items/alg-trust-region-method.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-trust-region-cauchy-step",
+        "lem-trust-region-cauchy-decrease"
+      ]
+    },
+    {
+      "id": "def-adaptive-cubic-regularization-model",
+      "path": "items/def-adaptive-cubic-regularization-model.md",
+      "in_native_owed_consumer_scope": false,
+      "in_current_changed_interface_cone": false,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-euclidean-inner-product",
+        "def-jacobian-matrix-and-gradient",
+        "def-hessian-and-euclidean-critical-point",
+        "def-induced-matrix-p-norm"
+      ]
+    },
+    {
+      "id": "def-trust-region-quadratic-model-and-ratio",
+      "path": "items/def-trust-region-quadratic-model-and-ratio.md",
+      "in_native_owed_consumer_scope": false,
+      "in_current_changed_interface_cone": false,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-euclidean-inner-product",
+        "def-jacobian-matrix-and-gradient",
+        "def-hessian-and-euclidean-critical-point",
+        "def-induced-matrix-p-norm",
+        "def-matrix-product-and-identity-matrix"
+      ]
+    },
+    {
+      "id": "ex-finite-basis-projector-optimization-on-grassmann",
+      "path": "items/ex-finite-basis-projector-optimization-on-grassmann.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": false,
+      "current_deps": [
+        "def-stiefel-grassmann-optimization-conventions",
+        "thm-stiefel-grassmann-tangent-projections",
+        "prop-stiefel-grassmann-riemannian-gradient-formulas",
+        "alg-riemannian-trust-region",
+        "thm-stiefel-retractions-are-first-order",
+        "thm-gram-schmidt-orthonormalisation",
+        "def-complex-stiefel-grassmann-optimization-conventions",
+        "thm-complex-stiefel-grassmann-tangent-projections",
+        "prop-complex-stiefel-grassmann-are-compact",
+        "prop-complex-grassmann-projector-energy-gradient",
+        "def-complex-grassmann-polar-retraction",
+        "thm-complex-grassmann-polar-retraction-is-first-order",
+        "thm-riemannian-trust-region-first-order-complexity",
+        "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+        "thm-extreme-value-metric",
+        "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+      ]
+    },
+    {
+      "id": "ex-indefinite-trust-region-boundary-minimizer",
+      "path": "items/ex-indefinite-trust-region-boundary-minimizer.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "lem-trust-region-subproblem-optimality-and-hard-case",
+        "alg-trust-region-cauchy-step"
+      ]
+    },
+    {
+      "id": "ex-rank-deficient-identifiability-and-lm-step",
+      "path": "items/ex-rank-deficient-identifiability-and-lm-step.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": false,
+      "current_deps": [
+        "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+        "alg-safeguarded-levenberg-marquardt",
+        "def-euclidean-inner-product",
+        "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer"
+      ]
+    },
+    {
+      "id": "ex-trust-region-newton-cauchy-truncated-cg",
+      "path": "items/ex-trust-region-newton-cauchy-truncated-cg.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "lem-trust-region-subproblem-optimality-and-hard-case",
+        "alg-trust-region-cauchy-step",
+        "alg-truncated-cg-trust-region-step",
+        "lem-truncated-cg-iterates-are-krylov-vectors",
+        "alg-inexact-newton-krylov-with-descent-safeguard",
+        "def-krylov-subspace-of-a-matrix-and-start-vector",
+        "def-wolfe-and-strong-wolfe-conditions",
+        "alg-bracketing-zoom-strong-wolfe-search"
+      ]
+    },
+    {
+      "id": "ex-trust-region-singular-hard-case",
+      "path": "items/ex-trust-region-singular-hard-case.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": false,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "lem-trust-region-subproblem-optimality-and-hard-case"
+      ]
+    },
+    {
+      "id": "lem-adaptive-cubic-unsuccessful-iteration-count",
+      "path": "items/lem-adaptive-cubic-unsuccessful-iteration-count.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "alg-adaptive-cubic-regularization",
+        "def-adaptive-cubic-regularization-model",
+        "def-hessian-and-euclidean-critical-point",
+        "cor-hessian-is-symmetric",
+        "lem-global-cubic-model-minimizer-decrease",
+        "def-induced-matrix-p-norm",
+        "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+        "thm-cauchy-schwarz-and-the-euclidean-norm",
+        "cor-mean-value-theorem",
+        "lem-geometric-sequence-null"
+      ]
+    },
+    {
+      "id": "lem-global-cubic-model-minimizer-decrease",
+      "path": "items/lem-global-cubic-model-minimizer-decrease.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-adaptive-cubic-regularization-model",
+        "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+        "thm-cauchy-schwarz-and-the-euclidean-norm",
+        "thm-real-power-continuity-and-derivatives",
+        "cor-euclidean-closed-balls-and-spheres-are-compact",
+        "thm-extreme-value-metric",
+        "cor-mean-value-theorem",
+        "alg-adaptive-cubic-regularization"
+      ]
+    },
+    {
+      "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+      "path": "items/lem-levenberg-marquardt-large-damping-forces-sufficient-decrease.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": false,
+      "current_deps": [
+        "alg-safeguarded-levenberg-marquardt",
+        "def-euclidean-inner-product",
+        "def-induced-matrix-p-norm",
+        "def-trust-region-quadratic-model-and-ratio",
+        "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+        "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian",
+        "thm-cauchy-schwarz-and-the-euclidean-norm",
+        "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+        "thm-nonlinear-least-squares-gradient-and-hessian",
+        "thm-singular-value-decomposition",
+        "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+      ]
+    },
+    {
+      "id": "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+      "path": "items/lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": false,
+      "current_deps": [
+        "def-euclidean-inner-product",
+        "def-matrix-product-and-identity-matrix",
+        "def-trust-region-quadratic-model-and-ratio",
+        "lem-positive-definite-model-has-unique-newton-step"
+      ]
+    },
+    {
+      "id": "lem-natural-logarithm-bounded-by-argument",
+      "path": "items/lem-natural-logarithm-bounded-by-argument.md",
+      "in_native_owed_consumer_scope": false,
+      "in_current_changed_interface_cone": false,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-natural-logarithm",
+        "thm-natural-logarithm-laws",
+        "thm-logarithm-derivative-and-integral",
+        "cor-mean-value-theorem"
+      ]
+    },
+    {
+      "id": "lem-positive-definite-model-has-unique-newton-step",
+      "path": "items/lem-positive-definite-model-has-unique-newton-step.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+        "def-definite-and-indefinite-hessian-quadratic-forms",
+        "def-invertible-euclidean-linear-map",
+        "alg-dogleg-trust-region-step",
+        "alg-trust-region-cauchy-step",
+        "thm-intermediate-value",
+        "thm-algebra-of-continuous-functions"
+      ]
+    },
+    {
+      "id": "lem-riemannian-trust-region-ratio-accuracy-for-small-radii",
+      "path": "items/lem-riemannian-trust-region-ratio-accuracy-for-small-radii.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": false,
+      "current_deps": [
+        "alg-riemannian-trust-region",
+        "thm-stiefel-retractions-are-first-order",
+        "thm-complex-grassmann-polar-retraction-is-first-order",
+        "alg-trust-region-cauchy-step",
+        "lem-trust-region-cauchy-decrease",
+        "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+        "thm-cauchy-schwarz-and-the-euclidean-norm",
+        "cor-mean-value-theorem"
+      ]
+    },
+    {
+      "id": "lem-truncated-cg-iterates-are-krylov-vectors",
+      "path": "items/lem-truncated-cg-iterates-are-krylov-vectors.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "alg-truncated-cg-trust-region-step",
+        "def-krylov-subspace-of-a-matrix-and-start-vector",
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-trust-region-cauchy-step"
+      ]
+    },
+    {
+      "id": "lem-trust-region-cauchy-decrease",
+      "path": "items/lem-trust-region-cauchy-decrease.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-trust-region-cauchy-step",
+        "def-induced-matrix-p-norm",
+        "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+        "thm-cauchy-schwarz-and-the-euclidean-norm"
+      ]
+    },
+    {
+      "id": "lem-trust-region-ratio-accuracy-for-small-radii",
+      "path": "items/lem-trust-region-ratio-accuracy-for-small-radii.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "alg-trust-region-cauchy-step",
+        "lem-trust-region-cauchy-decrease",
+        "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+        "thm-cauchy-schwarz-and-the-euclidean-norm",
+        "cor-mean-value-theorem"
+      ]
+    },
+    {
+      "id": "lem-trust-region-subproblem-optimality-and-hard-case",
+      "path": "items/lem-trust-region-subproblem-optimality-and-hard-case.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": false,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "def-trust-region-quadratic-model-and-ratio",
+        "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+        "def-definite-and-indefinite-hessian-quadratic-forms",
+        "thm-intermediate-value",
+        "thm-algebra-of-continuous-functions"
+      ]
+    },
+    {
+      "id": "thm-adaptive-cubic-regularization-epsilon-complexity",
+      "path": "items/thm-adaptive-cubic-regularization-epsilon-complexity.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "alg-adaptive-cubic-regularization",
+        "def-adaptive-cubic-regularization-model",
+        "def-hessian-and-euclidean-critical-point",
+        "cor-hessian-is-symmetric",
+        "def-euclidean-inner-product",
+        "def-induced-matrix-p-norm",
+        "thm-cauchy-schwarz-and-the-euclidean-norm",
+        "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+        "lem-global-cubic-model-minimizer-decrease",
+        "lem-adaptive-cubic-unsuccessful-iteration-count",
+        "cor-mean-value-theorem"
+      ]
+    },
+    {
+      "id": "thm-riemannian-trust-region-first-order-complexity",
+      "path": "items/thm-riemannian-trust-region-first-order-complexity.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": false,
+      "current_deps": [
+        "alg-riemannian-trust-region",
+        "lem-riemannian-trust-region-ratio-accuracy-for-small-radii",
+        "lem-trust-region-cauchy-decrease",
+        "prop-stiefel-grassmann-are-compact",
+        "prop-complex-stiefel-grassmann-are-compact",
+        "thm-extreme-value-metric",
+        "def-natural-logarithm",
+        "thm-natural-logarithm-laws",
+        "lem-natural-logarithm-bounded-by-argument",
+        "thm-of-archimedean",
+        "lem-geometric-sequence-null"
+      ]
+    },
+    {
+      "id": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "path": "items/thm-safeguarded-levenberg-marquardt-global-stationarity.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": false,
+      "current_deps": [
+        "alg-safeguarded-levenberg-marquardt",
+        "def-euclidean-inner-product",
+        "def-induced-matrix-p-norm",
+        "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+        "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+        "thm-singular-value-decomposition",
+        "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+        "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+        "thm-nonlinear-least-squares-gradient-and-hessian"
+      ]
+    },
+    {
+      "id": "thm-trust-region-epsilon-iteration-complexity",
+      "path": "items/thm-trust-region-epsilon-iteration-complexity.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "alg-trust-region-method",
+        "lem-trust-region-ratio-accuracy-for-small-radii",
+        "lem-trust-region-cauchy-decrease",
+        "def-natural-logarithm",
+        "thm-natural-logarithm-laws",
+        "lem-natural-logarithm-bounded-by-argument",
+        "thm-of-archimedean",
+        "lem-geometric-sequence-null"
+      ]
+    },
+    {
+      "id": "thm-trust-region-global-liminf-gradient",
+      "path": "items/thm-trust-region-global-liminf-gradient.md",
+      "in_native_owed_consumer_scope": true,
+      "in_current_changed_interface_cone": true,
+      "in_assigned_batch_inventory": true,
+      "current_deps": [
+        "alg-trust-region-method",
+        "lem-trust-region-ratio-accuracy-for-small-radii",
+        "lem-trust-region-cauchy-decrease",
+        "lem-geometric-sequence-null",
+        "def-limsup-liminf",
+        "lem-extended-reals-complete",
+        "def-upper-bound"
+      ]
+    }
+  ],
+  "disposition": "All historical paths retained for substantive review, including removed current Riemannian algorithm edges and the global-liminf hypothesis-only reference. Native records unchanged."
+}

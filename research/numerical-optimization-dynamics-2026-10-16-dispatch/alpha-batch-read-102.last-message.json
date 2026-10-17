@@ -1,0 +1,363 @@
+{
+  "group": "af",
+  "batches": ["102"],
+  "pages_read": [
+    "numerical-identifiability-and-optimal-experiment-design",
+    "numerical-identifiability-and-optimal-experiment-design-examples"
+  ],
+  "items_read": [
+    "def-nonlinear-experimental-design-and-local-identifiability",
+    "lem-computed-sensitivity-singular-value-perturbation",
+    "lem-logdet-information-perturbation-bound",
+    "alg-finite-budget-multiplicative-d-optimal-design",
+    "lem-information-matrix-perturbation-bound",
+    "rem-gauss-newton-information-is-not-full-hessian",
+    "thm-full-rank-sensitivity-implies-local-identifiability",
+    "thm-local-information-positive-definite-iff-full-column-rank",
+    "thm-local-parameter-perturbation-bound",
+    "thm-multiplicative-design-update-well-defined-and-terminates",
+    "thm-uniform-sensitivity-error-controls-design-gap",
+    "thm-equivalence-violation-bounds-d-optimal-design-gap",
+    "ex-cubic-observation-is-locally-identifiable-with-zero-jacobian",
+    "ex-first-order-kinetic-rates-are-confounded-by-total-decay",
+    "ex-local-identifiability-does-not-imply-global-identifiability",
+    "ex-solver-tolerance-can-reverse-a-design-ranking",
+    "ex-endpoint-sensors-give-a-d-optimal-linear-time-design"
+  ],
+  "conventions": [
+    {
+      "convention": "The parameter dimension is positive, the parameter domain is open, candidate conditions form a finite nonempty set, observations are C1, and observation precision matrices are symmetric positive definite.",
+      "fixed_by": "def-nonlinear-experimental-design-and-local-identifiability",
+      "matters_for": [
+        "thm-full-rank-sensitivity-implies-local-identifiability",
+        "thm-local-information-positive-definite-iff-full-column-rank",
+        "lem-information-matrix-perturbation-bound"
+      ]
+    },
+    {
+      "convention": "Only positive-weight conditions enter the stacked observation map and sensitivity Jacobian. Local identifiability means injectivity on an open neighborhood; global identifiability means injectivity on the entire parameter domain.",
+      "fixed_by": "def-nonlinear-experimental-design-and-local-identifiability",
+      "matters_for": [
+        "thm-full-rank-sensitivity-implies-local-identifiability",
+        "thm-local-information-positive-definite-iff-full-column-rank",
+        "ex-cubic-observation-is-locally-identifiable-with-zero-jacobian",
+        "ex-first-order-kinetic-rates-are-confounded-by-total-decay",
+        "ex-local-identifiability-does-not-imply-global-identifiability"
+      ]
+    },
+    {
+      "convention": "Approximate designs have nonnegative real weights summing to one; exact integer run allocation is a separate problem.",
+      "fixed_by": "def-nonlinear-experimental-design-and-local-identifiability",
+      "matters_for": [
+        "alg-finite-budget-multiplicative-d-optimal-design",
+        "thm-multiplicative-design-update-well-defined-and-terminates",
+        "thm-equivalence-violation-bounds-d-optimal-design-gap",
+        "ex-endpoint-sensors-give-a-d-optimal-linear-time-design"
+      ]
+    },
+    {
+      "convention": "Matrix error bounds use the Euclidean operator norm. Singular values in the perturbation lemma are indexed from 1 through min(m,n).",
+      "fixed_by": "lem-computed-sensitivity-singular-value-perturbation",
+      "matters_for": [
+        "lem-information-matrix-perturbation-bound",
+        "lem-logdet-information-perturbation-bound",
+        "ex-solver-tolerance-can-reverse-a-design-ranking"
+      ]
+    },
+    {
+      "convention": "The log-determinant perturbation bound requires a strictly positive common quadratic-form floor on the entire exact/computed matrix segment.",
+      "fixed_by": "lem-logdet-information-perturbation-bound",
+      "matters_for": [
+        "thm-uniform-sensitivity-error-controls-design-gap",
+        "ex-solver-tolerance-can-reverse-a-design-ranking"
+      ]
+    },
+    {
+      "convention": "The multiplicative procedure uses exact arithmetic, counts weight updates with a nonnegative integer budget N, scans at indices 0 through N, and tests zero violation before budget exhaustion.",
+      "fixed_by": "alg-finite-budget-multiplicative-d-optimal-design",
+      "matters_for": [
+        "thm-multiplicative-design-update-well-defined-and-terminates",
+        "thm-equivalence-violation-bounds-d-optimal-design-gap",
+        "ex-endpoint-sensors-give-a-d-optimal-linear-time-design"
+      ]
+    },
+    {
+      "convention": "The parameter-error estimate is conditional on an existing fit inside the stated closed ball; when L=0 its radius is r0, otherwise it is min(r0, μ/(2L)).",
+      "fixed_by": "thm-local-parameter-perturbation-bound",
+      "matters_for": ["thm-local-parameter-perturbation-bound"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-nonlinear-experimental-design-and-local-identifiability",
+      "statement": "Local identifiability at θ0 means injectivity of the supported joint observation map on some open neighborhood of θ0. Its weighted information matrix is Mθ(ξ)=Σx ξx Jx(θ)ᵀ Wx Jx(θ).",
+      "used_by": [
+        "lem-information-matrix-perturbation-bound",
+        "thm-full-rank-sensitivity-implies-local-identifiability",
+        "thm-local-information-positive-definite-iff-full-column-rank",
+        "thm-local-parameter-perturbation-bound",
+        "alg-finite-budget-multiplicative-d-optimal-design",
+        "thm-uniform-sensitivity-error-controls-design-gap"
+      ]
+    },
+    {
+      "id": "lem-information-matrix-perturbation-bound",
+      "statement": "Uniform bounds ‖Jx‖₂≤K, ‖Jh,x−Jx‖₂≤η, and ‖Wx‖₂≤w imply ‖Mh(ξ)−M(ξ)‖₂≤δ:=w(2Kη+η²) for every approximate design. A true quadratic-form floor α>δ gives computed floor α−δ.",
+      "used_by": [
+        "thm-uniform-sensitivity-error-controls-design-gap",
+        "ex-solver-tolerance-can-reverse-a-design-ranking"
+      ]
+    },
+    {
+      "id": "lem-logdet-information-perturbation-bound",
+      "statement": "For symmetric p×p matrices A,B with p≥1 and common segment quadratic-form floor α>0, |log det B−log det A|≤p‖B−A‖₂/α.",
+      "used_by": [
+        "thm-uniform-sensitivity-error-controls-design-gap",
+        "ex-solver-tolerance-can-reverse-a-design-ranking"
+      ]
+    },
+    {
+      "id": "thm-local-information-positive-definite-iff-full-column-rank",
+      "statement": "For the finite nonlinear observation design at a fixed parameter and approximate design, the weighted information matrix is positive definite if and only if the stacked support sensitivity Jacobian has trivial kernel, equivalently full column rank.",
+      "used_by": [
+        "thm-multiplicative-design-update-well-defined-and-terminates",
+        "ex-first-order-kinetic-rates-are-confounded-by-total-decay"
+      ]
+    },
+    {
+      "id": "thm-multiplicative-design-update-well-defined-and-terminates",
+      "statement": "Starting from approximate weights with positive-definite information, every multiplicative update preserves nonnegative weights summing to one and positive definiteness. For finite budget N, the procedure returns after at most N updates and N+1 sensitivity scans.",
+      "used_by": [
+        "alg-finite-budget-multiplicative-d-optimal-design",
+        "thm-equivalence-violation-bounds-d-optimal-design-gap",
+        "ex-endpoint-sensors-give-a-d-optimal-linear-time-design"
+      ]
+    },
+    {
+      "id": "thm-equivalence-violation-bounds-d-optimal-design-gap",
+      "statement": "For any returned nonsingular approximate design ξ, v=maxx fxᵀM(ξ)⁻¹fx−p is nonnegative; every nonsingular approximate competitor η satisfies log det M(η)−log det M(ξ)≤v; and v=0 if and only if ξ is D-optimal among nonsingular approximate designs.",
+      "used_by": ["ex-endpoint-sensors-give-a-d-optimal-linear-time-design"]
+    },
+    {
+      "id": "thm-full-rank-sensitivity-implies-local-identifiability",
+      "statement": "For the C1 joint observation map on an open parameter domain of positive dimension, full column rank of its Jacobian at θ0 implies injectivity on an open neighborhood of θ0.",
+      "used_by": ["ex-local-identifiability-does-not-imply-global-identifiability"]
+    },
+    {
+      "id": "thm-uniform-sensitivity-error-controls-design-gap",
+      "statement": "On the stated nonempty compact metric design space, with continuous criteria, uniform sensitivity error δ=w(2Kη+η²), and common positive segment floor α, a τ-approximate computed maximizer has true log-determinant gap at most τ+2pδ/α.",
+      "used_by": ["ex-solver-tolerance-can-reverse-a-design-ranking"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Orthonormal diagonalization of symmetric information matrices and positive determinant/eigenvalue estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-approximate-linear-model-design-and-optimality-criteria",
+      "used_for": "Finite approximate weights, information matrices, nonsingularity, D-optimality, and the separate exact allocation convention.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "C1 observation-map hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Euclidean quadratic forms and norms.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Observation Jacobian notation.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Conformable matrix products and coordinate expansions.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-norm",
+      "used_for": "Vector norm convention in sensitivity and parameter perturbation arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Operator-norm bounds on sensitivity errors and linear images.",
+      "opened": true
+    },
+    {
+      "id": "thm-eckart-young-best-rank-k-approximation",
+      "used_for": "Best rank-(i−1) approximation characterization of the ith singular value.",
+      "opened": true
+    },
+    {
+      "id": "def-induced-matrix-p-norm",
+      "used_for": "Identification of induced matrix 2-norm with Euclidean operator norm.",
+      "opened": true
+    },
+    {
+      "id": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+      "used_for": "Compatibility and submultiplicativity in the information perturbation expansion.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Quadratic-form perturbation estimates and Euclidean triangle inequalities.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-norm-is-the-largest-singular-value",
+      "used_for": "Transpose norm equality through singular values.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Sensitivity truncations and transpose singular-value comparison.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-a-square-matrix",
+      "used_for": "Trace expansions and tr(Ip)=p.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-differential-and-jacobis-formula",
+      "used_for": "Differentiating log determinant along positive-definite affine paths.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-multiplicative",
+      "used_for": "Positive determinant from orthogonal diagonalization.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-of-a-triangular-matrix",
+      "used_for": "Determinant of diagonal eigenvalue matrices.",
+      "opened": true
+    },
+    {
+      "id": "def-determinant-of-a-square-matrix",
+      "used_for": "Determinant convention and det(Ip)=1.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Log-determinant chain rule, monotonicity, and the numerical example's logarithm bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Selected-coordinate derivatives, parameter paths, and log-determinant paths.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-of-ab-equals-trace-of-ba",
+      "used_for": "Cyclic trace exchange in the log-determinant perturbation estimate.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Endpoint log-determinant estimate, kinetic integrating-factor uniqueness, and logarithm monotonicity.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Existence of exact and computed maximizers on the assumed nonempty compact design space.",
+      "opened": true
+    },
+    {
+      "id": "lem-log-determinant-concavity-on-positive-definite-matrices",
+      "used_for": "Concavity supporting the equivalence-violation upper bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-d-optimality-equivalence-theorem",
+      "used_for": "Zero equivalence violation if and only if D-optimality for nonsingular approximate designs.",
+      "opened": true
+    },
+    {
+      "id": "def-row-space-column-space-nullspace-and-matrix-ranks",
+      "used_for": "Matrix rank and column-space convention.",
+      "opened": true
+    },
+    {
+      "id": "lem-matrix-rank-detected-by-nonzero-minors",
+      "used_for": "Selecting an invertible square coordinate minor from full sensitivity rank.",
+      "opened": true
+    },
+    {
+      "id": "thm-dimension-of-a-linear-subspace",
+      "used_for": "The number of independent sensitivity columns cannot exceed the observation dimension.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-inverse-function-theorem",
+      "used_for": "Local injectivity of the selected square observation map.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+      "used_for": "Invertibility of the selected nonzero minor.",
+      "opened": true
+    },
+    {
+      "id": "thm-row-rank-equals-column-rank",
+      "used_for": "Full column rank gives matrix rank p.",
+      "opened": true
+    },
+    {
+      "id": "cor-vector-valued-ftc-and-lipschitz-bound",
+      "used_for": "Bounding the first-order remainder through the derivative of the remainder path.",
+      "opened": true
+    },
+    {
+      "id": "def-lipschitz-holder-contraction",
+      "used_for": "Operator-norm Lipschitz assumption on the Jacobian.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-first-order-kinetic-rates-are-confounded-by-total-decay",
+      "concern": "The title says “Parallel first-order decay identifies only the sum of two rates”, but the permitted finite nonempty observation set may be T={0}. Then every observation equals A0 independently of k1+k2, so even the sum is not identifiable. The body correctly proves nonseparation and rank at most one; the title's positive identifiability assertion needs a positive observation time or wording that merely says observations depend only on the sum.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "rem-gauss-newton-information-is-not-full-hessian",
+      "concern": "The remark begins “For the unweighted nonlinear least-squares objective” and asserts the exact Hessian identity without stating that the residual map is C2. Its cited supplier thm-nonlinear-least-squares-gradient-and-hessian explicitly requires C2, whereas the batch observation definition supplies only C1. For example r(θ)=1+|θ|^(3/2) is C1 but its squared-residual objective has no second derivative at zero. The intended supplier hypothesis is immediately recoverable, but should be stated in the remark.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "numerical-identifiability-and-optimal-experiment-design",
+      "to": "inequality-kkt-duality-and-optimality-certificates",
+      "faithful": true,
+      "note": "Checked the required page and the consuming page/items. This is a contextual page prerequisite: the assigned proofs invoke neither KKT multipliers nor a constraint-qualification converse. No supplier proposition is restated more strongly."
+    },
+    {
+      "from": "numerical-identifiability-and-optimal-experiment-design",
+      "to": "proximal-gradient-and-accelerated-composite-optimization",
+      "faithful": true,
+      "note": "Checked both page interfaces and assigned uses. The multiplicative design algorithm invokes no proximal or FISTA procedure and imports no convergence rate; finite termination is proved from its own budget. No stronger proximal claim is attributed to the supplier."
+    },
+    {
+      "from": "numerical-identifiability-and-optimal-experiment-design",
+      "to": "gauss-newton-and-levenberg-marquardt-methods",
+      "faithful": false,
+      "note": "The cited Hessian supplier was opened and its formula is reproduced correctly, but it assumes a C2 residual map. The consuming remark omits that hypothesis; the assigned observation definition guarantees only C1. This same-batch concern is recorded against rem-gauss-newton-information-is-not-full-hessian."
+    },
+    {
+      "from": "numerical-identifiability-and-optimal-experiment-design",
+      "to": "discrete-continuous-and-pde-adjoint-sensitivities",
+      "faithful": true,
+      "note": "Checked the required page against the assigned sensitivity-error claims. The batch assumes explicit operator-norm sensitivity errors; it does not derive them from state error, a solver tolerance, an adjoint formula, or an unstated discretization rate. No stronger adjoint proposition is imported."
+    }
+  ]
+}

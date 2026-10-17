@@ -1,0 +1,1622 @@
+Geometric Numerical Integration
+TU M¨unchen
+Ernst Hairer
+January – February 2010
+
+Lecture 2: Symplectic integrators
+
+Table of contents
+
+1
+Basic symplectic integration schemes
+1
+2
+Symplectic Runge–Kutta methods
+4
+3
+The Adjoint of a Method
+7
+4
+Composition methods
+8
+5
+Splitting methods
+12
+6
+Integrators based on generating functions
+15
+7
+Variational integrators
+15
+8
+Exercises
+18
+
+A numerical one-step method yn+1 = Φh(yn) is called symplectic if, when applied
+to a Hamiltonian system, the discrete flow y �→Φh(y) is a symplectic transforma-
+tion for all sufficiently small step sizes. Pioneering work on symplectic integrators
+is due to de Vogelaere (1956)1, Ruth (1983)2, and Feng Kang (1985)3.
+
+1
+Basic symplectic integration schemes
+
+The most simple symplectic integrators are motivated by the theory of generating
+functions for symplectic transformations (see Lecture 1). We consider the Hamil-
+tonian system in the variables y = (p, q),
+
+˙p = −∇qH(p, q)
+˙q =
+∇pH(p, q)
+or equivalently
+˙y = J−1∇H(y).
+
+1R. de Vogelaere, Methods of integration which preserve the contact transformation property
+of the Hamiltonian equations, Report No. 4, Dept. Math., Univ. of Notre Dame, Notre Dame, Ind.
+(1956)
+2R.D. Ruth, A canonical integration technique, IEEE Trans. Nuclear Science NS-30 (1983)
+2669–2671.
+3K. Feng, On difference schemes and symplectic geometry, Proceedings of the 5-th Intern.
+Symposium on differential geometry & differential equations, Aug. 1984, Beijing (1985) 42–58.
+
+1
+
+
+Theorem 1 (symplectic Euler) The so-called symplectic Euler methods
+
+pn+1 = pn −h∇qH(pn+1, qn)
+
+qn+1 = qn + h∇pH(pn+1, qn)
+or
+pn+1 = pn −h∇qH(pn, qn+1)
+
+qn+1 = qn + h∇pH(pn, qn+1)
+(1)
+
+are symplectic methods of order 1.
+
+Proof. Symplecticity is an immediate consequence of the first two characteriza-
+tions of Theorem 5 (Lecture 1). Consistency of the scheme is obvious.
+
+The methods (1) are implicit for general Hamiltonian systems. For separable
+H(p, q) = T(p)+U(q), however, both variants turn out to be explicit. This is also
+the case for the methods of the next theorem.
+
+Theorem 2 (St¨ormer–Verlet) The St¨ormer–Verlet schemes
+
+pn+1/2 = pn −h
+
+2 ∇qH(pn+1/2, qn)
+
+qn+1 = qn + h
+
+2
+
+�
+∇pH(pn+1/2, qn) + ∇pH(pn+1/2, qn+1)
+�
+
+pn+1 = pn+1/2 −h
+
+2 ∇qH(pn+1/2, qn+1)
+
+(2)
+
+and
+qn+1/2 = qn + h
+
+2 ∇pH(pn, qn+1/2)
+
+pn+1 = pn −h
+
+2
+
+�
+∇qH(pn, qn+1/2) + ∇qH(pn+1, qn+1/2)
+�
+
+qn+1 = qn+1/2 + h
+
+2 ∇pH(pn+1, qn+1/2)
+
+(3)
+
+are symplectic methods of order 2.
+
+Proof. The statement follows from the fact that the St¨ormer–Verlet scheme is the
+composition of the two symplectic Euler methods (1) with step size h/2. Even
+order 2 follows from its symmetry.
+
+For a second order differential equation ¨q = −∇U(q), for which the Hamilto-
+nian is H(p, q) = 1
+
+2 pTp + U(q) , method (2) becomes
+
+qn+1 −2 qn + qn−1 = −h2 ∇U(qn),
+pn = qn+1 −qn−1
+
+2h
+.
+(4)
+
+Theorem 3 (implicit midpoint) The implicit midpoint rule
+
+yn+1 = yn + hJ−1∇H
+�yn+1 + yn
+
+2
+
+�
+(5)
+
+is a symplectic method of order 2.
+
+2
+
+
+0
+2
+4
+6
+8
+
+−2
+
+2
+
+0
+2
+4
+6
+8
+
+−2
+
+2
+
+0
+2
+4
+6
+8
+
+−2
+
+2
+
+0
+2
+4
+6
+8
+
+−2
+
+2
+
+0
+2
+4
+6
+8
+
+−2
+
+2
+
+0
+2
+4
+6
+8
+
+−2
+
+2
+
+explicit Euler
+Runge, order 2
+
+symplectic Euler
+Verlet
+
+implicit Euler
+midpoint rule
+
+Figure 1: Area preservation of numerical methods for the pendulum; same initial
+sets as in Figure 3 of Lecture 1; first order methods (left column): h = π/4;
+second order methods (right column): h = π/3; dashed: exact flow.
+
+Proof. Symplecticity is a consequence of the third characterization of Theorem 5
+(Lecture 1), and order 2 follows from the symmetry of the method.
+
+We consider the pendulum problem with Hamiltonian H(p, q) = 1
+
+2p2 −cos q.
+We apply six different numerical methods to this problem: the explicit Euler
+method, the symplectic Euler method (1), and the implicit Euler method, as well
+as a second order method of Runge, the St¨ormer–Verlet scheme (2), and the im-
+plicit midpoint rule (5). For two sets of initial values (p0, q0) we compute several
+steps with step size h = π/4 for the first order methods, and h = π/3 for the sec-
+ond order methods. One clearly observes in Figure 14 that the explicit Euler, the
+implicit Euler and the second order explicit method of Runge are not symplectic
+(not area preserving).
+
+4This figure and most of the text are taken from the monograph Geometric Numerical Integra-
+tion by Hairer, Lubich & Wanner.
+
+3
+
+
+2
+Symplectic Runge–Kutta methods
+
+An s-stage Runge–Kutta method, applied to an initial value problem ˙y = f(t, y),
+y(t0) = y0 is given by the formulas
+
+ki
+=
+f
+�
+t0 + cih, y0 + h
+
+s
+�
+
+j=1
+aijkj
+�
+,
+i = 1, . . . , s
+
+y1
+=
+y0 + h
+
+s
+�
+
+i=1
+biki,
+(6)
+
+where ci = �s
+j=1 aij. We allow a full matrix (aij) of non-zero coefficients, so that
+the slopes ki are defined implicitly. For the study of their symplecticity we follow
+the approach of Bochev & Scovel5. It relates symplecticity to the conservation
+of quadratic first integrals. Recall that a function I(y) is a first integral of the
+differential equation ˙y = f(y), if I′(y)f(y) = 0 for all y.
+
+Theorem 4 If a Runge–Kutta method (6) conserves quadratic first integrals (i.e.,
+I(y1) = I(y0) whenever I(y) = yTCy, with symmetric matrix C, is a first integral
+of ˙y = f(y)), then it is symplectic.
+
+Proof. Symplecticity of the discrete flow y �→Φh(y) means that for a Hamiltonian
+problem the quadratic expression ΨTJ Ψ (with Ψ = Φ′
+h(y)) is a first integral of
+the variational equation. The statement of the theorem is therefore a consequence
+of the fact that for Runge–Kutta methods the following diagram commutes:
+
+˙y = f(y), y(0) = y0
+−→
+˙y = f(y), y(0) = y0
+˙Ψ = f ′(y)Ψ, Ψ(0) = I
+�method
+�method
+
+{yn}
+−→
+{yn, Ψn}
+
+(horizontal arrows mean a differentiation with respect to y0). Therefore, the nu-
+merical result yn, Ψn, obtained from applying the method to the problem aug-
+mented by its variational equation, is equal to the numerical solution for ˙y = f(y)
+augmented by its derivative Ψn = ∂yn/∂y0.
+
+5P.B. Bochev & C. Scovel, On quadratic invariants and symplectic structure, BIT 34 (1994)
+337–345.
+
+4
+
+
+The commutativity of the above diagram is proved by implicit differentiation.
+Let us illustrate this for the explicit Euler method
+
+yn+1 = yn + hf(yn).
+
+We consider yn and yn+1 as functions of y0, and we differentiate with respect to
+y0 the equation defining the numerical method. For the Euler method this gives
+
+∂yn+1
+
+∂y0
+= ∂yn
+
+∂y0
++ hf ′(yn) ∂yn
+
+∂y0
+,
+
+which is exactly the relation that we get from applying the method to the varia-
+tional equation. Since ∂y0/∂y0 = I, we have ∂yn/∂y0 = Ψn for all n.
+
+An elegant proof of symplecticity is possible for Gauss collocation methods.
+They are defined as follows: let c1, . . . , cs be the zeros of the shifted Legendre
+polynomial ds
+
+dxs
+�
+xs(1 −x)s�
+, and let u(t) be the polynomial of degree s satisfying
+
+u(t0) = y0
+˙u(t0 + cih) = f
+�
+t0 + cih, u(t0 + cih)
+�
+,
+i = 1, . . ., s,
+(7)
+
+then the numerical solution of the Gauss collocation method is defined by y1 =
+u(t0 + h).
+Putting ki = ˙u(t0 + cih), and expressing ˙u(t0 + τh) and by integration also
+u(t0+τh) in terms of the ki, one see that these methods are special case of implicit
+Runge–Kutta methods. The implicit midpoint rule (5) is the special case s = 1 of
+the Gauss methods.
+
+Theorem 5 The Gauss collocation methods conserve quadratic first integrals and
+are thus symplectic by Theorem 4.
+
+Proof. Let u(t) be the collocation polynomial of the Gauss methods, and assume
+that I(y) = yTC y, with symmetric C, is a first integral of ˙y = f(y). Since
+d
+dtI
+�
+u(t)
+�
+= 2u(t)TC ˙u(t), it follows from u(t0) = y0 and u(t0 + h) = y1 that
+
+yT
+1 C y1 −yT
+0 C y0 = 2
+�t0+h
+
+t0
+u(t)TC ˙u(t) dt.
+(8)
+
+The integrand u(t)TC ˙u(t) is a polynomial of degree 2s −1, which is integrated
+without error by the s-stage Gaussian quadrature formula. It therefore follows
+from the collocation condition
+
+u(t0 + cih)TC ˙u(t0 + cih) = u(t0 + cih)TC f
+�
+u(t0 + cih)
+�
+= 0
+
+that the integral in (8) vanishes.
+
+5
+
+
+The following criterion on the conservation of quadratic first integrals is due
+to Cooper6, that on the symplecticity has been found independently by Lasagni7,
+Sanz-Serna8, and Suris9.
+
+Theorem 6 If the coefficients of a Runge–Kutta method satisfy
+
+biaij + bjaji = bibj
+for all i, j = 1, . . . , s,
+(9)
+
+then it conserves quadratic first integrals and it is symplectic (by Theorem 4).
+
+Proof. The Runge–Kutta relation y1 = y0 + h �s
+i=1 biki yields
+
+yT
+1 Cy1 = yT
+0 Cy0 + h
+
+s
+�
+
+i=1
+bi kT
+i Cy0 + h
+
+s
+�
+
+j=1
+bj yT
+0 Ckj + h2
+s
+�
+
+i,j=1
+bibj kT
+i Ckj. (10)
+
+We then write ki = f(Yi) with Yi = y0 + h �s
+j=1 aijkj. The main idea is to
+compute y0 from this relation and to insert it into the central expressions of (10).
+This yields (using the symmetry of C)
+
+yT
+1 Cy1 = yT
+0 Cy0 + 2h
+
+s
+�
+
+i=1
+bi Y T
+i Cf(Yi) + h2
+s
+�
+
+i,j=1
+(bibj −biaij −bjaji) kT
+i Ckj.
+
+The condition (9) together with the assumption yTCf(y) = 0, which states that
+yTCy is a first integral of ˙y = f(y), imply yT
+1 Cy1 = yT
+0 Cy0.
+
+All results of this section can be extended to partitioned Runge–Kutta meth-
+ods, where the components of p and q in a Hamiltonian system are treated by
+different Runge-Kutta methods. The most prominent examples are the symplectic
+Euler method (combination of explicit and implicit Euler) and the St¨ormer–Verlet
+method (combination of the trapezoidal rule and the implicit midpoint rule).
+
+6G.J. Cooper, Stability of Runge–Kutta methods for trajectory problems, IMA J. Numer.
+Anal. 7 (1987) 1–13.
+7F.M. Lasagni, Canonical Runge–Kutta methods, ZAMP 39 (1988) 952–953.
+8J.M. Sanz-Serna, Runge–Kutta schemes for Hamiltonian systems, BIT 28 (1988) 877–883.
+9Y.B. Suris, On the conservation of the symplectic structure in the numerical solution of Hamil-
+tonian systems (in Russian), In: Numerical Solution of Ordinary Differential Equations, ed. S.S.
+Filippov, Keldysh Inst. of Appl. Math., USSR Academy of Sciences, Moscow, 1988, 148–160.
+
+6
+
+
+3
+The Adjoint of a Method
+
+The flow ϕt of an autonomous differential equation ˙y = f(y) satisfies ϕ−1
+−t = ϕt.
+This property is in general not shared by the one-step map Φh of a numerical
+method. An illustration is presented in the upper picture of Figure 2 (a), where we
+see that the one-step map Φh for the explicit Euler method is different from the
+inverse of Φ−h, which is the implicit Euler method.
+
+Definition 1 The adjoint method Φ∗
+h of a method Φh is the inverse map of the
+original method with reversed time step −h, i.e.,
+
+Φ∗
+h := Φ−1
+−h
+(11)
+
+(see Figure 2 (b)). In other words, y1 = Φ∗
+h(y0) is implicitly defined by the relation
+Φ−h(y1) = y0. A method for which Φ∗
+h = Φh is called symmetric.
+
+y0
+
+y1
+Φh
+
+Φ−h
+
+y0
+
+y1
+Φh
+
+Φ−h
+
+(a)
+
+Φ−h
+
+Φ∗
+h
+
+(b)
+
+y0
+
+y1
+ϕh(y0)
+
+Φ−h
+
+Φ∗
+h
+
+Φ−h
+
+Φ∗
+h
+
+e
+
+e∗
+(c)
+
+Figure 2: Definition and properties of the adjoint method
+
+The adjoint method satisfies the usual properties such as (Φ∗
+h)∗= Φh and
+(Φh ◦Ψh)∗= Ψ∗
+h ◦Φ∗
+h for any two one-step methods Φh and Ψh. The implicit
+Euler method is the adjoint of the explicit Euler method. The implicit midpoint
+rule is symmetric (see the lower picture of Figure 2 (a)), and the trapezoidal rule
+and the St¨ormer–Verlet method are also symmetric.
+
+Theorem 7 Let ϕt be the exact flow of ˙y = f(y) and let Φh be a one-step method
+of order r satisfying
+
+Φh(y0) = ϕh(y0) + C(y0)hr+1 + O(hr+2).
+(12)
+
+The adjoint method Φ∗
+h then has the same order r and we have
+
+Φ∗
+h(y0) = ϕh(y0) + (−1)rC(y0)hr+1 + O(hp+r).
+(13)
+
+If the method is symmetric, its (maximal) order is even.
+
+7
+
+
+Proof. The idea of the proof is exhibited in drawing (c) of Figure 2. From a given
+initial value y0 we compute ϕh(y0) and y1 = Φ∗
+h(y0), whose difference e∗is the
+local error of Φ∗
+h. This error is then projected back by Φ−h to become e. We see
+that −e is the local error of Φ−h, i.e., by hypothesis (12),
+
+e = (−1)rC(ϕh(y0))hr+1 + O(hr+2).
+(14)
+
+Since ϕh(y0) = y0 + O(h) and e = (I + O(h))e∗, it follows that
+
+e∗= (−1)rC(y0)hr+1 + O(hr+2)
+
+which proves (13). The statement for symmetric methods is an immediate con-
+sequence of this result, because Φh = Φ∗
+h implies C(y0) = (−1)rC(y0), and
+therefore C(y0) can be different from zero only for even r.
+
+4
+Composition methods
+
+Let Φh be a basic method and γ1, . . . , γs real numbers. Then we call its composi-
+tion with step sizes γ1h, γ2h, . . . , γsh, i.e.,
+
+Ψh = Φγsh ◦. . . ◦Φγ1h,
+(15)
+
+the corresponding composition method (see Figure 3(a)). The aim is to increase
+the order while preserving desirable properties like symplecticity of the basic
+method.
+
+Theorem 8 Let Φh be a one-step method of order r. If
+
+γ1 + . . . + γs = 1
+γr+1
+1
++ . . . + γr+1
+s
+= 0,
+(16)
+
+then the composition method (15) is at least of order r + 1.
+
+Proof. The proof is presented in Figure 3(b) for s = 3. It is very similar to the
+proof of Theorem 7. Starting with y0, we let yi = Φγih(yi−1), so that Ψh(y0) = ys.
+By hypothesis we have ei+1 = ϕγih(yi) −Φγih(yi) = C(yi) γr+1
+i
+hr+1 + O(hr+2),
+and the transported local error satisfies Ei = (I + O(h))ei for all i. Because of
+yi = y0 + O(h) it follows from �s
+i=1 γi = 1 (consistency requirement) that
+
+ϕh(y0) −Ψh(y0) = E1 + . . . + Es = C(y0)(γr+1
+1
++ . . . + γr+1
+s
+)hr+1 + O(hr+2)
+
+which shows that under conditions (16) the O(hr+1)-term vanishes.
+
+8
+
+
+Ψh
+
+(a)
+
+y0
+y1
+y2
+
+y3
+
+ϕΣγih(y0)
+
+Φγ1h
+Φγ2h
+
+Φγ3h
+e1
+e2
+
+e3 =E3
+
+E2
+
+E1
+(b)
+
+y0
+y1
+y2
+
+Ψh(y0)
+
+ϕΣγih(y0)
+
+Φγ1h
+Φγ2h
+
+Φγ3h
+
+Figure 3: Composition of method Φh with three step sizes
+
+Example 1 (The Triple Jump) Equations (16) have no real solution for odd r.
+Therefore, the order increase is only possible for even r. In this case, the smallest
+s which allows a solution is s = 3. We then have some freedom for solving
+the two equations. If we impose symmetry γ1 = γ3, then we obtain (Creutz &
+Gocksch10, Forest11, Suzuki12, Yoshida13)
+
+γ1 = γ3 =
+1
+2 −21/(r+1),
+γ2 = −
+21/(r+1)
+
+2 −21/(r+1) .
+(17)
+
+This procedure can be repeated: we start with a symmetric method of order 2,
+apply (17) with r = 2 to obtain order 3; due to the symmetry of the γ’s this new
+method is in fact of order 4 (see Theorem 7). With this new method we repeat
+(17) with r = 4 and obtain a symmetric 9-stage composition method of order 6,
+then with r = 6 a 27-stage symmetric composition method of order 8, and so on.
+One obtains in this way any order, however, at the price of a terrible zig-zag of the
+step points (see Figure 4).
+
+−1
+0
+1
+2
+−1
+0
+1
+2
+−1
+0
+1
+2
+γ1
+
+−γ2
+
+γ3
+p=4
+p=6
+p=8
+
+Figure 4: The Triple Jump of order 4 and its iterates of orders 6 and 8
+
+10M. Creutz & A. Gocksch, Higher-order hybrid Monte Carlo algorithms, Phys. Rev. Lett. 63
+(1989) 9–12.
+11E. Forest, Canonical integrators as tracking codes, AIP Conference Proceedings 184 (1989)
+1106–1136.
+12M. Suzuki, Fractal decomposition of exponential operators with applications to many-body
+theories and Monte Carlo simulations, Phys. Lett. A 146 (1990) 319–323.
+13H. Yoshida, Construction of higher order symplectic integrators, Phys. Lett. A 150 (1990)
+262–268.
+
+9
+
+
+Example 2 (Suzuki’s Fractals) If one desires methods with smaller values of γi,
+one has to increase s even more. For example, for s = 5 the best solution of (16)
+has the sign structure + + −+ + with γ1 = γ2 (Suzuki 1990). This leads to
+
+γ1 = γ2 = γ4 = γ5 =
+1
+4 −41/(r+1),
+γ3 = −
+41/(r+1)
+
+4 −41/(r+1) .
+(18)
+
+The repetition of this algorithm for r = 2, 4, 6, . . . leads to a fractal structure of
+the step points (see Figure 5).
+
+0
+1
+0
+1
+0
+1
+
+γ1
+γ2
+
+−γ3
+γ4
+γ5
+p=4
+p=6
+p=8
+
+Figure 5: Suzuki’s ‘fractal’ composition methods
+
+Composition with the Adjoint Method. If we replace the composition (15) by
+the more general formula
+
+Ψh = Φαsh ◦Φ∗
+βsh ◦. . . ◦Φ∗
+β2h ◦Φα1h ◦Φ∗
+β1h,
+(19)
+
+the condition for order r + 1 becomes, by using the result (13) and a similar proof
+as above,
+β1 + α1 + β2 + . . . + βs + αs = 1
+
+(−1)rβr+1
+1
++ αr+1
+1
++ (−1)rβr+1
+2
++ . . . + (−1)rβr+1
+s
++ αr+1
+s
+= 0.
+(20)
+
+This allows an order increase for odd r as well. In particular, we see at once the
+solution α1 = β1 = 1/2 for r = s = 1, which turns every consistent one-step
+method of order 1 into a second-order symmetric method
+
+Ψh = Φh/2 ◦Φ∗
+h/2.
+(21)
+
+For example, if Φh is the explicit (resp. implicit) Euler method, then Ψh in (21) be-
+comes the implicit midpoint (resp. trapezoidal) rule. If Φh is the symplectic Euler
+method, then the composed method Ψh in (21) is the St¨ormer–Verlet method.
+
+A Numerical Example. To demonstrate the numerical performance of the above
+methods, we choose the Kepler problem on the interval [0, 7.5] with initial values
+corresponding to an eccentricity e = 0.6 (see Lecture 1). As the basic method we
+use the St¨ormer–Verlet scheme and compare in Figure 6 the Triple Jump (17) and
+Suzuki (18) compositions for a large number of different equidistant basic step
+sizes and for orders r = 4, 6, 8, 10, 12. The maximal final error is compared with
+
+10
+
+
+10−15
+
+10−12
+
+10−9
+
+10−6
+
+10−3
+
+100
+
+102
+103
+104
+105
+
+10−15
+
+10−12
+
+10−9
+
+10−6
+
+10−3
+
+100
+
+102
+103
+104
+105
+
+6
+
+8
+
+4
+
+6
+8
+10
+12
+
+Yoshida
+
+error
+
+function eval.
+
+6
+
+8
+
+4
+6
+
+8
+
+10
+12
+
+Suzuki
+
+error
+
+function eval.
+
+Figure 6: Numerical results of the Triple Jump and Suzuki step sequences (grey
+symbols) compared to optimal methods (black symbols)
+
+the total number of function evaluations in double logarithmic scales. We observe
+that the wild zig-zag of the Triple Jump (17) is a more serious handicap than the
+large number of small steps of the Suzuki sequence (18).
+
+Optimized composition methods. The construction of optimal methods (large
+order with minimal s) needs an elaborate order theory and cumbersome numerical
+search algorithms. We just present the coefficients of an 8th order method 14 15 16
+
+γ1 = γ15 =
+0.74167036435061295344822780
+γ2 = γ14 = −0.40910082580003159399730010
+γ3 = γ13 =
+0.19075471029623837995387626
+γ4 = γ12 = −0.57386247111608226665638773
+γ5 = γ11 =
+0.29906418130365592384446354
+γ6 = γ10 =
+0.33462491824529818378495798
+γ7 = γ9 =
+0.31529309239676659663205666
+γ8 = −0.79688793935291635401978884
+
+0
+1
+
+p8 s15
+
+(22)
+
+The results of this 8th order method and of an optimized method of order 6 are
+included in Figure 6 with black symbols. They outperform those of the previous
+approaches.
+
+14M. Suzuki & K. Umeno, Higher-order decomposition theory of exponential operators and its
+applications to QMC and nonlinear dynamics, Springer Proceedings in Physics 76 (1993) 74–86.
+15M. Suzuki, Quantum Monte Carlo methods and general decomposition theory of exponential
+operators and symplectic integrators, Physica A 205 (1994) 65–79.
+16R.I. McLachlan, On the numerical integration of ordinary differential equations by symmetric
+composition methods, SIAM J. Sci. Comput. 16 (1995) 151–168.
+
+11
+
+
+5
+Splitting methods
+
+We consider an arbitrary system ˙y = f(y) in Rn, and suppose that the vector field
+is “split” as (Figure 7)
+˙y = f [1](y) + f [2](y).
+(23)
+
+If the exact flows ϕ[1]
+t
+and ϕ[2]
+t
+of the systems ˙y = f [1](y) and ˙y = f [2](y) can be
+calculated explicitly, we can compose them to get numerical approximations.
+
+f
+=
+f[1]
++
+f[2]
+
+Figure 7: A splitting of a vector field.
+
+Lie–Trotter17 splitting. If, from a given initial value y0, we first solve the first
+system to obtain a value y1/2, and from this value integrate the second system to
+obtain y1, we get numerical integrators
+
+Φ∗
+h = ϕ[2]
+h ◦ϕ[1]
+h
+
+Φh = ϕ[1]
+h ◦ϕ[2]
+h
+
+Φ∗
+h
+
+y0
+y1/2
+
+y1
+
+ϕ[1]
+h
+
+ϕ[2]
+h
+Φh
+y0
+
+y1/2
+y1
+ϕ[2]
+h
+
+ϕ[1]
+h
+
+(24)
+
+where one is the adjoint of the other. By Taylor expansion we find that (ϕ[1]
+h ◦
+ϕ[2]
+h )(y0) = ϕh(y0) + O(h2), so that both methods give approximations of order 1
+to the solution of (23).
+
+Strang18 splitting or Marchuk19 splitting. Another idea is to use a symmetric
+version and put
+
+Φ[S]
+h = ϕ[1]
+h/2 ◦ϕ[2]
+h ◦ϕ[1]
+h/2 ,
+Φ[S]
+h
+
+y0
+
+y1
+
+ϕ[1]
+h/2
+
+ϕ[2]
+h
+
+ϕ[1]
+h/2
+
+(25)
+
+By breaking up in (25) ϕ[2]
+h
+= ϕ[2]
+h/2 ◦ϕ[2]
+h/2, we see that the Strang splitting
+
+17H.F. Trotter, On the product of semi-groups of operators, Proc. Am. Math. Soc.10 (1959)
+545–551.
+18G. Strang, On the construction and comparison of difference schemes, SIAM J. Numer.
+Anal. 5 (1968) 506–517.
+19G. Marchuk, Some applications of splitting-up methods to the solution of mathematical
+physics problems, Aplikace Matematiky 13 (1968) 103–132.
+
+12
+
+
+Φ[S]
+h
+= Φh/2 ◦Φ∗
+h/2 is the composition of the Lie-Trotter method and its adjoint
+with halved step sizes. The Strang splitting formula is therefore symmetric and of
+order 2 (see formula (21)).
+
+Example 3 (The Symplectic Euler and the St¨ormer–Verlet Schemes) Suppose
+we have a Hamiltonian system with separable Hamiltonian H(p, q) = T(p) +
+U(q). We consider this as the sum of two Hamiltonians, the first one depending
+only on p, the second one only on q. The corresponding Hamiltonian systems
+
+˙p = 0
+˙q = ∇pT(p)
+and
+˙p = −∇qU(q)
+˙q = 0
+(26)
+
+can be solved without problem to yield
+
+p(t) = p0
+q(t) = q0 + t ∇pT(p0)
+and
+p(t) = p0 −t ∇qU(q0)
+q(t) = q0.
+(27)
+
+Denoting the flows of these two systems by ϕT
+t and ϕU
+t , we see that the symplectic
+Euler method (1) is just the composition ϕT
+h ◦ϕU
+h , and its adjoint is ϕU
+h ◦ϕT
+h. The
+St¨ormer–Verlet scheme (2) is ϕU
+h/2 ◦ϕT
+h ◦ϕU
+h/2, the Strang splitting (25).
+
+General Splitting Procedure. In a similar way to the general idea of composi-
+tion methods (19), we can form with arbitrary coefficients a1, b1, a2, . . ., am, bm
+(where, eventually, a1 or bm, or both, are zero)
+
+Ψh = ϕ[2]
+bmh ◦ϕ[1]
+amh ◦ϕ[2]
+bm−1h ◦. . . ◦ϕ[1]
+a2h ◦ϕ[2]
+b1h ◦ϕ[1]
+a1h
+(28)
+
+and try to increase the order of the scheme by suitably determining the free coef-
+ficients.
+A close connection between the theories of splitting methods (28) and of com-
+position methods (19) was discovered by McLachlan (1995). Indeed, if we put
+β1 = a1 and break up ϕ[2]
+b1h = ϕ[2]
+α1h ◦ϕ[2]
+β1h (group property of the exact flow)
+where α1 is given in (30), further ϕ[1]
+a2h = ϕ[1]
+β2h ◦ϕ[1]
+α1h and so on (cf. Figure 8), we
+see, using (24), that Ψh of (28) is identical with Ψh of (19), where
+
+Φh = ϕ[1]
+h ◦ϕ[2]
+h
+so that
+Φ∗
+h = ϕ[2]
+h ◦ϕ[1]
+h .
+(29)
+
+A necessary and sufficient condition for the existence of αi and βi satisfying (30)
+is that �ai = �bi, which is the consistency condition anyway for method (28).
+
+13
+
+
+Φ∗
+β1h
+Φα1h
+
+Φ∗
+β2h
+Φα2h
+
+Φ∗
+β3h
+
+y0
+
+y1
+
+ϕ[1]
+a1h
+
+ϕ[2]
+b1h
+ϕ[1]
+a2h
+
+ϕ[2]
+b2h
+ϕ[1]
+a3h
+
+ϕ[2]
+b3h
+
+a1 = β1
+b1 = β1 + α1
+a2 = α1 + β2
+b2 = β2 + α2
+a3 = α2 + β3
+b3 = β3
+
+(30)
+
+Figure 8: Equivalence of splitting and composition methods.
+
+Combining Exact and Numerical Flows. If the splitting (23) is such that only
+the flow of, say, ˙y = f [1](y) can be computed exactly, we can consider
+
+Φh = ϕ[1]
+h ◦Φ[2]
+h ,
+Φ∗
+h = Φ[2]∗
+h
+◦ϕ[1]
+h
+(31)
+
+as the basis of the composition method (19). Here ϕ[1]
+t
+is the exact flow of ˙y =
+f [1](y), and Φ[2]
+h is some first-order integrator applied to ˙y = f [2](y). Since Φh
+of (31) is consistent with (23), the above interpretation of splitting methods as
+composition methods implies that the resulting method
+
+Ψh = ϕ[1]
+αsh ◦Φ[2]
+αsh ◦Φ[2]∗
+βsh ◦ϕ[1]
+(βs+αs−1)h ◦Φ[2]
+αs−1h ◦. . . ◦Φ[2]∗
+β1h ◦ϕ[1]
+β1h
+(32)
+
+has the desired high order. Notice that replacing ϕ[2]
+t with a low-order approxima-
+tion Φ[2]
+t
+in (28) would not retain the high order of the composition, because Φ[2]
+t
+does not satisfy the group property.
+
+Splitting into More than Two Vector Fields. Consider a differential equation
+
+˙y = f [1](y) + f [2](y) + . . . + f [N](y),
+(33)
+
+where we assume that the flows ϕ[j]
+t of the individual problems ˙y = f [j](y) can be
+computed exactly. There are many possibilities for extending (28) and for writing
+the method as a composition of ϕ[1]
+ajh, ϕ[2]
+bjh, ϕ[3]
+cjh, . . . . A simple and efficient way
+is to consider the first-order method
+
+Φh = ϕ[1]
+h ◦ϕ[2]
+h ◦. . . ◦ϕ[N]
+h
+together with its adjoint as the basis of the composition (19). Without any addi-
+tional effort this yields splitting methods for (33) of arbitrary high order.
+
+14
+
+
+6
+Integrators based on generating functions
+
+To construct symplectic numerical methods of high order, Feng Kang20 and Chan-
+nell & Scovel21 proposed computing an approximate solution of the Hamilton–
+Jacobi equation.
+Recall that a mapping (pn, qn) �→(pn+1, qn+1) defined by
+
+pn+1 = pn −∇qS1(pn+1, qn),
+qn+1 = qn + ∇pS1(pn+1, qn)
+(34)
+
+is always symplectic (Section 5 of Lecture 1) and that it reproduces the exact
+solution (after time h) of the Hamiltonian system (Section 6 of Lecture 1) if
+
+S1(p, q, t) = h G1(p, q) + h2 G2(p, q) + h3 G3(p, q) + . . .
+where
+
+G1(p, q) = H(p, q),
+
+G2(p, q) = 1
+
+2
+
+�∂H
+
+∂p
+∂H
+
+∂q
+
+�
+(p, q),
+
+G3(p, q) = 1
+
+6
+
+�∂2H
+
+∂p2
+
+�∂H
+
+∂q
+
+�2
++ ∂2H
+
+∂p∂q
+∂H
+
+∂p
+∂H
+
+∂q + ∂2H
+
+∂q2
+
+�∂H
+
+∂P
+
+�2�
+(p, q).
+
+If we use the truncated series
+
+S1(p, q) = h G1(p, q) + h2 G2(p, q) + . . . + hr Gr(p, q)
+(35)
+
+and insert it into (34), we obtain a symplectic one-step method of order r. We
+remark that for r ≥2 the methods obtained require the computation of higher
+derivatives of H(p, q), and for separable Hamiltonians H(p, q) = T(p) + U(q)
+they are no longer explicit (compared to the symplectic Euler method (1)).
+
+7
+Variational integrators
+
+All previous approaches start from extremizing the action integral
+
+S(q) =
+�tN
+
+t0
+L
+�
+q(t), ˙q(t)
+�
+dt,
+
+then deriving the Euler–Lagrange equations and the equivalent Hamiltonian equa-
+tions, and finally discretize the resulting differential equations.
+
+20K. Feng, Difference schemes for Hamiltonian formalism and symplectic geometry, J. Comp.
+Math. 4 (1986) 279–289.
+21P.J. Channell & J.C. Scovel, Symplectic integration of Hamiltonian systems, Nonlinearity 3
+(1990) 231–259.
+
+15
+
+
+Variational integrators start from discretizing the action integral followed by
+extremizing it in a finite dimensional space to obtain discrete Euler–Lagrange
+equations and (symplectic) numerical integrators.
+For given q0 and qN, we consider the approximation
+
+Sh({qn}N
+0 ) =
+
+N−1
+�
+
+n=0
+Lh(qn, qn+1),
+Lh(qn, qn+1) ≈
+�tn+1
+
+tn
+L(q(t), ˙q(t)) dt
+
+of the action integral, where Lh plays the role of a discrete Lagrangian. The
+requirement ∂Sh/∂qn = 0 for an extremum yields the discrete Euler–Lagrange
+equations
+∂Lh
+
+∂y (qn−1, qn) + ∂Lh
+
+∂x (qn, qn+1) = 0
+(36)
+
+for n = 1, . . . , N −1, where the partial derivatives refer to Lh = Lh(x, y). This
+gives a three-term difference scheme for determining q1, . . . , qN−1. We introduce
+the discrete momenta via a discrete Legendre transformation,
+
+pn = −∂Lh
+
+∂x (qn, qn+1),
+(37)
+
+so that the discrete Euler–Lagrange equations become equivalent to (substitute n
+for n + 1 in (36))
+
+pn+1 = ∂Lh
+
+∂y (qn, qn+1).
+(38)
+
+Under suitable assumptions on Lh, the two equations (37) and (38) define a map-
+ping (pn, qn) �→(pn+1, qn+1).
+
+Theorem 9 The numerical method (pn, qn) �→(pn+1, qn+1), defined by (37) and
+(38), is a symplectic integrator.
+
+Proof. The differential of Lh = Lh(qn, qn+1) satisfies
+
+dLh = pn+1 dqn+1 −pn dqn,
+
+which proves symplecticity by Theorem 4 of Lecture 1.
+
+Example 4 (MacKay22) Choose Lh(qn, qn+1) by approximating q(t) as the linear
+interpolant of qn and qn+1 and the integral by the trapezoidal rule. This gives
+
+Lh(qn, qn+1) = h
+
+2 L
+�
+qn, qn+1 −qn
+
+h
+
+�
++ h
+
+2 L
+�
+qn+1, qn+1 −qn
+
+h
+
+�
+(39)
+
+22R. MacKay, Some aspects of the dynamics of Hamiltonian systems, in: D.S. Broomhead &
+A. Iserles, eds., The Dynamics of Numerics and the Numerics of Dynamics, Clarendon Press,
+Oxford, 1992, 137–193.
+
+16
+
+
+and hence the symplectic scheme, with vn+1/2 = (qn+1 −qn)/h for brevity,
+
+pn = 1
+
+2
+∂L
+
+∂˙q (qn, vn+1/2) + 1
+
+2
+∂L
+
+∂˙q (qn+1, vn+1/2) −h
+
+2
+∂L
+
+∂q (qn, vn+1/2)
+
+pn+1 = 1
+
+2
+∂L
+
+∂˙q (qn, vn+1/2) + 1
+
+2
+∂L
+
+∂˙q (qn+1, vn+1/2) + h
+
+2
+∂L
+
+∂q (qn+1, vn+1/2) .
+
+For a mechanical Lagrangian L(q, ˙q) =
+1
+2 ˙qTM ˙q −U(q) and with the notation
+pn+1/2 = Mvn+1/2, this reduces to the St¨ormer–Verlet method
+
+pn+1/2 = pn −h
+
+2 ∇U(qn)
+
+qn+1 = qn + h M−1pn+1/2
+
+pn+1 = pn+1/2 −h
+
+2 ∇U(qn+1).
+
+In this case, the discrete Euler–Lagrange equations (36) become the familiar sec-
+ond order difference formula M(qn+1 −2qn + qn−1) = −h2∇U(qn).
+
+Example 5 (Wendlandt & Marsden23) Approximating the action integral instead
+by the midpoint rule gives
+
+Lh(qn, qn+1) = hL
+�qn+1 + qn
+
+2
+, qn+1 −qn
+
+h
+
+�
+.
+(40)
+
+This yields the symplectic scheme, with the abbreviations qn+1/2 = (qn+1 +qn)/2
+and vn+1/2 = (qn+1 −qn)/h,
+
+pn = ∂L
+
+∂˙q (qn+1/2, vn+1/2) −h
+
+2
+∂L
+
+∂q (qn+1/2, vn+1/2)
+
+pn+1 = ∂L
+
+∂˙q (qn+1/2, vn+1/2) + h
+
+2
+∂L
+
+∂q (qn+1/2, vn+1/2).
+
+For L(q, ˙q) = 1
+
+2 ˙qTM ˙q −U(q) and pn+1/2 = Mvn+1/2, this becomes the implicit
+midpoint rule
+pn+1/2 = pn −h
+
+2 ∇U(qn+1/2)
+
+qn+1 = qn + h M−1pn+1/2
+
+pn+1 = pn+1/2 −h
+
+2 ∇U(qn+1/2),
+
+because we have pn+1/2 = (pn+1 + pn)/2.
+
+23J.M. Wendlandt & J.E. Marsden, Mechanical integrators derived from a discrete variational
+principle, Physica D 106 (1997) 223–246.
+
+17
+
+
+8
+Exercises
+
+1. Prove that under the condition (9) a Runge–Kutta method preserves all first
+integrals of the form I(y) = yTCy + dTy + c.
+
+2. Prove that the Gauss methods of maximal oder 2s are the only collocation
+methods satisfying (9).
+Hint. Use the ideas of the proof of Lemma 13.9 in Hairer & Wanner24.
+
+3. Show that each of the symplectic Euler methods in (1) is the adjoint of the
+other.
+
+4. Consider the composition method (15) with s = 5, γ5 = γ1, and γ4 = γ2.
+Among the solutions of
+
+2γ1 + 2γ2 + γ3 = 1,
+2γ3
+1 + 2γ3
+2 + γ3
+3 = 0
+
+find the one that minimizes |2γ5
+1 + 2γ5
+2 + γ5
+3|.
+Remark. This property motivates the choice of the γi in (18).
+
+5. Design a symmetric splitting method for the Euler equations of a rigid body
+with given principal momenta of inertia I1, I2, I3
+
+˙y = B(y)∇H(y),
+B(y) =
+
+
+
+
+0
+−y3
+y2
+y3
+0
+−y1
+−y2
+y1
+0
+
+
+
+
+
+by splitting the Hamiltonian
+
+H(y1, y2, y3) = 1
+
+2
+
+�y2
+1
+I1
++ y2
+2
+I2
++ y2
+3
+I3
+
+�
+
+into three parts.
+
+24E. Hairer & G. Wanner, Solving Ordinary Differential Equations II. Stiff and Differential-
+Algebraic Problems, 2nd edition, Springer Series in Computational Mathematics 14, Springer-
+Verlag Berlin, 1996.
+
+18
+
+

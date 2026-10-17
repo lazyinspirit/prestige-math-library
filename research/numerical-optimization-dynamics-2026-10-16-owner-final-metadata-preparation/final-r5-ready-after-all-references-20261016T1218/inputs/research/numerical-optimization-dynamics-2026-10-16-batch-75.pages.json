@@ -1,0 +1,227 @@
+[
+  {
+    "order": 2434,
+    "id": "differential-algebraic-equations-and-consistent-initialization",
+    "kind": "A",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Differential algebraic equations and consistent initialization",
+    "companion": "differential-algebraic-equations-and-consistent-initialization-examples",
+    "requires": [
+      "nonlinear-equations-and-newton-methods",
+      "implicit-stiff-time-stepping-and-algebraic-error"
+    ],
+    "items": [
+      {
+        "id": "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+        "kind": "definition",
+        "title": "Semi-explicit index-one DAEs and consistent initial data",
+        "deps": [
+          "def-first-order-ode-initial-value-problem-and-solution"
+        ],
+        "justified_by": [
+          "thm-index-one-dae-implicit-function-reduction"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-regular-differentiation-index",
+        "kind": "definition",
+        "title": "Differentiation index for a regular local semi-explicit DAE",
+        "deps": [
+          "def-semi-explicit-index-one-dae-and-consistent-initial-data"
+        ],
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "thm-index-one-dae-implicit-function-reduction",
+        "kind": "theorem",
+        "title": "A regular index-one DAE has a local reduced ODE branch",
+        "deps": [
+          "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+          "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "lem-index-one-dae-algebraic-residual-to-state-error",
+        "kind": "lemma",
+        "title": "An index-one algebraic residual locally bounds algebraic state error",
+        "deps": [
+          "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+          "thm-index-one-dae-implicit-function-reduction",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "alg-index-one-dae-consistent-initialization",
+        "kind": "algorithm",
+        "title": "Finite-budget index-one DAE consistent initialization",
+        "deps": [
+          "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+          "thm-index-one-dae-implicit-function-reduction",
+          "alg-finite-budget-newton-for-vector-residuals"
+        ],
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "alg-index-one-dae-backward-euler-stepper",
+        "kind": "algorithm",
+        "title": "Finite-budget coupled backward Euler for an index-one DAE",
+        "deps": [
+          "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+          "alg-index-one-dae-consistent-initialization",
+          "thm-index-one-dae-implicit-function-reduction",
+          "def-backward-euler-step-equation",
+          "def-implicit-residual-and-algebraic-error-units",
+          "alg-finite-budget-newton-for-vector-residuals"
+        ],
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "alg-index-one-dae-bdf2-stepper",
+        "kind": "algorithm",
+        "title": "Finite-budget coupled constant-step BDF2 for an index-one DAE",
+        "deps": [
+          "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+          "alg-index-one-dae-consistent-initialization",
+          "thm-index-one-dae-implicit-function-reduction",
+          "alg-variable-step-bdf2-with-selected-implicit-branch",
+          "lem-variable-step-bdf2-interpolation-and-local-defect",
+          "def-implicit-residual-and-algebraic-error-units",
+          "alg-finite-budget-newton-for-vector-residuals"
+        ],
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "lem-index-one-dae-backward-euler-local-branch",
+        "kind": "lemma",
+        "title": "The coupled index-one backward-Euler equations have a local branch",
+        "deps": [
+          "alg-index-one-dae-backward-euler-stepper",
+          "thm-index-one-dae-implicit-function-reduction",
+          "thm-parametrized-implicit-function-theorem-with-higher-regularity"
+        ],
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "lem-index-one-dae-bdf2-local-branch",
+        "kind": "lemma",
+        "title": "The coupled index-one constant-step BDF2 equations have a local branch",
+        "deps": [
+          "alg-index-one-dae-bdf2-stepper",
+          "thm-index-one-dae-implicit-function-reduction",
+          "thm-parametrized-implicit-function-theorem-with-higher-regularity"
+        ],
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "thm-index-one-dae-finite-budget-solvers-terminate",
+        "kind": "theorem",
+        "title": "The finite-budget index-one DAE solvers return a status in finite work",
+        "deps": [
+          "lem-finite-budget-newton-work-and-status",
+          "alg-index-one-dae-consistent-initialization",
+          "alg-index-one-dae-backward-euler-stepper",
+          "alg-index-one-dae-bdf2-stepper",
+          "alg-finite-budget-newton-for-vector-residuals"
+        ],
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "thm-index-one-dae-backward-euler-first-order-with-residuals",
+        "kind": "theorem",
+        "title": "Coupled backward Euler is first order for a regular index-one DAE",
+        "deps": [
+          "alg-index-one-dae-backward-euler-stepper",
+          "lem-index-one-dae-backward-euler-local-branch",
+          "lem-index-one-dae-algebraic-residual-to-state-error",
+          "thm-index-one-dae-implicit-function-reduction",
+          "def-backward-euler-step-equation",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "lem-discrete-one-step-error-recurrence-bound"
+        ],
+        "dependency_level": 5,
+        "justified_by": []
+      },
+      {
+        "id": "thm-index-one-dae-bdf2-second-order-with-residuals",
+        "kind": "theorem",
+        "title": "Coupled constant-step BDF2 is second order for a regular index-one DAE",
+        "deps": [
+          "alg-index-one-dae-bdf2-stepper",
+          "alg-index-one-dae-backward-euler-stepper",
+          "lem-index-one-dae-bdf2-local-branch",
+          "lem-index-one-dae-backward-euler-local-branch",
+          "lem-index-one-dae-algebraic-residual-to-state-error",
+          "thm-index-one-dae-implicit-function-reduction",
+          "alg-variable-step-bdf2-with-selected-implicit-branch",
+          "lem-variable-step-bdf2-interpolation-and-local-defect",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "lem-discrete-one-step-error-recurrence-bound"
+        ],
+        "dependency_level": 5,
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2435,
+    "id": "differential-algebraic-equations-and-consistent-initialization-examples",
+    "kind": "B",
+    "category": "numerical-differential-equations-and-stochastic-dynamics",
+    "title": "Differential algebraic equations and consistent initialization — Examples",
+    "companion": "differential-algebraic-equations-and-consistent-initialization",
+    "requires": [
+      "differential-algebraic-equations-and-consistent-initialization"
+    ],
+    "items": [
+      {
+        "id": "ex-index-one-circuit-consistent-initialization-and-be-step",
+        "kind": "example",
+        "title": "A capacitor-resistor circuit has one consistent algebraic current",
+        "deps": [
+          "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+          "def-backward-euler-step-equation",
+          "thm-index-one-dae-implicit-function-reduction"
+        ],
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "ex-index-two-dae-algebraic-residual-does-not-control-state",
+        "kind": "example",
+        "title": "An index-two DAE can have zero algebraic residual and an arbitrary algebraic variable",
+        "deps": [
+          "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+          "def-regular-differentiation-index"
+        ],
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "ex-index-three-pendulum-by-differentiation",
+        "kind": "example",
+        "title": "The constrained pendulum has differentiation index three",
+        "deps": [
+          "def-semi-explicit-index-one-dae-and-consistent-initial-data",
+          "def-regular-differentiation-index"
+        ],
+        "dependency_level": 2,
+        "justified_by": []
+      }
+    ]
+  }
+]

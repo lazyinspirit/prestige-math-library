@@ -1,0 +1,1930 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "19",
+  "scope": [
+    "lem-sine-chord-and-lipschitz-bounds",
+    "lem-cardinal-lagrange-interpolation-and-operator-norm",
+    "cor-best-polynomial-approximation-errors-vanish",
+    "lem-chebyshev-cardinal-polynomial-formulas",
+    "thm-chebyshev-interpolation-near-best-error-bound",
+    "thm-chebyshev-interpolation-lebesgue-constant-log-bound",
+    "ex-equispaced-runge-function-interpolation-diverges",
+    "ex-chebyshev-interpolation-node-families-and-degree-one-norms",
+    "ex-exponential-best-error-rate-for-chebyshev-interpolation"
+  ],
+  "contracts": {
+    "lem-sine-chord-and-lipschitz-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-differentiable-implies-continuous",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\nlimit point of $A$ ([[def-limit-point-r]]). If $f$ is differentiable at $c$\n([[def-derivative]]) then $f$ is continuous at $c$ ([[def-continuity-real]]).\n\nConsequently, if $f$ is differentiable on a set $S \\subseteq A$ then $f$ is\ncontinuous at every point of $S$.\n\n**No converse is asserted, and none holds.** Continuity at $c$ does not give\ndifferentiability at $c$, and the standard witness is worked out on the\ncompanion page.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $h(u)=\\sin u-u\\cos u$. By [F1], [F2], and [F5], $h$ is differentiable and hence continuous, with $h'(u)=u\\sin u\\geq0$ on $(0,\\pi/2)$ by [F4]. For $u>0$, the mean value theorem on $[0,u]$ gives $h(u)\\geq h(0)=0$; at $u=0$ equality is immediate.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $0<u<\\pi/2$, define $r(u)=\\sin u/u$. By the quotient rule, the identity derivative in [F5], and step 1.1, $r'(u)=(u\\cos u-\\sin u)/u^2=-h(u)/u^2\\leq0$. The function $r$ is continuous on $[u,\\pi/2]$ by [F5], so the mean value theorem gives $r(u)\\geq r(\\pi/2)=2/\\pi$ by [F3] and [F4]; at $u=\\pi/2$ equality holds. Multiplying by $u$ and checking $u=0$ proves the first inequality.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $u\\ne v$, sine is continuous on the closed interval between them and differentiable inside by [F1] and [F5]. The mean value theorem gives $|\\sin u-\\sin v|=|\\cos c|\\,|u-v|\\leq|u-v|$ for some interior $c$, by [F3] and [F4]. If $u=v$, both sides are zero.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The first claim uses the fixed nonempty interval [0,pi/2]; the second ranges over real u and v."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1, 2.1, and 3.1 explicitly handle u=0 or u=v."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no degree or natural-index parameter in this trigonometric inequality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 treats the degenerate interval case u=v directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 verify u=0 and u=pi/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 2.1, and 3.1 use explicit functions and the mean value theorem; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is sine lies above its endpoint chord and has Lipschitz constant one, for a first angle in the closed interval zero to half pi, and arbitrary real angle pairs. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is sine lies above its endpoint chord and has Lipschitz constant one, for a first angle in the closed interval zero to half pi, and arbitrary real angle pairs. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Checked all three steps: h prime=u sin u is nonnegative on (0,pi/2), and MVT applies since differentiability supplies continuity by the explicit F5. The quotient is only used for positive u; MVT on [u,pi/2] yields the chord bound. u=0, u=pi/2 and u=v are explicit; the Lipschitz estimate uses |cos c|<=1. No choice. Published signs/range proof has short missing continuity/IVT citations (reader 1/2); established local suppliers close these nonfatal omissions, without changing the claimed bounds."
+      }
+    },
+    "lem-cardinal-lagrange-interpolation-and-operator-norm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+          "source_section": "Definition",
+          "quote": "Let $C[-1,1]$ be the real continuous functions on $[-1,1]$, with\n$\\|f\\|_\\infty:=\\sup_{x\\in[-1,1]}|f(x)|$. Let $\\mathcal P_n$ be the\nrestrictions to $[-1,1]$ of real polynomials of degree at most $n$, including\nthe zero polynomial. Interval notation is that of [[def-interval]]. Continuity and polynomial degree have the conventions of\n[[def-continuity-real]] and\n[[def-real-polynomial-degree-leading-coefficient-and-monic]].\n\nFor each $n\\in\\mathbb N$ (with naturals in real expressions interpreted by\ntheir canonical real images), the first-kind Chebyshev root angles and nodes are\n$$\\theta_j^{R,n}=\\frac{(2j+1)\\pi}{2n+2},\\qquad x_j^{R,n}=\\cos\\theta_j^{R,n},\\qquad 0\\leq j\\leq n.$$\nThey are the roots of $T_{n+1}$ by\n[[thm-chebyshev-multiple-angle-identities]]. For $n\\geq1$, the\nChebyshev–Lobatto angles and nodes are\n$$\\theta_j^{L,n}=\\frac{j\\pi}{n},\\qquad x_j^{L,n}=\\cos\\theta_j^{L,n},\\qquad 0\\leq j\\leq n.$$\nThey include both endpoints and are the extrema of $T_n$ by the same\nidentity. At $n=0$, define the Lobatto node to be $x_0^{L,0}=0$. The\ncosine is strictly decreasing on $[0,\\pi]$, so each listed family has\ndistinct nodes; the root family at $n=0$ also consists of $0$.\n\nFor either family $\\sigma\\in\\{R,L\\}$, write its nodes as\n$x_0,\\ldots,x_n$ and define\n$$\\ell_{j,n}^{\\sigma}(x)= \\prod_{\\substack{0\\leq k\\leq n\\\\k\\ne j}} \\frac{x-x_k}{x_j-x_k},\\qquad I_n^\\sigma f=\\sum_{j=0}^n f(x_j)\\ell_{j,n}^{\\sigma}.$$\nThese are the cardinal formula and interpolation sum of\n[[def-cardinal-polynomial-interpolation]] specialized to this node family.\nThe displayed cosine arrays decrease, whereas that supplier orders nodes\nincreasingly: use $z_i=x_{n-i}$ and data $y_i=f(z_i)$. Its cardinal\nfunction with index $n-j$ is exactly the displayed $\\ell_{j,n}^\\sigma$,\nby reindexing the finite product, and its interpolation sum is $I_n^\\sigma$.\nThe empty product at $n=0$ is $1$, so the same identification holds for the\nsingle node. Distinctness makes every denominator nonzero;\n[[lem-cardinal-basis-degree-and-values]] supplies the degree and cardinal\nvalues. The finite sum is linear in the data and maps $C[-1,1]$ into\n$\\mathcal P_n$. Its operator norm is\n$$\\Lambda_n^\\sigma:= \\sup\\{\\|I_n^\\sigma g\\|_\\infty:g\\in C[-1,1],\\ \\|g\\|_\\infty\\leq1\\}.$$\nIf $\\ell_{j,n}^\\sigma(x)=\\sum_{k=0}^n a_{jk}x^k$, then\n$|\\ell_{j,n}^\\sigma(x)|\\leq\\sum_{k=0}^n|a_{jk}|$ for $|x|\\leq1$; hence\n$\\|I_n^\\sigma g\\|_\\infty\\leq\\sum_{j,k}|a_{jk}|<\\infty$ whenever\n$\\|g\\|_\\infty\\leq1$. Define the best degree-$n$ uniform\napproximation error by\n$$E_n(f):=\\inf_{p\\in\\mathcal P_n}\\|f-p\\|_\\infty .$$\n\nThese quantities are real and well-defined. Polynomial functions are\ncontinuous, and sums and scalar multiples of continuous functions remain\ncontinuous by [[thm-algebra-of-continuous-functions]]. The interval\n$[-1,1]\\subset\\mathbb R$ is nonempty, closed, and bounded, so\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]] implies\nthat for every such continuous function $h$ there are finite minimum and\nmaximum values $m_h,M_h$. Since $m_h\\leq h(x)\\leq M_h$, one has\n$|h(x)|\\leq\\max(|m_h|,|M_h|)$, so each supremum norm above is finite. The set defining $\\Lambda_n^\\sigma$ contains\nthe zero function and is bounded above by the displayed finite coefficient\nsum. The set defining $E_n(f)$ contains the zero polynomial and is bounded\nbelow by zero. Completeness of $\\mathbb R$ ([[def-complete-ordered-field]])\ntherefore gives the stated finite supremum and infimum. Also, $n+1$ has\npositive real image by [[def-canonical-natural]] and\n[[lem-of-naturals-positive]], and $n$ has positive real image when $n\\geq1$;\nthus the root-angle denominator and the Lobatto denominator in its stated\nrange are nonzero.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, $n\\ge0$, let $x_0<\\cdots<x_n$ be distinct real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Then $I_n y$ from [[def-cardinal-polynomial-interpolation]] is the unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-cardinal-basis-degree-and-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, let $x_0<\\cdots<x_n$ be real nodes, and let $y_0,\\ldots,y_n\\in\\mathbb R$. Each cardinal function $\\ell_j$ of [[def-cardinal-polynomial-interpolation]] is the evaluation of a formal polynomial of degree $n$. The node function $\\omega_n$ is the evaluation of a monic formal polynomial of degree $n+1$, and $\\omega_n(x)\\ne0$ whenever $x$ differs from every node. The function $I_n y$ is the evaluation of a formal polynomial of degree at most $n$. At every pair $i,j\\in\\{0,\\ldots,n\\}$, $\\ell_j(x_i)=1$ if $i=j$ and $0$ otherwise.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $z_i=x_{n-i}$, so $z_0<\\cdots<z_n$ by [F1]. Under this reverse indexing, the supplier cardinal function at index $n-j$ is $\\ell_j$ by the specialization in [F1]. Applying [F3] gives its degree and cardinal values, including the one-node empty-product case $n=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Put $L(x)=\\sum_j|\\ell_{j,n}^\\sigma(x)|$. For every $g$ with $\\|g\\|_\\infty\\leq1$, the defining sum gives $|I_n^\\sigma g(x)|\\leq L(x)$, hence $\\Lambda_n^\\sigma\\leq\\sup_xL(x)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Prescribe data $y_i=1$ at $i=n-j$ and $0$ otherwise on the increasingly ordered nodes $z_i$ from step 1.1. The polynomial $\\ell_j$ has these data by step 1.1. The supplier uniqueness theorem [F2] makes it the unique degree-at-most-$n$ polynomial with the required cardinal values.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Prescribe $y_i=p(z_i)$ on the ordered nodes in step 1.1. By [F1] and [F3], their cardinal sum is $I_n^\\sigma p$ and has degree at most $n$. The polynomial $p$ itself interpolates those data, so the supplier uniqueness theorem [F2] gives $I_n^\\sigma p=p$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $x$. Define $\\operatorname{sgn}(t)=1$ for $t>0$, $-1$ for $t<0$, and $0$ for $t=0$, and prescribe $\\operatorname{sgn}(\\ell_{j,n}^\\sigma(x))$ at each node. These values lie in $[-1,1]$ and satisfy $\\operatorname{sgn}(t)t=|t|$ by cases. Sort nodes increasingly, interpolate these values linearly, and extend constantly to the interval endpoints; each interpolated value is a convex combination of endpoint values, so the resulting continuous $g_x$ has norm at most $1$. The cardinal sum gives $I_n^\\sigma g_x(x)=L(x)$, so $\\Lambda_n^\\sigma\\geq\\|I_n^\\sigma g_x\\|_\\infty\\geq L(x)$. Taking the supremum in $x$ and using step 1.2 proves equality. For $n=0$ the same construction is constant on the interval.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement permits n=0, which has one interpolation node. Proof step 1.1 explicitly invokes the empty-product cardinal polynomial at n=0, and step 3.1 constructs the constant one-node test function; the interpolation data itself is never empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 includes the zero polynomial, and step 3.1 treats n=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 cover n=1; step 3.1 covers the one-node case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 handles the one-node n=0 family explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 verifies cardinal values at every node, including endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1 constructs g_x from finitely many prescribed signs; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is unique cardinal polynomials reproduce all degree-bounded polynomials and yield the cardinal-sum operator norm, for either named Chebyshev grid at every nonnegative degree. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is unique cardinal polynomials reproduce all degree-bounded polynomials and yield the cardinal-sum operator norm, for either named Chebyshev grid at every nonnegative degree. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "One-node interpolation, n=0",
+          "method": "exact evaluation of the empty product and one-point cardinal sum",
+          "inputs": [
+            "n=0",
+            "x_0=0",
+            "ell_0(x)=1"
+          ],
+          "result": "I_0 f is the constant f(0), and the cardinal sum and operator norm are both 1.",
+          "conclusion": "The separately stated one-node convention agrees with the general cardinal and norm definitions."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "All five steps checked against cardinal degree/uniqueness suppliers: reversing indices preserves products and data; uniqueness applies including n=0. Upper norm bound is pointwise. For each fixed x the finite sign data admit a continuous piecewise-linear extension of norm <=1; signs at zero are defined and the single-node extension is constant. This attains the cardinal sum at x and proves the reverse supremum inequality without assuming a common optimizer for all x. No AC."
+      }
+    },
+    "cor-best-polynomial-approximation-errors-vanish": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-weierstrass-approximation-on-a-closed-interval",
+          "source_section": "Statement",
+          "quote": "For $a\\le b$, every continuous real function on $[a,b]$ is a uniform limit of polynomials.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+          "source_section": "Definition",
+          "quote": "Let $C[-1,1]$ be the real continuous functions on $[-1,1]$, with\n$\\|f\\|_\\infty:=\\sup_{x\\in[-1,1]}|f(x)|$. Let $\\mathcal P_n$ be the\nrestrictions to $[-1,1]$ of real polynomials of degree at most $n$, including\nthe zero polynomial. Interval notation is that of [[def-interval]]. Continuity and polynomial degree have the conventions of\n[[def-continuity-real]] and\n[[def-real-polynomial-degree-leading-coefficient-and-monic]].\n\nFor each $n\\in\\mathbb N$ (with naturals in real expressions interpreted by\ntheir canonical real images), the first-kind Chebyshev root angles and nodes are\n$$\\theta_j^{R,n}=\\frac{(2j+1)\\pi}{2n+2},\\qquad x_j^{R,n}=\\cos\\theta_j^{R,n},\\qquad 0\\leq j\\leq n.$$\nThey are the roots of $T_{n+1}$ by\n[[thm-chebyshev-multiple-angle-identities]]. For $n\\geq1$, the\nChebyshev–Lobatto angles and nodes are\n$$\\theta_j^{L,n}=\\frac{j\\pi}{n},\\qquad x_j^{L,n}=\\cos\\theta_j^{L,n},\\qquad 0\\leq j\\leq n.$$\nThey include both endpoints and are the extrema of $T_n$ by the same\nidentity. At $n=0$, define the Lobatto node to be $x_0^{L,0}=0$. The\ncosine is strictly decreasing on $[0,\\pi]$, so each listed family has\ndistinct nodes; the root family at $n=0$ also consists of $0$.\n\nFor either family $\\sigma\\in\\{R,L\\}$, write its nodes as\n$x_0,\\ldots,x_n$ and define\n$$\\ell_{j,n}^{\\sigma}(x)= \\prod_{\\substack{0\\leq k\\leq n\\\\k\\ne j}} \\frac{x-x_k}{x_j-x_k},\\qquad I_n^\\sigma f=\\sum_{j=0}^n f(x_j)\\ell_{j,n}^{\\sigma}.$$\nThese are the cardinal formula and interpolation sum of\n[[def-cardinal-polynomial-interpolation]] specialized to this node family.\nThe displayed cosine arrays decrease, whereas that supplier orders nodes\nincreasingly: use $z_i=x_{n-i}$ and data $y_i=f(z_i)$. Its cardinal\nfunction with index $n-j$ is exactly the displayed $\\ell_{j,n}^\\sigma$,\nby reindexing the finite product, and its interpolation sum is $I_n^\\sigma$.\nThe empty product at $n=0$ is $1$, so the same identification holds for the\nsingle node. Distinctness makes every denominator nonzero;\n[[lem-cardinal-basis-degree-and-values]] supplies the degree and cardinal\nvalues. The finite sum is linear in the data and maps $C[-1,1]$ into\n$\\mathcal P_n$. Its operator norm is\n$$\\Lambda_n^\\sigma:= \\sup\\{\\|I_n^\\sigma g\\|_\\infty:g\\in C[-1,1],\\ \\|g\\|_\\infty\\leq1\\}.$$\nIf $\\ell_{j,n}^\\sigma(x)=\\sum_{k=0}^n a_{jk}x^k$, then\n$|\\ell_{j,n}^\\sigma(x)|\\leq\\sum_{k=0}^n|a_{jk}|$ for $|x|\\leq1$; hence\n$\\|I_n^\\sigma g\\|_\\infty\\leq\\sum_{j,k}|a_{jk}|<\\infty$ whenever\n$\\|g\\|_\\infty\\leq1$. Define the best degree-$n$ uniform\napproximation error by\n$$E_n(f):=\\inf_{p\\in\\mathcal P_n}\\|f-p\\|_\\infty .$$\n\nThese quantities are real and well-defined. Polynomial functions are\ncontinuous, and sums and scalar multiples of continuous functions remain\ncontinuous by [[thm-algebra-of-continuous-functions]]. The interval\n$[-1,1]\\subset\\mathbb R$ is nonempty, closed, and bounded, so\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]] implies\nthat for every such continuous function $h$ there are finite minimum and\nmaximum values $m_h,M_h$. Since $m_h\\leq h(x)\\leq M_h$, one has\n$|h(x)|\\leq\\max(|m_h|,|M_h|)$, so each supremum norm above is finite. The set defining $\\Lambda_n^\\sigma$ contains\nthe zero function and is bounded above by the displayed finite coefficient\nsum. The set defining $E_n(f)$ contains the zero polynomial and is bounded\nbelow by zero. Completeness of $\\mathbb R$ ([[def-complete-ordered-field]])\ntherefore gives the stated finite supremum and infimum. Also, $n+1$ has\npositive real image by [[def-canonical-natural]] and\n[[lem-of-naturals-positive]], and $n$ has positive real image when $n\\geq1$;\nthus the root-angle denominator and the Lobatto denominator in its stated\nrange are nonzero.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], choose a polynomial $p$ and an integer $m$ with $p\\in\\mathcal P_m$ such that $\\|f-p\\|_\\infty<\\varepsilon$; if $p=0$, take $m=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $n\\geq m$, $p\\in\\mathcal P_n$, so [F2] gives $0\\leq E_n(f)\\leq\\|f-p\\|_\\infty<\\varepsilon$. Since $\\varepsilon>0$ was arbitrary, $E_n(f)\\to0$. This conclusion concerns $E_n$ alone; it does not show that $(1+\\Lambda_n^\\sigma)E_n(f)\\to0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is the fixed nonempty interval [-1,1], and P_n contains the zero polynomial."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 handles a zero approximating polynomial by taking m=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 applies uniformly for every n greater than or equal to the chosen m."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 permits degree zero when the approximating polynomial is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 applies the Weierstrass supplier on the closed interval [-1,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 instantiates one polynomial for a fixed epsilon; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is best degree-n errors tend to zero, without arbitrary-node interpolation convergence, for a fixed continuous function on the closed interval minus one to one. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is best degree-n errors tend to zero, without arbitrary-node interpolation convergence, for a fixed continuous function on the closed interval minus one to one. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-chebyshev-cardinal-polynomial-formulas": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+          "source_section": "Definition",
+          "quote": "Let $C[-1,1]$ be the real continuous functions on $[-1,1]$, with\n$\\|f\\|_\\infty:=\\sup_{x\\in[-1,1]}|f(x)|$. Let $\\mathcal P_n$ be the\nrestrictions to $[-1,1]$ of real polynomials of degree at most $n$, including\nthe zero polynomial. Interval notation is that of [[def-interval]]. Continuity and polynomial degree have the conventions of\n[[def-continuity-real]] and\n[[def-real-polynomial-degree-leading-coefficient-and-monic]].\n\nFor each $n\\in\\mathbb N$ (with naturals in real expressions interpreted by\ntheir canonical real images), the first-kind Chebyshev root angles and nodes are\n$$\\theta_j^{R,n}=\\frac{(2j+1)\\pi}{2n+2},\\qquad x_j^{R,n}=\\cos\\theta_j^{R,n},\\qquad 0\\leq j\\leq n.$$\nThey are the roots of $T_{n+1}$ by\n[[thm-chebyshev-multiple-angle-identities]]. For $n\\geq1$, the\nChebyshev–Lobatto angles and nodes are\n$$\\theta_j^{L,n}=\\frac{j\\pi}{n},\\qquad x_j^{L,n}=\\cos\\theta_j^{L,n},\\qquad 0\\leq j\\leq n.$$\nThey include both endpoints and are the extrema of $T_n$ by the same\nidentity. At $n=0$, define the Lobatto node to be $x_0^{L,0}=0$. The\ncosine is strictly decreasing on $[0,\\pi]$, so each listed family has\ndistinct nodes; the root family at $n=0$ also consists of $0$.\n\nFor either family $\\sigma\\in\\{R,L\\}$, write its nodes as\n$x_0,\\ldots,x_n$ and define\n$$\\ell_{j,n}^{\\sigma}(x)= \\prod_{\\substack{0\\leq k\\leq n\\\\k\\ne j}} \\frac{x-x_k}{x_j-x_k},\\qquad I_n^\\sigma f=\\sum_{j=0}^n f(x_j)\\ell_{j,n}^{\\sigma}.$$\nThese are the cardinal formula and interpolation sum of\n[[def-cardinal-polynomial-interpolation]] specialized to this node family.\nThe displayed cosine arrays decrease, whereas that supplier orders nodes\nincreasingly: use $z_i=x_{n-i}$ and data $y_i=f(z_i)$. Its cardinal\nfunction with index $n-j$ is exactly the displayed $\\ell_{j,n}^\\sigma$,\nby reindexing the finite product, and its interpolation sum is $I_n^\\sigma$.\nThe empty product at $n=0$ is $1$, so the same identification holds for the\nsingle node. Distinctness makes every denominator nonzero;\n[[lem-cardinal-basis-degree-and-values]] supplies the degree and cardinal\nvalues. The finite sum is linear in the data and maps $C[-1,1]$ into\n$\\mathcal P_n$. Its operator norm is\n$$\\Lambda_n^\\sigma:= \\sup\\{\\|I_n^\\sigma g\\|_\\infty:g\\in C[-1,1],\\ \\|g\\|_\\infty\\leq1\\}.$$\nIf $\\ell_{j,n}^\\sigma(x)=\\sum_{k=0}^n a_{jk}x^k$, then\n$|\\ell_{j,n}^\\sigma(x)|\\leq\\sum_{k=0}^n|a_{jk}|$ for $|x|\\leq1$; hence\n$\\|I_n^\\sigma g\\|_\\infty\\leq\\sum_{j,k}|a_{jk}|<\\infty$ whenever\n$\\|g\\|_\\infty\\leq1$. Define the best degree-$n$ uniform\napproximation error by\n$$E_n(f):=\\inf_{p\\in\\mathcal P_n}\\|f-p\\|_\\infty .$$\n\nThese quantities are real and well-defined. Polynomial functions are\ncontinuous, and sums and scalar multiples of continuous functions remain\ncontinuous by [[thm-algebra-of-continuous-functions]]. The interval\n$[-1,1]\\subset\\mathbb R$ is nonempty, closed, and bounded, so\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]] implies\nthat for every such continuous function $h$ there are finite minimum and\nmaximum values $m_h,M_h$. Since $m_h\\leq h(x)\\leq M_h$, one has\n$|h(x)|\\leq\\max(|m_h|,|M_h|)$, so each supremum norm above is finite. The set defining $\\Lambda_n^\\sigma$ contains\nthe zero function and is bounded above by the displayed finite coefficient\nsum. The set defining $E_n(f)$ contains the zero polynomial and is bounded\nbelow by zero. Completeness of $\\mathbb R$ ([[def-complete-ordered-field]])\ntherefore gives the stated finite supremum and infimum. Also, $n+1$ has\npositive real image by [[def-canonical-natural]] and\n[[lem-of-naturals-positive]], and $n$ has positive real image when $n\\geq1$;\nthus the root-angle denominator and the Lobatto denominator in its stated\nrange are nonzero.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cardinal-lagrange-interpolation-and-operator-norm",
+          "source_section": "Statement",
+          "quote": "For either Chebyshev node family and every $n\\geq0$, the cardinal\npolynomials in [[def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants]]\nsatisfy $\\ell_{j,n}^{\\sigma}(x_k^{\\sigma,n})=1$ when $j=k$ and $0$\notherwise. They are the unique degree-at-most-$n$ polynomials with those\ncardinal values. Consequently $I_n^\\sigma p=p$ for every $p\\in\\mathcal P_n$.\nMoreover,\n$$\\Lambda_n^\\sigma= \\sup_{x\\in[-1,1]}\\sum_{j=0}^n|\\ell_{j,n}^{\\sigma}(x)|.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chebyshev-multiple-angle-identities",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$ and real $\\theta$,\n$$T_n(\\cos\\theta)=\\cos(n\\theta),\\qquad U_n(\\cos\\theta)\\sin\\theta=\\sin((n+1)\\theta).$$ In particular, for $n\\ge1$ and $0\\le j\\le n$, $T_n(\\cos(j\\pi/n))=(-1)^j$. The conventions and prerequisite facts used below are recorded in [[def-chebyshev-polynomials-first-and-second-kind]], [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-induction-principle]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-chebyshev-polynomials-first-and-second-kind",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal P_{\\mathbb R}$ be the set of formal real polynomials of\n[[def-real-polynomial-degree-leading-coefficient-and-monic]]. Associate to every\n$P\\in\\mathcal P_{\\mathbb R}$ an eventually zero coefficient sequence $(p_k)$:\nuse its displayed finite coefficient list and extend it by zeros when $P\\ne0$,\nand put $p_k=0$ for every $k$ when $P=0$. Do the same for $Q$, with coefficients\n$(q_k)$. Define $P+Q$ coefficientwise and define $PQ$ by the convolution\ncoefficients\n$$ (P+Q)_k=p_k+q_k,\\qquad (PQ)_k=\\sum_{j=0}^{k}p_jq_{k-j}. $$\nusing the real finite sum of [[def-finite-sum]]. In either construction, discard\ntrailing zero coefficients; if every coefficient is zero, the result is the zero\npolynomial. Scalar multiplication and subtraction are the corresponding\ncoefficientwise operations. Thus these formulas define operations on the formal\ncoefficient-list objects, independently of evaluation.\n\nWrite $1=(1)$ and $X=(0,1)$, and define\n$$ \\Phi(P,Q):=(Q,2XQ-P)\\qquad(P,Q\\in\\mathcal P_{\\mathbb R}). $$\nApply [[thm-recursion]] to the set\n$\\mathcal P_{\\mathbb R}\\times\\mathcal P_{\\mathbb R}$, first with initial value\n$(1,X)$ and then with initial value $(1,2X)$, always using the function $\\Phi$.\nThis gives unique pair sequences $H^T,H^U$. Define $T_n$ and $U_n$ to be the\nfirst coordinates of $H^T_n$ and $H^U_n$, respectively. Since the first\ncoordinate of $\\Phi(P,Q)$ is $Q$, the second coordinate of $H^T_n$ is\n$T_{n+1}$ and the second coordinate of $H^U_n$ is $U_{n+1}$. Consequently\n$$ T_0=1,\\quad T_1=X,\\quad T_{n+2}=2XT_{n+1}-T_n, $$\n$$ U_0=1,\\quad U_1=2X,\\quad U_{n+2}=2XU_{n+1}-U_n $$\nfor every $n\\in\\mathbb N$. These unique sequences are the **Chebyshev\npolynomials of the first and second kinds**.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-chebyshev-degree-leading-coefficients-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, $T_n$ has degree $n$ and leading coefficient $2^{n-1}$, while $U_n$ has degree $n$ and leading coefficient $2^n$. The conventions and prerequisite facts used below are recorded in [[def-chebyshev-polynomials-first-and-second-kind]], [[thm-induction-principle]], [[def-integer-power]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-real-polynomial-factor-at-a-root",
+          "source_section": "Statement",
+          "quote": "If $p(x)=\\sum_{k<n}a_kx^k$ and $p(a)=0$, then there is a real polynomial $q$ with $p(x)=(x-a)q(x)$ for every real $x$. The conventions and prerequisite facts used below are recorded in [[def-real-polynomial-degree-leading-coefficient-and-monic]], [[lem-power-difference-factorisation]], [[lem-finite-sum-laws]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $N=n+1$ and $\\theta_j=(2j+1)\\pi/(2N)$. By [F3], $T_N(\\cos\\theta_j)=0$. Differentiating $T_N(\\cos\\theta)=\\cos(N\\theta)$ using [F4]–[F5] gives $\\sin\\theta\\,T_N'(\\cos\\theta)=N\\sin(N\\theta)$, hence $T_N'(\\cos\\theta_j)=N(-1)^j/\\sin\\theta_j\\ne0$ by [F7].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Set $\\omega_n(x)=(x^2-1)U_{n-1}(x)$. By [F3], $\\omega_n(\\cos\\theta)=-\\sin\\theta\\sin(n\\theta)$, so it vanishes at every Lobatto node; its degree is $n+1$ by [F4]. For an interior node $\\theta_j=j\\pi/n$, differentiating this identity gives $-\\sin\\theta_j\\,\\omega_n'(x_j)=-n\\sin\\theta_j(-1)^j$, hence $\\omega_n'(x_j)=n(-1)^j$ by [F7].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Differentiating $U_{n-1}(\\cos\\theta)\\sin\\theta=\\sin(n\\theta)$ at $\\theta=0,\\pi$ gives $U_{n-1}(1)=n$ and $U_{n-1}(-1)=(-1)^{n-1}n$ by [F7]. The product rule then gives $\\omega_n'(1)=2n$ and $\\omega_n'(-1)=2n(-1)^n$, so at every Lobatto node $\\omega_n'(x_j)=n(-1)^j/c_j$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F6], $T_N(x)/(x-x_j)$ is a polynomial. Writing $T_N=(x-x_j)Q_j$ and differentiating gives $Q_j(x_j)=T_N'(x_j)$; at every other node $Q_j$ vanishes. Therefore $Q_j/T_N'(x_j)$ is a degree-at-most-$n$ cardinal polynomial, which equals $\\ell_{j,n}^R$ by uniqueness [F2]. Substitution of $x=\\cos\\theta$ and [F3] gives the first formula.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F6], write $\\omega_n(x)=(x-x_j)Q_j(x)$ with $Q_j$ a polynomial. Differentiating this factorization gives $Q_j(x_j)=\\omega_n'(x_j)$; at every other Lobatto node $Q_j$ vanishes because $\\omega_n$ does. Thus $Q_j/\\omega_n'(x_j)$ is a degree-at-most-$n$ cardinal polynomial, hence $\\ell_{j,n}^L$ by [F2]. Substitution of $\\omega_n(\\cos\\theta)=-\\sin\\theta\\sin(n\\theta)$ and $|\\omega_n'(x_j)|=n/c_j$ gives the second formula.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes n>=1 and excludes the selected node angle before its quotient formulas. At n=1 there are no interior Lobatto nodes; proof step 1.3 supplies the two endpoint derivatives instead, so the empty interior-index case does not create a denominator."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero-degree case is outside the explicit n>=1 hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.2 and 1.3 handle n=1, with U_0=1 and no interior Lobatto nodes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.3 and 3.1 handle endpoint Lobatto nodes through derivative values; the displayed quotients exclude node angles."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.3 computes the Lobatto endpoint derivatives at theta=0 and theta=pi."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 through 3.1 define the needed polynomials explicitly and use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is absolute cardinal formulas with the explicit Lobatto endpoint half weights, for degree at least one, angles on the closed half-circle and angle unequal to the selected node. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is absolute cardinal formulas with the explicit Lobatto endpoint half weights, for degree at least one, angles on the closed half-circle and angle unequal to the selected node. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Checked differentiation of T_N(cos theta) and omega=(x^2-1)U_(n-1): interior derivatives are N(-1)^j/sin(theta_j) and n(-1)^j. Endpoint differentiation gives U_(n-1)(1)=n and U_(n-1)(-1)=(-1)^(n-1)n, hence omega endpoint derivatives 2n and 2n(-1)^n. For n=1 U_0=1 and no interior Lobatto nodes. Factorization gives degree-n quotients with nonzero nodal derivative; uniqueness applies. theta unequal to its own node makes the cosine denominator nonzero, including evaluation at another node. No AC."
+      }
+    },
+    "thm-chebyshev-interpolation-near-best-error-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+          "source_section": "Definition",
+          "quote": "Let $C[-1,1]$ be the real continuous functions on $[-1,1]$, with\n$\\|f\\|_\\infty:=\\sup_{x\\in[-1,1]}|f(x)|$. Let $\\mathcal P_n$ be the\nrestrictions to $[-1,1]$ of real polynomials of degree at most $n$, including\nthe zero polynomial. Interval notation is that of [[def-interval]]. Continuity and polynomial degree have the conventions of\n[[def-continuity-real]] and\n[[def-real-polynomial-degree-leading-coefficient-and-monic]].\n\nFor each $n\\in\\mathbb N$ (with naturals in real expressions interpreted by\ntheir canonical real images), the first-kind Chebyshev root angles and nodes are\n$$\\theta_j^{R,n}=\\frac{(2j+1)\\pi}{2n+2},\\qquad x_j^{R,n}=\\cos\\theta_j^{R,n},\\qquad 0\\leq j\\leq n.$$\nThey are the roots of $T_{n+1}$ by\n[[thm-chebyshev-multiple-angle-identities]]. For $n\\geq1$, the\nChebyshev–Lobatto angles and nodes are\n$$\\theta_j^{L,n}=\\frac{j\\pi}{n},\\qquad x_j^{L,n}=\\cos\\theta_j^{L,n},\\qquad 0\\leq j\\leq n.$$\nThey include both endpoints and are the extrema of $T_n$ by the same\nidentity. At $n=0$, define the Lobatto node to be $x_0^{L,0}=0$. The\ncosine is strictly decreasing on $[0,\\pi]$, so each listed family has\ndistinct nodes; the root family at $n=0$ also consists of $0$.\n\nFor either family $\\sigma\\in\\{R,L\\}$, write its nodes as\n$x_0,\\ldots,x_n$ and define\n$$\\ell_{j,n}^{\\sigma}(x)= \\prod_{\\substack{0\\leq k\\leq n\\\\k\\ne j}} \\frac{x-x_k}{x_j-x_k},\\qquad I_n^\\sigma f=\\sum_{j=0}^n f(x_j)\\ell_{j,n}^{\\sigma}.$$\nThese are the cardinal formula and interpolation sum of\n[[def-cardinal-polynomial-interpolation]] specialized to this node family.\nThe displayed cosine arrays decrease, whereas that supplier orders nodes\nincreasingly: use $z_i=x_{n-i}$ and data $y_i=f(z_i)$. Its cardinal\nfunction with index $n-j$ is exactly the displayed $\\ell_{j,n}^\\sigma$,\nby reindexing the finite product, and its interpolation sum is $I_n^\\sigma$.\nThe empty product at $n=0$ is $1$, so the same identification holds for the\nsingle node. Distinctness makes every denominator nonzero;\n[[lem-cardinal-basis-degree-and-values]] supplies the degree and cardinal\nvalues. The finite sum is linear in the data and maps $C[-1,1]$ into\n$\\mathcal P_n$. Its operator norm is\n$$\\Lambda_n^\\sigma:= \\sup\\{\\|I_n^\\sigma g\\|_\\infty:g\\in C[-1,1],\\ \\|g\\|_\\infty\\leq1\\}.$$\nIf $\\ell_{j,n}^\\sigma(x)=\\sum_{k=0}^n a_{jk}x^k$, then\n$|\\ell_{j,n}^\\sigma(x)|\\leq\\sum_{k=0}^n|a_{jk}|$ for $|x|\\leq1$; hence\n$\\|I_n^\\sigma g\\|_\\infty\\leq\\sum_{j,k}|a_{jk}|<\\infty$ whenever\n$\\|g\\|_\\infty\\leq1$. Define the best degree-$n$ uniform\napproximation error by\n$$E_n(f):=\\inf_{p\\in\\mathcal P_n}\\|f-p\\|_\\infty .$$\n\nThese quantities are real and well-defined. Polynomial functions are\ncontinuous, and sums and scalar multiples of continuous functions remain\ncontinuous by [[thm-algebra-of-continuous-functions]]. The interval\n$[-1,1]\\subset\\mathbb R$ is nonempty, closed, and bounded, so\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]] implies\nthat for every such continuous function $h$ there are finite minimum and\nmaximum values $m_h,M_h$. Since $m_h\\leq h(x)\\leq M_h$, one has\n$|h(x)|\\leq\\max(|m_h|,|M_h|)$, so each supremum norm above is finite. The set defining $\\Lambda_n^\\sigma$ contains\nthe zero function and is bounded above by the displayed finite coefficient\nsum. The set defining $E_n(f)$ contains the zero polynomial and is bounded\nbelow by zero. Completeness of $\\mathbb R$ ([[def-complete-ordered-field]])\ntherefore gives the stated finite supremum and infimum. Also, $n+1$ has\npositive real image by [[def-canonical-natural]] and\n[[lem-of-naturals-positive]], and $n$ has positive real image when $n\\geq1$;\nthus the root-angle denominator and the Lobatto denominator in its stated\nrange are nonzero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cardinal-lagrange-interpolation-and-operator-norm",
+          "source_section": "Statement",
+          "quote": "For either Chebyshev node family and every $n\\geq0$, the cardinal\npolynomials in [[def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants]]\nsatisfy $\\ell_{j,n}^{\\sigma}(x_k^{\\sigma,n})=1$ when $j=k$ and $0$\notherwise. They are the unique degree-at-most-$n$ polynomials with those\ncardinal values. Consequently $I_n^\\sigma p=p$ for every $p\\in\\mathcal P_n$.\nMoreover,\n$$\\Lambda_n^\\sigma= \\sup_{x\\in[-1,1]}\\sum_{j=0}^n|\\ell_{j,n}^{\\sigma}(x)|.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $p\\in\\mathcal P_n$ and put $h=f-p$. By [F2], $I_n^\\sigma p=p$, so $f-I_n^\\sigma f=h-I_n^\\sigma h$. If $\\|h\\|_\\infty=0$, then $h=0$ and the asserted bound follows; otherwise $g=h/\\|h\\|_\\infty$ lies in $C[-1,1]$ with $\\|g\\|_\\infty=1$, so the definition in [F1] gives $\\|I_n^\\sigma h\\|_\\infty=\\|h\\|_\\infty\\|I_n^\\sigma g\\|_\\infty\\leq\\Lambda_n^\\sigma\\|h\\|_\\infty$. Pointwise, $|h-I_n^\\sigma h|\\leq|h|+|I_n^\\sigma h|$, so taking suprema gives $\\|f-I_n^\\sigma f\\|_\\infty\\leq(1+\\Lambda_n^\\sigma)\\|f-p\\|_\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 holds for every $p\\in\\mathcal P_n$. The unit ball in [F1] contains the zero function and each norm is nonnegative, so $\\Lambda_n^\\sigma\\geq0$ and $1+\\Lambda_n^\\sigma>0$. Taking the infimum of the right-hand side over the nonempty set $\\mathcal P_n$ therefore gives $(1+\\Lambda_n^\\sigma)E_n(f)$, proving the claim.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Proof step 2.1 takes the infimum over the explicitly nonempty polynomial class P_n, which contains the zero polynomial for every n>=0. At n=0 the named cardinal supplier retains the one-node interpolant; no empty best-approximation class is used.",
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex root owner adjudication accepting the cited named Codex source/case owner review",
+            "reason": "Proof step 2.1 takes the infimum over the explicitly nonempty polynomial class P_n, which contains the zero polynomial for every n>=0. At n=0 the named cardinal supplier retains the one-node interpolant; no empty best-approximation class is used.",
+            "item_sha256": "500537ca51e61e8b23c3640857a7aca8ad9d4820ad9ceb2ec28727bae45462a2",
+            "row_sha256": "447dae0452e6429f96f9a05ae6d3506f91cff4bd99f11826097d397bd8829052"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 handles ||f-p||_infty=0 separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 apply for every n, including n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 treats the zero-norm residual without division."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 uses the supremum norm on the closed interval [-1,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 fixes arbitrary p and step 2.1 takes an infimum; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is interpolation error is at most one plus the operator norm times the best polynomial error, for either Chebyshev family, nonnegative degree and a continuous supplied function. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is interpolation error is at most one plus the operator norm times the best polynomial error, for either Chebyshev family, nonnegative degree and a continuous supplied function. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Both steps checked: polynomial reproduction and linearity give h-Ih. The zero norm case is separate; otherwise normalizing h puts it in the unit ball. Pointwise triangle then supremum yields the bound for every p. Lambda>=0 makes the scaling factor positive, so taking the infimum over nonempty P_n is valid even when E_n=0 and no best approximant is attained. n=0 is covered. No AC."
+      }
+    },
+    "thm-chebyshev-interpolation-lebesgue-constant-log-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+          "source_section": "Definition",
+          "quote": "Let $C[-1,1]$ be the real continuous functions on $[-1,1]$, with\n$\\|f\\|_\\infty:=\\sup_{x\\in[-1,1]}|f(x)|$. Let $\\mathcal P_n$ be the\nrestrictions to $[-1,1]$ of real polynomials of degree at most $n$, including\nthe zero polynomial. Interval notation is that of [[def-interval]]. Continuity and polynomial degree have the conventions of\n[[def-continuity-real]] and\n[[def-real-polynomial-degree-leading-coefficient-and-monic]].\n\nFor each $n\\in\\mathbb N$ (with naturals in real expressions interpreted by\ntheir canonical real images), the first-kind Chebyshev root angles and nodes are\n$$\\theta_j^{R,n}=\\frac{(2j+1)\\pi}{2n+2},\\qquad x_j^{R,n}=\\cos\\theta_j^{R,n},\\qquad 0\\leq j\\leq n.$$\nThey are the roots of $T_{n+1}$ by\n[[thm-chebyshev-multiple-angle-identities]]. For $n\\geq1$, the\nChebyshev–Lobatto angles and nodes are\n$$\\theta_j^{L,n}=\\frac{j\\pi}{n},\\qquad x_j^{L,n}=\\cos\\theta_j^{L,n},\\qquad 0\\leq j\\leq n.$$\nThey include both endpoints and are the extrema of $T_n$ by the same\nidentity. At $n=0$, define the Lobatto node to be $x_0^{L,0}=0$. The\ncosine is strictly decreasing on $[0,\\pi]$, so each listed family has\ndistinct nodes; the root family at $n=0$ also consists of $0$.\n\nFor either family $\\sigma\\in\\{R,L\\}$, write its nodes as\n$x_0,\\ldots,x_n$ and define\n$$\\ell_{j,n}^{\\sigma}(x)= \\prod_{\\substack{0\\leq k\\leq n\\\\k\\ne j}} \\frac{x-x_k}{x_j-x_k},\\qquad I_n^\\sigma f=\\sum_{j=0}^n f(x_j)\\ell_{j,n}^{\\sigma}.$$\nThese are the cardinal formula and interpolation sum of\n[[def-cardinal-polynomial-interpolation]] specialized to this node family.\nThe displayed cosine arrays decrease, whereas that supplier orders nodes\nincreasingly: use $z_i=x_{n-i}$ and data $y_i=f(z_i)$. Its cardinal\nfunction with index $n-j$ is exactly the displayed $\\ell_{j,n}^\\sigma$,\nby reindexing the finite product, and its interpolation sum is $I_n^\\sigma$.\nThe empty product at $n=0$ is $1$, so the same identification holds for the\nsingle node. Distinctness makes every denominator nonzero;\n[[lem-cardinal-basis-degree-and-values]] supplies the degree and cardinal\nvalues. The finite sum is linear in the data and maps $C[-1,1]$ into\n$\\mathcal P_n$. Its operator norm is\n$$\\Lambda_n^\\sigma:= \\sup\\{\\|I_n^\\sigma g\\|_\\infty:g\\in C[-1,1],\\ \\|g\\|_\\infty\\leq1\\}.$$\nIf $\\ell_{j,n}^\\sigma(x)=\\sum_{k=0}^n a_{jk}x^k$, then\n$|\\ell_{j,n}^\\sigma(x)|\\leq\\sum_{k=0}^n|a_{jk}|$ for $|x|\\leq1$; hence\n$\\|I_n^\\sigma g\\|_\\infty\\leq\\sum_{j,k}|a_{jk}|<\\infty$ whenever\n$\\|g\\|_\\infty\\leq1$. Define the best degree-$n$ uniform\napproximation error by\n$$E_n(f):=\\inf_{p\\in\\mathcal P_n}\\|f-p\\|_\\infty .$$\n\nThese quantities are real and well-defined. Polynomial functions are\ncontinuous, and sums and scalar multiples of continuous functions remain\ncontinuous by [[thm-algebra-of-continuous-functions]]. The interval\n$[-1,1]\\subset\\mathbb R$ is nonempty, closed, and bounded, so\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]] implies\nthat for every such continuous function $h$ there are finite minimum and\nmaximum values $m_h,M_h$. Since $m_h\\leq h(x)\\leq M_h$, one has\n$|h(x)|\\leq\\max(|m_h|,|M_h|)$, so each supremum norm above is finite. The set defining $\\Lambda_n^\\sigma$ contains\nthe zero function and is bounded above by the displayed finite coefficient\nsum. The set defining $E_n(f)$ contains the zero polynomial and is bounded\nbelow by zero. Completeness of $\\mathbb R$ ([[def-complete-ordered-field]])\ntherefore gives the stated finite supremum and infimum. Also, $n+1$ has\npositive real image by [[def-canonical-natural]] and\n[[lem-of-naturals-positive]], and $n$ has positive real image when $n\\geq1$;\nthus the root-angle denominator and the Lobatto denominator in its stated\nrange are nonzero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cardinal-lagrange-interpolation-and-operator-norm",
+          "source_section": "Statement",
+          "quote": "For either Chebyshev node family and every $n\\geq0$, the cardinal\npolynomials in [[def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants]]\nsatisfy $\\ell_{j,n}^{\\sigma}(x_k^{\\sigma,n})=1$ when $j=k$ and $0$\notherwise. They are the unique degree-at-most-$n$ polynomials with those\ncardinal values. Consequently $I_n^\\sigma p=p$ for every $p\\in\\mathcal P_n$.\nMoreover,\n$$\\Lambda_n^\\sigma= \\sup_{x\\in[-1,1]}\\sum_{j=0}^n|\\ell_{j,n}^{\\sigma}(x)|.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-chebyshev-cardinal-polynomial-formulas",
+          "source_section": "Statement",
+          "quote": "Let $n\\geq1$, $0\\leq\\theta\\leq\\pi$, and choose $j$ so\n$\\theta\\ne\\theta_j^{R,n}$. Then\n$$|\\ell_{j,n}^{R}(\\cos\\theta)| =\\frac{|\\cos((n+1)\\theta)|\\sin\\theta_j^{R,n}} {(n+1)|\\cos\\theta-\\cos\\theta_j^{R,n}|}.$$\nFor the Lobatto family, put $c_j=1/2$ for $j=0,n$ and $c_j=1$\notherwise. If $\\theta\\ne\\theta_j^{L,n}$, then\n$$|\\ell_{j,n}^{L}(\\cos\\theta)| =\\frac{c_j|\\sin\\theta\\,\\sin(n\\theta)|} {n|\\cos\\theta-\\cos\\theta_j^{L,n}|}.$$",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-sine-chord-and-lipschitz-bounds",
+          "source_section": "Statement",
+          "quote": "For $0\\leq u\\leq\\pi/2$,\n$$\\sin u\\geq \\frac{2u}{\\pi}.$$\nFor all real $u,v$,\n$$|\\sin u-\\sin v|\\leq |u-v|.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sine-and-cosine-subtraction-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $u,v$,\n$$\\sin(u-v)=\\sin u\\cos v-\\cos u\\sin v,\\qquad \\cos(u-v)=\\cos u\\cos v+\\sin u\\sin v.$$ The conventions and prerequisite facts used below are recorded in [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) with additive identity $0_F$ and\nmultiplicative identity $1_F$. Define\n$\\iota : \\mathbb{N} \\to F$ by recursion on $\\mathbb{N}$\n([[def-natural-numbers]], [[thm-recursion]]):\n\n$$\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .$$\n\n$\\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set ([[def-natural-numbers]]), and a set is not an\nelement of $F$. So $1/n$, $n^{\\alpha}$ and $x/n$ are not expressions of $F$ when\n$n$ is a natural: what they mean is $1/\\iota(n)$, $\\iota(n)^{\\alpha}$ and\n$x/\\iota(n)$. The map $\\iota$ is what carries a counting number into the field,\nand writing it is the whole reason a reader meets $1/\\iota(k+1)$ where an\ninformal text would write $1/(k+1)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in [[def-field]], and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-differentiable-implies-continuous",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\nlimit point of $A$ ([[def-limit-point-r]]). If $f$ is differentiable at $c$\n([[def-derivative]]) then $f$ is continuous at $c$ ([[def-continuity-real]]).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-pi-via-first-positive-cosine-zero",
+          "source_section": "Definition",
+          "quote": "Thus $\\pi>0$ and $\\pi/2=\\gamma$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In either angular grid the spacing is $h=\\pi/(n+1)$ for roots and $h=\\pi/n$ for Lobatto nodes. Choose a nearest grid angle $\\theta_k$ and put $d_j=|\\theta-\\theta_j|$. Then $d_k\\leq h/2$; if $|j-k|=r\\geq1$, the triangle inequality gives $d_j\\geq rh-d_k\\geq(r-\\tfrac12)h$. At most two indices occur for each $r$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $\\theta\\ne\\theta_j$, put $s=(\\theta+\\theta_j)/2$ and $d=\\theta-\\theta_j$. Since the two angles lie in $[0,\\pi]$, $|d|/2\\leq\\min(s,\\pi-s)$. The addition/subtraction formulas in [F5] give $\\sin\\theta_j,\\sin\\theta\\leq\\sin s+|\\sin(d/2)|$; the monotonicity and supplementary identity in [F5] then give $|\\sin(d/2)|\\leq\\sin s$, so each numerator is at most $2\\sin s$. Those same formulas give $|\\cos\\theta-\\cos\\theta_j|=2\\sin s\\sin(|d|/2)$, and [F4] gives $\\sin(|d|/2)\\geq|d|/\\pi$. Thus both ratios $\\sin\\theta_j/|\\cos\\theta-\\cos\\theta_j|$ and $\\sin\\theta/|\\cos\\theta-\\cos\\theta_j|$ are at most $\\pi/d_j$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For roots, [F3] and step 2.1 give $|\\ell_{j,n}^R(\\cos\\theta)|\\leq\\pi|\\cos((n+1)\\theta)|/((n+1)d_j)$. At the nearest node $k$, $\\cos((n+1)\\theta_k)=0$, and the cosine addition formula plus [F4] gives $|\\cos((n+1)\\theta)|\\leq(n+1)d_k$, so its term is at most $\\pi$. For other nodes use $|\\cos((n+1)\\theta)|\\leq1$ and step 1.1; summing over at most two nodes per distance rank yields $\\sum_j|\\ell_{j,n}^R(\\cos\\theta)|\\leq\\pi+2\\sum_{r=1}^n1/(r-\\tfrac12)$. At a node the cardinal sum is $1$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For Lobatto nodes, [F3] and step 2.1 give $|\\ell_{j,n}^L(\\cos\\theta)|\\leq\\pi c_j|\\sin(n\\theta)|/(nd_j)$. At the nearest node $k$, $\\sin(n\\theta_k)=0$, so [F4] gives $|\\sin(n\\theta)|\\leq nd_k$ and its term is at most $\\pi$ because $c_k\\leq1$. For other nodes use $|\\sin(n\\theta)|\\leq1$ and step 1.1; summing over at most two nodes per distance rank yields $\\sum_j|\\ell_{j,n}^L(\\cos\\theta)|\\leq\\pi+2\\sum_{r=1}^n1/(r-\\tfrac12)$. At a node the cardinal sum is $1$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $1/(r-\\tfrac12)\\leq2/r$, the shifted sum is at most $2H_n$, where $H_n=\\sum_{r=1}^n1/r$. For $r\\geq2$, $1/r\\leq\\int_{r-1}^r dt/t$, so [F6] gives $H_n\\leq1+\\log n$. Positivity of the real image of $n$ is [F7], so these logarithms are defined. The integral formula also gives $0=\\log1\\leq\\log n\\leq\\log(n+1)$ and $\\log2\\leq\\log(n+1)$ by integrating $1/t>0$ over $[1,n]$, $[n,n+1]$, and $[2,n+1]$. Since $\\log2=\\int_1^2dt/t>0$ and $\\pi>0$, we have $C>0$ and $1<C\\log2$. Thus both sums are at most $\\pi+4+4\\log n\\leq(4+(\\pi+4)/\\log2)\\log(n+1)$. By [F8], the angular supremum is over exactly $[-1,1]$; taking it and using [F2] proves both bounds. At $n=0$, each one-node operator has norm $1$ directly.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F6",
+            "F7",
+            "step 3.1",
+            "step 3.2",
+            "algebra",
+            "F8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both node families contain at least one node in every stated degree."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.1 gives the n=0 one-node operator norm directly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof steps 3.1, 3.2: At degree one both angular grids are covered by the cardinal estimates and positive log two denominator; the separate degree-zero clause gives the actual one-node norm one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 3.1 and 3.2 state the cardinal sum separately at exact grid-node angles."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 3.1 and 3.2 cover theta=0 and theta=pi, including Lobatto grid-node values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 selects a nearest point from a finite grid; this finite selection uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is both interpolation norms are bounded by the displayed universal constant times log(n+1), for degree at least one with a separately stated degree-zero one-node convention. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is both interpolation norms are bounded by the displayed universal constant times log(n+1), for degree at least one with a separately stated degree-zero one-node convention. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "One-node norm, n=0",
+          "method": "exact evaluation from the n=0 convention",
+          "inputs": [
+            "root node x_0=0",
+            "Lobatto node x_0=0"
+          ],
+          "result": "Both one-node interpolation operators have norm 1.",
+          "conclusion": "This verifies the separate n=0 clause without applying the logarithmic estimate at log(1)=0."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Checked all six steps. Nearest-angle distance <=h/2 holds for roots including gaps at endpoints and for Lobatto including endpoints. Other rank-r distances >=(r-1/2)h with at most two terms. For unequal angles s is interior, so cancelling sin(s)>0 is legitimate; sine numerators <=2sin(s) and the chord bound give pi/d_j. Nearest terms are <=pi by the sine Lipschitz bound, others form the shifted harmonic sum; exact-node cardinal sums are 1. H_n<=1+log n and log(n+1)>=log 2>0 prove the displayed explicit C, including n=1. F8 independently supplies the surjection cos:[0,pi] onto [-1,1]. n=0 norm 1 is handled separately. No AC."
+      }
+    },
+    "ex-equispaced-runge-function-interpolation-diverges": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+          "source_section": "Definition",
+          "quote": "Let $C[-1,1]$ be the real continuous functions on $[-1,1]$, with\n$\\|f\\|_\\infty:=\\sup_{x\\in[-1,1]}|f(x)|$. Let $\\mathcal P_n$ be the\nrestrictions to $[-1,1]$ of real polynomials of degree at most $n$, including\nthe zero polynomial. Interval notation is that of [[def-interval]]. Continuity and polynomial degree have the conventions of\n[[def-continuity-real]] and\n[[def-real-polynomial-degree-leading-coefficient-and-monic]].\n\nFor each $n\\in\\mathbb N$ (with naturals in real expressions interpreted by\ntheir canonical real images), the first-kind Chebyshev root angles and nodes are\n$$\\theta_j^{R,n}=\\frac{(2j+1)\\pi}{2n+2},\\qquad x_j^{R,n}=\\cos\\theta_j^{R,n},\\qquad 0\\leq j\\leq n.$$\nThey are the roots of $T_{n+1}$ by\n[[thm-chebyshev-multiple-angle-identities]]. For $n\\geq1$, the\nChebyshev–Lobatto angles and nodes are\n$$\\theta_j^{L,n}=\\frac{j\\pi}{n},\\qquad x_j^{L,n}=\\cos\\theta_j^{L,n},\\qquad 0\\leq j\\leq n.$$\nThey include both endpoints and are the extrema of $T_n$ by the same\nidentity. At $n=0$, define the Lobatto node to be $x_0^{L,0}=0$. The\ncosine is strictly decreasing on $[0,\\pi]$, so each listed family has\ndistinct nodes; the root family at $n=0$ also consists of $0$.\n\nFor either family $\\sigma\\in\\{R,L\\}$, write its nodes as\n$x_0,\\ldots,x_n$ and define\n$$\\ell_{j,n}^{\\sigma}(x)= \\prod_{\\substack{0\\leq k\\leq n\\\\k\\ne j}} \\frac{x-x_k}{x_j-x_k},\\qquad I_n^\\sigma f=\\sum_{j=0}^n f(x_j)\\ell_{j,n}^{\\sigma}.$$\nThese are the cardinal formula and interpolation sum of\n[[def-cardinal-polynomial-interpolation]] specialized to this node family.\nThe displayed cosine arrays decrease, whereas that supplier orders nodes\nincreasingly: use $z_i=x_{n-i}$ and data $y_i=f(z_i)$. Its cardinal\nfunction with index $n-j$ is exactly the displayed $\\ell_{j,n}^\\sigma$,\nby reindexing the finite product, and its interpolation sum is $I_n^\\sigma$.\nThe empty product at $n=0$ is $1$, so the same identification holds for the\nsingle node. Distinctness makes every denominator nonzero;\n[[lem-cardinal-basis-degree-and-values]] supplies the degree and cardinal\nvalues. The finite sum is linear in the data and maps $C[-1,1]$ into\n$\\mathcal P_n$. Its operator norm is\n$$\\Lambda_n^\\sigma:= \\sup\\{\\|I_n^\\sigma g\\|_\\infty:g\\in C[-1,1],\\ \\|g\\|_\\infty\\leq1\\}.$$\nIf $\\ell_{j,n}^\\sigma(x)=\\sum_{k=0}^n a_{jk}x^k$, then\n$|\\ell_{j,n}^\\sigma(x)|\\leq\\sum_{k=0}^n|a_{jk}|$ for $|x|\\leq1$; hence\n$\\|I_n^\\sigma g\\|_\\infty\\leq\\sum_{j,k}|a_{jk}|<\\infty$ whenever\n$\\|g\\|_\\infty\\leq1$. Define the best degree-$n$ uniform\napproximation error by\n$$E_n(f):=\\inf_{p\\in\\mathcal P_n}\\|f-p\\|_\\infty .$$\n\nThese quantities are real and well-defined. Polynomial functions are\ncontinuous, and sums and scalar multiples of continuous functions remain\ncontinuous by [[thm-algebra-of-continuous-functions]]. The interval\n$[-1,1]\\subset\\mathbb R$ is nonempty, closed, and bounded, so\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]] implies\nthat for every such continuous function $h$ there are finite minimum and\nmaximum values $m_h,M_h$. Since $m_h\\leq h(x)\\leq M_h$, one has\n$|h(x)|\\leq\\max(|m_h|,|M_h|)$, so each supremum norm above is finite. The set defining $\\Lambda_n^\\sigma$ contains\nthe zero function and is bounded above by the displayed finite coefficient\nsum. The set defining $E_n(f)$ contains the zero polynomial and is bounded\nbelow by zero. Completeness of $\\mathbb R$ ([[def-complete-ordered-field]])\ntherefore gives the stated finite supremum and infimum. Also, $n+1$ has\npositive real image by [[def-canonical-natural]] and\n[[lem-of-naturals-positive]], and $n$ has positive real image when $n\\geq1$;\nthus the root-angle denominator and the Lobatto denominator in its stated\nrange are nonzero.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-best-polynomial-approximation-errors-vanish",
+          "source_section": "Statement",
+          "quote": "For every $f\\in C[-1,1]$, $E_n(f)\\to0$ as $n\\to\\infty$. This statement\nconcerns best polynomial errors only; it does not assert convergence of\ninterpolation at arbitrary node arrays.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "source_section": "Statement",
+          "quote": "A nonzero real polynomial of degree $n$ has at most $n$ distinct real roots. The conventions and prerequisite facts used below are recorded in [[def-real-polynomial-degree-leading-coefficient-and-monic]], [[lem-real-polynomial-factor-at-a-root]], [[thm-induction-principle]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-exponential-series-has-infinite-radius",
+          "source_section": "Statement",
+          "quote": "For every real $x$, the series $\\sum_{n\\ge0}x^n/\\iota(n!)$ converges absolutely. Its power-series radius is therefore $+\\infty$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**The factorial.** By the recursion theorem ([[thm-recursion]]) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in [[def-nat-finite-sum-and-product]], there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with\n\n$$F(0) = 1, \\qquad F(\\sigma(n)) = F(n)\\cdot\\sigma(n) \\quad (n \\in \\mathbb{N}).$$\n\nWe write $n! := F(n)$. Thus $0! = 1$, $1! = 0!\\cdot 1 = 1$, $2! = 1!\\cdot 2 = 2$,\n$3! = 6$, $4! = 24$, $5! = 120$, $6! = 720$.\n\n**$0! = 1$ is the base clause of this recursion**, not a convention imported from\nelsewhere. Nothing about empty products is presupposed; the agreement with the\nempty product is proved below, in clause (a), rather than assumed.\n\n**Truncated difference.** Throughout, $n - k$ is the operation fixed in\n[[def-nat-finite-sum-and-product]]: the unique $j$ with $k + j = n$ when\n$k \\le n$, and $0$ when $n < k$.\n\n**The falling factorial.** For $n \\in \\mathbb{N}$ define $n^{\\underline{k}}$ by\nrecursion on $k$, by the recursion theorem applied to\n$\\mathbb{N}\\times\\mathbb{N}$ with starting element $(0,1)$ and\n$f(k, v) = (\\sigma(k),\\, v \\cdot (n-k))$:\n\n$$n^{\\underline{0}} = 1, \\qquad n^{\\underline{\\sigma(k)}} = n^{\\underline{k}}\\cdot(n-k) .$$\n\nSo $n^{\\underline{1}} = 1\\cdot(n-0) = n$ and $n^{\\underline{2}} = n\\,(n-1)$, and\nfor $k \\le n$ the value is the product $n(n-1)\\cdots(n-k+1)$ of the $k$ topmost\nfactors.\n\n**Four facts, proved here because the page uses each of them.**\n\n**(a) The factorial is the product of the first $n$ positive naturals.**\n$n! = \\prod_{j<n}\\sigma(j) = \\prod_{j<n}(j+1)$, the $\\mathbb{N}$-valued product of\n[[def-nat-finite-sum-and-product]]. Induction ([[thm-induction-principle]]): at\n$n = 0$ both sides are $1$, the empty product and the base clause agreeing; and\n$\\prod_{j<\\sigma(n)}\\sigma(j) = \\big(\\prod_{j<n}\\sigma(j)\\big)\\cdot\\sigma(n) = n!\\cdot\\sigma(n) = \\sigma(n)!$.\n**So the empty-product reading and the base-clause reading are the same reading**,\nand neither was assumed.\n\n**(b) $n! \\ne 0$, and $\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ ([[thm-omega-is-peano-system]]) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot y$\n([[lem-nat-mult-identity]]) and cancellation gives $x = 0$\n([[lem-nat-mult-cancellative]]). So $n! \\ne 0$ for every $n$ by induction. For the second, apply the bridge clause\n6 of that lemma to clause (a) above. This is what makes the factorial of this\npage and the real-valued product $\\prod_{j<n}(j+1)$ used elsewhere in the library\n**one object seen twice**, rather than two unrelated notions.\n\n**(c) $n^{\\underline{k}}\\cdot(n-k)! = n!$ for $k \\le n$.** Induction on $k$, for\nall $n$ at once. At $k = 0$ this reads $1 \\cdot n! = n!$. Assume it at $k$ and\nlet $\\sigma(k) \\le n$; then $k \\le n$, and writing $d := n - k$ we have\n$k + d = n$ and $d \\ne 0$, since $k + 0 = k \\ne n$; so $d = \\sigma(e)$ for a\nunique $e$ ([[lem-nat-nonzero-is-successor]]), and $\\sigma(k) + e = n$, that is\n$e = n - \\sigma(k)$ ([[lem-nat-add-cancellative]]). Therefore\n$n^{\\underline{\\sigma(k)}}\\cdot\\big(n-\\sigma(k)\\big)! = n^{\\underline{k}}\\cdot(n-k)\\cdot e! = n^{\\underline{k}}\\cdot\\big(e!\\cdot\\sigma(e)\\big) = n^{\\underline{k}}\\cdot\\sigma(e)! = n^{\\underline{k}}\\cdot(n-k)! = n!$,\nusing commutativity and associativity of multiplication\n([[lem-nat-mult-associative]], [[lem-nat-mult-commutative]]) and the recursion\nclause for the factorial.\n\n**(d) Boundary values.** $n^{\\underline{0}} = 1$ for every $n$, by the base\nclause; $n^{\\underline{n}} = n!$, since clause (c) at $k = n$ gives\n$n^{\\underline{n}}\\cdot 0! = n!$ and $0! = 1$; and\n$n^{\\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives\n$n^{\\underline{\\sigma(n)}} = n^{\\underline{n}}\\cdot 0 = 0$, the clause\n$x \\cdot 0 = 0$ being definitional ([[def-nat-multiplication]]), and if\n$n^{\\underline{k}} = 0$ then\n$n^{\\underline{\\sigma(k)}} = 0$ as well, so $n^{\\underline{k}} = 0$ for every\n$k \\ge \\sigma(n)$ by induction.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-binomial-theorem",
+          "source_section": "Statement",
+          "quote": "For all $x, y \\in \\mathbb{R}$ and every $n \\in \\mathbb{N}$,\n\n$$(x+y)^{n} \\;=\\; \\sum_{k<n+1} \\iota\\binom{n}{k}\\, x^{k}\\, y^{\\,n-k},$$\n\nwhere the powers are the integer powers of [[def-integer-power]], the sum is the\nreal finite sum of [[def-finite-sum]] over $k = 0, 1, \\dots, n$, the difference\n$n-k$ is a genuine one because $k \\le n$ throughout the range, and $\\iota$ is the\ncanonical natural of [[def-canonical-natural]].\n\n**The coefficient is $\\iota\\binom{n}{k}$ and not $\\binom{n}{k}$.** A binomial\ncoefficient is a natural number, that is a von Neumann natural, that is a set; it\nis not an element of $\\mathbb{R}$, and it enters the field through $\\iota$.\n\n**The identity is stated in $\\mathbb{R}$ and only in $\\mathbb{R}$.** The same\nproof uses nothing but commutativity, associativity, distributivity and\nnatural-number multiples of a ring element, so a commutative-ring version is\navailable wherever rings are; rings are not available at this point in the\nreading order, and the ring statement is a separate statement, to be made where\nthey are. See the Remarks below.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-binomial-closed-formula",
+          "source_section": "Statement",
+          "quote": "Let $n, k \\in \\mathbb{N}$ with $k \\le n$. Then, in $\\mathbb{N}$,\n\n$$\\binom{n}{k}\\cdot k!\\cdot (n-k)! = n! ,$$\n\nand consequently:\n\n1. $\\binom{n}{k}\\cdot k! = n^{\\underline{k}}$\n   ([[def-factorial-and-falling-factorial]]);\n2. **integrality**: in $\\mathbb{R}$,\n   $\\iota\\binom{n}{k} = \\dfrac{\\iota(n!)}{\\iota(k!)\\,\\iota((n-k)!)}$, so the\n   familiar quotient $n!/(k!\\,(n-k)!)$ is the canonical natural of a natural\n   number, namely of the count $\\binom{n}{k}$;\n3. **symmetry**: $\\binom{n}{k} = \\binom{n}{n-k}$.\n\nHere $\\iota$ is the canonical natural of [[def-canonical-natural]] and $n-k$ the\ntruncated difference, which for $k \\le n$ is the ordinary one.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-binomial-coefficients-symmetric-and-unimodal",
+          "source_section": "Statement",
+          "quote": "For every $n$ and $0\\le k\\le n$,\n\n$$\\binom nk=\\binom n{n-k}.$$\n\nFor $0\\le k<n$,\n\n$$\\binom n{k+1}\\ge\\binom nk\\quad\\Longleftrightarrow\\quad k+1\\le n-k.$$\n\nConsequently the binomial coefficients increase up to the middle rank and\ndecrease after it. Their maximum is attained only at $k=n/2$ when $n$ is even,\nand at the two ranks $k=(n-1)/2$ and $k=(n+1)/2$ when $n$ is odd.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) with additive identity $0_F$ and\nmultiplicative identity $1_F$. Define\n$\\iota : \\mathbb{N} \\to F$ by recursion on $\\mathbb{N}$\n([[def-natural-numbers]], [[thm-recursion]]):\n\n$$\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .$$\n\n$\\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set ([[def-natural-numbers]]), and a set is not an\nelement of $F$. So $1/n$, $n^{\\alpha}$ and $x/n$ are not expressions of $F$ when\n$n$ is a natural: what they mean is $1/\\iota(n)$, $\\iota(n)^{\\alpha}$ and\n$x/\\iota(n)$. The map $\\iota$ is what carries a counting number into the field,\nand writing it is the whole reason a reader meets $1/\\iota(k+1)$ where an\ninformal text would write $1/(k+1)$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in [[def-field]], and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-complex-numbers-and-arithmetic",
+          "source_section": "Definition",
+          "quote": "Form the polynomial ring $\\mathbb R[x]$\n([[def-polynomial-ring-over-a-commutative-ring]]) and define the **complex\nnumbers** by the quotient ring\n$$\\mathbb C:=\\mathbb R[x]/(x^2+1)$$\n([[def-quotient-ring]]). Write $a$ for the constant class $a+(x^2+1)$ and set\n$$i:=x+(x^2+1).$$\nThus $i^2=-1$ in the quotient. The constant-class map\n$\\mathbb R\\to\\mathbb C$ is the specified real map; its injectivity and the\nfield structure are proved in [[thm-complex-numbers-form-a-field]], after which\n$\\mathbb C/\\mathbb R$ is a field extension in the sense of\n[[def-field-extension-generated-subfields-and-simple-extension]].",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-complex-polynomial-degree-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal complex polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots,a_n)$ with $a_n\\ne0$; we write the latter as $p(Z)=\\sum_{k=0}^{n}a_kZ^k$. The list, rather than the function it induces, is the polynomial object. Define evaluation at $z\\in\\mathbb C$ by\n$$ 0(z):=0,\\qquad p(z):=\\sum_{k<n+1}^{\\mathbb C}a_kz^k\\quad\\text{for }p=(a_0,\\ldots,a_n)\\ne0. $$\nwhere the latter is the initial-segment complex sum defined in\n[[def-complex-series-power-series-and-absolute-convergence]]. Thus evaluation is\ndefined for the zero polynomial as well as every nonzero formal polynomial.\n\nFor nonzero $p=(a_0,\\ldots,a_n)$, define $\\deg p:=n$ and $\\operatorname{lc}(p):=a_n$. The zero polynomial has no degree and no leading coefficient. A nonzero polynomial is **monic** when $\\operatorname{lc}(p)=1$. Complex arithmetic and powers are those of [[thm-complex-numbers-form-a-field]] and [[def-complex-integer-powers]].",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-complex-modulus-of-real-embedding-equals-real-absolute-value",
+          "source_section": "Statement",
+          "quote": "For every real $r$, write $\\lambda_r$ for its canonical image in $\\mathbb C$. Then\n$$\n|\\lambda_r|_{\\mathbb C}=|r|_{\\mathbb R}.\n$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-rational-power",
+          "source_section": "Definition",
+          "quote": "$$a^{r} := \\big(a^{1/n}\\big)^{m},$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-rational-power-laws",
+          "source_section": "Statement",
+          "quote": "1. $a^{r} > 0$.\n2. $a^{r+s} = a^{r} a^{s}$.\n3. $(ab)^{r} = a^{r} b^{r}$; in particular $\\big(ab\\big)^{1/N} = a^{1/N} b^{1/N}$ for every natural $N \\ge 1$.\n4. $a^{-r} = \\big(a^{r}\\big)^{-1} = 1/a^{r}$.\n5. $\\big(a^{r}\\big)^{s} = a^{rs}$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-rational-power-monotone",
+          "source_section": "Statement",
+          "quote": "1. **In the exponent.** If $a > 1$ then $a^{r} < a^{s}$; if $a = 1$ then $a^{r} = a^{s} = 1$; if $0 < a < 1$ then $a^{r} > a^{s}$.\n2. **In the base.** If $r \\in \\mathbb{Q}$ with $r > 0$ and $0 < a < b$, then $a^{r} < b^{r}$; so $a \\mapsto a^{r}$ is strictly increasing on $\\{a \\in \\mathbb{R} : a > 0\\}$.\n3. **Comparison with $1$.** For rational $t > 0$: $a > 1$ implies $a^{t} > 1$, and $0 < a < 1$ implies $a^{t} < 1$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-rat-order",
+          "source_section": "Definition",
+          "quote": "A rational $x$ is **positive** when $0 < x$; on such representatives,\n$0 < [(a,b)]$ exactly when $0 < a$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-int-embeds-rat",
+          "source_section": "Statement",
+          "quote": "The map $j(k) = [(k,1)]$ is injective and preserves addition, multiplication,\nand order. Composing with [[lem-nat-embeds-int]] embeds $\\mathbb{N}$ in\n$\\mathbb{Q}$; we write $k$ for $j(k)$ throughout.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "Thus $a^1 = a$, $a^2 = a \\cdot a$, and so on. Note that this is defined for\n**every** $a$, including $a = 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-of-zero-mult",
+          "source_section": "Statement",
+          "quote": "In any field $F$ ([[def-field]]), for every $a \\in F$ we have $0 \\cdot a = 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-of-square-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$. For\nevery $a \\in F$ with $a \\neq 0$ we have $a^2 > 0$, where $a^2 = a \\cdot a$. In\nparticular, every nonzero square is positive.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $0\\leq j<n$, $x_{j+1}-x_j=2/n>0$, so the nodes are distinct. Each product $\\ell_{j,n}(x)$ has $n$ linear factors and degree at most $n$; at $x_j$ all its factors equal $1$, while at any other node $x_k$ the factor indexed by $k$ is zero. Thus $p_n\\in\\mathcal P_n$ and $p_n(x_j)=f(x_j)$. Define $\\omega_n(x)=\\prod_{j=0}^n(x-x_j)$ and for nodal data define the complex-linear Lagrange map $J_ng=\\sum_jg(x_j)\\ell_{j,n}$. For non-real $z$, put $g_z(x)=1/(x-z)$ and $q_{n,z}(x)=(1-\\omega_n(x)/\\omega_n(z))/(x-z)$. The denominator is nonzero because the roots of $\\omega_n$ are real and $\\mathbb C$ is a field [F10]. Expanding $\\omega_n(x)-\\omega_n(z)$ termwise and using $x^k-z^k=(x-z)\\sum_{r=0}^{k-1}x^{k-1-r}z^r$ shows $q_{n,z}$ is a complex polynomial of degree at most $n$; at each node $x_j$ it equals $1/(x_j-z)$. The difference $q_{n,z}-J_ng_z$ is a complex polynomial of degree at most $n$ with $n+1$ distinct real roots. By unique complex coordinates [F10], its real and imaginary coefficient polynomials are real polynomials; both vanish at all the nodes, so [F3] forces both to be zero. Since $g_z-q_{n,z}=\\omega_n(x)/((x-z)\\omega_n(z))$, this proves $g_z(x)-J_ng_z(x)=\\omega_n(x)/((x-z)\\omega_n(z))$ for real $x$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F10",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At $y_n=1-1/n$, direct multiplication gives $|\\omega_n(y_n)|=\\prod_{k=1}^n(2k-1)/n^{n+1}=\\binom{2n}{n}n!/(2^n n^{n+1})$. By [F8], $\\binom{2n}{n}$ is the largest of the $2n+1$ binomial coefficients, and [F7] says their sum is $4^n$, so $\\binom{2n}{n}\\geq4^n/(2n+1)$. Also $e<3$: for $k\\geq2$, $k!=2\\cdot3\\cdots k\\geq2^{k-1}$ because each of these $k-1$ factors is at least $2$, with strict inequality for $k\\geq3$; therefore [F4]–[F6] give $e=2+\\sum_{k=2}^\\infty1/k!<3$. By [F8], $\\binom nk k!=n(n-1)\\cdots(n-k+1)\\leq n^k$, hence $\\binom nk/n^k\\leq1/k!$; applying [F7] gives $(1+1/n)^n\\leq\\sum_{k=0}^n1/k!<e<3$. Induction then yields $n!\\geq(n/3)^n$: it holds at $n=1$, and the ratio of successive values of $n!/(n/3)^n$ is $3/(1+1/n)^n>1$. Therefore $|\\omega_n(y_n)|\\geq(2/3)^n/[n(2n+1)]$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The positive node radii form an arithmetic progression in $(0,1]$ of spacing $\\delta=2/n$; for even $n$ there is also the central node $0$. Pairing $r,-r$ in $\\omega_n(ia)$ gives the factor $| (ia-r)(ia+r) |=a^2+r^2$ by [F10], and the even-grid central factor is $|ia|=a\\leq1$. Each bin has length $1/4$, and the radius progression begins within $\\delta$ of $0$ and ends at $1$. Thus for each bin its endpoint gaps are at most $\\delta$ and its internal gaps equal $\\delta$: if it contains $m_b\\geq1$ radii, its length lies between $(m_b-1)\\delta$ and $(m_b+1)\\delta$; if it contains none, its length is at most one progression gap, so the same count bounds hold. Therefore $n/8-1\\leq m_b\\leq n/8+1$. Partition the radii into $(0,1/4],(1/4,1/2],(1/2,3/4],(3/4,1]$. The paired factors in these bins are bounded above by $B_1=41/400$, $B_2=29/100$, $B_3=241/400$, and $B_4=26/25$. By [F11], for $b=1,2,3$ the bound $B_b<1$ and $m_b\\geq n/8-1$ imply $B_b^{m_b}\\leq B_b^{n/8-1}$; for $b=4$, $B_4>1$ and $m_4\\leq n/8+1$ imply $B_4^{m_4}\\leq B_4^{n/8+1}$. Multiplying these bounds and the central factor gives $|\\omega_n(ia)|\\leq A(B_1B_2B_3B_4)^{n/8}$, where $A=B_1^{-1}B_2^{-1}B_3^{-1}B_4$. Direct rational multiplication gives $B_1B_2B_3B_4<1/50<(5/8)^8$; base monotonicity and the iterated-power law in [F11] then give $(B_1B_2B_3B_4)^{n/8}<(5/8)^n$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F10",
+            "algebra",
+            "F11"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With $a=1/5$, direct subtraction gives $f(x)=\\frac{a}{2i}(1/(x-ia)-1/(x+ia))$, and the finite Lagrange sum is complex-linear by field distributivity [F10], so it preserves the identity. Since $x_{n-j}=-x_j$, reindexing the factors gives $\\omega_n(-x)=(-1)^{n+1}\\omega_n(x)$; thus $\\omega_n$ is odd for even $n$ and even for odd $n$. Every factor $ia-x_j$ is nonzero, so $\\omega_n(ia)\\ne0$; real coefficients and parity give $\\omega_n(ia)=iW$ for a nonzero real $W$ when $n$ is even, and $\\omega_n(ia)=\\omega_n(-ia)=W$ for a nonzero real $W$ when $n$ is odd. For even $n$, substituting the pole-error identities from step 1.1 and using $1/(x-ia)+1/(x+ia)=2x/(x^2+a^2)$ gives $f(x)-p_n(x)=a x\\omega_n(x)/(i(x^2+a^2)\\omega_n(ia))$. For odd $n$, using $1/(x-ia)-1/(x+ia)=2ia/(x^2+a^2)$ gives $f(x)-p_n(x)=a^2\\omega_n(x)/((x^2+a^2)\\omega_n(ia))$. Taking moduli and using [F10] gives, for real $x$, $|f(x)-p_n(x)|=\\begin{cases}\\frac{a|x|}{x^2+a^2}\\frac{|\\omega_n(x)|}{|\\omega_n(ia)|},&n\\text{ even},\\\\ \\frac{a^2}{x^2+a^2}\\frac{|\\omega_n(x)|}{|\\omega_n(ia)|},&n\\text{ odd}.\\end{cases}$",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $n\\geq2$, $y_n\\geq1/2$ and $y_n^2+a^2\\leq26/25$, so the coefficient in step 2.1 is at least $5/52$ for even $n$ and $1/26$ for odd $n$, hence at least $1/26$. By [F10], the complex-modulus identity in step 2.1 is the stated real absolute error; steps 1.2 and 1.3 then give $|f(y_n)-p_n(y_n)|>\\frac1{26A}(16/15)^n/[n(2n+1)]$. The right-hand side tends to infinity because the ratio of successive terms tends to $16/15>1$ and is eventually bounded below by a fixed ratio greater than $1$. Therefore $\\|f-p_n\\|_\\infty\\to\\infty$. By [F12]–[F14], $f\\in C[-1,1]$, so [F2] applies and $E_n(f)\\to0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F10",
+            "step 2.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra",
+            "F9",
+            "F12",
+            "F13",
+            "F14"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The function is defined on the fixed nonempty interval [-1,1] and n>=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.3 accounts separately for the central node 0 when n is even."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement assumes n>=2, so n=1 is excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 verifies all equispaced nodes are distinct for n>=2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 includes both endpoint nodes x_0=-1 and x_n=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 through 3.1 give explicit polynomials, products, and estimates; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is interpolation errors diverge although best polynomial errors vanish, for the function one over one plus twenty-five x squared, positive grid degrees at least two and the evaluation points one minus inverse degree. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is interpolation errors diverge although best polynomial errors vanish, for the function one over one plus twenty-five x squared, positive grid degrees at least two and the evaluation points one minus inverse degree. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "First admissible Runge degree, n=2",
+          "method": "exact interpolation and rational evaluation",
+          "inputs": [
+            "nodes -1,0,1",
+            "f(-1)=f(1)=1/26",
+            "f(0)=1",
+            "y_2=1/2"
+          ],
+          "result": "p_2(x)=1-25x^2/26, f(y_2)=4/29, p_2(y_2)=79/104, and |f(y_2)-p_2(y_2)|=1875/3016.",
+          "conclusion": "The exact finite case matches the interpolation construction and gives a positive error at the proof evaluation point."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Checked all six steps independently. Complex pole interpolation follows by polynomial division and applying the real root bound to both coefficient parts. At y_n the product is (2n)!/(2^n n! n^(n+1)); central-binomial maximality and n!>=(n/3)^n give the stated lower bound. Positive grid radii have bin counts n/8 +/-1, including empty bins and small n. The rational bin product is <1/50<(5/8)^8, hence the pole product upper bound. Even/odd parity yields the two exact real error factors, bounded below by 1/26 at y_n. Their ratio gives growth (16/15)^n/[n(2n+1)], eventually geometric. Continuity is justified by 1+25x^2>0; best errors tend to zero independently. No choice; published zero-square observations are elementary ordered-field consequences, not an unmet prerequisite."
+      }
+    },
+    "ex-chebyshev-interpolation-node-families-and-degree-one-norms": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+          "source_section": "Definition",
+          "quote": "Let $C[-1,1]$ be the real continuous functions on $[-1,1]$, with\n$\\|f\\|_\\infty:=\\sup_{x\\in[-1,1]}|f(x)|$. Let $\\mathcal P_n$ be the\nrestrictions to $[-1,1]$ of real polynomials of degree at most $n$, including\nthe zero polynomial. Interval notation is that of [[def-interval]]. Continuity and polynomial degree have the conventions of\n[[def-continuity-real]] and\n[[def-real-polynomial-degree-leading-coefficient-and-monic]].\n\nFor each $n\\in\\mathbb N$ (with naturals in real expressions interpreted by\ntheir canonical real images), the first-kind Chebyshev root angles and nodes are\n$$\\theta_j^{R,n}=\\frac{(2j+1)\\pi}{2n+2},\\qquad x_j^{R,n}=\\cos\\theta_j^{R,n},\\qquad 0\\leq j\\leq n.$$\nThey are the roots of $T_{n+1}$ by\n[[thm-chebyshev-multiple-angle-identities]]. For $n\\geq1$, the\nChebyshev–Lobatto angles and nodes are\n$$\\theta_j^{L,n}=\\frac{j\\pi}{n},\\qquad x_j^{L,n}=\\cos\\theta_j^{L,n},\\qquad 0\\leq j\\leq n.$$\nThey include both endpoints and are the extrema of $T_n$ by the same\nidentity. At $n=0$, define the Lobatto node to be $x_0^{L,0}=0$. The\ncosine is strictly decreasing on $[0,\\pi]$, so each listed family has\ndistinct nodes; the root family at $n=0$ also consists of $0$.\n\nFor either family $\\sigma\\in\\{R,L\\}$, write its nodes as\n$x_0,\\ldots,x_n$ and define\n$$\\ell_{j,n}^{\\sigma}(x)= \\prod_{\\substack{0\\leq k\\leq n\\\\k\\ne j}} \\frac{x-x_k}{x_j-x_k},\\qquad I_n^\\sigma f=\\sum_{j=0}^n f(x_j)\\ell_{j,n}^{\\sigma}.$$\nThese are the cardinal formula and interpolation sum of\n[[def-cardinal-polynomial-interpolation]] specialized to this node family.\nThe displayed cosine arrays decrease, whereas that supplier orders nodes\nincreasingly: use $z_i=x_{n-i}$ and data $y_i=f(z_i)$. Its cardinal\nfunction with index $n-j$ is exactly the displayed $\\ell_{j,n}^\\sigma$,\nby reindexing the finite product, and its interpolation sum is $I_n^\\sigma$.\nThe empty product at $n=0$ is $1$, so the same identification holds for the\nsingle node. Distinctness makes every denominator nonzero;\n[[lem-cardinal-basis-degree-and-values]] supplies the degree and cardinal\nvalues. The finite sum is linear in the data and maps $C[-1,1]$ into\n$\\mathcal P_n$. Its operator norm is\n$$\\Lambda_n^\\sigma:= \\sup\\{\\|I_n^\\sigma g\\|_\\infty:g\\in C[-1,1],\\ \\|g\\|_\\infty\\leq1\\}.$$\nIf $\\ell_{j,n}^\\sigma(x)=\\sum_{k=0}^n a_{jk}x^k$, then\n$|\\ell_{j,n}^\\sigma(x)|\\leq\\sum_{k=0}^n|a_{jk}|$ for $|x|\\leq1$; hence\n$\\|I_n^\\sigma g\\|_\\infty\\leq\\sum_{j,k}|a_{jk}|<\\infty$ whenever\n$\\|g\\|_\\infty\\leq1$. Define the best degree-$n$ uniform\napproximation error by\n$$E_n(f):=\\inf_{p\\in\\mathcal P_n}\\|f-p\\|_\\infty .$$\n\nThese quantities are real and well-defined. Polynomial functions are\ncontinuous, and sums and scalar multiples of continuous functions remain\ncontinuous by [[thm-algebra-of-continuous-functions]]. The interval\n$[-1,1]\\subset\\mathbb R$ is nonempty, closed, and bounded, so\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]] implies\nthat for every such continuous function $h$ there are finite minimum and\nmaximum values $m_h,M_h$. Since $m_h\\leq h(x)\\leq M_h$, one has\n$|h(x)|\\leq\\max(|m_h|,|M_h|)$, so each supremum norm above is finite. The set defining $\\Lambda_n^\\sigma$ contains\nthe zero function and is bounded above by the displayed finite coefficient\nsum. The set defining $E_n(f)$ contains the zero polynomial and is bounded\nbelow by zero. Completeness of $\\mathbb R$ ([[def-complete-ordered-field]])\ntherefore gives the stated finite supremum and infimum. Also, $n+1$ has\npositive real image by [[def-canonical-natural]] and\n[[lem-of-naturals-positive]], and $n$ has positive real image when $n\\geq1$;\nthus the root-angle denominator and the Lobatto denominator in its stated\nrange are nonzero.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cardinal-lagrange-interpolation-and-operator-norm",
+          "source_section": "Statement",
+          "quote": "For either Chebyshev node family and every $n\\geq0$, the cardinal\npolynomials in [[def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants]]\nsatisfy $\\ell_{j,n}^{\\sigma}(x_k^{\\sigma,n})=1$ when $j=k$ and $0$\notherwise. They are the unique degree-at-most-$n$ polynomials with those\ncardinal values. Consequently $I_n^\\sigma p=p$ for every $p\\in\\mathcal P_n$.\nMoreover,\n$$\\Lambda_n^\\sigma= \\sup_{x\\in[-1,1]}\\sum_{j=0}^n|\\ell_{j,n}^{\\sigma}(x)|.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-half-angle-identities-with-sign-conditions",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\cos(x/2)=\\varepsilon_c\\sqrt{(1+\\cos x)/2},\\qquad \\sin(x/2)=\\varepsilon_s\\sqrt{(1-\\cos x)/2},$$\nwhere $\\varepsilon_c,\\varepsilon_s\\in\\{-1,0,1\\}$ are respectively the signs of $\\cos(x/2)$ and $\\sin(x/2)$ (so $\\operatorname{sgn}(0)=0$). Thus the positive square root is valid only where the relevant half-angle function is nonnegative. The conventions and prerequisite facts used below are recorded in [[thm-double-angle-and-power-reduction-identities]], [[thm-of-square-roots]], [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-subtraction-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $u,v$,\n$$\\sin(u-v)=\\sin u\\cos v-\\cos u\\sin v,\\qquad \\cos(u-v)=\\cos u\\cos v+\\sin u\\sin v.$$ The conventions and prerequisite facts used below are recorded in [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $c=1/\\sqrt2$. The root nodes are $c,-c$, so their cardinal polynomials are $\\ell_0(x)=(x+c)/(2c)$ and $\\ell_1(x)=(c-x)/(2c)$. For $|x|\\leq c$ both are nonnegative and their sum is $1$. For $c\\leq x\\leq1$, their absolute-value sum is $x/c\\leq1/c$; for $-1\\leq x\\leq-c$, it is $-x/c\\leq1/c$. Equality holds at $x=\\pm1$, so the root-family cardinal-sum supremum is $1/c=\\sqrt2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The Lobatto nodes are $1,-1$, with cardinal polynomials $(1+x)/2$ and $(1-x)/2$. Both are nonnegative on $[-1,1]$ and sum to $1$, so their cardinal-sum supremum is $1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying the operator-norm identity [F2] to the two cardinal-sum calculations gives $\\Lambda_1^R=\\sqrt2$ and $\\Lambda_1^L=1$, as claimed.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Each degree-one node family has exactly two nodes."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes n=1 and makes no zero-degree assertion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 compute both degree-one families."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 includes the equality cases x=+-1 where the root-family norm is attained."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 include x=+-1 and attain the suprema there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 write the nodes and cardinal polynomials explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is operator norms square root of two and one respectively, for the fixed degree-one root nodes plus/minus inverse square root of two and Lobatto endpoints. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is operator norms square root of two and one respectively, for the fixed degree-one root nodes plus/minus inverse square root of two and Lobatto endpoints. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "Degree-one root and Lobatto norms",
+          "method": "exact cardinal-polynomial calculation",
+          "inputs": [
+            "root nodes +-1/sqrt(2)",
+            "Lobatto nodes +-1"
+          ],
+          "result": "The root cardinal-sum maximum is sqrt(2), attained at x=+-1; the Lobatto cardinal-sum maximum is 1.",
+          "conclusion": "The operator norms are Lambda_1^R=sqrt(2) and Lambda_1^L=1, as stated."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Checked cos(pi/4)=1/sqrt(2)>0 by signed half-angle, cos(3pi/4)=-1/sqrt(2) by subtraction/quarter turns. For root nodes +/-c the cardinal sum is 1 inside [-c,c] and |x|/c outside, maximum sqrt(2) at +/-1. Lobatto cardinal functions are nonnegative with sum 1. Exact norm supplier applies; endpoints and sign transitions checked. No AC."
+      }
+    },
+    "ex-exponential-best-error-rate-for-chebyshev-interpolation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants",
+          "source_section": "Definition",
+          "quote": "Let $C[-1,1]$ be the real continuous functions on $[-1,1]$, with\n$\\|f\\|_\\infty:=\\sup_{x\\in[-1,1]}|f(x)|$. Let $\\mathcal P_n$ be the\nrestrictions to $[-1,1]$ of real polynomials of degree at most $n$, including\nthe zero polynomial. Interval notation is that of [[def-interval]]. Continuity and polynomial degree have the conventions of\n[[def-continuity-real]] and\n[[def-real-polynomial-degree-leading-coefficient-and-monic]].\n\nFor each $n\\in\\mathbb N$ (with naturals in real expressions interpreted by\ntheir canonical real images), the first-kind Chebyshev root angles and nodes are\n$$\\theta_j^{R,n}=\\frac{(2j+1)\\pi}{2n+2},\\qquad x_j^{R,n}=\\cos\\theta_j^{R,n},\\qquad 0\\leq j\\leq n.$$\nThey are the roots of $T_{n+1}$ by\n[[thm-chebyshev-multiple-angle-identities]]. For $n\\geq1$, the\nChebyshev–Lobatto angles and nodes are\n$$\\theta_j^{L,n}=\\frac{j\\pi}{n},\\qquad x_j^{L,n}=\\cos\\theta_j^{L,n},\\qquad 0\\leq j\\leq n.$$\nThey include both endpoints and are the extrema of $T_n$ by the same\nidentity. At $n=0$, define the Lobatto node to be $x_0^{L,0}=0$. The\ncosine is strictly decreasing on $[0,\\pi]$, so each listed family has\ndistinct nodes; the root family at $n=0$ also consists of $0$.\n\nFor either family $\\sigma\\in\\{R,L\\}$, write its nodes as\n$x_0,\\ldots,x_n$ and define\n$$\\ell_{j,n}^{\\sigma}(x)= \\prod_{\\substack{0\\leq k\\leq n\\\\k\\ne j}} \\frac{x-x_k}{x_j-x_k},\\qquad I_n^\\sigma f=\\sum_{j=0}^n f(x_j)\\ell_{j,n}^{\\sigma}.$$\nThese are the cardinal formula and interpolation sum of\n[[def-cardinal-polynomial-interpolation]] specialized to this node family.\nThe displayed cosine arrays decrease, whereas that supplier orders nodes\nincreasingly: use $z_i=x_{n-i}$ and data $y_i=f(z_i)$. Its cardinal\nfunction with index $n-j$ is exactly the displayed $\\ell_{j,n}^\\sigma$,\nby reindexing the finite product, and its interpolation sum is $I_n^\\sigma$.\nThe empty product at $n=0$ is $1$, so the same identification holds for the\nsingle node. Distinctness makes every denominator nonzero;\n[[lem-cardinal-basis-degree-and-values]] supplies the degree and cardinal\nvalues. The finite sum is linear in the data and maps $C[-1,1]$ into\n$\\mathcal P_n$. Its operator norm is\n$$\\Lambda_n^\\sigma:= \\sup\\{\\|I_n^\\sigma g\\|_\\infty:g\\in C[-1,1],\\ \\|g\\|_\\infty\\leq1\\}.$$\nIf $\\ell_{j,n}^\\sigma(x)=\\sum_{k=0}^n a_{jk}x^k$, then\n$|\\ell_{j,n}^\\sigma(x)|\\leq\\sum_{k=0}^n|a_{jk}|$ for $|x|\\leq1$; hence\n$\\|I_n^\\sigma g\\|_\\infty\\leq\\sum_{j,k}|a_{jk}|<\\infty$ whenever\n$\\|g\\|_\\infty\\leq1$. Define the best degree-$n$ uniform\napproximation error by\n$$E_n(f):=\\inf_{p\\in\\mathcal P_n}\\|f-p\\|_\\infty .$$\n\nThese quantities are real and well-defined. Polynomial functions are\ncontinuous, and sums and scalar multiples of continuous functions remain\ncontinuous by [[thm-algebra-of-continuous-functions]]. The interval\n$[-1,1]\\subset\\mathbb R$ is nonempty, closed, and bounded, so\n[[thm-euclidean-heine-borel-pseudocompactness-and-extreme-values]] implies\nthat for every such continuous function $h$ there are finite minimum and\nmaximum values $m_h,M_h$. Since $m_h\\leq h(x)\\leq M_h$, one has\n$|h(x)|\\leq\\max(|m_h|,|M_h|)$, so each supremum norm above is finite. The set defining $\\Lambda_n^\\sigma$ contains\nthe zero function and is bounded above by the displayed finite coefficient\nsum. The set defining $E_n(f)$ contains the zero polynomial and is bounded\nbelow by zero. Completeness of $\\mathbb R$ ([[def-complete-ordered-field]])\ntherefore gives the stated finite supremum and infimum. Also, $n+1$ has\npositive real image by [[def-canonical-natural]] and\n[[lem-of-naturals-positive]], and $n$ has positive real image when $n\\geq1$;\nthus the root-angle denominator and the Lobatto denominator in its stated\nrange are nonzero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chebyshev-interpolation-near-best-error-bound",
+          "source_section": "Statement",
+          "quote": "For either Chebyshev node family, every $n\\geq0$, and every\n$f\\in C[-1,1]$,\n$$\\|f-I_n^\\sigma f\\|_\\infty \\leq (1+\\Lambda_n^\\sigma)E_n(f).$$\nHere $E_n$ is the best degree-$n$ uniform error and $\\Lambda_n^\\sigma$\nis the operator norm defined in\n[[def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chebyshev-interpolation-lebesgue-constant-log-bound",
+          "source_section": "Statement",
+          "quote": "For $n\\geq1$, let $\\Lambda_n^R$ be the operator norm of interpolation at\nthe $n+1$ roots of $T_{n+1}$, and let $\\Lambda_n^L$ be the operator norm\nat the $n+1$ Chebyshev–Lobatto nodes. With the conventions in\n[[def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants]],\n$$\\Lambda_n^R\\leq C\\log(n+1),\\qquad \\Lambda_n^L\\leq C\\log(n+1),\\qquad C:=4+\\frac{\\pi+4}{\\log2}.$$\nHere $\\log$ is the natural logarithm of [[def-natural-logarithm]]. For $n=0$, both one-node operators have norm $1$; the logarithmic estimate is stated for $n\\geq1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-exponential-series-has-infinite-radius",
+          "source_section": "Statement",
+          "quote": "For every real $x$, the series $\\sum_{n\\ge0}x^n/\\iota(n!)$ converges absolutely. Its power-series radius is therefore $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**The factorial.** By the recursion theorem ([[thm-recursion]]) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in [[def-nat-finite-sum-and-product]], there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with\n\n$$F(0) = 1, \\qquad F(\\sigma(n)) = F(n)\\cdot\\sigma(n) \\quad (n \\in \\mathbb{N}).$$\n\nWe write $n! := F(n)$. Thus $0! = 1$, $1! = 0!\\cdot 1 = 1$, $2! = 1!\\cdot 2 = 2$,\n$3! = 6$, $4! = 24$, $5! = 120$, $6! = 720$.\n\n**$0! = 1$ is the base clause of this recursion**, not a convention imported from\nelsewhere. Nothing about empty products is presupposed; the agreement with the\nempty product is proved below, in clause (a), rather than assumed.\n\n**Truncated difference.** Throughout, $n - k$ is the operation fixed in\n[[def-nat-finite-sum-and-product]]: the unique $j$ with $k + j = n$ when\n$k \\le n$, and $0$ when $n < k$.\n\n**The falling factorial.** For $n \\in \\mathbb{N}$ define $n^{\\underline{k}}$ by\nrecursion on $k$, by the recursion theorem applied to\n$\\mathbb{N}\\times\\mathbb{N}$ with starting element $(0,1)$ and\n$f(k, v) = (\\sigma(k),\\, v \\cdot (n-k))$:\n\n$$n^{\\underline{0}} = 1, \\qquad n^{\\underline{\\sigma(k)}} = n^{\\underline{k}}\\cdot(n-k) .$$\n\nSo $n^{\\underline{1}} = 1\\cdot(n-0) = n$ and $n^{\\underline{2}} = n\\,(n-1)$, and\nfor $k \\le n$ the value is the product $n(n-1)\\cdots(n-k+1)$ of the $k$ topmost\nfactors.\n\n**Four facts, proved here because the page uses each of them.**\n\n**(a) The factorial is the product of the first $n$ positive naturals.**\n$n! = \\prod_{j<n}\\sigma(j) = \\prod_{j<n}(j+1)$, the $\\mathbb{N}$-valued product of\n[[def-nat-finite-sum-and-product]]. Induction ([[thm-induction-principle]]): at\n$n = 0$ both sides are $1$, the empty product and the base clause agreeing; and\n$\\prod_{j<\\sigma(n)}\\sigma(j) = \\big(\\prod_{j<n}\\sigma(j)\\big)\\cdot\\sigma(n) = n!\\cdot\\sigma(n) = \\sigma(n)!$.\n**So the empty-product reading and the base-clause reading are the same reading**,\nand neither was assumed.\n\n**(b) $n! \\ne 0$, and $\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ ([[thm-omega-is-peano-system]]) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot y$\n([[lem-nat-mult-identity]]) and cancellation gives $x = 0$\n([[lem-nat-mult-cancellative]]). So $n! \\ne 0$ for every $n$ by induction. For the second, apply the bridge clause\n6 of that lemma to clause (a) above. This is what makes the factorial of this\npage and the real-valued product $\\prod_{j<n}(j+1)$ used elsewhere in the library\n**one object seen twice**, rather than two unrelated notions.\n\n**(c) $n^{\\underline{k}}\\cdot(n-k)! = n!$ for $k \\le n$.** Induction on $k$, for\nall $n$ at once. At $k = 0$ this reads $1 \\cdot n! = n!$. Assume it at $k$ and\nlet $\\sigma(k) \\le n$; then $k \\le n$, and writing $d := n - k$ we have\n$k + d = n$ and $d \\ne 0$, since $k + 0 = k \\ne n$; so $d = \\sigma(e)$ for a\nunique $e$ ([[lem-nat-nonzero-is-successor]]), and $\\sigma(k) + e = n$, that is\n$e = n - \\sigma(k)$ ([[lem-nat-add-cancellative]]). Therefore\n$n^{\\underline{\\sigma(k)}}\\cdot\\big(n-\\sigma(k)\\big)! = n^{\\underline{k}}\\cdot(n-k)\\cdot e! = n^{\\underline{k}}\\cdot\\big(e!\\cdot\\sigma(e)\\big) = n^{\\underline{k}}\\cdot\\sigma(e)! = n^{\\underline{k}}\\cdot(n-k)! = n!$,\nusing commutativity and associativity of multiplication\n([[lem-nat-mult-associative]], [[lem-nat-mult-commutative]]) and the recursion\nclause for the factorial.\n\n**(d) Boundary values.** $n^{\\underline{0}} = 1$ for every $n$, by the base\nclause; $n^{\\underline{n}} = n!$, since clause (c) at $k = n$ gives\n$n^{\\underline{n}}\\cdot 0! = n!$ and $0! = 1$; and\n$n^{\\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives\n$n^{\\underline{\\sigma(n)}} = n^{\\underline{n}}\\cdot 0 = 0$, the clause\n$x \\cdot 0 = 0$ being definitional ([[def-nat-multiplication]]), and if\n$n^{\\underline{k}} = 0$ then\n$n^{\\underline{\\sigma(k)}} = 0$ as well, so $n^{\\underline{k}} = 0$ for every\n$k \\ge \\sigma(n)$ by induction.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) with additive identity $0_F$ and\nmultiplicative identity $1_F$. Define\n$\\iota : \\mathbb{N} \\to F$ by recursion on $\\mathbb{N}$\n([[def-natural-numbers]], [[thm-recursion]]):\n\n$$\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .$$\n\n$\\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set ([[def-natural-numbers]]), and a set is not an\nelement of $F$. So $1/n$, $n^{\\alpha}$ and $x/n$ are not expressions of $F$ when\n$n$ is a natural: what they mean is $1/\\iota(n)$, $\\iota(n)^{\\alpha}$ and\n$x/\\iota(n)$. The map $\\iota$ is what carries a counting number into the field,\nand writing it is the whole reason a reader meets $1/\\iota(k+1)$ where an\ninformal text would write $1/(k+1)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in [[def-field]], and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F10], $f=\\exp$ is continuous on $[-1,1]$. Put $p_n(x)=\\sum_{k=0}^n x^k/k!$, which belongs to $\\mathcal P_n$. For $|x|\\leq1$, [F4]–[F6] give $|\\exp(x)-p_n(x)|\\leq\\sum_{m=0}^\\infty1/(n+1+m)!\\leq\\frac1{(n+1)!}\\sum_{m=0}^\\infty1/m!=e/(n+1)!$. The middle inequality follows from $(n+2)\\cdots(n+1+m)\\geq1\\cdots m=m!$, including the empty product for $m=0$. Taking the infimum over $\\mathcal P_n$ proves $E_n(\\exp)\\leq e/(n+1)!$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "algebra",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the near-best estimate [F2] and then the norm bound [F3] to step 1.1. This gives $\\|\\exp-I_n^\\sigma\\exp\\|_\\infty\\leq(1+\\Lambda_n^\\sigma)E_n(\\exp)\\leq(1+C\\log(n+1))e/(n+1)!$ for each $\\sigma\\in\\{R,L\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F7], $\\log(n+1)=\\int_1^{n+1}dt/t\\leq n$ and $\\log2=\\int_1^2dt/t>0$, so $C>0$. For $n\\geq1$, $(n+1)!=2\\cdot3\\cdots(n+1)\\geq2^n$ because this product has $n$ factors, each at least $2$, so the bound in step 2.1 is at most $e(1+Cn)/2^n$. For $n\\geq2$, the ratio of successive terms of $n2^{-n}$ is $(n+1)/(2n)\\leq3/4$, hence induction gives $n2^{-n}\\leq2(3/4)^{n-2}$. The geometric-sequence limit [F8] now shows both $2^{-n}$ and $n2^{-n}$ tend to zero, so the interpolation errors tend to zero.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The function domain is the fixed nonempty interval [-1,1]."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes f=exp and n>=1; it makes no zero-function assertion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 through 3.1 include n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 includes m=0 as the empty tail-product case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 proves the Taylor-tail bound for all |x|<=1, including x=+-1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 defines the Taylor polynomial explicitly and the remaining estimates are deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is a factorial best-error bound combined with logarithmic Lebesgue constants gives uniform interpolation convergence, for the fixed exponential function on minus one to one and degrees at least one. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose forward implication must be proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The asserted conclusion is a factorial best-error bound combined with logarithmic Lebesgue constants gives uniform interpolation convergence, for the fixed exponential function on minus one to one and degrees at least one. This is the item's stated procedure, identity, bound or example conclusion; it does not assert a biconditional whose reverse implication must be proved separately."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "First rate instance, n=1",
+          "method": "exact Taylor-polynomial tail bound followed by the proved interpolation estimates",
+          "inputs": [
+            "p_1(x)=1+x",
+            "(n+1)!=2!",
+            "C=4+(pi+4)/log(2)"
+          ],
+          "result": "E_1(exp)<=e/2 and ||exp-I_1^sigma exp||_infty<=(1+C log(2))e/2 for sigma in {R,L}.",
+          "conclusion": "The explicit rate is finite and valid at the first allowed degree."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-19",
+        "notes": "Checked all three verification steps: exp is continuous by its supplier; factorial products give (n+1+m)!>=(n+1)!m!, so the absolutely convergent tail is uniformly <=e/(n+1)!. The near-best and logarithmic norm bounds apply for each family with n>=1. log(n+1)<=n and (n+1)!>=2^n reduce convergence to n/2^n, whose successive ratio <=3/4 for n>=2 yields the explicit geometric domination. The geometric supplier uses rational tolerances exactly as its cited def-real-limit requires; reader:19:6 misquotes that definition. Empty factorial tail and zero errors are covered. No AC."
+      }
+    }
+  }
+}

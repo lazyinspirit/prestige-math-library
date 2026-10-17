@@ -1,0 +1,87 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "triage_identity": "simplex26-finite-precision-composition-scope-gap",
+  "status": "Readonly concrete proposal; await root mathematical/design approval and full-battery drain before source edits.",
+  "confirmed_defect": "Approved OPT13 requires canonical NA02 finite-precision basis factorization/update with recomputation and residual checks. Current26 exact basis/pivots and exact stored-candidate audit implement no NA02 basis-solve composition; old26openrow also falsely retains already-repaired source1 proof gaps.",
+  "source_owner": "Optimization owner26 composes existing source1 interfaces. No missing source1 theorem or new general factorization algorithm needed.",
+  "inputs_read": [
+    "research/plan-numerical-optimization-track.md#OPT13",
+    "research/numerical-analysis-four-category-scaffolds-2026-10-16/optimization-audit.md#contract-opt13",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-26.pages.json",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-26.cross-batch-dependencies.json",
+    "research/numerical-optimization-dynamics-2026-10-16-owner-ledger-open26-page1-disposition.json",
+    "items/def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma.md",
+    "items/alg-scaled-householder-reflector-formation-and-application.md",
+    "items/thm-scaled-householder-qr-backward-stability.md",
+    "items/lem-rounded-triangular-substitution-componentwise-backward-error.md",
+    "items/thm-computed-full-rank-least-squares-backward-stability.md",
+    "items/lem-rounded-linear-and-normal-residual-certificates.md",
+    "items/def-revised-simplex-basis-dictionary.md",
+    "items/alg-revised-primal-simplex-bland-rule.md",
+    "items/alg-revised-dual-simplex-with-finite-budget.md",
+    "items/alg-revised-simplex-residual-audit.md",
+    "items/thm-revised-simplex-primal-dual-residual-gap.md"
+  ],
+  "smallest_repair": {
+    "same_pair_new_algorithm": "alg-revised-simplex-qr-basis-recompute-and-audit",
+    "same_pair_new_theorem": "thm-revised-simplex-qr-basis-residual-status-sound",
+    "existing_statement_definition_changes": [],
+    "algorithm_steps": [
+      "Inputs are finite stored-real standard-form LP data, full-row-rank A with rank preprocessing supplied, a valid ordered initial basis, finite basis-replacement proposal list of length L, evaluation budget K>=0 and optional nonnegative residual thresholds. Each proposed replacement is one leaving position and one currently nonbasic column; retain all existing exact primal/dual/PhaseI methods. An existing exact driver may supply its exact legal basis sequence; a numerical proposal is not automatically a valid simplex pivot.",
+      "Process at most min(L+1,K) basis states, including initial basis. Validate dimensions/finiteness/distinct indices and the declared nonsingularity of each input basis. For a proposed replacement whose nonsingularity cannot be established, return basis-validity-inconclusive, retaining the last audited basis. No numerical rank tolerance declares an exact singular or infeasible LP.",
+      "For m>=1, factor C=A_B and C^T separately from current original stored columns using the canonical scaled Householder QR sequence. Apply stored reflectors by the analyzed rounded rank-one updates (never treat a rounded dense Q as exactly orthogonal), then successful rounded triangular substitution for C*xhat_B=b, C^T*yhat=c_B and C*dhat_j=a_j for each requested nonbasic direction. Reuse a same-basis factorization for separate RHS; after every basis replacement discard it and recompute both QR factorizations from current stored A_B. This is the approved recomputation branch of basis updates, not a newly implemented factorization/update scheme.",
+      "All calls retain the operationwise no-underflow/normal/finite/range checks, 0<u<1, mu<1, (m+3)u<1 and gamma_(m+3)<1/8. Failed factorization/substitution/residual evaluation/certificate arithmetic returns numerical-failure with exact stage and last successful audit. The m=0 branch uses no QR: empty x_B,y,d, zero basis-equation residuals and the existing exact empty-basis audit.",
+      "For each successful solve Cz=r or C^T z=r, compute vhat=fl(Cz), what=fl(vhat-r) by successful sequential dots/subtraction. With g_m=(1+6u)/(1-(m-1)u)-1 set W=g_m||C||F||zhat||2+u(||vhat||2+||r||2). Let beta=(1+kappa_m)^m-1 and beta_C=beta+gamma_(m+3)(1+beta). Return eta=min{||what||2+W,beta_C||C||F||zhat||2+beta||r||2}, using exact norms or certified upward bounds for both branches. Apply identical formula to C^T. A larger validated bound is legal; if no finite certified bound is available, no certificate is returned.",
+      "Embed xhat_B with zero nonbasic entries and invoke alg-revised-simplex-residual-audit on the actual stored xhat,yhat. Return basis and each solve residual bound, exact stored-data primal residual/slack/objective gap and the existing audit status. If supplied basis thresholds are met, basis-solves-residual-certified means only those inequalities. The exact audit alone may issue verified-optimal-for-stored-data under its exact primal/sign/gap checks. Otherwise return candidate-only or budget-exhausted, not approximate optimality/infeasibility.",
+      "A proposed replacement without separately validated simplex sign/ratio premises is a basis proposal only. This service does not assert exact Bland pivots, primal/dual feasibility invariants or no-cycling from floating signs. If attached to the existing exact driver, legal pivot/basis claims remain those of that driver, while this service supplies the computed candidate/status layer. Forward error of each basis solve is at most ||C^-1||2*eta (and transpose analog); signs/ratios require an actual certified inverse-norm/interval bound or exact existing pivot checks. Unavailable or overlapping sign/ratio validation must return pivot-inconclusive, not silently choose an exact certified pivot. No guaranteed numerical success or polynomial-time claim."
+    ],
+    "proof_route": [
+      "Every call has finite dimensions/loops and finite budget. Canonical arithmetic returns a finite result or first failure; exact rational audit of finite dyadic input terminates. Basis replacement increments the counted state and discards stale factors, so at most min(L+1,K) states are audited. m=0 is direct finite arithmetic.",
+      "For square nonsingular C, the source1 QR/triangular equations yield C+Delta_Q=Qhat Rhat and (Rhat+Delta_R)zhat=Qhat^T(r+delta r). Qhat is square and exactly orthogonal as represented, so multiplying gives (C+Delta_C)zhat=r+delta r, Delta_C=Delta_Q+Qhat Delta_R. Hence ||Delta_C||F<=beta_C||C||F and ||Czhat-r||2<=beta_C||C||F||zhat||2+beta||r||2. No nonsingularity of Rhat+Delta_R is needed for this residual conclusion; successful substitution and actual C nonsingularity suffice.",
+      "The rounded residual lemma bounds ||what-(Czhat-r)||2<=W. Triangle inequality gives the other candidate bound. Both entries are upper bounds, so their minimum is an upper bound. Repeat for every RHS and C^T; failure grants no certificate.",
+      "The existing exact audit gives g=xhat^T r_d+yhat^T r_p and |g|<=||xhat||1||r_d||infinity+||yhat||1||r_p||infinity for the stored data. Only its exact primal feasibility, dual slack nonnegativity and zero gap imply stored-data optimality. A small residual neither implies a small solution error without inverse norm nor validates signs/ratios or pre-rounded input data.",
+      "Recomputation ties each returned certificate to the actual current C and RHS. Conditional exact driver transitions preserve their already-proved mathematical properties; arbitrary finite basis proposals are not asserted to do so. Every failure or ambiguity keeps the last audited candidate and explicit inconclusive status."
+    ]
+  },
+  "proposed_requires": [
+    "finite-precision-direct-factorizations",
+    "sparse-matrix-models-and-kernel-costs",
+    "inequality-kkt-duality-and-optimality-certificates"
+  ],
+  "proposed_direct_deps_algorithm": [
+    "def-revised-simplex-basis-dictionary",
+    "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+    "alg-scaled-householder-reflector-formation-and-application",
+    "thm-computed-full-rank-least-squares-backward-stability",
+    "lem-scaled-householder-step-meets-local-backward-error-premise",
+    "lem-rounded-linear-and-normal-residual-certificates",
+    "alg-revised-simplex-residual-audit"
+  ],
+  "proposed_direct_deps_theorem": [
+    "alg-revised-simplex-qr-basis-recompute-and-audit",
+    "thm-computed-full-rank-least-squares-backward-stability",
+    "lem-rounded-linear-and-normal-residual-certificates",
+    "thm-revised-simplex-primal-dual-residual-gap"
+  ],
+  "cycle_check_by_declared_structure": "New26items point only to existing26lower-level exact dictionary/audit and source1. No edge from1back to26. No85SQP or61verified-systems dependency introduced, no new pair.",
+  "provenance": "New algorithm/theorem statements ai-altered as local composition/adaptation of existing typed NA02 and OPT13 interfaces. Cite the actual NA02 Stuart–Voss/FNC sources and existing OPT13 Bindel/Bertsimas treatments with locators explicitly saying the wrapper/status theorem is locally composed; no fabricated source reading or attribution of the exact composed theorem to literature.",
+  "consumer_dispositions": {
+    "existing26exact_items": "checked-unaffected; no Statement/Definition changes, no exact driver replaced or assigned floating-point guarantees. Exact Bland, dual, PhaseI, rays and infeasibility proofs remain intact.",
+    "existing26five_examples": "checked-unaffected by additive service; existing stored-data ill-conditioned residual example keeps its exact gap/conditioning caveat.",
+    "same_pair_A_page": "add actual QR basis-recomputation/status service, describe canonical recomputation at every supplied valid basis replacement and finitefailure conditions; no unstated forward accuracy or numerical Bland success.",
+    "same_pair_B_page": "existingexamples unchanged; no new pair/example necessary.",
+    "external_consumers": "No changed supplier Statement/Definition, hence no new logical hypotheses propagated. Root should search current actual dependents of newIDs (none until added) and retain exact logical/source-owner boundaries."
+  },
+  "root_mirrors": "Root owns newIDs in26manifest, proof-contracts/coverage/page/source mirrors, levels/hash/readiness and current26ledger repair. Owner supplies actual source text/proof after authorization; exact existing item carriers byte-preserved.",
+  "unresolved_design_question": "Root approve recompute-and-audit service composed with existing exact drivers as the smallest sound realization. If a fully autonomous floating sign-based pivot chooser is additionally required, author a separate certified inverse-norm/interval sign-and-ratio layer before claiming exact pivot/invariant guarantees; do not mislabel residual-only pricing as that layer.",
+  "changed_files": [
+    "research/numerical-optimization-dynamics-2026-10-16-owner-simplex26-qr-composition-proposal.json"
+  ],
+  "not_performed": [
+    "source/manifest/contract/control/ledger edits",
+    "hash/level/readiness/runtime/stamp changes",
+    "gates",
+    "tests",
+    "commit"
+  ]
+}

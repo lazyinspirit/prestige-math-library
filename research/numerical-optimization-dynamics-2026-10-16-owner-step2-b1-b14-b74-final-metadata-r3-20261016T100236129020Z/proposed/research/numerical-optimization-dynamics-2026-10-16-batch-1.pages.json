@@ -1,0 +1,343 @@
+[
+  {
+    "order": 2286,
+    "id": "finite-precision-direct-factorizations",
+    "kind": "A",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Finite-precision direct factorizations and least squares",
+    "companion": "finite-precision-direct-factorizations-examples",
+    "requires": [
+      "direct-matrix-factorisations-lu-cholesky-and-qr",
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "the-moore-penrose-pseudoinverse-and-regularised-least-squares",
+      "the-spectral-theorem-and-singular-value-decomposition"
+    ],
+    "items": [
+      {
+        "id": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+        "kind": "definition",
+        "title": "Operationwise real and complex floating point arithmetic with rounded square roots and fused multiply-add",
+        "deps": [
+          "def-standard-relative-floating-point-model-and-unit-roundoff"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-balanced-pairwise-summation",
+        "kind": "algorithm",
+        "title": "Balanced pairwise summation with range-failure status",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-two-sum-error-free-transform",
+        "kind": "algorithm",
+        "title": "TwoSum error-free transformation",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-two-product-fma-error-free-transform",
+        "kind": "algorithm",
+        "title": "TwoProduct error-free transformation using fused multiply-add",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-kahan-compensated-summation",
+        "kind": "algorithm",
+        "title": "Kahan compensated summation with range-failure status",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-neumaier-compensated-summation",
+        "kind": "algorithm",
+        "title": "Neumaier compensated summation with range-failure status",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-rounded-cholesky-with-failure-status",
+        "kind": "algorithm",
+        "title": "Failure-aware rounded Cholesky factorization",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-scaled-householder-reflector-formation-and-application",
+        "kind": "algorithm",
+        "title": "Scaled Householder reflector formation and application",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "def-householder-reflector",
+          "def-full-reduced-and-column-pivoted-computational-qr-factorisations"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-bounded-mixed-precision-iterative-refinement",
+        "kind": "algorithm",
+        "title": "Bounded mixed-precision iterative refinement",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "def-forward-and-back-substitution-for-triangular-systems"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-balanced-pairwise-summation-error-bound",
+        "kind": "theorem",
+        "title": "Balanced pairwise summation has a depth-dependent error bound",
+        "deps": [
+          "alg-balanced-pairwise-summation",
+          "lem-product-of-one-plus-deltas-gives-theta-n"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-binary-rounding-grid-and-ordered-two-sum",
+        "kind": "lemma",
+        "title": "Binary rounding grids, exact subtraction, and ordered TwoSum",
+        "deps": [
+          "thm-of-archimedean"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-two-sum-error-free-transform",
+        "kind": "theorem",
+        "title": "TwoSum returns the exact rounding error of a floating point sum",
+        "deps": [
+          "alg-two-sum-error-free-transform",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "lem-binary-rounding-grid-and-ordered-two-sum"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-two-product-fma-error-free-transform",
+        "kind": "theorem",
+        "title": "TwoProduct with fused multiply-add returns the exact product residual",
+        "deps": [
+          "alg-two-product-fma-error-free-transform",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-kahan-and-neumaier-finite-error-identities",
+        "kind": "theorem",
+        "title": "Kahan and Neumaier summation satisfy explicit finite data-dependent error bounds",
+        "deps": [
+          "alg-kahan-compensated-summation",
+          "alg-neumaier-compensated-summation",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+        "kind": "theorem",
+        "title": "A successful rounded Cholesky factorization has componentwise and normwise backward error bounds",
+        "deps": [
+          "alg-rounded-cholesky-with-failure-status",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "lem-product-of-one-plus-deltas-gives-theta-n",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-scaled-householder-step-meets-local-backward-error-premise",
+        "kind": "lemma",
+        "title": "The scaled computed Householder step satisfies the local backward error premise",
+        "deps": [
+          "alg-scaled-householder-reflector-formation-and-application",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+          "lem-product-of-one-plus-deltas-gives-theta-n",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-frobenius-matrix-norm",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-mixed-precision-refinement-error-recurrence-and-floor",
+        "kind": "theorem",
+        "title": "Mixed-precision refinement has an error recurrence and a finite precision floor",
+        "deps": [
+          "alg-bounded-mixed-precision-iterative-refinement",
+          "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-scaled-householder-qr-backward-stability",
+        "kind": "theorem",
+        "title": "The scaled Householder QR implementation is backward stable",
+        "deps": [
+          "alg-scaled-householder-reflector-formation-and-application",
+          "lem-scaled-householder-step-meets-local-backward-error-premise",
+          "thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-computed-full-rank-least-squares-backward-stability",
+        "kind": "theorem",
+        "title": "Computed reduced QR least squares is backward stable for full column rank",
+        "deps": [
+          "thm-scaled-householder-qr-backward-stability",
+          "lem-rounded-triangular-substitution-componentwise-backward-error",
+          "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+          "lem-product-of-one-plus-deltas-gives-theta-n",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-rounded-triangular-substitution-componentwise-backward-error",
+        "kind": "lemma",
+        "title": "Rounded triangular substitution has a componentwise matrix backward error",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "lem-product-of-one-plus-deltas-gives-theta-n"
+        ],
+        "statement": "Let $R\\in\\mathbb R^{n\\times n}$ be upper triangular with nonzero diagonal, $y\\in\\mathbb R^n$, $n\\ge1$, and $(n+3)u<1$. Compute descending substitution by the sequential rounded dot $s_i=\\operatorname{fl}(\\sum_{j>i}R_{ij}\\widehat x_j)$ (empty sum zero), $t_i=\\operatorname{fl}(y_i-s_i)$, and $\\widehat x_i=\\operatorname{fl}(t_i/R_{ii})$. If every operation succeeds, there is upper triangular $\\Delta R$ with\n$$(R+\\Delta R)\\widehat x=y,\\qquad |\\Delta R|\\le\\gamma_{n+3}|R|,\\qquad \\|\\Delta R\\|_F\\le\\gamma_{n+3}\\|R\\|_F.$$\nIn particular $\\widehat x=0$ forces $y=0$. Forward substitution has the transposed conclusion.",
+        "strategy": "1.1 Expand the rounded dot to obtain $s_i=\\sum_{j>i}R_{ij}\\widehat x_j(1+\\theta_{ij})$, with $|\\theta_{ij}|\\le\\gamma_{n-i}$, and use $s_n=0$. Write subtraction and division errors as $\\alpha_i,\\beta_i\\in[-u,u]$. The computed row identity is then $R_{ii}\\widehat x_i/((1+\\alpha_i)(1+\\beta_i))+\\sum_{j>i}R_{ij}\\widehat x_j(1+\\theta_{ij})=y_i$. These identities also hold for zero intermediates by taking the corresponding error zero. [given, F1, F2, F3, algebra]\n\n1.2 Choose $\\Delta R_{ii}=R_{ii}(((1+\\alpha_i)(1+\\beta_i))^{-1}-1)$ and $\\Delta R_{ij}=R_{ij}\\theta_{ij}$ for $j>i$, with zeros below the diagonal. Since $u<1/(n+3)\\le1/4$, all denominators are positive and $|((1+\\alpha_i)(1+\\beta_i))^{-1}-1|\\le(1-u)^{-2}-1\\le3u/(1-3u)=\\gamma_3$; multiplying positive denominators verifies the last inequality. Thus every entry has the claimed bound. [F1, step 1.1, algebra, construct]\n\n2.1 Step 1.1 gives $(R+\\Delta R)\\widehat x=y$, and summing the squared entry bounds gives the Frobenius estimate. If $\\widehat x=0$, the same equation gives $y=0$, including dimension one without a division by $\\|\\widehat x\\|$. Reversing the row order proves the lower-triangular version. [step 1.1, step 1.2, algebra] ∎",
+        "sources": [
+          {
+            "title": "Stuart and Voss, Matrix Analysis and Algorithms",
+            "url": "https://www.seehuhn.de/publications/StuaVo08/numlinalg.pdf"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-rounded-linear-and-normal-residual-certificates",
+        "kind": "lemma",
+        "title": "Rounded matrix products give certified linear and normal-equation residual allowances",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "lem-product-of-one-plus-deltas-gives-theta-n",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "statement": "Let $A\\in\\mathbb F^{m\\times n}$, $x\\in\\mathbb F^n$, $y\\in\\mathbb F^m$ have stored real or complex entries, with $m,n\\ge1$. Use the operationwise arithmetic model, successful sequential dot products, and $0<u<1$ with $(\\max(m,n)-1)u<1$. Define\n$$g_k=\\frac{1+6u}{1-(k-1)u}-1,\\qquad F=\\|A\\|_F,\\quad X=\\|x\\|_2,\\quad Y=\\|y\\|_2.$$\nFor $\\widehat v=\\operatorname{fl}(Ax)$ and $\\widehat w=\\operatorname{fl}(\\widehat v-y)$, put $V=g_nFX$ and $W=V+u(\\|\\widehat v\\|_2+Y)$. Then\n$$\\|\\widehat w-(Ax-y)\\|_2\\le W.$$\nFor a stored real $\\lambda>0$, also compute $\\widehat z=\\operatorname{fl}(A^*\\widehat w)$, $\\widehat l=\\operatorname{fl}(\\lambda x)$ and $\\widehat r=\\operatorname{fl}(\\widehat z+\\widehat l)$, rounding scalar multiplication componentwise. The exact intended normal residual $r=A^*(Ax-y)+\\lambda x$ satisfies\n$$\\|\\widehat r-r\\|_2\\le\\rho:=FW+g_mF\\|\\widehat w\\|_2+u\\lambda X+u(\\|\\widehat z\\|_2+\\|\\widehat l\\|_2).$$\nNorms in these certificates mean exact norms or certified upper bounds. Uncontrolled rounding of the certificate itself is not authorized. The linear bound applies columnwise to certify $\\|I-AB\\|_2\\le\\|I-AB\\|_F$ from stored basis-solve columns $B$.",
+        "strategy": "1.1 For $(a+ib)(c+id)$, each rounded real product has error at most $u$ times its absolute exact value. Each final real addition contributes at most $u(1+u)$ times the two corresponding product magnitudes. The Euclidean norm of the resulting real/imaginary error is at most $2(2u+u^2)|a+ib||c+id|\\le6u|a+ib||c+id|$, since $u<1$. Conjugation is exact. Real products obey this conservative bound as well. [given, F1, algebra]\n\n1.2 In a length-$k$ dot product, each product error from step 1.1 is propagated through at most $k-1$ additions. Expansion of each real component and [F2] bound the dot discrepancy by $[6u+\\gamma_{k-1}(1+6u)]\\sum_i|a_i||x_i|=g_k\\sum_i|a_i||x_i|$, with $\\gamma_0=0$. Combining rows and applying Cauchy-Schwarz gives $\\|\\widehat v-Ax\\|_2\\le g_nFX=V$. Componentwise subtraction has vector error at most $u(\\|\\widehat v\\|_2+Y)$, so the linear residual allowance is $W$. Zeros cause no difficulty in this expansion. [F1, F2, step 1.1, algebra]\n\n2.1 Apply step 1.2 to $A^*\\widehat w$ to get $\\|\\widehat z-A^*\\widehat w\\|_2\\le g_mF\\|\\widehat w\\|_2$. Transporting the earlier error through $A^*$ adds at most $FW$. The scalar product error is at most $u\\lambda X$; the last addition adds at most $u(\\|\\widehat z\\|_2+\\|\\widehat l\\|_2)$. Their sum proves $\\rho$. For basis columns, the triangle inequality combines each computed linear residual with its allowance; summing the squared column bounds gives a Frobenius certificate for $I-AB$, which bounds its induced Euclidean norm by Cauchy-Schwarz. [F1, step 1.2, algebra] ∎",
+        "sources": [
+          {
+            "title": "Stuart and Voss, Matrix Analysis and Algorithms",
+            "url": "https://www.seehuhn.de/publications/StuaVo08/numlinalg.pdf"
+          }
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1
+      }
+    ]
+  },
+  {
+    "order": 2287,
+    "id": "finite-precision-direct-factorizations-examples",
+    "kind": "B",
+    "category": "numerical-linear-algebra-and-approximation",
+    "title": "Finite-precision direct factorizations and least squares — Examples",
+    "companion": "finite-precision-direct-factorizations",
+    "requires": [
+      "finite-precision-direct-factorizations"
+    ],
+    "items": [
+      {
+        "id": "ex-subnormal-and-overflow-range-failure",
+        "kind": "example",
+        "title": "Subnormal and overflow branches return range failure",
+        "deps": [
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+          "alg-balanced-pairwise-summation"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-neumaier-recovers-low-order-term-after-cancellation",
+        "kind": "example",
+        "title": "Neumaier summation recovers a low order term after cancellation",
+        "deps": [
+          "alg-neumaier-compensated-summation",
+          "thm-kahan-and-neumaier-finite-error-identities",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-rounded-cholesky-two-by-two-residual",
+        "kind": "example",
+        "title": "A rounded two by two Cholesky factor and its residual",
+        "deps": [
+          "alg-rounded-cholesky-with-failure-status",
+          "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-two-sum-recovers-a-rounded-away-low-part",
+        "kind": "example",
+        "title": "TwoSum recovers a rounded away low part",
+        "deps": [
+          "alg-two-sum-error-free-transform",
+          "thm-two-sum-error-free-transform",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-full-rank-least-squares-normal-equations-versus-qr",
+        "kind": "example",
+        "title": "A full rank least squares problem where rounded normal equations lose the pivot",
+        "deps": [
+          "thm-computed-full-rank-least-squares-backward-stability",
+          "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+          "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-ill-conditioned-design-stability-versus-forward-error",
+        "kind": "example",
+        "title": "An ill conditioned design with large forward sensitivity",
+        "deps": [
+          "thm-computed-full-rank-least-squares-backward-stability",
+          "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+          "def-condition-number-of-a-nonsingular-linear-system",
+          "def-induced-matrix-p-norm"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  }
+]

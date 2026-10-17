@@ -1,0 +1,54 @@
+C. E. Rasmussen & C. K. I. Williams, Gaussian Processes for Machine Learning, the MIT Press, 2006,
+ISBN 026218253X.
+c⃝2006 Massachusetts Institute of Technology.
+www.GaussianProcess.org/gpml
+8
+Regression
+ity of implementation and interpretability. Its main drawback is that it only
+allows a limited ﬂexibility; if the relationship between input and output can-
+not reasonably be approximated by a linear function, the model will give poor
+predictions.
+In this section we ﬁrst discuss the Bayesian treatment of the linear model.
+We then make a simple enhancement to this class of models by projecting the
+inputs into a high-dimensional feature space and applying the linear model
+there. We show that in some feature spaces one can apply the “kernel trick” to
+carry out computations implicitly in the high dimensional space; this last step
+leads to computational savings when the dimensionality of the feature space is
+large compared to the number of data points.
+We have a training set D of n observations, D = {(xi, yi) | i = 1, . . . , n},
+training set
+where x denotes an input vector (covariates) of dimension D and y denotes
+a scalar output or target (dependent variable); the column vector inputs for
+all n cases are aggregated in the D × n design matrix 1 X, and the targets
+design matrix
+are collected in the vector y, so we can write D = (X, y). In the regression
+setting the targets are real values. We are interested in making inferences about
+the relationship between inputs and targets, i.e. the conditional distribution of
+the targets given the inputs (but we are not interested in modelling the input
+distribution itself).
+2.1.1
+The Standard Linear Model
+We will review the Bayesian analysis of the standard linear regression model
+with Gaussian noise
+f(x) = x⊤w,
+y = f(x) + ε,
+(2.1)
+where x is the input vector, w is a vector of weights (parameters) of the linear
+model, f is the function value and y is the observed target value. Often a bias
+bias, oﬀset
+weight or oﬀset is included, but as this can be implemented by augmenting the
+input vector x with an additional element whose value is always one, we do not
+explicitly include it in our notation. We have assumed that the observed values
+y diﬀer from the function values f(x) by additive noise, and we will further
+assume that this noise follows an independent, identically distributed Gaussian
+distribution with zero mean and variance σ2
+n
+ε ∼N(0, σ2
+n).
+(2.2)
+This noise assumption together with the model directly gives rise to the likeli-
+likelihood
+hood, the probability density of the observations given the parameters, which is
+1In statistics texts the design matrix is usually taken to be the transpose of our deﬁnition,
+but our choice is deliberate and has the advantage that a data point is a standard (column)
+vector.

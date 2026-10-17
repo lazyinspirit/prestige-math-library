@@ -1,0 +1,1406 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-csr-matvec-algorithm-terminates-with-status",
+    "thm-csr-matvec-returns-the-represented-matrix-product",
+    "thm-csr-storage-and-exact-matvec-cost",
+    "thm-filled-graph-contains-schur-complement-support",
+    "ex-csr-tridiagonal-matrix",
+    "ex-ordered-elimination-creates-fill",
+    "ex-numerical-cancellation-within-filled-graph",
+    "ex-csr-matvec-operation-count",
+    "ex-csr-duplicates-and-explicit-zero-entry-count"
+  ],
+  "contracts": {
+    "thm-csr-matvec-algorithm-terminates-with-status": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "alg-csr-matrix-vector-product-with-validation",
+          "source_section": "Definition",
+          "quote": "Fix a field $F$. The **validated CSR matrix-vector product** takes integer\ndimension candidates $m,n$, integer arrays $r,c$, a value array $v$ of elements\nof $F$, and a vector candidate $x$ of elements of $F$. All input arrays are\nfinite; write $s=\\operatorname{length}(v)$.\n\n1. If $m\\notin\\mathbb N$, $n\\notin\\mathbb N$,\n   $\\operatorname{length}(r)\\ne m+1$,\n   $\\operatorname{length}(c)\\ne s$, or\n   $\\operatorname{length}(x)\\ne n$, return the status `invalid-dimension`.\n2. For $i=0,\\ldots,m$, check that $r_i\\in\\{0,\\ldots,s\\}$; return\n   `invalid-index` if a check fails. Check $r_0=0$ and $r_m=s$, and for each\n   $i=0,\\ldots,m-1$ check $r_i\\le r_{i+1}$; return `invalid-index` if any\n   check fails. For each $t=0,\\ldots,s-1$, check $0\\le c_t<n$ and return\n   `invalid-index` if a check fails.\n3. Initialize $y_i=0_F$ for $0\\le i<m$. For each row\n   $i=0,\\ldots,m-1$, and then each stored index\n   $t=r_i,\\ldots,r_{i+1}-1$, update\n   $$y_i\\gets y_i+v_t x_{c_t}.$$\n4. Return the status `ok` together with $y\\in F^m$.\n\nFor valid CSR data this uses exact field operations. Validation examines only\nfinite arrays, and the row intervals partition the $s$ stored entries, so the\nspecified loops are bounded. This procedure makes no floating-point rounding,\nbackward-stability, convergence, runtime, or memory-bandwidth claim.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "alg-csr-matrix-vector-product-with-validation",
+          "source_section": "Definition",
+          "quote": "Fix a field $F$. The **validated CSR matrix-vector product** takes integer\ndimension candidates $m,n$, integer arrays $r,c$, a value array $v$ of elements\nof $F$, and a vector candidate $x$ of elements of $F$. All input arrays are\nfinite; write $s=\\operatorname{length}(v)$.\n\n1. If $m\\notin\\mathbb N$, $n\\notin\\mathbb N$,\n   $\\operatorname{length}(r)\\ne m+1$,\n   $\\operatorname{length}(c)\\ne s$, or\n   $\\operatorname{length}(x)\\ne n$, return the status `invalid-dimension`.\n2. For $i=0,\\ldots,m$, check that $r_i\\in\\{0,\\ldots,s\\}$; return\n   `invalid-index` if a check fails. Check $r_0=0$ and $r_m=s$, and for each\n   $i=0,\\ldots,m-1$ check $r_i\\le r_{i+1}$; return `invalid-index` if any\n   check fails. For each $t=0,\\ldots,s-1$, check $0\\le c_t<n$ and return\n   `invalid-index` if a check fails.\n3. Initialize $y_i=0_F$ for $0\\le i<m$. For each row\n   $i=0,\\ldots,m-1$, and then each stored index\n   $t=r_i,\\ldots,r_{i+1}-1$, update\n   $$y_i\\gets y_i+v_t x_{c_t}.$$\n4. Return the status `ok` together with $y\\in F^m$.\n\nFor valid CSR data this uses exact field operations. Validation examines only\nfinite arrays, and the row intervals partition the $s$ stored entries, so the\nspecified loops are bounded. This procedure makes no floating-point rounding,\nbackward-stability, convergence, runtime, or memory-bandwidth claim.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "alg-csr-matrix-vector-product-with-validation",
+          "source_section": "Definition",
+          "quote": "Fix a field $F$. The **validated CSR matrix-vector product** takes integer\ndimension candidates $m,n$, integer arrays $r,c$, a value array $v$ of elements\nof $F$, and a vector candidate $x$ of elements of $F$. All input arrays are\nfinite; write $s=\\operatorname{length}(v)$.\n\n1. If $m\\notin\\mathbb N$, $n\\notin\\mathbb N$,\n   $\\operatorname{length}(r)\\ne m+1$,\n   $\\operatorname{length}(c)\\ne s$, or\n   $\\operatorname{length}(x)\\ne n$, return the status `invalid-dimension`.\n2. For $i=0,\\ldots,m$, check that $r_i\\in\\{0,\\ldots,s\\}$; return\n   `invalid-index` if a check fails. Check $r_0=0$ and $r_m=s$, and for each\n   $i=0,\\ldots,m-1$ check $r_i\\le r_{i+1}$; return `invalid-index` if any\n   check fails. For each $t=0,\\ldots,s-1$, check $0\\le c_t<n$ and return\n   `invalid-index` if a check fails.\n3. Initialize $y_i=0_F$ for $0\\le i<m$. For each row\n   $i=0,\\ldots,m-1$, and then each stored index\n   $t=r_i,\\ldots,r_{i+1}-1$, update\n   $$y_i\\gets y_i+v_t x_{c_t}.$$\n4. Return the status `ok` together with $y\\in F^m$.\n\nFor valid CSR data this uses exact field operations. Validation examines only\nfinite arrays, and the row intervals partition the $s$ stored entries, so the\nspecified loops are bounded. This procedure makes no floating-point rounding,\nbackward-stability, convergence, runtime, or memory-bandwidth claim.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "If a dimension is not natural or an array length fails its dimension check, the algorithm returns `invalid-dimension` immediately. Otherwise $m,n$ and $s=\\operatorname{length}(v)$ are finite naturals by [L1]. The row-pointer and column-index validations inspect at most $m+1$ and $s$ entries, respectively, and each scan advances its index by one; therefore they finish and either return `invalid-index` or pass as in [L2].",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "If validation passes, the outer loop has $m$ iterations. The inner ranges are disjoint and their total length is $\\sum_{i<m}(r_{i+1}-r_i)=r_m-r_0=s$, so all accumulation loops in [L3] are finite and every accessed index is valid. The algorithm then returns `ok` with its length-$m$ output. Together with step 1.1 this proves termination on every input in the Statement.",
+          "inputs": [
+            "given",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 covers m=n=s=0: the finite checks run on their empty or singleton arrays and both accumulation loops have zero iterations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers s=0: the inner ranges are empty and the finite initialization loop returns."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 bounds a one-row or one-entry loop by its finite array length."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 treats failed dimensions and malformed indices as immediate status returns."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks r_0=0 and r_m=s and bounds every pointer; malformed endpoints return invalid-index."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For thm-csr-matvec-algorithm-terminates-with-status, the proof uses a specified finite input and selects no element from a nonempty family. The theorem accepts integer dimension candidates and finite arrays, returning invalid-dimension before scans if needed. Its proof counts finite pointer/index scans and disjoint stored-index ranges; on valid zero-row input no accumulation is entered. The result is a deterministic termination/status implication, not a logical equivalence or a choice construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm-csr-matvec-algorithm-terminates-with-status, the Statement is a direct implication, computation, or equality, not a biconditional. The theorem accepts integer dimension candidates and finite arrays, returning invalid-dimension before scans if needed. Its proof counts finite pointer/index scans and disjoint stored-index ranges; on valid zero-row input no accumulation is entered. The result is a deterministic termination/status implication, not a logical equivalence or a choice construction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm-csr-matvec-algorithm-terminates-with-status, the Statement is a direct implication, computation, or equality, not a biconditional. The theorem accepts integer dimension candidates and finite arrays, returning invalid-dimension before scans if needed. Its proof counts finite pointer/index scans and disjoint stored-index ranges; on valid zero-row input no accumulation is entered. The result is a deterministic termination/status implication, not a logical equivalence or a choice construction."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "alg-csr-matrix-vector-product-with-validation",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "All input arrays are finite; write $s=\\operatorname{length}(v)$.",
+          "use": "The finite input arrays make every validation and accumulation range finite."
+        },
+        {
+          "supplier": "alg-csr-matrix-vector-product-with-validation",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "For $i=0,\\ldots,m$, check that $r_i\\in\\{0,\\ldots,s\\}$;",
+          "use": "The exact row-pointer and column-index validation branches terminate over finite ranges."
+        },
+        {
+          "supplier": "alg-csr-matrix-vector-product-with-validation",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "For each row $i=0,\\ldots,m-1$, and then each stored index $t=r_i,\\ldots,r_{i+1}-1$, update $$y_i\\gets y_i+v_t x_{c_t}.$$",
+          "use": "The validated accumulation visits each finite row interval."
+        }
+      ]
+    },
+    "thm-csr-matvec-returns-the-represented-matrix-product": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-csr-matrix-with-stored-entry-semantics",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, and let $m,n,s\\in\\mathbb N$, where $\\mathbb N$ includes\n$0$. A **compressed sparse row (CSR) record** for an $m$ by $n$ matrix over\n$F$ consists of integer arrays $r=(r_0,\\ldots,r_m)$ and\n$c=(c_0,\\ldots,c_{s-1})$, and a value array $v=(v_0,\\ldots,v_{s-1})\\in F^s$,\nsatisfying\n\n$$r_0=0,\\qquad 0=r_0\\le r_1\\le\\cdots\\le r_m=s,\\qquad 0\\le c_t<n\\quad(0\\le t<s).$$\n\nFor each row $i<m$, its **stored entries** are the indices\n$t$ with $r_i\\le t<r_{i+1}$. The row is empty exactly when\n$r_i=r_{i+1}$. Repeated column indices within one row and stored values\n$v_t=0_F$ are permitted; each such entry remains a separate stored entry.\n\nThe represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by\n\n$$A_{ij}:=\\sum_{r_i\\le t<r_{i+1}}\\mathbf 1_{c_t=j}v_t\\qquad(0\\le i<m,\\ 0\\le j<n),$$\n\nwhere $\\mathbf 1_{c_t=j}$ is $1_F$ when $c_t=j$ and $0_F$ otherwise, and an\nempty sum is $0_F$. Repeated entries in column $j$ are therefore added. The\nnumber $s$ is the **stored-entry count**; it is not in general the number of\nnonzero entries of $A$.\n\nA CSR record is **canonical** when no row repeats a column and no stored value\nis zero. In that case every nonzero matrix entry is stored exactly once and\n$s=\\operatorname{nnz}(A)$, where $\\operatorname{nnz}(A)$ denotes the number of\nnonzero entries of $A$. If $m=0$, the endpoint conditions force $s=0$ and the\nrow-pointer array has its single entry $r_0=0$. If $n=0$, the column-index\ncondition forces $s=0$ as well.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "alg-csr-matrix-vector-product-with-validation",
+          "source_section": "Definition",
+          "quote": "Fix a field $F$. The **validated CSR matrix-vector product** takes integer\ndimension candidates $m,n$, integer arrays $r,c$, a value array $v$ of elements\nof $F$, and a vector candidate $x$ of elements of $F$. All input arrays are\nfinite; write $s=\\operatorname{length}(v)$.\n\n1. If $m\\notin\\mathbb N$, $n\\notin\\mathbb N$,\n   $\\operatorname{length}(r)\\ne m+1$,\n   $\\operatorname{length}(c)\\ne s$, or\n   $\\operatorname{length}(x)\\ne n$, return the status `invalid-dimension`.\n2. For $i=0,\\ldots,m$, check that $r_i\\in\\{0,\\ldots,s\\}$; return\n   `invalid-index` if a check fails. Check $r_0=0$ and $r_m=s$, and for each\n   $i=0,\\ldots,m-1$ check $r_i\\le r_{i+1}$; return `invalid-index` if any\n   check fails. For each $t=0,\\ldots,s-1$, check $0\\le c_t<n$ and return\n   `invalid-index` if a check fails.\n3. Initialize $y_i=0_F$ for $0\\le i<m$. For each row\n   $i=0,\\ldots,m-1$, and then each stored index\n   $t=r_i,\\ldots,r_{i+1}-1$, update\n   $$y_i\\gets y_i+v_t x_{c_t}.$$\n4. Return the status `ok` together with $y\\in F^m$.\n\nFor valid CSR data this uses exact field operations. Validation examines only\nfinite arrays, and the row intervals partition the $s$ stored entries, so the\nspecified loops are bounded. This procedure makes no floating-point rounding,\nbackward-stability, convergence, runtime, or memory-bandwidth claim.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-finite-sum-in-a-commutative-monoid",
+          "source_section": "Definition",
+          "quote": "Let $(M,+,0)$ be a commutative monoid ([[def-semigroup-and-monoid]]), let $S$ be a finite set with $n:=|S|$ ([[def-finite-cardinality]]), and let $a:S\\to M$. Choose a bijection $\\phi:n\\to S$ and define\n\n$$\\sum_{s\\in S}a_s:=a_{\\phi(0)}+a_{\\phi(1)}+\\cdots+a_{\\phi(n-1)},$$\n\nwhere the right side is the finite monoid product of [[def-monoid-finite-product]] written additively. In particular, the sum over the empty set is $0$.\n\nThis value is independent of the enumeration. If $\\psi:n\\to S$ is another bijection, then $\\phi^{-1}\\circ\\psi$ is a permutation of $n$ ([[def-injection-surjection-bijection]]), and generalised commutativity gives\n\n$$\\sum_{k<n}a_{\\psi(k)}=\\sum_{k<n}a_{\\phi(k)}$$\n\n([[thm-generalised-associativity]]). Thus the displayed notation names one element of $M$ and does not select a preferred enumeration.\n\nWhen $M$ is the additive monoid of $\\mathbb R$ or of $\\mathbb N$, this definition agrees with [[def-sum-over-a-finite-index-set]]: both enumerate $S$, apply the same finite recursion with identity $0$, and are independent of the enumeration.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-function-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) and let $X$ be any set. Write\n\n$$F^{X} \\;:=\\; \\{\\, f \\;:\\; f \\text{ is a function } X \\to F \\,\\},$$\n\nand for $f \\in F^{X}$ write $f(x)$ for its value at $x \\in X$. Two elements of\n$F^{X}$ are equal exactly when they agree at every point of $X$. Define\n\n$$(f + g)(x) \\;:=\\; f(x) + g(x), \\qquad (\\lambda f)(x) \\;:=\\; \\lambda\\, f(x), \\qquad 0_{F^{X}}(x) \\;:=\\; 0_F,$$\n\nfor $f, g \\in F^{X}$, $\\lambda \\in F$ and $x \\in X$, the operations on the right\nbeing those of $F$. These are the **pointwise** operations.\n\n**These rules really are the required data.** For $f, g \\in F^{X}$ the assignment\n$x \\mapsto f(x) + g(x)$ is a function $X \\to F$, so $+$ is a binary operation\n$F^{X} \\times F^{X} \\to F^{X}$ ([[def-binary-operation]]); for $\\lambda \\in F$ and\n$f \\in F^{X}$ the assignment $x \\mapsto \\lambda f(x)$ is a function $X \\to F$, so\nscalar multiplication is a map $F \\times F^{X} \\to F^{X}$; and $0_{F^{X}}$, the\nconstant function at $0_F$, is an element of $F^{X}$.\n\n**$F^{X}$ is a vector space over $F$** ([[def-vector-space]]). Each axiom is an\nequation between elements of $F^{X}$, hence holds exactly when it holds at every\n$x \\in X$ after evaluation, and there it is the corresponding field axiom applied\nto the values $f(x), g(x), \\lambda, \\mu$:\n\n- associativity and commutativity of $+$, and $f + 0_{F^{X}} = f$, come from the\n  same laws for $+$ in $F$; the additive inverse of $f$ is $x \\mapsto -f(x)$,\n  which lies in $F^{X}$ and satisfies $f + (-f) = 0_{F^{X}}$ pointwise. This is\n  axiom (V1);\n- $\\bigl(\\lambda(f+g)\\bigr)(x) = \\lambda(f(x)+g(x)) = \\lambda f(x) + \\lambda g(x)$\n  is (V2), by distributivity in $F$;\n- $\\bigl((\\lambda+\\mu)f\\bigr)(x) = (\\lambda+\\mu)f(x) = \\lambda f(x) + \\mu f(x)$ is\n  (V3), by distributivity in $F$;\n- $\\bigl((\\lambda\\mu)f\\bigr)(x) = (\\lambda\\mu)f(x) = \\lambda(\\mu f(x))$ is (V4),\n  by associativity of multiplication in $F$;\n- $(1_F f)(x) = 1_F f(x) = f(x)$ is (V5), by the multiplicative identity law\n  in $F$.\n\n### The case $X = n$\n\nA natural number is a von Neumann natural ([[def-natural-numbers]]), that is a\nset, and $n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\} = \\{0, 1, \\dots, n-1\\}$\n([[lem-nat-order-is-membership]]). Taking $X = n$ therefore gives\n\n$$F^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to F \\,\\},$$\n\nwhose elements are written $x = (x_0, x_1, \\dots, x_{n-1})$ with $x_i := x(i)$ for\n$i < n$. **The coordinates are indexed from $0$**, because $0 \\in n$ whenever\n$n \\ne 0$ and $n \\notin n$ always. The operations read\n\n$$(x + y)_i = x_i + y_i, \\qquad (\\lambda x)_i = \\lambda x_i \\qquad (i < n),$$\n\nand the zero of $F^{n}$ is the tuple all of whose coordinates are $0_F$.\n\n**The two boundary cases.** $\\mathbb{N}$ contains $0$, so $n = 0$ is a genuine\ncase. Since $0 = \\varnothing$, the set $F^{0} = F^{\\varnothing}$ has exactly one\nelement, the empty function; that element is $0_{F^{0}}$, so $F^{0}$ is the\n**zero space** $\\{0_{F^{0}}\\}$, not the empty set. For $n = 1$ we have\n$1 = \\{0\\}$, and the map $F^{1} \\to F$ sending $x$ to its single coordinate $x_0$\nis a bijection satisfying $(x+y)_0 = x_0 + y_0$ and $(\\lambda x)_0 = \\lambda x_0$;\nwe use it to read $F^{1}$ as $F$ where convenient. (No general notion of\nisomorphism of vector spaces is available on this page, and none is claimed here:\nwhat is asserted is exactly the displayed bijection and the two displayed\nequations.)",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "lem-of-zero-mult",
+          "source_section": "Statement",
+          "quote": "In any field $F$ ([[def-field]]), for every $a \\in F$ we have $0 \\cdot a = 0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Fix a row $i$. Initially its output coordinate is $0_F$, the empty partial sum. After $q$ entries of that row have been visited, induction on $q$ gives $y_i=\\sum_{t=r_i}^{r_i+q-1}v_t x_{c_t}$: the next algorithmic update adds exactly the next summand. Taking $q=r_{i+1}-r_i$ yields $y_i=\\sum_{r_i\\le t<r_{i+1}}v_t x_{c_t}$.",
+          "inputs": [
+            "L2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "By [L1] and [L3], $(Ax)_i=\\sum_{j<n}\\sum_{r_i\\le t<r_{i+1}}\\mathbf 1_{c_t=j}v_t x_j$. Repeated application of [L5], by induction on the finite number of summands, distributes the products over these sums. Re-enumerating the resulting finite sum over pairs $(j,t)$ as $(t,j)$ is permitted by [L4]. For each fixed $t$, exactly the term $j=c_t$ survives, so the result is $\\sum_{r_i\\le t<r_{i+1}}v_t x_{c_t}$. By step 1.1 this equals $y_i$.",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4",
+            "L5",
+            "L7",
+            "L8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "If $m=0$, both $y$ and $Ax$ are the unique empty vector by [L6]. If $m>0$, step 2.1 gives equality in every coordinate $i<m$, hence $y=Ax$.",
+          "inputs": [
+            "L6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 treats m=0 by equality of the unique empty function; step 2.1 also uses empty sums when n=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the empty-sum convention when a row has no stored entries or n=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to a row with one stored entry by the base case and its single update."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes repeated columns and explicit zero values because it sums every stored index individually."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For thm-csr-matvec-returns-the-represented-matrix-product, the statement has no interval or endpoint parameter. The theorem works over an arbitrary field with natural row/column counts, including zero. Its proof starts each row with the empty sum, distributes/reindexes stored contributions including duplicates, and explicitly equates the unique empty outputs when m=0. There is no interval parameter, biconditional, or unprescribed witness selection in this exact-product identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For thm-csr-matvec-returns-the-represented-matrix-product, the proof uses a specified finite input and selects no element from a nonempty family. The theorem works over an arbitrary field with natural row/column counts, including zero. Its proof starts each row with the empty sum, distributes/reindexes stored contributions including duplicates, and explicitly equates the unique empty outputs when m=0. There is no interval parameter, biconditional, or unprescribed witness selection in this exact-product identity."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm-csr-matvec-returns-the-represented-matrix-product, the Statement is a direct implication, computation, or equality, not a biconditional. The theorem works over an arbitrary field with natural row/column counts, including zero. Its proof starts each row with the empty sum, distributes/reindexes stored contributions including duplicates, and explicitly equates the unique empty outputs when m=0. There is no interval parameter, biconditional, or unprescribed witness selection in this exact-product identity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm-csr-matvec-returns-the-represented-matrix-product, the Statement is a direct implication, computation, or equality, not a biconditional. The theorem works over an arbitrary field with natural row/column counts, including zero. Its proof starts each row with the empty sum, distributes/reindexes stored contributions including duplicates, and explicitly equates the unique empty outputs when m=0. There is no interval parameter, biconditional, or unprescribed witness selection in this exact-product identity."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-csr-matrix-with-stored-entry-semantics",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "The represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by $$A_{ij}:=\\sum_{r_i\\le t<r_{i+1}}\\mathbf 1_{c_t=j}v_t\\qquad(0\\le i<m,\\ 0\\le j<n),$$ where $\\mathbf 1_{c_t=j}$ is $1_F$ when $c_t=j$ and $0_F$ otherwise, and an empty sum is $0_F$.",
+          "use": "The represented matrix groups stored entries by row and column."
+        },
+        {
+          "supplier": "alg-csr-matrix-vector-product-with-validation",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "For each row $i=0,\\ldots,m-1$, and then each stored index $t=r_i,\\ldots,r_{i+1}-1$, update $$y_i\\gets y_i+v_t x_{c_t}.$$",
+          "use": "The algorithm updates each row accumulator by the stored product."
+        },
+        {
+          "supplier": "def-matrix-product-and-identity-matrix",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are $$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$",
+          "use": "The standard matrix-product coordinate is the finite column sum."
+        },
+        {
+          "supplier": "def-finite-sum-in-a-commutative-monoid",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "This value is independent of the enumeration.",
+          "use": "The finite paired sum can be re-enumerated after swapping its indices."
+        },
+        {
+          "supplier": "def-field",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.",
+          "use": "Finite sums distribute over multiplication by repeated field distributivity."
+        },
+        {
+          "supplier": "def-function-space",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Since $0 = \\varnothing$, the set $F^{0} = F^{\\varnothing}$ has exactly one element, the empty function; that element is $0_{F^{0}}$, so $F^{0}$ is the **zero space** $\\{0_{F^{0}}\\}$, not the empty set.",
+          "use": "The zero-dimensional output space has exactly one empty vector."
+        },
+        {
+          "supplier": "lem-of-zero-mult",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "In any field $F$ ([[def-field]]), for every $a \\in F$ we have $0 \\cdot a = 0$.",
+          "use": "Every term with indicator zero vanishes in the expanded finite sum."
+        },
+        {
+          "supplier": "def-field",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "Multiplication is associative and commutative **on all of $F$**, and $x \\cdot 1 = x$ for every $x \\in F$;",
+          "use": "For the unique matching column, the indicator factor 1 reduces the term to the stored product."
+        }
+      ]
+    },
+    "thm-csr-storage-and-exact-matvec-cost": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-csr-matrix-with-stored-entry-semantics",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, and let $m,n,s\\in\\mathbb N$, where $\\mathbb N$ includes\n$0$. A **compressed sparse row (CSR) record** for an $m$ by $n$ matrix over\n$F$ consists of integer arrays $r=(r_0,\\ldots,r_m)$ and\n$c=(c_0,\\ldots,c_{s-1})$, and a value array $v=(v_0,\\ldots,v_{s-1})\\in F^s$,\nsatisfying\n\n$$r_0=0,\\qquad 0=r_0\\le r_1\\le\\cdots\\le r_m=s,\\qquad 0\\le c_t<n\\quad(0\\le t<s).$$\n\nFor each row $i<m$, its **stored entries** are the indices\n$t$ with $r_i\\le t<r_{i+1}$. The row is empty exactly when\n$r_i=r_{i+1}$. Repeated column indices within one row and stored values\n$v_t=0_F$ are permitted; each such entry remains a separate stored entry.\n\nThe represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by\n\n$$A_{ij}:=\\sum_{r_i\\le t<r_{i+1}}\\mathbf 1_{c_t=j}v_t\\qquad(0\\le i<m,\\ 0\\le j<n),$$\n\nwhere $\\mathbf 1_{c_t=j}$ is $1_F$ when $c_t=j$ and $0_F$ otherwise, and an\nempty sum is $0_F$. Repeated entries in column $j$ are therefore added. The\nnumber $s$ is the **stored-entry count**; it is not in general the number of\nnonzero entries of $A$.\n\nA CSR record is **canonical** when no row repeats a column and no stored value\nis zero. In that case every nonzero matrix entry is stored exactly once and\n$s=\\operatorname{nnz}(A)$, where $\\operatorname{nnz}(A)$ denotes the number of\nnonzero entries of $A$. If $m=0$, the endpoint conditions force $s=0$ and the\nrow-pointer array has its single entry $r_0=0$. If $n=0$, the column-index\ncondition forces $s=0$ as well.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-csr-matrix-with-stored-entry-semantics",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, and let $m,n,s\\in\\mathbb N$, where $\\mathbb N$ includes\n$0$. A **compressed sparse row (CSR) record** for an $m$ by $n$ matrix over\n$F$ consists of integer arrays $r=(r_0,\\ldots,r_m)$ and\n$c=(c_0,\\ldots,c_{s-1})$, and a value array $v=(v_0,\\ldots,v_{s-1})\\in F^s$,\nsatisfying\n\n$$r_0=0,\\qquad 0=r_0\\le r_1\\le\\cdots\\le r_m=s,\\qquad 0\\le c_t<n\\quad(0\\le t<s).$$\n\nFor each row $i<m$, its **stored entries** are the indices\n$t$ with $r_i\\le t<r_{i+1}$. The row is empty exactly when\n$r_i=r_{i+1}$. Repeated column indices within one row and stored values\n$v_t=0_F$ are permitted; each such entry remains a separate stored entry.\n\nThe represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by\n\n$$A_{ij}:=\\sum_{r_i\\le t<r_{i+1}}\\mathbf 1_{c_t=j}v_t\\qquad(0\\le i<m,\\ 0\\le j<n),$$\n\nwhere $\\mathbf 1_{c_t=j}$ is $1_F$ when $c_t=j$ and $0_F$ otherwise, and an\nempty sum is $0_F$. Repeated entries in column $j$ are therefore added. The\nnumber $s$ is the **stored-entry count**; it is not in general the number of\nnonzero entries of $A$.\n\nA CSR record is **canonical** when no row repeats a column and no stored value\nis zero. In that case every nonzero matrix entry is stored exactly once and\n$s=\\operatorname{nnz}(A)$, where $\\operatorname{nnz}(A)$ denotes the number of\nnonzero entries of $A$. If $m=0$, the endpoint conditions force $s=0$ and the\nrow-pointer array has its single entry $r_0=0$. If $n=0$, the column-index\ncondition forces $s=0$ as well.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "alg-csr-matrix-vector-product-with-validation",
+          "source_section": "Definition",
+          "quote": "Fix a field $F$. The **validated CSR matrix-vector product** takes integer\ndimension candidates $m,n$, integer arrays $r,c$, a value array $v$ of elements\nof $F$, and a vector candidate $x$ of elements of $F$. All input arrays are\nfinite; write $s=\\operatorname{length}(v)$.\n\n1. If $m\\notin\\mathbb N$, $n\\notin\\mathbb N$,\n   $\\operatorname{length}(r)\\ne m+1$,\n   $\\operatorname{length}(c)\\ne s$, or\n   $\\operatorname{length}(x)\\ne n$, return the status `invalid-dimension`.\n2. For $i=0,\\ldots,m$, check that $r_i\\in\\{0,\\ldots,s\\}$; return\n   `invalid-index` if a check fails. Check $r_0=0$ and $r_m=s$, and for each\n   $i=0,\\ldots,m-1$ check $r_i\\le r_{i+1}$; return `invalid-index` if any\n   check fails. For each $t=0,\\ldots,s-1$, check $0\\le c_t<n$ and return\n   `invalid-index` if a check fails.\n3. Initialize $y_i=0_F$ for $0\\le i<m$. For each row\n   $i=0,\\ldots,m-1$, and then each stored index\n   $t=r_i,\\ldots,r_{i+1}-1$, update\n   $$y_i\\gets y_i+v_t x_{c_t}.$$\n4. Return the status `ok` together with $y\\in F^m$.\n\nFor valid CSR data this uses exact field operations. Validation examines only\nfinite arrays, and the row intervals partition the $s$ stored entries, so the\nspecified loops are bounded. This procedure makes no floating-point rounding,\nbackward-stability, convergence, runtime, or memory-bandwidth claim.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The value, column-index, and row-pointer arrays have lengths $s$, $s$, and $m+1$, respectively, so their input representation contains exactly $2s+m+1$ data slots.",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "The number of visits in row $i$ is $r_{i+1}-r_i$. Summing these lengths telescopes to $r_m-r_0=s$; monotonicity makes the intervals disjoint and their endpoints cover every stored index once. Thus the accumulation loop executes exactly $s$ multiply-add updates, and the initialization loop executes exactly $m$ times. The two validation scans examine at most $m+1$ pointers and $s$ column indices, so validation and loop control take $O(m+s+1)$ work.",
+          "inputs": [
+            "L1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "1.3",
+          "claim": "The returned vector occupies $m$ additional field slots. Counting it with the CSR arrays, and excluding the supplied $x$ and fixed workspace, gives exactly $2s+2m+1$ data slots, hence $O(m+s+1)$. If $m\\ge1$, then $m+s\\ge1$ and the additive constant is absorbed into a fixed multiple of $m+s$.",
+          "inputs": [
+            "L1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "2.1",
+          "claim": "For a square record of order $m\\ge1$ with every row storing at least one entry, summing its $m$ row lengths gives $s\\ge m$; substituting into the preceding bounds yields $O(s)$. By [L2], a canonical record has $s=\\operatorname{nnz}(A)$; no such equality is asserted when duplicate columns or explicit zeros are stored.",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 gives one pointer slot when m=s=0, and step 1.3 retains the +1 term in the uniform bound."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 gives zero multiplications and additions when s=0, while retaining m initializations."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 counts one stored entry as one multiplication and one addition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the nnz equality only under the canonical convention and the O(s) bound only when a square record of positive order has an entry in every row."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For thm-csr-storage-and-exact-matvec-cost, the statement has no interval or endpoint parameter. The theorem counts stored slots and visits, retaining the additive constant when m=s=0 and reserving O(m+s) for m>=1. The O(s) consequence requires at least one stored entry per row. It is a finite arithmetic/storage count, with no interval endpoint, equivalence, or selection from an arbitrary family."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For thm-csr-storage-and-exact-matvec-cost, the proof uses a specified finite input and selects no element from a nonempty family. The theorem counts stored slots and visits, retaining the additive constant when m=s=0 and reserving O(m+s) for m>=1. The O(s) consequence requires at least one stored entry per row. It is a finite arithmetic/storage count, with no interval endpoint, equivalence, or selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm-csr-storage-and-exact-matvec-cost, the Statement is a direct implication, computation, or equality, not a biconditional. The theorem counts stored slots and visits, retaining the additive constant when m=s=0 and reserving O(m+s) for m>=1. The O(s) consequence requires at least one stored entry per row. It is a finite arithmetic/storage count, with no interval endpoint, equivalence, or selection from an arbitrary family."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm-csr-storage-and-exact-matvec-cost, the Statement is a direct implication, computation, or equality, not a biconditional. The theorem counts stored slots and visits, retaining the additive constant when m=s=0 and reserving O(m+s) for m>=1. The O(s) consequence requires at least one stored entry per row. It is a finite arithmetic/storage count, with no interval endpoint, equivalence, or selection from an arbitrary family."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-csr-matrix-with-stored-entry-semantics",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "For each row $i<m$, its **stored entries** are the indices $t$ with $r_i\\le t<r_{i+1}$.",
+          "use": "The stored-entry intervals and row-pointer lengths determine the array and loop counts."
+        },
+        {
+          "supplier": "def-csr-matrix-with-stored-entry-semantics",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "A CSR record is **canonical** when no row repeats a column and no stored value is zero. In that case every nonzero matrix entry is stored exactly once and $s=\\operatorname{nnz}(A)$, where $\\operatorname{nnz}(A)$ denotes the number of nonzero entries of $A$.",
+          "use": "Canonical records give s=nnz(A); noncanonical records need not."
+        },
+        {
+          "supplier": "alg-csr-matrix-vector-product-with-validation",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "For each row $i=0,\\ldots,m-1$, and then each stored index $t=r_i,\\ldots,r_{i+1}-1$, update $$y_i\\gets y_i+v_t x_{c_t}.$$",
+          "use": "The algorithm performs one update for each stored index."
+        }
+      ]
+    },
+    "thm-filled-graph-contains-schur-complement-support": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-symmetric-structural-elimination-graph-and-ordering",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\in\\mathbb N$ (including $0$), and let $A\\in M_{n\\times n}(F)$ satisfy\n$A_{ij}=A_{ji}$ for every $i,j<n$ (that is, $A$ is symmetric). Its\n**structural graph** is\nthe simple undirected graph $G_0=(V,E_0)$ with vertex set\n$V=\\{0,\\ldots,n-1\\}$ and edge set\n\n$$E_0:=\\bigl\\{\\{i,j\\}:0\\le i<j<n,\\ A_{ij}\\ne0\\bigr\\}.$$\n\nAn **elimination ordering** is a listing $v_0,\\ldots,v_{n-1}$ in which every\nvertex of $V$ occurs exactly once. Define the current vertex set by\n$V_k=\\{v_\\ell:k\\le\\ell<n\\}$, starting with the structural graph $G_0$. At\nstep $k$, the **later neighbors** of $v_k$ are\n\n$$N_k(v_k):=\\{u\\in V_k\\setminus\\{v_k\\}:\\{u,v_k\\}\\in E_k\\}.$$\n\nThe filled graph $G_{k+1}=(V_{k+1},E_{k+1})$ is obtained by deleting $v_k$ and\nits incident edges, retaining all edges between remaining vertices, and adding\nevery edge between two distinct vertices of $N_k(v_k)$. An edge added at step\n$k$ that was not already in $E_k$ is a **fill edge**. Repeating this rule\ndefines the symbolic elimination pattern for the ordering; it is defined from\nthe initial graph and ordering alone, without numerical pivot values.\n\nIf $N_k(v_k)$ is nonempty, the **parent** of $v_k$ is the later neighbor\n$v_\\ell$ with least position $\\ell>k$ in the ordering. If $N_k(v_k)$ is\nempty, $v_k$ is a root. Each non-root has a unique parent, and positions strictly increase along parent edges, so there is no directed cycle. If the underlying undirected graph had a cycle, its least-position vertex would be a child of both adjacent later vertices, contradicting uniqueness. Thus the parent relation is an elimination forest.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-of-zero-mult",
+          "source_section": "Statement",
+          "quote": "In any field $F$ ([[def-field]]), for every $a \\in F$ we have $0 \\cdot a = 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-of-no-zero-divisors",
+          "source_section": "Statement",
+          "quote": "In any field $F$ ([[def-field]]), if $a, b \\in F$ satisfy $ab = 0$, then $a = 0$ or $b = 0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "At stage $0$, $S^0=A$ and the initial edge set consists exactly of the unordered off-diagonal pairs with nonzero matrix entry. Hence every nonzero off-diagonal entry of $S^0$ corresponds to an edge of $G_0$.",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "Suppose the support inclusion holds at stage $k$. If $S^{k+1}_{ij}\\ne0$ for distinct $i,j\\in V_{k+1}$, then at least one of $S^k_{ij}$ and $S^k_{iv_k}S^k_{v_kj}/p_k$ is nonzero. In the first case, the induction hypothesis gives $\\{i,j\\}\\in E_k$, and the update retains that edge. In the second case, the numerator is nonzero because a zero numerator would give a zero quotient by [L2] and [L3]; then [L4] forces both pivot couplings to be nonzero. The induction hypothesis gives $\\{i,v_k\\},\\{v_k,j\\}\\in E_k$, so $i,j\\in N_k(v_k)$ and the update adds $\\{i,j\\}$. Thus every such nonzero is supported by an edge of $G_{k+1}$.",
+          "inputs": [
+            "A1",
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "The base case and induction step prove the support inclusion at every stage. For any two distinct later neighbors of $v_k$, the graph update inserts their pair by definition, so the later-neighbor set is a clique in $G_{k+1}$.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L1",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 starts the induction from the empty off-diagonal support when n=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 give the vacuous support inclusion for a zero matrix."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the one-vertex case, which has no off-diagonal entries."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and A1 exclude zero pivots because the Schur update would be undefined."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For thm-filled-graph-contains-schur-complement-support, the statement has no interval or endpoint parameter. The Statement fixes a finite matrix/order and assumes each executed pivot nonzero. Its induction proves only numerical-support inclusion in the symbolic filled graph, expressly allowing cancellation and excluding a cost/equality conclusion. No interval endpoint or arbitrary choice is used; the elimination ordering is supplied, not selected by a choice axiom."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For thm-filled-graph-contains-schur-complement-support, the proof uses a specified finite input and selects no element from a nonempty family. The Statement fixes a finite matrix/order and assumes each executed pivot nonzero. Its induction proves only numerical-support inclusion in the symbolic filled graph, expressly allowing cancellation and excluding a cost/equality conclusion. No interval endpoint or arbitrary choice is used; the elimination ordering is supplied, not selected by a choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For thm-filled-graph-contains-schur-complement-support, the Statement is a direct implication, computation, or equality, not a biconditional. The Statement fixes a finite matrix/order and assumes each executed pivot nonzero. Its induction proves only numerical-support inclusion in the symbolic filled graph, expressly allowing cancellation and excluding a cost/equality conclusion. No interval endpoint or arbitrary choice is used; the elimination ordering is supplied, not selected by a choice axiom."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For thm-filled-graph-contains-schur-complement-support, the Statement is a direct implication, computation, or equality, not a biconditional. The Statement fixes a finite matrix/order and assumes each executed pivot nonzero. Its induction proves only numerical-support inclusion in the symbolic filled graph, expressly allowing cancellation and excluding a cost/equality conclusion. No interval endpoint or arbitrary choice is used; the elimination ordering is supplied, not selected by a choice axiom."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-symmetric-structural-elimination-graph-and-ordering",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "The filled graph $G_{k+1}=(V_{k+1},E_{k+1})$ is obtained by deleting $v_k$ and its incident edges, retaining all edges between remaining vertices, and adding every edge between two distinct vertices of $N_k(v_k)$.",
+          "use": "The finite graph update adds exactly the later-neighbor clique edges and retains existing edges."
+        },
+        {
+          "supplier": "def-field",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "x/y := x \\cdot y^{-1}$ (for $y \\ne 0$)",
+          "use": "Nonzero pivots make the Schur quotient well defined."
+        },
+        {
+          "supplier": "lem-of-zero-mult",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "In any field $F$ ([[def-field]]), for every $a \\in F$ we have $0 \\cdot a = 0$.",
+          "use": "A zero numerator yields a zero quotient."
+        },
+        {
+          "supplier": "lem-of-no-zero-divisors",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "In any field $F$ ([[def-field]]), if $a, b \\in F$ satisfy $ab = 0$, then $a = 0$ or $b = 0$.",
+          "use": "A nonzero pivot-coupling product has two nonzero factors."
+        }
+      ]
+    },
+    "ex-csr-tridiagonal-matrix": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-csr-matrix-with-stored-entry-semantics",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, and let $m,n,s\\in\\mathbb N$, where $\\mathbb N$ includes\n$0$. A **compressed sparse row (CSR) record** for an $m$ by $n$ matrix over\n$F$ consists of integer arrays $r=(r_0,\\ldots,r_m)$ and\n$c=(c_0,\\ldots,c_{s-1})$, and a value array $v=(v_0,\\ldots,v_{s-1})\\in F^s$,\nsatisfying\n\n$$r_0=0,\\qquad 0=r_0\\le r_1\\le\\cdots\\le r_m=s,\\qquad 0\\le c_t<n\\quad(0\\le t<s).$$\n\nFor each row $i<m$, its **stored entries** are the indices\n$t$ with $r_i\\le t<r_{i+1}$. The row is empty exactly when\n$r_i=r_{i+1}$. Repeated column indices within one row and stored values\n$v_t=0_F$ are permitted; each such entry remains a separate stored entry.\n\nThe represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by\n\n$$A_{ij}:=\\sum_{r_i\\le t<r_{i+1}}\\mathbf 1_{c_t=j}v_t\\qquad(0\\le i<m,\\ 0\\le j<n),$$\n\nwhere $\\mathbf 1_{c_t=j}$ is $1_F$ when $c_t=j$ and $0_F$ otherwise, and an\nempty sum is $0_F$. Repeated entries in column $j$ are therefore added. The\nnumber $s$ is the **stored-entry count**; it is not in general the number of\nnonzero entries of $A$.\n\nA CSR record is **canonical** when no row repeats a column and no stored value\nis zero. In that case every nonzero matrix entry is stored exactly once and\n$s=\\operatorname{nnz}(A)$, where $\\operatorname{nnz}(A)$ denotes the number of\nnonzero entries of $A$. If $m=0$, the endpoint conditions force $s=0$ and the\nrow-pointer array has its single entry $r_0=0$. If $n=0$, the column-index\ncondition forces $s=0$ as well.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-rat-field",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]]\nis a field: a commutative ring with $1 \\ne 0$ in which every nonzero element\nhas a multiplicative inverse.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The row-pointer array has length $5$, starts at $0$, ends at $10$, and is nondecreasing. Every listed column index lies in $\\{0,1,2,3\\}$, so the data satisfy the CSR invariants for a $4$ by $4$ matrix.",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Row $0$ uses columns $0,1$ with values $2,-1$; row $1$ uses columns $0,1,2$ with values $-1,2,-1$; row $2$ uses columns $1,2,3$ with values $-1,2,-1$; row $3$ uses columns $2,3$ with values $-1,2$. These rational sums are the specified entries of $T$, so the record represents $T$.",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For ex-csr-tridiagonal-matrix, there is no empty-set or zero-cardinality input requiring a separate conclusion. The example fixes four rows and ten stored rational entries, with every row explicitly nonempty. Verification checks the five row pointers and all listed columns, then identifies each tridiagonal entry. It does not vary row count to zero or one and states no equivalence, interval endpoint or existence-selection theorem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 displays the omitted off-diagonal coordinates as zero; all stored values themselves are nonzero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For ex-csr-tridiagonal-matrix, there is no one-element parameter or singleton instance requiring a separate branch. The example fixes four rows and ten stored rational entries, with every row explicitly nonempty. Verification checks the five row pointers and all listed columns, then identifies each tridiagonal entry. It does not vary row count to zero or one and states no equivalence, interval endpoint or existence-selection theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies this fixed record has no duplicate columns, explicit zeros, or empty rows."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For ex-csr-tridiagonal-matrix, the statement has no interval or endpoint parameter. The example fixes four rows and ten stored rational entries, with every row explicitly nonempty. Verification checks the five row pointers and all listed columns, then identifies each tridiagonal entry. It does not vary row count to zero or one and states no equivalence, interval endpoint or existence-selection theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For ex-csr-tridiagonal-matrix, the proof uses a specified finite input and selects no element from a nonempty family. The example fixes four rows and ten stored rational entries, with every row explicitly nonempty. Verification checks the five row pointers and all listed columns, then identifies each tridiagonal entry. It does not vary row count to zero or one and states no equivalence, interval endpoint or existence-selection theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For ex-csr-tridiagonal-matrix, the Statement is a direct implication, computation, or equality, not a biconditional. The example fixes four rows and ten stored rational entries, with every row explicitly nonempty. Verification checks the five row pointers and all listed columns, then identifies each tridiagonal entry. It does not vary row count to zero or one and states no equivalence, interval endpoint or existence-selection theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For ex-csr-tridiagonal-matrix, the Statement is a direct implication, computation, or equality, not a biconditional. The example fixes four rows and ten stored rational entries, with every row explicitly nonempty. Verification checks the five row pointers and all listed columns, then identifies each tridiagonal entry. It does not vary row count to zero or one and states no equivalence, interval endpoint or existence-selection theorem."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-csr-matrix-with-stored-entry-semantics",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "For each row $i<m$, its **stored entries** are the indices $t$ with $r_i\\le t<r_{i+1}$.",
+          "use": "L1 is the exact interface used at steps 1.1, 1.2."
+        },
+        {
+          "supplier": "thm-rat-field",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]] is a field: a commutative ring with $1 \\ne 0$ in which every nonzero element has a multiplicative inverse.",
+          "use": "L2 is the exact interface used at steps 2.1."
+        }
+      ]
+    },
+    "ex-ordered-elimination-creates-fill": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-symmetric-structural-elimination-graph-and-ordering",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\in\\mathbb N$ (including $0$), and let $A\\in M_{n\\times n}(F)$ satisfy\n$A_{ij}=A_{ji}$ for every $i,j<n$ (that is, $A$ is symmetric). Its\n**structural graph** is\nthe simple undirected graph $G_0=(V,E_0)$ with vertex set\n$V=\\{0,\\ldots,n-1\\}$ and edge set\n\n$$E_0:=\\bigl\\{\\{i,j\\}:0\\le i<j<n,\\ A_{ij}\\ne0\\bigr\\}.$$\n\nAn **elimination ordering** is a listing $v_0,\\ldots,v_{n-1}$ in which every\nvertex of $V$ occurs exactly once. Define the current vertex set by\n$V_k=\\{v_\\ell:k\\le\\ell<n\\}$, starting with the structural graph $G_0$. At\nstep $k$, the **later neighbors** of $v_k$ are\n\n$$N_k(v_k):=\\{u\\in V_k\\setminus\\{v_k\\}:\\{u,v_k\\}\\in E_k\\}.$$\n\nThe filled graph $G_{k+1}=(V_{k+1},E_{k+1})$ is obtained by deleting $v_k$ and\nits incident edges, retaining all edges between remaining vertices, and adding\nevery edge between two distinct vertices of $N_k(v_k)$. An edge added at step\n$k$ that was not already in $E_k$ is a **fill edge**. Repeating this rule\ndefines the symbolic elimination pattern for the ordering; it is defined from\nthe initial graph and ordering alone, without numerical pivot values.\n\nIf $N_k(v_k)$ is nonempty, the **parent** of $v_k$ is the later neighbor\n$v_\\ell$ with least position $\\ell>k$ in the ordering. If $N_k(v_k)$ is\nempty, $v_k$ is a root. Each non-root has a unique parent, and positions strictly increase along parent edges, so there is no directed cycle. If the underlying undirected graph had a cycle, its least-position vertex would be a child of both adjacent later vertices, contradicting uniqueness. Thus the parent relation is an elimination forest.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-rat-field",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]]\nis a field: a commutative ring with $1 \\ne 0$ in which every nonzero element\nhas a multiplicative inverse.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-filled-graph-contains-schur-complement-support",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $A\\in M_{n\\times n}(F)$ satisfy $A_{ij}=A_{ji}$ for\nall $i,j<n$, and fix an elimination ordering,\nand let $G_k=(V_k,E_k)$ be its symbolic filled graphs from\n[[def-symmetric-structural-elimination-graph-and-ordering]]. Put $S^0=A$.\nAssume each pivot $p_k:=S^k_{v_kv_k}$ is nonzero, and for every pair of\nremaining vertices define the Schur update\n\n$$S^{k+1}_{ij}:=S^k_{ij}-\\frac{S^k_{iv_k}S^k_{v_kj}}{p_k}.$$\n\nThen for every stage $k$, each nonzero off-diagonal entry $S^k_{ij}$ has\n$\\{i,j\\}\\in E_k$. At each elimination step, the later neighbors of the\neliminated vertex form a clique in the next filled graph. Thus the symbolic\nfilled graph contains the numerical Schur-complement support; equality is not\nasserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-filled-graph-contains-schur-complement-support",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $A\\in M_{n\\times n}(F)$ satisfy $A_{ij}=A_{ji}$ for\nall $i,j<n$, and fix an elimination ordering,\nand let $G_k=(V_k,E_k)$ be its symbolic filled graphs from\n[[def-symmetric-structural-elimination-graph-and-ordering]]. Put $S^0=A$.\nAssume each pivot $p_k:=S^k_{v_kv_k}$ is nonzero, and for every pair of\nremaining vertices define the Schur update\n\n$$S^{k+1}_{ij}:=S^k_{ij}-\\frac{S^k_{iv_k}S^k_{v_kj}}{p_k}.$$\n\nThen for every stage $k$, each nonzero off-diagonal entry $S^k_{ij}$ has\n$\\{i,j\\}\\in E_k$. At each elimination step, the later neighbors of the\neliminated vertex form a clique in the next filled graph. Thus the symbolic\nfilled graph contains the numerical Schur-complement support; equality is not\nasserted.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The off-diagonal nonzero entries of $A$ are exactly $A_{01}=A_{10}=-1$ and $A_{12}=A_{21}=-1$, so the initial structural graph is the path with edges $\\{0,1\\}$ and $\\{1,2\\}$. The first pivot is $p_0=2\\ne0$; by the update in [L3], $S^1=\\begin{pmatrix}3/2&-1/2\\\\-1/2&3/2\\end{pmatrix}$. The next pivot is $p_1=3/2\\ne0$, and the final pivot is $p_2=3/2-(-1/2)^2/(3/2)=4/3\\ne0$. Thus every pivot is nonzero.",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The first pivot is $v_0=1$, whose later-neighbor set is $\\{0,2\\}$. By [L1] its elimination adds $\\{0,2\\}$; the previously computed $S^1_{02}=-1/2$ is nonzero, consistently with the filled-support result [L4]. Thus the edge is a genuine fill edge for this numerical matrix.",
+          "inputs": [
+            "given",
+            "L1",
+            "L4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "This ordering creates one structural fill edge. The computation gives a finite example only and supplies no general fill bound.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For ex-ordered-elimination-creates-fill, there is no empty-set or zero-cardinality input requiring a separate conclusion. The example fixes a rational three-by-three path matrix and the supplied order middle-first. Verification computes nonzero pivots two, three halves and four thirds and the new nonzero fill entry minus one half. This fixed-size witness has no empty/singleton input, interval endpoint, iff direction or arbitrary choice of order."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the initially absent edge {0,2}; step 2.1 calculates its nonzero Schur-complement entry."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For ex-ordered-elimination-creates-fill, there is no one-element parameter or singleton instance requiring a separate branch. The example fixes a rational three-by-three path matrix and the supplied order middle-first. Verification computes nonzero pivots two, three halves and four thirds and the new nonzero fill entry minus one half. This fixed-size witness has no empty/singleton input, interval endpoint, iff direction or arbitrary choice of order."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies that every pivot in the fixed ordering is nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For ex-ordered-elimination-creates-fill, the statement has no interval or endpoint parameter. The example fixes a rational three-by-three path matrix and the supplied order middle-first. Verification computes nonzero pivots two, three halves and four thirds and the new nonzero fill entry minus one half. This fixed-size witness has no empty/singleton input, interval endpoint, iff direction or arbitrary choice of order."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For ex-ordered-elimination-creates-fill, the proof uses a specified finite input and selects no element from a nonempty family. The example fixes a rational three-by-three path matrix and the supplied order middle-first. Verification computes nonzero pivots two, three halves and four thirds and the new nonzero fill entry minus one half. This fixed-size witness has no empty/singleton input, interval endpoint, iff direction or arbitrary choice of order."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For ex-ordered-elimination-creates-fill, the Statement is a direct implication, computation, or equality, not a biconditional. The example fixes a rational three-by-three path matrix and the supplied order middle-first. Verification computes nonzero pivots two, three halves and four thirds and the new nonzero fill entry minus one half. This fixed-size witness has no empty/singleton input, interval endpoint, iff direction or arbitrary choice of order."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For ex-ordered-elimination-creates-fill, the Statement is a direct implication, computation, or equality, not a biconditional. The example fixes a rational three-by-three path matrix and the supplied order middle-first. Verification computes nonzero pivots two, three halves and four thirds and the new nonzero fill entry minus one half. This fixed-size witness has no empty/singleton input, interval endpoint, iff direction or arbitrary choice of order."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-symmetric-structural-elimination-graph-and-ordering",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "The filled graph $G_{k+1}=(V_{k+1},E_{k+1})$ is obtained by deleting $v_k$ and its incident edges, retaining all edges between remaining vertices, and adding every edge between two distinct vertices of $N_k(v_k)$.",
+          "use": "L1 is the exact interface used at steps 1.1, 1.2."
+        },
+        {
+          "supplier": "thm-rat-field",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]] is a field: a commutative ring with $1 \\ne 0$ in which every nonzero element has a multiplicative inverse.",
+          "use": "L2 is the exact interface used at steps 1.1."
+        },
+        {
+          "supplier": "thm-filled-graph-contains-schur-complement-support",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Assume each pivot $p_k:=S^k_{v_kv_k}$ is nonzero, and for every pair of remaining vertices define the Schur update $$S^{k+1}_{ij}:=S^k_{ij}-\\frac{S^k_{iv_k}S^k_{v_kj}}{p_k}.$$",
+          "use": "L3 is the exact interface used at steps 1.1."
+        },
+        {
+          "supplier": "thm-filled-graph-contains-schur-complement-support",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Then for every stage $k$, each nonzero off-diagonal entry $S^k_{ij}$ has $\\{i,j\\}\\in E_k$.",
+          "use": "L4 is the exact interface used at steps 3.1."
+        }
+      ]
+    },
+    "ex-numerical-cancellation-within-filled-graph": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-symmetric-structural-elimination-graph-and-ordering",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $n\\in\\mathbb N$ (including $0$), and let $A\\in M_{n\\times n}(F)$ satisfy\n$A_{ij}=A_{ji}$ for every $i,j<n$ (that is, $A$ is symmetric). Its\n**structural graph** is\nthe simple undirected graph $G_0=(V,E_0)$ with vertex set\n$V=\\{0,\\ldots,n-1\\}$ and edge set\n\n$$E_0:=\\bigl\\{\\{i,j\\}:0\\le i<j<n,\\ A_{ij}\\ne0\\bigr\\}.$$\n\nAn **elimination ordering** is a listing $v_0,\\ldots,v_{n-1}$ in which every\nvertex of $V$ occurs exactly once. Define the current vertex set by\n$V_k=\\{v_\\ell:k\\le\\ell<n\\}$, starting with the structural graph $G_0$. At\nstep $k$, the **later neighbors** of $v_k$ are\n\n$$N_k(v_k):=\\{u\\in V_k\\setminus\\{v_k\\}:\\{u,v_k\\}\\in E_k\\}.$$\n\nThe filled graph $G_{k+1}=(V_{k+1},E_{k+1})$ is obtained by deleting $v_k$ and\nits incident edges, retaining all edges between remaining vertices, and adding\nevery edge between two distinct vertices of $N_k(v_k)$. An edge added at step\n$k$ that was not already in $E_k$ is a **fill edge**. Repeating this rule\ndefines the symbolic elimination pattern for the ordering; it is defined from\nthe initial graph and ordering alone, without numerical pivot values.\n\nIf $N_k(v_k)$ is nonempty, the **parent** of $v_k$ is the later neighbor\n$v_\\ell$ with least position $\\ell>k$ in the ordering. If $N_k(v_k)$ is\nempty, $v_k$ is a root. Each non-root has a unique parent, and positions strictly increase along parent edges, so there is no directed cycle. If the underlying undirected graph had a cycle, its least-position vertex would be a child of both adjacent later vertices, contradicting uniqueness. Thus the parent relation is an elimination forest.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-rat-field",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]]\nis a field: a commutative ring with $1 \\ne 0$ in which every nonzero element\nhas a multiplicative inverse.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-filled-graph-contains-schur-complement-support",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $A\\in M_{n\\times n}(F)$ satisfy $A_{ij}=A_{ji}$ for\nall $i,j<n$, and fix an elimination ordering,\nand let $G_k=(V_k,E_k)$ be its symbolic filled graphs from\n[[def-symmetric-structural-elimination-graph-and-ordering]]. Put $S^0=A$.\nAssume each pivot $p_k:=S^k_{v_kv_k}$ is nonzero, and for every pair of\nremaining vertices define the Schur update\n\n$$S^{k+1}_{ij}:=S^k_{ij}-\\frac{S^k_{iv_k}S^k_{v_kj}}{p_k}.$$\n\nThen for every stage $k$, each nonzero off-diagonal entry $S^k_{ij}$ has\n$\\{i,j\\}\\in E_k$. At each elimination step, the later neighbors of the\neliminated vertex form a clique in the next filled graph. Thus the symbolic\nfilled graph contains the numerical Schur-complement support; equality is not\nasserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-filled-graph-contains-schur-complement-support",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $A\\in M_{n\\times n}(F)$ satisfy $A_{ij}=A_{ji}$ for\nall $i,j<n$, and fix an elimination ordering,\nand let $G_k=(V_k,E_k)$ be its symbolic filled graphs from\n[[def-symmetric-structural-elimination-graph-and-ordering]]. Put $S^0=A$.\nAssume each pivot $p_k:=S^k_{v_kv_k}$ is nonzero, and for every pair of\nremaining vertices define the Schur update\n\n$$S^{k+1}_{ij}:=S^k_{ij}-\\frac{S^k_{iv_k}S^k_{v_kj}}{p_k}.$$\n\nThen for every stage $k$, each nonzero off-diagonal entry $S^k_{ij}$ has\n$\\{i,j\\}\\in E_k$. At each elimination step, the later neighbors of the\neliminated vertex form a clique in the next filled graph. Thus the symbolic\nfilled graph contains the numerical Schur-complement support; equality is not\nasserted.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "All three off-diagonal positions of $A$ are nonzero, so the initial graph has edges $\\{0,1\\}$, $\\{0,2\\}$, and $\\{1,2\\}$. Eliminating vertex $1$ leaves $\\{0,2\\}$ as a later-neighbor pair, and [L1] retains its edge in the filled graph.",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The first pivot is $2$, and the update in [L3] gives $S^1_{02}=1/2-(1)(1)/2=0$. The two remaining diagonal entries are $3-1/2=5/2$, so the last two pivots are both $5/2$ and are nonzero. Thus all pivots are nonzero while the numerical support loses $\\{0,2\\}$.",
+          "inputs": [
+            "given",
+            "L2",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "By [L4], the filled graph contains the numerical support; step 1.1 shows its edge $\\{0,2\\}$ remains, while step 2.1 shows the corresponding numerical entry is zero. Thus the inclusion is strict in this example.",
+          "inputs": [
+            "L1",
+            "L4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For ex-numerical-cancellation-within-filled-graph, there is no empty-set or zero-cardinality input requiring a separate conclusion. The fixed rational triangle and elimination order retain the symbolic outer edge while the computed Schur entry cancels to zero. Verification also checks the remaining pivots five halves, so cancellation does not introduce an undefined division. Its three-vertex witness does not assert an empty/singleton family, endpoint or biconditional theorem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives an exact zero from the Schur-complement cancellation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For ex-numerical-cancellation-within-filled-graph, there is no one-element parameter or singleton instance requiring a separate branch. The fixed rational triangle and elimination order retain the symbolic outer edge while the computed Schur entry cancels to zero. Verification also checks the remaining pivots five halves, so cancellation does not introduce an undefined division. Its three-vertex witness does not assert an empty/singleton family, endpoint or biconditional theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the first and remaining pivots are all nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For ex-numerical-cancellation-within-filled-graph, the statement has no interval or endpoint parameter. The fixed rational triangle and elimination order retain the symbolic outer edge while the computed Schur entry cancels to zero. Verification also checks the remaining pivots five halves, so cancellation does not introduce an undefined division. Its three-vertex witness does not assert an empty/singleton family, endpoint or biconditional theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For ex-numerical-cancellation-within-filled-graph, the proof uses a specified finite input and selects no element from a nonempty family. The fixed rational triangle and elimination order retain the symbolic outer edge while the computed Schur entry cancels to zero. Verification also checks the remaining pivots five halves, so cancellation does not introduce an undefined division. Its three-vertex witness does not assert an empty/singleton family, endpoint or biconditional theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For ex-numerical-cancellation-within-filled-graph, the Statement is a direct implication, computation, or equality, not a biconditional. The fixed rational triangle and elimination order retain the symbolic outer edge while the computed Schur entry cancels to zero. Verification also checks the remaining pivots five halves, so cancellation does not introduce an undefined division. Its three-vertex witness does not assert an empty/singleton family, endpoint or biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For ex-numerical-cancellation-within-filled-graph, the Statement is a direct implication, computation, or equality, not a biconditional. The fixed rational triangle and elimination order retain the symbolic outer edge while the computed Schur entry cancels to zero. Verification also checks the remaining pivots five halves, so cancellation does not introduce an undefined division. Its three-vertex witness does not assert an empty/singleton family, endpoint or biconditional theorem."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-symmetric-structural-elimination-graph-and-ordering",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "The filled graph $G_{k+1}=(V_{k+1},E_{k+1})$ is obtained by deleting $v_k$ and its incident edges, retaining all edges between remaining vertices, and adding every edge between two distinct vertices of $N_k(v_k)$.",
+          "use": "L1 is the exact interface used at steps 1.1, 2.1."
+        },
+        {
+          "supplier": "thm-rat-field",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]] is a field: a commutative ring with $1 \\ne 0$ in which every nonzero element has a multiplicative inverse.",
+          "use": "L2 is the exact interface used at steps 3.1."
+        },
+        {
+          "supplier": "thm-filled-graph-contains-schur-complement-support",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Assume each pivot $p_k:=S^k_{v_kv_k}$ is nonzero, and for every pair of remaining vertices define the Schur update $$S^{k+1}_{ij}:=S^k_{ij}-\\frac{S^k_{iv_k}S^k_{v_kj}}{p_k}.$$",
+          "use": "L3 is the exact interface used at steps 3.1."
+        },
+        {
+          "supplier": "thm-filled-graph-contains-schur-complement-support",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "Then for every stage $k$, each nonzero off-diagonal entry $S^k_{ij}$ has $\\{i,j\\}\\in E_k$.",
+          "use": "L4 is the exact interface used at steps 3.1."
+        }
+      ]
+    },
+    "ex-csr-matvec-operation-count": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-csr-matrix-with-stored-entry-semantics",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, and let $m,n,s\\in\\mathbb N$, where $\\mathbb N$ includes\n$0$. A **compressed sparse row (CSR) record** for an $m$ by $n$ matrix over\n$F$ consists of integer arrays $r=(r_0,\\ldots,r_m)$ and\n$c=(c_0,\\ldots,c_{s-1})$, and a value array $v=(v_0,\\ldots,v_{s-1})\\in F^s$,\nsatisfying\n\n$$r_0=0,\\qquad 0=r_0\\le r_1\\le\\cdots\\le r_m=s,\\qquad 0\\le c_t<n\\quad(0\\le t<s).$$\n\nFor each row $i<m$, its **stored entries** are the indices\n$t$ with $r_i\\le t<r_{i+1}$. The row is empty exactly when\n$r_i=r_{i+1}$. Repeated column indices within one row and stored values\n$v_t=0_F$ are permitted; each such entry remains a separate stored entry.\n\nThe represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by\n\n$$A_{ij}:=\\sum_{r_i\\le t<r_{i+1}}\\mathbf 1_{c_t=j}v_t\\qquad(0\\le i<m,\\ 0\\le j<n),$$\n\nwhere $\\mathbf 1_{c_t=j}$ is $1_F$ when $c_t=j$ and $0_F$ otherwise, and an\nempty sum is $0_F$. Repeated entries in column $j$ are therefore added. The\nnumber $s$ is the **stored-entry count**; it is not in general the number of\nnonzero entries of $A$.\n\nA CSR record is **canonical** when no row repeats a column and no stored value\nis zero. In that case every nonzero matrix entry is stored exactly once and\n$s=\\operatorname{nnz}(A)$, where $\\operatorname{nnz}(A)$ denotes the number of\nnonzero entries of $A$. If $m=0$, the endpoint conditions force $s=0$ and the\nrow-pointer array has its single entry $r_0=0$. If $n=0$, the column-index\ncondition forces $s=0$ as well.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "alg-csr-matrix-vector-product-with-validation",
+          "source_section": "Definition",
+          "quote": "Fix a field $F$. The **validated CSR matrix-vector product** takes integer\ndimension candidates $m,n$, integer arrays $r,c$, a value array $v$ of elements\nof $F$, and a vector candidate $x$ of elements of $F$. All input arrays are\nfinite; write $s=\\operatorname{length}(v)$.\n\n1. If $m\\notin\\mathbb N$, $n\\notin\\mathbb N$,\n   $\\operatorname{length}(r)\\ne m+1$,\n   $\\operatorname{length}(c)\\ne s$, or\n   $\\operatorname{length}(x)\\ne n$, return the status `invalid-dimension`.\n2. For $i=0,\\ldots,m$, check that $r_i\\in\\{0,\\ldots,s\\}$; return\n   `invalid-index` if a check fails. Check $r_0=0$ and $r_m=s$, and for each\n   $i=0,\\ldots,m-1$ check $r_i\\le r_{i+1}$; return `invalid-index` if any\n   check fails. For each $t=0,\\ldots,s-1$, check $0\\le c_t<n$ and return\n   `invalid-index` if a check fails.\n3. Initialize $y_i=0_F$ for $0\\le i<m$. For each row\n   $i=0,\\ldots,m-1$, and then each stored index\n   $t=r_i,\\ldots,r_{i+1}-1$, update\n   $$y_i\\gets y_i+v_t x_{c_t}.$$\n4. Return the status `ok` together with $y\\in F^m$.\n\nFor valid CSR data this uses exact field operations. Validation examines only\nfinite arrays, and the row intervals partition the $s$ stored entries, so the\nspecified loops are bounded. This procedure makes no floating-point rounding,\nbackward-stability, convergence, runtime, or memory-bandwidth claim.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-csr-matvec-returns-the-represented-matrix-product",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $m,n\\in\\mathbb N$, let a valid CSR record represent\n$A\\in M_{m\\times n}(F)$, and let $x=(x_j)_{j<n}\\in F^n$. Define\n$(Ax)_i:=\\sum_{j<n}A_{ij}x_j$, the usual matrix-vector product from\n[[def-matrix-product-and-identity-matrix]]. Then the algorithm\n[[alg-csr-matrix-vector-product-with-validation]] returns `ok` with output\n$Ax$ in exact field arithmetic.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-csr-storage-and-exact-matvec-cost",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $m,n\\in\\mathbb N$, and let a valid CSR record have\n$s$ stored entries. Its input arrays use exactly $s$ field-value slots, $s$\ninteger column-index slots, and $m+1$ integer row-pointer slots, for a total of\n$2s+m+1$ data slots. On valid input, the algorithm\n[[alg-csr-matrix-vector-product-with-validation]] performs exactly $s$ field\nmultiplications, $s$ field additions, and $m$ zero initializations. Its index\nvalidation and loop-control work is $O(m+s+1)$. Counting the CSR arrays and\nreturned output but excluding the supplied vector $x$ and constant-size\nworkspace, it uses exactly $2s+2m+1$ data slots, hence $O(m+s+1)$ slots; for\n$m\\ge1$ this is $O(m+s)$. Here $O(g)$ means bounded by $Cg$ for a constant $C$ independent of\nthe dimensions and input values.\n\nFor a square record of order $m\\ge1$ with at least one stored entry in each\nrow, $s\\ge m$, so the work and storage are $O(s)$. For a canonical record as defined in\n[[def-csr-matrix-with-stored-entry-semantics]], $s=\\operatorname{nnz}(A)$;\nwithout that convention, the cost is in terms of stored entries, not\n$\\operatorname{nnz}(A)$. These are arithmetic, index, and storage counts, not\nruntime, memory-bandwidth, convergence, or factorization-cost bounds.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-rat-field",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]]\nis a field: a commutative ring with $1 \\ne 0$ in which every nonzero element\nhas a multiplicative inverse.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The row formulas give $y_0=2(1)-1(2)=0$, $y_1=-1(1)+2(2)-1(3)=0$, $y_2=-1(2)+2(3)-1(4)=0$, and $y_3=-1(3)+2(4)=5$ in $\\mathbb Q$.",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "By [L3], these row values are the exact matrix-vector output, so the algorithm returns $(0,0,0,5)$.",
+          "inputs": [
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "The CSR has $s=10$ entries and $m=4$ rows. [L4] gives $10$ multiplications, $10$ additions, $4$ initializations, and $2(10)+4+1=25$ input slots.",
+          "inputs": [
+            "given",
+            "L4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For ex-csr-matvec-operation-count, there is no empty-set or zero-cardinality input requiring a separate conclusion. The displayed four-row ten-entry CSR and vector (1,2,3,4) give output (0,0,0,5), ten products, ten additions and four initializations. Verification evaluates every row and the slot count twenty-five. This fixed computation has no empty/singleton input, interval endpoint, iff or arbitrary witness choice."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 has three zero output coordinates produced by exact cancellation of nonzero stored products."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For ex-csr-matvec-operation-count, there is no one-element parameter or singleton instance requiring a separate branch. The displayed four-row ten-entry CSR and vector (1,2,3,4) give output (0,0,0,5), ten products, ten additions and four initializations. Verification evaluates every row and the slot count twenty-five. This fixed computation has no empty/singleton input, interval endpoint, iff or arbitrary witness choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies this fixed record has no duplicate columns or explicit stored zeros."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For ex-csr-matvec-operation-count, the statement has no interval or endpoint parameter. The displayed four-row ten-entry CSR and vector (1,2,3,4) give output (0,0,0,5), ten products, ten additions and four initializations. Verification evaluates every row and the slot count twenty-five. This fixed computation has no empty/singleton input, interval endpoint, iff or arbitrary witness choice."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For ex-csr-matvec-operation-count, the proof uses a specified finite input and selects no element from a nonempty family. The displayed four-row ten-entry CSR and vector (1,2,3,4) give output (0,0,0,5), ten products, ten additions and four initializations. Verification evaluates every row and the slot count twenty-five. This fixed computation has no empty/singleton input, interval endpoint, iff or arbitrary witness choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For ex-csr-matvec-operation-count, the Statement is a direct implication, computation, or equality, not a biconditional. The displayed four-row ten-entry CSR and vector (1,2,3,4) give output (0,0,0,5), ten products, ten additions and four initializations. Verification evaluates every row and the slot count twenty-five. This fixed computation has no empty/singleton input, interval endpoint, iff or arbitrary witness choice."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For ex-csr-matvec-operation-count, the Statement is a direct implication, computation, or equality, not a biconditional. The displayed four-row ten-entry CSR and vector (1,2,3,4) give output (0,0,0,5), ten products, ten additions and four initializations. Verification evaluates every row and the slot count twenty-five. This fixed computation has no empty/singleton input, interval endpoint, iff or arbitrary witness choice."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-csr-matrix-with-stored-entry-semantics",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "For each row $i<m$, its **stored entries** are the indices $t$ with $r_i\\le t<r_{i+1}$.",
+          "use": "L1 is the exact interface used at steps 1.1."
+        },
+        {
+          "supplier": "alg-csr-matrix-vector-product-with-validation",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "For each row $i=0,\\ldots,m-1$, and then each stored index $t=r_i,\\ldots,r_{i+1}-1$, update $$y_i\\gets y_i+v_t x_{c_t}.$$",
+          "use": "L2 is the exact interface used at steps 1.1."
+        },
+        {
+          "supplier": "thm-csr-matvec-returns-the-represented-matrix-product",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "with output $Ax$ in exact field arithmetic.",
+          "use": "L3 is the exact interface used at steps 3.1."
+        },
+        {
+          "supplier": "thm-csr-storage-and-exact-matvec-cost",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "On valid input, the algorithm [[alg-csr-matrix-vector-product-with-validation]] performs exactly $s$ field multiplications, $s$ field additions, and $m$ zero initializations.",
+          "use": "L4 is the exact interface used at steps 3.1."
+        },
+        {
+          "supplier": "thm-rat-field",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]] is a field: a commutative ring with $1 \\ne 0$ in which every nonzero element has a multiplicative inverse.",
+          "use": "L5 is the exact interface used at steps 1.1."
+        }
+      ]
+    },
+    "ex-csr-duplicates-and-explicit-zero-entry-count": {
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-csr-matrix-with-stored-entry-semantics",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, and let $m,n,s\\in\\mathbb N$, where $\\mathbb N$ includes\n$0$. A **compressed sparse row (CSR) record** for an $m$ by $n$ matrix over\n$F$ consists of integer arrays $r=(r_0,\\ldots,r_m)$ and\n$c=(c_0,\\ldots,c_{s-1})$, and a value array $v=(v_0,\\ldots,v_{s-1})\\in F^s$,\nsatisfying\n\n$$r_0=0,\\qquad 0=r_0\\le r_1\\le\\cdots\\le r_m=s,\\qquad 0\\le c_t<n\\quad(0\\le t<s).$$\n\nFor each row $i<m$, its **stored entries** are the indices\n$t$ with $r_i\\le t<r_{i+1}$. The row is empty exactly when\n$r_i=r_{i+1}$. Repeated column indices within one row and stored values\n$v_t=0_F$ are permitted; each such entry remains a separate stored entry.\n\nThe represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by\n\n$$A_{ij}:=\\sum_{r_i\\le t<r_{i+1}}\\mathbf 1_{c_t=j}v_t\\qquad(0\\le i<m,\\ 0\\le j<n),$$\n\nwhere $\\mathbf 1_{c_t=j}$ is $1_F$ when $c_t=j$ and $0_F$ otherwise, and an\nempty sum is $0_F$. Repeated entries in column $j$ are therefore added. The\nnumber $s$ is the **stored-entry count**; it is not in general the number of\nnonzero entries of $A$.\n\nA CSR record is **canonical** when no row repeats a column and no stored value\nis zero. In that case every nonzero matrix entry is stored exactly once and\n$s=\\operatorname{nnz}(A)$, where $\\operatorname{nnz}(A)$ denotes the number of\nnonzero entries of $A$. If $m=0$, the endpoint conditions force $s=0$ and the\nrow-pointer array has its single entry $r_0=0$. If $n=0$, the column-index\ncondition forces $s=0$ as well.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "alg-csr-matrix-vector-product-with-validation",
+          "source_section": "Definition",
+          "quote": "Fix a field $F$. The **validated CSR matrix-vector product** takes integer\ndimension candidates $m,n$, integer arrays $r,c$, a value array $v$ of elements\nof $F$, and a vector candidate $x$ of elements of $F$. All input arrays are\nfinite; write $s=\\operatorname{length}(v)$.\n\n1. If $m\\notin\\mathbb N$, $n\\notin\\mathbb N$,\n   $\\operatorname{length}(r)\\ne m+1$,\n   $\\operatorname{length}(c)\\ne s$, or\n   $\\operatorname{length}(x)\\ne n$, return the status `invalid-dimension`.\n2. For $i=0,\\ldots,m$, check that $r_i\\in\\{0,\\ldots,s\\}$; return\n   `invalid-index` if a check fails. Check $r_0=0$ and $r_m=s$, and for each\n   $i=0,\\ldots,m-1$ check $r_i\\le r_{i+1}$; return `invalid-index` if any\n   check fails. For each $t=0,\\ldots,s-1$, check $0\\le c_t<n$ and return\n   `invalid-index` if a check fails.\n3. Initialize $y_i=0_F$ for $0\\le i<m$. For each row\n   $i=0,\\ldots,m-1$, and then each stored index\n   $t=r_i,\\ldots,r_{i+1}-1$, update\n   $$y_i\\gets y_i+v_t x_{c_t}.$$\n4. Return the status `ok` together with $y\\in F^m$.\n\nFor valid CSR data this uses exact field operations. Validation examines only\nfinite arrays, and the row intervals partition the $s$ stored entries, so the\nspecified loops are bounded. This procedure makes no floating-point rounding,\nbackward-stability, convergence, runtime, or memory-bandwidth claim.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-csr-matvec-returns-the-represented-matrix-product",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $m,n\\in\\mathbb N$, let a valid CSR record represent\n$A\\in M_{m\\times n}(F)$, and let $x=(x_j)_{j<n}\\in F^n$. Define\n$(Ax)_i:=\\sum_{j<n}A_{ij}x_j$, the usual matrix-vector product from\n[[def-matrix-product-and-identity-matrix]]. Then the algorithm\n[[alg-csr-matrix-vector-product-with-validation]] returns `ok` with output\n$Ax$ in exact field arithmetic.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-csr-storage-and-exact-matvec-cost",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $m,n\\in\\mathbb N$, and let a valid CSR record have\n$s$ stored entries. Its input arrays use exactly $s$ field-value slots, $s$\ninteger column-index slots, and $m+1$ integer row-pointer slots, for a total of\n$2s+m+1$ data slots. On valid input, the algorithm\n[[alg-csr-matrix-vector-product-with-validation]] performs exactly $s$ field\nmultiplications, $s$ field additions, and $m$ zero initializations. Its index\nvalidation and loop-control work is $O(m+s+1)$. Counting the CSR arrays and\nreturned output but excluding the supplied vector $x$ and constant-size\nworkspace, it uses exactly $2s+2m+1$ data slots, hence $O(m+s+1)$ slots; for\n$m\\ge1$ this is $O(m+s)$. Here $O(g)$ means bounded by $Cg$ for a constant $C$ independent of\nthe dimensions and input values.\n\nFor a square record of order $m\\ge1$ with at least one stored entry in each\nrow, $s\\ge m$, so the work and storage are $O(s)$. For a canonical record as defined in\n[[def-csr-matrix-with-stored-entry-semantics]], $s=\\operatorname{nnz}(A)$;\nwithout that convention, the cost is in terms of stored entries, not\n$\\operatorname{nnz}(A)$. These are arithmetic, index, and storage counts, not\nruntime, memory-bandwidth, convergence, or factorization-cost bounds.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-rat-field",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]]\nis a field: a commutative ring with $1 \\ne 0$ in which every nonzero element\nhas a multiplicative inverse.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-of-zero-mult",
+          "source_section": "Statement",
+          "quote": "In any field $F$ ([[def-field]]), for every $a \\in F$ we have $0 \\cdot a = 0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The pointers $0,2,3$ delimit two entries in row $0$ and one in row $1$; all column indices lie in $\\{0,1,2\\}$. Row $0$ contributes $2+(-2)=0$ to column $1$, and row $1$ contributes $0$ to column $0$. Thus every matrix entry is zero, while all three values are stored.",
+          "inputs": [
+            "given",
+            "L1",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The products in row $0$ are $2(5)$ and $(-2)(5)$, which sum to $0$; the row $1$ product is $0(4)=0$. By [L3], the algorithm returns $(0,0)$.",
+          "inputs": [
+            "L2",
+            "L3",
+            "L5",
+            "L6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "There are three stored entries and two rows, so [L4] gives $3$ multiplications, $3$ additions, $2$ initializations, and $2(3)+2+1=9$ CSR input slots. This noncanonical record has $s=3\\ne\\operatorname{nnz}(A)=0$.",
+          "inputs": [
+            "given",
+            "L1",
+            "L4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Both rows have at least one stored entry, so this example has no empty row."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the represented matrix is zero and step 2.1 verifies the zero output."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 has three stored entries, so the one-entry case is not part of this example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 directly checks the repeated column, explicit zero, and noncanonical s≠nnz(A) case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For ex-csr-duplicates-and-explicit-zero-entry-count, the statement has no interval or endpoint parameter. The example fixes a two-row three-entry noncanonical record. The repeated column cancels and the explicit stored zero still consumes work, giving a zero matrix despite three stored entries. Verification enumerates both rows and counts nine input slots; there is no continuous endpoint, iff or family-selection claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For ex-csr-duplicates-and-explicit-zero-entry-count, the proof uses a specified finite input and selects no element from a nonempty family. The example fixes a two-row three-entry noncanonical record. The repeated column cancels and the explicit stored zero still consumes work, giving a zero matrix despite three stored entries. Verification enumerates both rows and counts nine input slots; there is no continuous endpoint, iff or family-selection claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For ex-csr-duplicates-and-explicit-zero-entry-count, the Statement is a direct implication, computation, or equality, not a biconditional. The example fixes a two-row three-entry noncanonical record. The repeated column cancels and the explicit stored zero still consumes work, giving a zero matrix despite three stored entries. Verification enumerates both rows and counts nine input slots; there is no continuous endpoint, iff or family-selection claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For ex-csr-duplicates-and-explicit-zero-entry-count, the Statement is a direct implication, computation, or equality, not a biconditional. The example fixes a two-row three-entry noncanonical record. The repeated column cancels and the explicit stored zero still consumes work, giving a zero matrix despite three stored entries. Verification enumerates both rows and counts nine input slots; there is no continuous endpoint, iff or family-selection claim."
+        }
+      ],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-csr-matrix-with-stored-entry-semantics",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "The represented matrix $A\\in M_{m\\times n}(F)$ is defined entrywise by $$A_{ij}:=\\sum_{r_i\\le t<r_{i+1}}\\mathbf 1_{c_t=j}v_t\\qquad(0\\le i<m,\\ 0\\le j<n),$$ where $\\mathbf 1_{c_t=j}$ is $1_F$ when $c_t=j$ and $0_F$ otherwise, and an empty sum is $0_F$.",
+          "use": "L1 is the exact interface used at steps 1.1, 2.1."
+        },
+        {
+          "supplier": "alg-csr-matrix-vector-product-with-validation",
+          "status": "verified",
+          "source_section": "Definition",
+          "excerpt": "For each row $i=0,\\ldots,m-1$, and then each stored index $t=r_i,\\ldots,r_{i+1}-1$, update $$y_i\\gets y_i+v_t x_{c_t}.$$",
+          "use": "L2 is the exact interface used at steps 3.1."
+        },
+        {
+          "supplier": "thm-csr-matvec-returns-the-represented-matrix-product",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "with output $Ax$ in exact field arithmetic.",
+          "use": "L3 is the exact interface used at steps 3.1."
+        },
+        {
+          "supplier": "thm-csr-storage-and-exact-matvec-cost",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "On valid input, the algorithm [[alg-csr-matrix-vector-product-with-validation]] performs exactly $s$ field multiplications, $s$ field additions, and $m$ zero initializations.",
+          "use": "L4 is the exact interface used at steps 3.1."
+        },
+        {
+          "supplier": "thm-rat-field",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]] is a field: a commutative ring with $1 \\ne 0$ in which every nonzero element has a multiplicative inverse.",
+          "use": "L5 is the exact interface used at steps 1.1, 1.2."
+        },
+        {
+          "supplier": "lem-of-zero-mult",
+          "status": "verified",
+          "source_section": "Statement",
+          "excerpt": "In any field $F$ ([[def-field]]), for every $a \\in F$ we have $0 \\cdot a = 0$.",
+          "use": "The explicit zero value times the fourth vector coordinate vanishes."
+        }
+      ]
+    }
+  }
+}

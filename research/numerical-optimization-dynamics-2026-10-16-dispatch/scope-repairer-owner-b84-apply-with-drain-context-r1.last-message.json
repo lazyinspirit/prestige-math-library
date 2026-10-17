@@ -1,0 +1,127 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "label": "owner-b84-apply-with-drain-context-r1",
+  "result_name": "original-owner-apply-with-drain-result.json",
+  "owner_cycle": 1,
+  "verdict": "accept",
+  "scope": "External owner escalation resolution; no new native engine round or independent review.",
+  "guarded_edit": {
+    "source": "items/alg-safeguarded-levenberg-marquardt.md",
+    "writer_release": "research/numerical-optimization-dynamics-2026-10-16-owner-step2-b84/root-writer-drain-declaration-0920.json",
+    "immediate_before_byte_guard": "passed",
+    "action": "Applied exactly the approved complete proposal bytes.",
+    "post_write_proposal_equality": true,
+    "post_check_proposal_equality": true,
+    "other_source_writes": []
+  },
+  "findings": [
+    "Each attempt now constructs and solves the augmented problem at its current damping after the gradient exits. Changed damping cannot reuse an earlier factorization or report.",
+    "Computed zero candidates and inconsistent exact zero steps return before prediction or ratio evaluation. Every remaining candidate must pass predicted-decrease validation.",
+    "Both rejection multiplications and the accepted boundary division check failure and range before changing damping or accepting a trial.",
+    "Exact damping formulas and exact-solve convergence hypotheses remain unchanged. Computed candidates and finite failure branches acquire no exact convergence guarantee."
+  ],
+  "reviewed_items": [
+    "thm-nonlinear-least-squares-gradient-and-hessian",
+    "lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian",
+    "lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer",
+    "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+    "alg-safeguarded-levenberg-marquardt",
+    "thm-gauss-newton-local-linear-contraction",
+    "thm-gauss-newton-zero-residual-quadratic-convergence",
+    "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+    "thm-safeguarded-levenberg-marquardt-global-stationarity",
+    "ex-exponential-kinetics-gauss-newton-fit",
+    "ex-rank-deficient-identifiability-and-lm-step",
+    "ex-nonzero-residual-gauss-newton-is-only-linear"
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-gauss-newton-qr-svd-step-with-rank-safeguard",
+      "disposition": "Unchanged; exact supplied factorizations remain distinct from computed reports and candidate statuses."
+    },
+    {
+      "id": "alg-safeguarded-levenberg-marquardt",
+      "disposition": "Repaired by the exact approved proposal; current-damping construction, zero branches, prediction checks and damping failure ordering are explicit."
+    },
+    {
+      "id": "thm-gauss-newton-local-linear-contraction",
+      "disposition": "No repair required; proof uses the exact full-rank Gauss–Newton step and its stated singular-value and curvature bounds."
+    },
+    {
+      "id": "thm-gauss-newton-zero-residual-quadratic-convergence",
+      "disposition": "No repair required; proof uses an exact least-squares minimizer, Lipschitz Jacobian and uniform singular-value lower bound."
+    },
+    {
+      "id": "lem-levenberg-marquardt-large-damping-forces-sufficient-decrease",
+      "disposition": "No repair required; each increased damping now obtains the fresh exact step required by Proof 4.1. Its exact-arithmetic hypotheses exclude computed failure guarantees."
+    },
+    {
+      "id": "thm-safeguarded-levenberg-marquardt-global-stationarity",
+      "disposition": "No repair required; the fresh exact solves and unchanged damping formulas preserve the bounded-damping and sufficient-decrease argument."
+    },
+    {
+      "id": "ex-exponential-kinetics-gauss-newton-fit",
+      "disposition": "No repair required; the exact zero-residual, nonsingular-Jacobian example does not rely on computed LM behavior."
+    },
+    {
+      "id": "ex-rank-deficient-identifiability-and-lm-step",
+      "disposition": "No repair required; the exact step is (5/11,5/11), its norm is below Delta=1, and the accepted interior trial retains lambda=1."
+    },
+    {
+      "id": "ex-nonzero-residual-gauss-newton-is-only-linear",
+      "disposition": "No repair required; the exact recurrence and linear rate remain valid. Preserved the current batch59 correction x+(1/2)x+(1/2)x^3=(3/2)x+(1/2)x^3."
+    }
+  ],
+  "reviewed_pages": [
+    {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/gauss-newton-and-levenberg-marquardt-methods.md",
+      "disposition": "No repair required; exact convergence claims and conditional computed behavior remain separated."
+    },
+    {
+      "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/gauss-newton-and-levenberg-marquardt-methods-examples.md",
+      "disposition": "No repair required; the exact examples remain consistent with the repaired procedures."
+    }
+  ],
+  "dependency_trace": {
+    "basis": "Original interfaces, current dependencies, aliases, item-ID references and topic-name references.",
+    "closure": "The nine unique GN/LM closure items and both page carriers were checked.",
+    "aliases": "None found for the closure items.",
+    "outside_item_id_consumers": "None found in items or library.",
+    "additional_name_references": "IRGNM procedures, their consumers and identifiability context use separate procedures or unchanged mathematical results; no additional repair was required.",
+    "current_source_preservation": "All thirteen other archived batch source/page carriers remained byte-identical to their before carriers.",
+    "qr_supplier": "Read the current explicit beta bounds and conditional 20gamma clause; no unconditional backward-stability inference was introduced."
+  },
+  "original1_joint_issue": {
+    "resolution": "The actual written LM source rebuilds the augmented problem within every attempt and preserves exhaustive zero-step and predicted-decrease branches before any ratio.",
+    "separate_obligation": "This result does not complete original1's independent 86-consumer continuation."
+  },
+  "local_checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-safeguarded-levenberg-marquardt.md --json",
+      "exit_code": 0,
+      "output": {
+        "summary": {
+          "files": 1,
+          "checked": 1,
+          "failed": 0
+        },
+        "results": [
+          {
+            "file": "items/alg-safeguarded-levenberg-marquardt.md",
+            "item_id": "alg-safeguarded-levenberg-marquardt",
+            "status": "pass",
+            "strategy": "direct"
+          }
+        ]
+      }
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/alg-safeguarded-levenberg-marquardt.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    }
+  ],
+  "remaining_concerns": [],
+  "required_outside_source_repairs": [],
+  "preservation": "Native reports, history, counters, prior owner result and metadata were not edited. No formatter, broad gate battery, hashing or recertification was performed."
+}

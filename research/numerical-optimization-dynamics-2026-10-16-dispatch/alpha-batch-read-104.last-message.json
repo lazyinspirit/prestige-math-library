@@ -1,0 +1,223 @@
+{
+  "group": "l",
+  "batches": ["104"],
+  "pages_read": [
+    "multirate-and-partitioned-time-integration",
+    "multirate-and-partitioned-time-integration-examples"
+  ],
+  "items_read": [
+    "alg-frozen-slow-explicit-fast-euler",
+    "alg-synchronous-waveform-relaxation-finite-window",
+    "lem-frozen-slow-euler-variation-bounds",
+    "lem-frozen-slow-euler-one-step-stability",
+    "cor-cubic-defect-gives-second-order-for-symmetric-multirate-composition",
+    "thm-waveform-relaxation-contraction-and-error-bound",
+    "lem-frozen-slow-euler-local-defect-bound",
+    "thm-frozen-slow-euler-global-first-order-error",
+    "ex-linear-electromechanical-multirate-block-cost",
+    "ex-coupled-fast-mode-destabilizes-frozen-slow-euler",
+    "ex-frozen-slow-interpolation-limits-order"
+  ],
+  "conventions": [
+    {
+      "convention": "The slow update uses the initial pair, and every fast microstep uses the original frozen slow state. H>0 and the microstep count is a positive integer. Domain-exit returns no macro output.",
+      "fixed_by": "alg-frozen-slow-explicit-fast-euler",
+      "matters_for": [
+        "lem-frozen-slow-euler-variation-bounds",
+        "lem-frozen-slow-euler-one-step-stability",
+        "lem-frozen-slow-euler-local-defect-bound",
+        "thm-frozen-slow-euler-global-first-order-error",
+        "ex-linear-electromechanical-multirate-block-cost",
+        "ex-coupled-fast-mode-destabilizes-frozen-slow-euler",
+        "ex-frozen-slow-interpolation-limits-order"
+      ]
+    },
+    {
+      "convention": "Block errors use the product Euclidean norm. Field bounds and joint Lipschitz bounds hold on a common set containing the states being compared.",
+      "fixed_by": "lem-frozen-slow-euler-variation-bounds",
+      "matters_for": [
+        "lem-frozen-slow-euler-one-step-stability",
+        "lem-frozen-slow-euler-local-defect-bound",
+        "thm-frozen-slow-euler-global-first-order-error"
+      ]
+    },
+    {
+      "convention": "The global theorem assumes successful numerical runs and successful exact-start comparison runs with the same block-specific microstep counts, all within the common bounded Lipschitz set.",
+      "fixed_by": "thm-frozen-slow-euler-global-first-order-error",
+      "matters_for": ["thm-frozen-slow-euler-global-first-order-error"]
+    },
+    {
+      "convention": "Waveform updates and integrals are exact mathematical operations. Admissibility requires MΔ≤R and q=KΔ<1. Sweep zero returns no certificate; positive sweeps use E_k=q^kδ_0/(1-q).",
+      "fixed_by": "alg-synchronous-waveform-relaxation-finite-window",
+      "matters_for": ["thm-waveform-relaxation-contraction-and-error-bound"]
+    },
+    {
+      "convention": "Symmetric interpolation means I_H(1−θ;v,u)=I_H(θ;u,v), and symmetric stepping means Ψ_−H=Ψ_H inverse where defined. Cubic defect and one-step stability are separate uniform premises.",
+      "fixed_by": "cor-cubic-defect-gives-second-order-for-symmetric-multirate-composition",
+      "matters_for": [
+        "cor-cubic-defect-gives-second-order-for-symmetric-multirate-composition"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-frozen-slow-explicit-fast-euler",
+      "statement": "For admitted inputs, set h=H/m and x⁺=x+Hf(x,z), then perform z_{j+1}=z_j+h g(x,z_j), j=0,…,m−1, with x frozen. Check each evaluation state and the final output against the open domain; return success only when all required checks pass.",
+      "used_by": [
+        "lem-frozen-slow-euler-variation-bounds",
+        "lem-frozen-slow-euler-one-step-stability",
+        "lem-frozen-slow-euler-local-defect-bound",
+        "thm-frozen-slow-euler-global-first-order-error",
+        "ex-linear-electromechanical-multirate-block-cost",
+        "ex-coupled-fast-mode-destabilizes-frozen-slow-euler",
+        "ex-frozen-slow-interpolation-limits-order"
+      ]
+    },
+    {
+      "id": "lem-frozen-slow-euler-variation-bounds",
+      "statement": "For the stated continuous field, exact solution and frozen microstates in a common set where ‖F‖₂≤M, ‖U(b)−U(a)‖₂≤M(b−a) for 0≤a≤b≤H, and ‖z_j−z_0‖₂≤jhM for 0≤j≤m.",
+      "used_by": [
+        "lem-frozen-slow-euler-local-defect-bound",
+        "thm-frozen-slow-euler-global-first-order-error"
+      ]
+    },
+    {
+      "id": "lem-frozen-slow-euler-one-step-stability",
+      "statement": "For two successful runs with the same H,m, all compared inputs and microstates in a jointly K-Lipschitz set, and 0<H≤T, the output difference is at most (1+L_T H) times the input difference, where L_T=K√(2(1+exp(2KT))), independently of m.",
+      "used_by": ["thm-frozen-slow-euler-global-first-order-error"]
+    },
+    {
+      "id": "lem-frozen-slow-euler-local-defect-bound",
+      "statement": "Under the stated common-domain boundedness and joint Lipschitz assumptions for the exact path and exact-start microstates, the successful macro output satisfies ‖(x⁺,z_m)−U(H)‖₂≤4KMH².",
+      "used_by": ["thm-frozen-slow-euler-global-first-order-error"]
+    },
+    {
+      "id": "alg-synchronous-waveform-relaxation-finite-window",
+      "statement": "On the admitted radius-R waveform set, iterate Φ(U)(t)=u_0+∫_0^t F(U(s)) ds synchronously from the constant waveform, subject to the finite sweep budget, and certify tolerance only when q^kδ_0/(1−q)≤ε.",
+      "used_by": ["thm-waveform-relaxation-contraction-and-error-bound"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-vector-valued-functions-limits-and-continuity",
+      "used_for": "Continuous Euclidean-valued waveforms in the waveform algorithm.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-valued-derivative-and-integral",
+      "used_for": "Domain-relative derivatives, componentwise integrals, orientation, and integral additivity.",
+      "opened": true
+    },
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "Exact solutions, including one-sided derivatives at time endpoints.",
+      "opened": true
+    },
+    {
+      "id": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+      "used_for": "Exact-path integral identities and identification of the waveform fixed point with an IVP solution.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Product Euclidean norm and block-coordinate estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Triangle inequalities, projection bounds, and the elementary Frobenius matrix bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-inequality-for-the-vector-valued-integral",
+      "used_for": "Integral norm bounds on increasing intervals, including zero-length intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "Bounding integrals of nonnegative integrands by constant times interval length.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Exponential normalization in stability estimates and the linear example.",
+      "opened": true
+    },
+    {
+      "id": "def-integer-power",
+      "used_for": "Natural powers in microstep amplification estimates, including exponent zero.",
+      "opened": true
+    },
+    {
+      "id": "lem-power-monotone",
+      "used_for": "Raising nonnegative amplification-factor inequalities to integer powers.",
+      "opened": true
+    },
+    {
+      "id": "lem-exponential-dominates-one-plus-x",
+      "used_for": "Bounding microstep amplification and proving decay in the linear example.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Combining repeated exponential factors and expressing negative exponentials as reciprocals.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Uniform exponential bounds over H≤T.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Mean-value estimate of exponential increments and verification of exact linear solutions.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Exponential increment bound and nonincrease of the electromechanical energy.",
+      "opened": true
+    },
+    {
+      "id": "lem-vector-valued-continuous-curve-space-is-complete",
+      "used_for": "Completeness of the ambient waveform space.",
+      "opened": true
+    },
+    {
+      "id": "thm-complete-subspace-iff-closed",
+      "used_for": "The choice-free closed-subspace direction establishing completeness of X_R.",
+      "opened": true
+    },
+    {
+      "id": "thm-banach-fixed-point",
+      "used_for": "Existence, uniqueness, convergence, and the finite-iterate tail bound for waveform iteration.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Componentwise integrability of continuous vector integrands.",
+      "opened": true
+    },
+    {
+      "id": "thm-componentwise-limits-and-continuity",
+      "used_for": "Continuity of components and norms in the local-defect argument.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "multirate-and-partitioned-time-integration",
+      "to": "global-ode-and-density-error",
+      "faithful": true,
+      "note": "Read the prerequisite page, recurrence lemma, and general global-error statement. The owned corollary and global theorem invoke the finite recurrence with the correct orders, uniform constants, exact-start comparisons, and separate zero-stability-constant cases. They do not invoke the density results."
+    },
+    {
+      "from": "multirate-and-partitioned-time-integration",
+      "to": "imex-and-operator-splitting-methods",
+      "faithful": true,
+      "note": "Read the prerequisite page and exact split-flow, local-expansion, and global-order statements. The owned page accurately describes finite-dimensional Lie/Strang results under separate tube hypotheses and explicitly leaves the actual multirate coupling, cubic defect, and stability verification uninstantiated."
+    }
+  ]
+}

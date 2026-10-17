@@ -1,0 +1,27 @@
+--- items/alg-pseudo-arclength-continuation-with-certified-local-corrector.md
++++ items/alg-pseudo-arclength-continuation-with-certified-local-corrector.md
+@@ -66,7 +66,7 @@
+ At a queried point $z$, an evaluator returns either exact $(F(z),DF(z))$ or
+ certified data $(\widehat F(z),\eta_F,\widehat J(z),\eta_J)$ with
+ $$\|\widehat F(z)-F(z)\|_2\le\eta_F,\qquad \|\widehat J(z)-DF(z)\|_{\rm op}\le\eta_J.$$
+-All supplied tangent, evaluator, chart, certificate and requested fold callbacks must return a result or their declared failure in finite time for a termination claim. Their mathematical bounds must be sound; finite outer budgets cannot force a nonreturning callback to finish. For every proposed root ball, the certificate routine must also supply an
++All supplied tangent, evaluator, chart, certificate and requested fold callbacks must return a result or their declared failure in finite time for a termination claim. Their mathematical bounds must be sound; finite outer budgets cannot force a nonreturning callback to finish. For every root ball proposed by a continuation attempt, the certificate routine must also supply an
+ inverse bound for the approximate augmented Jacobian, a Jacobian-Lipschitz
+ constant on the whole ball, and an isolating branch neighborhood/angle
+ enclosure. If any
+@@ -79,8 +79,13 @@
+ `tangent-angle-failure`, `tube-exit`, `singular-corrector`,
+ `corrector-budget-exhausted`, `root-certificate-inconclusive`, or
+ `continuation-budget-exhausted`; and a fold field with value
+-`not-requested`, `certified`, or `inconclusive`. Each ball records its
+-center, radius, strict contraction bounds from
++`not-requested`, `certified`, or `inconclusive`. The initial seed record
++retains its supplied unique-section-root certificate, center, radius,
++section and transverse local chart/rank evidence; its center error is at
++most $r_0$. Any stronger error or contraction bounds proved by the supplied
++seed certificate are retained, but no contraction bounds are required or
++inferred for the seed. Every newly appended ball records its center,
++radius, section, strict contraction bounds and center-error bound from
+ [[thm-augmented-residual-contraction-certificate]], the local chart and
+ angle enclosure identifying it with the unique next point on the traced
+ branch, and the evaluation-error bounds used.

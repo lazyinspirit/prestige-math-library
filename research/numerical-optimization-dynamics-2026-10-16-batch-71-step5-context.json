@@ -1,0 +1,321 @@
+{
+  "group": "aa",
+  "batches": [
+    "71"
+  ],
+  "pages_read": [
+    "bfgs-and-limited-memory-quasi-newton-methods",
+    "bfgs-and-limited-memory-quasi-newton-methods-examples"
+  ],
+  "items_read": [
+    "def-bfgs-curvature-pair-and-update-formulas",
+    "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+    "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+    "lem-wolfe-steps-give-positive-bfgs-curvature",
+    "lem-powell-damping-gives-positive-curvature",
+    "alg-bfgs-hessian-direction-with-rounded-cholesky",
+    "alg-lbfgs-two-loop-with-curvature-filter",
+    "lem-bfgs-trace-determinant-potential-identities",
+    "alg-full-memory-bfgs-with-curvature-safeguards",
+    "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+    "thm-full-memory-bfgs-global-linear-convergence",
+    "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+    "lem-full-memory-bfgs-dennis-more-condition",
+    "thm-lbfgs-fixed-memory-linear-convergence",
+    "thm-full-memory-bfgs-local-superlinear-convergence",
+    "ex-bfgs-secant-on-a-strongly-convex-quadratic",
+    "ex-bfgs-powell-damping-after-negative-curvature",
+    "ex-lbfgs-memory-dependent-cost"
+  ],
+  "conventions": [
+    {
+      "convention": "Dimension n≥1; B is a real SPD Hessian model and H=B⁻¹. An undamped update requires s≠0 and sᵀy>0; the secant equations are B⁺s=y and H⁺y=s.",
+      "fixed_by": "def-bfgs-curvature-pair-and-update-formulas",
+      "matters_for": [
+        "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+        "lem-bfgs-trace-determinant-potential-identities",
+        "alg-full-memory-bfgs-with-curvature-safeguards",
+        "lem-lbfgs-two-loop-equals-stored-updates-and-cost"
+      ]
+    },
+    {
+      "convention": "Powell damping uses threshold 0.2sᵀBs and coefficient 0.8sᵀBs/(sᵀBs−sᵀy); its secant equation uses the damped vector.",
+      "fixed_by": "def-bfgs-curvature-pair-and-update-formulas",
+      "matters_for": [
+        "lem-powell-damping-gives-positive-curvature",
+        "alg-full-memory-bfgs-with-curvature-safeguards",
+        "ex-bfgs-powell-damping-after-negative-curvature"
+      ]
+    },
+    {
+      "convention": "Only the called rounded Cholesky factorization and triangular solves use finite arithmetic. Evaluations, line searches, tests, resets and matrix updates are exact; input representability is checked before every rounded call.",
+      "fixed_by": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "matters_for": [
+        "alg-bfgs-hessian-direction-with-rounded-cholesky",
+        "thm-full-memory-bfgs-global-linear-convergence",
+        "thm-full-memory-bfgs-local-superlinear-convergence"
+      ]
+    },
+    {
+      "convention": "Line searches use 0<c₁<c₂<1/2 and finite budgets, including zero budgets. Failures produce statuses, not accepted steps; convergence statements concern successful exact continuations.",
+      "fixed_by": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "matters_for": [
+        "thm-full-memory-bfgs-global-linear-convergence",
+        "lem-full-memory-bfgs-dennis-more-condition",
+        "thm-full-memory-bfgs-local-superlinear-convergence"
+      ]
+    },
+    {
+      "convention": "L-BFGS stores at most m positive-curvature pairs chronologically, traverses newest-to-oldest first and oldest-to-newest second, and starts each reconstructed inverse matrix from γI.",
+      "fixed_by": "alg-lbfgs-two-loop-with-curvature-filter",
+      "matters_for": [
+        "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+        "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+        "thm-lbfgs-fixed-memory-linear-convergence",
+        "ex-lbfgs-memory-dependent-cost"
+      ]
+    },
+    {
+      "convention": "The global full-memory theorem assumes a convex initial sublevel set containing a global minimizer, uniform positive Hessian bounds there, and exact undamped updates.",
+      "fixed_by": "thm-full-memory-bfgs-global-linear-convergence",
+      "matters_for": [
+        "lem-full-memory-bfgs-dennis-more-condition",
+        "thm-full-memory-bfgs-local-superlinear-convergence"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-bfgs-trace-determinant-potential-identities",
+      "statement": "For an SPD B and positive-curvature pair, tr(B⁺)=tr(B)−‖Bs‖²/(sᵀBs)+‖y‖²/(sᵀy), det(B⁺)=det(B)(sᵀy)/(sᵀBs), and ψ(B)=tr(B)−log det(B)≥n. With the stated m_s, M_s, q and η, ψ(B⁺)≤ψ(B)+(M_s−log m_s−1)+h(q/η²)+log η².",
+      "used_by": [
+        "thm-full-memory-bfgs-global-linear-convergence",
+        "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+        "lem-full-memory-bfgs-dennis-more-condition"
+      ]
+    },
+    {
+      "id": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+      "statement": "On a convex set with μ‖w‖²≤wᵀG(x)w and ‖G(x)‖₂≤Λ, gradient differences are Λ-Lipschitz and μ-strongly monotone, and the Taylor remainder lies between μ‖u−v‖²/2 and Λ‖u−v‖²/2. A Lipschitz Hessian on W also gives ‖g(u)−g(v)−G(x_*)(u−v)‖≤L_G max{‖u−x_*‖,‖v−x_*‖}‖u−v‖.",
+      "used_by": [
+        "thm-full-memory-bfgs-global-linear-convergence",
+        "lem-full-memory-bfgs-dennis-more-condition",
+        "thm-lbfgs-fixed-memory-linear-convergence",
+        "thm-full-memory-bfgs-local-superlinear-convergence"
+      ]
+    },
+    {
+      "id": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+      "statement": "Let B be SPD, H=B⁻¹, s≠0 and sᵀy>0. Then B⁺ and H⁺ are SPD, B⁺s=y, H⁺y=s, and B⁺H⁺=I.",
+      "used_by": [
+        "lem-bfgs-trace-determinant-potential-identities",
+        "thm-full-memory-bfgs-global-linear-convergence",
+        "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+        "lem-full-memory-bfgs-dennis-more-condition",
+        "ex-bfgs-secant-on-a-strongly-convex-quadratic",
+        "ex-bfgs-powell-damping-after-negative-curvature"
+      ]
+    },
+    {
+      "id": "thm-full-memory-bfgs-global-linear-convergence",
+      "statement": "Under its stated level-set Hessian assumptions, exact undamped BFGS with successful nonstationary line searches satisfies f(x_k)−f(x_*)≤exp(−τδk)[f(x₀)−f(x_*)], with the explicit constants in the Statement. Infinite successful continuations converge R-linearly; stationary termination is at x_*.",
+      "used_by": [
+        "lem-full-memory-bfgs-dennis-more-condition",
+        "thm-full-memory-bfgs-local-superlinear-convergence"
+      ]
+    },
+    {
+      "id": "lem-full-memory-bfgs-dennis-more-condition",
+      "statement": "Under the global theorem's hypotheses, an infinite nonstationary exact-undamped run with successful strong Wolfe searches and a locally Lipschitz Hessian satisfies ‖(B_k−G_*)s_k‖/‖s_k‖→0; the same limit holds with p_k.",
+      "used_by": [
+        "thm-full-memory-bfgs-local-superlinear-convergence"
+      ]
+    },
+    {
+      "id": "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+      "statement": "For 0≤r≤m chronological positive-curvature pairs and H₀=γI, γ>0, the two-loop recursion returns H_rg, where H_r is obtained by those inverse updates. Work and storage are O(rn+n), hence O(mn) for m≥1.",
+      "used_by": [
+        "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+        "thm-lbfgs-fixed-memory-linear-convergence",
+        "ex-lbfgs-memory-dependent-cost"
+      ]
+    },
+    {
+      "id": "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+      "statement": "Under the stated pair-curvature and base-scale bounds, the implicit inverse matrices satisfy (1/T)I≼H_k≼(T^(n−1)/D)I, where T=n/γ_min+mC and D=γ_max^(−n)min{1,a/T}^m. The usual nonempty-list scale lies in [1/C,b/a²].",
+      "used_by": [
+        "thm-lbfgs-fixed-memory-linear-convergence"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Real Euclidean inner products, norms and coordinate conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Matrix multiplication and identity matrices in update formulas.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Gradient and Jacobian conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-hessian-and-euclidean-critical-point",
+      "used_for": "Hessian index convention and stationary points.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Angle, curvature, norm and convergence estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-partial-derivatives-imply-total-differentiability",
+      "used_for": "Identifying derivatives of the gradient with its Jacobian.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiation along line segments.",
+      "opened": true
+    },
+    {
+      "id": "cor-vector-valued-ftc-and-lipschitz-bound",
+      "used_for": "Bounding gradient-path endpoint differences by derivative bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Strong monotonicity and quadratic Taylor inequalities.",
+      "opened": true
+    },
+    {
+      "id": "thm-clairaut-schwarz-mixed-partials",
+      "used_for": "Identifying the gradient Jacobian with the stated Hessian.",
+      "opened": true
+    },
+    {
+      "id": "def-forward-and-back-substitution-for-triangular-systems",
+      "used_for": "Triangular recursions in the rounded direction procedure.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+      "used_for": "The exact reference solve through two triangular systems.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Exact SPD Cholesky existence and the potential lower bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-multiplicative",
+      "used_for": "Congruence and block-factorization determinant calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-of-a-triangular-matrix",
+      "used_for": "Cholesky determinants, block factors and scalar initial matrices.",
+      "opened": true
+    },
+    {
+      "id": "def-determinant-of-a-square-matrix",
+      "used_for": "Transpose invariance and block determinant expansions.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Positive-domain logarithms and exponential inversion.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Scalar potential inequalities and logarithmic perturbation estimates.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "SPD eigenvalue bounds and square-root normalization.",
+      "opened": true
+    },
+    {
+      "id": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+      "used_for": "Applying the real spectral theorem to symmetric matrices.",
+      "opened": true
+    },
+    {
+      "id": "def-characteristic-polynomial-of-an-operator",
+      "used_for": "Operator characteristic polynomials in the spectral-bound proof.",
+      "opened": true
+    },
+    {
+      "id": "def-characteristic-polynomial-of-a-matrix",
+      "used_for": "Factoring characteristic polynomials in an eigenbasis.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-is-sum-of-eigenvalues",
+      "used_for": "Turning trace bounds into upper eigenvalue bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-is-product-of-eigenvalues",
+      "used_for": "Turning determinant bounds into lower eigenvalue bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Identifying operator and matrix traces.",
+      "opened": true
+    },
+    {
+      "id": "def-determinant-of-a-linear-operator",
+      "used_for": "Identifying operator and matrix determinants.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Constructing positive square roots of Hessian eigenvalues.",
+      "opened": true
+    },
+    {
+      "id": "cor-second-order-taylor-expansion-with-the-hessian",
+      "used_for": "Local unit-step acceptance and superlinear error estimates.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+      "concern": "Definition step 2 says to use the triangular-substitution recursions and 'Round each scalar operation under the given arithmetic model.' The cited exact recursions contain finite sums but specify no summation order or parenthesization. In rounded arithmetic these choices can change both the returned direction and the first range-failure. Specify the product, accumulation and division order to make this an exact operational procedure.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "bfgs-and-limited-memory-quasi-newton-methods",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Checked the operationwise arithmetic definition and rounded Cholesky procedure against the direction algorithm and full-memory caller. Representable-input restrictions, pivot/range failures and positive-normal diagonals are retained. The consumer claims neither unconditional success nor a direction backward-error bound."
+    },
+    {
+      "from": "bfgs-and-limited-memory-quasi-newton-methods",
+      "to": "nonconvex-line-search-and-inexact-newton-methods",
+      "faithful": true,
+      "note": "Checked Wolfe definitions, bracketing/zoom, the step lower bound, Zoutendijk summability and its uniform-angle corollary. Consumers establish strict descent and gradient Lipschitzness on accepted segments, use compatible constants, and preserve finite-budget failure statuses."
+    },
+    {
+      "from": "sqp-active-set-and-augmented-lagrangian-methods",
+      "to": "bfgs-and-limited-memory-quasi-newton-methods",
+      "faithful": true,
+      "note": "The reduced-BFGS SQP procedure uses the Hessian update only for positive curvature and otherwise retains B; its SPD citation matches the supplier. The SQP convergence theorem separately assumes reduced Dennis–Moré and inverse bounds, without importing unconstrained global convergence or claiming automatic reduced Dennis–Moré."
+    }
+  ]
+}

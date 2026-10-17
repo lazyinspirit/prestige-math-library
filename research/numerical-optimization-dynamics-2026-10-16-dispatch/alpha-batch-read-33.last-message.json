@@ -1,0 +1,313 @@
+{
+  "group": "p",
+  "batches": ["33"],
+  "pages_read": [
+    "computed-schur-decompositions-and-nonnormal-spectra",
+    "computed-schur-decompositions-and-nonnormal-spectra-examples"
+  ],
+  "items_read": [
+    "def-real-and-complex-schur-forms",
+    "def-exact-real-2x2-discriminant-sign-predicate",
+    "def-closed-epsilon-pseudospectrum",
+    "lem-unitary-similarity-error-accumulation",
+    "lem-neumann-invertibility-for-finite-matrices",
+    "lem-implicit-q-uniqueness-for-unreduced-hessenberg",
+    "lem-francis-compact-bulge-support-propagation",
+    "alg-complex-scaled-householder-reflector-step",
+    "lem-complex-scaled-householder-step-termination-and-status",
+    "lem-real-francis-double-shift-polynomial",
+    "thm-closed-pseudospectrum-resolvent-perturbation-equivalence",
+    "thm-bauer-fike-eigenvalue-perturbation-bound",
+    "alg-exact-francis-hessenberg-qr-step",
+    "lem-exact-francis-step-termination-and-similarity",
+    "lem-francis-double-shift-bulge-chase-matches-explicit-qr",
+    "alg-finite-budget-francis-schur-reduction",
+    "thm-computed-francis-schur-backward-error",
+    "thm-computed-pseudospectrum-membership-enclosure",
+    "lem-two-sided-scaled-householder-similarity-error",
+    "lem-exact-rational-two-by-two-discriminant-sign",
+    "thm-finite-budget-francis-schur-termination-and-status",
+    "ex-jordan-block-epsilon-pseudospectrum",
+    "ex-jordan-eigenvalue-residual-square-root-instability",
+    "ex-real-conjugate-pair-schur-block"
+  ],
+  "conventions": [
+    {
+      "convention": "The closed pseudospectrum is defined for n ≥ 1 and ε > 0 by σ_min(zI−A) ≤ ε. Perturbations are unstructured complex matrices, including when A is real.",
+      "fixed_by": "def-closed-epsilon-pseudospectrum",
+      "matters_for": [
+        "thm-closed-pseudospectrum-resolvent-perturbation-equivalence",
+        "thm-computed-pseudospectrum-membership-enclosure",
+        "ex-jordan-block-epsilon-pseudospectrum",
+        "ex-jordan-eigenvalue-residual-square-root-instability"
+      ]
+    },
+    {
+      "convention": "A real Schur form has diagonal blocks of size one or two; every size-two block must have exactly negative characteristic-polynomial discriminant.",
+      "fixed_by": "def-real-and-complex-schur-forms",
+      "matters_for": [
+        "alg-finite-budget-francis-schur-reduction",
+        "thm-finite-budget-francis-schur-termination-and-status",
+        "ex-real-conjugate-pair-schur-block"
+      ]
+    },
+    {
+      "convention": "discSign tests the exact discriminant of stored entries. An unavailable exact sign yields undecided; a rounded negative discriminant is insufficient.",
+      "fixed_by": "def-exact-real-2x2-discriminant-sign-predicate",
+      "matters_for": [
+        "lem-exact-rational-two-by-two-discriminant-sign",
+        "alg-finite-budget-francis-schur-reduction",
+        "thm-finite-budget-francis-schur-termination-and-status"
+      ]
+    },
+    {
+      "convention": "Stored reflector vectors represent exact unitary factors; rounded rank-one actions and rounded dense products are separate objects. Zero target vectors use identity branches without evaluating a zero-vector reflector denominator.",
+      "fixed_by": "alg-finite-budget-francis-schur-reduction",
+      "matters_for": [
+        "thm-computed-francis-schur-backward-error",
+        "thm-finite-budget-francis-schur-termination-and-status"
+      ]
+    },
+    {
+      "convention": "Deflation is a signed additive change equal to zero minus the overwritten entry, recorded separately from arithmetic error. Pure deflation is an identity-transform stage.",
+      "fixed_by": "alg-finite-budget-francis-schur-reduction",
+      "matters_for": [
+        "thm-computed-francis-schur-backward-error"
+      ]
+    },
+    {
+      "convention": "A matrix-target overwrite uses the target coefficient; a reflector formed from an external polynomial vector uses the separate-block coefficient and overwrites no unrelated matrix column. The two-sided coefficient is a+b+ab.",
+      "fixed_by": "lem-two-sided-scaled-householder-similarity-error",
+      "matters_for": [
+        "alg-finite-budget-francis-schur-reduction",
+        "thm-computed-francis-schur-backward-error"
+      ]
+    },
+    {
+      "convention": "The explicit double-shift comparison assumes nonsingular p(H), a nonzero initial vector, and unreduced outputs. Real-normalized factors agree up to diagonal signs; complex normalizations can introduce phases.",
+      "fixed_by": "lem-francis-double-shift-bulge-chase-matches-explicit-qr",
+      "matters_for": [
+        "lem-francis-double-shift-bulge-chase-matches-explicit-qr"
+      ]
+    },
+    {
+      "convention": "A computed pseudospectrum certificate declares inside at ŝ+δ ≤ ε, outside only at ŝ−δ > ε, and otherwise undecided.",
+      "fixed_by": "thm-computed-pseudospectrum-membership-enclosure",
+      "matters_for": [
+        "thm-computed-pseudospectrum-membership-enclosure"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-finite-budget-francis-schur-reduction",
+      "statement": "Defines finite Hessenberg initialization, bounded Francis sweeps, explicit failure/nonconvergence statuses, exact represented reflector products, separate deflation records, and optional outward backward-error accumulation.",
+      "used_by": [
+        "thm-computed-francis-schur-backward-error",
+        "thm-finite-budget-francis-schur-termination-and-status",
+        "alg-bartels-stewart-sylvester-equation",
+        "thm-bartels-stewart-dense-operation-count",
+        "alg-schur-parlett-matrix-function",
+        "alg-principal-matrix-logarithm-and-square-root"
+      ]
+    },
+    {
+      "id": "lem-two-sided-scaled-householder-similarity-error",
+      "statement": "Under the stated successful real/complex arithmetic, normal-range and mu < 1 hypotheses, the complete computed similarity satisfies H₊ = P*(H+E)P with ‖E‖F ≤ (a_m+b_m+a_mb_m)‖H‖F; identity branches have E=0 and deflation remains separate.",
+      "used_by": [
+        "alg-finite-budget-francis-schur-reduction",
+        "thm-computed-francis-schur-backward-error"
+      ]
+    },
+    {
+      "id": "lem-unitary-similarity-error-accumulation",
+      "statement": "If H₀=U₀*AU₀ and H_j=P_j*(H_{j−1}+E_j+D_j)P_j with unitary factors, then H_m=U_m*(A+Δ)U_m and ‖Δ‖F ≤ Σ_j(‖E_j‖F+‖D_j‖F), where U_m=U₀P₁⋯P_m. The real orthogonal assertion also holds.",
+      "used_by": [
+        "thm-computed-francis-schur-backward-error",
+        "lem-two-sided-unitary-equivalence-errors-accumulate-for-pencil"
+      ]
+    },
+    {
+      "id": "lem-francis-compact-bulge-support-propagation",
+      "statement": "The stated length-two/three supported aligning-reflector chase restores upper Hessenberg form. If P₀x=αe₁ with x≠0 and α≠0, its product Q satisfies Qe₁=x/α.",
+      "used_by": [
+        "alg-exact-francis-hessenberg-qr-step",
+        "lem-exact-francis-step-termination-and-similarity"
+      ]
+    },
+    {
+      "id": "lem-implicit-q-uniqueness-for-unreduced-hessenberg",
+      "statement": "For the stated unreduced Hessenberg H, unitary Q,V with Qe₁=Ve₁ and unreduced upper-Hessenberg transformed matrices satisfy that V*Q is diagonal unitary with first diagonal entry 1; over the reals the phases are signs.",
+      "used_by": [
+        "lem-francis-double-shift-bulge-chase-matches-explicit-qr"
+      ]
+    },
+    {
+      "id": "thm-closed-pseudospectrum-resolvent-perturbation-equivalence",
+      "statement": "For complex n×n A, n≥1 and ε>0, Λ_ε(A) equals the resolvent-norm set with threshold ≥1/ε and the union of spectra of A+E over ‖E‖₂≤ε; the resolvent norm is +∞ at singular shifts.",
+      "used_by": [
+        "ex-jordan-eigenvalue-residual-square-root-instability"
+      ]
+    },
+    {
+      "id": "lem-neumann-invertibility-for-finite-matrices",
+      "statement": "If n ≥ 1, X is a complex n×n matrix, and ‖X‖₂ < 1, then I+X is invertible.",
+      "used_by": [
+        "thm-bauer-fike-eigenvalue-perturbation-bound",
+        "lem-neumann-inverse-norm-bound"
+      ]
+    },
+    {
+      "id": "thm-finite-budget-francis-schur-termination-and-status",
+      "statement": "For admitted inputs and terminating supplied evaluators, the finite procedure terminates after finite initialization and at most N sweeps. Schur-computed verifies the target block pattern and the represented reflector product is unitary; it asserts neither exact factorization of the original input nor convergence.",
+      "used_by": [
+        "thm-bartels-stewart-finite-status-and-local-pivot-uniqueness",
+        "thm-matrix-function-finite-algorithms-termination-and-budget-status"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "used_for": "Unitary/orthogonal conventions and exact represented transformation factors.",
+      "opened": true
+    },
+    {
+      "id": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+      "used_for": "Spectrum, eigenvectors, perturbation witnesses and Jordan examples.",
+      "opened": true
+    },
+    {
+      "id": "def-singular-values-of-an-endomorphism",
+      "used_for": "Smallest singular values and the Jordan-block calculation.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Spectral-norm convention, rank-one perturbation norms and Neumann estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-frobenius-matrix-norm",
+      "used_for": "Entrywise error aggregation and deflation norms.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Attaining a smallest singular value and proving the inverse-norm/resolvent identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-norm-is-the-largest-singular-value",
+      "used_for": "Resolvent norm and spectral-norm singular-value interpretation.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+      "used_for": "Transporting local errors through exact unitary factors without changing Frobenius norm.",
+      "opened": true
+    },
+    {
+      "id": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+      "used_for": "Neumann-series estimates and Bauer–Fike.",
+      "opened": true
+    },
+    {
+      "id": "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices",
+      "used_for": "Exact zero patterns and compact-bulge support arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-householder-reflector",
+      "used_for": "Self-adjoint involutive reflector convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries",
+      "used_for": "Existence and unitarity of exact aligning reflectors.",
+      "opened": true
+    },
+    {
+      "id": "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift",
+      "used_for": "Shifted QR identity and the distinction between general Hessenberg shifts and symmetric Wilkinson shifts.",
+      "opened": true
+    },
+    {
+      "id": "prop-shifted-qr-preserves-upper-hessenberg-form",
+      "used_for": "Hessenberg preservation in the explicit two-shift comparison.",
+      "opened": true
+    },
+    {
+      "id": "thm-householder-similarity-reduces-to-hessenberg-and-tridiagonal-form",
+      "used_for": "Exact Hessenberg-reduction construction underlying initialization.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x",
+      "used_for": "The page's differentiable simple-eigenvalue sensitivity formula with compatible normalized eigenvectors.",
+      "opened": true
+    },
+    {
+      "id": "prop-simple-eigenvalue-condition-number-is-norm-x-norm-y-over-y-star-x",
+      "used_for": "The page's normwise first-order eigenvalue condition number.",
+      "opened": true
+    },
+    {
+      "id": "thm-schur-triangularisation",
+      "used_for": "Existence of triangularization under the explicitly retained splitting hypothesis.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-finite-budget-francis-schur-reduction",
+      "concern": "Initialization step 1 says, after completing each similarity, “If the resulting matrix fails the exact upper-Hessenberg zero-pattern check, return bulge-chase-invariant-failure”. A full Hessenberg pattern is generally established only after all initialization columns are processed. For A with rows (0,0,0,0), (1,0,0,0), (0,1,0,0), (0,1,1,0), the first real formation has x=(1,0,0), alpha=−1, v=(2,0,0), and tau=1/2. Its exactly representable similarity is diag(1,−1,1,1) A diag(1,−1,1,1), retaining h_42=−1. Thus the stated full check aborts before the second initialization stage can reduce that column. Exact rational computation confirmed this witness. The check's placement or tested partial pattern needs clarification. The termination/status theorem remains sound because it permits this failure.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "computed-schur-decompositions-and-nonnormal-spectra",
+      "to": "finite-precision-direct-factorizations",
+      "faithful": true,
+      "note": "Opened the operationwise model, real scaled-reflector procedure and local-error lemma. The consumer uses the actual target/separate-block coefficients, composes a+b+ab, and retains range and active-dimension hypotheses."
+    },
+    {
+      "from": "computed-schur-decompositions-and-nonnormal-spectra",
+      "to": "computed-singular-values-and-rank-revealing-factorizations",
+      "faithful": true,
+      "note": "Opened the complex kernels/local-error proof and SVD backward-error/absolute-error results. The wrapper preserves their arithmetic conventions; membership certification retains successful reduction, deflation, modulus-readout and shifted-input allowances."
+    },
+    {
+      "from": "generalized-eigenvalue-pencils-and-qz-methods",
+      "to": "computed-schur-decompositions-and-nonnormal-spectra",
+      "faithful": true,
+      "note": "The pencil accumulation lemma faithfully quotes similarity-error accumulation and applies it to an explicit 3n×3n block embedding, yielding the pair Frobenius bound without importing Francis convergence."
+    },
+    {
+      "from": "sylvester-and-lyapunov-matrix-equations",
+      "to": "computed-schur-decompositions-and-nonnormal-spectra",
+      "faithful": true,
+      "note": "Bartels–Stewart propagates non-Schur statuses and independently checks exact reconstruction and block shape. Its termination use retains evaluator contracts; its cost proof charges initialization checks, interval-local sweep checks and ancillary bookkeeping."
+    },
+    {
+      "from": "verified-linear-systems-and-spectral-enclosures",
+      "to": "computed-schur-decompositions-and-nonnormal-spectra",
+      "faithful": true,
+      "note": "The inverse-norm lemma applies Neumann invertibility with X=−E and ‖E‖₂≤q<1, then independently proves the quantitative 1/(1−q) estimate."
+    },
+    {
+      "from": "restarted-and-block-eigensolvers",
+      "to": "computed-schur-decompositions-and-nonnormal-spectra",
+      "faithful": true,
+      "note": "This is contextual: no direct assigned-batch supplier citation was found in the page's item dependencies or relevant statements. Residual acceptance expressly supplies no nonnormal forward eigenvalue bound, and arbitrary shifts receive no convergence claim."
+    },
+    {
+      "from": "matrix-functions-and-scaling-squaring",
+      "to": "computed-schur-decompositions-and-nonnormal-spectra",
+      "faithful": true,
+      "note": "Schur–Parlett and principal-function procedures treat computed Schur factors as candidates and check exact identities before use. The denominator solver expands the complex wrapper's actual scalar schedule; termination retains finite controls and terminating evaluator hypotheses."
+    }
+  ]
+}

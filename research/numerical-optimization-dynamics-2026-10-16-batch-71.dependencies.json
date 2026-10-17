@@ -1,0 +1,889 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "71",
+  "dependency_level": 4,
+  "prerequisite_batches": [
+    "1",
+    "58"
+  ],
+  "scheduling_input_sha256": "6dfd0c45f2a8223c7d6f772198513d38987ad90fa865c52f24f2241dd5c6d510",
+  "shared_dependency_artifact_input_sha256": "04a57edb982e756b2bdf7b54936383b64b17fbc7a6e2709dddb29d8083b46327",
+  "inputs": [
+    {
+      "consumer_page": "bfgs-and-limited-memory-quasi-newton-methods",
+      "supplier_page": "finite-precision-direct-factorizations",
+      "supplier_batch": "1",
+      "status": "actual assigned-page draft suppliers inspected; no independent approval claimed",
+      "actual_supplier_item_ids": [
+        "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+        "alg-rounded-cholesky-with-failure-status"
+      ],
+      "required_hypotheses": [
+        "The rounded Cholesky wrapper receives a real SPD Hessian and a gradient vector; operationwise arithmetic requires finite normal results and returns explicit range/pivot failure statuses. No backward-error, direction-accuracy, or convergence guarantee is imported."
+      ],
+      "affected_claims": [
+        "alg-bfgs-hessian-direction-with-rounded-cholesky",
+        "alg-full-memory-bfgs-with-curvature-safeguards"
+      ],
+      "owner_action": "Retain the actual item edges and ordinary independent review; do not infer backward stability from the factorization interface."
+    },
+    {
+      "consumer_page": "bfgs-and-limited-memory-quasi-newton-methods",
+      "supplier_page": "nonconvex-line-search-and-inexact-newton-methods",
+      "supplier_batch": "58",
+      "status": "actual draft supplier bodies and proofs inspected; no independent approval claimed",
+      "actual_supplier_item_ids": [
+        "def-wolfe-and-strong-wolfe-conditions",
+        "alg-bracketing-zoom-strong-wolfe-search",
+        "thm-zoutendijk-summability-for-wolfe-steps",
+        "lem-wolfe-step-lower-bound-from-the-descent-angle",
+        "cor-uniform-descent-angle-implies-gradient-vanishing"
+      ],
+      "required_hypotheses": [
+        "Wolfe steps are used only on strict descent directions with 0<c1<c2<1/2; every strong Wolfe step is a Wolfe step.",
+        "Zoutendijk requires a lower-bounded initial sublevel and a gradient Lipschitz set containing the accepted-step segments; rejected line-search probes are not assumed to remain in that sublevel.",
+        "The step lower bound requires a Wolfe step and the same accepted segment gradient-Lipschitz hypothesis.",
+        "The uniform-angle corollary is used only after the full Zoutendijk hypotheses have been verified.",
+        "Finite expansion/zoom budgets may fail even when an acceptable strong Wolfe step exists; algorithms report that status."
+      ],
+      "affected_claims": [
+        "lem-wolfe-steps-give-positive-bfgs-curvature",
+        "alg-lbfgs-two-loop-with-curvature-filter",
+        "alg-full-memory-bfgs-with-curvature-safeguards",
+        "thm-full-memory-bfgs-global-linear-convergence",
+        "thm-lbfgs-fixed-memory-linear-convergence",
+        "lem-full-memory-bfgs-dennis-more-condition",
+        "thm-full-memory-bfgs-local-superlinear-convergence"
+      ],
+      "owner_action": "Supplier bodies were inspected; preserve ordinary independent review and owner reconciliation."
+    }
+  ],
+  "item_dependency_edges": [
+    {
+      "consumer_item": "def-bfgs-curvature-pair-and-update-formulas",
+      "supplier_item": "def-euclidean-inner-product",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "Fix an integer $n\\ge1$. For successive points $x,x^+\\in\\mathbb R^n$ and vectors $g,g^+\\in\\mathbb R^n$, define the **step vector** $s:=x^+-x$ and the **gradient-difference vector** $y:=g^+-g$. Their **curvature** is $s^Ty$, using the Euclidean inner product of [[def-euclidean-inner-product]]."
+      ]
+    },
+    {
+      "consumer_item": "def-bfgs-curvature-pair-and-update-formulas",
+      "supplier_item": "def-matrix-product-and-identity-matrix",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "A real matrix $B\\in\\mathbb R^{n\\times n}$ is **symmetric positive definite (SPD)** when $B=B^T$ and $z^TBz>0$ for every nonzero $z\\in\\mathbb R^n$. For an SPD matrix $B$, write $H=B^{-1}$ for its inverse; $I$ denotes the identity matrix of [[def-matrix-product-and-identity-matrix]]. If $s\\ne0$ and $s^Ty>0$, set $\\rho:=(s^Ty)^{-1}$. The **BFGS Hessian update** and its inverse form are $$ B^+:=B-\\frac{Bss^TB}{s^TBs}+\\frac{yy^T}{s^Ty}, \\qquad H^+:=(I-\\rho sy^T)H(I-\\rho ys^T)+\\rho ss^T. $$ The denominators are positive under the stated hypotheses."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+      "supplier_item": "def-jacobian-matrix-and-gradient",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$G(x)$ is the Hessian matrix of second partial derivatives and $g(x)$ is the gradient vector of first partial derivatives."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+      "supplier_item": "def-hessian-and-euclidean-critical-point",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$G(x)$ is the Hessian matrix of second partial derivatives and $g(x)$ is the gradient vector of first partial derivatives."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+      "supplier_item": "def-euclidean-inner-product",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$w^Tz$ is the Euclidean inner product and $|w^Tz|\\le\\|w\\|_2\\|z\\|_2$."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+      "supplier_item": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$w^Tz$ is the Euclidean inner product and $|w^Tz|\\le\\|w\\|_2\\|z\\|_2$."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+      "supplier_item": "thm-continuous-partial-derivatives-imply-total-differentiability",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "continuous partial derivatives make a map totally differentiable with derivative matrix equal to its Jacobian."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+      "supplier_item": "thm-chain-rule-for-total-derivatives",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "the derivative of a composition is the composition of its total derivatives."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+      "supplier_item": "cor-vector-valued-ftc-and-lipschitz-bound",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "if a vector-valued function is continuous on $[a,b]$, differentiable on $(a,b)$, and its derivative norm is at most $M$, then its endpoint difference has norm at most $M(b-a)$."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+      "supplier_item": "cor-mean-value-theorem",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "for a real function continuous on $[a,b]$ and differentiable on $(a,b)$, some $c\\in(a,b)$ satisfies $h(b)-h(a)=h'(c)(b-a)$."
+      ]
+    },
+    {
+      "consumer_item": "lem-wolfe-steps-give-positive-bfgs-curvature",
+      "supplier_item": "def-wolfe-and-strong-wolfe-conditions",
+      "supplier_batch": "58",
+      "status": "actual draft supplier body and proof inspected; dispatch status is not independent approval",
+      "required_hypotheses": [
+        "for $\\phi(t)=f(x+tp)$, a Wolfe step satisfies $\\phi'(\\alpha)\\ge c_2\\phi'(0)$ with $0<c_2<1$; the chain rule gives $\\phi'(t)=\\nabla f(x+tp)^Tp$."
+      ]
+    },
+    {
+      "consumer_item": "lem-wolfe-steps-give-positive-bfgs-curvature",
+      "supplier_item": "def-euclidean-inner-product",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$u^Tv$ denotes the Euclidean inner product of $u,v\\in\\mathbb R^n$."
+      ]
+    },
+    {
+      "consumer_item": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+      "supplier_item": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+      "supplier_batch": "1",
+      "status": "actual draft supplier body and proof inspected; dispatch status is not independent approval",
+      "required_hypotheses": [
+        "Input a real symmetric positive-definite matrix $B\\in\\mathbb R^{n\\times n}$, $n\\ge1$, a vector $g\\in\\mathbb R^n$, and representable finite entries in the operationwise arithmetic model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]. **Output:** either a computed direction $p$ or a failure status."
+      ]
+    },
+    {
+      "consumer_item": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+      "supplier_item": "alg-rounded-cholesky-with-failure-status",
+      "supplier_batch": "1",
+      "status": "actual draft supplier body and proof inspected; dispatch status is not independent approval",
+      "required_hypotheses": [
+        "1. Call [[alg-rounded-cholesky-with-failure-status]] on $B$. If it returns a failure status, return factorization-failure with that pivot and operation index."
+      ]
+    },
+    {
+      "consumer_item": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+      "supplier_item": "def-forward-and-back-substitution-for-triangular-systems",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "2. If it returns a lower-triangular factor $\\widehat L$ with positive normal diagonal, use the forward-substitution recursion of [[def-forward-and-back-substitution-for-triangular-systems]] to compute $\\widehat L z=-g$, then its backward-substitution recursion to compute $\\widehat L^T p=z$. Round each scalar operation under the given arithmetic model. If an operation returns range-failure, return triangular-solve-failure with the operation and row indices."
+      ]
+    },
+    {
+      "consumer_item": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+      "supplier_item": "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "3. Otherwise return $p$. The exact-real reference problem is $Bp=-g$ and has a unique solution by [[thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost]]. The returned vector is the computed solve from $\\widehat L$; this definition asserts no backward-error bound for it."
+      ]
+    },
+    {
+      "consumer_item": "alg-lbfgs-two-loop-with-curvature-filter",
+      "supplier_item": "def-euclidean-inner-product",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "At a nonstationary iterate $x$ with $g=\\nabla f(x)$, all inner products are the Euclidean ones of [[def-euclidean-inner-product]]. Choose $\\gamma=\\gamma_0$ if the list is empty; otherwise choose $$ \\gamma=\\frac{s_{\\rm last}^Ty_{\\rm last}}{y_{\\rm last}^Ty_{\\rm last}}. $$ If this scalar cannot be computed as a finite positive real in the arithmetic used, clear the list and use $\\gamma_0$. Compute $r=H_k g$ by the following two loops, then set $p=-r$:"
+      ]
+    },
+    {
+      "consumer_item": "alg-lbfgs-two-loop-with-curvature-filter",
+      "supplier_item": "alg-bracketing-zoom-strong-wolfe-search",
+      "supplier_batch": "58",
+      "status": "actual draft supplier body and proof inspected; dispatch status is not independent approval",
+      "required_hypotheses": [
+        "Call [[alg-bracketing-zoom-strong-wolfe-search]] with $(f,x,p,c_1,c_2,E,Z)$. If it returns a failure status, return that status with the current point. If it returns $\\alpha>0$, set $x^+:=x+\\alpha p$, compute $g^+:=\\nabla f(x^+)$, and set $s:=x^+-x$, $y:=g^+-g$. If $s^Ty>0$, append $(s,y)$ and $\\rho=(s^Ty)^{-1}$, dropping the oldest pair if the list would exceed $m$. If $s^Ty\\le0$ or the pair arithmetic fails, skip that pair and preserve the existing valid list."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-trace-determinant-potential-identities",
+      "supplier_item": "def-euclidean-inner-product",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "for Euclidean vectors $u,v$, $|u^Tv|\\le\\|u\\|_2\\|v\\|_2$."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-trace-determinant-potential-identities",
+      "supplier_item": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "for Euclidean vectors $u,v$, $|u^Tv|\\le\\|u\\|_2\\|v\\|_2$."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-trace-determinant-potential-identities",
+      "supplier_item": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "every real SPD matrix has a unique factorization $B=LL^T$ with $L$ lower triangular and positive diagonal."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-trace-determinant-potential-identities",
+      "supplier_item": "thm-determinant-multiplicative",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "determinants multiply, and a triangular determinant is the product of its diagonal entries."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-trace-determinant-potential-identities",
+      "supplier_item": "thm-determinant-of-a-triangular-matrix",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "determinants multiply, and a triangular determinant is the product of its diagonal entries."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-trace-determinant-potential-identities",
+      "supplier_item": "def-determinant-of-a-square-matrix",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "the determinant is the Leibniz sum over permutations; applying the inverse permutation shows $\\det(P^T)=\\det(P)$."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-trace-determinant-potential-identities",
+      "supplier_item": "def-natural-logarithm",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$\\log$ is defined on $(0,\\infty)$ and has derivative $1/t$ there."
+      ]
+    },
+    {
+      "consumer_item": "lem-bfgs-trace-determinant-potential-identities",
+      "supplier_item": "thm-logarithm-derivative-and-integral",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$\\log$ is defined on $(0,\\infty)$ and has derivative $1/t$ there."
+      ]
+    },
+    {
+      "consumer_item": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "supplier_item": "def-euclidean-inner-product",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "At each nonstationary iterate $x_k$, set $g_k:=\\nabla f(x_k)$. Use the Euclidean inner product of [[def-euclidean-inner-product]] in descent and curvature tests. In exact direction mode set $p_k:=-H_kg_k$. In rounded-Cholesky mode call [[alg-bfgs-hessian-direction-with-rounded-cholesky]] with $(B_k,g_k)$; if the factorization or triangular solve fails, return its failure status. If the computed direction is not descending, reset $B_k:=\\gamma^{-1}I$, $H_k:=\\gamma I$, and set $p_k:=-\\gamma g_k$. If $g_k=0$, return stationary."
+      ]
+    },
+    {
+      "consumer_item": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "supplier_item": "alg-bracketing-zoom-strong-wolfe-search",
+      "supplier_batch": "58",
+      "status": "actual draft supplier body and proof inspected; dispatch status is not independent approval",
+      "required_hypotheses": [
+        "Call [[alg-bracketing-zoom-strong-wolfe-search]] with $(f,x_k,p_k,c_1,c_2,E,Z)$. If it returns a failure status, return that status and $x_k$. Otherwise take its positive strong Wolfe step $\\alpha_k$, and define $$ s_k:=\\alpha_kp_k,\\qquad y_k:=\\nabla f(x_k+s_k)-g_k. $$ In undamped mode set $\\bar y_k:=y_k$. In Powell mode put $c_k:=s_k^TB_ks_k$ and use the damping rule of [[def-bfgs-curvature-pair-and-update-formulas]] to form $\\bar y_k$. If $s_k^T\\bar y_k\\le0$, skip the matrix update and return curvature-rejected. Otherwise update both matrices by $$ B_{k+1}=B_k-\\frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k} +\\frac{\\bar y_k\\bar y_k^T}{s_k^T\\bar y_k}, \\qquad H_{k+1}=(I-\\rho_ks_k\\bar y_k^T)H_k(I-\\rho_k\\bar y_ks_k^T)+\\rho_ks_ks_k^T, \\quad \\rho_k=(s_k^T\\bar y_k)^{-1}. $$ Return update-failure if any required scalar or matrix operation is undefined; otherwise continue until stationarity or budget exhaustion. The output is the last point and one of stationary, a line-search status, factorization/solve failure, curvature-rejected, update-failure, or iteration-budget-exhausted."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "supplier_item": "thm-zoutendijk-summability-for-wolfe-steps",
+      "supplier_batch": "58",
+      "status": "actual draft supplier body and proof inspected; dispatch status is not independent approval",
+      "required_hypotheses": [
+        "if the gradient is Lipschitz on a set containing every accepted-step segment, the objective is bounded below on the initial sublevel, and every accepted step is a Wolfe step, then $\\sum_k\\cos^2\\theta_k\\|\\nabla f(x_k)\\|_2^2<\\infty$."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "supplier_item": "lem-wolfe-step-lower-bound-from-the-descent-angle",
+      "supplier_batch": "58",
+      "status": "actual draft supplier body and proof inspected; dispatch status is not independent approval",
+      "required_hypotheses": [
+        "on a segment with gradient Lipschitz constant $\\Lambda$, a Wolfe step satisfies $\\alpha_k\\ge\\frac{1-c_2}{\\Lambda}\\frac{\\cos\\theta_k\\|g_k\\|_2}{\\|p_k\\|_2}$."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "supplier_item": "def-hessian-and-euclidean-critical-point",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$G(x)$ is the Hessian and $g(x)=\\nabla f(x)$ is the gradient."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "supplier_item": "def-jacobian-matrix-and-gradient",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$G(x)$ is the Hessian and $g(x)=\\nabla f(x)$ is the gradient."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "supplier_item": "def-euclidean-inner-product",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$u^Tv$ is the Euclidean inner product and $|u^Tv|\\le\\|u\\|_2\\|v\\|_2$."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "supplier_item": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$u^Tv$ is the Euclidean inner product and $|u^Tv|\\le\\|u\\|_2\\|v\\|_2$."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "supplier_item": "def-wolfe-and-strong-wolfe-conditions",
+      "supplier_batch": "58",
+      "status": "actual draft supplier body and proof inspected; dispatch status is not independent approval",
+      "required_hypotheses": [
+        "every strong Wolfe step satisfies the Wolfe Armijo and curvature conditions."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "supplier_item": "thm-derivative-of-exponential",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$(e^t)'=e^t$ for real $t$."
+      ]
+    },
+    {
+      "consumer_item": "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+      "supplier_item": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "a real symmetric matrix has an orthonormal eigenbasis; for SPD matrices its eigenvalues are positive, their sum is the trace, and their product is the determinant."
+      ]
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "def-wolfe-and-strong-wolfe-conditions",
+      "supplier_batch": "58",
+      "status": "actual draft supplier body and proof inspected; dispatch status is not independent approval",
+      "required_hypotheses": [
+        "every strong Wolfe step is a Wolfe step."
+      ]
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "a real symmetric matrix has an orthonormal eigenbasis."
+      ]
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "thm-of-square-roots",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "every positive real number has a unique positive square root."
+      ]
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "def-hessian-and-euclidean-critical-point",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$G(x)=\\nabla^2f(x)$ and $g(x)=\\nabla f(x)$."
+      ]
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "def-jacobian-matrix-and-gradient",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$G(x)=\\nabla^2f(x)$ and $g(x)=\\nabla f(x)$."
+      ]
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "def-euclidean-inner-product",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$u^Tv$ is the Euclidean inner product and $|u^Tv|\\le\\|u\\|_2\\|v\\|_2$."
+      ]
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$u^Tv$ is the Euclidean inner product and $|u^Tv|\\le\\|u\\|_2\\|v\\|_2$."
+      ]
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "thm-logarithm-derivative-and-integral",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$\\log'(x)=1/x$ for $x>0$."
+      ]
+    },
+    {
+      "consumer_item": "thm-lbfgs-fixed-memory-linear-convergence",
+      "supplier_item": "def-wolfe-and-strong-wolfe-conditions",
+      "supplier_batch": "58",
+      "status": "actual draft supplier body and proof inspected; dispatch status is not independent approval",
+      "required_hypotheses": [
+        "every strong Wolfe step is a Wolfe step and satisfies the Armijo inequality."
+      ]
+    },
+    {
+      "consumer_item": "thm-lbfgs-fixed-memory-linear-convergence",
+      "supplier_item": "lem-wolfe-step-lower-bound-from-the-descent-angle",
+      "supplier_batch": "58",
+      "status": "actual draft supplier body and proof inspected; dispatch status is not independent approval",
+      "required_hypotheses": [
+        "if $\\nabla f$ is $\\Lambda$-Lipschitz on an accepted step segment, a Wolfe step satisfies $\\alpha_k\\ge\\frac{1-c_2}{\\Lambda}\\frac{\\cos\\theta_k\\|g_k\\|_2}{\\|p_k\\|_2}$."
+      ]
+    },
+    {
+      "consumer_item": "thm-lbfgs-fixed-memory-linear-convergence",
+      "supplier_item": "cor-uniform-descent-angle-implies-gradient-vanishing",
+      "supplier_batch": "58",
+      "status": "actual draft supplier body and proof inspected; dispatch status is not independent approval",
+      "required_hypotheses": [
+        "under the Zoutendijk hypotheses and Wolfe steps, a uniform positive lower bound on $\\cos\\theta_k$ implies $\\|g_k\\|_2\\to0$."
+      ]
+    },
+    {
+      "consumer_item": "thm-lbfgs-fixed-memory-linear-convergence",
+      "supplier_item": "def-hessian-and-euclidean-critical-point",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$G(x)$ is the Hessian and $g(x)=\\nabla f(x)$ is the gradient."
+      ]
+    },
+    {
+      "consumer_item": "thm-lbfgs-fixed-memory-linear-convergence",
+      "supplier_item": "def-jacobian-matrix-and-gradient",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$G(x)$ is the Hessian and $g(x)=\\nabla f(x)$ is the gradient."
+      ]
+    },
+    {
+      "consumer_item": "thm-lbfgs-fixed-memory-linear-convergence",
+      "supplier_item": "def-euclidean-inner-product",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "the Euclidean inner product and norm satisfy Cauchy–Schwarz."
+      ]
+    },
+    {
+      "consumer_item": "thm-lbfgs-fixed-memory-linear-convergence",
+      "supplier_item": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "the Euclidean inner product and norm satisfy Cauchy–Schwarz."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-local-superlinear-convergence",
+      "supplier_item": "cor-second-order-taylor-expansion-with-the-hessian",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$f(x_*+z)=f(x_*)+g_*^Tz+\\tfrac12z^TG_*z+o(\\|z\\|_2^2)$ for a $C^2$ scalar field."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-local-superlinear-convergence",
+      "supplier_item": "alg-bracketing-zoom-strong-wolfe-search",
+      "supplier_batch": "58",
+      "status": "actual draft supplier body and proof inspected; dispatch status is not independent approval",
+      "required_hypotheses": [
+        "the first expansion trial is $\\alpha=1$ and is returned if both strong Wolfe checks pass."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-local-superlinear-convergence",
+      "supplier_item": "def-wolfe-and-strong-wolfe-conditions",
+      "supplier_batch": "58",
+      "status": "actual draft supplier body and proof inspected; dispatch status is not independent approval",
+      "required_hypotheses": [
+        "strong Wolfe requires Armijo and $|g_{k+1}^Tp_k|\\le c_2|g_k^Tp_k|$."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-local-superlinear-convergence",
+      "supplier_item": "def-hessian-and-euclidean-critical-point",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$G(x)$ is the Hessian and $g(x)=\\nabla f(x)$."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-local-superlinear-convergence",
+      "supplier_item": "def-jacobian-matrix-and-gradient",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$G(x)$ is the Hessian and $g(x)=\\nabla f(x)$."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-local-superlinear-convergence",
+      "supplier_item": "def-euclidean-inner-product",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$|u^Tv|\\le\\|u\\|_2\\|v\\|_2$."
+      ]
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-local-superlinear-convergence",
+      "supplier_item": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "supplier_batch": "external-published",
+      "status": "published supplier body and relevant proof/definition inspected",
+      "required_hypotheses": [
+        "$|u^Tv|\\le\\|u\\|_2\\|v\\|_2$."
+      ]
+    }
+  ],
+  "within_batch_edges": [
+    {
+      "consumer_item": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+      "supplier_item": "def-bfgs-curvature-pair-and-update-formulas",
+      "dependency_level": 1
+    },
+    {
+      "consumer_item": "lem-wolfe-steps-give-positive-bfgs-curvature",
+      "supplier_item": "def-bfgs-curvature-pair-and-update-formulas",
+      "dependency_level": 1
+    },
+    {
+      "consumer_item": "lem-powell-damping-gives-positive-curvature",
+      "supplier_item": "def-bfgs-curvature-pair-and-update-formulas",
+      "dependency_level": 1
+    },
+    {
+      "consumer_item": "lem-bfgs-trace-determinant-potential-identities",
+      "supplier_item": "def-bfgs-curvature-pair-and-update-formulas",
+      "dependency_level": 2
+    },
+    {
+      "consumer_item": "lem-bfgs-trace-determinant-potential-identities",
+      "supplier_item": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+      "dependency_level": 2
+    },
+    {
+      "consumer_item": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "supplier_item": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+      "dependency_level": 3
+    },
+    {
+      "consumer_item": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "supplier_item": "def-bfgs-curvature-pair-and-update-formulas",
+      "dependency_level": 3
+    },
+    {
+      "consumer_item": "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+      "supplier_item": "def-bfgs-curvature-pair-and-update-formulas",
+      "dependency_level": 3
+    },
+    {
+      "consumer_item": "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+      "supplier_item": "alg-lbfgs-two-loop-with-curvature-filter",
+      "dependency_level": 3
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "supplier_item": "lem-bfgs-trace-determinant-potential-identities",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "supplier_item": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "supplier_item": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "supplier_item": "lem-wolfe-steps-give-positive-bfgs-curvature",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "supplier_item": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+      "supplier_item": "alg-lbfgs-two-loop-with-curvature-filter",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+      "supplier_item": "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+      "supplier_item": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+      "supplier_item": "lem-bfgs-trace-determinant-potential-identities",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "dependency_level": 5
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "dependency_level": 5
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "def-bfgs-curvature-pair-and-update-formulas",
+      "dependency_level": 5
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "lem-bfgs-trace-determinant-potential-identities",
+      "dependency_level": 5
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+      "dependency_level": 5
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "lem-wolfe-steps-give-positive-bfgs-curvature",
+      "dependency_level": 5
+    },
+    {
+      "consumer_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "supplier_item": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+      "dependency_level": 5
+    },
+    {
+      "consumer_item": "thm-lbfgs-fixed-memory-linear-convergence",
+      "supplier_item": "alg-lbfgs-two-loop-with-curvature-filter",
+      "dependency_level": 5
+    },
+    {
+      "consumer_item": "thm-lbfgs-fixed-memory-linear-convergence",
+      "supplier_item": "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+      "dependency_level": 5
+    },
+    {
+      "consumer_item": "thm-lbfgs-fixed-memory-linear-convergence",
+      "supplier_item": "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+      "dependency_level": 5
+    },
+    {
+      "consumer_item": "thm-lbfgs-fixed-memory-linear-convergence",
+      "supplier_item": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+      "dependency_level": 5
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-local-superlinear-convergence",
+      "supplier_item": "thm-full-memory-bfgs-global-linear-convergence",
+      "dependency_level": 6
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-local-superlinear-convergence",
+      "supplier_item": "lem-full-memory-bfgs-dennis-more-condition",
+      "dependency_level": 6
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-local-superlinear-convergence",
+      "supplier_item": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "dependency_level": 6
+    },
+    {
+      "consumer_item": "thm-full-memory-bfgs-local-superlinear-convergence",
+      "supplier_item": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+      "dependency_level": 6
+    },
+    {
+      "consumer_item": "ex-bfgs-secant-on-a-strongly-convex-quadratic",
+      "supplier_item": "def-bfgs-curvature-pair-and-update-formulas",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "ex-bfgs-secant-on-a-strongly-convex-quadratic",
+      "supplier_item": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "ex-bfgs-secant-on-a-strongly-convex-quadratic",
+      "supplier_item": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "ex-bfgs-powell-damping-after-negative-curvature",
+      "supplier_item": "def-bfgs-curvature-pair-and-update-formulas",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "ex-bfgs-powell-damping-after-negative-curvature",
+      "supplier_item": "lem-powell-damping-gives-positive-curvature",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "ex-bfgs-powell-damping-after-negative-curvature",
+      "supplier_item": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "ex-bfgs-powell-damping-after-negative-curvature",
+      "supplier_item": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "ex-lbfgs-memory-dependent-cost",
+      "supplier_item": "alg-lbfgs-two-loop-with-curvature-filter",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "ex-lbfgs-memory-dependent-cost",
+      "supplier_item": "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+      "dependency_level": 4
+    },
+    {
+      "consumer_item": "ex-lbfgs-memory-dependent-cost",
+      "supplier_item": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "dependency_level": 4
+    }
+  ],
+  "item_dependency_levels": [
+    {
+      "item": "def-bfgs-curvature-pair-and-update-formulas",
+      "dependency_level": 0
+    },
+    {
+      "item": "lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder",
+      "dependency_level": 0
+    },
+    {
+      "item": "lem-bfgs-updates-preserve-secant-symmetry-and-spd",
+      "dependency_level": 1
+    },
+    {
+      "item": "lem-wolfe-steps-give-positive-bfgs-curvature",
+      "dependency_level": 1
+    },
+    {
+      "item": "lem-powell-damping-gives-positive-curvature",
+      "dependency_level": 1
+    },
+    {
+      "item": "alg-bfgs-hessian-direction-with-rounded-cholesky",
+      "dependency_level": 2
+    },
+    {
+      "item": "alg-lbfgs-two-loop-with-curvature-filter",
+      "dependency_level": 2
+    },
+    {
+      "item": "lem-bfgs-trace-determinant-potential-identities",
+      "dependency_level": 2
+    },
+    {
+      "item": "alg-full-memory-bfgs-with-curvature-safeguards",
+      "dependency_level": 3
+    },
+    {
+      "item": "lem-lbfgs-two-loop-equals-stored-updates-and-cost",
+      "dependency_level": 3
+    },
+    {
+      "item": "thm-full-memory-bfgs-global-linear-convergence",
+      "dependency_level": 4
+    },
+    {
+      "item": "lem-lbfgs-curvature-bounds-imply-uniform-spectrum",
+      "dependency_level": 4
+    },
+    {
+      "item": "lem-full-memory-bfgs-dennis-more-condition",
+      "dependency_level": 5
+    },
+    {
+      "item": "thm-lbfgs-fixed-memory-linear-convergence",
+      "dependency_level": 5
+    },
+    {
+      "item": "thm-full-memory-bfgs-local-superlinear-convergence",
+      "dependency_level": 6
+    },
+    {
+      "item": "ex-bfgs-secant-on-a-strongly-convex-quadratic",
+      "dependency_level": 4
+    },
+    {
+      "item": "ex-bfgs-powell-damping-after-negative-curvature",
+      "dependency_level": 4
+    },
+    {
+      "item": "ex-lbfgs-memory-dependent-cost",
+      "dependency_level": 4
+    }
+  ],
+  "dispatch_prompt_scheduling_input_sha256": "d106e23ca34fd26cb882ad0fc8420ded3ebe5d5a6ae824bfebc5c084932146c6",
+  "shared_dependency_artifact_file_sha256": "2a0f995df70f741205c9b460eae21cf51eceb2a02408210e329dd6ad95fa74b7",
+  "shared_dependency_artifact_observed_at": "2026-10-16T04:08:15Z"
+}

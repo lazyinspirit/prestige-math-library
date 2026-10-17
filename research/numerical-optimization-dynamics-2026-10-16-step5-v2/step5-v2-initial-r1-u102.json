@@ -1,0 +1,289 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "102",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "alg-finite-budget-multiplicative-d-optimal-design",
+      "model": "gpt-6-luna",
+      "context_sha256": "5c3c1cfc5121a286874df900da428a9f29a9db564c3980c97190a74f9ff0019a",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The update-count bound is mathematically correct and already proved in thm-multiplicative-design-update-well-defined-and-terminates, step 3.1. Its repetition as a defining property, together with the invariant assertion, violates the algorithm/property separation. Moved these consequences to Remarks with an explicit link to the existing proof; every input, branch, scan and update is unchanged. This is a nonfatal presentation defect, not an incorrect complexity claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-local-parameter-perturbation-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "d8b7174dc75522bf9cdd79ae58ae89418db25c9230118ff5f56c4cfdb8ad740f",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F5 explicitly requires m>=1, while the theorem Statement permits m=0. The original step 2.1 applied F5 without separating that case. This is a nonfatal omitted degenerate-case argument: a path into R^0 is identically zero, so its remainder bound is immediate. Step 2.1 now handles m=0 directly and invokes F5 only for m>=1; the fact states its continuity, differentiability and nonnegative-bound hypotheses accurately. No Statement hypothesis or conclusion was weakened.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-first-order-kinetic-rates-are-confounded-by-total-decay",
+      "model": "gpt-6-luna",
+      "context_sha256": "02d3beb885f117bbb0d987b2f6796374385faca7e32e99b436394bd5d9bb332a",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "At the permitted observation set T={0}, the observation vector is (A0) for every positive rate pair, so it identifies neither individual rates nor their sum. The title therefore made a false positive-identifiability assertion. Changed only the title to say observations depend only on the sum. The full nonseparation claim and proof remain: the integrating factor gives A0 exp(-(k1+k2)t), an arbitrarily small positive rate-preserving perturbation gives exact aliases, and every sensitivity row is proportional to (1,1), including the zero row at t=0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-endpoint-sensors-give-a-d-optimal-linear-time-design",
+      "model": "gpt-6-luna",
+      "context_sha256": "6459cc34dfeebd9b29e09a1458409acc7aba324a138890441d62ea41f0ea0b81",
+      "outcome": "false_positive",
+      "reason": "The claimed obstruction is false: the algorithm permits any nonsingular initial approximate design and N=0. Initializing it at xi*=(1/2,0,1/2) yields sensitivities (2,1,2) and v=0, so it returns xi* at k=0 with equivalence-certified status. Thus xi* satisfies F4 precisely; being unreachable after finitely many updates from the separate uniform initialization is irrelevant. Directly, det M=E[(t-1)^2]-(E[t]-1)^2<=1, and xi* attains 1 with quadratic form (a+b)^2+b^2>0. Rational arithmetic independently confirms the uniform run returns (5/12,1/6,5/12) with v=1/5 and N=1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-finite-budget-multiplicative-d-optimal-design",
+      "disposition": "repaired",
+      "post_sha256": "d5fc868e0d979935e77d96810c5aee0d95010cfb11e91233fba6991edfbd7822",
+      "review_context_sha256": "e2ebc8c5d2a214ec90b6274f6b5dcd60914c860f2c6eadef8942acd14a247e3d",
+      "reason": "The update-count bound is mathematically correct and already proved in thm-multiplicative-design-update-well-defined-and-terminates, step 3.1. Its repetition as a defining property, together with the invariant assertion, violates the algorithm/property separation. Moved these consequences to Remarks with an explicit link to the existing proof; every input, branch, scan and update is unchanged. This is a nonfatal presentation defect, not an incorrect complexity claim. Checked finite trace normalization and preservation of the nonzero supported feature span in the justifying theorem. No new supplier or Choice assumption is needed. This is a repair-author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-local-parameter-perturbation-bound",
+      "disposition": "repaired",
+      "post_sha256": "a0712b0fe9fd39439ec23e0d6a548001659afbe428b878e34ec643da6f5f5888",
+      "review_context_sha256": "66050f3d37857c887e67733d00def92fcce3987fe82a46ef5c0cfc4b256439d0",
+      "reason": "F5 explicitly requires m>=1, while the theorem Statement permits m=0. The original step 2.1 applied F5 without separating that case. This is a nonfatal omitted degenerate-case argument: a path into R^0 is identically zero, so its remainder bound is immediate. Step 2.1 now handles m=0 directly and invokes F5 only for m>=1; the fact states its continuity, differentiability and nonnegative-bound hypotheses accurately. No Statement hypothesis or conclusion was weakened. Verified the segment lies inside the closed ball; derivative bound L||h||^2 and the radius give forward separation mu||h||/2. The data and fit triangle inequality gives the final estimate, including h=0 and L=0. Repair-author review only; Statement unchanged, so no propagation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-first-order-kinetic-rates-are-confounded-by-total-decay",
+      "disposition": "repaired",
+      "post_sha256": "b50037b9414404c25ed2b48e180f51675a229d4eb38f95412c5df791e049bafc",
+      "review_context_sha256": "6dbefb38835988889b515c7cfd1a6097a8e8a691afb105d83973f5a4fbca23d6",
+      "reason": "At the permitted observation set T={0}, the observation vector is (A0) for every positive rate pair, so it identifies neither individual rates nor their sum. The title therefore made a false positive-identifiability assertion. Changed only the title to say observations depend only on the sum. The full nonseparation claim and proof remain: the integrating factor gives A0 exp(-(k1+k2)t), an arbitrarily small positive rate-preserving perturbation gives exact aliases, and every sensitivity row is proportional to (1,1), including the zero row at t=0. The perturbation distance sqrt(2)epsilon is less than the chosen neighborhood radius, preserving both positivity and exact outputs. No Statement or Definition changed, so no propagation is triggered. Repair-author review only.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-endpoint-sensors-give-a-d-optimal-linear-time-design",
+      "disposition": "unaffected",
+      "post_sha256": "e852e7b2c1489ae91663dd852c5163039793cdcf2100263d36d63476708556c3",
+      "review_context_sha256": "1ce278a6a879f02b9946731950a2395bbd0968a8bc5056acae1be7c1a26c1591",
+      "reason": "The claimed obstruction is false: the algorithm permits any nonsingular initial approximate design and N=0. Initializing it at xi*=(1/2,0,1/2) yields sensitivities (2,1,2) and v=0, so it returns xi* at k=0 with equivalence-certified status. Thus xi* satisfies F4 precisely; being unreachable after finitely many updates from the separate uniform initialization is irrelevant. Directly, det M=E[(t-1)^2]-(E[t]-1)^2<=1, and xi* attains 1 with quadratic form (a+b)^2+b^2>0. Rational arithmetic independently confirms the uniform run returns (5/12,1/6,5/12) with v=1/5 and N=1. Reviewed against the changed algorithm Definition: no input, recurrence, sensitivity or return branch changed. Item bytes are unchanged; only its contract source quotation was synchronized.",
+      "metadata_repair_only": true,
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-multiplicative-design-update-well-defined-and-terminates",
+    "thm-equivalence-violation-bounds-d-optimal-design-gap",
+    "ex-endpoint-sensors-give-a-d-optimal-linear-time-design"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-finite-budget-multiplicative-d-optimal-design",
+      "outcome": "confirmed_nonfatal",
+      "locus": "definition",
+      "reason": "The update-count bound is mathematically correct and already proved in thm-multiplicative-design-update-well-defined-and-terminates, step 3.1. Its repetition as a defining property, together with the invariant assertion, violates the algorithm/property separation. Moved these consequences to Remarks with an explicit link to the existing proof; every input, branch, scan and update is unchanged. This is a nonfatal presentation defect, not an incorrect complexity claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-local-parameter-perturbation-bound",
+      "outcome": "confirmed_nonfatal",
+      "locus": "proof-step",
+      "reason": "F5 explicitly requires m>=1, while the theorem Statement permits m=0. The original step 2.1 applied F5 without separating that case. This is a nonfatal omitted degenerate-case argument: a path into R^0 is identically zero, so its remainder bound is immediate. Step 2.1 now handles m=0 directly and invokes F5 only for m>=1; the fact states its continuity, differentiability and nonnegative-bound hypotheses accurately. No Statement hypothesis or conclusion was weakened.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-first-order-kinetic-rates-are-confounded-by-total-decay",
+      "outcome": "confirmed_fatal",
+      "locus": "frontmatter",
+      "reason": "At the permitted observation set T={0}, the observation vector is (A0) for every positive rate pair, so it identifies neither individual rates nor their sum. The title therefore made a false positive-identifiability assertion. Changed only the title to say observations depend only on the sum. The full nonseparation claim and proof remain: the integrating factor gives A0 exp(-(k1+k2)t), an arbitrarily small positive rate-preserving perturbation gives exact aliases, and every sensitivity row is proportional to (1,1), including the zero row at t=0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "rem-gauss-newton-information-is-not-full-hessian",
+      "route": "owner: unassigned draft frontier item, ordinary owner repair; not published maintenance",
+      "locus": "Remark opening and displayed Hessian identity",
+      "affected_use": "The remark applies thm-nonlinear-least-squares-gradient-and-hessian to an unspecified residual map, although the batch observation model supplies only C1 regularity.",
+      "invalidated_claim": "An exact classical Hessian identity and its zero-residual conclusion cannot be asserted under merely C1 residual regularity; the cited supplier Statement requires C2.",
+      "minimality": "State the supplier C2 hypothesis in the opening sentence; no supplier theorem or interface change is needed. Assigned unit 102 may not edit this unassigned item.",
+      "reason": "Verified the digest concern directly: the residual r(theta)=1+|theta|^(3/2) is C1 on R; phi(theta)=1/2+|theta|^(3/2)+|theta|^3/2 has derivative difference quotient at zero growing like (3/2)|theta|^(-1/2), so its second derivative does not exist there. The exact cited theorem assumes C2 explicitly.",
+      "source_paths": [
+        "items/rem-gauss-newton-information-is-not-full-hessian.md: Remark",
+        "items/thm-nonlinear-least-squares-gradient-and-hessian.md: Statement"
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "items": [
+      {
+        "id": "alg-finite-budget-multiplicative-d-optimal-design",
+        "claim": "Finite exact multiplicative procedure; p>=1, nonempty finite X, nonnegative finite integer N, singular initial-information branch before inversion, zero-violation branch before budget branch.",
+        "dependencies": [
+          "def-approximate-linear-model-design-and-optimality-criteria",
+          "def-nonlinear-experimental-design-and-local-identifiability",
+          "thm-d-optimality-equivalence-theorem"
+        ],
+        "source_evidence": [
+          "SCHEMA.md: Algorithms",
+          "items/thm-multiplicative-design-update-well-defined-and-terminates.md: Proof 1.1–3.1"
+        ],
+        "validation": "Strict proof-contract check: 0 errors, 0 warnings, 4/4 items checked after updating only three exact Definition quotation mirrors.",
+        "unresolved_obligations": [],
+        "next_action": "Assigned review complete; engine collects evidence and performs any subsequent adjudication or consumer routing."
+      },
+      {
+        "id": "thm-local-parameter-perturbation-bound",
+        "claim": "Conditional local fit error <=2(epsilon+delta)/mu; r=r0 when L=0, otherwise min(r0,mu/(2L)).",
+        "source_evidence": [
+          "items/cor-vector-valued-ftc-and-lipschitz-bound.md: Statement clause 2 and Proof 1.2, 2.2, 3.2, 4.1",
+          "items/thm-local-parameter-perturbation-bound.md: Proof 1.1–4.1"
+        ],
+        "dependencies": [
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-chain-rule-for-total-derivatives",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-lipschitz-holder-contraction",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "validation": "Proof-only repair; synchronized contract step 2.1 and zero/degenerate boundary evidence. Corrected manifest radius summary to min(r0,mu/(2L)) and retained conditional existence. Final focused checks passed.",
+        "unresolved_obligations": [],
+        "next_action": "Assigned review complete; engine collects evidence and performs any subsequent adjudication or consumer routing."
+      },
+      {
+        "id": "ex-first-order-kinetic-rates-are-confounded-by-total-decay",
+        "claim": "All finite nonempty time sets in [0,infinity) are retained; individual positive rates remain locally and globally confounded, and rank is at most one.",
+        "source_evidence": [
+          "items/ex-first-order-kinetic-rates-are-confounded-by-total-decay.md: Example, Given, Verification 1.1–2.1",
+          "items/cor-mean-value-theorem.md: Statement",
+          "items/thm-local-information-positive-definite-iff-full-column-rank.md: Statement"
+        ],
+        "validation": "Title-only item repair; manifest title synchronized and summary corrected from rank one to rank at most one. Verification and broad observation-time domain are unchanged. Final focused checks passed.",
+        "unresolved_obligations": [],
+        "next_action": "Assigned review complete; engine collects evidence and performs any subsequent adjudication or consumer routing."
+      },
+      {
+        "id": "ex-endpoint-sensors-give-a-d-optimal-linear-time-design",
+        "claim": "Three finite candidate times 0,1,2; p=2; endpoint design D-optimal among nonsingular approximate designs; uniform initialization with N=1 returns positive violation 1/5.",
+        "source_evidence": [
+          "items/alg-finite-budget-multiplicative-d-optimal-design.md: Definition, Input and k=0 branch",
+          "items/thm-equivalence-violation-bounds-d-optimal-design-gap.md: Statement and Proof 1.1–3.1",
+          "items/ex-endpoint-sensors-give-a-d-optimal-linear-time-design.md: Verification 1.1–3.1"
+        ],
+        "validation": "Independent Python fractions calculation recomputed M0, M1, both inverses, sensitivities and endpoint matrix; all agree exactly. Strict contract check previously passed after source quotation refresh.",
+        "unresolved_obligations": [],
+        "next_action": "Assigned review complete; engine collects evidence and performs any subsequent adjudication or consumer routing."
+      }
+    ],
+    "downstream_reviews": [
+      {
+        "supplier": "alg-finite-budget-multiplicative-d-optimal-design",
+        "id": "thm-multiplicative-design-update-well-defined-and-terminates",
+        "path": "items/thm-multiplicative-design-update-well-defined-and-terminates.md",
+        "affected_use": "Statement analyzes the procedure; F1 supplies xi_x^+=xi_x s_x/p; proof 3.1 counts indices k=0,...,N.",
+        "disposition": "unaffected",
+        "reason": "No instruction or admissible input changed. Proof 1.1 proves normalization, 2.1 preserves the supported nonzero-feature kernel, and 3.1 proves the relocated scan/update bounds. Statement unchanged."
+      },
+      {
+        "supplier": "alg-finite-budget-multiplicative-d-optimal-design",
+        "id": "thm-equivalence-violation-bounds-d-optimal-design-gap",
+        "path": "items/thm-equivalence-violation-bounds-d-optimal-design-gap.md",
+        "affected_use": "Statement takes any returned nonsingular approximate design; F1 defines M, s_x and v used by steps 1.1–3.1.",
+        "disposition": "unaffected",
+        "reason": "Returned carriers and sensitivity definition are identical; the weighted-trace identity, concave logdet bound and equivalence proof still apply. Statement unchanged."
+      },
+      {
+        "supplier": "alg-finite-budget-multiplicative-d-optimal-design",
+        "id": "ex-endpoint-sensors-give-a-d-optimal-linear-time-design",
+        "path": "items/ex-endpoint-sensors-give-a-d-optimal-linear-time-design.md",
+        "affected_use": "F2 and steps 1.2, 2.1 use the multiplicative weights and the N=1 budget-exhausted return with violation 1/5.",
+        "disposition": "unaffected",
+        "reason": "All operational instructions, branch order and weights are identical. The separate theorem still proves nonsingularity; assigned mathematical review follows in dependency order."
+      }
+    ],
+    "page_uses": [
+      {
+        "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/numerical-identifiability-and-optimal-experiment-design.md",
+        "affected_use": "The page lists the algorithm and says its exact-arithmetic procedure reports equivalence violation without a convergence claim.",
+        "disposition": "unaffected",
+        "reason": "Procedure and scope unchanged; only placement of already proved consequences changed."
+      }
+    ],
+    "statement_definition_comparison": "Only the algorithm Definition changed: its inputs, procedure and all branches are byte-for-byte preserved; the invariant assertion and scan/update bound moved to Remarks with the existing theorem cited. The parameter theorem Statement is unchanged, its repair is confined to F5 and proof step 2.1. The kinetic example changes only its title. The endpoint item is unchanged. Thus the only interface event is the algorithm Definition, whose three direct item consumers and owning page were examined. No published or outside-frontier direct consumer was found. No new item or Choice assumption was required.",
+    "validation": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-102.proof-contracts.json --strict --items alg-finite-budget-multiplicative-d-optimal-design,thm-local-parameter-perturbation-bound,ex-first-order-kinetic-rates-are-confounded-by-total-decay,ex-endpoint-sensors-give-a-d-optimal-linear-time-design,thm-multiplicative-design-update-well-defined-and-terminates,thm-equivalence-violation-bounds-d-optimal-design-gap",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 6/6 items checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-finite-budget-multiplicative-d-optimal-design.md items/thm-local-parameter-perturbation-bound.md items/ex-first-order-kinetic-rates-are-confounded-by-total-decay.md items/ex-endpoint-sensors-give-a-d-optimal-linear-time-design.md",
+        "exit_code": 0,
+        "result": "3 proofs checked, 0 failing; algorithm has no phase proof"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-finite-budget-multiplicative-d-optimal-design.md items/thm-local-parameter-perturbation-bound.md items/ex-first-order-kinetic-rates-are-confounded-by-total-decay.md items/ex-endpoint-sensors-give-a-d-optimal-linear-time-design.md",
+        "exit_code": 0,
+        "result": "4 files checked; math and YAML parse under the actual renderer"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-finite-budget-multiplicative-d-optimal-design.md items/thm-local-parameter-perturbation-bound.md items/ex-first-order-kinetic-rates-are-confounded-by-total-decay.md",
+        "exit_code": 0,
+        "result": "3 items, 6 steps, 0 defects"
+      },
+      {
+        "command": "Python 3 fractions.Fraction recomputation of the three-candidate matrices, inverses, updates and sensitivities",
+        "exit_code": 0,
+        "result": "Uniform violation 1/2; one-update weights (5/12,1/6,5/12), violation 1/5; endpoint determinant 1 and violation 0. This finite arithmetic check does not substitute for the determinant-bound proof."
+      }
+    ],
+    "unresolved_obligations": [],
+    "owner_routes": [
+      "Unassigned draft rem-gauss-newton-information-is-not-full-hessian requires the explicit C2 residual hypothesis; exact affected use, counterexample and minimal repair are in ledger_updates. No edit or adjudication was made to that unassigned carrier."
+    ],
+    "published_consumer_findings": [],
+    "source_reading": "Relevant repository item interfaces, the two algorithm-analysis proofs, assigned arguments, contracts and page interfaces were read. No external source consultation is claimed; these elementary finite-dimensional arguments are familiar. No independent acceptance of this agent’s repairs is claimed."
+  },
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-102.proof-contracts.json": "7b2e40c58ab35c3318988bcc850ef8b8b7851e9b0100b73ffceb5e09cea1b31c",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-102.pages.json": "f086a10c4fe19424831dcabacc382fa2f4ea28d5edbcf07c981d4a6a9f5bde48"
+  }
+}

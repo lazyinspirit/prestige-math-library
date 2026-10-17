@@ -1,0 +1,290 @@
+{
+  "group": "z",
+  "batches": [
+    "60"
+  ],
+  "pages_read": [
+    "operator-splitting-admm-and-primal-dual-methods",
+    "operator-splitting-admm-and-primal-dual-methods-examples"
+  ],
+  "items_read": [
+    "def-maximal-monotone-relation-on-euclidean-space",
+    "def-saddle-point-for-convex-concave-lagrangian",
+    "lem-firmly-nonexpansive-picard-iteration-converges",
+    "lem-one-point-extension-for-finite-dimensional-nonexpansive-map",
+    "lem-schur-reduction-for-polynomial-unit-disk-roots",
+    "alg-naive-sequential-three-block-admm",
+    "alg-two-block-admm-scaled",
+    "def-fenchel-conjugate-on-finite-dimensional-euclidean-space",
+    "def-resolvent-of-a-monotone-relation",
+    "lem-admm-exact-subproblem-optimality-relations",
+    "lem-fenchel-conjugate-is-proper-closed-convex",
+    "lem-fenchel-young-equality-characterizes-subgradients",
+    "thm-maximal-monotone-resolvent-is-firmly-nonexpansive",
+    "alg-douglas-rachford-splitting",
+    "alg-pdhg-primal-dual-hybrid-gradient",
+    "lem-two-block-admm-energy-and-objective-estimates",
+    "lem-douglas-rachford-map-is-firmly-nonexpansive",
+    "lem-pdhg-one-step-gap-telescope",
+    "thm-two-block-admm-residual-objective-and-dual-convergence",
+    "thm-douglas-rachford-shadow-converges-to-zero-of-sum",
+    "thm-pdhg-ergodic-saddle-gap-o1k",
+    "cex-naive-three-block-admm-divergence",
+    "ex-consensus-admm-least-squares",
+    "ex-lanczos-ritz-value-is-not-a-norm-certificate",
+    "ex-two-pixel-pdhg-total-variation-step"
+  ],
+  "conventions": [
+    {
+      "convention": "Relations are subsets of E × E for E = R^n; maximal monotonicity means inclusion-maximality among monotone graphs, not a largest monotone graph. Zero-dimensional Euclidean spaces are allowed.",
+      "fixed_by": "def-maximal-monotone-relation-on-euclidean-space",
+      "matters_for": [
+        "def-resolvent-of-a-monotone-relation",
+        "thm-maximal-monotone-resolvent-is-firmly-nonexpansive",
+        "alg-douglas-rachford-splitting",
+        "thm-douglas-rachford-shadow-converges-to-zero-of-sum"
+      ]
+    },
+    {
+      "convention": "A saddle point has a finite central value and satisfies Ψ(x*,y) ≤ Ψ(x*,y*) ≤ Ψ(x,y*) at every displayed argument; those evaluations must be defined.",
+      "fixed_by": "def-saddle-point-for-convex-concave-lagrangian",
+      "matters_for": [
+        "lem-two-block-admm-energy-and-objective-estimates",
+        "thm-two-block-admm-residual-objective-and-dual-convergence",
+        "thm-pdhg-ergodic-saddle-gap-o1k",
+        "ex-consensus-admm-least-squares"
+      ]
+    },
+    {
+      "convention": "The resolvent is initially the possibly partial, set-valued inverse relation JρA(y) = {x : y − x ∈ ρA(x)}, with ρ > 0.",
+      "fixed_by": "def-resolvent-of-a-monotone-relation",
+      "matters_for": [
+        "thm-maximal-monotone-resolvent-is-firmly-nonexpansive",
+        "alg-douglas-rachford-splitting",
+        "thm-douglas-rachford-shadow-converges-to-zero-of-sum"
+      ]
+    },
+    {
+      "convention": "ADMM uses the Lagrangian f(x) + g(z) + ⟨y,Kx + Lz − c⟩, unscaled dual y^k = ρu^k, and exact attained subproblem minimizers. Multiple minimizers are resolved by the minimum-norm tie-break; failed capped sweeps leave the state unchanged.",
+      "fixed_by": "alg-two-block-admm-scaled",
+      "matters_for": [
+        "lem-admm-exact-subproblem-optimality-relations",
+        "lem-two-block-admm-energy-and-objective-estimates",
+        "thm-two-block-admm-residual-objective-and-dual-convergence",
+        "ex-consensus-admm-least-squares"
+      ]
+    },
+    {
+      "convention": "ADMM energy descent starts at k = 1, because arbitrary z^0 need not satisfy a preceding z-subproblem optimality condition. The objective estimates apply to every exact sweep.",
+      "fixed_by": "lem-two-block-admm-energy-and-objective-estimates",
+      "matters_for": [
+        "thm-two-block-admm-residual-objective-and-dual-convergence"
+      ]
+    },
+    {
+      "convention": "PDHG evaluates Φ only on dom f × dom g*, starts with extrapolated x̄^0 = x^0, uses exact proximal calls, and requires positive steps satisfying τσ‖K‖₂² < 1.",
+      "fixed_by": "alg-pdhg-primal-dual-hybrid-gradient",
+      "matters_for": [
+        "lem-pdhg-one-step-gap-telescope",
+        "thm-pdhg-ergodic-saddle-gap-o1k",
+        "ex-lanczos-ritz-value-is-not-a-norm-certificate",
+        "ex-two-pixel-pdhg-total-variation-step"
+      ]
+    },
+    {
+      "convention": "The PDHG ergodic averages use outputs x^{k+1}, y^{k+1} for k = 0,…,N−1, with N ≥ 1. The rate concerns saddle differences on domain test pairs and bounded test sets.",
+      "fixed_by": "thm-pdhg-ergodic-saddle-gap-o1k",
+      "matters_for": [
+        "ex-two-pixel-pdhg-total-variation-step"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-maximal-monotone-resolvent-is-firmly-nonexpansive",
+      "statement": "Let A be maximal monotone on E = R^n and let ρ > 0. For every y ∈ E there is a unique x ∈ E with y − x ∈ ρA(x). The everywhere-defined resolvent satisfies ‖JρA y − JρA y′‖₂² ≤ ⟨JρA y − JρA y′, y − y′⟩ and is 1-Lipschitz.",
+      "used_by": [
+        "alg-douglas-rachford-splitting",
+        "lem-douglas-rachford-map-is-firmly-nonexpansive",
+        "thm-douglas-rachford-shadow-converges-to-zero-of-sum"
+      ]
+    },
+    {
+      "id": "lem-two-block-admm-energy-and-objective-estimates",
+      "statement": "Under a feasible Lagrangian saddle point and attained exact ADMM subproblems, V^{k+1} ≤ V^k − ρ‖r^{k+1}‖₂² − ρ‖LΔz^{k+1}‖₂² for k ≥ 1. Every exact sweep satisfies p_{k+1} − p* ≤ −⟨y^{k+1},r^{k+1}⟩ + ρ⟨LΔz^{k+1},r^{k+1} − L(z^{k+1} − z*)⟩ and p* − p_{k+1} ≤ ⟨y*,r^{k+1}⟩.",
+      "used_by": [
+        "thm-two-block-admm-residual-objective-and-dual-convergence"
+      ]
+    },
+    {
+      "id": "lem-pdhg-one-step-gap-telescope",
+      "statement": "For the exact PDHG recurrence, κ = √(τσ)‖K‖₂ < 1, every x ∈ dom f, y ∈ dom g*, and integer N ≥ 1, the sum from k = 0 to N−1 of Φ(x^{k+1},y) − Φ(x,y^{k+1}) is at most ‖x − x^0‖₂²/(2τ) + ‖y − y^0‖₂²/(2σ). This includes K = 0 and uses x̄^0 = x^0.",
+      "used_by": [
+        "thm-pdhg-ergodic-saddle-gap-o1k"
+      ]
+    },
+    {
+      "id": "lem-one-point-extension-for-finite-dimensional-nonexpansive-map",
+      "statement": "Let E = R^n, D ⊆ E, and T:D → E be 1-Lipschitz. For every y ∈ E there exists q ∈ E such that ‖q − T(p)‖₂ ≤ ‖y − p‖₂ for every p ∈ D.",
+      "used_by": [
+        "thm-maximal-monotone-resolvent-is-firmly-nonexpansive"
+      ]
+    },
+    {
+      "id": "lem-firmly-nonexpansive-picard-iteration-converges",
+      "statement": "Let T:E → E be firmly nonexpansive on E = R^n, suppose Fix(T) is nonempty, and start at any w₀. Then the Picard sequence w_{k+1} = T(w_k) converges to a fixed point of T.",
+      "used_by": [
+        "thm-douglas-rachford-shadow-converges-to-zero-of-sum"
+      ]
+    },
+    {
+      "id": "lem-admm-exact-subproblem-optimality-relations",
+      "statement": "For any exact two-block ADMM sweep, with Δz^{k+1} = z^{k+1} − z^k and y^{k+1} = ρu^{k+1}, −K*(y^{k+1} − ρLΔz^{k+1}) ∈ ∂f(x^{k+1}) and −L*y^{k+1} ∈ ∂g(z^{k+1}).",
+      "used_by": [
+        "lem-two-block-admm-energy-and-objective-estimates",
+        "thm-two-block-admm-residual-objective-and-dual-convergence"
+      ]
+    },
+    {
+      "id": "lem-fenchel-conjugate-is-proper-closed-convex",
+      "statement": "If f:R^n → (−∞,+∞] is proper, closed and convex, then its conjugate f* is also proper, closed and convex.",
+      "used_by": [
+        "alg-pdhg-primal-dual-hybrid-gradient",
+        "thm-two-block-admm-residual-objective-and-dual-convergence"
+      ]
+    },
+    {
+      "id": "lem-schur-reduction-for-polynomial-unit-disk-roots",
+      "statement": "For a real monic polynomial p of degree n ≥ 1 with |a₀| < 1, define p#(z) = z^n p(1/z) and q(z) = (p(z) − a₀p#(z))/(z(1 − a₀²)). If every zero of p lies strictly inside the unit disk, then every zero of q does too.",
+      "used_by": [
+        "cex-naive-three-block-admm-divergence"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Euclidean pairings, finite-coordinate algebra, and the singleton R^0 convention.",
+      "opened": true
+    },
+    {
+      "id": "def-extended-reals",
+      "used_for": "Extended-real order and defined arithmetic in saddle and conjugate expressions.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Cauchy–Schwarz, norm inequalities, polarization, and estimates in convergence and extension arguments.",
+      "opened": true
+    },
+    {
+      "id": "cor-bolzano-weierstrass-in-rn",
+      "used_for": "Choice-free convergent subsequences in positive-dimensional Euclidean spaces for Picard and ADMM convergence.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of closed bounded finite-dimensional sets in the one-point extension argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-semicontinuous-extreme-value-theorem",
+      "used_for": "Attainment of the finite maximum-of-quadratics minimum in the one-point extension proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-nearest-point-in-a-nonempty-closed-convex-set",
+      "used_for": "Projection onto the finite active-gradient convex hull and the ADMM minimum-norm minimizer tie-break.",
+      "opened": true
+    },
+    {
+      "id": "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+      "used_for": "Separating the origin from an active-gradient convex hull in the one-point extension proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-compact-iff-finite-intersection-property",
+      "used_for": "Passing from finite intersections of extension balls to their total intersection.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "Adjoint identities in ADMM optimality and PDHG updates.",
+      "opened": true
+    },
+    {
+      "id": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+      "used_for": "Existence and uniqueness of the finite-dimensional adjoints, including zero-dimensional spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-induced-matrix-p-norm",
+      "used_for": "The unit-ball operator-norm convention, its zero-input-dimension case, and the PDHG step-size bound.",
+      "opened": true
+    },
+    {
+      "id": "def-krylov-subspace-of-a-matrix-and-start-vector",
+      "used_for": "The empty K₀ convention and invariant Krylov spaces in the Ritz-value example.",
+      "opened": true
+    },
+    {
+      "id": "thm-rouche-theorem",
+      "used_for": "Preserving the unit-disk zero count in the Schur reduction lemma.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-polynomial-has-exactly-degree-many-roots-counted-with-multiplicity",
+      "used_for": "Polynomial factorization and root counting in the three-block ADMM counterexample.",
+      "opened": true
+    },
+    {
+      "id": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+      "used_for": "Obtaining a nonzero complex eigenvector for an unstable eigenvalue of the counterexample matrix.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
+      "used_for": "Turning a characteristic-polynomial root outside the unit disk into an eigenvalue.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-semicontinuity-level-set-characterisations",
+      "used_for": "Checking the proximal supplier's use of lower semicontinuity on its real-valued compact sublevel restriction.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-two-block-admm-residual-objective-and-dual-convergence",
+      "concern": "Proof 4.1 says “using steps 2.2–2.2” when passing to the limit in step 1.2. Objective convergence from step 3.1 is also needed and is correctly included in the trailing tags; the prose range appears to be a typographical error.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "operator-splitting-admm-and-primal-dual-methods",
+      "to": "sparse-matrix-models-and-kernel-costs",
+      "faithful": true,
+      "note": "Opened the supplier page and the CSR definition, algorithm, correctness theorem and cost theorem. The two-pixel example uses a valid canonical 1-by-2 record with two stored entries; its product, six input slots, two multiplications, two additions and one initialization match the suppliers. No floating-point or runtime conclusion is imported."
+    },
+    {
+      "from": "operator-splitting-admm-and-primal-dual-methods",
+      "to": "inequality-kkt-duality-and-optimality-certificates",
+      "faithful": true,
+      "note": "Opened the supplier page, convex-duality definition and weak-duality theorem. The consensus example has a full-row-rank equality row and no inequalities; its direct dual computation gives d(y) = 1 − (y − 1)^2. It uses weak duality without importing Slater or an unsupported strong-duality assertion."
+    },
+    {
+      "from": "operator-splitting-admm-and-primal-dual-methods",
+      "to": "proximal-gradient-and-accelerated-composite-optimization",
+      "faithful": true,
+      "note": "Opened the supplier page and the proper-closed-convex, subdifferential, proximal, affine-minorant and proximal-existence interfaces. Consumers preserve the closed-epigraph convention, finite-domain subgradient conditions, positive proximal parameters and exact-call requirement. Zero-dimensional cases are addressed directly, and ADMM attainment is assumed rather than inferred from proximal existence."
+    },
+    {
+      "from": "operator-splitting-admm-and-primal-dual-methods",
+      "to": "krylov-methods-and-lanczos-convergence",
+      "faithful": true,
+      "note": "Opened the supplier page and the complete Lanczos theorem. The example uses exactly its zero-top-projection branch for diag(1,2) started at e₁. The invariant subspace has Ritz value 1 while the operator norm is 2; no upper norm certificate or top-eigenvalue convergence is inferred."
+    }
+  ]
+}

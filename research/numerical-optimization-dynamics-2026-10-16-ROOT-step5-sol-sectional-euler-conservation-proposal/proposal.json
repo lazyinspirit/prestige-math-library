@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "recorded_at": "2026-10-17T05:14:46Z",
+  "research_only": true,
+  "reviewer": "ROOT/kept_low_stochastic",
+  "distinct_issue_cycle": 1,
+  "status": "Research proposal only; actual native5.5 adjudication/adoption remains owed",
+  "original_judge_observations": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-sectional-euler-conservation-proposal/original-judge-observations.json",
+  "finding": {
+    "id": "thm-finite-sectional-forward-euler-global-first-order-error",
+    "model": "gpt-6.1-sol",
+    "keep": false,
+    "at": "2026-10-17T05:13:42.602Z",
+    "disposition": "Confirmed exact-interface citation omission. The global-ODE Statement gives existence, nonnegativity and coordinate/moment bounds, rather than directly stating conservation of augmented mass. Target F1 and Proof1.1 need that additional conclusion."
+  },
+  "proposal": {
+    "canonical_path": "items/thm-finite-sectional-forward-euler-global-first-order-error.md",
+    "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-sectional-euler-conservation-proposal/before/thm-finite-sectional-forward-euler-global-first-order-error.md",
+    "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-sectional-euler-conservation-proposal/proposed/thm-finite-sectional-forward-euler-global-first-order-error.md",
+    "guard": {
+      "kind": "exact-byte-equality",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-sectional-euler-conservation-proposal/before/thm-finite-sectional-forward-euler-global-first-order-error.md",
+      "action": "Refuse adoption unless current canonical source equals full archived preimage. Copied old judge hashes do not bind current sources."
+    },
+    "edit_summary": "Add existing exact conservation theorem to target deps. Rewrite only F1 to identify global existence/nonnegativity from the original global-ODE supplier and exact augmented-mass conservation from the new direct supplier. The Statement, Given, all numbered Proof steps, constants, accepted-grid hypotheses, Euclidean norm and model/grid/cutoff-error distinction are unchanged.",
+    "original_statement_or_definition_changed": false
+  },
+  "independent_reasoning": [
+    "The actual global-ODE supplier already depends on the conservation theorem and records it as its own F2, but that hidden proof context should not be attributed to a stronger advertised global-ODE Statement. Promoting the exact conservation supplier to a direct dependency removes the mismatch cleanly.",
+    "The existing conservation theorem advertises constant sum_i x_i n_i(t)+L(t) for every nonnegative event-ODE solution as long as it exists. Its actual Proof3.1 proves this by pairing each finite event increment with the augmented mass vector: in-range coagulation preserves parent sum through fixed-pivot barycentric identities, overflow transfers the exact lost mass to L, and fragmentation daughter first moment equals parent mass. Summing finite zero-mass increments gives the zero mass derivative, then constant initial mass. Its positivity proof and event assumptions match the exact solution supplied by the global-ODE theorem.",
+    "Apply that conservation result to the unique global nonnegative solution with initial mass M. Since every grid pivot x_i is positive, its simplex S_M is closed and bounded, hence compact in finite dimension; it contains the initial state, so it is nonempty even when M=0. The already direct forward-Euler positivity/conservation theorem puts each successful numerical state into the same S_M under the existing CFL condition.",
+    "Consequently the existing Proof1.1 is licensed unchanged: polynomial F has bounded norm on S_M, h<=T bounds exact-start Euler outputs by R_S+TB_F, and the enlarged compact tube has positive margin inside its open convex-fiber cylinder. Polynomial F and its derivatives are bounded on that bounded cylinder. The actual local-error supplier gives uniform Ch^2 defects and1+Lh stability; the actual global-error supplier then gives C_T h with zero initial error. The constant is independent of N and the convergence remains only to this finite-dimensional event ODE.",
+    "No new local conservation proof item, supplier Statement change, new axiom, weaker box-only replacement or loss of the richer mass-simplex argument is necessary. This repair uses an already present proved exact supplier and leaves every original target claim intact."
+  ],
+  "actual_sources_read": [
+    "items/thm-finite-sectional-forward-euler-global-first-order-error.md",
+    "items/thm-finite-sectional-global-ode-and-moment-bounds.md",
+    "items/thm-finite-sectional-positivity-and-mass-reservoir-conservation.md",
+    "items/thm-finite-sectional-forward-euler-positivity-and-conservation.md",
+    "items/alg-finite-sectional-forward-euler-positivity-cfl.md",
+    "items/alg-finite-sectional-coagulation-fragmentation-balance.md",
+    "items/thm-forward-euler-one-step-consistency-and-local-error.md (actual Statement and local proof context)",
+    "items/thm-global-error-from-one-step-defect-and-stability.md (actual Statement and recurrence proof)"
+  ],
+  "consumer_disposition": "No original Statement or Definition changes. This is a target Facts/dependency repair only; no downstream propagation or downstream review coverage is claimed.",
+  "future_mirrors": [
+    {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-87.proof-contracts.json",
+      "pointer": "/contracts/thm-finite-sectional-forward-euler-global-first-order-error",
+      "action": "After legitimate native repair, retain existing global-ODE citation and add exact conservation supplier Statement quotation as a second F1 citation with use1.1. Mirror any explicit supplier-interface/dependency list for this added direct premise. No derivation claims or target Statement are changed."
+    },
+    {
+      "path": "run-owned current target inventory/dependency mirrors",
+      "action": "Only after adopted native repair, include the existing conservation theorem as this target direct supplier; no new item creation or historical coverage is implied."
+    }
+  ],
+  "external_full_text_reading_claimed": false,
+  "execution_limits": {
+    "canonical_source_or_metadata_edits": false,
+    "hashes_computed": false,
+    "tests_checks_gates_run": false,
+    "native_controls_dispatch_or_admission_used": false,
+    "current_review_credit_or_acceptance_claimed": false,
+    "commits_created": false
+  },
+  "history_policy": "Original Sol/Luna rows copied unchanged with exact file/line/timestamp. All prior research packets remain unchanged. This proposal cannot replace native5.5 adjudication/adoption, source-guard binding or actual root-owned recertification.",
+  "future_citation": {
+    "fact": "F1",
+    "source": "thm-finite-sectional-positivity-and-mass-reservoir-conservation",
+    "source_section": "Statement",
+    "quote": "For the ODE of [[alg-finite-sectional-coagulation-fragmentation-balance]], every solution starting from $n_i(0)\\ge0$ and $L(0)\\ge0$ remains nonnegative for as long as it exists. The augmented mass\n\n$$m_{\\mathrm{tot}}(t)=\\sum_{i=0}^{M}x_i n_i(t)+L(t)$$\n\nis constant. The retained-bin number and retained mass need not be constant when overflow occurs.",
+    "uses": [
+      "1.1"
+    ]
+  }
+}

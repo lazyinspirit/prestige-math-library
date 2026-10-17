@@ -1,0 +1,107 @@
+{
+  "research_only": true,
+  "applied": false,
+  "cycle": 1,
+  "edits": [
+    {
+      "path": "tools/step3-manifest-history.mjs",
+      "before_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-historical-verifier-cycle1/before/tools/step3-manifest-history.mjs",
+      "proposed_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-historical-verifier-cycle1/proposed/tools/step3-manifest-history.mjs",
+      "diff_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-historical-verifier-cycle1/step3-manifest-history.mjs.diff",
+      "replacements": [
+        {
+          "source_excerpt": "function preclosureArchive(root,run,batch,r,route,current) {",
+          "proposed_replacement": "function preclosureArchive(root,run,batch,r,route,current,frozenArtifacts=null) {"
+        },
+        {
+          "source_excerpt": "  const raw=bytes(root,path),doc=JSON.parse(raw);\n  assert(doc.version===1",
+          "proposed_replacement": "  const raw=bytes(root,path),doc=JSON.parse(raw);\n  if(frozenArtifacts)assert(frozenArtifacts[path]===sha(raw),'preclosure registry is not the exact sealed original');\n  assert(doc.version===1"
+        },
+        {
+          "source_excerpt": "    const b=ref(root,q);assert(evidence[q.path]===undefined||evidence[q.path]===q.sha256,'ambiguous preclosure evidence');",
+          "proposed_replacement": "    if(frozenArtifacts)assert(frozenArtifacts[q.path]===q.sha256,'preclosure reference is not in the exact sealed artifact map');\n    const b=ref(root,q);assert(evidence[q.path]===undefined||evidence[q.path]===q.sha256,'ambiguous preclosure evidence');"
+        },
+        {
+          "source_excerpt": "  assert(e.current?.path===r.path&&e.current.sha256===sha(current)\n    &&ownRef(e.current_archive).equals(current),'current manifest capture differs');\n  evidence[r.path]=e.current.sha256;",
+          "proposed_replacement": "  const closureCapture=ownRef(e.current_archive);\n  assert(e.current?.path===r.path&&e.current.sha256===sha(closureCapture)\n    &&e.current_archive.sha256===e.current.sha256,'closure-time manifest capture differs');\n  if(frozenArtifacts)assert(frozenArtifacts[r.path]===e.current.sha256,'canonical closure-time manifest binding changed');\n  else assert(closureCapture.equals(current),'current manifest capture differs');\n  // In verify mode this canonical key denotes the original artifact slot;\n  // its authenticated bytes come from closureCapture, never the later live file.\n  evidence[r.path]=e.current.sha256;"
+        },
+        {
+          "source_excerpt": "  assert(identity(historical)===identity(current),'changed historical/current page or item identity');",
+          "proposed_replacement": "  assert(identity(historical)===identity(frozenArtifacts?closureCapture:current),'changed historical/current page or item identity');"
+        },
+        {
+          "source_excerpt": "  return {historical,current,archived:true,evidence};",
+          "proposed_replacement": "  return {historical,current,archived:true,evidence,...(frozenArtifacts?{closureCapture}: {})};"
+        },
+        {
+          "source_excerpt": "export function historicalStep3Manifest(root,run,batch,r,route,{preclosure=false}={}) {",
+          "proposed_replacement": "export function historicalStep3Manifest(root,run,batch,r,route,{preclosure=false,frozenArtifacts=null}={}) {"
+        },
+        {
+          "source_excerpt": "  const current=bytes(root,r.path);\n  if(sha(current)===r.sha256)return",
+          "proposed_replacement": "  if(frozenArtifacts){\n    const frozen=json(root,`research/${run}-step3-closure.json`);\n    assert(preclosure&&frozen.version===3&&frozen.run===run&&frozen.status==='closed'\n      &&frozen.basis==='dependency-ordered-step3a'&&frozen.manifest_evidence_policy===PRECLOSURE_MANIFEST_POLICY\n      &&JSON.stringify(frozen.artifacts)===JSON.stringify(frozenArtifacts),'not the actual original marked frozen closure');\n  }\n  const current=bytes(root,r.path);\n  if(!frozenArtifacts&&sha(current)===r.sha256)return"
+        },
+        {
+          "source_excerpt": "  if(preclosure){const captured=preclosureArchive(root,run,batch,r,route,current);if(captured)return captured;}\n  const historical=",
+          "proposed_replacement": "  if(preclosure){const captured=preclosureArchive(root,run,batch,r,route,current,frozenArtifacts);if(captured)return captured;}\n  if(frozenArtifacts){\n    // No new certified/owner archive may enlarge an already frozen artifact set.\n    assert(frozenArtifacts[r.path]===r.sha256&&sha(current)===r.sha256,'missing exact original closure-time manifest archive');\n    return {historical:current,current,archived:false};\n  }\n  const historical="
+        }
+      ]
+    },
+    {
+      "path": "tools/step3-owner-downstream-consumer-routes.mjs",
+      "before_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-historical-verifier-cycle1/before/tools/step3-owner-downstream-consumer-routes.mjs",
+      "proposed_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-historical-verifier-cycle1/proposed/tools/step3-owner-downstream-consumer-routes.mjs",
+      "diff_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-historical-verifier-cycle1/step3-owner-downstream-consumer-routes.mjs.diff",
+      "replacements": [
+        {
+          "source_excerpt": "export function downstreamConsumerClosureEvidence(root,run,manifestPolicy=null) {",
+          "proposed_replacement": "export function downstreamConsumerClosureEvidence(root,run,manifestPolicy=null,{frozenArtifacts=null}={}) {"
+        },
+        {
+          "source_excerpt": "  assert(manifestPolicy===null||manifestPolicy===PRECLOSURE_MANIFEST_POLICY,'unknown manifest evidence policy');",
+          "proposed_replacement": "  assert(manifestPolicy===null||manifestPolicy===PRECLOSURE_MANIFEST_POLICY,'unknown manifest evidence policy');\n  assert(frozenArtifacts===null||manifestPolicy===PRECLOSURE_MANIFEST_POLICY,'frozen manifest verification requires the original marked policy');"
+        },
+        {
+          "source_excerpt": "        {preclosure:manifestPolicy===PRECLOSURE_MANIFEST_POLICY});",
+          "proposed_replacement": "        {preclosure:manifestPolicy===PRECLOSURE_MANIFEST_POLICY,frozenArtifacts});"
+        },
+        {
+          "source_excerpt": "        continue; // Live path binds CURRENT bytes; the historical SHA binds its archive.",
+          "proposed_replacement": "        // Close binds live bytes. Verify reconstructs that exact original slot\n        // from the already sealed closureCapture; actual live ownership is\n        // checked independently above, without adopting current review coverage.\n        continue;"
+        }
+      ]
+    },
+    {
+      "path": "tools/step3-close.mjs",
+      "before_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-historical-verifier-cycle1/before/tools/step3-close.mjs",
+      "proposed_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-historical-verifier-cycle1/proposed/tools/step3-close.mjs",
+      "diff_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-historical-verifier-cycle1/step3-close.mjs.diff",
+      "replacements": [
+        {
+          "source_excerpt": "const artifactHashes = (version = 3, observationPolicy = null, manifestPolicy = null, repairEvidencePolicy = null) => ({",
+          "proposed_replacement": "const artifactHashes = (version = 3, observationPolicy = null, manifestPolicy = null, repairEvidencePolicy = null, frozenManifestArtifacts = null) => ({"
+        },
+        {
+          "source_excerpt": "downstreamConsumerClosureEvidence(root, run, manifestPolicy)",
+          "proposed_replacement": "downstreamConsumerClosureEvidence(root, run, manifestPolicy, { frozenArtifacts: frozenManifestArtifacts })"
+        },
+        {
+          "source_excerpt": "  const currentArtifacts = artifactHashes(receipt.version, receipt.observation_evidence_policy, receipt.manifest_evidence_policy, receipt.owner_repair_evidence_policy);",
+          "proposed_replacement": "  // Only verification authenticates closure-time manifest slots through their\n  // already sealed archives. Close/default calls retain live preclosure currency.\n  const currentArtifacts = artifactHashes(receipt.version, receipt.observation_evidence_policy, receipt.manifest_evidence_policy, receipt.owner_repair_evidence_policy,\n    receipt.manifest_evidence_policy === PRECLOSURE_MANIFEST_POLICY ? receipt.artifacts : null);"
+        }
+      ]
+    },
+    {
+      "path": "tools/step3-preclosure-manifest-continuity.md",
+      "before_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-historical-verifier-cycle1/before/tools/step3-preclosure-manifest-continuity.md",
+      "proposed_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-historical-verifier-cycle1/proposed/tools/step3-preclosure-manifest-continuity.md",
+      "diff_file": "/home/lazyinspirit/Projects/prestige-math-library/research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-historical-verifier-cycle1/step3-preclosure-manifest-continuity.md.diff",
+      "replacements": [
+        {
+          "source_excerpt": "The new record is deliberately strict about its sealed current manifest. Any subsequent manifest change requires a separately supported native continuity/repair route; this proposal does not authorize editing its currentSHA or rewriting a frozen close receipt. In particular a later Step5 manifest change must not be silently accepted through this first-closure capture. Existing old history branches remain available to their original callers; this new branch is not a universal future-manifest waiver.",
+          "proposed_replacement": "Close and ordinary preclosure routing remain strict about the actual current manifest: its full bytes must equal the captured current archive. Neither the continuity registry nor a frozen close receipt may be rewritten after closure.\n\nLater `step3-close verify` authenticates history separately. Only an already marked original version-3 closure supplies the exact frozen artifact map. Every continuity registry and original reference must remain in that same sealed map with its original digest. Each canonical manifest artifact slot is reconstructed from its existing hash-bound closure-time current archive; this is a historical binding, never a claim that its old digest describes later live bytes. The full original/historical identity, native Alpha completion and root reconciliation checks still apply to those archived captures. No new postclosure archive, certificate or repair route may enlarge the frozen artifact set. All other artifacts retain their ordinary exact-current-byte verification, and the exact artifact-set and ledger checks remain unchanged.\n\nThe later live manifest is retained separately for actual target membership, unique current ownership/draft/run and direct-dependency checks in the downstream loader. This verifies historical closure without adopting a current source review or licensing any later mathematical or metadata repair. Unmarked receipts and close/default preclosure callers retain their original behavior."
+        }
+      ]
+    }
+  ]
+}

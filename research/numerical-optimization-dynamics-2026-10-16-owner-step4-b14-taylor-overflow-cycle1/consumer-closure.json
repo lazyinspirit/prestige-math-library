@@ -1,0 +1,122 @@
+{
+  "owner": "/root/num_step2_prox27, same focused repair owner for both changed public interfaces and all affected consumers",
+  "before_interfaces": {
+    "def-centered-taylor-model-with-derivative-interval": "Definition\n\nLet $f$ be a real function that is $n+1$ times continuously differentiable on\nan open interval containing the finite real interval $X=[a,b]$. Here\n$n\\ge0$ is an integer, and continuous differentiability means that the\nderivatives through order $n+1$ exist there and are continuous. Let $c\\in X$\nbe a dyadic point. Put\n$$\nP_n(t)=\\sum_{j=0}^n\\frac{f^{(j)}(c)}{j!}(t-c)^j.\n$$\nSupply dyadic intervals $C_j$ containing $f^{(j)}(c)/j!$ for $0\\le j\\le n$\nand a dyadic interval $D$ containing $f^{(n+1)}(X)$. Put\n$M=\\max(|\\inf D|,|\\sup D|)$ and\n$R=\\max(|a-c|,|b-c|)$. The **centered Taylor-model enclosure** is\n$$\\mathcal T_n(f,X,c,(C_j)_{j=0}^n,D) =\\sum_{j=0}^n C_j(X-c)^j+ \\left[-\\frac{M R^{n+1}}{(n+1)!},\\frac{M R^{n+1}}{(n+1)!}\\right],$$\nwhere products, powers, sums, and the final sum are evaluated by\noutward-rounded interval operations. The first term carries input variation\nthrough the polynomial; the symmetric second interval is the explicit\nderivative-based remainder. If a required coefficient or derivative\nenclosure is unavailable, no Taylor-model certificate is returned.\n\n",
+    "thm-centered-taylor-model-encloses-function-range": "Statement\n\nUnder the hypotheses in\n[[def-centered-taylor-model-with-derivative-interval]],\n$f(X)\\subseteq\\mathcal T_n(f,X,c,(C_j)_{j=0}^n,D)$. For $n=0$ this gives\n$f(X)\\subseteq C_0+[-M R,M R]$.\n"
+  },
+  "proposed_interfaces": {
+    "def-centered-taylor-model-with-derivative-interval": "Definition\n\nLet $f$ be a real function that is $n+1$ times continuously differentiable on\nan open interval containing the finite real interval $X=[a,b]$. Here\n$n\\ge0$ is an integer, and continuous differentiability means that the\nderivatives through order $n+1$ exist there and are continuous. Let $c\\in X$\nbe a dyadic point. Put\n$$\nP_n(t)=\\sum_{j=0}^n\\frac{f^{(j)}(c)}{j!}(t-c)^j.\n$$\nSupply dyadic intervals $C_j$ containing $f^{(j)}(c)/j!$ for $0\\le j\\le n$\nand a dyadic interval $D$ containing $f^{(n+1)}(X)$. Put\n$M=\\max(|\\inf D|,|\\sup D|)$ and\n$R=\\max(|a-c|,|b-c|)$. Define the **analytic centered Taylor set** by\n$$\\mathcal E_n(f,X,c,(C_j)_{j=0}^n,D)=\\sum_{j=0}^n C_j(X-c)^j+\\left[-\\frac{M R^{n+1}}{(n+1)!},\\frac{M R^{n+1}}{(n+1)!}\\right],$$\nwhere this displayed expression uses exact set addition, multiplication and\npowers, with $(X-c)^0=\\{1\\}$. It is a bounded closed interval as an exact subset of $\\mathbb R$; its\nendpoints need not be representable in the selected dyadic format. The\npolynomial term carries input variation, and the symmetric term is the\nexplicit derivative-based remainder.\n\nThe **computed centered Taylor-model enclosure**\n$\\mathcal T_n(f,X,c,(C_j)_{j=0}^n,D)$ is the finite interval returned by\nevaluating the displayed expression with outward-rounded interval operations\nin the selected format. Each required exact input or remainder endpoint is\nenclosed by directed rounding before it is used as a stored interval\nendpoint. A finite Taylor-model certificate is returned only when all these\nconversions and all required interval operations return finite enclosures.\nIf a required coefficient or derivative enclosure is unavailable, no\nTaylor-model certificate is returned. If a conversion or operation returns\na non-finite status, propagate that status and return no finite Taylor-model\ncertificate; the analytic set is not substituted as a stored result or an\noverflow certificate.\n",
+    "thm-centered-taylor-model-encloses-function-range": "Statement\n\nUnder the hypotheses in\n[[def-centered-taylor-model-with-derivative-interval]], the exact analytic\nset satisfies\n$$f(X)\\subseteq\\mathcal E_n(f,X,c,(C_j)_{j=0}^n,D).$$\nIf every required outward conversion and interval operation returns a finite\nenclosure, the computed Taylor model is a finite interval and\n$$f(X)\\subseteq\\mathcal T_n(f,X,c,(C_j)_{j=0}^n,D).$$\nFor $n=0$, the analytic inclusion is $f(X)\\subseteq C_0+[-MR,MR]$, with this\nsum interpreted exactly; its outward-rounded evaluation has the same\nfinite-success qualification. An unavailable required enclosure or a\nnon-finite conversion or operation returns no finite Taylor-model\ncertificate. When valid coefficient and derivative enclosures are supplied,\narithmetic failure does not invalidate the analytic inclusion, but that\ninclusion asserts no representable result or fallback computation.\n"
+  },
+  "aliases": {
+    "before": {
+      "def-centered-taylor-model-with-derivative-interval": [],
+      "thm-centered-taylor-model-encloses-function-range": []
+    },
+    "proposed": {
+      "def-centered-taylor-model-with-derivative-interval": [],
+      "thm-centered-taylor-model-encloses-function-range": []
+    },
+    "basis": "Neither target frontmatter declares aliases; IDs retained. No alias introduced."
+  },
+  "all_literal_source_uses": [
+    {
+      "target": "thm-centered-taylor-model-encloses-function-range",
+      "file": "items/thm-centered-taylor-model-encloses-function-range.md",
+      "line": 2,
+      "text": "id: thm-centered-taylor-model-encloses-function-range"
+    },
+    {
+      "target": "def-centered-taylor-model-with-derivative-interval",
+      "file": "items/thm-centered-taylor-model-encloses-function-range.md",
+      "line": 14,
+      "text": "deps: [def-centered-taylor-model-with-derivative-interval, lem-taylor-integral-remainder, thm-outward-rounded-operations-are-isotone-and-dag-sound]"
+    },
+    {
+      "target": "def-centered-taylor-model-with-derivative-interval",
+      "file": "items/thm-centered-taylor-model-encloses-function-range.md",
+      "line": 24,
+      "text": "[[def-centered-taylor-model-with-derivative-interval]],"
+    },
+    {
+      "target": "def-centered-taylor-model-with-derivative-interval",
+      "file": "items/thm-centered-taylor-model-encloses-function-range.md",
+      "line": 31,
+      "text": "[[def-centered-taylor-model-with-derivative-interval]], Taylor's integral"
+    },
+    {
+      "target": "def-centered-taylor-model-with-derivative-interval",
+      "file": "items/thm-centered-taylor-model-encloses-function-range.md",
+      "line": 36,
+      "text": "[L1] [[def-centered-taylor-model-with-derivative-interval]]: each $C_j$"
+    },
+    {
+      "target": "def-centered-taylor-model-with-derivative-interval",
+      "file": "items/def-centered-taylor-model-with-derivative-interval.md",
+      "line": 2,
+      "text": "id: def-centered-taylor-model-with-derivative-interval"
+    },
+    {
+      "target": "thm-centered-taylor-model-encloses-function-range",
+      "file": "items/def-centered-taylor-model-with-derivative-interval.md",
+      "line": 14,
+      "text": "justified_by: [thm-centered-taylor-model-encloses-function-range]"
+    },
+    {
+      "target": "def-centered-taylor-model-with-derivative-interval",
+      "file": "library/numerical-linear-algebra-and-approximation/outward-rounded-interval-and-ball-arithmetic.md",
+      "line": 18,
+      "text": "  - def-centered-taylor-model-with-derivative-interval"
+    },
+    {
+      "target": "thm-centered-taylor-model-encloses-function-range",
+      "file": "library/numerical-linear-algebra-and-approximation/outward-rounded-interval-and-ball-arithmetic.md",
+      "line": 36,
+      "text": "  - thm-centered-taylor-model-encloses-function-range"
+    }
+  ],
+  "all_current_run_citation_uses": [
+    {
+      "file": "research/numerical-optimization-dynamics-2026-10-16-batch-14.proof-contracts.json",
+      "subject": "thm-centered-taylor-model-encloses-function-range",
+      "path": [
+        "contracts",
+        "thm-centered-taylor-model-encloses-function-range",
+        "citations",
+        0
+      ],
+      "supplier": "def-centered-taylor-model-with-derivative-interval"
+    }
+  ],
+  "consumer_dispositions": [
+    {
+      "subject": "thm-centered-taylor-model-encloses-function-range",
+      "supplier": "def-centered-taylor-model-with-derivative-interval",
+      "use": "Actual logical dependency and L1 Definition quote. Entire source read; proposed theorem explicitly proves exact analytic inclusion separately from finite computed success.",
+      "disposition": "focused repair included"
+    },
+    {
+      "subject": "def-centered-taylor-model-with-derivative-interval",
+      "supplier": "thm-centered-taylor-model-encloses-function-range",
+      "use": "Frontmatter justified_by only; not a logical deps edge. Entire Definition read; proposed finite-success/status semantics align with the revised theorem.",
+      "disposition": "focused repair included; no dependency cycle created"
+    },
+    {
+      "subject": "library/numerical-linear-algebra-and-approximation/outward-rounded-interval-and-ball-arithmetic.md",
+      "use": "Only owning A placement and descriptive Taylor-model paragraph. Entire page read; opening paragraph already says overflow and exhausted budgets return explicit non-finite statuses, and later text makes no unconditional fixed-format success guarantee.",
+      "disposition": "current page remains accurate; no source edit proposed"
+    },
+    {
+      "subject": "alg-budgeted-validated-range-evaluation",
+      "use": "Entire Definition read because of nearby range-evaluation terminology. It calls the elementary evaluator, not this Taylor model, preserves every non-finite leaf status and certifies only a completed width-tested hull.",
+      "disposition": "false positive as an affected Taylor consumer; no target ID dependency/call or mathematical edit"
+    },
+    {
+      "subject": "thm-budgeted-range-evaluation-terminates-and-is-sound",
+      "use": "Entire theorem read: finite-call termination and conditional certified hull, based on real/complex elementary range suppliers; no Taylor theorem use.",
+      "disposition": "no affected target dependency; no edit"
+    }
+  ],
+  "further_hops": [],
+  "further_hops_basis": "The only logical item consumer of the changed Definition is the repaired theorem. No other item cites the changed theorem ID, and the only reverse target use is the Definition justified_by. Whole items/library public-ID and generic centered-Taylor phrase inventory supplies the nonlogical page use; no external item consumer or higher-hop changed interface found."
+}

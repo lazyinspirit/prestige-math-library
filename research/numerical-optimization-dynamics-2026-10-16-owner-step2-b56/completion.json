@@ -1,0 +1,41 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "56",
+  "status": "source-repair-complete-awaiting-root-metadata-and-native-acceptance",
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-parabolic-backward-euler-error-and-reconstruction.md items/alg-parabolic-backward-euler-averaged-forms.md --json",
+      "exit_code": 0,
+      "result": "2 files; theorem pass, algorithm not-applicable; 1 proof checked, 0 failures"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/thm-parabolic-backward-euler-error-and-reconstruction.md items/alg-parabolic-backward-euler-averaged-forms.md",
+      "exit_code": 0,
+      "result": "2 items, 5 steps, 0 defects"
+    }
+  ],
+  "consumer_dispositions": [
+    {
+      "id": "alg-parabolic-backward-euler-averaged-forms",
+      "decision": "accept-proposed",
+      "reason": "The theorem can be instantiated with a=a_h for arbitrary valid algorithm input and proves unique step solves. Closing its missing math delimiter changes no Definition mathematics."
+    },
+    {
+      "id": "thm-parabolic-backward-euler-error-and-reconstruction",
+      "decision": "accept-proposed",
+      "reason": "Algorithm coefficients/load are now explicitly the semidiscrete coefficients/load. The residual subtraction and all stability/error/reconstruction estimates use the correct identical averaged form."
+    },
+    {
+      "id": "parabolic-finite-element-methods",
+      "decision": "unchanged-compatible",
+      "reason": "The same first-order nodal estimate and affine reconstruction are proved under existing hypotheses; scalar a.e. coefficient/load averages remain exactly as described."
+    },
+    {
+      "id": "parabolic-finite-element-methods-examples",
+      "decision": "unchanged-compatible",
+      "reason": "Examples do not consume the backward Euler algorithm or theorem; their initial projection/Ritz/CN claims are unchanged."
+    }
+  ],
+  "final_recheck": "Canonical bytes still exactly equal approved proposed/final archives after final proof-layout. Repeated full items/library use search; no new downstream consumer. Algorithm justified_by theorem applies for arbitrary a_h using a=a_h; theorem uses prescribed a_h=a. A/B page prose remains compatible.",
+  "metadata_native_controls_verification_untouched": true
+}

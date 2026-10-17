@@ -1,0 +1,11 @@
+---
+page: the-topology-of-euclidean-space
+title: "The Topology of Euclidean Space"
+status: published
+items: [rem-euclidean-topology-dictionary, def-euclidean-spheres-and-closed-balls, def-pseudocompact-space, lem-pseudocompact-euclidean-subset-is-bounded, lem-pseudocompact-euclidean-subset-is-closed, thm-euclidean-heine-borel-pseudocompactness-and-extreme-values, cor-euclidean-compactness-equivalence-chart, cor-euclidean-closed-balls-and-spheres-are-compact, def-polygonal-path-and-polygonal-connectedness, lem-euclidean-polygonal-paths-are-continuous, lem-polygonally-reachable-set-is-clopen, thm-open-connected-subsets-of-rn-are-polygonally-connected, cor-components-of-open-subsets-of-rn-are-polygonally-connected, cor-rn-is-polygonally-connected-and-locally-path-connected, cor-rn-is-locally-compact-and-sigma-compact, lem-finite-powers-of-countable-sets-are-countable, thm-rational-points-and-boxes-in-rn, lem-punctured-rn-is-polygonally-connected, lem-radial-normalisation-is-continuous, thm-radial-straight-line-map-on-punctured-rn, cor-euclidean-spheres-are-path-connected, thm-r-is-not-homeomorphic-to-higher-dimensional-euclidean-space]
+examples: [fs-connected-subsets-of-rn-are-polygonally-connected]
+---
+
+The product topology, the Euclidean metric topology, and the topologies from finite-dimensional norms agree on $\mathbb R^n$. The declared compactness prerequisite supplies open-cover compactness, Heine-Borel, compact images and extrema, metric compactness equivalences, and connectedness. The normed-space prerequisite supplies Euclidean metrics, norm comparison, standard coordinates, and continuity of norms; finite counting supplies finite-product countability and finite selections used for rational boxes.
+
+For nonempty Euclidean subsets, the development proves the ZF equivalence of compactness, closedness and boundedness, pseudocompactness, and the extreme-value property, then records the extension under $\mathrm{AC}_\omega$ and $\mathrm{DC}$. It develops polygonal paths, open-set connectedness, components, local compactness, and rational points and boxes directly. Punctured spaces and radial normalisation then give sphere connectedness and the point-removal argument that separates the line from higher-dimensional Euclidean spaces.

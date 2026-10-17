@@ -1,0 +1,14 @@
+Let the input length be $n\in\mathbb N_0$. If $n=0$, both algorithms return exactly zero, the sum of the empty input, and their absolute errors are zero. Kahan executes no loop operations and returns $s_0=0$; Neumaier executes no loop operations and its final addition returns $\operatorname{fl}(s_0+c_0)=0$, with final rounding error $\epsilon^f=0$. The Kahan identity and bound below apply when $n\ge1$; no $y_0$, $s_{-1}$, or $\epsilon_0^s$ is required in the empty branch.
+
+For $n\ge1$ successfully processed real inputs $x_1,\ldots,x_n$, let $\epsilon_i^y,\epsilon_i^s,\epsilon_i^d,\epsilon_i^c$ be the signed errors in the four Kahan operations. Then
+$$s_n-\sum_{i=1}^n x_i=\sum_{i=1}^n\epsilon_i^y+\epsilon_n^s-\sum_{i=1}^{n-1}(\epsilon_i^d+\epsilon_i^c),$$
+hence
+$$|s_n-\sum_i x_i|\le u\sum_i|x_i-c_{i-1}|+u|s_{n-1}+y_n|+u\sum_{i<n}(|s_i-s_{i-1}|+|d_i-y_i|).$$
+For Neumaier, let $\epsilon_i^t,\epsilon_i^q,\epsilon_i^a,\epsilon_i^c$ be the signed errors at the actually executed operations and $\epsilon^f$ the final rounding error. Then
+$$\widehat s-\sum_i x_i=\sum_i(\epsilon_i^q+\epsilon_i^a+\epsilon_i^c)+\epsilon^f.$$
+The leading-sum error $\epsilon_i^t$ cancels from this exact identity; its nonnegative allowance may still be retained in the conservative bound below.
+For each $i$, define $P_i$ by the branch-specific expression below. Then
+$$|\widehat s-\sum_i x_i|\le u\sum_iP_i+u|s_n+c_n|,$$
+where the final term accounts for the last rounded addition. These are finite data-dependent bounds, not uniform relative-error claims.
+
+$$P_i=|s_{i-1}|+|x_i|+ \begin{cases}|s_{i-1}|+|t_i|,&|s_{i-1}|\ge|x_i|,\\|x_i|+|t_i|,&|s_{i-1}|<|x_i|\end{cases} +\begin{cases}|q_i|+|x_i|,&|s_{i-1}|\ge|x_i|,\\|q_i|+|s_{i-1}|,&|s_{i-1}|<|x_i|\end{cases} +|c_{i-1}|+|a_i|.$$

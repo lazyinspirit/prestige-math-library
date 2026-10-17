@@ -34,6 +34,8 @@ import { loadOwnerPageRepairs, ownerPageFindingRepair } from './step3-owner-post
 import { loadRequiredPageRoutes, requiredPageCarrier } from './step3-owner-required-page-routes.mjs';
 import { loadDownstreamConsumerRoutes, downstreamConsumerRoute } from './step3-owner-downstream-consumer-routes.mjs';
 import { sourceIdenticalAcceptanceContinuity } from './step3-owner-source-identical-continuity.mjs';
+import { unchangedPageCausalRepair } from './step3-owner-unchanged-page-repairs.mjs';
+import { stabilizedSourceIdenticalAcceptanceContinuity } from './step3-owner-stabilized-source-identical-continuity.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -1854,7 +1856,9 @@ if (command === 'check') {
               if (decision.verdict === 'accepted_repair' && currentSha !== hashValue(postValue)
                 && !riskReviewOnlyDelta(target, postValue, currentValue)
                 && !(ownerEvidence?.source_identical_acceptance_continuities ?? []).some(entry =>
-                  sourceIdenticalAcceptanceContinuity(ROOT, run, decision, target, postValue, currentValue, entry))) {
+                  sourceIdenticalAcceptanceContinuity(ROOT, run, decision, target, postValue, currentValue, entry))
+                && !(ownerEvidence?.stabilized_source_identical_acceptance_continuities ?? []).some(entry =>
+                  stabilizedSourceIdenticalAcceptanceContinuity(ROOT, run, decision, target, postValue, currentValue, entry))) {
                 error('decision-not-applied', `[${target.id}] accepted_repair no longer matches the reader result`);
               }
               if (decision.verdict === 'reverted_change' && currentSha !== hashValue(preValue)) {
@@ -1873,7 +1877,11 @@ if (command === 'check') {
             }
             if (target?.observed_sha256 && decisionRows.some((row) => repaired.has(row.disposition))
               && currentSha === target.observed_sha256
-              && !priorAppliedRepair(decision, target, decisionRows)) {
+              && !priorAppliedRepair(decision, target, decisionRows)
+              && !(ownerEvidence?.unchanged_page_causal_repairs ?? []).some(entry =>
+                unchangedPageCausalRepair(ROOT, run, decision, target, currentValue, entry, {
+                  activeRows: mine, currentCause: live?.items?.[entry?.cause?.id], ownerEvidence,
+                }))) {
               error('decision-not-applied', `[${target.id}] ${decision.verdict} names a repaired defect but the carrier is unchanged`);
             }
           }

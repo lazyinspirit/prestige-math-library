@@ -1,0 +1,244 @@
+{
+  "order": 400,
+  "id": "matrix-differentiation-and-first-order-spectral-perturbation",
+  "title": "Matrix Differentiation and First-order Spectral Perturbation",
+  "kind": "A",
+  "category": "linear-algebra",
+  "companion": "matrix-differentiation-and-first-order-spectral-perturbation-examples",
+  "requires": [
+    "the-inverse-function-theorem-completed",
+    "the-moore-penrose-pseudoinverse-and-regularised-least-squares"
+  ],
+  "items": [
+    {
+      "id": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+      "kind": "definition",
+      "title": "The real Frechet derivative on real and complex matrix spaces with the Frobenius norm",
+      "deps": [
+        "def-frobenius-matrix-norm"
+      ]
+    },
+    {
+      "id": "prop-matrix-differentials-obey-sum-product-and-adjoint-rules",
+      "kind": "proposition",
+      "title": "Matrix differentials obey the sum rule, product rule, and adjoint rule",
+      "strategy": "Expand $(A+tH)(B+tK)$ and $(A+tH)^*$ to first order and collect the linear terms. The remainder terms are quadratic in $t$, so they vanish after dividing by $t$ in the Frechet-derivative limit.",
+      "deps": [
+        "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+        "def-matrix-product-and-identity-matrix",
+        "thm-matrix-of-the-adjoint-is-the-conjugate-transpose"
+      ]
+    },
+    {
+      "id": "thm-derivative-of-matrix-inversion",
+      "kind": "theorem",
+      "title": "On the invertible locus, $D\\operatorname{inv}(A)[H]=-A^{-1}HA^{-1}$",
+      "strategy": "Differentiate the identity $A(A^{-1})=I$ using the product rule. Solving the resulting linear equation for the derivative of $A^{-1}$ yields the stated formula.",
+      "deps": [
+        "prop-matrix-differentials-obey-sum-product-and-adjoint-rules",
+        "def-invertible-matrix-and-general-linear-group"
+      ]
+    },
+    {
+      "id": "thm-determinant-differential-and-jacobis-formula",
+      "kind": "theorem",
+      "title": "The determinant differential is $D\\det(A)[H]=\\operatorname{tr}(\\operatorname{adj}(A)H)$ at every matrix, and Jacobi's formula holds on the invertible locus",
+      "strategy": "View the determinant as a multilinear function of the columns and isolate the first-order term produced by replacing one column at a time by the perturbation column. On invertible matrices, substitute $\\operatorname{adj}(A)=\\det(A)A^{-1}$ to obtain Jacobi's logarithmic form.",
+      "deps": [
+        "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+        "thm-derivative-of-matrix-inversion",
+        "def-trace-of-a-square-matrix",
+        "def-invertible-matrix-and-general-linear-group"
+      ]
+    },
+    {
+      "id": "prop-differentials-of-trace-and-frobenius-linear-functionals",
+      "kind": "proposition",
+      "title": "Trace and Frobenius-linear matrix functionals differentiate by inspection",
+      "strategy": "For a linear functional, the increment already equals its first-order term, so the derivative is the same linear map. The Frobenius inner-product identification rewrites these linear maps as gradients of the same shape as the input matrix.",
+      "deps": [
+        "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+        "def-trace-of-a-square-matrix",
+        "def-frobenius-matrix-norm"
+      ]
+    },
+    {
+      "id": "prop-gradient-of-a-quadratic-matrix-form",
+      "kind": "proposition",
+      "title": "Matrix quadratic forms have the expected first derivative and Hessian",
+      "strategy": "Expand the quadratic expression at $A+tH$, collect the linear and quadratic terms in $t$, and then identify the coefficients with the Frechet derivative and second derivative under the Frobenius inner product.",
+      "deps": [
+        "prop-matrix-differentials-obey-sum-product-and-adjoint-rules",
+        "prop-differentials-of-trace-and-frobenius-linear-functionals"
+      ]
+    },
+    {
+      "id": "thm-gradient-and-hessian-of-the-frobenius-least-squares-functional",
+      "kind": "theorem",
+      "title": "The Frobenius least-squares objective has gradient $A^*(Ax-b)$ and Hessian $A^*A$ in the vector variable",
+      "strategy": "Write $f(x)=\\frac12\\|Ax-b\\|_2^2$ as the quadratic form of the residual and differentiate using the adjoint and quadratic-form rules. Differentiating once more leaves the constant linear map $A^*A$ as the Hessian.",
+      "deps": [
+        "prop-gradient-of-a-quadratic-matrix-form",
+        "thm-least-squares-solutions-and-normal-equation",
+        "thm-matrix-of-the-adjoint-is-the-conjugate-transpose"
+      ]
+    },
+    {
+      "id": "def-compatible-left-and-right-eigenvectors-for-a-simple-eigenvalue",
+      "kind": "definition",
+      "title": "Compatible left and right eigenvectors for a simple eigenvalue",
+      "deps": [
+        "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+        "cor-a-simple-eigenvalue-has-one-dimensional-eigenspace",
+        "thm-matrix-of-the-adjoint-is-the-conjugate-transpose"
+      ]
+    },
+    {
+      "id": "prop-simple-eigenvalues-admit-left-right-normalization",
+      "kind": "proposition",
+      "title": "For a simple eigenvalue, left and right eigenvectors pair nontrivially and may be normalized by $y^*x=1$",
+      "strategy": "If $y^*x=0$ for every left eigenvector $y$, then the right eigenvector would lie in the range of $A-\\lambda I$, contradicting one-dimensionality of the eigenspace at a simple eigenvalue. Once one nonzero pairing is found, scale one vector to make the pairing equal to one.",
+      "deps": [
+        "def-compatible-left-and-right-eigenvectors-for-a-simple-eigenvalue"
+      ]
+    },
+    {
+      "id": "def-condition-number-of-a-simple-eigenvalue",
+      "kind": "definition",
+      "title": "The normwise condition number of a simple eigenvalue",
+      "deps": [
+        "prop-simple-eigenvalues-admit-left-right-normalization",
+        "def-inner-product-norm"
+      ]
+    },
+    {
+      "id": "def-simple-spectral-projector",
+      "kind": "definition",
+      "title": "The simple spectral projector $P=xy^*/(y^*x)$",
+      "deps": [
+        "prop-simple-eigenvalues-admit-left-right-normalization"
+      ]
+    },
+    {
+      "id": "prop-simple-spectral-projector-is-scale-invariant",
+      "kind": "proposition",
+      "title": "The simple spectral projector is unchanged by nonzero rescalings of the left and right eigenvectors",
+      "strategy": "Rescaling $x$ and $y$ multiplies the numerator and denominator of $xy^*/(y^*x)$ by the same nonzero scalar factor. The quotient is therefore unchanged.",
+      "deps": [
+        "def-simple-spectral-projector"
+      ]
+    },
+    {
+      "id": "def-reduced-resolvent-or-group-inverse-at-a-simple-eigenvalue",
+      "kind": "definition",
+      "title": "The reduced resolvent, or group inverse, on the complementary invariant subspace of a simple eigenvalue",
+      "deps": [
+        "def-simple-spectral-projector",
+        "def-matrix-product-and-identity-matrix"
+      ]
+    },
+    {
+      "id": "prop-reduced-resolvent-identities-for-a-simple-eigenvalue",
+      "kind": "proposition",
+      "title": "The reduced resolvent satisfies the standard projector and inverse identities on the complementary invariant subspace",
+      "strategy": "Split the space into the simple eigendirection and its complementary invariant subspace. On the eigendirection the reduced resolvent vanishes, while on the complement it is the inverse of $A-\\lambda I$; the projector identities follow by comparing the two summands.",
+      "deps": [
+        "def-reduced-resolvent-or-group-inverse-at-a-simple-eigenvalue",
+        "def-simple-spectral-projector"
+      ]
+    },
+    {
+      "id": "thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing",
+      "kind": "theorem",
+      "title": "A simple eigenvalue and a gauge-fixed right eigenvector admit local $C^1$ branches in the underlying real matrix space",
+      "strategy": "Fix a base simple eigenpair and add one scalar gauge condition to the eigenvector equation so the unknowns are the eigenvalue and a normalized vector. The linearization is invertible precisely because the eigenspace is one-dimensional and the gauge removes the scaling freedom, so the parametrized implicit function theorem yields local $C^1$ branches.",
+      "deps": [
+        "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+        "prop-simple-eigenvalues-admit-left-right-normalization",
+        "thm-parametrized-implicit-function-theorem-with-higher-regularity"
+      ]
+    },
+    {
+      "id": "thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x",
+      "kind": "theorem",
+      "title": "Along a differentiable matrix path, a simple eigenvalue satisfies $\\lambda'=y^*A'x$ under the normalization $y^*x=1$",
+      "strategy": "Differentiate the eigenvalue equation $Ax=\\lambda x$ along the local eigenpair branch. Left-multiplying by the corresponding left eigenvector cancels the $Ax'$ term and the normalization leaves exactly the scalar $y^*A'x$.",
+      "deps": [
+        "thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing",
+        "prop-simple-eigenvalues-admit-left-right-normalization"
+      ]
+    },
+    {
+      "id": "prop-simple-eigenvalue-condition-number-is-norm-x-norm-y-over-y-star-x",
+      "kind": "proposition",
+      "title": "The normwise condition number of a simple eigenvalue is $\\|x\\|_2\\|y\\|_2/|y^*x|$",
+      "strategy": "Apply the first-order eigenvalue formula to a perturbation direction of unit spectral norm and maximize the numerator with Cauchy-Schwarz. Equality is attained by a rank-one perturbation aligned with the left and right eigenvectors.",
+      "deps": [
+        "def-condition-number-of-a-simple-eigenvalue",
+        "thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x"
+      ]
+    },
+    {
+      "id": "thm-derivative-of-the-simple-spectral-projector",
+      "kind": "theorem",
+      "title": "The derivative of the simple spectral projector is expressed by the reduced resolvent and the perturbation",
+      "strategy": "Differentiate the identities $P^2=P$, $AP=PA=\\lambda P$, and $Py=x$ in a normalized gauge. Solving the off-eigendirection part with the reduced resolvent yields the standard first-order projector formula with one reduced-resolvent factor on each side of the perturbation.",
+      "deps": [
+        "def-simple-spectral-projector",
+        "prop-reduced-resolvent-identities-for-a-simple-eigenvalue",
+        "thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing"
+      ]
+    },
+    {
+      "id": "thm-gauge-fixed-simple-eigenvector-derivative-formula",
+      "kind": "theorem",
+      "title": "In a fixed gauge, the derivative of a simple right eigenvector is obtained by applying the reduced resolvent to the perturbation",
+      "strategy": "Differentiate $(A-\\lambda I)x=0$ together with the gauge condition. The right-hand side lies in the complementary invariant subspace, so applying the reduced resolvent solves uniquely for the component of $x'$ orthogonal to the gauge direction.",
+      "deps": [
+        "prop-reduced-resolvent-identities-for-a-simple-eigenvalue",
+        "thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x",
+        "thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing"
+      ]
+    },
+    {
+      "id": "cor-hermitian-simple-eigenpair-derivative-simplifications",
+      "kind": "corollary",
+      "title": "For a Hermitian simple eigenvalue, one may take $y=x$ and the first-order formulas simplify accordingly",
+      "strategy": "For a Hermitian matrix, left and right eigenvectors coincide after unit normalization. Substituting $y=x$ into the simple-eigenvalue, projector, and eigenvector derivative formulas gives the Hermitian special case directly.",
+      "deps": [
+        "thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x",
+        "thm-gauge-fixed-simple-eigenvector-derivative-formula",
+        "def-self-adjoint-and-normal-endomorphism"
+      ]
+    },
+    {
+      "id": "thm-directional-derivative-of-a-simple-positive-singular-value",
+      "kind": "theorem",
+      "title": "If $\\sigma>0$ is a simple singular value with left and right singular vectors $u,v$, then its real directional derivative is $\\operatorname{Re}(u^*Hv)$",
+      "strategy": "Write the singular value equation as an eigenvalue problem for the Hermitian block matrix with eigenvalues $\\pm\\sigma$. The positive simple singular value corresponds to a simple Hermitian eigenvalue, so the Hermitian derivative formula transfers back to the stated singular-value derivative.",
+      "deps": [
+        "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+        "thm-singular-value-decomposition",
+        "cor-hermitian-simple-eigenpair-derivative-simplifications"
+      ]
+    },
+    {
+      "id": "cex-a-defective-jordan-block-produces-square-root-eigenvalue-splitting",
+      "kind": "counterexample",
+      "title": "A defective Jordan block can split under perturbation at square-root scale",
+      "strategy": "Perturb the $2\\times2$ Jordan block $\\begin{pmatrix}\\lambda&1\\\\0&\\lambda\\end{pmatrix}$ by a small lower-left entry. The characteristic polynomial becomes $(z-\\lambda)^2-\\varepsilon$, so the two eigenvalues move by $\\pm\\sqrt\\varepsilon$ rather than linearly.",
+      "deps": [
+        "def-eigenvalue-eigenvector-eigenspace-and-spectrum"
+      ]
+    },
+    {
+      "id": "cex-an-ordered-eigenvector-branch-need-not-be-differentiable-through-a-crossing",
+      "kind": "counterexample",
+      "title": "An ordered eigenvector branch need not extend differentiably through an eigenvalue crossing",
+      "strategy": "Take a smooth Hermitian family whose two eigenvalues cross and track eigenvectors ordered by size. Any global ordering must swap the eigendirections at the crossing, so no single differentiable ordered eigenvector branch can pass through that point.",
+      "deps": [
+        "thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing"
+      ]
+    }
+  ]
+}

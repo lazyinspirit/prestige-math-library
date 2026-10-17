@@ -1,0 +1,2266 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "30",
+  "scope": [
+    "alg-dyadic-brownian-bridge-increment-tree",
+    "thm-dyadic-brownian-bridge-tree-increment-laws",
+    "def-predictable-stopping-time-grid",
+    "lem-continuous-adapted-process-at-bounded-stopping-time",
+    "lem-stopping-time-ito-step-interval-sum",
+    "alg-adaptive-euler-maruyama-on-predictable-grid",
+    "lem-finite-budget-adaptive-em-status",
+    "lem-adaptive-em-predictable-grid-second-moment",
+    "thm-adaptive-em-predictable-grid-strong-error",
+    "def-scalar-brownian-bridge-from-x-to-y",
+    "lem-scalar-brownian-bridge-restriction-density",
+    "thm-scalar-brownian-bridge-barrier-crossing-probability",
+    "ex-redrawing-rejected-increment-biases-path",
+    "ex-coarse-fine-em-bridge-coupling",
+    "ex-brownian-bridge-barrier-missed-by-endpoints"
+  ],
+  "page_requirements": [
+    {
+      "consumer_page": "adaptive-stochastic-paths-and-brownian-bridge-coupling",
+      "supplier_page": "milstein-stochastic-taylor-and-iterated-integrals",
+      "supplier_pair": "T13",
+      "supplier_batch": "9",
+      "status": "resolved-navigation-context-body-present",
+      "actual_supplier_item_ids": [
+        "def-milstein-scheme-and-iterated-integrals"
+      ],
+      "required_hypotheses": "No Milstein logical hypothesis is consumed. Actual T13 definition uses deterministic-grid iterated integrals and a Taylor correction absent from the T15 EM update; the page edge remains a curricular/navigation requirement, and its authored body now exists.",
+      "affected_claims": [
+        "pair-level readiness for the declared page requirement"
+      ]
+    }
+  ],
+  "contracts": {
+    "alg-dyadic-brownian-bridge-increment-tree": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: an invocation requires one existing parent interval of positive length."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: h=0 is excluded by the input condition h>0; the output always has two child increments."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: m=1 is allowed and the same scalar split formula defines the two children."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: for any fixed parent the conditional covariance is -(h/4)I_m; the procedure does not require the parent value to be nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the two stored children sum exactly to their parent by the displayed split formulas."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC is explicitly assumed for the Gaussian and Brownian interfaces; each finite list of split requests uses fresh declared innovations."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: Dyadic bridge refinement stores a parent and creates path-consistent Gaussian child increments. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: Dyadic bridge refinement stores a parent and creates path-consistent Gaussian child increments. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [],
+          "uses": [
+            "Definition"
+          ],
+          "declared_in_frontmatter": "AC is stated in the definition as an interface assumption for its Brownian/Gaussian inputs."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "algorithm",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-dyadic-brownian-bridge-tree-increment-laws": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-dyadic-brownian-bridge-increment-tree",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as in the finite-dimensional Gaussian and Brownian\ninterfaces. Let a node represent an interval $[u,u+h]$, where $h>0$, and let\n$\\Delta W\\in\\mathbb R^m$ be its already sampled parent increment. Draw a fresh\nvector $Z\\sim N_m(0,(h/4)I_m)$ independently of the parent and of every\ninnovation used at another node. Store the two child increments\n$$\\Delta W_L=\\tfrac12\\Delta W+Z,\\qquad \\Delta W_R=\\tfrac12\\Delta W-Z.$$\n\nFor a finite ordered list of $q\\in\\mathbb N_0$ split requests, each naming an\nexisting leaf, apply the rule once to each requested leaf and retain every\nparent. Process a rejected trial's left child before its right child; if a\nchild is later refined, draw a new independent innovation for it. Each request\nreplaces one leaf by two children, so the result is a finite rooted tree with\nthe sampled increments, interval lengths, and left-to-right order. Never\ndiscard a sampled parent and redraw a replacement for the same interval. The\nprocedure assigns increments at dyadic tree nodes; it does not by itself\ndefine values at nondyadic times or prove that the node-selection rule is\npredictable. In an adaptive run, a finite work budget supplies a finite list\nof requests.\n\nThe independence assertion for the two children is unconditional before the\nparent is revealed. Conditional on a fixed parent, their sum is fixed and their\nconditional covariance is $-(h/4)I_m$; they are not conditionally independent.\nThe exact fixed-depth Brownian increment law is proved separately on the A page.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $D\\sim N_m(0,\\ell I_m)$ and let $Z\\sim N_m(0,(\\ell/4)I_m)$ be independent. Put $L=D/2+Z$ and $R=D/2-Z$. The vector $(L,R)$ is a linear image of the independent jointly Gaussian pair $(D,Z)$, so it is jointly Gaussian. Its means are zero, and direct covariance expansion gives $\\operatorname{Cov}(L)=\\operatorname{Cov}(R)=\\tfrac14\\ell I_m+\\tfrac14\\ell I_m=\\tfrac\\ell2I_m,$ $\\operatorname{Cov}(L,R)=\\tfrac14\\ell I_m-\\tfrac14\\ell I_m=0.$ Also $L+R=D$ identically.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The joint Gaussian characteristic function of $(L,R)$ from [F2] has zero cross-covariance blocks by step 1.1, so it factors into the product of the characteristic functions of $N_m(0,(\\ell/2)I_m)$ in the two blocks. Uniqueness of the multivariate normal law in [F2] therefore gives independent children with those marginal laws. If one conditions on $D$, the common $D/2$ term is fixed and the remaining terms are $Z$ and $-Z$, so their conditional cross-covariance is $-\\operatorname{Cov}(Z)=-(\\ell/4)I_m$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At depth $0$ the assertion is the root law. Suppose the increments at depth $k$ are mutually independent with law $N_m(0,(h/2^k)I_m)$. The fresh innovations at depth $k$ are mutually independent and independent of the entire parent family by the input construction. Therefore the pairs consisting of each parent and its own innovation are mutually independent across the depth-$k$ nodes. For each such pair, step 2.1 gives the unconditional joint law of its two children: they are independent $N_m(0,(h/2^{k+1})I_m)$ vectors. Since child pairs from distinct parents are measurable functions of disjoint independent parent-innovation pairs, those pairs are mutually independent as well. Hence all depth-$(k+1)$ increments are mutually independent with the claimed law.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Finite induction from step 3.1 proves the assertion for every fixed $r$. The case $r=0$ is the root law; every interval has positive length by $h>0$, so zero-length nodes are excluded. Sum consistency holds at each node by step 1.1. The result concerns each fixed finite tree, not a claim that an endpoint-selected random traversal is predictable. AC enters only through [A1].",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: a root increment with h>0 and m>=1 is required; there is no empty tree input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: h>0 is a hypothesis, so zero-length nodes are excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 4.1: r=0 is the root-law case, with no split required."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1: the conditional child covariance is computed even for a fixed parent; no nonzero parent is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1: every internal parent equals the sum of its two children; step 4.1 covers the terminal depth."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 4.1: AC enters only through [A1], as declared in the statement and facts."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: At each fixed finite depth the dyadic tree increments have the exact independent Gaussian laws and parent-sum consistency. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: At each fixed finite depth the dyadic tree increments have the exact independent Gaussian laws and parent-sum consistency. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "4.1"
+          ],
+          "declared_in_frontmatter": "AC is explicitly assumed or inherited through the Brownian, Gaussian, filtration, or Itô interface; the item proof identifies its role in [A1]."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "4.1"
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "scalar-single-split",
+          "model": "m=1, h=4, r=1; D~N(0,4), Z~N(0,1) independent.",
+          "result": "Var(D/2+Z)=Var(D/2-Z)=2, Cov(D/2+Z,D/2-Z)=0, and the two children sum to D.",
+          "evidence": "Proof steps 1.1–2.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "theorem",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-predictable-stopping-time-grid": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: T>0 and strict positive active step lengths force at least one interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: active lengths satisfy h_n>0; the extension after N sets h_n=0 to mark completed indices."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: N=1 is allowed and gives the single interval [0,T]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: no lower bound on positive step lengths is imposed; only h_n<=h_max is required."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the grid begins at tau_0=0 and terminates at tau_N=T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: the grid conditions are deterministic measurability and stopping-time requirements; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: A predictable grid is a finite random partition selected using information at its left endpoints. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: A predictable grid is a finite random partition selected using information at its left endpoints. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [],
+      "axiom_uses": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "definition",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-continuous-adapted-process-at-bounded-stopping-time": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-natural-and-usual-augmented-brownian-filtrations",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $B$ be a standard Brownian motion on a\nprobability space $(\\Omega,\\mathcal F,P)$ [[def-brownian-motion]]. First\nreplace the ambient space by its completion, retaining the notation\n$(\\Omega,\\mathcal F,P)$ for this extension. This is supplied by\n[[thm-completion-of-a-measure-space]]; AC supplies its countable-choice\nhypothesis by [[lem-ac-supplies-sequential-choices-for-probability-constructions]].\nThe coordinate functions, their laws, and their raw sigma-algebras are unchanged.\nFour families are distinguished.\n\n1. **Raw natural filtration.** $\\mathcal F^0_t:=\\sigma(B_s:0\\le s\\le t)$ for\n   $t\\ge0$, and $\\mathcal F^0_\\infty:=\\sigma\\bigl(\\bigcup_{t\\ge0}\\mathcal F^0_t\\bigr)\n   =\\sigma(B_s:s\\ge0)$. Both sigma-algebras exist by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]], and\n   $(\\mathcal F^0_t)_{t\\ge0}$ is a continuous-time filtration in the sense of\n   [[def-continuous-time-filtration-and-all-pairs-martingale]], the smallest one\n   to which $B$ is adapted. It contains no completion and no right-continuous\n   augmentation.\n2. **Raw right limit.** $\\mathcal F^0_{t+}:=\\bigcap_{u>t}\\mathcal F^0_u$ for\n   $t\\ge0$. At $t=0$ this is the germ sigma-algebra used later on this page;\n   the uncountable intersection is the decreasing intersection over the\n   rational $u>t$, since $t\\mapsto\\mathcal F^0_t$ is increasing. No null\n   sets are adjoined in this operation.\n3. **Ambient null ideal and completed raw filtration.** Let\n   $$\\mathcal N:=\\{M\\subseteq\\Omega:\\text{there is }N_0\\in\\mathcal F\\text{ with }P(N_0)=0\\text{ and }M\\subseteq N_0\\}$$\n   be the family of all subsets of ambient $P$-null events. These sets are\n   ambient-measurable because the ambient probability space was completed.\n   This is a sigma-ideal: for a countable family choose null envelopes using\n   AC, then take their union; subsets require the same envelope.\n   Nullness follows from\n   [[prop-null-sets-form-a-sigma-ideal-in-a-complete-space]]. Put\n   $$\\overline{\\mathcal F}{}^0_t:=\\sigma\\bigl(\\mathcal F^0_t\\cup\\mathcal N\\bigr),\\qquad t\\ge0 .$$\n   Each $\\overline{\\mathcal F}{}^0_t$ is a sub-sigma-algebra of $\\mathcal F$,\n   contains every member of $\\mathcal N$, and\n   $\\overline{\\mathcal F}{}^0_s\\subseteq\\overline{\\mathcal F}{}^0_t$ for\n   $s\\le t$, so $(\\overline{\\mathcal F}{}^0_t)_{t\\ge0}$ is a filtration.\n4. **Usual augmentation.** $\\mathcal F_t:=\\bigcap_{u>t}\\overline{\\mathcal F}{}^0_u$\n   for $t\\ge0$.\n\nThe following facts are part of the definition and are the form in which it is\nused later.\n\n(a) $\\mathcal F^0_t\\subseteq\\overline{\\mathcal F}{}^0_t\\subseteq\\mathcal F_t$\n    for every $t\\ge0$, and every $\\mathcal F_t$ contains $\\mathcal N$.\n(b) $(\\mathcal F_t)_{t\\ge0}$ is increasing and **right-continuous**: for every\n    $t\\ge0$,\n    $$\\bigcap_{s>t}\\mathcal F_s=\\mathcal F_t .$$\n    Indeed, if $A\\in\\bigcap_{s>t}\\mathcal F_s$, fix $u>t$ and take\n    $s=(t+u)/2$. Then $A\\in\\mathcal F_s\\subseteq\\overline{\\mathcal F}{}^0_u$.\n    Since $u>t$ was arbitrary, $A\\in\\mathcal F_t$. Conversely\n    $t\\le s$ gives $\\mathcal F_t\\subseteq\\mathcal F_s$, because\n    $\\overline{\\mathcal F}{}^0$ is increasing and the intersection defining\n    $\\mathcal F_t$ ranges over the larger parameter set $\\{u>t\\}\\supseteq\\{u>s\\}$,\n    so $\\mathcal F_t\\subseteq\\bigcap_{s>t}\\mathcal F_s$.\n(c) **Every completed set differs from a raw set by a null set.** Let\n    $$\\mathcal D_t:=\\{A\\subseteq\\Omega:\\text{there is }A_0\\in\\mathcal F^0_t \\text{ and }M\\in\\mathcal N\\text{ with }A\\triangle A_0\\subseteq M\\}.$$\n    Then $\\mathcal D_t$ is a sigma-algebra containing\n    $\\mathcal F^0_t\\cup\\mathcal N$: complementation preserves symmetric\n    difference, and, after selecting countably many witnesses by AC,\n    $$(\\bigcup_k A_k)\\triangle(\\bigcup_k A_{0,k})\\subseteq\\bigcup_k(A_k\\triangle A_{0,k})\\subseteq\\bigcup_k M_k\\in\\mathcal N.$$\n    Thus $\\overline{\\mathcal F}{}^0_t\\subseteq\\mathcal D_t$. Conversely,\n    if $A\\triangle A_0\\subseteq M\\in\\mathcal N$, then\n    $A\\triangle A_0\\in\\mathcal N$, so\n    $A=A_0\\triangle(A\\triangle A_0)\\in\\overline{\\mathcal F}{}^0_t$.\n    This proves equality, and also ambient measurability of every $A\\in\\mathcal D_t$.\n    In particular, for\n    $A\\in\\overline{\\mathcal F}{}^0_t$ one has $P(A)=P(A_0)$ for such an $A_0$,\n    and $\\int_AX\\,dP=\\int_{A_0}X\\,dP$ for every integrable real or complex $X$,\n    by [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]\n    applied to $X1_A$ and $X1_{A_0}$. Apply it to indicators for the measure\n    equality. If $P(A)=0$, its raw representative $A_0$ is null, so\n    $A\\subseteq A_0\\cup M$ is contained in an ambient null envelope.\n    Every subset of $A$ therefore belongs to $\\mathcal N$.\n    This proves completeness of each $\\overline{\\mathcal F}{}^0_t$.\n    It also proves completeness of $\\mathcal F_t$: a null member belongs\n    to $\\overline{\\mathcal F}{}^0_{t+1}$ and hence all its subsets belong to\n    $\\mathcal N\\subseteq\\mathcal F_t$. Thus every ambient null event and\n    every one of its subsets belongs already to $\\mathcal F_0$; together\n    with right-continuity, this is the usual-conditions convention used below.\n(d) The four families $\\mathcal F^0_t$, $\\mathcal F^0_{t+}$,\n    $\\overline{\\mathcal F}{}^0_t$ and $\\mathcal F_t$ are kept distinct in every\n    statement below. The strong Markov theorem is stated for $(\\mathcal F_t)$\n    and the deterministic Markov theorems are stated for both $(\\mathcal F^0_t)$\n    and $(\\mathcal F_t)$; the companion examples page carries a counterexample\n    showing that $\\mathcal F^0_{0+}\\ne\\mathcal F^0_0$ in the canonical\n    realization.\n\nThe raw filtration remains raw even though the ambient measure has been\ncompleted; no null set is removed from $\\Omega$. Choice is used for the\ncompletion theorem and the countable witnesses above, and is also inherited\nfrom the ambient Brownian construction.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-continuous-time-stopping-time",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and let\n$(\\mathcal F_t)_{t\\ge0}$ be a continuous-time filtration\n[[def-continuous-time-filtration-and-all-pairs-martingale]].\n\n1. A map $\\tau:\\Omega\\to[0,\\infty]$ (infinite values allowed) is a **stopping\n   time** for $(\\mathcal F_t)$ when\n   $$\\{\\tau\\le t\\}\\in\\mathcal F_t\\qquad\\text{for every }t\\ge0 .$$\n2. For a stopping time $\\tau$ its **stopped sigma-algebra** is\n   $$\\mathcal F_\\tau:=\\{A\\in\\mathcal F:A\\cap\\{\\tau\\le t\\}\\in\\mathcal F_t \\text{ for every }t\\ge0\\}.$$\n\nThe following facts are used below, and each is a direct set computation.\n\n(a) $\\mathcal F_\\tau$ is a sigma-algebra: $\\emptyset\\cap\\{\\tau\\le\n    t\\}=\\emptyset\\in\\mathcal F_t$; for $A\\in\\mathcal F_\\tau$ one has\n    $A^c\\cap\\{\\tau\\le t\\}=\\{\\tau\\le t\\}\\setminus(A\\cap\\{\\tau\\le t\\})\\in\\mathcal\n    F_t$; and for a sequence $A_n\\in\\mathcal F_\\tau$ the union satisfies\n    $\\bigl(\\bigcup_nA_n\\bigr)\\cap\\{\\tau\\le t\\}=\\bigcup_n(A_n\\cap\\{\\tau\\le\n    t\\})\\in\\mathcal F_t$. All operations are literal, not modulo null sets, and\n    no completeness of the filtration is assumed.\n(b) If $\\tau\\equiv t_0<\\infty$ is deterministic, then\n    $A\\cap\\{\\tau\\le t\\}$ is $A$ for $t\\ge t_0$ and $\\emptyset$ for $t<t_0$, so\n    $\\mathcal F_\\tau=\\bigcap_{t\\ge t_0}\\mathcal F_t=\\mathcal F_{t_0}$, where\n    the last equality follows because the intersection includes its least\n    member $\\mathcal F_{t_0}$. If $\\tau\\equiv\\infty$, then every test event\n    $\\{\\tau\\le t\\}$ is empty and $\\mathcal F_\\tau=\\mathcal F$.\n(c) Suppose the filtration is right-continuous. Then $\\tau$ is a stopping time\n    if and only if $\\{\\tau<t\\}\\in\\mathcal F_t$ for every $t>0$. Indeed\n    $$\\{\\tau<t\\}=\\bigcup_{n\\ge1}\\{\\tau\\le t-\\tfrac1n\\}$$\n    (with the terms for $t-\\tfrac1n<0$ read as the empty set, since\n    $\\tau\\ge0$), which gives the forward implication; conversely\n    $$\\{\\tau\\le t\\}=\\bigcap_{n\\ge1}\\{\\tau<t+\\tfrac1n\\},$$\n    and $\\bigcap_n\\mathcal F_{t+1/n}=\\bigcap_{s>t}\\mathcal F_s=\\mathcal F_t$ by\n    right-continuity together with monotonicity of the filtration.\n(d) Under the same right-continuity assumption, for $A\\in\\mathcal F$ one has\n    $A\\in\\mathcal F_\\tau$ if and only if $A\\cap\\{\\tau<t\\}\\in\\mathcal F_t$ for\n    every $t>0$: the forward implication follows from\n    $A\\cap\\{\\tau<t\\}=\\bigcup_n(A\\cap\\{\\tau\\le t-\\tfrac1n\\})$ and the converse\n    from $A\\cap\\{\\tau\\le t\\}=\\bigcap_n(A\\cap\\{\\tau<t+\\tfrac1n\\})$ together with\n    $\\bigcap_n\\mathcal F_{t+1/n}=\\mathcal F_t$.\n\nBecause the two versions of each test are interchangeable exactly when the\nfiltration is right-continuous, the convention is recorded here once: the\nBrownian strong Markov theorem is stated for the usual augmentation, which is\nright-continuous, and the raw-filtration statements use the non-strict test\ndirectly. No choice principle is used by this definition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-continuous-time-filtration-and-all-pairs-martingale",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. On a probability space\n$(\\Omega,\\mathcal F,P)$, a **continuous-time filtration** is a family\n$(\\mathcal F_t)_{t\\ge0}$ of sub-sigma-algebras of $\\mathcal F$ such that\n$\\mathcal F_s\\subseteq\\mathcal F_t$ whenever $0\\le s\\le t$. A process\n$X=(X_t)_{t\\ge0}$ is **adapted** when $X_t$ is measurable from\n$(\\Omega,\\mathcal F_t)$ to its state space at every $t$.\n\nFor any process of random elements $X=(X_t)_{t\\ge0}$, its **natural\nfiltration** is\n\n$$\\mathcal F_t^X=\\sigma\\!\\left(\\{X_u^{-1}(C):0\\le u\\le t,\\ C\\text{ measurable in the state space of }X_u\\}\\right).$$\n\nThe generated sigma-algebra exists by\n[[thm-generated-sigma-algebra-exists-and-is-minimal]]. Its generator families\nare nested in $t$, so $(\\mathcal F_t^X)_{t\\ge0}$ is a filtration; every\n$X_t$ is $\\mathcal F_t^X$-measurable, and minimality makes this the smallest\nfiltration to which $X$ is adapted. No completion or right-continuous\naugmentation is included.\n\nA real process $M=(M_t)_{t\\ge0}$ is an **all-pairs continuous-time\nmartingale** relative to $(\\mathcal F_t)$ when:\n\n1. $M$ is adapted;\n2. $E|M_t|<\\infty$ for every $t\\ge0$; and\n3. for every $0\\le s\\le t$,\n   $$E[M_t\\mid\\mathcal F_s]=M_s\\qquad\\text{almost surely}.$$\n\nThe equality in clause 3 is equality of the almost-everywhere classes in\n[[def-conditional-expectation-as-an-ae-class]]. At $s=t$ it is the\nknown-variable identity. The word “continuous-time” specifies the index set;\nit does not assert path continuity. Likewise the definition imposes neither\nright continuity nor completeness on the filtration. AC is declared exactly\nbecause the library's conditional-expectation existence theorem uses it; the\nfiltration, adaptation, and natural-filtration constructions make no choices.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $t\\in(0,T]$ and, for each integer $n\\ge1$, form the deterministic grid $G_{n,t}=\\{kt2^{-n}:0\\le k\\le2^n\\}$. Let $\\tau_{n,t}$ be the least point of $G_{n,t}$ greater than or equal to $\\tau\\wedge t$. For $s<t$, $\\{\\tau_{n,t}\\le s\\}=\\bigcup_{q\\in G_{n,t},\\ q\\le s}\\{\\tau\\le q\\}\\in\\mathcal F_s$ by [F2] and [F3]; for $s\\ge t$ the event is all of $\\Omega$. Thus $\\tau_{n,t}$ is a finite-valued stopping time, $\\tau_{n,t}\\le t$, and $\\tau_{n,t}\\downarrow\\tau\\wedge t$. Each event $\\{\\tau_{n,t}=q\\}$ belongs to $\\mathcal F_q$ by subtracting consecutive sublevel events, so the finite-valued variable $X_{\\tau_{n,t}}$ is $\\mathcal F_t$-measurable by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $Z_t$ as the limit of $X_{\\tau_{n,t}}$ where that finite vector limit exists, and as $0$ otherwise. Since each approximant is $\\mathcal F_t$-measurable, $Z_t$ is $\\mathcal F_t$-measurable. On $\\{\\tau\\le t\\}$ and on the full-probability continuity event, $\\tau_{n,t}\\downarrow\\tau$ and continuity gives $Z_t=X_\\tau$. The case $t=0$ follows directly from $\\tau\\wedge0=0$ and $Z_0=X_0$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "given",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any Borel set $C\\subseteq\\mathbb R^d$, the events $\\{X_\\tau\\in C\\}\\cap\\{\\tau\\le t\\}$ and $\\{Z_t\\in C\\}\\cap\\{\\tau\\le t\\}$ differ only on the measurable null set where path continuity may fail. The second event is in $\\mathcal F_t$ by [F2] and step 2.1; [F1] places their symmetric difference in $\\mathcal F_t$, so the first event is in $\\mathcal F_t$. At $t=T$ this also gives $\\{X_\\tau\\in C\\}\\in\\mathcal F_T$. All tests in [F2] hold, proving $X_\\tau\\in\\mathcal F_\\tau$. AC enters only through [A1].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the process has positive finite dimension and a bounded stopping time is supplied; an empty process is outside the input type."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: when tau=0, every upper grid approximation equals 0 and X_tau=X_0 is F_0-measurable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: d=1 is included; the proof applies to each finite-dimensional coordinate without a dimension-specific argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: a constant continuous path gives X_tau=X_0, which is measurable at F_0 and hence at F_tau."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 and step 3.1: tau=0 is direct and tau=T is covered by the F_T event test."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1: AC is inherited through the filtration convention [A1]; the proof uses explicit finite dyadic grids and no further selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: A continuous adapted process evaluated at a bounded stopping time is measurable in the stopped sigma-algebra. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: A continuous adapted process evaluated at a bounded stopping time is measurable in the stopped sigma-algebra. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "3.1"
+          ],
+          "declared_in_frontmatter": "AC is explicitly assumed or inherited through the Brownian, Gaussian, filtration, or Itô interface; the item proof identifies its role in [A1]."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "3.1"
+          ]
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "lemma",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-stopping-time-ito-step-interval-sum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-square-integrable-predictable-step-ito-integral-is-finite-sum",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix $T>0$ and a finite partition $0=t_0<t_1<\\cdots<t_N=T$.\nLet $W$ be a scalar Brownian motion adapted to $(\\mathcal F_t)$, with\n$W_t-W_s$ independent of $\\mathcal F_s$ and distributed as $N(0,t-s)$ for\nevery $0\\le s<t\\le T$. If each $\\xi_k$ is real-valued,\n$\\mathcal F_{t_k}$-measurable and square-integrable, then the predictable\nstep process\n$$H_s=\\sum_{k=0}^{N-1}\\xi_k1_{(t_k,t_{k+1}]}(s)$$\nis square-integrable. Every continuous version of its Itô integral agrees, at every time on one\nmeasurable event of probability one, with\n$$S_t=\\sum_{k=0}^{N-1}\\xi_k\\bigl(W_{t\\wedge t_{k+1}}-W_{t\\wedge t_k}\\bigr),\\qquad 0\\le t\\le T.$$\nIf the probability space is complete, this agreement is indistinguishability.\nThe coefficients need not be bounded.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-ito-isometry-and-linearity-in-predictable-l2",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Fix $T>0$. For predictable\n$H,K$ with finite energy $E\\int_0^TH^2ds,E\\int_0^TK^2ds<\\infty$ the integrals\n$\\int_0^TH\\,dB$ of\n[[def-ito-integral-for-square-integrable-predictable-processes]] satisfy\n$$\\int_0^T(H+K)\\,dB=\\int_0^TH\\,dB+\\int_0^TK\\,dB,\\qquad \\int_0^T(aH)\\,dB=a\\int_0^TH\\,dB\\quad(a\\in\\mathbb R),$$\nand the identities are equalities of $L^2(P)$-classes (almost sure\nequalities). Moreover the map $H\\mapsto\\int_0^TH\\,dB$ is an isometry,\n$$E\\Bigl(\\int_0^TH\\,dB\\Bigr)^2=E\\int_0^TH^2ds=\\|H\\|^2_{L^2(\\mathrm dt\\otimes P)},$$\nit takes values in the mean-zero subspace of $L^2(P)$, and the bilinear cross\nidentity\n$$E\\Bigl[\\Bigl(\\int_0^TH\\,dB\\Bigr)\\Bigl(\\int_0^TK\\,dB\\Bigr)\\Bigr]=E\\int_0^TH_sK_s\\,ds$$\nholds for all such $H,K$. In particular the image of the map is a closed\nsubspace of $L^2(P)$ isometric to the predictable $L^2$ space of $H$'s, and\n$H\\mapsto\\int_0^TH\\,dB$ is injective up to the $(\\mathrm dt\\otimes P)$-class.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-continuous-time-stopping-time",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and let\n$(\\mathcal F_t)_{t\\ge0}$ be a continuous-time filtration\n[[def-continuous-time-filtration-and-all-pairs-martingale]].\n\n1. A map $\\tau:\\Omega\\to[0,\\infty]$ (infinite values allowed) is a **stopping\n   time** for $(\\mathcal F_t)$ when\n   $$\\{\\tau\\le t\\}\\in\\mathcal F_t\\qquad\\text{for every }t\\ge0 .$$\n2. For a stopping time $\\tau$ its **stopped sigma-algebra** is\n   $$\\mathcal F_\\tau:=\\{A\\in\\mathcal F:A\\cap\\{\\tau\\le t\\}\\in\\mathcal F_t \\text{ for every }t\\ge0\\}.$$\n\nThe following facts are used below, and each is a direct set computation.\n\n(a) $\\mathcal F_\\tau$ is a sigma-algebra: $\\emptyset\\cap\\{\\tau\\le\n    t\\}=\\emptyset\\in\\mathcal F_t$; for $A\\in\\mathcal F_\\tau$ one has\n    $A^c\\cap\\{\\tau\\le t\\}=\\{\\tau\\le t\\}\\setminus(A\\cap\\{\\tau\\le t\\})\\in\\mathcal\n    F_t$; and for a sequence $A_n\\in\\mathcal F_\\tau$ the union satisfies\n    $\\bigl(\\bigcup_nA_n\\bigr)\\cap\\{\\tau\\le t\\}=\\bigcup_n(A_n\\cap\\{\\tau\\le\n    t\\})\\in\\mathcal F_t$. All operations are literal, not modulo null sets, and\n    no completeness of the filtration is assumed.\n(b) If $\\tau\\equiv t_0<\\infty$ is deterministic, then\n    $A\\cap\\{\\tau\\le t\\}$ is $A$ for $t\\ge t_0$ and $\\emptyset$ for $t<t_0$, so\n    $\\mathcal F_\\tau=\\bigcap_{t\\ge t_0}\\mathcal F_t=\\mathcal F_{t_0}$, where\n    the last equality follows because the intersection includes its least\n    member $\\mathcal F_{t_0}$. If $\\tau\\equiv\\infty$, then every test event\n    $\\{\\tau\\le t\\}$ is empty and $\\mathcal F_\\tau=\\mathcal F$.\n(c) Suppose the filtration is right-continuous. Then $\\tau$ is a stopping time\n    if and only if $\\{\\tau<t\\}\\in\\mathcal F_t$ for every $t>0$. Indeed\n    $$\\{\\tau<t\\}=\\bigcup_{n\\ge1}\\{\\tau\\le t-\\tfrac1n\\}$$\n    (with the terms for $t-\\tfrac1n<0$ read as the empty set, since\n    $\\tau\\ge0$), which gives the forward implication; conversely\n    $$\\{\\tau\\le t\\}=\\bigcap_{n\\ge1}\\{\\tau<t+\\tfrac1n\\},$$\n    and $\\bigcap_n\\mathcal F_{t+1/n}=\\bigcap_{s>t}\\mathcal F_s=\\mathcal F_t$ by\n    right-continuity together with monotonicity of the filtration.\n(d) Under the same right-continuity assumption, for $A\\in\\mathcal F$ one has\n    $A\\in\\mathcal F_\\tau$ if and only if $A\\cap\\{\\tau<t\\}\\in\\mathcal F_t$ for\n    every $t>0$: the forward implication follows from\n    $A\\cap\\{\\tau<t\\}=\\bigcup_n(A\\cap\\{\\tau\\le t-\\tfrac1n\\})$ and the converse\n    from $A\\cap\\{\\tau\\le t\\}=\\bigcap_n(A\\cap\\{\\tau<t+\\tfrac1n\\})$ together with\n    $\\bigcap_n\\mathcal F_{t+1/n}=\\mathcal F_t$.\n\nBecause the two versions of each test are interchangeable exactly when the\nfiltration is right-continuous, the convention is recorded here once: the\nBrownian strong Markov theorem is stated for the usual augmentation, which is\nright-continuous, and the raw-filtration statements use the non-strict test\ndirectly. No choice principle is used by this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-brownian-motion",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A real process\n$B=(B_t)_{t\\ge0}$ is a **standard Brownian motion** if:\n\n1. $B_0=0$ almost surely;\n2. for every finite list $0=t_0<t_1<\\cdots<t_n$, the increments\n   $B_{t_j}-B_{t_{j-1}}$ are mutually independent and have laws\n   $N(0,t_j-t_{j-1})$; and\n3. there is one measurable event $A$ with $P(A)=1$ such that\n   $t\\mapsto B_t(\\omega)$ is continuous on $[0,\\infty)$ for every\n   $\\omega\\in A$.\n\nBy\n[[lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments]],\nthe first two clauses are equivalent to saying that $B$ is a centered Gaussian\nprocess with covariance $\\min(s,t)$. Clause 3 is additional: it cannot be\nrecovered from finite-dimensional distributions alone.\n\nNo filtration is part of this definition. In particular, no completed or\nright-continuous filtration and no Markov or martingale assertion is silently\nimposed. Modifications and indistinguishability retain the distinct meanings in\n[[def-law-modification-and-indistinguishability-of-processes]]. The cases\n$n=0$, $t_1=0$, and zero-length increments are respectively vacuous or already\ncovered by $B_0=0$; the increment list itself is strictly increasing.\n\nChoice is declared because the normal-law and Gaussian/increment-equivalence\ninterfaces construct and identify normal laws under AC. The continuity clause\nselects no path and makes no additional use of choice.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-continuous-adapted-process-at-bounded-stopping-time",
+          "source_section": "Statement",
+          "quote": "Assume AC and use the usual augmented Brownian filtration of\n[[def-natural-and-usual-augmented-brownian-filtrations]]. Let\n$X=(X_t)_{0\\le t\\le T}$ be an adapted, finite-dimensional real process with\ncontinuous paths on a measurable event of probability one. If $\\tau$ is a\nstopping time with $0\\le\\tau\\le T$, then the stopped random vector $X_\\tau$\nis $\\mathcal F_\\tau$-measurable.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ito-integral-process-has-a-continuous-martingale-version",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $H$ be a predictable\nprocess with $E\\int_0^TH_s^2ds<\\infty$ for every finite $T$. Then there is an\nadapted process $M=(M_t)_{t\\ge0}$ with continuous paths such that\n$M_t=\\int_0^tH_s\\,dB_s$ almost surely for every $t\\ge0$\n[[def-ito-integral-for-square-integrable-predictable-processes]], and $M$ is a\nsquare-integrable martingale relative to $(\\mathcal F_t)$\n[[def-continuous-time-adapted-process-and-martingale]]: $EM_t^2=E\\int_0^tH_s^2ds<\\infty$\nfor every $t$. Any two such continuous versions agree at every time on one\nmeasurable event of probability one; in particular the continuous version is\nunique in this common-full-measure-event sense, and it is the only continuous\nsquare-integrable martingale whose value at each deterministic $t$ is the\nintegral class.\n\nThis conclusion is deliberately distinguished from the exact definition of\nindistinguishability in\n[[def-law-modification-and-indistinguishability-of-processes]]. On a\nnoncomplete probability space the full equality set, although it contains the\nmeasurable probability-one event constructed below, need not itself be\nmeasurable. On a complete probability space the two notions coincide, because\nthe complement of the equality set is then a measurable subset of a null set.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First verify that $H_s=\\xi1_{(\\tau,\\sigma]}(s)$ is predictable pointwise. For $s>0$ and Borel $C\\subseteq\\mathbb R$, put $A_C=\\{\\xi\\in C\\}\\in\\mathcal F_\\tau$. Then\n$$A_C\\cap\\{\\tau<s\\}=\\bigcup_{q\\in\\mathbb Q\\cap[0,s)}A_C\\cap\\{\\tau\\le q\\}\\in\\mathcal F_s,$$\nand $\\{\\sigma\\ge s\\}=\\{\\sigma<s\\}^c\\in\\mathcal F_s$, since $\\{\\sigma<s\\}=\\bigcup_{q\\in\\mathbb Q\\cap[0,s)}\\{\\sigma\\le q\\}$. With $E_s=\\{\\tau<s\\}\\cap\\{\\sigma\\ge s\\}$, both $E_s$ and $A_C\\cap E_s$ belong to $\\mathcal F_s$. The preimage $\\{H_s\\in C\\}$ is $A_C\\cap E_s$ if $0\\notin C$, and $(A_C\\cap E_s)\\cup E_s^c$ if $0\\in C$; thus it belongs to $\\mathcal F_s$. Thus $H$ is adapted. Its paths are left-continuous and $H_0=0$. On the nested deterministic grids $t_j^{(r)}=jT2^{-r}$, define $P^{(r)}_0=0$ and $P^{(r)}_s=H_{t_j^{(r)}}$ on each cell $(t_j^{(r)},t_{j+1}^{(r)}]$. Each $P^{(r)}$ is predictable by [F2]; the left endpoints of the cells containing any fixed $s>0$ increase to $s$ from below, so left-continuity gives $P^{(r)}_s\\to H_s$. Hence $H$ is a pointwise limit of predictable processes and is predictable. Now let $\\delta_n=T2^{-n}$, and round each stopping time upward to the next point of this deterministic grid: $\\tau_n=\\delta_n\\lceil\\tau/\\delta_n\\rceil$ and $\\sigma_n=\\delta_n\\lceil\\sigma/\\delta_n\\rceil$. The stopping-time test shows these are finite-valued stopping times, $\\tau_n\\le\\sigma_n$, $\\tau_n\\downarrow\\tau$, and $\\sigma_n\\downarrow\\sigma$. On a grid cell $(t_k,t_{k+1}]$, the process $H^n=\\xi1_{(\\tau_n,\\sigma_n]}$ has coefficient $\\xi1_{\\{\\tau_n\\le t_k<\\sigma_n\\}}$. This coefficient is $\\mathcal F_{t_k}$-measurable: the active event is in $\\mathcal F_{t_k}$, and $\\xi$ restricted to $\\{\\tau_n\\le t_k\\}=\\{\\tau\\le t_k\\}$ is $\\mathcal F_{t_k}$-measurable by [F2]. Thus $H^n$ is a finite predictable step process.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The intervals $(\\tau_n,\\sigma_n]$ and $(\\tau,\\sigma]$ differ in Lebesgue measure by at most $2\\delta_n$ on each path. Hence $\\mathbb E\\int_0^T|H^n_s-H_s|^2ds\\le 2\\delta_n\\mathbb E|\\xi|^2\\longrightarrow0.$ Also $\\mathbb E\\int_0^TH_s^2ds=\\mathbb E[|\\xi|^2(\\sigma-\\tau)]\\le T\\mathbb E|\\xi|^2<\\infty$. The predictable $L^2$ space is closed under almost-everywhere limits: since the displayed squared errors are summable in $n$, Tonelli implies $H^n\\to H$ for $dt\\otimes P$-almost every $(s,\\omega)$; therefore $H$ has a predictable representative.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F1] to the deterministic-grid representation of $H^n$. The active cells are consecutive, so their finite sum telescopes and gives $\\int_0^tH^n_s\\,dW_s=\\xi\\bigl(W_{t\\wedge\\sigma_n}-W_{t\\wedge\\tau_n}\\bigr)$ almost surely for every fixed $t$. By the isometry in [F1] and step 1.2 the left side converges in $L^2$ to $\\int_0^tH_s\\,dW_s$. By [F3], path continuity and the endpoint convergence imply that the right side converges almost surely to $\\xi(W_{t\\wedge\\sigma}-W_{t\\wedge\\tau})$. Uniqueness of limits in probability identifies the two limits almost surely.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply step 2.1 at the countable dense set of rational times in $[0,T]$ and intersect those measurable probability-one events with the continuity events from [F3] and [F4]. The two continuous processes then agree at every time on that one event. If $\\tau=\\sigma$, both sides vanish; $\\tau=0$, $\\sigma=T$, and $t=0$ are included by the same formula. AC is used only through [A1].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1: when tau=sigma the interval is empty and both sides of the integral identity vanish."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: setting xi=0 makes both sides zero for every t."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: scalar W and a single coefficient xi are included; the matrix-valued case is coordinatewise."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: tau=sigma is handled explicitly; no positive interval length is required."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1: tau=0, sigma=T, and t=0 are included by the same formula."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1: AC is used only through [A1], with the finite-grid approximation explicit in steps 1.1–2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The stopped-interval predictable step integrates to its coefficient times the stopped Brownian increment. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The stopped-interval predictable step integrates to its coefficient times the stopped Brownian increment. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "3.1"
+          ],
+          "declared_in_frontmatter": "AC is explicitly assumed or inherited through the Brownian, Gaussian, filtration, or Itô interface; the item proof identifies its role in [A1]."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "3.1"
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "whole-horizon-indicator",
+          "model": "tau=0, sigma=T, xi=1.",
+          "result": "For 0<=t<=T, the integrand is 1 and the identity reduces to integral_0^t 1 dW=W_t.",
+          "evidence": "Proof step 2.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "lemma",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "alg-adaptive-euler-maruyama-on-predictable-grid": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: T>0 and a finite partition or predictable grid of positive total duration is required."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: B=0 returns inconclusive before any trial because T>0; the finite-budget status lemma explicitly handles this case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a single grid interval and a single root interval are allowed when their length is at most h_max."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the Euler update remains defined when b or sigma vanishes; no division or nondegeneracy condition occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both branches reach T only after accepted updates cover the supplied grid or root partition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC is assumed through the Euler, Brownian, and Gaussian interfaces; finite work and queue updates require no additional selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The algorithm defines predictable-grid and endpoint-refinement Euler branches with explicit finite-budget status. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The algorithm defines predictable-grid and endpoint-refinement Euler branches with explicit finite-budget status. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [],
+          "uses": [
+            "Definition"
+          ],
+          "declared_in_frontmatter": "AC is stated in the definition as an interface assumption for its Brownian/Gaussian inputs."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "algorithm",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-finite-budget-adaptive-em-status": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-adaptive-euler-maruyama-on-predictable-grid",
+          "source_section": "Definition",
+          "quote": "Assume AC and use the coefficient, Brownian, and initial-value conventions of\n[[alg-euler-maruyama]]. The inputs are $T>0$, the coefficients $b,\\sigma$,\nthe Brownian path or increment source, an initial value $X_0$, a deterministic\nmaximum step $h_{\\max}>0$, and a deterministic work budget\n$B\\in\\mathbb N_0$. Stopped Brownian values are measurable at their stopped\nsigma-algebras by [[lem-continuous-adapted-process-at-bounded-stopping-time]],\nand each stopping time $\\tau_n$ is $\\mathcal F_{\\tau_n}$-measurable by the\nevent tests of [[def-continuous-time-stopping-time]]. Since $h_n$ is\n$\\mathcal F_{\\tau_n}$-measurable, Borel coefficient evaluation and the\npredictable-grid update keep $Y_n$ measurable at $\\mathcal F_{\\tau_n}$ by\ninduction. The continuous interpolation is adapted as well: at each fixed\n$t$, the active-interval events are in $\\mathcal F_t$ by the stopping-time\ntests, and each term uses stopped values restricted to $\\{\\tau_n\\le t\\}$. Choose\none of the following modes.\n\n1. **Predictable-grid mode.** Supply a finite predictable grid\n   [[def-predictable-stopping-time-grid]] with\n   $h_n\\le h_{\\max}$ on every active interval. Initialize $Y_0=X_0$ and\n   process its intervals in order until the grid reaches $T$ or the budget\n   is exhausted. Each interval uses the actual Brownian increment and update\n   $$Y_{n+1}=Y_n+b(\\tau_n,Y_n)h_n+ \\sigma(\\tau_n,Y_n)(W_{\\tau_{n+1}}-W_{\\tau_n}).$$\n   The continuous interpolation on the interval is\n   $$Y_t=Y_n+b(\\tau_n,Y_n)(t-\\tau_n)+ \\sigma(\\tau_n,Y_n)(W_t-W_{\\tau_n}).$$\n   This is the Euler–Maruyama update of [[alg-euler-maruyama]] with the\n   supplied interval length; the fixed-grid supplier itself makes no\n   variable-grid convergence assertion.\n\n2. **Endpoint-refinement mode.** Supply a total Borel-measurable Boolean-valued\n   accept/reject rule on the finite-dimensional current trial data. Initialize a queue with a finite partition\n   $0=u_0<\\cdots<u_J=T$ whose root intervals have lengths at most\n   $h_{\\max}$, together with their sampled Brownian increments. Pop the\n   earliest interval $[u,u+\\ell]$, form the Euler trial\n   $Y^*=Y+b(u,Y)\\ell+\\sigma(u,Y)\\Delta W$, and apply the supplied\n   accept/reject rule. If accepted, set $Y\\leftarrow Y^*$, append the\n   right-endpoint/state pair to the accepted path record, and advance to the\n   interval's right endpoint. If rejected, retain its parent increment,\n   split it with [[alg-dyadic-brownian-bridge-increment-tree]], and put its\n   left then right children at the front of the queue; do not update $Y$ on\n   the rejected parent and do not redraw the parent or either child. This\n   branch preserves the sampled path tree, but an endpoint-dependent\n   acceptance rule is not a predictable-grid controller;\n   the strong-error theorem on this page makes no error claim for this branch.\n\nFor either mode, initialize `current_time=0`, `current_state=X_0`, and\n`trial_count=0`. Maintain `current_time` and `current_state` as the endpoint\nand Euler state of the accepted path. In endpoint-refinement mode, also\ninitialize the accepted path record with $(0,X_0)$; append each\nright-endpoint/state pair only when its interval is accepted.\nCount every trial node, accepted or rejected, as one work unit; after each\ntrial, increment `trial_count` by one. Before the first trial and after every\ntrial, first check whether the mode's completion condition holds: the supplied\ngrid has reached $T$ in predictable-grid mode,\nor the queue is empty and the accepted path reaches $T$ in endpoint-refinement\nmode. If so, return with `status: complete`. Otherwise, if the count has\nreached $B$, return with `status: inconclusive`; if not, perform the next\ntrial. Thus a budget $B=0$ returns `inconclusive`, and a last trial that\nreaches $T$ returns `complete`.\n\nBoth statuses use the output record\n`(mode, status, current_time, current_state, approximation, pending_work,\ntrial_count)`. On completion, `current_time=T`, `current_state=Y_T`, and\n`pending_work` is empty. The `approximation` is the full continuous Euler\ninterpolation in predictable-grid mode; in endpoint-refinement mode it is the\naccepted ordered endpoint/state record together with the retained increment\ntree. On an inconclusive return, `trial_count=B`, `current_state` is the state\nat `current_time`, and `approximation` is the partial output through that\ntime: the continuous interpolation restricted to $[0,\\texttt{current\\_time}]$\nin predictable-grid mode, and the accepted endpoint/state record and retained\ntree in endpoint-refinement mode. `pending_work` is the remaining ordered grid\nsuffix or the current ordered tree queue, respectively. The tree assigns no\nvalues at non-dyadic times, so endpoint-refinement mode returns its accepted\nnode record rather than a continuous interpolation. A finite budget never\nchanges an inconclusive result into a successful certificate.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Before the first operation the counter is zero. Each operation increases it by exactly one, and no branch decreases it or runs without consuming a unit. Induction on the operation count therefore gives a counter between $0$ and $B$ throughout execution; the loop either reaches $T$ and returns `complete`, or reaches counter $B$ first and returns `inconclusive` by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each trial state and finite queue is a measurable function of the initial data, Brownian increments and fresh Gaussian innovations: coefficient evaluation and the acceptance rule are Borel, and updates, splits and queue operations are measurable finite operations. Induction through the deterministic budget makes the event that trial $k$ is performed measurable for each $1\\le k\\le B$. Thus $C=\\sum_{k=1}^B1_{\\{\\text{trial }k\\text{ is performed}\\}}$ is a random variable. It satisfies $0\\le C\\le B$ pointwise by step 1.1, so it is integrable and $\\mathbb EC\\le B$. If $B=0$, no trial is performed and, since $T>0$, the status is `inconclusive`. This proves the claim without asserting that completion occurs with positive probability.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: the procedure requires T>0; completion at time zero is outside its input domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: B=0 performs no trial and returns inconclusive because T>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: with B=1 the counter permits at most one trial and the same complete-or-inconclusive rule applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1: the bound remains valid when no trial can run, including the B=0 case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1: complete is returned only after T is reached; otherwise budget exhaustion returns inconclusive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1: AC is inherited from the procedure interface [A1]; the pointwise counter bound is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: A finite budget bounds the number of trial operations and distinguishes complete from inconclusive output. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: A finite budget bounds the number of trial operations and distinguishes complete from inconclusive output. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "2.1"
+          ],
+          "declared_in_frontmatter": "AC is explicitly assumed or inherited through the Brownian, Gaussian, filtration, or Itô interface; the item proof identifies its role in [A1]."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "2.1"
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "zero-budget",
+          "model": "T>0, B=0.",
+          "result": "Zero operations occur and the status is inconclusive.",
+          "evidence": "Proof step 2.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "lemma",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-adaptive-em-predictable-grid-second-moment": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-adaptive-euler-maruyama-on-predictable-grid",
+          "source_section": "Definition",
+          "quote": "Assume AC and use the coefficient, Brownian, and initial-value conventions of\n[[alg-euler-maruyama]]. The inputs are $T>0$, the coefficients $b,\\sigma$,\nthe Brownian path or increment source, an initial value $X_0$, a deterministic\nmaximum step $h_{\\max}>0$, and a deterministic work budget\n$B\\in\\mathbb N_0$. Stopped Brownian values are measurable at their stopped\nsigma-algebras by [[lem-continuous-adapted-process-at-bounded-stopping-time]],\nand each stopping time $\\tau_n$ is $\\mathcal F_{\\tau_n}$-measurable by the\nevent tests of [[def-continuous-time-stopping-time]]. Since $h_n$ is\n$\\mathcal F_{\\tau_n}$-measurable, Borel coefficient evaluation and the\npredictable-grid update keep $Y_n$ measurable at $\\mathcal F_{\\tau_n}$ by\ninduction. The continuous interpolation is adapted as well: at each fixed\n$t$, the active-interval events are in $\\mathcal F_t$ by the stopping-time\ntests, and each term uses stopped values restricted to $\\{\\tau_n\\le t\\}$. Choose\none of the following modes.\n\n1. **Predictable-grid mode.** Supply a finite predictable grid\n   [[def-predictable-stopping-time-grid]] with\n   $h_n\\le h_{\\max}$ on every active interval. Initialize $Y_0=X_0$ and\n   process its intervals in order until the grid reaches $T$ or the budget\n   is exhausted. Each interval uses the actual Brownian increment and update\n   $$Y_{n+1}=Y_n+b(\\tau_n,Y_n)h_n+ \\sigma(\\tau_n,Y_n)(W_{\\tau_{n+1}}-W_{\\tau_n}).$$\n   The continuous interpolation on the interval is\n   $$Y_t=Y_n+b(\\tau_n,Y_n)(t-\\tau_n)+ \\sigma(\\tau_n,Y_n)(W_t-W_{\\tau_n}).$$\n   This is the Euler–Maruyama update of [[alg-euler-maruyama]] with the\n   supplied interval length; the fixed-grid supplier itself makes no\n   variable-grid convergence assertion.\n\n2. **Endpoint-refinement mode.** Supply a total Borel-measurable Boolean-valued\n   accept/reject rule on the finite-dimensional current trial data. Initialize a queue with a finite partition\n   $0=u_0<\\cdots<u_J=T$ whose root intervals have lengths at most\n   $h_{\\max}$, together with their sampled Brownian increments. Pop the\n   earliest interval $[u,u+\\ell]$, form the Euler trial\n   $Y^*=Y+b(u,Y)\\ell+\\sigma(u,Y)\\Delta W$, and apply the supplied\n   accept/reject rule. If accepted, set $Y\\leftarrow Y^*$, append the\n   right-endpoint/state pair to the accepted path record, and advance to the\n   interval's right endpoint. If rejected, retain its parent increment,\n   split it with [[alg-dyadic-brownian-bridge-increment-tree]], and put its\n   left then right children at the front of the queue; do not update $Y$ on\n   the rejected parent and do not redraw the parent or either child. This\n   branch preserves the sampled path tree, but an endpoint-dependent\n   acceptance rule is not a predictable-grid controller;\n   the strong-error theorem on this page makes no error claim for this branch.\n\nFor either mode, initialize `current_time=0`, `current_state=X_0`, and\n`trial_count=0`. Maintain `current_time` and `current_state` as the endpoint\nand Euler state of the accepted path. In endpoint-refinement mode, also\ninitialize the accepted path record with $(0,X_0)$; append each\nright-endpoint/state pair only when its interval is accepted.\nCount every trial node, accepted or rejected, as one work unit; after each\ntrial, increment `trial_count` by one. Before the first trial and after every\ntrial, first check whether the mode's completion condition holds: the supplied\ngrid has reached $T$ in predictable-grid mode,\nor the queue is empty and the accepted path reaches $T$ in endpoint-refinement\nmode. If so, return with `status: complete`. Otherwise, if the count has\nreached $B$, return with `status: inconclusive`; if not, perform the next\ntrial. Thus a budget $B=0$ returns `inconclusive`, and a last trial that\nreaches $T$ returns `complete`.\n\nBoth statuses use the output record\n`(mode, status, current_time, current_state, approximation, pending_work,\ntrial_count)`. On completion, `current_time=T`, `current_state=Y_T`, and\n`pending_work` is empty. The `approximation` is the full continuous Euler\ninterpolation in predictable-grid mode; in endpoint-refinement mode it is the\naccepted ordered endpoint/state record together with the retained increment\ntree. On an inconclusive return, `trial_count=B`, `current_state` is the state\nat `current_time`, and `approximation` is the partial output through that\ntime: the continuous interpolation restricted to $[0,\\texttt{current\\_time}]$\nin predictable-grid mode, and the accepted endpoint/state record and retained\ntree in endpoint-refinement mode. `pending_work` is the remaining ordered grid\nsuffix or the current ordered tree queue, respectively. The tree assigns no\nvalues at non-dyadic times, so endpoint-refinement mode returns its accepted\nnode record rather than a continuous interpolation. A finite budget never\nchanges an inconclusive result into a successful certificate.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-predictable-stopping-time-grid",
+          "source_section": "Definition",
+          "quote": "Assume $T>0$ and work on a filtered probability space with stopping times and\nstopped sigma-algebras as defined in\n[[def-continuous-time-stopping-time]]. A **finite predictable stopping-time\ngrid** on $[0,T]$ is a random integer $N<\\infty$ almost surely and a sequence\nof stopping times\n$$0=\\tau_0<\\tau_1<\\cdots<\\tau_N=T$$\nsuch that, for each $n<N$, the step length\n$h_n=\\tau_{n+1}-\\tau_n$ is $\\mathcal F_{\\tau_n}$-measurable and satisfies\n$0<h_n\\le h_{\\max}$ for a deterministic $h_{\\max}>0$. Extend the sequence by\n$\\tau_n=T$ and $h_n=0$ for $n\\ge N$. A **budgeted** predictable grid has a\ndeterministic integer $B$ with $N\\le B$ almost surely.\n\nThe condition $h_n\\in\\mathcal F_{\\tau_n}$ says the next interval is selected\nusing information available at its left endpoint. A decision that inspects\n$W_{\\tau_{n+1}}-W_{\\tau_n}$ before fixing $h_n$ is not predictable under this\ndefinition. Brownian-bridge refinement can preserve the sampled path after\nsuch a decision, but does not make that grid predictable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-stopping-an-ito-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $H$ be a locally\nsquare-integrable predictable process\n[[def-locally-square-integrable-predictable-brownian-integrand]] with localized\nintegral $H\\cdot B$ in the progressively measurable version of\n[[thm-localized-ito-integral]], with its measurable-full-event convention\nfor indistinguishability. The filtration satisfies the usual conditions and\nlocal energy is finite almost surely on every finite horizon, as required by\nthe local-integrability definition. Let $\\tau$ be a\nstopping time [[def-continuous-time-stopping-time]]. Then the process\n$s\\mapsto(H\\cdot B)_{s\\wedge\\tau}$ and the localized integral of the process\n$1_{[0,\\tau]}H$ are indistinguishable:\n$$(H\\cdot B)_{t\\wedge\\tau}=\\int_0^t1_{[0,\\tau]}(s)H_s\\,dB_s\\qquad\\text{for every }t\\ge0\\text{, up to indistinguishability}.$$\nIn particular, for $H$ of finite energy this reduces to the stopping identity\nof [[thm-localized-ito-integral]], and for $\\tau\\equiv\\infty$ it is the\ndefinition of the localized integral.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-stopping-time-ito-step-interval-sum",
+          "source_section": "Statement",
+          "quote": "Assume AC and the usual filtered-space hypotheses for the Itô integral. Let\n$W$ be a scalar Brownian motion on $[0,T]$, let $0\\le\\tau\\le\\sigma\\le T$ be\nstopping times, and let $\\xi\\in L^2(\\mathcal F_\\tau)$. The process\n$H_s=\\xi\\,1_{(\\tau,\\sigma]}(s)$ is predictable with finite energy, and its\ncontinuous Itô-integral version satisfies\n$$\\int_0^t H_s\\,dW_s=\\xi\\bigl(W_{t\\wedge\\sigma}-W_{t\\wedge\\tau}\\bigr) \\quad(0\\le t\\le T)$$\nup to indistinguishability. The statement applies coordinatewise to each\nentry of a matrix-valued coefficient and a finite-dimensional Brownian motion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-doob-maximal-bound-for-the-ito-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $H$ be a predictable\nprocess on $[0,T]$, where $T\\ge0$, with $E\\int_0^TH_s^2ds<\\infty$. Extend $H$ by zero after $T$ when applying the global continuous-version theorem, and let\n$M_t=\\int_0^tH_s\\,dB_s$ be the continuous version of\n[[thm-ito-integral-process-has-a-continuous-martingale-version]]. Then\n$$E\\sup_{0\\le t\\le T}|M_t|^2\\le4\\,E\\int_0^TH_s^2\\,ds .$$\nThe left-hand side is finite and does not depend on the chosen version, since\nany two continuous versions are indistinguishable. Every continuous version of\nthe integral process satisfies the same bound. The path supremum in this\nexpectation means its measurable version $S_D=\\sup_{q\\in D}|M_q|$ on the\ncountable scaled dyadic grid $D$ (including both endpoints). Continuity\nidentifies it with the path supremum on a measurable event of probability one.\nIndistinguishability here uses that full-event convention, as in the cited\ncontinuous-version theorem, without assuming completeness of the filtration.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-euler-maruyama",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and use the finite-dimensional Brownian-motion\nconvention of [[def-d-dimensional-brownian-motion]]. Let the state dimension\n$d$ and noise dimension $m$ be positive finite integers, and fix $T>0$ and\n$N\\in\\mathbb N$ with $N\\ge1$. Set $h=T/N>0$ and $t_k=kh$ for\n$0\\le k\\le N$. Let\n$b:[0,T]\\times\\mathbb R^d\\to\\mathbb R^d$ and\n$\\sigma:[0,T]\\times\\mathbb R^d\\to\\mathbb R^{d\\times m}$ be jointly Borel.\nWrite $|\\cdot|$ for the Euclidean norm and $\\|\\cdot\\|_F$ for the Frobenius\nnorm. Suppose finite constants $L,K$ satisfy, for every $s,t\\in[0,T]$ and\n$x,y\\in\\mathbb R^d$,\n$$|b(t,x)-b(t,y)|+\\|\\sigma(t,x)-\\sigma(t,y)\\|_F\\le L|x-y|,$$\n$$|b(t,x)|^2+\\|\\sigma(t,x)\\|_F^2\\le K^2(1+|x|^2),$$\nand\n$$|b(t,x)-b(s,x)|+\\|\\sigma(t,x)-\\sigma(s,x)\\|_F\\le K(1+|x|)|t-s|^{1/2}.$$\nLet $W$ be an adapted standard $m$-dimensional Brownian motion on a filtered\nprobability space, with $W_t-W_s$ independent of $\\mathcal F_s$ and law\n$N_m(0,(t-s)I_m)$ whenever $0\\le s<t\\le T$. Let $X_0$ be\n$\\mathcal F_0$-measurable, independent of future Brownian increments, and\n$\\mathbb E|X_0|^2<\\infty$.\n\nThe **Euler–Maruyama algorithm** takes these data as input and returns\n$Y_0,\\ldots,Y_N$:\n\n1. Set $Y_0=X_0$.\n2. For $k=0,\\ldots,N-1$, form $\\Delta W_k=W_{t_{k+1}}-W_{t_k}$ and set\n   $$Y_{k+1}=Y_k+b(t_k,Y_k)h+\\sigma(t_k,Y_k)\\Delta W_k.$$\n\nThe output is the grid approximation for the coefficient pair $(b,\\sigma)$.\nThe companion step-process and interpolation definition uses this same grid\nand endpoint convention.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-fatou-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(f_n)$ be nonnegative measurable functions. Then\n$$\\int \\liminf_{n\\to\\infty}f_n\\,d\\mu\\le\\liminf_{n\\to\\infty}\\int f_n\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-continuous-time-stopping-time",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and let\n$(\\mathcal F_t)_{t\\ge0}$ be a continuous-time filtration\n[[def-continuous-time-filtration-and-all-pairs-martingale]].\n\n1. A map $\\tau:\\Omega\\to[0,\\infty]$ (infinite values allowed) is a **stopping\n   time** for $(\\mathcal F_t)$ when\n   $$\\{\\tau\\le t\\}\\in\\mathcal F_t\\qquad\\text{for every }t\\ge0 .$$\n2. For a stopping time $\\tau$ its **stopped sigma-algebra** is\n   $$\\mathcal F_\\tau:=\\{A\\in\\mathcal F:A\\cap\\{\\tau\\le t\\}\\in\\mathcal F_t \\text{ for every }t\\ge0\\}.$$\n\nThe following facts are used below, and each is a direct set computation.\n\n(a) $\\mathcal F_\\tau$ is a sigma-algebra: $\\emptyset\\cap\\{\\tau\\le\n    t\\}=\\emptyset\\in\\mathcal F_t$; for $A\\in\\mathcal F_\\tau$ one has\n    $A^c\\cap\\{\\tau\\le t\\}=\\{\\tau\\le t\\}\\setminus(A\\cap\\{\\tau\\le t\\})\\in\\mathcal\n    F_t$; and for a sequence $A_n\\in\\mathcal F_\\tau$ the union satisfies\n    $\\bigl(\\bigcup_nA_n\\bigr)\\cap\\{\\tau\\le t\\}=\\bigcup_n(A_n\\cap\\{\\tau\\le\n    t\\})\\in\\mathcal F_t$. All operations are literal, not modulo null sets, and\n    no completeness of the filtration is assumed.\n(b) If $\\tau\\equiv t_0<\\infty$ is deterministic, then\n    $A\\cap\\{\\tau\\le t\\}$ is $A$ for $t\\ge t_0$ and $\\emptyset$ for $t<t_0$, so\n    $\\mathcal F_\\tau=\\bigcap_{t\\ge t_0}\\mathcal F_t=\\mathcal F_{t_0}$, where\n    the last equality follows because the intersection includes its least\n    member $\\mathcal F_{t_0}$. If $\\tau\\equiv\\infty$, then every test event\n    $\\{\\tau\\le t\\}$ is empty and $\\mathcal F_\\tau=\\mathcal F$.\n(c) Suppose the filtration is right-continuous. Then $\\tau$ is a stopping time\n    if and only if $\\{\\tau<t\\}\\in\\mathcal F_t$ for every $t>0$. Indeed\n    $$\\{\\tau<t\\}=\\bigcup_{n\\ge1}\\{\\tau\\le t-\\tfrac1n\\}$$\n    (with the terms for $t-\\tfrac1n<0$ read as the empty set, since\n    $\\tau\\ge0$), which gives the forward implication; conversely\n    $$\\{\\tau\\le t\\}=\\bigcap_{n\\ge1}\\{\\tau<t+\\tfrac1n\\},$$\n    and $\\bigcap_n\\mathcal F_{t+1/n}=\\bigcap_{s>t}\\mathcal F_s=\\mathcal F_t$ by\n    right-continuity together with monotonicity of the filtration.\n(d) Under the same right-continuity assumption, for $A\\in\\mathcal F$ one has\n    $A\\in\\mathcal F_\\tau$ if and only if $A\\cap\\{\\tau<t\\}\\in\\mathcal F_t$ for\n    every $t>0$: the forward implication follows from\n    $A\\cap\\{\\tau<t\\}=\\bigcup_n(A\\cap\\{\\tau\\le t-\\tfrac1n\\})$ and the converse\n    from $A\\cap\\{\\tau\\le t\\}=\\bigcap_n(A\\cap\\{\\tau<t+\\tfrac1n\\})$ together with\n    $\\bigcap_n\\mathcal F_{t+1/n}=\\mathcal F_t$.\n\nBecause the two versions of each test are interchangeable exactly when the\nfiltration is right-continuous, the convention is recorded here once: the\nBrownian strong Markov theorem is stated for the usual augmentation, which is\nright-continuous, and the raw-filtration statements use the non-strict test\ndirectly. No choice principle is used by this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $R>0$ define $\\rho_R=\\inf\\{t\\le T:|Y_t|\\ge R\\}\\wedge T$, taking $\\rho_R=T$ if the set is empty. For an integer $k\\ge1$, set $\\theta_{R,k}=\\rho_R\\wedge\\tau_k$ and $Y^{R,k}_t=Y_{t\\wedge\\theta_{R,k}}$. Continuity, adaptedness and [F8] make $\\rho_R$ a stopping time, so $\\theta_{R,k}$ is a stopping time. For the first $k$ intervals, multiply each left-endpoint coefficient by $1_{\\{|Y_n|\\le |X_0|\\vee R\\}}$. These factors are measurable at $\\mathcal F_{\\tau_n}$, the truncated coefficients are in $L^2$ by [F5], and they agree with the original coefficients before $\\theta_{R,k}$, except at time endpoints which do not affect the integrals. Thus [F3] gives their finite-step integral representation, to which [F2] applies. Before $\\theta_{R,k}$, every active left-endpoint value is bounded by $|X_0|\\vee R$; [F5] and $X_0\\in L^2$ therefore give finite expected coefficient energy. Applying [F2] at $\\theta_{R,k}$ to the finite-step integral representation yields $Y^{R,k}_t=X_0+\\int_0^t1_{[0,\\theta_{R,k}]}(s)\\bar b_s\\,ds+\\int_0^t1_{[0,\\theta_{R,k}]}(s)\\bar\\sigma_s\\,dW_s$, where $\\bar b_s=b(\\tau_n,Y_n)$ and $\\bar\\sigma_s=\\sigma(\\tau_n,Y_n)$ on active intervals. Also $\\sup_{u\\le t}|Y^{R,k}_u|\\le |X_0|\\vee R$, so $U_{R,k}(t):=\\mathbb E\\sup_{u\\le t}|Y^{R,k}_u|^2$ is finite and continuous by [F9], since the path suprema converge pointwise with $t$ and are bounded by the integrable variable $(|X_0|\\vee R)^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F8",
+            "F9",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write each coordinate of the stopped martingale as $M^i=\\sum_{j=1}^m M^{ij}$, with $M^{ij}_t=\\int_0^t1_{[0,\\theta_{R,k}]}(s)\\bar\\sigma^{ij}_s\\,dW^j_s$. For every $i,j$, [F4] applies to the scalar Brownian coordinate $W^j$. The inequalities $\\sup_t|\\sum_jM^{ij}_t|^2\\le m\\sum_j\\sup_t|M^{ij}_t|^2$ and $|a+b+c|^2\\le3(|a|^2+|b|^2+|c|^2)$ give the martingale bound $4m\\mathbb E\\int_0^t1_{[0,\\theta_{R,k}]}\\|\\bar\\sigma_s\\|_F^2ds$. Cauchy–Schwarz bounds the squared drift supremum by $T\\int_0^t1_{[0,\\theta_{R,k}]}|\\bar b_s|^2ds$. On an active interval, $|\\bar Y_s|^2\\le\\sup_{u\\le s}|Y^{R,k}_u|^2$; using [F5] in the representation of step 1.1 yields $U_{R,k}(t)\\le3\\mathbb E|X_0|^2+(3T+12m)K^2\\int_0^t(1+U_{R,k}(s))ds$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F6] to $1+U_{R,k}$ with $A=1+3\\mathbb E|X_0|^2$ and $C=(3T+12m)K^2$. Then $U_{R,k}(T)\\le(1+3\\mathbb E|X_0|^2)e^{(3T+12m)K^2T}-1$, uniformly in $R,k$.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $N<\\infty$ almost surely, for almost every path $\\tau_k=T$ for all sufficiently large $k$. Thus $Y^{R,k}$ eventually equals $Y^{\\rho_R}$ uniformly on $[0,T]$; [F7] passes the bound of step 3.1 to $\\mathbb E\\sup_{t\\le T}|Y_{t\\wedge\\rho_R}|^2$. Each continuous path $Y$ is bounded on $[0,T]$, so $Y^{\\rho_R}\\to Y$ uniformly almost surely as $R\\to\\infty$, and [F7] gives the stated bound. The cases $X_0=0$ or $K=0$ are covered by the same inequality, and no lower mesh bound or deterministic bound on $N$ is used. AC is inherited only through [A1].",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F7",
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: T>0 and a grid partition of [0,T] are required."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: active grid steps are strictly positive; h_max is only an upper bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: N=1 is allowed; the localization and Gronwall estimates do not require multiple steps."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1: X_0=0 or K=0 is covered by the same displayed inequality; no mesh lower bound is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 4.1: the stopped path converges uniformly to the full path on [0,T], including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 4.1: AC is inherited only through [A1]; the localizing times and limiting argument are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The complete Euler interpolation has a controller-uniform expected squared path-supremum bound. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The complete Euler interpolation has a controller-uniform expected squared path-supremum bound. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "4.1"
+          ],
+          "declared_in_frontmatter": "AC is explicitly assumed or inherited through the Brownian, Gaussian, filtration, or Itô interface; the item proof identifies its role in [A1]."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "4.1"
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "zero-coefficients",
+          "model": "b=0, sigma=0 on any finite predictable grid.",
+          "result": "Y_t=X_0 for all t, and E sup |Y_t|^2=E|X_0|^2, within the displayed localization bound.",
+          "evidence": "Proof steps 3.1–4.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "lemma",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-adaptive-em-predictable-grid-strong-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-euler-maruyama",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and use the finite-dimensional Brownian-motion\nconvention of [[def-d-dimensional-brownian-motion]]. Let the state dimension\n$d$ and noise dimension $m$ be positive finite integers, and fix $T>0$ and\n$N\\in\\mathbb N$ with $N\\ge1$. Set $h=T/N>0$ and $t_k=kh$ for\n$0\\le k\\le N$. Let\n$b:[0,T]\\times\\mathbb R^d\\to\\mathbb R^d$ and\n$\\sigma:[0,T]\\times\\mathbb R^d\\to\\mathbb R^{d\\times m}$ be jointly Borel.\nWrite $|\\cdot|$ for the Euclidean norm and $\\|\\cdot\\|_F$ for the Frobenius\nnorm. Suppose finite constants $L,K$ satisfy, for every $s,t\\in[0,T]$ and\n$x,y\\in\\mathbb R^d$,\n$$|b(t,x)-b(t,y)|+\\|\\sigma(t,x)-\\sigma(t,y)\\|_F\\le L|x-y|,$$\n$$|b(t,x)|^2+\\|\\sigma(t,x)\\|_F^2\\le K^2(1+|x|^2),$$\nand\n$$|b(t,x)-b(s,x)|+\\|\\sigma(t,x)-\\sigma(s,x)\\|_F\\le K(1+|x|)|t-s|^{1/2}.$$\nLet $W$ be an adapted standard $m$-dimensional Brownian motion on a filtered\nprobability space, with $W_t-W_s$ independent of $\\mathcal F_s$ and law\n$N_m(0,(t-s)I_m)$ whenever $0\\le s<t\\le T$. Let $X_0$ be\n$\\mathcal F_0$-measurable, independent of future Brownian increments, and\n$\\mathbb E|X_0|^2<\\infty$.\n\nThe **Euler–Maruyama algorithm** takes these data as input and returns\n$Y_0,\\ldots,Y_N$:\n\n1. Set $Y_0=X_0$.\n2. For $k=0,\\ldots,N-1$, form $\\Delta W_k=W_{t_{k+1}}-W_{t_k}$ and set\n   $$Y_{k+1}=Y_k+b(t_k,Y_k)h+\\sigma(t_k,Y_k)\\Delta W_k.$$\n\nThe output is the grid approximation for the coefficient pair $(b,\\sigma)$.\nThe companion step-process and interpolation definition uses this same grid\nand endpoint convention.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-adaptive-euler-maruyama-on-predictable-grid",
+          "source_section": "Definition",
+          "quote": "Assume AC and use the coefficient, Brownian, and initial-value conventions of\n[[alg-euler-maruyama]]. The inputs are $T>0$, the coefficients $b,\\sigma$,\nthe Brownian path or increment source, an initial value $X_0$, a deterministic\nmaximum step $h_{\\max}>0$, and a deterministic work budget\n$B\\in\\mathbb N_0$. Stopped Brownian values are measurable at their stopped\nsigma-algebras by [[lem-continuous-adapted-process-at-bounded-stopping-time]],\nand each stopping time $\\tau_n$ is $\\mathcal F_{\\tau_n}$-measurable by the\nevent tests of [[def-continuous-time-stopping-time]]. Since $h_n$ is\n$\\mathcal F_{\\tau_n}$-measurable, Borel coefficient evaluation and the\npredictable-grid update keep $Y_n$ measurable at $\\mathcal F_{\\tau_n}$ by\ninduction. The continuous interpolation is adapted as well: at each fixed\n$t$, the active-interval events are in $\\mathcal F_t$ by the stopping-time\ntests, and each term uses stopped values restricted to $\\{\\tau_n\\le t\\}$. Choose\none of the following modes.\n\n1. **Predictable-grid mode.** Supply a finite predictable grid\n   [[def-predictable-stopping-time-grid]] with\n   $h_n\\le h_{\\max}$ on every active interval. Initialize $Y_0=X_0$ and\n   process its intervals in order until the grid reaches $T$ or the budget\n   is exhausted. Each interval uses the actual Brownian increment and update\n   $$Y_{n+1}=Y_n+b(\\tau_n,Y_n)h_n+ \\sigma(\\tau_n,Y_n)(W_{\\tau_{n+1}}-W_{\\tau_n}).$$\n   The continuous interpolation on the interval is\n   $$Y_t=Y_n+b(\\tau_n,Y_n)(t-\\tau_n)+ \\sigma(\\tau_n,Y_n)(W_t-W_{\\tau_n}).$$\n   This is the Euler–Maruyama update of [[alg-euler-maruyama]] with the\n   supplied interval length; the fixed-grid supplier itself makes no\n   variable-grid convergence assertion.\n\n2. **Endpoint-refinement mode.** Supply a total Borel-measurable Boolean-valued\n   accept/reject rule on the finite-dimensional current trial data. Initialize a queue with a finite partition\n   $0=u_0<\\cdots<u_J=T$ whose root intervals have lengths at most\n   $h_{\\max}$, together with their sampled Brownian increments. Pop the\n   earliest interval $[u,u+\\ell]$, form the Euler trial\n   $Y^*=Y+b(u,Y)\\ell+\\sigma(u,Y)\\Delta W$, and apply the supplied\n   accept/reject rule. If accepted, set $Y\\leftarrow Y^*$, append the\n   right-endpoint/state pair to the accepted path record, and advance to the\n   interval's right endpoint. If rejected, retain its parent increment,\n   split it with [[alg-dyadic-brownian-bridge-increment-tree]], and put its\n   left then right children at the front of the queue; do not update $Y$ on\n   the rejected parent and do not redraw the parent or either child. This\n   branch preserves the sampled path tree, but an endpoint-dependent\n   acceptance rule is not a predictable-grid controller;\n   the strong-error theorem on this page makes no error claim for this branch.\n\nFor either mode, initialize `current_time=0`, `current_state=X_0`, and\n`trial_count=0`. Maintain `current_time` and `current_state` as the endpoint\nand Euler state of the accepted path. In endpoint-refinement mode, also\ninitialize the accepted path record with $(0,X_0)$; append each\nright-endpoint/state pair only when its interval is accepted.\nCount every trial node, accepted or rejected, as one work unit; after each\ntrial, increment `trial_count` by one. Before the first trial and after every\ntrial, first check whether the mode's completion condition holds: the supplied\ngrid has reached $T$ in predictable-grid mode,\nor the queue is empty and the accepted path reaches $T$ in endpoint-refinement\nmode. If so, return with `status: complete`. Otherwise, if the count has\nreached $B$, return with `status: inconclusive`; if not, perform the next\ntrial. Thus a budget $B=0$ returns `inconclusive`, and a last trial that\nreaches $T$ returns `complete`.\n\nBoth statuses use the output record\n`(mode, status, current_time, current_state, approximation, pending_work,\ntrial_count)`. On completion, `current_time=T`, `current_state=Y_T`, and\n`pending_work` is empty. The `approximation` is the full continuous Euler\ninterpolation in predictable-grid mode; in endpoint-refinement mode it is the\naccepted ordered endpoint/state record together with the retained increment\ntree. On an inconclusive return, `trial_count=B`, `current_state` is the state\nat `current_time`, and `approximation` is the partial output through that\ntime: the continuous interpolation restricted to $[0,\\texttt{current\\_time}]$\nin predictable-grid mode, and the accepted endpoint/state record and retained\ntree in endpoint-refinement mode. `pending_work` is the remaining ordered grid\nsuffix or the current ordered tree queue, respectively. The tree assigns no\nvalues at non-dyadic times, so endpoint-refinement mode returns its accepted\nnode record rather than a continuous interpolation. A finite budget never\nchanges an inconclusive result into a successful certificate.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-predictable-stopping-time-grid",
+          "source_section": "Definition",
+          "quote": "Assume $T>0$ and work on a filtered probability space with stopping times and\nstopped sigma-algebras as defined in\n[[def-continuous-time-stopping-time]]. A **finite predictable stopping-time\ngrid** on $[0,T]$ is a random integer $N<\\infty$ almost surely and a sequence\nof stopping times\n$$0=\\tau_0<\\tau_1<\\cdots<\\tau_N=T$$\nsuch that, for each $n<N$, the step length\n$h_n=\\tau_{n+1}-\\tau_n$ is $\\mathcal F_{\\tau_n}$-measurable and satisfies\n$0<h_n\\le h_{\\max}$ for a deterministic $h_{\\max}>0$. Extend the sequence by\n$\\tau_n=T$ and $h_n=0$ for $n\\ge N$. A **budgeted** predictable grid has a\ndeterministic integer $B$ with $N\\le B$ almost surely.\n\nThe condition $h_n\\in\\mathcal F_{\\tau_n}$ says the next interval is selected\nusing information available at its left endpoint. A decision that inspects\n$W_{\\tau_{n+1}}-W_{\\tau_n}$ before fixing $h_n$ is not predictable under this\ndefinition. Brownian-bridge refinement can preserve the sampled path after\nsuch a decision, but does not make that grid predictable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-adaptive-em-predictable-grid-second-moment",
+          "source_section": "Statement",
+          "quote": "Work on a filtered probability space satisfying the usual conditions for the\nIt\\^o integral. Assume the coefficient and Brownian hypotheses of\n[[alg-euler-maruyama]] on $[0,T]$: finite state/noise dimensions, a square\nintegrable $\\mathcal F_0$-measurable initial value, globally Lipschitz state\ndependence, linear growth, and the stated half-Hölder time modulus. Let a\nfinite predictable grid as in\n[[def-predictable-stopping-time-grid]] have $N<\\infty$ almost surely and\nmaximum step at most $h_{\\max}\\le T$. Form the complete continuous Euler\ninterpolation by applying the predictable-grid updates in\n[[alg-adaptive-euler-maruyama-on-predictable-grid]] on every interval. A\nfinite-budget execution returns this interpolation as complete when its\nbudget $B$ satisfies $N\\le B$. Then a finite constant\n$C=C(T,K,m,\\mathbb E|X_0|^2)$ satisfies\n$$\\mathbb E\\sup_{0\\le t\\le T}|Y_t|^2\\le C.$$\nThe bound is uniform over the controller and the number and placement of its\npredictable steps; no deterministic bound on $N$ is needed for this moment\nestimate.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-stopping-time-ito-step-interval-sum",
+          "source_section": "Statement",
+          "quote": "Assume AC and the usual filtered-space hypotheses for the Itô integral. Let\n$W$ be a scalar Brownian motion on $[0,T]$, let $0\\le\\tau\\le\\sigma\\le T$ be\nstopping times, and let $\\xi\\in L^2(\\mathcal F_\\tau)$. The process\n$H_s=\\xi\\,1_{(\\tau,\\sigma]}(s)$ is predictable with finite energy, and its\ncontinuous Itô-integral version satisfies\n$$\\int_0^t H_s\\,dW_s=\\xi\\bigl(W_{t\\wedge\\sigma}-W_{t\\wedge\\tau}\\bigr) \\quad(0\\le t\\le T)$$\nup to indistinguishability. The statement applies coordinatewise to each\nentry of a matrix-valued coefficient and a finite-dimensional Brownian motion.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+          "source_section": "Statement",
+          "quote": "Assume the data and hypotheses of\n[[def-ito-sde-and-strong-solution]] on $[0,T]$, with $T\\ge0$, finite\ndimensions $d,m\\ge1$, Lipschitz constant $L$, and linear-growth constant\n$K$. There is a strong solution $X$ on the given filtered probability space.\nIt is unique up to indistinguishability among strong solutions with the same\ninitial value and Brownian driver, and it satisfies\n$$E\\sup_{0\\le t\\le T}|X_t|^2\\le(1+3E|X_0|^2)e^{C_TT},\\qquad C_T:=6K^2T+24mK^2.$$\nThe bound is independent of any later numerical mesh.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ito-isometry-and-linearity-in-predictable-l2",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Fix $T>0$. For predictable\n$H,K$ with finite energy $E\\int_0^TH^2ds,E\\int_0^TK^2ds<\\infty$ the integrals\n$\\int_0^TH\\,dB$ of\n[[def-ito-integral-for-square-integrable-predictable-processes]] satisfy\n$$\\int_0^T(H+K)\\,dB=\\int_0^TH\\,dB+\\int_0^TK\\,dB,\\qquad \\int_0^T(aH)\\,dB=a\\int_0^TH\\,dB\\quad(a\\in\\mathbb R),$$\nand the identities are equalities of $L^2(P)$-classes (almost sure\nequalities). Moreover the map $H\\mapsto\\int_0^TH\\,dB$ is an isometry,\n$$E\\Bigl(\\int_0^TH\\,dB\\Bigr)^2=E\\int_0^TH^2ds=\\|H\\|^2_{L^2(\\mathrm dt\\otimes P)},$$\nit takes values in the mean-zero subspace of $L^2(P)$, and the bilinear cross\nidentity\n$$E\\Bigl[\\Bigl(\\int_0^TH\\,dB\\Bigr)\\Bigl(\\int_0^TK\\,dB\\Bigr)\\Bigr]=E\\int_0^TH_sK_s\\,ds$$\nholds for all such $H,K$. In particular the image of the map is a closed\nsubspace of $L^2(P)$ isometric to the predictable $L^2$ space of $H$'s, and\n$H\\mapsto\\int_0^TH\\,dB$ is injective up to the $(\\mathrm dt\\otimes P)$-class.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-doob-maximal-bound-for-the-ito-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let $H$ be a predictable\nprocess on $[0,T]$, where $T\\ge0$, with $E\\int_0^TH_s^2ds<\\infty$. Extend $H$ by zero after $T$ when applying the global continuous-version theorem, and let\n$M_t=\\int_0^tH_s\\,dB_s$ be the continuous version of\n[[thm-ito-integral-process-has-a-continuous-martingale-version]]. Then\n$$E\\sup_{0\\le t\\le T}|M_t|^2\\le4\\,E\\int_0^TH_s^2\\,ds .$$\nThe left-hand side is finite and does not depend on the chosen version, since\nany two continuous versions are indistinguishable. Every continuous version of\nthe integral process satisfies the same bound. The path supremum in this\nexpectation means its measurable version $S_D=\\sup_{q\\in D}|M_q|$ on the\ncountable scaled dyadic grid $D$ (including both endpoints). Continuity\nidentifies it with the path supremum on a measurable event of probability one.\nIndistinguishability here uses that full-event convention, as in the cited\ncontinuous-version theorem, without assuming completeness of the filtration.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-d-dimensional-brownian-motion",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and let $d\\ge1$ be a finite integer. An\n$\\mathbb R^d$-valued process $B=(B_t)_{t\\ge0}$ is a **standard\n$d$-dimensional Brownian motion** if:\n\n1. $B_0=0$ almost surely;\n2. for every finite list $0=t_0<t_1<\\cdots<t_n$, the vector increments\n   $$B_{t_j}-B_{t_{j-1}},\\qquad 1\\le j\\le n,$$\n   are mutually independent and have laws\n   $N_d(0,(t_j-t_{j-1})I_d)$; and\n3. there is one measurable event $A$ with $P(A)=1$ such that\n   $t\\mapsto B_t(\\omega)$ is continuous from $[0,\\infty)$ to\n   $\\mathbb R^d$ for every $\\omega\\in A$.\n\nEquivalently, its $d$ coordinate processes $B^\\alpha=(B_t^\\alpha)_{t\\ge0}$\nare independent standard one-dimensional Brownian motions. Here independence\nof the processes means the following precise assertion. Put\n$I=[0,\\infty)$ and equip $\\mathbb R^I$ with its cylinder sigma-algebra. The\nmaps\n$$ \\Phi_\\alpha:\\Omega\\longrightarrow\\mathbb R^I, \\qquad \\Phi_\\alpha(\\omega)(t)=B_t^\\alpha(\\omega), \\qquad 1\\le\\alpha\\le d, $$\nare independent random elements.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\eta(s)=\\tau_n$ and $\\bar Y_s=Y_n$ on each active interval $\\tau_n<s\\le\\tau_{n+1}$, and put $\\bar b_s=b(\\tau_n,Y_n)$ and $\\bar\\sigma_s=\\sigma(\\tau_n,Y_n)$ there. Values at the countable grid endpoints do not affect time or It\\^o integrals. Each coefficient step is predictable by [F4]; the countable sum is predictable. Growth [F1], $\\sum_{n<N}h_n=T$, and [F3] give $\\mathbb E\\int_0^T(|\\bar b_s|^2+\\|\\bar\\sigma_s\\|_F^2)ds<\\infty$. Truncating after the first $k$ intervals gives finite-step integral identities by [F4]. Their integrands converge in $L^2(ds\\,dP)$ to the full coefficients: the tail vanishes almost surely because $N<\\infty$, and the increasing partial energy sums converge to the integrable total energy by [F9], so the expected tail energy tends to zero. Isometry [F6] and Cauchy–Schwarz for the drift pass these identities to the limit. Combining with the strong-solution identity gives $e_t:=X_t-Y_t=\\int_0^t(b(s,X_s)-\\bar b_s)ds+\\sum_{j=1}^m\\int_0^t(\\sigma_{\\cdot j}(s,X_s)-\\bar\\sigma_{\\cdot j,s})dW_s^j$, where $\\sigma_{\\cdot j}$ denotes column $j$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On interval $n$, put $b_n=b(\\tau_n,Y_n)$, $\\sigma_n=\\sigma(\\tau_n,Y_n)$, and $h_n=\\tau_{n+1}-\\tau_n$. The interpolation increment is $Y_s-\\bar Y_s=b_n(s-\\tau_n)+\\sigma_n(W_s-W_{\\tau_n})$. Its drift contribution is $\\int_{\\tau_n}^{\\tau_{n+1}}|b_n|^2(s-\\tau_n)^2ds=\\tfrac13|b_n|^2h_n^3\\le\\tfrac13h^2|b_n|^2h_n$. For the diffusion put $M^n_s=\\sigma_n(W_{s\\wedge\\tau_{n+1}}-W_{s\\wedge\\tau_n})$. Each entry is the stopped It\\^o integral of $\\sigma_n^{ij}1_{(\\tau_n,\\tau_{n+1}]}$; [F4], [F6], and [F8] imply $\\mathbb E\\sup_{s\\le T}|M^n_s|^2\\le4m\\mathbb E[\\|\\sigma_n\\|_F^2h_n]$. Therefore $\\mathbb E\\int_{\\tau_n}^{\\tau_{n+1}}|\\sigma_n(W_s-W_{\\tau_n})|^2ds\\le4mh\\mathbb E[\\|\\sigma_n\\|_F^2h_n]$. Sum over $n$ using [F9], $\\sum_{n<N}h_n=T$, the growth bound [F1], and moment bound [F3]: $\\int_0^T\\mathbb E|Y_s-\\bar Y_s|^2ds\\le C_1h$, where $C_1$ is independent of the controller and mesh; here $h^2\\le Th$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "F8",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The state-Lipschitz and time-modulus bounds in [F1], together with $|X_s-\\bar Y_s|\\le|e_s|+|Y_s-\\bar Y_s|$, imply for a constant $C_2$ fixed by the coefficient bounds, $|b(s,X_s)-b(\\eta(s),\\bar Y_s)|^2+\\|\\sigma(s,X_s)-\\sigma(\\eta(s),\\bar Y_s)\\|_F^2\\le C_2(|e_s|^2+|Y_s-\\bar Y_s|^2+(1+|\\bar Y_s|^2)(s-\\eta(s)))$. Since $s-\\eta(s)\\le h$ and [F3] bounds $\\mathbb E\\sup_{s\\le T}|Y_s|^2$, the time-modulus term has integral at most $C_3h$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $v(t)=\\mathbb E\\sup_{r\\le t}|e_r|^2$. The moment bounds [F3] and [F5], with [F10], make $v$ finite and continuous: pathwise running suprema are continuous and dominated by the integrable variable $2\\sup_{r\\le T}(|X_r|^2+|Y_r|^2)$. Apply Cauchy–Schwarz to the drift in step 1.1 and [F8] to each scalar diffusion coordinate, using $|\\sum_{j=1}^m z_j|^2\\le m\\sum_{j=1}^m|z_j|^2$. Then $v(t)\\le2T\\int_0^t\\mathbb E|b(s,X_s)-\\bar b_s|^2ds+8m\\int_0^t\\mathbb E\\|\\sigma(s,X_s)-\\bar\\sigma_s\\|_F^2ds$. Insert steps 1.2 and 1.3 and use $\\mathbb E|e_s|^2\\le v(s)$ to obtain $v(t)\\le C_4\\int_0^tv(s)ds+C_5h$, with constants independent of the controller and mesh. Gronwall [F7] gives $v(T)\\le C_5e^{C_4T}h$, hence also $\\sup_{t\\le T}\\mathbb E|e_t|^2\\le Ch$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F7",
+            "F8",
+            "F10",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The pathwise inequality $|e_{\\tau_n}|^2\\le\\sup_{t\\le T}|e_t|^2$ and step 2.1 give $\\mathbb E|e_{\\tau_n}|^2\\le Ch$ at each random grid endpoint. The constant does not depend on $N$, the lower step lengths, or the controller. The endpoint-refinement mode of [F2] does not meet the predictability hypothesis and is not covered. This proof claims no asymptotic cost law. AC is used only through [A1].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: T>0 and a finite predictable partition are required."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement: a positive-duration partition has positive maximum step h; the theorem assumes h>0 implicitly through its grid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.2–2.1: a single interval is covered by the same mesh and Gronwall estimates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.3: zero diffusion or zero drift is allowed; the proof uses only upper Lipschitz, growth, and time-modulus bounds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1: the estimate holds for every deterministic t in [0,T], including t=0 and t=T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1: AC is used only through [A1], with no selection in the error estimate."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The predictable-grid Euler interpolation has one-time mean-square error bounded by C h. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The predictable-grid Euler interpolation has one-time mean-square error bounded by C h. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "3.1"
+          ],
+          "declared_in_frontmatter": "AC is explicitly assumed or inherited through the Brownian, Gaussian, filtration, or Itô interface; the item proof identifies its role in [A1]."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "3.1"
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "zero-sde",
+          "model": "b=0, sigma=0 and the same initial value for X and Y.",
+          "result": "Both paths equal X_0, so the error is identically zero for every mesh.",
+          "evidence": "Proof steps 1.1–2.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "theorem",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-scalar-brownian-bridge-from-x-to-y": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the bridge requires a positive duration h and scalar endpoints x,y."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Definition: h=0 is excluded because the affine interpolation divides by h."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: x=y is allowed; the bridge is then the constant endpoint plus its centered bridge residual."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the endpoints may coincide; no endpoint separation or nondegeneracy is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the formula gives B_0=x and B_h=y directly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC is explicitly assumed from the Brownian interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The scalar Brownian bridge is defined by affine endpoint interpolation plus a centered Brownian residual. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The scalar Brownian bridge is defined by affine endpoint interpolation plus a centered Brownian residual. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [],
+          "uses": [
+            "Definition"
+          ],
+          "declared_in_frontmatter": "AC is stated in the definition as an interface assumption for its Brownian/Gaussian inputs."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "definition",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-scalar-brownian-bridge-restriction-density": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-brownian-motion",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A real process\n$B=(B_t)_{t\\ge0}$ is a **standard Brownian motion** if:\n\n1. $B_0=0$ almost surely;\n2. for every finite list $0=t_0<t_1<\\cdots<t_n$, the increments\n   $B_{t_j}-B_{t_{j-1}}$ are mutually independent and have laws\n   $N(0,t_j-t_{j-1})$; and\n3. there is one measurable event $A$ with $P(A)=1$ such that\n   $t\\mapsto B_t(\\omega)$ is continuous on $[0,\\infty)$ for every\n   $\\omega\\in A$.\n\nBy\n[[lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments]],\nthe first two clauses are equivalent to saying that $B$ is a centered Gaussian\nprocess with covariance $\\min(s,t)$. Clause 3 is additional: it cannot be\nrecovered from finite-dimensional distributions alone.\n\nNo filtration is part of this definition. In particular, no completed or\nright-continuous filtration and no Markov or martingale assertion is silently\nimposed. Modifications and indistinguishability retain the distinct meanings in\n[[def-law-modification-and-indistinguishability-of-processes]]. The cases\n$n=0$, $t_1=0$, and zero-length increments are respectively vacuous or already\ncovered by $B_0=0$; the increment list itself is strictly increasing.\n\nChoice is declared because the normal-law and Gaussian/increment-equivalence\ninterfaces construct and identify normal laws under AC. The continuity clause\nselects no path and makes no additional use of choice.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-brownian-transition-semigroup-property",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, and let $p_t$ and $P_t$ be the Brownian transition\nkernel and operators of [[def-brownian-transition-semigroup]].\n\n1. **Expectation form.** If $B$ is a standard Brownian motion\n   [[def-brownian-motion]], then for every $t\\ge0$, every $x\\in\\mathbb R$ and\n   every bounded Borel $f:\\mathbb R\\to\\mathbb R$,\n   $$P_tf(x)=E\\bigl[f(x+B_t)\\bigr].$$\n2. **Semigroup identity.** For all $s,t\\ge0$, $P_sP_t=P_{s+t}$ as operators on\n   bounded Borel functions.\n3. **Kernel identity.** For all $s,t>0$ and all $x,z\\in\\mathbb R$,\n   $$\\int_{\\mathbb R}p_s(x,y)\\,p_t(y,z)\\,dy=p_{s+t}(x,z).$$\n   Conversely, the kernel identity for all $x,z$ implies the semigroup identity\n   for all bounded Borel $f$.\n4. **Probability kernels.** $P_t1=1$ for every $t\\ge0$, so each $P_t$ is a\n   probability kernel operator and $\\|P_tf\\|_\\infty\\le\\|f\\|_\\infty$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates",
+          "source_section": "Statement",
+          "quote": "Put $C=C([0,\\infty),\\mathbb R)$, give $C$ the uniform-on-compacts topology,\nand write $\\pi_t(f)=f(t)$. Then\n$$\\mathcal B(C)=\\sigma(\\pi_t:t\\ge0)=\\sigma(\\pi_q:q\\in\\mathbb Q\\cap[0,\\infty)).$$\nHere each expression on the right denotes the smallest sigma-algebra on $C$\nmaking every displayed coordinate map measurable. No choice principle is used.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $\\beta_s=W_s-(s/h)W_h$. For any finite times $s_1,\\ldots,s_k\\in[0,h]$, [F1] makes $(\\beta_{s_1},\\ldots,\\beta_{s_k},W_h)$ jointly Gaussian. Direct covariance calculation gives $\\operatorname{Cov}(\\beta_{s_i},W_h)=s_i-(s_i/h)h=0$ and $\\operatorname{Cov}(\\beta_s,\\beta_t)=\\min(s,t)-st/h$. Hence [F2] makes every finite vector of bridge residual coordinates independent of $W_h$. The countable generating coordinates in [F4] then make the entire continuous residual path independent of $W_h$. Therefore conditioning on $W_h=y-x$ gives exactly the explicit bridge process from the definition, for each $y$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $t=0$, the restricted bridge path is the constant initial value $x$ and the density ratio is $p_h(y-x)/p_h(y-x)=1$. Now take $0<t<h$ and fix $0=s_0<s_1<\\cdots<s_k=t$. By independent increments and [F3], the joint density of $X_{s_1},\\ldots,X_{s_k},X_h$ at $z_1,\\ldots,z_k,y$ is $p_{s_1}(z_1-x)\\prod_{i=2}^kp_{s_i-s_{i-1}}(z_i-z_{i-1}) p_{h-t}(y-z_k).$ Dividing by the strictly positive endpoint density $p_h(y-x)$ gives the conditional bridge density for these coordinates. By step 1.1 this is the finite-dimensional law of the bridge in the definition. The same expression is the Brownian path density on $[0,t]$ multiplied by $p_{h-t}(y-X_t)/p_h(y-x)$ when the coordinate at time $t$ is included; integrating out that last coordinate uses the convolution identity [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus the restriction-density identity holds for every finite cylinder event on $[0,t]$. The density is nonnegative and integrates to one by [F3]. The class of path events for which the identity holds is a lambda-system containing the generating cylinder pi-system of [F4]; Dynkin's pi-lambda theorem therefore extends the identity to all Borel path events on $[0,t]$. This proves the restriction assertion.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By step 1.1, the joint law of the residual bridge path and endpoint $W_h$ is the product of the bridge residual law and the $N(0,h)$ endpoint density. Applying the measurable map $(\\beta,z)\\mapsto(x+(s/h)z+\\beta_s)_{0\\le s\\le h}$ and translating $z=y-x$ gives the stated full-path disintegration. The endpoint density is continuous and positive for every $y$ since $h>0$. The degenerate cases $t=0$ and a one-coordinate cylinder follow from the same formulas; $t=h$ is excluded from the restriction statement. AC is used only through [A1].",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1: the lambda-system extension includes the empty path event."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 and step 4.1: the t=0 restriction is the constant initial path and its density ratio is one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 4.1: the one-coordinate cylinder case is included in the restriction argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1: coincident endpoints x=y are allowed because h>0 keeps the endpoint density positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 covers t=0; the statement explicitly requires t<h and excludes t=h."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 4.1: AC is used only through [A1]; the finite-dimensional Gaussian and countable-cylinder argument is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The scalar bridge restriction to every t<h has the stated Brownian path density. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The scalar bridge restriction to every t<h has the stated Brownian path density. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "4.1"
+          ],
+          "declared_in_frontmatter": "AC is explicitly assumed or inherited through the Brownian, Gaussian, filtration, or Itô interface; the item proof identifies its role in [A1]."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "4.1"
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "initial-time-restriction",
+          "model": "t=0 with h>0.",
+          "result": "The restriction is the constant path at x and p_h(y-x)/p_h(y-x)=1.",
+          "evidence": "Proof step 2.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "lemma",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "thm-scalar-brownian-bridge-barrier-crossing-probability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-brownian-reflection-principle",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, let $B$ be a standard Brownian motion\n[[def-brownian-motion]]. All path operations below use a fixed\neverywhere-continuous, zero-start representative: choose a measurable\nprobability-one event on which the paths are continuous and $B_0=0$, and\nreplace $B$ by the zero path off this event, as in\n[[def-wiener-measure-on-continuous-path-space]]. Retain the notation $B$ for\nthis representative and use its own raw natural filtration and usual\naugmentation. This preserves every finite-dimensional law; all maxima and\nhitting times below refer to this representative, without transferring\nstopping times between the raw filtrations of different versions.\nLet $a>0$ and $T>0$, and put\n$$M_T:=\\sup_{0\\le s\\le T}B_s,\\qquad \\tau_a:=\\inf\\{s\\ge0:B_s=a\\} .$$\nThen:\n\n1. The path reflected at $\\tau_a$ has Wiener law: for each $T>0$ the process\n   $(B_u)_{0\\le u\\le T}$ and its reflection $\\widetilde B_u:=B_u$ for\n   $u\\le\\tau_a\\wedge T$, $\\widetilde B_u:=2a-B_u$ for\n   $\\tau_a\\wedge T<u\\le T$, have the same law on the cylinder sigma-algebra\n   $\\sigma(\\pi_u:u\\in[0,T])$ of $\\mathbb R^{[0,T]}$.\n2. For every $b\\le a$,\n   $$P(M_T\\ge a,\\ B_T\\le b)=P(B_T\\ge2a-b),$$\n   and in particular $P(M_T\\ge a)=2P(B_T\\ge a)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-scalar-brownian-bridge-from-x-to-y",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $h>0$, $x,y\\in\\mathbb R$, and let $W$ be a standard scalar\nBrownian motion on $[0,h]$. The **scalar Brownian bridge from $x$ to $y$ over\nduration $h$** is the continuous Gaussian process\n$$B^{x,y,h}_t=x+\\frac{t}{h}(y-x)+W_t-\\frac{t}{h}W_h, \\qquad 0\\le t\\le h.$$\nIt starts at $x$ and ends at $y$. Its law does not depend on which Brownian\nmotion is used. The endpoint-conditional and restriction-density properties are established\nseparately on the A page.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-scalar-brownian-bridge-restriction-density",
+          "source_section": "Statement",
+          "quote": "Assume AC, let $h>0$ and $x,y\\in\\mathbb R$, and let $\\mu_{x,y}^h$ be the\nlaw on $C([0,h])$ of the bridge in\n[[def-scalar-brownian-bridge-from-x-to-y]]. If $X_s=x+W_s$ is Brownian motion\nstarted at $x$, then for every Borel path event $A\\subseteq C([0,h])$ and\nBorel set $D\\subseteq\\mathbb R$,\n$$\\mathbb P\\{X\\in A,\\ X_h\\in D\\}= \\int_D p_h(y-x)\\,\\mu_{x,y}^h(A)\\,dy,$$\nwhere $p_t(z)=(2\\pi t)^{-1/2}e^{-z^2/(2t)}$. In particular this specifies\nthe endpoint-conditioned bridge law for every endpoint $y$. For every\n$0\\le t<h$, the restriction of $\\mu_{x,y}^h$ to path events up to time $t$\nhas density\n$$\\frac{p_{h-t}(y-X_t)}{p_h(y-x)}$$\nrelative to Brownian motion $X$ started at $x$ on $[0,t]$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-brownian-transition-semigroup-property",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, and let $p_t$ and $P_t$ be the Brownian transition\nkernel and operators of [[def-brownian-transition-semigroup]].\n\n1. **Expectation form.** If $B$ is a standard Brownian motion\n   [[def-brownian-motion]], then for every $t\\ge0$, every $x\\in\\mathbb R$ and\n   every bounded Borel $f:\\mathbb R\\to\\mathbb R$,\n   $$P_tf(x)=E\\bigl[f(x+B_t)\\bigr].$$\n2. **Semigroup identity.** For all $s,t\\ge0$, $P_sP_t=P_{s+t}$ as operators on\n   bounded Borel functions.\n3. **Kernel identity.** For all $s,t>0$ and all $x,z\\in\\mathbb R$,\n   $$\\int_{\\mathbb R}p_s(x,y)\\,p_t(y,z)\\,dy=p_{s+t}(x,z).$$\n   Conversely, the kernel identity for all $x,z$ implies the semigroup identity\n   for all bounded Borel $f$.\n4. **Probability kernels.** $P_t1=1$ for every $t\\ge0$, so each $P_t$ is a\n   probability kernel operator and $\\|P_tf\\|_\\infty\\le\\|f\\|_\\infty$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First assume $x,y>c$, put $a=x-c>0$, $z=x-y$, and let $W^z$ denote the canonical bridge from $0$ to $z$ over duration $h$. The bridge event in the Statement has the law of $\\{\\sup_{s\\le h}W^{z}_s\\ge a\\}$: subtracting the bridge path from $x$ negates its centered Gaussian residual and has terminal value $z$. Since $z=a-(y-c)<a$, the restriction and endpoint-disintegration statement [F2] applies to this endpoint.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $q(z)=\\mathbb P\\{\\sup_{s\\le h}W^z_s\\ge a\\}$. From [F1], for $u<v<a$, $\\mathbb P\\{\\sup_{s\\le h}W_s\\ge a,\\ u<W_h\\le v\\} =\\int_u^vp_h(2a-r)dr.$ Indeed, subtract the reflection identities at $v$ and $u$ and change variables in the Gaussian endpoint integral [F3]. The full endpoint disintegration [F2] then identifies $q(r)p_h(r)=p_h(2a-r)$ for Lebesgue-almost every $r<a$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The function $q$ is continuous on $(-\\infty,a)$. Under the explicit bridge representation, changing endpoint from $r$ to $r'$ changes the path uniformly by at most $|r-r'|$. Thus the crossing indicators converge almost surely as $r'\\to r$ unless the bridge maximum equals $a$. For fixed $r<a$, if that maximum equals $a$, it is attained before $h$; hence for some $t_k=h(1-1/k)<h$ the bridge maximum on $[0,t_k]$ equals $a$. By the restriction density in [F2], this event has probability zero because the Brownian maximum on $[0,t_k]$ has a continuous distribution by the reflection identity [F1] and the continuous Gaussian density [F3]. The countable union over $k\\ge2$ is null. Dominated convergence proves continuity of $q$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Both $q(r)p_h(r)$ and $p_h(2a-r)$ are continuous on $r<a$. Step 1.2 shows they agree almost everywhere there; if their difference were nonzero at one point, continuity would make it nonzero on an interval of positive Lebesgue measure, a contradiction. Hence $q(z)=\\frac{p_h(2a-z)}{p_h(z)}$ for the specified endpoint $z<a$. Since $2a-z=(x-c)+(y-c)$ and $z=(x-c)-(y-c)$, the Gaussian density ratio is $\\exp\\left(-\\frac{((x-c)+(y-c))^2-((x-c)-(y-c))^2}{2h}\\right) =\\exp\\left(-\\frac{2(x-c)(y-c)}h\\right).$",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $x=c$ or $y=c$, the bridge begins or ends at the barrier, so the event in the Statement is certain and the right side is $e^0=1$. These boundary cases complete the claim for $x,y\\ge c$. The strict case used $z<a$, which follows exactly from $y>c$; no formula is asserted when an endpoint lies below the barrier. AC is used only through [A1].",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 4.1: when x=c or y=c the bridge starts or ends on the barrier, so crossing is certain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement requires h>0; Proof step 3.1 divides by the strictly positive Gaussian density p_h(z) and 2h. Step 4.1 handles zero endpoint distance to the barrier with probability one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 4.1: an endpoint equal to c is handled explicitly and gives probability one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1: boundary endpoints x=c or y=c are proved separately from the strict interior case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 4.1: both endpoint boundary cases are included; the strict proof uses x,y>c."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 4.1: AC is inherited only through [A1]; the density and continuity argument makes no further selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: The scalar bridge crossing probability equals exp(-2(x-c)(y-c)/h), including endpoint equality. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: The scalar bridge crossing probability equals exp(-2(x-c)(y-c)/h), including endpoint equality. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "4.1"
+          ],
+          "declared_in_frontmatter": "AC is explicitly assumed or inherited through the Brownian, Gaussian, filtration, or Itô interface; the item proof identifies its role in [A1]."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "4.1"
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "unit-symmetric-bridge",
+          "model": "x=y=1, c=0, h=1.",
+          "result": "The crossing probability is exp(-2).",
+          "evidence": "Proof steps 1.1–4.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "theorem",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "ex-redrawing-rejected-increment-biases-path": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-dyadic-brownian-bridge-increment-tree",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as in the finite-dimensional Gaussian and Brownian\ninterfaces. Let a node represent an interval $[u,u+h]$, where $h>0$, and let\n$\\Delta W\\in\\mathbb R^m$ be its already sampled parent increment. Draw a fresh\nvector $Z\\sim N_m(0,(h/4)I_m)$ independently of the parent and of every\ninnovation used at another node. Store the two child increments\n$$\\Delta W_L=\\tfrac12\\Delta W+Z,\\qquad \\Delta W_R=\\tfrac12\\Delta W-Z.$$\n\nFor a finite ordered list of $q\\in\\mathbb N_0$ split requests, each naming an\nexisting leaf, apply the rule once to each requested leaf and retain every\nparent. Process a rejected trial's left child before its right child; if a\nchild is later refined, draw a new independent innovation for it. Each request\nreplaces one leaf by two children, so the result is a finite rooted tree with\nthe sampled increments, interval lengths, and left-to-right order. Never\ndiscard a sampled parent and redraw a replacement for the same interval. The\nprocedure assigns increments at dyadic tree nodes; it does not by itself\ndefine values at nondyadic times or prove that the node-selection rule is\npredictable. In an adaptive run, a finite work budget supplies a finite list\nof requests.\n\nThe independence assertion for the two children is unconditional before the\nparent is revealed. Conditional on a fixed parent, their sum is fixed and their\nconditional covariance is $-(h/4)I_m$; they are not conditionally independent.\nThe exact fixed-depth Brownian increment law is proved separately on the A page.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $I=[-c,c]$ and $p=\\mathbb P\\{G_1\\in I\\}>0$. For each Borel $A$, the event that the first accepted draw lies in $A$ is the disjoint union over $k\\ge0$ of the events that the first $k$ draws lie outside $I$ and draw $k+1$ lies in $A\\cap I$. Independence therefore gives $\\mathbb P\\{R\\in A\\}=\\sum_{k=0}^\\infty(1-p)^k \\mathbb P\\{G_1\\in A\\cap I\\}=\\frac{\\mathbb P\\{G_1\\in A\\cap I\\}}p.$ This is exactly the stated truncated-normal law.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The law is symmetric, so $\\mathbb ER=0$. Both $I$ and its complement have positive probability. On $I$, $G_1^2\\le c^2$ with strict inequality on a positive-probability subset; on $I^c$, $G_1^2>c^2$. Hence $\\mathbb E[G_1^2\\mid G_1\\in I]<c^2< \\mathbb E[G_1^2\\mid G_1\\notin I].$ The unconditional variance $h=\\mathbb EG_1^2$ is the strict weighted average of these two conditional second moments. Therefore $\\operatorname{Var}(R)=\\mathbb E[G_1^2\\mid G_1\\in I]<h$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The resampled increment is thus not $N(0,h)$, whereas bridge refinement in [F2] preserves the already sampled parent increment by exact sum consistency. This example concerns endpoint-dependent rejection; it does not contradict the predictable-grid error theorem, whose step lengths are fixed from current information.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1: for the empty Borel set A both sides of the truncated-law identity are zero."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Example: h>0 and c>0 are hypotheses; zero variance and zero acceptance-window width are excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: the k=0 term explicitly includes acceptance on the first draw."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1: the conditional variance is strictly below h because both the interval and its complement have positive Gaussian probability."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1: the closed window [-c,c] is used; the continuous density gives its boundary zero mass."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1: AC is inherited through [A1]; the geometric-series and variance calculations use no additional choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: Repeatedly redrawing an increment after an endpoint rejection changes its Gaussian law. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: Repeatedly redrawing an increment after an endpoint rejection changes its Gaussian law. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "3.1"
+          ],
+          "declared_in_frontmatter": "AC is explicitly assumed or inherited through the Brownian, Gaussian, filtration, or Itô interface; the item proof identifies its role in [A1]."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "3.1"
+          ]
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "example",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "ex-coarse-fine-em-bridge-coupling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-euler-maruyama",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and use the finite-dimensional Brownian-motion\nconvention of [[def-d-dimensional-brownian-motion]]. Let the state dimension\n$d$ and noise dimension $m$ be positive finite integers, and fix $T>0$ and\n$N\\in\\mathbb N$ with $N\\ge1$. Set $h=T/N>0$ and $t_k=kh$ for\n$0\\le k\\le N$. Let\n$b:[0,T]\\times\\mathbb R^d\\to\\mathbb R^d$ and\n$\\sigma:[0,T]\\times\\mathbb R^d\\to\\mathbb R^{d\\times m}$ be jointly Borel.\nWrite $|\\cdot|$ for the Euclidean norm and $\\|\\cdot\\|_F$ for the Frobenius\nnorm. Suppose finite constants $L,K$ satisfy, for every $s,t\\in[0,T]$ and\n$x,y\\in\\mathbb R^d$,\n$$|b(t,x)-b(t,y)|+\\|\\sigma(t,x)-\\sigma(t,y)\\|_F\\le L|x-y|,$$\n$$|b(t,x)|^2+\\|\\sigma(t,x)\\|_F^2\\le K^2(1+|x|^2),$$\nand\n$$|b(t,x)-b(s,x)|+\\|\\sigma(t,x)-\\sigma(s,x)\\|_F\\le K(1+|x|)|t-s|^{1/2}.$$\nLet $W$ be an adapted standard $m$-dimensional Brownian motion on a filtered\nprobability space, with $W_t-W_s$ independent of $\\mathcal F_s$ and law\n$N_m(0,(t-s)I_m)$ whenever $0\\le s<t\\le T$. Let $X_0$ be\n$\\mathcal F_0$-measurable, independent of future Brownian increments, and\n$\\mathbb E|X_0|^2<\\infty$.\n\nThe **Euler–Maruyama algorithm** takes these data as input and returns\n$Y_0,\\ldots,Y_N$:\n\n1. Set $Y_0=X_0$.\n2. For $k=0,\\ldots,N-1$, form $\\Delta W_k=W_{t_{k+1}}-W_{t_k}$ and set\n   $$Y_{k+1}=Y_k+b(t_k,Y_k)h+\\sigma(t_k,Y_k)\\Delta W_k.$$\n\nThe output is the grid approximation for the coefficient pair $(b,\\sigma)$.\nThe companion step-process and interpolation definition uses this same grid\nand endpoint convention.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-dyadic-brownian-bridge-increment-tree",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as in the finite-dimensional Gaussian and Brownian\ninterfaces. Let a node represent an interval $[u,u+h]$, where $h>0$, and let\n$\\Delta W\\in\\mathbb R^m$ be its already sampled parent increment. Draw a fresh\nvector $Z\\sim N_m(0,(h/4)I_m)$ independently of the parent and of every\ninnovation used at another node. Store the two child increments\n$$\\Delta W_L=\\tfrac12\\Delta W+Z,\\qquad \\Delta W_R=\\tfrac12\\Delta W-Z.$$\n\nFor a finite ordered list of $q\\in\\mathbb N_0$ split requests, each naming an\nexisting leaf, apply the rule once to each requested leaf and retain every\nparent. Process a rejected trial's left child before its right child; if a\nchild is later refined, draw a new independent innovation for it. Each request\nreplaces one leaf by two children, so the result is a finite rooted tree with\nthe sampled increments, interval lengths, and left-to-right order. Never\ndiscard a sampled parent and redraw a replacement for the same interval. The\nprocedure assigns increments at dyadic tree nodes; it does not by itself\ndefine values at nondyadic times or prove that the node-selection rule is\npredictable. In an adaptive run, a finite work budget supplies a finite list\nof requests.\n\nThe independence assertion for the two children is unconditional before the\nparent is revealed. Conditional on a fixed parent, their sum is fixed and their\nconditional covariance is $-(h/4)I_m$; they are not conditionally independent.\nThe exact fixed-depth Brownian increment law is proved separately on the A page.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dyadic-brownian-bridge-tree-increment-laws",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix $m\\ge1$, $h>0$, and a finite tree depth $r\\ge0$. Take a root\nincrement $D_\\varnothing\\sim N_m(0,hI_m)$. At each internal node $v$ of\nlength $\\ell_v=h/2^{|v|}$, use the split in\n[[alg-dyadic-brownian-bridge-increment-tree]] with a fresh\n$Z_v\\sim N_m(0,(\\ell_v/4)I_m)$ independent of the root and of all other\ninnovations. Then the $2^r$ increments at depth $r$ are mutually independent\nand each has law $N_m(0,(h/2^r)I_m)$. At every internal node its increment is\nexactly the sum of its two children. The independence claim is unconditional;\nconditional on a fixed parent, the two children have covariance\n$-(\\ell_v/4)I_m$ and are not independent.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Applying [F1] once with $b(y)=y$ and $\\sigma(y)=1$ gives $Y_c=y_0+hy_0+\\Delta W=(1+h)y_0+\\Delta W$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F1] on the first fine half-step gives $Y_{1/2}=(1+h/2)y_0+\\Delta W_1$. The second half-step gives $Y_f=(1+h/2)Y_{1/2}+\\Delta W_2$, so substitution yields the displayed fine formula.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitute [F2] into $Y_f$ and subtract $Y_c$ from step 1.1: $Y_f-Y_c=\\bigl((1+h/2)^2-(1+h)\\bigr)y_0+ \\bigl((1+h/2)(\\Delta W/2+Z)+(\\Delta W/2-Z)-\\Delta W\\bigr) =\\frac{h^2}{4}y_0+\\frac h4\\Delta W+\\frac h2Z.$ For $y_0=0$, independence and the variances in [F2] give $\\operatorname{Var}(Y_f-Y_c)=(h/4)^2h+(h/2)^2(h/4)=h^3/8$. The identity $\\Delta W_1+\\Delta W_2=\\Delta W$ makes this a path-consistent coupling, not two independent simulations.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The case $h=0$ is excluded; for every $h>0$ the fine difference has strictly positive variance at $y_0=0$. A nonzero initial value changes the mean by $h^2y_0/4$ but not that variance. This example checks an exact finite-dimensional coupling only; it is not a general MLMC or convergence rate theorem.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: h>0 and a sampled parent increment are required to define a coarse/fine step."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: y_0=0 is evaluated explicitly, giving a centered difference with positive variance h^3/8."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and steps 1.1–2.1: one coarse step is compared with the two fine half-steps."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1: for every h>0 the difference variance is strictly positive when y_0=0; h=0 is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1: the two child increments sum to the parent, so both paths share the same Brownian endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 4.1: AC is inherited through [A1]; the finite Euler algebra makes no additional selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: Bridge splitting gives an exact coarse/fine Euler coupling with a computable nonzero difference. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: Bridge splitting gives an exact coarse/fine Euler coupling with a computable nonzero difference. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "4.1"
+          ],
+          "declared_in_frontmatter": "AC is explicitly assumed or inherited through the Brownian, Gaussian, filtration, or Itô interface; the item proof identifies its role in [A1]."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "4.1"
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "h-two-zero-start",
+          "model": "h=2, y_0=0, DeltaW~N(0,2), Z~N(0,1/2), independent.",
+          "result": "Y_f-Y_c=(1/2)DeltaW+Z and its variance is 1=h^3/8.",
+          "evidence": "Proof step 3.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "example",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "ex-brownian-bridge-barrier-missed-by-endpoints": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply the crossing theorem with $x=y=1$, $c=0$, and $h=1$. Its hypotheses $x,y\\ge c$ and $h>0$ hold, and it gives $\\mathbb P\\{\\inf_{0\\le s\\le1}B_s\\le0\\}= \\exp(-2(1-0)(1-0)/1)=e^{-2}$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $e^{-2}>0$, the endpoint-only check “both endpoints exceed zero” does not certify that the path stayed above zero. If either endpoint were exactly zero, the crossing event would instead have probability one by the boundary case of the same theorem.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the interval has positive duration one and two specified endpoints."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Example: duration h=1; the zero-duration bridge is outside the input domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: the example evaluates the single bridge with endpoints x=y=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1: the bridge has positive crossing probability despite both endpoints being strictly above the barrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1: both endpoints are 1>0, while the interior crossing event has probability e^-2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1: AC is inherited through [A1]; the theorem substitution uses no further selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: A Brownian bridge can cross a barrier even when its two observed endpoints are above it. This is a direct definition, construction, estimate, or example, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: A Brownian bridge can cross a barrier even when its two observed endpoints are above it. The item gives no converse hypothesis-recovery direction and is not an iff criterion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "2.1"
+          ],
+          "declared_in_frontmatter": "AC is explicitly assumed or inherited through the Brownian, Gaussian, filtration, or Itô interface; the item proof identifies its role in [A1]."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "2.1"
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "unit-barrier-crossing",
+          "model": "x=y=1, c=0, h=1.",
+          "result": "The bridge crosses zero with probability exp(-2)>0.",
+          "evidence": "Proof step 1.1"
+        }
+      ],
+      "finite_smoke": [],
+      "risk": "Draft local proof remains subject to the native independent-review stages. Owner resolved the stale T13 body-availability hold and unavailable planned-source disposition; see numerical-optimization-dynamics-2026-10-16-owner-adaptive-sde-escalation.json.",
+      "kind": "example",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    }
+  }
+}

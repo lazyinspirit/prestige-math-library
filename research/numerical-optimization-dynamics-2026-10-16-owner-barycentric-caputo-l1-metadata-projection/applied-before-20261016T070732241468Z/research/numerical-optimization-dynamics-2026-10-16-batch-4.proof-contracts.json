@@ -1,0 +1,2544 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "4",
+  "scope": [
+    "lem-finite-coefficient-vector-has-polynomial-representative",
+    "lem-finite-double-sum-interchange",
+    "lem-finite-product-of-nonzero-reals-is-nonzero",
+    "lem-polynomial-highest-derivative",
+    "lem-product-of-linear-factors-is-monic-polynomial",
+    "def-cardinal-polynomial-interpolation",
+    "lem-finite-product-of-quotients",
+    "lem-cardinal-basis-degree-and-values",
+    "prop-equispaced-interpolation-basis-growth",
+    "thm-cardinal-polynomial-interpolant-exists-uniquely",
+    "thm-barycentric-interpolation-identities",
+    "thm-lagrange-interpolation-remainder",
+    "alg-finite-barycentric-interpolation-evaluator",
+    "prop-finite-barycentric-interpolation-evaluator-returns-status",
+    "ex-equispaced-cardinal-basis-growth",
+    "ex-quadratic-interpolation-at-three-nodes",
+    "ex-cubic-interpolation-pointwise-remainder"
+  ],
+  "contracts": {
+    "lem-finite-coefficient-vector-has-polynomial-representative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal real polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "**Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) fo",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-reals-field",
+          "source_section": "Statement",
+          "quote": "is a field.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-zero-mult",
+          "source_section": "Statement",
+          "quote": "In any field $F$ ([[def-field]]), for every $a \\in F$ we have $0 \\cdot a = 0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For $n=0$, if $c_0=0$ choose the zero polynomial, whose evaluation is $0$; if $c_0\\ne0$, choose the one-term formal list $(c_0)$, of degree $0$ and leading coefficient $c_0$. In both cases its evaluation is $c_0x^0=c_0$.",
+          "inputs": [
+            "base",
+            "given",
+            "F1",
+            "F4",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Suppose the assertion holds for vectors of length $n+1$, and consider $c_0,\\ldots,c_n,c_{n+1}$. If $c_{n+1}=0$, the finite-sum recursion and [F4] show that the displayed evaluation is the evaluation for the prefix vector; use its representative from the induction hypothesis. If $c_{n+1}\\ne0$, the formal coefficient list $(c_0,\\ldots,c_n,c_{n+1})$ is valid by [F1], has degree $n+1$ and leading coefficient $c_{n+1}$, and evaluates to the displayed sum by [F2]. The zero-characterization in the first case is inherited from the prefix; in the second case both the vector and the polynomial are nonzero.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra",
+            "ih",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Induction [F3] now supplies the representative for every $n$. The construction also proves that it is zero exactly when all vector entries vanish, and that a nonzero final entry is its leading coefficient at degree $n$.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F3",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires coefficient vector c_0,...,c_n and no interval domain; it has no separate empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 prove the all-zero branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves n=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item requires coefficient vector c_0,...,c_n and no interval domain; it has no separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item requires coefficient vector c_0,...,c_n and no interval domain; it has no separate endpoints branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "lem-finite-coefficient-vector-has-polynomial-representative constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires coefficient vector c_0,...,c_n and no interval domain; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires coefficient vector c_0,...,c_n and no interval domain; it has no separate reverse branch."
+        }
+      ]
+    },
+    "lem-finite-double-sum-interchange": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** functio",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "**Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) fo",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication)",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reals-field",
+          "source_section": "Statement",
+          "quote": "is a field.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For $n=0$, both iterated sums are empty and equal $0$ by [F1].",
+          "inputs": [
+            "base",
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Assume the identity for every $n$-by-$n$ real array, and consider an arbitrary $(n+1)$-by-$(n+1)$ array. Splitting at the last row and column and using finite-sum additivity [F1] gives $\\sum_{j<n+1}\\sum_{k<n+1}a_{jk}=\\sum_{j<n}\\sum_{k<n}a_{jk}+\\sum_{j<n}a_{j,n}+\\sum_{k<n}a_{n,k}+a_{n,n}$. Splitting in the opposite order gives $\\sum_{k<n+1}\\sum_{j<n+1}a_{jk}=\\sum_{k<n}\\sum_{j<n}a_{jk}+\\sum_{k<n}a_{n,k}+\\sum_{j<n}a_{j,n}+a_{n,n}$. The induction hypothesis equates the first terms, and associativity and commutativity [F3] equate the remaining sums after interchanging their order. Thus the identity holds for the successor size.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "ih",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Induction [F2] using steps 1.1 and 1.2 proves the identity for every finite square array.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies both empty iterated sums."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement permits array entries to be zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 prove the one-by-one case as the first induction successor."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item requires a finite square array of real numbers; it has no separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item requires a finite square array of real numbers; it has no separate endpoints branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "lem-finite-double-sum-interchange constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires a finite square array of real numbers; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires a finite square array of real numbers; it has no separate reverse branch."
+        }
+      ]
+    },
+    "lem-finite-product-of-nonzero-reals-is-nonzero": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "**Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) fo",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reals-field",
+          "source_section": "Statement",
+          "quote": "is a field.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-no-zero-divisors",
+          "source_section": "Statement",
+          "quote": "if $a, b \\in F$ satisfy $ab = 0$, then $a = 0$ or $b = 0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For $n=0$, the empty product is $1$, which is nonzero by [F3].",
+          "inputs": [
+            "base",
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Suppose the prefix product $\\prod_{k<n}a_k$ is nonzero and the next factor $a_n$ is nonzero. By [F1] the extended product is $(\\prod_{k<n}a_k)a_n$; [F4] implies it cannot be zero, since both factors are nonzero.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "ih",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Induction [F2] applied to steps 1.1 and 1.2 proves the claim for every finite list of nonzero real factors.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the empty product is 1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item requires a finite list of nonzero real factors; it has no separate zero branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 covers a one-factor product."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item requires a finite list of nonzero real factors; it has no separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item requires a finite list of nonzero real factors; it has no separate endpoints branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "lem-finite-product-of-nonzero-reals-is-nonzero constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires a finite list of nonzero real factors; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires a finite list of nonzero real factors; it has no separate reverse branch."
+        }
+      ]
+    },
+    "lem-polynomial-highest-derivative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal real polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at e",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) fo",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**(d) Boundary values.** $n^{\\underline{0}} = 1$ for every $n$, by the base\nclause; $n^{\\underline{n}} = n!$, since clause (c) at $k = n$ gives\n$n^{\\underline{n}}\\cdot 0!",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "source_section": "Statement",
+          "quote": "6. **The bridge into $\\mathbb{R}$.**\n   $\\displaystyle\\iota\\Big(\\sum^{\\mathbb{N}}_{k<n} a_k\\Big) = \\sum^{\\mathbb{R}}_{k<n} \\iota(a_k)$\n   and\n   $\\displaystyle\\iota\\Big(\\prod^{\\mathbb{N}}_{k<n} a_k\\Big) = \\prod^{\\mathbb{R}}_{k<n} \\iota(a_k)$.\n7. **$\\",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By [F1], the evaluation function of $p$ is $\\sum_{k=0}^{m}a_kX^k$; zero padding changes this finite sum by zero terms only. For $0\\le r\\le m$, define the real function $Q_r(X)=\\sum_{k=r}^{m}a_k\\bigl(\\prod_{s=0}^{r-1}(k-s)\\bigr)X^{k-r}$, with the empty product equal to $1$; each factor $k-s$ is natural because $k\\ge r>s$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "At $r=0$, $Q_0=p=p^{(0)}$ by [F2]. If $r<m$ and $p^{(r)}=Q_r$, termwise differentiation in [F3] kills the $k=r$ constant term and multiplies each term with $k>r$ by its exponent $k-r$; the result is exactly $Q_{r+1}$. Hence $p^{(r+1)}=Q_{r+1}$.",
+          "inputs": [
+            "base",
+            "given",
+            "step 1.1",
+            "F2",
+            "F3",
+            "ih",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Apply [F4] to the property $P(r)$ that $r\\le m$ implies $p^{(r)}=Q_r$. Step 1.1 proves $P(0)$. If $P(r)$ holds and $r+1\\le m$, then $r<m$ and step 2.1 proves $p^{(r+1)}=Q_{r+1}$; if $r+1>m$, $P(r+1)$ is vacuous. Thus $P(m)$ holds.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F4",
+            "ih",
+            "discharge-induction"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "At $r=m$, the sum defining $Q_m$ contains only $k=m$ and equals $a_m\\prod_{s=0}^{m-1}(m-s)=a_m m!_{\\mathbb R}$: [F6] identifies the natural falling product with $m!$, and [F7] carries it to the real product in the statement. This proves the stated derivative and both special cases.",
+          "inputs": [
+            "step 3.1",
+            "given",
+            "F6",
+            "F7",
+            "discharge-induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires m>=1 and a global polynomial function; it has no separate empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 include the zero polynomial."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 include m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item requires m>=1 and a global polynomial function; it has no separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item requires m>=1 and a global polynomial function; it has no separate endpoints branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "lem-polynomial-highest-derivative constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires m>=1 and a global polynomial function; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires m>=1 and a global polynomial function; it has no separate reverse branch."
+        }
+      ]
+    },
+    "lem-product-of-linear-factors-is-monic-polynomial": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal real polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "**Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-power-laws",
+          "source_section": "Statement",
+          "quote": "For all $m, n \\in \\mathbb{N}$: $a^{m+n} = a^m a^n$, $(a^m)^n = a^{mn}$ and $(ab)^n = a^n b^n$.\n2. If $a \\",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-reals-field",
+          "source_section": "Statement",
+          "quote": "is a field.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) fo",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "At $n=0$, the empty product is $1$, the evaluation of the one-term polynomial $(1)$, which is monic of degree zero.",
+          "inputs": [
+            "base",
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Suppose $P_n(X)=\\sum_{k=0}^{n}a_kX^k$ with $a_n=1$, as supplied by the induction hypothesis. Multiplication by the next factor gives $P_n(X)(X-r_n)=\\sum_{k=0}^{n}a_kX^{k+1}-\\sum_{k=0}^{n}r_na_kX^k.$ By the finite-sum and field laws [F2, F4], this is represented by the coefficient list $b_0=-r_na_0$, $b_k=a_{k-1}-r_na_k$ for $1\\le k\\le n$, and $b_{n+1}=a_n=1$. This list is a formal polynomial by [F1]; its last coefficient is $1$, so its degree is $n+1$ and it is monic.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra",
+            "ih",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Induction [F5] proves the claim for every finite list length, including the empty product case.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F5",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 checks n=0."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item requires finite product and no interval domain; it has no separate zero branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the one-factor case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item requires finite product and no interval domain; it has no separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item requires finite product and no interval domain; it has no separate endpoints branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "lem-product-of-linear-factors-is-monic-polynomial constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires finite product and no interval domain; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires finite product and no interval domain; it has no separate reverse branch."
+        }
+      ]
+    },
+    "def-cardinal-polynomial-interpolation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition specifies n=0 empty product as 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits zero nodal values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition explicitly handles n=0 and one node."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item requires finite distinct nodes and no interval; it has no separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item requires finite distinct nodes and no interval; it has no separate endpoints branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "def-cardinal-polynomial-interpolation constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires finite distinct nodes and no interval; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires finite distinct nodes and no interval; it has no separate reverse branch."
+        }
+      ]
+    },
+    "lem-finite-product-of-quotients": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**No",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) fo",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reals-field",
+          "source_section": "Statement",
+          "quote": "is a field.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication)",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-inverse-unique",
+          "source_section": "Statement",
+          "quote": "multiplicative inverse are unique.\nHence the notations $0$, $1$, $-x$, and $x^{-1}$ denote well-defined e",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-product-of-nonzero-reals-is-nonzero",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$ and let $a_0,\\ldots,a_{n-1}\\in\\mathbb R$ all be nonzero. Then the finite product $\\pr",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For $n=0$, both products are empty and equal $1$ by [F1]. Also $1^{-1}=1$, since $1\\cdot1=1$ and inverses are unique by [F3, F4]. Thus both sides equal $1$.",
+          "inputs": [
+            "base",
+            "given",
+            "F1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Assume the identity for the first $n$ terms, and append $u_n\\in\\mathbb R$ and $d_n\\ne0$. Put $U=\\prod_{k<n}u_k$ and $D=\\prod_{k<n}d_k$. By [F5], both $D$ and the extended denominator product $Dd_n$ are nonzero, so $D^{-1}$ and $(Dd_n)^{-1}$ exist; also $d_n^{-1}$ exists by [F3]. Associativity and commutativity give $(Dd_n)(D^{-1}d_n^{-1})=(DD^{-1})(d_nd_n^{-1})=1$, so uniqueness [F4] gives $(Dd_n)^{-1}=D^{-1}d_n^{-1}$. Using the induction hypothesis, product recursion [F1], and the quotient convention, $$\\prod_{k<n+1}\\frac{u_k}{d_k}=\\left(\\prod_{k<n}\\frac{u_k}{d_k}\\right)\\frac{u_n}{d_n}=\\frac{U}{D}\\frac{u_n}{d_n}=\\frac{Uu_n}{Dd_n}=\\frac{\\prod_{k<n+1}u_k}{\\prod_{k<n+1}d_k}.$$ The equality $(U/D)(u_n/d_n)=(Uu_n)/(Dd_n)$ follows from associativity and commutativity together with $(Dd_n)^{-1}=D^{-1}d_n^{-1}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "ih",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Induction [F2] applied to steps 1.1 and 1.2 proves the identity for every finite list length.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies both empty products and the quotient 1/1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement permits zero numerators; step 1.2 only requires the denominator to be nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 prove the one-factor case as the first induction successor."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item requires finite lists of real numerators and nonzero real denominators; it has no separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item requires finite lists of real numerators and nonzero real denominators; it has no separate endpoints branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "lem-finite-product-of-quotients constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires finite lists of real numerators and nonzero real denominators; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires finite lists of real numerators and nonzero real denominators; it has no separate reverse branch."
+        }
+      ]
+    },
+    "lem-cardinal-basis-degree-and-values": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cardinal-polynomial-interpolation",
+          "source_section": "Definition",
+          "quote": "Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\le",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-product-of-linear-factors-is-monic-polynomial",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$ and reals $r_0,\\ldots,r_{n-1}$, the function\n$$P_n(X)=\\prod_{k<n}(X-r_k)$$\nis t",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-coefficient-vector-has-polynomial-representative",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$ and reals $c_0,\\ldots,c_n$, the function\n$$q(x)=\\sum_{k=0}^{n}c_kx^k$$\nis the e",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal real polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-reals-field",
+          "source_section": "Statement",
+          "quote": "is a field.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "totally ordered field.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-no-zero-divisors",
+          "source_section": "Statement",
+          "quote": "if $a, b \\in F$ satisfy $ab = 0$, then $a = 0$ or $b = 0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-product-of-nonzero-reals-is-nonzero",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$ and let $a_0,\\ldots,a_{n-1}\\in\\mathbb R$ all be nonzero. Then the finite product $\\prod_{k<n}a_k$ is nonzero. For $n=0$ this is the empty product $1$.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-product-of-quotients",
+          "source_section": "Statement",
+          "quote": "use $u/d$ to denote $u d^{-1}$. Then\n$$\\prod_{k<n}\\frac{u_k}{d_k}=\\frac{\\prod_{k<n}u_k}{\\prod_{k<n}d_k}.$$\nThe denominator on the right is nonzero by [[lem-finite-product-of-nonzero-reals-is-nonzero]]. The identity includes $n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displayst",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-finite-double-sum-interchange",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$ and let $a_{jk}\\in\\mathbb R$ for $j,k<n$. Then\n$$\\sum_{j<n}\\sum_{k<n}a_{jk}=\\sum_{k<n}\\sum_{j<n}a_{jk}.$$\nThe sums are those recursively defined in [[def-finite-sum]], and the identity includes $n=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1}",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-of-zero-mult",
+          "source_section": "Statement",
+          "quote": "In any field $F$ ([[def-field]]), for every $a \\in F$ we have $0 \\cdot a = 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**Notation.** For $m, n \\in \\mathbb{N}$ we abbrev",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) fo",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For $k\\ne j$, strict ordering of the nodes gives $x_j-x_k\\ne0$. The denominator product in $w_j$ is nonzero by [F6], so its inverse $w_j$ exists and is nonzero by [F5]. List the omitted-node indices in increasing order and put $P_j(X)=\\prod_{k\\ne j}(X-x_k)$; [F2] makes this a monic formal polynomial of degree $n$. For an arbitrary real $x$, apply [F7] to the real numerators $x-x_k$ and denominators $x_j-x_k$ in that list. It gives $\\ell_j(x)=P_j(x)/\\prod_{k\\ne j}(x_j-x_k)=w_jP_j(x)$, also when $n=0$ by the empty-product convention. Scale the coefficient list $(a_0,\\ldots,a_n)$ of $P_j$ by $w_j$; the resulting vector has final coefficient $w_j\\ne0$. By [F3] and [F4] it represents a formal polynomial of degree $n$, and [F8] gives its evaluation $w_jP_j(x)=\\ell_j(x)$ for every real $x$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "If $i=j$, each factor in $\\ell_j(x_i)$ is $d/d=1$ for a nonzero difference $d=x_j-x_k$. Induction [F13] on the list length shows their product is $1$: the empty product is $1$, and appending a factor $1$ leaves it unchanged by [F12] and the field identity [F5]. This includes the empty list. If $i\\ne j$, the omitted-node list contains $x_i$: its index is $i$ when $i<j$ and $i-1$ when $i>j$. The corresponding quotient factor is $0$ because its numerator is $x_i-x_i=0$, its denominator is nonzero, and [F11] gives $0$ times its inverse equal to $0$. Splitting the finite product before and after that factor by [F10] writes $\\ell_j(x_i)$ as a prefix product times $0$ times a suffix product, which is $0$ by commutativity [F5] and [F11].",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "The product lemma [F2] applied to $x_0,\\ldots,x_n$ gives a monic polynomial of degree $n+1$ evaluating to $\\omega_n$, with degree and leading coefficient understood from the formal list [F4].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "derivation-1.4",
+          "step": "1.4",
+          "claim": "If $x$ differs from every node, each factor $x-x_j$ is nonzero by [F5], so the product lemma [F6] gives $\\omega_n(x)\\ne0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "For each $j$, let $(a_{j,0},\\ldots,a_{j,n})$ be the coefficient vector of the degree-$n$ representative from step 1.1. Define $b_k=\\sum_{j<n+1}y_ja_{j,k}$ for $k<n+1$. For every real $x$, finite-sum scaling [F8], field distributivity, and double-sum interchange [F9] give $$\\sum_{k<n+1}b_kx^k=\\sum_{k<n+1}\\sum_{j<n+1}y_ja_{j,k}x^k=\\sum_{j<n+1}y_j\\sum_{k<n+1}a_{j,k}x^k=\\sum_{j<n+1}y_j\\ell_j(x)=I_ny(x).$$ The vector $(b_0,\\ldots,b_n)$ therefore gives, by [F3], a formal polynomial of degree at most $n$ evaluating to $I_ny$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F8",
+            "F9",
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires n+1 strictly ordered nodes and no interval; it has no separate empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers zero data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include n=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item requires n+1 strictly ordered nodes and no interval; it has no separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item requires n+1 strictly ordered nodes and no interval; it has no separate endpoints branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "lem-cardinal-basis-degree-and-values constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires n+1 strictly ordered nodes and no interval; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires n+1 strictly ordered nodes and no interval; it has no separate reverse branch."
+        }
+      ]
+    },
+    "prop-equispaced-interpolation-basis-growth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cardinal-polynomial-interpolation",
+          "source_section": "Definition",
+          "quote": "Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\le",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-binomial-coefficient",
+          "source_section": "Definition",
+          "quote": "binomial coefficient**. By the previous paragraph and $\\lvert n\\rvert = n$,\n\n$$\\big\\lvert [A]^{k}\\big\\rve",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ ([[thm-omega-is-peano-sy",
+          "uses": [
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-binomial-closed-formula",
+          "source_section": "Statement",
+          "quote": "integrality**: in $\\mathbb{R}$,\n   $\\iota\\binom{n}{k} = \\dfrac{\\iota(n!)}{\\iota(k!)\\,\\iota((n-k)!)}$, so",
+          "uses": [
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-binomial-coefficients-symmetric-and-unimodal",
+          "source_section": "Statement",
+          "quote": "maximum is attained only at $k=n/2$ when $n$ is even,\nand at the two ranks $k=(n-1)/2$ and $k=(n+1)/2$ wh",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-binomial-theorem-over-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "commutative ring. For all $x,y\\in R$ and $n\\in\\mathbb N$,\n\n$$ (x+y)^n=\\sum_{k=0}^n\\binom nkx^ky^{n-k}.$$\n\nThe natural-number coefficients act by repeated addition. The fo",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-reals-field",
+          "source_section": "Statement",
+          "quote": "is a field.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-field-is-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "it is commutative\n   ([[def-commutative-ring]]), with $1 \\ne 0$;\n2. $F$ is an integral domain ([[def-zero-divisor-and-integral-domain]]);\n3. $F$ is a division ring ([[def-division-ring]]), and hence a commutative\n   division ring.\n\nThe field structur",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "totally ordered field.",
+          "uses": [
+            "1.1",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "source_section": "Statement",
+          "quote": "6. **The bridge into $\\mathbb{R}$.**\n   $\\displaystyle\\iota\\Big(\\sum^{\\mathbb{N}}_{k<n} a_k\\Big) = \\sum^{\\mathbb{R}}_{k<n} \\iota(a_k)$\n   and\n   $\\displaystyle\\iota\\Big(\\prod^{\\mathbb{N}}_{k<n} a_k\\Big) = \\prod^{\\mathbb{R}}_{k<n} \\iota(a_k)$.\n7. **$\\",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set ([[def-natu",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1}",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-power-laws",
+          "source_section": "Statement",
+          "quote": "For all $m, n \\in \\mathbb{N}$: $a^{m+n} = a^m a^n$, $(a^m)^n = a^{mn}$ and $(ab)^n = a^n b^n$.\n2. If $a \\",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Put $M=m>0$. Since $x_{k+1}-x_k=1/M>0$, the nodes increase from $-1$ to $1$, and $x_m=0$. If $x_*=x_k$, then $1=2k$; for $k=0$ the right side is $0$, while for $k\\ge1$ it is at least $2$, by [F8, F9]. Thus $x_*$ is not a node.",
+          "inputs": [
+            "given",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "For $k\\ne m$, $\\left|\\frac{x_*-x_k}{x_m-x_k}\\right|=\\frac{|\\tfrac12-k|}{|m-k|}.$ The denominator product is $(m!_{\\mathbb R})^2$, where $m!_{\\mathbb R}=\\prod_{j=1}^{m}j$. In the numerator, the $k=0$ factor is $1/2$ and the remaining factors are $k-1/2$ for $1\\le k\\le2m$, with $k=m$ omitted. Pairing the odd factors gives $\\prod_{\\substack{0\\le k\\le2m\\\\k\\ne m}}|\\tfrac12-k|=\\frac{(4m)!_{\\mathbb R}}{(2m-1)16^m(2m)!_{\\mathbb R}}.$ Using [F3, F4] to rewrite the factorial ratios yields the exact identity $|\\ell_m(x_*)|=\\frac{\\binom{4m}{2m}\\,\\binom{2m}{m}}{(2m-1)16^m}.$",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F9",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "Apply [F6] in the commutative ring $\\mathbb R$ [F7] with $u=v=1$. The sum of the $r$th binomial row is $2^r$. For $r=4m$ and $r=2m$, [F5] says the central term is largest; each coefficient is nonnegative by [F2, F9], so [F10] bounds the row sum above by $(r+1)$ times its central term. Consequently $\\binom{4m}{2m}\\ge\\frac{16^m}{4m+1},\\qquad \\binom{2m}{m}\\ge\\frac{4^m}{2m+1}.$",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "F10",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.4",
+          "step": "1.4",
+          "claim": "By [F6, F7], $4^m=(1+3)^m=\\sum_{k=0}^{m}\\binom{m}{k}3^k\\ge81\\,\\binom{m}{4}.$ Here every summand is nonnegative by [F2, F8, F9], and the inequality retains the $k=4$ term using [F10]. From [F3, F4], $\\binom{m}{4}=m(m-1)(m-2)(m-3)/24$. Since $m\\ge6$, each of these four factors is at least $m/2$, so $\\binom{m}{4}\\ge m^4/384$. Therefore $4^m\\ge81m^4/384$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Substituting step 1.3 in step 1.2 gives $|\\ell_m(x_*)|\\ge\\frac{4^m}{(2m-1)(4m+1)(2m+1)}\\ge\\frac{4^m}{30\\,m^3},$ because the three denominator factors are at most $2m$, $5m$ and $3m$, respectively.",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Combining step 1.4 with step 2.1 yields $|\\ell_m(x_*)|\\ge81m/(384\\cdot30)=9m/1280$, as claimed.",
+          "inputs": [
+            "step 2.1",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires m>=6 and a nonempty node family; it has no separate empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 give a positive lower bound."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item requires m>=6 and a nonempty node family; it has no separate one branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves spacing and excludes a node query."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 locates nodes at -1, 1 and x_* between them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "prop-equispaced-interpolation-basis-growth constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires m>=6 and a nonempty node family; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires m>=6 and a nonempty node family; it has no separate reverse branch."
+        }
+      ]
+    },
+    "thm-cardinal-polynomial-interpolant-exists-uniquely": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cardinal-polynomial-interpolation",
+          "source_section": "Definition",
+          "quote": "Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\le",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cardinal-basis-degree-and-values",
+          "source_section": "Statement",
+          "quote": "Each cardinal function $\\ell_j$ of [[def-cardinal-polynomial-interpolation]] is the evaluation of a forma",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-coefficient-vector-has-polynomial-representative",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$ and reals $c_0,\\ldots,c_n$, the function\n$$q(x)=\\sum_{k=0}^{n}c_kx^k$$\nis the e",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "source_section": "Statement",
+          "quote": "A nonzero real polynomial of degree $n$ has at most $n$ distinct real roots. The conventions and prerequi",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "**Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-reals-field",
+          "source_section": "Statement",
+          "quote": "is a field.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By [F2], $p:=I_n y$ is the evaluation of a formal polynomial of degree at most $n$. At node $x_i$, [F1, F2] give $p(x_i)=\\sum_{j=0}^ny_j\\ell_j(x_i)=y_i$. Thus an interpolant exists.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Let $q$ be any formal polynomial of degree at most $n$ with $q(x_i)=y_i$. Extend the actual coefficient lists of $p$ and $q$ by zeros through index $n$, obtaining vectors $(a_k)$ and $(b_k)$; these are vectors for their evaluations, not padded formal objects. The vector $c_k=a_k-b_k$ defines by [F3] a formal polynomial $r$ of degree at most $n$; [F5] gives $r(t)=p(t)-q(t)$ for every real $t$. Since $p$ and $q$ agree at all nodes by step 1.1 and the choice of $q$, $r$ has the $n+1$ distinct roots $x_0,\\ldots,x_n$. If $r$ were nonzero, [F4] would give at most $\\deg r\\le n$ roots, a contradiction. Hence $r$ is the zero formal polynomial; by [F3], every $a_k-b_k=0$. The canonical coefficient lists of $p$ and $q$ are therefore identical, so $p=q$.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "This proves that the interpolant from step 1.1 is the unique formal polynomial of degree at most $n$ satisfying the node values.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires n+1 distinct nodes and no interval; it has no separate empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include zero data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include n=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item requires n+1 distinct nodes and no interval; it has no separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item requires n+1 distinct nodes and no interval; it has no separate endpoints branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "thm-cardinal-polynomial-interpolant-exists-uniquely constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires n+1 distinct nodes and no interval; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires n+1 distinct nodes and no interval; it has no separate reverse branch."
+        }
+      ]
+    },
+    "thm-barycentric-interpolation-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cardinal-polynomial-interpolation",
+          "source_section": "Definition",
+          "quote": "Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\le",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-cardinal-basis-degree-and-values",
+          "source_section": "Statement",
+          "quote": "Each cardinal function $\\ell_j$ of [[def-cardinal-polynomial-interpolation]] is the evaluation of a forma",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-reals-field",
+          "source_section": "Statement",
+          "quote": "is a field.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "**Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Split the product for $\\omega_n(x)$ before and after index $j$ using [F4]: it is $A(x-x_j)B$, where $A=\\prod_{k<j}(x-x_k)$ and $B=\\prod_{j<k\\le n}(x-x_k)$. Since $x\\ne x_j$, division by $x-x_j$ gives $AB=\\prod_{k\\ne j}(x-x_k)$ in the increasing omitted-index order of [F1]. Multiplying by $w_j$ therefore gives $\\ell_j(x)=\\omega_n(x)w_j/(x-x_j)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "By [F1], $S(X):=\\sum_{j=0}^{n}\\ell_j(X)=I_n(1,\\ldots,1)(X)$, so it has degree at most $n$ by [F2]. At each node $x_i$, [F3] gives $S(x_i)=1$. The constant polynomial $1$ is another degree-at-most-$n$ interpolant of these data; uniqueness in [F2] gives $S(X)=1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Summing the identities of step 1.1 over $j$ gives $\\omega_n(x)\\sum_{j=0}^{n}w_j/(x-x_j)=\\sum_{j=0}^{n}\\ell_j(x)=1$ by step 1.2. Since $\\omega_n(x)\\ne0$ by [F3], the denominator sum equals $1/\\omega_n(x)$ and is nonzero by the field laws [F4].",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Multiplying step 1.1 by $y_j$ and summing gives $\\omega_n(x)\\sum_{j=0}^{n}y_jw_j/(x-x_j)=\\sum_{j=0}^{n}y_j\\ell_j(x)=I_n y(x)$ by [F1]. Dividing this identity by the nonzero identity in step 2.1 proves the quotient formula. At $x_i$, [F2] gives $I_n y(x_i)=y_i$, which is the separate node value stated above.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires distinct nodes and an off-node quotient query; it has no separate empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 handles zero data while step 2.1 proves denominator nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include n=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item requires distinct nodes and an off-node quotient query; it has no separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the separate at-node value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "thm-barycentric-interpolation-identities constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires distinct nodes and an off-node quotient query; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires distinct nodes and an off-node quotient query; it has no separate reverse branch."
+        }
+      ]
+    },
+    "thm-lagrange-interpolation-remainder": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cardinal-polynomial-interpolation",
+          "source_section": "Definition",
+          "quote": "Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\le",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-higher-order-rolle",
+          "source_section": "Statement",
+          "quote": "some $c\\in(x_0,x_n)$ satisfies $f^{(n)}(c)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-polynomial-highest-derivative",
+          "source_section": "Statement",
+          "quote": "p^{(m)}(x)=a_m m!_{\\mathbb R}$$\nfor every $x\\in\\mathbb R$. In particular, this derivative is zero if $\\de",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differe",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is co",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-cardinal-basis-degree-and-values",
+          "source_section": "Statement",
+          "quote": "Each cardinal function $\\ell_j$ of [[def-cardinal-polynomial-interpolation]] is the evaluation of a forma",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ ([[thm-omega-is-peano-system]]) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-nat-finite-sum-laws-and-the-canonical-embedding",
+          "source_section": "Statement",
+          "quote": "6. **The bridge into $\\mathbb{R}$.**\n   $\\displaystyle\\iota\\Big(\\sum^{\\mathbb{N}}_{k<n} a_k\\Big) = \\sum^{\\mathbb{R}}_{k<n} \\iota(a_k)$\n   and\n   $\\displaystyle\\iota\\Big(\\prod^{\\mathbb{N}}_{k<n} a_k\\Big) = \\prod^{\\mathbb{R}}_{k<n} \\iota(a_k)$.\n7. **$\\",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-reals-field",
+          "source_section": "Statement",
+          "quote": "is a field.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "If $x=x_j$ for some node, [F2] gives $p(x)=f(x)$, so the error is zero.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Suppose $x$ is not a node. By [F8], $\\omega_n(x)\\ne0$, so set $c=(f(x)-p(x))/\\omega_n(x)$ and define $g(t)=f(t)-p(t)-c\\omega_n(t)$ on $[a,b]$. At every node $x_j$, [F2] gives $f(x_j)=p(x_j)$ and [F1] gives $\\omega_n(x_j)=0$, so $g(x_j)=0$; by the choice of $c$, also $g(x)=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F8",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "By [F8], $\\omega_n$ is monic of degree $n+1$ and $p$ has degree at most $n$, so their coefficients at degree $n+1$ are respectively $1$ and $0$. Applying [F5] to these two polynomials gives $p^{(n+1)}(\\xi)=0$ and $\\omega_n^{(n+1)}(\\xi)=(n+1)!_{\\mathbb R}$.",
+          "inputs": [
+            "F5",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Sort the $n+2$ distinct points consisting of the nodes and $x$ as $z_0<\\cdots<z_{n+1}$. The function $f$ is $C^{n+1}$ by [F3]; $p$ has degree at most $n$ and $\\omega_n$ has degree $n+1$ by [F8]. Their iterated derivatives through order $n+1$ exist by [F5]. Repeated application of the sum and scalar-multiple rules [F6] shows that $g$ is $(n+1)$-times differentiable on $(z_0,z_{n+1})$. Also, $f$ is continuous by [F3], the polynomial functions $p$ and $\\omega_n$ are continuous by [F7], and the finite linear combination defining $g$ is continuous on $[z_0,z_{n+1}]$ by [F7]. Apply [F4] with $m=n+1$ to the zeros from step 1.2. This yields $\\xi\\in(z_0,z_{n+1})$ with $g^{(n+1)}(\\xi)=0$.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Differentiate the defining identity for $g$ $n+1$ times at $\\xi$. Step 2.1 licenses these derivatives and [F6] preserves the linear combination, so $0=g^{(n+1)}(\\xi)=f^{(n+1)}(\\xi)-c(n+1)!_{\\mathbb R}$. By [F9] the factorial factor is nonzero, so $c=f^{(n+1)}(\\xi)/(n+1)!_{\\mathbb R}$.",
+          "inputs": [
+            "step 2.1",
+            "step 1.3",
+            "F6",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Substituting the value of $c$ into its definition in step 1.2 gives the claimed remainder formula. Since $z_0=\\min\\{x,x_0\\}$ and $z_{n+1}=\\max\\{x,x_n\\}$, $\\xi$ lies in the stated interval.",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires a<b and at least one distinct node; it has no separate empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 and 3.1–4.1 give zero error for f=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses order-one higher Rolle when n=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item requires a<b and at least one distinct node; it has no separate degenerate branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 handles nodes; steps 2.1 and 4.1 include interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "thm-lagrange-interpolation-remainder constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires a<b and at least one distinct node; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires a<b and at least one distinct node; it has no separate reverse branch."
+        }
+      ]
+    },
+    "alg-finite-barycentric-interpolation-evaluator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition accepts n=0 as one node and an empty inner loop."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition accepts zero data; checked arithmetic returns success or range_failure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition specifies n=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition returns invalid_nodes for duplicate or unordered nodes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition handles exact-node queries before quotient evaluation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "alg-finite-barycentric-interpolation-evaluator constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires n>=0 and finite arrays with checked statuses; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires n>=0 and finite arrays with checked statuses; it has no separate reverse branch."
+        }
+      ]
+    },
+    "prop-finite-barycentric-interpolation-evaluator-returns-status": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-barycentric-interpolation-evaluator",
+          "source_section": "Definition",
+          "quote": "The input is a natural number $n\\ge0$, a floating-point system $(\\mathbb F,N_{\\min},N_{\\max},\\operatornam",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The input validation examines only the $n+1$ nodes and data values. If a node or ordering check fails it returns *invalid_nodes*; if a data or query check fails it returns *invalid_data*. Otherwise it either returns the node value at an exact node, which is in $\\mathbb F$, or proceeds to weight construction.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Weight construction visits at most $(n+1)n$ node pairs and performs finitely many checked operations. Each operation either returns a value in $\\mathbb F$ or returns *range_failure*, which stops the procedure, so this stage terminates.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "If weight construction completes, the evaluation loop visits exactly $n+1$ terms. Every checked operation either returns a value in $\\mathbb F$ or exits with *range_failure*. After the loop, a zero denominator returns *range_failure*; otherwise the checked final division either returns *range_failure* or returns *success* with a value in $\\mathbb F$.",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "These cases exhaust the procedure's branches and every loop is finite, so every input terminates with a declared status.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 include n=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes zero data and declared statuses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 cover one node."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 returns invalid_nodes for duplicate or unordered nodes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 covers exact-node queries."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "prop-finite-barycentric-interpolation-evaluator-returns-status constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires every finite evaluator input; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires every finite evaluator input; it has no separate reverse branch."
+        }
+      ]
+    },
+    "ex-equispaced-cardinal-basis-growth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cardinal-polynomial-interpolation",
+          "source_section": "Definition",
+          "quote": "Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\le",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-equispaced-interpolation-basis-growth",
+          "source_section": "Statement",
+          "quote": "Then\n$$|\\ell_m(x_*)|\\ge\\frac{9\\,m}{1280}.$$\nIn these real formulas, natural numbers and binomial coeffici",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-weierstrass-approximation-on-a-closed-interval",
+          "source_section": "Statement",
+          "quote": "uniform limit of polynomials.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Set $y_m=1$ and $y_k=0$ for $k\\ne m$. Then $\\max_{0\\le k\\le2m}|y_k|=1$.",
+          "inputs": [
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "By [F1], $I_{2m}y=\\ell_m$. Since $m\\ge6$, the query $x_*=-1+1/(2m)$ lies in $[-1,1]$; [F2] therefore gives $\\max_{x\\in[-1,1]}|I_{2m}y(x)|\\ge|I_{2m}y(x_*)|=|\\ell_m(x_*)|\\ge9m/1280.$ The input vector depends on $m$, so this calculation is an operator-amplification witness and does not by itself establish divergence for one fixed function.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The density assertion [F3] states that for each fixed continuous function some sequence of polynomials converges uniformly to it. It makes no assertion that the polynomials selected by these changing nodal data converge for any fixed function; hence it is consistent with the finite-dimensional amplification calculation above.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires m>=6 and a nonzero coordinate data vector; it has no separate empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item requires m>=6 and a nonzero coordinate data vector; it has no separate zero branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item requires m>=6 and a nonzero coordinate data vector; it has no separate one branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 uses distinct nodes and an off-node query."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 places x_* inside [-1,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "ex-equispaced-cardinal-basis-growth constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires m>=6 and a nonzero coordinate data vector; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires m>=6 and a nonzero coordinate data vector; it has no separate reverse branch."
+        }
+      ]
+    },
+    "ex-quadratic-interpolation-at-three-nodes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cardinal-polynomial-interpolation",
+          "source_section": "Definition",
+          "quote": "Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\le",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal real polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The nodal values are $f(-1)=1$, $f(0)=0$, and $f(1)=1$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The polynomial $q(X)=X^2$ has degree $2$ by [F2] and takes these three values. By the definition [F1] and uniqueness [F3], $I_2f=q=f$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires f=x^2 and three distinct nodes; it has no separate empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item requires f=x^2 and three distinct nodes; it has no separate zero branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item requires f=x^2 and three distinct nodes; it has no separate one branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses distinct nodes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies endpoint nodes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "ex-quadratic-interpolation-at-three-nodes constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires f=x^2 and three distinct nodes; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires f=x^2 and three distinct nodes; it has no separate reverse branch."
+        }
+      ]
+    },
+    "ex-cubic-interpolation-pointwise-remainder": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cardinal-polynomial-interpolation",
+          "source_section": "Definition",
+          "quote": "Define the node polynomial and barycentric weights by\n$$\\omega_n(X)=\\prod_{k=0}^{n}(X-x_k),\\qquad w_j=\\le",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-polynomial-degree-leading-coefficient-and-monic",
+          "source_section": "Definition",
+          "quote": "A **formal real polynomial** is either the zero polynomial $0$, or a finite coefficient list $(a_0,\\ldots",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "unique real polynomial of degree at most $n$ satisfying $p(x_i)=y_i$ for every $i=0,\\ldots,n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "of class **$C^k$** on $I$ if these derivatives exist and every $f^{(j)}$, $0\\le j\\le k$, is continuous on",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at e",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differe",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is co",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-lagrange-interpolation-remainder",
+          "source_section": "Statement",
+          "quote": "If $x=x_j$ for a node, then $f(x)-p(x)=0$. If $x\\in[a,b]$ is not a node, there is\n$$\\xi\\in\\bigl(\\min\\{x,x",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ ([[thm-omega-is-peano-system]]) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set ([[def-natu",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The nodal values are $f(0)=0$, $f(1)=1$, and $f(2)=8$. The formal polynomial $q(t)=3t^2-2t$ has degree $2$ and these values, so uniqueness [F3] gives $p=I_2f=q$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The power and linearity rules [F5, F6] give $f'(t)=3t^2$, $f''(t)=6t$, and $f^{(3)}(t)=6$. Each of $f,f',f'',f^{(3)}$ is a polynomial function and hence continuous by [F7]; thus $f\\in C^3([0,3])$ by [F4].",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "At $x=3$, $f(3)=27$ and $p(3)=21$, so the error is $6$. The node product is $(3-0)(3-1)(3-2)=6$, and [F9] gives $3!_{\\mathbb R}=6$.",
+          "inputs": [
+            "given",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Taking $\\xi=1\\in(0,3)$, step 1.2 and step 2.1 give the right side of the formula in [F8] as $(6/6)\\cdot6=6=f(3)-p(3)$. This verifies the pointwise remainder identity for this example.",
+          "inputs": [
+            "given",
+            "F8",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonzero cubic on [0,3] with three distinct nodes; it has no separate empty branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item requires nonzero cubic on [0,3] with three distinct nodes; it has no separate zero branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item requires nonzero cubic on [0,3] with three distinct nodes; it has no separate one branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use a nondegenerate interval and distinct nodes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies x=3 with xi=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "ex-cubic-interpolation-pointwise-remainder constructs finite data deterministically and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item requires nonzero cubic on [0,3] with three distinct nodes; it has no separate forward branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item requires nonzero cubic on [0,3] with three distinct nodes; it has no separate reverse branch."
+        }
+      ]
+    }
+  }
+}

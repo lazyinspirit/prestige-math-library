@@ -1,7 +1,11 @@
 // Step 3: independent readers, read-only refuters, routed batch adjudication,
 // mechanical closure.
 
-import { withRefuterContinuation } from './refuter-continuations.mts';
+// Propagate the parent's reload version so live stage closures cannot retain
+// a cached continuation policy after an explicit native stage reload.
+const continuationURL = new URL('./refuter-continuations.mts', import.meta.url);
+continuationURL.search = new URL(import.meta.url).search;
+const { withRefuterContinuation } = await import(continuationURL.href);
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { MAX_RUN_BATCHES } from '../src/capacity.mjs';
 import { holdStep3 } from './step3-hold.mts';

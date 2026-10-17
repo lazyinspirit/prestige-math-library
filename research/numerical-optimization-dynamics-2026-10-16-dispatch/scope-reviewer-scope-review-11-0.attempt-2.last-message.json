@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "11",
+  "round": 0,
+  "reviewed_items": [
+    "alg-linear-congruential-generator-mod-power-of-two",
+    "alg-counter-based-keyed-permutation-stream",
+    "thm-finite-state-streams-eventually-periodic",
+    "thm-independent-fair-bit-streams-produce-uniforms",
+    "lem-generalized-inverse-sublevel-identity",
+    "lem-box-muller-product-density-and-radius-moment",
+    "thm-midpoint-bit-stream-coupling-and-error",
+    "thm-lcg-full-period-and-adjacent-dependence",
+    "lem-counter-based-keyed-stream-no-reuse",
+    "alg-rational-bernoulli-rejection-from-fair-bits",
+    "alg-finite-categorical-inverse-cdf",
+    "alg-certified-bracketed-cdf-inversion",
+    "cor-box-muller-from-independent-bits-gives-standard-normals",
+    "thm-rational-bernoulli-rejection-law-and-cost",
+    "thm-finite-categorical-midpoint-count-bound",
+    "thm-certified-bracketed-inverse-error",
+    "alg-box-muller-finite-bit-transform",
+    "thm-box-muller-finite-bit-coupling-error",
+    "ex-lcg-low-bit-alternation",
+    "ex-box-muller-finite-midpoint-tail",
+    "ex-box-muller-zero-endpoint",
+    "ex-inverse-cdf-near-zero-density"
+  ],
+  "reviewed_pages": [
+    "finite-bit-random-streams-and-variate-generation",
+    "finite-bit-random-streams-and-variate-generation-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The assigned Box–Muller chain relies on a published square-root supplier whose proof omits a needed Archimedean step. The batch also has page-local repairs listed below; the outside supplier gap requires owner reconciliation.",
+  "findings": [
+    {
+      "id": "thm-of-square-roots",
+      "type": "prerequisite",
+      "reason": "In published proof steps 4.1–4.2, the proof chooses h>0 below arbitrary positive bounds without establishing that such h exists. Its listed dependencies do not supply the Archimedean property or density of positive reals. thm-of-archimedean supplies the missing property but is not cited. This is used directly by lem-box-muller-product-density-and-radius-moment."
+    },
+    {
+      "id": "thm-independent-fair-bit-streams-produce-uniforms",
+      "type": "local",
+      "reason": "Step 3.1 applies measure uniqueness to lower rectangles without establishing that they generate the Borel sigma-algebra of the cube. It also treats product joint law as equivalent to independence, while def-independent-random-elements defines sigma-algebra independence. Add the generator argument and use thm-rectangle-criterion-for-independent-random-elements (or prove the rectangle criterion locally)."
+    },
+    {
+      "id": "lem-box-muller-product-density-and-radius-moment",
+      "type": "local",
+      "reason": "Fact F4 misstates def-independent-random-elements: factorization of the joint density is not itself the linked definition of independence. Step 2.1 should derive factorization on Borel rectangles from the product density using Tonelli, then apply thm-rectangle-criterion-for-independent-random-elements."
+    },
+    {
+      "id": "alg-finite-categorical-inverse-cdf",
+      "type": "local",
+      "reason": "The Definition says to use binary search but omits the search bounds, update branches, and stopping instruction; the comparison bound is an algorithm property without a separate proof. The input restriction U∈(0,1) also needs an explicit extension or almost-sure convention when composed with the bit-stream theorem's [0,1]-valued output."
+    },
+    {
+      "id": "alg-certified-bracketed-cdf-inversion",
+      "type": "local",
+      "reason": "The tail check queries F(a) and F(b), then the loop makes N midpoint evaluations, while the stated budget is only at least N evaluations. Supply endpoint values as inputs or require budget N+2. The modulus-existence and cost claims should be stated and proved separately from the procedure."
+    },
+    {
+      "id": "thm-rational-bernoulli-rejection-law-and-cost",
+      "type": "local",
+      "reason": "Step 3.1 uses the infinite geometric sum to compute the expected number of attempts, but thm-geometric-series is absent from deps and the identity is not proved locally. Add the prerequisite or show the finite-sum limit."
+    },
+    {
+      "id": "alg-box-muller-finite-bit-transform",
+      "type": "local",
+      "reason": "The Definition includes the radius-error bound eta_r and resource counts, although algorithmic properties need separate proofs. Theorem thm-box-muller-finite-bit-coupling-error uses eta_r without deriving it from q=-2L_- and the evaluator certificates. Move the bound and cost claims to a proved result, or prove the bound in the theorem; specify the integer types of p0, pmax, and the series cap."
+    },
+    {
+      "id": "thm-box-muller-finite-bit-coupling-error",
+      "type": "local",
+      "reason": "Step 1.1 uses the mean-value theorem and the derivative bound for log, but thm-logarithm-derivative-and-integral is not a direct dependency. Step 2.1 also needs an explicit derivation of |r_hat-r_b|≤eta_r from the algorithm's reported certificates."
+    },
+    {
+      "id": "ex-box-muller-finite-midpoint-tail",
+      "type": "local",
+      "reason": "Step 2.1 asserts that r(u) decreases with u but supplies no proof or direct prerequisite for monotonicity of log and the square root. Add the short order argument or cite the relevant results."
+    },
+    {
+      "id": "ex-box-muller-zero-endpoint",
+      "type": "local",
+      "reason": "The example uses the Box–Muller radius formula as a premise but does not depend on or identify the item supplying that formula. Add the exact-transform supplier and state it in Facts & Assumptions."
+    },
+    {
+      "id": "ex-inverse-cdf-near-zero-density",
+      "type": "local",
+      "reason": "The verification uses sqrt(epsilon) and its order bounds without a square-root prerequisite or a local definition by its equation. Add the supplier or state and verify the defining root properties."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-box-muller-product-density-and-radius-moment",
+      "decision": "escalate",
+      "reason": "Direct consumer of thm-of-square-roots; it also needs the local independence derivation in its density proof."
+    },
+    {
+      "id": "cor-box-muller-from-independent-bits-gives-standard-normals",
+      "decision": "escalate",
+      "reason": "Depends on the Box–Muller density lemma, whose square-root prerequisite remains unresolved."
+    },
+    {
+      "id": "alg-box-muller-finite-bit-transform",
+      "decision": "escalate",
+      "reason": "Depends on the Box–Muller density lemma; it also needs the radius-error property separated and proved."
+    },
+    {
+      "id": "thm-box-muller-finite-bit-coupling-error",
+      "decision": "escalate",
+      "reason": "Depends on the affected density lemma and algorithm; repair its eta_r derivation and direct logarithm prerequisite."
+    },
+    {
+      "id": "ex-box-muller-finite-midpoint-tail",
+      "decision": "escalate",
+      "reason": "Depends on the affected density lemma and also needs its local radius-monotonicity justification."
+    },
+    {
+      "id": "ex-box-muller-zero-endpoint",
+      "decision": "escalate",
+      "reason": "Its implicit Box–Muller formula use should be linked to the affected density lemma."
+    },
+    {
+      "id": "ex-inverse-cdf-near-zero-density",
+      "decision": "escalate",
+      "reason": "Its square-root calculation needs an explicit supplier; the identified square-root supplier requires owner reconciliation."
+    },
+    {
+      "id": "thm-finite-categorical-midpoint-count-bound",
+      "decision": "repair",
+      "reason": "Its proof uses the algorithm's least-index, non-strict threshold rule; align the Fact wording and verify the endpoint convention after the algorithm is made total or its almost-sure restriction is stated."
+    },
+    {
+      "id": "thm-certified-bracketed-inverse-error",
+      "decision": "accept",
+      "reason": "Its successful-call bracket and error arguments remain valid after the endpoint-evaluation budget is clarified."
+    }
+  ]
+}

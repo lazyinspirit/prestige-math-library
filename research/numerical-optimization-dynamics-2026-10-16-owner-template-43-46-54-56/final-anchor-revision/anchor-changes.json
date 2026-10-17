@@ -1,0 +1,926 @@
+[
+  {
+    "key": "alg-backward-euler-convolution-quadrature::endpoints",
+    "old_evidence": "The procedure explicitly initializes V^0=0,U^0=u_0 and returns all nodes through the supplied N; forcing is queried only at positive indices.",
+    "new_evidence": "Definition, initialisation and returned-node range: The procedure explicitly initializes V^0=0,U^0=u_0 and returns all nodes through the supplied N; forcing is queried only at positive indices.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "initialisation and returned-node range",
+      "quote": "Input $0<\\alpha<1$, a step size $h>0$, an integer $N\\ge1$, $\\lambda\\ge0$,\nan initial value $u_0$, and forcing values $F^1,\\ldots,F^N$. If any\nadmissibility condition fails, return `invalid-input`. Set $\\omega_0=1$ and\ncompute $\\omega_1,\\ldots,\\omega_N$ in increasing order by\n\n$$\\omega_j:=\\frac{j-1-\\alpha}{j}\\,\\omega_{j-1}.$$\n\nSet $V^0=0$ and $U^0=u_0$. For $n=1,\\ldots,N$ in increasing order, compute\n\n$$V^n:=\\frac{F^n-\\lambda u_0-h^{-\\alpha}\\sum_{j=1}^n\\omega_jV^{n-j}}{h^{-\\alpha}+\\lambda},\\qquad U^n:=u_0+V^n.$$\n\nFor any sequence $V^0,\\ldots,V^N$ with $V^0=0$, use the notation\n\n$$\\bar\\partial_h^\\alpha V^n:=h^{-\\alpha}\\sum_{j=0}^n\\omega_jV^{n-j}.$$\n\nReturn $U^0,\\ldots,U^N$. A finite-precision implementation that cannot\ncertify a scalar solve returns `solve-failed` without reporting a value. No\nFFT or truncated-memory error claim is included."
+    }
+  },
+  {
+    "key": "alg-implicit-midpoint-hamiltonian-step::degenerate",
+    "old_evidence": "At theta=0 the rule uses theta^k=0 only for k>=1 and never evaluates0^0.",
+    "new_evidence": "Definition, the explicit theta=0 convention after the finite iteration: At theta=0 the rule uses theta^k=0 only for k>=1 and never evaluates0^0.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the explicit theta=0 convention after the finite iteration",
+      "quote": "Let $U\\subseteq\\mathbb R^{2d}$ be open and $H\\in C^2(U)$. Write $z=(q,p)$ in canonical coordinates, set $J=\\begin{pmatrix}0&I\\\\-I&0\\end{pmatrix}$, and define the finite-regularity coordinate field\n$$F(q,p):=\\bigl(\\nabla_pH(q,p),-\\nabla_qH(q,p)\\bigr)=J\\nabla H(q,p).$$\nGiven $z\\in U$, for a signed step $h$, the **exact local implicit midpoint step** is defined by\n$$Z=z+\\frac h2F(Z),\\qquad z^+=2Z-z,$$\nusing the locally unique solution $Z$ in a declared closed ball $\\overline B(z,\\rho)\\subset U$. The branch is admissible when certified bounds $M\\ge\\sup_{\\overline B}\\|F\\|$ and $L\\ge\\sup_{\\overline B}\\|DF\\|$ satisfy $|h|M/2\\le\\rho$ and $|h|L/2<1$. It returns `branch-not-certified` if the ball or bounds are unavailable, and `domain-failure` if the admitted ball is not contained in $U$.\n\nFor a finite iteration implementation of these exact operations, input an output tolerance $\\tau>0$ and an update budget $B\\in\\mathbb N_0$. Use $\\theta=|h|L/2$ and proceed as follows.\n\n1. Set $Z_0=z$. If $B=0$, return `inconclusive` with current stage iterate $Z_0$, approximate output $z$, and output-error bound $2\\rho$.\n2. If $B\\ge1$, compute $Z_1=z+(h/2)F(Z_0)$ and set $d_1=\\|Z_1-Z_0\\|$.\n3. For $k=1,\\ldots,B$, set $b_k=\\theta^k d_1/(1-\\theta)$ and the output radius $r_k=2b_k$. If $r_k\\le\\tau$, return the approximation $2Z_k-z$ with output-error certificate $r_k$. Otherwise, if $k<B$, compute $Z_{k+1}=z+(h/2)F(Z_k)$ and continue. If the check fails at $k=B$, return `inconclusive` with current stage iterate $Z_B$, approximate output $2Z_B-z$, and output-error bound $2b_B$.\n\nWhen $\\theta=0$, use $\\theta^k=0$ for $k\\ge1$; the procedure never evaluates $0^0$. These certificates concern the displayed exact recurrence and exact output operations; inexact evaluations require additional certified error accounting before a tolerance claim can be made. An approximate result is not asserted to be exactly symplectic. The exact map is the selected branch value $2Z-z$."
+    }
+  },
+  {
+    "key": "alg-implicit-midpoint-hamiltonian-step::empty",
+    "old_evidence": "An update budget B=0 returns the supplied stage z and output-error bound2rho before any Picard update.",
+    "new_evidence": "Definition, finite-iteration branch1 for budget B=0: An update budget B=0 returns the supplied stage z and output-error bound2rho before any Picard update.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "finite-iteration branch1 for budget B=0",
+      "quote": "Let $U\\subseteq\\mathbb R^{2d}$ be open and $H\\in C^2(U)$. Write $z=(q,p)$ in canonical coordinates, set $J=\\begin{pmatrix}0&I\\\\-I&0\\end{pmatrix}$, and define the finite-regularity coordinate field\n$$F(q,p):=\\bigl(\\nabla_pH(q,p),-\\nabla_qH(q,p)\\bigr)=J\\nabla H(q,p).$$\nGiven $z\\in U$, for a signed step $h$, the **exact local implicit midpoint step** is defined by\n$$Z=z+\\frac h2F(Z),\\qquad z^+=2Z-z,$$\nusing the locally unique solution $Z$ in a declared closed ball $\\overline B(z,\\rho)\\subset U$. The branch is admissible when certified bounds $M\\ge\\sup_{\\overline B}\\|F\\|$ and $L\\ge\\sup_{\\overline B}\\|DF\\|$ satisfy $|h|M/2\\le\\rho$ and $|h|L/2<1$. It returns `branch-not-certified` if the ball or bounds are unavailable, and `domain-failure` if the admitted ball is not contained in $U$.\n\nFor a finite iteration implementation of these exact operations, input an output tolerance $\\tau>0$ and an update budget $B\\in\\mathbb N_0$. Use $\\theta=|h|L/2$ and proceed as follows.\n\n1. Set $Z_0=z$. If $B=0$, return `inconclusive` with current stage iterate $Z_0$, approximate output $z$, and output-error bound $2\\rho$.\n2. If $B\\ge1$, compute $Z_1=z+(h/2)F(Z_0)$ and set $d_1=\\|Z_1-Z_0\\|$.\n3. For $k=1,\\ldots,B$, set $b_k=\\theta^k d_1/(1-\\theta)$ and the output radius $r_k=2b_k$. If $r_k\\le\\tau$, return the approximation $2Z_k-z$ with output-error certificate $r_k$. Otherwise, if $k<B$, compute $Z_{k+1}=z+(h/2)F(Z_k)$ and continue. If the check fails at $k=B$, return `inconclusive` with current stage iterate $Z_B$, approximate output $2Z_B-z$, and output-error bound $2b_B$.\n\nWhen $\\theta=0$, use $\\theta^k=0$ for $k\\ge1$; the procedure never evaluates $0^0$. These certificates concern the displayed exact recurrence and exact output operations; inexact evaluations require additional certified error accounting before a tolerance claim can be made. An approximate result is not asserted to be exactly symplectic. The exact map is the selected branch value $2Z-z$."
+    }
+  },
+  {
+    "key": "alg-implicit-midpoint-hamiltonian-step::endpoints",
+    "old_evidence": "The certificate allows |h|M/2=rho but requires theta<1; unavailable balls and bounds have separate failure statuses.",
+    "new_evidence": "Definition, admissible ball inequalities and failure statuses: The certificate allows |h|M/2=rho but requires theta<1; unavailable balls and bounds have separate failure statuses.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "admissible ball inequalities and failure statuses",
+      "quote": "Let $U\\subseteq\\mathbb R^{2d}$ be open and $H\\in C^2(U)$. Write $z=(q,p)$ in canonical coordinates, set $J=\\begin{pmatrix}0&I\\\\-I&0\\end{pmatrix}$, and define the finite-regularity coordinate field\n$$F(q,p):=\\bigl(\\nabla_pH(q,p),-\\nabla_qH(q,p)\\bigr)=J\\nabla H(q,p).$$\nGiven $z\\in U$, for a signed step $h$, the **exact local implicit midpoint step** is defined by\n$$Z=z+\\frac h2F(Z),\\qquad z^+=2Z-z,$$\nusing the locally unique solution $Z$ in a declared closed ball $\\overline B(z,\\rho)\\subset U$. The branch is admissible when certified bounds $M\\ge\\sup_{\\overline B}\\|F\\|$ and $L\\ge\\sup_{\\overline B}\\|DF\\|$ satisfy $|h|M/2\\le\\rho$ and $|h|L/2<1$. It returns `branch-not-certified` if the ball or bounds are unavailable, and `domain-failure` if the admitted ball is not contained in $U$.\n\nFor a finite iteration implementation of these exact operations, input an output tolerance $\\tau>0$ and an update budget $B\\in\\mathbb N_0$. Use $\\theta=|h|L/2$ and proceed as follows.\n\n1. Set $Z_0=z$. If $B=0$, return `inconclusive` with current stage iterate $Z_0$, approximate output $z$, and output-error bound $2\\rho$.\n2. If $B\\ge1$, compute $Z_1=z+(h/2)F(Z_0)$ and set $d_1=\\|Z_1-Z_0\\|$.\n3. For $k=1,\\ldots,B$, set $b_k=\\theta^k d_1/(1-\\theta)$ and the output radius $r_k=2b_k$. If $r_k\\le\\tau$, return the approximation $2Z_k-z$ with output-error certificate $r_k$. Otherwise, if $k<B$, compute $Z_{k+1}=z+(h/2)F(Z_k)$ and continue. If the check fails at $k=B$, return `inconclusive` with current stage iterate $Z_B$, approximate output $2Z_B-z$, and output-error bound $2b_B$.\n\nWhen $\\theta=0$, use $\\theta^k=0$ for $k\\ge1$; the procedure never evaluates $0^0$. These certificates concern the displayed exact recurrence and exact output operations; inexact evaluations require additional certified error accounting before a tolerance claim can be made. An approximate result is not asserted to be exactly symplectic. The exact map is the selected branch value $2Z-z$."
+    }
+  },
+  {
+    "key": "alg-implicit-midpoint-hamiltonian-step::one",
+    "old_evidence": "For B=1 the algorithm forms Z_1 once, tests radius2 theta d_1/(1-theta), and otherwise returns inconclusive.",
+    "new_evidence": "Definition, finite-iteration branches2–3 at budget B=1: For B=1 the algorithm forms Z_1 once, tests radius2 theta d_1/(1-theta), and otherwise returns inconclusive.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "finite-iteration branches2–3 at budget B=1",
+      "quote": "Let $U\\subseteq\\mathbb R^{2d}$ be open and $H\\in C^2(U)$. Write $z=(q,p)$ in canonical coordinates, set $J=\\begin{pmatrix}0&I\\\\-I&0\\end{pmatrix}$, and define the finite-regularity coordinate field\n$$F(q,p):=\\bigl(\\nabla_pH(q,p),-\\nabla_qH(q,p)\\bigr)=J\\nabla H(q,p).$$\nGiven $z\\in U$, for a signed step $h$, the **exact local implicit midpoint step** is defined by\n$$Z=z+\\frac h2F(Z),\\qquad z^+=2Z-z,$$\nusing the locally unique solution $Z$ in a declared closed ball $\\overline B(z,\\rho)\\subset U$. The branch is admissible when certified bounds $M\\ge\\sup_{\\overline B}\\|F\\|$ and $L\\ge\\sup_{\\overline B}\\|DF\\|$ satisfy $|h|M/2\\le\\rho$ and $|h|L/2<1$. It returns `branch-not-certified` if the ball or bounds are unavailable, and `domain-failure` if the admitted ball is not contained in $U$.\n\nFor a finite iteration implementation of these exact operations, input an output tolerance $\\tau>0$ and an update budget $B\\in\\mathbb N_0$. Use $\\theta=|h|L/2$ and proceed as follows.\n\n1. Set $Z_0=z$. If $B=0$, return `inconclusive` with current stage iterate $Z_0$, approximate output $z$, and output-error bound $2\\rho$.\n2. If $B\\ge1$, compute $Z_1=z+(h/2)F(Z_0)$ and set $d_1=\\|Z_1-Z_0\\|$.\n3. For $k=1,\\ldots,B$, set $b_k=\\theta^k d_1/(1-\\theta)$ and the output radius $r_k=2b_k$. If $r_k\\le\\tau$, return the approximation $2Z_k-z$ with output-error certificate $r_k$. Otherwise, if $k<B$, compute $Z_{k+1}=z+(h/2)F(Z_k)$ and continue. If the check fails at $k=B$, return `inconclusive` with current stage iterate $Z_B$, approximate output $2Z_B-z$, and output-error bound $2b_B$.\n\nWhen $\\theta=0$, use $\\theta^k=0$ for $k\\ge1$; the procedure never evaluates $0^0$. These certificates concern the displayed exact recurrence and exact output operations; inexact evaluations require additional certified error accounting before a tolerance claim can be made. An approximate result is not asserted to be exactly symplectic. The exact map is the selected branch value $2Z-z$."
+    }
+  },
+  {
+    "key": "alg-local-symplectic-euler-step::one",
+    "old_evidence": "For d=1 the update is p_plus=p-h V prime(q), followed by q_plus=q+h p_plus/M.",
+    "new_evidence": "Definition, the displayed kick-then-drift coordinate update: For d=1 the update is p_plus=p-h V prime(q), followed by q_plus=q+h p_plus/M.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the displayed kick-then-drift coordinate update",
+      "quote": "Input an admitted state $(q,p)\\in Q\\times\\mathbb R^d$, step $h>0$, $V\\in C^1(Q)$, and symmetric positive-definite $M$. First set $p^+=p-h\\nabla V(q)$. Then set $q^+=q+hM^{-1}p^+$. If $q^+\\notin Q$, return `domain-failure`; otherwise return $(q^+,p^+)$. This fixes the kick-then-drift ordering. The returned map is the partial composition $D_h\\circ K_h$ in the notation of [[def-local-leapfrog-domain-on-an-open-configuration-set]].\n\nFor exact mathematical statements the displayed operations are evaluated exactly. A finite implementation that cannot certify the state and force evaluation returns `inconclusive`; it does not report a step outside $Q$ as successful."
+    }
+  },
+  {
+    "key": "alg-na-computed-clenshaw-curtis-via-fast-dft::endpoints",
+    "old_evidence": "For n>=1 the extension contains each endpoint sample once before reflecting only indices1 through n-1.",
+    "new_evidence": "Definition, branch2 even extension and its reflected interior-index range: For n>=1 the extension contains each endpoint sample once before reflecting only indices1 through n-1.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "branch2 even extension and its reflected interior-index range",
+      "quote": "Input real numbers $a<b$, a natural $n\\ge0$, sampled values $y_0,\\ldots,y_n$, and the phase/FFT controls for [[alg-na-computed-fast-transforms-and-convolution]]: a phase tolerance $0<\\tau\\le1/4$, integer dyadic exponent limits $e_{\\min}\\le e_{\\max}$, an initial phase precision $p_0\\ge2$, a finite precision cap $p_{\\max}\\ge p_0$, a finite elementary-series cap $J\\ge1$, and a maximum radix-two recursion depth $d_{\\max}\\ge0$. Set $m=(a+b)/2$ and $d=(b-a)/2$. For an underlying $f\\in C[a,b]$, admissible samples satisfy $y_0=f(m)$ when $n=0$ and $y_j=f(m+d\\cos(j\\pi/n))$ for $0\\le j\\le n$ when $n\\ge1$, using the canonical real images of [[def-canonical-natural]]. The output is an approximate real quadrature value or the first status returned by the called DFT procedure.\n\n1. If $n=0$, return $(b-a)y_0$, the midpoint convention of [[def-na-clenshaw-curtis-quadrature]].\n2. If $n\\ge1$, form $z\\in\\mathbb C^{2n}$ by $z_j:=y_j+0i$ for $0\\le j\\le n$ and $z_{2n-j}:=y_j+0i$ for $1\\le j<n$. This is the even extension $(y_0,\\ldots,y_n,y_{n-1},\\ldots,y_1)$, with real samples embedded as complex numbers with zero imaginary part. Call [[alg-na-computed-fast-transforms-and-convolution]] on $z$ with length $2n$ and the same controls $(\\tau,e_{\\min},e_{\\max},p_0,p_{\\max},J,d_{\\max})$. If it returns a status instead of a vector, return that status.\n3. Otherwise, take the real parts $X_k$ of output entries $0\\le k\\le n$, form the DCT-I coefficients $a_0=X_0/(2n)$, $a_n=X_n/(2n)$, and $a_k=X_k/n$ for $1\\le k<n$ as in [[def-na-clenshaw-curtis-dct-i]], and return $d\\sum_{k=0}^n a_k\\mu_k$ with the exact moments $\\mu_k$ in [[def-na-clenshaw-curtis-quadrature]].\n\nThe postprocessing is exact real arithmetic applied to the approximate DFT output. The procedure makes no end-to-end floating-point error or stability claim; it only propagates the DFT routine's declared failure statuses."
+    }
+  },
+  {
+    "key": "alg-na-computed-clenshaw-curtis-via-fast-dft::one",
+    "old_evidence": "At n=1 the extension has length2 with samples y_0,y_1; no reflected interior samples are appended.",
+    "new_evidence": "Definition, branch2 even extension and its reflected interior-index range: At n=1 the extension has length2 with samples y_0,y_1; no reflected interior samples are appended.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "branch2 even extension and its reflected interior-index range",
+      "quote": "Input real numbers $a<b$, a natural $n\\ge0$, sampled values $y_0,\\ldots,y_n$, and the phase/FFT controls for [[alg-na-computed-fast-transforms-and-convolution]]: a phase tolerance $0<\\tau\\le1/4$, integer dyadic exponent limits $e_{\\min}\\le e_{\\max}$, an initial phase precision $p_0\\ge2$, a finite precision cap $p_{\\max}\\ge p_0$, a finite elementary-series cap $J\\ge1$, and a maximum radix-two recursion depth $d_{\\max}\\ge0$. Set $m=(a+b)/2$ and $d=(b-a)/2$. For an underlying $f\\in C[a,b]$, admissible samples satisfy $y_0=f(m)$ when $n=0$ and $y_j=f(m+d\\cos(j\\pi/n))$ for $0\\le j\\le n$ when $n\\ge1$, using the canonical real images of [[def-canonical-natural]]. The output is an approximate real quadrature value or the first status returned by the called DFT procedure.\n\n1. If $n=0$, return $(b-a)y_0$, the midpoint convention of [[def-na-clenshaw-curtis-quadrature]].\n2. If $n\\ge1$, form $z\\in\\mathbb C^{2n}$ by $z_j:=y_j+0i$ for $0\\le j\\le n$ and $z_{2n-j}:=y_j+0i$ for $1\\le j<n$. This is the even extension $(y_0,\\ldots,y_n,y_{n-1},\\ldots,y_1)$, with real samples embedded as complex numbers with zero imaginary part. Call [[alg-na-computed-fast-transforms-and-convolution]] on $z$ with length $2n$ and the same controls $(\\tau,e_{\\min},e_{\\max},p_0,p_{\\max},J,d_{\\max})$. If it returns a status instead of a vector, return that status.\n3. Otherwise, take the real parts $X_k$ of output entries $0\\le k\\le n$, form the DCT-I coefficients $a_0=X_0/(2n)$, $a_n=X_n/(2n)$, and $a_k=X_k/n$ for $1\\le k<n$ as in [[def-na-clenshaw-curtis-dct-i]], and return $d\\sum_{k=0}^n a_k\\mu_k$ with the exact moments $\\mu_k$ in [[def-na-clenshaw-curtis-quadrature]].\n\nThe postprocessing is exact real arithmetic applied to the approximate DFT output. The procedure makes no end-to-end floating-point error or stability claim; it only propagates the DFT routine's declared failure statuses."
+    }
+  },
+  {
+    "key": "alg-na-computed-clenshaw-curtis-via-fast-dft::zero",
+    "old_evidence": "The n=0 branch computes (b-a)y_0 and bypasses all DFT and division-by-n steps.",
+    "new_evidence": "Definition, branch1 midpoint return before any DFT call: The n=0 branch computes (b-a)y_0 and bypasses all DFT and division-by-n steps.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "branch1 midpoint return before any DFT call",
+      "quote": "Input real numbers $a<b$, a natural $n\\ge0$, sampled values $y_0,\\ldots,y_n$, and the phase/FFT controls for [[alg-na-computed-fast-transforms-and-convolution]]: a phase tolerance $0<\\tau\\le1/4$, integer dyadic exponent limits $e_{\\min}\\le e_{\\max}$, an initial phase precision $p_0\\ge2$, a finite precision cap $p_{\\max}\\ge p_0$, a finite elementary-series cap $J\\ge1$, and a maximum radix-two recursion depth $d_{\\max}\\ge0$. Set $m=(a+b)/2$ and $d=(b-a)/2$. For an underlying $f\\in C[a,b]$, admissible samples satisfy $y_0=f(m)$ when $n=0$ and $y_j=f(m+d\\cos(j\\pi/n))$ for $0\\le j\\le n$ when $n\\ge1$, using the canonical real images of [[def-canonical-natural]]. The output is an approximate real quadrature value or the first status returned by the called DFT procedure.\n\n1. If $n=0$, return $(b-a)y_0$, the midpoint convention of [[def-na-clenshaw-curtis-quadrature]].\n2. If $n\\ge1$, form $z\\in\\mathbb C^{2n}$ by $z_j:=y_j+0i$ for $0\\le j\\le n$ and $z_{2n-j}:=y_j+0i$ for $1\\le j<n$. This is the even extension $(y_0,\\ldots,y_n,y_{n-1},\\ldots,y_1)$, with real samples embedded as complex numbers with zero imaginary part. Call [[alg-na-computed-fast-transforms-and-convolution]] on $z$ with length $2n$ and the same controls $(\\tau,e_{\\min},e_{\\max},p_0,p_{\\max},J,d_{\\max})$. If it returns a status instead of a vector, return that status.\n3. Otherwise, take the real parts $X_k$ of output entries $0\\le k\\le n$, form the DCT-I coefficients $a_0=X_0/(2n)$, $a_n=X_n/(2n)$, and $a_k=X_k/n$ for $1\\le k<n$ as in [[def-na-clenshaw-curtis-dct-i]], and return $d\\sum_{k=0}^n a_k\\mu_k$ with the exact moments $\\mu_k$ in [[def-na-clenshaw-curtis-quadrature]].\n\nThe postprocessing is exact real arithmetic applied to the approximate DFT output. The procedure makes no end-to-end floating-point error or stability claim; it only propagates the DFT routine's declared failure statuses."
+    }
+  },
+  {
+    "key": "alg-na-romberg-trapezoid-table::empty",
+    "old_evidence": "At L=0 the only table member is R_0,0=T_1; both Richardson loops have no iterations.",
+    "new_evidence": "Definition, the admitted L>=0 table inventory and base-column branch1: At L=0 the only table member is R_0,0=T_1; both Richardson loops have no iterations.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the admitted L>=0 table inventory and base-column branch1",
+      "quote": "Input a real function $f$ on a nondegenerate closed interval $[a,b]$ and an integer $L\\ge0$. The output is the finite triangular table $(R_{\\ell,j})_{0\\le j\\le\\ell\\le L}$ and its top entry $R_{L,L}$.\n\n1. For each $\\ell=0,\\ldots,L$, set $N_\\ell:=2^\\ell\\in\\mathbb N$ using natural exponentiation of [[def-nat-power]], $h_\\ell:=(b-a)/N_\\ell$, and $R_{\\ell,0}:=T_{N_\\ell}(f)$ using the composite trapezoidal value $T_N$ of [[def-composite-trapezoidal-rule]]. Natural powers in real scalar expressions are understood through their canonical real images.\n2. For $j=1,\\ldots,L$, and then for each $\\ell=j,\\ldots,L$, set\n$$R_{\\ell,j}:=R_{\\ell,j-1}+\\frac{R_{\\ell,j-1}-R_{\\ell-1,j-1}}{4^j-1}.$$\n\nFor $j\\ge1$, claim 3 of [[lem-power-monotone]] gives $4^j\\ge4>1$, using the natural-to-real power identity of [[def-nat-power]]; thus every displayed denominator $4^j-1$ is the positive real $4^j-1$ and is invertible by [[thm-reals-field]]. This definition returns only the stated finite table; it makes no accuracy claim for nonsmooth inputs or finite-precision arithmetic."
+    }
+  },
+  {
+    "key": "alg-na-romberg-trapezoid-table::zero",
+    "old_evidence": "The zero-level table has N_0=1 and returns its single composite-trapezoid entry.",
+    "new_evidence": "Definition, the admitted L>=0 table inventory and base-column branch1: The zero-level table has N_0=1 and returns its single composite-trapezoid entry.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the admitted L>=0 table inventory and base-column branch1",
+      "quote": "Input a real function $f$ on a nondegenerate closed interval $[a,b]$ and an integer $L\\ge0$. The output is the finite triangular table $(R_{\\ell,j})_{0\\le j\\le\\ell\\le L}$ and its top entry $R_{L,L}$.\n\n1. For each $\\ell=0,\\ldots,L$, set $N_\\ell:=2^\\ell\\in\\mathbb N$ using natural exponentiation of [[def-nat-power]], $h_\\ell:=(b-a)/N_\\ell$, and $R_{\\ell,0}:=T_{N_\\ell}(f)$ using the composite trapezoidal value $T_N$ of [[def-composite-trapezoidal-rule]]. Natural powers in real scalar expressions are understood through their canonical real images.\n2. For $j=1,\\ldots,L$, and then for each $\\ell=j,\\ldots,L$, set\n$$R_{\\ell,j}:=R_{\\ell,j-1}+\\frac{R_{\\ell,j-1}-R_{\\ell-1,j-1}}{4^j-1}.$$\n\nFor $j\\ge1$, claim 3 of [[lem-power-monotone]] gives $4^j\\ge4>1$, using the natural-to-real power identity of [[def-nat-power]]; thus every displayed denominator $4^j-1$ is the positive real $4^j-1$ and is invertible by [[thm-reals-field]]. This definition returns only the stated finite table; it makes no accuracy claim for nonsmooth inputs or finite-precision arithmetic."
+    }
+  },
+  {
+    "key": "alg-na-romberg-trapezoid-table::one",
+    "old_evidence": "With L=1 the entries are T_1,T_2 and R_1,1=T_2+(T_2-T_1)/3.",
+    "new_evidence": "Definition, base column and Richardson branch2 with j=1: With L=1 the entries are T_1,T_2 and R_1,1=T_2+(T_2-T_1)/3.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "base column and Richardson branch2 with j=1",
+      "quote": "Input a real function $f$ on a nondegenerate closed interval $[a,b]$ and an integer $L\\ge0$. The output is the finite triangular table $(R_{\\ell,j})_{0\\le j\\le\\ell\\le L}$ and its top entry $R_{L,L}$.\n\n1. For each $\\ell=0,\\ldots,L$, set $N_\\ell:=2^\\ell\\in\\mathbb N$ using natural exponentiation of [[def-nat-power]], $h_\\ell:=(b-a)/N_\\ell$, and $R_{\\ell,0}:=T_{N_\\ell}(f)$ using the composite trapezoidal value $T_N$ of [[def-composite-trapezoidal-rule]]. Natural powers in real scalar expressions are understood through their canonical real images.\n2. For $j=1,\\ldots,L$, and then for each $\\ell=j,\\ldots,L$, set\n$$R_{\\ell,j}:=R_{\\ell,j-1}+\\frac{R_{\\ell,j-1}-R_{\\ell-1,j-1}}{4^j-1}.$$\n\nFor $j\\ge1$, claim 3 of [[lem-power-monotone]] gives $4^j\\ge4>1$, using the natural-to-real power identity of [[def-nat-power]]; thus every displayed denominator $4^j-1$ is the positive real $4^j-1$ and is invertible by [[thm-reals-field]]. This definition returns only the stated finite table; it makes no accuracy claim for nonsmooth inputs or finite-precision arithmetic."
+    }
+  },
+  {
+    "key": "alg-na-romberg-trapezoid-table::endpoints",
+    "old_evidence": "Each base column is the closed composite trapezoid and therefore includes the supplied values f(a),f(b).",
+    "new_evidence": "Definition, branch1 invocation of the closed composite trapezoidal rule: Each base column is the closed composite trapezoid and therefore includes the supplied values f(a),f(b).",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "branch1 invocation of the closed composite trapezoidal rule",
+      "quote": "Input a real function $f$ on a nondegenerate closed interval $[a,b]$ and an integer $L\\ge0$. The output is the finite triangular table $(R_{\\ell,j})_{0\\le j\\le\\ell\\le L}$ and its top entry $R_{L,L}$.\n\n1. For each $\\ell=0,\\ldots,L$, set $N_\\ell:=2^\\ell\\in\\mathbb N$ using natural exponentiation of [[def-nat-power]], $h_\\ell:=(b-a)/N_\\ell$, and $R_{\\ell,0}:=T_{N_\\ell}(f)$ using the composite trapezoidal value $T_N$ of [[def-composite-trapezoidal-rule]]. Natural powers in real scalar expressions are understood through their canonical real images.\n2. For $j=1,\\ldots,L$, and then for each $\\ell=j,\\ldots,L$, set\n$$R_{\\ell,j}:=R_{\\ell,j-1}+\\frac{R_{\\ell,j-1}-R_{\\ell-1,j-1}}{4^j-1}.$$\n\nFor $j\\ge1$, claim 3 of [[lem-power-monotone]] gives $4^j\\ge4>1$, using the natural-to-real power identity of [[def-nat-power]]; thus every displayed denominator $4^j-1$ is the positive real $4^j-1$ and is invertible by [[thm-reals-field]]. This definition returns only the stated finite table; it makes no accuracy claim for nonsmooth inputs or finite-precision arithmetic."
+    }
+  },
+  {
+    "key": "alg-parabolic-backward-euler-averaged-forms::one",
+    "old_evidence": "For N=1 the single average is over(0,T), the returned nodes are U^0,U^1 and the affine reconstruction joins exactly those nodes.",
+    "new_evidence": "Definition, one-cell averages, variational solve and returned reconstructions: For N=1 the single average is over(0,T), the returned nodes are U^0,U^1 and the affine reconstruction joins exactly those nodes.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "one-cell averages, variational solve and returned reconstructions",
+      "quote": "Input a real evolution triple $(V,H,V^*)$ and a finite-dimensional conforming\nsubspace $V_h\\subset V$ with its inherited $H$ inner product and $V$ norm; a\nfinite-element use instantiates it with a zero-boundary conforming polynomial\nspace. Input also a final time $T>0$, a finite partition\n$0=t_0<t_1<\\cdots<t_N=T$, and a real bilinear form family\n$a_h(t;\\cdot,\\cdot):V_h\\times V_h\\to\\mathbb R$ such that\n$t\\mapsto a_h(t;v_h,w_h)$ is measurable for each fixed $v_h,w_h\\in V_h$.\nThere must be constants $0\\le M<\\infty$, $\\alpha>0$ and one null set\n$E\\subset(0,T)$ such that\n$$|a_h(t;v_h,w_h)|\\le M\\|v_h\\|_V\\|w_h\\|_V,\\qquad a_h(t;v_h,v_h)\\ge\\alpha\\|v_h\\|_V^2\\qquad(v_h,w_h\\in V_h,\\ t\\in(0,T)\\setminus E).$$\nThe same exceptional set and constants apply to all pairs. Input a strongly\nmeasurable load $g\\in L^2(0,T;V_h^*)$ and an initial value $U^0\\in V_h$. A\nfinite-element load $f\\in L^2(0,T;V^*)$ is supplied as its restriction\n$g(t)=f(t)|_{V_h}$. For $I_j=(t_{j-1},t_j)$ and $\\tau_j=t_j-t_{j-1}$,\nform the scalar bilinear and Bochner load averages\n$$\\bar a_j(v_h,w_h)=\\tau_j^{-1}\\int_{I_j}a_h(t;v_h,w_h)\\,dt,\\qquad \\bar g_j=\\tau_j^{-1}\\int_{I_j}g(t)\\,dt.$$\nFor $j=1,\\ldots,N$, solve for $U^j\\in V_h$ from\n$$\\tau_j^{-1}(U^j-U^{j-1},v_h)_H+ \\bar a_j(U^j,v_h)=\\langle\\bar g_j,v_h\\rangle_{V_h^*,V_h} \\qquad(v_h\\in V_h).$$\nReturn the nodes $U^0,\\ldots,U^N$, the piecewise-constant function\n$\\bar U(t)=U^j$ on each open interval $(t_{j-1},t_j)$ (endpoint values do\nnot affect the $L^2$ function), and the continuous piecewise\naffine reconstruction $\\widehat U$ joining consecutive nodes. The initial\nvalue is the separately supplied $U^0$; the initial jump is\n$U^1-U^0$, and subsequent jumps are $U^j-U^{j-1}$. Invalid spaces, partitions,\nor form/data hypotheses return `invalid-input`; the well-definedness theorem\nproves that each indicated solve has a unique answer under the stated\nhypotheses. Because coefficients and loads are averaged,\nthis procedure is defined on their almost-everywhere equivalence classes and\ndoes not sample a representative at a point. For a time-dependent form this\nis the averaged-coefficient backward Euler method; with piecewise-constant\ntime trials it is also the $dG(0)$ step."
+    }
+  },
+  {
+    "key": "alg-parabolic-backward-euler-averaged-forms::zero",
+    "old_evidence": "With U^0=0 and load g=0, each coercive step has zero as its unique solution; this leaves the positive form coercivity unchanged.",
+    "new_evidence": "Definition, the homogeneous variational step and its declared unique-solve interface: With U^0=0 and load g=0, each coercive step has zero as its unique solution; this leaves the positive form coercivity unchanged.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the homogeneous variational step and its declared unique-solve interface",
+      "quote": "Input a real evolution triple $(V,H,V^*)$ and a finite-dimensional conforming\nsubspace $V_h\\subset V$ with its inherited $H$ inner product and $V$ norm; a\nfinite-element use instantiates it with a zero-boundary conforming polynomial\nspace. Input also a final time $T>0$, a finite partition\n$0=t_0<t_1<\\cdots<t_N=T$, and a real bilinear form family\n$a_h(t;\\cdot,\\cdot):V_h\\times V_h\\to\\mathbb R$ such that\n$t\\mapsto a_h(t;v_h,w_h)$ is measurable for each fixed $v_h,w_h\\in V_h$.\nThere must be constants $0\\le M<\\infty$, $\\alpha>0$ and one null set\n$E\\subset(0,T)$ such that\n$$|a_h(t;v_h,w_h)|\\le M\\|v_h\\|_V\\|w_h\\|_V,\\qquad a_h(t;v_h,v_h)\\ge\\alpha\\|v_h\\|_V^2\\qquad(v_h,w_h\\in V_h,\\ t\\in(0,T)\\setminus E).$$\nThe same exceptional set and constants apply to all pairs. Input a strongly\nmeasurable load $g\\in L^2(0,T;V_h^*)$ and an initial value $U^0\\in V_h$. A\nfinite-element load $f\\in L^2(0,T;V^*)$ is supplied as its restriction\n$g(t)=f(t)|_{V_h}$. For $I_j=(t_{j-1},t_j)$ and $\\tau_j=t_j-t_{j-1}$,\nform the scalar bilinear and Bochner load averages\n$$\\bar a_j(v_h,w_h)=\\tau_j^{-1}\\int_{I_j}a_h(t;v_h,w_h)\\,dt,\\qquad \\bar g_j=\\tau_j^{-1}\\int_{I_j}g(t)\\,dt.$$\nFor $j=1,\\ldots,N$, solve for $U^j\\in V_h$ from\n$$\\tau_j^{-1}(U^j-U^{j-1},v_h)_H+ \\bar a_j(U^j,v_h)=\\langle\\bar g_j,v_h\\rangle_{V_h^*,V_h} \\qquad(v_h\\in V_h).$$\nReturn the nodes $U^0,\\ldots,U^N$, the piecewise-constant function\n$\\bar U(t)=U^j$ on each open interval $(t_{j-1},t_j)$ (endpoint values do\nnot affect the $L^2$ function), and the continuous piecewise\naffine reconstruction $\\widehat U$ joining consecutive nodes. The initial\nvalue is the separately supplied $U^0$; the initial jump is\n$U^1-U^0$, and subsequent jumps are $U^j-U^{j-1}$. Invalid spaces, partitions,\nor form/data hypotheses return `invalid-input`; the well-definedness theorem\nproves that each indicated solve has a unique answer under the stated\nhypotheses. Because coefficients and loads are averaged,\nthis procedure is defined on their almost-everywhere equivalence classes and\ndoes not sample a representative at a point. For a time-dependent form this\nis the averaged-coefficient backward Euler method; with piecewise-constant\ntime trials it is also the $dG(0)$ step."
+    }
+  },
+  {
+    "key": "alg-parabolic-crank-nicolson-cg1::one",
+    "old_evidence": "At N=1 the procedure solves one midpoint variational equation with average load over(0,T).",
+    "new_evidence": "Definition, one-cell averaged-load midpoint equation: At N=1 the procedure solves one midpoint variational equation with average load over(0,T).",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "one-cell averaged-load midpoint equation",
+      "quote": "Input a finite-dimensional conforming subspace $V_h\\subset V$ with its\ninherited $H$ inner product and $V$ norm; a finite-element use instantiates it\nwith a zero-boundary conforming polynomial space. Input also a final time\n$T>0$, a finite partition\n$0=t_0<\\cdots<t_N=T$, a time-independent real bounded coercive\nbilinear form $a$ on $V$, a load $f\\in L^2(0,T;V^*)$, and $U^0\\in V_h$.\nPut $\\bar f_j=\\tau_j^{-1}\\int_{t_{j-1}}^{t_j}f(t)\\,dt$. For\n$j=1,\\ldots,N$, solve\n$$\\tau_j^{-1}(U^j-U^{j-1},v_h)_H+ a\\!\\left(\\frac{U^j+U^{j-1}}2,v_h\\right) =\\langle\\bar f_j,v_h\\rangle\\qquad(v_h\\in V_h).$$\nReturn the nodal values and their continuous piecewise-linear interpolant.\nThere are no interior time jumps; the initial value is the supplied $U^0$.\nThe coefficient form is time-independent, while the load is averaged, so no\npoint value of an $L^2(V^*)$ equivalence class is used. Invalid inputs return\n`invalid-input`; the well-definedness theorem proves that each indicated step\nhas a unique solution under the stated hypotheses.\n\nFor each interval, the same equation is the continuous-Galerkin $cG(1)$\nequation with continuous piecewise-linear trial functions and constant test\nfunctions: integrating $U'$ gives $U^j-U^{j-1}$, and integrating the linear\ntrial function in the time-independent form gives its midpoint value. Thus\nthis item asserts the $cG(1)$ equivalence only; it does not assert rates for\nhigher-degree $cG$ or discontinuous-Galerkin methods."
+    }
+  },
+  {
+    "key": "alg-parabolic-crank-nicolson-cg1::zero",
+    "old_evidence": "Zero initial value and zero load yield the zero unique step sequence under the unchanged coercive form.",
+    "new_evidence": "Definition, homogeneous initial/load data in its unique coercive variational step: Zero initial value and zero load yield the zero unique step sequence under the unchanged coercive form.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "homogeneous initial/load data in its unique coercive variational step",
+      "quote": "Input a finite-dimensional conforming subspace $V_h\\subset V$ with its\ninherited $H$ inner product and $V$ norm; a finite-element use instantiates it\nwith a zero-boundary conforming polynomial space. Input also a final time\n$T>0$, a finite partition\n$0=t_0<\\cdots<t_N=T$, a time-independent real bounded coercive\nbilinear form $a$ on $V$, a load $f\\in L^2(0,T;V^*)$, and $U^0\\in V_h$.\nPut $\\bar f_j=\\tau_j^{-1}\\int_{t_{j-1}}^{t_j}f(t)\\,dt$. For\n$j=1,\\ldots,N$, solve\n$$\\tau_j^{-1}(U^j-U^{j-1},v_h)_H+ a\\!\\left(\\frac{U^j+U^{j-1}}2,v_h\\right) =\\langle\\bar f_j,v_h\\rangle\\qquad(v_h\\in V_h).$$\nReturn the nodal values and their continuous piecewise-linear interpolant.\nThere are no interior time jumps; the initial value is the supplied $U^0$.\nThe coefficient form is time-independent, while the load is averaged, so no\npoint value of an $L^2(V^*)$ equivalence class is used. Invalid inputs return\n`invalid-input`; the well-definedness theorem proves that each indicated step\nhas a unique solution under the stated hypotheses.\n\nFor each interval, the same equation is the continuous-Galerkin $cG(1)$\nequation with continuous piecewise-linear trial functions and constant test\nfunctions: integrating $U'$ gives $U^j-U^{j-1}$, and integrating the linear\ntrial function in the time-independent form gives its midpoint value. Thus\nthis item asserts the $cG(1)$ equivalence only; it does not assert rates for\nhigher-degree $cG$ or discontinuous-Galerkin methods."
+    }
+  },
+  {
+    "key": "def-caputo-derivative-and-fractional-integral::one",
+    "old_evidence": "Order beta=1 gives the ordinary indefinite integral because Gamma1=1; alpha=1 is excluded from the Caputo branch.",
+    "new_evidence": "Definition, the positive-order integral formula and strict Caputo-order domain: Order beta=1 gives the ordinary indefinite integral because Gamma1=1; alpha=1 is excluded from the Caputo branch.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the positive-order integral formula and strict Caputo-order domain",
+      "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$ whose almost-everywhere derivative belongs to\n$L^1(0,T)$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]]. Under Countable Choice\n([[def-countable-choice]]), every such absolutely continuous $u$ has\n$u'\\in L^1(0,T)$ by\n[[thm-absolutely-continuous-functions-have-integrable-derivatives]], so the\nCaputo derivative is defined on the whole absolutely continuous class under\nthat assumption. Without Countable Choice, the same formula is defined for\neach absolutely continuous $u$ whose derivative is separately known to be in\n$L^1(0,T)$. The Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]]."
+    }
+  },
+  {
+    "key": "def-caputo-derivative-and-fractional-integral::zero",
+    "old_evidence": "The continuous-input estimate has value0 at t=0; the order restrictions beta>0 and0<alpha<1 remain in force.",
+    "new_evidence": "Definition, the continuous-input bound on the closed time interval: The continuous-input estimate has value0 at t=0; the order restrictions beta>0 and0<alpha<1 remain in force.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the continuous-input bound on the closed time interval",
+      "quote": "Let $T>0$ and $\\beta>0$. For $g\\in L^1(0,T)$, its left fractional\nintegral of order $\\beta$ is, for almost every $t\\in(0,T)$,\n\n$$I^\\beta g(t):=\\frac{1}{\\Gamma(\\beta)}\\int_0^t(t-s)^{\\beta-1}g(s)\\,ds.$$\n\nThe definition uses Lebesgue integration, with\n[[def-indefinite-lebesgue-integral-on-a-compact-interval]] and\n[[def-l-one-of-a-measure]]. The kernel is integrable and\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}$$\nby [[lem-fractional-integral-kernel-power-integral]]. Tonelli's theorem\n[[thm-tonelli-theorem-for-sigma-finite-product-spaces]] therefore gives\n$$\\int_0^T\\int_0^t(t-s)^{\\beta-1}|g(s)|\\,ds\\,dt =\\int_0^T|g(s)|\\int_s^T(t-s)^{\\beta-1}dt\\,ds \\le \\frac{T^\\beta}{\\beta}\\|g\\|_{L^1(0,T)}<\\infty,$$\nso the defining integral is finite for almost every $t$. For continuous $g$,\nit is finite at every $t\\in[0,T]$ and\n$$|I^\\beta g(t)|\\le \\frac{t^\\beta}{\\beta\\Gamma(\\beta)}\\|g\\|_\\infty =\\frac{t^\\beta}{\\Gamma(\\beta+1)}\\|g\\|_\\infty,$$\nusing [[thm-real-gamma-functional-equation]].\n\nFor $0<\\alpha<1$ and an absolutely continuous function\n$u:[0,T]\\to\\mathbb R$ whose almost-everywhere derivative belongs to\n$L^1(0,T)$, its Caputo derivative of order $\\alpha$ is the\nalmost-everywhere defined function\n\n$$D_C^\\alpha u:=I^{1-\\alpha}u'=\\frac{1}{\\Gamma(1-\\alpha)}\\int_0^t(t-s)^{-\\alpha}u'(s)\\,ds.$$\n\nHere absolute continuity is as in\n[[def-absolutely-continuous-function]]. Under Countable Choice\n([[def-countable-choice]]), every such absolutely continuous $u$ has\n$u'\\in L^1(0,T)$ by\n[[thm-absolutely-continuous-functions-have-integrable-derivatives]], so the\nCaputo derivative is defined on the whole absolutely continuous class under\nthat assumption. Without Countable Choice, the same formula is defined for\neach absolutely continuous $u$ whose derivative is separately known to be in\n$L^1(0,T)$. The Gamma factors are the positive real Euler Gamma function\n[[def-real-gamma-function-by-the-euler-integral]]."
+    }
+  },
+  {
+    "key": "def-local-leapfrog-domain-on-an-open-configuration-set::empty",
+    "old_evidence": "If Q is empty there are no admitted states and the local restriction has empty domain; no output or flow completeness is asserted.",
+    "new_evidence": "Definition, the explicit admitted-domain restriction of the local drift and three shears: If Q is empty there are no admitted states and the local restriction has empty domain; no output or flow completeness is asserted.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the explicit admitted-domain restriction of the local drift and three shears",
+      "quote": "Let $Q\\subseteq\\mathbb R^d$ be open, let $V\\in C^1(Q,\\mathbb R)$, and let $M$ be a real symmetric positive-definite matrix. Use the force-kick $K_a$ and drift $D_b$ already defined in [[def-leapfrog-step-map]], with $U$ there replaced by $V$. The local kick is the restriction of $K_a$ to $Q\\times\\mathbb R^d$. The local drift is the restriction of $D_b$ to\n$$\\{(q,p):q\\in Q,\\ q+bM^{-1}p\\in Q\\}.$$\n\nFor a signed step $h$, the local leapfrog map is the restriction of $K_{h/2}\\circ D_h\\circ K_{h/2}$ to the states for which all three intermediate configurations lie in $Q$. Its output is defined only on that admitted set. This definition changes the configuration domain of the published map; it does not redefine the global leapfrog map or assert that the local map is complete."
+    }
+  },
+  {
+    "key": "def-local-leapfrog-domain-on-an-open-configuration-set::one",
+    "old_evidence": "For one configuration coordinate, the admitted-set condition still checks q and q+b M^(-1)p in the same open subset of R.",
+    "new_evidence": "Definition, the explicit admitted-domain restriction of the local drift and three shears: For one configuration coordinate, the admitted-set condition still checks q and q+b M^(-1)p in the same open subset of R.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the explicit admitted-domain restriction of the local drift and three shears",
+      "quote": "Let $Q\\subseteq\\mathbb R^d$ be open, let $V\\in C^1(Q,\\mathbb R)$, and let $M$ be a real symmetric positive-definite matrix. Use the force-kick $K_a$ and drift $D_b$ already defined in [[def-leapfrog-step-map]], with $U$ there replaced by $V$. The local kick is the restriction of $K_a$ to $Q\\times\\mathbb R^d$. The local drift is the restriction of $D_b$ to\n$$\\{(q,p):q\\in Q,\\ q+bM^{-1}p\\in Q\\}.$$\n\nFor a signed step $h$, the local leapfrog map is the restriction of $K_{h/2}\\circ D_h\\circ K_{h/2}$ to the states for which all three intermediate configurations lie in $Q$. Its output is defined only on that admitted set. This definition changes the configuration domain of the published map; it does not redefine the global leapfrog map or assert that the local map is complete."
+    }
+  },
+  {
+    "key": "def-na-bernoulli-polynomials::one",
+    "old_evidence": "Putting m=1 and beta_0,0=1 in the recursion gives B_1(X)=X-1/2.",
+    "new_evidence": "Definition, the B_0 assignment and predecessor coefficient recursion: Putting m=1 and beta_0,0=1 in the recursion gives B_1(X)=X-1/2.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the B_0 assignment and predecessor coefficient recursion",
+      "quote": "Define polynomials $B_m\\in\\mathbb R[X]$ recursively. Put $B_0(X)=1$. If $m\\ge1$ and $B_{m-1}(X)=\\sum_{q=0}^{m-1}\\beta_{m-1,q}X^q$, set\n$$B_m(X):=m\\sum_{q=0}^{m-1}\\beta_{m-1,q}\\left(\\frac{X^{q+1}}{q+1}-\\frac{1}{(q+1)(q+2)}\\right).$$\nNatural numbers in real denominators mean their canonical real images from [[def-canonical-natural]]; these images are positive by [[lem-of-naturals-positive]] and therefore invertible in $\\mathbb R$ by [[thm-reals-field]]. Every sum is finite. Write $B_m:=B_m(0)$ for the Bernoulli number of index $m$."
+    }
+  },
+  {
+    "key": "def-na-bernoulli-polynomials::zero",
+    "old_evidence": "The Bernoulli recursion initializes B_0(X)=1; it does not apply the predecessor recursion at zero.",
+    "new_evidence": "Definition, the B_0 assignment and predecessor coefficient recursion: The Bernoulli recursion initializes B_0(X)=1; it does not apply the predecessor recursion at zero.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the B_0 assignment and predecessor coefficient recursion",
+      "quote": "Define polynomials $B_m\\in\\mathbb R[X]$ recursively. Put $B_0(X)=1$. If $m\\ge1$ and $B_{m-1}(X)=\\sum_{q=0}^{m-1}\\beta_{m-1,q}X^q$, set\n$$B_m(X):=m\\sum_{q=0}^{m-1}\\beta_{m-1,q}\\left(\\frac{X^{q+1}}{q+1}-\\frac{1}{(q+1)(q+2)}\\right).$$\nNatural numbers in real denominators mean their canonical real images from [[def-canonical-natural]]; these images are positive by [[lem-of-naturals-positive]] and therefore invertible in $\\mathbb R$ by [[thm-reals-field]]. Every sum is finite. Write $B_m:=B_m(0)$ for the Bernoulli number of index $m$."
+    }
+  },
+  {
+    "key": "def-na-clenshaw-curtis-dct-i::empty",
+    "old_evidence": "For n=1 the interior sum j=1,...,n-1 is empty; the two endpoint summands remain.",
+    "new_evidence": "Definition, the endpoint summands and interior range1 through n-1: For n=1 the interior sum j=1,...,n-1 is empty; the two endpoint summands remain.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the endpoint summands and interior range1 through n-1",
+      "quote": "Let $n\\in\\mathbb N$ with $n\\ge1$ and let $y=(y_0,\\ldots,y_n)\\in\\mathbb R^{n+1}$. In real-valued formulas, each natural index denotes its canonical real image ([[def-canonical-natural]]). Since $n>0$ by [[lem-of-naturals-positive]], division by $n$ is defined in $\\mathbb R$ ([[thm-reals-field]]). The type-I discrete cosine transform, in the Lobatto convention used here, is the vector $X=(X_0,\\ldots,X_n)$ defined by\n$$X_k:=y_0+(-1)^k y_n+2\\sum_{j=1}^{n-1}y_j\\cos\\!\\left(\\frac{j k\\pi}{n}\\right),\\qquad 0\\le k\\le n.$$\nHere $(-1)^k$ is the natural power of the real number $-1$ from [[def-integer-power]], and the sum is the finite sum of [[def-finite-sum]], empty when $n=1$. The data $y_j$ are ordered from the right endpoint toward the left endpoint at nodes $\\cos(j\\pi/n)$. This definition fixes the unnormalised DCT-I convention; the transform is not defined at $n=0$."
+    }
+  },
+  {
+    "key": "def-na-clenshaw-curtis-dct-i::one",
+    "old_evidence": "For n=1 the formula gives X_0=y_0+y_1 and X_1=y_0-y_1.",
+    "new_evidence": "Definition, the endpoint summands and interior range1 through n-1: For n=1 the formula gives X_0=y_0+y_1 and X_1=y_0-y_1.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the endpoint summands and interior range1 through n-1",
+      "quote": "Let $n\\in\\mathbb N$ with $n\\ge1$ and let $y=(y_0,\\ldots,y_n)\\in\\mathbb R^{n+1}$. In real-valued formulas, each natural index denotes its canonical real image ([[def-canonical-natural]]). Since $n>0$ by [[lem-of-naturals-positive]], division by $n$ is defined in $\\mathbb R$ ([[thm-reals-field]]). The type-I discrete cosine transform, in the Lobatto convention used here, is the vector $X=(X_0,\\ldots,X_n)$ defined by\n$$X_k:=y_0+(-1)^k y_n+2\\sum_{j=1}^{n-1}y_j\\cos\\!\\left(\\frac{j k\\pi}{n}\\right),\\qquad 0\\le k\\le n.$$\nHere $(-1)^k$ is the natural power of the real number $-1$ from [[def-integer-power]], and the sum is the finite sum of [[def-finite-sum]], empty when $n=1$. The data $y_j$ are ordered from the right endpoint toward the left endpoint at nodes $\\cos(j\\pi/n)$. This definition fixes the unnormalised DCT-I convention; the transform is not defined at $n=0$."
+    }
+  },
+  {
+    "key": "def-na-clenshaw-curtis-dct-i::endpoints",
+    "old_evidence": "The ordered nodes run from cos(0)=1 to cos(pi)=-1 and their data have weights 1 and (-1)^k.",
+    "new_evidence": "Definition, the stated right-to-left Lobatto ordering and endpoint coefficients: The ordered nodes run from cos(0)=1 to cos(pi)=-1 and their data have weights 1 and (-1)^k.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the stated right-to-left Lobatto ordering and endpoint coefficients",
+      "quote": "Let $n\\in\\mathbb N$ with $n\\ge1$ and let $y=(y_0,\\ldots,y_n)\\in\\mathbb R^{n+1}$. In real-valued formulas, each natural index denotes its canonical real image ([[def-canonical-natural]]). Since $n>0$ by [[lem-of-naturals-positive]], division by $n$ is defined in $\\mathbb R$ ([[thm-reals-field]]). The type-I discrete cosine transform, in the Lobatto convention used here, is the vector $X=(X_0,\\ldots,X_n)$ defined by\n$$X_k:=y_0+(-1)^k y_n+2\\sum_{j=1}^{n-1}y_j\\cos\\!\\left(\\frac{j k\\pi}{n}\\right),\\qquad 0\\le k\\le n.$$\nHere $(-1)^k$ is the natural power of the real number $-1$ from [[def-integer-power]], and the sum is the finite sum of [[def-finite-sum]], empty when $n=1$. The data $y_j$ are ordered from the right endpoint toward the left endpoint at nodes $\\cos(j\\pi/n)$. This definition fixes the unnormalised DCT-I convention; the transform is not defined at $n=0$."
+    }
+  },
+  {
+    "key": "def-na-clenshaw-curtis-quadrature::zero",
+    "old_evidence": "The explicit zero-degree branch is the midpoint rule and uses no division by n.",
+    "new_evidence": "Definition, the separate n=0 midpoint convention: The explicit zero-degree branch is the midpoint rule and uses no division by n.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the separate n=0 midpoint convention",
+      "quote": "Let $a<b$, $m=(a+b)/2$, $d=(b-a)/2$, and $f\\in C[a,b]$. For $n\\ge1$, set $g(t):=f(m+dt)$ on $[-1,1]$, let $y_j=g(\\cos(j\\pi/n))$, and form $a_0,\\ldots,a_n$ from the DCT-I coefficients in [[thm-na-clenshaw-curtis-interpolation-coefficients]]. With the Chebyshev moments $\\mu_k$ of [[lem-na-chebyshev-integral-moments]], define\n$$Q_{n,[a,b]}(f):=d\\sum_{k=0}^{n}a_k\\mu_k.$$\nFor $n=0$, define instead\n$$Q_{0,[a,b]}(f):=(b-a)f(m),$$\nthe midpoint rule. This is the explicit endpoint and zero-degree convention for Clenshaw–Curtis quadrature. The sums and coefficients are exact real quantities; finite-precision evaluation is a separate algorithm."
+    }
+  },
+  {
+    "key": "def-na-clenshaw-curtis-quadrature::one",
+    "old_evidence": "At n=1, moments mu_0=2,mu_1=0 and the two DCT samples give the endpoint trapezoid.",
+    "new_evidence": "Definition, the n>=1 DCT-coefficient/moment formula: At n=1, moments mu_0=2,mu_1=0 and the two DCT samples give the endpoint trapezoid.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the n>=1 DCT-coefficient/moment formula",
+      "quote": "Let $a<b$, $m=(a+b)/2$, $d=(b-a)/2$, and $f\\in C[a,b]$. For $n\\ge1$, set $g(t):=f(m+dt)$ on $[-1,1]$, let $y_j=g(\\cos(j\\pi/n))$, and form $a_0,\\ldots,a_n$ from the DCT-I coefficients in [[thm-na-clenshaw-curtis-interpolation-coefficients]]. With the Chebyshev moments $\\mu_k$ of [[lem-na-chebyshev-integral-moments]], define\n$$Q_{n,[a,b]}(f):=d\\sum_{k=0}^{n}a_k\\mu_k.$$\nFor $n=0$, define instead\n$$Q_{0,[a,b]}(f):=(b-a)f(m),$$\nthe midpoint rule. This is the explicit endpoint and zero-degree convention for Clenshaw–Curtis quadrature. The sums and coefficients are exact real quantities; finite-precision evaluation is a separate algorithm."
+    }
+  },
+  {
+    "key": "def-na-clenshaw-curtis-quadrature::endpoints",
+    "old_evidence": "The affine Lobatto pullback sends t=1 to b and t=-1 to a; n=0 instead samples the midpoint.",
+    "new_evidence": "Definition, the affine pullback m+d t and zero-degree midpoint branch: The affine Lobatto pullback sends t=1 to b and t=-1 to a; n=0 instead samples the midpoint.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the affine pullback m+d t and zero-degree midpoint branch",
+      "quote": "Let $a<b$, $m=(a+b)/2$, $d=(b-a)/2$, and $f\\in C[a,b]$. For $n\\ge1$, set $g(t):=f(m+dt)$ on $[-1,1]$, let $y_j=g(\\cos(j\\pi/n))$, and form $a_0,\\ldots,a_n$ from the DCT-I coefficients in [[thm-na-clenshaw-curtis-interpolation-coefficients]]. With the Chebyshev moments $\\mu_k$ of [[lem-na-chebyshev-integral-moments]], define\n$$Q_{n,[a,b]}(f):=d\\sum_{k=0}^{n}a_k\\mu_k.$$\nFor $n=0$, define instead\n$$Q_{0,[a,b]}(f):=(b-a)f(m),$$\nthe midpoint rule. This is the explicit endpoint and zero-degree convention for Clenshaw–Curtis quadrature. The sums and coefficients are exact real quantities; finite-precision evaluation is a separate algorithm."
+    }
+  },
+  {
+    "key": "def-na-closed-newton-cotes-eight-panel-rule::endpoints",
+    "old_evidence": "The j=0 and j=8 nodes are -1 and1, with endpoint weight989/14175 at each.",
+    "new_evidence": "Definition, the nine explicit nodes, rational weights and linear finite sum: The j=0 and j=8 nodes are -1 and1, with endpoint weight989/14175 at each.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the nine explicit nodes, rational weights and linear finite sum",
+      "quote": "For $j=0,\\ldots,8$, set $x_j=-1+j/4$ and\n$$w_j:=\\frac{1}{14175}(989,5888,-928,10496,-4540,10496,-928,5888,989)_j.$$\nFor any real-valued function $f$ on $[-1,1]$, define the closed nine-node rule\n$$Q_8(f):=\\sum_{j=0}^{8}w_j f(x_j),$$\nwhere the sum is finite. The nodes are equally spaced and include both endpoints; the subsequent weight and exactness lemma verifies that these coefficients are the integrated Lagrange-cardinal weights."
+    }
+  },
+  {
+    "key": "def-na-closed-newton-cotes-eight-panel-rule::one",
+    "old_evidence": "For the constant function one, the nine displayed rational weights sum to two; the rule remains a nine-node rule.",
+    "new_evidence": "Definition, the nine explicit nodes, rational weights and linear finite sum: For the constant function one, the nine displayed rational weights sum to two; the rule remains a nine-node rule.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the nine explicit nodes, rational weights and linear finite sum",
+      "quote": "For $j=0,\\ldots,8$, set $x_j=-1+j/4$ and\n$$w_j:=\\frac{1}{14175}(989,5888,-928,10496,-4540,10496,-928,5888,989)_j.$$\nFor any real-valued function $f$ on $[-1,1]$, define the closed nine-node rule\n$$Q_8(f):=\\sum_{j=0}^{8}w_j f(x_j),$$\nwhere the sum is finite. The nodes are equally spaced and include both endpoints; the subsequent weight and exactness lemma verifies that these coefficients are the integrated Lagrange-cardinal weights."
+    }
+  },
+  {
+    "key": "def-na-closed-newton-cotes-eight-panel-rule::zero",
+    "old_evidence": "The zero function has all nine samples zero, hence the defined weighted sum is zero.",
+    "new_evidence": "Definition, the nine explicit nodes, rational weights and linear finite sum: The zero function has all nine samples zero, hence the defined weighted sum is zero.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the nine explicit nodes, rational weights and linear finite sum",
+      "quote": "For $j=0,\\ldots,8$, set $x_j=-1+j/4$ and\n$$w_j:=\\frac{1}{14175}(989,5888,-928,10496,-4540,10496,-928,5888,989)_j.$$\nFor any real-valued function $f$ on $[-1,1]$, define the closed nine-node rule\n$$Q_8(f):=\\sum_{j=0}^{8}w_j f(x_j),$$\nwhere the sum is finite. The nodes are equally spaced and include both endpoints; the subsequent weight and exactness lemma verifies that these coefficients are the integrated Lagrange-cardinal weights."
+    }
+  },
+  {
+    "key": "def-na-peano-kernel::one",
+    "old_evidence": "The r=1 branch is the indicator of (t,b], with denominator0!=1; its Darboux integrability is established separately.",
+    "new_evidence": "Definition, the separate r=1 indicator and Darboux-integrability paragraph: The r=1 branch is the indicator of (t,b], with denominator0!=1; its Darboux integrability is established separately.",
+    "anchor": {
+      "section": "Definition",
+      "step": null,
+      "description": "the separate r=1 indicator and Darboux-integrability paragraph",
+      "quote": "Let $a<b$, let $x_1,\\ldots,x_s\\in[a,b]$ be a finite indexed list (repetitions are allowed), and let $w_1,\\ldots,w_s\\in\\mathbb R$. For every Riemann-integrable $f:[a,b]\\to\\mathbb R$, define the quadrature value and residual by\n$$Q(f):=\\sum_{i=1}^{s}w_i f(x_i),\\qquad L(f):=\\int_a^b f(x)\\,dx-Q(f).$$\nFor a natural $r\\ge1$, say that $Q$ is exact through degree $r-1$ if $L(p)=0$ for every formal real polynomial $p$ of degree at most $r-1$ ([[def-real-polynomial-degree-leading-coefficient-and-monic]]). Here $r-1$ is the natural predecessor specified by [[def-factorial-and-falling-factorial]]. For any natural $q$, the factorial $q!$ in a real-valued formula denotes its canonical real image under [[def-canonical-natural]]. This denominator is nonzero: $q!\\ne0$ by [[def-factorial-and-falling-factorial]], every nonzero natural is a successor by [[lem-nat-nonzero-is-successor]] and therefore is at least $1$ in the natural order [[def-nat-order]], and its canonical real image is positive by [[lem-of-naturals-positive]], hence invertible by [[thm-reals-field]]. For $t\\in[a,b]$ define\n$$g_{r,t}(x):=\\begin{cases}\\dfrac{(x-t)^{r-1}}{(r-1)!},&x>t,\\\\0,&x\\le t,\\end{cases}\\qquad K_r(t):=L(g_{r,t}).$$\nThe power is the natural power of [[def-integer-power]]. For $r\\ge2$, $g_{r,t}$ is polynomial and continuous on each side of $t$ by [[thm-algebra-of-continuous-functions]]; the polynomial branch extends to $t$ with value $0$ because $r-1\\ge1$, agreeing with the zero branch. Thus it is continuous on $[a,b]$ and Riemann-integrable by [[thm-continuous-implies-integrable]]. For $r=1$ it is the indicator of $(t,b]$; if $t=b$ it is zero, and if $t<b$, for each $\\varepsilon>0$ choose $s\\in(t,b)$ with $s-t<\\varepsilon$ and use the partition with breakpoints $a,t,s,b$ after deleting repeated endpoints. The indicator is constant on all panels except $[t,s]$, where its oscillation is $1$, so its upper-minus-lower sum is at most $s-t<\\varepsilon$; [[thm-riemann-criterion]] makes it integrable. At $r=1$ the denominator is $0!=1$. Once $K_1$ is shown integrable, changing its values at the finitely many quadrature nodes does not change its integral by [[lem-changing-a-function-at-finitely-many-points]]."
+    }
+  },
+  {
+    "key": "cor-na-closed-newton-cotes-eight-panel-peano-bound::one",
+    "old_evidence": "For f=1 the tenth derivative vanishes and degree9 exactness makes the residual zero.",
+    "new_evidence": "Proof 2.1, application of degree9 exactness to the Peano bound: For f=1 the tenth derivative vanishes and degree9 exactness makes the residual zero.",
+    "anchor": {
+      "section": "Proof",
+      "step": "2.1",
+      "description": "application of degree9 exactness to the Peano bound",
+      "quote": "The exactness condition of [F4] holds by [F2], and its smoothness condition is [A1]. Applying [F4] to this $Q_8$ and substituting the kernel from step 1.1 proves the bound. [given, A1, F2, F4, step 1.1] ∎"
+    }
+  },
+  {
+    "key": "cor-parabolic-semidiscrete-spatial-error-rates::one",
+    "old_evidence": "The endpoint s=1 is explicitly the full-adjoint branch, giving h^(r+1); r=1 remains an allowed polynomial approximation order.",
+    "new_evidence": "Proof 4.1, the explicit s=1 rate specialisation: The endpoint s=1 is explicitly the full-adjoint branch, giving h^(r+1); r=1 remains an allowed polynomial approximation order.",
+    "anchor": {
+      "section": "Proof",
+      "step": "4.1",
+      "description": "the explicit s=1 rate specialisation",
+      "quote": "The decomposition $u_h-u=\\theta+\\rho$ gives the $L^\\infty(H)$ bound by the triangle inequality. For the $L^2(V)$ bound, step 1.1 gives $\\|\\rho\\|_{L^2(V)}\\le\\sqrt T(M/\\alpha)C_{\\rm FE}h^r \\|u\\|_{L^\\infty(W^{r+1,2})}$, and step 3.1 bounds $\\theta$; adding them proves the displayed estimate. The $h^{r+1}$ case follows by setting $s=1$ in the conditional dual branch. [step 1.1, step 3.1, algebra] ∎"
+    }
+  },
+  {
+    "key": "ex-backward-euler-is-a-stable-but-not-symplectic::degenerate",
+    "old_evidence": "A zero oscillator state maps to itself, but the map determinant remains below1 for h>0, so zero state does not imply symplecticity.",
+    "new_evidence": "Verification 2.1, the oscillator matrix and state-independent determinant: A zero oscillator state maps to itself, but the map determinant remains below1 for h>0, so zero state does not imply symplecticity.",
+    "anchor": {
+      "section": "Verification",
+      "step": "2.1",
+      "description": "the oscillator matrix and state-independent determinant",
+      "quote": "For the oscillator, $I-hA=\\begin{pmatrix}1&-h\\\\h&1\\end{pmatrix}$, so $S_{BE}=(I-hA)^{-1}=\\frac1{1+h^2}\\begin{pmatrix}1&h\\\\-h&1\\end{pmatrix},\\qquad \\det S_{BE}=\\frac1{1+h^2}<1.$ By [F2], $S_{BE}^TJS_{BE}=(\\det S_{BE})J\\ne J$. It is therefore not symplectic. [F2, algebra] ∎"
+    }
+  },
+  {
+    "key": "ex-l1-and-cq-fractional-relaxation-first-step::endpoints",
+    "old_evidence": "Both calculations start at U^0=1 and return positive U^1<1; no long-time endpoint conclusion is asserted.",
+    "new_evidence": "Verification 2.1, the explicit positivity and less-than-one conclusions: Both calculations start at U^0=1 and return positive U^1<1; no long-time endpoint conclusion is asserted.",
+    "anchor": {
+      "section": "Verification",
+      "step": "2.1",
+      "description": "the explicit positivity and less-than-one conclusions",
+      "quote": "For CQ, [F2] gives $(h^{-1/2}+1)V^1=-1$, so $V^1=-\\sqrt h/(1+\\sqrt h)$ and $U^1=1+V^1=(1+\\sqrt h)^{-1}$. Both values are positive and less than $1$ because $h>0$ and $\\Gamma(3/2)>0$. [given, F2, F3, algebra] ∎"
+    }
+  },
+  {
+    "key": "ex-l1-full-history-cost-and-truncation-bias::empty",
+    "old_evidence": "For zero retained increments m=0 the retained sum is empty and its value0 agrees with (mh)^(1-alpha)/Gamma(2-alpha).",
+    "new_evidence": "Verification 2.1, the retained-lag sum whose empty range telescopes to zero: For zero retained increments m=0 the retained sum is empty and its value0 agrees with (mh)^(1-alpha)/Gamma(2-alpha).",
+    "anchor": {
+      "section": "Verification",
+      "step": "2.1",
+      "description": "the retained-lag sum whose empty range telescopes to zero",
+      "quote": "For $n>m$, the truncated version of [F3] retains exactly the $m$ terms with index lag $j=0,\\ldots,m-1$. Since $u^k-u^{k-1}=h$, $$\\widetilde\\delta_h^\\alpha u^n =\\frac{h^{1-\\alpha}}{\\Gamma(2-\\alpha)}\\sum_{j=0}^{m-1}a_j =\\frac{h^{1-\\alpha}m^{1-\\alpha}}{\\Gamma(2-\\alpha)},$$ where the sum telescopes. The full sum through $j=n-1$ likewise telescopes to $n^{1-\\alpha}$ and equals the exact derivative from step 1.2. This gives the bias stated. [step 1.2, F3, algebra]"
+    }
+  },
+  {
+    "key": "ex-l1-full-history-cost-and-truncation-bias::one",
+    "old_evidence": "At N=1 the direct-history count is1, and at m=1 each later truncated sum retains its single latest increment.",
+    "new_evidence": "Verification 1.3, the direct-history per-step count: At N=1 the direct-history count is1, and at m=1 each later truncated sum retains its single latest increment.",
+    "anchor": {
+      "section": "Verification",
+      "step": "1.3",
+      "description": "the direct-history per-step count",
+      "quote": "The direct full-history step $n$ uses one term for each increment $k=1,\\ldots,n$. Let $S=\\sum_{n=1}^N n$. Reindexing by $n\\mapsto N+1-n$ using [F8] also gives $S=\\sum_{n=1}^N(N+1-n)$. Adding these equalities termwise gives $2S=\\sum_{n=1}^N(N+1)=N(N+1)$ by [F7], so the full-history term count is $N(N+1)/2$. Retaining the sequence requires $N+1$ nodal values. [given, F7, F8, algebra]"
+    }
+  },
+  {
+    "key": "ex-na-eight-panel-newton-cotes-negative-weight-amplification::endpoints",
+    "old_evidence": "The first and last sample perturbations carry the endpoint weights989/14175 in the absolute-weight sum.",
+    "new_evidence": "Proof 1.1, the explicit absolute-weight sum including the two endpoint weights: The first and last sample perturbations carry the endpoint weights989/14175 in the absolute-weight sum.",
+    "anchor": {
+      "section": "Proof",
+      "step": "1.1",
+      "description": "the explicit absolute-weight sum including the two endpoint weights",
+      "quote": "The positive weight numerators sum to $34746$ and the absolute values of the negative numerators sum to $928+4540+928=6396$. Thus $\\sum_j|w_j|=(34746+6396)/14175=41142/14175=13714/4725$, while $\\sum_jw_j=2$. The triangle inequality and [A1] give $|\\sum_jw_j\\delta_j|\\le\\varepsilon\\sum_j|w_j|$. Equality holds by taking $\\delta_j=\\varepsilon$ when $w_j>0$ and $\\delta_j=-\\varepsilon$ when $w_j<0$ (with either value when $w_j=0$). Since $Q_8(f+\\delta)-Q_8(f)=\\sum_jw_j\\delta_j$, this proves the sharp bound. [given, A1, F1, algebra]"
+    }
+  },
+  {
+    "key": "ex-stoermer-verlet-bounded-harmonic-oscillator-energy::degenerate",
+    "old_evidence": "If the initial oscillator state is zero, the linear step leaves it zero and both modified/original energies vanish.",
+    "new_evidence": "Verification 1.1, the explicit linear oscillator update matrix: If the initial oscillator state is zero, the linear step leaves it zero and both modified/original energies vanish.",
+    "anchor": {
+      "section": "Verification",
+      "step": "1.1",
+      "description": "the explicit linear oscillator update matrix",
+      "quote": "The first kick gives $p_{1/2}=p-hq/2$, the drift gives $q_1=q+hp_{1/2}=(1-h^2/2)q+hp$, and the last kick gives $p_1=p_{1/2}-hq_1/2=-h(1-h^2/4)q+(1-h^2/2)p$. Thus $S_h=\\begin{pmatrix}a&h\\\\-hs&a\\end{pmatrix},\\quad a=1-h^2/2,\\quad s=1-h^2/4.$ [F1, given, algebra]"
+    }
+  },
+  {
+    "key": "ex-symplectic-euler-harmonic-oscillator::degenerate",
+    "old_evidence": "The zero state remains zero under the linear matrix, while the nonconservation witness instead uses(0,1).",
+    "new_evidence": "Verification 1.1, the displayed linear step formula: The zero state remains zero under the linear matrix, while the nonconservation witness instead uses(0,1).",
+    "anchor": {
+      "section": "Verification",
+      "step": "1.1",
+      "description": "the displayed linear step formula",
+      "quote": "Since $V'(q)=q$, [F1] gives $p^+=p-hq$ and $q^+=q+h(p-hq)=(1-h^2)q+hp$, which is the displayed matrix. [given, F1, algebra]"
+    }
+  },
+  {
+    "key": "ex-symplectic-euler-harmonic-oscillator::zero",
+    "old_evidence": "At h=0 the displayed matrix is I and the determinant computation still gives1.",
+    "new_evidence": "Verification 1.1, the displayed linear step formula: At h=0 the displayed matrix is I and the determinant computation still gives1.",
+    "anchor": {
+      "section": "Verification",
+      "step": "1.1",
+      "description": "the displayed linear step formula",
+      "quote": "Since $V'(q)=q$, [F1] gives $p^+=p-hq$ and $q^+=q+h(p-hq)=(1-h^2)q+hp$, which is the displayed matrix. [given, F1, algebra]"
+    }
+  },
+  {
+    "key": "lem-backward-euler-cq-weights-and-partial-sums::endpoints",
+    "old_evidence": "The generating identity is asserted only for |z|<1, while the index endpoint n=0 has p_0=1 by its explicit empty-product convention.",
+    "new_evidence": "Statement, the open-disc generating identity and explicit n=0 empty-product convention: The generating identity is asserted only for |z|<1, while the index endpoint n=0 has p_0=1 by its explicit empty-product convention.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the open-disc generating identity and explicit n=0 empty-product convention",
+      "quote": "Let $0<\\alpha<1$ and let $(\\omega_j)$ be the weights from\n[[alg-backward-euler-convolution-quadrature]]. Then $\\omega_0=1$,\n$\\omega_j<0$ for every $j\\ge1$, and for every complex $z$ with $|z|<1$,\n$$\\sum_{j=0}^{\\infty}\\omega_jz^j=(1-z)^\\alpha_{\\operatorname{Log}}.$$\nFor $n\\ge0$ define\n$$p_n:=\\sum_{j=0}^n\\omega_j.$$\nThen\n$$p_n=\\prod_{k=1}^n\\left(1-\\frac{\\alpha}{k}\\right) =\\frac{\\Gamma(n+1-\\alpha)}{\\Gamma(1-\\alpha)\\Gamma(n+1)}>0,$$\nwhere the empty product for $n=0$ is $1$. For every $n\\ge1$,\n$$p_n\\ge\\frac{(n+1)^{-\\alpha}}{\\Gamma(1-\\alpha)}.$$"
+    }
+  },
+  {
+    "key": "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians::degenerate",
+    "old_evidence": "A zero Hessian or zero shear parameter makes the corresponding off-diagonal block zero; no Hessian invertibility is needed.",
+    "new_evidence": "Proof 1.1, the explicit symmetric-Hessian kick block calculation: A zero Hessian or zero shear parameter makes the corresponding off-diagonal block zero; no Hessian invertibility is needed.",
+    "anchor": {
+      "section": "Proof",
+      "step": "1.1",
+      "description": "the explicit symmetric-Hessian kick block calculation",
+      "quote": "At an admitted point, differentiation of [F1] gives $DK_a=\\begin{pmatrix}I&0\\\\-a\\nabla^2V(q)&I\\end{pmatrix}.$ Writing $C=-a\\nabla^2V(q)=C^T$, block multiplication gives $DK_a^T J DK_a=\\begin{pmatrix}C-C^T&I\\\\-I&0\\end{pmatrix}=J.$ [F1, F2, F3, given, algebra]"
+    }
+  },
+  {
+    "key": "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians::one",
+    "old_evidence": "In d=1 the two block calculations reduce to scalar lower and upper triangular shear matrices with determinant1.",
+    "new_evidence": "Proof 1.1, the explicit symmetric-Hessian kick block calculation: In d=1 the two block calculations reduce to scalar lower and upper triangular shear matrices with determinant1.",
+    "anchor": {
+      "section": "Proof",
+      "step": "1.1",
+      "description": "the explicit symmetric-Hessian kick block calculation",
+      "quote": "At an admitted point, differentiation of [F1] gives $DK_a=\\begin{pmatrix}I&0\\\\-a\\nabla^2V(q)&I\\end{pmatrix}.$ Writing $C=-a\\nabla^2V(q)=C^T$, block multiplication gives $DK_a^T J DK_a=\\begin{pmatrix}C-C^T&I\\\\-I&0\\end{pmatrix}=J.$ [F1, F2, F3, given, algebra]"
+    }
+  },
+  {
+    "key": "lem-canonical-kick-and-drift-shears-have-symplectic-jacobians::empty",
+    "old_evidence": "On an empty open configuration domain there are no admitted points and the pointwise derivative claim is vacuous.",
+    "new_evidence": "Statement, the pointwise assertion on admitted open-domain points: On an empty open configuration domain there are no admitted points and the pointwise derivative claim is vacuous.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the pointwise assertion on admitted open-domain points",
+      "quote": "Let $Q\\subseteq\\mathbb R^d$ be open, $V\\in C^2(Q)$, and $M$ be symmetric positive definite. Put $J=\\begin{pmatrix}0&I\\\\-I&0\\end{pmatrix}$. At every point of their open domains, the local kick and drift from [[def-local-leapfrog-domain-on-an-open-configuration-set]] are $C^1$ and their Jacobians $A$ satisfy $A^TJA=J$. Here this matrix identity is the finite-regularity meaning of symplecticity; no smooth-manifold definition is being applied to a map of insufficient regularity."
+    }
+  },
+  {
+    "key": "lem-finite-modified-hamiltonian-exists::one",
+    "old_evidence": "For symplectic Euler r=1,N=1 the finite recursion supplies only X_1,H_1; r=2 methods still require N>=2.",
+    "new_evidence": "Proof 1.2, the finite triangular coefficient recursion: For symplectic Euler r=1,N=1 the finite recursion supplies only X_1,H_1; r=2 methods still require N>=2.",
+    "anchor": {
+      "section": "Proof",
+      "step": "1.2",
+      "description": "the finite triangular coefficient recursion",
+      "quote": "Seek $Y_h=X_H+\\sum_{m=1}^Nh^mX_m$. The time-$h$ flow expansion is $z+\\sum_{k=1}^{N+1}\\frac{h^k}{k!}(Y_h\\cdot\\nabla)^{k-1}Y_h(z)+O(h^{N+2})$. At coefficient $h^{m+1}$, the first term $hY_h$ contributes $X_m$; every term with $k\\ge2$ can involve only $X_1,\\ldots,X_{m-1}$ at that degree. Thus set $X_m=d_{m+1}-P_m$, where $P_m$ is the already determined coefficient from those higher flow terms. This finite recursion matches coefficients through degree $N+1$. Since each method agrees with the exact $X_H$ flow through degree $r$, it gives $X_1=\\cdots=X_{r-1}=0$. [F1, F2, F6, algebra]"
+    }
+  },
+  {
+    "key": "lem-fractional-integral-kernel-power-integral::one",
+    "old_evidence": "At beta=1 the kernel is1 and the formula is the ordinary integral t.",
+    "new_evidence": "Statement, the beta>0 integral identity specialised to beta=1: At beta=1 the kernel is1 and the formula is the ordinary integral t.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the beta>0 integral identity specialised to beta=1",
+      "quote": "For $\\beta>0$ and $t>0$,\n$$\\int_0^t(t-s)^{\\beta-1}\\,ds=\\frac{t^\\beta}{\\beta}.$$\nWhen $0<\\beta<1$ the integral is improper at $s=t$; for $\\beta\\ge1$ it\nis an ordinary integral. It converges in both cases because\n$B(\\beta,1)$ is defined for positive arguments."
+    }
+  },
+  {
+    "key": "lem-local-hamiltonian-flow-preserves-symplectic-matrix::one",
+    "old_evidence": "For one degree of freedom J is the2-by-2 canonical matrix, and the same symmetric-Hessian calculation applies.",
+    "new_evidence": "Proof 1.1, the canonical-block/Hessian identity: For one degree of freedom J is the2-by-2 canonical matrix, and the same symmetric-Hessian calculation applies.",
+    "anchor": {
+      "section": "Proof",
+      "step": "1.1",
+      "description": "the canonical-block/Hessian identity",
+      "quote": "In canonical coordinates [F1] gives $X_H=J\\nabla H$, hence $A(z):=DX_H(z)=J\\nabla^2H(z)$. By [F3] the Hessian is symmetric, and $J^T=-J$, $J^2=-I$; therefore $A^TJ+JA=0$. [F1, F3, algebra]"
+    }
+  },
+  {
+    "key": "lem-na-chebyshev-integral-moments::one",
+    "old_evidence": "At k=1 the zero-frequency sine contribution is identically zero and the odd-frequency case gives mu_1=0.",
+    "new_evidence": "Proof 2.1, the separate zero-frequency sine contribution: At k=1 the zero-frequency sine contribution is identically zero and the odd-frequency case gives mu_1=0.",
+    "anchor": {
+      "section": "Proof",
+      "step": "2.1",
+      "description": "the separate zero-frequency sine contribution",
+      "quote": "For the nonnegative integer $k$ in [A1], the case $k=0$ gives $\\mu_0=\\int_0^\\pi\\sin\\theta\\,d\\theta=2$ by step 1.1. For $k\\ge1$, [F5] gives $\\sin\\theta\\cos(k\\theta)=\\frac12(\\sin((k+1)\\theta)-\\sin((k-1)\\theta))$. [F6]–[F7] evaluate each nonzero-frequency sine integral; the $m=0$ term is identically zero. [given, A1, F5, F6, F7, step 1.1, algebra]"
+    }
+  },
+  {
+    "key": "lem-na-chebyshev-recurrence-angle-identity::endpoints",
+    "old_evidence": "The universal real theta includes0 and pi; recurrence and angle formulas remain defined at both.",
+    "new_evidence": "Statement, the universal real-angle identity, including theta=0 and pi: The universal real theta includes0 and pi; recurrence and angle formulas remain defined at both.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the universal real-angle identity, including theta=0 and pi",
+      "quote": "For every integer $n\\ge0$ and every real $\\theta$, the first-kind Chebyshev polynomial from [[def-chebyshev-polynomials-first-and-second-kind]] satisfies\n$$T_n(\\cos\\theta)=\\cos(n\\theta).$$"
+    }
+  },
+  {
+    "key": "lem-na-clenshaw-curtis-dct-i-orthogonality::one",
+    "old_evidence": "When n=1, both diagonal entries are endpoint cases with S_00=S_11=1, and S_01=0.",
+    "new_evidence": "Proof 3.1, the explicit endpoint-frequency and off-diagonal cases: When n=1, both diagonal entries are endpoint cases with S_00=S_11=1, and S_01=0.",
+    "anchor": {
+      "section": "Proof",
+      "step": "3.1",
+      "description": "the explicit endpoint-frequency and off-diagonal cases",
+      "quote": "For $k,\\ell$ in [A1], [F2] makes each product in $S_{k\\ell}$ one half the sum of the cosine terms with natural frequency indices $|k-\\ell|$ and $k+\\ell$, so $S_{k\\ell}=\\frac12(D_{|k-\\ell|}+D_{k+\\ell})$. If $k\\ne\\ell$, then $1\\le|k-\\ell|<2n$ and $1\\le k+\\ell<2n$ except the impossible distinct-endpoint case $k+\\ell=2n$, so both terms vanish by step 2.1. If $k=\\ell=0$ or $k=\\ell=n$, both indices are $0$ or $2n$, giving $S_{k\\ell}=n$. If $k=\\ell$ is interior, the indices are $0$ and $2k$ with $1\\le2k<2n$, giving $S_{k\\ell}=n/2$. These cases prove the statement. [given, A1, F1, F2, step 2.1, algebra] ∎"
+    }
+  },
+  {
+    "key": "lem-na-closed-newton-cotes-eight-panel-weights-and-exactness::zero",
+    "old_evidence": "The zero polynomial is included among degree-at-most8 polynomials and the linear quadrature/integral both vanish.",
+    "new_evidence": "Proof 3.1, the degree-at-most8 polynomial reproduction argument: The zero polynomial is included among degree-at-most8 polynomials and the linear quadrature/integral both vanish.",
+    "anchor": {
+      "section": "Proof",
+      "step": "3.1",
+      "description": "the degree-at-most8 polynomial reproduction argument",
+      "quote": "For every polynomial $p$ of degree at most $8$, its cardinal interpolant $\\sum_{j=0}^8p(x_j)\\ell_j$ has degree at most $8$ and agrees with $p$ at all nine nodes by [F2]. Uniqueness [F3] makes it equal to $p$. Integrating this finite identity and using step 2.1 and [F5] yields $\\int_{-1}^1p=\\sum_jp(x_j)\\int_{-1}^1\\ell_j=Q_8(p)$. [given, F1, F2, F3, F5, step 2.1, algebra]"
+    }
+  },
+  {
+    "key": "lem-one-step-modified-energy-defect::one",
+    "old_evidence": "The whole assertion is a single-step energy bound; for the r=N=1 branch it bounds that defect by C_1 h^2.",
+    "new_evidence": "Statement, the single-admitted-step estimate with finite N>=r: The whole assertion is a single-step energy bound; for the r=N=1 branch it bounds that defect by C_1 h^2.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the single-admitted-step estimate with finite N>=r",
+      "quote": "Fix $N\\ge r$ and a compact comparison tube $K'\\Subset U$. Let $H_h^{[N]}$ be the finite modified Hamiltonian from [[lem-finite-modified-hamiltonian-exists]]. Suppose $z$, $\\Phi_h(z)$, the exact time-$h$ flow of $X_{H_h^{[N]}}$ from $z$, and the line segment joining those two endpoints all lie in $K'$. For sufficiently small $0<h\\le1$, there is a constant $C_1$ independent of $z,h$ such that\n$$|H_h^{[N]}(\\Phi_h(z))-H_h^{[N]}(z)|\\le C_1h^{N+1}.$$"
+    }
+  },
+  {
+    "key": "lem-parabolic-bochner-time-mollification::degenerate",
+    "old_evidence": "On a zero evolution space all representatives and convolutions are zero; no division by a vector norm occurs.",
+    "new_evidence": "Proof 4.1, the reflected convolution construction on the given evolution triple: On a zero evolution space all representatives and convolutions are zero; no division by a vector norm occurs.",
+    "anchor": {
+      "section": "Proof",
+      "step": "4.1",
+      "description": "the reflected convolution construction on the given evolution triple",
+      "quote": "Let $\\eta_\\epsilon$ be a nonnegative smooth mollifier of mass one, supported in $(-\\epsilon,\\epsilon)$, and convolve the reflected functions in time. On a neighborhood of $[0,T]$, $u_\\epsilon=\\eta_\\epsilon*u$ is smooth with values in $V$ by [F2]. Testing the reflected weak derivative identity against a fixed $v\\in V$ and integrating by parts in the scalar variable gives $\\langle u_\\epsilon'(t),v\\rangle=\\int\\langle g(s),v\\rangle \\eta_\\epsilon(t-s)\\,ds=\\langle(\\eta_\\epsilon*g)(t),v\\rangle$. The bounded inclusion $V\\to V^*$ commutes with the Bochner integral by [F3], so $u_\\epsilon'=\\eta_\\epsilon*g$ in $V^*$. [F1, F2, F3, step 3.1, construct]"
+    }
+  },
+  {
+    "key": "lem-parabolic-bochner-time-mollification::one",
+    "old_evidence": "For V=H=R, the reflection and Bochner integrals become their scalar counterparts without changing the argument.",
+    "new_evidence": "Proof 4.1, the reflected convolution construction on the given evolution triple: For V=H=R, the reflection and Bochner integrals become their scalar counterparts without changing the argument.",
+    "anchor": {
+      "section": "Proof",
+      "step": "4.1",
+      "description": "the reflected convolution construction on the given evolution triple",
+      "quote": "Let $\\eta_\\epsilon$ be a nonnegative smooth mollifier of mass one, supported in $(-\\epsilon,\\epsilon)$, and convolve the reflected functions in time. On a neighborhood of $[0,T]$, $u_\\epsilon=\\eta_\\epsilon*u$ is smooth with values in $V$ by [F2]. Testing the reflected weak derivative identity against a fixed $v\\in V$ and integrating by parts in the scalar variable gives $\\langle u_\\epsilon'(t),v\\rangle=\\int\\langle g(s),v\\rangle \\eta_\\epsilon(t-s)\\,ds=\\langle(\\eta_\\epsilon*g)(t),v\\rangle$. The bounded inclusion $V\\to V^*$ commutes with the Bochner integral by [F3], so $u_\\epsilon'=\\eta_\\epsilon*g$ in $V^*$. [F1, F2, F3, step 3.1, construct]"
+    }
+  },
+  {
+    "key": "lem-parabolic-discrete-energy-identity::degenerate",
+    "old_evidence": "The zero Hilbert space has only x=y=0 and the same identity holds.",
+    "new_evidence": "Proof 1.1, the bilinear square expansion, also valid on the zero Hilbert space: The zero Hilbert space has only x=y=0 and the same identity holds.",
+    "anchor": {
+      "section": "Proof",
+      "step": "1.1",
+      "description": "the bilinear square expansion, also valid on the zero Hilbert space",
+      "quote": "Expand the last square using [F1]: $\\|x-y\\|_H^2=\\|x\\|_H^2-2(x,y)_H+\\|y\\|_H^2$. [F1, algebra]"
+    }
+  },
+  {
+    "key": "lem-parabolic-energy-pairing-and-trace::degenerate",
+    "old_evidence": "If s=t, both endpoint differences and both integrals are zero, as allowed by0<=s<=t<=T.",
+    "new_evidence": "Statement, the real evolution-space identities for every0<=s<=t<=T: If s=t, both endpoint differences and both integrals are zero, as allowed by0<=s<=t<=T.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the real evolution-space identities for every0<=s<=t<=T",
+      "quote": "Assume Countable Choice. Let $(V,H,V^*)$ be the real evolution triple of\n[[def-parabolic-evolution-triple-and-energy-space]], and let\n$u,v\\in W(0,T;V)$. Each has a unique representative in $C([0,T];H)$, and\nfor all $0\\le s\\le t\\le T$,\n$$\\|u(t)\\|_H^2-\\|u(s)\\|_H^2 =2\\int_s^t\\langle u'(r),u(r)\\rangle_{V^*,V}\\,dr,$$\n$$(u(t),v(t))_H-(u(s),v(s))_H =\\int_s^t\\bigl(\\langle u'(r),v(r)\\rangle_{V^*,V} +\\langle v'(r),u(r)\\rangle_{V^*,V}\\bigr)\\,dr.$$\nWriting $c_i=\\|i:V\\to H\\|$, the trace obeys\n$$\\sup_{0\\le t\\le T}\\|u(t)\\|_H^2 \\le \\frac{c_i^2}{T}\\|u\\|_{L^2(0,T;V)}^2 +2\\|u'\\|_{L^2(0,T;V^*)}\\|u\\|_{L^2(0,T;V)}.$$"
+    }
+  },
+  {
+    "key": "lem-parabolic-energy-pairing-and-trace::one",
+    "old_evidence": "In the scalar evolution triple the identities reduce to the usual derivative of u squared and the scalar product rule.",
+    "new_evidence": "Statement, the real evolution-space identities for every0<=s<=t<=T: In the scalar evolution triple the identities reduce to the usual derivative of u squared and the scalar product rule.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the real evolution-space identities for every0<=s<=t<=T",
+      "quote": "Assume Countable Choice. Let $(V,H,V^*)$ be the real evolution triple of\n[[def-parabolic-evolution-triple-and-energy-space]], and let\n$u,v\\in W(0,T;V)$. Each has a unique representative in $C([0,T];H)$, and\nfor all $0\\le s\\le t\\le T$,\n$$\\|u(t)\\|_H^2-\\|u(s)\\|_H^2 =2\\int_s^t\\langle u'(r),u(r)\\rangle_{V^*,V}\\,dr,$$\n$$(u(t),v(t))_H-(u(s),v(s))_H =\\int_s^t\\bigl(\\langle u'(r),v(r)\\rangle_{V^*,V} +\\langle v'(r),u(r)\\rangle_{V^*,V}\\bigr)\\,dr.$$\nWriting $c_i=\\|i:V\\to H\\|$, the trace obeys\n$$\\sup_{0\\le t\\le T}\\|u(t)\\|_H^2 \\le \\frac{c_i^2}{T}\\|u\\|_{L^2(0,T;V)}^2 +2\\|u'\\|_{L^2(0,T;V^*)}\\|u\\|_{L^2(0,T;V)}.$$"
+    }
+  },
+  {
+    "key": "lem-parabolic-energy-pairing-and-trace::zero",
+    "old_evidence": "For u=v=0 the energy, product and trace right-hand sides all vanish.",
+    "new_evidence": "Statement, the real evolution-space identities for every0<=s<=t<=T: For u=v=0 the energy, product and trace right-hand sides all vanish.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the real evolution-space identities for every0<=s<=t<=T",
+      "quote": "Assume Countable Choice. Let $(V,H,V^*)$ be the real evolution triple of\n[[def-parabolic-evolution-triple-and-energy-space]], and let\n$u,v\\in W(0,T;V)$. Each has a unique representative in $C([0,T];H)$, and\nfor all $0\\le s\\le t\\le T$,\n$$\\|u(t)\\|_H^2-\\|u(s)\\|_H^2 =2\\int_s^t\\langle u'(r),u(r)\\rangle_{V^*,V}\\,dr,$$\n$$(u(t),v(t))_H-(u(s),v(s))_H =\\int_s^t\\bigl(\\langle u'(r),v(r)\\rangle_{V^*,V} +\\langle v'(r),u(r)\\rangle_{V^*,V}\\bigr)\\,dr.$$\nWriting $c_i=\\|i:V\\to H\\|$, the trace obeys\n$$\\sup_{0\\le t\\le T}\\|u(t)\\|_H^2 \\le \\frac{c_i^2}{T}\\|u\\|_{L^2(0,T;V)}^2 +2\\|u'\\|_{L^2(0,T;V^*)}\\|u\\|_{L^2(0,T;V)}.$$"
+    }
+  },
+  {
+    "key": "lem-parabolic-projection-time-product-rule::degenerate",
+    "old_evidence": "A zero bounded map P gives the zero path; no inverse or nonzero-map hypothesis is used.",
+    "new_evidence": "Statement, the fixed-map and time-dependent product formulas: A zero bounded map P gives the zero path; no inverse or nonzero-map hypothesis is used.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the fixed-map and time-dependent product formulas",
+      "quote": "Assume Countable Choice. Let $X$ be a separable real Hilbert space and $Y$ a real Hilbert space, and\nlet $u\\in H^1(0,T;X)$ (meaning\n$u,u'\\in L^2(0,T;X)$ with distribution derivative). It has a unique\ncontinuous representative on $[0,T]$. Let\n$P\\in\\mathcal L(X,Y)$ be a fixed bounded linear map. Then\n$Pu\\in H^1(0,T;Y)$ and $(Pu)'=Pu'$.\n\nIf instead $P:[0,T]\\to\\mathcal L(X,Y)$ is continuously differentiable in\noperator norm, then $P(t)u(t)\\in H^1(0,T;Y)$ and\n$$\\frac{d}{dt}(P(t)u(t))=P'(t)u(t)+P(t)u'(t)\\quad\\text{a.e.}$$\nIn particular, a differentiable time-dependent Ritz comparison contributes\nthe term $P'(t)u(t)$ to its residual derivative."
+    }
+  },
+  {
+    "key": "lem-parabolic-projection-time-product-rule::zero",
+    "old_evidence": "For the zero path u=0,u prime=0 both P prime u and P u prime vanish in the displayed derivative formula.",
+    "new_evidence": "Statement, the fixed-map and time-dependent product formulas: For the zero path u=0,u prime=0 both P prime u and P u prime vanish in the displayed derivative formula.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the fixed-map and time-dependent product formulas",
+      "quote": "Assume Countable Choice. Let $X$ be a separable real Hilbert space and $Y$ a real Hilbert space, and\nlet $u\\in H^1(0,T;X)$ (meaning\n$u,u'\\in L^2(0,T;X)$ with distribution derivative). It has a unique\ncontinuous representative on $[0,T]$. Let\n$P\\in\\mathcal L(X,Y)$ be a fixed bounded linear map. Then\n$Pu\\in H^1(0,T;Y)$ and $(Pu)'=Pu'$.\n\nIf instead $P:[0,T]\\to\\mathcal L(X,Y)$ is continuously differentiable in\noperator norm, then $P(t)u(t)\\in H^1(0,T;Y)$ and\n$$\\frac{d}{dt}(P(t)u(t))=P'(t)u(t)+P(t)u'(t)\\quad\\text{a.e.}$$\nIn particular, a differentiable time-dependent Ritz comparison contributes\nthe term $P'(t)u(t)$ to its residual derivative."
+    }
+  },
+  {
+    "key": "lem-parabolic-ritz-projection-well-defined::degenerate",
+    "old_evidence": "The zero trial-space branch is explicit; a nonzero homogeneous solution is excluded by positive coercivity, not assumed absent.",
+    "new_evidence": "Proof 1.1, the explicit zero-trial-space branch: The zero trial-space branch is explicit; a nonzero homogeneous solution is excluded by positive coercivity, not assumed absent.",
+    "anchor": {
+      "section": "Proof",
+      "step": "1.1",
+      "description": "the explicit zero-trial-space branch",
+      "quote": "If $V_h=\\{0\\}$, define $R_hu=0$; the Ritz equation, uniqueness, and norm bound are immediate. Otherwise fix a finite ordered basis $(e_1,\\ldots,e_m)$ of $V_h$. Form the square matrix $K_{ij}=a(e_j,e_i)$ and vector $b_i=a(u,e_i)$. If $Kc=0$ and $x=\\sum_jc_je_j$, then $a(x,e_i)=0$ for each $i$, hence $a(x,x)=\\sum_i c_i a(x,e_i)=0$. Coercivity [F2] gives $x=0$, so basis independence gives $c=0$. Thus $K$ has zero kernel and, being square, is invertible. Its unique solution $Kc=b$ defines the unique $R_hu$ satisfying [F1]. [F1, F2, given, construct]"
+    }
+  },
+  {
+    "key": "lem-truncated-modified-flow-matches-map::endpoints",
+    "old_evidence": "The displayed estimate includes |h|<=h_0 on either sign of time, with both trajectories remaining in the controlled tube.",
+    "new_evidence": "Statement, the signed-step bound including |h|=h_0 under the admitted compact hypotheses: The displayed estimate includes |h|<=h_0 on either sign of time, with both trajectories remaining in the controlled tube.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the signed-step bound including |h|=h_0 under the admitted compact hypotheses",
+      "quote": "Fix an integer $N\\ge r$ and a compact set $K\\Subset U$ for which the method maps and their selected branches are defined on a neighborhood. Let $H_h^{[N]}$ and $X_h^{[N]}$ be the finite modified Hamiltonian and vector field from [[lem-finite-modified-hamiltonian-exists]], and let $\\varphi_h^{[N]}$ be the time-$h$ flow of $X_h^{[N]}$. If the method, the comparison flow, and all Taylor segments remain in a compact $K'\\Subset U$, then there are $h_0,C_N>0$ such that\n$$E_K(h)\\le C_N|h|^{N+2}\\qquad(|h|\\le h_0),$$\nwhere $E_K(h)=0$ if $K=\\varnothing$, and otherwise\n$$E_K(h):=\\max_{z\\in K}\\|\\Phi_h(z)-\\varphi_h^{[N]}(z)\\|.$$\nFor nonempty $K$, this maximum exists by continuity on the compact set and equals the ordinary real supremum. In both cases $E_K(h)$ is the least nonnegative upper bound for the pointwise errors on $K$: for empty $K$ every nonnegative real is an upper bound and $0$ is the least. This convention does not assign a real supremum to an empty subset of $\\mathbb R$.\nThe constants depend on the fixed truncation order and the compact derivative bounds; no uniformity as $N\\to\\infty$ is claimed."
+    }
+  },
+  {
+    "key": "lem-truncated-modified-flow-matches-map::one",
+    "old_evidence": "For r=N=1, current Proof 2.1 cancels all collected coefficients through degree2 and leaves a uniform order3 remainder.",
+    "new_evidence": "Proof 2.1, the fixed-order coefficient regrouping and remainder: For r=N=1, current Proof 2.1 cancels all collected coefficients through degree2 and leaves a uniform order3 remainder.",
+    "anchor": {
+      "section": "Proof",
+      "step": "2.1",
+      "description": "the fixed-order coefficient regrouping and remainder",
+      "quote": "Expand the finitely many polynomials $B_q(h,z)$ in step 1.3 and collect equal powers of $h$. Every term of degree at least $N+2$ is bounded by a fixed constant times $|h|^{N+2}$ for $|h|\\le1$, because there are finitely many such terms and their coefficient functions are bounded on the compact tube. The recursion in [F1] (its coefficient construction) identifies all collected coefficients through degree $N+1$ with the method coefficients $d_q$ in step 1.2. Subtracting the two expansions leaves only their uniform remainders and the discarded higher-degree polynomial terms. Consequently $\\|\\Phi_h(z)-\\varphi_h^{[N]}(z)\\|\\le C_N|h|^{N+2}$ for all $z\\in K$, after increasing $C_N$ to a positive constant. Taking the attained maximum from step 1.1 proves the asserted estimate; step 1.1 already covers empty $K$. [F1, F4, step 1.1, step 1.2, step 1.3, algebra] ∎"
+    }
+  },
+  {
+    "key": "prop-local-leapfrog-and-symplectic-euler-are-symplectic::degenerate",
+    "old_evidence": "The only required matrices are the admitted shear Jacobians; a zero potential curvature is allowed in their product.",
+    "new_evidence": "Proof 2.1, the symplectic matrix product calculation: The only required matrices are the admitted shear Jacobians; a zero potential curvature is allowed in their product.",
+    "anchor": {
+      "section": "Proof",
+      "step": "2.1",
+      "description": "the symplectic matrix product calculation",
+      "quote": "If $A$ and $B$ satisfy $A^TJA=J$ and $B^TJB=J$, then $(AB)^TJ(AB)=B^T(A^TJA)B=B^TJB=J$. Applying this identity successively to [F3], with [F4] identifying the Jacobian of each composition, proves the result for both step maps. [F3, F4, algebra] ∎"
+    }
+  },
+  {
+    "key": "prop-local-leapfrog-and-symplectic-euler-are-symplectic::empty",
+    "old_evidence": "If the admitted domain is empty there is no composed point to differentiate, so the pointwise assertion is vacuous.",
+    "new_evidence": "Statement, the universal assertion on every admitted open-domain point: If the admitted domain is empty there is no composed point to differentiate, so the pointwise assertion is vacuous.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the universal assertion on every admitted open-domain point",
+      "quote": "Under the hypotheses of [[lem-canonical-kick-and-drift-shears-have-symplectic-jacobians]], every admitted local leapfrog step and every admitted kick-then-drift symplectic Euler step has a $C^1$ Jacobian satisfying $D\\Phi^TJD\\Phi=J$ on its open admitted domain. The result concerns symplecticity, not energy conservation."
+    }
+  },
+  {
+    "key": "thm-backward-euler-cq-compatible-quadratic-first-order-error::one",
+    "old_evidence": "The n=1 residual uses the separate coefficient s_1=1 supplied by the coefficient lemma, so no negative predecessor occurs.",
+    "new_evidence": "Proof 3.1, the coefficient representation using the s_n supplier: The n=1 residual uses the separate coefficient s_1=1 supplied by the coefficient lemma, so no negative predecessor occurs.",
+    "anchor": {
+      "section": "Proof",
+      "step": "3.1",
+      "description": "the coefficient representation using the s_n supplier",
+      "quote": "Put $v(t)=t^2$, so $v(nh)=h^2n^2$. Starting from the geometric series [F10] and differentiating termwise by [F11] gives $\\sum_{n\\ge0}n^2z^n=z(1+z)/(1-z)^3$. Multiplying this generating series by $h^{-\\alpha}(1-z)^\\alpha$ and using [F12] shows that the discrete Caputo derivative of the exact nodal values is $h^{2-\\alpha}s_n$, with $s_n$ from [F5]. The exact derivative from step 2.1 is $2h^{2-\\alpha}n^{2-\\alpha}/\\Gamma(3-\\alpha)$. [step 2.1, F2, F5, F10, F11, F12, algebra]"
+    }
+  },
+  {
+    "key": "thm-finite-order-modified-energy-bound::one",
+    "old_evidence": "For n=1 the telescoping sum has one defect and gives2C_0 h^r+C_1 h^(N+1).",
+    "new_evidence": "Proof 1.1, the finite sum of individual modified-energy increments: For n=1 the telescoping sum has one defect and gives2C_0 h^r+C_1 h^(N+1).",
+    "anchor": {
+      "section": "Proof",
+      "step": "1.1",
+      "description": "the finite sum of individual modified-energy increments",
+      "quote": "For the selected method, [F3] fixes the order $r$ of the finite modification. For each $k<n$, [A1] and [F2] then give $|H_h^{[N]}(z_{k+1})-H_h^{[N]}(z_k)|\\le C_1h^{N+1}$. The triangle inequality over the $n$ consecutive increments yields $|H_h^{[N]}(z_n)-H_h^{[N]}(z_0)|\\le C_1n h^{N+1}.$ [A1, F2, F3, given, algebra]"
+    }
+  },
+  {
+    "key": "thm-implicit-midpoint-branch-symplectic-order-and-error::degenerate",
+    "old_evidence": "The zero-contraction case is handled before division by any iterate error; only1-theta appears in the error denominator.",
+    "new_evidence": "Proof 1.1, the contraction certificates and separately proved theta=0 branch: The zero-contraction case is handled before division by any iterate error; only1-theta appears in the error denominator.",
+    "anchor": {
+      "section": "Proof",
+      "step": "1.1",
+      "description": "the contraction certificates and separately proved theta=0 branch",
+      "quote": "Since $H\\in C^2(U)$, the coordinate field $F$ is $C^1$. On the admitted closed ball, $T_z(W)=z+(h/2)F(W)$ maps the ball into itself because $\\|T_z(W)-z\\|\\le |h|M/2\\le\\rho$. The mean-value estimate on this convex ball gives $\\|T_z(W)-T_z(V)\\|\\le\\theta\\|W-V\\|$ with $\\theta=|h|L/2<1$. The ball is nonempty and complete, so [F1] gives a unique fixed point $Z$, keeps all iterates in the ball, and gives $\\|Z_k-Z\\|\\le b_k=\\theta^k\\|Z_1-Z_0\\|/(1-\\theta)$. Multiplication by two gives $\\|(2Z_k-z)-(2Z-z)\\|=2\\|Z_k-Z\\|\\le2b_k$, and $Z\\in\\overline B(z,\\rho)$ gives $\\|(2Z-z)-z\\|\\le2\\rho$. The convention $\\theta^0=1$ makes the bound valid at $k=0$. If $\\theta=0$, $T_z$ is constant on the ball, hence $Z_1=T_z(z)=T_z(Z)=Z$ and every later iterate equals $Z$; thus $b_k=0$ for $k\\ge1$. These assertions require only the $C^2$ hypotheses. [A1, F1, given, algebra]"
+    }
+  },
+  {
+    "key": "thm-implicit-midpoint-branch-symplectic-order-and-error::one",
+    "old_evidence": "At k=1 the stage error is at most theta times d_1 divided by1-theta, and the output error is twice that bound.",
+    "new_evidence": "Proof 1.1, the contraction certificates and separately proved theta=0 branch: At k=1 the stage error is at most theta times d_1 divided by1-theta, and the output error is twice that bound.",
+    "anchor": {
+      "section": "Proof",
+      "step": "1.1",
+      "description": "the contraction certificates and separately proved theta=0 branch",
+      "quote": "Since $H\\in C^2(U)$, the coordinate field $F$ is $C^1$. On the admitted closed ball, $T_z(W)=z+(h/2)F(W)$ maps the ball into itself because $\\|T_z(W)-z\\|\\le |h|M/2\\le\\rho$. The mean-value estimate on this convex ball gives $\\|T_z(W)-T_z(V)\\|\\le\\theta\\|W-V\\|$ with $\\theta=|h|L/2<1$. The ball is nonempty and complete, so [F1] gives a unique fixed point $Z$, keeps all iterates in the ball, and gives $\\|Z_k-Z\\|\\le b_k=\\theta^k\\|Z_1-Z_0\\|/(1-\\theta)$. Multiplication by two gives $\\|(2Z_k-z)-(2Z-z)\\|=2\\|Z_k-Z\\|\\le2b_k$, and $Z\\in\\overline B(z,\\rho)$ gives $\\|(2Z-z)-z\\|\\le2\\rho$. The convention $\\theta^0=1$ makes the bound valid at $k=0$. If $\\theta=0$, $T_z$ is constant on the ball, hence $Z_1=T_z(z)=T_z(Z)=Z$ and every later iterate equals $Z$; thus $b_k=0$ for $k\\ge1$. These assertions require only the $C^2$ hypotheses. [A1, F1, given, algebra]"
+    }
+  },
+  {
+    "key": "thm-local-symplectic-euler-and-leapfrog-trajectory-errors::endpoints",
+    "old_evidence": "The finite recurrence includes every nh<=T, including n=N; the compact tube must contain all associated intermediate states.",
+    "new_evidence": "Proof 3.1, the finite error recurrence including its initial value: The finite recurrence includes every nh<=T, including n=N; the compact tube must contain all associated intermediate states.",
+    "anchor": {
+      "section": "Proof",
+      "step": "3.1",
+      "description": "the finite error recurrence including its initial value",
+      "quote": "For either method, if its local defect is $Ch^{s+1}$, steps 1.2, 2.1, and 2.2 give $e_{n+1}\\le(1+Lh)e_n+Ch^{s+1}$. Iterating this inequality and using $(1+Lh)^j\\le e^{LT}$ and $n\\le T/h$ yields $e_n\\le e^{LT}e_0+CTe^{LT}h^s$. [A1, step 1.2, step 2.1, step 2.2, algebra]"
+    }
+  },
+  {
+    "key": "thm-local-symplectic-euler-and-leapfrog-trajectory-errors::zero",
+    "old_evidence": "At n=0 the error bound includes the supplied initial error e_0 before any recurrence increment.",
+    "new_evidence": "Proof 3.1, the finite error recurrence including its initial value: At n=0 the error bound includes the supplied initial error e_0 before any recurrence increment.",
+    "anchor": {
+      "section": "Proof",
+      "step": "3.1",
+      "description": "the finite error recurrence including its initial value",
+      "quote": "For either method, if its local defect is $Ch^{s+1}$, steps 1.2, 2.1, and 2.2 give $e_{n+1}\\le(1+Lh)e_n+Ch^{s+1}$. Iterating this inequality and using $(1+Lh)^j\\le e^{LT}$ and $n\\le T/h$ yields $e_n\\le e^{LT}e_0+CTe^{LT}h^s$. [A1, step 1.2, step 2.1, step 2.2, algebra]"
+    }
+  },
+  {
+    "key": "thm-na-clenshaw-curtis-exactness-and-near-best-error::one",
+    "old_evidence": "The n=1 branch uses the two-node Lobatto interpolant; the same integral-of-interpolant argument remains valid.",
+    "new_evidence": "Proof 1.1, the n>=1 integral-of-interpolant identity: The n=1 branch uses the two-node Lobatto interpolant; the same integral-of-interpolant argument remains valid.",
+    "anchor": {
+      "section": "Proof",
+      "step": "1.1",
+      "description": "the n>=1 integral-of-interpolant identity",
+      "quote": "For $n\\ge1$, let $p_n(t)=\\sum_{k=0}^na_kT_k(t)$. By [F1]–[F3] and [F10], $Q_{n,[a,b]}(f)=d\\sum_k a_k\\int_{-1}^1T_k(t)\\,dt=d\\int_{-1}^1p_n(t)\\,dt$. The affine substitution [F9] makes this $\\int_a^bP(x)\\,dx$ for $P(x)=p_n((x-m)/d)$, and [F2] identifies $P$ with the interpolant pullback. For $n=0$, [F1] is the integral of the constant polynomial $P(x)=f(m)$ by [F9]. Thus $Q_{n,[a,b]}(f)=\\int_a^bP(x)\\,dx$ in every case. [given, F1, F2, F3, F9, F10, algebra]"
+    }
+  },
+  {
+    "key": "thm-na-clenshaw-curtis-interpolation-coefficients::one",
+    "old_evidence": "For n=1 both coefficients are endpoint coefficients X_k/(2n), and no interior coefficient case is used.",
+    "new_evidence": "Proof 2.1, the separately calculated endpoint and interior DCT reconstruction factors: For n=1 both coefficients are endpoint coefficients X_k/(2n), and no interior coefficient case is used.",
+    "anchor": {
+      "section": "Proof",
+      "step": "2.1",
+      "description": "the separately calculated endpoint and interior DCT reconstruction factors",
+      "quote": "Substitute the expression for $X_k$ from step 1.1 into the displayed reconstruction sum and interchange the two finite sums. By [F2], every frequency $m\\ne j$ contributes zero. If $j$ is an endpoint, its outer half-weight and the diagonal sum $n$ contribute $(1/n)\\cdot2\\cdot(1/2)n\\,y_j=y_j$; if $j$ is interior, the diagonal sum $n/2$ contributes $(1/n)\\cdot2\\cdot(n/2)y_j=y_j$. Thus $p_n(\\cos(j\\pi/n))=y_j$ for each $j$. [given, F1, F2, step 1.1, algebra]"
+    }
+  },
+  {
+    "key": "thm-na-euler-maclaurin-composite-trapezoid-remainder::one",
+    "old_evidence": "At p=1 the first integration-by-parts boundary term and J_2 already give the stated formula; N=1 leaves one panel.",
+    "new_evidence": "Proof 2.1, the finite correction iteration including its first/final recurrence: At p=1 the first integration-by-parts boundary term and J_2 already give the stated formula; N=1 leaves one panel.",
+    "anchor": {
+      "section": "Proof",
+      "step": "2.1",
+      "description": "the finite correction iteration including its first/final recurrence",
+      "quote": "Write $b_q:=\\frac{B_qh^q}{q!}(f^{(q-1)}(b)-f^{(q-1)}(a))$ for $q\\ge2$. If $k+1$ is odd and at least $3$, [F2] makes that boundary term zero, so step 1.2 gives $J_k=-J_{k+1}$. If $k+1=2r$ is even, step 1.2 gives $J_{2r-1}=b_{2r}-J_{2r}$. For each $r<p$, the odd-index recurrence at $k=2r$ gives $J_{2r}=-J_{2r+1}$; hence $J_{2r-1}=b_{2r}+J_{2r+1}$. Finite induction on $r=1,\\ldots,p-1$ ([[thm-induction-principle]]) iterates these identities; followed by the final even-index recurrence, it gives $J_1=\\sum_{r=1}^{p}\\frac{B_{2r}h^{2r}}{(2r)!}\\bigl(f^{(2r-1)}(b)-f^{(2r-1)}(a)\\bigr)-J_{2p}.$ [given, step 1.2, F2, algebra]"
+    }
+  },
+  {
+    "key": "thm-na-romberg-even-power-cancellation::endpoints",
+    "old_evidence": "Column0 inherits the closed trapezoid samples, and the expansion coefficients retain endpoint derivative differences.",
+    "new_evidence": "Statement, the closed-interval smooth expansion and supplied trapezoid-table hypotheses: Column0 inherits the closed trapezoid samples, and the expansion coefficients retain endpoint derivative differences.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the closed-interval smooth expansion and supplied trapezoid-table hypotheses",
+      "quote": "Let $a<b$, let $m\\ge1$ and $L\\ge m$ be integers, and let $f\\in C^{2m+2}([a,b])$. Write $h_\\ell=(b-a)2^{-\\ell}$ and let $(R_{\\ell,j})$ be the table from [[alg-na-romberg-trapezoid-table]]. If the trapezoid expansion has coefficients $c_1,\\ldots,c_m$ as in [[cor-na-composite-trapezoid-even-power-expansion]], then the recurrence cancels all first $m$ even powers and there is a finite $C_{m,L}$ such that\n$$|R_{L,m}-\\int_a^b f(x)\\,dx|\\le C_{m,L}h_L^{2m+2}.$$\nNo error-order conclusion is made from a ratio of observed consecutive trapezoid errors."
+    }
+  },
+  {
+    "key": "thm-parabolic-backward-euler-error-and-reconstruction::degenerate",
+    "old_evidence": "If V_h={0}, its variational steps have the sole zero solution; positive coercivity and positive cell widths remain admissible.",
+    "new_evidence": "Proof 1.1, the homogeneous square-system uniqueness argument, also valid for the zero trial space: If V_h={0}, its variational steps have the sole zero solution; positive coercivity and positive cell widths remain admissible.",
+    "anchor": {
+      "section": "Proof",
+      "step": "1.1",
+      "description": "the homogeneous square-system uniqueness argument, also valid for the zero trial space",
+      "quote": "Fix a finite basis of $V_h$ and write the $j$th variational step as a square linear system for the coefficients of $U^j$. If its homogeneous system has solution $x\\in V_h$, testing by $x$ gives $\\tau_j^{-1}\\|x\\|_H^2+\\bar a_j(x,x)=0$. Coercivity [F4] implies $x=0$. Thus the square matrix has zero kernel and is invertible, proving a unique solution at each step without a choice axiom. [F1, F4, given, construct]"
+    }
+  },
+  {
+    "key": "thm-parabolic-backward-euler-error-and-reconstruction::zero",
+    "old_evidence": "When initial value and load are zero the discrete nodes are zero by the unique-step result; e^0=0 and u_h prime=0 also make C_e=0.",
+    "new_evidence": "Statement, the exact C_U and C_e expressions for homogeneous data: When initial value and load are zero the discrete nodes are zero by the unique-step result; e^0=0 and u_h prime=0 also make C_e=0.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the exact C_U and C_e expressions for homogeneous data",
+      "quote": "Let $V_h$ be a finite-dimensional conforming subspace of a real evolution\ntriple. Let $a(t;\\cdot,\\cdot):V_h\\times V_h\\to\\mathbb R$ be real bilinear\nand measurable in $t$ for each fixed pair. Assume there is one null set\n$E\\subset(0,T)$ outside which, with common constants $0\\le M<\\infty$ and\n$\\alpha>0$,\n$$|a(t;v_h,w_h)|\\le M\\|v_h\\|_V\\|w_h\\|_V,\\qquad a(t;v_h,v_h)\\ge\\alpha\\|v_h\\|_V^2\\qquad(v_h,w_h\\in V_h).$$\nLet $f\\in L^2(0,T;V_h^*)$. Let\n$u_h\\in H^1(0,T;V_h)$ be the semidiscrete solution from\n[[thm-parabolic-finite-dimensional-measurable-ode]]. On a finite partition\n$0=t_0<\\cdots<t_N=T$, put $\\tau_j=t_j-t_{j-1}$ and\n$\\tau_{\\max}=\\max_j\\tau_j$. For the interval-averaged backward Euler values\n$U^j$ from [[alg-parabolic-backward-euler-averaged-forms]], define\n$e^j=U^j-u_h(t_j)$ and let $\\widehat U$ be the affine reconstruction, with\n$\\overline U(t)=U^j$ on $(t_{j-1},t_j)$. Every step has a unique solution.\nWith\n$$C_U=\\|U^0\\|_H^2+\\alpha^{-1}\\|f\\|_{L^2(0,T;V_h^*)}^2,$$\nthe separate maximum and cumulative bounds are\n$$\\max_{0\\le m\\le N}\\|U^m\\|_H^2\\le C_U,\\qquad \\sum_{j=1}^N\\|U^j-U^{j-1}\\|_H^2+ \\alpha\\sum_{j=1}^N\\tau_j\\|U^j\\|_V^2\\le C_U.$$\nThe reconstruction satisfies\n$$\\|\\widehat U'\\|_{L^2(0,T;V_h^*)}^2 \\le2\\|f\\|_{L^2(V_h^*)}^2+2M^2\\|\\overline U\\|_{L^2(V)}^2,$$\n$$\\|\\widehat U-\\overline U\\|_{L^2(0,T;V_h^*)}^2 \\le\\frac{c_i^2\\tau_{\\max}}3 \\sum_{j=1}^N\\|U^j-U^{j-1}\\|_H^2,$$\nwhere $c_i=\\|V\\hookrightarrow H\\|$. For the nodal error, define\n$$C_e=\\|e^0\\|_H^2+ \\frac{M^2}{\\alpha}\\tau_{\\max}^2 \\|u_h'\\|_{L^2(0,T;V_h)}^2.$$\nThen the error obeys the separate bounds\n$$\\max_{0\\le m\\le N}\\|e^m\\|_H^2\\le C_e,\\qquad \\alpha\\sum_{j=1}^N\\tau_j\\|e^j\\|_V^2\\le C_e.$$\nThus exact initial projection $U^0=u_h(0)$ gives first-order maximum nodal\nerror. The reconstruction estimates provide bounds for later compactness\narguments; they do not themselves assert compactness."
+    }
+  },
+  {
+    "key": "thm-parabolic-crank-nicolson-second-order::zero",
+    "old_evidence": "With zero data the unique CN sequence is zero; when the exact trajectory is affine in time the second derivative term in C_e vanishes.",
+    "new_evidence": "Statement, the separate homogeneous-data stability and second-derivative error constants: With zero data the unique CN sequence is zero; when the exact trajectory is affine in time the second derivative term in C_e vanishes.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the separate homogeneous-data stability and second-derivative error constants",
+      "quote": "Let $V_h$ be a finite-dimensional conforming subspace of a real evolution\ntriple. Assume a time-independent real bilinear form $a$ is bounded by $M$\nand coercive by $\\alpha>0$, the load $f\\in L^2(0,T;V_h^*)$, and the\npartition and data of [[alg-parabolic-crank-nicolson-cg1]]. Every time step\nhas a unique solution and, with\n$U^{\\mathrm{mid},j}=(U^j+U^{j-1})/2$,\n$$\\max_{0\\le m\\le N}\\|U^m\\|_H^2\\le C_U,\\qquad \\alpha\\sum_{j=1}^N\\tau_j\\|U^{\\mathrm{mid},j}\\|_V^2\\le C_U, \\quad C_U:=\\|U^0\\|_H^2+\\alpha^{-1}\\|f\\|_{L^2(0,T;V_h^*)}^2.$$\nIf the exact semidiscrete solution $u_h$ from\n[[thm-parabolic-finite-dimensional-measurable-ode]] satisfies\n$u_h\\in H^2(0,T;V_h)$, meaning $u_h,u_h',u_h''\\in L^2(0,T;V_h)$ with weak\ntime derivatives. Under this regularity assumption, set\n$e^j=U^j-u_h(t_j)$, $\\tau_{\\max}=\\max_j\\tau_j$, and\n$$C_e:=\\|e^0\\|_H^2+ \\frac{M^2}{16\\alpha}\\tau_{\\max}^4 \\|u_h''\\|_{L^2(0,T;V_h)}^2.$$\nThen the error satisfies the separate bounds\n$$\\max_{0\\le m\\le N}\\|e^m\\|_H^2\\le C_e,\\qquad \\alpha\\sum_{j=1}^N\\tau_j \\left\\|\\frac{e^j+e^{j-1}}2\\right\\|_V^2\\le C_e.$$\nThus exact initial projection $U^0=u_h(0)$ gives second-order maximum nodal\nerror. The regularity hypothesis is on the time-dependent semidiscrete\nsolution and is not implied by the method definition."
+    }
+  },
+  {
+    "key": "thm-parabolic-semidiscrete-ritz-error-splitting-and-energy-bound::empty",
+    "old_evidence": "A zero finite trial space makes P_h=0 and u_h=0, so theta=0; its dual residual is the zero functional and the tested equation is vacuous.",
+    "new_evidence": "Statement, the definitions of P_h,rho,theta and the full variational residual: A zero finite trial space makes P_h=0 and u_h=0, so theta=0; its dual residual is the zero functional and the tested equation is vacuous.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the definitions of P_h,rho,theta and the full variational residual",
+      "quote": "Assume Countable Choice and the bounded polyhedral mesh setting, spaces,\nform and data of [[thm-parabolic-fem-semidiscrete-existence-energy]]. Let $u$\nbe the continuous solution supplied by\n[[thm-parabolic-variational-wellposedness-and-energy-stability]] on the same\nevolution triple and let $u_h$ be the corresponding semidiscrete solution.\nFor this error identity, assume the additional regularity $u\\in H^1(0,T;V)$,\nmeaning $u,u'\\in L^2(0,T;V)$ with the unique continuous representative\nsupplied by [[lem-parabolic-projection-time-product-rule]]. Let\n$P_h:V\\to V_h$ be a fixed bounded linear\ncomparison map, define\n$$\\rho(t)=P_hu(t)-u(t),\\qquad\\theta(t)=u_h(t)-P_hu(t),$$\nand let $\\mathcal R_h(t)\\in V_h^*$ be the full residual\n$$\\mathcal R_h(t)(v_h)=(\\rho'(t),v_h)_H+a(t;\\rho(t),v_h).$$\nThen for almost every $t$ and every $v_h\\in V_h$,\n$$(\\theta'(t),v_h)_H+a(t;\\theta(t),v_h)=-\\mathcal R_h(t)(v_h),$$\nand for every $t\\in[0,T]$,\n$$\\|\\theta(t)\\|_H^2+\\alpha\\int_0^t\\|\\theta(s)\\|_V^2ds \\le\\|\\theta(0)\\|_H^2+ \\alpha^{-1}\\int_0^t\\|\\mathcal R_h(s)\\|_{V_h^*}^2ds.$$\n\nThe same identity and energy bound hold for an operator-norm $C^1$\ntime-dependent comparison map $P_h(t):V\\to V_h$, with its time derivative\nincluded in $\\rho'$ as stated below. For a time-independent form and the\nRitz projection $P_h=R_h$ from\n[[def-parabolic-ritz-projection]], Galerkin orthogonality makes\n$a(\\rho(t),v_h)=0$, so the residual is exactly\n$(R_hu'(t)-u'(t),v_h)_H$. If a time-dependent comparison $P_h(t)$ is used,\nit must be operator-norm $C^1$; then\n$\\rho'=P_h'(t)u+P_h(t)u'-u'$, including the projection-derivative term.\nFor a measurable time-dependent form with a fixed comparison map, no\northogonality is inferred and the full displayed residual remains."
+    }
+  },
+  {
+    "key": "thm-parabolic-semidiscrete-ritz-error-splitting-and-energy-bound::zero",
+    "old_evidence": "When u=u_h=0 the explicitly defined rho,theta and residual all vanish; the positive form constants are unchanged.",
+    "new_evidence": "Statement, the definitions of P_h,rho,theta and the full variational residual: When u=u_h=0 the explicitly defined rho,theta and residual all vanish; the positive form constants are unchanged.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the definitions of P_h,rho,theta and the full variational residual",
+      "quote": "Assume Countable Choice and the bounded polyhedral mesh setting, spaces,\nform and data of [[thm-parabolic-fem-semidiscrete-existence-energy]]. Let $u$\nbe the continuous solution supplied by\n[[thm-parabolic-variational-wellposedness-and-energy-stability]] on the same\nevolution triple and let $u_h$ be the corresponding semidiscrete solution.\nFor this error identity, assume the additional regularity $u\\in H^1(0,T;V)$,\nmeaning $u,u'\\in L^2(0,T;V)$ with the unique continuous representative\nsupplied by [[lem-parabolic-projection-time-product-rule]]. Let\n$P_h:V\\to V_h$ be a fixed bounded linear\ncomparison map, define\n$$\\rho(t)=P_hu(t)-u(t),\\qquad\\theta(t)=u_h(t)-P_hu(t),$$\nand let $\\mathcal R_h(t)\\in V_h^*$ be the full residual\n$$\\mathcal R_h(t)(v_h)=(\\rho'(t),v_h)_H+a(t;\\rho(t),v_h).$$\nThen for almost every $t$ and every $v_h\\in V_h$,\n$$(\\theta'(t),v_h)_H+a(t;\\theta(t),v_h)=-\\mathcal R_h(t)(v_h),$$\nand for every $t\\in[0,T]$,\n$$\\|\\theta(t)\\|_H^2+\\alpha\\int_0^t\\|\\theta(s)\\|_V^2ds \\le\\|\\theta(0)\\|_H^2+ \\alpha^{-1}\\int_0^t\\|\\mathcal R_h(s)\\|_{V_h^*}^2ds.$$\n\nThe same identity and energy bound hold for an operator-norm $C^1$\ntime-dependent comparison map $P_h(t):V\\to V_h$, with its time derivative\nincluded in $\\rho'$ as stated below. For a time-independent form and the\nRitz projection $P_h=R_h$ from\n[[def-parabolic-ritz-projection]], Galerkin orthogonality makes\n$a(\\rho(t),v_h)=0$, so the residual is exactly\n$(R_hu'(t)-u'(t),v_h)_H$. If a time-dependent comparison $P_h(t)$ is used,\nit must be operator-norm $C^1$; then\n$\\rho'=P_h'(t)u+P_h(t)u'-u'$, including the projection-derivative term.\nFor a measurable time-dependent form with a fixed comparison map, no\northogonality is inferred and the full displayed residual remains."
+    }
+  },
+  {
+    "key": "thm-parabolic-variational-wellposedness-and-energy-stability::one",
+    "old_evidence": "The Hilbert-space argument permits V=H=R; its space-time BNB proof and scalar form retain the same positive coercivity constants.",
+    "new_evidence": "Statement, the real separable Hilbert evolution setting, which permits the scalar triple: The Hilbert-space argument permits V=H=R; its space-time BNB proof and scalar form retain the same positive coercivity constants.",
+    "anchor": {
+      "section": "Statement",
+      "step": null,
+      "description": "the real separable Hilbert evolution setting, which permits the scalar triple",
+      "quote": "Assume Countable Choice. Let $T>0$, let $V$ be a separable real Hilbert\nspace, and let $(V,H,V^*)$ be its real evolution triple. Suppose\n$a(t;\\cdot,\\cdot):V\\times V\\to\\mathbb R$ is bilinear and scalar measurable\nfor each fixed pair $v,w\\in V$, and there is one null set outside which\n$$|a(t;v,w)|\\le M\\|v\\|_V\\|w\\|_V,\\qquad a(t;v,v)\\ge\\alpha\\|v\\|_V^2$$\nfor all $v,w\\in V$, with constants $M>0$ and $\\alpha>0$. Let\n$f\\in L^2(0,T;V^*)$ and $u_0\\in H$. Then there is a unique\n$u\\in W(0,T;V)$ with $u(0)=u_0$ and, for almost every $t$,\n$$\\langle u'(t),v\\rangle_{V^*,V}+a(t;u(t),v) =\\langle f(t),v\\rangle_{V^*,V}\\qquad(v\\in V).$$\nFor every $t\\in[0,T]$ it satisfies\n$$\\|u(t)\\|_H^2+\\alpha\\int_0^t\\|u(s)\\|_V^2\\,ds \\le\\|u_0\\|_H^2+\\alpha^{-1}\\int_0^t\\|f(s)\\|_{V^*}^2\\,ds.$$\nThe proof applies BNB to the space-time form. Scalar measurability suffices\nbecause $V$ is separable and the measurable inverse action is proved locally."
+    }
+  }
+]

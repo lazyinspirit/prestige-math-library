@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "91",
+  "round": 0,
+  "reviewed_items": [
+    "def-regular-minimum-energy-path-in-a-collision-free-tube",
+    "lem-dimer-central-force-hessian-vector-error",
+    "lem-local-root-from-uniformly-small-residual",
+    "lem-local-root-in-max-norm",
+    "alg-finite-budget-dimer-mode-following",
+    "alg-finite-image-string-method",
+    "alg-improved-tangent-climbing-neb",
+    "def-validated-eigenvalue-enclosures-for-an-index-one-hessian",
+    "lem-centered-chord-and-unequal-step-tangent-error",
+    "lem-arc-length-polyline-interpolation-error",
+    "thm-local-index-one-saddle-certificate-from-enclosures",
+    "alg-index-one-eigenvector-following-step",
+    "prop-central-string-projected-force-consistency",
+    "thm-dimer-mode-perturbation-and-local-saddle-error",
+    "prop-improved-neb-monotone-tangent-has-first-order-projection-error",
+    "prop-index-one-eigenvector-step-is-the-local-newton-correction",
+    "thm-dimer-mode-error-contracts-local-saddle-translation",
+    "thm-gauge-fixed-stable-discrete-path-comparison",
+    "ex-dimer-hessian-vector-bias-noise-tradeoff",
+    "ex-corner-and-cusp-break-the-string-tangent-hypotheses",
+    "ex-curved-double-well-has-a-circular-minimum-energy-path",
+    "ex-straight-chord-is-not-the-curved-double-well-path",
+    "ex-index-two-maximum-fails-the-index-one-certificate",
+    "ex-near-degenerate-saddle-modes-rotate-under-small-perturbations",
+    "ex-zero-discrete-neb-residual-does-not-fix-a-continuum-path"
+  ],
+  "reviewed_pages": [
+    "minimum-energy-paths-string-neb-and-saddle-certificates",
+    "minimum-energy-paths-string-neb-and-saddle-certificates-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete batch review found locally resolvable proof-premise gaps and outer-loop budget ambiguities. The approved scope is otherwise represented, and the affected consumers have been checked.",
+  "findings": [
+    {
+      "id": "lem-local-root-from-uniformly-small-residual",
+      "type": "local",
+      "reason": "Proof step 2.1 applies the mean-value inequality on B2(x0, 2r) with Lipschitz constant 1/2, but step 1.1 establishes that derivative bound only on the closed radius-r ball. Apply the inequality on the open radius-r ball and extend to its boundary by continuity, or give a segmentwise argument. The Statement need not change."
+    },
+    {
+      "id": "def-validated-eigenvalue-enclosures-for-an-index-one-hessian",
+      "type": "prerequisite",
+      "reason": "The Definition invokes the real spectral theorem for H without establishing Hessian symmetry. Add and cite cor-hessian-is-symmetric; V in C4 supplies its hypothesis. The same missing supplier chain affects lem-dimer-central-force-hessian-vector-error Facts F1/proof 1.1; thm-local-index-one-saddle-certificate-from-enclosures Facts F2-F4/proofs 1.1-2.1 and 4.1; thm-dimer-mode-perturbation-and-local-saddle-error Facts F1-F2/proof 1.1; thm-dimer-mode-error-contracts-local-saddle-translation Facts F5-F6/proofs 1.1-3.1; prop-index-one-eigenvector-step-is-the-local-newton-correction Fact F4/proof 1.1; and ex-curved-double-well-has-a-circular-minimum-energy-path proof 2.1. Where the argument identifies D(grad V) with H, also cite thm-total-derivative-computes-directional-and-partial-derivatives so the Jacobian entries match the Hessian convention. These suppliers are available and the stated C4/C-infinity hypotheses suffice."
+    },
+    {
+      "id": "lem-arc-length-polyline-interpolation-error",
+      "type": "local",
+      "reason": "Facts F3 and proof steps 1.1-1.2 invoke the Taylor supplier, whose stated domain is open and convex, while this item gives a curve only on [0,L]. Make the endpoint C3 convention and the one-dimensional Taylor application explicit. Related uses need the same local-domain clarification: lem-dimer-central-force-hessian-vector-error F2/proof 1.1 can use the line restriction on an open parameter interval around the admissible segment; ex-curved-double-well-has-a-circular-minimum-energy-path F4/proof 2.1 can restrict to a convex ball around the point inside U. lem-centered-chord-and-unequal-step-tangent-error uses an open interval and already meets the premise."
+    },
+    {
+      "id": "alg-finite-budget-dimer-mode-following",
+      "type": "local",
+      "reason": "The translation cap K is not tied to an explicit outer-loop counter. Specify the initial counter, residual-before-cap check order, and that an update occurs only while the counter is below K, including K=0."
+    },
+    {
+      "id": "alg-improved-tangent-climbing-neb",
+      "type": "local",
+      "reason": "The update budget N and climbing switch n_climb lack an explicit outer-loop counter and final-iteration check order. Specify the initial counter, tolerance-before-budget order, update only while below N, and that the first climbing force is used at iteration n_climb, including N=0 and n_climb=N."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-index-one-eigenvector-following-step",
+      "decision": "accept",
+      "reason": "It already states Hessian symmetry and uses the validated enclosure interface consistently."
+    },
+    {
+      "id": "thm-local-index-one-saddle-certificate-from-enclosures",
+      "decision": "repair",
+      "reason": "Its Jacobian-Hessian identification and spectral argument need the cited derivative-matrix and Hessian-symmetry suppliers."
+    },
+    {
+      "id": "thm-dimer-mode-perturbation-and-local-saddle-error",
+      "decision": "repair",
+      "reason": "The eigenbasis and local-certificate uses need the Hessian-symmetry prerequisite; its uses of the HVP and local-root claims otherwise match their stated conditions."
+    },
+    {
+      "id": "thm-dimer-mode-error-contracts-local-saddle-translation",
+      "decision": "repair",
+      "reason": "Its symmetric-Hessian and Jacobian identifications need the cited suppliers; the recurrence estimates otherwise match the supplied hypotheses."
+    },
+    {
+      "id": "prop-index-one-eigenvector-step-is-the-local-newton-correction",
+      "decision": "repair",
+      "reason": "Make the supplier chain for D(grad V)=H explicit in Fact F4."
+    },
+    {
+      "id": "ex-curved-double-well-has-a-circular-minimum-energy-path",
+      "decision": "repair",
+      "reason": "Clarify the local convex Taylor domain and cite Hessian symmetry for the Morse-index conclusion."
+    },
+    {
+      "id": "ex-index-two-maximum-fails-the-index-one-certificate",
+      "decision": "accept",
+      "reason": "The example computes the symmetric Hessian explicitly as -2I and correctly rejects its enclosure."
+    },
+    {
+      "id": "ex-near-degenerate-saddle-modes-rotate-under-small-perturbations",
+      "decision": "accept",
+      "reason": "Its explicit matrices are symmetric and the example uses only the mode-angle conclusion."
+    },
+    {
+      "id": "alg-finite-budget-dimer-mode-following",
+      "decision": "repair",
+      "reason": "Clarify its finite translation counter and cap semantics; its paired-force estimate use is consistent."
+    },
+    {
+      "id": "ex-dimer-hessian-vector-bias-noise-tradeoff",
+      "decision": "accept",
+      "reason": "The exact gradient calculation and force-error contribution match the HVP statement."
+    },
+    {
+      "id": "prop-central-string-projected-force-consistency",
+      "decision": "accept",
+      "reason": "Its uses of the tangent and interpolation estimates match their hypotheses."
+    },
+    {
+      "id": "thm-gauge-fixed-stable-discrete-path-comparison",
+      "decision": "accept",
+      "reason": "Its maximum-norm root and interpolation conclusions match the supplier Statements."
+    },
+    {
+      "id": "prop-improved-neb-monotone-tangent-has-first-order-projection-error",
+      "decision": "accept",
+      "reason": "The tangent-branch calculation is independent of the outer-loop clarification."
+    },
+    {
+      "id": "ex-straight-chord-is-not-the-curved-double-well-path",
+      "decision": "accept",
+      "reason": "It uses the NEB tangent definition only; the continuous MEP calculation is independent of loop counts."
+    },
+    {
+      "id": "ex-zero-discrete-neb-residual-does-not-fix-a-continuum-path",
+      "decision": "accept",
+      "reason": "Its zero-residual conclusion remains valid with an initial residual check before budget exhaustion."
+    },
+    {
+      "id": "minimum-energy-paths-string-neb-and-saddle-certificates",
+      "decision": "accept",
+      "reason": "The page summary remains accurate with the requested procedure-counter clarifications."
+    }
+  ]
+}

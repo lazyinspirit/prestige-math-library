@@ -1,0 +1,1168 @@
+{
+  "version": 1,
+  "scope": [
+    "def-matrix-contractivity-and-logarithmic-norm",
+    "def-absolute-stability-regions-for-one-step-and-multistep-methods",
+    "thm-backward-euler-a-and-l-stability",
+    "thm-trapezoidal-a-stable-not-l-stable",
+    "lem-bdf2-root-locus-location",
+    "thm-explicit-euler-absolute-stability-disk",
+    "thm-bdf2-is-a-stable",
+    "prop-bdf2-roots-vanish-in-stiff-limit",
+    "cex-backward-euler-scalar-stability-not-matrix-contractivity",
+    "ex-forward-euler-frequency-step-restriction",
+    "ex-diagonal-fast-slow-system-restricts-explicit-step",
+    "ex-stiff-decay-mode-damping-comparison"
+  ],
+  "contracts": {
+    "def-matrix-contractivity-and-logarithmic-norm": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition fixes its finite matrix or scalar test domain; no empty family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero parameters and the zero-vector boundary are stated or excluded explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one scalar update or one-dimensional instance is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: poles, singular denominators, and repeated unit roots are specified."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: closed half-plane and unit-circle boundaries are stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition makes no choice from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition makes no if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "Definition-only carrier; checked the inner-product domain and the induced-norm and logarithmic-norm formulas. The nonnormal implication is proved only in the assigned counterexample."
+      }
+    },
+    "def-absolute-stability-regions-for-one-step-and-multistep-methods": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition fixes its finite matrix or scalar test domain; no empty family is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero parameters and the zero-vector boundary are stated or excluded explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one scalar update or one-dimensional instance is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: poles, singular denominators, and repeated unit roots are specified."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: closed half-plane and unit-circle boundaries are stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition makes no choice from a nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition requires a reduced rational one-step stability function to be defined exactly when its denominator is nonzero; being defined therefore entails that nonzero-denominator domain test. The multistep criterion separately retains a nonzero leading coefficient and simple unit roots."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition of the reduced rational multiplier also makes a nonzero denominator sufficient for being defined at that z. This domain equivalence alone does not assert |R(z)|<=1; membership in the stability region additionally requires that separate modulus inequality."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "Definition-only carrier; checked the one-step pole condition, closed left-half-plane convention, rational L-limit, and nonvanishing leading coefficient for multistep tests."
+      }
+    },
+    "thm-explicit-euler-absolute-stability-disk": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-absolute-stability-regions-for-one-step-and-multistep-methods",
+          "source_section": "Definition",
+          "quote": "For the scalar test equation $y'=\\lambda y$, a step size $h>0$ gives $z=h\\lambda$. A one-step scalar update has stability function $R$ when one step sends $y_n$ to $y_{n+1}=R(z)y_n$. If $R$ is rational, write it in reduced form; it is defined at $z$ exactly when its denominator is nonzero there. Its absolute-stability region is\n\n$$\\mathcal S_R=\\{z\\in\\mathbb C:R(z)\\text{ is defined and }|R(z)|\\le1\\}.$$\n\nThe update is A-stable when the closed left half-plane $\\{z:\\operatorname{Re}z\\le0\\}$ is contained in $\\mathcal S_R$. A rational one-step update is L-stable when it is A-stable and\n\n$$\\lim_{\\substack{|z|\\to\\infty\\\\ \\operatorname{Re}z\\le0}}R(z)=0,$$\n\nwhere the limit means that the values tend to zero along every sequence in the closed left half-plane whose modulus tends to infinity.\n\nFor a linear multistep method with the coefficient and polynomial convention of [[def-linear-multistep-method-consistency-order-and-root-condition]], substitution of the scalar test equation gives the characteristic polynomial\n\n$$\\pi_z(\\zeta)=\\rho(\\zeta)-z\\sigma(\\zeta).$$\n\nThe multistep absolute-stability region consists of those $z$ for which the leading coefficient $\\alpha_k-z\\beta_k$ is nonzero and every root of $\\pi_z$ satisfies the root condition: all roots have modulus at most one, and every root of modulus one is simple. This criterion concerns constant-step scalar test recurrences.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-euler-midpoint-rk4-orders-and-stability-functions",
+          "source_section": "Statement",
+          "quote": "Under the smoothness and compact-tube hypotheses of [[prop-explicit-rk-order-conditions-through-four]], the forward Euler, explicit midpoint, and classical four-stage tableaus of [[def-euler-midpoint-rk4-tableaus]] have uniform local orders at least one, two, and four, respectively.\n\nFor the scalar test equation $y'=\\lambda y$, set $z=h\\lambda$. The corresponding stability functions, defined by $y^+=R(z)y$, are\n$$R_{\\mathrm E}(z)=1+z,\\qquad R_{\\mathrm M}(z)=1+z+\\frac{z^2}{2},\\qquad R_{\\mathrm{RK4}}(z)=1+z+\\frac{z^2}{2}+\\frac{z^3}{6}+\\frac{z^4}{24}.$$\nThe absolute stability region of a listed method is $\\{z\\in\\mathbb C:|R(z)|\\le1\\}$. On the negative real axis, the Euler and midpoint regions are exactly $[-2,0]$. No maximal real interval is asserted here for RK4.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "euler-multiplier-disk",
+          "claim": "By [F2], the forward-Euler multiplier is defined for every $z\\in\\mathbb C$ and equals $1+z$. Thus [F1] makes its absolute-stability condition $|1+z|\\le1$, which is the closed disk centered at $-1$ with radius one.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "euler-real-axis",
+          "claim": "For $\\lambda=-\\rho$ with $\\rho>0$, $z=-h\\rho$ is real and the disk condition is $|1-h\\rho|\\le1$. This is equivalent to $-1\\le1-h\\rho\\le1$, hence $0\\le h\\rho\\le2$; since $h\\rho>0$, it is exactly $0<h\\rho\\le2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The forward-Euler stability disk is a set of individual complex test values with a directly evaluated multiplier; there is no empty numerical input or root list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the disk center."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.1 includes the unit multiplier at z=0 and the zero multiplier at z=-1; neither requires an inverse denominator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the endpoint multiplier."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the closed interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The explicit affine multiplier1+z determines disk membership uniquely, and the real decay restriction is scalar inequality algebra with h,rho>0."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Proof step 2.1 starts from |1-h*rho|<=1, expands it to0<=h*rho<=2 and uses h*rho>0, proving stability implies the stated positive step restriction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Proof step 2.1's same reversible inequalities show0<h*rho<=2 implies-1<=1-h*rho<=1 and hence the multiplier modulus at most1; the endpoint h*rho=2 is retained."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The disk and both sides of the real-axis restriction are derived by exact modulus algebra; unit-modulus boundary points are included."
+      }
+    },
+    "thm-backward-euler-a-and-l-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-absolute-stability-regions-for-one-step-and-multistep-methods",
+          "source_section": "Definition",
+          "quote": "For the scalar test equation $y'=\\lambda y$, a step size $h>0$ gives $z=h\\lambda$. A one-step scalar update has stability function $R$ when one step sends $y_n$ to $y_{n+1}=R(z)y_n$. If $R$ is rational, write it in reduced form; it is defined at $z$ exactly when its denominator is nonzero there. Its absolute-stability region is\n\n$$\\mathcal S_R=\\{z\\in\\mathbb C:R(z)\\text{ is defined and }|R(z)|\\le1\\}.$$\n\nThe update is A-stable when the closed left half-plane $\\{z:\\operatorname{Re}z\\le0\\}$ is contained in $\\mathcal S_R$. A rational one-step update is L-stable when it is A-stable and\n\n$$\\lim_{\\substack{|z|\\to\\infty\\\\ \\operatorname{Re}z\\le0}}R(z)=0,$$\n\nwhere the limit means that the values tend to zero along every sequence in the closed left half-plane whose modulus tends to infinity.\n\nFor a linear multistep method with the coefficient and polynomial convention of [[def-linear-multistep-method-consistency-order-and-root-condition]], substitution of the scalar test equation gives the characteristic polynomial\n\n$$\\pi_z(\\zeta)=\\rho(\\zeta)-z\\sigma(\\zeta).$$\n\nThe multistep absolute-stability region consists of those $z$ for which the leading coefficient $\\alpha_k-z\\beta_k$ is nonzero and every root of $\\pi_z$ satisfies the root condition: all roots have modulus at most one, and every root of modulus one is simple. This criterion concerns constant-step scalar test recurrences.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "backward-euler-multiplier",
+          "claim": "If $\\operatorname{Re}z\\le0$, then $1-z\\ne0$. Solving the stated update gives $y_{n+1}=(1-z)^{-1}y_n$, so $R_{\\mathrm{BE}}(z)=(1-z)^{-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "backward-euler-half-plane",
+          "claim": "For $\\operatorname{Re}z\\le0$, $|1-z|^2-1=|z|^2-2\\operatorname{Re}z\\ge0$. Therefore $|R_{\\mathrm{BE}}(z)|\\le1$ on the closed left half-plane, proving A-stability by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "backward-euler-limit",
+          "claim": "The reverse triangle inequality gives $|1-z|\\ge |z|-1$, so $|R_{\\mathrm{BE}}(z)|\\le1/(|z|-1)\\to0$ as $|z|\\to\\infty$ within $\\operatorname{Re}z\\le0$. By [F1] the method is L-stable.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The backward-Euler theorem concerns one scalar test value z and a defined rational multiplier; no input family or matrix index set may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.1 derives the one-step scalar multiplier directly; step 2.1 includes z=0, whose multiplier is1, while the pole z=1 is outside the closed left half-plane."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the denominator pole exclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the limit at infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Solving the scalar implicit equation fixes the backward-Euler multiplier uniquely; its modulus inequality and stiff limit require no eigenvector or minimizer selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The backward-Euler result proves A- and L-stability on the closed left half-plane; it does not claim that this half-plane is the entire stability region."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A scalar backward-Euler step can be stable at other test values; no reverse inference from |R|<=1 to Re(z)<=0 is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The pole is outside the closed left half-plane; the L-limit is uniform along all sequences in that half-plane."
+      }
+    },
+    "thm-trapezoidal-a-stable-not-l-stable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-absolute-stability-regions-for-one-step-and-multistep-methods",
+          "source_section": "Definition",
+          "quote": "For the scalar test equation $y'=\\lambda y$, a step size $h>0$ gives $z=h\\lambda$. A one-step scalar update has stability function $R$ when one step sends $y_n$ to $y_{n+1}=R(z)y_n$. If $R$ is rational, write it in reduced form; it is defined at $z$ exactly when its denominator is nonzero there. Its absolute-stability region is\n\n$$\\mathcal S_R=\\{z\\in\\mathbb C:R(z)\\text{ is defined and }|R(z)|\\le1\\}.$$\n\nThe update is A-stable when the closed left half-plane $\\{z:\\operatorname{Re}z\\le0\\}$ is contained in $\\mathcal S_R$. A rational one-step update is L-stable when it is A-stable and\n\n$$\\lim_{\\substack{|z|\\to\\infty\\\\ \\operatorname{Re}z\\le0}}R(z)=0,$$\n\nwhere the limit means that the values tend to zero along every sequence in the closed left half-plane whose modulus tends to infinity.\n\nFor a linear multistep method with the coefficient and polynomial convention of [[def-linear-multistep-method-consistency-order-and-root-condition]], substitution of the scalar test equation gives the characteristic polynomial\n\n$$\\pi_z(\\zeta)=\\rho(\\zeta)-z\\sigma(\\zeta).$$\n\nThe multistep absolute-stability region consists of those $z$ for which the leading coefficient $\\alpha_k-z\\beta_k$ is nonzero and every root of $\\pi_z$ satisfies the root condition: all roots have modulus at most one, and every root of modulus one is simple. This criterion concerns constant-step scalar test recurrences.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "trapezoid-multiplier",
+          "claim": "If $\\operatorname{Re}z\\le0$, then $1-z/2\\ne0$. Solving the stated update gives $R_{\\mathrm T}(z)=(1+z/2)/(1-z/2)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "trapezoid-half-plane",
+          "claim": "For $\\operatorname{Re}z\\le0$, $|1-z/2|^2-|1+z/2|^2=-2\\operatorname{Re}z\\ge0$. Thus $|R_{\\mathrm T}(z)|\\le1$ throughout the closed left half-plane, proving A-stability by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "trapezoid-limit-failure",
+          "claim": "Along the negative real axis $z=-x$, $x>0$, the multiplier is $(1-x/2)/(1+x/2)$ and tends to $-1$ as $x\\to\\infty$. Its modulus therefore tends to one, not zero, so the L-stability limit in [F1] fails.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The trapezoidal test problem has one scalar z and one rational update equation, not a possibly empty mesh family in its hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.1 solves a scalar single-step equation and step 2.1 includes z=0 with R_T(0)=1; its pole z=2 is excluded by Re(z)<=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the denominator pole exclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the negative-real limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The trapezoidal instability-of-damping witness is the explicit ray z=-x,x>0; no unspecified sequence or root selection is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This theorem gives A-stability and refutes L-stability by the multiplier's negative-real-axis limit, rather than stating a biconditional classification of all rational methods."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The negative limit-1 shows one failure of the L-stability condition; the result does not infer the trapezoidal formula from failure of stiff damping."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The denominator has no zero in the closed left half-plane; the negative-real sequence is a decisive boundary-to-infinity test for L-stability."
+      }
+    },
+    "lem-bdf2-root-locus-location": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-variable-step-bdf2-with-selected-implicit-branch",
+          "source_section": "Definition",
+          "quote": "Input a vector field $f(t,y)$, a finite grid $t_0,\\ldots,t_N$, starting states $Y_0,Y_1\\in\\mathbb R^d$ (so $N\\ge1$), and for each later step a prescribed closed ball $B_{n+1}\\subset\\mathbb R^d$ that specifies the admissible implicit branch. Before any evaluation, if either starting state has dimension different from $d$, return `invalid-input`; otherwise, if any time increment is nonpositive, return `invalid-grid`. Set $h_n=t_{n+1}-t_n$ and $r_n=h_n/h_{n-1}$ for $1\\le n<N$.\n\nFor $n=1,\\ldots,N-1$, form the equation\n\n$$\\frac{(1+2r_n)Z-(1+r_n)^2Y_n+r_n^2Y_{n-1}}{h_n(1+r_n)}=f(t_{n+1},Z).$$\n\nIf this equation has exactly one root $Z$ in $B_{n+1}$, set $Y_{n+1}=Z$ and continue. If it has no root there, return `no-root` with the computed prefix; if it has more than one root there, return `ambiguous-branch` with the computed prefix. If an evaluation of $f$ is undefined, return `evaluation-failure` with the prefix. On reaching $N$, return `completed` and $(Y_0,\\ldots,Y_N)$. The procedure is defined for arbitrary positive adjacent step ratios; no convergence or accuracy property is part of this algorithm.\n\nThe coefficients are those obtained from the quadratic interpolation derivative in [[lem-variable-step-bdf2-interpolation-and-local-defect]]. A separate theorem gives the uniform ratio hypotheses needed for second-order convergence; they are not part of this algorithm.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-multistep-method-consistency-order-and-root-condition",
+          "source_section": "Definition",
+          "quote": "Let $k\\ge1$, $d\\ge1$, and let $f:U\\to\\mathbb R^d$ be the right-hand side of a first-order initial-value problem on an open set $U\\subseteq\\mathbb R\\times\\mathbb R^d$, using the convention of [[def-first-order-ode-initial-value-problem-and-solution]]. A **constant-step $k$-step linear multistep method** has real coefficients $\\alpha_0,\\ldots,\\alpha_k,\\beta_0,\\ldots,\\beta_k$ with $\\alpha_k\\ne0$ and advances values by\n\n$$\\sum_{j=0}^k\\alpha_jY_{n+j}=h\\sum_{j=0}^k\\beta_j f(t_{n+j},Y_{n+j}),\\qquad t_{n+j}=t_n+jh,\\quad h>0.$$\n\nMultiplying all coefficients by the same nonzero scalar leaves the method unchanged; one may normalize $\\alpha_k=1$. Its **characteristic polynomials** are\n\n$$\\rho(\\zeta)=\\sum_{j=0}^k\\alpha_j\\zeta^j,\\qquad \\sigma(\\zeta)=\\sum_{j=0}^k\\beta_j\\zeta^j.$$\n\nFor an exact solution $y$ with $p+1$ continuous derivatives, the **unscaled local residual** at $t_n$ is\n\n$$\\tau_n(h;y)=\\sum_{j=0}^k\\alpha_jy(t_n+jh)-h\\sum_{j=0}^k\\beta_jy'(t_n+jh).$$\n\nThe method has **order at least $p$**, where $p\\ge1$ is an integer, if this residual is $O(h^{p+1})$ uniformly for admitted starting times in every fixed compact interval on which the indicated derivatives are bounded. It is **consistent** if it has order at least one. Equivalently, with the above coefficient convention, consistency is $\\rho(1)=0$ and $\\rho'(1)=\\sigma(1)$.\n\nThe **root condition** is that every complex root of $\\rho$ has modulus at most one and every root of modulus one has algebraic multiplicity one. The method is **zero-stable** if for each $T>0$ there is a constant $M_T$ independent of $N$ such that every solution of the homogeneous recurrence $\\sum_j\\alpha_jY_{n+j}=0$ on the uniform grid $h=T/N$ satisfies\n\n$$\\max_{0\\le n\\le N}\\|Y_n\\|_\\infty\\le M_T\\max_{0\\le j<k}\\|Y_j\\|_\\infty.$$\n\nHere $\\|x\\|_\\infty=\\max_{1\\le i\\le d}|x_i|$ for $x\\in\\mathbb R^d$. The root-condition equivalence for zero-stability is established separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-absolute-stability-regions-for-one-step-and-multistep-methods",
+          "source_section": "Definition",
+          "quote": "For the scalar test equation $y'=\\lambda y$, a step size $h>0$ gives $z=h\\lambda$. A one-step scalar update has stability function $R$ when one step sends $y_n$ to $y_{n+1}=R(z)y_n$. If $R$ is rational, write it in reduced form; it is defined at $z$ exactly when its denominator is nonzero there. Its absolute-stability region is\n\n$$\\mathcal S_R=\\{z\\in\\mathbb C:R(z)\\text{ is defined and }|R(z)|\\le1\\}.$$\n\nThe update is A-stable when the closed left half-plane $\\{z:\\operatorname{Re}z\\le0\\}$ is contained in $\\mathcal S_R$. A rational one-step update is L-stable when it is A-stable and\n\n$$\\lim_{\\substack{|z|\\to\\infty\\\\ \\operatorname{Re}z\\le0}}R(z)=0,$$\n\nwhere the limit means that the values tend to zero along every sequence in the closed left half-plane whose modulus tends to infinity.\n\nFor a linear multistep method with the coefficient and polynomial convention of [[def-linear-multistep-method-consistency-order-and-root-condition]], substitution of the scalar test equation gives the characteristic polynomial\n\n$$\\pi_z(\\zeta)=\\rho(\\zeta)-z\\sigma(\\zeta).$$\n\nThe multistep absolute-stability region consists of those $z$ for which the leading coefficient $\\alpha_k-z\\beta_k$ is nonzero and every root of $\\pi_z$ satisfies the root condition: all roots have modulus at most one, and every root of modulus one is simple. This criterion concerns constant-step scalar test recurrences.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "uniform-bdf2-polynomial",
+          "claim": "Setting $r_n=1$ in [F1] gives $3Y_{n+1}-4Y_n+Y_{n-1}=2h f(t_{n+1},Y_{n+1})$. Substituting $f(t,y)=\\lambda y$ and a trial mode $Y_n=\\zeta^n$, the polynomial convention in [F2] gives $(3-2z)\\zeta^2-4\\zeta+1=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "root-locus-identity",
+          "claim": "The constant term is one, so a root has $\\zeta\\ne0$. Put $w=1/\\zeta$, $a=\\operatorname{Re}w$, and $r=|w|$. Solving the equation in step 1.1 for $z$ gives $z=3/2-2w+w^2/2$, and therefore $\\operatorname{Re}z=(1-a)^2+(1-r^2)/2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "root-locus-half-plane",
+          "claim": "If $|\\zeta|>1$, then $r<1$ and step 2.1 gives $\\operatorname{Re}z>0$. If $|\\zeta|=1$, then $r=1$, so $\\operatorname{Re}z=(1-a)^2\\ge0$; equality forces $w=1$, hence $\\zeta=1$ and $z=0$. This proves both assertions.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The root-locus lemma conditions on a root of its displayed BDF2 quadratic and analyzes its modulus; it does not average over a possibly empty root selection."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the sole unit-root equality case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the first root mode."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the excluded zero root."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the unit-circle boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof treats any given root and maps it to its reciprocal; its inequalities hold pointwise and require no choice of roots across test values."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The root-locus statement says a root outside the unit disk forces a right-half-plane test value, with an equality restriction; it is not an equivalence of these conditions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A right-half-plane test value is not claimed always to possess a specified outside-unit-disk root; only the stated implication and boundary equality are proved."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The root zeta=0 is excluded by the polynomial's constant term; the unit-circle equality case is explicitly retained at z=0, zeta=1."
+      }
+    },
+    "thm-bdf2-is-a-stable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-absolute-stability-regions-for-one-step-and-multistep-methods",
+          "source_section": "Definition",
+          "quote": "For the scalar test equation $y'=\\lambda y$, a step size $h>0$ gives $z=h\\lambda$. A one-step scalar update has stability function $R$ when one step sends $y_n$ to $y_{n+1}=R(z)y_n$. If $R$ is rational, write it in reduced form; it is defined at $z$ exactly when its denominator is nonzero there. Its absolute-stability region is\n\n$$\\mathcal S_R=\\{z\\in\\mathbb C:R(z)\\text{ is defined and }|R(z)|\\le1\\}.$$\n\nThe update is A-stable when the closed left half-plane $\\{z:\\operatorname{Re}z\\le0\\}$ is contained in $\\mathcal S_R$. A rational one-step update is L-stable when it is A-stable and\n\n$$\\lim_{\\substack{|z|\\to\\infty\\\\ \\operatorname{Re}z\\le0}}R(z)=0,$$\n\nwhere the limit means that the values tend to zero along every sequence in the closed left half-plane whose modulus tends to infinity.\n\nFor a linear multistep method with the coefficient and polynomial convention of [[def-linear-multistep-method-consistency-order-and-root-condition]], substitution of the scalar test equation gives the characteristic polynomial\n\n$$\\pi_z(\\zeta)=\\rho(\\zeta)-z\\sigma(\\zeta).$$\n\nThe multistep absolute-stability region consists of those $z$ for which the leading coefficient $\\alpha_k-z\\beta_k$ is nonzero and every root of $\\pi_z$ satisfies the root condition: all roots have modulus at most one, and every root of modulus one is simple. This criterion concerns constant-step scalar test recurrences.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bdf2-root-locus-location",
+          "source_section": "Statement",
+          "quote": "On a uniform grid, the variable-step BDF2 algorithm of [[alg-variable-step-bdf2-with-selected-implicit-branch]] has the scalar test-equation polynomial\n\n$$P_z(\\zeta)=(3-2z)\\zeta^2-4\\zeta+1,\\qquad z=h\\lambda.$$\n\nIf $\\zeta$ is a root and $|\\zeta|\\ge1$, then $\\operatorname{Re}z\\ge0$. Equality is possible only for $z=0$ and $\\zeta=1$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "bdf2-degree",
+          "claim": "The leading coefficient of $P_z$ is $3-2z$. If it vanished, then $z=3/2$, contradicting $\\operatorname{Re}z\\le0$. Thus $P_z$ has degree two.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bdf2-root-condition",
+          "claim": "By [F2], a root with modulus greater than one would force $\\operatorname{Re}z>0$, which is impossible. A root with modulus one can occur only when $z=0$ and $\\zeta=1$. At $z=0$, $P_0(\\zeta)=3\\zeta^2-4\\zeta+1=(3\\zeta-1)(\\zeta-1)$, so the unit root is simple and the other root is $1/3$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bdf2-a-stability",
+          "claim": "The degree and root properties in steps 1.1–1.2 satisfy the multistep criterion in [F1] for every $\\operatorname{Re}z\\le0$. Hence the closed left half-plane lies in the absolute-stability region, proving A-stability.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 proves3-2z cannot vanish on Re(z)<=0, so the test polynomial retains degree two instead of degenerating to an absent root condition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 checks the z=0 factorization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 checks the unit root."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the leading coefficient."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the unit-circle root."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The BDF2 argument bounds every root of its fixed quadratic and checks the explicit boundary factorization at z=0; it chooses no branch of roots over a parameter family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The BDF2 theorem proves inclusion of the closed left half-plane in the multistep stability region; it does not claim equality of that region with the half-plane."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse says every stable BDF2 test value has nonpositive real part; the supplied root-locus implication is used only to establish the claimed inclusion."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The z=0 root is simple and its companion root is 1/3; no assumption about nonlinear convergence or higher BDF order is used."
+      }
+    },
+    "prop-bdf2-roots-vanish-in-stiff-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-bdf2-root-locus-location",
+          "source_section": "Statement",
+          "quote": "On a uniform grid, the variable-step BDF2 algorithm of [[alg-variable-step-bdf2-with-selected-implicit-branch]] has the scalar test-equation polynomial\n\n$$P_z(\\zeta)=(3-2z)\\zeta^2-4\\zeta+1,\\qquad z=h\\lambda.$$\n\nIf $\\zeta$ is a root and $|\\zeta|\\ge1$, then $\\operatorname{Re}z\\ge0$. Equality is possible only for $z=0$ and $\\zeta=1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "bdf2-root-modulus-bound",
+          "claim": "Let $C=|3-2z|$ and $r=|\\zeta|$. By [F1], the root equation implies $(3-2z)\\zeta^2=4\\zeta-1$, hence $Cr^2=|4\\zeta-1|\\le4r+1$. Also $C\\ge2|z|-3$, so $C\\to\\infty$ as $|z|\\to\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bdf2-root-limit",
+          "claim": "If $C>5$ and $r\\ge1$, step 1.1 gives $Cr^2\\le4r+1\\le5r$, hence $C\\le5/r\\le5$, a contradiction. Thus $r<1$ for $C>5$, and then $Cr^2\\le4r+1<5$, so $r<\\sqrt{5/C}$. This bound tends to zero as $|z|\\to\\infty$, proving the claim for every root.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 handles any root of the degree-two BDF2 polynomial on the closed left half-plane; the nonvanishing leading coefficient leaves two roots counted with multiplicity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the zero-root boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks all root moduli."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the C>5 branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the stiff limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The estimate r<sqrt(5/C) in proof2.1 holds simultaneously for every root, so no mesh-dependent branch selection or choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The BDF2 proposition asserts decay of all test roots in a stiff limit and explicitly separates this multistep damping statement from the one-step L-stability definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Vanishing roots are not claimed to characterize BDF2 or imply an L-stability property for a multistep method; no converse classification is present."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The bound applies to each root without choosing a square-root branch; no multistep L-stability label is introduced."
+      }
+    },
+    "ex-forward-euler-frequency-step-restriction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-explicit-euler-absolute-stability-disk",
+          "source_section": "Statement",
+          "quote": "For forward Euler applied to $y'=\\lambda y$, let $z=h\\lambda$. Its stability function is $R_{\\mathrm E}(z)=1+z$, and its absolute-stability region is exactly the closed disk\n\n$$\\{z\\in\\mathbb C:|z+1|\\le1\\}.$$\n\nOn the negative real axis, for $y'=-\\rho y$ with $\\rho>0$, the method is absolutely stable exactly when $0<h\\rho\\le2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "euler-frequency-modulus",
+          "claim": "Set $z=h\\lambda=-h\\rho+ih\\omega$. Then $|1+z|^2=(1-h\\rho)^2+(h\\omega)^2=1-2h\\rho+h^2(\\rho^2+\\omega^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "euler-frequency-step-bound",
+          "claim": "By [F1], stability is equivalent to the last expression being at most one. Since $h>0$ and $\\rho^2+\\omega^2>0$, this is equivalent to $h(\\rho^2+\\omega^2)\\le2\\rho$, or $h\\le2\\rho/(\\rho^2+\\omega^2)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The frequency example fixes a single complex mode with rho>0 and real omega; no possibly empty frequency family or spectral decomposition is input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the zero-frequency case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Verification step 1.1 concerns one scalar step; omega=0 reduces the inequality in step 2.1 to h<=2/rho, retaining the ordinary real-decay restriction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the zero-step limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the equality step bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The complex test value is explicitly lambda=-rho+i*omega, and the bound follows by scalar modulus algebra; no unknown eigenmode is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Verification step 2.1 divides the modulus inequality by h>0 and rho^2+omega^2>0, yielding h<=2*rho/(rho^2+omega^2) as a necessary stability condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Verification step 2.1 uses reversible positive-factor inequalities, so the stated step bound also makes(1-h*rho)^2+(h*omega)^2<=1 and suffices for scalar stability."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The case omega=0 reduces to the real-axis restriction; no frequency-independent step bound is claimed."
+      }
+    },
+    "ex-diagonal-fast-slow-system-restricts-explicit-step": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-explicit-euler-absolute-stability-disk",
+          "source_section": "Statement",
+          "quote": "For forward Euler applied to $y'=\\lambda y$, let $z=h\\lambda$. Its stability function is $R_{\\mathrm E}(z)=1+z$, and its absolute-stability region is exactly the closed disk\n\n$$\\{z\\in\\mathbb C:|z+1|\\le1\\}.$$\n\nOn the negative real axis, for $y'=-\\rho y$ with $\\rho>0$, the method is absolutely stable exactly when $0<h\\rho\\le2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "diagonal-euler-multipliers",
+          "claim": "Applying forward Euler to each diagonal component gives the multipliers $1-h$ and $1-1000h$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fast-component-intersection",
+          "claim": "By [F1], the first component is stable exactly when $0<h\\le2$ and the second exactly when $0<1000h\\le2$. Their intersection is $0<h\\le1/500$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The fast-slow example fixes exactly two diagonal scalar components with decay rates1 and1000; neither a missing component family nor an empty intersection is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the componentwise zero state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks both scalar multipliers."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the diagonal component cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the fast-mode equality step."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both component multipliers are explicit, and their two admissible real-step intervals have the directly computed intersection(0,1/500]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example itself reports the restriction obtained by requiring stability of both specified components, without stating a separate logical equivalence in its top-level claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The componentwise exact scalar criterion is used in verification2.1, but the top-level example makes no converse characterization of general fast-slow systems."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "Both components are included; equality at h=1/500 gives a unit-modulus fast multiplier and is bounded, not decaying."
+      }
+    },
+    "ex-stiff-decay-mode-damping-comparison": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-limits-and-range",
+          "source_section": "Statement",
+          "quote": "$$\\exp(x)\\to+\\infty\\quad(x\\to+\\infty),\\qquad \\exp(x)\\to0\\quad(x\\to-\\infty),$$\nand the range of $\\exp$ is contained in $(0,\\infty)$ and is unbounded above with infimum $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-backward-euler-a-and-l-stability",
+          "source_section": "Statement",
+          "quote": "Backward Euler on $y'=\\lambda y$ is the scalar update $y_{n+1}=y_n+z y_{n+1}$, where $z=h\\lambda$. Its stability function is\n\n$$R_{\\mathrm{BE}}(z)=\\frac{1}{1-z}.$$\n\nIt is A-stable and L-stable.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-trapezoidal-a-stable-not-l-stable",
+          "source_section": "Statement",
+          "quote": "The trapezoidal rule on $y'=\\lambda y$ is\n\n$$y_{n+1}=y_n+\\frac z2(y_n+y_{n+1}),\\qquad z=h\\lambda.$$\n\nIts stability function is $R_{\\mathrm T}(z)=(1+z/2)/(1-z/2)$. It is A-stable but not L-stable.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-bdf2-roots-vanish-in-stiff-limit",
+          "source_section": "Statement",
+          "quote": "For $\\operatorname{Re}z\\le0$, let $\\zeta$ be any root of the constant-step BDF2 test polynomial $P_z(\\zeta)=(3-2z)\\zeta^2-4\\zeta+1$. As $|z|\\to\\infty$ within the closed left half-plane, every such root satisfies $\\zeta\\to0$.\n\nThis is a multistep damping statement. It does not extend the one-step definition of L-stability to multistep methods.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ndifferentiable at every point of $I$ that is interior to $I$\n([[def-interior-closure-boundary-r]], [[def-derivative]]), with\n\n$$f'(x) = 0 \\qquad \\text{at every interior point } x \\text{ of } I .$$\n\nThen $f$ is constant on $I$: there is a real $k$ with $f(x) = k$ for every\n$x \\in I$.\n\nConsequently, if $f, g : I \\to \\mathbb{R}$ are both continuous on $I$ and both\ndifferentiable at every interior point of $I$, with $f'(x) = g'(x)$ at every\ninterior point $x$, then there is a real $k$ with\n\n$$f(x) \\;=\\; g(x) + k \\qquad \\text{for every } x \\in I .$$\n\n**Order-convexity of $I$ is essential and is not a convenience.** The\nconclusion is false on a domain that falls into separate pieces, since a\nfunction may be constant on each piece with different constants; nothing in the\nproof would survive, because the mean value theorem is applied to the segment\njoining two points of the domain and that segment must lie in the domain.\n\n**The hypothesis is imposed only at interior points.** At an endpoint of $I$\nnothing is asked at all: $f$ need not be differentiable there, and the proof\nnever evaluates a difference quotient at an endpoint, since it applies the mean\nvalue theorem on a segment $[u,v] \\subseteq I$ and uses the derivative only at\npoints of $(u,v)$, all of which are interior to $I$. What is *not* meant is that\nthe derivative at an endpoint is free to be nonzero: once $f$ is known to be\nconstant its difference quotient at an endpoint is constantly $0$, so wherever\n$f'$ exists at an endpoint it is $0$ too. That is a consequence of the theorem,\nnot a hypothesis of it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-fast-decay-trajectory",
+          "claim": "The function $u(t)=\\exp(-\\rho t)$ is continuous on $[0,h]$, has $u(0)=1$ by [F1], and satisfies $u'(t)=-\\rho\\exp(-\\rho t)=-\\rho u(t)$ on $(0,h)$ by [F2] and [F3]. Thus it is a classical solution.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unique-exact-fast-decay-factor",
+          "claim": "Let $y$ be any classical solution from the Given and set $v(t)=\\exp(\\rho t)y(t)$ on $[0,h]$. By [F9], $v$ is continuous there. On $(0,h)$, [F8], [F2], and [F3] give $v'(t)=\\rho\\exp(\\rho t)y(t)+\\exp(\\rho t)y'(t)=0$. So [F10] makes $v$ constant; since $v(0)=1$, [F11] gives $y(h)=1/\\exp(\\rho h)=\\exp(-x)$. The exact one-step factor is therefore $\\exp(-x)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "one-step-damping-factors",
+          "claim": "At $z=-x$, [F5] gives $R_{\\mathrm{BE}}(-x)=1/(1+x)\\to0$, and [F6] gives $R_{\\mathrm T}(-x)=(1-x/2)/(1+x/2)\\to-1$.",
+          "step": "1.3",
+          "inputs": [
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fast-mode-damping-contrast",
+          "claim": "Since $-x$ lies in the closed left half-plane, [F7] gives that both BDF2 roots tend to zero as $x\\to\\infty$. By [F4] and step 1.2 the exact factor also tends to zero. Therefore $|R_{\\mathrm T}(-x)-\\exp(-x)|\\to1$, exhibiting the trapezoidal fast-mode damping defect without making a general accuracy claim.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The damping comparison evaluates one scalar exact flow and three specified numerical methods at z=-rho*h; no unspecified or empty method collection is input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the initial value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 checks the method multipliers."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 checks the negative-real stiff step."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the limit at infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The exact solution is identified by the integrating factor, and the BDF2 supplier estimates both roots at once; choosing a root branch along the stiff limit is unnecessary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example compares four explicit stiff-limit factors and illustrates the trapezoidal damping defect; it states no equivalence between A-stability and accurate stiff decay."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The limiting difference1 between trapezoidal and exact factors is not claimed to characterize every A-stable method or furnish a general accuracy converse."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The example compares one scalar fast mode only; it makes no general nonlinear, global-error, or unconditional stiffness classification."
+      }
+    },
+    "cex-backward-euler-scalar-stability-not-matrix-contractivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-matrix-contractivity-and-logarithmic-norm",
+          "source_section": "Definition",
+          "quote": "Let $G\\in\\mathbb R^{d\\times d}$ be symmetric positive definite. Define the inner product and its vector norm by\n\n$$\\langle x,y\\rangle_G=x^\\mathsf{T}Gy,\\qquad \\|x\\|_G=\\sqrt{x^\\mathsf{T}Gx}.$$\n\nFor a real matrix $M$, its induced operator norm is $\\|M\\|_G=\\sup_{x\\ne0}\\|Mx\\|_G/\\|x\\|_G$. A matrix step $M$ is contractive in this specified inner product when $\\|M\\|_G\\le1$.\n\nFor a real matrix $A$, its logarithmic norm in the same inner product is\n\n$$\\mu_G(A)=\\sup_{x\\ne0}\\frac{x^\\mathsf{T}GAx}{x^\\mathsf{T}Gx}.$$\n\nIn the Euclidean inner product $G=I$, write $\\|\\cdot\\|_2$ and $\\mu_2$. A real matrix is normal when $AA^\\mathsf{T}=A^\\mathsf{T}A$ and nonnormal otherwise.\n\nFor a rational stability function $R=P/Q$, the matrix step $R(hA)$ is defined only when $Q(hA)$ is invertible; its contractivity is the separate condition $\\|R(hA)\\|_G\\le1$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-backward-euler-a-and-l-stability",
+          "source_section": "Statement",
+          "quote": "Backward Euler on $y'=\\lambda y$ is the scalar update $y_{n+1}=y_n+z y_{n+1}$, where $z=h\\lambda$. Its stability function is\n\n$$R_{\\mathrm{BE}}(z)=\\frac{1}{1-z}.$$\n\nIt is A-stable and L-stable.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nonnormal-scalar-spectrum",
+          "claim": "The characteristic polynomial of $A$ is $(\\nu+1)^2$, so its roots are both $-1$ and the scalar backward-Euler factor is $R_{\\mathrm{BE}}(-1)=1/2$. Also $A A^\\mathsf{T}\\ne A^\\mathsf{T}A$, so $A$ is nonnormal.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "matrix-step-expansion",
+          "claim": "Direct inversion gives $(I-A)^{-1}=\\begin{pmatrix}1/2&4\\\\0&1/2\\end{pmatrix}$. For $e_2=(0,1)^\\mathsf{T}$, this step gives $(4,1/2)^\\mathsf{T}$, whose Euclidean norm is $\\sqrt{65/4}>1=\\|e_2\\|_2$. Thus the matrix step is not contractive.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "logarithmic-norm-value",
+          "claim": "For $x=(x_1,x_2)^\\mathsf{T}$, $7\\|x\\|_2^2-x^\\mathsf{T}Ax=8(x_1-x_2)^2\\ge0$, with equality at $x_1=x_2\\ne0$. Hence $\\mu_2(A)=7>0$, which records the nonnormal growth hidden by the negative scalar test value. The claimed implication is false.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes a two-by-two nonnormal matrix and one unit test vector; it is not an assertion about an empty spectrum or zero-dimensional state space."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a fixed nonzero witness vector; the zero vector cannot witness failure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 checks the nonzero witness vector."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the repeated characteristic root."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample has no stability-parameter endpoint; its fixed matrix is a strict counterexample."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness explicitly gives A=[[-1,16],[0,-1]] and e2=(0,1), so no selection of an extremizing vector is needed to disprove contractivity."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement refuted is a universal implication from left-half-plane scalar spectrum to Euclidean backward-Euler contractivity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample disproves that one-way implication; it does not assert or investigate its converse, and the explicit nonnormal witness remains the whole claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch 52 author — not independent approval",
+        "notes": "The nonzero vector e2 witnesses failure of contractivity; the zero vector is not used in the induced-norm supremum."
+      }
+    }
+  }
+}

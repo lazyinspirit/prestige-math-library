@@ -1,0 +1,1304 @@
+{
+  "version": 1,
+  "level": "numerical-optimization-dynamics-2026-10-16-batch-28",
+  "scope": [
+    "lem-discrete-one-step-error-recurrence-bound",
+    "thm-global-error-from-one-step-defect-and-stability",
+    "thm-continuous-flow-log-density-equation",
+    "thm-divergence-integral-error-with-separate-quadrature",
+    "cor-global-log-density-error-from-state-and-quadrature",
+    "thm-euler-global-state-and-log-density-error",
+    "ex-euler-linear-flow-exact-log-density-update",
+    "ex-exact-state-with-inexact-log-density-quadrature"
+  ],
+  "contracts": {
+    "lem-discrete-one-step-error-recurrence-bound": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "$$1+x\\le\\exp(x).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-power-monotone",
+          "source_section": "Statement",
+          "quote": "for $a, b \\ge 0$ and $n \\ge 1$: $a < b \\iff a^n < b^n$ and $a \\le b \\iff a^n \\le b^n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "$$a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "**Finite sums and finite products of $a$ are defined by recursion on the upper index**",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "unroll-finite-recurrence",
+          "step": "1.1",
+          "claim": "Inductively unroll the recurrence into the initial term and a finite geometric sum.",
+          "inputs": [
+            "A1"
+          ]
+        },
+        {
+          "id": "sum-the-two-cases",
+          "step": "2.1",
+          "claim": "Evaluate the geometric sum for L>0 and the arithmetic sum for L=0, using hN=T.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires N≥1, so it has no empty grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives e_n=0 when C=C₀=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers n=0 and n=N=1 in both L branches."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the zero-forcing case C=0 and zero-initial-error case C₀=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include every index 0≤n≤N, including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The sequence is given; the proof makes no selection from sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states an implication, not an equivalence."
+        }
+      ]
+    },
+    "thm-global-error-from-one-step-defect-and-stability": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "A **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-one-step-ode-method-local-defect-order-and-stability",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, and consider a first-order IVP and solution in the sense of [[def-first-order-ode-initial-value-problem-and-solution]]. A **one-step method** is a family of maps $\\Psi_h(t,v)$, defined for admitted times $t$, positive step sizes $h$, and states $v$, whose value is the method's approximation at time $t+h$ from the single input state $v$ at time $t$. It does not use earlier numerical states.\n\nIf $y$ is an exact solution on an interval containing $[t,t+h]$, the **local defect** is\n\n$$\\delta_h(t;y):=\\Psi_h(t,y(t))-y(t+h).$$\n\nLet $K\\subseteq D$ be a fixed compact time-state set. The method has **uniform local order $p$ on $K$ along $y$** if there are constants $C\\ge0$ and $h_0>0$, independent of the admitted starting time $t$ and step $0<h\\le h_0$, such that\n\n$$\\|\\delta_h(t;y)\\|_2\\le C h^{p+1}$$\n\nwhenever the exact solution graph on $[t,t+h]$ and the associated method time-state inputs, stages, and outputs under consideration lie in $K$. Here $p$ is a positive integer and $\\|\\cdot\\|_2$ is the Euclidean norm of [[def-euclidean-inner-product]].\n\nThe method has **one-step Lipschitz stability on $K$** with constant $L\\ge0$ if\n\n$$\\|\\Psi_h(t,u)-\\Psi_h(t,v)\\|_2\\le(1+Lh)\\|u-v\\|_2$$\n\nfor every admitted step size $h$, admitted time $t$, and input states $u,v$ with $(t,u),(t,v)\\in K$. This is a bound on the change in one step; it is separate from absolute or linear stability regions and does not itself assert a global error estimate.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-discrete-one-step-error-recurrence-bound",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, $N\\ge1$, $h=T/N$, $p\\ge1$, and $C_0,C,L\\ge0$. If nonnegative real numbers $e_0,\\ldots,e_N$ satisfy\n$$e_0\\le C_0h^p,\\qquad e_{n+1}\\le(1+Lh)e_n+Ch^{p+1}\\quad(0\\le n<N),$$\nthen, when $L>0$,\n$$\\max_{0\\le n\\le N}e_n\\le\\left(C_0\\exp(LT)+C\\frac{\\exp(LT)-1}{L}\\right)h^p,$$\nand, when $L=0$,\n$$\\max_{0\\le n\\le N}e_n\\le(C_0+CT)h^p.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "one-step-error-recurrence",
+          "step": "1.1",
+          "claim": "The triangle inequality splits the next error into the propagated previous error and the exact-start local defect.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A1"
+          ]
+        },
+        {
+          "id": "apply-geometric-bound",
+          "step": "2.1",
+          "claim": "The recurrence lemma gives the explicit fixed-time estimate, including the L=0 branch.",
+          "inputs": [
+            "A1",
+            "F4",
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires N≥1, so there is no empty grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero error when C=C₀=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes N=1, so one Euler or one general one-step update is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes C=0 and the L=0 case without division by L."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The maximum in the Statement includes n=0 and n=N; step 2.1 handles both."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The method and tube are given; no set-valued selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts a one-way error bound."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts a one-way error bound."
+        }
+      ]
+    },
+    "thm-continuous-flow-log-density-equation": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "A **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-c1-dependence-of-solutions-on-initial-data",
+          "source_section": "Statement",
+          "quote": "Let $F:D\\subseteq\\mathbb R\\times\\mathbb R^n\\to\\mathbb R^n$ be continuous and\n$C^1$ in the state variable. Fix data $(t_0,x_0)\\in D$ and a compact time\ninterval $I=[t_0-h,t_0+h]$ on which the corresponding solutions through nearby\ninitial states all exist. Then the solution map\n\n$$\\Phi:I\\times U_0\\to\\mathbb R^n,\\qquad \\Phi(t,y)=x(t;y),$$\n\nis $C^1$ in the initial-state variable $y$ on some neighbourhood $U_0$ of\n$x_0$. For each $y\\in U_0$, the derivative matrix\n$D_y\\Phi(t,y)$ is the solution of the variational equation along $t\\mapsto x(t;y)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-determinant-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$\nThe sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.\n\nWhen $A$ is real, $|\\det A|$ means the ordinary real absolute value of its real determinant. It is not alternate notation for the determinant itself.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$ and every real matrix $A\\in M_n(\\mathbb R)$,\n$$A\\text{ is invertible}\\quad\\Longleftrightarrow\\quad\\det(A)\\ne0.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+          "source_section": "Statement",
+          "quote": "For each fixed $n\\ge1$, the function $\\det:M_n(\\mathbb R)\\to\\mathbb R$ is evaluation of the polynomial\n$$P_n:=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}x_{\\sigma(i),i}$$\nin the $n^2$ commuting variables $x_{ri}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and every commutative ring $R$, the Leibniz determinant $\\det:M_n(R)\\to R$ is column-multilinear, alternating and normalized.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identify-pushforward-density",
+          "step": "1.1",
+          "claim": "Apply change of variables to a Borel set and the candidate density to show that it is a density of the pushforward.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F5",
+            "F9"
+          ]
+        },
+        {
+          "id": "flow-jacobian-and-sign",
+          "step": "2.1",
+          "claim": "Use C¹ dependence for the variational equation, the inverse-flow chain rule for nonvanishing, and the intermediate value theorem for positivity.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "F10",
+            "F11",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "differentiate-density",
+          "step": "3.1",
+          "claim": "Jacobi's determinant formula and cyclic trace give the divergence derivative with the negative sign.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "F11",
+            "F12",
+            "step 2.1",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty initial probability space with a positive density and a chosen x₀."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If div f=0, step 3.1 gives constant log density along each trajectory."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional case is included: step 3.1 reduces the trace to the scalar derivative."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For f=0, step 2.1 gives J=I and step 3.1 gives no log-density change."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At t=0 the Jacobian is I and the density formula returns p₀; the statement specifies one-sided endpoint derivatives."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes ACω and step 1.1 spends it only through the change-of-variables supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives a density identity and derivative formula, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives a density identity and derivative formula, not an equivalence."
+        }
+      ]
+    },
+    "thm-divergence-integral-error-with-separate-quadrature": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-global-error-from-one-step-defect-and-stability",
+          "source_section": "Statement",
+          "quote": "If constants $C,C_0,L\\ge0$, independent of $N$ and $n$, satisfy",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "split-state-and-quadrature-errors",
+          "step": "1.1",
+          "claim": "Split each scalar increment discrepancy into state sensitivity and exact-start quadrature defect.",
+          "inputs": [
+            "F1",
+            "A1"
+          ]
+        },
+        {
+          "id": "sum-grid-error",
+          "step": "2.1",
+          "claim": "Iterate the scalar error recurrence for at most N=T/h steps.",
+          "inputs": [
+            "A1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires N≥1, so there is at least one interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero scalar error when initial, state-sensitivity, and quadrature contributions vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1's n≤N sum bound includes the one-step case N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid if Kx=0 or Kq=0; the remaining quadrature or state term is retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and step 2.1 bound the maximum from n=0 through N, including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The state sequence and quadrature maps are given; no choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way error estimate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way error estimate."
+        }
+      ]
+    },
+    "cor-global-log-density-error-from-state-and-quadrature": {
+      "risk": "medium",
+      "kind": "corollary",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-continuous-flow-log-density-equation",
+          "source_section": "Statement",
+          "quote": "Then $p_t$ is a density of $\\mu_t$ on $\\mathbb R^d$, the flow Jacobian has positive determinant, and\n$$p_t(\\Phi_t(x_0))=\\frac{p_0(x_0)}{\\det D\\Phi_t(x_0)}>0,$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-divergence-integral-error-with-separate-quadrature",
+          "source_section": "Statement",
+          "quote": "If constants $K_q,D\\ge0$ and an integer $m\\ge1$ satisfy, uniformly for $n<N$ and $u,v\\in K$,\n$$|Q_h(t_n,u)-Q_h(t_n,v)|\\le hK_q\\|u-v\\|_2,\\qquad |Q_h(t_n,x(t_n))-I_n|\\le Dh^{m+1},$$\nthen\n$$\\max_{0\\le n\\le N}|\\widehat\\ell_n-\\ell_n|\\le C_{\\ell,0}h^r+TK_qK_xh^p+DT h^m.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identify-density-increment",
+          "step": "1.1",
+          "claim": "The flow identity and Volterra equation identify each exact divergence integral with the change in log density.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "transfer-scalar-bound",
+          "step": "2.1",
+          "claim": "Apply the deterministic quadrature bound to the exact log-density grid sequence.",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires N≥1 and an initial density."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 preserves the zero-error case when all displayed error contributions vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies for N=1 as well as for any finite grid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the divergence integrand is zero and quadrature is exact, the log-density error term vanishes in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and step 2.1 include n=0 and n=N; the flow identity supplies the endpoint density values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes ACω; step 1.1 uses it only through the change-of-variables supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary transfers an error estimate; it is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary transfers an error estimate; it is not an equivalence."
+        }
+      ]
+    },
+    "thm-euler-global-state-and-log-density-error": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "A curve solves the IVP if and only if it satisfies the associated Volterra integral equation. Explicitly, the equation is\n$$x(t)=x_0+\\int_{t_0}^{t}F(s,x(s))\\,ds\\qquad(t\\in I).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then\n$$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "Let $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and differentiable at every point of $(a,b)$, and let $M \\ge 0$ satisfy $\\lVert f'(t)\\rVert_2 \\le M$ for every $t \\in (a,b)$. Then $$\\lVert f(t) - f(s)\\rVert_2 \\;\\le\\; M\\,|t-s| \\qquad \\text{for all } s,t \\in [a,b],$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "$$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-global-error-from-one-step-defect-and-stability",
+          "source_section": "Statement",
+          "quote": "If constants $C,C_0,L\\ge0",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-global-log-density-error-from-state-and-quadrature",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the hypotheses of [[thm-continuous-flow-log-density-equation]]. Let $q(t,x):=-\\operatorname{div}_x f(t,x)$, and suppose a numerical state method and scalar quadrature satisfy the hypotheses of [[thm-divergence-integral-error-with-separate-quadrature]], with numerical initial value satisfying $|\\widehat\\ell_0-\\log p_0(x(0))|\\le C_{\\ell,0}h^r$. Then the numerical scalar values $\\widehat\\ell_n$ approximate the actual flow log densities and\n$$\\max_{0\\le n\\le N}\\left|\\widehat\\ell_n-\\log p_{t_n}(x(t_n))\\right|\\le C_{\\ell,0}h^r+TK_qK_xh^p+DT h^m,$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "euler-map-stability",
+          "step": "1.1",
+          "claim": "The mean-value inequality on each convex state slice gives the one-step Euler stability factor 1+L_f h.",
+          "inputs": [
+            "A1",
+            "F3"
+          ]
+        },
+        {
+          "id": "euler-state-local-defect",
+          "step": "1.2",
+          "claim": "The derivative of f along the exact state path is bounded by M_f+L_fB_f; integrate the difference to obtain C_x h².",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "state-global-error",
+          "step": "2.1",
+          "claim": "Apply the general global error theorem with the derived Euler defect and stability constants.",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "F7"
+          ]
+        },
+        {
+          "id": "density-quadrature-conditions",
+          "step": "1.3",
+          "claim": "Bound the divergence update's state sensitivity by L_q and its exact-start left-quadrature defect by D_q h².",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F4"
+          ]
+        },
+        {
+          "id": "density-global-error",
+          "step": "3.1",
+          "claim": "Apply the separate log-density error corollary with p=m=1, the state constant K_x, and the Euler quadrature constants.",
+          "inputs": [
+            "A2",
+            "F6",
+            "step 2.1",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires T>0 and N≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 and step 1.3 give zero defects when f and div f vanish; the L=0 branch in step 2.1 remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 apply for N=1; their local bounds and global sums have one interval."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The theorem explicitly includes L_f=0 in the K_x definition and a zero divergence field in step 1.3."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 bounds every grid index from t0 through tN=T; the density identity covers endpoint values by continuity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit in the Statement and step 3.1 inherits only the density branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives error bounds, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives error bounds, not an equivalence."
+        }
+      ]
+    },
+    "ex-euler-linear-flow-exact-log-density-update": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-continuous-flow-log-density-equation",
+          "source_section": "Statement",
+          "quote": "Then $p_t$ is a density of $\\mu_t$ on $\\mathbb R^d$, the flow Jacobian has positive determinant, and\n$$p_t(\\Phi_t(x_0))=\\frac{p_0(x_0)}{\\det D\\Phi_t(x_0)}>0,$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euler-global-state-and-log-density-error",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the flow-density hypotheses of [[thm-continuous-flow-log-density-equation]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-power-monotone",
+          "source_section": "Statement",
+          "quote": "for $a, b \\ge 0$ and $n \\ge 1$: $a < b \\iff a^n < b^n$ and $a \\le b \\iff a^n \\le b^n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "$$a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "$\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "\\log(x/y)=\\log x-\\log y",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "linear-flow-state",
+          "step": "1.1",
+          "claim": "Solve the linear flow and Euler recursion; the inequality e^h>1+h yields nonzero state error.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "linear-flow-density-update",
+          "step": "2.1",
+          "claim": "The exact Jacobian determinant gives log-density change −1, and N Euler divergence increments sum to −1.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "F10",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes N≥1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes f(x)=x and x₀=1; it has no zero-field parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include N=1, for which the state error is exp(1)−2 and the log update remains −1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonzero linear field and nonzero initial state."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 compare exact and numerical values at t₀=0 and t_N=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit in the Example and step 2.1 uses the density formula."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies explicit values, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies explicit values, not an equivalence."
+        }
+      ]
+    },
+    "ex-exact-state-with-inexact-log-density-quadrature": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-continuous-flow-log-density-equation",
+          "source_section": "Statement",
+          "quote": "Then $p_t$ is a density of $\\mu_t$ on $\\mathbb R^d$, the flow Jacobian has positive determinant, and\n$$p_t(\\Phi_t(x_0))=\\frac{p_0(x_0)}{\\det D\\Phi_t(x_0)}>0,$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-global-log-density-error-from-state-and-quadrature",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the hypotheses of [[thm-continuous-flow-log-density-equation]]. Let $q(t,x):=-\\operatorname{div}_x f(t,x)$, and suppose a numerical state method and scalar quadrature satisfy the hypotheses of [[thm-divergence-integral-error-with-separate-quadrature]]",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-euler-global-state-and-log-density-error",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the flow-density hypotheses of [[thm-continuous-flow-log-density-equation]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "$\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "\\log(x/y)=\\log x-\\log y",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "zero-state",
+          "step": "1.1",
+          "claim": "Solve the explicit flow and verify that both the exact and Euler states stay identically zero; check the Euler theorem's smooth-tube hypotheses.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "left-and-midpoint-quadrature",
+          "step": "2.1",
+          "claim": "Use the Jacobian for exact log density, then sum both quadrature rules and compute the h/2 error.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes N≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The exact and Euler state values are zero at every grid point by step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives h/2=1/2 for N=1 and zero midpoint error."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the zero state trajectory; the vector field itself remains nonzero for t>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include the initial and terminal grid points t₀=0 and t_N=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit in the Example and step 2.1 uses the density formula."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies explicit values, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies explicit values, not an equivalence."
+        }
+      ]
+    }
+  }
+}

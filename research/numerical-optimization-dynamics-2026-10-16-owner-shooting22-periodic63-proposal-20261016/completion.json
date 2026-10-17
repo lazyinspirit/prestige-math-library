@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "status": "exact-proposal-awaiting-root-review-no-canonical-writes",
+  "recorded_at": "2026-10-16T07:54:43.510126+00:00",
+  "source_finding": "research/numerical-optimization-dynamics-2026-10-16-scope-review/batch-22/review-0.json",
+  "cycle": 1,
+  "changes": [
+    {
+      "id": "alg-single-shooting-for-nonlinear-bvps",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/before/items/alg-single-shooting-for-nonlinear-bvps.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/proposed/items/alg-single-shooting-for-nonlinear-bvps.md",
+      "before_raw_sha256": "447e6d043f433e0e7f22f05ffe249b1da7838572149f08e839cc73508179630e",
+      "proposed_raw_sha256": "3afef847bf866b2fe316f8750587b302155682feddf07111628d85a540b2286c",
+      "scope": "Definition changes only; corrector additionally adds explicit direct deps for certified evaluator and Newton linear correction. No mathematical theorem Statement changes."
+    },
+    {
+      "id": "alg-validated-periodic-orbit-corrector",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/before/items/alg-validated-periodic-orbit-corrector.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/proposed/items/alg-validated-periodic-orbit-corrector.md",
+      "before_raw_sha256": "e97adab5873ab2db422562c1ae1f1408047f409ff9629763ed0fd2c06b66638e",
+      "proposed_raw_sha256": "0211768d7b4519934b1f3cf3ac6d54491b09cca1b0bb78c5b98fa840e261e650",
+      "scope": "Definition changes only; corrector additionally adds explicit direct deps for certified evaluator and Newton linear correction. No mathematical theorem Statement changes."
+    },
+    {
+      "id": "alg-periodic-orbit-pseudoarclength-continuation",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/before/items/alg-periodic-orbit-pseudoarclength-continuation.md",
+      "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/proposed/items/alg-periodic-orbit-pseudoarclength-continuation.md",
+      "before_raw_sha256": "2059b72bf729ad9f7f602d60fcfd2adf213f4dc2003cb1ff5d11d2738d1c8c47",
+      "proposed_raw_sha256": "8b0948df33f9c872442a0b06ca169d4e2c769c976e8d0773e2ddeffcdb4cb7f6",
+      "scope": "Definition changes only; corrector additionally adds explicit direct deps for certified evaluator and Newton linear correction. No mathematical theorem Statement changes."
+    }
+  ],
+  "mathematical_resolution": [
+    {
+      "finding": "single-shooting success/failure contradiction and boundary-domain check",
+      "resolution": "Allow evaluator failure while retaining full successful-response trajectory/C1 map/exact numerical derivative/uniform-error interface. Query and endpoint membership must succeed before B or its derivatives; otherwise return failure without residual certificate."
+    },
+    {
+      "finding": "periodic corrector interval provider is not certified pointwise shooting evaluator",
+      "resolution": "Existing evaluator-dependent single/multiple modes explicitly require their actual evaluator inputs. Add fully operational enclosure-guided candidate mode: validated singleton jet gives rational boxes, their midpoints propose a linear correction through existing correction algorithm, with no exact-derivative or convergence assertion. All candidates independently validated by available interval provider."
+    },
+    {
+      "finding": "actual Krawczyk callback composition",
+      "resolution": "Supply actual W, eta, budgets; compute F0 at each current processed box midpoint and J(Y) on that box, then full-box trajectory/monodromy and nonstationarity. Return the actual certified subbox. No arbitrary-center residual substituted for midpoint residual."
+    }
+  ],
+  "scope_preservation": "Single, multiple, collocation, section continuation, full trajectory/monodromy, strict root uniqueness and conditional orbital/Floquet claims retained. No new ideal numerical integrator assumed. Range provider remains permitted to be inconclusive.",
+  "consumer_dispositions": [
+    {
+      "id": "cor-local-newton-convergence-for-shooting-bvp-residual",
+      "status": "focused-checked",
+      "evidence": "Exact flow evaluator succeeds on the given local ball, zero trajectory error; boundary residual assumed C2 there so required endpoint pairs lie in its domain. Successful finite Newton steps and tolerance meaning unchanged. No repair.",
+      "inspected_paths": [
+        "items/cor-local-newton-convergence-for-shooting-bvp-residual.md"
+      ],
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/before/items/cor-local-newton-convergence-for-shooting-bvp-residual.md",
+      "repair_proposed": false
+    },
+    {
+      "id": "thm-shooting-residual-error-budget",
+      "status": "focused-checked",
+      "evidence": "Statement assumes evaluator success on entire compared ball and terminal-state Lipschitz boundary residual between exact/approximate endpoints; supplies the exact successful residual premise. Failure status makes no estimate. No repair.",
+      "inspected_paths": [
+        "items/thm-shooting-residual-error-budget.md"
+      ],
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/before/items/thm-shooting-residual-error-budget.md",
+      "repair_proposed": false
+    },
+    {
+      "id": "ex-unstable-single-shooting-amplifies-error",
+      "status": "focused-checked",
+      "evidence": "Exact explicit linear flow and everywhere-defined B(x0,x1)=(u0+1,u1). Successful branch unchanged; no failure or domain assumption used. No repair.",
+      "inspected_paths": [
+        "items/ex-unstable-single-shooting-amplifies-error.md"
+      ],
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/before/items/ex-unstable-single-shooting-amplifies-error.md",
+      "repair_proposed": false
+    },
+    {
+      "id": "ex-newton-shooting-fails-from-singular-start",
+      "status": "focused-checked",
+      "evidence": "Exact constant flow and everywhere polynomial B; initial residual -1 and zero Jacobian remain valid, yielding the same singular-jacobian status. No repair.",
+      "inspected_paths": [
+        "items/ex-newton-shooting-fails-from-singular-start.md"
+      ],
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/before/items/ex-newton-shooting-fails-from-singular-start.md",
+      "repair_proposed": false
+    },
+    {
+      "id": "alg-ctrl1-indirect-shooting-for-the-ode-optimality-system",
+      "status": "focused-checked",
+      "evidence": "Definition explicitly supplies certified differentiable IVP evaluator for smooth-feedback augmented optimality system; calls single shooting and returns its status. Added evaluator/domain failures propagate transparently; no success assumed or optimality claim. No repair.",
+      "inspected_paths": [
+        "items/alg-ctrl1-indirect-shooting-for-the-ode-optimality-system.md"
+      ],
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/before/items/alg-ctrl1-indirect-shooting-for-the-ode-optimality-system.md",
+      "repair_proposed": false
+    },
+    {
+      "id": "alg-periodic-orbit-pseudoarclength-continuation",
+      "status": "focused-checked",
+      "evidence": "Direct corrector caller needs new explicit callback input package; proposed local Definition sentence forwards candidate mode/evaluator prerequisites, validated jet step caps, W inverse witness, eta, and finite budgets plus certified section-row bounds. Continuation/rank/fold claims and regularity unchanged.",
+      "inspected_paths": [
+        "items/alg-periodic-orbit-pseudoarclength-continuation.md"
+      ],
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/before/items/alg-periodic-orbit-pseudoarclength-continuation.md",
+      "repair_proposed": true
+    },
+    {
+      "id": "thm-validated-periodic-orbit-certificate-soundness",
+      "status": "focused-checked",
+      "evidence": "F1/F3 and Proof1.1 require only independently sound midpoint residual/Jacobian and strict Krawczyk inclusion+contraction. Proposed corrector now supplies these at actual processed box midpoint with W witness; if subdivision output box Y is its reported Z in theorem notation. F2/Proof2.1 and F4/3.1 still use positive period/nonstationarity and successful full-box flow+variational enclosure. Candidate method irrelevant; no theorem edit.",
+      "inspected_paths": [
+        "items/thm-validated-periodic-orbit-certificate-soundness.md"
+      ],
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/before/items/thm-validated-periodic-orbit-certificate-soundness.md",
+      "repair_proposed": false
+    },
+    {
+      "id": "ex-van-der-pol-stability-conditional-on-validated-enclosure",
+      "status": "focused-checked",
+      "evidence": "Conditional successful corrector record and cluster certificates only; no numerical candidate or IVP evaluator claim. All success records preserved and stronger operational callbacks supplied. No repair.",
+      "inspected_paths": [
+        "items/ex-van-der-pol-stability-conditional-on-validated-enclosure.md"
+      ],
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/before/items/ex-van-der-pol-stability-conditional-on-validated-enclosure.md",
+      "repair_proposed": false
+    },
+    {
+      "id": "thm-orbital-stability-from-certified-floquet-multipliers",
+      "status": "focused-checked",
+      "evidence": "Current F1/F7 and Proof4.1 use only certified exact periodic orbit and nonsingular-preconditioner q<1 Jacobian record. New corrector supplies witness and actual uniform callback enclosures, preserving output contract; candidate-generation change irrelevant. Current F5/Proof5.1 C1 repair from its owner retained byte-for-byte. No repair.",
+      "inspected_paths": [
+        "items/thm-orbital-stability-from-certified-floquet-multipliers.md"
+      ],
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/before/items/thm-orbital-stability-from-certified-floquet-multipliers.md",
+      "repair_proposed": false
+    },
+    {
+      "id": "ex-near-unit-floquet-multiplier-is-inconclusive",
+      "status": "focused-checked",
+      "evidence": "Indirect via orbital theorem; only conditional jet and cluster data and strict unit-circle margin matter. Candidate interfaces never used. No repair.",
+      "inspected_paths": [
+        "items/ex-near-unit-floquet-multiplier-is-inconclusive.md"
+      ],
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-owner-shooting22-periodic63-proposal-20261016/before/items/ex-near-unit-floquet-multiplier-is-inconclusive.md",
+      "repair_proposed": false
+    }
+  ],
+  "other_checked_interfaces": [
+    "items/alg-multiple-shooting-for-nonlinear-bvps.md",
+    "items/def-certified-ivp-approximation-and-sensitivity-interface.md",
+    "items/def-validated-periodic-shooting-jet-enclosure.md",
+    "items/def-verified-flow-variational-range-oracle.md",
+    "items/alg-validated-euler-flow-and-monodromy-enclosure.md",
+    "items/alg-krawczyk-root-certification.md",
+    "items/alg-newton-correction-for-vector-residuals.md",
+    "items/def-phase-bordered-multiple-shooting-and-midpoint-collocation.md",
+    "items/alg-midpoint-collocation-for-nonlinear-bvps.md"
+  ],
+  "page_dispositions": [
+    {
+      "path": "library/numerical-differential-equations-and-stochastic-dynamics/nonlinear-boundary-value-solvers.md",
+      "status": "summary remains accurate: certified finite-budget shooting, local Newton, separate error terms"
+    },
+    {
+      "path": "library/numerical-differential-equations-and-stochastic-dynamics/periodic-orbit-shooting-collocation-and-floquet-error.md",
+      "status": "summary remains accurate: finite candidates plus actual range-oracle validation, separate contraction/nonstationarity/monodromy"
+    }
+  ],
+  "checks": "No gates, controls, readiness/level/hash recertification, tests or canonical source writes. Full before source preimages archived; proposed carriers and exact unified diff supplied. Same reviewer owns subsequent affected-consumer closure.",
+  "root_bookkeeping": "If approved, root mirrors 3 modified Definition quotes and 2 added corrector deps, contract citation/procedure evidence, manifest inventory and native review/gates. No new item required.",
+  "remaining_gaps": []
+}

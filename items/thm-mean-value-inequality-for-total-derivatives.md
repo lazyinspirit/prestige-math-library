@@ -14,8 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  precheck: pass
-  audited: 2026-08-02
+  repair: research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-zero-domain/thm-mean-value-inequality-for-total-derivatives/application/repair.json
 sources:
   scraped: []
   references:
@@ -46,7 +45,7 @@ $$\|f(y)-f(x)\|_2\le M\|y-x\|_2\qquad(x,y\in U).$$
 
 **Proof technique:** direct.
 
-1.1 If $x=y$ the conclusion is immediate. Otherwise put $\gamma(t)=x+t(y-x)$ for $0\le t\le1$; [L1] keeps $\gamma([0,1])$ in $U$. [L1, L2, L3]
+1.1 If $n=0$, both function values are the unique zero vector, so the left-hand side is $0$ and the right-hand side is nonnegative. If $x=y$ the conclusion is also immediate. For the remaining case $n\ge1$ and $x\ne y$, the source dimension is necessarily positive; put $\gamma(t)=x+t(y-x)$ for $0\le t\le1$; [L1] keeps $\gamma([0,1])$ in $U$. [L1, L2, L3]
 
 2.1 The chain rule gives $(f\circ\gamma)'(t)=Df(\gamma(t))(y-x)$ for $0<t<1$, whose norm is at most $M\|y-x\|_2$ by hypothesis. [step 1.1, L2, algebra]
 

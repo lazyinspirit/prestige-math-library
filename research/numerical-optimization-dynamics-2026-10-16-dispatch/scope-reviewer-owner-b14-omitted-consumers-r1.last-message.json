@@ -1,0 +1,581 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "14",
+  "round": 1,
+  "reviewed_items": [
+    "def-complete-ordered-real-field",
+    "def-continuity-and-derivative-on-real-interval",
+    "def-dyadic-floating-point-format-and-directed-rounding",
+    "lem-archimedean-property-from-completeness",
+    "lem-closed-interval-compactness-from-completeness",
+    "lem-nonnegative-square-root-exists-and-unique",
+    "alg-dyadic-square-root-bisection",
+    "def-intervals-rectangles-and-complex-balls",
+    "lem-directed-dyadic-rounding-enclosure-and-error",
+    "def-outward-rounded-interval-and-ball-operations",
+    "lem-real-and-complex-modulus-rules",
+    "thm-dyadic-square-root-bisection-encloses",
+    "def-centered-taylor-model-with-derivative-interval",
+    "lem-absolutely-convergent-series-cauchy-product",
+    "lem-derivative-algebra-and-chain-rules",
+    "lem-elementary-power-series-converge-uniformly-on-bounded-sets",
+    "lem-extreme-value-theorem-from-compactness",
+    "lem-power-series-termwise-differentiation",
+    "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+    "lem-continuous-functions-riemann-integrable",
+    "lem-rolle-theorem-from-extreme-values",
+    "def-real-elementary-functions-and-domains",
+    "lem-mean-value-theorem-on-closed-interval",
+    "lem-riemann-integral-linearity",
+    "lem-fundamental-theorem-and-integration-by-parts",
+    "lem-range-reduced-exp-log-and-arctan-series-enclosures",
+    "lem-taylor-lagrange-remainder-from-mean-value",
+    "lem-taylor-integral-remainder",
+    "lem-trigonometric-identities-machin-and-range-reduction",
+    "alg-certified-elementary-range-evaluation",
+    "thm-centered-taylor-model-encloses-function-range",
+    "alg-budgeted-validated-range-evaluation",
+    "thm-real-elementary-range-enclosures",
+    "thm-complex-elementary-range-enclosures",
+    "thm-budgeted-range-evaluation-terminates-and-is-sound",
+    "ex-division-by-interval-containing-zero",
+    "ex-interval-subtraction-dependency",
+    "ex-certified-sine-near-a-multiple-of-pi"
+  ],
+  "reviewed_pages": [
+    "outward-rounded-interval-and-ball-arithmetic",
+    "outward-rounded-interval-and-ball-arithmetic-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Read-only owner continuation owner-b14-omitted-consumers-r1 completed inspection of the current assigned batch and all 97 actual cone items. Consumer decisions concern their actual affected uses. The original positivity, root-order, calculus and exponential-product repairs are present, but four concrete obligations remain below. The 32 false-positive items are not accepted by their exclusion. No sources, reports, metadata, native results, history or counters were changed. This external owner receipt neither creates a native review round nor replaces the genuine successful repair-1 record. The proposed repairs require root authorization.",
+  "findings": [
+    {
+      "id": "alg-budgeted-validated-range-evaluation",
+      "type": "prerequisite",
+      "reason": "Definition, split branch at items/alg-budgeted-validated-range-evaluation.md:45, can violate the evaluator's input prerequisite at items/alg-certified-elementary-range-evaluation.md:32: supplied input endpoints must use the selected format. For p=2, e_min=0, e_max=4, the identity DAG on [1,3/2], epsilon=1/8 and B=1 first returns width 1/2, then splits at 5/4, which is not representable in that format. The next evaluator call is outside its defined interface. Smallest proposed repair: before enqueuing children, test midpoint representability and return inconclusive with the unresolved parent when it fails; explicitly inherit the evaluator's initial input conditions. Then amend thm-budgeted-range-evaluation-terminates-and-is-sound proof 1.1 to cover this finite stop and establish admissibility of every subcall. This preserves certified-range and width claims. Recheck Box–Muller log/root calls after the supplier repair; its failure propagation needs no conceptual change. The B=0 sine example does not encounter this branch."
+    },
+    {
+      "id": "thm-complex-elementary-range-enclosures",
+      "type": "prerequisite",
+      "reason": "Proof 1.3 at items/thm-complex-elementary-range-enclosures.md:101 assumes that a coarse quadrant sector contains the narrower computed argument interval. Bounds on exact arguments do not establish that inclusion. With N=1 and a sufficiently wide finite format, compare Log on [1,256]+i{1024} with Log on [0,256]+i{1024}. The smaller rectangle uses atan([4,1024])=P_N/2-atan([1/1024,1/4]). Termwise evaluation of the displayed series gives the inner arctangent lower endpoint at most 1/1024-1/192-1/4800<0, so the resulting argument upper endpoint exceeds p_+/2. The larger rectangle uses the coarse quadrant-I interval [0,p_+/2], together with its axis piece, and therefore does not contain that smaller computed interval. Both rectangles avoid the cut and origin. Smallest proposed repair: in alg-certified-elementary-range-evaluation step 5, intersect every ratio-based argument enclosure with its fixed certified quadrant sector before conversion and hull formation. Then prove that fixed-sector intersection preserves inclusion within a ratio branch and makes every transition to a coarse branch contain the smaller result. Recheck the evaluator's justified_by use and the budgeted theorem's finite complex-range use. No external consumer inspected relies on complex-log nestedness."
+    },
+    {
+      "id": "ex-certified-sine-near-a-multiple-of-pi",
+      "type": "local",
+      "reason": "Verification 1.2 at items/ex-certified-sine-near-a-multiple-of-pi.md:83 does not use the evaluator's actual cell formula. For W=p_+-p_-, C_5=5P/2+[-1/4,1/4]P begins at 9p_-/4-W/4, rather than 9p_-/4. Replace that endpoint and use p_->9W to exclude the right neighbor; this follows immediately from p_->2 and W<10^-18. The left-neighbor endpoint 7p_+/4 and its p_->7W test remain valid. The residual, final width estimate and B=0 certification survive this local proof correction."
+    },
+    {
+      "id": "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+      "type": "local",
+      "reason": "Verification 1.2 at items/ex-multimodal-polynomial-spatial-bnb-gap-certificate.md:39 says interval multiplication on [-1,1] gives x^2 in [0,1]. Its cited alg-interval-dag-box-enclosure-and-bound supports +,-,multiplication,division; natural multiplication gives [-1,1]*[-1,1]=[-1,1]. Smallest proposed repair, without widening the supplier: specify u=x*x, v=u*u, f=v-u; at the root its natural enclosure is [-2,2] and the initial gap is 2. On each sign-separated child, u and v lie in [0,1], so the stated lower bound -1 and final gap 13/16 remain valid. This outside-batch example needs owner-authorized proof repair only; its promised one-split certificate is preserved."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-bounded-mixed-integer-branch-and-bound",
+      "decision": "accept",
+      "reason": "Requires verified factorable relaxations and dual bounds; unavailable bounds never justify pruning. Integer-hull and child-cover uses do not depend on square-root storage or elementary nestedness."
+    },
+    {
+      "id": "alg-box-muller-finite-bit-transform",
+      "decision": "escalate",
+      "reason": "Steps 2–3 use single-output log/root DAGs and propagate failed certification correctly, but positive split budgets can reach the wrapper's inadmissible midpoint subcall. Repair the wrapper first; retain this consumer's certified-only error claims and failure propagation."
+    },
+    {
+      "id": "alg-budgeted-validated-range-evaluation",
+      "decision": "escalate",
+      "reason": "Selects one output, uses FIFO order and rejects non-finite results correctly. Its split branch nevertheless passes potentially unrepresentable endpoints to the fixed-format evaluator; apply the midpoint prerequisite repair."
+    },
+    {
+      "id": "alg-certified-adaptive-simpson",
+      "decision": "accept",
+      "reason": "Uses outward real arithmetic and explicit value/derivative enclosure contracts. It already rejects unrepresentable midpoints and non-finite operations; it does not call the changed budgeted wrapper."
+    },
+    {
+      "id": "alg-certified-constraint-emptiness-search",
+      "decision": "accept",
+      "reason": "Uses arithmetic-DAG lower-bound consistency with increasing precision and no-overflow hypotheses. Unavailable bounds return inconclusive; no fixed-parameter elementary nestedness transfer occurs."
+    },
+    {
+      "id": "alg-certified-elementary-range-evaluation",
+      "decision": "escalate",
+      "reason": "Arithmetic nodes correctly consume caller-rounded square-root bounds, and typed outputs, traversal and piece failures are specified. Its complex nestedness justification remains defective until ratio-based arguments are clipped to their certified sectors."
+    },
+    {
+      "id": "alg-complex-resolvent-cover-validator",
+      "decision": "accept",
+      "reason": "Uses rectangle arithmetic and outward modulus/norm upper bounds, with failure on non-finite calculations. It invokes neither principal Log nor elementary nestedness."
+    },
+    {
+      "id": "alg-event-driven-frictionless-sphere-contact-with-certified-events",
+      "decision": "accept",
+      "reason": "Consumes the transverse-event estimate only with supplied reference-error, guard, ordering and reset certificates. Its Remarks explicitly limit the rational residual checker to a sufficient provider branch."
+    },
+    {
+      "id": "alg-factorable-mccormick-box-relaxation",
+      "decision": "accept",
+      "reason": "Uses certified operand ranges from the arithmetic oracle and requires supplied verified graph enclosures for other nonlinear nodes. Unsupported or unverified bounds make the relaxation unavailable."
+    },
+    {
+      "id": "alg-floquet-multiplier-cluster-certifier",
+      "decision": "accept",
+      "reason": "Forwards the required disk-cover inputs to the resolvent validator and rejects failed bounds. Its rational square-root bounds and pi series are separately specified; no changed elementary evaluator call is made."
+    },
+    {
+      "id": "alg-golub-welsch-certified-node-and-weight-enclosures",
+      "decision": "accept",
+      "reason": "Square roots use outward operations with domain/failure checks. Uniform solves and the near-orthonormal certifier must succeed before node/weight certificates are returned; no omitted format argument is passed to exact bisection."
+    },
+    {
+      "id": "alg-interval-dag-box-enclosure-and-bound",
+      "decision": "accept",
+      "reason": "Its topological evaluator supports arithmetic nodes only, encloses constants and propagates every listed non-finite status. It requires neither elementary nestedness nor square-root procedure arguments."
+    },
+    {
+      "id": "alg-interval-determinant-sign-certifier",
+      "decision": "accept",
+      "reason": "Evaluates every Leibniz term with outward arithmetic and rejects non-finite operations before determinant sign or zero tests."
+    },
+    {
+      "id": "alg-interval-hermitian-ldl-inertia-certifier",
+      "decision": "accept",
+      "reason": "Uses finite outward determinants, traces, inverses and Schur updates; unresolved signs or denominators return pivot-inconclusive. No elementary evaluator interface is assumed."
+    },
+    {
+      "id": "alg-interval-linear-krawczyk-certifier",
+      "decision": "accept",
+      "reason": "Requires the exact inverse witness, finite outward Krawczyk inclusion and a separate defect bound for uniqueness. Modulus bounds remain caller-rounded outward quantities."
+    },
+    {
+      "id": "alg-krawczyk-root-certification",
+      "decision": "accept",
+      "reason": "Uses admissible residual/Jacobian callbacks and outward arithmetic; failed evaluations leave boxes unresolved. This generic callback interface does not invoke the changed elementary wrapper."
+    },
+    {
+      "id": "alg-lipschitz-midpoint-box-lower-bound",
+      "decision": "accept",
+      "reason": "Consumes the arithmetic oracle's singleton enclosure and computes q_- minus an upward radius allowance downward. Non-finite arithmetic returns inconclusive."
+    },
+    {
+      "id": "alg-na-certified-unit-circle-phase",
+      "decision": "accept",
+      "reason": "Calls the multi-output elementary evaluator directly for supported real sine/cosine nodes, with the current precision and fixed J. It does not call the single-output budgeted wrapper or infer nestedness across precision changes."
+    },
+    {
+      "id": "alg-na-computed-clenshaw-curtis-via-fast-dft",
+      "decision": "accept",
+      "reason": "Forwards all phase/FFT controls to the length-2n DFT, propagates statuses and declares exact postprocessing without an end-to-end floating-point accuracy claim."
+    },
+    {
+      "id": "alg-na-computed-fast-transforms-and-convolution",
+      "decision": "accept",
+      "reason": "Mixed-radix and Bluestein phase calls supply rational q and all finite controls; failed phase, transform and arithmetic calls propagate. It makes no general mixed-radix stability claim."
+    },
+    {
+      "id": "alg-na-computed-fft-cyclic-and-linear-convolution",
+      "decision": "accept",
+      "reason": "Forward/inverse FFT calls retain their controls and certificates; output is returned only after all phase and arithmetic operations succeed."
+    },
+    {
+      "id": "alg-na-computed-unitary-radix-two-fft",
+      "decision": "accept",
+      "reason": "Twiddle calls use the phase routine's exact argument tuple and propagate failure. Its operationwise rounded sqrt(1/2) is a separate arithmetic-model primitive, not the exact dyadic bisection procedure."
+    },
+    {
+      "id": "alg-near-orthonormal-hermitian-eigenvalue-certifier",
+      "decision": "accept",
+      "reason": "Frobenius and square-root bounds are outward; domain, comparison and range failures return inconclusive. Certification requires all residual and orthogonality inequalities."
+    },
+    {
+      "id": "alg-ordered-hermitian-eigenvalue-bisection",
+      "decision": "accept",
+      "reason": "The initial Frobenius bound uses outward square roots; successful inertia counts update brackets, while failed queries leave them unchanged."
+    },
+    {
+      "id": "alg-pade-scaling-and-squaring-exponential",
+      "decision": "accept",
+      "reason": "Consumes only the resolvent validator's covered-segment norm bound and preserves separate caller topology prerequisites. Scalar exponential bounds use its own finite series controller."
+    },
+    {
+      "id": "alg-periodic-orbit-pseudoarclength-continuation",
+      "decision": "accept",
+      "reason": "Forwards the corrector's validation box, inverse witness, callbacks and finite caps. It expressly requires finite-returning callbacks and does not turn interval enclosures into differentiable point evaluators."
+    },
+    {
+      "id": "alg-point-verified-linear-system-certifier",
+      "decision": "accept",
+      "reason": "Combines operationwise residual allowances with outward norm and square-root bounds, rejecting non-finite bounds before its q<1 certificate."
+    },
+    {
+      "id": "alg-safeguarded-hybrid-event-location-and-restart",
+      "decision": "accept",
+      "reason": "Consumes complete smooth-root isolation and certified reference-error data; unresolved boxes, ambiguous order and failed checks prevent successful event or absence claims."
+    },
+    {
+      "id": "alg-scalar-interval-newton-certification",
+      "decision": "accept",
+      "reason": "Calls valid range/derivative evaluators and uses outward division only when the derivative interval excludes zero. Failures return inconclusive."
+    },
+    {
+      "id": "alg-smooth-function-root-isolation",
+      "decision": "accept",
+      "reason": "Calls scalar Newton with update budget one, retains uncertified boxes through subdivision or unresolved output, and never consumes elementary nestedness."
+    },
+    {
+      "id": "alg-uniform-interval-linear-residual-certifier",
+      "decision": "accept",
+      "reason": "Its modulus computations explicitly use outward sqrt(X^2+Y^2); every non-finite modulus, norm or division fails certification."
+    },
+    {
+      "id": "alg-validated-periodic-orbit-corrector",
+      "decision": "accept",
+      "reason": "Independent Krawczyk validation receives the current-box midpoint residual and full-box Jacobian from validated jets, plus an exact inverse witness. Failed callbacks leave boxes unresolved."
+    },
+    {
+      "id": "alg-validated-residual-tube-certificate-checker",
+      "decision": "accept",
+      "reason": "Converts rational data outward and evaluates only rational real-operation DAGs. It rejects non-finite operations and explicitly performs no transcendental or automatic subdivision call."
+    },
+    {
+      "id": "cex-grazing-event-time-error-is-not-linearly-bounded",
+      "decision": "accept",
+      "reason": "Uses the transverse lemma to identify the missing positive derivative margin; its explicit square-root counterexample is an exact mathematical construction."
+    },
+    {
+      "id": "def-centered-taylor-model-with-derivative-interval",
+      "decision": "accept",
+      "reason": "Requires independently supplied coefficient and derivative enclosures and evaluates the polynomial/remainder outward. It does not infer derivative certificates from elementary calls."
+    },
+    {
+      "id": "def-certified-hybrid-event-enclosure",
+      "decision": "accept",
+      "reason": "Requires an actual certified residual-tube record and separately justified reference-error ledger. It does not equate local checker success with the total hybrid error bound."
+    },
+    {
+      "id": "def-factorable-box-convex-relaxation-interface",
+      "decision": "accept",
+      "reason": "Requires outward operand/coefficient enclosures and verified nonlinear graph bounds; non-finite or unverified data make a relaxation unavailable."
+    },
+    {
+      "id": "def-outward-rounded-interval-and-ball-operations",
+      "decision": "accept",
+      "reason": "Calls exact bisection on dyadic endpoints with n=p and performs outward storage conversion in this caller, matching the repaired format-free bisection interface."
+    },
+    {
+      "id": "def-validated-periodic-shooting-jet-enclosure",
+      "decision": "accept",
+      "reason": "Uses real interval enclosure soundness and explicitly requires a successful validated flow/variational provider. The period column divides by the strictly positive period interval."
+    },
+    {
+      "id": "def-validated-residual-tube-certificate",
+      "decision": "accept",
+      "reason": "Restricts its field to rational arithmetic DAGs and requires outward conversion, denominator exclusion and finite strict-margin checks. No elementary extension is imported."
+    },
+    {
+      "id": "ex-bouncing-ball-transverse-event-error-and-reset",
+      "decision": "accept",
+      "reason": "Checks the exact incoming state error, derivative margin and reset/field bounds before applying the transverse estimate; it expressly disclaims a residual-certified reconstruction."
+    },
+    {
+      "id": "ex-bounded-engineering-design-mixed-integer-gap-certificate",
+      "decision": "accept",
+      "reason": "Supplies exact square-completion lower bounds and attaining witnesses for every integer assignment. Its complete enumeration uses the mixed ledger theorem without an interval-evaluator success assumption."
+    },
+    {
+      "id": "ex-certified-sine-near-a-multiple-of-pi",
+      "decision": "escalate",
+      "reason": "Single sine output, fixed parameters and B=0 fit the current interfaces, but Verification 1.2 misstates the right neighboring C_5 endpoint. Correct it to 9p_-/4-W/4 and use p_->9W; the final certificate remains supported."
+    },
+    {
+      "id": "ex-division-by-interval-containing-zero",
+      "decision": "accept",
+      "reason": "Its explicit unbounded quotient construction matches the outward division rule's refusal to return a finite enclosure across zero."
+    },
+    {
+      "id": "ex-event-root-with-derivative-separated-from-zero",
+      "decision": "accept",
+      "reason": "The exact dyadic Newton quotient gives [11/8,23/16] strictly inside [1,2]; the one-box scalar/isolation call uses valid derivative and range enclosures."
+    },
+    {
+      "id": "ex-hermitian-eigenvalue-bisection-by-verified-inertia",
+      "decision": "accept",
+      "reason": "The supplied M=3 bounds sqrt(5); all eight listed shifts have nonzero diagonal pivots and produce the stated width-3/8 brackets."
+    },
+    {
+      "id": "ex-interval-subtraction-dependency",
+      "decision": "accept",
+      "reason": "Uses the actual subtraction endpoint formula to obtain [-1,1], while the shared exact input gives range {0}; the repaired suppliers preserve this distinction."
+    },
+    {
+      "id": "ex-multimodal-polynomial-spatial-bnb-gap-certificate",
+      "decision": "escalate",
+      "reason": "Its root calculation substitutes a square enclosure for multiplication in the arithmetic-only oracle. Specify the repeated-multiplication DAG and change the root enclosure/gap to [-2,2] and 2; child lower bounds and the one-split 13/16 certificate survive."
+    },
+    {
+      "id": "ex-near-unit-floquet-multiplier-is-inconclusive",
+      "decision": "accept",
+      "reason": "Uses the count-versus-location distinction correctly: the interval admits multipliers on either side of modulus one and supplies no strict stability separation."
+    },
+    {
+      "id": "ex-two-events-between-endpoints-defeat-sign-screening",
+      "decision": "accept",
+      "reason": "The exact two roots have opposite crossing directions; complete isolation and direction classification identify the enabled root despite equal endpoint signs."
+    },
+    {
+      "id": "ex-validated-mass-action-equilibrium-root",
+      "decision": "accept",
+      "reason": "Its derivative enclosure excludes zero and its exact midpoint residual is zero, yielding a singleton Newton image strictly inside the original box."
+    },
+    {
+      "id": "ex-van-der-pol-stability-conditional-on-validated-enclosure",
+      "decision": "accept",
+      "reason": "Makes only a conditional implication from a successful orbit certificate and complete strictly separated cluster certificates; it claims no fabricated computation."
+    },
+    {
+      "id": "lem-na-computed-unitary-butterfly-error-bound",
+      "decision": "accept",
+      "reason": "Consumes only the certified phase error epsilon and unit target modulus, with successful normal-range operationwise primitives. No cross-precision enclosure nestedness is used."
+    },
+    {
+      "id": "lem-naive-all-pairs-collision-search-has-quadratic-work",
+      "decision": "accept",
+      "reason": "Uses the sphere algorithm's explicit pair-enumeration loop and excludes event-solving and certification work from the count."
+    },
+    {
+      "id": "lem-rational-expression-derivative-recursion-correct",
+      "decision": "accept",
+      "reason": "Consumes the residual-certificate definition's rational node inventory; its derivative and local-Lipschitz argument is restricted to nonzero denominators."
+    },
+    {
+      "id": "lem-real-interval-arithmetic-preserves-enclosure",
+      "decision": "accept",
+      "reason": "Proves enclosure for the actual outward arithmetic endpoint rules and topological evaluation, including squaring as a distinct operation. It does not transfer elementary nestedness."
+    },
+    {
+      "id": "lem-separated-simple-floquet-multiplier-perturbation-bound",
+      "decision": "accept",
+      "reason": "The shooting-jet reference supplies only the interpretation of an enclosed monodromy matrix. Its perturbation proof separately assumes the complementary resolvent and separation bounds."
+    },
+    {
+      "id": "lem-transverse-hybrid-event-time-error",
+      "decision": "accept",
+      "reason": "Explicitly assumes the total dense/reference state bound and a uniform signed derivative margin before using MVT; it does not infer those premises from checker output alone."
+    },
+    {
+      "id": "thm-bounded-mixed-integer-finite-budget-terminates",
+      "decision": "accept",
+      "reason": "Uses finite-returning oracles and the finite shared node budget, with separately budgeted finite enumeration. The changed elementary wrapper is not its oracle implementation."
+    },
+    {
+      "id": "thm-bounded-mixed-integer-gap-certificate-sound",
+      "decision": "accept",
+      "reason": "Uses the mixed algorithm's covering children and complete terminal lower-bound ledger. Its gap proof requires valid bounds and never treats unavailable relaxations as certificates."
+    },
+    {
+      "id": "thm-box-muller-finite-bit-coupling-error",
+      "decision": "accept",
+      "reason": "Its affected use is conditional on certified success for every midpoint pair and uniform returned log/root/phase bounds. The coupling proof uses those certificates, not unconditional wrapper success or nestedness; retain that conditional claim while repairing the supplier's split branch."
+    },
+    {
+      "id": "thm-budgeted-range-evaluation-terminates-and-is-sound",
+      "decision": "escalate",
+      "reason": "Finite successful leaf-range and final-width reasoning remains applicable, without complex nestedness. Proof 1.1 nevertheless assumes every queued evaluator call is admissible, which fails at an unrepresentable midpoint; repair the procedure before completing the total termination argument."
+    },
+    {
+      "id": "thm-centered-taylor-model-encloses-function-range",
+      "decision": "accept",
+      "reason": "Uses supplied coefficient/derivative inclusions, the integral Taylor remainder and finite outward polynomial operations; no changed elementary caller conditions are omitted."
+    },
+    {
+      "id": "thm-certified-adaptive-simpson-enclosure",
+      "decision": "accept",
+      "reason": "Its panel enclosure proof uses finite outward arithmetic plus the separate Peano remainder. The defining algorithm's representability and failure checks preserve the recursive argument."
+    },
+    {
+      "id": "thm-complex-elementary-range-enclosures",
+      "decision": "escalate",
+      "reason": "Finite exp/Log containment uses valid real and rectangle enclosures. The nestedness transition in Proof 1.3 is unsupported and fails for unclipped interval-series argument enclosures; repair step 5 and its sector-containment proof."
+    },
+    {
+      "id": "thm-complex-resolvent-cover-validator-soundness",
+      "decision": "accept",
+      "reason": "Consumes finite outward disk norm bounds and endpoint coverage, then applies the resolvent certificate. It preserves the explicit absence of an eigenvalue-count claim."
+    },
+    {
+      "id": "thm-dyadic-square-root-bisection-encloses",
+      "decision": "accept",
+      "reason": "Its invariant proves enclosure and exact grid width for the format-free pair; Proof 1.3 separately justifies caller storage rounding and 1.4 handles exponent-boundary monotonicity."
+    },
+    {
+      "id": "thm-factorable-dual-certificate-is-valid-box-lower-bound",
+      "decision": "accept",
+      "reason": "Uses actual certified operand enclosures and verified graph relations to embed feasible points, then weak duality. Unsupported nonlinear nodes cannot supply its premises."
+    },
+    {
+      "id": "thm-finite-hybrid-trajectory-error-under-separated-events",
+      "decision": "accept",
+      "reason": "Uses certified local residual error separately from accumulated reset-state error and applies the transverse bound only on matched brackets. Its recurrence does not assume elementary evaluator nestedness."
+    },
+    {
+      "id": "thm-floquet-multiplier-cluster-certificate-soundness",
+      "decision": "accept",
+      "reason": "Uses the validator's uniform resolvent bound on covered polygon edges; the midpoint and perturbation allowances then enclose the argument-principle integral before the integer test."
+    },
+    {
+      "id": "thm-golub-welsch-certified-enclosures-are-sound",
+      "decision": "accept",
+      "reason": "Uses successful uniform coefficient solves and outward Jacobi construction, then certified node and residual-gap bounds. Square-root lower/upper endpoint directions are used consistently."
+    },
+    {
+      "id": "thm-interval-determinant-sign-certifier-soundness",
+      "decision": "accept",
+      "reason": "Uses containment of every finite Leibniz evaluation before zero-exclusion or exact-zero tests; inconclusive output supplies no singularity claim."
+    },
+    {
+      "id": "thm-interval-hermitian-ldl-inertia-certifier-soundness",
+      "decision": "accept",
+      "reason": "Its induction uses finite outward inverse/Schur updates and verified pivot signs before inertia additivity. Failed pivots do not establish singularity."
+    },
+    {
+      "id": "thm-interval-linear-krawczyk-certifier-soundness",
+      "decision": "accept",
+      "reason": "The exact inverse witness and computed-box inclusion establish the set-inclusion premise; uniqueness additionally uses the returned uniform defect bound below one."
+    },
+    {
+      "id": "thm-interval-lipschitz-bound-sound-consistent",
+      "decision": "accept",
+      "reason": "Uses arithmetic endpoint continuity away from zero denominators and vanishing directed-rounding error as precision increases. It does not apply fixed-format elementary nestedness across changing parameters."
+    },
+    {
+      "id": "thm-krawczyk-inclusion-exclusion-and-uniqueness",
+      "decision": "accept",
+      "reason": "Consumes actual finite real-operation enclosures for the Krawczyk image and separately checked contraction bound. Its queue proof preserves unresolved boxes after failed evaluations."
+    },
+    {
+      "id": "thm-na-arbitrary-length-fft-correctness-and-cost",
+      "decision": "accept",
+      "reason": "Explicitly replaces phase outputs by exact targets in a formal model and excludes phase/interval work from its operation count. It does not claim exactness or guaranteed success of the computed evaluator."
+    },
+    {
+      "id": "thm-na-bluestein-chirp-phase-error-separate-from-fft-error",
+      "decision": "accept",
+      "reason": "Uses only successful chirp certificates and a separately assumed convolution error bound. Its modulation/demodulation estimates preserve those hypotheses."
+    },
+    {
+      "id": "thm-na-certified-unit-circle-phase-enclosure",
+      "decision": "accept",
+      "reason": "F1 uses finite sine/cosine containment and the canonical-pi bridge; the proof bounds corner error by the sum of coordinate widths. It uses neither wrapper multi-output calls nor changing-precision nestedness."
+    },
+    {
+      "id": "thm-na-computed-fft-convolution-error-bound",
+      "decision": "accept",
+      "reason": "Uses successful forward/inverse FFT error bounds and certified twiddle errors, then separates product and final scaling errors. Phase evaluation work or success is not inferred unconditionally."
+    },
+    {
+      "id": "thm-na-computed-unitary-radix-two-fft-error-bound",
+      "decision": "accept",
+      "reason": "Its recursive error estimate consumes the butterfly's certified twiddle error premise and unitary norm preservation; no interval nestedness assumption enters."
+    },
+    {
+      "id": "thm-near-orthonormal-hermitian-eigenvalue-certifier-soundness",
+      "decision": "accept",
+      "reason": "Uses finite outward Gram, residual and square-root bounds to establish the separate residual-certificate hypotheses before enclosing ordered eigenvalues."
+    },
+    {
+      "id": "thm-orbital-stability-from-certified-floquet-multipliers",
+      "decision": "accept",
+      "reason": "Consumes the corrector's actual inverse/contraction record and complete cluster counts with strict disk separation. These uses do not depend on complex elementary Log or its nestedness."
+    },
+    {
+      "id": "thm-ordered-hermitian-eigenvalue-bisection-soundness",
+      "decision": "accept",
+      "reason": "Uses the outward initial norm bound and successful uniform inertia counts; blocked or exhausted queries preserve existing brackets."
+    },
+    {
+      "id": "thm-outward-rounded-operations-are-isotone-and-dag-sound",
+      "decision": "accept",
+      "reason": "Consumes exact-root endpoint monotonicity followed by caller rounding. Ball coordinate lower bounds are proved from nonnegative roots, and the finite DAG induction retains non-finite failure conditions."
+    },
+    {
+      "id": "thm-pade-scaling-and-squaring-error-bound",
+      "decision": "accept",
+      "reason": "Uses only the successful covered-contour resolvent bound from the affected validator chain. Exact solve, contour topology, scalar tails and squaring defects remain explicit separate premises."
+    },
+    {
+      "id": "thm-periodic-shooting-residual-to-orbit-error-budget",
+      "decision": "accept",
+      "reason": "Consumes the jet's actual residual inclusion, with independently stated inverse, neighborhood and Jacobian-Lipschitz bounds. It does not infer orbit error from a numerical residual alone."
+    },
+    {
+      "id": "thm-point-verified-linear-system-certifier-soundness",
+      "decision": "accept",
+      "reason": "Uses outward norm allowances to establish actual defect/residual bounds before applying the residual enclosure theorem; no elementary nestedness is needed."
+    },
+    {
+      "id": "thm-real-elementary-range-enclosures",
+      "decision": "accept",
+      "reason": "The exponential scaling proof explicitly uses repeated Cauchy products and the multinomial coefficients. Its real nestedness claim fixes DAG/output, constants, format and N; external phase callers consume containment only."
+    },
+    {
+      "id": "thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted",
+      "decision": "accept",
+      "reason": "Uses complete root-isolation results, valid exact-guard enclosures and propagated reference error before event selection and timing. It retains non-success on incomplete certificates."
+    },
+    {
+      "id": "thm-scalar-interval-newton-exclusion-and-inclusion",
+      "decision": "accept",
+      "reason": "Uses finite outward division with derivative interval excluding zero, MVT root preservation and endpoint signs for strict inclusion. No unsupported elementary call is substituted."
+    },
+    {
+      "id": "thm-smooth-function-root-isolation-soundness",
+      "decision": "accept",
+      "reason": "Consumes scalar Newton certificates and covering bisections; remaining queue entries become unresolved at budget exhaustion, preserving root coverage."
+    },
+    {
+      "id": "thm-uniform-constraint-margin-enables-empty-box-detection",
+      "decision": "accept",
+      "reason": "Its consistency use includes valid arithmetic DAGs, increasing precision, finite-returning queries and a fixed range avoiding overflow. It makes no transfer from fixed-N elementary nestedness to convergence."
+    },
+    {
+      "id": "thm-uniform-interval-linear-residual-certifier-soundness",
+      "decision": "accept",
+      "reason": "Uses finite outward component moduli and norm bounds to establish uniform residual certificate data, then applies the q<1 solution-enclosure theorem."
+    },
+    {
+      "id": "thm-validated-periodic-orbit-certificate-soundness",
+      "decision": "accept",
+      "reason": "Requires actual residual/Jacobian enclosures, strict inclusion, a separate contraction bound and nonstationarity. Successful full-box jet output supplies the trajectory and monodromy inclusions."
+    },
+    {
+      "id": "thm-validated-residual-tube-certificate-sound",
+      "decision": "accept",
+      "reason": "Uses finite real arithmetic to turn checker tests into exact residual, Jacobian and strict tube inequalities. The rational-DAG domain and continuation premises remain explicit."
+    },
+    {
+      "id": "thm-validated-residual-tube-checker-terminates",
+      "decision": "accept",
+      "reason": "Its finite traversal argument uses supplied arrays, rational derivative DAGs and finite real arithmetic operations only. It does not invoke the defective budgeted elementary split procedure."
+    },
+    {
+      "id": "computed-fast-transforms-and-convolution",
+      "decision": "accept",
+      "reason": "Retains the original page-context disposition: phase certification may fail, and FFT accuracy is conditional on certified twiddles and successful normal-range operations."
+    },
+    {
+      "id": "finite-bit-random-streams-and-variate-generation",
+      "decision": "accept",
+      "reason": "Retains the original page-context disposition: finite Box–Muller uses certified suppliers, and its distribution theorem requires all-input success with uniform bounds. This does not settle the wrapper repair identified above."
+    },
+    {
+      "id": "matrix-norms-condition-numbers-and-numerical-stability",
+      "decision": "accept",
+      "reason": "Retains only the original contextual disposition: the approved batch design imports no item-level proof premise from this page. This is not a new acceptance of its mathematics."
+    },
+    {
+      "id": "finite-precision-direct-factorizations",
+      "decision": "accept",
+      "reason": "Retains only the original contextual disposition, confirmed by the assigned A-page explanation: the page requirement does not import a factorization or round-to-nearest success model into these local proofs."
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "4",
+  "round": 0,
+  "reviewed_items": [
+    "lem-finite-coefficient-vector-has-polynomial-representative",
+    "lem-finite-double-sum-interchange",
+    "lem-finite-product-of-nonzero-reals-is-nonzero",
+    "lem-polynomial-highest-derivative",
+    "lem-product-of-linear-factors-is-monic-polynomial",
+    "def-cardinal-polynomial-interpolation",
+    "lem-finite-product-of-quotients",
+    "lem-cardinal-basis-degree-and-values",
+    "prop-equispaced-interpolation-basis-growth",
+    "thm-cardinal-polynomial-interpolant-exists-uniquely",
+    "thm-barycentric-interpolation-identities",
+    "thm-lagrange-interpolation-remainder",
+    "alg-finite-barycentric-interpolation-evaluator",
+    "prop-finite-barycentric-interpolation-evaluator-returns-status",
+    "ex-equispaced-cardinal-basis-growth",
+    "ex-quadratic-interpolation-at-three-nodes",
+    "ex-cubic-interpolation-pointwise-remainder"
+  ],
+  "reviewed_pages": [
+    "polynomial-interpolation-and-remainder",
+    "polynomial-interpolation-and-remainder-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Reviewed all 17 assigned items and both pages against the approved NA-10 design and actual supplier proofs; the current cross-batch dependency list is empty. Two published supplier proofs leave prerequisites used by assigned claims unstated, so owner reconciliation is needed. The findings also identify local proof clarifications for the single repair pass.",
+  "findings": [
+    {
+      "id": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+      "type": "prerequisite",
+      "reason": "Its proof step 2.1 requires the quotient q from lem-real-polynomial-factor-at-a-root to have degree n when p has degree n+1. That supplier states divisibility and its proof only says to collect the finite sums into a polynomial; it does not establish the required degree reduction. thm-cardinal-polynomial-interpolant-exists-uniquely step 2.1 consumes this root bound. The missing quotient-degree argument is in a published supplier outside this batch."
+    },
+    {
+      "id": "lem-binomial-coefficients-symmetric-and-unimodal",
+      "type": "prerequisite",
+      "reason": "Proof step 2.1 infers a coefficient comparison from C(n,k)(n-k)=C(n,k+1)(k+1). Positive n-k and k+1 alone do not justify that inference; it also needs C(n,k)>0. The definition identifies C(n,k) as a count but the proof does not establish existence of a k-subset for k<=n. prop-equispaced-interpolation-basis-growth step 1.3 uses the resulting central-maximum claim."
+    },
+    {
+      "id": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+      "type": "local",
+      "reason": "Step 1.1 treats I_n y as an evaluation function, but step 2.1 then refers to its actual coefficient list and concludes equality of formal polynomials. Explicitly choose formal representatives for I_n y and q, and distinguish them from their evaluation functions. This is local and needs no statement change; the separate root-count prerequisite remains unresolved."
+    },
+    {
+      "id": "lem-polynomial-highest-derivative",
+      "type": "local",
+      "reason": "Step 2.1 says termwise differentiation gives exactly Q_{r+1}, but does not show the coefficient identity combining the factor iota(k-r) with the preceding product. State the canonical-natural product calculation and use F7, which supplies the product bridge."
+    },
+    {
+      "id": "ex-equispaced-cardinal-basis-growth",
+      "type": "local",
+      "reason": "Step 1.2 asserts a maximum over [-1,1] without an attainment premise. The example only needs the value at x_*; remove the maximum assertion or supply continuity and compactness prerequisites."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "prop-equispaced-interpolation-basis-growth",
+      "decision": "repair",
+      "reason": "Step 1.3 relies on the central-maximum conclusion whose published proof omits positivity of in-range binomial coefficients. The assigned proof can establish that positivity and the needed central bound locally; the published supplier defect is also reported above."
+    },
+    {
+      "id": "ex-equispaced-cardinal-basis-growth",
+      "decision": "repair",
+      "reason": "It consumes the equispaced lower bound and has the separate unsupported maximum assertion in step 1.2; recheck after the proposition repair and remove or justify that assertion."
+    },
+    {
+      "id": "thm-cardinal-polynomial-interpolant-exists-uniquely",
+      "decision": "escalate",
+      "reason": "Its uniqueness step 2.1 uses the published root-count theorem, whose proof does not supply the quotient-degree prerequisite."
+    },
+    {
+      "id": "thm-barycentric-interpolation-identities",
+      "decision": "escalate",
+      "reason": "Step 1.2 uses uniqueness of the interpolant to prove the denominator identity, so it depends on the unresolved root-count proof."
+    },
+    {
+      "id": "thm-lagrange-interpolation-remainder",
+      "decision": "repair",
+      "reason": "Its steps 1.3 and 3.1 use the highest-derivative claim; independently recheck after that supplier's coefficient calculation is made explicit. Its use of the cardinal theorem requires only the separately established existence and node values."
+    },
+    {
+      "id": "alg-finite-barycentric-interpolation-evaluator",
+      "decision": "escalate",
+      "reason": "Its exact-arithmetic target cites the barycentric identity theorem, whose proof currently depends on the unresolved uniqueness proof."
+    },
+    {
+      "id": "prop-finite-barycentric-interpolation-evaluator-returns-status",
+      "decision": "accept",
+      "reason": "The claim is only finite termination, declared status coverage, and value membership in F; its proof does not use the disputed interpolation identity."
+    },
+    {
+      "id": "ex-quadratic-interpolation-at-three-nodes",
+      "decision": "escalate",
+      "reason": "Step 2.1 uses the uniqueness theorem to identify I_2 f with q."
+    },
+    {
+      "id": "ex-cubic-interpolation-pointwise-remainder",
+      "decision": "escalate",
+      "reason": "Step 1.1 uses the uniqueness theorem to identify the interpolant with q."
+    },
+    {
+      "id": "polynomial-interpolation-and-remainder",
+      "decision": "escalate",
+      "reason": "The page claims uniqueness and the barycentric identity, which depend on the unresolved root-count supplier proof."
+    },
+    {
+      "id": "polynomial-interpolation-and-remainder-examples",
+      "decision": "escalate",
+      "reason": "Its quadratic and cubic example claims currently rely on the unresolved uniqueness theorem; its equispaced example also awaits the local repair noted above."
+    }
+  ]
+}

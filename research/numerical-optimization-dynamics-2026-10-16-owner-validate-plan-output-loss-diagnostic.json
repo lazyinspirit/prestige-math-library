@@ -1,0 +1,34 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "at": "2026-10-16T06:20:46.263314+00:00",
+  "kind": "read-only-source-flow-diagnostic",
+  "nativeArtifact": "research/numerical-optimization-dynamics-2026-10-16-owner-step1-full-gate-failures-0617.json",
+  "nativeGateCode": 1,
+  "capturedBytes": 74858,
+  "reportedWarningCount": 463,
+  "capturedRedundantPrerequisiteRows": 164,
+  "capturedErrorLines": [],
+  "hasTerminalOK": false,
+  "hasTerminalFAIL": false,
+  "sourceFacts": [
+    {
+      "file": "tools/validate-plan.mjs",
+      "lines": "653-658",
+      "fact": "Warnings are printed before the errors. The only normal code-1 branch prints error summary and then immediately calls process.exit(1), which can truncate buffered stdout on a pipe."
+    },
+    {
+      "file": "tools/frontier-item-gate.mjs",
+      "lines": "76-78",
+      "fact": "spawnSync uses inherited stdout/stderr; forwards status, no warning-based failure projection."
+    },
+    {
+      "file": "tools/autopilot/src/gates.mts",
+      "lines": "56-66,77-87",
+      "fact": "Asynchronous child stdout/stderr listeners concatenate full received output; no warning strictness or output truncation in result."
+    }
+  ],
+  "diagnosis": "Captured warning section is incomplete (164 of announced463 rows); absent error tail does not show no hard errors. Code1 normally requires nonempty errors in validate-plan. Exact error identity cannot be recovered from this captured artifact alone. Do not remove legitimate prerequisites or reinterpret warnings as hard failure.",
+  "smallestProposal": "Replace immediate process.exit(1) in final report with process.exitCode=1, and place success report in else, so queued full diagnostics drain naturally while retaining exact nonzero semantics. Parent owns any source change and future gate attempt.",
+  "executedChecks": [],
+  "canonicalChanges": []
+}

@@ -1,0 +1,312 @@
+{
+  "group": "r",
+  "batches": ["49"],
+  "pages_read": [
+    "sylvester-and-lyapunov-matrix-equations",
+    "sylvester-and-lyapunov-matrix-equations-examples"
+  ],
+  "items_read": [
+    "lem-sylvester-vectorization-isometry-and-kronecker-identity",
+    "lem-small-block-determinant-separation-lower-bound",
+    "def-hurwitz-matrix-and-continuous-lyapunov-equation",
+    "lem-adjugate-inverse-formula-over-a-field",
+    "def-sylvester-operator-and-separation-number",
+    "lem-hurwitz-matrix-exponential-decay-bound",
+    "lem-hurwitz-negative-shift-matrix-invertible",
+    "lem-sylvester-separation-controls-the-frobenius-error",
+    "thm-sylvester-unique-solvability-spectral-separation",
+    "thm-continuous-lyapunov-integral-and-positivity",
+    "alg-low-rank-alternating-direction-implicit-lyapunov",
+    "thm-sylvester-residual-to-forward-error-bound",
+    "thm-low-rank-adi-exact-residual-factor-identity",
+    "thm-low-rank-adi-conditional-convergence-bound",
+    "alg-bartels-stewart-sylvester-equation",
+    "thm-bartels-stewart-sylvester-exact-correctness",
+    "thm-bartels-stewart-dense-operation-count",
+    "thm-bartels-stewart-finite-status-and-local-pivot-uniqueness",
+    "thm-low-rank-adi-finite-status-and-well-definedness",
+    "ex-stable-linear-noise-lyapunov-covariance",
+    "ex-nearly-colliding-sylvester-eigenvalue-sums",
+    "ex-low-rank-adi-residual-certificate"
+  ],
+  "conventions": [
+    {
+      "convention": "Column vectorization stacks columns; the Sylvester matrix is I_n ⊗ A + B^T ⊗ I_m, using transpose rather than adjoint even over C.",
+      "fixed_by": "lem-sylvester-vectorization-isometry-and-kronecker-identity",
+      "matters_for": [
+        "def-sylvester-operator-and-separation-number",
+        "thm-sylvester-unique-solvability-spectral-separation",
+        "alg-bartels-stewart-sylvester-equation"
+      ]
+    },
+    {
+      "convention": "sep(A,-B) measures X ↦ AX+XB in Frobenius norm; its second argument includes a conventional minus sign. Matrix dimensions m,n are positive.",
+      "fixed_by": "def-sylvester-operator-and-separation-number",
+      "matters_for": [
+        "lem-sylvester-separation-controls-the-frobenius-error",
+        "thm-sylvester-unique-solvability-spectral-separation",
+        "thm-sylvester-residual-to-forward-error-bound",
+        "thm-low-rank-adi-conditional-convergence-bound",
+        "ex-nearly-colliding-sylvester-eigenvalue-sums"
+      ]
+    },
+    {
+      "convention": "Hurwitz means strictly negative real parts of all complex eigenvalues. The Lyapunov equation is AX+XA*+Q=0, with self-adjoint Q; star means transpose over R and conjugate transpose over C.",
+      "fixed_by": "def-hurwitz-matrix-and-continuous-lyapunov-equation",
+      "matters_for": [
+        "lem-hurwitz-matrix-exponential-decay-bound",
+        "lem-hurwitz-negative-shift-matrix-invertible",
+        "thm-continuous-lyapunov-integral-and-positivity",
+        "alg-low-rank-alternating-direction-implicit-lyapunov"
+      ]
+    },
+    {
+      "convention": "ADI uses negative-real-part shifts, c_j=-2 Re(p_j), and R_j=R_{j-1}+c_j V_j. Real-data nonreal shifts are validated in consecutive conjugate pairs, but updates process each individual shift and may use complex arithmetic.",
+      "fixed_by": "alg-low-rank-alternating-direction-implicit-lyapunov",
+      "matters_for": [
+        "thm-low-rank-adi-exact-residual-factor-identity",
+        "thm-low-rank-adi-conditional-convergence-bound",
+        "thm-low-rank-adi-finite-status-and-well-definedness",
+        "ex-low-rank-adi-residual-certificate"
+      ]
+    },
+    {
+      "convention": "Bartels–Stewart accepts computed Schur factors only after exact certificate checks. Block columns increase and block rows decrease. A nonzero determinant is rejected when its certified separation lower bound is at most the threshold, including equality.",
+      "fixed_by": "alg-bartels-stewart-sylvester-equation",
+      "matters_for": [
+        "thm-bartels-stewart-sylvester-exact-correctness",
+        "thm-bartels-stewart-dense-operation-count",
+        "thm-bartels-stewart-finite-status-and-local-pivot-uniqueness"
+      ]
+    },
+    {
+      "convention": "The cubic Bartels–Stewart bound counts exact integer/rational operations as scalar operations, assumes linearly bounded sweep budgets and dimension-independent controller budgets, and makes no bit-complexity claim.",
+      "fixed_by": "thm-bartels-stewart-dense-operation-count",
+      "matters_for": [
+        "sylvester-and-lyapunov-matrix-equations"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-sylvester-unique-solvability-spectral-separation",
+      "statement": "For F∈{R,C}, m,n≥1 and compatible square A,B, the Sylvester map is invertible if and only if σ(A)∩(-σ(B))=∅, with real spectra taken over C. This is equivalent to unique solvability for every right-hand side and to sep(A,-B)>0.",
+      "used_by": [
+        "thm-sylvester-residual-to-forward-error-bound",
+        "thm-low-rank-adi-conditional-convergence-bound",
+        "alg-bartels-stewart-sylvester-equation",
+        "thm-bartels-stewart-sylvester-exact-correctness",
+        "ex-nearly-colliding-sylvester-eigenvalue-sums",
+        "thm-principal-matrix-logarithm-and-square-root-exist"
+      ]
+    },
+    {
+      "id": "alg-bartels-stewart-sylvester-equation",
+      "statement": "Finite-budget Schur calls produce candidates; exact Schur certificates precede block substitution. Each local Kronecker matrix must have nonzero determinant and δ(M)>τ before its adjugate solve is stored. Successful completion returns X=UYV* and its exact residual.",
+      "used_by": [
+        "thm-bartels-stewart-sylvester-exact-correctness",
+        "thm-bartels-stewart-dense-operation-count",
+        "thm-bartels-stewart-finite-status-and-local-pivot-uniqueness",
+        "alg-schur-parlett-matrix-function"
+      ]
+    },
+    {
+      "id": "thm-bartels-stewart-finite-status-and-local-pivot-uniqueness",
+      "statement": "For admitted inputs the procedure terminates with a declared status; every stored local solve is unique. On success the full equation has exactly one solution, without an additional spectral-disjointness assumption, because successful local pivot checks imply invertibility of the full block operator.",
+      "used_by": [
+        "thm-schur-parlett-recurrence-correctness",
+        "thm-matrix-function-finite-algorithms-termination-and-budget-status"
+      ]
+    },
+    {
+      "id": "thm-continuous-lyapunov-integral-and-positivity",
+      "statement": "For Hurwitz A and self-adjoint Q, the integral of e^{tA}Qe^{tA*} over [0,∞) converges and uniquely solves AX+XA*+Q=0. Nonnegative Q gives nonnegative X; positive Q gives positive X. For nonnegative Q, X is positive exactly when no nonzero trajectory e^{tA*}v remains in ker Q^{1/2} for every t≥0.",
+      "used_by": [
+        "thm-low-rank-adi-conditional-convergence-bound",
+        "ex-stable-linear-noise-lyapunov-covariance"
+      ]
+    },
+    {
+      "id": "thm-low-rank-adi-exact-residual-factor-identity",
+      "statement": "For every completed ADI iterate j, with X_0=0 and R_0=B, AX_j+X_jA*+BB*=R_jR_j*.",
+      "used_by": [
+        "thm-low-rank-adi-conditional-convergence-bound",
+        "ex-low-rank-adi-residual-certificate"
+      ]
+    },
+    {
+      "id": "lem-hurwitz-matrix-exponential-decay-bound",
+      "statement": "For Hurwitz A with unitary Schur form T=D+N and α=-max Re σ(A)>0, ||e^{tA}||₂≤e^{-αt} Σ_{k=0}^{n-1}(t||N||₂)^k/k! for every t≥0.",
+      "used_by": [
+        "thm-continuous-lyapunov-integral-and-positivity"
+      ]
+    },
+    {
+      "id": "thm-sylvester-residual-to-forward-error-bound",
+      "statement": "For the unique solution X and any approximation X̂, if R=C-(AX̂+X̂B) and sep(A,-B)>0, then ||X-X̂||_F≤||R||_F/sep(A,-B).",
+      "used_by": [
+        "thm-low-rank-adi-conditional-convergence-bound",
+        "ex-nearly-colliding-sylvester-eigenvalue-sums"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-frobenius-matrix-norm",
+      "used_for": "Entrywise Frobenius norm, vectorization isometry and matrix-product estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Separation minima, invertibility criteria and residual norm estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+      "used_for": "Singular-value formulas and unitary invariance in the determinant lower bound and ADI error bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-multiplicative",
+      "used_for": "Factoring the determinant of an SVD.",
+      "opened": true
+    },
+    {
+      "id": "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus",
+      "used_for": "Unit determinant modulus of the unitary SVD factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-of-a-triangular-matrix",
+      "used_for": "Diagonal determinant products and the spectral Sylvester criterion.",
+      "opened": true
+    },
+    {
+      "id": "def-non-negative-and-positive-operator",
+      "used_for": "Self-adjointness and quadratic-form positivity conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-minors-cofactors-and-adjugate",
+      "used_for": "Adjugate definition and the size-one empty-minor convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-laplace-cofactor-expansion",
+      "used_for": "Diagonal and replaced-row entries of the adjugate identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+      "used_for": "Vanishing of determinants with repeated columns, and hence repeated rows after transposition.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-of-transpose",
+      "used_for": "Repeated-row determinant argument and conjugate-adjoint spectral calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-invertible-iff-determinant-nonzero",
+      "used_for": "Adjugate inverse and determinant-based Sylvester invertibility.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-normed-spaces-are-banach",
+      "used_for": "Applying the bounded-operator exponential-series theorem to finite matrices.",
+      "opened": true
+    },
+    {
+      "id": "lem-exponential-series-of-a-bounded-operator",
+      "used_for": "Matrix exponential convergence, differentiation and commutation in the decay and Lyapunov proofs.",
+      "opened": true
+    },
+    {
+      "id": "thm-schur-triangularisation",
+      "used_for": "Complex triangularization after explicitly establishing characteristic-polynomial splitting.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Euclidean operator norm and columnwise product estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "used_for": "Unitary norm preservation in the exponential decay estimate.",
+      "opened": true
+    },
+    {
+      "id": "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+      "used_for": "Bounding ordered-integral products in the exponential decay proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-the-complex-numbers-are-algebraically-closed",
+      "used_for": "Discharging the splitting hypothesis of Schur triangularization over C.",
+      "opened": true
+    },
+    {
+      "id": "cor-matrix-rank-nullity",
+      "used_for": "Singularity implies a nonzero kernel in the shifted Hurwitz solve.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-polynomial-of-block-triangular-matrix",
+      "used_for": "Factoring the characteristic polynomial of the block-triangular Kronecker sum.",
+      "opened": true
+    },
+    {
+      "id": "def-characteristic-polynomial-of-a-matrix",
+      "used_for": "Evaluating characteristic polynomials at zero to obtain determinant products.",
+      "opened": true
+    },
+    {
+      "id": "def-determinant-of-a-square-matrix",
+      "used_for": "Determinant sign scaling and compatibility with complex conjugation.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "used_for": "Writing the Lyapunov quadratic form as an integral of squared norms.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-norm-is-the-largest-singular-value",
+      "used_for": "Equality of the operator norms of a matrix and its adjoint.",
+      "opened": true
+    },
+    {
+      "id": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+      "used_for": "Identifying the adjoint matrix in the ADI spectral-separation argument.",
+      "opened": true
+    },
+    {
+      "id": "lem-complex-conjugation-and-modulus-laws",
+      "used_for": "Conjugating determinant formulas to identify σ(A*) with the conjugate of σ(A).",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-low-rank-adi-conditional-convergence-bound",
+      "concern": "Step 3.1 writes: “If R_j=UΣV* is an SVD, then R_jR_j*=UΣ²U*”. Here R_j has shape n×r and r need not equal n, so the full SVD factor Σ is rectangular and Σ² is undefined. The required product is ΣΣ*, whose diagonal contains the squared singular values. The following norm inequality is correct and closes immediately with that product.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "sylvester-and-lyapunov-matrix-equations",
+      "to": "computed-schur-decompositions-and-nonnormal-spectra",
+      "faithful": true,
+      "note": "Checked the actual Schur procedure, real/complex Schur definitions, exact discriminant predicate and rational sign recipe, finite-status theorem, and supporting chase/similarity descriptions against Bartels–Stewart and its property proofs. Computed Schur output remains a candidate; exact factorization is checked separately. Finite controls and evaluator cost qualifications are preserved."
+    },
+    {
+      "from": "matrix-functions-and-scaling-squaring",
+      "to": "sylvester-and-lyapunov-matrix-equations",
+      "faithful": true,
+      "note": "Checked the principal square-root uniqueness proof, Schur–Parlett algorithm and correctness proof, and finite-algorithm termination theorem. The spectral Sylvester criterion is used with opposite half-planes. Schur–Parlett obtains uniqueness from successful local pivots through the explicit finite-status/local-pivot theorem, rather than assuming an unverified spectral premise. Exact-certificate and failure-status qualifications are retained."
+    }
+  ]
+}

@@ -1,0 +1,1244 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+    "lem-parabolic-theta-step-exists-uniquely",
+    "thm-parabolic-theta-l2-stability-for-half-theta",
+    "lem-periodic-heat-difference-amplification-symbol",
+    "thm-forward-euler-heat-cfl-and-nyquist-instability",
+    "thm-theta-scheme-discrete-maximum-principle",
+    "thm-parabolic-theta-scheme-local-truncation-error",
+    "thm-parabolic-theta-scheme-global-error-bound",
+    "ex-forward-euler-parabolic-cfl-threshold-and-nyquist-growth",
+    "ex-backward-euler-damps-high-frequencies",
+    "ex-crank-nicolson-preserves-high-frequency-amplitude",
+    "ex-continuous-and-discrete-heat-maximum-principles"
+  ],
+  "contracts": {
+    "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rectangular-grid-and-dirichlet-flux-stencil",
+          "source_section": "Definition",
+          "quote": "Let $L_x,L_y>0$, let $N_x,N_y$ be integers at least $2$, and set $h_x=L_x/N_x$ and $h_y=L_y/N_y$. The rectangular grid nodes are $(x_i,y_j)=(ih_x,jh_y)$ for $0\\le i\\le N_x$ and $0\\le j\\le N_y$. The interior index set is $I_h=\\{(i,j):1\\le i<N_x,\\ 1\\le j<N_y\\}$, and its boundary is the set of grid nodes with $i\\in\\{0,N_x\\}$ or $j\\in\\{0,N_y\\}$. A grid function is a real-valued function on all grid nodes; $X_{h,0}$ is the vector space of grid functions that vanish on the boundary.\n\nFor grid functions $v,w$, define the weighted interior inner product and norm by\n$$\n\\langle v,w\\rangle_h=h_xh_y\\sum_{i=1}^{N_x-1}\\sum_{j=1}^{N_y-1}v_{ij}w_{ij},\\qquad \\|v\\|_h=\\langle v,v\\rangle_h^{1/2}.\n$$\nThe edge differences are $D_xv_{i+1/2,j}=(v_{i+1,j}-v_{ij})/h_x$ for $0\\le i<N_x$, $1\\le j<N_y$, and $D_yv_{i,j+1/2}=(v_{i,j+1}-v_{ij})/h_y$ for $1\\le i<N_x$, $0\\le j<N_y$. For a scalar coefficient $a$ sampled at face midpoints, write $a_{i+1/2,j}=a(x_i+h_x/2,y_j)$ and $a_{i,j+1/2}=a(x_i,y_j+h_y/2)$.\n\nThe positive divergence-form Dirichlet operator on interior nodes is\n$$\n(A_h^av)_{ij}=-\\frac{a_{i+1/2,j}D_xv_{i+1/2,j}-a_{i-1/2,j}D_xv_{i-1/2,j}}{h_x}-\\frac{a_{i,j+1/2}D_yv_{i,j+1/2}-a_{i,j-1/2}D_yv_{i,j-1/2}}{h_y}.\n$$\nFor $a\\equiv1$, this is the five-point Dirichlet Laplacian $-D_x^+D_x^- -D_y^+D_y^-$. The associated edge energy is\n$$\nE_h^a(v,w)=h_xh_y\\left(\\sum_{j=1}^{N_y-1}\\sum_{i=0}^{N_x-1}a_{i+1/2,j}D_xv_{i+1/2,j}D_xw_{i+1/2,j}+\\sum_{i=1}^{N_x-1}\\sum_{j=0}^{N_y-1}a_{i,j+1/2}D_yv_{i,j+1/2}D_yw_{i,j+1/2}\\right).\n$$\nThe homogeneous scheme solves $A_h^av=f_h$ in $I_h$ with $v=0$ on the boundary. For Dirichlet data $g$, it solves the same interior equations with $v=g$ at boundary nodes. This definition specifies the rectangular Dirichlet stencil; it does not specify a Neumann or nonrectangular boundary closure.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-discrete-summation-by-parts-poincare-and-inverse-bound",
+          "source_section": "Statement",
+          "quote": "On the grid of [[def-rectangular-grid-and-dirichlet-flux-stencil]], put $q^x_{i+1/2,j}=a_{i+1/2,j}D_xv_{i+1/2,j}$ and $q^y_{i,j+1/2}=a_{i,j+1/2}D_yv_{i,j+1/2}$. For any grid functions $v,w$,\n$$\n\\langle A_h^av,w\\rangle_h=E_h^a(v,w)-h_y\\sum_{j=1}^{N_y-1}\\left(q^x_{N_x-1/2,j}w_{N_x,j}-q^x_{1/2,j}w_{0,j}\\right)-h_x\\sum_{i=1}^{N_x-1}\\left(q^y_{i,N_y-1/2}w_{i,N_y}-q^y_{i,1/2}w_{i,0}\\right).\n$$\nIn particular, if $w$ vanishes on the boundary, then $\\langle A_h^av,w\\rangle_h=E_h^a(v,w)$. For every $v\\in X_{h,0}$,\n$$\n\\|v\\|_h^2\\le L_x^2\\,h_xh_y\\sum_{j=1}^{N_y-1}\\sum_{i=0}^{N_x-1}|D_xv_{i+1/2,j}|^2.\n$$\nIf all horizontal and vertical face values satisfy $a_{i+1/2,j},a_{i,j+1/2}\\ge a_0>0$, then the homogeneous Dirichlet matrix $A_h^a$ is invertible and\n$$\n\\|(A_h^a)^{-1}\\|_{\\ell_h^2\\to\\ell_h^2}\\le \\frac{L_x^2}{a_0},\n$$\nwhere $\\ell_h^2$ is the norm $\\|\\cdot\\|_h$ on interior vectors. The constants are independent of $N_x,N_y$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "Fix a dimension $d\\ge1$, side lengths $L_j>0$, integers $N_j\\ge2$, directional diffusivities $\\kappa_j>0$, and spacings $h_j=L_j/N_j$. For a finite periodic rectangular grid let\n$$\nG_h^{\\rm per}=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z),\\qquad \\langle v,w\\rangle_h=\\Bigl(\\prod_{j=1}^d h_j\\Bigr)\\sum_{i\\in G_h^{\\rm per}}v_iw_i,\n$$\nand define the positive centered heat operator, with indices reduced modulo $N_j$, by\n$$(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\kappa_j\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.$$\n\nFor a two-dimensional Dirichlet rectangle, use the nodes and weighted interior inner product of [[def-rectangular-grid-and-dirichlet-flux-stencil]]. At an interior node $(i,j)$ define\n$$(A_h^{B}V)_{ij}=\\kappa_x\\frac{2V_{ij}-V_{i+1,j}-V_{i-1,j}}{h_x^2}+\\kappa_y\\frac{2V_{ij}-V_{i,j+1}-V_{i,j-1}}{h_y^2},$$\nwhere values on boundary neighbours are the prescribed Dirichlet row $B$. Write $A_h^0$ for the square matrix on interior values when the boundary is zero. For any boundary vector $B$, let $c_h(B)$ be the result of applying this stencil to the grid vector that equals $B$ on the boundary and $0$ at interior nodes. Then $A_h^B V=A_h^0V+c_h(B)$ on interior nodes.\n\nLet $T>0$, an integer $M\\ge1$, $\\Delta t=T/M$, $t_n=n\\Delta t$, and $\\theta\\in[0,1]$. Given interior initial data $U^0$, interior source samples $F^n$, and, in the Dirichlet case, boundary rows $B^n$ for $0\\le n\\le M$ whose time-zero row agrees with the initial grid data, the periodic update is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^{\\rm per}\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)F^n+\\theta F^{n+1},\\quad 0\\le n<M.\n$$\nThe Dirichlet update, with the boundary values imposed at every time level, is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^0\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)\\bigl(F^n-c_h(B^n)\\bigr)+\\theta\\bigl(F^{n+1}-c_h(B^{n+1})\\bigr),\\quad 0\\le n<M.\n$$\nThus the interior rows use the exact boundary contributions at both endpoints of the time step. The choices $\\theta=0,1/2,1$ are forward Euler, Crank–Nicolson, and backward Euler applied to the spatially semidiscrete heat equation; this definition does not redefine those ODE time-stepping procedures.\n\nFor a homogeneous-source update with periodic rows or zero Dirichlet boundary values, let $Q_h$ be its one-step linear map when that step is well defined, and give it the operator norm induced by $\\|\\cdot\\|_h$. The family is **grid-norm power stable on $[0,T]$** if there is $C_T<\\infty$, independent of the grid and time step, such that $\\|Q_h^n\\|_{h\\to h}\\le C_T$ whenever $n\\Delta t\\le T$. This is a statement in the mesh-dependent finite grid norms defined above.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "directional-energy",
+          "claim": "Let $E_x(v,w)$ and $E_y(v,w)$ denote the horizontal and vertical summands of $E_h^1(v,w)$ from [F1]. The horizontal telescoping calculation and its vertical counterpart in [F2] give the corresponding unweighted directional identities. Multiplying them by $\\kappa_x$ and $\\kappa_y$ yields $\\langle A_{h,x}v,w\\rangle_h=\\kappa_xE_x(v,w)$ and $\\langle A_{h,y}v,w\\rangle_h=\\kappa_yE_y(v,w)$, since all boundary values vanish.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "self-adjointness",
+          "claim": "By [F3] and step 1.1, $\\langle A_hv,w\\rangle_h=\\kappa_xE_x(v,w)+\\kappa_yE_y(v,w)$. Each edge sum is symmetric in $v,w$, so $\\langle A_hv,w\\rangle_h=\\langle v,A_hw\\rangle_h$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nonnegative-energy",
+          "claim": "Taking $w=v$ in step 2.1 gives $\\langle A_hv,v\\rangle_h=\\kappa_xE_x(v,v)+\\kappa_yE_y(v,v)$. Every summand is a positive mesh weight times a square, and $\\kappa_x,\\kappa_y>0$, hence this quantity is nonnegative.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement imports Nx,Ny>=2 from the grid convention, so (Nx-1)(Ny-1)>=1 interior nodes and the displayed directional edge index sets are nonempty. Proof steps 1.1 and 3.1 use the zero-Dirichlet edge identities and positive square weights."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At v=0 every edge term and both sides of the asserted quadratic identity vanish. See step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "κx=κy=1 is included; the energy is the five-point Dirichlet edge energy. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Nx=Ny=2 the single interior value has four boundary edges, all included in the telescoping identity. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The imported summation-by-parts statement retains all boundary terms; zero Dirichlet values remove them exactly. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finite sums and pointwise positive coefficients are used; no choices are made. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "lem-parabolic-theta-step-exists-uniquely": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "Fix a dimension $d\\ge1$, side lengths $L_j>0$, integers $N_j\\ge2$, directional diffusivities $\\kappa_j>0$, and spacings $h_j=L_j/N_j$. For a finite periodic rectangular grid let\n$$\nG_h^{\\rm per}=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z),\\qquad \\langle v,w\\rangle_h=\\Bigl(\\prod_{j=1}^d h_j\\Bigr)\\sum_{i\\in G_h^{\\rm per}}v_iw_i,\n$$\nand define the positive centered heat operator, with indices reduced modulo $N_j$, by\n$$(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\kappa_j\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.$$\n\nFor a two-dimensional Dirichlet rectangle, use the nodes and weighted interior inner product of [[def-rectangular-grid-and-dirichlet-flux-stencil]]. At an interior node $(i,j)$ define\n$$(A_h^{B}V)_{ij}=\\kappa_x\\frac{2V_{ij}-V_{i+1,j}-V_{i-1,j}}{h_x^2}+\\kappa_y\\frac{2V_{ij}-V_{i,j+1}-V_{i,j-1}}{h_y^2},$$\nwhere values on boundary neighbours are the prescribed Dirichlet row $B$. Write $A_h^0$ for the square matrix on interior values when the boundary is zero. For any boundary vector $B$, let $c_h(B)$ be the result of applying this stencil to the grid vector that equals $B$ on the boundary and $0$ at interior nodes. Then $A_h^B V=A_h^0V+c_h(B)$ on interior nodes.\n\nLet $T>0$, an integer $M\\ge1$, $\\Delta t=T/M$, $t_n=n\\Delta t$, and $\\theta\\in[0,1]$. Given interior initial data $U^0$, interior source samples $F^n$, and, in the Dirichlet case, boundary rows $B^n$ for $0\\le n\\le M$ whose time-zero row agrees with the initial grid data, the periodic update is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^{\\rm per}\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)F^n+\\theta F^{n+1},\\quad 0\\le n<M.\n$$\nThe Dirichlet update, with the boundary values imposed at every time level, is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^0\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)\\bigl(F^n-c_h(B^n)\\bigr)+\\theta\\bigl(F^{n+1}-c_h(B^{n+1})\\bigr),\\quad 0\\le n<M.\n$$\nThus the interior rows use the exact boundary contributions at both endpoints of the time step. The choices $\\theta=0,1/2,1$ are forward Euler, Crank–Nicolson, and backward Euler applied to the spatially semidiscrete heat equation; this definition does not redefine those ODE time-stepping procedures.\n\nFor a homogeneous-source update with periodic rows or zero Dirichlet boundary values, let $Q_h$ be its one-step linear map when that step is well defined, and give it the operator norm induced by $\\|\\cdot\\|_h$. The family is **grid-norm power stable on $[0,T]$** if there is $C_T<\\infty$, independent of the grid and time step, such that $\\|Q_h^n\\|_{h\\to h}\\le C_T$ whenever $n\\Delta t\\le T$. This is a statement in the mesh-dependent finite grid norms defined above.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+          "source_section": "Statement",
+          "quote": "On the two-dimensional rectangular zero-Dirichlet grid of [[def-parabolic-theta-finite-difference-scheme]], set $A_h:=A_h^0$, the centered positive heat matrix on interior values defined there, with $\\kappa_x,\\kappa_y>0$. In the weighted grid inner product of [[def-rectangular-grid-and-dirichlet-flux-stencil]], $A_h$ is self-adjoint and positive semidefinite; explicitly,\n$$\n\\langle A_hv,w\\rangle_h=h_xh_y\\left(\\kappa_x\\sum_{j=1}^{N_y-1}\\sum_{i=0}^{N_x-1}D_xv_{i+1/2,j}D_xw_{i+1/2,j}+\\kappa_y\\sum_{i=1}^{N_x-1}\\sum_{j=0}^{N_y-1}D_yv_{i,j+1/2}D_yw_{i,j+1/2}\\right),\n$$\nso $\\langle A_hv,v\\rangle_h\\ge0$ for every interior grid vector $v$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "explicit-identity",
+          "claim": "If $\\theta=0$, the implicit matrix in [F1] is the identity, so for every right-hand side there is exactly one solution, namely that right-hand side.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "positive-kernel",
+          "claim": "Suppose $\\theta>0$ and $(I+\\theta\\Delta t A_h)v=0$. Taking the weighted inner product with $v$ gives $\\|v\\|_h^2+\\theta\\Delta t\\langle A_hv,v\\rangle_h=0$. By [F2] the second term is nonnegative, so $\\|v\\|_h^2=0$ and $v=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-dimensional-onto",
+          "claim": "The interior vector space is finite dimensional and the matrix is square. Its zero kernel from step 1.2 means its rank equals the dimension by rank-nullity; hence its range is the whole space. Thus every right-hand side has exactly one solution.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Nx,Ny≥2 give a finite nonempty interior vector space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For zero right-hand side the identity case and the zero-kernel argument give U=0. See step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At θ=0 the matrix is I; at θ=1 the same positive-definiteness argument applies. See step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Rank-nullity applies to the one-interior-node matrix when Nx=Ny=2. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Known boundary contributions occur only on the right-hand side and do not change the implicit matrix. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses finite-dimensional rank-nullity and no choice principle. See step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "thm-parabolic-theta-l2-stability-for-half-theta": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "Fix a dimension $d\\ge1$, side lengths $L_j>0$, integers $N_j\\ge2$, directional diffusivities $\\kappa_j>0$, and spacings $h_j=L_j/N_j$. For a finite periodic rectangular grid let\n$$\nG_h^{\\rm per}=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z),\\qquad \\langle v,w\\rangle_h=\\Bigl(\\prod_{j=1}^d h_j\\Bigr)\\sum_{i\\in G_h^{\\rm per}}v_iw_i,\n$$\nand define the positive centered heat operator, with indices reduced modulo $N_j$, by\n$$(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\kappa_j\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.$$\n\nFor a two-dimensional Dirichlet rectangle, use the nodes and weighted interior inner product of [[def-rectangular-grid-and-dirichlet-flux-stencil]]. At an interior node $(i,j)$ define\n$$(A_h^{B}V)_{ij}=\\kappa_x\\frac{2V_{ij}-V_{i+1,j}-V_{i-1,j}}{h_x^2}+\\kappa_y\\frac{2V_{ij}-V_{i,j+1}-V_{i,j-1}}{h_y^2},$$\nwhere values on boundary neighbours are the prescribed Dirichlet row $B$. Write $A_h^0$ for the square matrix on interior values when the boundary is zero. For any boundary vector $B$, let $c_h(B)$ be the result of applying this stencil to the grid vector that equals $B$ on the boundary and $0$ at interior nodes. Then $A_h^B V=A_h^0V+c_h(B)$ on interior nodes.\n\nLet $T>0$, an integer $M\\ge1$, $\\Delta t=T/M$, $t_n=n\\Delta t$, and $\\theta\\in[0,1]$. Given interior initial data $U^0$, interior source samples $F^n$, and, in the Dirichlet case, boundary rows $B^n$ for $0\\le n\\le M$ whose time-zero row agrees with the initial grid data, the periodic update is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^{\\rm per}\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)F^n+\\theta F^{n+1},\\quad 0\\le n<M.\n$$\nThe Dirichlet update, with the boundary values imposed at every time level, is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^0\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)\\bigl(F^n-c_h(B^n)\\bigr)+\\theta\\bigl(F^{n+1}-c_h(B^{n+1})\\bigr),\\quad 0\\le n<M.\n$$\nThus the interior rows use the exact boundary contributions at both endpoints of the time step. The choices $\\theta=0,1/2,1$ are forward Euler, Crank–Nicolson, and backward Euler applied to the spatially semidiscrete heat equation; this definition does not redefine those ODE time-stepping procedures.\n\nFor a homogeneous-source update with periodic rows or zero Dirichlet boundary values, let $Q_h$ be its one-step linear map when that step is well defined, and give it the operator norm induced by $\\|\\cdot\\|_h$. The family is **grid-norm power stable on $[0,T]$** if there is $C_T<\\infty$, independent of the grid and time step, such that $\\|Q_h^n\\|_{h\\to h}\\le C_T$ whenever $n\\Delta t\\le T$. This is a statement in the mesh-dependent finite grid norms defined above.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint",
+          "source_section": "Statement",
+          "quote": "On the two-dimensional rectangular zero-Dirichlet grid of [[def-parabolic-theta-finite-difference-scheme]], set $A_h:=A_h^0$, the centered positive heat matrix on interior values defined there, with $\\kappa_x,\\kappa_y>0$. In the weighted grid inner product of [[def-rectangular-grid-and-dirichlet-flux-stencil]], $A_h$ is self-adjoint and positive semidefinite; explicitly,\n$$\n\\langle A_hv,w\\rangle_h=h_xh_y\\left(\\kappa_x\\sum_{j=1}^{N_y-1}\\sum_{i=0}^{N_x-1}D_xv_{i+1/2,j}D_xw_{i+1/2,j}+\\kappa_y\\sum_{i=1}^{N_x-1}\\sum_{j=0}^{N_y-1}D_yv_{i,j+1/2}D_yw_{i,j+1/2}\\right),\n$$\nso $\\langle A_hv,v\\rangle_h\\ge0$ for every interior grid vector $v$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-parabolic-theta-step-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "For every finite two-dimensional rectangular Dirichlet grid, $\\Delta t>0$, $\\theta\\in[0,1]$, and interior right-hand side (including the known source and boundary contributions), the θ step of [[def-parabolic-theta-finite-difference-scheme]] has a unique interior solution. Its implicit matrix is $I+\\theta\\Delta t A_h$, where $A_h$ is the zero-boundary operator.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "theta-energy-identity",
+          "claim": "By [F3] the step has a unique solution. Write $\\delta U=U^{n+1}-U^n$. The identity $U_\\theta=U^n+\\theta\\delta U$ gives $\\langle\\delta U,U_\\theta\\rangle_h=\\frac12(\\|U^{n+1}\\|_h^2-\\|U^n\\|_h^2)+(\\theta-\\tfrac12)\\|\\delta U\\|_h^2$ by expanding the two squared norms.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "forced-energy-inequality",
+          "claim": "Taking the inner product of [F1] with $U_\\theta$ and using step 1.1 gives $\\frac12(\\|U^{n+1}\\|_h^2-\\|U^n\\|_h^2)+(\\theta-\\tfrac12)\\|\\delta U\\|_h^2+\\Delta t\\langle A_hU_\\theta,U_\\theta\\rangle_h=\\Delta t\\langle q^n,U_\\theta\\rangle_h$. The two terms after the norm difference on the left are nonnegative by $\\theta\\ge1/2$ and [F2]. Cauchy–Schwarz and the triangle inequality give $|\\langle q^n,U_\\theta\\rangle_h|\\le\\|q^n\\|_h\\|U_\\theta\\|_h\\le\\|q^n\\|_h\\max(\\|U^n\\|_h,\\|U^{n+1}\\|_h)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "one-step-forced-bound",
+          "claim": "Put $a=\\|U^n\\|_h$, $b=\\|U^{n+1}\\|_h$, and $r=\\|q^n\\|_h$. If $b\\le a$, the claimed bound is immediate. If $b>a$, step 2.1 gives $(b^2-a^2)/2\\le\\Delta t\\,r b$; dividing by $(a+b)/2>0$ yields $b-a\\le2\\Delta t r\\,b/(a+b)\\le2\\Delta t r$. This proves the forced estimate in all cases. When $q^n=0$, it gives $b\\le a$; iteration over any finite number of steps preserves the same mesh-independent constant $1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Nx,Ny≥2 and a finite time grid are assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For q=0 the one-step bound reduces to contraction and covers U=0 without division. See step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At θ=1/2 the difference-square term vanishes; at θ=1 it is nonnegative. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The energy identity holds on the one-interior-node grid Nx=Ny=2. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The theorem explicitly uses homogeneous Dirichlet boundary rows; the source is interior. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses a finite-grid inner product and no selection principle. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "lem-periodic-heat-difference-amplification-symbol": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "Fix a dimension $d\\ge1$, side lengths $L_j>0$, integers $N_j\\ge2$, directional diffusivities $\\kappa_j>0$, and spacings $h_j=L_j/N_j$. For a finite periodic rectangular grid let\n$$\nG_h^{\\rm per}=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z),\\qquad \\langle v,w\\rangle_h=\\Bigl(\\prod_{j=1}^d h_j\\Bigr)\\sum_{i\\in G_h^{\\rm per}}v_iw_i,\n$$\nand define the positive centered heat operator, with indices reduced modulo $N_j$, by\n$$(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\kappa_j\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.$$\n\nFor a two-dimensional Dirichlet rectangle, use the nodes and weighted interior inner product of [[def-rectangular-grid-and-dirichlet-flux-stencil]]. At an interior node $(i,j)$ define\n$$(A_h^{B}V)_{ij}=\\kappa_x\\frac{2V_{ij}-V_{i+1,j}-V_{i-1,j}}{h_x^2}+\\kappa_y\\frac{2V_{ij}-V_{i,j+1}-V_{i,j-1}}{h_y^2},$$\nwhere values on boundary neighbours are the prescribed Dirichlet row $B$. Write $A_h^0$ for the square matrix on interior values when the boundary is zero. For any boundary vector $B$, let $c_h(B)$ be the result of applying this stencil to the grid vector that equals $B$ on the boundary and $0$ at interior nodes. Then $A_h^B V=A_h^0V+c_h(B)$ on interior nodes.\n\nLet $T>0$, an integer $M\\ge1$, $\\Delta t=T/M$, $t_n=n\\Delta t$, and $\\theta\\in[0,1]$. Given interior initial data $U^0$, interior source samples $F^n$, and, in the Dirichlet case, boundary rows $B^n$ for $0\\le n\\le M$ whose time-zero row agrees with the initial grid data, the periodic update is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^{\\rm per}\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)F^n+\\theta F^{n+1},\\quad 0\\le n<M.\n$$\nThe Dirichlet update, with the boundary values imposed at every time level, is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^0\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)\\bigl(F^n-c_h(B^n)\\bigr)+\\theta\\bigl(F^{n+1}-c_h(B^{n+1})\\bigr),\\quad 0\\le n<M.\n$$\nThus the interior rows use the exact boundary contributions at both endpoints of the time step. The choices $\\theta=0,1/2,1$ are forward Euler, Crank–Nicolson, and backward Euler applied to the spatially semidiscrete heat equation; this definition does not redefine those ODE time-stepping procedures.\n\nFor a homogeneous-source update with periodic rows or zero Dirichlet boundary values, let $Q_h$ be its one-step linear map when that step is well defined, and give it the operator norm induced by $\\|\\cdot\\|_h$. The family is **grid-norm power stable on $[0,T]$** if there is $C_T<\\infty$, independent of the grid and time step, such that $\\|Q_h^n\\|_{h\\to h}\\le C_T$ whenever $n\\Delta t\\le T$. This is a statement in the mesh-dependent finite grid norms defined above.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "periodic-eigenvalue",
+          "claim": "For each coordinate $j$, the mode satisfies $\\phi_\\ell(i+e_j)=e^{2\\pi\\mathrm i\\ell_j/N_j}\\phi_\\ell(i)$ and $\\phi_\\ell(i-e_j)=e^{-2\\pi\\mathrm i\\ell_j/N_j}\\phi_\\ell(i)$. Substitution into the $j$th stencil term gives $\\kappa_jh_j^{-2}(2-e^{2\\pi\\mathrm i\\ell_j/N_j}-e^{-2\\pi\\mathrm i\\ell_j/N_j})\\phi_\\ell(i)=4\\kappa_jh_j^{-2}\\sin^2(\\pi\\ell_j/N_j)\\phi_\\ell(i)$. Summing over $j$ yields the asserted eigenvalue.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fourier-orthogonality",
+          "claim": "For one coordinate, the finite geometric sum $\\sum_{r=0}^{N_j-1}e^{2\\pi\\mathrm i qr/N_j}$ equals $N_j$ if $q$ is divisible by $N_j$ and equals $0$ otherwise. Therefore distinct modes are orthogonal in the complexified grid inner product. There are exactly $\\prod_jN_j$ such nonzero modes, equal to the dimension of the grid space, so they form a basis.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "theta-factor",
+          "claim": "Substituting $U^n=a_n\\phi_\\ell$ into the zero-source update gives $(a_{n+1}-a_n)+\\Delta t\\lambda_\\ell((1-\\theta)a_n+\\theta a_{n+1})=0$. Since $1+\\theta\\Delta t\\lambda_\\ell\\ge1$, solving this scalar equation gives $a_{n+1}=g_\\theta(\\ell)a_n$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "full-grid-action",
+          "claim": "By step 1.2 every grid vector is a finite linear combination of these modes, and the update acts on each component by the factor from step 2.1. Thus the stated factors describe the full update.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement imports d>=1,Nj>=2. Proof step 1.2 counts exactly product_j Nj nonzero Fourier modes, while each coordinate geometric sum has Nj terms; no empty periodic grid or coordinate list is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero Fourier mode has λ=0 and multiplier 1. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The formula includes d=1 and reduces to the one-dimensional centered heat symbol. See step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For Nj=2 the geometric-sum basis still has Nj modes and the stencil counts both periodic neighbors. See step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The indices ℓj=0 and ℓj=Nj/2 when even are included in the finite basis. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof enumerates a finite Fourier basis and uses finite geometric sums. See step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "thm-forward-euler-heat-cfl-and-nyquist-instability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "On the finite periodic rectangular $d$-grid of [[def-parabolic-theta-finite-difference-scheme]], let $\\ell_j\\in\\{0,\\ldots,N_j-1\\}$ and\n$$\n\\phi_\\ell(i)=\\exp\\left(2\\pi\\mathrm i\\sum_{j=1}^d\\frac{\\ell_ji_j}{N_j}\\right).\n$$\nThen $\\phi_\\ell$ is an eigenvector of $A_h^{\\rm per}$ with eigenvalue\n$$\n\\lambda_\\ell=4\\sum_{j=1}^d\\frac{\\kappa_j}{h_j^2}\\sin^2\\left(\\frac{\\pi\\ell_j}{N_j}\\right)\\ge0.\n$$\nFor zero source, the $\\theta$ update multiplies this mode at each step by\n$$\ng_\\theta(\\ell)=\\frac{1-(1-\\theta)\\Delta t\\lambda_\\ell}{1+\\theta\\Delta t\\lambda_\\ell}.\n$$\nThe displayed modes form a basis of the complexified grid space, so this factor describes the full periodic update.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "spectral-upper-bound",
+          "claim": "Since $0\\le\\sin^2(\\pi\\ell_j/N_j)\\le1$, [F1] gives $0\\le\\lambda_\\ell\\le4S$ for every mode. If $\\Delta tS\\le1/2$, then $0\\le\\Delta t\\lambda_\\ell\\le2$, so $|g_0(\\ell)|=|1-\\Delta t\\lambda_\\ell|\\le1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sufficient-cfl",
+          "claim": "The Fourier modes in [F1] are an orthogonal basis. Each mode is multiplied by a scalar of magnitude at most one in step 1.1; summing the squared modal coefficients therefore shows that one update is nonexpansive in the weighted grid $L^2$ norm, and every finite power remains nonexpansive.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nyquist-sharpness",
+          "claim": "If every $N_j$ is even, choose $\\ell_j=N_j/2$ for every coordinate. Then each sine square in [F1] equals one, so $\\lambda_\\ell=4S$ and $g_0(\\ell)=1-4\\Delta tS$. It equals $-1$ at $\\Delta tS=1/2$ and is strictly less than $-1$ when $\\Delta tS>1/2$. Repeated updates multiply this mode by $g_0(\\ell)^n$, whose magnitude grows geometrically in the latter case.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement uses a d>=1 periodic grid with Nj>=2 and positive diffusivities/spacings. Proof step 2.1 expands in its nonempty finite Fourier basis; step 3.1 explicitly selects the joint Nyquist index only when every Nj is even."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At zero spatial frequency λ=0 and the forward-Euler factor is exactly 1. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=1 with even N the sufficient threshold μ≤1/2 is attained by the Nyquist mode. See step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Nj=2 is even and the joint Nyquist mode realizes λ=4Σκj/hj². See step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At ΔtS=1/2 the Nyquist factor is −1; above it the factor is below −1. See step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses the finite Fourier basis from the preceding lemma. See step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "thm-theta-scheme-discrete-maximum-principle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "Fix a dimension $d\\ge1$, side lengths $L_j>0$, integers $N_j\\ge2$, directional diffusivities $\\kappa_j>0$, and spacings $h_j=L_j/N_j$. For a finite periodic rectangular grid let\n$$\nG_h^{\\rm per}=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z),\\qquad \\langle v,w\\rangle_h=\\Bigl(\\prod_{j=1}^d h_j\\Bigr)\\sum_{i\\in G_h^{\\rm per}}v_iw_i,\n$$\nand define the positive centered heat operator, with indices reduced modulo $N_j$, by\n$$(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\kappa_j\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.$$\n\nFor a two-dimensional Dirichlet rectangle, use the nodes and weighted interior inner product of [[def-rectangular-grid-and-dirichlet-flux-stencil]]. At an interior node $(i,j)$ define\n$$(A_h^{B}V)_{ij}=\\kappa_x\\frac{2V_{ij}-V_{i+1,j}-V_{i-1,j}}{h_x^2}+\\kappa_y\\frac{2V_{ij}-V_{i,j+1}-V_{i,j-1}}{h_y^2},$$\nwhere values on boundary neighbours are the prescribed Dirichlet row $B$. Write $A_h^0$ for the square matrix on interior values when the boundary is zero. For any boundary vector $B$, let $c_h(B)$ be the result of applying this stencil to the grid vector that equals $B$ on the boundary and $0$ at interior nodes. Then $A_h^B V=A_h^0V+c_h(B)$ on interior nodes.\n\nLet $T>0$, an integer $M\\ge1$, $\\Delta t=T/M$, $t_n=n\\Delta t$, and $\\theta\\in[0,1]$. Given interior initial data $U^0$, interior source samples $F^n$, and, in the Dirichlet case, boundary rows $B^n$ for $0\\le n\\le M$ whose time-zero row agrees with the initial grid data, the periodic update is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^{\\rm per}\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)F^n+\\theta F^{n+1},\\quad 0\\le n<M.\n$$\nThe Dirichlet update, with the boundary values imposed at every time level, is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^0\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)\\bigl(F^n-c_h(B^n)\\bigr)+\\theta\\bigl(F^{n+1}-c_h(B^{n+1})\\bigr),\\quad 0\\le n<M.\n$$\nThus the interior rows use the exact boundary contributions at both endpoints of the time step. The choices $\\theta=0,1/2,1$ are forward Euler, Crank–Nicolson, and backward Euler applied to the spatially semidiscrete heat equation; this definition does not redefine those ODE time-stepping procedures.\n\nFor a homogeneous-source update with periodic rows or zero Dirichlet boundary values, let $Q_h$ be its one-step linear map when that step is well defined, and give it the operator norm induced by $\\|\\cdot\\|_h$. The family is **grid-norm power stable on $[0,T]$** if there is $C_T<\\infty$, independent of the grid and time step, such that $\\|Q_h^n\\|_{h\\to h}\\le C_T$ whenever $n\\Delta t\\le T$. This is a statement in the mesh-dependent finite grid norms defined above.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-parabolic-theta-step-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "For every finite two-dimensional rectangular Dirichlet grid, $\\Delta t>0$, $\\theta\\in[0,1]$, and interior right-hand side (including the known source and boundary contributions), the θ step of [[def-parabolic-theta-finite-difference-scheme]] has a unique interior solution. Its implicit matrix is $I+\\theta\\Delta t A_h$, where $A_h$ is the zero-boundary operator.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-parabolic-theta-l2-stability-for-half-theta",
+          "source_section": "Statement",
+          "quote": "On a finite two-dimensional rectangular Dirichlet grid with zero boundary data, let $\\theta\\in[1/2,1]$, $\\Delta t>0$, and consider one θ step of [[def-parabolic-theta-finite-difference-scheme]] with source vector $q^n$. It is uniquely solvable and satisfies\n$$\n\\|U^{n+1}\\|_h\\le\\|U^n\\|_h+2\\Delta t\\|q^n\\|_h.\n$$\nIn particular, when $q^n=0$ every step is contractive in weighted grid L2. The contraction constant $1$ is independent of the mesh, time step, and number of steps, so this is unconditional finite-time grid-norm stability.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nonnegative-explicit-rows",
+          "claim": "Rearranging the scheme at an interior node gives $(1+2\\theta(\\mu_x+\\mu_y))U^{n+1}_{ij}=\\theta\\mu_x(U^{n+1}_{i+1,j}+U^{n+1}_{i-1,j})+\\theta\\mu_y(U^{n+1}_{i,j+1}+U^{n+1}_{i,j-1})+(1-\\theta)\\mu_x(U^{n}_{i+1,j}+U^{n}_{i-1,j})+(1-\\theta)\\mu_y(U^{n}_{i,j+1}+U^{n}_{i,j-1})+[1-2(1-\\theta)(\\mu_x+\\mu_y)]U^n_{ij}$. The coefficient of the old center is nonnegative by the stated condition, and every neighbor coefficient is nonnegative because $\\theta\\in[0,1]$ and $\\mu_x,\\mu_y>0$. Thus if all old interior and boundary values are nonnegative, the known right-hand side of the implicit interior system is nonnegative; the future boundary contributions are also nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "implicit-minimum-principle",
+          "claim": "Let $W$ be the unique interior solution of the implicit system with nonnegative right-hand side and nonnegative future boundary data, whose existence is [F2]. If an interior value attained a negative minimum $W_{ij}<0$, then every adjacent interior or boundary value would be at least $W_{ij}$, so $W_{ij}+\\theta\\mu_x(2W_{ij}-W_{i+1,j}-W_{i-1,j})+\\theta\\mu_y(2W_{ij}-W_{i,j+1}-W_{i,j-1})\\le W_{ij}<0$. This is the corresponding component of the nonnegative right-hand side, a contradiction. Hence $W\\ge0$; for $\\theta=0$ the same inequality reduces to $W_{ij}<0$ and gives the contradiction directly.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "global-max-min",
+          "claim": "The zero-source scheme is linear. Let $M_0$ and $m_0$ be respectively the maximum and minimum of the finite collection of initial and prescribed boundary values at all time levels. The constant grid with interior and boundary values $M_0$ solves the zero-source scheme with constant boundary rows $M_0$, since every centered second difference of a constant is zero. Subtracting the numerical solution $U$ gives a solution with initial values $M_0-U^0\\ge0$ and boundary rows $M_0-B^n\\ge0$. Induction using steps 1.1–1.2 gives $U\\le M_0$. Likewise, subtracting the constant grid with interior and boundary values $m_0$ from $U$ gives initial values $U^0-m_0\\ge0$ and boundary rows $B^n-m_0\\ge0$, so induction gives $U\\ge m_0$. Thus $m_0\\le U^n_{ij}\\le M_0$ at every interior node and time level; the prescribed boundary nodes satisfy the same bounds by definition.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "l2-versus-maximum-principle",
+          "claim": "In the homogeneous-boundary case at $\\theta=1/2$, the stated sufficient maximum-principle restriction reduces to $\\Delta t(\\kappa_x/h_x^2+\\kappa_y/h_y^2)\\le1$. By [F3] weighted $L^2$ stability holds for every $\\Delta t>0$ under the same zero-boundary setup. Thus the maximum-principle condition is a stricter sufficient condition; this comparison makes no claim that the maximum principle fails outside it.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Nx,Ny≥2 and finitely many rows are assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero initial and boundary rows remain zero under the homogeneous linear update. See step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "θ=1 gives an automatic condition; θ=0 gives the forward-Euler convex-combination restriction. See step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The negative-minimum argument includes the single interior node when Nx=Ny=2. See step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The extrema include all prescribed boundary rows and the initial row, including time zero. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finite extrema and induction over a finite set of time levels are used. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "thm-parabolic-theta-scheme-local-truncation-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "Fix a dimension $d\\ge1$, side lengths $L_j>0$, integers $N_j\\ge2$, directional diffusivities $\\kappa_j>0$, and spacings $h_j=L_j/N_j$. For a finite periodic rectangular grid let\n$$\nG_h^{\\rm per}=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z),\\qquad \\langle v,w\\rangle_h=\\Bigl(\\prod_{j=1}^d h_j\\Bigr)\\sum_{i\\in G_h^{\\rm per}}v_iw_i,\n$$\nand define the positive centered heat operator, with indices reduced modulo $N_j$, by\n$$(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\kappa_j\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.$$\n\nFor a two-dimensional Dirichlet rectangle, use the nodes and weighted interior inner product of [[def-rectangular-grid-and-dirichlet-flux-stencil]]. At an interior node $(i,j)$ define\n$$(A_h^{B}V)_{ij}=\\kappa_x\\frac{2V_{ij}-V_{i+1,j}-V_{i-1,j}}{h_x^2}+\\kappa_y\\frac{2V_{ij}-V_{i,j+1}-V_{i,j-1}}{h_y^2},$$\nwhere values on boundary neighbours are the prescribed Dirichlet row $B$. Write $A_h^0$ for the square matrix on interior values when the boundary is zero. For any boundary vector $B$, let $c_h(B)$ be the result of applying this stencil to the grid vector that equals $B$ on the boundary and $0$ at interior nodes. Then $A_h^B V=A_h^0V+c_h(B)$ on interior nodes.\n\nLet $T>0$, an integer $M\\ge1$, $\\Delta t=T/M$, $t_n=n\\Delta t$, and $\\theta\\in[0,1]$. Given interior initial data $U^0$, interior source samples $F^n$, and, in the Dirichlet case, boundary rows $B^n$ for $0\\le n\\le M$ whose time-zero row agrees with the initial grid data, the periodic update is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^{\\rm per}\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)F^n+\\theta F^{n+1},\\quad 0\\le n<M.\n$$\nThe Dirichlet update, with the boundary values imposed at every time level, is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^0\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)\\bigl(F^n-c_h(B^n)\\bigr)+\\theta\\bigl(F^{n+1}-c_h(B^{n+1})\\bigr),\\quad 0\\le n<M.\n$$\nThus the interior rows use the exact boundary contributions at both endpoints of the time step. The choices $\\theta=0,1/2,1$ are forward Euler, Crank–Nicolson, and backward Euler applied to the spatially semidiscrete heat equation; this definition does not redefine those ODE time-stepping procedures.\n\nFor a homogeneous-source update with periodic rows or zero Dirichlet boundary values, let $Q_h$ be its one-step linear map when that step is well defined, and give it the operator norm induced by $\\|\\cdot\\|_h$. The family is **grid-norm power stable on $[0,T]$** if there is $C_T<\\infty$, independent of the grid and time step, such that $\\|Q_h^n\\|_{h\\to h}\\le C_T$ whenever $n\\Delta t\\le T$. This is a statement in the mesh-dependent finite grid norms defined above.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "complete-residual-decomposition",
+          "claim": "At each interior node set $r^n_{ij}=u(x_i,y_j,t_n)$ and define $\\tau^n=(r^{n+1}-r^n)/\\Delta t+A_h^{B_\\theta}((1-\\theta)r^n+\\theta r^{n+1})-((1-\\theta)f^n+\\theta f^{n+1})$, where $B_\\theta=(1-\\theta)B^n+\\theta B^{n+1}$ and $A_h^{B_\\theta}$ applies the centered stencil using that exact boundary row. Applying the PDE at $t_n$ and $t_{n+1}$ rewrites this as the weighted average of the two spatial stencil defects plus $(r^{n+1}-r^n)/\\Delta t-((1-\\theta)u_t^n+\\theta u_t^{n+1})$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "spatial-taylor-bound",
+          "claim": "For a one-variable $C^4$ function $v$, Taylor expansion at an interior node gives $(v(x+h)-2v(x)+v(x-h))/h^2-v''(x)=h^2(v^{(4)}(\\xi_+)+v^{(4)}(\\xi_-))/24$ for some $\\xi_+\\in(x,x+h)$ and $\\xi_-\\in(x-h,x)$. Thus the absolute error is at most $h^2\\|v^{(4)}\\|_\\infty/12$. The stencil uses the exact boundary samples at the first and last interior rows, so the same Taylor estimate applies there. Applying it in $x$ and $y$ bounds each spatial defect in step 1.1 by $(\\kappa_xh_x^2M_{x4}+\\kappa_yh_y^2M_{y4})/12$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "temporal-quadrature-bound",
+          "claim": "Put $g(t)=u_t(x_i,y_j,t)$. The quotient $(u(t_{n+1})-u(t_n))/\\Delta t$ is the average of $g$ on the time interval. For $\\theta\\ne1/2$, both this average and $(1-\\theta)g(t_n)+\\theta g(t_{n+1})$ lie between the minimum and maximum of $g$ on that interval; their difference is therefore at most its oscillation, which is at most $\\Delta t M_{tt}$. For $\\theta=1/2$, let $L$ be the linear interpolant of $g$ at the two endpoints. The interpolation remainder satisfies $|g(t)-L(t)|\\le M_{ttt}(t-t_n)(t_{n+1}-t)/2$. Integrating and dividing by $\\Delta t$ gives $|(\\Delta t)^{-1}\\int_{t_n}^{t_{n+1}}g-(g(t_n)+g(t_{n+1}))/2|\\le (\\Delta t)^2M_{ttt}/12$. These are the required bounds for the temporal term in step 1.1.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "local-residual-bound",
+          "claim": "Combining the two spatial bounds from step 2.1 with the temporal bound from step 2.2 in the residual identity of step 1.1 gives the two asserted estimates at every interior node. Taking the maximum over nodes and time steps proves the stated complete-residual bounds.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The positive rectangle and finite grid are assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If u and f vanish, every residual term and derivative bound vanishes. See step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The θ=1/2 and θ≠1/2 temporal cases are separately proved, including θ=0 and θ=1. See step 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Taylor estimates are pointwise and hold at the one interior node for Nx=Ny=2. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Exact boundary samples are used in the first and last interior stencils; derivative bounds hold on the closed cylinder. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses pointwise Taylor formulas and finite node maxima; no choice axiom is used. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "thm-parabolic-theta-scheme-global-error-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "Fix a dimension $d\\ge1$, side lengths $L_j>0$, integers $N_j\\ge2$, directional diffusivities $\\kappa_j>0$, and spacings $h_j=L_j/N_j$. For a finite periodic rectangular grid let\n$$\nG_h^{\\rm per}=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z),\\qquad \\langle v,w\\rangle_h=\\Bigl(\\prod_{j=1}^d h_j\\Bigr)\\sum_{i\\in G_h^{\\rm per}}v_iw_i,\n$$\nand define the positive centered heat operator, with indices reduced modulo $N_j$, by\n$$(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\kappa_j\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.$$\n\nFor a two-dimensional Dirichlet rectangle, use the nodes and weighted interior inner product of [[def-rectangular-grid-and-dirichlet-flux-stencil]]. At an interior node $(i,j)$ define\n$$(A_h^{B}V)_{ij}=\\kappa_x\\frac{2V_{ij}-V_{i+1,j}-V_{i-1,j}}{h_x^2}+\\kappa_y\\frac{2V_{ij}-V_{i,j+1}-V_{i,j-1}}{h_y^2},$$\nwhere values on boundary neighbours are the prescribed Dirichlet row $B$. Write $A_h^0$ for the square matrix on interior values when the boundary is zero. For any boundary vector $B$, let $c_h(B)$ be the result of applying this stencil to the grid vector that equals $B$ on the boundary and $0$ at interior nodes. Then $A_h^B V=A_h^0V+c_h(B)$ on interior nodes.\n\nLet $T>0$, an integer $M\\ge1$, $\\Delta t=T/M$, $t_n=n\\Delta t$, and $\\theta\\in[0,1]$. Given interior initial data $U^0$, interior source samples $F^n$, and, in the Dirichlet case, boundary rows $B^n$ for $0\\le n\\le M$ whose time-zero row agrees with the initial grid data, the periodic update is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^{\\rm per}\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)F^n+\\theta F^{n+1},\\quad 0\\le n<M.\n$$\nThe Dirichlet update, with the boundary values imposed at every time level, is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^0\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)\\bigl(F^n-c_h(B^n)\\bigr)+\\theta\\bigl(F^{n+1}-c_h(B^{n+1})\\bigr),\\quad 0\\le n<M.\n$$\nThus the interior rows use the exact boundary contributions at both endpoints of the time step. The choices $\\theta=0,1/2,1$ are forward Euler, Crank–Nicolson, and backward Euler applied to the spatially semidiscrete heat equation; this definition does not redefine those ODE time-stepping procedures.\n\nFor a homogeneous-source update with periodic rows or zero Dirichlet boundary values, let $Q_h$ be its one-step linear map when that step is well defined, and give it the operator norm induced by $\\|\\cdot\\|_h$. The family is **grid-norm power stable on $[0,T]$** if there is $C_T<\\infty$, independent of the grid and time step, such that $\\|Q_h^n\\|_{h\\to h}\\le C_T$ whenever $n\\Delta t\\le T$. This is a statement in the mesh-dependent finite grid norms defined above.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-parabolic-theta-l2-stability-for-half-theta",
+          "source_section": "Statement",
+          "quote": "On a finite two-dimensional rectangular Dirichlet grid with zero boundary data, let $\\theta\\in[1/2,1]$, $\\Delta t>0$, and consider one θ step of [[def-parabolic-theta-finite-difference-scheme]] with source vector $q^n$. It is uniquely solvable and satisfies\n$$\n\\|U^{n+1}\\|_h\\le\\|U^n\\|_h+2\\Delta t\\|q^n\\|_h.\n$$\nIn particular, when $q^n=0$ every step is contractive in weighted grid L2. The contraction constant $1$ is independent of the mesh, time step, and number of steps, so this is unconditional finite-time grid-norm stability.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-parabolic-theta-scheme-local-truncation-error",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega=(0,L_x)\\times(0,L_y)$, $T>0$, $N_x,N_y\\ge2$, $M\\ge1$, $h_x=L_x/N_x$, $h_y=L_y/N_y$, and $\\Delta t=T/M$. Let $\\kappa_x,\\kappa_y>0$, $\\theta\\in[0,1]$, and suppose $u$ satisfies\n$$\nu_t-\\kappa_xu_{xx}-\\kappa_yu_{yy}=f$$\non $\\overline\\Omega\\times[0,T]$, with exact sampled initial and Dirichlet rows in the scheme of [[def-parabolic-theta-finite-difference-scheme]]. Assume $u_{tt},u_{ttt},u_{xxxx},u_{yyyy}$ are continuous on the closed cylinder, and write $M_{tt},M_{ttt},M_{x4},M_{y4}$ for their respective sup norms there. If $r^n$ is the exact grid sample at time $t_n$, the complete interior residual is bounded at every time step by\n$$\n\\|\\tau^n\\|_\\infty\\le \\Delta t M_{tt}+\\frac{\\kappa_xh_x^2M_{x4}+\\kappa_yh_y^2M_{y4}}{12}\\quad(\\theta\\ne\\tfrac12),\n$$\nand\n$$\n\\|\\tau^n\\|_\\infty\\le\\frac{(\\Delta t)^2M_{ttt}}{12}+\\frac{\\kappa_xh_x^2M_{x4}+\\kappa_yh_y^2M_{y4}}{12}\\quad(\\theta=\\tfrac12),\n$$\nwhere $\\tau^n$ is defined by substituting the exact samples and the exact boundary rows into the fully discrete equation, including its interior rows adjacent to the boundary.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "error-equation",
+          "claim": "Define the interior error $e^n=r^n-U^n$. Exact initial values give $e^0=0$, and exact boundary rows give $e^n=0$ on every boundary node. Subtracting the numerical equation from the exact sampled equation whose residual is [F3] shows that $e^n$ satisfies the same zero-Dirichlet θ update with source $q^n=\\tau^n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "residual-propagation",
+          "claim": "Applying [F2] at each time step gives $\\|e^{n+1}\\|_h\\le\\|e^n\\|_h+2\\Delta t\\|\\tau^n\\|_h$. Summing these inequalities from $n=0$ to $m-1$ and using $e^0=0$ yields $\\|e^m\\|_h\\le2\\Delta t\\sum_{n=0}^{m-1}\\|\\tau^n\\|_h$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weighted-grid-error",
+          "claim": "The weighted grid norm has total interior weight $h_xh_y(N_x-1)(N_y-1)<L_xL_y$, so [F3] gives $\\|\\tau^n\\|_h\\le\\sqrt{L_xL_y}\\,R_\\theta$. Since $m\\Delta t\\le T$, step 2.1 implies $\\|e^m\\|_h\\le2T\\sqrt{L_xL_y}\\,R_\\theta$. Substituting the two explicit values of $R_\\theta$ from [F3] proves the stated rates.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is a positive rectangle and M≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Exact zero data give e0=0 and τ=0, so the bound is zero. See step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The θ=1/2 and θ≠1/2 rates are inherited from the two local residual branches. See step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The total interior weight bound holds for Nx=Ny=2 and is below the rectangle area. See step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Exact initial and every-time boundary samples make e0 and all boundary errors zero. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The estimate sums finitely many residual bounds and uses no choice axiom. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "ex-forward-euler-parabolic-cfl-threshold-and-nyquist-growth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "Fix a dimension $d\\ge1$, side lengths $L_j>0$, integers $N_j\\ge2$, directional diffusivities $\\kappa_j>0$, and spacings $h_j=L_j/N_j$. For a finite periodic rectangular grid let\n$$\nG_h^{\\rm per}=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z),\\qquad \\langle v,w\\rangle_h=\\Bigl(\\prod_{j=1}^d h_j\\Bigr)\\sum_{i\\in G_h^{\\rm per}}v_iw_i,\n$$\nand define the positive centered heat operator, with indices reduced modulo $N_j$, by\n$$(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\kappa_j\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.$$\n\nFor a two-dimensional Dirichlet rectangle, use the nodes and weighted interior inner product of [[def-rectangular-grid-and-dirichlet-flux-stencil]]. At an interior node $(i,j)$ define\n$$(A_h^{B}V)_{ij}=\\kappa_x\\frac{2V_{ij}-V_{i+1,j}-V_{i-1,j}}{h_x^2}+\\kappa_y\\frac{2V_{ij}-V_{i,j+1}-V_{i,j-1}}{h_y^2},$$\nwhere values on boundary neighbours are the prescribed Dirichlet row $B$. Write $A_h^0$ for the square matrix on interior values when the boundary is zero. For any boundary vector $B$, let $c_h(B)$ be the result of applying this stencil to the grid vector that equals $B$ on the boundary and $0$ at interior nodes. Then $A_h^B V=A_h^0V+c_h(B)$ on interior nodes.\n\nLet $T>0$, an integer $M\\ge1$, $\\Delta t=T/M$, $t_n=n\\Delta t$, and $\\theta\\in[0,1]$. Given interior initial data $U^0$, interior source samples $F^n$, and, in the Dirichlet case, boundary rows $B^n$ for $0\\le n\\le M$ whose time-zero row agrees with the initial grid data, the periodic update is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^{\\rm per}\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)F^n+\\theta F^{n+1},\\quad 0\\le n<M.\n$$\nThe Dirichlet update, with the boundary values imposed at every time level, is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^0\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)\\bigl(F^n-c_h(B^n)\\bigr)+\\theta\\bigl(F^{n+1}-c_h(B^{n+1})\\bigr),\\quad 0\\le n<M.\n$$\nThus the interior rows use the exact boundary contributions at both endpoints of the time step. The choices $\\theta=0,1/2,1$ are forward Euler, Crank–Nicolson, and backward Euler applied to the spatially semidiscrete heat equation; this definition does not redefine those ODE time-stepping procedures.\n\nFor a homogeneous-source update with periodic rows or zero Dirichlet boundary values, let $Q_h$ be its one-step linear map when that step is well defined, and give it the operator norm induced by $\\|\\cdot\\|_h$. The family is **grid-norm power stable on $[0,T]$** if there is $C_T<\\infty$, independent of the grid and time step, such that $\\|Q_h^n\\|_{h\\to h}\\le C_T$ whenever $n\\Delta t\\le T$. This is a statement in the mesh-dependent finite grid norms defined above.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "On the finite periodic rectangular $d$-grid of [[def-parabolic-theta-finite-difference-scheme]], let $\\ell_j\\in\\{0,\\ldots,N_j-1\\}$ and\n$$\n\\phi_\\ell(i)=\\exp\\left(2\\pi\\mathrm i\\sum_{j=1}^d\\frac{\\ell_ji_j}{N_j}\\right).\n$$\nThen $\\phi_\\ell$ is an eigenvector of $A_h^{\\rm per}$ with eigenvalue\n$$\n\\lambda_\\ell=4\\sum_{j=1}^d\\frac{\\kappa_j}{h_j^2}\\sin^2\\left(\\frac{\\pi\\ell_j}{N_j}\\right)\\ge0.\n$$\nFor zero source, the $\\theta$ update multiplies this mode at each step by\n$$\ng_\\theta(\\ell)=\\frac{1-(1-\\theta)\\Delta t\\lambda_\\ell}{1+\\theta\\Delta t\\lambda_\\ell}.\n$$\nThe displayed modes form a basis of the complexified grid space, so this factor describes the full periodic update.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-forward-euler-heat-cfl-and-nyquist-instability",
+          "source_section": "Statement",
+          "quote": "On a finite periodic rectangular $d$-grid with $\\kappa_j>0$, let $S=\\sum_{j=1}^d\\kappa_j/h_j^2$. The forward-Euler heat update is nonexpansive in the periodic weighted grid L2 norm whenever $\\Delta tS\\le1/2$. If every $N_j$ is even, the condition is sharp for that grid family: when $\\Delta tS>1/2$, the joint Nyquist Fourier mode has amplification below $-1$ and grows in norm under iteration. At equality its amplification is $-1$, so its magnitude is preserved.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nyquist-factor",
+          "claim": "The vector $\\phi_j=(-1)^j$ is the mode $\\ell=N/2$, so [F2] gives its multiplier $g=1-4\\mu$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "endpoint-and-growth",
+          "claim": "At $\\mu=1/2$, $g=-1$, and hence $U_j^n=(-1)^n\\phi_j$ has unchanged norm; [F3] shows all other Fourier modes are also nonexpansive. If $\\mu>1/2$, then $g<-1$, so $\\|U^n\\|_h=|g|^n\\|\\phi\\|_h$ grows geometrically.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N is an even integer at least two."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes nonzero alternating initial data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The exact endpoint μ=1/2 gives multiplier −1 and preserves mode magnitude. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "N=2 is the smallest even periodic grid and has the Nyquist mode. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both μ=1/2 and μ>1/2 are computed explicitly. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The verification is a direct finite-mode substitution. See step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "ex-backward-euler-damps-high-frequencies": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "Fix a dimension $d\\ge1$, side lengths $L_j>0$, integers $N_j\\ge2$, directional diffusivities $\\kappa_j>0$, and spacings $h_j=L_j/N_j$. For a finite periodic rectangular grid let\n$$\nG_h^{\\rm per}=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z),\\qquad \\langle v,w\\rangle_h=\\Bigl(\\prod_{j=1}^d h_j\\Bigr)\\sum_{i\\in G_h^{\\rm per}}v_iw_i,\n$$\nand define the positive centered heat operator, with indices reduced modulo $N_j$, by\n$$(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\kappa_j\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.$$\n\nFor a two-dimensional Dirichlet rectangle, use the nodes and weighted interior inner product of [[def-rectangular-grid-and-dirichlet-flux-stencil]]. At an interior node $(i,j)$ define\n$$(A_h^{B}V)_{ij}=\\kappa_x\\frac{2V_{ij}-V_{i+1,j}-V_{i-1,j}}{h_x^2}+\\kappa_y\\frac{2V_{ij}-V_{i,j+1}-V_{i,j-1}}{h_y^2},$$\nwhere values on boundary neighbours are the prescribed Dirichlet row $B$. Write $A_h^0$ for the square matrix on interior values when the boundary is zero. For any boundary vector $B$, let $c_h(B)$ be the result of applying this stencil to the grid vector that equals $B$ on the boundary and $0$ at interior nodes. Then $A_h^B V=A_h^0V+c_h(B)$ on interior nodes.\n\nLet $T>0$, an integer $M\\ge1$, $\\Delta t=T/M$, $t_n=n\\Delta t$, and $\\theta\\in[0,1]$. Given interior initial data $U^0$, interior source samples $F^n$, and, in the Dirichlet case, boundary rows $B^n$ for $0\\le n\\le M$ whose time-zero row agrees with the initial grid data, the periodic update is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^{\\rm per}\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)F^n+\\theta F^{n+1},\\quad 0\\le n<M.\n$$\nThe Dirichlet update, with the boundary values imposed at every time level, is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^0\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)\\bigl(F^n-c_h(B^n)\\bigr)+\\theta\\bigl(F^{n+1}-c_h(B^{n+1})\\bigr),\\quad 0\\le n<M.\n$$\nThus the interior rows use the exact boundary contributions at both endpoints of the time step. The choices $\\theta=0,1/2,1$ are forward Euler, Crank–Nicolson, and backward Euler applied to the spatially semidiscrete heat equation; this definition does not redefine those ODE time-stepping procedures.\n\nFor a homogeneous-source update with periodic rows or zero Dirichlet boundary values, let $Q_h$ be its one-step linear map when that step is well defined, and give it the operator norm induced by $\\|\\cdot\\|_h$. The family is **grid-norm power stable on $[0,T]$** if there is $C_T<\\infty$, independent of the grid and time step, such that $\\|Q_h^n\\|_{h\\to h}\\le C_T$ whenever $n\\Delta t\\le T$. This is a statement in the mesh-dependent finite grid norms defined above.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "On the finite periodic rectangular $d$-grid of [[def-parabolic-theta-finite-difference-scheme]], let $\\ell_j\\in\\{0,\\ldots,N_j-1\\}$ and\n$$\n\\phi_\\ell(i)=\\exp\\left(2\\pi\\mathrm i\\sum_{j=1}^d\\frac{\\ell_ji_j}{N_j}\\right).\n$$\nThen $\\phi_\\ell$ is an eigenvector of $A_h^{\\rm per}$ with eigenvalue\n$$\n\\lambda_\\ell=4\\sum_{j=1}^d\\frac{\\kappa_j}{h_j^2}\\sin^2\\left(\\frac{\\pi\\ell_j}{N_j}\\right)\\ge0.\n$$\nFor zero source, the $\\theta$ update multiplies this mode at each step by\n$$\ng_\\theta(\\ell)=\\frac{1-(1-\\theta)\\Delta t\\lambda_\\ell}{1+\\theta\\Delta t\\lambda_\\ell}.\n$$\nThe displayed modes form a basis of the complexified grid space, so this factor describes the full periodic update.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "backward-euler-nyquist-factor",
+          "claim": "Setting $\\theta=1$ and $\\lambda=4\\kappa/h^2$ in [F2] gives $g=1/(1+4\\kappa\\Delta t/h^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "mesh-limit-damping",
+          "claim": "As $h\\to0$ with $\\kappa,\\Delta t>0$ fixed, the denominator tends to infinity, so $g\\to0$. Thus this high-frequency mode is strongly damped.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "all-mode-stability",
+          "claim": "For every mode $\\lambda\\ge0$, the backward-Euler factor is $1/(1+\\Delta t\\lambda)\\in(0,1]$, so the periodic Fourier basis gives nonincrease of the full weighted grid $L^2$ norm.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N is even and at least two."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes κ>0 and Δt>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Nyquist eigenvalue is exactly 4κ/h² for every even N. See step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The multiplier formula also holds at N=2. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The limit h→0 is taken with κ and Δt fixed and positive. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example is a scalar formula and real limit. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "ex-crank-nicolson-preserves-high-frequency-amplitude": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "Fix a dimension $d\\ge1$, side lengths $L_j>0$, integers $N_j\\ge2$, directional diffusivities $\\kappa_j>0$, and spacings $h_j=L_j/N_j$. For a finite periodic rectangular grid let\n$$\nG_h^{\\rm per}=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z),\\qquad \\langle v,w\\rangle_h=\\Bigl(\\prod_{j=1}^d h_j\\Bigr)\\sum_{i\\in G_h^{\\rm per}}v_iw_i,\n$$\nand define the positive centered heat operator, with indices reduced modulo $N_j$, by\n$$(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\kappa_j\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.$$\n\nFor a two-dimensional Dirichlet rectangle, use the nodes and weighted interior inner product of [[def-rectangular-grid-and-dirichlet-flux-stencil]]. At an interior node $(i,j)$ define\n$$(A_h^{B}V)_{ij}=\\kappa_x\\frac{2V_{ij}-V_{i+1,j}-V_{i-1,j}}{h_x^2}+\\kappa_y\\frac{2V_{ij}-V_{i,j+1}-V_{i,j-1}}{h_y^2},$$\nwhere values on boundary neighbours are the prescribed Dirichlet row $B$. Write $A_h^0$ for the square matrix on interior values when the boundary is zero. For any boundary vector $B$, let $c_h(B)$ be the result of applying this stencil to the grid vector that equals $B$ on the boundary and $0$ at interior nodes. Then $A_h^B V=A_h^0V+c_h(B)$ on interior nodes.\n\nLet $T>0$, an integer $M\\ge1$, $\\Delta t=T/M$, $t_n=n\\Delta t$, and $\\theta\\in[0,1]$. Given interior initial data $U^0$, interior source samples $F^n$, and, in the Dirichlet case, boundary rows $B^n$ for $0\\le n\\le M$ whose time-zero row agrees with the initial grid data, the periodic update is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^{\\rm per}\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)F^n+\\theta F^{n+1},\\quad 0\\le n<M.\n$$\nThe Dirichlet update, with the boundary values imposed at every time level, is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^0\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)\\bigl(F^n-c_h(B^n)\\bigr)+\\theta\\bigl(F^{n+1}-c_h(B^{n+1})\\bigr),\\quad 0\\le n<M.\n$$\nThus the interior rows use the exact boundary contributions at both endpoints of the time step. The choices $\\theta=0,1/2,1$ are forward Euler, Crank–Nicolson, and backward Euler applied to the spatially semidiscrete heat equation; this definition does not redefine those ODE time-stepping procedures.\n\nFor a homogeneous-source update with periodic rows or zero Dirichlet boundary values, let $Q_h$ be its one-step linear map when that step is well defined, and give it the operator norm induced by $\\|\\cdot\\|_h$. The family is **grid-norm power stable on $[0,T]$** if there is $C_T<\\infty$, independent of the grid and time step, such that $\\|Q_h^n\\|_{h\\to h}\\le C_T$ whenever $n\\Delta t\\le T$. This is a statement in the mesh-dependent finite grid norms defined above.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-periodic-heat-difference-amplification-symbol",
+          "source_section": "Statement",
+          "quote": "On the finite periodic rectangular $d$-grid of [[def-parabolic-theta-finite-difference-scheme]], let $\\ell_j\\in\\{0,\\ldots,N_j-1\\}$ and\n$$\n\\phi_\\ell(i)=\\exp\\left(2\\pi\\mathrm i\\sum_{j=1}^d\\frac{\\ell_ji_j}{N_j}\\right).\n$$\nThen $\\phi_\\ell$ is an eigenvector of $A_h^{\\rm per}$ with eigenvalue\n$$\n\\lambda_\\ell=4\\sum_{j=1}^d\\frac{\\kappa_j}{h_j^2}\\sin^2\\left(\\frac{\\pi\\ell_j}{N_j}\\right)\\ge0.\n$$\nFor zero source, the $\\theta$ update multiplies this mode at each step by\n$$\ng_\\theta(\\ell)=\\frac{1-(1-\\theta)\\Delta t\\lambda_\\ell}{1+\\theta\\Delta t\\lambda_\\ell}.\n$$\nThe displayed modes form a basis of the complexified grid space, so this factor describes the full periodic update.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "crank-nicolson-factor",
+          "claim": "Substituting $\\theta=1/2$ and $\\lambda=4\\kappa/h^2$ into [F2] gives $g=(1-2\\kappa\\Delta t/h^2)/(1+2\\kappa\\Delta t/h^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "high-frequency-limit",
+          "claim": "As $h\\to0$ with $\\kappa,\\Delta t>0$ fixed, the numerator and denominator have leading terms $-2\\kappa\\Delta t/h^2$ and $2\\kappa\\Delta t/h^2$, so $g\\to-1$ and $|g|\\to1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stability-without-damping",
+          "claim": "For any $z=\\Delta t\\lambda\\ge0$, $|1-z/2|\\le1+z/2$, so the factor in [F2] has magnitude at most one. Thus the mode is stable at each mesh while its high-frequency damping vanishes in the limit.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N is even and at least two."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes κ>0 and Δt>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar inequality |1−z/2|≤1+z/2 holds at z=0 and all z≥0. See step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The multiplier formula includes the smallest even grid N=2. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The fixed-positive-Δt mesh limit gives g→−1 and |g|→1. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The verification uses scalar algebra only. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    },
+    "ex-continuous-and-discrete-heat-maximum-principles": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-parabolic-theta-finite-difference-scheme",
+          "source_section": "Definition",
+          "quote": "Fix a dimension $d\\ge1$, side lengths $L_j>0$, integers $N_j\\ge2$, directional diffusivities $\\kappa_j>0$, and spacings $h_j=L_j/N_j$. For a finite periodic rectangular grid let\n$$\nG_h^{\\rm per}=\\prod_{j=1}^d(\\mathbb Z/N_j\\mathbb Z),\\qquad \\langle v,w\\rangle_h=\\Bigl(\\prod_{j=1}^d h_j\\Bigr)\\sum_{i\\in G_h^{\\rm per}}v_iw_i,\n$$\nand define the positive centered heat operator, with indices reduced modulo $N_j$, by\n$$(A_h^{\\rm per}v)_i=\\sum_{j=1}^d\\kappa_j\\frac{2v_i-v_{i+e_j}-v_{i-e_j}}{h_j^2}.$$\n\nFor a two-dimensional Dirichlet rectangle, use the nodes and weighted interior inner product of [[def-rectangular-grid-and-dirichlet-flux-stencil]]. At an interior node $(i,j)$ define\n$$(A_h^{B}V)_{ij}=\\kappa_x\\frac{2V_{ij}-V_{i+1,j}-V_{i-1,j}}{h_x^2}+\\kappa_y\\frac{2V_{ij}-V_{i,j+1}-V_{i,j-1}}{h_y^2},$$\nwhere values on boundary neighbours are the prescribed Dirichlet row $B$. Write $A_h^0$ for the square matrix on interior values when the boundary is zero. For any boundary vector $B$, let $c_h(B)$ be the result of applying this stencil to the grid vector that equals $B$ on the boundary and $0$ at interior nodes. Then $A_h^B V=A_h^0V+c_h(B)$ on interior nodes.\n\nLet $T>0$, an integer $M\\ge1$, $\\Delta t=T/M$, $t_n=n\\Delta t$, and $\\theta\\in[0,1]$. Given interior initial data $U^0$, interior source samples $F^n$, and, in the Dirichlet case, boundary rows $B^n$ for $0\\le n\\le M$ whose time-zero row agrees with the initial grid data, the periodic update is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^{\\rm per}\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)F^n+\\theta F^{n+1},\\quad 0\\le n<M.\n$$\nThe Dirichlet update, with the boundary values imposed at every time level, is\n$$\n\\frac{U^{n+1}-U^n}{\\Delta t}+A_h^0\\bigl((1-\\theta)U^n+\\theta U^{n+1}\\bigr)=(1-\\theta)\\bigl(F^n-c_h(B^n)\\bigr)+\\theta\\bigl(F^{n+1}-c_h(B^{n+1})\\bigr),\\quad 0\\le n<M.\n$$\nThus the interior rows use the exact boundary contributions at both endpoints of the time step. The choices $\\theta=0,1/2,1$ are forward Euler, Crank–Nicolson, and backward Euler applied to the spatially semidiscrete heat equation; this definition does not redefine those ODE time-stepping procedures.\n\nFor a homogeneous-source update with periodic rows or zero Dirichlet boundary values, let $Q_h$ be its one-step linear map when that step is well defined, and give it the operator norm induced by $\\|\\cdot\\|_h$. The family is **grid-norm power stable on $[0,T]$** if there is $C_T<\\infty$, independent of the grid and time step, such that $\\|Q_h^n\\|_{h\\to h}\\le C_T$ whenever $n\\Delta t\\le T$. This is a statement in the mesh-dependent finite grid norms defined above.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-theta-scheme-discrete-maximum-principle",
+          "source_section": "Statement",
+          "quote": "On the finite two-dimensional rectangular Dirichlet grid of [[def-parabolic-theta-finite-difference-scheme]], suppose $\\theta\\in[0,1]$, the source is zero, and\n$$\n\\Delta t(1-\\theta)\\left(\\frac{\\kappa_x}{h_x^2}+\\frac{\\kappa_y}{h_y^2}\\right)\\le\\frac12.\n$$\nThen every numerical interior value at every time level lies between the minimum and maximum of all initial and prescribed boundary values. In particular, with homogeneous boundary rows and $\\theta=1/2$, this maximum-principle condition is $\\Delta t(\\kappa_x/h_x^2+\\kappa_y/h_y^2)\\le1$, a stricter sufficient condition than the unconditional weighted $L^2$ stability for the same homogeneous problem proved in [[thm-parabolic-theta-l2-stability-for-half-theta]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-heat-solution",
+          "claim": "Direct differentiation gives $u_t=-2\\pi^2u$ and $\\Delta u=-2\\pi^2u$, so $u_t-\\Delta u=0$. Also $u=0$ on the four sides and $u(x,y,0)=\\sin(\\pi x)\\sin(\\pi y)\\in[0,1]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "continuous-bound",
+          "claim": "On $[0,1]$, $0\\le\\sin(\\pi x),\\sin(\\pi y)\\le1$, and for $t\\ge0$ the factor $e^{-2\\pi^2t}$ lies in $(0,1]$. The explicit formula therefore gives $0\\le u\\le1$ throughout the closed cylinder.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "discrete-bound",
+          "claim": "The sampled initial values lie in $[0,1]$ and the boundary rows are zero. With $\\theta=0$ and $\\kappa_x=\\kappa_y=1$, the condition in [F2] is exactly $2\\Delta t/h^2\\le1/2$. Therefore [F2] gives $0\\le U^n_{ij}\\le1$ at every grid node and time level.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Ω=(0,1)^2 is nonempty and bounded; N≥2 and M≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The boundary data are zero and the explicit solution is zero on all four sides. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The continuous initial maximum is 1 at an interior point; the discrete values remain in [0,1]. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For N=2 the single interior value is 1 initially and the stated CFL condition still applies. See step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The continuous parabolic boundary includes initial and lateral rows; the discrete extrema include every prescribed boundary row. See step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The solution is explicit and the two maximum-principle applications make no choices. See step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a one-way result or example and states no equivalence."
+        }
+      ]
+    }
+  }
+}

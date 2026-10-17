@@ -1,0 +1,792 @@
+--- current/research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json
++++ proposed/research/numerical-optimization-dynamics-2026-10-16-batch-74.proof-contracts.json
+@@ -2508,7 +2508,7 @@
+           "fact": "F1",
+           "source": "alg-two-stage-rosenbrock-w-method",
+           "source_section": "Definition",
+-          "quote": "**Input:** an ODE field $f:D\\to\\mathbb R^d$ on the open domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$, $(t_n,y_n)\\in D$, $h>0$, a finite real state-Jacobian approximation $\\widetilde J_n$, a finite approximation $\\widetilde T_n$ to $\\partial_t f(t_n,y_n)$, stage residual tolerances $\\varepsilon_1,\\varepsilon_2\\ge0$, the selected stored finite set $\\mathbb F$ of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], terminating exact field-evaluation and `store` routines, and the terminating certified-norm routine of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. The exact-storage check returns $v$ if every entry is in $\\mathbb F$ and `unavailable` otherwise; it does not round. Put\n$$\\alpha:=\\frac{1}{2+\\sqrt2}=1-\\frac{1}{\\sqrt2},\\qquad W:=I_d-\\alpha h\\widetilde J_n.$$\nThe two-stage method is\n$$W k_1=f(t_n,y_n)+\\alpha h\\widetilde T_n,$$\n$$F_1=f\\!\\left(t_n+\\frac h2,y_n+\\frac h2k_1\\right),\\qquad W q_2=F_1-k_1,\\qquad k_2=q_2+k_1,$$\n$$y_{n+1}=y_n+h k_2.$$\n\nThe residuals $Wk_1-[f(t_n,y_n)+\\alpha h\\widetilde T_n]$ and $Wq_2-(F_1-k_1)$ are update residuals of their linear stage equations in the sense of [[def-implicit-residual-and-algebraic-error-units]]. The coefficient $\\alpha$ and the autonomous two-stage formula are the second-order Rosenbrock formula recorded for ode23s in WIAS Example 2.37. The first-stage $\\alpha h\\widetilde T_n$ term specifies the nonautonomous extension used here; its order is independently established under the stated boundedness hypotheses.\n\n1. Form $W$ by exact outer arithmetic and set $W_s:=\\operatorname{store}(W)$. If storage returns `unavailable`, return $(y_n,\\texttt{representation-unavailable})$. Factor $W_s$ once using [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. If factorization fails, return $(y_n,\\texttt{factorization-failure})$.\n2. Evaluate $f(t_n,y_n)$ and form $b_1=f(t_n,y_n)+\\alpha h\\widetilde T_n$ by exact outer arithmetic. If either evaluation fails or storage $b_{1,s}:=\\operatorname{store}(b_1)$ is unavailable, return $(y_n,\\texttt{input-or-representation-failure})$. Solve $W_sk_1=b_{1,s}$ with tolerance $\\varepsilon_1$. If it is not certified, return $(y_n,\\text{stage-1 status})$. Otherwise set $k_1$ to its returned vector.\n3. Check $(t_n+h/2,y_n+hk_1/2)\\in D$. If not, return $(y_n,\\texttt{invalid-stage-domain})$. Otherwise evaluate $F_1$ exactly, form $b_2=F_1-k_1$ exactly, and set $b_{2,s}:=\\operatorname{store}(b_2)$. If evaluation fails or storage is unavailable, return $(y_n,\\texttt{stage-2-input-or-representation-failure})$. Solve $W_sq_2=b_{2,s}$ with the same factor object and tolerance $\\varepsilon_2$. If this solve is not certified, return $(y_n,\\text{stage-2 status})$.\n4. Set $k_2=q_2+k_1$ and return $(y_n+h k_2,\\texttt{success},\\rho_1,\\rho_2)$ with the two certified update-residual bounds.\n\nThe exact-J branch takes $\\widetilde J_n=D_yf(t_n,y_n)$ and $\\widetilde T_n=\\partial_t f(t_n,y_n)$. The W-method branch permits any bounded matrix approximations satisfying the hypotheses of the local and global order results; it receives no scalar A/L-stability guarantee from the exact-J result. The factor matrix is the same in both stages, so the procedure performs one shifted-matrix factorization and two stage solves. For this mixed-arithmetic specification, field evaluations and outer affine combinations are exact real operations, and every matrix/RHS passed to QR must pass `store`; factorization, triangular solves, and residual checks use the operationwise model. A full hardware-rounding theorem for outer operations would need additional certified evaluation and update-error terms. A finite arithmetic residual is not a forward-error bound without an inverse estimate.\n",
++          "quote": "**Input:** an ODE field $f:D\\to\\mathbb R^d$ on the open domain $D\\subseteq\\mathbb R\\times\\mathbb R^d$, $(t_n,y_n)\\in D$, $h>0$, a finite real state-Jacobian approximation $\\widetilde J_n$, a finite approximation $\\widetilde T_n$ to $\\partial_t f(t_n,y_n)$, stage residual tolerances $\\varepsilon_1,\\varepsilon_2\\ge0$, a unit roundoff $u>0$ with $du<1$, the selected stored finite set $\\mathbb F$ of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], a terminating field-evaluation routine `evaluate_f` that returns either the exact value $f(t,y)$ or `evaluation-failure` for each requested $(t,y)\\in D$, terminating `store` routine, and terminating certificate evaluator `evaluator` meeting the input contract of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. The exact-storage check returns $v$ if every entry is in $\\mathbb F$ and `unavailable` otherwise; it does not round. Put\n$$\\alpha:=\\frac{1}{2+\\sqrt2}=1-\\frac{1}{\\sqrt2},\\qquad W:=I_d-\\alpha h\\widetilde J_n.$$\nThe two-stage method is\n$$W k_1=f(t_n,y_n)+\\alpha h\\widetilde T_n,$$\n$$F_1=f\\!\\left(t_n+\\frac h2,y_n+\\frac h2k_1\\right),\\qquad W q_2=F_1-k_1,\\qquad k_2=q_2+k_1,$$\n$$y_{n+1}=y_n+h k_2.$$\n\nThe residuals $Wk_1-[f(t_n,y_n)+\\alpha h\\widetilde T_n]$ and $Wq_2-(F_1-k_1)$ are update residuals of their linear stage equations in the sense of [[def-implicit-residual-and-algebraic-error-units]]. The coefficient $\\alpha$ and the autonomous two-stage formula are the second-order Rosenbrock formula recorded for ode23s in WIAS Example 2.37. The first-stage $\\alpha h\\widetilde T_n$ term specifies the nonautonomous extension used here; its order is independently established under the stated boundedness hypotheses.\n\n1. Form $W$ by exact outer arithmetic and set $W_s:=\\operatorname{store}(W)$. If storage returns `unavailable`, return $(y_n,\\texttt{representation-unavailable})$. Call `factor(W_s,u,evaluator)` of [[alg-rosenbrock-shifted-qr-solver-with-residual-certificate]]. If it returns a factorization failure status, return $(y_n,\\texttt{factorization-failure})$; otherwise retain its factor object.\n2. Call `evaluate_f(t_n,y_n)`. If it returns `evaluation-failure`, return $(y_n,\\texttt{input-or-representation-failure})$. Otherwise denote its returned exact value by $f_0$, form $b_1=f_0+\\alpha h\\widetilde T_n$ by exact outer arithmetic, and set $b_{1,s}:=\\operatorname{store}(b_1)$. If storage returns `unavailable`, return $(y_n,\\texttt{input-or-representation-failure})$. Call the retained factor object's `solve(b_{1,s},\\varepsilon_1)`. If it is not certified, return $(y_n,\\text{stage-1 status})$. Otherwise set $k_1$ to its returned vector.\n3. Check $(t_n+h/2,y_n+hk_1/2)\\in D$. If not, return $(y_n,\\texttt{invalid-stage-domain})$. Otherwise call `evaluate_f(t_n+h/2,y_n+hk_1/2)`. If it returns `evaluation-failure`, return $(y_n,\\texttt{stage-2-input-or-representation-failure})$. Otherwise set $F_1$ to the returned exact value, form $b_2=F_1-k_1$ exactly, and set $b_{2,s}:=\\operatorname{store}(b_2)$. If storage returns `unavailable`, return $(y_n,\\texttt{stage-2-input-or-representation-failure})$. Call the same factor object's `solve(b_{2,s},\\varepsilon_2)`. If this solve is not certified, return $(y_n,\\text{stage-2 status})$.\n4. Set $k_2=q_2+k_1$ and return $(y_n+h k_2,\\texttt{success},\\rho_1,\\rho_2)$ with the two certified update-residual bounds.\n\nThe exact-J branch takes $\\widetilde J_n=D_yf(t_n,y_n)$ and $\\widetilde T_n=\\partial_t f(t_n,y_n)$. The W-method branch permits any bounded matrix approximations satisfying the hypotheses of the local and global order results; it receives no scalar A/L-stability guarantee from the exact-J result. The factor matrix is the same in both stages, so the procedure performs one shifted-matrix factorization and two stage solves. For this mixed-arithmetic specification, field evaluations and outer affine combinations are exact real operations, and every matrix/RHS passed to factorization or solve must pass `store`; factorization, triangular solves, and residual dot products use the operationwise model, while residual-bound formation is delegated to the terminating certificate evaluator. A full hardware-rounding theorem for outer operations would need additional certified evaluation and update-error terms. A finite arithmetic residual is not a forward-error bound without an inverse estimate.",
+           "uses": [
+             "2.1",
+             "3.1",
+@@ -2519,7 +2519,7 @@
+           "fact": "F2",
+           "source": "alg-rosenbrock-shifted-qr-solver-with-residual-certificate",
+           "source_section": "Definition",
+-          "quote": "**Input:** a stored real square matrix $M\\in\\mathbb R^{d\\times d}$, $d\\ge1$; a finite list of stored real right-hand sides $b^{(1)},\\ldots,b^{(s)}\\in\\mathbb R^d$, $s\\ge1$; residual tolerances $\\varepsilon_1,\\ldots,\\varepsilon_s\\ge0$; a unit roundoff $u$ with $du<1$; and a norm-certificate routine which either returns an exact norm or a certified upper bound for each requested Euclidean or Frobenius norm, or returns `unavailable`. All arithmetic uses [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]].\n\n1. Set $R:=M$. For each column $j=0,\\ldots,d-1$, let $x$ be the active part of column $j$ of $R$ and $B$ the active trailing block to its right. Call [[alg-scaled-householder-reflector-formation-and-application]] on $(x,B)$. This applies the reflector in [[def-householder-reflector]] using the operation order specified by the called procedure. If it returns `range-failure`, return that status and no factor object. Otherwise replace the active block by its returned $C_+$, store its $(v,\\widehat\\tau)$, and continue. The resulting $R$ is upper triangular with its lower entries set to exact zeros by the called procedure; this is the full/reduced computational QR convention of [[def-full-reduced-and-column-pivoted-computational-qr-factorisations]].\n2. If any diagonal entry $R_{jj}$ is zero, return `singular-factor`. Otherwise return a factor object containing $R$ and the ordered stored reflectors. Its operation `solve(b,epsilon)` is:\n   1. Apply the stored reflector updates in the same order, each using the successful rounded dot, scaling, product, and subtraction operations specified by [[alg-scaled-householder-reflector-formation-and-application]], to obtain $c$.\n   2. Compute $x$ by descending rounded back substitution for $Rx=c$, using the recursion of [[def-forward-and-back-substitution-for-triangular-systems]]. Return the first `range-failure` if any operation fails.\n   3. Compute $\\widehat v=\\operatorname{fl}(Mx)$ row by row and $\\widehat r=\\operatorname{fl}(\\widehat v-b)$. Request certified norm bounds for $M,x,b,\\widehat v,\\widehat r$. If any bound is unavailable, return `(residual-unverified, x, null)`. Otherwise use [[lem-rosenbrock-stage-residual-certificate]] to form $\\rho\\ge\\|Mx-b\\|_2$. Return `(success, x, rho)` if $\\rho\\le\\epsilon$; otherwise return `(residual-not-certified, x, rho)`.\n\nA factor object is reused for every right-hand side in the input list: the procedure performs one shifted-matrix factorization and one triangular solve plus one residual check per right-hand side. A returned residual bound is an equation-residual certificate, not a forward-error estimate; converting it to forward error requires a separate inverse bound. No rank-revealing guarantee, sparse cost bound, or success guarantee for an ill-conditioned matrix is part of this procedure.\n\nThe operation terminates with one of `success`, `singular-factor`, `range-failure`, `residual-unverified`, or `residual-not-certified` for each right-hand side, together with any completed approximate solution and residual bound.\n",
++          "quote": "**Input:** a stored real square matrix $M\\in\\mathbb R^{d\\times d}$ with $d\\ge1$; a unit roundoff $u>0$ with $du<1$; and a terminating certificate evaluator `evaluator`. For each requested Euclidean or Frobenius norm of stored data, `evaluator` returns a finite stored nonnegative upper bound for the exact norm or `unavailable`. For each requested nonnegative expression formed from such upper bounds, $u$, and $d$, it returns a finite stored nonnegative upper bound for the exact expression or `unavailable`. Every returned bound is sound. All reflector, substitution, dot-product, and residual operations below use [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]]; certificate-evaluator calls return certified bounds rather than relying on ordinary rounded evaluation of a bound expression.\n\nDenote the top-level factor-only operation by `factor(M,u,evaluator)`. It returns either a reusable factor object or a factorization failure status.\n\n1. Set $R:=M$. For each column $j=0,\\ldots,d-1$, let $x$ be the active part of column $j$ of $R$ and $B$ the active trailing block to its right. Call [[alg-scaled-householder-reflector-formation-and-application]] on $(x,B)$. If it returns `range-failure`, return that status and no factor object. If it returns a marked `identity` or `reflector` result, replace the active block by its returned $C_+$, store its marker and (when present) $(v,\\widehat\\tau)$, and continue. For any other return, stop and return `factorization-failure` with no factor object. The resulting $R$ is upper triangular with its lower entries set to exact zeros by the called procedure; this is the full/reduced computational QR convention of [[def-full-reduced-and-column-pivoted-computational-qr-factorisations]].\n2. If any diagonal entry $R_{jj}$ is zero, return `singular-factor`. Otherwise return a factor object containing the original stored $M$, $R$, the ordered stored reflectors, $u$, and the certificate evaluator. The factor object's operation `solve(b,epsilon)`, whose input is any stored real $b\\in\\mathbb R^d$ and finite $\\epsilon\\ge0$, is:\n   1. Apply the stored reflector updates in the same order, each using the successful rounded dot, scaling, product, and subtraction operations specified by [[alg-scaled-householder-reflector-formation-and-application]], to obtain $c$. Return the first `range-failure` if an operation fails.\n   2. Compute $x$ by descending rounded back substitution for $Rx=c$. For $i=d-1,d-2,\\ldots,0$, initialize $s:=0$; for $j=i+1,i+2,\\ldots,d-1$ in increasing order, compute $p:=\\operatorname{fl}(R_{ij}x_j)$ and then $s:=\\operatorname{fl}(s+p)$; next compute $t:=\\operatorname{fl}(c_i-s)$ and $x_i:=\\operatorname{fl}(t/R_{ii})$. If any product, addition, subtraction, or division fails, return the first `range-failure`. This is the descending recurrence of [[def-forward-and-back-substitution-for-triangular-systems]] with its rounded operation order made explicit.\n   3. Compute $\\widehat v_i$ for $i=0,\\ldots,d-1$ as the rounded left-to-right dot product of row $i$ of the original $M$ with $x$: initialize the accumulator with $\\operatorname{fl}(M_{i0}x_0)$ and for $j=1,\\ldots,d-1$ compute $p:=\\operatorname{fl}(M_{ij}x_j)$ and then replace the accumulator $s$ by $\\operatorname{fl}(s+p)$. Set the resulting accumulator to $\\widehat v_i$. Then compute each $\\widehat r_i:=\\operatorname{fl}(\\widehat v_i-b_i)$. Return the first `range-failure` if any operation fails.\n   4. Request evaluator bounds $\\overline m\\ge\\|M\\|_F$, $\\overline x\\ge\\|x\\|_2$, $\\overline b\\ge\\|b\\|_2$, $\\overline v\\ge\\|\\widehat v\\|_2$, and $\\overline r\\ge\\|\\widehat r\\|_2$. If any request is unavailable, return `(residual-unverified, x, null)`. Request a certified upper bound $\\overline W$ for $\\gamma_d\\overline m\\,\\overline x+u(\\overline v+\\overline b)$, where $\\gamma_d:=du/(1-du)$. If this request is unavailable, return `(residual-unverified, x, null)`. Request a certified upper bound $\\rho$ for $\\overline r+\\overline W$; if unavailable, return `(residual-unverified, x, null)`. By [[lem-rosenbrock-stage-residual-certificate]], $\\rho\\ge\\|Mx-b\\|_2$. Return `(success, x, rho)` if $\\rho\\le\\epsilon$; otherwise return `(residual-not-certified, x, rho)`.\n\nThis is a factor-only operation followed by an independently callable solve operation: the factor object accepts each later stored right-hand side and tolerance without receiving a precomputed list. Each solve performs one triangular solve and one residual check using the same stored factorization. A returned residual bound is an equation-residual certificate, not a forward-error estimate; converting it to forward error requires a separate inverse bound. No rank-revealing guarantee, sparse cost bound, or success guarantee for an ill-conditioned matrix is part of this procedure.\n\nFactorization terminates with `singular-factor`, `range-failure`, `factorization-failure`, or a reusable factor object. Each call to the object's `solve` operation terminates with `success`, `range-failure`, `residual-unverified`, or `residual-not-certified`, together with any completed approximate solution and residual bound.",
+           "uses": [
+             "2.1",
+             "3.1",
+@@ -2530,7 +2530,7 @@
+           "fact": "F3",
+           "source": "alg-scaled-householder-reflector-formation-and-application",
+           "source_section": "Definition",
+-          "quote": "Input a real active column $x\\in\\mathbb F^r$ and trailing block $B\\in\\mathbb F^{r\\times q}$, with entries in the floating-point system, $r\\ge1$, and $q\\ge0$. If $x=0$, return the identity action and copy $B$. Otherwise let $s=\\max_i|x_i|>0$, compute $z_i=\\operatorname{fl}(x_i/s)$ and $t=\\operatorname{fl}(\\sum_i z_i^2)$ by sequential rounded operations, then $\\widehat r=\\operatorname{fl}(s\\operatorname{fl}(\\sqrt t))$. Set $\\sigma=1$ when $x_1=0$ and $\\sigma=\\operatorname{sign}(x_1)$ otherwise, $\\widehat\\alpha=-\\sigma\\widehat r$, $v_i=\\operatorname{fl}(x_i-\\widehat\\alpha\\,1_{i=1})$, $w=\\operatorname{fl}(v^Tv)$, and $\\widehat\\tau=\\operatorname{fl}(2/w)$. Compute $d=\\operatorname{fl}(v^TB)$ by sequential rounded products and additions, $p_i=\\operatorname{fl}(\\widehat\\tau v_i)$, $U_{ij}=\\operatorname{fl}(p_i d_j)$, and $\\widehat B_{ij}=\\operatorname{fl}(B_{ij}-U_{ij})$. The complete active output is $C_+=[\\widehat\\alpha e_1\\;\\widehat B]$: write exact zeros below its first diagonal entry. This fixes the multiplication order and includes the column overwrite in the analyzed step. Return the first range failure on any invalid or out-of-range operation; return failure if $t$, $\\widehat r$, or $w$ is not positive normal, or any intermediate is nonfinite. Otherwise return $(v,\\widehat\\tau,\\widehat\\alpha,C_+)$. Store these reflectors to represent the exact orthogonal product; a rounded explicit dense product is a separate output with its own arithmetic error. The exact reflector associated with nonzero stored $v$ is $H(v)=I-2vv^T/(v^Tv)$, using [[def-householder-reflector]] and the QR convention of [[def-full-reduced-and-column-pivoted-computational-qr-factorisations]]. This definition does not assert a local backward-error bound.\n\n",
++          "quote": "Input a real active column $x\\in\\mathbb F^r$ and trailing block $B\\in\\mathbb F^{r\\times q}$ with entries in the floating-point system, $r\\ge1$, $q\\ge0$. If every component of $x$ is zero, return the identity action and a copy of $B$, with the active output column set to exact zeros, so that $C_+=[0e_1\\;B]$; return $(v=0,\\widehat\\tau=0,\\widehat\\alpha=0,C_+)$ marked `identity`. Otherwise compute $s=\\max_{1\\le i\\le r}|x_i|>0$, and then, in increasing $i$, compute $z_i=\\operatorname{fl}(x_i/s)$. Initialize $t=0$ and, in increasing $i$, compute $a_i=\\operatorname{fl}(z_i z_i)$ followed by $t=\\operatorname{fl}(t+a_i)$. Compute $h=\\operatorname{fl}(\\sqrt t)$ and then $\\widehat r=\\operatorname{fl}(s h)$. Set $\\sigma=1$ if $x_1=0$ and $\\sigma=\\operatorname{sign}(x_1)$ otherwise, and set $\\widehat\\alpha=-\\sigma\\widehat r$ using the exact sign change. Compute $v_1=\\operatorname{fl}(x_1-\\widehat\\alpha)$, then copy $v_i=x_i$ exactly for $i=2,\\ldots,r$.\n\nInitialize $w=0$ and, in increasing $i$, compute $a_i=\\operatorname{fl}(v_i v_i)$ followed by $w=\\operatorname{fl}(w+a_i)$. Then compute $\\widehat\\tau=\\operatorname{fl}(2/w)$. For each column $j=1,\\ldots,q$ in increasing order, initialize $d_j=0$ and, in increasing $i$, compute $a_{ij}=\\operatorname{fl}(v_i B_{ij})$ followed by $d_j=\\operatorname{fl}(d_j+a_{ij})$. After all $d_j$ have been computed, in increasing $i$ compute $p_i=\\operatorname{fl}(\\widehat\\tau v_i)$. Then, in increasing $j$ and within each column in increasing $i$, compute $U_{ij}=\\operatorname{fl}(p_i d_j)$ and $\\widehat B_{ij}=\\operatorname{fl}(B_{ij}-U_{ij})$ in that order. The complete active output is $C_+=[\\widehat\\alpha e_1\\;\\widehat B]$, with exact zeros written below its first diagonal entry. If any elementary operation fails, return the first range failure with its stage and indices in the order above. Also return failure if $t$, $\\widehat r$, or $w$ is not positive normal, or any intermediate is nonfinite. Otherwise return $(v,\\widehat\\tau,\\widehat\\alpha,C_+)$ marked `reflector`. For a separate block $Y$, apply the stored reflector by computing its sequential column dots in increasing column order, then the vector $p_i=\\operatorname{fl}(\\widehat\\tau v_i)$ in increasing $i$, and then each rounded product and subtraction by increasing column and row; omit the target-column overwrite. Store reflector factors with their identity/reflector marker to represent the exact orthogonal product; a rounded explicit dense product is a separate output with its own arithmetic error. For a nonzero stored $v$, the associated exact reflector is $H(v)=I-2vv^T/(v^Tv)$, using [[def-householder-reflector]] and the QR convention of [[def-full-reduced-and-column-pivoted-computational-qr-factorisations]]. This definition does not assert a local backward-error bound.",
+           "uses": [
+             "1.1"
+           ]
+@@ -2539,7 +2539,7 @@
+           "fact": "F4",
+           "source": "lem-rosenbrock-stage-residual-certificate",
+           "source_section": "Statement",
+-          "quote": "Let $d\\ge1$, $M\\in\\mathbb R^{d\\times d}$, and $x,b\\in\\mathbb R^d$ be stored real data. Use successful sequential left-to-right dot products and componentwise subtraction in the operationwise model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], with unit roundoff $u>0$ and $du<1$. Put\n$$\\widehat v_i:=\\operatorname{fl}\\Bigl(\\sum_{j<d}M_{ij}x_j\\Bigr),\\qquad \\widehat r:=\\operatorname{fl}(\\widehat v-b),\\qquad \\gamma_d:=\\frac{du}{1-du}.$$\nFor $\\|M\\|_F=(\\sum_{i,j<d}M_{ij}^2)^{1/2}$, define\n$$W:=\\gamma_d\\|M\\|_F\\|x\\|_2+u(\\|\\widehat v\\|_2+\\|b\\|_2).$$\nThen\n$$\\|\\widehat r-(Mx-b)\\|_2\\le W,\\qquad \\|Mx-b\\|_2\\le\\|\\widehat r\\|_2+W.$$\nIf a norm in these formulas is replaced by an exact or certified upper bound, the resulting value of $\\|\\widehat r\\|_2+W$ remains a certified upper bound for the exact residual.\n\n",
++          "quote": "Let $d\\ge1$, $M\\in\\mathbb R^{d\\times d}$, and $x,b\\in\\mathbb R^d$ be stored real data. Use successful sequential left-to-right dot products and componentwise subtraction in the operationwise model of [[def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]], with unit roundoff $u>0$ and $du<1$. Put\n$$\\widehat v_i:=\\operatorname{fl}\\Bigl(\\sum_{j<d}M_{ij}x_j\\Bigr),\\qquad \\widehat r:=\\operatorname{fl}(\\widehat v-b),\\qquad \\gamma_d:=\\frac{du}{1-du}.$$\nFor $\\|M\\|_F=(\\sum_{i,j<d}M_{ij}^2)^{1/2}$, define\n$$W:=\\gamma_d\\|M\\|_F\\|x\\|_2+u(\\|\\widehat v\\|_2+\\|b\\|_2).$$\nThen\n$$\\|\\widehat r-(Mx-b)\\|_2\\le W,\\qquad \\|Mx-b\\|_2\\le\\|\\widehat r\\|_2+W.$$\nIf a norm in these formulas is replaced by an exact or certified upper bound, the resulting value of $\\|\\widehat r\\|_2+W$ remains a certified upper bound for the exact residual.",
+           "uses": [
+             "4.1"
+           ]
+@@ -2548,7 +2548,7 @@
+           "fact": "F5",
+           "source": "def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma",
+           "source_section": "Definition",
+-          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.\n",
++          "quote": "Let the representable set, normal range, and unit roundoff be as in [[def-standard-relative-floating-point-model-and-unit-roundoff]]. Here fl is round-to-nearest, ties-to-even, on each real exact result that is zero or normal; every other nonzero exact result (subnormal or overflow), NaN, infinity, invalid operation, or division by zero returns range-failure. A real add, subtract, multiply, or divide is one rounded operation. For positive in-range x, fl(sqrt(x)) is correctly rounded to nearest, ties-to-even, and fails unless its result is positive and normal. A real fused multiply-add returns the correctly rounded value of the single exact expression ab+c; it is not two operations.\n\nComplex addition and subtraction round real and imaginary components separately. A complex product (a+ib)(c+id) uses four rounded real products ac, bd, ad, bc, then rounded subtraction and addition, for six real operations. Conjugation and sign changes are exact. Scaling and division by a positive real scalar round each complex component separately; no other complex division primitive is used here.\n\nA procedure succeeds only when each exact intermediate is zero or normal and every rounded output is finite; otherwise it returns the first range-failure with its operation or pivot index. For ku<1 write gamma_k=ku/(1-ku). This is a no-underflow success model, not the gradual-underflow model.",
+           "uses": [
+             "1.1",
+             "2.1",
+@@ -2570,7 +2570,7 @@
+         },
+         {
+           "id": "derivation-2-1",
+-          "claim": "The first RHS is $f(y)=(-1,-4)^T$. The stored reflectors send it to $(1,4)^T$, and back substitution with $R=-I_2$ gives $k_1=(-1,-4)^T$. The midpoint is $y+k_1/2=(1/2,0)^T$, so $F_1=J(y+k_1/2)=(-1/2,0)^T$; all these exact values are stored.",
++          "claim": "The first RHS is $f(y)=(-1,-4)^T$. In the first reflector replay the dot is $-2$ and the active vector $p=\\widehat\\tau v$ is $(1,0)^T$, so the update sends $(-1,-4)^T$ to $(1,-4)^T$. The second replay has dot $-8$ and scalar $p=1$, so it sends the second coordinate to $-4-(-8)=4$. Every replay product, accumulated sum and subtraction is zero or one of the stipulated normal values, hence is represented exactly by [F5]. Thus the transformed RHS is $(1,4)^T$, and descending substitution with $R=-I_2$ has zero off-diagonal products and exact divisions by $-1$, giving $k_1=(-1,-4)^T$. The midpoint is $y+k_1/2=(1/2,0)^T$, so $F_1=J(y+k_1/2)=(-1/2,0)^T$; all these exact values are stored.",
+           "step": "2.1",
+           "inputs": [
+             "given",
+@@ -2583,7 +2583,7 @@
+         },
+         {
+           "id": "derivation-3-1",
+-          "claim": "The second RHS is $F_1-k_1=(1/2,4)^T$. The same stored reflectors send it to $(-1/2,-4)^T$ and back substitution gives $q_2=(1/2,4)^T$. Hence $k_2=q_2+k_1=(-1/2,0)^T$.",
++          "claim": "The second RHS is $F_1-k_1=(1/2,4)^T$. The first stored reflector has dot $1$ and active $p=(1,0)^T$, so it sends the first coordinate to $1/2-1=-1/2$ and leaves the second at $4$. The second reflector has dot $8$ and scalar $p=1$, so it sends the second coordinate to $4-8=-4$. All replay products, sums and subtractions are again zero or stipulated normal represented values. Descending substitution with $R=-I_2$ is exact as in step 2.1 and gives $q_2=(1/2,4)^T$. Hence $k_2=q_2+k_1=(-1/2,0)^T$.",
+           "step": "3.1",
+           "inputs": [
+             "given",
+@@ -2596,7 +2596,7 @@
+         },
+         {
+           "id": "derivation-4-1",
+-          "claim": "For either solve, $W=I_2$ makes $\\widehat v=x$ and the computed residual zero. The exact bounds $\\|W\\|_F=\\sqrt2<2$ and $\\|x\\|_2,\\|b\\|_2,\\|\\widehat v\\|_2<5$, with $\\gamma_2=2u/(1-2u)<0.021$, make the allowance in [F4] below $0.021\\cdot2\\cdot5+0.01\\cdot10<1$. Thus both solves meet tolerance one. By [F1]–[F2], this successful call uses one factorization and two triangular solves.",
++          "claim": "For either solve, $W=I_2$ makes $\\widehat v=x$ and the computed residual zero. The norm upper bounds and $\\gamma_2=2u/(1-2u)<0.021$ show the first certificate expression is at most $0.021\\cdot2\\cdot5+0.01\\cdot10=0.31<1/2$, so the evaluator's stated $1/2$ bounds are sound; the residual-bound expression is then also at most $1/2$. Thus both solves meet tolerance one. By [F1]–[F2], this successful call uses one factorization and two triangular solves.",
+           "step": "4.1",
+           "inputs": [
+             "given",
+@@ -2922,6 +2922,717 @@
+         "status": "complete",
+         "notes": "Checked claim boundaries, zero/singular behavior, endpoint hypotheses, residual-versus-forward-error distinctions, and exact-J versus approximate-J scope stated in the carrier."
+       }
++    },
++    "lem-rosenbrock-matrix-inverse-perturbation": {
++      "citations": [],
++      "derivations": [
++        {
++          "id": "derive-1.1",
++          "step": "1.1",
++          "claim": "Since $Q-P=P(P^{-1}-Q^{-1})Q$, multiplication on the left by $P^{-1}$ and on the right by $Q^{-1}$ yields $P^{-1}-Q^{-1}=P^{-1}(Q-P)Q^{-1}$.",
++          "inputs": [
++            "given",
++            "algebra"
++          ]
++        },
++        {
++          "id": "derive-1.2",
++          "step": "1.2",
++          "claim": "Apply submultiplicativity [A1] to the three factors in the identity of step 1.1 to obtain the stated norm bound.",
++          "inputs": [
++            "A1",
++            "step 1.1",
++            "algebra"
++          ]
++        }
++      ],
++      "routine_steps": [],
++      "boundaries": [
++        {
++          "case": "empty",
++          "status": "not_applicable",
++          "reason": "This fixed-dimensional analytic Statement has no variable input collection or finite-budget loop with an empty-input branch."
++        },
++        {
++          "case": "zero",
++          "status": "checked",
++          "evidence": "Proof 1.1: the inverse-difference identity permits P=Q and gives zero; singular P or Q is excluded by the Statement."
++        },
++        {
++          "case": "one",
++          "status": "checked",
++          "evidence": "The algebra and estimates in the source include the scalar dimension d=1; no projected proof step requires dimension greater than one."
++        },
++        {
++          "case": "degenerate",
++          "status": "checked",
++          "evidence": "The source Statement explicitly retains the required inverse/admissibility hypotheses; no conclusion is extended to a singular excluded stage."
++        },
++        {
++          "case": "endpoints",
++          "status": "not_applicable",
++          "reason": "There is no interval or step-size endpoint parameter in this inverse identity."
++        },
++        {
++          "case": "nonempty-choice",
++          "status": "not_applicable",
++          "reason": "No selection from an arbitrary indexed family is used; the source works with specified finite-dimensional data."
++        },
++        {
++          "case": "iff-forward",
++          "status": "not_applicable",
++          "reason": "The source has no biconditional assertion."
++        },
++        {
++          "case": "iff-reverse",
++          "status": "not_applicable",
++          "reason": "The source has no biconditional assertion."
++        }
++      ],
++      "risk_review": {
++        "status": "complete",
++        "notes": "Metadata projection of actual source, not a fresh mathematical review. Root approved six exact-method carriers; seventh inverse-identity supplier requires explicit root/source-owner confirmation before integration acceptance. Same original1 final consumer closure remains owed."
++      }
++    },
++    "lem-rosenbrock-euler-local-defect": {
++      "citations": [
++        {
++          "fact": "F1",
++          "source": "def-rosenbrock-euler-step-map",
++          "source_section": "Definition",
++          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, let $d\\ge1$, and let $f:D\\to\\mathbb R^d$ be a vector field ([[def-first-order-ode-initial-value-problem-and-solution]]). For $(t,y)\\in D$, a step size $h>0$, a parameter $\\gamma>0$, and a matrix $\\widetilde J\\in\\mathbb R^{d\\times d}$, put\n$$A_{\\gamma,h}(\\widetilde J):=I_d-\\gamma h\\widetilde J.$$\nWhen this matrix is invertible, the **one-stage Rosenbrock step** uses the stage slope $k$ and update\n$$A_{\\gamma,h}(\\widetilde J)k=f(t,y),\\qquad \\Phi_{\\gamma,h}^{\\widetilde J}(t,y):=y+hk.$$\nThe **exact-Jacobian branch** sets $\\widetilde J=D_yf(t,y)$, where $D_yf$ is the Jacobian in the state variables as in [[def-jacobian-matrix-and-gradient]]. An approximate-Jacobian branch may supply a different $\\widetilde J$; the equation requires the chosen shifted matrix to be invertible. The name **Rosenbrock–Euler** here refers to the case $\\gamma=1$. This definition specifies one linearized step and does not say that it solves the full backward-Euler nonlinear equation.",
++          "uses": [
++            "1.1"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "thm-chain-rule-for-total-derivatives",
++          "source_section": "Statement",
++          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
++          "uses": [
++            "1.2"
++          ]
++        },
++        {
++          "fact": "F3",
++          "source": "cor-mean-value-theorem",
++          "source_section": "Statement",
++          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
++          "uses": [
++            "1.2"
++          ]
++        },
++        {
++          "fact": "F4",
++          "source": "def-first-order-ode-initial-value-problem-and-solution",
++          "source_section": "Definition",
++          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation\n\n$$x'(t)=F(t,x(t))$$\n\nis a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$, written $x(t_0)=x_0$.\n\nA **solution on an interval** $I$ is a function $x:I\\to\\mathbb R^n$ such that $t_0\\in I$, $(t,x(t))\\in D$ for every $t\\in I$, $x$ is differentiable on $I$ in the domain-relative sense of [[def-vector-valued-derivative-and-integral]], and\n\n$$x(t_0)=x_0,\\qquad x'(t)=F(t,x(t))\\quad(t\\in I).$$\n\nEndpoints of $I$ use the corresponding one-sided, domain-relative derivative. A local solution is one whose interval contains a nondegenerate neighborhood of $t_0$ relative to the time projection of $D$.",
++          "uses": [
++            "1.2"
++          ]
++        }
++      ],
++      "derivations": [
++        {
++          "id": "derive-1.1",
++          "step": "1.1",
++          "claim": "Write $J=Df(y)$ and $M=I-hJ$. By [F1], $k=M^{-1}f(y)$; hence $\\|k\\|\\le BF$. Since $M^{-1}-I=M^{-1}(I-M)=hM^{-1}J$, $\\|k-f(y)\\|\\le hBLF$.",
++          "inputs": [
++            "given",
++            "F1",
++            "algebra"
++          ]
++        },
++        {
++          "id": "derive-1.2",
++          "step": "1.2",
++          "claim": "By [F4], $y'(t+s)=f(y(t+s))$. Put $g(s)=f(y(t+s))$. By [F2], $g'(s)=Df(y(t+s))f(y(t+s))$, so $\\|g'(s)\\|\\le LF$. For any continuously differentiable vector curve $g$ with this derivative bound, the scalar mean-value theorem [F3] implies $\\|g(s)-g(0)\\|\\le LFs$: if the difference is nonzero, take its unit direction $u$, apply [F3] to $r\\mapsto u\\cdot g(r)$, and use $|u\\cdot g'(r)|\\le\\|g'(r)\\|$. Thus $q(s):=y(t+s)-y-sf(y)$ has $q'(s)=g(s)-g(0)$ with $\\|q'(s)\\|\\le LFs$. Applying the same vector-curve bound to $q$ on $[0,h]$ yields $\\|y(t+h)-y-hf(y)\\|=\\|q(h)\\|\\le LFh^2$.",
++          "inputs": [
++            "given",
++            "F2",
++            "F3",
++            "F4",
++            "choose"
++          ]
++        },
++        {
++          "id": "derive-2.1",
++          "step": "2.1",
++          "claim": "The numerical increment differs from forward Euler by $h(k-f(y))$, bounded by $BLFh^2$ in step 1.1. The triangle inequality with step 1.2 proves the stated local defect bound with $C_0:=FL(B+1)$.",
++          "inputs": [
++            "step 1.1",
++            "step 1.2",
++            "algebra"
++          ]
++        }
++      ],
++      "routine_steps": [],
++      "boundaries": [
++        {
++          "case": "empty",
++          "status": "not_applicable",
++          "reason": "This fixed-dimensional analytic Statement has no variable input collection or finite-budget loop with an empty-input branch."
++        },
++        {
++          "case": "zero",
++          "status": "checked",
++          "evidence": "The source Statement and complete projected proof retain zero permissible fields, residuals, differences or scalar z without dividing by their norms; inverse hypotheses remain explicit."
++        },
++        {
++          "case": "one",
++          "status": "checked",
++          "evidence": "The algebra and estimates in the source include the scalar dimension d=1; no projected proof step requires dimension greater than one."
++        },
++        {
++          "case": "degenerate",
++          "status": "checked",
++          "evidence": "The source Statement explicitly retains the required inverse/admissibility hypotheses; no conclusion is extended to a singular excluded stage."
++        },
++        {
++          "case": "endpoints",
++          "status": "checked",
++          "evidence": "The exact source Statement fixes its own h/time or half-plane domain, and the projected proof establishes only that domain; no h=0 extension or rounded execution guarantee is added."
++        },
++        {
++          "case": "nonempty-choice",
++          "status": "not_applicable",
++          "reason": "No selection from an arbitrary indexed family is used; the source works with specified finite-dimensional data."
++        },
++        {
++          "case": "iff-forward",
++          "status": "not_applicable",
++          "reason": "The source has no biconditional assertion."
++        },
++        {
++          "case": "iff-reverse",
++          "status": "not_applicable",
++          "reason": "The source has no biconditional assertion."
++        }
++      ],
++      "risk_review": {
++        "status": "complete",
++        "notes": "Metadata projection of actual source, not a fresh mathematical review. Root approved six exact-method carriers; seventh inverse-identity supplier requires explicit root/source-owner confirmation before integration acceptance. Same original1 final consumer closure remains owed."
++      }
++    },
++    "lem-rosenbrock-euler-step-map-lipschitz": {
++      "citations": [
++        {
++          "fact": "F1",
++          "source": "def-rosenbrock-euler-step-map",
++          "source_section": "Definition",
++          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, let $d\\ge1$, and let $f:D\\to\\mathbb R^d$ be a vector field ([[def-first-order-ode-initial-value-problem-and-solution]]). For $(t,y)\\in D$, a step size $h>0$, a parameter $\\gamma>0$, and a matrix $\\widetilde J\\in\\mathbb R^{d\\times d}$, put\n$$A_{\\gamma,h}(\\widetilde J):=I_d-\\gamma h\\widetilde J.$$\nWhen this matrix is invertible, the **one-stage Rosenbrock step** uses the stage slope $k$ and update\n$$A_{\\gamma,h}(\\widetilde J)k=f(t,y),\\qquad \\Phi_{\\gamma,h}^{\\widetilde J}(t,y):=y+hk.$$\nThe **exact-Jacobian branch** sets $\\widetilde J=D_yf(t,y)$, where $D_yf$ is the Jacobian in the state variables as in [[def-jacobian-matrix-and-gradient]]. An approximate-Jacobian branch may supply a different $\\widetilde J$; the equation requires the chosen shifted matrix to be invertible. The name **Rosenbrock–Euler** here refers to the case $\\gamma=1$. This definition specifies one linearized step and does not say that it solves the full backward-Euler nonlinear equation.",
++          "uses": [
++            "3.1",
++            "4.1"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "lem-rosenbrock-matrix-inverse-perturbation",
++          "source_section": "Statement",
++          "quote": "If $P,Q\\in\\mathbb R^{d\\times d}$ are invertible, then $P^{-1}-Q^{-1}=P^{-1}(Q-P)Q^{-1}$. Consequently, for any submultiplicative matrix norm,\n$$\n\\|P^{-1}-Q^{-1}\\|\\le\\|P^{-1}\\|\\,\\|Q-P\\|\\,\\|Q^{-1}\\|.\n$$",
++          "uses": [
++            "2.1"
++          ]
++        },
++        {
++          "fact": "F3",
++          "source": "thm-chain-rule-for-total-derivatives",
++          "source_section": "Statement",
++          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
++          "uses": [
++            "1.1"
++          ]
++        },
++        {
++          "fact": "F4",
++          "source": "cor-mean-value-theorem",
++          "source_section": "Statement",
++          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
++          "uses": [
++            "1.1"
++          ]
++        }
++      ],
++      "derivations": [
++        {
++          "id": "derive-1.1",
++          "step": "1.1",
++          "claim": "The segment from $v$ to $u$ lies in $K$. For any unit vector $a$, the scalar function $s\\mapsto a\\cdot f(v+s(u-v))$ has derivative bounded by $L\\|u-v\\|$ by [F3]; [F4] therefore gives $|a\\cdot(f(u)-f(v))|\\le L\\|u-v\\|$. Taking the supremum over unit $a$ yields $\\|f(u)-f(v)\\|\\le L\\|u-v\\|$. Applying the same argument to $s\\mapsto a\\cdot Df(v+s(u-v))b$ for unit $a,b$, with [F3] and the Hessian bound $H$, gives $\\|Df(u)-Df(v)\\|\\le H\\|u-v\\|$.",
++          "inputs": [
++            "given",
++            "F3",
++            "F4",
++            "choose"
++          ]
++        },
++        {
++          "id": "derive-2.1",
++          "step": "2.1",
++          "claim": "Put $M_u=M_h(u)$ and $M_v=M_h(v)$. Then $\\|M_v-M_u\\|=h\\|Df(u)-Df(v)\\|\\le hH\\|u-v\\|$. By [F2], $\\|M_u^{-1}-M_v^{-1}\\|\\le B^2hH\\|u-v\\|$.",
++          "inputs": [
++            "given",
++            "F2",
++            "step 1.1",
++            "algebra"
++          ]
++        },
++        {
++          "id": "derive-3.1",
++          "step": "3.1",
++          "claim": "Let $K_h(y)=M_h(y)^{-1}f(y)$. Adding and subtracting $M_u^{-1}f(v)$ and using steps 1.1 and 2.1 gives $\\|K_h(u)-K_h(v)\\|\\le(BL+B^2hHF)\\|u-v\\|$.",
++          "inputs": [
++            "F1",
++            "step 1.1",
++            "step 2.1",
++            "algebra"
++          ]
++        },
++        {
++          "id": "derive-4.1",
++          "step": "4.1",
++          "claim": "By [F1], $\\|\\Phi_h(u)-\\Phi_h(v)\\|\\le[1+hBL+h^2B^2HF]\\|u-v\\|\\le(1+L_*h)\\|u-v\\|$, since $h\\le h_0$.",
++          "inputs": [
++            "F1",
++            "step 3.1",
++            "algebra"
++          ]
++        }
++      ],
++      "routine_steps": [],
++      "boundaries": [
++        {
++          "case": "empty",
++          "status": "not_applicable",
++          "reason": "This fixed-dimensional analytic Statement has no variable input collection or finite-budget loop with an empty-input branch."
++        },
++        {
++          "case": "zero",
++          "status": "checked",
++          "evidence": "The source Statement and complete projected proof retain zero permissible fields, residuals, differences or scalar z without dividing by their norms; inverse hypotheses remain explicit."
++        },
++        {
++          "case": "one",
++          "status": "checked",
++          "evidence": "The algebra and estimates in the source include the scalar dimension d=1; no projected proof step requires dimension greater than one."
++        },
++        {
++          "case": "degenerate",
++          "status": "checked",
++          "evidence": "The source Statement explicitly retains the required inverse/admissibility hypotheses; no conclusion is extended to a singular excluded stage."
++        },
++        {
++          "case": "endpoints",
++          "status": "checked",
++          "evidence": "The exact source Statement fixes its own h/time or half-plane domain, and the projected proof establishes only that domain; no h=0 extension or rounded execution guarantee is added."
++        },
++        {
++          "case": "nonempty-choice",
++          "status": "not_applicable",
++          "reason": "No selection from an arbitrary indexed family is used; the source works with specified finite-dimensional data."
++        },
++        {
++          "case": "iff-forward",
++          "status": "not_applicable",
++          "reason": "The source has no biconditional assertion."
++        },
++        {
++          "case": "iff-reverse",
++          "status": "not_applicable",
++          "reason": "The source has no biconditional assertion."
++        }
++      ],
++      "risk_review": {
++        "status": "complete",
++        "notes": "Metadata projection of actual source, not a fresh mathematical review. Root approved six exact-method carriers; seventh inverse-identity supplier requires explicit root/source-owner confirmation before integration acceptance. Same original1 final consumer closure remains owed."
++      }
++    },
++    "thm-rosenbrock-euler-global-first-order": {
++      "citations": [
++        {
++          "fact": "F1",
++          "source": "def-rosenbrock-euler-step-map",
++          "source_section": "Definition",
++          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, let $d\\ge1$, and let $f:D\\to\\mathbb R^d$ be a vector field ([[def-first-order-ode-initial-value-problem-and-solution]]). For $(t,y)\\in D$, a step size $h>0$, a parameter $\\gamma>0$, and a matrix $\\widetilde J\\in\\mathbb R^{d\\times d}$, put\n$$A_{\\gamma,h}(\\widetilde J):=I_d-\\gamma h\\widetilde J.$$\nWhen this matrix is invertible, the **one-stage Rosenbrock step** uses the stage slope $k$ and update\n$$A_{\\gamma,h}(\\widetilde J)k=f(t,y),\\qquad \\Phi_{\\gamma,h}^{\\widetilde J}(t,y):=y+hk.$$\nThe **exact-Jacobian branch** sets $\\widetilde J=D_yf(t,y)$, where $D_yf$ is the Jacobian in the state variables as in [[def-jacobian-matrix-and-gradient]]. An approximate-Jacobian branch may supply a different $\\widetilde J$; the equation requires the chosen shifted matrix to be invertible. The name **Rosenbrock–Euler** here refers to the case $\\gamma=1$. This definition specifies one linearized step and does not say that it solves the full backward-Euler nonlinear equation.",
++          "uses": [
++            "1.1"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "lem-rosenbrock-euler-local-defect-and-residual-error",
++          "source_section": "Statement",
++          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open and $f:D\\to\\mathbb R^d$ be $C^2$ (componentwise, as in [[def-ck-euclidean-maps-and-diffeomorphisms]]). Let $y(s)$ solve $y'=f(s,y)$ on $[t,t+h]$, $h>0$, and set $J=D_yf(t,y(t))$. Suppose the trajectory lies in a region where $\\|f\\|_2\\le F$, $\\|D_yf\\|_2\\le L$, and $\\|f_t+D_yf\\,f\\|_2\\le M_1$. Fix $\\gamma>0$ and a real matrix $\\widetilde J$. Suppose $A=I-\\gamma hJ$ and $\\widetilde A=I-\\gamma h\\widetilde J$ are invertible with $\\|A^{-1}\\|_2\\le\\kappa_0$ and $\\|\\widetilde A^{-1}\\|_2\\le\\kappa_1$. Write $\\delta=\\|\\widetilde J-J\\|_2$.\n\nFor the exact-arithmetic Rosenbrock stage map $\\Phi_{\\gamma,h}^{\\widetilde J}$, and a computed stage $\\widehat k$ whose update residual obeys $\\|\\widetilde A\\widehat k-f(t,y(t))\\|_2\\le\\rho$, the update $\\widehat y_+=y(t)+h\\widehat k$ satisfies\n$$\\|\\widehat y_+-y(t+h)\\|_2\\le C_Eh^2+\\kappa_1h\\rho, \\qquad C_E:=\\gamma\\kappa_0LF+\\frac{M_1}{2}+\\gamma\\kappa_0\\kappa_1\\delta F.$$\nThe last term is the separate Jacobian-approximation allowance. The residual is an equation residual in the units of [[def-implicit-residual-and-algebraic-error-units]], not a forward-error estimate by itself.",
++          "uses": [
++            "1.1"
++          ]
++        },
++        {
++          "fact": "F3",
++          "source": "lem-rosenbrock-euler-step-map-lipschitz",
++          "source_section": "Statement",
++          "quote": "Let $K\\subset U\\subset\\mathbb R^d$ be compact and convex, let $f\\in C^2(U,\\mathbb R^d)$, and suppose on $K$ that $\\|f\\|\\le F$, $\\|Df\\|\\le L$, and $\\|D^2f\\|\\le H$. For $0<h\\le h_0$, assume $M_h(y):=I-hDf(y)$ is invertible for every $y\\in K$ with $\\|M_h(y)^{-1}\\|\\le B$. The exact-arithmetic autonomous exact-Jacobian Rosenbrock-Euler map $\\Phi_h(y)=y+hM_h(y)^{-1}f(y)$ of [[def-rosenbrock-euler-step-map]], with $\\gamma=1$, then satisfies\n$$\n\\|\\Phi_h(u)-\\Phi_h(v)\\|\\le(1+L_*h)\\|u-v\\|,\\qquad L_*:=BL+h_0B^2HF,\n$$\nfor all $u,v\\in K$.",
++          "uses": [
++            "1.1"
++          ]
++        }
++      ],
++      "derivations": [
++        {
++          "id": "derive-1.1",
++          "step": "1.1",
++          "claim": "Set $e_j=\\|Y_j-y(t_j)\\|$. Since $Y_{j+1}=\\Phi_h(Y_j)$, insert $\\Phi_h(y(t_j))$ and apply [F2] and [F3] to obtain $e_{j+1}\\le(1+L_*h)e_j+C_0h^2$.",
++          "inputs": [
++            "given",
++            "F1",
++            "F2",
++            "F3",
++            "algebra"
++          ]
++        },
++        {
++          "id": "derive-2.1",
++          "step": "2.1",
++          "claim": "Starting with $e_0=0$, induction on $n$ in the recurrence of step 1.1 gives $e_n\\le C_0h^2\\sum_{j=0}^{n-1}(1+L_*h)^j\\le C_0n h^2e^{L_*nh}$; the last inequality follows from $1+x\\le e^x$ for $x\\ge0$.",
++          "inputs": [
++            "given",
++            "step 1.1",
++            "algebra"
++          ]
++        },
++        {
++          "id": "derive-3.1",
++          "step": "3.1",
++          "claim": "Since $nh=t_n\\le T$, step 2.1 yields $e_n\\le C_0T e^{L_*T}h$.",
++          "inputs": [
++            "given",
++            "step 2.1",
++            "algebra"
++          ]
++        }
++      ],
++      "routine_steps": [],
++      "boundaries": [
++        {
++          "case": "empty",
++          "status": "not_applicable",
++          "reason": "This fixed-dimensional analytic Statement has no variable input collection or finite-budget loop with an empty-input branch."
++        },
++        {
++          "case": "zero",
++          "status": "checked",
++          "evidence": "The source Statement and complete projected proof retain zero permissible fields, residuals, differences or scalar z without dividing by their norms; inverse hypotheses remain explicit."
++        },
++        {
++          "case": "one",
++          "status": "checked",
++          "evidence": "The algebra and estimates in the source include the scalar dimension d=1; no projected proof step requires dimension greater than one."
++        },
++        {
++          "case": "degenerate",
++          "status": "checked",
++          "evidence": "The source Statement explicitly retains the required inverse/admissibility hypotheses; no conclusion is extended to a singular excluded stage."
++        },
++        {
++          "case": "endpoints",
++          "status": "checked",
++          "evidence": "The exact source Statement fixes its own h/time or half-plane domain, and the projected proof establishes only that domain; no h=0 extension or rounded execution guarantee is added."
++        },
++        {
++          "case": "nonempty-choice",
++          "status": "not_applicable",
++          "reason": "No selection from an arbitrary indexed family is used; the source works with specified finite-dimensional data."
++        },
++        {
++          "case": "iff-forward",
++          "status": "not_applicable",
++          "reason": "The source has no biconditional assertion."
++        },
++        {
++          "case": "iff-reverse",
++          "status": "not_applicable",
++          "reason": "The source has no biconditional assertion."
++        }
++      ],
++      "risk_review": {
++        "status": "complete",
++        "notes": "Metadata projection of actual source, not a fresh mathematical review. Root approved six exact-method carriers; seventh inverse-identity supplier requires explicit root/source-owner confirmation before integration acceptance. Same original1 final consumer closure remains owed."
++      }
++    },
++    "thm-rosenbrock-euler-a-l-stable": {
++      "citations": [
++        {
++          "fact": "F1",
++          "source": "def-rosenbrock-euler-step-map",
++          "source_section": "Definition",
++          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, let $d\\ge1$, and let $f:D\\to\\mathbb R^d$ be a vector field ([[def-first-order-ode-initial-value-problem-and-solution]]). For $(t,y)\\in D$, a step size $h>0$, a parameter $\\gamma>0$, and a matrix $\\widetilde J\\in\\mathbb R^{d\\times d}$, put\n$$A_{\\gamma,h}(\\widetilde J):=I_d-\\gamma h\\widetilde J.$$\nWhen this matrix is invertible, the **one-stage Rosenbrock step** uses the stage slope $k$ and update\n$$A_{\\gamma,h}(\\widetilde J)k=f(t,y),\\qquad \\Phi_{\\gamma,h}^{\\widetilde J}(t,y):=y+hk.$$\nThe **exact-Jacobian branch** sets $\\widetilde J=D_yf(t,y)$, where $D_yf$ is the Jacobian in the state variables as in [[def-jacobian-matrix-and-gradient]]. An approximate-Jacobian branch may supply a different $\\widetilde J$; the equation requires the chosen shifted matrix to be invertible. The name **Rosenbrock–Euler** here refers to the case $\\gamma=1$. This definition specifies one linearized step and does not say that it solves the full backward-Euler nonlinear equation.",
++          "uses": [
++            "1.1",
++            "2.1"
++          ]
++        },
++        {
++          "fact": "F1",
++          "source": "thm-rosenbrock-euler-scalar-a-and-l-stability",
++          "source_section": "Statement",
++          "quote": "For scalar stability, consider the exact-arithmetic complexification of the exact-Jacobian one-stage equation. For $\\lambda,y,k\\in\\mathbb C$, $h>0$, $\\gamma>0$, and $z=h\\lambda$, use $(1-\\gamma z)k=\\lambda y$ and $y_+=y+hk$. Equivalently, identify $\\mathbb C$ with $\\mathbb R^2$ and multiplication by $\\lambda$ with the real matrix $C_\\lambda=\\begin{pmatrix}\\operatorname{Re}\\lambda&-\\operatorname{Im}\\lambda\\\\\\operatorname{Im}\\lambda&\\operatorname{Re}\\lambda\\end{pmatrix}$; the corresponding real exact Jacobian is $C_\\lambda$, and the equations become $(I_2-\\gamma h C_\\lambda)k=C_\\lambda y$ and $y_+=y+hk$. This is a scalar stability analysis of exact stage equations; it is not an execution of the finite-precision real algorithm [[alg-rosenbrock-euler-step]]. Use the scalar rational-function criteria in [[def-scalar-rk-a-and-l-stability]] for its amplification function. Its scalar stability function is\n$$R_\\gamma(z)=1+\\frac{z}{1-\\gamma z}=\\frac{1+(1-\\gamma)z}{1-\\gamma z}.$$\nIt has no pole in $\\operatorname{Re}z\\le0$ and satisfies $|R_\\gamma(z)|\\le1$ throughout that half-plane if and only if $\\gamma\\ge\\tfrac12$. Among these parameters, it is L-stable if and only if $\\gamma=1$. In particular, the named Rosenbrock–Euler case $\\gamma=1$ has the backward-Euler factor $R(z)=(1-z)^{-1}$.",
++          "uses": [
++            "1.1",
++            "2.1"
++          ]
++        }
++      ],
++      "derivations": [
++        {
++          "id": "derive-1.1",
++          "step": "1.1",
++          "claim": "If $\\operatorname{Re}z\\le0$, then $1-z\\ne0$. Solving the stage equation in [F1] gives $y^+=y+h\\lambda y/(1-z)=y/(1-z)$, so $R(z)=(1-z)^{-1}$; this is also the scalar backward-Euler update.",
++          "inputs": [
++            "given",
++            "F1",
++            "algebra"
++          ]
++        },
++        {
++          "id": "derive-2.1",
++          "step": "2.1",
++          "claim": "For $\\operatorname{Re}z\\le0$, $|1-z|^2=1-2\\operatorname{Re}z+|z|^2\\ge1+|z|^2>0$. Hence there is no pole there and $|R(z)|\\le1/\\sqrt{1+|z|^2}\\le1$. The same bound tends to zero whenever $|z|\\to\\infty$ within the closed left half-plane. These prove the stated A- and full L-stability conditions.",
++          "inputs": [
++            "given",
++            "F1",
++            "step 1.1",
++            "algebra"
++          ]
++        }
++      ],
++      "routine_steps": [],
++      "boundaries": [
++        {
++          "case": "empty",
++          "status": "not_applicable",
++          "reason": "This fixed-dimensional analytic Statement has no variable input collection or finite-budget loop with an empty-input branch."
++        },
++        {
++          "case": "zero",
++          "status": "checked",
++          "evidence": "The source Statement and complete projected proof retain zero permissible fields, residuals, differences or scalar z without dividing by their norms; inverse hypotheses remain explicit."
++        },
++        {
++          "case": "one",
++          "status": "checked",
++          "evidence": "The algebra and estimates in the source include the scalar dimension d=1; no projected proof step requires dimension greater than one."
++        },
++        {
++          "case": "degenerate",
++          "status": "checked",
++          "evidence": "The source Statement explicitly retains the required inverse/admissibility hypotheses; no conclusion is extended to a singular excluded stage."
++        },
++        {
++          "case": "endpoints",
++          "status": "checked",
++          "evidence": "The exact source Statement fixes its own h/time or half-plane domain, and the projected proof establishes only that domain; no h=0 extension or rounded execution guarantee is added."
++        },
++        {
++          "case": "nonempty-choice",
++          "status": "not_applicable",
++          "reason": "No selection from an arbitrary indexed family is used; the source works with specified finite-dimensional data."
++        },
++        {
++          "case": "iff-forward",
++          "status": "not_applicable",
++          "reason": "The source has no biconditional assertion."
++        },
++        {
++          "case": "iff-reverse",
++          "status": "not_applicable",
++          "reason": "The source has no biconditional assertion."
++        }
++      ],
++      "risk_review": {
++        "status": "complete",
++        "notes": "Metadata projection of actual source, not a fresh mathematical review. Root approved six exact-method carriers; seventh inverse-identity supplier requires explicit root/source-owner confirmation before integration acceptance. Same original1 final consumer closure remains owed."
++      }
++    },
++    "thm-rosenbrock-euler-one-newton-step-for-backward-euler": {
++      "citations": [
++        {
++          "fact": "F1",
++          "source": "def-rosenbrock-euler-step-map",
++          "source_section": "Definition",
++          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, let $d\\ge1$, and let $f:D\\to\\mathbb R^d$ be a vector field ([[def-first-order-ode-initial-value-problem-and-solution]]). For $(t,y)\\in D$, a step size $h>0$, a parameter $\\gamma>0$, and a matrix $\\widetilde J\\in\\mathbb R^{d\\times d}$, put\n$$A_{\\gamma,h}(\\widetilde J):=I_d-\\gamma h\\widetilde J.$$\nWhen this matrix is invertible, the **one-stage Rosenbrock step** uses the stage slope $k$ and update\n$$A_{\\gamma,h}(\\widetilde J)k=f(t,y),\\qquad \\Phi_{\\gamma,h}^{\\widetilde J}(t,y):=y+hk.$$\nThe **exact-Jacobian branch** sets $\\widetilde J=D_yf(t,y)$, where $D_yf$ is the Jacobian in the state variables as in [[def-jacobian-matrix-and-gradient]]. An approximate-Jacobian branch may supply a different $\\widetilde J$; the equation requires the chosen shifted matrix to be invertible. The name **Rosenbrock–Euler** here refers to the case $\\gamma=1$. This definition specifies one linearized step and does not say that it solves the full backward-Euler nonlinear equation.",
++          "uses": [
++            "3.1"
++          ]
++        }
++      ],
++      "derivations": [
++        {
++          "id": "derive-1.1",
++          "step": "1.1",
++          "claim": "Differentiating $G(s)=s-hf(y+s)$ at $s=0$ gives $DG(0)=I-hDf(y)=M$, while direct substitution gives $G(0)=-hf(y)$.",
++          "inputs": [
++            "given",
++            "algebra"
++          ]
++        },
++        {
++          "id": "derive-2.1",
++          "step": "2.1",
++          "claim": "The Newton correction is therefore $s_1=0-M^{-1}(-hf(y))=hM^{-1}f(y)$.",
++          "inputs": [
++            "given",
++            "step 1.1",
++            "algebra"
++          ]
++        },
++        {
++          "id": "derive-3.1",
++          "step": "3.1",
++          "claim": "By [F1], the Rosenbrock-Euler output is $y+hM^{-1}f(y)=y+s_1$, as claimed.",
++          "inputs": [
++            "F1",
++            "step 2.1",
++            "algebra"
++          ]
++        }
++      ],
++      "routine_steps": [],
++      "boundaries": [
++        {
++          "case": "empty",
++          "status": "not_applicable",
++          "reason": "This fixed-dimensional analytic Statement has no variable input collection or finite-budget loop with an empty-input branch."
++        },
++        {
++          "case": "zero",
++          "status": "checked",
++          "evidence": "The source Statement and complete projected proof retain zero permissible fields, residuals, differences or scalar z without dividing by their norms; inverse hypotheses remain explicit."
++        },
++        {
++          "case": "one",
++          "status": "checked",
++          "evidence": "The algebra and estimates in the source include the scalar dimension d=1; no projected proof step requires dimension greater than one."
++        },
++        {
++          "case": "degenerate",
++          "status": "checked",
++          "evidence": "The source Statement explicitly retains the required inverse/admissibility hypotheses; no conclusion is extended to a singular excluded stage."
++        },
++        {
++          "case": "endpoints",
++          "status": "checked",
++          "evidence": "The exact source Statement fixes its own h/time or half-plane domain, and the projected proof establishes only that domain; no h=0 extension or rounded execution guarantee is added."
++        },
++        {
++          "case": "nonempty-choice",
++          "status": "not_applicable",
++          "reason": "No selection from an arbitrary indexed family is used; the source works with specified finite-dimensional data."
++        },
++        {
++          "case": "iff-forward",
++          "status": "not_applicable",
++          "reason": "The source has no biconditional assertion."
++        },
++        {
++          "case": "iff-reverse",
++          "status": "not_applicable",
++          "reason": "The source has no biconditional assertion."
++        }
++      ],
++      "risk_review": {
++        "status": "complete",
++        "notes": "Metadata projection of actual source, not a fresh mathematical review. Root approved six exact-method carriers; seventh inverse-identity supplier requires explicit root/source-owner confirmation before integration acceptance. Same original1 final consumer closure remains owed."
++      }
++    },
++    "ex-rosenbrock-euler-stiff-linear-damping": {
++      "citations": [
++        {
++          "fact": "F1",
++          "source": "def-rosenbrock-euler-step-map",
++          "source_section": "Definition",
++          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^d$ be open, let $d\\ge1$, and let $f:D\\to\\mathbb R^d$ be a vector field ([[def-first-order-ode-initial-value-problem-and-solution]]). For $(t,y)\\in D$, a step size $h>0$, a parameter $\\gamma>0$, and a matrix $\\widetilde J\\in\\mathbb R^{d\\times d}$, put\n$$A_{\\gamma,h}(\\widetilde J):=I_d-\\gamma h\\widetilde J.$$\nWhen this matrix is invertible, the **one-stage Rosenbrock step** uses the stage slope $k$ and update\n$$A_{\\gamma,h}(\\widetilde J)k=f(t,y),\\qquad \\Phi_{\\gamma,h}^{\\widetilde J}(t,y):=y+hk.$$\nThe **exact-Jacobian branch** sets $\\widetilde J=D_yf(t,y)$, where $D_yf$ is the Jacobian in the state variables as in [[def-jacobian-matrix-and-gradient]]. An approximate-Jacobian branch may supply a different $\\widetilde J$; the equation requires the chosen shifted matrix to be invertible. The name **Rosenbrock–Euler** here refers to the case $\\gamma=1$. This definition specifies one linearized step and does not say that it solves the full backward-Euler nonlinear equation.",
++          "uses": [
++            "1.1"
++          ]
++        },
++        {
++          "fact": "F2",
++          "source": "thm-rosenbrock-euler-a-l-stable",
++          "source_section": "Statement",
++          "quote": "Consider the exact-arithmetic Rosenbrock-Euler map of [[def-rosenbrock-euler-step-map]] with $\\gamma=1$, exact Jacobian, and its complex scalar test equation $y'=\\lambda y$, $z=h\\lambda$. The complexification is the real two-dimensional exact map under $(\\operatorname{Re}y,\\operatorname{Im}y)$, with multiplication by $\\lambda$ represented by $C_\\lambda=\\begin{pmatrix}\\operatorname{Re}\\lambda&-\\operatorname{Im}\\lambda\\\\\\operatorname{Im}\\lambda&\\operatorname{Re}\\lambda\\end{pmatrix}$. Thus its exact stage equation is $(I_2-hC_\\lambda)k=C_\\lambda y$, equivalently $(1-z)k=\\lambda y$, and its update is $y+hk$. This is the $\\gamma=1$ exact complexification used in [[thm-rosenbrock-euler-scalar-a-and-l-stability]], not execution of a real rounded solver. Its amplification factor is $R(z)=(1-z)^{-1}$. A-stability means no pole and $|R(z)|\\le1$ throughout $\\operatorname{Re}z\\le0$; L-stability additionally means $R(z)\\to0$ as $|z|\\to\\infty$ within that half-plane. The exact method is both A-stable and L-stable, and its amplification factor agrees with backward Euler.",
++          "uses": []
++        }
++      ],
++      "derivations": [
++        {
++          "id": "derive-1.1",
++          "step": "1.1",
++          "claim": "Here $\\lambda=-10$ and $z=h\\lambda=-2$, so $1-h\\lambda=3$. The exact stage solve in [F1] gives $k=-10/3$ and $y_{n+1}=1-(1/5)(10/3)=1/3$.",
++          "inputs": [
++            "given",
++            "F1",
++            "algebra"
++          ]
++        },
++        {
++          "id": "derive-2.1",
++          "step": "2.1",
++          "claim": "The explicit Euler update is $1+h\\lambda=1-2=-1$. The two amplification magnitudes are therefore $1/3$ and $1$, respectively, proving the stated contrast for this finite scalar example.",
++          "inputs": [
++            "given",
++            "step 1.1",
++            "algebra"
++          ]
++        }
++      ],
++      "routine_steps": [],
++      "boundaries": [
++        {
++          "case": "empty",
++          "status": "not_applicable",
++          "reason": "This fixed-dimensional analytic Statement has no variable input collection or finite-budget loop with an empty-input branch."
++        },
++        {
++          "case": "zero",
++          "status": "checked",
++          "evidence": "The source Statement and complete projected proof retain zero permissible fields, residuals, differences or scalar z without dividing by their norms; inverse hypotheses remain explicit."
++        },
++        {
++          "case": "one",
++          "status": "checked",
++          "evidence": "The algebra and estimates in the source include the scalar dimension d=1; no projected proof step requires dimension greater than one."
++        },
++        {
++          "case": "degenerate",
++          "status": "checked",
++          "evidence": "The source Statement explicitly retains the required inverse/admissibility hypotheses; no conclusion is extended to a singular excluded stage."
++        },
++        {
++          "case": "endpoints",
++          "status": "checked",
++          "evidence": "The exact source Statement fixes its own h/time or half-plane domain, and the projected proof establishes only that domain; no h=0 extension or rounded execution guarantee is added."
++        },
++        {
++          "case": "nonempty-choice",
++          "status": "not_applicable",
++          "reason": "No selection from an arbitrary indexed family is used; the source works with specified finite-dimensional data."
++        },
++        {
++          "case": "iff-forward",
++          "status": "not_applicable",
++          "reason": "The source has no biconditional assertion."
++        },
++        {
++          "case": "iff-reverse",
++          "status": "not_applicable",
++          "reason": "The source has no biconditional assertion."
++        }
++      ],
++      "risk_review": {
++        "status": "complete",
++        "notes": "Metadata projection of actual source, not a fresh mathematical review. Root approved six exact-method carriers; seventh inverse-identity supplier requires explicit root/source-owner confirmation before integration acceptance. Same original1 final consumer closure remains owed."
++      }
+     }
+   }
+ }

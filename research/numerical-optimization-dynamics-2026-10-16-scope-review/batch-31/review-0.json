@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "batch": "31",
+  "round": 0,
+  "reviewed_items": [
+    "lem-shared-minimum-poisson-count-coupling",
+    "alg-explicit-poisson-tau-leaping",
+    "def-density-scaled-jump-and-chemical-langevin-generators",
+    "lem-poisson-tau-leap-moment-and-covariance-identities",
+    "thm-minimum-intensity-tau-leap-level-variance",
+    "alg-critical-reaction-binomial-guarded-tau-leaping",
+    "lem-bounded-rate-reaction-generator-dynkin-identity",
+    "lem-poisson-tau-leap-one-step-weak-defect",
+    "thm-density-scaled-chemical-langevin-model-error",
+    "thm-poisson-tau-leap-weak-order-one-with-exit-bound",
+    "cor-mlmc-complexity-for-poisson-tau-leaping",
+    "ex-minimum-intensity-coupling-reduces-one-step-variance",
+    "ex-chemical-langevin-near-empty-poisson-birth",
+    "ex-poisson-tau-leap-negative-population-pure-death",
+    "ex-binomial-guard-prevents-invalid-counts-but-changes-noise",
+    "ex-stiff-reversible-explicit-leap-mean-amplification"
+  ],
+  "reviewed_pages": [
+    "tau-leaping-and-reaction-diffusion-model-error",
+    "tau-leaping-and-reaction-diffusion-model-error-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete review found three locally resolvable defects; the remaining claims and supplier uses match the approved finite-state scope.",
+  "findings": [
+    {
+      "id": "alg-critical-reaction-binomial-guarded-tau-leaping",
+      "type": "local",
+      "reason": "C(x)=∅ is permitted, but step 2 still forms and calls a zero-channel subsystem; the reaction-system and Gillespie suppliers require a positive channel count. Define an explicit no-critical-event branch."
+    },
+    {
+      "id": "thm-density-scaled-chemical-langevin-model-error",
+      "type": "prerequisite",
+      "reason": "Proof step 1.2 invokes the Dynkin lemma for D on x0+V⁻¹Z^d with jumps νj/V, while the lemma's exactness supplier is stated for integer-lattice states and increments. Add the affine relabeling y=V(x−x0), transport the rates and test function, or prove the bounded-rate identity directly for this lattice."
+    },
+    {
+      "id": "ex-stiff-reversible-explicit-leap-mean-amplification",
+      "type": "local",
+      "reason": "The repository convention has N include 0. At M=0, the claimed mean 3M/2 is not outside the physical interval [0,M]. Require M≥1."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-binomial-guard-prevents-invalid-counts-but-changes-noise",
+      "decision": "repair",
+      "reason": "This example uses C=∅ and currently relies on the undefined zero-channel call; recheck after the algorithm's no-event branch is added. Its one-channel variance calculations are sound."
+    },
+    {
+      "id": "cor-mlmc-complexity-for-poisson-tau-leaping",
+      "decision": "accept",
+      "reason": "Its reference to the guarded algorithm only limits transfer of the Poisson guarantee; the MLMC proof does not depend on the algorithm's empty-set case."
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "repeat",
+  "round": 2,
+  "unit": "30",
+  "input_sha256": "99e8fcdaaf4b8c60537fe6619d80cdd7d83ebe205fb35c77da897a78690496fc",
+  "decisions": [
+    {
+      "id": "alg-adaptive-euler-maruyama-on-predictable-grid",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "9ac4f778ac69066fac7cdd9ac779060c4df900b881f08b2c6571ea1754629f28",
+      "outcome": "false_positive",
+      "reason": "The Definition invokes the supplier's upper-grid approximation and null-completion argument, explicitly identifying its extension to complete filtrations; it does not claim that the supplier's Statement has that generality. I checked the entire supplier proof: step 1.1 uses only stopping-time tests, adaptedness and an increasing filtration; step 2.1 uses continuity and measurable limits; step 3.1 uses only the ambient-null-set inclusion in every F_t. The algorithm's usual conditions supply that inclusion. No step uses generation by Brownian coordinates, Brownian independence, or a Brownian-specific augmentation. Thus the explicitly cited argument proves the required stopped measurability under the actual inputs, and the narrower supplier Statement does not invalidate this proof reuse.",
+      "uncertain": false,
+      "source_urls": [
+        "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-adaptive-euler-maruyama-on-predictable-grid",
+      "disposition": "unaffected",
+      "post_sha256": "98972bf2e2dbd9cbc67a922ff767a9ef0e1e623a4874f3771e7a63b460333bcb",
+      "review_context_sha256": "e51231d94bbd89bbdf78783be318f610a63e2aece4aff33e46ee0b9b533fbdaa",
+      "reason": "Reviewed the full procedure, its owning contract and page, and the relevant dependency arguments. The stopped-value proof reuse is valid under usual conditions, including ambient null completion. Stopped sigma-algebra tests give measurability of tau_n and nesting F_tau_n within F_tau_(n+1), so Borel evaluation preserves state measurability. The two branches specify their updates, retained tree, ordered pending work, partial outputs, and completion-before-budget tests, including B=0. Endpoint-dependent rejection is excluded from the predictable-grid error claim. AC remains inherited. No item, contract or page edit is needed; the guard equals the frozen assignment before guard.",
+      "uncertain": false,
+      "source_urls": [
+        "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "alg-adaptive-euler-maruyama-on-predictable-grid",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "9ac4f778ac69066fac7cdd9ac779060c4df900b881f08b2c6571ea1754629f28",
+      "outcome": "false_positive",
+      "reason": "The Definition invokes the supplier's upper-grid approximation and null-completion argument, explicitly identifying its extension to complete filtrations; it does not claim that the supplier's Statement has that generality. I checked the entire supplier proof: step 1.1 uses only stopping-time tests, adaptedness and an increasing filtration; step 2.1 uses continuity and measurable limits; step 3.1 uses only the ambient-null-set inclusion in every F_t. The algorithm's usual conditions supply that inclusion. No step uses generation by Brownian coordinates, Brownian independence, or a Brownian-specific augmentation. Thus the explicitly cited argument proves the required stopped measurability under the actual inputs, and the narrower supplier Statement does not invalidate this proof reuse.",
+      "uncertain": false,
+      "source_urls": [
+        "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "review_complete_no_repair_required",
+    "mathematical_evidence": "For a bounded stopping time rho and fixed 0<t<=T, round rho wedge t upward on {kt/2^r:0<=k<=2^r}. Each cell event is F_q-measurable at its grid endpoint q<=t; hence each stopped Brownian approximation is F_t-measurable. Define Z_t by the finite vector limit, and zero where it fails. On the common continuity event, Z_t=W_(rho wedge t). For every Borel C, {W_rho in C} intersect {rho<=t} differs from {Z_t in C} intersect {rho<=t} only within the ambient null continuity complement, every subset of which is in F_0 under the usual conditions. This proves each stopped test; t=0 uses W_0 and t=T also proves ambient measurability. This is precisely the cited supplier argument with its actual necessary hypotheses, rather than an application of its narrower Statement. It works coordinatewise and adds no choice principle.",
+    "source_consulted": {
+      "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf",
+      "locators": "Chapter 4, printed p. 33 (usual conditions and ambient-null-set convention), p. 39, Lemma 4.16 and its complete proof, and p. 40, Lemma 4.20 and its complete proof.",
+      "establishes": "Under usual conditions, progressive processes evaluated at stopping times are measurable in the stopped sigma-algebra; adapted continuous processes are progressive. These provide a separate confirmation, not a replacement for the local proof."
+    },
+    "scope": "Only the assigned report is written. No Statement or Definition changes, new prerequisite, or downstream interface event occurred. No published-consumer ledger update or outside maintenance finding is proposed. The digest concern about the barrier-crossing theorem is outside this assignment and is not adjudicated here.",
+    "checks": [
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run numerical-optimization-dynamics-2026-10-16 --items alg-adaptive-euler-maruyama-on-predictable-grid",
+        "exit_code": 0,
+        "result": "Copied both current hashes immediately after completing the mathematical review; no supplier edits followed."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-adaptive-euler-maruyama-on-predictable-grid.md --json",
+        "exit_code": 0,
+        "result": "1 file checked; errors=[], warnings=[]."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-adaptive-euler-maruyama-on-predictable-grid.md --json",
+        "exit_code": 0,
+        "result": "1 file; not-applicable, 0 proof sections checked, 0 failures."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-30.proof-contracts.json --items alg-adaptive-euler-maruyama-on-predictable-grid --strict --json",
+        "exit_code": 0,
+        "result": "Assigned item checked; ok=true, errors=[], warnings=[]."
+      }
+    ],
+    "proof_layout": "No item paths changed; the required post-edit proof-layout command therefore has no subjects.",
+    "unresolved_obligations": []
+  }
+}

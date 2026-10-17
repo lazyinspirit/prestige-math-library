@@ -1,0 +1,20 @@
+--- tools/step6-commit.mjs
++++ tools/step6-commit.mjs
+@@ -67,7 +67,7 @@
+ export function commitStep6(root, run, { physics = false, finalReceipt = finalPath(run), receipt = {}, assertValidated } = {}) {
+   if (typeof assertValidated !== 'function') throw Error('step6 commit: requires the genuine final-validation binding');
+   const scope = preflightStep6(root, run, { physics, finalReceipt });
+-  for (const suffix of ['proof-layout.json', 'publication-readiness.json', 'step6-evidence.json', 'step6-report-integrity.json', 'step6-report.response.json', 'step6-report.md'])
++  for (const suffix of ['proof-layout.json', 'publication-readiness.json', 'step6-evidence.json', 'step6-report-integrity.json', 'step6-report.response.json', 'step6-report.md', 'pathway-closure.json', 'judge-closure.json'])
+     regularPath(scope.root, `research/${run}-${suffix}`);
+   const { gitRoot, paths, localPaths } = scope;
+   const actualIndex = gitPath(gitRoot, 'index'), lockPath = actualIndex + '.lock';
+@@ -177,6 +177,8 @@
+       .map(path => fileState(gitRoot, path)), validated, 'validated owned working bytes');
+     if (!readFileSync(receiptFile).equals(expectedReceipt)) throw Error('step6 commit: receipt changed');
+     const currentScope = preflightStep6(root, run, { physics, finalReceipt });
++    for (const suffix of ['pathway-closure.json', 'judge-closure.json'])
++      regularPath(currentScope.root, `research/${run}-${suffix}`);
+     equal(currentScope.paths, paths, 'owned inventory');
+     equal(currentScope.policy?.contextSha256 ?? null, scope.policy?.contextSha256 ?? null, 'scope authority');
+     equal(currentScope.fragments, scope.fragments, 'fragment authority');

@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "recorded_at": "2026-10-17T04:45:00Z",
+  "research_only": true,
+  "reviewer": "ROOT/kept_low_stochastic",
+  "distinct_issue_cycle": 1,
+  "status": "Pending actual native5.5 adjudication; research proposal only, with no current acceptance claimed",
+  "original_judge_observation": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-chaos-estimator-interface-proposal/original-judge-observation.json",
+  "finding": {
+    "id": "def-chaos-quadrature-coefficient-estimator",
+    "model": "gpt-6.1-sol",
+    "keep": false,
+    "at": "2026-10-17T04:42:22.459Z",
+    "disposition": "Confirmed conditional-interface omission, rather than a false positive. The estimator finite sums are meaningful for general node-evaluable u; its last sentence unqualifiedly names exact coefficients and projection even though the linked definition requires a real L2 class."
+  },
+  "proposal": {
+    "canonical_path": "items/def-chaos-quadrature-coefficient-estimator.md",
+    "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-chaos-estimator-interface-proposal/before/def-chaos-quadrature-coefficient-estimator.md",
+    "proposed_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-chaos-estimator-interface-proposal/proposed/def-chaos-quadrature-coefficient-estimator.md",
+    "guard": {
+      "kind": "exact-byte-equality",
+      "before_file": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-chaos-estimator-interface-proposal/before/def-chaos-quadrature-coefficient-estimator.md",
+      "action": "Refuse application unless current canonical bytes match full archived preimage. Copied native judge hashes are historical and do not establish current source binding."
+    },
+    "original_definition_changed": true,
+    "edit_summary": "Keep both finite formulas, basis, finite cubature inputs and all node-evaluable real inputs unchanged. Explicitly impose no L2 requirement for these finite calculations. Condition only exact c_alpha/P_Lambda language on a chosen node-evaluable representative of an admissible real L2 class; retain the original no-general-accuracy caveat."
+  },
+  "independent_reasoning": [
+    "For finite J and finite real weights/node values, each Q(u psi_alpha) is a finite real sum because the finite polynomial basis has finite values at finite real nodes. The finite estimated polynomial is then an element of the admitted finite basis span, regardless of whether u itself is globally measurable/integrable/square-integrable. No integral of u is used by these formulas.",
+    "The actual def-finite-chaos-orthogonal-projection begins For real u in L2(rho). Its exact coefficient pairing is legitimate because each admitted psi_alpha is in L2(rho), and its own declared Cauchy-Schwarz interface makes the product integrable. Its orthogonal projection language concerns this real L2 quotient and finite space. Merely having finitely many real node values cannot supply the missing global hypothesis.",
+    "For a concrete counterexample compatible with the support convention, let rho be uniform on[0,1], choose admissible constant basis psi0=1, and take u(y)=1/y for y>0, defining u(0)=0. At finitely many interior nodes u is finite, so the estimator is finite. On each interval (2^(-k-1),2^(-k)] the integrand u is at least2^k and the interval length is2^(-k-1), so every such interval contributes at least1/2 to its nonnegative integral. Thus the exact constant coefficient diverges. The finite estimator still makes sense and is intentionally retained.",
+    "The actual weighted orthogonal-polynomial Galerkin definition was also inspected: it explicitly places V_N(mu) inside L2(mu), defines L2 by finite squared-integral classes, and defines its spectral projection on admissible coefficient sequences. It does not license arbitrary node-evaluable projections. It is not a direct dependency of the chaos estimator, so no supplier change or new edge is proposed.",
+    "No duplicate algorithm, new lemma, new result or native-creation record is needed: this is a precise conditional interpretation within the existing definition. Empty Lambda and zero/empty cubature sums retain their finite algebraic meanings; the conditional exact projection notation stays on its established L2 domain."
+  ],
+  "consumer_discovery": {
+    "method": "Full current items/*.md YAML deps/justified_by reverse closure for this definition, supplemented by direct item/library text references. This is focused research discovery, not native validation or a test certificate.",
+    "exact_consumer_ids": [
+      "thm-chaos-quadrature-coefficient-error-split",
+      "cor-tensor-gauss-exact-chaos-coefficients",
+      "cor-smolyak-chaos-coefficient-error-bound"
+    ],
+    "consumer_count": 3,
+    "closure_structure": "All three consumers are direct. Tensor-Gauss and Smolyak also depend on the error-split theorem; no further indirect consumer exists.",
+    "aliases": "The estimator declares no aliases."
+  },
+  "consumer_reviews": [
+    {
+      "id": "thm-chaos-quadrature-coefficient-error-split",
+      "relationship": "direct",
+      "source_before": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-chaos-estimator-interface-proposal/before/thm-chaos-quadrature-coefficient-error-split.md",
+      "verdict": "compatible; no source change needed",
+      "evidence": "Actual full source read. Its Statement already assumes real u in L2(rho) and chooses a representative tilde-u defined at every cubature node. This is exactly the proposed conditional exact-coefficient interface. F1 uses only the unchanged finite estimated polynomial; F2/F4 receive the L2 pairing from the exact projection supplier. Orthogonality and squared-norm expansion in Proof1.1–2.1 retain the same finite coefficient error split and triangle bound. Lambda empty gives the zero finite sum and unchanged residual identity. Neither completeness of L2 nor node evaluation of an equivalence class without a chosen representative is asserted."
+    },
+    {
+      "id": "cor-tensor-gauss-exact-chaos-coefficients",
+      "relationship": "direct and via error-split theorem",
+      "source_before": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-chaos-estimator-interface-proposal/before/cor-tensor-gauss-exact-chaos-coefficients.md",
+      "verdict": "compatible; no source change needed",
+      "evidence": "Actual full source read. The input u belongs to the finite chaos space P_Lambda, which its actual basis definition places inside L2(rho). Proof1.1 uses its finite polynomial expansion u=sum_beta c_beta psi_beta as the polynomial evaluated by the Gaussian rule. Hence its node-evaluable polynomial representative and L2 admissibility meet both halves of the repaired estimator definition. Products have coordinate degree <=2p_j<=2m_j-2, and the existing tensor exactness proof makes every coefficient difference zero. This preserves the original polynomial-input exactness claim; it does not add a claim that arbitrary null-set modifications share finite node values. No representative-independent cubature guarantee or non-L2 projection is proposed."
+    },
+    {
+      "id": "cor-smolyak-chaos-coefficient-error-bound",
+      "relationship": "direct and via error-split theorem",
+      "source_before": "research/numerical-optimization-dynamics-2026-10-16-ROOT-step5-sol-chaos-estimator-interface-proposal/before/cor-smolyak-chaos-coefficient-error-bound.md",
+      "verdict": "compatible; no source change needed",
+      "evidence": "Actual full source read. Its Statement already assumes real u in L2(rho), fixes a node-defined representative tilde-u, and assumes each coefficient integrand tilde-u psi_alpha has the required continuous mixed-fourth derivatives and finite bounds on the uniform cube. Thus exact coefficients exist under the projection supplier and finite cubature remains evaluated on that chosen representative. Applying scalar Smolyak bounds in Proof1.1, summing squares in2.1 and invoking the L2 split in3.1 preserve every existing constant, cube-law restriction, endpoint convention and mixed-regularity hypothesis."
+    }
+  ],
+  "supplier_interfaces_read": [
+    "items/def-finite-chaos-orthogonal-projection.md",
+    "items/def-chaos-orthonormal-tensor-basis.md",
+    "items/def-finite-product-chaos-input.md",
+    "items/def-weighted-orthogonal-polynomial-galerkin-space.md"
+  ],
+  "page_disposition": {
+    "path": "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/polynomial-chaos-stochastic-collocation-and-galerkin-uq.md",
+    "evidence": "Full page prose read. Its projection/coefficient-error discussion refers to representative-based projection/error claims under the cited results; those three results already state L2 or finite-space membership. No new global accuracy or arbitrary non-L2 projection is asserted. No page source edit proposed."
+  },
+  "future_mirrors": [
+    {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-99.proof-contracts.json",
+      "pointer": "/contracts/thm-chaos-quadrature-coefficient-error-split/citations/0/quote",
+      "action": "After legitimate native repair, mirror exact admitted estimator Definition. Preserve original context/judgment bytes; no mathematical consumer source change is required by this conditional clarification."
+    },
+    {
+      "path": "research/numerical-optimization-dynamics-2026-10-16-batch-99.proof-contracts.json",
+      "pointer": "/contracts/cor-tensor-gauss-exact-chaos-coefficients/citations/7/quote",
+      "action": "After legitimate native repair, mirror exact admitted estimator Definition. Preserve original context/judgment bytes; no mathematical consumer source change is required by this conditional clarification."
+    }
+  ],
+  "external_full_text_reading_claimed": false,
+  "preservation": "Independent of the stopped-value first-cycle packet and all earlier immutable packets. Original Sol keep:false judgment, timestamp, reason and context/item hash fields retained unchanged as history; no native adjudication or mathematical acceptance is inferred.",
+  "execution_limits": {
+    "canonical_content_or_metadata_edits": false,
+    "hashes_computed": false,
+    "checks_tests_or_gates_run": false,
+    "native_controls_or_dispatch_used": false,
+    "admission_or_current_acceptance_claimed": false,
+    "commits_created": false
+  },
+  "future_native_work": "Only actual native5.5 adjudication/repair or a legitimate drained owner-escalation may adopt this proposal. Root owns current preimage hashes, policy/ownership checks and real supplier/consumer recertification. The research review is not a replacement for those steps."
+}

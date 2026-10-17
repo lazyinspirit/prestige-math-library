@@ -1,0 +1,1351 @@
+Computing the Polar Decomposition—with
+Applications
+
+Higham, Nicholas J.
+
+1986
+
+MIMS EPrint: 2007.9
+
+Manchester Institute for Mathematical Sciences
+
+School of Mathematics
+
+The University of Manchester
+
+Reports available from:
+http://eprints.maths.manchester.ac.uk/
+
+And by contacting:
+The MIMS Secretary
+
+School of Mathematics
+
+The University of Manchester
+
+Manchester, M13 9PL, UK
+
+ISSN 1749-9097
+
+
+SIAM J. Sci. STAT. COMPUT.
+
+Vol. 7, No. 4, October 1986
+
+(C) 1986 Society for Industrial and Applied Mathematics
+OO7
+
+COMPUTING THE POLAR DECOMPOSITION---WITH APPLICATIONS*
+
+NICHOLAS J. HIGHAMf
+
+Abstract. A quadratically convergent Newton method for computing the polar decomposition of a
+full-rank matrix is presented and analysed. Acceleration parameters are introduced so as to enhance the
+
+initial rate of convergence and it is shown how reliable estimates of the optimal parameters may be computed
+in practice.
+To add to the known best approximation property of the unitary polar factor, the Hermitian polar
+factor H of a nonsingular Hermitian matrix A is shown to be a good positive definite approximation to A
+and 1/2(A / H) is shown to be a best Hermitian positive semi-definite approximation to A. Perturbation
+bounds for the polar factors are derived.
+Applications of the polar decomposition to factor analysis, aerospace computations and optimisation
+are outlined; and a new method is derived for computing the square root of a symmetric positive definite
+matrix.
+
+Key words, polar decomposition, singular value decomposition, Newton’s method, matrix square root
+
+AMS(MOS) subject classifications. 65F25, 65F30, 65F35
+
+1. Introduction. The polar decomposition is a generalisation to matrices of the
+familiar complex number representation z
+r ei, r ->_ 0.
+THEOREM 1.1. Polar Decomposition. LetA
+Cren, m >= n. Then there exists a matrix
+U (3. .mxn and a unique Hermitian positive semi-definite matrix H
+C" such that
+
+A
+UH,
+U* U
+I,.
+
+If rank A)= n then H is positive definite and U is uniquely determined.
+The decomposition is well known and can be found in many textbook, for
+example, [13], [16], [27]. An early reference is [1].
+It is well known that the polar factor U possesses a best approximation property
+(see
+2.2). Less attention has been paid in the literature to the Hermitian polar factor
+H. We derive some interesting properties of H which show that when A is nonsingular
+and Hermitian, H is a good Hermitian positive definite approximation to A and
+1/2(A + H) is a best Hermitian positive semi-definite approximation to A.
+In view of the properties possessed by the polar factors of a matrix, techniques
+for computing the polar decomposition are of interest. While U and H can be obtained
+via the singular value decomposition (see
+3.1), this approach is not always the most
+efficient (if A
+U, as explained in
+6.2) or the most convenient (a library routine for
+computing the singular value decomposition might not be available, on a micro-
+computer, for example).
+In
+3 we present and analyse a Newton method for computing the polar decompo-
+sition which involves only matrix additions and matrix inversions. The method is
+shown to be quadratically convergent. Acceleration parameters are introduced so as
+to enhance the initial rate of convergence and it is shown how reliable estimates of
+the optimal parameters may be computed in practice. The stability of the method is
+considered in
+4. In
+5 the relationship of the method to two well-known iterations
+
+is described.
+
+* Received by the editors March 13, 1985. This work was carried out with the support of a SERC
+Research Studentship.
+f Department of Mathematics, University of Manchester, Manchester M13 9PL, England.
+1160
+
+
+COMPUTING THE POLAR DECOMPOSITION
+1161
+
+In
+{} 6 we describe applications of the polar decomposition to factor analysis,
+aerospace computations and optimisation. We show how our algorithm may be
+employed in these applications and compare it with other methods in use currently.
+A new method for computing the square root of a symmetric positive definite matrix
+
+is derived.
+
+2. Properties of the polar decomposition.
+2.1. Elementary properties. We begin by noting the close relationship of the polar
+decomposition to the singular value decomposition. Let A
+Cm", m >-- n, have the
+singular value decomposition [16, p. 16]
+
+(2.1)
+A= P(0) Q*’
+
+where P
+C "m and Q
+C"" are unitary and
+
+X
+diag (0-, 0"2,
+O"n),
+0"1
+0"2 =>"
+0-n
+0.
+
+Partitioning
+P- [P1, P2 ],
+P*IP1
+In,
+
+it follows that A has the polar decomposition A
+UH, where
+
+(2.2)
+U=P1Q*,
+
+(2.3)
+H=QEQ*.
+
+Conversely, given the polar decomposition A
+UH e C"", from a spectral decomposi-
+tion H
+QQ* (Q*Q
+1) one can construct the singular value decomposition A
+(UQ)EQ*.
+Several interesting properties of the polar decomposition are displayed in Lemma
+2.1. Our notation is as follows. For A
+C"")t(A) and 0-(A) denote, respectively, the
+set of eigenvalues and the set of singular values of A, and rE(A)
+0"/0",, is the 2-norm
+condition number. C /2 denotes the unique Hermitian positive semi-definite square
+root of the Hermitian positive semi-definite matrix C [20], [27]. A is normal if
+A’A-AA* [16, p. 193].
+LEMMA 2.1. Let A
+C" have the polar decomposition A
+UH. Then
+
+(i) H
+(3*3) 1/2.
+
+(ii) A(H)=0"(H)=0"(A).
+
+(iii) =(H)= (A).
+(iv) A is normal if and only if UH
+HU.
+Proof. (i)-(iii) are immediate. For (iv) see [13, p. 276].
+
+2.2. The unitary polar factor. Our interest in the polar decomposition stems from
+a best approximation property possessed by the unitary factor. The following result
+displays this property; it is the generalisation to complex matrices of a result in
+16,
+p. 425] (see also [9], [15], [17], [26], [31]). The Frobenius matrix norm is defined by
+
+IIAII
+(trace (A’A)) 1/2.
+
+THEOREM 2.2. Let A, B
+C m" and let B*A
+C" have the polar decomposition
+B*A
+UH.
+
+Then for any unitary Z
+C"",
+
+(2.4)
+IIa- BUII <-IIa- nZll <= IIa+ BUII.
+
+
+1162
+NICHOLAS J. HIGHAM
+
+(2.5)
+IIA+BUII= E (r(A)2+2r(B*A)+o(B)2).
+i=1
+An important special case of Theorem 2.2 is obtained by taking m
+n and B
+L
+COROLLARY 2.3. Let A
+C"" have the polar decomposition
+A
+UH.
+
+Then for any unitary Z
+C"",
+
+(o’i(A)
+1)2
+=][A-UI]F<--]]A-ZI[F<--[[A+U[[F
+(o’i(A) + 1)
+2
+
+i=1
+i=1
+
+Thus if distance is measured in the Frobenius norm, the nearest unitary matrix
+to A
+C"" is the unitary factor in the polar decomposition of A; and the furthest
+unitary matrix from A is minus this unitary factor. This result was established by Fan
+and Hoffman
+12] for any unitarily invariant norm (thus it is valid for the 2-norm). It
+
+is not hard to show that Corollary 2.3 remains true when A
+C
+with rn > n (this
+does not follow immediately from Theorem 2.2).
+
+2.3. The Hermitian polar factor. As well as yielding a closest unitary matrix, the
+polar decomposition provides information about nearby Hermitian positive (semi-)
+definite matrices.
+Let A e C"" be Hermitian with at least one negative eigenvalue and consider the
+problem of finding a small-normed perturbation E
+E* such that A + E is positive
+semi-definite. Define, for any Hermitian B,
+
+(2.6)
+8(B)=min {[[El[2: B+ E is Hermitian positive semi-definite}.
+
+From the Courant-Fischer minimax theory [16, p. 269], any admissible E in the
+definition of 6(A) must satisfy
+
+O-< A,,(A + E) _-< A,, (A) + AI(E),
+
+where h,(.
+<_-.
+<_- A l(" ). Thus
+
+(2.7)
+lIE II,->-la,(E)[ >= X,(E) ->_ -A.(A).
+We now find a perturbation E for which this lower bound is attained. Let A have the
+spectral decomposition
+
+(2.8)
+A
+ZAZ*=
+Azz*,
+Z*Z
+I.
+i=1
+For
+
+i: Ai<0
+
+(or E =-Aft) it is easily seen that A+ E, is singular and Hermitian positive semi-
+definite, with
+It follows from (2.6) and (2.7) that
+
+(2.9)
+6(A)
+-X,(A)
+(A,(A) < 0).
+Now observe, from (2.8), that A has the polar decomposition A
+UH, where
+
+(2.10)
+U
+Z diag (sign (A))Z*,
+H
+Z diag (IAI)Z*.
+
+It follows that
+
+(2.11)
+Ev=1/2(H-A
+
+
+COMPUTING THE POLAR DECOMPOSITION
+1163
+
+Thus 1/2(A+ H)= A+ Ep is a nearest Hermitian positive semi-definite matrix to A in
+the 2-norm. This is a special case of a result obtained by Halmos [ 18] that applies to
+general non-Hermitian linear operators A.
+We summarise our findings in the following lemma.
+LEMMA 2.4. Let A
+C
+be Hermitian, with the polar decomposition A
+UH. Then
+
+(i) 8(A) =max {0,-A.(A)}=1/2IIA-HII=.
+(ii) 1/2(A + H) is a best Hermitian positive semi-definite approximation to A in the
+2-norm.
+
+(iii) For any Hermitian positive (semi-) definite X
+C"",
+
+IIA- HII= < EllA
+
+(iv) H and A have a common set of eigenvectors.
+The lemma shows that from the polar decomposition of a Hermitian matrix A we
+can obtain not only a best Hermitian positive semi-definite approximation to A,
+1/2(A+ H), but also, ifA is nonsingular, a good Hermitian positive definite approximation
+to A, H itself. In
+6.3 we give an example of how the positive definite approximation
+may be utilised.
+
+2.4. P.erturbation bounds for the polar factors. It is of interest both for theoretical
+and for practical purposes (see
+4) to determine bounds for the changes induced in
+the polar factors of a matrix by perturbations in the matrix. The following theorem
+provides such bounds.
+THEOREM 2.5. Let A
+C"" be nonsingular, with the polar decomposition A
+UH.
+If e
+IIaAIl /llAIl satisfies KF(A)e < 1 then A+ AA has the polar decomposition
+
+where
+A + AA
+U + A U)(H + AH),
+
+IIHII
+_-< (1 +x/)KF(A)e + O(e2).
+
+Proof. Let E
+(1/ e)AA. Then A + tE is nonsingular for 0 _<-
+_-< e. Thus A + tE has
+the polar decomposition
+
+(2.12)
+A+ tE
+U(t)H(t),
+0 <- t<= e,
+
+where H(t) is positive definite. We prove the theorem under the assumption that U(t)
+and H(t) are twice continuously differentiable functions of t; a rather similar but
+longer proof which does not require this assumption may be found in [22].
+From (2.12),
+
+H(t)
+2
+(A+ tE)*(A+ tE),
+
+which gives, on differentiating
+16, p. 4] and setting
+O,
+
+H/:/(0) +/-:/(0)H
+A*E + E*A.
+
+Since A
+UH, this can be written as
+
+(2.13)
+n(o) +/:/(0)H
+HF+ F’H,
+
+where
+F= U*E.
+
+
+1164
+NICHOLAS J. HIGHAM
+
+Let H have the spectral decomposition
+H
+ZAZ*,
+Z*Z
+I.
+
+Performing a similarity transformation on (2.13) using Z gives
+AH + HA
+AF+/*A,
+where
+z* i:I O Z ,, ),
+
+This equation has the solution
+
+i]
+Ai]-- +jTA],
+1<= i, j <= n.
+
+Using the Cauchy-Schwarz inequality,
+
+from which it follows that
+
+_
+
+Z*FZ
+(.ij ).
+
+Thus
+
+(2.14)
+II(0)IIF
+II/:/11 <--1111-IIFII- IIEII.
+A Taylor expansion gives
+H + AH =-- H(e)= H(O)+ e/:/(O) + O(e)
+H + e/-:/(O) +
+
+so that
+
+IIAHII =<
+II/:/(0)
++ o()
+lIE I1 + o(
+
+The required bound is obtained by dividing throughout by ]IH[[
+IIAII and using
+
+Now write (2.12) in the form U(t)= (A+ tE)H(t)-
+and ditterentiate, to obtain
+
+O(t)= EH(t)--(A+ tE)n(t)-llLI(t)n(t)-1.
+
+Setting
+0 gives
+
+(J(O)
+EH-
+AH-1I:t(O)H-
+(E
+U/-7/(0))H-1,
+
+and so, using (2.14),
+
+0(0)11-< (1 +)llE I1 IIn-lll
+(1 +,/)llE I1 IIa-111.
+From the Taylor series for U(t),
+
+Ila uIl,
+u()- u(o) I1,-<_ 110(o) I1, + o(=)
+
+_<--(1 +)eIIEIIIIA-’IIF + o()
+
+(1 + x/)eKF(A) + O(e2),
+
+which gives the required bound, since IIAUII/II UII= IIAUII/#-ff_--< IIAUII.
+
+3. Computing the polar decomposition.
+3.1. Using the singular value decomposition. Our constructive derivation of the
+polar decomposition in
+2 suggests the following computational procedure"
+
+
+COMPUTING THE POLAR DECOMPOSITION,
+1165
+
+(1) compute the singular value decomposition (2.1), forming only the first n
+columns P1 of P;
+(2) form U and H according to (2.2) and (2.3).
+This method requires (when A is real) approximately 7mn2/ ll/3n
+3 flops to compute
+P1, E and Q, if we use the Golub-Reinsch SVD algorithm [16, p. 175], plus mn 2 flops
+to form U and n3/2 flops to form H (see [16, p. 32] for a discussion of the term
+"flop"). Since the SVD algorithm is numerically stable and is readily available in
+library routines such as LINPACK [11] this SVD approach has much to recommend
+
+it.
+We now develop an alternative method for computing the polar decomposition
+which does not require the use of sophisticated library routines and which, in certain
+circumstances (see
+6.2),
+is computationally much less expensive than the SVD
+technique. The method applies to nonsingular square matrices. If A
+C m" with m > n
+and rank (A)-n then we can first compute a QR factorisation [16, p. 146] A-QR
+(where Q
+C"" has orthonormal columns and R is upper triangular and nonsingular)
+and then apply the method to R. The polar decomposition of A is given in terms of
+that of R by
+A= QR
+Q(URHR)
+(QUR)B =-- UH.
+
+3.2. A Newton method. Consider the iteration (the real matrix version of which
+
+is discussed in [3], [4], [5], [6], [28])
+
+(3.1a)
+Xo
+A
+C"",
+nonsingular,
+
+(3.1b)
+Xk+I
+1/2(Xk / X-*),
+k
+O, 1, 2,"’,
+
+where X* denotes (XI)*. We claim that the sequence {Xk} converges quadratically
+to the unitary polar factor in A’s polar decomposition. To prove this we make use of
+the singular value decomposition
+
+where
+
+(3.2)
+
+Define
+
+(3.3)
+
+Then from (3.1) we obtain
+
+(3.4a)
+
+(3.4b)
+
+A= PEQ*
+
+=- UH,
+
+(P*P=Q*Q=In)
+
+U
+PQ*,
+H
+QEQ*.
+
+Dk
+P*XkQ.
+
+Dk+
+1/2(Dk + D-*).
+
+Since Do e R"" is diagonal with positive diagonal elements it follows by induction
+that the sequence {Dk} is defined and that
+
+(3.5)
+Dk
+diag (dk)) e Rnxn,
+dk) > O.
+
+Accordingly, (3.4) represents n uncoupled scalar iterations
+d
+cry,
+l<__i<-n,
+
+
+1166
+NICHOLAS J. HIGHAM
+
+which we recognise as Newton iterations for the square root of 1 with starting values
+the singular values of A.
+Simple manipulations yield the relations (cf. [19, p. 84], [21])
+
+d(k+l)-- 1
+1
+(3.6)
+_,
+2dk)(dk)--l)2,
+l <--i<--_n,
+
+(3.7)
+d(k+l)
+1
+d
+tr,
+2k+,
+__----/i
+l<i<n.
+_d(+l)+l \d+
+cry+
+
+Since A is nonsingular I/il < 1 for each
+i. It follows that dk)- 1 as k-
+for each i,
+that is, Dk- I, or equivalently, from (3.3) and (3.2)
+
+lim Xk- U.
+
+To analyse the rate of convergence we write (3.6) in the form
+
+Dk+- I --1/2(Dk-- I)D-I(Dk
+I)
+
+and pre- and post-multiply by P and Q*, respectively, to obtain, from (3.2) and (3.3)
+
+X/,- U
+1/2(X- U)X-’(X- U).
+
+Furthermore, using (3.2), (3.3) and (3.7),
+
+II(Xk+, + U)-I(xk+I
+U)II2
+IIQ(Dk+I + I)-IP*P(Dk+,
+
+(D+, + I)-’(D+,- I) I1-
+
+2k+l
+=max
+=max i
+’<=’<=, \d
+k) +
+
+Note from (3.3) and (3.5) that d),
+d(,k) are the singular values of X. We have
+proved the following.
+THEOREM 3.1. Let A
+C
+be nonsingular and consider iteration (3.1). Each iterate
+X is nonsingular,
+
+lim X
+U
+
+where U is the unitary factor in the polar decomposition of A, and
+
+(3.8)
+[[X
+II=llXk-- UII@,
+
+(
+r’(Xk)-I )
+
+2
+(3.9)
+Ilx +,- uIl=-<-
+IlX+l+ uIl=
+max
+l<-i<=,,
+tri(Xk) + 1
+
+(3.10)
+IlXk+l+ gll 
+max
+<_<_,
+r(A)+l
+
+3.3. Accelerating convergence. The quadratic convergence of iteration (3.1) ensures
+rapid convergence in the final stages of the iteration: (3.8) implies that the number of
+correct significant figures will approximately be doubled on each step.
+Initially,
+however, the speed of convergence can be inordinately slow, as can be seen by
+considering A
+aI, for large lal, in (3.1) and (3.10).
+We are led to the idea of scaling the matrix A, or more generally, scaling the
+current iterate at the start of each step, with the aim of hastening the onset of the
+ultimate phase of rapid convergence.
+
+
+COMPUTING THE POLAR DECOMPOSITION
+1167
+
+Consider the scaling Xk
+ykXk, Yk > 0. From (3.1b) we have
+
+x/
+x/(,l=
+,x+x*
+
+(thus / can be regarded as an acceleration parameter), and from (3.9)
+
+(3.11)
+
+where
+
+Ok(3’k)
+max
+")’ktri Xk
+1
+
+3’ktr, Xk + 1
+
+A natural choice for Yk is the value yokp which minimises Ok(y). A straightforward
+argument shows that
+
+(3 12)
+k
+(o.(X,)o.,(Xk))-/,
+"Yopt
+
+(3.13)
+Ok(
+,(k)x
+K2(Xk)/2-1
+roptl
+r:,(Xk)l/2+ 1"
+
+One can show that for X,+
+Xk+l(’opt),(k)
+
+(3.14)
+
+1
+)
+,<(x,<+,) <-
+’<-(x,<) ’/+
+
+<_(x<)1-.
+
+If this acceleration technique is used at each stage of iteration (3.1) then from (3.11),
+(3.13) and (3.14) we have, by induction (cf. (3.10))
+
+1/2k+l
+K2(A)
+-1
+(3.15)
+IIX/- U]I2=< IIXk+I+ U[I_ r(A)?Ek,+ 1
+
+The effectiveness of the acceleration procedure is illustrated by the example
+A
+diag (1, 24, 34,
+254); with the convergence criterion IIx- uIl=-
+-< 10-9 the unac-
+celerated iteration requires twenty-two iterations, while the accelerated version requires
+only seven.
+
+3.4. The lraetieal algorithm. It is not feasible to compute yokp exactly at each
+stage, since this would require computation of the extremal singular values of Xk, but
+(k)
+a good approximation to yopt can be computed at negligible cost.
+Taking A
+Xk, X-
+in the inequalities [16, p. 15]
+
+and defining
+
+oh(A)
+IIAII<- dlIAII,IIAII<- d-IIAII,
+
+<,
+,lllxll,llxllo,
+dllX-’ll,llx-’lloo,
+
+/
+k
+-k
+est
+k
+
+we find, from (3.12), that
+
+1
+(k)<
+(k).
+1/4, (k)
+1/4 "}’opt
+)test
+1
+lopt.
+
+
+1168
+NICHOLAS J. HIGHAM
+
+Making suitable modifications to the derivation of (3.15) one can show that if the
+acceleration parameter estimates
+-(k)
+rest are used in the first k stages of iteration (3.1)
+then (cf. (3.15))
+
+\[
+
+x/-ff kE(A) ’/2k+’
+
+ll)
+A) 1/2+’ +
+(3.16)
+IIx/,- ull-
+-< IIx/, + uIl,4-ff
+
+This bound suggests that in the initial stages of iteration (3.1) the estimates -(k)
+rest will
+be almost as effective as the exact values
+(k)
+"’opt"
+We have found empirically that once the error [IXk- UI[2 is sufficiently smallmless
+than 10-2, saymit is advantageous to revert to the original, unaccelerated form of
+iteration (3.1) so as to secure the desirable quadratic convergence.
+Incorporating the acceleration parameter estimates yeskt into iteration (3.1) we
+have the following.
+
+ALGORITHM POLAR. Given a nonsingular matrix A
+C nn this algorithm computes
+the polar decomposition A- UH.
+(1) Xo := A; k:=-l.
+(2) Repeat
+k:= k+l
+Yk := X
+If "close to convergence" then
+
+"yk := 1
+else
+:-,/llx II, IIx I1o;
+:=,/11 Yk II, Yk I1o
+
+Xk+ :=
+TkXk
+Y
+k
+Until converged.
+(3) U := X+
+H1 := U*A
+H := (H + H) (to ensure that the computed H is Hermitian).
+Cost: (for real A) (s+ 1)n
+flops, where s iterations are required for convergence.
+
+In step (3) of the algorithm we could implicitly force H to be Hermitian by
+computing only the upper triangular part of U’A; the given technique is preferred
+for reasons discussed in
+4.
+A suitable convergence test to apply in step (2) of Algorithm Polar is
+
+(3.17)
+
+where n, depending on n, is a small multiple of the machine unit roundoff u [16, p. 33].
+
+4. Backward error analysis. Consider the SVD approach to computing the polar
+decomposition, described in
+3.1. Using the backward error analysis for the Golub-
+Reinsch SVD algorithm
+16, p. 174] one can show that the computed polar factors of
+A, U and H, satisfy
+O- v/au,
+IlaUll=_-< ,
+K + AH,
+* =/,
+Ilanll_ <- llgll=,
+VK
+A+ AA,
+IIAAII- <----
+IIAII=,
+
+where V is unitary, K is Hermitian positive semi-definite (certainly positive definite
+
+
+COMPUTING THE POLAR DECOMPOSITION
+1169
+
+if K2(A)< l/e) and e is a small multiple of the machine precision u. Thus / and
+are relatively close to the true polar factors of a matrix "near" to A. This result is the
+best that can be expected of any method for computing the polar decomposition in
+
+finite precision arithmetic.
+We have been unable to prove a corresponding stability result for Algorithm Polar.
+Instead we derive an a posteriori test for stability of the computed polar factors U
+and H.
+Under mild assumptions one can show that with the convergence test (3.17) U
+
+satisfies
+
+V+AU,
+V’V--I,
+
+Algorithm Polar computes
+
+where, four simplicity, we ignore the rounding errors incurred in the computation of
+H1 and H (these lead to extra terms of order e IIAII=, which do not affect the conclusion
+below). Defining
+
+We have
+
+where
+
+^,
+G
+1/2(if,
+H,
+
+VI2I
+V(1211
+G)
+V( V* + A U*)A
+VG
+A+ AA,
+
+This result is comparable with the result for the SVD method if (changing to the
+one-norm)
+
+(4.1a)
+,,,
+e,
+
+(4.1b)
+IIGlll
+
+(4.1c)
+H is positive definite.
+
+Thus, in particular, IIGII must be sufficiently small, that is, /)1 must be sufficiently
+close to being Hermitian. These conditions are easil tested; one can test (4.1c) by
+attempting to compute a Choleski decomposition of H. Note that evaluation of (4.1b)
+
+is computationally much less expensive than the alternative of comparing IIA-
+with ,, a II1.
+Once the above tests have been performed, the accuracy of the computed polar
+factors (that is, the forward error) can be estimated with the aid of Theorem 2.5. The
+condition numbers KI(A), ro(A) can be formed at no extra cost during the first step
+of Algorithm Polar.
+
+5. Relation to matrix sign and square root iterations. In this section we show how
+iteration (3.1) is related to iterations for the matrix sign function and the matrix square
+root.
+For a diagonalisable matrix A
+ZDZ-1, D
+diag (di), Re di # 0, the sign function
+
+is given by [10], [30]
+
+sign (A)
+Z diag (sign (Re d,))Z-1.
+
+An iterative method for computing sign (A) is [10], [30]
+
+(5.1)
+Sk+l =1/2(Sk + SI),
+So
+A.
+
+
+1170
+NICHOLAS J. HIGHAM
+
+This iteration is essentially Newton’s method for a square root of/, with starting matrix
+A (see [21]). We observe that iteration (3.1) implicitly performs this "sign iteration"
+on the matrix
+of singular values: see (3.4) and (3.5). In fact, iteration (3.1) may be
+derived by applying the sign iteration to the Hermitian matrix
+
+W= A
+0
+
+whose eigenvalues are plus and minus the singular values of A.
+Our analysis of the convergence of iteration (3.1), and of the acceleration para-
+meters {y}, applies with suitable modifications to the sign iteration (5.1); cf. [23],
+[24], [25], [3O].
+Consider now the iteration
+
+(5.2)
+Yk+
+1/2 Yk + Y- B),
+Yo
+B,
+
+for a square root of B
+C"". In [21] this iteration is shown to be numerically unstable
+in the sense that a small peurbation in the kth iterate can lead to peurbations in
+succeeding iterates which grow unboundedly.
+It can be shown that the sequence {Xk} from iteration (3.1) is related to the
+sequence { Yk} generated by (5.2) with B
+A*A according to
+
+X*k A=-- Yk.
+
+Thus iteration (3.1) implicitly carries out iteration (5.2) on B=A*A, without ever
+forming A*A. The techniques of [21] can be used to show that iteration (3.1) does not
+
+suffer from the numerical instability which impairs iteration (5.2).
+
+6. Applications.
+6.1. Factor analysis [17], [31]. In psychometrics the "Orthogonal Procrustes"
+problem consists of finding an orthogonal matrix Q
+Rnn which most nearly trans-
+forms a given matrix B R’n into a given matrix A
+Rm, according to the criterion
+that the sum of squares of the residual matrix A- BQ is minimised [17], [31] (see also
+
+[9], [32]). Theorem 2.2 shows that a solution to this problem is Q
+U where BTA
+UH
+
+is a polar decomposition. If A and B have full rank then BTA is nonsingular and U
+may be computed by Algorithm Polar; if either A or B is rank-deficient then U may
+be computed via a singular value decomposition of BrA, as described in
+3.1 (see
+also [16, p. 426]).
+
+6.2. Aerospace computations [2]-[7], [9], [28], [32]. In aerospace systems an
+important role is played by the direction cosine matrix (DCM)--an orthogonal matrix
+D33 which transforms vectors from one coordinate system to another. Errors
+incurred in computation of the DCM result in a loss of orthogonality; an intuitively
+appealing way in which to restore orthogonality is to replace the computed DCM D
+by the nearest orthogonal matrix, that is, by the orthogonal polar factor of/ (see
+Corollary 2.3).
+A key feature of this application is that D is relatively close to being orthogonal:
+typically II/- UIIF < .1 [2], [3], [4]. From (3.8) we can expect iteration (3.1) to converge
+within four iterations, for a tolerance 3
+10-16 in (3.17). Of course if U is not required
+to full machine accuracy then there is no need to iterate to convergence--just one or
+two iterations may yield a sufficiently accurate approximation to U.
+For matrices that are as close to orthogonality as D above, computation of U
+from Algorithm Polar will require at most 4n3 flops, making this method particularly
+
+
+COMPUTING THE POLAR DECOMPOSITION
+1171
+
+attractive, since the singular value decomposition approach described in
+3.1
+still
+requires approximately 12n
+flops.
+We now compare Algorithm Polar with two other iterative techniques which have
+been proposed for computing the orthogonal polar factor of a nearly-orthogonal matrix.
+Bjorck and Bowie [7] derive a family of iterative methods with orders of conver-
+gence 2, 3,... by employing a binomial expansion for the matrix square root in the
+expression U-AH-1- A(A*A) -1/2 (see Lemma 2.1(i)). Their quadratically conver-
+gent method is
+
+(6.1a)
+Xo=A,
+
+(6.1b)
+Qk
+I- X*kXk,
+k-O, 1,2,
+(6.1c)
+Xk/I
+Xk(I +1/2Qk),
+
+One step of this iteration costs 3n3/2 flops (for AR""); in comparison iteration
+(3.1) requires only n
+flops per step. Also, while iteration (3.1) converges for any
+nonsingular A, a practical condition for the convergence of iteration (6.1) is [7]
+
+0 < tri(A) < v/,
+l<-i<-n.
+
+The following iteration is proposed in [2]:
+
+(6.2a)
+Xo= A6 I
+
+(6.2b)
+Xk+=X,--1/2(XkArXk--A),
+k=0, 1,2,’’’.
+
+It is shown in [3], [5], [28] that iteration (6.2) is locally, linearly convergent to the
+orthogonal polar factor of A. Evaluation of iteration (6.2) requires 2n
+3 flops per step.
+Because of its linear convergence and its computational cost, this iteration is decidedly
+unattractive in comparison with iteration (3.1).
+We appreciate that flop counts are not necessarily a fair means for comparing
+competing algorithms. In fact, because iterations (3.1), (6.1) and (6.2) use only matrix
+multiplications, inversions and additions, the flops involved in these iterations may be
+significantly cheaper than those in the Golub-Reinsch SVD algorithm, particularly on
+the new special computer architectures.
+
+6.3. Optimisation. Newton’s method for the minimisation of F(x), F:"->,
+requires at each stage computation of a search direction Pk from
+
+GkPk
+--gk,
+
+where gk- V F(Xk) is the gradient vector and
+
+Gk =( 02F
+
+\ox, ox
+(x’)
+
+is the (symmetric) Hessian matrix. Difficulties occur when G is not positive definite
+since p, if defined, need not be a descent direction [14, p. 107]. We suggest that in
+this situation one replaces G by its polar factor H. H is positive definite (assuming
+G is nonsingular) and it has the properties listed in Lemmas 2.1 and 2.4. H may be
+computed using Algorithm Polar at a cost of (s/2 + 1)n
+flops, if advantage is taken
+of the symmetry of the iterates (for example the LINPACK routine SSIDI [11] may
+be used to compute the matrix inverses). The equation Hpk =--gk may be solved in
+n/6 flops by use of the Choleski decomposition.
+In
+14] several techniques are described for modifying G to give a related positive
+definite
+matrix. One
+of these
+consists
+of computing
+a
+spectral
+decomposition
+
+
+1172
+NICHOLAS J. HIGHAM
+
+Gk
+ZAZ* and replacing Gk by k
+ZIAIZ*; from (2.10) we recognize k as the
+polar factor H of Gk. This approach yields the same matrix as our suggestion, at a
+cost of about 6n
+flops [16, p. 282].
+
+6.4. Matrix square root [8], [10], [20], [21], [25]. A new method for computing
+the symmetric positive definite square root A1/2 of a symmetric positive definite matrix
+A is obtained from the observation that if
+A= LL,
+LT= UH
+
+are Choleski and polar decompositions respectively, then (see Lemma 2.1(i)) H
+A1/2.
+
+ALGORITHM ROOT. Given a symmetric positive definite matrix A"" this
+algorithm computes A1/2.
+(1) Compute the Choleski decomposition A- LLr [16, p. 89].
+(2) Compute the Hermitian polar factor H- A 1/2 of Lr using Algorithm Polar.
+Cost: (S --)tt flops, where s iterations of Algorithm Polar are required for convergence
+(taking into account the triangularity of L).
+
+Note that since we are applying Algorithm Polar to L, the quantity K2(A
+in the
+bound (3.16) is replaced by KE(Lr)
+r2(A) 1/2.
+Algorithm Root is an attractive, numerically stable alternative (see
+5) to the
+iterations in [10], [21], [25] for the case where A is symmetric positive definite.
+
+7. Numerical examples. In this section we present some test results which illustrate
+the performance of Algorithm
+Polar. The computations were performed using
+MATLAB [29] in double precision on a VAX 11/780 computer; the unit roundoff
+U
+2-56
+1.39 x 10-17.
+We used the convergence test (3.17) with /5, =4u for n_-<25 and 5o=8U. Once
+the criterion IIXk
+Xk-IlII <- .01 was satisfied Xk+I, Xk+2,"
+were computed using the
+unaccelerated iteration (Ts
+1, j > k).
+In the first test real matrices A of order n
+5, 10, 25, 50 were generated according
+to A= U,Vr, where E=diag (ri) is a matrix of singular values (tri= i,
+2,
+4 or 2i)
+and U, V are random orthogonal matrices (different for each A), obtained from the
+QR decomposition of a matrix with elements from the uniform distribution on [0, 1].
+The results are summarised in Table 7.1. The quantity
+
+BERR.
+Ilnl- n*lll
+
+is the backward error measure derived in
+4 (see (4.1b)) and must be of order one
+for the algorithm to have performed in a stable manner. For every matrix in this test
+the computed Hermitian polar factor/ was positive definite.
+
+TABLE 7.1
+Number of iterations.
+
+0"
+
+o.
+
+tr
+4
+
+tr
+2
+max BERR,
+
+n
+5
+10
+25
+50
+
+6
+7
+8
+8
+7
+7
+10
+9
+8
+8
+10
+10
+7
+8
+9
+10
+
+.38
+.55
+2.1
+2.8
+
+
+COMPUTING THE POLAR DECOMPOSITION
+1173
+
+The second test compares Algorithm Polar with iterations (6.1) and (6.2) (using
+the same convergence test, (3.17), for each iteration). The parametrised matrix
+
+A(a)=
+0
+1
+-1
+0
+
+is orthogonal for a
+0. The results are displayed in Table 7.2.
+
+TABLE 7.2
+Number of iterations.
+
+.001
+
+.01
+
+.1
+
+2
+
+Algorithm Polar
+Iteration (6.1)
+Iteration (6.2)
+
+4
+4
+5
+4
+4
+8
+5
+5
+13
+6
+10
+76
+7
+diverged
+diverged
+
+8. Conclusions. From the test results of
+7 and the theory of
+3 we draw several
+conclusions about Algorithm Polar.
+The acceleration parameter estimates are very effective. Convergence to a tolerance
+t >= 10-17 (see (3.17)) is usually obtained within ten iterations, the computational cost
+of one iteration being approximately
+rl
+flops.
+In applications where A is nearly orthogonal (see
+6.2) Algorithm Polar is an
+
+attractive alternative to iterations (6.1) and (6.2)--it is guaranteed to converge (within
+four or five iterations, typically) and it will usually be computationally the least
+expensive of the three methods.
+We have not proved that Algorithm Polar is stable, that is, that the computed
+polar factors are relatively close to the true polar factors of a matrix near to A. The
+
+tests (4.1) provide an inexpensive means of monitoring the stability of Algorithm Polar.
+Algorithm Polar has performed stably in all our numerical tests, producing, in every
+case, computed polar factors which are just as acceptable as those furnished by the
+SVD approach.
+
+Acknowledgments. I have benefited from stimulating discussions on this work with
+Professors A. Bjorck, R. Byers, G. H. Golub and C. B. Moler. This work was completed
+during a visit to Stanford University. I thank Professor G. H. Golub for making my
+stay so pleasant and Stanford University for the use of their computer facilities. I also
+thank Dr. I. Gladwell and Dr. G. Hall for their valuable comments on the manuscript.
+The helpful comments of the referee and editor are appreciated.
+
+REFERENCES
+
+[1] L. AUTONNE, Sur les groupes lindaires, rdels et orthogonaux, Bull. Soc. Math. France, 30 (1902), pp.
+121-134.
+[2] I.Y. BAR-ITZHACK, Iterative optimal orthogonalization ofthe strapdown matrix, IEEE Trans. Aerospace
+Electron. Systems, 11 (1975), pp. 30-37.
+[3] ., A unidimensional convergence testfor matrix iterative processes applied to strapdown navigation,
+Internat. J. Numer. Methods Engrg., 11 (1977), pp. 115-130.
+[4]
+I. Y. BAR2ITZHACK AND K. A. FEGLEY, Orthogonalization techniques of a direction cosine matrix,
+IEEE Trans. Aerospace Electron. Systems, 5 (1969), pp. 798-804.
+
+
+1174
+NICHOLAS J. HIGHAM
+
+[5]
+I. Y. BAR-ITZHACK AND J. MEYER, On the convergence of iterative orthogonalization processes, IEEE
+Trans. Aerospace Electron. Systems, 12 (1976), pp. 146-151.
+[6]
+I. Y. BAR-ITZHACK, J. MEYER AND P. A. FUHRMANN, Strapdown matrix orthogonalization: the dual
+
+iterative algorithm, IEEE Trans. Aerospace Electron. Systems, 12 (1976), pp. 32-37.
+[7] A. BJORCK AND C. BOWIE, An iterative algorithm for computing the best estimate of an orthogonal
+matrix, SIAM J. Numer. Anal., 8 (1971), pp. 358-364.
+[8] A. BJORCK AND S. HAMMARLING, A Schur method for the square root of a matrix, Linear Algebra
+Appl., 52/53 (1983), pp. 127-140.
+[9] J. E. BROCK, Optimal matrices describing linear systems, AIAA J., 6 (1968), pp. 1292-1296.
+[10] E. D. DENMAN AND A. N. BEAVERS, The matrix sign function and computations in systems, Appl.
+Math. Comput., 2 (1976), pp. 63-94.
+11] J.J. DONGARRA, J. R. BUNCH, C. B. MOLER AND G. W. STEWART, LINPACK Users’ Guide, Society
+for Industrial and Applied Mathematics, Philadelphia, PA, 1979.
+[12] K. FAN AND A. J. HOFFMAN, Some metric inequalities in the space of matrices, Proc. Amer. Math.
+Soc., 6 (1955), pp. 111-116.
+[13] F. R. GANTMACHER, The Theory of Matrices, Volume One, Chelsea, New York, 1959.
+14] P. E. GILL, W. MURRAY AND M. H. WRIGHT, Practical Optimization, Academic Press, London, 1981.
+[15] G. H. GOLUB, Least squares, singular values and matrix approximations, Appl. Math., 13 (1968), pp.
+44-51.
+16] G. H. GOLUB AND C. F. VAN LOAN, Matrix Computations, Johns Hopkins University Press, Baltimore,
+MD, 1983.
+17] B. F. GREEN, The orthogonal approximation of an oblique structure in factor analysis, Psychometrika,
+17 (1952), pp. 429-440.
+[18] P. R. HALMOS, Positive approximants of operators, Indiana Univ. Math. J., 21 (1972), pp. 951-960.
+19] P. HENRICI, Elements of Numerical Analysis, John Wiley, New York, 1964.
+[20] N. J. HIGHAM, Computing real square roots of a real matrix, Numerical Analysis Report No. 89,
+University of Manchester, England, 1984; to appear in Linear Algebra Appl.
+[21] ., Newton’s method for the matrix square root, Numerical Analysis Report No. 91, University of
+Manchester, England, 1984; to appear in Math. Comp.
+[22] , Computing the polar decompositionmwith applications, Numerical Analysis Report No. 94,
+University of Manchester, England, 1984.
+[23] W. D. HOSKINS, D. S. MEEK AND D. J. WALTON, The numerical solution of the matrix equation
+XA+AY=F, BIT, 17 (1977), pp. 184-190.
+[24] , The numerical solution ofA’Q+ QA =-C, IEEE Trans. Automat. Control, AC-22 (1977), pp.
+882-883.
+[25] W. D. HOSKINS AND O. J. WALTON, Afaster, more stable methodfor computing the pth roots ofpositive
+definite matrices, Linear Algebra Appl., 26 (1979), pp. 139-163.
+[26] J. B. KELLER, Closest unitary, orthogonal and Hermitian operators to a given operator, Math. Mag., 48
+(1975), pp. 192-197.
+[27] M. MARCUS AND H. MINC, Introduction to Linear Algebra, Macmillan, New York, 1965.
+[28] J. MEYER AND I. Y. BAR-ITZHACK, Practical comparison ofiterative matrix orthogonalisation algorithms,
+IEEE Trans. Aerospace Electron. Systems, 13 (1977), pp. 230-235.
+[29] C. B. MOLER, MATLAB Users’ Guide, Technical Report CS81-1 (revised), Department of Computer
+Science, University of New Mexico, Albuquerque, NM, 1982.
+[30] J. D. ROaERTS, Linear model reduction and solution of the algebraic Riccati equation by use of the sign
+function, Internat. J. Control, 32 (1980), pp. 677-687.
+[31] P. H. SCHONEMANN, A generalized solution of the orthogonal Procrustes problem, Psychometrika, 31
+(1966), pp. 1-10.
+[32] G. WAHBA, Problem 65-1" A least squares estimate of satellite attitude, SIAM Rev., 7 (1965), p. 409;
+solutions in, 8 (1966), pp. 384-386.
+
+

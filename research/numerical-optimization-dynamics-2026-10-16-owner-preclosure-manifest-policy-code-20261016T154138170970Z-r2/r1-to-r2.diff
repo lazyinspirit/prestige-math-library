@@ -1,0 +1,53 @@
+--- r1/tools/step3-manifest-history.mjs
++++ r2/tools/step3-manifest-history.mjs
+@@ -117,7 +117,8 @@
+   if(!matches.length)return null;
+   const e=matches[0],evidence={[path]:sha(raw)};
+   const ownRef=q=>{
+-    assert(q?.path?.startsWith(`research/${run}-`),'preclosure evidence outside own run');
++    assert(typeof q?.path==='string'&&q.path.startsWith(`research/${run}-`)
++      &&!q.path.split('/').includes('..'),'preclosure evidence outside own run');
+     const b=ref(root,q);assert(evidence[q.path]===undefined||evidence[q.path]===q.sha256,'ambiguous preclosure evidence');
+     evidence[q.path]=q.sha256;return b;
+   };
+@@ -142,7 +143,7 @@
+     const ids=[],itemIds=[];
+     const value=pages.map(p=>{assert(typeof p.id==='string'&&Array.isArray(p.items),'invalid page identity');ids.push(p.id);
+       const items=p.items.map(x=>typeof x==='string'?x:x.id);assert(items.every(x=>typeof x==='string'),'invalid item identity');
+-      itemIds.push(...items);return {id:p.id,items:items.sort()};}).sort((a,b)=>a.id.localeCompare(b.id));
++      itemIds.push(...items);return {id:p.id,category:p.category??null,kind:p.kind??null,items:items.sort()};}).sort((a,b)=>a.id.localeCompare(b.id));
+     assert(new Set(ids).size===ids.length&&new Set(itemIds).size===itemIds.length,'ambiguous manifest identity');
+     return JSON.stringify(value);
+   };
+@@ -152,6 +153,8 @@
+   const result=JSON.parse(ownRef(e.native_result));
+   assert(result.run===run&&result.role==='alpha'&&result.label===`3a-batch-${batch}`
+     &&result.ok===true&&result.exit_code===0&&result.process_exit_code===0&&result.timed_out!==true
++    &&result.terminal_summary?.task_completed===true&&result.terminal_summary.task_aborted===false
++    &&result.terminal_summary.final_response_present===true
+     &&result.covers?.map(String).includes(String(batch))&&Number.isFinite(Date.parse(result.started_at))
+     &&Number.isFinite(Date.parse(result.ended_at))&&Date.parse(result.started_at)<=Date.parse(result.ended_at)
+     &&Date.parse(result.ended_at)<=Date.parse(doc.recorded_at),'Alpha did not genuinely complete');
+--- r1/tools/step3-preclosure-manifest-continuity.md
++++ r2/tools/step3-preclosure-manifest-continuity.md
+@@ -14,17 +14,17 @@
+ - genuine recorded_at and substantive reason (at least80characters);
+ - nonempty entries with unique `(route_index,field)` tuples.
+ 
+-Each entry contains `route_index`, `field` (`manifest` or `consumer_manifest`), substantive `reason`, `original` (the UNCHANGED route reference), `route_registry` (actual original canonical registry path/rawSHA), `route_entry_sha256` (existing canonical sorted-object route hash, not raw JSON field-order hash), `archive`, `preimage_origin`, `current` (canonical path/currentSHA), `current_archive`, `native_result`, `native_report`, and `current_metadata_evidence`. All references have `{path,sha256}`. Every archive/evidence path must be a regular nonsymlink own-run research file with no traversal. Root supplies actual hashes and timestamps; this proposal creates no sealed evidence.
++Each entry contains `route_index`, `field` (`manifest` or `consumer_manifest`), substantive `reason`, `original` (the UNCHANGED route reference), `route_registry` (actual original canonical registry path/rawSHA), `route_entry_sha256` (existing canonical sorted-object route hash, not raw JSON field-order hash), `archive`, `preimage_origin`, `current` (canonical path/currentSHA), `current_archive`, `native_result`, `native_report`, and `current_metadata_evidence`. All references have `{path,sha256}`. Every archive/evidence path must be a regular nonsymlink own-run research file with no `..` path segment, even if normalization would stay inside the repository. Root supplies actual hashes and timestamps; this proposal creates no sealed evidence.
+ 
+ The authenticated preimage origins for the current run are the FULL original manifests at `research/numerical-optimization-dynamics-2026-10-16-owner-step2-three-errors-final-binding-before/manifests/numerical-optimization-dynamics-2026-10-16-batch-{6,20,36}.pages.json`. Root's `ROOT-original-downstream-manifest-search.json` authenticates their original route SHAs. Five entries are needed: index0/manifest (batch6), index1/manifest, index2/manifest, index3/manifest (batch20), index4/manifest (batch36). Full-byte archives may be shared for three batch20 entries. No original entry or finding binding changes.
+ 
+ `current_metadata_evidence` is a NEW truthfully dated root reconciliation record, not a rewrite of historical native authority. It has version1, kind `owner-step3-current-manifest-reconciliation`, exact run, owner_identity `/root`, mathematical_acceptance false, native_coverage_adopted false, `bindings:{canonicalManifestPath:CURRENT_SHA}`, `original_bindings:{canonicalManifestPath:ORIGINAL_ROUTE_SHA}`, exact `native_result:{path,sha256}`, actual `recorded_at`, and substantive `reason` explaining actual manifest deltas and root reconciliation. Its date must be at/after successful native completion and at/before continuity registration. Root may put actual existing operation/receipt pointers in additional fields; original publication/native histories remain untouched. The record does not assert that Alpha authored root's later metadata.
+ 
+-The immutable native result must be the actual successful `alpha-3a-batch-B.attempt-N.result.json`, with exact run/alpha role/label, both zero exit codes, not timedout, batch cover, ordered actual start/end dates and completion before registration. Its final response must name the exact nonempty hash-bound current native report. For this run the actual completed attempts are6attempt2,20attempt1,36attempt1. Root must not repoint a stable result alias and call it immutable.
++The immutable native result must be the actual successful `alpha-3a-batch-B.attempt-N.result.json`, with exact run/alpha role/label, both zero exit codes, not timedout, actual terminal_summary.task_completed true, task_aborted false and final_response_present true, batch cover, ordered actual start/end dates and completion before registration. Its final response must name the exact nonempty hash-bound current native report. For this run the actual completed attempts are6attempt2,20attempt1,36attempt1. Root must not repoint a stable result alias and call it immutable.
+ 
+ ## What the implementation verifies
+ 
+-Original full archive bytes equal the authenticated original SHA and durable original capture. Current full archive equals current live bytes and its sealed currentSHA. Historical/current page IDs and each page's exact item-ID inventory are equal, with duplicates rejected. The existing current ownership/draft/run/directdependency checks remain in the downstream loader and closure path; neither the original null consumer nor original unbound observation is reconstructed. Original reader/refuter native-result and structured-tail checks are unchanged.
++Original full archive bytes equal the authenticated original SHA and durable original capture. Current full archive equals current live bytes and its sealed currentSHA. Historical/current page IDs, category, kind (where present), and each page's exact item-ID inventory are equal, with duplicates rejected. Missing category/kind normalize to null; any actual value change rejects. The existing current ownership/draft/run/directdependency checks remain in the downstream loader and closure path; neither the original null consumer nor original unbound observation is reconstructed. Original reader/refuter native-result and structured-tail checks are unchanged.
+ 
+ Validation now obtains the exact full-registry index from the existing entry binding, rather than adding a field to that entry. It passes that index into the history helper for both original manifest references. Only the explicit new helper option admits new typed preclosure continuity; default callers retain old postclosure/certifiedStep5 branches byte-for-byte. Invalid matching new evidence throws, never silently falls back.
+ 

@@ -1,0 +1,172 @@
+--- research/numerical-optimization-dynamics-2026-10-16-batch-9.proof-contracts.json
++++ research/numerical-optimization-dynamics-2026-10-16-batch-9.proof-contracts.json (proposed)
+@@ -77,7 +77,7 @@
+           "fact": "L1",
+           "source": "def-milstein-scheme-and-iterated-integrals",
+           "source_section": "Definition",
+-          "quote": "The diffusion fields have **commutative noise** when $L_i\\sigma_j(x)=L_j\\sigma_i(x)$ for every $x$ and every $i,j$. Under that condition, the equivalent update using only Brownian increments is",
++          "quote": "Assume AC and the Brownian filtered-space conventions in [[def-continuous-brownian-ito-process]]. Let $d,m\\ge1$ be finite integers, let $W=(W^1,\\ldots,W^m)$ be the driving standard Brownian motion, and consider the autonomous It\\^o SDE\n$$dX_t=b(X_t)\\,dt+\\sum_{j=1}^m\\sigma_j(X_t)\\,dW^j_t,$$\nwhere $b:\\mathbb R^d\\to\\mathbb R^d$ and $\\sigma_j:\\mathbb R^d\\to\\mathbb R^d$. For a differentiable vector-valued function $f$, $Df(x)$ is its Jacobian and $L_i f(x):=Df(x)\\sigma_i(x)$; this definition is applied componentwise when $f$ is matrix-valued.\n\nOn a deterministic grid $t_n=nh$, define $\\Delta W_n^j=W^j_{t_{n+1}}-W^j_{t_n}$ and the iterated It\\^o integral\n$$I_{ij,n}:=\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})\\,dW^j_s,\\qquad 1\\le i,j\\le m.$$\nThe integrand is predictable and square-integrable, so this is the $L^2$ It\\^o integral of [[def-ito-integral-for-square-integrable-predictable-processes]]; its finite energy is $\\mathbb E\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})^2ds=h^2/2$ by [[thm-ito-isometry-and-linearity-in-predictable-l2]].\n\nThe general Milstein Taylor update is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)I_{ij,n}.$$\nThe diffusion fields have **commutative noise** when $L_i\\sigma_j(x)=L_j\\sigma_i(x)$ for every $x$ and every $i,j$. Under that condition, the equivalent update using only Brownian increments is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\frac12\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)\\bigl(\\Delta W_n^i\\Delta W_n^j-\\delta_{ij}h\\bigr).$$\nFor scalar noise ($d=m=1$), this reads\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sigma(Y_n)\\Delta W_n+\\frac12\\sigma(Y_n)\\sigma'(Y_n)\\bigl((\\Delta W_n)^2-h\\bigr).$$\n\nFor every $1\\le i,j\\le m$, define the Brownian area component $A_{ij,n}:=(I_{ij,n}-I_{ji,n})/2$ and the symmetric part $S_{ij,n}:=(I_{ij,n}+I_{ji,n})/2$. In particular, $A_{ii,n}=0$ and $S_{ii,n}=I_{ii,n}$. Then $A_{ji,n}=-A_{ij,n}$, $S_{ji,n}=S_{ij,n}$, and reindexing the sums gives\n$$\\sum_{i,j}L_i\\sigma_j I_{ij,n}=\\frac12\\sum_{i,j}(L_i\\sigma_j+L_j\\sigma_i)S_{ij,n}+\\frac12\\sum_{i,j}(L_i\\sigma_j-L_j\\sigma_i)A_{ij,n}.$$\nThe second sum vanishes under commutative noise; otherwise the general update includes the area components. A noncommuting Milstein implementation must sample or approximate the needed areas and account for their approximation error and computational cost; this definition makes no claim that an exact area sample is free or that a particular area sampler has a specified error rate.\n\nFor this pair, $C_b^k(\\mathbb R^d;\\mathbb R^q)$ means that every component and every partial derivative of orders at most $k$ exists, is continuous, and is bounded. This notation is componentwise for vector and matrix valued functions.",
+           "uses": [
+             "1.1",
+             "3.1"
+@@ -438,7 +438,7 @@
+           "fact": "L1",
+           "source": "def-milstein-scheme-and-iterated-integrals",
+           "source_section": "Definition",
+-          "quote": "For this pair, $C_b^k(\\mathbb R^d;\\mathbb R^q)$ means that every component and every partial derivative of orders at most $k$ exists, is continuous, and is bounded. This notation is componentwise for vector and matrix valued functions.",
++          "quote": "Assume AC and the Brownian filtered-space conventions in [[def-continuous-brownian-ito-process]]. Let $d,m\\ge1$ be finite integers, let $W=(W^1,\\ldots,W^m)$ be the driving standard Brownian motion, and consider the autonomous It\\^o SDE\n$$dX_t=b(X_t)\\,dt+\\sum_{j=1}^m\\sigma_j(X_t)\\,dW^j_t,$$\nwhere $b:\\mathbb R^d\\to\\mathbb R^d$ and $\\sigma_j:\\mathbb R^d\\to\\mathbb R^d$. For a differentiable vector-valued function $f$, $Df(x)$ is its Jacobian and $L_i f(x):=Df(x)\\sigma_i(x)$; this definition is applied componentwise when $f$ is matrix-valued.\n\nOn a deterministic grid $t_n=nh$, define $\\Delta W_n^j=W^j_{t_{n+1}}-W^j_{t_n}$ and the iterated It\\^o integral\n$$I_{ij,n}:=\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})\\,dW^j_s,\\qquad 1\\le i,j\\le m.$$\nThe integrand is predictable and square-integrable, so this is the $L^2$ It\\^o integral of [[def-ito-integral-for-square-integrable-predictable-processes]]; its finite energy is $\\mathbb E\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})^2ds=h^2/2$ by [[thm-ito-isometry-and-linearity-in-predictable-l2]].\n\nThe general Milstein Taylor update is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)I_{ij,n}.$$\nThe diffusion fields have **commutative noise** when $L_i\\sigma_j(x)=L_j\\sigma_i(x)$ for every $x$ and every $i,j$. Under that condition, the equivalent update using only Brownian increments is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\frac12\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)\\bigl(\\Delta W_n^i\\Delta W_n^j-\\delta_{ij}h\\bigr).$$\nFor scalar noise ($d=m=1$), this reads\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sigma(Y_n)\\Delta W_n+\\frac12\\sigma(Y_n)\\sigma'(Y_n)\\bigl((\\Delta W_n)^2-h\\bigr).$$\n\nFor every $1\\le i,j\\le m$, define the Brownian area component $A_{ij,n}:=(I_{ij,n}-I_{ji,n})/2$ and the symmetric part $S_{ij,n}:=(I_{ij,n}+I_{ji,n})/2$. In particular, $A_{ii,n}=0$ and $S_{ii,n}=I_{ii,n}$. Then $A_{ji,n}=-A_{ij,n}$, $S_{ji,n}=S_{ij,n}$, and reindexing the sums gives\n$$\\sum_{i,j}L_i\\sigma_j I_{ij,n}=\\frac12\\sum_{i,j}(L_i\\sigma_j+L_j\\sigma_i)S_{ij,n}+\\frac12\\sum_{i,j}(L_i\\sigma_j-L_j\\sigma_i)A_{ij,n}.$$\nThe second sum vanishes under commutative noise; otherwise the general update includes the area components. A noncommuting Milstein implementation must sample or approximate the needed areas and account for their approximation error and computational cost; this definition makes no claim that an exact area sample is free or that a particular area sampler has a specified error rate.\n\nFor this pair, $C_b^k(\\mathbb R^d;\\mathbb R^q)$ means that every component and every partial derivative of orders at most $k$ exists, is continuous, and is bounded. This notation is componentwise for vector and matrix valued functions.",
+           "uses": [
+             "1.1"
+           ]
+@@ -611,7 +611,7 @@
+           "fact": "L1",
+           "source": "def-milstein-scheme-and-iterated-integrals",
+           "source_section": "Definition",
+-          "quote": "For this pair, $C_b^k(\\mathbb R^d;\\mathbb R^q)$ means that every component and every partial derivative of orders at most $k$ exists, is continuous, and is bounded.",
++          "quote": "Assume AC and the Brownian filtered-space conventions in [[def-continuous-brownian-ito-process]]. Let $d,m\\ge1$ be finite integers, let $W=(W^1,\\ldots,W^m)$ be the driving standard Brownian motion, and consider the autonomous It\\^o SDE\n$$dX_t=b(X_t)\\,dt+\\sum_{j=1}^m\\sigma_j(X_t)\\,dW^j_t,$$\nwhere $b:\\mathbb R^d\\to\\mathbb R^d$ and $\\sigma_j:\\mathbb R^d\\to\\mathbb R^d$. For a differentiable vector-valued function $f$, $Df(x)$ is its Jacobian and $L_i f(x):=Df(x)\\sigma_i(x)$; this definition is applied componentwise when $f$ is matrix-valued.\n\nOn a deterministic grid $t_n=nh$, define $\\Delta W_n^j=W^j_{t_{n+1}}-W^j_{t_n}$ and the iterated It\\^o integral\n$$I_{ij,n}:=\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})\\,dW^j_s,\\qquad 1\\le i,j\\le m.$$\nThe integrand is predictable and square-integrable, so this is the $L^2$ It\\^o integral of [[def-ito-integral-for-square-integrable-predictable-processes]]; its finite energy is $\\mathbb E\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})^2ds=h^2/2$ by [[thm-ito-isometry-and-linearity-in-predictable-l2]].\n\nThe general Milstein Taylor update is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)I_{ij,n}.$$\nThe diffusion fields have **commutative noise** when $L_i\\sigma_j(x)=L_j\\sigma_i(x)$ for every $x$ and every $i,j$. Under that condition, the equivalent update using only Brownian increments is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\frac12\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)\\bigl(\\Delta W_n^i\\Delta W_n^j-\\delta_{ij}h\\bigr).$$\nFor scalar noise ($d=m=1$), this reads\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sigma(Y_n)\\Delta W_n+\\frac12\\sigma(Y_n)\\sigma'(Y_n)\\bigl((\\Delta W_n)^2-h\\bigr).$$\n\nFor every $1\\le i,j\\le m$, define the Brownian area component $A_{ij,n}:=(I_{ij,n}-I_{ji,n})/2$ and the symmetric part $S_{ij,n}:=(I_{ij,n}+I_{ji,n})/2$. In particular, $A_{ii,n}=0$ and $S_{ii,n}=I_{ii,n}$. Then $A_{ji,n}=-A_{ij,n}$, $S_{ji,n}=S_{ij,n}$, and reindexing the sums gives\n$$\\sum_{i,j}L_i\\sigma_j I_{ij,n}=\\frac12\\sum_{i,j}(L_i\\sigma_j+L_j\\sigma_i)S_{ij,n}+\\frac12\\sum_{i,j}(L_i\\sigma_j-L_j\\sigma_i)A_{ij,n}.$$\nThe second sum vanishes under commutative noise; otherwise the general update includes the area components. A noncommuting Milstein implementation must sample or approximate the needed areas and account for their approximation error and computational cost; this definition makes no claim that an exact area sample is free or that a particular area sampler has a specified error rate.\n\nFor this pair, $C_b^k(\\mathbb R^d;\\mathbb R^q)$ means that every component and every partial derivative of orders at most $k$ exists, is continuous, and is bounded. This notation is componentwise for vector and matrix valued functions.",
+           "uses": [
+             "1.1",
+             "3.1"
+@@ -952,7 +952,7 @@
+           "fact": "L1",
+           "source": "def-milstein-scheme-and-iterated-integrals",
+           "source_section": "Definition",
+-          "quote": "Then $A_{ji,n}=-A_{ij,n}$, $S_{ji,n}=S_{ij,n}$, and reindexing the sums gives\n$$\\sum_{i,j}L_i\\sigma_j I_{ij,n}=\\frac12\\sum_{i,j}(L_i\\sigma_j+L_j\\sigma_i)S_{ij,n}+\\frac12\\sum_{i,j}(L_i\\sigma_j-L_j\\sigma_i)A_{ij,n}.$$\nThe second sum vanishes under commutative noise; otherwise the general update includes the area components.",
++          "quote": "Assume AC and the Brownian filtered-space conventions in [[def-continuous-brownian-ito-process]]. Let $d,m\\ge1$ be finite integers, let $W=(W^1,\\ldots,W^m)$ be the driving standard Brownian motion, and consider the autonomous It\\^o SDE\n$$dX_t=b(X_t)\\,dt+\\sum_{j=1}^m\\sigma_j(X_t)\\,dW^j_t,$$\nwhere $b:\\mathbb R^d\\to\\mathbb R^d$ and $\\sigma_j:\\mathbb R^d\\to\\mathbb R^d$. For a differentiable vector-valued function $f$, $Df(x)$ is its Jacobian and $L_i f(x):=Df(x)\\sigma_i(x)$; this definition is applied componentwise when $f$ is matrix-valued.\n\nOn a deterministic grid $t_n=nh$, define $\\Delta W_n^j=W^j_{t_{n+1}}-W^j_{t_n}$ and the iterated It\\^o integral\n$$I_{ij,n}:=\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})\\,dW^j_s,\\qquad 1\\le i,j\\le m.$$\nThe integrand is predictable and square-integrable, so this is the $L^2$ It\\^o integral of [[def-ito-integral-for-square-integrable-predictable-processes]]; its finite energy is $\\mathbb E\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})^2ds=h^2/2$ by [[thm-ito-isometry-and-linearity-in-predictable-l2]].\n\nThe general Milstein Taylor update is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)I_{ij,n}.$$\nThe diffusion fields have **commutative noise** when $L_i\\sigma_j(x)=L_j\\sigma_i(x)$ for every $x$ and every $i,j$. Under that condition, the equivalent update using only Brownian increments is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\frac12\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)\\bigl(\\Delta W_n^i\\Delta W_n^j-\\delta_{ij}h\\bigr).$$\nFor scalar noise ($d=m=1$), this reads\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sigma(Y_n)\\Delta W_n+\\frac12\\sigma(Y_n)\\sigma'(Y_n)\\bigl((\\Delta W_n)^2-h\\bigr).$$\n\nFor every $1\\le i,j\\le m$, define the Brownian area component $A_{ij,n}:=(I_{ij,n}-I_{ji,n})/2$ and the symmetric part $S_{ij,n}:=(I_{ij,n}+I_{ji,n})/2$. In particular, $A_{ii,n}=0$ and $S_{ii,n}=I_{ii,n}$. Then $A_{ji,n}=-A_{ij,n}$, $S_{ji,n}=S_{ij,n}$, and reindexing the sums gives\n$$\\sum_{i,j}L_i\\sigma_j I_{ij,n}=\\frac12\\sum_{i,j}(L_i\\sigma_j+L_j\\sigma_i)S_{ij,n}+\\frac12\\sum_{i,j}(L_i\\sigma_j-L_j\\sigma_i)A_{ij,n}.$$\nThe second sum vanishes under commutative noise; otherwise the general update includes the area components. A noncommuting Milstein implementation must sample or approximate the needed areas and account for their approximation error and computational cost; this definition makes no claim that an exact area sample is free or that a particular area sampler has a specified error rate.\n\nFor this pair, $C_b^k(\\mathbb R^d;\\mathbb R^q)$ means that every component and every partial derivative of orders at most $k$ exists, is continuous, and is bounded. This notation is componentwise for vector and matrix valued functions.",
+           "uses": [
+             "1.1",
+             "1.2",
+@@ -1453,7 +1453,7 @@
+           "fact": "L1",
+           "source": "def-milstein-scheme-and-iterated-integrals",
+           "source_section": "Definition",
+-          "quote": "The diffusion fields have **commutative noise** when $L_i\\sigma_j(x)=L_j\\sigma_i(x)$ for every $x$ and every $i,j$. Under that condition, the equivalent update using only Brownian increments is",
++          "quote": "Assume AC and the Brownian filtered-space conventions in [[def-continuous-brownian-ito-process]]. Let $d,m\\ge1$ be finite integers, let $W=(W^1,\\ldots,W^m)$ be the driving standard Brownian motion, and consider the autonomous It\\^o SDE\n$$dX_t=b(X_t)\\,dt+\\sum_{j=1}^m\\sigma_j(X_t)\\,dW^j_t,$$\nwhere $b:\\mathbb R^d\\to\\mathbb R^d$ and $\\sigma_j:\\mathbb R^d\\to\\mathbb R^d$. For a differentiable vector-valued function $f$, $Df(x)$ is its Jacobian and $L_i f(x):=Df(x)\\sigma_i(x)$; this definition is applied componentwise when $f$ is matrix-valued.\n\nOn a deterministic grid $t_n=nh$, define $\\Delta W_n^j=W^j_{t_{n+1}}-W^j_{t_n}$ and the iterated It\\^o integral\n$$I_{ij,n}:=\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})\\,dW^j_s,\\qquad 1\\le i,j\\le m.$$\nThe integrand is predictable and square-integrable, so this is the $L^2$ It\\^o integral of [[def-ito-integral-for-square-integrable-predictable-processes]]; its finite energy is $\\mathbb E\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})^2ds=h^2/2$ by [[thm-ito-isometry-and-linearity-in-predictable-l2]].\n\nThe general Milstein Taylor update is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)I_{ij,n}.$$\nThe diffusion fields have **commutative noise** when $L_i\\sigma_j(x)=L_j\\sigma_i(x)$ for every $x$ and every $i,j$. Under that condition, the equivalent update using only Brownian increments is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\frac12\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)\\bigl(\\Delta W_n^i\\Delta W_n^j-\\delta_{ij}h\\bigr).$$\nFor scalar noise ($d=m=1$), this reads\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sigma(Y_n)\\Delta W_n+\\frac12\\sigma(Y_n)\\sigma'(Y_n)\\bigl((\\Delta W_n)^2-h\\bigr).$$\n\nFor every $1\\le i,j\\le m$, define the Brownian area component $A_{ij,n}:=(I_{ij,n}-I_{ji,n})/2$ and the symmetric part $S_{ij,n}:=(I_{ij,n}+I_{ji,n})/2$. In particular, $A_{ii,n}=0$ and $S_{ii,n}=I_{ii,n}$. Then $A_{ji,n}=-A_{ij,n}$, $S_{ji,n}=S_{ij,n}$, and reindexing the sums gives\n$$\\sum_{i,j}L_i\\sigma_j I_{ij,n}=\\frac12\\sum_{i,j}(L_i\\sigma_j+L_j\\sigma_i)S_{ij,n}+\\frac12\\sum_{i,j}(L_i\\sigma_j-L_j\\sigma_i)A_{ij,n}.$$\nThe second sum vanishes under commutative noise; otherwise the general update includes the area components. A noncommuting Milstein implementation must sample or approximate the needed areas and account for their approximation error and computational cost; this definition makes no claim that an exact area sample is free or that a particular area sampler has a specified error rate.\n\nFor this pair, $C_b^k(\\mathbb R^d;\\mathbb R^q)$ means that every component and every partial derivative of orders at most $k$ exists, is continuous, and is bounded. This notation is componentwise for vector and matrix valued functions.",
+           "uses": [
+             "1.1",
+             "2.2"
+@@ -1645,7 +1645,7 @@
+           "fact": "F1",
+           "source": "def-milstein-scheme-and-iterated-integrals",
+           "source_section": "Definition",
+-          "quote": "Under that condition, the equivalent update using only Brownian increments is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\frac12\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)\\bigl(\\Delta W_n^i\\Delta W_n^j-\\delta_{ij}h\\bigr).$$\nFor scalar noise ($d=m=1$), this reads\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sigma(Y_n)\\Delta W_n+\\frac12\\sigma(Y_n)\\sigma'(Y_n)\\bigl((\\Delta W_n)^2-h\\bigr).$$",
++          "quote": "Assume AC and the Brownian filtered-space conventions in [[def-continuous-brownian-ito-process]]. Let $d,m\\ge1$ be finite integers, let $W=(W^1,\\ldots,W^m)$ be the driving standard Brownian motion, and consider the autonomous It\\^o SDE\n$$dX_t=b(X_t)\\,dt+\\sum_{j=1}^m\\sigma_j(X_t)\\,dW^j_t,$$\nwhere $b:\\mathbb R^d\\to\\mathbb R^d$ and $\\sigma_j:\\mathbb R^d\\to\\mathbb R^d$. For a differentiable vector-valued function $f$, $Df(x)$ is its Jacobian and $L_i f(x):=Df(x)\\sigma_i(x)$; this definition is applied componentwise when $f$ is matrix-valued.\n\nOn a deterministic grid $t_n=nh$, define $\\Delta W_n^j=W^j_{t_{n+1}}-W^j_{t_n}$ and the iterated It\\^o integral\n$$I_{ij,n}:=\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})\\,dW^j_s,\\qquad 1\\le i,j\\le m.$$\nThe integrand is predictable and square-integrable, so this is the $L^2$ It\\^o integral of [[def-ito-integral-for-square-integrable-predictable-processes]]; its finite energy is $\\mathbb E\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})^2ds=h^2/2$ by [[thm-ito-isometry-and-linearity-in-predictable-l2]].\n\nThe general Milstein Taylor update is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)I_{ij,n}.$$\nThe diffusion fields have **commutative noise** when $L_i\\sigma_j(x)=L_j\\sigma_i(x)$ for every $x$ and every $i,j$. Under that condition, the equivalent update using only Brownian increments is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\frac12\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)\\bigl(\\Delta W_n^i\\Delta W_n^j-\\delta_{ij}h\\bigr).$$\nFor scalar noise ($d=m=1$), this reads\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sigma(Y_n)\\Delta W_n+\\frac12\\sigma(Y_n)\\sigma'(Y_n)\\bigl((\\Delta W_n)^2-h\\bigr).$$\n\nFor every $1\\le i,j\\le m$, define the Brownian area component $A_{ij,n}:=(I_{ij,n}-I_{ji,n})/2$ and the symmetric part $S_{ij,n}:=(I_{ij,n}+I_{ji,n})/2$. In particular, $A_{ii,n}=0$ and $S_{ii,n}=I_{ii,n}$. Then $A_{ji,n}=-A_{ij,n}$, $S_{ji,n}=S_{ij,n}$, and reindexing the sums gives\n$$\\sum_{i,j}L_i\\sigma_j I_{ij,n}=\\frac12\\sum_{i,j}(L_i\\sigma_j+L_j\\sigma_i)S_{ij,n}+\\frac12\\sum_{i,j}(L_i\\sigma_j-L_j\\sigma_i)A_{ij,n}.$$\nThe second sum vanishes under commutative noise; otherwise the general update includes the area components. A noncommuting Milstein implementation must sample or approximate the needed areas and account for their approximation error and computational cost; this definition makes no claim that an exact area sample is free or that a particular area sampler has a specified error rate.\n\nFor this pair, $C_b^k(\\mathbb R^d;\\mathbb R^q)$ means that every component and every partial derivative of orders at most $k$ exists, is continuous, and is bounded. This notation is componentwise for vector and matrix valued functions.",
+           "uses": [
+             "2.1"
+           ]
+@@ -1764,7 +1764,7 @@
+           "fact": "F1",
+           "source": "def-milstein-scheme-and-iterated-integrals",
+           "source_section": "Definition",
+-          "quote": "Under that condition, the equivalent update using only Brownian increments is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\frac12\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)\\bigl(\\Delta W_n^i\\Delta W_n^j-\\delta_{ij}h\\bigr).$$\nFor scalar noise ($d=m=1$), this reads\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sigma(Y_n)\\Delta W_n+\\frac12\\sigma(Y_n)\\sigma'(Y_n)\\bigl((\\Delta W_n)^2-h\\bigr).$$",
++          "quote": "Assume AC and the Brownian filtered-space conventions in [[def-continuous-brownian-ito-process]]. Let $d,m\\ge1$ be finite integers, let $W=(W^1,\\ldots,W^m)$ be the driving standard Brownian motion, and consider the autonomous It\\^o SDE\n$$dX_t=b(X_t)\\,dt+\\sum_{j=1}^m\\sigma_j(X_t)\\,dW^j_t,$$\nwhere $b:\\mathbb R^d\\to\\mathbb R^d$ and $\\sigma_j:\\mathbb R^d\\to\\mathbb R^d$. For a differentiable vector-valued function $f$, $Df(x)$ is its Jacobian and $L_i f(x):=Df(x)\\sigma_i(x)$; this definition is applied componentwise when $f$ is matrix-valued.\n\nOn a deterministic grid $t_n=nh$, define $\\Delta W_n^j=W^j_{t_{n+1}}-W^j_{t_n}$ and the iterated It\\^o integral\n$$I_{ij,n}:=\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})\\,dW^j_s,\\qquad 1\\le i,j\\le m.$$\nThe integrand is predictable and square-integrable, so this is the $L^2$ It\\^o integral of [[def-ito-integral-for-square-integrable-predictable-processes]]; its finite energy is $\\mathbb E\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})^2ds=h^2/2$ by [[thm-ito-isometry-and-linearity-in-predictable-l2]].\n\nThe general Milstein Taylor update is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)I_{ij,n}.$$\nThe diffusion fields have **commutative noise** when $L_i\\sigma_j(x)=L_j\\sigma_i(x)$ for every $x$ and every $i,j$. Under that condition, the equivalent update using only Brownian increments is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\frac12\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)\\bigl(\\Delta W_n^i\\Delta W_n^j-\\delta_{ij}h\\bigr).$$\nFor scalar noise ($d=m=1$), this reads\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sigma(Y_n)\\Delta W_n+\\frac12\\sigma(Y_n)\\sigma'(Y_n)\\bigl((\\Delta W_n)^2-h\\bigr).$$\n\nFor every $1\\le i,j\\le m$, define the Brownian area component $A_{ij,n}:=(I_{ij,n}-I_{ji,n})/2$ and the symmetric part $S_{ij,n}:=(I_{ij,n}+I_{ji,n})/2$. In particular, $A_{ii,n}=0$ and $S_{ii,n}=I_{ii,n}$. Then $A_{ji,n}=-A_{ij,n}$, $S_{ji,n}=S_{ij,n}$, and reindexing the sums gives\n$$\\sum_{i,j}L_i\\sigma_j I_{ij,n}=\\frac12\\sum_{i,j}(L_i\\sigma_j+L_j\\sigma_i)S_{ij,n}+\\frac12\\sum_{i,j}(L_i\\sigma_j-L_j\\sigma_i)A_{ij,n}.$$\nThe second sum vanishes under commutative noise; otherwise the general update includes the area components. A noncommuting Milstein implementation must sample or approximate the needed areas and account for their approximation error and computational cost; this definition makes no claim that an exact area sample is free or that a particular area sampler has a specified error rate.\n\nFor this pair, $C_b^k(\\mathbb R^d;\\mathbb R^q)$ means that every component and every partial derivative of orders at most $k$ exists, is continuous, and is bounded. This notation is componentwise for vector and matrix valued functions.",
+           "uses": [
+             "1.1"
+           ]
+@@ -1775,17 +1775,17 @@
+           "source_section": "Definition",
+           "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-rando",
+           "uses": [
+-            "1.2"
++            "2.1"
+           ]
+         },
+         {
+           "fact": "L1",
+           "source": "thm-commutative-milstein-strong-order-one",
+           "source_section": "Statement",
+-          "quote": "Then there is a constant $C_T$, independent of $N$, such that\n$$\\max_{0\\le n\\le N}\\mathbb E|Y_n-X_{t_n}|^2\\le C_T h^2.$$\nThus the grid root-mean-square error is $O(h)$ on $[0,T]$.",
++          "quote": "Assume AC. Let $d,m\\ge1$ be finite, let $W$ be an $m$-dimensional Brownian motion relative to a filtration satisfying [[def-continuous-brownian-ito-process]], and let $X$ solve\n$$dX_t=b(X_t)dt+\\sum_{j=1}^m\\sigma_j(X_t)dW_t^j,\\qquad X_0\\in L^2(\\mathbb R^d).$$\nAssume $b,\\sigma_1,\\ldots,\\sigma_m\\in C_b^3(\\mathbb R^d)$ as defined in [[def-milstein-scheme-and-iterated-integrals]]. Put $L_i f=Df\\,\\sigma_i$ and assume commutative noise $L_i\\sigma_j=L_j\\sigma_i$ for all $i,j$. On the uniform grid $t_n=nh$, $h=T/N\\le1$, initialize $Y_0=X_0$ and use the product-increment Milstein update in the Definition. Then there is a constant $C_T$, independent of $N$, such that\n$$\\max_{0\\le n\\le N}\\mathbb E|Y_n-X_{t_n}|^2\\le C_T h^2.$$\nThus the grid root-mean-square error is $O(h)$ on $[0,T]$. For $m=1$ the commutativity condition is automatic and the scheme is the scalar Milstein update. No claim is made for a noncommuting-noise scheme without an area sampler satisfying a separately proved approximation bound.",
+           "uses": [
+             "1.1",
+-            "2.1"
++            "3.1"
+           ]
+         },
+         {
+@@ -1794,7 +1794,7 @@
+           "source_section": "Definition",
+           "quote": "Every family of nonempty sets has a choice function > ([[def-choice-function]]). Written out: for every set $\\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\\m",
+           "uses": [
+-            "2.1"
++            "3.1"
+           ]
+         }
+       ],
+@@ -1802,7 +1802,7 @@
+         {
+           "id": "step-1-1",
+           "step": "1.1",
+-          "claim": "Here $b(x)=0$, $\\sigma(x)=\\sin x$, and $\\sigma'(x)=\\cos x$. At $Y_n=\\pi/4$, both $\\sigma(Y_n)$ and $\\sigma'(Y_n)$ equal $1/\\sqrt2$, so [F1] gives the stated update with correction coefficient $\\frac12(1/\\sqrt2)^2=1/4$. The function $\\sin x$ and its derivatives through order three are bounded and continuous, so it meets the regularity premise of [L1].",
++          "claim": "Here $b(x)=0$, $\\sigma(x)=\\sin x$, and $\\sigma'(x)=\\cos x$. At $Y_0=\\pi/4$, both $\\sigma(Y_0)$ and $\\sigma'(Y_0)$ equal $1/\\sqrt2$, so [F1] gives the stated update with correction coefficient $\\frac12(1/\\sqrt2)^2=1/4$. The function $\\sin x$ and its derivatives through order three are bounded and continuous, so it meets the regularity premise of [L1].",
+           "inputs": [
+             "F1",
+             "L1",
+@@ -1811,9 +1811,9 @@
+           ]
+         },
+         {
+-          "id": "step-1-2",
+-          "step": "1.2",
+-          "claim": "By [F2], the correction has conditional mean $\\frac14(h-h)=0$ and variance $\\frac1{16}(3h^2-2h^2+h^2)=h^2/8$. Its covariance with the linear noise term is $\\frac{1}{4\\sqrt2}\\mathbb E[(\\Delta W_n)^3-h\\Delta W_n]=0$. Hence the one-step increment variance is $h/2+h^2/8$, and the derivative correction is a separate nonzero fluctuation.",
++          "id": "step-2-1",
++          "step": "2.1",
++          "claim": "By [F2], the correction has conditional mean $\\frac14(h-h)=0$ and variance $\\frac1{16}(3h^2-2h^2+h^2)=h^2/8$. Its covariance with the linear noise term is $\\frac{1}{4\\sqrt2}\\mathbb E[(\\Delta W_0)^3-h\\Delta W_0]=0$. Hence the one-step increment variance is $h/2+h^2/8$, and the derivative correction is a separate nonzero fluctuation.",
+           "inputs": [
+             "F2",
+             "step 1.1",
+@@ -1821,9 +1821,9 @@
+           ]
+         },
+         {
+-          "id": "step-2-1",
+-          "step": "2.1",
+-          "claim": "Applying [L1] to the SDE with $b=0$ and $\\sigma(x)=\\sin x$ yields grid root-mean-square error $O(h)$ on every fixed finite horizon. This is the theorem's bounded-coefficient multiplicative-noise case under the inherited AC convention [A1]; it supplies no weak-order-two statement for Heun.",
++          "id": "step-3-1",
++          "step": "3.1",
++          "claim": "Applying [L1] to the SDE with $b=0$ and $\\sigma(x)=\\sin x$ yields $\\max_{0\\le n\\le N}\\mathbb E|Y_n-X_{t_n}|^2\\le C_T h^2$, with $C_T$ independent of $N$, on the supplied uniform grid. Taking square roots yields grid root-mean-square error $O(h)$ on every fixed finite horizon. This is the theorem's bounded-coefficient multiplicative-noise case under the inherited AC convention [A1]; it supplies no weak-order-two statement for Heun.",
+           "inputs": [
+             "L1",
+             "A1",
+@@ -1841,7 +1841,7 @@
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "Step 1.2 computes the centered correction mean and variance from the Gaussian moments."
++          "evidence": "Step 2.1 computes the centered correction mean and variance from the Gaussian moments."
+         },
+         {
+           "case": "one",
+@@ -1856,12 +1856,12 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Step 1.2 computes moments conditional on the current grid sigma algebra for the step increment."
++          "evidence": "Step 2.1 computes moments conditional on the current grid sigma algebra for the step increment."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Step 2.1 invokes the theorem under its declared AC interface."
++          "evidence": "Step 3.1 invokes the theorem under its declared AC interface."
+         },
+         {
+           "case": "iff-forward",
+@@ -1878,7 +1878,7 @@
+         {
+           "id": "def-axiom-of-choice",
+           "uses": [
+-            "2.1"
++            "3.1"
+           ],
+           "reason": "AC is inherited from the exact Brownian, Ito, or conditional-expectation interfaces identified in [A1]; the proof uses it only at the listed steps."
+         }
+@@ -1915,7 +1915,7 @@
+           "fact": "F2",
+           "source": "def-milstein-scheme-and-iterated-integrals",
+           "source_section": "Definition",
+-          "quote": "Assume AC and the Brownian filtered-space conventions in [[def-continuous-brownian-ito-process]]. Let $d,m\\ge1$ be finite integers, let $W=(W^1,\\ldots,W^m)$ be the driving standard Brownian motion, and consider the autonomous It\\^o SDE\n$$dX_t=b(X_t)\\,dt+\\sum_{j=1}^m\\sigma_j(X_t)\\,dW^j_t,$$\nwhere $b:\\mathbb R^d\\to\\mathbb R^d$ and $\\sigma_j:\\mathbb R^d\\to\\mathbb R^d$. For a differentiable vector-valued function $f$, $Df(x)$ is its Jacobian and $L_i f(x):=Df(x)\\sigma_i(x)$; this definition is applied componentwise when $f$ is matrix-valued.",
++          "quote": "Assume AC and the Brownian filtered-space conventions in [[def-continuous-brownian-ito-process]]. Let $d,m\\ge1$ be finite integers, let $W=(W^1,\\ldots,W^m)$ be the driving standard Brownian motion, and consider the autonomous It\\^o SDE\n$$dX_t=b(X_t)\\,dt+\\sum_{j=1}^m\\sigma_j(X_t)\\,dW^j_t,$$\nwhere $b:\\mathbb R^d\\to\\mathbb R^d$ and $\\sigma_j:\\mathbb R^d\\to\\mathbb R^d$. For a differentiable vector-valued function $f$, $Df(x)$ is its Jacobian and $L_i f(x):=Df(x)\\sigma_i(x)$; this definition is applied componentwise when $f$ is matrix-valued.\n\nOn a deterministic grid $t_n=nh$, define $\\Delta W_n^j=W^j_{t_{n+1}}-W^j_{t_n}$ and the iterated It\\^o integral\n$$I_{ij,n}:=\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})\\,dW^j_s,\\qquad 1\\le i,j\\le m.$$\nThe integrand is predictable and square-integrable, so this is the $L^2$ It\\^o integral of [[def-ito-integral-for-square-integrable-predictable-processes]]; its finite energy is $\\mathbb E\\int_{t_n}^{t_{n+1}}(W^i_s-W^i_{t_n})^2ds=h^2/2$ by [[thm-ito-isometry-and-linearity-in-predictable-l2]].\n\nThe general Milstein Taylor update is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)I_{ij,n}.$$\nThe diffusion fields have **commutative noise** when $L_i\\sigma_j(x)=L_j\\sigma_i(x)$ for every $x$ and every $i,j$. Under that condition, the equivalent update using only Brownian increments is\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sum_{j=1}^m\\sigma_j(Y_n)\\Delta W_n^j+\\frac12\\sum_{i,j=1}^m L_i\\sigma_j(Y_n)\\bigl(\\Delta W_n^i\\Delta W_n^j-\\delta_{ij}h\\bigr).$$\nFor scalar noise ($d=m=1$), this reads\n$$Y_{n+1}=Y_n+b(Y_n)h+\\sigma(Y_n)\\Delta W_n+\\frac12\\sigma(Y_n)\\sigma'(Y_n)\\bigl((\\Delta W_n)^2-h\\bigr).$$\n\nFor every $1\\le i,j\\le m$, define the Brownian area component $A_{ij,n}:=(I_{ij,n}-I_{ji,n})/2$ and the symmetric part $S_{ij,n}:=(I_{ij,n}+I_{ji,n})/2$. In particular, $A_{ii,n}=0$ and $S_{ii,n}=I_{ii,n}$. Then $A_{ji,n}=-A_{ij,n}$, $S_{ji,n}=S_{ij,n}$, and reindexing the sums gives\n$$\\sum_{i,j}L_i\\sigma_j I_{ij,n}=\\frac12\\sum_{i,j}(L_i\\sigma_j+L_j\\sigma_i)S_{ij,n}+\\frac12\\sum_{i,j}(L_i\\sigma_j-L_j\\sigma_i)A_{ij,n}.$$\nThe second sum vanishes under commutative noise; otherwise the general update includes the area components. A noncommuting Milstein implementation must sample or approximate the needed areas and account for their approximation error and computational cost; this definition makes no claim that an exact area sample is free or that a particular area sampler has a specified error rate.\n\nFor this pair, $C_b^k(\\mathbb R^d;\\mathbb R^q)$ means that every component and every partial derivative of orders at most $k$ exists, is continuous, and is bounded. This notation is componentwise for vector and matrix valued functions.",
+           "uses": [
+             "1.1"
+           ]

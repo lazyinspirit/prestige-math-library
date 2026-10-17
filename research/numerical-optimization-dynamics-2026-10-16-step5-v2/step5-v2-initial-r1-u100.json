@@ -1,0 +1,453 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "100",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-ctrl1-smooth-transcription-data",
+      "model": "gpt-6-luna",
+      "context_sha256": "80272b4fb00cf2e7ff0540e14b77dbcac880af01963e75f07323e041975c591a",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed a nonfatal title/interface mismatch: def-ck-euclidean-maps-and-diffeomorphisms defines smooth as C-infinity, whereas the Definition explicitly requires only continuous state/control derivatives through order three. Removed Smooth from the display title; the Definition, derivative assumptions and content contract are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+      "model": "gpt-6-luna",
+      "context_sha256": "84fdc5d0ffa479f40f47b5275c0e83d243987d7601b27454da3cfcb718c169d7",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The stage equations and quadrature queried f,L on domains [0,T] x Omega_x x Omega_u but restricted only time. For example f defined only on Omega_x=(-1,1) cannot be queried at a trial stage X=2. Added start, control and every-stage membership checks before queries, including implicit trial stages; no existence or convergence claim was added.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence",
+      "model": "gpt-6-luna",
+      "context_sha256": "ae47f8e6968d29d62c4992bd5ac09fd4a6a71c8b3a68552eaf1d00bb3cb9f947",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed a nonfatal omitted routine derivation: scalar Minkowski alone does not literally assert the vector-valued L2 triangle inequality used in steps 1.2 and 2.1. F4 now derives it by pointwise Euclidean triangle, squaring/integral monotonicity, and scalar Minkowski on the two scalar norm functions. Nearest-point separation, averaging contraction and step-function density prove the unchanged recovery statement under the original Countable Choice assumption.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-ctrl1-indirect-shooting-for-the-ode-optimality-system",
+      "model": "gpt-6-luna",
+      "context_sha256": "1040a4310b40d40799c03a4d97109da60d01af728b3a113e13a22ca257ba5c64",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The admitted optional terminal constraints can change transversality: on [0,1], minimize integral u^2/2 with x prime=u, x(0)=0, x(1)=a nonzero, phi=0, and U_c=[-2|a|,2|a|]. Its interior minimizer u=a has constant adjoint p=-a, contradicting the displayed p(1)=0. Restricted this free-terminal residual to branches without active endpoint constraints, explicitly excluding extra endpoint equalities and requiring optional inequalities strictly inactive. The square BVP, supplied differentiable IVP evaluator and inherited numerical-residual status remain intact.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "model": "gpt-6-luna",
+      "context_sha256": "452652a321c6608eb0d26395d0587790dd107811c44445e68c4d7a580b19a73e",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed undefined terminal-cost queries at infeasible multiple-shooting/collocation candidates: on one cell take Omega_x=(-1,1), f=L=0, x0=0, u=0 and phi(x)=log(1-x^2). Candidate X_{N,0}=2 has computed endpoint Phi_0=0, so every former stage/endpoint check passed but phi(2) is undefined. Added a check of the actual independent terminal node before phi/terminal constraints, plus actual endpoint-constraint argument checks covering optional endpoint controls. Construction returns stage-domain-failure and no objective candidate on failure; feasible equations and objective are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "model": "gpt-6-luna",
+      "context_sha256": "4d84ef05efbe52086d7371d193582b309c77e78e9f8011cc1ee7fb37b4e91f3b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed a supplier-precondition defect: the primal-dual solver Definition explicitly requires integer N>=0, and the merit globalization Definition requires finite integer R,J_max>=1. The dispatcher admitted fractional caps and its own k=K stopping test likewise needs integer K. Typed K,N as finite nonnegative integers and R,J_max as finite positive integers. Integer zero K/N still audit the initial candidate before budget termination; every solver call now respects the supplier cap interface.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-ctrl1-smooth-transcription-data",
+      "disposition": "repaired",
+      "post_sha256": "c8bb42c0ac5f16182011afaa6b4e348e8ad84e5cefcb504f2185771b8e271065",
+      "review_context_sha256": "d58613b24ca6b86c3f0663c484a3a425021e6b9a66481c3a61de319597a9ea31",
+      "reason": "Confirmed a nonfatal title/interface mismatch: def-ck-euclidean-maps-and-diffeomorphisms defines smooth as C-infinity, whereas the Definition explicitly requires only continuous state/control derivatives through order three. Removed Smooth from the display title; the Definition, derivative assumptions and content contract are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+      "disposition": "repaired",
+      "post_sha256": "4597f08780ff314f3d0ccb6eea6100b1f117cea4ba80775a8eb3dac41c9a2aca",
+      "review_context_sha256": "8efb8c8659acfafa2883391a297af6514afa790f77528b8841e8fea7105c8c8d",
+      "reason": "The stage equations and quadrature queried f,L on domains [0,T] x Omega_x x Omega_u but restricted only time. For example f defined only on Omega_x=(-1,1) cannot be queried at a trial stage X=2. Added start, control and every-stage membership checks before queries, including implicit trial stages; no existence or convergence claim was added.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence",
+      "disposition": "repaired",
+      "post_sha256": "99f9784067f71ea00bb7ca8aebc61c7de9e3f680d44521255e007cb07e777bff",
+      "review_context_sha256": "895e7a77ea972c220f7ba8049256211494d90f7390e14e2d6e86ceff91bcd29f",
+      "reason": "Confirmed a nonfatal omitted routine derivation: scalar Minkowski alone does not literally assert the vector-valued L2 triangle inequality used in steps 1.2 and 2.1. F4 now derives it by pointwise Euclidean triangle, squaring/integral monotonicity, and scalar Minkowski on the two scalar norm functions. Nearest-point separation, averaging contraction and step-function density prove the unchanged recovery statement under the original Countable Choice assumption.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-ctrl1-indirect-shooting-for-the-ode-optimality-system",
+      "disposition": "repaired",
+      "post_sha256": "2661bbb4375df9fe09282bda3d1c6a201ca3bbcfc60c8db8b1398f560291e71e",
+      "review_context_sha256": "95a40f2408c33cc20a49141325dce1d0f9abeef1cdd74769e7b5eaca42412e44",
+      "reason": "The admitted optional terminal constraints can change transversality: on [0,1], minimize integral u^2/2 with x prime=u, x(0)=0, x(1)=a nonzero, phi=0, and U_c=[-2|a|,2|a|]. Its interior minimizer u=a has constant adjoint p=-a, contradicting the displayed p(1)=0. Restricted this free-terminal residual to branches without active endpoint constraints, explicitly excluding extra endpoint equalities and requiring optional inequalities strictly inactive. The square BVP, supplied differentiable IVP evaluator and inherited numerical-residual status remain intact.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "disposition": "repaired",
+      "post_sha256": "c58024204e4e3825767a06119df5b2e69b6d84b1645288d4d3fc194692018b2c",
+      "review_context_sha256": "04bc5397d7c2ef67ba32014653f53d02476422dc822a51eb5fd3a86d25ef10f5",
+      "reason": "Confirmed undefined terminal-cost queries at infeasible multiple-shooting/collocation candidates: on one cell take Omega_x=(-1,1), f=L=0, x0=0, u=0 and phi(x)=log(1-x^2). Candidate X_{N,0}=2 has computed endpoint Phi_0=0, so every former stage/endpoint check passed but phi(2) is undefined. Added a check of the actual independent terminal node before phi/terminal constraints, plus actual endpoint-constraint argument checks covering optional endpoint controls. Construction returns stage-domain-failure and no objective candidate on failure; feasible equations and objective are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "disposition": "repaired",
+      "post_sha256": "05fc6717298d4df7b7e00b3b0748499b04b54150e4b200619bdca72e2a250128",
+      "review_context_sha256": "dc675773300d185f685c221d5fa8470f3b36a33fa875d5992295f93a7974fd80",
+      "reason": "Confirmed a supplier-precondition defect: the primal-dual solver Definition explicitly requires integer N>=0, and the merit globalization Definition requires finite integer R,J_max>=1. The dispatcher admitted fractional caps and its own k=K stopping test likewise needs integer K. Typed K,N as finite nonnegative integers and R,J_max as finite positive integers. Integer zero K/N still audit the initial candidate before budget termination; every solver call now respects the supplier cap interface.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+    "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+    "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent",
+    "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+    "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+    "thm-ctrl1-mesh-consistent-lqr-minimizers-converge",
+    "thm-ctrl1-objective-and-control-error-from-consistency-bounds",
+    "ex-ctrl1-single-versus-multiple-shooting-two-intervals",
+    "ex-ctrl1-chemical-dosing-linear-model"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-ctrl1-smooth-transcription-data",
+      "severity": "nonfatal",
+      "locus": "frontmatter",
+      "reason": "Confirmed a nonfatal title/interface mismatch: def-ck-euclidean-maps-and-diffeomorphisms defines smooth as C-infinity, whereas the Definition explicitly requires only continuous state/control derivatives through order three. Removed Smooth from the display title; the Definition, derivative assumptions and content contract are unchanged.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u100.json",
+      "post_sha256": "c8bb42c0ac5f16182011afaa6b4e348e8ad84e5cefcb504f2185771b8e271065"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+      "severity": "fatal",
+      "locus": "definition",
+      "defect_type": "logic",
+      "reason": "The stage equations and quadrature queried f,L on domains [0,T] x Omega_x x Omega_u but restricted only time. For example f defined only on Omega_x=(-1,1) cannot be queried at a trial stage X=2. Added start, control and every-stage membership checks before queries, including implicit trial stages; no existence or convergence claim was added.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u100.json",
+      "post_sha256": "4597f08780ff314f3d0ccb6eea6100b1f117cea4ba80775a8eb3dac41c9a2aca"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "reason": "Confirmed a nonfatal omitted routine derivation: scalar Minkowski alone does not literally assert the vector-valued L2 triangle inequality used in steps 1.2 and 2.1. F4 now derives it by pointwise Euclidean triangle, squaring/integral monotonicity, and scalar Minkowski on the two scalar norm functions. Nearest-point separation, averaging contraction and step-function density prove the unchanged recovery statement under the original Countable Choice assumption.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u100.json",
+      "post_sha256": "99f9784067f71ea00bb7ca8aebc61c7de9e3f680d44521255e007cb07e777bff"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-ctrl1-indirect-shooting-for-the-ode-optimality-system",
+      "severity": "fatal",
+      "locus": "definition",
+      "defect_type": "logic",
+      "reason": "The admitted optional terminal constraints can change transversality: on [0,1], minimize integral u^2/2 with x prime=u, x(0)=0, x(1)=a nonzero, phi=0, and U_c=[-2|a|,2|a|]. Its interior minimizer u=a has constant adjoint p=-a, contradicting the displayed p(1)=0. Restricted this free-terminal residual to branches without active endpoint constraints, explicitly excluding extra endpoint equalities and requiring optional inequalities strictly inactive. The square BVP, supplied differentiable IVP evaluator and inherited numerical-residual status remain intact.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u100.json",
+      "post_sha256": "2661bbb4375df9fe09282bda3d1c6a201ca3bbcfc60c8db8b1398f560291e71e"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "severity": "fatal",
+      "locus": "definition",
+      "defect_type": "logic",
+      "reason": "Confirmed undefined terminal-cost queries at infeasible multiple-shooting/collocation candidates: on one cell take Omega_x=(-1,1), f=L=0, x0=0, u=0 and phi(x)=log(1-x^2). Candidate X_{N,0}=2 has computed endpoint Phi_0=0, so every former stage/endpoint check passed but phi(2) is undefined. Added a check of the actual independent terminal node before phi/terminal constraints, plus actual endpoint-constraint argument checks covering optional endpoint controls. Construction returns stage-domain-failure and no objective candidate on failure; feasible equations and objective are unchanged.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u100.json",
+      "post_sha256": "c58024204e4e3825767a06119df5b2e69b6d84b1645288d4d3fc194692018b2c"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "severity": "fatal",
+      "locus": "definition",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed a supplier-precondition defect: the primal-dual solver Definition explicitly requires integer N>=0, and the merit globalization Definition requires finite integer R,J_max>=1. The dispatcher admitted fractional caps and its own k=K stopping test likewise needs integer K. Typed K,N as finite nonnegative integers and R,J_max as finite positive integers. Integer zero K/N still audit the initial candidate before budget termination; every solver call now respects the supplier cap interface.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "evidence": "research/numerical-optimization-dynamics-2026-10-16-step5-v2/step5-v2-initial-r1-u100.json",
+      "post_sha256": "05fc6717298d4df7b7e00b3b0748499b04b54150e4b200619bdca72e2a250128"
+    }
+  ],
+  "repair_notes": [
+    {
+      "id": "def-ctrl1-smooth-transcription-data",
+      "reason": "Confirmed a nonfatal title/interface mismatch: def-ck-euclidean-maps-and-diffeomorphisms defines smooth as C-infinity, whereas the Definition explicitly requires only continuous state/control derivatives through order three. Removed Smooth from the display title; the Definition, derivative assumptions and content contract are unchanged.",
+      "dependencies": [
+        "def-ck-euclidean-maps-and-diffeomorphisms"
+      ],
+      "validation": "Review complete; current context capture follows. No Statement/Definition change, hence no downstream propagation."
+    },
+    {
+      "supplier": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+      "consumer": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "path": "items/alg-ctrl1-runge-kutta-shooting-and-collocation-transcription.md",
+      "affected_use": "Definition, Stage evaluation already checks X_{j,0} in Omega_x and u_j in Omega_u, then checks every explicit/implicit stage input before evaluation. Its open residual domain restricts all induced stages. The added supplier restrictions are already enforced; unchanged use remains sound.",
+      "disposition": "unaffected",
+      "uncertain": false
+    },
+    {
+      "supplier": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+      "consumer": "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+      "path": "items/lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program.md",
+      "affected_use": "Facts F1 and proof 1.1 use the finite affine stage equations. The final Statement paragraph separately requires pointwise-domain and smoothness hypotheses when calling the procedure. The polynomial sampled-system claim and affine elimination remain sound under that caveat.",
+      "disposition": "unaffected",
+      "uncertain": false
+    },
+    {
+      "id": "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+      "reason": "The stage equations and quadrature queried f,L on domains [0,T] x Omega_x x Omega_u but restricted only time. For example f defined only on Omega_x=(-1,1) cannot be queried at a trial stage X=2. Added start, control and every-stage membership checks before queries, including implicit trial stages; no existence or convergence claim was added.",
+      "page_use": "The owning page describes explicit/internal implicit stages and sample evaluation; its prose makes no broader domain claim and remains sound.",
+      "validation": "Review complete; context capture follows. Contract contains no proof/citation worksheets; its time-boundary statements remain true. No new prerequisites or AC requirements."
+    },
+    {
+      "id": "lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence",
+      "reason": "Confirmed a nonfatal omitted routine derivation: scalar Minkowski alone does not literally assert the vector-valued L2 triangle inequality used in steps 1.2 and 2.1. F4 now derives it by pointwise Euclidean triangle, squaring/integral monotonicity, and scalar Minkowski on the two scalar norm functions. Nearest-point separation, averaging contraction and step-function density prove the unchanged recovery statement under the original Countable Choice assumption.",
+      "dependencies": [
+        "thm-cauchy-schwarz-and-the-euclidean-norm",
+        "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+        "thm-minkowski-inequality-for-integrals",
+        "thm-box-step-functions-are-dense-in-l-p-of-rn"
+      ],
+      "validation": "Strict one-item proof-contract check passed with no errors or warnings. F4 citation/interface rows and existing proof-step mirrors updated under the shared-write lock. Statement unchanged: no propagation. Owning page still accurately describes strong cell-average recovery under stated choice hypotheses."
+    },
+    {
+      "id": "alg-ctrl1-indirect-shooting-for-the-ode-optimality-system",
+      "reason": "The admitted optional terminal constraints can change transversality: on [0,1], minimize integral u^2/2 with x prime=u, x(0)=0, x(1)=a nonzero, phi=0, and U_c=[-2|a|,2|a|]. Its interior minimizer u=a has constant adjoint p=-a, contradicting the displayed p(1)=0. Restricted this free-terminal residual to branches without active endpoint constraints, explicitly excluding extra endpoint equalities and requiring optional inequalities strictly inactive. The square BVP, supplied differentiable IVP evaluator and inherited numerical-residual status remain intact.",
+      "dependencies": [
+        "def-nonlinear-two-point-bvp-and-boundary-residual",
+        "def-certified-ivp-approximation-and-sensitivity-interface",
+        "alg-single-shooting-for-nonlinear-bvps",
+        "prop-shooting-residual-derivative"
+      ],
+      "validation": "Direct item/reference search found no item consumers. Owning page merely lists the algorithm and makes no active-endpoint indirect claim; no page repair required. Existing contract has no proof/citation worksheets and its exclusions remain true. Definition changed; direct-consumer inventory is empty."
+    },
+    {
+      "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "consumer": "lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent",
+      "path": "items/lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent.md",
+      "affected_use": "Statement, F1/F2 and proof 1.1-3.1 use successful deterministic interval maps and exact continuity equations. At a feasible tuple X_{N,0}=Phi_{N-1}, whose domain was already checked; the added independent-node guard leaves the feasible projection and shared objectives identical.",
+      "disposition": "unaffected",
+      "uncertain": false
+    },
+    {
+      "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "consumer": "lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program",
+      "path": "items/lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program.md",
+      "affected_use": "Statement final paragraph separates polynomial sampled-system algebra from the procedure's pointwise-domain requirements; F2 and proof use affine maps and the same quadratic objective. The added evaluation guard changes no polynomial coefficient or affine constraint and is retained by the existing domain caveat.",
+      "disposition": "unaffected",
+      "uncertain": false
+    },
+    {
+      "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "consumer": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "path": "items/alg-ctrl1-finite-budget-transcription-solver-dispatch.md",
+      "affected_use": "Definition first audit checks sampled domains and construction statuses, returns partial failed records, and calls SQP only for constructed records. A newly rejected terminal argument therefore follows the existing failure branch without solver calls. No new domain-success assumption is inferred.",
+      "disposition": "unaffected",
+      "uncertain": false
+    },
+    {
+      "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "consumer": "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+      "path": "items/thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription.md",
+      "affected_use": "Statement and F1 explicitly assume actual NLP functions C3 on an open neighborhood of the KKT point. This neighborhood must lie in the objective's domain. Checking actual terminal arguments preserves that neighborhood, exact KKT map and local full-step convergence argument.",
+      "disposition": "unaffected",
+      "uncertain": false
+    },
+    {
+      "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "consumer": "thm-ctrl1-mesh-consistent-lqr-minimizers-converge",
+      "path": "items/thm-ctrl1-mesh-consistent-lqr-minimizers-converge.md",
+      "affected_use": "Statement assumes well-defined discrete objectives J_N on feasible sets F_N subset F and a uniform objective-consistency bound. Its proof uses only those values and feasible recovery controls. The terminal guard rejects undefined candidates and does not alter any admissible J_N or the conditional convergence proof.",
+      "disposition": "unaffected",
+      "uncertain": false
+    },
+    {
+      "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "consumer": "thm-ctrl1-objective-and-control-error-from-consistency-bounds",
+      "path": "items/thm-ctrl1-objective-and-control-error-from-consistency-bounds.md",
+      "affected_use": "Statement prescribes well-defined sampled running and terminal quadratic values plus state/quadrature consistency at the two feasible comparison controls; proof 1.2 bounds their terminal error. The new guard changes neither those values nor the conditional comparison inequalities.",
+      "disposition": "unaffected",
+      "uncertain": false
+    },
+    {
+      "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "consumer": "ex-ctrl1-single-versus-multiple-shooting-two-intervals",
+      "path": "items/ex-ctrl1-single-versus-multiple-shooting-two-intervals.md",
+      "affected_use": "Example F2 and verification 1.1-2.1 use x prime=u on the real state domain, with exact endpoints v0/2 and (v0+v1)/2 and a globally defined terminal quadratic. Every actual terminal node in the displayed feasible tuple passes; the recursion and reduced objective are unchanged.",
+      "disposition": "unaffected",
+      "uncertain": false
+    },
+    {
+      "supplier": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "consumer": "ex-ctrl1-chemical-dosing-linear-model",
+      "path": "items/ex-ctrl1-chemical-dosing-linear-model.md",
+      "affected_use": "Example and verification 2.1 use the global linear field f=-x+u, zero costs, explicit-midpoint stage 1/2 and terminal node 1/2. The displayed candidate and all endpoint arguments are in the real state domain, so the added guard preserves the calculation.",
+      "disposition": "unaffected",
+      "uncertain": false
+    },
+    {
+      "id": "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+      "reason": "Confirmed undefined terminal-cost queries at infeasible multiple-shooting/collocation candidates: on one cell take Omega_x=(-1,1), f=L=0, x0=0, u=0 and phi(x)=log(1-x^2). Candidate X_{N,0}=2 has computed endpoint Phi_0=0, so every former stage/endpoint check passed but phi(2) is undefined. Added a check of the actual independent terminal node before phi/terminal constraints, plus actual endpoint-constraint argument checks covering optional endpoint controls. Construction returns stage-domain-failure and no objective candidate on failure; feasible equations and objective are unchanged.",
+      "validation": "Reviewed complete procedure, its actual-map derivative and Newton input interfaces, owning contract and A/B page interfaces. No proof/citation contract mirrors change. Page claims remain conditional on construction/sample-domain success. All eight direct item consumers examined; none requires a repair from this interface event. No published or outside-frontier consumer found."
+    },
+    {
+      "supplier": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "consumer": "thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription",
+      "path": "items/thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription.md",
+      "affected_use": "Statement and proof 3.1 use the dispatcher only to observe that a finite outer cap may stop before the local exact-Hessian iteration converges. Finite integer K preserves this caveat, and the independent full-step convergence theorem has no fractional-budget use. No theorem clause or proof needs repair.",
+      "disposition": "unaffected",
+      "uncertain": false
+    },
+    {
+      "id": "alg-ctrl1-finite-budget-transcription-solver-dispatch",
+      "reason": "Confirmed a supplier-precondition defect: the primal-dual solver Definition explicitly requires integer N>=0, and the merit globalization Definition requires finite integer R,J_max>=1. The dispatcher admitted fractional caps and its own k=K stopping test likewise needs integer K. Typed K,N as finite nonnegative integers and R,J_max as finite positive integers. Integer zero K/N still audit the initial candidate before budget termination; every solver call now respects the supplier cap interface.",
+      "dependencies": [
+        "alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones",
+        "alg-sqp-merit-globalization-with-finite-budgets",
+        "alg-sqp-exact-hessian-newton-step"
+      ],
+      "validation": "Reviewed the complete dispatcher, owning contract, relevant solver Definitions, exact stored-QP gap conditions and conditional local convergence interfaces. Owning page already describes finite budgets and statuses; it remains accurate. No additional prerequisite, AC assumption or published/outside consumer is involved."
+    },
+    {
+      "note": "Preserved the original alpha-batch-100 risk_review attribution in the recovery contract; this report supplies the separately attributed repair review. No independent review of my repair is claimed. Context hashes captured earlier bind the item and supplier context, not rewritten historical review notes."
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "disposition": "no_update_proposed",
+      "reason": "Direct dependency/reference searches for each changed Definition found only current draft batch-100 consumers and the owning draft page. No potentially defective published consumer was found in this lane; no published item was edited or adjudicated. This is not a whole-library published audit."
+    },
+    {
+      "validation": "Attempted rendercheck --help only to discover CLI usage; the tool treated it as an unscoped scan, so it was interrupted (exit 130) without any result being adopted. The actual six-item rendercheck then passed. No whole-corpus result is claimed."
+    },
+    {
+      "definition_changes": [
+        "def-ctrl1-runge-kutta-tableau-and-stage-collocation",
+        "alg-ctrl1-indirect-shooting-for-the-ode-optimality-system",
+        "alg-ctrl1-runge-kutta-shooting-and-collocation-transcription",
+        "alg-ctrl1-finite-budget-transcription-solver-dispatch"
+      ],
+      "unchanged_sections": [
+        "def-ctrl1-smooth-transcription-data: Definition",
+        "lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence: Statement"
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Controller collection, ordinary frontier effect routing, rejudgment and certification remain controller duties. Four confirmed fatal items mean this repaired round does not itself meet the zero-fatal convergence threshold."
+    },
+    {
+      "id": "def-ctrl1-smooth-transcription-data",
+      "metadata_repair": "Mirrored the repaired display title in its unique owning entry of research/numerical-optimization-dynamics-2026-10-16-batch-100.pages.json under acquire/reread/edit/check/release. All other parsed manifest rows are preserved. Item carrier changed, so disposition remains repaired rather than metadata_repair_only."
+    },
+    {
+      "status": "assigned_repair_complete",
+      "repair_complete": true,
+      "reason": "All six exact rejected tuples have decisions and completed repairs, with immediate individual review-context captures. Four fatal and two nonfatal findings are recorded. All nine unique direct item consumers across the four Definition changes are inventoried with supplier-specific use evidence; no consumer edit, creation or outside maintenance finding is needed. Focused checks passed. The native engine retains all later rejudgment and certification duties."
+    }
+  ],
+  "gate_resolutions": [],
+  "checks": [
+    {
+      "name": "rendercheck",
+      "scope": "all six assigned changed items",
+      "exit_code": 0,
+      "result": "6 checked; no errors or warnings"
+    },
+    {
+      "name": "precheck",
+      "scope": "all six assigned changed items",
+      "exit_code": 0,
+      "result": "1 proof checked and passed; 5 definition/algorithm bodies not applicable; zero failures"
+    },
+    {
+      "name": "proof-contract",
+      "scope": "all six assigned contracts, --strict --items explicit IDs",
+      "exit_code": 0,
+      "result": "All six checked; no errors or warnings"
+    },
+    {
+      "name": "proof-layout",
+      "command": "node tools/proof-layout.mjs items/def-ctrl1-smooth-transcription-data.md items/def-ctrl1-runge-kutta-tableau-and-stage-collocation.md items/lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence.md items/alg-ctrl1-indirect-shooting-for-the-ode-optimality-system.md items/alg-ctrl1-runge-kutta-shooting-and-collocation-transcription.md items/alg-ctrl1-finite-budget-transcription-solver-dispatch.md",
+      "exit_code": 0,
+      "result": "6 items, 3 steps, 0 defects"
+    },
+    {
+      "name": "report-bindings",
+      "exit_code": 0,
+      "result": "All six decision identities match the exact assigned tuples, all six post guards match current carriers, and the canonical frozen pack input hash matches. Exact Statement/Definition section hashes change for only RK tableau, indirect shooting, transcription and dispatch."
+    },
+    {
+      "name": "manifest-title-mirror",
+      "exit_code": 0,
+      "result": "Owning JSON parses and the unique assigned title equals the current item title."
+    }
+  ],
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-100.proof-contracts.json": "898b02715c47dfdce5e3e4727a907e348596f1c9ea8d0af09a6ff5bfbf63f8a0",
+    "research/numerical-optimization-dynamics-2026-10-16-batch-100.pages.json": "29f5a49f5ce8be5fdcae145901bb1612ce27b6e4ac630bc6d6b636e85469a84a"
+  }
+}

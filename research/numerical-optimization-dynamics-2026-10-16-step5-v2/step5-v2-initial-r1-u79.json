@@ -1,0 +1,300 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "79",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "def-size-structured-transport-and-division-kernel",
+      "model": "gpt-6-luna",
+      "context_sha256": "96d1fb6a4e2cd2a3e8b15b575637d2502aafe6ff5955eeba4b4c91180ef21418",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "At y=X the stopped interval is {0}, whose initial time is not a limit point; the cited intrinsic derivative is therefore undefined. Retain the unique extended IVP on [0,T], assert the restricted IVP only for y<X, and define the singleton solely as an immediately stopped path. Also make the no-hit convention tau_y=+infinity explicit. Rates, kernels, weak equation and discrete interfaces are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-age-structured-renewal-finite-cutoff-model",
+      "model": "gpt-6-luna",
+      "context_sha256": "13567f186f01c2fe1bbfb33299d176f8cefa67532881c1621f9d242070f9d821",
+      "outcome": "false_positive",
+      "reason": "The definition explicitly sets B_A(t)=integral_0^A beta(a)n^A(t,a) da, removes cohorts at A, and extends n^A by zero. The phrase same renewal inflow identifies the renewal functional form, not equality of B_A with the infinite-model birth trace. Extending beta constantly past A makes the half-line integral of the zero-extended n^A exactly this finite integral. No supplier theorem is claimed to solve the absorbing model, and the separate finite-cutoff existence theorem supplies that result. The mathematical interface is unambiguous and sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-age-structured-renewal-semigroup-growth-and-data-stability",
+      "model": "gpt-6-luna",
+      "context_sha256": "945370127d63cdadfb562c8cbac6c423b5ed7dfbb60ab566ea26f6d58a643f38",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "F2 supplies solutions only on L1_+, and the original step 1.1 did not construct the asserted real-linear L1 operator. The repaired step first proves cone additivity and nonnegative homogeneity by uniqueness, then defines S(t)f=S(t)f^+-S(t)f^- and proves decomposition independence using p+f^-=q+f^+. This gives real linearity and the signed characteristic equations. Step 2.1 now proves |S(t)f|<=S(t)|f| and extends the positive-data Gronwall norm bound to signed data. The perturbation proof uses the same characteristic forcing estimate and the now-valid norm bound; its nondecreasing Gronwall majorant and all original claims remain intact.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-size-structured-positivity-number-and-weighted-moment-identities",
+      "model": "gpt-6-luna",
+      "context_sha256": "1582c7b5631fd3e3963e6ddf80e375d28f0079c36b99c7f87e088946a9f17000",
+      "outcome": "false_positive",
+      "reason": "The backward citation is a schema-permitted justified_by discharge, not a reverse deps edge. Step 3.1 constructs the characteristic independently from g and the projection: uniform M,L permit centered Picard cylinders with h_0 M<=1 and Lh_0<1, and finitely many restarts cover [0,T]. It never assumes the definition's existence assertion. The corrected definition merely labels the extended path's stopped restriction, including the singleton at y=X. Steps 1.1-2.1 prove positivity and both balances by nonnegative coefficients, telescoping and weighted summation by parts. The item is unchanged; its contract quote alone was synchronized to the repaired supplier Definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-age-structured-renewal-bv-l1-convergence",
+      "model": "gpt-6-luna",
+      "context_sha256": "e66360e0e0306d340775abfe9ecde79e1a930837c440d8fd4ea2b2cf21dc40ab",
+      "outcome": "false_positive",
+      "reason": "The birth algorithm calls adaptive Simpson on beta alone and only then multiplies its returned cell estimate Q_j(beta) by M_j/Delta a. Its evaluator is deterministic; beta, cell, depth, budget and tolerance are fixed in time. Recursion and leaf weights therefore are fixed, independently of masses. Set b_j=Q_j(beta)/Delta a in [0,beta_infinity]; then B_k=sum b_j M_j^k and the disputed temporal difference bound follows directly. Subtracting adjacent updates gives the stated BV recurrence, including J=1; mass and variation iteration give time-Lipschitz control. Finite block approximations, bounded cell propagation and initial L1 tails give global compactness, the cell-supported quadrature defect vanishes, and characteristic integrating factors plus Volterra uniqueness identify the limit. No rule restriction or item edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-age-cutoff-versus-outflow-tail-error",
+      "model": "gpt-6-luna",
+      "context_sha256": "2ef4efca8e90afc17a4b8544ab41e5710bdb9e080ed50aede7c88ec84f0daa96",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The general supplier bounds the L1 cutoff error by 2 exp(beta_infinity T) times the initial tail; the original F3 omitted that factor. This is a nonfatal citation restatement defect because steps 1.1-3.1 independently compute the example's exact total-mass deficit: the lambda=1 update shifts exact cell masses, giving retained mass 1-exp(-(4-k)), outflow exp(-(4-k))-exp(-4), and omitted initial tail exp(-4). F3 now states the supplier's full L1 estimate and distinguishes its sharper outflow bound. The example and every numerical step remain unchanged; no general L1 equality for the cellwise reconstruction is asserted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-size-structured-transport-and-division-kernel",
+      "disposition": "repaired",
+      "post_sha256": "eeaa16b6ae585157f925fb644131dcecaba5cc88a107760c40b27ec937356eaa",
+      "review_context_sha256": "dd8372800914b22737c0cb056579ba1eeeacac017d8cbce251448394721b516a",
+      "reason": "At y=X the stopped interval is {0}, whose initial time is not a limit point; the cited intrinsic derivative is therefore undefined. Retain the unique extended IVP on [0,T], assert the restricted IVP only for y<X, and define the singleton solely as an immediately stopped path. Also make the no-hit convention tau_y=+infinity explicit. Rates, kernels, weak equation and discrete interfaces are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-age-structured-renewal-finite-cutoff-model",
+      "disposition": "unaffected",
+      "post_sha256": "d556da92bb8b28e2b3905752d61053188fbf48a99e614db23263bb0664179ef4",
+      "review_context_sha256": "b01a332f43e8a55b28bac27b11d5f8131023f3a931931ce46466f738c1ba9f27",
+      "reason": "The definition explicitly sets B_A(t)=integral_0^A beta(a)n^A(t,a) da, removes cohorts at A, and extends n^A by zero. The phrase same renewal inflow identifies the renewal functional form, not equality of B_A with the infinite-model birth trace. Extending beta constantly past A makes the half-line integral of the zero-extended n^A exactly this finite integral. No supplier theorem is claimed to solve the absorbing model, and the separate finite-cutoff existence theorem supplies that result. The mathematical interface is unambiguous and sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-age-structured-renewal-semigroup-growth-and-data-stability",
+      "disposition": "repaired",
+      "post_sha256": "709299d90b604adf52e3cbf1eb54f34f8848f460034b77bb9485bab50ec35b0a",
+      "review_context_sha256": "a908012d47b67a4c1dd2f54dced71ba58db77349e38bcad693d7100e42b0f106",
+      "reason": "F2 supplies solutions only on L1_+, and the original step 1.1 did not construct the asserted real-linear L1 operator. The repaired step first proves cone additivity and nonnegative homogeneity by uniqueness, then defines S(t)f=S(t)f^+-S(t)f^- and proves decomposition independence using p+f^-=q+f^+. This gives real linearity and the signed characteristic equations. Step 2.1 now proves |S(t)f|<=S(t)|f| and extends the positive-data Gronwall norm bound to signed data. The perturbation proof uses the same characteristic forcing estimate and the now-valid norm bound; its nondecreasing Gronwall majorant and all original claims remain intact.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-size-structured-positivity-number-and-weighted-moment-identities",
+      "disposition": "unaffected",
+      "post_sha256": "ecf4f4bee2641a9bc1afa3ea9e1f59219d6311eb6e161fefa04749b764a70552",
+      "review_context_sha256": "88171c75c162c544844118293866285ee00130a4c7ac1bca9f9a1382a490d6f1",
+      "reason": "The backward citation is a schema-permitted justified_by discharge, not a reverse deps edge. Step 3.1 constructs the characteristic independently from g and the projection: uniform M,L permit centered Picard cylinders with h_0 M<=1 and Lh_0<1, and finitely many restarts cover [0,T]. It never assumes the definition's existence assertion. The corrected definition merely labels the extended path's stopped restriction, including the singleton at y=X. Steps 1.1-2.1 prove positivity and both balances by nonnegative coefficients, telescoping and weighted summation by parts. The item is unchanged; its contract quote alone was synchronized to the repaired supplier Definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    },
+    {
+      "id": "thm-age-structured-renewal-bv-l1-convergence",
+      "disposition": "unaffected",
+      "post_sha256": "b2811c0edba053b1d572f0da89556e3caf1b309161f2c904218cb89ef22a0380",
+      "review_context_sha256": "99fa08d936ec83dd3d48dff94fa7b4e35cda772112270fb8eef7f199146e6608",
+      "reason": "The birth algorithm calls adaptive Simpson on beta alone and only then multiplies its returned cell estimate Q_j(beta) by M_j/Delta a. Its evaluator is deterministic; beta, cell, depth, budget and tolerance are fixed in time. Recursion and leaf weights therefore are fixed, independently of masses. Set b_j=Q_j(beta)/Delta a in [0,beta_infinity]; then B_k=sum b_j M_j^k and the disputed temporal difference bound follows directly. Subtracting adjacent updates gives the stated BV recurrence, including J=1; mass and variation iteration give time-Lipschitz control. Finite block approximations, bounded cell propagation and initial L1 tails give global compactness, the cell-supported quadrature defect vanishes, and characteristic integrating factors plus Volterra uniqueness identify the limit. No rule restriction or item edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-age-cutoff-versus-outflow-tail-error",
+      "disposition": "repaired",
+      "post_sha256": "41e17f2c74d07bfc89cf7536ed2285adb97ab4250dca9281499c824f7e7d2964",
+      "review_context_sha256": "a9973a4f45933544b32df1155caf161b8f1bb8446b9bb0271dbb7add15d95334",
+      "reason": "The general supplier bounds the L1 cutoff error by 2 exp(beta_infinity T) times the initial tail; the original F3 omitted that factor. This is a nonfatal citation restatement defect because steps 1.1-3.1 independently compute the example's exact total-mass deficit: the lambda=1 update shifts exact cell masses, giving retained mass 1-exp(-(4-k)), outflow exp(-(4-k))-exp(-4), and omitted initial tail exp(-4). F3 now states the supplier's full L1 estimate and distinguishes its sharper outflow bound. The example and every numerical step remain unchanged; no general L1 equality for the cellwise reconstruction is asserted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-size-structured-finite-volume-flux-and-kernel-quadrature",
+    "thm-size-structured-positivity-number-and-weighted-moment-identities",
+    "ex-half-size-division-numerical-moment-budget"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-size-structured-transport-and-division-kernel",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "Definition, final paragraph",
+      "finding": "At y=X the stopped interval is {0}, whose initial time is not a limit point; the cited intrinsic derivative is therefore undefined. Retain the unique extended IVP on [0,T], assert the restricted IVP only for y<X, and define the singleton solely as an immediately stopped path. Also make the no-hit convention tau_y=+infinity explicit. Rates, kernels, weak equation and discrete interfaces are unchanged.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-age-structured-renewal-semigroup-growth-and-data-stability",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "Proof steps 1.1 and 2.1",
+      "finding": "F2 supplies solutions only on L1_+, and the original step 1.1 did not construct the asserted real-linear L1 operator. The repaired step first proves cone additivity and nonnegative homogeneity by uniqueness, then defines S(t)f=S(t)f^+-S(t)f^- and proves decomposition independence using p+f^-=q+f^+. This gives real linearity and the signed characteristic equations. Step 2.1 now proves |S(t)f|<=S(t)|f| and extends the positive-data Gronwall norm bound to signed data. The perturbation proof uses the same characteristic forcing estimate and the now-valid norm bound; its nondecreasing Gronwall majorant and all original claims remain intact.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-age-cutoff-versus-outflow-tail-error",
+      "severity": "nonfatal",
+      "locus": "Verification fact F3",
+      "finding": "The general supplier bounds the L1 cutoff error by 2 exp(beta_infinity T) times the initial tail; the original F3 omitted that factor. This is a nonfatal citation restatement defect because steps 1.1-3.1 independently compute the example's exact total-mass deficit: the lambda=1 update shifts exact cell masses, giving retained mass 1-exp(-(4-k)), outflow exp(-(4-k))-exp(-4), and omitted initial tail exp(-4). F3 now states the supplier's full L1 estimate and distinguishes its sharper outflow bound. The example and every numerical step remain unchanged; no general L1 equality for the cellwise reconstruction is asserted.",
+      "status": "fixed"
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "def-size-structured-transport-and-division-kernel",
+      "def-age-structured-renewal-finite-cutoff-model",
+      "thm-age-structured-renewal-semigroup-growth-and-data-stability",
+      "thm-size-structured-positivity-number-and-weighted-moment-identities",
+      "thm-age-structured-renewal-bv-l1-convergence",
+      "ex-age-cutoff-versus-outflow-tail-error"
+    ],
+    "sources_consulted": {
+      "local": [
+        "SCHEMA.md: justified_by rule",
+        "items/def-first-order-ode-initial-value-problem-and-solution.md: Definition",
+        "items/def-vector-valued-derivative-and-integral.md: derivative requires a limit point",
+        "items/thm-picard-lindelof-local-existence-and-uniqueness.md: quantitative Statement",
+        "items/alg-age-structured-positive-birth-quadrature.md: adaptive mode integrates beta before density scaling",
+        "items/alg-adaptive-simpson-with-finite-depth-and-panel-cap.md: deterministic evaluator and fixed recursion inputs",
+        "items/alg-age-structured-renewal-upwind-finite-volume.md: fixed per-cell settings",
+        "items/thm-age-structured-renewal-upwind-positivity-mass-bound-and-stability.md: full proof",
+        "items/thm-gronwall-integral-inequality.md: Statement",
+        "items/thm-age-structured-renewal-cutoff-tail-and-outflow-bound.md: full Statement and Proof"
+      ],
+      "external": []
+    },
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-79.proof-contracts.json --strict --items def-size-structured-transport-and-division-kernel,thm-size-structured-positivity-number-and-weighted-moment-identities,ex-half-size-division-numerical-moment-budget --json",
+        "exit_code": 0,
+        "result": "3 selected contracts passed, no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-age-structured-renewal-semigroup-growth-and-data-stability.md --json",
+        "exit_code": 0,
+        "result": "1 proof checked, pass."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-size-structured-transport-and-division-kernel.md items/def-age-structured-renewal-finite-cutoff-model.md items/thm-age-structured-renewal-semigroup-growth-and-data-stability.md items/thm-size-structured-positivity-number-and-weighted-moment-identities.md items/thm-age-structured-renewal-bv-l1-convergence.md items/ex-age-cutoff-versus-outflow-tail-error.md --json",
+        "exit_code": 0,
+        "result": "6 assigned files: 4 proofs passed, 2 definitions not applicable, 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-size-structured-transport-and-division-kernel.md items/def-age-structured-renewal-finite-cutoff-model.md items/thm-age-structured-renewal-semigroup-growth-and-data-stability.md items/thm-size-structured-positivity-number-and-weighted-moment-identities.md items/thm-age-structured-renewal-bv-l1-convergence.md items/ex-age-cutoff-versus-outflow-tail-error.md --json",
+        "exit_code": 0,
+        "result": "6 assigned items checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/finite-smoke.mjs research/numerical-optimization-dynamics-2026-10-16-batch-79.proof-contracts.json --items ex-age-cutoff-versus-outflow-tail-error --json",
+        "exit_code": 0,
+        "result": "cutoff-shift fixture passed: three independent exact cell-mass shifts, bounded numerical evidence only."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-size-structured-transport-and-division-kernel.md items/thm-age-structured-renewal-semigroup-growth-and-data-stability.md items/ex-age-cutoff-versus-outflow-tail-error.md",
+        "exit_code": 0,
+        "result": "3 changed items, 8 numbered steps, 0 defects. Run after the last item edit; later changes were contract/report only."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-79.proof-contracts.json --strict --items def-size-structured-transport-and-division-kernel,def-age-structured-renewal-finite-cutoff-model,thm-age-structured-renewal-semigroup-growth-and-data-stability,thm-size-structured-positivity-number-and-weighted-moment-identities,thm-age-structured-renewal-bv-l1-convergence,ex-age-cutoff-versus-outflow-tail-error,ex-half-size-division-numerical-moment-budget --json",
+        "exit_code": 0,
+        "result": "7 selected contracts passed; 0 errors, 0 warnings. The additional direct consumer was selected only to validate its synchronized supplier quote."
+      }
+    ],
+    "interface_changes": [
+      {
+        "supplier": "def-size-structured-transport-and-division-kernel",
+        "section": "Definition",
+        "change": "Restrict intrinsic IVP assertion to nondegenerate stopped intervals, retain y=X as a singleton path, and specify no-hit convention."
+      }
+    ],
+    "downstream_examinations": [
+      {
+        "supplier": "def-size-structured-transport-and-division-kernel",
+        "id": "alg-size-structured-finite-volume-flux-and-kernel-quadrature",
+        "path": "items/alg-size-structured-finite-volume-flux-and-kernel-quadrature.md",
+        "affected_use": "Definition imports coefficients and daughter kernel, then uses g(x_j), loss rates and K at parent-cell midpoints; it never differentiates a stopped characteristic.",
+        "invalidated_claim": null,
+        "disposition": "unchanged_sound",
+        "minimality": "All rates and kernel hypotheses remain identical; no consumer source edit is necessary."
+      },
+      {
+        "supplier": "def-size-structured-transport-and-division-kernel",
+        "id": "thm-size-structured-positivity-number-and-weighted-moment-identities",
+        "path": "items/thm-size-structured-positivity-number-and-weighted-moment-identities.md",
+        "affected_use": "Statement and step 3.1 construct the extended path on [0,T] and identify its stopped restriction; F1 uses only loss and daughter-kernel hypotheses.",
+        "invalidated_claim": null,
+        "disposition": "unchanged_sound",
+        "minimality": "The proof constructs the extended IVP from quantitative Picard bounds; a singleton stopped path need not have an intrinsic derivative. Only its exact supplier quotation was synchronized."
+      },
+      {
+        "supplier": "def-size-structured-transport-and-division-kernel",
+        "id": "ex-half-size-division-numerical-moment-budget",
+        "path": "items/ex-half-size-division-numerical-moment-budget.md",
+        "affected_use": "F1 and steps 1.1, 3.1 use K_y as daughter production and gamma as parent removal for the occupied size-2 cell.",
+        "invalidated_claim": null,
+        "disposition": "unchanged_sound",
+        "minimality": "The kernel, parent-removal and discrete balance conventions are unchanged. Only its exact supplier quotation was synchronized."
+      }
+    ],
+    "page_examinations": [
+      {
+        "path": "library/numerical-differential-equations-and-stochastic-dynamics/renewal-age-and-size-structured-numerical-methods.md",
+        "affected_use": "Lists the size definition and describes fixed interval, strictly positive growth, absorbing upper boundary and kernel moments.",
+        "disposition": "unchanged_sound",
+        "reason": "The page makes no derivative assertion about a singleton stopped path."
+      }
+    ],
+    "published_consumer_findings": [],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects the report and routes the supplier interface inventory; central certification and any rejudgment remain controller-owned.",
+    "repair_complete": true,
+    "changed_items": [
+      "def-size-structured-transport-and-division-kernel",
+      "thm-age-structured-renewal-semigroup-growth-and-data-stability",
+      "ex-age-cutoff-versus-outflow-tail-error"
+    ],
+    "changed_statement_or_definition_items": [
+      "def-size-structured-transport-and-division-kernel"
+    ],
+    "metadata_repairs": [
+      "Updated the size-definition endpoint boundary and its two exact supplier quotes in the size theorem and half-size example contracts.",
+      "Updated semigroup derivation mirrors for steps 1.1 and 2.1, including the added step 1.1 input to step 2.1. Both metadata edits used acquire/reread/edit/check/release; prior review attribution was preserved."
+    ],
+    "published_ledger_updates": "None proposed: the changed definition has only three direct item consumers, all draft frontier items, and none has an invalidated use. No published item was edited or adjudicated.",
+    "independence": "The repair reviews are this adjudicator's own repair evidence, not independent acceptance of the repairs. Original judge tuples and prior review records were preserved."
+  },
+  "supporting_evidence": {
+    "research/numerical-optimization-dynamics-2026-10-16-batch-79.proof-contracts.json": "72e37fd71bbc176a5e1e84ca0eb4aae9147a5ef001591226eb4d42ab3951cb99"
+  }
+}

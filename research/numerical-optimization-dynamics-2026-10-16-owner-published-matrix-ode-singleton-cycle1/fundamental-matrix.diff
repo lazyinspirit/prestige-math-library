@@ -1,0 +1,45 @@
+--- items/prop-a-fundamental-matrix-is-invertible.md
++++ items/prop-a-fundamental-matrix-is-invertible.md
+@@ -6,10 +6,12 @@
+ origin: session
+ provenance:
+   statement: literature-derived
+-  proof: ai-generated
++  proof: ai-altered
+ deps: [def-variational-equation-along-an-ode-solution,
+        lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval,
+-       thm-algebra-of-derivatives]
++       thm-algebra-of-derivatives,
++       thm-invertible-matrix-theorem,
++       cor-zero-derivative-implies-constant]
+ justified_by: []
+ aliases: []
+ landmark: false
+@@ -47,20 +49,16 @@
+ 
+ [L2] One-variable derivatives obey the product rule entrywise ([[thm-algebra-of-derivatives]]).
+ 
++[L3] A finite square matrix is invertible if and only if its nullspace is zero; this includes the empty matrix ([[thm-invertible-matrix-theorem]]).
++
++[L4] A real function continuous on an interval and differentiable with zero derivative at every interior point is constant on the whole interval, including its endpoints ([[cor-zero-derivative-implies-constant]]).
++
+ ## Proof
+ 
+ **Proof technique:** direct.
+ 
+-1.1 Fix a compact subinterval $[u,v]\subseteq I$ containing $t_0$. By [F1] and [L1] the matrix ODE below has a unique solution. [F1, L1, choose]
++1.1 If $n=0$, every $A(t)$ is the unique empty matrix $I_0$, already invertible; for the remainder assume $n\ge1$. Fix a compact nondegenerate subinterval $[u,v]\subseteq I$ containing $t_0$. Applying [L1] to the transposed equation $(B^T)'=-C^TB^T$, $B(t_0)^T=I_n$, gives a unique solution $B$ on $[u,v]$ of $$B'(t)=-B(t)C(t),\qquad B(t_0)=I_n.$$ [F1, L1, given, construct]
+ 
+-$$B'(t)=-B(t)C(t),\qquad B(t_0)=I_n,$$
++2.1 Entrywise product differentiation from [L2] gives $$\frac{d}{dt}\bigl(B(t)A(t)\bigr)=B'(t)A(t)+B(t)A'(t)=-B(t)C(t)A(t)+B(t)C(t)A(t)=0.$$ Each entry of $B(t)A(t)$ is continuous on $[u,v]$ and has derivative zero in its interior, so [L4] makes every entry constant on $[u,v]$. At $t=t_0$ this constant is $I_nI_n=I_n$, so $B(t)A(t)=I_n$ for all $t\in[u,v]$. [given, L2, L4, step 1.1]
+ 
+-has a unique solution $B:[u,v]\to M_n(\mathbb R)$.
+-
+-2.1 Entrywise product differentiation from [L2] gives the identity below. [given, L2, step 1.1]
+-
+-$$\frac{d}{dt}\bigl(B(t)A(t)\bigr) =B'(t)A(t)+B(t)A'(t) =-B(t)C(t)A(t)+B(t)C(t)A(t)=0.$$
+-
+-Thus $B(t)A(t)$ is constant on $[u,v]$. At $t=t_0$ this constant is $I_nI_n=I_n$, so $B(t)A(t)=I_n$ for all $t\in[u,v]$.
+-
+-3.1 The same calculation applied to $A(t)B(t)$ gives $\frac{d}{dt}(A(t)B(t))=0$ and $A(t_0)B(t_0)=I_n$, hence $A(t)B(t)=I_n$ on $[u,v]$. Therefore $B(t)=A(t)^{-1}$ and $A(t)$ is invertible on $[u,v]$. Since $t\in I$ was arbitrary and lies in some compact subinterval containing $t_0$, every $A(t)$ is invertible on $I$. [given, L2, step 1.1, step 2.1] ∎
++3.1 Fix $t\in[u,v]$. Step 2.1 gives $B(t)A(t)=I_n$, so $A(t)x=0$ implies $x=B(t)A(t)x=0$. By [L3], the square matrix $A(t)$ has a two-sided inverse $D$. Then $B(t)=B(t)(A(t)D)=(B(t)A(t))D=D$, and therefore $A(t)B(t)=I_n$ and $B(t)=A(t)^{-1}$. Thus $A(t)$ is invertible on $[u,v]$. For any $t\in I$ different from $t_0$, choose the compact nondegenerate segment between $t$ and $t_0$ in $I$; at $t=t_0$, $A(t_0)=I_n$ is already invertible. Hence every $A(t)$ is invertible on $I$. [given, L3, step 1.1, step 2.1, algebra] ∎

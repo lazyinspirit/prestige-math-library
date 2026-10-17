@@ -1,0 +1,1979 @@
+{
+  "version": 1,
+  "level": "numerical-optimization-dynamics-2026-10-16-batch-47",
+  "scope": [
+    "def-xd-finite-column-generator",
+    "lem-xd-finite-matrix-exponential-series",
+    "lem-xd-geometric-poisson-tail-bound",
+    "def-xd-countable-nonexplosive-ctmc",
+    "def-xd-countable-l1-distance",
+    "lem-xd-uniformized-matrix-is-stochastic",
+    "def-xd-finite-state-projection-and-cemetery-lift",
+    "thm-xd-finite-generator-master-equation-uniformization",
+    "alg-xd-budgeted-uniformization-accumulation",
+    "thm-xd-uniformization-truncation-and-error",
+    "thm-xd-finite-state-projection-loss-and-observable-bound",
+    "alg-xd-finite-budget-adaptive-projection",
+    "thm-xd-finite-budget-adaptive-projection-soundness",
+    "ex-xd-two-state-gating-uniformization",
+    "ex-xd-birth-death-poisson-tail",
+    "ex-xd-immigration-death-finite-state-projection",
+    "ex-xd-equal-mean-distinct-probability-vectors"
+  ],
+  "contracts": {
+    "def-xd-finite-column-generator": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes n≥1, so the state set is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Definition: zero exit rates and Q=0 satisfy the nonnegative off-diagonal and zero-column-sum conditions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: Definition: for n=1 the sole column-sum condition forces the sole entry to be zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Definition: absorbing columns with zero exit rate are explicitly allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This definition has no time or scalar interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-xd-finite-matrix-exponential-series": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-induced-matrix-p-norm",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb{Q}$ with $p\\ge 1$ and let $m,n,q\\in\\mathbb{N}$, with the\ninduced $p$-norms of [[def-induced-matrix-p-norm]].\n\n1. **Compatibility.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and every\n   $x\\in\\mathbb{R}^{n}$,\n   $$\\lVert Ax\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert x\\rVert_p.$$\n2. **Submultiplicativity.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and\n   $B\\in M_{n\\times q}(\\mathbb{R})$,\n   $$\\lVert AB\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert B\\rVert_p.$$\n3. **Normalisation.** For every $n\\ge 1$,\n   $$\\lVert I_n\\rVert_p=1,$$\n   where $I_n$ is the identity matrix of [[def-matrix-product-and-identity-matrix]];\n   at $n=0$ the unique empty matrix $I_0\\in M_0(\\mathbb{R})$ has\n   $\\lVert I_0\\rVert_p=0$, the convention of [[def-induced-matrix-p-norm]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-exponential-series-has-infinite-radius",
+          "source_section": "Statement",
+          "quote": "For every real $x$, the series $\\sum_{n\\ge0}x^n/\\iota(n!)$ converges absolutely. Its power-series radius is therefore $+\\infty$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $M=\\|A\\|_1$. For any $T>0$ and $|t|\\le T$, [F1] gives $\\|t^kA^k/k!\\|_1\\le (TM)^k/k!$. The majorant series converges by [F2], so the matrix series is absolutely and uniformly Cauchy on $[-T,T]$ and defines $e^{tA}$. Since $T$ was arbitrary, it converges locally uniformly.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Fix $c\\in\\mathbb R$ and choose $R>|c|$. For $|h|<R-|c|$ and $k\\ge1$, the finite factorization $(c+h)^k-c^k=h\\sum_{j=0}^{k-1}(c+h)^{k-1-j}c^j$ bounds both the norm of the $k$th matrix-series difference quotient and the norm of the $k$th proposed derivative term by $M(MR)^{k-1}/(k-1)!$. The sum of these bounds converges by [F2], so both tails are uniformly small; each finite partial sum is a matrix polynomial whose difference quotient tends to its ordinary derivative. Taking first a sufficiently large partial sum and then $h\\to0$ proves differentiability and gives $\\frac{d}{dt}e^{tA}|_{t=c}=\\sum_{k\\ge1}A^kc^{k-1}/(k-1)!=Ae^{cA}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Every term in the derivative series commutes with $A$, so the same sum equals $e^{cA}A$. The $k=0$ term in the defining series gives $e^{0A}=I$.",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For commuting $A,B$, the double series for $e^Ae^B$ is absolutely convergent because its term norms are bounded by $\\|A\\|_1^m\\|B\\|_1^n/(m!n!)$, whose double sum is finite by [F2]. Regroup by $r=m+n$; commutation and the binomial formula give $\\sum_{m+n=r}A^mB^n/(m!n!)=(A+B)^r/r!$. Summing over $r$ proves $e^Ae^B=e^{A+B}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1–2.1 apply to n=0 because the empty matrix space has one element and induced 1-norm zero; the series, derivative and product identities are then the unique empty matrix identities."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1–1.3 include A=0 and t=0 in the convergence and derivative formulas."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The proof uses finite matrix coordinates and the induced norm for every dimension, including n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1–2.1 allow zero matrices and commuting matrices without an invertibility hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Step 1.2 proves differentiability at every real c; step 2.1 includes t=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-xd-geometric-poisson-tail-bound": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "**The factorial.** By the recursion theorem ([[thm-recursion]]) applied to the\nset $\\mathbb{N}\\times\\mathbb{N}$, the starting element $(0,1)$ and the function\n$f(k, v) = (\\sigma(k),\\, v \\cdot \\sigma(k))$, and by the same induction on the\nfirst coordinate as in [[def-nat-finite-sum-and-product]], there is a unique\n$F : \\mathbb{N} \\to \\mathbb{N}$ with\n\n$$F(0) = 1, \\qquad F(\\sigma(n)) = F(n)\\cdot\\sigma(n) \\quad (n \\in \\mathbb{N}).$$\n\nWe write $n! := F(n)$. Thus $0! = 1$, $1! = 0!\\cdot 1 = 1$, $2! = 1!\\cdot 2 = 2$,\n$3! = 6$, $4! = 24$, $5! = 120$, $6! = 720$.\n\n**$0! = 1$ is the base clause of this recursion**, not a convention imported from\nelsewhere. Nothing about empty products is presupposed; the agreement with the\nempty product is proved below, in clause (a), rather than assumed.\n\n**Truncated difference.** Throughout, $n - k$ is the operation fixed in\n[[def-nat-finite-sum-and-product]]: the unique $j$ with $k + j = n$ when\n$k \\le n$, and $0$ when $n < k$.\n\n**The falling factorial.** For $n \\in \\mathbb{N}$ define $n^{\\underline{k}}$ by\nrecursion on $k$, by the recursion theorem applied to\n$\\mathbb{N}\\times\\mathbb{N}$ with starting element $(0,1)$ and\n$f(k, v) = (\\sigma(k),\\, v \\cdot (n-k))$:\n\n$$n^{\\underline{0}} = 1, \\qquad n^{\\underline{\\sigma(k)}} = n^{\\underline{k}}\\cdot(n-k) .$$\n\nSo $n^{\\underline{1}} = 1\\cdot(n-0) = n$ and $n^{\\underline{2}} = n\\,(n-1)$, and\nfor $k \\le n$ the value is the product $n(n-1)\\cdots(n-k+1)$ of the $k$ topmost\nfactors.\n\n**Four facts, proved here because the page uses each of them.**\n\n**(a) The factorial is the product of the first $n$ positive naturals.**\n$n! = \\prod_{j<n}\\sigma(j) = \\prod_{j<n}(j+1)$, the $\\mathbb{N}$-valued product of\n[[def-nat-finite-sum-and-product]]. Induction ([[thm-induction-principle]]): at\n$n = 0$ both sides are $1$, the empty product and the base clause agreeing; and\n$\\prod_{j<\\sigma(n)}\\sigma(j) = \\big(\\prod_{j<n}\\sigma(j)\\big)\\cdot\\sigma(n) = n!\\cdot\\sigma(n) = \\sigma(n)!$.\n**So the empty-product reading and the base-clause reading are the same reading**,\nand neither was assumed.\n\n**(b) $n! \\ne 0$, and $\\iota(n!) = \\prod^{\\mathbb{R}}_{j<n}\\iota(j+1)$.** For the\nfirst, $0! = 1 \\ne 0$ ([[thm-omega-is-peano-system]]) and\n$\\sigma(n)! = n!\\cdot\\sigma(n)$ is a product of two nonzero naturals, which is\nnonzero: if $xy = 0$ with $y \\ne 0$ then $xy = 0\\cdot y$\n([[lem-nat-mult-identity]]) and cancellation gives $x = 0$\n([[lem-nat-mult-cancellative]]). So $n! \\ne 0$ for every $n$ by induction. For the second, apply the bridge clause\n6 of that lemma to clause (a) above. This is what makes the factorial of this\npage and the real-valued product $\\prod_{j<n}(j+1)$ used elsewhere in the library\n**one object seen twice**, rather than two unrelated notions.\n\n**(c) $n^{\\underline{k}}\\cdot(n-k)! = n!$ for $k \\le n$.** Induction on $k$, for\nall $n$ at once. At $k = 0$ this reads $1 \\cdot n! = n!$. Assume it at $k$ and\nlet $\\sigma(k) \\le n$; then $k \\le n$, and writing $d := n - k$ we have\n$k + d = n$ and $d \\ne 0$, since $k + 0 = k \\ne n$; so $d = \\sigma(e)$ for a\nunique $e$ ([[lem-nat-nonzero-is-successor]]), and $\\sigma(k) + e = n$, that is\n$e = n - \\sigma(k)$ ([[lem-nat-add-cancellative]]). Therefore\n$n^{\\underline{\\sigma(k)}}\\cdot\\big(n-\\sigma(k)\\big)! = n^{\\underline{k}}\\cdot(n-k)\\cdot e! = n^{\\underline{k}}\\cdot\\big(e!\\cdot\\sigma(e)\\big) = n^{\\underline{k}}\\cdot\\sigma(e)! = n^{\\underline{k}}\\cdot(n-k)! = n!$,\nusing commutativity and associativity of multiplication\n([[lem-nat-mult-associative]], [[lem-nat-mult-commutative]]) and the recursion\nclause for the factorial.\n\n**(d) Boundary values.** $n^{\\underline{0}} = 1$ for every $n$, by the base\nclause; $n^{\\underline{n}} = n!$, since clause (c) at $k = n$ gives\n$n^{\\underline{n}}\\cdot 0! = n!$ and $0! = 1$; and\n$n^{\\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives\n$n^{\\underline{\\sigma(n)}} = n^{\\underline{n}}\\cdot 0 = 0$, the clause\n$x \\cdot 0 = 0$ being definitional ([[def-nat-multiplication]]), and if\n$n^{\\underline{k}} = 0$ then\n$n^{\\underline{\\sigma(k)}} = 0$ as well, so $n^{\\underline{k}} = 0$ for every\n$k \\ge \\sigma(n)$ by induction.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If $\\mu=0$, [F1] gives $N=0$ almost surely and $K\\ge0$, so the tail is zero. Now suppose $\\mu>0$ and put $w_k=e^{-\\mu}\\mu^k/k!$ and $\\rho=\\mu/(K+2)$. The hypothesis gives $0<\\rho<1$, and [F1]–[F3] yield $w_{k+1}/w_k=\\mu/(k+1)\\le\\rho$ for every $k\\ge K+1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Iterating the ratio bound gives $w_{K+1+j}\\le w_{K+1}\\rho^j$ for each integer $j\\ge0$.",
+          "inputs": [
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F2] and step 2.1, $\\tau_K(\\mu)=\\sum_{j\\ge0}w_{K+1+j}\\le w_{K+1}\\sum_{j\\ge0}\\rho^j=w_{K+1}/(1-\\rho)$; substituting the values of $w_{K+1}$ and $\\rho$ proves the stated bound.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Statement requires integer K≥0 and does not use an empty state set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 proves the μ=0 tail is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1–2.1 cover K=0 and all larger integers."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 handles the degenerate zero-parameter law separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Statement treats μ=0 and requires the strict bound μ<K+2 for the positive-μ branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-xd-countable-nonexplosive-ctmc": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition requires a nonempty state space S."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Definition specifies that λ(x)=0 means the chain stays at x."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: A singleton S is allowed; its only possible state change rate is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Absorbing states and the all-zero rate system are explicitly permitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Definition includes K₀=I and the holding law at elapsed time t=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-xd-countable-l1-distance": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: Definition permits S=∅; the sum over the empty set is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The defining sum is zero for the zero functions a=b=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: For a singleton state space the distance is the single absolute coordinate difference."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: The equal-mass-function case gives zero termwise."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This definition has no time or interval parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-xd-uniformized-matrix-is-stochastic": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-xd-finite-column-generator",
+          "source_section": "Definition",
+          "quote": "Let $S=\\{0,1,\\ldots,n-1\\}$ with $n\\ge1$. Identify its real matrices with $M_n(\\mathbb R)$, the finite matrix space with row and column indices in $S$ from [[def-matrix-space]], and use the matrix-product and identity conventions of [[def-matrix-product-and-identity-matrix]]. A **finite column generator** on $S$ is a real matrix $Q=(q_{ij})\\in M_n(\\mathbb R)$ satisfying\n\n$$q_{ij}\\ge0\\quad(i\\ne j),\\qquad \\sum_{i<n}q_{ij}=0\\quad(j<n).$$\n\nThe column index $j$ is the source state and the row index $i$ is the destination state: for $i\\ne j$, $q_{ij}$ is the transition rate from $j$ to $i$. The exit rate from $j$ is\n\n$$r_j:=-q_{jj}=\\sum_{i\\ne j}q_{ij}\\ge0.$$\n\nA **column probability vector** is $p\\in\\mathbb R^n$ with $p_i\\ge0$ for each $i$ and $\\sum_{i<n}p_i=1$. A **subprobability vector** has the same coordinatewise nonnegativity and has coordinate sum at most one. These conventions are used throughout this page.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Suppose $\\nu>0$. For $i\\ne j$, $P_{ij}=q_{ij}/\\nu\\ge0$ by [F1]. For a diagonal entry, $P_{jj}=1-r_j/\\nu\\ge0$ because $r_j\\le\\nu$. Thus every entry is nonnegative.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For each source column $j$, [F1] gives $\\sum_iP_{ij}=\\sum_i(\\delta_{ij}+q_{ij}/\\nu)=1+\\nu^{-1}\\sum_iq_{ij}=1$. Hence $P$ is column stochastic.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $\\nu=0$, the bound $0\\le r_j\\le\\nu$ gives $r_j=0$ for every $j$. Each finite sum $r_j=\\sum_{i\\ne j}q_{ij}$ consists of nonnegative terms, so each off-diagonal entry in column $j$ is zero; the column-sum condition then gives $q_{jj}=0$. Therefore $Q=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Its finite generator convention requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 proves ν=0 forces Q=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For n=1 the generator has Q=0 and P=[1] whenever ν>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 handles the zero generator/rate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 allows ν equal to the maximal exit rate, including zero diagonal entries in P."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-xd-finite-state-projection-and-cemetery-lift": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition requires F to be finite and nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Definition assigns τ_F=0 when X₀ is outside F and includes initial cemetery mass p₀(S\\F)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: The construction works for a singleton F; its single finite column sends its exit rate to the cemetery."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: If no rate exits F, the cemetery row receives zero rate; the absorbing cemetery column remains zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Definition specifies Y₀ and the initial killed and cemetery masses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-xd-finite-generator-master-equation-uniformization": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-xd-finite-column-generator",
+          "source_section": "Definition",
+          "quote": "Let $S=\\{0,1,\\ldots,n-1\\}$ with $n\\ge1$. Identify its real matrices with $M_n(\\mathbb R)$, the finite matrix space with row and column indices in $S$ from [[def-matrix-space]], and use the matrix-product and identity conventions of [[def-matrix-product-and-identity-matrix]]. A **finite column generator** on $S$ is a real matrix $Q=(q_{ij})\\in M_n(\\mathbb R)$ satisfying\n\n$$q_{ij}\\ge0\\quad(i\\ne j),\\qquad \\sum_{i<n}q_{ij}=0\\quad(j<n).$$\n\nThe column index $j$ is the source state and the row index $i$ is the destination state: for $i\\ne j$, $q_{ij}$ is the transition rate from $j$ to $i$. The exit rate from $j$ is\n\n$$r_j:=-q_{jj}=\\sum_{i\\ne j}q_{ij}\\ge0.$$\n\nA **column probability vector** is $p\\in\\mathbb R^n$ with $p_i\\ge0$ for each $i$ and $\\sum_{i<n}p_i=1$. A **subprobability vector** has the same coordinatewise nonnegativity and has coordinate sum at most one. These conventions are used throughout this page.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-xd-uniformized-matrix-is-stochastic",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a finite column generator and let $\\nu\\ge\\max_{j<n}r_j$. If $\\nu>0$, then\n\n$$P:=I+Q/\\nu$$\n\nhas nonnegative entries and every column sums to one. If $\\nu=0$, then $Q=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-xd-finite-matrix-exponential-series",
+          "source_section": "Statement",
+          "quote": "For a finite real square matrix $A$, define\n\n$$e^{tA}:=\\sum_{k=0}^{\\infty}\\frac{t^kA^k}{k!}.$$\n\nThis series converges absolutely and uniformly for $t$ in every bounded interval. It is differentiable with $\\frac{d}{dt}e^{tA}=Ae^{tA}=e^{tA}A$ and $e^{0A}=I$. If finite square matrices $A$ and $B$ commute, then $e^Ae^B=e^{A+B}$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Suppose $\\nu>0$. By [F2], $P$ is nonnegative and column stochastic. If $x$ is a column probability vector, then $Px$ is nonnegative and $\\sum_i(Px)_i=\\sum_j(\\sum_iP_{ij})x_j=\\sum_jx_j=1$. Induction gives that $P^kp_0$ is a probability vector for every $k\\ge0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "By [F3] and the matrix series of [F5], the uniformization sum equals $e^{-\\nu t}e^{\\nu tP}p_0$. The power series gives $e^{-\\nu tI}=e^{-\\nu t}I$; since $-\\nu tI$ commutes with $\\nu tP$, [F5] gives $e^{-\\nu tI}e^{\\nu tP}=e^{\\nu t(P-I)}=e^{tQ}$ using $Q=\\nu(P-I)$. This proves the displayed identity.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "By [F5], $p(t)=e^{tQ}p_0$ has derivative $Qe^{tQ}p_0=Qp(t)$ and initial value $p_0$.",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "1.4",
+          "claim": "Let $u$ be any other differentiable solution with the same initial vector and put $z(t)=e^{-tQ}u(t)$. The product rule [F7], the equation $u'=Qu$, and commutation of $Q$ with $e^{-tQ}$ from [F5] give $z'(t)=0$. If $t>0$, [F6] applied to each coordinate of $z$ on $[0,t]$ gives $z(t)=z(0)=p_0$; if $t=0$ this follows from the initial value directly. Multiplying by $e^{tQ}$ and using [F5] gives $u(t)=e^{tQ}p_0$. Thus the solution is unique.",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The weights in [F3] at parameter $\\nu t$ sum to one by [F4]. Hence the nonnegative weighted sum of the probability vectors from step 1.1 is itself a probability vector.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $\\nu=0$, [F2] gives $Q=0$. The constant function $p(t)=p_0$ solves the equation. The uniqueness argument in step 1.4 applied with $Q=0$ shows that every solution with this initial value equals it. This proves the zero-rate case.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite generator definition requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 3.1 proves ν=0 implies Q=0 and p(t)=p₀."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Every argument is finite-dimensional and includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Step 3.1 and the ν=0 clause cover the zero generator."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The statement includes t=0; steps 1.3 and 3.1 give the initial law."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-xd-budgeted-uniformization-accumulation": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Inputs include a finite generator with n≥1 and a probability vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Definition returns (p₀,0,0) when ν=0 or t=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: B=1 permits only K=0 when m=1; the finite search returns the first term or budget-exhausted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: For Q=0, P=I; the same finite truncation and tail status rules apply."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Procedure handles t=0, ν=0, and 0<μ≤1 after time splitting."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The K search is over an explicitly finite list and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-xd-uniformization-truncation-and-error": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-xd-uniformized-matrix-is-stochastic",
+          "source_section": "Statement",
+          "quote": "has nonnegative entries and every column sums to one. If $\\nu=0$, then $Q=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-xd-finite-generator-master-equation-uniformization",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be an $n\\times n$ finite column generator, let $p_0$ be a column probability vector, and let $t\\ge0$. The unique differentiable solution of\n\n$$p'(t)=Qp(t),\\qquad p(0)=p_0,$$\n\nis $p(t)=e^{tQ}p_0$. If $\\nu>0$ and $\\nu\\ge\\max_jr_j$, put $P=I+Q/\\nu$; then\n\n$$p(t)=\\sum_{k=0}^{\\infty}e^{-\\nu t}\\frac{(\\nu t)^k}{k!}P^kp_0.$$\n\nEach term $P^kp_0$ is a probability vector, and the displayed Poisson mixture is a probability vector. If $\\nu=0$, then $Q=0$ and $p(t)=p_0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-xd-geometric-poisson-tail-bound",
+          "source_section": "Statement",
+          "quote": "For $N\\sim\\operatorname{Pois}(\\mu)$ with $\\mu\\ge0$ and integer $K\\ge0$, write $\\tau_K(\\mu):=\\mathbb P(N>K)$. If $\\mu=0$, then $\\tau_K(\\mu)=0$. If $\\mu>0$ and $\\mu<K+2$, then\n\n$$\\tau_K(\\mu)\\le \\frac{e^{-\\mu}\\mu^{K+1}}{(K+1)!\\left(1-\\mu/(K+2)\\right)}.$$\n\nThe right side is a geometric majorant computed from a Poisson mass, not a floating-point subtraction of a rounded partial sum from one.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-induced-matrix-p-norm",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb{N}$, let $p\\in\\mathbb{Q}$ with $p\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$ be a real matrix\n([[def-matrix-product-and-identity-matrix]]), regarded as the linear map\n$x\\mapsto Ax$ from $\\mathbb{R}^{n}$ to $\\mathbb{R}^{m}$ with the published\n$p$-norms ([[def-p-norms-on-rn]]). The **matrix $p$-norm induced by**\n$\\lVert\\cdot\\rVert_{p}$ is",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\in\\mathbb{N}$ with $m\\ge 1$ and $n\\ge 1$, and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb{R})$, with the induced $1$-norm and the\nseparately defined induced $\\infty$-norm of\n[[def-induced-matrix-p-norm]].\n\n1. **Maximum column sum.** $\\lVert A\\rVert_1=\\max_{j<n}\\sum_{i<m}|a_{ij}|$.\n2. **Maximum row sum.** $\\lVert A\\rVert_\\infty=\\max_{i<m}\\sum_{j<n}|a_{ij}|$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+          "source_section": "Statement",
+          "quote": "Let $p\\in\\mathbb{Q}$ with $p\\ge 1$ and let $m,n,q\\in\\mathbb{N}$, with the\ninduced $p$-norms of [[def-induced-matrix-p-norm]].\n\n1. **Compatibility.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and every\n   $x\\in\\mathbb{R}^{n}$,\n   $$\\lVert Ax\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert x\\rVert_p.$$\n2. **Submultiplicativity.** For every $A\\in M_{m\\times n}(\\mathbb{R})$ and\n   $B\\in M_{n\\times q}(\\mathbb{R})$,\n   $$\\lVert AB\\rVert_p\\;\\le\\;\\lVert A\\rVert_p\\,\\lVert B\\rVert_p.$$\n3. **Normalisation.** For every $n\\ge 1$,\n   $$\\lVert I_n\\rVert_p=1,$$\n   where $I_n$ is the identity matrix of [[def-matrix-product-and-identity-matrix]];\n   at $n=0$ the unique empty matrix $I_0\\in M_0(\\mathbb{R})$ has\n   $\\lVert I_0\\rVert_p=0$, the convention of [[def-induced-matrix-p-norm]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-xd-budgeted-uniformization-accumulation",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite column generator $Q$, a column probability vector $p_0$, $t\\ge0$, an admissible rate $\\nu\\ge\\max_jr_j$, a positive tail budget $\\varepsilon$, a positive integer total-term cap $B$, and either exact real arithmetic or a validated arithmetic backend. In a rounded execution, the backend must certify the scalar control decisions defining $m$ and $\\mu$, each finite tail-budget comparison, and an outward upper bound $T\\ge mG_K(\\mu)$; it must also return a certified $\\ell^1$ error bound $E_{\\rm alg}:=\\|\\widehat p-R_{\\mu,K}^mp_0\\|_1$ for its computed vector. The vector bound includes any arithmetic error from the weights, time split, and matrix-free $P$ actions. If any scalar or vector certificate is unavailable, return `certificate-unavailable`.\n\n**Outputs.** Return $(p_0,0,0)$ when $\\nu=0$ or $t=0$. Otherwise return `budget-exhausted` or `certificate-unavailable`, or an approximate vector $\\widehat p$ and certified bounds $(T,E_{\\rm alg})$ for which $\\|p(t)-\\widehat p\\|_1\\le T+E_{\\rm alg}$. Here $T\\ge mG_K(\\mu)$ is an outward-certified Poisson-tail upper bound and $E_{\\rm alg}$ bounds the arithmetic/algebraic error relative to the exact truncated accumulation. In exact real arithmetic, $T=mG_K(\\mu)$ and $E_{\\rm alg}=0$.\n\n**Procedure.** For $\\nu t>0$, set $m=\\lceil\\nu t\\rceil$ and $\\mu=\\nu t/m$, so $0<\\mu\\le1$. A rounded backend must certify these values and inequalities; if it cannot, return `certificate-unavailable`. If $m>B$, return `budget-exhausted`. Set $K_{\\max}=\\lfloor B/m\\rfloor-1$. Search the finite list $K=0,1,\\ldots,K_{\\max}$ for a member satisfying\n\n$$G_K(\\mu):=\\frac{e^{-\\mu}\\mu^{K+1}}{(K+1)!\\left(1-\\mu/(K+2)\\right)}\\le\\varepsilon/m.$$\n\nIn rounded arithmetic, accept a candidate only when a validated upper enclosure proves the displayed inequality, and set $T$ to a validated upper bound for $mG_K(\\mu)$. If no candidate works, return `budget-exhausted` when the comparisons certify that every candidate fails, and `certificate-unavailable` when they do not decide the search. In exact arithmetic set $T=mG_K(\\mu)$. Set $P=I+Q/\\nu$ and $x_0=p_0$. For each substep $j=1,\\ldots,m$, initialize $v_0=x_{j-1}$, $w_0=e^{-\\mu}$, and $x_j=w_0v_0$. For $k=0,\\ldots,K-1$, update\n\n$$v_{k+1}=Pv_k,\\qquad w_{k+1}=w_k\\frac{\\mu}{k+1},\\qquad x_j\\leftarrow x_j+w_{k+1}v_{k+1}.$$\n\nThese $P$ actions use the exact operator-application interface of [[def-matrix-free-access-model-for-krylov-methods]]: the routine supplies $v\\mapsto Pv$ and vector additions and scalar multiples, without requiring stored matrix entries. No CSR representation, operation-count estimate, or convergence claim is part of this procedure. The exact term count is $m(K+1)\\le B$ and the certified tail bound satisfies $T\\le\\varepsilon$. Never replace a tail certificate by floating-point $1-\\sum_{k\\le K}w_k$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-xd-finite-matrix-exponential-series",
+          "source_section": "Statement",
+          "quote": "For a finite real square matrix $A$, define\n\n$$e^{tA}:=\\sum_{k=0}^{\\infty}\\frac{t^kA^k}{k!}.$$\n\nThis series converges absolutely and uniformly for $t$ in every bounded interval. It is differentiable with $\\frac{d}{dt}e^{tA}=Ae^{tA}=e^{tA}A$ and $e^{0A}=I$. If finite square matrices $A$ and $B$ commute, then $e^Ae^B=e^{A+B}$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For any $\\mu>0$, set $S_\\mu=e^{\\mu Q/\\nu}=e^{-\\mu}e^{\\mu P}$ and $R_{\\mu,K}=\\sum_{k=0}^K w_k(\\mu)P^k$. By [F1], each $P^k$ is nonnegative and column stochastic; [F2] and [F3] give $S_\\mu=\\sum_{k\\ge0}w_k(\\mu)P^k$ with nonnegative weights summing to one. Thus $R_{\\mu,K}$ is nonnegative with common column sum $s_K:=\\sum_{k=0}^K w_k(\\mu)\\le1$, and $S_\\mu-R_{\\mu,K}$ is nonnegative with common column sum $\\tau_K(\\mu)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The induced norm formula [F6] gives $\\|S_\\mu\\|_1=1$, $\\|R_{\\mu,K}\\|_1=s_K$, and $\\|S_\\mu-R_{\\mu,K}\\|_1=\\tau_K(\\mu)$. If $\\lambda=\\nu t=0$, only the $k=0$ Poisson weight is nonzero, so $p(t)=u_K(t)=p_0$ and the omitted mass is zero. If $\\lambda>0$, apply step 1.1 with $\\mu=\\lambda$: $(S_\\lambda-R_{\\lambda,K})p_0$ is nonnegative and its coordinate sum is $\\tau_K(\\lambda)$; by [F5], the exact one-series $\\ell^1$ omitted mass is therefore exactly the scalar Poisson tail.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the time-split algorithm, $0<\\mu\\le1$ and $K\\ge0$, so $\\mu<K+2$ and [F4] gives $\\tau_K(\\mu)\\le G_K(\\mu)$. For $m$ substeps the telescoping identity $S_\\mu^m-R_{\\mu,K}^m=\\sum_{j=0}^{m-1}S_\\mu^{m-1-j}(S_\\mu-R_{\\mu,K})R_{\\mu,K}^j$, [F5]–[F6], and step 2.1 give $\\|S_\\mu^m-R_{\\mu,K}^m\\|_1\\le m\\tau_K(\\mu)\\le mG_K(\\mu)$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Every term in the telescoping identity is nonnegative, so the exact vector error on $p_0$ is nonnegative. Each column sum of $S_\\mu^m$ is one and each column sum of $R_{\\mu,K}^m$ is $s_K^m$; hence its $\\ell^1$ mass is exactly $1-s_K^m=1-(1-\\tau_K(\\mu))^m\\le m\\tau_K(\\mu)$. This proves the exact time-split lost-mass identity and the preceding error bound.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Since $m\\mu=\\nu t$, [F8] gives $S_\\mu^m=e^{tQ}$ and [F2] gives $S_\\mu^mp_0=p(t)$, while [F7] identifies the exact truncated output as $R_{\\mu,K}^mp_0$. The triangle inequality for the vector $1$-norm [F5] therefore yields $\\|p(t)-\\widehat u\\|_1\\le\\|p(t)-R_{\\mu,K}^mp_0\\|_1+\\|R_{\\mu,K}^mp_0-\\widehat u\\|_1\\le mG_K(\\mu)+E_{\\rm alg}\\le T+E_{\\rm alg}$ when the validated upper bound $T$ is supplied. If $\\nu t=0$, the algorithm returns $p_0$ and both error terms are zero.",
+          "inputs": [
+            "F2",
+            "F5",
+            "F7",
+            "F8",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite generator definition requires n≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 handles λ=νt=0; the algorithm and theorem return p₀ with zero error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The formulas include K=0 and m=1 without an extra-state assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If Q=0, P=I and all omitted mass is exactly the scalar Poisson tail stated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Steps 2.1 and 5.1 handle λ=0; for λ>0 the split parameter satisfies 0<μ≤1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument assumes its stated inputs and makes no arbitrary selection from a nonempty family; it invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-xd-finite-state-projection-loss-and-observable-bound": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-xd-countable-nonexplosive-ctmc",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a nonempty at most countable state space, and let $q(x,y)\\ge0$ be a finite transition rate for each pair $x,y\\in S$ with $x\\ne y$. Require the total exit rate\n\n$$\\lambda(x):=\\sum_{y\\ne x}q(x,y)$$\n\nto be finite for every $x$. The associated **column rate matrix convention** is $Q_{yx}=q(x,y)$ for $y\\ne x$ and $Q_{xx}=-\\lambda(x)$; thus the source state indexes the column. No finite-dimensional matrix is asserted for an infinite $S$.\n\nA **given time-homogeneous pure-jump Markov chain with rates $q$** is a process $X=(X_t)_{t\\ge0}$ with values in $S$ whose conditional future law given its history depends only on its present state and elapsed time, and whose paths are constant between successive jumps. Its transition kernels $K_t$ depend only on elapsed time, satisfy $K_0=I$, and obey $K_{s+t}=K_sK_t$ using the composition $(K_sK_t)(x,A):=\\int_S K_t(z,A)\\,K_s(x,dz)$ of [[def-composition-of-probability-kernels]]. At state $x$ with $\\lambda(x)>0$, its holding time has survival $e^{-\\lambda(x)t}$ and its next state is $y\\ne x$ with probability $q(x,y)/\\lambda(x)$, independently of that holding time; at $\\lambda(x)=0$ it stays at $x$. It is **nonexplosive** when almost surely it has only finitely many state changes on every bounded time interval.\n\nThe chain and nonexplosion are input hypotheses in this item and in the projection results below. This definition does not construct a chain from an arbitrary countable rate matrix and proves no general nonexplosion claim.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-xd-finite-state-projection-and-cemetery-lift",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a given nonexplosive chain as in [[def-xd-countable-nonexplosive-ctmc]], with initial law $p_0$ on $S$, and let $F\\subseteq S$ be finite and nonempty. Its first exit time from $F$ is\n\n$$\\tau_F:=\\inf\\{s\\ge0:X_s\\notin F\\},$$\n\nwith $\\tau_F=0$ when $X_0\\notin F$. Adjoin a new state $\\dagger\\notin S$ and define the **killed projection** $Y_t=X_t$ for $t<\\tau_F$ and $Y_t=\\dagger$ for $t\\ge\\tau_F$. The **killed mass vector** is $u_F(t,x):=\\mathbb P(Y_t=x)$ for $x\\in F$, and the **cemetery mass** is $c_F(t):=\\mathbb P(Y_t=\\dagger)$. Initially, $u_F(0,x)=p_0(x)$ for $x\\in F$ and $c_F(0)=p_0(S\\setminus F)$.\n\nFor $x\\in F$ let $\\lambda(x)=\\sum_{y\\ne x}q(x,y)$. The killed principal subgenerator on $F$ has entries $(Q_F)_{y x}=q(x,y)$ for $y\\ne x$ in $F$ and $(Q_F)_{x x}=-\\lambda(x)$; its column sum is $-\\sum_{y\\notin F}q(x,y)$. The **cemetery lift** is the finite matrix $\\widetilde Q_F$ on $F\\cup\\{\\dagger\\}$ with these same entries on $F$, with\n\n$$\\widetilde Q_{\\dagger x}=\\lambda(x)-\\sum_{\\substack{y\\in F\\\\y\\ne x}}q(x,y)=\\sum_{y\\notin F}q(x,y)\\quad(x\\in F),\\qquad \\widetilde Q_{x\\dagger}=0\\quad(x\\in F),\\qquad \\widetilde Q_{\\dagger\\dagger}=0.$$\n\nEvery column of $\\widetilde Q_F$ sums to zero and its off-diagonal entries are nonnegative, so it is a finite column generator in the sense of [[def-xd-finite-column-generator]]. The cemetery state is absorbing; trajectories that return to $F$ after their first exit remain at $\\dagger$ in this projection.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-xd-finite-generator-master-equation-uniformization",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be an $n\\times n$ finite column generator, let $p_0$ be a column probability vector, and let $t\\ge0$. The unique differentiable solution of\n\n$$p'(t)=Qp(t),\\qquad p(0)=p_0,$$\n\nis $p(t)=e^{tQ}p_0$. If $\\nu>0$ and $\\nu\\ge\\max_jr_j$, put $P=I+Q/\\nu$; then\n\n$$p(t)=\\sum_{k=0}^{\\infty}e^{-\\nu t}\\frac{(\\nu t)^k}{k!}P^kp_0.$$\n\nEach term $P^kp_0$ is a probability vector, and the displayed Poisson mixture is a probability vector. If $\\nu=0$, then $Q=0$ and $p(t)=p_0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-xd-countable-l1-distance",
+          "source_section": "Definition",
+          "quote": "Let $S$ be at most countable. For nonnegative functions $a,b:S\\to[0,\\infty)$ with finite total masses, define\n\n$$\\|a-b\\|_{\\ell^1(S)}:=\\sum_{x\\in S}|a(x)-b(x)|.$$\n\nFor a nonnegative family, $\\sum_{x\\in S}$ means the supremum of its finite subsums; this agrees with the ordinary series under any enumeration of $S$. The distance is finite because $|a(x)-b(x)|\\le a(x)+b(x)$ termwise, so $\\|a-b\\|_{\\ell^1(S)}\\le\\sum_xa(x)+\\sum_xb(x)$. In particular it is defined for probability and subprobability mass functions.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$1+x\\le\\exp(x).$$\nConsequently, if $0\\le p\\le1$ and $m\\in\\mathbb N$, then\n$$ (1-p)^m\\le\\exp(-mp). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-exponential-series-has-infinite-radius",
+          "source_section": "Statement",
+          "quote": "For every real $x$, the series $\\sum_{n\\ge0}x^n/\\iota(n!)$ converges absolutely. Its power-series radius is therefore $+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For each source state $x\\in F$, the off-diagonal entries of $\\widetilde Q_F$ are the internal rates $q(x,y)$ and the exit rate to $\\dagger$ is $\\sum_{y\\notin F}q(x,y)$. Their sum is $\\lambda(x)$, so the diagonal $-\\lambda(x)$ makes the column sum zero. The cemetery column is zero. Therefore $\\widetilde Q_F$ is a finite column generator.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "By the definition of $Y$, for each $x\\in F$ the event $\\{Y_t=x\\}$ is exactly $\\{X_t=x,\\tau_F>t\\}$; the complementary event $\\{Y_t=\\dagger\\}$ is $\\{\\tau_F\\le t\\}$. Therefore $u_F(t,x)=\\mathbb P(X_t=x,\\tau_F>t)\\le p_t(x)$ and $c_F(t)=\\mathbb P(\\tau_F\\le t)$. Returning paths are included in $p_t$ but excluded from $u_F$ by the strict first-exit condition.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Let $M_F=\\max_{x\\in F}\\lambda(x)$, finite because $F$ is finite. For $0\\le h\\le1$, [F6] bounds the exponential series remainder by $|e^{-\\lambda(x)h}-(1-\\lambda(x)h)|\\le h^2\\sum_{k\\ge2}\\lambda(x)^k/k!$, so no-jump probability is $1-\\lambda(x)h+o(h)$ uniformly on finite $F$. If $\\lambda(x)>0$, the first-jump probability $1-e^{-\\lambda(x)h}=\\lambda(x)h+o(h)$ multiplied by the destination probability $q(x,y)/\\lambda(x)$ from [F1] gives rate $q(x,y)h+o(h)$ for each $y\\ne x$; if $\\lambda(x)=0$, all rates from $x$ are zero and these probabilities are zero. For the aggregate exit event, its conditional destination probability is $a_x/\\lambda(x)$ when $\\lambda(x)>0$, so its probability is $a_xh+o(h)$; when $\\lambda(x)=0$, $a_x=0$ and this probability is zero. Here $a_x=\\lambda(x)-\\sum_{y\\in F,y\\ne x}q(x,y)\\ge0$. After reaching $\\dagger$ there are no further changes. By [F5] applied to $-u$, $1-e^{-u}\\le u$ for $u\\ge0$, so the probability of a first change within $h$ is at most $M_Fh$; conditional on a first change that stays in $F$, a second change within the remaining time has probability at most $M_Fh$. Hence the probability of two or more changes is at most $M_F^2h^2$. Thus the finite transition matrix of $Y$ is $I+h\\widetilde Q_F+o(h)$ as $h\\downarrow0$, uniformly over its finite state space.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Extend $u_F$ by zero outside $F$. For $x\\in F$, $p_t(x)-u_F(t,x)\\ge0$ by step 1.2; for $x\\notin F$, the difference is $p_t(x)\\ge0$. Summing these nonnegative differences over $S$ gives $1-\\sum_{x\\in F}u_F(t,x)=1-\\mathbb P(\\tau_F>t)=c_F(t)$. By [F4], this sum is exactly $\\|p_t-\\bar u_F(t)\\|_{\\ell^1(S)}$.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The process $Y$ is Markov: before killing this follows from the Markov property of $X$, and after killing its state $\\dagger$ is absorbing. Hence its finite column transition matrix $T_Y(h)$ satisfies $T_Y(h)=I+h\\widetilde Q_F+o(h)$ entrywise by step 2.1, and its law satisfies $\\widetilde p(t+h)=T_Y(h)\\widetilde p(t)$. This gives the right derivative $\\widetilde Q_F\\widetilde p(t)$. For $t>0$, $\\widetilde p(t)=T_Y(h)\\widetilde p(t-h)$. Since the state space has finitely many coordinates, the entrywise expansion and $\\sum_j\\widetilde p_j(t-h)=1$ imply each coordinate of $\\widetilde p(t)-\\widetilde p(t-h)$ is $O(h)$; hence $\\widetilde p(t-h)\\to\\widetilde p(t)$. Dividing the identity by $h$ and using the entrywise limit $(T_Y(h)-I)/h\\to\\widetilde Q_F$ gives the left derivative $\\widetilde Q_F\\widetilde p(t)$ as well, because every coordinate is a finite sum. Thus $\\widetilde p'=\\widetilde Q_F\\widetilde p$ with initial law $\\widetilde p(0)$. By [F3], $\\widetilde p(t)=e^{t\\widetilde Q_F}\\widetilde p(0)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Let $a=\\inf f$, $b=\\sup f$, and $c=(a+b)/2=f(\\dagger)$. The coupling uses the same path $X$: on $\\{\\tau_F>t\\}$, $Y_t=X_t$, and on $\\{\\tau_F\\le t\\}$, $Y_t=\\dagger$. Thus $|\\mathbb E f(X_t)-\\mathbb E f(Y_t)|=|\\mathbb E[\\mathbf1_{\\{\\tau_F\\le t\\}}(f(X_t)-c)]|\\le\\tfrac12(b-a)\\mathbb P(\\tau_F\\le t)=\\tfrac12\\operatorname{osc}(f)c_F(t)$, as asserted.",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a finite nonempty F."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The proof includes zero exit rates, initial mass outside F, and step 3.1 uses the t=0 first-exit convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The finite cemetery generator and first-exit argument also apply when F is a singleton."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: When no path exits F by t, c_F(t)=0 and both stated errors are zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The statement and proof include t=0 and bounded observables with zero oscillation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The chain and path coupling are given; the proof does not select from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-xd-finite-budget-adaptive-projection": {
+      "risk": "low",
+      "kind": "algorithm",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Inputs require N>0 and each listed finite projection set to be nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: At T=0 the uniformization routine returns the lifted initial vector; the cemetery interval still includes its initial escaped mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: N=1 and B=1 are valid finite caps and the procedure either certifies or returns inconclusive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: A projection with zero exit rate has exact cemetery mass equal to its initial cemetery coordinate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The input allows T=0 and the procedure records each tested finite projection interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All candidate sets are supplied as a finite list; the procedure selects no set by an existence argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-xd-finite-budget-adaptive-projection-soundness": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-xd-finite-budget-adaptive-projection",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A given nonexplosive chain $X$ and initial law $p_0$; a finite positive integer $N$ and an explicitly supplied nested list of nonempty finite sets $F_1\\subseteq\\cdots\\subseteq F_N$; for each $F_i$, its exact finite cemetery-lift generator $\\widetilde Q_{F_i}$ and lifted initial vector from [[def-xd-finite-state-projection-and-cemetery-lift]]; final time $T\\ge0$; tolerance $\\varepsilon>0$; and a positive integer per-projection term cap $B$.\n\nThe supplied lift data must be the exact rates and initial masses of the given chain. An implementation may obtain the cemetery rate from the exact exit rate minus the finite sum of within-$F_i$ rates. The arithmetic backend must enclose each computed cemetery coordinate and provide the certified arithmetic/algebraic error required by [[thm-xd-uniformization-truncation-and-error]].\n\n**Procedure.** For $i=1,\\ldots,N$ in order:\n\n1. Apply [[alg-xd-budgeted-uniformization-accumulation]] to $(\\widetilde Q_{F_i},\\widetilde p_{F_i,0},T)$ with at most $B$ terms. If it returns `budget-exhausted`, `certificate-unavailable`, or the exact lift data are unavailable, return `inconclusive` with the statuses and all completed projection records; do not skip an uncertified projection.\n2. Let $\\widehat c_i$ be the computed cemetery coordinate and let $\\delta_i$ be the total certified $\\ell^1$ error bound (Poisson-tail plus arithmetic/algebraic error). Form the outward-certified interval\n   $$L_i=\\max(0,\\widehat c_i-\\delta_i),\\qquad U_i=\\min(1,\\widehat c_i+\\delta_i).$$\n   Record $F_i$, the computed vector, $\\widehat c_i$, $[L_i,U_i]$, its tail bound, and its arithmetic/algebraic error.\n3. If validated interval arithmetic certifies $U_i\\le\\varepsilon$, return `certified` with this projection and its record.\n\nIf all $N$ projections have valid records but none passes the tolerance, return `inconclusive` with every record. The algorithm uses at most $N$ projections and $NB$ uniformization terms. It makes no claim that some finite projection outside this supplied list meets $\\varepsilon$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-xd-finite-state-projection-loss-and-observable-bound",
+          "source_section": "Statement",
+          "quote": "Let $X_t$ be a given nonexplosive countable chain with rates $q(x,y)$, initial law $p_0$, and finite exit rates as in [[def-xd-countable-nonexplosive-ctmc]]. For a finite nonempty $F\\subseteq S$, let $\\tau_F$ and $Y_t$ be the killed projection of [[def-xd-finite-state-projection-and-cemetery-lift]]. Write $p_t(x)=\\mathbb P(X_t=x)$ and $u_F(t,x)=\\mathbb P(Y_t=x)$ for $x\\in F$. Then\n\n$$u_F(t,x)=\\mathbb P(X_t=x,\\tau_F>t)\\le p_t(x),\\qquad c_F(t)=\\mathbb P(\\tau_F\\le t).$$\n\nIf $\\bar u_F$ is $u_F$ extended by zero to $S\\setminus F$, then\n\n$$\\|p_t-\\bar u_F(t)\\|_{\\ell^1(S)}=c_F(t).$$\n\nFor any bounded real observable $f:S\\to\\mathbb R$, put $\\operatorname{osc}(f):=\\sup_{x\\in S}f(x)-\\inf_{x\\in S}f(x)$ and extend it to the cemetery state by $f(\\dagger):=(\\sup f+\\inf f)/2$. The corresponding expectation error obeys\n\n$$|\\mathbb E[f(X_t)]-\\mathbb E[f(Y_t)]|\\le\\tfrac12\\operatorname{osc}(f)c_F(t).$$\n\nThe finite cemetery lift $\\widetilde Q_F$ in [[def-xd-finite-state-projection-and-cemetery-lift]] is a finite generator and $\\mathcal L(Y_t)=e^{t\\widetilde Q_F}\\mathcal L(Y_0)$. A path that exits $F$ and later returns contributes to the full marginal but remains at the cemetery state in the killed projection.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-xd-uniformization-truncation-and-error",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a finite column generator, $p_0$ a column probability vector, and $\\nu>0$ an admissible rate. For $\\lambda=\\nu t$ and $K\\ge0$, the exact one-series partial sum\n\n$$u_K(t):=\\sum_{k=0}^{K}e^{-\\lambda}\\frac{\\lambda^k}{k!}P^kp_0$$\n\nis nonnegative and substochastic, and its exact $\\ell^1$ distance from $p(t)$ is the scalar Poisson tail $\\tau_K(\\lambda)=\\mathbb P(\\operatorname{Pois}(\\lambda)>K)$. If $\\nu t>0$, the budgeted algorithm sets $m=\\lceil\\nu t\\rceil$ and $\\mu=\\nu t/m\\le1$, and uses $R_{\\mu,K}=\\sum_{k=0}^K e^{-\\mu}\\mu^kP^k/k!$. Then $R_{\\mu,K}^m p_0$ is nonnegative and substochastic, and its exact transient $\\ell^1$ error is\n\n$$1-\\left(\\sum_{k=0}^{K}e^{-\\mu}\\frac{\\mu^k}{k!}\\right)^m\\le m\\tau_K(\\mu)\\le mG_K(\\mu).$$\n\nIf a computed vector $\\widehat u$ has a separately certified accumulated arithmetic/algebraic error $E_{\\rm alg}:=\\|\\widehat u-R_{\\mu,K}^mp_0\\|_1$, then $\\|p(t)-\\widehat u\\|_1\\le mG_K(\\mu)+E_{\\rm alg}$. In rounded arithmetic, if $T$ is a validated upper bound for $mG_K(\\mu)$, then $\\|p(t)-\\widehat u\\|_1\\le T+E_{\\rm alg}$. The geometric tail certificate is not obtained by floating-point subtraction from one.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The procedure iterates over only the supplied finite list $F_1,\\ldots,F_N$, and for each $F_i$ the uniformization solver uses at most $B$ terms by [F1]. It either returns during one of these calls or after the last candidate, so it terminates after at most $N$ projections and $NB$ terms.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Suppose the algorithm returns `certified` at index $i$. By [F3], $|\\widehat c_i-c_{F_i}(T)|\\le\\delta_i$. Since $0\\le c_{F_i}(T)\\le1$, the interval endpoints in [F1] enclose $c_{F_i}(T)$; hence $c_{F_i}(T)\\le U_i\\le\\varepsilon$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Apply [F2] to this actual $F_i$: the embedded killed-vector error equals $c_{F_i}(T)$ and the observable error is at most $\\tfrac12\\operatorname{osc}(f)c_{F_i}(T)$. Step 1.2 gives the asserted $\\varepsilon$ bounds.",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If no candidate passes, or a finite solver returns an unavailable certificate, [F1] specifies `inconclusive`; the procedure has examined only the supplied finite list and therefore establishes no existence claim for a projection outside that list.",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm input requires N>0 and a nonempty finite candidate set at each index."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: A zero true loss is enclosed by its certified interval and passes whenever the validated upper endpoint is at most ε."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The loop proof covers N=1 and any positive cap B."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The soundness conclusion remains valid for an absorbing projection with zero exit loss."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The statement covers the algorithm’s finite stopping and inconclusive statuses at the supplied final time."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite candidate list is supplied; the theorem proves no existence claim outside it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-xd-two-state-gating-uniformization": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-xd-finite-column-generator",
+          "source_section": "Definition",
+          "quote": "Let $S=\\{0,1,\\ldots,n-1\\}$ with $n\\ge1$. Identify its real matrices with $M_n(\\mathbb R)$, the finite matrix space with row and column indices in $S$ from [[def-matrix-space]], and use the matrix-product and identity conventions of [[def-matrix-product-and-identity-matrix]]. A **finite column generator** on $S$ is a real matrix $Q=(q_{ij})\\in M_n(\\mathbb R)$ satisfying\n\n$$q_{ij}\\ge0\\quad(i\\ne j),\\qquad \\sum_{i<n}q_{ij}=0\\quad(j<n).$$\n\nThe column index $j$ is the source state and the row index $i$ is the destination state: for $i\\ne j$, $q_{ij}$ is the transition rate from $j$ to $i$. The exit rate from $j$ is\n\n$$r_j:=-q_{jj}=\\sum_{i\\ne j}q_{ij}\\ge0.$$\n\nA **column probability vector** is $p\\in\\mathbb R^n$ with $p_i\\ge0$ for each $i$ and $\\sum_{i<n}p_i=1$. A **subprobability vector** has the same coordinatewise nonnegativity and has coordinate sum at most one. These conventions are used throughout this page.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-xd-finite-generator-master-equation-uniformization",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be an $n\\times n$ finite column generator, let $p_0$ be a column probability vector, and let $t\\ge0$. The unique differentiable solution of\n\n$$p'(t)=Qp(t),\\qquad p(0)=p_0,$$\n\nis $p(t)=e^{tQ}p_0$. If $\\nu>0$ and $\\nu\\ge\\max_jr_j$, put $P=I+Q/\\nu$; then\n\n$$p(t)=\\sum_{k=0}^{\\infty}e^{-\\nu t}\\frac{(\\nu t)^k}{k!}P^kp_0.$$\n\nEach term $P^kp_0$ is a probability vector, and the displayed Poisson mixture is a probability vector. If $\\nu=0$, then $Q=0$ and $p(t)=p_0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The matrix $Q$ in the Example has off-diagonal entries $\\alpha,\\beta\\ge0$ and both columns sum to zero, so it satisfies [F1]; its exit rates are $\\alpha$ and $\\beta$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Suppose $s>0$ and choose $\\nu=s$. Then\n$P=I+Q/s=\\begin{pmatrix}\\beta/s&\\beta/s\\\\\\alpha/s&\\alpha/s\\end{pmatrix}$.\nBoth columns equal the probability vector $v=(\\beta/s,\\alpha/s)^T$. Therefore $Pe_{\\rm off}=v$ and $Pv=v$, which by induction gives $P^ke_{\\rm off}=v$ for every $k\\ge1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F2], the on-coordinate at time $t$ is $\\sum_{k\\ge1}e^{-st}(st)^k(\\alpha/s)/k!$. By [F3] the sum of the masses over $k\\ge1$ is $1-e^{-st}$, so $p_{\\rm on}(t)=\\frac{\\alpha}{s}(1-e^{-st})$. The off-coordinate is $1-p_{\\rm on}(t)$ because the solution is a probability vector.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $s=0$, nonnegativity of $\\alpha,\\beta$ implies $\\alpha=\\beta=0$, so $Q=0$ and the master equation keeps $e_{\\rm off}$ fixed. If $s>0$ and $\\alpha=0$, the formula gives $p_{\\rm on}=0$; if $\\beta=0$, it gives $p_{\\rm on}=1-e^{-\\alpha t}$. The endpoint cases agree with the stated rates.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two states, off and on."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: Step 3.1 handles s=0, and step 2.1 gives no opening when α=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: At β=0 the gate is one-way and step 3.1 gives p_on(t)=1−e^(−αt)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: Step 3.1 handles the zero-rate gate; the two boundary-rate cases α=0 or β=0 are explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: The formula includes t=0 and the rate endpoints α=0 and β=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two states and the rate parameters are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-xd-birth-death-poisson-tail": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-xd-finite-column-generator",
+          "source_section": "Definition",
+          "quote": "Let $S=\\{0,1,\\ldots,n-1\\}$ with $n\\ge1$. Identify its real matrices with $M_n(\\mathbb R)$, the finite matrix space with row and column indices in $S$ from [[def-matrix-space]], and use the matrix-product and identity conventions of [[def-matrix-product-and-identity-matrix]]. A **finite column generator** on $S$ is a real matrix $Q=(q_{ij})\\in M_n(\\mathbb R)$ satisfying\n\n$$q_{ij}\\ge0\\quad(i\\ne j),\\qquad \\sum_{i<n}q_{ij}=0\\quad(j<n).$$\n\nThe column index $j$ is the source state and the row index $i$ is the destination state: for $i\\ne j$, $q_{ij}$ is the transition rate from $j$ to $i$. The exit rate from $j$ is\n\n$$r_j:=-q_{jj}=\\sum_{i\\ne j}q_{ij}\\ge0.$$\n\nA **column probability vector** is $p\\in\\mathbb R^n$ with $p_i\\ge0$ for each $i$ and $\\sum_{i<n}p_i=1$. A **subprobability vector** has the same coordinatewise nonnegativity and has coordinate sum at most one. These conventions are used throughout this page.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-xd-finite-generator-master-equation-uniformization",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be an $n\\times n$ finite column generator, let $p_0$ be a column probability vector, and let $t\\ge0$. The unique differentiable solution of\n\n$$p'(t)=Qp(t),\\qquad p(0)=p_0,$$\n\nis $p(t)=e^{tQ}p_0$. If $\\nu>0$ and $\\nu\\ge\\max_jr_j$, put $P=I+Q/\\nu$; then\n\n$$p(t)=\\sum_{k=0}^{\\infty}e^{-\\nu t}\\frac{(\\nu t)^k}{k!}P^kp_0.$$\n\nEach term $P^kp_0$ is a probability vector, and the displayed Poisson mixture is a probability vector. If $\\nu=0$, then $Q=0$ and $p(t)=p_0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-xd-geometric-poisson-tail-bound",
+          "source_section": "Statement",
+          "quote": "For $N\\sim\\operatorname{Pois}(\\mu)$ with $\\mu\\ge0$ and integer $K\\ge0$, write $\\tau_K(\\mu):=\\mathbb P(N>K)$. If $\\mu=0$, then $\\tau_K(\\mu)=0$. If $\\mu>0$ and $\\mu<K+2$, then",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-scalar-poisson-count-law",
+          "source_section": "Definition",
+          "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a Poisson point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-poisson-count-law-normalization-and-moments",
+          "source_section": "Statement",
+          "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The off-diagonal entries of $Q$ are nonnegative and its columns sum to zero; its exit rates are $1,2,2$. Thus [F1] holds, $\\nu=2$ dominates every exit rate, and $P=I+Q/2=\\begin{pmatrix}1/2&1/2&0\\\\1/2&0&1\\\\0&1/2&0\\end{pmatrix}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Starting from $e_0$, successive multiplication by this $P$ gives $P e_0=(1/2,1/2,0)^T$, $P^2e_0=(1/2,1/4,1/4)^T$, $P^3e_0=(3/8,1/2,1/8)^T$, and $P^4e_0=(7/16,5/16,1/4)^T$. Each vector is obtained by multiplying the preceding vector by the displayed matrix.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F4], the first five Poisson weights at parameter $1$ are $e^{-1}(1,1,1/2,1/6,1/24)$. Weighting the five vectors from $e_0$ through $P^4e_0$ and adding coordinatewise gives $u_4=e^{-1}(703/384,277/384,5/32)^T$ and total retained mass $65/(24e)$. By normalization [F4], the exact omitted mass is $1-65/(24e)=\\mathbb P(\\operatorname{Pois}(1)>4)$. This subtraction is an exact identity, not a floating-point tail-estimation rule.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Applying [F3] with $\\mu=1$ and $K=4$ gives $\\mathbb P(\\operatorname{Pois}(1)>4)\\le e^{-1}/(5!(1-1/6))=1/(100e)$. This upper bound is computed from a positive geometric majorant and does not use a floating-point subtraction.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the three-state set {0,1,2}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The Poisson parameter, time and all state-changing rates in this fixed example are positive; the exact t=0 branch is handled by the general theorem."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This worked example is explicitly three-state and truncates at K=4; a one-state case is not part of its data."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: All displayed rates are positive, so no zero-rate division or degenerate transition is hidden in the calculation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: The fixed calculation uses t=1/2, ν=2 and K=4, and the proof separately identifies the exact omitted tail."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All matrix entries and the initial basis vector are fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-xd-immigration-death-finite-state-projection": {
+      "risk": "high",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reaction-network-propensity-system-and-generator",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d$ and $R$. A **reaction propensity system** consists of a state set $E\\subseteq\\mathbb Z^d$ that is finite or countable, increments $\\nu_j\\in\\mathbb Z^d$ for $1\\le j\\le R$, and propensities $a_j:E\\to[0,\\infty)$. Here “countable” means finite or countably infinite, as in [[def-countable]]. The total propensity\n$$\\lambda(x):=\\sum_{j=1}^R a_j(x)$$\nis finite for every $x\\in E$, and $a_j(x)>0$ implies $x+\\nu_j\\in E$. Here $\\mathbb N$ and $\\mathbb Z$ have the meanings in [[def-natural-numbers]] and [[def-integers]], and addition in $\\mathbb Z^d$ is coordinatewise.\n\nA **reaction event** of channel $j$ at state $x$ records the marked transition $x\\mapsto x+\\nu_j$. The counting process $N_j(t)$ records the number of channel-$j$ events by time $t$. A zero increment $\\nu_j=0$ is allowed: it records a reaction event without changing the state.\n\nFor a time-homogeneous system, the **reaction generator operator** on bounded functions $f:E\\to\\mathbb R$ is\n$$(Qf)(x):=\\sum_{j:a_j(x)>0} a_j(x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nWhen $E$ is finite, $\\Lambda:=\\max_{x\\in E}\\lambda(x)<\\infty$. If no active reaction has zero increment, the corresponding matrix has off-diagonal entries $q_{xy}=\\sum_{j:x+\\nu_j=y}a_j(x)$ and diagonal $q_{xx}=-\\lambda(x)$. With zero-increment events, the operator formula remains valid and the matrix diagonal is instead minus the sum of state-changing rates; the zero-increment channels remain part of the marked event process.\n\nFor a finite horizon $T$, a **time-dependent propensity system** replaces $a_j(x)$ by functions $a_j:[0,T]\\times E\\to[0,\\infty)$ whose sections $t\\mapsto a_j(t,x)$ are measurable for the Borel sigma-algebra $\\mathcal B([0,T])$ of the usual topology on $[0,T]$ ([[def-borel-sigma-algebra]]). Require finite total rate $\\lambda(t,x):=\\sum_j a_j(t,x)$. Its time-dependent generator operator is\n$$(Q_t f)(x):=\\sum_{j:a_j(t,x)>0} a_j(t,x)\\bigl(f(x+\\nu_j)-f(x)\\bigr).$$\nThis definition specifies a stochastic model. It does not assert that a physical chemical system follows that model.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-countable-state-reaction-networks-lyapunov-nonexplosion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice. Let $E\\subseteq\\mathbb Z^d$ be countable and let a finite-channel system be as in [[def-reaction-network-propensity-system-and-generator]]. For an initial state $x_0\\in E$, construct its minimal reaction process recursively: at state $x$, wait an exponential time with parameter $\\lambda(x)$, choose channel $j$ with probability $a_j(x)/\\lambda(x)$, and move to $x+\\nu_j$; if $\\lambda(x)=0$, remain at $x$ forever. Use an independent stream of these exponential and uniform random inputs, whose countable product law exists by Countable Choice and Dependent Choice.\n\nFor $V:E\\to[1,\\infty)$, call $V$ **proper** when $\\{x:V(x)\\le n\\}$ is finite for every integer $n\\ge1$. For this possibly unbounded $V$, define the finite local expression\n$$(QV)(x):=\\sum_{j:a_j(x)>0}a_j(x)\\bigl(V(x+\\nu_j)-V(x)\\bigr);$$\nthis does not assert that $V$ belongs to the bounded-function domain of the generator in [F1]. Suppose $QV\\le cV$ for a constant $c\\ge0$. Define $T_m$ as the time of the $m$th reaction event, with $T_m=\\infty$ if fewer than $m$ events occur. Then the explosion time $\\tau_\\infty:=\\lim_{m\\to\\infty}T_m$ satisfies $\\mathbb P_{x_0}(\\tau_\\infty=\\infty)=1$. No full Axiom of Choice is used.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-xd-countable-nonexplosive-ctmc",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a nonempty at most countable state space, and let $q(x,y)\\ge0$ be a finite transition rate for each pair $x,y\\in S$ with $x\\ne y$. Require the total exit rate\n\n$$\\lambda(x):=\\sum_{y\\ne x}q(x,y)$$\n\nto be finite for every $x$. The associated **column rate matrix convention** is $Q_{yx}=q(x,y)$ for $y\\ne x$ and $Q_{xx}=-\\lambda(x)$; thus the source state indexes the column. No finite-dimensional matrix is asserted for an infinite $S$.\n\nA **given time-homogeneous pure-jump Markov chain with rates $q$** is a process $X=(X_t)_{t\\ge0}$ with values in $S$ whose conditional future law given its history depends only on its present state and elapsed time, and whose paths are constant between successive jumps. Its transition kernels $K_t$ depend only on elapsed time, satisfy $K_0=I$, and obey $K_{s+t}=K_sK_t$ using the composition $(K_sK_t)(x,A):=\\int_S K_t(z,A)\\,K_s(x,dz)$ of [[def-composition-of-probability-kernels]]. At state $x$ with $\\lambda(x)>0$, its holding time has survival $e^{-\\lambda(x)t}$ and its next state is $y\\ne x$ with probability $q(x,y)/\\lambda(x)$, independently of that holding time; at $\\lambda(x)=0$ it stays at $x$. It is **nonexplosive** when almost surely it has only finitely many state changes on every bounded time interval.\n\nThe chain and nonexplosion are input hypotheses in this item and in the projection results below. This definition does not construct a chain from an arbitrary countable rate matrix and proves no general nonexplosion claim.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-xd-finite-state-projection-and-cemetery-lift",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a given nonexplosive chain as in [[def-xd-countable-nonexplosive-ctmc]], with initial law $p_0$ on $S$, and let $F\\subseteq S$ be finite and nonempty. Its first exit time from $F$ is\n\n$$\\tau_F:=\\inf\\{s\\ge0:X_s\\notin F\\},$$\n\nwith $\\tau_F=0$ when $X_0\\notin F$. Adjoin a new state $\\dagger\\notin S$ and define the **killed projection** $Y_t=X_t$ for $t<\\tau_F$ and $Y_t=\\dagger$ for $t\\ge\\tau_F$. The **killed mass vector** is $u_F(t,x):=\\mathbb P(Y_t=x)$ for $x\\in F$, and the **cemetery mass** is $c_F(t):=\\mathbb P(Y_t=\\dagger)$. Initially, $u_F(0,x)=p_0(x)$ for $x\\in F$ and $c_F(0)=p_0(S\\setminus F)$.\n\nFor $x\\in F$ let $\\lambda(x)=\\sum_{y\\ne x}q(x,y)$. The killed principal subgenerator on $F$ has entries $(Q_F)_{y x}=q(x,y)$ for $y\\ne x$ in $F$ and $(Q_F)_{x x}=-\\lambda(x)$; its column sum is $-\\sum_{y\\notin F}q(x,y)$. The **cemetery lift** is the finite matrix $\\widetilde Q_F$ on $F\\cup\\{\\dagger\\}$ with these same entries on $F$, with\n\n$$\\widetilde Q_{\\dagger x}=\\lambda(x)-\\sum_{\\substack{y\\in F\\\\y\\ne x}}q(x,y)=\\sum_{y\\notin F}q(x,y)\\quad(x\\in F),\\qquad \\widetilde Q_{x\\dagger}=0\\quad(x\\in F),\\qquad \\widetilde Q_{\\dagger\\dagger}=0.$$\n\nEvery column of $\\widetilde Q_F$ sums to zero and its off-diagonal entries are nonnegative, so it is a finite column generator in the sense of [[def-xd-finite-column-generator]]. The cemetery state is absorbing; trajectories that return to $F$ after their first exit remain at $\\dagger$ in this projection.",
+          "uses": [
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-xd-finite-generator-master-equation-uniformization",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be an $n\\times n$ finite column generator, let $p_0$ be a column probability vector, and let $t\\ge0$. The unique differentiable solution of\n\n$$p'(t)=Qp(t),\\qquad p(0)=p_0,$$\n\nis $p(t)=e^{tQ}p_0$. If $\\nu>0$ and $\\nu\\ge\\max_jr_j$, put $P=I+Q/\\nu$; then\n\n$$p(t)=\\sum_{k=0}^{\\infty}e^{-\\nu t}\\frac{(\\nu t)^k}{k!}P^kp_0.$$\n\nEach term $P^kp_0$ is a probability vector, and the displayed Poisson mixture is a probability vector. If $\\nu=0$, then $Q=0$ and $p(t)=p_0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-xd-finite-state-projection-loss-and-observable-bound",
+          "source_section": "Statement",
+          "quote": "Let $X_t$ be a given nonexplosive countable chain with rates $q(x,y)$, initial law $p_0$, and finite exit rates as in [[def-xd-countable-nonexplosive-ctmc]]. For a finite nonempty $F\\subseteq S$, let $\\tau_F$ and $Y_t$ be the killed projection of [[def-xd-finite-state-projection-and-cemetery-lift]]. Write $p_t(x)=\\mathbb P(X_t=x)$ and $u_F(t,x)=\\mathbb P(Y_t=x)$ for $x\\in F$. Then\n\n$$u_F(t,x)=\\mathbb P(X_t=x,\\tau_F>t)\\le p_t(x),\\qquad c_F(t)=\\mathbb P(\\tau_F\\le t).$$\n\nIf $\\bar u_F$ is $u_F$ extended by zero to $S\\setminus F$, then\n\n$$\\|p_t-\\bar u_F(t)\\|_{\\ell^1(S)}=c_F(t).$$\n\nFor any bounded real observable $f:S\\to\\mathbb R$, put $\\operatorname{osc}(f):=\\sup_{x\\in S}f(x)-\\inf_{x\\in S}f(x)$ and extend it to the cemetery state by $f(\\dagger):=(\\sup f+\\inf f)/2$. The corresponding expectation error obeys\n\n$$|\\mathbb E[f(X_t)]-\\mathbb E[f(Y_t)]|\\le\\tfrac12\\operatorname{osc}(f)c_F(t).$$\n\nThe finite cemetery lift $\\widetilde Q_F$ in [[def-xd-finite-state-projection-and-cemetery-lift]] is a finite generator and $\\mathcal L(Y_t)=e^{t\\widetilde Q_F}\\mathcal L(Y_0)$. A path that exits $F$ and later returns contributes to the full marginal but remains at the cemetery state in the killed projection.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The system has two channels, increments $+1$ and $-1$, and propensities $a_+(n)=1$ and $a_-(n)=n$; the death channel is inactive at $n=0$, so every positive-propensity poststate remains in $\\mathbb N_0$ and the total rate $1+n$ is finite. Thus [F1] applies.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Let $V(n)=1+n$. Its sublevel set $\\{n:V(n)\\le m\\}$ is finite for each integer $m\\ge1$, so $V$ is proper. For $n\\ge1$, $QV(n)=1(V(n+1)-V(n))+n(V(n-1)-V(n))=1-n\\le1+n=V(n)$; at $n=0$ the same value $QV(0)=1$ satisfies this bound. Hence [F2] with $c=1$ and [A1] proves the immigration-death chain is nonexplosive, as required by [F3].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "On $F=\\{0,1\\}$, state $0$ jumps to $1$ at rate $1$; state $1$ jumps to $0$ at rate $1$ and exits to $2\\notin F$ at rate $1$. These off-diagonal rates are nonnegative, and the cemetery construction [F4] gives the displayed $\\widetilde Q_F$ with zero column sums. Multiplying by the lifted probability vector gives $p_0'=-p_0+p_1$, $p_1'=p_0-2p_1$, and $c_F'=p_1$, with initial vector $(1,0,0)^T$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "From $p_1'=p_0-2p_1$ we have $p_0=p_1'+2p_1$; differentiating and using $p_0'=-p_0+p_1$ yields $p_1''+3p_1'+p_1=0$, with $p_1(0)=0$ and $p_1'(0)=1$. The characteristic roots are $r_\\pm=(-3\\pm\\sqrt5)/2$ and $r_+-r_-=\\sqrt5$, so the unique solution is $p_1(t)=(e^{r_+t}-e^{r_-t})/\\sqrt5$.",
+          "inputs": [
+            "F5",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Since $c_F'=p_1$ and $c_F(0)=0$, integrating the expression in step 2.1 gives the displayed formula for $c_F(t)$. By [F6], this coordinate is $\\mathbb P(\\tau_F\\le t)$ and equals the embedded killed-vector $\\ell^1$ error.",
+          "inputs": [
+            "step 2.1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Fix $t>0$ and choose ordered times $0<s_1<s_2<s_3<t$. The joint density for jumps $0\\to1$ at $s_1$, $1\\to2$ at $s_2$, and $2\\to1$ at $s_3$, followed by no further jump through $t$, is $e^{-s_1}\\cdot1\\cdot e^{-2(s_2-s_1)}\\cdot1\\cdot e^{-3(s_3-s_2)}\\cdot2\\cdot e^{-2(t-s_3)}$, which is strictly positive; integrating this positive density over the nonempty ordered-time simplex gives positive probability. Such paths contribute to the full marginal at state $1$ but have already been killed at their first exit from $F$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes E=ℕ₀ and F={0,1}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The death channel is inactive at n=0, and step 3.1 gives c_F(0)=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes the two-element projection F={0,1}; a singleton projection is not part of this calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The zero-propensity death channel at state 0 is explicitly excluded from positive-propensity poststate requirements in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: The formula for c_F(t) is valid for t≥0 and step 3.1 verifies its value at t=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The state set, channels and projection are explicit; step 3.1 constructs a finite ordered-time witness directly for each t>0."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-xd-equal-mean-distinct-probability-vectors": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-xd-finite-column-generator",
+          "source_section": "Definition",
+          "quote": "Let $S=\\{0,1,\\ldots,n-1\\}$ with $n\\ge1$. Identify its real matrices with $M_n(\\mathbb R)$, the finite matrix space with row and column indices in $S$ from [[def-matrix-space]], and use the matrix-product and identity conventions of [[def-matrix-product-and-identity-matrix]]. A **finite column generator** on $S$ is a real matrix $Q=(q_{ij})\\in M_n(\\mathbb R)$ satisfying\n\n$$q_{ij}\\ge0\\quad(i\\ne j),\\qquad \\sum_{i<n}q_{ij}=0\\quad(j<n).$$\n\nThe column index $j$ is the source state and the row index $i$ is the destination state: for $i\\ne j$, $q_{ij}$ is the transition rate from $j$ to $i$. The exit rate from $j$ is\n\n$$r_j:=-q_{jj}=\\sum_{i\\ne j}q_{ij}\\ge0.$$\n\nA **column probability vector** is $p\\in\\mathbb R^n$ with $p_i\\ge0$ for each $i$ and $\\sum_{i<n}p_i=1$. A **subprobability vector** has the same coordinatewise nonnegativity and has coordinate sum at most one. These conventions are used throughout this page.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-xd-finite-generator-master-equation-uniformization",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be an $n\\times n$ finite column generator, let $p_0$ be a column probability vector, and let $t\\ge0$. The unique differentiable solution of\n\n$$p'(t)=Qp(t),\\qquad p(0)=p_0,$$\n\nis $p(t)=e^{tQ}p_0$. If $\\nu>0$ and $\\nu\\ge\\max_jr_j$, put $P=I+Q/\\nu$; then\n\n$$p(t)=\\sum_{k=0}^{\\infty}e^{-\\nu t}\\frac{(\\nu t)^k}{k!}P^kp_0.$$\n\nEach term $P^kp_0$ is a probability vector, and the displayed Poisson mixture is a probability vector. If $\\nu=0$, then $Q=0$ and $p(t)=p_0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "$Q_A=0$ is a finite column generator, and the constant vector $p_A(t)=e_1$ solves $p_A'=Q_Ap_A$ with the stated initial value. By [F2] it is the unique law, and its mean is $0\\cdot0+1\\cdot1+2\\cdot0=1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The off-diagonal entries of $Q_B$ are nonnegative and its columns sum to zero, so [F1] applies. Writing $p_B=(p_0,p_1,p_2)^T$, its master equation is $p_0'=p_1$, $p_1'=-2p_1$, $p_2'=p_1$ with initial values $(0,1,0)$. Solving gives $p_1=e^{-2t}$ and $p_0=p_2=(1-e^{-2t})/2$; direct differentiation verifies these formulas and their initial data, and [F2] makes this the unique law.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The mean under $p_B(t)$ is $0\\cdot p_0+1\\cdot p_1+2\\cdot p_2=e^{-2t}+1-e^{-2t}=1$, the same as the mean under $p_A(t)$, while $p_B$ has positive mass at $0$ for $t>0$ and $p_A$ has none. Thus the same mean trajectory corresponds to two different full distributions.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the three-state set {0,1,2}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: Q_A=0 is explicitly one of the two generators and its law remains e₁."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes three states so that distinct laws with equal means can be exhibited."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The zero generator branch is computed directly in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: At t=0 both laws equal e₁; step 2.1 proves they differ for every t>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two generators and common initial vector are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, procedure, example, or one-way assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

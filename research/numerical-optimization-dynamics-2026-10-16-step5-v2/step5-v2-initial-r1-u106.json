@@ -1,0 +1,194 @@
+{
+  "run": "numerical-optimization-dynamics-2026-10-16",
+  "phase": "initial",
+  "round": 1,
+  "unit": "106",
+  "input_sha256": "1a7ee9a7fe14e61542c2bc3f5fd18046c94a9802c7e266731ec32a1f499132e5",
+  "decisions": [
+    {
+      "id": "lem-stable-gaussian-autoregression-invariant-law",
+      "model": "gpt-6-luna",
+      "context_sha256": "30113fc34cc7e696a091f1ad64845cd00a8abb4b961ef0b5d0f57b0a5fdc3245",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F4 incorrectly attributes vector-law uniqueness to a scalar theorem. This is nonfatal because the already cited lem-characteristic-function-of-a-multivariate-normal-law proves uniqueness among arbitrary Borel vector laws with the displayed Gaussian transform (proof 2.1 via scalar projections and Cramer–Wold). Rebound F4 to that existing supplier. The covariance series, invariant transform, dominated-convergence uniqueness argument, and finite-matrix Lyapunov uniqueness are valid, including G=0 and singular P.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-exact-ornstein-uhlenbeck-momentum-substep",
+      "model": "gpt-6-luna",
+      "context_sha256": "03ce38dabab678d9832dd130d0943e07990e25e1f7fe4b9eefca829a7084f84f",
+      "outcome": "false_positive",
+      "reason": "The standing hypothesis (H) is exactly adaptedness and N(0,t-s) increments independent of F_s (def-elementary-predictable-brownian-integrand, Definition). The model specifies Brownian motion relative to a complete usual filtration and cites def-ito-sde-and-strong-solution, whose Definition explicitly supplies these increment and adaptedness conditions; the lemma additionally states independence from the starting sigma algebra. Thus H is already satisfied, not an extra missing assumption. The integrating factor is C^{1,2}; the deterministic exponential integral has covariance beta^{-1}(1-exp(-2 gamma h))M, and independent future increments preserve independence under its L2 approximation. Positive h,beta,gamma and SPD M permit standardization. No repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-baoab-one-step-error-moment-bounds",
+      "model": "gpt-6-luna",
+      "context_sha256": "ee48fed9abcd4dab82c3782132fffe5d597bfb7047f410ae0e2b6b04096854c3",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Confirmed missing initial-moment hypothesis in F5: its supplier requires E|X_0|^2<infinity, whereas this lemma permits any finite F_t-measurable start. The original step 2.2 used unlicensed existence and moment finiteness. Repaired F5 to state the actual hypothesis, added a first L2 case, and proved the full original scope by bounded-start solution pasting. On D_n={|Z_t|<=n}, additive-noise cancellation gives a zero-initial-data Gronwall difference, ensuring consistency and uniqueness. Residuals agree on D_n; their conditional estimates paste with constants independent of n. The proof specifies local signed conditional means and makes no unconditional moment claim for heavy-tailed starts. BAOAB algebra, h^3 conditional second moments, h^2 means and Ch same-noise Lipschitz bound checked. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-baoab-finite-time-strong-order-one",
+      "model": "gpt-6-luna",
+      "context_sha256": "9b4302c158d80cfdd5ffb968f48dda9db20737988fb6cd919e7585d7ce6f612e",
+      "outcome": "false_positive",
+      "reason": "A1 is valid assumption bookkeeping, not a theorem purportedly proved by def-axiom-of-choice. F1 assumes all data of def-ito-sde-and-strong-solution, whose Definition explicitly assumes AC; F1 also has axiom_base Full AC and its proof F3 records that dependence. L1 fixes the model data whose Definition expressly assumes AC and invokes AC-dependent Ito and Gaussian suppliers. The common L2 initial state meets F1. The local residual bounds and Ch same-noise Lipschitz estimate give centered increments with variances Ch^2 E|e_n|^2 and Ch^3, mean defect squared Ch^4; orthogonality to the past and Young yield the recurrence (1+Ch)E|e_n|^2+Ch^3. Iterating from e_0=0 over Nh=T gives the asserted grid maximum Ch^2. The local-lemma proof repair leaves all used bounds and its Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-harmonic-baoab-thermostat-covariance",
+      "model": "gpt-6-luna",
+      "context_sha256": "479d0fce6bbf3549880fd0363f5574da6daffba76a77e23d0d24a742b521261f",
+      "outcome": "false_positive",
+      "reason": "A1 records an inherited assumption, not a claim that the definition of AC proves the harmonic theorem. The actual F1 supplier has axiom_base Full AC, an explicit Given AC, A1 identifying its use, and dependencies on the AC-assuming model and stable Gaussian autoregression. Its Gaussian uniqueness proof uses that latter supplier, whose Statement begins Assume AC. Thus the example correctly carries this assumption. The chosen h=1/2 is below 2 sqrt(2/8)=1 and r=1/4; substitution gives Var(Q)=1/8 and Var(P)=3/2 versus canonical momentum variance 2, hence bias -1/2. No unsupported choice step occurs in 2.1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-ula-and-baoab-have-distinct-harmonic-variance-bias",
+      "model": "gpt-6-luna",
+      "context_sha256": "e11fc1e4aaad2ea6cb4ac939e194709fe713a0a6b07ec1acdb61e551ae111355",
+      "outcome": "false_positive",
+      "reason": "A1 identifies the AC assumption by its definition and describes inherited use; it does not assert that choice-function existence itself proves an invariant-law calculation. The ULA theorem explicitly begins Assume AC. The harmonic BAOAB supplier records Full AC, Given AC and its dependence on the AC-assuming model and Gaussian autoregression; these actual hypotheses license the inheritance even though its displayed Statement does not repeat the word AC. For eta=1 the existing ULA invariant Gaussian has variance 2; h=1<2 and r=1/4 give BAOAB variances 1 and 3/4. The example neither strengthens ULA uniqueness nor transfers a result between the distinct kernels.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-stable-gaussian-autoregression-invariant-law",
+      "disposition": "repaired",
+      "post_sha256": "091480140d5273fb4b91f2617faa5bbd8511c54ff2ff54ee29eaf955475cbde3",
+      "review_context_sha256": "1eeeb87eab9df053ce340f2e849e89b35f20eb4c584e4ad0bba5b219e2c393bc",
+      "reason": "The covariance series converges in norm, gives the Lyapunov identity, and its Gaussian transform identifies both the invariant update and any invariant law. Corrected F4 to the existing multivariate Gaussian uniqueness supplier. Singular/zero covariance and uniqueness among finite matrix solutions remain covered; Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-exact-ornstein-uhlenbeck-momentum-substep",
+      "disposition": "unaffected",
+      "post_sha256": "b1f0c2d7bf1f494186b6910b788c75962938dd923f406c82805ba7350a18dc85",
+      "review_context_sha256": "2e6b9bc894231cee45301025321d2344f38d53c10fd9af5464af5c52076b6bb6",
+      "reason": "The filtered Brownian convention supplies H. The exponential integrating factor and deterministic Gaussian integral give the stated covariance and independence; SPD M and h>0 permit standardization. No item change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-baoab-one-step-error-moment-bounds",
+      "disposition": "repaired",
+      "post_sha256": "40a382837f91b856efdb4a897d2f0e492941441982e4d56a7815c07f755c492d",
+      "review_context_sha256": "0e122ac6e1764e345badbed5f617b53e0009f1d2a5a8d62e61a8e8d3912a0244",
+      "reason": "Repaired the unlicensed F5 application without narrowing the Statement: prove the L2 case, paste bounded-start solutions using additive-noise cancellation and Gronwall, and paste their local conditional estimates on {|Z_t|<=n}. The proof explains signed conditional means for heavy-tailed starts. Rechecked h^2 means, h^3 second moments and the Ch same-noise residual bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-baoab-finite-time-strong-order-one",
+      "disposition": "unaffected",
+      "post_sha256": "d223a0caa9b573ee8703f58d5713b3284474a902d7dc1b6bacb4caef48314add",
+      "review_context_sha256": "cdc0f165d4604836b100f7a63a458579ceffec8e093409a0e88aade9e13a8045",
+      "reason": "Actual suppliers assume AC, and the common L2 start meets the existence theorem. Centered residuals are orthogonal to the past; their variance and mean bounds give E|e_{n+1}|^2 <= (1+Ch)E|e_n|^2+Ch^3, hence Ch^2 over Nh=T. The repaired local proof leaves the consumed Statement unchanged. No item change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-harmonic-baoab-thermostat-covariance",
+      "disposition": "unaffected",
+      "post_sha256": "3a2efe4956e969e2e5e30cd907fa48caf393fb0a5944fba5ec8e24a6229318c6",
+      "review_context_sha256": "4ca0e1b0603ff69e2df78d04f4578d98c25650377732a8b8657f53b6ee7a567c",
+      "reason": "AC is explicitly carried by the actual harmonic supplier and its model/Gaussian dependencies. The chosen h=1/2 is below threshold 1; r=1/4 gives position variance 1/8 and momentum variance 3/2, with bias -1/2. No item change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-ula-and-baoab-have-distinct-harmonic-variance-bias",
+      "disposition": "unaffected",
+      "post_sha256": "47e9de555599819c58d6e9a4795500885e3274d3487e9e3f4ed055051cc9dfb4",
+      "review_context_sha256": "3e7eae7ddb39d824c8a1282b4c4f206b1e8b7930b9470f6bd3669a2c46ed611d",
+      "reason": "Both actual suppliers carry AC. At eta=1 the existing ULA invariant Gaussian has variance 2; at h=1<2 and r=1/4, BAOAB variances are 1 and 3/4. No unsupported uniqueness or cross-kernel inference is made. No item change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-repaired-finding",
+      "id": "lem-stable-gaussian-autoregression-invariant-law",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "facts-block",
+      "reason": "F4 attributed vector uniqueness to a scalar theorem, but the required Gaussian-vector uniqueness was already a declared supplier.",
+      "correction": "Rebound F4 and its owning contract citation to lem-characteristic-function-of-a-multivariate-normal-law; Statement and proof inference unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-repaired-finding",
+      "id": "lem-baoab-one-step-error-moment-bounds",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "locus": "proof-step",
+      "reason": "F5 omitted its required square-integrable initial value, so the original exact-solution moment argument was not licensed for the allowed arbitrary finite random start.",
+      "correction": "Restored F5 hypothesis; added licensed L2 case and bounded-start solution/conditional-estimate pasting, with precise local signed conditional means and no unconditional heavy-tail moment assertion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "All six assigned draft items belong to the frozen frontier and were reviewed in the prescribed supplier-first order. Two item carriers and only their owning proof-contract entries changed; four false-positive carriers are unchanged. No prerequisites were created and no pages or manifests changed.",
+    "The mathematical evidence consulted was local: model and BAOAB definitions; multivariate Gaussian characteristic-function lemma (full proof, especially 2.1); Brownian, elementary-integrand H, and strong-SDE definitions; deterministic-integral Gaussian corollary and multidimensional Ito theorem (complete arguments); Lipschitz strong well-posedness theorem (complete proof); harmonic BAOAB and published Gaussian ULA theorem (complete proofs); and the owning contracts/page interfaces. No external source consultation or independent review of the authored repair is claimed.",
+    "After each mathematical review, the native review-contexts command captured the recorded post_sha256 and review_context_sha256 before another supplier was edited. Shared contract edits used acquire/reread/edit/strict-check/release under tools/step5-shared-write-lock.mjs with owner step5-v2-initial-r1-u106.",
+    "Compared both changed Statement sections literally to their preserved consumer-contract quotations and checked the frozen Statement hashes: both unchanged. Thus downstream is empty under the required Statement/Definition propagation rule. The assigned strong-order consumer was reviewed against the repaired local proof and remains sound.",
+    "Final focused checks all passed: precheck 6 checked/0 failing; renderer 6 checked/0 errors/0 warnings; strict proof contracts 6 checked/0 errors/0 warnings; required final batched proof-layout 2 items/8 steps/0 defects. No subsequent item edits occurred. All six report guard hashes and dispositions match disk.",
+    "No published or outside-frontier defect was discovered; no published-consumer-ledger update is proposed. No gate diagnostics were assigned. There is no unresolved mathematical obligation in this unit; the confirmed-fatal decision still requires the engine-owned next round and independent rejudgment, and this report does not certify closure."
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-stable-gaussian-autoregression-invariant-law.md items/lem-exact-ornstein-uhlenbeck-momentum-substep.md items/lem-baoab-one-step-error-moment-bounds.md items/thm-baoab-finite-time-strong-order-one.md items/ex-harmonic-baoab-thermostat-covariance.md items/ex-ula-and-baoab-have-distinct-harmonic-variance-bias.md --json",
+      "exit_code": 0,
+      "result": "6 checked, 0 failing"
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/lem-stable-gaussian-autoregression-invariant-law.md items/lem-exact-ornstein-uhlenbeck-momentum-substep.md items/lem-baoab-one-step-error-moment-bounds.md items/thm-baoab-finite-time-strong-order-one.md items/ex-harmonic-baoab-thermostat-covariance.md items/ex-ula-and-baoab-have-distinct-harmonic-variance-bias.md --json",
+      "exit_code": 0,
+      "result": "6 checked, 0 errors, 0 warnings"
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/numerical-optimization-dynamics-2026-10-16-batch-106.proof-contracts.json --strict --items lem-stable-gaussian-autoregression-invariant-law,lem-exact-ornstein-uhlenbeck-momentum-substep,lem-baoab-one-step-error-moment-bounds,thm-baoab-finite-time-strong-order-one,ex-harmonic-baoab-thermostat-covariance,ex-ula-and-baoab-have-distinct-harmonic-variance-bias --json",
+      "exit_code": 0,
+      "result": "6 checked, 0 errors, 0 warnings"
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/lem-stable-gaussian-autoregression-invariant-law.md items/lem-baoab-one-step-error-moment-bounds.md",
+      "exit_code": 0,
+      "result": "2 items, 8 steps, 0 defects"
+    }
+  ]
+}
